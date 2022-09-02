@@ -88,7 +88,8 @@ export const getMushafLinesNumber = (quranFont: QuranFont, mushafLines: MushafLi
   if (
     quranFont !== QuranFont.IndoPak ||
     (quranFont === QuranFont.IndoPak && mushafLines === MushafLines.FifteenLines)
-  )
+  ) {
     return 15;
+  }
   return 16;
 };

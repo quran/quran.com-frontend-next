@@ -194,7 +194,7 @@ const ReadingView = ({
               Footer: () => {
                 const pageVerses = mushafPageToVersesMap[lastReadPageNumber];
                 const lastVerse = pageVerses?.[pageVerses.length - 1];
-                if (lastVerse)
+                if (lastVerse) {
                   return (
                     <EndOfScrollingControls
                       quranReaderDataType={quranReaderDataType}
@@ -202,6 +202,7 @@ const ReadingView = ({
                       initialData={initialData}
                     />
                   );
+                }
                 return null;
               },
             }}

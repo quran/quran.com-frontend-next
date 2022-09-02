@@ -1,3 +1,5 @@
+import { it, expect } from 'vitest';
+
 import { migrateRecentReadingSessions } from './migrating-recent-reading-sessions';
 
 const previousReadingSessions = {
