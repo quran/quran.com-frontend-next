@@ -117,7 +117,6 @@
 }
 
 .socialInteractionContainer {
-  opacity: var(--opacity-75);
   margin-block-start: calc(0.5 * var(--spacing-xxsmall));
 }
 .actionItemContainer {
@@ -143,4 +142,8 @@
 }
 .referencedVersesPrefix {
   margin-inline-end: calc(0.5 * var(--spacing-xxsmall));
+}
+
+.item {
+  opacity: var(--opacity-75);
 }

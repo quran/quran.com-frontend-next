@@ -324,6 +324,7 @@ const ReflectionItem = ({
             shouldCloseMenuAfterClick
             icon={<CopyLinkIcon />}
             onClick={onCopyLinkClicked}
+            className={styles.item}
           >
             {t('quran-reader:cpy-link')}
           </PopoverMenu.Item>
@@ -331,6 +332,7 @@ const ReflectionItem = ({
             shouldCloseMenuAfterClick
             icon={<CopyIcon />}
             onClick={onCopyTextClicked}
+            className={styles.item}
           >
             {t('quran-reader:copy-text')}
           </PopoverMenu.Item>
