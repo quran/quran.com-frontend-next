@@ -32,20 +32,19 @@ interface RubPageProps {
   chaptersData: ChaptersData;
 }
 
-
-const RubPage: NextPage<RubPageProps> = ({ hasError, rubVerses, chaptersData,}) => {
+const RubPage: NextPage<RubPageProps> = ({ hasError, rubVerses, chaptersData }) => {
   const { t, lang } = useTranslation('common');
   const {
     query: { rubId },
   } = useRouter();
 
   if (hasError) return <Error statusCode={500} />;
-  
+
   const path = getRubNavigationUrl(Number(rubId));
   return (
     <DataContext.Provider value={chaptersData}>
       <NextSeoWrapper
-        title={`${t("rub")} ${toLocalizedNumber(Number(rubId), lang)}`}
+        title={`${t('rub')} ${toLocalizedNumber(Number(rubId), lang)}`}
         description={getPageOrJuzMetaDescription(rubVerses)}
         canonical={getCanonicalUrl(lang, path)}
         languageAlternates={getLanguageAlternates(path)}
@@ -64,7 +63,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   let rubId = String(params.rubId);
 
   // we need to validate the chapterId and rubId first to save calling BE since we haven't set the valid paths inside getStaticPaths to avoid pre-rendering them at build time.
-  if (!isValidRubId(rubId)) return { notFound: true, };
+  if (!isValidRubId(rubId)) return { notFound: true };
 
   const chaptersData = await getAllChaptersData(locale);
   rubId = formatStringNumber(rubId);
@@ -78,8 +77,8 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     const pagesLookupResponse = await getPagesLookup({
       rubElHizbNumber: Number(rubId),
       mushaf: defaultMushafId,
-    });    
-    
+    });
+
     const firstPageOfRub = Object.keys(pagesLookupResponse.pages)[0];
     const firstPageOfRubLookup = pagesLookupResponse.pages[firstPageOfRub];
 
@@ -87,7 +86,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
       chaptersData,
       pagesLookupResponse.lookupRange.from,
       pagesLookupResponse.lookupRange.to,
-    ).length;    
+    ).length;
 
     const rubVersesResponse = await getRubVerses(rubId, locale, {
       ...getDefaultWordFields(getQuranReaderStylesInitialState(locale).quranFont),
@@ -107,7 +106,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
       },
       revalidate: ONE_WEEK_REVALIDATION_PERIOD_SECONDS, // verses will be generated at runtime if not found in the cache, then cached for subsequent requests for 7 days.
     };
-  } catch (error) {    
+  } catch (error) {
     return {
       props: {
         hasError: true,

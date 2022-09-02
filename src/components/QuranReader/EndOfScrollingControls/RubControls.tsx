@@ -8,8 +8,8 @@ import ChevronRightIcon from '../../../../public/icons/chevron-right.svg';
 import Button, { ButtonType } from 'src/components/dls/Button/Button';
 import useScrollToTop from 'src/hooks/useScrollToTop';
 import { logButtonClick } from 'src/utils/eventLogger';
-import { isFirstRub, isLastRub } from 'src/utils/rub';
 import { getRubNavigationUrl } from 'src/utils/navigation';
+import { isFirstRub, isLastRub } from 'src/utils/rub';
 import Verse from 'types/Verse';
 
 interface Props {

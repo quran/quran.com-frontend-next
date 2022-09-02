@@ -10,7 +10,7 @@ interface Verse {
   pageNumber: number;
   juzNumber: number;
   hizbNumber: number;
-  rubNumber: number; //FIXME: This doesn't work for some reason, in console it's appearing as RubElHizbNumber rather than RubNumber
+  rubNumber: number; // FIXME: This doesn't work for some reason, in console it's appearing as RubElHizbNumber rather than RubNumber
   rubElHizbNumber: number; // Added this to fix the issue
   verseKey: string;
   verseIndex: number;
