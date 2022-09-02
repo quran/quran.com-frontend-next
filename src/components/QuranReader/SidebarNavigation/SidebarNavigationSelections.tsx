@@ -18,6 +18,9 @@ const SurahSelection = dynamic(() => import('./SurahSelection'), {
 const JuzSelection = dynamic(() => import('./JuzSelection'), {
   loading: SidebarSelectionSkeleton,
 });
+// const HizbSelection = dynamic(() => import('./HizbSelection'), {
+//   loading: SidebarSelectionSkeleton,
+// });
 
 type Props = {
   isVisible: IsSidebarNavigationVisible;
@@ -26,15 +29,12 @@ type Props = {
 
 const SidebarNavigationSelections: React.FC<Props> = ({ isVisible, selectedNavigationItem }) => {
   // we skip requesting any selection list if the drawer is not open.
-  if (!isVisible) {
-    return <></>;
-  }
-  if (selectedNavigationItem === NavigationItem.Surah) {
-    return <SurahSelection />;
-  }
-  if (selectedNavigationItem === NavigationItem.Juz) {
-    return <JuzSelection />;
-  }
+  if (!isVisible) return <></>;
+
+  if (selectedNavigationItem === NavigationItem.Surah) return <SurahSelection />;
+  if (selectedNavigationItem === NavigationItem.Juz) return <JuzSelection />;
+  // if (selectedNavigationItem === NavigationItem.Hizb) return <HizbSelection />;
+
   return <PageSelection />;
 };
 

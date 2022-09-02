@@ -4,13 +4,14 @@ import classNames from 'classnames';
 import Fuse from 'fuse.js';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
+import { useSelector } from 'react-redux';
 
 import styles from './SidebarNavigation.module.scss';
 
 import Link from 'src/components/dls/Link/Link';
 import DataContext from 'src/contexts/DataContext';
-import useChapterIdsByUrlPath from 'src/hooks/useChapterId';
 import { SCROLL_TO_NEAREST_ELEMENT, useScrollToElement } from 'src/hooks/useScrollToElement';
+import { selectLastReadVerseKey } from 'src/redux/slices/QuranReader/readingTracker';
 import { logEmptySearchResults } from 'src/utils/eventLogger';
 import { toLocalizedNumber } from 'src/utils/locale';
 import { getSurahNavigationUrl } from 'src/utils/navigation';
@@ -31,8 +32,9 @@ const filterSurah = (surah, searchQuery: string) => {
 
 const SurahList = () => {
   const { t, lang } = useTranslation('common');
-  const chapterIds = useChapterIdsByUrlPath(lang);
-  const currentChapterId = chapterIds[0];
+  const lastReadVerseKey = useSelector(selectLastReadVerseKey);
+  const currentChapterId = lastReadVerseKey.chapterId;
+
   const router = useRouter();
   const chaptersData = useContext(DataContext);
 

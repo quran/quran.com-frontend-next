@@ -2,6 +2,7 @@ import React from 'react';
 
 import ChapterControls from './ChapterControls';
 import styles from './EndOfScrollingControls.module.scss';
+import HizbControls from './HizbControls';
 import JuzControls from './JuzControls';
 import PageControls from './PageControls';
 import VerseControls from './VerseControls';
@@ -33,6 +34,7 @@ const EndOfScrollingControls: React.FC<Props> = ({
         )}
         {quranReaderDataType === QuranReaderDataType.Page && <PageControls lastVerse={lastVerse} />}
         {quranReaderDataType === QuranReaderDataType.Juz && <JuzControls lastVerse={lastVerse} />}
+        {quranReaderDataType === QuranReaderDataType.Hizb && <HizbControls lastVerse={lastVerse} />}
       </div>
     </div>
   );

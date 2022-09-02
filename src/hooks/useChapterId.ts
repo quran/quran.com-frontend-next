@@ -5,6 +5,7 @@ import { useRouter } from 'next/router';
 import { getChapterIdBySlug } from 'src/api';
 import DataContext from 'src/contexts/DataContext';
 import { getChapterIdsForJuz, getChapterIdsForPage } from 'src/utils/chapter';
+import { getChapterIdsForHizb } from 'src/utils/hizb';
 import { formatStringNumber } from 'src/utils/number';
 import { isValidChapterId, isValidVerseKey } from 'src/utils/validator';
 import { getChapterNumberFromKey } from 'src/utils/verse';
@@ -24,7 +25,7 @@ import { getChapterNumberFromKey } from 'src/utils/verse';
 const AYAH_KURSI_SLUGS = ['ayatul-kursi', 'آیت الکرسی']; // TODO: this needs to be refactored when we localize Ayatul Kursi
 const useChapterIdsByUrlPath = (lang: string): string[] => {
   const router = useRouter();
-  const { chapterId, juzId, pageId } = router.query;
+  const { chapterId, juzId, pageId, hizbId } = router.query;
   const [chapterIds, setChapterIds] = useState([]);
   const chaptersData = useContext(DataContext);
   useEffect(() => {
@@ -53,9 +54,11 @@ const useChapterIdsByUrlPath = (lang: string): string[] => {
         setChapterIds(chapterIdsForPage);
       } else if (juzId) {
         setChapterIds(await getChapterIdsForJuz(formatStringNumber(juzId as string)));
+      } else if (hizbId) {
+        setChapterIds(await getChapterIdsForHizb(formatStringNumber(hizbId as string)));
       }
     })();
-  }, [pageId, juzId, lang, chapterId, chaptersData]);
+  }, [pageId, juzId, hizbId, lang, chapterId, chaptersData]);
 
   return chapterIds;
 };

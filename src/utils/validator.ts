@@ -82,6 +82,24 @@ export const isValidJuzId = (juzId: string): boolean => {
 };
 
 /**
+ * Validate a hizbId which can be in-valid in 2 cases:
+ *
+ * 1. if it's a string that is not numeric e.g. "test".
+ * 2. if it's a numeric string but lies outside the range 1->60.
+ *
+ * @param {string} hizbId
+ * @returns {boolean}
+ */
+export const isValidHizbId = (hizbId: string): boolean => {
+  const hizbIdNumber = Number(hizbId);
+  // if it's not a numeric string or it's numeric but out of the range of chapter 1->30
+  if (Number.isNaN(hizbIdNumber) || hizbIdNumber > 60 || hizbIdNumber < 1) {
+    return false;
+  }
+  return true;
+};
+
+/**
  * Validate a pageId which can be in-valid in 2 cases:
  *
  * 1. if it's a string that is not numeric e.g. "test".

@@ -46,6 +46,14 @@ export const getVerseNavigationUrl = (chapterIdOrSlug: string, verseNumber: stri
 export const getJuzNavigationUrl = (juzNumber: string | number): string => `/juz/${juzNumber}`;
 
 /**
+ * Get the href link to a hizb.
+ *
+ * @param {string | number} hizbNumber
+ * @returns  {string}
+ */
+export const getHizbNavigationUrl = (hizbNumber: string | number): string => `/hizb/${hizbNumber}`;
+
+/**
  * Get the href link to a page.
  *
  * @param {string | number} pageNumber
@@ -125,6 +133,9 @@ export const resolveUrlBySearchNavigationType = (
   }
   if (type === SearchNavigationType.JUZ) {
     return getJuzNavigationUrl(key);
+  }
+  if (type === SearchNavigationType.HIZB) {
+    return getHizbNavigationUrl(key);
   }
   if (type === SearchNavigationType.PAGE) {
     return getPageNavigationUrl(key);
