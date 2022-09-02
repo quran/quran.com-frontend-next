@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import { getChapterIdBySlug } from 'src/api';
 import DataContext from 'src/contexts/DataContext';
 import { getChapterIdsForJuz, getChapterIdsForPage } from 'src/utils/chapter';
-// import { getChapterIdsForHizb } from 'src/utils/hizb';
+import { getChapterIdsForHizb } from 'src/utils/hizb';
 import { formatStringNumber } from 'src/utils/number';
 import { isValidChapterId, isValidVerseKey } from 'src/utils/validator';
 import { getChapterNumberFromKey } from 'src/utils/verse';
@@ -54,9 +54,9 @@ const useChapterIdsByUrlPath = (lang: string): string[] => {
         setChapterIds(chapterIdsForPage);
       } else if (juzId) {
         setChapterIds(await getChapterIdsForJuz(formatStringNumber(juzId as string)));
-      } // else if (hizbId) {
-      //   setChapterIds(await getChapterIdsForHizb(formatStringNumber(hizbId as string)));
-      // }
+      } else if (hizbId) {
+        setChapterIds(await getChapterIdsForHizb(formatStringNumber(hizbId as string)));
+      }
     })();
   }, [pageId, juzId, hizbId, lang, chapterId, chaptersData]);
 
