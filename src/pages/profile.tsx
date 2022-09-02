@@ -10,6 +10,7 @@ import useSWR from 'swr';
 import layoutStyle from './index.module.scss';
 import styles from './profile.module.scss';
 
+import CollectionList from 'src/components/Collection/CollectionList/CollectionList';
 import Button from 'src/components/dls/Button/Button';
 import Skeleton from 'src/components/dls/Skeleton/Skeleton';
 import DeleteAccountButton from 'src/components/Profile/DeleteAccountButton';
@@ -117,6 +118,16 @@ const ProfilePage: NextPage<Props> = ({ chaptersData }) => {
             </div>
             <div className={classNames(layoutStyle.flowItem, layoutStyle.fullWidth)}>
               <BookmarksSection />
+            </div>
+
+            <div
+              className={classNames(
+                layoutStyle.flowItem,
+                layoutStyle.fullWidth,
+                styles.collectionListContainer,
+              )}
+            >
+              <CollectionList />
             </div>
 
             <div

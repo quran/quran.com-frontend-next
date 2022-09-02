@@ -32,6 +32,11 @@ export const makeAppleLoginUrl = (): string => makeUrl('auth/apple');
 
 export const makeBookmarksUrl = (mushafId: number): string => makeUrl('bookmarks', { mushafId });
 
+export const makeCollectionsUrl = (): string => makeUrl('collections');
+
+export const makeGetBookmarkByCollectionId = (collectionId: string) =>
+  makeUrl(`collections/${collectionId}`);
+
 export const makeBookmarksRangeUrl = (
   mushafId: number,
   chapterNumber: number,

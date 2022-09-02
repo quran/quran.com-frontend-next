@@ -13,6 +13,7 @@
     "/surah/[chapterId]/info": ["surah-info"],
     "/chapter_info/[chapterId]": ["surah-info"],
     "/surah-info/[chapterId]": ["surah-info"],
+    "/collections/[collection-id]": ["collection"],
     "/search": ["search"],
     "/about-us": ["about"],
     "/developers": ["developers"],

@@ -16,6 +16,8 @@ import {
   makeCompleteAnnouncementUrl,
   makeSyncLocalDataUrl,
   makeRefreshTokenUrl,
+  makeCollectionsUrl,
+  makeGetBookmarkByCollectionId,
 } from 'src/utils/auth/apiPaths';
 import CompleteAnnouncementRequest from 'types/auth/CompleteAnnouncementRequest';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
@@ -129,6 +131,14 @@ export const addOrUpdateUserPreference = async (key: string, value: any, group: 
     value,
     group,
   });
+
+export const getCollectionsList = async () => {
+  return privateFetcher(makeCollectionsUrl());
+};
+
+export const getBookmarksByCollectionId = async (collectionId: string) => {
+  return privateFetcher(makeGetBookmarkByCollectionId(collectionId));
+};
 
 export const requestVerificationCode = async (emailToVerify) => {
   return postRequest(makeVerificationCodeUrl(), { email: emailToVerify });
