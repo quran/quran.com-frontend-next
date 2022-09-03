@@ -5,11 +5,10 @@ import useTranslation from 'next-translate/useTranslation';
 import dynamic from 'next/dynamic';
 import { useDispatch, useSelector } from 'react-redux';
 
-import BackIcon from '../../../../public/icons/west.svg';
-
 import SettingsBodySkeleton from './SettingsBodySkeleton';
 import styles from './SettingsDrawer.module.scss';
 
+import BackIcon from '@/icons/west.svg';
 import Button, { ButtonVariant } from 'src/components/dls/Button/Button';
 import Drawer, { DrawerType } from 'src/components/Navbar/Drawer';
 import { selectNavbar, setSettingsView, SettingsView } from 'src/redux/slices/navbar';

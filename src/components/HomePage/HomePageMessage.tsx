@@ -4,11 +4,11 @@ import useTranslation from 'next-translate/useTranslation';
 
 // import useTranslation from 'next-translate/useTranslation';
 
-import CloseIcon from '../../../public/icons/close.svg';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '../dls/Button/Button';
 
 import styles from './HomePageMessage.module.scss';
 
+import CloseIcon from '@/icons/close.svg';
 import { logEvent } from 'src/utils/eventLogger';
 import openGivingLoopPopup from 'src/utils/givingloop';
 

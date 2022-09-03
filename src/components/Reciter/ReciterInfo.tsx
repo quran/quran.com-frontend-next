@@ -4,12 +4,12 @@ import { useContext, useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
-import PlayIcon from '../../../public/icons/play-arrow.svg';
 import Button from '../dls/Button/Button';
 import { StationType } from '../Radio/types';
 
 import styles from './ReciterInfo.module.scss';
 
+import PlayIcon from '@/icons/play-arrow.svg';
 import { makeCDNUrl } from 'src/utils/cdn';
 import { logEvent } from 'src/utils/eventLogger';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';

@@ -5,11 +5,10 @@ import React, { MouseEvent } from 'react';
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 
-import CloseIcon from '../../../../../public/icons/close.svg';
-
 import styles from './FootnoteText.module.scss';
 import transStyles from './TranslationText.module.scss';
 
+import CloseIcon from '@/icons/close.svg';
 import Button, { ButtonSize, ButtonShape, ButtonVariant } from 'src/components/dls/Button/Button';
 import Spinner from 'src/components/dls/Spinner/Spinner';
 import { getLanguageDataById, findLanguageIdByLocale } from 'src/utils/locale';

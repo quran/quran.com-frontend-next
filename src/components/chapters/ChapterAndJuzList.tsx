@@ -5,7 +5,6 @@ import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 import dynamic from 'next/dynamic';
 
-import CaretDownIcon from '../../../public/icons/caret-down.svg';
 import Link from '../dls/Link/Link';
 import SurahPreviewRow from '../dls/SurahPreview/SurahPreviewRow';
 import Tabs from '../dls/Tabs/Tabs';
@@ -13,6 +12,7 @@ import Tabs from '../dls/Tabs/Tabs';
 import styles from './ChapterAndJuzList.module.scss';
 import ChapterAndJuzListSkeleton from './ChapterAndJuzListSkeleton';
 
+import CaretDownIcon from '@/icons/caret-down.svg';
 import { logButtonClick, logValueChange } from 'src/utils/eventLogger';
 import { shouldUseMinimalLayout, toLocalizedNumber } from 'src/utils/locale';
 import Chapter from 'types/Chapter';

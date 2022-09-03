@@ -3,9 +3,8 @@ import { useCallback, useContext } from 'react';
 import { useSelector } from '@xstate/react';
 import useTranslation from 'next-translate/useTranslation';
 
-import CheckIcon from '../../../../public/icons/check.svg';
-import ChevronLeftIcon from '../../../../public/icons/chevron-left.svg';
-
+import CheckIcon from '@/icons/check.svg';
+import ChevronLeftIcon from '@/icons/chevron-left.svg';
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
 import Spinner from 'src/components/dls/Spinner/Spinner';
 import { playbackRates } from 'src/components/Navbar/SettingsDrawer/AudioSection';

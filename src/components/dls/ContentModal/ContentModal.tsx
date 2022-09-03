@@ -4,11 +4,11 @@ import * as Dialog from '@radix-ui/react-dialog';
 import classNames from 'classnames';
 import { useRouter } from 'next/router';
 
-import CloseIcon from '../../../../public/icons/close.svg';
 import Button, { ButtonShape, ButtonVariant } from '../Button/Button';
 
 import styles from './ContentModal.module.scss';
 
+import CloseIcon from '@/icons/close.svg';
 import ContentModalHandles from 'src/components/dls/ContentModal/types/ContentModalHandles';
 import { isRTLLocale } from 'src/utils/locale';
 

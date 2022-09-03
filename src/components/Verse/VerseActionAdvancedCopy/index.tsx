@@ -2,11 +2,11 @@ import { useRef, useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
-import AdvancedCopyIcon from '../../../../public/icons/clipboard.svg';
 import VerseAdvancedCopy from '../AdvancedCopy/VerseAdvancedCopy';
 
 import styles from './VerseActionAdvancedCopy.module.scss';
 
+import AdvancedCopyIcon from '@/icons/clipboard.svg';
 import ContentModal from 'src/components/dls/ContentModal/ContentModal';
 import ContentModalHandles from 'src/components/dls/ContentModal/types/ContentModalHandles';
 import Action from 'src/components/dls/Modal/Action';

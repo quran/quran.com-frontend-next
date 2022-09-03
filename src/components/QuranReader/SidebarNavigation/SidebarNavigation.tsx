@@ -5,11 +5,10 @@ import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 
-import IconClose from '../../../../public/icons/close.svg';
-
 import styles from './SidebarNavigation.module.scss';
 import SidebarNavigationSelections from './SidebarNavigationSelections';
 
+import IconClose from '@/icons/close.svg';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
 import KeyboardInput from 'src/components/dls/KeyboardInput';
 import Switch from 'src/components/dls/Switch/Switch';

@@ -1,6 +1,6 @@
 // import { useDispatch } from 'react-redux';
 
-// import CloseIcon from '../../../public/icons/close.svg';
+// import CloseIcon from '@/icons/close.svg';
 import { useState } from 'react';
 
 import classNames from 'classnames';

@@ -2,10 +2,10 @@ import { useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
-import RepeatIcon from '../../../public/icons/repeat.svg';
 import { RepetitionMode } from '../AudioPlayer/RepeatAudioModal/SelectRepetitionMode';
 import PopoverMenu from '../dls/PopoverMenu/PopoverMenu';
 
+import RepeatIcon from '@/icons/repeat.svg';
 import RepeatAudioModal from 'src/components/AudioPlayer/RepeatAudioModal/RepeatAudioModal';
 import { getChapterNumberFromKey } from 'src/utils/verse';
 

@@ -5,10 +5,9 @@ import Fuse from 'fuse.js';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 
-import IconSearch from '../../../../public/icons/search.svg';
-
 import styles from './ReciterSelectionBody.module.scss';
 
+import IconSearch from '@/icons/search.svg';
 import DataFetcher from 'src/components/DataFetcher';
 import Input from 'src/components/dls/Forms/Input';
 import RadioGroup, { RadioGroupOrientation } from 'src/components/dls/Forms/RadioGroup/RadioGroup';

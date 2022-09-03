@@ -2,10 +2,9 @@ import { useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
-import PlusIcon from '../../../../public/icons/plus.svg';
-
 import styles from './SaveToCollectionModal.module.scss';
 
+import PlusIcon from '@/icons/plus.svg';
 import Button, { ButtonVariant } from 'src/components/dls/Button/Button';
 import Checkbox from 'src/components/dls/Forms/Checkbox/Checkbox';
 import Modal from 'src/components/dls/Modal/Modal';

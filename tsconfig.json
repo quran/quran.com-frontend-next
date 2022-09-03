@@ -19,7 +19,10 @@
     "skipLibCheck": true,
     "strict": false,
     "target": "es5",
-    "incremental": true
+    "incremental": true,
+    "paths": {
+      "@/icons/*": ["./public/icons/*"]
+    }
   },
   "exclude": [
     "node_modules"

@@ -4,8 +4,7 @@ import { useSelector as useXstateSelector } from '@xstate/react';
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch, useSelector } from 'react-redux';
 
-import DownloadIcon from '../../../../public/icons/download.svg';
-
+import DownloadIcon from '@/icons/download.svg';
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
 import Spinner, { SpinnerSize } from 'src/components/dls/Spinner/Spinner';
 import {

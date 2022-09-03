@@ -5,10 +5,6 @@ import classNames from 'classnames';
 import clipboardCopy from 'clipboard-copy';
 import useTranslation from 'next-translate/useTranslation';
 
-import CopyLinkIcon from '../../../public/icons/copy-link.svg';
-import DownloadIcon from '../../../public/icons/download.svg';
-import PauseIcon from '../../../public/icons/pause.svg';
-import PlayIcon from '../../../public/icons/play-arrow.svg';
 import { download } from '../AudioPlayer/Buttons/DownloadAudioButton';
 import ChapterIconContainer from '../chapters/ChapterIcon/ChapterIconContainer';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '../dls/Button/Button';
@@ -17,6 +13,10 @@ import { ToastStatus, useToast } from '../dls/Toast/Toast';
 
 import styles from './ChapterList.module.scss';
 
+import CopyLinkIcon from '@/icons/copy-link.svg';
+import DownloadIcon from '@/icons/download.svg';
+import PauseIcon from '@/icons/pause.svg';
+import PlayIcon from '@/icons/play-arrow.svg';
 import { getChapterAudioData } from 'src/api';
 import { logButtonClick, logEvent } from 'src/utils/eventLogger';
 import { getReciterChapterNavigationUrl } from 'src/utils/navigation';

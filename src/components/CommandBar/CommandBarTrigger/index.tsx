@@ -3,10 +3,9 @@ import React, { useCallback } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch } from 'react-redux';
 
-import IconSearch from '../../../../public/icons/search.svg';
-
 import styles from './CommandBarTrigger.module.scss';
 
+import IconSearch from '@/icons/search.svg';
 import KeyboardInput from 'src/components/dls/KeyboardInput';
 import TarteelVoiceSearchTrigger from 'src/components/TarteelVoiceSearch/Trigger';
 import { toggleIsOpen } from 'src/redux/slices/CommandBar/state';

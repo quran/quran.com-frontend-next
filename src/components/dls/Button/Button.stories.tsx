@@ -1,6 +1,6 @@
-import SettingIcon from '../../../../public/icons/settings.svg';
-
 import Button, { ButtonShape, ButtonSize, ButtonType, ButtonVariant } from './Button';
+
+import SettingIcon from '@/icons/settings.svg';
 
 export default {
   title: 'dls/Button',

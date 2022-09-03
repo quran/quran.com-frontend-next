@@ -4,10 +4,9 @@ import { useSelector } from '@xstate/react';
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 
-import ChevronDownIcon from '../../../../../public/icons/chevron-down.svg';
-
 import styles from './PageNavigationButtons.module.scss';
 
+import ChevronDownIcon from '@/icons/chevron-down.svg';
 import Button, { ButtonSize } from 'src/components/dls/Button/Button';
 import KeyboardInput from 'src/components/dls/KeyboardInput';
 import { ContentSide } from 'src/components/dls/Tooltip';

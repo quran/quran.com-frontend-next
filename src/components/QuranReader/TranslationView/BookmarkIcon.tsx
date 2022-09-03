@@ -6,10 +6,9 @@ import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { useSWRConfig } from 'swr';
 
-import BookmarkedIcon from '../../../../public/icons/bookmark.svg';
-
 import styles from './TranslationViewCell.module.scss';
 
+import BookmarkedIcon from '@/icons/bookmark.svg';
 import Button, { ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
 import { ToastStatus, useToast } from 'src/components/dls/Toast/Toast';
 import { selectBookmarks, toggleVerseBookmark } from 'src/redux/slices/QuranReader/bookmarks';

@@ -7,10 +7,9 @@ import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 
-import IconSearch from '../../../../public/icons/search.svg';
-
 import styles from './SearchSelectionBody.module.scss';
 
+import IconSearch from '@/icons/search.svg';
 import DataFetcher from 'src/components/DataFetcher';
 import Checkbox from 'src/components/dls/Forms/Checkbox/Checkbox';
 import Input from 'src/components/dls/Forms/Input';

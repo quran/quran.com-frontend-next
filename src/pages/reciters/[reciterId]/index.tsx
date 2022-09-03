@@ -5,10 +5,10 @@ import Fuse from 'fuse.js';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 
-import SearchIcon from '../../../../public/icons/search.svg';
 import layoutStyle from '../../index.module.scss';
 import pageStyle from '../reciterPage.module.scss';
 
+import SearchIcon from '@/icons/search.svg';
 import { getReciterData } from 'src/api';
 import Input from 'src/components/dls/Forms/Input';
 import NextSeoWrapper from 'src/components/NextSeoWrapper';

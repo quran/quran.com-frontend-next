@@ -5,11 +5,11 @@ import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 import dynamic from 'next/dynamic';
 
-import OverflowMenuIcon from '../../../public/icons/menu_more_horiz.svg';
 import cellStyles from '../QuranReader/TranslationView/TranslationViewCell.module.scss';
 
 import styles from './OverflowVerseActionsMenuBody.module.scss';
 
+import OverflowMenuIcon from '@/icons/menu_more_horiz.svg';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
 import Spinner from 'src/components/dls/Spinner/Spinner';
