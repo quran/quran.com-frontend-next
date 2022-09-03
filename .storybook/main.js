@@ -43,8 +43,10 @@ module.exports = {
 
         // Add support for module aliases (same aliases in tsconfig.json)
         config.resolve.alias = {
-            ...config.resolve.alias,
+            ...(config.resolve.alias || {}),
             '@/icons': path.resolve(__dirname, "../public/icons"),
+            '@/dls': path.resolve(__dirname, "./components/dls"),
+            '@/': path.resolve(__dirname, "./"),
           };
 
         const fileLoaderRule = config.module.rules.find(rule => Array.isArray(rule.test) ? rule.test[0].test('.svg') : rule.test.test('.svg'));
