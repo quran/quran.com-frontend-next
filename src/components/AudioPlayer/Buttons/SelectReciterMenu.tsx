@@ -5,14 +5,14 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from './SelectReciterMenu.module.scss';
 
-import CheckIcon from '@/icons/check.svg';
-import ChevronLeftIcon from '@/icons/chevron-left.svg';
-import DataFetcher from 'src/components/DataFetcher';
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import Spinner from '@/dls/Spinner/Spinner';
-import usePersistPreferenceGroup from 'src/hooks/auth/usePersistPreferenceGroup';
+import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
+import CheckIcon from '@/icons/check.svg';
+import ChevronLeftIcon from '@/icons/chevron-left.svg';
 import { makeAvailableRecitersUrl } from '@/utils/apiPaths';
 import { logButtonClick, logItemSelectionChange, logValueChange } from '@/utils/eventLogger';
+import DataFetcher from 'src/components/DataFetcher';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import { RecitersResponse } from 'types/ApiResponses';
 import PreferenceGroup from 'types/auth/PreferenceGroup';

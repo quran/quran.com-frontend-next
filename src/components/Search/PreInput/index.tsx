@@ -7,14 +7,14 @@ import styles from './PreInput.module.scss';
 import SearchItem from './SearchItem';
 import SearchQuerySuggestion from './SearchQuerySuggestion';
 
-import TrendUpIcon from '@/icons/trend-up.svg';
 import Link from '@/dls/Link/Link';
-import SearchHistory from 'src/components/Search/SearchHistory';
-import useGetChaptersData from 'src/hooks/useGetChaptersData';
+import useGetChaptersData from '@/hooks/useGetChaptersData';
+import TrendUpIcon from '@/icons/trend-up.svg';
 import { getChapterData } from '@/utils/chapter';
 import { logButtonClick } from '@/utils/eventLogger';
 import { toLocalizedNumber, toLocalizedVerseKey } from '@/utils/locale';
 import { getSurahNavigationUrl } from '@/utils/navigation';
+import SearchHistory from 'src/components/Search/SearchHistory';
 
 interface Props {
   onSearchKeywordClicked: (searchQuery: string) => void;

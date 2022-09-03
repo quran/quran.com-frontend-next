@@ -3,14 +3,14 @@ import { useCallback, useContext } from 'react';
 import { useSelector } from '@xstate/react';
 import useTranslation from 'next-translate/useTranslation';
 
-import CheckIcon from '@/icons/check.svg';
-import ChevronLeftIcon from '@/icons/chevron-left.svg';
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import Spinner from '@/dls/Spinner/Spinner';
-import { playbackRates } from 'src/components/Navbar/SettingsDrawer/AudioSection';
-import usePersistPreferenceGroup from 'src/hooks/auth/usePersistPreferenceGroup';
+import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
+import CheckIcon from '@/icons/check.svg';
+import ChevronLeftIcon from '@/icons/chevron-left.svg';
 import { logButtonClick, logValueChange } from '@/utils/eventLogger';
 import { toLocalizedNumber } from '@/utils/locale';
+import { playbackRates } from 'src/components/Navbar/SettingsDrawer/AudioSection';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 

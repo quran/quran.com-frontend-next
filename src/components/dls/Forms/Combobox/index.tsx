@@ -27,8 +27,8 @@ import Tag from './Tag';
 import ComboboxSize from './types/ComboboxSize';
 import { InitialValue, Value, MultiSelectValue, InitialSelectedItems } from './types/Values';
 
-import useFocus from 'src/hooks/useFocusElement';
-import useOutsideClickDetector from 'src/hooks/useOutsideClickDetector';
+import useFocus from '@/hooks/useFocusElement';
+import useOutsideClickDetector from '@/hooks/useOutsideClickDetector';
 
 interface Props {
   id: string;

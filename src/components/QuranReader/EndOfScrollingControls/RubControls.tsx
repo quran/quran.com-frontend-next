@@ -6,7 +6,7 @@ import ChevronLeftIcon from '../../../../public/icons/chevron-left.svg';
 import ChevronRightIcon from '../../../../public/icons/chevron-right.svg';
 
 import Button, { ButtonType } from '@/dls/Button/Button';
-import useScrollToTop from 'src/hooks/useScrollToTop';
+import useScrollToTop from '@/hooks/useScrollToTop';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getRubNavigationUrl } from '@/utils/navigation';
 import { isFirstRub, isLastRub } from '@/utils/rub';

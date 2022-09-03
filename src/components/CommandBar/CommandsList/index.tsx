@@ -13,7 +13,7 @@ import CommandControl from './CommandControl';
 import styles from './CommandList.module.scss';
 import CommandPrefix from './CommandPrefix';
 
-import useScroll, { SMOOTH_SCROLL_TO_CENTER } from 'src/hooks/useScrollToElement';
+import useScroll, { SMOOTH_SCROLL_TO_CENTER } from '@/hooks/useScrollToElement';
 import {
   addRecentNavigation,
   removeRecentNavigation,

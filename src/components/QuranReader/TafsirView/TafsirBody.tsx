@@ -18,13 +18,8 @@ import TafsirText from './TafsirText';
 import TafsirVerseText from './TafsirVerseText';
 import styles from './TafsirView.module.scss';
 
-import { fetcher } from 'src/api';
-import DataFetcher from 'src/components/DataFetcher';
 import Separator from '@/dls/Separator/Separator';
-import DataContext from 'src/contexts/DataContext';
-import usePersistPreferenceGroup from 'src/hooks/auth/usePersistPreferenceGroup';
-import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
-import { selectTafsirs, setSelectedTafsirs } from 'src/redux/slices/QuranReader/tafsirs';
+import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
 import { makeTafsirContentUrl, makeTafsirsUrl } from '@/utils/apiPaths';
 import {
   logButtonClick,
@@ -42,6 +37,11 @@ import {
   isLastVerseOfSurah,
   getVerseAndChapterNumbersFromKey,
 } from '@/utils/verse';
+import { fetcher } from 'src/api';
+import DataFetcher from 'src/components/DataFetcher';
+import DataContext from 'src/contexts/DataContext';
+import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
+import { selectTafsirs, setSelectedTafsirs } from 'src/redux/slices/QuranReader/tafsirs';
 import { TafsirContentResponse, TafsirsResponse } from 'types/ApiResponses';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 

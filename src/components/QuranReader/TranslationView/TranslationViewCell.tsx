@@ -12,19 +12,19 @@ import TranslationText from './TranslationText';
 import styles from './TranslationViewCell.module.scss';
 
 import Separator from '@/dls/Separator/Separator';
+import useScroll, { SMOOTH_SCROLL_TO_CENTER } from '@/hooks/useScrollToElement';
 import {
   verseFontChanged,
   verseTranslationChanged,
   verseTranslationFontChanged,
 } from '@/utils/memoization';
+import { getVerseWords, makeVerseKey } from '@/utils/verse';
 import OverflowVerseActionsMenu from 'src/components/Verse/OverflowVerseActionsMenu';
 import PlayVerseAudioButton from 'src/components/Verse/PlayVerseAudioButton';
 import VerseLink from 'src/components/Verse/VerseLink';
 import VerseText from 'src/components/Verse/VerseText';
-import useScroll, { SMOOTH_SCROLL_TO_CENTER } from 'src/hooks/useScrollToElement';
 import { selectEnableAutoScrolling } from 'src/redux/slices/AudioPlayer/state';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
-import { getVerseWords, makeVerseKey } from '@/utils/verse';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import BookmarksMap from 'types/BookmarksMap';
 import Translation from 'types/Translation';

@@ -12,10 +12,10 @@ import useScrollToVirtualizedVerse from './hooks/useScrollToVirtualizedVerse';
 import TranslationPage from './TranslationPage';
 
 import Spinner from '@/dls/Spinner/Spinner';
+import useGetQueryParamOrReduxValue from '@/hooks/useGetQueryParamOrReduxValue';
+import useGetQueryParamOrXstateValue from '@/hooks/useGetQueryParamOrXstateValue';
+import useQcfFont from '@/hooks/useQcfFont';
 import { getNumberOfPages } from '@/utils/page';
-import useGetQueryParamOrReduxValue from 'src/hooks/useGetQueryParamOrReduxValue';
-import useGetQueryParamOrXstateValue from 'src/hooks/useGetQueryParamOrXstateValue';
-import useQcfFont from 'src/hooks/useQcfFont';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
 import { VersesResponse } from 'types/ApiResponses';
 import QueryParam from 'types/QueryParam';

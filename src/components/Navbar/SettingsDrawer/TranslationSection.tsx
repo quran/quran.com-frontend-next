@@ -10,8 +10,12 @@ import styles from './TranslationSection.module.scss';
 import Counter from '@/dls/Counter/Counter';
 import SelectionCard from '@/dls/SelectionCard/SelectionCard';
 import Skeleton from '@/dls/Skeleton/Skeleton';
+import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
+import { makeTranslationsUrl } from '@/utils/apiPaths';
+import { areArraysEqual } from '@/utils/array';
+import { logValueChange } from '@/utils/eventLogger';
+import { toLocalizedNumber } from '@/utils/locale';
 import DataFetcher from 'src/components/DataFetcher';
-import usePersistPreferenceGroup from 'src/hooks/auth/usePersistPreferenceGroup';
 import { setSettingsView, SettingsView } from 'src/redux/slices/navbar';
 import {
   decreaseTranslationFontScale,
@@ -21,10 +25,6 @@ import {
   selectQuranReaderStyles,
 } from 'src/redux/slices/QuranReader/styles';
 import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';
-import { makeTranslationsUrl } from '@/utils/apiPaths';
-import { areArraysEqual } from '@/utils/array';
-import { logValueChange } from '@/utils/eventLogger';
-import { toLocalizedNumber } from '@/utils/locale';
 import { TranslationsResponse } from 'types/ApiResponses';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 

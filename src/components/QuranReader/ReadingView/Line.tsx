@@ -4,17 +4,16 @@ import { useSelector as useXstateSelector } from '@xstate/react';
 import classNames from 'classnames';
 import { shallowEqual, useSelector } from 'react-redux';
 
-import { verseFontChanged } from '@/utils/memoization';
-
 import styles from './Line.module.scss';
 
+import useScroll, { SMOOTH_SCROLL_TO_CENTER } from '@/hooks/useScrollToElement';
+import { verseFontChanged } from '@/utils/memoization';
+import { getWordDataByLocation } from '@/utils/verse';
 import ChapterHeader from 'src/components/chapters/ChapterHeader';
 import VerseText from 'src/components/Verse/VerseText';
-import useScroll, { SMOOTH_SCROLL_TO_CENTER } from 'src/hooks/useScrollToElement';
 import { selectEnableAutoScrolling } from 'src/redux/slices/AudioPlayer/state';
 import { selectWordByWordPreferences } from 'src/redux/slices/QuranReader/readingPreferences';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
-import { getWordDataByLocation } from '@/utils/verse';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import Word from 'types/Word';
 

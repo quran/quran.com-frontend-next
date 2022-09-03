@@ -10,15 +10,15 @@ import TranslationText from '../QuranReader/TranslationView/TranslationText';
 import PlainVerseText from './PlainVerseText';
 import styles from './VerseAndTranslation.module.scss';
 
-import { fetcher } from 'src/api';
-import Error from 'src/components/Error';
-import useQcfFont from 'src/hooks/useQcfFont';
-import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
-import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';
+import useQcfFont from '@/hooks/useQcfFont';
 import { getDefaultWordFields, getMushafId } from '@/utils/api';
 import { makeVersesUrl } from '@/utils/apiPaths';
 import { areArraysEqual } from '@/utils/array';
 import { getVerseWords } from '@/utils/verse';
+import { fetcher } from 'src/api';
+import Error from 'src/components/Error';
+import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
+import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';
 import { VersesResponse } from 'types/ApiResponses';
 
 /**

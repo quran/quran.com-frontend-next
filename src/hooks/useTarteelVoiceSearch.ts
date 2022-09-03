@@ -6,9 +6,9 @@ import { useEffect, useState, useCallback, useRef } from 'react';
 // @ts-ignore
 import { AudioWorklet } from 'audio-worklet';
 
+import useBrowserLayoutEffect from '@/hooks/useBrowserLayoutEffect';
 import { logEmptySearchResults, logEvent } from '@/utils/eventLogger';
 import { getAverageVolume } from 'src/audioInput/voice';
-import useBrowserLayoutEffect from 'src/hooks/useBrowserLayoutEffect';
 import Event from 'types/Tarteel/Event';
 import Result from 'types/Tarteel/Result';
 import SearchResult from 'types/Tarteel/SearchResult';

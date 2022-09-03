@@ -8,8 +8,8 @@ import SearchResults from './SearchResults';
 import styles from './VoiceSearchBodyContainer.module.scss';
 
 import Spinner, { SpinnerSize } from '@/dls/Spinner/Spinner';
+import useTarteelVoiceSearch from '@/hooks/useTarteelVoiceSearch';
 import NoResults from 'src/components/Search/NoResults';
-import useTarteelVoiceSearch from 'src/hooks/useTarteelVoiceSearch';
 
 interface Props {
   isCommandBar?: boolean;

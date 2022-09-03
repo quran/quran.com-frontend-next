@@ -7,10 +7,10 @@ import skeletonStyles from './TranslationViewSkeleton.module.scss';
 
 import Button, { ButtonSize } from '@/dls/Button/Button';
 import Skeleton from '@/dls/Skeleton/Skeleton';
-import verseTextStyles from 'src/components/Verse/VerseText.module.scss';
-import useGetQueryParamOrReduxValue from 'src/hooks/useGetQueryParamOrReduxValue';
-import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
+import useGetQueryParamOrReduxValue from '@/hooks/useGetQueryParamOrReduxValue';
 import { getFontClassName } from '@/utils/fontFaceHelper';
+import verseTextStyles from 'src/components/Verse/VerseText.module.scss';
+import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import QueryParam from 'types/QueryParam';
 import { QuranFont } from 'types/QuranReader';
 

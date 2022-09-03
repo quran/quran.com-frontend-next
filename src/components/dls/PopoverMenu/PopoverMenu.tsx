@@ -5,7 +5,7 @@ import classNames from 'classnames';
 
 import styles from './PopoverMenu.module.scss';
 
-import useDirection from 'src/hooks/useDirection';
+import useDirection from '@/hooks/useDirection';
 import { Direction } from '@/utils/locale';
 
 export enum PopoverMenuExpandDirection {

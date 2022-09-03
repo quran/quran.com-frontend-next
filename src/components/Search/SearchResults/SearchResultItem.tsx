@@ -8,7 +8,7 @@ import styles from './SearchResultItem.module.scss';
 
 import Link from '@/dls/Link/Link';
 import QuranWord from '@/dls/QuranWord/QuranWord';
-import useGetChaptersData from 'src/hooks/useGetChaptersData';
+import useGetChaptersData from '@/hooks/useGetChaptersData';
 import { getChapterData } from '@/utils/chapter';
 import { logButtonClick } from '@/utils/eventLogger';
 import { toLocalizedVerseKey } from '@/utils/locale';

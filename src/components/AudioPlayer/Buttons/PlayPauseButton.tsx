@@ -5,15 +5,15 @@ import useTranslation from 'next-translate/useTranslation';
 
 import SurahAudioMismatchModal from '../SurahAudioMismatchModal';
 
-import PauseIcon from '@/icons/pause.svg';
-import PlayIcon from '@/icons/play-arrow.svg';
 import Button, { ButtonShape, ButtonVariant } from '@/dls/Button/Button';
 import Spinner, { SpinnerSize } from '@/dls/Spinner/Spinner';
-import DataContext from 'src/contexts/DataContext';
-import useChapterIdsByUrlPath from 'src/hooks/useChapterId';
+import useChapterIdsByUrlPath from '@/hooks/useChapterId';
+import PauseIcon from '@/icons/pause.svg';
+import PlayIcon from '@/icons/play-arrow.svg';
 import { getChapterData } from '@/utils/chapter';
 import { withStopPropagation } from '@/utils/event';
 import { logButtonClick } from '@/utils/eventLogger';
+import DataContext from 'src/contexts/DataContext';
 import { selectIsLoading } from 'src/xstate/actors/audioPlayer/selectors';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 

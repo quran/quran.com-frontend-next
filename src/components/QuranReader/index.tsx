@@ -15,18 +15,18 @@ import styles from './QuranReader.module.scss';
 import QuranReaderView from './QuranReaderView';
 import SidebarNavigation from './SidebarNavigation/SidebarNavigation';
 
+import useGlobalIntersectionObserver from '@/hooks/useGlobalIntersectionObserver';
+import { addReadingSession } from '@/utils/auth/api';
+import { makeReadingSessionsUrl } from '@/utils/auth/apiPaths';
+import { isLoggedIn } from '@/utils/auth/login';
+import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
 import FontPreLoader from 'src/components/Fonts/FontPreLoader';
 import DataContext from 'src/contexts/DataContext';
-import useGlobalIntersectionObserver from 'src/hooks/useGlobalIntersectionObserver';
 import { selectNotes } from 'src/redux/slices/QuranReader/notes';
 import { selectReadingPreference } from 'src/redux/slices/QuranReader/readingPreferences';
 import { setLastReadVerse } from 'src/redux/slices/QuranReader/readingTracker';
 import { selectIsSidebarNavigationVisible } from 'src/redux/slices/QuranReader/sidebarNavigation';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
-import { addReadingSession } from '@/utils/auth/api';
-import { makeReadingSessionsUrl } from '@/utils/auth/apiPaths';
-import { isLoggedIn } from '@/utils/auth/login';
-import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
 import { VersesResponse } from 'types/ApiResponses';
 import { QuranReaderDataType, ReadingPreference } from 'types/QuranReader';
 

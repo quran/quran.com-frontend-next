@@ -8,14 +8,14 @@ import Section from './Section';
 import styles from './ThemeSection.module.scss';
 
 import Switch, { SwitchSize } from '@/dls/Switch/Switch';
+import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
 import AutoIcon from '@/icons/auto.svg';
 import MoonIcon from '@/icons/moon-outline.svg';
 import SunIcon from '@/icons/sun-outline.svg';
 import SunsetIcon from '@/icons/sunset.svg';
-import usePersistPreferenceGroup from 'src/hooks/auth/usePersistPreferenceGroup';
+import { logValueChange } from '@/utils/eventLogger';
 import { selectTheme, setTheme } from 'src/redux/slices/theme';
 import ThemeType from 'src/redux/types/ThemeType';
-import { logValueChange } from '@/utils/eventLogger';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 
 export const themeIcons = {

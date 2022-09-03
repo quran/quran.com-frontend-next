@@ -3,10 +3,10 @@ import useTranslation from 'next-translate/useTranslation';
 import OverflowAudioPlayActionsMenuBody from './OverflowAudioPlayActionsMenuBody';
 import styles from './OverflowAudioPlayerActionsMenu.module.scss';
 
-import OverflowMenuIcon from '@/icons/menu_more_horiz.svg';
 import Button, { ButtonShape, ButtonVariant } from '@/dls/Button/Button';
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
-import useDirection from 'src/hooks/useDirection';
+import useDirection from '@/hooks/useDirection';
+import OverflowMenuIcon from '@/icons/menu_more_horiz.svg';
 import { logEvent } from '@/utils/eventLogger';
 
 const OverflowAudioPlayerActionsMenu = () => {

@@ -15,7 +15,7 @@ import DataFetcher from 'src/components/DataFetcher';
 import TarteelAttribution from 'src/components/TarteelAttribution/TarteelAttribution';
 import VoiceSearchBodyContainer from 'src/components/TarteelVoiceSearch/BodyContainer';
 import TarteelVoiceSearchTrigger from 'src/components/TarteelVoiceSearch/Trigger';
-import useDebounce from 'src/hooks/useDebounce';
+import useDebounce from '@/hooks/useDebounce';
 import { selectRecentNavigations } from 'src/redux/slices/CommandBar/state';
 import { selectIsCommandBarVoiceFlowStarted } from 'src/redux/slices/voiceSearch';
 import { makeSearchResultsUrl } from '@/utils/apiPaths';

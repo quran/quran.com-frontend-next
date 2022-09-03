@@ -12,21 +12,17 @@ import styles from './SearchSelectionBody.module.scss';
 import Checkbox from '@/dls/Forms/Checkbox/Checkbox';
 import Input from '@/dls/Forms/Input';
 import SpinnerContainer from '@/dls/Spinner/SpinnerContainer';
+import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
 import IconSearch from '@/icons/search.svg';
+import { makeTranslationsUrl } from '@/utils/apiPaths';
+import { logValueChange, logItemSelectionChange, logEmptySearchResults } from '@/utils/eventLogger';
+import filterTranslations from '@/utils/filter-translations';
+import { getLocaleName } from '@/utils/locale';
 import DataFetcher from 'src/components/DataFetcher';
-import usePersistPreferenceGroup from 'src/hooks/auth/usePersistPreferenceGroup';
 import {
   selectTranslations,
   setSelectedTranslations,
 } from 'src/redux/slices/QuranReader/translations';
-import { makeTranslationsUrl } from '@/utils/apiPaths';
-import {
-  logValueChange,
-  logItemSelectionChange,
-  logEmptySearchResults,
-} from '@/utils/eventLogger';
-import filterTranslations from '@/utils/filter-translations';
-import { getLocaleName } from '@/utils/locale';
 import { TranslationsResponse } from 'types/ApiResponses';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 import AvailableTranslation from 'types/AvailableTranslation';

@@ -13,8 +13,12 @@ import Select from '@/dls/Forms/Select';
 import HelperTooltip from '@/dls/HelperTooltip/HelperTooltip';
 import SelectionCard from '@/dls/SelectionCard/SelectionCard';
 import Toggle from '@/dls/Toggle/Toggle';
+import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
+import { makeAvailableRecitersUrl } from '@/utils/apiPaths';
+import { logValueChange } from '@/utils/eventLogger';
+import { generateSelectOptions } from '@/utils/input';
+import { toLocalizedNumber } from '@/utils/locale';
 import DataFetcher from 'src/components/DataFetcher';
-import usePersistPreferenceGroup from 'src/hooks/auth/usePersistPreferenceGroup';
 import {
   setEnableAutoScrolling,
   setShowTooltipWhenPlayingAudio,
@@ -25,10 +29,6 @@ import {
   selectReadingPreferences,
   setWordClickFunctionality,
 } from 'src/redux/slices/QuranReader/readingPreferences';
-import { makeAvailableRecitersUrl } from '@/utils/apiPaths';
-import { logValueChange } from '@/utils/eventLogger';
-import { generateSelectOptions } from '@/utils/input';
-import { toLocalizedNumber } from '@/utils/locale';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import { RecitersResponse } from 'types/ApiResponses';
 import PreferenceGroup from 'types/auth/PreferenceGroup';

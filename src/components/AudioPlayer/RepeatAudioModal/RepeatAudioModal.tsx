@@ -10,9 +10,8 @@ import SelectRepetitionMode, { RepetitionMode } from './SelectRepetitionMode';
 
 import Modal from '@/dls/Modal/Modal';
 import Separator from '@/dls/Separator/Separator';
-import { RangeVerseItem } from 'src/components/Verse/AdvancedCopy/SelectorContainer';
-import usePersistPreferenceGroup from 'src/hooks/auth/usePersistPreferenceGroup';
-import useGetChaptersData from 'src/hooks/useGetChaptersData';
+import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
+import useGetChaptersData from '@/hooks/useGetChaptersData';
 import { getChapterData } from '@/utils/chapter';
 import { logButtonClick, logValueChange } from '@/utils/eventLogger';
 import { toLocalizedVerseKey } from '@/utils/locale';
@@ -22,6 +21,7 @@ import {
   getChapterNumberFromKey,
   getVerseNumberFromKey,
 } from '@/utils/verse';
+import { RangeVerseItem } from 'src/components/Verse/AdvancedCopy/SelectorContainer';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 

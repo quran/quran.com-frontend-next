@@ -9,12 +9,12 @@ import { useSelector } from 'react-redux';
 import styles from './SidebarNavigation.module.scss';
 
 import Link from '@/dls/Link/Link';
-import DataContext from 'src/contexts/DataContext';
-import { SCROLL_TO_NEAREST_ELEMENT, useScrollToElement } from 'src/hooks/useScrollToElement';
-import { selectLastReadVerseKey } from 'src/redux/slices/QuranReader/readingTracker';
+import { SCROLL_TO_NEAREST_ELEMENT, useScrollToElement } from '@/hooks/useScrollToElement';
 import { logEmptySearchResults } from '@/utils/eventLogger';
 import { toLocalizedNumber } from '@/utils/locale';
 import { getSurahNavigationUrl } from '@/utils/navigation';
+import DataContext from 'src/contexts/DataContext';
+import { selectLastReadVerseKey } from 'src/redux/slices/QuranReader/readingTracker';
 import Chapter from 'types/Chapter';
 
 const filterSurah = (surah, searchQuery: string) => {

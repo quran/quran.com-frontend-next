@@ -6,9 +6,9 @@ import { useRouter } from 'next/router';
 import styles from './AudioPlayerSlider.module.scss';
 
 import Slider, { Direction, SliderVariant } from '@/dls/Slider';
+import useDirection from '@/hooks/useDirection';
 import { secondsFormatter } from '@/utils/datetime';
 import { logEvent } from '@/utils/eventLogger';
-import useDirection from 'src/hooks/useDirection';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 
 const AudioPlayerSlider = (): JSX.Element => {

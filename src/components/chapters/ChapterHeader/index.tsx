@@ -13,7 +13,7 @@ import Bismillah from '@/dls/Bismillah/Bismillah';
 import Button, { ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import { QURAN_READER_OBSERVER_ID } from 'src/components/QuranReader/observer';
 import PlayChapterAudioButton from 'src/components/QuranReader/PlayChapterAudioButton';
-import useIntersectionObserver from 'src/hooks/useObserveElement';
+import useIntersectionObserver from '@/hooks/useObserveElement';
 import { setIsSettingsDrawerOpen, setSettingsView, SettingsView } from 'src/redux/slices/navbar';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getSurahInfoNavigationUrl } from '@/utils/navigation';
