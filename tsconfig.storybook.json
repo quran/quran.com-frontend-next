@@ -13,6 +13,7 @@
     "paths": {
       "@/icons/*": ["../public/icons/*"],
       "@/dls/*": ["./components/dls/*"],
+      "@/data/*": ["../data/*"],
       "@/*": ["./*"],
     },
     "forceConsistentCasingInFileNames": true,

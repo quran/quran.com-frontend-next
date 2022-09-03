@@ -46,6 +46,7 @@ module.exports = {
             ...(config.resolve.alias || {}),
             '@/icons': path.resolve(__dirname, "../public/icons"),
             '@/dls': path.resolve(__dirname, "./components/dls"),
+            '@/data': path.resolve(__dirname, "../data"),
             '@/': path.resolve(__dirname, "./"),
           };
 

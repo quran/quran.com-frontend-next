@@ -23,6 +23,7 @@
     "paths": {
       "@/icons/*": ["./public/icons/*"],
       "@/dls/*": ["./src/components/dls/*"],
+      "@/data/*": ["./data/*"],
       "@/*": ["./src/*"],
     }
   },
