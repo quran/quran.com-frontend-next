@@ -10,7 +10,7 @@ import Modal from '../dls/Modal/Modal';
 import styles from './DonatePopup.module.scss';
 
 import CloseIcon from '@/icons/close.svg';
-import { selectSessionCount } from 'src/redux/slices/session';
+import { selectSessionCount } from '@/redux/slices/session';
 import { logEvent } from '@/utils/eventLogger';
 import openGivingLoopPopup from '@/utils/givingloop';
 

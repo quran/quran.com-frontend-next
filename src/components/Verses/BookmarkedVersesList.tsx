@@ -8,8 +8,8 @@ import styles from './BookmarkedVersesList.module.scss';
 
 import Button, { ButtonShape, ButtonType } from '@/dls/Button/Button';
 import DataContext from 'src/contexts/DataContext';
-import { selectBookmarks } from 'src/redux/slices/QuranReader/bookmarks';
-import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
+import { selectBookmarks } from '@/redux/slices/QuranReader/bookmarks';
+import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import { getMushafId } from '@/utils/api';
 import { privateFetcher } from '@/utils/auth/api';
 import { makeBookmarksUrl } from '@/utils/auth/apiPaths';

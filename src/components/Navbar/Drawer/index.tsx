@@ -19,8 +19,8 @@ import {
   setIsNavigationDrawerOpen,
   setIsSearchDrawerOpen,
   setIsSettingsDrawerOpen,
-} from 'src/redux/slices/navbar';
-import { stopSearchDrawerVoiceFlow } from 'src/redux/slices/voiceSearch';
+} from '@/redux/slices/navbar';
+import { stopSearchDrawerVoiceFlow } from '@/redux/slices/voiceSearch';
 
 export enum DrawerType {
   Navigation = 'navigation',

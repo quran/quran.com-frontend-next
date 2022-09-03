@@ -10,7 +10,7 @@ import { getAvailableTranslations } from 'src/api';
 import {
   selectSelectedTranslations,
   setSelectedTranslations,
-} from 'src/redux/slices/QuranReader/translations';
+} from '@/redux/slices/QuranReader/translations';
 import { areArraysEqual, numbersToStringsArray } from '@/utils/array';
 import AvailableTranslation from 'types/AvailableTranslation';
 

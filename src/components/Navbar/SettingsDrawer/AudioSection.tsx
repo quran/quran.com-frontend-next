@@ -23,12 +23,12 @@ import {
   setEnableAutoScrolling,
   setShowTooltipWhenPlayingAudio,
   selectAudioPlayerState,
-} from 'src/redux/slices/AudioPlayer/state';
-import { setSettingsView, SettingsView } from 'src/redux/slices/navbar';
+} from '@/redux/slices/AudioPlayer/state';
+import { setSettingsView, SettingsView } from '@/redux/slices/navbar';
 import {
   selectReadingPreferences,
   setWordClickFunctionality,
-} from 'src/redux/slices/QuranReader/readingPreferences';
+} from '@/redux/slices/QuranReader/readingPreferences';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import { RecitersResponse } from 'types/ApiResponses';
 import PreferenceGroup from 'types/auth/PreferenceGroup';

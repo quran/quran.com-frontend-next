@@ -10,9 +10,9 @@ import styles from './ResetButton.module.scss';
 
 import Button from '@/dls/Button/Button';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
-import resetSettings from 'src/redux/actions/reset-settings';
-import { DEFAULT_XSTATE_INITIAL_STATE } from 'src/redux/defaultSettings/defaultSettings';
-import { persistDefaultSettings } from 'src/redux/slices/defaultSettings';
+import resetSettings from '@/redux/actions/reset-settings';
+import { DEFAULT_XSTATE_INITIAL_STATE } from '@/redux/defaultSettings/defaultSettings';
+import { persistDefaultSettings } from '@/redux/slices/defaultSettings';
 import { isLoggedIn } from '@/utils/auth/login';
 import { logButtonClick } from '@/utils/eventLogger';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';

@@ -20,7 +20,7 @@ import {
   setIsSearchDrawerOpen,
   setIsNavigationDrawerOpen,
   setIsSettingsDrawerOpen,
-} from 'src/redux/slices/navbar';
+} from '@/redux/slices/navbar';
 import { logEvent } from '@/utils/eventLogger';
 
 /**

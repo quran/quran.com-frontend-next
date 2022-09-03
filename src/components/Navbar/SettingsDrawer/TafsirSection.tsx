@@ -10,15 +10,15 @@ import Counter from '@/dls/Counter/Counter';
 import SelectionCard from '@/dls/SelectionCard/SelectionCard';
 import Skeleton from '@/dls/Skeleton/Skeleton';
 import DataFetcher from '@/components/DataFetcher';
-import { setSettingsView, SettingsView } from 'src/redux/slices/navbar';
+import { setSettingsView, SettingsView } from '@/redux/slices/navbar';
 import {
   MAXIMUM_TAFSIR_FONT_STEP,
   MINIMUM_FONT_STEP,
   selectQuranReaderStyles,
   increaseTafsirFontScale,
   decreaseTafsirFontScale,
-} from 'src/redux/slices/QuranReader/styles';
-import { selectSelectedTafsirs } from 'src/redux/slices/QuranReader/tafsirs';
+} from '@/redux/slices/QuranReader/styles';
+import { selectSelectedTafsirs } from '@/redux/slices/QuranReader/tafsirs';
 import { makeTafsirsUrl } from '@/utils/apiPaths';
 import { areArraysEqual } from '@/utils/array';
 import { logValueChange } from '@/utils/eventLogger';

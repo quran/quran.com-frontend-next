@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 
 import ScrollableSelection from './ScrollableSelection';
 
-import { selectLastReadVerseKey } from 'src/redux/slices/QuranReader/readingTracker';
+import { selectLastReadVerseKey } from '@/redux/slices/QuranReader/readingTracker';
 import { getJuzIds, getJuzNumberByHizb } from '@/utils/juz';
 import { getJuzNavigationUrl } from '@/utils/navigation';
 

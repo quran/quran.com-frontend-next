@@ -16,7 +16,7 @@ import useGetQueryParamOrReduxValue from '@/hooks/useGetQueryParamOrReduxValue';
 import useGetQueryParamOrXstateValue from '@/hooks/useGetQueryParamOrXstateValue';
 import useQcfFont from '@/hooks/useQcfFont';
 import { getNumberOfPages } from '@/utils/page';
-import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
+import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
 import { VersesResponse } from 'types/ApiResponses';
 import QueryParam from 'types/QueryParam';
 import { QuranReaderDataType } from 'types/QuranReader';

@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import ChevronLeftIcon from '@/icons/chevron-left.svg';
 import ChevronRightIcon from '@/icons/chevron-right.svg';
 import Button, { ButtonType } from '@/dls/Button/Button';
-import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
+import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getPageNavigationUrl } from '@/utils/navigation';
 import { isFirstPage, isLastPage } from '@/utils/page';

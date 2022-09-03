@@ -17,8 +17,8 @@ import { makeVersesUrl } from '@/utils/apiPaths';
 import { areArraysEqual } from '@/utils/array';
 import { getVerseWords } from '@/utils/verse';
 import { fetcher } from 'src/api';
-import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
-import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';
+import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
+import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
 import { VersesResponse } from 'types/ApiResponses';
 
 /**

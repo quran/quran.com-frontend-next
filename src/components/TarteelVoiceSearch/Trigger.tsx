@@ -14,7 +14,7 @@ import {
   toggleIsCommandBarVoiceFlowStarted,
   selectIsCommandBarVoiceFlowStarted,
   selectIsSearchDrawerVoiceFlowStarted,
-} from 'src/redux/slices/voiceSearch';
+} from '@/redux/slices/voiceSearch';
 
 interface Props {
   isCommandBar?: boolean;

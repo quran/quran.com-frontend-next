@@ -22,7 +22,7 @@ import DataFetcher from '@/components/DataFetcher';
 import {
   selectTranslations,
   setSelectedTranslations,
-} from 'src/redux/slices/QuranReader/translations';
+} from '@/redux/slices/QuranReader/translations';
 import { TranslationsResponse } from 'types/ApiResponses';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 import AvailableTranslation from 'types/AvailableTranslation';

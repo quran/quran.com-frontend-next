@@ -10,7 +10,7 @@ import { logValueChange } from '@/utils/eventLogger';
 import {
   selectReadingPreferences,
   setReadingPreference,
-} from 'src/redux/slices/QuranReader/readingPreferences';
+} from '@/redux/slices/QuranReader/readingPreferences';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 import { ReadingPreference } from 'types/QuranReader';
 

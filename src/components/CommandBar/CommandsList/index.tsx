@@ -18,7 +18,7 @@ import {
   addRecentNavigation,
   removeRecentNavigation,
   setIsOpen,
-} from 'src/redux/slices/CommandBar/state';
+} from '@/redux/slices/CommandBar/state';
 import { resolveUrlBySearchNavigationType } from '@/utils/navigation';
 import { SearchNavigationResult } from 'types/SearchNavigationResult';
 

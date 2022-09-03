@@ -11,7 +11,7 @@ import { makeVersesFilterUrl } from '@/utils/apiPaths';
 import { areArraysEqual } from '@/utils/array';
 import { toLocalizedVerseKey } from '@/utils/locale';
 import { truncateString } from '@/utils/string';
-import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';
+import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
 import { VersesResponse } from 'types/ApiResponses';
 import { SearchNavigationType } from 'types/SearchNavigationResult';
 import SearchResult from 'types/Tarteel/SearchResult';

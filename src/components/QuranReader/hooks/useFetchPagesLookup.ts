@@ -2,7 +2,7 @@ import useSWRImmutable from 'swr/immutable';
 
 import { fetcher } from 'src/api';
 import { getPagesLookupParams } from '@/components/QuranReader/api';
-import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
+import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
 import { getMushafId } from '@/utils/api';
 import { makePagesLookupUrl } from '@/utils/apiPaths';
 import { PagesLookUpResponse, VersesResponse } from 'types/ApiResponses';

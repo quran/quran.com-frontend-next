@@ -1,7 +1,7 @@
 /* eslint-disable max-lines */
 /* eslint-disable react-func/max-lines-per-function */
 import { fetcher } from 'src/api';
-import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
+import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
 import { getDefaultWordFields, getMushafId } from '@/utils/api';
 import {
   makeHizbVersesUrl,

@@ -11,7 +11,7 @@ import styles from './SettingsDrawer.module.scss';
 import Button, { ButtonVariant } from '@/dls/Button/Button';
 import BackIcon from '@/icons/west.svg';
 import Drawer, { DrawerType } from '@/components/Navbar/Drawer';
-import { selectNavbar, setSettingsView, SettingsView } from 'src/redux/slices/navbar';
+import { selectNavbar, setSettingsView, SettingsView } from '@/redux/slices/navbar';
 import { logValueChange } from '@/utils/eventLogger';
 
 const SettingsBody = dynamic(() => import('./SettingsBody'), {

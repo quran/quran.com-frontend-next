@@ -4,11 +4,11 @@ import { decamelizeKeys } from 'humps';
 
 import { getDefaultWordFields, getMushafId, ITEMS_PER_PAGE, makeUrl } from './api';
 
-import { DEFAULT_RECITER } from 'src/redux/defaultSettings/defaultSettings';
+import { DEFAULT_RECITER } from '@/redux/defaultSettings/defaultSettings';
 import {
   getReadingPreferencesInitialState,
   getTranslationsInitialState,
-} from 'src/redux/defaultSettings/util';
+} from '@/redux/defaultSettings/util';
 import { AdvancedCopyRequest, PagesLookUpRequest, SearchRequest } from 'types/ApiRequests';
 import { MushafLines, QuranFont } from 'types/QuranReader';
 

@@ -18,7 +18,7 @@ import {
   setShowWordByWordTransliteration,
   setSelectedWordByWordLocale,
   selectReadingPreferences,
-} from 'src/redux/slices/QuranReader/readingPreferences';
+} from '@/redux/slices/QuranReader/readingPreferences';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 
 export const WBW_LOCALES = ['en', 'ur', 'id', 'bn', 'tr', 'fa', 'ru', 'hi', 'de', 'ta', 'inh'];

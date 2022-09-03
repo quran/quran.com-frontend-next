@@ -13,10 +13,10 @@ import { areArraysEqual } from '@/utils/array';
 import { logButtonClick, logEmptySearchResults, logTextSearchQuery } from '@/utils/eventLogger';
 import { getSearchResults } from 'src/api';
 import Drawer, { DrawerType } from '@/components/Navbar/Drawer';
-import { selectNavbar } from 'src/redux/slices/navbar';
-import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';
-import { addSearchHistoryRecord } from 'src/redux/slices/Search/search';
-import { selectIsSearchDrawerVoiceFlowStarted } from 'src/redux/slices/voiceSearch';
+import { selectNavbar } from '@/redux/slices/navbar';
+import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
+import { addSearchHistoryRecord } from '@/redux/slices/Search/search';
+import { selectIsSearchDrawerVoiceFlowStarted } from '@/redux/slices/voiceSearch';
 import { SearchResponse } from 'types/ApiResponses';
 
 const SearchBodyContainer = dynamic(() => import('@/components/Search/SearchBodyContainer'), {

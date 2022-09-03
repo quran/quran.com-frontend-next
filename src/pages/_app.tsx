@@ -28,7 +28,7 @@ import * as gtag from '@/utils/gtag';
 import { getDir } from '@/utils/locale';
 import { createSEOConfig } from '@/utils/seo';
 import DataContext from 'src/contexts/DataContext';
-import ReduxProvider from 'src/redux/Provider';
+import ReduxProvider from '@/redux/Provider';
 import ThemeProvider from 'src/styles/ThemeProvider';
 import { AudioPlayerMachineProvider } from 'src/xstate/AudioPlayerMachineContext';
 

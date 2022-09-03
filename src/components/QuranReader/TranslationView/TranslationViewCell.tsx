@@ -23,8 +23,8 @@ import {
   verseTranslationFontChanged,
 } from '@/utils/memoization';
 import { getVerseWords, makeVerseKey } from '@/utils/verse';
-import { selectEnableAutoScrolling } from 'src/redux/slices/AudioPlayer/state';
-import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
+import { selectEnableAutoScrolling } from '@/redux/slices/AudioPlayer/state';
+import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import BookmarksMap from 'types/BookmarksMap';
 import Translation from 'types/Translation';

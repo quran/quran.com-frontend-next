@@ -13,12 +13,12 @@ import useIntersectionObserver from '@/hooks/useObserveElement';
 import isCenterAlignedPage from '@/utils';
 import { getFontClassName } from '@/utils/fontFaceHelper';
 import { getFirstWordOfSurah } from '@/utils/verse';
-import { selectWordByWordPreferences } from 'src/redux/slices/QuranReader/readingPreferences';
+import { selectWordByWordPreferences } from '@/redux/slices/QuranReader/readingPreferences';
 import {
   selectReadingViewSelectedVerseKey,
   selectReadingViewHoveredVerseKey,
-} from 'src/redux/slices/QuranReader/readingViewVerse';
-import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
+} from '@/redux/slices/QuranReader/readingViewVerse';
+import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import { FALLBACK_FONT, QuranFont } from 'types/QuranReader';
 import Word from 'types/Word';
 

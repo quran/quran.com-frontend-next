@@ -40,8 +40,8 @@ import {
 } from '@/utils/verse';
 import { fetcher } from 'src/api';
 import DataContext from 'src/contexts/DataContext';
-import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
-import { selectTafsirs, setSelectedTafsirs } from 'src/redux/slices/QuranReader/tafsirs';
+import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
+import { selectTafsirs, setSelectedTafsirs } from '@/redux/slices/QuranReader/tafsirs';
 import { TafsirContentResponse, TafsirsResponse } from 'types/ApiResponses';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 

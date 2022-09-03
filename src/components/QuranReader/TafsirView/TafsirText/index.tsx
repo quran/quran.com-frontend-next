@@ -16,7 +16,7 @@ import {
   selectQuranReaderStyles,
   increaseTafsirFontScale,
   decreaseTafsirFontScale,
-} from 'src/redux/slices/QuranReader/styles';
+} from '@/redux/slices/QuranReader/styles';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 
 type TafsirTextProps = {

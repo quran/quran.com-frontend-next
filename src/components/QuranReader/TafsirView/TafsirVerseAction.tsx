@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux';
 import TafsirIcon from '@/icons/book-open.svg';
 import ContentModalHandles from '@/dls/ContentModal/types/ContentModalHandles';
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
-import { selectSelectedTafsirs } from 'src/redux/slices/QuranReader/tafsirs';
+import { selectSelectedTafsirs } from '@/redux/slices/QuranReader/tafsirs';
 import { logButtonClick, logEvent } from '@/utils/eventLogger';
 import { fakeNavigate, getVerseSelectedTafsirNavigationUrl } from '@/utils/navigation';
 

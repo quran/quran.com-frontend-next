@@ -21,7 +21,7 @@ import { generateVerseKeysBetweenTwoVerseKeys } from '@/utils/verseKeys';
 import { getJuzVerses, getPagesLookup } from 'src/api';
 import DataContext from 'src/contexts/DataContext';
 import Error from 'src/pages/_error';
-import { getQuranReaderStylesInitialState } from 'src/redux/defaultSettings/util';
+import { getQuranReaderStylesInitialState } from '@/redux/defaultSettings/util';
 import { VersesResponse } from 'types/ApiResponses';
 import ChaptersData from 'types/ChaptersData';
 import { QuranReaderDataType } from 'types/QuranReader';

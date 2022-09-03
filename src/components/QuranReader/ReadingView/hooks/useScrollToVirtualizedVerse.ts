@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { VirtuosoHandle } from 'react-virtuoso';
 
 import { fetcher } from 'src/api';
-import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
+import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
 import { getMushafId } from '@/utils/api';
 import { makeVersesFilterUrl } from '@/utils/apiPaths';
 import { getVerseNumberFromKey } from '@/utils/verse';

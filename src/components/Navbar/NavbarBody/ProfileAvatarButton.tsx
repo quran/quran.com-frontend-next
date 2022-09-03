@@ -10,7 +10,7 @@ import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import ArrowIcon from '@/icons/east.svg';
 import LogoutIcon from '@/icons/logout.svg';
 import IconPerson from '@/icons/person.svg';
-import { removeLastSyncAt } from 'src/redux/slices/Auth/userDataSync';
+import { removeLastSyncAt } from '@/redux/slices/Auth/userDataSync';
 import { logoutUser } from '@/utils/auth/api';
 import { isLoggedIn } from '@/utils/auth/login';
 import { logButtonClick } from '@/utils/eventLogger';

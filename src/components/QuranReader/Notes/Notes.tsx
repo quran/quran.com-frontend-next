@@ -6,7 +6,7 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import styles from './Notes.module.scss';
 
-import { setIsVisible, selectNotes } from 'src/redux/slices/QuranReader/notes';
+import { setIsVisible, selectNotes } from '@/redux/slices/QuranReader/notes';
 
 const Notes = () => {
   const dispatch = useDispatch();

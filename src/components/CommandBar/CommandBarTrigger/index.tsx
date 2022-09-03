@@ -8,7 +8,7 @@ import styles from './CommandBarTrigger.module.scss';
 import IconSearch from '@/icons/search.svg';
 import KeyboardInput from '@/dls/KeyboardInput';
 import TarteelVoiceSearchTrigger from '@/components/TarteelVoiceSearch/Trigger';
-import { toggleIsOpen } from 'src/redux/slices/CommandBar/state';
+import { toggleIsOpen } from '@/redux/slices/CommandBar/state';
 import { logButtonClick } from '@/utils/eventLogger';
 
 const CommandBarTrigger: React.FC = () => {

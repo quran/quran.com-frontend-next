@@ -22,11 +22,11 @@ import { makeReadingSessionsUrl } from '@/utils/auth/apiPaths';
 import { isLoggedIn } from '@/utils/auth/login';
 import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
 import DataContext from 'src/contexts/DataContext';
-import { selectNotes } from 'src/redux/slices/QuranReader/notes';
-import { selectReadingPreference } from 'src/redux/slices/QuranReader/readingPreferences';
-import { setLastReadVerse } from 'src/redux/slices/QuranReader/readingTracker';
-import { selectIsSidebarNavigationVisible } from 'src/redux/slices/QuranReader/sidebarNavigation';
-import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
+import { selectNotes } from '@/redux/slices/QuranReader/notes';
+import { selectReadingPreference } from '@/redux/slices/QuranReader/readingPreferences';
+import { setLastReadVerse } from '@/redux/slices/QuranReader/readingTracker';
+import { selectIsSidebarNavigationVisible } from '@/redux/slices/QuranReader/sidebarNavigation';
+import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import { VersesResponse } from 'types/ApiResponses';
 import { QuranReaderDataType, ReadingPreference } from 'types/QuranReader';
 

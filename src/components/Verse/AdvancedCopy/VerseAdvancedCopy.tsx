@@ -19,7 +19,7 @@ import HelperTooltip from '@/dls/HelperTooltip/HelperTooltip';
 import Link, { LinkVariant } from '@/dls/Link/Link';
 import { getAvailableTranslations } from 'src/api';
 import DataContext from 'src/contexts/DataContext';
-import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';
+import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
 import { makeTranslationsUrl } from '@/utils/apiPaths';
 import { areArraysEqual } from '@/utils/array';
 import { throwIfError } from '@/utils/error';

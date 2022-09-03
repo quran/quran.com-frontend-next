@@ -19,7 +19,7 @@ import {
   setShowTooltipFor,
   setSelectedWordByWordLocale,
   selectReadingPreferences,
-} from 'src/redux/slices/QuranReader/readingPreferences';
+} from '@/redux/slices/QuranReader/readingPreferences';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 import QueryParam from 'types/QueryParam';
 import { WordByWordType } from 'types/QuranReader';

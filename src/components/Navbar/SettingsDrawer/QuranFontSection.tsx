@@ -15,7 +15,7 @@ import Select from '@/dls/Forms/Select';
 import Switch from '@/dls/Switch/Switch';
 import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
 import { logValueChange } from '@/utils/eventLogger';
-import { getQuranReaderStylesInitialState } from 'src/redux/defaultSettings/util';
+import { getQuranReaderStylesInitialState } from '@/redux/defaultSettings/util';
 import {
   decreaseQuranTextFontScale,
   increaseQuranTextFontScale,
@@ -24,7 +24,7 @@ import {
   setQuranFont,
   setMushafLines,
   MAXIMUM_QURAN_FONT_STEP,
-} from 'src/redux/slices/QuranReader/styles';
+} from '@/redux/slices/QuranReader/styles';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 import { MushafLines, QuranFont } from 'types/QuranReader';
 

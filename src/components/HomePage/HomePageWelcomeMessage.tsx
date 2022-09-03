@@ -11,7 +11,7 @@ import HomePageMessage from './HomePageMessage';
 import {
   selectWelcomeMessage,
   setIsVisible as setIsWelcomeMessageVisible,
-} from 'src/redux/slices/welcomeMessage';
+} from '@/redux/slices/welcomeMessage';
 import { logEvent } from '@/utils/eventLogger';
 
 const HomePageWelcomeMessage = () => {

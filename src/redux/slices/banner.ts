@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { RootState } from '../RootState';
 
-import SliceName from 'src/redux/types/SliceName';
+import SliceName from '@/redux/types/SliceName';
 
 export type BannerState = {
   isBannerVisible: boolean;

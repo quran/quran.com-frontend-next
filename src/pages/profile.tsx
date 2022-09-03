@@ -23,7 +23,7 @@ import { getAllChaptersData } from '@/utils/chapter';
 import { logButtonClick } from '@/utils/eventLogger';
 import DataContext from 'src/contexts/DataContext';
 import Error from 'src/pages/_error';
-import { removeLastSyncAt } from 'src/redux/slices/Auth/userDataSync';
+import { removeLastSyncAt } from '@/redux/slices/Auth/userDataSync';
 import ChaptersData from 'types/ChaptersData';
 
 interface Props {

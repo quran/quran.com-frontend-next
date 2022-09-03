@@ -14,7 +14,7 @@ import Button, { ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import { QURAN_READER_OBSERVER_ID } from '@/components/QuranReader/observer';
 import PlayChapterAudioButton from '@/components/QuranReader/PlayChapterAudioButton';
 import useIntersectionObserver from '@/hooks/useObserveElement';
-import { setIsSettingsDrawerOpen, setSettingsView, SettingsView } from 'src/redux/slices/navbar';
+import { setIsSettingsDrawerOpen, setSettingsView, SettingsView } from '@/redux/slices/navbar';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getSurahInfoNavigationUrl } from '@/utils/navigation';
 

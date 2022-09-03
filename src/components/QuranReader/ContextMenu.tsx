@@ -10,14 +10,14 @@ import styles from './ContextMenu.module.scss';
 
 import ChevronDownIcon from '@/icons/chevron-down.svg';
 import DataContext from 'src/contexts/DataContext';
-import { selectNavbar } from 'src/redux/slices/navbar';
-import { selectContextMenu } from 'src/redux/slices/QuranReader/contextMenu';
-import { selectNotes } from 'src/redux/slices/QuranReader/notes';
-import { selectLastReadVerseKey } from 'src/redux/slices/QuranReader/readingTracker';
+import { selectNavbar } from '@/redux/slices/navbar';
+import { selectContextMenu } from '@/redux/slices/QuranReader/contextMenu';
+import { selectNotes } from '@/redux/slices/QuranReader/notes';
+import { selectLastReadVerseKey } from '@/redux/slices/QuranReader/readingTracker';
 import {
   selectIsSidebarNavigationVisible,
   setIsVisible,
-} from 'src/redux/slices/QuranReader/sidebarNavigation';
+} from '@/redux/slices/QuranReader/sidebarNavigation';
 import { getChapterData, getChapterReadingProgress } from '@/utils/chapter';
 import { logEvent } from '@/utils/eventLogger';
 import { getJuzNumberByHizb } from '@/utils/juz';

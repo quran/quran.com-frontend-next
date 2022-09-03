@@ -11,7 +11,7 @@ import { SCROLL_TO_NEAREST_ELEMENT, useScrollToElement } from '@/hooks/useScroll
 import { toLocalizedNumber } from '@/utils/locale';
 import { getChapterWithStartingVerseUrl } from '@/utils/navigation';
 import { getVerseNumberFromKey } from '@/utils/verse';
-import { selectIsVerseKeySelected } from 'src/redux/slices/QuranReader/readingTracker';
+import { selectIsVerseKeySelected } from '@/redux/slices/QuranReader/readingTracker';
 
 type VerseListItemProps = {
   verseKey: string;

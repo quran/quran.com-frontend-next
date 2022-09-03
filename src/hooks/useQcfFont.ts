@@ -13,7 +13,7 @@ import {
   resetLoadedFontFaces,
   selectLoadedFontFaces,
   addLoadedFontFace,
-} from 'src/redux/slices/QuranReader/font-faces';
+} from '@/redux/slices/QuranReader/font-faces';
 import { QuranFont } from 'types/QuranReader';
 import Verse from 'types/Verse';
 

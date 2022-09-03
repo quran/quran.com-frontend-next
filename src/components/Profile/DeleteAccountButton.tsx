@@ -11,7 +11,7 @@ import Modal from '../dls/Modal/Modal';
 
 import styles from './DeleteAccountButton.module.scss';
 
-import { removeLastSyncAt } from 'src/redux/slices/Auth/userDataSync';
+import { removeLastSyncAt } from '@/redux/slices/Auth/userDataSync';
 import { deleteAccount } from '@/utils/auth/api';
 import { logButtonClick } from '@/utils/eventLogger';
 

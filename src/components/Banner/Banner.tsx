@@ -11,10 +11,10 @@ import Button, { ButtonSize, ButtonType } from '../dls/Button/Button';
 
 import styles from './Banner.module.scss';
 
-import { selectIsBannerVisible } from 'src/redux/slices/banner';
+import { selectIsBannerVisible } from '@/redux/slices/banner';
 import openGivingLoopPopup from '@/utils/givingloop';
 
-// import { setIsBannerVisible } from 'src/redux/slices/banner';
+// import { setIsBannerVisible } from '@/redux/slices/banner';
 // import { logButtonClick } from '@/utils/eventLogger';
 
 type BannerProps = {

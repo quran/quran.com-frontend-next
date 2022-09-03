@@ -3,8 +3,8 @@ import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
 import useScrollDirection, { ScrollDirection } from '@/hooks/useScrollDirection';
-import { setIsVisible } from 'src/redux/slices/navbar';
-import { setIsExpanded } from 'src/redux/slices/QuranReader/contextMenu';
+import { setIsVisible } from '@/redux/slices/navbar';
+import { setIsExpanded } from '@/redux/slices/QuranReader/contextMenu';
 
 const GlobalScrollListener = () => {
   const dispatch = useDispatch();

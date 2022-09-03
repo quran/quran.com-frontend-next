@@ -30,7 +30,7 @@ import Error from 'src/pages/_error';
 import {
   getQuranReaderStylesInitialState,
   getTranslationsInitialState,
-} from 'src/redux/defaultSettings/util';
+} from '@/redux/defaultSettings/util';
 import { ChapterResponse } from 'types/ApiResponses';
 import ChaptersData from 'types/ChaptersData';
 

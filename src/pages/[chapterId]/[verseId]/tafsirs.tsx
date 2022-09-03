@@ -28,7 +28,7 @@ import Error from 'src/pages/_error';
 import {
   getQuranReaderStylesInitialState,
   getTafsirsInitialState,
-} from 'src/redux/defaultSettings/util';
+} from '@/redux/defaultSettings/util';
 import { ChapterResponse, VersesResponse } from 'types/ApiResponses';
 import ChaptersData from 'types/ChaptersData';
 

@@ -7,9 +7,9 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import styles from './TafsirsAdjustment.module.scss';
 
-import { getTafsirs } from 'src/api';
-import { selectSelectedTafsirs, setSelectedTafsirs } from 'src/redux/slices/QuranReader/tafsirs';
+import { selectSelectedTafsirs, setSelectedTafsirs } from '@/redux/slices/QuranReader/tafsirs';
 import { areArraysEqual } from '@/utils/array';
+import { getTafsirs } from 'src/api';
 import TafsirInfo from 'types/TafsirInfo';
 
 const TafsirsAdjustment = () => {

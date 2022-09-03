@@ -8,7 +8,7 @@ import styles from './SidebarNavigation.module.scss';
 import VerseListItem from './VerseListItem';
 
 import DataContext from 'src/contexts/DataContext';
-import { selectLastReadVerseKey } from 'src/redux/slices/QuranReader/readingTracker';
+import { selectLastReadVerseKey } from '@/redux/slices/QuranReader/readingTracker';
 import { logEmptySearchResults } from '@/utils/eventLogger';
 import { toLocalizedNumber } from '@/utils/locale';
 import { getChapterWithStartingVerseUrl } from '@/utils/navigation';

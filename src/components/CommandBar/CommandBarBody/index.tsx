@@ -16,8 +16,8 @@ import TarteelAttribution from '@/components/TarteelAttribution/TarteelAttributi
 import VoiceSearchBodyContainer from '@/components/TarteelVoiceSearch/BodyContainer';
 import TarteelVoiceSearchTrigger from '@/components/TarteelVoiceSearch/Trigger';
 import useDebounce from '@/hooks/useDebounce';
-import { selectRecentNavigations } from 'src/redux/slices/CommandBar/state';
-import { selectIsCommandBarVoiceFlowStarted } from 'src/redux/slices/voiceSearch';
+import { selectRecentNavigations } from '@/redux/slices/CommandBar/state';
+import { selectIsCommandBarVoiceFlowStarted } from '@/redux/slices/voiceSearch';
 import { makeSearchResultsUrl } from '@/utils/apiPaths';
 import { areArraysEqual } from '@/utils/array';
 import { logButtonClick, logTextSearchQuery } from '@/utils/eventLogger';

@@ -3,13 +3,13 @@ import { useEffect } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { useSWRConfig } from 'swr';
 
-import { selectLastSyncAt, setLastSyncAt } from 'src/redux/slices/Auth/userDataSync';
-import { selectBookmarks } from 'src/redux/slices/QuranReader/bookmarks';
+import { selectLastSyncAt, setLastSyncAt } from '@/redux/slices/Auth/userDataSync';
+import { selectBookmarks } from '@/redux/slices/QuranReader/bookmarks';
 import {
   RecentReadingSessions,
   selectRecentReadingSessions,
-} from 'src/redux/slices/QuranReader/readingTracker';
-import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
+} from '@/redux/slices/QuranReader/readingTracker';
+import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import { getMushafId } from '@/utils/api';
 import { syncUserLocalData } from '@/utils/auth/api';
 import { makeReadingSessionsUrl, makeUserProfileUrl } from '@/utils/auth/apiPaths';

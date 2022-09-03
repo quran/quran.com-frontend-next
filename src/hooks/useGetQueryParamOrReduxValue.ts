@@ -11,9 +11,9 @@ import {
   QueryParamValueType,
 } from '@/utils/query-params';
 import { isValidTranslationsQueryParamValue } from '@/utils/queryParamValidator';
-import { RootState } from 'src/redux/RootState';
-import { selectWordByWordLocale } from 'src/redux/slices/QuranReader/readingPreferences';
-import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';
+import { RootState } from '@/redux/RootState';
+import { selectWordByWordLocale } from '@/redux/slices/QuranReader/readingPreferences';
+import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
 import QueryParam from 'types/QueryParam';
 
 const QUERY_PARAMS_DATA = {

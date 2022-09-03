@@ -10,7 +10,7 @@ import styles from './RecentReadingSessions.module.scss';
 
 import SurahPreview, { SurahPreviewDisplay } from '@/dls/SurahPreview/SurahPreview';
 import DataContext from 'src/contexts/DataContext';
-import { selectRecentReadingSessions } from 'src/redux/slices/QuranReader/readingTracker';
+import { selectRecentReadingSessions } from '@/redux/slices/QuranReader/readingTracker';
 import { privateFetcher } from '@/utils/auth/api';
 import { makeReadingSessionsUrl } from '@/utils/auth/apiPaths';
 import { isLoggedIn } from '@/utils/auth/login';

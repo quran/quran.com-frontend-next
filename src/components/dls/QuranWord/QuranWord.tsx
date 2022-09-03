@@ -20,13 +20,13 @@ import { milliSecondsToSeconds } from '@/utils/datetime';
 import { logButtonClick } from '@/utils/eventLogger';
 import { isQCFFont } from '@/utils/fontFaceHelper';
 import { getChapterNumberFromKey, makeWordLocation } from '@/utils/verse';
-import { selectShowTooltipWhenPlayingAudio } from 'src/redux/slices/AudioPlayer/state';
+import { selectShowTooltipWhenPlayingAudio } from '@/redux/slices/AudioPlayer/state';
 import {
   selectWordClickFunctionality,
   selectReadingPreference,
   selectShowTooltipFor,
   selectWordByWordPreferences,
-} from 'src/redux/slices/QuranReader/readingPreferences';
+} from '@/redux/slices/QuranReader/readingPreferences';
 import { getWordTimeSegment } from 'src/xstate/actors/audioPlayer/audioPlayerMachineHelper';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import { ReadingPreference, QuranFont, WordClickFunctionality } from 'types/QuranReader';

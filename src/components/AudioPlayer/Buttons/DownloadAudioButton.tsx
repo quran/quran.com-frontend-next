@@ -10,7 +10,7 @@ import Spinner, { SpinnerSize } from '@/dls/Spinner/Spinner';
 import {
   selectIsDownloadingAudio,
   setIsDownloadingAudio,
-} from 'src/redux/slices/AudioPlayer/state';
+} from '@/redux/slices/AudioPlayer/state';
 import { logButtonClick } from '@/utils/eventLogger';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 

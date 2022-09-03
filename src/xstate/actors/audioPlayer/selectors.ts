@@ -1,7 +1,7 @@
 /* eslint-disable import/prefer-default-export */
 
+import { DEFAULT_RECITER } from '@/redux/defaultSettings/defaultSettings';
 import { makeVerseKey } from '@/utils/verse';
-import { DEFAULT_RECITER } from 'src/redux/defaultSettings/defaultSettings';
 
 export const selectIsUsingDefaultReciter = (state) =>
   state.context.reciterId === DEFAULT_RECITER.id;

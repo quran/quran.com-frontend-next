@@ -16,15 +16,15 @@ import { areArraysEqual } from '@/utils/array';
 import { logValueChange } from '@/utils/eventLogger';
 import { toLocalizedNumber } from '@/utils/locale';
 import DataFetcher from '@/components/DataFetcher';
-import { setSettingsView, SettingsView } from 'src/redux/slices/navbar';
+import { setSettingsView, SettingsView } from '@/redux/slices/navbar';
 import {
   decreaseTranslationFontScale,
   increaseTranslationFontScale,
   MAXIMUM_TRANSLATIONS_FONT_STEP,
   MINIMUM_FONT_STEP,
   selectQuranReaderStyles,
-} from 'src/redux/slices/QuranReader/styles';
-import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';
+} from '@/redux/slices/QuranReader/styles';
+import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
 import { TranslationsResponse } from 'types/ApiResponses';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 

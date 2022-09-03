@@ -7,8 +7,8 @@ import styles from './VersePreview.module.scss';
 
 import Skeleton from '@/dls/Skeleton/Skeleton';
 import PlainVerseText from '@/components/Verse/PlainVerseText';
-import { addLoadedFontFace } from 'src/redux/slices/QuranReader/font-faces';
-import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
+import { addLoadedFontFace } from '@/redux/slices/QuranReader/font-faces';
+import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import {
   getFontFaceNameForPage,
   getV1OrV2FontFaceSource,

@@ -14,7 +14,7 @@ import { logEmptySearchResults } from '@/utils/eventLogger';
 import { toLocalizedNumber } from '@/utils/locale';
 import { getSurahNavigationUrl } from '@/utils/navigation';
 import DataContext from 'src/contexts/DataContext';
-import { selectLastReadVerseKey } from 'src/redux/slices/QuranReader/readingTracker';
+import { selectLastReadVerseKey } from '@/redux/slices/QuranReader/readingTracker';
 import Chapter from 'types/Chapter';
 
 const filterSurah = (surah, searchQuery: string) => {

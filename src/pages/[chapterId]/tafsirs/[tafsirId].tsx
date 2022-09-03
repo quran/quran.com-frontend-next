@@ -26,7 +26,7 @@ import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
 import { fetcher } from 'src/api';
 import DataContext from 'src/contexts/DataContext';
 import Error from 'src/pages/_error';
-import { getQuranReaderStylesInitialState } from 'src/redux/defaultSettings/util';
+import { getQuranReaderStylesInitialState } from '@/redux/defaultSettings/util';
 import { ChapterResponse, TafsirContentResponse } from 'types/ApiResponses';
 import ChaptersData from 'types/ChaptersData';
 

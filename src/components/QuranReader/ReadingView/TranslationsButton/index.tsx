@@ -13,8 +13,8 @@ import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/But
 import ContentModalHandles from '@/dls/ContentModal/types/ContentModalHandles';
 import TranslationsView from '@/components/QuranReader/ReadingView/TranslationsView';
 import TranslationViewCellSkeleton from '@/components/QuranReader/TranslationView/TranslatioViewCellSkeleton';
-import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
-import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';
+import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
+import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
 import { getDefaultWordFields, getMushafId } from '@/utils/api';
 import { makeByVerseKeyUrl } from '@/utils/apiPaths';
 import { logButtonClick, logEvent } from '@/utils/eventLogger';

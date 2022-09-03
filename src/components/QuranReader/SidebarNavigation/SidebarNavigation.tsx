@@ -15,14 +15,14 @@ import useOutsideClickDetector from '@/hooks/useOutsideClickDetector';
 import IconClose from '@/icons/close.svg';
 import { logButtonClick, logEvent, logValueChange } from '@/utils/eventLogger';
 import { isMobile } from '@/utils/responsive';
-import { selectContextMenu } from 'src/redux/slices/QuranReader/contextMenu';
+import { selectContextMenu } from '@/redux/slices/QuranReader/contextMenu';
 import {
   selectIsSidebarNavigationVisible,
   selectNavigationItem,
   selectSelectedNavigationItem,
   NavigationItem,
   setIsVisible,
-} from 'src/redux/slices/QuranReader/sidebarNavigation';
+} from '@/redux/slices/QuranReader/sidebarNavigation';
 
 const SidebarNavigation = () => {
   const { isExpanded: isContextMenuExpanded } = useSelector(selectContextMenu, shallowEqual);
