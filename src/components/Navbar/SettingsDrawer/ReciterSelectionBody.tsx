@@ -14,7 +14,7 @@ import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
 import IconSearch from '@/icons/search.svg';
 import { makeAvailableRecitersUrl } from '@/utils/apiPaths';
 import { logEmptySearchResults, logItemSelectionChange } from '@/utils/eventLogger';
-import DataFetcher from 'src/components/DataFetcher';
+import DataFetcher from '@/components/DataFetcher';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import { RecitersResponse } from 'types/ApiResponses';
 import PreferenceGroup from 'types/auth/PreferenceGroup';

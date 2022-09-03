@@ -8,7 +8,7 @@ import PlusIcon from '@/icons/plus.svg';
 import Button, { ButtonVariant } from '@/dls/Button/Button';
 import Checkbox from '@/dls/Forms/Checkbox/Checkbox';
 import Modal from '@/dls/Modal/Modal';
-import FormBuilder from 'src/components/FormBuilder/FormBuilder';
+import FormBuilder from '@/components/FormBuilder/FormBuilder';
 import { RuleType } from 'types/FieldRule';
 import { FormFieldType } from 'types/FormField';
 

@@ -4,8 +4,8 @@ import useTranslation from 'next-translate/useTranslation';
 import dynamic from 'next/dynamic';
 import { shallowEqual, useSelector } from 'react-redux';
 
-import DataFetcher from 'src/components/DataFetcher';
-import TafsirSkeleton from 'src/components/QuranReader/TafsirView/TafsirSkeleton';
+import DataFetcher from '@/components/DataFetcher';
+import TafsirSkeleton from '@/components/QuranReader/TafsirView/TafsirSkeleton';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import { makeVerseReflectionsUrl } from '@/utils/apiPaths';
 

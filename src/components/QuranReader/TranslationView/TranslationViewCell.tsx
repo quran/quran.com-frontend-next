@@ -11,6 +11,10 @@ import ShareVerseButton from './ShareVerseButton';
 import TranslationText from './TranslationText';
 import styles from './TranslationViewCell.module.scss';
 
+import OverflowVerseActionsMenu from '@/components/Verse/OverflowVerseActionsMenu';
+import PlayVerseAudioButton from '@/components/Verse/PlayVerseAudioButton';
+import VerseLink from '@/components/Verse/VerseLink';
+import VerseText from '@/components/Verse/VerseText';
 import Separator from '@/dls/Separator/Separator';
 import useScroll, { SMOOTH_SCROLL_TO_CENTER } from '@/hooks/useScrollToElement';
 import {
@@ -19,10 +23,6 @@ import {
   verseTranslationFontChanged,
 } from '@/utils/memoization';
 import { getVerseWords, makeVerseKey } from '@/utils/verse';
-import OverflowVerseActionsMenu from 'src/components/Verse/OverflowVerseActionsMenu';
-import PlayVerseAudioButton from 'src/components/Verse/PlayVerseAudioButton';
-import VerseLink from 'src/components/Verse/VerseLink';
-import VerseText from 'src/components/Verse/VerseText';
 import { selectEnableAutoScrolling } from 'src/redux/slices/AudioPlayer/state';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';

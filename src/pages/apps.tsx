@@ -10,12 +10,12 @@ import TarteelAppImage from '../../public/images/tarteel-app.png';
 
 import styles from './apps.module.scss';
 
+import NextSeoWrapper from '@/components/NextSeoWrapper';
+import PageContainer from '@/components/PageContainer';
 import Link from '@/dls/Link/Link';
 import { logTarteelLinkClick } from '@/utils/eventLogger';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl } from '@/utils/navigation';
-import NextSeoWrapper from 'src/components/NextSeoWrapper';
-import PageContainer from 'src/components/PageContainer';
 
 type AppProps = {
   app: any;

@@ -10,7 +10,7 @@ import SearchIcon from '@/icons/search-book.svg';
 import ContentModalHandles from '@/dls/ContentModal/types/ContentModalHandles';
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import Separator from '@/dls/Separator/Separator';
-import PlainVerseText from 'src/components/Verse/PlainVerseText';
+import PlainVerseText from '@/components/Verse/PlainVerseText';
 import { logButtonClick, logEvent } from '@/utils/eventLogger';
 import Verse from 'types/Verse';
 

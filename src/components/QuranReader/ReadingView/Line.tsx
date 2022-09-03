@@ -6,11 +6,11 @@ import { shallowEqual, useSelector } from 'react-redux';
 
 import styles from './Line.module.scss';
 
+import ChapterHeader from '@/components/chapters/ChapterHeader';
+import VerseText from '@/components/Verse/VerseText';
 import useScroll, { SMOOTH_SCROLL_TO_CENTER } from '@/hooks/useScrollToElement';
 import { verseFontChanged } from '@/utils/memoization';
 import { getWordDataByLocation } from '@/utils/verse';
-import ChapterHeader from 'src/components/chapters/ChapterHeader';
-import VerseText from 'src/components/Verse/VerseText';
 import { selectEnableAutoScrolling } from 'src/redux/slices/AudioPlayer/state';
 import { selectWordByWordPreferences } from 'src/redux/slices/QuranReader/readingPreferences';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';

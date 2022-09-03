@@ -1,6 +1,6 @@
 import React from 'react';
 
-import CommandBar from 'src/components/CommandBar';
+import CommandBar from '@/components/CommandBar';
 
 const GlobalKeyboardListeners: React.FC = () => {
   return (

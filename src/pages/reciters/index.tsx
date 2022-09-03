@@ -9,14 +9,14 @@ import layoutStyle from '../index.module.scss';
 
 import pageStyle from './reciterPage.module.scss';
 
+import { filterReciters } from '@/components/Navbar/SettingsDrawer/ReciterSelectionBody';
+import NextSeoWrapper from '@/components/NextSeoWrapper';
+import QuranReciterListHero from '@/components/Reciter/QuranReciterListHero';
+import RecitersList from '@/components/Reciter/RecitersList';
 import { getAllChaptersData } from '@/utils/chapter';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl } from '@/utils/navigation';
 import { getAvailableReciters } from 'src/api';
-import { filterReciters } from 'src/components/Navbar/SettingsDrawer/ReciterSelectionBody';
-import NextSeoWrapper from 'src/components/NextSeoWrapper';
-import QuranReciterListHero from 'src/components/Reciter/QuranReciterListHero';
-import RecitersList from 'src/components/Reciter/RecitersList';
 import DataContext from 'src/contexts/DataContext';
 
 const NAVIGATION_URL = '/reciters';

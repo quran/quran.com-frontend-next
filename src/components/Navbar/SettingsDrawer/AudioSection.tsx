@@ -18,7 +18,7 @@ import { makeAvailableRecitersUrl } from '@/utils/apiPaths';
 import { logValueChange } from '@/utils/eventLogger';
 import { generateSelectOptions } from '@/utils/input';
 import { toLocalizedNumber } from '@/utils/locale';
-import DataFetcher from 'src/components/DataFetcher';
+import DataFetcher from '@/components/DataFetcher';
 import {
   setEnableAutoScrolling,
   setShowTooltipWhenPlayingAudio,

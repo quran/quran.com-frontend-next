@@ -10,7 +10,7 @@ import { RepetitionMode } from './RepeatAudioModal/SelectRepetitionMode';
 import RepeatIcon from '@/icons/repeat.svg';
 import Badge from '@/dls/Badge/Badge';
 import Button, { ButtonShape, ButtonVariant } from '@/dls/Button/Button';
-import Wrapper from 'src/components/Wrapper/Wrapper';
+import Wrapper from '@/components/Wrapper/Wrapper';
 import { logButtonClick } from '@/utils/eventLogger';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 

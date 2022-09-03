@@ -12,19 +12,19 @@ import useFocus from '@/hooks/useFocusElement';
 import { areArraysEqual } from '@/utils/array';
 import { logButtonClick, logEmptySearchResults, logTextSearchQuery } from '@/utils/eventLogger';
 import { getSearchResults } from 'src/api';
-import Drawer, { DrawerType } from 'src/components/Navbar/Drawer';
+import Drawer, { DrawerType } from '@/components/Navbar/Drawer';
 import { selectNavbar } from 'src/redux/slices/navbar';
 import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';
 import { addSearchHistoryRecord } from 'src/redux/slices/Search/search';
 import { selectIsSearchDrawerVoiceFlowStarted } from 'src/redux/slices/voiceSearch';
 import { SearchResponse } from 'types/ApiResponses';
 
-const SearchBodyContainer = dynamic(() => import('src/components/Search/SearchBodyContainer'), {
+const SearchBodyContainer = dynamic(() => import('@/components/Search/SearchBodyContainer'), {
   ssr: false,
   loading: () => <Spinner />,
 });
 const VoiceSearchBodyContainer = dynamic(
-  () => import('src/components/TarteelVoiceSearch/BodyContainer'),
+  () => import('@/components/TarteelVoiceSearch/BodyContainer'),
   {
     ssr: false,
     loading: () => <Spinner />,

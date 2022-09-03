@@ -10,7 +10,7 @@ import CheckIcon from '@/icons/check.svg';
 import ChevronLeftIcon from '@/icons/chevron-left.svg';
 import { logButtonClick, logValueChange } from '@/utils/eventLogger';
 import { toLocalizedNumber } from '@/utils/locale';
-import { playbackRates } from 'src/components/Navbar/SettingsDrawer/AudioSection';
+import { playbackRates } from '@/components/Navbar/SettingsDrawer/AudioSection';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 

@@ -6,7 +6,7 @@ import useSWR from 'swr';
 import styles from './VersePreview.module.scss';
 
 import Skeleton from '@/dls/Skeleton/Skeleton';
-import PlainVerseText from 'src/components/Verse/PlainVerseText';
+import PlainVerseText from '@/components/Verse/PlainVerseText';
 import { addLoadedFontFace } from 'src/redux/slices/QuranReader/font-faces';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import {

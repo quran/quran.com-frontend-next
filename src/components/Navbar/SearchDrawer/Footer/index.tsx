@@ -2,8 +2,8 @@ import React from 'react';
 
 import styles from './Footer.module.scss';
 
+import TarteelAttribution from '@/components/TarteelAttribution/TarteelAttribution';
 import Separator from '@/dls/Separator/Separator';
-import TarteelAttribution from 'src/components/TarteelAttribution/TarteelAttribution';
 
 const Footer: React.FC = () => {
   return (

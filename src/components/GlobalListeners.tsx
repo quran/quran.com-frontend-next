@@ -1,7 +1,7 @@
 import React from 'react';
 
-import GlobalKeyboardListeners from 'src/components/GlobalKeyboardListeners';
-import GlobalScrollListener from 'src/components/GlobalScrollListener';
+import GlobalKeyboardListeners from '@/components/GlobalKeyboardListeners';
+import GlobalScrollListener from '@/components/GlobalScrollListener';
 
 const GlobalListeners = () => {
   return (

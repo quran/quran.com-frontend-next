@@ -6,8 +6,8 @@ import styles from './RepeatSetting.module.scss';
 
 import Combobox from '@/dls/Forms/Combobox';
 import Switch from '@/dls/Switch/Switch';
-import { RangeSelectorType } from 'src/components/Verse/AdvancedCopy/SelectorContainer';
-import VerseRangeSelector from 'src/components/Verse/AdvancedCopy/VersesRangeSelector';
+import { RangeSelectorType } from '@/components/Verse/AdvancedCopy/SelectorContainer';
+import VerseRangeSelector from '@/components/Verse/AdvancedCopy/VersesRangeSelector';
 import { toLocalizedVerseKey } from '@/utils/locale';
 
 export enum RepetitionMode {

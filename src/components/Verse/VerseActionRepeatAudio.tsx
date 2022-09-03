@@ -5,8 +5,8 @@ import useTranslation from 'next-translate/useTranslation';
 import { RepetitionMode } from '../AudioPlayer/RepeatAudioModal/SelectRepetitionMode';
 import PopoverMenu from '../dls/PopoverMenu/PopoverMenu';
 
+import RepeatAudioModal from '@/components/AudioPlayer/RepeatAudioModal/RepeatAudioModal';
 import RepeatIcon from '@/icons/repeat.svg';
-import RepeatAudioModal from 'src/components/AudioPlayer/RepeatAudioModal/RepeatAudioModal';
 import { getChapterNumberFromKey } from '@/utils/verse';
 
 type VerseActionRepeatAudioProps = {

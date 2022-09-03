@@ -12,6 +12,8 @@ import layoutStyle from '../../index.module.scss';
 
 import styles from './chapterId.module.scss';
 
+import { download } from '@/components/AudioPlayer/Buttons/DownloadAudioButton';
+import NextSeoWrapper from '@/components/NextSeoWrapper';
 import Button, { ButtonType } from '@/dls/Button/Button';
 import Spinner from '@/dls/Spinner/Spinner';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
@@ -31,8 +33,6 @@ import {
 import { getCurrentPath } from '@/utils/url';
 import { isValidChapterId } from '@/utils/validator';
 import { getChapterAudioData, getChapterIdBySlug, getReciterData } from 'src/api';
-import { download } from 'src/components/AudioPlayer/Buttons/DownloadAudioButton';
-import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import DataContext from 'src/contexts/DataContext';
 import { selectCurrentAudioReciterId } from 'src/xstate/actors/audioPlayer/selectors';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';

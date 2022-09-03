@@ -6,13 +6,13 @@ import Image from 'next/image';
 
 import styles from './contentPage.module.scss';
 
+import NextSeoWrapper from '@/components/NextSeoWrapper';
+import PageContainer from '@/components/PageContainer';
 import Link from '@/dls/Link/Link';
 import { logTarteelLinkClick } from '@/utils/eventLogger';
 import { getBlurDataUrl } from '@/utils/image';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl } from '@/utils/navigation';
-import NextSeoWrapper from 'src/components/NextSeoWrapper';
-import PageContainer from 'src/components/PageContainer';
 
 const path = '/about-us';
 const AboutUsPage = () => {

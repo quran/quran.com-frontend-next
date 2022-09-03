@@ -3,10 +3,10 @@ import useSWRImmutable from 'swr/immutable';
 
 import RadioContext from '../actors/radio/types/RadioContext';
 
+import curatedStations from '@/components/Radio/curatedStations';
+import { StationInfo, StationType } from '@/components/Radio/types';
 import { makeReciterUrl } from '@/utils/apiPaths';
 import { getReciterData } from 'src/api';
-import curatedStations from 'src/components/Radio/curatedStations';
-import { StationInfo, StationType } from 'src/components/Radio/types';
 
 const useCurrentStationInfo = (context: RadioContext): StationInfo => {
   const { t, lang } = useTranslation('radio');

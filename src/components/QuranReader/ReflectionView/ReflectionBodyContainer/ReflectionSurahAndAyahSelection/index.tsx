@@ -4,7 +4,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from './ReflectionSurahAndAyahSelection.module.scss';
 
-import SurahAndAyahSelection from 'src/components/QuranReader/TafsirView/SurahAndAyahSelection';
+import SurahAndAyahSelection from '@/components/QuranReader/TafsirView/SurahAndAyahSelection';
 import { logItemSelectionChange } from '@/utils/eventLogger';
 import { fakeNavigate, getVerseReflectionNavigationUrl } from '@/utils/navigation';
 import { makeVerseKey } from '@/utils/verse';

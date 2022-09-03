@@ -8,11 +8,11 @@ import styles from './ChapterHeader.module.scss';
 import InfoIcon from '@/icons/info.svg';
 import ChapterIconContainer, {
   ChapterIconsSize,
-} from 'src/components/chapters/ChapterIcon/ChapterIconContainer';
+} from '@/components/chapters/ChapterIcon/ChapterIconContainer';
 import Bismillah from '@/dls/Bismillah/Bismillah';
 import Button, { ButtonSize, ButtonVariant } from '@/dls/Button/Button';
-import { QURAN_READER_OBSERVER_ID } from 'src/components/QuranReader/observer';
-import PlayChapterAudioButton from 'src/components/QuranReader/PlayChapterAudioButton';
+import { QURAN_READER_OBSERVER_ID } from '@/components/QuranReader/observer';
+import PlayChapterAudioButton from '@/components/QuranReader/PlayChapterAudioButton';
 import useIntersectionObserver from '@/hooks/useObserveElement';
 import { setIsSettingsDrawerOpen, setSettingsView, SettingsView } from 'src/redux/slices/navbar';
 import { logButtonClick } from '@/utils/eventLogger';

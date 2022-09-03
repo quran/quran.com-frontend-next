@@ -9,7 +9,7 @@ import Link from '@/dls/Link/Link';
 import Spinner, { SpinnerSize } from '@/dls/Spinner/Spinner';
 import Tooltip, { ContentSide } from '@/dls/Tooltip';
 import useDirection from '@/hooks/useDirection';
-import Wrapper from 'src/components/Wrapper/Wrapper';
+import Wrapper from '@/components/Wrapper/Wrapper';
 
 export enum ButtonSize {
   Small = 'small',

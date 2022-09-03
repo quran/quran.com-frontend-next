@@ -9,7 +9,7 @@ import styles from './SearchSelectionBody.module.scss';
 
 import Input from '@/dls/Forms/Input';
 import IconSearch from '@/icons/search.svg';
-import DataFetcher from 'src/components/DataFetcher';
+import DataFetcher from '@/components/DataFetcher';
 import { selectSelectedTafsirs, setSelectedTafsirs } from 'src/redux/slices/QuranReader/tafsirs';
 import { makeTafsirsUrl } from '@/utils/apiPaths';
 import { areArraysEqual } from '@/utils/array';

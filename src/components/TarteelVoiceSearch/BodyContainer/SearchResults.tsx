@@ -4,14 +4,14 @@ import groupBy from 'lodash/groupBy';
 import useTranslation from 'next-translate/useTranslation';
 import { useSelector } from 'react-redux';
 
-import CommandsList from 'src/components/CommandBar/CommandsList';
-import DataFetcher from 'src/components/DataFetcher';
-import SearchResultItem, { Source } from 'src/components/Search/SearchResults/SearchResultItem';
-import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';
+import CommandsList from '@/components/CommandBar/CommandsList';
+import DataFetcher from '@/components/DataFetcher';
+import SearchResultItem, { Source } from '@/components/Search/SearchResults/SearchResultItem';
 import { makeVersesFilterUrl } from '@/utils/apiPaths';
 import { areArraysEqual } from '@/utils/array';
 import { toLocalizedVerseKey } from '@/utils/locale';
 import { truncateString } from '@/utils/string';
+import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';
 import { VersesResponse } from 'types/ApiResponses';
 import { SearchNavigationType } from 'types/SearchNavigationResult';
 import SearchResult from 'types/Tarteel/SearchResult';

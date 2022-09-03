@@ -1,8 +1,8 @@
 import AudioPlayerContext from './types/AudioPlayerContext';
 
+import isCurrentTimeInRange from '@/components/AudioPlayer/hooks/isCurrentTimeInRange';
 import { getVerseNumberFromKey } from '@/utils/verse';
 import { getAvailableReciters, getChapterAudioData } from 'src/api';
-import isCurrentTimeInRange from 'src/components/AudioPlayer/hooks/isCurrentTimeInRange';
 import AudioData from 'types/AudioData';
 import Reciter from 'types/Reciter';
 import VerseTiming from 'types/VerseTiming';

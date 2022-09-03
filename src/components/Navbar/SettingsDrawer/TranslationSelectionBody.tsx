@@ -18,7 +18,7 @@ import { makeTranslationsUrl } from '@/utils/apiPaths';
 import { logValueChange, logItemSelectionChange, logEmptySearchResults } from '@/utils/eventLogger';
 import filterTranslations from '@/utils/filter-translations';
 import { getLocaleName } from '@/utils/locale';
-import DataFetcher from 'src/components/DataFetcher';
+import DataFetcher from '@/components/DataFetcher';
 import {
   selectTranslations,
   setSelectedTranslations,

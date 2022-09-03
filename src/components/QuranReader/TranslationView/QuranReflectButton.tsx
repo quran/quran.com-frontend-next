@@ -6,10 +6,10 @@ import { useRouter } from 'next/router';
 
 import styles from './TranslationViewCell.module.scss';
 
-import ChatIcon from '@/icons/chat.svg';
+import ReflectionBodyContainer from '@/components/QuranReader/ReflectionView/ReflectionBodyContainer';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import ContentModal from '@/dls/ContentModal/ContentModal';
-import ReflectionBodyContainer from 'src/components/QuranReader/ReflectionView/ReflectionBodyContainer';
+import ChatIcon from '@/icons/chat.svg';
 // import { logButtonClick } from '@/utils/eventLogger';
 import {
   fakeNavigate,

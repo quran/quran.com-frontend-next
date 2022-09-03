@@ -6,13 +6,13 @@ import styles from './ReflectionBody.module.scss';
 
 import Button from '@/dls/Button/Button';
 import Separator from '@/dls/Separator/Separator';
-import ReflectionDisclaimerMessage from 'src/components/QuranReader/ReflectionView/ReflectionDisclaimerMessage';
+import ReflectionDisclaimerMessage from '@/components/QuranReader/ReflectionView/ReflectionDisclaimerMessage';
 import ReflectionItem, {
   VerseReference,
-} from 'src/components/QuranReader/ReflectionView/ReflectionItem';
-import ReflectionNotAvailableMessage from 'src/components/QuranReader/ReflectionView/ReflectionNotAvailableMessage';
-import TafsirEndOfScrollingActions from 'src/components/QuranReader/TafsirView/TafsirEndOfScrollingActions';
-import VerseAndTranslation from 'src/components/Verse/VerseAndTranslation';
+} from '@/components/QuranReader/ReflectionView/ReflectionItem';
+import ReflectionNotAvailableMessage from '@/components/QuranReader/ReflectionView/ReflectionNotAvailableMessage';
+import TafsirEndOfScrollingActions from '@/components/QuranReader/TafsirView/TafsirEndOfScrollingActions';
+import VerseAndTranslation from '@/components/Verse/VerseAndTranslation';
 import DataContext from 'src/contexts/DataContext';
 import { logButtonClick } from '@/utils/eventLogger';
 import {

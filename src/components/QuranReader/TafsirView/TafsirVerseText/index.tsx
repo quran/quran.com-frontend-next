@@ -2,9 +2,9 @@ import React, { useMemo } from 'react';
 
 import { shallowEqual, useSelector } from 'react-redux';
 
+import PlainVerseText from '@/components/Verse/PlainVerseText';
 import useQcfFont from '@/hooks/useQcfFont';
 import { getVerseWords } from '@/utils/verse';
-import PlainVerseText from 'src/components/Verse/PlainVerseText';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import Verse from 'types/Verse';
 

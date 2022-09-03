@@ -8,7 +8,7 @@ import styles from './Footer.module.scss';
 import FooterThemeSwitcher from './FooterThemeSwitcher';
 
 import Link, { LinkVariant } from '@/dls/Link/Link';
-import LanguageSelector from 'src/components/Navbar/LanguageSelector';
+import LanguageSelector from '@/components/Navbar/LanguageSelector';
 import { toLocalizedDate } from '@/utils/locale';
 
 const BottomSection = () => {

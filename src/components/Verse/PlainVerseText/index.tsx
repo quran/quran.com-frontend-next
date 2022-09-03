@@ -7,12 +7,12 @@ import styles from '../VerseText.module.scss';
 
 import PlainVerseTextWord from './PlainVerseTextWord';
 
+import useIsFontLoaded from '@/components/QuranReader/hooks/useIsFontLoaded';
 import GlyphWord from '@/dls/QuranWord/GlyphWord';
 import TajweedWord from '@/dls/QuranWord/TajweedWordImage';
 import TextWord from '@/dls/QuranWord/TextWord';
-import useIsFontLoaded from 'src/components/QuranReader/hooks/useIsFontLoaded';
-import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import { getFontClassName, isQCFFont } from '@/utils/fontFaceHelper';
+import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import { QuranFont } from 'types/QuranReader';
 import Word from 'types/Word';
 

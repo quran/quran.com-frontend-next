@@ -1,5 +1,6 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 
+import InfoPage from '@/components/chapters/Info/InfoPage';
 import { getChapterData, getAllChaptersData } from '@/utils/chapter';
 import {
   REVALIDATION_PERIOD_ON_ERROR_SECONDS,
@@ -7,7 +8,6 @@ import {
 } from '@/utils/staticPageGeneration';
 import { isValidChapterId } from '@/utils/validator';
 import { getChapterIdBySlug, getChapterInfo } from 'src/api';
-import InfoPage from 'src/components/chapters/Info/InfoPage';
 import { ChapterInfoResponse, ChapterResponse } from 'types/ApiResponses';
 import ChaptersData from 'types/ChaptersData';
 

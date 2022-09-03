@@ -16,6 +16,9 @@ import PageNavigationButtons from './PageNavigationButtons';
 import styles from './ReadingView.module.scss';
 import ReadingViewSkeleton from './ReadingViewSkeleton';
 
+import useFetchPagesLookup from '@/components/QuranReader/hooks/useFetchPagesLookup';
+import onCopyQuranWords from '@/components/QuranReader/onCopyQuranWords';
+import QueryParamMessage from '@/components/QuranReader/QueryParamMessage';
 import Spinner from '@/dls/Spinner/Spinner';
 import useGetQueryParamOrReduxValue from '@/hooks/useGetQueryParamOrReduxValue';
 import useGetQueryParamOrXstateValue from '@/hooks/useGetQueryParamOrXstateValue';
@@ -23,9 +26,6 @@ import useQcfFont from '@/hooks/useQcfFont';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getLineWidthClassName } from '@/utils/fontFaceHelper';
 import { getPageIndexByPageNumber } from '@/utils/page';
-import useFetchPagesLookup from 'src/components/QuranReader/hooks/useFetchPagesLookup';
-import onCopyQuranWords from 'src/components/QuranReader/onCopyQuranWords';
-import QueryParamMessage from 'src/components/QuranReader/QueryParamMessage';
 import Error from 'src/pages/_error';
 import { selectedLastReadPage } from 'src/redux/slices/QuranReader/readingTracker';
 import { selectIsUsingDefaultFont } from 'src/redux/slices/QuranReader/styles';
@@ -36,7 +36,7 @@ import { QuranReaderDataType } from 'types/QuranReader';
 import Verse from 'types/Verse';
 
 const EndOfScrollingControls = dynamic(
-  () => import('src/components/QuranReader/EndOfScrollingControls'),
+  () => import('@/components/QuranReader/EndOfScrollingControls'),
   {
     ssr: false,
     loading: () => <Spinner />,

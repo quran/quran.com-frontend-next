@@ -4,7 +4,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import Info from '.';
 
-import NextSeoWrapper from 'src/components/NextSeoWrapper';
+import NextSeoWrapper from '@/components/NextSeoWrapper';
 import DataContext from 'src/contexts/DataContext';
 import Error from 'src/pages/_error';
 import { getLanguageAlternates, toLocalizedNumber } from '@/utils/locale';

@@ -21,7 +21,7 @@ import {
   getChapterNumberFromKey,
   getVerseNumberFromKey,
 } from '@/utils/verse';
-import { RangeVerseItem } from 'src/components/Verse/AdvancedCopy/SelectorContainer';
+import { RangeVerseItem } from '@/components/Verse/AdvancedCopy/SelectorContainer';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 

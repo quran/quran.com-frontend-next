@@ -15,12 +15,12 @@ import styles from './QuranReader.module.scss';
 import QuranReaderView from './QuranReaderView';
 import SidebarNavigation from './SidebarNavigation/SidebarNavigation';
 
+import FontPreLoader from '@/components/Fonts/FontPreLoader';
 import useGlobalIntersectionObserver from '@/hooks/useGlobalIntersectionObserver';
 import { addReadingSession } from '@/utils/auth/api';
 import { makeReadingSessionsUrl } from '@/utils/auth/apiPaths';
 import { isLoggedIn } from '@/utils/auth/login';
 import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
-import FontPreLoader from 'src/components/Fonts/FontPreLoader';
 import DataContext from 'src/contexts/DataContext';
 import { selectNotes } from 'src/redux/slices/QuranReader/notes';
 import { selectReadingPreference } from 'src/redux/slices/QuranReader/readingPreferences';

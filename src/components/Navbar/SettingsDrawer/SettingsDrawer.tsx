@@ -10,7 +10,7 @@ import styles from './SettingsDrawer.module.scss';
 
 import Button, { ButtonVariant } from '@/dls/Button/Button';
 import BackIcon from '@/icons/west.svg';
-import Drawer, { DrawerType } from 'src/components/Navbar/Drawer';
+import Drawer, { DrawerType } from '@/components/Navbar/Drawer';
 import { selectNavbar, setSettingsView, SettingsView } from 'src/redux/slices/navbar';
 import { logValueChange } from '@/utils/eventLogger';
 

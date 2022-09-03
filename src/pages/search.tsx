@@ -8,6 +8,9 @@ import { useSelector } from 'react-redux';
 
 import styles from './search.module.scss';
 
+import NextSeoWrapper from '@/components/NextSeoWrapper';
+import TranslationsFilter from '@/components/Search/Filters/TranslationsFilter';
+import SearchBodyContainer from '@/components/Search/SearchBodyContainer';
 import Button, { ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import ContentModal, { ContentModalSize } from '@/dls/ContentModal/ContentModal';
 import Input, { InputVariant } from '@/dls/Forms/Input';
@@ -28,9 +31,6 @@ import filterTranslations from '@/utils/filter-translations';
 import { getLanguageAlternates, toLocalizedNumber } from '@/utils/locale';
 import { getCanonicalUrl } from '@/utils/navigation';
 import { getAvailableLanguages, getAvailableTranslations, getSearchResults } from 'src/api';
-import NextSeoWrapper from 'src/components/NextSeoWrapper';
-import TranslationsFilter from 'src/components/Search/Filters/TranslationsFilter';
-import SearchBodyContainer from 'src/components/Search/SearchBodyContainer';
 import DataContext from 'src/contexts/DataContext';
 import { getTranslationsInitialState } from 'src/redux/defaultSettings/util';
 import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';

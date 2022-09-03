@@ -15,7 +15,7 @@ import { makeTranslationsUrl } from '@/utils/apiPaths';
 import { areArraysEqual } from '@/utils/array';
 import { logValueChange } from '@/utils/eventLogger';
 import { toLocalizedNumber } from '@/utils/locale';
-import DataFetcher from 'src/components/DataFetcher';
+import DataFetcher from '@/components/DataFetcher';
 import { setSettingsView, SettingsView } from 'src/redux/slices/navbar';
 import {
   decreaseTranslationFontScale,

@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import styles from './ChapterIconContainer.module.scss';
 
-import ChapterIcon from 'src/components/chapters/ChapterIcon';
+import ChapterIcon from '@/components/chapters/ChapterIcon';
 
 export enum ChapterIconsSize {
   Small = 'small',

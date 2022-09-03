@@ -7,7 +7,7 @@ import useSWRImmutable from 'swr/immutable';
 import Page from './Page';
 import ReadingViewSkeleton from './ReadingViewSkeleton';
 
-import { getReaderViewRequestKey, verseFetcher } from 'src/components/QuranReader/api';
+import { getReaderViewRequestKey, verseFetcher } from '@/components/QuranReader/api';
 import { getPageNumberByPageIndex } from '@/utils/page';
 import { selectIsUsingDefaultWordByWordLocale } from 'src/redux/slices/QuranReader/readingPreferences';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';

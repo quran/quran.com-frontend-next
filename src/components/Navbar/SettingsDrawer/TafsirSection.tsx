@@ -9,7 +9,7 @@ import styles from './TafsirSection.module.scss';
 import Counter from '@/dls/Counter/Counter';
 import SelectionCard from '@/dls/SelectionCard/SelectionCard';
 import Skeleton from '@/dls/Skeleton/Skeleton';
-import DataFetcher from 'src/components/DataFetcher';
+import DataFetcher from '@/components/DataFetcher';
 import { setSettingsView, SettingsView } from 'src/redux/slices/navbar';
 import {
   MAXIMUM_TAFSIR_FONT_STEP,

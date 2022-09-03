@@ -5,7 +5,7 @@ import useTranslation from 'next-translate/useTranslation';
 import styles from './RenameCollectionModal.module.scss';
 
 import Modal from '@/dls/Modal/Modal';
-import FormBuilder from 'src/components/FormBuilder/FormBuilder';
+import FormBuilder from '@/components/FormBuilder/FormBuilder';
 import { RuleType } from 'types/FieldRule';
 import { FormFieldType } from 'types/FormField';
 

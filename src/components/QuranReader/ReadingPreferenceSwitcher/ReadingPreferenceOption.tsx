@@ -2,8 +2,8 @@ import React from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
+import styles from '@/components/QuranReader/ReadingPreferenceSwitcher/ReadingPreference.module.scss';
 import Spinner from '@/dls/Spinner/Spinner';
-import styles from 'src/components/QuranReader/ReadingPreferenceSwitcher/ReadingPreference.module.scss';
 import { ReadingPreference } from 'types/QuranReader';
 
 type Props = {

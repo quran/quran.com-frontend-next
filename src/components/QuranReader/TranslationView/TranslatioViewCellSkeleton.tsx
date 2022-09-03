@@ -5,11 +5,11 @@ import { useSelector, shallowEqual } from 'react-redux';
 import cellStyles from './TranslationViewCell.module.scss';
 import skeletonStyles from './TranslationViewSkeleton.module.scss';
 
+import verseTextStyles from '@/components/Verse/VerseText.module.scss';
 import Button, { ButtonSize } from '@/dls/Button/Button';
 import Skeleton from '@/dls/Skeleton/Skeleton';
 import useGetQueryParamOrReduxValue from '@/hooks/useGetQueryParamOrReduxValue';
 import { getFontClassName } from '@/utils/fontFaceHelper';
-import verseTextStyles from 'src/components/Verse/VerseText.module.scss';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import QueryParam from 'types/QueryParam';
 import { QuranFont } from 'types/QuranReader';

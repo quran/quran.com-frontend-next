@@ -18,6 +18,7 @@ import TafsirText from './TafsirText';
 import TafsirVerseText from './TafsirVerseText';
 import styles from './TafsirView.module.scss';
 
+import DataFetcher from '@/components/DataFetcher';
 import Separator from '@/dls/Separator/Separator';
 import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
 import { makeTafsirContentUrl, makeTafsirsUrl } from '@/utils/apiPaths';
@@ -38,7 +39,6 @@ import {
   getVerseAndChapterNumbersFromKey,
 } from '@/utils/verse';
 import { fetcher } from 'src/api';
-import DataFetcher from 'src/components/DataFetcher';
 import DataContext from 'src/contexts/DataContext';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import { selectTafsirs, setSelectedTafsirs } from 'src/redux/slices/QuranReader/tafsirs';

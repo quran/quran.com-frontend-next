@@ -7,12 +7,12 @@ import { QURAN_READER_OBSERVER_ID } from '../QuranReader/observer';
 
 import styles from './VerseText.module.scss';
 
+import useIsFontLoaded from '@/components/QuranReader/hooks/useIsFontLoaded';
 import QuranWord from '@/dls/QuranWord/QuranWord';
 import useIntersectionObserver from '@/hooks/useObserveElement';
 import isCenterAlignedPage from '@/utils';
 import { getFontClassName } from '@/utils/fontFaceHelper';
 import { getFirstWordOfSurah } from '@/utils/verse';
-import useIsFontLoaded from 'src/components/QuranReader/hooks/useIsFontLoaded';
 import { selectWordByWordPreferences } from 'src/redux/slices/QuranReader/readingPreferences';
 import {
   selectReadingViewSelectedVerseKey,

@@ -5,6 +5,8 @@ import React from 'react';
 import { NextPage, GetStaticProps, GetStaticPaths } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 
+import NextSeoWrapper from '@/components/NextSeoWrapper';
+import QuranReader from '@/components/QuranReader';
 import { getDefaultWordFields, getMushafId } from '@/utils/api';
 import { getAllChaptersData, getChapterData } from '@/utils/chapter';
 import { toLocalizedNumber, getLocaleName, getLanguageAlternates } from '@/utils/locale';
@@ -18,8 +20,6 @@ import { isValidChapterId, isValidVerseKey } from '@/utils/validator';
 import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
 import { generateVerseKeysBetweenTwoVerseKeys } from '@/utils/verseKeys';
 import { getChapterIdBySlug, getChapterVerses, getPagesLookup } from 'src/api';
-import NextSeoWrapper from 'src/components/NextSeoWrapper';
-import QuranReader from 'src/components/QuranReader';
 import DataContext from 'src/contexts/DataContext';
 import Error from 'src/pages/_error';
 import { getQuranReaderStylesInitialState } from 'src/redux/defaultSettings/util';

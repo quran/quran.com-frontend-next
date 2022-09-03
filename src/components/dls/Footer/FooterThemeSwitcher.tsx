@@ -7,7 +7,7 @@ import PopoverMenu from '../PopoverMenu/PopoverMenu';
 import styles from './FooterThemeSwitcher.module.scss';
 
 import ChevronSelectIcon from '@/icons/chevron-select.svg';
-import { themeIcons } from 'src/components/Navbar/SettingsDrawer/ThemeSection';
+import { themeIcons } from '@/components/Navbar/SettingsDrawer/ThemeSection';
 import { selectTheme, setTheme } from 'src/redux/slices/theme';
 import ThemeType from 'src/redux/types/ThemeType';
 

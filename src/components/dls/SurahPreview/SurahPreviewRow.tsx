@@ -7,7 +7,7 @@ import styles from './SurahPreviewRow.module.scss';
 
 import ChapterIconContainer, {
   ChapterIconsSize,
-} from 'src/components/chapters/ChapterIcon/ChapterIconContainer';
+} from '@/components/chapters/ChapterIcon/ChapterIconContainer';
 import { toLocalizedNumber } from '@/utils/locale';
 
 type SurahPreviewRowProps = {

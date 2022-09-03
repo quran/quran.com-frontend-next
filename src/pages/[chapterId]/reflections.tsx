@@ -7,6 +7,8 @@ import { SWRConfig } from 'swr';
 
 import styles from './[verseId]/tafsirs.module.scss';
 
+import NextSeoWrapper from '@/components/NextSeoWrapper';
+import ReflectionBodyContainer from '@/components/QuranReader/ReflectionView/ReflectionBodyContainer';
 import { getDefaultWordFields, getMushafId } from '@/utils/api';
 import { makeVerseReflectionsUrl, makeVersesUrl } from '@/utils/apiPaths';
 import { getChapterData, getAllChaptersData } from '@/utils/chapter';
@@ -23,8 +25,6 @@ import {
 import { isValidVerseKey } from '@/utils/validator';
 import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
 import { fetcher } from 'src/api';
-import NextSeoWrapper from 'src/components/NextSeoWrapper';
-import ReflectionBodyContainer from 'src/components/QuranReader/ReflectionView/ReflectionBodyContainer';
 import DataContext from 'src/contexts/DataContext';
 import Error from 'src/pages/_error';
 import {

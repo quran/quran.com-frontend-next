@@ -7,8 +7,8 @@ import NoResults from './NoResults';
 import PreInput from './PreInput';
 import styles from './SearchBodyContainer.module.scss';
 
+import SearchResults from '@/components/Search/SearchResults';
 import Spinner, { SpinnerSize } from '@/dls/Spinner/Spinner';
-import SearchResults from 'src/components/Search/SearchResults';
 import { getSearchQueryNavigationUrl } from '@/utils/navigation';
 import { SearchResponse } from 'types/ApiResponses';
 
