@@ -2,11 +2,10 @@ import React from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
-import ChevronLeftIcon from '../../../../public/icons/chevron-left.svg';
-import ChevronRightIcon from '../../../../public/icons/chevron-right.svg';
-
 import Button, { ButtonType } from '@/dls/Button/Button';
 import useScrollToTop from '@/hooks/useScrollToTop';
+import ChevronLeftIcon from '@/icons/chevron-left.svg';
+import ChevronRightIcon from '@/icons/chevron-right.svg';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getRubNavigationUrl } from '@/utils/navigation';
 import { isFirstRub, isLastRub } from '@/utils/rub';
