@@ -7,6 +7,7 @@ import { Virtuoso, VirtuosoHandle } from 'react-virtuoso';
 
 import onCopyQuranWords from '../onCopyQuranWords';
 import QueryParamMessage from '../QueryParamMessage';
+import { getNumberOfPages } from '../utils/page';
 
 import useScrollToVirtualizedVerse from './hooks/useScrollToVirtualizedVerse';
 import TranslationPage from './TranslationPage';
@@ -16,7 +17,6 @@ import useGetQueryParamOrReduxValue from '@/hooks/useGetQueryParamOrReduxValue';
 import useGetQueryParamOrXstateValue from '@/hooks/useGetQueryParamOrXstateValue';
 import useQcfFont from '@/hooks/useQcfFont';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
-import { getNumberOfPages } from '@/utils/page';
 import { VersesResponse } from 'types/ApiResponses';
 import QueryParam from 'types/QueryParam';
 import { QuranReaderDataType } from 'types/QuranReader';

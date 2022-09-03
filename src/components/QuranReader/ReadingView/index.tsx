@@ -10,6 +10,8 @@ import { useHotkeys } from 'react-hotkeys-hook';
 import { shallowEqual, useSelector } from 'react-redux';
 import { Virtuoso, VirtuosoHandle } from 'react-virtuoso';
 
+import { getPageIndexByPageNumber } from '../utils/page';
+
 import useScrollToVirtualizedVerse from './hooks/useScrollToVirtualizedVerse';
 import PageContainer from './PageContainer';
 import PageNavigationButtons from './PageNavigationButtons';
@@ -28,7 +30,6 @@ import { selectIsUsingDefaultFont } from '@/redux/slices/QuranReader/styles';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getLineWidthClassName } from '@/utils/fontFaceHelper';
-import { getPageIndexByPageNumber } from '@/utils/page';
 import Error from 'src/pages/_error';
 import { VersesResponse } from 'types/ApiResponses';
 import QueryParam from 'types/QueryParam';

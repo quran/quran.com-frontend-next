@@ -4,13 +4,14 @@ import { useSelector as useXstateSelector } from '@xstate/react';
 import { useSelector } from 'react-redux';
 import useSWRImmutable from 'swr/immutable';
 
+import { getPageNumberByPageIndex } from '../utils/page';
+
 import Page from './Page';
 import ReadingViewSkeleton from './ReadingViewSkeleton';
 
 import { getReaderViewRequestKey, verseFetcher } from '@/components/QuranReader/api';
 import { selectIsUsingDefaultWordByWordLocale } from '@/redux/slices/QuranReader/readingPreferences';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
-import { getPageNumberByPageIndex } from '@/utils/page';
 import { selectIsUsingDefaultReciter } from 'src/xstate/actors/audioPlayer/selectors';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import { VersesResponse } from 'types/ApiResponses';
