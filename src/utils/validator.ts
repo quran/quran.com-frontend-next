@@ -85,7 +85,7 @@ export const isValidJuzId = (juzId: string): boolean => {
  * Validate a rubId which can be in-valid in 2 cases:
  *
  * 1. if it's a string that is not numeric e.g. "test".
- * 2. if it's a numeric string but lies outside the range 1->30.
+ * 2. if it's a numeric string but lies outside the range 1->240.
  *
  * @param {string} rubId
  * @returns {boolean}
