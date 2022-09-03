@@ -82,6 +82,24 @@ export const isValidJuzId = (juzId: string): boolean => {
 };
 
 /**
+ * Validate a rubId which can be in-valid in 2 cases:
+ *
+ * 1. if it's a string that is not numeric e.g. "test".
+ * 2. if it's a numeric string but lies outside the range 1->240.
+ *
+ * @param {string} rubId
+ * @returns {boolean}
+ */
+export const isValidRubId = (rubId: string): boolean => {
+  const rubIdNumber = Number(rubId);
+  // if it's not a numeric string or it's numeric but out of the range of chapter 1->240
+  if (Number.isNaN(rubIdNumber) || rubIdNumber > 240 || rubIdNumber < 1) {
+    return false;
+  }
+  return true;
+};
+
+/**
  * Validate a hizbId which can be in-valid in 2 cases:
  *
  * 1. if it's a string that is not numeric e.g. "test".

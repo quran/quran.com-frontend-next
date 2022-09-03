@@ -13,6 +13,7 @@ export enum NavigationItem {
   Surah = 'surah',
   Juz = 'juz',
   Page = 'page',
+  RubElHizb = 'rub_el_hizb',
   Hizb = 'hizb',
 }
 

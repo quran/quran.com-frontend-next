@@ -18,6 +18,7 @@
     "/about-us": ["about"],
     "/developers": ["developers"],
     "/privacy": ["privacy"],
+    "/rub/[rubId]": ["quran-reader"],
     "/support": ["support"],
     "/tajweed-colors": ["tajweed"],
     "/product-updates": ["product-updates"],

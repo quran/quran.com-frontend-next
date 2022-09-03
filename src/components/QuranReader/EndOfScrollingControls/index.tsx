@@ -5,6 +5,7 @@ import styles from './EndOfScrollingControls.module.scss';
 import HizbControls from './HizbControls';
 import JuzControls from './JuzControls';
 import PageControls from './PageControls';
+import RubControls from './RubControls';
 import VerseControls from './VerseControls';
 
 import { VersesResponse } from 'types/ApiResponses';
@@ -34,6 +35,7 @@ const EndOfScrollingControls: React.FC<Props> = ({
         )}
         {quranReaderDataType === QuranReaderDataType.Page && <PageControls lastVerse={lastVerse} />}
         {quranReaderDataType === QuranReaderDataType.Juz && <JuzControls lastVerse={lastVerse} />}
+        {quranReaderDataType === QuranReaderDataType.Rub && <RubControls lastVerse={lastVerse} />}
         {quranReaderDataType === QuranReaderDataType.Hizb && <HizbControls lastVerse={lastVerse} />}
       </div>
     </div>

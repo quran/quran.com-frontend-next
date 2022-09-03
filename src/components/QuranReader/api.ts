@@ -8,6 +8,7 @@ import {
   makeJuzVersesUrl,
   makePageVersesUrl,
   makeVersesUrl,
+  makeRubVersesUrl,
 } from 'src/utils/apiPaths';
 import { PagesLookUpRequest } from 'types/ApiRequests';
 import { VersesResponse } from 'types/ApiResponses';
@@ -86,6 +87,19 @@ export const getTranslationViewRequestKey = ({
       page,
       reciter,
       perPage: 'all',
+      translations: selectedTranslations.join(','),
+      ...getDefaultWordFields(quranReaderStyles.quranFont),
+      ...getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines),
+    });
+  }
+  if (quranReaderDataType === QuranReaderDataType.Rub) {
+    return makeRubVersesUrl(id, locale, {
+      wordTranslationLanguage: wordByWordLocale,
+      reciter,
+      page,
+      from: initialData.metaData.from,
+      perPage: initialData.pagination.perPage,
+      to: initialData.metaData.to,
       translations: selectedTranslations.join(','),
       ...getDefaultWordFields(quranReaderStyles.quranFont),
       ...getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines),
