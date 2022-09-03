@@ -22,14 +22,14 @@ import BookmarkedIcon from '@/icons/bookmark.svg';
 import CopyIcon from '@/icons/copy.svg';
 import LinkIcon from '@/icons/east.svg';
 import UnBookmarkedIcon from '@/icons/unbookmarked.svg';
+import { selectBookmarks, toggleVerseBookmark } from '@/redux/slices/QuranReader/bookmarks';
+import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import { getMushafId } from '@/utils/api';
 import { addOrRemoveBookmark, getIsResourceBookmarked } from '@/utils/auth/api';
 import { makeBookmarksUrl, makeIsResourceBookmarkedUrl } from '@/utils/auth/apiPaths';
 import { isLoggedIn } from '@/utils/auth/login';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getVerseUrl } from '@/utils/verse';
-import { selectBookmarks, toggleVerseBookmark } from '@/redux/slices/QuranReader/bookmarks';
-import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import BookmarkType from 'types/BookmarkType';
 import Verse from 'types/Verse';
 

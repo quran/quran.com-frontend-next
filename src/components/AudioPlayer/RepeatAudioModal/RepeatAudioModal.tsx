@@ -8,6 +8,7 @@ import styles from './RepeatAudioModal.module.scss';
 import RepeatSetting from './RepeatSetting';
 import SelectRepetitionMode, { RepetitionMode } from './SelectRepetitionMode';
 
+import { RangeVerseItem } from '@/components/Verse/AdvancedCopy/SelectorContainer';
 import Modal from '@/dls/Modal/Modal';
 import Separator from '@/dls/Separator/Separator';
 import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
@@ -21,7 +22,6 @@ import {
   getChapterNumberFromKey,
   getVerseNumberFromKey,
 } from '@/utils/verse';
-import { RangeVerseItem } from '@/components/Verse/AdvancedCopy/SelectorContainer';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 

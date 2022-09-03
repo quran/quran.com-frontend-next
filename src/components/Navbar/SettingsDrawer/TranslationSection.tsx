@@ -7,15 +7,11 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import Section from './Section';
 import styles from './TranslationSection.module.scss';
 
+import DataFetcher from '@/components/DataFetcher';
 import Counter from '@/dls/Counter/Counter';
 import SelectionCard from '@/dls/SelectionCard/SelectionCard';
 import Skeleton from '@/dls/Skeleton/Skeleton';
 import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
-import { makeTranslationsUrl } from '@/utils/apiPaths';
-import { areArraysEqual } from '@/utils/array';
-import { logValueChange } from '@/utils/eventLogger';
-import { toLocalizedNumber } from '@/utils/locale';
-import DataFetcher from '@/components/DataFetcher';
 import { setSettingsView, SettingsView } from '@/redux/slices/navbar';
 import {
   decreaseTranslationFontScale,
@@ -25,6 +21,10 @@ import {
   selectQuranReaderStyles,
 } from '@/redux/slices/QuranReader/styles';
 import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
+import { makeTranslationsUrl } from '@/utils/apiPaths';
+import { areArraysEqual } from '@/utils/array';
+import { logValueChange } from '@/utils/eventLogger';
+import { toLocalizedNumber } from '@/utils/locale';
 import { TranslationsResponse } from 'types/ApiResponses';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 

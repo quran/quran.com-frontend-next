@@ -4,13 +4,10 @@ import { useSelector as useXstateSelector } from '@xstate/react';
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch, useSelector } from 'react-redux';
 
-import DownloadIcon from '@/icons/download.svg';
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import Spinner, { SpinnerSize } from '@/dls/Spinner/Spinner';
-import {
-  selectIsDownloadingAudio,
-  setIsDownloadingAudio,
-} from '@/redux/slices/AudioPlayer/state';
+import DownloadIcon from '@/icons/download.svg';
+import { selectIsDownloadingAudio, setIsDownloadingAudio } from '@/redux/slices/AudioPlayer/state';
 import { logButtonClick } from '@/utils/eventLogger';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 

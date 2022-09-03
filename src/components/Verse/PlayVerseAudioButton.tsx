@@ -10,10 +10,10 @@ import styles from '../QuranReader/TranslationView/TranslationViewCell.module.sc
 import Button, { ButtonShape, ButtonSize, ButtonType, ButtonVariant } from '@/dls/Button/Button';
 import PauseIcon from '@/icons/pause-outline.svg';
 import PlayIcon from '@/icons/play-outline.svg';
-import DataContext from 'src/contexts/DataContext';
 import { getChapterData } from '@/utils/chapter';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getChapterNumberFromKey, getVerseNumberFromKey } from '@/utils/verse';
+import DataContext from 'src/contexts/DataContext';
 import {
   selectIsVerseBeingPlayed,
   selectIsVerseLoading,

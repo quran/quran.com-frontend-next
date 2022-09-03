@@ -7,8 +7,8 @@ import { useSelector } from 'react-redux';
 import useSWRImmutable from 'swr/immutable';
 
 import { RangeSelectorType, RangeVerseItem } from './SelectorContainer';
-import copyVerse from '@/utils/copyVerse';
-import validateRangeSelection from '@/utils/validateRangeSelection';
+import copyVerse from './utils/copyVerse';
+import validateRangeSelection from './utils/validateRangeSelection';
 import styles from './VerseAdvancedCopy.module.scss';
 import VersesRangeSelector from './VersesRangeSelector';
 
@@ -17,8 +17,6 @@ import RadioGroup, { RadioGroupOrientation } from '@/dls/Forms/RadioGroup/RadioG
 import Select from '@/dls/Forms/Select';
 import HelperTooltip from '@/dls/HelperTooltip/HelperTooltip';
 import Link, { LinkVariant } from '@/dls/Link/Link';
-import { getAvailableTranslations } from 'src/api';
-import DataContext from 'src/contexts/DataContext';
 import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
 import { makeTranslationsUrl } from '@/utils/apiPaths';
 import { areArraysEqual } from '@/utils/array';
@@ -31,6 +29,8 @@ import {
 } from '@/utils/eventLogger';
 import { toLocalizedVerseKey } from '@/utils/locale';
 import { generateChapterVersesKeys } from '@/utils/verse';
+import { getAvailableTranslations } from 'src/api';
+import DataContext from 'src/contexts/DataContext';
 import { QuranFont } from 'types/QuranReader';
 import Verse from 'types/Verse';
 

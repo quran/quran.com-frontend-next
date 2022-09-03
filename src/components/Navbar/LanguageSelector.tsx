@@ -13,7 +13,6 @@ import styles from './LanguageSelector.module.scss';
 
 import ChevronSelectIcon from '@/icons/chevron-select.svg';
 import GlobeIcon from '@/icons/globe.svg';
-import i18nConfig from 'i18n.json';
 import resetSettings from '@/redux/actions/reset-settings';
 import { selectIsUsingDefaultSettings } from '@/redux/slices/defaultSettings';
 import { addOrUpdateUserPreference } from '@/utils/auth/api';
@@ -21,6 +20,7 @@ import { isLoggedIn } from '@/utils/auth/login';
 import { setLocaleCookie } from '@/utils/cookies';
 import { logEvent, logValueChange } from '@/utils/eventLogger';
 import { getLocaleName } from '@/utils/locale';
+import i18nConfig from 'i18n.json';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 
 const { locales } = i18nConfig;

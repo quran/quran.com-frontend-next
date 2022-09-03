@@ -6,11 +6,11 @@ import dynamic from 'next/dynamic';
 import WordByWordHeading from './WordByWordHeading';
 import styles from './WordByWordVerseAction.module.scss';
 
-import SearchIcon from '@/icons/search-book.svg';
+import PlainVerseText from '@/components/Verse/PlainVerseText';
 import ContentModalHandles from '@/dls/ContentModal/types/ContentModalHandles';
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import Separator from '@/dls/Separator/Separator';
-import PlainVerseText from '@/components/Verse/PlainVerseText';
+import SearchIcon from '@/icons/search-book.svg';
 import { logButtonClick, logEvent } from '@/utils/eventLogger';
 import Verse from 'types/Verse';
 

@@ -3,11 +3,11 @@ import { useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
 import { VirtuosoHandle } from 'react-virtuoso';
 
-import { fetcher } from 'src/api';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
 import { getMushafId } from '@/utils/api';
 import { makeVersesFilterUrl } from '@/utils/apiPaths';
 import { getVerseNumberFromKey } from '@/utils/verse';
+import { fetcher } from 'src/api';
 import { VersesResponse } from 'types/ApiResponses';
 import LookupRecord from 'types/LookupRecord';
 import { MushafLines, QuranFont, QuranReaderDataType } from 'types/QuranReader';

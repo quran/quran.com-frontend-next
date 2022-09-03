@@ -11,9 +11,9 @@ import useTranslation from 'next-translate/useTranslation';
 import FootnoteText from './FootnoteText';
 import styles from './TranslationText.module.scss';
 
-import { getFootnote } from 'src/api';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getLanguageDataById } from '@/utils/locale';
+import { getFootnote } from 'src/api';
 import Footnote from 'types/Footnote';
 
 interface Props {

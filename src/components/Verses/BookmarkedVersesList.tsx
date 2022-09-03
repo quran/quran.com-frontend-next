@@ -7,7 +7,6 @@ import useSWRImmutable from 'swr/immutable';
 import styles from './BookmarkedVersesList.module.scss';
 
 import Button, { ButtonShape, ButtonType } from '@/dls/Button/Button';
-import DataContext from 'src/contexts/DataContext';
 import { selectBookmarks } from '@/redux/slices/QuranReader/bookmarks';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import { getMushafId } from '@/utils/api';
@@ -19,6 +18,7 @@ import { logButtonClick } from '@/utils/eventLogger';
 import { toLocalizedVerseKey } from '@/utils/locale';
 import { getVerseNavigationUrlByVerseKey } from '@/utils/navigation';
 import { getChapterNumberFromKey, makeVerseKey } from '@/utils/verse';
+import DataContext from 'src/contexts/DataContext';
 import Bookmark from 'types/Bookmark';
 
 const BookmarkedVersesList: React.FC = () => {

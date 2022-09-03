@@ -11,8 +11,8 @@ import useIsFontLoaded from '@/components/QuranReader/hooks/useIsFontLoaded';
 import GlyphWord from '@/dls/QuranWord/GlyphWord';
 import TajweedWord from '@/dls/QuranWord/TajweedWordImage';
 import TextWord from '@/dls/QuranWord/TextWord';
-import { getFontClassName, isQCFFont } from '@/utils/fontFaceHelper';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
+import { getFontClassName, isQCFFont } from '@/utils/fontFaceHelper';
 import { QuranFont } from 'types/QuranReader';
 import Word from 'types/Word';
 

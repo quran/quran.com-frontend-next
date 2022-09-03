@@ -15,6 +15,7 @@ import BookmarksSection from '@/components/Verses/BookmarksSection';
 import RecentReadingSessions from '@/components/Verses/RecentReadingSessions';
 import Button from '@/dls/Button/Button';
 import Skeleton from '@/dls/Skeleton/Skeleton';
+import { removeLastSyncAt } from '@/redux/slices/Auth/userDataSync';
 import { getUserProfile, logoutUser } from '@/utils/auth/api';
 import { makeUserProfileUrl } from '@/utils/auth/apiPaths';
 import { DEFAULT_PHOTO_URL } from '@/utils/auth/constants';
@@ -23,7 +24,6 @@ import { getAllChaptersData } from '@/utils/chapter';
 import { logButtonClick } from '@/utils/eventLogger';
 import DataContext from 'src/contexts/DataContext';
 import Error from 'src/pages/_error';
-import { removeLastSyncAt } from '@/redux/slices/Auth/userDataSync';
 import ChaptersData from 'types/ChaptersData';
 
 interface Props {

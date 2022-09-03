@@ -5,11 +5,11 @@ import classNames from 'classnames';
 
 import styles from './Button.module.scss';
 
+import Wrapper from '@/components/Wrapper/Wrapper';
 import Link from '@/dls/Link/Link';
 import Spinner, { SpinnerSize } from '@/dls/Spinner/Spinner';
 import Tooltip, { ContentSide } from '@/dls/Tooltip';
 import useDirection from '@/hooks/useDirection';
-import Wrapper from '@/components/Wrapper/Wrapper';
 
 export enum ButtonSize {
   Small = 'small',

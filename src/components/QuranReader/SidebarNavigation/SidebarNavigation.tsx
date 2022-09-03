@@ -13,8 +13,6 @@ import KeyboardInput from '@/dls/KeyboardInput';
 import Switch from '@/dls/Switch/Switch';
 import useOutsideClickDetector from '@/hooks/useOutsideClickDetector';
 import IconClose from '@/icons/close.svg';
-import { logButtonClick, logEvent, logValueChange } from '@/utils/eventLogger';
-import { isMobile } from '@/utils/responsive';
 import { selectContextMenu } from '@/redux/slices/QuranReader/contextMenu';
 import {
   selectIsSidebarNavigationVisible,
@@ -23,6 +21,8 @@ import {
   NavigationItem,
   setIsVisible,
 } from '@/redux/slices/QuranReader/sidebarNavigation';
+import { logButtonClick, logEvent, logValueChange } from '@/utils/eventLogger';
+import { isMobile } from '@/utils/responsive';
 
 const SidebarNavigation = () => {
   const { isExpanded: isContextMenuExpanded } = useSelector(selectContextMenu, shallowEqual);

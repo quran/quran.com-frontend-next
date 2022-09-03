@@ -4,8 +4,6 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from './ReflectionBody.module.scss';
 
-import Button from '@/dls/Button/Button';
-import Separator from '@/dls/Separator/Separator';
 import ReflectionDisclaimerMessage from '@/components/QuranReader/ReflectionView/ReflectionDisclaimerMessage';
 import ReflectionItem, {
   VerseReference,
@@ -13,7 +11,8 @@ import ReflectionItem, {
 import ReflectionNotAvailableMessage from '@/components/QuranReader/ReflectionView/ReflectionNotAvailableMessage';
 import TafsirEndOfScrollingActions from '@/components/QuranReader/TafsirView/TafsirEndOfScrollingActions';
 import VerseAndTranslation from '@/components/Verse/VerseAndTranslation';
-import DataContext from 'src/contexts/DataContext';
+import Button from '@/dls/Button/Button';
+import Separator from '@/dls/Separator/Separator';
 import { logButtonClick } from '@/utils/eventLogger';
 import {
   fakeNavigate,
@@ -26,6 +25,7 @@ import {
   isLastVerseOfSurah,
   makeVerseKey,
 } from '@/utils/verse';
+import DataContext from 'src/contexts/DataContext';
 
 /**
  * From reflection data, extract the verse references

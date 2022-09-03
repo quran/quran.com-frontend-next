@@ -7,8 +7,8 @@ import Blocks from '../Blocks';
 
 import styles from './Page.module.scss';
 
-import BackIcon from '@/icons/west.svg';
 import Link, { LinkVariant } from '@/dls/Link/Link';
+import BackIcon from '@/icons/west.svg';
 import { getPageTitle } from '@/utils/notion';
 
 interface Props {

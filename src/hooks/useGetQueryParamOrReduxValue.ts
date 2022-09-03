@@ -4,6 +4,9 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useSelector, shallowEqual } from 'react-redux';
 
+import { RootState } from '@/redux/RootState';
+import { selectWordByWordLocale } from '@/redux/slices/QuranReader/readingPreferences';
+import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
 import { areArraysEqual } from '@/utils/array';
 import {
   equalityCheckerByType,
@@ -11,9 +14,6 @@ import {
   QueryParamValueType,
 } from '@/utils/query-params';
 import { isValidTranslationsQueryParamValue } from '@/utils/queryParamValidator';
-import { RootState } from '@/redux/RootState';
-import { selectWordByWordLocale } from '@/redux/slices/QuranReader/readingPreferences';
-import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
 import QueryParam from 'types/QueryParam';
 
 const QUERY_PARAMS_DATA = {

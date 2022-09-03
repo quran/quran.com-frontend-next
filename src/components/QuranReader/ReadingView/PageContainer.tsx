@@ -8,9 +8,9 @@ import Page from './Page';
 import ReadingViewSkeleton from './ReadingViewSkeleton';
 
 import { getReaderViewRequestKey, verseFetcher } from '@/components/QuranReader/api';
-import { getPageNumberByPageIndex } from '@/utils/page';
 import { selectIsUsingDefaultWordByWordLocale } from '@/redux/slices/QuranReader/readingPreferences';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
+import { getPageNumberByPageIndex } from '@/utils/page';
 import { selectIsUsingDefaultReciter } from 'src/xstate/actors/audioPlayer/selectors';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import { VersesResponse } from 'types/ApiResponses';

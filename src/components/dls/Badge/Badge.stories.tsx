@@ -1,6 +1,6 @@
-import RepeatIcon from '@/icons/repeat.svg';
 import Badge from '@/dls/Badge/Badge';
 import Button, { ButtonShape, ButtonVariant } from '@/dls/Button/Button';
+import RepeatIcon from '@/icons/repeat.svg';
 
 export default {
   title: 'dls/Badge',

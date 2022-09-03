@@ -9,6 +9,7 @@ import styles from '../[verseId]/tafsirs.module.scss';
 
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import TafsirBody from '@/components/QuranReader/TafsirView/TafsirBody';
+import { getQuranReaderStylesInitialState } from '@/redux/defaultSettings/util';
 import { makeTafsirContentUrl, makeTafsirsUrl } from '@/utils/apiPaths';
 import { getAllChaptersData, getChapterData } from '@/utils/chapter';
 import { getLanguageAlternates, toLocalizedNumber } from '@/utils/locale';
@@ -26,7 +27,6 @@ import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
 import { fetcher } from 'src/api';
 import DataContext from 'src/contexts/DataContext';
 import Error from 'src/pages/_error';
-import { getQuranReaderStylesInitialState } from '@/redux/defaultSettings/util';
 import { ChapterResponse, TafsirContentResponse } from 'types/ApiResponses';
 import ChaptersData from 'types/ChaptersData';
 

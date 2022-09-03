@@ -5,6 +5,12 @@ import classNames from 'classnames';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 
+import {
+  verseFontChanged,
+  verseTranslationChanged,
+  verseTranslationFontChanged,
+} from '../utils/memoization';
+
 import BookmarkIcon from './BookmarkIcon';
 import QuranReflectButton from './QuranReflectButton';
 import ShareVerseButton from './ShareVerseButton';
@@ -17,14 +23,9 @@ import VerseLink from '@/components/Verse/VerseLink';
 import VerseText from '@/components/Verse/VerseText';
 import Separator from '@/dls/Separator/Separator';
 import useScroll, { SMOOTH_SCROLL_TO_CENTER } from '@/hooks/useScrollToElement';
-import {
-  verseFontChanged,
-  verseTranslationChanged,
-  verseTranslationFontChanged,
-} from '@/utils/memoization';
-import { getVerseWords, makeVerseKey } from '@/utils/verse';
 import { selectEnableAutoScrolling } from '@/redux/slices/AudioPlayer/state';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
+import { getVerseWords, makeVerseKey } from '@/utils/verse';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import BookmarksMap from 'types/BookmarksMap';
 import Translation from 'types/Translation';

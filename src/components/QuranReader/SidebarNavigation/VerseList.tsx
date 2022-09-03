@@ -7,12 +7,12 @@ import { useSelector } from 'react-redux';
 import styles from './SidebarNavigation.module.scss';
 import VerseListItem from './VerseListItem';
 
-import DataContext from 'src/contexts/DataContext';
 import { selectLastReadVerseKey } from '@/redux/slices/QuranReader/readingTracker';
 import { logEmptySearchResults } from '@/utils/eventLogger';
 import { toLocalizedNumber } from '@/utils/locale';
 import { getChapterWithStartingVerseUrl } from '@/utils/navigation';
 import { generateChapterVersesKeys, getVerseNumberFromKey } from '@/utils/verse';
+import DataContext from 'src/contexts/DataContext';
 
 const VerseList = () => {
   const [searchQuery, setSearchQuery] = useState('');

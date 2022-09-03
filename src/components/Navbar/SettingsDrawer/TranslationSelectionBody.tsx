@@ -9,20 +9,20 @@ import { useSelector } from 'react-redux';
 
 import styles from './SearchSelectionBody.module.scss';
 
+import DataFetcher from '@/components/DataFetcher';
 import Checkbox from '@/dls/Forms/Checkbox/Checkbox';
 import Input from '@/dls/Forms/Input';
 import SpinnerContainer from '@/dls/Spinner/SpinnerContainer';
 import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
 import IconSearch from '@/icons/search.svg';
-import { makeTranslationsUrl } from '@/utils/apiPaths';
-import { logValueChange, logItemSelectionChange, logEmptySearchResults } from '@/utils/eventLogger';
-import filterTranslations from '@/utils/filter-translations';
-import { getLocaleName } from '@/utils/locale';
-import DataFetcher from '@/components/DataFetcher';
 import {
   selectTranslations,
   setSelectedTranslations,
 } from '@/redux/slices/QuranReader/translations';
+import { makeTranslationsUrl } from '@/utils/apiPaths';
+import { logValueChange, logItemSelectionChange, logEmptySearchResults } from '@/utils/eventLogger';
+import filterTranslations from '@/utils/filter-translations';
+import { getLocaleName } from '@/utils/locale';
 import { TranslationsResponse } from 'types/ApiResponses';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 import AvailableTranslation from 'types/AvailableTranslation';

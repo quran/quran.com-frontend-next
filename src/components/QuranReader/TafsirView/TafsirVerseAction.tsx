@@ -5,9 +5,9 @@ import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 
-import TafsirIcon from '@/icons/book-open.svg';
 import ContentModalHandles from '@/dls/ContentModal/types/ContentModalHandles';
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
+import TafsirIcon from '@/icons/book-open.svg';
 import { selectSelectedTafsirs } from '@/redux/slices/QuranReader/tafsirs';
 import { logButtonClick, logEvent } from '@/utils/eventLogger';
 import { fakeNavigate, getVerseSelectedTafsirNavigationUrl } from '@/utils/navigation';

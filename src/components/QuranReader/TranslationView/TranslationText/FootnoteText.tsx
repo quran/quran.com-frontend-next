@@ -8,9 +8,9 @@ import useTranslation from 'next-translate/useTranslation';
 import styles from './FootnoteText.module.scss';
 import transStyles from './TranslationText.module.scss';
 
-import CloseIcon from '@/icons/close.svg';
 import Button, { ButtonSize, ButtonShape, ButtonVariant } from '@/dls/Button/Button';
 import Spinner from '@/dls/Spinner/Spinner';
+import CloseIcon from '@/icons/close.svg';
 import { getLanguageDataById, findLanguageIdByLocale } from '@/utils/locale';
 import Footnote from 'types/Footnote';
 

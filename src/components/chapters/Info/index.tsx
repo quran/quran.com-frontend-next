@@ -7,8 +7,8 @@ import Image from 'next/image';
 
 import styles from './Info.module.scss';
 
-import BackIcon from '@/icons/west.svg';
 import Button, { ButtonSize, ButtonVariant } from '@/dls/Button/Button';
+import BackIcon from '@/icons/west.svg';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getBlurDataUrl } from '@/utils/image';
 import { toLocalizedNumber } from '@/utils/locale';

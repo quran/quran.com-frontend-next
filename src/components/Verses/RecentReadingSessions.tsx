@@ -9,7 +9,6 @@ import Link from '../dls/Link/Link';
 import styles from './RecentReadingSessions.module.scss';
 
 import SurahPreview, { SurahPreviewDisplay } from '@/dls/SurahPreview/SurahPreview';
-import DataContext from 'src/contexts/DataContext';
 import { selectRecentReadingSessions } from '@/redux/slices/QuranReader/readingTracker';
 import { privateFetcher } from '@/utils/auth/api';
 import { makeReadingSessionsUrl } from '@/utils/auth/apiPaths';
@@ -19,6 +18,7 @@ import { logButtonClick } from '@/utils/eventLogger';
 import { toLocalizedNumber } from '@/utils/locale';
 import { getChapterWithStartingVerseUrl } from '@/utils/navigation';
 import { getVerseAndChapterNumbersFromKey, makeVerseKey } from '@/utils/verse';
+import DataContext from 'src/contexts/DataContext';
 import ReadingSession from 'types/ReadingSession';
 
 const RecentReadingSessions = () => {

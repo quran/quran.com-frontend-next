@@ -8,11 +8,11 @@ import styles from './WordPopover.module.scss';
 
 import Popover, { ContentSide } from '@/dls/Popover';
 import useLongPress from '@/hooks/useLongPress';
-import { logEvent } from '@/utils/eventLogger';
 import {
   setReadingViewSelectedVerseKey,
   setReadingViewHoveredVerseKey,
 } from '@/redux/slices/QuranReader/readingViewVerse';
+import { logEvent } from '@/utils/eventLogger';
 import Word from 'types/Word';
 
 type Props = {

@@ -6,17 +6,17 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import SearchDrawerHeader from './Header';
 
+import Drawer, { DrawerType } from '@/components/Navbar/Drawer';
 import Spinner from '@/dls/Spinner/Spinner';
 import useDebounce from '@/hooks/useDebounce';
 import useFocus from '@/hooks/useFocusElement';
-import { areArraysEqual } from '@/utils/array';
-import { logButtonClick, logEmptySearchResults, logTextSearchQuery } from '@/utils/eventLogger';
-import { getSearchResults } from 'src/api';
-import Drawer, { DrawerType } from '@/components/Navbar/Drawer';
 import { selectNavbar } from '@/redux/slices/navbar';
 import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
 import { addSearchHistoryRecord } from '@/redux/slices/Search/search';
 import { selectIsSearchDrawerVoiceFlowStarted } from '@/redux/slices/voiceSearch';
+import { areArraysEqual } from '@/utils/array';
+import { logButtonClick, logEmptySearchResults, logTextSearchQuery } from '@/utils/eventLogger';
+import { getSearchResults } from 'src/api';
 import { SearchResponse } from 'types/ApiResponses';
 
 const SearchBodyContainer = dynamic(() => import('@/components/Search/SearchBodyContainer'), {

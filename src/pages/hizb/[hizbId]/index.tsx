@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import QuranReader from '@/components/QuranReader';
+import { getQuranReaderStylesInitialState } from '@/redux/defaultSettings/util';
 import { getDefaultWordFields, getMushafId } from '@/utils/api';
 import { getAllChaptersData } from '@/utils/chapter';
 import { getLanguageAlternates, toLocalizedNumber } from '@/utils/locale';
@@ -21,7 +22,6 @@ import { generateVerseKeysBetweenTwoVerseKeys } from '@/utils/verseKeys';
 import { getHizbVerses, getPagesLookup } from 'src/api';
 import DataContext from 'src/contexts/DataContext';
 import Error from 'src/pages/_error';
-import { getQuranReaderStylesInitialState } from '@/redux/defaultSettings/util';
 import { VersesResponse } from 'types/ApiResponses';
 import ChaptersData from 'types/ChaptersData';
 import { QuranReaderDataType } from 'types/QuranReader';

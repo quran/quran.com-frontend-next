@@ -1,7 +1,7 @@
 import React, { MouseEvent } from 'react';
 
-import CloseIcon from '@/icons/close.svg';
 import Button, { ButtonSize, ButtonVariant } from '@/dls/Button/Button';
+import CloseIcon from '@/icons/close.svg';
 // import KeyboardInput from '@/dls/KeyboardInput';
 
 interface Props {

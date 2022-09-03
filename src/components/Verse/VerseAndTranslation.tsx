@@ -12,13 +12,13 @@ import styles from './VerseAndTranslation.module.scss';
 
 import Error from '@/components/Error';
 import useQcfFont from '@/hooks/useQcfFont';
+import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
+import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
 import { getDefaultWordFields, getMushafId } from '@/utils/api';
 import { makeVersesUrl } from '@/utils/apiPaths';
 import { areArraysEqual } from '@/utils/array';
 import { getVerseWords } from '@/utils/verse';
 import { fetcher } from 'src/api';
-import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
-import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
 import { VersesResponse } from 'types/ApiResponses';
 
 /**

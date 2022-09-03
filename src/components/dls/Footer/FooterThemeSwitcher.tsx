@@ -6,8 +6,8 @@ import PopoverMenu from '../PopoverMenu/PopoverMenu';
 
 import styles from './FooterThemeSwitcher.module.scss';
 
-import ChevronSelectIcon from '@/icons/chevron-select.svg';
 import { themeIcons } from '@/components/Navbar/SettingsDrawer/ThemeSection';
+import ChevronSelectIcon from '@/icons/chevron-select.svg';
 import { selectTheme, setTheme } from '@/redux/slices/theme';
 import ThemeType from '@/redux/types/ThemeType';
 

@@ -23,7 +23,6 @@ import {
   makeTafsirContentUrl,
   makePagesLookupUrl,
 } from '@/utils/apiPaths';
-
 import { SearchRequest, AdvancedCopyRequest, PagesLookUpRequest } from 'types/ApiRequests';
 import {
   TranslationsResponse,

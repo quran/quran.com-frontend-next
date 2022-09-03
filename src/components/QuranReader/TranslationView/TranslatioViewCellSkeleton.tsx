@@ -9,8 +9,8 @@ import verseTextStyles from '@/components/Verse/VerseText.module.scss';
 import Button, { ButtonSize } from '@/dls/Button/Button';
 import Skeleton from '@/dls/Skeleton/Skeleton';
 import useGetQueryParamOrReduxValue from '@/hooks/useGetQueryParamOrReduxValue';
-import { getFontClassName } from '@/utils/fontFaceHelper';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
+import { getFontClassName } from '@/utils/fontFaceHelper';
 import QueryParam from 'types/QueryParam';
 import { QuranFont } from 'types/QuranReader';
 

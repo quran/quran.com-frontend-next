@@ -5,9 +5,9 @@ import useTranslation from 'next-translate/useTranslation';
 import styles from './TafsirView.module.scss';
 
 import Select, { SelectSize } from '@/dls/Forms/Select';
-import DataContext from 'src/contexts/DataContext';
 import { toLocalizedNumber } from '@/utils/locale';
 import { generateChapterVersesKeys, getVerseNumberFromKey } from '@/utils/verse';
+import DataContext from 'src/contexts/DataContext';
 
 const SurahAndAyahSelection = ({
   selectedChapterId,

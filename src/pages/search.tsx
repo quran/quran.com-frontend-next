@@ -18,6 +18,8 @@ import useAddQueryParamsToUrl from '@/hooks/useAddQueryParamsToUrl';
 import useDebounce from '@/hooks/useDebounce';
 import FilterIcon from '@/icons/filter.svg';
 import SearchIcon from '@/icons/search.svg';
+import { getTranslationsInitialState } from '@/redux/defaultSettings/util';
+import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
 import { areArraysEqual } from '@/utils/array';
 import { getAllChaptersData } from '@/utils/chapter';
 import {
@@ -32,8 +34,6 @@ import { getLanguageAlternates, toLocalizedNumber } from '@/utils/locale';
 import { getCanonicalUrl } from '@/utils/navigation';
 import { getAvailableLanguages, getAvailableTranslations, getSearchResults } from 'src/api';
 import DataContext from 'src/contexts/DataContext';
-import { getTranslationsInitialState } from '@/redux/defaultSettings/util';
-import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
 import { SearchResponse } from 'types/ApiResponses';
 import AvailableLanguage from 'types/AvailableLanguage';
 import AvailableTranslation from 'types/AvailableTranslation';

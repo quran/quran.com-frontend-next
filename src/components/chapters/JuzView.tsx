@@ -7,9 +7,9 @@ import SurahPreviewRow from '../dls/SurahPreview/SurahPreviewRow';
 
 import styles from './JuzView.module.scss';
 
-import DataContext from 'src/contexts/DataContext';
 import { getAllJuzMappings, getChapterData } from '@/utils/chapter';
 import { shouldUseMinimalLayout, toLocalizedNumber } from '@/utils/locale';
+import DataContext from 'src/contexts/DataContext';
 
 type JuzViewProps = {
   isDescending: boolean;

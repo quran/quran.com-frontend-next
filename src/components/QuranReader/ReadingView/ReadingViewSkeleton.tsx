@@ -4,8 +4,8 @@ import { shallowEqual, useSelector } from 'react-redux';
 
 import styles from './ReadingViewSkeleton.module.scss';
 
-import Skeleton from '@/dls/Skeleton/Skeleton';
 import verseTextStyles from '@/components/Verse/VerseText.module.scss';
+import Skeleton from '@/dls/Skeleton/Skeleton';
 import { selectWordByWordPreferences } from '@/redux/slices/QuranReader/readingPreferences';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import { getFontClassName } from '@/utils/fontFaceHelper';

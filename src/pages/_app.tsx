@@ -19,6 +19,7 @@ import SessionIncrementor from '@/components/SessionIncrementor';
 import ThirdPartyScripts from '@/components/ThirdPartyScripts/ThirdPartyScripts';
 import Footer from '@/dls/Footer/Footer';
 import ToastContainerProvider from '@/dls/Toast/ToastProvider';
+import ReduxProvider from '@/redux/Provider';
 import { API_HOST } from '@/utils/api';
 import { getUserProfile } from '@/utils/auth/api';
 import { makeUserProfileUrl } from '@/utils/auth/apiPaths';
@@ -28,7 +29,6 @@ import * as gtag from '@/utils/gtag';
 import { getDir } from '@/utils/locale';
 import { createSEOConfig } from '@/utils/seo';
 import DataContext from 'src/contexts/DataContext';
-import ReduxProvider from '@/redux/Provider';
 import ThemeProvider from 'src/styles/ThemeProvider';
 import { AudioPlayerMachineProvider } from 'src/xstate/AudioPlayerMachineContext';
 

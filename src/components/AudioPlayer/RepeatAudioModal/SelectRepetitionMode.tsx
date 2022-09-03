@@ -4,10 +4,10 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from './RepeatSetting.module.scss';
 
-import Combobox from '@/dls/Forms/Combobox';
-import Switch from '@/dls/Switch/Switch';
 import { RangeSelectorType } from '@/components/Verse/AdvancedCopy/SelectorContainer';
 import VerseRangeSelector from '@/components/Verse/AdvancedCopy/VersesRangeSelector';
+import Combobox from '@/dls/Forms/Combobox';
+import Switch from '@/dls/Switch/Switch';
 import { toLocalizedVerseKey } from '@/utils/locale';
 
 export enum RepetitionMode {

@@ -7,12 +7,12 @@ import { useSelector } from 'react-redux';
 
 import styles from './TranslationsButton.module.scss';
 
-import TranslationsIcon from '@/icons/translation.svg';
 import DataFetcher from '@/components/DataFetcher';
-import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
-import ContentModalHandles from '@/dls/ContentModal/types/ContentModalHandles';
 import TranslationsView from '@/components/QuranReader/ReadingView/TranslationsView';
 import TranslationViewCellSkeleton from '@/components/QuranReader/TranslationView/TranslatioViewCellSkeleton';
+import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
+import ContentModalHandles from '@/dls/ContentModal/types/ContentModalHandles';
+import TranslationsIcon from '@/icons/translation.svg';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
 import { getDefaultWordFields, getMushafId } from '@/utils/api';

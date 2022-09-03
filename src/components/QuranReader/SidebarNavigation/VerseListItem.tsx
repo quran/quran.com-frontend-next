@@ -8,10 +8,10 @@ import styles from './SidebarNavigation.module.scss';
 
 import Link from '@/dls/Link/Link';
 import { SCROLL_TO_NEAREST_ELEMENT, useScrollToElement } from '@/hooks/useScrollToElement';
+import { selectIsVerseKeySelected } from '@/redux/slices/QuranReader/readingTracker';
 import { toLocalizedNumber } from '@/utils/locale';
 import { getChapterWithStartingVerseUrl } from '@/utils/navigation';
 import { getVerseNumberFromKey } from '@/utils/verse';
-import { selectIsVerseKeySelected } from '@/redux/slices/QuranReader/readingTracker';
 
 type VerseListItemProps = {
   verseKey: string;

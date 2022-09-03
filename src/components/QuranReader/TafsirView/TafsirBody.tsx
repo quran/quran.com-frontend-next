@@ -21,6 +21,8 @@ import styles from './TafsirView.module.scss';
 import DataFetcher from '@/components/DataFetcher';
 import Separator from '@/dls/Separator/Separator';
 import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
+import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
+import { selectTafsirs, setSelectedTafsirs } from '@/redux/slices/QuranReader/tafsirs';
 import { makeTafsirContentUrl, makeTafsirsUrl } from '@/utils/apiPaths';
 import {
   logButtonClick,
@@ -40,8 +42,6 @@ import {
 } from '@/utils/verse';
 import { fetcher } from 'src/api';
 import DataContext from 'src/contexts/DataContext';
-import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
-import { selectTafsirs, setSelectedTafsirs } from '@/redux/slices/QuranReader/tafsirs';
 import { TafsirContentResponse, TafsirsResponse } from 'types/ApiResponses';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 

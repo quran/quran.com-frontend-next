@@ -9,7 +9,6 @@ import styles from './TafsirText.module.scss';
 import Counter from '@/dls/Counter/Counter';
 import SpinnerContainer from '@/dls/Spinner/SpinnerContainer';
 import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
-import { logValueChange } from '@/utils/eventLogger';
 import {
   MAXIMUM_TAFSIR_FONT_STEP,
   MINIMUM_FONT_STEP,
@@ -17,6 +16,7 @@ import {
   increaseTafsirFontScale,
   decreaseTafsirFontScale,
 } from '@/redux/slices/QuranReader/styles';
+import { logValueChange } from '@/utils/eventLogger';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 
 type TafsirTextProps = {

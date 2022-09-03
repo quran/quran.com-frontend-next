@@ -5,9 +5,9 @@ import { useDispatch } from 'react-redux';
 
 import styles from './CommandBarTrigger.module.scss';
 
-import IconSearch from '@/icons/search.svg';
-import KeyboardInput from '@/dls/KeyboardInput';
 import TarteelVoiceSearchTrigger from '@/components/TarteelVoiceSearch/Trigger';
+import KeyboardInput from '@/dls/KeyboardInput';
+import IconSearch from '@/icons/search.svg';
 import { toggleIsOpen } from '@/redux/slices/CommandBar/state';
 import { logButtonClick } from '@/utils/eventLogger';
 

@@ -6,10 +6,10 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import Section from './Section';
 import styles from './TafsirSection.module.scss';
 
+import DataFetcher from '@/components/DataFetcher';
 import Counter from '@/dls/Counter/Counter';
 import SelectionCard from '@/dls/SelectionCard/SelectionCard';
 import Skeleton from '@/dls/Skeleton/Skeleton';
-import DataFetcher from '@/components/DataFetcher';
 import { setSettingsView, SettingsView } from '@/redux/slices/navbar';
 import {
   MAXIMUM_TAFSIR_FONT_STEP,

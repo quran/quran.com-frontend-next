@@ -12,7 +12,6 @@ import DrawerCloseButton from './DrawerCloseButton';
 
 import useOutsideClickDetector from '@/hooks/useOutsideClickDetector';
 import usePreventBodyScrolling from '@/hooks/usePreventBodyScrolling';
-import { logEvent } from '@/utils/eventLogger';
 import {
   Navbar,
   selectNavbar,
@@ -21,6 +20,7 @@ import {
   setIsSettingsDrawerOpen,
 } from '@/redux/slices/navbar';
 import { stopSearchDrawerVoiceFlow } from '@/redux/slices/voiceSearch';
+import { logEvent } from '@/utils/eventLogger';
 
 export enum DrawerType {
   Navigation = 'navigation',

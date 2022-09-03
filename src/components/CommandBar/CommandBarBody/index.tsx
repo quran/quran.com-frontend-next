@@ -10,12 +10,12 @@ import CommandsList, { Command } from '../CommandsList';
 
 import styles from './CommandBarBody.module.scss';
 
-import IconSearch from '@/icons/search.svg';
 import DataFetcher from '@/components/DataFetcher';
 import TarteelAttribution from '@/components/TarteelAttribution/TarteelAttribution';
 import VoiceSearchBodyContainer from '@/components/TarteelVoiceSearch/BodyContainer';
 import TarteelVoiceSearchTrigger from '@/components/TarteelVoiceSearch/Trigger';
 import useDebounce from '@/hooks/useDebounce';
+import IconSearch from '@/icons/search.svg';
 import { selectRecentNavigations } from '@/redux/slices/CommandBar/state';
 import { selectIsCommandBarVoiceFlowStarted } from '@/redux/slices/voiceSearch';
 import { makeSearchResultsUrl } from '@/utils/apiPaths';

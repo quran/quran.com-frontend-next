@@ -9,9 +9,9 @@ import styles from './Page.module.scss';
 import PageFooter from './PageFooter';
 
 import useIsFontLoaded from '@/components/QuranReader/hooks/useIsFontLoaded';
-import { getLineWidthClassName } from '@/utils/fontFaceHelper';
 import { selectWordByWordPreferences } from '@/redux/slices/QuranReader/readingPreferences';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
+import { getLineWidthClassName } from '@/utils/fontFaceHelper';
 import { FALLBACK_FONT, QuranFont } from 'types/QuranReader';
 import Verse from 'types/Verse';
 

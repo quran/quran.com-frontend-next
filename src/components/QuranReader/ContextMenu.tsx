@@ -9,7 +9,6 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import styles from './ContextMenu.module.scss';
 
 import ChevronDownIcon from '@/icons/chevron-down.svg';
-import DataContext from 'src/contexts/DataContext';
 import { selectNavbar } from '@/redux/slices/navbar';
 import { selectContextMenu } from '@/redux/slices/QuranReader/contextMenu';
 import { selectNotes } from '@/redux/slices/QuranReader/notes';
@@ -24,6 +23,7 @@ import { getJuzNumberByHizb } from '@/utils/juz';
 import { toLocalizedNumber } from '@/utils/locale';
 import { isMobile } from '@/utils/responsive';
 import { getVerseNumberFromKey } from '@/utils/verse';
+import DataContext from 'src/contexts/DataContext';
 
 const ContextMenu = () => {
   const dispatch = useDispatch();

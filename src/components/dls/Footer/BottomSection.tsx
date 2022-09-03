@@ -7,8 +7,8 @@ import { PopoverMenuExpandDirection } from '../PopoverMenu/PopoverMenu';
 import styles from './Footer.module.scss';
 import FooterThemeSwitcher from './FooterThemeSwitcher';
 
-import Link, { LinkVariant } from '@/dls/Link/Link';
 import LanguageSelector from '@/components/Navbar/LanguageSelector';
+import Link, { LinkVariant } from '@/dls/Link/Link';
 import { toLocalizedDate } from '@/utils/locale';
 
 const BottomSection = () => {

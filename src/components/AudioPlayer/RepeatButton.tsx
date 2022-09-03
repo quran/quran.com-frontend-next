@@ -7,10 +7,10 @@ import RemainingRangeCount from './RemainingRangeCount';
 import RepeatAudioModal from './RepeatAudioModal/RepeatAudioModal';
 import { RepetitionMode } from './RepeatAudioModal/SelectRepetitionMode';
 
-import RepeatIcon from '@/icons/repeat.svg';
+import Wrapper from '@/components/Wrapper/Wrapper';
 import Badge from '@/dls/Badge/Badge';
 import Button, { ButtonShape, ButtonVariant } from '@/dls/Button/Button';
-import Wrapper from '@/components/Wrapper/Wrapper';
+import RepeatIcon from '@/icons/repeat.svg';
 import { logButtonClick } from '@/utils/eventLogger';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 

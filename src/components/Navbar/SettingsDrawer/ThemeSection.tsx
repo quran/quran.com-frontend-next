@@ -13,9 +13,9 @@ import AutoIcon from '@/icons/auto.svg';
 import MoonIcon from '@/icons/moon-outline.svg';
 import SunIcon from '@/icons/sun-outline.svg';
 import SunsetIcon from '@/icons/sunset.svg';
-import { logValueChange } from '@/utils/eventLogger';
 import { selectTheme, setTheme } from '@/redux/slices/theme';
 import ThemeType from '@/redux/types/ThemeType';
+import { logValueChange } from '@/utils/eventLogger';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 
 export const themeIcons = {

@@ -8,9 +8,9 @@ import EmailSent from './EmailSent';
 import styles from './login.module.scss';
 import ResendEmailSection from './ResendEmailSection';
 
-import Button, { ButtonType, ButtonVariant } from '@/dls/Button/Button';
 import EmailLogin, { EmailLoginData, sendMagicLink } from '@/components/Login/EmailLogin';
 import SocialLogin from '@/components/Login/SocialLogin';
+import Button, { ButtonType, ButtonVariant } from '@/dls/Button/Button';
 import { logButtonClick, logFormSubmission } from '@/utils/eventLogger';
 import AuthType from 'types/auth/AuthType';
 

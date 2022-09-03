@@ -7,9 +7,9 @@ import styles from './SearchHistory.module.scss';
 
 import Header from '@/components/Search/PreInput/Header';
 import SearchQuerySuggestion from '@/components/Search/PreInput/SearchQuerySuggestion';
+import { removeSearchHistoryRecord, selectSearchHistory } from '@/redux/slices/Search/search';
 import { areArraysEqual } from '@/utils/array';
 import { logButtonClick } from '@/utils/eventLogger';
-import { removeSearchHistoryRecord, selectSearchHistory } from '@/redux/slices/Search/search';
 
 interface Props {
   onSearchKeywordClicked: (searchQuery: string) => void;

@@ -13,13 +13,13 @@ import Checkbox from '@/dls/Forms/Checkbox/Checkbox';
 import Select, { SelectSize } from '@/dls/Forms/Select';
 import HelperTooltip from '@/dls/HelperTooltip/HelperTooltip';
 import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
-import { removeItemFromArray } from '@/utils/array';
-import { logValueChange } from '@/utils/eventLogger';
 import {
   setShowTooltipFor,
   setSelectedWordByWordLocale,
   selectReadingPreferences,
 } from '@/redux/slices/QuranReader/readingPreferences';
+import { removeItemFromArray } from '@/utils/array';
+import { logValueChange } from '@/utils/eventLogger';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 import QueryParam from 'types/QueryParam';
 import { WordByWordType } from 'types/QuranReader';

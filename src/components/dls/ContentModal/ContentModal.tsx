@@ -8,8 +8,8 @@ import Button, { ButtonShape, ButtonVariant } from '../Button/Button';
 
 import styles from './ContentModal.module.scss';
 
-import CloseIcon from '@/icons/close.svg';
 import ContentModalHandles from '@/dls/ContentModal/types/ContentModalHandles';
+import CloseIcon from '@/icons/close.svg';
 import { isRTLLocale } from '@/utils/locale';
 
 export enum ContentModalSize {

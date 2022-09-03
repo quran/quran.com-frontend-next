@@ -4,9 +4,9 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from './TranslationViewCell.module.scss';
 
-import CopyLinkIcon from '@/icons/copy-link.svg';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
+import CopyLinkIcon from '@/icons/copy-link.svg';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getWindowOrigin } from '@/utils/url';
 import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
