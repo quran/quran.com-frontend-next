@@ -19,8 +19,8 @@ import {
   selectSelectedTranslations,
   setSelectedTranslations,
 } from 'src/redux/slices/QuranReader/translations';
-import { areArraysEqual } from 'src/utils/array';
-import { isValidTranslationsQueryParamValue } from 'src/utils/queryParamValidator';
+import { areArraysEqual } from '@/utils/array';
+import { isValidTranslationsQueryParamValue } from '@/utils/queryParamValidator';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import QueryParam from 'types/QueryParam';
 

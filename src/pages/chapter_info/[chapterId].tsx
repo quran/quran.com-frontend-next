@@ -1,13 +1,13 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 
-import { getChapterIdBySlug, getChapterInfo } from 'src/api';
-import InfoPage from 'src/components/chapters/Info/InfoPage';
-import { getChapterData, getAllChaptersData } from 'src/utils/chapter';
+import { getChapterData, getAllChaptersData } from '@/utils/chapter';
 import {
   REVALIDATION_PERIOD_ON_ERROR_SECONDS,
   ONE_MONTH_REVALIDATION_PERIOD_SECONDS,
-} from 'src/utils/staticPageGeneration';
-import { isValidChapterId } from 'src/utils/validator';
+} from '@/utils/staticPageGeneration';
+import { isValidChapterId } from '@/utils/validator';
+import { getChapterIdBySlug, getChapterInfo } from 'src/api';
+import InfoPage from 'src/components/chapters/Info/InfoPage';
 import { ChapterInfoResponse, ChapterResponse } from 'types/ApiResponses';
 import ChaptersData from 'types/ChaptersData';
 

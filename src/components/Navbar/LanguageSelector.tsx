@@ -16,11 +16,11 @@ import GlobeIcon from '@/icons/globe.svg';
 import i18nConfig from 'i18n.json';
 import resetSettings from 'src/redux/actions/reset-settings';
 import { selectIsUsingDefaultSettings } from 'src/redux/slices/defaultSettings';
-import { addOrUpdateUserPreference } from 'src/utils/auth/api';
-import { isLoggedIn } from 'src/utils/auth/login';
-import { setLocaleCookie } from 'src/utils/cookies';
-import { logEvent, logValueChange } from 'src/utils/eventLogger';
-import { getLocaleName } from 'src/utils/locale';
+import { addOrUpdateUserPreference } from '@/utils/auth/api';
+import { isLoggedIn } from '@/utils/auth/login';
+import { setLocaleCookie } from '@/utils/cookies';
+import { logEvent, logValueChange } from '@/utils/eventLogger';
+import { getLocaleName } from '@/utils/locale';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 
 const { locales } = i18nConfig;

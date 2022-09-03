@@ -9,8 +9,8 @@ import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import Spinner from '@/dls/Spinner/Spinner';
 import { playbackRates } from 'src/components/Navbar/SettingsDrawer/AudioSection';
 import usePersistPreferenceGroup from 'src/hooks/auth/usePersistPreferenceGroup';
-import { logButtonClick, logValueChange } from 'src/utils/eventLogger';
-import { toLocalizedNumber } from 'src/utils/locale';
+import { logButtonClick, logValueChange } from '@/utils/eventLogger';
+import { toLocalizedNumber } from '@/utils/locale';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 

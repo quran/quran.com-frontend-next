@@ -6,7 +6,7 @@ import Separator from '@/dls/Separator/Separator';
 import TranslationText from 'src/components/QuranReader/TranslationView/TranslationText';
 import PlainVerseText from 'src/components/Verse/PlainVerseText';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
-import { getVerseWords } from 'src/utils/verse';
+import { getVerseWords } from '@/utils/verse';
 import Translation from 'types/Translation';
 import Verse from 'types/Verse';
 

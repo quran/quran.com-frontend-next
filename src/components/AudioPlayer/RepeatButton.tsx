@@ -11,7 +11,7 @@ import RepeatIcon from '@/icons/repeat.svg';
 import Badge from '@/dls/Badge/Badge';
 import Button, { ButtonShape, ButtonVariant } from '@/dls/Button/Button';
 import Wrapper from 'src/components/Wrapper/Wrapper';
-import { logButtonClick } from 'src/utils/eventLogger';
+import { logButtonClick } from '@/utils/eventLogger';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 
 const RepeatAudioButton = ({ isLoading }) => {

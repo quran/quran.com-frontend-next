@@ -10,7 +10,7 @@ import styles from './ContentModal.module.scss';
 
 import CloseIcon from '@/icons/close.svg';
 import ContentModalHandles from '@/dls/ContentModal/types/ContentModalHandles';
-import { isRTLLocale } from 'src/utils/locale';
+import { isRTLLocale } from '@/utils/locale';
 
 export enum ContentModalSize {
   SMALL = 'small',

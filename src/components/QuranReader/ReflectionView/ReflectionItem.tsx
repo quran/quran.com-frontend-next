@@ -22,19 +22,19 @@ import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import VerseAndTranslation from 'src/components/Verse/VerseAndTranslation';
 import DataContext from 'src/contexts/DataContext';
-import { getChapterData } from 'src/utils/chapter';
-import { formatDateRelatively } from 'src/utils/datetime';
-import { logButtonClick } from 'src/utils/eventLogger';
-import truncate from 'src/utils/html-truncate';
-import { toLocalizedNumber } from 'src/utils/locale';
+import { getChapterData } from '@/utils/chapter';
+import { formatDateRelatively } from '@/utils/datetime';
+import { logButtonClick } from '@/utils/eventLogger';
+import truncate from '@/utils/html-truncate';
+import { toLocalizedNumber } from '@/utils/locale';
 import {
   getQuranReflectPostCommentUrl,
   getQuranReflectAuthorUrl,
   getQuranReflectPostUrl,
   getQuranReflectTagUrl,
-} from 'src/utils/navigation';
-import { navigateToExternalUrl } from 'src/utils/url';
-import { makeVerseKey } from 'src/utils/verse';
+} from '@/utils/navigation';
+import { navigateToExternalUrl } from '@/utils/url';
+import { makeVerseKey } from '@/utils/verse';
 
 export type VerseReference = {
   chapter: number;

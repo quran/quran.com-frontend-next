@@ -9,7 +9,7 @@ import styles from './Header.module.scss';
 
 import Separator from '@/dls/Separator/Separator';
 import TarteelVoiceSearchTrigger from 'src/components/TarteelVoiceSearch/Trigger';
-import { logButtonClick } from 'src/utils/eventLogger';
+import { logButtonClick } from '@/utils/eventLogger';
 
 interface Props {
   isVoiceFlowStarted: boolean;

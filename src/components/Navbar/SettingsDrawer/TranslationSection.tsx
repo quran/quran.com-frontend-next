@@ -21,10 +21,10 @@ import {
   selectQuranReaderStyles,
 } from 'src/redux/slices/QuranReader/styles';
 import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';
-import { makeTranslationsUrl } from 'src/utils/apiPaths';
-import { areArraysEqual } from 'src/utils/array';
-import { logValueChange } from 'src/utils/eventLogger';
-import { toLocalizedNumber } from 'src/utils/locale';
+import { makeTranslationsUrl } from '@/utils/apiPaths';
+import { areArraysEqual } from '@/utils/array';
+import { logValueChange } from '@/utils/eventLogger';
+import { toLocalizedNumber } from '@/utils/locale';
 import { TranslationsResponse } from 'types/ApiResponses';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 

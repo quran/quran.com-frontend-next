@@ -21,7 +21,7 @@ import {
   setIsNavigationDrawerOpen,
   setIsSettingsDrawerOpen,
 } from 'src/redux/slices/navbar';
-import { logEvent } from 'src/utils/eventLogger';
+import { logEvent } from '@/utils/eventLogger';
 
 /**
  * Log drawer events.

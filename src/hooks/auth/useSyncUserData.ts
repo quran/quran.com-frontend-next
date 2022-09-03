@@ -10,11 +10,11 @@ import {
   selectRecentReadingSessions,
 } from 'src/redux/slices/QuranReader/readingTracker';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
-import { getMushafId } from 'src/utils/api';
-import { syncUserLocalData } from 'src/utils/auth/api';
-import { makeReadingSessionsUrl, makeUserProfileUrl } from 'src/utils/auth/apiPaths';
-import { isLoggedIn } from 'src/utils/auth/login';
-import { getVerseAndChapterNumbersFromKey } from 'src/utils/verse';
+import { getMushafId } from '@/utils/api';
+import { syncUserLocalData } from '@/utils/auth/api';
+import { makeReadingSessionsUrl, makeUserProfileUrl } from '@/utils/auth/apiPaths';
+import { isLoggedIn } from '@/utils/auth/login';
+import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
 import SyncDataType from 'types/auth/SyncDataType';
 import UserProfile from 'types/auth/UserProfile';
 import BookmarkType from 'types/BookmarkType';

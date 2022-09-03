@@ -8,8 +8,8 @@ import Skeleton from '@/dls/Skeleton/Skeleton';
 import verseTextStyles from 'src/components/Verse/VerseText.module.scss';
 import { selectWordByWordPreferences } from 'src/redux/slices/QuranReader/readingPreferences';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
-import { getFontClassName } from 'src/utils/fontFaceHelper';
-import { getMushafLinesNumber } from 'src/utils/page';
+import { getFontClassName } from '@/utils/fontFaceHelper';
+import { getMushafLinesNumber } from '@/utils/page';
 
 const ReadingViewSkeleton = () => {
   const { quranFont, quranTextFontScale, mushafLines } = useSelector(

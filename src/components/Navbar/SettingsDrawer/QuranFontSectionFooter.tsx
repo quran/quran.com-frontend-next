@@ -6,7 +6,7 @@ import Link from 'next/link';
 
 import Section from './Section';
 
-import { isQCFFont } from 'src/utils/fontFaceHelper';
+import { isQCFFont } from '@/utils/fontFaceHelper';
 import { QuranFont } from 'types/QuranReader';
 
 interface Props {

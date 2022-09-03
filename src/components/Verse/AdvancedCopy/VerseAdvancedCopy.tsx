@@ -7,8 +7,8 @@ import { useSelector } from 'react-redux';
 import useSWRImmutable from 'swr/immutable';
 
 import { RangeSelectorType, RangeVerseItem } from './SelectorContainer';
-import copyVerse from './utils/copyVerse';
-import validateRangeSelection from './utils/validateRangeSelection';
+import copyVerse from '@/utils/copyVerse';
+import validateRangeSelection from '@/utils/validateRangeSelection';
 import styles from './VerseAdvancedCopy.module.scss';
 import VersesRangeSelector from './VersesRangeSelector';
 
@@ -20,17 +20,17 @@ import Link, { LinkVariant } from '@/dls/Link/Link';
 import { getAvailableTranslations } from 'src/api';
 import DataContext from 'src/contexts/DataContext';
 import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';
-import { makeTranslationsUrl } from 'src/utils/apiPaths';
-import { areArraysEqual } from 'src/utils/array';
-import { throwIfError } from 'src/utils/error';
+import { makeTranslationsUrl } from '@/utils/apiPaths';
+import { areArraysEqual } from '@/utils/array';
+import { throwIfError } from '@/utils/error';
 import {
   logButtonClick,
   logEvent,
   logItemSelectionChange,
   logValueChange,
-} from 'src/utils/eventLogger';
-import { toLocalizedVerseKey } from 'src/utils/locale';
-import { generateChapterVersesKeys } from 'src/utils/verse';
+} from '@/utils/eventLogger';
+import { toLocalizedVerseKey } from '@/utils/locale';
+import { generateChapterVersesKeys } from '@/utils/verse';
 import { QuranFont } from 'types/QuranReader';
 import Verse from 'types/Verse';
 

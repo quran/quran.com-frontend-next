@@ -23,10 +23,10 @@ import { selectReadingPreference } from 'src/redux/slices/QuranReader/readingPre
 import { setLastReadVerse } from 'src/redux/slices/QuranReader/readingTracker';
 import { selectIsSidebarNavigationVisible } from 'src/redux/slices/QuranReader/sidebarNavigation';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
-import { addReadingSession } from 'src/utils/auth/api';
-import { makeReadingSessionsUrl } from 'src/utils/auth/apiPaths';
-import { isLoggedIn } from 'src/utils/auth/login';
-import { getVerseAndChapterNumbersFromKey } from 'src/utils/verse';
+import { addReadingSession } from '@/utils/auth/api';
+import { makeReadingSessionsUrl } from '@/utils/auth/apiPaths';
+import { isLoggedIn } from '@/utils/auth/login';
+import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
 import { VersesResponse } from 'types/ApiResponses';
 import { QuranReaderDataType, ReadingPreference } from 'types/QuranReader';
 

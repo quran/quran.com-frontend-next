@@ -19,14 +19,14 @@ import {
   selectTranslations,
   setSelectedTranslations,
 } from 'src/redux/slices/QuranReader/translations';
-import { makeTranslationsUrl } from 'src/utils/apiPaths';
+import { makeTranslationsUrl } from '@/utils/apiPaths';
 import {
   logValueChange,
   logItemSelectionChange,
   logEmptySearchResults,
-} from 'src/utils/eventLogger';
-import filterTranslations from 'src/utils/filter-translations';
-import { getLocaleName } from 'src/utils/locale';
+} from '@/utils/eventLogger';
+import filterTranslations from '@/utils/filter-translations';
+import { getLocaleName } from '@/utils/locale';
 import { TranslationsResponse } from 'types/ApiResponses';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 import AvailableTranslation from 'types/AvailableTranslation';

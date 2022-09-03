@@ -7,7 +7,7 @@ import PopoverMenu from '../dls/PopoverMenu/PopoverMenu';
 
 import RepeatIcon from '@/icons/repeat.svg';
 import RepeatAudioModal from 'src/components/AudioPlayer/RepeatAudioModal/RepeatAudioModal';
-import { getChapterNumberFromKey } from 'src/utils/verse';
+import { getChapterNumberFromKey } from '@/utils/verse';
 
 type VerseActionRepeatAudioProps = {
   verseKey: string;

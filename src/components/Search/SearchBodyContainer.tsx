@@ -9,7 +9,7 @@ import styles from './SearchBodyContainer.module.scss';
 
 import Spinner, { SpinnerSize } from '@/dls/Spinner/Spinner';
 import SearchResults from 'src/components/Search/SearchResults';
-import { getSearchQueryNavigationUrl } from 'src/utils/navigation';
+import { getSearchQueryNavigationUrl } from '@/utils/navigation';
 import { SearchResponse } from 'types/ApiResponses';
 
 interface Props {

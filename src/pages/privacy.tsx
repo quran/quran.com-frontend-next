@@ -6,10 +6,10 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from './contentPage.module.scss';
 
+import { getLanguageAlternates } from '@/utils/locale';
+import { getCanonicalUrl } from '@/utils/navigation';
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import PageContainer from 'src/components/PageContainer';
-import { getLanguageAlternates } from 'src/utils/locale';
-import { getCanonicalUrl } from 'src/utils/navigation';
 
 const PATH = '/privacy';
 const PrivacyPage: NextPage = (): JSX.Element => {

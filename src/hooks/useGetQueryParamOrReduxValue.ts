@@ -4,16 +4,16 @@ import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import { useSelector, shallowEqual } from 'react-redux';
 
-import { RootState } from 'src/redux/RootState';
-import { selectWordByWordLocale } from 'src/redux/slices/QuranReader/readingPreferences';
-import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';
-import { areArraysEqual } from 'src/utils/array';
+import { areArraysEqual } from '@/utils/array';
 import {
   equalityCheckerByType,
   getQueryParamValueByType,
   QueryParamValueType,
-} from 'src/utils/query-params';
-import { isValidTranslationsQueryParamValue } from 'src/utils/queryParamValidator';
+} from '@/utils/query-params';
+import { isValidTranslationsQueryParamValue } from '@/utils/queryParamValidator';
+import { RootState } from 'src/redux/RootState';
+import { selectWordByWordLocale } from 'src/redux/slices/QuranReader/readingPreferences';
+import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';
 import QueryParam from 'types/QueryParam';
 
 const QUERY_PARAMS_DATA = {

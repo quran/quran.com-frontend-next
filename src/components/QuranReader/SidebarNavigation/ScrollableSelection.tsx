@@ -7,7 +7,7 @@ import styles from './SidebarNavigation.module.scss';
 
 import Link from '@/dls/Link/Link';
 import { SCROLL_TO_NEAREST_ELEMENT, useScrollToElement } from 'src/hooks/useScrollToElement';
-import { logEmptySearchResults } from 'src/utils/eventLogger';
+import { logEmptySearchResults } from '@/utils/eventLogger';
 
 const ScrollableSelection = ({
   items,

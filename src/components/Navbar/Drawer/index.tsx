@@ -20,7 +20,7 @@ import {
   setIsSettingsDrawerOpen,
 } from 'src/redux/slices/navbar';
 import { stopSearchDrawerVoiceFlow } from 'src/redux/slices/voiceSearch';
-import { logEvent } from 'src/utils/eventLogger';
+import { logEvent } from '@/utils/eventLogger';
 
 export enum DrawerType {
   Navigation = 'navigation',

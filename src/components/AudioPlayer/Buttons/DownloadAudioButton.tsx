@@ -11,7 +11,7 @@ import {
   selectIsDownloadingAudio,
   setIsDownloadingAudio,
 } from 'src/redux/slices/AudioPlayer/state';
-import { logButtonClick } from 'src/utils/eventLogger';
+import { logButtonClick } from '@/utils/eventLogger';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 
 export const download = (url: string, onDone: () => void) => {

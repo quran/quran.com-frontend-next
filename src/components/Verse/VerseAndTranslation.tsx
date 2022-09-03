@@ -15,10 +15,10 @@ import Error from 'src/components/Error';
 import useQcfFont from 'src/hooks/useQcfFont';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';
-import { getDefaultWordFields, getMushafId } from 'src/utils/api';
-import { makeVersesUrl } from 'src/utils/apiPaths';
-import { areArraysEqual } from 'src/utils/array';
-import { getVerseWords } from 'src/utils/verse';
+import { getDefaultWordFields, getMushafId } from '@/utils/api';
+import { makeVersesUrl } from '@/utils/apiPaths';
+import { areArraysEqual } from '@/utils/array';
+import { getVerseWords } from '@/utils/verse';
 import { VersesResponse } from 'types/ApiResponses';
 
 /**

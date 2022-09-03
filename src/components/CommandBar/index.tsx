@@ -11,7 +11,7 @@ import CommandBarBase from './CommandBarBase/CommandBarBase';
 import Spinner from '@/dls/Spinner/Spinner';
 import { selectCommandBarIsOpen, setIsOpen, toggleIsOpen } from 'src/redux/slices/CommandBar/state';
 import { stopCommandBarVoiceFlow } from 'src/redux/slices/voiceSearch';
-import { logEvent } from 'src/utils/eventLogger';
+import { logEvent } from '@/utils/eventLogger';
 
 const CommandBarBody = dynamic(() => import('./CommandBarBody'), {
   ssr: false,

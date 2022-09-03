@@ -18,9 +18,9 @@ import TarteelVoiceSearchTrigger from 'src/components/TarteelVoiceSearch/Trigger
 import useDebounce from 'src/hooks/useDebounce';
 import { selectRecentNavigations } from 'src/redux/slices/CommandBar/state';
 import { selectIsCommandBarVoiceFlowStarted } from 'src/redux/slices/voiceSearch';
-import { makeSearchResultsUrl } from 'src/utils/apiPaths';
-import { areArraysEqual } from 'src/utils/array';
-import { logButtonClick, logTextSearchQuery } from 'src/utils/eventLogger';
+import { makeSearchResultsUrl } from '@/utils/apiPaths';
+import { areArraysEqual } from '@/utils/array';
+import { logButtonClick, logTextSearchQuery } from '@/utils/eventLogger';
 import { SearchResponse } from 'types/ApiResponses';
 import { SearchNavigationType } from 'types/SearchNavigationResult';
 

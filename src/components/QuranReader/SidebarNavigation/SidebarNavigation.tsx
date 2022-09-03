@@ -21,8 +21,8 @@ import {
   NavigationItem,
   setIsVisible,
 } from 'src/redux/slices/QuranReader/sidebarNavigation';
-import { logButtonClick, logEvent, logValueChange } from 'src/utils/eventLogger';
-import { isMobile } from 'src/utils/responsive';
+import { logButtonClick, logEvent, logValueChange } from '@/utils/eventLogger';
+import { isMobile } from '@/utils/responsive';
 
 const SidebarNavigation = () => {
   const { isExpanded: isContextMenuExpanded } = useSelector(selectContextMenu, shallowEqual);

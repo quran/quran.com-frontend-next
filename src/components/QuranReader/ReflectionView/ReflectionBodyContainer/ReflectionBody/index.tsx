@@ -14,18 +14,18 @@ import ReflectionNotAvailableMessage from 'src/components/QuranReader/Reflection
 import TafsirEndOfScrollingActions from 'src/components/QuranReader/TafsirView/TafsirEndOfScrollingActions';
 import VerseAndTranslation from 'src/components/Verse/VerseAndTranslation';
 import DataContext from 'src/contexts/DataContext';
-import { logButtonClick } from 'src/utils/eventLogger';
+import { logButtonClick } from '@/utils/eventLogger';
 import {
   fakeNavigate,
   getQuranReflectVerseUrl,
   getVerseReflectionNavigationUrl,
-} from 'src/utils/navigation';
+} from '@/utils/navigation';
 import {
   getVerseAndChapterNumbersFromKey,
   isFirstVerseOfSurah,
   isLastVerseOfSurah,
   makeVerseKey,
-} from 'src/utils/verse';
+} from '@/utils/verse';
 
 /**
  * From reflection data, extract the verse references

@@ -15,7 +15,7 @@ import SunsetIcon from '@/icons/sunset.svg';
 import usePersistPreferenceGroup from 'src/hooks/auth/usePersistPreferenceGroup';
 import { selectTheme, setTheme } from 'src/redux/slices/theme';
 import ThemeType from 'src/redux/types/ThemeType';
-import { logValueChange } from 'src/utils/eventLogger';
+import { logValueChange } from '@/utils/eventLogger';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 
 export const themeIcons = {

@@ -6,10 +6,10 @@ import ChevronLeftIcon from '@/icons/chevron-left.svg';
 import ChevronRightIcon from '@/icons/chevron-right.svg';
 import Button, { ButtonType } from '@/dls/Button/Button';
 import DataContext from 'src/contexts/DataContext';
-import { isFirstSurah, isLastSurah } from 'src/utils/chapter';
-import { logButtonClick } from 'src/utils/eventLogger';
-import { getSurahNavigationUrl, getChapterWithStartingVerseUrl } from 'src/utils/navigation';
-import { isLastVerseOfSurah as isLastVerse } from 'src/utils/verse';
+import { isFirstSurah, isLastSurah } from '@/utils/chapter';
+import { logButtonClick } from '@/utils/eventLogger';
+import { getSurahNavigationUrl, getChapterWithStartingVerseUrl } from '@/utils/navigation';
+import { isLastVerseOfSurah as isLastVerse } from '@/utils/verse';
 import Verse from 'types/Verse';
 
 interface Props {

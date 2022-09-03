@@ -7,9 +7,9 @@ import styles from './TranslationViewCell.module.scss';
 import CopyLinkIcon from '@/icons/copy-link.svg';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
-import { logButtonClick } from 'src/utils/eventLogger';
-import { getWindowOrigin } from 'src/utils/url';
-import { getVerseAndChapterNumbersFromKey } from 'src/utils/verse';
+import { logButtonClick } from '@/utils/eventLogger';
+import { getWindowOrigin } from '@/utils/url';
+import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
 
 type ShareVerseButtonProps = {
   verseKey: string;

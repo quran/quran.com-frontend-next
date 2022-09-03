@@ -8,7 +8,7 @@ import Combobox from '@/dls/Forms/Combobox';
 import Switch from '@/dls/Switch/Switch';
 import { RangeSelectorType } from 'src/components/Verse/AdvancedCopy/SelectorContainer';
 import VerseRangeSelector from 'src/components/Verse/AdvancedCopy/VersesRangeSelector';
-import { toLocalizedVerseKey } from 'src/utils/locale';
+import { toLocalizedVerseKey } from '@/utils/locale';
 
 export enum RepetitionMode {
   Single = 'single',

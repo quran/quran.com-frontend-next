@@ -6,8 +6,8 @@ import { useSelector } from 'react-redux';
 import ScrollableSelection from './ScrollableSelection';
 
 import { selectLastReadVerseKey } from 'src/redux/slices/QuranReader/readingTracker';
-import { getJuzIds, getJuzNumberByHizb } from 'src/utils/juz';
-import { getJuzNavigationUrl } from 'src/utils/navigation';
+import { getJuzIds, getJuzNumberByHizb } from '@/utils/juz';
+import { getJuzNavigationUrl } from '@/utils/navigation';
 
 const JuzSelection = () => {
   const { t, lang } = useTranslation('common');

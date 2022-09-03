@@ -19,10 +19,10 @@ import {
   decreaseTafsirFontScale,
 } from 'src/redux/slices/QuranReader/styles';
 import { selectSelectedTafsirs } from 'src/redux/slices/QuranReader/tafsirs';
-import { makeTafsirsUrl } from 'src/utils/apiPaths';
-import { areArraysEqual } from 'src/utils/array';
-import { logValueChange } from 'src/utils/eventLogger';
-import { toLocalizedNumber } from 'src/utils/locale';
+import { makeTafsirsUrl } from '@/utils/apiPaths';
+import { areArraysEqual } from '@/utils/array';
+import { logValueChange } from '@/utils/eventLogger';
+import { toLocalizedNumber } from '@/utils/locale';
 import { TafsirsResponse } from 'types/ApiResponses';
 
 const TafsirSection = () => {

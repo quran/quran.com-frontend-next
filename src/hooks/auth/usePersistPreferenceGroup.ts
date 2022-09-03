@@ -7,8 +7,8 @@ import useTranslation from 'next-translate/useTranslation';
 import { useDispatch } from 'react-redux';
 
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
-import { addOrUpdateUserPreference } from 'src/utils/auth/api';
-import { isLoggedIn } from 'src/utils/auth/login';
+import { addOrUpdateUserPreference } from '@/utils/auth/api';
+import { isLoggedIn } from '@/utils/auth/login';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 
 type ActionOrThunkAction = Action | AsyncThunkAction<any, any, any>;

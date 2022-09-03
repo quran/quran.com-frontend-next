@@ -1,5 +1,5 @@
 import { getAdvancedCopyRawResult } from 'src/api';
-import { getMushafId } from 'src/utils/api';
+import { getMushafId } from '@/utils/api';
 
 /**
  * Given these parameters, get the `text to be copied` from API

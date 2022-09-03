@@ -14,7 +14,7 @@ import RadioInformation from './RadioInformation';
 
 import PauseIcon from '@/icons/pause.svg';
 import PlayIcon from '@/icons/play-arrow.svg';
-import { logEvent } from 'src/utils/eventLogger';
+import { logEvent } from '@/utils/eventLogger';
 import { selectIsLoading } from 'src/xstate/actors/audioPlayer/selectors';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 

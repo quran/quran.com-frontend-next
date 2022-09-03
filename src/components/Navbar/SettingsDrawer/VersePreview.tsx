@@ -13,8 +13,8 @@ import {
   getFontFaceNameForPage,
   getV1OrV2FontFaceSource,
   isQCFFont,
-} from 'src/utils/fontFaceHelper';
-import getSampleVerse from 'src/utils/sampleVerse';
+} from '@/utils/fontFaceHelper';
+import getSampleVerse from '@/utils/sampleVerse';
 import { QuranFont } from 'types/QuranReader';
 import Word from 'types/Word';
 

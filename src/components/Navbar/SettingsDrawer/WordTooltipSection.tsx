@@ -18,8 +18,8 @@ import {
   setSelectedWordByWordLocale,
   selectReadingPreferences,
 } from 'src/redux/slices/QuranReader/readingPreferences';
-import { removeItemFromArray } from 'src/utils/array';
-import { logValueChange } from 'src/utils/eventLogger';
+import { removeItemFromArray } from '@/utils/array';
+import { logValueChange } from '@/utils/eventLogger';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 import QueryParam from 'types/QueryParam';
 import { WordByWordType } from 'types/QuranReader';

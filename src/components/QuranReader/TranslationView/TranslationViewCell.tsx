@@ -16,7 +16,7 @@ import {
   verseFontChanged,
   verseTranslationChanged,
   verseTranslationFontChanged,
-} from 'src/components/QuranReader/utils/memoization';
+} from '@/utils/memoization';
 import OverflowVerseActionsMenu from 'src/components/Verse/OverflowVerseActionsMenu';
 import PlayVerseAudioButton from 'src/components/Verse/PlayVerseAudioButton';
 import VerseLink from 'src/components/Verse/VerseLink';
@@ -24,7 +24,7 @@ import VerseText from 'src/components/Verse/VerseText';
 import useScroll, { SMOOTH_SCROLL_TO_CENTER } from 'src/hooks/useScrollToElement';
 import { selectEnableAutoScrolling } from 'src/redux/slices/AudioPlayer/state';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
-import { getVerseWords, makeVerseKey } from 'src/utils/verse';
+import { getVerseWords, makeVerseKey } from '@/utils/verse';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import BookmarksMap from 'types/BookmarksMap';
 import Translation from 'types/Translation';

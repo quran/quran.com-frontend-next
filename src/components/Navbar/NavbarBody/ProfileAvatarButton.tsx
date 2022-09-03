@@ -11,9 +11,9 @@ import ArrowIcon from '@/icons/east.svg';
 import LogoutIcon from '@/icons/logout.svg';
 import IconPerson from '@/icons/person.svg';
 import { removeLastSyncAt } from 'src/redux/slices/Auth/userDataSync';
-import { logoutUser } from 'src/utils/auth/api';
-import { isLoggedIn } from 'src/utils/auth/login';
-import { logButtonClick } from 'src/utils/eventLogger';
+import { logoutUser } from '@/utils/auth/api';
+import { isLoggedIn } from '@/utils/auth/login';
+import { logButtonClick } from '@/utils/eventLogger';
 
 const shouldShowButton = () => {
   const allowedPercentageOfUsers = Number(process.env.NEXT_PUBLIC_SHOW_LOGIN_BUTTON_THRESHOLD);

@@ -18,12 +18,12 @@ import {
   selectIsSidebarNavigationVisible,
   setIsVisible,
 } from 'src/redux/slices/QuranReader/sidebarNavigation';
-import { getChapterData, getChapterReadingProgress } from 'src/utils/chapter';
-import { logEvent } from 'src/utils/eventLogger';
-import { getJuzNumberByHizb } from 'src/utils/juz';
-import { toLocalizedNumber } from 'src/utils/locale';
-import { isMobile } from 'src/utils/responsive';
-import { getVerseNumberFromKey } from 'src/utils/verse';
+import { getChapterData, getChapterReadingProgress } from '@/utils/chapter';
+import { logEvent } from '@/utils/eventLogger';
+import { getJuzNumberByHizb } from '@/utils/juz';
+import { toLocalizedNumber } from '@/utils/locale';
+import { isMobile } from '@/utils/responsive';
+import { getVerseNumberFromKey } from '@/utils/verse';
 
 const ContextMenu = () => {
   const dispatch = useDispatch();

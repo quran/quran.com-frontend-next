@@ -21,7 +21,7 @@ import IconRadio from '@/icons/radio.svg';
 import Tarteel from '@/icons/tarteel.svg';
 // import MobileApps from '../MobileApps';
 import FundraisingBanner from 'src/components/Fundaraising/FundraisingBanner';
-import { logTarteelLinkClick } from 'src/utils/eventLogger';
+import { logTarteelLinkClick } from '@/utils/eventLogger';
 
 // import IconDonate from '@/icons/donate.svg';
 // import IconUpdates from '@/icons/updates.svg';

@@ -4,7 +4,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import CloseIcon from '@/icons/close.svg';
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
-import { logButtonClick } from 'src/utils/eventLogger';
+import { logButtonClick } from '@/utils/eventLogger';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 
 const CloseButton = () => {

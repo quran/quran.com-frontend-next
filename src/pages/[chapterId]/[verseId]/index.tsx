@@ -4,27 +4,27 @@ import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 
+import { getDefaultWordFields, getMushafId } from '@/utils/api';
+import { getAllChaptersData, getChapterData } from '@/utils/chapter';
+import { getLanguageAlternates, toLocalizedNumber, toLocalizedVersesRange } from '@/utils/locale';
+import { getCanonicalUrl, getVerseNavigationUrl } from '@/utils/navigation';
+import {
+  REVALIDATION_PERIOD_ON_ERROR_SECONDS,
+  ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
+} from '@/utils/staticPageGeneration';
+import {
+  getToAndFromFromRange,
+  isValidVerseRange,
+  isValidVerseId,
+  isValidVerseNumber,
+} from '@/utils/validator';
+import { generateVerseKeysBetweenTwoVerseKeys } from '@/utils/verseKeys';
 import { getChapterIdBySlug, getChapterVerses, getPagesLookup } from 'src/api';
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import QuranReader from 'src/components/QuranReader';
 import DataContext from 'src/contexts/DataContext';
 import Error from 'src/pages/_error';
 import { getQuranReaderStylesInitialState } from 'src/redux/defaultSettings/util';
-import { getDefaultWordFields, getMushafId } from 'src/utils/api';
-import { getAllChaptersData, getChapterData } from 'src/utils/chapter';
-import { getLanguageAlternates, toLocalizedNumber, toLocalizedVersesRange } from 'src/utils/locale';
-import { getCanonicalUrl, getVerseNavigationUrl } from 'src/utils/navigation';
-import {
-  REVALIDATION_PERIOD_ON_ERROR_SECONDS,
-  ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
-} from 'src/utils/staticPageGeneration';
-import {
-  getToAndFromFromRange,
-  isValidVerseRange,
-  isValidVerseId,
-  isValidVerseNumber,
-} from 'src/utils/validator';
-import { generateVerseKeysBetweenTwoVerseKeys } from 'src/utils/verseKeys';
 import { ChapterResponse, VersesResponse } from 'types/ApiResponses';
 import ChaptersData from 'types/ChaptersData';
 import MetaData from 'types/MetaData';

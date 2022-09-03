@@ -12,7 +12,7 @@ import {
   setReadingViewSelectedVerseKey,
   setReadingViewHoveredVerseKey,
 } from 'src/redux/slices/QuranReader/readingViewVerse';
-import { logEvent } from 'src/utils/eventLogger';
+import { logEvent } from '@/utils/eventLogger';
 import Word from 'types/Word';
 
 type Props = {

@@ -11,9 +11,9 @@ import Button, { ButtonShape, ButtonSize, ButtonType, ButtonVariant } from '@/dl
 import PauseIcon from '@/icons/pause-outline.svg';
 import PlayIcon from '@/icons/play-outline.svg';
 import DataContext from 'src/contexts/DataContext';
-import { getChapterData } from 'src/utils/chapter';
-import { logButtonClick } from 'src/utils/eventLogger';
-import { getChapterNumberFromKey, getVerseNumberFromKey } from 'src/utils/verse';
+import { getChapterData } from '@/utils/chapter';
+import { logButtonClick } from '@/utils/eventLogger';
+import { getChapterNumberFromKey, getVerseNumberFromKey } from '@/utils/verse';
 import {
   selectIsVerseBeingPlayed,
   selectIsVerseLoading,

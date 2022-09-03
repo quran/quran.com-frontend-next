@@ -9,15 +9,15 @@ import layoutStyle from '../index.module.scss';
 
 import pageStyle from './reciterPage.module.scss';
 
+import { getAllChaptersData } from '@/utils/chapter';
+import { getLanguageAlternates } from '@/utils/locale';
+import { getCanonicalUrl } from '@/utils/navigation';
 import { getAvailableReciters } from 'src/api';
 import { filterReciters } from 'src/components/Navbar/SettingsDrawer/ReciterSelectionBody';
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import QuranReciterListHero from 'src/components/Reciter/QuranReciterListHero';
 import RecitersList from 'src/components/Reciter/RecitersList';
 import DataContext from 'src/contexts/DataContext';
-import { getAllChaptersData } from 'src/utils/chapter';
-import { getLanguageAlternates } from 'src/utils/locale';
-import { getCanonicalUrl } from 'src/utils/navigation';
 
 const NAVIGATION_URL = '/reciters';
 

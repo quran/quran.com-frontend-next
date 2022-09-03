@@ -11,7 +11,7 @@ import {
   selectSelectedTranslations,
   setSelectedTranslations,
 } from 'src/redux/slices/QuranReader/translations';
-import { areArraysEqual, numbersToStringsArray } from 'src/utils/array';
+import { areArraysEqual, numbersToStringsArray } from '@/utils/array';
 import AvailableTranslation from 'types/AvailableTranslation';
 
 const TranslationsAdjustment = () => {

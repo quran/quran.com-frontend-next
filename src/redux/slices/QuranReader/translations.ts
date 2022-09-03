@@ -1,12 +1,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+import { areArraysEqual } from '@/utils/array';
 import resetSettings from 'src/redux/actions/reset-settings';
 import syncUserPreferences from 'src/redux/actions/sync-user-preferences';
 import { getTranslationsInitialState } from 'src/redux/defaultSettings/util';
 import { RootState } from 'src/redux/RootState';
 import SliceName from 'src/redux/types/SliceName';
 import TranslationsSettings from 'src/redux/types/TranslationsSettings';
-import { areArraysEqual } from 'src/utils/array';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 
 export const translationsSlice = createSlice({

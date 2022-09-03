@@ -9,8 +9,8 @@ import TafsirIcon from '@/icons/book-open.svg';
 import ContentModalHandles from '@/dls/ContentModal/types/ContentModalHandles';
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import { selectSelectedTafsirs } from 'src/redux/slices/QuranReader/tafsirs';
-import { logButtonClick, logEvent } from 'src/utils/eventLogger';
-import { fakeNavigate, getVerseSelectedTafsirNavigationUrl } from 'src/utils/navigation';
+import { logButtonClick, logEvent } from '@/utils/eventLogger';
+import { fakeNavigate, getVerseSelectedTafsirNavigationUrl } from '@/utils/navigation';
 
 const TafsirBody = dynamic(() => import('./TafsirBody'), { ssr: false });
 const ContentModal = dynamic(() => import('@/dls/ContentModal/ContentModal'), {

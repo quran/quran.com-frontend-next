@@ -11,10 +11,10 @@ import TrendUpIcon from '@/icons/trend-up.svg';
 import Link from '@/dls/Link/Link';
 import SearchHistory from 'src/components/Search/SearchHistory';
 import useGetChaptersData from 'src/hooks/useGetChaptersData';
-import { getChapterData } from 'src/utils/chapter';
-import { logButtonClick } from 'src/utils/eventLogger';
-import { toLocalizedNumber, toLocalizedVerseKey } from 'src/utils/locale';
-import { getSurahNavigationUrl } from 'src/utils/navigation';
+import { getChapterData } from '@/utils/chapter';
+import { logButtonClick } from '@/utils/eventLogger';
+import { toLocalizedNumber, toLocalizedVerseKey } from '@/utils/locale';
+import { getSurahNavigationUrl } from '@/utils/navigation';
 
 interface Props {
   onSearchKeywordClicked: (searchQuery: string) => void;

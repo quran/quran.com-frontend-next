@@ -13,7 +13,7 @@ import Footer from '@/dls/Modal/Footer';
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import Spinner from '@/dls/Spinner/Spinner';
 import AdvancedCopyIcon from '@/icons/clipboard.svg';
-import { logEvent } from 'src/utils/eventLogger';
+import { logEvent } from '@/utils/eventLogger';
 import Verse from 'types/Verse';
 
 type VerseActionAdvancedCopyProps = {

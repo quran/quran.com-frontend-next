@@ -6,7 +6,7 @@ import Button, { ButtonSize } from '@/dls/Button/Button';
 import Select, { SelectSize } from '@/dls/Forms/Select';
 import Skeleton from '@/dls/Skeleton/Skeleton';
 import SpinnerContainer from '@/dls/Spinner/SpinnerContainer';
-import { getLocaleNameByFullName } from 'src/utils/locale';
+import { getLocaleNameByFullName } from '@/utils/locale';
 import { TafsirsResponse } from 'types/ApiResponses';
 
 type LanguageAndTafsirSelectionProps = {

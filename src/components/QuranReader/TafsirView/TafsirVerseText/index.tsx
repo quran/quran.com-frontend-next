@@ -5,7 +5,7 @@ import { shallowEqual, useSelector } from 'react-redux';
 import PlainVerseText from 'src/components/Verse/PlainVerseText';
 import useQcfFont from 'src/hooks/useQcfFont';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
-import { getVerseWords } from 'src/utils/verse';
+import { getVerseWords } from '@/utils/verse';
 import Verse from 'types/Verse';
 
 interface Props {

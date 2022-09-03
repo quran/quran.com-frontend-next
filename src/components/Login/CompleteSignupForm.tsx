@@ -7,9 +7,9 @@ import FormBuilder from '../FormBuilder/FormBuilder';
 import styles from './CompleteSignupForm.module.scss';
 import EmailVerificationForm from './EmailVerificationForm';
 
-import { completeSignup } from 'src/utils/auth/api';
-import { makeUserProfileUrl } from 'src/utils/auth/apiPaths';
-import { logFormSubmission } from 'src/utils/eventLogger';
+import { completeSignup } from '@/utils/auth/api';
+import { makeUserProfileUrl } from '@/utils/auth/apiPaths';
+import { logFormSubmission } from '@/utils/eventLogger';
 import FormField from 'types/FormField';
 
 type CompleteSignupFormProps = {

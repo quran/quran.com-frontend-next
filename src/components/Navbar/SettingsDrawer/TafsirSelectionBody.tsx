@@ -11,13 +11,13 @@ import Input from '@/dls/Forms/Input';
 import IconSearch from '@/icons/search.svg';
 import DataFetcher from 'src/components/DataFetcher';
 import { selectSelectedTafsirs, setSelectedTafsirs } from 'src/redux/slices/QuranReader/tafsirs';
-import { makeTafsirsUrl } from 'src/utils/apiPaths';
-import { areArraysEqual } from 'src/utils/array';
+import { makeTafsirsUrl } from '@/utils/apiPaths';
+import { areArraysEqual } from '@/utils/array';
 import {
   logEmptySearchResults,
   logValueChange,
   logItemSelectionChange,
-} from 'src/utils/eventLogger';
+} from '@/utils/eventLogger';
 import { TafsirsResponse } from 'types/ApiResponses';
 import TafsirInfo from 'types/TafsirInfo';
 

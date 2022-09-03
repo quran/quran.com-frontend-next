@@ -18,12 +18,12 @@ import { selectIsUsingDefaultWordByWordLocale } from 'src/redux/slices/QuranRead
 import { selectIsUsingDefaultFont } from 'src/redux/slices/QuranReader/styles';
 import { selectIsUsingDefaultTranslations } from 'src/redux/slices/QuranReader/translations';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
-import { getMushafId } from 'src/utils/api';
-import { areArraysEqual } from 'src/utils/array';
-import { getPageBookmarks } from 'src/utils/auth/api';
-import { makeBookmarksRangeUrl } from 'src/utils/auth/apiPaths';
-import { isLoggedIn } from 'src/utils/auth/login';
-import { toLocalizedNumber } from 'src/utils/locale';
+import { getMushafId } from '@/utils/api';
+import { areArraysEqual } from '@/utils/array';
+import { getPageBookmarks } from '@/utils/auth/api';
+import { makeBookmarksRangeUrl } from '@/utils/auth/apiPaths';
+import { isLoggedIn } from '@/utils/auth/login';
+import { toLocalizedNumber } from '@/utils/locale';
 import { selectIsUsingDefaultReciter } from 'src/xstate/actors/audioPlayer/selectors';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import { VersesResponse } from 'types/ApiResponses';

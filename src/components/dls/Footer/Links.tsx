@@ -4,7 +4,7 @@ import styles from './Footer.module.scss';
 
 import Link, { LinkVariant } from '@/dls/Link/Link';
 import useGetChaptersData from 'src/hooks/useGetChaptersData';
-import { logTarteelLinkClick } from 'src/utils/eventLogger';
+import { logTarteelLinkClick } from '@/utils/eventLogger';
 
 const Links = () => {
   const { t, lang } = useTranslation('common');

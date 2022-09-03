@@ -9,7 +9,7 @@ import IconSearch from '@/icons/search.svg';
 import KeyboardInput from '@/dls/KeyboardInput';
 import TarteelVoiceSearchTrigger from 'src/components/TarteelVoiceSearch/Trigger';
 import { toggleIsOpen } from 'src/redux/slices/CommandBar/state';
-import { logButtonClick } from 'src/utils/eventLogger';
+import { logButtonClick } from '@/utils/eventLogger';
 
 const CommandBarTrigger: React.FC = () => {
   const { t } = useTranslation('common');

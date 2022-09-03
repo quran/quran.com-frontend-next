@@ -5,9 +5,9 @@ import { VirtuosoHandle } from 'react-virtuoso';
 
 import { fetcher } from 'src/api';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
-import { getMushafId } from 'src/utils/api';
-import { makeVersesFilterUrl } from 'src/utils/apiPaths';
-import { getVerseNumberFromKey } from 'src/utils/verse';
+import { getMushafId } from '@/utils/api';
+import { makeVersesFilterUrl } from '@/utils/apiPaths';
+import { getVerseNumberFromKey } from '@/utils/verse';
 import { VersesResponse } from 'types/ApiResponses';
 import LookupRecord from 'types/LookupRecord';
 import { MushafLines, QuranFont, QuranReaderDataType } from 'types/QuranReader';

@@ -8,8 +8,8 @@ import styles from './SearchResults.module.scss';
 import Link from '@/dls/Link/Link';
 import Pagination from '@/dls/Pagination/Pagination';
 import NavigationItem from 'src/components/Search/NavigationItem';
-import { logButtonClick } from 'src/utils/eventLogger';
-import { toLocalizedNumber } from 'src/utils/locale';
+import { logButtonClick } from '@/utils/eventLogger';
+import { toLocalizedNumber } from '@/utils/locale';
 import { SearchResponse } from 'types/ApiResponses';
 
 interface Props {

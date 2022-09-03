@@ -9,7 +9,7 @@ import FooterThemeSwitcher from './FooterThemeSwitcher';
 
 import Link, { LinkVariant } from '@/dls/Link/Link';
 import LanguageSelector from 'src/components/Navbar/LanguageSelector';
-import { toLocalizedDate } from 'src/utils/locale';
+import { toLocalizedDate } from '@/utils/locale';
 
 const BottomSection = () => {
   const { t, lang } = useTranslation('common');

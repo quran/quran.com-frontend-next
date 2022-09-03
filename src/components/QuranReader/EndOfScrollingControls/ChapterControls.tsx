@@ -6,9 +6,9 @@ import ChevronLeftIcon from '@/icons/chevron-left.svg';
 import ChevronRightIcon from '@/icons/chevron-right.svg';
 import Button, { ButtonType } from '@/dls/Button/Button';
 import useScrollToTop from 'src/hooks/useScrollToTop';
-import { isFirstSurah, isLastSurah } from 'src/utils/chapter';
-import { logButtonClick } from 'src/utils/eventLogger';
-import { getSurahNavigationUrl } from 'src/utils/navigation';
+import { isFirstSurah, isLastSurah } from '@/utils/chapter';
+import { logButtonClick } from '@/utils/eventLogger';
+import { getSurahNavigationUrl } from '@/utils/navigation';
 import { VersesResponse } from 'types/ApiResponses';
 import Verse from 'types/Verse';
 

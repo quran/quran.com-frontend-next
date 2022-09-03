@@ -19,7 +19,7 @@ import {
   removeRecentNavigation,
   setIsOpen,
 } from 'src/redux/slices/CommandBar/state';
-import { resolveUrlBySearchNavigationType } from 'src/utils/navigation';
+import { resolveUrlBySearchNavigationType } from '@/utils/navigation';
 import { SearchNavigationResult } from 'types/SearchNavigationResult';
 
 export interface Command extends SearchNavigationResult {

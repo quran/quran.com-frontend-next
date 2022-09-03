@@ -12,7 +12,7 @@ import useScrollToVirtualizedVerse from './hooks/useScrollToVirtualizedVerse';
 import TranslationPage from './TranslationPage';
 
 import Spinner from '@/dls/Spinner/Spinner';
-import { getNumberOfPages } from 'src/components/QuranReader/utils/page';
+import { getNumberOfPages } from '@/utils/page';
 import useGetQueryParamOrReduxValue from 'src/hooks/useGetQueryParamOrReduxValue';
 import useGetQueryParamOrXstateValue from 'src/hooks/useGetQueryParamOrXstateValue';
 import useQcfFont from 'src/hooks/useQcfFont';

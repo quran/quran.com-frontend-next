@@ -24,7 +24,7 @@ import {
   setMushafLines,
   MAXIMUM_QURAN_FONT_STEP,
 } from 'src/redux/slices/QuranReader/styles';
-import { logValueChange } from 'src/utils/eventLogger';
+import { logValueChange } from '@/utils/eventLogger';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 import { MushafLines, QuranFont } from 'types/QuranReader';
 

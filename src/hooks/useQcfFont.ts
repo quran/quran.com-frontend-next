@@ -2,18 +2,18 @@ import { useEffect, useCallback, useRef } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import {
-  resetLoadedFontFaces,
-  selectLoadedFontFaces,
-  addLoadedFontFace,
-} from 'src/redux/slices/QuranReader/font-faces';
-import { removeItemFromArray } from 'src/utils/array';
+import { removeItemFromArray } from '@/utils/array';
 import {
   getFontFaceNameForPage,
   getV1OrV2FontFaceSource,
   getPagesByVerses,
   isQCFFont,
-} from 'src/utils/fontFaceHelper';
+} from '@/utils/fontFaceHelper';
+import {
+  resetLoadedFontFaces,
+  selectLoadedFontFaces,
+  addLoadedFontFace,
+} from 'src/redux/slices/QuranReader/font-faces';
 import { QuranFont } from 'types/QuranReader';
 import Verse from 'types/Verse';
 

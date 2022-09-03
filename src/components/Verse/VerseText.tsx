@@ -5,7 +5,7 @@ import { shallowEqual, useSelector } from 'react-redux';
 
 import { QURAN_READER_OBSERVER_ID } from '../QuranReader/observer';
 
-import isCenterAlignedPage from './pageUtils';
+import isCenterAlignedPage from '@/utils';
 import styles from './VerseText.module.scss';
 
 import QuranWord from '@/dls/QuranWord/QuranWord';
@@ -17,8 +17,8 @@ import {
   selectReadingViewHoveredVerseKey,
 } from 'src/redux/slices/QuranReader/readingViewVerse';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
-import { getFontClassName } from 'src/utils/fontFaceHelper';
-import { getFirstWordOfSurah } from 'src/utils/verse';
+import { getFontClassName } from '@/utils/fontFaceHelper';
+import { getFirstWordOfSurah } from '@/utils/verse';
 import { FALLBACK_FONT, QuranFont } from 'types/QuranReader';
 import Word from 'types/Word';
 

@@ -24,12 +24,12 @@ import UnBookmarkedIcon from '@/icons/unbookmarked.svg';
 import WordByWordVerseAction from 'src/components/QuranReader/ReadingView/WordByWordVerseAction';
 import { selectBookmarks, toggleVerseBookmark } from 'src/redux/slices/QuranReader/bookmarks';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
-import { getMushafId } from 'src/utils/api';
-import { addOrRemoveBookmark, getIsResourceBookmarked } from 'src/utils/auth/api';
-import { makeBookmarksUrl, makeIsResourceBookmarkedUrl } from 'src/utils/auth/apiPaths';
-import { isLoggedIn } from 'src/utils/auth/login';
-import { logButtonClick } from 'src/utils/eventLogger';
-import { getVerseUrl } from 'src/utils/verse';
+import { getMushafId } from '@/utils/api';
+import { addOrRemoveBookmark, getIsResourceBookmarked } from '@/utils/auth/api';
+import { makeBookmarksUrl, makeIsResourceBookmarkedUrl } from '@/utils/auth/apiPaths';
+import { isLoggedIn } from '@/utils/auth/login';
+import { logButtonClick } from '@/utils/eventLogger';
+import { getVerseUrl } from '@/utils/verse';
 import BookmarkType from 'types/BookmarkType';
 import Verse from 'types/Verse';
 

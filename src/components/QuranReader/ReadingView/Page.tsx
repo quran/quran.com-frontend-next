@@ -11,7 +11,7 @@ import PageFooter from './PageFooter';
 import useIsFontLoaded from 'src/components/QuranReader/hooks/useIsFontLoaded';
 import { selectWordByWordPreferences } from 'src/redux/slices/QuranReader/readingPreferences';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
-import { getLineWidthClassName } from 'src/utils/fontFaceHelper';
+import { getLineWidthClassName } from '@/utils/fontFaceHelper';
 import { FALLBACK_FONT, QuranFont } from 'types/QuranReader';
 import Verse from 'types/Verse';
 

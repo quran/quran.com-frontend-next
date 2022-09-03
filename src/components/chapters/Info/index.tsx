@@ -9,10 +9,10 @@ import styles from './Info.module.scss';
 
 import BackIcon from '@/icons/west.svg';
 import Button, { ButtonSize, ButtonVariant } from '@/dls/Button/Button';
-import { logButtonClick } from 'src/utils/eventLogger';
-import { getBlurDataUrl } from 'src/utils/image';
-import { toLocalizedNumber } from 'src/utils/locale';
-import { getSurahNavigationUrl } from 'src/utils/navigation';
+import { logButtonClick } from '@/utils/eventLogger';
+import { getBlurDataUrl } from '@/utils/image';
+import { toLocalizedNumber } from '@/utils/locale';
+import { getSurahNavigationUrl } from '@/utils/navigation';
 import Chapter from 'types/Chapter';
 import ChapterInfo from 'types/ChapterInfo';
 

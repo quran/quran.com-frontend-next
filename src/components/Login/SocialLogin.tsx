@@ -11,8 +11,8 @@ import {
   makeGoogleLoginUrl,
   makeFacebookLoginUrl,
   makeAppleLoginUrl,
-} from 'src/utils/auth/apiPaths';
-import { logButtonClick } from 'src/utils/eventLogger';
+} from '@/utils/auth/apiPaths';
+import { logButtonClick } from '@/utils/eventLogger';
 import AuthType from 'types/auth/AuthType';
 
 const SocialLogin = () => {

@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import { VirtuosoHandle } from 'react-virtuoso';
 
-import { verseIndexToApiPageNumber } from 'src/components/QuranReader/utils/page';
+import { verseIndexToApiPageNumber } from '@/utils/page';
 import { QuranReaderDataType } from 'types/QuranReader';
 import ScrollAlign from 'types/ScrollAlign';
 

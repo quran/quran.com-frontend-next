@@ -7,8 +7,8 @@ import BackwardIcon from '@/icons/backward.svg';
 import ForwardIcon from '@/icons/forward.svg';
 import Button, { ButtonShape, ButtonVariant } from '@/dls/Button/Button';
 import DataContext from 'src/contexts/DataContext';
-import { getChapterData } from 'src/utils/chapter';
-import { logButtonClick } from 'src/utils/eventLogger';
+import { getChapterData } from '@/utils/chapter';
+import { logButtonClick } from '@/utils/eventLogger';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 
 export enum SeekButtonType {

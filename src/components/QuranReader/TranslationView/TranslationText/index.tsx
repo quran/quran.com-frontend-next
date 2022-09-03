@@ -12,8 +12,8 @@ import FootnoteText from './FootnoteText';
 import styles from './TranslationText.module.scss';
 
 import { getFootnote } from 'src/api';
-import { logButtonClick } from 'src/utils/eventLogger';
-import { getLanguageDataById } from 'src/utils/locale';
+import { logButtonClick } from '@/utils/eventLogger';
+import { getLanguageDataById } from '@/utils/locale';
 import Footnote from 'types/Footnote';
 
 interface Props {

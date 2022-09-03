@@ -5,14 +5,14 @@ import useTranslation from 'next-translate/useTranslation';
 import pageStyle from './index.module.scss';
 import radioStyle from './radio.module.scss';
 
+import { getAllChaptersData } from '@/utils/chapter';
+import { getLanguageAlternates } from '@/utils/locale';
+import { getCanonicalUrl } from '@/utils/navigation';
 import { getAvailableReciters } from 'src/api';
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import CuratedStationList from 'src/components/Radio/CuratedStationList';
 import ReciterStationList from 'src/components/Radio/ReciterStationList';
 import DataContext from 'src/contexts/DataContext';
-import { getAllChaptersData } from 'src/utils/chapter';
-import { getLanguageAlternates } from 'src/utils/locale';
-import { getCanonicalUrl } from 'src/utils/navigation';
 import ChaptersData from 'types/ChaptersData';
 import Reciter from 'types/Reciter';
 

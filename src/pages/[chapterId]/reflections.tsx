@@ -7,6 +7,21 @@ import { SWRConfig } from 'swr';
 
 import styles from './[verseId]/tafsirs.module.scss';
 
+import { getDefaultWordFields, getMushafId } from '@/utils/api';
+import { makeVerseReflectionsUrl, makeVersesUrl } from '@/utils/apiPaths';
+import { getChapterData, getAllChaptersData } from '@/utils/chapter';
+import { getLanguageAlternates, toLocalizedNumber } from '@/utils/locale';
+import {
+  getCanonicalUrl,
+  getVerseReflectionNavigationUrl,
+  scrollWindowToTop,
+} from '@/utils/navigation';
+import {
+  REVALIDATION_PERIOD_ON_ERROR_SECONDS,
+  ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
+} from '@/utils/staticPageGeneration';
+import { isValidVerseKey } from '@/utils/validator';
+import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
 import { fetcher } from 'src/api';
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import ReflectionBodyContainer from 'src/components/QuranReader/ReflectionView/ReflectionBodyContainer';
@@ -16,21 +31,6 @@ import {
   getQuranReaderStylesInitialState,
   getTranslationsInitialState,
 } from 'src/redux/defaultSettings/util';
-import { getDefaultWordFields, getMushafId } from 'src/utils/api';
-import { makeVerseReflectionsUrl, makeVersesUrl } from 'src/utils/apiPaths';
-import { getChapterData, getAllChaptersData } from 'src/utils/chapter';
-import { getLanguageAlternates, toLocalizedNumber } from 'src/utils/locale';
-import {
-  getCanonicalUrl,
-  getVerseReflectionNavigationUrl,
-  scrollWindowToTop,
-} from 'src/utils/navigation';
-import {
-  REVALIDATION_PERIOD_ON_ERROR_SECONDS,
-  ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
-} from 'src/utils/staticPageGeneration';
-import { isValidVerseKey } from 'src/utils/validator';
-import { getVerseAndChapterNumbersFromKey } from 'src/utils/verse';
 import { ChapterResponse } from 'types/ApiResponses';
 import ChaptersData from 'types/ChaptersData';
 

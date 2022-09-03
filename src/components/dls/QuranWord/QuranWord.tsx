@@ -22,11 +22,11 @@ import {
   selectShowTooltipFor,
   selectWordByWordPreferences,
 } from 'src/redux/slices/QuranReader/readingPreferences';
-import { areArraysEqual } from 'src/utils/array';
-import { milliSecondsToSeconds } from 'src/utils/datetime';
-import { logButtonClick } from 'src/utils/eventLogger';
-import { isQCFFont } from 'src/utils/fontFaceHelper';
-import { getChapterNumberFromKey, makeWordLocation } from 'src/utils/verse';
+import { areArraysEqual } from '@/utils/array';
+import { milliSecondsToSeconds } from '@/utils/datetime';
+import { logButtonClick } from '@/utils/eventLogger';
+import { isQCFFont } from '@/utils/fontFaceHelper';
+import { getChapterNumberFromKey, makeWordLocation } from '@/utils/verse';
 import { getWordTimeSegment } from 'src/xstate/actors/audioPlayer/audioPlayerMachineHelper';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import { ReadingPreference, QuranFont, WordClickFunctionality } from 'types/QuranReader';

@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 import styles from './TajweedWordImage.module.scss';
 
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
-import { makeCDNUrl } from 'src/utils/cdn';
+import { makeCDNUrl } from '@/utils/cdn';
 
 interface Props {
   path: string;

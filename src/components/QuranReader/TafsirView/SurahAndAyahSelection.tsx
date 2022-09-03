@@ -6,8 +6,8 @@ import styles from './TafsirView.module.scss';
 
 import Select, { SelectSize } from '@/dls/Forms/Select';
 import DataContext from 'src/contexts/DataContext';
-import { toLocalizedNumber } from 'src/utils/locale';
-import { generateChapterVersesKeys, getVerseNumberFromKey } from 'src/utils/verse';
+import { toLocalizedNumber } from '@/utils/locale';
+import { generateChapterVersesKeys, getVerseNumberFromKey } from '@/utils/verse';
 
 const SurahAndAyahSelection = ({
   selectedChapterId,

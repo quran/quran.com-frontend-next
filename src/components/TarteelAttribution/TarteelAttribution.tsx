@@ -5,7 +5,7 @@ import styles from './TarteelAttribution.module.scss';
 import Link from '@/dls/Link/Link';
 import TarteelLogo from '@/icons/tarteel-logo.svg';
 import TarteelText from '@/icons/tarteel-text.svg';
-import { logTarteelLinkClick } from 'src/utils/eventLogger';
+import { logTarteelLinkClick } from '@/utils/eventLogger';
 
 interface Props {
   isCommandBar?: boolean;

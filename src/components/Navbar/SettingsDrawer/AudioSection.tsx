@@ -25,10 +25,10 @@ import {
   selectReadingPreferences,
   setWordClickFunctionality,
 } from 'src/redux/slices/QuranReader/readingPreferences';
-import { makeAvailableRecitersUrl } from 'src/utils/apiPaths';
-import { logValueChange } from 'src/utils/eventLogger';
-import { generateSelectOptions } from 'src/utils/input';
-import { toLocalizedNumber } from 'src/utils/locale';
+import { makeAvailableRecitersUrl } from '@/utils/apiPaths';
+import { logValueChange } from '@/utils/eventLogger';
+import { generateSelectOptions } from '@/utils/input';
+import { toLocalizedNumber } from '@/utils/locale';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import { RecitersResponse } from 'types/ApiResponses';
 import PreferenceGroup from 'types/auth/PreferenceGroup';

@@ -11,9 +11,9 @@ import Button, { ButtonShape, ButtonVariant } from '@/dls/Button/Button';
 import Spinner, { SpinnerSize } from '@/dls/Spinner/Spinner';
 import DataContext from 'src/contexts/DataContext';
 import useChapterIdsByUrlPath from 'src/hooks/useChapterId';
-import { getChapterData } from 'src/utils/chapter';
-import { withStopPropagation } from 'src/utils/event';
-import { logButtonClick } from 'src/utils/eventLogger';
+import { getChapterData } from '@/utils/chapter';
+import { withStopPropagation } from '@/utils/event';
+import { logButtonClick } from '@/utils/eventLogger';
 import { selectIsLoading } from 'src/xstate/actors/audioPlayer/selectors';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 

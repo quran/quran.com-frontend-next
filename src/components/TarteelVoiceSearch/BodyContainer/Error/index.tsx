@@ -8,7 +8,7 @@ import ErrorIcon from '@/icons/info.svg';
 import MicrophoneIcon from '@/icons/microphone.svg';
 import NoMicrophoneIcon from '@/icons/no-mic.svg';
 import Link, { LinkVariant } from '@/dls/Link/Link';
-import { logTarteelLinkClick } from 'src/utils/eventLogger';
+import { logTarteelLinkClick } from '@/utils/eventLogger';
 import VoiceError from 'types/Tarteel/VoiceError';
 
 interface Props {

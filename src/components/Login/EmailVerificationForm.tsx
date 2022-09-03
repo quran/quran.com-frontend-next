@@ -11,9 +11,9 @@ import { FormBuilderFormField } from '../FormBuilder/FormBuilderTypes';
 import styles from './CompleteSignupForm.module.scss';
 import ResendEmailSection from './ResendEmailSection';
 
-import { completeSignup, requestVerificationCode } from 'src/utils/auth/api';
-import { makeUserProfileUrl } from 'src/utils/auth/apiPaths';
-import { logFormSubmission } from 'src/utils/eventLogger';
+import { completeSignup, requestVerificationCode } from '@/utils/auth/api';
+import { makeUserProfileUrl } from '@/utils/auth/apiPaths';
+import { logFormSubmission } from '@/utils/eventLogger';
 import ErrorMessageId from 'types/ErrorMessageId';
 import { RuleType } from 'types/FieldRule';
 import { FormFieldType } from 'types/FormField';

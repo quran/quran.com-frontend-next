@@ -9,7 +9,7 @@ import styles from './Pagination.module.scss';
 import PreviousIcon from '@/icons/caret-back.svg';
 import NextIcon from '@/icons/caret-forward.svg';
 import Button, { ButtonVariant } from '@/dls/Button/Button';
-import { toLocalizedNumber } from 'src/utils/locale';
+import { toLocalizedNumber } from '@/utils/locale';
 
 interface Props {
   currentPage: number;

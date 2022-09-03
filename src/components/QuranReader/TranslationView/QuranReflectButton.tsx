@@ -10,13 +10,13 @@ import ChatIcon from '@/icons/chat.svg';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import ContentModal from '@/dls/ContentModal/ContentModal';
 import ReflectionBodyContainer from 'src/components/QuranReader/ReflectionView/ReflectionBodyContainer';
-// import { logButtonClick } from 'src/utils/eventLogger';
+// import { logButtonClick } from '@/utils/eventLogger';
 import {
   fakeNavigate,
   getQuranReflectVerseUrl,
   // getVerseReflectionNavigationUrl,
-} from 'src/utils/navigation';
-import { getVerseAndChapterNumbersFromKey } from 'src/utils/verse';
+} from '@/utils/navigation';
+import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
 
 type QuranReflectButtonProps = {
   verseKey: string;

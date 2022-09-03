@@ -11,7 +11,7 @@ import ContentModalHandles from '@/dls/ContentModal/types/ContentModalHandles';
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import Separator from '@/dls/Separator/Separator';
 import PlainVerseText from 'src/components/Verse/PlainVerseText';
-import { logButtonClick, logEvent } from 'src/utils/eventLogger';
+import { logButtonClick, logEvent } from '@/utils/eventLogger';
 import Verse from 'types/Verse';
 
 const ContentModal = dynamic(() => import('@/dls/ContentModal/ContentModal'), {

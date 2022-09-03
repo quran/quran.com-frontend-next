@@ -9,7 +9,7 @@ import styles from './Page.module.scss';
 
 import BackIcon from '@/icons/west.svg';
 import Link, { LinkVariant } from '@/dls/Link/Link';
-import { getPageTitle } from 'src/utils/notion';
+import { getPageTitle } from '@/utils/notion';
 
 interface Props {
   page: any;

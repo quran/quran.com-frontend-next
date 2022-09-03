@@ -8,15 +8,15 @@ import Head from 'next/head';
 
 import styles from './index.module.scss';
 
+import { getAllChaptersData } from '@/utils/chapter';
+import { getLanguageAlternates } from '@/utils/locale';
+import { getCanonicalUrl } from '@/utils/navigation';
 import ChapterAndJuzListWrapper from 'src/components/chapters/ChapterAndJuzList';
 import HomePageHero from 'src/components/HomePage/HomePageHero';
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import BookmarksSection from 'src/components/Verses/BookmarksSection';
 import RecentReadingSessions from 'src/components/Verses/RecentReadingSessions';
 import DataContext from 'src/contexts/DataContext';
-import { getAllChaptersData } from 'src/utils/chapter';
-import { getLanguageAlternates } from 'src/utils/locale';
-import { getCanonicalUrl } from 'src/utils/navigation';
 import { ChaptersResponse } from 'types/ApiResponses';
 import ChaptersData from 'types/ChaptersData';
 

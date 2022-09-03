@@ -12,7 +12,7 @@ import Button, { ButtonVariant } from '@/dls/Button/Button';
 import BackIcon from '@/icons/west.svg';
 import Drawer, { DrawerType } from 'src/components/Navbar/Drawer';
 import { selectNavbar, setSettingsView, SettingsView } from 'src/redux/slices/navbar';
-import { logValueChange } from 'src/utils/eventLogger';
+import { logValueChange } from '@/utils/eventLogger';
 
 const SettingsBody = dynamic(() => import('./SettingsBody'), {
   ssr: false,

@@ -7,7 +7,7 @@ import { shallowEqual, useSelector } from 'react-redux';
 import DataFetcher from 'src/components/DataFetcher';
 import TafsirSkeleton from 'src/components/QuranReader/TafsirView/TafsirSkeleton';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
-import { makeVerseReflectionsUrl } from 'src/utils/apiPaths';
+import { makeVerseReflectionsUrl } from '@/utils/apiPaths';
 
 const ReflectionSurahAndAyahSelection = dynamic(() => import('./ReflectionSurahAndAyahSelection'), {
   ssr: false,

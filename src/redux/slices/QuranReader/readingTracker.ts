@@ -1,9 +1,9 @@
 /* eslint-disable react-func/max-lines-per-function */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+import { getDistanceBetweenVerses } from '@/utils/verse';
 import { RootState } from 'src/redux/RootState';
 import SliceName from 'src/redux/types/SliceName';
-import { getDistanceBetweenVerses } from 'src/utils/verse';
 import ChaptersData from 'types/ChaptersData';
 
 interface LastReadVerse {

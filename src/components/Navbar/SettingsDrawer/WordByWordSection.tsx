@@ -17,8 +17,8 @@ import {
   setSelectedWordByWordLocale,
   selectReadingPreferences,
 } from 'src/redux/slices/QuranReader/readingPreferences';
-import { logValueChange } from 'src/utils/eventLogger';
-import { getLocaleName } from 'src/utils/locale';
+import { logValueChange } from '@/utils/eventLogger';
+import { getLocaleName } from '@/utils/locale';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 
 export const WBW_LOCALES = ['en', 'ur', 'id', 'bn', 'tr', 'fa', 'ru', 'hi', 'de', 'ta', 'inh'];

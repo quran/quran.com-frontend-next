@@ -13,15 +13,15 @@ import Separator from '@/dls/Separator/Separator';
 import { RangeVerseItem } from 'src/components/Verse/AdvancedCopy/SelectorContainer';
 import usePersistPreferenceGroup from 'src/hooks/auth/usePersistPreferenceGroup';
 import useGetChaptersData from 'src/hooks/useGetChaptersData';
-import { getChapterData } from 'src/utils/chapter';
-import { logButtonClick, logValueChange } from 'src/utils/eventLogger';
-import { toLocalizedVerseKey } from 'src/utils/locale';
+import { getChapterData } from '@/utils/chapter';
+import { logButtonClick, logValueChange } from '@/utils/eventLogger';
+import { toLocalizedVerseKey } from '@/utils/locale';
 import {
   generateChapterVersesKeys,
   getChapterFirstAndLastVerseKey,
   getChapterNumberFromKey,
   getVerseNumberFromKey,
-} from 'src/utils/verse';
+} from '@/utils/verse';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 

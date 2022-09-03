@@ -15,9 +15,9 @@ import TranslationsView from 'src/components/QuranReader/ReadingView/Translation
 import TranslationViewCellSkeleton from 'src/components/QuranReader/TranslationView/TranslatioViewCellSkeleton';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';
-import { getDefaultWordFields, getMushafId } from 'src/utils/api';
-import { makeByVerseKeyUrl } from 'src/utils/apiPaths';
-import { logButtonClick, logEvent } from 'src/utils/eventLogger';
+import { getDefaultWordFields, getMushafId } from '@/utils/api';
+import { makeByVerseKeyUrl } from '@/utils/apiPaths';
+import { logButtonClick, logEvent } from '@/utils/eventLogger';
 import { VerseResponse } from 'types/ApiResponses';
 import Verse from 'types/Verse';
 

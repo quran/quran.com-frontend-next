@@ -13,6 +13,18 @@ import ContentModal, { ContentModalSize } from '@/dls/ContentModal/ContentModal'
 import Input, { InputVariant } from '@/dls/Forms/Input';
 import FilterIcon from '@/icons/filter.svg';
 import SearchIcon from '@/icons/search.svg';
+import { areArraysEqual } from '@/utils/array';
+import { getAllChaptersData } from '@/utils/chapter';
+import {
+  logButtonClick,
+  logEmptySearchResults,
+  logEvent,
+  logTextSearchQuery,
+  logValueChange,
+} from '@/utils/eventLogger';
+import filterTranslations from '@/utils/filter-translations';
+import { getLanguageAlternates, toLocalizedNumber } from '@/utils/locale';
+import { getCanonicalUrl } from '@/utils/navigation';
 import { getAvailableLanguages, getAvailableTranslations, getSearchResults } from 'src/api';
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import TranslationsFilter from 'src/components/Search/Filters/TranslationsFilter';
@@ -22,18 +34,6 @@ import useAddQueryParamsToUrl from 'src/hooks/useAddQueryParamsToUrl';
 import useDebounce from 'src/hooks/useDebounce';
 import { getTranslationsInitialState } from 'src/redux/defaultSettings/util';
 import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';
-import { areArraysEqual } from 'src/utils/array';
-import { getAllChaptersData } from 'src/utils/chapter';
-import {
-  logButtonClick,
-  logEmptySearchResults,
-  logEvent,
-  logTextSearchQuery,
-  logValueChange,
-} from 'src/utils/eventLogger';
-import filterTranslations from 'src/utils/filter-translations';
-import { getLanguageAlternates, toLocalizedNumber } from 'src/utils/locale';
-import { getCanonicalUrl } from 'src/utils/navigation';
 import { SearchResponse } from 'types/ApiResponses';
 import AvailableLanguage from 'types/AvailableLanguage';
 import AvailableTranslation from 'types/AvailableTranslation';

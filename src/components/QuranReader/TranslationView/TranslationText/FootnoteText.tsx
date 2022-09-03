@@ -11,7 +11,7 @@ import transStyles from './TranslationText.module.scss';
 import CloseIcon from '@/icons/close.svg';
 import Button, { ButtonSize, ButtonShape, ButtonVariant } from '@/dls/Button/Button';
 import Spinner from '@/dls/Spinner/Spinner';
-import { getLanguageDataById, findLanguageIdByLocale } from 'src/utils/locale';
+import { getLanguageDataById, findLanguageIdByLocale } from '@/utils/locale';
 import Footnote from 'types/Footnote';
 
 interface FootnoteTextProps {

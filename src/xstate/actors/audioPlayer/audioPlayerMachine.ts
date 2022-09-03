@@ -23,8 +23,8 @@ import {
 import AudioPlayerContext from './types/AudioPlayerContext';
 import AudioPlayerEventType from './types/AudioPlayerEventType';
 
+import { milliSecondsToSeconds, secondsToMilliSeconds } from '@/utils/datetime';
 import { StationType } from 'src/components/Radio/types';
-import { milliSecondsToSeconds, secondsToMilliSeconds } from 'src/utils/datetime';
 import AudioData from 'types/AudioData';
 
 /**

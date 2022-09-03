@@ -15,8 +15,8 @@ import { selectNavbar } from 'src/redux/slices/navbar';
 import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';
 import { addSearchHistoryRecord } from 'src/redux/slices/Search/search';
 import { selectIsSearchDrawerVoiceFlowStarted } from 'src/redux/slices/voiceSearch';
-import { areArraysEqual } from 'src/utils/array';
-import { logButtonClick, logEmptySearchResults, logTextSearchQuery } from 'src/utils/eventLogger';
+import { areArraysEqual } from '@/utils/array';
+import { logButtonClick, logEmptySearchResults, logTextSearchQuery } from '@/utils/eventLogger';
 import { SearchResponse } from 'types/ApiResponses';
 
 const SearchBodyContainer = dynamic(() => import('src/components/Search/SearchBodyContainer'), {

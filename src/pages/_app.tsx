@@ -10,6 +10,14 @@ import useSWRImmutable from 'swr/immutable';
 
 import Footer from '@/dls/Footer/Footer';
 import ToastContainerProvider from '@/dls/Toast/ToastProvider';
+import { API_HOST } from '@/utils/api';
+import { getUserProfile } from '@/utils/auth/api';
+import { makeUserProfileUrl } from '@/utils/auth/apiPaths';
+import { isLoggedIn } from '@/utils/auth/login';
+import { logAndRedirectUnsupportedLogicalCSS } from '@/utils/css';
+import * as gtag from '@/utils/gtag';
+import { getDir } from '@/utils/locale';
+import { createSEOConfig } from '@/utils/seo';
 import AudioPlayer from 'src/components/AudioPlayer/AudioPlayer';
 import DeveloperUtility from 'src/components/DeveloperUtility/DeveloperUtility';
 import DonatePopup from 'src/components/DonatePopup/DonatePopup';
@@ -22,14 +30,6 @@ import ThirdPartyScripts from 'src/components/ThirdPartyScripts/ThirdPartyScript
 import DataContext from 'src/contexts/DataContext';
 import ReduxProvider from 'src/redux/Provider';
 import ThemeProvider from 'src/styles/ThemeProvider';
-import { API_HOST } from 'src/utils/api';
-import { getUserProfile } from 'src/utils/auth/api';
-import { makeUserProfileUrl } from 'src/utils/auth/apiPaths';
-import { isLoggedIn } from 'src/utils/auth/login';
-import { logAndRedirectUnsupportedLogicalCSS } from 'src/utils/css';
-import * as gtag from 'src/utils/gtag';
-import { getDir } from 'src/utils/locale';
-import { createSEOConfig } from 'src/utils/seo';
 import { AudioPlayerMachineProvider } from 'src/xstate/AudioPlayerMachineContext';
 
 import 'src/styles/reset.scss';
