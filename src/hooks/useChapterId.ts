@@ -6,8 +6,8 @@ import { getChapterIdBySlug } from 'src/api';
 import DataContext from 'src/contexts/DataContext';
 import { getChapterIdsForJuz, getChapterIdsForPage } from 'src/utils/chapter';
 import { getChapterIdsForHizb } from 'src/utils/hizb';
-import { getChapterIdsForRub } from 'src/utils/rub';
 import { formatStringNumber } from 'src/utils/number';
+import { getChapterIdsForRub } from 'src/utils/rub';
 import { isValidChapterId, isValidVerseKey } from 'src/utils/validator';
 import { getChapterNumberFromKey } from 'src/utils/verse';
 
