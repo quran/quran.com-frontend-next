@@ -8,8 +8,8 @@ import { useDispatch, useSelector } from 'react-redux';
 import SettingsBodySkeleton from './SettingsBodySkeleton';
 import styles from './SettingsDrawer.module.scss';
 
+import Button, { ButtonVariant } from '@/dls/Button/Button';
 import BackIcon from '@/icons/west.svg';
-import Button, { ButtonVariant } from 'src/components/dls/Button/Button';
 import Drawer, { DrawerType } from 'src/components/Navbar/Drawer';
 import { selectNavbar, setSettingsView, SettingsView } from 'src/redux/slices/navbar';
 import { logValueChange } from 'src/utils/eventLogger';

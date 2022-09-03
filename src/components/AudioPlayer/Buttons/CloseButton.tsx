@@ -3,7 +3,7 @@ import { useContext } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 
 import CloseIcon from '@/icons/close.svg';
-import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
+import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import { logButtonClick } from 'src/utils/eventLogger';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 

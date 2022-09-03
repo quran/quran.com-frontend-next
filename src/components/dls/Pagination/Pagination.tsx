@@ -8,7 +8,7 @@ import styles from './Pagination.module.scss';
 
 import PreviousIcon from '@/icons/caret-back.svg';
 import NextIcon from '@/icons/caret-forward.svg';
-import Button, { ButtonVariant } from 'src/components/dls/Button/Button';
+import Button, { ButtonVariant } from '@/dls/Button/Button';
 import { toLocalizedNumber } from 'src/utils/locale';
 
 interface Props {

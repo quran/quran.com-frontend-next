@@ -6,7 +6,7 @@ import styles from './Error.module.scss';
 
 import RetryIcon from '@/icons/retry.svg';
 import { OFFLINE_ERROR } from 'src/api';
-import Button, { ButtonSize, ButtonType } from 'src/components/dls/Button/Button';
+import Button, { ButtonSize, ButtonType } from '@/dls/Button/Button';
 
 interface Props {
   onRetryClicked: () => void;

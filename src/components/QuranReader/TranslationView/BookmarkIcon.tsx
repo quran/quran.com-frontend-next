@@ -9,8 +9,8 @@ import { useSWRConfig } from 'swr';
 import styles from './TranslationViewCell.module.scss';
 
 import BookmarkedIcon from '@/icons/bookmark.svg';
-import Button, { ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
-import { ToastStatus, useToast } from 'src/components/dls/Toast/Toast';
+import Button, { ButtonSize, ButtonVariant } from '@/dls/Button/Button';
+import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import { selectBookmarks, toggleVerseBookmark } from 'src/redux/slices/QuranReader/bookmarks';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import { getMushafId } from 'src/utils/api';

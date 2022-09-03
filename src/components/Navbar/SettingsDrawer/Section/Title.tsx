@@ -2,7 +2,7 @@ import React from 'react';
 
 import styles from './Title.module.scss';
 
-import SpinnerContainer from 'src/components/dls/Spinner/SpinnerContainer';
+import SpinnerContainer from '@/dls/Spinner/SpinnerContainer';
 
 const Title = ({ children, isLoading = false }) => {
   return (

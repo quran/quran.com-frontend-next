@@ -7,7 +7,7 @@ import PartialResult from './PartialResult';
 import SearchResults from './SearchResults';
 import styles from './VoiceSearchBodyContainer.module.scss';
 
-import Spinner, { SpinnerSize } from 'src/components/dls/Spinner/Spinner';
+import Spinner, { SpinnerSize } from '@/dls/Spinner/Spinner';
 import NoResults from 'src/components/Search/NoResults';
 import useTarteelVoiceSearch from 'src/hooks/useTarteelVoiceSearch';
 

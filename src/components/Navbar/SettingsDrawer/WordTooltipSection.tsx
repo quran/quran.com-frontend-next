@@ -9,9 +9,9 @@ import Section from './Section';
 import { WORD_BY_WORD_LOCALES_OPTIONS } from './WordByWordSection';
 import styles from './WordByWordSection.module.scss';
 
-import Checkbox from 'src/components/dls/Forms/Checkbox/Checkbox';
-import Select, { SelectSize } from 'src/components/dls/Forms/Select';
-import HelperTooltip from 'src/components/dls/HelperTooltip/HelperTooltip';
+import Checkbox from '@/dls/Forms/Checkbox/Checkbox';
+import Select, { SelectSize } from '@/dls/Forms/Select';
+import HelperTooltip from '@/dls/HelperTooltip/HelperTooltip';
 import usePersistPreferenceGroup from 'src/hooks/auth/usePersistPreferenceGroup';
 import {
   setShowTooltipFor,

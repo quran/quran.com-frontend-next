@@ -9,11 +9,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import styles from './AudioSection.module.scss';
 import Section from './Section';
 
+import Select from '@/dls/Forms/Select';
+import HelperTooltip from '@/dls/HelperTooltip/HelperTooltip';
+import SelectionCard from '@/dls/SelectionCard/SelectionCard';
+import Toggle from '@/dls/Toggle/Toggle';
 import DataFetcher from 'src/components/DataFetcher';
-import Select from 'src/components/dls/Forms/Select';
-import HelperTooltip from 'src/components/dls/HelperTooltip/HelperTooltip';
-import SelectionCard from 'src/components/dls/SelectionCard/SelectionCard';
-import Toggle from 'src/components/dls/Toggle/Toggle';
 import usePersistPreferenceGroup from 'src/hooks/auth/usePersistPreferenceGroup';
 import {
   setEnableAutoScrolling,

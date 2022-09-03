@@ -7,10 +7,10 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import Section from './Section';
 import styles from './TranslationSection.module.scss';
 
+import Counter from '@/dls/Counter/Counter';
+import SelectionCard from '@/dls/SelectionCard/SelectionCard';
+import Skeleton from '@/dls/Skeleton/Skeleton';
 import DataFetcher from 'src/components/DataFetcher';
-import Counter from 'src/components/dls/Counter/Counter';
-import SelectionCard from 'src/components/dls/SelectionCard/SelectionCard';
-import Skeleton from 'src/components/dls/Skeleton/Skeleton';
 import usePersistPreferenceGroup from 'src/hooks/auth/usePersistPreferenceGroup';
 import { setSettingsView, SettingsView } from 'src/redux/slices/navbar';
 import {

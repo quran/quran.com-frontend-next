@@ -8,7 +8,7 @@ import { QURAN_READER_OBSERVER_ID } from '../QuranReader/observer';
 import isCenterAlignedPage from './pageUtils';
 import styles from './VerseText.module.scss';
 
-import QuranWord from 'src/components/dls/QuranWord/QuranWord';
+import QuranWord from '@/dls/QuranWord/QuranWord';
 import useIsFontLoaded from 'src/components/QuranReader/hooks/useIsFontLoaded';
 import useIntersectionObserver from 'src/hooks/useObserveElement';
 import { selectWordByWordPreferences } from 'src/redux/slices/QuranReader/readingPreferences';

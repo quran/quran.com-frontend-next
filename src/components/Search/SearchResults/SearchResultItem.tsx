@@ -6,8 +6,8 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from './SearchResultItem.module.scss';
 
-import Link from 'src/components/dls/Link/Link';
-import QuranWord from 'src/components/dls/QuranWord/QuranWord';
+import Link from '@/dls/Link/Link';
+import QuranWord from '@/dls/QuranWord/QuranWord';
 import useGetChaptersData from 'src/hooks/useGetChaptersData';
 import { getChapterData } from 'src/utils/chapter';
 import { logButtonClick } from 'src/utils/eventLogger';

@@ -10,9 +10,9 @@ import QuranFontSectionFooter from './QuranFontSectionFooter';
 import Section from './Section';
 import VersePreview from './VersePreview';
 
-import Counter from 'src/components/dls/Counter/Counter';
-import Select from 'src/components/dls/Forms/Select';
-import Switch from 'src/components/dls/Switch/Switch';
+import Counter from '@/dls/Counter/Counter';
+import Select from '@/dls/Forms/Select';
+import Switch from '@/dls/Switch/Switch';
 import usePersistPreferenceGroup from 'src/hooks/auth/usePersistPreferenceGroup';
 import { getQuranReaderStylesInitialState } from 'src/redux/defaultSettings/util';
 import {

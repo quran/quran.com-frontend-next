@@ -10,7 +10,7 @@ import TarteelAppImage from '../../public/images/tarteel-app.png';
 
 import styles from './apps.module.scss';
 
-import Link from 'src/components/dls/Link/Link';
+import Link from '@/dls/Link/Link';
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import PageContainer from 'src/components/PageContainer';
 import { logTarteelLinkClick } from 'src/utils/eventLogger';

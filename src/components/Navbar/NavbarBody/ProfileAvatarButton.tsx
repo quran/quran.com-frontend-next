@@ -5,11 +5,11 @@ import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
 
+import Button, { ButtonShape, ButtonVariant } from '@/dls/Button/Button';
+import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import ArrowIcon from '@/icons/east.svg';
 import LogoutIcon from '@/icons/logout.svg';
 import IconPerson from '@/icons/person.svg';
-import Button, { ButtonShape, ButtonVariant } from 'src/components/dls/Button/Button';
-import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
 import { removeLastSyncAt } from 'src/redux/slices/Auth/userDataSync';
 import { logoutUser } from 'src/utils/auth/api';
 import { isLoggedIn } from 'src/utils/auth/login';

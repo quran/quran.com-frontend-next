@@ -2,7 +2,7 @@ import React from 'react';
 
 import styles from './TranslationsView.module.scss';
 
-import Separator from 'src/components/dls/Separator/Separator';
+import Separator from '@/dls/Separator/Separator';
 import TranslationText from 'src/components/QuranReader/TranslationView/TranslationText';
 import PlainVerseText from 'src/components/Verse/PlainVerseText';
 import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';

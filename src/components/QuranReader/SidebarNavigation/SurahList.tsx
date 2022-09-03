@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux';
 
 import styles from './SidebarNavigation.module.scss';
 
-import Link from 'src/components/dls/Link/Link';
+import Link from '@/dls/Link/Link';
 import DataContext from 'src/contexts/DataContext';
 import { SCROLL_TO_NEAREST_ELEMENT, useScrollToElement } from 'src/hooks/useScrollToElement';
 import { selectLastReadVerseKey } from 'src/redux/slices/QuranReader/readingTracker';

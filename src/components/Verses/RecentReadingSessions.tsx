@@ -8,7 +8,7 @@ import Link from '../dls/Link/Link';
 
 import styles from './RecentReadingSessions.module.scss';
 
-import SurahPreview, { SurahPreviewDisplay } from 'src/components/dls/SurahPreview/SurahPreview';
+import SurahPreview, { SurahPreviewDisplay } from '@/dls/SurahPreview/SurahPreview';
 import DataContext from 'src/contexts/DataContext';
 import { selectRecentReadingSessions } from 'src/redux/slices/QuranReader/readingTracker';
 import { privateFetcher } from 'src/utils/auth/api';

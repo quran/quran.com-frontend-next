@@ -2,7 +2,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from './Footer.module.scss';
 
-import Link, { LinkVariant } from 'src/components/dls/Link/Link';
+import Link, { LinkVariant } from '@/dls/Link/Link';
 import useGetChaptersData from 'src/hooks/useGetChaptersData';
 import { logTarteelLinkClick } from 'src/utils/eventLogger';
 

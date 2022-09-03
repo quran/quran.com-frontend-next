@@ -5,8 +5,8 @@ import useTranslation from 'next-translate/useTranslation';
 import SearchResultItem, { Source } from './SearchResultItem';
 import styles from './SearchResults.module.scss';
 
-import Link from 'src/components/dls/Link/Link';
-import Pagination from 'src/components/dls/Pagination/Pagination';
+import Link from '@/dls/Link/Link';
+import Pagination from '@/dls/Pagination/Pagination';
 import NavigationItem from 'src/components/Search/NavigationItem';
 import { logButtonClick } from 'src/utils/eventLogger';
 import { toLocalizedNumber } from 'src/utils/locale';

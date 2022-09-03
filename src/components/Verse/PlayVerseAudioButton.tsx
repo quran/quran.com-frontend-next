@@ -7,14 +7,9 @@ import useTranslation from 'next-translate/useTranslation';
 import Spinner from '../dls/Spinner/Spinner';
 import styles from '../QuranReader/TranslationView/TranslationViewCell.module.scss';
 
+import Button, { ButtonShape, ButtonSize, ButtonType, ButtonVariant } from '@/dls/Button/Button';
 import PauseIcon from '@/icons/pause-outline.svg';
 import PlayIcon from '@/icons/play-outline.svg';
-import Button, {
-  ButtonShape,
-  ButtonSize,
-  ButtonType,
-  ButtonVariant,
-} from 'src/components/dls/Button/Button';
 import DataContext from 'src/contexts/DataContext';
 import { getChapterData } from 'src/utils/chapter';
 import { logButtonClick } from 'src/utils/eventLogger';

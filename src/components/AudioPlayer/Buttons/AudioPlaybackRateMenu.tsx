@@ -5,8 +5,8 @@ import useTranslation from 'next-translate/useTranslation';
 
 import CheckIcon from '@/icons/check.svg';
 import ChevronLeftIcon from '@/icons/chevron-left.svg';
-import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
-import Spinner from 'src/components/dls/Spinner/Spinner';
+import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
+import Spinner from '@/dls/Spinner/Spinner';
 import { playbackRates } from 'src/components/Navbar/SettingsDrawer/AudioSection';
 import usePersistPreferenceGroup from 'src/hooks/auth/usePersistPreferenceGroup';
 import { logButtonClick, logValueChange } from 'src/utils/eventLogger';

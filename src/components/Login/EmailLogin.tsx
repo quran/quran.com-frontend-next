@@ -7,7 +7,7 @@ import styles from './login.module.scss';
 
 import MailIcon from '@/icons/mail.svg';
 import ArrowLeft from '@/icons/west.svg';
-import Button, { ButtonType, ButtonVariant } from 'src/components/dls/Button/Button';
+import Button, { ButtonType, ButtonVariant } from '@/dls/Button/Button';
 import { makeSendMagicLinkUrl } from 'src/utils/auth/apiPaths';
 import { EMAIL_VALIDATION_REGEX } from 'src/utils/validation';
 import ErrorMessageId from 'types/ErrorMessageId';

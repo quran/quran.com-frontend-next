@@ -2,7 +2,7 @@ import React from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
-import Spinner from 'src/components/dls/Spinner/Spinner';
+import Spinner from '@/dls/Spinner/Spinner';
 import styles from 'src/components/QuranReader/ReadingPreferenceSwitcher/ReadingPreference.module.scss';
 import { ReadingPreference } from 'types/QuranReader';
 

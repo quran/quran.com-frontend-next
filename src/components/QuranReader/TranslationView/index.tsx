@@ -11,7 +11,7 @@ import QueryParamMessage from '../QueryParamMessage';
 import useScrollToVirtualizedVerse from './hooks/useScrollToVirtualizedVerse';
 import TranslationPage from './TranslationPage';
 
-import Spinner from 'src/components/dls/Spinner/Spinner';
+import Spinner from '@/dls/Spinner/Spinner';
 import { getNumberOfPages } from 'src/components/QuranReader/utils/page';
 import useGetQueryParamOrReduxValue from 'src/hooks/useGetQueryParamOrReduxValue';
 import useGetQueryParamOrXstateValue from 'src/hooks/useGetQueryParamOrXstateValue';

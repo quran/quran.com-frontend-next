@@ -3,7 +3,7 @@ import { useCallback, useEffect } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 
-import { ToastStatus, useToast } from 'src/components/dls/Toast/Toast';
+import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import LoginContainer from 'src/components/Login/LoginContainer';
 import AuthError from 'types/AuthError';
 

@@ -6,7 +6,7 @@ import styles from './Counter.module.scss';
 
 import MinusIcon from '@/icons/minus.svg';
 import PlusIcon from '@/icons/plus.svg';
-import Button, { ButtonShape, ButtonVariant } from 'src/components/dls/Button/Button';
+import Button, { ButtonShape, ButtonVariant } from '@/dls/Button/Button';
 import { toLocalizedNumber } from 'src/utils/locale';
 
 type CounterProps = {

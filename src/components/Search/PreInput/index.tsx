@@ -8,7 +8,7 @@ import SearchItem from './SearchItem';
 import SearchQuerySuggestion from './SearchQuerySuggestion';
 
 import TrendUpIcon from '@/icons/trend-up.svg';
-import Link from 'src/components/dls/Link/Link';
+import Link from '@/dls/Link/Link';
 import SearchHistory from 'src/components/Search/SearchHistory';
 import useGetChaptersData from 'src/hooks/useGetChaptersData';
 import { getChapterData } from 'src/utils/chapter';

@@ -9,8 +9,8 @@ import styles from './TranslationsButton.module.scss';
 
 import TranslationsIcon from '@/icons/translation.svg';
 import DataFetcher from 'src/components/DataFetcher';
-import Button, { ButtonShape, ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
-import ContentModalHandles from 'src/components/dls/ContentModal/types/ContentModalHandles';
+import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
+import ContentModalHandles from '@/dls/ContentModal/types/ContentModalHandles';
 import TranslationsView from 'src/components/QuranReader/ReadingView/TranslationsView';
 import TranslationViewCellSkeleton from 'src/components/QuranReader/TranslationView/TranslatioViewCellSkeleton';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
@@ -21,7 +21,7 @@ import { logButtonClick, logEvent } from 'src/utils/eventLogger';
 import { VerseResponse } from 'types/ApiResponses';
 import Verse from 'types/Verse';
 
-const ContentModal = dynamic(() => import('src/components/dls/ContentModal/ContentModal'), {
+const ContentModal = dynamic(() => import('@/dls/ContentModal/ContentModal'), {
   ssr: false,
 });
 

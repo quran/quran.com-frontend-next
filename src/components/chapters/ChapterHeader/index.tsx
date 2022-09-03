@@ -9,8 +9,8 @@ import InfoIcon from '@/icons/info.svg';
 import ChapterIconContainer, {
   ChapterIconsSize,
 } from 'src/components/chapters/ChapterIcon/ChapterIconContainer';
-import Bismillah from 'src/components/dls/Bismillah/Bismillah';
-import Button, { ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
+import Bismillah from '@/dls/Bismillah/Bismillah';
+import Button, { ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import { QURAN_READER_OBSERVER_ID } from 'src/components/QuranReader/observer';
 import PlayChapterAudioButton from 'src/components/QuranReader/PlayChapterAudioButton';
 import useIntersectionObserver from 'src/hooks/useObserveElement';

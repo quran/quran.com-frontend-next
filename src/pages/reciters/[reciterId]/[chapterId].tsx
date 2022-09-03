@@ -12,6 +12,9 @@ import layoutStyle from '../../index.module.scss';
 
 import styles from './chapterId.module.scss';
 
+import Button, { ButtonType } from '@/dls/Button/Button';
+import Spinner from '@/dls/Spinner/Spinner';
+import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import CopyIcon from '@/icons/copy.svg';
 import DownloadIcon from '@/icons/download.svg';
 import PauseIcon from '@/icons/pause.svg';
@@ -19,9 +22,6 @@ import PlayIcon from '@/icons/play-arrow.svg';
 import ReaderIcon from '@/icons/reader.svg';
 import { getChapterAudioData, getChapterIdBySlug, getReciterData } from 'src/api';
 import { download } from 'src/components/AudioPlayer/Buttons/DownloadAudioButton';
-import Button, { ButtonType } from 'src/components/dls/Button/Button';
-import Spinner from 'src/components/dls/Spinner/Spinner';
-import { ToastStatus, useToast } from 'src/components/dls/Toast/Toast';
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import DataContext from 'src/contexts/DataContext';
 import { makeCDNUrl } from 'src/utils/cdn';

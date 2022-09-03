@@ -6,7 +6,7 @@ import styles from './login.module.scss';
 import AppleIcon from '@/icons/apple.svg';
 import FacebookIcon from '@/icons/facebook.svg';
 import GoogleIcon from '@/icons/google.svg';
-import Button from 'src/components/dls/Button/Button';
+import Button from '@/dls/Button/Button';
 import {
   makeGoogleLoginUrl,
   makeFacebookLoginUrl,

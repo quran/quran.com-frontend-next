@@ -14,13 +14,13 @@ import TafsirVerseAction from '../QuranReader/TafsirView/TafsirVerseAction';
 import VerseActionAdvancedCopy from './VerseActionAdvancedCopy';
 import VerseActionRepeatAudio from './VerseActionRepeatAudio';
 
+import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
+import Spinner from '@/dls/Spinner/Spinner';
+import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import BookmarkedIcon from '@/icons/bookmark.svg';
 import CopyIcon from '@/icons/copy.svg';
 import LinkIcon from '@/icons/east.svg';
 import UnBookmarkedIcon from '@/icons/unbookmarked.svg';
-import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
-import Spinner from 'src/components/dls/Spinner/Spinner';
-import { ToastStatus, useToast } from 'src/components/dls/Toast/Toast';
 import WordByWordVerseAction from 'src/components/QuranReader/ReadingView/WordByWordVerseAction';
 import { selectBookmarks, toggleVerseBookmark } from 'src/redux/slices/QuranReader/bookmarks';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';

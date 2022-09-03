@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 
 import styles from './changelog.module.scss';
 
-import Spinner from 'src/components/dls/Spinner/Spinner';
+import Spinner from '@/dls/Spinner/Spinner';
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import LocalizationMessage from 'src/components/Notion/LocalizationMessage';
 import NotionPage from 'src/components/Notion/Page';

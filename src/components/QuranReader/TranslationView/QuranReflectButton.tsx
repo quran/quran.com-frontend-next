@@ -7,8 +7,8 @@ import { useRouter } from 'next/router';
 import styles from './TranslationViewCell.module.scss';
 
 import ChatIcon from '@/icons/chat.svg';
-import Button, { ButtonShape, ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
-import ContentModal from 'src/components/dls/ContentModal/ContentModal';
+import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
+import ContentModal from '@/dls/ContentModal/ContentModal';
 import ReflectionBodyContainer from 'src/components/QuranReader/ReflectionView/ReflectionBodyContainer';
 // import { logButtonClick } from 'src/utils/eventLogger';
 import {

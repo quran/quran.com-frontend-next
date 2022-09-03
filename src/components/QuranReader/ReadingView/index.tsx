@@ -16,7 +16,7 @@ import PageNavigationButtons from './PageNavigationButtons';
 import styles from './ReadingView.module.scss';
 import ReadingViewSkeleton from './ReadingViewSkeleton';
 
-import Spinner from 'src/components/dls/Spinner/Spinner';
+import Spinner from '@/dls/Spinner/Spinner';
 import useFetchPagesLookup from 'src/components/QuranReader/hooks/useFetchPagesLookup';
 import onCopyQuranWords from 'src/components/QuranReader/onCopyQuranWords';
 import QueryParamMessage from 'src/components/QuranReader/QueryParamMessage';

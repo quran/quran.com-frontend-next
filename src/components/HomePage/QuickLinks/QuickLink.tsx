@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Button, { ButtonShape, ButtonSize, ButtonType } from 'src/components/dls/Button/Button';
+import Button, { ButtonShape, ButtonSize, ButtonType } from '@/dls/Button/Button';
 import { logButtonClick } from 'src/utils/eventLogger';
 
 interface Props {

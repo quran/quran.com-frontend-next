@@ -8,7 +8,7 @@ import dynamic from 'next/dynamic';
 
 import styles from './AudioPlayer.module.scss';
 
-import Spinner from 'src/components/dls/Spinner/Spinner';
+import Spinner from '@/dls/Spinner/Spinner';
 import { logEvent } from 'src/utils/eventLogger';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 

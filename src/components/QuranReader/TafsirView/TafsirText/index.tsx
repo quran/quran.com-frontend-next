@@ -6,8 +6,8 @@ import { useSelector } from 'react-redux';
 
 import styles from './TafsirText.module.scss';
 
-import Counter from 'src/components/dls/Counter/Counter';
-import SpinnerContainer from 'src/components/dls/Spinner/SpinnerContainer';
+import Counter from '@/dls/Counter/Counter';
+import SpinnerContainer from '@/dls/Spinner/SpinnerContainer';
 import usePersistPreferenceGroup from 'src/hooks/auth/usePersistPreferenceGroup';
 import {
   MAXIMUM_TAFSIR_FONT_STEP,

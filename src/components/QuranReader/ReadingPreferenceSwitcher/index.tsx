@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import LoadingSwitcher from './ReadingPreferenceOption';
 import styles from './ReadingPreferenceSwitcher.module.scss';
 
-import Switch from 'src/components/dls/Switch/Switch';
+import Switch from '@/dls/Switch/Switch';
 import usePersistPreferenceGroup from 'src/hooks/auth/usePersistPreferenceGroup';
 import {
   selectReadingPreferences,

@@ -9,7 +9,7 @@ import styles from './PlayButton.module.scss';
 
 import PauseIcon from '@/icons/pause.svg';
 import PlayIcon from '@/icons/play-arrow.svg';
-import Button, { ButtonSize, ButtonType, ButtonVariant } from 'src/components/dls/Button/Button';
+import Button, { ButtonSize, ButtonType, ButtonVariant } from '@/dls/Button/Button';
 import DataContext from 'src/contexts/DataContext';
 import { getChapterData } from 'src/utils/chapter';
 import { logButtonClick } from 'src/utils/eventLogger';

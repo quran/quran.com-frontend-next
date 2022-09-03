@@ -8,10 +8,10 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import useSWRImmutable from 'swr/immutable';
 
+import Footer from '@/dls/Footer/Footer';
+import ToastContainerProvider from '@/dls/Toast/ToastProvider';
 import AudioPlayer from 'src/components/AudioPlayer/AudioPlayer';
 import DeveloperUtility from 'src/components/DeveloperUtility/DeveloperUtility';
-import Footer from 'src/components/dls/Footer/Footer';
-import ToastContainerProvider from 'src/components/dls/Toast/ToastProvider';
 import DonatePopup from 'src/components/DonatePopup/DonatePopup';
 import FontPreLoader from 'src/components/Fonts/FontPreLoader';
 import GlobalListeners from 'src/components/GlobalListeners';

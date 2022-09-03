@@ -4,8 +4,8 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from './ReflectionBody.module.scss';
 
-import Button from 'src/components/dls/Button/Button';
-import Separator from 'src/components/dls/Separator/Separator';
+import Button from '@/dls/Button/Button';
+import Separator from '@/dls/Separator/Separator';
 import ReflectionDisclaimerMessage from 'src/components/QuranReader/ReflectionView/ReflectionDisclaimerMessage';
 import ReflectionItem, {
   VerseReference,

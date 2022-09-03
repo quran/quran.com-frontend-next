@@ -6,7 +6,7 @@ import ReadingViewWordActionsMenu from '../WordActionsMenu';
 
 import styles from './WordPopover.module.scss';
 
-import Popover, { ContentSide } from 'src/components/dls/Popover';
+import Popover, { ContentSide } from '@/dls/Popover';
 import useLongPress from 'src/hooks/useLongPress';
 import {
   setReadingViewSelectedVerseKey,

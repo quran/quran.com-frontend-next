@@ -5,8 +5,8 @@ import { useSelector, shallowEqual } from 'react-redux';
 import cellStyles from './TranslationViewCell.module.scss';
 import skeletonStyles from './TranslationViewSkeleton.module.scss';
 
-import Button, { ButtonSize } from 'src/components/dls/Button/Button';
-import Skeleton from 'src/components/dls/Skeleton/Skeleton';
+import Button, { ButtonSize } from '@/dls/Button/Button';
+import Skeleton from '@/dls/Skeleton/Skeleton';
 import verseTextStyles from 'src/components/Verse/VerseText.module.scss';
 import useGetQueryParamOrReduxValue from 'src/hooks/useGetQueryParamOrReduxValue';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';

@@ -20,7 +20,7 @@ import styles from './TafsirView.module.scss';
 
 import { fetcher } from 'src/api';
 import DataFetcher from 'src/components/DataFetcher';
-import Separator from 'src/components/dls/Separator/Separator';
+import Separator from '@/dls/Separator/Separator';
 import DataContext from 'src/contexts/DataContext';
 import usePersistPreferenceGroup from 'src/hooks/auth/usePersistPreferenceGroup';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';

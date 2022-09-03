@@ -7,11 +7,11 @@ import { shallowEqual, useSelector } from 'react-redux';
 import Section from './Section';
 import styles from './ThemeSection.module.scss';
 
+import Switch, { SwitchSize } from '@/dls/Switch/Switch';
 import AutoIcon from '@/icons/auto.svg';
 import MoonIcon from '@/icons/moon-outline.svg';
 import SunIcon from '@/icons/sun-outline.svg';
 import SunsetIcon from '@/icons/sunset.svg';
-import Switch, { SwitchSize } from 'src/components/dls/Switch/Switch';
 import usePersistPreferenceGroup from 'src/hooks/auth/usePersistPreferenceGroup';
 import { selectTheme, setTheme } from 'src/redux/slices/theme';
 import ThemeType from 'src/redux/types/ThemeType';

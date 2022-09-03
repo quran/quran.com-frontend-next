@@ -4,7 +4,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from './VerseLink.module.scss';
 
-import Button, { ButtonShape, ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
+import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import { logButtonClick } from 'src/utils/eventLogger';
 import { toLocalizedVerseKey } from 'src/utils/locale';
 import { getChapterWithStartingVerseUrl } from 'src/utils/navigation';

@@ -4,7 +4,7 @@ import styles from './CollectionDetail.module.scss';
 
 import ChevronDownIcon from '@/icons/chevron-down.svg';
 import OverflowMenuIcon from '@/icons/menu_more_horiz.svg';
-import Collapsible from 'src/components/dls/Collapsible/Collapsible';
+import Collapsible from '@/dls/Collapsible/Collapsible';
 
 type CollectionItem = {
   id: string | number;

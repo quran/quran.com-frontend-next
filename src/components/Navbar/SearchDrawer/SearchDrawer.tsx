@@ -6,8 +6,8 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import SearchDrawerHeader from './Header';
 
+import Spinner from '@/dls/Spinner/Spinner';
 import { getSearchResults } from 'src/api';
-import Spinner from 'src/components/dls/Spinner/Spinner';
 import Drawer, { DrawerType } from 'src/components/Navbar/Drawer';
 import useDebounce from 'src/hooks/useDebounce';
 import useFocus from 'src/hooks/useFocusElement';

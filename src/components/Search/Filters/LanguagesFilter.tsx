@@ -4,7 +4,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from './Filter.module.scss';
 
-import Combobox from 'src/components/dls/Forms/Combobox';
+import Combobox from '@/dls/Forms/Combobox';
 import AvailableLanguage from 'types/AvailableLanguage';
 
 interface Props {

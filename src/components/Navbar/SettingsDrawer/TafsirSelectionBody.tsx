@@ -7,9 +7,9 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import styles from './SearchSelectionBody.module.scss';
 
+import Input from '@/dls/Forms/Input';
 import IconSearch from '@/icons/search.svg';
 import DataFetcher from 'src/components/DataFetcher';
-import Input from 'src/components/dls/Forms/Input';
 import { selectSelectedTafsirs, setSelectedTafsirs } from 'src/redux/slices/QuranReader/tafsirs';
 import { makeTafsirsUrl } from 'src/utils/apiPaths';
 import { areArraysEqual } from 'src/utils/array';

@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 
 import styles from './SidebarNavigation.module.scss';
 
-import Link from 'src/components/dls/Link/Link';
+import Link from '@/dls/Link/Link';
 import { SCROLL_TO_NEAREST_ELEMENT, useScrollToElement } from 'src/hooks/useScrollToElement';
 import { selectIsVerseKeySelected } from 'src/redux/slices/QuranReader/readingTracker';
 import { toLocalizedNumber } from 'src/utils/locale';

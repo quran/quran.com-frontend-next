@@ -10,8 +10,8 @@ import useSWR from 'swr';
 import layoutStyle from './index.module.scss';
 import styles from './profile.module.scss';
 
-import Button from 'src/components/dls/Button/Button';
-import Skeleton from 'src/components/dls/Skeleton/Skeleton';
+import Button from '@/dls/Button/Button';
+import Skeleton from '@/dls/Skeleton/Skeleton';
 import DeleteAccountButton from 'src/components/Profile/DeleteAccountButton';
 import BookmarksSection from 'src/components/Verses/BookmarksSection';
 import RecentReadingSessions from 'src/components/Verses/RecentReadingSessions';

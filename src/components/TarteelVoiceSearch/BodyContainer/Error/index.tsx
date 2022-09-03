@@ -7,7 +7,7 @@ import styles from './Error.module.scss';
 import ErrorIcon from '@/icons/info.svg';
 import MicrophoneIcon from '@/icons/microphone.svg';
 import NoMicrophoneIcon from '@/icons/no-mic.svg';
-import Link, { LinkVariant } from 'src/components/dls/Link/Link';
+import Link, { LinkVariant } from '@/dls/Link/Link';
 import { logTarteelLinkClick } from 'src/utils/eventLogger';
 import VoiceError from 'types/Tarteel/VoiceError';
 

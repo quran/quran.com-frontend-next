@@ -7,8 +7,8 @@ import SurahAudioMismatchModal from '../SurahAudioMismatchModal';
 
 import PauseIcon from '@/icons/pause.svg';
 import PlayIcon from '@/icons/play-arrow.svg';
-import Button, { ButtonShape, ButtonVariant } from 'src/components/dls/Button/Button';
-import Spinner, { SpinnerSize } from 'src/components/dls/Spinner/Spinner';
+import Button, { ButtonShape, ButtonVariant } from '@/dls/Button/Button';
+import Spinner, { SpinnerSize } from '@/dls/Spinner/Spinner';
 import DataContext from 'src/contexts/DataContext';
 import useChapterIdsByUrlPath from 'src/hooks/useChapterId';
 import { getChapterData } from 'src/utils/chapter';

@@ -9,9 +9,9 @@ import styles from './SidebarNavigation.module.scss';
 import SidebarNavigationSelections from './SidebarNavigationSelections';
 
 import IconClose from '@/icons/close.svg';
-import Button, { ButtonShape, ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
-import KeyboardInput from 'src/components/dls/KeyboardInput';
-import Switch from 'src/components/dls/Switch/Switch';
+import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
+import KeyboardInput from '@/dls/KeyboardInput';
+import Switch from '@/dls/Switch/Switch';
 import useOutsideClickDetector from 'src/hooks/useOutsideClickDetector';
 import { selectContextMenu } from 'src/redux/slices/QuranReader/contextMenu';
 import {

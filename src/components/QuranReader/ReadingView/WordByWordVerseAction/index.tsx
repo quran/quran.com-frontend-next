@@ -7,14 +7,14 @@ import WordByWordHeading from './WordByWordHeading';
 import styles from './WordByWordVerseAction.module.scss';
 
 import SearchIcon from '@/icons/search-book.svg';
-import ContentModalHandles from 'src/components/dls/ContentModal/types/ContentModalHandles';
-import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
-import Separator from 'src/components/dls/Separator/Separator';
+import ContentModalHandles from '@/dls/ContentModal/types/ContentModalHandles';
+import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
+import Separator from '@/dls/Separator/Separator';
 import PlainVerseText from 'src/components/Verse/PlainVerseText';
 import { logButtonClick, logEvent } from 'src/utils/eventLogger';
 import Verse from 'types/Verse';
 
-const ContentModal = dynamic(() => import('src/components/dls/ContentModal/ContentModal'), {
+const ContentModal = dynamic(() => import('@/dls/ContentModal/ContentModal'), {
   ssr: false,
 });
 

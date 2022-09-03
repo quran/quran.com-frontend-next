@@ -2,10 +2,10 @@ import classNames from 'classnames';
 
 import styles from './TafsirView.module.scss';
 
-import Button, { ButtonSize } from 'src/components/dls/Button/Button';
-import Select, { SelectSize } from 'src/components/dls/Forms/Select';
-import Skeleton from 'src/components/dls/Skeleton/Skeleton';
-import SpinnerContainer from 'src/components/dls/Spinner/SpinnerContainer';
+import Button, { ButtonSize } from '@/dls/Button/Button';
+import Select, { SelectSize } from '@/dls/Forms/Select';
+import Skeleton from '@/dls/Skeleton/Skeleton';
+import SpinnerContainer from '@/dls/Spinner/SpinnerContainer';
 import { getLocaleNameByFullName } from 'src/utils/locale';
 import { TafsirsResponse } from 'types/ApiResponses';
 

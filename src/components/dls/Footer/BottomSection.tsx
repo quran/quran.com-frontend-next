@@ -7,7 +7,7 @@ import { PopoverMenuExpandDirection } from '../PopoverMenu/PopoverMenu';
 import styles from './Footer.module.scss';
 import FooterThemeSwitcher from './FooterThemeSwitcher';
 
-import Link, { LinkVariant } from 'src/components/dls/Link/Link';
+import Link, { LinkVariant } from '@/dls/Link/Link';
 import LanguageSelector from 'src/components/Navbar/LanguageSelector';
 import { toLocalizedDate } from 'src/utils/locale';
 

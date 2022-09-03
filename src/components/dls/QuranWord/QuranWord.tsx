@@ -12,7 +12,7 @@ import styles from './QuranWord.module.scss';
 import TajweedWord from './TajweedWordImage';
 import TextWord from './TextWord';
 
-import MobilePopover from 'src/components/dls/Popover/HoverablePopover';
+import MobilePopover from '@/dls/Popover/HoverablePopover';
 import ReadingViewWordPopover from 'src/components/QuranReader/ReadingView/WordPopover';
 import Wrapper from 'src/components/Wrapper/Wrapper';
 import { selectShowTooltipWhenPlayingAudio } from 'src/redux/slices/AudioPlayer/state';

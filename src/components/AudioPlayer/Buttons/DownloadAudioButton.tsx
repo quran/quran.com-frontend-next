@@ -5,8 +5,8 @@ import useTranslation from 'next-translate/useTranslation';
 import { useDispatch, useSelector } from 'react-redux';
 
 import DownloadIcon from '@/icons/download.svg';
-import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
-import Spinner, { SpinnerSize } from 'src/components/dls/Spinner/Spinner';
+import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
+import Spinner, { SpinnerSize } from '@/dls/Spinner/Spinner';
 import {
   selectIsDownloadingAudio,
   setIsDownloadingAudio,

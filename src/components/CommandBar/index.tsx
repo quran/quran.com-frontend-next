@@ -8,7 +8,7 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import styles from './CommandBar.module.scss';
 import CommandBarBase from './CommandBarBase/CommandBarBase';
 
-import Spinner from 'src/components/dls/Spinner/Spinner';
+import Spinner from '@/dls/Spinner/Spinner';
 import { selectCommandBarIsOpen, setIsOpen, toggleIsOpen } from 'src/redux/slices/CommandBar/state';
 import { stopCommandBarVoiceFlow } from 'src/redux/slices/voiceSearch';
 import { logEvent } from 'src/utils/eventLogger';

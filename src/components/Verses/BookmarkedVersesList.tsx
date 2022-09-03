@@ -6,7 +6,7 @@ import useSWRImmutable from 'swr/immutable';
 
 import styles from './BookmarkedVersesList.module.scss';
 
-import Button, { ButtonShape, ButtonType } from 'src/components/dls/Button/Button';
+import Button, { ButtonShape, ButtonType } from '@/dls/Button/Button';
 import DataContext from 'src/contexts/DataContext';
 import { selectBookmarks } from 'src/redux/slices/QuranReader/bookmarks';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';

@@ -8,8 +8,8 @@ import styles from './RepeatAudioModal.module.scss';
 import RepeatSetting from './RepeatSetting';
 import SelectRepetitionMode, { RepetitionMode } from './SelectRepetitionMode';
 
-import Modal from 'src/components/dls/Modal/Modal';
-import Separator from 'src/components/dls/Separator/Separator';
+import Modal from '@/dls/Modal/Modal';
+import Separator from '@/dls/Separator/Separator';
 import { RangeVerseItem } from 'src/components/Verse/AdvancedCopy/SelectorContainer';
 import usePersistPreferenceGroup from 'src/hooks/auth/usePersistPreferenceGroup';
 import useGetChaptersData from 'src/hooks/useGetChaptersData';

@@ -6,7 +6,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from './contentPage.module.scss';
 
-import Link, { LinkVariant } from 'src/components/dls/Link/Link';
+import Link, { LinkVariant } from '@/dls/Link/Link';
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import PageContainer from 'src/components/PageContainer';
 import { getLanguageAlternates } from 'src/utils/locale';

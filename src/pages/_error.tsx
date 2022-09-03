@@ -4,8 +4,8 @@ import { useRouter } from 'next/router';
 
 import styles from './_error.module.scss';
 
-import Button from 'src/components/dls/Button/Button';
-import Link, { LinkVariant } from 'src/components/dls/Link/Link';
+import Button from '@/dls/Button/Button';
+import Link, { LinkVariant } from '@/dls/Link/Link';
 
 // reference: https://nextjs.org/docs/advanced-features/custom-error-page#more-advanced-error-page-customizing
 type ErrorProps = {

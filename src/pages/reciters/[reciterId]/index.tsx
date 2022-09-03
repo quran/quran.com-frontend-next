@@ -8,9 +8,9 @@ import useTranslation from 'next-translate/useTranslation';
 import layoutStyle from '../../index.module.scss';
 import pageStyle from '../reciterPage.module.scss';
 
+import Input from '@/dls/Forms/Input';
 import SearchIcon from '@/icons/search.svg';
 import { getReciterData } from 'src/api';
-import Input from 'src/components/dls/Forms/Input';
 import NextSeoWrapper from 'src/components/NextSeoWrapper';
 import ChaptersList from 'src/components/Reciter/ChaptersList';
 import ReciterInfo from 'src/components/Reciter/ReciterInfo';

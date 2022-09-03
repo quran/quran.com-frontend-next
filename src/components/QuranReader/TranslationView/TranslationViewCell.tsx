@@ -11,7 +11,7 @@ import ShareVerseButton from './ShareVerseButton';
 import TranslationText from './TranslationText';
 import styles from './TranslationViewCell.module.scss';
 
-import Separator from 'src/components/dls/Separator/Separator';
+import Separator from '@/dls/Separator/Separator';
 import {
   verseFontChanged,
   verseTranslationChanged,

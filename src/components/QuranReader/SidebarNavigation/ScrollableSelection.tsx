@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 
 import styles from './SidebarNavigation.module.scss';
 
-import Link from 'src/components/dls/Link/Link';
+import Link from '@/dls/Link/Link';
 import { SCROLL_TO_NEAREST_ELEMENT, useScrollToElement } from 'src/hooks/useScrollToElement';
 import { logEmptySearchResults } from 'src/utils/eventLogger';
 

@@ -7,11 +7,11 @@ import { useRouter } from 'next/router';
 
 import styles from './ReciterSelectionBody.module.scss';
 
+import Input from '@/dls/Forms/Input';
+import RadioGroup, { RadioGroupOrientation } from '@/dls/Forms/RadioGroup/RadioGroup';
+import SpinnerContainer from '@/dls/Spinner/SpinnerContainer';
 import IconSearch from '@/icons/search.svg';
 import DataFetcher from 'src/components/DataFetcher';
-import Input from 'src/components/dls/Forms/Input';
-import RadioGroup, { RadioGroupOrientation } from 'src/components/dls/Forms/RadioGroup/RadioGroup';
-import SpinnerContainer from 'src/components/dls/Spinner/SpinnerContainer';
 import usePersistPreferenceGroup from 'src/hooks/auth/usePersistPreferenceGroup';
 import { makeAvailableRecitersUrl } from 'src/utils/apiPaths';
 import { logEmptySearchResults, logItemSelectionChange } from 'src/utils/eventLogger';
