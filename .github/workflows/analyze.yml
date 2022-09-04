@@ -4,9 +4,6 @@ name: Analyze Bundle Size
 on:
   pull_request:
     types: [opened, synchronize, reopened]
-    
-  # Allows you to run this workflow manually from the Actions tab
-  workflow_dispatch:
 
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
@@ -48,6 +45,7 @@ jobs:
           name: bundle
           path: |
             .next/analyze/client.html
+            .next/server/analyze/server.html
     
       # A bit of find & replace on our output text for displaying properly. Save this to an Action variable.
       - name: Get comment body
