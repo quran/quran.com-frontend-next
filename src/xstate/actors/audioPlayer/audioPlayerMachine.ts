@@ -23,8 +23,8 @@ import {
 import AudioPlayerContext from './types/AudioPlayerContext';
 import AudioPlayerEventType from './types/AudioPlayerEventType';
 
-import { StationType } from 'src/components/Radio/types';
-import { milliSecondsToSeconds, secondsToMilliSeconds } from 'src/utils/datetime';
+import { StationType } from '@/components/Radio/types';
+import { milliSecondsToSeconds, secondsToMilliSeconds } from '@/utils/datetime';
 import AudioData from 'types/AudioData';
 
 /**
@@ -978,12 +978,13 @@ export const audioPlayerMachine =
         ]),
         // @ts-ignore
         repeatPreviousAyah: pure((context) => {
-          if (context.repeatActor)
+          if (context.repeatActor) {
             return [
               send({ type: 'REPEAT_PREV_AYAH' }, { to: context.repeatActor.id }),
               'decrementAyah',
               'setAudioPlayerCurrentTime',
             ];
+          }
           return [];
         }),
         updateRepeatVerseTimings: pure((context) => {
@@ -1002,8 +1003,9 @@ export const audioPlayerMachine =
           return actions;
         }),
         nextAudioTrack: pure((context) => {
-          if (context.radioActor)
+          if (context.radioActor) {
             return send({ type: 'TRACK_ENDED' }, { to: context.radioActor.id });
+          }
           return [];
         }),
         seekTo: pure((context, event) => {

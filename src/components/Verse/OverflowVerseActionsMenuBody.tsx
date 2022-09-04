@@ -9,27 +9,27 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { useSWRConfig } from 'swr';
 import useSWRImmutable from 'swr/immutable';
 
-import BookmarkedIcon from '../../../public/icons/bookmark.svg';
-import CopyIcon from '../../../public/icons/copy.svg';
-import LinkIcon from '../../../public/icons/east.svg';
-import UnBookmarkedIcon from '../../../public/icons/unbookmarked.svg';
 import TafsirVerseAction from '../QuranReader/TafsirView/TafsirVerseAction';
 
 import VerseActionAdvancedCopy from './VerseActionAdvancedCopy';
 import VerseActionRepeatAudio from './VerseActionRepeatAudio';
 
-import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
-import Spinner from 'src/components/dls/Spinner/Spinner';
-import { ToastStatus, useToast } from 'src/components/dls/Toast/Toast';
-import WordByWordVerseAction from 'src/components/QuranReader/ReadingView/WordByWordVerseAction';
-import { selectBookmarks, toggleVerseBookmark } from 'src/redux/slices/QuranReader/bookmarks';
-import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
-import { getMushafId } from 'src/utils/api';
-import { addOrRemoveBookmark, getIsResourceBookmarked } from 'src/utils/auth/api';
-import { makeBookmarksUrl, makeIsResourceBookmarkedUrl } from 'src/utils/auth/apiPaths';
-import { isLoggedIn } from 'src/utils/auth/login';
-import { logButtonClick } from 'src/utils/eventLogger';
-import { getVerseUrl } from 'src/utils/verse';
+import WordByWordVerseAction from '@/components/QuranReader/ReadingView/WordByWordVerseAction';
+import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
+import Spinner from '@/dls/Spinner/Spinner';
+import { ToastStatus, useToast } from '@/dls/Toast/Toast';
+import BookmarkedIcon from '@/icons/bookmark.svg';
+import CopyIcon from '@/icons/copy.svg';
+import LinkIcon from '@/icons/east.svg';
+import UnBookmarkedIcon from '@/icons/unbookmarked.svg';
+import { selectBookmarks, toggleVerseBookmark } from '@/redux/slices/QuranReader/bookmarks';
+import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
+import { getMushafId } from '@/utils/api';
+import { addOrRemoveBookmark, getIsResourceBookmarked } from '@/utils/auth/api';
+import { makeBookmarksUrl, makeIsResourceBookmarkedUrl } from '@/utils/auth/apiPaths';
+import { isLoggedIn } from '@/utils/auth/login';
+import { logButtonClick } from '@/utils/eventLogger';
+import { getVerseUrl } from '@/utils/verse';
 import BookmarkType from 'types/BookmarkType';
 import Verse from 'types/Verse';
 

@@ -2,12 +2,11 @@ import React from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
-import RetryIcon from '../../../public/icons/retry.svg';
-
 import styles from './Error.module.scss';
 
+import Button, { ButtonSize, ButtonType } from '@/dls/Button/Button';
+import RetryIcon from '@/icons/retry.svg';
 import { OFFLINE_ERROR } from 'src/api';
-import Button, { ButtonSize, ButtonType } from 'src/components/dls/Button/Button';
 
 interface Props {
   onRetryClicked: () => void;

@@ -2,14 +2,14 @@
 /* eslint-disable react/no-multi-comp */
 import { useState, useMemo } from 'react';
 
-import LinkIcon from '../../../../public/icons/east.svg';
-import RepeatIcon from '../../../../public/icons/repeat.svg';
-import ShareIcon from '../../../../public/icons/share.svg';
-import TafsirIcon from '../../../../public/icons/tafsir.svg';
-import UnBookmarkedIcon from '../../../../public/icons/unbookmarked.svg';
-import BackIcon from '../../../../public/icons/west.svg';
-
 import PopoverMenu from './PopoverMenu';
+
+import LinkIcon from '@/icons/east.svg';
+import RepeatIcon from '@/icons/repeat.svg';
+import ShareIcon from '@/icons/share.svg';
+import TafsirIcon from '@/icons/tafsir.svg';
+import UnBookmarkedIcon from '@/icons/unbookmarked.svg';
+import BackIcon from '@/icons/west.svg';
 
 export default {
   title: 'dls/PopoverMenu',

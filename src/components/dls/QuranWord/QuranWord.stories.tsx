@@ -2,7 +2,7 @@ import { Provider } from 'react-redux';
 
 import QuranWord from './QuranWord';
 
-import getStore from 'src/redux/store';
+import getStore from '@/redux/store';
 import { mockWord } from 'tests/mocks/words';
 import { QuranFont } from 'types/QuranReader';
 // @ts-ignore

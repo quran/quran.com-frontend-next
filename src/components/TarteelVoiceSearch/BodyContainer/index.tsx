@@ -7,9 +7,9 @@ import PartialResult from './PartialResult';
 import SearchResults from './SearchResults';
 import styles from './VoiceSearchBodyContainer.module.scss';
 
-import Spinner, { SpinnerSize } from 'src/components/dls/Spinner/Spinner';
-import NoResults from 'src/components/Search/NoResults';
-import useTarteelVoiceSearch from 'src/hooks/useTarteelVoiceSearch';
+import NoResults from '@/components/Search/NoResults';
+import Spinner, { SpinnerSize } from '@/dls/Spinner/Spinner';
+import useTarteelVoiceSearch from '@/hooks/useTarteelVoiceSearch';
 
 interface Props {
   isCommandBar?: boolean;

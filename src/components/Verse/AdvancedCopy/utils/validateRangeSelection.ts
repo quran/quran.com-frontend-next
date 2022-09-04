@@ -1,4 +1,4 @@
-import { getVerseNumberFromKey } from 'src/utils/verse';
+import { getVerseNumberFromKey } from '@/utils/verse';
 
 /**
  * Validate the selected range start and end verse keys. The selection will be invalid in the following cases:

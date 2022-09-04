@@ -2,10 +2,11 @@ import React, { ReactNode, useState, useEffect, ChangeEvent } from 'react';
 
 import classNames from 'classnames';
 
-import ClearIcon from '../../../../../public/icons/close.svg';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '../../Button/Button';
 
 import styles from './Input.module.scss';
+
+import ClearIcon from '@/icons/close.svg';
 
 export enum InputSize {
   Small = 'small',

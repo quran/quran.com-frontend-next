@@ -6,7 +6,7 @@ import Button, { ButtonSize, ButtonType } from '../dls/Button/Button';
 
 import styles from './Banner.module.scss';
 
-import { selectIsBannerVisible } from 'src/redux/slices/banner';
+import { selectIsBannerVisible } from '@/redux/slices/banner';
 import { logEvent } from 'src/utils/eventLogger';
 
 type BannerProps = {

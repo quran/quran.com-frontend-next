@@ -7,27 +7,22 @@ import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 
-import IconSearch from '../../../../public/icons/search.svg';
-
 import styles from './SearchSelectionBody.module.scss';
 
-import DataFetcher from 'src/components/DataFetcher';
-import Checkbox from 'src/components/dls/Forms/Checkbox/Checkbox';
-import Input from 'src/components/dls/Forms/Input';
-import SpinnerContainer from 'src/components/dls/Spinner/SpinnerContainer';
-import usePersistPreferenceGroup from 'src/hooks/auth/usePersistPreferenceGroup';
+import DataFetcher from '@/components/DataFetcher';
+import Checkbox from '@/dls/Forms/Checkbox/Checkbox';
+import Input from '@/dls/Forms/Input';
+import SpinnerContainer from '@/dls/Spinner/SpinnerContainer';
+import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
+import IconSearch from '@/icons/search.svg';
 import {
   selectTranslations,
   setSelectedTranslations,
-} from 'src/redux/slices/QuranReader/translations';
-import { makeTranslationsUrl } from 'src/utils/apiPaths';
-import {
-  logValueChange,
-  logItemSelectionChange,
-  logEmptySearchResults,
-} from 'src/utils/eventLogger';
-import filterTranslations from 'src/utils/filter-translations';
-import { getLocaleName } from 'src/utils/locale';
+} from '@/redux/slices/QuranReader/translations';
+import { makeTranslationsUrl } from '@/utils/apiPaths';
+import { logValueChange, logItemSelectionChange, logEmptySearchResults } from '@/utils/eventLogger';
+import filterTranslations from '@/utils/filter-translations';
+import { getLocaleName } from '@/utils/locale';
 import { TranslationsResponse } from 'types/ApiResponses';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 import AvailableTranslation from 'types/AvailableTranslation';

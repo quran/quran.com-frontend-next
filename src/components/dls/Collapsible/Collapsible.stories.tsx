@@ -1,10 +1,11 @@
 /* eslint-disable react/no-multi-comp */
-import ChevronDownIcon from '../../../../public/icons/chevron-down.svg';
-import OverflowMenuIcon from '../../../../public/icons/menu_more_horiz.svg';
 import Button, { ButtonSize, ButtonVariant } from '../Button/Button';
 import PopoverMenu from '../PopoverMenu/PopoverMenu';
 
 import Collapsible from './Collapsible';
+
+import ChevronDownIcon from '@/icons/chevron-down.svg';
+import OverflowMenuIcon from '@/icons/menu_more_horiz.svg';
 
 export default {
   title: 'dls/Collapsible',

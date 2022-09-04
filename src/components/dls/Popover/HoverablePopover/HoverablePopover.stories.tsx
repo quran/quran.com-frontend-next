@@ -2,7 +2,7 @@ import React from 'react';
 
 import HoverablePopover from '.';
 
-import { ContentSide } from 'src/components/dls/Popover';
+import { ContentSide } from '@/dls/Popover';
 
 export default {
   title: 'dls/Popover/Hoverable',

@@ -1,12 +1,11 @@
 import useTranslation from 'next-translate/useTranslation';
 
-import TarteelLogo from '../../../public/icons/tarteel-logo.svg';
-import TarteelText from '../../../public/icons/tarteel-text.svg';
-
 import styles from './TarteelAttribution.module.scss';
 
-import Link from 'src/components/dls/Link/Link';
-import { logTarteelLinkClick } from 'src/utils/eventLogger';
+import Link from '@/dls/Link/Link';
+import TarteelLogo from '@/icons/tarteel-logo.svg';
+import TarteelText from '@/icons/tarteel-text.svg';
+import { logTarteelLinkClick } from '@/utils/eventLogger';
 
 interface Props {
   isCommandBar?: boolean;

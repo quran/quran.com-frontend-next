@@ -8,7 +8,7 @@ import Slide1 from './WelcomeMessageSlides/Slide1';
 import Slide2 from './WelcomeMessageSlides/Slide2';
 import Slide3 from './WelcomeMessageSlides/Slide3';
 
-import { logCarouselSlideCompletion } from 'src/utils/eventLogger';
+import { logCarouselSlideCompletion } from '@/utils/eventLogger';
 
 type WelcomeMessageModalBodyProps = {
   onCompleted: () => void;

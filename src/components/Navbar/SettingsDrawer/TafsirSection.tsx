@@ -6,23 +6,23 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import Section from './Section';
 import styles from './TafsirSection.module.scss';
 
-import DataFetcher from 'src/components/DataFetcher';
-import Counter from 'src/components/dls/Counter/Counter';
-import SelectionCard from 'src/components/dls/SelectionCard/SelectionCard';
-import Skeleton from 'src/components/dls/Skeleton/Skeleton';
-import { setSettingsView, SettingsView } from 'src/redux/slices/navbar';
+import DataFetcher from '@/components/DataFetcher';
+import Counter from '@/dls/Counter/Counter';
+import SelectionCard from '@/dls/SelectionCard/SelectionCard';
+import Skeleton from '@/dls/Skeleton/Skeleton';
+import { setSettingsView, SettingsView } from '@/redux/slices/navbar';
 import {
   MAXIMUM_TAFSIR_FONT_STEP,
   MINIMUM_FONT_STEP,
   selectQuranReaderStyles,
   increaseTafsirFontScale,
   decreaseTafsirFontScale,
-} from 'src/redux/slices/QuranReader/styles';
-import { selectSelectedTafsirs } from 'src/redux/slices/QuranReader/tafsirs';
-import { makeTafsirsUrl } from 'src/utils/apiPaths';
-import { areArraysEqual } from 'src/utils/array';
-import { logValueChange } from 'src/utils/eventLogger';
-import { toLocalizedNumber } from 'src/utils/locale';
+} from '@/redux/slices/QuranReader/styles';
+import { selectSelectedTafsirs } from '@/redux/slices/QuranReader/tafsirs';
+import { makeTafsirsUrl } from '@/utils/apiPaths';
+import { areArraysEqual } from '@/utils/array';
+import { logValueChange } from '@/utils/eventLogger';
+import { toLocalizedNumber } from '@/utils/locale';
 import { TafsirsResponse } from 'types/ApiResponses';
 
 const TafsirSection = () => {
@@ -61,16 +61,18 @@ const TafsirSection = () => {
 
       let selectedValueString = t('settings.no-tafsir-selected');
       if (selectedTafsirs.length === 1) selectedValueString = firstSelectedTafsir.name;
-      if (selectedTafsirs.length === 2)
+      if (selectedTafsirs.length === 2) {
         selectedValueString = t('settings.value-and-other', {
           value: firstSelectedTafsir.name,
           othersCount: localizedSelectedTafsirs,
         });
-      if (selectedTafsirs.length > 2)
+      }
+      if (selectedTafsirs.length > 2) {
         selectedValueString = t('settings.value-and-others', {
           value: firstSelectedTafsir.name,
           othersCount: localizedSelectedTafsirs,
         });
+      }
 
       return (
         <SelectionCard

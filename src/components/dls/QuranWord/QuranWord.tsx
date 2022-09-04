@@ -12,21 +12,21 @@ import styles from './QuranWord.module.scss';
 import TajweedWord from './TajweedWordImage';
 import TextWord from './TextWord';
 
-import MobilePopover from 'src/components/dls/Popover/HoverablePopover';
-import ReadingViewWordPopover from 'src/components/QuranReader/ReadingView/WordPopover';
-import Wrapper from 'src/components/Wrapper/Wrapper';
-import { selectShowTooltipWhenPlayingAudio } from 'src/redux/slices/AudioPlayer/state';
+import ReadingViewWordPopover from '@/components/QuranReader/ReadingView/WordPopover';
+import Wrapper from '@/components/Wrapper/Wrapper';
+import MobilePopover from '@/dls/Popover/HoverablePopover';
+import { selectShowTooltipWhenPlayingAudio } from '@/redux/slices/AudioPlayer/state';
 import {
   selectWordClickFunctionality,
   selectReadingPreference,
   selectShowTooltipFor,
   selectWordByWordPreferences,
-} from 'src/redux/slices/QuranReader/readingPreferences';
-import { areArraysEqual } from 'src/utils/array';
-import { milliSecondsToSeconds } from 'src/utils/datetime';
-import { logButtonClick } from 'src/utils/eventLogger';
-import { isQCFFont } from 'src/utils/fontFaceHelper';
-import { getChapterNumberFromKey, makeWordLocation } from 'src/utils/verse';
+} from '@/redux/slices/QuranReader/readingPreferences';
+import { areArraysEqual } from '@/utils/array';
+import { milliSecondsToSeconds } from '@/utils/datetime';
+import { logButtonClick } from '@/utils/eventLogger';
+import { isQCFFont } from '@/utils/fontFaceHelper';
+import { getChapterNumberFromKey, makeWordLocation } from '@/utils/verse';
 import { getWordTimeSegment } from 'src/xstate/actors/audioPlayer/audioPlayerMachineHelper';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import { ReadingPreference, QuranFont, WordClickFunctionality } from 'types/QuranReader';

@@ -13,6 +13,8 @@ import {
   makeTranslationsUrl,
   makeVersesUrl,
   makeJuzVersesUrl,
+  makeRubVersesUrl,
+  makeHizbVersesUrl,
   makeChapterInfoUrl,
   makePageVersesUrl,
   makeFootnoteUrl,
@@ -20,8 +22,7 @@ import {
   makeReciterUrl,
   makeTafsirContentUrl,
   makePagesLookupUrl,
-} from './utils/apiPaths';
-
+} from '@/utils/apiPaths';
 import { SearchRequest, AdvancedCopyRequest, PagesLookUpRequest } from 'types/ApiRequests';
 import {
   TranslationsResponse,
@@ -229,6 +230,36 @@ export const getJuzVerses = async (
   locale: string,
   params?: Record<string, unknown>,
 ): Promise<VersesResponse> => fetcher(makeJuzVersesUrl(id, locale, params));
+
+/**
+ * Get the verses of a specific Rub El Hizb.
+ *
+ * @param {string} id the ID of the Rub El Hizb.
+ * @param {string} locale  the locale.
+ * @param {string} params the params that we might need to include that differs from the default ones.
+ *
+ * @returns {Promise<VersesResponse>}
+ */
+export const getRubVerses = async (
+  id: string,
+  locale: string,
+  params?: Record<string, unknown>,
+): Promise<VersesResponse> => fetcher(makeRubVersesUrl(id, locale, params));
+
+/**
+ * Get the verses of a specific Hizb.
+ *
+ * @param {string} id the ID of the Hizb.
+ * @param {string} locale  the locale.
+ * @param {string} params the params that we might need to include that differs from the default ones.
+ *
+ * @returns {Promise<VersesResponse>}
+ */
+export const getHizbVerses = async (
+  id: string,
+  locale: string,
+  params?: Record<string, unknown>,
+): Promise<VersesResponse> => fetcher(makeHizbVersesUrl(id, locale, params));
 
 /**
  * Get the verses of a specific page.

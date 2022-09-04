@@ -5,15 +5,14 @@ import useTranslation from 'next-translate/useTranslation';
 import dynamic from 'next/dynamic';
 import { useDispatch, useSelector } from 'react-redux';
 
-import BackIcon from '../../../../public/icons/west.svg';
-
 import SettingsBodySkeleton from './SettingsBodySkeleton';
 import styles from './SettingsDrawer.module.scss';
 
-import Button, { ButtonVariant } from 'src/components/dls/Button/Button';
-import Drawer, { DrawerType } from 'src/components/Navbar/Drawer';
-import { selectNavbar, setSettingsView, SettingsView } from 'src/redux/slices/navbar';
-import { logValueChange } from 'src/utils/eventLogger';
+import Drawer, { DrawerType } from '@/components/Navbar/Drawer';
+import Button, { ButtonVariant } from '@/dls/Button/Button';
+import BackIcon from '@/icons/west.svg';
+import { selectNavbar, setSettingsView, SettingsView } from '@/redux/slices/navbar';
+import { logValueChange } from '@/utils/eventLogger';
 
 const SettingsBody = dynamic(() => import('./SettingsBody'), {
   ssr: false,
@@ -47,7 +46,7 @@ const SettingsDrawer = () => {
   };
   let header;
   if (settingsView === SettingsView.Body) header = <div>{t('settings.title')}</div>;
-  if (settingsView !== SettingsView.Body)
+  if (settingsView !== SettingsView.Body) {
     header = (
       <div className={styles.headerContainer}>
         <Button variant={ButtonVariant.Ghost} onClick={onGoBackClicked}>
@@ -59,6 +58,7 @@ const SettingsDrawer = () => {
         {settingsView === SettingsView.RepeatSettings && t('audio.player.repeat-settings')}
       </div>
     );
+  }
 
   return (
     <Drawer type={DrawerType.Settings} header={header} closeOnNavigation={false}>

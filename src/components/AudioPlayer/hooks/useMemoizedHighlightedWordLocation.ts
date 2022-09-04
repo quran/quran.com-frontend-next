@@ -23,8 +23,9 @@ const useMemoizedHighlightedWordLocation = (
 
   if (lastHighlightedWordLocation.current) {
     const [, timestampFrom, timestampTo] = lastHighlightedWordLocation.current;
-    if (isCurrentTimeInRange(currentTime, timestampFrom, timestampTo))
+    if (isCurrentTimeInRange(currentTime, timestampFrom, timestampTo)) {
       return lastHighlightedWordLocation.current;
+    }
   }
 
   const highlightedWordLocation = currentHighlightedVerseTiming.segments.find((segment) => {

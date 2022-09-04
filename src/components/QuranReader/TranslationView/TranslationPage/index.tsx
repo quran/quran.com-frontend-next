@@ -9,21 +9,21 @@ import useSWRImmutable from 'swr/immutable';
 
 import styles from '../TranslationView.module.scss';
 
-import ChapterHeader from 'src/components/chapters/ChapterHeader';
-import { getTranslationViewRequestKey, verseFetcher } from 'src/components/QuranReader/api';
-import TranslationViewCell from 'src/components/QuranReader/TranslationView/TranslationViewCell';
-import TranslationViewSkeleton from 'src/components/QuranReader/TranslationView/TranslationViewSkeleton';
-import { getTranslationsInitialState } from 'src/redux/defaultSettings/util';
-import { selectIsUsingDefaultWordByWordLocale } from 'src/redux/slices/QuranReader/readingPreferences';
-import { selectIsUsingDefaultFont } from 'src/redux/slices/QuranReader/styles';
-import { selectIsUsingDefaultTranslations } from 'src/redux/slices/QuranReader/translations';
-import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
-import { getMushafId } from 'src/utils/api';
-import { areArraysEqual } from 'src/utils/array';
-import { getPageBookmarks } from 'src/utils/auth/api';
-import { makeBookmarksRangeUrl } from 'src/utils/auth/apiPaths';
-import { isLoggedIn } from 'src/utils/auth/login';
-import { toLocalizedNumber } from 'src/utils/locale';
+import ChapterHeader from '@/components/chapters/ChapterHeader';
+import { getTranslationViewRequestKey, verseFetcher } from '@/components/QuranReader/api';
+import TranslationViewCell from '@/components/QuranReader/TranslationView/TranslationViewCell';
+import TranslationViewSkeleton from '@/components/QuranReader/TranslationView/TranslationViewSkeleton';
+import { getTranslationsInitialState } from '@/redux/defaultSettings/util';
+import { selectIsUsingDefaultWordByWordLocale } from '@/redux/slices/QuranReader/readingPreferences';
+import { selectIsUsingDefaultFont } from '@/redux/slices/QuranReader/styles';
+import { selectIsUsingDefaultTranslations } from '@/redux/slices/QuranReader/translations';
+import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
+import { getMushafId } from '@/utils/api';
+import { areArraysEqual } from '@/utils/array';
+import { getPageBookmarks } from '@/utils/auth/api';
+import { makeBookmarksRangeUrl } from '@/utils/auth/apiPaths';
+import { isLoggedIn } from '@/utils/auth/login';
+import { toLocalizedNumber } from '@/utils/locale';
 import { selectIsUsingDefaultReciter } from 'src/xstate/actors/audioPlayer/selectors';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import { VersesResponse } from 'types/ApiResponses';
@@ -138,16 +138,18 @@ const TranslationPage: React.FC<Props> = ({
   const getTranslationNameString = (translations?: Translation[]) => {
     let translationName = t('settings.no-translation-selected');
     if (translations?.length === 1) translationName = translations?.[0].resourceName;
-    if (translations?.length === 2)
+    if (translations?.length === 2) {
       translationName = t('settings.value-and-other', {
         value: translations?.[0].resourceName,
         othersCount: toLocalizedNumber(translations.length - 1, lang),
       });
-    if (translations?.length > 2)
+    }
+    if (translations?.length > 2) {
       translationName = t('settings.value-and-others', {
         value: translations?.[0].resourceName,
         othersCount: toLocalizedNumber(translations.length - 1, lang),
       });
+    }
 
     return translationName;
   };

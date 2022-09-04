@@ -6,19 +6,18 @@ import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { useSWRConfig } from 'swr';
 
-import BookmarkedIcon from '../../../../public/icons/bookmark.svg';
-
 import styles from './TranslationViewCell.module.scss';
 
-import Button, { ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
-import { ToastStatus, useToast } from 'src/components/dls/Toast/Toast';
-import { selectBookmarks, toggleVerseBookmark } from 'src/redux/slices/QuranReader/bookmarks';
-import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
-import { getMushafId } from 'src/utils/api';
-import { addOrRemoveBookmark } from 'src/utils/auth/api';
-import { makeIsResourceBookmarkedUrl } from 'src/utils/auth/apiPaths';
-import { isLoggedIn } from 'src/utils/auth/login';
-import { logButtonClick } from 'src/utils/eventLogger';
+import Button, { ButtonSize, ButtonVariant } from '@/dls/Button/Button';
+import { ToastStatus, useToast } from '@/dls/Toast/Toast';
+import BookmarkedIcon from '@/icons/bookmark.svg';
+import { selectBookmarks, toggleVerseBookmark } from '@/redux/slices/QuranReader/bookmarks';
+import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
+import { getMushafId } from '@/utils/api';
+import { addOrRemoveBookmark } from '@/utils/auth/api';
+import { makeIsResourceBookmarkedUrl } from '@/utils/auth/apiPaths';
+import { isLoggedIn } from '@/utils/auth/login';
+import { logButtonClick } from '@/utils/eventLogger';
 import BookmarksMap from 'types/BookmarksMap';
 import BookmarkType from 'types/BookmarkType';
 import Verse from 'types/Verse';

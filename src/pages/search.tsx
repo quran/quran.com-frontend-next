@@ -1,40 +1,39 @@
 /* eslint-disable max-lines */
-import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import React, { useState, useEffect, useMemo, useCallback, useRef } from 'react';
 
 import { GetStaticProps, NextPage } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 
-import FilterIcon from '../../public/icons/filter.svg';
-import SearchIcon from '../../public/icons/search.svg';
-
 import styles from './search.module.scss';
 
-import { getAvailableLanguages, getAvailableTranslations, getSearchResults } from 'src/api';
-import Button, { ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
-import ContentModal, { ContentModalSize } from 'src/components/dls/ContentModal/ContentModal';
-import Input, { InputVariant } from 'src/components/dls/Forms/Input';
-import NextSeoWrapper from 'src/components/NextSeoWrapper';
-import TranslationsFilter from 'src/components/Search/Filters/TranslationsFilter';
-import SearchBodyContainer from 'src/components/Search/SearchBodyContainer';
-import DataContext from 'src/contexts/DataContext';
-import useAddQueryParamsToUrl from 'src/hooks/useAddQueryParamsToUrl';
-import useDebounce from 'src/hooks/useDebounce';
-import { getTranslationsInitialState } from 'src/redux/defaultSettings/util';
-import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';
-import { areArraysEqual } from 'src/utils/array';
-import { getAllChaptersData } from 'src/utils/chapter';
+import NextSeoWrapper from '@/components/NextSeoWrapper';
+import TranslationsFilter from '@/components/Search/Filters/TranslationsFilter';
+import SearchBodyContainer from '@/components/Search/SearchBodyContainer';
+import Button, { ButtonSize, ButtonVariant } from '@/dls/Button/Button';
+import ContentModal, { ContentModalSize } from '@/dls/ContentModal/ContentModal';
+import Input, { InputVariant } from '@/dls/Forms/Input';
+import useAddQueryParamsToUrl from '@/hooks/useAddQueryParamsToUrl';
+import useDebounce from '@/hooks/useDebounce';
+import FilterIcon from '@/icons/filter.svg';
+import SearchIcon from '@/icons/search.svg';
+import { getTranslationsInitialState } from '@/redux/defaultSettings/util';
+import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
+import { areArraysEqual } from '@/utils/array';
+import { getAllChaptersData } from '@/utils/chapter';
 import {
   logButtonClick,
   logEmptySearchResults,
   logEvent,
   logTextSearchQuery,
   logValueChange,
-} from 'src/utils/eventLogger';
-import filterTranslations from 'src/utils/filter-translations';
-import { getLanguageAlternates, toLocalizedNumber } from 'src/utils/locale';
-import { getCanonicalUrl } from 'src/utils/navigation';
+} from '@/utils/eventLogger';
+import filterTranslations from '@/utils/filter-translations';
+import { getLanguageAlternates, toLocalizedNumber } from '@/utils/locale';
+import { getCanonicalUrl } from '@/utils/navigation';
+import { getAvailableLanguages, getAvailableTranslations, getSearchResults } from 'src/api';
+import DataContext from 'src/contexts/DataContext';
 import { SearchResponse } from 'types/ApiResponses';
 import AvailableLanguage from 'types/AvailableLanguage';
 import AvailableTranslation from 'types/AvailableTranslation';
@@ -158,17 +157,40 @@ const Search: NextPage<SearchProps> = ({ translations, chaptersData }): JSX.Elem
     [],
   );
 
+  // a ref to know whether this is the initial search request made when the user loads the page or not
+  const isInitialSearch = useRef(true);
+
   // listen to any changes in the API params and call BE on change.
   useEffect(() => {
     // only when the search query has a value we call the API.
     if (debouncedSearchQuery) {
-      getResults(debouncedSearchQuery, currentPage, selectedTranslations, selectedLanguages);
+      // we don't want to reset pagination when the user reloads the page with a ?page={number} in the url query
+      if (!isInitialSearch.current) {
+        setCurrentPage(1);
+      }
+
+      getResults(
+        debouncedSearchQuery,
+        // if it is the initial search request, use the page number in the url, otherwise, reset it
+        isInitialSearch.current ? currentPage : 1,
+        selectedTranslations,
+        selectedLanguages,
+      );
+
+      // if it was the initial request, update the ref
+      if (isInitialSearch.current) {
+        isInitialSearch.current = false;
+      }
     }
-  }, [currentPage, debouncedSearchQuery, getResults, selectedLanguages, selectedTranslations]);
+    // we don't want to run this effect when currentPage is changed
+    // because we are already handeling this in onPageChange
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [debouncedSearchQuery, getResults, selectedLanguages, selectedTranslations]);
 
   const onPageChange = (page: number) => {
     logEvent('search_page_number_change');
     setCurrentPage(page);
+    getResults(debouncedSearchQuery, page, selectedTranslations, selectedLanguages);
   };
 
   const onTranslationChange = useCallback((translationIds: string[]) => {
@@ -202,16 +224,18 @@ const Search: NextPage<SearchProps> = ({ translations, chaptersData }): JSX.Elem
     if (!firstSelectedTranslation) return t('search:all-translations');
 
     if (selectedTranslationsArray.length === 1) selectedValueString = firstSelectedTranslation.name;
-    if (selectedTranslationsArray.length === 2)
+    if (selectedTranslationsArray.length === 2) {
       selectedValueString = t('settings.value-and-other', {
         value: firstSelectedTranslation?.name,
         othersCount: toLocalizedNumber(selectedTranslationsArray.length - 1, lang),
       });
-    if (selectedTranslationsArray.length > 2)
+    }
+    if (selectedTranslationsArray.length > 2) {
       selectedValueString = t('settings.value-and-others', {
         value: firstSelectedTranslation?.name,
         othersCount: toLocalizedNumber(selectedTranslationsArray.length - 1, lang),
       });
+    }
 
     return selectedValueString;
   }, [lang, selectedTranslations, t, translations]);

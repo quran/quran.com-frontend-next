@@ -1,7 +1,8 @@
-import QuestionMarkIcon from '../../../../public/icons/help-circle.svg';
 import HoverablePopover from '../Popover/HoverablePopover';
 
 import styles from './HelperTooltip.module.scss';
+
+import QuestionMarkIcon from '@/icons/help-circle.svg';
 
 interface HelperTooltipProps {
   children: React.ReactNode;

@@ -1,8 +1,8 @@
 import React from 'react';
 
-import CloseIcon from '../../../../../../public/icons/close.svg';
-
 import styles from './ClearInputIcon.module.scss';
+
+import CloseIcon from '@/icons/close.svg';
 
 interface Props {
   shouldShowIcon: boolean;

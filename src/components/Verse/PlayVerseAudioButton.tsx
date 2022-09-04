@@ -4,21 +4,16 @@ import { useSelector as useXstateSelector } from '@xstate/react';
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 
-import PauseIcon from '../../../public/icons/pause-outline.svg';
-import PlayIcon from '../../../public/icons/play-outline.svg';
 import Spinner from '../dls/Spinner/Spinner';
 import styles from '../QuranReader/TranslationView/TranslationViewCell.module.scss';
 
-import Button, {
-  ButtonShape,
-  ButtonSize,
-  ButtonType,
-  ButtonVariant,
-} from 'src/components/dls/Button/Button';
+import Button, { ButtonShape, ButtonSize, ButtonType, ButtonVariant } from '@/dls/Button/Button';
+import PauseIcon from '@/icons/pause-outline.svg';
+import PlayIcon from '@/icons/play-outline.svg';
+import { getChapterData } from '@/utils/chapter';
+import { logButtonClick } from '@/utils/eventLogger';
+import { getChapterNumberFromKey, getVerseNumberFromKey } from '@/utils/verse';
 import DataContext from 'src/contexts/DataContext';
-import { getChapterData } from 'src/utils/chapter';
-import { logButtonClick } from 'src/utils/eventLogger';
-import { getChapterNumberFromKey, getVerseNumberFromKey } from 'src/utils/verse';
 import {
   selectIsVerseBeingPlayed,
   selectIsVerseLoading,
@@ -71,7 +66,7 @@ const PlayVerseAudioButton: React.FC<PlayVerseAudioProps> = ({
     }
   };
 
-  if (isVerseLoading)
+  if (isVerseLoading) {
     return (
       <Button
         size={ButtonSize.Small}
@@ -83,8 +78,9 @@ const PlayVerseAudioButton: React.FC<PlayVerseAudioProps> = ({
         <Spinner />
       </Button>
     );
+  }
 
-  if (isVerseBeingPlayed)
+  if (isVerseBeingPlayed) {
     return (
       <Button
         variant={ButtonVariant.Ghost}
@@ -101,6 +97,7 @@ const PlayVerseAudioButton: React.FC<PlayVerseAudioProps> = ({
         </span>
       </Button>
     );
+  }
 
   return (
     <Button

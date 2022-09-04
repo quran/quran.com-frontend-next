@@ -1,3 +1,5 @@
+import { it, expect } from 'vitest';
+
 import { toLocalizedNumber } from './locale';
 
 it('toLocalizedNumber works as expected', () => {

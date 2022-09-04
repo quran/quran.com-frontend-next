@@ -1,6 +1,6 @@
 import styles from './SidebarSelectionSkeleton.module.scss';
 
-import Skeleton from 'src/components/dls/Skeleton/Skeleton';
+import Skeleton from '@/dls/Skeleton/Skeleton';
 
 const ROWS_COUNT = 12;
 const rowsArr = Array(ROWS_COUNT).fill(null);

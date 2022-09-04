@@ -3,12 +3,12 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { REHYDRATE } from 'redux-persist';
 
-import resetSettings from 'src/redux/actions/reset-settings';
-import syncUserPreferences from 'src/redux/actions/sync-user-preferences';
-import { getAudioPlayerStateInitialState } from 'src/redux/defaultSettings/util';
-import { RootState } from 'src/redux/RootState';
-import AudioState from 'src/redux/types/AudioState';
-import SliceName from 'src/redux/types/SliceName';
+import resetSettings from '@/redux/actions/reset-settings';
+import syncUserPreferences from '@/redux/actions/sync-user-preferences';
+import { getAudioPlayerStateInitialState } from '@/redux/defaultSettings/util';
+import { RootState } from '@/redux/RootState';
+import AudioState from '@/redux/types/AudioState';
+import SliceName from '@/redux/types/SliceName';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 
 export const selectAudioPlayerState = (state: RootState) => state.audioPlayerState;

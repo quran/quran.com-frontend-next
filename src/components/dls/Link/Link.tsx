@@ -4,7 +4,7 @@ import NextLink from 'next/link';
 
 import styles from './Link.module.scss';
 
-import Wrapper from 'src/components/Wrapper/Wrapper';
+import Wrapper from '@/components/Wrapper/Wrapper';
 
 export enum LinkVariant {
   Highlight = 'highlight',

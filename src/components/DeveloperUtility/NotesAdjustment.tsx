@@ -3,7 +3,7 @@ import React from 'react';
 
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
-import { selectNotes, setIsVisible } from 'src/redux/slices/QuranReader/notes';
+import { selectNotes, setIsVisible } from '@/redux/slices/QuranReader/notes';
 
 const NotesAdjustment = () => {
   const dispatch = useDispatch();
