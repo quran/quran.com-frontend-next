@@ -20,7 +20,8 @@
     "test:integration": "playwright test",
     "test:coverage": "vitest run --coverage",
     "test:watch": "vitest watch",
-    "analyze": "ANALYZE_BUNDLE=true yarn build",
+    "analyze": "cross-env ANALYZE_BUNDLE=true yarn build",
+    "analyze:bundle": "node ./scripts/analyze-bundle.js",
     "lokalise:pull": "node scripts/lokalise.js",
     "lokalise:push": "node scripts/lokalise.js push",
     "chapter-data:format": "node scripts/format-chapter-data-json.js"
@@ -109,6 +110,7 @@
     "babel-loader": "^8.2.5",
     "babel-plugin-polyfill-corejs2": "^0.3.2",
     "babel-plugin-polyfill-regenerator": "^0.4.0",
+    "cross-env": "^7.0.3",
     "dotenv": "^16.0.1",
     "eslint": "^8.22.0",
     "eslint-config-airbnb": "^19.0.4",

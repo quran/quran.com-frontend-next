@@ -1,0 +1,98 @@
+name: Analyze Bundle Size
+
+# Run this workflow on every Pull Request action as well as all pushes to master
+on:
+  pull_request:
+  push:
+    branches:
+      - master
+
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+
+# defaults:
+#   run:
+#     # change this if your nextjs app does not live at the root of the repo
+#     working-directory: ./
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "analyze"
+  analyze:
+    runs-on: ubuntu-latest
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      # Next.js runs on Node—we need to set this up first.
+      - name: Setup Node
+        uses: actions/setup-node@v2
+        with:
+          node-version: "15.x"
+
+      # Run `npm install`, using a cache
+      - name: Install
+        uses: bahmutov/npm-install@v1
+
+      - name: Restore next build
+        uses: actions/cache@v2
+        id: restore-build-cache
+        env:
+          cache-name: cache-next-build
+        with:
+          # if you use a custom build directory, replace all instances of `.next` in this file with your build directory
+          # ex: if your app builds to `dist`, replace `.next` with `dist`
+          path: .next/cache
+          # change this if you prefer a more strict cache
+          key: ${{ runner.os }}-build-${{ env.cache-name }}
+
+      - name: Build Next.js app & Analyze
+        run: yarn analyze
+
+      - name: Analyze Pages
+        run: yarn analyze:bundle | tee .next/analyze/bundle-comparison.txt
+
+      - name: Upload bundle
+        uses: actions/upload-artifact@v2
+        with:
+          name: bundle
+          path: |
+            .next/analyze/client.html
+    
+      # A bit of find & replace on our output text for displaying properly. Save this to an Action variable.
+      - name: Get comment body
+        id: get-comment-body
+        if: success() && github.event.number
+        run: |
+          body=$(cat .next/analyze/bundle-comparison.txt)
+          body="${body//'%'/'%25'}"
+          body="${body//$'\n'/'%0A'}"
+          body="${body//$'\r'/'%0D'}"
+          echo ::set-output name=body::$body
+
+      # Looks for a comment with <!-- GH BOT --> somewhere in its body.
+      - name: Find Comment
+        uses: peter-evans/find-comment@v1
+        if: success() && github.event.number
+        id: fc
+        with:
+          issue-number: ${{ github.event.number }}
+          body-includes: "<!-- GH BOT -->"
+
+      # If no comment exists, make one with the previously saved Action variable!
+      - name: Create Comment
+        uses: peter-evans/create-or-update-comment@v1.4.4
+        if: success() && github.event.number && steps.fc.outputs.comment-id == 0
+        with:
+          issue-number: ${{ github.event.number }}
+          body: ${{ steps.get-comment-body.outputs.body }}
+
+      # Otherwise, if a comment already exists, replace its body.
+      - name: Update Comment
+        uses: peter-evans/create-or-update-comment@v1.4.4
+        if: success() && github.event.number && steps.fc.outputs.comment-id != 0
+        with:
+          issue-number: ${{ github.event.number }}
+          body: ${{ steps.get-comment-body.outputs.body }}
+          comment-id: ${{ steps.fc.outputs.comment-id }}
+          edit-mode: replace
