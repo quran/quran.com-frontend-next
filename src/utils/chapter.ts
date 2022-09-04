@@ -33,13 +33,13 @@ export const getAllChaptersData = (
 ): Promise<Record<string, Chapter>> => {
   if (SUPPORTED_CHAPTER_LOCALES.includes(lang)) {
     return new Promise((res) => {
-      import(`../../data/chapters/${lang}.json`).then((data) => {
+      import(`@/data/chapters/${lang}.json`).then((data) => {
         res(data.default);
       });
     });
   }
   return new Promise((res) => {
-    import(`../../data/chapters/en.json`).then((data) => {
+    import(`@/data/chapters/en.json`).then((data) => {
       // @ts-ignore
       res(data.default);
     });
@@ -64,7 +64,7 @@ export const getChapterData = (chapters: ChaptersData, id: string): Chapter =>
  */
 export const getChapterIdsForPage = (pageId: string): Promise<string[]> => {
   return new Promise((res) => {
-    import(`../../data/page-to-chapter-mappings.json`).then((data) => {
+    import(`@/data/page-to-chapter-mappings.json`).then((data) => {
       res(data.default[pageId]);
     });
   });
@@ -78,7 +78,7 @@ export const getChapterIdsForPage = (pageId: string): Promise<string[]> => {
  */
 export const getChapterIdsForJuz = async (juzId: string): Promise<string[]> => {
   return new Promise((res) => {
-    import(`../../data/juz-to-chapter-mappings.json`).then((data) => {
+    import(`@/data/juz-to-chapter-mappings.json`).then((data) => {
       res(data.default[juzId]);
     });
   });
@@ -92,7 +92,7 @@ type ChapterAndVerseMapping = { [chapter: string]: string };
  */
 export const getAllJuzMappings = (): Promise<{ [juz: string]: ChapterAndVerseMapping }> => {
   return new Promise((res) => {
-    import('../../data/juz-to-chapter-verse-mappings.json').then((data) => {
+    import('@/data/juz-to-chapter-verse-mappings.json').then((data) => {
       res(data.default);
     });
   });

@@ -2,9 +2,9 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from './Footer.module.scss';
 
-import Link, { LinkVariant } from 'src/components/dls/Link/Link';
-import useGetChaptersData from 'src/hooks/useGetChaptersData';
-import { logTarteelLinkClick } from 'src/utils/eventLogger';
+import Link, { LinkVariant } from '@/dls/Link/Link';
+import useGetChaptersData from '@/hooks/useGetChaptersData';
+import { logTarteelLinkClick } from '@/utils/eventLogger';
 
 const Links = () => {
   const { t, lang } = useTranslation('common');

@@ -6,37 +6,36 @@ import classNames from 'classnames';
 import clipboardCopy from 'clipboard-copy';
 import useTranslation from 'next-translate/useTranslation';
 
-import ChatIcon from '../../../../public/icons/chat.svg';
-import ChevronDownIcon from '../../../../public/icons/chevron-down.svg';
-import CopyLinkIcon from '../../../../public/icons/copy-link.svg';
-import CopyIcon from '../../../../public/icons/copy.svg';
-import LoveIcon from '../../../../public/icons/love.svg';
-import OverflowMenuIcon from '../../../../public/icons/menu_more_horiz.svg';
-import ShareIcon from '../../../../public/icons/share.svg';
-import VerifiedIcon from '../../../../public/icons/verified.svg';
-
 import styles from './ReflectionItem.module.scss';
 
-import Button, { ButtonShape, ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
-import Link, { LinkVariant } from 'src/components/dls/Link/Link';
-import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
-import { ToastStatus, useToast } from 'src/components/dls/Toast/Toast';
-import VerseAndTranslation from 'src/components/Verse/VerseAndTranslation';
-import DataContext from 'src/contexts/DataContext';
-import { getChapterData } from 'src/utils/chapter';
-import { formatDateRelatively } from 'src/utils/datetime';
-import { logButtonClick } from 'src/utils/eventLogger';
-import truncate from 'src/utils/html-truncate';
-import { toLocalizedNumber } from 'src/utils/locale';
+import VerseAndTranslation from '@/components/Verse/VerseAndTranslation';
+import DataContext from '@/contexts/DataContext';
+import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
+import Link, { LinkVariant } from '@/dls/Link/Link';
+import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
+import { ToastStatus, useToast } from '@/dls/Toast/Toast';
+import ChatIcon from '@/icons/chat.svg';
+import ChevronDownIcon from '@/icons/chevron-down.svg';
+import CopyLinkIcon from '@/icons/copy-link.svg';
+import CopyIcon from '@/icons/copy.svg';
+import LoveIcon from '@/icons/love.svg';
+import OverflowMenuIcon from '@/icons/menu_more_horiz.svg';
+import ShareIcon from '@/icons/share.svg';
+import VerifiedIcon from '@/icons/verified.svg';
+import { getChapterData } from '@/utils/chapter';
+import { formatDateRelatively } from '@/utils/datetime';
+import { logButtonClick } from '@/utils/eventLogger';
+import truncate from '@/utils/html-truncate';
+import { toLocalizedNumber } from '@/utils/locale';
 import {
   getQuranReflectPostCommentUrl,
   getQuranReflectAuthorUrl,
   getQuranReflectPostUrl,
   getQuranReflectTagUrl,
-} from 'src/utils/navigation';
-import { stripHTMLTags } from 'src/utils/string';
-import { navigateToExternalUrl } from 'src/utils/url';
-import { makeVerseKey } from 'src/utils/verse';
+} from '@/utils/navigation';
+import { stripHTMLTags } from '@/utils/string';
+import { navigateToExternalUrl } from '@/utils/url';
+import { makeVerseKey } from '@/utils/verse';
 
 export type VerseReference = {
   chapter: number;

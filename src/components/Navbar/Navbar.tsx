@@ -6,7 +6,7 @@ import { useSelector, shallowEqual } from 'react-redux';
 import styles from './Navbar.module.scss';
 import NavbarBody from './NavbarBody';
 
-import { selectNavbar } from 'src/redux/slices/navbar';
+import { selectNavbar } from '@/redux/slices/navbar';
 
 const Navbar = () => {
   const { isVisible: isNavbarVisible } = useSelector(selectNavbar, shallowEqual);

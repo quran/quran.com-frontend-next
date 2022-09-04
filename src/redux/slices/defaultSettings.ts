@@ -2,10 +2,10 @@ import { createAsyncThunk, createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { getLocaleInitialState } from '../defaultSettings/util';
 
-import { RootState } from 'src/redux/RootState';
-import SliceName from 'src/redux/types/SliceName';
-import { addOrUpdateBulkUserPreferences } from 'src/utils/auth/api';
-import { stateToPreferenceGroups } from 'src/utils/auth/preferencesMapper';
+import { RootState } from '@/redux/RootState';
+import SliceName from '@/redux/types/SliceName';
+import { addOrUpdateBulkUserPreferences } from '@/utils/auth/api';
+import { stateToPreferenceGroups } from '@/utils/auth/preferencesMapper';
 
 export type DefaultSettings = {
   isUsingDefaultSettings: boolean;

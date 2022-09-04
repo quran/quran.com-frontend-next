@@ -2,11 +2,10 @@ import React from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
-import IconSearch from '../../../../public/icons/search.svg';
-
 import styles from './NoResults.module.scss';
 
-import AdvancedSearchLink from 'src/components/Navbar/SearchDrawer/AdvancedSearchLink';
+import AdvancedSearchLink from '@/components/Navbar/SearchDrawer/AdvancedSearchLink';
+import IconSearch from '@/icons/search.svg';
 
 interface Props {
   searchUrl?: string;

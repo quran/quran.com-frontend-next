@@ -2,10 +2,10 @@
 /* eslint-disable react/no-multi-comp */
 import React, { useState, useEffect, useCallback } from 'react';
 
-import SearchIcon from '../../../../../public/icons/search.svg';
-import SettingIcon from '../../../../../public/icons/settings.svg';
-
 import Input, { InputSize, InputType } from '.';
+
+import SearchIcon from '@/icons/search.svg';
+import SettingIcon from '@/icons/settings.svg';
 
 export default {
   title: 'dls/Input',

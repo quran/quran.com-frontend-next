@@ -6,19 +6,19 @@ import useSWRImmutable from 'swr/immutable';
 
 import styles from './BookmarkedVersesList.module.scss';
 
-import Button, { ButtonShape, ButtonType } from 'src/components/dls/Button/Button';
+import Button, { ButtonShape, ButtonType } from '@/dls/Button/Button';
+import { selectBookmarks } from '@/redux/slices/QuranReader/bookmarks';
+import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
+import { getMushafId } from '@/utils/api';
+import { privateFetcher } from '@/utils/auth/api';
+import { makeBookmarksUrl } from '@/utils/auth/apiPaths';
+import { isLoggedIn } from '@/utils/auth/login';
+import { getChapterData } from '@/utils/chapter';
+import { logButtonClick } from '@/utils/eventLogger';
+import { toLocalizedVerseKey } from '@/utils/locale';
+import { getVerseNavigationUrlByVerseKey } from '@/utils/navigation';
+import { getChapterNumberFromKey, makeVerseKey } from '@/utils/verse';
 import DataContext from 'src/contexts/DataContext';
-import { selectBookmarks } from 'src/redux/slices/QuranReader/bookmarks';
-import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
-import { getMushafId } from 'src/utils/api';
-import { privateFetcher } from 'src/utils/auth/api';
-import { makeBookmarksUrl } from 'src/utils/auth/apiPaths';
-import { isLoggedIn } from 'src/utils/auth/login';
-import { getChapterData } from 'src/utils/chapter';
-import { logButtonClick } from 'src/utils/eventLogger';
-import { toLocalizedVerseKey } from 'src/utils/locale';
-import { getVerseNavigationUrlByVerseKey } from 'src/utils/navigation';
-import { getChapterNumberFromKey, makeVerseKey } from 'src/utils/verse';
 import Bookmark from 'types/Bookmark';
 
 const BookmarkedVersesList: React.FC = () => {

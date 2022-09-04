@@ -2,7 +2,7 @@ import classNames from 'classnames';
 
 import styles from './Text.module.scss';
 
-import Link from 'src/components/dls/Link/Link';
+import Link from '@/dls/Link/Link';
 
 interface Props {
   text: any;

@@ -4,12 +4,12 @@ import { shallowEqual, useSelector } from 'react-redux';
 
 import styles from './ReadingViewSkeleton.module.scss';
 
-import Skeleton from 'src/components/dls/Skeleton/Skeleton';
-import verseTextStyles from 'src/components/Verse/VerseText.module.scss';
-import { selectWordByWordPreferences } from 'src/redux/slices/QuranReader/readingPreferences';
-import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
-import { getFontClassName } from 'src/utils/fontFaceHelper';
-import { getMushafLinesNumber } from 'src/utils/page';
+import verseTextStyles from '@/components/Verse/VerseText.module.scss';
+import Skeleton from '@/dls/Skeleton/Skeleton';
+import { selectWordByWordPreferences } from '@/redux/slices/QuranReader/readingPreferences';
+import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
+import { getFontClassName } from '@/utils/fontFaceHelper';
+import { getMushafLinesNumber } from '@/utils/page';
 
 const ReadingViewSkeleton = () => {
   const { quranFont, quranTextFontScale, mushafLines } = useSelector(

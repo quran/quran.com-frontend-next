@@ -2,7 +2,7 @@ import { useCallback, useContext } from 'react';
 
 import { useHotkeys, Options } from 'react-hotkeys-hook';
 
-import { logEvent } from 'src/utils/eventLogger';
+import { logEvent } from '@/utils/eventLogger';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 
 type AudioKeyBoardListenersProps = {

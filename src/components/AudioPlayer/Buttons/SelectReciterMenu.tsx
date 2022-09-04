@@ -3,17 +3,16 @@ import React, { useCallback, useContext } from 'react';
 import { useSelector } from '@xstate/react';
 import useTranslation from 'next-translate/useTranslation';
 
-import CheckIcon from '../../../../public/icons/check.svg';
-import ChevronLeftIcon from '../../../../public/icons/chevron-left.svg';
-
 import styles from './SelectReciterMenu.module.scss';
 
-import DataFetcher from 'src/components/DataFetcher';
-import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
-import Spinner from 'src/components/dls/Spinner/Spinner';
-import usePersistPreferenceGroup from 'src/hooks/auth/usePersistPreferenceGroup';
-import { makeAvailableRecitersUrl } from 'src/utils/apiPaths';
-import { logButtonClick, logItemSelectionChange, logValueChange } from 'src/utils/eventLogger';
+import DataFetcher from '@/components/DataFetcher';
+import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
+import Spinner from '@/dls/Spinner/Spinner';
+import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
+import CheckIcon from '@/icons/check.svg';
+import ChevronLeftIcon from '@/icons/chevron-left.svg';
+import { makeAvailableRecitersUrl } from '@/utils/apiPaths';
+import { logButtonClick, logItemSelectionChange, logValueChange } from '@/utils/eventLogger';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import { RecitersResponse } from 'types/ApiResponses';
 import PreferenceGroup from 'types/auth/PreferenceGroup';

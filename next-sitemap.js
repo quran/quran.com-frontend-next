@@ -158,11 +158,19 @@ module.exports = {
     range(1, 31).forEach(async (juzId) => {
       result.push(await config.transform(config, `/juz/${juzId}`));
     });
-    // 8. /page/[pageId]
+    // 8. /hizb/[hizbId]
+    range(1, 61).forEach(async (hizbId) => {
+      result.push(await config.transform(config, `/hizb/${hizbId}`));
+    });
+    // 9. /rub/[rubId]
+    range(1, 241).forEach(async (rubId) => {
+      result.push(await config.transform(config, `/rub/${rubId}`));
+    });
+    // 10. /page/[pageId]
     range(1, 605).forEach(async (pageId) => {
       result.push(await config.transform(config, `/page/${pageId}`));
     });
-    // 9. /reciters/[reciterId]
+    // 11. /reciters/[reciterId]
     reciterIds.forEach((reciterId) => {
       const location = `/reciters/${reciterId}`;
       result.push({

@@ -3,16 +3,16 @@ import { useState } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import { useSelector } from 'react-redux';
 
-import CloseIcon from '../../../public/icons/close.svg';
 import MoonIllustrationSVG from '../../../public/images/moon-illustration.svg';
 import Button, { ButtonShape, ButtonSize, ButtonType, ButtonVariant } from '../dls/Button/Button';
 import Modal from '../dls/Modal/Modal';
 
 import styles from './DonatePopup.module.scss';
 
-import { selectSessionCount } from 'src/redux/slices/session';
-import { logEvent } from 'src/utils/eventLogger';
-import openGivingLoopPopup from 'src/utils/givingloop';
+import CloseIcon from '@/icons/close.svg';
+import { selectSessionCount } from '@/redux/slices/session';
+import { logEvent } from '@/utils/eventLogger';
+import openGivingLoopPopup from '@/utils/givingloop';
 
 const POPUP_VISIBILITY_FREQUENCY_BY_SESSION_COUNT = 10;
 const DonatePopup = () => {

@@ -3,17 +3,17 @@ import { useContext } from 'react';
 import { useSelector } from '@xstate/react';
 import useTranslation from 'next-translate/useTranslation';
 
-import PauseIcon from '../../../../public/icons/pause.svg';
-import PlayIcon from '../../../../public/icons/play-arrow.svg';
 import SurahAudioMismatchModal from '../SurahAudioMismatchModal';
 
-import Button, { ButtonShape, ButtonVariant } from 'src/components/dls/Button/Button';
-import Spinner, { SpinnerSize } from 'src/components/dls/Spinner/Spinner';
+import Button, { ButtonShape, ButtonVariant } from '@/dls/Button/Button';
+import Spinner, { SpinnerSize } from '@/dls/Spinner/Spinner';
+import useChapterIdsByUrlPath from '@/hooks/useChapterId';
+import PauseIcon from '@/icons/pause.svg';
+import PlayIcon from '@/icons/play-arrow.svg';
+import { getChapterData } from '@/utils/chapter';
+import { withStopPropagation } from '@/utils/event';
+import { logButtonClick } from '@/utils/eventLogger';
 import DataContext from 'src/contexts/DataContext';
-import useChapterIdsByUrlPath from 'src/hooks/useChapterId';
-import { getChapterData } from 'src/utils/chapter';
-import { withStopPropagation } from 'src/utils/event';
-import { logButtonClick } from 'src/utils/eventLogger';
 import { selectIsLoading } from 'src/xstate/actors/audioPlayer/selectors';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 

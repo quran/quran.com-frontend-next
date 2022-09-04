@@ -4,16 +4,15 @@ import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 
-import ChatIcon from '../../../../public/icons/chat.svg';
-
 import styles from './TranslationViewCell.module.scss';
 
-import Button, { ButtonShape, ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
-import ContentModal from 'src/components/dls/ContentModal/ContentModal';
-import ReflectionBodyContainer from 'src/components/QuranReader/ReflectionView/ReflectionBodyContainer';
-import { logButtonClick } from 'src/utils/eventLogger';
-import { fakeNavigate, getVerseReflectionNavigationUrl } from 'src/utils/navigation';
-import { getVerseAndChapterNumbersFromKey } from 'src/utils/verse';
+import ContentModal from '@/components/dls/ContentModal/ContentModal';
+import ReflectionBodyContainer from '@/components/QuranReader/ReflectionView/ReflectionBodyContainer';
+import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
+import ChatIcon from '@/icons/chat.svg';
+import { logButtonClick } from '@/utils/eventLogger';
+import { fakeNavigate, getVerseReflectionNavigationUrl } from '@/utils/navigation';
+import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
 
 type QuranReflectButtonProps = {
   verseKey: string;

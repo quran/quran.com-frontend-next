@@ -3,10 +3,9 @@ import React from 'react';
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 
-import MicrophoneIcon from '../../../../../public/icons/microphone.svg';
-
 import styles from './PartialResult.module.scss';
 
+import MicrophoneIcon from '@/icons/microphone.svg';
 import { getVolumeLevelMultiplier } from 'src/audioInput/voice';
 
 interface Props {

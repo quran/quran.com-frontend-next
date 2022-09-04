@@ -1,6 +1,6 @@
 // import { useDispatch } from 'react-redux';
 
-// import CloseIcon from '../../../public/icons/close.svg';
+// import CloseIcon from '@/icons/close.svg';
 import { useState } from 'react';
 
 import classNames from 'classnames';
@@ -11,11 +11,11 @@ import Button, { ButtonSize, ButtonType } from '../dls/Button/Button';
 
 import styles from './Banner.module.scss';
 
-import { selectIsBannerVisible } from 'src/redux/slices/banner';
-import openGivingLoopPopup from 'src/utils/givingloop';
+import { selectIsBannerVisible } from '@/redux/slices/banner';
+import openGivingLoopPopup from '@/utils/givingloop';
 
-// import { setIsBannerVisible } from 'src/redux/slices/banner';
-// import { logButtonClick } from 'src/utils/eventLogger';
+// import { setIsBannerVisible } from '@/redux/slices/banner';
+// import { logButtonClick } from '@/utils/eventLogger';
 
 type BannerProps = {
   onClick?: () => void;

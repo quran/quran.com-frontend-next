@@ -2,15 +2,14 @@ import classNames from 'classnames';
 import clipboardCopy from 'clipboard-copy';
 import useTranslation from 'next-translate/useTranslation';
 
-import CopyLinkIcon from '../../../../public/icons/copy-link.svg';
-
 import styles from './TranslationViewCell.module.scss';
 
-import Button, { ButtonShape, ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
-import { ToastStatus, useToast } from 'src/components/dls/Toast/Toast';
-import { logButtonClick } from 'src/utils/eventLogger';
-import { getWindowOrigin } from 'src/utils/url';
-import { getVerseAndChapterNumbersFromKey } from 'src/utils/verse';
+import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
+import { ToastStatus, useToast } from '@/dls/Toast/Toast';
+import CopyLinkIcon from '@/icons/copy-link.svg';
+import { logButtonClick } from '@/utils/eventLogger';
+import { getWindowOrigin } from '@/utils/url';
+import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
 
 type ShareVerseButtonProps = {
   verseKey: string;

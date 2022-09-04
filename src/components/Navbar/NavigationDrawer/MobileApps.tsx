@@ -3,10 +3,10 @@ import React from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import Image from 'next/image';
 
-import IconMobile from '../../../../public/icons/mobile.svg';
-
 import styles from './MobileApps.module.scss';
 import NavigationDrawerItem from './NavigationDrawerItem';
+
+import IconMobile from '@/icons/mobile.svg';
 
 const MobileApps = () => {
   const { t } = useTranslation('common');

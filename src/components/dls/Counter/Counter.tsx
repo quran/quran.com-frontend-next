@@ -2,13 +2,12 @@ import { useMemo } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
-import MinusIcon from '../../../../public/icons/minus.svg';
-import PlusIcon from '../../../../public/icons/plus.svg';
-
 import styles from './Counter.module.scss';
 
-import Button, { ButtonShape, ButtonVariant } from 'src/components/dls/Button/Button';
-import { toLocalizedNumber } from 'src/utils/locale';
+import Button, { ButtonShape, ButtonVariant } from '@/dls/Button/Button';
+import MinusIcon from '@/icons/minus.svg';
+import PlusIcon from '@/icons/plus.svg';
+import { toLocalizedNumber } from '@/utils/locale';
 
 type CounterProps = {
   count: number | string;

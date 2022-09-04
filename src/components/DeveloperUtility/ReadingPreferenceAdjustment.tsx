@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   selectReadingPreference,
   setReadingPreference,
-} from 'src/redux/slices/QuranReader/readingPreferences';
+} from '@/redux/slices/QuranReader/readingPreferences';
 import { ReadingPreference } from 'types/QuranReader';
 
 const ReadingPreferenceAdjustment = () => {

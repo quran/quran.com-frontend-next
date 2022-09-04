@@ -18,30 +18,30 @@ import TafsirText from './TafsirText';
 import TafsirVerseText from './TafsirVerseText';
 import styles from './TafsirView.module.scss';
 
-import { fetcher } from 'src/api';
-import DataFetcher from 'src/components/DataFetcher';
-import Separator from 'src/components/dls/Separator/Separator';
-import DataContext from 'src/contexts/DataContext';
-import usePersistPreferenceGroup from 'src/hooks/auth/usePersistPreferenceGroup';
-import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
-import { selectTafsirs, setSelectedTafsirs } from 'src/redux/slices/QuranReader/tafsirs';
-import { makeTafsirContentUrl, makeTafsirsUrl } from 'src/utils/apiPaths';
+import DataFetcher from '@/components/DataFetcher';
+import Separator from '@/dls/Separator/Separator';
+import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
+import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
+import { selectTafsirs, setSelectedTafsirs } from '@/redux/slices/QuranReader/tafsirs';
+import { makeTafsirContentUrl, makeTafsirsUrl } from '@/utils/apiPaths';
 import {
   logButtonClick,
   logEvent,
   logItemSelectionChange,
   logValueChange,
-} from 'src/utils/eventLogger';
-import { getLanguageDataById } from 'src/utils/locale';
-import { fakeNavigate, getVerseSelectedTafsirNavigationUrl } from 'src/utils/navigation';
-import { getSelectedTafsirLanguage, getTafsirsLanguageOptions } from 'src/utils/tafsir';
+} from '@/utils/eventLogger';
+import { getLanguageDataById } from '@/utils/locale';
+import { fakeNavigate, getVerseSelectedTafsirNavigationUrl } from '@/utils/navigation';
+import { getSelectedTafsirLanguage, getTafsirsLanguageOptions } from '@/utils/tafsir';
 import {
   getVerseNumberFromKey,
   getFirstAndLastVerseKeys,
   makeVerseKey,
   isLastVerseOfSurah,
   getVerseAndChapterNumbersFromKey,
-} from 'src/utils/verse';
+} from '@/utils/verse';
+import { fetcher } from 'src/api';
+import DataContext from 'src/contexts/DataContext';
 import { TafsirContentResponse, TafsirsResponse } from 'types/ApiResponses';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 

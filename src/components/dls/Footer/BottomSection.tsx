@@ -7,9 +7,9 @@ import { PopoverMenuExpandDirection } from '../PopoverMenu/PopoverMenu';
 import styles from './Footer.module.scss';
 import FooterThemeSwitcher from './FooterThemeSwitcher';
 
-import Link, { LinkVariant } from 'src/components/dls/Link/Link';
-import LanguageSelector from 'src/components/Navbar/LanguageSelector';
-import { toLocalizedDate } from 'src/utils/locale';
+import LanguageSelector from '@/components/Navbar/LanguageSelector';
+import Link, { LinkVariant } from '@/dls/Link/Link';
+import { toLocalizedDate } from '@/utils/locale';
 
 const BottomSection = () => {
   const { t, lang } = useTranslation('common');

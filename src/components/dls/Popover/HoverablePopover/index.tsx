@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react';
 
-import Popover, { ContentSide } from 'src/components/dls/Popover';
-import Tooltip from 'src/components/dls/Tooltip';
+import Popover, { ContentSide } from '@/dls/Popover';
+import Tooltip from '@/dls/Tooltip';
 
 interface Props {
   content: ReactNode;

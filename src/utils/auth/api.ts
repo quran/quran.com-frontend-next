@@ -1,6 +1,5 @@
 import { configureRefreshFetch } from 'refresh-fetch';
 
-import { fetcher } from 'src/api';
 import {
   makeBookmarksUrl,
   makeCompleteSignupUrl,
@@ -16,7 +15,8 @@ import {
   makeCompleteAnnouncementUrl,
   makeSyncLocalDataUrl,
   makeRefreshTokenUrl,
-} from 'src/utils/auth/apiPaths';
+} from '@/utils/auth/apiPaths';
+import { fetcher } from 'src/api';
 import CompleteAnnouncementRequest from 'types/auth/CompleteAnnouncementRequest';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 import RefreshToken from 'types/auth/RefreshToken';

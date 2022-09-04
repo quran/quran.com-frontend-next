@@ -2,7 +2,7 @@ import React from 'react';
 
 import styles from './LinkContainer.module.scss';
 
-import Link from 'src/components/dls/Link/Link';
+import Link from '@/dls/Link/Link';
 
 type LinkContainerProps = {
   href?: string;

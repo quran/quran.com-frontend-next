@@ -6,7 +6,7 @@ import AlQuranulKarimSVG from '../../../public/images/alquranul-karim.svg';
 import styles from './HomePageHero.module.scss';
 import QuickLinks from './QuickLinks';
 
-import CommandBarTrigger from 'src/components/CommandBar/CommandBarTrigger';
+import CommandBarTrigger from '@/components/CommandBar/CommandBarTrigger';
 
 const PlayRadioButton = dynamic(() => import('./PlayRadioButton'));
 
