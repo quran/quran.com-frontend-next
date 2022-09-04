@@ -33,7 +33,7 @@ jobs:
         run: yarn lint
 
   test:
-    name: Test
+    name: 🧪 Test
     runs-on: ubuntu-latest
     steps:
       - name: 🛑 Cancel Previous Runs
@@ -55,7 +55,7 @@ jobs:
         run: yarn test:coverage
 
   analyze:
-    name: Analyze Bundle Size
+    name: 🔍 Analyze Bundle Size
     runs-on: ubuntu-latest
     steps:
       - name: 🛑 Cancel Previous Runs
