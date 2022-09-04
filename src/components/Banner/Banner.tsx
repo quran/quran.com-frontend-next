@@ -2,12 +2,12 @@ import classNames from 'classnames';
 import { useSelector } from 'react-redux';
 
 import MoonIllustrationSVG from '../../../public/images/moon-illustration.svg';
-import Button, { ButtonSize, ButtonType } from '../dls/Button/Button';
 
 import styles from './Banner.module.scss';
 
+import Button, { ButtonSize, ButtonType } from '@/dls/Button/Button';
 import { selectIsBannerVisible } from '@/redux/slices/banner';
-import { logEvent } from 'src/utils/eventLogger';
+import { logEvent } from '@/utils/eventLogger';
 
 type BannerProps = {
   onClick?: () => void;

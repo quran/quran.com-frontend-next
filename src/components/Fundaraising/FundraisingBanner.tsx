@@ -1,11 +1,11 @@
 import useTranslation from 'next-translate/useTranslation';
 
 import MoonIllustrationSVG from '../../../public/images/moon-illustration.svg';
-import Button, { ButtonType } from '../dls/Button/Button';
 
 import styles from './FundraisingBanner.module.scss';
 
-import { logEvent } from 'src/utils/eventLogger';
+import Button, { ButtonType } from '@/dls/Button/Button';
+import { logEvent } from '@/utils/eventLogger';
 
 const FundraisingBanner = () => {
   const { t } = useTranslation('common');
