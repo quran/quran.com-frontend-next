@@ -170,6 +170,10 @@ export const updateCollection = async (collectionId: string, { name }) => {
   return postRequest(makeUpdateCollectionUrl(collectionId), { name });
 };
 
+export const deleteCollection = async (collectionId: string) => {
+  return deleteRequest(makeUpdateCollectionUrl(collectionId));
+};
+
 export const getBookmarksByCollectionId = async (collectionId: string) => {
   return privateFetcher(makeGetBookmarkByCollectionId(collectionId));
 };

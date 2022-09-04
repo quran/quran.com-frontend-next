@@ -4,9 +4,10 @@ import { useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useSelector } from 'react-redux';
-import useSWR from 'swr';
+import useSWR, { useSWRConfig } from 'swr';
 import useSWRImmutable from 'swr/immutable';
 
+import PlusIcon from '../../../public/icons/plus.svg';
 import SaveToCollectionModal, {
   Collection,
 } from '../Collection/SaveToCollectionModal/SaveToCollectionModal';
@@ -21,7 +22,11 @@ import {
   getBookmarkCollections,
   getCollectionsList,
 } from 'src/utils/auth/api';
-import { makeBookmarkCollectionsUrl, makeCollectionsUrl } from 'src/utils/auth/apiPaths';
+import {
+  makeBookmarkCollectionsUrl,
+  makeCollectionsUrl,
+  makeIsResourceBookmarkedUrl,
+} from 'src/utils/auth/apiPaths';
 import { isLoggedIn } from 'src/utils/auth/login';
 import BookmarkType from 'types/BookmarkType';
 
@@ -34,6 +39,8 @@ const SaveToCollectionAction = ({ verse }) => {
     makeCollectionsUrl({ limit: 50 }),
     () => getCollectionsList({ limit: 50 }),
   );
+
+  const { mutate: globalSWRMutate } = useSWRConfig();
 
   const { data: bookmarkCollectionIdsData, mutate: mutateBookmarkCollectionIdsData } =
     useSWRImmutable(
@@ -63,10 +70,22 @@ const SaveToCollectionAction = ({ verse }) => {
     // TODO: add logging here
   };
 
-  const bookmarkIcon = 'a';
-
   const closeModal = () => {
     setIsSaveCollectionModalOpen(false);
+  };
+
+  const mutateIsResourceBookmarked = () => {
+    if (!isLoggedIn()) {
+      return;
+    }
+    globalSWRMutate(
+      makeIsResourceBookmarkedUrl(
+        mushafId,
+        Number(verse.chapterId),
+        BookmarkType.Ayah,
+        Number(verse.verseNumber),
+      ),
+    );
   };
 
   const onCollectionToggled = (changedCollection: Collection, newValue: boolean) => {
@@ -77,17 +96,21 @@ const SaveToCollectionAction = ({ verse }) => {
       isAdd: newValue,
       verseNumber: verse.verseNumber,
       collectionId: changedCollection.id,
-    }).catch((err) => {
-      if (err.status === 400) {
-        toast(t('common:error.bookmark-sync'), {
+    })
+      .then(() => {
+        mutateIsResourceBookmarked();
+      })
+      .catch((err) => {
+        if (err.status === 400) {
+          toast(t('common:error.bookmark-sync'), {
+            status: ToastStatus.Error,
+          });
+          return;
+        }
+        toast(t('error.general'), {
           status: ToastStatus.Error,
         });
-        return;
-      }
-      toast(t('error.general'), {
-        status: ToastStatus.Error,
       });
-    });
   };
 
   const onNewCollectionCreated = (newCollectionName: string) => {
@@ -101,17 +124,21 @@ const SaveToCollectionAction = ({ verse }) => {
         isAdd: true,
         verseNumber: verse.verseNumber,
         collectionId: newCollection.id,
-      }).catch((err) => {
-        if (err.status === 400) {
-          toast(t('common:error.bookmark-sync'), {
+      })
+        .then(() => {
+          mutateIsResourceBookmarked();
+        })
+        .catch((err) => {
+          if (err.status === 400) {
+            toast(t('common:error.bookmark-sync'), {
+              status: ToastStatus.Error,
+            });
+            return;
+          }
+          toast(t('error.general'), {
             status: ToastStatus.Error,
           });
-          return;
-        }
-        toast(t('error.general'), {
-          status: ToastStatus.Error,
         });
-      });
     });
   };
 
@@ -127,7 +154,7 @@ const SaveToCollectionAction = ({ verse }) => {
 
   return (
     <>
-      <PopoverMenu.Item onClick={onMenuClicked} icon={bookmarkIcon}>
+      <PopoverMenu.Item onClick={onMenuClicked} icon={<PlusIcon />}>
         Save to Collection
         {/* {isVerseBookmarked ? `${t('bookmarked')}!` : `${t('bookmark')}`} */}
       </PopoverMenu.Item>

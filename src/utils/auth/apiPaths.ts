@@ -45,6 +45,8 @@ export const makeAddCollectionUrl = () => makeUrl('collections');
 export const makeUpdateCollectionUrl = (collectionId: string) =>
   makeUrl(`collections/${collectionId}`);
 
+export const deleteCollectionUrl = (collectionId: string) => makeUrl(`collections/${collectionId}`);
+
 export const makeBookmarkCollectionsUrl = (
   mushafId: number,
   key: number,

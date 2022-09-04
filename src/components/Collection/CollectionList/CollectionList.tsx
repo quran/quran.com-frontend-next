@@ -1,12 +1,15 @@
+import { useState } from 'react';
+
 import useTranslation from 'next-translate/useTranslation';
 import Link from 'next/link';
 import useSWR from 'swr';
 
-import ChevronDownIcon from '../../../../public/icons/chevron-down.svg';
 import OverflowMenuIcon from '../../../../public/icons/menu_more_horiz.svg';
 import BookmarkIcon from '../../../../public/icons/unbookmarked.svg';
 
 import styles from './CollectionList.module.scss';
+import CollectionListSort from './CollectionListSort';
+import DeleteCollectionAction from './DeleteCollectionAction';
 import RenameCollectionAction from './RenameCollectionAction';
 
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
@@ -14,31 +17,47 @@ import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
 import { getCollectionsList } from 'src/utils/auth/api';
 import { makeCollectionsUrl } from 'src/utils/auth/apiPaths';
 
+const defaultSortOptionId = 'recentlyUpdated';
+
 const CollectionList = () => {
   const { t } = useTranslation();
-  const { data, mutate } = useSWR(makeCollectionsUrl, getCollectionsList);
+  const [sortBy, setSortBy] = useState(defaultSortOptionId);
+  const { data, mutate } = useSWR(
+    makeCollectionsUrl({
+      sortBy,
+    }),
+    () =>
+      getCollectionsList({
+        sortBy,
+      }),
+  );
+
+  const sortOptions = [
+    { id: 'recentlyUpdated', label: t('collection:recently-updated') },
+    { id: 'alphabetical', label: t('collection:alphabetical') },
+  ];
 
   if (!data) return null;
 
   const collections = data?.data || [];
 
-  const onCollectionRenamed = () => {
+  const onSortOptionChanged = (val) => {
+    setSortBy(val);
+  };
+
+  const onCollectionUpdated = () => {
     mutate();
   };
 
-  const sorter = (
-    <div className={styles.sorter}>
-      {t('profile:recently-added')}
-      <span className={styles.itemIcon}>
-        <ChevronDownIcon />
-      </span>
-    </div>
-  );
   return (
     <div>
       <div className={styles.header}>
         <div>{t('profile:collections')}</div>
-        {sorter}
+        <CollectionListSort
+          options={sortOptions}
+          selectedOptionId={sortBy}
+          onChange={onSortOptionChanged}
+        />
       </div>
       <div className={styles.collectionListContainer}>
         {collections.map((collection) => {
@@ -77,9 +96,12 @@ const CollectionList = () => {
                   <RenameCollectionAction
                     currentCollectionName={collection.name}
                     collectionId={collection.id}
-                    onDone={onCollectionRenamed}
+                    onDone={onCollectionUpdated}
                   />
-                  <PopoverMenu.Item>{t('profile:delete')}</PopoverMenu.Item>
+                  <DeleteCollectionAction
+                    collectionId={collection.id}
+                    onDone={onCollectionUpdated}
+                  />
                 </PopoverMenu>
               </div>
             </Link>
