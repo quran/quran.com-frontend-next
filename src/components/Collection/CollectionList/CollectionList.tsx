@@ -7,6 +7,7 @@ import OverflowMenuIcon from '../../../../public/icons/menu_more_horiz.svg';
 import BookmarkIcon from '../../../../public/icons/unbookmarked.svg';
 
 import styles from './CollectionList.module.scss';
+import RenameCollectionAction from './RenameCollectionAction';
 
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
@@ -15,11 +16,15 @@ import { makeCollectionsUrl } from 'src/utils/auth/apiPaths';
 
 const CollectionList = () => {
   const { t } = useTranslation();
-  const { data } = useSWR(makeCollectionsUrl, getCollectionsList);
+  const { data, mutate } = useSWR(makeCollectionsUrl, getCollectionsList);
 
   if (!data) return null;
 
   const collections = data?.data || [];
+
+  const onCollectionRenamed = () => {
+    mutate();
+  };
 
   const sorter = (
     <div className={styles.sorter}>
@@ -69,7 +74,11 @@ const CollectionList = () => {
                   isModal
                   isPortalled
                 >
-                  <PopoverMenu.Item>{t('profile:rename')}</PopoverMenu.Item>
+                  <RenameCollectionAction
+                    currentCollectionName={collection.name}
+                    collectionId={collection.id}
+                    onDone={onCollectionRenamed}
+                  />
                   <PopoverMenu.Item>{t('profile:delete')}</PopoverMenu.Item>
                 </PopoverMenu>
               </div>

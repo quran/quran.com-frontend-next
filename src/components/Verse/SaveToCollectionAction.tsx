@@ -31,8 +31,8 @@ const SaveToCollectionAction = ({ verse }) => {
   const mushafId = getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines).mushaf;
   const { t } = useTranslation('common');
   const { data: collectionListData, mutate: mutateCollectionListData } = useSWR(
-    makeCollectionsUrl,
-    getCollectionsList,
+    makeCollectionsUrl({ limit: 50 }),
+    () => getCollectionsList({ limit: 50 }),
   );
 
   const { data: bookmarkCollectionIdsData, mutate: mutateBookmarkCollectionIdsData } =

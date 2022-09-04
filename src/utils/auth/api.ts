@@ -21,6 +21,8 @@ import {
   makeGetBookmarkByCollectionId,
   makeAddCollectionUrl,
   makeBookmarkCollectionsUrl,
+  CollectionsQueryParams,
+  makeUpdateCollectionUrl,
 } from 'src/utils/auth/apiPaths';
 import CompleteAnnouncementRequest from 'types/auth/CompleteAnnouncementRequest';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
@@ -160,8 +162,12 @@ export const addOrUpdateUserPreference = async (key: string, value: any, group: 
     group,
   });
 
-export const getCollectionsList = async () => {
-  return privateFetcher(makeCollectionsUrl());
+export const getCollectionsList = async (queryParams: CollectionsQueryParams) => {
+  return privateFetcher(makeCollectionsUrl(queryParams));
+};
+
+export const updateCollection = async (collectionId: string, { name }) => {
+  return postRequest(makeUpdateCollectionUrl(collectionId), { name });
 };
 
 export const getBookmarksByCollectionId = async (collectionId: string) => {
