@@ -23,6 +23,7 @@ import {
   makeBookmarkCollectionsUrl,
   CollectionsQueryParams,
   makeUpdateCollectionUrl,
+  BookmarkByCollectioIdQueryParams,
 } from 'src/utils/auth/apiPaths';
 import CompleteAnnouncementRequest from 'types/auth/CompleteAnnouncementRequest';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
@@ -174,8 +175,11 @@ export const deleteCollection = async (collectionId: string) => {
   return deleteRequest(makeUpdateCollectionUrl(collectionId));
 };
 
-export const getBookmarksByCollectionId = async (collectionId: string) => {
-  return privateFetcher(makeGetBookmarkByCollectionId(collectionId));
+export const getBookmarksByCollectionId = async (
+  collectionId: string,
+  queryParams: BookmarkByCollectioIdQueryParams,
+) => {
+  return privateFetcher(makeGetBookmarkByCollectionId(collectionId, queryParams));
 };
 
 export const addCollection = async (collectionName: string) => {

@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
 import useSWR from 'swr';
@@ -10,12 +12,21 @@ import { getBookmarksByCollectionId } from 'src/utils/auth/api';
 import { makeGetBookmarkByCollectionId } from 'src/utils/auth/apiPaths';
 import { getAllChaptersData } from 'src/utils/chapter';
 
+const defaultSortOptionId = 'recentlyAdded';
+
 const CollectionDetailPage = ({ chaptersData }) => {
   const router = useRouter();
   const collectionId = router.query['collection-id'] as string;
 
-  const { data } = useSWR(makeGetBookmarkByCollectionId, () =>
-    getBookmarksByCollectionId(collectionId),
+  const [sortBy, setSortBy] = useState(defaultSortOptionId);
+  const onSortByChange = (newSortByVal) => {
+    setSortBy(newSortByVal);
+  };
+
+  const { data } = useSWR(makeGetBookmarkByCollectionId(collectionId, { sortBy }), () =>
+    getBookmarksByCollectionId(collectionId, {
+      sortBy,
+    }),
   );
 
   if (!data) return null;
@@ -23,7 +34,12 @@ const CollectionDetailPage = ({ chaptersData }) => {
   return (
     <DataContext.Provider value={chaptersData}>
       <div className={styles.container}>
-        <CollectionDetail title={data.data.collection.name} collectionItems={data.data.bookmarks} />
+        <CollectionDetail
+          title={data.data.collection.name}
+          collectionItems={data.data.bookmarks}
+          sortBy={sortBy}
+          onSortByChange={onSortByChange}
+        />
       </div>
     </DataContext.Provider>
   );

@@ -55,8 +55,15 @@ export const makeBookmarkCollectionsUrl = (
 ): string =>
   makeUrl('bookmarks/collections', { mushafId, key, type, ...(verseNumber && { verseNumber }) });
 
-export const makeGetBookmarkByCollectionId = (collectionId: string) =>
-  makeUrl(`collections/${collectionId}`);
+export type BookmarkByCollectioIdQueryParams = {
+  cursor?: string;
+  limit?: number;
+  sortBy?: string;
+};
+export const makeGetBookmarkByCollectionId = (
+  collectionId: string,
+  queryParams: BookmarkByCollectioIdQueryParams,
+) => makeUrl(`collections/${collectionId}`, queryParams);
 
 export const makeBookmarksRangeUrl = (
   mushafId: number,

@@ -4,6 +4,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import ChevronDownIcon from '../../../../public/icons/chevron-down.svg';
 import OverflowMenuIcon from '../../../../public/icons/menu_more_horiz.svg';
+import CollectionSorter from '../CollectionSorter/CollectionSorter';
 
 import styles from './CollectionDetail.module.scss';
 
@@ -25,18 +26,32 @@ type CollectionItem = {
 type CollectionDetailProps = {
   title: string;
   collectionItems: CollectionItem[];
+  sortBy: string;
+  onSortByChange: (sortBy: string) => void;
 };
 
-const CollectionDetail = ({ title, collectionItems }: CollectionDetailProps) => {
+const CollectionDetail = ({
+  title,
+  collectionItems,
+  sortBy,
+  onSortByChange,
+}: CollectionDetailProps) => {
   const { t, lang } = useTranslation();
+
+  const sortOptions = [
+    {
+      id: 'recentlyAdded',
+      label: t('collection:recently-added'),
+    },
+    {
+      id: 'verseKey',
+      label: t('collection:verse-key'),
+    },
+  ];
+
   const chaptersData = useContext(DataContext);
   const sorter = (
-    <div className={styles.sorter}>
-      {t('collection:recently-added')}
-      <div className={styles.sorterIcon}>
-        <ChevronDownIcon />
-      </div>
-    </div>
+    <CollectionSorter selectedOptionId={sortBy} onChange={onSortByChange} options={sortOptions} />
   );
 
   return (
