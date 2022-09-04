@@ -50,7 +50,7 @@ jobs:
         run: yarn analyze
 
       - name: Analyze Pages
-        run: yarn analyze:bundle | tee .next/analyze/bundle-comparison.txt
+        run: yarn analyze:bundle
 
       - name: Upload bundle
         uses: actions/upload-artifact@v2

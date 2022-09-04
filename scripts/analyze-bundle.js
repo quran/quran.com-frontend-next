@@ -38,6 +38,7 @@ const pageSizes = Object.keys(bundle.pages).map((p) => {
 
 // Produce a Markdown table with each page & its size
 const sizes = pageSizes
+  .filter(({ path: pagePath, size }) => pagePath && size)
   .map(({ path: pagePath, size }) => `| \`${pagePath}\` | ${formatBytes(size)} |`)
   .join('\n');
 
