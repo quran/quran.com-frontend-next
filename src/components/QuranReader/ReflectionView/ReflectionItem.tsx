@@ -8,6 +8,11 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from './ReflectionItem.module.scss';
 
+import VerseAndTranslation from '@/components/Verse/VerseAndTranslation';
+import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
+import Link, { LinkVariant } from '@/dls/Link/Link';
+import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
+import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import ChatIcon from '@/icons/chat.svg';
 import ChevronDownIcon from '@/icons/chevron-down.svg';
 import CopyLinkIcon from '@/icons/copy-link.svg';
@@ -16,25 +21,20 @@ import LoveIcon from '@/icons/love.svg';
 import OverflowMenuIcon from '@/icons/menu_more_horiz.svg';
 import ShareIcon from '@/icons/share.svg';
 import VerifiedIcon from '@/icons/verified.svg';
-import Button, { ButtonShape, ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
-import Link, { LinkVariant } from 'src/components/dls/Link/Link';
-import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
-import { ToastStatus, useToast } from 'src/components/dls/Toast/Toast';
-import VerseAndTranslation from 'src/components/Verse/VerseAndTranslation';
-import DataContext from 'src/contexts/DataContext';
-import { getChapterData } from 'src/utils/chapter';
-import { formatDateRelatively } from 'src/utils/datetime';
-import { logButtonClick } from 'src/utils/eventLogger';
-import truncate from 'src/utils/html-truncate';
-import { toLocalizedNumber } from 'src/utils/locale';
+import { getChapterData } from '@/utils/chapter';
+import { formatDateRelatively } from '@/utils/datetime';
+import { logButtonClick } from '@/utils/eventLogger';
+import truncate from '@/utils/html-truncate';
+import { toLocalizedNumber } from '@/utils/locale';
 import {
   getQuranReflectPostCommentUrl,
   getQuranReflectAuthorUrl,
   getQuranReflectPostUrl,
   getQuranReflectTagUrl,
-} from 'src/utils/navigation';
-import { navigateToExternalUrl } from 'src/utils/url';
-import { makeVerseKey } from 'src/utils/verse';
+} from '@/utils/navigation';
+import { navigateToExternalUrl } from '@/utils/url';
+import { makeVerseKey } from '@/utils/verse';
+import DataContext from 'src/contexts/DataContext';
 
 export type VerseReference = {
   chapter: number;

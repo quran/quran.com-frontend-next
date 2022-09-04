@@ -13,8 +13,8 @@ import styles from './ChapterAndJuzList.module.scss';
 import ChapterAndJuzListSkeleton from './ChapterAndJuzListSkeleton';
 
 import CaretDownIcon from '@/icons/caret-down.svg';
-import { logButtonClick, logValueChange } from 'src/utils/eventLogger';
-import { shouldUseMinimalLayout, toLocalizedNumber } from 'src/utils/locale';
+import { logButtonClick, logValueChange } from '@/utils/eventLogger';
+import { shouldUseMinimalLayout, toLocalizedNumber } from '@/utils/locale';
 import Chapter from 'types/Chapter';
 
 enum View {

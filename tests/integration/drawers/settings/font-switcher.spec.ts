@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
+import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
 import Homepage from 'tests/POM/home-page';
 import { MushafLines, QuranFont } from 'types/QuranReader';
 

@@ -1,6 +1,6 @@
 import styles from './RepeatSetting.module.scss';
 
-import Counter from 'src/components/dls/Counter/Counter';
+import Counter from '@/dls/Counter/Counter';
 
 type RepeatSettingProps = {
   label: string;

@@ -2,11 +2,11 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from './CollectionList.module.scss';
 
+import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
+import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import ChevronDownIcon from '@/icons/chevron-down.svg';
 import OverflowMenuIcon from '@/icons/menu_more_horiz.svg';
 import BookmarkIcon from '@/icons/unbookmarked.svg';
-import Button, { ButtonShape, ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
-import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
 
 type Collection = {
   id: string | number;

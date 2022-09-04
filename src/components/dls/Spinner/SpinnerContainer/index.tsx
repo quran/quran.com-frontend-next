@@ -2,7 +2,7 @@ import React from 'react';
 
 import styles from './SpinnerContainer.module.scss';
 
-import Spinner from 'src/components/dls/Spinner/Spinner';
+import Spinner from '@/dls/Spinner/Spinner';
 
 type Props = {
   children: React.ReactNode;

@@ -1,7 +1,7 @@
 import React from 'react';
 
-import Button, { ButtonShape, ButtonSize, ButtonType } from 'src/components/dls/Button/Button';
-import { logButtonClick } from 'src/utils/eventLogger';
+import Button, { ButtonShape, ButtonSize, ButtonType } from '@/dls/Button/Button';
+import { logButtonClick } from '@/utils/eventLogger';
 
 interface Props {
   slug: string;

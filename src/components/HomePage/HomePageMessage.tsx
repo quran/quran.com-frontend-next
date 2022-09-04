@@ -9,8 +9,8 @@ import Button, { ButtonShape, ButtonSize, ButtonVariant } from '../dls/Button/Bu
 import styles from './HomePageMessage.module.scss';
 
 import CloseIcon from '@/icons/close.svg';
-import { logEvent } from 'src/utils/eventLogger';
-import openGivingLoopPopup from 'src/utils/givingloop';
+import { logEvent } from '@/utils/eventLogger';
+import openGivingLoopPopup from '@/utils/givingloop';
 
 type HomePageMessageProps = {
   title?: string;

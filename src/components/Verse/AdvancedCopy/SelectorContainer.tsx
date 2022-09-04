@@ -4,7 +4,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from './SelectorContainer.module.scss';
 
-import Combobox from 'src/components/dls/Forms/Combobox';
+import Combobox from '@/dls/Forms/Combobox';
 
 export interface RangeVerseItem {
   id: string;

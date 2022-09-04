@@ -2,8 +2,8 @@ import React from 'react';
 
 import { NextSeo } from 'next-seo';
 
-import { SEOProps } from 'src/utils/seo';
-import { truncateString } from 'src/utils/string';
+import { SEOProps } from '@/utils/seo';
+import { truncateString } from '@/utils/string';
 
 interface Props extends SEOProps {
   url?: string;

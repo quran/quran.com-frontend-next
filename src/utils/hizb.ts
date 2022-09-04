@@ -35,7 +35,7 @@ export const getHizbIds = (lang: string) => {
  */
 export const getChapterIdsForHizb = async (hizbId: string): Promise<string[]> => {
   return new Promise((res) => {
-    import(`../../data/hizb-to-chapter-mappings.json`).then((data) => {
+    import(`@/data/hizb-to-chapter-mappings.json`).then((data) => {
       res(data.default[hizbId]);
     });
   });

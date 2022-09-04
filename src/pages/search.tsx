@@ -8,32 +8,32 @@ import { useSelector } from 'react-redux';
 
 import styles from './search.module.scss';
 
+import NextSeoWrapper from '@/components/NextSeoWrapper';
+import TranslationsFilter from '@/components/Search/Filters/TranslationsFilter';
+import SearchBodyContainer from '@/components/Search/SearchBodyContainer';
+import Button, { ButtonSize, ButtonVariant } from '@/dls/Button/Button';
+import ContentModal, { ContentModalSize } from '@/dls/ContentModal/ContentModal';
+import Input, { InputVariant } from '@/dls/Forms/Input';
+import useAddQueryParamsToUrl from '@/hooks/useAddQueryParamsToUrl';
+import useDebounce from '@/hooks/useDebounce';
 import FilterIcon from '@/icons/filter.svg';
 import SearchIcon from '@/icons/search.svg';
-import { getAvailableLanguages, getAvailableTranslations, getSearchResults } from 'src/api';
-import Button, { ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
-import ContentModal, { ContentModalSize } from 'src/components/dls/ContentModal/ContentModal';
-import Input, { InputVariant } from 'src/components/dls/Forms/Input';
-import NextSeoWrapper from 'src/components/NextSeoWrapper';
-import TranslationsFilter from 'src/components/Search/Filters/TranslationsFilter';
-import SearchBodyContainer from 'src/components/Search/SearchBodyContainer';
-import DataContext from 'src/contexts/DataContext';
-import useAddQueryParamsToUrl from 'src/hooks/useAddQueryParamsToUrl';
-import useDebounce from 'src/hooks/useDebounce';
-import { getTranslationsInitialState } from 'src/redux/defaultSettings/util';
-import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';
-import { areArraysEqual } from 'src/utils/array';
-import { getAllChaptersData } from 'src/utils/chapter';
+import { getTranslationsInitialState } from '@/redux/defaultSettings/util';
+import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
+import { areArraysEqual } from '@/utils/array';
+import { getAllChaptersData } from '@/utils/chapter';
 import {
   logButtonClick,
   logEmptySearchResults,
   logEvent,
   logTextSearchQuery,
   logValueChange,
-} from 'src/utils/eventLogger';
-import filterTranslations from 'src/utils/filter-translations';
-import { getLanguageAlternates, toLocalizedNumber } from 'src/utils/locale';
-import { getCanonicalUrl } from 'src/utils/navigation';
+} from '@/utils/eventLogger';
+import filterTranslations from '@/utils/filter-translations';
+import { getLanguageAlternates, toLocalizedNumber } from '@/utils/locale';
+import { getCanonicalUrl } from '@/utils/navigation';
+import { getAvailableLanguages, getAvailableTranslations, getSearchResults } from 'src/api';
+import DataContext from 'src/contexts/DataContext';
 import { SearchResponse } from 'types/ApiResponses';
 import AvailableLanguage from 'types/AvailableLanguage';
 import AvailableTranslation from 'types/AvailableTranslation';

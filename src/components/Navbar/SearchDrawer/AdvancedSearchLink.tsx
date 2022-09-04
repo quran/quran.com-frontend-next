@@ -4,9 +4,9 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from './AdvancedSearchLink.module.scss';
 
-import Link from 'src/components/dls/Link/Link';
-import { logButtonClick } from 'src/utils/eventLogger';
-import { getSearchQueryNavigationUrl } from 'src/utils/navigation';
+import Link from '@/dls/Link/Link';
+import { logButtonClick } from '@/utils/eventLogger';
+import { getSearchQueryNavigationUrl } from '@/utils/navigation';
 
 interface Props {
   searchUrl?: string;

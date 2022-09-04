@@ -3,7 +3,7 @@ import useTranslation from 'next-translate/useTranslation';
 import BookmarkedVersesList from './BookmarkedVersesList';
 import styles from './BookmarksAndQuickLinks.module.scss';
 
-import Tabs from 'src/components/dls/Tabs/Tabs';
+import Tabs from '@/dls/Tabs/Tabs';
 
 enum View {
   Bookmarks = 'bookmarks',

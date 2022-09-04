@@ -5,7 +5,7 @@ import { RootState } from '../RootState';
 import { setIsUsingDefaultSettings } from '../slices/defaultSettings';
 import SliceName from '../types/SliceName';
 
-import { RESET_SETTINGS_EVENT } from 'src/redux/actions/reset-settings';
+import { RESET_SETTINGS_EVENT } from '@/redux/actions/reset-settings';
 
 const OBSERVED_ACTIONS = [
   `${SliceName.THEME}/setTheme`,

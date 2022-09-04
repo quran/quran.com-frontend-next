@@ -4,14 +4,14 @@
 
 import { RootState } from '../RootState';
 
-import { DefaultSettings } from 'src/redux/defaultSettings/defaultSettings';
-import AudioState from 'src/redux/types/AudioState';
-import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
-import ReadingPreferences from 'src/redux/types/ReadingPreferences';
-import SliceName from 'src/redux/types/SliceName';
-import TafsirsSettings from 'src/redux/types/TafsirsSettings';
-import Theme from 'src/redux/types/Theme';
-import TranslationsSettings from 'src/redux/types/TranslationsSettings';
+import { DefaultSettings } from '@/redux/defaultSettings/defaultSettings';
+import AudioState from '@/redux/types/AudioState';
+import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
+import ReadingPreferences from '@/redux/types/ReadingPreferences';
+import SliceName from '@/redux/types/SliceName';
+import TafsirsSettings from '@/redux/types/TafsirsSettings';
+import Theme from '@/redux/types/Theme';
+import TranslationsSettings from '@/redux/types/TranslationsSettings';
 
 /**
  * Get the initial state of the store.

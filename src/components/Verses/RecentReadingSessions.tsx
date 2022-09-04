@@ -8,17 +8,17 @@ import Link from '../dls/Link/Link';
 
 import styles from './RecentReadingSessions.module.scss';
 
-import SurahPreview, { SurahPreviewDisplay } from 'src/components/dls/SurahPreview/SurahPreview';
+import SurahPreview, { SurahPreviewDisplay } from '@/dls/SurahPreview/SurahPreview';
+import { selectRecentReadingSessions } from '@/redux/slices/QuranReader/readingTracker';
+import { privateFetcher } from '@/utils/auth/api';
+import { makeReadingSessionsUrl } from '@/utils/auth/apiPaths';
+import { isLoggedIn } from '@/utils/auth/login';
+import { getChapterData } from '@/utils/chapter';
+import { logButtonClick } from '@/utils/eventLogger';
+import { toLocalizedNumber } from '@/utils/locale';
+import { getChapterWithStartingVerseUrl } from '@/utils/navigation';
+import { getVerseAndChapterNumbersFromKey, makeVerseKey } from '@/utils/verse';
 import DataContext from 'src/contexts/DataContext';
-import { selectRecentReadingSessions } from 'src/redux/slices/QuranReader/readingTracker';
-import { privateFetcher } from 'src/utils/auth/api';
-import { makeReadingSessionsUrl } from 'src/utils/auth/apiPaths';
-import { isLoggedIn } from 'src/utils/auth/login';
-import { getChapterData } from 'src/utils/chapter';
-import { logButtonClick } from 'src/utils/eventLogger';
-import { toLocalizedNumber } from 'src/utils/locale';
-import { getChapterWithStartingVerseUrl } from 'src/utils/navigation';
-import { getVerseAndChapterNumbersFromKey, makeVerseKey } from 'src/utils/verse';
 import ReadingSession from 'types/ReadingSession';
 
 const RecentReadingSessions = () => {

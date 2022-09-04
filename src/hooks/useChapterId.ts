@@ -2,14 +2,14 @@ import { useState, useEffect, useContext } from 'react';
 
 import { useRouter } from 'next/router';
 
+import { getChapterIdsForJuz, getChapterIdsForPage } from '@/utils/chapter';
+import { getChapterIdsForHizb } from '@/utils/hizb';
+import { formatStringNumber } from '@/utils/number';
+import { getChapterIdsForRub } from '@/utils/rub';
+import { isValidChapterId, isValidVerseKey } from '@/utils/validator';
+import { getChapterNumberFromKey } from '@/utils/verse';
 import { getChapterIdBySlug } from 'src/api';
 import DataContext from 'src/contexts/DataContext';
-import { getChapterIdsForJuz, getChapterIdsForPage } from 'src/utils/chapter';
-import { getChapterIdsForHizb } from 'src/utils/hizb';
-import { formatStringNumber } from 'src/utils/number';
-import { getChapterIdsForRub } from 'src/utils/rub';
-import { isValidChapterId, isValidVerseKey } from 'src/utils/validator';
-import { getChapterNumberFromKey } from 'src/utils/verse';
 
 /**
  * Given a url path such as `/chapter/1`, return the chapters id

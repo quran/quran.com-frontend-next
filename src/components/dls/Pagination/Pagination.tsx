@@ -6,10 +6,10 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from './Pagination.module.scss';
 
+import Button, { ButtonVariant } from '@/dls/Button/Button';
 import PreviousIcon from '@/icons/caret-back.svg';
 import NextIcon from '@/icons/caret-forward.svg';
-import Button, { ButtonVariant } from 'src/components/dls/Button/Button';
-import { toLocalizedNumber } from 'src/utils/locale';
+import { toLocalizedNumber } from '@/utils/locale';
 
 interface Props {
   currentPage: number;

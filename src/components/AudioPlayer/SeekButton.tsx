@@ -3,12 +3,12 @@ import { useContext, useMemo } from 'react';
 import { useSelector } from '@xstate/react';
 import useTranslation from 'next-translate/useTranslation';
 
+import Button, { ButtonShape, ButtonVariant } from '@/dls/Button/Button';
 import BackwardIcon from '@/icons/backward.svg';
 import ForwardIcon from '@/icons/forward.svg';
-import Button, { ButtonShape, ButtonVariant } from 'src/components/dls/Button/Button';
+import { getChapterData } from '@/utils/chapter';
+import { logButtonClick } from '@/utils/eventLogger';
 import DataContext from 'src/contexts/DataContext';
-import { getChapterData } from 'src/utils/chapter';
-import { logButtonClick } from 'src/utils/eventLogger';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 
 export enum SeekButtonType {

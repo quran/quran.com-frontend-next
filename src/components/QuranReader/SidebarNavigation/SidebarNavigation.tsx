@@ -8,21 +8,21 @@ import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import styles from './SidebarNavigation.module.scss';
 import SidebarNavigationSelections from './SidebarNavigationSelections';
 
+import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
+import KeyboardInput from '@/dls/KeyboardInput';
+import Switch from '@/dls/Switch/Switch';
+import useOutsideClickDetector from '@/hooks/useOutsideClickDetector';
 import IconClose from '@/icons/close.svg';
-import Button, { ButtonShape, ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
-import KeyboardInput from 'src/components/dls/KeyboardInput';
-import Switch from 'src/components/dls/Switch/Switch';
-import useOutsideClickDetector from 'src/hooks/useOutsideClickDetector';
-import { selectContextMenu } from 'src/redux/slices/QuranReader/contextMenu';
+import { selectContextMenu } from '@/redux/slices/QuranReader/contextMenu';
 import {
   selectIsSidebarNavigationVisible,
   selectNavigationItem,
   selectSelectedNavigationItem,
   NavigationItem,
   setIsVisible,
-} from 'src/redux/slices/QuranReader/sidebarNavigation';
-import { logButtonClick, logEvent, logValueChange } from 'src/utils/eventLogger';
-import { isMobile } from 'src/utils/responsive';
+} from '@/redux/slices/QuranReader/sidebarNavigation';
+import { logButtonClick, logEvent, logValueChange } from '@/utils/eventLogger';
+import { isMobile } from '@/utils/responsive';
 
 const SidebarNavigation = () => {
   const { isExpanded: isContextMenuExpanded } = useSelector(selectContextMenu, shallowEqual);

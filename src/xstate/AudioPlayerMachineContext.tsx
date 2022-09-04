@@ -11,8 +11,8 @@ import {
   persistXstateToLocalStorage,
 } from './actors/audioPlayer/audioPlayerPersistHelper';
 
-import { ToastStatus, useToast } from 'src/components/dls/Toast/Toast';
-import { DEFAULT_RECITER } from 'src/redux/defaultSettings/defaultSettings';
+import { ToastStatus, useToast } from '@/dls/Toast/Toast';
+import { DEFAULT_RECITER } from '@/redux/defaultSettings/defaultSettings';
 
 export const AudioPlayerMachineContext = createContext(
   {} as InterpreterFrom<typeof audioPlayerMachine>,

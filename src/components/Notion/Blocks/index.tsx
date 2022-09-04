@@ -2,7 +2,7 @@ import classNames from 'classnames';
 
 import styles from './Blocks.module.scss';
 
-import Text from 'src/components/Changelog/Text';
+import Text from '@/components/Changelog/Text';
 
 export const renderBlock = (block, pageTitle: string) => {
   const { type } = block;

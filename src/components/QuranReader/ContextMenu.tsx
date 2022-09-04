@@ -9,21 +9,21 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import styles from './ContextMenu.module.scss';
 
 import ChevronDownIcon from '@/icons/chevron-down.svg';
-import DataContext from 'src/contexts/DataContext';
-import { selectNavbar } from 'src/redux/slices/navbar';
-import { selectContextMenu } from 'src/redux/slices/QuranReader/contextMenu';
-import { selectNotes } from 'src/redux/slices/QuranReader/notes';
-import { selectLastReadVerseKey } from 'src/redux/slices/QuranReader/readingTracker';
+import { selectNavbar } from '@/redux/slices/navbar';
+import { selectContextMenu } from '@/redux/slices/QuranReader/contextMenu';
+import { selectNotes } from '@/redux/slices/QuranReader/notes';
+import { selectLastReadVerseKey } from '@/redux/slices/QuranReader/readingTracker';
 import {
   selectIsSidebarNavigationVisible,
   setIsVisible,
-} from 'src/redux/slices/QuranReader/sidebarNavigation';
-import { getChapterData, getChapterReadingProgress } from 'src/utils/chapter';
-import { logEvent } from 'src/utils/eventLogger';
-import { getJuzNumberByHizb } from 'src/utils/juz';
-import { toLocalizedNumber } from 'src/utils/locale';
-import { isMobile } from 'src/utils/responsive';
-import { getVerseNumberFromKey } from 'src/utils/verse';
+} from '@/redux/slices/QuranReader/sidebarNavigation';
+import { getChapterData, getChapterReadingProgress } from '@/utils/chapter';
+import { logEvent } from '@/utils/eventLogger';
+import { getJuzNumberByHizb } from '@/utils/juz';
+import { toLocalizedNumber } from '@/utils/locale';
+import { isMobile } from '@/utils/responsive';
+import { getVerseNumberFromKey } from '@/utils/verse';
+import DataContext from 'src/contexts/DataContext';
 
 const ContextMenu = () => {
   const dispatch = useDispatch();

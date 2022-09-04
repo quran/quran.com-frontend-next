@@ -5,8 +5,8 @@ import classNames from 'classnames';
 import LinkContainer from './LinkContainer';
 import styles from './NavigationDrawerItem.module.scss';
 
+import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
 import IconNorthEast from '@/icons/north_east.svg';
-import IconContainer, { IconColor, IconSize } from 'src/components/dls/IconContainer/IconContainer';
 
 type NavigationDrawerItemProps = {
   title?: string;

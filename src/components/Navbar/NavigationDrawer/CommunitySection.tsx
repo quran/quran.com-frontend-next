@@ -2,9 +2,9 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from './CommunitySection.module.scss';
 
+import Button, { ButtonType } from '@/dls/Button/Button';
+import Link from '@/dls/Link/Link';
 import DiscordIcon from '@/icons/discord-icon.svg';
-import Button, { ButtonType } from 'src/components/dls/Button/Button';
-import Link from 'src/components/dls/Link/Link';
 
 const CommunitySection = () => {
   const { t } = useTranslation('common');

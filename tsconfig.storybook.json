@@ -11,7 +11,10 @@
     "rootDirs": ["src", "stories"],
     "baseUrl": "src",
     "paths": {
-      "@/icons/*": ["../public/icons/*"]
+      "@/icons/*": ["../public/icons/*"],
+      "@/dls/*": ["./components/dls/*"],
+      "@/data/*": ["../data/*"],
+      "@/*": ["./*"],
     },
     "forceConsistentCasingInFileNames": true,
     "suppressImplicitAnyIndexErrors": true,

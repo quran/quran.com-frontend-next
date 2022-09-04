@@ -2,7 +2,7 @@ import Trans from 'next-translate/Trans';
 
 import styles from '../WelcomeMessageModalBody.module.scss';
 
-import Link, { LinkVariant } from 'src/components/dls/Link/Link';
+import Link, { LinkVariant } from '@/dls/Link/Link';
 
 const Slide3 = ({ action }) => {
   return (

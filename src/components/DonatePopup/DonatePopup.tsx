@@ -10,9 +10,9 @@ import Modal from '../dls/Modal/Modal';
 import styles from './DonatePopup.module.scss';
 
 import CloseIcon from '@/icons/close.svg';
-import { selectSessionCount } from 'src/redux/slices/session';
-import { logEvent } from 'src/utils/eventLogger';
-import openGivingLoopPopup from 'src/utils/givingloop';
+import { selectSessionCount } from '@/redux/slices/session';
+import { logEvent } from '@/utils/eventLogger';
+import openGivingLoopPopup from '@/utils/givingloop';
 
 const POPUP_VISIBILITY_FREQUENCY_BY_SESSION_COUNT = 10;
 const DonatePopup = () => {
