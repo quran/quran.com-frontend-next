@@ -1,12 +1,10 @@
-import useTranslation from 'next-translate/useTranslation';
-
 import ChevronDownIcon from '../../../../public/icons/chevron-down.svg';
 
-import styles from './CollectionList.module.scss';
+import styles from './CollectionSorter.module.scss';
 
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
 
-const CollectionListSort = ({ options, selectedOptionId, onChange }) => {
+const CollectionSorter = ({ options, selectedOptionId, onChange }) => {
   const selectedOption = options.find((option) => option.id === selectedOptionId);
 
   return (
@@ -35,4 +33,4 @@ const CollectionListSort = ({ options, selectedOptionId, onChange }) => {
   );
 };
 
-export default CollectionListSort;
+export default CollectionSorter;

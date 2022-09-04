@@ -6,9 +6,9 @@ import useSWR from 'swr';
 
 import OverflowMenuIcon from '../../../../public/icons/menu_more_horiz.svg';
 import BookmarkIcon from '../../../../public/icons/unbookmarked.svg';
+import CollectionSorter from '../CollectionSorter/CollectionSorter';
 
 import styles from './CollectionList.module.scss';
-import CollectionListSort from './CollectionListSort';
 import DeleteCollectionAction from './DeleteCollectionAction';
 import RenameCollectionAction from './RenameCollectionAction';
 
@@ -53,7 +53,7 @@ const CollectionList = () => {
     <div>
       <div className={styles.header}>
         <div>{t('profile:collections')}</div>
-        <CollectionListSort
+        <CollectionSorter
           options={sortOptions}
           selectedOptionId={sortBy}
           onChange={onSortOptionChanged}
