@@ -6,6 +6,7 @@ import useTranslation from 'next-translate/useTranslation';
 import dynamic from 'next/dynamic';
 
 import OverflowMenuIcon from '../../../public/icons/menu_more_horiz.svg';
+import Popover from '../dls/Popover';
 import cellStyles from '../QuranReader/TranslationView/TranslationViewCell.module.scss';
 
 import styles from './OverflowVerseActionsMenuBody.module.scss';

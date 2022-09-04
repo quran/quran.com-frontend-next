@@ -34,6 +34,16 @@ export const makeBookmarksUrl = (mushafId: number): string => makeUrl('bookmarks
 
 export const makeCollectionsUrl = (): string => makeUrl('collections');
 
+export const makeAddCollectionUrl = () => makeUrl('collections');
+
+export const makeBookmarkCollectionsUrl = (
+  mushafId: number,
+  key: number,
+  type: BookmarkType,
+  verseNumber?: number,
+): string =>
+  makeUrl('bookmarks/collections', { mushafId, key, type, ...(verseNumber && { verseNumber }) });
+
 export const makeGetBookmarkByCollectionId = (collectionId: string) =>
   makeUrl(`collections/${collectionId}`);
 

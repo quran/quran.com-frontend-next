@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { configureRefreshFetch } from 'refresh-fetch';
 
 import { fetcher } from 'src/api';
@@ -18,6 +19,8 @@ import {
   makeRefreshTokenUrl,
   makeCollectionsUrl,
   makeGetBookmarkByCollectionId,
+  makeAddCollectionUrl,
+  makeBookmarkCollectionsUrl,
 } from 'src/utils/auth/apiPaths';
 import CompleteAnnouncementRequest from 'types/auth/CompleteAnnouncementRequest';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
@@ -84,13 +87,31 @@ export const completeAnnouncement = async (data: CompleteAnnouncementRequest): P
 
 export const deleteAccount = async (): Promise<void> => deleteRequest(makeDeleteAccountUrl());
 
-export const addOrRemoveBookmark = async (
-  key: number,
-  mushafId: number,
-  type: BookmarkType,
-  isAdd: boolean,
-  verseNumber?: number,
-) => postRequest(makeBookmarksUrl(mushafId), { key, mushaf: mushafId, type, verseNumber, isAdd });
+type AddOrRemoveBookmarkParams = {
+  key: number;
+  mushafId: number;
+  type: BookmarkType;
+  isAdd: boolean;
+  verseNumber?: number;
+  collectionId?: string;
+};
+
+export const addOrRemoveBookmark = async ({
+  key,
+  mushafId,
+  type,
+  verseNumber,
+  isAdd,
+  collectionId,
+}: AddOrRemoveBookmarkParams) =>
+  postRequest(makeBookmarksUrl(mushafId), {
+    key,
+    mushaf: mushafId,
+    type,
+    verseNumber,
+    isAdd,
+    collectionId,
+  });
 
 export const getPageBookmarks = async (
   mushafId: number,
@@ -107,6 +128,13 @@ export const getIsResourceBookmarked = async (
   verseNumber?: number,
 ): Promise<boolean> =>
   privateFetcher(makeIsResourceBookmarkedUrl(mushafId, key, type, verseNumber));
+
+export const getBookmarkCollections = async (
+  mushafId: number,
+  key: number,
+  type: BookmarkType,
+  verseNumber?: number,
+) => privateFetcher(makeBookmarkCollectionsUrl(mushafId, key, type, verseNumber));
 
 export const addReadingSession = async (chapterNumber: number, verseNumber: number) =>
   postRequest(makeReadingSessionsUrl(), {
@@ -138,6 +166,10 @@ export const getCollectionsList = async () => {
 
 export const getBookmarksByCollectionId = async (collectionId: string) => {
   return privateFetcher(makeGetBookmarkByCollectionId(collectionId));
+};
+
+export const addCollection = async (collectionName: string) => {
+  return postRequest(makeAddCollectionUrl(), { name: collectionName });
 };
 
 export const requestVerificationCode = async (emailToVerify) => {

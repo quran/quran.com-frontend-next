@@ -14,7 +14,7 @@ import { RuleType } from 'types/FieldRule';
 import { FormFieldType } from 'types/FormField';
 
 export type Collection = {
-  id: string | number;
+  id: string;
   name: string;
   checked?: boolean;
 };
@@ -22,9 +22,10 @@ export type Collection = {
 type SaveToCollectionModalProps = {
   isOpen: boolean;
   collections: Collection[];
-  onCollectionToggled: (collection: Collection) => void;
-  onNewCollectionCreated: (name: string) => void;
+  onCollectionToggled: (collection: Collection, newValue: boolean) => void;
+  onNewCollectionCreated: (name: string) => Promise<void>;
   isAddingNewCollection?: boolean;
+  onClose?: () => void;
 };
 
 const SaveToCollectionModal = ({
@@ -32,12 +33,13 @@ const SaveToCollectionModal = ({
   collections,
   onCollectionToggled,
   onNewCollectionCreated,
+  onClose,
 }: SaveToCollectionModalProps) => {
   const [isAddingNewCollection, setIsAddingNewCollection] = useState(false);
   const { t } = useTranslation();
 
   return (
-    <Modal isOpen={isOpen}>
+    <Modal isOpen={isOpen} onClickOutside={onClose}>
       <Modal.Body>
         <div className={styles.header}>{t('quran-reader:save-to')}</div>
         <div className={styles.collectionList}>
@@ -45,9 +47,9 @@ const SaveToCollectionModal = ({
             <div className={styles.collectionItem} key={collection.id}>
               <Checkbox
                 id={collection.name}
-                checked={collection.checked}
+                defaultChecked={collection.checked}
                 label={collection.name}
-                onChange={() => onCollectionToggled(collection)}
+                onChange={(checked) => onCollectionToggled(collection, checked)}
               />
             </div>
           ))}
@@ -76,7 +78,7 @@ const SaveToCollectionModal = ({
                 ]}
                 actionText={t('common:submit')}
                 onSubmit={(data: any) => {
-                  onNewCollectionCreated(data.name);
+                  onNewCollectionCreated(data.name).then(() => setIsAddingNewCollection(false));
                 }}
               />
             </div>
