@@ -205,6 +205,7 @@ export const withCredentialsFetcher = async <T>(
   init?: RequestInit,
 ): Promise<T> => {
   try {
+    console.log('aaa');
     const data = await fetcher<T>(input, { ...init, credentials: 'include' });
     return data;
   } catch (error) {

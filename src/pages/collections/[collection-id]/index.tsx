@@ -2,13 +2,15 @@ import { useState } from 'react';
 
 import { GetStaticPaths, GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
-import useSWR from 'swr';
+import useSWRInfinite from 'swr/infinite';
 
 import styles from './index.module.scss';
 
 import CollectionDetail from 'src/components/Collection/CollectionDetail/CollectionDetail';
+import Button from 'src/components/dls/Button/Button';
 import DataContext from 'src/contexts/DataContext';
-import { getBookmarksByCollectionId } from 'src/utils/auth/api';
+// import useScrollListener from 'src/hooks/useScrollListener';
+import { privateFetcher } from 'src/utils/auth/api';
 import { makeGetBookmarkByCollectionId } from 'src/utils/auth/apiPaths';
 import { getAllChaptersData } from 'src/utils/chapter';
 
@@ -19,27 +21,57 @@ const CollectionDetailPage = ({ chaptersData }) => {
   const collectionId = router.query['collection-id'] as string;
 
   const [sortBy, setSortBy] = useState(defaultSortOptionId);
+
   const onSortByChange = (newSortByVal) => {
     setSortBy(newSortByVal);
   };
 
-  const { data } = useSWR(makeGetBookmarkByCollectionId(collectionId, { sortBy }), () =>
-    getBookmarksByCollectionId(collectionId, {
-      sortBy,
-    }),
-  );
+  const getKey = (pageIndex, previousPageData) => {
+    if (previousPageData && !previousPageData.data) return null;
+    // first page, we don't have `previousPageData`
+    if (pageIndex === 0) {
+      return makeGetBookmarkByCollectionId(collectionId, {
+        sortBy,
+      });
+    }
 
-  if (!data) return null;
+    const cursor = previousPageData.pagination?.endCursor;
+    return makeGetBookmarkByCollectionId(collectionId, {
+      sortBy,
+      cursor,
+    });
+  };
+
+  const { data, size, setSize } = useSWRInfinite(getKey, privateFetcher);
+
+  if (!data || data.length === 0) {
+    return null;
+  }
+
+  const lastPageData = data[data.length - 1];
+  const { hasNextPage } = lastPageData.pagination;
+
+  const bookmarks = data.map((response) => response.data.bookmarks).flat();
+  const title = data[0].data.collection.name;
 
   return (
     <DataContext.Provider value={chaptersData}>
       <div className={styles.container}>
         <CollectionDetail
-          title={data.data.collection.name}
-          collectionItems={data.data.bookmarks}
+          title={title}
+          collectionItems={bookmarks}
           sortBy={sortBy}
           onSortByChange={onSortByChange}
         />
+        {hasNextPage && (
+          <Button
+            onClick={() => {
+              setSize(size + 1);
+            }}
+          >
+            Load more
+          </Button>
+        )}
       </div>
     </DataContext.Provider>
   );

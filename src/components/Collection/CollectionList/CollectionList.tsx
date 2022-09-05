@@ -1,4 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+
+import console from 'console';
 
 import useTranslation from 'next-translate/useTranslation';
 import Link from 'next/link';
@@ -22,14 +24,12 @@ const defaultSortOptionId = 'recentlyUpdated';
 const CollectionList = () => {
   const { t } = useTranslation();
   const [sortBy, setSortBy] = useState(defaultSortOptionId);
-  const { data, mutate } = useSWR(
-    makeCollectionsUrl({
-      sortBy,
-    }),
-    () =>
-      getCollectionsList({
-        sortBy,
-      }),
+  const apiParams = {
+    sortBy,
+  };
+
+  const { data, mutate } = useSWR(makeCollectionsUrl(apiParams), () =>
+    getCollectionsList(apiParams),
   );
 
   const sortOptions = [
