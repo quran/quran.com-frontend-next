@@ -9,7 +9,6 @@ import styles from './index.module.scss';
 import CollectionDetail from 'src/components/Collection/CollectionDetail/CollectionDetail';
 import Button from 'src/components/dls/Button/Button';
 import DataContext from 'src/contexts/DataContext';
-// import useScrollListener from 'src/hooks/useScrollListener';
 import { privateFetcher } from 'src/utils/auth/api';
 import { makeGetBookmarkByCollectionId } from 'src/utils/auth/apiPaths';
 import { getAllChaptersData } from 'src/utils/chapter';
