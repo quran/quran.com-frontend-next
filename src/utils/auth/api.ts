@@ -23,11 +23,12 @@ import {
   makeBookmarkCollectionsUrl,
   CollectionsQueryParams,
   makeUpdateCollectionUrl,
-  BookmarkByCollectioIdQueryParams,
+  BookmarkByCollectionIdQueryParams,
   makeDeleteCollectionUrl,
   makeDeleteCollectionBookmarkUrl,
 } from 'src/utils/auth/apiPaths';
 import CompleteAnnouncementRequest from 'types/auth/CompleteAnnouncementRequest';
+import { GetBookmarkCollectionsIdResponse } from 'types/auth/GetBookmarksByCollectionId';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 import RefreshToken from 'types/auth/RefreshToken';
 import SyncDataType from 'types/auth/SyncDataType';
@@ -183,8 +184,8 @@ export const deleteCollectionBookmark = async (collectionId: string, bookmarkId:
 
 export const getBookmarksByCollectionId = async (
   collectionId: string,
-  queryParams: BookmarkByCollectioIdQueryParams,
-) => {
+  queryParams: BookmarkByCollectionIdQueryParams,
+): Promise<GetBookmarkCollectionsIdResponse> => {
   return privateFetcher(makeGetBookmarkByCollectionId(collectionId, queryParams));
 };
 

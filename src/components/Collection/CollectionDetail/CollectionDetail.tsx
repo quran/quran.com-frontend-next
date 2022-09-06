@@ -25,20 +25,13 @@ import { deleteCollectionBookmark } from 'src/utils/auth/api';
 import { getChapterData } from 'src/utils/chapter';
 import { toLocalizedVerseKey } from 'src/utils/locale';
 import { makeVerseKey } from 'src/utils/verse';
-
-type CollectionItem = {
-  createdAt: string;
-  group: string;
-  id: string;
-  key: number;
-  type: string;
-  verseNumber: number;
-};
+import { VersesResponse } from 'types/ApiResponses';
+import Bookmark from 'types/Bookmark';
 
 type CollectionDetailProps = {
   id: string;
   title: string;
-  collectionItems: CollectionItem[];
+  collectionItems: Bookmark[];
   sortBy: string;
   onSortByChange: (sortBy: string) => void;
   onUpdated: () => void;
@@ -118,12 +111,8 @@ const CollectionDetail = ({
                 const chapterId = bookmark.key;
                 const params = {
                   words: true,
-                  // translation_fields: resource_name,language_id
                   perPage: 1,
-                  // fields: text_uthmani,chapter_id,hizb_number,text_imlaei_simple
                   translations: selectedTranslations.join(','),
-                  // reciter: 7
-                  // word_translation_language: en
                   page: bookmark.verseNumber,
                   ...getDefaultWordFields(quranReaderStyles.quranFont),
                   mushaf,
@@ -132,7 +121,7 @@ const CollectionDetail = ({
                 return (
                   <DataFetcher
                     queryKey={makeVersesUrl(chapterId.toString(), lang, params)}
-                    render={(data) => {
+                    render={(data: VersesResponse) => {
                       const firstVerse = data.verses?.[0];
                       return (
                         <div>

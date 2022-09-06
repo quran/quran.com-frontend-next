@@ -9,7 +9,7 @@ import { getVerseWords } from 'src/utils/verse';
 import Verse from 'types/Verse';
 
 interface Props {
-  verses: Record<string, Verse>;
+  verses: Verse[];
 }
 
 const TafsirVerseText: React.FC<Props> = ({ verses }) => {
@@ -23,13 +23,7 @@ const TafsirVerseText: React.FC<Props> = ({ verses }) => {
     [verses],
   );
   useQcfFont(quranFont, tafsirVerses);
-  const words = useMemo(
-    () =>
-      Object.values(verses)
-        .map((verse) => getVerseWords(verse))
-        .flat(),
-    [verses],
-  );
+  const words = useMemo(() => verses.map((verse) => getVerseWords(verse)).flat(), [verses]);
   return <PlainVerseText words={words} />;
 };
 

@@ -209,7 +209,7 @@ const TafsirBody = ({
             <TafsirGroupMessage from={firstVerseKey} to={lastVerseKey} />
           )}
           <div className={styles.verseTextContainer}>
-            <TafsirVerseText verses={verses} />
+            <TafsirVerseText verses={Object.values(verses)} />
           </div>
           <div className={styles.separatorContainer}>
             <Separator />

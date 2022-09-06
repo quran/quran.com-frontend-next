@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 import { GetStaticPaths, GetStaticProps } from 'next';
+import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 import useSWRInfinite from 'swr/infinite';
 
@@ -12,10 +13,12 @@ import DataContext from 'src/contexts/DataContext';
 import { privateFetcher } from 'src/utils/auth/api';
 import { makeGetBookmarkByCollectionId } from 'src/utils/auth/apiPaths';
 import { getAllChaptersData } from 'src/utils/chapter';
+import { GetBookmarkCollectionsIdResponse } from 'types/auth/GetBookmarksByCollectionId';
 
 const defaultSortOptionId = 'recentlyAdded';
 
 const CollectionDetailPage = ({ chaptersData }) => {
+  const { t } = useTranslation();
   const router = useRouter();
   const collectionId = router.query.collectionId as string;
 
@@ -27,6 +30,7 @@ const CollectionDetailPage = ({ chaptersData }) => {
 
   const getKey = (pageIndex, previousPageData) => {
     if (previousPageData && !previousPageData.data) return null;
+
     // first page, we don't have `previousPageData`
     if (pageIndex === 0) {
       return makeGetBookmarkByCollectionId(collectionId, {
@@ -41,7 +45,10 @@ const CollectionDetailPage = ({ chaptersData }) => {
     });
   };
 
-  const { data, size, setSize, mutate } = useSWRInfinite(getKey, privateFetcher);
+  const { data, size, setSize, mutate } = useSWRInfinite<GetBookmarkCollectionsIdResponse>(
+    getKey,
+    privateFetcher,
+  );
 
   if (!data || data.length === 0) {
     return null;
@@ -74,7 +81,7 @@ const CollectionDetailPage = ({ chaptersData }) => {
               setSize(size + 1);
             }}
           >
-            Load more
+            {t('collection:load-more')}
           </Button>
         )}
       </div>
