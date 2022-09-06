@@ -18,7 +18,7 @@ const defaultSortOptionId = 'recentlyAdded';
 
 const CollectionDetailPage = ({ chaptersData }) => {
   const router = useRouter();
-  const collectionId = router.query['collection-id'] as string;
+  const collectionId = router.query.collectionId as string;
 
   const [sortBy, setSortBy] = useState(defaultSortOptionId);
 
@@ -42,11 +42,15 @@ const CollectionDetailPage = ({ chaptersData }) => {
     });
   };
 
-  const { data, size, setSize } = useSWRInfinite(getKey, privateFetcher);
+  const { data, size, setSize, mutate } = useSWRInfinite(getKey, privateFetcher);
 
   if (!data || data.length === 0) {
     return null;
   }
+
+  const onUpdated = () => {
+    mutate();
+  };
 
   const lastPageData = data[data.length - 1];
   const { hasNextPage } = lastPageData.pagination;
@@ -58,10 +62,12 @@ const CollectionDetailPage = ({ chaptersData }) => {
     <DataContext.Provider value={chaptersData}>
       <div className={styles.container}>
         <CollectionDetail
+          id={collectionId}
           title={title}
           collectionItems={bookmarks}
           sortBy={sortBy}
           onSortByChange={onSortByChange}
+          onUpdated={onUpdated}
         />
         {hasNextPage && (
           <Button

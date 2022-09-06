@@ -101,7 +101,7 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
         onActionTriggered={onActionTriggered}
         bookmarksRangeUrl={bookmarksRangeUrl}
       />
-      <SaveToCollectionAction verse={verse} />
+      <SaveToCollectionAction verse={verse} bookmarksRangeUrl={bookmarksRangeUrl} />
 
       <VerseActionRepeatAudio verseKey={verse.verseKey} />
     </div>

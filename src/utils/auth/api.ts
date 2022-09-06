@@ -24,6 +24,8 @@ import {
   CollectionsQueryParams,
   makeUpdateCollectionUrl,
   BookmarkByCollectioIdQueryParams,
+  makeDeleteCollectionUrl,
+  makeDeleteCollectionBookmarkUrl,
 } from 'src/utils/auth/apiPaths';
 import CompleteAnnouncementRequest from 'types/auth/CompleteAnnouncementRequest';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
@@ -172,7 +174,11 @@ export const updateCollection = async (collectionId: string, { name }) => {
 };
 
 export const deleteCollection = async (collectionId: string) => {
-  return deleteRequest(makeUpdateCollectionUrl(collectionId));
+  return deleteRequest(makeDeleteCollectionUrl(collectionId));
+};
+
+export const deleteCollectionBookmark = async (collectionId: string, bookmarkId: string) => {
+  return deleteRequest(makeDeleteCollectionBookmarkUrl(collectionId, bookmarkId));
 };
 
 export const getBookmarksByCollectionId = async (
@@ -205,7 +211,6 @@ export const withCredentialsFetcher = async <T>(
   init?: RequestInit,
 ): Promise<T> => {
   try {
-    console.log('aaa');
     const data = await fetcher<T>(input, { ...init, credentials: 'include' });
     return data;
   } catch (error) {

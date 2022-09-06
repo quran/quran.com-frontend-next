@@ -10,7 +10,9 @@ import CollectionSorter from '../CollectionSorter/CollectionSorter';
 import styles from './CollectionDetail.module.scss';
 
 import DataFetcher from 'src/components/DataFetcher';
+import Button, { ButtonVariant } from 'src/components/dls/Button/Button';
 import Collapsible from 'src/components/dls/Collapsible/Collapsible';
+import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
 import TafsirVerseText from 'src/components/QuranReader/TafsirView/TafsirVerseText';
 import TranslationText from 'src/components/QuranReader/TranslationView/TranslationText';
 import DataContext from 'src/contexts/DataContext';
@@ -19,6 +21,7 @@ import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/transla
 import { getDefaultWordFields, getMushafId } from 'src/utils/api';
 import { makeVersesUrl } from 'src/utils/apiPaths';
 import { areArraysEqual } from 'src/utils/array';
+import { deleteCollectionBookmark } from 'src/utils/auth/api';
 import { getChapterData } from 'src/utils/chapter';
 import { toLocalizedVerseKey } from 'src/utils/locale';
 import { makeVerseKey } from 'src/utils/verse';
@@ -33,23 +36,33 @@ type CollectionItem = {
 };
 
 type CollectionDetailProps = {
+  id: string;
   title: string;
   collectionItems: CollectionItem[];
   sortBy: string;
   onSortByChange: (sortBy: string) => void;
+  onUpdated: () => void;
 };
 
 const CollectionDetail = ({
+  id,
   title,
   collectionItems,
   sortBy,
   onSortByChange,
+  onUpdated,
 }: CollectionDetailProps) => {
   const { t, lang } = useTranslation();
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const { quranFont, mushafLines } = quranReaderStyles;
   const { mushaf } = getMushafId(quranFont, mushafLines);
   const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
+
+  const onBookmarkItemDeleted = (bookmarkId: string) => {
+    deleteCollectionBookmark(id, bookmarkId).then(() => {
+      onUpdated();
+    });
+  };
 
   const sortOptions = [
     {
@@ -74,9 +87,9 @@ const CollectionDetail = ({
         {sorter}
       </div>
       <div className={styles.collectionItemsContainer}>
-        {collectionItems.map((item) => {
-          const chapterData = getChapterData(chaptersData, item.key.toString());
-          const verseKey = makeVerseKey(item.key, item.verseNumber);
+        {collectionItems.map((bookmark) => {
+          const chapterData = getChapterData(chaptersData, bookmark.key.toString());
+          const verseKey = makeVerseKey(bookmark.key, bookmark.verseNumber);
           const itemTitle = `${chapterData.transliteratedName} ${toLocalizedVerseKey(
             verseKey,
             lang,
@@ -84,13 +97,25 @@ const CollectionDetail = ({
           return (
             <Collapsible
               title={itemTitle}
-              key={item.id}
+              key={bookmark.id}
               prefix={<ChevronDownIcon />}
-              suffix={<OverflowMenuIcon />}
+              suffix={
+                <PopoverMenu
+                  trigger={
+                    <Button variant={ButtonVariant.Ghost}>
+                      <OverflowMenuIcon />
+                    </Button>
+                  }
+                >
+                  <PopoverMenu.Item onClick={() => onBookmarkItemDeleted(bookmark.id)}>
+                    Delete
+                  </PopoverMenu.Item>
+                </PopoverMenu>
+              }
             >
               {({ isOpen }) => {
                 if (!isOpen) return null;
-                const chapterId = item.key;
+                const chapterId = bookmark.key;
                 const params = {
                   words: true,
                   // translation_fields: resource_name,language_id
@@ -99,7 +124,7 @@ const CollectionDetail = ({
                   translations: selectedTranslations.join(','),
                   // reciter: 7
                   // word_translation_language: en
-                  page: item.verseNumber,
+                  page: bookmark.verseNumber,
                   ...getDefaultWordFields(quranReaderStyles.quranFont),
                   mushaf,
                 };

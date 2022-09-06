@@ -30,7 +30,7 @@ import {
 import { isLoggedIn } from 'src/utils/auth/login';
 import BookmarkType from 'types/BookmarkType';
 
-const SaveToCollectionAction = ({ verse }) => {
+const SaveToCollectionAction = ({ verse, bookmarksRangeUrl }) => {
   const [isSaveCollectionModalOpen, setIsSaveCollectionModalOpen] = useState(false);
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const mushafId = getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines).mushaf;
@@ -86,6 +86,10 @@ const SaveToCollectionAction = ({ verse }) => {
         Number(verse.verseNumber),
       ),
     );
+
+    if (bookmarksRangeUrl) {
+      globalSWRMutate(bookmarksRangeUrl);
+    }
   };
 
   const onCollectionToggled = (changedCollection: Collection, newValue: boolean) => {
