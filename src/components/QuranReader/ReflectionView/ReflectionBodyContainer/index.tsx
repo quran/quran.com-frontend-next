@@ -53,7 +53,11 @@ const ReflectionBodyContainer = ({
   const body = (
     <DataFetcher
       loading={TafsirSkeleton}
-      queryKey={makeVerseReflectionsUrl(selectedChapterId, selectedVerseNumber, lang)}
+      queryKey={makeVerseReflectionsUrl({
+        chapterId: selectedChapterId,
+        verseNumber: selectedVerseNumber,
+        locale: lang,
+      })}
       render={renderBody}
     />
   );

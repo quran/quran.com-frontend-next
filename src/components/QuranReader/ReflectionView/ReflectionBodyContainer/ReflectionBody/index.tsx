@@ -19,12 +19,7 @@ import {
   getQuranReflectVerseUrl,
   getVerseReflectionNavigationUrl,
 } from '@/utils/navigation';
-import {
-  getVerseAndChapterNumbersFromKey,
-  isFirstVerseOfSurah,
-  isLastVerseOfSurah,
-  makeVerseKey,
-} from '@/utils/verse';
+import { isFirstVerseOfSurah, isLastVerseOfSurah, makeVerseKey } from '@/utils/verse';
 import DataContext from 'src/contexts/DataContext';
 
 /**
@@ -35,22 +30,11 @@ import DataContext from 'src/contexts/DataContext';
  * @returns {VerseReference[]} verseReferences
  */
 const getVerseReferencesFromReflection = (reflection: any): VerseReference[] => {
-  return reflection.referencedAyahs.map((reference) => {
-    const [chapterNumber, verseNumber] = getVerseAndChapterNumbersFromKey(reference.key.toString());
-    let from;
-    let to;
-
-    const verseRange = verseNumber || '';
-
-    if (verseRange.includes('-')) {
-      [from, to] = verseRange.split('-');
-    } else {
-      from = verseRange;
-      to = verseRange;
-    }
+  return reflection.filters.map((filter) => {
+    const { surahNumber, from, to } = filter;
 
     return {
-      chapter: Number(chapterNumber),
+      chapter: Number(surahNumber),
       from: Number(from),
       to: Number(to),
     };
@@ -131,10 +115,10 @@ const ReflectionBody: React.FC<Props> = ({
           authorName={reflection?.author?.name}
           authorUsername={reflection?.author?.username}
           isAuthorVerified={reflection?.author?.verified}
-          reflectionText={reflection?.htmlBody}
-          avatarUrl={reflection?.author?.avatarUrl}
+          reflectionText={reflection?.body}
+          avatarUrl={reflection?.author?.profileImg}
           verseReferences={getVerseReferencesFromReflection(reflection)}
-          likesCount={reflection?.likesCount}
+          likesCount={reflection?.likes}
           commentsCount={reflection?.commentsCount}
         />
       ))}

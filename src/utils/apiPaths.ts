@@ -1,7 +1,3 @@
-import { stringify } from 'querystring';
-
-import { decamelizeKeys } from 'humps';
-
 import { getDefaultWordFields, getMushafId, ITEMS_PER_PAGE, makeUrl } from './api';
 
 import { DEFAULT_RECITER } from '@/redux/defaultSettings/defaultSettings';
@@ -11,6 +7,7 @@ import {
 } from '@/redux/defaultSettings/util';
 import { AdvancedCopyRequest, PagesLookUpRequest, SearchRequest } from 'types/ApiRequests';
 import { MushafLines, QuranFont } from 'types/QuranReader';
+import VerseReflectionsRequestParams from 'types/VerseReflectionsRequestParams';
 
 export const DEFAULT_VERSES_PARAMS = {
   words: true,
@@ -281,17 +278,13 @@ export const makePageVersesUrl = (
  */
 export const makeFootnoteUrl = (footnoteId: string): string => makeUrl(`/foot_notes/${footnoteId}`);
 
-export const makeVerseReflectionsUrl = (chapterId: string, verseNumber: string, lang: string) => {
-  // TODO: revert this back once the API is ready
-  return `https://staging.quran.com/api/qdc/qr/reflections?${stringify(
-    decamelizeKeys({
-      ranges: `${chapterId}:${verseNumber}`,
-      author: true,
-      fields: 'created_at,html_body,comments_count,likes_count',
-      filter: 'latest',
-      verified: true,
-      authorFields: 'avatar_url',
-      lang,
-    }),
-  )}`;
+export const makeVerseReflectionsUrl = ({
+  chapterId,
+  verseNumber,
+  locale,
+  page = 1,
+  tab = 'most_popular',
+}: VerseReflectionsRequestParams) => {
+  const chapterNumber = Number(chapterId) + 1;
+  return `https://quranreflect.com/posts.json?client_auth_token=${process.env.NEXT_PUBLIC_QURAN_REFLECT_TOKEN}&q[filters_attributes][0][chapter_id]=${chapterNumber}&q[filters_attributes][0][from]=${verseNumber}&q[filters_attributes][0][to]=${verseNumber}&q[filters_operation]=OR&q[tags_operation]=OR&page=${page}&tab=${tab}&lang=${locale}`;
 };
