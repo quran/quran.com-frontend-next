@@ -37,6 +37,11 @@ type CollectionDetailProps = {
   onUpdated: () => void;
 };
 
+enum CollectionDetailSortOption {
+  RecentlyAdded = 'recentlyAdded',
+  VerseKey = 'verseKey',
+}
+
 const CollectionDetail = ({
   id,
   title,
@@ -59,11 +64,11 @@ const CollectionDetail = ({
 
   const sortOptions = [
     {
-      id: 'recentlyAdded',
+      id: CollectionDetailSortOption.RecentlyAdded,
       label: t('collection:recently-added'),
     },
     {
-      id: 'verseKey',
+      id: CollectionDetailSortOption.VerseKey,
       label: t('collection:verse-key'),
     },
   ];

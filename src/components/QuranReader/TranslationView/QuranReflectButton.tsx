@@ -14,7 +14,7 @@ import ReflectionBodyContainer from 'src/components/QuranReader/ReflectionView/R
 // import { logButtonClick } from 'src/utils/eventLogger';
 import {
   fakeNavigate,
-  getVerseReflectionNavigationUrl,
+  getQuranReflectVerseUrl,
   // getVerseReflectionNavigationUrl,
 } from 'src/utils/navigation';
 import { getVerseAndChapterNumbersFromKey } from 'src/utils/verse';
@@ -34,12 +34,12 @@ const QuranReflectButton = ({
   const router = useRouter();
   const [isContentModalOpen, setIsContentModalOpen] = useState(false);
 
-  const onButtonClicked = () => {
-    // eslint-disable-next-line i18next/no-literal-string
-    // logButtonClick(`${isTranslationView ? 'translation_view' : 'reading_view'}_reflect`);
-    setIsContentModalOpen(true);
-    fakeNavigate(getVerseReflectionNavigationUrl(verseKey), lang);
-  };
+  // const onButtonClicked = () => {
+  //   // eslint-disable-next-line i18next/no-literal-string
+  //   logButtonClick(`${isTranslationView ? 'translation_view' : 'reading_view'}_reflect`);
+  //   setIsContentModalOpen(true);
+  //   fakeNavigate(getVerseReflectionNavigationUrl(verseKey), lang);
+  // };
 
   const contentModalRef = useRef(null);
 
@@ -57,8 +57,9 @@ const QuranReflectButton = ({
     <>
       <Button
         variant={ButtonVariant.Ghost}
-        onClick={onButtonClicked}
-        // href={getQuranReflectVerseUrl(verseKey)}
+        isNewTab
+        // onClick={onButtonClicked}
+        href={getQuranReflectVerseUrl(verseKey)}
         size={ButtonSize.Small}
         tooltip={t('reflect')}
         shouldFlipOnRTL={false}

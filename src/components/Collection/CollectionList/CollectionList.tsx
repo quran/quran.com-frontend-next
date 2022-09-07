@@ -19,6 +19,11 @@ import { makeCollectionsUrl } from 'src/utils/auth/apiPaths';
 
 const defaultSortOptionId = 'recentlyUpdated';
 
+enum CollectionListSortOption {
+  RecentlyUpdated = 'recentlyUpdated',
+  Alphabetical = 'alphabetical',
+}
+
 const CollectionList = () => {
   const { t } = useTranslation();
   const [sortBy, setSortBy] = useState(defaultSortOptionId);
@@ -31,8 +36,8 @@ const CollectionList = () => {
   );
 
   const sortOptions = [
-    { id: 'recentlyUpdated', label: t('collection:recently-updated') },
-    { id: 'alphabetical', label: t('collection:alphabetical') },
+    { id: CollectionListSortOption.RecentlyUpdated, label: t('collection:recently-updated') },
+    { id: CollectionListSortOption.Alphabetical, label: t('collection:alphabetical') },
   ];
 
   if (!data) return null;
