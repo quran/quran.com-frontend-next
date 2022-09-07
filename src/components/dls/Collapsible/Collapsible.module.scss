@@ -15,6 +15,10 @@
   margin-inline-end: var(--spacing-xxsmall);
 }
 
+.prefixRotated {
+  transform: rotate(180deg);
+}
+
 .suffixContainer {
   display: flex;
   align-items: center;

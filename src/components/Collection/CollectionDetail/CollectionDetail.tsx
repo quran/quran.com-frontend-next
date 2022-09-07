@@ -92,6 +92,7 @@ const CollectionDetail = ({
               title={itemTitle}
               key={bookmark.id}
               prefix={<ChevronDownIcon />}
+              shouldRotatePrefixOnToggle
               suffix={
                 <PopoverMenu
                   trigger={
