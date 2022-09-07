@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import styles from './IconContainer.module.scss';
 
-import useDirection from 'src/hooks/useDirection';
+import useDirection from '@/hooks/useDirection';
 
 export enum IconColor {
   default = 'default',

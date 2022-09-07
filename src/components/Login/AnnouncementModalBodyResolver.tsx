@@ -1,8 +1,8 @@
 import dynamic from 'next/dynamic';
 import { useSWRConfig } from 'swr';
 
-import { completeAnnouncement } from 'src/utils/auth/api';
-import { makeUserProfileUrl } from 'src/utils/auth/apiPaths';
+import { completeAnnouncement } from '@/utils/auth/api';
+import { makeUserProfileUrl } from '@/utils/auth/apiPaths';
 import Announcement, { AnnouncementType } from 'types/auth/Announcement';
 import UserProfile from 'types/auth/UserProfile';
 

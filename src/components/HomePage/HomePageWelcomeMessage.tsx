@@ -11,8 +11,8 @@ import HomePageMessage from './HomePageMessage';
 import {
   selectWelcomeMessage,
   setIsVisible as setIsWelcomeMessageVisible,
-} from 'src/redux/slices/welcomeMessage';
-import { logEvent } from 'src/utils/eventLogger';
+} from '@/redux/slices/welcomeMessage';
+import { logEvent } from '@/utils/eventLogger';
 
 const HomePageWelcomeMessage = () => {
   const { t } = useTranslation('home');

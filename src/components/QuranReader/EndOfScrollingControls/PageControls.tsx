@@ -3,14 +3,13 @@ import React from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import { useSelector } from 'react-redux';
 
-import ChevronLeftIcon from '../../../../public/icons/chevron-left.svg';
-import ChevronRightIcon from '../../../../public/icons/chevron-right.svg';
-
-import Button, { ButtonType } from 'src/components/dls/Button/Button';
-import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
-import { logButtonClick } from 'src/utils/eventLogger';
-import { getPageNavigationUrl } from 'src/utils/navigation';
-import { isFirstPage, isLastPage } from 'src/utils/page';
+import Button, { ButtonType } from '@/dls/Button/Button';
+import ChevronLeftIcon from '@/icons/chevron-left.svg';
+import ChevronRightIcon from '@/icons/chevron-right.svg';
+import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
+import { logButtonClick } from '@/utils/eventLogger';
+import { getPageNavigationUrl } from '@/utils/navigation';
+import { isFirstPage, isLastPage } from '@/utils/page';
 import Verse from 'types/Verse';
 
 interface Props {

@@ -6,11 +6,11 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from './contentPage.module.scss';
 
-import Link, { LinkVariant } from 'src/components/dls/Link/Link';
-import NextSeoWrapper from 'src/components/NextSeoWrapper';
-import PageContainer from 'src/components/PageContainer';
-import { getLanguageAlternates } from 'src/utils/locale';
-import { getCanonicalUrl } from 'src/utils/navigation';
+import NextSeoWrapper from '@/components/NextSeoWrapper';
+import PageContainer from '@/components/PageContainer';
+import Link, { LinkVariant } from '@/dls/Link/Link';
+import { getLanguageAlternates } from '@/utils/locale';
+import { getCanonicalUrl } from '@/utils/navigation';
 
 const PATH = '/support';
 const SupportPage: NextPage = (): JSX.Element => {

@@ -8,10 +8,10 @@ import EmailSent from './EmailSent';
 import styles from './login.module.scss';
 import ResendEmailSection from './ResendEmailSection';
 
-import Button, { ButtonType, ButtonVariant } from 'src/components/dls/Button/Button';
-import EmailLogin, { EmailLoginData, sendMagicLink } from 'src/components/Login/EmailLogin';
-import SocialLogin from 'src/components/Login/SocialLogin';
-import { logButtonClick, logFormSubmission } from 'src/utils/eventLogger';
+import EmailLogin, { EmailLoginData, sendMagicLink } from '@/components/Login/EmailLogin';
+import SocialLogin from '@/components/Login/SocialLogin';
+import Button, { ButtonType, ButtonVariant } from '@/dls/Button/Button';
+import { logButtonClick, logFormSubmission } from '@/utils/eventLogger';
 import AuthType from 'types/auth/AuthType';
 
 enum LoginType {

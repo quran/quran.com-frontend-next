@@ -3,10 +3,10 @@ import React from 'react';
 import * as RadixCheckbox from '@radix-ui/react-checkbox';
 import classNames from 'classnames';
 
-import DividerHorizontalIcon from '../../../../../public/icons/divider-horizontal.svg';
-import TickIcon from '../../../../../public/icons/tick.svg';
-
 import styles from './Checkbox.module.scss';
+
+import DividerHorizontalIcon from '@/icons/divider-horizontal.svg';
+import TickIcon from '@/icons/tick.svg';
 
 const INDETERMINATE = 'indeterminate';
 

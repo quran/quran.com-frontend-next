@@ -4,7 +4,7 @@ import classNames from 'classnames';
 
 import Notes from './Notes/Notes';
 
-import Spinner, { SpinnerSize } from 'src/components/dls/Spinner/Spinner';
+import Spinner, { SpinnerSize } from '@/dls/Spinner/Spinner';
 
 interface Props {
   isSideBarVisible: boolean;

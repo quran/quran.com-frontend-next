@@ -3,7 +3,7 @@
 // import { ToastStatus } from './Toast';
 // import styles from './Toast.stories.module.scss';
 
-// import Button from 'src/components/dls/Button/Button';
+// import Button from '@/dls/Button/Button';
 
 export default {
   title: 'dls/Toast',

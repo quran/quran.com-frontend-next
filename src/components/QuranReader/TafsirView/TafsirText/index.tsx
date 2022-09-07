@@ -6,17 +6,17 @@ import { useSelector } from 'react-redux';
 
 import styles from './TafsirText.module.scss';
 
-import Counter from 'src/components/dls/Counter/Counter';
-import SpinnerContainer from 'src/components/dls/Spinner/SpinnerContainer';
-import usePersistPreferenceGroup from 'src/hooks/auth/usePersistPreferenceGroup';
+import Counter from '@/dls/Counter/Counter';
+import SpinnerContainer from '@/dls/Spinner/SpinnerContainer';
+import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
 import {
   MAXIMUM_TAFSIR_FONT_STEP,
   MINIMUM_FONT_STEP,
   selectQuranReaderStyles,
   increaseTafsirFontScale,
   decreaseTafsirFontScale,
-} from 'src/redux/slices/QuranReader/styles';
-import { logValueChange } from 'src/utils/eventLogger';
+} from '@/redux/slices/QuranReader/styles';
+import { logValueChange } from '@/utils/eventLogger';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 
 type TafsirTextProps = {

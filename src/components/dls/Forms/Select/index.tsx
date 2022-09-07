@@ -2,9 +2,9 @@ import React, { ChangeEvent, useCallback } from 'react';
 
 import classNames from 'classnames';
 
-import CaretIcon from '../../../../../public/icons/caret-down.svg';
-
 import styles from './Select.module.scss';
+
+import CaretIcon from '@/icons/caret-down.svg';
 
 export interface SelectOption {
   label: string;

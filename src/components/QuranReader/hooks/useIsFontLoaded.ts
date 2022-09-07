@@ -2,8 +2,8 @@ import { useMemo } from 'react';
 
 import { useSelector } from 'react-redux';
 
-import { selectLoadedFontFaces } from 'src/redux/slices/QuranReader/font-faces';
-import { isQCFFont } from 'src/utils/fontFaceHelper';
+import { selectLoadedFontFaces } from '@/redux/slices/QuranReader/font-faces';
+import { isQCFFont } from '@/utils/fontFaceHelper';
 import { QuranFont } from 'types/QuranReader';
 
 /**

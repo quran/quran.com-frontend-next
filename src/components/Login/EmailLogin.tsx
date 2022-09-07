@@ -1,15 +1,15 @@
 import useTranslation from 'next-translate/useTranslation';
 
-import MailIcon from '../../../public/icons/mail.svg';
-import ArrowLeft from '../../../public/icons/west.svg';
 import buildTranslatedErrorMessageByErrorId from '../FormBuilder/buildTranslatedErrorMessageByErrorId';
 import FormBuilder, { SubmissionResult } from '../FormBuilder/FormBuilder';
 
 import styles from './login.module.scss';
 
-import Button, { ButtonType, ButtonVariant } from 'src/components/dls/Button/Button';
-import { makeSendMagicLinkUrl } from 'src/utils/auth/apiPaths';
-import { EMAIL_VALIDATION_REGEX } from 'src/utils/validation';
+import Button, { ButtonType, ButtonVariant } from '@/dls/Button/Button';
+import MailIcon from '@/icons/mail.svg';
+import ArrowLeft from '@/icons/west.svg';
+import { makeSendMagicLinkUrl } from '@/utils/auth/apiPaths';
+import { EMAIL_VALIDATION_REGEX } from '@/utils/validation';
 import ErrorMessageId from 'types/ErrorMessageId';
 import { RuleType } from 'types/FieldRule';
 import { FormFieldType } from 'types/FormField';

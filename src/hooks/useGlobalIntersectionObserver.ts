@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 
-import useBrowserLayoutEffect from 'src/hooks/useBrowserLayoutEffect';
+import useBrowserLayoutEffect from '@/hooks/useBrowserLayoutEffect';
 
 /**
  * A hook that will create a global observer and inject it into window so that it's

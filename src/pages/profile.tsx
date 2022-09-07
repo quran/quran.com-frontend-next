@@ -10,21 +10,21 @@ import useSWR from 'swr';
 import layoutStyle from './index.module.scss';
 import styles from './profile.module.scss';
 
+import DeleteAccountButton from '@/components/Profile/DeleteAccountButton';
+import BookmarksSection from '@/components/Verses/BookmarksSection';
+import RecentReadingSessions from '@/components/Verses/RecentReadingSessions';
+import Button from '@/dls/Button/Button';
+import Skeleton from '@/dls/Skeleton/Skeleton';
+import { removeLastSyncAt } from '@/redux/slices/Auth/userDataSync';
+import { getUserProfile, logoutUser } from '@/utils/auth/api';
+import { makeUserProfileUrl } from '@/utils/auth/apiPaths';
+import { DEFAULT_PHOTO_URL } from '@/utils/auth/constants';
+import { isLoggedIn } from '@/utils/auth/login';
+import { getAllChaptersData } from '@/utils/chapter';
+import { logButtonClick } from '@/utils/eventLogger';
 import CollectionList from 'src/components/Collection/CollectionList/CollectionList';
-import Button from 'src/components/dls/Button/Button';
-import Skeleton from 'src/components/dls/Skeleton/Skeleton';
-import DeleteAccountButton from 'src/components/Profile/DeleteAccountButton';
-import BookmarksSection from 'src/components/Verses/BookmarksSection';
-import RecentReadingSessions from 'src/components/Verses/RecentReadingSessions';
 import DataContext from 'src/contexts/DataContext';
 import Error from 'src/pages/_error';
-import { removeLastSyncAt } from 'src/redux/slices/Auth/userDataSync';
-import { getUserProfile, logoutUser } from 'src/utils/auth/api';
-import { makeUserProfileUrl } from 'src/utils/auth/apiPaths';
-import { DEFAULT_PHOTO_URL } from 'src/utils/auth/constants';
-import { isLoggedIn } from 'src/utils/auth/login';
-import { getAllChaptersData } from 'src/utils/chapter';
-import { logButtonClick } from 'src/utils/eventLogger';
 import ChaptersData from 'types/ChaptersData';
 
 interface Props {

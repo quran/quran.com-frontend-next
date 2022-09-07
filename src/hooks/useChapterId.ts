@@ -2,12 +2,14 @@ import { useState, useEffect, useContext } from 'react';
 
 import { useRouter } from 'next/router';
 
+import { getChapterIdsForJuz, getChapterIdsForPage } from '@/utils/chapter';
+import { getChapterIdsForHizb } from '@/utils/hizb';
+import { formatStringNumber } from '@/utils/number';
+import { getChapterIdsForRub } from '@/utils/rub';
+import { isValidChapterId, isValidVerseKey } from '@/utils/validator';
+import { getChapterNumberFromKey } from '@/utils/verse';
 import { getChapterIdBySlug } from 'src/api';
 import DataContext from 'src/contexts/DataContext';
-import { getChapterIdsForJuz, getChapterIdsForPage } from 'src/utils/chapter';
-import { formatStringNumber } from 'src/utils/number';
-import { isValidChapterId, isValidVerseKey } from 'src/utils/validator';
-import { getChapterNumberFromKey } from 'src/utils/verse';
 
 /**
  * Given a url path such as `/chapter/1`, return the chapters id
@@ -24,7 +26,7 @@ import { getChapterNumberFromKey } from 'src/utils/verse';
 const AYAH_KURSI_SLUGS = ['ayatul-kursi', 'آیت الکرسی']; // TODO: this needs to be refactored when we localize Ayatul Kursi
 const useChapterIdsByUrlPath = (lang: string): string[] => {
   const router = useRouter();
-  const { chapterId, juzId, pageId } = router.query;
+  const { chapterId, juzId, pageId, hizbId, rubId } = router.query;
   const [chapterIds, setChapterIds] = useState([]);
   const chaptersData = useContext(DataContext);
   useEffect(() => {
@@ -53,9 +55,13 @@ const useChapterIdsByUrlPath = (lang: string): string[] => {
         setChapterIds(chapterIdsForPage);
       } else if (juzId) {
         setChapterIds(await getChapterIdsForJuz(formatStringNumber(juzId as string)));
+      } else if (hizbId) {
+        setChapterIds(await getChapterIdsForHizb(formatStringNumber(hizbId as string)));
+      } else if (rubId) {
+        setChapterIds(await getChapterIdsForRub(formatStringNumber(rubId as string)));
       }
     })();
-  }, [pageId, juzId, lang, chapterId, chaptersData]);
+  }, [pageId, juzId, hizbId, rubId, lang, chapterId, chaptersData]);
 
   return chapterIds;
 };

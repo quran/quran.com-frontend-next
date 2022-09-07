@@ -1,7 +1,6 @@
 /* eslint-disable max-lines */
 import { configureRefreshFetch } from 'refresh-fetch';
 
-import { fetcher } from 'src/api';
 import {
   makeBookmarksUrl,
   makeCompleteSignupUrl,
@@ -26,7 +25,8 @@ import {
   BookmarkByCollectionIdQueryParams,
   makeDeleteCollectionUrl,
   makeDeleteCollectionBookmarkUrl,
-} from 'src/utils/auth/apiPaths';
+} from '@/utils/auth/apiPaths';
+import { fetcher } from 'src/api';
 import CompleteAnnouncementRequest from 'types/auth/CompleteAnnouncementRequest';
 import { GetBookmarkCollectionsIdResponse } from 'types/auth/GetBookmarksByCollectionId';
 import PreferenceGroup from 'types/auth/PreferenceGroup';

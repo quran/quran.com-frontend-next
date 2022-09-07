@@ -1,6 +1,6 @@
 import stringify from '../qs-stringify';
 
-import { getAuthApiPath } from 'src/utils/url';
+import { getAuthApiPath } from '@/utils/url';
 import BookmarkType from 'types/BookmarkType';
 
 const makeUrl = (url: string, parameters?: Record<string, unknown>): string => {

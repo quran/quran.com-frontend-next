@@ -3,18 +3,18 @@ import { useEffect } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { useSWRConfig } from 'swr';
 
-import { selectLastSyncAt, setLastSyncAt } from 'src/redux/slices/Auth/userDataSync';
-import { selectBookmarks } from 'src/redux/slices/QuranReader/bookmarks';
+import { selectLastSyncAt, setLastSyncAt } from '@/redux/slices/Auth/userDataSync';
+import { selectBookmarks } from '@/redux/slices/QuranReader/bookmarks';
 import {
   RecentReadingSessions,
   selectRecentReadingSessions,
-} from 'src/redux/slices/QuranReader/readingTracker';
-import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
-import { getMushafId } from 'src/utils/api';
-import { syncUserLocalData } from 'src/utils/auth/api';
-import { makeReadingSessionsUrl, makeUserProfileUrl } from 'src/utils/auth/apiPaths';
-import { isLoggedIn } from 'src/utils/auth/login';
-import { getVerseAndChapterNumbersFromKey } from 'src/utils/verse';
+} from '@/redux/slices/QuranReader/readingTracker';
+import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
+import { getMushafId } from '@/utils/api';
+import { syncUserLocalData } from '@/utils/auth/api';
+import { makeReadingSessionsUrl, makeUserProfileUrl } from '@/utils/auth/apiPaths';
+import { isLoggedIn } from '@/utils/auth/login';
+import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
 import SyncDataType from 'types/auth/SyncDataType';
 import UserProfile from 'types/auth/UserProfile';
 import BookmarkType from 'types/BookmarkType';

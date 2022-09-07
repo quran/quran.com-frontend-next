@@ -6,8 +6,8 @@ import styles from './SurahPreviewBlock.module.scss';
 
 import ChapterIconContainer, {
   ChapterIconsSize,
-} from 'src/components/chapters/ChapterIcon/ChapterIconContainer';
-import { shouldUseMinimalLayout, toLocalizedNumber } from 'src/utils/locale';
+} from '@/components/chapters/ChapterIcon/ChapterIconContainer';
+import { shouldUseMinimalLayout, toLocalizedNumber } from '@/utils/locale';
 
 type SurahPreviewBlockProps = {
   surahNumber: number;

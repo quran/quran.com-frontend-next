@@ -15,7 +15,7 @@ import {
   MAXIMUM_TRANSLATIONS_FONT_STEP,
   decreaseTranslationFontScale,
   increaseTranslationFontScale,
-} from 'src/redux/slices/QuranReader/styles';
+} from '@/redux/slices/QuranReader/styles';
 import { QuranFont } from 'types/QuranReader';
 
 /**

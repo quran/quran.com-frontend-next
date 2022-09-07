@@ -5,11 +5,11 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import styles from './SearchHistory.module.scss';
 
-import Header from 'src/components/Search/PreInput/Header';
-import SearchQuerySuggestion from 'src/components/Search/PreInput/SearchQuerySuggestion';
-import { removeSearchHistoryRecord, selectSearchHistory } from 'src/redux/slices/Search/search';
-import { areArraysEqual } from 'src/utils/array';
-import { logButtonClick } from 'src/utils/eventLogger';
+import Header from '@/components/Search/PreInput/Header';
+import SearchQuerySuggestion from '@/components/Search/PreInput/SearchQuerySuggestion';
+import { removeSearchHistoryRecord, selectSearchHistory } from '@/redux/slices/Search/search';
+import { areArraysEqual } from '@/utils/array';
+import { logButtonClick } from '@/utils/eventLogger';
 
 interface Props {
   onSearchKeywordClicked: (searchQuery: string) => void;

@@ -2,7 +2,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from './SurahAudioMismatchModal.module.scss';
 
-import Modal from 'src/components/dls/Modal/Modal';
+import Modal from '@/dls/Modal/Modal';
 
 type Props = {
   isOpen: boolean;

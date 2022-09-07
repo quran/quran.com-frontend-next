@@ -1,10 +1,9 @@
 import useTranslation from 'next-translate/useTranslation';
 
-import QuranTextLogo from '../../../../public/icons/quran-text-logo.svg';
-
 import styles from './NavbarLogoWrapper.module.scss';
 
-import Link from 'src/components/dls/Link/Link';
+import Link from '@/dls/Link/Link';
+import QuranTextLogo from '@/icons/quran-text-logo.svg';
 
 const NavbarLogoWrapper = () => {
   const { t } = useTranslation('common');

@@ -6,29 +6,29 @@ import { SWRConfig } from 'swr';
 
 import styles from './tafsirs.module.scss';
 
-import { fetcher, getChapterIdBySlug } from 'src/api';
-import NextSeoWrapper from 'src/components/NextSeoWrapper';
-import TafsirBody from 'src/components/QuranReader/TafsirView/TafsirBody';
-import DataContext from 'src/contexts/DataContext';
-import Error from 'src/pages/_error';
+import NextSeoWrapper from '@/components/NextSeoWrapper';
+import TafsirBody from '@/components/QuranReader/TafsirView/TafsirBody';
 import {
   getQuranReaderStylesInitialState,
   getTafsirsInitialState,
-} from 'src/redux/defaultSettings/util';
-import { makeTafsirContentUrl, makeTafsirsUrl } from 'src/utils/apiPaths';
-import { getAllChaptersData, getChapterData } from 'src/utils/chapter';
-import { getLanguageAlternates, toLocalizedNumber } from 'src/utils/locale';
+} from '@/redux/defaultSettings/util';
+import { makeTafsirContentUrl, makeTafsirsUrl } from '@/utils/apiPaths';
+import { getAllChaptersData, getChapterData } from '@/utils/chapter';
+import { getLanguageAlternates, toLocalizedNumber } from '@/utils/locale';
 import {
   getCanonicalUrl,
   getVerseTafsirNavigationUrl,
   scrollWindowToTop,
-} from 'src/utils/navigation';
+} from '@/utils/navigation';
 import {
   REVALIDATION_PERIOD_ON_ERROR_SECONDS,
   ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
-} from 'src/utils/staticPageGeneration';
-import { isValidVerseId } from 'src/utils/validator';
-import { makeVerseKey } from 'src/utils/verse';
+} from '@/utils/staticPageGeneration';
+import { isValidVerseId } from '@/utils/validator';
+import { makeVerseKey } from '@/utils/verse';
+import { fetcher, getChapterIdBySlug } from 'src/api';
+import DataContext from 'src/contexts/DataContext';
+import Error from 'src/pages/_error';
 import { ChapterResponse, VersesResponse } from 'types/ApiResponses';
 import ChaptersData from 'types/ChaptersData';
 
