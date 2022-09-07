@@ -160,7 +160,7 @@ const SaveToCollectionAction = ({ verse, bookmarksRangeUrl }) => {
   return (
     <>
       <PopoverMenu.Item onClick={onMenuClicked} icon={<PlusIcon />}>
-        {t('collection:save-to-collection')}
+        {t('common:save-to-collection')}
       </PopoverMenu.Item>
       {isDataReady && (
         <SaveToCollectionModal
