@@ -1,12 +1,15 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { GetStaticPaths, GetStaticProps } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 import useSWRInfinite from 'swr/infinite';
 
+import layoutStyles from '../../index.module.scss';
+
 import styles from './index.module.scss';
 
+import { isLoggedIn } from '@/utils/auth/login';
 import CollectionDetail from 'src/components/Collection/CollectionDetail/CollectionDetail';
 import Button from 'src/components/dls/Button/Button';
 import DataContext from 'src/contexts/DataContext';
@@ -21,6 +24,12 @@ const CollectionDetailPage = ({ chaptersData }) => {
   const { t } = useTranslation();
   const router = useRouter();
   const collectionId = router.query.collectionId as string;
+
+  useEffect(() => {
+    if (!isLoggedIn()) {
+      router.replace('/');
+    }
+  }, [router]);
 
   const [sortBy, setSortBy] = useState(defaultSortOptionId);
 
@@ -70,20 +79,26 @@ const CollectionDetailPage = ({ chaptersData }) => {
 
   return (
     <DataContext.Provider value={chaptersData}>
-      <div className={styles.container}>
-        <CollectionDetail
-          id={collectionId}
-          title={title}
-          bookmarks={bookmarks}
-          sortBy={sortBy}
-          onSortByChange={onSortByChange}
-          onUpdated={onUpdated}
-        />
-        {hasNextPage && (
-          <div className={styles.loadMoreContainer}>
-            <Button onClick={loadMore}>{t('collection:load-more')}</Button>
+      <div className={layoutStyles.pageContainer}>
+        <div className={layoutStyles.flow}>
+          <div className={layoutStyles.flowItem}>
+            <div className={styles.container}>
+              <CollectionDetail
+                id={collectionId}
+                title={title}
+                bookmarks={bookmarks}
+                sortBy={sortBy}
+                onSortByChange={onSortByChange}
+                onUpdated={onUpdated}
+              />
+              {hasNextPage && (
+                <div className={styles.loadMoreContainer}>
+                  <Button onClick={loadMore}>{t('collection:load-more')}</Button>
+                </div>
+              )}
+            </div>
           </div>
-        )}
+        </div>
       </div>
     </DataContext.Provider>
   );

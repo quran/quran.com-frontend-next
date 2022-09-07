@@ -1,6 +1,8 @@
+/* eslint-disable max-lines */
 import { useContext } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
+import { useRouter } from 'next/router';
 import { useSelector, shallowEqual } from 'react-redux';
 
 import ChevronDownIcon from '../../../../public/icons/chevron-down.svg';
@@ -9,6 +11,8 @@ import CollectionSorter from '../CollectionSorter/CollectionSorter';
 
 import styles from './CollectionDetail.module.scss';
 
+import { logButtonClick } from '@/utils/eventLogger';
+import { getChapterWithStartingVerseUrl } from '@/utils/navigation';
 import DataFetcher from 'src/components/DataFetcher';
 import Button, { ButtonVariant } from 'src/components/dls/Button/Button';
 import Collapsible from 'src/components/dls/Collapsible/Collapsible';
@@ -62,6 +66,8 @@ const CollectionDetail = ({
     });
   };
 
+  const router = useRouter();
+
   const sortOptions = [
     {
       id: CollectionDetailSortOption.RecentlyAdded,
@@ -77,6 +83,15 @@ const CollectionDetail = ({
   const sorter = (
     <CollectionSorter selectedOptionId={sortBy} onChange={onSortByChange} options={sortOptions} />
   );
+
+  const onGoToAyahClicked = (verseKey: string) => {
+    const verseUrl = getChapterWithStartingVerseUrl(verseKey);
+    logButtonClick(
+      // eslint-disable-next-line i18next/no-literal-string
+      `collection_detail_menu_go_to_verse`,
+    );
+    router.push(verseUrl);
+  };
 
   return (
     <div className={styles.container}>
@@ -107,7 +122,14 @@ const CollectionDetail = ({
                   }
                 >
                   <PopoverMenu.Item onClick={() => onBookmarkItemDeleted(bookmark.id)}>
-                    Delete
+                    {t('collection:delete')}
+                  </PopoverMenu.Item>
+                  <PopoverMenu.Item
+                    onClick={() =>
+                      onGoToAyahClicked(makeVerseKey(bookmark.key, bookmark.verseNumber))
+                    }
+                  >
+                    {t('collection:go-to-ayah')}
                   </PopoverMenu.Item>
                 </PopoverMenu>
               }
@@ -131,7 +153,7 @@ const CollectionDetail = ({
                       if (!data) return null;
                       const firstVerse = data.verses?.[0];
                       return (
-                        <div>
+                        <div className={styles.verseContainer}>
                           <TafsirVerseText verses={data.verses} />
                           <div>
                             {firstVerse.translations?.map((translation) => {
