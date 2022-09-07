@@ -3,3 +3,9 @@
   margin-inline: auto;
   margin-block: calc(2 * var(--spacing-mega));
 }
+
+.loadMoreContainer {
+  display: flex;
+  margin-block-start: var(--spacing-medium);
+  justify-content: center;
+}

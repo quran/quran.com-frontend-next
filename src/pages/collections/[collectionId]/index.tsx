@@ -64,6 +64,10 @@ const CollectionDetailPage = ({ chaptersData }) => {
   const bookmarks = data.map((response) => response.data.bookmarks).flat();
   const title = data[0].data.collection.name;
 
+  const loadMore = () => {
+    setSize(size + 1);
+  };
+
   return (
     <DataContext.Provider value={chaptersData}>
       <div className={styles.container}>
@@ -76,13 +80,9 @@ const CollectionDetailPage = ({ chaptersData }) => {
           onUpdated={onUpdated}
         />
         {hasNextPage && (
-          <Button
-            onClick={() => {
-              setSize(size + 1);
-            }}
-          >
-            {t('collection:load-more')}
-          </Button>
+          <div className={styles.loadMoreContainer}>
+            <Button onClick={loadMore}>{t('collection:load-more')}</Button>
+          </div>
         )}
       </div>
     </DataContext.Provider>
