@@ -122,12 +122,13 @@ const CollectionDetail = ({
                   <DataFetcher
                     queryKey={makeVersesUrl(chapterId.toString(), lang, params)}
                     render={(data: VersesResponse) => {
+                      if (!data) return null;
                       const firstVerse = data.verses?.[0];
                       return (
                         <div>
                           <TafsirVerseText verses={data.verses} />
                           <div>
-                            {firstVerse.translations.map((translation) => {
+                            {firstVerse.translations?.map((translation) => {
                               return (
                                 <TranslationText
                                   key={translation.id}
