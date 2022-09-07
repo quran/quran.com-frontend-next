@@ -29,7 +29,7 @@ const RenameCollectionAction = ({ currentCollectionName, collectionId, onDone })
         defaultValue={currentCollectionName}
         onSubmit={onSubmit}
       />
-      <PopoverMenu.Item onClick={onMenuClicked}>{t('profile:rename')}</PopoverMenu.Item>;
+      <PopoverMenu.Item onClick={onMenuClicked}>{t('profile:rename')}</PopoverMenu.Item>
     </>
   );
 };
