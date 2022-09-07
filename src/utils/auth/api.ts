@@ -37,6 +37,7 @@ import UserPreferencesResponse from 'types/auth/UserPreferencesResponse';
 import UserProfile from 'types/auth/UserProfile';
 import BookmarksMap from 'types/BookmarksMap';
 import BookmarkType from 'types/BookmarkType';
+import { Collection } from 'types/Collection';
 import CompleteSignupRequest from 'types/CompleteSignupRequest';
 
 type RequestData = Record<string, any>;
@@ -140,7 +141,8 @@ export const getBookmarkCollections = async (
   key: number,
   type: BookmarkType,
   verseNumber?: number,
-) => privateFetcher(makeBookmarkCollectionsUrl(mushafId, key, type, verseNumber));
+): Promise<string[]> =>
+  privateFetcher(makeBookmarkCollectionsUrl(mushafId, key, type, verseNumber));
 
 export const addReadingSession = async (chapterNumber: number, verseNumber: number) =>
   postRequest(makeReadingSessionsUrl(), {
@@ -166,7 +168,9 @@ export const addOrUpdateUserPreference = async (key: string, value: any, group: 
     group,
   });
 
-export const getCollectionsList = async (queryParams: CollectionsQueryParams) => {
+export const getCollectionsList = async (
+  queryParams: CollectionsQueryParams,
+): Promise<{ data: Collection[] }> => {
   return privateFetcher(makeCollectionsUrl(queryParams));
 };
 

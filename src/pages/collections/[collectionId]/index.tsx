@@ -70,7 +70,7 @@ const CollectionDetailPage = ({ chaptersData }) => {
         <CollectionDetail
           id={collectionId}
           title={title}
-          collectionItems={bookmarks}
+          bookmarks={bookmarks}
           sortBy={sortBy}
           onSortByChange={onSortByChange}
           onUpdated={onUpdated}

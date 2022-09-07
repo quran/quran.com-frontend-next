@@ -31,7 +31,7 @@ import Bookmark from 'types/Bookmark';
 type CollectionDetailProps = {
   id: string;
   title: string;
-  collectionItems: Bookmark[];
+  bookmarks: Bookmark[];
   sortBy: string;
   onSortByChange: (sortBy: string) => void;
   onUpdated: () => void;
@@ -40,7 +40,7 @@ type CollectionDetailProps = {
 const CollectionDetail = ({
   id,
   title,
-  collectionItems,
+  bookmarks,
   sortBy,
   onSortByChange,
   onUpdated,
@@ -80,7 +80,7 @@ const CollectionDetail = ({
         {sorter}
       </div>
       <div className={styles.collectionItemsContainer}>
-        {collectionItems.map((bookmark) => {
+        {bookmarks.map((bookmark) => {
           const chapterData = getChapterData(chaptersData, bookmark.key.toString());
           const verseKey = makeVerseKey(bookmark.key, bookmark.verseNumber);
           const itemTitle = `${chapterData.transliteratedName} ${toLocalizedVerseKey(

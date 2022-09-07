@@ -14,7 +14,6 @@ import ReflectionBodyContainer from 'src/components/QuranReader/ReflectionView/R
 // import { logButtonClick } from 'src/utils/eventLogger';
 import {
   fakeNavigate,
-  getQuranReflectVerseUrl,
   getVerseReflectionNavigationUrl,
   // getVerseReflectionNavigationUrl,
 } from 'src/utils/navigation';

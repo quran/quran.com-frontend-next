@@ -28,13 +28,14 @@ import {
   makeIsResourceBookmarkedUrl,
 } from 'src/utils/auth/apiPaths';
 import { isLoggedIn } from 'src/utils/auth/login';
+import { logButtonClick } from 'src/utils/eventLogger';
 import BookmarkType from 'types/BookmarkType';
 
 const SaveToCollectionAction = ({ verse, bookmarksRangeUrl }) => {
   const [isSaveCollectionModalOpen, setIsSaveCollectionModalOpen] = useState(false);
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const mushafId = getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines).mushaf;
-  const { t } = useTranslation('common');
+  const { t } = useTranslation();
   const { data: collectionListData, mutate: mutateCollectionListData } = useSWR(
     makeCollectionsUrl({ limit: 50 }),
     () => getCollectionsList({ limit: 50 }),
@@ -67,7 +68,7 @@ const SaveToCollectionAction = ({ verse, bookmarksRangeUrl }) => {
 
   const onMenuClicked = () => {
     setIsSaveCollectionModalOpen(true);
-    // TODO: add logging here
+    logButtonClick('save_to_collection_menu');
   };
 
   const closeModal = () => {
@@ -111,14 +112,14 @@ const SaveToCollectionAction = ({ verse, bookmarksRangeUrl }) => {
           });
           return;
         }
-        toast(t('error.general'), {
+        toast(t('common:error.general'), {
           status: ToastStatus.Error,
         });
       });
   };
 
   const onNewCollectionCreated = (newCollectionName: string) => {
-    return addCollection(newCollectionName).then((newCollection) => {
+    return addCollection(newCollectionName).then((newCollection: any) => {
       mutateCollectionListData();
       mutateBookmarkCollectionIdsData([...bookmarkCollectionIdsData, newCollection.id]);
       addOrRemoveBookmark({
@@ -139,7 +140,7 @@ const SaveToCollectionAction = ({ verse, bookmarksRangeUrl }) => {
             });
             return;
           }
-          toast(t('error.general'), {
+          toast(t('common:error.general'), {
             status: ToastStatus.Error,
           });
         });
@@ -159,8 +160,7 @@ const SaveToCollectionAction = ({ verse, bookmarksRangeUrl }) => {
   return (
     <>
       <PopoverMenu.Item onClick={onMenuClicked} icon={<PlusIcon />}>
-        Save to Collection
-        {/* {isVerseBookmarked ? `${t('bookmarked')}!` : `${t('bookmark')}`} */}
+        {t('collection:save-to-collection')}
       </PopoverMenu.Item>
       {isDataReady && (
         <SaveToCollectionModal

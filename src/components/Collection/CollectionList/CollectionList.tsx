@@ -1,6 +1,4 @@
-import { useEffect, useState } from 'react';
-
-import console from 'console';
+import { useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import Link from 'next/link';
@@ -28,7 +26,7 @@ const CollectionList = () => {
     sortBy,
   };
 
-  const { data, mutate } = useSWR(makeCollectionsUrl(apiParams), () =>
+  const { data, mutate } = useSWR<any>(makeCollectionsUrl(apiParams), () =>
     getCollectionsList(apiParams),
   );
 
