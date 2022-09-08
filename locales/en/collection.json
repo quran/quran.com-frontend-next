@@ -5,5 +5,7 @@
     "verse-key": "Chapter and Verse Number",
     "load-more": "Load more",
     "go-to-ayah": "Go to ayah",
-    "delete": "Delete"
+    "delete": "Delete",
+    "empty": "Collection is empty",
+    "back-to-collection-list": "Back to collection list"
 }

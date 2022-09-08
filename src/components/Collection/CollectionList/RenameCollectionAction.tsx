@@ -11,8 +11,11 @@ const RenameCollectionAction = ({ currentCollectionName, collectionId, onDone })
   const { t } = useTranslation();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const onMenuClicked = () => {
+  const onMenuItemClicked = () => {
     setIsModalOpen(true);
+  };
+  const closeModal = () => {
+    setIsModalOpen(false);
   };
 
   const onSubmit = (data) => {
@@ -25,11 +28,14 @@ const RenameCollectionAction = ({ currentCollectionName, collectionId, onDone })
   return (
     <>
       <RenameCollectionModal
+        onClose={closeModal}
         isOpen={isModalOpen}
         defaultValue={currentCollectionName}
         onSubmit={onSubmit}
       />
-      <PopoverMenu.Item onClick={onMenuClicked}>{t('profile:rename')}</PopoverMenu.Item>
+      <PopoverMenu.Item shouldStopPropagation onClick={onMenuItemClicked}>
+        {t('profile:rename')}
+      </PopoverMenu.Item>
     </>
   );
 };

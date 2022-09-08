@@ -93,6 +93,8 @@ const CollectionDetail = ({
     router.push(verseUrl);
   };
 
+  const isCollectionEmpty = bookmarks.length === 0;
+
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -100,83 +102,92 @@ const CollectionDetail = ({
         {sorter}
       </div>
       <div className={styles.collectionItemsContainer}>
-        {bookmarks.map((bookmark) => {
-          const chapterData = getChapterData(chaptersData, bookmark.key.toString());
-          const verseKey = makeVerseKey(bookmark.key, bookmark.verseNumber);
-          const itemTitle = `${chapterData.transliteratedName} ${toLocalizedVerseKey(
-            verseKey,
-            lang,
-          )}`;
-          return (
-            <Collapsible
-              title={itemTitle}
-              key={bookmark.id}
-              prefix={<ChevronDownIcon />}
-              shouldRotatePrefixOnToggle
-              suffix={
-                <PopoverMenu
-                  trigger={
-                    <Button variant={ButtonVariant.Ghost}>
-                      <OverflowMenuIcon />
-                    </Button>
-                  }
-                >
-                  <PopoverMenu.Item onClick={() => onBookmarkItemDeleted(bookmark.id)}>
-                    {t('collection:delete')}
-                  </PopoverMenu.Item>
-                  <PopoverMenu.Item
-                    onClick={() =>
-                      onGoToAyahClicked(makeVerseKey(bookmark.key, bookmark.verseNumber))
+        {isCollectionEmpty ? (
+          <div className={styles.emptyCollectionContainer}>
+            <span>{t('collection:empty')}</span>
+            <div className={styles.backToCollectionButtonContainer}>
+              <Button href="/profile">{t('collection:back-to-collection-list')}</Button>
+            </div>
+          </div>
+        ) : (
+          bookmarks.map((bookmark) => {
+            const chapterData = getChapterData(chaptersData, bookmark.key.toString());
+            const verseKey = makeVerseKey(bookmark.key, bookmark.verseNumber);
+            const itemTitle = `${chapterData.transliteratedName} ${toLocalizedVerseKey(
+              verseKey,
+              lang,
+            )}`;
+            return (
+              <Collapsible
+                title={itemTitle}
+                key={bookmark.id}
+                prefix={<ChevronDownIcon />}
+                shouldRotatePrefixOnToggle
+                suffix={
+                  <PopoverMenu
+                    trigger={
+                      <Button variant={ButtonVariant.Ghost}>
+                        <OverflowMenuIcon />
+                      </Button>
                     }
                   >
-                    {t('collection:go-to-ayah')}
-                  </PopoverMenu.Item>
-                </PopoverMenu>
-              }
-            >
-              {({ isOpen }) => {
-                if (!isOpen) return null;
-                const chapterId = bookmark.key;
-                const params = {
-                  words: true,
-                  perPage: 1,
-                  translations: selectedTranslations.join(','),
-                  page: bookmark.verseNumber,
-                  ...getDefaultWordFields(quranReaderStyles.quranFont),
-                  mushaf,
-                };
+                    <PopoverMenu.Item onClick={() => onBookmarkItemDeleted(bookmark.id)}>
+                      {t('collection:delete')}
+                    </PopoverMenu.Item>
+                    <PopoverMenu.Item
+                      onClick={() =>
+                        onGoToAyahClicked(makeVerseKey(bookmark.key, bookmark.verseNumber))
+                      }
+                    >
+                      {t('collection:go-to-ayah')}
+                    </PopoverMenu.Item>
+                  </PopoverMenu>
+                }
+              >
+                {({ isOpen }) => {
+                  if (!isOpen) return null;
+                  const chapterId = bookmark.key;
+                  const params = {
+                    words: true,
+                    perPage: 1,
+                    translations: selectedTranslations.join(','),
+                    page: bookmark.verseNumber,
+                    ...getDefaultWordFields(quranReaderStyles.quranFont),
+                    mushaf,
+                  };
 
-                return (
-                  <DataFetcher
-                    queryKey={makeVersesUrl(chapterId.toString(), lang, params)}
-                    render={(data: VersesResponse) => {
-                      if (!data) return null;
-                      const firstVerse = data.verses?.[0];
-                      return (
-                        <div className={styles.verseContainer}>
-                          <TafsirVerseText verses={data.verses} />
-                          <div>
-                            {firstVerse.translations?.map((translation) => {
-                              return (
-                                <TranslationText
-                                  key={translation.id}
-                                  translationFontScale={quranReaderStyles.translationFontScale}
-                                  text={translation.text}
-                                  languageId={translation.languageId}
-                                  resourceName={translation.resourceName}
-                                />
-                              );
-                            })}
+                  return (
+                    <DataFetcher
+                      queryKey={makeVersesUrl(chapterId.toString(), lang, params)}
+                      render={(data: VersesResponse) => {
+                        if (!data) return null;
+                        const firstVerse = data.verses?.[0];
+                        return (
+                          <div className={styles.verseContainer}>
+                            <TafsirVerseText verses={data.verses} />
+                            <div>
+                              {firstVerse.translations?.map((translation) => {
+                                return (
+                                  <TranslationText
+                                    key={translation.id}
+                                    translationFontScale={quranReaderStyles.translationFontScale}
+                                    text={translation.text}
+                                    languageId={translation.languageId}
+                                    resourceName={translation.resourceName}
+                                  />
+                                );
+                              })}
+                            </div>
                           </div>
-                        </div>
-                      );
-                    }}
-                  />
-                );
-              }}
-            </Collapsible>
-          );
-        })}
+                        );
+                      }}
+                    />
+                  );
+                }}
+              </Collapsible>
+            );
+          })
+        )}
       </div>
     </div>
   );

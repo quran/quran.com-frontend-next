@@ -9,9 +9,17 @@ import layoutStyles from '../../index.module.scss';
 
 import styles from './index.module.scss';
 
+import NextSeoWrapper from '@/components/NextSeoWrapper';
+import ArrowLeft from '@/icons/west.svg';
 import { isLoggedIn } from '@/utils/auth/login';
+import { getLanguageAlternates } from '@/utils/locale';
+import {
+  getCanonicalUrl,
+  getCollectionNavigationUrl,
+  getProfileNavigationUrl,
+} from '@/utils/navigation';
 import CollectionDetail from 'src/components/Collection/CollectionDetail/CollectionDetail';
-import Button from 'src/components/dls/Button/Button';
+import Button, { ButtonVariant } from 'src/components/dls/Button/Button';
 import DataContext from 'src/contexts/DataContext';
 import { privateFetcher } from 'src/utils/auth/api';
 import { makeGetBookmarkByCollectionId } from 'src/utils/auth/apiPaths';
@@ -21,7 +29,7 @@ import { GetBookmarkCollectionsIdResponse } from 'types/auth/GetBookmarksByColle
 const defaultSortOptionId = 'recentlyAdded';
 
 const CollectionDetailPage = ({ chaptersData }) => {
-  const { t } = useTranslation();
+  const { t, lang } = useTranslation();
   const router = useRouter();
   const collectionId = router.query.collectionId as string;
 
@@ -77,12 +85,26 @@ const CollectionDetailPage = ({ chaptersData }) => {
     setSize(size + 1);
   };
 
+  const navigationUrl = getCollectionNavigationUrl(collectionId);
+
   return (
     <DataContext.Provider value={chaptersData}>
+      <NextSeoWrapper
+        title={title}
+        canonical={getCanonicalUrl(lang, navigationUrl)}
+        languageAlternates={getLanguageAlternates(navigationUrl)}
+      />
       <div className={layoutStyles.pageContainer}>
         <div className={layoutStyles.flow}>
           <div className={layoutStyles.flowItem}>
             <div className={styles.container}>
+              <Button
+                href={getProfileNavigationUrl()}
+                variant={ButtonVariant.Ghost}
+                hasSidePadding={false}
+              >
+                <ArrowLeft />
+              </Button>
               <CollectionDetail
                 id={collectionId}
                 title={title}

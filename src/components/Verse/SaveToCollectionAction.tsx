@@ -104,6 +104,8 @@ const SaveToCollectionAction = ({ verse, bookmarksRangeUrl }) => {
     })
       .then(() => {
         mutateIsResourceBookmarked();
+        mutateCollectionListData();
+        mutateBookmarkCollectionIdsData();
       })
       .catch((err) => {
         if (err.status === 400) {
@@ -120,8 +122,6 @@ const SaveToCollectionAction = ({ verse, bookmarksRangeUrl }) => {
 
   const onNewCollectionCreated = (newCollectionName: string) => {
     return addCollection(newCollectionName).then((newCollection: any) => {
-      mutateCollectionListData();
-      mutateBookmarkCollectionIdsData([...bookmarkCollectionIdsData, newCollection.id]);
       addOrRemoveBookmark({
         key: Number(verse.chapterId),
         mushafId,
@@ -132,6 +132,8 @@ const SaveToCollectionAction = ({ verse, bookmarksRangeUrl }) => {
       })
         .then(() => {
           mutateIsResourceBookmarked();
+          mutateCollectionListData();
+          mutateBookmarkCollectionIdsData([...bookmarkCollectionIdsData, newCollection.id]);
         })
         .catch((err) => {
           if (err.status === 400) {

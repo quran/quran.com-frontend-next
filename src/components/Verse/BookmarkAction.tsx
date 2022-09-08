@@ -107,7 +107,7 @@ const BookmarkAction = ({ verse, isTranslationView, onActionTriggered, bookmarks
         key: Number(verse.chapterId),
         mushafId,
         type: BookmarkType.Ayah,
-        isAdd: isVerseBookmarked,
+        isAdd: !isVerseBookmarked,
         verseNumber: verse.verseNumber,
       }).catch((err) => {
         if (err.status === 400) {

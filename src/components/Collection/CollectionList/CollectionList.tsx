@@ -65,19 +65,21 @@ const CollectionList = () => {
       <div className={styles.collectionListContainer}>
         {collections.map((collection) => {
           return (
-            <Link key={collection.id} href={`/collections/${collection.id}`}>
+            <div key={collection.id}>
               <div className={styles.itemContainer}>
-                <div>
-                  <div className={styles.itemTitle}>{collection.name}</div>
-                  <div className={styles.itemInfo}>
-                    <div className={styles.itemIcon}>
-                      <BookmarkIcon />
-                    </div>
-                    <div className={styles.itemCount}>
-                      {collection.count} {t('common:verses')}
+                <Link href={`/collections/${collection.id}`}>
+                  <div>
+                    <div className={styles.itemTitle}>{collection.name}</div>
+                    <div className={styles.itemInfo}>
+                      <div className={styles.itemIcon}>
+                        <BookmarkIcon />
+                      </div>
+                      <div className={styles.itemCount}>
+                        {collection.count} {t('common:verses')}
+                      </div>
                     </div>
                   </div>
-                </div>
+                </Link>
 
                 <PopoverMenu
                   trigger={
@@ -107,7 +109,7 @@ const CollectionList = () => {
                   />
                 </PopoverMenu>
               </div>
-            </Link>
+            </div>
           );
         })}
       </div>
