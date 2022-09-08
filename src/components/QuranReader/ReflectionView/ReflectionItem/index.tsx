@@ -75,12 +75,11 @@ const ReflectionItem = ({
     text
       .split(' ')
       .map((word) => {
-        if (word.startsWith('<tag>') && word.endsWith('</tag>')) {
-          const val = word.substring(5, word.length - 6);
+        if (word.startsWith('#')) {
           // eslint-disable-next-line i18next/no-literal-string
-          return `<a target="_blank" href="${getQuranReflectTagUrl(val)}" class="${
+          return `<a target="_blank" href="${getQuranReflectTagUrl(word)}" class="${
             styles.hashtag
-          }">${val}</a>`;
+          }">${word}</a>`;
         }
 
         return word;
