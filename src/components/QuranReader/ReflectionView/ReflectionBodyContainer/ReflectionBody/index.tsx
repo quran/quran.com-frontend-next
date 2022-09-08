@@ -5,9 +5,7 @@ import useTranslation from 'next-translate/useTranslation';
 import styles from './ReflectionBody.module.scss';
 
 import ReflectionDisclaimerMessage from '@/components/QuranReader/ReflectionView/ReflectionDisclaimerMessage';
-import ReflectionItem, {
-  VerseReference,
-} from '@/components/QuranReader/ReflectionView/ReflectionItem';
+import ReflectionItem from '@/components/QuranReader/ReflectionView/ReflectionItem';
 import ReflectionNotAvailableMessage from '@/components/QuranReader/ReflectionView/ReflectionNotAvailableMessage';
 import TafsirEndOfScrollingActions from '@/components/QuranReader/TafsirView/TafsirEndOfScrollingActions';
 import VerseAndTranslation from '@/components/Verse/VerseAndTranslation';
@@ -21,15 +19,16 @@ import {
 } from '@/utils/navigation';
 import { isFirstVerseOfSurah, isLastVerseOfSurah, makeVerseKey } from '@/utils/verse';
 import DataContext from 'src/contexts/DataContext';
+import { ReflectionVerseReference } from 'types/ReflectionVerseReference';
 
 /**
  * From reflection data, extract the verse references
  * This is is a temporary function, once we migrate to use Quran.com's API we will probably remove this function
  *
  * @param {object} reflection
- * @returns {VerseReference[]} verseReferences
+ * @returns {ReflectionVerseReference[]} verseReferences
  */
-const getVerseReferencesFromReflection = (reflection: any): VerseReference[] => {
+const getVerseReferencesFromReflection = (reflection: any): ReflectionVerseReference[] => {
   return reflection.filters.map((filter) => {
     const { surahNumber, from, to } = filter;
 
@@ -122,15 +121,12 @@ const ReflectionBody: React.FC<Props> = ({
           verseReferences={getVerseReferencesFromReflection(reflection)}
           likesCount={reflection?.likes}
           commentsCount={reflection?.commentsCount}
+          selectedChapterId={selectedChapterId}
+          selectedVerseNumber={selectedVerseNumber}
         />
       ))}
       <div className={styles.readMoreButtonContainer}>
-        <Button
-          href={getQuranReflectVerseUrl(
-            makeVerseKey(Number(selectedChapterId), Number(selectedVerseNumber)),
-          )}
-          isNewTab
-        >
+        <Button href={getQuranReflectVerseUrl(selectedChapterId, selectedVerseNumber)} isNewTab>
           {t('read-more-quran-reflect')}
         </Button>
       </div>

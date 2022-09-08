@@ -25,6 +25,8 @@ type ReflectionItemProps = {
   reflectionGroup?: string;
   reflectionGroupLink?: string;
   isAuthorVerified: boolean;
+  selectedChapterId: string;
+  selectedVerseNumber: string;
   verseReferences?: ReflectionVerseReference[];
   likesCount?: number;
   commentsCount?: number;
@@ -45,6 +47,8 @@ const ReflectionItem = ({
   commentsCount,
   reflectionGroup,
   reflectionGroupLink,
+  selectedChapterId,
+  selectedVerseNumber,
 }: ReflectionItemProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const { t } = useTranslation();
@@ -102,7 +106,11 @@ const ReflectionItem = ({
           onReferredVersesHeaderClicked={onReferredVersesHeaderClicked}
           shouldShowReferredVerses={shouldShowReferredVerses}
         />
-        <HeaderMenu postId={id} />
+        <HeaderMenu
+          postId={id}
+          selectedChapterId={selectedChapterId}
+          selectedVerseNumber={selectedVerseNumber}
+        />
       </div>
       {shouldShowReferredVerses && nonChapterVerseReferences?.length > 0 && (
         <div className={styles.verseAndTranslationsListContainer}>

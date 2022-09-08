@@ -213,9 +213,16 @@ export const getCanonicalUrl = (lang: string, path: string): string =>
 export const getProductUpdatesUrl = (id = ''): string =>
   `/product-updates${`${id ? `/${id}` : ''}`}`;
 
-export const getQuranReflectVerseUrl = (verseKey: string) => {
-  const [chapter, verse] = getVerseAndChapterNumbersFromKey(verseKey);
-  return `https://quranreflect.com/${chapter}/${verse}?feed=true`;
+const getQuranReflectFilteredVerseUrl = (chapterId: string, verseNumber: string, params) => {
+  return `https://quranreflect.com?filters=${chapterId}:${verseNumber}&${stringify(params)}`;
+};
+
+export const getQuranReflectVerseUrl = (chapterId: string, verseNumber: string) => {
+  return getQuranReflectFilteredVerseUrl(chapterId, verseNumber, { feed: true });
+};
+
+export const getQuranReflectEditUrl = (chapterId: string, verseNumber: string) => {
+  return getQuranReflectFilteredVerseUrl(chapterId, verseNumber, { edit: true });
 };
 
 export const getQuranReflectAuthorUrl = (username: string) => {
