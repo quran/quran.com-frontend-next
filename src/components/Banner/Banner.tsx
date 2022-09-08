@@ -1,21 +1,14 @@
-// import { useDispatch } from 'react-redux';
-
-// import CloseIcon from '@/icons/close.svg';
-import { useState } from 'react';
-
 import classNames from 'classnames';
 import { useSelector } from 'react-redux';
 
 import MoonIllustrationSVG from '../../../public/images/moon-illustration.svg';
-import Button, { ButtonSize, ButtonType } from '../dls/Button/Button';
 
 import styles from './Banner.module.scss';
 
+import Button, { ButtonSize, ButtonType } from '@/dls/Button/Button';
 import { selectIsBannerVisible } from '@/redux/slices/banner';
-import openGivingLoopPopup from '@/utils/givingloop';
-
-// import { setIsBannerVisible } from '@/redux/slices/banner';
-// import { logButtonClick } from '@/utils/eventLogger';
+import { makeDonateUrl } from '@/utils/apiPaths';
+import { logEvent } from '@/utils/eventLogger';
 
 type BannerProps = {
   onClick?: () => void;
@@ -25,20 +18,12 @@ type BannerProps = {
 };
 
 const Banner = ({ text, cta }: BannerProps) => {
-  const [isLoading, setIsLoading] = useState(false);
   const isBannerVisible = useSelector(selectIsBannerVisible);
-  // const dispatch = useDispatch();
-  // const closeBanner = () => {
-  //   dispatch(setIsBannerVisible(false));
-  //   logButtonClick('banner_close');
-  // };
 
   const onDonateClicked = () => {
-    openGivingLoopPopup();
-    setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 5000);
+    logEvent('donate_button_clicked', {
+      source: 'banner',
+    });
   };
 
   return (
@@ -57,19 +42,14 @@ const Banner = ({ text, cta }: BannerProps) => {
         <Button
           isNewTab
           onClick={onDonateClicked}
+          href={makeDonateUrl()}
           className={styles.cta}
           size={ButtonSize.Small}
           type={ButtonType.Success}
-          isLoading={isLoading}
         >
           {cta}
         </Button>
       </div>
-      {/* <div className={styles.closeButton}>
-        <Button type={ButtonType.Success} variant={ButtonVariant.Compact} onClick={closeBanner}>
-          <CloseIcon />
-        </Button>
-      </div> */}
     </div>
   );
 };

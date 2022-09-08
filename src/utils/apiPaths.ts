@@ -281,6 +281,9 @@ export const makePageVersesUrl = (
  */
 export const makeFootnoteUrl = (footnoteId: string): string => makeUrl(`/foot_notes/${footnoteId}`);
 
+export const makeDonateUrl = (showDonationPopup = false) =>
+  `https://donate.quran.com${showDonationPopup ? '?showDonationPopup' : ''}`;
+
 export const makeVerseReflectionsUrl = (chapterId: string, verseNumber: string, lang: string) => {
   // TODO: revert this back once the API is ready
   return `https://staging.quran.com/api/qdc/qr/reflections?${stringify(

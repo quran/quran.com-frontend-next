@@ -1,29 +1,27 @@
-import { useState } from 'react';
-
 import useTranslation from 'next-translate/useTranslation';
 
 import MoonIllustrationSVG from '../../../public/images/moon-illustration.svg';
-import Button, { ButtonType, ButtonVariant } from '../dls/Button/Button';
 
 import styles from './FundraisingBanner.module.scss';
 
+import Button, { ButtonType, ButtonVariant } from '@/dls/Button/Button';
+import { makeDonateUrl } from '@/utils/apiPaths';
 import { logEvent } from '@/utils/eventLogger';
-import openGivingLoopPopup from '@/utils/givingloop';
 
 const FundraisingBanner = () => {
   const { t } = useTranslation('common');
-  const [isLoading, setIsLoading] = useState(false);
   const onDonateClicked = () => {
-    openGivingLoopPopup();
-    setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 5000);
-
     logEvent('donate_button_clicked', {
       source: 'sidebar_banner',
     });
   };
+
+  const onLearnMoreClicked = () => {
+    logEvent('learn_more_button_clicked', {
+      source: 'sidebar_banner',
+    });
+  };
+
   return (
     <div className={styles.container}>
       <h1 className={styles.header}>{t('fundraising.title')}</h1>
@@ -31,17 +29,18 @@ const FundraisingBanner = () => {
       <Button
         onClick={onDonateClicked}
         isNewTab
+        href={makeDonateUrl(true)}
         type={ButtonType.Warning}
         className={styles.cta}
-        isLoading={isLoading}
       >
         {t('donate')}
       </Button>
       <Button
-        href="https://donate.quran.com"
+        href={makeDonateUrl()}
+        onClick={onLearnMoreClicked}
         isNewTab
-        type={ButtonType.Warning}
         className={styles.cta}
+        type={ButtonType.Success}
         variant={ButtonVariant.Outlined}
       >
         {t('fundraising.learn-more')}
