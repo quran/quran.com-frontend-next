@@ -5,10 +5,9 @@ import { NextPage, GetStaticProps, GetStaticPaths } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 import { SWRConfig } from 'swr';
 
-import styles from './[verseId]/tafsirs.module.scss';
-
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import ReflectionBodyContainer from '@/components/QuranReader/ReflectionView/ReflectionBodyContainer';
+import layoutStyle from '@/pages/index.module.scss';
 import {
   getQuranReaderStylesInitialState,
   getTranslationsInitialState,
@@ -72,20 +71,24 @@ const SelectedAyahReflection: NextPage<AyahReflectionProp> = ({
         })}
       />
       <SWRConfig value={{ fallback }}>
-        <div className={styles.tafsirContainer}>
-          <ReflectionBodyContainer
-            scrollToTop={scrollWindowToTop}
-            initialChapterId={chapterId}
-            initialVerseNumber={verseNumber.toString()}
-            render={({ body, surahAndAyahSelection }) => {
-              return (
-                <div>
-                  {surahAndAyahSelection}
-                  {body}
-                </div>
-              );
-            }}
-          />
+        <div className={layoutStyle.pageContainer}>
+          <div className={layoutStyle.flow}>
+            <div className={layoutStyle.flowItem}>
+              <ReflectionBodyContainer
+                scrollToTop={scrollWindowToTop}
+                initialChapterId={chapterId}
+                initialVerseNumber={verseNumber.toString()}
+                render={({ body, surahAndAyahSelection }) => {
+                  return (
+                    <div>
+                      {surahAndAyahSelection}
+                      {body}
+                    </div>
+                  );
+                }}
+              />
+            </div>
+          </div>
         </div>
       </SWRConfig>
     </DataContext.Provider>
