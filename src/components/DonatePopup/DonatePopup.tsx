@@ -23,17 +23,25 @@ const DonatePopup = () => {
     () => sessionCount % POPUP_VISIBILITY_FREQUENCY_BY_SESSION_COUNT === 0 && sessionCount > 0,
   );
 
+  const onCloseButtonClicked = () => {
+    setIsPopupVisible(false);
+  };
+
   const onDonateButtonClicked = () => {
     logEvent('donate_button_clicked', {
       source: 'donate_popover',
     });
+    onCloseButtonClicked();
+  };
+
+  const onLearnMoreClicked = () => {
+    logEvent('learn_more_button_clicked', {
+      source: 'donate_popover',
+    });
+    onCloseButtonClicked();
   };
 
   if (!isPopupVisible) return null;
-
-  const onCloseButtonClicked = () => {
-    setIsPopupVisible(false);
-  };
 
   return (
     <Modal isOpen contentClassName={styles.modalSize}>
@@ -63,9 +71,18 @@ const DonatePopup = () => {
               isNewTab
               className={styles.action}
               type={ButtonType.Success}
-              variant={ButtonVariant.Outlined}
             >
               {t('donate')}
+            </Button>
+            <Button
+              href={makeDonateUrl()}
+              onClick={onLearnMoreClicked}
+              isNewTab
+              className={styles.action}
+              type={ButtonType.Success}
+              variant={ButtonVariant.Outlined}
+            >
+              {t('fundraising.learn-more')}
             </Button>
           </div>
           <div className={styles.text}>{t('popup.footnote')}</div>
