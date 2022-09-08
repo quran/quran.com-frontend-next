@@ -5,6 +5,7 @@ import MoonIllustrationSVG from '../../../public/images/moon-illustration.svg';
 import styles from './FundraisingBanner.module.scss';
 
 import Button, { ButtonType } from '@/dls/Button/Button';
+import { makeDonateUrl } from '@/utils/apiPaths';
 import { logEvent } from '@/utils/eventLogger';
 
 const FundraisingBanner = () => {
@@ -21,7 +22,7 @@ const FundraisingBanner = () => {
       <Button
         onClick={onDonateClicked}
         isNewTab
-        href="https://donate.quran.com"
+        href={makeDonateUrl(true)}
         type={ButtonType.Warning}
         className={styles.cta}
       >

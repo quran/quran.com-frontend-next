@@ -12,6 +12,7 @@ import {
   selectWelcomeMessage,
   setIsVisible as setIsWelcomeMessageVisible,
 } from '@/redux/slices/welcomeMessage';
+import { makeDonateUrl } from '@/utils/apiPaths';
 import { logEvent } from '@/utils/eventLogger';
 
 const HomePageWelcomeMessage = () => {
@@ -38,7 +39,7 @@ const HomePageWelcomeMessage = () => {
                   source: 'welcome_message',
                 })
               }
-              href="https://donate.quran.com"
+              href={makeDonateUrl(true)}
               target="_blank"
               rel="noreferrer"
               key="0"

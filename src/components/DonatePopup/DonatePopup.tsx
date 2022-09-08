@@ -11,6 +11,7 @@ import Button, { ButtonShape, ButtonSize, ButtonType, ButtonVariant } from '@/dl
 import Modal from '@/dls/Modal/Modal';
 import CloseIcon from '@/icons/close.svg';
 import { selectSessionCount } from '@/redux/slices/session';
+import { makeDonateUrl } from '@/utils/apiPaths';
 import { logEvent } from '@/utils/eventLogger';
 
 const POPUP_VISIBILITY_FREQUENCY_BY_SESSION_COUNT = 10;
@@ -57,7 +58,7 @@ const DonatePopup = () => {
           </div>
           <div className={styles.actionsContainer}>
             <Button
-              href="https://donate.quran.com"
+              href={makeDonateUrl(true)}
               onClick={onDonateButtonClicked}
               isNewTab
               className={styles.action}

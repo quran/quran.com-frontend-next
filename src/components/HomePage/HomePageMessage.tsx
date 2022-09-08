@@ -6,6 +6,7 @@ import styles from './HomePageMessage.module.scss';
 
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import CloseIcon from '@/icons/close.svg';
+import { makeDonateUrl } from '@/utils/apiPaths';
 import { logEvent } from '@/utils/eventLogger';
 
 type HomePageMessageProps = {
@@ -39,7 +40,7 @@ const HomePageMessage = ({
           isNewTab
           onClick={onDonateClicked}
           className={styles.ctaPrimary}
-          href="https://donate.quran.com"
+          href={makeDonateUrl(true)}
         >
           {t('fundraising-sticky-banner.cta')}
         </Button>
