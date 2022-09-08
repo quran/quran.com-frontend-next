@@ -106,11 +106,8 @@ export const getVerseSelectedTafsirNavigationUrl = (
 export const getVerseReflectionNavigationUrl = (verseKey: string): string =>
   `/${verseKey}/reflections`;
 
-export const getQuranReflectPostUrl = (postId: number) =>
-  `https://quranreflect.com/posts/${postId}`;
-
-export const getQuranReflectPostCommentUrl = (postId: number) =>
-  `https://quranreflect.com/posts/${postId}#comments`;
+export const getQuranReflectPostUrl = (postId: number, viewComments = false) =>
+  `https://quranreflect.com/posts/${postId}${viewComments ? '#comments' : ''}`;
 
 export const getQuranReflectTagUrl = (tag: string) =>
   ` https://quranreflect.com/?tags=${encodeURIComponent(tag)}`;

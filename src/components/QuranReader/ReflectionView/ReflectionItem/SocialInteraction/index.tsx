@@ -15,7 +15,7 @@ import LoveIcon from '@/icons/love.svg';
 import ShareIcon from '@/icons/share.svg';
 import { logButtonClick } from '@/utils/eventLogger';
 import { toLocalizedNumber } from '@/utils/locale';
-import { getQuranReflectPostCommentUrl, getQuranReflectPostUrl } from '@/utils/navigation';
+import { getQuranReflectPostUrl } from '@/utils/navigation';
 import { stripHTMLTags } from '@/utils/string';
 
 type Props = {
@@ -74,7 +74,7 @@ const SocialInteraction: React.FC<Props> = ({
         className={styles.actionItemContainer}
         variant={ButtonVariant.Compact}
         prefix={<ChatIcon />}
-        href={getQuranReflectPostCommentUrl(postId)}
+        href={getQuranReflectPostUrl(postId, true)}
         isNewTab
         size={ButtonSize.Small}
         onClick={onCommentsCountClicked}
