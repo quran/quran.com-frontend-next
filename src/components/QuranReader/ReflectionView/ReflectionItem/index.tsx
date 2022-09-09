@@ -79,7 +79,7 @@ const ReflectionItem = ({
     text
       .split(' ')
       .map((word) => {
-        if (word.startsWith('#')) {
+        if (word.trim().startsWith('#')) {
           // eslint-disable-next-line i18next/no-literal-string
           return `<a target="_blank" href="${getQuranReflectTagUrl(word)}" class="${
             styles.hashtag
@@ -132,9 +132,9 @@ const ReflectionItem = ({
         className={styles.body}
         // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{
-          __html: highlightHashtag(
-            isExpanded ? reflectionText : truncate(reflectionText, MAX_REFLECTION_LENGTH),
-          ),
+          __html: isExpanded
+            ? highlightHashtag(reflectionText)
+            : truncate(highlightHashtag(reflectionText), MAX_REFLECTION_LENGTH),
         }}
       />
       {reflectionText.length > MAX_REFLECTION_LENGTH && (
