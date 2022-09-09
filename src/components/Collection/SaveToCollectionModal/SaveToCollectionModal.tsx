@@ -8,7 +8,9 @@ import FormBuilder from '@/components/FormBuilder/FormBuilder';
 import Button, { ButtonVariant } from '@/dls/Button/Button';
 import Checkbox from '@/dls/Forms/Checkbox/Checkbox';
 import Modal from '@/dls/Modal/Modal';
+import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import PlusIcon from '@/icons/plus.svg';
+import { logButtonClick } from '@/utils/eventLogger';
 import { RuleType } from 'types/FieldRule';
 import { FormFieldType } from 'types/FormField';
 
@@ -36,6 +38,25 @@ const SaveToCollectionModal = ({
 }: SaveToCollectionModalProps) => {
   const [isAddingNewCollection, setIsAddingNewCollection] = useState(false);
   const { t } = useTranslation();
+  const toast = useToast();
+
+  const handleSubmit = (data) => {
+    onNewCollectionCreated(data.name)
+      .then(() => setIsAddingNewCollection(false))
+      .catch(() => {
+        toast(t('common:error.general'), {
+          status: ToastStatus.Error,
+        });
+      });
+  };
+
+  const onAddNewCollection = () => {
+    setIsAddingNewCollection(true);
+    logButtonClick('save_to_collection_add_new_collection');
+  };
+
+  const handleCheckboxChange = (collection) => (checked) =>
+    onCollectionToggled(collection, checked);
 
   return (
     <Modal isOpen={isOpen} onClickOutside={onClose}>
@@ -48,7 +69,7 @@ const SaveToCollectionModal = ({
                 id={collection.name}
                 defaultChecked={collection.checked}
                 label={collection.name}
-                onChange={(checked) => onCollectionToggled(collection, checked)}
+                onChange={handleCheckboxChange(collection)}
               />
             </div>
           ))}
@@ -58,7 +79,7 @@ const SaveToCollectionModal = ({
             <Button
               variant={ButtonVariant.Ghost}
               prefix={<PlusIcon />}
-              onClick={() => setIsAddingNewCollection(true)}
+              onClick={onAddNewCollection}
             >
               {t('quran-reader:add-collection')}
             </Button>
@@ -76,9 +97,7 @@ const SaveToCollectionModal = ({
                   },
                 ]}
                 actionText={t('common:submit')}
-                onSubmit={(data: any) => {
-                  onNewCollectionCreated(data.name).then(() => setIsAddingNewCollection(false));
-                }}
+                onSubmit={handleSubmit}
               />
             </div>
           )}

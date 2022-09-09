@@ -11,14 +11,15 @@ import CollectionSorter from '../CollectionSorter/CollectionSorter';
 
 import styles from './CollectionDetail.module.scss';
 
+import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getChapterWithStartingVerseUrl } from '@/utils/navigation';
 import DataFetcher from 'src/components/DataFetcher';
 import Button, { ButtonVariant } from 'src/components/dls/Button/Button';
 import Collapsible from 'src/components/dls/Collapsible/Collapsible';
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
-import TafsirVerseText from 'src/components/QuranReader/TafsirView/TafsirVerseText';
 import TranslationText from 'src/components/QuranReader/TranslationView/TranslationText';
+import VerseTextPreview from 'src/components/QuranReader/VerseTextPreview';
 import DataContext from 'src/contexts/DataContext';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';
@@ -31,6 +32,7 @@ import { toLocalizedVerseKey } from 'src/utils/locale';
 import { makeVerseKey } from 'src/utils/verse';
 import { VersesResponse } from 'types/ApiResponses';
 import Bookmark from 'types/Bookmark';
+import { CollectionDetailSortOption } from 'types/CollectionSortOptions';
 
 type CollectionDetailProps = {
   id: string;
@@ -40,11 +42,6 @@ type CollectionDetailProps = {
   onSortByChange: (sortBy: string) => void;
   onUpdated: () => void;
 };
-
-enum CollectionDetailSortOption {
-  RecentlyAdded = 'recentlyAdded',
-  VerseKey = 'verseKey',
-}
 
 const CollectionDetail = ({
   id,
@@ -60,10 +57,18 @@ const CollectionDetail = ({
   const { mushaf } = getMushafId(quranFont, mushafLines);
   const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
 
+  const toast = useToast();
+
   const onBookmarkItemDeleted = (bookmarkId: string) => {
-    deleteCollectionBookmark(id, bookmarkId).then(() => {
-      onUpdated();
-    });
+    deleteCollectionBookmark(id, bookmarkId)
+      .then(() => {
+        onUpdated();
+      })
+      .catch(() => {
+        toast(t('common:error.general'), {
+          status: ToastStatus.Error,
+        });
+      });
   };
 
   const router = useRouter();
@@ -94,6 +99,15 @@ const CollectionDetail = ({
   };
 
   const isCollectionEmpty = bookmarks.length === 0;
+
+  const handleDeleteMenuClicked = (bookmark) => () => {
+    logButtonClick('collection_detail_delete_menu');
+    onBookmarkItemDeleted(bookmark.id);
+  };
+  const handleGoToAyah = (bookmark) => () => {
+    logButtonClick('collection_detail_go_to_ayah_menu');
+    onGoToAyahClicked(makeVerseKey(bookmark.key, bookmark.verseNumber));
+  };
 
   return (
     <div className={styles.container}>
@@ -131,14 +145,10 @@ const CollectionDetail = ({
                       </Button>
                     }
                   >
-                    <PopoverMenu.Item onClick={() => onBookmarkItemDeleted(bookmark.id)}>
+                    <PopoverMenu.Item onClick={handleDeleteMenuClicked(bookmark)}>
                       {t('collection:delete')}
                     </PopoverMenu.Item>
-                    <PopoverMenu.Item
-                      onClick={() =>
-                        onGoToAyahClicked(makeVerseKey(bookmark.key, bookmark.verseNumber))
-                      }
-                    >
+                    <PopoverMenu.Item onClick={handleGoToAyah(bookmark)}>
                       {t('collection:go-to-ayah')}
                     </PopoverMenu.Item>
                   </PopoverMenu>
@@ -164,7 +174,7 @@ const CollectionDetail = ({
                         const firstVerse = data.verses?.[0];
                         return (
                           <div className={styles.verseContainer}>
-                            <TafsirVerseText verses={data.verses} />
+                            <VerseTextPreview verses={data.verses} />
                             <div>
                               {firstVerse.translations?.map((translation) => {
                                 return (

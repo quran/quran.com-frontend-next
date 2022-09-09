@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 
+import classNames from 'classnames';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
@@ -10,8 +11,10 @@ import layoutStyles from '../../index.module.scss';
 import styles from './index.module.scss';
 
 import NextSeoWrapper from '@/components/NextSeoWrapper';
+import Spinner, { SpinnerSize } from '@/dls/Spinner/Spinner';
 import ArrowLeft from '@/icons/west.svg';
 import { isLoggedIn } from '@/utils/auth/login';
+import { logButtonClick, logValueChange } from '@/utils/eventLogger';
 import { getLanguageAlternates } from '@/utils/locale';
 import {
   getCanonicalUrl,
@@ -25,8 +28,9 @@ import { privateFetcher } from 'src/utils/auth/api';
 import { makeGetBookmarkByCollectionId } from 'src/utils/auth/apiPaths';
 import { getAllChaptersData } from 'src/utils/chapter';
 import { GetBookmarkCollectionsIdResponse } from 'types/auth/GetBookmarksByCollectionId';
+import { CollectionDetailSortOption } from 'types/CollectionSortOptions';
 
-const defaultSortOptionId = 'recentlyAdded';
+const DEFAULT_SORT_OPTION = CollectionDetailSortOption.RecentlyAdded;
 
 const CollectionDetailPage = ({ chaptersData }) => {
   const { t, lang } = useTranslation();
@@ -39,22 +43,34 @@ const CollectionDetailPage = ({ chaptersData }) => {
     }
   }, [router]);
 
-  const [sortBy, setSortBy] = useState(defaultSortOptionId);
+  const [sortBy, setSortBy] = useState(DEFAULT_SORT_OPTION);
 
   const onSortByChange = (newSortByVal) => {
+    logValueChange('collection_detail_page_sort_by', sortBy, newSortByVal);
     setSortBy(newSortByVal);
   };
 
+  /**
+   * Get the SWR key for cursor based pagination
+   * - when the page index is still 0 (first fetch). the get the bookmarkByCollection url without `cursor` param
+   * - on the next fetch, add `cursor` to the parameters
+   *
+   * corner case
+   * - when previous fetch contains empty data, stop fetching
+   * - when the user is logged out, don't fetch the data
+   *
+   * Reference: https://swr.vercel.app/docs/pagination#useswrinfinite
+   *
+   * @returns {string} swr key
+   */
   const getKey = (pageIndex, previousPageData) => {
+    if (!isLoggedIn()) return null;
     if (previousPageData && !previousPageData.data) return null;
-
-    // first page, we don't have `previousPageData`
     if (pageIndex === 0) {
       return makeGetBookmarkByCollectionId(collectionId, {
         sortBy,
       });
     }
-
     const cursor = previousPageData.pagination?.endCursor;
     return makeGetBookmarkByCollectionId(collectionId, {
       sortBy,
@@ -62,13 +78,15 @@ const CollectionDetailPage = ({ chaptersData }) => {
     });
   };
 
-  const { data, size, setSize, mutate } = useSWRInfinite<GetBookmarkCollectionsIdResponse>(
-    getKey,
-    privateFetcher,
-  );
+  const { data, size, setSize, mutate, isValidating } =
+    useSWRInfinite<GetBookmarkCollectionsIdResponse>(getKey, privateFetcher);
 
-  if (!data || data.length === 0) {
-    return null;
+  if (!data) {
+    return (
+      <div className={classNames(styles.container, styles.loadingContainer)}>
+        <Spinner size={SpinnerSize.Large} />
+      </div>
+    );
   }
 
   const onUpdated = () => {
@@ -83,6 +101,7 @@ const CollectionDetailPage = ({ chaptersData }) => {
 
   const loadMore = () => {
     setSize(size + 1);
+    logButtonClick('collection_detail_page_load_more');
   };
 
   const navigationUrl = getCollectionNavigationUrl(collectionId);
@@ -113,6 +132,7 @@ const CollectionDetailPage = ({ chaptersData }) => {
                 onSortByChange={onSortByChange}
                 onUpdated={onUpdated}
               />
+              {isValidating && <Spinner size={SpinnerSize.Large} />}
               {hasNextPage && (
                 <div className={styles.loadMoreContainer}>
                   <Button onClick={loadMore}>{t('collection:load-more')}</Button>

@@ -12,21 +12,18 @@ import styles from './CollectionList.module.scss';
 import DeleteCollectionAction from './DeleteCollectionAction';
 import RenameCollectionAction from './RenameCollectionAction';
 
+import { logValueChange } from '@/utils/eventLogger';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
 import { getCollectionsList } from 'src/utils/auth/api';
 import { makeCollectionsUrl } from 'src/utils/auth/apiPaths';
+import { CollectionListSortOption } from 'types/CollectionSortOptions';
 
-const defaultSortOptionId = 'recentlyUpdated';
-
-enum CollectionListSortOption {
-  RecentlyUpdated = 'recentlyUpdated',
-  Alphabetical = 'alphabetical',
-}
+const DEFAULT_SORT_OPTION = CollectionListSortOption.RecentlyUpdated;
 
 const CollectionList = () => {
   const { t } = useTranslation();
-  const [sortBy, setSortBy] = useState(defaultSortOptionId);
+  const [sortBy, setSortBy] = useState(DEFAULT_SORT_OPTION);
   const apiParams = {
     sortBy,
   };
@@ -44,8 +41,9 @@ const CollectionList = () => {
 
   const collections = data?.data || [];
 
-  const onSortOptionChanged = (val) => {
-    setSortBy(val);
+  const onSortOptionChanged = (nextSortBy) => {
+    logValueChange('collection_list', sortBy, nextSortBy);
+    setSortBy(nextSortBy);
   };
 
   const onCollectionUpdated = () => {

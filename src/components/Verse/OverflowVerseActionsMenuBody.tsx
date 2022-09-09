@@ -1,5 +1,3 @@
-/* eslint-disable react-func/max-lines-per-function */
-/* eslint-disable max-lines */
 import React, { useState, useEffect } from 'react';
 
 import clipboardCopy from 'clipboard-copy';
@@ -13,6 +11,7 @@ import SaveToCollectionAction from './SaveToCollectionAction';
 import VerseActionAdvancedCopy from './VerseActionAdvancedCopy';
 import VerseActionRepeatAudio from './VerseActionRepeatAudio';
 
+import { isLoggedIn } from '@/utils/auth/login';
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
 import WordByWordVerseAction from 'src/components/QuranReader/ReadingView/WordByWordVerseAction';
 import { logButtonClick } from 'src/utils/eventLogger';
@@ -101,7 +100,9 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
         onActionTriggered={onActionTriggered}
         bookmarksRangeUrl={bookmarksRangeUrl}
       />
-      <SaveToCollectionAction verse={verse} bookmarksRangeUrl={bookmarksRangeUrl} />
+      {isLoggedIn() ? (
+        <SaveToCollectionAction verse={verse} bookmarksRangeUrl={bookmarksRangeUrl} />
+      ) : null}
 
       <VerseActionRepeatAudio verseKey={verse.verseKey} />
     </div>

@@ -12,7 +12,7 @@ interface Props {
   verses: Verse[];
 }
 
-const TafsirVerseText: React.FC<Props> = ({ verses }) => {
+const VerseTextPreview: React.FC<Props> = ({ verses }) => {
   const { quranFont } = useSelector(selectQuranReaderStyles, shallowEqual);
   const tafsirVerses = useMemo(
     () =>
@@ -27,4 +27,4 @@ const TafsirVerseText: React.FC<Props> = ({ verses }) => {
   return <PlainVerseText words={words} />;
 };
 
-export default TafsirVerseText;
+export default VerseTextPreview;

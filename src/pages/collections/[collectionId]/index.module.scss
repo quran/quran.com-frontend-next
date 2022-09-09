@@ -7,3 +7,16 @@
   margin-block-start: var(--spacing-medium);
   justify-content: center;
 }
+
+.loadingContainer {
+  display: flex;
+  justify-content: center;
+  margin-block-start: var(--spacing-mega);
+}
+
+.emptyContainer {
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  margin-block-start: var(--spacing-mega);
+}

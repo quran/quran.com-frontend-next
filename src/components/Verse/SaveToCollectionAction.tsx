@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useSelector } from 'react-redux';
-import useSWR, { useSWRConfig } from 'swr';
+import { useSWRConfig } from 'swr';
 import useSWRImmutable from 'swr/immutable';
 
 import PlusIcon from '../../../public/icons/plus.svg';
@@ -36,8 +36,8 @@ const SaveToCollectionAction = ({ verse, bookmarksRangeUrl }) => {
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const mushafId = getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines).mushaf;
   const { t } = useTranslation();
-  const { data: collectionListData, mutate: mutateCollectionListData } = useSWR(
-    makeCollectionsUrl({}),
+  const { data: collectionListData, mutate: mutateCollectionListData } = useSWRImmutable(
+    isLoggedIn() ? makeCollectionsUrl({}) : null,
     () => getCollectionsList({}),
   );
 

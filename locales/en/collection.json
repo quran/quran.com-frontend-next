@@ -7,5 +7,6 @@
     "go-to-ayah": "Go to ayah",
     "delete": "Delete",
     "empty": "Collection is empty",
+    "collection-list-empty": "Collection list is empty. You haven't created any collection yet",
     "back-to-collection-list": "Back to collection list"
 }
