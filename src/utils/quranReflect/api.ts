@@ -7,5 +7,5 @@ export const makeQuranReflectApiUrl = (path: string, parameters = {}): string =>
     client_auth_token: process.env.NEXT_PUBLIC_QURAN_REFLECT_TOKEN,
     ...parameters,
   };
-  return `https://quranreflect.com/${path}?${stringify(params)}`;
+  return `https://quranreflect.com/v1/${path}?${stringify(params)}`;
 };

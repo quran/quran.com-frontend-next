@@ -5,32 +5,16 @@ import useTranslation from 'next-translate/useTranslation';
 import AuthorInfo from './AuthorInfo';
 import HeaderMenu from './HeaderMenu';
 import styles from './ReflectionItem.module.scss';
+import ReflectionItemProps from './ReflectionItemProps';
 import SocialInteraction from './SocialInteraction';
 
 import VerseAndTranslation from '@/components/Verse/VerseAndTranslation';
 import DataContext from '@/contexts/DataContext';
 import { getChapterData } from '@/utils/chapter';
+import { logButtonClick } from '@/utils/eventLogger';
 import truncate from '@/utils/html-truncate';
 import { getQuranReflectTagUrl } from '@/utils/navigation';
 import { makeVerseKey } from '@/utils/verse';
-import { ReflectionVerseReference } from 'types/ReflectionVerseReference';
-
-type ReflectionItemProps = {
-  id: number;
-  authorName: string;
-  authorUsername: string;
-  avatarUrl: string;
-  date: string;
-  reflectionText: string;
-  reflectionGroup?: string;
-  reflectionGroupLink?: string;
-  isAuthorVerified: boolean;
-  selectedChapterId: string;
-  selectedVerseNumber: string;
-  verseReferences?: ReflectionVerseReference[];
-  likesCount?: number;
-  commentsCount?: number;
-};
 
 const MAX_REFLECTION_LENGTH = 220;
 
@@ -52,12 +36,25 @@ const ReflectionItem = ({
 }: ReflectionItemProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const { t } = useTranslation();
-  const onMoreLessClicked = () => setIsExpanded((prevIsExpanded) => !prevIsExpanded);
   const [shouldShowReferredVerses, setShouldShowReferredVerses] = useState(false);
   const chaptersData = useContext(DataContext);
 
   const onReferredVersesHeaderClicked = () => {
-    setShouldShowReferredVerses((prevShouldShowReferredVerses) => !prevShouldShowReferredVerses);
+    setShouldShowReferredVerses((prevShouldShowReferredVerses) => {
+      logButtonClick(
+        // eslint-disable-next-line i18next/no-literal-string
+        `reflection_item_reference_${prevShouldShowReferredVerses ? 'close' : 'open'}`,
+      );
+      return !prevShouldShowReferredVerses;
+    });
+  };
+
+  const onMoreLessClicked = () => {
+    setIsExpanded((prevIsExpanded) => {
+      // eslint-disable-next-line i18next/no-literal-string
+      logButtonClick(`reflection_item_show_${prevIsExpanded ? 'less' : 'more'}`);
+      return !prevIsExpanded;
+    });
   };
 
   // some reference, are referencing to the entire chapter (doesn't have from/to properties)

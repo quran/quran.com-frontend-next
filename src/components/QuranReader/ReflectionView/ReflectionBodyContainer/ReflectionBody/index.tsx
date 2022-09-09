@@ -106,7 +106,7 @@ const ReflectionBody: React.FC<Props> = ({
       ) : (
         <ReflectionDisclaimerMessage />
       )}
-      {data?.posts?.map((reflection) => (
+      {data?.posts?.posts?.map((reflection) => (
         <ReflectionItem
           id={reflection.id}
           key={reflection.id}
