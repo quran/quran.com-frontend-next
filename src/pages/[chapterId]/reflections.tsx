@@ -13,7 +13,7 @@ import {
   getTranslationsInitialState,
 } from '@/redux/defaultSettings/util';
 import { getDefaultWordFields, getMushafId } from '@/utils/api';
-import { makeVerseReflectionsUrl, makeVersesUrl } from '@/utils/apiPaths';
+import { makeVersesUrl } from '@/utils/apiPaths';
 import { getChapterData, getAllChaptersData } from '@/utils/chapter';
 import { getLanguageAlternates, toLocalizedNumber } from '@/utils/locale';
 import {
@@ -21,6 +21,7 @@ import {
   getVerseReflectionNavigationUrl,
   scrollWindowToTop,
 } from '@/utils/navigation';
+import { makeVerseReflectionsUrl } from '@/utils/quranReflect/apiPaths';
 import {
   REVALIDATION_PERIOD_ON_ERROR_SECONDS,
   ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
