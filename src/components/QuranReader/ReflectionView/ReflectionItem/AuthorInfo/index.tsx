@@ -11,7 +11,7 @@ import VerifiedIcon from '@/icons/verified.svg';
 import { formatDateRelatively } from '@/utils/datetime';
 import { logButtonClick } from '@/utils/eventLogger';
 import { toLocalizedNumber } from '@/utils/locale';
-import { getQuranReflectAuthorUrl } from '@/utils/navigation';
+import { getQuranReflectAuthorUrl } from '@/utils/quranReflect/navigation';
 import { makeVerseKey } from '@/utils/verse';
 import { ReflectionVerseReference } from 'types/ReflectionVerseReference';
 

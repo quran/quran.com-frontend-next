@@ -13,7 +13,7 @@ import DataContext from '@/contexts/DataContext';
 import { getChapterData } from '@/utils/chapter';
 import { logButtonClick } from '@/utils/eventLogger';
 import truncate from '@/utils/html-truncate';
-import { getQuranReflectTagUrl } from '@/utils/navigation';
+import { getQuranReflectTagUrl } from '@/utils/quranReflect/navigation';
 import { makeVerseKey } from '@/utils/verse';
 
 const MAX_REFLECTION_LENGTH = 220;

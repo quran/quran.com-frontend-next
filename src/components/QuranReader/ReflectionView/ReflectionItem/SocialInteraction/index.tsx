@@ -15,7 +15,7 @@ import LoveIcon from '@/icons/love.svg';
 import ShareIcon from '@/icons/share.svg';
 import { logButtonClick } from '@/utils/eventLogger';
 import { toLocalizedNumber } from '@/utils/locale';
-import { getQuranReflectPostUrl } from '@/utils/navigation';
+import { getQuranReflectPostUrl } from '@/utils/quranReflect/navigation';
 import { stripHTMLTags } from '@/utils/string';
 
 type Props = {

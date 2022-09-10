@@ -12,11 +12,8 @@ import VerseAndTranslation from '@/components/Verse/VerseAndTranslation';
 import Button from '@/dls/Button/Button';
 import Separator from '@/dls/Separator/Separator';
 import { logButtonClick } from '@/utils/eventLogger';
-import {
-  fakeNavigate,
-  getQuranReflectVerseUrl,
-  getVerseReflectionNavigationUrl,
-} from '@/utils/navigation';
+import { fakeNavigate, getVerseReflectionNavigationUrl } from '@/utils/navigation';
+import { getQuranReflectVerseUrl } from '@/utils/quranReflect/navigation';
 import { isFirstVerseOfSurah, isLastVerseOfSurah, makeVerseKey } from '@/utils/verse';
 import DataContext from 'src/contexts/DataContext';
 import { ReflectionVerseReference } from 'types/ReflectionVerseReference';
@@ -106,7 +103,7 @@ const ReflectionBody: React.FC<Props> = ({
       ) : (
         <ReflectionDisclaimerMessage />
       )}
-      {data?.posts?.posts?.map((reflection) => (
+      {data?.posts?.map((reflection) => (
         <ReflectionItem
           id={reflection.id}
           key={reflection.id}

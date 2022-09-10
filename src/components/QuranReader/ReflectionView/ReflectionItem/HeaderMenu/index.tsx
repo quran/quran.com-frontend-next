@@ -6,7 +6,7 @@ import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/But
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import OverflowMenuIcon from '@/icons/menu_more_horiz.svg';
 import { logButtonClick } from '@/utils/eventLogger';
-import { getQuranReflectEditUrl, getQuranReflectPostUrl } from '@/utils/navigation';
+import { getQuranReflectEditUrl, getQuranReflectPostUrl } from '@/utils/quranReflect/navigation';
 import { navigateToExternalUrl } from '@/utils/url';
 
 type Props = {

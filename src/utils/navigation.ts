@@ -106,12 +106,6 @@ export const getVerseSelectedTafsirNavigationUrl = (
 export const getVerseReflectionNavigationUrl = (verseKey: string): string =>
   `/${verseKey}/reflections`;
 
-export const getQuranReflectPostUrl = (postId: number, viewComments = false) =>
-  `https://quranreflect.com/posts/${postId}${viewComments ? '#comments' : ''}`;
-
-export const getQuranReflectTagUrl = (tag: string) =>
-  ` https://quranreflect.com/?tags=${encodeURIComponent(tag)}`;
-
 /**
  * Get the href link to a surah.
  *
@@ -209,22 +203,6 @@ export const getCanonicalUrl = (lang: string, path: string): string =>
  */
 export const getProductUpdatesUrl = (id = ''): string =>
   `/product-updates${`${id ? `/${id}` : ''}`}`;
-
-const getQuranReflectFilteredVerseUrl = (chapterId: string, verseNumber: string, params) => {
-  return `https://quranreflect.com?filters=${chapterId}:${verseNumber}&${stringify(params)}`;
-};
-
-export const getQuranReflectVerseUrl = (chapterId: string, verseNumber: string) => {
-  return getQuranReflectFilteredVerseUrl(chapterId, verseNumber, { feed: true });
-};
-
-export const getQuranReflectEditUrl = (chapterId: string, verseNumber: string) => {
-  return getQuranReflectFilteredVerseUrl(chapterId, verseNumber, { edit: true });
-};
-
-export const getQuranReflectAuthorUrl = (username: string) => {
-  return `https://quranreflect.com/${username}`;
-};
 
 /**
  * Update the browser history with the new url.
