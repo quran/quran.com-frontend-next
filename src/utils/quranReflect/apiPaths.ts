@@ -20,6 +20,6 @@ export const makeVerseReflectionsUrl = ({
     page,
     tab,
     lang: locale,
-    verified: true,
+    feed: true,
   });
 };
