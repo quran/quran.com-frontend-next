@@ -7,6 +7,7 @@ type ReflectionItemProps = {
   avatarUrl: string;
   date: string;
   reflectionText: string;
+  verseText: string;
   reflectionGroup?: string;
   reflectionGroupLink?: string;
   isAuthorVerified: boolean;

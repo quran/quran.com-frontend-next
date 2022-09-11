@@ -23,6 +23,7 @@ type Props = {
   commentsCount: number;
   postId: number;
   reflectionText: string;
+  verseText: string;
 };
 
 const SocialInteraction: React.FC<Props> = ({
@@ -30,6 +31,7 @@ const SocialInteraction: React.FC<Props> = ({
   commentsCount,
   postId,
   reflectionText,
+  verseText,
 }) => {
   const { t, lang } = useTranslation();
   const toast = useToast();
@@ -44,8 +46,11 @@ const SocialInteraction: React.FC<Props> = ({
 
   const onCopyTextClicked = () => {
     logButtonClick('reflection_item_copy_text');
-
-    const textToCopy = stripHTMLTags(`${reflectionText} -- ${getQuranReflectPostUrl(postId)}`);
+    // eslint-disable-next-line i18next/no-literal-string
+    const verseTextString = verseText ? `${verseText}\r\n\r\n` : '';
+    const textToCopy = stripHTMLTags(
+      `${verseTextString}${reflectionText} -- ${getQuranReflectPostUrl(postId)}`,
+    );
     clipboardCopy(textToCopy).then(() =>
       toast(t('quran-reader:text-copied'), { status: ToastStatus.Success }),
     );

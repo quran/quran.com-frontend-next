@@ -1,4 +1,4 @@
-import React from 'react';
+import { useEffect } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useSelector } from 'react-redux';
@@ -34,9 +34,10 @@ interface Props {
   chapter: number;
   from: number;
   to: number;
+  setVerseText?: (verseText: string) => void;
 }
 
-const VerseAndTranslation: React.FC<Props> = ({ chapter, from, to }) => {
+const VerseAndTranslation: React.FC<Props> = ({ chapter, from, to, setVerseText }) => {
   const { lang } = useTranslation();
   const translations = useSelector(selectSelectedTranslations, areArraysEqual);
   const { quranFont, mushafLines, translationFontScale } = useSelector(
@@ -60,12 +61,18 @@ const VerseAndTranslation: React.FC<Props> = ({ chapter, from, to }) => {
     shouldFetchData ? makeVersesUrl(chapter, lang, apiParams) : null,
     fetcher,
   );
+  useEffect(() => {
+    if (setVerseText && data?.verses?.[0].textUthmani) {
+      setVerseText(data?.verses?.[0].textUthmani);
+    }
+  }, [data?.verses, setVerseText]);
 
   useQcfFont(quranFont, data?.verses ? data.verses : []);
 
   if (error) return <Error error={error} onRetryClicked={mutate} />;
 
   if (!data) return <Spinner />;
+
   return (
     <div className={styles.container}>
       {data?.verses.map((verse) => (

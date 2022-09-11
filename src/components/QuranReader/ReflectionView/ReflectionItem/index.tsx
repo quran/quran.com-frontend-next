@@ -30,6 +30,7 @@ const ReflectionItem = ({
   likesCount,
   commentsCount,
   reflectionGroup,
+  verseText,
   reflectionGroupLink,
   selectedChapterId,
   selectedVerseNumber,
@@ -72,21 +73,25 @@ const ReflectionItem = ({
     [chaptersData, t],
   );
 
-  const highlightHashtag = (text: string) =>
-    text
-      .split(' ')
-      .map((word) => {
-        if (word.trim().startsWith('#')) {
-          // eslint-disable-next-line i18next/no-literal-string
-          return `<a target="_blank" href="${getQuranReflectTagUrl(word)}" class="${
-            styles.hashtag
-          }">${word}</a>`;
-        }
+  const formattedText = useMemo(
+    () =>
+      reflectionText
+        .split(' ')
+        .map((word) => {
+          if (word.trim().startsWith('#')) {
+            // eslint-disable-next-line i18next/no-literal-string
+            return `<a target="_blank" href="${getQuranReflectTagUrl(word)}" class="${
+              styles.hashtag
+            }">${word}</a>`;
+          }
 
-        return word;
-      })
-      .join(' ')
-      .replace(/\r\n\r\n/g, '<br>');
+          return word;
+        })
+        .join(' ')
+        .replace(/\r\n\r\n/g, '<br>'),
+    [reflectionText],
+  );
+
   return (
     <div className={styles.container}>
       <div className={styles.header}>
@@ -129,9 +134,7 @@ const ReflectionItem = ({
         className={styles.body}
         // eslint-disable-next-line react/no-danger
         dangerouslySetInnerHTML={{
-          __html: isExpanded
-            ? highlightHashtag(reflectionText)
-            : truncate(highlightHashtag(reflectionText), MAX_REFLECTION_LENGTH),
+          __html: isExpanded ? formattedText : truncate(formattedText, MAX_REFLECTION_LENGTH),
         }}
       />
       {reflectionText.length > MAX_REFLECTION_LENGTH && (
@@ -147,6 +150,7 @@ const ReflectionItem = ({
       )}
       <SocialInteraction
         reflectionText={reflectionText}
+        verseText={verseText}
         likesCount={likesCount}
         commentsCount={commentsCount}
         postId={id}

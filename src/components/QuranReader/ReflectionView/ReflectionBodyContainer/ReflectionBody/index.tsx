@@ -1,4 +1,4 @@
-import React, { useCallback, useContext } from 'react';
+import React, { useCallback, useContext, useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
@@ -54,6 +54,7 @@ const ReflectionBody: React.FC<Props> = ({
   setSelectedVerseNumber,
 }) => {
   const { t, lang } = useTranslation('quran-reader');
+  const [verseText, setVerseText] = useState('');
   const chaptersData = useContext(DataContext);
   const hasNextVerse = !isLastVerseOfSurah(
     chaptersData,
@@ -94,6 +95,7 @@ const ReflectionBody: React.FC<Props> = ({
         from={Number(selectedVerseNumber)}
         to={Number(selectedVerseNumber)}
         chapter={Number(selectedChapterId)}
+        setVerseText={setVerseText}
       />
       <div className={styles.separatorContainer}>
         <Separator />
@@ -112,6 +114,7 @@ const ReflectionBody: React.FC<Props> = ({
           authorUsername={reflection?.author?.username}
           isAuthorVerified={reflection?.author?.verified}
           reflectionText={reflection?.body}
+          verseText={verseText}
           reflectionGroup={reflection?.group}
           reflectionGroupLink={reflection?.groupLink}
           avatarUrl={reflection?.author?.profileImg}
