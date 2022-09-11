@@ -17,6 +17,7 @@ export const makeVerseReflectionsUrl = ({
     'q[filters_attributes][0][chapter_id]': chapterNumber,
     'q[filters_attributes][0][from]': verseNumber,
     'q[filters_attributes][0][to]': verseNumber,
+    'q[filters_operation]': 'OR',
     page,
     tab,
     lang: locale,
