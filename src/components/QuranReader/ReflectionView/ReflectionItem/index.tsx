@@ -85,8 +85,8 @@ const ReflectionItem = ({
 
         return word;
       })
-      .join(' ');
-
+      .join(' ')
+      .replace(/\r\n\r\n/g, '<br>');
   return (
     <div className={styles.container}>
       <div className={styles.header}>
