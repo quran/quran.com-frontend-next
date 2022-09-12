@@ -88,7 +88,7 @@ const ReflectionItem = ({
           return word;
         })
         .join(' ')
-        .replace(/\r\n\r\n/g, '<br>'),
+        .replace(/\r\n/g, '<br>'),
     [reflectionText],
   );
 
