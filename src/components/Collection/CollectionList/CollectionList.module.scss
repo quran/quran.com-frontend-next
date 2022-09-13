@@ -39,3 +39,8 @@
     margin-block-start: var(--spacing-xsmall);
   }
 }
+
+.collectionListEmpty {
+  display: flex;
+  justify-content: center;
+}

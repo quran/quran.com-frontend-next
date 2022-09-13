@@ -61,55 +61,61 @@ const CollectionList = () => {
         />
       </div>
       <div className={styles.collectionListContainer}>
-        {collections.map((collection) => {
-          return (
-            <div key={collection.id}>
-              <div className={styles.itemContainer}>
-                <Link href={`/collections/${collection.id}`}>
-                  <div>
-                    <div className={styles.itemTitle}>{collection.name}</div>
-                    <div className={styles.itemInfo}>
-                      <div className={styles.itemIcon}>
-                        <BookmarkIcon />
-                      </div>
-                      <div className={styles.itemCount}>
-                        {collection.count} {t('common:verses')}
+        {collections.length === 0 ? (
+          <div className={styles.collectionListEmpty}>
+            <span>{t('collection:empty')}</span>
+          </div>
+        ) : (
+          collections.map((collection) => {
+            return (
+              <div key={collection.id}>
+                <div className={styles.itemContainer}>
+                  <Link href={`/collections/${collection.id}`}>
+                    <div>
+                      <div className={styles.itemTitle}>{collection.name}</div>
+                      <div className={styles.itemInfo}>
+                        <div className={styles.itemIcon}>
+                          <BookmarkIcon />
+                        </div>
+                        <div className={styles.itemCount}>
+                          {collection.count} {t('common:verses')}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </Link>
+                  </Link>
 
-                <PopoverMenu
-                  trigger={
-                    <Button
-                      size={ButtonSize.Small}
-                      tooltip={t('common:more')}
-                      variant={ButtonVariant.Ghost}
-                      shape={ButtonShape.Circle}
-                      ariaLabel={t('common:more')}
-                    >
-                      <span>
-                        <OverflowMenuIcon />
-                      </span>
-                    </Button>
-                  }
-                  isModal
-                  isPortalled
-                >
-                  <RenameCollectionAction
-                    currentCollectionName={collection.name}
-                    collectionId={collection.id}
-                    onDone={onCollectionUpdated}
-                  />
-                  <DeleteCollectionAction
-                    collectionId={collection.id}
-                    onDone={onCollectionUpdated}
-                  />
-                </PopoverMenu>
+                  <PopoverMenu
+                    trigger={
+                      <Button
+                        size={ButtonSize.Small}
+                        tooltip={t('common:more')}
+                        variant={ButtonVariant.Ghost}
+                        shape={ButtonShape.Circle}
+                        ariaLabel={t('common:more')}
+                      >
+                        <span>
+                          <OverflowMenuIcon />
+                        </span>
+                      </Button>
+                    }
+                    isModal
+                    isPortalled
+                  >
+                    <RenameCollectionAction
+                      currentCollectionName={collection.name}
+                      collectionId={collection.id}
+                      onDone={onCollectionUpdated}
+                    />
+                    <DeleteCollectionAction
+                      collectionId={collection.id}
+                      onDone={onCollectionUpdated}
+                    />
+                  </PopoverMenu>
+                </div>
               </div>
-            </div>
-          );
-        })}
+            );
+          })
+        )}
       </div>
     </div>
   );
