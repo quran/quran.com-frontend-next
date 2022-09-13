@@ -19,12 +19,13 @@ import Button, { ButtonShape, ButtonSize, ButtonVariant } from 'src/components/d
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
 import { getCollectionsList, updateCollection } from 'src/utils/auth/api';
 import { makeCollectionsUrl } from 'src/utils/auth/apiPaths';
+import { Collection } from 'types/Collection';
 import { CollectionListSortOption } from 'types/CollectionSortOptions';
 
 const DEFAULT_SORT_OPTION = CollectionListSortOption.RecentlyUpdated;
 
 const CollectionList = () => {
-  const [collectionToRename, setCollectionToRename] = useState(null);
+  const [collectionToRename, setCollectionToRename] = useState<Collection | null>(null);
   const { t } = useTranslation();
   const toast = useToast();
   const [sortBy, setSortBy] = useState(DEFAULT_SORT_OPTION);
@@ -56,7 +57,7 @@ const CollectionList = () => {
 
   const closeModal = () => {
     logButtonClick('rename_collection_action_close');
-    collectionToRename(null);
+    setCollectionToRename(null);
   };
 
   const onSubmit = (renameFormData: any) => {
