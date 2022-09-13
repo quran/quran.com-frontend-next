@@ -24,7 +24,9 @@ import {
   makeUpdateCollectionUrl,
   BookmarkByCollectionIdQueryParams,
   makeDeleteCollectionUrl,
-  makeDeleteCollectionBookmarkUrl,
+  makeAddCollectionBookmarkUrl,
+  makeDeleteCollectionBookmarkByIdUrl,
+  makeDeleteCollectionBookmarkByKeyUrl,
 } from '@/utils/auth/apiPaths';
 import { fetcher } from 'src/api';
 import CompleteAnnouncementRequest from 'types/auth/CompleteAnnouncementRequest';
@@ -100,7 +102,6 @@ type AddOrRemoveBookmarkParams = {
   type: BookmarkType;
   isAdd: boolean;
   verseNumber?: number;
-  collectionId?: string;
 };
 
 export const addOrRemoveBookmark = async ({
@@ -109,7 +110,6 @@ export const addOrRemoveBookmark = async ({
   type,
   verseNumber,
   isAdd,
-  collectionId,
 }: AddOrRemoveBookmarkParams) =>
   postRequest(makeBookmarksUrl(mushafId), {
     key,
@@ -117,7 +117,6 @@ export const addOrRemoveBookmark = async ({
     type,
     verseNumber,
     isAdd,
-    collectionId,
   });
 
 export const getPageBookmarks = async (
@@ -182,8 +181,34 @@ export const deleteCollection = async (collectionId: string) => {
   return deleteRequest(makeDeleteCollectionUrl(collectionId));
 };
 
-export const deleteCollectionBookmark = async (collectionId: string, bookmarkId: string) => {
-  return deleteRequest(makeDeleteCollectionBookmarkUrl(collectionId, bookmarkId));
+export const addCollectionBookmark = async ({ collectionId, key, mushaf, type, verseNumber }) => {
+  return postRequest(makeAddCollectionBookmarkUrl(collectionId), {
+    collectionId,
+    key,
+    mushaf,
+    type,
+    verseNumber,
+  });
+};
+
+export const deleteCollectionBookmarkById = async (collectionId: string, bookmarkId: string) => {
+  return deleteRequest(makeDeleteCollectionBookmarkByIdUrl(collectionId, bookmarkId));
+};
+
+export const deleteCollectionBookmarkByKey = async ({
+  collectionId,
+  key,
+  mushaf,
+  type,
+  verseNumber,
+}) => {
+  return deleteRequest(makeDeleteCollectionBookmarkByKeyUrl(collectionId), {
+    collectionId,
+    key,
+    mushaf,
+    type,
+    verseNumber,
+  });
 };
 
 export const getBookmarksByCollectionId = async (

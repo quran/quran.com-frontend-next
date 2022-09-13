@@ -120,13 +120,7 @@ const ProfilePage: NextPage<Props> = ({ chaptersData }) => {
               <BookmarksSection />
             </div>
 
-            <div
-              className={classNames(
-                layoutStyle.flowItem,
-                layoutStyle.fullWidth,
-                styles.collectionListContainer,
-              )}
-            >
+            <div className={classNames(layoutStyle.flowItem, styles.collectionListContainer)}>
               <CollectionList />
             </div>
 

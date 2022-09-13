@@ -26,7 +26,7 @@ import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/transla
 import { getDefaultWordFields, getMushafId } from 'src/utils/api';
 import { makeVersesUrl } from 'src/utils/apiPaths';
 import { areArraysEqual } from 'src/utils/array';
-import { deleteCollectionBookmark } from 'src/utils/auth/api';
+import { deleteCollectionBookmarkById } from 'src/utils/auth/api';
 import { getChapterData } from 'src/utils/chapter';
 import { toLocalizedVerseKey } from 'src/utils/locale';
 import { makeVerseKey } from 'src/utils/verse';
@@ -60,7 +60,7 @@ const CollectionDetail = ({
   const toast = useToast();
 
   const onBookmarkItemDeleted = (bookmarkId: string) => {
-    deleteCollectionBookmark(id, bookmarkId)
+    deleteCollectionBookmarkById(id, bookmarkId)
       .then(() => {
         onUpdated();
       })

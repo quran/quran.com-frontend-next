@@ -24,6 +24,7 @@ import {
 import CollectionDetail from 'src/components/Collection/CollectionDetail/CollectionDetail';
 import Button, { ButtonVariant } from 'src/components/dls/Button/Button';
 import DataContext from 'src/contexts/DataContext';
+import Error from 'src/pages/_error';
 import { privateFetcher } from 'src/utils/auth/api';
 import { makeGetBookmarkByCollectionId } from 'src/utils/auth/apiPaths';
 import { getAllChaptersData } from 'src/utils/chapter';
@@ -78,8 +79,12 @@ const CollectionDetailPage = ({ chaptersData }) => {
     });
   };
 
-  const { data, size, setSize, mutate, isValidating } =
+  const { data, size, setSize, mutate, isValidating, error } =
     useSWRInfinite<GetBookmarkCollectionsIdResponse>(getKey, privateFetcher);
+
+  if (error) {
+    return <Error statusCode={403} />;
+  }
 
   if (!data) {
     return (

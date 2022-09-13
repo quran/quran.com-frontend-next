@@ -41,6 +41,7 @@ const SaveToCollectionModal = ({
   const toast = useToast();
 
   const handleSubmit = (data) => {
+    logButtonClick('save_to_collection_modal_submit');
     onNewCollectionCreated(data.name)
       .then(() => setIsAddingNewCollection(false))
       .catch(() => {

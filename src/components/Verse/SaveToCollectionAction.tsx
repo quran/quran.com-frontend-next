@@ -4,7 +4,7 @@ import { useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useSelector } from 'react-redux';
-import { useSWRConfig } from 'swr';
+import useSWR, { useSWRConfig } from 'swr';
 import useSWRImmutable from 'swr/immutable';
 
 import PlusIcon from '../../../public/icons/plus.svg';
@@ -18,7 +18,8 @@ import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import { getMushafId } from 'src/utils/api';
 import {
   addCollection,
-  addOrRemoveBookmark,
+  addCollectionBookmark,
+  deleteCollectionBookmarkByKey,
   getBookmarkCollections,
   getCollectionsList,
 } from 'src/utils/auth/api';
@@ -36,7 +37,7 @@ const SaveToCollectionAction = ({ verse, bookmarksRangeUrl }) => {
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const mushafId = getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines).mushaf;
   const { t } = useTranslation();
-  const { data: collectionListData, mutate: mutateCollectionListData } = useSWRImmutable(
+  const { data: collectionListData, mutate: mutateCollectionListData } = useSWR(
     isLoggedIn() ? makeCollectionsUrl({}) : null,
     () => getCollectionsList({}),
   );
@@ -94,41 +95,65 @@ const SaveToCollectionAction = ({ verse, bookmarksRangeUrl }) => {
   };
 
   const onCollectionToggled = (changedCollection: Collection, newValue: boolean) => {
-    addOrRemoveBookmark({
-      key: Number(verse.chapterId),
-      mushafId,
-      type: BookmarkType.Ayah,
-      isAdd: newValue,
-      verseNumber: verse.verseNumber,
-      collectionId: changedCollection.id,
-    })
-      .then(() => {
-        mutateIsResourceBookmarked();
-        mutateCollectionListData();
-        mutateBookmarkCollectionIdsData();
+    if (newValue === true) {
+      addCollectionBookmark({
+        key: Number(verse.chapterId),
+        mushaf: mushafId,
+        type: BookmarkType.Ayah,
+        verseNumber: verse.verseNumber,
+        collectionId: changedCollection.id,
       })
-      .catch((err) => {
-        if (err.status === 400) {
-          toast(t('common:error.bookmark-sync'), {
+        .then(() => {
+          mutateIsResourceBookmarked();
+          mutateCollectionListData();
+          mutateBookmarkCollectionIdsData();
+        })
+        .catch((err) => {
+          if (err.status === 400) {
+            toast(t('common:error.bookmark-sync'), {
+              status: ToastStatus.Error,
+            });
+            return;
+          }
+          toast(t('common:error.general'), {
             status: ToastStatus.Error,
           });
-          return;
-        }
-        toast(t('common:error.general'), {
-          status: ToastStatus.Error,
         });
-      });
+    } else {
+      deleteCollectionBookmarkByKey({
+        key: Number(verse.chapterId),
+        mushaf: mushafId,
+        type: BookmarkType.Ayah,
+        verseNumber: verse.verseNumber,
+        collectionId: changedCollection.id,
+      })
+        .then(() => {
+          mutateIsResourceBookmarked();
+          mutateCollectionListData();
+          mutateBookmarkCollectionIdsData();
+        })
+        .catch((err) => {
+          if (err.status === 400) {
+            toast(t('common:error.bookmark-sync'), {
+              status: ToastStatus.Error,
+            });
+            return;
+          }
+          toast(t('common:error.general'), {
+            status: ToastStatus.Error,
+          });
+        });
+    }
   };
 
   const onNewCollectionCreated = (newCollectionName: string) => {
     return addCollection(newCollectionName).then((newCollection: any) => {
-      addOrRemoveBookmark({
-        key: Number(verse.chapterId),
-        mushafId,
-        type: BookmarkType.Ayah,
-        isAdd: true,
-        verseNumber: verse.verseNumber,
+      addCollectionBookmark({
         collectionId: newCollection.id,
+        key: Number(verse.chapterId),
+        mushaf: mushafId,
+        type: BookmarkType.Ayah,
+        verseNumber: verse.verseNumber,
       })
         .then(() => {
           mutateIsResourceBookmarked();

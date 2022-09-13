@@ -25,6 +25,7 @@ const RenameCollectionAction = ({ currentCollectionName, collectionId, onDone })
   };
 
   const onSubmit = (data) => {
+    logButtonClick('rename_collection_action_submit');
     updateCollection(collectionId, { name: data.name })
       .then(() => {
         onDone();

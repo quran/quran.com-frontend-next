@@ -48,8 +48,14 @@ export const makeUpdateCollectionUrl = (collectionId: string) =>
 export const makeDeleteCollectionUrl = (collectionId: string) =>
   makeUrl(`collections/${collectionId}`);
 
-export const makeDeleteCollectionBookmarkUrl = (collectionId: string, bookmarkId: string) =>
-  makeUrl(`collections/${collectionId}/${bookmarkId}`);
+export const makeAddCollectionBookmarkUrl = (collectionId: string) =>
+  makeUrl(`collections/${collectionId}/bookmarks`);
+
+export const makeDeleteCollectionBookmarkByIdUrl = (collectionId: string, bookmarkId: string) =>
+  makeUrl(`collections/${collectionId}/bookmarks/${bookmarkId}`);
+
+export const makeDeleteCollectionBookmarkByKeyUrl = (collectionId: string) =>
+  makeUrl(`collections/${collectionId}/bookmarks`);
 
 export const makeBookmarkCollectionsUrl = (
   mushafId: number,
