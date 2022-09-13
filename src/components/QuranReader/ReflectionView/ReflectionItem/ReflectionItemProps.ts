@@ -8,7 +8,6 @@ type ReflectionItemProps = {
   date: string;
   reflectionText: string;
   reflectionLanguage: string;
-  verseText: string;
   reflectionGroup?: string;
   reflectionGroupLink?: string;
   isAuthorVerified: boolean;
@@ -17,6 +16,8 @@ type ReflectionItemProps = {
   verseReferences?: ReflectionVerseReference[];
   likesCount?: number;
   commentsCount?: number;
+  filters: any;
+  trimmedCitationTexts: Record<string, any>;
 };
 
 export default ReflectionItemProps;

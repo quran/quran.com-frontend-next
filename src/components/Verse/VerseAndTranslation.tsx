@@ -1,5 +1,3 @@
-import { useEffect } from 'react';
-
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useSelector } from 'react-redux';
 import useSWR from 'swr/immutable';
@@ -34,10 +32,9 @@ interface Props {
   chapter: number;
   from: number;
   to: number;
-  setVerseText?: (verseText: string) => void;
 }
 
-const VerseAndTranslation: React.FC<Props> = ({ chapter, from, to, setVerseText }) => {
+const VerseAndTranslation: React.FC<Props> = ({ chapter, from, to }) => {
   const { lang } = useTranslation();
   const translations = useSelector(selectSelectedTranslations, areArraysEqual);
   const { quranFont, mushafLines, translationFontScale } = useSelector(
@@ -61,11 +58,6 @@ const VerseAndTranslation: React.FC<Props> = ({ chapter, from, to, setVerseText 
     shouldFetchData ? makeVersesUrl(chapter, lang, apiParams) : null,
     fetcher,
   );
-  useEffect(() => {
-    if (setVerseText && data?.verses?.[0].textUthmani) {
-      setVerseText(data?.verses?.[0].textUthmani);
-    }
-  }, [data?.verses, setVerseText]);
 
   useQcfFont(quranFont, data?.verses ? data.verses : []);
 

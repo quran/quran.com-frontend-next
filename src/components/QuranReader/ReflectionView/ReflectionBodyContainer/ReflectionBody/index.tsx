@@ -1,4 +1,4 @@
-import React, { useCallback, useContext, useState } from 'react';
+import React, { useCallback, useContext } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
@@ -14,28 +14,9 @@ import Separator from '@/dls/Separator/Separator';
 import { logButtonClick } from '@/utils/eventLogger';
 import { fakeNavigate, getVerseReflectionNavigationUrl } from '@/utils/navigation';
 import { getQuranReflectVerseUrl } from '@/utils/quranReflect/navigation';
+import { getVerseReferencesFromReflection } from '@/utils/quranReflect/string';
 import { isFirstVerseOfSurah, isLastVerseOfSurah, makeVerseKey } from '@/utils/verse';
 import DataContext from 'src/contexts/DataContext';
-import { ReflectionVerseReference } from 'types/ReflectionVerseReference';
-
-/**
- * From reflection data, extract the verse references
- * This is is a temporary function, once we migrate to use Quran.com's API we will probably remove this function
- *
- * @param {object} reflection
- * @returns {ReflectionVerseReference[]} verseReferences
- */
-const getVerseReferencesFromReflection = (reflection: any): ReflectionVerseReference[] => {
-  return reflection.filters.map((filter) => {
-    const { surahNumber, from, to } = filter;
-
-    return {
-      chapter: Number(surahNumber),
-      from: Number(from),
-      to: Number(to),
-    };
-  });
-};
 
 interface Props {
   selectedChapterId: string;
@@ -54,7 +35,6 @@ const ReflectionBody: React.FC<Props> = ({
   setSelectedVerseNumber,
 }) => {
   const { t, lang } = useTranslation('quran-reader');
-  const [verseText, setVerseText] = useState('');
   const chaptersData = useContext(DataContext);
   const hasNextVerse = !isLastVerseOfSurah(
     chaptersData,
@@ -95,7 +75,6 @@ const ReflectionBody: React.FC<Props> = ({
         from={Number(selectedVerseNumber)}
         to={Number(selectedVerseNumber)}
         chapter={Number(selectedChapterId)}
-        setVerseText={setVerseText}
       />
       <div className={styles.separatorContainer}>
         <Separator />
@@ -115,15 +94,16 @@ const ReflectionBody: React.FC<Props> = ({
           isAuthorVerified={reflection?.author?.verified}
           reflectionText={reflection?.body}
           reflectionLanguage={reflection.language}
-          verseText={verseText}
           reflectionGroup={reflection?.group}
           reflectionGroupLink={reflection?.groupLink}
           avatarUrl={reflection?.author?.profileImg}
-          verseReferences={getVerseReferencesFromReflection(reflection)}
+          verseReferences={getVerseReferencesFromReflection(reflection.filters)}
           likesCount={reflection?.likes}
           commentsCount={reflection?.commentsCount}
           selectedChapterId={selectedChapterId}
           selectedVerseNumber={selectedVerseNumber}
+          filters={reflection.filters}
+          trimmedCitationTexts={reflection.trimmedCitationTexts}
         />
       ))}
       <div className={styles.readMoreButtonContainer}>

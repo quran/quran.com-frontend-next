@@ -31,11 +31,12 @@ const ReflectionItem = ({
   likesCount,
   commentsCount,
   reflectionGroup,
-  verseText,
   reflectionGroupLink,
   selectedChapterId,
   selectedVerseNumber,
   reflectionLanguage,
+  trimmedCitationTexts,
+  filters,
 }: ReflectionItemProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const { t } = useTranslation();
@@ -152,9 +153,10 @@ const ReflectionItem = ({
         )}
       </div>
       <SocialInteraction
+        filters={filters}
         reflectionText={reflectionText}
-        verseText={verseText}
         likesCount={likesCount}
+        trimmedCitationTexts={trimmedCitationTexts}
         commentsCount={commentsCount}
         postId={id}
       />
