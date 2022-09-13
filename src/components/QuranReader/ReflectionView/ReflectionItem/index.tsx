@@ -13,6 +13,7 @@ import DataContext from '@/contexts/DataContext';
 import { getChapterData } from '@/utils/chapter';
 import { logButtonClick } from '@/utils/eventLogger';
 import truncate from '@/utils/html-truncate';
+import { isRTLReflection } from '@/utils/quranReflect/locale';
 import { getQuranReflectTagUrl } from '@/utils/quranReflect/navigation';
 import { makeVerseKey } from '@/utils/verse';
 
@@ -34,6 +35,7 @@ const ReflectionItem = ({
   reflectionGroupLink,
   selectedChapterId,
   selectedVerseNumber,
+  reflectionLanguage,
 }: ReflectionItemProps) => {
   const [isExpanded, setIsExpanded] = useState(false);
   const { t } = useTranslation();
@@ -129,25 +131,26 @@ const ReflectionItem = ({
           ))}
         </div>
       )}
-
-      <span
-        className={styles.body}
-        // eslint-disable-next-line react/no-danger
-        dangerouslySetInnerHTML={{
-          __html: isExpanded ? formattedText : truncate(formattedText, MAX_REFLECTION_LENGTH),
-        }}
-      />
-      {reflectionText.length > MAX_REFLECTION_LENGTH && (
+      <div className={isRTLReflection(reflectionLanguage) ? styles.rtl : styles.ltr}>
         <span
-          className={styles.moreOrLessText}
-          tabIndex={0}
-          role="button"
-          onKeyDown={onMoreLessClicked}
-          onClick={onMoreLessClicked}
-        >
-          {isExpanded ? t('quran-reader:see-less') : t('quran-reader:see-more')}
-        </span>
-      )}
+          className={styles.body}
+          // eslint-disable-next-line react/no-danger
+          dangerouslySetInnerHTML={{
+            __html: isExpanded ? formattedText : truncate(formattedText, MAX_REFLECTION_LENGTH),
+          }}
+        />
+        {reflectionText.length > MAX_REFLECTION_LENGTH && (
+          <span
+            className={styles.moreOrLessText}
+            tabIndex={0}
+            role="button"
+            onKeyDown={onMoreLessClicked}
+            onClick={onMoreLessClicked}
+          >
+            {isExpanded ? t('quran-reader:see-less') : t('quran-reader:see-more')}
+          </span>
+        )}
+      </div>
       <SocialInteraction
         reflectionText={reflectionText}
         verseText={verseText}

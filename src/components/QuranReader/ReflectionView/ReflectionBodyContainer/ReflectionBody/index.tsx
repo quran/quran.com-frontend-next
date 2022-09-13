@@ -114,6 +114,7 @@ const ReflectionBody: React.FC<Props> = ({
           authorUsername={reflection?.author?.username}
           isAuthorVerified={reflection?.author?.verified}
           reflectionText={reflection?.body}
+          reflectionLanguage={reflection.language}
           verseText={verseText}
           reflectionGroup={reflection?.group}
           reflectionGroupLink={reflection?.groupLink}

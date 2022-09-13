@@ -72,6 +72,7 @@ const SocialInteraction: React.FC<Props> = ({
         prefix={<LoveIcon />}
         size={ButtonSize.Small}
         onClick={onLikesCountClicked}
+        shouldFlipOnRTL={false}
       >
         {toLocalizedNumber(likesCount, lang)}
       </Button>
@@ -83,6 +84,7 @@ const SocialInteraction: React.FC<Props> = ({
         isNewTab
         size={ButtonSize.Small}
         onClick={onCommentsCountClicked}
+        shouldFlipOnRTL={false}
       >
         {toLocalizedNumber(commentsCount, lang)}
       </Button>
@@ -95,6 +97,7 @@ const SocialInteraction: React.FC<Props> = ({
             variant={ButtonVariant.Compact}
             size={ButtonSize.Small}
             tooltip={t('common:share')}
+            shouldFlipOnRTL={false}
           >
             <ShareIcon />
           </Button>
