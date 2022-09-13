@@ -204,6 +204,13 @@ export const getCanonicalUrl = (lang: string, path: string): string =>
 export const getProductUpdatesUrl = (id = ''): string =>
   `/product-updates${`${id ? `/${id}` : ''}`}`;
 
+export const getProfileNavigationUrl = () => {
+  return '/profile';
+};
+
+export const getCollectionNavigationUrl = (collectionId: string) => {
+  return `/collections/${collectionId}`;
+};
 /**
  * Update the browser history with the new url.
  * without actually navigating into that url.

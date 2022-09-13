@@ -71,6 +71,9 @@ const FormBuilder = <T,>({
       <Button
         {...actionProps}
         htmlType="submit"
+        onClick={(e) => {
+          e.stopPropagation();
+        }}
         className={classNames(styles.submitButton, actionProps.className)}
       >
         {actionText}

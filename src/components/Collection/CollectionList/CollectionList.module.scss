@@ -2,12 +2,14 @@
   display: flex;
   justify-content: space-between;
   margin-block-end: var(--spacing-large);
+  font-size: var(--font-size-large);
 }
 
 .itemContainer {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  cursor: pointer;
 }
 
 .itemTitle {
@@ -38,8 +40,7 @@
   }
 }
 
-.sorter {
+.collectionListEmpty {
   display: flex;
-  align-items: center;
-  font-size: var(--font-size-small);
+  justify-content: center;
 }

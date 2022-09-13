@@ -25,6 +25,7 @@ type LinkProps = {
   shouldPrefetch?: boolean;
   title?: string;
   children?: React.ReactNode;
+  ariaLabel?: string;
 };
 
 const Link: React.FC<LinkProps> = ({
@@ -39,6 +40,7 @@ const Link: React.FC<LinkProps> = ({
   isShallow = false,
   shouldPrefetch = true,
   title,
+  ariaLabel,
 }) => (
   <Wrapper
     shouldWrap={!download}
@@ -66,6 +68,8 @@ const Link: React.FC<LinkProps> = ({
       })}
       {...(onClick && { onClick })}
       {...(title && { title })}
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      {...(ariaLabel && { 'aria-label': ariaLabel })}
     >
       {children}
     </a>

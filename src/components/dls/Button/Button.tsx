@@ -132,6 +132,8 @@ const Button: React.FC<ButtonProps> = ({
         shouldPrefetch={prefetch}
         isShallow={shallowRouting}
         {...(onClick && { onClick })}
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        {...(ariaLabel && { ariaLabel })}
       >
         <div dir={direction} className={classes} data-auto-flip-icon={shouldFlipOnRTL} {...props}>
           {prefixFinal && (

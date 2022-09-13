@@ -8,6 +8,8 @@ import useTranslation from 'next-translate/useTranslation';
 import { useSelector, shallowEqual } from 'react-redux';
 import useSWR from 'swr/immutable';
 
+import VerseTextPreview from '../VerseTextPreview';
+
 import LanguageAndTafsirSelection from './LanguageAndTafsirSelection';
 import SurahAndAyahSelection from './SurahAndAyahSelection';
 import TafsirEndOfScrollingActions from './TafsirEndOfScrollingActions';
@@ -15,7 +17,6 @@ import TafsirGroupMessage from './TafsirGroupMessage';
 import TafsirMessage from './TafsirMessage';
 import TafsirSkeleton from './TafsirSkeleton';
 import TafsirText from './TafsirText';
-import TafsirVerseText from './TafsirVerseText';
 import styles from './TafsirView.module.scss';
 
 import DataFetcher from '@/components/DataFetcher';
@@ -209,7 +210,7 @@ const TafsirBody = ({
             <TafsirGroupMessage from={firstVerseKey} to={lastVerseKey} />
           )}
           <div className={styles.verseTextContainer}>
-            <TafsirVerseText verses={verses} />
+            <VerseTextPreview verses={Object.values(verses)} />
           </div>
           <div className={styles.separatorContainer}>
             <Separator />

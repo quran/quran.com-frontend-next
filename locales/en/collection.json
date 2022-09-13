@@ -1,3 +1,12 @@
 {
-    "recently-added": "Recently added"
+    "recently-added": "Recently added",
+    "recently-updated": "Recently updated",
+    "alphabetical": "A-Z",
+    "verse-key": "Chapter and Verse Number",
+    "load-more": "Load more",
+    "go-to-ayah": "Go to ayah",
+    "delete": "Delete",
+    "empty": "Collection is empty",
+    "collection-list-empty": "Collection list is empty. You haven't created any collection yet",
+    "back-to-collection-list": "Back to collection list"
 }

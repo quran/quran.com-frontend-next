@@ -1,80 +1,153 @@
+import { useState } from 'react';
+
 import useTranslation from 'next-translate/useTranslation';
+import Link from 'next/link';
+import useSWR from 'swr';
+
+import OverflowMenuIcon from '../../../../public/icons/menu_more_horiz.svg';
+import BookmarkIcon from '../../../../public/icons/unbookmarked.svg';
+import CollectionSorter from '../CollectionSorter/CollectionSorter';
+import RenameCollectionModal from '../RenameCollectionModal/RenameCollectionModal';
 
 import styles from './CollectionList.module.scss';
+import DeleteCollectionAction from './DeleteCollectionAction';
+import RenameCollectionAction from './RenameCollectionAction';
 
-import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
-import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
-import ChevronDownIcon from '@/icons/chevron-down.svg';
-import OverflowMenuIcon from '@/icons/menu_more_horiz.svg';
-import BookmarkIcon from '@/icons/unbookmarked.svg';
+import { ToastStatus, useToast } from '@/dls/Toast/Toast';
+import { logButtonClick, logValueChange } from '@/utils/eventLogger';
+import Button, { ButtonShape, ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
+import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
+import { getCollectionsList, updateCollection } from 'src/utils/auth/api';
+import { makeCollectionsUrl } from 'src/utils/auth/apiPaths';
+import { Collection } from 'types/Collection';
+import { CollectionListSortOption } from 'types/CollectionSortOptions';
 
-type Collection = {
-  id: string | number;
-  name: string;
-  itemCount: number;
-};
+const DEFAULT_SORT_OPTION = CollectionListSortOption.RecentlyUpdated;
 
-type CollectionListProps = {
-  collections: Collection[];
-};
-
-const CollectionList = ({ collections }: CollectionListProps) => {
+const CollectionList = () => {
+  const [collectionToRename, setCollectionToRename] = useState<Collection | null>(null);
   const { t } = useTranslation();
-  const sorter = (
-    <div className={styles.sorter}>
-      {t('profile:recently-added')}
-      <span className={styles.itemIcon}>
-        <ChevronDownIcon />
-      </span>
-    </div>
+  const toast = useToast();
+  const [sortBy, setSortBy] = useState(DEFAULT_SORT_OPTION);
+  const apiParams = {
+    sortBy,
+  };
+
+  const { data, mutate } = useSWR<any>(makeCollectionsUrl(apiParams), () =>
+    getCollectionsList(apiParams),
   );
+
+  const sortOptions = [
+    { id: CollectionListSortOption.RecentlyUpdated, label: t('collection:recently-updated') },
+    { id: CollectionListSortOption.Alphabetical, label: t('collection:alphabetical') },
+  ];
+
+  if (!data) return null;
+
+  const collections = data?.data || [];
+
+  const onSortOptionChanged = (nextSortBy) => {
+    logValueChange('collection_list', sortBy, nextSortBy);
+    setSortBy(nextSortBy);
+  };
+
+  const onCollectionUpdated = () => {
+    mutate();
+  };
+
+  const closeModal = () => {
+    logButtonClick('rename_collection_action_close');
+    setCollectionToRename(null);
+  };
+
+  const onSubmit = (renameFormData: any) => {
+    logButtonClick('rename_collection_action_submit');
+    updateCollection(collectionToRename.id, { name: renameFormData.name })
+      .then(() => {
+        onCollectionUpdated();
+        setCollectionToRename(null);
+      })
+      .catch(() => {
+        toast(t('common:error.general'), {
+          status: ToastStatus.Error,
+        });
+      });
+  };
+
+  const isRenameModalOpen = !!collectionToRename;
+
   return (
-    <div>
-      <div className={styles.header}>
-        <div>{t('profile:collections')}</div>
-        {sorter}
-      </div>
-      <div className={styles.collectionListContainer}>
-        {collections.map((collection) => {
-          return (
-            <div key={collection.id} className={styles.itemContainer}>
-              <div>
-                <div className={styles.itemTitle}>{collection.name}</div>
-                <div className={styles.itemInfo}>
-                  <div className={styles.itemIcon}>
-                    <BookmarkIcon />
-                  </div>
-                  <div className={styles.itemCount}>
-                    {collection.itemCount} {t('common:verses')}
+    <>
+      <RenameCollectionModal
+        onClose={closeModal}
+        isOpen={isRenameModalOpen}
+        defaultValue={collectionToRename?.name}
+        onSubmit={onSubmit}
+      />
+      <div>
+        <div className={styles.header}>
+          <div>{t('profile:collections')}</div>
+          <CollectionSorter
+            options={sortOptions}
+            selectedOptionId={sortBy}
+            onChange={onSortOptionChanged}
+          />
+        </div>
+        <div className={styles.collectionListContainer}>
+          {collections.length === 0 ? (
+            <div className={styles.collectionListEmpty}>
+              <span>{t('collection:empty')}</span>
+            </div>
+          ) : (
+            collections.map((collection) => {
+              return (
+                <div key={collection.id}>
+                  <div className={styles.itemContainer}>
+                    <Link href={`/collections/${collection.id}`}>
+                      <div>
+                        <div className={styles.itemTitle}>{collection.name}</div>
+                        <div className={styles.itemInfo}>
+                          <div className={styles.itemIcon}>
+                            <BookmarkIcon />
+                          </div>
+                          <div className={styles.itemCount}>
+                            {collection.count} {t('common:verses')}
+                          </div>
+                        </div>
+                      </div>
+                    </Link>
+
+                    <PopoverMenu
+                      trigger={
+                        <Button
+                          size={ButtonSize.Small}
+                          tooltip={t('common:more')}
+                          variant={ButtonVariant.Ghost}
+                          shape={ButtonShape.Circle}
+                          ariaLabel={t('common:more')}
+                        >
+                          <span>
+                            <OverflowMenuIcon />
+                          </span>
+                        </Button>
+                      }
+                      isModal
+                      isPortalled
+                    >
+                      <RenameCollectionAction onClick={() => setCollectionToRename(collection)} />
+                      <DeleteCollectionAction
+                        collectionId={collection.id}
+                        onDone={onCollectionUpdated}
+                      />
+                    </PopoverMenu>
                   </div>
                 </div>
-              </div>
-
-              <PopoverMenu
-                trigger={
-                  <Button
-                    size={ButtonSize.Small}
-                    tooltip={t('common:more')}
-                    variant={ButtonVariant.Ghost}
-                    shape={ButtonShape.Circle}
-                    ariaLabel={t('common:more')}
-                  >
-                    <span>
-                      <OverflowMenuIcon />
-                    </span>
-                  </Button>
-                }
-                isModal
-                isPortalled
-              >
-                <PopoverMenu.Item>{t('profile:rename')}</PopoverMenu.Item>
-                <PopoverMenu.Item>{t('profile:delete')}</PopoverMenu.Item>
-              </PopoverMenu>
-            </div>
-          );
-        })}
+              );
+            })
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
