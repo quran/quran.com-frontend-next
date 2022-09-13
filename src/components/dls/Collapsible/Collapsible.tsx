@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 
 import * as CollapsiblePrimitive from '@radix-ui/react-collapsible';
+import classNames from 'classnames';
 
 import styles from './Collapsible.module.scss';
 
@@ -16,9 +17,17 @@ type Props = {
   suffix?: React.ReactNode;
   children: ({ isOpen }: ChildrenRenderProps) => React.ReactNode;
   isDefaultOpen?: boolean;
+  shouldRotatePrefixOnToggle?: boolean;
 };
 
-const Collapsible = ({ isDefaultOpen = false, prefix, title, suffix, children }: Props) => {
+const Collapsible = ({
+  isDefaultOpen = false,
+  prefix,
+  title,
+  suffix,
+  children,
+  shouldRotatePrefixOnToggle,
+}: Props) => {
   const [isOpen, setIsOpen] = useState(isDefaultOpen);
 
   const onSuffixClicked = (e) => {
@@ -33,7 +42,13 @@ const Collapsible = ({ isDefaultOpen = false, prefix, title, suffix, children }:
       <CollapsiblePrimitive.Trigger asChild>
         <div className={styles.header} onClick={onHeaderClicked}>
           <div className={styles.headerLeft}>
-            <div className={styles.prefixContainer}>{prefix}</div>
+            <div
+              className={classNames(styles.prefixContainer, {
+                [styles.prefixRotated]: shouldRotatePrefixOnToggle && isOpen,
+              })}
+            >
+              {prefix}
+            </div>
             {title}
           </div>
           <div className={styles.suffixContainer} onClick={onSuffixClicked}>

@@ -18,11 +18,13 @@ interface Props {
   required?: boolean;
   label?: string;
   name?: string;
+  defaultChecked?: boolean;
 }
 
 const Checkbox: React.FC<Props> = ({
   disabled = false,
   required = false,
+  defaultChecked,
   checked,
   id,
   label,
@@ -48,6 +50,7 @@ const Checkbox: React.FC<Props> = ({
         onCheckedChange={handleChange}
         id={id}
         className={styles.checkbox}
+        defaultChecked={defaultChecked}
         {...(checked !== undefined && { checked })} // make it controlled only when checked is passed.
       >
         <RadixCheckbox.Indicator

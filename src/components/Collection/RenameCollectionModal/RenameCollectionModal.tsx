@@ -19,12 +19,18 @@ type RenameCollectionModalProps = {
   isOpen: boolean;
   defaultValue: string;
   onSubmit: (data: any) => void;
+  onClose: () => void;
 };
 
-const RenameCollectionModal = ({ isOpen, onSubmit, defaultValue }: RenameCollectionModalProps) => {
+const RenameCollectionModal = ({
+  isOpen,
+  onSubmit,
+  defaultValue,
+  onClose,
+}: RenameCollectionModalProps) => {
   const { t } = useTranslation('profile');
   return (
-    <Modal isOpen={isOpen}>
+    <Modal isOpen={isOpen} onClickOutside={onClose}>
       <Modal.Body>
         <div className={styles.header}>Rename Collection</div>
         <div className={styles.newCollectionFormContainer}>

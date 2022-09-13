@@ -222,6 +222,14 @@ export const getQuranReflectAuthorUrl = (username: string) => {
   return `https://quranreflect.com/${username}`;
 };
 
+export const getProfileNavigationUrl = () => {
+  return '/profile';
+};
+
+export const getCollectionNavigationUrl = (collectionId: string) => {
+  return `/collections/${collectionId}`;
+};
+
 /**
  * Update the browser history with the new url.
  * without actually navigating into that url.

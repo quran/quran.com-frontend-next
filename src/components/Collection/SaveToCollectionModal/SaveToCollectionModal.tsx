@@ -8,12 +8,14 @@ import FormBuilder from '@/components/FormBuilder/FormBuilder';
 import Button, { ButtonVariant } from '@/dls/Button/Button';
 import Checkbox from '@/dls/Forms/Checkbox/Checkbox';
 import Modal from '@/dls/Modal/Modal';
+import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import PlusIcon from '@/icons/plus.svg';
+import { logButtonClick } from '@/utils/eventLogger';
 import { RuleType } from 'types/FieldRule';
 import { FormFieldType } from 'types/FormField';
 
 export type Collection = {
-  id: string | number;
+  id: string;
   name: string;
   checked?: boolean;
 };
@@ -21,9 +23,10 @@ export type Collection = {
 type SaveToCollectionModalProps = {
   isOpen: boolean;
   collections: Collection[];
-  onCollectionToggled: (collection: Collection) => void;
-  onNewCollectionCreated: (name: string) => void;
+  onCollectionToggled: (collection: Collection, newValue: boolean) => void;
+  onNewCollectionCreated: (name: string) => Promise<void>;
   isAddingNewCollection?: boolean;
+  onClose?: () => void;
 };
 
 const SaveToCollectionModal = ({
@@ -31,12 +34,33 @@ const SaveToCollectionModal = ({
   collections,
   onCollectionToggled,
   onNewCollectionCreated,
+  onClose,
 }: SaveToCollectionModalProps) => {
   const [isAddingNewCollection, setIsAddingNewCollection] = useState(false);
   const { t } = useTranslation();
+  const toast = useToast();
+
+  const handleSubmit = (data) => {
+    logButtonClick('save_to_collection_modal_submit');
+    onNewCollectionCreated(data.name)
+      .then(() => setIsAddingNewCollection(false))
+      .catch(() => {
+        toast(t('common:error.general'), {
+          status: ToastStatus.Error,
+        });
+      });
+  };
+
+  const onAddNewCollection = () => {
+    setIsAddingNewCollection(true);
+    logButtonClick('save_to_collection_add_new_collection');
+  };
+
+  const handleCheckboxChange = (collection) => (checked) =>
+    onCollectionToggled(collection, checked);
 
   return (
-    <Modal isOpen={isOpen}>
+    <Modal isOpen={isOpen} onClickOutside={onClose}>
       <Modal.Body>
         <div className={styles.header}>{t('quran-reader:save-to')}</div>
         <div className={styles.collectionList}>
@@ -44,9 +68,9 @@ const SaveToCollectionModal = ({
             <div className={styles.collectionItem} key={collection.id}>
               <Checkbox
                 id={collection.name}
-                checked={collection.checked}
+                defaultChecked={collection.checked}
                 label={collection.name}
-                onChange={() => onCollectionToggled(collection)}
+                onChange={handleCheckboxChange(collection)}
               />
             </div>
           ))}
@@ -56,7 +80,7 @@ const SaveToCollectionModal = ({
             <Button
               variant={ButtonVariant.Ghost}
               prefix={<PlusIcon />}
-              onClick={() => setIsAddingNewCollection(true)}
+              onClick={onAddNewCollection}
             >
               {t('quran-reader:add-collection')}
             </Button>
@@ -74,9 +98,7 @@ const SaveToCollectionModal = ({
                   },
                 ]}
                 actionText={t('common:submit')}
-                onSubmit={(data: any) => {
-                  onNewCollectionCreated(data.name);
-                }}
+                onSubmit={handleSubmit}
               />
             </div>
           )}

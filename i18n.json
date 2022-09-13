@@ -14,6 +14,7 @@
     "/surah/[chapterId]/info": ["surah-info"],
     "/chapter_info/[chapterId]": ["surah-info"],
     "/surah-info/[chapterId]": ["surah-info"],
+    "/collections/[collectionId]": ["collection"],
     "/search": ["search"],
     "/about-us": ["about"],
     "/developers": ["developers"],
@@ -28,7 +29,7 @@
     "/reciters/[reciterId]": ["home", "radio", "reciter"],
     "/reciters/[reciterId]/[chapterId]": ["reciter"],
     "/reciters": ["reciter", "home"],
-    "/profile": ["home", "profile"],
+    "/profile": ["home", "profile", "collection"],
     "/login": ["login"]
   }
 }

@@ -70,13 +70,13 @@ const BookmarkIcon: React.FC<Props> = ({ verse, pageBookmarks, bookmarksRangeUrl
         ),
       );
 
-      addOrRemoveBookmark(
-        verse.chapterId as number,
+      addOrRemoveBookmark({
+        key: Number(verse.chapterId),
         mushafId,
-        BookmarkType.Ayah,
-        false,
-        verse.verseNumber,
-      ).catch((err) => {
+        type: BookmarkType.Ayah,
+        isAdd: false,
+        verseNumber: verse.verseNumber,
+      }).catch((err) => {
         if (err.status === 400) {
           toast(t('common:error.bookmark-sync'), {
             status: ToastStatus.Error,
