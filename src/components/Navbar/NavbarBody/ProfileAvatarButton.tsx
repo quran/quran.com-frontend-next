@@ -53,6 +53,7 @@ const ProfileAvatarButton = () => {
   const trigger = (
     <Button
       tooltip={isUserLoggedIn ? t('profile') : t('login')}
+      ariaLabel={isUserLoggedIn ? t('profile') : t('login')}
       variant={ButtonVariant.Ghost}
       href={isUserLoggedIn ? null : '/login'}
       shape={ButtonShape.Circle}
