@@ -111,7 +111,6 @@ const CollectionList = () => {
               </Link>
             </div>
           </div>
-          .
           {collections.map((collection) => {
             return (
               <div key={collection.id}>
