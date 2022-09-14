@@ -8,6 +8,7 @@ import BookmarkedVersesList from './BookmarkedVersesList';
 import styles from './BookmarksAndQuickLinks.module.scss';
 
 import Tabs from '@/dls/Tabs/Tabs';
+import { isLoggedIn } from '@/utils/auth/login';
 import { logValueChange } from '@/utils/eventLogger';
 
 enum View {
@@ -19,10 +20,10 @@ const BookmarksAndCollectionsSection = () => {
   const { t } = useTranslation('home');
   const [selectedTab, setSelectedTab] = useState(View.Bookmarks);
 
-  const tabs = [
-    { title: t('tab.bookmarks'), value: View.Bookmarks },
-    { title: t('tab.collections'), value: View.Collections },
-  ];
+  const tabs = [{ title: t('tab.bookmarks'), value: View.Bookmarks }];
+  if (isLoggedIn()) {
+    tabs.push({ title: t('tab.collections'), value: View.Collections });
+  }
 
   const onTabSelected = (newTab) => {
     logValueChange('bookmark_section_and_collection', selectedTab, newTab);
