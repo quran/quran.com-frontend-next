@@ -75,6 +75,11 @@ export const makeGetBookmarkByCollectionId = (
   queryParams: BookmarkByCollectionIdQueryParams,
 ) => makeUrl(`collections/${collectionId}`, queryParams);
 
+export const makeAllCollectionsItemsUrl = (queryParams: BookmarkByCollectionIdQueryParams) =>
+  makeUrl(`collections/all`, queryParams);
+
+export const makeDeleteBookmarkUrl = (bookmarkId: string) => makeUrl(`bookmarks/${bookmarkId}`);
+
 export const makeBookmarksRangeUrl = (
   mushafId: number,
   chapterNumber: number,

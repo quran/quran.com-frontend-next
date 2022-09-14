@@ -27,6 +27,7 @@ import {
   makeAddCollectionBookmarkUrl,
   makeDeleteCollectionBookmarkByIdUrl,
   makeDeleteCollectionBookmarkByKeyUrl,
+  makeDeleteBookmarkUrl,
 } from '@/utils/auth/apiPaths';
 import { fetcher } from 'src/api';
 import CompleteAnnouncementRequest from 'types/auth/CompleteAnnouncementRequest';
@@ -209,6 +210,10 @@ export const deleteCollectionBookmarkByKey = async ({
     type,
     verseNumber,
   });
+};
+
+export const deleteBookmarkById = async (bookmarkId: string) => {
+  return deleteRequest(makeDeleteBookmarkUrl(bookmarkId));
 };
 
 export const getBookmarksByCollectionId = async (
