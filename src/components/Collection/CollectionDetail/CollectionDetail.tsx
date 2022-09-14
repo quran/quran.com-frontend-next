@@ -11,7 +11,6 @@ import CollectionSorter from '../CollectionSorter/CollectionSorter';
 
 import styles from './CollectionDetail.module.scss';
 
-import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getChapterWithStartingVerseUrl } from '@/utils/navigation';
 import DataFetcher from 'src/components/DataFetcher';
@@ -26,7 +25,6 @@ import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/transla
 import { getDefaultWordFields, getMushafId } from 'src/utils/api';
 import { makeVersesUrl } from 'src/utils/apiPaths';
 import { areArraysEqual } from 'src/utils/array';
-import { deleteCollectionBookmarkById } from 'src/utils/auth/api';
 import { getChapterData } from 'src/utils/chapter';
 import { toLocalizedVerseKey } from 'src/utils/locale';
 import { makeVerseKey } from 'src/utils/verse';
@@ -41,35 +39,21 @@ type CollectionDetailProps = {
   sortBy: string;
   onSortByChange: (sortBy: string) => void;
   onUpdated: () => void;
+  onItemDeleted: (bookmarkId: string) => void;
 };
 
 const CollectionDetail = ({
-  id,
   title,
   bookmarks,
   sortBy,
   onSortByChange,
-  onUpdated,
+  onItemDeleted,
 }: CollectionDetailProps) => {
   const { t, lang } = useTranslation();
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const { quranFont, mushafLines } = quranReaderStyles;
   const { mushaf } = getMushafId(quranFont, mushafLines);
   const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
-
-  const toast = useToast();
-
-  const onBookmarkItemDeleted = (bookmarkId: string) => {
-    deleteCollectionBookmarkById(id, bookmarkId)
-      .then(() => {
-        onUpdated();
-      })
-      .catch(() => {
-        toast(t('common:error.general'), {
-          status: ToastStatus.Error,
-        });
-      });
-  };
 
   const router = useRouter();
 
@@ -102,8 +86,9 @@ const CollectionDetail = ({
 
   const handleDeleteMenuClicked = (bookmark) => () => {
     logButtonClick('collection_detail_delete_menu');
-    onBookmarkItemDeleted(bookmark.id);
+    onItemDeleted(bookmark.id);
   };
+
   const handleGoToAyah = (bookmark) => () => {
     logButtonClick('collection_detail_go_to_ayah_menu');
     onGoToAyahClicked(makeVerseKey(bookmark.key, bookmark.verseNumber));

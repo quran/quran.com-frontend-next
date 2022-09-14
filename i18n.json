@@ -14,6 +14,7 @@
     "/surah/[chapterId]/info": ["surah-info"],
     "/chapter_info/[chapterId]": ["surah-info"],
     "/surah-info/[chapterId]": ["surah-info"],
+    "/collections/all": ["collection"],
     "/collections/[collectionId]": ["collection"],
     "/search": ["search"],
     "/about-us": ["about"],

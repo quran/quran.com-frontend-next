@@ -94,57 +94,68 @@ const CollectionList = () => {
           />
         </div>
         <div className={styles.collectionListContainer}>
-          {collections.length === 0 ? (
-            <div className={styles.collectionListEmpty}>
-              <span>{t('collection:empty')}</span>
-            </div>
-          ) : (
-            collections.map((collection) => {
-              return (
-                <div key={collection.id}>
-                  <div className={styles.itemContainer}>
-                    <Link href={`/collections/${collection.id}`}>
-                      <div>
-                        <div className={styles.itemTitle}>{collection.name}</div>
-                        <div className={styles.itemInfo}>
-                          <div className={styles.itemIcon}>
-                            <BookmarkIcon />
-                          </div>
-                          <div className={styles.itemCount}>
-                            {collection.count} {t('common:verses')}
-                          </div>
-                        </div>
-                      </div>
-                    </Link>
-
-                    <PopoverMenu
-                      trigger={
-                        <Button
-                          size={ButtonSize.Small}
-                          tooltip={t('common:more')}
-                          variant={ButtonVariant.Ghost}
-                          shape={ButtonShape.Circle}
-                          ariaLabel={t('common:more')}
-                        >
-                          <span>
-                            <OverflowMenuIcon />
-                          </span>
-                        </Button>
-                      }
-                      isModal
-                      isPortalled
-                    >
-                      <RenameCollectionAction onClick={() => setCollectionToRename(collection)} />
-                      <DeleteCollectionAction
-                        collectionId={collection.id}
-                        onDone={onCollectionUpdated}
-                      />
-                    </PopoverMenu>
+          <div>
+            <div className={styles.itemContainer}>
+              <Link href="/collections/all">
+                <div>
+                  <div className={styles.itemTitle}>{t('collection:all-saved-verses')}</div>
+                  <div className={styles.itemInfo}>
+                    <div className={styles.itemIcon}>
+                      <BookmarkIcon />
+                    </div>
+                    <div className={styles.itemCount}>
+                      {data?.collectionsItemsCount} {t('common:verses')}
+                    </div>
                   </div>
                 </div>
-              );
-            })
-          )}
+              </Link>
+            </div>
+          </div>
+          {collections.map((collection) => {
+            return (
+              <div key={collection.id}>
+                <div className={styles.itemContainer}>
+                  <Link href={`/collections/${collection.id}`}>
+                    <div>
+                      <div className={styles.itemTitle}>{collection.name}</div>
+                      <div className={styles.itemInfo}>
+                        <div className={styles.itemIcon}>
+                          <BookmarkIcon />
+                        </div>
+                        <div className={styles.itemCount}>
+                          {collection.count} {t('common:verses')}
+                        </div>
+                      </div>
+                    </div>
+                  </Link>
+
+                  <PopoverMenu
+                    trigger={
+                      <Button
+                        size={ButtonSize.Small}
+                        tooltip={t('common:more')}
+                        variant={ButtonVariant.Ghost}
+                        shape={ButtonShape.Circle}
+                        ariaLabel={t('common:more')}
+                      >
+                        <span>
+                          <OverflowMenuIcon />
+                        </span>
+                      </Button>
+                    }
+                    isModal
+                    isPortalled
+                  >
+                    <RenameCollectionAction onClick={() => setCollectionToRename(collection)} />
+                    <DeleteCollectionAction
+                      collectionId={collection.id}
+                      onDone={onCollectionUpdated}
+                    />
+                  </PopoverMenu>
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </>

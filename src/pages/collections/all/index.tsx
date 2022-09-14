@@ -1,28 +1,27 @@
 import { useState } from 'react';
 
-import { GetStaticPaths, GetStaticProps } from 'next';
-import { useRouter } from 'next/router';
+import { GetStaticProps } from 'next';
+import useTranslation from 'next-translate/useTranslation';
 
 import CollectionDetailContainer from '@/components/Collection/CollectionDetailContainer/CollectionDetailContainer';
 import { isLoggedIn } from '@/utils/auth/login';
 import { logValueChange } from '@/utils/eventLogger';
-import { makeGetBookmarkByCollectionId } from 'src/utils/auth/apiPaths';
+import { makeAllCollectionsItemsUrl } from 'src/utils/auth/apiPaths';
 import { getAllChaptersData } from 'src/utils/chapter';
 import { CollectionDetailSortOption } from 'types/CollectionSortOptions';
 
 const CollectionDetailPage = ({ chaptersData }) => {
-  const router = useRouter();
   const [sortBy, setSortBy] = useState(CollectionDetailSortOption.RecentlyAdded);
+  const { t } = useTranslation();
 
   const onSortByChange = (newSortByVal) => {
     logValueChange('collection_detail_page_sort_by', sortBy, newSortByVal);
     setSortBy(newSortByVal);
   };
 
-  const collectionId = router.query.collectionId as string;
   /**
    * Get the SWR key for cursor based pagination
-   * - when the page index is still 0 (first fetch). the get the bookmarkByCollection url without `cursor` param
+   * - when the page index is still 0 (first fetch). get the bookmarkByCollection url without `cursor` param
    * - on the next fetch, add `cursor` to the parameters
    *
    * corner case
@@ -37,12 +36,12 @@ const CollectionDetailPage = ({ chaptersData }) => {
     if (!isLoggedIn()) return null;
     if (previousPageData && !previousPageData.data) return null;
     if (pageIndex === 0) {
-      return makeGetBookmarkByCollectionId(collectionId, {
+      return makeAllCollectionsItemsUrl({
         sortBy,
       });
     }
     const cursor = previousPageData.pagination?.endCursor;
-    return makeGetBookmarkByCollectionId(collectionId, {
+    return makeAllCollectionsItemsUrl({
       sortBy,
       cursor,
     });
@@ -50,10 +49,12 @@ const CollectionDetailPage = ({ chaptersData }) => {
 
   return (
     <CollectionDetailContainer
-      sortBy={sortBy}
+      title={t('collection:all-saved-verses')}
       getSWRKey={getKey}
       chaptersData={chaptersData}
       onSortByChange={onSortByChange}
+      sortBy={sortBy}
+      shouldDeleteBookmark
     />
   );
 };
@@ -67,10 +68,5 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
     },
   };
 };
-
-export const getStaticPaths: GetStaticPaths = async () => ({
-  paths: [], // no pre-rendered chapters at build time.
-  fallback: 'blocking', // will server-render pages on-demand if the path doesn't exist.
-});
 
 export default CollectionDetailPage;
