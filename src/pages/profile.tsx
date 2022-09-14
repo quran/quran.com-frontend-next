@@ -11,7 +11,7 @@ import layoutStyle from './index.module.scss';
 import styles from './profile.module.scss';
 
 import DeleteAccountButton from '@/components/Profile/DeleteAccountButton';
-import BookmarksSection from '@/components/Verses/BookmarksSection';
+import BookmarksAndCollectionsSection from '@/components/Verses/BookmarksAndCollectionsSection';
 import RecentReadingSessions from '@/components/Verses/RecentReadingSessions';
 import Button from '@/dls/Button/Button';
 import Skeleton from '@/dls/Skeleton/Skeleton';
@@ -22,7 +22,6 @@ import { DEFAULT_PHOTO_URL } from '@/utils/auth/constants';
 import { isLoggedIn } from '@/utils/auth/login';
 import { getAllChaptersData } from '@/utils/chapter';
 import { logButtonClick } from '@/utils/eventLogger';
-import CollectionList from 'src/components/Collection/CollectionList/CollectionList';
 import DataContext from 'src/contexts/DataContext';
 import Error from 'src/pages/_error';
 import ChaptersData from 'types/ChaptersData';
@@ -117,11 +116,7 @@ const ProfilePage: NextPage<Props> = ({ chaptersData }) => {
               <RecentReadingSessions />
             </div>
             <div className={classNames(layoutStyle.flowItem, layoutStyle.fullWidth)}>
-              <BookmarksSection />
-            </div>
-
-            <div className={classNames(layoutStyle.flowItem, styles.collectionListContainer)}>
-              <CollectionList />
+              <BookmarksAndCollectionsSection />
             </div>
 
             <div
