@@ -86,7 +86,7 @@ const CollectionList = () => {
       />
       <div>
         <div className={styles.header}>
-          <div>{t('profile:collections')}</div>
+          <div>{t('collection:collections')}</div>
           <CollectionSorter
             options={sortOptions}
             selectedOptionId={sortBy}
