@@ -123,6 +123,8 @@ const CollectionDetailContainer = ({
         title={collectionTitle}
         canonical={getCanonicalUrl(lang, navigationUrl)}
         languageAlternates={getLanguageAlternates(navigationUrl)}
+        nofollow
+        noindex
       />
       <div className={layoutStyles.pageContainer}>
         <div className={layoutStyles.flow}>
