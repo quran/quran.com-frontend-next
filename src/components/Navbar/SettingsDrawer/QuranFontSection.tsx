@@ -3,7 +3,7 @@ import React, { useMemo } from 'react';
 
 import { Action } from '@reduxjs/toolkit';
 import useTranslation from 'next-translate/useTranslation';
-import { shallowEqual, useSelector } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import styles from './QuranFontSection.module.scss';
 import QuranFontSectionFooter from './QuranFontSectionFooter';
@@ -15,6 +15,7 @@ import Select from '@/dls/Forms/Select';
 import Switch from '@/dls/Switch/Switch';
 import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
 import { getQuranReaderStylesInitialState } from '@/redux/defaultSettings/util';
+import { resetLoadedFontFaces } from '@/redux/slices/QuranReader/font-faces';
 import {
   decreaseQuranTextFontScale,
   increaseQuranTextFontScale,
@@ -30,6 +31,7 @@ import { MushafLines, QuranFont } from 'types/QuranReader';
 
 const QuranFontSection = () => {
   const { t, lang } = useTranslation('common');
+  const dispatch = useDispatch();
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const {
     actions: { onSettingsChange },
@@ -125,6 +127,9 @@ const QuranFontSection = () => {
     undoAction: Action,
   ) => {
     onSettingsChange(key, value, action, undoAction, PreferenceGroup.QURAN_READER_STYLES);
+
+    // reset the loaded Fonts when we switch the font
+    dispatch(resetLoadedFontFaces());
   };
 
   const onFontChange = (value: QuranFont) => {
