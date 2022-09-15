@@ -146,7 +146,9 @@ const CollectionDetailContainer = ({
                 onUpdated={onUpdated}
                 onItemDeleted={onItemDeleted}
               />
-              {bookmarks?.length > 0 && isValidating && <Spinner size={SpinnerSize.Large} />}
+              {bookmarks?.length > 0 && size > 1 && isValidating && (
+                <Spinner size={SpinnerSize.Large} />
+              )}
               {hasNextPage && (
                 <div className={styles.loadMoreContainer}>
                   <Button onClick={loadMore}>{t('collection:load-more')}</Button>
