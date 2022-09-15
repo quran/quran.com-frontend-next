@@ -66,6 +66,20 @@ const BookmarkAction = ({ verse, isTranslationView, onActionTriggered, bookmarks
     return false;
   }, [bookmarkedVerses, bookmark, verse.verseKey]);
 
+  const updateInBookmarkRange = (value) => {
+    // when it's translation view, we need to invalidate the cached bookmarks range
+    if (bookmarksRangeUrl) {
+      const bookmarkedVersesRange = cache.get(bookmarksRangeUrl);
+      const nextBookmarkedVersesRange = {
+        ...bookmarkedVersesRange,
+        [verse.verseKey]: value,
+      };
+      globalMutate(bookmarksRangeUrl, nextBookmarkedVersesRange, {
+        revalidate: false,
+      });
+    }
+  };
+
   const onToggleBookmarkClicked = () => {
     // eslint-disable-next-line i18next/no-literal-string
     logButtonClick(
@@ -84,18 +98,6 @@ const BookmarkAction = ({ verse, isTranslationView, onActionTriggered, bookmarks
         });
       }
 
-      // when it's translation view, we need to invalidate the cached bookmarks range
-      if (bookmarksRangeUrl) {
-        const bookmarkedVersesRange = cache.get(bookmarksRangeUrl);
-        const nextBookmarkedVersesRange = {
-          ...bookmarkedVersesRange,
-          [verse.verseKey]: !isVerseBookmarked,
-        };
-        globalMutate(bookmarksRangeUrl, nextBookmarkedVersesRange, {
-          revalidate: false,
-        });
-      }
-
       cache.delete(
         makeBookmarksUrl(
           getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines).mushaf,
@@ -109,8 +111,9 @@ const BookmarkAction = ({ verse, isTranslationView, onActionTriggered, bookmarks
           type: BookmarkType.Ayah,
           verseNumber: verse.verseNumber,
         })
-          .then(() => {
+          .then((newBookmark) => {
             mutate();
+            updateInBookmarkRange(newBookmark);
             toast(t('verse-bookmarked'), {
               status: ToastStatus.Success,
             });
@@ -128,6 +131,7 @@ const BookmarkAction = ({ verse, isTranslationView, onActionTriggered, bookmarks
           });
       } else {
         deleteBookmarkById(bookmark.id).then(() => {
+          updateInBookmarkRange(null);
           toast(t('verse-bookmark-removed'), {
             status: ToastStatus.Success,
           });
