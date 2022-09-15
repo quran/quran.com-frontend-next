@@ -2,11 +2,7 @@ import { useEffect, useCallback, useRef } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import {
-  resetLoadedFontFaces,
-  selectLoadedFontFaces,
-  addLoadedFontFace,
-} from '@/redux/slices/QuranReader/font-faces';
+import { selectLoadedFontFaces, addLoadedFontFace } from '@/redux/slices/QuranReader/font-faces';
 import { removeItemFromArray } from '@/utils/array';
 import {
   getFontFaceNameForPage,
@@ -23,6 +19,9 @@ import Verse from 'types/Verse';
  * store it in redux so that VerseText can use it to determine whether the fallback
  * text and font should be font or not.
  *
+ * Notes, loaded font is reset every time the user switch the font
+ * see src/components/Navbar/SettingsDrawer/QuranFontSection.tsx
+ *
  * @param {QuranFont} quranFont
  * @param {Verse[]} verses
  */
@@ -37,11 +36,6 @@ const useQcfFont = (quranFont: QuranFont, verses: Verse[]) => {
     },
     [dispatch],
   );
-
-  useEffect(() => {
-    // reset the loaded Fonts when we switch the font
-    dispatch(resetLoadedFontFaces());
-  }, [dispatch, quranFont]);
 
   // listen to changes in verses (this is due to infinite scrolling fetching more verses).
   useEffect(() => {
