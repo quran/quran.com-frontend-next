@@ -25,6 +25,7 @@ import {
 } from 'src/utils/auth/api';
 import {
   makeBookmarkCollectionsUrl,
+  makeBookmarksUrl,
   makeCollectionsUrl,
   makeIsResourceBookmarkedUrl,
 } from 'src/utils/auth/apiPaths';
@@ -94,6 +95,13 @@ const SaveToCollectionAction = ({ verse, bookmarksRangeUrl }) => {
     }
   };
 
+  const mutateBookmarksUrl = () =>
+    globalSWRMutate(
+      makeBookmarksUrl(
+        getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines).mushaf,
+      ),
+    );
+
   const onCollectionToggled = (changedCollection: Collection, newValue: boolean) => {
     if (newValue === true) {
       addCollectionBookmark({
@@ -107,6 +115,7 @@ const SaveToCollectionAction = ({ verse, bookmarksRangeUrl }) => {
           mutateIsResourceBookmarked();
           mutateCollectionListData();
           mutateBookmarkCollectionIdsData();
+          mutateBookmarksUrl();
         })
         .catch((err) => {
           if (err.status === 400) {
@@ -131,6 +140,7 @@ const SaveToCollectionAction = ({ verse, bookmarksRangeUrl }) => {
           mutateIsResourceBookmarked();
           mutateCollectionListData();
           mutateBookmarkCollectionIdsData();
+          mutateBookmarksUrl();
         })
         .catch((err) => {
           if (err.status === 400) {
@@ -159,6 +169,7 @@ const SaveToCollectionAction = ({ verse, bookmarksRangeUrl }) => {
           mutateIsResourceBookmarked();
           mutateCollectionListData();
           mutateBookmarkCollectionIdsData([...bookmarkCollectionIdsData, newCollection.id]);
+          mutateBookmarksUrl();
         })
         .catch((err) => {
           if (err.status === 400) {
