@@ -87,13 +87,13 @@ export const makeBookmarksRangeUrl = (
   perPage: number,
 ): string => makeUrl('bookmarks/ayahs-range', { mushafId, chapterNumber, verseNumber, perPage });
 
-export const makeIsResourceBookmarkedUrl = (
+export const makeBookmarkUrl = (
   mushafId: number,
   key: number,
   type: BookmarkType,
   verseNumber?: number,
 ): string =>
-  makeUrl('bookmarks/is-bookmarked', { mushafId, key, type, ...(verseNumber && { verseNumber }) });
+  makeUrl('bookmarks/bookmark', { mushafId, key, type, ...(verseNumber && { verseNumber }) });
 
 export const makeReadingSessionsUrl = () => makeUrl('reading-sessions');
 

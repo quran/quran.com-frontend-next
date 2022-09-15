@@ -26,7 +26,7 @@ import {
 import {
   makeBookmarkCollectionsUrl,
   makeCollectionsUrl,
-  makeIsResourceBookmarkedUrl,
+  makeBookmarkUrl,
 } from 'src/utils/auth/apiPaths';
 import { isLoggedIn } from 'src/utils/auth/login';
 import { logButtonClick } from 'src/utils/eventLogger';
@@ -81,7 +81,7 @@ const SaveToCollectionAction = ({ verse, bookmarksRangeUrl }) => {
       return;
     }
     globalSWRMutate(
-      makeIsResourceBookmarkedUrl(
+      makeBookmarkUrl(
         mushafId,
         Number(verse.chapterId),
         BookmarkType.Ayah,
