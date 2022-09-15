@@ -7,7 +7,7 @@ import {
   makeUserProfileUrl,
   makeDeleteAccountUrl,
   makeBookmarksRangeUrl,
-  makeIsResourceBookmarkedUrl,
+  makeBookmarkUrl,
   makeReadingSessionsUrl,
   makeUserPreferencesUrl,
   makeVerificationCodeUrl,
@@ -38,6 +38,7 @@ import SyncDataType from 'types/auth/SyncDataType';
 import SyncUserLocalDataResponse from 'types/auth/SyncUserLocalDataResponse';
 import UserPreferencesResponse from 'types/auth/UserPreferencesResponse';
 import UserProfile from 'types/auth/UserProfile';
+import Bookmark from 'types/Bookmark';
 import BookmarksMap from 'types/BookmarksMap';
 import BookmarkType from 'types/BookmarkType';
 import { Collection } from 'types/Collection';
@@ -97,27 +98,19 @@ export const completeAnnouncement = async (data: CompleteAnnouncementRequest): P
 
 export const deleteAccount = async (): Promise<void> => deleteRequest(makeDeleteAccountUrl());
 
-type AddOrRemoveBookmarkParams = {
+type AddBookmarkParams = {
   key: number;
   mushafId: number;
   type: BookmarkType;
-  isAdd: boolean;
   verseNumber?: number;
 };
 
-export const addOrRemoveBookmark = async ({
-  key,
-  mushafId,
-  type,
-  verseNumber,
-  isAdd,
-}: AddOrRemoveBookmarkParams) =>
+export const addBookmark = async ({ key, mushafId, type, verseNumber }: AddBookmarkParams) =>
   postRequest(makeBookmarksUrl(mushafId), {
     key,
     mushaf: mushafId,
     type,
     verseNumber,
-    isAdd,
   });
 
 export const getPageBookmarks = async (
@@ -128,13 +121,12 @@ export const getPageBookmarks = async (
 ): Promise<BookmarksMap> =>
   privateFetcher(makeBookmarksRangeUrl(mushafId, chapterNumber, verseNumber, perPage));
 
-export const getIsResourceBookmarked = async (
+export const getBookmark = async (
   mushafId: number,
   key: number,
   type: BookmarkType,
   verseNumber?: number,
-): Promise<boolean> =>
-  privateFetcher(makeIsResourceBookmarkedUrl(mushafId, key, type, verseNumber));
+): Promise<Bookmark> => privateFetcher(makeBookmarkUrl(mushafId, key, type, verseNumber));
 
 export const getBookmarkCollections = async (
   mushafId: number,
