@@ -2,7 +2,7 @@ import React, { useContext, useMemo } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useSelector } from 'react-redux';
-import useSWRImmutable from 'swr/immutable';
+import useSWR from 'swr';
 
 import styles from './BookmarkedVersesList.module.scss';
 
@@ -28,7 +28,7 @@ const BookmarkedVersesList: React.FC = () => {
 
   const bookmarkedVerses = useSelector(selectBookmarks, shallowEqual);
 
-  const { data, isValidating } = useSWRImmutable<Bookmark[]>(
+  const { data, isValidating } = useSWR<Bookmark[]>(
     isLoggedIn() // only fetch the data when user is loggedIn
       ? makeBookmarksUrl(
           getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines).mushaf,
