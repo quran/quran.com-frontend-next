@@ -117,6 +117,8 @@ const CollectionDetailContainer = ({
     }
   };
 
+  const isLoadingMoreData = bookmarks?.length > 0 && size > 1 && isValidating;
+
   return (
     <DataContext.Provider value={chaptersData}>
       <NextSeoWrapper
@@ -146,9 +148,7 @@ const CollectionDetailContainer = ({
                 onUpdated={onUpdated}
                 onItemDeleted={onItemDeleted}
               />
-              {bookmarks?.length > 0 && size > 1 && isValidating && (
-                <Spinner size={SpinnerSize.Large} />
-              )}
+              {isLoadingMoreData && <Spinner size={SpinnerSize.Large} />}
               {hasNextPage && (
                 <div className={styles.loadMoreContainer}>
                   <Button onClick={loadMore}>{t('collection:load-more')}</Button>
