@@ -14,8 +14,8 @@ import BookmarkedIcon from '@/icons/bookmark.svg';
 import { selectBookmarks, toggleVerseBookmark } from '@/redux/slices/QuranReader/bookmarks';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import { getMushafId } from '@/utils/api';
-import { addOrRemoveBookmark } from '@/utils/auth/api';
-import { makeIsResourceBookmarkedUrl } from '@/utils/auth/apiPaths';
+import { deleteBookmarkById } from '@/utils/auth/api';
+import { makeBookmarkUrl } from '@/utils/auth/apiPaths';
 import { isLoggedIn } from '@/utils/auth/login';
 import { logButtonClick } from '@/utils/eventLogger';
 import BookmarksMap from 'types/BookmarksMap';
@@ -62,7 +62,7 @@ const BookmarkIcon: React.FC<Props> = ({ verse, pageBookmarks, bookmarksRangeUrl
       });
 
       cache.delete(
-        makeIsResourceBookmarkedUrl(
+        makeBookmarkUrl(
           mushafId,
           Number(verse.chapterId),
           BookmarkType.Ayah,
@@ -70,23 +70,20 @@ const BookmarkIcon: React.FC<Props> = ({ verse, pageBookmarks, bookmarksRangeUrl
         ),
       );
 
-      addOrRemoveBookmark({
-        key: Number(verse.chapterId),
-        mushafId,
-        type: BookmarkType.Ayah,
-        isAdd: false,
-        verseNumber: verse.verseNumber,
-      }).catch((err) => {
-        if (err.status === 400) {
-          toast(t('common:error.bookmark-sync'), {
+      const bookmarkId = pageBookmarks[verse.verseKey].id;
+      if (bookmarkId) {
+        deleteBookmarkById(bookmarkId).catch((err) => {
+          if (err.status === 400) {
+            toast(t('common:error.bookmark-sync'), {
+              status: ToastStatus.Error,
+            });
+            return;
+          }
+          toast(t('common:error.general'), {
             status: ToastStatus.Error,
           });
-          return;
-        }
-        toast(t('common:error.general'), {
-          status: ToastStatus.Error,
         });
-      });
+      }
     } else {
       dispatch(toggleVerseBookmark(verse.verseKey));
     }

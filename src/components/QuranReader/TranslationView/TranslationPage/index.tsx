@@ -100,26 +100,24 @@ const TranslationPage: React.FC<Props> = ({
   );
 
   const mushafId = getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines).mushaf;
-  const bookmarksRangeUrl = verses
-    ? makeBookmarksRangeUrl(
-        mushafId,
-        Number(verses[0].chapterId),
-        Number(verses[0].verseNumber),
-        initialData.pagination.perPage,
-      )
-    : '';
-  const { data: pageBookmarks } = useSWRImmutable(
-    verses && isLoggedIn() ? bookmarksRangeUrl : null,
-    async () => {
-      const response = await getPageBookmarks(
-        mushafId,
-        Number(verses[0].chapterId),
-        Number(verses[0].verseNumber),
-        initialData.pagination.perPage,
-      );
-      return response;
-    },
-  );
+  const bookmarksRangeUrl =
+    verses && verses.length && isLoggedIn()
+      ? makeBookmarksRangeUrl(
+          mushafId,
+          Number(verses?.[0].chapterId),
+          Number(verses?.[0].verseNumber),
+          initialData.pagination.perPage,
+        )
+      : null;
+  const { data: pageBookmarks } = useSWRImmutable(bookmarksRangeUrl, async () => {
+    const response = await getPageBookmarks(
+      mushafId,
+      Number(verses[0].chapterId),
+      Number(verses[0].verseNumber),
+      initialData.pagination.perPage,
+    );
+    return response;
+  });
 
   useEffect(() => {
     if (verses) {

@@ -71,7 +71,7 @@ const CollectionDetailContainer = ({
   if (!data) {
     return (
       <div className={classNames(styles.container, styles.loadingContainer)}>
-        <Spinner size={SpinnerSize.Large} />
+        <Spinner shouldDelayVisibility size={SpinnerSize.Large} />
       </div>
     );
   }
@@ -148,7 +148,11 @@ const CollectionDetailContainer = ({
                 onUpdated={onUpdated}
                 onItemDeleted={onItemDeleted}
               />
+<<<<<<< HEAD
               {isLoadingMoreData && <Spinner size={SpinnerSize.Large} />}
+=======
+              {isValidating && <Spinner shouldDelayVisibility size={SpinnerSize.Large} />}
+>>>>>>> c5a87613fb764083e72234f3c00a7260edacc4d0
               {hasNextPage && (
                 <div className={styles.loadMoreContainer}>
                   <Button onClick={loadMore}>{t('collection:load-more')}</Button>
