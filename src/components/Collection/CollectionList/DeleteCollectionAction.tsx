@@ -22,11 +22,7 @@ const DeleteCollectionAction = ({ collectionId, onDone }) => {
       });
   };
 
-  return (
-    <>
-      <PopoverMenu.Item onClick={onMenuItemClicked}>{t('profile:delete')}</PopoverMenu.Item>;
-    </>
-  );
+  return <PopoverMenu.Item onClick={onMenuItemClicked}>{t('profile:delete')}</PopoverMenu.Item>;
 };
 
 export default DeleteCollectionAction;

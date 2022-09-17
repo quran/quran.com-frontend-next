@@ -20,7 +20,16 @@ const updateState = (newState: State) => {
 
 const listeners: Array<(state: State) => void> = [];
 
-export const useConfirmModal = () => {
+/**
+ * When this hook (useConfirmationModalInternal) is called.
+ * We set `useState` in the component. So that it will trigger rerender when the state changes
+ *
+ * `setState` is registered to a global `listeners`.
+ * Every time we `updateState`, this will update the  state in every components that subscribe
+ * to the changes (listeners)
+ */
+
+export const useConfirmationModalInternal = () => {
   const [state, setState] = useState(memoryState);
   useEffect(() => {
     listeners.push(setState);
@@ -50,6 +59,15 @@ export const useConfirmModal = () => {
 };
 
 let resolveCallback: (arg: boolean) => void;
+
+/**
+ * This hook is meant to be consumed by other components
+ * Check ConfirmationModal.stories.tsx for an example
+ *
+ * This hook return a callback, that's when called return a Promise<boolean>
+ * if the user click "confirm", boolean will be true, otherwise it will be false
+ */
+
 export const useConfirm = () => {
   const confirm = (state: State) => {
     updateState({ ...state, open: true });
