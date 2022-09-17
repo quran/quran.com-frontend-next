@@ -5,14 +5,14 @@ import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 import { useSelector, shallowEqual } from 'react-redux';
 
-import ChevronDownIcon from '../../../../public/icons/chevron-down.svg';
-import OverflowMenuIcon from '../../../../public/icons/menu_more_horiz.svg';
 import CollectionSorter from '../CollectionSorter/CollectionSorter';
 
 import styles from './CollectionDetail.module.scss';
 
 import ConfirmationModal from '@/dls/ConfirmationModal/ConfirmationModal';
 import { useConfirm } from '@/dls/ConfirmationModal/hooks';
+import ChevronDownIcon from '@/icons/chevron-down.svg';
+import OverflowMenuIcon from '@/icons/menu_more_horiz.svg';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getChapterWithStartingVerseUrl } from '@/utils/navigation';
 import DataFetcher from 'src/components/DataFetcher';

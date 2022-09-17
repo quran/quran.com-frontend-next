@@ -150,6 +150,7 @@ const CollectionList = () => {
                   >
                     <RenameCollectionAction onClick={() => setCollectionToRename(collection)} />
                     <DeleteCollectionAction
+                      collectionName={collection.name}
                       collectionId={collection.id}
                       onDone={onCollectionUpdated}
                     />

@@ -6,7 +6,7 @@ import { logButtonClick } from '@/utils/eventLogger';
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
 import { deleteCollection } from 'src/utils/auth/api';
 
-const DeleteCollectionAction = ({ collectionId, onDone }) => {
+const DeleteCollectionAction = ({ collectionId, onDone, collectionName }) => {
   const { t } = useTranslation();
   const toast = useToast();
   const confirm = useConfirm();
@@ -17,7 +17,7 @@ const DeleteCollectionAction = ({ collectionId, onDone }) => {
       confirmText: t('collection:delete'),
       cancelText: t('common:cancel'),
       title: t('collection:delete-collection.title'),
-      subtitle: t('collection:delete-collection.subtitle', { collectionName: 'aa' }),
+      subtitle: t('collection:delete-collection.subtitle', { collectionName }),
     });
 
     if (isConfirmed) {
