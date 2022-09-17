@@ -10,5 +10,12 @@
     "empty": "Collection is empty",
     "collection-list-empty": "Collection list is empty. You haven't created any collection yet",
     "back-to-collection-list": "Back to collection list",
-    "all-saved-verses": "All saved verses"
+    "delete-bookmark": {
+        "title": "Delete bookmark",
+        "subtitle": "Delete {{bookmarkName}} from {{collectionName}} ?"
+    },
+    "delete-collection": {
+        "title": "Delete collection",
+        "subtitle": "Delete {{collectionName}} ?"
+    }
 }
