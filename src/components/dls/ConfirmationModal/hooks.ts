@@ -29,7 +29,7 @@ const listeners: Array<(state: State) => void> = [];
  * to the changes (listeners)
  */
 
-export const useConfirmationModalInternal = () => {
+export const useConfirmModal = () => {
   const [state, setState] = useState(memoryState);
   useEffect(() => {
     listeners.push(setState);
