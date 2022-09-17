@@ -32,8 +32,8 @@ const ConfirmationModal = () => {
         <p>{state.description}</p>
       </Modal.Body>
       <Modal.Footer>
-        <Modal.Action onClick={onConfirm}>{state.confirmText}</Modal.Action>
         <Modal.CloseAction onClick={onCancel}>{state.cancelText}</Modal.CloseAction>
+        <Modal.Action onClick={onConfirm}>{state.confirmText}</Modal.Action>
       </Modal.Footer>
     </Modal>
   );
