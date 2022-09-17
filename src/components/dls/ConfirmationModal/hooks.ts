@@ -6,7 +6,7 @@ type State = {
   description?: string;
   confirmText?: string;
   cancelText?: string;
-  open?: boolean;
+  open: boolean;
 };
 
 let memoryState: State = {

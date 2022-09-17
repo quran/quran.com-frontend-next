@@ -27,7 +27,7 @@ const ConfirmationModal = () => {
       <Modal.Body>
         <Modal.Header>
           <Modal.Title>{state.title}</Modal.Title>
-          <Modal.Subtitle>{state.title}</Modal.Subtitle>
+          <Modal.Subtitle>{state.subtitle}</Modal.Subtitle>
         </Modal.Header>
         <p>{state.description}</p>
       </Modal.Body>
