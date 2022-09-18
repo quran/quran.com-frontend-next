@@ -1,29 +1,39 @@
-import Modal from '../Modal/Modal';
+/* eslint-disable react/no-array-index-key */
+import { useMemo } from 'react';
 
 import { useConfirmModal } from './hooks';
+
+import Modal from '@/dls/Modal/Modal';
 
 const ConfirmationModal = () => {
   const { onCancel, onConfirm, state } = useConfirmModal();
 
-  const actions = [];
-  if (state.confirmText && onConfirm) {
-    actions.push({
-      label: state.confirmText,
-      onClick: onConfirm,
-      isPrimary: true,
-    });
-  }
+  const actions = useMemo(() => {
+    const returnedActions = [];
+    if (state.confirmText && onConfirm) {
+      returnedActions.push({
+        label: state.confirmText,
+        onClick: onConfirm,
+      });
+    }
+    if (state.cancelText && onCancel) {
+      returnedActions.push({
+        label: state.cancelText,
+        onClick: onCancel,
+        isCloseAction: true,
+      });
+    }
+    return returnedActions;
+  }, [onCancel, onConfirm, state.cancelText, state.confirmText]);
 
-  if (state.cancelText && onCancel) {
-    actions.push({
-      label: state.cancelText,
-      onClick: onCancel,
-      isPrimary: false,
-    });
-  }
+  const onClose = () => {
+    if (onCancel) {
+      onCancel();
+    }
+  };
 
   return (
-    <Modal isOpen={!!state.open}>
+    <Modal isOpen={!!state.open} onClickOutside={onClose} onEscapeKeyDown={onClose}>
       <Modal.Body>
         <Modal.Header>
           <Modal.Title>{state.title}</Modal.Title>
@@ -32,8 +42,21 @@ const ConfirmationModal = () => {
         <p>{state.description}</p>
       </Modal.Body>
       <Modal.Footer>
-        <Modal.CloseAction onClick={onCancel}>{state.cancelText}</Modal.CloseAction>
-        <Modal.Action onClick={onConfirm}>{state.confirmText}</Modal.Action>
+        {actions.map((action, index) => {
+          const { onClick, label } = action;
+          if (action.isCloseAction) {
+            return (
+              <Modal.CloseAction key={index} onClick={onClick}>
+                {label}
+              </Modal.CloseAction>
+            );
+          }
+          return (
+            <Modal.Action key={index} onClick={onClick}>
+              {label}
+            </Modal.Action>
+          );
+        })}
       </Modal.Footer>
     </Modal>
   );

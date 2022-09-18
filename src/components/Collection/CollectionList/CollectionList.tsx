@@ -13,6 +13,7 @@ import styles from './CollectionList.module.scss';
 import DeleteCollectionAction from './DeleteCollectionAction';
 import RenameCollectionAction from './RenameCollectionAction';
 
+import ConfirmationModal from '@/dls/ConfirmationModal/ConfirmationModal';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import { logButtonClick, logValueChange } from '@/utils/eventLogger';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
@@ -84,6 +85,7 @@ const CollectionList = () => {
         defaultValue={collectionToRename?.name}
         onSubmit={onSubmit}
       />
+      <ConfirmationModal />
       <div>
         <div className={styles.header}>
           <div>{t('collection:collections')}</div>
@@ -148,6 +150,7 @@ const CollectionList = () => {
                   >
                     <RenameCollectionAction onClick={() => setCollectionToRename(collection)} />
                     <DeleteCollectionAction
+                      collectionName={collection.name}
                       collectionId={collection.id}
                       onDone={onCollectionUpdated}
                     />
