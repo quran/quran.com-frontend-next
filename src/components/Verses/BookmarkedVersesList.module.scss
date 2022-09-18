@@ -33,7 +33,7 @@
 }
 
 .linkButtonContainer {
-  color: var(--color-text-inverse);
+  color: white;
   text-decoration: none;
   background-color: transparent;
   font-weight: var(--font-weight-semibold);
@@ -43,11 +43,12 @@
   box-sizing: border-box;
   display: flex;
   align-items: center;
-  color: var(--color-text-inverse);
+  color: white;
   border: none;
   width: var(--spacing-mega);
   background-color: transparent;
   & svg {
+    fill: white;
     height: 16px;
     width: 16px;
   }
