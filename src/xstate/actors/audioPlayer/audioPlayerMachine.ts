@@ -298,7 +298,7 @@ export const audioPlayerMachine =
                   on: {
                     PLAY_AYAH: [
                       {
-                        actions: ['setSurahAndAyahNumber', 'setAudioPlayerCurrentTime'],
+                        actions: ['setSurahAndAyahNumbers', 'setAudioPlayerCurrentTime'],
                       },
                     ],
                     CHANGE_RECITER: [
@@ -829,7 +829,10 @@ export const audioPlayerMachine =
         }),
         setSurahAndAyahNumbers: assign({
           surah: (context, event) => event.surah,
-          ayahNumber: (context, event) => event.ayahNumber,
+          ayahNumber: (context, event) => {
+            console.log(event);
+            return event.ayahNumber;
+          },
         }),
         setCurrentSurahAndAyahAsNewSurahAndAyah: assign({
           surah: (context) => context.newSurah,
