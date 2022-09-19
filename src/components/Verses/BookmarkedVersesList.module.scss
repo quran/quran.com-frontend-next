@@ -33,23 +33,30 @@
 }
 
 .linkButtonContainer {
-  color: white;
+  color: var(--shade-0);
   text-decoration: none;
   background-color: transparent;
   font-weight: var(--font-weight-semibold);
 }
 
 .closeIconContainer {
-  box-sizing: border-box;
   display: flex;
-  align-items: center;
-  color: white;
   border: none;
-  width: var(--spacing-mega);
+  width: var(--spacing-xsmall);
+  box-sizing: border-box;
+  justify-content: center;
+  padding-inline-start: var(--spacing-small);
   background-color: transparent;
+  align-items: center;
+  color: var(--shade-0);
+  & > span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
   & svg {
-    fill: white;
-    height: 16px;
-    width: 16px;
+    fill: var(--shade-0);
+    width: var(--spacing-medium);
+    height: var(--spacing-medium);
   }
 }

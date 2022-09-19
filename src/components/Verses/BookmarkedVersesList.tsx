@@ -69,6 +69,7 @@ const BookmarkedVersesList: React.FC = () => {
   }
 
   const onBookmarkDeleted = (verseKey) => () => {
+    logButtonClick('bookmarked_verses_list_delete');
     if (isLoggedIn()) {
       const selectedBookmark = data.find((bookmark) => {
         const [chapter, verseNumber] = getVerseAndChapterNumbersFromKey(verseKey);
@@ -92,6 +93,10 @@ const BookmarkedVersesList: React.FC = () => {
     }
   };
 
+  const onLinkClicked = () => {
+    logButtonClick('bookmarked_verses_list_link');
+  };
+
   return (
     <div className={styles.container}>
       {bookmarkedVersesKeys.length > 0 ? (
@@ -107,12 +112,7 @@ const BookmarkedVersesList: React.FC = () => {
               return (
                 <div key={verseKey} className={styles.bookmarkItem}>
                   <Link href={getVerseNavigationUrlByVerseKey(verseKey)}>
-                    <a
-                      className={styles.linkButtonContainer}
-                      onClick={() => {
-                        logButtonClick('homepage_bookmark');
-                      }}
-                    >
+                    <a className={styles.linkButtonContainer} onClick={onLinkClicked}>
                       {bookmarkText}
                     </a>
                   </Link>
@@ -121,7 +121,9 @@ const BookmarkedVersesList: React.FC = () => {
                     type="button"
                     className={styles.closeIconContainer}
                   >
-                    <CloseIcon />
+                    <span>
+                      <CloseIcon />
+                    </span>
                   </button>
                 </div>
               );
