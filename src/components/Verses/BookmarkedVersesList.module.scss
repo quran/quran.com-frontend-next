@@ -21,6 +21,43 @@
 }
 
 .bookmarkItem {
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
   margin-inline-end: var(--spacing-small);
   white-space: nowrap;
+  background-color: var(--color-success-medium);
+  border-radius: var(--border-radius-pill);
+  padding-inline-start: var(--spacing-small);
+  padding-block: var(--spacing-xsmall);
+}
+
+.linkButtonContainer {
+  color: var(--shade-0);
+  text-decoration: none;
+  background-color: transparent;
+  font-weight: var(--font-weight-semibold);
+}
+
+.closeIconContainer {
+  display: flex;
+  border: none;
+  width: var(--spacing-xsmall);
+  box-sizing: border-box;
+  justify-content: center;
+  padding-inline-start: var(--spacing-small);
+  padding-inline-end: var(--spacing-large);
+  background-color: transparent;
+  align-items: center;
+  color: var(--shade-0);
+  & > span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  & svg {
+    fill: var(--shade-0);
+    width: var(--spacing-medium);
+    height: var(--spacing-medium);
+  }
 }
