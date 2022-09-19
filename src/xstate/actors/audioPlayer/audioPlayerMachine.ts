@@ -829,10 +829,7 @@ export const audioPlayerMachine =
         }),
         setSurahAndAyahNumbers: assign({
           surah: (context, event) => event.surah,
-          ayahNumber: (context, event) => {
-            console.log(event);
-            return event.ayahNumber;
-          },
+          ayahNumber: (context, event) => event.ayahNumber,
         }),
         setCurrentSurahAndAyahAsNewSurahAndAyah: assign({
           surah: (context) => context.newSurah,
