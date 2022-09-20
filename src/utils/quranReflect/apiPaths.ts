@@ -10,7 +10,7 @@ export const makeVerseReflectionsUrl = ({
   verseNumber,
   locale,
   page = 1,
-  tab = Tab.Feed,
+  tab = Tab.MostPopular,
 }: VerseReflectionsRequestParams) => {
   const chapterNumber = Number(chapterId) + 1;
   return makeQuranReflectApiUrl('posts.json', {
