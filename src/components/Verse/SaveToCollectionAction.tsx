@@ -25,8 +25,9 @@ import {
 } from 'src/utils/auth/api';
 import {
   makeBookmarkCollectionsUrl,
+  makeBookmarksUrl,
   makeCollectionsUrl,
-  makeIsResourceBookmarkedUrl,
+  makeBookmarkUrl,
 } from 'src/utils/auth/apiPaths';
 import { isLoggedIn } from 'src/utils/auth/login';
 import { logButtonClick } from 'src/utils/eventLogger';
@@ -81,7 +82,7 @@ const SaveToCollectionAction = ({ verse, bookmarksRangeUrl }) => {
       return;
     }
     globalSWRMutate(
-      makeIsResourceBookmarkedUrl(
+      makeBookmarkUrl(
         mushafId,
         Number(verse.chapterId),
         BookmarkType.Ayah,
@@ -93,6 +94,13 @@ const SaveToCollectionAction = ({ verse, bookmarksRangeUrl }) => {
       globalSWRMutate(bookmarksRangeUrl);
     }
   };
+
+  const mutateBookmarksUrl = () =>
+    globalSWRMutate(
+      makeBookmarksUrl(
+        getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines).mushaf,
+      ),
+    );
 
   const onCollectionToggled = (changedCollection: Collection, newValue: boolean) => {
     if (newValue === true) {
@@ -107,6 +115,7 @@ const SaveToCollectionAction = ({ verse, bookmarksRangeUrl }) => {
           mutateIsResourceBookmarked();
           mutateCollectionListData();
           mutateBookmarkCollectionIdsData();
+          mutateBookmarksUrl();
         })
         .catch((err) => {
           if (err.status === 400) {
@@ -131,6 +140,7 @@ const SaveToCollectionAction = ({ verse, bookmarksRangeUrl }) => {
           mutateIsResourceBookmarked();
           mutateCollectionListData();
           mutateBookmarkCollectionIdsData();
+          mutateBookmarksUrl();
         })
         .catch((err) => {
           if (err.status === 400) {
@@ -159,6 +169,7 @@ const SaveToCollectionAction = ({ verse, bookmarksRangeUrl }) => {
           mutateIsResourceBookmarked();
           mutateCollectionListData();
           mutateBookmarkCollectionIdsData([...bookmarkCollectionIdsData, newCollection.id]);
+          mutateBookmarksUrl();
         })
         .catch((err) => {
           if (err.status === 400) {

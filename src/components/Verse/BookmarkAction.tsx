@@ -16,8 +16,8 @@ import { ToastStatus, useToast } from 'src/components/dls/Toast/Toast';
 import { selectBookmarks, toggleVerseBookmark } from 'src/redux/slices/QuranReader/bookmarks';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import { getMushafId } from 'src/utils/api';
-import { addOrRemoveBookmark, getIsResourceBookmarked } from 'src/utils/auth/api';
-import { makeBookmarksUrl, makeIsResourceBookmarkedUrl } from 'src/utils/auth/apiPaths';
+import { addBookmark, deleteBookmarkById, getBookmark } from 'src/utils/auth/api';
+import { makeBookmarksUrl, makeBookmarkUrl } from 'src/utils/auth/apiPaths';
 import { isLoggedIn } from 'src/utils/auth/login';
 import { logButtonClick } from 'src/utils/eventLogger';
 import BookmarkType from 'types/BookmarkType';
@@ -33,12 +33,12 @@ const BookmarkAction = ({ verse, isTranslationView, onActionTriggered, bookmarks
   const { cache, mutate: globalMutate } = useSWRConfig();
 
   const {
-    data: isVerseBookmarkedData,
+    data: bookmark,
     isValidating: isVerseBookmarkedLoading,
     mutate,
   } = useSWRImmutable(
     isLoggedIn()
-      ? makeIsResourceBookmarkedUrl(
+      ? makeBookmarkUrl(
           mushafId,
           Number(verse.chapterId),
           BookmarkType.Ayah,
@@ -46,7 +46,7 @@ const BookmarkAction = ({ verse, isTranslationView, onActionTriggered, bookmarks
         )
       : null,
     async () => {
-      const response = await getIsResourceBookmarked(
+      const response = await getBookmark(
         mushafId,
         Number(verse.chapterId),
         BookmarkType.Ayah,
@@ -57,14 +57,28 @@ const BookmarkAction = ({ verse, isTranslationView, onActionTriggered, bookmarks
   );
   const isVerseBookmarked = useMemo(() => {
     const isUserLoggedIn = isLoggedIn();
-    if (isUserLoggedIn && isVerseBookmarkedData) {
-      return isVerseBookmarkedData;
+    if (isUserLoggedIn && bookmark) {
+      return bookmark;
     }
     if (!isUserLoggedIn) {
       return !!bookmarkedVerses[verse.verseKey];
     }
     return false;
-  }, [bookmarkedVerses, isVerseBookmarkedData, verse.verseKey]);
+  }, [bookmarkedVerses, bookmark, verse.verseKey]);
+
+  const updateInBookmarkRange = (value) => {
+    // when it's translation view, we need to invalidate the cached bookmarks range
+    if (bookmarksRangeUrl) {
+      const bookmarkedVersesRange = cache.get(bookmarksRangeUrl);
+      const nextBookmarkedVersesRange = {
+        ...bookmarkedVersesRange,
+        [verse.verseKey]: value,
+      };
+      globalMutate(bookmarksRangeUrl, nextBookmarkedVersesRange, {
+        revalidate: false,
+      });
+    }
+  };
 
   const onToggleBookmarkClicked = () => {
     // eslint-disable-next-line i18next/no-literal-string
@@ -77,18 +91,9 @@ const BookmarkAction = ({ verse, isTranslationView, onActionTriggered, bookmarks
 
     if (isLoggedIn()) {
       // optimistic update, we are making assumption that the bookmark update will succeed
-      mutate((currentIsVerseBookmarked) => !currentIsVerseBookmarked, {
-        revalidate: false,
-      });
 
-      // when it's translation view, we need to invalidate the cached bookmarks range
-      if (bookmarksRangeUrl) {
-        const bookmarkedVersesRange = cache.get(bookmarksRangeUrl);
-        const nextBookmarkedVersesRange = {
-          ...bookmarkedVersesRange,
-          [verse.verseKey]: !isVerseBookmarked,
-        };
-        globalMutate(bookmarksRangeUrl, nextBookmarkedVersesRange, {
+      if (isVerseBookmarked) {
+        mutate(() => null, {
           revalidate: false,
         });
       }
@@ -99,27 +104,39 @@ const BookmarkAction = ({ verse, isTranslationView, onActionTriggered, bookmarks
         ),
       );
 
-      toast(isVerseBookmarked ? t('verse-bookmark-removed') : t('verse-bookmarked'), {
-        status: ToastStatus.Success,
-      });
-
-      addOrRemoveBookmark({
-        key: Number(verse.chapterId),
-        mushafId,
-        type: BookmarkType.Ayah,
-        isAdd: !isVerseBookmarked,
-        verseNumber: verse.verseNumber,
-      }).catch((err) => {
-        if (err.status === 400) {
-          toast(t('common:error.bookmark-sync'), {
-            status: ToastStatus.Error,
+      if (!isVerseBookmarked) {
+        addBookmark({
+          key: Number(verse.chapterId),
+          mushafId,
+          type: BookmarkType.Ayah,
+          verseNumber: verse.verseNumber,
+        })
+          .then((newBookmark) => {
+            mutate();
+            updateInBookmarkRange(newBookmark);
+            toast(t('verse-bookmarked'), {
+              status: ToastStatus.Success,
+            });
+          })
+          .catch((err) => {
+            if (err.status === 400) {
+              toast(t('common:error.bookmark-sync'), {
+                status: ToastStatus.Error,
+              });
+              return;
+            }
+            toast(t('error.general'), {
+              status: ToastStatus.Error,
+            });
           });
-          return;
-        }
-        toast(t('error.general'), {
-          status: ToastStatus.Error,
+      } else {
+        deleteBookmarkById(bookmark.id).then(() => {
+          updateInBookmarkRange(null);
+          toast(t('verse-bookmark-removed'), {
+            status: ToastStatus.Success,
+          });
         });
-      });
+      }
     } else {
       dispatch(toggleVerseBookmark(verse.verseKey));
     }

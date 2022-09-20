@@ -296,6 +296,11 @@ export const audioPlayerMachine =
                   description: 'The audio player is playing the audio',
                   initial: 'ACTIVE',
                   on: {
+                    PLAY_AYAH: [
+                      {
+                        actions: ['setSurahAndAyahNumbers', 'setAudioPlayerCurrentTime'],
+                      },
+                    ],
                     CHANGE_RECITER: [
                       {
                         actions: ['pauseAudio', 'setReciterId', 'resetElapsedTime'],

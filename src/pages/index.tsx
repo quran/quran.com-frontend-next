@@ -11,7 +11,7 @@ import styles from './index.module.scss';
 import ChapterAndJuzListWrapper from '@/components/chapters/ChapterAndJuzList';
 import HomePageHero from '@/components/HomePage/HomePageHero';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
-import BookmarksSection from '@/components/Verses/BookmarksSection';
+import BookmarksAndCollectionsSection from '@/components/Verses/BookmarksAndCollectionsSection';
 import RecentReadingSessions from '@/components/Verses/RecentReadingSessions';
 import { getAllChaptersData } from '@/utils/chapter';
 import { getLanguageAlternates } from '@/utils/locale';
@@ -48,7 +48,7 @@ const Index: NextPage<IndexProps> = ({
               <RecentReadingSessions />
             </div>
             <div className={classNames(styles.flowItem, styles.fullWidth)}>
-              <BookmarksSection />
+              <BookmarksAndCollectionsSection />
             </div>
             <div className={styles.flowItem}>
               <ChapterAndJuzListWrapper chapters={chapters} />

@@ -5,13 +5,14 @@ import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 import { useSelector, shallowEqual } from 'react-redux';
 
-import ChevronDownIcon from '../../../../public/icons/chevron-down.svg';
-import OverflowMenuIcon from '../../../../public/icons/menu_more_horiz.svg';
 import CollectionSorter from '../CollectionSorter/CollectionSorter';
 
 import styles from './CollectionDetail.module.scss';
 
-import { ToastStatus, useToast } from '@/dls/Toast/Toast';
+import ConfirmationModal from '@/dls/ConfirmationModal/ConfirmationModal';
+import { useConfirm } from '@/dls/ConfirmationModal/hooks';
+import ChevronDownIcon from '@/icons/chevron-down.svg';
+import OverflowMenuIcon from '@/icons/menu_more_horiz.svg';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getChapterWithStartingVerseUrl } from '@/utils/navigation';
 import DataFetcher from 'src/components/DataFetcher';
@@ -26,7 +27,6 @@ import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/transla
 import { getDefaultWordFields, getMushafId } from 'src/utils/api';
 import { makeVersesUrl } from 'src/utils/apiPaths';
 import { areArraysEqual } from 'src/utils/array';
-import { deleteCollectionBookmarkById } from 'src/utils/auth/api';
 import { getChapterData } from 'src/utils/chapter';
 import { toLocalizedVerseKey } from 'src/utils/locale';
 import { makeVerseKey } from 'src/utils/verse';
@@ -41,15 +41,15 @@ type CollectionDetailProps = {
   sortBy: string;
   onSortByChange: (sortBy: string) => void;
   onUpdated: () => void;
+  onItemDeleted: (bookmarkId: string) => void;
 };
 
 const CollectionDetail = ({
-  id,
   title,
   bookmarks,
   sortBy,
   onSortByChange,
-  onUpdated,
+  onItemDeleted,
 }: CollectionDetailProps) => {
   const { t, lang } = useTranslation();
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
@@ -57,21 +57,8 @@ const CollectionDetail = ({
   const { mushaf } = getMushafId(quranFont, mushafLines);
   const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
 
-  const toast = useToast();
-
-  const onBookmarkItemDeleted = (bookmarkId: string) => {
-    deleteCollectionBookmarkById(id, bookmarkId)
-      .then(() => {
-        onUpdated();
-      })
-      .catch(() => {
-        toast(t('common:error.general'), {
-          status: ToastStatus.Error,
-        });
-      });
-  };
-
   const router = useRouter();
+  const confirm = useConfirm();
 
   const sortOptions = [
     {
@@ -100,106 +87,125 @@ const CollectionDetail = ({
 
   const isCollectionEmpty = bookmarks.length === 0;
 
-  const handleDeleteMenuClicked = (bookmark) => () => {
+  const handleDeleteMenuClicked = (bookmark) => async () => {
     logButtonClick('collection_detail_delete_menu');
-    onBookmarkItemDeleted(bookmark.id);
+    const bookmarkName = getBookmarkName(bookmark);
+
+    const isConfirmed = await confirm({
+      confirmText: t('collection:delete'),
+      cancelText: t('common:cancel'),
+      title: t('collection:delete-bookmark.title'),
+      subtitle: t('collection:delete-bookmark.subtitle', {
+        bookmarkName,
+        collectionName: title,
+      }),
+    });
+
+    if (isConfirmed) {
+      onItemDeleted(bookmark.id);
+    }
   };
+
   const handleGoToAyah = (bookmark) => () => {
     logButtonClick('collection_detail_go_to_ayah_menu');
     onGoToAyahClicked(makeVerseKey(bookmark.key, bookmark.verseNumber));
   };
 
-  return (
-    <div className={styles.container}>
-      <div className={styles.header}>
-        <div className={styles.title}>{title}</div>
-        {sorter}
-      </div>
-      <div className={styles.collectionItemsContainer}>
-        {isCollectionEmpty ? (
-          <div className={styles.emptyCollectionContainer}>
-            <span>{t('collection:empty')}</span>
-            <div className={styles.backToCollectionButtonContainer}>
-              <Button href="/profile">{t('collection:back-to-collection-list')}</Button>
-            </div>
-          </div>
-        ) : (
-          bookmarks.map((bookmark) => {
-            const chapterData = getChapterData(chaptersData, bookmark.key.toString());
-            const verseKey = makeVerseKey(bookmark.key, bookmark.verseNumber);
-            const itemTitle = `${chapterData.transliteratedName} ${toLocalizedVerseKey(
-              verseKey,
-              lang,
-            )}`;
-            return (
-              <Collapsible
-                title={itemTitle}
-                key={bookmark.id}
-                prefix={<ChevronDownIcon />}
-                shouldRotatePrefixOnToggle
-                suffix={
-                  <PopoverMenu
-                    trigger={
-                      <Button variant={ButtonVariant.Ghost}>
-                        <OverflowMenuIcon />
-                      </Button>
-                    }
-                  >
-                    <PopoverMenu.Item onClick={handleDeleteMenuClicked(bookmark)}>
-                      {t('collection:delete')}
-                    </PopoverMenu.Item>
-                    <PopoverMenu.Item onClick={handleGoToAyah(bookmark)}>
-                      {t('collection:go-to-ayah')}
-                    </PopoverMenu.Item>
-                  </PopoverMenu>
-                }
-              >
-                {({ isOpen }) => {
-                  if (!isOpen) return null;
-                  const chapterId = bookmark.key;
-                  const params = {
-                    words: true,
-                    perPage: 1,
-                    translations: selectedTranslations.join(','),
-                    page: bookmark.verseNumber,
-                    ...getDefaultWordFields(quranReaderStyles.quranFont),
-                    mushaf,
-                  };
+  const getBookmarkName = (bookmark) => {
+    const chapterData = getChapterData(chaptersData, bookmark.key.toString());
+    const verseKey = makeVerseKey(bookmark.key, bookmark.verseNumber);
+    return `${chapterData.transliteratedName} ${toLocalizedVerseKey(verseKey, lang)}`;
+  };
 
-                  return (
-                    <DataFetcher
-                      queryKey={makeVersesUrl(chapterId.toString(), lang, params)}
-                      render={(data: VersesResponse) => {
-                        if (!data) return null;
-                        const firstVerse = data.verses?.[0];
-                        return (
-                          <div className={styles.verseContainer}>
-                            <VerseTextPreview verses={data.verses} />
-                            <div>
-                              {firstVerse.translations?.map((translation) => {
-                                return (
-                                  <TranslationText
-                                    key={translation.id}
-                                    translationFontScale={quranReaderStyles.translationFontScale}
-                                    text={translation.text}
-                                    languageId={translation.languageId}
-                                    resourceName={translation.resourceName}
-                                  />
-                                );
-                              })}
+  return (
+    <>
+      <div className={styles.container}>
+        <div className={styles.header}>
+          <div className={styles.title}>{title}</div>
+          {sorter}
+        </div>
+        <div className={styles.collectionItemsContainer}>
+          {isCollectionEmpty ? (
+            <div className={styles.emptyCollectionContainer}>
+              <span>{t('collection:empty')}</span>
+              <div className={styles.backToCollectionButtonContainer}>
+                <Button href="/profile">{t('collection:back-to-collection-list')}</Button>
+              </div>
+            </div>
+          ) : (
+            bookmarks.map((bookmark) => {
+              const bookmarkName = getBookmarkName(bookmark);
+              return (
+                <Collapsible
+                  title={bookmarkName}
+                  key={bookmark.id}
+                  prefix={<ChevronDownIcon />}
+                  shouldRotatePrefixOnToggle
+                  suffix={
+                    <PopoverMenu
+                      trigger={
+                        <Button variant={ButtonVariant.Ghost}>
+                          <OverflowMenuIcon />
+                        </Button>
+                      }
+                    >
+                      <PopoverMenu.Item onClick={handleDeleteMenuClicked(bookmark)}>
+                        {t('collection:delete')}
+                      </PopoverMenu.Item>
+                      <PopoverMenu.Item onClick={handleGoToAyah(bookmark)}>
+                        {t('collection:go-to-ayah')}
+                      </PopoverMenu.Item>
+                    </PopoverMenu>
+                  }
+                >
+                  {({ isOpen }) => {
+                    if (!isOpen) return null;
+                    const chapterId = bookmark.key;
+                    const params = {
+                      words: true,
+                      perPage: 1,
+                      translations: selectedTranslations.join(','),
+                      page: bookmark.verseNumber,
+                      ...getDefaultWordFields(quranReaderStyles.quranFont),
+                      mushaf,
+                    };
+
+                    return (
+                      <DataFetcher
+                        queryKey={makeVersesUrl(chapterId.toString(), lang, params)}
+                        render={(data: VersesResponse) => {
+                          if (!data) return null;
+                          const firstVerse = data.verses?.[0];
+                          return (
+                            <div className={styles.verseContainer}>
+                              <VerseTextPreview verses={data.verses} />
+                              <div>
+                                {firstVerse.translations?.map((translation) => {
+                                  return (
+                                    <TranslationText
+                                      key={translation.id}
+                                      translationFontScale={quranReaderStyles.translationFontScale}
+                                      text={translation.text}
+                                      languageId={translation.languageId}
+                                      resourceName={translation.resourceName}
+                                    />
+                                  );
+                                })}
+                              </div>
                             </div>
-                          </div>
-                        );
-                      }}
-                    />
-                  );
-                }}
-              </Collapsible>
-            );
-          })
-        )}
+                          );
+                        }}
+                      />
+                    );
+                  }}
+                </Collapsible>
+              );
+            })
+          )}
+        </div>
       </div>
-    </div>
+      <ConfirmationModal />
+    </>
   );
 };
 

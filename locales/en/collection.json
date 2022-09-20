@@ -1,4 +1,5 @@
 {
+    "collections": "Collections",
     "recently-added": "Recently added",
     "recently-updated": "Recently updated",
     "alphabetical": "A-Z",
@@ -8,5 +9,14 @@
     "delete": "Delete",
     "empty": "Collection is empty",
     "collection-list-empty": "Collection list is empty. You haven't created any collection yet",
-    "back-to-collection-list": "Back to collection list"
+    "back-to-collection-list": "Back to collection list",
+    "delete-bookmark": {
+        "title": "Delete bookmark",
+        "subtitle": "Are you sure you want to delete {{bookmarkName}} from {{collectionName}} collection?"
+    },
+    "delete-collection": {
+        "title": "Delete collection",
+        "subtitle": "Are you sure you want to delete {{collectionName}} collection?"
+    },
+    "all-saved-verses": "All saved verses"
 }
