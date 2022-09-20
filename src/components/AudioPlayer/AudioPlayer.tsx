@@ -63,13 +63,14 @@ const AudioPlayer = () => {
     const currentTimestamp = audioPlayer.currentTime;
     const downloadProgress = getAudioPlayerDownloadProgress(audioPlayer);
     const isWaiting = currentTimestamp > downloadProgress - 2; // 2s tolerance
+    const isAlmostEnded = currentTimestamp > audioPlayer.duration - 2; // 2s tolerance
 
     /**
      * simulate onWaiting event on safari.
      * If the audio is not in loading state already. And `currentTime` is nearby last timestamp of `buffered`
      * trigger WAITING event.
      */
-    if (!isLoading && isWaiting) {
+    if (!isLoading && isWaiting && !isAlmostEnded) {
       audioService.send({ type: 'WAITING' });
     } else if (isLoading && !isWaiting) {
       audioService.send({ type: 'CAN_PLAY' });
