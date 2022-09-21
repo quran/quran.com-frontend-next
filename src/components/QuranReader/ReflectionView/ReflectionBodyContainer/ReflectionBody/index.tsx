@@ -1,4 +1,4 @@
-import React, { useCallback, useContext } from 'react';
+import React, { useCallback, useContext, useMemo } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
@@ -13,6 +13,7 @@ import Button from '@/dls/Button/Button';
 import Separator from '@/dls/Separator/Separator';
 import { logButtonClick } from '@/utils/eventLogger';
 import { fakeNavigate, getVerseReflectionNavigationUrl } from '@/utils/navigation';
+import { localeToReflectionLanguages } from '@/utils/quranReflect/locale';
 import { getQuranReflectVerseUrl } from '@/utils/quranReflect/navigation';
 import { getVerseReferencesFromReflection } from '@/utils/quranReflect/string';
 import { isFirstVerseOfSurah, isLastVerseOfSurah, makeVerseKey } from '@/utils/verse';
@@ -68,7 +69,11 @@ const ReflectionBody: React.FC<Props> = ({
       lang,
     );
   }, [lang, scrollToTop, selectedChapterId, selectedVerseNumber, setSelectedVerseNumber]);
-
+  const filteredPosts = useMemo(() => {
+    return data?.posts?.filter((reflection) =>
+      localeToReflectionLanguages(lang).includes(reflection.language),
+    );
+  }, [data?.posts, lang]);
   return (
     <div className={styles.container}>
       <VerseAndTranslation
@@ -79,12 +84,12 @@ const ReflectionBody: React.FC<Props> = ({
       <div className={styles.separatorContainer}>
         <Separator />
       </div>
-      {data?.posts?.length === 0 ? (
+      {filteredPosts?.length === 0 ? (
         <ReflectionNotAvailableMessage />
       ) : (
         <ReflectionDisclaimerMessage />
       )}
-      {data?.posts?.map((reflection) => (
+      {filteredPosts?.map((reflection) => (
         <ReflectionItem
           id={reflection.id}
           key={reflection.id}
