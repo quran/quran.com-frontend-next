@@ -21,6 +21,12 @@ const AudioPlayerBody = dynamic(() => import('./AudioPlayerBody'), {
   ),
 });
 
+/**
+ * Buffering when 2s away from download progress
+ * and put the audio in `almostEnded` state when 2s away from ending
+ */
+const AUDIO_DURATION_TOLERANCE = 2; // 2s ,
+
 const getAudioPlayerDownloadProgress = (audioPlayer: HTMLAudioElement) => {
   // TODO: Technically this is not accurate, but it's close enough for now.
   /**
@@ -62,8 +68,8 @@ const AudioPlayer = () => {
     const audioPlayer: HTMLAudioElement = e.target;
     const currentTimestamp = audioPlayer.currentTime;
     const downloadProgress = getAudioPlayerDownloadProgress(audioPlayer);
-    const isWaiting = currentTimestamp > downloadProgress - 2; // 2s tolerance
-    const isAlmostEnded = currentTimestamp > audioPlayer.duration - 2; // 2s tolerance
+    const isWaiting = currentTimestamp > downloadProgress - AUDIO_DURATION_TOLERANCE; // 2s tolerance
+    const isAlmostEnded = currentTimestamp > audioPlayer.duration - AUDIO_DURATION_TOLERANCE; // 2s tolerance
 
     /**
      * simulate onWaiting event on safari.
