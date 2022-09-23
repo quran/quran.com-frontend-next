@@ -15,14 +15,14 @@ import { logButtonClick } from '@/utils/eventLogger';
 import { fakeNavigate, getVerseReflectionNavigationUrl } from '@/utils/navigation';
 import { localeToReflectionLanguages } from '@/utils/quranReflect/locale';
 import { getQuranReflectVerseUrl } from '@/utils/quranReflect/navigation';
-import { getVerseReferencesFromReflection } from '@/utils/quranReflect/string';
 import { isFirstVerseOfSurah, isLastVerseOfSurah, makeVerseKey } from '@/utils/verse';
 import DataContext from 'src/contexts/DataContext';
+import AyahReflectionsResponse from 'types/QuranReflect/AyahReflectionsResponse';
 
 interface Props {
   selectedChapterId: string;
   selectedVerseNumber: string;
-  data: any;
+  data: AyahReflectionsResponse;
   scrollToTop: () => void;
   setSelectedVerseNumber: (verseNumber: string) => void;
   translationFontScale: number;
@@ -91,24 +91,10 @@ const ReflectionBody: React.FC<Props> = ({
       )}
       {filteredPosts?.map((reflection) => (
         <ReflectionItem
-          id={reflection.id}
           key={reflection.id}
-          date={reflection.createdAt}
-          authorName={reflection?.author?.name}
-          authorUsername={reflection?.author?.username}
-          isAuthorVerified={reflection?.author?.verified}
-          reflectionText={reflection?.body}
-          reflectionLanguage={reflection.language}
-          reflectionGroup={reflection?.group}
-          reflectionGroupLink={reflection?.groupLink}
-          avatarUrl={reflection?.author?.profileImg}
-          verseReferences={getVerseReferencesFromReflection(reflection.filters)}
-          likesCount={reflection?.likes}
-          commentsCount={reflection?.commentsCount}
+          reflection={reflection}
           selectedChapterId={selectedChapterId}
           selectedVerseNumber={selectedVerseNumber}
-          filters={reflection.filters}
-          trimmedCitationTexts={reflection.trimmedCitationTexts}
         />
       ))}
       <div className={styles.readMoreButtonContainer}>

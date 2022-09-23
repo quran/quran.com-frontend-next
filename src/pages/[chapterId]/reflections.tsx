@@ -21,7 +21,7 @@ import {
   getVerseReflectionNavigationUrl,
   scrollWindowToTop,
 } from '@/utils/navigation';
-import { makeVerseReflectionsUrl } from '@/utils/quranReflect/apiPaths';
+import { getAyahReflections, makeAyahReflectionsUrl } from '@/utils/quranReflect/apiPaths';
 import {
   REVALIDATION_PERIOD_ON_ERROR_SECONDS,
   ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
@@ -107,9 +107,9 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   const { quranFont, mushafLines } = getQuranReaderStylesInitialState(locale);
   const translations = getTranslationsInitialState(locale).selectedTranslations;
   try {
-    const verseReflectionUrl = makeVerseReflectionsUrl({
-      chapterId: chapterNumber,
-      verseNumber,
+    const verseReflectionUrl = makeAyahReflectionsUrl({
+      surahId: chapterNumber,
+      ayahNumber: verseNumber,
       locale,
     });
 
@@ -126,7 +126,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     const versesUrl = makeVersesUrl(chapterNumber, locale, apiParams);
 
     const [verseReflectionsData, versesData] = await Promise.all([
-      fetcher(verseReflectionUrl),
+      getAyahReflections(verseReflectionUrl),
       fetcher(versesUrl),
     ]);
 

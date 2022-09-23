@@ -16,16 +16,18 @@ import ShareIcon from '@/icons/share.svg';
 import { logButtonClick } from '@/utils/eventLogger';
 import { toLocalizedNumber } from '@/utils/locale';
 import { getQuranReflectPostUrl } from '@/utils/quranReflect/navigation';
-import { parseTrimmedCitationTexts } from '@/utils/quranReflect/string';
+import { getCopyReflectionContent } from '@/utils/quranReflect/string';
 import { stripHTMLTags } from '@/utils/string';
+import ReflectionFilter from 'types/QuranReflect/ReflectionFilter';
+import TrimmedCitationTexts from 'types/QuranReflect/TrimmedCitationTexts';
 
 type Props = {
   likesCount: number;
   commentsCount: number;
   postId: number;
   reflectionText: string;
-  trimmedCitationTexts: Record<string, any>;
-  filters: any;
+  trimmedCitationTexts: TrimmedCitationTexts;
+  filters: ReflectionFilter[];
 };
 
 const SocialInteraction: React.FC<Props> = ({
@@ -49,16 +51,15 @@ const SocialInteraction: React.FC<Props> = ({
 
   const onCopyTextClicked = () => {
     logButtonClick('reflection_item_copy_text');
-    const textToCopy = stripHTMLTags(
-      // eslint-disable-next-line i18next/no-literal-string
-      `${reflectionText}\r\n\r\n${parseTrimmedCitationTexts(
-        trimmedCitationTexts,
-        filters,
-      )}\r\n\r\n${getQuranReflectPostUrl(postId)}`,
-    );
-    clipboardCopy(textToCopy).then(() =>
-      toast(t('quran-reader:text-copied'), { status: ToastStatus.Success }),
-    );
+    clipboardCopy(
+      stripHTMLTags(
+        // eslint-disable-next-line i18next/no-literal-string
+        `${reflectionText}\r\n\r\n${getCopyReflectionContent(
+          trimmedCitationTexts,
+          filters,
+        )}\r\n\r\n${getQuranReflectPostUrl(postId)}`,
+      ),
+    ).then(() => toast(t('quran-reader:text-copied'), { status: ToastStatus.Success }));
   };
 
   const onCopyLinkClicked = () => {

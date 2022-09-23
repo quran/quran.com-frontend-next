@@ -1,13 +1,16 @@
-import { ReflectionVerseReference } from 'types/ReflectionVerseReference';
+import ReflectionFilter from 'types/QuranReflect/ReflectionFilter';
+import { ReflectionVerseReference } from 'types/QuranReflect/ReflectionVerseReference';
+import TrimmedCitationTexts from 'types/QuranReflect/TrimmedCitationTexts';
 
 /**
- * From reflection data, extract the verse references
- * This is is a temporary function, once we migrate to use Quran.com's API we will probably remove this function
+ * Extract the verse references from reflection data
  *
  * @param {any} filters
  * @returns {ReflectionVerseReference[]} verseReferences
  */
-export const getVerseReferencesFromReflection = (filters: any): ReflectionVerseReference[] => {
+export const getVerseReferencesFromReflectionFilters = (
+  filters: ReflectionFilter[],
+): ReflectionVerseReference[] => {
   return filters.map((filter) => {
     const { surahNumber, from, to } = filter;
 
@@ -19,7 +22,11 @@ export const getVerseReferencesFromReflection = (filters: any): ReflectionVerseR
   });
 };
 
-const getSurahNameByGroupTranslationId = (filters: any[], groupSurahNumber, groupTranslationId) => {
+const getSurahNameByGroupTranslationId = (
+  filters: ReflectionFilter[],
+  groupSurahNumber: number,
+  groupTranslationId: number,
+) => {
   const matchedSurahFilters = filters.find((filter) => {
     const { surahNumber } = filter;
     return surahNumber === groupSurahNumber;
@@ -34,31 +41,58 @@ const getSurahNameByGroupTranslationId = (filters: any[], groupSurahNumber, grou
   return defaultCitationName.name;
 };
 
-export const parseTrimmedCitationTexts = (trimmedCitationTexts, filters: any[]) => {
-  let parsedString = '';
+/**
+ * Get the summary of the citation e.g.
+ * "Chapter 1: The Opening, Verses:  1 - 7"
+ *
+ * @param {number[]} groupAyahNumbers an array of verse numbers of the citation group.
+ * @param {number} groupSurahNumber the Surah number of the group.
+ * @param {string} surahName the Surah name
+ * @returns {string}
+ */
+export const getCitationSummary = (
+  groupAyahNumbers: number[],
+  groupSurahNumber: number,
+  surahName: string,
+): string => {
+  const citationNumberOfAyahs = groupAyahNumbers.length;
+  return `Chapter ${groupSurahNumber}: ${surahName}, Verse${
+    citationNumberOfAyahs > 1
+      ? `s:  ${groupAyahNumbers[0]} - ${groupAyahNumbers[citationNumberOfAyahs - 1]}`
+      : `:  ${groupAyahNumbers[0]}`
+  }`;
+};
+
+export const getCopyReflectionContent = (
+  trimmedCitationTexts: TrimmedCitationTexts,
+  filters: ReflectionFilter[],
+) => {
+  let copyReflectionContent = '';
   Object.keys(trimmedCitationTexts).forEach((index) => {
     const citationTextGroup = trimmedCitationTexts[index];
     if (citationTextGroup?.[0]) {
-      let groupText = '';
-      let groupSurahNumber;
-      let groupTranslationId;
+      let citationGroupText = '';
+      let groupSurahNumber: number;
+      let groupTranslationId: number;
       const groupAyahNumbers = [];
       citationTextGroup?.[0].forEach((citationDetails) => {
         const { citationId, number: ayahNumber, translationId } = citationDetails;
         groupTranslationId = translationId;
         groupSurahNumber = Number(citationId) - 1;
         groupAyahNumbers.push(ayahNumber);
-        groupText += `${citationDetails.text} (${citationDetails.number}) `;
+        citationGroupText += `${citationDetails.text} (${citationDetails.number}) `;
       });
-      const chapterName = getSurahNameByGroupTranslationId(
+      const surahName = getSurahNameByGroupTranslationId(
         filters,
         groupSurahNumber,
         groupTranslationId,
       );
-      parsedString += `Chapter ${groupSurahNumber}: ${chapterName}, Verse${
-        groupAyahNumbers.length > 1 ? 's' : ''
-      }:  ${groupAyahNumbers.join(' - ')}\r\n${groupText}\r\n\r\n`;
+      copyReflectionContent += `${getCitationSummary(
+        groupAyahNumbers,
+        groupSurahNumber,
+        surahName,
+      )}\r\n${citationGroupText}\r\n\r\n`;
     }
   });
-  return parsedString;
+  return copyReflectionContent;
 };

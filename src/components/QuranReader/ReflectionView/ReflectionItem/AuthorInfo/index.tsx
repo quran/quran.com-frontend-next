@@ -13,7 +13,7 @@ import { logButtonClick } from '@/utils/eventLogger';
 import { toLocalizedNumber } from '@/utils/locale';
 import { getQuranReflectAuthorUrl } from '@/utils/quranReflect/navigation';
 import { makeVerseKey } from '@/utils/verse';
-import { ReflectionVerseReference } from 'types/ReflectionVerseReference';
+import { ReflectionVerseReference } from 'types/QuranReflect/ReflectionVerseReference';
 
 type Props = {
   authorUsername: string;

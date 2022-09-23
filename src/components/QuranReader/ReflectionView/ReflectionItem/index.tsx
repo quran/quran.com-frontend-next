@@ -5,7 +5,6 @@ import useTranslation from 'next-translate/useTranslation';
 import AuthorInfo from './AuthorInfo';
 import HeaderMenu from './HeaderMenu';
 import styles from './ReflectionItem.module.scss';
-import ReflectionItemProps from './ReflectionItemProps';
 import SocialInteraction from './SocialInteraction';
 
 import VerseAndTranslation from '@/components/Verse/VerseAndTranslation';
@@ -15,29 +14,27 @@ import { logButtonClick } from '@/utils/eventLogger';
 import truncate from '@/utils/html-truncate';
 import { isRTLReflection } from '@/utils/quranReflect/locale';
 import { getQuranReflectTagUrl } from '@/utils/quranReflect/navigation';
+import { getVerseReferencesFromReflectionFilters } from '@/utils/quranReflect/string';
 import { makeVerseKey } from '@/utils/verse';
+import AyahReflection from 'types/QuranReflect/AyahReflection';
 
 const MAX_REFLECTION_LENGTH = 220;
 
-const ReflectionItem = ({
-  id,
-  authorName,
-  authorUsername,
-  date,
-  avatarUrl,
-  reflectionText,
-  isAuthorVerified,
-  verseReferences,
-  likesCount,
-  commentsCount,
-  reflectionGroup,
-  reflectionGroupLink,
+type Props = {
+  reflection: AyahReflection;
+  selectedChapterId: string;
+  selectedVerseNumber: string;
+};
+
+const ReflectionItem: React.FC<Props> = ({
+  reflection,
   selectedChapterId,
   selectedVerseNumber,
-  reflectionLanguage,
-  trimmedCitationTexts,
-  filters,
-}: ReflectionItemProps) => {
+}) => {
+  const { id, createdAt, author } = reflection;
+  const reflectionText = reflection?.body;
+  // TODO: here
+  const verseReferences = getVerseReferencesFromReflectionFilters(reflection.filters);
   const [isExpanded, setIsExpanded] = useState(false);
   const { t } = useTranslation();
   const [shouldShowReferredVerses, setShouldShowReferredVerses] = useState(false);
@@ -99,13 +96,13 @@ const ReflectionItem = ({
     <div className={styles.container}>
       <div className={styles.header}>
         <AuthorInfo
-          authorUsername={authorUsername}
-          authorName={authorName}
-          avatarUrl={avatarUrl}
-          date={date}
-          isAuthorVerified={isAuthorVerified}
-          reflectionGroup={reflectionGroup}
-          reflectionGroupLink={reflectionGroupLink}
+          authorUsername={author?.username}
+          authorName={author?.name}
+          avatarUrl={author?.profileImg}
+          date={createdAt}
+          isAuthorVerified={reflection?.author?.verified}
+          reflectionGroup={reflection?.group}
+          reflectionGroupLink={reflection?.groupLink}
           verseReferences={verseReferences}
           nonChapterVerseReferences={nonChapterVerseReferences}
           onReferredVersesHeaderClicked={onReferredVersesHeaderClicked}
@@ -132,7 +129,7 @@ const ReflectionItem = ({
           ))}
         </div>
       )}
-      <div className={isRTLReflection(reflectionLanguage) ? styles.rtl : styles.ltr}>
+      <div className={isRTLReflection(reflection.language) ? styles.rtl : styles.ltr}>
         <span
           className={styles.body}
           // eslint-disable-next-line react/no-danger
@@ -141,11 +138,11 @@ const ReflectionItem = ({
           }}
         />
         {reflectionText.length > MAX_REFLECTION_LENGTH && (
+          // eslint-disable-next-line jsx-a11y/click-events-have-key-events
           <span
             className={styles.moreOrLessText}
             tabIndex={0}
             role="button"
-            onKeyDown={onMoreLessClicked}
             onClick={onMoreLessClicked}
           >
             {isExpanded ? t('quran-reader:see-less') : t('quran-reader:see-more')}
@@ -153,11 +150,11 @@ const ReflectionItem = ({
         )}
       </div>
       <SocialInteraction
-        filters={filters}
+        filters={reflection.filters}
         reflectionText={reflectionText}
-        likesCount={likesCount}
-        trimmedCitationTexts={trimmedCitationTexts}
-        commentsCount={commentsCount}
+        likesCount={reflection?.likes}
+        trimmedCitationTexts={reflection.trimmedCitationTexts}
+        commentsCount={reflection?.commentsCount}
         postId={id}
       />
     </div>
