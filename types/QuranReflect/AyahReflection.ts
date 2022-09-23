@@ -1,4 +1,5 @@
 import ReflectionFilter from './ReflectionFilter';
+import ReflectionLanguage from './ReflectionLanguage';
 import TrimmedCitationTexts from './TrimmedCitationTexts';
 
 type AyahReflection = {
@@ -30,7 +31,7 @@ type AyahReflection = {
   roomId?: number;
   group?: string;
   groupLink?: string;
-  language: string;
+  language: ReflectionLanguage;
   trimmedCitationTexts: TrimmedCitationTexts;
   filters: ReflectionFilter[];
 };

@@ -8,7 +8,7 @@ import ReflectionLanguage from 'types/QuranReflect/ReflectionLanguage';
  * @param {string} language
  * @returns {boolean}
  */
-export const isRTLReflection = (language: string): boolean => {
+export const isRTLReflection = (language: ReflectionLanguage): boolean => {
   switch (language) {
     case ReflectionLanguage.ARABIC:
     case ReflectionLanguage.URDU:
