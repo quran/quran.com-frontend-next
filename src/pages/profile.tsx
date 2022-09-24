@@ -10,20 +10,23 @@ import useSWR from 'swr';
 import layoutStyle from './index.module.scss';
 import styles from './profile.module.scss';
 
-import Button from 'src/components/dls/Button/Button';
-import Skeleton from 'src/components/dls/Skeleton/Skeleton';
-import DeleteAccountButton from 'src/components/Profile/DeleteAccountButton';
-import BookmarksSection from 'src/components/Verses/BookmarksSection';
-import RecentReadingSessions from 'src/components/Verses/RecentReadingSessions';
+import NextSeoWrapper from '@/components/NextSeoWrapper';
+import DeleteAccountButton from '@/components/Profile/DeleteAccountButton';
+import BookmarksAndCollectionsSection from '@/components/Verses/BookmarksAndCollectionsSection';
+import RecentReadingSessions from '@/components/Verses/RecentReadingSessions';
+import Button from '@/dls/Button/Button';
+import Skeleton from '@/dls/Skeleton/Skeleton';
+import { removeLastSyncAt } from '@/redux/slices/Auth/userDataSync';
+import { getUserProfile, logoutUser } from '@/utils/auth/api';
+import { makeUserProfileUrl } from '@/utils/auth/apiPaths';
+import { DEFAULT_PHOTO_URL } from '@/utils/auth/constants';
+import { isLoggedIn } from '@/utils/auth/login';
+import { getAllChaptersData } from '@/utils/chapter';
+import { logButtonClick } from '@/utils/eventLogger';
+import { getLanguageAlternates } from '@/utils/locale';
+import { getCanonicalUrl, getProfileNavigationUrl } from '@/utils/navigation';
 import DataContext from 'src/contexts/DataContext';
 import Error from 'src/pages/_error';
-import { removeLastSyncAt } from 'src/redux/slices/Auth/userDataSync';
-import { getUserProfile, logoutUser } from 'src/utils/auth/api';
-import { makeUserProfileUrl } from 'src/utils/auth/apiPaths';
-import { DEFAULT_PHOTO_URL } from 'src/utils/auth/constants';
-import { isLoggedIn } from 'src/utils/auth/login';
-import { getAllChaptersData } from 'src/utils/chapter';
-import { logButtonClick } from 'src/utils/eventLogger';
 import ChaptersData from 'types/ChaptersData';
 
 interface Props {
@@ -34,7 +37,7 @@ const nameSample = 'Mohammad Ali';
 const emailSample = 'mohammadali@quran.com';
 const ProfilePage: NextPage<Props> = ({ chaptersData }) => {
   const dispatch = useDispatch();
-  const { t } = useTranslation();
+  const { t, lang } = useTranslation();
   const router = useRouter();
 
   const {
@@ -89,6 +92,13 @@ const ProfilePage: NextPage<Props> = ({ chaptersData }) => {
 
   return (
     <DataContext.Provider value={chaptersData}>
+      <NextSeoWrapper
+        title={t('common:profile')}
+        url={getCanonicalUrl(lang, getProfileNavigationUrl())}
+        languageAlternates={getLanguageAlternates(getProfileNavigationUrl())}
+        nofollow
+        noindex
+      />
       <div className={layoutStyle.pageContainer}>
         <div className={layoutStyle.flow}>
           <div className={styles.container}>
@@ -116,7 +126,7 @@ const ProfilePage: NextPage<Props> = ({ chaptersData }) => {
               <RecentReadingSessions />
             </div>
             <div className={classNames(layoutStyle.flowItem, layoutStyle.fullWidth)}>
-              <BookmarksSection />
+              <BookmarksAndCollectionsSection />
             </div>
 
             <div

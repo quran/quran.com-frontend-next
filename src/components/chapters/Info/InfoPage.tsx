@@ -4,11 +4,11 @@ import useTranslation from 'next-translate/useTranslation';
 
 import Info from '.';
 
-import NextSeoWrapper from 'src/components/NextSeoWrapper';
+import NextSeoWrapper from '@/components/NextSeoWrapper';
+import { getLanguageAlternates, toLocalizedNumber } from '@/utils/locale';
+import { getCanonicalUrl, getSurahInfoNavigationUrl } from '@/utils/navigation';
 import DataContext from 'src/contexts/DataContext';
 import Error from 'src/pages/_error';
-import { getLanguageAlternates, toLocalizedNumber } from 'src/utils/locale';
-import { getCanonicalUrl, getSurahInfoNavigationUrl } from 'src/utils/navigation';
 import { ChapterInfoResponse, ChapterResponse } from 'types/ApiResponses';
 import ChaptersData from 'types/ChaptersData';
 

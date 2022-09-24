@@ -1,8 +1,8 @@
 import useTranslation from 'next-translate/useTranslation';
 
-import QuranTextLogo from '../../../../public/icons/quran-text-logo.svg';
-
 import styles from './Footer.module.scss';
+
+import QuranTextLogo from '@/icons/quran-text-logo.svg';
 
 const TitleAndDescription = () => {
   const { t } = useTranslation('common');

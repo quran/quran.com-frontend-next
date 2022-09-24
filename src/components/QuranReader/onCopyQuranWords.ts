@@ -1,7 +1,7 @@
 import clipboardCopy from 'clipboard-copy';
 
-import { DATA_ATTRIBUTE_WORD_LOCATION } from 'src/components/dls/QuranWord/QuranWord';
-import { getWordDataByLocation } from 'src/utils/verse';
+import { DATA_ATTRIBUTE_WORD_LOCATION } from '@/dls/QuranWord/QuranWord';
+import { getWordDataByLocation } from '@/utils/verse';
 import { QuranFont } from 'types/QuranReader';
 import Verse from 'types/Verse';
 
@@ -52,15 +52,21 @@ const extractText = (wordLocation: string, verses: Verse[], quranFont: QuranFont
 
   // find the verse
   const selectedVerse = verses.find((v) => v.verseKey === `${chapter}:${verse}`);
-  if (!selectedVerse) return '';
+  if (!selectedVerse) {
+    return '';
+  }
 
   // find the word
   const selectedWord = selectedVerse.words.find(
     (word) => Number(word.position) === Number(location),
   );
-  if (!selectedWord) return '';
+  if (!selectedWord) {
+    return '';
+  }
 
-  if (quranFont === QuranFont.IndoPak) return selectedWord.textIndopak;
+  if (quranFont === QuranFont.IndoPak) {
+    return selectedWord.textIndopak;
+  }
   return selectedWord.textUthmani;
 };
 

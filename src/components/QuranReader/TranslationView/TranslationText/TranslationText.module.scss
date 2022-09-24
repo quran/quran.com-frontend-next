@@ -30,8 +30,7 @@ $translation-line-height: 1.5;
 }
 
 .urdu {
-  font-family: "MehrNastaliq", "Mehr Nastaliq Web", "Helvetica Neue", Helvetica,
-    Arial, serif !important; // important is needed to over-ride the language specific font-family
+  font-family: "MehrNastaliq", "Mehr Nastaliq Web", "Helvetica Neue", Helvetica, Arial, serif !important; // important is needed to over-ride the language specific font-family
 }
 
 .kurdish {
@@ -45,5 +44,5 @@ $translation-line-height: 1.5;
 .translationName {
   margin-block-start: calc(0.5 * var(--spacing-xxsmall));
   color: var(--color-text-faded);
-  font-size: var(--font-size-small);
+  font-size: var(--font-size-xsmall);
 }

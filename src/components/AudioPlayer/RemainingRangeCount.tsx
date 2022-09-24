@@ -1,7 +1,7 @@
 import { useSelector } from '@xstate/react';
 import useTranslation from 'next-translate/useTranslation';
 
-import { toLocalizedNumber } from 'src/utils/locale';
+import { toLocalizedNumber } from '@/utils/locale';
 
 const RemainingRangeCount = ({ rangeActor }) => {
   const { lang } = useTranslation('common');

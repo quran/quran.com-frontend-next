@@ -1,11 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import resetSettings from 'src/redux/actions/reset-settings';
-import syncUserPreferences from 'src/redux/actions/sync-user-preferences';
-import { getReadingPreferencesInitialState } from 'src/redux/defaultSettings/util';
-import { RootState } from 'src/redux/RootState';
-import ReadingPreferences from 'src/redux/types/ReadingPreferences';
-import SliceName from 'src/redux/types/SliceName';
+import resetSettings from '@/redux/actions/reset-settings';
+import syncUserPreferences from '@/redux/actions/sync-user-preferences';
+import { getReadingPreferencesInitialState } from '@/redux/defaultSettings/util';
+import { RootState } from '@/redux/RootState';
+import ReadingPreferences from '@/redux/types/ReadingPreferences';
+import SliceName from '@/redux/types/SliceName';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 import { ReadingPreference, WordByWordType, WordClickFunctionality } from 'types/QuranReader';
 

@@ -2,9 +2,8 @@ import React from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
-import IconClose from '../../../../public/icons/close.svg';
-
-import Button, { ButtonShape, ButtonVariant } from 'src/components/dls/Button/Button';
+import Button, { ButtonShape, ButtonVariant } from '@/dls/Button/Button';
+import IconClose from '@/icons/close.svg';
 
 interface Props {
   onClick: () => void;

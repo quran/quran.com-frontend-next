@@ -6,25 +6,25 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import SearchDrawerHeader from './Header';
 
+import Drawer, { DrawerType } from '@/components/Navbar/Drawer';
+import Spinner from '@/dls/Spinner/Spinner';
+import useDebounce from '@/hooks/useDebounce';
+import useFocus from '@/hooks/useFocusElement';
+import { selectNavbar } from '@/redux/slices/navbar';
+import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
+import { addSearchHistoryRecord } from '@/redux/slices/Search/search';
+import { selectIsSearchDrawerVoiceFlowStarted } from '@/redux/slices/voiceSearch';
+import { areArraysEqual } from '@/utils/array';
+import { logButtonClick, logEmptySearchResults, logTextSearchQuery } from '@/utils/eventLogger';
 import { getSearchResults } from 'src/api';
-import Spinner from 'src/components/dls/Spinner/Spinner';
-import Drawer, { DrawerType } from 'src/components/Navbar/Drawer';
-import useDebounce from 'src/hooks/useDebounce';
-import useFocus from 'src/hooks/useFocusElement';
-import { selectNavbar } from 'src/redux/slices/navbar';
-import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';
-import { addSearchHistoryRecord } from 'src/redux/slices/Search/search';
-import { selectIsSearchDrawerVoiceFlowStarted } from 'src/redux/slices/voiceSearch';
-import { areArraysEqual } from 'src/utils/array';
-import { logButtonClick, logEmptySearchResults } from 'src/utils/eventLogger';
 import { SearchResponse } from 'types/ApiResponses';
 
-const SearchBodyContainer = dynamic(() => import('src/components/Search/SearchBodyContainer'), {
+const SearchBodyContainer = dynamic(() => import('@/components/Search/SearchBodyContainer'), {
   ssr: false,
   loading: () => <Spinner />,
 });
 const VoiceSearchBodyContainer = dynamic(
-  () => import('src/components/TarteelVoiceSearch/BodyContainer'),
+  () => import('@/components/TarteelVoiceSearch/BodyContainer'),
   {
     ssr: false,
     loading: () => <Spinner />,
@@ -57,6 +57,7 @@ const SearchDrawer: React.FC = () => {
     // only when the search query has a value we call the API.
     if (debouncedSearchQuery) {
       dispatch({ type: addSearchHistoryRecord.type, payload: debouncedSearchQuery });
+      logTextSearchQuery(debouncedSearchQuery, 'search_drawer');
       setIsSearching(true);
       getSearchResults({
         query: debouncedSearchQuery,

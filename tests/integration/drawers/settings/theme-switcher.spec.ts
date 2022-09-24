@@ -1,6 +1,6 @@
 import { test, expect } from '@playwright/test';
 
-import Homepage from 'tests/POM/home-page';
+import Homepage from '@/tests/POM/home-page';
 
 test.beforeEach(async ({ page }) => {
   await page.goto('/');

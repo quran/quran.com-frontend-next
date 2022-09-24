@@ -1,5 +1,7 @@
 /* eslint-disable max-lines */
 /* eslint-disable react-func/max-lines-per-function */
+import { it, expect } from 'vitest';
+
 import { getAllChaptersData } from './chapter';
 import { generateVerseKeysBetweenTwoVerseKeys } from './verseKeys';
 

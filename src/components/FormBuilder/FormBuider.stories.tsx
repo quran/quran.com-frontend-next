@@ -4,7 +4,7 @@
 
 import FormBuilder from './FormBuilder';
 
-import { EMAIL_VALIDATION_REGEX } from 'src/utils/validation';
+import { EMAIL_VALIDATION_REGEX } from '@/utils/validation';
 import { RuleType } from 'types/FieldRule';
 import { FormFieldType } from 'types/FormField';
 

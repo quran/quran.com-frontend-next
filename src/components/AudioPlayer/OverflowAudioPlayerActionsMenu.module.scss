@@ -25,4 +25,8 @@
     inset-inline-start: 50% !important;
     transform: translate3d(-50%, 0, 0) !important;
   }
+
+  @include breakpoints.smallerThanTablet {
+    position: fixed !important;
+  }
 }

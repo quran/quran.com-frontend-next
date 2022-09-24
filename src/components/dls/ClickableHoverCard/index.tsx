@@ -1,7 +1,7 @@
 import React, { ReactNode } from 'react';
 
-import HoverCard from 'src/components/dls/HoverCard';
-import Popover from 'src/components/dls/Popover';
+import HoverCard from '@/dls/HoverCard';
+import Popover from '@/dls/Popover';
 
 export enum ContentSide {
   TOP = 'top',

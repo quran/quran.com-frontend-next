@@ -1,4 +1,4 @@
-import useBrowserLayoutEffect from 'src/hooks/useBrowserLayoutEffect';
+import useBrowserLayoutEffect from '@/hooks/useBrowserLayoutEffect';
 
 /**
  * A hook that will run when enabled that will manually set the zIndex of the parent of

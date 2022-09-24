@@ -5,15 +5,14 @@ import React from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import Image from 'next/image';
 
-import BackIcon from '../../../../public/icons/west.svg';
-
 import styles from './Info.module.scss';
 
-import Button, { ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
-import { logButtonClick } from 'src/utils/eventLogger';
-import { getBlurDataUrl } from 'src/utils/image';
-import { toLocalizedNumber } from 'src/utils/locale';
-import { getSurahNavigationUrl } from 'src/utils/navigation';
+import Button, { ButtonSize, ButtonVariant } from '@/dls/Button/Button';
+import BackIcon from '@/icons/west.svg';
+import { logButtonClick } from '@/utils/eventLogger';
+import { getBlurDataUrl } from '@/utils/image';
+import { toLocalizedNumber } from '@/utils/locale';
+import { getSurahNavigationUrl } from '@/utils/navigation';
 import Chapter from 'types/Chapter';
 import ChapterInfo from 'types/ChapterInfo';
 

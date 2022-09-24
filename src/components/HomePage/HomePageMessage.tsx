@@ -1,16 +1,13 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
-// import useTranslation from 'next-translate/useTranslation';
-
-import CloseIcon from '../../../public/icons/close.svg';
-import Button, { ButtonShape, ButtonSize, ButtonVariant } from '../dls/Button/Button';
-
 import styles from './HomePageMessage.module.scss';
 
-import { logEvent } from 'src/utils/eventLogger';
-import openGivingLoopPopup from 'src/utils/givingloop';
+import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
+import CloseIcon from '@/icons/close.svg';
+import { makeDonateUrl } from '@/utils/apiPaths';
+import { logEvent } from '@/utils/eventLogger';
 
 type HomePageMessageProps = {
   title?: string;
@@ -25,14 +22,7 @@ const HomePageMessage = ({
   onClose,
 }: HomePageMessageProps) => {
   const { t } = useTranslation('common');
-  const [isLoading, setIsLoading] = useState(false);
   const onDonateClicked = () => {
-    openGivingLoopPopup();
-    setIsLoading(true);
-    setTimeout(() => {
-      setIsLoading(false);
-    }, 5000);
-
     logEvent('donate_button_clicked', {
       source: 'cta_welcome_message',
     });
@@ -47,26 +37,12 @@ const HomePageMessage = ({
 
       <div className={styles.ctaContainer}>
         <Button
-          isLoading={isLoading}
           isNewTab
           onClick={onDonateClicked}
           className={styles.ctaPrimary}
+          href={makeDonateUrl(true)}
         >
           {t('fundraising-sticky-banner.cta')}
-        </Button>
-
-        <Button
-          isNewTab
-          href="https://donate.quran.com"
-          onClick={() => {
-            logEvent('donate_button_clicked', {
-              source: 'learn_more_welcome_message',
-            });
-          }}
-          className={styles.ctaSecondary}
-          variant={ButtonVariant.Outlined}
-        >
-          {t('fundraising.learn-more')}
         </Button>
         <div className={styles.closeIcon}>
           <Button

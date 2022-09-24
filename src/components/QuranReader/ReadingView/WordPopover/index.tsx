@@ -6,13 +6,13 @@ import ReadingViewWordActionsMenu from '../WordActionsMenu';
 
 import styles from './WordPopover.module.scss';
 
-import Popover, { ContentSide } from 'src/components/dls/Popover';
-import useLongPress from 'src/hooks/useLongPress';
+import Popover, { ContentSide } from '@/dls/Popover';
+import useLongPress from '@/hooks/useLongPress';
 import {
   setReadingViewSelectedVerseKey,
   setReadingViewHoveredVerseKey,
-} from 'src/redux/slices/QuranReader/readingViewVerse';
-import { logEvent } from 'src/utils/eventLogger';
+} from '@/redux/slices/QuranReader/readingViewVerse';
+import { logEvent } from '@/utils/eventLogger';
 import Word from 'types/Word';
 
 type Props = {

@@ -1,0 +1,46 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin-block-end: var(--spacing-large);
+  font-size: var(--font-size-large);
+}
+
+.itemContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  cursor: pointer;
+}
+
+.itemTitle {
+  font-weight: var(--font-weight-bold);
+}
+
+.itemInfo {
+  display: flex;
+  align-items: center;
+}
+
+.itemIcon {
+  display: flex;
+  --icon-size: var(--spacing-medium);
+  width: var(--icon-size);
+  > svg {
+    width: 100%;
+  }
+}
+
+.itemCount {
+  margin-inline-start: var(--spacing-xxsmall);
+}
+
+.collectionListContainer {
+  > * + * {
+    margin-block-start: var(--spacing-xsmall);
+  }
+}
+
+.collectionListEmpty {
+  display: flex;
+  justify-content: center;
+}

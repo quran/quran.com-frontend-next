@@ -2,20 +2,19 @@ import React from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
-import TrendUpIcon from '../../../../public/icons/trend-up.svg';
-
 import Header from './Header';
 import styles from './PreInput.module.scss';
 import SearchItem from './SearchItem';
 import SearchQuerySuggestion from './SearchQuerySuggestion';
 
-import Link from 'src/components/dls/Link/Link';
-import SearchHistory from 'src/components/Search/SearchHistory';
-import useGetChaptersData from 'src/hooks/useGetChaptersData';
-import { getChapterData } from 'src/utils/chapter';
-import { logButtonClick } from 'src/utils/eventLogger';
-import { toLocalizedNumber, toLocalizedVerseKey } from 'src/utils/locale';
-import { getSurahNavigationUrl } from 'src/utils/navigation';
+import SearchHistory from '@/components/Search/SearchHistory';
+import Link from '@/dls/Link/Link';
+import useGetChaptersData from '@/hooks/useGetChaptersData';
+import TrendUpIcon from '@/icons/trend-up.svg';
+import { getChapterData } from '@/utils/chapter';
+import { logButtonClick } from '@/utils/eventLogger';
+import { toLocalizedNumber, toLocalizedVerseKey } from '@/utils/locale';
+import { getSurahNavigationUrl } from '@/utils/navigation';
 
 interface Props {
   onSearchKeywordClicked: (searchQuery: string) => void;

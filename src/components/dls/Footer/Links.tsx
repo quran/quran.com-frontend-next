@@ -2,9 +2,10 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from './Footer.module.scss';
 
-import Link, { LinkVariant } from 'src/components/dls/Link/Link';
-import useGetChaptersData from 'src/hooks/useGetChaptersData';
-import { logTarteelLinkClick } from 'src/utils/eventLogger';
+import Link, { LinkVariant } from '@/dls/Link/Link';
+import useGetChaptersData from '@/hooks/useGetChaptersData';
+import { makeDonateUrl } from '@/utils/apiPaths';
+import { logTarteelLinkClick } from '@/utils/eventLogger';
 
 const Links = () => {
   const { t, lang } = useTranslation('common');
@@ -23,7 +24,7 @@ const Links = () => {
         { text: t('quran-radio'), url: '/radio' },
         { text: t('reciters'), url: '/reciters' },
         { text: t('about'), url: '/about-us' },
-        { text: t('donate'), isExternal: true, url: 'https://donate.quran.com' },
+        { text: t('donate'), isExternal: true, url: makeDonateUrl() },
         { text: t('mobile-apps'), url: '/apps' },
         { text: t('developers'), url: '/developers' },
         { text: t('product-updates'), url: '/product-updates' },

@@ -4,11 +4,11 @@ import { decamelizeKeys } from 'humps';
 
 import { getDefaultWordFields, getMushafId, ITEMS_PER_PAGE, makeUrl } from './api';
 
-import { DEFAULT_RECITER } from 'src/redux/defaultSettings/defaultSettings';
+import { DEFAULT_RECITER } from '@/redux/defaultSettings/defaultSettings';
 import {
   getReadingPreferencesInitialState,
   getTranslationsInitialState,
-} from 'src/redux/defaultSettings/util';
+} from '@/redux/defaultSettings/util';
 import { AdvancedCopyRequest, PagesLookUpRequest, SearchRequest } from 'types/ApiRequests';
 import { MushafLines, QuranFont } from 'types/QuranReader';
 
@@ -216,6 +216,34 @@ export const makeJuzVersesUrl = (
 ): string => makeUrl(`/verses/by_juz/${id}`, getVersesParams(currentLocale, params));
 
 /**
+ * Compose the url for Rub el Hizb's verses API.
+ *
+ * @param {string} id  the Id of the Rub el Hizb.
+ * @param {string} currentLocale  the locale.
+ * @param {Record<string, unknown>} params  in-case we need to over-ride the default params.
+ * @returns {string}
+ */
+export const makeRubVersesUrl = (
+  id: string | number,
+  currentLocale: string,
+  params?: Record<string, unknown>,
+): string => makeUrl(`/verses/by_rub_el_hizb/${id}`, getVersesParams(currentLocale, params));
+
+/**
+ * Compose the url for Hizb's verses API.
+ *
+ * @param {string} id  the Id of the hizb.
+ * @param {string} currentLocale  the locale.
+ * @param {Record<string, unknown>} params  in-case we need to over-ride the default params.
+ * @returns {string}
+ */
+export const makeHizbVersesUrl = (
+  id: string | number,
+  currentLocale: string,
+  params?: Record<string, unknown>,
+): string => makeUrl(`/verses/by_hizb/${id}`, getVersesParams(currentLocale, params));
+
+/**
  * Compose the url for by verse key API.
  *
  * @param {string} verseKey  the Id of the juz.
@@ -252,6 +280,9 @@ export const makePageVersesUrl = (
  * @returns {string}
  */
 export const makeFootnoteUrl = (footnoteId: string): string => makeUrl(`/foot_notes/${footnoteId}`);
+
+export const makeDonateUrl = (showDonationPopup = false) =>
+  `https://donate.quran.com${showDonationPopup ? '?showDonationPopup' : ''}`;
 
 export const makeVerseReflectionsUrl = (chapterId: string, verseNumber: string, lang: string) => {
   // TODO: revert this back once the API is ready

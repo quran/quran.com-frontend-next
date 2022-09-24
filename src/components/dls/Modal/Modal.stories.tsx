@@ -5,21 +5,12 @@ import { useState } from 'react';
 
 import Modal from './Modal';
 
-import Button, { ButtonVariant, ButtonType } from 'src/components/dls/Button/Button';
+import Button, { ButtonVariant, ButtonType } from '@/dls/Button/Button';
 
 export default {
   title: 'dls/Modal',
   component: Modal,
   argTypes: {
-    isOpen: {
-      control: {
-        type: 'boolean',
-      },
-      defaultValue: false,
-      table: {
-        category: 'Optional',
-      },
-    },
     isInvertedOverlay: {
       control: {
         type: 'boolean',
@@ -53,11 +44,6 @@ export default {
       },
     },
     trigger: {
-      table: {
-        category: 'Optional',
-      },
-    },
-    onClickOutside: {
       table: {
         category: 'Optional',
       },
@@ -195,7 +181,7 @@ const WithControlledComponentTemplate = (args) => {
           <p>Some content contained within this modal</p>
         </Modal.Body>
         <Modal.Footer>
-          <Modal.Action>Cancel</Modal.Action>
+          <Modal.Action onClick={() => setOpen(false)}>Cancel</Modal.Action>
           <Modal.Action isDisabled>Submit</Modal.Action>
         </Modal.Footer>
       </Modal>

@@ -2,30 +2,30 @@ import React from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
-import IconDevelopers from '../../../../../public/icons/developers.svg';
-import IconFeedback from '../../../../../public/icons/feedback.svg';
-import IconHome from '../../../../../public/icons/home.svg';
-import IconInfo from '../../../../../public/icons/info.svg';
-import IconLock from '../../../../../public/icons/lock.svg';
-import MobileIcon from '../../../../../public/icons/mobile.svg';
-import IconProductUpdates from '../../../../../public/icons/product-updates.svg';
-import IconQ from '../../../../../public/icons/Q_simple.svg';
-import QuranReflect from '../../../../../public/icons/QR.svg';
-import IconQuestionMark from '../../../../../public/icons/question-mark.svg';
-import IconRadio2 from '../../../../../public/icons/radio-2.svg';
-import IconRadio from '../../../../../public/icons/radio.svg';
-import Tarteel from '../../../../../public/icons/tarteel.svg';
-// import MobileApps from '../MobileApps';
 import NavigationDrawerItem from '../NavigationDrawerItem';
 
 import styles from './NavigationDrawerBody.module.scss';
 
-import FundraisingBanner from 'src/components/Fundaraising/FundraisingBanner';
-import { logTarteelLinkClick } from 'src/utils/eventLogger';
+import FundraisingBanner from '@/components/Fundaraising/FundraisingBanner';
+import IconDevelopers from '@/icons/developers.svg';
+import IconFeedback from '@/icons/feedback.svg';
+import IconHome from '@/icons/home.svg';
+import IconInfo from '@/icons/info.svg';
+import IconLock from '@/icons/lock.svg';
+import MobileIcon from '@/icons/mobile.svg';
+import IconProductUpdates from '@/icons/product-updates.svg';
+import IconQ from '@/icons/Q_simple.svg';
+import QuranReflect from '@/icons/QR.svg';
+import IconQuestionMark from '@/icons/question-mark.svg';
+import IconRadio2 from '@/icons/radio-2.svg';
+import IconRadio from '@/icons/radio.svg';
+import Tarteel from '@/icons/tarteel.svg';
+// import MobileApps from '../MobileApps';
+import { logTarteelLinkClick } from '@/utils/eventLogger';
 
-// import IconDonate from '../../../../../public/icons/donate.svg';
-// import IconUpdates from '../../../../../public/icons/updates.svg';
-// import IconCollection from '../../../../../public/icons/collection.svg';
+// import IconDonate from '@/icons/donate.svg';
+// import IconUpdates from '@/icons/updates.svg';
+// import IconCollection from '@/icons/collection.svg';
 
 const NavigationDrawerBody = () => {
   const { t } = useTranslation('common');

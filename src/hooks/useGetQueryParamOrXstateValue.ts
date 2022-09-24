@@ -8,8 +8,8 @@ import {
   equalityCheckerByType,
   getQueryParamValueByType,
   QueryParamValueType,
-} from 'src/utils/query-params';
-import { isValidReciterId } from 'src/utils/queryParamValidator';
+} from '@/utils/query-params';
+import { isValidReciterId } from '@/utils/queryParamValidator';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import QueryParam from 'types/QueryParam';
 
@@ -63,7 +63,7 @@ const useGetQueryParamOrXstateValue = (
 
       const parsedQueryParamValue = getQueryParamValueByType(paramStringValue, valueType);
       const checkEquality = equalityCheckerByType[valueType];
-      const isQueryParamDifferent = checkEquality(parsedQueryParamValue, selectedValue);
+      const isQueryParamDifferent = !checkEquality(parsedQueryParamValue, selectedValue);
 
       setValueDetails({
         value: parsedQueryParamValue,

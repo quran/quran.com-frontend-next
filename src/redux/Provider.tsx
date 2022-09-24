@@ -7,10 +7,11 @@ import { PersistGate } from 'redux-persist/integration/react';
 
 import getStore from './store';
 
-import syncUserPreferences from 'src/redux/actions/sync-user-preferences';
-import { getUserPreferences } from 'src/utils/auth/api';
-import { isLoggedIn } from 'src/utils/auth/login';
-import { setLocaleCookie } from 'src/utils/cookies';
+import GateLoader from '@/components/GateLoader';
+import syncUserPreferences from '@/redux/actions/sync-user-preferences';
+import { getUserPreferences } from '@/utils/auth/api';
+import { isLoggedIn } from '@/utils/auth/login';
+import { setLocaleCookie } from '@/utils/cookies';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 
@@ -63,7 +64,7 @@ const ReduxProvider = ({ children, locale }) => {
   if (isClient) {
     return (
       <Provider store={store}>
-        <PersistGate loading={null} persistor={persistor} onBeforeLift={onBeforeLift}>
+        <PersistGate loading={<GateLoader />} persistor={persistor} onBeforeLift={onBeforeLift}>
           {children}
         </PersistGate>
       </Provider>

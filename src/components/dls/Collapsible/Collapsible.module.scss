@@ -1,0 +1,26 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.headerLeft {
+  display: flex;
+}
+
+.prefixContainer {
+  display: flex;
+  align-items: center;
+  margin-inline-end: var(--spacing-xxsmall);
+}
+
+.prefixRotated {
+  transform: rotate(180deg);
+}
+
+.suffixContainer {
+  display: flex;
+  align-items: center;
+  margin-inline-end: var(--spacing-xxsmall);
+}

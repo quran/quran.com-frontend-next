@@ -1,25 +1,26 @@
 /* eslint-disable max-lines */
-import React, { useState, useCallback } from 'react';
+import React, { useState, useCallback, useEffect } from 'react';
 
 import classNames from 'classnames';
 import groupBy from 'lodash/groupBy';
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useSelector } from 'react-redux';
 
-import IconSearch from '../../../../public/icons/search.svg';
 import CommandsList, { Command } from '../CommandsList';
 
 import styles from './CommandBarBody.module.scss';
 
-import DataFetcher from 'src/components/DataFetcher';
-import TarteelAttribution from 'src/components/TarteelAttribution/TarteelAttribution';
-import VoiceSearchBodyContainer from 'src/components/TarteelVoiceSearch/BodyContainer';
-import TarteelVoiceSearchTrigger from 'src/components/TarteelVoiceSearch/Trigger';
-import { selectRecentNavigations } from 'src/redux/slices/CommandBar/state';
-import { selectIsCommandBarVoiceFlowStarted } from 'src/redux/slices/voiceSearch';
-import { makeSearchResultsUrl } from 'src/utils/apiPaths';
-import { areArraysEqual } from 'src/utils/array';
-import { logButtonClick } from 'src/utils/eventLogger';
+import DataFetcher from '@/components/DataFetcher';
+import TarteelAttribution from '@/components/TarteelAttribution/TarteelAttribution';
+import VoiceSearchBodyContainer from '@/components/TarteelVoiceSearch/BodyContainer';
+import TarteelVoiceSearchTrigger from '@/components/TarteelVoiceSearch/Trigger';
+import useDebounce from '@/hooks/useDebounce';
+import IconSearch from '@/icons/search.svg';
+import { selectRecentNavigations } from '@/redux/slices/CommandBar/state';
+import { selectIsCommandBarVoiceFlowStarted } from '@/redux/slices/voiceSearch';
+import { makeSearchResultsUrl } from '@/utils/apiPaths';
+import { areArraysEqual } from '@/utils/array';
+import { logButtonClick, logTextSearchQuery } from '@/utils/eventLogger';
 import { SearchResponse } from 'types/ApiResponses';
 import { SearchNavigationType } from 'types/SearchNavigationResult';
 
@@ -28,6 +29,16 @@ const NAVIGATE_TO = [
     name: 'Juz 1',
     key: 1,
     resultType: SearchNavigationType.JUZ,
+  },
+  {
+    name: 'Hizb 1',
+    key: 1,
+    resultType: SearchNavigationType.HIZB,
+  },
+  {
+    name: 'Rub el Hizb 1',
+    key: 1,
+    resultType: SearchNavigationType.RUB_EL_HIZB,
   },
   {
     name: 'Page 1',
@@ -46,11 +57,23 @@ const NAVIGATE_TO = [
   },
 ];
 
+const DEBOUNCING_PERIOD_MS = 1500;
+
 const CommandBarBody: React.FC = () => {
   const { t } = useTranslation('common');
   const recentNavigations = useSelector(selectRecentNavigations, areArraysEqual);
   const isVoiceSearchFlowStarted = useSelector(selectIsCommandBarVoiceFlowStarted, shallowEqual);
   const [searchQuery, setSearchQuery] = useState<string>(null);
+  // Debounce search query to avoid having to call the API on every type. The API will be called once the user stops typing.
+  const debouncedSearchQuery = useDebounce<string>(searchQuery, DEBOUNCING_PERIOD_MS);
+
+  useEffect(() => {
+    // only when the search query has a value we call the API.
+    if (debouncedSearchQuery) {
+      logTextSearchQuery(debouncedSearchQuery, 'command_bar');
+    }
+  }, [debouncedSearchQuery]);
+
   /**
    * Handle when the search query is changed.
    *

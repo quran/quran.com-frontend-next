@@ -4,10 +4,10 @@ import classNames from 'classnames';
 
 import styles from './ComboboxItems.module.scss';
 
-import ComboboxItem, { DropdownItem } from 'src/components/dls/Forms/Combobox/ComboboxItem';
-import ComboboxSize from 'src/components/dls/Forms/Combobox/types/ComboboxSize';
-import { Value } from 'src/components/dls/Forms/Combobox/types/Values';
-import useScroll from 'src/hooks/useScrollToElement';
+import ComboboxItem, { DropdownItem } from '@/dls/Forms/Combobox/ComboboxItem';
+import ComboboxSize from '@/dls/Forms/Combobox/types/ComboboxSize';
+import { Value } from '@/dls/Forms/Combobox/types/Values';
+import useScroll from '@/hooks/useScrollToElement';
 
 interface Props {
   isOpened: boolean;

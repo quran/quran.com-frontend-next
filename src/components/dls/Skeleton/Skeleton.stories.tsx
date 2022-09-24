@@ -1,7 +1,7 @@
 /* eslint-disable react/no-multi-comp */
 import Skeleton from './Skeleton';
 
-import Button from 'src/components/dls/Button/Button';
+import Button from '@/dls/Button/Button';
 
 export default {
   title: 'dls/Skeleton',

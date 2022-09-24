@@ -5,11 +5,11 @@ import classNames from 'classnames';
 
 import styles from './Button.module.scss';
 
-import Link from 'src/components/dls/Link/Link';
-import Spinner, { SpinnerSize } from 'src/components/dls/Spinner/Spinner';
-import Tooltip, { ContentSide } from 'src/components/dls/Tooltip';
-import Wrapper from 'src/components/Wrapper/Wrapper';
-import useDirection from 'src/hooks/useDirection';
+import Wrapper from '@/components/Wrapper/Wrapper';
+import Link from '@/dls/Link/Link';
+import Spinner, { SpinnerSize } from '@/dls/Spinner/Spinner';
+import Tooltip, { ContentSide } from '@/dls/Tooltip';
+import useDirection from '@/hooks/useDirection';
 
 export enum ButtonSize {
   Small = 'small',
@@ -132,6 +132,8 @@ const Button: React.FC<ButtonProps> = ({
         shouldPrefetch={prefetch}
         isShallow={shallowRouting}
         {...(onClick && { onClick })}
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        {...(ariaLabel && { ariaLabel })}
       >
         <div dir={direction} className={classes} data-auto-flip-icon={shouldFlipOnRTL} {...props}>
           {prefixFinal && (
