@@ -63,7 +63,7 @@ const useGetQueryParamOrXstateValue = (
 
       const parsedQueryParamValue = getQueryParamValueByType(paramStringValue, valueType);
       const checkEquality = equalityCheckerByType[valueType];
-      const isQueryParamDifferent = checkEquality(parsedQueryParamValue, selectedValue);
+      const isQueryParamDifferent = !checkEquality(parsedQueryParamValue, selectedValue);
 
       setValueDetails({
         value: parsedQueryParamValue,

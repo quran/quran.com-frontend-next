@@ -156,6 +156,13 @@ const QueryParamMessage: React.FC<Props> = ({
         }),
       );
     }
+
+    if (reciterQueryParamDifferent) {
+      audioService.send({
+        type: 'CHANGE_RECITER',
+        reciterId: Number(router.query[QueryParam.Reciter]),
+      });
+    }
   };
 
   const areUrlParamsUsed =
