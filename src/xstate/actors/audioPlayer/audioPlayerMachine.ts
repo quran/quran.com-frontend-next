@@ -3,6 +3,7 @@
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable jsdoc/check-tag-names */
 /* eslint-disable max-lines */
+
 import random from 'lodash/random';
 import { assign, createMachine, send, spawn } from 'xstate';
 import { pure, stop } from 'xstate/lib/actions';
@@ -420,9 +421,11 @@ export const audioPlayerMachine =
                     PLAY_AYAH: [
                       {
                         actions: ['setNewSurahAndAyahNumbers'],
+                        // actions: ['setSurahAndAyahNumbers'],
                         description: 'When the user chooses to play an Ayah of another Surah',
                         cond: 'isDifferentSurah',
                         target: '#audioPlayer.VISIBLE.SURAH_MISMATCH',
+                        // target: '#audioPlayer.VISIBLE.LOADING_RECITER_DATA',
                       },
                       {
                         actions: [
@@ -444,10 +447,10 @@ export const audioPlayerMachine =
                         target: '#audioPlayer.VISIBLE.LOADING_CUSTOM_RECITER_DATA',
                       },
                       {
-                        actions: ['setNewSurahAndResetNewAyahNumber'],
+                        actions: ['setSurahAndResetAyahNumber'],
                         description: 'When the user chooses to play another Surah',
                         cond: 'isDifferentSurah',
-                        target: '#audioPlayer.VISIBLE.SURAH_MISMATCH',
+                        target: '#audioPlayer.VISIBLE.LOADING_RECITER_DATA',
                       },
                       {
                         actions: ['exitRadio'],
@@ -678,10 +681,10 @@ export const audioPlayerMachine =
                 target: '.AUDIO_PLAYER_INITIATED.PLAYING.ACTIVE',
               },
               {
-                actions: ['setNewSurahAndAyahNumbers'],
+                actions: ['setSurahAndAyahNumbers'],
                 description: 'When the user chooses to play an Ayah of another Surah',
                 cond: 'isDifferentSurah',
-                target: '.SURAH_MISMATCH',
+                target: 'VISIBLE.LOADING_RECITER_DATA',
               },
               {
                 actions: [
@@ -708,9 +711,11 @@ export const audioPlayerMachine =
                 target: 'VISIBLE.LOADING_CUSTOM_RECITER_DATA',
               },
               {
+                // actions: 'setSurahAndResetAyahNumber',
                 actions: 'setNewSurahAndResetNewAyahNumber',
                 description: 'When the user chooses to play another Surah',
                 cond: 'isDifferentSurah',
+                // target: 'VISIBLE.LOADING_RECITER_DATA',
                 target: '.SURAH_MISMATCH',
               },
             ],
