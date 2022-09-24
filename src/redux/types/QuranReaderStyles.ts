@@ -1,4 +1,4 @@
-import { MushafLines, QuranFont } from 'types/QuranReader';
+import { MushafLines, QuranFont } from '@/types/QuranReader';
 
 type QuranReaderStyles = {
   tafsirFontScale: number;
