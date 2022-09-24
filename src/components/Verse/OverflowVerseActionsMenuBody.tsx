@@ -4,20 +4,19 @@ import clipboardCopy from 'clipboard-copy';
 import useTranslation from 'next-translate/useTranslation';
 import { useSelector, shallowEqual } from 'react-redux';
 
-import CopyIcon from '../../../public/icons/copy.svg';
-import TafsirVerseAction from '../QuranReader/TafsirView/TafsirVerseAction';
-
 import BookmarkAction from './BookmarkAction';
 import SaveToCollectionAction from './SaveToCollectionAction';
 import VerseActionAdvancedCopy from './VerseActionAdvancedCopy';
 import VerseActionRepeatAudio from './VerseActionRepeatAudio';
 
+import WordByWordVerseAction from '@/components/QuranReader/ReadingView/WordByWordVerseAction';
+import TafsirVerseAction from '@/components/QuranReader/TafsirView/TafsirVerseAction';
+import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
+import CopyIcon from '@/icons/copy.svg';
+import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import { isLoggedIn } from '@/utils/auth/login';
-import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
-import WordByWordVerseAction from 'src/components/QuranReader/ReadingView/WordByWordVerseAction';
-import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
-import { logButtonClick } from 'src/utils/eventLogger';
-import { QuranFont } from 'types/QuranReader';
+import { logButtonClick } from '@/utils/eventLogger';
+import { getWordTextFieldNameByFont } from '@/utils/word';
 import Verse from 'types/Verse';
 
 interface Props {
@@ -73,9 +72,7 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
       `${isTranslationView ? 'translation_view' : 'reading_view'}_verse_actions_menu_copy`,
     );
     const verseText = verse.words
-      .map((word) =>
-        quranReaderStyles.quranFont === QuranFont.IndoPak ? word.textIndopak : word.textUthmani,
-      )
+      .map((word) => word[getWordTextFieldNameByFont(quranReaderStyles.quranFont)])
       .join(' ');
     clipboardCopy(verseText).then(() => {
       setIsCopied(true);

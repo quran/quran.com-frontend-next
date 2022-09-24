@@ -2,6 +2,7 @@ import clipboardCopy from 'clipboard-copy';
 
 import { DATA_ATTRIBUTE_WORD_LOCATION } from '@/dls/QuranWord/QuranWord';
 import { getWordDataByLocation } from '@/utils/verse';
+import { getWordTextFieldNameByFont } from '@/utils/word';
 import { QuranFont } from 'types/QuranReader';
 import Verse from 'types/Verse';
 
@@ -63,11 +64,7 @@ const extractText = (wordLocation: string, verses: Verse[], quranFont: QuranFont
   if (!selectedWord) {
     return '';
   }
-
-  if (quranFont === QuranFont.IndoPak) {
-    return selectedWord.textIndopak;
-  }
-  return selectedWord.textUthmani;
+  return selectedWord[getWordTextFieldNameByFont(quranFont)];
 };
 
 export default onCopyQuranWords;
