@@ -63,11 +63,7 @@ export interface Typegen0 {
   eventsCausingActions: {
     continueFromLastTimestamp: "END";
     decrementAyah: "PREV_AYAH";
-    exitRadio:
-      | "CONFIRM_PLAY_MISMATCHED_SURAH"
-      | "PLAY_AYAH"
-      | "PLAY_SURAH"
-      | "SET_REPEAT_SETTING";
+    exitRadio: "PLAY_AYAH" | "PLAY_SURAH" | "SET_REPEAT_SETTING";
     forwardChangeReciterToRadioMachine: "CHANGE_RECITER";
     forwardEndedToRadioMachine: "END";
     forwardPlayToRadioMachine: "PLAY_RADIO";
@@ -103,21 +99,15 @@ export interface Typegen0 {
       | "done.invoke.fetchRepeatData";
     setAudioRef: "SET_AUDIO_REF";
     setAyahNumber: "PLAY_AYAH";
-    setCurrentSurahAndAyahAsNewSurahAndAyah: "CONFIRM_PLAY_MISMATCHED_SURAH";
     setElapsedTime: "TOGGLE";
     setInitialContext: "SET_INITIAL_CONTEXT";
-    setNewSurahAndAyahNumbers: "PLAY_AYAH";
-    setNewSurahAndResetNewAyahNumber: "PLAY_SURAH";
     setPlaybackRate: "SET_PLAYBACK_SPEED";
     setRadioStationDetails: "PLAY_RADIO_TRACK";
     setReciterId: "CHANGE_RECITER";
     setRecitersList: "SET_RECITERS_LIST";
     setSurahAndAyahNumbers: "PLAY_AYAH";
     setSurahAndResetAyahNumber: "PLAY_SURAH";
-    stopRepeatActor:
-      | "CONFIRM_PLAY_MISMATCHED_SURAH"
-      | "PLAY_RADIO"
-      | "REPEAT_FINISHED";
+    stopRepeatActor: "PLAY_RADIO" | "REPEAT_FINISHED";
     updateDownloadProgress: "PROGRESS";
     updateRepeatAyah: "PLAY_AYAH";
     updateRepeatVerseTimings:
@@ -129,14 +119,12 @@ export interface Typegen0 {
     fetchCustomReciter: "PLAY_SURAH";
     fetchReciter:
       | "CHANGE_RECITER"
-      | "CONFIRM_PLAY_MISMATCHED_SURAH"
       | "PLAY_AYAH"
       | "PLAY_RADIO_TRACK"
       | "PLAY_SURAH"
       | "SET_REPEAT_SETTING";
     fetchRepeatData: "SET_REPEAT_SETTING";
     initMediaSession:
-      | "CANCEL_PLAY_MISMATCHED_SURAH"
       | "PLAY_AYAH"
       | "PLAY_SURAH"
       | "done.invoke.fetchCustomReciter"
@@ -189,7 +177,6 @@ export interface Typegen0 {
     | "VISIBLE.LOADING_RECITER_DATA"
     | "VISIBLE.LOADING_RECITER_DATA_AND_PAUSE"
     | "VISIBLE.LOADING_REPEAT_DATA"
-    | "VISIBLE.SURAH_MISMATCH"
     | {
         VISIBLE?:
           | "AUDIO_PLAYER_INITIATED"
@@ -198,7 +185,6 @@ export interface Typegen0 {
           | "LOADING_RECITER_DATA"
           | "LOADING_RECITER_DATA_AND_PAUSE"
           | "LOADING_REPEAT_DATA"
-          | "SURAH_MISMATCH"
           | {
               AUDIO_PLAYER_INITIATED?:
                 | "DELAYING"
