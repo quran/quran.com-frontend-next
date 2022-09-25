@@ -123,7 +123,7 @@ const Drawer: React.FC<Props> = ({
         closeDrawer('navigation');
       }
     });
-  }, [closeDrawer, router.events, isNavbarVisible, isOpen, closeOnNavigation]);
+  }, [closeDrawer, dispatch, router.events, isNavbarVisible, isOpen, closeOnNavigation]);
 
   useOutsideClickDetector(
     drawerRef,
