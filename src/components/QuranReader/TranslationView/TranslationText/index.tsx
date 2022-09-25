@@ -172,6 +172,7 @@ const TranslationText: React.FC<Props> = ({
             styles[langData.direction],
             styles[langData.font],
           )}
+          // eslint-disable-next-line i18next/no-literal-string
         >
           — {resourceName}
         </p>

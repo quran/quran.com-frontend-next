@@ -73,6 +73,7 @@ const SearchResultItem: React.FC<Props> = ({ result, source }) => {
         {result.translations?.map((translation) => (
           <div key={translation.resourceId} className={styles.translationContainer}>
             <div dangerouslySetInnerHTML={{ __html: translation.text }} />
+            {/* eslint-disable-next-line i18next/no-literal-string */}
             <p className={styles.translationName}> - {translation.resourceName}</p>
           </div>
         ))}

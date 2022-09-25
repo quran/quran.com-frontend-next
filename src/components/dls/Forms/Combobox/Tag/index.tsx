@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unknown-property */
 import React, { memo } from 'react';
 
 import classNames from 'classnames';

@@ -17,7 +17,7 @@ const CommandBarBody = dynamic(() => import('./CommandBarBody'), {
   ssr: false,
   loading: () => (
     <div className={styles.loadingContainer}>
-      <Spinner />,
+      <Spinner />
     </div>
   ),
 });

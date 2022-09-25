@@ -118,6 +118,7 @@ const RecitationPage = ({
       />
       <div className={classNames(layoutStyle.flow)}>
         <div className={classNames(layoutStyle.flowItem, styles.container)}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             className={styles.reciterImage}
             alt={selectedReciter.translatedName.name}
@@ -125,6 +126,7 @@ const RecitationPage = ({
           />
           <div>
             <div className={styles.chapterName}>
+              {/* eslint-disable-next-line i18next/no-literal-string */}
               {selectedChapter.id}. {selectedChapter.transliteratedName}
             </div>
             <div className={styles.reciterName}>{selectedReciter.translatedName.name}</div>

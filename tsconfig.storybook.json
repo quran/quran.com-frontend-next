@@ -14,6 +14,7 @@
       "@/icons/*": ["../public/icons/*"],
       "@/dls/*": ["./components/dls/*"],
       "@/data/*": ["../data/*"],
+      "@/types/*": ["../types/*"],
       "@/*": ["./*"],
     },
     "forceConsistentCasingInFileNames": true,

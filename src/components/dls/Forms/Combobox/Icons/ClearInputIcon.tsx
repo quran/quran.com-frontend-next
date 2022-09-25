@@ -16,6 +16,7 @@ const ClearInputIcon: React.FC<Props> = ({ shouldShowIcon, onClearButtonClicked 
   return (
     <span
       className={styles.clearIconContainer}
+      // eslint-disable-next-line react/no-unknown-property
       unselectable="on"
       aria-hidden="true"
       onClick={onClearButtonClicked}

@@ -110,6 +110,7 @@ const ContextMenu = () => {
             <p className={classNames(styles.alignEnd)}>
               {isExpanded && (
                 <span className={styles.secondaryInfo}>
+                  {/* eslint-disable-next-line i18next/no-literal-string */}
                   {t('juz')} {juzNumber} / {t('hizb')} {localizedHizb} -{' '}
                 </span>
               )}
