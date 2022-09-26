@@ -204,7 +204,10 @@
     "reciters": "Recituesit",
     "reflect": "Pasqyrim",
     "remove": "Hiq",
+    "rename": "Riemërto",
     "retry": "Provo sërish",
+    "rub": "Rub el Hizb",
+    "save-to-collection": "Ruaje në Koleksion",
     "search-for": "Kërko për \"{{searchQuery}}\"",
     "search-results": "{{count}} rezultatet e  kërkimit",
     "search": {
@@ -243,6 +246,7 @@
     "share": "Shpërndaje",
     "shared": "Lidhja është kopjuar në kujtesë!",
     "sidebar": {
+        "search-hizb": "Kërko Hizb",
         "search-juz": "Kërko Xhuzin",
         "search-page": "Kërko Faqja",
         "search-surah": "Kërko suren",

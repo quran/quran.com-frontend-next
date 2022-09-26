@@ -95,7 +95,7 @@ const TranslationView = ({
         reciterQueryParamDifferent={reciterQueryParamDifferent}
         wordByWordLocaleQueryParamDifferent={wordByWordLocaleQueryParamDifferent}
       />
-      <div onCopy={(event) => onCopyQuranWords(event, verses)}>
+      <div onCopy={(event) => onCopyQuranWords(event, verses, quranReaderStyles.quranFont)}>
         <Virtuoso
           ref={virtuosoRef}
           useWindowScroll

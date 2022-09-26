@@ -204,7 +204,10 @@
     "reciters": "ผู้อ่าน",
     "reflect": "สะท้อน",
     "remove": "ลบ",
+    "rename": "เปลี่ยนชื่อ",
     "retry": "ลองอีกครั้ง",
+    "rub": "รุบอุลฮิซบ์",
+    "save-to-collection": "บันทึกลงในคอลเล็กชัน",
     "search-for": "ค้นหา '{{searchQuery}}'",
     "search-results": "{{count}} ผลการค้นหา",
     "search": {
@@ -243,6 +246,7 @@
     "share": "แบ่งปัน",
     "shared": "คัดลอกลิงก์ไปยังคลิปบอร์ดแล้ว!",
     "sidebar": {
+        "search-hizb": "ค้นหาอัลฮิซบ์",
         "search-juz": "ค้นหา Juz",
         "search-page": "ค้นหาหน้า",
         "search-surah": "ค้นหา ซูเราะห์",

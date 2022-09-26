@@ -23,7 +23,7 @@ const BookmarksAndCollectionsSection = () => {
 
   const tabs = [{ title: t('tab.bookmarks'), value: View.Bookmarks }];
   if (isLoggedIn()) {
-    tabs.push({ title: t('tab.collections'), value: View.Collections });
+    tabs.push({ title: t('collection:collections'), value: View.Collections });
   }
 
   const onTabSelected = (newTab) => {

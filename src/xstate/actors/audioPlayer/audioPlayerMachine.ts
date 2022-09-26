@@ -3,6 +3,7 @@
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable jsdoc/check-tag-names */
 /* eslint-disable max-lines */
+
 import random from 'lodash/random';
 import { assign, createMachine, send, spawn } from 'xstate';
 import { pure, stop } from 'xstate/lib/actions';
@@ -133,23 +134,6 @@ export const audioPlayerMachine =
           description: 'Audio player is visible in the UI',
           initial: 'LOADING_RECITER_DATA',
           states: {
-            SURAH_MISMATCH: {
-              on: {
-                CONFIRM_PLAY_MISMATCHED_SURAH: {
-                  actions: [
-                    'setCurrentSurahAndAyahAsNewSurahAndAyah',
-                    'exitRadio',
-                    'stopRepeatActor',
-                  ],
-                  description: 'User confirms to play the new Surah',
-                  target: 'LOADING_RECITER_DATA',
-                },
-                CANCEL_PLAY_MISMATCHED_SURAH: {
-                  description: 'User cancels playing the new Surah',
-                  target: '#audioPlayer.VISIBLE.AUDIO_PLAYER_INITIATED.HISTORY',
-                },
-              },
-            },
             AUDIO_PLAYER_INITIATED: {
               description: 'File has been loaded and is ready to be played',
               initial: 'PAUSED',
@@ -298,6 +282,12 @@ export const audioPlayerMachine =
                   on: {
                     PLAY_AYAH: [
                       {
+                        actions: ['setSurahAndAyahNumbers', 'exitRadio', 'stopRepeatActor'],
+                        description: 'When the user chooses to play an Ayah of another Surah',
+                        cond: 'isDifferentSurah',
+                        target: '#audioPlayer.VISIBLE.LOADING_RECITER_DATA',
+                      },
+                      {
                         actions: ['setSurahAndAyahNumbers', 'setAudioPlayerCurrentTime'],
                       },
                     ],
@@ -419,10 +409,10 @@ export const audioPlayerMachine =
                     },
                     PLAY_AYAH: [
                       {
-                        actions: ['setNewSurahAndAyahNumbers'],
+                        actions: ['setSurahAndAyahNumbers', 'exitRadio', 'stopRepeatActor'],
                         description: 'When the user chooses to play an Ayah of another Surah',
                         cond: 'isDifferentSurah',
-                        target: '#audioPlayer.VISIBLE.SURAH_MISMATCH',
+                        target: '#audioPlayer.VISIBLE.LOADING_RECITER_DATA',
                       },
                       {
                         actions: [
@@ -439,15 +429,15 @@ export const audioPlayerMachine =
                     ],
                     PLAY_SURAH: [
                       {
-                        actions: ['setSurahAndResetAyahNumber', 'exitRadio'],
+                        actions: ['setSurahAndResetAyahNumber', 'exitRadio', 'stopRepeatActor'],
                         cond: 'isUsingCustomReciterId',
                         target: '#audioPlayer.VISIBLE.LOADING_CUSTOM_RECITER_DATA',
                       },
                       {
-                        actions: ['setNewSurahAndResetNewAyahNumber'],
+                        actions: ['setSurahAndResetAyahNumber', 'exitRadio', 'stopRepeatActor'],
                         description: 'When the user chooses to play another Surah',
                         cond: 'isDifferentSurah',
-                        target: '#audioPlayer.VISIBLE.SURAH_MISMATCH',
+                        target: '#audioPlayer.VISIBLE.LOADING_RECITER_DATA',
                       },
                       {
                         actions: ['exitRadio'],
@@ -678,10 +668,10 @@ export const audioPlayerMachine =
                 target: '.AUDIO_PLAYER_INITIATED.PLAYING.ACTIVE',
               },
               {
-                actions: ['setNewSurahAndAyahNumbers'],
+                actions: ['setSurahAndAyahNumbers', 'exitRadio', 'stopRepeatActor'],
                 description: 'When the user chooses to play an Ayah of another Surah',
                 cond: 'isDifferentSurah',
-                target: '.SURAH_MISMATCH',
+                target: 'VISIBLE.LOADING_RECITER_DATA',
               },
               {
                 actions: [
@@ -703,15 +693,15 @@ export const audioPlayerMachine =
                 target: '.AUDIO_PLAYER_INITIATED.PLAYING.ACTIVE',
               },
               {
-                actions: ['setSurahAndResetAyahNumber', 'exitRadio'],
+                actions: ['setSurahAndResetAyahNumber', 'exitRadio', 'stopRepeatActor'],
                 cond: 'isUsingCustomReciterId',
                 target: 'VISIBLE.LOADING_CUSTOM_RECITER_DATA',
               },
               {
-                actions: 'setNewSurahAndResetNewAyahNumber',
+                actions: ['setSurahAndResetAyahNumber', 'exitRadio', 'stopRepeatActor'],
                 description: 'When the user chooses to play another Surah',
                 cond: 'isDifferentSurah',
-                target: '.SURAH_MISMATCH',
+                target: 'VISIBLE.LOADING_RECITER_DATA',
               },
             ],
             PLAY_RADIO: {
@@ -803,15 +793,6 @@ export const audioPlayerMachine =
           reciterId: (context, event: any) => event.reciterId,
           surah: (context, event: any) => event.surah,
         }),
-        setNewSurahAndResetNewAyahNumber: assign({
-          newSurah: (context, event) => event.surah,
-          // eslint-disable-next-line @typescript-eslint/no-unused-vars
-          newAyahNumber: (context) => 1,
-        }),
-        setNewSurahAndAyahNumbers: assign({
-          newSurah: (context, event) => event.surah,
-          newAyahNumber: (context, event) => event.ayahNumber,
-        }),
         decrementAyah: assign({
           ayahNumber: (context) => context.ayahNumber - 1,
         }),
@@ -830,10 +811,6 @@ export const audioPlayerMachine =
         setSurahAndAyahNumbers: assign({
           surah: (context, event) => event.surah,
           ayahNumber: (context, event) => event.ayahNumber,
-        }),
-        setCurrentSurahAndAyahAsNewSurahAndAyah: assign({
-          surah: (context) => context.newSurah,
-          ayahNumber: (context) => context.newAyahNumber,
         }),
         setAudioRef: assign({
           audioPlayer: (context, event) => event.audioPlayerRef,

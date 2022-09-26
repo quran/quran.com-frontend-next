@@ -4,7 +4,7 @@
     "recently-read": "Recently Read",
     "tab": {
         "bookmarks": "Bookmarks",
-        "collections": "Collections"
+        "popular": "Popular"
     },
     "voice": {
         "trigger": "Quick access to anything"

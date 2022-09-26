@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useContext, useEffect, useState } from 'react';
+import { useContext } from 'react';
 
 import { useSelector as useXstateSelector } from '@xstate/react';
 import { useRouter } from 'next/router';
@@ -44,34 +44,31 @@ const useGetQueryParamOrXstateValue = (
   const { selector } = QUERY_PARAMS_DATA[queryParam];
 
   const selectedValue = useXstateSelector(audioService, selector);
-  const [valueDetails, setValueDetails] = useState({
+  const defaultValueDetails = {
     value: selectedValue,
     isQueryParamDifferent: false,
-  });
+  };
 
-  useEffect(() => {
-    // if the param exists in the url
-    if (isReady && query[queryParam]) {
-      const { validate, valueType } = QUERY_PARAMS_DATA[queryParam];
+  // if the param exists in the url
+  if (isReady && query[queryParam]) {
+    const { validate, valueType } = QUERY_PARAMS_DATA[queryParam];
 
-      const paramStringValue = String(query[queryParam]);
-      const isValidValue = validate(paramStringValue);
-      if (!isValidValue) {
-        setValueDetails({ isQueryParamDifferent: false, value: selectedValue });
-        return;
-      }
-
-      const parsedQueryParamValue = getQueryParamValueByType(paramStringValue, valueType);
-      const checkEquality = equalityCheckerByType[valueType];
-      const isQueryParamDifferent = checkEquality(parsedQueryParamValue, selectedValue);
-
-      setValueDetails({
-        value: parsedQueryParamValue,
-        isQueryParamDifferent,
-      });
+    const paramStringValue = String(query[queryParam]);
+    const isValidValue = validate(paramStringValue);
+    if (!isValidValue) {
+      return { isQueryParamDifferent: false, value: selectedValue };
     }
-  }, [isReady, query, queryParam, selectedValue]);
-  return valueDetails;
+
+    const parsedQueryParamValue = getQueryParamValueByType(paramStringValue, valueType);
+    const checkEquality = equalityCheckerByType[valueType];
+    const isQueryParamDifferent = !checkEquality(parsedQueryParamValue, selectedValue);
+
+    return {
+      value: parsedQueryParamValue,
+      isQueryParamDifferent,
+    };
+  }
+  return defaultValueDetails;
 };
 
 export default useGetQueryParamOrXstateValue;

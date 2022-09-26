@@ -204,7 +204,10 @@
     "reciters": "قاریان",
     "reflect": "منعکس کنید",
     "remove": "برداشتن",
+    "rename": "تغییر نام دهید",
     "retry": "دوباره امتحان کنید",
+    "rub": "روب الحزب",
+    "save-to-collection": "ذخیره در مجموعه",
     "search-for": "جستجوی \"{{searchQuery}}\"",
     "search-results": "{{count}} نتایج جستجو",
     "search": {
@@ -243,6 +246,7 @@
     "share": "اشتراک گذاری",
     "shared": "پیوند در کلیپ بورد کپی شده است!",
     "sidebar": {
+        "search-hizb": "جستجو در حزب",
         "search-juz": "جستجوی Juz",
         "search-page": "صفحه جستجو",
         "search-surah": "جستجو در سوره",

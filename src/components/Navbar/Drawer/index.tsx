@@ -18,6 +18,7 @@ import {
   setIsNavigationDrawerOpen,
   setIsSearchDrawerOpen,
   setIsSettingsDrawerOpen,
+  setIsVisible,
 } from '@/redux/slices/navbar';
 import { stopSearchDrawerVoiceFlow } from '@/redux/slices/voiceSearch';
 import { logEvent } from '@/utils/eventLogger';
@@ -110,14 +111,19 @@ const Drawer: React.FC<Props> = ({
     { enabled: isOpen, enableOnTags: ['INPUT', 'SELECT'] },
   );
 
-  // Hide navbar after successful navigation
   useEffect(() => {
+    // Keep nav bar visible when drawer is open
+    if (isOpen) {
+      dispatch(setIsVisible(true));
+    }
+
+    // Hide navbar after successful navigation
     router.events.on('routeChangeComplete', () => {
       if (isOpen && closeOnNavigation) {
         closeDrawer('navigation');
       }
     });
-  }, [closeDrawer, router.events, isOpen, closeOnNavigation]);
+  }, [closeDrawer, dispatch, router.events, isNavbarVisible, isOpen, closeOnNavigation]);
 
   useOutsideClickDetector(
     drawerRef,

@@ -50,6 +50,7 @@ module.exports = {
             '@/icons': path.resolve(__dirname, "../public/icons"),
             '@/dls': path.resolve(__dirname, "../src/components/dls"),
             '@/data': path.resolve(__dirname, "../data"),
+            '@/types': path.resolve(__dirname, "../types"),
             ...(otherAliases.reduce((acc, folder) => ({ 
                 ...acc, 
                 [`@/${folder}`]: path.resolve(__dirname, "../src", folder) 

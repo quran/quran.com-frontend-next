@@ -111,6 +111,7 @@ const ChaptersList = ({ filteredChapters, selectedReciter }: ChaptersListProps) 
               </div>
               <div>
                 <div className={styles.chapterName}>
+                  {/* eslint-disable-next-line i18next/no-literal-string */}
                   {chapter.localizedId}. {chapter.transliteratedName}
                 </div>
                 <span className={styles.chapterIconContainer}>

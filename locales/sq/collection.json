@@ -1,0 +1,22 @@
+{
+    "all-saved-verses": "Të gjitha vargjet e ruajtura",
+    "alphabetical": "AZ",
+    "back-to-collection-list": "Kthehu te lista e koleksioneve",
+    "collection-list-empty": "Lista e koleksioneve është bosh. Nuk keni krijuar ende asnjë koleksion",
+    "collections": "Koleksionet",
+    "delete": "Fshije",
+    "delete-bookmark": {
+        "subtitle": "Jeni i sigurt që dëshironi të fshini {{bookmarkName}} nga {{collectionName}} ?",
+        "title": "Fshi faqerojtësin"
+    },
+    "delete-collection": {
+        "subtitle": "Jeni i sigurt që dëshironi të fshini {{collectionName}} ?",
+        "title": "Fshi koleksionin"
+    },
+    "empty": "Koleksioni është bosh",
+    "go-to-ayah": "Shko te ajah",
+    "load-more": "Ngarko më shumë",
+    "recently-added": "Shtuar së fundmi",
+    "recently-updated": "Përditësuar së fundmi",
+    "verse-key": "Numri i kapitullit dhe vargut"
+}

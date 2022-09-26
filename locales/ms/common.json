@@ -204,7 +204,10 @@
     "reciters": "qari",
     "reflect": "Renungkan",
     "remove": "Keluarkan",
+    "rename": "Namakan semula",
     "retry": "Cuba lagi (Retry)",
+    "rub": "Gosok el Hizb",
+    "save-to-collection": "Simpan ke Koleksi",
     "search-for": "Cari '{{searchQuery}}'",
     "search-results": "{{count}} hasil carian",
     "search": {
@@ -243,6 +246,7 @@
     "share": "Kongsi",
     "shared": "Pautan telah disalin ke papan keratan!",
     "sidebar": {
+        "search-hizb": "Cari Hizb",
         "search-juz": "Cari Juzuk",
         "search-page": "Halaman Carian",
         "search-surah": "Cari surah",

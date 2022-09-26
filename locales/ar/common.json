@@ -204,7 +204,10 @@
     "reciters": "القراء",
     "reflect": "تدبر",
     "remove": "إزالة",
+    "rename": "إعادة تسمية",
     "retry": "أعد المحاولة",
+    "rub": "ربع الحزب",
+    "save-to-collection": "حفظ في المجموعة",
     "search-for": "ابحث عن '{{searchQuery}}'",
     "search-results": "نتائج البحث: {{count}}",
     "search": {
@@ -243,6 +246,7 @@
     "share": "شارك",
     "shared": "تم نسخ الرابط إلى الحافظة!",
     "sidebar": {
+        "search-hizb": "بحث عن حزب",
         "search-juz": "ابحث عن جزء",
         "search-page": "ابحث عن صفحة",
         "search-surah": "ابحث عن سورة",

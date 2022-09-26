@@ -204,7 +204,10 @@
     "reciters": "تلاوت کرنے والے",
     "reflect": "عکاسی کرنا",
     "remove": "دور",
+    "rename": "نام تبدیل کریں۔",
     "retry": "دوبارہ کوشش کریں۔",
+    "rub": "راب ال حزب",
+    "save-to-collection": "مجموعہ میں محفوظ کریں۔",
     "search-for": "'{{searchQuery}}' تلاش کریں",
     "search-results": "{{count}} تلاش کے نتائج",
     "search": {
@@ -243,6 +246,7 @@
     "share": "بانٹیں",
     "shared": "لنک کو کلپ بورڈ پر کاپی کر دیا گیا ہے!",
     "sidebar": {
+        "search-hizb": "حزب کو تلاش کریں۔",
         "search-juz": "سپارے میں تلاش کریں۔",
         "search-page": "صفحہ تلاش کریں۔",
         "search-surah": "سورہ تلاش کریں۔",

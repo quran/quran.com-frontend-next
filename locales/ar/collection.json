@@ -1,0 +1,22 @@
+{
+    "all-saved-verses": "جميع الآيات المحفوظة",
+    "alphabetical": "AZ",
+    "back-to-collection-list": "العودة إلى قائمة المجموعة",
+    "collection-list-empty": "قائمة المجموعة فارغة. لم تقم بإنشاء أي مجموعة حتى الآن",
+    "collections": "المجموعات",
+    "delete": "حذف",
+    "delete-bookmark": {
+        "subtitle": "هل تريد بالتأكيد حذف {{bookmarkName}} من {{collectionName}} ؟",
+        "title": "حذف الإشارة المرجعية"
+    },
+    "delete-collection": {
+        "subtitle": "هل تريد بالتأكيد حذف {{collectionName}} ؟",
+        "title": "حذف المجموعة"
+    },
+    "empty": "المجموعة فارغة",
+    "go-to-ayah": "اذهب إلى الآية",
+    "load-more": "تحميل المزيد",
+    "recently-added": "أضيف مؤخرا",
+    "recently-updated": "تم تحديثه مؤخرا",
+    "verse-key": "الفصل ورقم الآية"
+}

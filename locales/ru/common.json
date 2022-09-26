@@ -204,7 +204,10 @@
     "reciters": "Чтецы",
     "reflect": "Отражать",
     "remove": "Удалять",
+    "rename": "Переименовать",
     "retry": "Повторить",
+    "rub": "Руб эль Хизб",
+    "save-to-collection": "Сохранить в коллекцию",
     "search-for": "Найдите '{{searchQuery}}'",
     "search-results": "{{count}} результатов поиска",
     "search": {
@@ -243,6 +246,7 @@
     "share": "Делиться",
     "shared": "Ссылка скопирована в буфер обмена!",
     "sidebar": {
+        "search-hizb": "Поиск Хизб",
         "search-juz": "Искать Джуз",
         "search-page": "Страница поиска",
         "search-surah": "Искать суру",

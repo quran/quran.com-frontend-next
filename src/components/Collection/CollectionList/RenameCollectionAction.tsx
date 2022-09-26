@@ -14,7 +14,7 @@ const RenameCollectionAction = ({ onClick }) => {
   return (
     <>
       <PopoverMenu.Item shouldStopPropagation shouldCloseMenuAfterClick onClick={onMenuItemClicked}>
-        {t('profile:rename')}
+        {t('common:rename')}
       </PopoverMenu.Item>
     </>
   );

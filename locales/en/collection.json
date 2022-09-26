@@ -1,22 +1,22 @@
 {
-    "collections": "Collections",
-    "recently-added": "Recently added",
-    "recently-updated": "Recently updated",
+    "all-saved-verses": "All saved verses",
     "alphabetical": "A-Z",
-    "verse-key": "Chapter and Verse Number",
-    "load-more": "Load more",
-    "go-to-ayah": "Go to ayah",
-    "delete": "Delete",
-    "empty": "Collection is empty",
-    "collection-list-empty": "Collection list is empty. You haven't created any collection yet",
     "back-to-collection-list": "Back to collection list",
+    "collection-list-empty": "Collection list is empty. You haven't created any collection yet",
+    "collections": "Collections",
+    "delete": "Delete",
     "delete-bookmark": {
-        "title": "Delete bookmark",
-        "subtitle": "Are you sure you want to delete {{bookmarkName}} from {{collectionName}} collection?"
+        "subtitle": "Are you sure you want to delete {{bookmarkName}} from {{collectionName}} collection?",
+        "title": "Delete bookmark"
     },
     "delete-collection": {
-        "title": "Delete collection",
-        "subtitle": "Are you sure you want to delete {{collectionName}} collection?"
+        "subtitle": "Are you sure you want to delete {{collectionName}} collection?",
+        "title": "Delete collection"
     },
-    "all-saved-verses": "All saved verses"
+    "empty": "Collection is empty",
+    "go-to-ayah": "Go to ayah",
+    "load-more": "Load More",
+    "recently-added": "Recently added",
+    "recently-updated": "Recently updated",
+    "verse-key": "Chapter and Verse Number"
 }

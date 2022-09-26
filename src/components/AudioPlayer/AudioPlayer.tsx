@@ -9,6 +9,7 @@ import dynamic from 'next/dynamic';
 import styles from './AudioPlayer.module.scss';
 
 import Spinner from '@/dls/Spinner/Spinner';
+import { milliSecondsToSeconds } from '@/utils/datetime';
 import { logEvent } from '@/utils/eventLogger';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 
@@ -20,6 +21,12 @@ const AudioPlayerBody = dynamic(() => import('./AudioPlayerBody'), {
     </div>
   ),
 });
+
+/**
+ * Buffering when 2s away from download progress
+ * and put the audio in `almostEnded` state when 2s away from ending
+ */
+const AUDIO_DURATION_TOLERANCE = 2; // 2s ,
 
 const getAudioPlayerDownloadProgress = (audioPlayer: HTMLAudioElement) => {
   // TODO: Technically this is not accurate, but it's close enough for now.
@@ -62,17 +69,24 @@ const AudioPlayer = () => {
     const audioPlayer: HTMLAudioElement = e.target;
     const currentTimestamp = audioPlayer.currentTime;
     const downloadProgress = getAudioPlayerDownloadProgress(audioPlayer);
-    const isWaiting = currentTimestamp > downloadProgress - 2; // 2s tolerance
+    const isWaiting = currentTimestamp > downloadProgress - AUDIO_DURATION_TOLERANCE;
 
-    /**
-     * simulate onWaiting event on safari.
-     * If the audio is not in loading state already. And `currentTime` is nearby last timestamp of `buffered`
-     * trigger WAITING event.
-     */
-    if (!isLoading && isWaiting) {
-      audioService.send({ type: 'WAITING' });
-    } else if (isLoading && !isWaiting) {
-      audioService.send({ type: 'CAN_PLAY' });
+    const audioDataDuration = audioService.getSnapshot().context?.audioData?.duration;
+    if (audioDataDuration) {
+      const isAlmostEnded =
+        currentTimestamp > milliSecondsToSeconds(audioDataDuration) - AUDIO_DURATION_TOLERANCE;
+
+      /**
+       * simulate onWaiting event on safari.
+       * If the audio is not in loading state already. And `currentTime` is nearby last timestamp of `buffered`
+       * trigger WAITING event.
+       */
+
+      if (!isLoading && isWaiting && !isAlmostEnded) {
+        audioService.send({ type: 'WAITING' });
+      } else if (isLoading && !isWaiting) {
+        audioService.send({ type: 'CAN_PLAY' });
+      }
     }
 
     audioService.send({ type: 'UPDATE_TIMING' });

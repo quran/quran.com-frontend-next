@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
@@ -16,6 +17,7 @@ import RenameCollectionAction from './RenameCollectionAction';
 import ConfirmationModal from '@/dls/ConfirmationModal/ConfirmationModal';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import { logButtonClick, logValueChange } from '@/utils/eventLogger';
+import { toLocalizedNumber } from '@/utils/locale';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
 import { getCollectionsList, updateCollection } from 'src/utils/auth/api';
@@ -27,7 +29,7 @@ const DEFAULT_SORT_OPTION = CollectionListSortOption.RecentlyUpdated;
 
 const CollectionList = () => {
   const [collectionToRename, setCollectionToRename] = useState<Collection | null>(null);
-  const { t } = useTranslation();
+  const { t, lang } = useTranslation();
   const toast = useToast();
   const [sortBy, setSortBy] = useState(DEFAULT_SORT_OPTION);
   const apiParams = {
@@ -106,7 +108,10 @@ const CollectionList = () => {
                       <BookmarkIcon />
                     </div>
                     <div className={styles.itemCount}>
-                      {data?.collectionsItemsCount} {t('common:verses')}
+                      {data?.collectionsItemsCount && (
+                        <>{toLocalizedNumber(data?.collectionsItemsCount, lang)}</>
+                      )}{' '}
+                      {t('common:verses')}
                     </div>
                   </div>
                 </div>
@@ -125,7 +130,7 @@ const CollectionList = () => {
                           <BookmarkIcon />
                         </div>
                         <div className={styles.itemCount}>
-                          {collection.count} {t('common:verses')}
+                          {toLocalizedNumber(collection.count, lang)} {t('common:verses')}
                         </div>
                       </div>
                     </div>

@@ -1,0 +1,22 @@
+{
+    "all-saved-verses": "โองการที่บันทึกไว้ทั้งหมด",
+    "alphabetical": "AZ",
+    "back-to-collection-list": "กลับไปที่รายการคอลเลกชัน",
+    "collection-list-empty": "รายการคอลเลกชันว่างเปล่า คุณยังไม่ได้สร้างคอลเล็กชันใดๆ เลย",
+    "collections": "ของสะสม",
+    "delete": "ลบ",
+    "delete-bookmark": {
+        "subtitle": "คุณแน่ใจหรือไม่ว่าต้องการลบ {{bookmarkName}} จาก {{collectionName}}",
+        "title": "ลบบุ๊คมาร์ค"
+    },
+    "delete-collection": {
+        "subtitle": "คุณแน่ใจหรือไม่ว่าต้องการลบ {{collectionName}}",
+        "title": "ลบคอลเลกชัน"
+    },
+    "empty": "คอลเลกชันว่างเปล่า",
+    "go-to-ayah": "ไปที่อายะ",
+    "load-more": "โหลดเพิ่ม",
+    "recently-added": "เพิ่มมาเร็ว ๆ นี้",
+    "recently-updated": "อัพเดทล่าสุด",
+    "verse-key": "บทที่และหมายเลขกลอน"
+}

@@ -14,7 +14,7 @@
             },
             "slide-3": {
                 "action": "好，知道了",
-                "description": "感谢您使用 Quran.com，我们很高兴听到您对<link> feedback.quran.com <\/link> > 的反馈",
+                "description": "感谢您使用 Quran.com，我们很高兴听到您对<link> feedback.quran.com <\/link> 的反馈",
                 "title": "我们想听听你的想法"
             }
         }
@@ -204,7 +204,10 @@
     "reciters": "朗诵者",
     "reflect": "参悟",
     "remove": "消除",
+    "rename": "改名",
     "retry": "重试",
+    "rub": "鲁布埃尔希兹",
+    "save-to-collection": "保存到收藏",
     "search-for": "搜索 '{{searchQuery}}'",
     "search-results": "{{count}}搜索结果",
     "search": {
@@ -243,6 +246,7 @@
     "share": "分享",
     "shared": "链接已复制到剪贴板！",
     "sidebar": {
+        "search-hizb": "搜索 Hizb",
         "search-juz": "按卷搜索",
         "search-page": "按页搜索",
         "search-surah": "按章搜索",

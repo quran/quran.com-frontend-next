@@ -204,7 +204,10 @@
     "reciters": "voordragers",
     "reflect": "Reflecteren",
     "remove": "Verwijderen",
+    "rename": "Hernoemen",
     "retry": "Opnieuw proberen",
+    "rub": "Rub el Hizb",
+    "save-to-collection": "Opslaan in collectie",
     "search-for": "Zoeken naar '{{searchQuery}}'",
     "search-results": "{{count}} zoekresultaten",
     "search": {
@@ -243,6 +246,7 @@
     "share": "Deel",
     "shared": "Link is gekopieerd naar het klembord!",
     "sidebar": {
+        "search-hizb": "Zoek Hizb",
         "search-juz": "Zoek Juz",
         "search-page": "Zoekpagina",
         "search-surah": "zoek soera",
