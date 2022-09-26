@@ -6,6 +6,5 @@
         "instruction-text": "Digita <strong> {{text}} <\/strong> per confermare",
         "subtitle": "Questa azione non può essere annullata. Questo eliminerà definitivamente il tuo account, i segnalibri salvati, le sessioni di lettura e tutti i tuoi dati.",
         "title": "Sei assolutamente sicuro?"
-    },
-    "rename": "Rinominare"
+    }
 }

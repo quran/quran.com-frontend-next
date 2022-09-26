@@ -32,7 +32,7 @@ const RenameCollectionModal = ({
   return (
     <Modal isOpen={isOpen} onClickOutside={onClose}>
       <Modal.Body>
-        <div className={styles.header}>{t('rename')}</div>
+        <div className={styles.header}>{t('common:rename')}</div>
         <div className={styles.newCollectionFormContainer}>
           <FormBuilder
             formFields={[

@@ -6,6 +6,5 @@
         "instruction-text": "Lütfen onaylamak için <strong> {{text}} <\/strong> yazın",
         "subtitle": "Bu işlem geri alınamaz. Bu, hesabınızı, kayıtlı yer imlerinizi, okuma oturumlarınızı ve tüm verilerinizi kalıcı olarak siler.",
         "title": "Kesinlikle emin misin?"
-    },
-    "rename": "Yeniden isimlendirmek"
+    }
 }

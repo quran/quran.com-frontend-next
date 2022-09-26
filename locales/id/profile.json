@@ -6,6 +6,5 @@
         "instruction-text": "Ketik <strong> {{text}} <\/strong> untuk mengonfirmasi",
         "subtitle": "Tindakan ini tidak bisa dibatalkan. Tindakan ini akan menghapus akun Anda, bookmark tersimpan, sesi membaca, dan semua data Anda secara permanen.",
         "title": "Apakah Anda benar-benar yakin?"
-    },
-    "rename": "Ganti nama"
+    }
 }
