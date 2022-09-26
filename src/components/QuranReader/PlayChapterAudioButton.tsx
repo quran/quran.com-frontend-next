@@ -8,8 +8,10 @@ import Spinner from '../dls/Spinner/Spinner';
 import styles from './PlayButton.module.scss';
 
 import Button, { ButtonSize, ButtonType, ButtonVariant } from '@/dls/Button/Button';
+import useGetQueryParamOrXstateValue from '@/hooks/useGetQueryParamOrXstateValue';
 import PauseIcon from '@/icons/pause.svg';
 import PlayIcon from '@/icons/play-arrow.svg';
+import QueryParam from '@/types/QueryParam';
 import { getChapterData } from '@/utils/chapter';
 import { logButtonClick } from '@/utils/eventLogger';
 import DataContext from 'src/contexts/DataContext';
@@ -35,11 +37,19 @@ const PlayChapterAudioButton: React.FC<Props> = ({ chapterId }) => {
     selectIsPlayingCurrentChapter(state, chapterId),
   );
 
+  const {
+    value: reciterId,
+    isQueryParamDifferent: reciterQueryParamDifferent,
+  }: { value: number; isQueryParamDifferent: boolean } = useGetQueryParamOrXstateValue(
+    QueryParam.Reciter,
+  );
+
   const play = () => {
     logButtonClick('chapter_header_play_audio');
     audioService.send({
       type: 'PLAY_SURAH',
       surah: chapterId,
+      reciterId: reciterQueryParamDifferent ? reciterId : undefined,
     });
   };
 
