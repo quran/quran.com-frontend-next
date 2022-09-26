@@ -6,16 +6,12 @@ import { useRouter } from 'next/router';
 
 import styles from './TranslationViewCell.module.scss';
 
+import ContentModal from '@/components/dls/ContentModal/ContentModal';
 import ReflectionBodyContainer from '@/components/QuranReader/ReflectionView/ReflectionBodyContainer';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
-import ContentModal from '@/dls/ContentModal/ContentModal';
 import ChatIcon from '@/icons/chat.svg';
-// import { logButtonClick } from '@/utils/eventLogger';
-import {
-  fakeNavigate,
-  getQuranReflectVerseUrl,
-  // getVerseReflectionNavigationUrl,
-} from '@/utils/navigation';
+import { logButtonClick } from '@/utils/eventLogger';
+import { fakeNavigate, getVerseReflectionNavigationUrl } from '@/utils/navigation';
 import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
 
 type QuranReflectButtonProps = {
@@ -33,12 +29,12 @@ const QuranReflectButton = ({
   const router = useRouter();
   const [isContentModalOpen, setIsContentModalOpen] = useState(false);
 
-  // const onButtonClicked = () => {
-  //   // eslint-disable-next-line i18next/no-literal-string
-  //   logButtonClick(`${isTranslationView ? 'translation_view' : 'reading_view'}_reflect`);
-  //   setIsContentModalOpen(true);
-  //   fakeNavigate(getVerseReflectionNavigationUrl(verseKey), lang);
-  // };
+  const onButtonClicked = () => {
+    // eslint-disable-next-line i18next/no-literal-string
+    logButtonClick(`${isTranslationView ? 'translation_view' : 'reading_view'}_reflect`);
+    setIsContentModalOpen(true);
+    fakeNavigate(getVerseReflectionNavigationUrl(verseKey), lang);
+  };
 
   const contentModalRef = useRef(null);
 
@@ -56,9 +52,7 @@ const QuranReflectButton = ({
     <>
       <Button
         variant={ButtonVariant.Ghost}
-        isNewTab
-        // onClick={onButtonClicked}
-        href={getQuranReflectVerseUrl(verseKey)}
+        onClick={onButtonClicked}
         size={ButtonSize.Small}
         tooltip={t('reflect')}
         shouldFlipOnRTL={false}

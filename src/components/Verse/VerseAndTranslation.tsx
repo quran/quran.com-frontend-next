@@ -1,5 +1,3 @@
-import React from 'react';
-
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useSelector } from 'react-redux';
 import useSWR from 'swr/immutable';
@@ -66,6 +64,7 @@ const VerseAndTranslation: React.FC<Props> = ({ chapter, from, to }) => {
   if (error) return <Error error={error} onRetryClicked={mutate} />;
 
   if (!data) return <Spinner />;
+
   return (
     <div className={styles.container}>
       {data?.verses.map((verse) => (

@@ -7,7 +7,8 @@ import { shallowEqual, useSelector } from 'react-redux';
 import DataFetcher from '@/components/DataFetcher';
 import TafsirSkeleton from '@/components/QuranReader/TafsirView/TafsirSkeleton';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
-import { makeVerseReflectionsUrl } from '@/utils/apiPaths';
+import { makeAyahReflectionsUrl } from '@/utils/quranReflect/apiPaths';
+import AyahReflectionsResponse from 'types/QuranReflect/AyahReflectionsResponse';
 
 const ReflectionSurahAndAyahSelection = dynamic(() => import('./ReflectionSurahAndAyahSelection'), {
   ssr: false,
@@ -22,7 +23,6 @@ type ReflectionBodyProps = {
   initialVerseNumber: string;
   scrollToTop: () => void;
   render: (renderProps: { surahAndAyahSelection: JSX.Element; body: JSX.Element }) => JSX.Element;
-  initialData?: any;
 };
 
 const ReflectionBodyContainer = ({
@@ -37,7 +37,7 @@ const ReflectionBodyContainer = ({
   const { lang } = useTranslation();
 
   const renderBody = useCallback(
-    (data) => (
+    (data: AyahReflectionsResponse) => (
       <ReflectionBody
         data={data}
         selectedChapterId={selectedChapterId}
@@ -53,7 +53,11 @@ const ReflectionBodyContainer = ({
   const body = (
     <DataFetcher
       loading={TafsirSkeleton}
-      queryKey={makeVerseReflectionsUrl(selectedChapterId, selectedVerseNumber, lang)}
+      queryKey={makeAyahReflectionsUrl({
+        surahId: selectedChapterId,
+        ayahNumber: selectedVerseNumber,
+        locale: lang,
+      })}
       render={renderBody}
     />
   );

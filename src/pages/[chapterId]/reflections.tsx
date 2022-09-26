@@ -5,16 +5,15 @@ import { NextPage, GetStaticProps, GetStaticPaths } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 import { SWRConfig } from 'swr';
 
-import styles from './[verseId]/tafsirs.module.scss';
-
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import ReflectionBodyContainer from '@/components/QuranReader/ReflectionView/ReflectionBodyContainer';
+import layoutStyle from '@/pages/index.module.scss';
 import {
   getQuranReaderStylesInitialState,
   getTranslationsInitialState,
 } from '@/redux/defaultSettings/util';
 import { getDefaultWordFields, getMushafId } from '@/utils/api';
-import { makeVerseReflectionsUrl, makeVersesUrl } from '@/utils/apiPaths';
+import { makeVersesUrl } from '@/utils/apiPaths';
 import { getChapterData, getAllChaptersData } from '@/utils/chapter';
 import { getLanguageAlternates, toLocalizedNumber } from '@/utils/locale';
 import {
@@ -22,6 +21,7 @@ import {
   getVerseReflectionNavigationUrl,
   scrollWindowToTop,
 } from '@/utils/navigation';
+import { getAyahReflections, makeAyahReflectionsUrl } from '@/utils/quranReflect/apiPaths';
 import {
   REVALIDATION_PERIOD_ON_ERROR_SECONDS,
   ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
@@ -57,9 +57,6 @@ const SelectedAyahReflection: NextPage<AyahReflectionProp> = ({
   }
 
   const navigationUrl = getVerseReflectionNavigationUrl(`${chapterId}:${verseNumber}`);
-
-  return <Error statusCode={404} />;
-
   return (
     <DataContext.Provider value={chaptersData}>
       <NextSeoWrapper
@@ -75,20 +72,24 @@ const SelectedAyahReflection: NextPage<AyahReflectionProp> = ({
         })}
       />
       <SWRConfig value={{ fallback }}>
-        <div className={styles.tafsirContainer}>
-          <ReflectionBodyContainer
-            scrollToTop={scrollWindowToTop}
-            initialChapterId={chapterId}
-            initialVerseNumber={verseNumber.toString()}
-            render={({ body, surahAndAyahSelection }) => {
-              return (
-                <div>
-                  {surahAndAyahSelection}
-                  {body}
-                </div>
-              );
-            }}
-          />
+        <div className={layoutStyle.pageContainer}>
+          <div className={layoutStyle.flow}>
+            <div className={layoutStyle.flowItem}>
+              <ReflectionBodyContainer
+                scrollToTop={scrollWindowToTop}
+                initialChapterId={chapterId}
+                initialVerseNumber={verseNumber.toString()}
+                render={({ body, surahAndAyahSelection }) => {
+                  return (
+                    <div>
+                      {surahAndAyahSelection}
+                      {body}
+                    </div>
+                  );
+                }}
+              />
+            </div>
+          </div>
         </div>
       </SWRConfig>
     </DataContext.Provider>
@@ -106,7 +107,11 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   const { quranFont, mushafLines } = getQuranReaderStylesInitialState(locale);
   const translations = getTranslationsInitialState(locale).selectedTranslations;
   try {
-    const verseReflectionUrl = makeVerseReflectionsUrl(chapterNumber, verseNumber, locale);
+    const verseReflectionUrl = makeAyahReflectionsUrl({
+      surahId: chapterNumber,
+      ayahNumber: verseNumber,
+      locale,
+    });
 
     const mushafId = getMushafId(quranFont, mushafLines).mushaf;
     const apiParams = {
@@ -121,7 +126,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     const versesUrl = makeVersesUrl(chapterNumber, locale, apiParams);
 
     const [verseReflectionsData, versesData] = await Promise.all([
-      fetcher(verseReflectionUrl),
+      getAyahReflections(verseReflectionUrl),
       fetcher(versesUrl),
     ]);
 
