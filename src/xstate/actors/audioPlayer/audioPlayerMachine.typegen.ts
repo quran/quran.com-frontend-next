@@ -107,7 +107,11 @@ export interface Typegen0 {
     setRecitersList: "SET_RECITERS_LIST";
     setSurahAndAyahNumbers: "PLAY_AYAH";
     setSurahAndResetAyahNumber: "PLAY_SURAH";
-    stopRepeatActor: "PLAY_RADIO" | "REPEAT_FINISHED";
+    stopRepeatActor:
+      | "PLAY_AYAH"
+      | "PLAY_RADIO"
+      | "PLAY_SURAH"
+      | "REPEAT_FINISHED";
     updateDownloadProgress: "PROGRESS";
     updateRepeatAyah: "PLAY_AYAH";
     updateRepeatVerseTimings:

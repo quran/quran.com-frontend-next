@@ -282,7 +282,7 @@ export const audioPlayerMachine =
                   on: {
                     PLAY_AYAH: [
                       {
-                        actions: ['setSurahAndAyahNumbers'],
+                        actions: ['setSurahAndAyahNumbers', 'exitRadio', 'stopRepeatActor'],
                         description: 'When the user chooses to play an Ayah of another Surah',
                         cond: 'isDifferentSurah',
                         target: '#audioPlayer.VISIBLE.LOADING_RECITER_DATA',
@@ -409,7 +409,7 @@ export const audioPlayerMachine =
                     },
                     PLAY_AYAH: [
                       {
-                        actions: ['setSurahAndAyahNumbers'],
+                        actions: ['setSurahAndAyahNumbers', 'exitRadio', 'stopRepeatActor'],
                         description: 'When the user chooses to play an Ayah of another Surah',
                         cond: 'isDifferentSurah',
                         target: '#audioPlayer.VISIBLE.LOADING_RECITER_DATA',
@@ -429,12 +429,12 @@ export const audioPlayerMachine =
                     ],
                     PLAY_SURAH: [
                       {
-                        actions: ['setSurahAndResetAyahNumber', 'exitRadio'],
+                        actions: ['setSurahAndResetAyahNumber', 'exitRadio', 'stopRepeatActor'],
                         cond: 'isUsingCustomReciterId',
                         target: '#audioPlayer.VISIBLE.LOADING_CUSTOM_RECITER_DATA',
                       },
                       {
-                        actions: ['setSurahAndResetAyahNumber'],
+                        actions: ['setSurahAndResetAyahNumber', 'exitRadio', 'stopRepeatActor'],
                         description: 'When the user chooses to play another Surah',
                         cond: 'isDifferentSurah',
                         target: '#audioPlayer.VISIBLE.LOADING_RECITER_DATA',
@@ -668,7 +668,7 @@ export const audioPlayerMachine =
                 target: '.AUDIO_PLAYER_INITIATED.PLAYING.ACTIVE',
               },
               {
-                actions: ['setSurahAndAyahNumbers'],
+                actions: ['setSurahAndAyahNumbers', 'exitRadio', 'stopRepeatActor'],
                 description: 'When the user chooses to play an Ayah of another Surah',
                 cond: 'isDifferentSurah',
                 target: 'VISIBLE.LOADING_RECITER_DATA',
@@ -693,12 +693,12 @@ export const audioPlayerMachine =
                 target: '.AUDIO_PLAYER_INITIATED.PLAYING.ACTIVE',
               },
               {
-                actions: ['setSurahAndResetAyahNumber', 'exitRadio'],
+                actions: ['setSurahAndResetAyahNumber', 'exitRadio', 'stopRepeatActor'],
                 cond: 'isUsingCustomReciterId',
                 target: 'VISIBLE.LOADING_CUSTOM_RECITER_DATA',
               },
               {
-                actions: 'setSurahAndResetAyahNumber',
+                actions: ['setSurahAndResetAyahNumber', 'exitRadio', 'stopRepeatActor'],
                 description: 'When the user chooses to play another Surah',
                 cond: 'isDifferentSurah',
                 target: 'VISIBLE.LOADING_RECITER_DATA',
