@@ -205,6 +205,7 @@
     "reflect": "Reflecteren",
     "remove": "Verwijderen",
     "retry": "Opnieuw proberen",
+    "rub": "Rub el Hizb",
     "search-for": "Zoeken naar '{{searchQuery}}'",
     "search-results": "{{count}} zoekresultaten",
     "search": {
@@ -243,6 +244,7 @@
     "share": "Deel",
     "shared": "Link is gekopieerd naar het klembord!",
     "sidebar": {
+        "search-hizb": "Zoek Hizb",
         "search-juz": "Zoek Juz",
         "search-page": "Zoekpagina",
         "search-surah": "zoek soera",

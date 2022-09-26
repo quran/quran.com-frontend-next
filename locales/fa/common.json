@@ -205,6 +205,7 @@
     "reflect": "منعکس کنید",
     "remove": "برداشتن",
     "retry": "دوباره امتحان کنید",
+    "rub": "روب الحزب",
     "search-for": "جستجوی \"{{searchQuery}}\"",
     "search-results": "{{count}} نتایج جستجو",
     "search": {
@@ -243,6 +244,7 @@
     "share": "اشتراک گذاری",
     "shared": "پیوند در کلیپ بورد کپی شده است!",
     "sidebar": {
+        "search-hizb": "جستجو در حزب",
         "search-juz": "جستجوی Juz",
         "search-page": "صفحه جستجو",
         "search-surah": "جستجو در سوره",

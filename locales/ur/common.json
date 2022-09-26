@@ -205,6 +205,7 @@
     "reflect": "عکاسی کرنا",
     "remove": "دور",
     "retry": "دوبارہ کوشش کریں۔",
+    "rub": "راب ال حزب",
     "search-for": "'{{searchQuery}}' تلاش کریں",
     "search-results": "{{count}} تلاش کے نتائج",
     "search": {
@@ -243,6 +244,7 @@
     "share": "بانٹیں",
     "shared": "لنک کو کلپ بورڈ پر کاپی کر دیا گیا ہے!",
     "sidebar": {
+        "search-hizb": "حزب کو تلاش کریں۔",
         "search-juz": "سپارے میں تلاش کریں۔",
         "search-page": "صفحہ تلاش کریں۔",
         "search-surah": "سورہ تلاش کریں۔",

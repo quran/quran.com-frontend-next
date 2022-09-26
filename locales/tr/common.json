@@ -205,6 +205,7 @@
     "reflect": "Yansıt",
     "remove": "Kaldırmak",
     "retry": "Yeniden dene",
+    "rub": "El Hizb'i ovmak",
     "search-for": "'{{searchQuery}}' için arama yapın",
     "search-results": "{{count}} arama sonucu",
     "search": {
@@ -243,6 +244,7 @@
     "share": "Paylaş",
     "shared": "Bağlantı panoya kopyalandı!",
     "sidebar": {
+        "search-hizb": "Hizb'de Ara",
         "search-juz": "Cüz ara",
         "search-page": "Arama Sayfası",
         "search-surah": "Sure ara",

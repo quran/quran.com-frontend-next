@@ -205,6 +205,7 @@
     "reflect": "Réfléchir",
     "remove": "Supprimer",
     "retry": "Réessayez",
+    "rub": "Rub el Hizb",
     "search-for": "Rechercher '{{searchQuery}}'",
     "search-results": "{{count}} résultats de recherche",
     "search": {
@@ -243,6 +244,7 @@
     "share": "Partager",
     "shared": "Le lien a été copié dans le presse-papiers !",
     "sidebar": {
+        "search-hizb": "Rechercher",
         "search-juz": "Rechercher Juz",
         "search-page": "Page de recherche",
         "search-surah": "Recherche sourate",

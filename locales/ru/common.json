@@ -205,6 +205,7 @@
     "reflect": "Отражать",
     "remove": "Удалять",
     "retry": "Повторить",
+    "rub": "Руб эль Хизб",
     "search-for": "Найдите '{{searchQuery}}'",
     "search-results": "{{count}} результатов поиска",
     "search": {
@@ -243,6 +244,7 @@
     "share": "Делиться",
     "shared": "Ссылка скопирована в буфер обмена!",
     "sidebar": {
+        "search-hizb": "Поиск Хизб",
         "search-juz": "Искать Джуз",
         "search-page": "Страница поиска",
         "search-surah": "Искать суру",
