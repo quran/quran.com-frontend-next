@@ -206,6 +206,7 @@
     "remove": "消除",
     "retry": "重试",
     "rub": "鲁布埃尔希兹",
+    "save-to-collection": "保存到收藏",
     "search-for": "搜索 '{{searchQuery}}'",
     "search-results": "{{count}}搜索结果",
     "search": {

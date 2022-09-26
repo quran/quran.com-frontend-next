@@ -6,5 +6,6 @@
         "instruction-text": "Veuillez saisir <strong> {{text}} <\/strong> pour confirmer",
         "subtitle": "Cette action ne peut pas être annulée. Cela supprimera définitivement votre compte, vos signets enregistrés, vos sessions de lecture et toutes vos données.",
         "title": "Êtes-vous absolument sûr?"
-    }
+    },
+    "rename": "Renommer"
 }

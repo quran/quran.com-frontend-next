@@ -206,6 +206,7 @@
     "remove": "Kaldırmak",
     "retry": "Yeniden dene",
     "rub": "El Hizb'i ovmak",
+    "save-to-collection": "Koleksiyona Kaydet",
     "search-for": "'{{searchQuery}}' için arama yapın",
     "search-results": "{{count}} arama sonucu",
     "search": {

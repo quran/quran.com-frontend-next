@@ -6,5 +6,6 @@
         "instruction-text": "Ju lutemi shkruani <strong> {{text}} <\/strong> për ta konfirmuar",
         "subtitle": "Ky veprim nuk mund të zhbëhet. Kjo do të fshijë përgjithmonë llogarinë tuaj, faqeshënuesit e ruajtur, seancat e leximit dhe të gjitha të dhënat tuaja.",
         "title": "Jeni absolutisht i sigurt?"
-    }
+    },
+    "rename": "Riemërto"
 }

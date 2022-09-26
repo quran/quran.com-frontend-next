@@ -206,6 +206,7 @@
     "remove": "ลบ",
     "retry": "ลองอีกครั้ง",
     "rub": "รุบอุลฮิซบ์",
+    "save-to-collection": "บันทึกลงในคอลเล็กชัน",
     "search-for": "ค้นหา '{{searchQuery}}'",
     "search-results": "{{count}} ผลการค้นหา",
     "search": {

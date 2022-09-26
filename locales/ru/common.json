@@ -206,6 +206,7 @@
     "remove": "Удалять",
     "retry": "Повторить",
     "rub": "Руб эль Хизб",
+    "save-to-collection": "Сохранить в коллекцию",
     "search-for": "Найдите '{{searchQuery}}'",
     "search-results": "{{count}} результатов поиска",
     "search": {

@@ -206,6 +206,7 @@
     "remove": "Hiq",
     "retry": "Provo sërish",
     "rub": "Rub el Hizb",
+    "save-to-collection": "Ruaje në Koleksion",
     "search-for": "Kërko për \"{{searchQuery}}\"",
     "search-results": "{{count}} rezultatet e  kërkimit",
     "search": {

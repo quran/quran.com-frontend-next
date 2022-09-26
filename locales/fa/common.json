@@ -206,6 +206,7 @@
     "remove": "برداشتن",
     "retry": "دوباره امتحان کنید",
     "rub": "روب الحزب",
+    "save-to-collection": "ذخیره در مجموعه",
     "search-for": "جستجوی \"{{searchQuery}}\"",
     "search-results": "{{count}} نتایج جستجو",
     "search": {

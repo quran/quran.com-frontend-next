@@ -206,6 +206,7 @@
     "remove": "إزالة",
     "retry": "أعد المحاولة",
     "rub": "ربع الحزب",
+    "save-to-collection": "حفظ في المجموعة",
     "search-for": "ابحث عن '{{searchQuery}}'",
     "search-results": "نتائج البحث: {{count}}",
     "search": {

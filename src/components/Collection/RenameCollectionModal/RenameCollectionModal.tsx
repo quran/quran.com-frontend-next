@@ -32,7 +32,7 @@ const RenameCollectionModal = ({
   return (
     <Modal isOpen={isOpen} onClickOutside={onClose}>
       <Modal.Body>
-        <div className={styles.header}>Rename Collection</div>
+        <div className={styles.header}>{t('rename')}</div>
         <div className={styles.newCollectionFormContainer}>
           <FormBuilder
             formFields={[
@@ -44,7 +44,7 @@ const RenameCollectionModal = ({
                 type: FormFieldType.Text,
               },
             ]}
-            actionText="Submit"
+            actionText={t('common:submit')}
             onSubmit={onSubmit}
           />
         </div>

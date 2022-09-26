@@ -206,6 +206,7 @@
     "remove": "Verwijderen",
     "retry": "Opnieuw proberen",
     "rub": "Rub el Hizb",
+    "save-to-collection": "Opslaan in collectie",
     "search-for": "Zoeken naar '{{searchQuery}}'",
     "search-results": "{{count}} zoekresultaten",
     "search": {

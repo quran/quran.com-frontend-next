@@ -206,6 +206,7 @@
     "remove": "Supprimer",
     "retry": "Réessayez",
     "rub": "Rub el Hizb",
+    "save-to-collection": "Enregistrer dans la collection",
     "search-for": "Rechercher '{{searchQuery}}'",
     "search-results": "{{count}} résultats de recherche",
     "search": {
