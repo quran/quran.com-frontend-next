@@ -9,8 +9,6 @@ interface AudioPlayerContext {
   audioPlayer: HTMLAudioElement;
   reciterId: number;
   surah?: number;
-  newSurah?: number;
-  newAyahNumber?: number;
   ayahNumber: number;
   wordLocation?: number;
   audioData: AudioData;

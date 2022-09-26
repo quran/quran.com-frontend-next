@@ -7,8 +7,6 @@ type AudioPlayerEventType =
   | { type: 'PLAY_SURAH'; surah: number; reciterId?: number }
   | { type: 'PLAY_AYAH'; surah: number; ayahNumber: number }
   | { type: 'CHANGE_RECITER'; reciterId: number; surah?: undefined; audioPlayerRef?: undefined }
-  | { type: 'CANCEL_PLAY_MISMATCHED_SURAH' }
-  | { type: 'CONFIRM_PLAY_MISMATCHED_SURAH' }
   | { type: 'CLOSE' }
   | { type: 'END' }
   | { type: 'WAITING' }
