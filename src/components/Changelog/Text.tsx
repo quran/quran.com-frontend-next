@@ -2,7 +2,7 @@ import classNames from 'classnames';
 
 import styles from './Text.module.scss';
 
-import Link from '@/dls/Link/Link';
+import Link, { LinkVariant } from '@/dls/Link/Link';
 
 interface Props {
   text: any;
@@ -29,7 +29,12 @@ const Text: React.FC<Props> = ({ text }) => {
         style={color !== 'default' ? { color } : {}}
       >
         {value.text.link ? (
-          <Link href={value.text.link.url} isNewTab shouldPrefetch={false}>
+          <Link
+            href={value.text.link.url}
+            variant={LinkVariant.Highlight}
+            isNewTab
+            shouldPrefetch={false}
+          >
             {value.text.content}
           </Link>
         ) : (
