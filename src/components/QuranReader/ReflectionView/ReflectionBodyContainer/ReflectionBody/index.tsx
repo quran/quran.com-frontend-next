@@ -74,6 +74,11 @@ const ReflectionBody: React.FC<Props> = ({
       localeToReflectionLanguages(lang).includes(reflection.language),
     );
   }, [data?.posts, lang]);
+
+  const onReadMoreClicked = () => {
+    logButtonClick('read_more_reflections');
+  };
+
   return (
     <div className={styles.container}>
       <VerseAndTranslation
@@ -98,7 +103,11 @@ const ReflectionBody: React.FC<Props> = ({
         />
       ))}
       <div className={styles.readMoreButtonContainer}>
-        <Button href={getQuranReflectVerseUrl(selectedChapterId, selectedVerseNumber)} isNewTab>
+        <Button
+          href={getQuranReflectVerseUrl(selectedChapterId, selectedVerseNumber)}
+          onClick={onReadMoreClicked}
+          isNewTab
+        >
           {t('read-more-quran-reflect')}
         </Button>
       </div>
