@@ -1,19 +1,19 @@
 import useTranslation from 'next-translate/useTranslation';
 
-import Button from '../dls/Button/Button';
-import Carousel from '../dls/Carousel/Carousel';
+import AnnouncementBody from '../AnnouncementBody';
 
-import styles from './WelcomeMessageModalBody.module.scss';
-import Slide1 from './WelcomeMessageSlides/Slide1';
-import Slide2 from './WelcomeMessageSlides/Slide2';
-import Slide3 from './WelcomeMessageSlides/Slide3';
+import Slide1 from './Slides/Slide1';
+import Slide2 from './Slides/Slide2';
+import Slide3 from './Slides/Slide3';
 
+import Button from '@/dls/Button/Button';
+import Carousel from '@/dls/Carousel';
 import { logCarouselSlideCompletion } from '@/utils/eventLogger';
 
-type WelcomeMessageModalBodyProps = {
+type AuthOnboardingAnnouncementProps = {
   onCompleted: () => void;
 };
-const WelcomeMessageModalBody = ({ onCompleted }: WelcomeMessageModalBodyProps) => {
+const AuthOnboardingAnnouncement = ({ onCompleted }: AuthOnboardingAnnouncementProps) => {
   const { t } = useTranslation('common');
 
   const logSlideCompletedClick = (slideNumber: number) => {
@@ -26,9 +26,9 @@ const WelcomeMessageModalBody = ({ onCompleted }: WelcomeMessageModalBodyProps) 
   };
 
   return (
-    <div className={styles.container}>
+    <AnnouncementBody>
       <Carousel
-        items={[
+        slides={[
           {
             id: 'announcement-slide-1',
             component: (
@@ -67,8 +67,8 @@ const WelcomeMessageModalBody = ({ onCompleted }: WelcomeMessageModalBodyProps) 
           },
         ]}
       />
-    </div>
+    </AnnouncementBody>
   );
 };
 
-export default WelcomeMessageModalBody;
+export default AuthOnboardingAnnouncement;

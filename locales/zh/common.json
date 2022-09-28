@@ -17,6 +17,12 @@
                 "description": "感谢您使用 Quran.com，我们很高兴听到您对<link> feedback.quran.com <\/link> 的反馈",
                 "title": "我们想听听你的想法"
             }
+        },
+        "collections-announcement": {
+            "slide-1": {
+                "description": "我们很高兴地宣布，现在您可以在“收藏”下对书签进行分组！ <br\/> <br\/> <li> > 添加任意数量的收藏夹 <\/li <\/li> <li <li>为一个或多个收藏夹添加书签<\/li> <li>还有更多！ <\/li>",
+                "title": "书签收藏在这里！"
+            }
         }
     },
     "aria": {

@@ -17,6 +17,12 @@
                 "description": "Grazie per aver utilizzato Quran.com e saremo lieti di ricevere il tuo feedback su <link> feedback.quran.com <\/link>",
                 "title": "Vogliamo ascoltare i tuoi pensieri"
             }
+        },
+        "collections-announcement": {
+            "slide-1": {
+                "description": "Siamo molto felici di annunciare che ora puoi raggruppare i segnalibri in \"raccolte\"! <br\/> <br\/> <li> Aggiungi tutte le raccolte che desideri <\/li> <li> Aggiungi un segnalibro a una o più raccolte <\/li> <li> E altro ancora! <\/li>",
+                "title": "Le raccolte di segnalibri sono qui!"
+            }
         }
     },
     "aria": {

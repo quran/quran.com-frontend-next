@@ -17,6 +17,12 @@
                 "description": "Bedankt voor het gebruik van Quran.com en we horen graag uw feedback op <link> feedback.quran.com <\/link>",
                 "title": "We willen je gedachten horen"
             }
+        },
+        "collections-announcement": {
+            "slide-1": {
+                "description": "We zijn erg blij om aan te kondigen dat je nu bladwijzers kunt groeperen onder \"collecties\"! <br\/> <br\/> <li> Voeg zoveel collecties toe als je wilt <\/li> <li> Voeg een bladwijzer toe aan een of meer collecties <\/li> <li> En meer! <\/li>",
+                "title": "Bladwijzercollecties zijn hier!"
+            }
         }
     },
     "aria": {

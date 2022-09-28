@@ -17,6 +17,12 @@
                 "description": "Terima kasih kerana menggunakan Quran.com dan kami berbesar hati untuk mendengar maklum balas anda tentang <link> feedback.quran.com <\/link>",
                 "title": "Kami mahu mendengar fikiran anda"
             }
+        },
+        "collections-announcement": {
+            "slide-1": {
+                "description": "Kami sangat gembira untuk mengumumkan bahawa kini anda boleh mengumpulkan penanda halaman di bawah \"koleksi\"! <br\/> <br\/> <li> Tambahkan seberapa banyak koleksi yang anda mahu <\/li> <li> Tambahkan penanda halaman pada satu atau lebih koleksi <\/li> <li> Dan banyak lagi! <\/li>",
+                "title": "Koleksi penanda halaman ada di sini!"
+            }
         }
     },
     "aria": {

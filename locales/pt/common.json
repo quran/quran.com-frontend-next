@@ -17,6 +17,12 @@
                 "description": "Obrigado por usar o Quran.com e ficaríamos felizes em ouvir seus comentários sobre <link> feedback.quran.com <\/link>",
                 "title": "Queremos ouvir seus pensamentos"
             }
+        },
+        "collections-announcement": {
+            "slide-1": {
+                "description": "Estamos muito felizes em anunciar que agora você pode agrupar favoritos em \"coleções\"! <br\/> <br\/> <li> Adicione quantas coleções quiser <\/li> <li> Adicione um marcador a uma ou mais coleções <\/li> <li> E muito mais! <\/li>",
+                "title": "As coleções de marcadores estão aqui!"
+            }
         }
     },
     "aria": {

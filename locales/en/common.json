@@ -17,6 +17,12 @@
                 "description": "Thank you for using Quran.com and we would be glad to hear your feedback on <link>feedback.quran.com<\/link>",
                 "title": "We wanna hear your thoughts"
             }
+        },
+        "collections-announcement": {
+            "slide-1": {
+                "description": "We are very happy to announce that now you can group bookmarks under \"collections\"! <br\/><br\/> <li>Add as many collections as you want<\/li><li>Add a bookmark to one or more collections<\/li><li>And more!<\/li>",
+                "title": "Bookmarks collections are here!"
+            }
         }
     },
     "aria": {

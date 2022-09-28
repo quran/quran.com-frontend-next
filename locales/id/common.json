@@ -17,6 +17,12 @@
                 "description": "Terima kasih telah menggunakan Quran.com dan kami akan senang mendengar tanggapan Anda di <link> feedback.quran.com <\/link>",
                 "title": "Kami ingin mendengar pendapat Anda"
             }
+        },
+        "collections-announcement": {
+            "slide-1": {
+                "description": "Kami sangat senang mengumumkan bahwa sekarang Anda dapat mengelompokkan bookmark di bawah \"koleksi\"! <br\/> <br\/> <li> Tambahkan koleksi sebanyak yang Anda inginkan <\/li> <li> Tambahkan bookmark ke satu atau beberapa koleksi <\/li> <li> Dan banyak lagi! <\/li>",
+                "title": "Koleksi bookmark ada di sini!"
+            }
         }
     },
     "aria": {

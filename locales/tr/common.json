@@ -17,6 +17,12 @@
                 "description": "Kuran.com'u kullandığınız için teşekkür ederiz ve <link> feedback.quran.com <\/link> ile ilgili görüşlerinizi duymaktan memnuniyet duyarız.",
                 "title": "Düşüncelerinizi duymak istiyoruz"
             }
+        },
+        "collections-announcement": {
+            "slide-1": {
+                "description": "Artık yer imlerini \"koleksiyonlar\" altında gruplayabileceğinizi duyurmaktan çok mutluyuz! <br\/> <br\/> <li> İstediğiniz kadar koleksiyon ekleyin <\/li> <li> Bir veya daha fazla koleksiyona yer imi ekleyin <\/li> <li> Ve daha fazlası! <\/li>",
+                "title": "Yer imi koleksiyonları burada!"
+            }
         }
     },
     "aria": {

@@ -17,6 +17,12 @@
                 "description": "Faleminderit që përdorni Quran.com dhe do të ishim të lumtur të dëgjonim komentet tuaja në <link> feedback.quran.com <\/link>",
                 "title": "Ne duam të dëgjojmë mendimet tuaja"
             }
+        },
+        "collections-announcement": {
+            "slide-1": {
+                "description": "Jemi shumë të lumtur të njoftojmë se tani ju mund të gruponi faqerojtësit nën \"koleksione\"! <br\/> <br\/> <li> Shtoni sa më shumë koleksione që dëshironi <\/li> <li> Shtoni një faqeshënues në një ose më shumë koleksione <\/li> <li> Dhe më shumë! <\/li>",
+                "title": "Koleksionet e faqeshënuesve janë këtu!"
+            }
         }
     },
     "aria": {

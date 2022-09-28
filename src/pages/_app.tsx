@@ -9,11 +9,11 @@ import { useRouter } from 'next/router';
 import useSWRImmutable from 'swr/immutable';
 
 import AudioPlayer from '@/components/AudioPlayer/AudioPlayer';
+import UserAccountModal from '@/components/Auth/UserAccountModal';
 import DeveloperUtility from '@/components/DeveloperUtility/DeveloperUtility';
 import DonatePopup from '@/components/DonatePopup/DonatePopup';
 import FontPreLoader from '@/components/Fonts/FontPreLoader';
 import GlobalListeners from '@/components/GlobalListeners';
-import UserAccountModal from '@/components/Login/UserAccountModal';
 import Navbar from '@/components/Navbar/Navbar';
 import SessionIncrementor from '@/components/SessionIncrementor';
 import ThirdPartyScripts from '@/components/ThirdPartyScripts/ThirdPartyScripts';

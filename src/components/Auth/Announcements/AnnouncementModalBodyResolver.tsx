@@ -6,7 +6,13 @@ import { makeUserProfileUrl } from '@/utils/auth/apiPaths';
 import Announcement, { AnnouncementType } from 'types/auth/Announcement';
 import UserProfile from 'types/auth/UserProfile';
 
-const WelcomeMessageModalBody = dynamic(() => import('./WelcomeMessageModalBody'));
+const WelcomeMessageModalBody = dynamic(
+  () => import('@/components/Auth/Announcements/AuthOnboardingAnnouncement'),
+);
+
+const CollectionsAnnouncement = dynamic(
+  () => import('@/components/Auth/Announcements/CollectionsAnnouncement'),
+);
 
 type AnnouncementModalBodyResolverProps = {
   announcement: Announcement;
@@ -31,6 +37,13 @@ const AnnouncementModalBodyResolver = ({ announcement }: AnnouncementModalBodyRe
   if (announcement.type === AnnouncementType.AuthOnboarding) {
     return (
       <WelcomeMessageModalBody onCompleted={() => onCompleted(AnnouncementType.AuthOnboarding)} />
+    );
+  }
+  if (announcement.type === AnnouncementType.CollectionsAnnouncement) {
+    return (
+      <CollectionsAnnouncement
+        onCompleted={() => onCompleted(AnnouncementType.CollectionsAnnouncement)}
+      />
     );
   }
 

@@ -5,8 +5,10 @@ import useSyncUserData from '@/hooks/auth/useSyncUserData';
 import Announcement from 'types/auth/Announcement';
 import FormField from 'types/FormField';
 
-const CompleteSignupForm = dynamic(() => import('./CompleteSignupForm'));
-const AnnouncementModalBodyResolver = dynamic(() => import('./AnnouncementModalBodyResolver'));
+const CompleteSignupForm = dynamic(() => import('@/components/Login/CompleteSignupForm'));
+const AnnouncementModalBodyResolver = dynamic(
+  () => import('@/components/Auth/Announcements/AnnouncementModalBodyResolver'),
+);
 
 type Props = {
   requiredFields: FormField[];
