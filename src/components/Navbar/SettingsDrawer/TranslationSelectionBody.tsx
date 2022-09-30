@@ -14,6 +14,7 @@ import Checkbox from '@/dls/Forms/Checkbox/Checkbox';
 import Input from '@/dls/Forms/Input';
 import SpinnerContainer from '@/dls/Spinner/SpinnerContainer';
 import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
+import useRemoveQueryParam from '@/hooks/useRemoveQueryParam';
 import IconSearch from '@/icons/search.svg';
 import {
   selectTranslations,
@@ -38,6 +39,7 @@ const TranslationSelectionBody = () => {
   const translationsState = useSelector(selectTranslations);
   const { selectedTranslations } = translationsState;
   const [searchQuery, setSearchQuery] = useState('');
+  const removeQueryParam = useRemoveQueryParam();
 
   /**
    * Persist settings in the DB if the user is logged in before dispatching
@@ -69,6 +71,11 @@ const TranslationSelectionBody = () => {
           ? [...selectedTranslations, selectedTranslationId]
           : selectedTranslations.filter((id) => id !== selectedTranslationId); // remove the id
 
+        // if unchecked also remove from query param
+        if (!isChecked) {
+          removeQueryParam(QueryParam.Translations);
+        }
+
         logItemSelectionChange('translation', selectedTranslationId.toString(), isChecked);
         logValueChange('selected_translations', selectedTranslations, nextTranslations);
         onTranslationsSettingsChange(
@@ -82,7 +89,7 @@ const TranslationSelectionBody = () => {
         }
       };
     },
-    [lang, onTranslationsSettingsChange, router, selectedTranslations],
+    [lang, onTranslationsSettingsChange, router, selectedTranslations, removeQueryParam],
   );
 
   const renderTranslationGroup = useCallback(
