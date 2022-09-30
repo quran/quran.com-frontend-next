@@ -120,7 +120,7 @@ export interface Typegen0 {
     updateTiming: "UPDATE_TIMING";
   };
   eventsCausingServices: {
-    fetchCustomReciter: "PLAY_SURAH";
+    fetchCustomReciter: "PLAY_AYAH" | "PLAY_SURAH";
     fetchReciter:
       | "CHANGE_RECITER"
       | "PLAY_AYAH"
@@ -152,13 +152,14 @@ export interface Typegen0 {
     canRepeatPrevAyah: "PREV_AYAH";
     isAudioAlmostEnded: "END";
     isDifferentSurah: "PLAY_AYAH" | "PLAY_SURAH";
+    isDifferentSurahAndReciter: "PLAY_AYAH";
     isNotFirstVerse: "PREV_AYAH";
     isNotLastVerse: "NEXT_AYAH";
     isRadioActive: "CHANGE_RECITER";
     isRepeatActive: "SEEK_TO";
     isSameAyah: "PLAY_AYAH";
     isSameSurahAndReciter: "PLAY_AYAH" | "PLAY_SURAH";
-    isUsingCustomReciterId: "PLAY_SURAH";
+    isUsingCustomReciterId: "PLAY_AYAH" | "PLAY_SURAH";
   };
   eventsCausingDelays: {
     VERSE_DELAY: "REPEAT_AYAH";

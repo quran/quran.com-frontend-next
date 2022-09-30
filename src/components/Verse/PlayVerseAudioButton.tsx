@@ -8,7 +8,9 @@ import Spinner from '../dls/Spinner/Spinner';
 import styles from '../QuranReader/TranslationView/TranslationViewCell.module.scss';
 
 import Button, { ButtonShape, ButtonSize, ButtonType, ButtonVariant } from '@/dls/Button/Button';
+import useGetQueryParamOrXstateValue from '@/hooks/useGetQueryParamOrXstateValue';
 import PlayIcon from '@/icons/play-outline.svg';
+import QueryParam from '@/types/QueryParam';
 import { getChapterData } from '@/utils/chapter';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getChapterNumberFromKey, getVerseNumberFromKey } from '@/utils/verse';
@@ -29,6 +31,12 @@ const PlayVerseAudioButton: React.FC<PlayVerseAudioProps> = ({
 }) => {
   const audioService = useContext(AudioPlayerMachineContext);
   const { t } = useTranslation('common');
+  const {
+    value: reciterId,
+    isQueryParamDifferent: reciterQueryParamDifferent,
+  }: { value: number; isQueryParamDifferent: boolean } = useGetQueryParamOrXstateValue(
+    QueryParam.Reciter,
+  );
 
   const isVerseLoading = useXstateSelector(audioService, (state) =>
     selectIsVerseLoading(state, verseKey),
@@ -42,7 +50,12 @@ const PlayVerseAudioButton: React.FC<PlayVerseAudioProps> = ({
     // eslint-disable-next-line i18next/no-literal-string
     logButtonClick(`${isTranslationView ? 'translation_view' : 'reading_view'}_play_verse`);
 
-    audioService.send({ type: 'PLAY_AYAH', surah: chapterId, ayahNumber: verseNumber });
+    audioService.send({
+      type: 'PLAY_AYAH',
+      surah: chapterId,
+      ayahNumber: verseNumber,
+      reciterId: reciterQueryParamDifferent ? reciterId : undefined,
+    });
 
     if (onActionTriggered) {
       onActionTriggered();
