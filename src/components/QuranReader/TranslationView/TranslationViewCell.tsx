@@ -22,7 +22,7 @@ import PlayVerseAudioButton from '@/components/Verse/PlayVerseAudioButton';
 import VerseLink from '@/components/Verse/VerseLink';
 import VerseText from '@/components/Verse/VerseText';
 import Separator from '@/dls/Separator/Separator';
-import useScroll, { SMOOTH_SCROLL_TO_CENTER } from '@/hooks/useScrollToElement';
+import useScroll, { SMOOTH_SCROLL_TO_TOP } from '@/hooks/useScrollToElement';
 import { selectEnableAutoScrolling } from '@/redux/slices/AudioPlayer/state';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
 import { getVerseWords, makeVerseKey } from '@/utils/verse';
@@ -58,7 +58,7 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
   const enableAutoScrolling = useSelector(selectEnableAutoScrolling);
 
   const [scrollToSelectedItem, selectedItemRef]: [() => void, RefObject<HTMLDivElement>] =
-    useScroll(SMOOTH_SCROLL_TO_CENTER);
+    useScroll(SMOOTH_SCROLL_TO_TOP);
 
   useEffect(() => {
     if ((isHighlighted && enableAutoScrolling) || Number(startingVerse) === verseIndex + 1) {
