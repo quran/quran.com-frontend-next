@@ -5,7 +5,7 @@ type AudioPlayerEventType =
   | { type: 'SET_AUDIO_REF'; audioPlayerRef: HTMLAudioElement }
   | { type: 'SET_PLAYBACK_SPEED'; playbackRate: number }
   | { type: 'PLAY_SURAH'; surah: number; reciterId?: number }
-  | { type: 'PLAY_AYAH'; surah: number; ayahNumber: number }
+  | { type: 'PLAY_AYAH'; surah: number; ayahNumber: number; reciterId?: number }
   | { type: 'CHANGE_RECITER'; reciterId: number; surah?: undefined; audioPlayerRef?: undefined }
   | { type: 'CLOSE' }
   | { type: 'END' }
