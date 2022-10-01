@@ -106,12 +106,18 @@
   }
   &.topSheetOnMobile {
     @include breakpoints.smallerThanTablet {
+      // add 2.5% spacing on the left and right, on mobile
+      width: 95%;
+      margin-left: 2.5%;
+
       top: 10%;
+      border-radius: var(--border-radius-rounded) var(--border-radius-rounded);
       bottom: unset;
     }
   }
   z-index: var(--z-index-modal);
 }
+
 .content[data-state="open"] {
   animation: mobileContentIn constants.$animationDuration
       constants.$animationEasing,

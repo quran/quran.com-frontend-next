@@ -30,7 +30,7 @@ const RenameCollectionModal = ({
 }: RenameCollectionModalProps) => {
   const { t } = useTranslation('profile');
   return (
-    <Modal isOpen={isOpen} onClickOutside={onClose}>
+    <Modal isOpen={isOpen} onClickOutside={onClose} isBottomSheetOnMobile={false}>
       <Modal.Body>
         <div className={styles.header}>{t('common:rename')}</div>
         <div className={styles.newCollectionFormContainer}>
