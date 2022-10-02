@@ -36,9 +36,7 @@ const TafsirSection = () => {
     () => (
       <div>
         {selectedTafsirs.map((id) => (
-          <Skeleton key={id}>
-            <div>{id}</div>
-          </Skeleton>
+          <Skeleton className={styles.skeleton} key={id} />
         ))}
       </div>
     ),

@@ -6,3 +6,8 @@
   flex-direction: column;
   margin-block-start: var(--spacing-xsmall);
 }
+
+.skeleton {
+  height: calc(1.5 * var(--spacing-mega));
+  width: 100%;
+}
