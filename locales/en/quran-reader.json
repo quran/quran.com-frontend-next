@@ -44,6 +44,8 @@
     "remove-bookmark": "Remove bookmark",
     "rub-beginning": "Beginning of Rub el Hizb",
     "save-to": "Save to...",
+    "saved-to": "Saved to {{collectionName}}",
+    "removed-from": "Removed from {{collectionName}}",
     "see-less": "See less",
     "see-more": "See more",
     "select-range": "Select verses range",

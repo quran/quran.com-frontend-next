@@ -112,6 +112,9 @@ const SaveToCollectionAction = ({ verse, bookmarksRangeUrl }) => {
         collectionId: changedCollection.id,
       })
         .then(() => {
+          toast(t('quran-reader:saved-to', { collectionName: changedCollection.name }), {
+            status: ToastStatus.Success,
+          });
           mutateIsResourceBookmarked();
           mutateCollectionListData();
           mutateBookmarkCollectionIdsData();
@@ -137,6 +140,9 @@ const SaveToCollectionAction = ({ verse, bookmarksRangeUrl }) => {
         collectionId: changedCollection.id,
       })
         .then(() => {
+          toast(t('quran-reader:removed-from', { collectionName: changedCollection.name }), {
+            status: ToastStatus.Success,
+          });
           mutateIsResourceBookmarked();
           mutateCollectionListData();
           mutateBookmarkCollectionIdsData();
