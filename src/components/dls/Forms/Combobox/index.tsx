@@ -83,8 +83,13 @@ const Combobox: React.FC<Props> = ({
   const [focusInput, inputRef]: [() => void, RefObject<HTMLInputElement>] = useFocus();
   const comboBoxRef = useRef(null);
   const closeCombobox = useCallback(() => {
+    if (!isMultiSelect) {
+      setInputValue(selectedValue as string);
+    } else {
+      setInputValue('');
+    }
     setIsOpened(false);
-  }, []);
+  }, [isMultiSelect, selectedValue]);
   useOutsideClickDetector(comboBoxRef, closeCombobox, isOpened);
   useHotkeys('Escape', closeCombobox, { enabled: isOpened, enableOnTags: ['INPUT'] });
 
