@@ -37,18 +37,27 @@ const SaveToCollectionModal = ({
   onClose,
 }: SaveToCollectionModalProps) => {
   const [isAddingNewCollection, setIsAddingNewCollection] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const { t } = useTranslation();
   const toast = useToast();
 
   const handleSubmit = (data) => {
+    setIsSubmitting(true);
     logButtonClick('save_to_collection_modal_submit');
     onNewCollectionCreated(data.name)
-      .then(() => setIsAddingNewCollection(false))
+      .then(() => {
+        onClose();
+        toast(t('quran-reader:saved-to', { collectionName: data.name }), {
+          status: ToastStatus.Success,
+        });
+        return setIsAddingNewCollection(false);
+      })
       .catch(() => {
         toast(t('common:error.general'), {
           status: ToastStatus.Error,
         });
-      });
+      })
+      .finally(() => setIsSubmitting(false));
   };
 
   const onAddNewCollection = () => {
@@ -98,6 +107,7 @@ const SaveToCollectionModal = ({
                   },
                 ]}
                 actionText={t('common:submit')}
+                isSubmitting={isSubmitting}
                 onSubmit={handleSubmit}
               />
             </div>
