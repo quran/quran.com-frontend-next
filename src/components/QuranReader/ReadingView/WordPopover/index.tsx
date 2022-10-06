@@ -7,7 +7,6 @@ import ReadingViewWordActionsMenu from '../WordActionsMenu';
 import styles from './WordPopover.module.scss';
 
 import Popover, { ContentSide } from '@/dls/Popover';
-import useLongPress from '@/hooks/useLongPress';
 import {
   setReadingViewSelectedVerseKey,
   setReadingViewHoveredVerseKey,
@@ -34,10 +33,6 @@ const ReadingViewWordPopover: React.FC<Props> = ({ word, children }) => {
     [dispatch, word.verseKey],
   );
 
-  const onLongPress = useCallback(() => {
-    onOpenChange(true);
-  }, [onOpenChange]);
-  const [onTouchStart, onTouchEnd] = useLongPress(onLongPress);
   const onHoverChange = useCallback(
     (isHovering: boolean) => {
       dispatch(setReadingViewHoveredVerseKey(isHovering ? word.verseKey : null));
@@ -65,13 +60,7 @@ const ReadingViewWordPopover: React.FC<Props> = ({ word, children }) => {
       contentSide={ContentSide.TOP}
       contentSideOffset={-10}
       trigger={
-        <div
-          onMouseEnter={onMouseEnter}
-          onMouseLeave={onMouseLeave}
-          onTouchMove={onTouchMove}
-          onTouchStart={onTouchStart}
-          onTouchEnd={onTouchEnd}
-        >
+        <div onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} onTouchMove={onTouchMove}>
           {children}
         </div>
       }
