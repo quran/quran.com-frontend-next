@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-import { getAllChaptersData } from 'src/utils/chapter';
+import { getAllChaptersData } from '@/utils/chapter';
 import ChaptersData from 'types/ChaptersData';
 
 const useGetChaptersData = (lang: string): ChaptersData => {

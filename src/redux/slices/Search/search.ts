@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { RootState } from 'src/redux/RootState';
-import SliceName from 'src/redux/types/SliceName';
+import { RootState } from '@/redux/RootState';
+import SliceName from '@/redux/types/SliceName';
 
 export type Search = {
   searchHistory: string[];

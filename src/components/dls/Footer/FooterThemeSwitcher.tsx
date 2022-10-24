@@ -6,10 +6,10 @@ import PopoverMenu from '../PopoverMenu/PopoverMenu';
 
 import styles from './FooterThemeSwitcher.module.scss';
 
+import { themeIcons } from '@/components/Navbar/SettingsDrawer/ThemeSection';
 import ChevronSelectIcon from '@/icons/chevron-select.svg';
-import { themeIcons } from 'src/components/Navbar/SettingsDrawer/ThemeSection';
-import { selectTheme, setTheme } from 'src/redux/slices/theme';
-import ThemeType from 'src/redux/types/ThemeType';
+import { selectTheme, setTheme } from '@/redux/slices/theme';
+import ThemeType from '@/redux/types/ThemeType';
 
 const FooterThemeSwitcher = () => {
   const { t } = useTranslation('common');

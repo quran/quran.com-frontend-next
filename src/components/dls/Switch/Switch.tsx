@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 
 import styles from './Switch.module.scss';
 
-import { isRTLLocale } from 'src/utils/locale';
+import { isRTLLocale } from '@/utils/locale';
 
 // reference: https://vercel.com/design/switch
 

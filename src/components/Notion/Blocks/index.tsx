@@ -2,7 +2,7 @@ import classNames from 'classnames';
 
 import styles from './Blocks.module.scss';
 
-import Text from 'src/components/Changelog/Text';
+import Text from '@/components/Changelog/Text';
 
 export const renderBlock = (block, pageTitle: string) => {
   const { type } = block;
@@ -11,7 +11,7 @@ export const renderBlock = (block, pageTitle: string) => {
     case 'paragraph':
       return (
         <p className={styles.paragraph}>
-          <Text text={value.text} />
+          <Text text={value.rich_text} />
         </p>
       );
     case 'image': {
@@ -28,7 +28,7 @@ export const renderBlock = (block, pageTitle: string) => {
     case 'numbered_list_item':
       return (
         <li className={styles.list}>
-          <Text text={value.text} />
+          <Text text={value.rich_text} />
         </li>
       );
     case 'heading_1':

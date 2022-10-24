@@ -9,26 +9,26 @@ import { useDispatch, useSelector } from 'react-redux';
 import styles from './AudioSection.module.scss';
 import Section from './Section';
 
-import DataFetcher from 'src/components/DataFetcher';
-import Select from 'src/components/dls/Forms/Select';
-import HelperTooltip from 'src/components/dls/HelperTooltip/HelperTooltip';
-import SelectionCard from 'src/components/dls/SelectionCard/SelectionCard';
-import Toggle from 'src/components/dls/Toggle/Toggle';
-import usePersistPreferenceGroup from 'src/hooks/auth/usePersistPreferenceGroup';
+import DataFetcher from '@/components/DataFetcher';
+import Select from '@/dls/Forms/Select';
+import HelperTooltip from '@/dls/HelperTooltip/HelperTooltip';
+import SelectionCard from '@/dls/SelectionCard/SelectionCard';
+import Toggle from '@/dls/Toggle/Toggle';
+import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
 import {
   setEnableAutoScrolling,
   setShowTooltipWhenPlayingAudio,
   selectAudioPlayerState,
-} from 'src/redux/slices/AudioPlayer/state';
-import { setSettingsView, SettingsView } from 'src/redux/slices/navbar';
+} from '@/redux/slices/AudioPlayer/state';
+import { setSettingsView, SettingsView } from '@/redux/slices/navbar';
 import {
   selectReadingPreferences,
   setWordClickFunctionality,
-} from 'src/redux/slices/QuranReader/readingPreferences';
-import { makeAvailableRecitersUrl } from 'src/utils/apiPaths';
-import { logValueChange } from 'src/utils/eventLogger';
-import { generateSelectOptions } from 'src/utils/input';
-import { toLocalizedNumber } from 'src/utils/locale';
+} from '@/redux/slices/QuranReader/readingPreferences';
+import { makeAvailableRecitersUrl } from '@/utils/apiPaths';
+import { logValueChange } from '@/utils/eventLogger';
+import { generateSelectOptions } from '@/utils/input';
+import { toLocalizedNumber } from '@/utils/locale';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import { RecitersResponse } from 'types/ApiResponses';
 import PreferenceGroup from 'types/auth/PreferenceGroup';

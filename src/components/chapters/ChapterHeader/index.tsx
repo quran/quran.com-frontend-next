@@ -1,3 +1,4 @@
+/* eslint-disable i18next/no-literal-string */
 import React, { useRef } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
@@ -5,18 +6,18 @@ import { useDispatch } from 'react-redux';
 
 import styles from './ChapterHeader.module.scss';
 
-import InfoIcon from '@/icons/info.svg';
 import ChapterIconContainer, {
   ChapterIconsSize,
-} from 'src/components/chapters/ChapterIcon/ChapterIconContainer';
-import Bismillah from 'src/components/dls/Bismillah/Bismillah';
-import Button, { ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
-import { QURAN_READER_OBSERVER_ID } from 'src/components/QuranReader/observer';
-import PlayChapterAudioButton from 'src/components/QuranReader/PlayChapterAudioButton';
-import useIntersectionObserver from 'src/hooks/useObserveElement';
-import { setIsSettingsDrawerOpen, setSettingsView, SettingsView } from 'src/redux/slices/navbar';
-import { logButtonClick } from 'src/utils/eventLogger';
-import { getSurahInfoNavigationUrl } from 'src/utils/navigation';
+} from '@/components/chapters/ChapterIcon/ChapterIconContainer';
+import { QURAN_READER_OBSERVER_ID } from '@/components/QuranReader/observer';
+import PlayChapterAudioButton from '@/components/QuranReader/PlayChapterAudioButton';
+import Bismillah from '@/dls/Bismillah/Bismillah';
+import Button, { ButtonSize, ButtonVariant } from '@/dls/Button/Button';
+import useIntersectionObserver from '@/hooks/useObserveElement';
+import InfoIcon from '@/icons/info.svg';
+import { setIsSettingsDrawerOpen, setSettingsView, SettingsView } from '@/redux/slices/navbar';
+import { logButtonClick } from '@/utils/eventLogger';
+import { getSurahInfoNavigationUrl } from '@/utils/navigation';
 
 interface Props {
   chapterId: string;

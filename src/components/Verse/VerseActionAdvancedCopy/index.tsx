@@ -6,14 +6,14 @@ import VerseAdvancedCopy from '../AdvancedCopy/VerseAdvancedCopy';
 
 import styles from './VerseActionAdvancedCopy.module.scss';
 
+import ContentModal from '@/dls/ContentModal/ContentModal';
+import ContentModalHandles from '@/dls/ContentModal/types/ContentModalHandles';
+import Action from '@/dls/Modal/Action';
+import Footer from '@/dls/Modal/Footer';
+import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
+import Spinner from '@/dls/Spinner/Spinner';
 import AdvancedCopyIcon from '@/icons/clipboard.svg';
-import ContentModal from 'src/components/dls/ContentModal/ContentModal';
-import ContentModalHandles from 'src/components/dls/ContentModal/types/ContentModalHandles';
-import Action from 'src/components/dls/Modal/Action';
-import Footer from 'src/components/dls/Modal/Footer';
-import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
-import Spinner from 'src/components/dls/Spinner/Spinner';
-import { logEvent } from 'src/utils/eventLogger';
+import { logEvent } from '@/utils/eventLogger';
 import Verse from 'types/Verse';
 
 type VerseActionAdvancedCopyProps = {

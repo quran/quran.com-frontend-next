@@ -4,9 +4,9 @@ import SearchItem from '../SearchItem';
 
 import styles from './SearchQuerySuggestion.module.scss';
 
+import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import CloseIcon from '@/icons/close.svg';
 import SearchIcon from '@/icons/search.svg';
-import Button, { ButtonShape, ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
 
 interface Props {
   searchQuery: string;

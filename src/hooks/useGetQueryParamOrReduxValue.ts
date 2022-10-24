@@ -1,19 +1,18 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useEffect, useState } from 'react';
 
 import { useRouter } from 'next/router';
 import { useSelector, shallowEqual } from 'react-redux';
 
-import { RootState } from 'src/redux/RootState';
-import { selectWordByWordLocale } from 'src/redux/slices/QuranReader/readingPreferences';
-import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';
-import { areArraysEqual } from 'src/utils/array';
+import { RootState } from '@/redux/RootState';
+import { selectWordByWordLocale } from '@/redux/slices/QuranReader/readingPreferences';
+import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
+import { areArraysEqual } from '@/utils/array';
 import {
   equalityCheckerByType,
   getQueryParamValueByType,
   QueryParamValueType,
-} from 'src/utils/query-params';
-import { isValidTranslationsQueryParamValue } from 'src/utils/queryParamValidator';
+} from '@/utils/query-params';
+import { isValidTranslationsQueryParamValue } from '@/utils/queryParamValidator';
 import QueryParam from 'types/QueryParam';
 
 const QUERY_PARAMS_DATA = {
@@ -62,33 +61,31 @@ const useGetQueryParamOrReduxValue = (
   }
   // @ts-ignore
   const selectedValue = useSelector(...useSelectorArguments);
-  const [valueDetails, setValueDetails] = useState({
+  const valueDetails = {
     value: selectedValue,
     isQueryParamDifferent: false,
-  });
+  };
 
-  useEffect(() => {
-    // if the param exists in the url
-    if (isReady && query[queryParam]) {
-      const { validate, valueType } = QUERY_PARAMS_DATA[queryParam];
+  // if the param exists in the url
+  if (isReady && query[queryParam]) {
+    const { validate, valueType } = QUERY_PARAMS_DATA[queryParam];
 
-      const paramStringValue = String(query[queryParam]);
-      const isValidValue = validate(paramStringValue);
-      if (!isValidValue) {
-        setValueDetails({ isQueryParamDifferent: false, value: selectedValue });
-        return;
-      }
-
-      const parsedQueryParamValue = getQueryParamValueByType(paramStringValue, valueType);
-      const checkEquality = equalityCheckerByType[valueType];
-      const isQueryParamDifferent = checkEquality(parsedQueryParamValue, selectedValue);
-
-      setValueDetails({
-        value: parsedQueryParamValue,
-        isQueryParamDifferent,
-      });
+    const paramStringValue = String(query[queryParam]);
+    const isValidValue = validate(paramStringValue);
+    if (!isValidValue) {
+      return { isQueryParamDifferent: false, value: selectedValue };
     }
-  }, [isReady, query, queryParam, selectedValue]);
+
+    const parsedQueryParamValue = getQueryParamValueByType(paramStringValue, valueType);
+    const checkEquality = equalityCheckerByType[valueType];
+    const isQueryParamDifferent = !checkEquality(parsedQueryParamValue, selectedValue);
+
+    return {
+      value: parsedQueryParamValue,
+      isQueryParamDifferent,
+    };
+  }
+
   return valueDetails;
 };
 

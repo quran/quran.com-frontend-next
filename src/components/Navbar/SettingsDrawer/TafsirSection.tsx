@@ -6,23 +6,23 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import Section from './Section';
 import styles from './TafsirSection.module.scss';
 
-import DataFetcher from 'src/components/DataFetcher';
-import Counter from 'src/components/dls/Counter/Counter';
-import SelectionCard from 'src/components/dls/SelectionCard/SelectionCard';
-import Skeleton from 'src/components/dls/Skeleton/Skeleton';
-import { setSettingsView, SettingsView } from 'src/redux/slices/navbar';
+import DataFetcher from '@/components/DataFetcher';
+import Counter from '@/dls/Counter/Counter';
+import SelectionCard from '@/dls/SelectionCard/SelectionCard';
+import Skeleton from '@/dls/Skeleton/Skeleton';
+import { setSettingsView, SettingsView } from '@/redux/slices/navbar';
 import {
   MAXIMUM_TAFSIR_FONT_STEP,
   MINIMUM_FONT_STEP,
   selectQuranReaderStyles,
   increaseTafsirFontScale,
   decreaseTafsirFontScale,
-} from 'src/redux/slices/QuranReader/styles';
-import { selectSelectedTafsirs } from 'src/redux/slices/QuranReader/tafsirs';
-import { makeTafsirsUrl } from 'src/utils/apiPaths';
-import { areArraysEqual } from 'src/utils/array';
-import { logValueChange } from 'src/utils/eventLogger';
-import { toLocalizedNumber } from 'src/utils/locale';
+} from '@/redux/slices/QuranReader/styles';
+import { selectSelectedTafsirs } from '@/redux/slices/QuranReader/tafsirs';
+import { makeTafsirsUrl } from '@/utils/apiPaths';
+import { areArraysEqual } from '@/utils/array';
+import { logValueChange } from '@/utils/eventLogger';
+import { toLocalizedNumber } from '@/utils/locale';
 import { TafsirsResponse } from 'types/ApiResponses';
 
 const TafsirSection = () => {
@@ -36,9 +36,7 @@ const TafsirSection = () => {
     () => (
       <div>
         {selectedTafsirs.map((id) => (
-          <Skeleton key={id}>
-            <div>{id}</div>
-          </Skeleton>
+          <Skeleton className={styles.skeleton} key={id} />
         ))}
       </div>
     ),

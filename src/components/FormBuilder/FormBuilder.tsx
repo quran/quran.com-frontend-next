@@ -12,6 +12,7 @@ export type SubmissionResult<T> = Promise<void | { errors: { [key in keyof T]: s
 type FormBuilderProps<T> = {
   formFields: FormBuilderFormField[];
   onSubmit: (data: T) => void | SubmissionResult<T>;
+  isSubmitting?: boolean;
   actionText: string;
   actionProps?: ButtonProps;
 };
@@ -21,6 +22,7 @@ const FormBuilder = <T,>({
   onSubmit,
   actionText,
   actionProps = {},
+  isSubmitting,
 }: FormBuilderProps<T>) => {
   const { handleSubmit, control, setError } = useForm({ mode: 'onBlur' });
 
@@ -71,6 +73,10 @@ const FormBuilder = <T,>({
       <Button
         {...actionProps}
         htmlType="submit"
+        isLoading={isSubmitting}
+        onClick={(e) => {
+          e.stopPropagation();
+        }}
         className={classNames(styles.submitButton, actionProps.className)}
       >
         {actionText}

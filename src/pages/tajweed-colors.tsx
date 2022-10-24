@@ -5,7 +5,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from './tajweedColors.module.scss';
 
-import NextSeoWrapper from 'src/components/NextSeoWrapper';
+import NextSeoWrapper from '@/components/NextSeoWrapper';
 
 const TAJWEED_COLORS = ['edgham', 'mad-2', 'mad-2-4-6', 'mad-4-5', 'mad-6', 'ekhfa', 'qalqala'];
 

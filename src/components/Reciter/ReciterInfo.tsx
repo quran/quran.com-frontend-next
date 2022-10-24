@@ -10,8 +10,8 @@ import { StationType } from '../Radio/types';
 import styles from './ReciterInfo.module.scss';
 
 import PlayIcon from '@/icons/play-arrow.svg';
-import { makeCDNUrl } from 'src/utils/cdn';
-import { logEvent } from 'src/utils/eventLogger';
+import { makeCDNUrl } from '@/utils/cdn';
+import { logEvent } from '@/utils/eventLogger';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import Reciter from 'types/Reciter';
 

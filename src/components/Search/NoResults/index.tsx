@@ -4,8 +4,8 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from './NoResults.module.scss';
 
+import AdvancedSearchLink from '@/components/Navbar/SearchDrawer/AdvancedSearchLink';
 import IconSearch from '@/icons/search.svg';
-import AdvancedSearchLink from 'src/components/Navbar/SearchDrawer/AdvancedSearchLink';
 
 interface Props {
   searchUrl?: string;

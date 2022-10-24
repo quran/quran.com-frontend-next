@@ -1,11 +1,11 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import resetSettings from 'src/redux/actions/reset-settings';
-import syncUserPreferences from 'src/redux/actions/sync-user-preferences';
-import { getQuranReaderStylesInitialState } from 'src/redux/defaultSettings/util';
-import { RootState } from 'src/redux/RootState';
-import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
-import SliceName from 'src/redux/types/SliceName';
+import resetSettings from '@/redux/actions/reset-settings';
+import syncUserPreferences from '@/redux/actions/sync-user-preferences';
+import { getQuranReaderStylesInitialState } from '@/redux/defaultSettings/util';
+import { RootState } from '@/redux/RootState';
+import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
+import SliceName from '@/redux/types/SliceName';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 import { MushafLines, QuranFont } from 'types/QuranReader';
 

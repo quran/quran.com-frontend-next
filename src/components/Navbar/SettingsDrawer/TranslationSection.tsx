@@ -7,24 +7,24 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import Section from './Section';
 import styles from './TranslationSection.module.scss';
 
-import DataFetcher from 'src/components/DataFetcher';
-import Counter from 'src/components/dls/Counter/Counter';
-import SelectionCard from 'src/components/dls/SelectionCard/SelectionCard';
-import Skeleton from 'src/components/dls/Skeleton/Skeleton';
-import usePersistPreferenceGroup from 'src/hooks/auth/usePersistPreferenceGroup';
-import { setSettingsView, SettingsView } from 'src/redux/slices/navbar';
+import DataFetcher from '@/components/DataFetcher';
+import Counter from '@/dls/Counter/Counter';
+import SelectionCard from '@/dls/SelectionCard/SelectionCard';
+import Skeleton from '@/dls/Skeleton/Skeleton';
+import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
+import { setSettingsView, SettingsView } from '@/redux/slices/navbar';
 import {
   decreaseTranslationFontScale,
   increaseTranslationFontScale,
   MAXIMUM_TRANSLATIONS_FONT_STEP,
   MINIMUM_FONT_STEP,
   selectQuranReaderStyles,
-} from 'src/redux/slices/QuranReader/styles';
-import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';
-import { makeTranslationsUrl } from 'src/utils/apiPaths';
-import { areArraysEqual } from 'src/utils/array';
-import { logValueChange } from 'src/utils/eventLogger';
-import { toLocalizedNumber } from 'src/utils/locale';
+} from '@/redux/slices/QuranReader/styles';
+import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
+import { makeTranslationsUrl } from '@/utils/apiPaths';
+import { areArraysEqual } from '@/utils/array';
+import { logValueChange } from '@/utils/eventLogger';
+import { toLocalizedNumber } from '@/utils/locale';
 import { TranslationsResponse } from 'types/ApiResponses';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 
@@ -43,9 +43,7 @@ const TranslationSection = () => {
     () => (
       <div>
         {selectedTranslations.map((id) => (
-          <Skeleton key={id}>
-            <div>{id}</div>
-          </Skeleton>
+          <Skeleton className={styles.skeleton} key={id} />
         ))}
       </div>
     ),

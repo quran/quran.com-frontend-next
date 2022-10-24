@@ -2,12 +2,12 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { getThemeInitialState } from '../defaultSettings/util';
 
-import resetSettings from 'src/redux/actions/reset-settings';
-import syncUserPreferences from 'src/redux/actions/sync-user-preferences';
-import { RootState } from 'src/redux/RootState';
-import SliceName from 'src/redux/types/SliceName';
-import Theme from 'src/redux/types/Theme';
-import ThemeType from 'src/redux/types/ThemeType';
+import resetSettings from '@/redux/actions/reset-settings';
+import syncUserPreferences from '@/redux/actions/sync-user-preferences';
+import { RootState } from '@/redux/RootState';
+import SliceName from '@/redux/types/SliceName';
+import Theme from '@/redux/types/Theme';
+import ThemeType from '@/redux/types/ThemeType';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 
 export const themeSlice = createSlice({

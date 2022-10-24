@@ -5,7 +5,7 @@
         "auth-onboarding": {
             "slide-1": {
                 "action": "Regardez ce qu'il y a de nouveau",
-                "title": "Bienvenue sur Quran.com <br> <\/br> Bêta du compte utilisateur"
+                "title": "Bienvenue sur Quran.com <br> <\/br> Compte utilisateur"
             },
             "slide-2": {
                 "action": "Prochain",
@@ -16,6 +16,12 @@
                 "action": "OK, j'ai compris",
                 "description": "Merci d'utiliser Quran.com et nous serions heureux d'entendre vos commentaires sur <link> feedback.quran.com <\/link>",
                 "title": "Nous voulons entendre vos pensées"
+            }
+        },
+        "collections-announcement": {
+            "slide-1": {
+                "description": "Nous sommes très heureux de vous annoncer que vous pouvez désormais regrouper les signets sous \"collections\" ! <br\/> <br\/> <li> Ajoutez autant de collections que vous le souhaitez <\/li> <li> Ajoutez un signet à une ou plusieurs collections <\/li> <li> Et plus encore ! <\/li>",
+                "title": "Les collections de marque-pages sont là !"
             }
         }
     },
@@ -182,9 +188,6 @@
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} sur {{totalNumberOfResults}} résultats de recherche",
     "popular-links": "Liens populaires",
     "popup": {
-        "cta-1": "Faire un don mensuel",
-        "cta-2": "Faire un don unique",
-        "cta-3": "Apprendre encore plus",
         "footnote": "Les dons mensuels nous permettent de moins nous concentrer sur la collecte de fonds",
         "text-1": "Nous nous engageons à servir le monde de la connaissance et de la technologie coraniques, toujours gratuitement.",
         "text-2": "Quran.com est une opportunité parfaite pour la charité continue (Sadaqah Jariyah). Veuillez envisager d'investir dans votre au-delà en tant que donateur mensuel (ou ponctuel).",
@@ -207,7 +210,10 @@
     "reciters": "Récitants",
     "reflect": "Réfléchir",
     "remove": "Supprimer",
+    "rename": "Renommer",
     "retry": "Réessayez",
+    "rub": "Rub el Hizb",
+    "save-to-collection": "Enregistrer dans la collection",
     "search-for": "Rechercher '{{searchQuery}}'",
     "search-results": "{{count}} résultats de recherche",
     "search": {
@@ -246,6 +252,7 @@
     "share": "Partager",
     "shared": "Le lien a été copié dans le presse-papiers !",
     "sidebar": {
+        "search-hizb": "Rechercher",
         "search-juz": "Rechercher Juz",
         "search-page": "Page de recherche",
         "search-surah": "Recherche sourate",

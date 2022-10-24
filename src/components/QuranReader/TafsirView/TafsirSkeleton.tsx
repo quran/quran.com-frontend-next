@@ -3,7 +3,7 @@ import range from 'lodash/range';
 
 import styles from './TafsirView.module.scss';
 
-import Skeleton from 'src/components/dls/Skeleton/Skeleton';
+import Skeleton from '@/dls/Skeleton/Skeleton';
 
 const TafsirSkeleton = () => {
   return (

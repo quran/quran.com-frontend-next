@@ -8,8 +8,8 @@ import { sendParent } from 'xstate/lib/actions';
 import RadioContext from './types/RadioContext';
 import RadioEventType from './types/RadioEventType';
 
-import curatedStations from 'src/components/Radio/curatedStations';
-import { AudioTrack, StationType } from 'src/components/Radio/types';
+import curatedStations from '@/components/Radio/curatedStations';
+import { AudioTrack, StationType } from '@/components/Radio/types';
 
 export const createRadioMachine = () => {
   return createMachine(

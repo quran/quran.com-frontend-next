@@ -5,7 +5,7 @@ import { useState } from 'react';
 
 import Modal from './Modal';
 
-import Button, { ButtonVariant, ButtonType } from 'src/components/dls/Button/Button';
+import Button, { ButtonVariant, ButtonType } from '@/dls/Button/Button';
 
 export default {
   title: 'dls/Modal',

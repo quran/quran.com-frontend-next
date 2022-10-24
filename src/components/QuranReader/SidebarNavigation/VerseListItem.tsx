@@ -6,12 +6,12 @@ import { useSelector } from 'react-redux';
 
 import styles from './SidebarNavigation.module.scss';
 
-import Link from 'src/components/dls/Link/Link';
-import { SCROLL_TO_NEAREST_ELEMENT, useScrollToElement } from 'src/hooks/useScrollToElement';
-import { selectIsVerseKeySelected } from 'src/redux/slices/QuranReader/readingTracker';
-import { toLocalizedNumber } from 'src/utils/locale';
-import { getChapterWithStartingVerseUrl } from 'src/utils/navigation';
-import { getVerseNumberFromKey } from 'src/utils/verse';
+import Link from '@/dls/Link/Link';
+import { SCROLL_TO_NEAREST_ELEMENT, useScrollToElement } from '@/hooks/useScrollToElement';
+import { selectIsVerseKeySelected } from '@/redux/slices/QuranReader/readingTracker';
+import { toLocalizedNumber } from '@/utils/locale';
+import { getChapterWithStartingVerseUrl } from '@/utils/navigation';
+import { getVerseNumberFromKey } from '@/utils/verse';
 
 type VerseListItemProps = {
   verseKey: string;

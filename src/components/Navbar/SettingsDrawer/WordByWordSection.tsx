@@ -7,18 +7,18 @@ import { shallowEqual, useSelector } from 'react-redux';
 import Section from './Section';
 import styles from './WordByWordSection.module.scss';
 
-import Checkbox from 'src/components/dls/Forms/Checkbox/Checkbox';
-import Select, { SelectSize } from 'src/components/dls/Forms/Select';
-import HelperTooltip from 'src/components/dls/HelperTooltip/HelperTooltip';
-import usePersistPreferenceGroup from 'src/hooks/auth/usePersistPreferenceGroup';
+import Checkbox from '@/dls/Forms/Checkbox/Checkbox';
+import Select, { SelectSize } from '@/dls/Forms/Select';
+import HelperTooltip from '@/dls/HelperTooltip/HelperTooltip';
+import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
 import {
   setShowWordByWordTranslation,
   setShowWordByWordTransliteration,
   setSelectedWordByWordLocale,
   selectReadingPreferences,
-} from 'src/redux/slices/QuranReader/readingPreferences';
-import { logValueChange } from 'src/utils/eventLogger';
-import { getLocaleName } from 'src/utils/locale';
+} from '@/redux/slices/QuranReader/readingPreferences';
+import { logValueChange } from '@/utils/eventLogger';
+import { getLocaleName } from '@/utils/locale';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 
 export const WBW_LOCALES = ['en', 'ur', 'id', 'bn', 'tr', 'fa', 'ru', 'hi', 'de', 'ta', 'inh'];

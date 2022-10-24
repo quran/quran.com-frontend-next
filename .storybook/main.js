@@ -41,10 +41,21 @@ module.exports = {
             path.resolve('./'),
         ];
 
+        // @/ root alias doesn't work in storybook, so we have to write the aliases manually
+        const otherAliases = ['components', 'utils', 'redux', 'hooks', 'contexts'];
+
         // Add support for module aliases (same aliases in tsconfig.json)
         config.resolve.alias = {
-            ...config.resolve.alias,
+            ...(config.resolve.alias || {}),
             '@/icons': path.resolve(__dirname, "../public/icons"),
+            '@/dls': path.resolve(__dirname, "../src/components/dls"),
+            '@/api': path.resolve(__dirname, "../src/api"),
+            '@/data': path.resolve(__dirname, "../data"),
+            '@/types': path.resolve(__dirname, "../types"),
+            ...(otherAliases.reduce((acc, folder) => ({ 
+                ...acc, 
+                [`@/${folder}`]: path.resolve(__dirname, "../src", folder) 
+            }), {})),
           };
 
         const fileLoaderRule = config.module.rules.find(rule => Array.isArray(rule.test) ? rule.test[0].test('.svg') : rule.test.test('.svg'));

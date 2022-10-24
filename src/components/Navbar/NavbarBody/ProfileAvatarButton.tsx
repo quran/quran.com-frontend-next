@@ -5,15 +5,15 @@ import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
 
+import Button, { ButtonShape, ButtonVariant } from '@/dls/Button/Button';
+import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import ArrowIcon from '@/icons/east.svg';
 import LogoutIcon from '@/icons/logout.svg';
 import IconPerson from '@/icons/person.svg';
-import Button, { ButtonShape, ButtonVariant } from 'src/components/dls/Button/Button';
-import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
-import { removeLastSyncAt } from 'src/redux/slices/Auth/userDataSync';
-import { logoutUser } from 'src/utils/auth/api';
-import { isLoggedIn } from 'src/utils/auth/login';
-import { logButtonClick } from 'src/utils/eventLogger';
+import { removeLastSyncAt } from '@/redux/slices/Auth/userDataSync';
+import { logoutUser } from '@/utils/auth/api';
+import { isLoggedIn } from '@/utils/auth/login';
+import { logButtonClick } from '@/utils/eventLogger';
 
 const shouldShowButton = () => {
   const allowedPercentageOfUsers = Number(process.env.NEXT_PUBLIC_SHOW_LOGIN_BUTTON_THRESHOLD);
@@ -53,6 +53,7 @@ const ProfileAvatarButton = () => {
   const trigger = (
     <Button
       tooltip={isUserLoggedIn ? t('profile') : t('login')}
+      ariaLabel={isUserLoggedIn ? t('profile') : t('login')}
       variant={ButtonVariant.Ghost}
       href={isUserLoggedIn ? null : '/login'}
       shape={ButtonShape.Circle}

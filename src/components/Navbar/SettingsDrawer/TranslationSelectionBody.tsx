@@ -9,24 +9,21 @@ import { useSelector } from 'react-redux';
 
 import styles from './SearchSelectionBody.module.scss';
 
+import DataFetcher from '@/components/DataFetcher';
+import Checkbox from '@/dls/Forms/Checkbox/Checkbox';
+import Input from '@/dls/Forms/Input';
+import SpinnerContainer from '@/dls/Spinner/SpinnerContainer';
+import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
+import useRemoveQueryParam from '@/hooks/useRemoveQueryParam';
 import IconSearch from '@/icons/search.svg';
-import DataFetcher from 'src/components/DataFetcher';
-import Checkbox from 'src/components/dls/Forms/Checkbox/Checkbox';
-import Input from 'src/components/dls/Forms/Input';
-import SpinnerContainer from 'src/components/dls/Spinner/SpinnerContainer';
-import usePersistPreferenceGroup from 'src/hooks/auth/usePersistPreferenceGroup';
 import {
   selectTranslations,
   setSelectedTranslations,
-} from 'src/redux/slices/QuranReader/translations';
-import { makeTranslationsUrl } from 'src/utils/apiPaths';
-import {
-  logValueChange,
-  logItemSelectionChange,
-  logEmptySearchResults,
-} from 'src/utils/eventLogger';
-import filterTranslations from 'src/utils/filter-translations';
-import { getLocaleName } from 'src/utils/locale';
+} from '@/redux/slices/QuranReader/translations';
+import { makeTranslationsUrl } from '@/utils/apiPaths';
+import { logValueChange, logItemSelectionChange, logEmptySearchResults } from '@/utils/eventLogger';
+import filterTranslations from '@/utils/filter-translations';
+import { getLocaleName } from '@/utils/locale';
 import { TranslationsResponse } from 'types/ApiResponses';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 import AvailableTranslation from 'types/AvailableTranslation';
@@ -42,6 +39,7 @@ const TranslationSelectionBody = () => {
   const translationsState = useSelector(selectTranslations);
   const { selectedTranslations } = translationsState;
   const [searchQuery, setSearchQuery] = useState('');
+  const removeQueryParam = useRemoveQueryParam();
 
   /**
    * Persist settings in the DB if the user is logged in before dispatching
@@ -73,6 +71,11 @@ const TranslationSelectionBody = () => {
           ? [...selectedTranslations, selectedTranslationId]
           : selectedTranslations.filter((id) => id !== selectedTranslationId); // remove the id
 
+        // if unchecked also remove from query param
+        if (!isChecked) {
+          removeQueryParam(QueryParam.Translations);
+        }
+
         logItemSelectionChange('translation', selectedTranslationId.toString(), isChecked);
         logValueChange('selected_translations', selectedTranslations, nextTranslations);
         onTranslationsSettingsChange(
@@ -86,7 +89,7 @@ const TranslationSelectionBody = () => {
         }
       };
     },
-    [lang, onTranslationsSettingsChange, router, selectedTranslations],
+    [lang, onTranslationsSettingsChange, router, selectedTranslations, removeQueryParam],
   );
 
   const renderTranslationGroup = useCallback(

@@ -5,7 +5,7 @@
         "auth-onboarding": {
             "slide-1": {
                 "action": "Yeniliklere bakın",
-                "title": "Kuran.com'a hoş geldiniz <br> <\/br> Kullanıcı Hesabı Beta"
+                "title": "Kuran.com'a Hoş Geldiniz <br> <\/br> Kullanıcı Hesabı"
             },
             "slide-2": {
                 "action": "Sonraki",
@@ -16,6 +16,12 @@
                 "action": "Tamam anladım",
                 "description": "Kuran.com'u kullandığınız için teşekkür ederiz ve <link> feedback.quran.com <\/link> ile ilgili görüşlerinizi duymaktan memnuniyet duyarız.",
                 "title": "Düşüncelerinizi duymak istiyoruz"
+            }
+        },
+        "collections-announcement": {
+            "slide-1": {
+                "description": "Artık yer imlerini \"koleksiyonlar\" altında gruplayabileceğinizi duyurmaktan çok mutluyuz! <br\/> <br\/> <li> İstediğiniz kadar koleksiyon ekleyin <\/li> <li> Bir veya daha fazla koleksiyona yer imi ekleyin <\/li> <li> Ve daha fazlası! <\/li>",
+                "title": "Yer imi koleksiyonları burada!"
             }
         }
     },
@@ -182,9 +188,6 @@
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} \/ {{totalNumberOfResults}} arama sonucu",
     "popular-links": "Popüler Bağlantılar",
     "popup": {
-        "cta-1": "Aylık Bağış Yapın",
-        "cta-2": "Bir Kez Bağış Yapın",
-        "cta-3": "Daha fazla bilgi edin",
         "footnote": "Aylık bağışlar, bağış toplamaya daha az odaklanmamızı sağlıyor",
         "text-1": "Her zaman ücretsiz olarak dünya Kuran bilgisine ve teknolojisine hizmet etmeye kararlıyız.",
         "text-2": "Kuran.com sürekli sadaka (Sadaqah Jariyah) için mükemmel bir fırsattır. Lütfen Ahiretinize aylık (veya bir kerelik) bağışçı olarak yatırım yapmayı düşünün.",
@@ -207,7 +210,10 @@
     "reciters": "okuyucular",
     "reflect": "Yansıt",
     "remove": "Kaldırmak",
+    "rename": "Yeniden isimlendirmek",
     "retry": "Yeniden dene",
+    "rub": "El Hizb'i ovmak",
+    "save-to-collection": "Koleksiyona Kaydet",
     "search-for": "'{{searchQuery}}' için arama yapın",
     "search-results": "{{count}} arama sonucu",
     "search": {
@@ -246,6 +252,7 @@
     "share": "Paylaş",
     "shared": "Bağlantı panoya kopyalandı!",
     "sidebar": {
+        "search-hizb": "Hizb'de Ara",
         "search-juz": "Cüz ara",
         "search-page": "Arama Sayfası",
         "search-surah": "Sure ara",

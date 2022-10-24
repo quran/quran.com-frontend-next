@@ -1,6 +1,6 @@
 import Document, { Html, Head, Main, NextScript, DocumentContext } from 'next/document';
 
-import { getDir } from 'src/utils/locale';
+import { getDir } from '@/utils/locale';
 
 const DEFAULT_LOCALE = 'en';
 

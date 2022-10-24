@@ -7,22 +7,15 @@ import useTranslation from 'next-translate/useTranslation';
 import Spinner from '../dls/Spinner/Spinner';
 import styles from '../QuranReader/TranslationView/TranslationViewCell.module.scss';
 
-import PauseIcon from '@/icons/pause-outline.svg';
+import Button, { ButtonShape, ButtonSize, ButtonType, ButtonVariant } from '@/dls/Button/Button';
+import useGetQueryParamOrXstateValue from '@/hooks/useGetQueryParamOrXstateValue';
 import PlayIcon from '@/icons/play-outline.svg';
-import Button, {
-  ButtonShape,
-  ButtonSize,
-  ButtonType,
-  ButtonVariant,
-} from 'src/components/dls/Button/Button';
+import QueryParam from '@/types/QueryParam';
+import { getChapterData } from '@/utils/chapter';
+import { logButtonClick } from '@/utils/eventLogger';
+import { getChapterNumberFromKey, getVerseNumberFromKey } from '@/utils/verse';
 import DataContext from 'src/contexts/DataContext';
-import { getChapterData } from 'src/utils/chapter';
-import { logButtonClick } from 'src/utils/eventLogger';
-import { getChapterNumberFromKey, getVerseNumberFromKey } from 'src/utils/verse';
-import {
-  selectIsVerseBeingPlayed,
-  selectIsVerseLoading,
-} from 'src/xstate/actors/audioPlayer/selectors';
+import { selectIsVerseLoading } from 'src/xstate/actors/audioPlayer/selectors';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 
 interface PlayVerseAudioProps {
@@ -38,8 +31,11 @@ const PlayVerseAudioButton: React.FC<PlayVerseAudioProps> = ({
 }) => {
   const audioService = useContext(AudioPlayerMachineContext);
   const { t } = useTranslation('common');
-  const isVerseBeingPlayed = useXstateSelector(audioService, (state) =>
-    selectIsVerseBeingPlayed(state, verseKey),
+  const {
+    value: reciterId,
+    isQueryParamDifferent: reciterQueryParamDifferent,
+  }: { value: number; isQueryParamDifferent: boolean } = useGetQueryParamOrXstateValue(
+    QueryParam.Reciter,
   );
 
   const isVerseLoading = useXstateSelector(audioService, (state) =>
@@ -54,17 +50,12 @@ const PlayVerseAudioButton: React.FC<PlayVerseAudioProps> = ({
     // eslint-disable-next-line i18next/no-literal-string
     logButtonClick(`${isTranslationView ? 'translation_view' : 'reading_view'}_play_verse`);
 
-    audioService.send({ type: 'PLAY_AYAH', surah: chapterId, ayahNumber: verseNumber });
-
-    if (onActionTriggered) {
-      onActionTriggered();
-    }
-  };
-
-  const onPauseClicked = () => {
-    // eslint-disable-next-line i18next/no-literal-string
-    logButtonClick(`${isTranslationView ? 'translation_view' : 'reading_view'}_pause_verse`);
-    audioService.send('TOGGLE');
+    audioService.send({
+      type: 'PLAY_AYAH',
+      surah: chapterId,
+      ayahNumber: verseNumber,
+      reciterId: reciterQueryParamDifferent ? reciterId : undefined,
+    });
 
     if (onActionTriggered) {
       onActionTriggered();
@@ -81,25 +72,6 @@ const PlayVerseAudioButton: React.FC<PlayVerseAudioProps> = ({
         variant={ButtonVariant.Ghost}
       >
         <Spinner />
-      </Button>
-    );
-  }
-
-  if (isVerseBeingPlayed) {
-    return (
-      <Button
-        variant={ButtonVariant.Ghost}
-        size={ButtonSize.Small}
-        tooltip={t('audio.player.pause')}
-        onClick={onPauseClicked}
-        className={classNames(styles.iconContainer, styles.verseAction, {
-          [styles.fadedVerseAction]: isTranslationView,
-        })}
-        shape={ButtonShape.Circle}
-      >
-        <span className={styles.icon}>
-          <PauseIcon />
-        </span>
       </Button>
     );
   }

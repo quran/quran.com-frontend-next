@@ -7,11 +7,11 @@ import RemainingRangeCount from './RemainingRangeCount';
 import RepeatAudioModal from './RepeatAudioModal/RepeatAudioModal';
 import { RepetitionMode } from './RepeatAudioModal/SelectRepetitionMode';
 
+import Wrapper from '@/components/Wrapper/Wrapper';
+import Badge from '@/dls/Badge/Badge';
+import Button, { ButtonShape, ButtonVariant } from '@/dls/Button/Button';
 import RepeatIcon from '@/icons/repeat.svg';
-import Badge from 'src/components/dls/Badge/Badge';
-import Button, { ButtonShape, ButtonVariant } from 'src/components/dls/Button/Button';
-import Wrapper from 'src/components/Wrapper/Wrapper';
-import { logButtonClick } from 'src/utils/eventLogger';
+import { logButtonClick } from '@/utils/eventLogger';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 
 const RepeatAudioButton = ({ isLoading }) => {

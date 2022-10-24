@@ -5,7 +5,7 @@
         "auth-onboarding": {
             "slide-1": {
                 "action": "Lihat apa yang baru",
-                "title": "Selamat datang di Quran.com <br> <\/br> Akun Pengguna Beta"
+                "title": "Selamat datang di Quran.com <br> <\/br> Akun Pengguna"
             },
             "slide-2": {
                 "action": "Lanjut",
@@ -16,6 +16,12 @@
                 "action": "OK saya mengerti",
                 "description": "Terima kasih telah menggunakan Quran.com dan kami akan senang mendengar tanggapan Anda di <link> feedback.quran.com <\/link>",
                 "title": "Kami ingin mendengar pendapat Anda"
+            }
+        },
+        "collections-announcement": {
+            "slide-1": {
+                "description": "Kami sangat senang mengumumkan bahwa sekarang Anda dapat mengelompokkan bookmark di bawah \"koleksi\"! <br\/> <br\/> <li> Tambahkan koleksi sebanyak yang Anda inginkan <\/li> <li> Tambahkan bookmark ke satu atau beberapa koleksi <\/li> <li> Dan banyak lagi! <\/li>",
+                "title": "Koleksi bookmark ada di sini!"
             }
         }
     },
@@ -182,9 +188,6 @@
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} dari {{totalNumberOfResults}} hasil pencarian",
     "popular-links": "Link populer",
     "popup": {
-        "cta-1": "Donasi Bulanan",
-        "cta-2": "Donasi Satu Kali",
-        "cta-3": "Belajarlah lagi",
         "footnote": "Donasi bulanan memungkinkan kami untuk tidak terlalu fokus pada penggalangan dana",
         "text-1": "Kami berkomitmen untuk melayani dunia pengetahuan dan teknologi Al-Qur'an, selalu gratis.",
         "text-2": "Quran.com adalah kesempatan sempurna untuk amal berkelanjutan (Sadaqah Jariyah). Harap pertimbangkan untuk berinvestasi di akhirat Anda sebagai donor bulanan (atau satu kali).",
@@ -207,7 +210,10 @@
     "reciters": "Qari",
     "reflect": "Mencerminkan",
     "remove": "Keluarkan",
+    "rename": "Ganti nama",
     "retry": "Cuba lagi (Retry)",
+    "rub": "Rub el Hizb",
+    "save-to-collection": "Simpan ke Koleksi",
     "search-for": "Telusuri '{{searchQuery}}'",
     "search-results": "{{count}} hasil penelusuran",
     "search": {
@@ -246,6 +252,7 @@
     "share": "Membagikan",
     "shared": "Tautan telah disalin ke papan klip!",
     "sidebar": {
+        "search-hizb": "Cari Hizbut Tahrir",
         "search-juz": "Cari Juz",
         "search-page": "Cari Halaman",
         "search-surah": "Cari Surat",

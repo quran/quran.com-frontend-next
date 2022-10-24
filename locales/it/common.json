@@ -5,7 +5,7 @@
         "auth-onboarding": {
             "slide-1": {
                 "action": "Guarda cosa c'è di nuovo",
-                "title": "Benvenuto su Quran.com <br> <\/br> Account utente Beta"
+                "title": "Benvenuto su Quran.com <br> <\/br> Account utente"
             },
             "slide-2": {
                 "action": "Prossimo",
@@ -16,6 +16,12 @@
                 "action": "Ok, capito",
                 "description": "Grazie per aver utilizzato Quran.com e saremo lieti di ricevere il tuo feedback su <link> feedback.quran.com <\/link>",
                 "title": "Vogliamo ascoltare i tuoi pensieri"
+            }
+        },
+        "collections-announcement": {
+            "slide-1": {
+                "description": "Siamo molto felici di annunciare che ora puoi raggruppare i segnalibri in \"raccolte\"! <br\/> <br\/> <li> Aggiungi tutte le raccolte che desideri <\/li> <li> Aggiungi un segnalibro a una o più raccolte <\/li> <li> E altro ancora! <\/li>",
+                "title": "Le raccolte di segnalibri sono qui!"
             }
         }
     },
@@ -149,7 +155,7 @@
     "from": "A partire dal",
     "fundraising": {
         "description": "Le donazioni mensili ci aiutano a migliorare Quran.com e sostenere le operazioni, quindi ci concentriamo meno sulla raccolta fondi e più sulla creazione di impatto.",
-        "learn-more": "Per saperne di più",
+        "learn-more": "Scopri di più",
         "title": "Diventa un donatore mensile"
     },
     "help": "Aiuto",
@@ -182,9 +188,6 @@
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} di {{totalNumberOfResults}} risultati di ricerca",
     "popular-links": "Link popolari",
     "popup": {
-        "cta-1": "Dona mensilmente",
-        "cta-2": "Dona una volta",
-        "cta-3": "Per saperne di più",
         "footnote": "Le donazioni mensili ci consentono di concentrarci meno sulla raccolta fondi",
         "text-1": "Ci impegniamo a servire il mondo della conoscenza e della tecnologia coraniche, sempre gratuitamente.",
         "text-2": "Quran.com è un'opportunità perfetta per la carità continua (Sadaqah Jariyah). Si prega di considerare di investire nell'Aldilà come donatore mensile (o una tantum).",
@@ -207,7 +210,10 @@
     "reciters": "Recitatori",
     "reflect": "Riflettere",
     "remove": "Rimuovere",
+    "rename": "Rinominare",
     "retry": "Riprova",
+    "rub": "Rub el Hizb",
+    "save-to-collection": "Salva nella raccolta",
     "search-for": "Cerca '{{searchQuery}}'",
     "search-results": "{{count}} risultati di ricerca",
     "search": {
@@ -246,6 +252,7 @@
     "share": "Condividere",
     "shared": "Il link è stato copiato negli appunti!",
     "sidebar": {
+        "search-hizb": "Cerca Hizb",
         "search-juz": "Cerca Juz",
         "search-page": "Pagina di ricerca",
         "search-surah": "Cerca sura",

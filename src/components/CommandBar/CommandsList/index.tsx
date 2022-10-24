@@ -13,13 +13,13 @@ import CommandControl from './CommandControl';
 import styles from './CommandList.module.scss';
 import CommandPrefix from './CommandPrefix';
 
-import useScroll, { SMOOTH_SCROLL_TO_CENTER } from 'src/hooks/useScrollToElement';
+import useScroll, { SMOOTH_SCROLL_TO_CENTER } from '@/hooks/useScrollToElement';
 import {
   addRecentNavigation,
   removeRecentNavigation,
   setIsOpen,
-} from 'src/redux/slices/CommandBar/state';
-import { resolveUrlBySearchNavigationType } from 'src/utils/navigation';
+} from '@/redux/slices/CommandBar/state';
+import { resolveUrlBySearchNavigationType } from '@/utils/navigation';
 import { SearchNavigationResult } from 'types/SearchNavigationResult';
 
 export interface Command extends SearchNavigationResult {

@@ -12,16 +12,16 @@ import SettingsDrawer from '../SettingsDrawer/SettingsDrawer';
 import styles from './NavbarBody.module.scss';
 import ProfileAvatarButton from './ProfileAvatarButton';
 
+import Button, { ButtonShape, ButtonVariant } from '@/dls/Button/Button';
 import IconMenu from '@/icons/menu.svg';
 import IconSearch from '@/icons/search.svg';
 import IconSettings from '@/icons/settings.svg';
-import Button, { ButtonShape, ButtonVariant } from 'src/components/dls/Button/Button';
 import {
   setIsSearchDrawerOpen,
   setIsNavigationDrawerOpen,
   setIsSettingsDrawerOpen,
-} from 'src/redux/slices/navbar';
-import { logEvent } from 'src/utils/eventLogger';
+} from '@/redux/slices/navbar';
+import { logEvent } from '@/utils/eventLogger';
 
 /**
  * Log drawer events.

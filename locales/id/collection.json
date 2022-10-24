@@ -1,0 +1,22 @@
+{
+    "all-saved-verses": "Semua ayat yang disimpan",
+    "alphabetical": "AZ",
+    "back-to-collection-list": "Kembali ke daftar koleksi",
+    "collection-list-empty": "Daftar koleksi kosong. Anda belum membuat koleksi apa pun",
+    "collections": "Koleksi",
+    "delete": "Menghapus",
+    "delete-bookmark": {
+        "subtitle": "Yakin ingin menghapus {{bookmarkName}} dari {{collectionName}} ?",
+        "title": "Hapus bookmark"
+    },
+    "delete-collection": {
+        "subtitle": "Yakin ingin menghapus {{collectionName}} ?",
+        "title": "Hapus koleksi"
+    },
+    "empty": "Koleksi kosong",
+    "go-to-ayah": "Pergi ke ayah",
+    "load-more": "Muat lebih banyak",
+    "recently-added": "Baru-baru ini ditambahkan",
+    "recently-updated": "Baru-baru ini diperbarui",
+    "verse-key": "Nomor Bab dan Ayat"
+}

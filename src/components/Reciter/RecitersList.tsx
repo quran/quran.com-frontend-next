@@ -2,9 +2,9 @@ import Card, { CardSize } from '../dls/Card/Card';
 
 import styles from './RecitersList.module.scss';
 
-import Link from 'src/components/dls/Link/Link';
-import { makeCDNUrl } from 'src/utils/cdn';
-import { getReciterNavigationUrl } from 'src/utils/navigation';
+import Link from '@/dls/Link/Link';
+import { makeCDNUrl } from '@/utils/cdn';
+import { getReciterNavigationUrl } from '@/utils/navigation';
 import Reciter from 'types/Reciter';
 
 type RecitersListProps = {

@@ -1,5 +1,5 @@
-import { QURANCDN_AUDIO_BASE_URL } from 'src/utils/audio';
-import { logEvent } from 'src/utils/eventLogger';
+import { QURANCDN_AUDIO_BASE_URL } from '@/utils/audio';
+import { logEvent } from '@/utils/eventLogger';
 import Word from 'types/Word';
 
 const playWordAudio = (word: Word) => {

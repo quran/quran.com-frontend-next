@@ -1,7 +1,7 @@
 import getTextToCopy from './getTextCopy';
 
-import { textToBlob } from 'src/utils/blob';
-import copyText from 'src/utils/copyText';
+import { textToBlob } from '@/utils/blob';
+import copyText from '@/utils/copyText';
 
 /**
  * given these params,

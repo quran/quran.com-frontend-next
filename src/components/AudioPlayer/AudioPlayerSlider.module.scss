@@ -8,11 +8,15 @@
   justify-content: space-between;
   color: var(--color-text-faded);
   font-size: var(--font-size-xsmall);
-  min-height: var(--font-size-xsmall); // prevents CLS when the current/total time are not loaded yet
+  min-height: var(
+    --font-size-xsmall
+  ); // prevents CLS when the current/total time are not loaded yet
   transition: var(--transition-regular);
   @include breakpoints.tablet {
     font-size: var(--font-size-normal);
-    min-height: var(--font-size-normal); // prevents CLS when the current/total time are not loaded yet
+    min-height: var(
+      --font-size-normal
+    ); // prevents CLS when the current/total time are not loaded yet
     margin-block: var(--spacing-medium) calc(-2 * var(--spacing-small));
   }
 }
@@ -20,7 +24,7 @@
 .sliderContainer {
   display: inline-block;
   position: fixed;
-  /* stylelint-disable-next-line csstools/use-logical */
+  // stylelint-disable-next-line csstools/use-logical
   left: 50%;
   transform: translate(-50%, 0);
   margin: 0;
