@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 
+import { Translate } from 'next-translate';
 import useTranslation from 'next-translate/useTranslation';
 
 import ThumbsDownIcon from '../../../../public/icons/thumbsdown-outline.svg';
@@ -13,17 +14,50 @@ import Button, { ButtonVariant } from 'src/components/dls/Button/Button';
 import { ToastStatus, useToast } from 'src/components/dls/Toast/Toast';
 import DataContext from 'src/contexts/DataContext';
 import { getChapterData } from 'src/utils/chapter';
-import { SearchNavigationType } from 'types/SearchNavigationResult';
+import ChaptersData from 'types/ChaptersData';
+import KalimatResultItem from 'types/Kalimat/KalimatResultItem';
+import KalimatResultType from 'types/Kalimat/KalimatResultType';
+import { SearchNavigationResult, SearchNavigationType } from 'types/SearchNavigationResult';
 
 type Props = {
   isSearchDrawer: boolean;
-  chapterId: string;
+  result: KalimatResultItem;
   searchQuery: string;
 };
 
-const KalimatSearchNavigation: React.FC<Props> = ({ chapterId, isSearchDrawer, searchQuery }) => {
+const getSearchNavigationResult = (
+  chaptersData: ChaptersData,
+  result: KalimatResultItem,
+  t: Translate,
+): SearchNavigationResult => {
+  const { id, type } = result;
+  if (type === KalimatResultType.QuranJuz) {
+    const juzNumber = id.substring(id.indexOf('j') + 1);
+    return {
+      name: t('common:juz'),
+      key: juzNumber,
+      resultType: SearchNavigationType.JUZ,
+    };
+  }
+  if (type === KalimatResultType.QuranPage) {
+    const pageNumber = id.substring(id.indexOf('p') + 1);
+    return {
+      name: t('common:page'),
+      key: pageNumber,
+      resultType: SearchNavigationType.PAGE,
+    };
+  }
+  // when it's a chapter
+  return {
+    name: getChapterData(chaptersData, id).transliteratedName,
+    key: id,
+    resultType: SearchNavigationType.SURAH,
+  };
+};
+
+const KalimatSearchNavigation: React.FC<Props> = ({ isSearchDrawer, searchQuery, result }) => {
+  const { id } = result;
   const chaptersData = useContext(DataContext);
-  const chapterData = getChapterData(chaptersData, chapterId);
   const toast = useToast();
   const { t } = useTranslation();
 
@@ -31,7 +65,7 @@ const KalimatSearchNavigation: React.FC<Props> = ({ chapterId, isSearchDrawer, s
     const feedbackRequestParams = {
       query: searchQuery,
       feedbackScore: isThumbsUp ? 1 : -1,
-      result: chapterId,
+      result: id,
     };
     submitKalimatSearchResultFeedback(feedbackRequestParams)
       .then(() => {
@@ -68,11 +102,7 @@ const KalimatSearchNavigation: React.FC<Props> = ({ chapterId, isSearchDrawer, s
       </div>
       <NavigationItem
         isSearchDrawer={isSearchDrawer}
-        navigation={{
-          name: chapterData.transliteratedName,
-          key: chapterId,
-          resultType: SearchNavigationType.SURAH,
-        }}
+        navigation={getSearchNavigationResult(chaptersData, result, t)}
       />
     </div>
   );

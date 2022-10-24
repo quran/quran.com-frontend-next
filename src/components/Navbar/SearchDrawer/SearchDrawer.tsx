@@ -20,6 +20,7 @@ import { selectIsSearchDrawerVoiceFlowStarted } from 'src/redux/slices/voiceSear
 import { areArraysEqual } from 'src/utils/array';
 import { logButtonClick, logTextSearchQuery } from 'src/utils/eventLogger';
 import { VersesResponse } from 'types/ApiResponses';
+import KalimatResultType from 'types/Kalimat/KalimatResultType';
 import { QuranFont } from 'types/QuranReader';
 
 const SearchBodyContainer = dynamic(() => import('src/components/Search/SearchBodyContainer'), {
@@ -67,7 +68,7 @@ const SearchDrawer: React.FC = () => {
           if (kalimatResponse.length) {
             getFilteredVerses({
               filters: kalimatResponse
-                .filter((result) => !result.isChapter)
+                .filter((result) => result.type === KalimatResultType.QuranVerse)
                 .map((result) => `${result.id}`)
                 .join(','),
               fields: QuranFont.QPCHafs,

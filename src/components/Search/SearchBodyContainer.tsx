@@ -43,7 +43,7 @@ const SearchBodyContainer: React.FC<Props> = ({
   const searchUrl = getSearchQueryNavigationUrl(searchQuery);
   const isEmptyResponse =
     searchResult &&
-    searchResult.chapters.length === 0 &&
+    searchResult.navigations?.length === 0 &&
     searchResult.pagination.totalRecords === 0;
   const isPreInputLayout =
     !searchQuery || isSearching || hasError || (!isSearching && !hasError && isEmptyResponse);

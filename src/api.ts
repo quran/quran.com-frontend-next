@@ -48,10 +48,10 @@ import {
   ReciterResponse,
   TafsirContentResponse,
   PagesLookUpResponse,
-  KalimatSearchResponse,
-  KalimatSearchResultFeedbackResponse,
 } from 'types/ApiResponses';
 import AudioData from 'types/AudioData';
+import KalimatSearchResponse from 'types/Kalimat/KalimatSearchResponse';
+import KalimatSearchResultFeedbackResponse from 'types/Kalimat/KalimatSearchResultFeedbackResponse';
 import { MushafLines, QuranFont } from 'types/QuranReader';
 
 export const OFFLINE_ERROR = 'OFFLINE';

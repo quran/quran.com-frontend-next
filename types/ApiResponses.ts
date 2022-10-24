@@ -4,6 +4,7 @@ import AvailableTranslation from './AvailableTranslation';
 import Chapter from './Chapter';
 import ChapterInfo from './ChapterInfo';
 import Footnote from './Footnote';
+import KalimatResultItem from './Kalimat/KalimatResultItem';
 import LookupRange from './LookupRange';
 import LookupRecord from './LookupRecord';
 import MetaData from './MetaData';
@@ -32,6 +33,7 @@ export interface VersesResponse extends BaseResponse {
   metaData?: MetaData;
   pagesLookup?: PagesLookUpResponse;
   chapters?: string[];
+  navigations?: KalimatResultItem[];
 }
 
 // The response from the chapters endpoint that returns a list of the chapters
@@ -81,17 +83,6 @@ export interface SearchResponse extends BaseResponse {
     verses: Verse[];
   };
 }
-
-type KalimatResultItem = {
-  id: string;
-  isChapter: boolean;
-};
-
-export type KalimatSearchResponse = KalimatResultItem[];
-
-export type KalimatSearchResultFeedbackResponse = {
-  message: string;
-};
 
 export interface AdvancedCopyRawResultResponse extends BaseResponse {
   result?: string;

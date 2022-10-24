@@ -45,6 +45,7 @@ import { VersesResponse } from 'types/ApiResponses';
 import AvailableLanguage from 'types/AvailableLanguage';
 import AvailableTranslation from 'types/AvailableTranslation';
 import ChaptersData from 'types/ChaptersData';
+import KalimatResultType from 'types/Kalimat/KalimatResultType';
 import { QuranFont } from 'types/QuranReader';
 
 const PAGE_SIZE = 10;
@@ -143,7 +144,7 @@ const Search: NextPage<SearchProps> = ({ translations, chaptersData }): JSX.Elem
           if (kalimatResponse.length) {
             getFilteredVerses({
               filters: kalimatResponse
-                .filter((result) => !result.isChapter)
+                .filter((result) => result.type === KalimatResultType.QuranVerse)
                 .map((result) => `${result.id}`)
                 .join(','),
               fields: QuranFont.QPCHafs,
@@ -161,9 +162,9 @@ const Search: NextPage<SearchProps> = ({ translations, chaptersData }): JSX.Elem
                 } else {
                   setSearchResult({
                     ...response,
-                    chapters: kalimatResponse
-                      .filter((result) => result.isChapter)
-                      .map((result) => `${result.id}`),
+                    navigations: kalimatResponse.filter(
+                      (result) => result.type !== KalimatResultType.QuranVerse,
+                    ),
                   });
                 }
               })

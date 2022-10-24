@@ -41,18 +41,18 @@ const SearchResults: React.FC<Props> = ({
         <p className={styles.header}>
           {t('common:search-results', {
             count: toLocalizedNumber(
-              searchResult.pagination.totalRecords + Number(searchResult?.chapters?.length),
+              searchResult.pagination.totalRecords + Number(searchResult?.navigations?.length),
               lang,
             ),
           })}
         </p>
         <>
-          {!!searchResult.chapters?.length && (
+          {!!searchResult.navigations?.length && (
             <div className={styles.navigationItemsListContainer}>
-              {searchResult?.chapters.map((chapterId) => (
-                <span className={styles.navigationItemContainer} key={chapterId}>
+              {searchResult?.navigations.map((result) => (
+                <span className={styles.navigationItemContainer} key={result.id}>
                   <KalimatSearchNavigation
-                    chapterId={chapterId}
+                    result={result}
                     isSearchDrawer={isSearchDrawer}
                     searchQuery={searchQuery}
                   />
