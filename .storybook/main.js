@@ -49,6 +49,7 @@ module.exports = {
             ...(config.resolve.alias || {}),
             '@/icons': path.resolve(__dirname, "../public/icons"),
             '@/dls': path.resolve(__dirname, "../src/components/dls"),
+            '@/api': path.resolve(__dirname, "../src/api"),
             '@/data': path.resolve(__dirname, "../data"),
             '@/types': path.resolve(__dirname, "../types"),
             ...(otherAliases.reduce((acc, folder) => ({ 
