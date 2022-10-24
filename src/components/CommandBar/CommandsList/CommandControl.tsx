@@ -1,8 +1,8 @@
 import React, { MouseEvent } from 'react';
 
+import Button, { ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import CloseIcon from '@/icons/close.svg';
-import Button, { ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
-// import KeyboardInput from 'src/components/dls/KeyboardInput';
+// import KeyboardInput from '@/dls/KeyboardInput';
 
 interface Props {
   isClearable: boolean;

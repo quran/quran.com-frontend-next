@@ -10,17 +10,17 @@ import CommandsList, { Command } from '../CommandsList';
 
 import styles from './CommandBarBody.module.scss';
 
+import DataFetcher from '@/components/DataFetcher';
+import TarteelAttribution from '@/components/TarteelAttribution/TarteelAttribution';
+import VoiceSearchBodyContainer from '@/components/TarteelVoiceSearch/BodyContainer';
+import TarteelVoiceSearchTrigger from '@/components/TarteelVoiceSearch/Trigger';
+import useDebounce from '@/hooks/useDebounce';
 import IconSearch from '@/icons/search.svg';
-import DataFetcher from 'src/components/DataFetcher';
-import TarteelAttribution from 'src/components/TarteelAttribution/TarteelAttribution';
-import VoiceSearchBodyContainer from 'src/components/TarteelVoiceSearch/BodyContainer';
-import TarteelVoiceSearchTrigger from 'src/components/TarteelVoiceSearch/Trigger';
-import useDebounce from 'src/hooks/useDebounce';
-import { selectRecentNavigations } from 'src/redux/slices/CommandBar/state';
-import { selectIsCommandBarVoiceFlowStarted } from 'src/redux/slices/voiceSearch';
-import { makeSearchResultsUrl } from 'src/utils/apiPaths';
-import { areArraysEqual } from 'src/utils/array';
-import { logButtonClick, logTextSearchQuery } from 'src/utils/eventLogger';
+import { selectRecentNavigations } from '@/redux/slices/CommandBar/state';
+import { selectIsCommandBarVoiceFlowStarted } from '@/redux/slices/voiceSearch';
+import { makeSearchResultsUrl } from '@/utils/apiPaths';
+import { areArraysEqual } from '@/utils/array';
+import { logButtonClick, logTextSearchQuery } from '@/utils/eventLogger';
 import { SearchResponse } from 'types/ApiResponses';
 import { SearchNavigationType } from 'types/SearchNavigationResult';
 

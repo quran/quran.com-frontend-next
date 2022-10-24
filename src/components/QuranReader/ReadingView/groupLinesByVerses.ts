@@ -1,6 +1,6 @@
 import groupBy from 'lodash/groupBy';
 
-import { getVerseWords } from 'src/utils/verse';
+import { getVerseWords } from '@/utils/verse';
 import Verse from 'types/Verse';
 import Word from 'types/Word';
 

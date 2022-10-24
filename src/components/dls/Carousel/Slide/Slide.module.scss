@@ -1,0 +1,32 @@
+.actionContainer {
+  display: flex;
+  justify-content: center;
+  margin-block-start: var(--spacing-large);
+}
+
+.slideContainer {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.title {
+  font-size: var(--font-size-xlarge);
+  font-weight: var(--font-weight-bold);
+  text-align: center;
+  margin-block-end: var(--spacing-large);
+}
+
+.headerContainer {
+  max-width: calc(5 * var(--spacing-mega));
+  margin-inline: auto;
+  width: 100%;
+}
+
+.description {
+  font-size: var(--font-size-medium);
+  font-weight: var(--font-weight-regular);
+  text-align: center;
+  margin-block: var(--spacing-small);
+}

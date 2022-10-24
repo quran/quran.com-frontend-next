@@ -1,2 +1,4 @@
-type BookmarksMap = Record<string, boolean>;
+import Bookmark from './Bookmark';
+
+type BookmarksMap = Record<string, Bookmark>;
 export default BookmarksMap;

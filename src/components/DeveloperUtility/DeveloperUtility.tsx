@@ -8,8 +8,8 @@ import styles from './DeveloperUtility.module.scss';
 import NavbarAdjustment from './NavbarAdjustment';
 import NotesAdjustment from './NotesAdjustment';
 
+import Separator from '@/dls/Separator/Separator';
 import WrenchIcon from '@/icons/wrench.svg';
-import Separator from 'src/components/dls/Separator/Separator';
 
 /**
  * A set of developer utilities only availble on development environments

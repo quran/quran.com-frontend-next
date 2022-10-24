@@ -2,7 +2,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from './TafsirEndOfScrollingActions.module.scss';
 
-import Button, { ButtonType } from 'src/components/dls/Button/Button';
+import Button, { ButtonType } from '@/dls/Button/Button';
 
 type TafsirEndOfScrollingActionsProps = {
   hasNextVerseGroup: boolean;

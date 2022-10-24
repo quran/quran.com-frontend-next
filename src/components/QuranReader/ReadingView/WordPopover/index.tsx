@@ -6,13 +6,12 @@ import ReadingViewWordActionsMenu from '../WordActionsMenu';
 
 import styles from './WordPopover.module.scss';
 
-import Popover, { ContentSide } from 'src/components/dls/Popover';
-import useLongPress from 'src/hooks/useLongPress';
+import Popover, { ContentSide } from '@/dls/Popover';
 import {
   setReadingViewSelectedVerseKey,
   setReadingViewHoveredVerseKey,
-} from 'src/redux/slices/QuranReader/readingViewVerse';
-import { logEvent } from 'src/utils/eventLogger';
+} from '@/redux/slices/QuranReader/readingViewVerse';
+import { logEvent } from '@/utils/eventLogger';
 import Word from 'types/Word';
 
 type Props = {
@@ -34,10 +33,6 @@ const ReadingViewWordPopover: React.FC<Props> = ({ word, children }) => {
     [dispatch, word.verseKey],
   );
 
-  const onLongPress = useCallback(() => {
-    onOpenChange(true);
-  }, [onOpenChange]);
-  const [onTouchStart, onTouchEnd] = useLongPress(onLongPress);
   const onHoverChange = useCallback(
     (isHovering: boolean) => {
       dispatch(setReadingViewHoveredVerseKey(isHovering ? word.verseKey : null));
@@ -65,13 +60,7 @@ const ReadingViewWordPopover: React.FC<Props> = ({ word, children }) => {
       contentSide={ContentSide.TOP}
       contentSideOffset={-10}
       trigger={
-        <div
-          onMouseEnter={onMouseEnter}
-          onMouseLeave={onMouseLeave}
-          onTouchMove={onTouchMove}
-          onTouchStart={onTouchStart}
-          onTouchEnd={onTouchEnd}
-        >
+        <div onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} onTouchMove={onTouchMove}>
           {children}
         </div>
       }

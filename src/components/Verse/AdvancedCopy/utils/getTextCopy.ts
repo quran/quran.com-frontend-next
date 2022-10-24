@@ -1,5 +1,6 @@
+import { MushafLines } from '@/types/QuranReader';
+import { getMushafId } from '@/utils/api';
 import { getAdvancedCopyRawResult } from 'src/api';
-import { getMushafId } from 'src/utils/api';
 
 /**
  * Given these parameters, get the `text to be copied` from API
@@ -38,7 +39,7 @@ const getTextToCopy = ({
       translations: toBeCopiedTranslations.join(', '),
     }), // only include the translations when at least 1 translation has been selected.
     ...(shouldCopyFont && {
-      ...getMushafId(shouldCopyFont),
+      ...getMushafId(shouldCopyFont, MushafLines.SixteenLines),
     }), // only include the fonts when at least 1 font has been selected.
   }).then((res) => res.result);
 };

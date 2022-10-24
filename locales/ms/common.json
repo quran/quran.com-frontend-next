@@ -5,7 +5,7 @@
         "auth-onboarding": {
             "slide-1": {
                 "action": "Lihat apa yang baharu",
-                "title": "Selamat datang ke Quran.com <br> <\/br> Akaun Pengguna Beta"
+                "title": "Selamat datang ke Akaun Pengguna <br> <\/br>"
             },
             "slide-2": {
                 "action": "Seterusnya",
@@ -16,6 +16,12 @@
                 "action": "Okay, faham",
                 "description": "Terima kasih kerana menggunakan Quran.com dan kami berbesar hati untuk mendengar maklum balas anda tentang <link> feedback.quran.com <\/link>",
                 "title": "Kami mahu mendengar fikiran anda"
+            }
+        },
+        "collections-announcement": {
+            "slide-1": {
+                "description": "Kami sangat gembira untuk mengumumkan bahawa kini anda boleh mengumpulkan penanda halaman di bawah \"koleksi\"! <br\/> <br\/> <li> Tambahkan seberapa banyak koleksi yang anda mahu <\/li> <li> Tambahkan penanda halaman pada satu atau lebih koleksi <\/li> <li> Dan banyak lagi! <\/li>",
+                "title": "Koleksi penanda halaman ada di sini!"
             }
         }
     },
@@ -182,9 +188,6 @@
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} daripada {{totalNumberOfResults}} hasil carian",
     "popular-links": "Pautan LINK yang popular",
     "popup": {
-        "cta-1": "Menderma Bulanan",
-        "cta-2": "Menderma Sekali",
-        "cta-3": "Ketahui lebih lanjut",
         "footnote": "Derma bulanan membolehkan kami kurang memberi tumpuan kepada pengumpulan dana",
         "text-1": "Kami komited untuk berkhidmat kepada pengetahuan dan teknologi al-Quran dunia, sentiasa secara percuma.",
         "text-2": "Quran.com adalah peluang sempurna untuk amal berterusan (Sadaqah Jariyah). Sila pertimbangkan untuk melabur di Akhirat anda sebagai penderma bulanan (atau sekali).",
@@ -207,7 +210,10 @@
     "reciters": "qari",
     "reflect": "Renungkan",
     "remove": "Keluarkan",
+    "rename": "Namakan semula",
     "retry": "Cuba lagi (Retry)",
+    "rub": "Gosok el Hizb",
+    "save-to-collection": "Simpan ke Koleksi",
     "search-for": "Cari '{{searchQuery}}'",
     "search-results": "{{count}} hasil carian",
     "search": {
@@ -246,6 +252,7 @@
     "share": "Kongsi",
     "shared": "Pautan telah disalin ke papan keratan!",
     "sidebar": {
+        "search-hizb": "Cari Hizb",
         "search-juz": "Cari Juzuk",
         "search-page": "Halaman Carian",
         "search-surah": "Cari surah",

@@ -1,15 +1,15 @@
 /* eslint-disable max-lines */
 /* eslint-disable react-func/max-lines-per-function */
-import { fetcher } from 'src/api';
-import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
-import { getDefaultWordFields, getMushafId } from 'src/utils/api';
+import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
+import { getDefaultWordFields, getMushafId } from '@/utils/api';
 import {
   makeHizbVersesUrl,
   makeJuzVersesUrl,
   makePageVersesUrl,
   makeVersesUrl,
   makeRubVersesUrl,
-} from 'src/utils/apiPaths';
+} from '@/utils/apiPaths';
+import { fetcher } from 'src/api';
 import { PagesLookUpRequest } from 'types/ApiRequests';
 import { VersesResponse } from 'types/ApiResponses';
 import LookupRecord from 'types/LookupRecord';

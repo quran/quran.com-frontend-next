@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unknown-property */
 /* eslint-disable max-lines */
 /* eslint-disable jsx-a11y/role-has-required-aria-props */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
@@ -27,8 +28,8 @@ import Tag from './Tag';
 import ComboboxSize from './types/ComboboxSize';
 import { InitialValue, Value, MultiSelectValue, InitialSelectedItems } from './types/Values';
 
-import useFocus from 'src/hooks/useFocusElement';
-import useOutsideClickDetector from 'src/hooks/useOutsideClickDetector';
+import useFocus from '@/hooks/useFocusElement';
+import useOutsideClickDetector from '@/hooks/useOutsideClickDetector';
 
 interface Props {
   id: string;
@@ -82,8 +83,13 @@ const Combobox: React.FC<Props> = ({
   const [focusInput, inputRef]: [() => void, RefObject<HTMLInputElement>] = useFocus();
   const comboBoxRef = useRef(null);
   const closeCombobox = useCallback(() => {
+    if (!isMultiSelect) {
+      setInputValue(selectedValue as string);
+    } else {
+      setInputValue('');
+    }
     setIsOpened(false);
-  }, []);
+  }, [isMultiSelect, selectedValue]);
   useOutsideClickDetector(comboBoxRef, closeCombobox, isOpened);
   useHotkeys('Escape', closeCombobox, { enabled: isOpened, enableOnTags: ['INPUT'] });
 

@@ -3,16 +3,12 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from './login.module.scss';
 
+import Button from '@/dls/Button/Button';
 import AppleIcon from '@/icons/apple.svg';
 import FacebookIcon from '@/icons/facebook.svg';
 import GoogleIcon from '@/icons/google.svg';
-import Button from 'src/components/dls/Button/Button';
-import {
-  makeGoogleLoginUrl,
-  makeFacebookLoginUrl,
-  makeAppleLoginUrl,
-} from 'src/utils/auth/apiPaths';
-import { logButtonClick } from 'src/utils/eventLogger';
+import { makeGoogleLoginUrl, makeFacebookLoginUrl, makeAppleLoginUrl } from '@/utils/auth/apiPaths';
+import { logButtonClick } from '@/utils/eventLogger';
 import AuthType from 'types/auth/AuthType';
 
 const SocialLogin = () => {

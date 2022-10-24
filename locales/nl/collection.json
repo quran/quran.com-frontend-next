@@ -1,0 +1,22 @@
+{
+    "all-saved-verses": "Alle opgeslagen verzen",
+    "alphabetical": "AZ",
+    "back-to-collection-list": "Terug naar collectielijst",
+    "collection-list-empty": "Verzamellijst is leeg. Je hebt nog geen collectie gemaakt",
+    "collections": "Collecties",
+    "delete": "Verwijderen",
+    "delete-bookmark": {
+        "subtitle": "Weet u zeker dat u {{bookmarkName}} uit {{collectionName}} wilt verwijderen?",
+        "title": "Bladwijzer verwijderen"
+    },
+    "delete-collection": {
+        "subtitle": "Weet u zeker dat u {{collectionName}} wilt verwijderen?",
+        "title": "Verzameling verwijderen"
+    },
+    "empty": "Collectie is leeg",
+    "go-to-ayah": "Ga naar ayah",
+    "load-more": "Meer laden",
+    "recently-added": "Recent toegevoegd",
+    "recently-updated": "Recentelijk bijgewerkt",
+    "verse-key": "Hoofdstuk- en versnummer"
+}

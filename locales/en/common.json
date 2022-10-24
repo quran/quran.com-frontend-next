@@ -5,7 +5,7 @@
         "auth-onboarding": {
             "slide-1": {
                 "action": "See what's new",
-                "title": "Welcome to Quran.com <br><\/br> User Account Beta"
+                "title": "Welcome to Quran.com <br><\/br> User Account"
             },
             "slide-2": {
                 "action": "Next",
@@ -16,6 +16,12 @@
                 "action": "Okay, got it",
                 "description": "Thank you for using Quran.com and we would be glad to hear your feedback on <link>feedback.quran.com<\/link>",
                 "title": "We wanna hear your thoughts"
+            }
+        },
+        "collections-announcement": {
+            "slide-1": {
+                "description": "We are very happy to announce that now you can group bookmarks under \"collections\"! <br\/><br\/> <li>Add as many collections as you want<\/li><li>Add a bookmark to one or more collections<\/li><li>And more!<\/li>",
+                "title": "Bookmarks collections are here!"
             }
         }
     },
@@ -182,9 +188,6 @@
     "pagination-summary": "{{currentResultNumber}}-{{endOfResultNumber}} of {{totalNumberOfResults}} search results",
     "popular-links": "Popular Links",
     "popup": {
-        "cta-1": "Donate Monthly",
-        "cta-2": "Donate One Time",
-        "cta-3": "Learn more",
         "footnote": "Monthly donations allow us to focus less on fundraising",
         "text-1": "We are committed to serving the world Quranic knowledge and technology, always for free.",
         "text-2": "Quran.com is a perfect opportunity for continuous charity (Sadaqah Jariyah). Please consider investing in your Hereafter as a monthly (or one-time) donor.",
@@ -207,8 +210,10 @@
     "reciters": "Reciters",
     "reflect": "Reflect",
     "remove": "Remove",
+    "rename": "Rename",
     "retry": "Retry",
     "rub": "Rub el Hizb",
+    "save-to-collection": "Save to Collection",
     "search-for": "Search for '{{searchQuery}}'",
     "search-results": "{{count}} search results",
     "search": {
@@ -247,8 +252,8 @@
     "share": "Share",
     "shared": "Link has been copied to the clipboard!",
     "sidebar": {
-        "search-juz": "Search Juz",
         "search-hizb": "Search Hizb",
+        "search-juz": "Search Juz",
         "search-page": "Search Page",
         "search-surah": "Search surah",
         "try-navigating-with": "Tip: try navigating with"

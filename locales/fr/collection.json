@@ -1,0 +1,22 @@
+{
+    "all-saved-verses": "Tous les versets enregistrés",
+    "alphabetical": "AZ",
+    "back-to-collection-list": "Retour à la liste des collections",
+    "collection-list-empty": "La liste de collecte est vide. Vous n'avez pas encore créé de collection",
+    "collections": "Collections",
+    "delete": "Effacer",
+    "delete-bookmark": {
+        "subtitle": "Voulez-vous vraiment supprimer {{bookmarkName}} de {{collectionName}} ?",
+        "title": "Supprimer le signet"
+    },
+    "delete-collection": {
+        "subtitle": "Voulez-vous vraiment supprimer la {{collectionName}} ?",
+        "title": "Supprimer la collection"
+    },
+    "empty": "La collection est vide",
+    "go-to-ayah": "Allez à ayah",
+    "load-more": "Charger plus",
+    "recently-added": "Récemment ajouté",
+    "recently-updated": "Récemment mis à jour",
+    "verse-key": "Numéro de chapitre et de verset"
+}

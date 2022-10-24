@@ -1,8 +1,8 @@
 import React from 'react';
 
-import Button from 'src/components/dls/Button/Button';
-import { logButtonClick } from 'src/utils/eventLogger';
-import { resolveUrlBySearchNavigationType } from 'src/utils/navigation';
+import Button from '@/dls/Button/Button';
+import { logButtonClick } from '@/utils/eventLogger';
+import { resolveUrlBySearchNavigationType } from '@/utils/navigation';
 import { SearchNavigationResult } from 'types/SearchNavigationResult';
 
 interface Props {

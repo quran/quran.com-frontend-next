@@ -1,0 +1,74 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-block-end: var(--spacing-xsmall);
+}
+
+.container {
+  margin-block-end: calc(2.5 * var(--spacing-large));
+}
+
+.body {
+  margin-block-start: var(--spacing-mega);
+  opacity: var(--opacity-75);
+  & p + p {
+    margin-block-start: var(--spacing-medium);
+  }
+  & p:last-child {
+    &::before {
+      margin-block-start: var(--spacing-medium);
+      display: block;
+      content: "\A";
+    }
+    display: inline;
+  }
+
+  & p[lang="ar"],
+  & p[lang="fa"],
+  & p[lang="ur"] {
+    direction: rtl;
+    display: block;
+  }
+}
+
+.moreOrLessText {
+  cursor: pointer;
+  font-weight: var(--font-weight-semibold);
+  display: inline-block;
+  margin-inline-start: var(--spacing-xxsmall);
+}
+.hashtag {
+  color: var(--color-success-medium);
+}
+
+.verseAndTranslationsListContainer {
+  background-color: var(--color-background-alternative-faded);
+  border-radius: var(--border-radius-default);
+  padding-inline: var(--spacing-mega);
+  margin-block: var(--spacing-large);
+}
+.verseAndTranslationContainer {
+  padding-block: var(--spacing-mega);
+  & + & {
+    border-block-start: 1px solid var(--color-borders-hairline);
+  }
+}
+
+.surahName {
+  font-weight: var(--font-weight-semibold);
+  opacity: var(--opacity-75);
+  text-transform: capitalize;
+}
+
+.item {
+  opacity: var(--opacity-75);
+}
+
+.rtl {
+  direction: rtl;
+}
+
+.ltr {
+  direction: ltr;
+}

@@ -4,10 +4,10 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from './Counter.module.scss';
 
+import Button, { ButtonShape, ButtonVariant } from '@/dls/Button/Button';
 import MinusIcon from '@/icons/minus.svg';
 import PlusIcon from '@/icons/plus.svg';
-import Button, { ButtonShape, ButtonVariant } from 'src/components/dls/Button/Button';
-import { toLocalizedNumber } from 'src/utils/locale';
+import { toLocalizedNumber } from '@/utils/locale';
 
 type CounterProps = {
   count: number | string;

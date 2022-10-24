@@ -4,16 +4,16 @@ import { useRouter } from 'next/router';
 
 import styles from './changelog.module.scss';
 
-import Spinner from 'src/components/dls/Spinner/Spinner';
-import NextSeoWrapper from 'src/components/NextSeoWrapper';
-import LocalizationMessage from 'src/components/Notion/LocalizationMessage';
-import NotionPage from 'src/components/Notion/Page';
-import PageContainer from 'src/components/PageContainer';
+import NextSeoWrapper from '@/components/NextSeoWrapper';
+import LocalizationMessage from '@/components/Notion/LocalizationMessage';
+import NotionPage from '@/components/Notion/Page';
+import PageContainer from '@/components/PageContainer';
+import Spinner from '@/dls/Spinner/Spinner';
+import { getCanonicalUrl, getProductUpdatesUrl } from '@/utils/navigation';
+import { getPageTitle, getRevalidationTime } from '@/utils/notion';
+import { REVALIDATION_PERIOD_ON_ERROR_SECONDS } from '@/utils/staticPageGeneration';
 import { retrieveBlockChildren, retrieveDatabase, retrievePage } from 'src/lib/notion';
 import Error from 'src/pages/_error';
-import { getCanonicalUrl, getProductUpdatesUrl } from 'src/utils/navigation';
-import { getPageTitle, getRevalidationTime } from 'src/utils/notion';
-import { REVALIDATION_PERIOD_ON_ERROR_SECONDS } from 'src/utils/staticPageGeneration';
 
 interface Props {
   hasError?: boolean;

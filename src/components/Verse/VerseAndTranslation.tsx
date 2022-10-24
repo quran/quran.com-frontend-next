@@ -1,5 +1,3 @@
-import React from 'react';
-
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useSelector } from 'react-redux';
 import useSWR from 'swr/immutable';
@@ -10,15 +8,15 @@ import TranslationText from '../QuranReader/TranslationView/TranslationText';
 import PlainVerseText from './PlainVerseText';
 import styles from './VerseAndTranslation.module.scss';
 
+import Error from '@/components/Error';
+import useQcfFont from '@/hooks/useQcfFont';
+import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
+import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
+import { getDefaultWordFields, getMushafId } from '@/utils/api';
+import { makeVersesUrl } from '@/utils/apiPaths';
+import { areArraysEqual } from '@/utils/array';
+import { getVerseWords } from '@/utils/verse';
 import { fetcher } from 'src/api';
-import Error from 'src/components/Error';
-import useQcfFont from 'src/hooks/useQcfFont';
-import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
-import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';
-import { getDefaultWordFields, getMushafId } from 'src/utils/api';
-import { makeVersesUrl } from 'src/utils/apiPaths';
-import { areArraysEqual } from 'src/utils/array';
-import { getVerseWords } from 'src/utils/verse';
 import { VersesResponse } from 'types/ApiResponses';
 
 /**
@@ -66,6 +64,7 @@ const VerseAndTranslation: React.FC<Props> = ({ chapter, from, to }) => {
   if (error) return <Error error={error} onRetryClicked={mutate} />;
 
   if (!data) return <Spinner />;
+
   return (
     <div className={styles.container}>
       {data?.verses.map((verse) => (

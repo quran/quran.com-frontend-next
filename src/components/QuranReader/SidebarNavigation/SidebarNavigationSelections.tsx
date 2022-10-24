@@ -7,7 +7,7 @@ import SidebarSelectionSkeleton from './SidebarSelectionSkeleton';
 import {
   IsSidebarNavigationVisible,
   NavigationItem,
-} from 'src/redux/slices/QuranReader/sidebarNavigation';
+} from '@/redux/slices/QuranReader/sidebarNavigation';
 
 const PageSelection = dynamic(() => import('./PageSelection'), {
   loading: SidebarSelectionSkeleton,

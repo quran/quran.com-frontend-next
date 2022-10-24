@@ -6,6 +6,7 @@ import NavigationDrawerItem from '../NavigationDrawerItem';
 
 import styles from './NavigationDrawerBody.module.scss';
 
+import FundraisingBanner from '@/components/Fundaraising/FundraisingBanner';
 import IconDevelopers from '@/icons/developers.svg';
 import IconFeedback from '@/icons/feedback.svg';
 import IconHome from '@/icons/home.svg';
@@ -20,8 +21,7 @@ import IconRadio2 from '@/icons/radio-2.svg';
 import IconRadio from '@/icons/radio.svg';
 import Tarteel from '@/icons/tarteel.svg';
 // import MobileApps from '../MobileApps';
-import FundraisingBanner from 'src/components/Fundaraising/FundraisingBanner';
-import { logTarteelLinkClick } from 'src/utils/eventLogger';
+import { logTarteelLinkClick } from '@/utils/eventLogger';
 
 // import IconDonate from '@/icons/donate.svg';
 // import IconUpdates from '@/icons/updates.svg';

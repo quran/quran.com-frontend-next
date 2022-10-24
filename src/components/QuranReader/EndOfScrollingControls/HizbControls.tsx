@@ -2,13 +2,13 @@ import React from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
+import Button, { ButtonType } from '@/dls/Button/Button';
+import useScrollToTop from '@/hooks/useScrollToTop';
 import ChevronLeftIcon from '@/icons/chevron-left.svg';
 import ChevronRightIcon from '@/icons/chevron-right.svg';
-import Button, { ButtonType } from 'src/components/dls/Button/Button';
-import useScrollToTop from 'src/hooks/useScrollToTop';
-import { logButtonClick } from 'src/utils/eventLogger';
-import { isFirstHizb, isLastHizb } from 'src/utils/hizb';
-import { getHizbNavigationUrl } from 'src/utils/navigation';
+import { logButtonClick } from '@/utils/eventLogger';
+import { isFirstHizb, isLastHizb } from '@/utils/hizb';
+import { getHizbNavigationUrl } from '@/utils/navigation';
 import Verse from 'types/Verse';
 
 interface Props {

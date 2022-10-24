@@ -1,0 +1,22 @@
+{
+    "all-saved-verses": "Tüm kaydedilen ayetler",
+    "alphabetical": "A'dan Z'ye",
+    "back-to-collection-list": "Koleksiyon listesine geri dön",
+    "collection-list-empty": "Koleksiyon listesi boş. Henüz bir koleksiyon oluşturmadınız",
+    "collections": "Koleksiyonlar",
+    "delete": "Silmek",
+    "delete-bookmark": {
+        "subtitle": "{{bookmarkName}} ' {{collectionName}} koleksiyonundan silmek istediğinizden emin misiniz?",
+        "title": "Yer işaretini sil"
+    },
+    "delete-collection": {
+        "subtitle": "{{collectionName}} koleksiyonunu silmek istediğinizden emin misiniz?",
+        "title": "Koleksiyonu sil"
+    },
+    "empty": "Koleksiyon boş",
+    "go-to-ayah": "ayah'a git",
+    "load-more": "Daha fazla yükle",
+    "recently-added": "Son eklenen",
+    "recently-updated": "Son güncellenen",
+    "verse-key": "Sure ve Ayet Numarası"
+}

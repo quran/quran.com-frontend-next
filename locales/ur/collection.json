@@ -1,0 +1,22 @@
+{
+    "all-saved-verses": "تمام محفوظ شدہ آیات",
+    "alphabetical": "AZ",
+    "back-to-collection-list": "جمع کرنے کی فہرست پر واپس جائیں۔",
+    "collection-list-empty": "جمع کرنے کی فہرست خالی ہے۔ آپ نے ابھی تک کوئی مجموعہ نہیں بنایا ہے۔",
+    "collections": "مجموعے",
+    "delete": "حذف کریں۔",
+    "delete-bookmark": {
+        "subtitle": "کیا آپ واقعی {{bookmarkName}} کو {{collectionName}} مجموعہ سے حذف کرنا چاہتے ہیں؟",
+        "title": "بک مارک کو حذف کریں۔"
+    },
+    "delete-collection": {
+        "subtitle": "کیا آپ واقعی {{collectionName}} مجموعہ حذف کرنا چاہتے ہیں؟",
+        "title": "مجموعہ کو حذف کریں۔"
+    },
+    "empty": "مجموعہ خالی ہے۔",
+    "go-to-ayah": "آیت پر جائیں۔",
+    "load-more": "مزید لوڈ کریں",
+    "recently-added": "حال ہی میں شامل",
+    "recently-updated": "حال ہی میں اپ ڈیٹ کیا گیا۔",
+    "verse-key": "باب اور آیت نمبر"
+}

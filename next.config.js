@@ -19,6 +19,7 @@ const isProduction = process.env.NEXT_PUBLIC_VERCEL_ENV === 'production';
 const isCI = process.env.CI;
 
 const config = {
+  productionBrowserSourceMaps: true, // {@see https://nextjs.org/docs/advanced-features/source-maps}
   experimental: {
     outputStandalone: true,
   },

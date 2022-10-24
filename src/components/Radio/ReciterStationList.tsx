@@ -2,7 +2,6 @@ import { useContext } from 'react';
 
 import { useSelector } from '@xstate/react';
 
-import { getReciterNavigationUrl } from '../../utils/navigation';
 import Card, { CardSize } from '../dls/Card/Card';
 import Link from '../dls/Link/Link';
 
@@ -11,8 +10,9 @@ import { StationType } from './types';
 
 import PauseIcon from '@/icons/pause.svg';
 import PlayIcon from '@/icons/play-arrow.svg';
-import { makeCDNUrl } from 'src/utils/cdn';
-import { logEvent } from 'src/utils/eventLogger';
+import { makeCDNUrl } from '@/utils/cdn';
+import { logEvent } from '@/utils/eventLogger';
+import { getReciterNavigationUrl } from '@/utils/navigation';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import Reciter from 'types/Reciter';
 

@@ -5,7 +5,7 @@
         "auth-onboarding": {
             "slide-1": {
                 "action": "看看有什么新鲜事",
-                "title": "欢迎来到 Quran.com <br> <\/br>用户帐户测试版"
+                "title": "欢迎来到 Quran.com <br> <\/br>用户帐户"
             },
             "slide-2": {
                 "action": "下一个",
@@ -14,8 +14,14 @@
             },
             "slide-3": {
                 "action": "好，知道了",
-                "description": "感谢您使用 Quran.com，我们很高兴听到您对<link> feedback.quran.com <\/link> > 的反馈",
+                "description": "感谢您使用 Quran.com，我们很高兴听到您对<link> feedback.quran.com <\/link> 的反馈",
                 "title": "我们想听听你的想法"
+            }
+        },
+        "collections-announcement": {
+            "slide-1": {
+                "description": "我们很高兴地宣布，现在您可以在“收藏”下对书签进行分组！ <br\/> <br\/> <li> > 添加任意数量的收藏夹 <\/li <\/li> <li <li>为一个或多个收藏夹添加书签<\/li> <li>还有更多！ <\/li>",
+                "title": "书签收藏在这里！"
             }
         }
     },
@@ -182,9 +188,6 @@
     "pagination-summary": "{{currentResultNumber}} - {{totalNumberOfResults}}搜索结果，共{{endOfResultNumber}}",
     "popular-links": "热门链接",
     "popup": {
-        "cta-1": "每月捐赠",
-        "cta-2": "捐赠一次",
-        "cta-3": "学到更多",
         "footnote": "每月捐款让我们可以减少对筹款的关注",
         "text-1": "我们致力于为世界提供古兰经知识和技术，始终免费。",
         "text-2": "Quran.com 是持续慈善（Sadaqah Jariyah）的绝佳机会。请考虑以每月（或一次性）捐助者的身份投资您的来世。",
@@ -207,7 +210,10 @@
     "reciters": "朗诵者",
     "reflect": "参悟",
     "remove": "消除",
+    "rename": "改名",
     "retry": "重试",
+    "rub": "鲁布埃尔希兹",
+    "save-to-collection": "保存到收藏",
     "search-for": "搜索 '{{searchQuery}}'",
     "search-results": "{{count}}搜索结果",
     "search": {
@@ -246,6 +252,7 @@
     "share": "分享",
     "shared": "链接已复制到剪贴板！",
     "sidebar": {
+        "search-hizb": "搜索 Hizb",
         "search-juz": "按卷搜索",
         "search-page": "按页搜索",
         "search-surah": "按章搜索",

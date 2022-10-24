@@ -5,7 +5,7 @@
         "auth-onboarding": {
             "slide-1": {
                 "action": "Shihni çfarë ka të re",
-                "title": "Mirë se vini në Quran.com <br> <\/br> Llogaria e përdoruesit Beta"
+                "title": "Mirë se vini në llogarinë e përdoruesit <br> <\/br> të Quran.com"
             },
             "slide-2": {
                 "action": "Tjetra",
@@ -16,6 +16,12 @@
                 "action": "Mirë, e kuptova",
                 "description": "Faleminderit që përdorni Quran.com dhe do të ishim të lumtur të dëgjonim komentet tuaja në <link> feedback.quran.com <\/link>",
                 "title": "Ne duam të dëgjojmë mendimet tuaja"
+            }
+        },
+        "collections-announcement": {
+            "slide-1": {
+                "description": "Jemi shumë të lumtur të njoftojmë se tani ju mund të gruponi faqerojtësit nën \"koleksione\"! <br\/> <br\/> <li> Shtoni sa më shumë koleksione që dëshironi <\/li> <li> Shtoni një faqeshënues në një ose më shumë koleksione <\/li> <li> Dhe më shumë! <\/li>",
+                "title": "Koleksionet e faqeshënuesve janë këtu!"
             }
         }
     },
@@ -182,9 +188,6 @@
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} nga {{totalNumberOfResults}} rezultate kërkimi",
     "popular-links": "Kërkimet e preferuara",
     "popup": {
-        "cta-1": "Dhuroni çdo muaj",
-        "cta-2": "Dhuroni Një herë",
-        "cta-3": "Mëso më shumë",
         "footnote": "Donacionet mujore na lejojnë të fokusohemi më pak në mbledhjen e fondeve",
         "text-1": "Ne jemi të përkushtuar t'i shërbejmë njohurive dhe teknologjisë botërore kuranore, gjithmonë falas.",
         "text-2": "Quran.com është një mundësi e përkryer për bamirësi të vazhdueshme (Sadakah Jariyah). Ju lutemi, konsideroni të investoni në Ahiretin tuaj si donator mujor (ose një herë).",
@@ -207,7 +210,10 @@
     "reciters": "Recituesit",
     "reflect": "Pasqyrim",
     "remove": "Hiq",
+    "rename": "Riemërto",
     "retry": "Provo sërish",
+    "rub": "Rub el Hizb",
+    "save-to-collection": "Ruaje në Koleksion",
     "search-for": "Kërko për \"{{searchQuery}}\"",
     "search-results": "{{count}} rezultatet e  kërkimit",
     "search": {
@@ -246,6 +252,7 @@
     "share": "Shpërndaje",
     "shared": "Lidhja është kopjuar në kujtesë!",
     "sidebar": {
+        "search-hizb": "Kërko Hizb",
         "search-juz": "Kërko Xhuzin",
         "search-page": "Kërko Faqja",
         "search-surah": "Kërko suren",

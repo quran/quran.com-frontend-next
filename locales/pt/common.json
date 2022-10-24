@@ -5,7 +5,7 @@
         "auth-onboarding": {
             "slide-1": {
                 "action": "Veja o que é novo",
-                "title": "Bem-vindo ao Quran.com <br> <\/br> Conta de usuário beta"
+                "title": "Bem-vindo ao Quran.com <br> <\/br> Conta de usuário"
             },
             "slide-2": {
                 "action": "Próximo",
@@ -16,6 +16,12 @@
                 "action": "Ok, entendi",
                 "description": "Obrigado por usar o Quran.com e ficaríamos felizes em ouvir seus comentários sobre <link> feedback.quran.com <\/link>",
                 "title": "Queremos ouvir seus pensamentos"
+            }
+        },
+        "collections-announcement": {
+            "slide-1": {
+                "description": "Estamos muito felizes em anunciar que agora você pode agrupar favoritos em \"coleções\"! <br\/> <br\/> <li> Adicione quantas coleções quiser <\/li> <li> Adicione um marcador a uma ou mais coleções <\/li> <li> E muito mais! <\/li>",
+                "title": "As coleções de marcadores estão aqui!"
             }
         }
     },
@@ -182,9 +188,6 @@
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} de {{totalNumberOfResults}} resultados da pesquisa",
     "popular-links": "Links populares",
     "popup": {
-        "cta-1": "Doar Mensalmente",
-        "cta-2": "Doe uma vez",
-        "cta-3": "Saber mais",
         "footnote": "As doações mensais permitem que nos concentremos menos na angariação de fundos",
         "text-1": "Estamos comprometidos em servir o conhecimento e a tecnologia do Alcorão, sempre de graça.",
         "text-2": "Quran.com é uma oportunidade perfeita para caridade contínua (Sadaqah Jariyah). Por favor, considere investir no seu Além como um doador mensal (ou único).",
@@ -207,7 +210,10 @@
     "reciters": "Recitadores",
     "reflect": "Refletir",
     "remove": "Retirar",
+    "rename": "Renomear",
     "retry": "Tentar novamente",
+    "rub": "Rub el Hizb",
+    "save-to-collection": "Salvar na coleção",
     "search-for": "Procure por '{{searchQuery}}'",
     "search-results": "{{count}} resultados de pesquisa",
     "search": {
@@ -246,6 +252,7 @@
     "share": "Compartilhado",
     "shared": "O link foi copiado para a área de transferência!",
     "sidebar": {
+        "search-hizb": "Pesquisar hizb",
         "search-juz": "Pesquisar Juz",
         "search-page": "Página de Pesquisa",
         "search-surah": "Surata de pesquisa",

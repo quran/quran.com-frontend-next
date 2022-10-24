@@ -5,16 +5,16 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import styles from './Trigger.module.scss';
 
+import Button, { ButtonShape, ButtonVariant } from '@/dls/Button/Button';
+import useBrowserLayoutEffect from '@/hooks/useBrowserLayoutEffect';
 import CloseIcon from '@/icons/close.svg';
 import MicrophoneIcon from '@/icons/microphone.svg';
-import Button, { ButtonShape, ButtonVariant } from 'src/components/dls/Button/Button';
-import useBrowserLayoutEffect from 'src/hooks/useBrowserLayoutEffect';
 import {
   toggleIsSearchDrawerVoiceFlowStarted,
   toggleIsCommandBarVoiceFlowStarted,
   selectIsCommandBarVoiceFlowStarted,
   selectIsSearchDrawerVoiceFlowStarted,
-} from 'src/redux/slices/voiceSearch';
+} from '@/redux/slices/voiceSearch';
 
 interface Props {
   isCommandBar?: boolean;

@@ -1,0 +1,22 @@
+{
+    "all-saved-verses": "Todos os versos salvos",
+    "alphabetical": "AZ",
+    "back-to-collection-list": "Voltar à lista de coleções",
+    "collection-list-empty": "A lista de coleções está vazia. Você ainda não criou nenhuma coleção",
+    "collections": "Coleções",
+    "delete": "Excluir",
+    "delete-bookmark": {
+        "subtitle": "Tem certeza de que deseja excluir {{bookmarkName}} da {{collectionName}} ?",
+        "title": "Excluir favorito"
+    },
+    "delete-collection": {
+        "subtitle": "Tem certeza de que deseja excluir a {{collectionName}} ?",
+        "title": "Excluir coleção"
+    },
+    "empty": "A coleção está vazia",
+    "go-to-ayah": "Vá para ayah",
+    "load-more": "Carregue mais",
+    "recently-added": "Adicionado recentemente",
+    "recently-updated": "Atualizado recentemente",
+    "verse-key": "Número do Capítulo e do Versículo"
+}

@@ -2,6 +2,7 @@ $contentMinHeight: calc(1.3 * var(--spacing-mega));
 .tabsContainer {
   margin-block-end: var(--spacing-medium);
   padding-inline-start: var(--flow-side-spacing, 0);
+  padding-inline-end: var(--flow-side-spacing, 0);
 }
 .contentContainer {
   min-height: $contentMinHeight;

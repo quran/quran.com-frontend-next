@@ -14,7 +14,7 @@
   color: var(--color-text-inverse);
   background-color: var(--color-background-inverse);
   text-align: center;
-  max-width: calc(8 * var(--spacing-mega));
+  max-width: calc(10 * var(--spacing-mega));
   & > span {
     fill: var(--color-background-inverse);
   }

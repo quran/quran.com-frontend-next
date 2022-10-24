@@ -21,7 +21,12 @@
     "target": "es5",
     "incremental": true,
     "paths": {
-      "@/icons/*": ["./public/icons/*"]
+      "@/icons/*": ["./public/icons/*"],
+      "@/dls/*": ["./src/components/dls/*"],
+      "@/data/*": ["./data/*"],
+      "@/types/*": ["./types/*"],
+      "@/tests/*": ["./tests/*"],
+      "@/*": ["./src/*"],
     }
   },
   "exclude": [

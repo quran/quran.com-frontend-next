@@ -5,7 +5,7 @@
         "auth-onboarding": {
             "slide-1": {
                 "action": "Zie wat nieuw is",
-                "title": "Welkom bij Quran.com <br> <\/br> Gebruikersaccount Beta"
+                "title": "Welkom bij Quran.com <br> <\/br> Gebruikersaccount"
             },
             "slide-2": {
                 "action": "Volgende",
@@ -16,6 +16,12 @@
                 "action": "Oké, snap het",
                 "description": "Bedankt voor het gebruik van Quran.com en we horen graag uw feedback op <link> feedback.quran.com <\/link>",
                 "title": "We willen je gedachten horen"
+            }
+        },
+        "collections-announcement": {
+            "slide-1": {
+                "description": "We zijn erg blij om aan te kondigen dat je nu bladwijzers kunt groeperen onder \"collecties\"! <br\/> <br\/> <li> Voeg zoveel collecties toe als je wilt <\/li> <li> Voeg een bladwijzer toe aan een of meer collecties <\/li> <li> En meer! <\/li>",
+                "title": "Bladwijzercollecties zijn hier!"
             }
         }
     },
@@ -182,9 +188,6 @@
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} van {{totalNumberOfResults}} zoekresultaten",
     "popular-links": "Populaire links",
     "popup": {
-        "cta-1": "Doneer maandelijks",
-        "cta-2": "Eenmalig doneren",
-        "cta-3": "Leer meer",
         "footnote": "Dankzij maandelijkse donaties kunnen we ons minder richten op fondsenwerving",
         "text-1": "We zijn toegewijd om de wereld kennis en technologie van de Koran te dienen, altijd gratis.",
         "text-2": "Quran.com is een perfecte gelegenheid voor voortdurende liefdadigheid (Sadaqah Jariyah). Overweeg om te investeren in uw Hiernamaals als maandelijkse (of eenmalige) donateur.",
@@ -207,7 +210,10 @@
     "reciters": "voordragers",
     "reflect": "Reflecteren",
     "remove": "Verwijderen",
+    "rename": "Hernoemen",
     "retry": "Opnieuw proberen",
+    "rub": "Rub el Hizb",
+    "save-to-collection": "Opslaan in collectie",
     "search-for": "Zoeken naar '{{searchQuery}}'",
     "search-results": "{{count}} zoekresultaten",
     "search": {
@@ -246,6 +252,7 @@
     "share": "Deel",
     "shared": "Link is gekopieerd naar het klembord!",
     "sidebar": {
+        "search-hizb": "Zoek Hizb",
         "search-juz": "Zoek Juz",
         "search-page": "Zoekpagina",
         "search-surah": "zoek soera",

@@ -13,7 +13,7 @@ import styles from './OverflowAudioPlayActionsMenuBody.module.scss';
 
 import ChevronRightIcon from '@/icons/chevron-right.svg';
 import PersonIcon from '@/icons/person.svg';
-import { logButtonClick } from 'src/utils/eventLogger';
+import { logButtonClick } from '@/utils/eventLogger';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 
 /**

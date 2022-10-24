@@ -11,9 +11,9 @@ import useTranslation from 'next-translate/useTranslation';
 import FootnoteText from './FootnoteText';
 import styles from './TranslationText.module.scss';
 
+import { logButtonClick } from '@/utils/eventLogger';
+import { getLanguageDataById } from '@/utils/locale';
 import { getFootnote } from 'src/api';
-import { logButtonClick } from 'src/utils/eventLogger';
-import { getLanguageDataById } from 'src/utils/locale';
 import Footnote from 'types/Footnote';
 
 interface Props {
@@ -172,6 +172,7 @@ const TranslationText: React.FC<Props> = ({
             styles[langData.direction],
             styles[langData.font],
           )}
+          // eslint-disable-next-line i18next/no-literal-string
         >
           — {resourceName}
         </p>

@@ -1,6 +1,6 @@
 import storage from 'redux-persist/lib/storage';
 
-import SliceName from 'src/redux/types/SliceName';
+import SliceName from '@/redux/types/SliceName';
 
 const commandBarPersistConfig = {
   key: SliceName.COMMAND_BAR,

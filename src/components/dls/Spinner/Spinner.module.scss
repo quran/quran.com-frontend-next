@@ -16,6 +16,11 @@
   box-sizing: border-box;
 }
 
+.delayVisibility {
+  opacity: 0;
+  animation: fadeIn 2s ease 1s forwards;
+}
+
 .centered {
   margin-block-start: 0;
   margin-block-end: 0;
@@ -97,4 +102,13 @@
 .span:nth-child(12) {
   animation-delay: -0.1s;
   transform: rotate(330deg) translate(146%);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
