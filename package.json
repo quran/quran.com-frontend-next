@@ -5,6 +5,7 @@
   "license": "MIT",
   "scripts": {
     "dev": "next dev",
+    "devwin": "./node_modules/.bin/next.cmd dev -p 3005",
     "dev:https": "node server.js",
     "build": "next build",
     "postbuild": "yarn run generate-sitemap",
