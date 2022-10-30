@@ -1,16 +1,16 @@
-import { useState } from "react";
+import { useState } from 'react';
 
-import useTranslation from "next-translate/useTranslation";
-import { useRouter } from "next/router";
+import useTranslation from 'next-translate/useTranslation';
+import { useRouter } from 'next/router';
 
-import { RepetitionMode } from "../AudioPlayer/RepeatAudioModal/SelectRepetitionMode";
-import PopoverMenu from "../dls/PopoverMenu/PopoverMenu";
+import { RepetitionMode } from '../AudioPlayer/RepeatAudioModal/SelectRepetitionMode';
+import PopoverMenu from '../dls/PopoverMenu/PopoverMenu';
 
-import RepeatAudioModal from "@/components/AudioPlayer/RepeatAudioModal/RepeatAudioModal";
-import RepeatIcon from "@/icons/repeat.svg";
-import { logEvent } from "@/utils/eventLogger";
-import { fakeNavigate } from "@/utils/navigation";
-import { getChapterNumberFromKey } from "@/utils/verse";
+import RepeatAudioModal from '@/components/AudioPlayer/RepeatAudioModal/RepeatAudioModal';
+import RepeatIcon from '@/icons/repeat.svg';
+import { logEvent } from '@/utils/eventLogger';
+import { fakeNavigate } from '@/utils/navigation';
+import { getChapterNumberFromKey } from '@/utils/verse';
 
 type VerseActionRepeatAudioProps = {
   verseKey: string;
@@ -25,16 +25,16 @@ const VerseActionRepeatAudio = ({
   onActionTriggered,
   isTranslationView,
 }: VerseActionRepeatAudioProps) => {
-  const { t } = useTranslation("common");
+  const { t } = useTranslation('common');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const chapterId = getChapterNumberFromKey(verseKey);
   const router = useRouter();
 
   const onModalClose = () => {
     if (isTranslationView) {
-      logEvent("translation_view_tafsir_modal_close");
+      logEvent('translation_view_tafsir_modal_close');
     } else {
-      logEvent("reading_view_tafsir_modal_close");
+      logEvent('reading_view_tafsir_modal_close');
     }
     setIsModalOpen(false);
     fakeNavigate(router.asPath, router.locale);
@@ -61,7 +61,7 @@ const VerseActionRepeatAudio = ({
           setIsModalOpen(true);
         }}
       >
-        {t("audio.player.repeat-1-verse")}
+        {t('audio.player.repeat-1-verse')}
       </PopoverMenu.Item>
     </>
   );
