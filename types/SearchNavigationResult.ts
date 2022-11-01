@@ -6,6 +6,7 @@ export enum SearchNavigationType {
   RUB_EL_HIZB = 'rub_el_hizb',
   SEARCH_PAGE = 'search_page',
   PAGE = 'page',
+  RANGE = 'range',
 }
 
 export interface SearchNavigationResult {
