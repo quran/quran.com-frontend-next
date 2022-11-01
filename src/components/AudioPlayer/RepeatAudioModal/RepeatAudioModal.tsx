@@ -187,7 +187,7 @@ const RepeatAudioModal = ({
             label={t('audio.player.play-range')}
             value={verseRepetition.repeatRange}
             minValue={1}
-            infinityThreshold={3}
+            infinityThreshold={8}
             onChange={onRepeatRangeChange}
             suffix={t('audio.player.times')}
           />
@@ -195,7 +195,7 @@ const RepeatAudioModal = ({
             label={t('audio.player.repeat-verse')}
             value={verseRepetition.repeatEachVerse}
             minValue={1}
-            infinityThreshold={3}
+            infinityThreshold={8}
             onChange={onRepeatEachVerseChange}
             suffix={t('audio.player.times')}
           />
