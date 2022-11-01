@@ -7,8 +7,6 @@
     "dev": "next dev",
     "dev:https": "node server.js",
     "build": "next build",
-    "devwin": "./node_modules/.bin/next.cmd dev -p 3005",
-    "deveslintwin": "./node_modules/.bin/eslint.cmd . --ext=tsx,ts,js,jsx --fix",
     "postbuild": "yarn run generate-sitemap",
     "snapshots:update": "vitest run --update",
     "start": "next start",
