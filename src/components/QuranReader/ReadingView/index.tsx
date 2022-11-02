@@ -109,7 +109,6 @@ const ReadingView = ({
   );
 
   const scrollToPreviousPage = useCallback(() => {
-    logButtonClick('reading_view_prev_page');
     virtuosoRef.current.scrollToIndex({
       index: currentPageIndex - 1,
       align: 'start',
@@ -118,13 +117,22 @@ const ReadingView = ({
   }, [currentPageIndex]);
 
   const scrollToNextPage = useCallback(() => {
-    logButtonClick('reading_view_next_page');
     virtuosoRef.current.scrollToIndex({
       index: currentPageIndex + 1,
       align: 'start',
       offset: 25,
     });
   }, [currentPageIndex]);
+
+  const onPrevPageClicked = useCallback(() => {
+    logButtonClick('reading_view_prev_page_button');
+    scrollToPreviousPage();
+  }, [scrollToPreviousPage]);
+
+  const onNextPageClicked = useCallback(() => {
+    logButtonClick('reading_view_next_page_button');
+    scrollToNextPage();
+  }, [scrollToNextPage]);
 
   const allowKeyboardNavigation = quranTextFontScale <= 5;
   const onUpClicked = useCallback(
@@ -212,8 +220,8 @@ const ReadingView = ({
       </div>
       {allowKeyboardNavigation && (
         <PageNavigationButtons
-          scrollToNextPage={scrollToNextPage}
-          scrollToPreviousPage={scrollToPreviousPage}
+          scrollToNextPage={onNextPageClicked}
+          scrollToPreviousPage={onPrevPageClicked}
         />
       )}
     </>
