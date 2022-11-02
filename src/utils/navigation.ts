@@ -1,7 +1,7 @@
 import { stringify } from 'querystring';
 
 import { getBasePath } from './url';
-import { getVerseAndChapterNumbersFromKey } from './verse';
+import { getVerseAndChapterNumbersFromKey, getVerseNumberRangeFromKey } from './verse';
 
 import { SearchNavigationType } from 'types/SearchNavigationResult';
 
@@ -14,6 +14,17 @@ import { SearchNavigationType } from 'types/SearchNavigationResult';
 export const getVerseNavigationUrlByVerseKey = (verseKey: string): string => {
   const [chapterId, verseNumber] = getVerseAndChapterNumbersFromKey(verseKey);
   return `/${chapterId}/${verseNumber}`;
+};
+
+/**
+ * Get the href link to a verse range e.g. 3:5-7.
+ *
+ * @param {string} key
+ * @returns {string}
+ */
+export const getSurahRangeNavigationUrlByVerseKey = (key: string): string => {
+  const { surah, from, to } = getVerseNumberRangeFromKey(key);
+  return `/${surah}/${from}-${to}`;
 };
 
 /**
@@ -144,6 +155,9 @@ export const resolveUrlBySearchNavigationType = (
   }
   if (type === SearchNavigationType.SEARCH_PAGE) {
     return getSearchQueryNavigationUrl(key as string);
+  }
+  if (type === SearchNavigationType.RANGE) {
+    return getSurahRangeNavigationUrlByVerseKey(key as string);
   }
   // for the Surah navigation
   return getSurahNavigationUrl(key);
