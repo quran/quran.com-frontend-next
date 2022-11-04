@@ -1,11 +1,11 @@
 import React from 'react';
 
 import QuranReflectButton from '../../TranslationView/QuranReflectButton';
-import ShareVerseButton from '../../TranslationView/ShareVerseButton';
 
 import styles from './WordActionsMenu.module.scss';
 
 import TranslationsButton from '@/components/QuranReader/ReadingView/TranslationsButton';
+import TafsirButton from '@/components/QuranReader/TranslationView/TafsirButton';
 import OverflowVerseActionsMenu from '@/components/Verse/OverflowVerseActionsMenu';
 import PlayVerseAudioButton from '@/components/Verse/PlayVerseAudioButton';
 import Word from 'types/Word';
@@ -18,8 +18,7 @@ type Props = {
 const ReadingViewWordActionsMenu: React.FC<Props> = ({ word, onActionTriggered }) => {
   return (
     <div className={styles.container}>
-      <TranslationsButton verse={word.verse} onActionTriggered={onActionTriggered} />
-      <ShareVerseButton
+      <TafsirButton
         verseKey={word.verseKey}
         isTranslationView={false}
         onActionTriggered={onActionTriggered}
@@ -29,6 +28,7 @@ const ReadingViewWordActionsMenu: React.FC<Props> = ({ word, onActionTriggered }
         isTranslationView={false}
         onActionTriggered={onActionTriggered}
       />
+      <TranslationsButton verse={word.verse} onActionTriggered={onActionTriggered} />
       {word?.verse?.timestamps && (
         <PlayVerseAudioButton
           verseKey={word.verseKey}

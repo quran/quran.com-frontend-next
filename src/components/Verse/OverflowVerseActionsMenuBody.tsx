@@ -10,12 +10,15 @@ import VerseActionAdvancedCopy from './VerseActionAdvancedCopy';
 import VerseActionRepeatAudio from './VerseActionRepeatAudio';
 
 import WordByWordVerseAction from '@/components/QuranReader/ReadingView/WordByWordVerseAction';
-import TafsirVerseAction from '@/components/QuranReader/TafsirView/TafsirVerseAction';
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
+import { ToastStatus, useToast } from '@/dls/Toast/Toast';
+import CopyLinkIcon from '@/icons/copy-link.svg';
 import CopyIcon from '@/icons/copy.svg';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import { isLoggedIn } from '@/utils/auth/login';
 import { logButtonClick } from '@/utils/eventLogger';
+import { getWindowOrigin } from '@/utils/url';
+import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
 import { getWordTextFieldNameByFont } from '@/utils/word';
 import Verse from 'types/Verse';
 
@@ -28,16 +31,34 @@ interface Props {
 
 const RESET_ACTION_TEXT_TIMEOUT_MS = 3 * 1000;
 
+export const onShareClicked = (
+  verseKey: string,
+  isTranslationView: boolean,
+  callback: () => void,
+  locale: string,
+) => {
+  logButtonClick(
+    // eslint-disable-next-line i18next/no-literal-string
+    `${isTranslationView ? 'translation_view' : 'reading_view'}_verse_actions_menu_copy`,
+  );
+  const origin = getWindowOrigin(locale);
+  const [chapter, verse] = getVerseAndChapterNumbersFromKey(verseKey);
+  if (origin) {
+    clipboardCopy(`${origin}/${chapter}/${verse}`).then(callback);
+  }
+};
+
 const OverflowVerseActionsMenuBody: React.FC<Props> = ({
   verse,
   isTranslationView,
   onActionTriggered,
   bookmarksRangeUrl,
 }) => {
-  const { t } = useTranslation('common');
+  const { t, lang } = useTranslation('common');
   const [isCopied, setIsCopied] = useState(false);
   const [isShared, setIsShared] = useState(false);
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
+  const toast = useToast();
 
   useEffect(() => {
     let timeoutId: ReturnType<typeof setTimeout>;
@@ -79,10 +100,25 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
     });
   };
 
+  const onShareVerseClicked = () => {
+    onShareClicked(
+      verse.verseKey,
+      isTranslationView,
+      () => toast(t('shared'), { status: ToastStatus.Success }),
+      lang,
+    );
+    if (onActionTriggered) {
+      onActionTriggered();
+    }
+  };
+
   return (
     <div>
       <PopoverMenu.Item onClick={onCopyClicked} icon={<CopyIcon />}>
         {isCopied ? `${t('copied')}!` : `${t('copy')}`}
+      </PopoverMenu.Item>
+      <PopoverMenu.Item onClick={onShareVerseClicked} icon={<CopyLinkIcon />}>
+        {t('common:share')}
       </PopoverMenu.Item>
 
       <VerseActionAdvancedCopy
@@ -93,12 +129,6 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
       {!isTranslationView && (
         <WordByWordVerseAction verse={verse} onActionTriggered={onActionTriggered} />
       )}
-      <TafsirVerseAction
-        chapterId={Number(verse.chapterId)}
-        verseNumber={verse.verseNumber}
-        isTranslationView={isTranslationView}
-        onActionTriggered={onActionTriggered}
-      />
 
       <BookmarkAction
         verse={verse}
