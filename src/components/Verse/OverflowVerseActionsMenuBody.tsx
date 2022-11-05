@@ -115,10 +115,10 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
   return (
     <div>
       <PopoverMenu.Item onClick={onCopyClicked} icon={<CopyIcon />}>
-        {isCopied ? `${t('copied')}!` : `${t('copy')}`}
+        {isCopied ? `${t('copied')}!` : `${t('quran-reader:copy-verse')}`}
       </PopoverMenu.Item>
       <PopoverMenu.Item onClick={onShareVerseClicked} icon={<CopyLinkIcon />}>
-        {t('common:share')}
+        {t('quran-reader:cpy-link')}
       </PopoverMenu.Item>
 
       <VerseActionAdvancedCopy
