@@ -1,6 +1,10 @@
 {
     "add-collection": "Koleksiyon Ekle",
     "advanced-copy": "Gelişmiş Kopya",
+    "aria": {
+        "read-ayah-refls": "Ayah Yansımalarını Okuyun",
+        "read-tafsirs": "Ayah Tefsirlerini Okuyun"
+    },
     "ayatul-kursi": "Ayetel Kürsi",
     "back-to-ayah": "Ayete geri dön",
     "copy-arabic": "Arapça metin (Osmani metin)",

@@ -1,6 +1,10 @@
 {
     "add-collection": "افزودن مجموعه",
     "advanced-copy": "کپی پیشرفته",
+    "aria": {
+        "read-ayah-refls": "بازتاب آیه را بخوانید",
+        "read-tafsirs": "آیات تفسیر را بخوانید"
+    },
     "ayatul-kursi": "آیت الکرسی",
     "back-to-ayah": "بازگشت به آیه",
     "copy-arabic": "متن عربی (متن عثمانی)",

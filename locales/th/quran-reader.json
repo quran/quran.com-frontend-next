@@ -1,6 +1,10 @@
 {
     "add-collection": "เพิ่มเข้าคอลเลคชั่น",
     "advanced-copy": "คัดลอกขั้นสูง",
+    "aria": {
+        "read-ayah-refls": "อ่าน Ayah Reflections",
+        "read-tafsirs": "อ่านอายะตัฟซีรฺ"
+    },
     "ayatul-kursi": "อยาตุล กุรซี",
     "back-to-ayah": "กลับไปที่อายะ",
     "copy-arabic": "ข้อความภาษาอาหรับ (ข้อความ Uthmani)",

@@ -1,6 +1,10 @@
 {
     "add-collection": "সংগ্রহ যোগ করুন",
     "advanced-copy": "উন্নত কপি",
+    "aria": {
+        "read-ayah-refls": "আয়াতের প্রতিফলন পড়ুন",
+        "read-tafsirs": "আয়াত তাফসীর পড়ুন"
+    },
     "ayatul-kursi": "আয়াতুল কুরসি",
     "back-to-ayah": "আয়াহ-এ ফেরত যান",
     "copy-arabic": "আরবি পাঠ (উসমানী পাঠ)",

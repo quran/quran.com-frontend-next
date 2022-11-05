@@ -1,6 +1,10 @@
 {
     "add-collection": "Collectie toevoegen",
     "advanced-copy": "Geavanceerd kopiëren",
+    "aria": {
+        "read-ayah-refls": "Lees Ayah Reflections",
+        "read-tafsirs": "Lees Ayah Tafsirs"
+    },
     "ayatul-kursi": "Ayatul Kursi",
     "back-to-ayah": "terug naar Ayah",
     "copy-arabic": "Arabische tekst (Uthmani-tekst)",

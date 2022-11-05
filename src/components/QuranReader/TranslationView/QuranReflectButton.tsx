@@ -60,7 +60,7 @@ const QuranReflectButton = ({
         className={classNames(styles.iconContainer, styles.verseAction, {
           [styles.fadedVerseAction]: isTranslationView,
         })}
-        ariaLabel={t('aria.read-ayah-refls')}
+        ariaLabel={t('quran-reader:aria.read-ayah-refls')}
       >
         <span className={styles.icon}>
           <ChatIcon />

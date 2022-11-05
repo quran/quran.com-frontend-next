@@ -1,6 +1,10 @@
 {
     "add-collection": "Ajouter une collection",
     "advanced-copy": "Copie avancée",
+    "aria": {
+        "read-ayah-refls": "Lire les réflexions d'Ayah",
+        "read-tafsirs": "Lire Ayah Tafsirs"
+    },
     "ayatul-kursi": "Ayatul Kursi",
     "back-to-ayah": "Retour à Ayah",
     "copy-arabic": "Texte arabe (texte outhmani)",

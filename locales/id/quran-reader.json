@@ -1,6 +1,10 @@
 {
     "add-collection": "Tambahkan Koleksi",
     "advanced-copy": "Salinan Lanjutan",
+    "aria": {
+        "read-ayah-refls": "Baca Refleksi Ayat",
+        "read-tafsirs": "Baca Ayah Tafsir"
+    },
     "ayatul-kursi": "Ayat Kursi",
     "back-to-ayah": "Kembali ke Ayat",
     "copy-arabic": "Teks Arab (teks Utsmani)",

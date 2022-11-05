@@ -1,6 +1,10 @@
 {
     "add-collection": "أضف المجموعة",
     "advanced-copy": "نسخ مفصل",
+    "aria": {
+        "read-ayah-refls": "اقرأ تأملات آية",
+        "read-tafsirs": "اقرأ تفسيرات الآية"
+    },
     "ayatul-kursi": "آية الكرسي",
     "back-to-ayah": "العودة إلى آية",
     "copy-arabic": "النص القرآني (نص عثماني)",

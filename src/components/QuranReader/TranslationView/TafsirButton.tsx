@@ -72,7 +72,7 @@ const TafsirButton: React.FC<Props> = ({
         className={classNames(styles.iconContainer, styles.verseAction, {
           [styles.fadedVerseAction]: isTranslationView,
         })}
-        // TODO: ariaLabel={t('aria.read-ayah-refls')}
+        ariaLabel={t('quran-reader:aria.read-tafsirs')}
       >
         <span className={styles.icon}>
           <TafsirIcon />
