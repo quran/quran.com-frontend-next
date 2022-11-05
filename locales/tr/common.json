@@ -31,9 +31,7 @@
         "msg-close": "Mesajı Kapat",
         "nav-drawer-open": "Gezinti Çekmecesini Aç",
         "play-surah": "{{surahName}} çal",
-        "read-ayah-refls": "Ayah Yansımalarını Okuyun",
         "select-lng": "Dil Seçin",
-        "share-ayah": "Ayah'ı paylaşın",
         "sidebar-nav-close": "Gezinme Kenar Çubuğunu Kapat"
     },
     "audio": {

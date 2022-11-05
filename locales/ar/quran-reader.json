@@ -1,12 +1,17 @@
 {
     "add-collection": "أضف المجموعة",
     "advanced-copy": "نسخ مفصل",
+    "aria": {
+        "read-ayah-refls": "اقرأ تأملات آية",
+        "read-tafsirs": "اقرأ تفسيرات الآية"
+    },
     "ayatul-kursi": "آية الكرسي",
     "back-to-ayah": "العودة إلى آية",
     "copy-arabic": "النص القرآني (نص عثماني)",
     "copy-footnote-q": "هل تريد أيضًا نسخ الهوامش؟",
     "copy-success": "تم نسخ النص بنجاح في الحافظة الخاصة بك.",
     "copy-text": "نسخ النص",
+    "copy-verse": "نسخ الآية",
     "cpy-link": "نسخ الوصلة",
     "current-verse": "الآية الحالية",
     "download-copy": "إذا كنت تريد تنزيل ملف نصي.",

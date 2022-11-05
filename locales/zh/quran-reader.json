@@ -1,12 +1,17 @@
 {
     "add-collection": "添加收藏",
     "advanced-copy": "高级复制",
+    "aria": {
+        "read-ayah-refls": "阅读相关参悟",
+        "read-tafsirs": "阅读 Ayah Tafsirs"
+    },
     "ayatul-kursi": "阿叶提库尔西",
     "back-to-ayah": "回到阿亚",
     "copy-arabic": "阿拉伯文（纳斯赫体）",
     "copy-footnote-q": "还要复制脚注？",
     "copy-success": "文本已成功复制到剪贴板中。",
     "copy-text": "复制文本",
+    "copy-verse": "复制经文",
     "cpy-link": "复制链接",
     "current-verse": "当前节文",
     "download-copy": "如果你想下载文本文件。",

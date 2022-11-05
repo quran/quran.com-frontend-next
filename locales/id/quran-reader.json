@@ -1,12 +1,17 @@
 {
     "add-collection": "Tambahkan Koleksi",
     "advanced-copy": "Salinan Lanjutan",
+    "aria": {
+        "read-ayah-refls": "Baca Refleksi Ayat",
+        "read-tafsirs": "Baca Ayah Tafsir"
+    },
     "ayatul-kursi": "Ayat Kursi",
     "back-to-ayah": "Kembali ke Ayat",
     "copy-arabic": "Teks Arab (teks Utsmani)",
     "copy-footnote-q": "Salin juga Catatan Kaki?",
     "copy-success": "Teks berhasil disalin di papan klip Anda.",
     "copy-text": "Salin teks",
+    "copy-verse": "Salin Ayat",
     "cpy-link": "Salin tautan",
     "current-verse": "Ayat saat ini",
     "download-copy": "jika Anda ingin mengunduh file teks.",

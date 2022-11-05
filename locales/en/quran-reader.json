@@ -1,12 +1,17 @@
 {
     "add-collection": "Add Collection",
     "advanced-copy": "Advanced Copy",
+    "aria": {
+        "read-ayah-refls": "Read Ayah Reflections",
+        "read-tafsirs": "Read Ayah Tafsirs"
+    },
     "ayatul-kursi": "Ayatul Kursi",
     "back-to-ayah": "Back to Ayah",
     "copy-arabic": "Arabic text (Uthmani text)",
     "copy-footnote-q": "Also copy Footnote(s)?",
     "copy-success": "Text is copied successfully in your clipboard.",
     "copy-text": "Copy text",
+    "copy-verse": "Copy Verse",
     "cpy-link": "Copy Link",
     "current-verse": "Current verse",
     "download-copy": "if you want to download text file.",

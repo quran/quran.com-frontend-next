@@ -1,12 +1,17 @@
 {
     "add-collection": "Collectie toevoegen",
     "advanced-copy": "Geavanceerd kopiëren",
+    "aria": {
+        "read-ayah-refls": "Lees Ayah Reflections",
+        "read-tafsirs": "Lees Ayah Tafsirs"
+    },
     "ayatul-kursi": "Ayatul Kursi",
     "back-to-ayah": "terug naar Ayah",
     "copy-arabic": "Arabische tekst (Uthmani-tekst)",
     "copy-footnote-q": "Ook voetnoot(en) kopiëren?",
     "copy-success": "Tekst is succesvol gekopieerd naar uw klembord.",
     "copy-text": "Kopieer tekst",
+    "copy-verse": "Kopieer vers",
     "cpy-link": "Kopieer link",
     "current-verse": "huidige vers",
     "download-copy": "als u een tekstbestand wilt downloaden.",

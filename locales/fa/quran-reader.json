@@ -1,12 +1,17 @@
 {
     "add-collection": "افزودن مجموعه",
     "advanced-copy": "کپی پیشرفته",
+    "aria": {
+        "read-ayah-refls": "بازتاب آیه را بخوانید",
+        "read-tafsirs": "آیات تفسیر را بخوانید"
+    },
     "ayatul-kursi": "آیت الکرسی",
     "back-to-ayah": "بازگشت به آیه",
     "copy-arabic": "متن عربی (متن عثمانی)",
     "copy-footnote-q": "همچنین پاورقی(های) را کپی کنید؟",
     "copy-success": "متن با موفقیت در کلیپ بورد شما کپی شد.",
     "copy-text": "متن را کپی کن",
+    "copy-verse": "آیه را کپی کنید",
     "cpy-link": "لینک را کپی کنید",
     "current-verse": "آیه فعلی",
     "download-copy": "اگر می خواهید فایل متنی را دانلود کنید.",

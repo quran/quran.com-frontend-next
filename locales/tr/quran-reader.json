@@ -1,12 +1,17 @@
 {
     "add-collection": "Koleksiyon Ekle",
     "advanced-copy": "Gelişmiş Kopya",
+    "aria": {
+        "read-ayah-refls": "Ayah Yansımalarını Okuyun",
+        "read-tafsirs": "Ayah Tefsirlerini Okuyun"
+    },
     "ayatul-kursi": "Ayetel Kürsi",
     "back-to-ayah": "Ayete geri dön",
     "copy-arabic": "Arapça metin (Osmani metin)",
     "copy-footnote-q": "Dipnot(lar) da kopyalansın mı?",
     "copy-success": "Metin panonuza başarıyla kopyalandı.",
     "copy-text": "Metni kopyala",
+    "copy-verse": "Ayeti Kopyala",
     "cpy-link": "Bağlantıyı kopyala",
     "current-verse": "Geçerli ayet",
     "download-copy": "Metin dosyasını indirmek istiyorsanız.",

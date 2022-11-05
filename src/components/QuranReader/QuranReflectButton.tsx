@@ -4,10 +4,9 @@ import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 
-import styles from './TranslationViewCell.module.scss';
-
 import ContentModal from '@/components/dls/ContentModal/ContentModal';
 import ReflectionBodyContainer from '@/components/QuranReader/ReflectionView/ReflectionBodyContainer';
+import styles from '@/components/QuranReader/TranslationView/TranslationViewCell.module.scss';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import ChatIcon from '@/icons/chat.svg';
 import { logButtonClick } from '@/utils/eventLogger';
@@ -60,7 +59,7 @@ const QuranReflectButton = ({
         className={classNames(styles.iconContainer, styles.verseAction, {
           [styles.fadedVerseAction]: isTranslationView,
         })}
-        ariaLabel={t('aria.read-ayah-refls')}
+        ariaLabel={t('quran-reader:aria.read-ayah-refls')}
       >
         <span className={styles.icon}>
           <ChatIcon />

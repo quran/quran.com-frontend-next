@@ -31,9 +31,7 @@
         "msg-close": "إغلاق الرسالة",
         "nav-drawer-open": "افتح درج التنقل",
         "play-surah": "تشغيل السورة {{surahName}}",
-        "read-ayah-refls": "اقرأ تأملات آية",
         "select-lng": "اختر اللغة",
-        "share-ayah": "مشاركة آية",
         "sidebar-nav-close": "إغلاق شريط التنقل الجانبي"
     },
     "audio": {
