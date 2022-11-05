@@ -5,11 +5,9 @@ import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 
-import TafsirBody from '../TafsirView/TafsirBody';
-
-import styles from './TranslationViewCell.module.scss';
-
 import ContentModal from '@/components/dls/ContentModal/ContentModal';
+import TafsirBody from '@/components/QuranReader/TafsirView/TafsirBody';
+import styles from '@/components/QuranReader/TranslationView/TranslationViewCell.module.scss';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import TafsirIcon from '@/icons/book-open.svg';
 import { selectSelectedTafsirs } from '@/redux/slices/QuranReader/tafsirs';

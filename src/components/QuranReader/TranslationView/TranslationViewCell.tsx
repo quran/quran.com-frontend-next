@@ -12,11 +12,11 @@ import {
 } from '../utils/memoization';
 
 import BookmarkIcon from './BookmarkIcon';
-import QuranReflectButton from './QuranReflectButton';
 import TranslationText from './TranslationText';
 import styles from './TranslationViewCell.module.scss';
 
-import TafsirButton from '@/components/QuranReader/TranslationView/TafsirButton';
+import QuranReflectButton from '@/components/QuranReader/QuranReflectButton';
+import TafsirButton from '@/components/QuranReader/TafsirButton';
 import OverflowVerseActionsMenu from '@/components/Verse/OverflowVerseActionsMenu';
 import PlayVerseAudioButton from '@/components/Verse/PlayVerseAudioButton';
 import VerseLink from '@/components/Verse/VerseLink';
@@ -92,10 +92,10 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
               />
             </div>
             <div className={classNames(styles.actionItem)}>
-              <QuranReflectButton verseKey={verse.verseKey} />
+              <TafsirButton verseKey={verse.verseKey} />
             </div>
             <div className={classNames(styles.actionItem)}>
-              <TafsirButton verseKey={verse.verseKey} />
+              <QuranReflectButton verseKey={verse.verseKey} />
             </div>
           </div>
           <div className={styles.actionContainerRight}>

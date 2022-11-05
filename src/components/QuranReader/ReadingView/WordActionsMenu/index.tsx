@@ -1,11 +1,11 @@
 import React from 'react';
 
-import QuranReflectButton from '../../TranslationView/QuranReflectButton';
+import QuranReflectButton from '../../QuranReflectButton';
 
 import styles from './WordActionsMenu.module.scss';
 
 import TranslationsButton from '@/components/QuranReader/ReadingView/TranslationsButton';
-import TafsirButton from '@/components/QuranReader/TranslationView/TafsirButton';
+import TafsirButton from '@/components/QuranReader/TafsirButton';
 import OverflowVerseActionsMenu from '@/components/Verse/OverflowVerseActionsMenu';
 import PlayVerseAudioButton from '@/components/Verse/PlayVerseAudioButton';
 import Word from 'types/Word';
