@@ -33,7 +33,6 @@
         "play-surah": "Jouez la sourate {{surahName}}",
         "read-ayah-refls": "Lire les réflexions d'Ayah",
         "select-lng": "Choisir la langue",
-        "share-ayah": "Partager Ayah",
         "sidebar-nav-close": "Fermer la barre latérale de navigation"
     },
     "audio": {
