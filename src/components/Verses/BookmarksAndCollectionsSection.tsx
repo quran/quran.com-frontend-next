@@ -12,6 +12,9 @@ import Tabs from '@/dls/Tabs/Tabs';
 import { isLoggedIn } from '@/utils/auth/login';
 import { logValueChange } from '@/utils/eventLogger';
 
+import { useSelector } from 'react-redux';
+import { selectBookmarks } from '@/redux/slices/QuranReader/bookmarks';
+
 enum View {
   Bookmarks = 'bookmarks',
   Collections = 'collections',
@@ -20,6 +23,8 @@ enum View {
 const BookmarksAndCollectionsSection = () => {
   const { t } = useTranslation('home');
   const [selectedTab, setSelectedTab] = useState(View.Bookmarks);
+
+  const bookmarkedVerses = useSelector(selectBookmarks);
 
   const tabs = [{ title: t('tab.bookmarks'), value: View.Bookmarks }];
   if (isLoggedIn()) {
@@ -30,6 +35,10 @@ const BookmarksAndCollectionsSection = () => {
     logValueChange('bookmark_section_and_collection', selectedTab, newTab);
     setSelectedTab(newTab);
   };
+
+  const isBookmarkEmpty = Object.keys(bookmarkedVerses).length === 0;
+
+  if(isBookmarkEmpty) return null
 
   return (
     <div>
