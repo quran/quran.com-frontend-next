@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
+import { useSelector } from 'react-redux';
 
 import CollectionList from '../Collection/CollectionList/CollectionList';
 
@@ -9,11 +10,9 @@ import BookmarkedVersesList from './BookmarkedVersesList';
 import styles from './BookmarksAndQuickLinks.module.scss';
 
 import Tabs from '@/dls/Tabs/Tabs';
+import { selectBookmarks } from '@/redux/slices/QuranReader/bookmarks';
 import { isLoggedIn } from '@/utils/auth/login';
 import { logValueChange } from '@/utils/eventLogger';
-
-import { useSelector } from 'react-redux';
-import { selectBookmarks } from '@/redux/slices/QuranReader/bookmarks';
 
 enum View {
   Bookmarks = 'bookmarks',
@@ -38,7 +37,7 @@ const BookmarksAndCollectionsSection = () => {
 
   const isBookmarkEmpty = Object.keys(bookmarkedVerses).length === 0;
 
-  if(isBookmarkEmpty) return null
+  if (isBookmarkEmpty) return null;
 
   return (
     <div>
