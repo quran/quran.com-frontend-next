@@ -9,9 +9,7 @@ import TitleAndDescription from './TitleAndDescription';
 import { selectIsSidebarNavigationVisible } from '@/redux/slices/QuranReader/sidebarNavigation';
 
 const Footer = () => {
-  const isSidebarNavigationVisible = useSelector(
-    selectIsSidebarNavigationVisible
-  );
+  const isSidebarNavigationVisible = useSelector(selectIsSidebarNavigationVisible);
 
   return (
     <footer
