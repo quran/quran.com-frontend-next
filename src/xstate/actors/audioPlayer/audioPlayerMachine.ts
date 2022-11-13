@@ -96,6 +96,9 @@ export const audioPlayerMachine =
             PLAY_RADIO: {
               actions: ['stopRepeatActor', 'forwardPlayToRadioMachine'],
             },
+            CLOSE_RADIO: {
+              actions: ['pauseAudio', 'exitRadio'],
+            },
             PLAY_RADIO_TRACK: {
               actions: 'setRadioStationDetails',
               description: 'User opens the audio player to play radio of a certain station',
@@ -726,6 +729,10 @@ export const audioPlayerMachine =
             ],
             PLAY_RADIO: {
               actions: ['stopRepeatActor', 'forwardPlayToRadioMachine'],
+            },
+            CLOSE_RADIO: {
+              actions: ['pauseAudio', 'exitRadio'],
+              target: 'HIDDEN',
             },
           },
         },
