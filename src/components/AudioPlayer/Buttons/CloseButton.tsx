@@ -19,7 +19,7 @@ const CloseButton = () => {
       }}
       icon={<CloseIcon />}
     >
-      {t('audio.player.close')}
+      {t('audio.player.close-audio-player')}
     </PopoverMenu.Item>
   );
 };

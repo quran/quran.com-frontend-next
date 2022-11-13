@@ -25,7 +25,14 @@
   font-weight: var(--font-weight-semibold);
   line-height: normal;
 }
+
 .description {
   text-align: start;
   line-height: normal;
+}
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xsmall);
 }
