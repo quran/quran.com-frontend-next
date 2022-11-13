@@ -45,7 +45,8 @@
         "playback-speed": "Vitesse de lecture",
         "playback-speed-unit": "X",
         "player": {
-            "close": "Fermer le lecteur audio",
+            "close": "Fermer",
+            "close-audio-player": "Fermer le lecteur audio",
             "currently-playing": "Vous jouez actuellement",
             "delay-verse": "Délai entre le verset",
             "download": "Télécharger",

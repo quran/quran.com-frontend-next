@@ -45,7 +45,8 @@
         "playback-speed": "播放速度",
         "playback-speed-unit": "X",
         "player": {
-            "close": "关闭音频播放器",
+            "close": "关",
+            "close-audio-player": "关闭音频播放器",
             "currently-playing": "您正在播放",
             "delay-verse": "每节之间停顿",
             "download": "下载",
