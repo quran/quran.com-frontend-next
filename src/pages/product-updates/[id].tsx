@@ -9,19 +9,26 @@ import LocalizationMessage from '@/components/Notion/LocalizationMessage';
 import NotionPage from '@/components/Notion/Page';
 import PageContainer from '@/components/PageContainer';
 import Spinner from '@/dls/Spinner/Spinner';
+import ChaptersData from '@/types/ChaptersData';
+import { getAllChaptersData } from '@/utils/chapter';
 import { getCanonicalUrl, getProductUpdatesUrl } from '@/utils/navigation';
 import { getPageTitle, getRevalidationTime } from '@/utils/notion';
 import { REVALIDATION_PERIOD_ON_ERROR_SECONDS } from '@/utils/staticPageGeneration';
 import { retrieveBlockChildren, retrieveDatabase, retrievePage } from 'src/lib/notion';
 import Error from 'src/pages/_error';
 
-interface Props {
+type ProductUpdatesItemProps = {
   hasError?: boolean;
   page?: any[];
   blocks?: any[];
-}
+  chaptersData: ChaptersData;
+};
 
-const Page: NextPage<Props> = ({ hasError, page, blocks }) => {
+const ProductUpdatesItem: NextPage<ProductUpdatesItemProps> = ({
+  hasError,
+  page,
+  blocks,
+}): JSX.Element => {
   const { lang } = useTranslation();
   const router = useRouter();
   if (router.isFallback) {
@@ -51,15 +58,22 @@ const Page: NextPage<Props> = ({ hasError, page, blocks }) => {
   );
 };
 
-export const getStaticProps = async (context) => {
-  const { id } = context.params;
+export const getStaticProps = async ({ params, locale }) => {
+  const { id } = params;
   try {
-    const response = await Promise.all([retrievePage(id), retrieveBlockChildren(id)]);
+    const response = await Promise.all([
+      retrievePage(id),
+      retrieveBlockChildren(id),
+      getAllChaptersData(locale),
+    ]);
+    const page = response[0];
     const blocks = response[1];
+    const chaptersData = response[2];
     return {
       props: {
-        page: response[0],
+        page,
         blocks,
+        chaptersData,
       },
       revalidate: getRevalidationTime([blocks]),
     };
@@ -81,4 +95,4 @@ export const getStaticPaths = async () => {
   };
 };
 
-export default Page;
+export default ProductUpdatesItem;

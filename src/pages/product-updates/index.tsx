@@ -9,19 +9,26 @@ import NextSeoWrapper from '@/components/NextSeoWrapper';
 import LocalizationMessage from '@/components/Notion/LocalizationMessage';
 import Page from '@/components/Notion/Page';
 import PageContainer from '@/components/PageContainer';
+import ChaptersData from '@/types/ChaptersData';
+import { getAllChaptersData } from '@/utils/chapter';
 import { getCanonicalUrl, getProductUpdatesUrl } from '@/utils/navigation';
 import { getRevalidationTime } from '@/utils/notion';
 import { REVALIDATION_PERIOD_ON_ERROR_SECONDS } from '@/utils/staticPageGeneration';
 import { retrieveBlockChildren, retrieveDatabase } from 'src/lib/notion';
 import Error from 'src/pages/_error';
 
-interface Props {
+type ProductUpdatesProps = {
   hasError?: boolean;
   pages?: any[];
   pagesBlocks?: any[];
-}
+  chaptersData: ChaptersData;
+};
 
-const Changelog: NextPage<Props> = ({ pages, pagesBlocks, hasError }) => {
+const ProductUpdates: NextPage<ProductUpdatesProps> = ({
+  pages,
+  pagesBlocks,
+  hasError,
+}): JSX.Element => {
   const { t, lang } = useTranslation('common');
   if (hasError) {
     return <Error statusCode={500} />;
@@ -45,7 +52,7 @@ const Changelog: NextPage<Props> = ({ pages, pagesBlocks, hasError }) => {
   );
 };
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
   try {
     // 1. get the list of pages by querying the database.
     const pages = await retrieveDatabase(process.env.NOTION_DATABASE_ID);
@@ -56,10 +63,14 @@ export const getStaticProps: GetStaticProps = async () => {
     });
     // 3. wait for all the requests.
     const pagesBlocks = await Promise.all(promises);
+
+    const allChaptersData = await getAllChaptersData(locale);
+
     return {
       props: {
         pages,
         pagesBlocks,
+        chaptersData: allChaptersData,
       },
       revalidate: getRevalidationTime(pagesBlocks),
     };
@@ -73,4 +84,4 @@ export const getStaticProps: GetStaticProps = async () => {
   }
 };
 
-export default Changelog;
+export default ProductUpdates;

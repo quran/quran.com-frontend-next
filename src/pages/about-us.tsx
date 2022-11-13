@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-has-content */
 /* eslint-disable jsx-a11y/control-has-associated-label */
+import { GetStaticProps, NextPage } from 'next';
 import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
 import Image from 'next/image';
@@ -9,13 +10,20 @@ import styles from './contentPage.module.scss';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import PageContainer from '@/components/PageContainer';
 import Link from '@/dls/Link/Link';
+import ChaptersData from '@/types/ChaptersData';
+import { getAllChaptersData } from '@/utils/chapter';
 import { logTarteelLinkClick } from '@/utils/eventLogger';
 import { getBlurDataUrl } from '@/utils/image';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl } from '@/utils/navigation';
 
 const path = '/about-us';
-const AboutUsPage = () => {
+
+type AboutUsPageProps = {
+  chaptersData: ChaptersData;
+};
+
+const AboutUsPage: NextPage<AboutUsPageProps> = (): JSX.Element => {
   const { t, lang } = useTranslation('about');
 
   const onTarteelLinkClicked = () => {
@@ -148,6 +156,16 @@ const AboutUsPage = () => {
       </PageContainer>
     </>
   );
+};
+
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
+  const allChaptersData = await getAllChaptersData(locale);
+
+  return {
+    props: {
+      chaptersData: allChaptersData,
+    },
+  };
 };
 
 export default AboutUsPage;

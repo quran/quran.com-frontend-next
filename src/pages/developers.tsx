@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-has-content */
 /* eslint-disable jsx-a11y/control-has-associated-label */
+import { GetStaticProps, NextPage } from 'next';
 import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
 
@@ -8,11 +9,17 @@ import styles from './contentPage.module.scss';
 import CommunitySection from '@/components/Navbar/NavigationDrawer/CommunitySection';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import PageContainer from '@/components/PageContainer';
+import ChaptersData from '@/types/ChaptersData';
+import { getAllChaptersData } from '@/utils/chapter';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl } from '@/utils/navigation';
 
+type DevelopersPageProps = {
+  chaptersData: ChaptersData;
+};
+
 const path = '/developers';
-const DevelopersPage = () => {
+const DevelopersPage: NextPage<DevelopersPageProps> = (): JSX.Element => {
   const { t, lang } = useTranslation('developers');
   return (
     <>
@@ -141,6 +148,16 @@ const DevelopersPage = () => {
       </PageContainer>
     </>
   );
+};
+
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
+  const allChaptersData = await getAllChaptersData(locale);
+
+  return {
+    props: {
+      chaptersData: allChaptersData,
+    },
+  };
 };
 
 export default DevelopersPage;
