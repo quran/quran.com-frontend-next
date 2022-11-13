@@ -18,15 +18,45 @@ type DevelopersPageProps = {
   chaptersData: ChaptersData;
 };
 
-const path = '/developers';
+const PATH = '/developers';
+const GITHUB_PROJECTS = [
+  {
+    key: 0,
+    i18nKey: 'developers:projects.q-next',
+    links: [{ key: 0, href: 'https://github.com/quran/quran.com-frontend-next' }],
+  },
+  {
+    key: 1,
+    i18nKey: 'developers:projects.q-api',
+    links: [{ key: 0, href: 'https://github.com/quran/quran.com-api' }],
+  },
+  {
+    key: 2,
+    i18nKey: 'developers:projects.q-android',
+    links: [{ key: 0, href: 'https://github.com/quran/quran_android' }],
+  },
+  {
+    key: 3,
+    i18nKey: 'developers:projects.q-ios',
+    links: [{ key: 0, href: 'https://github.com/quran/quran-ios' }],
+  },
+  {
+    key: 4,
+    i18nKey: 'developers:projects.q-audio',
+    links: [
+      { key: 0, href: 'https://github.com/quran/audio.quran.com' },
+      { key: 1, href: 'https://github.com/quran/quranicaudio-app' },
+    ],
+  },
+];
 const DevelopersPage: NextPage<DevelopersPageProps> = (): JSX.Element => {
   const { t, lang } = useTranslation('developers');
   return (
     <>
       <NextSeoWrapper
         title={t('common:developers')}
-        url={getCanonicalUrl(lang, path)}
-        languageAlternates={getLanguageAlternates(path)}
+        url={getCanonicalUrl(lang, PATH)}
+        languageAlternates={getLanguageAlternates(PATH)}
       />
       <PageContainer>
         <div className={styles.contentPage}>
@@ -50,77 +80,16 @@ const DevelopersPage: NextPage<DevelopersPageProps> = (): JSX.Element => {
             />
           </p>
           <div>
-            <p>
-              <Trans
-                i18nKey="developers:projects.q-next"
-                components={[
-                  <a
-                    key={0}
-                    href="https://github.com/quran/quran.com-frontend-next"
-                    target="_blank"
-                    rel="noreferrer"
-                  />,
-                ]}
-              />
-            </p>
-            <p>
-              <Trans
-                i18nKey="developers:projects.q-api"
-                components={[
-                  <a
-                    key={0}
-                    href="https://github.com/quran/quran.com-api"
-                    target="_blank"
-                    rel="noreferrer"
-                  />,
-                ]}
-              />
-            </p>
-            <p>
-              <Trans
-                i18nKey="developers:projects.q-android"
-                components={[
-                  <a
-                    key={0}
-                    href="https://github.com/quran/quran_android"
-                    target="_blank"
-                    rel="noreferrer"
-                  />,
-                ]}
-              />
-            </p>
-            <p>
-              <Trans
-                i18nKey="developers:projects.q-ios"
-                components={[
-                  <a
-                    key={0}
-                    href="https://github.com/quran/quran-ios"
-                    target="_blank"
-                    rel="noreferrer"
-                  />,
-                ]}
-              />
-            </p>
-            <p>
-              <Trans
-                i18nKey="developers:projects.q-audio"
-                components={[
-                  <a
-                    key={0}
-                    href="https://github.com/quran/audio.quran.com"
-                    target="_blank"
-                    rel="noreferrer"
-                  />,
-                  <a
-                    key={1}
-                    href="https://github.com/quran/quranicaudio-app"
-                    target="_blank"
-                    rel="noreferrer"
-                  />,
-                ]}
-              />
-            </p>
+            {GITHUB_PROJECTS.map((project) => (
+              <p key={project.key}>
+                <Trans
+                  i18nKey={project.i18nKey}
+                  components={project.links.map((link) => (
+                    <a key={link.key} href={link.href} target="_blank" rel="noreferrer" />
+                  ))}
+                />
+              </p>
+            ))}
           </div>
           <p>
             <Trans

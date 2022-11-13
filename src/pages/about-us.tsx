@@ -17,7 +17,48 @@ import { getBlurDataUrl } from '@/utils/image';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl } from '@/utils/navigation';
 
-const path = '/about-us';
+const PATH = '/about-us';
+const CREDIT_LINKS = [
+  {
+    key: 0,
+    i18nKey: 'about:credits.tanzil',
+    href: 'https://tanzil.net/',
+  },
+  {
+    key: 1,
+    i18nKey: 'about:credits.quran-complex',
+    href: 'https://qurancomplex.gov.sa/',
+  },
+  {
+    key: 2,
+    i18nKey: 'about:credits.quran-align',
+    href: 'https://github.com/cpfair/quran-align',
+  },
+  {
+    key: 3,
+    i18nKey: 'about:credits.quran-enc',
+    href: 'https://quranenc.com/en/home',
+  },
+  {
+    key: 4,
+    i18nKey: 'about:credits.zekr',
+    href: 'https://zekr.org',
+  },
+  {
+    key: 5,
+    i18nKey: 'about:credits.lokalize',
+    href: 'https://lokalise.com/',
+    image: '/images/lokalize.png',
+    alt: 'Lokalise',
+  },
+  {
+    key: 6,
+    i18nKey: 'about:credits.vercel',
+    href: 'https://vercel.com/?utm_source=quran-pro&utm_campaign=oss',
+    image: '/images/powered-by-vercel.svg',
+    alt: 'Vercel',
+  },
+];
 
 type AboutUsPageProps = {
   chaptersData: ChaptersData;
@@ -34,8 +75,8 @@ const AboutUsPage: NextPage<AboutUsPageProps> = (): JSX.Element => {
     <>
       <NextSeoWrapper
         title={t('common:about')}
-        url={getCanonicalUrl(lang, path)}
-        languageAlternates={getLanguageAlternates(path)}
+        url={getCanonicalUrl(lang, PATH)}
+        languageAlternates={getLanguageAlternates(PATH)}
       />
       <PageContainer>
         <div className={styles.contentPage}>
@@ -51,106 +92,29 @@ const AboutUsPage: NextPage<AboutUsPageProps> = (): JSX.Element => {
           <p className={styles.heading}>{t('credits.title')}</p>
           <p>{t('credits.desc')}</p>
           <ul className={styles.list}>
-            <li>
-              <Trans
-                i18nKey="about:credits.tanzil"
-                components={[
-                  <a key={0} target="_blank" href="https://tanzil.net/" rel="noreferrer" />,
-                ]}
-              />
-            </li>
-            <li>
-              <Trans
-                i18nKey="about:credits.quran-complex"
-                components={[
-                  <a
-                    key={0}
-                    target="_blank"
-                    href="https://qurancomplex.gov.sa/"
-                    rel="noreferrer"
-                  />,
-                ]}
-              />
-            </li>
-            <li>
-              <Trans
-                i18nKey="about:credits.quran-align"
-                components={[
-                  <a
-                    key={0}
-                    target="_blank"
-                    href="https://github.com/cpfair/quran-align"
-                    rel="noreferrer"
-                  />,
-                ]}
-              />
-            </li>
-            <li>
-              <Trans
-                i18nKey="about:credits.quran-enc"
-                components={[
-                  <a
-                    key={0}
-                    target="_blank"
-                    href="https://quranenc.com/en/home"
-                    rel="noreferrer"
-                  />,
-                ]}
-              />
-            </li>
-            <li>
-              <Trans
-                i18nKey="about:credits.zekr"
-                components={[
-                  <a key={0} target="_blank" href="https://zekr.org" rel="noreferrer" />,
-                ]}
-              />
-            </li>
-            <li>
-              <Trans
-                i18nKey="about:credits.lokalize"
-                components={[
-                  <a key={0} target="_blank" href="https://lokalise.com/" rel="noreferrer" />,
-                ]}
-              />
-              <div className={styles.image}>
-                <Image
-                  src="/images/lokalize.png"
-                  layout="fixed"
-                  width={300}
-                  height={70}
-                  placeholder="blur"
-                  blurDataURL={getBlurDataUrl(300, 70)}
-                  alt="Lokalise"
+            {CREDIT_LINKS.map((link) => (
+              <li key={link.key}>
+                <Trans
+                  i18nKey={link.i18nKey}
+                  components={[<a key={0} target="_blank" href={link.href} rel="noreferrer" />]}
                 />
-              </div>
-            </li>
-            <li>
-              <Trans
-                i18nKey="about:credits.vercel"
-                components={[
-                  <a
-                    key={0}
-                    target="_blank"
-                    href="https://vercel.com/?utm_source=quran-pro&utm_campaign=oss"
-                    rel="noreferrer"
-                  />,
-                ]}
-              />
-              <Link href="https://vercel.com/?utm_source=quran-pro&utm_campaign=oss" isNewTab>
-                <div className={styles.image}>
-                  <Image
-                    src="/images/powered-by-vercel.svg"
-                    layout="fixed"
-                    width={150}
-                    height={70}
-                    placeholder="blur"
-                    blurDataURL={getBlurDataUrl(300, 70)}
-                    alt="Vercel"
-                  />
-                </div>
-              </Link>
-            </li>
+                {link?.image ? (
+                  <div className={styles.image}>
+                    <Image
+                      src={link.image}
+                      layout="fixed"
+                      width={300}
+                      height={70}
+                      placeholder="blur"
+                      blurDataURL={getBlurDataUrl(300, 70)}
+                      alt={link?.alt}
+                    />
+                  </div>
+                ) : (
+                  <></>
+                )}
+              </li>
+            ))}
           </ul>
         </div>
       </PageContainer>
