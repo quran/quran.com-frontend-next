@@ -51,16 +51,12 @@ const ReadingViewWordPopover: React.FC<Props> = ({ word, children }) => {
     onHoverChange(false);
   }, [onHoverChange]);
 
-  const onTouchMove = useCallback(() => {
-    onOpenChange(false);
-  }, [onOpenChange]);
-
   return (
     <Popover
       contentSide={ContentSide.TOP}
       contentSideOffset={-10}
       trigger={
-        <div onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave} onTouchMove={onTouchMove}>
+        <div onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}>
           {children}
         </div>
       }
