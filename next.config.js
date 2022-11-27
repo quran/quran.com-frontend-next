@@ -16,6 +16,8 @@ const runtimeCaching = require('./pwa-runtime-config.js');
 
 const isDev = process.env.NEXT_PUBLIC_VERCEL_ENV === 'development';
 const isProduction = process.env.NEXT_PUBLIC_VERCEL_ENV === 'production';
+const isCI = process.env.CI;
+
 const config = {
   productionBrowserSourceMaps: true, // {@see https://nextjs.org/docs/advanced-features/source-maps}
   experimental: {
@@ -161,7 +163,7 @@ const config = {
   },
 };
 
-module.exports = withPlugins(
-  [withBundleAnalyzer, withPWA, withFonts, nextTranslate, withSentryConfig],
-  config,
-);
+const plugins = [withBundleAnalyzer, withPWA, withFonts, nextTranslate];
+if (!isCI) plugins.push(withSentryConfig);
+
+module.exports = withPlugins(plugins, config);

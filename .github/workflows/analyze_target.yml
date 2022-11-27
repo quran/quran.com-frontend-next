@@ -1,0 +1,91 @@
+name: 🔍 Analyze
+
+# Run this workflow on successful merges and all pushes to the main branch
+on:
+  pull_request_target:
+    types: [opened, synchronize, reopened]
+  push:
+    branches:
+      - master
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  analyze:
+    name: 🔍 Analyze Bundle Size
+    runs-on: ubuntu-latest
+    steps:
+      - name: 🛑 Cancel Previous Runs
+        uses: styfle/cancel-workflow-action@0.9.1
+
+      - name: ⬇️ Checkout repo
+        uses: actions/checkout@v3
+
+      - name: ⎔ Setup Node
+        uses: actions/setup-node@v3
+        with:
+          node-version: '14'
+          cache: 'yarn'
+          
+      - name: 📥 Install deps
+        run: yarn install --frozen-lockfile
+
+      - name: ⚡️ Restore next build
+        uses: actions/cache@v3
+        id: restore-build-cache
+        with:
+          path: ${{ github.workspace }}/.next/cache
+          key: ${{ runner.os }}-nextjs-${{ hashFiles('**/yarn.lock') }}-${{ hashFiles('**.[jt]s', '**.[jt]sx') }}
+          restore-keys: |
+            ${{ runner.os }}-nextjs-${{ hashFiles('**/yarn.lock') }}-
+
+      - name: ⚙️ Build & 🔍 Analyze
+        run: yarn analyze
+
+      - name: 🔍 Analyze Pages
+        run: yarn analyze:bundle
+
+      - name: 📁 Upload bundle
+        uses: actions/upload-artifact@v2
+        with:
+          name: bundle
+          path: |
+            .next/analyze/client.html
+            .next/server/analyze/server.html
+    
+      # A bit of find & replace on our output text for displaying properly. Save this to an Action variable.
+      - name: 📝 Get comment body
+        id: get-comment-body
+        if: success() && github.event.number
+        run: |
+          body=$(cat .next/analyze/bundle-comparison.txt)
+          body="${body//'%'/'%25'}"
+          body="${body//$'\n'/'%0A'}"
+          body="${body//$'\r'/'%0D'}"
+          echo ::set-output name=body::$body
+
+      # Looks for a comment with <!-- GH BOT --> somewhere in its body.
+      - name: 🔍 Find Comment
+        uses: peter-evans/find-comment@v1
+        if: success() && github.event.number
+        id: fc
+        with:
+          issue-number: ${{ github.event.number }}
+          body-includes: "<!-- GH BOT -->"
+
+      # If no comment exists, make one with the previously saved Action variable!
+      - name: ✏️ Create Comment
+        uses: peter-evans/create-or-update-comment@v1.4.4
+        if: success() && github.event.number && steps.fc.outputs.comment-id == 0
+        with:
+          issue-number: ${{ github.event.number }}
+          body: ${{ steps.get-comment-body.outputs.body }}
+
+      # Otherwise, if a comment already exists, replace its body.
+      - name: 🔃 Update Comment
+        uses: peter-evans/create-or-update-comment@v1.4.4
+        if: success() && github.event.number && steps.fc.outputs.comment-id != 0
+        with:
+          issue-number: ${{ github.event.number }}
+          body: ${{ steps.get-comment-body.outputs.body }}
+          comment-id: ${{ steps.fc.outputs.comment-id }}
+          edit-mode: replace
