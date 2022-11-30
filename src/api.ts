@@ -23,15 +23,10 @@ import {
   makeKalimatSearchResultsUrl,
   makeVersesFilterUrl,
   makeKalimatSearchResultFeedbackUrl,
+  makeKalimatSearchAsYouTypeUrl,
 } from './utils/apiPaths';
 
-import {
-  SearchRequest,
-  AdvancedCopyRequest,
-  PagesLookUpRequest,
-  KalimatSearchRequest,
-  KalimatSearchResultFeedbackRequest,
-} from 'types/ApiRequests';
+import { SearchRequest, AdvancedCopyRequest, PagesLookUpRequest } from 'types/ApiRequests';
 import {
   TranslationsResponse,
   SearchResponse,
@@ -50,7 +45,11 @@ import {
   PagesLookUpResponse,
 } from 'types/ApiResponses';
 import AudioData from 'types/AudioData';
+import { KalimatSearchAsYouTypeRequest } from 'types/Kalimat/KalimatSearchAsYouTypeRequest';
+import KalimatSearchAsYouTypeResponse from 'types/Kalimat/KalimatSearchAsYouTypeResponse';
+import { KalimatSearchRequest } from 'types/Kalimat/KalimatSearchRequest';
 import KalimatSearchResponse from 'types/Kalimat/KalimatSearchResponse';
+import { KalimatSearchResultFeedbackRequest } from 'types/Kalimat/KalimatSearchResultFeedbackRequest';
 import KalimatSearchResultFeedbackResponse from 'types/Kalimat/KalimatSearchResultFeedbackResponse';
 import { MushafLines, QuranFont } from 'types/QuranReader';
 
@@ -212,6 +211,19 @@ export const getKalimatSearchResults = async (
   method = 'GET',
 ): Promise<KalimatSearchResponse> =>
   fetcher(makeKalimatSearchResultsUrl(params), { ...KALIMAT_FETCH_OPTIONS, method });
+
+/**
+ * Get the search results of a query.
+ *
+ * @param {KalimatSearchAsYouTypeRequest} params
+ * @param {string} method
+ * @returns  {Promise<KalimatSearchResponse>}
+ */
+export const getKalimatSearchAsYouTypeResults = async (
+  params: KalimatSearchAsYouTypeRequest,
+  method = 'GET',
+): Promise<KalimatSearchAsYouTypeResponse> =>
+  fetcher(makeKalimatSearchAsYouTypeUrl(params), { ...KALIMAT_FETCH_OPTIONS, method });
 
 /**
  * Get the search results of a query.

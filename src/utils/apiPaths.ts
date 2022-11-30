@@ -10,13 +10,11 @@ import {
   getReadingPreferencesInitialState,
   getTranslationsInitialState,
 } from 'src/redux/defaultSettings/util';
-import {
-  AdvancedCopyRequest,
-  KalimatSearchRequest,
-  KalimatSearchResultFeedbackRequest,
-  PagesLookUpRequest,
-  SearchRequest,
-} from 'types/ApiRequests';
+import { AdvancedCopyRequest, PagesLookUpRequest, SearchRequest } from 'types/ApiRequests';
+import KalimatApi from 'types/Kalimat/KalimatApi';
+import { KalimatSearchAsYouTypeRequest } from 'types/Kalimat/KalimatSearchAsYouTypeRequest';
+import { KalimatSearchRequest } from 'types/Kalimat/KalimatSearchRequest';
+import { KalimatSearchResultFeedbackRequest } from 'types/Kalimat/KalimatSearchResultFeedbackRequest';
 import { MushafLines, QuranFont } from 'types/QuranReader';
 
 export const DEFAULT_VERSES_PARAMS = {
@@ -153,11 +151,14 @@ export const makeKalimatSearchResultsUrl = ({
   exactMatchesOnly = 1,
   numResults = 30,
 }: KalimatSearchRequest) =>
-  makeKalimatApiUrl({
-    query,
-    exactMatchesOnly,
-    numResults,
-  });
+  makeKalimatApiUrl(
+    {
+      query,
+      exactMatchesOnly,
+      numResults,
+    },
+    KalimatApi.Search,
+  );
 
 export const makeKalimatSearchResultFeedbackUrl = ({
   query,
@@ -170,7 +171,15 @@ export const makeKalimatSearchResultFeedbackUrl = ({
       result,
       feedbackScore,
     },
-    false,
+    KalimatApi.Feedback,
+  );
+
+export const makeKalimatSearchAsYouTypeUrl = ({ query }: KalimatSearchAsYouTypeRequest) =>
+  makeKalimatApiUrl(
+    {
+      query,
+    },
+    KalimatApi.SearchAsYouType,
   );
 
 /**
@@ -301,6 +310,6 @@ export const makeVerseReflectionsUrl = (chapterId: string, verseNumber: string, 
 };
 
 export const makeKalimatApiUrl = (
-  params: KalimatSearchRequest | KalimatSearchResultFeedbackRequest,
-  isSearch = true,
-) => `https://api.kalimat.dev:443/${isSearch ? 'search' : 'feedback'}?${stringify(params)}`;
+  params: KalimatSearchRequest | KalimatSearchResultFeedbackRequest | KalimatSearchAsYouTypeRequest,
+  api: KalimatApi,
+) => `https://api.kalimat.dev:443/${api}?${stringify(params)}`;

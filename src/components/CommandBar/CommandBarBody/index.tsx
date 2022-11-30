@@ -11,6 +11,7 @@ import CommandsList, { Command } from '../CommandsList';
 
 import styles from './CommandBarBody.module.scss';
 
+import { KALIMAT_FETCH_OPTIONS } from 'src/api';
 import DataFetcher from 'src/components/DataFetcher';
 import TarteelAttribution from 'src/components/TarteelAttribution/TarteelAttribution';
 import VoiceSearchBodyContainer from 'src/components/TarteelVoiceSearch/BodyContainer';
@@ -18,10 +19,14 @@ import TarteelVoiceSearchTrigger from 'src/components/TarteelVoiceSearch/Trigger
 import useDebounce from 'src/hooks/useDebounce';
 import { selectRecentNavigations } from 'src/redux/slices/CommandBar/state';
 import { selectIsCommandBarVoiceFlowStarted } from 'src/redux/slices/voiceSearch';
-import { makeSearchResultsUrl } from 'src/utils/apiPaths';
+import { makeKalimatSearchAsYouTypeUrl } from 'src/utils/apiPaths';
 import { areArraysEqual } from 'src/utils/array';
 import { logButtonClick, logTextSearchQuery } from 'src/utils/eventLogger';
-import { SearchResponse } from 'types/ApiResponses';
+import {
+  kalimatIdToNavigationKey,
+  kalimatResultTypeToSearchNavigationType,
+} from 'src/utils/kalimat/search';
+import KalimatSearchAsYouTypeResponse from 'types/Kalimat/KalimatSearchAsYouTypeResponse';
 import { SearchNavigationType } from 'types/SearchNavigationResult';
 
 const NAVIGATE_TO = [
@@ -114,7 +119,7 @@ const CommandBarBody: React.FC = () => {
    *               the search query).
    */
   const dataFetcherRender = useCallback(
-    (data: SearchResponse) => {
+    (data: KalimatSearchAsYouTypeResponse) => {
       let toBeGroupedCommands = [] as Command[];
       let numberOfCommands = 0;
       // if it's pre-input
@@ -123,8 +128,10 @@ const CommandBarBody: React.FC = () => {
         numberOfCommands = recentNavigations.length + NAVIGATE_TO.length;
       } else {
         toBeGroupedCommands = [
-          ...data.result.navigation.map((navigationItem) => ({
-            ...navigationItem,
+          ...data.map((resultItem) => ({
+            key: kalimatIdToNavigationKey(resultItem.type, resultItem.id),
+            name: resultItem.longestMatchedToken,
+            resultType: kalimatResultTypeToSearchNavigationType(resultItem.type),
             group: t('command-bar.navigations'),
           })),
           {
@@ -134,7 +141,7 @@ const CommandBarBody: React.FC = () => {
             group: t('search.title'),
           },
         ];
-        numberOfCommands = data.result.navigation.length + 1;
+        numberOfCommands = data.length + 1;
       }
       return (
         <CommandsList
@@ -187,7 +194,8 @@ const CommandBarBody: React.FC = () => {
           <VoiceSearchBodyContainer isCommandBar />
         ) : (
           <DataFetcher
-            queryKey={searchQuery ? makeSearchResultsUrl({ query: searchQuery }) : null}
+            queryKey={searchQuery ? makeKalimatSearchAsYouTypeUrl({ query: searchQuery }) : null}
+            queryOptions={{ ...KALIMAT_FETCH_OPTIONS, method: 'GET' }}
             render={dataFetcherRender}
           />
         )}

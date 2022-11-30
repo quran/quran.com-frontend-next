@@ -1,15 +1,3 @@
-export type KalimatSearchRequest = {
-  query: string;
-  exactMatchesOnly?: number;
-  numResults?: number;
-};
-
-export type KalimatSearchResultFeedbackRequest = {
-  query: string;
-  result: string;
-  feedbackScore: number;
-};
-
 export type SearchRequest = {
   query: string;
   filterLanguages?: string;

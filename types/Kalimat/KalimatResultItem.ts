@@ -1,10 +1,10 @@
 import KalimatResultType from './KalimatResultType';
 
-type KalimatResultItem = {
+interface KalimatResultItem {
   id: string;
   enText: string;
   text: string;
   type: KalimatResultType;
-};
+}
 
 export default KalimatResultItem;
