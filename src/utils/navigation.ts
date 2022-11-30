@@ -1,7 +1,7 @@
 import { stringify } from 'querystring';
 
 import { getBasePath } from './url';
-import { getVerseAndChapterNumbersFromKey } from './verse';
+import { getVerseAndChapterNumbersFromKey, getVerseNumberRangeFromKey } from './verse';
 
 import { SearchNavigationType } from 'types/SearchNavigationResult';
 
@@ -14,6 +14,17 @@ import { SearchNavigationType } from 'types/SearchNavigationResult';
 export const getVerseNavigationUrlByVerseKey = (verseKey: string): string => {
   const [chapterId, verseNumber] = getVerseAndChapterNumbersFromKey(verseKey);
   return `/${chapterId}/${verseNumber}`;
+};
+
+/**
+ * Get the href link to a verse range e.g. 3:5-7.
+ *
+ * @param {string} key
+ * @returns {string}
+ */
+export const getSurahRangeNavigationUrlByVerseKey = (key: string): string => {
+  const { surah, from, to } = getVerseNumberRangeFromKey(key);
+  return `/${surah}/${from}-${to}`;
 };
 
 /**
@@ -44,6 +55,22 @@ export const getVerseNavigationUrl = (chapterIdOrSlug: string, verseNumber: stri
  * @returns  {string}
  */
 export const getJuzNavigationUrl = (juzNumber: string | number): string => `/juz/${juzNumber}`;
+
+/**
+ * Get the href link to a Rub el Hizb.
+ *
+ * @param {string | number} rubNumber
+ * @returns  {string}
+ */
+export const getRubNavigationUrl = (rubNumber: string | number): string => `/rub/${rubNumber}`;
+
+/**
+ * Get the href link to a hizb.
+ *
+ * @param {string | number} hizbNumber
+ * @returns  {string}
+ */
+export const getHizbNavigationUrl = (hizbNumber: string | number): string => `/hizb/${hizbNumber}`;
 
 /**
  * Get the href link to a page.
@@ -90,15 +117,6 @@ export const getVerseSelectedTafsirNavigationUrl = (
 export const getVerseReflectionNavigationUrl = (verseKey: string): string =>
   `/${verseKey}/reflections`;
 
-export const getQuranReflectPostUrl = (postId: number) =>
-  `https://quranreflect.com/posts/${postId}`;
-
-export const getQuranReflectPostCommentUrl = (postId: number) =>
-  `https://quranreflect.com/posts/${postId}#comments`;
-
-export const getQuranReflectTagUrl = (tag: string) =>
-  ` https://quranreflect.com/?tags=${encodeURIComponent(tag)}`;
-
 /**
  * Get the href link to a surah.
  *
@@ -126,11 +144,20 @@ export const resolveUrlBySearchNavigationType = (
   if (type === SearchNavigationType.JUZ) {
     return getJuzNavigationUrl(key);
   }
+  if (type === SearchNavigationType.RUB_EL_HIZB) {
+    return getRubNavigationUrl(key);
+  }
+  if (type === SearchNavigationType.HIZB) {
+    return getHizbNavigationUrl(key);
+  }
   if (type === SearchNavigationType.PAGE) {
     return getPageNavigationUrl(key);
   }
   if (type === SearchNavigationType.SEARCH_PAGE) {
     return getSearchQueryNavigationUrl(key as string);
+  }
+  if (type === SearchNavigationType.RANGE) {
+    return getSurahRangeNavigationUrlByVerseKey(key as string);
   }
   // for the Surah navigation
   return getSurahNavigationUrl(key);
@@ -191,15 +218,13 @@ export const getCanonicalUrl = (lang: string, path: string): string =>
 export const getProductUpdatesUrl = (id = ''): string =>
   `/product-updates${`${id ? `/${id}` : ''}`}`;
 
-export const getQuranReflectVerseUrl = (verseKey: string) => {
-  const [chapter, verse] = getVerseAndChapterNumbersFromKey(verseKey);
-  return `https://quranreflect.com/${chapter}/${verse}?feed=true`;
+export const getProfileNavigationUrl = () => {
+  return '/profile';
 };
 
-export const getQuranReflectAuthorUrl = (username: string) => {
-  return `https://quranreflect.com/${username}`;
+export const getCollectionNavigationUrl = (collectionId: string) => {
+  return `/collections/${collectionId}`;
 };
-
 /**
  * Update the browser history with the new url.
  * without actually navigating into that url.

@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import styles from './SearchItem.module.scss';
 
-import IconContainer, { IconColor, IconSize } from 'src/components/dls/IconContainer/IconContainer';
+import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
 
 type SearchItemProps = {
   prefix: React.ReactNode;

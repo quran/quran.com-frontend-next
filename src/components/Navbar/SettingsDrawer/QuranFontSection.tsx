@@ -3,18 +3,19 @@ import React, { useMemo } from 'react';
 
 import { Action } from '@reduxjs/toolkit';
 import useTranslation from 'next-translate/useTranslation';
-import { shallowEqual, useSelector } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import styles from './QuranFontSection.module.scss';
 import QuranFontSectionFooter from './QuranFontSectionFooter';
 import Section from './Section';
 import VersePreview from './VersePreview';
 
-import Counter from 'src/components/dls/Counter/Counter';
-import Select from 'src/components/dls/Forms/Select';
-import Switch from 'src/components/dls/Switch/Switch';
-import usePersistPreferenceGroup from 'src/hooks/auth/usePersistPreferenceGroup';
-import { getQuranReaderStylesInitialState } from 'src/redux/defaultSettings/util';
+import Counter from '@/dls/Counter/Counter';
+import Select from '@/dls/Forms/Select';
+import Switch from '@/dls/Switch/Switch';
+import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
+import { getQuranReaderStylesInitialState } from '@/redux/defaultSettings/util';
+import { resetLoadedFontFaces } from '@/redux/slices/QuranReader/font-faces';
 import {
   decreaseQuranTextFontScale,
   increaseQuranTextFontScale,
@@ -23,13 +24,14 @@ import {
   setQuranFont,
   setMushafLines,
   MAXIMUM_QURAN_FONT_STEP,
-} from 'src/redux/slices/QuranReader/styles';
-import { logValueChange } from 'src/utils/eventLogger';
+} from '@/redux/slices/QuranReader/styles';
+import { logValueChange } from '@/utils/eventLogger';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 import { MushafLines, QuranFont } from 'types/QuranReader';
 
 const QuranFontSection = () => {
   const { t, lang } = useTranslation('common');
+  const dispatch = useDispatch();
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const {
     actions: { onSettingsChange },
@@ -125,6 +127,9 @@ const QuranFontSection = () => {
     undoAction: Action,
   ) => {
     onSettingsChange(key, value, action, undoAction, PreferenceGroup.QURAN_READER_STYLES);
+
+    // reset the loaded Fonts when we switch the font
+    dispatch(resetLoadedFontFaces());
   };
 
   const onFontChange = (value: QuranFont) => {

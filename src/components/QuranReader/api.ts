@@ -1,9 +1,15 @@
 /* eslint-disable max-lines */
 /* eslint-disable react-func/max-lines-per-function */
+import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
+import { getDefaultWordFields, getMushafId } from '@/utils/api';
+import {
+  makeHizbVersesUrl,
+  makeJuzVersesUrl,
+  makePageVersesUrl,
+  makeVersesUrl,
+  makeRubVersesUrl,
+} from '@/utils/apiPaths';
 import { fetcher } from 'src/api';
-import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
-import { getDefaultWordFields, getMushafId } from 'src/utils/api';
-import { makeJuzVersesUrl, makePageVersesUrl, makeVersesUrl } from 'src/utils/apiPaths';
 import { PagesLookUpRequest } from 'types/ApiRequests';
 import { VersesResponse } from 'types/ApiResponses';
 import LookupRecord from 'types/LookupRecord';
@@ -64,12 +70,36 @@ export const getTranslationViewRequestKey = ({
       perPage: initialData.pagination.perPage,
     });
   }
+  if (quranReaderDataType === QuranReaderDataType.Hizb) {
+    return makeHizbVersesUrl(id, locale, {
+      wordTranslationLanguage: wordByWordLocale,
+      page,
+      reciter,
+      translations: selectedTranslations.join(','),
+      ...getDefaultWordFields(quranReaderStyles.quranFont),
+      ...getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines),
+      perPage: initialData.pagination.perPage,
+    });
+  }
   if (quranReaderDataType === QuranReaderDataType.Page) {
     return makePageVersesUrl(id, locale, {
       wordTranslationLanguage: wordByWordLocale,
       page,
       reciter,
       perPage: 'all',
+      translations: selectedTranslations.join(','),
+      ...getDefaultWordFields(quranReaderStyles.quranFont),
+      ...getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines),
+    });
+  }
+  if (quranReaderDataType === QuranReaderDataType.Rub) {
+    return makeRubVersesUrl(id, locale, {
+      wordTranslationLanguage: wordByWordLocale,
+      reciter,
+      page,
+      from: initialData.metaData.from,
+      perPage: initialData.pagination.perPage,
+      to: initialData.metaData.to,
       translations: selectedTranslations.join(','),
       ...getDefaultWordFields(quranReaderStyles.quranFont),
       ...getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines),

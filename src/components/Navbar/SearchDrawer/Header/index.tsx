@@ -7,9 +7,9 @@ import DrawerSearchIcon from '../Buttons/DrawerSearchIcon';
 
 import styles from './Header.module.scss';
 
-import Separator from 'src/components/dls/Separator/Separator';
-import TarteelVoiceSearchTrigger from 'src/components/TarteelVoiceSearch/Trigger';
-import { logButtonClick } from 'src/utils/eventLogger';
+import TarteelVoiceSearchTrigger from '@/components/TarteelVoiceSearch/Trigger';
+import Separator from '@/dls/Separator/Separator';
+import { logButtonClick } from '@/utils/eventLogger';
 
 interface Props {
   isVoiceFlowStarted: boolean;

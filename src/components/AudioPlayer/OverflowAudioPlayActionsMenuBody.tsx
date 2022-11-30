@@ -3,8 +3,6 @@ import { useState, useMemo, useContext } from 'react';
 import { useSelector } from '@xstate/react';
 import useTranslation from 'next-translate/useTranslation';
 
-import ChevronRightIcon from '../../../public/icons/chevron-right.svg';
-import PersonIcon from '../../../public/icons/person.svg';
 import PopoverMenu from '../dls/PopoverMenu/PopoverMenu';
 
 import AudioPlaybackRateMenu from './Buttons/AudioPlaybackRateMenu';
@@ -13,7 +11,9 @@ import DownloadAudioButton from './Buttons/DownloadAudioButton';
 import SelectReciterMenu from './Buttons/SelectReciterMenu';
 import styles from './OverflowAudioPlayActionsMenuBody.module.scss';
 
-import { logButtonClick } from 'src/utils/eventLogger';
+import ChevronRightIcon from '@/icons/chevron-right.svg';
+import PersonIcon from '@/icons/person.svg';
+import { logButtonClick } from '@/utils/eventLogger';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 
 /**

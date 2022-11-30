@@ -1,66 +1,28 @@
-import React, { useCallback, useContext } from 'react';
+import React, { useCallback, useContext, useMemo } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from './ReflectionBody.module.scss';
 
-import Button from 'src/components/dls/Button/Button';
-import Separator from 'src/components/dls/Separator/Separator';
-import ReflectionDisclaimerMessage from 'src/components/QuranReader/ReflectionView/ReflectionDisclaimerMessage';
-import ReflectionItem, {
-  VerseReference,
-} from 'src/components/QuranReader/ReflectionView/ReflectionItem';
-import ReflectionNotAvailableMessage from 'src/components/QuranReader/ReflectionView/ReflectionNotAvailableMessage';
-import TafsirEndOfScrollingActions from 'src/components/QuranReader/TafsirView/TafsirEndOfScrollingActions';
-import VerseAndTranslation from 'src/components/Verse/VerseAndTranslation';
+import ReflectionDisclaimerMessage from '@/components/QuranReader/ReflectionView/ReflectionDisclaimerMessage';
+import ReflectionItem from '@/components/QuranReader/ReflectionView/ReflectionItem';
+import ReflectionNotAvailableMessage from '@/components/QuranReader/ReflectionView/ReflectionNotAvailableMessage';
+import TafsirEndOfScrollingActions from '@/components/QuranReader/TafsirView/TafsirEndOfScrollingActions';
+import VerseAndTranslation from '@/components/Verse/VerseAndTranslation';
+import Button from '@/dls/Button/Button';
+import Separator from '@/dls/Separator/Separator';
+import { logButtonClick } from '@/utils/eventLogger';
+import { fakeNavigate, getVerseReflectionNavigationUrl } from '@/utils/navigation';
+import { localeToReflectionLanguages } from '@/utils/quranReflect/locale';
+import { getQuranReflectVerseUrl } from '@/utils/quranReflect/navigation';
+import { isFirstVerseOfSurah, isLastVerseOfSurah, makeVerseKey } from '@/utils/verse';
 import DataContext from 'src/contexts/DataContext';
-import { logButtonClick } from 'src/utils/eventLogger';
-import {
-  fakeNavigate,
-  getQuranReflectVerseUrl,
-  getVerseReflectionNavigationUrl,
-} from 'src/utils/navigation';
-import {
-  getVerseAndChapterNumbersFromKey,
-  isFirstVerseOfSurah,
-  isLastVerseOfSurah,
-  makeVerseKey,
-} from 'src/utils/verse';
-
-/**
- * From reflection data, extract the verse references
- * This is is a temporary function, once we migrate to use Quran.com's API we will probably remove this function
- *
- * @param {object} reflection
- * @returns {VerseReference[]} verseReferences
- */
-const getVerseReferencesFromReflection = (reflection: any): VerseReference[] => {
-  return reflection.referencedAyahs.map((reference) => {
-    const [chapterNumber, verseNumber] = getVerseAndChapterNumbersFromKey(reference.key.toString());
-    let from;
-    let to;
-
-    const verseRange = verseNumber || '';
-
-    if (verseRange.includes('-')) {
-      [from, to] = verseRange.split('-');
-    } else {
-      from = verseRange;
-      to = verseRange;
-    }
-
-    return {
-      chapter: Number(chapterNumber),
-      from: Number(from),
-      to: Number(to),
-    };
-  });
-};
+import AyahReflectionsResponse from 'types/QuranReflect/AyahReflectionsResponse';
 
 interface Props {
   selectedChapterId: string;
   selectedVerseNumber: string;
-  data: any;
+  data: AyahReflectionsResponse;
   scrollToTop: () => void;
   setSelectedVerseNumber: (verseNumber: string) => void;
   translationFontScale: number;
@@ -107,6 +69,15 @@ const ReflectionBody: React.FC<Props> = ({
       lang,
     );
   }, [lang, scrollToTop, selectedChapterId, selectedVerseNumber, setSelectedVerseNumber]);
+  const filteredPosts = useMemo(() => {
+    return data?.posts?.filter((reflection) =>
+      localeToReflectionLanguages(lang).includes(reflection.language),
+    );
+  }, [data?.posts, lang]);
+
+  const onReadMoreClicked = () => {
+    logButtonClick('read_more_reflections');
+  };
 
   return (
     <div className={styles.container}>
@@ -118,31 +89,23 @@ const ReflectionBody: React.FC<Props> = ({
       <div className={styles.separatorContainer}>
         <Separator />
       </div>
-      {data?.posts?.length === 0 ? (
+      {filteredPosts?.length === 0 ? (
         <ReflectionNotAvailableMessage />
       ) : (
         <ReflectionDisclaimerMessage />
       )}
-      {data?.posts?.map((reflection) => (
+      {filteredPosts?.map((reflection) => (
         <ReflectionItem
-          id={reflection.id}
           key={reflection.id}
-          date={reflection.createdAt}
-          authorName={reflection?.author?.name}
-          authorUsername={reflection?.author?.username}
-          isAuthorVerified={reflection?.author?.verified}
-          reflectionText={reflection?.htmlBody}
-          avatarUrl={reflection?.author?.avatarUrl}
-          verseReferences={getVerseReferencesFromReflection(reflection)}
-          likesCount={reflection?.likesCount}
-          commentsCount={reflection?.commentsCount}
+          reflection={reflection}
+          selectedChapterId={selectedChapterId}
+          selectedVerseNumber={selectedVerseNumber}
         />
       ))}
       <div className={styles.readMoreButtonContainer}>
         <Button
-          href={getQuranReflectVerseUrl(
-            makeVerseKey(Number(selectedChapterId), Number(selectedVerseNumber)),
-          )}
+          href={getQuranReflectVerseUrl(selectedChapterId, selectedVerseNumber)}
+          onClick={onReadMoreClicked}
           isNewTab
         >
           {t('read-more-quran-reflect')}

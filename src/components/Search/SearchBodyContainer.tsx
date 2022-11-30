@@ -7,9 +7,9 @@ import NoResults from './NoResults';
 import PreInput from './PreInput';
 import styles from './SearchBodyContainer.module.scss';
 
-import Spinner, { SpinnerSize } from 'src/components/dls/Spinner/Spinner';
-import SearchResults from 'src/components/Search/SearchResults';
-import { getSearchQueryNavigationUrl } from 'src/utils/navigation';
+import SearchResults from '@/components/Search/SearchResults';
+import Spinner, { SpinnerSize, SpinnerSize } from '@/dls/Spinner/Spinner';
+import { getSearchQueryNavigationUrl, getSearchQueryNavigationUrl } from 'src/utils/navigation';
 import { VersesResponse } from 'types/ApiResponses';
 
 interface Props {

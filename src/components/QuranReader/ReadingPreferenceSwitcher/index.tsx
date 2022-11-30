@@ -4,13 +4,13 @@ import { useSelector } from 'react-redux';
 import LoadingSwitcher from './ReadingPreferenceOption';
 import styles from './ReadingPreferenceSwitcher.module.scss';
 
-import Switch from 'src/components/dls/Switch/Switch';
-import usePersistPreferenceGroup from 'src/hooks/auth/usePersistPreferenceGroup';
+import Switch from '@/dls/Switch/Switch';
+import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
 import {
   selectReadingPreferences,
   setReadingPreference,
-} from 'src/redux/slices/QuranReader/readingPreferences';
-import { logValueChange } from 'src/utils/eventLogger';
+} from '@/redux/slices/QuranReader/readingPreferences';
+import { logValueChange } from '@/utils/eventLogger';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 import { ReadingPreference } from 'types/QuranReader';
 

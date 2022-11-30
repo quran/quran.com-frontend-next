@@ -5,16 +5,12 @@ import useSWR from 'swr';
 
 import styles from './VersePreview.module.scss';
 
-import Skeleton from 'src/components/dls/Skeleton/Skeleton';
-import PlainVerseText from 'src/components/Verse/PlainVerseText';
-import { addLoadedFontFace } from 'src/redux/slices/QuranReader/font-faces';
-import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
-import {
-  getFontFaceNameForPage,
-  getV1OrV2FontFaceSource,
-  isQCFFont,
-} from 'src/utils/fontFaceHelper';
-import getSampleVerse from 'src/utils/sampleVerse';
+import PlainVerseText from '@/components/Verse/PlainVerseText';
+import Skeleton from '@/dls/Skeleton/Skeleton';
+import { addLoadedFontFace } from '@/redux/slices/QuranReader/font-faces';
+import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
+import { getFontFaceNameForPage, getV1OrV2FontFaceSource, isQCFFont } from '@/utils/fontFaceHelper';
+import getSampleVerse from '@/utils/sampleVerse';
 import { QuranFont } from 'types/QuranReader';
 import Word from 'types/Word';
 

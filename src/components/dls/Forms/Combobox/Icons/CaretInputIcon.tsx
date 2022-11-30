@@ -2,9 +2,9 @@ import React from 'react';
 
 import classNames from 'classnames';
 
-import CaretIcon from '../../../../../../public/icons/caret-down.svg';
-
 import styles from './CaretInputIcon.module.scss';
+
+import CaretIcon from '@/icons/caret-down.svg';
 
 interface Props {
   shouldShowIcon: boolean;

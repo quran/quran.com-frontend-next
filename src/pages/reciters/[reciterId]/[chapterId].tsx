@@ -8,32 +8,32 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 
-import CopyIcon from '../../../../public/icons/copy.svg';
-import DownloadIcon from '../../../../public/icons/download.svg';
-import PauseIcon from '../../../../public/icons/pause.svg';
-import PlayIcon from '../../../../public/icons/play-arrow.svg';
-import ReaderIcon from '../../../../public/icons/reader.svg';
 import layoutStyle from '../../index.module.scss';
 
 import styles from './chapterId.module.scss';
 
-import { getChapterAudioData, getChapterIdBySlug, getReciterData } from 'src/api';
-import { download } from 'src/components/AudioPlayer/Buttons/DownloadAudioButton';
-import Button, { ButtonType } from 'src/components/dls/Button/Button';
-import Spinner from 'src/components/dls/Spinner/Spinner';
-import { ToastStatus, useToast } from 'src/components/dls/Toast/Toast';
-import NextSeoWrapper from 'src/components/NextSeoWrapper';
-import DataContext from 'src/contexts/DataContext';
-import { makeCDNUrl } from 'src/utils/cdn';
-import { getChapterData, getAllChaptersData } from 'src/utils/chapter';
-import { logButtonClick } from 'src/utils/eventLogger';
+import { download } from '@/components/AudioPlayer/Buttons/DownloadAudioButton';
+import NextSeoWrapper from '@/components/NextSeoWrapper';
+import Button, { ButtonType } from '@/dls/Button/Button';
+import Spinner from '@/dls/Spinner/Spinner';
+import { ToastStatus, useToast } from '@/dls/Toast/Toast';
+import CopyIcon from '@/icons/copy.svg';
+import DownloadIcon from '@/icons/download.svg';
+import PauseIcon from '@/icons/pause.svg';
+import PlayIcon from '@/icons/play-arrow.svg';
+import ReaderIcon from '@/icons/reader.svg';
+import { makeCDNUrl } from '@/utils/cdn';
+import { getChapterData, getAllChaptersData } from '@/utils/chapter';
+import { logButtonClick } from '@/utils/eventLogger';
 import {
   getCanonicalUrl,
   getReciterChapterNavigationUrl,
   getSurahNavigationUrl,
-} from 'src/utils/navigation';
-import { getCurrentPath } from 'src/utils/url';
-import { isValidChapterId } from 'src/utils/validator';
+} from '@/utils/navigation';
+import { getCurrentPath } from '@/utils/url';
+import { isValidChapterId } from '@/utils/validator';
+import { getChapterAudioData, getChapterIdBySlug, getReciterData } from 'src/api';
+import DataContext from 'src/contexts/DataContext';
 import { selectCurrentAudioReciterId } from 'src/xstate/actors/audioPlayer/selectors';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import Chapter from 'types/Chapter';
@@ -118,6 +118,7 @@ const RecitationPage = ({
       />
       <div className={classNames(layoutStyle.flow)}>
         <div className={classNames(layoutStyle.flowItem, styles.container)}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             className={styles.reciterImage}
             alt={selectedReciter.translatedName.name}
@@ -125,6 +126,7 @@ const RecitationPage = ({
           />
           <div>
             <div className={styles.chapterName}>
+              {/* eslint-disable-next-line i18next/no-literal-string */}
               {selectedChapter.id}. {selectedChapter.transliteratedName}
             </div>
             <div className={styles.reciterName}>{selectedReciter.translatedName.name}</div>

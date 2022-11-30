@@ -195,7 +195,7 @@ export const createRangeCycleMachine = ({
           const nextVerseTiming: VerseTiming = context.verseTimings[currentIndex + 1];
 
           const nextVerseNumber = context.currentVerseNumber + 1;
-          const previousVerseDuration = currentVerseTiming.duration;
+          const previousVerseDuration = Math.abs(currentVerseTiming.duration);
 
           return [
             stop(context.verseCycleActor.id),

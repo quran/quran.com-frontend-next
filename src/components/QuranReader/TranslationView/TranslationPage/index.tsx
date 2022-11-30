@@ -9,21 +9,21 @@ import useSWRImmutable from 'swr/immutable';
 
 import styles from '../TranslationView.module.scss';
 
-import ChapterHeader from 'src/components/chapters/ChapterHeader';
-import { getTranslationViewRequestKey, verseFetcher } from 'src/components/QuranReader/api';
-import TranslationViewCell from 'src/components/QuranReader/TranslationView/TranslationViewCell';
-import TranslationViewSkeleton from 'src/components/QuranReader/TranslationView/TranslationViewSkeleton';
-import { getTranslationsInitialState } from 'src/redux/defaultSettings/util';
-import { selectIsUsingDefaultWordByWordLocale } from 'src/redux/slices/QuranReader/readingPreferences';
-import { selectIsUsingDefaultFont } from 'src/redux/slices/QuranReader/styles';
-import { selectIsUsingDefaultTranslations } from 'src/redux/slices/QuranReader/translations';
-import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
-import { getMushafId } from 'src/utils/api';
-import { areArraysEqual } from 'src/utils/array';
-import { getPageBookmarks } from 'src/utils/auth/api';
-import { makeBookmarksRangeUrl } from 'src/utils/auth/apiPaths';
-import { isLoggedIn } from 'src/utils/auth/login';
-import { toLocalizedNumber } from 'src/utils/locale';
+import ChapterHeader from '@/components/chapters/ChapterHeader';
+import { getTranslationViewRequestKey, verseFetcher } from '@/components/QuranReader/api';
+import TranslationViewCell from '@/components/QuranReader/TranslationView/TranslationViewCell';
+import TranslationViewSkeleton from '@/components/QuranReader/TranslationView/TranslationViewSkeleton';
+import { getTranslationsInitialState } from '@/redux/defaultSettings/util';
+import { selectIsUsingDefaultWordByWordLocale } from '@/redux/slices/QuranReader/readingPreferences';
+import { selectIsUsingDefaultFont } from '@/redux/slices/QuranReader/styles';
+import { selectIsUsingDefaultTranslations } from '@/redux/slices/QuranReader/translations';
+import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
+import { getMushafId } from '@/utils/api';
+import { areArraysEqual } from '@/utils/array';
+import { getPageBookmarks } from '@/utils/auth/api';
+import { makeBookmarksRangeUrl } from '@/utils/auth/apiPaths';
+import { isLoggedIn } from '@/utils/auth/login';
+import { toLocalizedNumber } from '@/utils/locale';
 import { selectIsUsingDefaultReciter } from 'src/xstate/actors/audioPlayer/selectors';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import { VersesResponse } from 'types/ApiResponses';
@@ -100,26 +100,24 @@ const TranslationPage: React.FC<Props> = ({
   );
 
   const mushafId = getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines).mushaf;
-  const bookmarksRangeUrl = verses
-    ? makeBookmarksRangeUrl(
-        mushafId,
-        Number(verses[0].chapterId),
-        Number(verses[0].verseNumber),
-        initialData.pagination.perPage,
-      )
-    : '';
-  const { data: pageBookmarks } = useSWRImmutable(
-    verses && isLoggedIn() ? bookmarksRangeUrl : null,
-    async () => {
-      const response = await getPageBookmarks(
-        mushafId,
-        Number(verses[0].chapterId),
-        Number(verses[0].verseNumber),
-        initialData.pagination.perPage,
-      );
-      return response;
-    },
-  );
+  const bookmarksRangeUrl =
+    verses && verses.length && isLoggedIn()
+      ? makeBookmarksRangeUrl(
+          mushafId,
+          Number(verses?.[0].chapterId),
+          Number(verses?.[0].verseNumber),
+          initialData.pagination.perPage,
+        )
+      : null;
+  const { data: pageBookmarks } = useSWRImmutable(bookmarksRangeUrl, async () => {
+    const response = await getPageBookmarks(
+      mushafId,
+      Number(verses[0].chapterId),
+      Number(verses[0].verseNumber),
+      initialData.pagination.perPage,
+    );
+    return response;
+  });
 
   useEffect(() => {
     if (verses) {

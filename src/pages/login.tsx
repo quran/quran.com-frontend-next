@@ -3,8 +3,8 @@ import { useCallback, useEffect } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 
-import { ToastStatus, useToast } from 'src/components/dls/Toast/Toast';
-import LoginContainer from 'src/components/Login/LoginContainer';
+import LoginContainer from '@/components/Login/LoginContainer';
+import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import AuthError from 'types/AuthError';
 
 const LoginPage = () => {

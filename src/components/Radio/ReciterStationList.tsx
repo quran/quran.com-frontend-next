@@ -2,17 +2,17 @@ import { useContext } from 'react';
 
 import { useSelector } from '@xstate/react';
 
-import PauseIcon from '../../../public/icons/pause.svg';
-import PlayIcon from '../../../public/icons/play-arrow.svg';
-import { getReciterNavigationUrl } from '../../utils/navigation';
 import Card, { CardSize } from '../dls/Card/Card';
 import Link from '../dls/Link/Link';
 
 import styles from './ReciterStationList.module.scss';
 import { StationType } from './types';
 
-import { makeCDNUrl } from 'src/utils/cdn';
-import { logEvent } from 'src/utils/eventLogger';
+import PauseIcon from '@/icons/pause.svg';
+import PlayIcon from '@/icons/play-arrow.svg';
+import { makeCDNUrl } from '@/utils/cdn';
+import { logEvent } from '@/utils/eventLogger';
+import { getReciterNavigationUrl } from '@/utils/navigation';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import Reciter from 'types/Reciter';
 

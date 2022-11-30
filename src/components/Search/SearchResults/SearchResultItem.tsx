@@ -9,17 +9,17 @@ import ThumbsUpIcon from '../../../../public/icons/thumbsup-outline.svg';
 
 import styles from './SearchResultItem.module.scss';
 
+import Link from '@/dls/Link/Link';
+import { getChapterData } from '@/utils/chapter';
+import { toLocalizedVerseKey } from '@/utils/locale';
+import { getChapterNumberFromKey } from '@/utils/verse';
 import { submitKalimatSearchResultFeedback } from 'src/api';
 import Button, { ButtonVariant } from 'src/components/dls/Button/Button';
-import Link from 'src/components/dls/Link/Link';
 import QuranWord from 'src/components/dls/QuranWord/QuranWord';
 import { ToastStatus, useToast } from 'src/components/dls/Toast/Toast';
 import useGetChaptersData from 'src/hooks/useGetChaptersData';
-import { getChapterData } from 'src/utils/chapter';
 import { logButtonClick } from 'src/utils/eventLogger';
-import { toLocalizedVerseKey } from 'src/utils/locale';
 import { getChapterWithStartingVerseUrl } from 'src/utils/navigation';
-import { getChapterNumberFromKey } from 'src/utils/verse';
 import Verse from 'types/Verse';
 import { CharType } from 'types/Word';
 
@@ -115,6 +115,7 @@ const SearchResultItem: React.FC<Props> = ({
         {result.translations?.map((translation) => (
           <div key={translation.resourceId} className={styles.translationContainer}>
             <div dangerouslySetInnerHTML={{ __html: translation.text }} />
+            {/* eslint-disable-next-line i18next/no-literal-string */}
             <p className={styles.translationName}> - {translation.resourceName}</p>
           </div>
         ))}

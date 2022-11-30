@@ -10,33 +10,34 @@ import { useHotkeys } from 'react-hotkeys-hook';
 import { shallowEqual, useSelector } from 'react-redux';
 import { Virtuoso, VirtuosoHandle } from 'react-virtuoso';
 
+import { getPageIndexByPageNumber } from '../utils/page';
+
 import useScrollToVirtualizedVerse from './hooks/useScrollToVirtualizedVerse';
 import PageContainer from './PageContainer';
 import PageNavigationButtons from './PageNavigationButtons';
 import styles from './ReadingView.module.scss';
 import ReadingViewSkeleton from './ReadingViewSkeleton';
 
-import Spinner from 'src/components/dls/Spinner/Spinner';
-import useFetchPagesLookup from 'src/components/QuranReader/hooks/useFetchPagesLookup';
-import onCopyQuranWords from 'src/components/QuranReader/onCopyQuranWords';
-import QueryParamMessage from 'src/components/QuranReader/QueryParamMessage';
-import { getPageIndexByPageNumber } from 'src/components/QuranReader/utils/page';
-import useGetQueryParamOrReduxValue from 'src/hooks/useGetQueryParamOrReduxValue';
-import useGetQueryParamOrXstateValue from 'src/hooks/useGetQueryParamOrXstateValue';
-import useQcfFont from 'src/hooks/useQcfFont';
+import useFetchPagesLookup from '@/components/QuranReader/hooks/useFetchPagesLookup';
+import onCopyQuranWords from '@/components/QuranReader/onCopyQuranWords';
+import QueryParamMessage from '@/components/QuranReader/QueryParamMessage';
+import Spinner from '@/dls/Spinner/Spinner';
+import useGetQueryParamOrReduxValue from '@/hooks/useGetQueryParamOrReduxValue';
+import useGetQueryParamOrXstateValue from '@/hooks/useGetQueryParamOrXstateValue';
+import useQcfFont from '@/hooks/useQcfFont';
+import { selectedLastReadPage } from '@/redux/slices/QuranReader/readingTracker';
+import { selectIsUsingDefaultFont } from '@/redux/slices/QuranReader/styles';
+import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
+import { logButtonClick } from '@/utils/eventLogger';
+import { getLineWidthClassName } from '@/utils/fontFaceHelper';
 import Error from 'src/pages/_error';
-import { selectedLastReadPage } from 'src/redux/slices/QuranReader/readingTracker';
-import { selectIsUsingDefaultFont } from 'src/redux/slices/QuranReader/styles';
-import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
-import { logButtonClick } from 'src/utils/eventLogger';
-import { getLineWidthClassName } from 'src/utils/fontFaceHelper';
 import { VersesResponse } from 'types/ApiResponses';
 import QueryParam from 'types/QueryParam';
 import { QuranReaderDataType } from 'types/QuranReader';
 import Verse from 'types/Verse';
 
 const EndOfScrollingControls = dynamic(
-  () => import('src/components/QuranReader/EndOfScrollingControls'),
+  () => import('@/components/QuranReader/EndOfScrollingControls'),
   {
     ssr: false,
     loading: () => <Spinner />,
@@ -108,7 +109,6 @@ const ReadingView = ({
   );
 
   const scrollToPreviousPage = useCallback(() => {
-    logButtonClick('reading_view_prev_page');
     virtuosoRef.current.scrollToIndex({
       index: currentPageIndex - 1,
       align: 'start',
@@ -117,13 +117,22 @@ const ReadingView = ({
   }, [currentPageIndex]);
 
   const scrollToNextPage = useCallback(() => {
-    logButtonClick('reading_view_next_page');
     virtuosoRef.current.scrollToIndex({
       index: currentPageIndex + 1,
       align: 'start',
       offset: 25,
     });
   }, [currentPageIndex]);
+
+  const onPrevPageClicked = useCallback(() => {
+    logButtonClick('reading_view_prev_page_button');
+    scrollToPreviousPage();
+  }, [scrollToPreviousPage]);
+
+  const onNextPageClicked = useCallback(() => {
+    logButtonClick('reading_view_next_page_button');
+    scrollToNextPage();
+  }, [scrollToNextPage]);
 
   const allowKeyboardNavigation = quranTextFontScale <= 5;
   const onUpClicked = useCallback(
@@ -171,7 +180,7 @@ const ReadingView = ({
         wordByWordLocaleQueryParamDifferent={wordByWordLocaleQueryParamDifferent}
       />
       <div
-        onCopy={(event) => onCopyQuranWords(event, verses)}
+        onCopy={(event) => onCopyQuranWords(event, verses, quranFont)}
         className={classNames(
           styles.container,
           styles[getLineWidthClassName(quranFont, quranTextFontScale, mushafLines)],
@@ -211,8 +220,8 @@ const ReadingView = ({
       </div>
       {allowKeyboardNavigation && (
         <PageNavigationButtons
-          scrollToNextPage={scrollToNextPage}
-          scrollToPreviousPage={scrollToPreviousPage}
+          scrollToNextPage={onNextPageClicked}
+          scrollToPreviousPage={onPrevPageClicked}
         />
       )}
     </>

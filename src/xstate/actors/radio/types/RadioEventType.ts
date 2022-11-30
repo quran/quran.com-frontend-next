@@ -1,4 +1,4 @@
-import { StationType } from 'src/components/Radio/types';
+import { StationType } from '@/components/Radio/types';
 
 type RadioEventType =
   | { type: 'TRACK_ENDED' }

@@ -12,7 +12,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import styles from './Toast.module.scss';
 import ToastContext from './ToastContext';
 
-import Button, { ButtonSize, ButtonType } from 'src/components/dls/Button/Button';
+import Button, { ButtonSize, ButtonType } from '@/dls/Button/Button';
 
 export enum ToastStatus {
   Success = 'success',

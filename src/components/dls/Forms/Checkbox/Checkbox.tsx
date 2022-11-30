@@ -3,10 +3,10 @@ import React from 'react';
 import * as RadixCheckbox from '@radix-ui/react-checkbox';
 import classNames from 'classnames';
 
-import DividerHorizontalIcon from '../../../../../public/icons/divider-horizontal.svg';
-import TickIcon from '../../../../../public/icons/tick.svg';
-
 import styles from './Checkbox.module.scss';
+
+import DividerHorizontalIcon from '@/icons/divider-horizontal.svg';
+import TickIcon from '@/icons/tick.svg';
 
 const INDETERMINATE = 'indeterminate';
 
@@ -18,11 +18,13 @@ interface Props {
   required?: boolean;
   label?: string;
   name?: string;
+  defaultChecked?: boolean;
 }
 
 const Checkbox: React.FC<Props> = ({
   disabled = false,
   required = false,
+  defaultChecked,
   checked,
   id,
   label,
@@ -48,6 +50,7 @@ const Checkbox: React.FC<Props> = ({
         onCheckedChange={handleChange}
         id={id}
         className={styles.checkbox}
+        defaultChecked={defaultChecked}
         {...(checked !== undefined && { checked })} // make it controlled only when checked is passed.
       >
         <RadixCheckbox.Indicator

@@ -1,6 +1,6 @@
 import stringify from '../qs-stringify';
 
-import { getAuthApiPath } from 'src/utils/url';
+import { getAuthApiPath } from '@/utils/url';
 import BookmarkType from 'types/BookmarkType';
 
 const makeUrl = (url: string, parameters?: Record<string, unknown>): string => {
@@ -32,6 +32,54 @@ export const makeAppleLoginUrl = (): string => makeUrl('auth/apple');
 
 export const makeBookmarksUrl = (mushafId: number): string => makeUrl('bookmarks', { mushafId });
 
+export type CollectionsQueryParams = {
+  cursor?: string;
+  limit?: number;
+  sortBy?: string;
+};
+export const makeCollectionsUrl = (queryParams: CollectionsQueryParams): string =>
+  makeUrl('collections', queryParams);
+
+export const makeAddCollectionUrl = () => makeUrl('collections');
+
+export const makeUpdateCollectionUrl = (collectionId: string) =>
+  makeUrl(`collections/${collectionId}`);
+
+export const makeDeleteCollectionUrl = (collectionId: string) =>
+  makeUrl(`collections/${collectionId}`);
+
+export const makeAddCollectionBookmarkUrl = (collectionId: string) =>
+  makeUrl(`collections/${collectionId}/bookmarks`);
+
+export const makeDeleteCollectionBookmarkByIdUrl = (collectionId: string, bookmarkId: string) =>
+  makeUrl(`collections/${collectionId}/bookmarks/${bookmarkId}`);
+
+export const makeDeleteCollectionBookmarkByKeyUrl = (collectionId: string) =>
+  makeUrl(`collections/${collectionId}/bookmarks`);
+
+export const makeBookmarkCollectionsUrl = (
+  mushafId: number,
+  key: number,
+  type: BookmarkType,
+  verseNumber?: number,
+): string =>
+  makeUrl('bookmarks/collections', { mushafId, key, type, ...(verseNumber && { verseNumber }) });
+
+export type BookmarkByCollectionIdQueryParams = {
+  cursor?: string;
+  limit?: number;
+  sortBy?: string;
+};
+export const makeGetBookmarkByCollectionId = (
+  collectionId: string,
+  queryParams: BookmarkByCollectionIdQueryParams,
+) => makeUrl(`collections/${collectionId}`, queryParams);
+
+export const makeAllCollectionsItemsUrl = (queryParams: BookmarkByCollectionIdQueryParams) =>
+  makeUrl(`collections/all`, queryParams);
+
+export const makeDeleteBookmarkUrl = (bookmarkId: string) => makeUrl(`bookmarks/${bookmarkId}`);
+
 export const makeBookmarksRangeUrl = (
   mushafId: number,
   chapterNumber: number,
@@ -39,13 +87,13 @@ export const makeBookmarksRangeUrl = (
   perPage: number,
 ): string => makeUrl('bookmarks/ayahs-range', { mushafId, chapterNumber, verseNumber, perPage });
 
-export const makeIsResourceBookmarkedUrl = (
+export const makeBookmarkUrl = (
   mushafId: number,
   key: number,
   type: BookmarkType,
   verseNumber?: number,
 ): string =>
-  makeUrl('bookmarks/is-bookmarked', { mushafId, key, type, ...(verseNumber && { verseNumber }) });
+  makeUrl('bookmarks/bookmark', { mushafId, key, type, ...(verseNumber && { verseNumber }) });
 
 export const makeReadingSessionsUrl = () => makeUrl('reading-sessions');
 

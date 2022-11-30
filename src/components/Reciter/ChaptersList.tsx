@@ -5,10 +5,6 @@ import classNames from 'classnames';
 import clipboardCopy from 'clipboard-copy';
 import useTranslation from 'next-translate/useTranslation';
 
-import CopyLinkIcon from '../../../public/icons/copy-link.svg';
-import DownloadIcon from '../../../public/icons/download.svg';
-import PauseIcon from '../../../public/icons/pause.svg';
-import PlayIcon from '../../../public/icons/play-arrow.svg';
 import { download } from '../AudioPlayer/Buttons/DownloadAudioButton';
 import ChapterIconContainer from '../chapters/ChapterIcon/ChapterIconContainer';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '../dls/Button/Button';
@@ -17,10 +13,14 @@ import { ToastStatus, useToast } from '../dls/Toast/Toast';
 
 import styles from './ChapterList.module.scss';
 
+import CopyLinkIcon from '@/icons/copy-link.svg';
+import DownloadIcon from '@/icons/download.svg';
+import PauseIcon from '@/icons/pause.svg';
+import PlayIcon from '@/icons/play-arrow.svg';
+import { logButtonClick, logEvent } from '@/utils/eventLogger';
+import { getReciterChapterNavigationUrl } from '@/utils/navigation';
+import { getWindowOrigin } from '@/utils/url';
 import { getChapterAudioData } from 'src/api';
-import { logButtonClick, logEvent } from 'src/utils/eventLogger';
-import { getReciterChapterNavigationUrl } from 'src/utils/navigation';
-import { getWindowOrigin } from 'src/utils/url';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import Chapter from 'types/Chapter';
 import Reciter from 'types/Reciter';
@@ -111,6 +111,7 @@ const ChaptersList = ({ filteredChapters, selectedReciter }: ChaptersListProps) 
               </div>
               <div>
                 <div className={styles.chapterName}>
+                  {/* eslint-disable-next-line i18next/no-literal-string */}
                   {chapter.localizedId}. {chapter.transliteratedName}
                 </div>
                 <span className={styles.chapterIconContainer}>

@@ -10,17 +10,18 @@ import SearchDrawerFooter from '../SearchDrawer/Footer';
 import styles from './Drawer.module.scss';
 import DrawerCloseButton from './DrawerCloseButton';
 
-import useOutsideClickDetector from 'src/hooks/useOutsideClickDetector';
-import usePreventBodyScrolling from 'src/hooks/usePreventBodyScrolling';
+import useOutsideClickDetector from '@/hooks/useOutsideClickDetector';
+import usePreventBodyScrolling from '@/hooks/usePreventBodyScrolling';
 import {
   Navbar,
   selectNavbar,
   setIsNavigationDrawerOpen,
   setIsSearchDrawerOpen,
   setIsSettingsDrawerOpen,
-} from 'src/redux/slices/navbar';
-import { stopSearchDrawerVoiceFlow } from 'src/redux/slices/voiceSearch';
-import { logEvent } from 'src/utils/eventLogger';
+  setIsVisible,
+} from '@/redux/slices/navbar';
+import { stopSearchDrawerVoiceFlow } from '@/redux/slices/voiceSearch';
+import { logEvent } from '@/utils/eventLogger';
 
 export enum DrawerType {
   Navigation = 'navigation',
@@ -110,14 +111,19 @@ const Drawer: React.FC<Props> = ({
     { enabled: isOpen, enableOnTags: ['INPUT', 'SELECT'] },
   );
 
-  // Hide navbar after successful navigation
   useEffect(() => {
+    // Keep nav bar visible when drawer is open
+    if (isOpen) {
+      dispatch(setIsVisible(true));
+    }
+
+    // Hide navbar after successful navigation
     router.events.on('routeChangeComplete', () => {
       if (isOpen && closeOnNavigation) {
         closeDrawer('navigation');
       }
     });
-  }, [closeDrawer, router.events, isOpen, closeOnNavigation]);
+  }, [closeDrawer, dispatch, router.events, isNavbarVisible, isOpen, closeOnNavigation]);
 
   useOutsideClickDetector(
     drawerRef,

@@ -1,7 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { RootState } from 'src/redux/RootState';
-import SliceName from 'src/redux/types/SliceName';
+import { RootState } from '@/redux/RootState';
+import SliceName from '@/redux/types/SliceName';
 
 export type IsSidebarNavigationVisible = boolean | 'auto';
 export type SidebarNavigation = {
@@ -13,6 +13,8 @@ export enum NavigationItem {
   Surah = 'surah',
   Juz = 'juz',
   Page = 'page',
+  RubElHizb = 'rub_el_hizb',
+  Hizb = 'hizb',
 }
 
 export const initialSidebarIsVisible = 'auto'; // sidebar will be open on desktop and closed on mobile

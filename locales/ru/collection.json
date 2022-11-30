@@ -1,0 +1,22 @@
+{
+    "all-saved-verses": "Все сохраненные стихи",
+    "alphabetical": "Аризона",
+    "back-to-collection-list": "Назад к списку коллекций",
+    "collection-list-empty": "Список коллекций пуст. Вы еще не создали ни одной коллекции",
+    "collections": "Коллекции",
+    "delete": "Удалить",
+    "delete-bookmark": {
+        "subtitle": "Вы уверены, что хотите удалить {{bookmarkName}} из {{collectionName}} ?",
+        "title": "Удалить закладку"
+    },
+    "delete-collection": {
+        "subtitle": "Вы уверены, что хотите удалить {{collectionName}} ?",
+        "title": "Удалить коллекцию"
+    },
+    "empty": "Коллекция пуста",
+    "go-to-ayah": "Иди к айе",
+    "load-more": "Загрузи больше",
+    "recently-added": "Недавно добавленный",
+    "recently-updated": "Недавно обновленный",
+    "verse-key": "Глава и номер стиха"
+}

@@ -5,26 +5,27 @@ import classNames from 'classnames';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 
-import BookmarkIcon from './BookmarkIcon';
-import QuranReflectButton from './QuranReflectButton';
-import ShareVerseButton from './ShareVerseButton';
-import TranslationText from './TranslationText';
-import styles from './TranslationViewCell.module.scss';
-
-import Separator from 'src/components/dls/Separator/Separator';
 import {
   verseFontChanged,
   verseTranslationChanged,
   verseTranslationFontChanged,
-} from 'src/components/QuranReader/utils/memoization';
-import OverflowVerseActionsMenu from 'src/components/Verse/OverflowVerseActionsMenu';
-import PlayVerseAudioButton from 'src/components/Verse/PlayVerseAudioButton';
-import VerseLink from 'src/components/Verse/VerseLink';
-import VerseText from 'src/components/Verse/VerseText';
-import useScroll, { SMOOTH_SCROLL_TO_CENTER } from 'src/hooks/useScrollToElement';
-import { selectEnableAutoScrolling } from 'src/redux/slices/AudioPlayer/state';
-import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
-import { getVerseWords, makeVerseKey } from 'src/utils/verse';
+} from '../utils/memoization';
+
+import BookmarkIcon from './BookmarkIcon';
+import TranslationText from './TranslationText';
+import styles from './TranslationViewCell.module.scss';
+
+import QuranReflectButton from '@/components/QuranReader/QuranReflectButton';
+import TafsirButton from '@/components/QuranReader/TafsirButton';
+import OverflowVerseActionsMenu from '@/components/Verse/OverflowVerseActionsMenu';
+import PlayVerseAudioButton from '@/components/Verse/PlayVerseAudioButton';
+import VerseLink from '@/components/Verse/VerseLink';
+import VerseText from '@/components/Verse/VerseText';
+import Separator from '@/dls/Separator/Separator';
+import useScroll, { SMOOTH_SCROLL_TO_TOP } from '@/hooks/useScrollToElement';
+import { selectEnableAutoScrolling } from '@/redux/slices/AudioPlayer/state';
+import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
+import { getVerseWords, makeVerseKey } from '@/utils/verse';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import BookmarksMap from 'types/BookmarksMap';
 import Translation from 'types/Translation';
@@ -57,7 +58,7 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
   const enableAutoScrolling = useSelector(selectEnableAutoScrolling);
 
   const [scrollToSelectedItem, selectedItemRef]: [() => void, RefObject<HTMLDivElement>] =
-    useScroll(SMOOTH_SCROLL_TO_CENTER);
+    useScroll(SMOOTH_SCROLL_TO_TOP);
 
   useEffect(() => {
     if ((isHighlighted && enableAutoScrolling) || Number(startingVerse) === verseIndex + 1) {
@@ -91,10 +92,10 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
               />
             </div>
             <div className={classNames(styles.actionItem)}>
-              <QuranReflectButton verseKey={verse.verseKey} />
+              <TafsirButton verseKey={verse.verseKey} />
             </div>
             <div className={classNames(styles.actionItem)}>
-              <ShareVerseButton verseKey={verse.verseKey} />
+              <QuranReflectButton verseKey={verse.verseKey} />
             </div>
           </div>
           <div className={styles.actionContainerRight}>

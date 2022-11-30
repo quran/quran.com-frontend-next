@@ -5,16 +5,15 @@ import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 
-import TafsirIcon from '../../../../public/icons/book-open.svg';
-
-import ContentModalHandles from 'src/components/dls/ContentModal/types/ContentModalHandles';
-import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
-import { selectSelectedTafsirs } from 'src/redux/slices/QuranReader/tafsirs';
-import { logButtonClick, logEvent } from 'src/utils/eventLogger';
-import { fakeNavigate, getVerseSelectedTafsirNavigationUrl } from 'src/utils/navigation';
+import ContentModalHandles from '@/dls/ContentModal/types/ContentModalHandles';
+import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
+import TafsirIcon from '@/icons/book-open.svg';
+import { selectSelectedTafsirs } from '@/redux/slices/QuranReader/tafsirs';
+import { logButtonClick, logEvent } from '@/utils/eventLogger';
+import { fakeNavigate, getVerseSelectedTafsirNavigationUrl } from '@/utils/navigation';
 
 const TafsirBody = dynamic(() => import('./TafsirBody'), { ssr: false });
-const ContentModal = dynamic(() => import('src/components/dls/ContentModal/ContentModal'), {
+const ContentModal = dynamic(() => import('@/dls/ContentModal/ContentModal'), {
   ssr: false,
 });
 

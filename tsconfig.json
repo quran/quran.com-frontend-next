@@ -19,7 +19,15 @@
     "skipLibCheck": true,
     "strict": false,
     "target": "es5",
-    "incremental": true
+    "incremental": true,
+    "paths": {
+      "@/icons/*": ["./public/icons/*"],
+      "@/dls/*": ["./src/components/dls/*"],
+      "@/data/*": ["./data/*"],
+      "@/types/*": ["./types/*"],
+      "@/tests/*": ["./tests/*"],
+      "@/*": ["./src/*"],
+    }
   },
   "exclude": [
     "node_modules"

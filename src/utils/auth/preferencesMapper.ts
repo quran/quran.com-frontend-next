@@ -1,12 +1,12 @@
 /* eslint-disable import/prefer-default-export */
 /* eslint-disable react-func/max-lines-per-function */
-import { DEFAULT_XSTATE_INITIAL_STATE } from 'src/redux/defaultSettings/defaultSettings';
-import AudioState from 'src/redux/types/AudioState';
-import QuranReaderStyles from 'src/redux/types/QuranReaderStyles';
-import ReadingPreferences from 'src/redux/types/ReadingPreferences';
-import SliceName from 'src/redux/types/SliceName';
-import TafsirsSettings from 'src/redux/types/TafsirsSettings';
-import TranslationsSettings from 'src/redux/types/TranslationsSettings';
+import { DEFAULT_XSTATE_INITIAL_STATE } from '@/redux/defaultSettings/defaultSettings';
+import AudioState from '@/redux/types/AudioState';
+import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
+import ReadingPreferences from '@/redux/types/ReadingPreferences';
+import SliceName from '@/redux/types/SliceName';
+import TafsirsSettings from '@/redux/types/TafsirsSettings';
+import TranslationsSettings from '@/redux/types/TranslationsSettings';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 
 const SLICE_NAME_TO_PREFERENCE_GROUP = {

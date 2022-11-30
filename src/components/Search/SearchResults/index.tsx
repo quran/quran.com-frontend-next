@@ -7,10 +7,10 @@ import KalimatSearchNavigation from '../KalimatSearchNavigation';
 import SearchResultItem, { Source } from './SearchResultItem';
 import styles from './SearchResults.module.scss';
 
+import { logButtonClick, logButtonClick } from '@/utils/eventLogger';
 import Link from 'src/components/dls/Link/Link';
 import Pagination from 'src/components/dls/Pagination/Pagination';
-import { logButtonClick } from 'src/utils/eventLogger';
-import { toLocalizedNumber } from 'src/utils/locale';
+import { toLocalizedNumber, toLocalizedNumber } from 'src/utils/locale';
 import { VersesResponse } from 'types/ApiResponses';
 
 interface Props {

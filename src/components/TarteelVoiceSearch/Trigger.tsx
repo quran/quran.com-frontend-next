@@ -3,19 +3,18 @@ import React, { useRef } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
-import CloseIcon from '../../../public/icons/close.svg';
-import MicrophoneIcon from '../../../public/icons/microphone.svg';
-
 import styles from './Trigger.module.scss';
 
-import Button, { ButtonShape, ButtonVariant } from 'src/components/dls/Button/Button';
-import useBrowserLayoutEffect from 'src/hooks/useBrowserLayoutEffect';
+import Button, { ButtonShape, ButtonVariant } from '@/dls/Button/Button';
+import useBrowserLayoutEffect from '@/hooks/useBrowserLayoutEffect';
+import CloseIcon from '@/icons/close.svg';
+import MicrophoneIcon from '@/icons/microphone.svg';
 import {
   toggleIsSearchDrawerVoiceFlowStarted,
   toggleIsCommandBarVoiceFlowStarted,
   selectIsCommandBarVoiceFlowStarted,
   selectIsSearchDrawerVoiceFlowStarted,
-} from 'src/redux/slices/voiceSearch';
+} from '@/redux/slices/voiceSearch';
 
 interface Props {
   isCommandBar?: boolean;

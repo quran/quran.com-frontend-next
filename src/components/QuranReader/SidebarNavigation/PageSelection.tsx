@@ -3,10 +3,10 @@ import { useSelector } from 'react-redux';
 
 import ScrollableSelection from './ScrollableSelection';
 
-import { selectedLastReadPage } from 'src/redux/slices/QuranReader/readingTracker';
-import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
-import { getPageNavigationUrl } from 'src/utils/navigation';
-import { getPageIdsByMushaf } from 'src/utils/page';
+import { selectedLastReadPage } from '@/redux/slices/QuranReader/readingTracker';
+import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
+import { getPageNavigationUrl } from '@/utils/navigation';
+import { getPageIdsByMushaf } from '@/utils/page';
 
 const PageSelection = () => {
   const { t, lang } = useTranslation('common');

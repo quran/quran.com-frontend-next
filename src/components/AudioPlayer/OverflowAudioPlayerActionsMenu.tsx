@@ -1,14 +1,13 @@
 import useTranslation from 'next-translate/useTranslation';
 
-import OverflowMenuIcon from '../../../public/icons/menu_more_horiz.svg';
-
 import OverflowAudioPlayActionsMenuBody from './OverflowAudioPlayActionsMenuBody';
 import styles from './OverflowAudioPlayerActionsMenu.module.scss';
 
-import Button, { ButtonShape, ButtonVariant } from 'src/components/dls/Button/Button';
-import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
-import useDirection from 'src/hooks/useDirection';
-import { logEvent } from 'src/utils/eventLogger';
+import Button, { ButtonShape, ButtonVariant } from '@/dls/Button/Button';
+import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
+import useDirection from '@/hooks/useDirection';
+import OverflowMenuIcon from '@/icons/menu_more_horiz.svg';
+import { logEvent } from '@/utils/eventLogger';
 
 const OverflowAudioPlayerActionsMenu = () => {
   const { t } = useTranslation('common');

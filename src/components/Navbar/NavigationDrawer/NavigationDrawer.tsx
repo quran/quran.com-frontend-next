@@ -10,7 +10,7 @@ import NavbarLogoWrapper from '../Logo/NavbarLogoWrapper';
 import styles from './NavigationDrawer.module.scss';
 import NavigationDrawerBodySkeleton from './NavigationDrawerBodySkeleton';
 
-import { selectNavbar } from 'src/redux/slices/navbar';
+import { selectNavbar } from '@/redux/slices/navbar';
 
 const NavigationDrawerBody = dynamic(() => import('./NavigationDrawerBody'), {
   ssr: false,

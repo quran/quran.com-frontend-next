@@ -1,0 +1,22 @@
+{
+    "all-saved-verses": "Semua ayat yang disimpan",
+    "alphabetical": "AZ",
+    "back-to-collection-list": "Kembali ke senarai koleksi",
+    "collection-list-empty": "Senarai koleksi kosong. Anda belum membuat sebarang koleksi lagi",
+    "collections": "Koleksi",
+    "delete": "Padam",
+    "delete-bookmark": {
+        "subtitle": "Adakah anda pasti mahu memadamkan {{bookmarkName}} daripada {{collectionName}} ?",
+        "title": "Padamkan penanda halaman"
+    },
+    "delete-collection": {
+        "subtitle": "Adakah anda pasti mahu memadamkan {{collectionName}} ?",
+        "title": "Padamkan koleksi"
+    },
+    "empty": "Koleksi kosong",
+    "go-to-ayah": "Pergi ke ayah",
+    "load-more": "Buka Lagi",
+    "recently-added": "Baru sahaja ditambah",
+    "recently-updated": "Dikemas kini baru-baru ini",
+    "verse-key": "Bab dan Nombor Ayat"
+}

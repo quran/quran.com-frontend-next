@@ -2,9 +2,9 @@ import React, { memo } from 'react';
 
 import useSWRImmutable from 'swr/immutable';
 
+import Error from '@/components/Error';
+import Spinner from '@/dls/Spinner/Spinner';
 import { fetcher } from 'src/api';
-import Spinner from 'src/components/dls/Spinner/Spinner';
-import Error from 'src/components/Error';
 import { BaseResponse } from 'types/ApiResponses';
 
 interface Props {

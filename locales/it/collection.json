@@ -1,0 +1,22 @@
+{
+    "all-saved-verses": "Tutti i versi salvati",
+    "alphabetical": "AZ",
+    "back-to-collection-list": "Torna all'elenco di raccolta",
+    "collection-list-empty": "L'elenco delle raccolte è vuoto. Non hai ancora creato nessuna raccolta",
+    "collections": "Collezioni",
+    "delete": "Elimina",
+    "delete-bookmark": {
+        "subtitle": "Sei sicuro di voler eliminare {{bookmarkName}} dalla {{collectionName}} ?",
+        "title": "Elimina segnalibro"
+    },
+    "delete-collection": {
+        "subtitle": "Sei sicuro di voler eliminare {{collectionName}} ?",
+        "title": "Elimina raccolta"
+    },
+    "empty": "La raccolta è vuota",
+    "go-to-ayah": "Vai a si",
+    "load-more": "Carica altro",
+    "recently-added": "Aggiunto recentemente",
+    "recently-updated": "Aggiornato di recente",
+    "verse-key": "Numero di capitolo e versetto"
+}

@@ -5,28 +5,24 @@ import React from 'react';
 import { NextPage, GetStaticProps, GetStaticPaths } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 
-import { getChapterIdBySlug, getChapterVerses, getPagesLookup } from 'src/api';
-import NextSeoWrapper from 'src/components/NextSeoWrapper';
-import QuranReader from 'src/components/QuranReader';
-import DataContext from 'src/contexts/DataContext';
-import Error from 'src/pages/_error';
-import { getQuranReaderStylesInitialState } from 'src/redux/defaultSettings/util';
-import { getDefaultWordFields, getMushafId } from 'src/utils/api';
-import { getAllChaptersData, getChapterData } from 'src/utils/chapter';
-import { toLocalizedNumber, getLocaleName, getLanguageAlternates } from 'src/utils/locale';
-import {
-  getCanonicalUrl,
-  getSurahNavigationUrl,
-  getVerseNavigationUrl,
-} from 'src/utils/navigation';
-import { formatStringNumber } from 'src/utils/number';
+import NextSeoWrapper from '@/components/NextSeoWrapper';
+import QuranReader from '@/components/QuranReader';
+import { getQuranReaderStylesInitialState } from '@/redux/defaultSettings/util';
+import { getDefaultWordFields, getMushafId } from '@/utils/api';
+import { getAllChaptersData, getChapterData } from '@/utils/chapter';
+import { toLocalizedNumber, getLocaleName, getLanguageAlternates } from '@/utils/locale';
+import { getCanonicalUrl, getSurahNavigationUrl, getVerseNavigationUrl } from '@/utils/navigation';
+import { formatStringNumber } from '@/utils/number';
 import {
   REVALIDATION_PERIOD_ON_ERROR_SECONDS,
   ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
-} from 'src/utils/staticPageGeneration';
-import { isValidChapterId, isValidVerseKey } from 'src/utils/validator';
-import { getVerseAndChapterNumbersFromKey } from 'src/utils/verse';
-import { generateVerseKeysBetweenTwoVerseKeys } from 'src/utils/verseKeys';
+} from '@/utils/staticPageGeneration';
+import { isValidChapterId, isValidVerseKey } from '@/utils/validator';
+import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
+import { generateVerseKeysBetweenTwoVerseKeys } from '@/utils/verseKeys';
+import { getChapterIdBySlug, getChapterVerses, getPagesLookup } from 'src/api';
+import DataContext from 'src/contexts/DataContext';
+import Error from 'src/pages/_error';
 import { ChapterResponse, VersesResponse } from 'types/ApiResponses';
 import ChaptersData from 'types/ChaptersData';
 import { QuranReaderDataType } from 'types/QuranReader';

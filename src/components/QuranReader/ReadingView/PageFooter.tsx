@@ -4,9 +4,9 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from './PageFooter.module.scss';
 
-import Link from 'src/components/dls/Link/Link';
-import { toLocalizedNumber } from 'src/utils/locale';
-import { getPageNavigationUrl } from 'src/utils/navigation';
+import Link from '@/dls/Link/Link';
+import { toLocalizedNumber } from '@/utils/locale';
+import { getPageNavigationUrl } from '@/utils/navigation';
 
 interface Props {
   page: number;

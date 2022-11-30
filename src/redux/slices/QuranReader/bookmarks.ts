@@ -1,6 +1,6 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
-import { RootState } from 'src/redux/RootState';
+import { RootState } from '@/redux/RootState';
 
 export type Bookmarks = {
   bookmarkedVerses: Record<string, number>;

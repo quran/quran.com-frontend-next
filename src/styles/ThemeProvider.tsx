@@ -2,7 +2,7 @@ import React from 'react';
 
 import { shallowEqual, useSelector } from 'react-redux';
 
-import { selectTheme } from 'src/redux/slices/theme';
+import { selectTheme } from '@/redux/slices/theme';
 
 const ThemeProvider = ({ children }) => {
   const theme = useSelector(selectTheme, shallowEqual);

@@ -1,15 +1,13 @@
 /* eslint-disable max-lines */
 import { stringify } from 'querystring';
 
-import { decamelizeKeys } from 'humps';
-
 import { getDefaultWordFields, getMushafId, ITEMS_PER_PAGE, makeUrl } from './api';
 
-import { DEFAULT_RECITER } from 'src/redux/defaultSettings/defaultSettings';
+import { DEFAULT_RECITER } from '@/redux/defaultSettings/defaultSettings';
 import {
   getReadingPreferencesInitialState,
   getTranslationsInitialState,
-} from 'src/redux/defaultSettings/util';
+} from '@/redux/defaultSettings/util';
 import { AdvancedCopyRequest, PagesLookUpRequest, SearchRequest } from 'types/ApiRequests';
 import KalimatApi from 'types/Kalimat/KalimatApi';
 import { KalimatSearchAsYouTypeRequest } from 'types/Kalimat/KalimatSearchAsYouTypeRequest';
@@ -257,6 +255,34 @@ export const makeJuzVersesUrl = (
 ): string => makeUrl(`/verses/by_juz/${id}`, getVersesParams(currentLocale, params));
 
 /**
+ * Compose the url for Rub el Hizb's verses API.
+ *
+ * @param {string} id  the Id of the Rub el Hizb.
+ * @param {string} currentLocale  the locale.
+ * @param {Record<string, unknown>} params  in-case we need to over-ride the default params.
+ * @returns {string}
+ */
+export const makeRubVersesUrl = (
+  id: string | number,
+  currentLocale: string,
+  params?: Record<string, unknown>,
+): string => makeUrl(`/verses/by_rub_el_hizb/${id}`, getVersesParams(currentLocale, params));
+
+/**
+ * Compose the url for Hizb's verses API.
+ *
+ * @param {string} id  the Id of the hizb.
+ * @param {string} currentLocale  the locale.
+ * @param {Record<string, unknown>} params  in-case we need to over-ride the default params.
+ * @returns {string}
+ */
+export const makeHizbVersesUrl = (
+  id: string | number,
+  currentLocale: string,
+  params?: Record<string, unknown>,
+): string => makeUrl(`/verses/by_hizb/${id}`, getVersesParams(currentLocale, params));
+
+/**
  * Compose the url for by verse key API.
  *
  * @param {string} verseKey  the Id of the juz.
@@ -294,22 +320,10 @@ export const makePageVersesUrl = (
  */
 export const makeFootnoteUrl = (footnoteId: string): string => makeUrl(`/foot_notes/${footnoteId}`);
 
-export const makeVerseReflectionsUrl = (chapterId: string, verseNumber: string, lang: string) => {
-  // TODO: revert this back once the API is ready
-  return `https://staging.quran.com/api/qdc/qr/reflections?${stringify(
-    decamelizeKeys({
-      ranges: `${chapterId}:${verseNumber}`,
-      author: true,
-      fields: 'created_at,html_body,comments_count,likes_count',
-      filter: 'latest',
-      verified: true,
-      authorFields: 'avatar_url',
-      lang,
-    }),
-  )}`;
-};
-
 export const makeKalimatApiUrl = (
   params: KalimatSearchRequest | KalimatSearchResultFeedbackRequest | KalimatSearchAsYouTypeRequest,
   api: KalimatApi,
 ) => `https://api.kalimat.dev:443/${api}?${stringify(params)}`;
+
+export const makeDonateUrl = (showDonationPopup = false) =>
+  `https://donate.quran.com${showDonationPopup ? '?showDonationPopup' : ''}`;
