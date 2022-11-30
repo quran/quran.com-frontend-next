@@ -2,6 +2,7 @@ import { ReactNode } from 'react';
 
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
+import Image from 'next/image';
 
 import Button, { ButtonVariant } from '../Button/Button';
 
@@ -50,7 +51,7 @@ const Card = ({
         onKeyPress={onImgClick}
         onClick={onImgClick}
       >
-        {imgSrc && <img alt={imgAlt} className={styles.img} src={imgSrc} />}
+        {imgSrc && <Image alt={imgAlt} className={styles.img} src={imgSrc} layout="fill" />}
 
         {actionIcon && (
           <div className={styles.cardHoverEffectContainer} data-theme="dark">
