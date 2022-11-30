@@ -8,8 +8,8 @@ import PreInput from './PreInput';
 import styles from './SearchBodyContainer.module.scss';
 
 import SearchResults from '@/components/Search/SearchResults';
-import Spinner, { SpinnerSize, SpinnerSize } from '@/dls/Spinner/Spinner';
-import { getSearchQueryNavigationUrl, getSearchQueryNavigationUrl } from 'src/utils/navigation';
+import Spinner, { SpinnerSize } from '@/dls/Spinner/Spinner';
+import { getSearchQueryNavigationUrl } from '@/utils/navigation';
 import { VersesResponse } from 'types/ApiResponses';
 
 interface Props {
