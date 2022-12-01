@@ -141,6 +141,18 @@ const CommandBarBody: React.FC = () => {
           ...data.map((resultItem) => ({
             key: kalimatIdToNavigationKey(resultItem.type, resultItem.id),
             name: resultItem.longestMatchedToken,
+            // name: `<em>longestMatchedToken</em>: ${
+            //   resultItem.longestMatchedToken
+            // }</br> <em>text</em>: ${resultItem.text} </br> <em>enText</em>: ${
+            //   resultItem.enText
+            // } </br> <em>type</em>: ${resultItem.type} </br> <em>matches</em>: ${
+            //   resultItem.matches
+            // } </br> <em>rawId</em>: ${
+            //   resultItem.id
+            // }</br> <em>convertedId</em>: ${kalimatIdToNavigationKey(
+            //   resultItem.type,
+            //   resultItem.id,
+            // )}`,
             resultType: kalimatResultTypeToSearchNavigationType(resultItem.type),
             group: t('command-bar.navigations'),
           })),

@@ -46,9 +46,9 @@ import {
   PagesLookUpResponse,
 } from 'types/ApiResponses';
 import AudioData from 'types/AudioData';
-import { KalimatSearchAsYouTypeRequest } from 'types/Kalimat/KalimatSearchAsYouTypeRequest';
+import KalimatSearchAsYouTypeRequest from 'types/Kalimat/KalimatSearchAsYouTypeRequest';
 import KalimatSearchAsYouTypeResponse from 'types/Kalimat/KalimatSearchAsYouTypeResponse';
-import { KalimatSearchRequest } from 'types/Kalimat/KalimatSearchRequest';
+import KalimatSearchRequest from 'types/Kalimat/KalimatSearchRequest';
 import KalimatSearchResponse from 'types/Kalimat/KalimatSearchResponse';
 import { KalimatSearchResultFeedbackRequest } from 'types/Kalimat/KalimatSearchResultFeedbackRequest';
 import KalimatSearchResultFeedbackResponse from 'types/Kalimat/KalimatSearchResultFeedbackResponse';
@@ -204,27 +204,23 @@ export const getSearchResults = async (params: SearchRequest): Promise<SearchRes
  * Get the search results of a query.
  *
  * @param {KalimatSearchRequest} params
- * @param {string} method
  * @returns  {Promise<KalimatSearchResponse>}
  */
 export const getKalimatSearchResults = async (
   params: KalimatSearchRequest,
-  method = 'GET',
 ): Promise<KalimatSearchResponse> =>
-  fetcher(makeKalimatSearchResultsUrl(params), { ...KALIMAT_FETCH_OPTIONS, method });
+  fetcher(makeKalimatSearchResultsUrl(params), { ...KALIMAT_FETCH_OPTIONS });
 
 /**
  * Get the search results of a query.
  *
  * @param {KalimatSearchAsYouTypeRequest} params
- * @param {string} method
  * @returns  {Promise<KalimatSearchResponse>}
  */
 export const getKalimatSearchAsYouTypeResults = async (
   params: KalimatSearchAsYouTypeRequest,
-  method = 'GET',
 ): Promise<KalimatSearchAsYouTypeResponse> =>
-  fetcher(makeKalimatSearchAsYouTypeUrl(params), { ...KALIMAT_FETCH_OPTIONS, method });
+  fetcher(makeKalimatSearchAsYouTypeUrl(params), { ...KALIMAT_FETCH_OPTIONS });
 
 /**
  * Get the search results of a query.

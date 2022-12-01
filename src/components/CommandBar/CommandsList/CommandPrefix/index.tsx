@@ -1,3 +1,4 @@
+/* eslint-disable react/no-danger */
 import React from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
@@ -20,11 +21,17 @@ const CommandPrefix: React.FC<Props> = ({ name, type }) => {
         <NavigateIcon />
       </span>
       <p className={styles.name}>
-        {type === SearchNavigationType.SEARCH_PAGE
-          ? t('search-for', {
-              searchQuery: name,
-            })
-          : name}
+        <div
+          dangerouslySetInnerHTML={{
+            __html:
+              type === SearchNavigationType.SEARCH_PAGE
+                ? t('search-for', {
+                    searchQuery: name,
+                  })
+                : name,
+          }}
+          className={styles.name}
+        />
       </p>
     </div>
   );

@@ -10,8 +10,8 @@ import {
 } from '@/redux/defaultSettings/util';
 import { AdvancedCopyRequest, PagesLookUpRequest, SearchRequest } from 'types/ApiRequests';
 import KalimatApi from 'types/Kalimat/KalimatApi';
-import { KalimatSearchAsYouTypeRequest } from 'types/Kalimat/KalimatSearchAsYouTypeRequest';
-import { KalimatSearchRequest } from 'types/Kalimat/KalimatSearchRequest';
+import KalimatSearchAsYouTypeRequest from 'types/Kalimat/KalimatSearchAsYouTypeRequest';
+import KalimatSearchRequest from 'types/Kalimat/KalimatSearchRequest';
 import { KalimatSearchResultFeedbackRequest } from 'types/Kalimat/KalimatSearchResultFeedbackRequest';
 import { MushafLines, QuranFont } from 'types/QuranReader';
 

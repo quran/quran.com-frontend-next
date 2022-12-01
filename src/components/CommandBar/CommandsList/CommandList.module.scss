@@ -24,7 +24,6 @@ $itemHeight: calc(1.5 * var(--spacing-mega));
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: $itemHeight;
   font-size: var(--font-size-normal);
   padding-block-start: 0;
   padding-block-end: 0;
@@ -32,24 +31,19 @@ $itemHeight: calc(1.5 * var(--spacing-mega));
   padding-inline-end: var(--spacing-xsmall);
   cursor: pointer;
   color: var(--color-text-faded);
-  white-space: nowrap;
   position: relative;
   z-index: var(--z-index-default);
   &.selected {
     color: var(--color-text-default);
+    transition: transform var(--transition-fast);
+    width: 100%;
+    border-radius: var(--border-radius-rounded);
+    background: var(--color-background-alternative-faint);
+    z-index: var(--z-index-default);
   }
-}
-
-.highlight {
-  transition: transform var(--transition-fast);
-  height: $itemHeight;
-  width: 100%;
-  position: absolute;
-  border-radius: var(--border-radius-rounded);
-  background: var(--color-background-alternative-faint);
-  z-index: var(--z-index-default);
-  @include breakpoints.tablet {
-    margin-block-start: calc(-1 * var(--spacing-xsmall));
+  em {
+    font-weight: var(--font-weight-bold);
+    text-decoration: underline;
   }
 }
 
