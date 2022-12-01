@@ -320,10 +320,8 @@ export const makePageVersesUrl = (
  */
 export const makeFootnoteUrl = (footnoteId: string): string => makeUrl(`/foot_notes/${footnoteId}`);
 
-export const makeKalimatApiUrl = (
-  params: KalimatSearchRequest | KalimatSearchResultFeedbackRequest | KalimatSearchAsYouTypeRequest,
-  api: KalimatApi,
-) => `https://api.kalimat.dev:443/${api}?${stringify(params)}`;
+export const makeKalimatApiUrl = (params: Record<string, any>, api: KalimatApi) =>
+  `https://api.kalimat.dev:443/${api}?${stringify(params)}`;
 
 export const makeDonateUrl = (showDonationPopup = false) =>
   `https://donate.quran.com${showDonationPopup ? '?showDonationPopup' : ''}`;
