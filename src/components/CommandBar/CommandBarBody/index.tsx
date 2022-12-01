@@ -140,7 +140,7 @@ const CommandBarBody: React.FC = () => {
         toBeGroupedCommands = [
           ...data.map((resultItem) => ({
             key: kalimatIdToNavigationKey(resultItem.type, resultItem.id),
-            name: resultItem.longestMatchedToken,
+            name: resultItem.matches,
             // name: `<em>longestMatchedToken</em>: ${
             //   resultItem.longestMatchedToken
             // }</br> <em>text</em>: ${resultItem.text} </br> <em>enText</em>: ${
