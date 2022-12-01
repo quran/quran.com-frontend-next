@@ -11,8 +11,8 @@ import BookmarkedIcon from '../../../public/icons/bookmark.svg';
 import UnBookmarkedIcon from '../../../public/icons/unbookmarked.svg';
 import PopoverMenu from '../dls/PopoverMenu/PopoverMenu';
 
-import Spinner from 'src/components/dls/Spinner/Spinner';
-import { ToastStatus, useToast } from 'src/components/dls/Toast/Toast';
+import Spinner from '@/components/dls/Spinner/Spinner';
+import { ToastStatus, useToast } from '@/components/dls/Toast/Toast';
 import { selectBookmarks, toggleVerseBookmark } from 'src/redux/slices/QuranReader/bookmarks';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import { getMushafId } from 'src/utils/api';

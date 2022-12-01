@@ -9,6 +9,8 @@ import layoutStyles from '../../../pages/index.module.scss';
 
 import styles from './CollectionDetailContainer.module.scss';
 
+import CollectionDetail from '@/components/Collection/CollectionDetail/CollectionDetail';
+import Button, { ButtonVariant } from '@/components/dls/Button/Button';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import Spinner, { SpinnerSize } from '@/dls/Spinner/Spinner';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
@@ -21,8 +23,6 @@ import {
   getCollectionNavigationUrl,
   getProfileNavigationUrl,
 } from '@/utils/navigation';
-import CollectionDetail from 'src/components/Collection/CollectionDetail/CollectionDetail';
-import Button, { ButtonVariant } from 'src/components/dls/Button/Button';
 import DataContext from 'src/contexts/DataContext';
 import Error from 'src/pages/_error';
 import {

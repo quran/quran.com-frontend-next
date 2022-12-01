@@ -2,7 +2,7 @@ import ChevronDownIcon from '../../../../public/icons/chevron-down.svg';
 
 import styles from './CollectionSorter.module.scss';
 
-import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
+import PopoverMenu from '@/components/dls/PopoverMenu/PopoverMenu';
 
 const CollectionSorter = ({ options, selectedOptionId, onChange }) => {
   const selectedOption = options.find((option) => option.id === selectedOptionId);

@@ -9,18 +9,18 @@ import CollectionSorter from '../CollectionSorter/CollectionSorter';
 
 import styles from './CollectionDetail.module.scss';
 
+import DataFetcher from '@/components/DataFetcher';
+import Button, { ButtonVariant } from '@/components/dls/Button/Button';
+import Collapsible from '@/components/dls/Collapsible/Collapsible';
+import PopoverMenu from '@/components/dls/PopoverMenu/PopoverMenu';
+import TranslationText from '@/components/QuranReader/TranslationView/TranslationText';
+import VerseTextPreview from '@/components/QuranReader/VerseTextPreview';
 import ConfirmationModal from '@/dls/ConfirmationModal/ConfirmationModal';
 import { useConfirm } from '@/dls/ConfirmationModal/hooks';
 import ChevronDownIcon from '@/icons/chevron-down.svg';
 import OverflowMenuIcon from '@/icons/menu_more_horiz.svg';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getChapterWithStartingVerseUrl } from '@/utils/navigation';
-import DataFetcher from 'src/components/DataFetcher';
-import Button, { ButtonVariant } from 'src/components/dls/Button/Button';
-import Collapsible from 'src/components/dls/Collapsible/Collapsible';
-import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
-import TranslationText from 'src/components/QuranReader/TranslationView/TranslationText';
-import VerseTextPreview from 'src/components/QuranReader/VerseTextPreview';
 import DataContext from 'src/contexts/DataContext';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';

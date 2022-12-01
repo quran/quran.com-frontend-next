@@ -1,9 +1,9 @@
 import useTranslation from 'next-translate/useTranslation';
 
+import PopoverMenu from '@/components/dls/PopoverMenu/PopoverMenu';
 import { useConfirm } from '@/dls/ConfirmationModal/hooks';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import { logButtonClick } from '@/utils/eventLogger';
-import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
 import { deleteCollection } from 'src/utils/auth/api';
 
 const DeleteCollectionAction = ({ collectionId, onDone, collectionName }) => {

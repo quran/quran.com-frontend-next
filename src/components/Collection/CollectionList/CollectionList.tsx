@@ -14,12 +14,12 @@ import styles from './CollectionList.module.scss';
 import DeleteCollectionAction from './DeleteCollectionAction';
 import RenameCollectionAction from './RenameCollectionAction';
 
+import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/components/dls/Button/Button';
+import PopoverMenu from '@/components/dls/PopoverMenu/PopoverMenu';
 import ConfirmationModal from '@/dls/ConfirmationModal/ConfirmationModal';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import { logButtonClick, logValueChange } from '@/utils/eventLogger';
 import { toLocalizedNumber } from '@/utils/locale';
-import Button, { ButtonShape, ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
-import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
 import { getCollectionsList, updateCollection } from 'src/utils/auth/api';
 import { makeCollectionsUrl } from 'src/utils/auth/apiPaths';
 import { Collection } from 'types/Collection';

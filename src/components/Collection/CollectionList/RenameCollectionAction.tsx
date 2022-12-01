@@ -1,7 +1,7 @@
 import useTranslation from 'next-translate/useTranslation';
 
+import PopoverMenu from '@/components/dls/PopoverMenu/PopoverMenu';
 import { logButtonClick } from '@/utils/eventLogger';
-import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
 
 const RenameCollectionAction = ({ onClick }) => {
   const { t } = useTranslation();

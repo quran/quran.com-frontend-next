@@ -9,14 +9,14 @@ import ThumbsUpIcon from '../../../../public/icons/thumbsup-outline.svg';
 
 import styles from './SearchResultItem.module.scss';
 
+import Button, { ButtonVariant } from '@/components/dls/Button/Button';
+import QuranWord from '@/components/dls/QuranWord/QuranWord';
+import { ToastStatus, useToast } from '@/components/dls/Toast/Toast';
 import Link from '@/dls/Link/Link';
 import { getChapterData } from '@/utils/chapter';
 import { toLocalizedVerseKey } from '@/utils/locale';
 import { getChapterNumberFromKey } from '@/utils/verse';
 import { submitKalimatSearchResultFeedback } from 'src/api';
-import Button, { ButtonVariant } from 'src/components/dls/Button/Button';
-import QuranWord from 'src/components/dls/QuranWord/QuranWord';
-import { ToastStatus, useToast } from 'src/components/dls/Toast/Toast';
 import useGetChaptersData from 'src/hooks/useGetChaptersData';
 import { logButtonClick } from 'src/utils/eventLogger';
 import { getChapterWithStartingVerseUrl } from 'src/utils/navigation';

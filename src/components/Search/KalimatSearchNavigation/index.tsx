@@ -9,9 +9,9 @@ import NavigationItem from '../NavigationItem';
 
 import styles from './KalimatSearchNavigation.module.scss';
 
+import Button, { ButtonVariant } from '@/components/dls/Button/Button';
+import { ToastStatus, useToast } from '@/components/dls/Toast/Toast';
 import { submitKalimatSearchResultFeedback } from 'src/api';
-import Button, { ButtonVariant } from 'src/components/dls/Button/Button';
-import { ToastStatus, useToast } from 'src/components/dls/Toast/Toast';
 import DataContext from 'src/contexts/DataContext';
 import { getChapterData } from 'src/utils/chapter';
 import ChaptersData from 'types/ChaptersData';

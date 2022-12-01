@@ -13,7 +13,7 @@ import SaveToCollectionModal, {
 } from '../Collection/SaveToCollectionModal/SaveToCollectionModal';
 import PopoverMenu from '../dls/PopoverMenu/PopoverMenu';
 
-import { ToastStatus, useToast } from 'src/components/dls/Toast/Toast';
+import { ToastStatus, useToast } from '@/components/dls/Toast/Toast';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import { getMushafId } from 'src/utils/api';
 import {
