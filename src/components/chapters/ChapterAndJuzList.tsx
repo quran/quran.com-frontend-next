@@ -34,6 +34,8 @@ type ChapterAndJuzListProps = {
 enum Sort {
   ASC = 'ascending',
   DESC = 'descending',
+  A_ASC = 'a_ascending',
+  A_DESC = 'a_descending',
 }
 
 const MOST_VISITED_CHAPTERS = {
@@ -58,7 +60,15 @@ const ChapterAndJuzList: React.FC<ChapterAndJuzListProps> = ({
 
   const onSort = () => {
     setSortBy((prevValue) => {
-      const newValue = prevValue === Sort.DESC ? Sort.ASC : Sort.DESC;
+      const newValue = prevValue === Sort.ASC 
+      ? Sort.DESC 
+      : prevValue === Sort.DESC 
+      ? Sort.A_ASC 
+      : prevValue === Sort.A_ASC 
+      ? Sort.A_DESC
+      : Sort.ASC
+      ;
+
       // eslint-disable-next-line i18next/no-literal-string
       logValueChange(`homepage_${view}_sorting`, prevValue, newValue);
       return newValue;
@@ -75,9 +85,13 @@ const ChapterAndJuzList: React.FC<ChapterAndJuzListProps> = ({
 
   const sortedChapters = useMemo(
     () =>
-      sortBy === Sort.DESC
+      sortBy === Sort.ASC
+        ? chapters
+        : sortBy === Sort.DESC
         ? chapters.slice().sort((a, b) => Number(b.id) - Number(a.id))
-        : chapters,
+        : sortBy === Sort.A_ASC
+        ? chapters.slice().sort((a, b) => Number(a.versesCount) - Number(b.versesCount))
+        : chapters.slice().sort((a, b) => Number(b.versesCount) - Number(a.versesCount)),
     [sortBy, chapters],
   );
 
