@@ -16,6 +16,7 @@ import CaretDownIcon from '@/icons/caret-down.svg';
 import { logButtonClick, logValueChange } from '@/utils/eventLogger';
 import { shouldUseMinimalLayout, toLocalizedNumber } from '@/utils/locale';
 import Chapter from 'types/Chapter';
+import { openStdin } from 'process';
 
 enum View {
   Surah = 'surah',
@@ -60,13 +61,17 @@ const ChapterAndJuzList: React.FC<ChapterAndJuzListProps> = ({
 
   const onSort = () => {
     setSortBy((prevValue) => {
-      const newValue = prevValue === Sort.ASC 
-      ? Sort.DESC 
-      : prevValue === Sort.DESC 
-      ? Sort.A_ASC 
-      : prevValue === Sort.A_ASC 
-      ? Sort.A_DESC
-      : Sort.ASC
+
+      var dropdown = document.getElementById("dropdown") as HTMLSelectElement;
+      var option_value = dropdown.options[dropdown.selectedIndex].value;
+ 
+      const newValue = option_value === "ASC" 
+      ? Sort.ASC 
+      : option_value === "DESC"  
+      ? Sort.DESC
+      : option_value === "A_ASC"
+      ? Sort.A_ASC
+      : Sort.A_DESC
       ;
 
       // eslint-disable-next-line i18next/no-literal-string
@@ -106,18 +111,14 @@ const ChapterAndJuzList: React.FC<ChapterAndJuzListProps> = ({
       <div className={styles.tabsContainer}>
         <Tabs tabs={tabs} selected={view} onSelect={onTabSelected} />
         <div className={styles.sorter}>
-          <div className={styles.uppercase}>{t('sort.by')}:</div>
-          <div
-            className={styles.sortByValue}
-            onClick={onSort}
-            role="button"
-            onKeyPress={onSort}
-            tabIndex={0}
-          >
-            <span>{t(`sort.${sortBy}`)}</span>
-            <span className={sortBy === Sort.ASC ? styles.rotate180 : ''}>
-              <CaretDownIcon />
-            </span>
+          <div className={styles.uppercase}>{t('sort.by')}:  
+            <select id="dropdown" onChange={onSort}>
+              <option value="ASC">Ascending</option>
+              <option value="DESC">Descending</option>
+              <option value="A_ASC">Ascending Ayahs</option>
+              <option value="A_DESC">Descieding Ayahs</option>
+            </select>
+          
           </div>
         </div>
       </div>
