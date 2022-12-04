@@ -80,6 +80,17 @@ const ChapterAndJuzList: React.FC<ChapterAndJuzListProps> = ({
     });
   };
 
+  const onSortJuz = () => {
+    setSortBy((prevValue) => {
+
+      const newValue = prevValue === Sort.DESC ? Sort.ASC : Sort.DESC;
+
+      // eslint-disable-next-line i18next/no-literal-string
+      logValueChange(`homepage_${view}_sorting`, prevValue, newValue);
+      return newValue;
+    });
+  };
+
   const tabs = useMemo(
     () => [
       { title: t(`${View.Surah}`), value: View.Surah },
@@ -111,15 +122,25 @@ const ChapterAndJuzList: React.FC<ChapterAndJuzListProps> = ({
       <div className={styles.tabsContainer}>
         <Tabs tabs={tabs} selected={view} onSelect={onTabSelected} />
         <div className={styles.sorter}>
-          <div className={styles.uppercase}>{t('sort.by')}:  
-            <select id="dropdown" onChange={onSort}>
+          <div className={styles.uppercase}>{t('sort.by')}:</div>
+          {view === View.Surah && (<select id="dropdown" onChange={onSort}>
               <option value="ASC">Ascending</option>
               <option value="DESC">Descending</option>
               <option value="A_ASC">Ascending Ayahs</option>
-              <option value="A_DESC">Descieding Ayahs</option>
-            </select>
-          
-          </div>
+              <option value="A_DESC">Descending Ayahs</option>
+            </select>)}
+            {view === View.Juz && <div
+            className={styles.sortByValue}
+            onClick={onSortJuz}
+            role="button"
+            onKeyPress={onSortJuz}
+            tabIndex={0}
+          >
+            <span>{t(`sort.${sortBy}`)}</span>
+            <span className={sortBy === Sort.ASC ? styles.rotate180 : ''}>
+              <CaretDownIcon />
+            </span>
+          </div>}
         </div>
       </div>
       <div
