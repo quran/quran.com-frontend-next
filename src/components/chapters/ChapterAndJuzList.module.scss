@@ -75,6 +75,30 @@
   }
 }
 
+.sortByValueDropDown {
+  // background: rgba(0, 0, 0, 0);
+  background-color: var(--color-background-default);
+  border: none;
+  display: flex;
+  align-items: center;
+  font-weight: var(--font-weight-bold);
+  text-transform: uppercase;
+  cursor: pointer;
+  margin-inline-start: var(--spacing-xxsmall);
+  & > span {
+    display: flex;
+    align-items: center;
+  }
+  & > .rotate180 > svg {
+    transform: rotate(180deg);
+  }
+  & > span > svg {
+    width: var(--spacing-small);
+    margin-inline-start: var(--spacing-xxsmall);
+    transition: transform var(--transition-regular);
+  }
+}
+
 .loadingContainer {
   min-height: 100vh; // reduce layout shift
 }
