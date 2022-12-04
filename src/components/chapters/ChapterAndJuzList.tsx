@@ -65,11 +65,11 @@ const ChapterAndJuzList: React.FC<ChapterAndJuzListProps> = ({
       var dropdown = document.getElementById("dropdown") as HTMLSelectElement;
       var option_value = dropdown.options[dropdown.selectedIndex].value;
  
-      const newValue = option_value === "ASC" 
+      const newValue = option_value === Sort.ASC  
       ? Sort.ASC 
-      : option_value === "DESC"  
+      : option_value === Sort.DESC 
       ? Sort.DESC
-      : option_value === "A_ASC"
+      : option_value === Sort.A_ASC
       ? Sort.A_ASC
       : Sort.A_DESC
       ;
@@ -124,20 +124,20 @@ const ChapterAndJuzList: React.FC<ChapterAndJuzListProps> = ({
         <div className={styles.sorter}>
           <div className={styles.uppercase}>{t('sort.by')}:</div>
           {view === View.Surah && (<select id="dropdown" onChange={onSort}>
-              <option value="ASC">Ascending</option>
-              <option value="DESC">Descending</option>
-              <option value="A_ASC">Ascending Ayahs</option>
-              <option value="A_DESC">Descending Ayahs</option>
+              <option value="ascending">Ascending</option>
+              <option value="descending">Descending</option>
+              <option value="a_ascending">Ascending Ayahs</option>
+              <option value="a_descending">Descending Ayahs</option>
             </select>)}
-            {view === View.Juz && <div
+          {view === View.Juz && <div
             className={styles.sortByValue}
             onClick={onSortJuz}
             role="button"
             onKeyPress={onSortJuz}
             tabIndex={0}
           >
-            <span>{t(`sort.${sortBy}`)}</span>
-            <span className={sortBy === Sort.ASC ? styles.rotate180 : ''}>
+            <span>{t(sortBy === Sort.DESC ? Sort.DESC : Sort.ASC)}</span>
+            <span className={sortBy === Sort.DESC ? '' : styles.rotate180}>
               <CaretDownIcon />
             </span>
           </div>}
