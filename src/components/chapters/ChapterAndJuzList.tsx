@@ -130,6 +130,7 @@ const ChapterAndJuzList: React.FC<ChapterAndJuzListProps> = ({
               id="dropdown"
               onChange={onSort}
               className={styles.sortByValueDropDown}
+              value = {sortBy}
             >
               <option value="ascending">Ascending</option>
               <option value="descending">Descending</option>
