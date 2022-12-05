@@ -7,9 +7,9 @@
     "email-placeholder": "E-posta Adresi",
     "login-error": {
         "AuthenticationError": "Kimlik doğrulama başarısız oldu. Lütfen daha sonra tekrar deneyiniz",
-        "TokenExpiredError": "Çıkış yaptınız, lütfen tekrar giriş yapın."
+        "TokenExpiredError": "Oturumunuz kapatıldı, lütfen tekrar giriş yapın."
     },
-    "login-title": "Kuran.com'a giriş yapın",
-    "other-options": "Diğer Giriş Seçenekleri",
+    "login-title": "Quran.com'a giriş yapın",
+    "other-options": "Diğer Oturum Açma Seçenekleri",
     "verify-code": "Sağlanan güvenlik kodunun aşağıdaki metinle eşleştiğini doğrulayın:"
 }

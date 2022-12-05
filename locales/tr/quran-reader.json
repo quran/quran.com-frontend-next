@@ -1,9 +1,9 @@
 {
     "add-collection": "Koleksiyon Ekle",
-    "advanced-copy": "Gelişmiş Kopya",
+    "advanced-copy": "Gelişmiş Kopyalama",
     "aria": {
-        "read-ayah-refls": "Ayah Yansımalarını Okuyun",
-        "read-tafsirs": "Ayah Tefsirlerini Okuyun"
+        "read-ayah-refls": "Ayetin Yansımalarını Okuyun",
+        "read-tafsirs": "Ayetin Tefsirlerini Okuyun"
     },
     "ayatul-kursi": "Ayetel Kürsi",
     "back-to-ayah": "Ayete geri dön",
@@ -59,7 +59,7 @@
     "surah-info": "Sure Bilgileri",
     "tafsirs": "Tefsirler",
     "text-copied": "Metin panoya kopyalandı!",
-    "trans-change": "Değiştirmek",
+    "trans-change": "Değiştir",
     "translation-by": "Çeviri:",
     "verses-range": "Ayet aralığı",
     "view-on-quran-reflect": "Kuran'da görüntüle"
