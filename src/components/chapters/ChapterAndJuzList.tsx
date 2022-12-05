@@ -16,7 +16,6 @@ import CaretDownIcon from "@/icons/caret-down.svg";
 import { logButtonClick, logValueChange } from "@/utils/eventLogger";
 import { shouldUseMinimalLayout, toLocalizedNumber } from "@/utils/locale";
 import Chapter from "types/Chapter";
-import { openStdin } from "process";
 
 enum View {
   Surah = "surah",
@@ -130,7 +129,7 @@ const ChapterAndJuzList: React.FC<ChapterAndJuzListProps> = ({
               id="dropdown"
               onChange={onSort}
               className={styles.sortByValueDropDown}
-              value = {sortBy}
+              value={sortBy}
             >
               <option value="ascending">Ascending</option>
               <option value="descending">Descending</option>
