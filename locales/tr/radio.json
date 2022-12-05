@@ -6,7 +6,7 @@
             "title": "Amma cüzü"
         },
         "popular-recitations": {
-            "description": "Günlük küratörlü anlatım beslemesi",
+            "description": "Günlük küratörlü okuma akışı",
             "title": "Popüler Anlatımlar"
         },
         "surah-al-kahf": {
@@ -18,7 +18,7 @@
             "title": "Yasin, Vakı'a, Mülk"
         }
     },
-    "curated-stations": "Küratörlü İstasyonlar",
+    "curated-stations": "Veli İstasyonları",
     "pause-radio": "Radyoyu Duraklat",
     "play-radio": "Radyo Çal",
     "radio-desc": "Çeşitli okuyucular tarafından Kur'an-ı Kerim'in kesintisiz güzel okunuşunu dinleyin.",
