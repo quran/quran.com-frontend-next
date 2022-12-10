@@ -173,12 +173,12 @@ export const makeKalimatSearchResultFeedbackUrl = ({
   );
 
 export const makeKalimatSearchAsYouTypeUrl = ({ query }: KalimatSearchAsYouTypeRequest) =>
-  makeKalimatApiUrl(
+  `${makeKalimatApiUrl(
     {
       query,
     },
     KalimatApi.SearchAsYouType,
-  );
+  )}&indexes=['autocomplete_quran_chapters']`;
 
 /**
  * Compose the url for the navigation search API that is used to show results inside the command bar.
