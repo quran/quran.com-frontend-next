@@ -19,6 +19,9 @@ export const kalimatResultTypeToSearchNavigationType = (
   if (type === KalimatResultType.QuranVerse) {
     return SearchNavigationType.AYAH;
   }
+  if (type === KalimatResultType.QuranRange) {
+    return SearchNavigationType.RANGE;
+  }
   return SearchNavigationType.SURAH;
 };
 

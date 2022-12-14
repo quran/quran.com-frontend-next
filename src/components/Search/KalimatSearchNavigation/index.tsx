@@ -11,6 +11,8 @@ import styles from './KalimatSearchNavigation.module.scss';
 
 import Button, { ButtonVariant } from '@/components/dls/Button/Button';
 import { ToastStatus, useToast } from '@/components/dls/Toast/Toast';
+import { toLocalizedNumber } from '@/utils/locale';
+import { getVerseNumberRangeFromKey } from '@/utils/verse';
 import { submitKalimatSearchResultFeedback } from 'src/api';
 import DataContext from 'src/contexts/DataContext';
 import { getChapterData } from 'src/utils/chapter';
@@ -25,10 +27,12 @@ type Props = {
   searchQuery: string;
 };
 
+// eslint-disable-next-line react-func/max-lines-per-function
 const getSearchNavigationResult = (
   chaptersData: ChaptersData,
   result: KalimatResultItem,
   t: Translate,
+  locale: string,
 ): SearchNavigationResult => {
   const { id, type } = result;
   if (type === KalimatResultType.QuranJuz) {
@@ -47,6 +51,16 @@ const getSearchNavigationResult = (
       resultType: SearchNavigationType.PAGE,
     };
   }
+  if (type === KalimatResultType.QuranRange) {
+    const { surah, from, to } = getVerseNumberRangeFromKey(id);
+    return {
+      name: `${t('common:surah')} ${
+        getChapterData(chaptersData, `${surah}`).transliteratedName
+      } ${t('common:ayah')} ${toLocalizedNumber(from, locale)} - ${toLocalizedNumber(to, locale)}`,
+      key: id,
+      resultType: SearchNavigationType.RANGE,
+    };
+  }
   // when it's a chapter
   return {
     name: getChapterData(chaptersData, id).transliteratedName,
@@ -59,7 +73,7 @@ const KalimatSearchNavigation: React.FC<Props> = ({ isSearchDrawer, searchQuery,
   const { id } = result;
   const chaptersData = useContext(DataContext);
   const toast = useToast();
-  const { t } = useTranslation();
+  const { t, lang } = useTranslation();
 
   const onFeedbackIconClicked = (isThumbsUp: boolean) => {
     const feedbackRequestParams = {
@@ -102,7 +116,7 @@ const KalimatSearchNavigation: React.FC<Props> = ({ isSearchDrawer, searchQuery,
       </div>
       <NavigationItem
         isSearchDrawer={isSearchDrawer}
-        navigation={getSearchNavigationResult(chaptersData, result, t)}
+        navigation={getSearchNavigationResult(chaptersData, result, t, lang)}
       />
     </div>
   );
