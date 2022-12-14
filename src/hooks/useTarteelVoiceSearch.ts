@@ -7,6 +7,8 @@ import { useEffect, useState, useCallback, useRef } from 'react';
 import { AudioWorklet } from 'audio-worklet';
 
 import useBrowserLayoutEffect from '@/hooks/useBrowserLayoutEffect';
+import SearchQuerySource from '@/types/SearchQuerySource';
+import SearchType from '@/types/SearchType';
 import { logEmptySearchResults, logEvent } from '@/utils/eventLogger';
 import { getAverageVolume } from 'src/audioInput/voice';
 import Event from 'types/Tarteel/Event';
@@ -111,7 +113,7 @@ const useTarteelVoiceSearch = (startRecording = true) => {
           setIsLoading(false);
           setSearchResult(data as SearchResult);
           if (!(data as SearchResult).matches.length) {
-            logEmptySearchResults(data.queryText, 'tarteel', 'voice');
+            logEmptySearchResults(data.queryText, SearchQuerySource.Tarteel, SearchType.Voice);
           }
           stopFlow(webSocket, analyser, micWorkletNode, micSourceNode, audioContext);
           break;

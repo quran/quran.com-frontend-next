@@ -8,7 +8,8 @@ import styles from './SidebarNavigation.module.scss';
 import VerseListItem from './VerseListItem';
 
 import { selectLastReadVerseKey } from '@/redux/slices/QuranReader/readingTracker';
-import { logEmptySearchResults } from '@/utils/eventLogger';
+import SearchQuerySource from '@/types/SearchQuerySource';
+import { logEmptySearchResults, logTextSearchQuery } from '@/utils/eventLogger';
 import { toLocalizedNumber } from '@/utils/locale';
 import { getChapterWithStartingVerseUrl } from '@/utils/navigation';
 import { generateChapterVersesKeys, getVerseNumberFromKey } from '@/utils/verse';
@@ -38,7 +39,9 @@ const VerseList = () => {
 
   useEffect(() => {
     if (!filteredVerseKeys.length) {
-      logEmptySearchResults(searchQuery, 'sidebar_navigation_verse_list');
+      logEmptySearchResults(searchQuery, SearchQuerySource.SidebarNavigationVersesList);
+    } else {
+      logTextSearchQuery(searchQuery, SearchQuerySource.SidebarNavigationVersesList);
     }
   }, [searchQuery, filteredVerseKeys]);
 

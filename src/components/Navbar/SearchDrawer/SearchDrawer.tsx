@@ -14,6 +14,7 @@ import { selectNavbar } from '@/redux/slices/navbar';
 import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
 import { addSearchHistoryRecord } from '@/redux/slices/Search/search';
 import { selectIsSearchDrawerVoiceFlowStarted } from '@/redux/slices/voiceSearch';
+import SearchQuerySource from '@/types/SearchQuerySource';
 import { areArraysEqual } from '@/utils/array';
 import { logButtonClick, logEmptySearchResults, logTextSearchQuery } from '@/utils/eventLogger';
 import { getSearchResults } from 'src/api';
@@ -57,7 +58,7 @@ const SearchDrawer: React.FC = () => {
     // only when the search query has a value we call the API.
     if (debouncedSearchQuery) {
       dispatch({ type: addSearchHistoryRecord.type, payload: debouncedSearchQuery });
-      logTextSearchQuery(debouncedSearchQuery, 'search_drawer');
+      logTextSearchQuery(debouncedSearchQuery, SearchQuerySource.SearchDrawer);
       setIsSearching(true);
       getSearchResults({
         query: debouncedSearchQuery,
@@ -73,7 +74,7 @@ const SearchDrawer: React.FC = () => {
             setSearchResult(response);
             // if there is no navigations nor verses in the response
             if (response.pagination.totalRecords === 0 && !response.result.navigation.length) {
-              logEmptySearchResults(debouncedSearchQuery, 'search_drawer');
+              logEmptySearchResults(debouncedSearchQuery, SearchQuerySource.SearchDrawer);
             }
           }
         })

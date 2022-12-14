@@ -11,7 +11,8 @@ import styles from './SidebarNavigation.module.scss';
 import Link from '@/dls/Link/Link';
 import { SCROLL_TO_NEAREST_ELEMENT, useScrollToElement } from '@/hooks/useScrollToElement';
 import { selectLastReadVerseKey } from '@/redux/slices/QuranReader/readingTracker';
-import { logEmptySearchResults } from '@/utils/eventLogger';
+import SearchQuerySource from '@/types/SearchQuerySource';
+import { logEmptySearchResults, logTextSearchQuery } from '@/utils/eventLogger';
 import { toLocalizedNumber } from '@/utils/locale';
 import { getSurahNavigationUrl } from '@/utils/navigation';
 import DataContext from 'src/contexts/DataContext';
@@ -25,7 +26,9 @@ const filterSurah = (surah, searchQuery: string) => {
 
   const filteredSurah = fuse.search(searchQuery).map(({ item }) => item);
   if (!filteredSurah.length) {
-    logEmptySearchResults(searchQuery, 'sidebar_navigation_chapter_list');
+    logEmptySearchResults(searchQuery, SearchQuerySource.SidebarNavigationChaptersList);
+  } else {
+    logTextSearchQuery(searchQuery, SearchQuerySource.SidebarNavigationChaptersList);
   }
   return filteredSurah as Chapter[];
 };

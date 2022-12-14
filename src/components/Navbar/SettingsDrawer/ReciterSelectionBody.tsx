@@ -13,6 +13,7 @@ import RadioGroup, { RadioGroupOrientation } from '@/dls/Forms/RadioGroup/RadioG
 import SpinnerContainer from '@/dls/Spinner/SpinnerContainer';
 import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
 import IconSearch from '@/icons/search.svg';
+import SearchQuerySource from '@/types/SearchQuerySource';
 import { makeAvailableRecitersUrl } from '@/utils/apiPaths';
 import { logEmptySearchResults, logItemSelectionChange } from '@/utils/eventLogger';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
@@ -29,7 +30,7 @@ export const filterReciters = (reciters, searchQuery: string): Reciter[] => {
 
   const filteredReciter = fuse.search(searchQuery).map(({ item }) => item);
   if (!filteredReciter.length) {
-    logEmptySearchResults(searchQuery, 'settings_drawer_translation');
+    logEmptySearchResults(searchQuery, SearchQuerySource.TranslationSettingsDrawer);
   }
   return filteredReciter as Reciter[];
 };

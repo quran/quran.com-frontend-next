@@ -11,6 +11,7 @@ import DataFetcher from '@/components/DataFetcher';
 import Input from '@/dls/Forms/Input';
 import IconSearch from '@/icons/search.svg';
 import { selectSelectedTafsirs, setSelectedTafsirs } from '@/redux/slices/QuranReader/tafsirs';
+import SearchQuerySource from '@/types/SearchQuerySource';
 import { makeTafsirsUrl } from '@/utils/apiPaths';
 import { areArraysEqual } from '@/utils/array';
 import { logEmptySearchResults, logValueChange, logItemSelectionChange } from '@/utils/eventLogger';
@@ -25,7 +26,7 @@ const filterTafsirs = (tafsirs, searchQuery: string): TafsirInfo[] => {
 
   const filteredTafsirs = fuse.search(searchQuery).map(({ item }) => item);
   if (!filteredTafsirs.length) {
-    logEmptySearchResults(searchQuery, 'settings_drawer_tafsir');
+    logEmptySearchResults(searchQuery, SearchQuerySource.TafsirSettingsDrawer);
   }
   return filteredTafsirs as TafsirInfo[];
 };
