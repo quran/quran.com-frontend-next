@@ -35,7 +35,6 @@ const RubControls: React.FC<Props> = ({ lastVerse }) => {
       )}
       <Button
         type={ButtonType.Secondary}
-        href={getRubNavigationUrl(rubElHizbNumber - 1)}
         onClick={() => {
           logButtonClick('rub_control_scroll_to_beginning');
           scrollToTop();

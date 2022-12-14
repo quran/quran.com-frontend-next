@@ -22,6 +22,7 @@ import FilterIcon from '@/icons/filter.svg';
 import SearchIcon from '@/icons/search.svg';
 import { getTranslationsInitialState } from '@/redux/defaultSettings/util';
 import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
+import SearchQuerySource from '@/types/SearchQuerySource';
 import { areArraysEqual } from '@/utils/array';
 import { getAllChaptersData } from '@/utils/chapter';
 import { logButtonClick, logEvent, logTextSearchQuery, logValueChange } from '@/utils/eventLogger';
@@ -132,7 +133,7 @@ const Search: NextPage<SearchProps> = ({ translations, chaptersData }): JSX.Elem
   const getResults = useCallback(
     (query: string, page: number, translation: string, language: string) => {
       setIsSearching(true);
-      logTextSearchQuery(query, 'search_page');
+      logTextSearchQuery(query, SearchQuerySource.SearchPage);
       getKalimatSearchResults({ query, exactMatchesOnly: exactMatchesOnly ? 1 : 0 })
         .then((kalimatResponse) => {
           if (kalimatResponse.length) {
@@ -221,7 +222,7 @@ const Search: NextPage<SearchProps> = ({ translations, chaptersData }): JSX.Elem
   }, [debouncedSearchQuery, getResults, selectedLanguages, selectedTranslations]);
 
   const onPageChange = (page: number) => {
-    logEvent('search_page_number_change');
+    logEvent('search_page_number_change', { page });
     setCurrentPage(page);
     getResults(debouncedSearchQuery, page, selectedTranslations, selectedLanguages);
   };
@@ -295,6 +296,11 @@ const Search: NextPage<SearchProps> = ({ translations, chaptersData }): JSX.Elem
   const onTranslationSearchClearClicked = () => {
     logButtonClick('search_page_translation_search_clear');
     setTranslationSearchQuery('');
+  };
+
+  const onTranslationsFiltersClicked = () => {
+    logButtonClick('search_page_translation_filter');
+    setIsContentModalOpen(true);
   };
 
   return (
@@ -374,7 +380,7 @@ const Search: NextPage<SearchProps> = ({ translations, chaptersData }): JSX.Elem
             </div>
             <div className={styles.filtersContainer}>
               <Button
-                onClick={() => setIsContentModalOpen(true)}
+                onClick={onTranslationsFiltersClicked}
                 size={ButtonSize.Small}
                 variant={ButtonVariant.Compact}
                 prefix={<FilterIcon />}

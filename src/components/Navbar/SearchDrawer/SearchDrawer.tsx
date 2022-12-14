@@ -16,6 +16,7 @@ import { selectNavbar } from '@/redux/slices/navbar';
 import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
 import { addSearchHistoryRecord } from '@/redux/slices/Search/search';
 import { selectIsSearchDrawerVoiceFlowStarted } from '@/redux/slices/voiceSearch';
+import SearchQuerySource from '@/types/SearchQuerySource';
 import { areArraysEqual } from '@/utils/array';
 import { logButtonClick, logTextSearchQuery } from '@/utils/eventLogger';
 import { getFilteredVerses, getKalimatSearchResults } from 'src/api';
@@ -61,7 +62,7 @@ const SearchDrawer: React.FC = () => {
     // only when the search query has a value we call the API.
     if (debouncedSearchQuery) {
       dispatch({ type: addSearchHistoryRecord.type, payload: debouncedSearchQuery });
-      logTextSearchQuery(debouncedSearchQuery, 'search_drawer');
+      logTextSearchQuery(debouncedSearchQuery, SearchQuerySource.SearchDrawer);
       setIsSearching(true);
       getKalimatSearchResults({ query: debouncedSearchQuery })
         .then((kalimatResponse) => {
