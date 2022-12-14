@@ -148,12 +148,14 @@ export const makeKalimatSearchResultsUrl = ({
   query,
   exactMatchesOnly = 1,
   numResults = 30,
+  getText = 0,
 }: KalimatSearchRequest) =>
   makeKalimatApiUrl(
     {
       query,
       exactMatchesOnly,
       numResults,
+      getText,
     },
     KalimatApi.Search,
   );
