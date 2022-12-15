@@ -11,6 +11,7 @@ import styles from './KalimatSearchNavigation.module.scss';
 
 import Button, { ButtonVariant } from '@/components/dls/Button/Button';
 import { ToastStatus, useToast } from '@/components/dls/Toast/Toast';
+import { getKalimatJuzNumber, getKalimatPageNumber } from '@/utils/kalimat/search';
 import { toLocalizedNumber } from '@/utils/locale';
 import { getVerseNumberRangeFromKey } from '@/utils/verse';
 import { submitKalimatSearchResultFeedback } from 'src/api';
@@ -36,7 +37,7 @@ const getSearchNavigationResult = (
 ): SearchNavigationResult => {
   const { id, type } = result;
   if (type === KalimatResultType.QuranJuz) {
-    const juzNumber = id.substring(id.indexOf('j') + 1);
+    const juzNumber = getKalimatJuzNumber(id);
     return {
       name: t('common:juz'),
       key: juzNumber,
@@ -44,7 +45,7 @@ const getSearchNavigationResult = (
     };
   }
   if (type === KalimatResultType.QuranPage) {
-    const pageNumber = id.substring(id.indexOf('p') + 1);
+    const pageNumber = getKalimatPageNumber(id);
     return {
       name: t('common:page'),
       key: pageNumber,
