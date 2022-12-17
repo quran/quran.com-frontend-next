@@ -174,10 +174,14 @@ export const makeKalimatSearchResultFeedbackUrl = ({
     KalimatApi.Feedback,
   );
 
-export const makeKalimatSearchAsYouTypeUrl = ({ query }: KalimatSearchAsYouTypeRequest) =>
+export const makeKalimatSearchAsYouTypeUrl = ({
+  query,
+  highlight = 0,
+}: KalimatSearchAsYouTypeRequest) =>
   `${makeKalimatApiUrl(
     {
       query,
+      highlight,
     },
     KalimatApi.SearchAsYouType,
   )}&indexes=['autocomplete_quran_chapters']`;

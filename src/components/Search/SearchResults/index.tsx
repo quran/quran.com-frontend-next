@@ -41,7 +41,7 @@ const SearchResults: React.FC<Props> = ({
         <p className={styles.header}>
           {t('common:search-results', {
             count: toLocalizedNumber(
-              searchResult.pagination.totalRecords + Number(searchResult?.navigations?.length),
+              searchResult.pagination.totalRecords + Number(searchResult?.navigations?.length || 0),
               lang,
             ),
           })}

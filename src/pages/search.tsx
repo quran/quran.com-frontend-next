@@ -139,7 +139,10 @@ const Search: NextPage<SearchProps> = ({ translations, chaptersData }): JSX.Elem
           if (kalimatResponse.length) {
             getFilteredVerses({
               filters: kalimatResponse
-                .filter((result) => result.type === KalimatResultType.QuranVerse)
+                .filter(
+                  (result) =>
+                    result.type === KalimatResultType.QuranVerse && result.navigational !== 1,
+                )
                 .map((result) => `${result.id}`)
                 .join(','),
               fields: QuranFont.QPCHafs,
@@ -158,7 +161,9 @@ const Search: NextPage<SearchProps> = ({ translations, chaptersData }): JSX.Elem
                   setSearchResult({
                     ...response,
                     navigations: kalimatResponse.filter(
-                      (result) => result.type !== KalimatResultType.QuranVerse,
+                      (result) =>
+                        result.type !== KalimatResultType.QuranVerse ||
+                        (result.type === KalimatResultType.QuranVerse && result.navigational === 1),
                     ),
                   });
                 }

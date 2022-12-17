@@ -5,6 +5,7 @@ interface KalimatResultItem {
   enText: string;
   text: string;
   type: KalimatResultType;
+  navigational: 1 | 0;
 }
 
 export default KalimatResultItem;
