@@ -101,7 +101,7 @@ const AuthorInfo: React.FC<Props> = ({
         </Link>
         <div>
           <span className={styles.date}>{formattedDate}</span>
-          {verseReferences && (
+          {verseReferences.length !== 0 && (
             <>
               <span className={styles.separator}>{SEPARATOR}</span>
               <span
