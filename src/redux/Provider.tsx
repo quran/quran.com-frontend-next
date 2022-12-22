@@ -61,7 +61,6 @@ const ReduxProvider = ({ children, locale }) => {
     }
   };
 
-  // if (isClient) {
   return (
     <Provider store={store}>
       <PersistGate loading={<GateLoader />} persistor={persistor} onBeforeLift={onBeforeLift}>
@@ -69,9 +68,6 @@ const ReduxProvider = ({ children, locale }) => {
       </PersistGate>
     </Provider>
   );
-  // }
-
-  // return <Provider store={store}>{children}</Provider>;
 };
 
 export default ReduxProvider;
