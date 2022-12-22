@@ -40,6 +40,12 @@ const ReduxProvider = ({ children, locale }) => {
    * then store in Redux so that they can be used.
    */
   const onBeforeLift = async () => {
+    if (isClient) {
+      // Set a global flag to indicate that the persist gate has been hydrated.
+      window.isPersistGateHydrated = true;
+      console.log('gate hydrated');
+    }
+
     if (isClient && isLoggedIn()) {
       try {
         const userPreferences = await getUserPreferences();
@@ -63,7 +69,7 @@ const ReduxProvider = ({ children, locale }) => {
 
   return (
     <Provider store={store}>
-      <PersistGate loading={<GateLoader />} persistor={persistor} onBeforeLift={onBeforeLift}>
+      <PersistGate persistor={persistor} onBeforeLift={onBeforeLift}>
         {() => <>{children}</>}
       </PersistGate>
     </Provider>
