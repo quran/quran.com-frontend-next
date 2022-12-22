@@ -65,7 +65,7 @@ const ReduxProvider = ({ children, locale }) => {
   return (
     <Provider store={store}>
       <PersistGate loading={<GateLoader />} persistor={persistor} onBeforeLift={onBeforeLift}>
-        {() => ({ children })}
+        {() => <>{children}</>}
       </PersistGate>
     </Provider>
   );
