@@ -9,7 +9,6 @@ import PreferenceGroup from 'types/auth/PreferenceGroup';
 
 import getStore from './store';
 
-import GateLoader from '@/components/GateLoader';
 import syncUserPreferences from '@/redux/actions/sync-user-preferences';
 import { getUserPreferences } from '@/utils/auth/api';
 import { isLoggedIn } from '@/utils/auth/login';
