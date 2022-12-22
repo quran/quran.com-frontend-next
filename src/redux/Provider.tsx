@@ -4,6 +4,8 @@ import setLanguage from 'next-translate/setLanguage';
 import { Provider } from 'react-redux';
 import { persistStore } from 'redux-persist';
 import { PersistGate } from 'redux-persist/integration/react';
+import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
+import PreferenceGroup from 'types/auth/PreferenceGroup';
 
 import getStore from './store';
 
@@ -12,8 +14,6 @@ import syncUserPreferences from '@/redux/actions/sync-user-preferences';
 import { getUserPreferences } from '@/utils/auth/api';
 import { isLoggedIn } from '@/utils/auth/login';
 import { setLocaleCookie } from '@/utils/cookies';
-import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
-import PreferenceGroup from 'types/auth/PreferenceGroup';
 
 /**
  * A wrapper around the Provider component to skip rendering <PersistGate />
@@ -61,17 +61,17 @@ const ReduxProvider = ({ children, locale }) => {
     }
   };
 
-  if (isClient) {
-    return (
-      <Provider store={store}>
-        <PersistGate loading={<GateLoader />} persistor={persistor} onBeforeLift={onBeforeLift}>
-          {children}
-        </PersistGate>
-      </Provider>
-    );
-  }
+  // if (isClient) {
+  return (
+    <Provider store={store}>
+      <PersistGate loading={<GateLoader />} persistor={persistor} onBeforeLift={onBeforeLift}>
+        {children}
+      </PersistGate>
+    </Provider>
+  );
+  // }
 
-  return <Provider store={store}>{children}</Provider>;
+  // return <Provider store={store}>{children}</Provider>;
 };
 
 export default ReduxProvider;
