@@ -14,7 +14,7 @@ const PERSIST_GATE_HYDRATION_DURATION_MS = 50; // This number is mostly arbitrar
 // and dispatches an action to set the hydration as complete.
 // The component works by setting a timeout to fire after the REHYDRATE event.
 // Because the redux store is synchronous, there's no way to ensure the order of actions.
-// So we have to use a timeout. The dispatch is done async and doesn't block the main thread.
+// So we have to use a timeout to ensure that the hydration complete event happens *after* REHYDRATE.
 const GlobalPersistGateHydrationListener = () => {
   const dispatch = useDispatch();
   const isPersistGateHydrationInProgress = useSelector(selectisPersistGateHydrationInProgress);
