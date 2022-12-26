@@ -12,7 +12,7 @@ const DisableAnimationsUntilHydration = () => {
 
   if (isClient && !isPersistGateHydrationComplete) {
     return (
-      <style jsx global>
+      <style>
         {`
           * {
             transition: all 0s !important;
