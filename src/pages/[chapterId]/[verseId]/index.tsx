@@ -63,7 +63,10 @@ const Verse: NextPage<VerseProps> = ({
         }`}
         canonical={getCanonicalUrl(lang, path)}
         languageAlternates={getLanguageAlternates(path)}
-        description={versesResponse.verses[0].textImlaeiSimple}
+        description={
+          versesResponse.verses[0]?.translations[0]?.text ||
+          versesResponse.verses[0].textImlaeiSimple
+        }
       />
       <QuranReader
         initialData={versesResponse}
