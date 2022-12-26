@@ -54,7 +54,7 @@ const BookmarkedVersesList: React.FC = () => {
 
     const isUserLoggedIn = isLoggedIn();
     if (isUserLoggedIn && data) {
-      return data.map((bookmark) => makeVerseKey(bookmark.key, bookmark.verseNumber));
+      return data.map((bookmark) => makeVerseKey(bookmark.key, bookmark.verseNumber)).reverse();
     }
 
     if (!isUserLoggedIn) {
