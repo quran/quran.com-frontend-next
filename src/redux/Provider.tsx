@@ -4,8 +4,6 @@ import setLanguage from 'next-translate/setLanguage';
 import { Provider } from 'react-redux';
 import { persistStore } from 'redux-persist';
 import { PersistGate } from 'redux-persist/integration/react';
-import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
-import PreferenceGroup from 'types/auth/PreferenceGroup';
 
 import getStore from './store';
 
@@ -13,6 +11,9 @@ import syncUserPreferences from '@/redux/actions/sync-user-preferences';
 import { getUserPreferences } from '@/utils/auth/api';
 import { isLoggedIn } from '@/utils/auth/login';
 import { setLocaleCookie } from '@/utils/cookies';
+import isClient from '@/utils/isClient';
+import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
+import PreferenceGroup from 'types/auth/PreferenceGroup';
 
 /**
  * A wrapper around the Provider component to skip rendering <PersistGate />
@@ -28,23 +29,11 @@ const ReduxProvider = ({ children, locale }) => {
   const persistor = useMemo(() => persistStore(store), [store]);
   const audioService = useContext(AudioPlayerMachineContext);
 
-  const isClient = !!(
-    typeof window !== 'undefined' &&
-    window.document &&
-    window.document.createElement
-  );
-
   /**
    * Before the Gate lifts, we want to get the user preferences
    * then store in Redux so that they can be used.
    */
   const onBeforeLift = async () => {
-    if (isClient) {
-      // Set a global flag to indicate that the persist gate has been hydrated.
-      window.isPersistGateHydrated = true;
-      console.log('gate hydrated');
-    }
-
     if (isClient && isLoggedIn()) {
       try {
         const userPreferences = await getUserPreferences();

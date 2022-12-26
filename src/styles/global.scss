@@ -1,10 +1,6 @@
 @use "src/styles/theme";
 @use "src/styles/constants";
 
-* {
-  transition: all 0s !important;
-}
-
 body {
   min-height: 100vh;
   background: var(--color-background-default);
