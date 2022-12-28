@@ -180,9 +180,10 @@ const getOgDescription = (versesResponse: VersesResponse, isVerse: boolean, lang
   // Single verse pages
   if (isVerse) {
     const verse = versesResponse.verses[0];
-    ogText = verse?.translations[0]?.text
-      ? getPlainTranslationText(verse?.translations[0]?.text)
-      : verse?.textImlaeiSimple;
+    ogText =
+      verse?.translations.length > 0
+        ? getPlainTranslationText(verse?.translations[0]?.text)
+        : verse?.textImlaeiSimple;
   }
 
   // For verse ranges, return the first 3 verses in the format of `(verse number) verse translation text`
@@ -191,7 +192,7 @@ const getOgDescription = (versesResponse: VersesResponse, isVerse: boolean, lang
     ogText = firstThreeVerses
       .map((verse) => {
         return `(${toLocalizedNumber(Number(verse.verseNumber), lang)}) ${
-          verse?.translations[0]?.text
+          verse?.translations.length > 0
             ? getPlainTranslationText(verse?.translations[0]?.text)
             : verse?.textImlaeiSimple
         }`;
