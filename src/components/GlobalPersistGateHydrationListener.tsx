@@ -3,10 +3,10 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import {
-  selectisPersistGateHydrationInProgress,
+  selectIsPersistGateHydrationInProgress,
   setIsPersistGateHydrationComplete,
   setIsPersistGateHydrationInProgress,
-} from '../redux/slices/persistGateHydration';
+} from '@/redux/slices/persistGateHydration';
 
 const PERSIST_GATE_HYDRATION_DURATION_MS = 50; // This number is mostly arbitrary. Long enough to ensure that the hydration is complete.
 
@@ -17,7 +17,7 @@ const PERSIST_GATE_HYDRATION_DURATION_MS = 50; // This number is mostly arbitrar
 // So we have to use a timeout to ensure that the hydration complete event happens *after* REHYDRATE.
 const GlobalPersistGateHydrationListener = () => {
   const dispatch = useDispatch();
-  const isPersistGateHydrationInProgress = useSelector(selectisPersistGateHydrationInProgress);
+  const isPersistGateHydrationInProgress = useSelector(selectIsPersistGateHydrationInProgress);
 
   useEffect(() => {
     if (isPersistGateHydrationInProgress) {

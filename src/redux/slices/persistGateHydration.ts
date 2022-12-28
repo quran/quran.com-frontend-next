@@ -39,8 +39,10 @@ export const persistGateHydrationSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(REHYDRATE, (state: PersistGateHydrationState) => {
-      // eslint-disable-next-line no-param-reassign
-      state.isPersistGateHydrationInProgress = true;
+      return {
+        ...state,
+        isPersistGateHydrationInProgress: true,
+      };
     });
   },
 });
@@ -48,9 +50,9 @@ export const persistGateHydrationSlice = createSlice({
 export const { setIsPersistGateHydrationInProgress, setIsPersistGateHydrationComplete } =
   persistGateHydrationSlice.actions;
 
-export const selectisPersistGateHydrationInProgress = (state: RootState) =>
+export const selectIsPersistGateHydrationInProgress = (state: RootState) =>
   state.persistGateHydration.isPersistGateHydrationInProgress;
-export const selectisPersistGateHydrationComplete = (state: RootState) =>
+export const selectIsPersistGateHydrationComplete = (state: RootState) =>
   state.persistGateHydration.isPersistGateHydrationComplete;
 
 export default persistGateHydrationSlice.reducer;
