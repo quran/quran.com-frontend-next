@@ -181,7 +181,7 @@ const getOgDescription = (versesResponse: VersesResponse, isVerse: boolean, lang
   if (isVerse) {
     const verse = versesResponse.verses[0];
     ogText =
-      verse?.translations.length > 0
+      verse?.translations?.length > 0
         ? getPlainTranslationText(verse?.translations[0]?.text)
         : verse?.textImlaeiSimple;
   }
@@ -192,7 +192,7 @@ const getOgDescription = (versesResponse: VersesResponse, isVerse: boolean, lang
     ogText = firstThreeVerses
       .map((verse) => {
         return `(${toLocalizedNumber(Number(verse.verseNumber), lang)}) ${
-          verse?.translations.length > 0
+          verse?.translations?.length > 0
             ? getPlainTranslationText(verse?.translations[0]?.text)
             : verse?.textImlaeiSimple
         }`;
