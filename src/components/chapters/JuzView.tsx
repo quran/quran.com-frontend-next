@@ -16,7 +16,7 @@ type JuzViewProps = {
 };
 
 const JuzView = ({ isDescending }: JuzViewProps) => {
-  const { t, lang } = useTranslation('common');
+  const { t, lang } = useTranslation();
   const [juzMappings, setJuzMappings] = useState([]);
   const chaptersData = useContext(DataContext);
 
@@ -45,7 +45,10 @@ const JuzView = ({ isDescending }: JuzViewProps) => {
           <div key={juzId} className={styles.juzContainer}>
             <Link href={`/juz/${juzId}`} variant={LinkVariant.Primary} shouldPrefetch={false}>
               <div className={styles.juzTitle}>
-                {t('juz')} {toLocalizedNumber(juzId, lang)}
+                <span>
+                  {t('common:juz')} {toLocalizedNumber(juzId, lang)}
+                </span>
+                <span className={styles.readJuz}>{t('home:read-juz')}</span>
               </div>
             </Link>
             {chapterIds.map((chapterId) => {
@@ -58,7 +61,9 @@ const JuzView = ({ isDescending }: JuzViewProps) => {
                   >
                     <SurahPreviewRow
                       chapterId={Number(chapterId)}
-                      description={`${toLocalizedNumber(chapter.versesCount, lang)} ${t('ayahs')}`}
+                      description={`${toLocalizedNumber(chapter.versesCount, lang)} ${t(
+                        'common:ayahs',
+                      )}`}
                       surahName={chapter.transliteratedName}
                       surahNumber={Number(chapterId)}
                       translatedSurahName={chapter.translatedName as string}
