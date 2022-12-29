@@ -1,40 +1,41 @@
-import { useEffect } from "react";
+/* eslint-disable max-lines */
+import { useEffect } from 'react';
 
-import classNames from "classnames";
-import { NextPage, GetStaticProps } from "next";
-import useTranslation from "next-translate/useTranslation";
-import { useRouter } from "next/router";
-import { useDispatch } from "react-redux";
-import useSWR from "swr";
+import classNames from 'classnames';
+import { NextPage, GetStaticProps } from 'next';
+import useTranslation from 'next-translate/useTranslation';
+import { useRouter } from 'next/router';
+import { useDispatch } from 'react-redux';
+import useSWR from 'swr';
 
-import layoutStyle from "./index.module.scss";
-import styles from "./profile.module.scss";
+import layoutStyle from './index.module.scss';
+import styles from './profile.module.scss';
 
-import NextSeoWrapper from "@/components/NextSeoWrapper";
-import DeleteAccountButton from "@/components/Profile/DeleteAccountButton";
-import BookmarksAndCollectionsSection from "@/components/Verses/BookmarksAndCollectionsSection";
-import RecentReadingSessions from "@/components/Verses/RecentReadingSessions";
-import Button from "@/dls/Button/Button";
-import Skeleton from "@/dls/Skeleton/Skeleton";
-import { removeLastSyncAt } from "@/redux/slices/Auth/userDataSync";
-import { getUserProfile, logoutUser } from "@/utils/auth/api";
-import { makeUserProfileUrl } from "@/utils/auth/apiPaths";
-import { DEFAULT_PHOTO_URL } from "@/utils/auth/constants";
-import { isLoggedIn } from "@/utils/auth/login";
-import { getAllChaptersData } from "@/utils/chapter";
-import { logButtonClick } from "@/utils/eventLogger";
-import { getLanguageAlternates } from "@/utils/locale";
-import { getCanonicalUrl, getProfileNavigationUrl } from "@/utils/navigation";
-import DataContext from "src/contexts/DataContext";
-import Error from "src/pages/_error";
-import ChaptersData from "types/ChaptersData";
+import NextSeoWrapper from '@/components/NextSeoWrapper';
+import DeleteAccountButton from '@/components/Profile/DeleteAccountButton';
+import BookmarksAndCollectionsSection from '@/components/Verses/BookmarksAndCollectionsSection';
+import RecentReadingSessions from '@/components/Verses/RecentReadingSessions';
+import Button from '@/dls/Button/Button';
+import Skeleton from '@/dls/Skeleton/Skeleton';
+import { removeLastSyncAt } from '@/redux/slices/Auth/userDataSync';
+import { getUserProfile, logoutUser } from '@/utils/auth/api';
+import { makeUserProfileUrl } from '@/utils/auth/apiPaths';
+import { DEFAULT_PHOTO_URL } from '@/utils/auth/constants';
+import { isLoggedIn } from '@/utils/auth/login';
+import { getAllChaptersData } from '@/utils/chapter';
+import { logButtonClick } from '@/utils/eventLogger';
+import { getLanguageAlternates } from '@/utils/locale';
+import { getCanonicalUrl, getProfileNavigationUrl } from '@/utils/navigation';
+import DataContext from 'src/contexts/DataContext';
+import Error from 'src/pages/_error';
+import ChaptersData from 'types/ChaptersData';
 
 interface Props {
   chaptersData?: ChaptersData;
 }
 
-const nameSample = "Mohammad Ali";
-const emailSample = "mohammadali@quran.com";
+const nameSample = 'Mohammad Ali';
+const emailSample = 'mohammadali@quran.com';
 const ProfilePage: NextPage<Props> = ({ chaptersData }) => {
   const dispatch = useDispatch();
   const { t, lang } = useTranslation();
@@ -48,7 +49,7 @@ const ProfilePage: NextPage<Props> = ({ chaptersData }) => {
 
   useEffect(() => {
     if (!isLoggedIn()) {
-      router.replace("/login");
+      router.replace('/login');
     }
   }, [router]);
 
@@ -56,10 +57,10 @@ const ProfilePage: NextPage<Props> = ({ chaptersData }) => {
     if (!isLoggedIn()) {
       return;
     }
-    logButtonClick("profile_logout");
+    logButtonClick('profile_logout');
     logoutUser().then(() => {
       dispatch({ type: removeLastSyncAt.type });
-      router.push("/login");
+      router.push('/login');
       router.reload();
     });
   };
@@ -73,12 +74,7 @@ const ProfilePage: NextPage<Props> = ({ chaptersData }) => {
   const { email, firstName, lastName, photoUrl } = userData || {};
 
   const profileSkeletonInfoSkeleton = (
-    <div
-      className={classNames(
-        styles.profileInfoContainer,
-        styles.skeletonContainer
-      )}
-    >
+    <div className={classNames(styles.profileInfoContainer, styles.skeletonContainer)}>
       <Skeleton>
         <h2 className={styles.name}>{nameSample}</h2>
       </Skeleton>
@@ -98,7 +94,7 @@ const ProfilePage: NextPage<Props> = ({ chaptersData }) => {
   return (
     <DataContext.Provider value={chaptersData}>
       <NextSeoWrapper
-        title={t("common:profile")}
+        title={t('common:profile')}
         url={getCanonicalUrl(lang, getProfileNavigationUrl())}
         languageAlternates={getLanguageAlternates(getProfileNavigationUrl())}
         nofollow
@@ -125,7 +121,7 @@ const ProfilePage: NextPage<Props> = ({ chaptersData }) => {
               className={classNames(
                 layoutStyle.flowItem,
                 layoutStyle.fullWidth,
-                styles.recentReadingContainer
+                styles.recentReadingContainer,
               )}
             >
               <RecentReadingSessions />
@@ -134,7 +130,7 @@ const ProfilePage: NextPage<Props> = ({ chaptersData }) => {
               className={classNames(
                 layoutStyle.flowItem,
                 layoutStyle.fullWidth,
-                styles.bookmarksAndCollectionsContainer
+                styles.bookmarksAndCollectionsContainer,
               )}
             >
               <BookmarksAndCollectionsSection />
@@ -144,7 +140,7 @@ const ProfilePage: NextPage<Props> = ({ chaptersData }) => {
               className={classNames(
                 layoutStyle.flowItem,
                 layoutStyle.fullWidth,
-                styles.actionsContainer
+                styles.actionsContainer,
               )}
             >
               <div className={styles.action}>
@@ -152,7 +148,7 @@ const ProfilePage: NextPage<Props> = ({ chaptersData }) => {
               </div>
               <div className={styles.action}>
                 <Button isDisabled={isLoading} onClick={onLogoutClicked}>
-                  {t("common:logout")}
+                  {t('common:logout')}
                 </Button>
               </div>
             </div>
