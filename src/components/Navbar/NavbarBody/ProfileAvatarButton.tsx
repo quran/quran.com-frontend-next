@@ -1,6 +1,5 @@
 import { useState } from 'react';
 
-import Cookies from 'js-cookie';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
@@ -15,32 +14,11 @@ import { logoutUser } from '@/utils/auth/api';
 import { isLoggedIn } from '@/utils/auth/login';
 import { logButtonClick } from '@/utils/eventLogger';
 
-const shouldShowButton = () => {
-  const allowedPercentageOfUsers = Number(process.env.NEXT_PUBLIC_SHOW_LOGIN_BUTTON_THRESHOLD);
-  // eslint-disable-next-line i18next/no-literal-string
-  const cookiesKey = `${allowedPercentageOfUsers}-show-login-button`;
-  const FIXED_COOKIES_KEY = 'show-login-button';
-  if (Cookies.get(FIXED_COOKIES_KEY) === 'true' || Cookies.get(cookiesKey) === 'true') {
-    return true;
-  }
-  const randomNumber = Math.floor(Math.random() * (100 - 1) + 1);
-  if (randomNumber <= allowedPercentageOfUsers) {
-    Cookies.set(cookiesKey, 'true');
-    return true;
-  }
-  Cookies.set(cookiesKey, 'false');
-  return false;
-};
-
 const ProfileAvatarButton = () => {
   const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
   const { t } = useTranslation('common');
   const router = useRouter();
-
-  if (!shouldShowButton()) {
-    return <></>;
-  }
 
   const isUserLoggedIn = isLoggedIn();
 
