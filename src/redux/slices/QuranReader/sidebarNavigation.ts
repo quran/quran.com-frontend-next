@@ -17,7 +17,8 @@ export enum NavigationItem {
   Hizb = 'hizb',
 }
 
-export const initialSidebarIsVisible = 'auto'; // sidebar will be open on desktop and closed on mobile
+export const initialSidebarIsVisible = false; // sidebar will be closed by default
+
 const initialState: SidebarNavigation = {
   isVisible: initialSidebarIsVisible,
   selectedNavigationItem: NavigationItem.Surah,
