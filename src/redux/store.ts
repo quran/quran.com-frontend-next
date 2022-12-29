@@ -22,6 +22,7 @@ import commandBarPersistConfig from './slices/CommandBar/persistConfig';
 import commandBar from './slices/CommandBar/state';
 import defaultSettings from './slices/defaultSettings';
 import navbar from './slices/navbar';
+import persistGateHydration from './slices/persistGateHydration';
 import bookmarks from './slices/QuranReader/bookmarks';
 import contextMenu from './slices/QuranReader/contextMenu';
 import fontFaces from './slices/QuranReader/font-faces';
@@ -88,6 +89,7 @@ export const rootReducer = combineReducers({
   banner,
   session,
   userDataSync,
+  persistGateHydration,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
