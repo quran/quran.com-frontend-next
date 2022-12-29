@@ -30,7 +30,13 @@ import {
 import DataContext from 'src/contexts/DataContext';
 import Bookmark from 'types/Bookmark';
 
-const BookmarkedVersesList: React.FC = () => {
+const BOOKMARKS_API_LIMIT = 10; // The number of bookmarks to fetch from the api
+
+type Props = {
+  switchToCollectionsTab: () => void;
+};
+
+const BookmarkedVersesList = ({ switchToCollectionsTab }: Props) => {
   const { t, lang } = useTranslation('home');
   const chaptersData = useContext(DataContext);
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
@@ -44,6 +50,7 @@ const BookmarkedVersesList: React.FC = () => {
     isLoggedIn() // only fetch the data when user is loggedIn
       ? makeBookmarksUrl(
           getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines).mushaf,
+          BOOKMARKS_API_LIMIT,
         )
       : null,
     privateFetcher,
@@ -63,6 +70,16 @@ const BookmarkedVersesList: React.FC = () => {
 
     return [];
   }, [bookmarkedVerses, data, isValidating]);
+
+  // Flag when a user is using the API and has more bookmarks than the api limit
+  const hasReachedBookmarksLimit = useMemo(() => {
+    const isUserLoggedIn = isLoggedIn();
+
+    if (isUserLoggedIn && data && data.length >= BOOKMARKS_API_LIMIT) {
+      return true;
+    }
+    return false;
+  }, [data]);
 
   if (!bookmarkedVersesKeys.length) {
     return null;
@@ -128,6 +145,14 @@ const BookmarkedVersesList: React.FC = () => {
                 </div>
               );
             })}
+            {hasReachedBookmarksLimit && (
+              <a
+                className={styles.viewAllBookmarksContainer}
+                onClick={() => switchToCollectionsTab()}
+              >
+                {t('view-all-bookmarks')}
+              </a>
+            )}
           </div>
         </div>
       ) : (
