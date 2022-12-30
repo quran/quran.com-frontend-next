@@ -11,6 +11,7 @@ import { getDefaultWordFields, getMushafId } from '@/utils/api';
 import { getAllChaptersData, getChapterData } from '@/utils/chapter';
 import { getLanguageAlternates, toLocalizedNumber, toLocalizedVersesRange } from '@/utils/locale';
 import { getCanonicalUrl, getVerseNavigationUrl } from '@/utils/navigation';
+import getPlainTranslationText from '@/utils/plainTranslationText';
 import {
   REVALIDATION_PERIOD_ON_ERROR_SECONDS,
   ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
@@ -63,7 +64,7 @@ const Verse: NextPage<VerseProps> = ({
         }`}
         canonical={getCanonicalUrl(lang, path)}
         languageAlternates={getLanguageAlternates(path)}
-        description={versesResponse.verses[0].textImlaeiSimple}
+        description={getOgDescription(versesResponse, isVerse, lang)}
       />
       <QuranReader
         initialData={versesResponse}
@@ -172,6 +173,40 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   }
 };
 
+// Generates the description and open graph description for the page.
+const getOgDescription = (versesResponse: VersesResponse, isVerse: boolean, lang: string) => {
+  let ogText = '';
+
+  // Single verse pages
+  if (isVerse) {
+    const verse = versesResponse.verses[0];
+    ogText =
+      verse?.translations?.length > 0
+        ? getPlainTranslationText(verse?.translations[0]?.text)
+        : verse?.textImlaeiSimple;
+  }
+
+  // For verse ranges, return the first 3 verses in the format of `(verse number) verse translation text`
+  else {
+    const firstThreeVerses = versesResponse.verses.slice(0, 3);
+    ogText = firstThreeVerses
+      .map((verse) => {
+        return `(${toLocalizedNumber(Number(verse.verseNumber), lang)}) ${
+          verse?.translations?.length > 0
+            ? getPlainTranslationText(verse?.translations[0]?.text)
+            : verse?.textImlaeiSimple
+        }`;
+      })
+      .join(' ');
+  }
+
+  // Check if the text is longer than 300 characters, if it is, trim it and add ellipsis.
+  if (ogText.length > 300) {
+    ogText = `${ogText.substring(0, 297)}...`;
+  }
+
+  return ogText;
+};
 export const getStaticPaths: GetStaticPaths = async () => ({
   paths: [], // no pre-rendered chapters at build time.
   fallback: 'blocking', // will server-render pages on-demand if the path doesn't exist.
