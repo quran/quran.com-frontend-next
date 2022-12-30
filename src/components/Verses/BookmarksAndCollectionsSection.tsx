@@ -31,19 +31,13 @@ const BookmarksAndCollectionsSection = () => {
     setSelectedTab(newTab);
   };
 
-  const switchToCollectionsTab = () => {
-    setSelectedTab(View.Collections);
-  };
-
   return (
     <div>
       <div className={styles.tabsContainer}>
         <Tabs tabs={tabs} selected={selectedTab} onSelect={onTabSelected} />
       </div>
       <div className={classNames(styles.contentContainer, styles.tabsContainer)}>
-        {selectedTab === View.Bookmarks && (
-          <BookmarkedVersesList switchToCollectionsTab={switchToCollectionsTab} />
-        )}
+        {selectedTab === View.Bookmarks && <BookmarkedVersesList />}
         {selectedTab === View.Collections && <CollectionList />}
       </div>
     </div>

@@ -32,11 +32,7 @@ import Bookmark from 'types/Bookmark';
 
 const BOOKMARKS_API_LIMIT = 10; // The number of bookmarks to fetch from the api
 
-type Props = {
-  switchToCollectionsTab: () => void;
-};
-
-const BookmarkedVersesList = ({ switchToCollectionsTab }: Props) => {
+const BookmarkedVersesList = () => {
   const { t, lang } = useTranslation('home');
   const chaptersData = useContext(DataContext);
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
@@ -146,12 +142,9 @@ const BookmarkedVersesList = ({ switchToCollectionsTab }: Props) => {
               );
             })}
             {hasReachedBookmarksLimit && (
-              <a
-                className={styles.viewAllBookmarksContainer}
-                onClick={() => switchToCollectionsTab()}
-              >
-                {t('view-all-bookmarks')}
-              </a>
+              <Link href="/collections/all">
+                <a className={styles.viewAllBookmarksContainer}>{t('view-all-bookmarks')}</a>
+              </Link>
             )}
           </div>
         </div>
