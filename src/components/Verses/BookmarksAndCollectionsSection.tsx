@@ -44,7 +44,7 @@ const BookmarksAndCollectionsSection = () => {
       </div>
       <div className={classNames(styles.contentContainer, styles.tabsContainer)}>
         {isBookmarkEmpty
-          ? t("no-bookmarks")
+          ? t('no-bookmarks')
           : selectedTab === View.Bookmarks && <BookmarkedVersesList />}
         {selectedTab === View.Collections && <CollectionList />}
       </div>
