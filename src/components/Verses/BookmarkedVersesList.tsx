@@ -4,12 +4,12 @@
 import React, { useContext, useMemo } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
-import Link from 'next/link';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux';
 import useSWR from 'swr';
 
 import styles from './BookmarkedVersesList.module.scss';
 
+import Link from '@/dls/Link/Link';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import CloseIcon from '@/icons/close.svg';
 import { selectBookmarks, toggleVerseBookmark } from '@/redux/slices/QuranReader/bookmarks';
@@ -110,6 +110,10 @@ const BookmarkedVersesList = () => {
     logButtonClick('bookmarked_verses_list_link');
   };
 
+  const onViewAllBookmarksClicked = () => {
+    logButtonClick('view_all_bookmarks');
+  };
+
   return (
     <div className={styles.container}>
       {bookmarkedVersesKeys.length > 0 ? (
@@ -124,10 +128,12 @@ const BookmarkedVersesList = () => {
               )}`;
               return (
                 <div key={verseKey} className={styles.bookmarkItem}>
-                  <Link href={getVerseNavigationUrlByVerseKey(verseKey)}>
-                    <a className={styles.linkButtonContainer} onClick={onLinkClicked}>
-                      {bookmarkText}
-                    </a>
+                  <Link
+                    href={getVerseNavigationUrlByVerseKey(verseKey)}
+                    onClick={onLinkClicked}
+                    className={styles.linkButtonContainer}
+                  >
+                    {bookmarkText}
                   </Link>
                   <button
                     onClick={onBookmarkDeleted(verseKey)}
@@ -142,8 +148,12 @@ const BookmarkedVersesList = () => {
               );
             })}
             {hasReachedBookmarksLimit && (
-              <Link href="/collections/all">
-                <a className={styles.viewAllBookmarksContainer}>{t('view-all-bookmarks')}</a>
+              <Link
+                href="/collections/all"
+                className={styles.viewAllBookmarksContainer}
+                onClick={onViewAllBookmarksClicked}
+              >
+                {t('view-all-bookmarks')}
               </Link>
             )}
           </div>
