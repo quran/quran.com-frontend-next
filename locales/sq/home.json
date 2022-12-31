@@ -1,11 +1,13 @@
 {
     "no-bookmarks": "Nuk keni ende asnjë faqeshënues",
     "noble-quran": "Kurani Fisnik",
+    "read-juz": "Lexoni Juz",
     "recently-read": "Lexuar së fundmi",
     "tab": {
         "bookmarks": "Faqeruajtësit",
         "popular": "Popullore"
     },
+    "view-all-bookmarks": "Shikoni të gjithë faqeshënuesit",
     "voice": {
         "trigger": "Qasje e shpejtë në çdo gjë"
     },

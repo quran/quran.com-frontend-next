@@ -1,18 +1,18 @@
 {
     "no-bookmarks": "You do not have any bookmarks yet",
     "noble-quran": "The Noble Quran",
+    "read-juz": "Read Juz",
     "recently-read": "Recently Read",
     "tab": {
         "bookmarks": "Bookmarks",
         "popular": "Popular"
     },
+    "view-all-bookmarks": "View all bookmarks",
     "voice": {
         "trigger": "Quick access to anything"
     },
-    "read-juz": "Read Juz",
     "welcome": {
         "body": "Monthly donations help us retain top talent and sustain operations, so that we can focus less on fundraising and more on creating impact.",
         "title": "Donate to Quran.com today"
-    },
-    "view-all-bookmarks": "View all bookmarks"
+    }
 }

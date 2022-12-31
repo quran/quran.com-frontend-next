@@ -1,11 +1,13 @@
 {
     "no-bookmarks": "আপনি এখনও কোনো বুকমার্ক নেই",
     "noble-quran": "নোবেল কুরআন",
+    "read-juz": "জুজ পড়ুন",
     "recently-read": "সম্প্রতি পঠিত",
     "tab": {
         "bookmarks": "বুকমার্ক",
         "popular": "জনপ্রিয়"
     },
+    "view-all-bookmarks": "সব বুকমার্ক দেখুন",
     "voice": {
         "trigger": "যেকোনো কিছুতে দ্রুত অ্যাক্সেস"
     },

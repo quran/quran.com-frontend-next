@@ -1,11 +1,13 @@
 {
     "no-bookmarks": "شما هنوز هیچ نشانکی ندارید",
     "noble-quran": "قرآن کریم",
+    "read-juz": "جوز را بخوانید",
     "recently-read": "اخیرا خوانده شده است",
     "tab": {
         "bookmarks": "نشانک ها",
         "popular": "محبوب"
     },
+    "view-all-bookmarks": "مشاهده همه نشانک ها",
     "voice": {
         "trigger": "دسترسی سریع به هر چیزی"
     },

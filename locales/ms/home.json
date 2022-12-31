@@ -1,11 +1,13 @@
 {
     "no-bookmarks": "Anda belum mempunyai sebarang penanda halaman",
     "noble-quran": "Al-Quran yang mulia",
+    "read-juz": "Baca Juz",
     "recently-read": "Bacaan Terkini",
     "tab": {
         "bookmarks": "Penanda buku",
         "popular": "Popular"
     },
+    "view-all-bookmarks": "Lihat semua penanda halaman",
     "voice": {
         "trigger": "Akses pantas kepada apa sahaja"
     },

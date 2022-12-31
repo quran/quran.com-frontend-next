@@ -1,11 +1,13 @@
 {
     "no-bookmarks": "ليس لديك أي إشارات مرجعية حتى الآن",
     "noble-quran": "القرآن الكريم",
+    "read-juz": "اقرأ الجزء",
     "recently-read": "قرئ مؤخرًا",
     "tab": {
         "bookmarks": "إشارات مرجعية",
         "popular": "شائع"
     },
+    "view-all-bookmarks": "عرض كل الإشارات المرجعية",
     "voice": {
         "trigger": "الوصول السريع إلى أي شيء"
     },

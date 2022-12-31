@@ -1,11 +1,13 @@
 {
     "no-bookmarks": "У вас еще нет закладок",
     "noble-quran": "Благородный Коран",
+    "read-juz": "Читать юз",
     "recently-read": "Недавно прочитал",
     "tab": {
         "bookmarks": "Закладки",
         "popular": "Популярный"
     },
+    "view-all-bookmarks": "Посмотреть все закладки",
     "voice": {
         "trigger": "Быстрый доступ ко всему"
     },

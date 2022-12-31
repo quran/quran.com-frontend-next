@@ -1,11 +1,13 @@
 {
     "no-bookmarks": "U heeft nog geen bladwijzers",
     "noble-quran": "De Edele Koran",
+    "read-juz": "Lees Juz",
     "recently-read": "Recent gelezen",
     "tab": {
         "bookmarks": "Bladwijzers",
         "popular": "Populair"
     },
+    "view-all-bookmarks": "Bekijk alle bladwijzers",
     "voice": {
         "trigger": "Snelle toegang tot alles"
     },

@@ -1,11 +1,13 @@
 {
     "no-bookmarks": "Você ainda não tem favoritos",
     "noble-quran": "O Nobre Alcorão",
+    "read-juz": "Leia Juz",
     "recently-read": "Lidos recentemente",
     "tab": {
         "bookmarks": "Favoritos",
         "popular": "Popular"
     },
+    "view-all-bookmarks": "Ver todos os favoritos",
     "voice": {
         "trigger": "Acesso rápido a qualquer coisa"
     },

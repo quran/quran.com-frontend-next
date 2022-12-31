@@ -1,11 +1,13 @@
 {
     "no-bookmarks": "Non hai ancora nessun segnalibro",
     "noble-quran": "Il Nobile Corano",
+    "read-juz": "Leggi Juz",
     "recently-read": "Letto di recente",
     "tab": {
         "bookmarks": "segnalibri",
         "popular": "Popolare"
     },
+    "view-all-bookmarks": "Visualizza tutti i segnalibri",
     "voice": {
         "trigger": "Accesso rapido a qualsiasi cosa"
     },

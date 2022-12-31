@@ -30,7 +30,7 @@
         "drawer-close": "Çekmeceyi Kapat",
         "msg-close": "Mesajı Kapat",
         "nav-drawer-open": "Gezinti Çekmecesini Aç",
-        "play-surah": "{{surahName}} Okut",
+        "play-surah": "{{surahName}} Ayeti Seslendir",
         "select-lng": "Dil Seçin",
         "sidebar-nav-close": "Gezinme Kenar Çubuğunu Kapat"
     },
@@ -73,7 +73,7 @@
         "title": "Ses"
     },
     "ayah": "Ayet",
-    "ayahs": "Ayetler",
+    "ayahs": "Ayet",
     "beta": "Beta",
     "bookmark": "Yer imi",
     "bookmarked": "İşaretli",
@@ -84,7 +84,7 @@
     "command-bar": {
         "navigations": "Navigasyonlar",
         "no-nav-results": "Navigasyon sonucu yok",
-        "placeholder": "Ne okumak istiyorsun?",
+        "placeholder": "Ne okumak istersiniz?",
         "powered-by": "Tarteel.ai tarafından desteklenen sesli arama",
         "recent-navigations": "Son gezinmeler",
         "search-by-voice": "Sesle ara",
@@ -154,7 +154,7 @@
     "fundraising": {
         "description": "Aylık bağışlar, Kuran.com'u iyileştirmemize ve operasyonları sürdürmemize yardımcı oluyor, böylece bağış toplamaya daha az ve etki yaratmaya daha fazla odaklanıyoruz.",
         "learn-more": "Daha fazla bilgi edinin",
-        "title": "Aylık Bağışçı Olun"
+        "title": "Aylık Bağışçımız Olun"
     },
     "help": "Yardım",
     "hizb": "Hizb",
@@ -173,7 +173,7 @@
     "mobile-apps": "Mobil Uygulamalar",
     "mode": "Mod",
     "more": "Daha fazla",
-    "navigate": "Gezin",
+    "navigate": "Keşfedin",
     "network": "Ağ",
     "next": "Sonraki",
     "next-ayah": "Sonraki Ayah",
@@ -236,7 +236,7 @@
         "search-reciter": "Okuyucu Ara",
         "search-tafsirs": "Tefsir ara",
         "search-translations": "Çevirileri Ara",
-        "selected-reciter": "Seçilmiş Okur",
+        "selected-reciter": "Seslendiren",
         "selected-tafsirs": "Seçilmiş Tefsirler",
         "selected-translations": "Seçilmiş Çeviriler",
         "show-tooltip-when-playing-audio": "Ses çalarken araç ipucunu göster",
@@ -263,7 +263,7 @@
         "descending": "Azalan"
     },
     "style": "Stil",
-    "submit": "Göndermek",
+    "submit": "Gönder",
     "surah": "Sure",
     "tafsir": {
         "font-size": "tefsir yazı tipi boyutu",

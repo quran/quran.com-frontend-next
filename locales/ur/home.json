@@ -1,11 +1,13 @@
 {
     "no-bookmarks": "آپ کے پاس ابھی تک کوئی بک مارکس نہیں ہیں۔",
     "noble-quran": "نوبل قرآن",
+    "read-juz": "جوز پڑھیں",
     "recently-read": "حال ہی میں پڑھا۔",
     "tab": {
         "bookmarks": "بک مارکس",
         "popular": "مقبول"
     },
+    "view-all-bookmarks": "تمام بک مارکس دیکھیں",
     "voice": {
         "trigger": "کسی بھی چیز تک فوری رسائی"
     },

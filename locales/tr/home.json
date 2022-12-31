@@ -1,11 +1,13 @@
 {
     "no-bookmarks": "Henüz yer işaretiniz yok",
     "noble-quran": "Kur'an-ı Kerim",
+    "read-juz": "Cüz oku",
     "recently-read": "Son Okunanlar",
     "tab": {
         "bookmarks": "Yer imleri",
         "popular": "Popüler"
     },
+    "view-all-bookmarks": "Tüm yer imlerini görüntüle",
     "voice": {
         "trigger": "Her şeye hızlı erişim"
     },
