@@ -1,28 +1,28 @@
 /* eslint-disable react/no-multi-comp */
-import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo } from "react";
 
-import classNames from 'classnames';
-import useTranslation from 'next-translate/useTranslation';
-import dynamic from 'next/dynamic';
+import classNames from "classnames";
+import useTranslation from "next-translate/useTranslation";
+import dynamic from "next/dynamic";
 
-import Link from '../dls/Link/Link';
-import SurahPreviewRow from '../dls/SurahPreview/SurahPreviewRow';
-import Tabs from '../dls/Tabs/Tabs';
+import Link from "../dls/Link/Link";
+import SurahPreviewRow from "../dls/SurahPreview/SurahPreviewRow";
+import Tabs from "../dls/Tabs/Tabs";
 
-import styles from './ChapterAndJuzList.module.scss';
-import ChapterAndJuzListSkeleton from './ChapterAndJuzListSkeleton';
+import styles from "./ChapterAndJuzList.module.scss";
+import ChapterAndJuzListSkeleton from "./ChapterAndJuzListSkeleton";
 
-import CaretDownIcon from '@/icons/caret-down.svg';
-import { logButtonClick, logValueChange } from '@/utils/eventLogger';
-import { shouldUseMinimalLayout, toLocalizedNumber } from '@/utils/locale';
-import Chapter from 'types/Chapter';
+import CaretDownIcon from "@/icons/caret-down.svg";
+import { logButtonClick, logValueChange } from "@/utils/eventLogger";
+import { shouldUseMinimalLayout, toLocalizedNumber } from "@/utils/locale";
+import Chapter from "types/Chapter";
 
 enum View {
-  Surah = 'surah',
-  Juz = 'juz',
+  Surah = "surah",
+  Juz = "juz",
 }
 
-const JuzView = dynamic(() => import('./JuzView'), {
+const JuzView = dynamic(() => import("./JuzView"), {
   ssr: false,
   loading: () => <ChapterAndJuzListSkeleton />,
 });
@@ -32,8 +32,10 @@ type ChapterAndJuzListProps = {
 };
 
 enum Sort {
-  ASC = 'ascending',
-  DESC = 'descending',
+  ASC = "ascending",
+  DESC = "descending",
+  A_ASC = "a_ascending",
+  A_DESC = "a_descending",
 }
 
 const MOST_VISITED_CHAPTERS = {
@@ -52,13 +54,33 @@ const MOST_VISITED_CHAPTERS = {
 const ChapterAndJuzList: React.FC<ChapterAndJuzListProps> = ({
   chapters,
 }: ChapterAndJuzListProps) => {
-  const { t, lang } = useTranslation('common');
+  const { t, lang } = useTranslation("common");
   const [view, setView] = useState(View.Surah);
   const [sortBy, setSortBy] = useState(Sort.ASC);
 
   const onSort = () => {
     setSortBy((prevValue) => {
+      var dropdown = document.getElementById("dropdown") as HTMLSelectElement;
+      var option_value = dropdown.options[dropdown.selectedIndex].value;
+
+      const newValue =
+        option_value === Sort.ASC
+          ? Sort.ASC
+          : option_value === Sort.DESC
+          ? Sort.DESC
+          : option_value === Sort.A_ASC
+          ? Sort.A_ASC
+          : Sort.A_DESC;
+      // eslint-disable-next-line i18next/no-literal-string
+      logValueChange(`homepage_${view}_sorting`, prevValue, newValue);
+      return newValue;
+    });
+  };
+
+  const onSortJuz = () => {
+    setSortBy((prevValue) => {
       const newValue = prevValue === Sort.DESC ? Sort.ASC : Sort.DESC;
+
       // eslint-disable-next-line i18next/no-literal-string
       logValueChange(`homepage_${view}_sorting`, prevValue, newValue);
       return newValue;
@@ -70,15 +92,23 @@ const ChapterAndJuzList: React.FC<ChapterAndJuzListProps> = ({
       { title: t(`${View.Surah}`), value: View.Surah },
       { title: t(`${View.Juz}`), value: View.Juz },
     ],
-    [t],
+    [t]
   );
 
   const sortedChapters = useMemo(
     () =>
-      sortBy === Sort.DESC
+      sortBy === Sort.ASC
+        ? chapters
+        : sortBy === Sort.DESC
         ? chapters.slice().sort((a, b) => Number(b.id) - Number(a.id))
-        : chapters,
-    [sortBy, chapters],
+        : sortBy === Sort.A_ASC
+        ? chapters
+            .slice()
+            .sort((a, b) => Number(a.versesCount) - Number(b.versesCount))
+        : chapters
+            .slice()
+            .sort((a, b) => Number(b.versesCount) - Number(a.versesCount)),
+    [sortBy, chapters]
   );
 
   const onTabSelected = (newView) => {
@@ -92,19 +122,36 @@ const ChapterAndJuzList: React.FC<ChapterAndJuzListProps> = ({
       <div className={styles.tabsContainer}>
         <Tabs tabs={tabs} selected={view} onSelect={onTabSelected} />
         <div className={styles.sorter}>
-          <div className={styles.uppercase}>{t('sort.by')}:</div>
-          <div
-            className={styles.sortByValue}
-            onClick={onSort}
-            role="button"
-            onKeyPress={onSort}
-            tabIndex={0}
-          >
-            <span>{t(`sort.${sortBy}`)}</span>
-            <span className={sortBy === Sort.ASC ? styles.rotate180 : ''}>
-              <CaretDownIcon />
-            </span>
-          </div>
+          <div className={styles.uppercase}>{t("sort.by")}:</div>
+
+          {view === View.Surah && (
+            <select
+              id="dropdown"
+              onChange={onSort}
+              className={styles.sortByValueDropDown}
+              value={sortBy}
+            >
+              <option value="ascending">Ascending</option>
+              <option value="descending">Descending</option>
+              <option value="a_ascending">Ascending Ayahs</option>
+              <option value="a_descending">Descending Ayahs</option>
+            </select>
+          )}
+
+          {view === View.Juz && (
+            <div
+              className={styles.sortByValue}
+              onClick={onSortJuz}
+              role="button"
+              onKeyPress={onSortJuz}
+              tabIndex={0}
+            >
+              <span>{t(sortBy === Sort.DESC ? Sort.DESC : Sort.ASC)}</span>
+              <span className={sortBy === Sort.DESC ? "" : styles.rotate180}>
+                <CaretDownIcon />
+              </span>
+            </div>
+          )}
         </div>
       </div>
       <div
@@ -118,11 +165,16 @@ const ChapterAndJuzList: React.FC<ChapterAndJuzListProps> = ({
             <div className={styles.chapterContainer} key={chapter.id}>
               <Link
                 href={`/${chapter.id}`}
-                shouldPrefetch={MOST_VISITED_CHAPTERS[Number(chapter.id)] === true}
+                shouldPrefetch={
+                  MOST_VISITED_CHAPTERS[Number(chapter.id)] === true
+                }
               >
                 <SurahPreviewRow
                   chapterId={Number(chapter.id)}
-                  description={`${toLocalizedNumber(chapter.versesCount, lang)} ${t('ayahs')}`}
+                  description={`${toLocalizedNumber(
+                    chapter.versesCount,
+                    lang
+                  )} ${t("ayahs")}`}
                   surahName={chapter.transliteratedName}
                   surahNumber={Number(chapter.id)}
                   translatedSurahName={chapter.translatedName as string}
