@@ -34,6 +34,7 @@ import sidebarNavigation from './slices/QuranReader/sidebarNavigation';
 import quranReaderStyles from './slices/QuranReader/styles';
 import tafsirs from './slices/QuranReader/tafsirs';
 import translations from './slices/QuranReader/translations';
+import revelationOrder from './slices/revelationOrder';
 import search from './slices/Search/search';
 import session from './slices/session';
 import theme from './slices/theme';
@@ -63,6 +64,7 @@ const persistConfig = {
     SliceName.SESSION,
     SliceName.BOOKMARKS,
     SliceName.USER_DATA_SYNC,
+    SliceName.REVELATION_ORDER,
   ], // Reducers defined here will be have their values saved in local storage and persist across sessions. See: https://github.com/rt2zz/redux-persist#blacklist--whitelist
 };
 
@@ -90,6 +92,7 @@ export const rootReducer = combineReducers({
   session,
   userDataSync,
   persistGateHydration,
+  revelationOrder,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
