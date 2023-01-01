@@ -18,11 +18,17 @@ import { shouldUseMinimalLayout, toLocalizedNumber } from '@/utils/locale';
 import Chapter from 'types/Chapter';
 
 enum View {
-  Surah = 'surah',
-  Juz = 'juz',
+  SURAH = 'surah',
+  JUZ = 'juz',
+  REVELATION_ORDER = 'revelation_order',
 }
 
 const JuzView = dynamic(() => import('./JuzView'), {
+  ssr: false,
+  loading: () => <ChapterAndJuzListSkeleton />,
+});
+
+const RevelationOrderView = dynamic(() => import('./RevelationOrderView'), {
   ssr: false,
   loading: () => <ChapterAndJuzListSkeleton />,
 });
@@ -53,7 +59,7 @@ const ChapterAndJuzList: React.FC<ChapterAndJuzListProps> = ({
   chapters,
 }: ChapterAndJuzListProps) => {
   const { t, lang } = useTranslation('common');
-  const [view, setView] = useState(View.Surah);
+  const [view, setView] = useState(View.SURAH);
   const [sortBy, setSortBy] = useState(Sort.ASC);
 
   const onSort = () => {
@@ -67,8 +73,9 @@ const ChapterAndJuzList: React.FC<ChapterAndJuzListProps> = ({
 
   const tabs = useMemo(
     () => [
-      { title: t(`${View.Surah}`), value: View.Surah },
-      { title: t(`${View.Juz}`), value: View.Juz },
+      { title: t(`${View.SURAH}`), value: View.SURAH },
+      { title: t(`${View.JUZ}`), value: View.JUZ },
+      { title: t(`${View.REVELATION_ORDER}`), value: View.REVELATION_ORDER },
     ],
     [t],
   );
@@ -109,11 +116,11 @@ const ChapterAndJuzList: React.FC<ChapterAndJuzListProps> = ({
       </div>
       <div
         className={classNames({
-          [styles.surahLayout]: view === View.Surah,
-          [styles.juzLayout]: view === View.Juz,
+          [styles.surahLayout]: view === View.SURAH || view === View.REVELATION_ORDER,
+          [styles.juzLayout]: view === View.JUZ,
         })}
       >
-        {view === View.Surah &&
+        {view === View.SURAH &&
           sortedChapters.map((chapter) => (
             <div className={styles.chapterContainer} key={chapter.id}>
               <Link
@@ -131,7 +138,10 @@ const ChapterAndJuzList: React.FC<ChapterAndJuzListProps> = ({
               </Link>
             </div>
           ))}
-        {view === View.Juz && <JuzView isDescending={sortBy === Sort.DESC} />}
+        {view === View.JUZ && <JuzView isDescending={sortBy === Sort.DESC} />}
+        {view === View.REVELATION_ORDER && (
+          <RevelationOrderView isDescending={sortBy === Sort.DESC} chapters={chapters} />
+        )}
       </div>
     </>
   );
