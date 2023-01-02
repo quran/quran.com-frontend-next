@@ -21,6 +21,7 @@ import {
   NavigationItem,
   setIsVisible,
 } from '@/redux/slices/QuranReader/sidebarNavigation';
+import { selectIsReadingByRevelationOrder } from '@/redux/slices/revelationOrder';
 import { logButtonClick, logEvent, logValueChange } from '@/utils/eventLogger';
 import { isMobile } from '@/utils/responsive';
 
@@ -28,6 +29,8 @@ const SidebarNavigation = () => {
   const { isExpanded: isContextMenuExpanded } = useSelector(selectContextMenu, shallowEqual);
   const isVisible = useSelector(selectIsSidebarNavigationVisible);
   const selectedNavigationItem = useSelector(selectSelectedNavigationItem);
+  const isReadingByRevelationOrder = useSelector(selectIsReadingByRevelationOrder);
+
   const dispatch = useDispatch();
   const { t } = useTranslation('common');
   const sidebarRef = useRef();
@@ -69,41 +72,54 @@ const SidebarNavigation = () => {
         [styles.spaceOnTop]: isContextMenuExpanded,
       })}
     >
-      <div className={styles.header}>
-        <div className={styles.switchContainer}>
-          <Switch
-            items={navigationItems}
-            selected={selectedNavigationItem}
-            onSelect={(value) => {
-              logValueChange('sidebar_navigation_view', selectedNavigationItem, value);
-              dispatch(selectNavigationItem(value as NavigationItem));
-            }}
-          />
-        </div>
-        <Button
-          tooltip={t('close')}
-          shape={ButtonShape.Circle}
-          size={ButtonSize.Small}
-          variant={ButtonVariant.Ghost}
-          onClick={() => {
-            logButtonClick('sidebar_navigation_close');
-            dispatch(setIsVisible(false));
-          }}
-          ariaLabel={t('aria.sidebar-nav-close')}
-        >
-          <IconClose />
-        </Button>
-      </div>
-      <p className={styles.tip}>
-        <span>{t('sidebar.try-navigating-with')}</span>
-        <KeyboardInput meta keyboardKey="K" />
-      </p>
-      <div className={styles.contentContainer}>
-        <SidebarNavigationSelections
-          isVisible={isVisible}
-          selectedNavigationItem={selectedNavigationItem}
-        />
-      </div>
+      {!isReadingByRevelationOrder ? (
+        <>
+          <div className={styles.header}>
+            <div className={styles.switchContainer}>
+              <Switch
+                items={navigationItems}
+                selected={selectedNavigationItem}
+                onSelect={(value) => {
+                  logValueChange('sidebar_navigation_view', selectedNavigationItem, value);
+                  dispatch(selectNavigationItem(value as NavigationItem));
+                }}
+              />
+            </div>
+            <Button
+              tooltip={t('close')}
+              shape={ButtonShape.Circle}
+              size={ButtonSize.Small}
+              variant={ButtonVariant.Ghost}
+              onClick={() => {
+                logButtonClick('sidebar_navigation_close');
+                dispatch(setIsVisible(false));
+              }}
+              ariaLabel={t('aria.sidebar-nav-close')}
+            >
+              <IconClose />
+            </Button>
+          </div>
+          <p className={styles.tip}>
+            <span>{t('sidebar.try-navigating-with')}</span>
+            <KeyboardInput meta keyboardKey="K" />
+          </p>
+
+          <div className={styles.contentContainer}>
+            <SidebarNavigationSelections
+              isVisible={isVisible}
+              selectedNavigationItem={selectedNavigationItem}
+            />
+          </div>
+        </>
+      ) : (
+        <>
+          <p>youre reading</p>
+          <SidebarNavigationSelections
+            isVisible={isVisible}
+            selectedNavigationItem={NavigationItem.Surah}
+          />{' '}
+        </>
+      )}
     </div>
   );
 };
