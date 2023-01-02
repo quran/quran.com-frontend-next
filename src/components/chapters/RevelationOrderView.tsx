@@ -2,12 +2,14 @@ import { useMemo } from 'react';
 
 import { Translate } from 'next-translate';
 import useTranslation from 'next-translate/useTranslation';
+import { useDispatch } from 'react-redux';
 
 import Link from '../dls/Link/Link';
 import SurahPreviewRow from '../dls/SurahPreview/SurahPreviewRow';
 
 import styles from './ChapterAndJuzList.module.scss';
 
+import { setIsReadingByRevelationOrder } from '@/redux/slices/revelationOrder';
 import Chapter from '@/types/Chapter';
 import { QURAN_CHAPTERS_COUNT } from '@/utils/chapter';
 import { shouldUseMinimalLayout, toLocalizedNumber } from '@/utils/locale';
@@ -21,6 +23,11 @@ type RevelationOrderViewProps = {
 
 const RevelationOrderView = ({ isDescending, chapters }: RevelationOrderViewProps) => {
   const { t, lang } = useTranslation();
+  const dispatch = useDispatch();
+
+  const onSurahClick = () => {
+    dispatch({ type: setIsReadingByRevelationOrder.type, payload: true });
+  };
 
   const sortedChaptersByRevelationOrder = useMemo(
     () =>
@@ -38,7 +45,7 @@ const RevelationOrderView = ({ isDescending, chapters }: RevelationOrderViewProp
     <>
       {sortedChaptersByRevelationOrder.map((chapter, revelationOrderIndex) => (
         <div className={styles.chapterContainer} key={chapter.id}>
-          <Link href={`/${chapter.id}`} shouldPrefetch={false}>
+          <Link href={`/${chapter.id}`} shouldPrefetch={false} onClick={onSurahClick}>
             <SurahPreviewRow
               chapterId={Number(revelationOrderIndex)}
               description={getChapterDescription(chapter, t)}

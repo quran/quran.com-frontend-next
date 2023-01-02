@@ -19,7 +19,9 @@ export const revelationOrderSlice = createSlice({
   },
 });
 
-export const selectIsReadingByRevelationOrder = (state: RootState) => state.revelationOrder;
+export const selectIsReadingByRevelationOrder = (state: RootState): boolean =>
+  state.revelationOrder.isReadingByRevelationOrder;
+
 export const { setIsReadingByRevelationOrder } = revelationOrderSlice.actions;
 
 export default revelationOrderSlice.reducer;

@@ -1,5 +1,6 @@
 import { stringify } from 'querystring';
 
+import REVELATION_ORDER from './revelationOrder';
 import { getBasePath } from './url';
 import { getVerseAndChapterNumbersFromKey, getVerseNumberRangeFromKey } from './verse';
 
@@ -125,6 +126,53 @@ export const getVerseReflectionNavigationUrl = (verseKey: string): string =>
  */
 export const getSurahNavigationUrl = (surahIdOrSlug: string | number): string =>
   `/${surahIdOrSlug}`;
+
+/**
+ * Get the href link to the previous surah.
+ *
+ * @param chapterNumber
+ * @param isReadingByRevelationOrder
+ * @returns  {string}
+ */
+export const getPreviousSurahNavigationUrl = (
+  chapterNumber: number,
+  isReadingByRevelationOrder?: boolean,
+): string => {
+  if (!isReadingByRevelationOrder) {
+    return getSurahNavigationUrl(chapterNumber - 1);
+  }
+  const currentChapterRevelationOrderIndex = REVELATION_ORDER.indexOf(chapterNumber);
+  const previousChapterRevelationOrderIndex = currentChapterRevelationOrderIndex - 1;
+
+  const previousChapterNumberByRevelationOrder =
+    REVELATION_ORDER[previousChapterRevelationOrderIndex];
+
+  return getSurahNavigationUrl(previousChapterNumberByRevelationOrder);
+};
+
+/**
+ * Get the href link to the next surah.
+ *
+ * @param chapterNumber
+ * @param isReadingByRevelationOrder
+ * @returns  {string}
+ */
+
+export const getNextSurahNavigationUrl = (
+  chapterNumber: number,
+  isReadingByRevelationOrder?: boolean,
+): string => {
+  if (!isReadingByRevelationOrder) {
+    return getSurahNavigationUrl(chapterNumber + 1);
+  }
+
+  const currentChapterRevelationOrderIndex = REVELATION_ORDER.indexOf(chapterNumber);
+  const nextChapterRevelationOrderIndex = currentChapterRevelationOrderIndex + 1;
+
+  const nextChapterNumberByRevelationOrder = REVELATION_ORDER[nextChapterRevelationOrderIndex];
+
+  return getSurahNavigationUrl(nextChapterNumberByRevelationOrder);
+};
 
 /**
  * Generate the navigation url based on the type.
