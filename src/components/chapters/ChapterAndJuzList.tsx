@@ -18,9 +18,9 @@ import { shouldUseMinimalLayout, toLocalizedNumber } from '@/utils/locale';
 import Chapter from 'types/Chapter';
 
 enum View {
-  SURAH = 'surah',
-  JUZ = 'juz',
-  REVELATION_ORDER = 'revelation_order',
+  Surah = 'surah',
+  Juz = 'juz',
+  RevelationOrder = 'revelation_order',
 }
 
 const JuzView = dynamic(() => import('./JuzView'), {
@@ -59,7 +59,7 @@ const ChapterAndJuzList: React.FC<ChapterAndJuzListProps> = ({
   chapters,
 }: ChapterAndJuzListProps) => {
   const { t, lang } = useTranslation();
-  const [view, setView] = useState(View.SURAH);
+  const [view, setView] = useState(View.Surah);
   const [sortBy, setSortBy] = useState(Sort.ASC);
 
   const onSort = () => {
@@ -73,9 +73,9 @@ const ChapterAndJuzList: React.FC<ChapterAndJuzListProps> = ({
 
   const tabs = useMemo(
     () => [
-      { title: t(`common:${View.SURAH}`), value: View.SURAH },
-      { title: t(`common:${View.JUZ}`), value: View.JUZ },
-      { title: t(`common:${View.REVELATION_ORDER}`), value: View.REVELATION_ORDER },
+      { title: t(`common:${View.Surah}`), value: View.Surah },
+      { title: t(`common:${View.Juz}`), value: View.Juz },
+      { title: t(`common:${View.RevelationOrder}`), value: View.RevelationOrder },
     ],
     [t],
   );
@@ -113,7 +113,7 @@ const ChapterAndJuzList: React.FC<ChapterAndJuzListProps> = ({
             </span>
           </div>
         </div>
-        {view === View.REVELATION_ORDER && (
+        {view === View.RevelationOrder && (
           <div className={styles.revelationOrderDisclaimer}>
             {t('home:revelation-order-disclaimer')}
           </div>
@@ -121,11 +121,11 @@ const ChapterAndJuzList: React.FC<ChapterAndJuzListProps> = ({
       </div>
       <div
         className={classNames({
-          [styles.surahLayout]: view === View.SURAH || view === View.REVELATION_ORDER,
-          [styles.juzLayout]: view === View.JUZ,
+          [styles.surahLayout]: view === View.Surah || view === View.RevelationOrder,
+          [styles.juzLayout]: view === View.Juz,
         })}
       >
-        {view === View.SURAH &&
+        {view === View.Surah &&
           sortedChapters.map((chapter) => (
             <div className={styles.chapterContainer} key={chapter.id}>
               <Link
@@ -145,8 +145,8 @@ const ChapterAndJuzList: React.FC<ChapterAndJuzListProps> = ({
               </Link>
             </div>
           ))}
-        {view === View.JUZ && <JuzView isDescending={sortBy === Sort.DESC} />}
-        {view === View.REVELATION_ORDER && (
+        {view === View.Juz && <JuzView isDescending={sortBy === Sort.DESC} />}
+        {view === View.RevelationOrder && (
           <RevelationOrderView isDescending={sortBy === Sort.DESC} chapters={chapters} />
         )}
       </div>

@@ -58,6 +58,7 @@ const SurahList = () => {
       });
     }
 
+    // Sort the chapters by revelation order
     return Object.entries(chaptersData)
       .map(([id, chapter]) => {
         return {

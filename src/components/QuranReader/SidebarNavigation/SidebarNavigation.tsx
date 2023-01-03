@@ -76,6 +76,7 @@ const SidebarNavigation = () => {
       })}
     >
       {!isReadingByRevelationOrder ? (
+        // Default ordering
         <>
           <div className={styles.header}>
             <div className={styles.switchContainer}>
@@ -115,6 +116,7 @@ const SidebarNavigation = () => {
           </div>
         </>
       ) : (
+        // Revelation ordering
         <>
           <RevelationOrderNavigationNotice view={RevelationOrderNavigationNoticeView.SideDrawer} />
           <SidebarNavigationSelections

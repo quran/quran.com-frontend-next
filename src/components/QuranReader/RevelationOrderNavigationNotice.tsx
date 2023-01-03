@@ -15,6 +15,7 @@ type Props = {
   view?: RevelationOrderNavigationNoticeView;
 };
 
+// A notice that lets users know that the ordering and navigation are not the default ones.
 const RevelationOrderNavigationNotice = ({ view }: Props) => {
   const dispatch = useDispatch();
 

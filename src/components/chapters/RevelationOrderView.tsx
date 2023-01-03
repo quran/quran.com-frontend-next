@@ -25,6 +25,7 @@ const RevelationOrderView = ({ isDescending, chapters }: RevelationOrderViewProp
   const { t, lang } = useTranslation();
   const dispatch = useDispatch();
 
+  // When the user clicks on a surah through the revelation order list, put them in "revelation order" mode.
   const onSurahClick = () => {
     dispatch({ type: setIsReadingByRevelationOrder.type, payload: true });
   };
@@ -60,7 +61,7 @@ const RevelationOrderView = ({ isDescending, chapters }: RevelationOrderViewProp
                 isDescending
                   ? QURAN_CHAPTERS_COUNT - Number(revelationOrderIndex)
                   : Number(revelationOrderIndex + 1)
-              } // Show the number based on the revelation order
+              } // Show the number based on the revelation order instead of the surah number.
               translatedSurahName={getTranslatedSurahName(chapter, t, lang)}
               isMinimalLayout={false}
             />
