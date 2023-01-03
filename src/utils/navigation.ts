@@ -130,8 +130,8 @@ export const getSurahNavigationUrl = (surahIdOrSlug: string | number): string =>
 /**
  * Get the href link to the previous surah.
  *
- * @param chapterNumber
- * @param isReadingByRevelationOrder
+ * @param {number} chapterNumber
+ * @param {boolean} isReadingByRevelationOrder
  * @returns  {string}
  */
 export const getPreviousSurahNavigationUrl = (

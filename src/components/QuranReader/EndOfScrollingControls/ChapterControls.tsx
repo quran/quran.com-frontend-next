@@ -3,10 +3,6 @@ import React from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import { useSelector } from 'react-redux';
 
-import RevelationOrderNavigationNotice, {
-  RevelationOrderNavigationNoticeView,
-} from '../RevelationOrderNavigationNotice';
-
 import Button, { ButtonType } from '@/dls/Button/Button';
 import useScrollToTop from '@/hooks/useScrollToTop';
 import ChevronLeftIcon from '@/icons/chevron-left.svg';
