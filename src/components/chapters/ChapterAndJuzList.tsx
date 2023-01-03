@@ -58,7 +58,7 @@ const MOST_VISITED_CHAPTERS = {
 const ChapterAndJuzList: React.FC<ChapterAndJuzListProps> = ({
   chapters,
 }: ChapterAndJuzListProps) => {
-  const { t, lang } = useTranslation('common');
+  const { t, lang } = useTranslation();
   const [view, setView] = useState(View.SURAH);
   const [sortBy, setSortBy] = useState(Sort.ASC);
 
@@ -73,9 +73,9 @@ const ChapterAndJuzList: React.FC<ChapterAndJuzListProps> = ({
 
   const tabs = useMemo(
     () => [
-      { title: t(`${View.SURAH}`), value: View.SURAH },
-      { title: t(`${View.JUZ}`), value: View.JUZ },
-      { title: t(`${View.REVELATION_ORDER}`), value: View.REVELATION_ORDER },
+      { title: t(`common:${View.SURAH}`), value: View.SURAH },
+      { title: t(`common:${View.JUZ}`), value: View.JUZ },
+      { title: t(`common:${View.REVELATION_ORDER}`), value: View.REVELATION_ORDER },
     ],
     [t],
   );
@@ -99,7 +99,7 @@ const ChapterAndJuzList: React.FC<ChapterAndJuzListProps> = ({
       <div className={styles.tabsContainer}>
         <Tabs tabs={tabs} selected={view} onSelect={onTabSelected} />
         <div className={styles.sorter}>
-          <div className={styles.uppercase}>{t('sort.by')}:</div>
+          <div className={styles.uppercase}>{t('common:sort.by')}:</div>
           <div
             className={styles.sortByValue}
             onClick={onSort}
@@ -107,12 +107,17 @@ const ChapterAndJuzList: React.FC<ChapterAndJuzListProps> = ({
             onKeyPress={onSort}
             tabIndex={0}
           >
-            <span>{t(`sort.${sortBy}`)}</span>
+            <span>{t(`common:sort.${sortBy}`)}</span>
             <span className={sortBy === Sort.ASC ? styles.rotate180 : ''}>
               <CaretDownIcon />
             </span>
           </div>
         </div>
+        {view === View.REVELATION_ORDER && (
+          <div className={styles.revelationOrderDisclaimer}>
+            {t('home:revelation-order-disclaimer')}
+          </div>
+        )}
       </div>
       <div
         className={classNames({
@@ -129,7 +134,9 @@ const ChapterAndJuzList: React.FC<ChapterAndJuzListProps> = ({
               >
                 <SurahPreviewRow
                   chapterId={Number(chapter.id)}
-                  description={`${toLocalizedNumber(chapter.versesCount, lang)} ${t('ayahs')}`}
+                  description={`${toLocalizedNumber(chapter.versesCount, lang)} ${t(
+                    'common:ayahs',
+                  )}`}
                   surahName={chapter.transliteratedName}
                   surahNumber={Number(chapter.id)}
                   translatedSurahName={chapter.translatedName as string}
