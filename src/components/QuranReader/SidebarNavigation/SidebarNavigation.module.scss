@@ -157,3 +157,9 @@
     margin-inline-end: var(--spacing-xsmall);
   }
 }
+
+.revelationOrderHeader {
+  display: flex;
+  flex-direction: row-reverse;
+  margin-block-end: var(--spacing-micro);
+}

@@ -118,6 +118,21 @@ const SidebarNavigation = () => {
       ) : (
         // Revelation ordering
         <>
+          <div className={styles.revelationOrderHeader}>
+            <Button
+              tooltip={t('close')}
+              shape={ButtonShape.Circle}
+              size={ButtonSize.Small}
+              variant={ButtonVariant.Ghost}
+              onClick={() => {
+                logButtonClick('sidebar_navigation_close');
+                dispatch(setIsVisible(false));
+              }}
+              ariaLabel={t('aria.sidebar-nav-close')}
+            >
+              <IconClose />
+            </Button>
+          </div>
           <RevelationOrderNavigationNotice view={RevelationOrderNavigationNoticeView.SideDrawer} />
           <SidebarNavigationSelections
             isVisible={isVisible}
