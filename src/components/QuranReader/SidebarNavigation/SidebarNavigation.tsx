@@ -8,6 +8,9 @@ import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import styles from './SidebarNavigation.module.scss';
 import SidebarNavigationSelections from './SidebarNavigationSelections';
 
+import RevelationOrderNavigationNotice, {
+  RevelationOrderNavigationNoticeView,
+} from '@/components/QuranReader/RevelationOrderNavigationNotice';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import KeyboardInput from '@/dls/KeyboardInput';
 import Switch from '@/dls/Switch/Switch';
@@ -113,7 +116,7 @@ const SidebarNavigation = () => {
         </>
       ) : (
         <>
-          <p>youre reading</p>
+          <RevelationOrderNavigationNotice view={RevelationOrderNavigationNoticeView.SideDrawer} />
           <SidebarNavigationSelections
             isVisible={isVisible}
             selectedNavigationItem={NavigationItem.Surah}

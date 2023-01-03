@@ -1,5 +1,9 @@
 import React from 'react';
 
+import RevelationOrderNavigationNotice, {
+  RevelationOrderNavigationNoticeView,
+} from '../RevelationOrderNavigationNotice';
+
 import ChapterControls from './ChapterControls';
 import styles from './EndOfScrollingControls.module.scss';
 import HizbControls from './HizbControls';
@@ -24,21 +28,30 @@ const EndOfScrollingControls: React.FC<Props> = ({
   initialData,
 }) => {
   return (
-    <div className={styles.container}>
-      <div className={styles.buttonsContainer}>
-        {quranReaderDataType === QuranReaderDataType.Chapter && (
-          <ChapterControls lastVerse={lastVerse} initialData={initialData} />
-        )}
-        {(quranReaderDataType === QuranReaderDataType.Verse ||
-          quranReaderDataType === QuranReaderDataType.VerseRange) && (
-          <VerseControls lastVerse={lastVerse} />
-        )}
-        {quranReaderDataType === QuranReaderDataType.Page && <PageControls lastVerse={lastVerse} />}
-        {quranReaderDataType === QuranReaderDataType.Juz && <JuzControls lastVerse={lastVerse} />}
-        {quranReaderDataType === QuranReaderDataType.Rub && <RubControls lastVerse={lastVerse} />}
-        {quranReaderDataType === QuranReaderDataType.Hizb && <HizbControls lastVerse={lastVerse} />}
+    <>
+      <RevelationOrderNavigationNotice
+        view={RevelationOrderNavigationNoticeView.EndOfScrollingControls}
+      />
+      <div className={styles.container}>
+        <div className={styles.buttonsContainer}>
+          {quranReaderDataType === QuranReaderDataType.Chapter && (
+            <ChapterControls lastVerse={lastVerse} initialData={initialData} />
+          )}
+          {(quranReaderDataType === QuranReaderDataType.Verse ||
+            quranReaderDataType === QuranReaderDataType.VerseRange) && (
+            <VerseControls lastVerse={lastVerse} />
+          )}
+          {quranReaderDataType === QuranReaderDataType.Page && (
+            <PageControls lastVerse={lastVerse} />
+          )}
+          {quranReaderDataType === QuranReaderDataType.Juz && <JuzControls lastVerse={lastVerse} />}
+          {quranReaderDataType === QuranReaderDataType.Rub && <RubControls lastVerse={lastVerse} />}
+          {quranReaderDataType === QuranReaderDataType.Hizb && (
+            <HizbControls lastVerse={lastVerse} />
+          )}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
