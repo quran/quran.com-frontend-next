@@ -34,10 +34,16 @@ const RevelationOrderView = ({ isDescending, chapters }: RevelationOrderViewProp
       isDescending
         ? chapters
             .slice()
-            .sort((a, b) => REVELATION_ORDER.indexOf(b.id) - REVELATION_ORDER.indexOf(a.id))
+            .sort(
+              (a, b) =>
+                REVELATION_ORDER.indexOf(Number(b.id)) - REVELATION_ORDER.indexOf(Number(a.id)),
+            )
         : chapters
             .slice()
-            .sort((a, b) => REVELATION_ORDER.indexOf(a.id) - REVELATION_ORDER.indexOf(b.id)),
+            .sort(
+              (a, b) =>
+                REVELATION_ORDER.indexOf(Number(a.id)) - REVELATION_ORDER.indexOf(Number(b.id)),
+            ),
     [isDescending, chapters],
   );
 
@@ -77,7 +83,7 @@ const getTranslatedSurahName = (chapter: Chapter, t: Translate, lang: string) =>
   if (shouldUseMinimalLayout(lang)) {
     return `${t('common:surah')} ${chapter.id}`;
   }
-  return `${toLocalizedNumber(chapter.id, lang)}: ${chapter.translatedName as string}`;
+  return `${toLocalizedNumber(Number(chapter.id), lang)}: ${chapter.translatedName as string}`;
 };
 
 export default RevelationOrderView;
