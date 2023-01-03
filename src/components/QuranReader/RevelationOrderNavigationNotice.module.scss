@@ -1,10 +1,10 @@
 @use "src/styles/breakpoints";
 
 .sideDrawerViewContainer {
-  margin-bottom: var(--spacing-medium);
-      padding: var(--spacing-small);
-          border: 1px var(--color-borders-hairline) solid;
-    border-radius: var(--border-radius-rounded);
+  margin-block-end: var(--spacing-medium);
+  padding: var(--spacing-small);
+  border: 1px var(--color-borders-hairline) solid;
+  border-radius: var(--border-radius-rounded);
 }
 
 .endOfScrollingViewContainer {
@@ -19,7 +19,7 @@
   margin: var(--spacing-medium) auto;
 }
 
-.link{
+.link {
   color: var(--color-text-link);
   text-decoration: underline;
 

@@ -83,8 +83,8 @@
   text-transform: uppercase;
 }
 
-.revelationOrderDisclaimer{
-  margin-top: var(--spacing-medium);
+.revelationOrderDisclaimer {
+  margin-block-start: var(--spacing-medium);
   padding: var(--spacing-small);
   border: 1px var(--color-borders-hairline) solid;
   border-radius: var(--border-radius-default);
