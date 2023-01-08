@@ -11,10 +11,12 @@ import styles from './SidebarNavigation.module.scss';
 import Link from '@/dls/Link/Link';
 import { SCROLL_TO_NEAREST_ELEMENT, useScrollToElement } from '@/hooks/useScrollToElement';
 import { selectLastReadVerseKey } from '@/redux/slices/QuranReader/readingTracker';
+import { selectIsReadingByRevelationOrder } from '@/redux/slices/revelationOrder';
 import SearchQuerySource from '@/types/SearchQuerySource';
 import { logEmptySearchResults, logTextSearchQuery } from '@/utils/eventLogger';
 import { toLocalizedNumber } from '@/utils/locale';
 import { getSurahNavigationUrl } from '@/utils/navigation';
+import REVELATION_ORDER from '@/utils/revelationOrder';
 import DataContext from 'src/contexts/DataContext';
 import Chapter from 'types/Chapter';
 
@@ -36,6 +38,8 @@ const filterSurah = (surah, searchQuery: string) => {
 const SurahList = () => {
   const { t, lang } = useTranslation('common');
   const lastReadVerseKey = useSelector(selectLastReadVerseKey);
+  const isReadingByRevelationOrder = useSelector(selectIsReadingByRevelationOrder);
+
   const currentChapterId = lastReadVerseKey.chapterId;
 
   const router = useRouter();
@@ -43,17 +47,30 @@ const SurahList = () => {
 
   const [searchQuery, setSearchQuery] = useState('');
 
-  const chapterDataArray = useMemo(
-    () =>
-      Object.entries(chaptersData).map(([id, chapter]) => {
+  const chapterDataArray = useMemo(() => {
+    if (!isReadingByRevelationOrder) {
+      return Object.entries(chaptersData).map(([id, chapter]) => {
         return {
           ...chapter,
           id,
           localizedId: toLocalizedNumber(Number(id), lang),
         };
-      }),
-    [chaptersData, lang],
-  );
+      });
+    }
+
+    // Sort the chapters by revelation order
+    return Object.entries(chaptersData)
+      .map(([id, chapter]) => {
+        return {
+          ...chapter,
+          id,
+          localizedId: toLocalizedNumber(Number(REVELATION_ORDER.indexOf(Number(id)) + 1), lang),
+        };
+      })
+      .sort(
+        (a, b) => REVELATION_ORDER.indexOf(Number(a.id)) - REVELATION_ORDER.indexOf(Number(b.id)),
+      );
+  }, [isReadingByRevelationOrder, chaptersData, lang]);
 
   const filteredChapters = searchQuery
     ? filterSurah(chapterDataArray, searchQuery)

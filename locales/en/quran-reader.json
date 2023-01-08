@@ -62,5 +62,6 @@
     "trans-change": "Change",
     "translation-by": "Translation by",
     "verses-range": "Range of verses",
-    "view-on-quran-reflect": "View on QuranReflect"
+    "view-on-quran-reflect": "View on QuranReflect",
+    "revelation-order-notice": "Note: you're navigating the Quran by the order of revelation. <link>Click here</link> to revert to the default ordering."
 }

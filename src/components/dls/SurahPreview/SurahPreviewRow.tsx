@@ -31,6 +31,7 @@ const SurahPreviewRow = ({
     () => toLocalizedNumber(surahNumber, lang),
     [surahNumber, lang],
   );
+
   if (isMinimalLayout) {
     return (
       <div className={styles.container}>
@@ -56,7 +57,7 @@ const SurahPreviewRow = ({
     <div className={styles.container}>
       <div className={styles.left}>
         <div className={styles.surahNumber}>
-          <span>{surahNumber}</span>
+          <span>{localizedSurahNumber}</span>
         </div>
         <div className={styles.surahNameContainer}>
           <div className={styles.surahName}>{surahName}</div>

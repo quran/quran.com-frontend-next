@@ -1,14 +1,16 @@
 import React from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
+import { useSelector } from 'react-redux';
 
 import Button, { ButtonType } from '@/dls/Button/Button';
 import useScrollToTop from '@/hooks/useScrollToTop';
 import ChevronLeftIcon from '@/icons/chevron-left.svg';
 import ChevronRightIcon from '@/icons/chevron-right.svg';
+import { selectIsReadingByRevelationOrder } from '@/redux/slices/revelationOrder';
 import { isFirstSurah, isLastSurah } from '@/utils/chapter';
 import { logButtonClick } from '@/utils/eventLogger';
-import { getSurahNavigationUrl } from '@/utils/navigation';
+import { getNextSurahNavigationUrl, getPreviousSurahNavigationUrl } from '@/utils/navigation';
 import { VersesResponse } from 'types/ApiResponses';
 import Verse from 'types/Verse';
 
@@ -18,6 +20,8 @@ interface Props {
 }
 
 const ChapterControls: React.FC<Props> = ({ initialData }) => {
+  const isReadingByRevelationOrder = useSelector(selectIsReadingByRevelationOrder);
+
   const { t } = useTranslation('quran-reader');
   const scrollToTop = useScrollToTop();
   const chapterIdAndLastVerse = initialData.pagesLookup.lookupRange.to;
@@ -27,11 +31,11 @@ const ChapterControls: React.FC<Props> = ({ initialData }) => {
 
   return (
     <>
-      {!isFirstSurah(chapterNumber) && (
+      {!isFirstSurah(chapterNumber, isReadingByRevelationOrder) && (
         <Button
           type={ButtonType.Secondary}
           prefix={<ChevronLeftIcon />}
-          href={getSurahNavigationUrl(chapterNumber - 1)}
+          href={getPreviousSurahNavigationUrl(chapterNumber, isReadingByRevelationOrder)}
           onClick={() => {
             logButtonClick('chapter_control_prev_chapter');
           }}
@@ -48,11 +52,11 @@ const ChapterControls: React.FC<Props> = ({ initialData }) => {
       >
         {t('surah-beginning')}
       </Button>
-      {!isLastSurah(chapterNumber) && (
+      {!isLastSurah(chapterNumber, isReadingByRevelationOrder) && (
         <Button
           type={ButtonType.Secondary}
           suffix={<ChevronRightIcon />}
-          href={getSurahNavigationUrl(chapterNumber + 1)}
+          href={getNextSurahNavigationUrl(chapterNumber, isReadingByRevelationOrder)}
           onClick={() => {
             logButtonClick('chapter_control_next_chapter');
           }}
