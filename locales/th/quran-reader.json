@@ -48,6 +48,7 @@
     "reflections-desc": "อ่านและแบ่งปันการสะท้อนบทเรียนอัลกุรอานของโองการที่  {{ayahNumber}} ของซูเราะห์ {{surahName}}",
     "remove-bookmark": "ลบบุ๊คมาร์ค",
     "removed-from": "นำออกจาก {{collectionName}}",
+    "revelation-order-notice": "หมายเหตุ: คุณกำลังท่องอัลกุรอานตามลำดับการเปิดเผย <link> คลิกที่นี่ <\/link> เพื่อเปลี่ยนกลับเป็นลำดับเริ่มต้น",
     "rub-beginning": "จุดเริ่มต้นของรุบอุลฮิซบ์",
     "save-to": "บันทึกเป็น...",
     "saved-to": "บันทึกไปที่ {{collectionName}}",

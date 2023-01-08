@@ -48,6 +48,7 @@
     "reflections-desc": "Lisez et partagez les réflexions coraniques d'Ayah {{ayahNumber}} de la sourate {{surahName}}",
     "remove-bookmark": "Supprimer le signet",
     "removed-from": "Supprimé de {{collectionName}}",
+    "revelation-order-notice": "Remarque : vous naviguez dans le Coran selon l'ordre de la révélation. <link> Cliquez ici <\/link> pour revenir à l'ordre par défaut.",
     "rub-beginning": "Début de Rub el Hizb",
     "save-to": "Enregistrer dans...",
     "saved-to": "Enregistré dans {{collectionName}}",

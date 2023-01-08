@@ -48,6 +48,7 @@
     "reflections-desc": "آیات {{ayahNumber}} سوره {{surahName}} را بخوانید و به اشتراک بگذارید.",
     "remove-bookmark": "حذف نشانک",
     "removed-from": "از {{collectionName}} حذف شد",
+    "revelation-order-notice": "توجه: شما در حال حرکت در قرآن به ترتیب وحی هستید. <link> اینجا را کلیک کنید <\/link> برای بازگشت به ترتیب پیش فرض.",
     "rub-beginning": "آغاز روب الحزب",
     "save-to": "ذخیره در...",
     "saved-to": "در {{collectionName}} ذخیره شد",

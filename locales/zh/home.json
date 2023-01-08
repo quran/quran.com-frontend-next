@@ -3,6 +3,7 @@
     "noble-quran": "尊贵的古兰经",
     "read-juz": "读朱兹",
     "recently-read": "最近阅读",
+    "revelation-order-disclaimer": "此视图显示古兰经中古兰经的时间顺序，基于它们被启示给先知穆罕默德 (PBUH) 的时间。该命令是学术观点的主题，一些 Surahs 在不同的时间被部分地揭示。此处的排序基于<link> Tanzil.net <\/link>的工作。",
     "tab": {
         "bookmarks": "书签",
         "popular": "受欢迎的"
