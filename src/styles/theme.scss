@@ -59,7 +59,7 @@
   --transition-slow: 0.6s;
 
   @include shades.shades-dangerous;
-  @include light.mode;
+  @include sepia.mode;
 
   // Detect OS dark mode
   @media (prefers-color-scheme: dark) {
