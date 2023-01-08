@@ -120,8 +120,14 @@ const ChapterAndJuzList: React.FC<ChapterAndJuzListProps> = ({
             <Trans
               i18nKey="home:revelation-order-disclaimer"
               components={{
-                // eslint-disable-next-line jsx-a11y/control-has-associated-label, jsx-a11y/anchor-has-content
-                link: <a href="https://tanzil.net/docs/revelation_order" />,
+                link: (
+                  // eslint-disable-next-line jsx-a11y/control-has-associated-label, jsx-a11y/anchor-has-content
+                  <a
+                    href="https://tanzil.net/docs/revelation_order"
+                    target="_blank"
+                    rel="noreferrer"
+                  />
+                ),
               }}
             />
           </div>
