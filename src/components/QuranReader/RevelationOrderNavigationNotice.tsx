@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 import styles from './RevelationOrderNavigationNotice.module.scss';
 
 import { setIsReadingByRevelationOrder } from '@/redux/slices/revelationOrder';
+import { logButtonClick } from '@/utils/eventLogger';
 
 export enum RevelationOrderNavigationNoticeView {
   SideDrawer = 'side-drawer',
@@ -21,6 +22,7 @@ const RevelationOrderNavigationNotice = ({ view }: Props) => {
 
   const revertToDefaultOrdering = () => {
     dispatch({ type: setIsReadingByRevelationOrder.type, payload: false });
+    logButtonClick(`revert_to_default_ordering_${view}`);
   };
 
   return (

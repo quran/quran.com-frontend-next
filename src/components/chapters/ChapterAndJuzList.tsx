@@ -2,6 +2,7 @@
 import React, { useState, useMemo } from 'react';
 
 import classNames from 'classnames';
+import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
 import dynamic from 'next/dynamic';
 
@@ -115,7 +116,14 @@ const ChapterAndJuzList: React.FC<ChapterAndJuzListProps> = ({
         </div>
         {view === View.RevelationOrder && (
           <div className={styles.revelationOrderDisclaimer}>
-            {t('home:revelation-order-disclaimer')}
+            {/* {t('home:revelation-order-disclaimer')} */}
+            <Trans
+              i18nKey="home:revelation-order-disclaimer"
+              components={{
+                // eslint-disable-next-line jsx-a11y/control-has-associated-label, jsx-a11y/anchor-has-content
+                link: <a href="https://tanzil.net/docs/revelation_order" />,
+              }}
+            />
           </div>
         )}
       </div>

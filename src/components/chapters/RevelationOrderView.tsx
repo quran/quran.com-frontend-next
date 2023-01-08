@@ -12,6 +12,7 @@ import styles from './ChapterAndJuzList.module.scss';
 import { setIsReadingByRevelationOrder } from '@/redux/slices/revelationOrder';
 import Chapter from '@/types/Chapter';
 import { QURAN_CHAPTERS_COUNT } from '@/utils/chapter';
+import { logEvent } from '@/utils/eventLogger';
 import { shouldUseMinimalLayout, toLocalizedNumber } from '@/utils/locale';
 import REVELATION_ORDER from '@/utils/revelationOrder';
 
@@ -28,6 +29,7 @@ const RevelationOrderView = ({ isDescending, chapters }: RevelationOrderViewProp
   // When the user clicks on a surah through the revelation order list, put them in "revelation order" mode.
   const onSurahClick = () => {
     dispatch({ type: setIsReadingByRevelationOrder.type, payload: true });
+    logEvent('revelation_ordering_surah_click');
   };
 
   const sortedChaptersByRevelationOrder = useMemo(
@@ -54,7 +56,7 @@ const RevelationOrderView = ({ isDescending, chapters }: RevelationOrderViewProp
         <div className={styles.chapterContainer} key={chapter.id}>
           <Link href={`/${chapter.id}`} shouldPrefetch={false} onClick={onSurahClick}>
             <SurahPreviewRow
-              chapterId={Number(revelationOrderIndex)}
+              chapterId={REVELATION_ORDER[revelationOrderIndex]}
               description={getChapterDescription(chapter, t)}
               surahName={`${chapter.transliteratedName}`}
               surahNumber={
@@ -82,7 +84,7 @@ const getChapterDescription = (chapter: Chapter, t: Translate) => {
 
 const getTranslatedSurahName = (chapter: Chapter, t: Translate, lang: string) => {
   if (shouldUseMinimalLayout(lang)) {
-    return `${t('common:surah')} ${chapter.id}`;
+    return `${t('common:surah')} ${toLocalizedNumber(chapter.id, lang)}`;
   }
   return `${toLocalizedNumber(Number(chapter.id), lang)}: ${chapter.translatedName as string}`;
 };
