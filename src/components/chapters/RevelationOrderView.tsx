@@ -84,7 +84,7 @@ const getChapterDescription = (chapter: Chapter, t: Translate) => {
 
 const getTranslatedSurahName = (chapter: Chapter, t: Translate, lang: string) => {
   if (shouldUseMinimalLayout(lang)) {
-    return `${t('common:surah')} ${toLocalizedNumber(chapter.id, lang)}`;
+    return `${t('common:surah')} ${toLocalizedNumber(Number(chapter.id), lang)}`;
   }
   return `${toLocalizedNumber(Number(chapter.id), lang)}: ${chapter.translatedName as string}`;
 };
