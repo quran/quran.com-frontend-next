@@ -1,19 +1,20 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 
 import { Translate } from 'next-translate';
 import useTranslation from 'next-translate/useTranslation';
-import { useDispatch } from 'react-redux';
-
-import Link from '../dls/Link/Link';
-import SurahPreviewRow from '../dls/SurahPreview/SurahPreviewRow';
+import { useRouter } from 'next/router';
 
 import styles from './ChapterAndJuzList.module.scss';
 
+import SurahPreviewRow from '@/dls/SurahPreview/SurahPreviewRow';
+import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
 import { setIsReadingByRevelationOrder } from '@/redux/slices/revelationOrder';
+import PreferenceGroup from '@/types/auth/PreferenceGroup';
 import Chapter from '@/types/Chapter';
 import { QURAN_CHAPTERS_COUNT } from '@/utils/chapter';
-import { logEvent } from '@/utils/eventLogger';
+import { logButtonClick } from '@/utils/eventLogger';
 import { shouldUseMinimalLayout, toLocalizedNumber } from '@/utils/locale';
+import { getSurahNavigationUrl } from '@/utils/navigation';
 import REVELATION_ORDER from '@/utils/revelationOrder';
 
 const MECCAN_SURAH_STRING_IDENTIFIER = 'makkah'; // the value is coming from the backend, ideally we would've set it up as an enum, but other pieces of the code are relying on this as a string, so we'll keep it as a string for now.
@@ -24,12 +25,27 @@ type RevelationOrderViewProps = {
 
 const RevelationOrderView = ({ isDescending, chapters }: RevelationOrderViewProps) => {
   const { t, lang } = useTranslation();
-  const dispatch = useDispatch();
+  const router = useRouter();
+  const {
+    actions: { onSettingsChange },
+    isLoading,
+  } = usePersistPreferenceGroup();
+  const [clickedSurahId, setClickedSurahId] = useState(null);
 
-  // When the user clicks on a surah through the revelation order list, put them in "revelation order" mode.
-  const onSurahClick = () => {
-    dispatch({ type: setIsReadingByRevelationOrder.type, payload: true });
-    logEvent('revelation_ordering_surah_click');
+  const onSurahClicked = (surahId: string | number) => {
+    setClickedSurahId(surahId);
+    onSettingsChange(
+      'isReadingByRevelationOrder',
+      true,
+      setIsReadingByRevelationOrder(true),
+      setIsReadingByRevelationOrder(false),
+      PreferenceGroup.READING,
+      () => {
+        // navigate to the selected Surah on success
+        router.push(getSurahNavigationUrl(surahId));
+      },
+    );
+    logButtonClick('revelation_ordering_surah');
   };
 
   const sortedChaptersByRevelationOrder = useMemo(
@@ -53,21 +69,27 @@ const RevelationOrderView = ({ isDescending, chapters }: RevelationOrderViewProp
   return (
     <>
       {sortedChaptersByRevelationOrder.map((chapter, revelationOrderIndex) => (
-        <div className={styles.chapterContainer} key={chapter.id}>
-          <Link href={`/${chapter.id}`} shouldPrefetch={false} onClick={onSurahClick}>
-            <SurahPreviewRow
-              chapterId={REVELATION_ORDER[revelationOrderIndex]}
-              description={getChapterDescription(chapter, t)}
-              surahName={`${chapter.transliteratedName}`}
-              surahNumber={
-                isDescending
-                  ? QURAN_CHAPTERS_COUNT - Number(revelationOrderIndex)
-                  : Number(revelationOrderIndex + 1)
-              } // Show the number based on the revelation order instead of the surah number.
-              translatedSurahName={getTranslatedSurahName(chapter, t, lang)}
-              isMinimalLayout={false}
-            />
-          </Link>
+        <div
+          role="button"
+          tabIndex={0}
+          className={styles.chapterContainer}
+          key={chapter.id}
+          onClick={() => onSurahClicked(chapter.id)}
+          onKeyPress={() => onSurahClicked(chapter.id)}
+        >
+          <SurahPreviewRow
+            chapterId={REVELATION_ORDER[revelationOrderIndex]}
+            description={getChapterDescription(chapter, t)}
+            surahName={`${chapter.transliteratedName}`}
+            surahNumber={
+              isDescending
+                ? QURAN_CHAPTERS_COUNT - Number(revelationOrderIndex)
+                : Number(revelationOrderIndex + 1)
+            } // Show the number based on the revelation order instead of the surah number.
+            translatedSurahName={getTranslatedSurahName(chapter, t, lang)}
+            isMinimalLayout={false}
+            isLoading={isLoading && clickedSurahId === chapter.id}
+          />
         </div>
       ))}
     </>
