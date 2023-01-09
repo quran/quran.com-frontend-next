@@ -1,10 +1,12 @@
 import classNames from 'classnames';
 import Trans from 'next-translate/Trans';
-import { useDispatch } from 'react-redux';
 
 import styles from './RevelationOrderNavigationNotice.module.scss';
 
+import Spinner from '@/dls/Spinner/Spinner';
+import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
 import { setIsReadingByRevelationOrder } from '@/redux/slices/revelationOrder';
+import PreferenceGroup from '@/types/auth/PreferenceGroup';
 import { logButtonClick } from '@/utils/eventLogger';
 
 export enum RevelationOrderNavigationNoticeView {
@@ -18,10 +20,19 @@ type Props = {
 
 // A notice that lets users know that the ordering and navigation are not the default ones.
 const RevelationOrderNavigationNotice = ({ view }: Props) => {
-  const dispatch = useDispatch();
+  const {
+    actions: { onSettingsChange },
+    isLoading,
+  } = usePersistPreferenceGroup();
 
   const revertToDefaultOrdering = () => {
-    dispatch({ type: setIsReadingByRevelationOrder.type, payload: false });
+    onSettingsChange(
+      'isReadingByRevelationOrder',
+      false,
+      setIsReadingByRevelationOrder(false),
+      setIsReadingByRevelationOrder(true),
+      PreferenceGroup.READING,
+    );
     logButtonClick(`revert_to_default_ordering_${view}`);
   };
 
@@ -33,6 +44,7 @@ const RevelationOrderNavigationNotice = ({ view }: Props) => {
           view === RevelationOrderNavigationNoticeView.EndOfScrollingControls,
       })}
     >
+      {isLoading && <Spinner />}
       <Trans
         components={{
           link: (
