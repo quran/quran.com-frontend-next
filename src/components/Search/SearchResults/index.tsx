@@ -66,15 +66,12 @@ const SearchResults: React.FC<Props> = ({
               {searchResult.pagination.totalRecords > 0 && (
                 <Link
                   href={`/search?query=${searchQuery}`}
-                  shouldPassHref
                   onClick={() => {
                     if (onSearchResultClicked) onSearchResultClicked();
                     logButtonClick('search_drawer_show_all');
                   }}
                 >
-                  <a>
-                    <p className={styles.showAll}>{t('common:search.show-all')}</p>
-                  </a>
+                  <p className={styles.showAll}>{t('common:search.show-all')}</p>
                 </Link>
               )}
             </div>
