@@ -13,7 +13,7 @@ const CloseRadioButton = () => {
   const audioService = useContext(AudioPlayerMachineContext);
   return (
     <Button
-      tooltip={t('audio.player.close')}
+      tooltip={t('close')}
       shape={ButtonShape.Circle}
       variant={ButtonVariant.Ghost}
       onClick={withStopPropagation(() => {

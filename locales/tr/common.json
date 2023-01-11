@@ -45,7 +45,7 @@
         "playback-speed": "Oynatma Hızı",
         "playback-speed-unit": "x",
         "player": {
-            "close": "Ses Oynatıcıyı Kapat",
+            "close-audio-player": "Ses Oynatıcıyı Kapat",
             "currently-playing": "Şu anda çalıyor",
             "delay-verse": "Ayet arası gecikme",
             "download": "İndir",

@@ -45,7 +45,7 @@
         "playback-speed": "Shpejtësia e riprodhimit",
         "playback-speed-unit": "x",
         "player": {
-            "close": "Mbyll luajtësin e audios",
+            "close-audio-player": "Mbyll luajtësin e audios",
             "currently-playing": "Aktualisht jeni duke luajtur",
             "delay-verse": "Vonesa mes vargjeve",
             "download": "Shkarko",
