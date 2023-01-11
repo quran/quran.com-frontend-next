@@ -46,7 +46,6 @@
         "playback-speed-unit": "NS",
         "player": {
             "close": "ปิด",
-            "close-audio-player": "ปิดเครื่องเล่นเสียง",
             "currently-playing": "คุณกำลังเล่น",
             "delay-verse": "ความล่าช้าระหว่างข้อ",
             "download": "ดาวน์โหลด",

@@ -46,7 +46,6 @@
         "playback-speed-unit": "ایکس",
         "player": {
             "close": "بستن",
-            "close-audio-player": "پخش کننده صوتی را ببندید",
             "currently-playing": "شما در حال حاضر در حال بازی هستید",
             "delay-verse": "تأخیر بین آیه",
             "download": "دانلود",

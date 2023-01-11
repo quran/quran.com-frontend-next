@@ -46,7 +46,6 @@
         "playback-speed-unit": "এক্স",
         "player": {
             "close": "বন্ধ",
-            "close-audio-player": "অডিও প্লেয়ার বন্ধ করুন",
             "currently-playing": "আপনি বর্তমানে খেলছেন",
             "delay-verse": "আয়াতের মধ্যে বিলম্ব",
             "download": "ডাউনলোড করুন",

@@ -46,7 +46,6 @@
         "playback-speed-unit": "Икс",
         "player": {
             "close": "Закройте",
-            "close-audio-player": "Закройте аудиоплеер",
             "currently-playing": "Вы сейчас играете",
             "delay-verse": "Задержка между стихами",
             "download": "Скачать",

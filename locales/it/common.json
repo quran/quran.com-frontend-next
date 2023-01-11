@@ -46,7 +46,6 @@
         "playback-speed-unit": "X",
         "player": {
             "close": "Chiudi",
-            "close-audio-player": "Chiudi lettore audio",
             "currently-playing": "Stai giocando attualmente",
             "delay-verse": "Ritardo tra i versi",
             "download": "Scarica",

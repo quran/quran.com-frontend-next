@@ -46,7 +46,6 @@
         "playback-speed-unit": "x",
         "player": {
             "close": "Tutup",
-            "close-audio-player": "Tutup Pemain Audio",
             "currently-playing": "Anda sedang memainkan",
             "delay-verse": "Kelewatan antara ayat",
             "download": "Muat turun",
