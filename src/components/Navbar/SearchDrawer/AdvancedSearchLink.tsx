@@ -18,12 +18,14 @@ const AdvancedSearchLink: React.FC<Props> = ({ searchUrl }) => {
     <div className={styles.linkContainer}>
       <Link
         href={searchUrl || getSearchQueryNavigationUrl()}
-        className={styles.link}
+        shouldPassHref
         onClick={() => {
           logButtonClick('search_drawer_advanced_search');
         }}
       >
-        <p>{t('search.switch-mode')}</p>
+        <a className={styles.link}>
+          <p>{t('search.switch-mode')}</p>
+        </a>
       </Link>
     </div>
   );
