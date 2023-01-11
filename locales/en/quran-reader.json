@@ -48,6 +48,7 @@
     "reflections-desc": "Read and share Quranic reflections of Ayah {{ayahNumber}} of Surah {{surahName}}",
     "remove-bookmark": "Remove bookmark",
     "removed-from": "Removed from {{collectionName}}",
+    "revelation-order-notice": "Note: you're navigating the Quran by the order of revelation. <link>Click here<\/link> to revert to the default ordering.",
     "rub-beginning": "Beginning of Rub el Hizb",
     "save-to": "Save to...",
     "saved-to": "Saved to {{collectionName}}",

@@ -48,6 +48,7 @@
     "reflections-desc": "قراءة ومشاركة تدبرات قرآنية للآية {{ayahNumber}} من سورة {{surahName}}",
     "remove-bookmark": "إزالة الإشارة المرجعية",
     "removed-from": "تمت إزالته من {{collectionName}}",
+    "revelation-order-notice": "ملاحظة: أنت تتنقل في القرآن بترتيب نزول الوحي. <link> انقر هنا <\/link> للعودة إلى الترتيب الافتراضي.",
     "rub-beginning": "بداية ربع الحزب",
     "save-to": "حفظ في...",
     "saved-to": "تم الحفظ في {{collectionName}}",

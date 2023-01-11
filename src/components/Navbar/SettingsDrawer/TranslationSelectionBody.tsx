@@ -20,6 +20,7 @@ import {
   selectTranslations,
   setSelectedTranslations,
 } from '@/redux/slices/QuranReader/translations';
+import SearchQuerySource from '@/types/SearchQuerySource';
 import { makeTranslationsUrl } from '@/utils/apiPaths';
 import { logValueChange, logItemSelectionChange, logEmptySearchResults } from '@/utils/eventLogger';
 import filterTranslations from '@/utils/filter-translations';
@@ -143,7 +144,7 @@ const TranslationSelectionBody = () => {
             : data.translations;
 
           if (!filteredTranslations.length) {
-            logEmptySearchResults(searchQuery, 'settings_drawer_translation');
+            logEmptySearchResults(searchQuery, SearchQuerySource.TranslationSettingsDrawer);
           }
 
           const translationByLanguages = groupBy(filteredTranslations, 'languageName');

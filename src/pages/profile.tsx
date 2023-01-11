@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { useEffect } from 'react';
 
 import classNames from 'classnames';
@@ -125,7 +126,13 @@ const ProfilePage: NextPage<Props> = ({ chaptersData }) => {
             >
               <RecentReadingSessions />
             </div>
-            <div className={classNames(layoutStyle.flowItem, layoutStyle.fullWidth)}>
+            <div
+              className={classNames(
+                layoutStyle.flowItem,
+                layoutStyle.fullWidth,
+                styles.bookmarksAndCollectionsContainer,
+              )}
+            >
               <BookmarksAndCollectionsSection />
             </div>
 

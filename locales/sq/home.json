@@ -1,11 +1,14 @@
 {
     "no-bookmarks": "Nuk keni ende asnjë faqeshënues",
     "noble-quran": "Kurani Fisnik",
+    "read-juz": "Lexoni Juz",
     "recently-read": "Lexuar së fundmi",
+    "revelation-order-disclaimer": "Ky këndvështrim tregon rendin kronologjik të sureve në Kuran bazuar në kohën kur ato iu shpallën profetit Muhamed (a.s.). Urdhri është subjekt i mendimit të dijetarëve dhe disa sure janë shpallur pjesë-pjesë në kohë të ndryshme. Renditja këtu bazohet në punën e <link> Tanzil.net <\/link> .",
     "tab": {
         "bookmarks": "Faqeruajtësit",
         "popular": "Popullore"
     },
+    "view-all-bookmarks": "Shikoni të gjithë faqeshënuesit",
     "voice": {
         "trigger": "Qasje e shpejtë në çdo gjë"
     },

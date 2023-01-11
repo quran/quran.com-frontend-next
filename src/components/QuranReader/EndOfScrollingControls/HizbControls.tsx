@@ -36,7 +36,6 @@ const HizbControls: React.FC<Props> = ({ lastVerse }) => {
       )}
       <Button
         type={ButtonType.Secondary}
-        href={getHizbNavigationUrl(hizbNumber)}
         onClick={() => {
           logButtonClick('hizb_control_scroll_to_beginning');
           scrollToTop();

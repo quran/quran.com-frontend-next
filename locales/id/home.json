@@ -1,11 +1,14 @@
 {
     "no-bookmarks": "Anda belum memiliki penanda apa pun",
     "noble-quran": "Al-Quran yang mulia",
+    "read-juz": "Baca Juz",
     "recently-read": "Baru-baru ini dibaca",
+    "revelation-order-disclaimer": "Pandangan ini menunjukkan urutan kronologis surat-surat dalam Al-Qur'an berdasarkan saat diturunkan kepada Nabi Muhammad SAW. Urutannya adalah subjek pendapat ilmiah dan beberapa Surat diturunkan di bagian-bagian pada waktu yang berbeda. Urutan di sini didasarkan pada karya <link> Tanzil.net <\/link> .",
     "tab": {
         "bookmarks": "Penanda",
         "popular": "Populer"
     },
+    "view-all-bookmarks": "Lihat semua bookmark",
     "voice": {
         "trigger": "Akses cepat ke semuanya"
     },

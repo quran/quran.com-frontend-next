@@ -48,6 +48,7 @@
     "reflections-desc": "Baca dan bagikan renungan Alquran dari Ayat {{ayahNumber}} Surah {{surahName}}",
     "remove-bookmark": "Hapus penanda",
     "removed-from": "Dihapus dari {{collectionName}}",
+    "revelation-order-notice": "Catatan: Anda menavigasi Al-Qur'an berdasarkan urutan wahyu. <link> Klik di sini <\/link> untuk kembali ke urutan default.",
     "rub-beginning": "Awal dari Rub el Hizb",
     "save-to": "Menyimpan ke...",
     "saved-to": "Disimpan ke {{collectionName}}",

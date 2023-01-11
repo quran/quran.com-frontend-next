@@ -30,7 +30,8 @@ export const makeFacebookLoginUrl = (): string => makeUrl('auth/facebook');
 
 export const makeAppleLoginUrl = (): string => makeUrl('auth/apple');
 
-export const makeBookmarksUrl = (mushafId: number): string => makeUrl('bookmarks', { mushafId });
+export const makeBookmarksUrl = (mushafId: number, limit?: number): string =>
+  makeUrl('bookmarks', { mushafId, limit });
 
 export type CollectionsQueryParams = {
   cursor?: string;

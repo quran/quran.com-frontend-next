@@ -18,6 +18,7 @@ import useDebounce from '@/hooks/useDebounce';
 import IconSearch from '@/icons/search.svg';
 import { selectRecentNavigations } from '@/redux/slices/CommandBar/state';
 import { selectIsCommandBarVoiceFlowStarted } from '@/redux/slices/voiceSearch';
+import SearchQuerySource from '@/types/SearchQuerySource';
 import { makeSearchResultsUrl } from '@/utils/apiPaths';
 import { areArraysEqual } from '@/utils/array';
 import { logButtonClick, logTextSearchQuery } from '@/utils/eventLogger';
@@ -70,7 +71,7 @@ const CommandBarBody: React.FC = () => {
   useEffect(() => {
     // only when the search query has a value we call the API.
     if (debouncedSearchQuery) {
-      logTextSearchQuery(debouncedSearchQuery, 'command_bar');
+      logTextSearchQuery(debouncedSearchQuery, SearchQuerySource.CommandBar);
     }
   }, [debouncedSearchQuery]);
 

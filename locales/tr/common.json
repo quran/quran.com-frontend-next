@@ -13,7 +13,7 @@
                 "title": "Verileriniz cihazlar arasında <br> <\/br> senkronize edilecek"
             },
             "slide-3": {
-                "action": "Tamam anladım",
+                "action": "Tamam, anladım.",
                 "description": "Kuran.com'u kullandığınız için teşekkür ederiz ve <link> feedback.quran.com <\/link> ile ilgili görüşlerinizi duymaktan memnuniyet duyarız.",
                 "title": "Düşüncelerinizi duymak istiyoruz"
             }
@@ -30,7 +30,7 @@
         "drawer-close": "Çekmeceyi Kapat",
         "msg-close": "Mesajı Kapat",
         "nav-drawer-open": "Gezinti Çekmecesini Aç",
-        "play-surah": "{{surahName}} çal",
+        "play-surah": "{{surahName}} Ayeti Seslendir",
         "select-lng": "Dil Seçin",
         "sidebar-nav-close": "Gezinme Kenar Çubuğunu Kapat"
     },
@@ -40,7 +40,7 @@
             "on": "Açık",
             "title": "Otomatik kaydırma"
         },
-        "play": "Ses Çal",
+        "play": "Okut",
         "playback-normal": "Normal",
         "playback-speed": "Oynatma Hızı",
         "playback-speed-unit": "x",
@@ -54,7 +54,7 @@
             "pause": "Duraklat",
             "pause-audio": "Sesi Duraklat",
             "play": "Çal",
-            "play-audio": "Ses Çal",
+            "play-audio": "Okut",
             "play-range": "Çalma aralığı",
             "previous-ayah": "Önceki Ayet",
             "repeat-1-verse": "Ayeti Tekrarla",
@@ -73,7 +73,7 @@
         "title": "Ses"
     },
     "ayah": "Ayet",
-    "ayahs": "Ayetler",
+    "ayahs": "Ayet",
     "beta": "Beta",
     "bookmark": "Yer imi",
     "bookmarked": "İşaretli",
@@ -84,7 +84,7 @@
     "command-bar": {
         "navigations": "Navigasyonlar",
         "no-nav-results": "Navigasyon sonucu yok",
-        "placeholder": "Ne okumak istiyorsun?",
+        "placeholder": "Ne okumak istersiniz?",
         "powered-by": "Tarteel.ai tarafından desteklenen sesli arama",
         "recent-navigations": "Son gezinmeler",
         "search-by-voice": "Sesle ara",
@@ -107,7 +107,7 @@
     },
     "default-description": "Kuran, basit ve kolay bir arayüzde birçok dile çevrildi",
     "developers": "Geliştiriciler",
-    "donate": "Bağış yapmak",
+    "donate": "Bağış Yapın",
     "email-verification": {
         "check-spam": "Doğrulama e-postasını almadınız mı? Spam gelen kutunuzu kontrol edin",
         "email-sent": "Az önce <strong> {{email}} <\/strong> adresine bir e-posta gönderdik.",
@@ -120,7 +120,7 @@
         "bookmark-sync": "Yer imi senkronize değil.",
         "email-login-fail": "E-posta ile oturum açılamadı. Lütfen tekrar deneyin",
         "general": "Bir şeyler ters gitti. Lütfen tekrar deneyin.",
-        "offline": "Bağlantınızı kaybettiniz gibi görünüyor. Lütfen kontrol edip tekrar deneyin.",
+        "offline": "Görünüşe göre bağlantınız kesildi. Lütfen bağlantınızı kontrol edip yeniden deneyiniz.",
         "pref-persist-fail": "Ayarlarınız bulutla eşitlenemedi."
     },
     "feedback": "Geri Bildirim",
@@ -153,8 +153,8 @@
     "from": "İtibaren",
     "fundraising": {
         "description": "Aylık bağışlar, Kuran.com'u iyileştirmemize ve operasyonları sürdürmemize yardımcı oluyor, böylece bağış toplamaya daha az ve etki yaratmaya daha fazla odaklanıyoruz.",
-        "learn-more": "Daha fazla bilgi edin",
-        "title": "Aylık Bağışçı Olun"
+        "learn-more": "Daha fazla bilgi edinin",
+        "title": "Aylık Bağışçımız Olun"
     },
     "help": "Yardım",
     "hizb": "Hizb",
@@ -167,13 +167,15 @@
     "languages": "Diller",
     "less": "Daha az",
     "loading": "Yükleniyor",
-    "login": "Giriş yapmak",
+    "login": "Oturum aç",
     "logout": "Çıkış Yap",
+    "meccan": "Mekkeli",
+    "medinan": "Medine",
     "menu": "Menü",
     "mobile-apps": "Mobil Uygulamalar",
     "mode": "Mod",
     "more": "Daha fazla",
-    "navigate": "Gezin",
+    "navigate": "Keşfedin",
     "network": "Ağ",
     "next": "Sonraki",
     "next-ayah": "Sonraki Ayah",
@@ -202,14 +204,15 @@
     "quran-radio": "Kuran Radyo",
     "reading-preference": {
         "reading": "Okuma",
-        "translation": "Tercüme"
+        "translation": "Meal"
     },
     "reciter": "Okuyucu",
-    "reciters": "okuyucular",
+    "reciters": "Okuyucular",
     "reflect": "Yansıt",
     "remove": "Kaldırmak",
-    "rename": "Yeniden isimlendirmek",
+    "rename": "Yeniden Adlandır",
     "retry": "Yeniden dene",
+    "revelation_order": "Vahiy Düzeni",
     "rub": "El Hizb'i ovmak",
     "save-to-collection": "Koleksiyona Kaydet",
     "search-for": "'{{searchQuery}}' için arama yapın",
@@ -236,15 +239,15 @@
         "search-reciter": "Okuyucu Ara",
         "search-tafsirs": "Tefsir ara",
         "search-translations": "Çevirileri Ara",
-        "selected-reciter": "Seçilmiş Okur",
+        "selected-reciter": "Seslendiren",
         "selected-tafsirs": "Seçilmiş Tefsirler",
         "selected-translations": "Seçilmiş Çeviriler",
         "show-tooltip-when-playing-audio": "Ses çalarken araç ipucunu göster",
         "title": "Ayarlar",
-        "tooltip-playing-audio-helper": "Ayet çalarken kelime çevirisini araç ipucunda göster",
+        "tooltip-playing-audio-helper": "Ayet okunurken kelime çevirisini araç ipucunda göster",
         "value-and-other": "{{value}} ve {{othersCount}} diğer",
         "value-and-others": "{{value}} ve {{othersCount}} diğerleri",
-        "wbw-helper": "Çeviriyi veya harf çevirisini doğrudan kelimenin altında görüntüleyin",
+        "wbw-helper": "Çeviriyi veya transliterasyonu kelimenin altında görüntüleyin",
         "word-tooltip-helper": "Kelimeyi gezdirirken veya tıklatırken çeviriyi veya harf çevirisini görüntüleyin"
     },
     "share": "Paylaş",
@@ -263,7 +266,7 @@
         "descending": "Azalan"
     },
     "style": "Stil",
-    "submit": "Göndermek",
+    "submit": "Gönder",
     "surah": "Sure",
     "tafsir": {
         "font-size": "tefsir yazı tipi boyutu",
@@ -290,9 +293,9 @@
     "to": "NS",
     "tooltip": "Araç ipucu",
     "tooltip-trans-lang": "Araç İpucu Dili",
-    "translation": "Tercüme",
+    "translation": "Meal",
     "translations": "Çeviriler",
-    "transliteration": "Harf çevirisi",
+    "transliteration": "Okunuş",
     "type": "Tip",
     "undo": "Geri alma",
     "validation": {
@@ -317,11 +320,11 @@
     },
     "wbw": "Kelime kelime",
     "wbw-trans-lang": "Kelime Dilinden Kelime",
-    "wbw-translation": "Kelime Kelime Çeviri",
-    "wbw-transliteration": "Kelime Kelime Çevirisi",
+    "wbw-translation": "Kelime Kelime Okunuş",
+    "wbw-transliteration": "Kelime Kelime Meal",
     "word-click": {
         "no-audio": "Ses Yok",
-        "play-audio": "Ses Çal",
+        "play-audio": "Okut",
         "title": "Kelime Tıklaması"
     },
     "word-tooltip": "Kelime İpucu",

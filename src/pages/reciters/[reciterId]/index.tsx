@@ -13,6 +13,7 @@ import ChaptersList from '@/components/Reciter/ChaptersList';
 import ReciterInfo from '@/components/Reciter/ReciterInfo';
 import Input from '@/dls/Forms/Input';
 import SearchIcon from '@/icons/search.svg';
+import SearchQuerySource from '@/types/SearchQuerySource';
 import { getAllChaptersData } from '@/utils/chapter';
 import { logEmptySearchResults } from '@/utils/eventLogger';
 import { getLanguageAlternates, toLocalizedNumber } from '@/utils/locale';
@@ -32,7 +33,7 @@ const filterChapters = (chapters, searchQuery: string) => {
   const filteredReciter = fuse.search(searchQuery);
   const resultItems = filteredReciter.map(({ item }) => item);
   if (!filteredReciter.length) {
-    logEmptySearchResults(searchQuery, 'reciter_page_chapter_list');
+    logEmptySearchResults(searchQuery, SearchQuerySource.ReciterPageChapterList);
   }
   return resultItems as Chapter[];
 };

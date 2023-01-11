@@ -7,11 +7,11 @@ import { PersistGate } from 'redux-persist/integration/react';
 
 import getStore from './store';
 
-import GateLoader from '@/components/GateLoader';
 import syncUserPreferences from '@/redux/actions/sync-user-preferences';
 import { getUserPreferences } from '@/utils/auth/api';
 import { isLoggedIn } from '@/utils/auth/login';
 import { setLocaleCookie } from '@/utils/cookies';
+import isClient from '@/utils/isClient';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 
@@ -28,12 +28,6 @@ const ReduxProvider = ({ children, locale }) => {
   const store = useMemo(() => getStore(locale), [locale]);
   const persistor = useMemo(() => persistStore(store), [store]);
   const audioService = useContext(AudioPlayerMachineContext);
-
-  const isClient = !!(
-    typeof window !== 'undefined' &&
-    window.document &&
-    window.document.createElement
-  );
 
   /**
    * Before the Gate lifts, we want to get the user preferences
@@ -61,17 +55,13 @@ const ReduxProvider = ({ children, locale }) => {
     }
   };
 
-  if (isClient) {
-    return (
-      <Provider store={store}>
-        <PersistGate loading={<GateLoader />} persistor={persistor} onBeforeLift={onBeforeLift}>
-          {children}
-        </PersistGate>
-      </Provider>
-    );
-  }
-
-  return <Provider store={store}>{children}</Provider>;
+  return (
+    <Provider store={store}>
+      <PersistGate persistor={persistor} onBeforeLift={onBeforeLift}>
+        {() => <>{children}</>}
+      </PersistGate>
+    </Provider>
+  );
 };
 
 export default ReduxProvider;

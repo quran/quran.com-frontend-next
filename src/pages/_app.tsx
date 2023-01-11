@@ -104,7 +104,6 @@ function MyApp({ Component, pageProps }): JSX.Element {
           </ToastContainerProvider>
         </TooltipProvider>
       </DirectionProvider>
-
       <ThirdPartyScripts />
     </>
   );

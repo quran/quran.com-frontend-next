@@ -1,11 +1,14 @@
 {
     "no-bookmarks": "Você ainda não tem favoritos",
     "noble-quran": "O Nobre Alcorão",
+    "read-juz": "Leia Juz",
     "recently-read": "Lidos recentemente",
+    "revelation-order-disclaimer": "Esta exibição mostra a ordem cronológica das suratas no Alcorão com base em quando foram reveladas ao profeta Muhammad (PECE). A ordem é um assunto de opinião acadêmica e algumas suratas foram reveladas em partes em diferentes épocas. A ordem aqui é baseada no trabalho de <link> Tanzil.net <\/link> .",
     "tab": {
         "bookmarks": "Favoritos",
         "popular": "Popular"
     },
+    "view-all-bookmarks": "Ver todos os favoritos",
     "voice": {
         "trigger": "Acesso rápido a qualquer coisa"
     },
