@@ -33,6 +33,7 @@ type AudioPlayerEventType =
     }
   | { type: 'REPEAT_AYAH'; ayahNumber: number; verseDelay: number }
   | { type: 'PLAY_RADIO'; stationType: StationType; stationId: number }
+  | { type: 'CLOSE_RADIO' }
   | {
       type: 'PLAY_RADIO_TRACK';
       reciterId: number;

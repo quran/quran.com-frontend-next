@@ -45,7 +45,7 @@
         "playback-speed": "Playback Speed",
         "playback-speed-unit": "x",
         "player": {
-            "close": "Close Audio Player",
+            "close-audio-player": "Close Audio Player",
             "currently-playing": "You are currently playing",
             "delay-verse": "Delay between verse",
             "download": "Download",

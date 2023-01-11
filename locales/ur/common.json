@@ -45,7 +45,7 @@
         "playback-speed": "پلے بیک کی رفتار",
         "playback-speed-unit": "ایکس",
         "player": {
-            "close": "آڈیو پلیئر بند کریں۔",
+            "close-audio-player": "آڈیو پلیئر بند کریں۔",
             "currently-playing": "آپ فی الحال کھیل رہے ہیں۔",
             "delay-verse": "آیت کے درمیان وقفہ",
             "download": "ڈاؤن لوڈ کریں",
