@@ -45,7 +45,7 @@
         "playback-speed": "Velocidade de reprodução",
         "playback-speed-unit": "x",
         "player": {
-            "close": "Fechar",
+            "close": "Fechar o reprodutor de áudio",
             "currently-playing": "Você está jogando atualmente",
             "delay-verse": "Atraso entre os versos",
             "download": "Download",

@@ -45,7 +45,7 @@
         "playback-speed": "Afspeelsnelheid",
         "playback-speed-unit": "x",
         "player": {
-            "close": "Sluit",
+            "close": "Sluit audiospeler",
             "currently-playing": "Je speelt momenteel",
             "delay-verse": "Vertraging tussen vers",
             "download": "Downloaden",

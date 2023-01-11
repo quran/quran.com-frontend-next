@@ -45,7 +45,7 @@
         "playback-speed": "سرعة التشغيل",
         "playback-speed-unit": "x",
         "player": {
-            "close": "أغلق",
+            "close": "أغلق مشغل الصوت",
             "currently-playing": "أنت تستمع حاليا",
             "delay-verse": "الفاصل بين الآيات",
             "download": "تحميل",

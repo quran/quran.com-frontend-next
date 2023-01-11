@@ -45,7 +45,7 @@
         "playback-speed": "Kecepatan Pemutaran",
         "playback-speed-unit": "x",
         "player": {
-            "close": "Tutup",
+            "close": "Tutup Pemutar Audio",
             "currently-playing": "Anda saat ini sedang memainkan",
             "delay-verse": "Keterlambatan antar ayat",
             "download": "Unduh",
