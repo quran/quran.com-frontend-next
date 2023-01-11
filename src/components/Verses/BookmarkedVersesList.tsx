@@ -3,7 +3,8 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useContext, useMemo } from 'react';
 
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux';
 import useSWR from 'swr';
 
@@ -33,7 +34,8 @@ import Bookmark from 'types/Bookmark';
 const BOOKMARKS_API_LIMIT = 10; // The number of bookmarks to fetch from the api
 
 const BookmarkedVersesList = () => {
-  const { t, lang } = useTranslation('home');
+  const { t } = useTranslation('home');
+  const { locale } = useRouter();
   const chaptersData = useContext(DataContext);
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const dispatch = useDispatch();
@@ -124,7 +126,7 @@ const BookmarkedVersesList = () => {
               const chapterData = getChapterData(chaptersData, chapterNumber.toString());
               const bookmarkText = `${chapterData.transliteratedName} ${toLocalizedVerseKey(
                 verseKey,
-                lang,
+                locale,
               )}`;
               return (
                 <div key={verseKey} className={styles.bookmarkItem}>

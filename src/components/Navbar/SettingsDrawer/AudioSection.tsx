@@ -3,7 +3,8 @@ import React, { useContext, useMemo } from 'react';
 
 import { ActionCreatorWithOptionalPayload } from '@reduxjs/toolkit';
 import { useSelector as useXstateSelector } from '@xstate/react';
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 
 import styles from './AudioSection.module.scss';
@@ -37,7 +38,8 @@ import { WordClickFunctionality } from 'types/QuranReader';
 export const playbackRates = [0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2];
 
 const AudioSection = () => {
-  const { t, lang } = useTranslation('common');
+  const { t } = useTranslation('common');
+  const { locale } = useRouter();
   const dispatch = useDispatch();
   const audioService = useContext(AudioPlayerMachineContext);
   const readingPreferences = useSelector(selectReadingPreferences);
@@ -89,9 +91,9 @@ const AudioSection = () => {
   const playbackRatesOptions = useMemo(
     () =>
       generateSelectOptions(
-        playbackRates.map((rate) => ({ label: toLocalizedNumber(rate, lang), value: rate })),
+        playbackRates.map((rate) => ({ label: toLocalizedNumber(rate, locale), value: rate })),
       ),
-    [lang],
+    [locale],
   );
 
   const onSelectionCardClicked = () => {
@@ -140,7 +142,7 @@ const AudioSection = () => {
         <Section.Title isLoading={isLoading}>{t('audio.title')}</Section.Title>
         <Section.Row>
           <DataFetcher
-            queryKey={makeAvailableRecitersUrl(lang)}
+            queryKey={makeAvailableRecitersUrl(locale)}
             render={(data: RecitersResponse) => {
               const selectedReciter = data.reciters.find(
                 (reciter) => reciter.id === selectedReciterId,

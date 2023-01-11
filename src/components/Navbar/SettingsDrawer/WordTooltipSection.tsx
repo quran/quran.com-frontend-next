@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Action } from '@reduxjs/toolkit';
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import { shallowEqual, useSelector } from 'react-redux';
 
@@ -25,8 +25,9 @@ import QueryParam from 'types/QueryParam';
 import { WordByWordType } from 'types/QuranReader';
 
 const WordTooltipSection = () => {
-  const { t, lang } = useTranslation('common');
+  const { t } = useTranslation('common');
   const router = useRouter();
+  const { locale } = router;
   const {
     actions: { onSettingsChange },
     isLoading,
@@ -58,8 +59,8 @@ const WordTooltipSection = () => {
     onWordTooltipSettingsChange(
       'selectedWordByWordLocale',
       value,
-      setSelectedWordByWordLocale({ value, locale: lang }),
-      setSelectedWordByWordLocale({ value: wordByWordLocale, locale: lang }),
+      setSelectedWordByWordLocale({ value, locale }),
+      setSelectedWordByWordLocale({ value: wordByWordLocale, locale }),
     );
   };
 

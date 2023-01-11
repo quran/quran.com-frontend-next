@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
 
 import Button, { ButtonType } from '@/dls/Button/Button';
 import ChevronLeftIcon from '@/icons/chevron-left.svg';

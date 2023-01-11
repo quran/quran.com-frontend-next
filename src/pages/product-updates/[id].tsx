@@ -1,5 +1,4 @@
 import { NextPage } from 'next';
-import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 
 import styles from './changelog.module.scss';
@@ -22,8 +21,8 @@ interface Props {
 }
 
 const Page: NextPage<Props> = ({ hasError, page, blocks }) => {
-  const { lang } = useTranslation();
   const router = useRouter();
+
   if (router.isFallback) {
     return (
       <div className={styles.container}>
@@ -39,7 +38,10 @@ const Page: NextPage<Props> = ({ hasError, page, blocks }) => {
   const { id } = page;
   return (
     <>
-      <NextSeoWrapper title={pageTitle} url={getCanonicalUrl(lang, getProductUpdatesUrl(id))} />
+      <NextSeoWrapper
+        title={pageTitle}
+        url={getCanonicalUrl(router.locale, getProductUpdatesUrl(id))}
+      />
       <PageContainer>
         <div className={styles.container}>
           <div className={styles.backIconContainer} />

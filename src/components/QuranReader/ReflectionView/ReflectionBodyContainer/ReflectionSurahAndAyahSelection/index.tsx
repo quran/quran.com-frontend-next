@@ -1,6 +1,6 @@
 import React from 'react';
 
-import useTranslation from 'next-translate/useTranslation';
+import { useRouter } from 'next/router';
 
 import styles from './ReflectionSurahAndAyahSelection.module.scss';
 
@@ -22,7 +22,7 @@ const ReflectionSurahAndAyahSelection: React.FC<Props> = ({
   setSelectedVerseNumber,
   setSelectedChapterId,
 }) => {
-  const { lang } = useTranslation();
+  const { locale } = useRouter();
   const onChapterIdChange = (newChapterId) => {
     logItemSelectionChange('reflection_chapter_id', newChapterId);
     setSelectedChapterId(newChapterId.toString());
@@ -30,7 +30,7 @@ const ReflectionSurahAndAyahSelection: React.FC<Props> = ({
     setSelectedVerseNumber(newVerseNumber); // reset verse number to 1 every time chapter changes
     fakeNavigate(
       getVerseReflectionNavigationUrl(makeVerseKey(newChapterId, Number(newVerseNumber))),
-      lang,
+      locale,
     );
   };
 
@@ -41,7 +41,7 @@ const ReflectionSurahAndAyahSelection: React.FC<Props> = ({
       getVerseReflectionNavigationUrl(
         makeVerseKey(Number(selectedChapterId), Number(newVerseNumber)),
       ),
-      lang,
+      locale,
     );
   };
 

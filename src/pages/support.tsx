@@ -1,8 +1,8 @@
 /* eslint-disable jsx-a11y/anchor-has-content */
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import { NextPage } from 'next';
-import Trans from 'next-translate/Trans';
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation, Trans } from 'next-i18next';
+import { useRouter } from 'next/router';
 
 import styles from './contentPage.module.scss';
 
@@ -14,12 +14,14 @@ import { getCanonicalUrl } from '@/utils/navigation';
 
 const PATH = '/support';
 const SupportPage: NextPage = (): JSX.Element => {
-  const { t, lang } = useTranslation('support');
+  const { t } = useTranslation('support');
+  const { locale } = useRouter();
+
   return (
     <>
       <NextSeoWrapper
         title={t('support')}
-        url={getCanonicalUrl(lang, PATH)}
+        url={getCanonicalUrl(locale, PATH)}
         languageAlternates={getLanguageAlternates(PATH)}
       />
       <PageContainer>

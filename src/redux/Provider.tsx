@@ -1,12 +1,12 @@
 import { useContext, useMemo } from 'react';
 
-import setLanguage from 'next-translate/setLanguage';
 import { Provider } from 'react-redux';
 import { persistStore } from 'redux-persist';
 import { PersistGate } from 'redux-persist/integration/react';
 
 import getStore from './store';
 
+import useSetLanguage from '@/hooks/useSetLanguage';
 import syncUserPreferences from '@/redux/actions/sync-user-preferences';
 import { getUserPreferences } from '@/utils/auth/api';
 import { isLoggedIn } from '@/utils/auth/login';
@@ -28,6 +28,7 @@ const ReduxProvider = ({ children, locale }) => {
   const store = useMemo(() => getStore(locale), [locale]);
   const persistor = useMemo(() => persistStore(store), [store]);
   const audioService = useContext(AudioPlayerMachineContext);
+  const setLanguage = useSetLanguage();
 
   /**
    * Before the Gate lifts, we want to get the user preferences

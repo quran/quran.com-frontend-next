@@ -2,7 +2,7 @@
 import { useContext } from 'react';
 
 import { unwrapResult } from '@reduxjs/toolkit';
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
 
@@ -24,18 +24,19 @@ import QueryParam from 'types/QueryParam';
 const ResetButton = () => {
   const dispatch = useDispatch();
   const router = useRouter();
-  const { t, lang } = useTranslation('common');
+  const { t } = useTranslation('common');
+  const { locale } = router;
   const toast = useToast();
   const audioService = useContext(AudioPlayerMachineContext);
 
   const onResetSettingsClicked = () => {
     logButtonClick('reset_settings');
     if (isLoggedIn()) {
-      dispatch(persistDefaultSettings(lang))
+      dispatch(persistDefaultSettings(locale))
         // @ts-ignore
         .then(unwrapResult)
         .then(() => {
-          dispatch(resetSettings(lang));
+          dispatch(resetSettings(locale));
           audioService.send({
             type: 'SET_INITIAL_CONTEXT',
             ...DEFAULT_XSTATE_INITIAL_STATE,
@@ -45,7 +46,7 @@ const ResetButton = () => {
           // TODO: show an error
         });
     } else {
-      dispatch(resetSettings(lang));
+      dispatch(resetSettings(locale));
       audioService.send({
         type: 'SET_INITIAL_CONTEXT',
         ...DEFAULT_XSTATE_INITIAL_STATE,

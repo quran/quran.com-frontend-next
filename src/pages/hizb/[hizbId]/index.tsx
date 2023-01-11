@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 
 import NextSeoWrapper from '@/components/NextSeoWrapper';
@@ -33,9 +33,10 @@ interface HizbPageProps {
 }
 
 const HizbPage: NextPage<HizbPageProps> = ({ hasError, hizbVerses, chaptersData }) => {
-  const { t, lang } = useTranslation('common');
+  const { t } = useTranslation('common');
   const {
     query: { hizbId },
+    locale,
   } = useRouter();
 
   if (hasError) return <Error statusCode={500} />;
@@ -46,9 +47,9 @@ const HizbPage: NextPage<HizbPageProps> = ({ hasError, hizbVerses, chaptersData 
   return (
     <DataContext.Provider value={chaptersData}>
       <NextSeoWrapper
-        title={`${t('hizb')} ${toLocalizedNumber(Number(hizbId), lang)}`}
+        title={`${t('hizb')} ${toLocalizedNumber(Number(hizbId), locale)}`}
         description={getPageOrJuzMetaDescription(hizbVerses)}
-        canonical={getCanonicalUrl(lang, path)}
+        canonical={getCanonicalUrl(locale, path)}
         languageAlternates={getLanguageAlternates(path)}
       />
       <QuranReader

@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import { GetStaticProps } from 'next';
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
 
 import pageStyle from './index.module.scss';
 import radioStyle from './radio.module.scss';
@@ -24,12 +25,14 @@ type RadioPageProps = {
 const NAVIGATION_URL = '/radio';
 
 const RadioPage = ({ reciters, chaptersData }: RadioPageProps) => {
-  const { t, lang } = useTranslation('radio');
+  const { t } = useTranslation('radio');
+  const { locale } = useRouter();
+
   return (
     <DataContext.Provider value={chaptersData}>
       <NextSeoWrapper
         title={t('common:quran-radio')}
-        canonical={getCanonicalUrl(lang, NAVIGATION_URL)}
+        canonical={getCanonicalUrl(locale, NAVIGATION_URL)}
         languageAlternates={getLanguageAlternates(NAVIGATION_URL)}
         description={t('radio-desc')}
       />

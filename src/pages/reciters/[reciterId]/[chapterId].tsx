@@ -5,7 +5,7 @@ import { useSelector } from '@xstate/react';
 import classNames from 'classnames';
 import clipboardCopy from 'clipboard-copy';
 import { GetStaticPaths, GetStaticProps } from 'next';
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 
 import layoutStyle from '../../index.module.scss';
@@ -50,9 +50,10 @@ const RecitationPage = ({
   selectedChapter,
   chaptersData,
 }: ShareRecitationPageProps) => {
-  const { t, lang } = useTranslation();
+  const { t } = useTranslation();
   const toast = useToast();
   const router = useRouter();
+  const { locale } = router;
   const [isDownloadingAudio, setIsDownloadingAudio] = useState(false);
 
   const audioService = useContext(AudioPlayerMachineContext);
@@ -112,7 +113,7 @@ const RecitationPage = ({
           reciterName: selectedReciter.translatedName.name,
         })}
         canonical={getCanonicalUrl(
-          lang,
+          locale,
           getReciterChapterNavigationUrl(selectedReciter.id.toString(), selectedChapter.slug),
         )}
       />

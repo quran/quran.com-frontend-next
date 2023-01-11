@@ -2,7 +2,7 @@
 /* eslint-disable react-func/max-lines-per-function */
 import { useMemo } from 'react';
 
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { useSWRConfig } from 'swr';
 import useSWRImmutable from 'swr/immutable';

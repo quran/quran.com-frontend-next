@@ -1,4 +1,4 @@
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
 import { useSWRConfig } from 'swr';
 
 import buildFormBuilderFormField from '../FormBuilder/buildFormBuilderFormField';

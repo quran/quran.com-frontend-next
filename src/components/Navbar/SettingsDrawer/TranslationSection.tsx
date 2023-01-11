@@ -1,7 +1,8 @@
 import { useCallback, useMemo } from 'react';
 
 import { Action } from '@reduxjs/toolkit';
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import Section from './Section';
@@ -33,7 +34,8 @@ const TranslationSection = () => {
     actions: { onSettingsChange },
     isLoading,
   } = usePersistPreferenceGroup();
-  const { t, lang } = useTranslation('common');
+  const { t } = useTranslation('common');
+  const { locale } = useRouter();
   const dispatch = useDispatch();
   const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
@@ -51,8 +53,8 @@ const TranslationSection = () => {
   );
 
   const localizedSelectedTranslations = useMemo(
-    () => toLocalizedNumber(selectedTranslations.length - 1, lang),
-    [selectedTranslations, lang],
+    () => toLocalizedNumber(selectedTranslations.length - 1, locale),
+    [selectedTranslations, locale],
   );
 
   const onSelectionCardClicked = useCallback(() => {
@@ -138,7 +140,7 @@ const TranslationSection = () => {
         <Section.Row>
           <DataFetcher
             loading={translationLoading}
-            queryKey={makeTranslationsUrl(lang)}
+            queryKey={makeTranslationsUrl(locale)}
             render={renderTranslations}
           />
         </Section.Row>

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import useTranslation from 'next-translate/useTranslation';
+import { useRouter } from 'next/router';
 
 import styles from './VerseLink.module.scss';
 
@@ -14,7 +14,8 @@ interface Props {
 }
 
 const VerseLink: React.FC<Props> = ({ verseKey }) => {
-  const { lang } = useTranslation('');
+  const { locale } = useRouter();
+
   return (
     <Button
       className={styles.verseLink}
@@ -28,7 +29,7 @@ const VerseLink: React.FC<Props> = ({ verseKey }) => {
         logButtonClick('translation_view_verse_link');
       }}
     >
-      {toLocalizedVerseKey(verseKey, lang)}
+      {toLocalizedVerseKey(verseKey, locale)}
     </Button>
   );
 };

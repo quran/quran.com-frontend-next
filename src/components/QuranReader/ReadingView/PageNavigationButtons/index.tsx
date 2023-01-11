@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 
 import { useSelector } from '@xstate/react';
 import classNames from 'classnames';
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
 
 import styles from './PageNavigationButtons.module.scss';
 

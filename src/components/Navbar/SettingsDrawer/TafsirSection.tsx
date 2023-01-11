@@ -1,6 +1,7 @@
 import { useCallback, useMemo } from 'react';
 
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import Section from './Section';
@@ -26,7 +27,8 @@ import { toLocalizedNumber } from '@/utils/locale';
 import { TafsirsResponse } from 'types/ApiResponses';
 
 const TafsirSection = () => {
-  const { t, lang } = useTranslation('common');
+  const { t } = useTranslation('common');
+  const { locale } = useRouter();
   const dispatch = useDispatch();
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const { tafsirFontScale } = quranReaderStyles;
@@ -45,8 +47,8 @@ const TafsirSection = () => {
   );
 
   const localizedSelectedTafsirs = useMemo(
-    () => toLocalizedNumber(selectedTafsirs.length - 1, lang),
-    [selectedTafsirs, lang],
+    () => toLocalizedNumber(selectedTafsirs.length - 1, locale),
+    [selectedTafsirs, locale],
   );
 
   const onSelectionCardClicked = useCallback(() => {
@@ -100,7 +102,7 @@ const TafsirSection = () => {
         <Section.Row>
           <DataFetcher
             loading={tafsirLoading}
-            queryKey={makeTafsirsUrl(lang)}
+            queryKey={makeTafsirsUrl(locale)}
             render={renderTafsirs}
           />
         </Section.Row>

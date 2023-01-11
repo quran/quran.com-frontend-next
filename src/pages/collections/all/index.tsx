@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import { GetStaticProps } from 'next';
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
 
 import CollectionDetailContainer from '@/components/Collection/CollectionDetailContainer/CollectionDetailContainer';
 import { isLoggedIn } from '@/utils/auth/login';

@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 
 import { useSelector } from '@xstate/react';
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
 
 import Button, { ButtonShape, ButtonVariant } from '@/dls/Button/Button';
 import Spinner, { SpinnerSize } from '@/dls/Spinner/Spinner';

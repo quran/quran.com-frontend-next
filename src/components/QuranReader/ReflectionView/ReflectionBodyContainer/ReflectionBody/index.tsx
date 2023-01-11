@@ -1,6 +1,7 @@
 import React, { useCallback, useContext, useMemo } from 'react';
 
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
 
 import styles from './ReflectionBody.module.scss';
 
@@ -35,7 +36,8 @@ const ReflectionBody: React.FC<Props> = ({
   scrollToTop,
   setSelectedVerseNumber,
 }) => {
-  const { t, lang } = useTranslation('quran-reader');
+  const { t } = useTranslation('quran-reader');
+  const { locale } = useRouter();
   const chaptersData = useContext(DataContext);
   const hasNextVerse = !isLastVerseOfSurah(
     chaptersData,
@@ -52,10 +54,10 @@ const ReflectionBody: React.FC<Props> = ({
       getVerseReflectionNavigationUrl(
         makeVerseKey(Number(selectedChapterId), Number(newVerseNumber)),
       ),
-      lang,
+      locale,
     );
     setSelectedVerseNumber(newVerseNumber);
-  }, [lang, scrollToTop, selectedChapterId, selectedVerseNumber, setSelectedVerseNumber]);
+  }, [locale, scrollToTop, selectedChapterId, selectedVerseNumber, setSelectedVerseNumber]);
 
   const loadPrevVerse = useCallback(() => {
     const newVerseNumber = String(Number(selectedVerseNumber) - 1);
@@ -66,14 +68,14 @@ const ReflectionBody: React.FC<Props> = ({
       getVerseReflectionNavigationUrl(
         makeVerseKey(Number(selectedChapterId), Number(newVerseNumber)),
       ),
-      lang,
+      locale,
     );
-  }, [lang, scrollToTop, selectedChapterId, selectedVerseNumber, setSelectedVerseNumber]);
+  }, [locale, scrollToTop, selectedChapterId, selectedVerseNumber, setSelectedVerseNumber]);
   const filteredPosts = useMemo(() => {
     return data?.posts?.filter((reflection) =>
-      localeToReflectionLanguages(lang).includes(reflection.language),
+      localeToReflectionLanguages(locale).includes(reflection.language),
     );
-  }, [data?.posts, lang]);
+  }, [data?.posts, locale]);
 
   const onReadMoreClicked = () => {
     logButtonClick('read_more_reflections');

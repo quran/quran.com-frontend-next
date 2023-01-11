@@ -1,5 +1,5 @@
 import capitalize from 'lodash/capitalize';
-import { Translate } from 'next-translate';
+import { TFunction } from 'next-i18next';
 
 import { FormBuilderFormField } from './FormBuilderTypes';
 
@@ -23,7 +23,7 @@ import FormField from 'types/FormField';
  * @param {FormField} formField
  * @returns {FormBuilderFormField} formBuilderFormField
  */
-const buildFormBuilderFormField = (formField: FormField, t: Translate): FormBuilderFormField => {
+const buildFormBuilderFormField = (formField: FormField, t: TFunction): FormBuilderFormField => {
   return {
     field: formField.field,
     type: formField.type,

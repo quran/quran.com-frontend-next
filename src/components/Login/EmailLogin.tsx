@@ -1,4 +1,4 @@
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
 
 import buildTranslatedErrorMessageByErrorId from '../FormBuilder/buildTranslatedErrorMessageByErrorId';
 import FormBuilder, { SubmissionResult } from '../FormBuilder/FormBuilder';

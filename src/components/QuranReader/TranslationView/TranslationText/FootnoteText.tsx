@@ -3,7 +3,8 @@
 import React, { MouseEvent } from 'react';
 
 import classNames from 'classnames';
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
 
 import styles from './FootnoteText.module.scss';
 import transStyles from './TranslationText.module.scss';
@@ -27,9 +28,10 @@ const FootnoteText: React.FC<FootnoteTextProps> = ({
   onTextClicked,
   isLoading,
 }) => {
-  const { t, lang } = useTranslation('quran-reader');
+  const { t } = useTranslation('quran-reader');
+  const { locale } = useRouter();
 
-  const languageId = footnote?.languageId || findLanguageIdByLocale(lang);
+  const languageId = footnote?.languageId || findLanguageIdByLocale(locale);
   const landData = getLanguageDataById(languageId);
 
   return (

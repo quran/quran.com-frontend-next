@@ -1,7 +1,6 @@
 import { useMemo, useState } from 'react';
 
-import { Translate } from 'next-translate';
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation, TFunction } from 'next-i18next';
 import { useRouter } from 'next/router';
 
 import styles from './ChapterAndJuzList.module.scss';
@@ -24,7 +23,7 @@ type RevelationOrderViewProps = {
 };
 
 const RevelationOrderView = ({ isDescending, chapters }: RevelationOrderViewProps) => {
-  const { t, lang } = useTranslation();
+  const { t } = useTranslation();
   const router = useRouter();
   const {
     actions: { onSettingsChange },
@@ -86,7 +85,7 @@ const RevelationOrderView = ({ isDescending, chapters }: RevelationOrderViewProp
                 ? QURAN_CHAPTERS_COUNT - Number(revelationOrderIndex)
                 : Number(revelationOrderIndex + 1)
             } // Show the number based on the revelation order instead of the surah number.
-            translatedSurahName={getTranslatedSurahName(chapter, t, lang)}
+            translatedSurahName={getTranslatedSurahName(chapter, t, router.locale)}
             isMinimalLayout={false}
             isLoading={isLoading && clickedSurahId === chapter.id}
           />
@@ -96,7 +95,7 @@ const RevelationOrderView = ({ isDescending, chapters }: RevelationOrderViewProp
   );
 };
 
-const getChapterDescription = (chapter: Chapter, t: Translate) => {
+const getChapterDescription = (chapter: Chapter, t: TFunction) => {
   if (chapter.revelationPlace === MECCAN_SURAH_STRING_IDENTIFIER) {
     return t('common:meccan');
   }
@@ -104,7 +103,7 @@ const getChapterDescription = (chapter: Chapter, t: Translate) => {
   return t('common:medinan');
 };
 
-const getTranslatedSurahName = (chapter: Chapter, t: Translate, lang: string) => {
+const getTranslatedSurahName = (chapter: Chapter, t: TFunction, lang: string) => {
   if (shouldUseMinimalLayout(lang)) {
     return `${t('common:surah')} ${toLocalizedNumber(Number(chapter.id), lang)}`;
   }

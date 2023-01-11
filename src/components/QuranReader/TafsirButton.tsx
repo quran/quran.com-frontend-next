@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
 
 import classNames from 'classnames';
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 
@@ -26,8 +26,9 @@ const TafsirButton: React.FC<Props> = ({
   isTranslationView = true,
   onActionTriggered,
 }) => {
-  const { t, lang } = useTranslation('common');
+  const { t } = useTranslation('common');
   const router = useRouter();
+  const { locale } = router;
   const tafsirs = useSelector(selectSelectedTafsirs);
   const [isContentModalOpen, setIsContentModalOpen] = useState(false);
   const [chapterId, verseNumber] = getVerseAndChapterNumbersFromKey(verseKey);
@@ -39,7 +40,7 @@ const TafsirButton: React.FC<Props> = ({
     setIsContentModalOpen(true);
     fakeNavigate(
       getVerseSelectedTafsirNavigationUrl(chapterId, Number(verseNumber), tafsirs[0]),
-      lang,
+      locale,
     );
   };
 

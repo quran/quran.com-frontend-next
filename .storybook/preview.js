@@ -6,11 +6,8 @@ import Theme from '../src/styles/theme.scss'
 import GlobalFonts from '../src/styles/fonts.scss';
 import GlobalStyles from '../src/styles/global.scss';
 import Styles from '../.storybook/styles.scss';
-import I18nProvider from 'next-translate/I18nProvider';
+import i18nDecorator from './i18n';
 import { themes } from '@storybook/theming';
-
-import commonEn from '../locales/en/common.json';
-import homeEn from '../locales/en/home.json';
 
 const themeDecorator = (Story, context) => {
   const theme = context.globals.theme;
@@ -30,9 +27,7 @@ const themeDecorator = (Story, context) => {
            boxSizing: 'border-box'
           }}>
           <TooltipProvider>
-            <I18nProvider lang={'en'} namespaces={{ common: commonEn, home: homeEn }}>
               <Story />
-            </I18nProvider>
           </TooltipProvider>
         </div>
       </div>
@@ -41,7 +36,7 @@ const themeDecorator = (Story, context) => {
 };
 
 
-export const decorators = [themeDecorator];
+export const decorators = [i18nDecorator, themeDecorator];
 export const globalTypes = {
   theme: {
     name: 'Theme',

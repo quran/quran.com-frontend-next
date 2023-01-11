@@ -2,7 +2,8 @@
 import React, { useMemo } from 'react';
 
 import { Action } from '@reduxjs/toolkit';
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import styles from './QuranFontSection.module.scss';
@@ -30,7 +31,8 @@ import PreferenceGroup from 'types/auth/PreferenceGroup';
 import { MushafLines, QuranFont } from 'types/QuranReader';
 
 const QuranFontSection = () => {
-  const { t, lang } = useTranslation('common');
+  const { t } = useTranslation('common');
+  const { locale } = useRouter();
   const dispatch = useDispatch();
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const {
@@ -73,7 +75,7 @@ const QuranFontSection = () => {
   // given quranFont [all quran fonts variants], check whether it belongs to IndoPak or Uthmani
   // for example if it's QuranFont.MadaniV1, it belongs to QuranFont.Uthmani
   // if it's QuranFont.IndoPak, it belongs to QuranFont.IndoPak
-  const getSelectedType = (font: QuranFont, locale: string) => {
+  const getSelectedType = (font: QuranFont, lang: string) => {
     const selectedViewEntry = Object.entries(fonts).find(([, values]) =>
       values.some((v) => v.id === font),
     );
@@ -82,7 +84,7 @@ const QuranFontSection = () => {
       return view;
     }
     // if no font is given, or invalid font is given, get type for default font
-    return getSelectedType(getQuranReaderStylesInitialState(locale).quranFont, locale);
+    return getSelectedType(getQuranReaderStylesInitialState(lang).quranFont, lang);
   };
 
   // get default font for selected type. We take the first font in this case
@@ -91,7 +93,7 @@ const QuranFontSection = () => {
     const [font] = fonts[selectedType];
     return font.value;
   };
-  const selectedType = getSelectedType(quranFont, lang);
+  const selectedType = getSelectedType(quranFont, locale);
   const lines = useMemo(
     () =>
       Object.values(MushafLines).map((line) => ({
@@ -138,8 +140,8 @@ const QuranFontSection = () => {
     onFontSettingsChange(
       'quranFont',
       fontValue,
-      setQuranFont({ quranFont: fontValue, locale: lang }),
-      setQuranFont({ quranFont: quranReaderStyles.quranFont, locale: lang }),
+      setQuranFont({ quranFont: fontValue, locale }),
+      setQuranFont({ quranFont: quranReaderStyles.quranFont, locale }),
     );
   };
 
@@ -148,8 +150,8 @@ const QuranFontSection = () => {
     onFontSettingsChange(
       'quranFont',
       value,
-      setQuranFont({ quranFont: value, locale: lang }),
-      setQuranFont({ quranFont: quranReaderStyles.quranFont, locale: lang }),
+      setQuranFont({ quranFont: value, locale }),
+      setQuranFont({ quranFont: quranReaderStyles.quranFont, locale }),
     );
   };
 
@@ -158,8 +160,8 @@ const QuranFontSection = () => {
     onFontSettingsChange(
       'mushafLines',
       value,
-      setMushafLines({ mushafLines: value, locale: lang }),
-      setMushafLines({ mushafLines: quranReaderStyles.mushafLines, locale: lang }),
+      setMushafLines({ mushafLines: value, locale }),
+      setMushafLines({ mushafLines: quranReaderStyles.mushafLines, locale }),
     );
   };
 

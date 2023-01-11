@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
 
 import styles from './SurahPreviewBlock.module.scss';
 
@@ -24,11 +25,13 @@ const SurahPreviewBlock = ({
   translatedSurahName,
   description,
 }: SurahPreviewBlockProps) => {
-  const { t, lang } = useTranslation('common');
-  const isMinimalLayout = shouldUseMinimalLayout(lang);
+  const { t } = useTranslation('common');
+  const { locale } = useRouter();
+  const isMinimalLayout = shouldUseMinimalLayout(locale);
   const localizedSurahNumber = useMemo(() => {
-    return toLocalizedNumber(surahNumber, lang);
-  }, [lang, surahNumber]);
+    return toLocalizedNumber(surahNumber, locale);
+  }, [locale, surahNumber]);
+
   return (
     <div className={styles.container}>
       <div className={styles.header}>

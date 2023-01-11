@@ -1,4 +1,4 @@
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
 import { useSelector, shallowEqual, useDispatch } from 'react-redux';
 
 import Button, { ButtonVariant } from '../Button/Button';

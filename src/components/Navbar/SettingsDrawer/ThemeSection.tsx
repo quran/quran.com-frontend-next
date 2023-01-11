@@ -1,7 +1,7 @@
 import React from 'react';
 
 import classNames from 'classnames';
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
 import { shallowEqual, useSelector } from 'react-redux';
 
 import Section from './Section';

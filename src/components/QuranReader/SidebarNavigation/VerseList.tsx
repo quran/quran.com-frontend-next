@@ -1,6 +1,6 @@
 import { useState, useMemo, useEffect, useContext } from 'react';
 
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 
@@ -17,11 +17,12 @@ import DataContext from 'src/contexts/DataContext';
 
 const VerseList = () => {
   const [searchQuery, setSearchQuery] = useState('');
-  const { t, lang } = useTranslation('common');
+  const { t } = useTranslation('common');
   const chaptersData = useContext(DataContext);
   const lastReadVerseKey = useSelector(selectLastReadVerseKey);
   const currentChapterId = lastReadVerseKey.chapterId;
   const router = useRouter();
+  const { locale } = router;
 
   const verseKeys = useMemo(
     () => (currentChapterId ? generateChapterVersesKeys(chaptersData, currentChapterId) : []),
@@ -30,7 +31,7 @@ const VerseList = () => {
 
   const filteredVerseKeys = verseKeys.filter((verseKey) => {
     const verseNumber = getVerseNumberFromKey(verseKey);
-    const localizedVerseNumber = toLocalizedNumber(verseNumber, lang);
+    const localizedVerseNumber = toLocalizedNumber(verseNumber, locale);
     return (
       localizedVerseNumber.toString().startsWith(searchQuery) ||
       verseNumber.toString().startsWith(searchQuery)

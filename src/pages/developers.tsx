@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-has-content */
 /* eslint-disable jsx-a11y/control-has-associated-label */
-import Trans from 'next-translate/Trans';
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation, Trans } from 'next-i18next';
+import { useRouter } from 'next/router';
 
 import styles from './contentPage.module.scss';
 
@@ -13,12 +13,14 @@ import { getCanonicalUrl } from '@/utils/navigation';
 
 const path = '/developers';
 const DevelopersPage = () => {
-  const { t, lang } = useTranslation('developers');
+  const { t } = useTranslation('developers');
+  const { locale } = useRouter();
+
   return (
     <>
       <NextSeoWrapper
         title={t('common:developers')}
-        url={getCanonicalUrl(lang, path)}
+        url={getCanonicalUrl(locale, path)}
         languageAlternates={getLanguageAlternates(path)}
       />
       <PageContainer>

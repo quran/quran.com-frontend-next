@@ -1,4 +1,5 @@
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 
 import ScrollableSelection from './ScrollableSelection';
@@ -8,8 +9,9 @@ import { getHizbIds } from '@/utils/hizb';
 import { getHizbNavigationUrl } from '@/utils/navigation';
 
 const HizbSelection = () => {
-  const { t, lang } = useTranslation('common');
-  const hizbIds = getHizbIds(lang);
+  const { t } = useTranslation('common');
+  const { locale } = useRouter();
+  const hizbIds = getHizbIds(locale);
   const lastReadVerseKey = useSelector(selectLastReadVerseKey);
 
   return (

@@ -2,7 +2,7 @@
 import { createContext } from 'react';
 
 import { useInterpret } from '@xstate/react';
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
 import { InterpreterFrom } from 'xstate';
 
 import { audioPlayerMachine } from './actors/audioPlayer/audioPlayerMachine';

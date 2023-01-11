@@ -1,7 +1,7 @@
 import React, { useCallback, useContext } from 'react';
 
 import { useSelector } from '@xstate/react';
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
 
 import styles from './SelectReciterMenu.module.scss';
 

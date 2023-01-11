@@ -2,7 +2,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { useContext, useState } from 'react';
 
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
 
 import Button from '../dls/Button/Button';
 import { StationType } from '../Radio/types';

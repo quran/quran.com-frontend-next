@@ -4,8 +4,8 @@
 import React, { useCallback, useMemo, useRef, useState } from 'react';
 
 import classNames from 'classnames';
-import useTranslation from 'next-translate/useTranslation';
 import dynamic from 'next/dynamic';
+import { useRouter } from 'next/router';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { shallowEqual, useSelector } from 'react-redux';
 import { Virtuoso, VirtuosoHandle } from 'react-virtuoso';
@@ -62,7 +62,7 @@ const ReadingView = ({
   const [mushafPageToVersesMap, setMushafPageToVersesMap] = useState<Record<number, Verse[]>>({
     [initialData.verses[0].pageNumber]: initialData.verses,
   });
-  const { lang } = useTranslation('quran-reader');
+  const { locale } = useRouter();
   const isUsingDefaultFont = useSelector(selectIsUsingDefaultFont);
   const lastReadPageNumber = useSelector(selectedLastReadPage, shallowEqual);
   const verses = useMemo(
@@ -160,7 +160,7 @@ const ReadingView = ({
       pagesVersesRange={pagesVersesRange}
       quranReaderStyles={quranReaderStyles}
       reciterId={reciterId}
-      lang={lang}
+      lang={locale}
       wordByWordLocale={wordByWordLocale}
       pageIndex={pageIndex}
       setMushafPageToVersesMap={setMushafPageToVersesMap}

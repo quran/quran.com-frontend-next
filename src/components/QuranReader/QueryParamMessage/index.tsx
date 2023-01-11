@@ -5,8 +5,7 @@
 import React, { useContext, useMemo } from 'react';
 
 import { useSelector as useXstateSelector } from '@xstate/react';
-import Trans from 'next-translate/Trans';
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation, Trans } from 'next-i18next';
 import { useRouter } from 'next/router';
 import { shallowEqual, useSelector } from 'react-redux';
 
@@ -56,8 +55,9 @@ const QueryParamMessage: React.FC<Props> = ({
   reciterQueryParamDifferent,
   wordByWordLocaleQueryParamDifferent,
 }) => {
-  const { t, lang } = useTranslation('common');
+  const { t } = useTranslation('common');
   const router = useRouter();
+  const { locale } = router;
   const audioService = useContext(AudioPlayerMachineContext);
   const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
   const selectedReciterId = useXstateSelector(audioService, (state) => state.context.reciterId);
@@ -151,8 +151,8 @@ const QueryParamMessage: React.FC<Props> = ({
       onSettingsChange(
         'selectedTranslations',
         nextTranslations,
-        setSelectedTranslations({ translations: nextTranslations, locale: lang }),
-        setSelectedTranslations({ translations: selectedTranslations, locale: lang }),
+        setSelectedTranslations({ translations: nextTranslations, locale }),
+        setSelectedTranslations({ translations: selectedTranslations, locale }),
         PreferenceGroup.TRANSLATIONS,
       );
     }
@@ -162,8 +162,8 @@ const QueryParamMessage: React.FC<Props> = ({
       onSettingsChange(
         'selectedWordByWordLocale',
         nextWordByWord,
-        setSelectedWordByWordLocale({ value: nextWordByWord, locale: lang }),
-        setSelectedWordByWordLocale({ value: selectedWordByWordLocale, locale: lang }),
+        setSelectedWordByWordLocale({ value: nextWordByWord, locale }),
+        setSelectedWordByWordLocale({ value: selectedWordByWordLocale, locale }),
         PreferenceGroup.READING,
       );
     }

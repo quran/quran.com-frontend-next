@@ -3,7 +3,7 @@ import React, { useState, useCallback, useEffect } from 'react';
 
 import classNames from 'classnames';
 import groupBy from 'lodash/groupBy';
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
 import { shallowEqual, useSelector } from 'react-redux';
 
 import CommandsList, { Command } from '../CommandsList';

@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useMemo, useCallback, useRef } from 'react';
 
 import { GetStaticProps, NextPage } from 'next';
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 
@@ -50,8 +50,9 @@ type SearchProps = {
 };
 
 const Search: NextPage<SearchProps> = ({ translations, chaptersData }): JSX.Element => {
-  const { t, lang } = useTranslation('common');
+  const { t } = useTranslation('common');
   const router = useRouter();
+  const { locale } = router;
   const userTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -228,18 +229,18 @@ const Search: NextPage<SearchProps> = ({ translations, chaptersData }): JSX.Elem
     if (selectedTranslationsArray.length === 2) {
       selectedValueString = t('settings.value-and-other', {
         value: firstSelectedTranslation?.name,
-        othersCount: toLocalizedNumber(selectedTranslationsArray.length - 1, lang),
+        othersCount: toLocalizedNumber(selectedTranslationsArray.length - 1, locale),
       });
     }
     if (selectedTranslationsArray.length > 2) {
       selectedValueString = t('settings.value-and-others', {
         value: firstSelectedTranslation?.name,
-        othersCount: toLocalizedNumber(selectedTranslationsArray.length - 1, lang),
+        othersCount: toLocalizedNumber(selectedTranslationsArray.length - 1, locale),
       });
     }
 
     return selectedValueString;
-  }, [lang, selectedTranslations, t, translations]);
+  }, [locale, selectedTranslations, t, translations]);
 
   const filteredTranslations = translationSearchQuery
     ? filterTranslations(translations, translationSearchQuery)
@@ -247,7 +248,7 @@ const Search: NextPage<SearchProps> = ({ translations, chaptersData }): JSX.Elem
 
   const onResetButtonClicked = () => {
     logButtonClick('search_page_reset_button');
-    const defaultTranslations = getTranslationsInitialState(lang).selectedTranslations;
+    const defaultTranslations = getTranslationsInitialState(locale).selectedTranslations;
     onTranslationChange(defaultTranslations.map((translation) => translation.toString()));
   };
 
@@ -281,7 +282,7 @@ const Search: NextPage<SearchProps> = ({ translations, chaptersData }): JSX.Elem
             : t('search:search')
         }
         description={t('search:search-desc')}
-        canonical={getCanonicalUrl(lang, navigationUrl)}
+        canonical={getCanonicalUrl(locale, navigationUrl)}
         languageAlternates={getLanguageAlternates(navigationUrl)}
       />
       <div className={styles.pageContainer}>

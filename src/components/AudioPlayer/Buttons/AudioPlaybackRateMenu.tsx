@@ -1,7 +1,8 @@
 import { useCallback, useContext } from 'react';
 
 import { useSelector } from '@xstate/react';
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
 
 import { playbackRates } from '@/components/Navbar/SettingsDrawer/AudioSection';
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
@@ -15,7 +16,9 @@ import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext'
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 
 const AudioPlaybackRateMenu = ({ onBack }) => {
-  const { t, lang } = useTranslation('common');
+  const { t } = useTranslation('common');
+  const { locale } = useRouter();
+
   const {
     actions: { onXstateSettingsChange },
     isLoading,
@@ -28,9 +31,9 @@ const AudioPlaybackRateMenu = ({ onBack }) => {
     (playbackRate) => {
       return playbackRate === 1
         ? t('audio.playback-normal')
-        : toLocalizedNumber(playbackRate, lang);
+        : toLocalizedNumber(playbackRate, locale);
     },
-    [lang, t],
+    [locale, t],
   );
 
   const onPlaybackRateSelected = (playbackRate: number) => {

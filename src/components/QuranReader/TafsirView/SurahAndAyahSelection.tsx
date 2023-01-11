@@ -1,6 +1,6 @@
 import { useContext, useMemo } from 'react';
 
-import useTranslation from 'next-translate/useTranslation';
+import { useRouter } from 'next/router';
 
 import styles from './TafsirView.module.scss';
 
@@ -15,7 +15,7 @@ const SurahAndAyahSelection = ({
   onChapterIdChange,
   onVerseNumberChange,
 }) => {
-  const { lang } = useTranslation();
+  const { locale } = useRouter();
   const chaptersData = useContext(DataContext);
   const verses = generateChapterVersesKeys(chaptersData, selectedChapterId);
   const surahOptions = useMemo(
@@ -31,11 +31,11 @@ const SurahAndAyahSelection = ({
       verses.map((verseKey) => {
         const verseNumber = getVerseNumberFromKey(verseKey).toString();
         return {
-          label: toLocalizedNumber(Number(verseNumber), lang),
+          label: toLocalizedNumber(Number(verseNumber), locale),
           value: verseNumber,
         };
       }),
-    [lang, verses],
+    [locale, verses],
   );
 
   return (

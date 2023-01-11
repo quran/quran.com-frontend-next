@@ -1,4 +1,4 @@
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
 
 import { logButtonClick } from '@/utils/eventLogger';
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';

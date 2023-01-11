@@ -1,8 +1,8 @@
 /* eslint-disable react-func/max-lines-per-function */
 import React from 'react';
 
-import setLanguage from 'next-translate/setLanguage';
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 
 import Button, { ButtonShape, ButtonVariant } from '../dls/Button/Button';
@@ -11,6 +11,7 @@ import { ToastStatus, useToast } from '../dls/Toast/Toast';
 
 import styles from './LanguageSelector.module.scss';
 
+import useSetLanguage from '@/hooks/useSetLanguage';
 import ChevronSelectIcon from '@/icons/chevron-select.svg';
 import GlobeIcon from '@/icons/globe.svg';
 import resetSettings from '@/redux/actions/reset-settings';
@@ -41,13 +42,16 @@ const LanguageSelector = ({
 }: LanguageSelectorProps) => {
   const isUsingDefaultSettings = useSelector(selectIsUsingDefaultSettings);
   const dispatch = useDispatch();
-  const { t, lang } = useTranslation('common');
+  const { t } = useTranslation('common');
+  const router = useRouter();
+  const { locale } = router;
+  const setLanguage = useSetLanguage();
   const toast = useToast();
 
   /**
    * When the user changes the language, we will:
    *
-   * 1. Call next-translate's setLanguage with the new value.
+   * 1. Call setLanguage with the new value.
    * 2. Store the new value of the locale in the cookies so that next time the user
    * lands on the `/` route, he will be redirected to the homepage with the
    * saved locale. This is to over-ride next.js's default behavior which takes
@@ -57,14 +61,14 @@ const LanguageSelector = ({
    *
    * @param {string} newLocale
    */
-  const onChange = async (newLocale: string) => {
+  const onChange = (newLocale: string) => {
     // if the user didn't change the settings and he is transitioning to a new locale, we want to apply the default settings of the new locale
     if (isUsingDefaultSettings) {
       dispatch(resetSettings(newLocale));
     }
-    logValueChange('locale', lang, newLocale);
+    logValueChange('locale', locale, newLocale);
 
-    await setLanguage(newLocale);
+    setLanguage(newLocale);
     setLocaleCookie(newLocale);
 
     if (isLoggedIn()) {
@@ -117,7 +121,7 @@ const LanguageSelector = ({
               </span>
             }
           >
-            {getLocaleName(lang)}
+            {getLocaleName(locale)}
           </Button>
         ) : (
           <Button
@@ -143,7 +147,7 @@ const LanguageSelector = ({
     >
       {options.map((option) => (
         <PopoverMenu.Item
-          isSelected={option.value === lang}
+          isSelected={option.value === locale}
           shouldCloseMenuAfterClick
           key={option.value}
           onClick={() => onChange(option.value)}

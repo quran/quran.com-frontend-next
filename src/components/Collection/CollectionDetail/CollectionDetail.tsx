@@ -1,7 +1,7 @@
 /* eslint-disable max-lines */
 import { useContext } from 'react';
 
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import { useSelector, shallowEqual } from 'react-redux';
 
@@ -51,13 +51,14 @@ const CollectionDetail = ({
   onSortByChange,
   onItemDeleted,
 }: CollectionDetailProps) => {
-  const { t, lang } = useTranslation();
+  const { t } = useTranslation();
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const { quranFont, mushafLines } = quranReaderStyles;
   const { mushaf } = getMushafId(quranFont, mushafLines);
   const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
 
   const router = useRouter();
+  const { locale } = router;
   const confirm = useConfirm();
 
   const sortOptions = [
@@ -114,7 +115,7 @@ const CollectionDetail = ({
   const getBookmarkName = (bookmark) => {
     const chapterData = getChapterData(chaptersData, bookmark.key.toString());
     const verseKey = makeVerseKey(bookmark.key, bookmark.verseNumber);
-    return `${chapterData.transliteratedName} ${toLocalizedVerseKey(verseKey, lang)}`;
+    return `${chapterData.transliteratedName} ${toLocalizedVerseKey(verseKey, locale)}`;
   };
 
   return (
@@ -172,7 +173,7 @@ const CollectionDetail = ({
 
                     return (
                       <DataFetcher
-                        queryKey={makeVersesUrl(chapterId.toString(), lang, params)}
+                        queryKey={makeVersesUrl(chapterId.toString(), locale, params)}
                         render={(data: VersesResponse) => {
                           if (!data) return null;
                           const firstVerse = data.verses?.[0];

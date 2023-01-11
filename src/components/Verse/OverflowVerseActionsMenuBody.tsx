@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 
 import clipboardCopy from 'clipboard-copy';
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
 import { useSelector, shallowEqual } from 'react-redux';
 
 import BookmarkAction from './BookmarkAction';
@@ -54,7 +55,8 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
   onActionTriggered,
   bookmarksRangeUrl,
 }) => {
-  const { t, lang } = useTranslation('common');
+  const { t } = useTranslation('common');
+  const { locale } = useRouter();
   const [isCopied, setIsCopied] = useState(false);
   const [isShared, setIsShared] = useState(false);
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
@@ -105,7 +107,7 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
       verse.verseKey,
       isTranslationView,
       () => toast(t('shared'), { status: ToastStatus.Success }),
-      lang,
+      locale,
     );
     if (onActionTriggered) {
       onActionTriggered();

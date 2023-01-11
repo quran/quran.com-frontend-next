@@ -1,7 +1,8 @@
 /* eslint-disable i18next/no-literal-string */
 import { useMemo } from 'react';
 
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
 
 import { PopoverMenuExpandDirection } from '../PopoverMenu/PopoverMenu';
 
@@ -13,14 +14,15 @@ import Link, { LinkVariant } from '@/dls/Link/Link';
 import { toLocalizedDate } from '@/utils/locale';
 
 const BottomSection = () => {
-  const { t, lang } = useTranslation('common');
+  const { t } = useTranslation('common');
+  const { locale } = useRouter();
   const localizedCurrentYear = useMemo(
     () =>
-      toLocalizedDate(new Date(), lang, {
+      toLocalizedDate(new Date(), locale, {
         year: 'numeric',
         calendar: 'gregory',
       }),
-    [lang],
+    [locale],
   );
 
   return (

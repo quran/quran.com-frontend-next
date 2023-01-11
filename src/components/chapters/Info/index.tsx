@@ -2,8 +2,9 @@
 
 import React from 'react';
 
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 
 import styles from './Info.module.scss';
 
@@ -22,7 +23,9 @@ interface Props {
 }
 
 const Info: React.FC<Props> = ({ chapter, chapterInfo }) => {
-  const { t, lang } = useTranslation();
+  const { t } = useTranslation();
+  const { locale } = useRouter();
+
   return (
     <div className={styles.container}>
       <div className={styles.infoBody}>
@@ -59,7 +62,7 @@ const Info: React.FC<Props> = ({ chapter, chapterInfo }) => {
             <div className={styles.detailsContainer}>
               <div>
                 <p className={styles.detailHeader}>{t('common:ayahs')}</p>
-                <p>{toLocalizedNumber(chapter.versesCount, lang)}</p>
+                <p>{toLocalizedNumber(chapter.versesCount, locale)}</p>
               </div>
               <div>
                 <p className={styles.detailHeader}>{t('surah-info:revelation-place')}</p>

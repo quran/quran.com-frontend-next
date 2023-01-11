@@ -1,6 +1,6 @@
 import React from 'react';
 
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
 
 import styles from '@/components/QuranReader/ReadingPreferenceSwitcher/ReadingPreference.module.scss';
 import Spinner from '@/dls/Spinner/Spinner';

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
 import { useSelector } from 'react-redux';
 
 import Button, { ButtonType } from '@/dls/Button/Button';

@@ -1,7 +1,6 @@
 import { useState } from 'react';
 
-import Trans from 'next-translate/Trans';
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation, Trans } from 'next-i18next';
 import { useSWRConfig } from 'swr';
 
 import buildTranslatedErrorMessageByErrorId from '../FormBuilder/buildTranslatedErrorMessageByErrorId';

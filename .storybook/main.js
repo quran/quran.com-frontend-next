@@ -41,6 +41,11 @@ module.exports = {
             path.resolve('./'),
         ];
 
+        // We do this because next-i18next will try to load files with fs (https://github.com/i18next/next-i18next/issues/1843) 
+        config.resolve ||= {}
+        config.resolve.fallback ||= {}
+        config.resolve.fallback.fs =  false;
+
         // @/ root alias doesn't work in storybook, so we have to write the aliases manually
         const otherAliases = ['components', 'utils', 'redux', 'hooks', 'contexts'];
 

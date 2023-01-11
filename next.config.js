@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 /* eslint-disable react-func/max-lines-per-function */
 /* eslint-disable no-param-reassign */
 const path = require('path');
@@ -7,11 +8,10 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 });
 const { withSentryConfig } = require('@sentry/nextjs');
 const withPlugins = require('next-compose-plugins');
-const withFonts = require('next-fonts');
 const withPWA = require('next-pwa');
-const nextTranslate = require('next-translate');
 
 const securityHeaders = require('./configs/SecurityHeaders.js');
+const localeConfig = require('./next-i18next.config.js');
 const runtimeCaching = require('./pwa-runtime-config.js');
 
 const isDev = process.env.NEXT_PUBLIC_VERCEL_ENV === 'development';
@@ -23,6 +23,7 @@ const isProduction = process.env.NEXT_PUBLIC_VERCEL_ENV === 'production';
 const config = {
   reactStrictMode: false,
   productionBrowserSourceMaps: true, // {@see https://nextjs.org/docs/advanced-features/source-maps}
+  ...localeConfig,
   output: 'standalone',
   images: {
     formats: ['image/avif', 'image/webp'],
@@ -164,7 +165,4 @@ const config = {
   },
 };
 
-module.exports = withPlugins(
-  [withBundleAnalyzer, withPWA, withFonts, nextTranslate, withSentryConfig],
-  config,
-);
+module.exports = withPlugins([withBundleAnalyzer, withPWA, withSentryConfig], config);

@@ -1,4 +1,4 @@
-import Trans from 'next-translate/Trans';
+import { Trans } from 'next-i18next';
 
 import Slide from '@/dls/Carousel/Slide';
 import Link, { LinkVariant } from '@/dls/Link/Link';

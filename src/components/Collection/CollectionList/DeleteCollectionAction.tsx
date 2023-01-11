@@ -1,4 +1,4 @@
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
 
 import { useConfirm } from '@/dls/ConfirmationModal/hooks';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';

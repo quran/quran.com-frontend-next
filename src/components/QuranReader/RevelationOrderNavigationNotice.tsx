@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import Trans from 'next-translate/Trans';
+import { Trans } from 'next-i18next';
 
 import styles from './RevelationOrderNavigationNotice.module.scss';
 

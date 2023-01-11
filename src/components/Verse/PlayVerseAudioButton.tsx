@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 
 import { useSelector as useXstateSelector } from '@xstate/react';
 import classNames from 'classnames';
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
 
 import Spinner from '../dls/Spinner/Spinner';
 import styles from '../QuranReader/TranslationView/TranslationViewCell.module.scss';

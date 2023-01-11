@@ -2,7 +2,8 @@ import React, { useMemo } from 'react';
 
 import classNames from 'classnames';
 import range from 'lodash/range';
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
 
 import styles from './Pagination.module.scss';
 
@@ -38,7 +39,8 @@ const Pagination: React.FC<Props> = ({
   siblingsCount = DEFAULT_SIBLINGS_COUNT,
   showSummary = true,
 }) => {
-  const { t, lang } = useTranslation('common');
+  const { t } = useTranslation('common');
+  const { locale } = useRouter();
   const paginationRange = useMemo(() => {
     // Math.ceil is used to round the number to the next higher integer value e.g. 0.7 gets rounded to 1, 1.1 gets rounded to 2. This ensures that we are reserving an extra page for the remaining data.
     const totalPageCount = Math.ceil(totalCount / pageSize);
@@ -118,7 +120,7 @@ const Pagination: React.FC<Props> = ({
               variant={ButtonVariant.Ghost}
               onClick={() => onPageChange(pageNumber as number)}
             >
-              {toLocalizedNumber(Number(pageNumber), lang)}
+              {toLocalizedNumber(Number(pageNumber), locale)}
             </Button>
           </div>
         );
@@ -136,12 +138,12 @@ const Pagination: React.FC<Props> = ({
       {showSummary && (
         <p className={styles.uppercase}>
           {t('pagination-summary', {
-            currentResultNumber: toLocalizedNumber(showingUntilItem - (pageSize - 1), lang),
+            currentResultNumber: toLocalizedNumber(showingUntilItem - (pageSize - 1), locale),
             endOfResultNumber: toLocalizedNumber(
               totalCount < showingUntilItem ? totalCount : showingUntilItem,
-              lang,
+              locale,
             ),
-            totalNumberOfResults: toLocalizedNumber(totalCount, lang),
+            totalNumberOfResults: toLocalizedNumber(totalCount, locale),
           })}
         </p>
       )}

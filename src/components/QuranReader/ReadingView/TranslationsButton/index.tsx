@@ -1,7 +1,7 @@
 import { useCallback, useRef, useState } from 'react';
 
 import classNames from 'classnames';
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
 import dynamic from 'next/dynamic';
 import { useSelector } from 'react-redux';
 

@@ -3,7 +3,7 @@ import React, { useCallback, useContext, useMemo } from 'react';
 
 import classNames from 'classnames';
 import debounce from 'lodash/debounce';
-import useTranslation from 'next-translate/useTranslation';
+import { useRouter } from 'next/router';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { useSWRConfig } from 'swr';
 
@@ -43,7 +43,7 @@ const QuranReader = ({
   id,
   quranReaderDataType = QuranReaderDataType.Chapter,
 }: QuranReaderProps) => {
-  const { lang } = useTranslation();
+  const { locale } = useRouter();
   const isSideBarVisible = useSelector(selectNotes, shallowEqual).isVisible;
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const isSidebarNavigationVisible = useSelector(selectIsSidebarNavigationVisible);
@@ -93,7 +93,7 @@ const QuranReader = ({
 
   return (
     <>
-      <FontPreLoader isQuranReader locale={lang} />
+      <FontPreLoader isQuranReader locale={locale} />
       <ContextMenu />
       <DebuggingObserverWindow isReadingMode={isReadingPreference} />
       <div

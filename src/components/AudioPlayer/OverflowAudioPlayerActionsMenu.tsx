@@ -1,4 +1,4 @@
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
 
 import OverflowAudioPlayActionsMenuBody from './OverflowAudioPlayActionsMenuBody';
 import styles from './OverflowAudioPlayerActionsMenu.module.scss';

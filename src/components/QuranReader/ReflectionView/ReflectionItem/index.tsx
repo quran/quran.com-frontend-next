@@ -1,6 +1,6 @@
 import { useCallback, useContext, useMemo, useState } from 'react';
 
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
 
 import AuthorInfo from './AuthorInfo';
 import HeaderMenu from './HeaderMenu';

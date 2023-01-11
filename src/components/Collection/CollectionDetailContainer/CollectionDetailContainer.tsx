@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 
 import classNames from 'classnames';
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import useSWRInfinite from 'swr/infinite';
 
@@ -50,8 +50,9 @@ const CollectionDetailContainer = ({
   sortBy,
   shouldDeleteBookmark,
 }: CollectionDetailContainerProps) => {
-  const { t, lang } = useTranslation();
+  const { t } = useTranslation();
   const router = useRouter();
+  const { locale } = router;
   const collectionId = router.query.collectionId as string;
   const toast = useToast();
 
@@ -123,7 +124,7 @@ const CollectionDetailContainer = ({
     <DataContext.Provider value={chaptersData}>
       <NextSeoWrapper
         title={collectionTitle}
-        canonical={getCanonicalUrl(lang, navigationUrl)}
+        canonical={getCanonicalUrl(locale, navigationUrl)}
         languageAlternates={getLanguageAlternates(navigationUrl)}
         nofollow
         noindex

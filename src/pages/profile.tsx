@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 
 import classNames from 'classnames';
 import { NextPage, GetStaticProps } from 'next';
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
 import useSWR from 'swr';
@@ -38,8 +38,9 @@ const nameSample = 'Mohammad Ali';
 const emailSample = 'mohammadali@quran.com';
 const ProfilePage: NextPage<Props> = ({ chaptersData }) => {
   const dispatch = useDispatch();
-  const { t, lang } = useTranslation();
+  const { t } = useTranslation();
   const router = useRouter();
+  const { locale } = router;
 
   const {
     data: userData,
@@ -95,7 +96,7 @@ const ProfilePage: NextPage<Props> = ({ chaptersData }) => {
     <DataContext.Provider value={chaptersData}>
       <NextSeoWrapper
         title={t('common:profile')}
-        url={getCanonicalUrl(lang, getProfileNavigationUrl())}
+        url={getCanonicalUrl(locale, getProfileNavigationUrl())}
         languageAlternates={getLanguageAlternates(getProfileNavigationUrl())}
         nofollow
         noindex

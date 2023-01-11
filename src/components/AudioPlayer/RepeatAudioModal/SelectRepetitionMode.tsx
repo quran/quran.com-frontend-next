@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
 
 import styles from './RepeatSetting.module.scss';
 
@@ -26,7 +27,9 @@ const SelectRepetitionMode = ({
   onRepetitionModeChange,
   verseKey,
 }) => {
-  const { t, lang } = useTranslation('common');
+  const { t } = useTranslation('common');
+  const { locale } = useRouter();
+
   const repetitionModeItems = useMemo(
     () => [
       {
@@ -63,7 +66,7 @@ const SelectRepetitionMode = ({
           items={comboboxVerseItems}
           onChange={(val) => onSingleVerseChange(val)}
           placeholder={t('audio.player.search-verse')}
-          initialInputValue={verseKey ? toLocalizedVerseKey(verseKey, lang) : null}
+          initialInputValue={verseKey ? toLocalizedVerseKey(verseKey, locale) : null}
         />
       )}
       {repetitionMode === RepetitionMode.Range && (
@@ -75,8 +78,8 @@ const SelectRepetitionMode = ({
             }}
             dropdownItems={comboboxVerseItems}
             isVisible
-            rangeStartVerse={rangeStartVerse ? toLocalizedVerseKey(rangeStartVerse, lang) : null}
-            rangeEndVerse={rangeEndVerse ? toLocalizedVerseKey(rangeEndVerse, lang) : null}
+            rangeStartVerse={rangeStartVerse ? toLocalizedVerseKey(rangeStartVerse, locale) : null}
+            rangeEndVerse={rangeEndVerse ? toLocalizedVerseKey(rangeEndVerse, locale) : null}
           />
         </div>
       )}

@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
 
 import styles from './Counter.module.scss';
 
@@ -26,8 +27,9 @@ type CounterProps = {
  * @returns {JSX.Element}
  */
 const Counter = ({ count, onIncrement, onDecrement }: CounterProps): JSX.Element => {
-  const { t, lang } = useTranslation('common');
-  const localizedCount = useMemo(() => toLocalizedNumber(Number(count), lang), [count, lang]);
+  const { t } = useTranslation('common');
+  const { locale } = useRouter();
+  const localizedCount = useMemo(() => toLocalizedNumber(Number(count), locale), [count, locale]);
   return (
     <div className={styles.container}>
       <Button

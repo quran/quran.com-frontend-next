@@ -1,4 +1,4 @@
-import useTranslation from 'next-translate/useTranslation';
+import { useRouter } from 'next/router';
 import { shallowEqual, useSelector } from 'react-redux';
 import useSWR from 'swr/immutable';
 
@@ -35,7 +35,7 @@ interface Props {
 }
 
 const VerseAndTranslation: React.FC<Props> = ({ chapter, from, to }) => {
-  const { lang } = useTranslation();
+  const { locale } = useRouter();
   const translations = useSelector(selectSelectedTranslations, areArraysEqual);
   const { quranFont, mushafLines, translationFontScale } = useSelector(
     selectQuranReaderStyles,
@@ -55,7 +55,7 @@ const VerseAndTranslation: React.FC<Props> = ({ chapter, from, to }) => {
   const shouldFetchData = !!from;
 
   const { data, error, mutate } = useSWR<VersesResponse>(
-    shouldFetchData ? makeVersesUrl(chapter, lang, apiParams) : null,
+    shouldFetchData ? makeVersesUrl(chapter, locale, apiParams) : null,
     fetcher,
   );
 

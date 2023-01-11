@@ -3,7 +3,8 @@
 import React from 'react';
 
 import { NextPage, GetStaticProps, GetStaticPaths } from 'next';
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
 
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import QuranReader from '@/components/QuranReader';
@@ -45,15 +46,17 @@ const Chapter: NextPage<ChapterProps> = ({
   isChapter,
   chaptersData,
 }) => {
-  const { t, lang } = useTranslation('common');
+  const { t } = useTranslation('common');
+  const { locale } = useRouter();
+
   if (hasError) {
     return <Error statusCode={500} />;
   }
   const getTitle = () => {
     if (isChapter) {
-      return `${toLocalizedNumber(1, lang)}-${toLocalizedNumber(
+      return `${toLocalizedNumber(1, locale)}-${toLocalizedNumber(
         chapterResponse.chapter.versesCount,
-        lang,
+        locale,
       )}`;
     }
     const { verseNumber } = versesResponse.verses[0];
@@ -61,7 +64,7 @@ const Chapter: NextPage<ChapterProps> = ({
     if (isAyatulKursi(chapterResponse.chapter.id as string, verseNumber)) {
       return t('quran-reader:ayatul-kursi');
     }
-    return `${toLocalizedNumber(verseNumber, lang)}`;
+    return `${toLocalizedNumber(verseNumber, locale)}`;
   };
 
   const getPath = () => {
@@ -78,14 +81,14 @@ const Chapter: NextPage<ChapterProps> = ({
   const path = getPath();
   const getCanonicalUrlValue = () => {
     if (isChapter) {
-      return getCanonicalUrl(lang, path);
+      return getCanonicalUrl(locale, path);
     }
     const { verseNumber } = versesResponse.verses[0];
     // if it's Ayatul Kursi
     if (isAyatulKursi(chapterResponse.chapter.id as string, verseNumber)) {
-      return getCanonicalUrl(lang, path);
+      return getCanonicalUrl(locale, path);
     }
-    return getCanonicalUrl(lang, path);
+    return getCanonicalUrl(locale, path);
   };
 
   return (
@@ -100,9 +103,9 @@ const Chapter: NextPage<ChapterProps> = ({
                 transliteratedName: chapterResponse.chapter.transliteratedName,
                 translatedName: chapterResponse.chapter.translatedName as string,
                 revelationPlace: t(`surah-info:${chapterResponse.chapter.revelationPlace}`),
-                chapterOrder: toLocalizedNumber(Number(chapterResponse.chapter.id), lang),
-                localeName: getLocaleName(lang),
-                versesCount: toLocalizedNumber(chapterResponse.chapter.versesCount, lang),
+                chapterOrder: toLocalizedNumber(Number(chapterResponse.chapter.id), locale),
+                localeName: getLocaleName(locale),
+                versesCount: toLocalizedNumber(chapterResponse.chapter.versesCount, locale),
               })
         }
         languageAlternates={getLanguageAlternates(path)}

@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
 
-import useTranslation from 'next-translate/useTranslation';
 import dynamic from 'next/dynamic';
+import { useRouter } from 'next/router';
 import { shallowEqual, useSelector } from 'react-redux';
 
 import DataFetcher from '@/components/DataFetcher';
@@ -34,7 +34,7 @@ const ReflectionBodyContainer = ({
   const [selectedChapterId, setSelectedChapterId] = useState(initialChapterId);
   const [selectedVerseNumber, setSelectedVerseNumber] = useState(initialVerseNumber);
   const { translationFontScale } = useSelector(selectQuranReaderStyles, shallowEqual);
-  const { lang } = useTranslation();
+  const { locale } = useRouter();
 
   const renderBody = useCallback(
     (data: AyahReflectionsResponse) => (
@@ -56,7 +56,7 @@ const ReflectionBodyContainer = ({
       queryKey={makeAyahReflectionsUrl({
         surahId: selectedChapterId,
         ayahNumber: selectedVerseNumber,
-        locale: lang,
+        locale,
       })}
       render={renderBody}
     />

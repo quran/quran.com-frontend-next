@@ -1,7 +1,7 @@
 /* eslint-disable i18next/no-literal-string */
 import { useEffect, useState } from 'react';
 
-import useTranslation from 'next-translate/useTranslation';
+import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 
 import styles from './TranslationsAdjustment.module.scss';
@@ -17,13 +17,13 @@ import AvailableTranslation from 'types/AvailableTranslation';
 const TranslationsAdjustment = () => {
   const dispatch = useDispatch();
   const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
-  const { lang } = useTranslation();
+  const { locale } = useRouter();
   const [translations, setTranslations] = useState<AvailableTranslation[]>([]);
   const [isExpanded, setIsExpanded] = useState(false);
   const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
-    getAvailableTranslations(lang)
+    getAvailableTranslations(locale)
       .then((res) => {
         // if there is an internal server error.
         if (res.status === 500) {
@@ -35,7 +35,7 @@ const TranslationsAdjustment = () => {
       .catch(() => {
         setHasError(true);
       });
-  }, [lang]);
+  }, [locale]);
 
   if (hasError) {
     return null;
@@ -53,7 +53,7 @@ const TranslationsAdjustment = () => {
     );
     dispatch({
       type: setSelectedTranslations.type,
-      payload: { translations: selectedTranslationsIDs, locale: lang },
+      payload: { translations: selectedTranslationsIDs, locale },
     });
   };
 

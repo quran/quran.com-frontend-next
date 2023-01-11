@@ -1,7 +1,7 @@
 import React, { useContext } from 'react';
 
 import { useSelector as useXstateSelector } from '@xstate/react';
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';

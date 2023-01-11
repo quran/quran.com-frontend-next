@@ -1,6 +1,6 @@
 import { useContext } from 'react';
 
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
 
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import CloseIcon from '@/icons/close.svg';

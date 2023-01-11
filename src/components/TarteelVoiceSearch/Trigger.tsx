@@ -1,6 +1,6 @@
 import React, { useRef } from 'react';
 
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import styles from './Trigger.module.scss';

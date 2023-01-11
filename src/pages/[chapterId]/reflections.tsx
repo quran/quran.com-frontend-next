@@ -2,7 +2,8 @@
 import React from 'react';
 
 import { NextPage, GetStaticProps, GetStaticPaths } from 'next';
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
 import { SWRConfig } from 'swr';
 
 import NextSeoWrapper from '@/components/NextSeoWrapper';
@@ -51,7 +52,9 @@ const SelectedAyahReflection: NextPage<AyahReflectionProp> = ({
   chaptersData,
   fallback,
 }) => {
-  const { t, lang } = useTranslation('quran-reader');
+  const { t } = useTranslation('quran-reader');
+  const { locale } = useRouter();
+
   if (hasError) {
     return <Error statusCode={500} />;
   }
@@ -62,9 +65,9 @@ const SelectedAyahReflection: NextPage<AyahReflectionProp> = ({
       <NextSeoWrapper
         title={`${t('common:reflect')} ${chapter.chapter.transliteratedName} - ${toLocalizedNumber(
           Number(verseNumber),
-          lang,
+          locale,
         )}`}
-        canonical={getCanonicalUrl(lang, navigationUrl)}
+        canonical={getCanonicalUrl(locale, navigationUrl)}
         languageAlternates={getLanguageAlternates(navigationUrl)}
         description={t('reflections-desc', {
           ayahNumber: verseNumber,

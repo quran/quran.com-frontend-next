@@ -1,6 +1,7 @@
 import React, { useContext, useMemo } from 'react';
 
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
 import { useSelector, shallowEqual } from 'react-redux';
 import useSWRImmutable from 'swr/immutable';
 
@@ -22,7 +23,8 @@ import DataContext from 'src/contexts/DataContext';
 import ReadingSession from 'types/ReadingSession';
 
 const RecentReadingSessions = () => {
-  const { t, lang } = useTranslation('home');
+  const { t } = useTranslation('home');
+  const { locale } = useRouter();
   const chaptersData = useContext(DataContext);
   const recentReadingSessions = useSelector(selectRecentReadingSessions, shallowEqual);
   const onRecentReadingSessionClicked = () => {
@@ -71,7 +73,7 @@ const RecentReadingSessions = () => {
                       surahName={surah.transliteratedName}
                       description={`${t('common:ayah')} ${toLocalizedNumber(
                         Number(verseNumber),
-                        lang,
+                        locale,
                       )}`}
                       verseCount={surah.versesCount}
                     />

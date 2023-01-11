@@ -1,10 +1,11 @@
+/* eslint-disable max-lines */
 /* eslint-disable react/no-multi-comp */
 import React, { useState, useMemo } from 'react';
 
 import classNames from 'classnames';
-import Trans from 'next-translate/Trans';
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation, Trans } from 'next-i18next';
 import dynamic from 'next/dynamic';
+import { useRouter } from 'next/router';
 
 import Link from '../dls/Link/Link';
 import SurahPreviewRow from '../dls/SurahPreview/SurahPreviewRow';
@@ -59,7 +60,9 @@ const MOST_VISITED_CHAPTERS = {
 const ChapterAndJuzList: React.FC<ChapterAndJuzListProps> = ({
   chapters,
 }: ChapterAndJuzListProps) => {
-  const { t, lang } = useTranslation();
+  const { t } = useTranslation();
+  const { locale } = useRouter();
+
   const [view, setView] = useState(View.Surah);
   const [sortBy, setSortBy] = useState(Sort.ASC);
 
@@ -148,13 +151,13 @@ const ChapterAndJuzList: React.FC<ChapterAndJuzListProps> = ({
               >
                 <SurahPreviewRow
                   chapterId={Number(chapter.id)}
-                  description={`${toLocalizedNumber(chapter.versesCount, lang)} ${t(
+                  description={`${toLocalizedNumber(chapter.versesCount, locale)} ${t(
                     'common:ayahs',
                   )}`}
                   surahName={chapter.transliteratedName}
                   surahNumber={Number(chapter.id)}
                   translatedSurahName={chapter.translatedName as string}
-                  isMinimalLayout={shouldUseMinimalLayout(lang)}
+                  isMinimalLayout={shouldUseMinimalLayout(locale)}
                 />
               </Link>
             </div>

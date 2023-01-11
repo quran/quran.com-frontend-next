@@ -1,5 +1,4 @@
-import Trans from 'next-translate/Trans';
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation, Trans } from 'next-i18next';
 
 import styles from './login.module.scss';
 

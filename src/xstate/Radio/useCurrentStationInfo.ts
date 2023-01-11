@@ -1,4 +1,5 @@
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
 import useSWRImmutable from 'swr/immutable';
 
 import RadioContext from '../actors/radio/types/RadioContext';
@@ -9,13 +10,14 @@ import { makeReciterUrl } from '@/utils/apiPaths';
 import { getReciterData } from 'src/api';
 
 const useCurrentStationInfo = (context: RadioContext): StationInfo => {
-  const { t, lang } = useTranslation('radio');
+  const { t } = useTranslation('radio');
+  const { locale } = useRouter();
 
   const stationState = context;
 
   const { data: reciterData } = useSWRImmutable(
-    stationState.type === StationType.Reciter ? makeReciterUrl(stationState.id, lang) : null,
-    () => getReciterData(stationState.id, lang),
+    stationState.type === StationType.Reciter ? makeReciterUrl(stationState.id, locale) : null,
+    () => getReciterData(stationState.id, locale),
   );
 
   const getCuratedStationInfo = (): StationInfo => {

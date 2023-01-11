@@ -1,8 +1,8 @@
 /* eslint-disable react/no-multi-comp */
 import classNames from 'classnames';
-import Trans from 'next-translate/Trans';
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation, Trans } from 'next-i18next';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 
 import QuranAppLogo from '../../public/images/quran-app-logo.png';
 import QuranAppImage from '../../public/images/quran-app.png';
@@ -81,7 +81,8 @@ const App = ({ app, isFlipped, isMain }: AppProps) => {
 
 const path = '/apps';
 const AppsPage = () => {
-  const { t, lang } = useTranslation();
+  const { t } = useTranslation();
+  const { locale } = useRouter();
 
   const apps = {
     quran: {
@@ -108,7 +109,7 @@ const AppsPage = () => {
     <>
       <NextSeoWrapper
         title={t('common:mobile-apps')}
-        url={getCanonicalUrl(lang, path)}
+        url={getCanonicalUrl(locale, path)}
         languageAlternates={getLanguageAlternates(path)}
       />
       <PageContainer>

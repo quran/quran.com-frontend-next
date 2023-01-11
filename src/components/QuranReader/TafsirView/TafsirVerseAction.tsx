@@ -1,6 +1,6 @@
 import { useRef, useState } from 'react';
 
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
@@ -33,9 +33,10 @@ const TafsirVerseAction = ({
   onActionTriggered,
 }: TafsirVerseActionProps) => {
   const [isContentModalOpen, setIsContentModalOpen] = useState(false);
-  const { t, lang } = useTranslation();
+  const { t } = useTranslation();
   const tafsirs = useSelector(selectSelectedTafsirs);
   const router = useRouter();
+  const { locale } = router;
 
   const contentModalRef = useRef<ContentModalHandles>();
 
@@ -66,7 +67,7 @@ const TafsirVerseAction = ({
           setIsContentModalOpen(true);
           fakeNavigate(
             getVerseSelectedTafsirNavigationUrl(chapterId, verseNumber, tafsirs[0]),
-            lang,
+            locale,
           );
         }}
       >

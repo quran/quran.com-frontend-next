@@ -2,7 +2,7 @@
 
 import React, { useMemo } from 'react';
 
-import useTranslation from 'next-translate/useTranslation';
+import { useRouter } from 'next/router';
 
 import styles from './SearchResultItem.module.scss';
 
@@ -28,13 +28,13 @@ interface Props {
 }
 
 const SearchResultItem: React.FC<Props> = ({ result, source }) => {
-  const { lang } = useTranslation('quran-reader');
+  const { locale } = useRouter();
   const localizedVerseKey = useMemo(
-    () => toLocalizedVerseKey(result.verseKey, lang),
-    [lang, result.verseKey],
+    () => toLocalizedVerseKey(result.verseKey, locale),
+    [locale, result.verseKey],
   );
 
-  const chaptersData = useGetChaptersData(lang);
+  const chaptersData = useGetChaptersData(locale);
 
   if (!chaptersData) return null;
 

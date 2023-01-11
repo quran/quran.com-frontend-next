@@ -1,7 +1,8 @@
 import React from 'react';
 
 import clipboardCopy from 'clipboard-copy';
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
 
 import styles from './SocialInteraction.module.scss';
 
@@ -38,7 +39,8 @@ const SocialInteraction: React.FC<Props> = ({
   trimmedCitationTexts,
   filters,
 }) => {
-  const { t, lang } = useTranslation();
+  const { t } = useTranslation();
+  const { locale } = useRouter();
   const toast = useToast();
 
   const onLikesCountClicked = () => {
@@ -80,7 +82,7 @@ const SocialInteraction: React.FC<Props> = ({
         onClick={onLikesCountClicked}
         shouldFlipOnRTL={false}
       >
-        {toLocalizedNumber(likesCount, lang)}
+        {toLocalizedNumber(likesCount, locale)}
       </Button>
       <Button
         className={styles.actionItemContainer}
@@ -92,7 +94,7 @@ const SocialInteraction: React.FC<Props> = ({
         onClick={onCommentsCountClicked}
         shouldFlipOnRTL={false}
       >
-        {toLocalizedNumber(commentsCount, lang)}
+        {toLocalizedNumber(commentsCount, locale)}
       </Button>
 
       <PopoverMenu

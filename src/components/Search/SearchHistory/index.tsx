@@ -1,6 +1,6 @@
 import React, { useCallback } from 'react';
 
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
 import { useDispatch, useSelector } from 'react-redux';
 
 import styles from './SearchHistory.module.scss';

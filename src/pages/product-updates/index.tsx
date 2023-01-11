@@ -1,7 +1,8 @@
 import React from 'react';
 
 import { GetStaticProps, NextPage } from 'next';
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
 
 import styles from './changelog.module.scss';
 
@@ -22,7 +23,9 @@ interface Props {
 }
 
 const Changelog: NextPage<Props> = ({ pages, pagesBlocks, hasError }) => {
-  const { t, lang } = useTranslation('common');
+  const { t } = useTranslation('common');
+  const { locale } = useRouter();
+
   if (hasError) {
     return <Error statusCode={500} />;
   }
@@ -31,7 +34,7 @@ const Changelog: NextPage<Props> = ({ pages, pagesBlocks, hasError }) => {
     <>
       <NextSeoWrapper
         title={t('product-updates')}
-        url={getCanonicalUrl(lang, getProductUpdatesUrl())}
+        url={getCanonicalUrl(locale, getProductUpdatesUrl())}
       />
       <PageContainer>
         <div className={styles.container}>

@@ -3,7 +3,8 @@ import { useState, useMemo } from 'react';
 import classNames from 'classnames';
 import Fuse from 'fuse.js';
 import { GetStaticPaths, GetStaticProps } from 'next';
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
 
 import layoutStyle from '../../index.module.scss';
 import pageStyle from '../reciterPage.module.scss';
@@ -43,8 +44,8 @@ type ReciterPageProps = {
   chaptersData: ChaptersData;
 };
 const ReciterPage = ({ selectedReciter, chaptersData }: ReciterPageProps) => {
-  const { t, lang } = useTranslation();
-
+  const { t } = useTranslation();
+  const { locale } = useRouter();
   const [searchQuery, setSearchQuery] = useState('');
 
   // `allChaptersData` type is Record<string, Chapter>, but we need Chapter[] format with `id` inside the object
@@ -54,11 +55,11 @@ const ReciterPage = ({ selectedReciter, chaptersData }: ReciterPageProps) => {
       Object.entries(chaptersData).map(([chapterId, chapter]) => {
         return {
           id: chapterId.toString(),
-          localizedId: toLocalizedNumber(Number(chapterId), lang),
+          localizedId: toLocalizedNumber(Number(chapterId), locale),
           ...chapter,
         };
       }),
-    [chaptersData, lang],
+    [chaptersData, locale],
   );
 
   const filteredChapters = useMemo(
@@ -72,7 +73,7 @@ const ReciterPage = ({ selectedReciter, chaptersData }: ReciterPageProps) => {
     <DataContext.Provider value={chaptersData}>
       <NextSeoWrapper
         title={selectedReciter?.translatedName?.name}
-        canonical={getCanonicalUrl(lang, navigationUrl)}
+        canonical={getCanonicalUrl(locale, navigationUrl)}
         languageAlternates={getLanguageAlternates(navigationUrl)}
         description={t('reciter:reciter-desc', {
           reciterName: selectedReciter?.translatedName?.name,

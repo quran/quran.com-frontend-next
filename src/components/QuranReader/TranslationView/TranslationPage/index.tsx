@@ -2,7 +2,7 @@
 import React, { useContext, useEffect, useMemo } from 'react';
 
 import { useSelector as useXstateSelector } from '@xstate/react';
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 import useSWRImmutable from 'swr/immutable';

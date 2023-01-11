@@ -1,4 +1,5 @@
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
 
 import styles from './Footer.module.scss';
 
@@ -8,8 +9,9 @@ import { makeDonateUrl } from '@/utils/apiPaths';
 import { logTarteelLinkClick } from '@/utils/eventLogger';
 
 const Links = () => {
-  const { t, lang } = useTranslation('common');
-  const chaptersData = useGetChaptersData(lang);
+  const { t } = useTranslation('common');
+  const { locale } = useRouter();
+  const chaptersData = useGetChaptersData(locale);
 
   if (!chaptersData) {
     return <></>;

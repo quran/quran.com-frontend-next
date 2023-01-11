@@ -3,8 +3,9 @@ import React from 'react';
 
 import classNames from 'classnames';
 import { NextPage, GetStaticProps } from 'next';
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 
 import styles from './index.module.scss';
 
@@ -13,6 +14,7 @@ import HomePageHero from '@/components/HomePage/HomePageHero';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import BookmarksAndCollectionsSection from '@/components/Verses/BookmarksAndCollectionsSection';
 import RecentReadingSessions from '@/components/Verses/RecentReadingSessions';
+import loadPageNamespaces from '@/lib/i18n';
 import { getAllChaptersData } from '@/utils/chapter';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl } from '@/utils/navigation';
@@ -29,7 +31,9 @@ const Index: NextPage<IndexProps> = ({
   chaptersData,
   chaptersResponse: { chapters },
 }): JSX.Element => {
-  const { t, lang } = useTranslation('home');
+  const { t } = useTranslation('home');
+  const { locale } = useRouter();
+
   return (
     <>
       <Head>
@@ -38,7 +42,7 @@ const Index: NextPage<IndexProps> = ({
       <DataContext.Provider value={chaptersData}>
         <NextSeoWrapper
           title={t('home:noble-quran')}
-          url={getCanonicalUrl(lang, '')}
+          url={getCanonicalUrl(locale, '')}
           languageAlternates={getLanguageAlternates('')}
         />
         <div className={styles.pageContainer}>
@@ -65,6 +69,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
 
   return {
     props: {
+      ...(await loadPageNamespaces(locale, ['home', 'collection'])),
       chaptersData: allChaptersData,
       chaptersResponse: {
         chapters: Object.keys(allChaptersData).map((chapterId) => {

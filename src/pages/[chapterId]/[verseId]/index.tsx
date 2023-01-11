@@ -1,7 +1,7 @@
 /* eslint-disable max-lines */
 /* eslint-disable react-func/max-lines-per-function */
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 
 import NextSeoWrapper from '@/components/NextSeoWrapper';
@@ -46,10 +46,12 @@ const Verse: NextPage<VerseProps> = ({
   isVerse,
   chaptersData,
 }) => {
-  const { t, lang } = useTranslation('common');
+  const { t } = useTranslation('common');
   const {
     query: { verseId },
+    locale,
   } = useRouter();
+
   if (hasError || !versesResponse.verses.length) {
     return <Error statusCode={500} />;
   }
@@ -59,12 +61,12 @@ const Verse: NextPage<VerseProps> = ({
       <NextSeoWrapper
         title={`${t('surah')} ${chapterResponse.chapter.transliteratedName} - ${
           isVerse
-            ? toLocalizedNumber(Number(verseId), lang)
-            : toLocalizedVersesRange(verseId as string, lang)
+            ? toLocalizedNumber(Number(verseId), locale)
+            : toLocalizedVersesRange(verseId as string, locale)
         }`}
-        canonical={getCanonicalUrl(lang, path)}
+        canonical={getCanonicalUrl(locale, path)}
         languageAlternates={getLanguageAlternates(path)}
-        description={getOgDescription(versesResponse, isVerse, lang)}
+        description={getOgDescription(versesResponse, isVerse, locale)}
       />
       <QuranReader
         initialData={versesResponse}

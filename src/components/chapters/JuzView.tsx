@@ -1,6 +1,7 @@
 import { useContext, useEffect, useMemo, useState } from 'react';
 
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
 
 import Link, { LinkVariant } from '../dls/Link/Link';
 import SurahPreviewRow from '../dls/SurahPreview/SurahPreviewRow';
@@ -16,7 +17,9 @@ type JuzViewProps = {
 };
 
 const JuzView = ({ isDescending }: JuzViewProps) => {
-  const { t, lang } = useTranslation();
+  const { t } = useTranslation();
+  const { locale } = useRouter();
+
   const [juzMappings, setJuzMappings] = useState([]);
   const chaptersData = useContext(DataContext);
 
@@ -46,7 +49,7 @@ const JuzView = ({ isDescending }: JuzViewProps) => {
             <Link href={`/juz/${juzId}`} variant={LinkVariant.Primary} shouldPrefetch={false}>
               <div className={styles.juzTitle}>
                 <span>
-                  {t('common:juz')} {toLocalizedNumber(juzId, lang)}
+                  {t('common:juz')} {toLocalizedNumber(juzId, locale)}
                 </span>
                 <span className={styles.readJuz}>{t('home:read-juz')}</span>
               </div>
@@ -61,13 +64,13 @@ const JuzView = ({ isDescending }: JuzViewProps) => {
                   >
                     <SurahPreviewRow
                       chapterId={Number(chapterId)}
-                      description={`${toLocalizedNumber(chapter.versesCount, lang)} ${t(
+                      description={`${toLocalizedNumber(chapter.versesCount, locale)} ${t(
                         'common:ayahs',
                       )}`}
                       surahName={chapter.transliteratedName}
                       surahNumber={Number(chapterId)}
                       translatedSurahName={chapter.translatedName as string}
-                      isMinimalLayout={shouldUseMinimalLayout(lang)}
+                      isMinimalLayout={shouldUseMinimalLayout(locale)}
                     />
                   </Link>
                 </div>

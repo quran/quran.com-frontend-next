@@ -2,7 +2,7 @@ import { useContext, useEffect, useMemo, useState } from 'react';
 
 import classNames from 'classnames';
 import Fuse from 'fuse.js';
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 
@@ -36,13 +36,14 @@ const filterSurah = (surah, searchQuery: string) => {
 };
 
 const SurahList = () => {
-  const { t, lang } = useTranslation('common');
+  const { t } = useTranslation('common');
   const lastReadVerseKey = useSelector(selectLastReadVerseKey);
   const isReadingByRevelationOrder = useSelector(selectIsReadingByRevelationOrder);
 
   const currentChapterId = lastReadVerseKey.chapterId;
 
   const router = useRouter();
+  const { locale } = router;
   const chaptersData = useContext(DataContext);
 
   const [searchQuery, setSearchQuery] = useState('');
@@ -53,7 +54,7 @@ const SurahList = () => {
         return {
           ...chapter,
           id,
-          localizedId: toLocalizedNumber(Number(id), lang),
+          localizedId: toLocalizedNumber(Number(id), locale),
         };
       });
     }
@@ -64,13 +65,13 @@ const SurahList = () => {
         return {
           ...chapter,
           id,
-          localizedId: toLocalizedNumber(Number(REVELATION_ORDER.indexOf(Number(id)) + 1), lang),
+          localizedId: toLocalizedNumber(Number(REVELATION_ORDER.indexOf(Number(id)) + 1), locale),
         };
       })
       .sort(
         (a, b) => REVELATION_ORDER.indexOf(Number(a.id)) - REVELATION_ORDER.indexOf(Number(b.id)),
       );
-  }, [isReadingByRevelationOrder, chaptersData, lang]);
+  }, [isReadingByRevelationOrder, chaptersData, locale]);
 
   const filteredChapters = searchQuery
     ? filterSurah(chapterDataArray, searchQuery)

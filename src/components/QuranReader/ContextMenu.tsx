@@ -3,7 +3,8 @@
 import React, { useContext, useMemo } from 'react';
 
 import classNames from 'classnames';
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import styles from './ContextMenu.module.scss';
@@ -29,7 +30,8 @@ const ContextMenu = () => {
   const dispatch = useDispatch();
   const chaptersData = useContext(DataContext);
   const isSidebarNavigationVisible = useSelector(selectIsSidebarNavigationVisible);
-  const { t, lang } = useTranslation('common');
+  const { t } = useTranslation('common');
+  const { locale } = useRouter();
   const isSideBarVisible = useSelector(selectNotes, shallowEqual).isVisible;
   const { isExpanded } = useSelector(selectContextMenu, shallowEqual);
   const isNavbarVisible = useSelector(selectNavbar, shallowEqual).isVisible;
@@ -38,14 +40,14 @@ const ContextMenu = () => {
     return chapterId ? getChapterData(chaptersData, chapterId) : null;
   }, [chapterId, chaptersData]);
   const juzNumber = useMemo(() => {
-    return hizb ? toLocalizedNumber(getJuzNumberByHizb(Number(hizb)), lang) : null;
-  }, [hizb, lang]);
+    return hizb ? toLocalizedNumber(getJuzNumberByHizb(Number(hizb)), locale) : null;
+  }, [hizb, locale]);
   const localizedHizb = useMemo(() => {
-    return toLocalizedNumber(Number(hizb), lang);
-  }, [hizb, lang]);
+    return toLocalizedNumber(Number(hizb), locale);
+  }, [hizb, locale]);
   const localizedPageNumber = useMemo(() => {
-    return toLocalizedNumber(Number(page), lang);
-  }, [page, lang]);
+    return toLocalizedNumber(Number(page), locale);
+  }, [page, locale]);
 
   // if it's SSR or the first time we render this
   if (!verseKey) {

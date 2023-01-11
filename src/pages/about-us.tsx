@@ -1,8 +1,8 @@
 /* eslint-disable jsx-a11y/anchor-has-content */
 /* eslint-disable jsx-a11y/control-has-associated-label */
-import Trans from 'next-translate/Trans';
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation, Trans } from 'next-i18next';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 
 import styles from './contentPage.module.scss';
 
@@ -16,7 +16,8 @@ import { getCanonicalUrl } from '@/utils/navigation';
 
 const path = '/about-us';
 const AboutUsPage = () => {
-  const { t, lang } = useTranslation('about');
+  const { t } = useTranslation('about');
+  const { locale } = useRouter();
 
   const onTarteelLinkClicked = () => {
     logTarteelLinkClick('about_us_page');
@@ -26,7 +27,7 @@ const AboutUsPage = () => {
     <>
       <NextSeoWrapper
         title={t('common:about')}
-        url={getCanonicalUrl(lang, path)}
+        url={getCanonicalUrl(locale, path)}
         languageAlternates={getLanguageAlternates(path)}
       />
       <PageContainer>

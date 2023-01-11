@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from 'react';
 
 import capitalize from 'lodash/capitalize';
-import useTranslation from 'next-translate/useTranslation';
+import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 
 import styles from './TafsirsAdjustment.module.scss';
@@ -15,13 +15,13 @@ import TafsirInfo from 'types/TafsirInfo';
 const TafsirsAdjustment = () => {
   const dispatch = useDispatch();
   const selectedTafsirs = useSelector(selectSelectedTafsirs, areArraysEqual);
-  const { lang } = useTranslation();
+  const { locale } = useRouter();
   const [tafsirs, setTafsirs] = useState<TafsirInfo[]>([]);
   const [isExpanded, setIsExpanded] = useState(false);
   const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
-    getTafsirs(lang)
+    getTafsirs(locale)
       .then((res) => {
         // if there is an internal server error.
         if (res.status === 500) {
@@ -33,7 +33,7 @@ const TafsirsAdjustment = () => {
       .catch(() => {
         setHasError(true);
       });
-  }, [lang]);
+  }, [locale]);
 
   if (hasError) {
     return null;
@@ -51,7 +51,7 @@ const TafsirsAdjustment = () => {
     );
     dispatch({
       type: setSelectedTafsirs.type,
-      payload: { tafsirs: selectedTafsirsIDs, locale: lang },
+      payload: { tafsirs: selectedTafsirsIDs, locale },
     });
   };
 

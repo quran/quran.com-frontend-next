@@ -1,5 +1,5 @@
 import capitalize from 'lodash/capitalize';
-import { Translate } from 'next-translate';
+import { TFunction } from 'next-i18next';
 
 import ErrorMessageId from 'types/ErrorMessageId';
 
@@ -8,7 +8,7 @@ const DEFAULT_ERROR_ID = ErrorMessageId.InvalidField;
 const buildTranslatedErrorMessageByErrorId = (
   errorId: ErrorMessageId,
   fieldName: string,
-  t: Translate,
+  t: TFunction,
 ) => {
   if (Object.values(ErrorMessageId).includes(errorId)) {
     return t(`validation.${errorId}`, { field: capitalize(fieldName) });

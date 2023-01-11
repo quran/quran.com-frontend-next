@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Trans from 'next-translate/Trans';
+import { Trans } from 'next-i18next';
 
 import styles from './Slide.module.scss';
 

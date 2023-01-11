@@ -1,6 +1,7 @@
 import React from 'react';
 
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
 
 import Info from '.';
 
@@ -24,7 +25,9 @@ const InfoPage: React.FC<Props> = ({
   chapterResponse,
   chaptersData,
 }) => {
-  const { t, lang } = useTranslation('common');
+  const { t } = useTranslation('common');
+  const { locale } = useRouter();
+
   if (hasError) {
     return <Error statusCode={500} />;
   }
@@ -34,9 +37,9 @@ const InfoPage: React.FC<Props> = ({
       <NextSeoWrapper
         title={`${t('surah')} ${chapterResponse.chapter.transliteratedName} - ${toLocalizedNumber(
           1,
-          lang,
-        )}-${toLocalizedNumber(chapterResponse.chapter.versesCount, lang)}`}
-        canonical={getCanonicalUrl(lang, navigationUrl)}
+          locale,
+        )}-${toLocalizedNumber(chapterResponse.chapter.versesCount, locale)}`}
+        canonical={getCanonicalUrl(locale, navigationUrl)}
         languageAlternates={getLanguageAlternates(navigationUrl)}
         description={chapterInfoResponse.chapterInfo.shortText}
       />

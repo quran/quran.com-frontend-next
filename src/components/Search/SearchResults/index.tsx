@@ -1,6 +1,7 @@
 import React from 'react';
 
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
 
 import SearchResultItem, { Source } from './SearchResultItem';
 import styles from './SearchResults.module.scss';
@@ -31,7 +32,9 @@ const SearchResults: React.FC<Props> = ({
   pageSize,
   onSearchResultClicked,
 }) => {
-  const { t, lang } = useTranslation();
+  const { t } = useTranslation('common');
+  const { locale } = useRouter();
+
   return (
     <>
       <div>
@@ -45,8 +48,12 @@ const SearchResults: React.FC<Props> = ({
           </div>
         )}
         <p className={styles.header}>
-          {t('common:search-results', {
-            count: toLocalizedNumber(searchResult.pagination.totalRecords, lang),
+          {t('search-results', {
+            // TODO: find a typesafe way
+            count: toLocalizedNumber(
+              searchResult.pagination.totalRecords,
+              locale,
+            ) as unknown as number,
           })}
         </p>
         <>
@@ -60,7 +67,7 @@ const SearchResults: React.FC<Props> = ({
           {isSearchDrawer ? (
             <div className={styles.resultsSummaryContainer}>
               <p>
-                {toLocalizedNumber(searchResult.pagination.totalRecords, lang)}{' '}
+                {toLocalizedNumber(searchResult.pagination.totalRecords, locale)}{' '}
                 {t('common:search.results')}
               </p>
               {searchResult.pagination.totalRecords > 0 && (

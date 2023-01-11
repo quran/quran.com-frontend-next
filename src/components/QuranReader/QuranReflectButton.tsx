@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
 
 import classNames from 'classnames';
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 
 import ContentModal from '@/components/dls/ContentModal/ContentModal';
@@ -24,22 +24,23 @@ const QuranReflectButton = ({
   isTranslationView = true,
   onActionTriggered,
 }: QuranReflectButtonProps) => {
-  const { t, lang } = useTranslation('common');
+  const { t } = useTranslation('common');
   const router = useRouter();
+  const { locale } = router;
   const [isContentModalOpen, setIsContentModalOpen] = useState(false);
 
   const onButtonClicked = () => {
     // eslint-disable-next-line i18next/no-literal-string
     logButtonClick(`${isTranslationView ? 'translation_view' : 'reading_view'}_reflect`);
     setIsContentModalOpen(true);
-    fakeNavigate(getVerseReflectionNavigationUrl(verseKey), lang);
+    fakeNavigate(getVerseReflectionNavigationUrl(verseKey), locale);
   };
 
   const contentModalRef = useRef(null);
 
   const onModalClose = () => {
     setIsContentModalOpen(false);
-    fakeNavigate(router.asPath, lang);
+    fakeNavigate(router.asPath, locale);
     if (onActionTriggered) {
       onActionTriggered();
     }

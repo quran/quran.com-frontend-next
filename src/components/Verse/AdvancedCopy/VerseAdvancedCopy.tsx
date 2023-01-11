@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useCallback, useMemo, useContext } from 'react';
 
 import classNames from 'classnames';
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
 import { useSelector } from 'react-redux';
 import useSWRImmutable from 'swr/immutable';
 

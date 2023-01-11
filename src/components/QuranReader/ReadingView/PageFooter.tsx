@@ -1,6 +1,6 @@
 import React from 'react';
 
-import useTranslation from 'next-translate/useTranslation';
+import { useRouter } from 'next/router';
 
 import styles from './PageFooter.module.scss';
 
@@ -13,13 +13,13 @@ interface Props {
 }
 
 const PageFooter: React.FC<Props> = ({ page }) => {
-  const { lang } = useTranslation('quran-reader');
+  const { locale } = useRouter();
   const pageUrl = getPageNavigationUrl(page);
 
   return (
     <div className={styles.pageText}>
       <Link href={pageUrl} shouldPrefetch={false} className={styles.pageLink}>
-        {toLocalizedNumber(page, lang)}
+        {toLocalizedNumber(page, locale)}
       </Link>
     </div>
   );

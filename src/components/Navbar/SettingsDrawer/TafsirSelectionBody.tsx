@@ -2,7 +2,8 @@ import { useState } from 'react';
 
 import Fuse from 'fuse.js';
 import groupBy from 'lodash/groupBy';
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
 import { useDispatch, useSelector } from 'react-redux';
 
 import styles from './SearchSelectionBody.module.scss';
@@ -35,7 +36,7 @@ const TafsirsSelectionBody = () => {
   const { t } = useTranslation('common');
   const dispatch = useDispatch();
   const selectedTafsirs = useSelector(selectSelectedTafsirs, areArraysEqual);
-  const { lang } = useTranslation();
+  const { locale } = useRouter();
   const [searchQuery, setSearchQuery] = useState('');
 
   const onTafsirsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -51,7 +52,7 @@ const TafsirsSelectionBody = () => {
 
     logItemSelectionChange('tafsir', selectedTafsirId, isChecked);
     logValueChange('selected_tafsirs', selectedTafsirs, nextTafsirs);
-    dispatch(setSelectedTafsirs({ tafsirs: nextTafsirs, locale: lang }));
+    dispatch(setSelectedTafsirs({ tafsirs: nextTafsirs, locale }));
   };
 
   return (
@@ -67,7 +68,7 @@ const TafsirsSelectionBody = () => {
         />
       </div>
       <DataFetcher
-        queryKey={makeTafsirsUrl(lang)}
+        queryKey={makeTafsirsUrl(locale)}
         render={(data: TafsirsResponse) => {
           const filteredTafsirs = searchQuery
             ? filterTafsirs(data.tafsirs, searchQuery)

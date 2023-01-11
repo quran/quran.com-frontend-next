@@ -2,7 +2,8 @@
 import React from 'react';
 
 import { NextPage, GetStaticProps, GetStaticPaths } from 'next';
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
 import { SWRConfig } from 'swr';
 
 import styles from '../[verseId]/tafsirs.module.scss';
@@ -51,7 +52,9 @@ const SelectedTafsirOfAyah: NextPage<AyahTafsirProp> = ({
   chaptersData,
   fallback,
 }) => {
-  const { t, lang } = useTranslation('common');
+  const { t } = useTranslation('common');
+  const { locale } = useRouter();
+
   if (hasError) {
     return <Error statusCode={500} />;
   }
@@ -61,14 +64,14 @@ const SelectedTafsirOfAyah: NextPage<AyahTafsirProp> = ({
     Number(verseNumber),
     tafsirData.tafsir.slug,
   );
-  const localizedVerseNumber = toLocalizedNumber(Number(verseNumber), lang);
+  const localizedVerseNumber = toLocalizedNumber(Number(verseNumber), locale);
   return (
     <DataContext.Provider value={chaptersData}>
       <NextSeoWrapper
         title={`${t('tafsir.surah')} ${
           chapter.chapter.transliteratedName
         } - ${localizedVerseNumber}`}
-        canonical={getCanonicalUrl(lang, navigationUrl)}
+        canonical={getCanonicalUrl(locale, navigationUrl)}
         description={t('tafsir.tafsir-desc', {
           verseNumber: localizedVerseNumber,
           tafsirName: tafsirData.tafsir.translatedName.name,

@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 
 import classNames from 'classnames';
-import useTranslation from 'next-translate/useTranslation';
+import { useRouter } from 'next/router';
 
 import styles from './SurahPreviewRow.module.scss';
 
@@ -29,10 +29,10 @@ const SurahPreviewRow = ({
   isMinimalLayout = false,
   isLoading = false,
 }: SurahPreviewRowProps) => {
-  const { lang } = useTranslation('home');
+  const { locale } = useRouter();
   const localizedSurahNumber = useMemo(
-    () => toLocalizedNumber(surahNumber, lang),
-    [surahNumber, lang],
+    () => toLocalizedNumber(surahNumber, locale),
+    [surahNumber, locale],
   );
 
   if (isMinimalLayout) {

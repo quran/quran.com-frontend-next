@@ -2,8 +2,7 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import React from 'react';
 
-import Trans from 'next-translate/Trans';
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation, Trans } from 'next-i18next';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 
 import HomePageMessage from './HomePageMessage';

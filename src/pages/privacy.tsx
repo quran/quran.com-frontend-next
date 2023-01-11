@@ -1,8 +1,8 @@
 /* eslint-disable jsx-a11y/anchor-has-content */
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import { NextPage } from 'next';
-import Trans from 'next-translate/Trans';
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation, Trans } from 'next-i18next';
+import { useRouter } from 'next/router';
 
 import styles from './contentPage.module.scss';
 
@@ -13,13 +13,14 @@ import { getCanonicalUrl } from '@/utils/navigation';
 
 const PATH = '/privacy';
 const PrivacyPage: NextPage = (): JSX.Element => {
-  const { t, lang } = useTranslation('privacy');
+  const { t } = useTranslation('privacy');
+  const { locale } = useRouter();
 
   return (
     <>
       <NextSeoWrapper
         title={t('header')}
-        url={getCanonicalUrl(lang, PATH)}
+        url={getCanonicalUrl(locale, PATH)}
         languageAlternates={getLanguageAlternates(PATH)}
       />
       <PageContainer>

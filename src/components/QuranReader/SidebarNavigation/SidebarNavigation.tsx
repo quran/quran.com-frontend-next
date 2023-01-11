@@ -2,7 +2,7 @@
 import { useRef } from 'react';
 
 import classNames from 'classnames';
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 
 import styles from './SidebarNavigation.module.scss';

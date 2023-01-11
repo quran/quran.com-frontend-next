@@ -6,7 +6,7 @@
 import React, { MouseEvent, useState } from 'react';
 
 import classNames from 'classnames';
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
 
 import FootnoteText from './FootnoteText';
 import styles from './TranslationText.module.scss';

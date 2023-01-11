@@ -2,7 +2,8 @@
 import { useMemo, useState, useEffect, useContext } from 'react';
 
 import { useSelector } from '@xstate/react';
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
 
 import styles from './RepeatAudioModal.module.scss';
 import RepeatSetting from './RepeatSetting';
@@ -40,7 +41,8 @@ const RepeatAudioModal = ({
   defaultRepetitionMode,
   selectedVerseKey,
 }: RepeatAudioModalProps) => {
-  const { t, lang } = useTranslation('common');
+  const { t } = useTranslation('common');
+  const { locale } = useRouter();
 
   const audioService = useContext(AudioPlayerMachineContext);
   const repeatActor = useSelector(audioService, (state) => state.context.repeatActor);
@@ -49,7 +51,7 @@ const RepeatAudioModal = ({
 
   const [repetitionMode, setRepetitionMode] = useState(defaultRepetitionMode);
   const isInRepeatMode = useSelector(audioService, (state) => !!state.context.repeatActor);
-  const chaptersData = useGetChaptersData(lang);
+  const chaptersData = useGetChaptersData(locale);
   const {
     actions: { onSettingsChangeWithoutDispatch },
   } = usePersistPreferenceGroup();
@@ -71,11 +73,11 @@ const RepeatAudioModal = ({
       id: chapterVerseKey,
       name: chapterVerseKey,
       value: chapterVerseKey,
-      label: toLocalizedVerseKey(chapterVerseKey, lang),
+      label: toLocalizedVerseKey(chapterVerseKey, locale),
     }));
 
     return initialState;
-  }, [chapterId, chaptersData, lang]);
+  }, [chapterId, chaptersData, locale]);
 
   const [firstVerseKeyInThisChapter, lastVerseKeyInThisChapter] = getChapterFirstAndLastVerseKey(
     chaptersData,

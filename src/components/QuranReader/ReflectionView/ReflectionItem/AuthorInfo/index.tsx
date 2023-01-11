@@ -1,7 +1,8 @@
 import React, { useMemo } from 'react';
 
 import classNames from 'classnames';
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
 
 import styles from './AuthorInfo.module.scss';
 
@@ -45,8 +46,9 @@ const AuthorInfo: React.FC<Props> = ({
   reflectionGroup,
   reflectionGroupLink,
 }) => {
-  const { t, lang } = useTranslation();
-  const formattedDate = formatDateRelatively(new Date(date), lang);
+  const { t } = useTranslation();
+  const { locale } = useRouter();
+  const formattedDate = formatDateRelatively(new Date(date), locale);
 
   const onReflectAuthorClicked = () => {
     logButtonClick('reflection_item_author');
@@ -56,7 +58,7 @@ const AuthorInfo: React.FC<Props> = ({
     let text = '';
     const chapters = verseReferences
       .filter((verse) => !verse.from || !verse.to)
-      .map((verse) => toLocalizedNumber(verse.chapter, lang));
+      .map((verse) => toLocalizedNumber(verse.chapter, locale));
 
     if (chapters.length > 0) {
       text += `${t('common:surah')} ${chapters.join(',')}`;
@@ -64,9 +66,9 @@ const AuthorInfo: React.FC<Props> = ({
 
     const verses = nonChapterVerseReferences.map((verse) =>
       makeVerseKey(
-        toLocalizedNumber(verse.chapter, lang),
-        toLocalizedNumber(verse.from, lang),
-        toLocalizedNumber(verse.to, lang),
+        toLocalizedNumber(verse.chapter, locale),
+        toLocalizedNumber(verse.from, locale),
+        toLocalizedNumber(verse.to, locale),
       ),
     );
 
@@ -76,7 +78,7 @@ const AuthorInfo: React.FC<Props> = ({
     }
 
     return text;
-  }, [verseReferences, nonChapterVerseReferences, lang, t]);
+  }, [verseReferences, nonChapterVerseReferences, locale, t]);
 
   return (
     <div className={styles.authorInfo}>

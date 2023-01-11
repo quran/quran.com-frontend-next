@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 
 import classNames from 'classnames';
-import useTranslation from 'next-translate/useTranslation';
+import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 
 import styles from './SidebarNavigation.module.scss';
@@ -17,11 +17,11 @@ type VerseListItemProps = {
   verseKey: string;
 };
 const VerseListItem = React.memo(({ verseKey }: VerseListItemProps) => {
-  const { lang } = useTranslation();
+  const { locale } = useRouter();
   const isVerseKeySelected = useSelector(selectIsVerseKeySelected(verseKey));
 
   const verseNumber = getVerseNumberFromKey(verseKey);
-  const localizedVerseNumber = toLocalizedNumber(verseNumber, lang);
+  const localizedVerseNumber = toLocalizedNumber(verseNumber, locale);
 
   const [scrollTo, verseRef] = useScrollToElement<HTMLDivElement>(SCROLL_TO_NEAREST_ELEMENT);
 

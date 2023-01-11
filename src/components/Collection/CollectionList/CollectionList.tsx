@@ -1,8 +1,9 @@
 /* eslint-disable max-lines */
 import { useState } from 'react';
 
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import useSWR from 'swr';
 
 import OverflowMenuIcon from '../../../../public/icons/menu_more_horiz.svg';
@@ -29,7 +30,8 @@ const DEFAULT_SORT_OPTION = CollectionListSortOption.RecentlyUpdated;
 
 const CollectionList = () => {
   const [collectionToRename, setCollectionToRename] = useState<Collection | null>(null);
-  const { t, lang } = useTranslation();
+  const { t } = useTranslation();
+  const { locale } = useRouter();
   const toast = useToast();
   const [sortBy, setSortBy] = useState(DEFAULT_SORT_OPTION);
   const apiParams = {
@@ -109,7 +111,7 @@ const CollectionList = () => {
                     </div>
                     <div className={styles.itemCount}>
                       {data?.collectionsItemsCount && (
-                        <>{toLocalizedNumber(data?.collectionsItemsCount, lang)}</>
+                        <>{toLocalizedNumber(data?.collectionsItemsCount, locale)}</>
                       )}{' '}
                       {t('common:verses')}
                     </div>
@@ -130,7 +132,7 @@ const CollectionList = () => {
                           <BookmarkIcon />
                         </div>
                         <div className={styles.itemCount}>
-                          {toLocalizedNumber(collection.count, lang)} {t('common:verses')}
+                          {toLocalizedNumber(collection.count, locale)} {t('common:verses')}
                         </div>
                       </div>
                     </div>

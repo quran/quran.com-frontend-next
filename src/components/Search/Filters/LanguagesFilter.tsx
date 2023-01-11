@@ -1,6 +1,6 @@
 import React, { memo, useMemo } from 'react';
 
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
 
 import styles from './Filter.module.scss';
 

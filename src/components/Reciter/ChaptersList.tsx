@@ -3,7 +3,8 @@ import { useContext, useState } from 'react';
 import { useSelector } from '@xstate/react';
 import classNames from 'classnames';
 import clipboardCopy from 'clipboard-copy';
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
 
 import { download } from '../AudioPlayer/Buttons/DownloadAudioButton';
 import ChapterIconContainer from '../chapters/ChapterIcon/ChapterIconContainer';
@@ -32,7 +33,8 @@ type ChaptersListProps = {
 
 const ChaptersList = ({ filteredChapters, selectedReciter }: ChaptersListProps) => {
   const toast = useToast();
-  const { t, lang } = useTranslation();
+  const { t } = useTranslation();
+  const { locale } = useRouter();
   const audioService = useContext(AudioPlayerMachineContext);
   const currentSurah = useSelector(audioService, (state) => state.context.surah);
   const currentReciterId = useSelector(audioService, (state) => state.context.audioData?.reciterId);
@@ -58,7 +60,7 @@ const ChaptersList = ({ filteredChapters, selectedReciter }: ChaptersListProps) 
 
   const onCopyUrlClicked = (chapterId) => {
     logButtonClick('reciter_page_chapter_url_copy');
-    const origin = getWindowOrigin(lang);
+    const origin = getWindowOrigin(locale);
     const path = getReciterChapterNavigationUrl(selectedReciter.id.toString(), chapterId);
     clipboardCopy(origin + path).then(() => {
       toast(t('common:shared'), { status: ToastStatus.Success });

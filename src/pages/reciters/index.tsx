@@ -2,7 +2,8 @@ import { useMemo, useState } from 'react';
 
 import classNames from 'classnames';
 import { GetStaticProps } from 'next';
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
 
 import Error from '../_error';
 import layoutStyle from '../index.module.scss';
@@ -22,7 +23,8 @@ import DataContext from 'src/contexts/DataContext';
 const NAVIGATION_URL = '/reciters';
 
 const RecitersListPage = ({ reciters, hasError, chaptersData }) => {
-  const { t, lang } = useTranslation('reciter');
+  const { t } = useTranslation('reciter');
+  const { locale } = useRouter();
   const [searchQuery, setSearchQuery] = useState('');
 
   const filteredReciters = useMemo(
@@ -37,7 +39,7 @@ const RecitersListPage = ({ reciters, hasError, chaptersData }) => {
       <NextSeoWrapper
         title={t('quran-reciters')}
         description={t('reciters-desc')}
-        canonical={getCanonicalUrl(lang, NAVIGATION_URL)}
+        canonical={getCanonicalUrl(locale, NAVIGATION_URL)}
         languageAlternates={getLanguageAlternates(NAVIGATION_URL)}
       />
       <div className={layoutStyle.flow}>

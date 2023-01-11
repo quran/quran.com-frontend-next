@@ -1,6 +1,7 @@
 import React from 'react';
 
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
 
 import Header from './Header';
 import styles from './PreInput.module.scss';
@@ -24,17 +25,18 @@ interface Props {
 const POPULAR_SEARCH_QUERIES = { Mulk: 67, Noah: 71, Kahf: 18, Yaseen: 36 };
 
 const PreInput: React.FC<Props> = ({ onSearchKeywordClicked, isSearchDrawer }) => {
-  const { t, lang } = useTranslation('common');
-  const chaptersData = useGetChaptersData(lang);
+  const { t } = useTranslation('common');
+  const { locale } = useRouter();
+  const chaptersData = useGetChaptersData(locale);
   if (!chaptersData) {
     return <></>;
   }
   const SEARCH_FOR_KEYWORDS = [
-    `${t('juz')} ${toLocalizedNumber(1, lang)}`,
-    `${t('page')} ${toLocalizedNumber(1, lang)}`,
+    `${t('juz')} ${toLocalizedNumber(1, locale)}`,
+    `${t('page')} ${toLocalizedNumber(1, locale)}`,
     getChapterData(chaptersData, '36').transliteratedName,
-    toLocalizedNumber(36, lang),
-    toLocalizedVerseKey('2:255', lang),
+    toLocalizedNumber(36, locale),
+    toLocalizedVerseKey('2:255', locale),
   ];
   return (
     <div className={styles.container}>

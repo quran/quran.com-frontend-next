@@ -1,7 +1,7 @@
 import React, { RefObject } from 'react';
 
 import classNames from 'classnames';
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
 
 import DrawerSearchIcon from '../Buttons/DrawerSearchIcon';
 

@@ -4,7 +4,7 @@
 import React, { useCallback, useContext, useEffect, useState } from 'react';
 
 import classNames from 'classnames';
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
 import { useSelector, shallowEqual } from 'react-redux';
 import useSWR from 'swr/immutable';
 

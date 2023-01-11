@@ -1,6 +1,6 @@
 /* eslint-disable i18next/no-literal-string */
 
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
 
 import styles from './RenameCollectionModal.module.scss';
 

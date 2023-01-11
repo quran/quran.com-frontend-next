@@ -1,9 +1,10 @@
+/* eslint-disable max-lines */
 import { useCallback, useState } from 'react';
 
 import { Action } from '@reduxjs/toolkit';
 import groupBy from 'lodash/groupBy';
 import omit from 'lodash/omit';
-import useTranslation from 'next-translate/useTranslation';
+import { useTranslation } from 'next-i18next';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 
@@ -35,8 +36,9 @@ const TranslationSelectionBody = () => {
     actions: { onSettingsChange },
     isLoading,
   } = usePersistPreferenceGroup();
-  const { t, lang } = useTranslation('common');
+  const { t } = useTranslation('common');
   const router = useRouter();
+  const { locale } = router;
   const translationsState = useSelector(selectTranslations);
   const { selectedTranslations } = translationsState;
   const [searchQuery, setSearchQuery] = useState('');
@@ -81,8 +83,8 @@ const TranslationSelectionBody = () => {
         logValueChange('selected_translations', selectedTranslations, nextTranslations);
         onTranslationsSettingsChange(
           nextTranslations,
-          setSelectedTranslations({ translations: nextTranslations, locale: lang }),
-          setSelectedTranslations({ translations: selectedTranslations, locale: lang }),
+          setSelectedTranslations({ translations: nextTranslations, locale }),
+          setSelectedTranslations({ translations: selectedTranslations, locale }),
         );
         if (nextTranslations.length) {
           router.query[QueryParam.Translations] = nextTranslations.join(',');
@@ -90,7 +92,7 @@ const TranslationSelectionBody = () => {
         }
       };
     },
-    [lang, onTranslationsSettingsChange, router, selectedTranslations, removeQueryParam],
+    [locale, onTranslationsSettingsChange, router, selectedTranslations, removeQueryParam],
   );
 
   const renderTranslationGroup = useCallback(
@@ -137,7 +139,7 @@ const TranslationSelectionBody = () => {
         </SpinnerContainer>
       </div>
       <DataFetcher
-        queryKey={makeTranslationsUrl(lang)}
+        queryKey={makeTranslationsUrl(locale)}
         render={(data: TranslationsResponse) => {
           const filteredTranslations = searchQuery
             ? filterTranslations(data.translations, searchQuery)
@@ -148,7 +150,7 @@ const TranslationSelectionBody = () => {
           }
 
           const translationByLanguages = groupBy(filteredTranslations, 'languageName');
-          const selectedTranslationLanguage = getLocaleName(lang).toLowerCase();
+          const selectedTranslationLanguage = getLocaleName(locale).toLowerCase();
           const selectedTranslationGroup = translationByLanguages[selectedTranslationLanguage];
           const translationByLanguagesWithoutSelectedLanguage = omit(translationByLanguages, [
             selectedTranslationLanguage,
