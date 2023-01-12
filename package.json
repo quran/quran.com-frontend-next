@@ -56,7 +56,6 @@
     "lodash": "^4.17.21",
     "next": "^13.1.1",
     "next-compose-plugins": "^2.2.0",
-    "next-fonts": "^1.0.3",
     "next-pwa": "^5.5.5",
     "next-seo": "^5.5.0",
     "next-translate": "^1.6.0",

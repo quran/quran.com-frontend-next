@@ -7,7 +7,6 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 });
 const { withSentryConfig } = require('@sentry/nextjs');
 const withPlugins = require('next-compose-plugins');
-const withFonts = require('next-fonts');
 const withPWA = require('next-pwa');
 const nextTranslate = require('next-translate');
 
@@ -165,6 +164,6 @@ const config = {
 };
 
 module.exports = withPlugins(
-  [withBundleAnalyzer, withPWA, withFonts, nextTranslate, withSentryConfig],
+  [withBundleAnalyzer, withPWA, nextTranslate, withSentryConfig],
   config,
 );
