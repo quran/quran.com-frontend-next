@@ -18,6 +18,7 @@ const LoadingSwitcher: React.FC<Props> = ({
   isLoading,
 }) => {
   const { t } = useTranslation('common');
+
   return isLoading && readingPreference === selectedReadingPreference ? (
     <div className={styles.container}>
       <span>
@@ -26,7 +27,7 @@ const LoadingSwitcher: React.FC<Props> = ({
       <span>{t(`reading-preference.${readingPreference}`)}</span>
     </div>
   ) : (
-    t(`reading-preference.${selectedReadingPreference}`)
+    <>{t(`reading-preference.${selectedReadingPreference}`)}</>
   );
 };
 
