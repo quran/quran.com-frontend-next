@@ -1,13 +1,15 @@
-import { ReadingPreference, WordByWordType, WordClickFunctionality } from 'types/QuranReader';
+import {
+  ReadingPreference,
+  WordByWordType,
+  WordClickFunctionality,
+  WordByWordDisplay,
+} from 'types/QuranReader';
 
 type ReadingPreferences = {
   readingPreference: ReadingPreference;
-  showWordByWordTranslation: boolean;
-  selectedWordByWordTranslation: number;
   selectedWordByWordLocale: string;
-  showWordByWordTransliteration: boolean;
-  selectedWordByWordTransliteration: number;
-  showTooltipFor: WordByWordType[];
+  wordByWordContentType: WordByWordType[];
+  wordByWordDisplay: WordByWordDisplay[];
   wordClickFunctionality: WordClickFunctionality;
   isUsingDefaultWordByWordLocale: boolean;
 };

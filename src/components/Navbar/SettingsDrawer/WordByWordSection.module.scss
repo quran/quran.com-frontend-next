@@ -1,6 +1,25 @@
 .checkboxContainer {
-  display: flex;
-  & > div + div {
-    margin-inline-start: var(--spacing-medium);
+  & > div {
+    margin-inline-start: var(--spacing-xxsmall);
+    margin-block: var(--spacing-xsmall);
   }
+}
+
+.displayContainer {
+  margin-inline-start: var(--spacing-xxsmall);
+  margin-block-start: var(--spacing-small);
+  display: flex;
+}
+
+.separator {
+  margin-block: var(--spacing-small);
+}
+
+.summaryText {
+  font-size: var(--font-size-small);
+  margin-block-end: var(--spacing-large);
+}
+
+.source {
+  font-weight: var(--font-weight-bold);
 }

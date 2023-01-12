@@ -3,15 +3,15 @@ import { useState, useMemo, useContext } from 'react';
 import { useSelector } from '@xstate/react';
 import useTranslation from 'next-translate/useTranslation';
 
-import PopoverMenu from '../dls/PopoverMenu/PopoverMenu';
-
+import AudioExperienceMenu from './Buttons/AudioExperienceMenu';
 import AudioPlaybackRateMenu from './Buttons/AudioPlaybackRateMenu';
-import CloseButton from './Buttons/CloseButton';
 import DownloadAudioButton from './Buttons/DownloadAudioButton';
 import SelectReciterMenu from './Buttons/SelectReciterMenu';
 import styles from './OverflowAudioPlayActionsMenuBody.module.scss';
 
+import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import ChevronRightIcon from '@/icons/chevron-right.svg';
+import ExperienceIcon from '@/icons/experience.svg';
 import PersonIcon from '@/icons/person.svg';
 import { logButtonClick } from '@/utils/eventLogger';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
@@ -32,6 +32,7 @@ enum AudioPlayerOverflowMenu {
   Main = 'main',
   AudioSpeed = 'audio-speed',
   Reciter = 'reciter',
+  Experience = 'experience',
 }
 
 const OverflowAudioPlayActionsMenuBody = () => {
@@ -46,8 +47,22 @@ const OverflowAudioPlayActionsMenuBody = () => {
     () => ({
       [AudioPlayerOverflowMenu.Main]: [
         <DownloadAudioButton key={0} />,
+        <PopoverMenu.Divider key={1} />,
         <PopoverMenu.Item
-          key={1}
+          key={2}
+          icon={<ExperienceIcon />}
+          onClick={() => {
+            logButtonClick(`audio_player_overflow_menu_experience`); // TODO: log this
+            setSelectedMenu(AudioPlayerOverflowMenu.Experience);
+          }}
+        >
+          <div className={styles.menuWithNestedItems}>
+            {t('audio.experience')}
+            <ChevronRightIcon />
+          </div>
+        </PopoverMenu.Item>,
+        <PopoverMenu.Item
+          key={3}
           icon={
             <span style={{ fontSize: getPlaybackRateLabelFontSize(playbackRate) }}>
               {playbackRate}
@@ -65,26 +80,25 @@ const OverflowAudioPlayActionsMenuBody = () => {
           </div>
         </PopoverMenu.Item>,
         <PopoverMenu.Item
-          key={2}
+          key={4}
           icon={<PersonIcon />}
           onClick={() => {
             logButtonClick(`audio_player_overflow_menu_reciter`);
             setSelectedMenu(AudioPlayerOverflowMenu.Reciter);
           }}
         >
-          <div className={styles.menuWithNestedItems}>
-            {t('audio.select-reciter')}
-            <ChevronRightIcon />
-          </div>
+          <div className={styles.menuWithNestedItems}>{t('audio.select-reciter')}</div>
+          <ChevronRightIcon />
         </PopoverMenu.Item>,
-        <PopoverMenu.Divider key={3} />,
-        <CloseButton key={4} />,
       ],
       [AudioPlayerOverflowMenu.AudioSpeed]: (
         <AudioPlaybackRateMenu onBack={() => setSelectedMenu(AudioPlayerOverflowMenu.Main)} />
       ),
       [AudioPlayerOverflowMenu.Reciter]: (
         <SelectReciterMenu onBack={() => setSelectedMenu(AudioPlayerOverflowMenu.Main)} />
+      ),
+      [AudioPlayerOverflowMenu.Experience]: (
+        <AudioExperienceMenu onBack={() => setSelectedMenu(AudioPlayerOverflowMenu.Main)} />
       ),
     }),
     [t, playbackRate],

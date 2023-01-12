@@ -2,6 +2,7 @@
 import { useContext, useState } from 'react';
 
 import { useSelector } from '@xstate/react';
+import useTranslation from 'next-translate/useTranslation';
 
 import RemainingRangeCount from './RemainingRangeCount';
 import RepeatAudioModal from './RepeatAudioModal/RepeatAudioModal';
@@ -12,14 +13,17 @@ import Badge from '@/dls/Badge/Badge';
 import Button, { ButtonShape, ButtonVariant } from '@/dls/Button/Button';
 import RepeatIcon from '@/icons/repeat.svg';
 import { logButtonClick } from '@/utils/eventLogger';
+import { selectIsLoading } from '@/xstate/actors/audioPlayer/selectors';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 
-const RepeatAudioButton = ({ isLoading }) => {
+const RepeatAudioButton = () => {
+  const { t } = useTranslation('common');
   const audioService = useContext(AudioPlayerMachineContext);
 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const currentSurah = useSelector(audioService, (state) => state.context.surah);
   const repeatActor = useSelector(audioService, (state) => state.context.repeatActor);
+  const isLoading = useSelector(audioService, selectIsLoading);
   const isInRepeatMode = !!repeatActor;
 
   const onButtonClicked = () => {
@@ -56,6 +60,7 @@ const RepeatAudioButton = ({ isLoading }) => {
       >
         <Button
           variant={ButtonVariant.Ghost}
+          tooltip={t('audio.player.repeat-settings')}
           shape={ButtonShape.Circle}
           onClick={onButtonClicked}
           isDisabled={isLoading}

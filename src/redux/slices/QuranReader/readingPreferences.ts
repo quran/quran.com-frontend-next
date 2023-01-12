@@ -7,7 +7,12 @@ import { RootState } from '@/redux/RootState';
 import ReadingPreferences from '@/redux/types/ReadingPreferences';
 import SliceName from '@/redux/types/SliceName';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
-import { ReadingPreference, WordByWordType, WordClickFunctionality } from 'types/QuranReader';
+import {
+  ReadingPreference,
+  WordByWordDisplay,
+  WordByWordType,
+  WordClickFunctionality,
+} from 'types/QuranReader';
 
 export const readingPreferencesSlice = createSlice({
   name: SliceName.READING_PREFERENCES,
@@ -16,22 +21,6 @@ export const readingPreferencesSlice = createSlice({
     setReadingPreference: (state, action: PayloadAction<ReadingPreference>) => ({
       ...state,
       readingPreference: action.payload,
-    }),
-    setShowWordByWordTranslation: (state, action: PayloadAction<boolean>) => ({
-      ...state,
-      showWordByWordTranslation: action.payload,
-    }),
-    setShowWordByWordTransliteration: (state, action: PayloadAction<boolean>) => ({
-      ...state,
-      showWordByWordTransliteration: action.payload,
-    }),
-    setSelectedWordByWordTranslation: (state, action: PayloadAction<number>) => ({
-      ...state,
-      selectedWordByWordTranslation: action.payload,
-    }),
-    setSelectedWordByWordTransliteration: (state, action: PayloadAction<number>) => ({
-      ...state,
-      selectedWordByWordTransliteration: action.payload,
     }),
     setSelectedWordByWordLocale: (
       state,
@@ -43,13 +32,17 @@ export const readingPreferencesSlice = createSlice({
         action.payload.value ===
         getReadingPreferencesInitialState(action.payload.locale).selectedWordByWordLocale,
     }),
-    setShowTooltipFor: (state, action: PayloadAction<WordByWordType[]>) => ({
-      ...state,
-      showTooltipFor: action.payload,
-    }),
     setWordClickFunctionality: (state, action: PayloadAction<WordClickFunctionality>) => ({
       ...state,
       wordClickFunctionality: action.payload,
+    }),
+    setWordByWordContentType: (state, action: PayloadAction<WordByWordType[]>) => ({
+      ...state,
+      wordByWordContentType: action.payload,
+    }),
+    setWordByWordDisplay: (state, action: PayloadAction<WordByWordDisplay[]>) => ({
+      ...state,
+      wordByWordDisplay: action.payload,
     }),
   },
   // reset the state to initial state
@@ -80,25 +73,45 @@ export const readingPreferencesSlice = createSlice({
 
 export const {
   setReadingPreference,
-  setShowWordByWordTranslation,
-  setShowWordByWordTransliteration,
-  setSelectedWordByWordTranslation,
-  setSelectedWordByWordTransliteration,
   setSelectedWordByWordLocale,
-  setShowTooltipFor,
   setWordClickFunctionality,
+  setWordByWordContentType,
+  setWordByWordDisplay,
 } = readingPreferencesSlice.actions;
 
-export const selectWordByWordPreferences = (state: RootState) => ({
-  showWordByWordTranslation: state.readingPreferences.showWordByWordTranslation,
-  selectedWordByWordTranslation: state.readingPreferences.selectedWordByWordTranslation,
-  showWordByWordTransliteration: state.readingPreferences.showWordByWordTransliteration,
-  selectedWordByWordTransliteration: state.readingPreferences.selectedWordByWordTransliteration,
-  selectedWordByWordLocale: state.readingPreferences.selectedWordByWordLocale,
-});
+export const selectWordByWordPreferences = (state: RootState) => {
+  const { readingPreferences } = state;
+  const { wordByWordDisplay, wordByWordContentType } = readingPreferences;
+
+  const shouldDisplayInline = wordByWordDisplay.includes(WordByWordDisplay.INLINE);
+
+  return {
+    showWordByWordTranslation:
+      shouldDisplayInline && wordByWordContentType.includes(WordByWordType.Translation),
+    showWordByWordTransliteration:
+      shouldDisplayInline && wordByWordContentType.includes(WordByWordType.Transliteration),
+  };
+};
 export const selectReadingPreferences = (state: RootState): ReadingPreferences =>
   state.readingPreferences;
-export const selectShowTooltipFor = (state: RootState) => state.readingPreferences.showTooltipFor;
+export const selectShowTooltipFor = (state: RootState) => {
+  const { readingPreferences } = state;
+  const { wordByWordDisplay, wordByWordContentType } = readingPreferences;
+  /*
+    We should not show any tooltips when:
+      1. Display options does not include tooltip.
+      2. Display options does include tooltip but no translation/transliterations were selected.
+  */
+  if (
+    !wordByWordDisplay ||
+    !wordByWordDisplay.includes(WordByWordDisplay.TOOLTIP) ||
+    !wordByWordContentType ||
+    !wordByWordContentType.length
+  ) {
+    return [];
+  }
+  return wordByWordContentType;
+};
 export const selectReadingPreference = (state: RootState) =>
   state.readingPreferences.readingPreference;
 export const selectWordClickFunctionality = (state: RootState) =>
