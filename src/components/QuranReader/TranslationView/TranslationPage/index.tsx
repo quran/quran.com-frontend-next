@@ -54,9 +54,10 @@ const TranslationPage: React.FC<Props> = ({
   resourceId,
   setApiPageToVersesMap,
 }) => {
-  const { lang, t } = useTranslation('common');
+  const { t } = useTranslation('common');
   const router = useRouter();
-  const defaultTranslations = getTranslationsInitialState(lang).selectedTranslations;
+  const { locale } = router;
+  const defaultTranslations = getTranslationsInitialState(locale).selectedTranslations;
   const translationParams = useMemo(
     () =>
       (router.query.translations as string)?.split(',')?.map((translation) => Number(translation)),
@@ -89,7 +90,7 @@ const TranslationPage: React.FC<Props> = ({
       isVerseData: quranReaderDataType === QuranReaderDataType.Verse,
       id: resourceId,
       reciter: reciterId,
-      locale: lang,
+      locale,
       wordByWordLocale,
     }),
     verseFetcher,
@@ -139,13 +140,13 @@ const TranslationPage: React.FC<Props> = ({
     if (translations?.length === 2) {
       translationName = t('settings.value-and-other', {
         value: translations?.[0].resourceName,
-        othersCount: toLocalizedNumber(translations.length - 1, lang),
+        othersCount: toLocalizedNumber(translations.length - 1, locale),
       });
     }
     if (translations?.length > 2) {
       translationName = t('settings.value-and-others', {
         value: translations?.[0].resourceName,
-        othersCount: toLocalizedNumber(translations.length - 1, lang),
+        othersCount: toLocalizedNumber(translations.length - 1, locale),
       });
     }
 

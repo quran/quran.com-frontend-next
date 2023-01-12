@@ -2,6 +2,7 @@ import React, { useCallback, useContext } from 'react';
 
 import { useSelector } from '@xstate/react';
 import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
 
 import styles from './SelectReciterMenu.module.scss';
 
@@ -21,7 +22,8 @@ import Reciter from 'types/Reciter';
 const DEFAULT_RECITATION_STYLE = 'Murattal';
 
 const SelectReciterMenu = ({ onBack }) => {
-  const { lang, t } = useTranslation('common');
+  const { t } = useTranslation('common');
+  const { locale } = useRouter();
 
   const audioService = useContext(AudioPlayerMachineContext);
   const selectedReciterId = useSelector(audioService, (state) => state.context.reciterId);
@@ -86,7 +88,9 @@ const SelectReciterMenu = ({ onBack }) => {
     [getItemIcon, selectedReciterId, onReciterSelected],
   );
 
-  const reciters = <DataFetcher queryKey={makeAvailableRecitersUrl(lang)} render={renderReciter} />;
+  const reciters = (
+    <DataFetcher queryKey={makeAvailableRecitersUrl(locale)} render={renderReciter} />
+  );
 
   return (
     <>

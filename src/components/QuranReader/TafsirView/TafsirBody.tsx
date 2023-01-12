@@ -5,6 +5,7 @@ import React, { useCallback, useContext, useEffect, useState } from 'react';
 
 import classNames from 'classnames';
 import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
 import { useSelector, shallowEqual } from 'react-redux';
 import useSWR from 'swr/immutable';
 
@@ -68,7 +69,8 @@ const TafsirBody = ({
   shouldRender,
 }: TafsirBodyProps) => {
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
-  const { lang, t } = useTranslation('common');
+  const { t } = useTranslation('common');
+  const { locale } = useRouter();
   const tafsirsState = useSelector(selectTafsirs);
   const { selectedTafsirs: userPreferredTafsirIds } = tafsirsState;
   const chaptersData = useContext(DataContext);
@@ -105,27 +107,27 @@ const TafsirBody = ({
           Number(selectedVerseNumber),
           slug,
         ),
-        lang,
+        locale,
       );
       onSettingsChange(
         'selectedTafsirs',
         [slug],
         setSelectedTafsirs({
           tafsirs: [slug],
-          locale: lang,
+          locale,
         }),
         setSelectedTafsirs({
           tafsirs: tafsirsState.selectedTafsirs,
-          locale: lang,
+          locale,
         }),
         PreferenceGroup.TAFSIRS,
       );
     },
-    [lang, onSettingsChange, selectedChapterId, selectedVerseNumber, tafsirsState],
+    [locale, onSettingsChange, selectedChapterId, selectedVerseNumber, tafsirsState],
   );
 
   const { data: tafsirSelectionList } = useSWR<TafsirsResponse>(
-    shouldRender ? makeTafsirsUrl(lang) : null,
+    shouldRender ? makeTafsirsUrl(locale) : null,
     fetcher,
   );
 
@@ -177,7 +179,7 @@ const TafsirBody = ({
             Number(newVerseNumber),
             selectedTafsirIdOrSlug,
           ),
-          lang,
+          locale,
         );
         setSelectedVerseNumber(newVerseNumber);
       };
@@ -192,7 +194,7 @@ const TafsirBody = ({
             Number(newVerseNumber),
             selectedTafsirIdOrSlug,
           ),
-          lang,
+          locale,
         );
         setSelectedVerseNumber(newVerseNumber);
       };
@@ -227,7 +229,7 @@ const TafsirBody = ({
         </div>
       );
     },
-    [chaptersData, lang, scrollToTop, selectedChapterId, selectedTafsirIdOrSlug, t],
+    [chaptersData, locale, scrollToTop, selectedChapterId, selectedTafsirIdOrSlug, t],
   );
 
   const surahAndAyahSelection = (
@@ -242,7 +244,7 @@ const TafsirBody = ({
             Number(1),
             selectedTafsirIdOrSlug,
           ),
-          lang,
+          locale,
         );
         setSelectedChapterId(newChapterId.toString());
         setSelectedVerseNumber('1'); // reset verse number to 1 every time chapter changes
@@ -256,7 +258,7 @@ const TafsirBody = ({
             Number(newVerseNumber),
             selectedTafsirIdOrSlug,
           ),
-          lang,
+          locale,
         );
       }}
     />
@@ -287,7 +289,7 @@ const TafsirBody = ({
       <DataFetcher
         loading={TafsirSkeleton}
         queryKey={makeTafsirContentUrl(selectedTafsirIdOrSlug, selectedVerseKey, {
-          lang,
+          lang: locale,
           quranFont: quranReaderStyles.quranFont,
           mushafLines: quranReaderStyles.mushafLines,
         })}

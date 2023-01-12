@@ -3,6 +3,7 @@ import React, { useState, useEffect, useCallback, useMemo, useContext } from 're
 
 import classNames from 'classnames';
 import { useTranslation } from 'next-i18next';
+import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 import useSWRImmutable from 'swr/immutable';
 
@@ -53,7 +54,8 @@ const TO_COPY_FONTS = [
 ];
 
 const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
-  const { lang, t } = useTranslation('quran-reader');
+  const { t } = useTranslation('quran-reader');
+  const { locale } = useRouter();
   const chaptersData = useContext(DataContext);
   const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
   // whether we should show the range of verses or not. This will be based on user selection.
@@ -99,8 +101,8 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
   // because we already have call the API in settings menu. useSWR will save it to cache.
   // in this component, we will get the data from the cache.
   // so, no rerender, no layout shift.
-  const { data: translationsResponse } = useSWRImmutable(makeTranslationsUrl(lang), () =>
-    getAvailableTranslations(lang).then((res) => {
+  const { data: translationsResponse } = useSWRImmutable(makeTranslationsUrl(locale), () =>
+    getAvailableTranslations(locale).then((res) => {
       throwIfError(res);
       return res;
     }),
@@ -122,7 +124,7 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
         };
       });
     setTranslations(responseTranslations);
-  }, [lang, selectedTranslations, availableTranslations]);
+  }, [locale, selectedTranslations, availableTranslations]);
 
   /**
    * Handle when either the range start/end's verse is selected.
@@ -153,7 +155,7 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
           id: chapterVersesKey,
           name: chapterVersesKey,
           value: chapterVersesKey,
-          label: toLocalizedVerseKey(chapterVersesKey, lang),
+          label: toLocalizedVerseKey(chapterVersesKey, locale),
         })),
       );
       // set the first verse's key as the default range's start verse.
@@ -275,7 +277,7 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
           {
             value: SINGLE_VERSE,
             id: SINGLE_VERSE,
-            label: `${t('current-verse')} ${toLocalizedVerseKey(verse.verseKey, lang)}`,
+            label: `${t('current-verse')} ${toLocalizedVerseKey(verse.verseKey, locale)}`,
           },
           {
             value: MULTIPLE_VERSES,
@@ -288,8 +290,8 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
         <VersesRangeSelector
           isVisible={showRangeOfVerses}
           dropdownItems={rangeVersesItems}
-          rangeStartVerse={toLocalizedVerseKey(rangeStartVerse, lang)}
-          rangeEndVerse={toLocalizedVerseKey(rangeEndVerse, lang)}
+          rangeStartVerse={toLocalizedVerseKey(rangeStartVerse, locale)}
+          rangeEndVerse={toLocalizedVerseKey(rangeEndVerse, locale)}
           onChange={onRangeBoundariesChange}
         />
       )}

@@ -38,12 +38,13 @@ export const filterReciters = (reciters, searchQuery: string): Reciter[] => {
 const DEFAULT_RECITATION_STYLE = 'Murattal';
 
 const SettingsReciter = () => {
-  const { lang, t } = useTranslation('common');
+  const { t } = useTranslation('common');
   const {
     isLoading,
     actions: { onXstateSettingsChange },
   } = usePersistPreferenceGroup();
   const router = useRouter();
+  const { locale } = router;
   const [searchQuery, setSearchQuery] = useState('');
 
   const audioService = useContext(AudioPlayerMachineContext);
@@ -83,7 +84,7 @@ const SettingsReciter = () => {
         </SpinnerContainer>
       </div>
       <DataFetcher
-        queryKey={makeAvailableRecitersUrl(lang)}
+        queryKey={makeAvailableRecitersUrl(locale)}
         render={(data: RecitersResponse) => {
           const filteredReciters = searchQuery
             ? filterReciters(data.reciters, searchQuery)
