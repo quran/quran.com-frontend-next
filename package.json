@@ -70,7 +70,7 @@
     "redux": "^4.2.0",
     "redux-persist": "^6.0.0",
     "refresh-fetch": "^0.8.0",
-    "swr": "^1.2.1",
+    "swr": "^2.0.0",
     "xstate": "^4.33.6"
   },
   "devDependencies": {
