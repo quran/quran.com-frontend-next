@@ -108,7 +108,6 @@ const AboutUsPage = () => {
               <div className={styles.image}>
                 <Image
                   src="/images/lokalize.png"
-                  layout="fixed"
                   width={300}
                   height={70}
                   placeholder="blur"
@@ -133,7 +132,6 @@ const AboutUsPage = () => {
                 <div className={styles.image}>
                   <Image
                     src="/images/powered-by-vercel.svg"
-                    layout="fixed"
                     width={150}
                     height={70}
                     placeholder="blur"
