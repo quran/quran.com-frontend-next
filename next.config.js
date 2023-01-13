@@ -2,39 +2,28 @@
 /* eslint-disable no-param-reassign */
 const path = require('path');
 
-const withBundleAnalyzer = require('@next/bundle-analyzer')({
-  enabled: process.env.ANALYZE_BUNDLE === 'true',
-});
+const withBundleAnalyzer = require('@next/bundle-analyzer');
 const { withSentryConfig } = require('@sentry/nextjs');
 const withPlugins = require('next-compose-plugins');
-const withFonts = require('next-fonts');
 const withPWA = require('next-pwa');
 const nextTranslate = require('next-translate');
 
-const securityHeaders = require('./configs/SecurityHeaders.js');
-const runtimeCaching = require('./pwa-runtime-config.js');
+const pwa = require('./configs/pwa.js');
+const securityHeaders = require('./configs/security-headers.js');
+const sentry = require('./configs/sentry.js');
 
 const isDev = process.env.NEXT_PUBLIC_VERCEL_ENV === 'development';
-const isProduction = process.env.NEXT_PUBLIC_VERCEL_ENV === 'production';
+
+/**
+ * @type {import('next').NextConfig}
+ */
 const config = {
+  reactStrictMode: true,
   productionBrowserSourceMaps: true, // {@see https://nextjs.org/docs/advanced-features/source-maps}
-  experimental: {
-    outputStandalone: true,
-  },
+  output: 'standalone',
   images: {
     formats: ['image/avif', 'image/webp'],
     domains: ['cdn.qurancdn.com', 'static.qurancdn.com', 'vercel.com', 'now.sh', 'quran.com'],
-  },
-  pwa: {
-    disable: !isProduction,
-    dest: 'public',
-    mode: isProduction ? 'production' : 'development',
-    runtimeCaching,
-    publicExcludes: [
-      '!fonts/**/!(sura_names|ProximaVara)*', // exclude pre-caching all fonts that are not sura_names or ProximaVara
-      '!icons/**', // exclude all icons
-      '!images/**/!(background|homepage)*', // don't pre-cache except background.jpg and homepage.png
-    ],
   },
   // this is needed to support importing audioWorklet nodes. {@see https://github.com/webpack/webpack/issues/11543#issuecomment-826897590}
   webpack: (webpackConfig) => {
@@ -81,17 +70,6 @@ const config = {
     });
 
     return webpackConfig;
-  },
-  SentryWebpackPluginOptions: {
-    // Additional config options for the Sentry Webpack plugin. Keep in mind that
-    // the following options are set automatically, and overriding them is not
-    // recommended:
-    //   release, url, org, project, authToken, configFile, stripPrefix,
-    //   urlPrefix, include, ignore
-
-    silent: true, // Suppresses all logs
-    // For all available options, see:
-    // https://github.com/getsentry/sentry-webpack-plugin#options.
   },
   async headers() {
     return isDev
@@ -161,7 +139,16 @@ const config = {
   },
 };
 
-module.exports = withPlugins(
-  [withBundleAnalyzer, withPWA, withFonts, nextTranslate, withSentryConfig],
+const finalConfig = withPlugins(
+  [
+    withBundleAnalyzer({
+      enabled: process.env.ANALYZE_BUNDLE === 'true',
+    }),
+    withPWA(pwa),
+    nextTranslate,
+  ],
   config,
 );
+
+// withSentryConfig must be outside withPlugins because its config is the second argument
+module.exports = withSentryConfig(finalConfig, sentry);
