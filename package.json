@@ -20,7 +20,7 @@
     "test:integration": "playwright test",
     "test:coverage": "vitest run --coverage",
     "test:watch": "vitest watch",
-    "analyze": "ANALYZE_BUNDLE=true yarn build",
+    "analyze": "cross-env ANALYZE_BUNDLE=true yarn build",
     "lokalise:pull": "node scripts/lokalise.js",
     "lokalise:push": "node scripts/lokalise.js push",
     "chapter-data:format": "node scripts/format-chapter-data-json.js"
@@ -73,7 +73,6 @@
     "xstate": "^4.33.6"
   },
   "devDependencies": {
-    "@babel/core": "^7.19.1",
     "@lokalise/node-api": "^8.0.1",
     "@next/eslint-plugin-next": "^12.3.1",
     "@playwright/test": "^1.26.0",
@@ -103,10 +102,7 @@
     "@vitejs/plugin-react": "^2.1.0",
     "@vitest/coverage-c8": "^0.23.4",
     "adm-zip": "^0.5.9",
-    "awesome-typescript-loader": "^5.2.1",
-    "babel-loader": "^8.2.5",
-    "babel-plugin-polyfill-corejs2": "^0.3.3",
-    "babel-plugin-polyfill-regenerator": "^0.4.1",
+    "cross-env": "^7.0.3",
     "dotenv": "^16.0.2",
     "eslint": "^8.24.0",
     "eslint-config-airbnb": "^19.0.4",
