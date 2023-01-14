@@ -1,7 +1,9 @@
-interface Props {
-  isMacOs?: boolean;
-}
+import isClient from '@/utils/isClient';
 
-const MetaShortcut: React.FC<Props> = ({ isMacOs }) => <>{isMacOs ? '⌘' : 'ctrl'}</>;
+const MetaShortcut: React.FC = () => {
+  const isMacOs = isClient && window.navigator.userAgent.search('Mac') !== -1;
+
+  return <span>{isMacOs ? '⌘' : 'ctrl'}</span>;
+};
 
 export default MetaShortcut;

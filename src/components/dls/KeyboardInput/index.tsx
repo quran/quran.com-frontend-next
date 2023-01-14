@@ -6,7 +6,7 @@ import dynamic from 'next/dynamic';
 
 import styles from './KeyboardInput.module.scss';
 
-// this solves a hydration error because we detect the OS on the client side, so the text might be different on the server and the client
+// Returns ctrl or ⌘ based on the OS. This component is loaded on the client only to prevent hydration errors
 const MetaShortcut = dynamic(() => import('./MetaShortcut'), {
   ssr: false,
 });
@@ -28,15 +28,9 @@ const KeyboardInput: React.FC<Props> = ({
   ctrl,
   invertColors = false,
 }) => {
-  const isMacOs = typeof window !== 'undefined' && window.navigator.userAgent.search('Mac') !== -1;
-
   return (
     <kbd className={classNames(styles.container, { [styles.invertedColors]: invertColors })}>
-      {meta && (
-        <span>
-          <MetaShortcut isMacOs={isMacOs} />
-        </span>
-      )}
+      {meta && <MetaShortcut />}
       {shift && <span>⇧</span>}
       {alt && <span>⌥</span>}
       {ctrl && <span>⌃</span>}
