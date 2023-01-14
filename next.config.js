@@ -4,7 +4,6 @@ const path = require('path');
 
 const withBundleAnalyzer = require('@next/bundle-analyzer');
 const { withSentryConfig } = require('@sentry/nextjs');
-const withPlugins = require('next-compose-plugins');
 const withPWA = require('next-pwa');
 const nextTranslate = require('next-translate');
 
@@ -139,16 +138,19 @@ const config = {
   },
 };
 
-const finalConfig = withPlugins(
-  [
-    withBundleAnalyzer({
-      enabled: process.env.ANALYZE_BUNDLE === 'true',
-    }),
-    withPWA(pwa),
-    nextTranslate,
-  ],
-  config,
-);
+let finalConfig = { ...config };
+
+const plugins = [
+  withBundleAnalyzer({
+    enabled: process.env.ANALYZE_BUNDLE === 'true',
+  }),
+  withPWA(pwa),
+  nextTranslate,
+];
+
+plugins.forEach((plugin) => {
+  finalConfig = plugin(finalConfig);
+});
 
 // withSentryConfig must be outside withPlugins because its config is the second argument
 module.exports = withSentryConfig(finalConfig, sentry);
