@@ -21,6 +21,7 @@
     "target": "es5",
     "incremental": true,
     "paths": {
+      "audio-worklet": ["./src/audioInput/audio-worklet.ts"],
       "@/icons/*": ["./public/icons/*"],
       "@/dls/*": ["./src/components/dls/*"],
       "@/data/*": ["./data/*"],
