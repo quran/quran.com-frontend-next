@@ -11,6 +11,7 @@ import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
 import { setIsReadingByRevelationOrder } from '@/redux/slices/revelationOrder';
 import PreferenceGroup from '@/types/auth/PreferenceGroup';
 import Chapter from '@/types/Chapter';
+import { isLoggedIn } from '@/utils/auth/login';
 import { QURAN_CHAPTERS_COUNT } from '@/utils/chapter';
 import { logButtonClick } from '@/utils/eventLogger';
 import { shouldUseMinimalLayout, toLocalizedNumber } from '@/utils/locale';
@@ -33,18 +34,22 @@ const RevelationOrderView = ({ isDescending, chapters }: RevelationOrderViewProp
   const [clickedSurahId, setClickedSurahId] = useState(null);
 
   const onSurahClicked = (surahId: string | number) => {
-    setClickedSurahId(surahId);
-    onSettingsChange(
-      'isReadingByRevelationOrder',
-      true,
-      setIsReadingByRevelationOrder(true),
-      setIsReadingByRevelationOrder(false),
-      PreferenceGroup.READING,
-      () => {
-        // navigate to the selected Surah on success
-        router.push(getSurahNavigationUrl(surahId));
-      },
-    );
+    if (isLoggedIn()) {
+      setClickedSurahId(surahId);
+      onSettingsChange(
+        'isReadingByRevelationOrder',
+        true,
+        setIsReadingByRevelationOrder(true),
+        setIsReadingByRevelationOrder(false),
+        PreferenceGroup.READING,
+        () => {
+          // navigate to the selected Surah on success
+          router.push(getSurahNavigationUrl(surahId));
+        },
+      );
+    } else {
+      router.push(getSurahNavigationUrl(surahId));
+    }
     logButtonClick('revelation_ordering_surah');
   };
 
