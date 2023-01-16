@@ -4,22 +4,14 @@ module.exports = {
     "stories": [
         "../src/**/*.stories.tsx"
     ],
-    "addons": [{
-            name: '@storybook/preset-scss',
-            options: {
-                cssLoaderOptions: {
-                    modules: {
-                        auto: true
-                    }
-                }
-            }
-        },
+    "addons": [
         "@storybook/addon-links",
         "@storybook/addon-essentials",
         "@storybook/addon-a11y",
-        "storybook-addon-next-router",
-        "@storybook/addon-storysource"
+        "@storybook/addon-storysource",
+        "storybook-addon-next",
     ],
+    framework: '@storybook/react',
     typescript: {
         check: false,
         checkOptions: {},
