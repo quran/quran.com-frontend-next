@@ -1,3 +1,5 @@
+// This file is just a reference; it is not used anymore since we now use a static JS file: /public/MicInputProcessor.js
+
 class MicInputProcessor extends AudioWorkletProcessor {
   process(inputs: Float32Array[][]) {
     // get the first channel of the first input since the processor might have multiple inputs and multiple channels for each input.
