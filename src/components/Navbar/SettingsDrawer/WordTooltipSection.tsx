@@ -86,7 +86,7 @@ const WordTooltipSection = () => {
         <div className={styles.checkboxContainer}>
           <div>
             <Checkbox
-              checked={showTooltipFor.includes(WordByWordType.Translation)}
+              checked={showTooltipFor && showTooltipFor.includes(WordByWordType.Translation)}
               id="word-tooltip-translation"
               name="word-tooltip-translation"
               label={t('translation')}
@@ -95,7 +95,7 @@ const WordTooltipSection = () => {
           </div>
           <div>
             <Checkbox
-              checked={showTooltipFor.includes(WordByWordType.Transliteration)}
+              checked={showTooltipFor && showTooltipFor.includes(WordByWordType.Transliteration)}
               id="word-tooltip-transliteration"
               name="word-tooltip-transliteration"
               label={t('transliteration')}

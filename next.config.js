@@ -1,6 +1,5 @@
 /* eslint-disable react-func/max-lines-per-function */
 /* eslint-disable no-param-reassign */
-const path = require('path');
 
 const withBundleAnalyzer = require('@next/bundle-analyzer');
 const { withSentryConfig } = require('@sentry/nextjs');
@@ -17,29 +16,14 @@ const isDev = process.env.NEXT_PUBLIC_VERCEL_ENV === 'development';
  * @type {import('next').NextConfig}
  */
 const config = {
-  reactStrictMode: true,
+  reactStrictMode: false,
   productionBrowserSourceMaps: true, // {@see https://nextjs.org/docs/advanced-features/source-maps}
   output: 'standalone',
   images: {
     formats: ['image/avif', 'image/webp'],
     domains: ['cdn.qurancdn.com', 'static.qurancdn.com', 'vercel.com', 'now.sh', 'quran.com'],
   },
-  // this is needed to support importing audioWorklet nodes. {@see https://github.com/webpack/webpack/issues/11543#issuecomment-826897590}
   webpack: (webpackConfig) => {
-    webpackConfig.resolve = {
-      ...webpackConfig.resolve,
-      alias: {
-        ...webpackConfig.resolve.alias,
-        'audio-worklet': path.resolve(__dirname, 'src/audioInput/audio-worklet.ts'),
-      },
-    };
-    webpackConfig.module.parser = {
-      ...webpackConfig.module.parser,
-      javascript: {
-        worker: ['AudioWorklet from audio-worklet'],
-      },
-    };
-
     webpackConfig.module.rules.push({
       test: /\.svg$/i,
       issuer: {
