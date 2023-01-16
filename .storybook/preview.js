@@ -1,13 +1,12 @@
-import { RouterContext } from "next/dist/shared/lib/router-context";
-
 import ResetCSS from '../src/styles/reset.scss';
 import { TooltipProvider } from '@radix-ui/react-tooltip';
 import Theme from '../src/styles/theme.scss'
 import GlobalFonts from '../src/styles/fonts.scss';
 import GlobalStyles from '../src/styles/global.scss';
-import Styles from '../.storybook/styles.scss';
+import Styles from './styles.scss';
 import I18nProvider from 'next-translate/I18nProvider';
 import { themes } from '@storybook/theming';
+import { RouterDecorator } from 'storybook-addon-next/dist/routing/decorator';
 
 import commonEn from '../locales/en/common.json';
 import homeEn from '../locales/en/home.json';
@@ -41,7 +40,7 @@ const themeDecorator = (Story, context) => {
 };
 
 
-export const decorators = [themeDecorator];
+export const decorators = [themeDecorator, RouterDecorator];
 export const globalTypes = {
   theme: {
     name: 'Theme',
@@ -93,14 +92,13 @@ const viewports = {
     },
   },
 };
+
 export const parameters = {
   layout: 'fullscreen',
   viewport: {
     viewports,
   },
-  nextRouter: {
-    Provider: RouterContext.Provider,
-  },
+  nextRouter: {},
   docs: {
     theme: themes.dark,
   },
