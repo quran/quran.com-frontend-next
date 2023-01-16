@@ -98,7 +98,6 @@ export const parameters = {
   viewport: {
     viewports,
   },
-  nextRouter: {},
   docs: {
     theme: themes.dark,
   },
