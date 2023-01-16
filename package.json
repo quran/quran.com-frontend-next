@@ -130,7 +130,6 @@
     "sass": "^1.55.0",
     "sass-loader": "^13.0.2",
     "storybook-addon-next": "^1.7.1",
-    "storybook-addon-next-router": "^4.0.0",
     "stylelint": "14.12.1",
     "stylelint-prettier": "^2.0.0",
     "stylelint-scss": "^4.3.0",
