@@ -29,7 +29,7 @@ const themeDecorator = (Story, context) => {
            boxSizing: 'border-box'
           }}>
           <TooltipProvider>
-            <I18nProvider lang={'en'} namespaces={{ common: commonEn, home: homeEn }}>
+            <I18nProvider lang='en' namespaces={{ common: commonEn, home: homeEn }}>
               <Story />
             </I18nProvider>
           </TooltipProvider>
