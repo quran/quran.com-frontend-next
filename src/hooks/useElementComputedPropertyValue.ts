@@ -12,7 +12,7 @@ const useElementComputedPropertyValue = (
   property: string,
 ): string | null => {
   if (typeof window !== 'undefined' && ref.current) {
-    return window.getComputedStyle(ref.current).getPropertyValue(property);
+    // return window.getComputedStyle(ref.current).getPropertyValue(property);
   }
   return null;
 };

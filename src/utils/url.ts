@@ -2,14 +2,14 @@ const getLocalePostfix = (locale: string) => (locale !== 'en' ? `/${locale}` : '
 
 export const getCurrentPath = () => {
   if (typeof window !== 'undefined') {
-    return window.location.href;
+    // return window.location.href;
   }
   return '';
 };
 
 export const getWindowOrigin = (locale: string) => {
   if (typeof window !== 'undefined') {
-    return `${window.location.origin}${getLocalePostfix(locale)}`;
+    // return `${window.location.origin}${getLocalePostfix(locale)}`;
   }
   return '';
 };
@@ -26,9 +26,9 @@ export const getWindowOrigin = (locale: string) => {
 export const navigateToExternalUrl = (url: string) => {
   if (typeof window !== 'undefined') {
     // if it's being blocked
-    if (!window.open(url, '_blank')) {
-      window.location.replace(url);
-    }
+    // if (!window.open(url, '_blank')) {
+    //   window.location.replace(url);
+    // }
   }
 };
 

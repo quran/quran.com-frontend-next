@@ -290,6 +290,6 @@ export const fakeNavigate = (url: string, locale: string) => {
  */
 export const scrollWindowToTop = (): void => {
   if (typeof window !== 'undefined') {
-    window.scrollTo(0, 0);
+    // window.scrollTo(0, 0);
   }
 };

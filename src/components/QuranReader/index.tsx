@@ -4,6 +4,7 @@ import React, { useCallback, useContext, useMemo } from 'react';
 import classNames from 'classnames';
 import debounce from 'lodash/debounce';
 import useTranslation from 'next-translate/useTranslation';
+import dynamic from 'next/dynamic';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { useSWRConfig } from 'swr';
 
@@ -13,7 +14,6 @@ import Notes from './Notes/Notes';
 import { getObservedVersePayload, getOptions, QURAN_READER_OBSERVER_ID } from './observer';
 import styles from './QuranReader.module.scss';
 import QuranReaderView from './QuranReaderView';
-import SidebarNavigation from './SidebarNavigation/SidebarNavigation';
 
 import FontPreLoader from '@/components/Fonts/FontPreLoader';
 import useGlobalIntersectionObserver from '@/hooks/useGlobalIntersectionObserver';
@@ -35,6 +35,11 @@ type QuranReaderProps = {
   id: number | string; // can be the chapter, verse, tafsir, hizb, juz, rub or page's ID.
   quranReaderDataType?: QuranReaderDataType;
 };
+
+const SidebarNavigation = dynamic(() => import('./SidebarNavigation/SidebarNavigation'), {
+  ssr: false,
+  loading: () => null,
+});
 
 const READING_SESSION_DEBOUNCE_WAIT_TIME = 2000; // 2 seconds
 

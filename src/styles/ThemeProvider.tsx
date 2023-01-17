@@ -8,7 +8,7 @@ const ThemeProvider = ({ children }) => {
   const theme = useSelector(selectTheme, shallowEqual);
 
   if (typeof window !== 'undefined' && document.body) {
-    document.body.setAttribute('data-theme', theme.type);
+    // document.body.setAttribute('data-theme', theme.type);
   }
 
   return <div>{children}</div>;
