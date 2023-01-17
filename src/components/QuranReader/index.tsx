@@ -1,5 +1,5 @@
 /* eslint-disable react/no-multi-comp */
-import React, { useCallback, useContext, useMemo } from 'react';
+import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 
 import classNames from 'classnames';
 import debounce from 'lodash/debounce';
@@ -57,6 +57,11 @@ const QuranReader = ({
   const chaptersData = useContext(DataContext);
   const dispatch = useDispatch();
   const { cache } = useSWRConfig();
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const addReadingSessionAndClearCache = useCallback(
     (chapterNumber, verseNumber) => {
@@ -76,18 +81,22 @@ const QuranReader = ({
     (element: Element) => {
       const lastReadVerse = getObservedVersePayload(element);
       const [chapterNumber, verseNumber] = getVerseAndChapterNumbersFromKey(lastReadVerse.verseKey);
-      dispatch(
-        setLastReadVerse({
-          lastReadVerse,
-          chaptersData,
-        }),
-      );
+
+      // fix weird hydration issue
+      if (isMounted) {
+        dispatch(
+          setLastReadVerse({
+            lastReadVerse,
+            chaptersData,
+          }),
+        );
+      }
 
       if (isLoggedIn()) {
         debouncedAddReadingSession(Number(chapterNumber), Number(verseNumber));
       }
     },
-    [chaptersData, debouncedAddReadingSession, dispatch],
+    [chaptersData, debouncedAddReadingSession, dispatch, isMounted],
   );
 
   useGlobalIntersectionObserver(
