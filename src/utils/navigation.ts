@@ -1,5 +1,6 @@
 import { stringify } from 'querystring';
 
+import isClient from './isClient';
 import REVELATION_ORDER from './revelationOrder';
 import { getBasePath } from './url';
 import { getVerseAndChapterNumbersFromKey, getVerseNumberRangeFromKey } from './verse';
@@ -289,7 +290,7 @@ export const fakeNavigate = (url: string, locale: string) => {
  * Scroll to the top of the page.
  */
 export const scrollWindowToTop = (): void => {
-  if (typeof window !== 'undefined') {
-    // window.scrollTo(0, 0);
+  if (isClient) {
+    window.scrollTo(0, 0);
   }
 };

@@ -1,5 +1,7 @@
 import { useLayoutEffect } from 'react';
 
+import isClient from '@/utils/isClient';
+
 /**
  * This is needed to avoid having the following warning:
  *      Warning: useLayoutEffect does nothing on the server, because its effect cannot be encoded into the server renderer's output format.
@@ -7,4 +9,4 @@ import { useLayoutEffect } from 'react';
  * {@link https://gist.github.com/gaearon/e7d97cdf38a2907924ea12e4ebdf3c85}
  */
 // eslint-disable-next-line @typescript-eslint/no-empty-function
-export default () => {};
+export default isClient ? useLayoutEffect : () => {};
