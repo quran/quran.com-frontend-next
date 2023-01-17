@@ -94,7 +94,7 @@ const TranslationPage: React.FC<Props> = ({
     }),
     verseFetcher,
     {
-      fallbackData: shouldUseInitialData ? initialData.verses : null,
+      fallbackData: shouldUseInitialData ? initialData.verses : undefined,
       revalidateOnMount: !shouldUseInitialData,
     },
   );

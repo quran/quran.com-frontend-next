@@ -44,7 +44,7 @@ const Info: React.FC<Props> = ({ chapter, chapterInfo }) => {
           <div className={styles.imageContainer}>
             <Image
               src={`/images/${chapter.revelationPlace}.jpg`}
-              layout="fill"
+              fill
               placeholder="blur"
               blurDataURL={getBlurDataUrl(200, 200)}
               alt={t(`surah-info:${chapter.revelationPlace}`)}

@@ -111,6 +111,11 @@
   margin-block-start: var(--spacing-xxsmall);
 }
 
+.disabledlinkContainer {
+  opacity: var(--opacity-50);
+  cursor: not-allowed;
+}
+
 .titleAndDescriptionContainer {
   max-width: calc(12.5 * var(--spacing-mega));
   margin-inline-end: var(--spacing-medium);

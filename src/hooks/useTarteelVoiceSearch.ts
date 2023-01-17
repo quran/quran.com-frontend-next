@@ -3,9 +3,6 @@
 /* eslint-disable react-func/max-lines-per-function */
 import { useEffect, useState, useCallback, useRef } from 'react';
 
-// @ts-ignore
-import { AudioWorklet } from 'audio-worklet';
-
 import useBrowserLayoutEffect from '@/hooks/useBrowserLayoutEffect';
 import SearchQuerySource from '@/types/SearchQuerySource';
 import SearchType from '@/types/SearchType';
@@ -193,7 +190,8 @@ const useTarteelVoiceSearch = (startRecording = true) => {
         // 2. Add the MicInputProcessor to the audioContext
         audioContext.audioWorklet
           .addModule(
-            new AudioWorklet(new URL('src/audioInput/MicInputProcessor.ts', import.meta.url)),
+            // AudioWorklet(new URL('../audioInput/MicInputProcessor.ts', import.meta.url).pathname),
+            '/MicInputProcessor.js',
           )
           .then(() => {
             logEvent('tarteel_websocket_initialize');

@@ -1,7 +1,12 @@
-// This file is just a reference; it is not used anymore since we now use a static JS file: /public/MicInputProcessor.js
+/* eslint-disable no-undef */
 
 class MicInputProcessor extends AudioWorkletProcessor {
-  process(inputs: Float32Array[][]) {
+  /**
+   *
+   * @param {Float32Array[][]} inputs
+   * @returns {boolean} true
+   */
+  process(inputs) {
     // get the first channel of the first input since the processor might have multiple inputs and multiple channels for each input.
     // then after converting the data, send it to the AudioWorkletNode that is listening to messages from the processors.
     this.port.postMessage(convertFloat32ToInt16(inputs[0][0]));
@@ -9,9 +14,14 @@ class MicInputProcessor extends AudioWorkletProcessor {
   }
 }
 
-const convertFloat32ToInt16 = (buffer: Float32Array): Int16Array => {
-  let float32BufferLength: number = buffer.length;
-  const int16ArrayBuffer: Int16Array = new Int16Array(float32BufferLength);
+/**
+ *
+ * @param {Float32Array} buffer
+ * @returns {Int16Array} int16ArrayBuffer
+ */
+const convertFloat32ToInt16 = (buffer) => {
+  let float32BufferLength = buffer.length;
+  const int16ArrayBuffer = new Int16Array(float32BufferLength);
   // eslint-disable-next-line no-plusplus
   while (float32BufferLength--) {
     int16ArrayBuffer[float32BufferLength] = Math.min(1, buffer[float32BufferLength]) * 0x7fff;
@@ -21,4 +31,5 @@ const convertFloat32ToInt16 = (buffer: Float32Array): Int16Array => {
 };
 
 registerProcessor('MicInputProcessor', MicInputProcessor);
+
 export default MicInputProcessor;
