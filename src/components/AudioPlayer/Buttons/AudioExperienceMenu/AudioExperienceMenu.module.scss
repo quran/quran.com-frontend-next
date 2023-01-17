@@ -23,3 +23,8 @@
 .bold {
   font-weight: bold;
 }
+
+.helpText {
+  opacity: var(--opacity-85);
+  font-size: var(--font-size-small);
+}

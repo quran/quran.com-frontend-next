@@ -2,6 +2,8 @@
   padding-block-start: var(--spacing-medium);
   font-style: italic;
   opacity: var(--opacity-75);
+  font-size: var(--font-size-small);
+  margin-block-end: var(--spacing-micro);
 }
 .invisible {
   display: none;

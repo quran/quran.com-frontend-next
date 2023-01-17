@@ -91,7 +91,7 @@ const AudioExperienceMenu = ({ onBack }) => {
                 {`${index === 0 && showTooltipFor.length > 1 ? ' • ' : ''}`}
               </span>
             ))}
-            <div>
+            <div className={styles.helpText}>
               <span>{t('audio.exp-tip')}</span>
               <br />
               <span

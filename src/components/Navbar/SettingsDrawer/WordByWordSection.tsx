@@ -153,13 +153,13 @@ const WordByWordSection = () => {
             label={t('recitation')}
             onChange={onRecitationChange}
           />
-          <div className={styles.summaryText}>
+          <Section.Footer>
             <Trans
               components={{ span: <span className={styles.source} /> }}
               i18nKey="common:reciter-summary"
               values={{ reciterName: 'Shaikh Wisam Sharieff' }}
             />
-          </div>
+          </Section.Footer>
         </div>
       </Section.Row>
       <Separator className={styles.separator} />
@@ -171,10 +171,11 @@ const WordByWordSection = () => {
           name="wordByWord"
           options={WORD_BY_WORD_LOCALES_OPTIONS}
           value={wordByWordLocale}
+          disabled={shouldDisableWordByWordDisplay}
           onChange={onWordByWordLocaleChange}
         />
       </Section.Row>
-      <div className={styles.summaryText}>
+      <Section.Footer>
         <Trans
           components={{
             link: <Link isNewTab href="https://quranwbw.com/" variant={LinkVariant.Blend} />,
@@ -182,30 +183,26 @@ const WordByWordSection = () => {
           i18nKey="common:wbw-lang-summary"
           values={{ source: 'quranwbw' }}
         />
-      </div>
-      <p>{t('display')}</p>
+      </Section.Footer>
+      <Section.Label>{t('display')}</Section.Label>
       <Section.Row>
-        <div className={styles.displayContainer}>
-          <div>
-            <Checkbox
-              checked={wordByWordDisplay.includes(WordByWordDisplay.INLINE)}
-              id="inline"
-              name="inline"
-              label={t('inline')}
-              disabled={shouldDisableWordByWordDisplay}
-              onChange={(isChecked) => onDisplaySettingChange(true, isChecked)}
-            />
-          </div>
-          <div>
-            <Checkbox
-              checked={wordByWordDisplay.includes(WordByWordDisplay.TOOLTIP)}
-              id="tooltip"
-              name="word-tooltip"
-              label={t('tooltip')}
-              disabled={shouldDisableWordByWordDisplay}
-              onChange={(isChecked) => onDisplaySettingChange(false, isChecked)}
-            />
-          </div>
+        <div className={styles.checkboxContainer}>
+          <Checkbox
+            checked={wordByWordDisplay.includes(WordByWordDisplay.INLINE)}
+            id="inline"
+            name="inline"
+            label={t('inline')}
+            disabled={shouldDisableWordByWordDisplay}
+            onChange={(isChecked) => onDisplaySettingChange(true, isChecked)}
+          />
+          <Checkbox
+            checked={wordByWordDisplay.includes(WordByWordDisplay.TOOLTIP)}
+            id="tooltip"
+            name="word-tooltip"
+            label={t('tooltip')}
+            disabled={shouldDisableWordByWordDisplay}
+            onChange={(isChecked) => onDisplaySettingChange(false, isChecked)}
+          />
         </div>
       </Section.Row>
     </Section>

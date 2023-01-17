@@ -5,19 +5,8 @@
   }
 }
 
-.displayContainer {
-  margin-inline-start: var(--spacing-xxsmall);
-  margin-block-start: var(--spacing-small);
-  display: flex;
-}
-
 .separator {
   margin-block: var(--spacing-small);
-}
-
-.summaryText {
-  font-size: var(--font-size-small);
-  margin-block-end: var(--spacing-large);
 }
 
 .source {
