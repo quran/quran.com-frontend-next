@@ -6,6 +6,7 @@ import useTranslation from 'next-translate/useTranslation';
 import AudioExperienceMenu from './Buttons/AudioExperienceMenu';
 import AudioPlaybackRateMenu from './Buttons/AudioPlaybackRateMenu';
 import DownloadAudioButton from './Buttons/DownloadAudioButton';
+import RepeatButton from './Buttons/RepeatButton';
 import SelectReciterMenu from './Buttons/SelectReciterMenu';
 import styles from './OverflowAudioPlayActionsMenuBody.module.scss';
 
@@ -47,9 +48,10 @@ const OverflowAudioPlayActionsMenuBody = () => {
     () => ({
       [AudioPlayerOverflowMenu.Main]: [
         <DownloadAudioButton key={0} />,
-        <PopoverMenu.Divider key={1} />,
+        <RepeatButton key={1} />,
+        <PopoverMenu.Divider key={2} />,
         <PopoverMenu.Item
-          key={2}
+          key={3}
           icon={<ExperienceIcon />}
           onClick={() => {
             logButtonClick(`audio_player_overflow_menu_experience`); // TODO: log this
@@ -62,7 +64,7 @@ const OverflowAudioPlayActionsMenuBody = () => {
           </div>
         </PopoverMenu.Item>,
         <PopoverMenu.Item
-          key={3}
+          key={4}
           icon={
             <span style={{ fontSize: getPlaybackRateLabelFontSize(playbackRate) }}>
               {playbackRate}
@@ -80,7 +82,7 @@ const OverflowAudioPlayActionsMenuBody = () => {
           </div>
         </PopoverMenu.Item>,
         <PopoverMenu.Item
-          key={4}
+          key={5}
           icon={<PersonIcon />}
           onClick={() => {
             logButtonClick(`audio_player_overflow_menu_reciter`);

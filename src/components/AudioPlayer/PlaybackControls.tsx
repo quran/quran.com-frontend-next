@@ -6,7 +6,6 @@ import CloseButton from './Buttons/CloseButton';
 import PlayPauseButton from './Buttons/PlayPauseButton';
 import OverflowAudioPlayerActionsMenu from './OverflowAudioPlayerActionsMenu';
 import styles from './PlaybackControls.module.scss';
-import RepeatAudioButton from './RepeatButton';
 import SeekButton, { SeekButtonType } from './SeekButton';
 
 import { selectIsLoading } from 'src/xstate/actors/audioPlayer/selectors';
@@ -20,9 +19,6 @@ const PlaybackControls = () => {
     <div className={styles.container}>
       <div className={styles.actionItem}>
         <OverflowAudioPlayerActionsMenu />
-      </div>
-      <div className={styles.actionItem}>
-        <RepeatAudioButton />
       </div>
       <div className={styles.actionItem}>
         <SeekButton type={SeekButtonType.PrevAyah} isLoading={isLoading} />

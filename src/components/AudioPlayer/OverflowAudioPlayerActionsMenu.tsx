@@ -1,31 +1,25 @@
-import useTranslation from 'next-translate/useTranslation';
-
+import AudioPlayerOverflowMenuTrigger from './AudioPlayerOverflowMenuTrigger';
 import OverflowAudioPlayActionsMenuBody from './OverflowAudioPlayActionsMenuBody';
 import styles from './OverflowAudioPlayerActionsMenu.module.scss';
 
-import Button, { ButtonShape, ButtonVariant } from '@/dls/Button/Button';
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import useDirection from '@/hooks/useDirection';
-import OverflowMenuIcon from '@/icons/menu_more_horiz.svg';
 import { logEvent } from '@/utils/eventLogger';
 
 const OverflowAudioPlayerActionsMenu = () => {
-  const { t } = useTranslation('common');
   const direction = useDirection();
+
+  const onOpenChange = (open: boolean) => {
+    logEvent(`audio_player_overflow_menu_${open ? 'open' : 'close'}`);
+  };
 
   return (
     <div dir={direction} className={styles.overriddenPopoverMenuContentPositioning}>
       <PopoverMenu
         isPortalled={false}
         isModal={false}
-        trigger={
-          <Button tooltip={t('more')} variant={ButtonVariant.Ghost} shape={ButtonShape.Circle}>
-            <OverflowMenuIcon />
-          </Button>
-        }
-        onOpenChange={(open: boolean) => {
-          logEvent(`audio_player_overflow_menu_${open ? 'open' : 'close'}`);
-        }}
+        trigger={<AudioPlayerOverflowMenuTrigger />}
+        onOpenChange={onOpenChange}
       >
         <OverflowAudioPlayActionsMenuBody />
       </PopoverMenu>

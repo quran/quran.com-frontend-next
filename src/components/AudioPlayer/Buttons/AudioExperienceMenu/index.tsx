@@ -84,7 +84,7 @@ const AudioExperienceMenu = ({ onBack }) => {
             label={t('settings.show-tooltip-when-playing-audio')}
             onChange={onShowTooltipWhenPlayingAudioChange}
           />
-          <div className={styles.experienceTipContainer}>
+          <div className={classNames(styles.experienceTipContainer, styles.helpText)}>
             {showTooltipFor.map((tooltipTextType, index) => (
               <span key={tooltipTextType} className={styles.tooltipText}>
                 {t(tooltipTextType)}
