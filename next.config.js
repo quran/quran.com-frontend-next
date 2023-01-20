@@ -16,7 +16,7 @@ const isDev = process.env.NEXT_PUBLIC_VERCEL_ENV === 'development';
  * @type {import('next').NextConfig}
  */
 const config = {
-  reactStrictMode: false,
+  reactStrictMode: true,
   productionBrowserSourceMaps: true, // {@see https://nextjs.org/docs/advanced-features/source-maps}
   output: 'standalone',
   images: {
