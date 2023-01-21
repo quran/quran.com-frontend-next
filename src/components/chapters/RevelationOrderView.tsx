@@ -48,6 +48,7 @@ const RevelationOrderView = ({ isDescending, chapters }: RevelationOrderViewProp
         },
       );
     } else {
+      setIsReadingByRevelationOrder(true);
       router.push(getSurahNavigationUrl(surahId));
     }
     logButtonClick('revelation_ordering_surah');
