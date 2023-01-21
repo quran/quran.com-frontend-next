@@ -46,12 +46,14 @@ const SearchResultItem: React.FC<Props> = ({ result, source }) => {
       <div className={styles.itemContainer}>
         <Link
           href={getChapterWithStartingVerseUrl(result.verseKey)}
-          className={styles.verseKey}
+          shouldPassHref
           onClick={() => {
             logButtonClick(`${source}_result_item`);
           }}
         >
-          {chapterData.transliteratedName} {localizedVerseKey}
+          <a className={styles.verseKey}>
+            {chapterData.transliteratedName} {localizedVerseKey}
+          </a>
         </Link>
         <div className={styles.quranTextContainer}>
           <div className={styles.quranTextResult} translate="no">

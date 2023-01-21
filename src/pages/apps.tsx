@@ -66,8 +66,15 @@ const App = ({ app, isFlipped, isMain }: AppProps) => {
           </Link>
         </div>
       </div>
-
-      <Image className={styles.appImage} src={app.preview} placeholder="blur" alt={app.title} />
+      <div>
+        <Image
+          className={styles.appImage}
+          src={app.preview}
+          height={1012}
+          width={801}
+          alt={app.title}
+        />
+      </div>
     </div>
   );
 };
