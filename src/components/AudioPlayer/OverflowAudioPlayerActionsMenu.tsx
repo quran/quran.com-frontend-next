@@ -14,12 +14,13 @@ const OverflowAudioPlayerActionsMenu = () => {
   };
 
   return (
-    <div dir={direction} className={styles.overriddenPopoverMenuContentPositioning}>
+    <div dir={direction}>
       <PopoverMenu
-        isPortalled={false}
-        isModal={false}
+        isPortalled
+        isModal
         trigger={<AudioPlayerOverflowMenuTrigger />}
         onOpenChange={onOpenChange}
+        contentClassName={styles.overriddenPopoverMenuContentPositioning}
       >
         <OverflowAudioPlayActionsMenuBody />
       </PopoverMenu>
