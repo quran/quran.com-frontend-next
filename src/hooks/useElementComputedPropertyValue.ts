@@ -1,5 +1,7 @@
 import React from 'react';
 
+import isClient from '@/utils/isClient';
+
 /**
  * A hook that gets the property value of the computed style of a specific element.
  *
@@ -11,7 +13,7 @@ const useElementComputedPropertyValue = (
   ref: React.RefObject<HTMLElement>,
   property: string,
 ): string | null => {
-  if (typeof window !== 'undefined' && ref.current) {
+  if (isClient && ref.current) {
     return window.getComputedStyle(ref.current).getPropertyValue(property);
   }
   return null;

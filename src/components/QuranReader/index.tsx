@@ -1,9 +1,10 @@
 /* eslint-disable react/no-multi-comp */
-import React, { useCallback, useContext, useMemo } from 'react';
+import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 
 import classNames from 'classnames';
 import debounce from 'lodash/debounce';
 import useTranslation from 'next-translate/useTranslation';
+import dynamic from 'next/dynamic';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { useSWRConfig } from 'swr';
 
@@ -13,7 +14,6 @@ import Notes from './Notes/Notes';
 import { getObservedVersePayload, getOptions, QURAN_READER_OBSERVER_ID } from './observer';
 import styles from './QuranReader.module.scss';
 import QuranReaderView from './QuranReaderView';
-import SidebarNavigation from './SidebarNavigation/SidebarNavigation';
 
 import FontPreLoader from '@/components/Fonts/FontPreLoader';
 import useGlobalIntersectionObserver from '@/hooks/useGlobalIntersectionObserver';
@@ -36,6 +36,11 @@ type QuranReaderProps = {
   quranReaderDataType?: QuranReaderDataType;
 };
 
+const SidebarNavigation = dynamic(() => import('./SidebarNavigation/SidebarNavigation'), {
+  ssr: false,
+  loading: () => null,
+});
+
 const READING_SESSION_DEBOUNCE_WAIT_TIME = 2000; // 2 seconds
 
 const QuranReader = ({
@@ -52,6 +57,11 @@ const QuranReader = ({
   const chaptersData = useContext(DataContext);
   const dispatch = useDispatch();
   const { cache } = useSWRConfig();
+  const [isMounted, setIsMounted] = useState(false);
+
+  useEffect(() => {
+    setIsMounted(true);
+  }, []);
 
   const addReadingSessionAndClearCache = useCallback(
     (chapterNumber, verseNumber) => {
@@ -71,18 +81,22 @@ const QuranReader = ({
     (element: Element) => {
       const lastReadVerse = getObservedVersePayload(element);
       const [chapterNumber, verseNumber] = getVerseAndChapterNumbersFromKey(lastReadVerse.verseKey);
-      dispatch(
-        setLastReadVerse({
-          lastReadVerse,
-          chaptersData,
-        }),
-      );
+
+      // fix weird hydration issue
+      if (isMounted) {
+        dispatch(
+          setLastReadVerse({
+            lastReadVerse,
+            chaptersData,
+          }),
+        );
+      }
 
       if (isLoggedIn()) {
         debouncedAddReadingSession(Number(chapterNumber), Number(verseNumber));
       }
     },
-    [chaptersData, debouncedAddReadingSession, dispatch],
+    [chaptersData, debouncedAddReadingSession, dispatch, isMounted],
   );
 
   useGlobalIntersectionObserver(

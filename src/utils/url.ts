@@ -1,14 +1,16 @@
+import isClient from './isClient';
+
 const getLocalePostfix = (locale: string) => (locale !== 'en' ? `/${locale}` : '');
 
 export const getCurrentPath = () => {
-  if (typeof window !== 'undefined') {
+  if (isClient) {
     return window.location.href;
   }
   return '';
 };
 
 export const getWindowOrigin = (locale: string) => {
-  if (typeof window !== 'undefined') {
+  if (isClient) {
     return `${window.location.origin}${getLocalePostfix(locale)}`;
   }
   return '';
@@ -24,7 +26,7 @@ export const getWindowOrigin = (locale: string) => {
  * @param {string} url
  */
 export const navigateToExternalUrl = (url: string) => {
-  if (typeof window !== 'undefined') {
+  if (isClient) {
     // if it's being blocked
     if (!window.open(url, '_blank')) {
       window.location.replace(url);
