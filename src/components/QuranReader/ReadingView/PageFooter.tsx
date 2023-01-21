@@ -18,8 +18,8 @@ const PageFooter: React.FC<Props> = ({ page }) => {
 
   return (
     <div className={styles.pageText}>
-      <Link href={pageUrl} shouldPrefetch={false} className={styles.pageLink}>
-        {toLocalizedNumber(page, lang)}
+      <Link href={pageUrl} shouldPassHref shouldPrefetch={false}>
+        <p className={styles.pageLink}>{toLocalizedNumber(page, lang)}</p>
       </Link>
     </div>
   );

@@ -1,28 +1,54 @@
 /* eslint-disable react-func/max-lines-per-function */
 /* eslint-disable no-param-reassign */
+const path = require('path');
 
-const withBundleAnalyzer = require('@next/bundle-analyzer');
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE_BUNDLE === 'true',
+});
 const { withSentryConfig } = require('@sentry/nextjs');
+const withPlugins = require('next-compose-plugins');
+const withFonts = require('next-fonts');
 const withPWA = require('next-pwa');
 const nextTranslate = require('next-translate');
 
-const pwa = require('./configs/pwa.js');
-const securityHeaders = require('./configs/security-headers.js');
-const sentry = require('./configs/sentry.js');
+const securityHeaders = require('./configs/SecurityHeaders.js');
+const runtimeCaching = require('./pwa-runtime-config.js');
 
 const isDev = process.env.NEXT_PUBLIC_VERCEL_ENV === 'development';
-
-/**
- * @type {import('next').NextConfig}
- */
+const isProduction = process.env.NEXT_PUBLIC_VERCEL_ENV === 'production';
 const config = {
-  reactStrictMode: false,
   productionBrowserSourceMaps: true, // {@see https://nextjs.org/docs/advanced-features/source-maps}
   images: {
     formats: ['image/avif', 'image/webp'],
     domains: ['cdn.qurancdn.com', 'static.qurancdn.com', 'vercel.com', 'now.sh', 'quran.com'],
   },
+  pwa: {
+    disable: !isProduction,
+    dest: 'public',
+    mode: isProduction ? 'production' : 'development',
+    runtimeCaching,
+    publicExcludes: [
+      '!fonts/**/!(sura_names|ProximaVara)*', // exclude pre-caching all fonts that are not sura_names or ProximaVara
+      '!icons/**', // exclude all icons
+      '!images/**/!(background|homepage)*', // don't pre-cache except background.jpg and homepage.png
+    ],
+  },
+  // this is needed to support importing audioWorklet nodes. {@see https://github.com/webpack/webpack/issues/11543#issuecomment-826897590}
   webpack: (webpackConfig) => {
+    webpackConfig.resolve = {
+      ...webpackConfig.resolve,
+      alias: {
+        ...webpackConfig.resolve.alias,
+        'audio-worklet': path.resolve(__dirname, 'src/audioInput/audio-worklet.ts'),
+      },
+    };
+    webpackConfig.module.parser = {
+      ...webpackConfig.module.parser,
+      javascript: {
+        worker: ['AudioWorklet from audio-worklet'],
+      },
+    };
+
     webpackConfig.module.rules.push({
       test: /\.svg$/i,
       issuer: {
@@ -52,6 +78,17 @@ const config = {
     });
 
     return webpackConfig;
+  },
+  SentryWebpackPluginOptions: {
+    // Additional config options for the Sentry Webpack plugin. Keep in mind that
+    // the following options are set automatically, and overriding them is not
+    // recommended:
+    //   release, url, org, project, authToken, configFile, stripPrefix,
+    //   urlPrefix, include, ignore
+
+    silent: true, // Suppresses all logs
+    // For all available options, see:
+    // https://github.com/getsentry/sentry-webpack-plugin#options.
   },
   async headers() {
     return isDev
@@ -121,19 +158,7 @@ const config = {
   },
 };
 
-let finalConfig = { ...config };
-
-const plugins = [
-  withBundleAnalyzer({
-    enabled: process.env.ANALYZE_BUNDLE === 'true',
-  }),
-  withPWA(pwa),
-  nextTranslate,
-];
-
-plugins.forEach((plugin) => {
-  finalConfig = plugin(finalConfig);
-});
-
-// withSentryConfig must be outside withPlugins because its config is the second argument
-module.exports = withSentryConfig(finalConfig, sentry);
+module.exports = withPlugins(
+  [withBundleAnalyzer, withPWA, withFonts, nextTranslate, withSentryConfig],
+  config,
+);

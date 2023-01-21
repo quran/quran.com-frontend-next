@@ -18,12 +18,12 @@ const LinkContainer = ({ href, isExternalLink, children, onClick }: LinkContaine
   return (
     <Link
       href={href}
+      shouldPassHref
       shouldPrefetch={false}
       onClick={onClick}
       isNewTab={isExternalLink}
-      className={styles.anchor}
     >
-      {children}
+      <div className={styles.anchor}>{children}</div>
     </Link>
   );
 };
