@@ -4,6 +4,8 @@ import NextLink from 'next/link';
 
 import styles from './Link.module.scss';
 
+import Wrapper from '@/components/Wrapper/Wrapper';
+
 export enum LinkVariant {
   Highlight = 'highlight',
   Primary = 'primary',
@@ -39,15 +41,22 @@ const Link: React.FC<LinkProps> = ({
   shouldPrefetch = true,
   title,
   ariaLabel,
-}) => {
-  const El = download ? 'a' : NextLink;
-
-  return (
-    <El
+}) => (
+  <Wrapper
+    shouldWrap={!download}
+    wrapper={(node) => (
+      <NextLink
+        href={href}
+        {...(shouldPassHref && { shouldPassHref })}
+        {...(shouldPrefetch === false && { prefetch: false })}
+        shallow={isShallow}
+      >
+        {node}
+      </NextLink>
+    )}
+  >
+    <a
       href={href}
-      {...(shouldPassHref && { passHref: shouldPassHref })}
-      {...(shouldPrefetch === false && { prefetch: false })}
-      shallow={isShallow}
       download={download}
       target={isNewTab ? '_blank' : undefined}
       rel={isNewTab ? 'noreferrer' : undefined}
@@ -63,8 +72,8 @@ const Link: React.FC<LinkProps> = ({
       {...(ariaLabel && { 'aria-label': ariaLabel })}
     >
       {children}
-    </El>
-  );
-};
+    </a>
+  </Wrapper>
+);
 
 export default Link;
