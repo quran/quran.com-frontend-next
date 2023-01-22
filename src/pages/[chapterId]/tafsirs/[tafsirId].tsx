@@ -70,7 +70,7 @@ const SelectedTafsirOfAyah: NextPage<AyahTafsirProp> = ({
           chapter.chapter.transliteratedName
         } - ${localizedVerseNumber}`}
         image={getChapterOgImageUrl({
-          chapterId: chapter.chapter.id,
+          chapterId,
           verseNumber,
           locale: lang,
         })}

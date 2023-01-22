@@ -38,7 +38,7 @@ const InfoPage: React.FC<Props> = ({
           lang,
         )}-${toLocalizedNumber(chapterResponse.chapter.versesCount, lang)}`}
         image={getChapterOgImageUrl({
-          chapterId: chapterResponse.chapter.id,
+          chapterId: chapterInfoResponse.chapterInfo.id,
           locale: lang,
         })}
         imageWidth={1200}

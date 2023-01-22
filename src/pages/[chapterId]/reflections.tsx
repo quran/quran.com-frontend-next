@@ -67,7 +67,7 @@ const SelectedAyahReflection: NextPage<AyahReflectionProp> = ({
           lang,
         )}`}
         image={getChapterOgImageUrl({
-          chapterId: chapter.chapter.id,
+          chapterId,
           verseNumber,
           locale: lang,
         })}

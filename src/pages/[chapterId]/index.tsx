@@ -96,7 +96,7 @@ const Chapter: NextPage<ChapterProps> = ({
         canonical={getCanonicalUrlValue()}
         image={getChapterOgImageUrl({
           chapterId: chapterResponse.chapter.id,
-          verseNumber: versesResponse.verses[0]?.verseNumber,
+          verseNumber: !isChapter ? versesResponse.verses[0]?.verseNumber : undefined,
           locale: lang,
         })}
         imageWidth={1200}
