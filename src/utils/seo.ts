@@ -3,7 +3,7 @@ import { NextSeoProps } from 'next-seo';
 
 import { getOpenGraphLocale } from './locale';
 
-import { getHomeOgImageUrl } from '@/lib/og';
+import { getDefaultOgImageUrl } from '@/lib/og';
 import { VersesResponse } from 'types/ApiResponses';
 
 export const config = {
@@ -58,7 +58,7 @@ export function createSEOConfig({
       description,
       images: [
         {
-          url: getHomeOgImageUrl({ locale }),
+          url: getDefaultOgImageUrl({ locale }),
           width: 1200,
           height: 630,
           alt: config.siteName,
