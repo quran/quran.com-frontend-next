@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 /* eslint-disable react-func/max-lines-per-function */
 import React from 'react';
 
@@ -7,6 +8,7 @@ import { SWRConfig } from 'swr';
 
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import ReflectionBodyContainer from '@/components/QuranReader/ReflectionView/ReflectionBodyContainer';
+import { getChapterOgImageUrl } from '@/lib/og';
 import layoutStyle from '@/pages/index.module.scss';
 import {
   getQuranReaderStylesInitialState,
@@ -64,6 +66,13 @@ const SelectedAyahReflection: NextPage<AyahReflectionProp> = ({
           Number(verseNumber),
           lang,
         )}`}
+        image={getChapterOgImageUrl({
+          chapterId: chapter.chapter.id,
+          verseNumber,
+          locale: lang,
+        })}
+        imageWidth={1200}
+        imageHeight={630}
         canonical={getCanonicalUrl(lang, navigationUrl)}
         languageAlternates={getLanguageAlternates(navigationUrl)}
         description={t('reflections-desc', {

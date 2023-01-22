@@ -9,6 +9,7 @@ import styles from '../[verseId]/tafsirs.module.scss';
 
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import TafsirBody from '@/components/QuranReader/TafsirView/TafsirBody';
+import { getChapterOgImageUrl } from '@/lib/og';
 import { getQuranReaderStylesInitialState } from '@/redux/defaultSettings/util';
 import { makeTafsirContentUrl, makeTafsirsUrl } from '@/utils/apiPaths';
 import { getAllChaptersData, getChapterData } from '@/utils/chapter';
@@ -68,6 +69,13 @@ const SelectedTafsirOfAyah: NextPage<AyahTafsirProp> = ({
         title={`${t('tafsir.surah')} ${
           chapter.chapter.transliteratedName
         } - ${localizedVerseNumber}`}
+        image={getChapterOgImageUrl({
+          chapterId: chapter.chapter.id,
+          verseNumber,
+          locale: lang,
+        })}
+        imageWidth={1200}
+        imageHeight={630}
         canonical={getCanonicalUrl(lang, navigationUrl)}
         description={t('tafsir.tafsir-desc', {
           verseNumber: localizedVerseNumber,
