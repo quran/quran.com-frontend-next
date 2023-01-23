@@ -18,6 +18,7 @@ $virtual-scrolling-height-bandage: calc(
 }
 
 .readingView {
+  min-height: 100vh;
   @include breakpoints.smallerThanTablet {
     width: 85%;
   }
