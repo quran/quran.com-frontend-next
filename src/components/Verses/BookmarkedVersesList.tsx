@@ -77,10 +77,6 @@ const BookmarkedVersesList = () => {
     return false;
   }, [data]);
 
-  if (!bookmarkedVersesKeys.length) {
-    return null;
-  }
-
   const onBookmarkDeleted = (verseKey) => () => {
     logButtonClick('bookmarked_verses_list_delete');
     if (isLoggedIn()) {
