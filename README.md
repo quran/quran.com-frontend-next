@@ -26,7 +26,7 @@
     ·
     <a href="https://github.com/quran/quran.com-frontend-next/issues">Request Feature</a>
     •
-    <a href="https://quran.github.io/quran.com-frontend-next/storybook/master">Storybook</a>
+    <a href="https://github.com/quran/quran.com-frontend-next/tree/master/.storybook">Storybook</a>
   </p>
 </p>
 
