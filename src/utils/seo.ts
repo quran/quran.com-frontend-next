@@ -2,13 +2,12 @@
 import { NextSeoProps } from 'next-seo';
 
 import { getOpenGraphLocale } from './locale';
-import { getBasePath } from './url';
 
+import { getDefaultOgImageUrl } from '@/lib/og';
 import { VersesResponse } from 'types/ApiResponses';
 
 export const config = {
   siteName: 'Quran.com',
-  websiteLogo: `${getBasePath()}/images/homepage.png`,
   twitterHandle: '@app_quran',
   twitterCardType: 'summary_large_image',
   facebookApp: '342185219529773',
@@ -59,9 +58,9 @@ export function createSEOConfig({
       description,
       images: [
         {
-          url: config.websiteLogo,
-          width: 2026,
-          height: 588,
+          url: getDefaultOgImageUrl({ locale }),
+          width: 1200,
+          height: 630,
           alt: config.siteName,
         },
       ],
