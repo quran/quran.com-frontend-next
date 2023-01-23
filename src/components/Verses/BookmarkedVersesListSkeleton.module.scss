@@ -1,0 +1,19 @@
+@use "./BookmarksAndQuickLinks.module.scss" as bookmarksAndQuickLinks;
+
+.skeletonContainer {
+  display: flex;
+  align-items: center;
+  flex-wrap: nowrap;
+  flex-grow: 1;
+  flex-shrink: 0;
+}
+
+.skeletonItem {
+  margin-inline-end: var(--spacing-small);
+  border-radius: var(--border-radius-pill) !important;
+  height: bookmarksAndQuickLinks.$contentMinHeight;
+  width: calc(var(--spacing-mega) * 4.7);
+  
+  // force border-radius since the skeleton uses pseudo elements 
+  overflow: hidden;
+}

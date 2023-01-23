@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/anchor-is-valid */
@@ -8,6 +9,7 @@ import { shallowEqual, useSelector, useDispatch } from 'react-redux';
 import useSWR from 'swr';
 
 import styles from './BookmarkedVersesList.module.scss';
+import BookmarkedVersesListSkeleton from './BookmarkedVesesListSkeleton';
 
 import Link from '@/dls/Link/Link';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
@@ -109,6 +111,18 @@ const BookmarkedVersesList = () => {
   const onViewAllBookmarksClicked = () => {
     logButtonClick('view_all_bookmarks');
   };
+
+  if (isValidating) {
+    return (
+      <div className={styles.container}>
+        <div className={styles.bookmarksContainer}>
+          <div className={styles.verseLinksContainer}>
+            <BookmarkedVersesListSkeleton />
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className={styles.container}>
