@@ -11,8 +11,6 @@
 .skeletonItem {
   margin-inline-end: var(--spacing-small);
   border-radius: var(--border-radius-pill) !important;
-  height: bookmarksAndQuickLinks.$contentMinHeight;
-  width: calc(var(--spacing-mega) * 4.7);
   pointer-events: none;
   
   // force border-radius since the skeleton uses pseudo elements 
