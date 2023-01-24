@@ -1,6 +1,7 @@
 import React, { useMemo, useRef } from 'react';
 
 import classNames from 'classnames';
+import { useRouter } from 'next/router';
 import { shallowEqual, useSelector } from 'react-redux';
 
 import { QURAN_READER_OBSERVER_ID } from '../QuranReader/observer';
@@ -18,7 +19,8 @@ import {
 } from '@/redux/slices/QuranReader/readingViewVerse';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import { getFontClassName } from '@/utils/fontFaceHelper';
-import { getFirstWordOfSurah } from '@/utils/verse';
+import { isValidVerseNumber } from '@/utils/validator';
+import { getFirstWordOfSurah, getVerseNumberFromKey } from '@/utils/verse';
 import { FALLBACK_FONT, QuranFont } from 'types/QuranReader';
 import Word from 'types/Word';
 
@@ -36,6 +38,13 @@ const VerseText = ({
   shouldShowH1ForSEO = false,
 }: VerseTextProps) => {
   const textRef = useRef(null);
+  const router = useRouter();
+  const { startingVerse } = router.query;
+  const startingVerseNumber =
+    startingVerse && typeof startingVerse === 'string' && isValidVerseNumber(startingVerse)
+      ? Number(startingVerse)
+      : undefined;
+
   useIntersectionObserver(textRef, QURAN_READER_OBSERVER_ID);
   const { quranFont, quranTextFontScale, mushafLines } = useSelector(
     selectQuranReaderStyles,
@@ -50,6 +59,7 @@ const VerseText = ({
   );
   const selectedVerseKey = useSelector(selectReadingViewSelectedVerseKey, shallowEqual);
   const hoveredVerseKey = useSelector(selectReadingViewHoveredVerseKey, shallowEqual);
+
   const centerAlignPage = useMemo(
     () => isCenterAlignedPage(pageNumber, lineNumber, quranFont),
     [pageNumber, lineNumber, quranFont],
@@ -98,7 +108,10 @@ const VerseText = ({
               font={quranFont}
               isFontLoaded={isFontLoaded}
               isHighlighted={word.verseKey === selectedVerseKey}
-              shouldShowSecondaryHighlight={word.verseKey === hoveredVerseKey}
+              shouldShowSecondaryHighlight={
+                getVerseNumberFromKey(word.verseKey) === startingVerseNumber ||
+                word.verseKey === hoveredVerseKey
+              }
             />
           ))}
         </div>
