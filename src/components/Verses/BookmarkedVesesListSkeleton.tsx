@@ -1,4 +1,5 @@
 import styles from './BookmarkedVersesListSkeleton.module.scss';
+import BookmarkPill from './BookmarkPill';
 
 import Skeleton from '@/dls/Skeleton/Skeleton';
 
@@ -10,7 +11,9 @@ const BookmarkedVersesListSkeleton = () => {
     <span className={styles.skeletonContainer}>
       {bookmarksArr.map((k, i) => (
         // eslint-disable-next-line react/no-array-index-key
-        <Skeleton key={`skeleton_${i}`} isActive className={styles.skeletonItem} />
+        <Skeleton key={`skeleton_${i}`} isActive className={styles.skeletonItem}>
+          <BookmarkPill verseKey="1:1" onDeleted={() => null} />
+        </Skeleton>
       ))}
     </span>
   );
