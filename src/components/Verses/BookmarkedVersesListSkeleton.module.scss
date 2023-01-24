@@ -1,5 +1,3 @@
-@use "./BookmarksAndQuickLinks.module.scss" as bookmarksAndQuickLinks;
-
 .skeletonContainer {
   display: flex;
   align-items: center;
@@ -10,7 +8,7 @@
 
 .skeletonItem {
   margin-inline-end: var(--spacing-small);
-  border-radius: var(--border-radius-pill) !important;
+  border-radius: var(--border-radius-pill);
   pointer-events: none;
   
   // force border-radius since the skeleton uses pseudo elements 
