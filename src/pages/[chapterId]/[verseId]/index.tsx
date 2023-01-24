@@ -6,6 +6,7 @@ import { useRouter } from 'next/router';
 
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import QuranReader from '@/components/QuranReader';
+import { getChapterOgImageUrl } from '@/lib/og';
 import { getQuranReaderStylesInitialState } from '@/redux/defaultSettings/util';
 import { getDefaultWordFields, getMushafId } from '@/utils/api';
 import { getAllChaptersData, getChapterData } from '@/utils/chapter';
@@ -62,6 +63,13 @@ const Verse: NextPage<VerseProps> = ({
             ? toLocalizedNumber(Number(verseId), lang)
             : toLocalizedVersesRange(verseId as string, lang)
         }`}
+        image={getChapterOgImageUrl({
+          chapterId: chapterResponse.chapter.id,
+          verseNumber: isVerse ? Number(verseId) : undefined,
+          locale: lang,
+        })}
+        imageWidth={1200}
+        imageHeight={630}
         canonical={getCanonicalUrl(lang, path)}
         languageAlternates={getLanguageAlternates(path)}
         description={getOgDescription(versesResponse, isVerse, lang)}

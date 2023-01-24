@@ -8,15 +8,15 @@
 }
 
 @mixin light {
+  @media (prefers-color-scheme: light) {
+    @content;
+  }
   [data-theme="light"] & {
     @content;
   }
 }
 
 @mixin sepia {
-  @media (prefers-color-scheme: light) {
-    @content;
-  }
   [data-theme="sepia"] & {
     @content;
   }
