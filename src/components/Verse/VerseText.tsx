@@ -1,3 +1,5 @@
+/* eslint-disable react/no-multi-comp */
+/* eslint-disable max-lines */
 import React, { useMemo, useRef } from 'react';
 
 import classNames from 'classnames';
@@ -50,6 +52,7 @@ const VerseText = ({
   );
   const selectedVerseKey = useSelector(selectReadingViewSelectedVerseKey, shallowEqual);
   const hoveredVerseKey = useSelector(selectReadingViewHoveredVerseKey, shallowEqual);
+
   const centerAlignPage = useMemo(
     () => isCenterAlignedPage(pageNumber, lineNumber, quranFont),
     [pageNumber, lineNumber, quranFont],
@@ -67,6 +70,86 @@ const VerseText = ({
   const fontClassName = isFontLoaded
     ? getFontClassName(quranFont, quranTextFontScale, mushafLines)
     : getFontClassName(FALLBACK_FONT, quranTextFontScale, mushafLines, true);
+
+  const renderWord = (word: Word) => (
+    <QuranWord
+      key={word.location}
+      word={word}
+      font={quranFont}
+      isFontLoaded={isFontLoaded}
+      isHighlighted={word.verseKey === selectedVerseKey}
+    />
+  );
+
+  const isSecondaryHighlighted = (word: Word) => word.verseKey === hoveredVerseKey;
+
+  const getHighlighter = () => {
+    const secondaryHighlightedIndexStart = words.findIndex(isSecondaryHighlighted);
+
+    const secondaryHighlightedIndexEnd = words.findIndex(
+      (word, index) => index > secondaryHighlightedIndexStart && !isSecondaryHighlighted(word),
+    );
+
+    // there is no end because it's the last word in the line and the next line is still the same verse
+    if (secondaryHighlightedIndexEnd === -1) {
+      const wordsBeforeSecondaryHighlighted = words.slice(0, secondaryHighlightedIndexStart);
+      const wordsBetweenSecondaryHighlighted = words.slice(secondaryHighlightedIndexStart);
+
+      return (
+        <div className={styles.highlighterWrapper}>
+          {wordsBeforeSecondaryHighlighted.length > 0 && (
+            <div className={classNames(styles.highlighterItem, styles.hidden)}>
+              {wordsBeforeSecondaryHighlighted?.map((w) => renderWord(w))}
+            </div>
+          )}
+          <div
+            className={classNames(styles.highlighted, styles.highlighterItem, styles.hideChildren)}
+          >
+            {wordsBetweenSecondaryHighlighted?.map((w) => renderWord(w))}
+          </div>
+        </div>
+      );
+    }
+
+    // now there will be 3 arrays
+    // 1. words before secondaryHighlightedIndexStart
+    // 2. words between secondaryHighlightedIndexStart and secondaryHighlightedIndexEnd
+    // 3. words after secondaryHighlightedIndexEnd
+    const wordsBeforeSecondaryHighlighted = words.slice(0, secondaryHighlightedIndexStart);
+    const wordsBetweenSecondaryHighlighted = words.slice(
+      secondaryHighlightedIndexStart,
+      secondaryHighlightedIndexEnd,
+    );
+    const wordsAfterSecondaryHighlighted = words.slice(secondaryHighlightedIndexEnd);
+
+    return (
+      <div className={styles.highlighterWrapper}>
+        <div className={styles.highlighterItem}>
+          {wordsBeforeSecondaryHighlighted.length > 0 && (
+            <div className={classNames(styles.highlighterItem, styles.hidden)}>
+              {wordsBeforeSecondaryHighlighted.map(renderWord)}
+            </div>
+          )}
+
+          <div
+            className={classNames(styles.highlighterItem, styles.highlighted, styles.hideChildren)}
+          >
+            {wordsBetweenSecondaryHighlighted.map(renderWord)}
+          </div>
+
+          {wordsAfterSecondaryHighlighted.length > 0 && (
+            <div className={classNames(styles.highlighterItem, styles.hidden)}>
+              {wordsAfterSecondaryHighlighted.map(renderWord)}
+            </div>
+          )}
+        </div>
+      </div>
+    );
+  };
+
+  const lineHasUnhighlightedWords = words.some((w) => !isSecondaryHighlighted(w));
+  const lineHasHighlightedWords = !lineHasUnhighlightedWords || words.some(isSecondaryHighlighted);
+
   return (
     <>
       <VerseTextContainer
@@ -89,18 +172,13 @@ const VerseText = ({
             [styles.largeQuranTextLayout]: isBigTextLayout,
             [styles.verseTextCenterAlign]: isReadingMode && centerAlignPage,
             [styles.verseTextSpaceBetween]: isReadingMode && !centerAlignPage,
+            [styles.highlighted]: !lineHasUnhighlightedWords,
           })}
         >
-          {words?.map((word) => (
-            <QuranWord
-              key={word.location}
-              word={word}
-              font={quranFont}
-              isFontLoaded={isFontLoaded}
-              isHighlighted={word.verseKey === selectedVerseKey}
-              shouldShowSecondaryHighlight={word.verseKey === hoveredVerseKey}
-            />
-          ))}
+          {/* if a part of the line is highlighted, we need to render the highlighted part in a separate div in the background so that we can change the background color of the div with the same width as the highlighted part without affecting the background color of the words */}
+          {lineHasUnhighlightedWords && lineHasHighlightedWords && getHighlighter()}
+
+          {words?.map((w) => renderWord(w))}
         </div>
       </VerseTextContainer>
     </>
