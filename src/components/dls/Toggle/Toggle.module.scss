@@ -24,9 +24,11 @@ $size: var(--spacing-medium);
   @include theme.light {
     background-color: var(--color-background-default);
   }
+  @include theme.sepia {
+    background-color: var(--color-background-default);
+  }
 
   border-radius: 50%;
-
   display: inline-block;
   height: $size;
   width: $size;

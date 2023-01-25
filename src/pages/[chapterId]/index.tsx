@@ -7,6 +7,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import QuranReader from '@/components/QuranReader';
+import { getChapterOgImageUrl } from '@/lib/og';
 import { getQuranReaderStylesInitialState } from '@/redux/defaultSettings/util';
 import { getDefaultWordFields, getMushafId } from '@/utils/api';
 import { getAllChaptersData, getChapterData } from '@/utils/chapter';
@@ -93,6 +94,13 @@ const Chapter: NextPage<ChapterProps> = ({
       <NextSeoWrapper
         title={`${t('surah')} ${chapterResponse.chapter.transliteratedName} - ${getTitle()}`}
         canonical={getCanonicalUrlValue()}
+        image={getChapterOgImageUrl({
+          chapterId: chapterResponse.chapter.id,
+          verseNumber: !isChapter ? versesResponse.verses[0]?.verseNumber : undefined,
+          locale: lang,
+        })}
+        imageWidth={1200}
+        imageHeight={630}
         description={
           !isChapter
             ? versesResponse.verses[0].textImlaeiSimple

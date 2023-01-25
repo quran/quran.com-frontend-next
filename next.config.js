@@ -18,9 +18,6 @@ const isDev = process.env.NEXT_PUBLIC_VERCEL_ENV === 'development';
 const isProduction = process.env.NEXT_PUBLIC_VERCEL_ENV === 'production';
 const config = {
   productionBrowserSourceMaps: true, // {@see https://nextjs.org/docs/advanced-features/source-maps}
-  experimental: {
-    outputStandalone: true,
-  },
   images: {
     formats: ['image/avif', 'image/webp'],
     domains: ['cdn.qurancdn.com', 'static.qurancdn.com', 'vercel.com', 'now.sh', 'quran.com'],
