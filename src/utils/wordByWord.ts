@@ -1,6 +1,8 @@
 /* eslint-disable import/prefer-default-export */
 import { WordByWordDisplay, WordByWordType } from '../../types/QuranReader';
 
+import { mergeTwoArraysUniquely } from './array';
+
 /**
  * Given current state either locally on Redux or remotely
  * from legacy value, we need to generate new state values.
@@ -31,9 +33,7 @@ export const consolidateWordByWordState = (
   // if show tooltip for is not empty
   if (showTooltipFor && showTooltipFor.length) {
     // merge showTooltipFor and wordByWordContentType array with unique value
-    wordByWordContentType = showTooltipFor
-      .filter((t) => !wordByWordContentType.includes(t))
-      .concat(wordByWordContentType);
+    wordByWordContentType = mergeTwoArraysUniquely(showTooltipFor, wordByWordContentType);
     wordByWordDisplay.push(WordByWordDisplay.TOOLTIP);
     // if either of translation/transliteration are set to true, it means we need to show wbw inline
     if (showWordByWordTranslation || showWordByWordTransliteration) {
