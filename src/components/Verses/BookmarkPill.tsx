@@ -18,7 +18,7 @@ interface Props {
   onDeleted: (verseKey: string) => void;
 }
 
-export default function BookmarkPill({ verseKey, onDeleted }: Props) {
+const BookmarkPill: React.FC<Props> = ({ verseKey, onDeleted }) => {
   const { lang } = useTranslation();
   const chaptersData = useContext(DataContext);
 
@@ -51,4 +51,6 @@ export default function BookmarkPill({ verseKey, onDeleted }: Props) {
       </button>
     </div>
   );
-}
+};
+
+export default BookmarkPill;
