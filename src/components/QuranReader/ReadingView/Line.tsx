@@ -2,6 +2,7 @@ import React, { useEffect, memo, useContext, RefObject } from 'react';
 
 import { useSelector as useXstateSelector } from '@xstate/react';
 import classNames from 'classnames';
+import { useRouter } from 'next/router';
 import { shallowEqual, useSelector } from 'react-redux';
 
 import { verseFontChanged } from '../utils/memoization';
@@ -14,6 +15,7 @@ import useScroll, { SMOOTH_SCROLL_TO_CENTER } from '@/hooks/useScrollToElement';
 import { selectEnableAutoScrolling } from '@/redux/slices/AudioPlayer/state';
 import { selectWordByWordPreferences } from '@/redux/slices/QuranReader/readingPreferences';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
+import { isValidVerseNumber } from '@/utils/validator';
 import { getWordDataByLocation } from '@/utils/verse';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import Word from 'types/Word';
@@ -28,6 +30,9 @@ export type LineProps = {
 };
 
 const Line = ({ lineKey, words, isBigTextLayout, pageIndex, lineIndex }: LineProps) => {
+  const router = useRouter();
+  const { startingVerse } = router.query;
+
   const audioService = useContext(AudioPlayerMachineContext);
   const isHighlighted = useXstateSelector(audioService, (state) => {
     const { surah, ayahNumber } = state.context;
@@ -53,6 +58,11 @@ const Line = ({ lineKey, words, isBigTextLayout, pageIndex, lineIndex }: LinePro
   const firstWordData = getWordDataByLocation(words[0].location);
   const shouldShowChapterHeader = firstWordData[1] === '1' && firstWordData[2] === '1';
   const isWordByWordLayout = showWordByWordTranslation || showWordByWordTransliteration;
+
+  const startingVerseNumber =
+    startingVerse && typeof startingVerse === 'string' && isValidVerseNumber(startingVerse)
+      ? Number(startingVerse)
+      : undefined;
 
   return (
     <div
@@ -81,6 +91,7 @@ const Line = ({ lineKey, words, isBigTextLayout, pageIndex, lineIndex }: LinePro
           isReadingMode
           isHighlighted={isHighlighted}
           shouldShowH1ForSEO={pageIndex === 0 && lineIndex === 0}
+          startingVerse={startingVerseNumber}
         />
       </div>
     </div>

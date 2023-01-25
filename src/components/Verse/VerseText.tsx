@@ -1,7 +1,6 @@
 import React, { useMemo, useRef } from 'react';
 
 import classNames from 'classnames';
-import { useRouter } from 'next/router';
 import { shallowEqual, useSelector } from 'react-redux';
 
 import { QURAN_READER_OBSERVER_ID } from '../QuranReader/observer';
@@ -19,7 +18,6 @@ import {
 } from '@/redux/slices/QuranReader/readingViewVerse';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import { getFontClassName } from '@/utils/fontFaceHelper';
-import { isValidVerseNumber } from '@/utils/validator';
 import { getFirstWordOfSurah, getVerseNumberFromKey } from '@/utils/verse';
 import { FALLBACK_FONT, QuranFont } from 'types/QuranReader';
 import Word from 'types/Word';
@@ -28,6 +26,7 @@ type VerseTextProps = {
   words: Word[];
   isReadingMode?: boolean;
   isHighlighted?: boolean;
+  startingVerse?: number;
   shouldShowH1ForSEO?: boolean;
 };
 
@@ -36,14 +35,9 @@ const VerseText = ({
   isReadingMode = false,
   isHighlighted,
   shouldShowH1ForSEO = false,
+  startingVerse,
 }: VerseTextProps) => {
   const textRef = useRef(null);
-  const router = useRouter();
-  const { startingVerse } = router.query;
-  const startingVerseNumber =
-    startingVerse && typeof startingVerse === 'string' && isValidVerseNumber(startingVerse)
-      ? Number(startingVerse)
-      : undefined;
 
   useIntersectionObserver(textRef, QURAN_READER_OBSERVER_ID);
   const { quranFont, quranTextFontScale, mushafLines } = useSelector(
@@ -109,7 +103,7 @@ const VerseText = ({
               isFontLoaded={isFontLoaded}
               isHighlighted={word.verseKey === selectedVerseKey}
               shouldShowSecondaryHighlight={
-                getVerseNumberFromKey(word.verseKey) === startingVerseNumber ||
+                getVerseNumberFromKey(word.verseKey) === startingVerse ||
                 word.verseKey === hoveredVerseKey
               }
             />
