@@ -10,7 +10,7 @@ import CloseIcon from '@/icons/close.svg';
 import { getChapterData } from '@/utils/chapter';
 import { logButtonClick } from '@/utils/eventLogger';
 import { toLocalizedVerseKey } from '@/utils/locale';
-import { getVerseNavigationUrlByVerseKey } from '@/utils/navigation';
+import { getChapterWithStartingVerseUrl } from '@/utils/navigation';
 import { getChapterNumberFromKey } from '@/utils/verse';
 
 interface Props {
@@ -34,7 +34,7 @@ const BookmarkPill: React.FC<Props> = ({ verseKey, onDeleted }) => {
   return (
     <div className={styles.bookmarkItem}>
       <Link
-        href={getVerseNavigationUrlByVerseKey(verseKey)}
+        href={getChapterWithStartingVerseUrl(verseKey)}
         onClick={onLinkClicked}
         className={styles.linkButtonContainer}
       >
