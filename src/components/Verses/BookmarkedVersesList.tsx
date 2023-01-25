@@ -71,7 +71,7 @@ const BookmarkedVersesList = () => {
     return false;
   }, [data]);
 
-  const onBookmarkDeleted = (verseKey) => () => {
+  const onBookmarkDeleted = (verseKey: string) => {
     logButtonClick('bookmarked_verses_list_delete');
     if (isLoggedIn()) {
       const selectedBookmark = data.find((bookmark) => {
