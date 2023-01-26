@@ -13,6 +13,7 @@ import Notes from './Notes/Notes';
 import { getObservedVersePayload, getOptions, QURAN_READER_OBSERVER_ID } from './observer';
 import styles from './QuranReader.module.scss';
 import QuranReaderView from './QuranReaderView';
+import groupLinesByVerses from './ReadingView/groupLinesByVerses';
 import SidebarNavigation from './SidebarNavigation/SidebarNavigation';
 
 import FontPreLoader from '@/components/Fonts/FontPreLoader';
@@ -91,6 +92,16 @@ const QuranReader = ({
     QURAN_READER_OBSERVER_ID,
   );
 
+  const lines = useMemo(
+    () =>
+      Object.values(
+        initialData.verses && initialData.verses.length
+          ? groupLinesByVerses(initialData.verses)
+          : {},
+      ),
+    [initialData.verses],
+  );
+
   return (
     <>
       <FontPreLoader isQuranReader locale={lang} />
@@ -106,6 +117,9 @@ const QuranReader = ({
           className={classNames(styles.infiniteScroll, {
             [styles.readingView]: isReadingPreference,
           })}
+          style={{
+            minHeight: isReadingPreference ? `${Math.min(lines.length * 20, 100)}vh` : undefined,
+          }}
         >
           <QuranReaderView
             isReadingPreference={isReadingPreference}
