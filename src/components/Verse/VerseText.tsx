@@ -1,6 +1,6 @@
 /* eslint-disable react/no-multi-comp */
 /* eslint-disable max-lines */
-import React, { useMemo, useRef } from 'react';
+import React, { useCallback, useMemo, useRef } from 'react';
 
 import classNames from 'classnames';
 import { shallowEqual, useSelector } from 'react-redux';
@@ -30,6 +30,12 @@ type VerseTextProps = {
   isHighlighted?: boolean;
   shouldShowH1ForSEO?: boolean;
 };
+
+enum VerseTextHighlightStatus {
+  HIGHLIGHTED = 'highlighted',
+  UNHIGHLIGHTED = 'unhighlighted',
+  MIXED = 'mixed',
+}
 
 const VerseText = ({
   words,
@@ -71,20 +77,54 @@ const VerseText = ({
     ? getFontClassName(quranFont, quranTextFontScale, mushafLines)
     : getFontClassName(FALLBACK_FONT, quranTextFontScale, mushafLines, true);
 
-  const renderWord = (word: Word) => (
-    <QuranWord
-      key={word.location}
-      word={word}
-      font={quranFont}
-      isFontLoaded={isFontLoaded}
-      isHighlighted={word.verseKey === selectedVerseKey}
-    />
+  const renderWord = useCallback(
+    (word: Word) => (
+      <QuranWord
+        key={word.location}
+        word={word}
+        font={quranFont}
+        isFontLoaded={isFontLoaded}
+        isHighlighted={word.verseKey === selectedVerseKey}
+      />
+    ),
+    [quranFont, isFontLoaded, selectedVerseKey],
   );
 
-  const isSecondaryHighlighted = (word: Word) => word.verseKey === hoveredVerseKey;
+  const isSecondaryHighlighted = useCallback(
+    (word: Word) => word.verseKey === hoveredVerseKey,
+    [hoveredVerseKey],
+  );
 
-  const getHighlighter = () => {
+  const wordsSecondaryHighlightStatus = useMemo(() => {
+    let hasHighlightedWords = false;
+    let hasUnhighlightedWords = false;
+
+    for (let i = 0; i < words.length; i += 1) {
+      const word = words[i];
+
+      if (hasHighlightedWords && hasUnhighlightedWords) break;
+
+      if (isSecondaryHighlighted(word)) hasHighlightedWords = true;
+      else hasUnhighlightedWords = true;
+    }
+
+    if (hasHighlightedWords && hasUnhighlightedWords) {
+      return VerseTextHighlightStatus.MIXED;
+    }
+
+    if (hasHighlightedWords) {
+      return VerseTextHighlightStatus.HIGHLIGHTED;
+    }
+
+    return VerseTextHighlightStatus.UNHIGHLIGHTED;
+  }, [words, isSecondaryHighlighted]);
+
+  const highlighter = useMemo(() => {
+    /* if a part of the line is highlighted, we need to render the highlighted part in a separate div in the background so that we can change the background color of the div with the same width as the highlighted part without affecting the background color of the words */
+    if (wordsSecondaryHighlightStatus !== VerseTextHighlightStatus.MIXED) return null;
+
     const secondaryHighlightedIndexStart = words.findIndex(isSecondaryHighlighted);
+    const wordsBeforeSecondaryHighlighted = words.slice(0, secondaryHighlightedIndexStart);
 
     const secondaryHighlightedIndexEnd = words.findIndex(
       (word, index) => index > secondaryHighlightedIndexStart && !isSecondaryHighlighted(word),
@@ -92,35 +132,36 @@ const VerseText = ({
 
     // there is no end because it's the last word in the line and the next line is still the same verse
     if (secondaryHighlightedIndexEnd === -1) {
-      const wordsBeforeSecondaryHighlighted = words.slice(0, secondaryHighlightedIndexStart);
-      const wordsBetweenSecondaryHighlighted = words.slice(secondaryHighlightedIndexStart);
+      const wordsBetweenSecondaryHighlighted = words.slice(
+        Math.max(secondaryHighlightedIndexStart, 0),
+      );
 
       return (
         <div className={styles.highlighterWrapper}>
           {wordsBeforeSecondaryHighlighted.length > 0 && (
             <div className={classNames(styles.highlighterItem, styles.hidden)}>
-              {wordsBeforeSecondaryHighlighted?.map((w) => renderWord(w))}
+              {wordsBeforeSecondaryHighlighted?.map(renderWord)}
             </div>
           )}
           <div
             className={classNames(styles.highlighted, styles.highlighterItem, styles.hideChildren)}
           >
-            {wordsBetweenSecondaryHighlighted?.map((w) => renderWord(w))}
+            {wordsBetweenSecondaryHighlighted?.map(renderWord)}
           </div>
         </div>
       );
     }
 
-    // now there will be 3 arrays
+    // there will be 3 arrays
     // 1. words before secondaryHighlightedIndexStart
     // 2. words between secondaryHighlightedIndexStart and secondaryHighlightedIndexEnd
     // 3. words after secondaryHighlightedIndexEnd
-    const wordsBeforeSecondaryHighlighted = words.slice(0, secondaryHighlightedIndexStart);
     const wordsBetweenSecondaryHighlighted = words.slice(
       secondaryHighlightedIndexStart,
       secondaryHighlightedIndexEnd,
     );
     const wordsAfterSecondaryHighlighted = words.slice(secondaryHighlightedIndexEnd);
+    // console.log('wordsAfterSecondaryHighlighted', wordsAfterSecondaryHighlighted);
 
     return (
       <div className={styles.highlighterWrapper}>
@@ -145,10 +186,7 @@ const VerseText = ({
         </div>
       </div>
     );
-  };
-
-  const lineHasUnhighlightedWords = words.some((w) => !isSecondaryHighlighted(w));
-  const lineHasHighlightedWords = !lineHasUnhighlightedWords || words.some(isSecondaryHighlighted);
+  }, [words, wordsSecondaryHighlightStatus, isSecondaryHighlighted, renderWord]);
 
   return (
     <>
@@ -172,13 +210,12 @@ const VerseText = ({
             [styles.largeQuranTextLayout]: isBigTextLayout,
             [styles.verseTextCenterAlign]: isReadingMode && centerAlignPage,
             [styles.verseTextSpaceBetween]: isReadingMode && !centerAlignPage,
-            [styles.highlighted]: !lineHasUnhighlightedWords,
+            [styles.highlighted]:
+              wordsSecondaryHighlightStatus === VerseTextHighlightStatus.HIGHLIGHTED,
           })}
         >
-          {/* if a part of the line is highlighted, we need to render the highlighted part in a separate div in the background so that we can change the background color of the div with the same width as the highlighted part without affecting the background color of the words */}
-          {lineHasUnhighlightedWords && lineHasHighlightedWords && getHighlighter()}
-
-          {words?.map((w) => renderWord(w))}
+          {highlighter}
+          {words?.map(renderWord)}
         </div>
       </VerseTextContainer>
     </>
