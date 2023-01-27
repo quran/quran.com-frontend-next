@@ -7,6 +7,7 @@ import useSWRImmutable from 'swr/immutable';
 import Link from '../dls/Link/Link';
 
 import styles from './RecentReadingSessions.module.scss';
+import RecentReadingSessionsSkeleton from './RecentReadingSessionsSkeleton';
 
 import SurahPreview, { SurahPreviewDisplay } from '@/dls/SurahPreview/SurahPreview';
 import { selectRecentReadingSessions } from '@/redux/slices/QuranReader/readingTracker';
@@ -29,7 +30,7 @@ const RecentReadingSessions = () => {
     logButtonClick('homepage_recently_read_card');
   };
 
-  const { data } = useSWRImmutable<ReadingSession[]>(
+  const { data, isValidating } = useSWRImmutable<ReadingSession[]>(
     isLoggedIn() ? makeReadingSessionsUrl() : null,
     privateFetcher,
   );
@@ -46,43 +47,50 @@ const RecentReadingSessions = () => {
     return [];
   }, [data, recentReadingSessions]);
 
+  if (isValidating) {
+    return (
+      <div className={styles.sessionsContainer}>
+        <p className={styles.sessionsHeader}>{t('recently-read')}</p>
+        <div className={styles.verseLinksContainer}>
+          <RecentReadingSessionsSkeleton />
+        </div>
+      </div>
+    );
+  }
+
   if (recentReadVerseKeys.length === 0) return null;
 
   return (
-    <>
-      {recentReadVerseKeys.length > 0 && (
-        <div className={styles.sessionsContainer}>
-          <p className={styles.sessionsHeader}>{t('recently-read')}</p>
-          <div className={styles.verseLinksContainer}>
-            {recentReadVerseKeys.map((verseKey) => {
-              const [chapterId, verseNumber] = getVerseAndChapterNumbersFromKey(verseKey);
-              const surah = getChapterData(chaptersData, chapterId);
-              return (
-                <div className={styles.verseLink} key={verseKey}>
-                  <Link
-                    href={getChapterWithStartingVerseUrl(verseKey)}
-                    onClick={onRecentReadingSessionClicked}
-                  >
-                    <SurahPreview
-                      display={SurahPreviewDisplay.Block}
-                      chapterId={Number(chapterId)}
-                      surahNumber={Number(chapterId)}
-                      translatedSurahName={surah.translatedName as string}
-                      surahName={surah.transliteratedName}
-                      description={`${t('common:ayah')} ${toLocalizedNumber(
-                        Number(verseNumber),
-                        lang,
-                      )}`}
-                      verseCount={surah.versesCount}
-                    />
-                  </Link>
-                </div>
-              );
-            })}
-          </div>
-        </div>
-      )}
-    </>
+    <div className={styles.sessionsContainer}>
+      <p className={styles.sessionsHeader}>{t('recently-read')}</p>
+      <div className={styles.verseLinksContainer}>
+        {recentReadVerseKeys.map((verseKey) => {
+          const [chapterId, verseNumber] = getVerseAndChapterNumbersFromKey(verseKey);
+          const surah = getChapterData(chaptersData, chapterId);
+          return (
+            <div className={styles.verseLink} key={verseKey}>
+              <Link
+                href={getChapterWithStartingVerseUrl(verseKey)}
+                onClick={onRecentReadingSessionClicked}
+              >
+                <SurahPreview
+                  display={SurahPreviewDisplay.Block}
+                  chapterId={Number(chapterId)}
+                  surahNumber={Number(chapterId)}
+                  translatedSurahName={surah.translatedName as string}
+                  surahName={surah.transliteratedName}
+                  description={`${t('common:ayah')} ${toLocalizedNumber(
+                    Number(verseNumber),
+                    lang,
+                  )}`}
+                  verseCount={surah.versesCount}
+                />
+              </Link>
+            </div>
+          );
+        })}
+      </div>
+    </div>
   );
 };
 
