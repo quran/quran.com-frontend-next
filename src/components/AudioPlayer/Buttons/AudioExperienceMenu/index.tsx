@@ -4,9 +4,11 @@ import useTranslation from 'next-translate/useTranslation';
 import { useSelector, useDispatch } from 'react-redux';
 
 import styles from './AudioExperienceMenu.module.scss';
+import HelpText from './HelpText';
 
 import Checkbox from '@/dls/Forms/Checkbox/Checkbox';
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
+import Spinner from '@/dls/Spinner/Spinner';
 import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
 import ChevronLeftIcon from '@/icons/chevron-left.svg';
 import {
@@ -15,21 +17,21 @@ import {
   selectAudioPlayerState,
 } from '@/redux/slices/AudioPlayer/state';
 import { setIsSettingsDrawerOpen } from '@/redux/slices/navbar';
-import { selectShowTooltipFor } from '@/redux/slices/QuranReader/readingPreferences';
+import { selectTooltipContentType } from '@/redux/slices/QuranReader/readingPreferences';
 import { logValueChange, logButtonClick } from '@/utils/eventLogger';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 
 const AudioExperienceMenu = ({ onBack }) => {
   const { t } = useTranslation('common');
   const {
-    // isLoading, // TODO: handle this
+    isLoading,
     actions: { onSettingsChange },
   } = usePersistPreferenceGroup();
   const dispatch = useDispatch();
 
   const audioPlayerState = useSelector(selectAudioPlayerState);
   const { enableAutoScrolling, showTooltipWhenPlayingAudio } = audioPlayerState;
-  const showTooltipFor = useSelector(selectShowTooltipFor);
+  const showTooltipFor = useSelector(selectTooltipContentType);
 
   const onAudioSettingsChange = (
     key: string,
@@ -66,6 +68,7 @@ const AudioExperienceMenu = ({ onBack }) => {
         {t('audio.experience')}
       </PopoverMenu.Item>
       <PopoverMenu.Divider />
+      {isLoading && <Spinner />}
       <div className={styles.checkboxContainer}>
         <div>
           <Checkbox
@@ -74,6 +77,7 @@ const AudioExperienceMenu = ({ onBack }) => {
             name="auto-scrolling"
             label={t('audio.auto-scroll.title')}
             onChange={onEnableAutoScrollingChange}
+            disabled={isLoading}
           />
         </div>
         <div>
@@ -83,29 +87,10 @@ const AudioExperienceMenu = ({ onBack }) => {
             name="show-tooltip"
             label={t('settings.show-tooltip-when-playing-audio')}
             onChange={onShowTooltipWhenPlayingAudioChange}
+            disabled={isLoading || (showTooltipFor && showTooltipFor.length === 0)}
           />
           <div className={classNames(styles.experienceTipContainer, styles.helpText)}>
-            {showTooltipFor.map((tooltipTextType, index) => (
-              <span key={tooltipTextType} className={styles.tooltipText}>
-                {t(tooltipTextType)}
-                {`${index === 0 && showTooltipFor.length > 1 ? ' • ' : ''}`}
-              </span>
-            ))}
-            <div className={styles.helpText}>
-              <span>{t('audio.exp-tip')}</span>
-              <br />
-              <span
-                onKeyPress={onSettingsClicked}
-                tabIndex={0}
-                role="button"
-                onClick={onSettingsClicked}
-                className={classNames(styles.bold, styles.link)}
-              >
-                {` ${t('settings.title')}`}
-              </span>
-              {' >'}
-              <span className={styles.bold}>{` ${t('wbw')}`}</span>
-            </div>
+            <HelpText onSettingsClicked={onSettingsClicked} showTooltipFor={showTooltipFor} />
           </div>
         </div>
       </div>

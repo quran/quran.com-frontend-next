@@ -43,6 +43,7 @@
         "play": "Play Audio",
         "playback-normal": "Normal",
         "playback-speed": "Playback Speed",
+        "speed": "Speed",
         "playback-speed-unit": "x",
         "player": {
             "close-audio-player": "Close Audio Player",
@@ -59,6 +60,7 @@
             "previous-ayah": "Previous Ayah",
             "repeat-1-verse": "Repeat Verse",
             "repeat-settings": "Repeat Settings",
+            "manage-repeat-settings": "Manage repeat settings",
             "repeat-verse": "Repeat each verse",
             "search-verse": "Search for a verse",
             "single-verse": "Single Verse",
@@ -72,7 +74,9 @@
         "select-reciter": "Select Reciter",
         "title": "Audio",
         "experience": "Experience",
-        "exp-tip": "You can change what the tooltip displays under"
+        "exp-tip": "<span>Change the content displayed under<\/span><br><\/br> <settingsLink>Settings<\/settingsLink> > <boldSpan>Word By Word<\/boldSpan>",
+        "exp-tip-no-select": "<span>Select the Translation and/or Transliteration<\/span><br><\/br><span>option under <\/span><settingsLink>Settings<\/settingsLink> > <boldSpan>Word By Word<\/boldSpan><span>, to<\/span><br><\/br> <span>enable this feature.<\/span>",
+        "displaying": "Displaying"
     },
     "recitation": "Recitation",
     "display": "Display",
@@ -297,8 +301,8 @@
     "to": "To",
     "tooltip": "Tooltip",
     "inline": "In-line",
-    "reciter-summary": "Default reciter: <span>{{reciterName}}<\/span>. In audio mode, word by word will leverage the reciter you’ve selected.",
-    "wbw-lang-summary": "Source: <link>{{source}}<\/link>. This source is independent of your translation selection.",
+    "reciter-summary": "Word by word reciter: <span>{{reciterName}}<\/span>. Click on a word to listen to its recitation.",
+    "wbw-lang-summary": "Word by word translation source: <link>{{source}}<\/link>. This source is independent of the verse translation selection.",
     "tooltip-trans-lang": "Tooltip Language",
     "translation": "Translation",
     "translations": "Translations",
@@ -327,6 +331,7 @@
     },
     "wbw": "Word By Word",
     "wbw-trans-lang": "Word By Word Language",
+    "trans-lang": "Translation Language",
     "wbw-translation": "Word By Word Translation",
     "wbw-transliteration": "Word By Word Transliteration",
     "word-click": {

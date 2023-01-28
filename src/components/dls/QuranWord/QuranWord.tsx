@@ -19,8 +19,8 @@ import { selectShowTooltipWhenPlayingAudio } from '@/redux/slices/AudioPlayer/st
 import {
   selectWordClickFunctionality,
   selectReadingPreference,
-  selectShowTooltipFor,
-  selectWordByWordPreferences,
+  selectTooltipContentType,
+  selectInlineDisplayWordByWordPreferences,
 } from '@/redux/slices/QuranReader/readingPreferences';
 import { areArraysEqual } from '@/utils/array';
 import { milliSecondsToSeconds } from '@/utils/datetime';
@@ -60,11 +60,11 @@ const QuranWord = ({
 
   const [isTooltipOpened, setIsTooltipOpened] = useState(false);
   const { showWordByWordTranslation, showWordByWordTransliteration } = useSelector(
-    selectWordByWordPreferences,
+    selectInlineDisplayWordByWordPreferences,
     shallowEqual,
   );
   const readingPreference = useSelector(selectReadingPreference);
-  const showTooltipFor = useSelector(selectShowTooltipFor, areArraysEqual);
+  const showTooltipFor = useSelector(selectTooltipContentType, areArraysEqual);
 
   // creating wordLocation instead of using `word.location` because
   // the value of `word.location` is `1:3:5-7`, but we want `1:3:5`

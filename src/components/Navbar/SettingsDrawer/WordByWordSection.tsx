@@ -126,6 +126,8 @@ const WordByWordSection = () => {
   };
 
   const shouldDisableWordByWordDisplay = !wordByWordContentType || !wordByWordContentType.length;
+  const shouldDisableLanguageSelect =
+    !wordByWordContentType || !wordByWordContentType.includes(WordByWordType.Translation);
 
   return (
     <Section>
@@ -164,14 +166,14 @@ const WordByWordSection = () => {
       </Section.Row>
       <Separator className={styles.separator} />
       <Section.Row>
-        <Section.Label>{t('language')}</Section.Label>
+        <Section.Label>{t('trans-lang')}</Section.Label>
         <Select
           size={SelectSize.Small}
           id="wordByWord"
           name="wordByWord"
           options={WORD_BY_WORD_LOCALES_OPTIONS}
           value={wordByWordLocale}
-          disabled={shouldDisableWordByWordDisplay}
+          disabled={shouldDisableLanguageSelect}
           onChange={onWordByWordLocaleChange}
         />
       </Section.Row>

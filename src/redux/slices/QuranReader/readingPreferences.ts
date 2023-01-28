@@ -79,7 +79,15 @@ export const {
   setWordByWordDisplay,
 } = readingPreferencesSlice.actions;
 
-export const selectWordByWordPreferences = (state: RootState) => {
+/**
+ * Check whether we should display inline wbw translation/transliteration.
+ *
+ * @param {RootState} state
+ * @returns {{showWordByWordTranslation: boolean, showWordByWordTransliteration: boolean}}
+ */
+export const selectInlineDisplayWordByWordPreferences = (
+  state: RootState,
+): { showWordByWordTranslation: boolean; showWordByWordTransliteration: boolean } => {
   const { readingPreferences } = state;
   const { wordByWordDisplay, wordByWordContentType } = readingPreferences;
 
@@ -92,16 +100,47 @@ export const selectWordByWordPreferences = (state: RootState) => {
       shouldDisplayInline && wordByWordContentType.includes(WordByWordType.Transliteration),
   };
 };
+
+/**
+ * Check whether the tooltip content is enabled or not.
+ * To be considered enabled, the following conditions need to be met:
+ *
+ * 1. display options need to include tooltip.
+ * 2. word by word content need to contain either translation or transliteration.
+ *
+ * @param {RootState} state
+ * @returns {boolean}
+ */
+export const selectIsTooltipContentEnabled = (state: RootState): boolean => {
+  const { readingPreferences } = state;
+  const { wordByWordContentType, wordByWordDisplay } = readingPreferences;
+
+  const shouldDisplayTooltip = wordByWordDisplay.includes(WordByWordDisplay.TOOLTIP);
+
+  if (!shouldDisplayTooltip) {
+    return false;
+  }
+
+  return (
+    wordByWordContentType.includes(WordByWordType.Translation) ||
+    wordByWordContentType.includes(WordByWordType.Transliteration)
+  );
+};
 export const selectReadingPreferences = (state: RootState): ReadingPreferences =>
   state.readingPreferences;
-export const selectShowTooltipFor = (state: RootState) => {
+
+/**
+ * Select which tooltip content to show. We should not show any tooltips when:
+ *
+ * 1. Display options does not include tooltip.
+ * 2. Display options does include tooltip but no translation/transliterations were selected.
+ *
+ * @param {RootState} state
+ * @returns {WordByWordType[]}
+ */
+export const selectTooltipContentType = (state: RootState): WordByWordType[] => {
   const { readingPreferences } = state;
   const { wordByWordDisplay, wordByWordContentType } = readingPreferences;
-  /*
-    We should not show any tooltips when:
-      1. Display options does not include tooltip.
-      2. Display options does include tooltip but no translation/transliterations were selected.
-  */
   if (
     !wordByWordDisplay ||
     !wordByWordDisplay.includes(WordByWordDisplay.TOOLTIP) ||

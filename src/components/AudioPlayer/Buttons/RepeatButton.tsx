@@ -60,7 +60,7 @@ const RepeatAudioButton = () => {
           )
         }
       >
-        {t('audio.player.repeat-settings')}
+        {t('audio.player.manage-repeat-settings')}
       </PopoverMenu.Item>
       {!isLoading && (
         <RepeatAudioModal
