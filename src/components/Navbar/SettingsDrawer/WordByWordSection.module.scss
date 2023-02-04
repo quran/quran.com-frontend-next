@@ -12,3 +12,8 @@
 .source {
   font-weight: var(--font-weight-bold);
 }
+
+.label {
+  margin-block-start: var(--spacing-xsmall);
+  margin-block-end: var(--spacing-xxsmall);
+}

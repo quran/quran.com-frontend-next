@@ -1,6 +1,5 @@
 import React from 'react';
 
-import classNames from 'classnames';
 import Trans from 'next-translate/Trans';
 import { useSelector } from 'react-redux';
 
@@ -11,11 +10,10 @@ import { selectIsTooltipContentEnabled } from '@/redux/slices/QuranReader/readin
 import { WordByWordType } from '@/types/QuranReader';
 
 type Props = {
-  onSettingsClicked: () => void;
   showTooltipFor?: WordByWordType[];
 };
 
-const HelpText: React.FC<Props> = ({ onSettingsClicked, showTooltipFor }) => {
+const HelpText: React.FC<Props> = ({ showTooltipFor }) => {
   const isTooltipContentEnabled = useSelector(selectIsTooltipContentEnabled);
   return (
     <>
@@ -29,17 +27,6 @@ const HelpText: React.FC<Props> = ({ onSettingsClicked, showTooltipFor }) => {
             span: <span key={0} />,
             br: <br key={1} />,
             boldSpan: <span key={2} className={styles.bold} />,
-            settingsLink: (
-              // eslint-disable-next-line jsx-a11y/control-has-associated-label
-              <span
-                key={3}
-                onKeyPress={onSettingsClicked}
-                tabIndex={0}
-                role="button"
-                onClick={onSettingsClicked}
-                className={classNames(styles.bold, styles.link)}
-              />
-            ),
           }}
         />
       </div>

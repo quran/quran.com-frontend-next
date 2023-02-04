@@ -186,7 +186,9 @@ const WordByWordSection = () => {
           values={{ source: 'quranwbw' }}
         />
       </Section.Footer>
-      <Section.Label>{t('display')}</Section.Label>
+      <Section.Label>
+        <p className={styles.label}>{t('display')}</p>
+      </Section.Label>
       <Section.Row>
         <div className={styles.checkboxContainer}>
           <Checkbox

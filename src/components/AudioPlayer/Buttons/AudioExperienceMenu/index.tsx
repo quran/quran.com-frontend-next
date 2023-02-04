@@ -1,7 +1,7 @@
 import { ActionCreatorWithOptionalPayload } from '@reduxjs/toolkit';
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import styles from './AudioExperienceMenu.module.scss';
 import HelpText from './HelpText';
@@ -16,9 +16,8 @@ import {
   setShowTooltipWhenPlayingAudio,
   selectAudioPlayerState,
 } from '@/redux/slices/AudioPlayer/state';
-import { setIsSettingsDrawerOpen } from '@/redux/slices/navbar';
 import { selectTooltipContentType } from '@/redux/slices/QuranReader/readingPreferences';
-import { logValueChange, logButtonClick } from '@/utils/eventLogger';
+import { logValueChange } from '@/utils/eventLogger';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 
 const AudioExperienceMenu = ({ onBack }) => {
@@ -27,7 +26,6 @@ const AudioExperienceMenu = ({ onBack }) => {
     isLoading,
     actions: { onSettingsChange },
   } = usePersistPreferenceGroup();
-  const dispatch = useDispatch();
 
   const audioPlayerState = useSelector(selectAudioPlayerState);
   const { enableAutoScrolling, showTooltipWhenPlayingAudio } = audioPlayerState;
@@ -55,11 +53,6 @@ const AudioExperienceMenu = ({ onBack }) => {
   const onShowTooltipWhenPlayingAudioChange = (newValue: boolean) => {
     logValueChange('audio_settings_show_tooltip_when_playing_audio', !newValue, newValue);
     onAudioSettingsChange('showTooltipWhenPlayingAudio', newValue, setShowTooltipWhenPlayingAudio);
-  };
-
-  const onSettingsClicked = () => {
-    dispatch(setIsSettingsDrawerOpen(true));
-    logButtonClick('experience_settings_drawer');
   };
 
   return (
@@ -90,7 +83,7 @@ const AudioExperienceMenu = ({ onBack }) => {
             disabled={isLoading || (showTooltipFor && showTooltipFor.length === 0)}
           />
           <div className={classNames(styles.experienceTipContainer, styles.helpText)}>
-            <HelpText onSettingsClicked={onSettingsClicked} showTooltipFor={showTooltipFor} />
+            <HelpText showTooltipFor={showTooltipFor} />
           </div>
         </div>
       </div>
