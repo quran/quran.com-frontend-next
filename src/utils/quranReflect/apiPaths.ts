@@ -27,7 +27,7 @@ export const makeAyahReflectionsUrl = ({
   ayahNumber,
   locale,
   page = 1,
-  tab = isProd ? Tab.MostPopular : Tab.Feed,
+  tab = Tab.MostPopular,
 }: AyahReflectionsRequestParams) => {
   const surahNumber = Number(surahId) + 1;
   return makeQuranReflectApiUrl('posts.json', {
