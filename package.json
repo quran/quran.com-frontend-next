@@ -21,8 +21,7 @@
     "test:coverage": "vitest run --coverage",
     "test:watch": "vitest watch",
     "analyze": "cross-env ANALYZE_BUNDLE=true yarn build",
-    "lokalise:pull": "node scripts/lokalise.js",
-    "lokalise:push": "node scripts/lokalise.js push",
+    "lokalise": "node scripts/lokalise.js",
     "chapter-data:format": "node scripts/format-chapter-data-json.js"
   },
   "dependencies": {
@@ -121,6 +120,8 @@
     "eslint-plugin-storybook": "^0.6.4",
     "eslint-plugin-unicorn": "^43.0.2",
     "husky": "^8.0.1",
+    "inquirer": "^8.0.0",
+    "inquirer-file-tree-selection-prompt": "^1",
     "jsdom": "^20.0.0",
     "lint-staged": "^13.0.3",
     "next-sitemap": "^3.1.22",
