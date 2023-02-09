@@ -98,6 +98,13 @@ export const makeBookmarkUrl = (
 
 export const makeReadingSessionsUrl = () => makeUrl('reading-sessions');
 
+export const makeReadingDaysUrl = (timezone?: string) =>
+  makeUrl('reading-days', timezone ? { timezone } : undefined);
+
+export const makeReadingGoalUrl = () => makeUrl('reading-goal');
+
+export const makeReadingGoalStatusUrl = () => makeUrl('reading-goal/status');
+
 export const makeUserPreferencesUrl = () => makeUrl('preferences');
 
 export const makeUserBulkPreferencesUrl = () => makeUrl('preferences/bulk');

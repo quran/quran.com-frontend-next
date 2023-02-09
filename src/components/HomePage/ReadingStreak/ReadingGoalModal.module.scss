@@ -1,0 +1,45 @@
+@use "src/styles/breakpoints";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  padding-inline: var(--spacing-mega);
+  padding-block: var(--spacing-mega);
+}
+
+.label {
+  font-weight: var(--font-weight-bold);
+  @include breakpoints.tablet {
+    min-width: calc(8.5 * var(--spacing-large));
+  }
+}
+
+.inputContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.inputContainer + .inputContainer {
+  margin-block-start: var(--spacing-large);
+}
+
+.rangeContainer {
+  width: 100%;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  & > div {
+    flex: 1;
+    & > label {
+      display: block;
+      margin-block-end: var(--spacing-xxsmall);
+    }
+
+    &:first-child {
+      margin-inline-end: var(--spacing-medium);
+    }
+  }
+}

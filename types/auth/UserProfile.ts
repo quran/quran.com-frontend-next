@@ -7,6 +7,7 @@ interface UserProfile {
   firstName: string;
   lastName: string;
   email: string;
+  streak: number;
   createdAt: string;
   photoUrl?: string;
   requiredFields: FormField[];

@@ -1,6 +1,8 @@
 /* eslint-disable max-lines */
 import { configureRefreshFetch } from 'refresh-fetch';
 
+import { ReadingDay, UpdateReadingDayBody } from '@/types/auth/ReadingDay';
+import { CreateReadingGoalRequest, ReadingGoal, ReadingGoalStatus } from '@/types/auth/ReadingGoal';
 import {
   makeBookmarksUrl,
   makeCompleteSignupUrl,
@@ -28,6 +30,9 @@ import {
   makeDeleteCollectionBookmarkByIdUrl,
   makeDeleteCollectionBookmarkByKeyUrl,
   makeDeleteBookmarkUrl,
+  makeReadingDaysUrl,
+  makeReadingGoalUrl,
+  makeReadingGoalStatusUrl,
 } from '@/utils/auth/apiPaths';
 import { fetcher } from 'src/api';
 import CompleteAnnouncementRequest from 'types/auth/CompleteAnnouncementRequest';
@@ -136,11 +141,29 @@ export const getBookmarkCollections = async (
 ): Promise<string[]> =>
   privateFetcher(makeBookmarkCollectionsUrl(mushafId, key, type, verseNumber));
 
+export const getReadingGoal = async (): Promise<{ data?: ReadingGoal }> =>
+  privateFetcher(makeReadingGoalUrl());
+
+export const getReadingGoalStatus = async (): Promise<{ data?: ReadingGoalStatus }> =>
+  privateFetcher(makeReadingGoalStatusUrl());
+
+export const addReadingGoal = async (
+  data: CreateReadingGoalRequest,
+): Promise<{ data?: ReadingGoal }> => postRequest(makeReadingGoalUrl(), data);
+
+export const deleteReadingGoal = async (): Promise<void> => deleteRequest(makeReadingGoalUrl());
+
+export const getReadingDay = async (timezone: string): Promise<{ data?: ReadingDay }> =>
+  privateFetcher(makeReadingDaysUrl(timezone));
+
 export const addReadingSession = async (chapterNumber: number, verseNumber: number) =>
   postRequest(makeReadingSessionsUrl(), {
     chapterNumber,
     verseNumber,
   });
+
+export const updateReadingDay = async (body: UpdateReadingDayBody): Promise<ReadingDay> =>
+  postRequest(makeReadingDaysUrl(), body);
 
 export const syncUserLocalData = async (
   payload: Record<SyncDataType, any>,

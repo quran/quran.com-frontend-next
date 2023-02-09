@@ -1,12 +1,9 @@
 /* eslint-disable max-lines */
-import { useEffect } from 'react';
-
 import classNames from 'classnames';
 import { NextPage, GetStaticProps } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
-import useSWR from 'swr';
 
 import layoutStyle from './index.module.scss';
 import styles from './profile.module.scss';
@@ -17,9 +14,9 @@ import BookmarksAndCollectionsSection from '@/components/Verses/BookmarksAndColl
 import RecentReadingSessions from '@/components/Verses/RecentReadingSessions';
 import Button from '@/dls/Button/Button';
 import Skeleton from '@/dls/Skeleton/Skeleton';
+import useCurrentUser from '@/hooks/auth/useCurrentUser';
 import { removeLastSyncAt } from '@/redux/slices/Auth/userDataSync';
-import { getUserProfile, logoutUser } from '@/utils/auth/api';
-import { makeUserProfileUrl } from '@/utils/auth/apiPaths';
+import { logoutUser } from '@/utils/auth/api';
 import { DEFAULT_PHOTO_URL } from '@/utils/auth/constants';
 import { isLoggedIn } from '@/utils/auth/login';
 import { getAllChaptersData } from '@/utils/chapter';
@@ -40,18 +37,7 @@ const ProfilePage: NextPage<Props> = ({ chaptersData }) => {
   const dispatch = useDispatch();
   const { t, lang } = useTranslation();
   const router = useRouter();
-
-  const {
-    data: userData,
-    isValidating,
-    error,
-  } = useSWR(isLoggedIn() ? makeUserProfileUrl() : null, getUserProfile);
-
-  useEffect(() => {
-    if (!isLoggedIn()) {
-      router.replace('/login');
-    }
-  }, [router]);
+  const { user, isLoading, error } = useCurrentUser();
 
   const onLogoutClicked = () => {
     if (!isLoggedIn()) {
@@ -65,13 +51,11 @@ const ProfilePage: NextPage<Props> = ({ chaptersData }) => {
     });
   };
 
-  const isLoading = isValidating || !userData;
-
   if (error) {
     return <Error statusCode={500} />;
   }
 
-  const { email, firstName, lastName, photoUrl } = userData || {};
+  const { email, firstName, lastName, photoUrl } = user;
 
   const profileSkeletonInfoSkeleton = (
     <div className={classNames(styles.profileInfoContainer, styles.skeletonContainer)}>

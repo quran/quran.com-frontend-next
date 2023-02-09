@@ -1,0 +1,18 @@
+{
+  "reading-goal": "Reading Goal",
+  "streak": "Current Streak",
+  "progress": "You've completed <strong>{{percent}}%<\/strong> of your goal.",
+  "set-reading-goal": "Set a reading goal.",
+  "set-reading-goal-success": "Your reading goal has been set successfully.",
+  "complete-message": "Your reading goal is complete!",
+  "delete-account": "Delete Reading Goal",
+  "days": "Days",
+  "continuious": "Continuious",
+  "delete-confirmation": {
+    "action-text": "I understand the consequence, delete my reading goal",
+    "confirmation-text": "delete my reading goal",
+    "instruction-text": "Please type <strong>{{text}}<\/strong> to confirm",
+    "subtitle": "This action cannot be undone. This will permanently delete reading goal and your current progress.",
+    "title": "Are you absolutely sure?"
+  }
+}

@@ -1,0 +1,63 @@
+.container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+}
+
+.streakTitle {
+  font-size: var(--font-size-large);
+}
+
+.streakNumber {
+  color: var(--color-success-medium);
+  font-size: calc(var(--font-size-jumbo) * 1.3);
+  font-weight: bold;
+  margin-top: var(--spacing-xxsmall);
+}
+
+.week {
+  display: flex;
+  // justify-content: space-around;
+  align-items: center;
+}
+
+.day {
+  color: var(--color-success-medium);
+}
+
+.circleContainer {
+  margin-top: var(--spacing-xsmall);
+  display: flex;
+  align-items: center;
+}
+
+.dayDivider {
+  width: calc(var(--spacing-large) * 1.2);
+  height: 2px;
+  background-color: var(--color-success-medium);
+}
+
+.dayCircle {
+  width: var(--spacing-large);
+  height: var(--spacing-large);
+  border-radius: var(--border-radius-circle);
+  border: 2px solid var(--color-success-medium);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  & svg {
+    width: 90%;
+    height: 90%;
+    color: white;
+  }
+}
+
+.filled {
+  background-color: var(--color-success-medium);
+}
+
+.goalContainer {
+  margin-top: var(--spacing-large);
+}
