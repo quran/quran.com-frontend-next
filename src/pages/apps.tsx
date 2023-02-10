@@ -1,5 +1,6 @@
 /* eslint-disable react/no-multi-comp */
 import classNames from 'classnames';
+import { GetStaticProps, NextPage } from 'next';
 import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
 import Image from 'next/image';
@@ -13,6 +14,8 @@ import styles from './apps.module.scss';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import PageContainer from '@/components/PageContainer';
 import Link from '@/dls/Link/Link';
+import ChaptersData from '@/types/ChaptersData';
+import { getAllChaptersData } from '@/utils/chapter';
 import { logTarteelLinkClick } from '@/utils/eventLogger';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl } from '@/utils/navigation';
@@ -79,8 +82,12 @@ const App = ({ app, isFlipped, isMain }: AppProps) => {
   );
 };
 
+type AppsPageProps = {
+  chaptersData: ChaptersData;
+};
+
 const path = '/apps';
-const AppsPage = () => {
+const AppsPage: NextPage<AppsPageProps> = (): JSX.Element => {
   const { t, lang } = useTranslation();
 
   const apps = {
@@ -117,6 +124,16 @@ const AppsPage = () => {
       </PageContainer>
     </>
   );
+};
+
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
+  const allChaptersData = await getAllChaptersData(locale);
+
+  return {
+    props: {
+      chaptersData: allChaptersData,
+    },
+  };
 };
 
 export default AppsPage;
