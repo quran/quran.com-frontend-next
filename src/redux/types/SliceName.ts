@@ -24,6 +24,7 @@ enum SliceName {
   USER_DATA_SYNC = 'userDataSync',
   PERSIST_GATE_HYDRATION = 'persistGateHydration',
   REVELATION_ORDER = 'revelationOrder',
+  AUDIO_SECTION_UPDATE_NOTICE = 'audioSectionUpdateNotice',
 }
 
 export default SliceName;

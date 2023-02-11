@@ -70,7 +70,8 @@
         },
         "repeat-moved": "De herhaalinstellingen zijn verplaatst naar de audiospeler. Klik op het <0> <\/0> om ze te openen",
         "select-reciter": "Selecteer voordrager",
-        "title": "Audio"
+        "title": "Audio",
+        "update-notice": "<p> 📣 De instelling 'Audio' wordt op {{month}} {{day}} verplaatst van Instellingen naar het menu Audiospeler. <\/p> <learnMore> Lees meer over deze wijzigingen op de pagina <\/learnMore>"
     },
     "ayah": "Aya",
     "ayahs": "Ayahs",

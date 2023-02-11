@@ -70,7 +70,8 @@
         },
         "repeat-moved": "Pengaturan pengulangan telah dipindahkan ke pemutar audio. Klik ikon <0> <\/0> untuk mengaksesnya",
         "select-reciter": "Pilih Qari",
-        "title": "audio"
+        "title": "audio",
+        "update-notice": "<p> 📣 Setelan 'Audio' dipindahkan dari Setelan ke menu Pemutar Audio pada {{month}} {{day}} . <\/p> <learnMore> Pelajari lebih lanjut tentang perubahan ini di halaman Pembaruan Produk <\/learnMore>"
     },
     "ayah": "Ayat",
     "ayahs": "Ayat",

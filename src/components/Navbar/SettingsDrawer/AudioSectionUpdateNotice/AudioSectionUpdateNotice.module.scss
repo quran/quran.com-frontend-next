@@ -1,0 +1,15 @@
+.container {
+  background-color: var(--color-secondary-faded);
+  padding: 10px;
+  display: flex;
+  flex-direction: row-reverse;
+  margin-block-end: var(--spacing-medium);
+}
+
+.learnMore {
+  padding-block-end: var(--spacing-large);
+}
+
+.button {
+  padding-inline: var(--spacing-xxsmall);
+}
