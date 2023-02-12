@@ -24,7 +24,7 @@ const useCurrentUser = () => {
 
   return {
     user: userData || ({} as typeof userData),
-    isLoading: isValidating || !userData,
+    isLoading: isValidating && !userData,
     error,
   };
 };

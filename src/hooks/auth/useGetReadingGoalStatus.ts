@@ -13,7 +13,7 @@ const useGetReadingGoalStatus = () => {
 
   return {
     readingGoalStatus,
-    isLoading: isValidating || !readingGoalStatus,
+    isLoading: isValidating && !readingGoalStatus,
     error,
   };
 };
