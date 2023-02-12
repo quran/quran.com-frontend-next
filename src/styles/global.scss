@@ -46,6 +46,36 @@ body {
     font-family: "DroidArabicNaskh", "Noto Nastaliq Arabic", "NotoNastaliq",
       "ProximaVara", Helvetica, Arial;
   }
+  // Scrollbar styles
+  ::-webkit-scrollbar {
+    width: 0.5rem; /* width of the entire scrollbar */
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent; /* color of the tracking area */
+  }
+  ::-webkit-scrollbar-thumb {
+    background-color: #73737380; /* color of the scroll thumb */
+    border-radius: 20px; /* roundness of the scroll thumb */
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: #52525280;    /* color of the scroll thumb */
+    border-radius: 20px;       /* roundness of the scroll thumb */
+  }
+  *::-webkit-scrollbar {
+    width: 0.5rem; 
+  }
+  *::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  *::-webkit-scrollbar-thumb {
+    background-color: #73737380; 
+    border-radius: 20px; 
+  }
+  *::-webkit-scrollbar-thumb:hover {
+    background-color: #52525280; 
+    border-radius: 20px;
+  }
+  
 }
 
 // reference: https://github.com/necolas/normalize.css/blob/fc091cce1534909334c1911709a39c22d406977b/normalize.css#L165
