@@ -53,6 +53,5 @@ export const getBasePath = (): string =>
  * @param {string} path
  * @returns  {string}
  */
-export const getAuthApiPath = (path: string): string =>
-  `${process.env.NEXT_PUBLIC_AUTH_BASE_URL}/${path}`;
+export const getAuthApiPath = (path: string): string => `https://staging2.auth.quran.com/${path}`;
 // `${process.env.NEXT_PUBLIC_AUTH_BASE_URL}/${path}`;
