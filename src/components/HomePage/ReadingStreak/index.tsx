@@ -49,7 +49,7 @@ const ReadingStreak = () => {
     const { progress } = readingGoalProgress.data;
     if (!progress) return null;
 
-    if (readingGoalProgress.data.progress.percent !== 100) {
+    if (progress.percent < 100) {
       return (
         <div className={styles.goalContainer}>
           <Trans
