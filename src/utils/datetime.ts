@@ -76,3 +76,21 @@ export const formatDateRelatively = (date: Date, locale: string, now: Date = new
 
   return relative.format(days, 'day');
 };
+
+// Intl.DateTimeFormat is performance heavy so we are caching the formatter.
+let dateTimeFormatter: Intl.DateTimeFormat = null;
+let timezone: string = null;
+
+/**
+ * Returns the current timezone.
+ *
+ * @example `Europe/London`
+ * @returns {string}
+ */
+export const getTimezone = (): string => {
+  if (timezone) return timezone;
+  if (!dateTimeFormatter) dateTimeFormatter = new Intl.DateTimeFormat();
+
+  timezone = dateTimeFormatter.resolvedOptions().timeZone;
+  return timezone;
+};

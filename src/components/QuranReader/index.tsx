@@ -7,7 +7,7 @@ import { shallowEqual, useSelector } from 'react-redux';
 
 import ContextMenu from './ContextMenu';
 import DebuggingObserverWindow from './DebuggingObserverWindow';
-import useSyncReadingDay from './hooks/useSyncReadingDay';
+import useSyncReadingProgress from './hooks/useSyncReadingProgress';
 import Notes from './Notes/Notes';
 import styles from './QuranReader.module.scss';
 import QuranReaderView from './QuranReaderView';
@@ -39,7 +39,7 @@ const QuranReader = ({
   const readingPreference = useSelector(selectReadingPreference) as ReadingPreference;
   const isReadingPreference = readingPreference === ReadingPreference.Reading;
 
-  useSyncReadingDay({
+  useSyncReadingProgress({
     isReadingPreference,
   });
 

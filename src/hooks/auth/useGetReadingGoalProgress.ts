@@ -3,7 +3,7 @@ import useSWR from 'swr';
 import { getReadingGoalProgress } from '@/utils/auth/api';
 import { makeReadingGoalProgressUrl } from '@/utils/auth/apiPaths';
 import { isLoggedIn } from '@/utils/auth/login';
-import { getTimezone } from '@/utils/time';
+import { getTimezone } from '@/utils/datetime';
 
 const useGetReadingGoalProgress = () => {
   const {

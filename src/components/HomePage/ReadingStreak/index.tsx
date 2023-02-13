@@ -14,8 +14,8 @@ import Skeleton from '@/dls/Skeleton/Skeleton';
 import useCurrentUser from '@/hooks/auth/useCurrentUser';
 import useGetReadingGoalProgress from '@/hooks/auth/useGetReadingGoalProgress';
 import { ReadingGoalType } from '@/types/auth/ReadingGoal';
+import { secondsFormatter } from '@/utils/datetime';
 import { toLocalizedNumber } from '@/utils/locale';
-import { formatSecondsToHumanReadable } from '@/utils/time';
 
 const ReadingStreak = () => {
   const { user, isLoading, error } = useCurrentUser();
@@ -42,7 +42,7 @@ const ReadingStreak = () => {
       return `${progress.amountLeft.toFixed(1)} ${t('common:pages')}`;
     }
 
-    return formatSecondsToHumanReadable(progress.amountLeft);
+    return secondsFormatter(progress.amountLeft, lang);
   };
 
   const getGoalStatus = () => {

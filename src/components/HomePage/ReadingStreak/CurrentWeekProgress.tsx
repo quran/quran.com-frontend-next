@@ -13,13 +13,13 @@ interface Props {
 }
 
 const getDaysOfWeek = (t: Translate) => [
-  t('saturday'),
-  t('sunday'),
-  t('monday'),
-  t('tuesday'),
-  t('wednesday'),
-  t('thursday'),
-  t('friday'),
+  t('week.saturday'),
+  t('week.sunday'),
+  t('week.monday'),
+  t('week.tuesday'),
+  t('week.wednesday'),
+  t('week.thursday'),
+  t('week.friday'),
 ];
 
 const CurrentWeekProgress: React.FC<Props> = ({ isTodaysGoalDone }) => {

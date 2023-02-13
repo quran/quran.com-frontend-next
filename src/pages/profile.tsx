@@ -35,7 +35,9 @@ interface Props {
 const nameSample = 'Mohammad Ali';
 const emailSample = 'mohammadali@quran.com';
 const ProfilePage: NextPage<Props> = ({ chaptersData }) => {
+  // we don't want to show the profile page if the user is not logged in
   useRequireAuth();
+
   const dispatch = useDispatch();
   const { t, lang } = useTranslation();
   const router = useRouter();
