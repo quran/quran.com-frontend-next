@@ -16,7 +16,7 @@ import { isLoggedIn } from '@/utils/auth/login';
 import { getTimezone } from '@/utils/datetime';
 import mergeVerseKeys from '@/utils/mergeVerseKeys';
 
-const READING_DAY_SYNC_TIME_MS = 10000; // 10 seconds
+const READING_DAY_SYNC_TIME_MS = 30000; // 30 seconds
 
 interface UseSyncReadingProgressProps {
   isReadingPreference: boolean;
