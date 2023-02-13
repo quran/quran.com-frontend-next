@@ -12,7 +12,7 @@ import styles from './ReadingStreak.module.scss';
 import VerseLink from '@/components/Verse/VerseLink';
 import Skeleton from '@/dls/Skeleton/Skeleton';
 import useCurrentUser from '@/hooks/auth/useCurrentUser';
-import useGetReadingGoalStatus from '@/hooks/auth/useGetReadingGoalStatus';
+import useGetReadingGoalProgress from '@/hooks/auth/useGetReadingGoalProgress';
 import { ReadingGoalType } from '@/types/auth/ReadingGoal';
 import { toLocalizedNumber } from '@/utils/locale';
 import { formatSecondsToHumanReadable } from '@/utils/time';
@@ -20,7 +20,7 @@ import { formatSecondsToHumanReadable } from '@/utils/time';
 const ReadingStreak = () => {
   const { user, isLoading } = useCurrentUser();
   const { t, lang } = useTranslation();
-  const { readingGoalStatus } = useGetReadingGoalStatus();
+  const { readingGoalProgress } = useGetReadingGoalProgress();
 
   const localizedStreak = useMemo(() => {
     return toLocalizedNumber(user?.streak || 0, lang);
@@ -33,10 +33,10 @@ const ReadingStreak = () => {
   );
 
   const getAmountLeftMessage = () => {
-    const { progress } = readingGoalStatus.data;
+    const { progress } = readingGoalProgress.data;
     if (!progress) return null;
 
-    const goalType = readingGoalStatus.data.type;
+    const goalType = readingGoalProgress.data.type;
 
     if (goalType === ReadingGoalType.PAGES || goalType === ReadingGoalType.RANGE) {
       return `${progress.amountLeft.toFixed(1)} ${t('common:pages')}`;
@@ -46,10 +46,10 @@ const ReadingStreak = () => {
   };
 
   const getGoalStatus = () => {
-    const { progress } = readingGoalStatus.data;
+    const { progress } = readingGoalProgress.data;
     if (!progress) return null;
 
-    if (readingGoalStatus.data.progress.percent !== 100) {
+    if (readingGoalProgress.data.progress.percent !== 100) {
       return (
         <div className={styles.goalContainer}>
           <Trans
@@ -79,14 +79,14 @@ const ReadingStreak = () => {
           {isLoading ? <Skeleton>{streak}</Skeleton> : streak}
         </div>
         <CurrentWeekProgress
-          isTodaysGoalDone={readingGoalStatus?.data?.progress?.percent === 100}
+          isTodaysGoalDone={readingGoalProgress?.data?.progress?.percent === 100}
         />
       </div>
       <div className={styles.goalContainer}>
-        {!readingGoalStatus?.data ? <ReadingGoalModal /> : getGoalStatus()}
+        {!readingGoalProgress?.data ? <ReadingGoalModal /> : getGoalStatus()}
       </div>
       <div className={styles.goalContainer}>
-        {readingGoalStatus?.data && <DeleteReadingGoalButton />}
+        {readingGoalProgress?.data && <DeleteReadingGoalButton />}
       </div>
     </>
   );

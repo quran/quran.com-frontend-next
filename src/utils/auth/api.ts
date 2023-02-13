@@ -32,7 +32,7 @@ import {
   makeDeleteBookmarkUrl,
   makeReadingDaysUrl,
   makeReadingGoalUrl,
-  makeReadingGoalStatusUrl,
+  makeReadingGoalProgressUrl,
 } from '@/utils/auth/apiPaths';
 import { fetcher } from 'src/api';
 import CompleteAnnouncementRequest from 'types/auth/CompleteAnnouncementRequest';
@@ -144,8 +144,9 @@ export const getBookmarkCollections = async (
 export const getReadingGoal = async (): Promise<{ data?: ReadingGoal }> =>
   privateFetcher(makeReadingGoalUrl());
 
-export const getReadingGoalStatus = async (): Promise<{ data?: ReadingGoalStatus }> =>
-  privateFetcher(makeReadingGoalStatusUrl());
+export const getReadingGoalProgress = async (
+  timezone: string,
+): Promise<{ data?: ReadingGoalStatus }> => privateFetcher(makeReadingGoalProgressUrl(timezone));
 
 export const addReadingGoal = async (
   data: CreateReadingGoalRequest,
