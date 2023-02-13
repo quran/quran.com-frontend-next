@@ -31,9 +31,6 @@ node_modules/
 # Yarn Integrity file
 .yarn-integrity
 
-.yarn
-.yarnrc.yml
-
 # dotenv environment variables file
 .env
 .env.local
