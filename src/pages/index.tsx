@@ -13,7 +13,7 @@ import HomePageHero from '@/components/HomePage/HomePageHero';
 import ReadingStreak from '@/components/HomePage/ReadingStreak';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import BookmarksAndCollectionsSection from '@/components/Verses/BookmarksAndCollectionsSection';
-import RecentReadingSessions from '@/components/Verses/RecentReadingSessions';
+// import RecentReadingSessions from '@/components/Verses/RecentReadingSessions';
 import { getAllChaptersData } from '@/utils/chapter';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl } from '@/utils/navigation';
@@ -47,7 +47,7 @@ const Index: NextPage<IndexProps> = ({
             <HomePageHero />
             <div className={classNames(styles.flowItem, styles.fullWidth)}>
               <ReadingStreak />
-              <RecentReadingSessions />
+              {/* <RecentReadingSessions /> */}
             </div>
             <div className={classNames(styles.flowItem, styles.fullWidth)}>
               <BookmarksAndCollectionsSection />
