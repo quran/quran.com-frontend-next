@@ -1,6 +1,8 @@
 import { useMemo } from 'react';
 
 import classNames from 'classnames';
+import { Translate } from 'next-translate';
+import useTranslation from 'next-translate/useTranslation';
 
 import styles from './ReadingStreak.module.scss';
 
@@ -10,23 +12,36 @@ interface Props {
   isTodaysGoalDone: boolean;
 }
 
+const getDaysOfWeek = (t: Translate) => [
+  t('saturday'),
+  t('sunday'),
+  t('monday'),
+  t('tuesday'),
+  t('wednesday'),
+  t('thursday'),
+  t('friday'),
+];
+
 const CurrentWeekProgress: React.FC<Props> = ({ isTodaysGoalDone }) => {
-  const week = useMemo(() => {
-    const days = ['Sa', 'Su', 'Mo', 'Tu', 'We', 'Th', 'Fr'];
+  const { t } = useTranslation('reading-goal');
+
+  // TODO: check the user's activty on each day
+  const weekDays = useMemo(() => {
+    const days = getDaysOfWeek(t);
     const today = new Date().getDay();
     return days.map((day, index) => ({ name: day, current: index === today + 1 }));
-  }, []);
+  }, [t]);
 
   return (
     <div className={styles.week}>
-      {week.map((day, idx) => (
+      {weekDays.map((day, idx) => (
         <div key={day.name} className={styles.day}>
           {day.name}
           <div className={styles.circleContainer}>
             <div className={classNames(styles.dayCircle, day.current && styles.filled)}>
               {day.current && isTodaysGoalDone && <CheckIcon />}
             </div>
-            {idx !== week.length - 1 && <div className={styles.dayDivider} />}
+            {idx !== weekDays.length - 1 && <div className={styles.dayDivider} />}
           </div>
         </div>
       ))}

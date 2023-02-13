@@ -14,5 +14,14 @@
     "instruction-text": "Please type <strong>{{text}}<\/strong> to confirm",
     "subtitle": "This action cannot be undone. This will permanently delete reading goal and your current progress.",
     "title": "Are you absolutely sure?"
+  },
+  "week": {
+    "saturday": "Sa",
+    "sunday": "Su",
+    "monday": "Mo",
+    "tuesday": "Tu",
+    "wednesday": "We",
+    "thursday": "Th",
+    "friday": "Fr"
   }
 }
