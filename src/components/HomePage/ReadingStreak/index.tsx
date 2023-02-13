@@ -81,7 +81,7 @@ const ReadingStreak = () => {
           {isLoading ? <Skeleton>{streak}</Skeleton> : streak}
         </div>
         <CurrentWeekProgress
-          isTodaysGoalDone={readingGoalProgress?.data?.progress?.percent === 100}
+          isTodaysGoalDone={readingGoalProgress?.data?.progress?.percent >= 100}
         />
       </div>
       <div className={styles.goalContainer}>
