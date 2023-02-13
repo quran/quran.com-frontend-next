@@ -94,3 +94,17 @@ export const getTimezone = (): string => {
   timezone = dateTimeFormatter.resolvedOptions().timeZone;
   return timezone;
 };
+
+/**
+ * Converts a date instance to a string in this format: YYYY-MM-DD
+ *
+ * @param {Date} date
+ * @returns {string}
+ */
+export const dateToDateString = (date: Date): string => {
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+
+  return `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
+};

@@ -6,7 +6,9 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from './ReadingStreak.module.scss';
 
+import useGetAllReadingDays from '@/hooks/auth/useGetAllReadingDays';
 import CheckIcon from '@/icons/check.svg';
+import { dateToDateString } from '@/utils/datetime';
 
 interface Props {
   isTodaysGoalDone: boolean;
@@ -29,8 +31,37 @@ const CurrentWeekProgress: React.FC<Props> = ({ isTodaysGoalDone }) => {
   const weekDays = useMemo(() => {
     const days = getDaysOfWeek(t);
     const today = new Date().getDay();
-    return days.map((day, index) => ({ name: day, current: index === today + 1 }));
+
+    return days.map((day, index) => {
+      const date = new Date();
+      const dayIndex = days.indexOf(day);
+      date.setDate(date.getDate() + dayIndex - today - 1);
+
+      return {
+        name: day,
+        current: index === today + 1,
+        date: dateToDateString(date),
+      };
+    });
   }, [t]);
+
+  const { readingDays } = useGetAllReadingDays(
+    weekDays[0].date,
+    weekDays[weekDays.length - 1].date,
+  );
+
+  const readingDaysSet = useMemo(() => {
+    if (!readingDays?.data) return new Set<string>();
+
+    // we know this is a string because we parse it on the server
+    return new Set(readingDays.data.map((day) => day.date as unknown as string));
+  }, [readingDays]);
+
+  const isDayChecked = (day: typeof weekDays[number]) => {
+    if (day.current && isTodaysGoalDone) return true;
+    if (readingDaysSet.has(day.date)) return true;
+    return false;
+  };
 
   return (
     <div className={styles.week}>
@@ -38,8 +69,13 @@ const CurrentWeekProgress: React.FC<Props> = ({ isTodaysGoalDone }) => {
         <div key={day.name} className={styles.day}>
           {day.name}
           <div className={styles.circleContainer}>
-            <div className={classNames(styles.dayCircle, day.current && styles.filled)}>
-              {day.current && isTodaysGoalDone && <CheckIcon />}
+            <div
+              className={classNames(
+                styles.dayCircle,
+                (day.current || isDayChecked(day)) && styles.filled,
+              )}
+            >
+              {isDayChecked(day) ? <CheckIcon /> : null}
             </div>
             {idx !== weekDays.length - 1 && <div className={styles.dayDivider} />}
           </div>

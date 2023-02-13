@@ -1,10 +1,20 @@
 {
   "reading-goal": "Reading Goal",
-  "streak": "Current Streak",
-  "progress": "You've completed <strong>{{percent}}%<\/strong> of your goal.",
+  "reading-goal-label": "You're on a",
+  "streak": "{{days}} day streak",
+  "continue-reading": "Continue Reading",
+  "todays-goal": "Today's Goal",
+  "remaining": "Remaining for today",
+  "view-progress": "View Progress",
+  "streak-definition": "A streak is a number of consecutive days you have read Quran.",
+  "progress": {
+    "time-goal": "Read {{mins}} of Quran",
+    "pages-goal": "Read {{pages}} pages of Quran",
+    "range-goal": "Read {{from}} to {{to}}",
+    "complete": "Today's goal is complete 🎉"
+  },
   "set-reading-goal": "Set a reading goal.",
   "set-reading-goal-success": "Your reading goal has been set successfully.",
-  "complete-message": "Your reading goal is complete!",
   "delete-account": "Delete Reading Goal",
   "days": "Days",
   "continuious": "Continuious",
