@@ -15,6 +15,7 @@ import RecentReadingSessions from '@/components/Verses/RecentReadingSessions';
 import Button from '@/dls/Button/Button';
 import Skeleton from '@/dls/Skeleton/Skeleton';
 import useCurrentUser from '@/hooks/auth/useCurrentUser';
+import useRequireAuth from '@/hooks/auth/useRequireAuth';
 import { removeLastSyncAt } from '@/redux/slices/Auth/userDataSync';
 import { logoutUser } from '@/utils/auth/api';
 import { DEFAULT_PHOTO_URL } from '@/utils/auth/constants';
@@ -34,6 +35,7 @@ interface Props {
 const nameSample = 'Mohammad Ali';
 const emailSample = 'mohammadali@quran.com';
 const ProfilePage: NextPage<Props> = ({ chaptersData }) => {
+  useRequireAuth();
   const dispatch = useDispatch();
   const { t, lang } = useTranslation();
   const router = useRouter();

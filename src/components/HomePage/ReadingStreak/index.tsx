@@ -18,7 +18,7 @@ import { toLocalizedNumber } from '@/utils/locale';
 import { formatSecondsToHumanReadable } from '@/utils/time';
 
 const ReadingStreak = () => {
-  const { user, isLoading } = useCurrentUser();
+  const { user, isLoading, error } = useCurrentUser();
   const { t, lang } = useTranslation();
   const { readingGoalProgress } = useGetReadingGoalProgress();
 
@@ -70,6 +70,8 @@ const ReadingStreak = () => {
 
     return <div className={styles.goalContainer}>{t('reading-goal:complete-message')}</div>;
   };
+
+  if (error || (!isLoading && !user?.id)) return null;
 
   return (
     <>
