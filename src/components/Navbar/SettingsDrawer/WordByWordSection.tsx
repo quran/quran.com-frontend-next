@@ -178,13 +178,15 @@ const WordByWordSection = () => {
         />
       </Section.Row>
       <Section.Footer>
-        <Trans
-          components={{
-            link: <Link isNewTab href="https://quranwbw.com/" variant={LinkVariant.Blend} />,
-          }}
-          i18nKey="common:wbw-lang-summary"
-          values={{ source: 'quranwbw' }}
-        />
+        <p className={styles.transSummary}>
+          <Trans
+            components={{
+              link: <Link isNewTab href="https://quranwbw.com/" variant={LinkVariant.Blend} />,
+            }}
+            i18nKey="common:wbw-lang-summary"
+            values={{ source: 'quranwbw' }}
+          />
+        </p>
       </Section.Footer>
       <Section.Label>
         <p className={styles.label}>{t('display')}</p>

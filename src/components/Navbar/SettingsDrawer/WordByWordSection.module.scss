@@ -1,3 +1,5 @@
+@use "src/styles/breakpoints";
+
 .checkboxContainer {
   & > div {
     margin-inline-start: var(--spacing-xxsmall);
@@ -16,4 +18,11 @@
 .label {
   margin-block-start: var(--spacing-xsmall);
   margin-block-end: var(--spacing-xxsmall);
+}
+
+.transSummary {
+  @include breakpoints.tablet {
+    width: 58%;
+    text-align: justify;
+  }
 }
