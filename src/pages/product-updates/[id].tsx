@@ -5,23 +5,21 @@ import { useRouter } from 'next/router';
 import styles from './changelog.module.scss';
 
 import NextSeoWrapper from '@/components/NextSeoWrapper';
-import LocalizationMessage from '@/components/Notion/LocalizationMessage';
-import NotionPage from '@/components/Notion/Page';
 import PageContainer from '@/components/PageContainer';
+import LocalizationMessage from '@/components/Sanity/LocalizationMessage';
+import SanityPage from '@/components/Sanity/Page';
 import Spinner from '@/dls/Spinner/Spinner';
+import { executeGroqQuery } from '@/lib/sanity';
 import { getCanonicalUrl, getProductUpdatesUrl } from '@/utils/navigation';
-import { getPageTitle, getRevalidationTime } from '@/utils/notion';
 import { REVALIDATION_PERIOD_ON_ERROR_SECONDS } from '@/utils/staticPageGeneration';
-import { retrieveBlockChildren, retrieveDatabase, retrievePage } from 'src/lib/notion';
 import Error from 'src/pages/_error';
 
 interface Props {
   hasError?: boolean;
   page?: any[];
-  blocks?: any[];
 }
 
-const Page: NextPage<Props> = ({ hasError, page, blocks }) => {
+const ProductUpdatePage: NextPage<Props> = ({ hasError, page }) => {
   const { lang } = useTranslation();
   const router = useRouter();
   if (router.isFallback) {
@@ -34,17 +32,17 @@ const Page: NextPage<Props> = ({ hasError, page, blocks }) => {
   if (hasError) {
     return <Error statusCode={500} />;
   }
-  const pageTitle = getPageTitle(page);
-  // @ts-ignore
-  const { id } = page;
   return (
     <>
-      <NextSeoWrapper title={pageTitle} url={getCanonicalUrl(lang, getProductUpdatesUrl(id))} />
+      <NextSeoWrapper
+        title={page.title}
+        url={getCanonicalUrl(lang, getProductUpdatesUrl(page.slug.current))}
+      />
       <PageContainer>
         <div className={styles.container}>
           <div className={styles.backIconContainer} />
           <LocalizationMessage />
-          <NotionPage page={page} blocks={blocks} isPageLayout />
+          <SanityPage page={page} isIndividualPage />
         </div>
       </PageContainer>
     </>
@@ -52,16 +50,23 @@ const Page: NextPage<Props> = ({ hasError, page, blocks }) => {
 };
 
 export const getStaticProps = async (context) => {
-  const { id } = context.params;
+  const { id = '' } = context.params;
   try {
-    const response = await Promise.all([retrievePage(id), retrieveBlockChildren(id)]);
-    const blocks = response[1];
+    const page = await executeGroqQuery(
+      '*[_type == "productUpdate" && slug.current == $slug][0]',
+      {
+        slug: id,
+      },
+      true,
+    );
+    if (!page) {
+      throw new Error('invalid slug');
+    }
     return {
       props: {
-        page: response[0],
-        blocks,
+        page,
       },
-      revalidate: getRevalidationTime([blocks]),
+      revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS,
     };
   } catch (error) {
     return {
@@ -74,11 +79,11 @@ export const getStaticProps = async (context) => {
 };
 
 export const getStaticPaths = async () => {
-  const pages = await retrieveDatabase(process.env.NOTION_DATABASE_ID);
+  const pages = await executeGroqQuery('*[_type == "productUpdate"]{ slug}');
   return {
-    paths: pages.map((page) => ({ params: { id: page.id } })),
+    paths: pages.map((page) => ({ params: { id: page.slug.current } })),
     fallback: true,
   };
 };
 
-export default Page;
+export default ProductUpdatePage;

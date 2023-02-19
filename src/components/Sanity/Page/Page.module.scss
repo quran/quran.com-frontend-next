@@ -23,6 +23,9 @@ $blocks-container-max-width: calc(25 * var(--spacing-mega));
 
 .title {
   font-size: calc(1.15 * var(--font-size-jumbo));
+  @include breakpoints.smallerThanTablet {
+    font-size: calc(1.15 * var(--font-size-normal));
+  }
   font-weight: var(--font-weight-bold);
 }
 
@@ -70,4 +73,16 @@ $blocks-container-max-width: calc(25 * var(--spacing-mega));
     width: var(--spacing-medium);
     margin-inline-end: var(--spacing-xxsmall);
   }
+}
+
+.image {
+  max-width: 100%;
+  border-radius: var(--border-radius-rounded);
+  margin: var(--spacing-large) 0;
+}
+
+.imageContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
