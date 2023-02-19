@@ -35,7 +35,9 @@ const ProductUpdatePage: NextPage<Props> = ({ hasError, page }) => {
   return (
     <>
       <NextSeoWrapper
+        // @ts-ignore
         title={page.title}
+        // @ts-ignore
         url={getCanonicalUrl(lang, getProductUpdatesUrl(page.slug.current))}
       />
       <PageContainer>
@@ -60,6 +62,7 @@ export const getStaticProps = async (context) => {
       true,
     );
     if (!page) {
+      // @ts-ignore
       throw new Error('invalid slug');
     }
     return {
