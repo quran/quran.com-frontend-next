@@ -130,6 +130,18 @@ const VerseText = ({
       (word, index) => index > secondaryHighlightedIndexStart && !isSecondaryHighlighted(word),
     );
 
+    const alignClassname = {
+      [styles.verseTextCenterAlign]: isReadingMode && centerAlignPage,
+      [styles.verseTextSpaceBetween]: isReadingMode && !centerAlignPage,
+    };
+    const wrapperClassname = classNames(styles.highlighterWrapper, alignClassname, {
+      [styles.centerHightlight]: isReadingMode && centerAlignPage,
+    });
+
+    const calculateFlex = (before: Word[]) => {
+      return `${Math.max(before.length - 1, 1)} 1 content`;
+    };
+
     // there is no end because it's the last word in the line and the next line is still the same verse
     if (secondaryHighlightedIndexEnd === -1) {
       const wordsBetweenSecondaryHighlighted = words.slice(
@@ -137,14 +149,16 @@ const VerseText = ({
       );
 
       return (
-        <div className={styles.highlighterWrapper}>
-          {wordsBeforeSecondaryHighlighted.length > 0 && (
-            <div className={classNames(styles.highlighterItem, styles.hidden)}>
-              {wordsBeforeSecondaryHighlighted?.map(renderWord)}
-            </div>
-          )}
+        <div className={wrapperClassname}>
+          {wordsBeforeSecondaryHighlighted.length > 0
+            ? wordsBeforeSecondaryHighlighted.map(renderWord)
+            : null}
+
           <div
-            className={classNames(styles.highlighted, styles.highlighterItem, styles.hideChildren)}
+            className={classNames(styles.highlighted, styles.highlighterItem, alignClassname)}
+            style={{
+              flex: calculateFlex(wordsBeforeSecondaryHighlighted),
+            }}
           >
             {wordsBetweenSecondaryHighlighted?.map(renderWord)}
           </div>
@@ -164,29 +178,33 @@ const VerseText = ({
     // console.log('wordsAfterSecondaryHighlighted', wordsAfterSecondaryHighlighted);
 
     return (
-      <div className={styles.highlighterWrapper}>
-        <div className={styles.highlighterItem}>
-          {wordsBeforeSecondaryHighlighted.length > 0 && (
-            <div className={classNames(styles.highlighterItem, styles.hidden)}>
-              {wordsBeforeSecondaryHighlighted.map(renderWord)}
-            </div>
-          )}
+      <div className={wrapperClassname}>
+        {wordsBeforeSecondaryHighlighted.length > 0
+          ? wordsBeforeSecondaryHighlighted.map(renderWord)
+          : null}
 
-          <div
-            className={classNames(styles.highlighterItem, styles.highlighted, styles.hideChildren)}
-          >
-            {wordsBetweenSecondaryHighlighted.map(renderWord)}
-          </div>
-
-          {wordsAfterSecondaryHighlighted.length > 0 && (
-            <div className={classNames(styles.highlighterItem, styles.hidden)}>
-              {wordsAfterSecondaryHighlighted.map(renderWord)}
-            </div>
-          )}
+        <div
+          className={classNames(styles.highlighterItem, styles.highlighted, alignClassname)}
+          style={{
+            flex: calculateFlex(wordsBeforeSecondaryHighlighted),
+          }}
+        >
+          {wordsBetweenSecondaryHighlighted.map(renderWord)}
         </div>
+
+        {wordsAfterSecondaryHighlighted.length > 0
+          ? wordsAfterSecondaryHighlighted.map(renderWord)
+          : null}
       </div>
     );
-  }, [words, wordsSecondaryHighlightStatus, isSecondaryHighlighted, renderWord]);
+  }, [
+    words,
+    wordsSecondaryHighlightStatus,
+    isSecondaryHighlighted,
+    renderWord,
+    isReadingMode,
+    centerAlignPage,
+  ]);
 
   return (
     <>

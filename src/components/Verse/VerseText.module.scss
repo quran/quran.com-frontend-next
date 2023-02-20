@@ -71,21 +71,28 @@
   pointer-events: none;
   z-index: -1;
   display: flex;
-  justify-content: space-between;
   align-items: center;
+
+  & > div {
+    opacity: 0;
+    flex: 1 1 auto;
+  }
+}
+
+.centerHightlight {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: auto;
 }
 
 .highlighterItem {
+  opacity: 1 !important;
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  width: 100%;
-}
 
-.hidden {
-  opacity: 0;
-}
-
-.hideChildren * {
-  opacity: 0;
+  & > div {
+    opacity: 0;
+    flex: unset !important;
+  }
 }
