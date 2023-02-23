@@ -1,23 +1,26 @@
 {
-  "reading-goal": "Reading Goal",
   "reading-goal-label": "You're on a",
   "streak": "{{days}} day streak",
   "continue-reading": "Continue Reading",
+  "view-progress": "View Progress",
+  "reading-goal": "Reading Goal",
   "todays-goal": "Today's Goal",
   "remaining": "Remaining for today",
-  "view-progress": "View Progress",
   "streak-definition": "A streak is a number of consecutive days you have read Quran.",
   "progress": {
-    "time-goal": "Read {{mins}} of Quran",
-    "pages-goal": "Read {{pages}} pages of Quran",
-    "range-goal": "Read {{from}} to {{to}}",
+    "time-goal": "read {{time}} of Quran",
+    "pages-goal": "read {{pages}} pages of Quran",
+    "range-goal": "read {{from}} to {{to}}",
     "complete": "Today's goal is complete 🎉"
   },
   "set-reading-goal": "Set a reading goal.",
   "set-reading-goal-success": "Your reading goal has been set successfully.",
   "delete-account": "Delete Reading Goal",
-  "days": "Days",
   "continuious": "Continuious",
+  "reading-plan": "Reading Plan",
+  "reading-plan-description": "Create a reading plan and Quran.com will automatically track your progress and help you reach your goal.",
+  "create-plan": "Create plan",
+  "days": "Days",
   "delete-confirmation": {
     "action-text": "I understand the consequence, delete my reading goal",
     "confirmation-text": "delete my reading goal",
@@ -33,5 +36,15 @@
     "wednesday": "We",
     "thursday": "Th",
     "friday": "Fr"
+  },
+  "create-goal-modal": {
+    "title": "What is your goal?",
+    "examples": {
+      "time": "Read 10 minutes a day",
+      "khatm": "Read the Quran in 30 days",
+      "juz": "Read 1 Juz a day",
+      "surah": "Read surah Al-Mulk every day",
+      "custom": "Custom"
+    }
   }
 }

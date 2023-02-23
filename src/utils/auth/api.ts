@@ -89,8 +89,8 @@ const deleteRequest = <T>(url: string, requestData?: RequestData): Promise<T> =>
     }),
   });
 
-export const getUserProfile = async (): Promise<UserProfile> =>
-  privateFetcher(makeUserProfileUrl());
+export const getUserProfile = async (timezone?: string): Promise<UserProfile> =>
+  privateFetcher(makeUserProfileUrl(timezone));
 
 export const refreshToken = async (): Promise<RefreshToken> =>
   privateFetcher(makeRefreshTokenUrl());

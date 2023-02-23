@@ -43,3 +43,21 @@
     }
   }
 }
+
+.exampleButton {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-block: calc(1.5 * var(--spacing-large));
+
+  & svg {
+    fill: var(--color-background-inverse);
+    width: var(--spacing-medium);
+    height: var(--spacing-medium);
+  }
+}
+
+.exampleButton + .exampleButton {
+  margin-block-start: var(--spacing-small);
+}
