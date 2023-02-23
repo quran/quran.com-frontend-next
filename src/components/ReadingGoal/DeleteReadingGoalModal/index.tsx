@@ -3,7 +3,7 @@ import { useState } from 'react';
 import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
 
-import styles from './DeleteReadingGoalButton.module.scss';
+import styles from './DeleteReadingGoalModal.module.scss';
 
 import Button, { ButtonType, ButtonVariant } from '@/dls/Button/Button';
 import Input from '@/dls/Forms/Input';
@@ -15,7 +15,7 @@ type DeleteReadingGoalButtonProps = {
   isDisabled?: boolean;
 };
 
-const DeleteReadingGoalButton = ({ isDisabled }: DeleteReadingGoalButtonProps) => {
+const DeleteReadingGoalModal = ({ isDisabled }: DeleteReadingGoalButtonProps) => {
   const { t } = useTranslation();
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [confirmationText, setConfirmationText] = useState('');
@@ -89,4 +89,4 @@ const DeleteReadingGoalButton = ({ isDisabled }: DeleteReadingGoalButtonProps) =
   );
 };
 
-export default DeleteReadingGoalButton;
+export default DeleteReadingGoalModal;

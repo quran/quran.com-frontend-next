@@ -10,7 +10,8 @@ const makeUrl = (url: string, parameters?: Record<string, unknown>): string => {
   return getAuthApiPath(`${url}${`?${stringify(parameters)}`}`);
 };
 
-export const makeUserProfileUrl = (): string => makeUrl('users/profile');
+export const makeUserProfileUrl = (timezone?: string): string =>
+  makeUrl('users/profile', timezone ? { timezone } : undefined);
 
 export const makeCompleteSignupUrl = (): string => makeUrl('users/completeSignup');
 

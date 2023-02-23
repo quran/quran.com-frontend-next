@@ -1,36 +1,36 @@
-import { useEffect, useState } from 'react';
+// import { useEffect, useState } from 'react';
 
 import useSWR from 'swr';
 
 import { getAllReadingDays } from '@/utils/auth/api';
 import { makeAllReadingDaysUrl } from '@/utils/auth/apiPaths';
 import { isLoggedIn } from '@/utils/auth/login';
-import isClient from '@/utils/isClient';
+// import isClient from '@/utils/isClient';
 
 const useGetAllReadingDays = (from: string, to: string) => {
-  const [shouldFetch, setShouldFetch] = useState(false);
-
-  useEffect(() => {
-    const handleResize = () => {
-      if (isClient) {
-        setShouldFetch(window.innerWidth >= 768);
-      }
-    };
-
-    handleResize();
-    window.addEventListener('resize', handleResize);
-
-    return () => {
-      window.removeEventListener('resize', handleResize);
-    };
-  }, []);
+  // const [shouldFetch, setShouldFetch] = useState(false);
 
   // is screen size is < 768px, we don't want to fetch the data
+  // useEffect(() => {
+  //   const handleResize = () => {
+  //     if (isClient) {
+  //       setShouldFetch(window.innerWidth >= 768);
+  //     }
+  //   };
+
+  //   handleResize();
+  //   window.addEventListener('resize', handleResize);
+
+  //   return () => {
+  //     window.removeEventListener('resize', handleResize);
+  //   };
+  // }, []);
+
   const {
     data: readingDays,
     isValidating,
     error,
-  } = useSWR(isLoggedIn() && shouldFetch ? makeAllReadingDaysUrl(from, to) : null, () =>
+  } = useSWR(isLoggedIn() ? makeAllReadingDaysUrl(from, to) : null, () =>
     getAllReadingDays(from, to),
   );
 

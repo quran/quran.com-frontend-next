@@ -1,0 +1,35 @@
+import useTranslation from 'next-translate/useTranslation';
+
+import MoonIllustrationSVG from '../../../../public/images/moon-illustration.svg';
+
+import styles from './ReadingStreak.module.scss';
+
+import CreateReadingGoalModal from '@/components/ReadingGoal/CreateReadingGoalModal';
+
+// import Button from '@/dls/Button/Button';
+
+const LoggedOutReadingStreak = () => {
+  const { t } = useTranslation('reading-goal');
+
+  return (
+    <div className={styles.wrapper}>
+      <div className={styles.illustrationContainer}>
+        <MoonIllustrationSVG />
+      </div>
+
+      <div className={styles.container}>
+        <div>
+          <p className={styles.streakTitle}>{t('reading-plan')}</p>
+        </div>
+      </div>
+      <div className={styles.goalContainer}>{t('reading-plan-description')}</div>
+
+      <div className={styles.actionsContainer}>
+        {/* <Button>{t('create-plan')}</Button> */}
+        <CreateReadingGoalModal />
+      </div>
+    </div>
+  );
+};
+
+export default LoggedOutReadingStreak;

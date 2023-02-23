@@ -1,10 +1,14 @@
+@use "src/styles/theme";
 @use "src/styles/breakpoints";
 
 .wrapper {
   background-color: var(--color-success-faded);
   padding: var(--spacing-mega);
-  border-radius: var(--border-radius-rounded);
   position: relative;
+
+  @include breakpoints.tablet {
+    border-radius: var(--border-radius-rounded);
+  }
 }
 
 .container {
@@ -19,7 +23,7 @@
   }
 }
 
-.streakLabel {
+.streakSubtitle {
   font-size: var(--font-size-small);
   text-transform: uppercase;
   color: var(--color-text-default);
@@ -34,9 +38,12 @@
   align-items: center;
 }
 
+.streakTitleWarning {
+  color: var(--color-warning-medium);
+}
+
 .week {
   display: none;
-  // justify-content: space-around;
   align-items: center;
 
   @include breakpoints.tablet {
@@ -78,6 +85,10 @@
 
 .filled {
   background-color: var(--color-success-medium);
+}
+
+.stroked {
+  border-style: dashed;
 }
 
 .goalContainer {
