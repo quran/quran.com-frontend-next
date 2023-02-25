@@ -32,7 +32,7 @@ const ReadingStreak = () => {
   }, [user, lang]);
 
   const hasUserReadToday = useMemo(() => {
-    return weekData.readingDaysMap[weekData.weekDays.find((d) => d.current).date]?.hasRead;
+    return weekData.readingDaysMap[weekData.weekDays.find((d) => d.current)?.date]?.hasRead;
   }, [weekData]);
 
   const streak = (
