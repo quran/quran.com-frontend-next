@@ -75,7 +75,7 @@
         "title": "Audio",
         "experience": "Experience",
         "exp-tip": "<span>Change the content displayed under<\/span><br><\/br> <boldSpan>Settings<\/boldSpan> > <boldSpan>Word By Word<\/boldSpan>",
-        "exp-tip-no-select": "<span>Select the Translation and/or Transliteration<\/span><br><\/br><span>option under <\/span><boldSpan>Settings<\/boldSpan> > <boldSpan>Word By Word<\/boldSpan><span>, to<\/span><br><\/br> <span>enable this feature.<\/span>",
+        "exp-tip-no-select": "<span>Tick the tooltip display option and select the <br><\/br> Translation and/or Transliteration option<\/span><br><\/br><span> under <\/span><boldSpan>Settings<\/boldSpan> > <boldSpan>Word By Word<\/boldSpan><span>, to<\/span><br><\/br> <span>enable this feature.<\/span>",
         "displaying": "Displaying"
     },
     "recitation": "Recitation",
