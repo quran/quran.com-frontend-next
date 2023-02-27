@@ -7,6 +7,7 @@ import useTranslation from 'next-translate/useTranslation';
 import { useDispatch, useSelector } from 'react-redux';
 
 import styles from './AudioSection.module.scss';
+import AudioSectionUpdateNotice from './AudioSectionUpdateNotice';
 import Section from './Section';
 
 import DataFetcher from '@/components/DataFetcher';
@@ -20,6 +21,10 @@ import {
   setShowTooltipWhenPlayingAudio,
   selectAudioPlayerState,
 } from '@/redux/slices/AudioPlayer/state';
+import {
+  selectAudioSectionUpdateNotice,
+  setIsVisible,
+} from '@/redux/slices/audioSectionUpdateNotice';
 import { setSettingsView, SettingsView } from '@/redux/slices/navbar';
 import {
   selectReadingPreferences,
@@ -41,6 +46,7 @@ const AudioSection = () => {
   const dispatch = useDispatch();
   const audioService = useContext(AudioPlayerMachineContext);
   const readingPreferences = useSelector(selectReadingPreferences);
+  const { isVisible: shouldNoticeBeVisible } = useSelector(selectAudioSectionUpdateNotice);
   const { wordClickFunctionality } = readingPreferences;
   const audioPlayerState = useSelector(selectAudioPlayerState);
   const { showTooltipWhenPlayingAudio, enableAutoScrolling } = audioPlayerState;
@@ -134,8 +140,13 @@ const AudioSection = () => {
     onAudioSettingsChange('showTooltipWhenPlayingAudio', newValue, setShowTooltipWhenPlayingAudio);
   };
 
+  const onNoticeCloseClicked = () => {
+    dispatch({ type: setIsVisible.type, payload: false });
+  };
+
   return (
     <div className={styles.container}>
+      {shouldNoticeBeVisible && <AudioSectionUpdateNotice onCloseClicked={onNoticeCloseClicked} />}
       <Section>
         <Section.Title isLoading={isLoading}>{t('audio.title')}</Section.Title>
         <Section.Row>

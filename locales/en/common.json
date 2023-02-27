@@ -70,7 +70,8 @@
         },
         "repeat-moved": "The repeat settings have moved to the audio player. Click on the <0><\/0> icon to access them",
         "select-reciter": "Select Reciter",
-        "title": "Audio"
+        "title": "Audio",
+        "update-notice": "<p>📣 The 'Audio' setting is moving from Settings to the Audio Player menu on {{month}} {{day}}.<\/p><learnMore>Learn more about these changes on the Product Updates page<\/learnMore>"
     },
     "ayah": "Ayah",
     "ayahs": "Ayahs",
