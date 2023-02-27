@@ -1,3 +1,4 @@
+/* eslint-disable i18next/no-literal-string */
 import React from 'react';
 
 import Trans from 'next-translate/Trans';
@@ -7,21 +8,32 @@ import styles from './AudioSectionUpdateNotice.module.scss';
 
 import Button, { ButtonVariant } from '@/dls/Button/Button';
 import Link, { LinkVariant } from '@/dls/Link/Link';
+import { logButtonClick } from '@/utils/eventLogger';
 import { toLocalizedMonthName, toLocalizedNumber } from '@/utils/locale';
 
 type Props = {
   onCloseClicked: () => void;
 };
 
-// TODO: UPDATE THIS on PROD
-const PRODUCT_UPDATE_PAGE_ID = 'b3640190-3819-40c6-91b2-096b7fd07147';
+const PRODUCT_UPDATE_PAGE_ID = 'simplifying-word-by-word-and-audio-settings';
 
 const AudioSectionUpdateNotice: React.FC<Props> = ({ onCloseClicked }) => {
   const { lang } = useTranslation();
+  const onProductPageLinkClicked = () => {
+    logButtonClick('wbw_consolidate_product_page');
+  };
+
+  const onCloseButtonClicked = () => {
+    logButtonClick('wbw_consolidate_notice_close');
+    onCloseClicked();
+  };
   return (
     <div className={styles.container}>
-      {/* eslint-disable-next-line i18next/no-literal-string */}
-      <Button variant={ButtonVariant.Ghost} onClick={onCloseClicked} className={styles.button}>
+      <Button
+        variant={ButtonVariant.Ghost}
+        onClick={onCloseButtonClicked}
+        className={styles.button}
+      >
         X
       </Button>
       <div>
@@ -30,6 +42,7 @@ const AudioSectionUpdateNotice: React.FC<Props> = ({ onCloseClicked }) => {
             p: <p className={styles.learnMore} />,
             learnMore: (
               <Link
+                onClick={onProductPageLinkClicked}
                 isNewTab
                 variant={LinkVariant.Blend}
                 href={`/product-updates/${PRODUCT_UPDATE_PAGE_ID}`}
