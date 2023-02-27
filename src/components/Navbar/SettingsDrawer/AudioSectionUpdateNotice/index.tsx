@@ -37,8 +37,8 @@ const AudioSectionUpdateNotice: React.FC<Props> = ({ onCloseClicked }) => {
             ),
           }}
           values={{
-            month: toLocalizedMonthName(2, lang),
-            day: toLocalizedNumber(30, lang),
+            month: toLocalizedMonthName(3, lang),
+            day: toLocalizedNumber(14, lang),
           }}
           i18nKey="common:audio.update-notice"
         />
