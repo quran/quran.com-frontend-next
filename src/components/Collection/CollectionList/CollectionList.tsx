@@ -122,7 +122,7 @@ const CollectionList = () => {
             return (
               <div key={collection.id}>
                 <div className={styles.itemContainer}>
-                  <Link href={`/collections/${collection.id}`}>
+                  <Link href={`/collections/${collection.url}`}>
                     <div>
                       <div className={styles.itemTitle}>{collection.name}</div>
                       <div className={styles.itemInfo}>
