@@ -1,5 +1,5 @@
 /* eslint-disable max-lines */
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
@@ -53,6 +53,7 @@ const CollectionDetail = ({
   onItemDeleted,
   isOwner,
 }: CollectionDetailProps) => {
+  const [isOpen, setIsOpen] = useState(false);
   const { t, lang } = useTranslation();
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const { quranFont, mushafLines } = quranReaderStyles;
@@ -119,6 +120,10 @@ const CollectionDetail = ({
     return `${chapterData.transliteratedName} ${toLocalizedVerseKey(verseKey, lang)}`;
   };
 
+  const onToggleClicked = () => {
+    setIsOpen((currentIsOpen) => !currentIsOpen);
+  };
+
   return (
     <>
       <div className={styles.container}>
@@ -126,6 +131,9 @@ const CollectionDetail = ({
           <div className={styles.title}>{title}</div>
           {sorter}
         </div>
+        <Button variant={ButtonVariant.Ghost} onClick={onToggleClicked}>
+          {isOpen ? t('collection:collapse-all') : t('collection:expand-all')}
+        </Button>
         <div className={styles.collectionItemsContainer}>
           {isCollectionEmpty ? (
             <div className={styles.emptyCollectionContainer}>
@@ -139,6 +147,7 @@ const CollectionDetail = ({
               const bookmarkName = getBookmarkName(bookmark);
               return (
                 <Collapsible
+                  shouldOpen={isOpen}
                   title={bookmarkName}
                   key={bookmark.id}
                   prefix={<ChevronDownIcon />}
@@ -162,8 +171,8 @@ const CollectionDetail = ({
                     </PopoverMenu>
                   }
                 >
-                  {({ isOpen }) => {
-                    if (!isOpen) return null;
+                  {({ isOpen: isOpenRenderProp }) => {
+                    if (!isOpenRenderProp) return null;
                     const chapterId = bookmark.key;
                     const params = {
                       words: true,

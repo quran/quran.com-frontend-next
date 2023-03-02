@@ -18,5 +18,7 @@
     "load-more": "Load More",
     "recently-added": "Recently added",
     "recently-updated": "Recently updated",
-    "verse-key": "Chapter and Verse Number"
+    "verse-key": "Chapter and Verse Number",
+    "expand-all": "Expand all",
+    "collapse-all": "Collapse all"
 }

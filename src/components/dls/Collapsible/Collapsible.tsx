@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import * as CollapsiblePrimitive from '@radix-ui/react-collapsible';
 import classNames from 'classnames';
@@ -17,6 +17,7 @@ type Props = {
   suffix?: React.ReactNode;
   children: ({ isOpen }: ChildrenRenderProps) => React.ReactNode;
   isDefaultOpen?: boolean;
+  shouldOpen?: boolean;
   shouldRotatePrefixOnToggle?: boolean;
 };
 
@@ -27,8 +28,13 @@ const Collapsible = ({
   suffix,
   children,
   shouldRotatePrefixOnToggle,
+  shouldOpen,
 }: Props) => {
   const [isOpen, setIsOpen] = useState(isDefaultOpen);
+
+  useEffect(() => {
+    setIsOpen(shouldOpen);
+  }, [shouldOpen]);
 
   const onSuffixClicked = (e) => {
     e.preventDefault();
