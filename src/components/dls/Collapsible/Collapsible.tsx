@@ -12,7 +12,7 @@ type ChildrenRenderProps = {
 };
 
 type Props = {
-  title: string;
+  title?: React.ReactNode;
   prefix?: React.ReactNode;
   suffix?: React.ReactNode;
   children: ({ isOpen }: ChildrenRenderProps) => React.ReactNode;

@@ -13,8 +13,15 @@ import ConfirmationModal from '@/dls/ConfirmationModal/ConfirmationModal';
 import { useConfirm } from '@/dls/ConfirmationModal/hooks';
 import ChevronDownIcon from '@/icons/chevron-down.svg';
 import OverflowMenuIcon from '@/icons/menu_more_horiz.svg';
+import { getDefaultWordFields, getMushafId } from '@/utils/api';
+import { makeVersesUrl } from '@/utils/apiPaths';
+import { areArraysEqual } from '@/utils/array';
+import { getChapterData } from '@/utils/chapter';
 import { logButtonClick } from '@/utils/eventLogger';
+import { toLocalizedVerseKey } from '@/utils/locale';
 import { getChapterWithStartingVerseUrl } from '@/utils/navigation';
+import { navigateToExternalUrl } from '@/utils/url';
+import { makeVerseKey } from '@/utils/verse';
 import DataFetcher from 'src/components/DataFetcher';
 import Button, { ButtonVariant } from 'src/components/dls/Button/Button';
 import Collapsible from 'src/components/dls/Collapsible/Collapsible';
@@ -24,12 +31,6 @@ import VerseTextPreview from 'src/components/QuranReader/VerseTextPreview';
 import DataContext from 'src/contexts/DataContext';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';
-import { getDefaultWordFields, getMushafId } from 'src/utils/api';
-import { makeVersesUrl } from 'src/utils/apiPaths';
-import { areArraysEqual } from 'src/utils/array';
-import { getChapterData } from 'src/utils/chapter';
-import { toLocalizedVerseKey } from 'src/utils/locale';
-import { makeVerseKey } from 'src/utils/verse';
 import { VersesResponse } from 'types/ApiResponses';
 import Bookmark from 'types/Bookmark';
 import { CollectionDetailSortOption } from 'types/CollectionSortOptions';
@@ -110,6 +111,7 @@ const CollectionDetail = ({
   };
 
   const handleGoToAyah = (bookmark) => () => {
+    alert(1);
     logButtonClick('collection_detail_go_to_ayah_menu');
     onGoToAyahClicked(makeVerseKey(bookmark.key, bookmark.verseNumber));
   };
@@ -148,7 +150,23 @@ const CollectionDetail = ({
               return (
                 <Collapsible
                   shouldOpen={isOpen}
-                  title={bookmarkName}
+                  title={
+                    <div className={styles.linkContainer}>
+                      <Button
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          e.preventDefault();
+                          const verseUrl = getChapterWithStartingVerseUrl(
+                            makeVerseKey(bookmark.key, bookmark.verseNumber),
+                          );
+                          navigateToExternalUrl(verseUrl);
+                        }}
+                        variant={ButtonVariant.Ghost}
+                      >
+                        <p className={styles.bookmarkLink}>{bookmarkName}</p>
+                      </Button>
+                    </div>
+                  }
                   key={bookmark.id}
                   prefix={<ChevronDownIcon />}
                   shouldRotatePrefixOnToggle
