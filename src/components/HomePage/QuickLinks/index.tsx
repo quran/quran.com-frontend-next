@@ -5,6 +5,10 @@ import useTranslation from 'next-translate/useTranslation';
 import QuickLink from './QuickLink';
 import styles from './QuickLinks.module.scss';
 
+import { isLoggedIn } from '@/utils/auth/login';
+
+const isProduction = process.env.NEXT_PUBLIC_VERCEL_ENV === 'production';
+
 const QUICK_LINKS = [
   {
     slug: 'surah-al-mulk',
@@ -26,15 +30,15 @@ const QUICK_LINKS = [
     slug: 'surah-al-waqiah',
     key: 'waqiah',
   },
-  // {
-  //   slug: '55',
-  //   key: 'rahman',
-  // },
-  // {
-  //   slug: '73',
-  //   key: 'muzzammil',
-  // },
 ];
+
+// TODO: this is temporary and needs to be updated.
+if (isLoggedIn() && isProduction) {
+  QUICK_LINKS.push({
+    slug: 'collections/the-authority-and-importance-of-the-sunnah-clem7p7lf15921610rsdk4xzulfj',
+    key: 'sunnah',
+  });
+}
 
 const QuickLinks: React.FC = () => {
   const { t } = useTranslation('quick-links');
