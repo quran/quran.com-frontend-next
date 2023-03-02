@@ -85,6 +85,7 @@ const CollectionDetailContainer = ({
 
   const bookmarks = data.map((response) => response.data.bookmarks).flat();
   const collectionTitle = title || data[0].data.collection.name;
+  const isOwner = data[0]?.data?.isOwner;
 
   const loadMore = () => {
     setSize(size + 1);
@@ -147,6 +148,7 @@ const CollectionDetailContainer = ({
                 onSortByChange={onSortByChange}
                 onUpdated={onUpdated}
                 onItemDeleted={onItemDeleted}
+                isOwner={isOwner}
               />
               {isLoadingMoreData && <Spinner size={SpinnerSize.Large} />}
               {hasNextPage && (

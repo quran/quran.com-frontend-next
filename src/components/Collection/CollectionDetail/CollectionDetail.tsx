@@ -37,6 +37,7 @@ import { CollectionDetailSortOption } from 'types/CollectionSortOptions';
 type CollectionDetailProps = {
   id: string;
   title: string;
+  isOwner: boolean;
   bookmarks: Bookmark[];
   sortBy: string;
   onSortByChange: (sortBy: string) => void;
@@ -50,6 +51,7 @@ const CollectionDetail = ({
   sortBy,
   onSortByChange,
   onItemDeleted,
+  isOwner,
 }: CollectionDetailProps) => {
   const { t, lang } = useTranslation();
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
@@ -149,9 +151,11 @@ const CollectionDetail = ({
                         </Button>
                       }
                     >
-                      <PopoverMenu.Item onClick={handleDeleteMenuClicked(bookmark)}>
-                        {t('collection:delete')}
-                      </PopoverMenu.Item>
+                      {isOwner && (
+                        <PopoverMenu.Item onClick={handleDeleteMenuClicked(bookmark)}>
+                          {t('collection:delete')}
+                        </PopoverMenu.Item>
+                      )}
                       <PopoverMenu.Item onClick={handleGoToAyah(bookmark)}>
                         {t('collection:go-to-ayah')}
                       </PopoverMenu.Item>
