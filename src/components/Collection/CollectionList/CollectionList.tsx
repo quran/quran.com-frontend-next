@@ -16,7 +16,7 @@ import RenameCollectionAction from './RenameCollectionAction';
 
 import ConfirmationModal from '@/dls/ConfirmationModal/ConfirmationModal';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
-import { logButtonClick, logValueChange } from '@/utils/eventLogger';
+import { logButtonClick, logEvent, logValueChange } from '@/utils/eventLogger';
 import { toLocalizedNumber } from '@/utils/locale';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
@@ -58,13 +58,19 @@ const CollectionList = () => {
     mutate();
   };
 
+  const isRenameModalOpen = !!collectionToRename;
+
   const closeModal = () => {
-    logButtonClick('rename_collection_action_close');
+    logButtonClick('rename_collection_action_close', {
+      collectionId: collectionToRename.id,
+    });
     setCollectionToRename(null);
   };
 
   const onSubmit = (renameFormData: any) => {
-    logButtonClick('rename_collection_action_submit');
+    logButtonClick('rename_collection_action_submit', {
+      collectionId: collectionToRename.id,
+    });
     updateCollection(collectionToRename.id, { name: renameFormData.name })
       .then(() => {
         onCollectionUpdated();
@@ -77,7 +83,16 @@ const CollectionList = () => {
       });
   };
 
-  const isRenameModalOpen = !!collectionToRename;
+  const onCollectionMenuOpenChange = (isMenuOpen: boolean, collectionId: string) => {
+    const eventData = {
+      collectionId,
+    };
+    if (isMenuOpen) {
+      logEvent('collection_popover_menu_opened', eventData);
+    } else {
+      logEvent('collection_popover_menu_closed', eventData);
+    }
+  };
 
   return (
     <>
@@ -95,6 +110,7 @@ const CollectionList = () => {
             options={sortOptions}
             selectedOptionId={sortBy}
             onChange={onSortOptionChanged}
+            isSingleCollection={false}
           />
         </div>
         <div className={styles.collectionListContainer}>
@@ -122,7 +138,7 @@ const CollectionList = () => {
             return (
               <div key={collection.id}>
                 <div className={styles.itemContainer}>
-                  <Link href={`/collections/${collection.id}`}>
+                  <Link href={`/collections/${collection.url}`}>
                     <div>
                       <div className={styles.itemTitle}>{collection.name}</div>
                       <div className={styles.itemInfo}>
@@ -149,6 +165,9 @@ const CollectionList = () => {
                           <OverflowMenuIcon />
                         </span>
                       </Button>
+                    }
+                    onOpenChange={(isMenuOpen) =>
+                      onCollectionMenuOpenChange(isMenuOpen, collection.id)
                     }
                     isModal
                     isPortalled

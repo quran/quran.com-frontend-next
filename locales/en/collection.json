@@ -2,6 +2,7 @@
     "all-saved-verses": "All saved verses",
     "alphabetical": "A-Z",
     "back-to-collection-list": "Back to collection list",
+    "collapse-all": "Collapse all",
     "collection-list-empty": "Collection list is empty. You haven't created any collection yet",
     "collections": "Collections",
     "delete": "Delete",
@@ -14,6 +15,7 @@
         "title": "Delete collection"
     },
     "empty": "Collection is empty",
+    "expand-all": "Expand all",
     "go-to-ayah": "Go to ayah",
     "load-more": "Load More",
     "recently-added": "Recently added",

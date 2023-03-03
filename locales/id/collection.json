@@ -2,6 +2,7 @@
     "all-saved-verses": "Semua ayat yang disimpan",
     "alphabetical": "AZ",
     "back-to-collection-list": "Kembali ke daftar koleksi",
+    "collapse-all": "Ciutkan semua",
     "collection-list-empty": "Daftar koleksi kosong. Anda belum membuat koleksi apa pun",
     "collections": "Koleksi",
     "delete": "Menghapus",
@@ -14,6 +15,7 @@
         "title": "Hapus koleksi"
     },
     "empty": "Koleksi kosong",
+    "expand-all": "Melebarkan semua",
     "go-to-ayah": "Pergi ke ayah",
     "load-more": "Muat lebih banyak",
     "recently-added": "Baru-baru ini ditambahkan",

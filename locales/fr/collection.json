@@ -2,6 +2,7 @@
     "all-saved-verses": "Tous les versets enregistrés",
     "alphabetical": "AZ",
     "back-to-collection-list": "Retour à la liste des collections",
+    "collapse-all": "Réduire tout",
     "collection-list-empty": "La liste de collecte est vide. Vous n'avez pas encore créé de collection",
     "collections": "Collections",
     "delete": "Effacer",
@@ -14,6 +15,7 @@
         "title": "Supprimer la collection"
     },
     "empty": "La collection est vide",
+    "expand-all": "Développer tout",
     "go-to-ayah": "Allez à ayah",
     "load-more": "Charger plus",
     "recently-added": "Récemment ajouté",

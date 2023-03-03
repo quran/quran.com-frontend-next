@@ -2,6 +2,7 @@
     "all-saved-verses": "Todos os versos salvos",
     "alphabetical": "AZ",
     "back-to-collection-list": "Voltar à lista de coleções",
+    "collapse-all": "Recolher todos",
     "collection-list-empty": "A lista de coleções está vazia. Você ainda não criou nenhuma coleção",
     "collections": "Coleções",
     "delete": "Excluir",
@@ -14,6 +15,7 @@
         "title": "Excluir coleção"
     },
     "empty": "A coleção está vazia",
+    "expand-all": "Expandir todos",
     "go-to-ayah": "Vá para ayah",
     "load-more": "Carregue mais",
     "recently-added": "Adicionado recentemente",

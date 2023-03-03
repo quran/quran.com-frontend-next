@@ -2,6 +2,7 @@
     "all-saved-verses": "Все сохраненные стихи",
     "alphabetical": "Аризона",
     "back-to-collection-list": "Назад к списку коллекций",
+    "collapse-all": "Свернуть все",
     "collection-list-empty": "Список коллекций пуст. Вы еще не создали ни одной коллекции",
     "collections": "Коллекции",
     "delete": "Удалить",
@@ -14,6 +15,7 @@
         "title": "Удалить коллекцию"
     },
     "empty": "Коллекция пуста",
+    "expand-all": "Расширить все",
     "go-to-ayah": "Иди к айе",
     "load-more": "Загрузи больше",
     "recently-added": "Недавно добавленный",
