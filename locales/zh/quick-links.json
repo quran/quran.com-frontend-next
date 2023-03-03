@@ -1,9 +1,10 @@
 {
-  "ayat-ul-kursi": "Ayatul Kursi",
-  "yaseen": "Surah Yaseen",
-  "mulk": "Surah Al Mulk",
-  "rahman": "Surah Ar-Rahman",
-  "waqiah": "Surah Al Waqi'ah",
-  "kahf": "Surah Al Kahf",
-  "muzzammil": "Surah Al Muzzammil"
+    "ayat-ul-kursi": "Ayatul Kursi",
+    "kahf": "Surah Al Kahf",
+    "mulk": "Surah Al Mulk",
+    "muzzammil": "Surah Al Muzzammil",
+    "rahman": "Surah Ar-Rahman",
+    "sunnah": "经文关于 圣训",
+    "waqiah": "Surah Al Waqi'ah",
+    "yaseen": "Surah Yaseen"
 }

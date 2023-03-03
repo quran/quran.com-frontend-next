@@ -2,6 +2,7 @@
     "all-saved-verses": "جميع الآيات المحفوظة",
     "alphabetical": "AZ",
     "back-to-collection-list": "العودة إلى قائمة المجموعة",
+    "collapse-all": "غلق الكل",
     "collection-list-empty": "قائمة المجموعة فارغة. لم تقم بإنشاء أي مجموعة حتى الآن",
     "collections": "المجموعات",
     "delete": "حذف",
@@ -14,6 +15,7 @@
         "title": "حذف المجموعة"
     },
     "empty": "المجموعة فارغة",
+    "expand-all": "فتح الكل",
     "go-to-ayah": "اذهب إلى الآية",
     "load-more": "تحميل المزيد",
     "recently-added": "أضيف مؤخرا",
