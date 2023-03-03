@@ -12,7 +12,9 @@ const DeleteCollectionAction = ({ collectionId, onDone, collectionName }) => {
   const confirm = useConfirm();
 
   const onMenuItemClicked = async () => {
-    logButtonClick('delete_collection_action_open');
+    logButtonClick('delete_collection_action_open', {
+      collectionId,
+    });
     const isConfirmed = await confirm({
       confirmText: t('collection:delete'),
       cancelText: t('common:cancel'),
@@ -21,7 +23,9 @@ const DeleteCollectionAction = ({ collectionId, onDone, collectionName }) => {
     });
 
     if (isConfirmed) {
-      logButtonClick('collection_delete_confirm');
+      logButtonClick('collection_delete_confirm', {
+        collectionId,
+      });
       deleteCollection(collectionId)
         .then(() => {
           onDone();
@@ -32,7 +36,9 @@ const DeleteCollectionAction = ({ collectionId, onDone, collectionName }) => {
           });
         });
     } else {
-      logButtonClick('collection_delete_confirm_cancel');
+      logButtonClick('collection_delete_confirm_cancel', {
+        collectionId,
+      });
     }
   };
 
