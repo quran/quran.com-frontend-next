@@ -19,6 +19,7 @@ type Props = {
   isDefaultOpen?: boolean;
   shouldOpen?: boolean;
   shouldRotatePrefixOnToggle?: boolean;
+  onOpenChange?: (isOpen: boolean) => void;
 };
 
 const Collapsible = ({
@@ -29,6 +30,7 @@ const Collapsible = ({
   children,
   shouldRotatePrefixOnToggle,
   shouldOpen,
+  onOpenChange,
 }: Props) => {
   const [isOpen, setIsOpen] = useState(isDefaultOpen);
 
@@ -44,7 +46,7 @@ const Collapsible = ({
   const onHeaderClicked = () => setIsOpen((preValue) => !preValue);
 
   return (
-    <CollapsiblePrimitive.Root open={isOpen}>
+    <CollapsiblePrimitive.Root onOpenChange={onOpenChange} open={isOpen}>
       <CollapsiblePrimitive.Trigger asChild>
         <div className={styles.header} onClick={onHeaderClicked}>
           <div className={styles.headerLeft}>

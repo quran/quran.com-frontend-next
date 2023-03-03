@@ -17,7 +17,7 @@ import { getDefaultWordFields, getMushafId } from '@/utils/api';
 import { makeVersesUrl } from '@/utils/apiPaths';
 import { areArraysEqual } from '@/utils/array';
 import { getChapterData } from '@/utils/chapter';
-import { logButtonClick } from '@/utils/eventLogger';
+import { logButtonClick, logEvent } from '@/utils/eventLogger';
 import { toLocalizedVerseKey } from '@/utils/locale';
 import { getChapterWithStartingVerseUrl } from '@/utils/navigation';
 import { navigateToExternalUrl } from '@/utils/url';
@@ -47,6 +47,7 @@ type CollectionDetailProps = {
 };
 
 const CollectionDetail = ({
+  id,
   title,
   bookmarks,
   sortBy,
@@ -77,21 +78,27 @@ const CollectionDetail = ({
 
   const chaptersData = useContext(DataContext);
   const sorter = (
-    <CollectionSorter selectedOptionId={sortBy} onChange={onSortByChange} options={sortOptions} />
+    <CollectionSorter
+      selectedOptionId={sortBy}
+      onChange={onSortByChange}
+      options={sortOptions}
+      isSingleCollection
+      collectionId={id}
+    />
   );
 
   const onGoToAyahClicked = (verseKey: string) => {
     const verseUrl = getChapterWithStartingVerseUrl(verseKey);
-    logButtonClick(
-      // eslint-disable-next-line i18next/no-literal-string
-      `collection_detail_menu_go_to_verse`,
-    );
+    logButtonClick(`collection_detail_menu_go_to_verse`, {
+      verseKey,
+      collectionId: id,
+    });
     router.push(verseUrl);
   };
 
   const isCollectionEmpty = bookmarks.length === 0;
 
-  const handleDeleteMenuClicked = (bookmark) => async () => {
+  const handleDeleteMenuClicked = (bookmark: Bookmark) => async () => {
     logButtonClick('collection_detail_delete_menu');
     const bookmarkName = getBookmarkName(bookmark);
 
@@ -105,14 +112,23 @@ const CollectionDetail = ({
       }),
     });
 
+    const eventData = {
+      verseKey: makeVerseKey(bookmark.key, bookmark.verseNumber),
+      collectionId: id,
+    };
     if (isConfirmed) {
+      logButtonClick('bookmark_delete_confirm', eventData);
       onItemDeleted(bookmark.id);
+    } else {
+      logButtonClick('bookmark_delete_confirm_cancel', eventData);
     }
   };
 
-  const handleGoToAyah = (bookmark) => () => {
-    alert(1);
-    logButtonClick('collection_detail_go_to_ayah_menu');
+  const handleGoToAyah = (bookmark: Bookmark) => () => {
+    logButtonClick('collection_detail_go_to_ayah_menu', {
+      verseKey: makeVerseKey(bookmark.key, bookmark.verseNumber),
+      collectionId: id,
+    });
     onGoToAyahClicked(makeVerseKey(bookmark.key, bookmark.verseNumber));
   };
 
@@ -122,8 +138,45 @@ const CollectionDetail = ({
     return `${chapterData.transliteratedName} ${toLocalizedVerseKey(verseKey, lang)}`;
   };
 
-  const onToggleClicked = () => {
-    setIsOpen((currentIsOpen) => !currentIsOpen);
+  const onToggleAllClicked = () => {
+    setIsOpen((currentIsOpen) => {
+      if (currentIsOpen) {
+        logButtonClick('collection_collapse_all', { collectionId: id });
+      } else {
+        logButtonClick('collection_expand_all', { collectionId: id });
+      }
+      return !currentIsOpen;
+    });
+  };
+
+  const onBackToCollectionsClicked = () => {
+    logButtonClick('back_to_collections_button', {
+      collectionId: id,
+    });
+  };
+
+  const onBookmarkMenuOpenChange = (isMenuOpen: boolean, bookmark: Bookmark) => {
+    const eventData = {
+      verseKey: makeVerseKey(bookmark.key, bookmark.verseNumber),
+      collectionId: id,
+    };
+    if (isMenuOpen) {
+      logEvent('collection_bookmark_popover_menu_opened', eventData);
+    } else {
+      logEvent('collection_bookmark_popover_menu_closed', eventData);
+    }
+  };
+
+  const onCollapseOpenChange = (isCollapseOpen: boolean, verseKey: string) => {
+    const eventData = {
+      verseKey,
+      collectionId: id,
+    };
+    if (isCollapseOpen) {
+      logEvent('collection_bookmark_collapse_opened', eventData);
+    } else {
+      logEvent('collection_bookmark_collapse_closed', eventData);
+    }
   };
 
   return (
@@ -133,7 +186,7 @@ const CollectionDetail = ({
           <div className={styles.title}>{title}</div>
           {sorter}
         </div>
-        <Button variant={ButtonVariant.Ghost} onClick={onToggleClicked}>
+        <Button variant={ButtonVariant.Ghost} onClick={onToggleAllClicked}>
           {isOpen ? t('collection:collapse-all') : t('collection:expand-all')}
         </Button>
         <div className={styles.collectionItemsContainer}>
@@ -141,7 +194,9 @@ const CollectionDetail = ({
             <div className={styles.emptyCollectionContainer}>
               <span>{t('collection:empty')}</span>
               <div className={styles.backToCollectionButtonContainer}>
-                <Button href="/profile">{t('collection:back-to-collection-list')}</Button>
+                <Button onClick={onBackToCollectionsClicked} href="/profile">
+                  {t('collection:back-to-collection-list')}
+                </Button>
               </div>
             </div>
           ) : (
@@ -149,6 +204,12 @@ const CollectionDetail = ({
               const bookmarkName = getBookmarkName(bookmark);
               return (
                 <Collapsible
+                  onOpenChange={(isCollapseOpen) =>
+                    onCollapseOpenChange(
+                      isCollapseOpen,
+                      makeVerseKey(bookmark.key, bookmark.verseNumber),
+                    )
+                  }
                   shouldOpen={isOpen}
                   title={
                     <div className={styles.linkContainer}>
@@ -159,6 +220,10 @@ const CollectionDetail = ({
                           const verseUrl = getChapterWithStartingVerseUrl(
                             makeVerseKey(bookmark.key, bookmark.verseNumber),
                           );
+                          logEvent('collection_bookmark_link_clicked', {
+                            collectionId: id,
+                            verseKey: makeVerseKey(bookmark.key, bookmark.verseNumber),
+                          });
                           navigateToExternalUrl(verseUrl);
                         }}
                         variant={ButtonVariant.Ghost}
@@ -177,6 +242,7 @@ const CollectionDetail = ({
                           <OverflowMenuIcon />
                         </Button>
                       }
+                      onOpenChange={(isMenuOpen) => onBookmarkMenuOpenChange(isMenuOpen, bookmark)}
                     >
                       {isOwner && (
                         <PopoverMenu.Item onClick={handleDeleteMenuClicked(bookmark)}>

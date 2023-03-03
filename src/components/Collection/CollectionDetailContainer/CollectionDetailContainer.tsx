@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { useEffect } from 'react';
 
 import classNames from 'classnames';
@@ -21,6 +22,7 @@ import {
   getCollectionNavigationUrl,
   getProfileNavigationUrl,
 } from '@/utils/navigation';
+import { slugifiedCollectionIdToCollectionId } from '@/utils/string';
 import CollectionDetail from 'src/components/Collection/CollectionDetail/CollectionDetail';
 import Button, { ButtonVariant } from 'src/components/dls/Button/Button';
 import DataContext from 'src/contexts/DataContext';
@@ -89,7 +91,10 @@ const CollectionDetailContainer = ({
 
   const loadMore = () => {
     setSize(size + 1);
-    logButtonClick('collection_detail_page_load_more');
+    logButtonClick('collection_detail_page_load_more', {
+      collectionId: slugifiedCollectionIdToCollectionId(collectionId),
+      page: size + 1,
+    });
   };
 
   const navigationUrl = getCollectionNavigationUrl(collectionId);
@@ -141,7 +146,7 @@ const CollectionDetailContainer = ({
                 <ArrowLeft />
               </Button>
               <CollectionDetail
-                id={collectionId}
+                id={slugifiedCollectionIdToCollectionId(collectionId)}
                 title={collectionTitle}
                 bookmarks={bookmarks}
                 sortBy={sortBy}
