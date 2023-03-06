@@ -2,7 +2,6 @@
 import { useContext, useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
-import { useRouter } from 'next/router';
 import { useSelector, shallowEqual } from 'react-redux';
 
 import CollectionSorter from '../CollectionSorter/CollectionSorter';
@@ -19,7 +18,7 @@ import { areArraysEqual } from '@/utils/array';
 import { getChapterData } from '@/utils/chapter';
 import { logButtonClick, logEvent } from '@/utils/eventLogger';
 import { toLocalizedVerseKey } from '@/utils/locale';
-import { getChapterWithStartingVerseUrl } from '@/utils/navigation';
+import { getVerseNavigationUrlByVerseKey } from '@/utils/navigation';
 import { navigateToExternalUrl } from '@/utils/url';
 import { makeVerseKey } from '@/utils/verse';
 import DataFetcher from 'src/components/DataFetcher';
@@ -62,7 +61,6 @@ const CollectionDetail = ({
   const { mushaf } = getMushafId(quranFont, mushafLines);
   const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
 
-  const router = useRouter();
   const confirm = useConfirm();
 
   const sortOptions = [
@@ -77,24 +75,6 @@ const CollectionDetail = ({
   ];
 
   const chaptersData = useContext(DataContext);
-  const sorter = (
-    <CollectionSorter
-      selectedOptionId={sortBy}
-      onChange={onSortByChange}
-      options={sortOptions}
-      isSingleCollection
-      collectionId={id}
-    />
-  );
-
-  const onGoToAyahClicked = (verseKey: string) => {
-    const verseUrl = getChapterWithStartingVerseUrl(verseKey);
-    logButtonClick(`collection_detail_menu_go_to_verse`, {
-      verseKey,
-      collectionId: id,
-    });
-    router.push(verseUrl);
-  };
 
   const isCollectionEmpty = bookmarks.length === 0;
 
@@ -125,11 +105,12 @@ const CollectionDetail = ({
   };
 
   const handleGoToAyah = (bookmark: Bookmark) => () => {
+    const verseKey = makeVerseKey(bookmark.key, bookmark.verseNumber);
     logButtonClick('collection_detail_go_to_ayah_menu', {
       verseKey: makeVerseKey(bookmark.key, bookmark.verseNumber),
       collectionId: id,
     });
-    onGoToAyahClicked(makeVerseKey(bookmark.key, bookmark.verseNumber));
+    navigateToExternalUrl(getVerseNavigationUrlByVerseKey(verseKey));
   };
 
   const getBookmarkName = (bookmark) => {
@@ -184,7 +165,15 @@ const CollectionDetail = ({
       <div className={styles.container}>
         <div className={styles.header}>
           <div className={styles.title}>{title}</div>
-          {sorter}
+          {isOwner && (
+            <CollectionSorter
+              selectedOptionId={sortBy}
+              onChange={onSortByChange}
+              options={sortOptions}
+              isSingleCollection
+              collectionId={id}
+            />
+          )}
         </div>
         <Button variant={ButtonVariant.Ghost} onClick={onToggleAllClicked}>
           {isOpen ? t('collection:collapse-all') : t('collection:expand-all')}
@@ -211,27 +200,7 @@ const CollectionDetail = ({
                     )
                   }
                   shouldOpen={isOpen}
-                  title={
-                    <div className={styles.linkContainer}>
-                      <Button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          e.preventDefault();
-                          const verseUrl = getChapterWithStartingVerseUrl(
-                            makeVerseKey(bookmark.key, bookmark.verseNumber),
-                          );
-                          logEvent('collection_bookmark_link_clicked', {
-                            collectionId: id,
-                            verseKey: makeVerseKey(bookmark.key, bookmark.verseNumber),
-                          });
-                          navigateToExternalUrl(verseUrl);
-                        }}
-                        variant={ButtonVariant.Ghost}
-                      >
-                        <p className={styles.bookmarkLink}>{bookmarkName}</p>
-                      </Button>
-                    </div>
-                  }
+                  title={bookmarkName}
                   key={bookmark.id}
                   prefix={<ChevronDownIcon />}
                   shouldRotatePrefixOnToggle
@@ -249,7 +218,10 @@ const CollectionDetail = ({
                           {t('collection:delete')}
                         </PopoverMenu.Item>
                       )}
-                      <PopoverMenu.Item onClick={handleGoToAyah(bookmark)}>
+                      <PopoverMenu.Item
+                        onClick={handleGoToAyah(bookmark)}
+                        shouldCloseMenuAfterClick
+                      >
                         {t('collection:go-to-ayah')}
                       </PopoverMenu.Item>
                     </PopoverMenu>

@@ -2,7 +2,7 @@
     "all-saved-verses": "所有保存的经文",
     "alphabetical": "AZ",
     "back-to-collection-list": "返回收藏列表",
-    "collapse-all": "全部收缩",
+    "collapse-all": "折叠所有经文",
     "collection-list-empty": "收藏列表为空。您还没有创建任何收藏",
     "collections": "收藏品",
     "delete": "删除",
@@ -15,7 +15,7 @@
         "title": "删除收藏"
     },
     "empty": "集合为空",
-    "expand-all": "展开全部",
+    "expand-all": "展开所有经文",
     "go-to-ayah": "去啊啊",
     "load-more": "继续显示",
     "recently-added": "最近添加的",

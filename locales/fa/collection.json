@@ -2,7 +2,7 @@
     "all-saved-verses": "همه آیات ذخیره شده",
     "alphabetical": "AZ",
     "back-to-collection-list": "بازگشت به لیست مجموعه",
-    "collapse-all": "همه را جمع کن",
+    "collapse-all": "همه آیات را جمع کنید",
     "collection-list-empty": "لیست مجموعه خالی است. شما هنوز هیچ مجموعه ای ایجاد نکرده اید",
     "collections": "مجموعه ها",
     "delete": "حذف",
@@ -15,7 +15,7 @@
         "title": "حذف مجموعه"
     },
     "empty": "مجموعه خالی است",
-    "expand-all": "همه را گسترش دهید",
+    "expand-all": "همه آیات را بسط دهید",
     "go-to-ayah": "برو به آیه",
     "load-more": "بارگذاری بیشتر",
     "recently-added": "به تازگی اضافه شده",
