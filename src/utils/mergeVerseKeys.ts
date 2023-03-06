@@ -31,8 +31,9 @@ function mergeVerseKeys(
       // OR
       // merge verses into a single range if they are not back to back but the distance is 1
       // e.g. 1:1, 1:2, 1:3, 1:5 will be merged into 1:1-1:5
-      if (verseNumbers[j] === end + 1 || verseNumbers[j] === end + 2) end = verseNumbers[j];
-      else {
+      if (verseNumbers[j] - end > 0 && verseNumbers[j] - end <= 5) {
+        end = verseNumbers[j];
+      } else {
         combinedVerses.add(`${chapter}:${start}-${chapter}:${end}`);
         start = verseNumbers[j];
         end = start;

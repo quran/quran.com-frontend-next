@@ -1,4 +1,6 @@
-import { getLangFullLocale, LANG_LOCALE_MAP } from './locale';
+import { Translate } from 'next-translate';
+
+import { getLangFullLocale, LANG_LOCALE_MAP, toLocalizedNumber } from './locale';
 
 // Converts seconds to (hours), minutes, and seconds
 export const secondsFormatter = (seconds: number, locale: string) => {
@@ -12,6 +14,30 @@ export const secondsFormatter = (seconds: number, locale: string) => {
     second: '2-digit',
     ...(seconds >= 3600 && { hour: '2-digit' }), // only include hours if the duration is more than 60 minutes
   });
+};
+
+export const secondsToReadableFormat = (seconds: number, t: Translate, locale: string) => {
+  let result = '';
+
+  const minutes = Math.floor(seconds / 60);
+  if (minutes < 60) {
+    result = t('reading-goal:x-minutes', {
+      count: minutes,
+      minutes: toLocalizedNumber(minutes, locale),
+    });
+  } else {
+    const hours = Math.floor(minutes / 60);
+    const minutesLeft = minutes % 60;
+    result = t('reading-goal:x-hours', { count: hours, hours: toLocalizedNumber(hours, locale) });
+    if (minutesLeft > 0) {
+      result += ` ${t('reading-goal:x-minutes', {
+        count: minutesLeft,
+        minutes: toLocalizedNumber(minutesLeft, locale),
+      })}`;
+    }
+  }
+
+  return result;
 };
 
 /**

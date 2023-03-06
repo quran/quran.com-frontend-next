@@ -4,8 +4,6 @@ import MoonIllustrationSVG from '../../../../public/images/moon-illustration.svg
 
 import styles from './ReadingStreak.module.scss';
 
-import CreateReadingGoalModal from '@/components/ReadingGoal/CreateReadingGoalModal';
-
 // import Button from '@/dls/Button/Button';
 
 const LoggedOutReadingStreak = () => {
@@ -24,10 +22,7 @@ const LoggedOutReadingStreak = () => {
       </div>
       <div className={styles.goalContainer}>{t('reading-plan-description')}</div>
 
-      <div className={styles.actionsContainer}>
-        {/* <Button>{t('create-plan')}</Button> */}
-        <CreateReadingGoalModal />
-      </div>
+      <div className={styles.actionsContainer}>{/* <Button>{t('create-plan')}</Button> */}</div>
     </div>
   );
 };
