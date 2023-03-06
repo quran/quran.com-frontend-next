@@ -57,8 +57,7 @@ const ReadingGoalOnboarding: React.FC = () => {
     setLoading(true);
 
     try {
-      // await addReadingGoal(data);
-      console.log('data', data);
+      await addReadingGoal(data);
       toast('reading-goal:set-reading-goal-success', {
         status: ToastStatus.Success,
       });
