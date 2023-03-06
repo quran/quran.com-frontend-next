@@ -30,3 +30,14 @@ export type ReadingGoalStatus = ReadingGoal & {
     daysLeft?: number;
   };
 };
+
+export type EstimatedReadingGoal =
+  | {
+      type: ReadingGoalType.PAGES | ReadingGoalType.TIME;
+      dailyAmount: number;
+    }
+  | {
+      type: ReadingGoalType.RANGE;
+      dailyAmount: number; // number of verses
+      ranges: string[];
+    };

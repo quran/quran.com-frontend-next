@@ -107,6 +107,8 @@ export const makeAllReadingDaysUrl = (from: string, to: string) =>
 
 export const makeReadingGoalUrl = () => makeUrl('reading-goal');
 
+export const makeEstimateReadingGoalUrl = () => makeUrl('reading-goal/estimate');
+
 export const makeReadingGoalProgressUrl = (timezone?: string) =>
   makeUrl('reading-goal/status', timezone ? { timezone } : undefined);
 

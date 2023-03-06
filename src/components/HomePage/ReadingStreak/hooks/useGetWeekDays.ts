@@ -17,30 +17,39 @@ const getDaysOfWeek = (t: Translate) => [
   t('week.friday'),
 ];
 
-const useGetWeekDays = () => {
+const useGetWeekDays = (enable = true) => {
   const { t } = useTranslation('reading-goal');
 
   // TODO: check the user's activty on each day
   const weekDays = useMemo(() => {
-    const days = getDaysOfWeek(t);
-    const today = new Date().getDay();
+    const daysOfWeek = getDaysOfWeek(t);
+    const days = [];
+    const today = new Date();
 
-    return days.map((day, index) => {
-      const date = new Date();
-      const dayIndex = days.indexOf(day);
-      date.setDate(date.getDate() + dayIndex - today - 1);
+    const saturday = new Date(today);
+    // get the saturday exactly before today (or today if today is saturday)
+    saturday.setDate(today.getDate() - today.getDay() - 1);
 
-      return {
-        name: day,
-        current: index === today + 1,
-        date: dateToDateString(date),
-      };
-    });
+    const friday = new Date(saturday);
+    friday.setDate(saturday.getDate() + 5);
+
+    for (let i = 0; i < 7; i += 1) {
+      const day = new Date(saturday);
+      day.setDate(saturday.getDate() + i);
+      days.push({
+        name: daysOfWeek[i],
+        current: day.getDate() === today.getDate(),
+        date: dateToDateString(day),
+      });
+    }
+
+    return days;
   }, [t]);
 
   const { readingDays, isLoading } = useGetAllReadingDays(
     weekDays[0].date,
     weekDays[weekDays.length - 1].date,
+    enable,
   );
 
   const readingDaysMap = useMemo<Record<string, ReadingDay & { hasRead: boolean }>>(() => {

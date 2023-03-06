@@ -1,0 +1,122 @@
+@use "src/styles/utility";
+@use "src/styles/breakpoints";
+
+.tabContainer {
+  margin-block: var(--spacing-large);
+  min-height: 80vh;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  gap: calc(2 * var(--spacing-mega));
+  
+  @include breakpoints.smallerThanDesktop {
+    flex-direction: column;
+    gap: var(--spacing-mega);
+  }
+}
+
+.optionsContainer {
+  display: flex;
+  flex-direction: column;
+  // justify-content: center;
+  // align-items: center;
+  gap: var(--spacing-large);
+  margin-block: var(--spacing-medium);
+  flex: 1;
+
+  @include breakpoints.smallerThanDesktop {
+    width: 100%;
+  }
+}
+
+.titleContainer {
+  flex: 1;
+
+  @include breakpoints.smallerThanDesktop {
+    width: 100%;
+    text-align: center;
+    margin-block-start: calc(2 * var(--spacing-mega));
+  }
+}
+
+.title {
+  font-size: var(--font-size-jumbo);
+  font-weight: var(--font-weight-bold);
+}
+
+.subtitle {
+  font-size: var(--font-size-large);
+  margin-block-start: var(--spacing-medium);
+  color: var(--color-text-faded);
+}
+
+.navigationContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--spacing-medium);
+  margin-block: var(--spacing-large);
+  // margin-block: var(--spacing-medium);
+}
+
+.navigateButton {
+  
+}
+
+.dayPreview {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-large);
+  border-radius: var(--border-radius-rounded);
+  background-color: var(--color-background-alternative-faded);
+  font-size: var(--font-size-large);
+}
+
+.rangePreview {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.rangePreviewTo {
+  width: 3px;
+  height: var(--spacing-medium);
+  background: var(--color-success-medium);
+  // margin-block: var(--spacing-xsmall);
+}
+
+.rangeInputContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--spacing-medium);
+  margin-block-end: var(--spacing-large);
+
+  & > div {
+    flex: 1;
+  }
+}
+
+.inputContainer {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.input {
+  width: 100%;
+
+  > select {
+    width: 100%;
+  }
+}
+
+.label {
+  font-size: var(--font-size-large);
+  font-weight: var(--font-weight-bold);
+  margin-block-end: var(--spacing-small);
+}

@@ -2,7 +2,12 @@
 import { configureRefreshFetch } from 'refresh-fetch';
 
 import { ReadingDay, UpdateReadingDayBody } from '@/types/auth/ReadingDay';
-import { CreateReadingGoalRequest, ReadingGoal, ReadingGoalStatus } from '@/types/auth/ReadingGoal';
+import {
+  CreateReadingGoalRequest,
+  EstimatedReadingGoal,
+  ReadingGoal,
+  ReadingGoalStatus,
+} from '@/types/auth/ReadingGoal';
 import {
   makeBookmarksUrl,
   makeCompleteSignupUrl,
@@ -34,6 +39,7 @@ import {
   makeReadingGoalUrl,
   makeReadingGoalProgressUrl,
   makeAllReadingDaysUrl,
+  makeEstimateReadingGoalUrl,
 } from '@/utils/auth/apiPaths';
 import { fetcher } from 'src/api';
 import CompleteAnnouncementRequest from 'types/auth/CompleteAnnouncementRequest';
@@ -152,6 +158,10 @@ export const getReadingGoalProgress = async (
 export const addReadingGoal = async (
   data: CreateReadingGoalRequest,
 ): Promise<{ data?: ReadingGoal }> => postRequest(makeReadingGoalUrl(), data);
+
+export const estimateReadingGoal = async (
+  data: CreateReadingGoalRequest,
+): Promise<{ data?: EstimatedReadingGoal }> => postRequest(makeEstimateReadingGoalUrl(), data);
 
 export const deleteReadingGoal = async (): Promise<void> => deleteRequest(makeReadingGoalUrl());
 
