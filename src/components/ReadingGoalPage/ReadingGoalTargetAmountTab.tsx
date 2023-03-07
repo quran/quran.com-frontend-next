@@ -60,8 +60,12 @@ const ReadingGoalTargetAmountTab: React.FC<ReadingGoalTabProps> = ({ state, disp
   const { t, lang } = useTranslation('reading-goal');
   const chaptersData = useContext(DataContext);
   const { type, period, pages, seconds, rangeStartVerse, rangeEndVerse, duration } = state;
-  const [startChapter, setStartChapter] = useState<string>();
-  const [endChapter, setEndChapter] = useState<string>();
+  const [startChapter, setStartChapter] = useState<string>(
+    rangeStartVerse ? rangeStartVerse.split(':')[0] : undefined,
+  );
+  const [endChapter, setEndChapter] = useState<string>(
+    rangeEndVerse ? rangeEndVerse.split(':')[0] : undefined,
+  );
 
   const dayOptions = useMemo(() => generateDaysOptions(t, lang), [t, lang]);
   const timeOptions = useMemo(() => generateTimeOptions(t, lang), [t, lang]);
@@ -190,6 +194,24 @@ const ReadingGoalTargetAmountTab: React.FC<ReadingGoalTabProps> = ({ state, disp
     });
   };
 
+  const getInitialInputValue = (
+    inputType: 'start-chapter' | 'start-verse' | 'end-chapter' | 'end-verse',
+  ) => {
+    if (inputType === 'start-chapter' || inputType === 'end-chapter') {
+      const chapterId = inputType === 'start-chapter' ? startChapter : endChapter;
+      if (!chapterId) return undefined;
+
+      return chapterOptions[Number(chapterId) - 1]?.label;
+    }
+
+    // inputType === 'start-verse' || inputType === 'end-verse'
+    const verseId = inputType === 'start-verse' ? startingVerse : endingVerse;
+    if (!verseId) return '';
+
+    const verseOptions = inputType === 'start-verse' ? startingVerseOptions : endingVerseOptions;
+    return verseOptions[Number(verseId) - 1]?.label;
+  };
+
   const getInput = () => {
     if (type === ReadingGoalType.RANGE) {
       return (
@@ -203,6 +225,7 @@ const ReadingGoalTargetAmountTab: React.FC<ReadingGoalTabProps> = ({ state, disp
                 label={<p className={styles.label}>{t('starting-chapter')}</p>}
                 items={startChapterOptions}
                 value={startChapter}
+                initialInputValue={getInitialInputValue('start-chapter')}
                 onChange={onChapterChange('start')}
               />
             </div>
@@ -216,7 +239,7 @@ const ReadingGoalTargetAmountTab: React.FC<ReadingGoalTabProps> = ({ state, disp
                 label={<p className={styles.label}>{t('starting-verse')}</p>}
                 items={startingVerseOptions}
                 value={startingVerse}
-                initialInputValue={!startingVerse ? '' : undefined}
+                initialInputValue={getInitialInputValue('start-verse')}
                 onChange={onVerseChange('start')}
               />
             </div>
@@ -230,6 +253,7 @@ const ReadingGoalTargetAmountTab: React.FC<ReadingGoalTabProps> = ({ state, disp
                 label={<p className={styles.label}>{t('ending-chapter')}</p>}
                 items={endChapterOptions}
                 value={endChapter}
+                initialInputValue={getInitialInputValue('end-chapter')}
                 onChange={onChapterChange('end')}
               />
             </div>
@@ -243,7 +267,7 @@ const ReadingGoalTargetAmountTab: React.FC<ReadingGoalTabProps> = ({ state, disp
                 items={endingVerseOptions}
                 value={endingVerse}
                 disabled={!endChapter}
-                initialInputValue={!endingVerse ? '' : undefined}
+                initialInputValue={getInitialInputValue('end-verse')}
                 onChange={onVerseChange('end')}
               />
             </div>

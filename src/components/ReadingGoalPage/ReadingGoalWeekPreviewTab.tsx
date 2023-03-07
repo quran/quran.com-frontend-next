@@ -58,7 +58,7 @@ const ReadingGoalWeekPreviewTab: React.FC<ReadingGoalTabProps> = ({ state, nav }
 
   const getDailyAmount = (idx: number) => {
     if (data.data.type === ReadingGoalType.RANGE) {
-      const range = data.data.ranges[idx];
+      const range = 'ranges' in data.data ? data.data.ranges[idx] : data.data.dailyAmount;
       const [start, end] = range.split('-');
       const [startingChapter, startingVerse] = getVerseAndChapterNumbersFromKey(start);
       const [endingChapter, endingVerse] = getVerseAndChapterNumbersFromKey(end);
