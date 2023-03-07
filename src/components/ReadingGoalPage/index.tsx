@@ -58,7 +58,7 @@ const ReadingGoalOnboarding: React.FC = () => {
 
     try {
       await addReadingGoal(data);
-      toast('reading-goal:set-reading-goal-success', {
+      toast(t('reading-goal:set-reading-goal-success'), {
         status: ToastStatus.Success,
       });
       router.push('/');

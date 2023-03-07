@@ -1,7 +1,7 @@
 export type ReadingGoal = {
   id: string;
   type: ReadingGoalType;
-  amount: string;
+  targetAmount: string;
   duration?: number;
   createdAt: Date;
   updatedAt: Date;
@@ -40,4 +40,8 @@ export type EstimatedReadingGoal =
       type: ReadingGoalType.RANGE;
       dailyAmount: number; // number of verses
       ranges: string[];
+    }
+  | {
+      type: ReadingGoalType.RANGE;
+      dailyAmount: string; // single range
     };

@@ -156,8 +156,8 @@ const initialState: ReadingGoalState = {
   pages: 1,
   seconds: 60,
   duration: null,
-  rangeStartVerse: null,
-  rangeEndVerse: null,
+  rangeStartVerse: '1:1',
+  rangeEndVerse: '114:6',
 };
 
 const useReadingGoalReducer = () => {
