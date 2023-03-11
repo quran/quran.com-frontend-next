@@ -4,12 +4,7 @@ import OptionButton from './OptionButton';
 import styles from './ReadingGoalPage.module.scss';
 import { readingGoalExamples, ReadingGoalTabProps } from './useReadingGoalReducer';
 
-const ReadingGoalExamplesTab: React.FC<ReadingGoalTabProps> = ({
-  state,
-  dispatch,
-  onTabChange,
-  nav,
-}) => {
+const ReadingGoalExamplesTab: React.FC<ReadingGoalTabProps> = ({ state, dispatch, nav }) => {
   const { t } = useTranslation('reading-goal');
 
   return (
@@ -25,9 +20,6 @@ const ReadingGoalExamplesTab: React.FC<ReadingGoalTabProps> = ({
             icon={example.icon}
             onSelect={() => {
               dispatch({ type: 'SET_EXAMPLE', payload: { exampleKey: example.i18nKey } });
-
-              // if the user selects the custom option, we want to go to the next tab. Otherwise, we want to skip the configuration
-              onTabChange((idx) => (example.i18nKey === 'custom' ? idx + 1 : idx + 4));
             }}
             selected={state.exampleKey === example.i18nKey}
             option={t(`examples.${example.i18nKey}.title`)}

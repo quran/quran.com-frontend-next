@@ -1,0 +1,11 @@
+.wrapper {
+  min-height: 50vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  h1 {
+    font-size: var(--font-size-jumbo);
+    font-weight: var(--font-weight-bold);
+  }
+}

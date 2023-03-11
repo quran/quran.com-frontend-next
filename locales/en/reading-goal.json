@@ -102,6 +102,8 @@
     "friday": "Fr"
   },
   "day-x": "Day {{day}}",
+  "remaining-days_one": "{{days}} day remaining",
+  "remaining-days_other": "{{days}} days remaining",
   "x-days_one": "{{days}} day",
   "x-days_other": "{{days}} days",
   "x-pages_one": "{{pages}} page",

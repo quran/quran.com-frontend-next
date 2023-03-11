@@ -27,8 +27,10 @@ const useGetWeekDays = (enable = true) => {
     const today = new Date();
 
     const saturday = new Date(today);
-    // get the saturday exactly before today (or today if today is saturday)
-    saturday.setDate(today.getDate() - today.getDay() - 1);
+
+    if (today.getDay() !== 6) {
+      saturday.setDate(today.getDate() - today.getDay() - 1);
+    }
 
     const friday = new Date(saturday);
     friday.setDate(saturday.getDate() + 5);

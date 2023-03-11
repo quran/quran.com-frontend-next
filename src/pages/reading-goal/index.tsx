@@ -1,27 +1,27 @@
 import { NextPage, GetStaticProps } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 
-import layoutStyle from './index.module.scss';
+import layoutStyle from '../index.module.scss';
 
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import ReadingGoalOnboarding from '@/components/ReadingGoalPage';
 import useRequireAuth from '@/hooks/auth/useRequireAuth';
 import { getAllChaptersData } from '@/utils/chapter';
 import { getLanguageAlternates } from '@/utils/locale';
-import { getCanonicalUrl, getProfileNavigationUrl } from '@/utils/navigation';
+import { getCanonicalUrl, getReadingGoalNavigationUrl } from '@/utils/navigation';
 
 const ReadingGoalPage: NextPage = () => {
   // we don't want to show the reading goal page if the user is not logged in
   useRequireAuth();
 
-  const { t, lang } = useTranslation();
+  const { t, lang } = useTranslation('reading-goal');
 
   return (
     <>
       <NextSeoWrapper
-        title={t('common:profile')}
-        url={getCanonicalUrl(lang, getProfileNavigationUrl())}
-        languageAlternates={getLanguageAlternates(getProfileNavigationUrl())}
+        title={t('reading-goal')}
+        url={getCanonicalUrl(lang, getReadingGoalNavigationUrl())}
+        languageAlternates={getLanguageAlternates(getReadingGoalNavigationUrl())}
         nofollow
         noindex
       />

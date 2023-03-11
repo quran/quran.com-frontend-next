@@ -291,8 +291,6 @@ const ReadingGoalTargetAmountTab: React.FC<ReadingGoalTabProps> = ({ state, disp
             htmlType="number"
             onChange={(p) => {
               const parsedPages = Number(p);
-
-              if (Number.isNaN(parsedPages) || parsedPages > 604 || parsedPages < 1) return;
               dispatch({ type: 'SET_PAGES', payload: { pages: parsedPages } });
             }}
           />
