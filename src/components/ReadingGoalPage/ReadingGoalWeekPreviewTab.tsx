@@ -1,5 +1,6 @@
 import { useMemo, useContext } from 'react';
 
+import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 import useSWR from 'swr';
 
@@ -69,22 +70,24 @@ const ReadingGoalWeekPreviewTab: React.FC<ReadingGoalTabProps> = ({ state, nav }
       return (
         <div className={styles.rangePreview}>
           <p>
-            {startingChapterName} {startingVerse}
+            {t('reciter:read')} {startingChapterName} {startingVerse}
           </p>
-          <div className={styles.rangePreviewTo} />
           <p>
-            {endingChapterName} {endingVerse}
+            {t('common:to').toLowerCase()} {endingChapterName} {endingVerse}
           </p>
         </div>
       );
     }
 
     if (data.data.type === ReadingGoalType.TIME) {
-      return secondsToReadableFormat(data.data.dailyAmount, t, lang);
+      return `${t('reciter:read')} ${secondsToReadableFormat(data.data.dailyAmount, t, lang)}`;
     }
 
     const pages = data.data.dailyAmount;
-    return t('x-pages', { count: pages, pages: toLocalizedNumber(pages, lang) });
+    return `${t('reciter:read')} ${t('x-pages', {
+      count: pages,
+      pages: toLocalizedNumber(pages, lang),
+    })}`;
   };
 
   return (
@@ -93,7 +96,7 @@ const ReadingGoalWeekPreviewTab: React.FC<ReadingGoalTabProps> = ({ state, nav }
         <h1 className={styles.title}>{t('preview-schedule.title')}</h1>
         <p className={styles.subtitle}>{t('preview-schedule.description')}</p>
       </div>
-      <div className={styles.optionsContainer}>
+      <ol className={classNames(styles.optionsContainer, styles.previewWrapper)}>
         {week.map((day, idx) => (
           <li key={day.getDate()} className={styles.dayPreview}>
             <h3>{t('day-x', { day: idx + 1 })}</h3>
@@ -107,7 +110,7 @@ const ReadingGoalWeekPreviewTab: React.FC<ReadingGoalTabProps> = ({ state, nav }
           </li>
         ))}
         {nav}
-      </div>
+      </ol>
     </>
   );
 };

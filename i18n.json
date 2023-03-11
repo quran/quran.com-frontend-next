@@ -4,7 +4,8 @@
   "pages": {
     "*": ["common", "error", "radio", "quick-links"],
     "/": ["home", "radio", "collection", "reading-goal", "reciter"],
-    "/reading-goal": ["reading-goal"],
+    "/reading-goal": ["reading-goal", "reciter"],
+    "/reading-goal/progress": ["reading-goal"],
     "/[chapterId]": ["quran-reader", "reading-goal", "chapter", "surah-info"],
     "/[chapterId]/reflections": ["quran-reader", "reading-goal"],
     "/[chapterId]/[verseId]": ["quran-reader", "reading-goal"],

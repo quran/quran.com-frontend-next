@@ -20,8 +20,6 @@
 .optionsContainer {
   display: flex;
   flex-direction: column;
-  // justify-content: center;
-  // align-items: center;
   gap: var(--spacing-large);
   margin-block: var(--spacing-medium);
   flex: 1;
@@ -65,7 +63,19 @@
   
 }
 
+$circle-size: var(--spacing-small);
+$circle-spacing: var(--spacing-xxsmall);
+$circle-border: 4px;
+
+.previewWrapper {
+  position: relative;
+  $spacing: calc($circle-size + $circle-spacing + $circle-border);
+  padding-inline-start: $spacing;
+  width: calc(100% - $spacing);
+}
+
 .dayPreview {
+  position: relative;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -73,19 +83,49 @@
   border-radius: var(--border-radius-rounded);
   background-color: var(--color-background-alternative-faded);
   font-size: var(--font-size-large);
+
+  h3 {
+    font-size: var(--font-size-xlarge);
+    font-weight: var(--font-weight-bold);
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset-inline-start: 0;
+    transform: translateX(calc(-100% - $circle-spacing));
+    width: $circle-size;
+    height: $circle-size;
+    border: $circle-border solid var(--color-success-medium);
+    border-radius: var(--border-radius-circle);
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset-inline-start: 0;
+    // we need to translate the line directly under the circle and in the middle of it
+    transform: translate(
+      calc(-100% + ($circle-spacing * -1) + ($circle-size + $circle-border) / -2), 
+      calc(50% + ($circle-size + $circle-border) / 2)
+    );
+    width: 3px;
+    height: 100%;
+    background-color: var(--color-success-medium);
+  }
+
+  &:last-of-type {
+    &::after {
+      display: none !important;
+    }
+  }
 }
+
 
 .rangePreview {
   display: flex;
   flex-direction: column;
-  align-items: center;
-}
-
-.rangePreviewTo {
-  width: 3px;
-  height: var(--spacing-medium);
-  background: var(--color-success-medium);
-  // margin-block: var(--spacing-xsmall);
+  align-items: flex-end;
 }
 
 .rangeInputContainer {

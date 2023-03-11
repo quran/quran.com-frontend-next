@@ -4,7 +4,7 @@ import MoonIllustrationSVG from '../../../../public/images/moon-illustration.svg
 
 import styles from './ReadingStreak.module.scss';
 
-// import Button from '@/dls/Button/Button';
+import Button from '@/dls/Button/Button';
 
 const LoggedOutReadingStreak = () => {
   const { t } = useTranslation('reading-goal');
@@ -22,7 +22,9 @@ const LoggedOutReadingStreak = () => {
       </div>
       <div className={styles.goalContainer}>{t('reading-plan-description')}</div>
 
-      <div className={styles.actionsContainer}>{/* <Button>{t('create-plan')}</Button> */}</div>
+      <div className={styles.actionsContainer}>
+        <Button href="/login">{t('create-plan')}</Button>
+      </div>
     </div>
   );
 };

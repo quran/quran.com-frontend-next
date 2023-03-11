@@ -16,28 +16,50 @@ export const secondsFormatter = (seconds: number, locale: string) => {
   });
 };
 
-export const secondsToReadableFormat = (seconds: number, t: Translate, locale: string) => {
-  let result = '';
+/**
+ * Convert seconds to the format of `x hours, y minutes, z seconds`.
+ * Or any combination of the three.
+ *
+ * @param {numbers} s seconds
+ * @param {Tramslate} t translate function
+ * @param {string} locale locale
+ * @returns {string}
+ */
+export const secondsToReadableFormat = (s: number, t: Translate, locale: string) => {
+  const results: string[] = [];
 
-  const minutes = Math.floor(seconds / 60);
-  if (minutes < 60) {
-    result = t('reading-goal:x-minutes', {
-      count: minutes,
-      minutes: toLocalizedNumber(minutes, locale),
-    });
-  } else {
-    const hours = Math.floor(minutes / 60);
-    const minutesLeft = minutes % 60;
-    result = t('reading-goal:x-hours', { count: hours, hours: toLocalizedNumber(hours, locale) });
-    if (minutesLeft > 0) {
-      result += ` ${t('reading-goal:x-minutes', {
-        count: minutesLeft,
-        minutes: toLocalizedNumber(minutesLeft, locale),
-      })}`;
-    }
+  let seconds = s;
+  let minutes = Math.floor(seconds / 60);
+  const hours = Math.floor(minutes / 60);
+
+  if (hours > 0) {
+    results.push(
+      t('reading-goal:x-hours', { count: hours, hours: toLocalizedNumber(hours, locale) }),
+    );
+    minutes %= 60;
+    seconds %= 60;
   }
 
-  return result;
+  if (minutes > 0) {
+    results.push(
+      t('reading-goal:x-minutes', {
+        count: minutes,
+        minutes: toLocalizedNumber(minutes, locale),
+      }),
+    );
+    seconds %= 60;
+  }
+
+  if (seconds > 0) {
+    results.push(
+      t('reading-goal:x-seconds', {
+        count: seconds,
+        seconds: toLocalizedNumber(seconds, locale),
+      }),
+    );
+  }
+
+  return results.join(', ');
 };
 
 /**
