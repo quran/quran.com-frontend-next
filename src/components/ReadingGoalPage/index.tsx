@@ -127,7 +127,9 @@ const ReadingGoalOnboarding: React.FC = () => {
       // if the user selected a range goal and didn't enter a valid range, disable the next button
       if (
         state.type === ReadingGoalType.RANGE &&
-        (!state.rangeStartVerse || !state.rangeEndVerse || !isValidVerseKey(chaptersData, state.rangeStartVerse) ||
+        (!state.rangeStartVerse ||
+          !state.rangeEndVerse ||
+          !isValidVerseKey(chaptersData, state.rangeStartVerse) ||
           !isValidVerseKey(chaptersData, state.rangeEndVerse))
       ) {
         return true;
