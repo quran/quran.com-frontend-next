@@ -1,25 +1,54 @@
+@use "src/styles/theme";
+@use "src/styles/breakpoints";
+
+.wrapper {
+  background-color: var(--color-success-faded);
+  padding: var(--spacing-mega);
+  position: relative;
+
+  @include breakpoints.tablet {
+    border-radius: var(--border-radius-rounded);
+  }
+}
+
 .container {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
   width: 100%;
+  
+  @include breakpoints.tablet {
+    align-items: center;
+    flex-direction: row;
+  }
+}
+
+.streakSubtitle {
+  font-size: var(--font-size-small);
+  text-transform: uppercase;
+  color: var(--color-text-default);
 }
 
 .streakTitle {
   font-size: var(--font-size-large);
-}
-
-.streakNumber {
   color: var(--color-success-medium);
   font-size: calc(var(--font-size-jumbo) * 1.3);
   font-weight: bold;
-  margin-top: var(--spacing-xxsmall);
+  display: flex;
+  align-items: center;
+}
+
+.streakTitleWarning {
+  color: var(--color-warning-medium);
 }
 
 .week {
-  display: flex;
-  // justify-content: space-around;
+  display: none;
   align-items: center;
+
+  @include breakpoints.tablet {
+    display: flex;
+  }
 }
 
 .day {
@@ -58,6 +87,56 @@
   background-color: var(--color-success-medium);
 }
 
+.stroked {
+  border-style: dashed;
+}
+
 .goalContainer {
-  margin-top: var(--spacing-large);
+  margin-block-start: var(--spacing-large);
+}
+
+.actionsContainer {
+  margin-block-start: var(--spacing-medium);
+  display: flex;
+  align-items: center;
+
+  & > :first-child {
+    margin-inline-end: var(--spacing-xxsmall);
+  }
+}
+
+.illustrationContainer {
+  width: calc(5 * var(--spacing-mega));
+  height: calc(5 * var(--spacing-mega));
+  position: absolute;
+  inset-block-end: calc(-1 * var(--spacing-medium));
+  inset-inline-end: 0;
+  opacity: var(--opacity-10);
+  color: var(--color-success-deep);
+}
+
+.dailyProgressContainer {
+  width: 100%;
+}
+
+.dailyGoal {
+  margin-block-start: var(--spacing-xsmall);
+  font-size:var(--font-size-large);
+  font-weight: var(--font-weight-medium);
+}
+
+.progressContainer {
+  margin-block-start: var(--spacing-mega);
+}
+
+.progressTextContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-block-start: var(--spacing-small);
+  
+  > p {
+    font-size:var(--font-size-large);
+    font-weight: var(--font-weight-bold);
+  }
 }

@@ -2,7 +2,12 @@
 import { configureRefreshFetch } from 'refresh-fetch';
 
 import { ReadingDay, UpdateReadingDayBody } from '@/types/auth/ReadingDay';
-import { CreateReadingGoalRequest, ReadingGoal, ReadingGoalStatus } from '@/types/auth/ReadingGoal';
+import {
+  CreateReadingGoalRequest,
+  EstimatedReadingGoal,
+  ReadingGoal,
+  ReadingGoalStatus,
+} from '@/types/auth/ReadingGoal';
 import {
   makeBookmarksUrl,
   makeCompleteSignupUrl,
@@ -33,6 +38,8 @@ import {
   makeReadingDaysUrl,
   makeReadingGoalUrl,
   makeReadingGoalProgressUrl,
+  makeAllReadingDaysUrl,
+  makeEstimateReadingGoalUrl,
 } from '@/utils/auth/apiPaths';
 import { fetcher } from 'src/api';
 import CompleteAnnouncementRequest from 'types/auth/CompleteAnnouncementRequest';
@@ -88,8 +95,8 @@ const deleteRequest = <T>(url: string, requestData?: RequestData): Promise<T> =>
     }),
   });
 
-export const getUserProfile = async (): Promise<UserProfile> =>
-  privateFetcher(makeUserProfileUrl());
+export const getUserProfile = async (timezone?: string): Promise<UserProfile> =>
+  privateFetcher(makeUserProfileUrl(timezone));
 
 export const refreshToken = async (): Promise<RefreshToken> =>
   privateFetcher(makeRefreshTokenUrl());
@@ -152,7 +159,16 @@ export const addReadingGoal = async (
   data: CreateReadingGoalRequest,
 ): Promise<{ data?: ReadingGoal }> => postRequest(makeReadingGoalUrl(), data);
 
+export const estimateReadingGoal = async (
+  data: CreateReadingGoalRequest,
+): Promise<{ data?: EstimatedReadingGoal }> => postRequest(makeEstimateReadingGoalUrl(), data);
+
 export const deleteReadingGoal = async (): Promise<void> => deleteRequest(makeReadingGoalUrl());
+
+export const getAllReadingDays = async (
+  from: string,
+  to: string,
+): Promise<{ data: ReadingDay[] }> => privateFetcher(makeAllReadingDaysUrl(from, to));
 
 export const getReadingDay = async (timezone: string): Promise<{ data?: ReadingDay }> =>
   privateFetcher(makeReadingDaysUrl(timezone));

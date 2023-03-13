@@ -2,6 +2,10 @@ export type ReadingDay = {
   ranges: string[];
   pagesRead: number;
   secondsRead: number;
+  progress: number;
+  dailyTargetPages?: number;
+  dailyTargetSeconds?: number;
+  dailyTargetRanges: string[];
   date: Date;
 };
 

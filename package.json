@@ -38,6 +38,7 @@
     "@radix-ui/react-id": "^1.0.0",
     "@radix-ui/react-polymorphic": "^0.0.14",
     "@radix-ui/react-popover": "^1.0.0",
+    "@radix-ui/react-progress": "^1.0.1",
     "@radix-ui/react-radio-group": "^1.0.0",
     "@radix-ui/react-separator": "^1.0.0",
     "@radix-ui/react-slider": "^1.0.0",

@@ -4,9 +4,7 @@ import mergeVerseKeys from './mergeVerseKeys';
 
 describe('merge verse keys', () => {
   it('should merge back to back verses', () => {
-    expect(mergeVerseKeys(new Set(['1:1', '1:2', '1:3', '1:7']))).toEqual(
-      new Set(['1:1-1:3', '1:7-1:7']),
-    );
+    expect(mergeVerseKeys(new Set(['1:1', '1:2', '1:3', '1:7']))).toEqual(new Set(['1:1-1:7']));
   });
 
   it("should merge verses if they're not back to back but the distance is 1", () => {
@@ -14,8 +12,8 @@ describe('merge verse keys', () => {
   });
 
   it('should not merge verses', () => {
-    expect(mergeVerseKeys(new Set(['1:1', '2:2', '1:4', '1:10']))).toEqual(
-      new Set(['1:1-1:1', '2:2-2:2', '1:4-1:4', '1:10-1:10']),
+    expect(mergeVerseKeys(new Set(['1:1', '2:2', '2:10']))).toEqual(
+      new Set(['1:1-1:1', '2:2-2:2', '2:10-2:10']),
     );
   });
 

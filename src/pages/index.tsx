@@ -47,6 +47,8 @@ const Index: NextPage<IndexProps> = ({
             <HomePageHero />
             <div className={classNames(styles.flowItem, styles.fullWidth)}>
               <ReadingStreak />
+            </div>
+            <div className={classNames(styles.flowItem, styles.fullWidth)}>
               <RecentReadingSessions />
             </div>
             <div className={classNames(styles.flowItem, styles.fullWidth)}>

@@ -1,13 +1,90 @@
 {
+  "examples-title": "Pick a preset goal or create your own",
+  "examples-subtitle": "Here is a list of common goals. You can also create your own goal.",
+  "recommended": "Recommended",
+  "examples": {
+    "time": {
+      "title": "Read 10 minutes a day",
+      "description": "A simple beginner-friendly goal"
+    },
+    "khatm": {
+      "title": "Read the Quran in 30 days",
+      "description": "A classic khatm goal. Read 1 Juz a day"
+    },
+    "custom": {
+      "title": "Custom",
+      "description": "Set a custom goal that suits you"
+    }
+  },
+  "frequency-tab": {
+    "title": "Choose a frequency for your goal",
+    "description": "Should your goal reset every day or every number of days? Don't worry, we will track your progress regardless of the frequency you choose."
+  },
+  "daily": {
+    "title": "Daily goal",
+    "description": "Your goal will reset every day"
+  },
+  "continuous": {
+    "title": "Over a duration",
+    "description": "Your goal will calculate your progress over a duration of days"
+  },
+  "goal-type": {
+    "title": "Choose a criteria for your goal",
+    "description": "Should your goal be based on time, pages, or a custom range (ie: 3 Juzs of the Quran)?"
+  },
+  "goal-types": {
+    "time": {
+      "title": "Time",
+      "description": "Your goal will be based on time"
+    },
+    "pages": {
+      "title": "Pages",
+      "description": "Your goal will be based on pages"
+    },
+    "range": {
+      "title": "Custom range",
+      "description": "Your goal will be based on a custom range of verses (this can be a chapter, a juz, or even the whole Quran)"
+    }
+  },
+  "goal-target": {
+    "title": "Set a target for your goal",
+    "description": "How much time, pages, or verses should you read to complete your goal?"
+  },
+  "duration": "Duration (days)",
+  "starting-chapter": "Starting chapter",
+  "ending-chapter": "Ending chapter",
+  "starting-verse": "Starting verse",
+  "ending-verse": "Ending verse",
+  "preview-schedule": {
+    "title": "Here is a preview of your schedule",
+    "description": "This is how your goal will look like. You can always change it later."
+  },
+  "daily-progress": "Daily Progress",
+  "goal-done": {
+    "title": "You completed today's goal",
+    "description": "Any additional reading will still be recorded"
+  },
+  "reading-goal-label": "You're on a",
+  "streak": "{{days}} day streak",
+  "continue-reading": "Continue Reading",
+  "view-progress": "View Progress",
   "reading-goal": "Reading Goal",
-  "streak": "Current Streak",
-  "progress": "You've completed <strong>{{percent}}%<\/strong> of your goal.",
-  "set-reading-goal": "Set a reading goal.",
+  "todays-goal": "Today's Goal",
+  "remaining": "Remaining for today",
+  "streak-definition": "A streak is a number of consecutive days you have read Quran.",
+  "progress": {
+    "time-goal": "read {{time}} of Quran",
+    "pages-goal": "read {{pages}} pages of Quran",
+    "range-goal": "read {{from}} to {{to}}",
+    "complete": "Today's goal is complete 🎉"
+  },
+  "set-reading-goal": "Set a reading goal",
   "set-reading-goal-success": "Your reading goal has been set successfully.",
-  "complete-message": "Your reading goal is complete!",
   "delete-account": "Delete Reading Goal",
+  "reading-plan": "Reading Plan",
+  "reading-plan-description": "Create a reading plan and Quran.com will automatically track your progress and help you reach your goal.",
+  "create-plan": "Create plan",
   "days": "Days",
-  "continuious": "Continuious",
   "delete-confirmation": {
     "action-text": "I understand the consequence, delete my reading goal",
     "confirmation-text": "delete my reading goal",
@@ -23,5 +100,18 @@
     "wednesday": "We",
     "thursday": "Th",
     "friday": "Fr"
-  }
+  },
+  "day-x": "Day {{day}}",
+  "remaining-days_one": "{{days}} day remaining",
+  "remaining-days_other": "{{days}} days remaining",
+  "x-days_one": "{{days}} day",
+  "x-days_other": "{{days}} days",
+  "x-pages_one": "{{pages}} page",
+  "x-pages_other": "{{pages}} pages",
+  "x-hours_one": "{{hours}} hour",
+  "x-hours_other": "{{hours}} hours",
+  "x-minutes_one": "{{minutes}} minute",
+  "x-minutes_other": "{{minutes}} minutes",
+  "x-seconds_one": "{{seconds}} second",
+  "x-seconds_other": "{{seconds}} seconds"
 }

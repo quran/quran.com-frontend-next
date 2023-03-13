@@ -10,7 +10,8 @@ const makeUrl = (url: string, parameters?: Record<string, unknown>): string => {
   return getAuthApiPath(`${url}${`?${stringify(parameters)}`}`);
 };
 
-export const makeUserProfileUrl = (): string => makeUrl('users/profile');
+export const makeUserProfileUrl = (timezone?: string): string =>
+  makeUrl('users/profile', timezone ? { timezone } : undefined);
 
 export const makeCompleteSignupUrl = (): string => makeUrl('users/completeSignup');
 
@@ -101,7 +102,12 @@ export const makeReadingSessionsUrl = () => makeUrl('reading-sessions');
 export const makeReadingDaysUrl = (timezone?: string) =>
   makeUrl('reading-days', timezone ? { timezone } : undefined);
 
+export const makeAllReadingDaysUrl = (from: string, to: string) =>
+  makeUrl('reading-days/all', { from, to });
+
 export const makeReadingGoalUrl = () => makeUrl('reading-goal');
+
+export const makeEstimateReadingGoalUrl = () => makeUrl('reading-goal/estimate');
 
 export const makeReadingGoalProgressUrl = (timezone?: string) =>
   makeUrl('reading-goal/status', timezone ? { timezone } : undefined);

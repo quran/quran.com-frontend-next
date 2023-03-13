@@ -1,4 +1,6 @@
-import { getLangFullLocale, LANG_LOCALE_MAP } from './locale';
+import { Translate } from 'next-translate';
+
+import { getLangFullLocale, LANG_LOCALE_MAP, toLocalizedNumber } from './locale';
 
 // Converts seconds to (hours), minutes, and seconds
 export const secondsFormatter = (seconds: number, locale: string) => {
@@ -12,6 +14,52 @@ export const secondsFormatter = (seconds: number, locale: string) => {
     second: '2-digit',
     ...(seconds >= 3600 && { hour: '2-digit' }), // only include hours if the duration is more than 60 minutes
   });
+};
+
+/**
+ * Convert seconds to the format of `x hours, y minutes, z seconds`.
+ * Or any combination of the three.
+ *
+ * @param {numbers} s seconds
+ * @param {Tramslate} t translate function
+ * @param {string} locale locale
+ * @returns {string}
+ */
+export const secondsToReadableFormat = (s: number, t: Translate, locale: string) => {
+  const results: string[] = [];
+
+  let seconds = s;
+  let minutes = Math.floor(seconds / 60);
+  const hours = Math.floor(minutes / 60);
+
+  if (hours > 0) {
+    results.push(
+      t('reading-goal:x-hours', { count: hours, hours: toLocalizedNumber(hours, locale) }),
+    );
+    minutes %= 60;
+    seconds %= 60;
+  }
+
+  if (minutes > 0) {
+    results.push(
+      t('reading-goal:x-minutes', {
+        count: minutes,
+        minutes: toLocalizedNumber(minutes, locale),
+      }),
+    );
+    seconds %= 60;
+  }
+
+  if (seconds > 0) {
+    results.push(
+      t('reading-goal:x-seconds', {
+        count: seconds,
+        seconds: toLocalizedNumber(seconds, locale),
+      }),
+    );
+  }
+
+  return results.join(', ');
 };
 
 /**
@@ -93,4 +141,18 @@ export const getTimezone = (): string => {
 
   timezone = dateTimeFormatter.resolvedOptions().timeZone;
   return timezone;
+};
+
+/**
+ * Converts a date instance to a string in this format: YYYY-MM-DD
+ *
+ * @param {Date} date
+ * @returns {string}
+ */
+export const dateToDateString = (date: Date): string => {
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+
+  return `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
 };
