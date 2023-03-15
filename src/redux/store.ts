@@ -16,7 +16,6 @@ import DefaultSettingsMiddleware from './middleware/defaultSettingsMiddleware';
 import migrations from './migrations';
 import audioPlayerPersistConfig from './slices/AudioPlayer/persistConfig';
 import audioPlayerState from './slices/AudioPlayer/state';
-import audioSectionUpdateNotice from './slices/audioSectionUpdateNotice';
 import userDataSync from './slices/Auth/userDataSync';
 import banner from './slices/banner';
 import commandBarPersistConfig from './slices/CommandBar/persistConfig';
@@ -95,7 +94,6 @@ export const rootReducer = combineReducers({
   userDataSync,
   persistGateHydration,
   revelationOrder,
-  audioSectionUpdateNotice,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
