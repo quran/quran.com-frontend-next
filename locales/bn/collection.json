@@ -2,6 +2,7 @@
     "all-saved-verses": "সমস্ত সংরক্ষিত আয়াত",
     "alphabetical": "AZ",
     "back-to-collection-list": "সংগ্রহ তালিকায় ফিরে যান",
+    "collapse-all": "সমস্ত আয়াত সঙ্কুচিত করুন",
     "collection-list-empty": "সংগ্রহের তালিকা খালি। আপনি এখনো কোনো সংগ্রহ তৈরি করেননি",
     "collections": "সংগ্রহ",
     "delete": "মুছে ফেলা",
@@ -14,6 +15,7 @@
         "title": "সংগ্রহ মুছুন"
     },
     "empty": "সংগ্রহ খালি",
+    "expand-all": "সব আয়াত প্রসারিত",
     "go-to-ayah": "আয়াতে যান",
     "load-more": "আর ঢুকাও",
     "recently-added": "সম্প্রতি যোগ",

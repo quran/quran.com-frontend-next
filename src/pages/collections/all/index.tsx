@@ -11,7 +11,7 @@ import { getAllChaptersData } from 'src/utils/chapter';
 import { CollectionDetailSortOption } from 'types/CollectionSortOptions';
 
 const CollectionDetailPage = ({ chaptersData }) => {
-  const [sortBy, setSortBy] = useState(CollectionDetailSortOption.RecentlyAdded);
+  const [sortBy, setSortBy] = useState(CollectionDetailSortOption.VerseKey);
   const { t } = useTranslation();
 
   const onSortByChange = (newSortByVal) => {

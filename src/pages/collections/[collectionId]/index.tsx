@@ -12,7 +12,7 @@ import { CollectionDetailSortOption } from 'types/CollectionSortOptions';
 
 const CollectionDetailPage = ({ chaptersData }) => {
   const router = useRouter();
-  const [sortBy, setSortBy] = useState(CollectionDetailSortOption.RecentlyAdded);
+  const [sortBy, setSortBy] = useState(CollectionDetailSortOption.VerseKey);
 
   const onSortByChange = (newSortByVal) => {
     logValueChange('collection_detail_page_sort_by', sortBy, newSortByVal);

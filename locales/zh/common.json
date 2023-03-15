@@ -70,7 +70,8 @@
         },
         "repeat-moved": "重复播放设置已移至音频播放器。单击<0> <\/0>图标以访问它们",
         "select-reciter": "选择诵读家",
-        "title": "音频"
+        "title": "音频",
+        "update-notice": "<p> 📣 在{{month}} {{day}} ，“音频”设置从“设置”移动到“音频播放器”菜单。 <\/p> <learnMore>在产品更新页面上了解有关这些更改的更多信息<\/learnMore>"
     },
     "ayah": "节",
     "ayahs": "节",

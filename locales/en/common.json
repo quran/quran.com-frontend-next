@@ -76,7 +76,8 @@
         "experience": "Experience",
         "exp-tip": "<span>Change the content displayed under<\/span><br><\/br> <boldSpan>Settings<\/boldSpan> > <boldSpan>Word By Word<\/boldSpan>",
         "exp-tip-no-select": "<span>Tick the tooltip display option and select the <br><\/br> Translation and/or Transliteration option<\/span><br><\/br><span> under <\/span><boldSpan>Settings<\/boldSpan> > <boldSpan>Word By Word<\/boldSpan><span>, to<\/span><br><\/br> <span>enable this feature.<\/span>",
-        "displaying": "Displaying"
+        "displaying": "Displaying",
+        "update-notice": "<p>📣 The 'Audio' setting is moving from Settings to the Audio Player menu on {{month}} {{day}}.<\/p><learnMore>Learn more about these changes on the Product Updates page<\/learnMore>"
     },
     "recitation": "Recitation",
     "display": "Display",

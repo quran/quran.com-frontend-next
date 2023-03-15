@@ -2,6 +2,7 @@
     "all-saved-verses": "โองการที่บันทึกไว้ทั้งหมด",
     "alphabetical": "AZ",
     "back-to-collection-list": "กลับไปที่รายการคอลเลกชัน",
+    "collapse-all": "ยุบโองการทั้งหมด",
     "collection-list-empty": "รายการคอลเลกชันว่างเปล่า คุณยังไม่ได้สร้างคอลเล็กชันใดๆ เลย",
     "collections": "ของสะสม",
     "delete": "ลบ",
@@ -14,6 +15,7 @@
         "title": "ลบคอลเลกชัน"
     },
     "empty": "คอลเลกชันว่างเปล่า",
+    "expand-all": "ขยายความทุกข้อ",
     "go-to-ayah": "ไปที่อายะ",
     "load-more": "โหลดเพิ่ม",
     "recently-added": "เพิ่มมาเร็ว ๆ นี้",

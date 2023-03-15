@@ -1,6 +1,6 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import * as CollapsiblePrimitive from '@radix-ui/react-collapsible';
 import classNames from 'classnames';
@@ -12,12 +12,14 @@ type ChildrenRenderProps = {
 };
 
 type Props = {
-  title: string;
+  title?: React.ReactNode;
   prefix?: React.ReactNode;
   suffix?: React.ReactNode;
   children: ({ isOpen }: ChildrenRenderProps) => React.ReactNode;
   isDefaultOpen?: boolean;
+  shouldOpen?: boolean;
   shouldRotatePrefixOnToggle?: boolean;
+  onOpenChange?: (isOpen: boolean) => void;
 };
 
 const Collapsible = ({
@@ -27,8 +29,14 @@ const Collapsible = ({
   suffix,
   children,
   shouldRotatePrefixOnToggle,
+  shouldOpen,
+  onOpenChange,
 }: Props) => {
   const [isOpen, setIsOpen] = useState(isDefaultOpen);
+
+  useEffect(() => {
+    setIsOpen(shouldOpen);
+  }, [shouldOpen]);
 
   const onSuffixClicked = (e) => {
     e.preventDefault();
@@ -38,7 +46,7 @@ const Collapsible = ({
   const onHeaderClicked = () => setIsOpen((preValue) => !preValue);
 
   return (
-    <CollapsiblePrimitive.Root open={isOpen}>
+    <CollapsiblePrimitive.Root onOpenChange={onOpenChange} open={isOpen}>
       <CollapsiblePrimitive.Trigger asChild>
         <div className={styles.header} onClick={onHeaderClicked}>
           <div className={styles.headerLeft}>
