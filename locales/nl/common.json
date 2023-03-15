@@ -40,6 +40,10 @@
             "on": "Op",
             "title": "Automatisch scrollen"
         },
+        "displaying": "Weergeven",
+        "exp-tip": "",
+        "exp-tip-no-select": "",
+        "experience": "Ervaring",
         "play": "Audio afspelen",
         "playback-normal": "normaal",
         "playback-speed": "Afspeelsnelheid",
@@ -50,6 +54,7 @@
             "delay-verse": "Vertraging tussen vers",
             "download": "Downloaden",
             "full-surah": "volledige soera",
+            "manage-repeat-settings": "Herhaalinstellingen beheren",
             "mismatch": "Klik op \"Overnieuw beginnen\" als je in plaats daarvan {{currentReadingChapter}}",
             "pause": "Pauze",
             "pause-audio": "Audio pauzeren",
@@ -70,6 +75,7 @@
         },
         "repeat-moved": "De herhaalinstellingen zijn verplaatst naar de audiospeler. Klik op het <0> <\/0> om ze te openen",
         "select-reciter": "Selecteer voordrager",
+        "speed": "Snelheid",
         "title": "Audio",
         "update-notice": "<p> 📣 De instelling 'Audio' wordt op {{month}} {{day}} verplaatst van Instellingen naar het menu Audiospeler. <\/p> <learnMore> Lees meer over deze wijzigingen op de pagina <\/learnMore>"
     },
@@ -108,6 +114,7 @@
     },
     "default-description": "De Koran vertaald in vele talen in een eenvoudige en gemakkelijke interface",
     "developers": "ontwikkelaars",
+    "display": "Weergave",
     "donate": "Doneren",
     "email-verification": {
         "check-spam": "Heb je de verificatie-e-mail niet ontvangen? Check je spam-inbox",
@@ -160,6 +167,7 @@
     "help": "Helpen",
     "hizb": "Hizb",
     "home": "Huis",
+    "inline": "In lijn",
     "input": {
         "clear": "Duidelijk"
     },
@@ -208,7 +216,9 @@
         "reading": "Lezing",
         "translation": "Vertaling"
     },
+    "recitation": "voordracht",
     "reciter": "Voordrager",
+    "reciter-summary": "",
     "reciters": "voordragers",
     "reflect": "Reflecteren",
     "remove": "Verwijderen",
@@ -295,6 +305,7 @@
     "to": "Tot",
     "tooltip": "Knopinfo",
     "tooltip-trans-lang": "Taal voor knopinfo",
+    "trans-lang": "Vertaling Taal",
     "translation": "Vertaling",
     "translations": "Vertalingen",
     "transliteration": "Transliteratie",
@@ -321,6 +332,7 @@
         "voice-search-powered-by": "Gesproken zoekopdracht Mogelijk gemaakt door"
     },
     "wbw": "Woord voor woord",
+    "wbw-lang-summary": "",
     "wbw-trans-lang": "Woord voor woord taal",
     "wbw-translation": "Woord voor woord vertaling",
     "wbw-transliteration": "Woord voor woord transliteratie",

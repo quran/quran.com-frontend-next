@@ -40,6 +40,10 @@
             "on": "Pasang",
             "title": "Gelongsor secara Atomatik"
         },
+        "displaying": "Memaparkan",
+        "exp-tip": "",
+        "exp-tip-no-select": "",
+        "experience": "Pengalaman",
         "play": "Mainkan Audio",
         "playback-normal": "Normal",
         "playback-speed": "Kelajuan Pemain",
@@ -50,6 +54,7 @@
             "delay-verse": "Kelewatan antara ayat",
             "download": "Muat turun",
             "full-surah": "Surah Penuh",
+            "manage-repeat-settings": "Urus tetapan ulangan",
             "mismatch": "Klik pada \"Mula Semula\" jika anda mahu teruskan {{currentReadingChapter}} sebaliknya",
             "pause": "Henti",
             "pause-audio": "Jeda Audio",
@@ -70,6 +75,7 @@
         },
         "repeat-moved": "Ketetapan ulangan telah pindah ke pemain audio. Klik pada <0> <\/0> untuk akses",
         "select-reciter": "Pilih Qari (Pembaca)",
+        "speed": "Kelajuan",
         "title": "Audio",
         "update-notice": "<p> 📣 Tetapan 'Audio' beralih daripada Tetapan ke menu Pemain Audio pada {{month}} {{day}} . <\/p> <learnMore> Ketahui lebih lanjut tentang perubahan ini pada halaman Kemas Kini Produk <\/learnMore>"
     },
@@ -108,6 +114,7 @@
     },
     "default-description": "Al-Quran diterjemahkan ke dalam banyak bahasa melalui interface yang ringkas dan mudah",
     "developers": "Pemaju (Developers)",
+    "display": "Paparan",
     "donate": "Menderma",
     "email-verification": {
         "check-spam": "Tidak menerima e-mel pengesahan? Semak peti masuk spam anda",
@@ -160,6 +167,7 @@
     "help": "Bantuan",
     "hizb": "Hizb",
     "home": "Halaman Utama",
+    "inline": "Dalam barisan",
     "input": {
         "clear": "Hilangkan"
     },
@@ -208,7 +216,9 @@
         "reading": "Membaca",
         "translation": "Terjemahan"
     },
+    "recitation": "Tilawah",
     "reciter": "Qari",
+    "reciter-summary": "",
     "reciters": "qari",
     "reflect": "Renungkan",
     "remove": "Keluarkan",
@@ -295,6 +305,7 @@
     "to": "Ke",
     "tooltip": "Alat",
     "tooltip-trans-lang": "Tooltip Language",
+    "trans-lang": "Bahasa Terjemahan",
     "translation": "Terjemahan",
     "translations": "Terjemahan",
     "transliteration": "Transliterasi",
@@ -321,6 +332,7 @@
         "voice-search-powered-by": "Enjin carian suara dihasilkan oleh"
     },
     "wbw": "Perkataan demi perkataan",
+    "wbw-lang-summary": "",
     "wbw-trans-lang": "Bahasa bagi Perkataan Demi Perkataan",
     "wbw-translation": "Terjemahan Perkataan demi Perkataan",
     "wbw-transliteration": "Transliterasi Kata demi Kata",

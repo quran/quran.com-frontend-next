@@ -40,6 +40,10 @@
             "on": "Sobre",
             "title": "Auto rolagem"
         },
+        "displaying": "Exibindo",
+        "exp-tip": "",
+        "exp-tip-no-select": "",
+        "experience": "Experiência",
         "play": "Tocar áudio",
         "playback-normal": "Normal",
         "playback-speed": "Velocidade de reprodução",
@@ -50,6 +54,7 @@
             "delay-verse": "Atraso entre os versos",
             "download": "Download",
             "full-surah": "Surata completa",
+            "manage-repeat-settings": "Gerenciar configurações de repetição",
             "mismatch": "Clique em \"Recomeçar\" se preferir jogar {{currentReadingChapter}}",
             "pause": "Pausa",
             "pause-audio": "Pausar áudio",
@@ -70,6 +75,7 @@
         },
         "repeat-moved": "As configurações de repetição foram movidas para o reprodutor de áudio. Clique no <0> <\/0> para acessá-los",
         "select-reciter": "Selecione o recitador",
+        "speed": "Velocidade",
         "title": "Áudio",
         "update-notice": "<p> 📣 A configuração 'Áudio' será movida de Configurações para o menu Reprodutor de áudio em {{month}} {{day}} . <\/p> <learnMore> Saiba mais sobre essas alterações na página de atualizações de produtos <\/learnMore>"
     },
@@ -108,6 +114,7 @@
     },
     "default-description": "O Alcorão traduzido para vários idiomas em uma interface simples e fácil",
     "developers": "Desenvolvedores",
+    "display": "Mostrar",
     "donate": "Doar",
     "email-verification": {
         "check-spam": "Não recebeu o e-mail de verificação? Verifique sua caixa de spam",
@@ -160,6 +167,7 @@
     "help": "Ajuda",
     "hizb": "Hizb",
     "home": "Casa",
+    "inline": "Em linha",
     "input": {
         "clear": "Claro"
     },
@@ -208,7 +216,9 @@
         "reading": "Lendo",
         "translation": "Tradução"
     },
+    "recitation": "Recitação",
     "reciter": "Recitador",
+    "reciter-summary": "",
     "reciters": "Recitadores",
     "reflect": "Refletir",
     "remove": "Retirar",
@@ -295,6 +305,7 @@
     "to": "Para",
     "tooltip": "Dica de ferramenta",
     "tooltip-trans-lang": "Linguagem de dica de ferramenta",
+    "trans-lang": "Idioma de tradução",
     "translation": "Tradução",
     "translations": "Traduções",
     "transliteration": "Transliteração",
@@ -321,6 +332,7 @@
         "voice-search-powered-by": "Pesquisa por voz com tecnologia de"
     },
     "wbw": "Palavra por palavra",
+    "wbw-lang-summary": "",
     "wbw-trans-lang": "Linguagem palavra por palavra",
     "wbw-translation": "Tradução palavra por palavra",
     "wbw-transliteration": "Transliteração palavra por palavra",

@@ -40,6 +40,10 @@
             "on": "Açık",
             "title": "Otomatik kaydırma"
         },
+        "displaying": "gösteriliyor",
+        "exp-tip": "",
+        "exp-tip-no-select": "",
+        "experience": "Deneyim",
         "play": "Okut",
         "playback-normal": "Normal",
         "playback-speed": "Oynatma Hızı",
@@ -50,6 +54,7 @@
             "delay-verse": "Ayet arası gecikme",
             "download": "İndir",
             "full-surah": "Tam sure",
+            "manage-repeat-settings": "Yineleme ayarlarını yönet",
             "mismatch": "Bunun yerine {{currentReadingChapter}} çalmak istiyorsanız \"Baştan Başla\"yı tıklayın.",
             "pause": "Duraklat",
             "pause-audio": "Sesi Duraklat",
@@ -70,6 +75,7 @@
         },
         "repeat-moved": "Tekrarlama ayarları müzik çalara taşındı. Erişmek için <0> <\/0> simgesine tıklayın",
         "select-reciter": "Okuyucu Seçin",
+        "speed": "Hız",
         "title": "Ses",
         "update-notice": "<p> 📣 'Ses' ayarı, {{month}} {{day}} tarihinde Ayarlar'dan Ses Çalar menüsüne taşınıyor. <\/p> <learnMore> Ürün Güncellemeleri sayfasında bu değişiklikler hakkında daha fazla bilgi edinin <\/learnMore>"
     },
@@ -108,6 +114,7 @@
     },
     "default-description": "Kuran, basit ve kolay bir arayüzde birçok dile çevrildi",
     "developers": "Geliştiriciler",
+    "display": "Görüntülemek",
     "donate": "Bağış Yapın",
     "email-verification": {
         "check-spam": "Doğrulama e-postasını almadınız mı? Spam gelen kutunuzu kontrol edin",
@@ -160,6 +167,7 @@
     "help": "Yardım",
     "hizb": "Hizb",
     "home": "Anasayfa",
+    "inline": "Çizgide",
     "input": {
         "clear": "Açık"
     },
@@ -208,7 +216,9 @@
         "reading": "Okuma",
         "translation": "Meal"
     },
+    "recitation": "okuma",
     "reciter": "Okuyucu",
+    "reciter-summary": "",
     "reciters": "Okuyucular",
     "reflect": "Yansıt",
     "remove": "Kaldırmak",
@@ -295,6 +305,7 @@
     "to": "NS",
     "tooltip": "Araç ipucu",
     "tooltip-trans-lang": "Araç İpucu Dili",
+    "trans-lang": "Çeviri Dili",
     "translation": "Meal",
     "translations": "Çeviriler",
     "transliteration": "Okunuş",
@@ -321,6 +332,7 @@
         "voice-search-powered-by": "Sesli Aramayı Destekleyen"
     },
     "wbw": "Kelime kelime",
+    "wbw-lang-summary": "",
     "wbw-trans-lang": "Kelime Dilinden Kelime",
     "wbw-translation": "Kelime Kelime Okunuş",
     "wbw-transliteration": "Kelime Kelime Meal",

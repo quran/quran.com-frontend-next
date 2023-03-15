@@ -40,6 +40,10 @@
             "on": "ہاں",
             "title": "آٹو سکرول"
         },
+        "displaying": "دکھانا",
+        "exp-tip": "",
+        "exp-tip-no-select": "",
+        "experience": "تجربہ",
         "play": "آڈیو چلائیں۔",
         "playback-normal": "نارمل",
         "playback-speed": "پلے بیک کی رفتار",
@@ -50,6 +54,7 @@
             "delay-verse": "آیت کے درمیان وقفہ",
             "download": "ڈاؤن لوڈ کریں",
             "full-surah": "مکمل سورہ",
+            "manage-repeat-settings": "دہرانے کی ترتیبات کا نظم کریں۔",
             "mismatch": "اگر آپ اس کے بجائے {{currentReadingChapter}} کھیلنا چاہتے ہیں تو \"Start Over\" پر کلک کریں۔",
             "pause": "توقف",
             "pause-audio": "آڈیو موقوف کریں۔",
@@ -70,6 +75,7 @@
         },
         "repeat-moved": "دہرائی جانے والی ترتیبات آڈیو پلیئر میں منتقل ہو گئی ہیں۔ ان تک رسائی کے لیے <0> <\/0> آئیکن پر کلک کریں۔",
         "select-reciter": "قاری منتخب کریں.",
+        "speed": "رفتار",
         "title": "آڈیو",
         "update-notice": "<p> 📣 'آڈیو' کی ترتیب {{month}} {{day}} کو ترتیبات سے آڈیو پلیئر مینو میں منتقل ہو رہی ہے۔ <\/p> <learnMore> پروڈکٹ اپڈیٹس کے صفحہ پر ان تبدیلیوں کے بارے میں مزید جانیں <\/learnMore>"
     },
@@ -108,6 +114,7 @@
     },
     "default-description": "قرآن مجید کا ایک سادہ اور آسان انٹرفیس میں متعدد زبانوں میں ترجمہ کیا گیا ہے۔",
     "developers": "ڈویلپرز",
+    "display": "ڈسپلے",
     "donate": "عطیہ کریں۔",
     "email-verification": {
         "check-spam": "تصدیقی ای میل موصول نہیں ہوا؟ اپنا اسپام ان باکس چیک کریں۔",
@@ -160,6 +167,7 @@
     "help": "مدد",
     "hizb": "حزب",
     "home": "گھر",
+    "inline": "ترتیب سے",
     "input": {
         "clear": "صاف"
     },
@@ -208,7 +216,9 @@
         "reading": "پڑہائی",
         "translation": "ترجمہ"
     },
+    "recitation": "تلاوت",
     "reciter": "تلاوت کرنے والا",
+    "reciter-summary": "",
     "reciters": "تلاوت کرنے والے",
     "reflect": "عکاسی کرنا",
     "remove": "دور",
@@ -295,6 +305,7 @@
     "to": "کو",
     "tooltip": "ٹول ٹِپ",
     "tooltip-trans-lang": "ٹول ٹپ کی زبان",
+    "trans-lang": "ترجمہ کی زبان",
     "translation": "ترجمہ",
     "translations": "ترجمے",
     "transliteration": "تلفظ",
@@ -321,6 +332,7 @@
         "voice-search-powered-by": "آواز کی تلاش بذریعہ تقویت یافتہ"
     },
     "wbw": "لفظ بہ لفظ",
+    "wbw-lang-summary": "",
     "wbw-trans-lang": "لفظ بہ لفظ زبان",
     "wbw-translation": "لفظ بہ لفظ ترجمہ",
     "wbw-transliteration": "لفظ بہ لفظ نقل",

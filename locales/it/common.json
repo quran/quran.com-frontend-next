@@ -40,6 +40,10 @@
             "on": "Sopra",
             "title": "Scorrimento automatico"
         },
+        "displaying": "Visualizzazione",
+        "exp-tip": "",
+        "exp-tip-no-select": "",
+        "experience": "Esperienza",
         "play": "Riproduci audio",
         "playback-normal": "Normale",
         "playback-speed": "Velocità di riproduzione",
@@ -50,6 +54,7 @@
             "delay-verse": "Ritardo tra i versi",
             "download": "Scarica",
             "full-surah": "Sura completa",
+            "manage-repeat-settings": "Gestisci le impostazioni di ripetizione",
             "mismatch": "Fai clic su \"Ricomincia\" se invece vuoi giocare a {{currentReadingChapter}}",
             "pause": "Pausa",
             "pause-audio": "Metti in pausa l'audio",
@@ -70,6 +75,7 @@
         },
         "repeat-moved": "Le impostazioni di ripetizione sono state spostate sul lettore audio. Fare clic sull'icona <0> <\/0> per accedervi",
         "select-reciter": "Seleziona Relatore",
+        "speed": "Velocità",
         "title": "Audio",
         "update-notice": "<p> 📣 L'impostazione \"Audio\" verrà spostata da Impostazioni al menu del lettore audio il {{month}} {{day}} . <\/p> <learnMore> Ulteriori informazioni su queste modifiche nella pagina degli aggiornamenti del prodotto <\/learnMore>"
     },
@@ -108,6 +114,7 @@
     },
     "default-description": "Il Corano tradotto in molte lingue con un'interfaccia semplice e facile",
     "developers": "Sviluppatori",
+    "display": "Schermo",
     "donate": "Donare",
     "email-verification": {
         "check-spam": "Non hai ricevuto l'email di verifica? Controlla la tua casella di posta indesiderata",
@@ -160,6 +167,7 @@
     "help": "Aiuto",
     "hizb": "Hizb",
     "home": "Casa",
+    "inline": "In linea",
     "input": {
         "clear": "Chiaro"
     },
@@ -208,7 +216,9 @@
         "reading": "Lettura",
         "translation": "Traduzione"
     },
+    "recitation": "Recitazione",
     "reciter": "Recitatore",
+    "reciter-summary": "",
     "reciters": "Recitatori",
     "reflect": "Riflettere",
     "remove": "Rimuovere",
@@ -295,6 +305,7 @@
     "to": "Per",
     "tooltip": "Descrizione comando",
     "tooltip-trans-lang": "Lingua dei suggerimenti",
+    "trans-lang": "Lingua di traduzione",
     "translation": "Traduzione",
     "translations": "Traduzioni",
     "transliteration": "Traslitterazione",
@@ -321,6 +332,7 @@
         "voice-search-powered-by": "Ricerca vocale Powered by"
     },
     "wbw": "Parola per parola",
+    "wbw-lang-summary": "",
     "wbw-trans-lang": "Parola per parola lingua",
     "wbw-translation": "Traduzione parola per parola",
     "wbw-transliteration": "Traslitterazione parola per parola",
