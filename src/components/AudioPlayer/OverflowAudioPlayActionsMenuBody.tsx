@@ -89,8 +89,10 @@ const OverflowAudioPlayActionsMenuBody = () => {
             setSelectedMenu(AudioPlayerOverflowMenu.Reciter);
           }}
         >
-          <div className={styles.menuWithNestedItems}>{t('reciter')}</div>
-          <ChevronRightIcon />
+          <div className={styles.menuWithNestedItems}>
+            {t('reciter')}
+            <ChevronRightIcon />
+          </div>
         </PopoverMenu.Item>,
       ],
       [AudioPlayerOverflowMenu.AudioSpeed]: (
