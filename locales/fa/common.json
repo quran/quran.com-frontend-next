@@ -331,7 +331,7 @@
         "voice-search-powered-by": "جستجوی صوتی ارائه شده توسط"
     },
     "wbw": "کلمه به کلمه",
-    "wbw-lang-summary": "",
+    "wbw-lang-summary": "منبع ترجمه کلمه به کلمه: <link> {{source}} <\/link> . این منبع مستقل از انتخاب ترجمه آیات است.",
     "wbw-trans-lang": "زبان کلمه به کلمه",
     "wbw-translation": "ترجمه کلمه به کلمه",
     "wbw-transliteration": "نویسه گردانی کلمه به کلمه",

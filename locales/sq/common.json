@@ -331,7 +331,7 @@
         "voice-search-powered-by": "Kërkimi me zë Mundësuar nga"
     },
     "wbw": "Fjalë Për Fjalë",
-    "wbw-lang-summary": "",
+    "wbw-lang-summary": "Burimi i përkthimit fjalë për fjalë: <link> {{source}} <\/link> . Ky burim është i pavarur nga përzgjedhja e përkthimit të vargjeve.",
     "wbw-trans-lang": "Fjalë për fjalë Gjuha",
     "wbw-translation": "Përkthimi fjalë pas fjale",
     "wbw-transliteration": "Përkthimi fjalë për fjalë",

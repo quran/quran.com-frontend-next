@@ -331,7 +331,7 @@
         "voice-search-powered-by": "Голосовой поиск на базе"
     },
     "wbw": "Слово за слово",
-    "wbw-lang-summary": "",
+    "wbw-lang-summary": "Источник пословного перевода: <link> {{source}} <\/link> . Этот источник не зависит от выбора перевода стиха.",
     "wbw-trans-lang": "Слово за словом язык",
     "wbw-translation": "Пословный перевод",
     "wbw-transliteration": "Пословная транслитерация",

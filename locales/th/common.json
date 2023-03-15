@@ -331,7 +331,7 @@
         "voice-search-powered-by": "ค้นหาด้วยเสียงขับเคลื่อนโดย"
     },
     "wbw": "คำต่อคำ",
-    "wbw-lang-summary": "",
+    "wbw-lang-summary": "แหล่งที่มาของการแปลคำต่อคำ: <link> {{source}} <\/link> แหล่งข้อมูลนี้ไม่ขึ้นกับการเลือกคำแปลร้อยกรอง",
     "wbw-trans-lang": "คำต่อคำ ภาษา",
     "wbw-translation": "การแปลคำต่อคำ",
     "wbw-transliteration": "คำต่อคำทับศัพท์",

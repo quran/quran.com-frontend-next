@@ -331,7 +331,7 @@
         "voice-search-powered-by": "Recherche vocale optimisée par"
     },
     "wbw": "Mot par mot",
-    "wbw-lang-summary": "",
+    "wbw-lang-summary": "Source de la traduction mot à mot : <link> {{source}} <\/link> . Cette source est indépendante de la sélection de traduction verset.",
     "wbw-trans-lang": "Langage mot à mot",
     "wbw-translation": "Traduction mot à mot",
     "wbw-transliteration": "Translittération mot à mot",

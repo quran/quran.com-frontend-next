@@ -331,7 +331,7 @@
         "voice-search-powered-by": "ভয়েস অনুসন্ধান দ্বারা চালিত"
     },
     "wbw": "শব্দ দ্বারা শব্দ",
-    "wbw-lang-summary": "",
+    "wbw-lang-summary": "শব্দ দ্বারা শব্দ অনুবাদ উৎস: <link> {{source}} <\/link> । এই উৎসটি শ্লোক অনুবাদ নির্বাচন থেকে স্বাধীন।",
     "wbw-trans-lang": "শব্দ দ্বারা শব্দ ভাষা",
     "wbw-translation": "শব্দ দ্বারা শব্দ অনুবাদ",
     "wbw-transliteration": "শব্দ দ্বারা শব্দ প্রতিবর্ণীকরণ",

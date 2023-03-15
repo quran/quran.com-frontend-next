@@ -331,7 +331,7 @@
         "voice-search-powered-by": "البحث الصوتي مدعوم من"
     },
     "wbw": "كلمة بكلمة",
-    "wbw-lang-summary": "",
+    "wbw-lang-summary": "مصدر الترجمة كلمة بكلمة: <link> {{source}} <\/link> . هذا المصدر مستقل عن اختيار ترجمة الآية.",
     "wbw-trans-lang": "لغة الترجمة كلمة بكلمة",
     "wbw-translation": "ترجمة الكلمات",
     "wbw-transliteration": "النقل الحرفي للكلمات",

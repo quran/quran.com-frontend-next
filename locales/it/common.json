@@ -331,7 +331,7 @@
         "voice-search-powered-by": "Ricerca vocale Powered by"
     },
     "wbw": "Parola per parola",
-    "wbw-lang-summary": "",
+    "wbw-lang-summary": "Fonte della traduzione parola per parola: <link> {{source}} <\/link> . Questa fonte è indipendente dalla selezione della traduzione in versi.",
     "wbw-trans-lang": "Parola per parola lingua",
     "wbw-translation": "Traduzione parola per parola",
     "wbw-transliteration": "Traslitterazione parola per parola",

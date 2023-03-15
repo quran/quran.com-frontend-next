@@ -331,7 +331,7 @@
         "voice-search-powered-by": "Pencarian suara dipersembahkan oleh"
     },
     "wbw": "Kata dari kata",
-    "wbw-lang-summary": "",
+    "wbw-lang-summary": "Sumber terjemahan kata demi kata: <link> {{source}} <\/link> . Sumber ini tidak tergantung pada pemilihan terjemahan ayat.",
     "wbw-trans-lang": "Bahasa kata per kata",
     "wbw-translation": "Terjemahan per kata",
     "wbw-transliteration": "Transliterasi per kata",

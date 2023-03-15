@@ -331,7 +331,7 @@
         "voice-search-powered-by": "语音搜索 技术支持单位"
     },
     "wbw": "在单词下方显示其译文",
-    "wbw-lang-summary": "",
+    "wbw-lang-summary": "逐字翻译来源： <link> {{source}} <\/link> 。此来源独立于诗歌翻译选择。",
     "wbw-trans-lang": "翻译成：",
     "wbw-translation": "逐字意译",
     "wbw-transliteration": "逐字音译",

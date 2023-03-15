@@ -331,7 +331,7 @@
         "voice-search-powered-by": "Sesli Aramayı Destekleyen"
     },
     "wbw": "Kelime kelime",
-    "wbw-lang-summary": "",
+    "wbw-lang-summary": "Kelime kelime çeviri kaynağı: <link> {{source}} <\/link> . Bu kaynak ayet çeviri seçiminden bağımsızdır.",
     "wbw-trans-lang": "Kelime Dilinden Kelime",
     "wbw-translation": "Kelime Kelime Okunuş",
     "wbw-transliteration": "Kelime Kelime Meal",

@@ -331,7 +331,7 @@
         "voice-search-powered-by": "Gesproken zoekopdracht Mogelijk gemaakt door"
     },
     "wbw": "Woord voor woord",
-    "wbw-lang-summary": "",
+    "wbw-lang-summary": "Woord voor woord vertalingsbron: <link> {{source}} <\/link> . Deze bron is onafhankelijk van de selectie van de versvertaling.",
     "wbw-trans-lang": "Woord voor woord taal",
     "wbw-translation": "Woord voor woord vertaling",
     "wbw-transliteration": "Woord voor woord transliteratie",
