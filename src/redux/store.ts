@@ -65,7 +65,6 @@ const persistConfig = {
     SliceName.BOOKMARKS,
     SliceName.USER_DATA_SYNC,
     SliceName.REVELATION_ORDER,
-    SliceName.AUDIO_SECTION_UPDATE_NOTICE,
   ], // Reducers defined here will be have their values saved in local storage and persist across sessions. See: https://github.com/rt2zz/redux-persist#blacklist--whitelist
 };
 
