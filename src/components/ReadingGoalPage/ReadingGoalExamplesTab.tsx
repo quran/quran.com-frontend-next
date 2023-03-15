@@ -1,8 +1,8 @@
 import useTranslation from 'next-translate/useTranslation';
 
+import { readingGoalExamples, ReadingGoalTabProps } from './hooks/useReadingGoalReducer';
 import OptionButton from './OptionButton';
 import styles from './ReadingGoalPage.module.scss';
-import { readingGoalExamples, ReadingGoalTabProps } from './useReadingGoalReducer';
 
 const ReadingGoalExamplesTab: React.FC<ReadingGoalTabProps> = ({ state, dispatch, nav }) => {
   const { t } = useTranslation('reading-goal');

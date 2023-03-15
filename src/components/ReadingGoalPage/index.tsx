@@ -5,13 +5,13 @@ import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 
+import useReadingGoalReducer, { ReadingGoalPeriod } from './hooks/useReadingGoalReducer';
 import ReadingGoalExamplesTab from './ReadingGoalExamplesTab';
 import styles from './ReadingGoalPage.module.scss';
 import ReadingGoalTargetAmountTab from './ReadingGoalTargetAmountTab';
 import ReadingGoalTimeTab from './ReadingGoalTimeTab';
 import ReadingGoalTypeTab from './ReadingGoalTypeTab';
 import ReadingGoalWeekPreviewTab from './ReadingGoalWeekPreviewTab';
-import useReadingGoalReducer from './useReadingGoalReducer';
 
 import DataContext from '@/contexts/DataContext';
 import Button, { ButtonSize } from '@/dls/Button/Button';
@@ -60,7 +60,7 @@ const ReadingGoalOnboarding: React.FC = () => {
       type: state.type,
       amount,
     };
-    if (state.period === 'continuous') data.duration = state.duration;
+    if (state.period === ReadingGoalPeriod.Continuous) data.duration = state.duration;
 
     setLoading(true);
 

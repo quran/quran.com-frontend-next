@@ -1,5 +1,3 @@
-import { useEffect } from 'react';
-
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
@@ -13,7 +11,6 @@ import NextSeoWrapper from '@/components/NextSeoWrapper';
 import Spinner, { SpinnerSize } from '@/dls/Spinner/Spinner';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import ArrowLeft from '@/icons/west.svg';
-import { isLoggedIn } from '@/utils/auth/login';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getLanguageAlternates } from '@/utils/locale';
 import {
@@ -54,12 +51,6 @@ const CollectionDetailContainer = ({
   const router = useRouter();
   const collectionId = router.query.collectionId as string;
   const toast = useToast();
-
-  useEffect(() => {
-    if (!isLoggedIn()) {
-      router.replace('/');
-    }
-  }, [router]);
 
   const { data, size, setSize, mutate, isValidating, error } =
     useSWRInfinite<GetBookmarkCollectionsIdResponse>(getSWRKey, privateFetcher);

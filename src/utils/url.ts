@@ -55,4 +55,3 @@ export const getBasePath = (): string =>
  */
 export const getAuthApiPath = (path: string): string =>
   `${process.env.NEXT_PUBLIC_AUTH_BASE_URL}/${path}`;
-// `${process.env.NEXT_PUBLIC_AUTH_BASE_URL}/${path}`;

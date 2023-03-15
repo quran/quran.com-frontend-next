@@ -1,6 +1,6 @@
-/* eslint-disable react-func/max-lines-per-function */
-import { useCallback, useContext, useEffect, useRef } from 'react';
+import { useCallback, useContext, useEffect, useRef, useMemo } from 'react';
 
+import debounce from 'lodash/debounce';
 import { useDispatch } from 'react-redux';
 import { useSWRConfig } from 'swr';
 
@@ -10,13 +10,15 @@ import DataContext from '@/contexts/DataContext';
 import useGlobalIntersectionObserver from '@/hooks/useGlobalIntersectionObserver';
 import { setLastReadVerse } from '@/redux/slices/QuranReader/readingTracker';
 import { UpdateReadingDayBody } from '@/types/auth/ReadingDay';
-import { updateReadingDay } from '@/utils/auth/api';
-import { makeReadingDaysUrl } from '@/utils/auth/apiPaths';
+import { addReadingSession, updateReadingDay } from '@/utils/auth/api';
+import { makeReadingSessionsUrl, makeStreakUrl } from '@/utils/auth/apiPaths';
 import { isLoggedIn } from '@/utils/auth/login';
 import { getTimezone } from '@/utils/datetime';
 import mergeVerseKeys from '@/utils/mergeVerseKeys';
+import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
 
-const READING_DAY_SYNC_TIME_MS = 30000; // 30 seconds
+const READING_DAY_SYNC_TIME_MS = 15000; // 15 seconds
+const READING_SESSION_DEBOUNCE_WAIT_TIME = 2000; // 2 seconds
 
 interface UseSyncReadingProgressProps {
   isReadingPreference: boolean;
@@ -37,11 +39,25 @@ const useSyncReadingProgress = ({ isReadingPreference }: UseSyncReadingProgressP
   const dispatch = useDispatch();
   const { cache } = useSWRConfig();
 
+  const addReadingSessionAndClearCache = useCallback(
+    (chapterNumber, verseNumber) => {
+      addReadingSession(chapterNumber, verseNumber).then(() => {
+        cache.delete(makeReadingSessionsUrl());
+      });
+    },
+    [cache],
+  );
+
+  const debouncedAddReadingSession = useMemo(
+    () => debounce(addReadingSessionAndClearCache, READING_SESSION_DEBOUNCE_WAIT_TIME),
+    [addReadingSessionAndClearCache],
+  );
+
   // send the data to the backend and clear the SWR cache
   const updateReadingDayAndClearCache = useCallback(
     (body: UpdateReadingDayBody) => {
       updateReadingDay(body).then(() => {
-        cache.delete(makeReadingDaysUrl());
+        cache.delete(makeStreakUrl());
       });
     },
     [cache],
@@ -61,8 +77,15 @@ const useSyncReadingProgress = ({ isReadingPreference }: UseSyncReadingProgressP
           chaptersData,
         }),
       );
+
+      if (isLoggedIn()) {
+        const [chapterNumber, verseNumber] = getVerseAndChapterNumbersFromKey(
+          lastReadVerse.verseKey,
+        );
+        debouncedAddReadingSession(Number(chapterNumber), Number(verseNumber));
+      }
     },
-    [chaptersData, dispatch],
+    [chaptersData, debouncedAddReadingSession, dispatch],
   );
 
   // eslint-disable-next-line consistent-return

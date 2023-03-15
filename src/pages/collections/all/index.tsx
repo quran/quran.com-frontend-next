@@ -4,6 +4,7 @@ import { GetStaticProps } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 
 import CollectionDetailContainer from '@/components/Collection/CollectionDetailContainer/CollectionDetailContainer';
+import useRequireAuth from '@/hooks/auth/useRequireAuth';
 import { isLoggedIn } from '@/utils/auth/login';
 import { logValueChange } from '@/utils/eventLogger';
 import { makeAllCollectionsItemsUrl } from 'src/utils/auth/apiPaths';
@@ -11,6 +12,7 @@ import { getAllChaptersData } from 'src/utils/chapter';
 import { CollectionDetailSortOption } from 'types/CollectionSortOptions';
 
 const CollectionDetailPage = ({ chaptersData }) => {
+  useRequireAuth();
   const [sortBy, setSortBy] = useState(CollectionDetailSortOption.RecentlyAdded);
   const { t } = useTranslation();
 

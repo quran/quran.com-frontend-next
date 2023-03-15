@@ -7,8 +7,13 @@ import ClockIcon from '@/icons/clock.svg';
 import SettingsIcon from '@/icons/settings-stroke.svg';
 import { ReadingGoalType } from '@/types/auth/ReadingGoal';
 
+export enum ReadingGoalPeriod {
+  Daily = 'daily',
+  Continuous = 'continuous',
+}
+
 interface ReadingGoalState {
-  period: 'daily' | 'continuous';
+  period: ReadingGoalPeriod;
   type: ReadingGoalType;
   pages: number;
   seconds: number;
@@ -73,7 +78,7 @@ const reducer = (state: ReadingGoalState, action: ReadingGoalAction): ReadingGoa
     case 'SET_PERIOD':
       return {
         ...state,
-        duration: action.payload.period === 'continuous' ? 30 : null,
+        duration: action.payload.period === ReadingGoalPeriod.Continuous ? 30 : null,
         period: action.payload.period,
       };
     case 'SET_TYPE':
@@ -95,7 +100,7 @@ const reducer = (state: ReadingGoalState, action: ReadingGoalAction): ReadingGoa
       return {
         ...state,
         duration: action.payload.duration,
-        period: action.payload.duration ? 'continuous' : 'daily',
+        period: action.payload.duration ? ReadingGoalPeriod.Continuous : ReadingGoalPeriod.Daily,
       };
     case 'SET_RANGE':
       return {
@@ -129,7 +134,7 @@ export const readingGoalExamples = {
     values: {
       type: ReadingGoalType.TIME,
       seconds: 10 * 60,
-      period: 'daily',
+      period: ReadingGoalPeriod.Daily,
     },
   },
   khatm: {
@@ -140,7 +145,7 @@ export const readingGoalExamples = {
       rangeStartVerse: '1:1',
       rangeEndVerse: '114:6',
       duration: 30,
-      period: 'continuous',
+      period: ReadingGoalPeriod.Continuous,
     },
   },
   custom: {
@@ -150,7 +155,7 @@ export const readingGoalExamples = {
 } as const;
 
 const initialState: ReadingGoalState = {
-  period: 'daily',
+  period: ReadingGoalPeriod.Daily,
   type: ReadingGoalType.PAGES,
   exampleKey: null,
   pages: 1,

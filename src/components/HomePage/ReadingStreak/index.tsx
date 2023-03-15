@@ -7,7 +7,6 @@ import useTranslation from 'next-translate/useTranslation';
 import MoonIllustrationSVG from '../../../../public/images/moon-illustration.svg';
 
 import CurrentWeekProgress from './CurrentWeekProgress';
-import useGetWeekDays from './hooks/useGetWeekDays';
 import LoggedOutReadingStreak from './LoggedOutReadingStreak';
 import styles from './ReadingStreak.module.scss';
 
@@ -17,9 +16,9 @@ import HelperTooltip from '@/dls/HelperTooltip/HelperTooltip';
 import Link, { LinkVariant } from '@/dls/Link/Link';
 import Progress from '@/dls/Progress';
 import Skeleton from '@/dls/Skeleton/Skeleton';
-import useCurrentUser from '@/hooks/auth/useCurrentUser';
-import useGetReadingGoalProgress from '@/hooks/auth/useGetReadingGoalProgress';
+import useGetStreakWithMetadata from '@/hooks/auth/useGetStreakWithMetadata';
 import { ReadingGoalType } from '@/types/auth/ReadingGoal';
+import { isLoggedIn } from '@/utils/auth/login';
 import { getChapterData } from '@/utils/chapter';
 import { secondsToReadableFormat } from '@/utils/datetime';
 import { toLocalizedNumber } from '@/utils/locale';
@@ -28,37 +27,37 @@ import {
   getReadingGoalNavigationUrl,
   getReadingGoalProgressNavigationUrl,
 } from '@/utils/navigation';
-import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
+import { convertFractionToPercent } from '@/utils/number';
+import { parseVerseRange } from '@/utils/verseKeys';
 
-interface ReadingStreakProps {
-  layout?: 'home' | 'quran-reader';
+export enum ReadingStreakLayout {
+  Home = 'home',
+  QuranReader = 'quran-reader',
 }
 
-const ReadingStreak: React.FC<ReadingStreakProps> = ({ layout = 'home' }) => {
+interface ReadingStreakProps {
+  layout?: ReadingStreakLayout;
+}
+
+const ReadingStreak: React.FC<ReadingStreakProps> = ({ layout = ReadingStreakLayout.Home }) => {
   const { t, lang } = useTranslation('reading-goal');
-  const { user, isLoading, error } = useCurrentUser();
   const chaptersData = useContext(DataContext);
-  const { readingGoalProgress } = useGetReadingGoalProgress();
-  const isQuranReader = layout === 'quran-reader';
 
-  const readingGoal = readingGoalProgress?.data;
+  const { isLoading, error, streak, readingGoal, weekData } = useGetStreakWithMetadata();
+
+  const isQuranReader = layout === ReadingStreakLayout.QuranReader;
   const nextVerseToRead = readingGoal?.progress?.nextVerseToRead;
-  const streak = user?.streak || 0;
-
-  // disable this request for quran-reader
-  const weekData = useGetWeekDays();
 
   const localizedStreak = useMemo(() => {
     return toLocalizedNumber(streak, lang);
   }, [streak, lang]);
 
   const currentReadingDay = useMemo(() => {
-    return weekData.readingDaysMap[weekData.weekDays.find((d) => d.current)?.date];
+    return weekData.readingDaysMap[weekData.days.find((d) => d.current)?.date];
   }, [weekData]);
 
   const percent = useMemo(() => {
-    const value = Math.min(Number(((currentReadingDay?.progress || 0) * 100).toFixed(1)), 100);
-    return value;
+    return convertFractionToPercent(currentReadingDay?.progress || 0);
   }, [currentReadingDay]);
 
   const localizedPercent = useMemo(() => {
@@ -89,6 +88,7 @@ const ReadingStreak: React.FC<ReadingStreakProps> = ({ layout = 'home' }) => {
     const prefix = percent === 0 ? t('todays-goal') : t('remaining');
 
     let action: string | React.ReactNode = '';
+
     if (goalType === ReadingGoalType.TIME) {
       action = t('progress.time-goal', {
         time: secondsToReadableFormat(progress.amountLeft, t, lang),
@@ -101,10 +101,12 @@ const ReadingStreak: React.FC<ReadingStreakProps> = ({ layout = 'home' }) => {
 
     if (goalType === ReadingGoalType.RANGE) {
       const all = [];
+
       currentReadingDay?.dailyTargetRanges?.forEach((range) => {
-        const [rangeFrom, rangeTo] = range.split('-');
-        const [fromChapter, fromVerse] = getVerseAndChapterNumbersFromKey(rangeFrom);
-        const [toChapter, toVerse] = getVerseAndChapterNumbersFromKey(rangeTo);
+        const [
+          { chapter: fromChapter, verse: fromVerse, verseKey: rangeFrom },
+          { chapter: toChapter, verse: toVerse, verseKey: rangeTo },
+        ] = parseVerseRange(range);
 
         const from = `${
           getChapterData(chaptersData, fromChapter).transliteratedName
@@ -115,26 +117,36 @@ const ReadingStreak: React.FC<ReadingStreakProps> = ({ layout = 'home' }) => {
         } ${toLocalizedNumber(Number(toVerse), lang)}`;
 
         all.push(
-          <div>
-            <Link href={getChapterWithStartingVerseUrl(rangeFrom)} variant={LinkVariant.Highlight}>
+          <>
+            <Link href={getChapterWithStartingVerseUrl(rangeFrom)} variant={LinkVariant.Blend}>
               {from}
-            </Link>{' '}
-            {t('common:to')}{' '}
-            <Link href={getChapterWithStartingVerseUrl(rangeTo)} variant={LinkVariant.Highlight}>
+            </Link>
+            {` ${t('common:to')} `}
+            <Link href={getChapterWithStartingVerseUrl(rangeTo)} variant={LinkVariant.Blend}>
               {to}
             </Link>
-          </div>,
+          </>,
         );
       });
 
-      action = all;
+      action =
+        all.length > 1 ? (
+          <ul>
+            {all.map((range, idx) => (
+              // eslint-disable-next-line react/no-array-index-key
+              <div key={idx}>{range}</div>
+            ))}
+          </ul>
+        ) : (
+          all
+        );
     }
 
     return (
       <>
         {/* eslint-disable-next-line i18next/no-literal-string */}
         {prefix}: {action}
-        {readingGoal.progress.daysLeft > 0 && (
+        {typeof readingGoal.progress.daysLeft !== 'undefined' && (
           <>
             <br />
             {t('remaining-days', {
@@ -157,23 +169,19 @@ const ReadingStreak: React.FC<ReadingStreakProps> = ({ layout = 'home' }) => {
     return t('progress.complete');
   };
 
-  if (error || (!isLoading && !user?.id)) {
+  if (error || !isLoggedIn()) {
     return <LoggedOutReadingStreak />;
   }
-
-  const streakContainer = (
-    <div>
-      <span className={styles.streakSubtitle}>{t('reading-goal-label')}</span>
-      {isLoading ? <Skeleton>{streakUI}</Skeleton> : streakUI}
-    </div>
-  );
 
   const getContent = () => {
     if (!isQuranReader) {
       return (
         <>
-          {streakContainer}
-          <CurrentWeekProgress isTodaysGoalDone={isGoalDone} weekData={weekData} />
+          <div>
+            <span className={styles.streakSubtitle}>{t('reading-goal-label')}</span>
+            {isLoading ? <Skeleton>{streakUI}</Skeleton> : streakUI}
+          </div>
+          <CurrentWeekProgress weekData={weekData} />
         </>
       );
     }
@@ -199,7 +207,7 @@ const ReadingStreak: React.FC<ReadingStreakProps> = ({ layout = 'home' }) => {
           <p className={styles.streakTitle}>{t('goal-done.title')}</p>
           <p className={styles.dailyGoal}>{t('goal-done.description')}</p>
         </div>
-        <CurrentWeekProgress isTodaysGoalDone={isGoalDone} weekData={weekData} />
+        <CurrentWeekProgress weekData={weekData} />
       </>
     );
   };
@@ -215,7 +223,7 @@ const ReadingStreak: React.FC<ReadingStreakProps> = ({ layout = 'home' }) => {
       {!isQuranReader && (
         <div className={styles.goalContainer}>
           {!readingGoal ? (
-            <Button href={getReadingGoalNavigationUrl()}>{t('set-reading-goal')}</Button>
+            <Button href={getReadingGoalNavigationUrl()}>{t('create-reading-goal')}</Button>
           ) : (
             getGoalStatus()
           )}

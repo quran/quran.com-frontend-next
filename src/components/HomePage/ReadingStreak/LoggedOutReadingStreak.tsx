@@ -17,13 +17,13 @@ const LoggedOutReadingStreak = () => {
 
       <div className={styles.container}>
         <div>
-          <p className={styles.streakTitle}>{t('reading-plan')}</p>
+          <p className={styles.streakTitle}>{t('reading-goal-title')}</p>
         </div>
       </div>
-      <div className={styles.goalContainer}>{t('reading-plan-description')}</div>
+      <div className={styles.goalContainer}>{t('reading-goal-description')}</div>
 
       <div className={styles.actionsContainer}>
-        <Button href="/login">{t('create-plan')}</Button>
+        <Button href="/login">{t('create-reading-goal')}</Button>
       </div>
     </div>
   );
