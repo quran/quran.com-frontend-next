@@ -40,6 +40,10 @@
             "on": "Aktiv",
             "title": "Lëvizja automatike"
         },
+        "displaying": "Duke u shfaqur",
+        "exp-tip": "<span>Ndrysho përmbajtjen e shfaqur nën<\/span><br><\/br> <boldSpan>Cilësimet<\/boldSpan> > <boldSpan>Fjalë për fjalë<\/boldSpan>",
+        "exp-tip-no-select": "<span>Shënoni opsionin e shfaqjes së këshillës së veglave dhe zgjidhni opsionin <br><\/br> Përkthimi dhe\/ose Transliterimi<\/span><br><\/br><span> nën <\/span><boldSpan>Cilësimet<\/boldSpan> > <boldSpan>Fjalë për fjalë<\/boldSpan><span>, për të<\/span><br><\/br> <span>aktivizuar këtë veçori.<\/span>",
+        "experience": "Përvoja",
         "play": "Luaj Audio",
         "playback-normal": "Normale",
         "playback-speed": "Shpejtësia e riprodhimit",
@@ -50,6 +54,7 @@
             "delay-verse": "Vonesa mes vargjeve",
             "download": "Shkarko",
             "full-surah": "Surja e plotë",
+            "manage-repeat-settings": "Menaxho cilësimet e përsëritjes",
             "mismatch": "Klikoni në \"Start Over\" nëse dëshironi të luani {{currentReadingChapter}} në vend të kësaj",
             "pause": "Ndalo",
             "pause-audio": "Ndalo audion",
@@ -70,8 +75,8 @@
         },
         "repeat-moved": "Cilësimet e përsëritjes janë zhvendosur te luajtësi audio. Klikoni në <0> <\/0> për t'iu qasur atyre",
         "select-reciter": "Zgjidhni Recitues",
-        "title": "Audio",
-        "update-notice": "<p> 📣 Cilësimi \"Audio\" po zhvendoset nga \"Cilësimet\" në menynë \"Player audio\" më {{month}} {{day}} . <\/p> <learnMore> Mësoni më shumë rreth këtyre ndryshimeve në faqen e përditësimeve të produktit <\/learnMore>"
+        "speed": "Shpejtësia",
+        "title": "Audio"
     },
     "ayah": "Ajeti",
     "ayahs": "Ajetet",
@@ -108,6 +113,7 @@
     },
     "default-description": "Kurani i përkthyer në shumë gjuhë në një ndërfaqe të thjeshtë dhe të lehtë",
     "developers": "Zhvilluesit",
+    "display": "Ekrani",
     "donate": "Dhuroni",
     "email-verification": {
         "check-spam": "Nuk e morët emailin e verifikimit? Kontrolloni kutinë tuaj të postës së padëshiruar",
@@ -160,6 +166,7 @@
     "help": "Ndihmë",
     "hizb": "Hizb",
     "home": "Shtëpi",
+    "inline": "Ne rresht",
     "input": {
         "clear": "Qartë"
     },
@@ -208,7 +215,9 @@
         "reading": "Leximi",
         "translation": "Përkthimi"
     },
+    "recitation": "Recitim",
     "reciter": "Recitues",
+    "reciter-summary": "Recitues fjalë për fjalë: <span> {{reciterName}} <\/span> . Klikoni mbi një fjalë për të dëgjuar recitimin e saj.",
     "reciters": "Recituesit",
     "reflect": "Pasqyrim",
     "remove": "Hiq",
@@ -295,6 +304,7 @@
     "to": "tek",
     "tooltip": "Mesazh sugjerues",
     "tooltip-trans-lang": "Gjuha e mesazheve sugjeruese",
+    "trans-lang": "Gjuha e përkthimit",
     "translation": "Përkthimi",
     "translations": "Përkthime",
     "transliteration": "Transliterimi",
@@ -321,6 +331,7 @@
         "voice-search-powered-by": "Kërkimi me zë Mundësuar nga"
     },
     "wbw": "Fjalë Për Fjalë",
+    "wbw-lang-summary": "Burimi i përkthimit fjalë për fjalë: <link> {{source}} <\/link> . Ky burim është i pavarur nga përzgjedhja e përkthimit të vargjeve.",
     "wbw-trans-lang": "Fjalë për fjalë Gjuha",
     "wbw-translation": "Përkthimi fjalë pas fjale",
     "wbw-transliteration": "Përkthimi fjalë për fjalë",

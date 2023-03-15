@@ -1,6 +1,19 @@
 .checkboxContainer {
-  display: flex;
-  & > div + div {
-    margin-inline-start: var(--spacing-medium);
+  & > div {
+    margin-inline-start: var(--spacing-xxsmall);
+    margin-block: var(--spacing-xsmall);
   }
+}
+
+.separator {
+  margin-block: var(--spacing-small);
+}
+
+.source {
+  font-weight: var(--font-weight-bold);
+}
+
+.label {
+  margin-block-start: var(--spacing-xsmall);
+  margin-block-end: var(--spacing-xxsmall);
 }

@@ -40,6 +40,10 @@
             "on": "hidup",
             "title": "Gulir Otomatis"
         },
+        "displaying": "Menampilkan",
+        "exp-tip": "<span>Ubah konten yang ditampilkan di bawah<\/span><br><\/br> <boldSpan>Pengaturan<\/boldSpan> > <boldSpan>Kata Demi Kata<\/boldSpan>",
+        "exp-tip-no-select": "<span>Centang opsi tampilan tooltip dan pilih opsi <br><\/br> Terjemahan dan\/atau Transliterasi<\/span><br><\/br><span> di bawah <\/span><boldSpan>Pengaturan<\/boldSpan> > <boldSpan>Kata Demi Kata<\/boldSpan><span>, untuk<\/span><br><\/br> <span>mengaktifkan fitur ini.<\/span>",
+        "experience": "Pengalaman",
         "play": "Putar Audio",
         "playback-normal": "Normal",
         "playback-speed": "Kecepatan Pemutaran",
@@ -50,6 +54,7 @@
             "delay-verse": "Keterlambatan antar ayat",
             "download": "Unduh",
             "full-surah": "Surah Lengkap",
+            "manage-repeat-settings": "Kelola pengaturan pengulangan",
             "mismatch": "Klik \"Mulai Dari Awal\" jika Anda ingin memainkan {{currentReadingChapter}} sebagai gantinya",
             "pause": "Berhenti sebentar",
             "pause-audio": "Jeda Audio",
@@ -70,8 +75,8 @@
         },
         "repeat-moved": "Pengaturan pengulangan telah dipindahkan ke pemutar audio. Klik ikon <0> <\/0> untuk mengaksesnya",
         "select-reciter": "Pilih Qari",
-        "title": "audio",
-        "update-notice": "<p> 📣 Setelan 'Audio' dipindahkan dari Setelan ke menu Pemutar Audio pada {{month}} {{day}} . <\/p> <learnMore> Pelajari lebih lanjut tentang perubahan ini di halaman Pembaruan Produk <\/learnMore>"
+        "speed": "Kecepatan",
+        "title": "audio"
     },
     "ayah": "Ayat",
     "ayahs": "Ayat",
@@ -108,6 +113,7 @@
     },
     "default-description": "Al-Quran diterjemahkan ke dalam banyak bahasa dengan antarmuka yang sederhana dan mudah",
     "developers": "Pengembang (Developers)",
+    "display": "Menampilkan",
     "donate": "Menyumbangkan",
     "email-verification": {
         "check-spam": "Tidak menerima email verifikasi? Periksa kotak masuk spam Anda",
@@ -160,6 +166,7 @@
     "help": "Bantuan",
     "hizb": "Hizb",
     "home": "Halaman Utama",
+    "inline": "Di barisan",
     "input": {
         "clear": "Jernih"
     },
@@ -208,7 +215,9 @@
         "reading": "Membaca",
         "translation": "Terjemahan"
     },
+    "recitation": "Pembacaan",
     "reciter": "Qari",
+    "reciter-summary": "Pembaca kata demi kata: <span> {{reciterName}} <\/span> . Klik pada sebuah kata untuk mendengarkan bacaannya.",
     "reciters": "Qari",
     "reflect": "Mencerminkan",
     "remove": "Keluarkan",
@@ -295,6 +304,7 @@
     "to": "Ke",
     "tooltip": "Keterangan alat",
     "tooltip-trans-lang": "Tooltip Language",
+    "trans-lang": "Bahasa Terjemahan",
     "translation": "Terjemahan",
     "translations": "Terjemahan",
     "transliteration": "Transliterasi",
@@ -321,6 +331,7 @@
         "voice-search-powered-by": "Pencarian suara dipersembahkan oleh"
     },
     "wbw": "Kata dari kata",
+    "wbw-lang-summary": "Sumber terjemahan kata demi kata: <link> {{source}} <\/link> . Sumber ini tidak tergantung pada pemilihan terjemahan ayat.",
     "wbw-trans-lang": "Bahasa kata per kata",
     "wbw-translation": "Terjemahan per kata",
     "wbw-transliteration": "Transliterasi per kata",

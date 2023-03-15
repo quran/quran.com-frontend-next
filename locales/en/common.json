@@ -40,6 +40,10 @@
             "on": "On",
             "title": "Auto Scroll"
         },
+        "displaying": "Displaying",
+        "exp-tip": "<span>Change the content displayed under<\/span><br><\/br> <boldSpan>Settings<\/boldSpan> > <boldSpan>Word By Word<\/boldSpan>",
+        "exp-tip-no-select": "<span>Tick the tooltip display option and select the <br><\/br> Translation and\/or Transliteration option<\/span><br><\/br><span> under <\/span><boldSpan>Settings<\/boldSpan> > <boldSpan>Word By Word<\/boldSpan><span>, to<\/span><br><\/br> <span>enable this feature.<\/span>",
+        "experience": "Experience",
         "play": "Play Audio",
         "playback-normal": "Normal",
         "playback-speed": "Playback Speed",
@@ -50,6 +54,7 @@
             "delay-verse": "Delay between verse",
             "download": "Download",
             "full-surah": "Full Surah",
+            "manage-repeat-settings": "Manage repeat settings",
             "mismatch": "Click on \"Start Over\" if you would like to play {{currentReadingChapter}} instead",
             "pause": "Pause",
             "pause-audio": "Pause Audio",
@@ -70,8 +75,8 @@
         },
         "repeat-moved": "The repeat settings have moved to the audio player. Click on the <0><\/0> icon to access them",
         "select-reciter": "Select Reciter",
-        "title": "Audio",
-        "update-notice": "<p>📣 The 'Audio' setting is moving from Settings to the Audio Player menu on {{month}} {{day}}.<\/p><learnMore>Learn more about these changes on the Product Updates page<\/learnMore>"
+        "speed": "Speed",
+        "title": "Audio"
     },
     "ayah": "Ayah",
     "ayahs": "Ayahs",
@@ -108,6 +113,7 @@
     },
     "default-description": "The Quran translated into many languages in a simple and easy interface",
     "developers": "Developers",
+    "display": "Display",
     "donate": "Donate",
     "email-verification": {
         "check-spam": "Didn't receive the verification email? Check your spam inbox",
@@ -160,6 +166,7 @@
     "help": "Help",
     "hizb": "Hizb",
     "home": "Home",
+    "inline": "In-line",
     "input": {
         "clear": "Clear"
     },
@@ -208,7 +215,9 @@
         "reading": "Reading",
         "translation": "Translation"
     },
+    "recitation": "Recitation",
     "reciter": "Reciter",
+    "reciter-summary": "Word by word reciter: <span>{{reciterName}}<\/span>. Click on a word to listen to its recitation.",
     "reciters": "Reciters",
     "reflect": "Reflect",
     "remove": "Remove",
@@ -295,6 +304,7 @@
     "to": "To",
     "tooltip": "Tooltip",
     "tooltip-trans-lang": "Tooltip Language",
+    "trans-lang": "Translation Language",
     "translation": "Translation",
     "translations": "Translations",
     "transliteration": "Transliteration",
@@ -321,6 +331,7 @@
         "voice-search-powered-by": "Voice Search Powered by"
     },
     "wbw": "Word By Word",
+    "wbw-lang-summary": "Word by word translation source: <link>{{source}}<\/link>. This source is independent of the verse translation selection.",
     "wbw-trans-lang": "Word By Word Language",
     "wbw-translation": "Word By Word Translation",
     "wbw-transliteration": "Word By Word Transliteration",

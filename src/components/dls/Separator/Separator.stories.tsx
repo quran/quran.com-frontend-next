@@ -1,10 +1,13 @@
 /* eslint-disable react/no-multi-comp */
-import Separator from './Separator';
+import Separator, { SeparatorWeight } from './Separator';
 import styles from './Separator.stories.module.scss';
 
 export default {
   title: 'dls/Separator',
   component: Separator,
+  args: {
+    weight: SeparatorWeight.SemiBold,
+  },
   argTypes: {
     isVertical: {
       control: {
@@ -13,6 +16,14 @@ export default {
       table: {
         category: 'Optional',
       },
+    },
+    weight: {
+      table: {
+        category: 'Optional',
+      },
+      options: [SeparatorWeight.SemiBold, SeparatorWeight.Bold],
+      control: { type: 'radio' },
+      description: 'The weight of the separator line.',
     },
   },
 };
