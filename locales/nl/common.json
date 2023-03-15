@@ -41,7 +41,7 @@
             "title": "Automatisch scrollen"
         },
         "displaying": "Weergeven",
-        "exp-tip": "",
+        "exp-tip": "<span>Wijzig de weergegeven inhoud onder<\/span><br><\/br> <boldSpan>Instellingen<\/boldSpan> > <boldSpan>Woord voor woord<\/boldSpan>",
         "exp-tip-no-select": "",
         "experience": "Ervaring",
         "play": "Audio afspelen",

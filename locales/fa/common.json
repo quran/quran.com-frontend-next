@@ -41,7 +41,7 @@
             "title": "اسکرول خودکار"
         },
         "displaying": "در حال نمایش",
-        "exp-tip": "",
+        "exp-tip": "<span>تغییر محتوای نمایش داده شده در<\/span><br><\/br> <boldSpan>تنظیمات<\/boldSpan> > <boldSpan>کلمه به کلمه<\/boldSpan>",
         "exp-tip-no-select": "",
         "experience": "تجربه",
         "play": "پخش صدا",

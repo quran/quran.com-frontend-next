@@ -41,7 +41,7 @@
             "title": "เลื่อนอัตโนมัติ"
         },
         "displaying": "กำลังแสดง",
-        "exp-tip": "",
+        "exp-tip": "<span>เปลี่ยนเนื้อหาที่แสดงภายใต้<\/span><br><\/br> <boldSpan>การตั้งค่า<\/boldSpan> > <boldSpan>ทีละคำ<\/boldSpan>",
         "exp-tip-no-select": "",
         "experience": "ประสบการณ์",
         "play": "เล่นเสียง",

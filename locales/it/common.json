@@ -41,7 +41,7 @@
             "title": "Scorrimento automatico"
         },
         "displaying": "Visualizzazione",
-        "exp-tip": "",
+        "exp-tip": "<span>Modifica il contenuto visualizzato in<\/span><br><\/br> <boldSpan>Impostazioni<\/boldSpan> > <boldSpan>Parola per parola<\/boldSpan>",
         "exp-tip-no-select": "",
         "experience": "Esperienza",
         "play": "Riproduci audio",

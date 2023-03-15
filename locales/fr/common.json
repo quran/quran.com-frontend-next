@@ -41,7 +41,7 @@
             "title": "Défilement automatique"
         },
         "displaying": "Affichage",
-        "exp-tip": "",
+        "exp-tip": "<span>Modifier le contenu affiché sous<\/span><br><\/br> <boldSpan>Paramètres<\/boldSpan> > <boldSpan>Mot par mot<\/boldSpan>",
         "exp-tip-no-select": "",
         "experience": "Expérience",
         "play": "Lire le son",

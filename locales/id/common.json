@@ -41,7 +41,7 @@
             "title": "Gulir Otomatis"
         },
         "displaying": "Menampilkan",
-        "exp-tip": "",
+        "exp-tip": "<span>Ubah konten yang ditampilkan di bawah<\/span><br><\/br> <boldSpan>Pengaturan<\/boldSpan> > <boldSpan>Kata Demi Kata<\/boldSpan>",
         "exp-tip-no-select": "",
         "experience": "Pengalaman",
         "play": "Putar Audio",

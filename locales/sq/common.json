@@ -41,7 +41,7 @@
             "title": "Lëvizja automatike"
         },
         "displaying": "Duke u shfaqur",
-        "exp-tip": "",
+        "exp-tip": "<span>Ndrysho përmbajtjen e shfaqur nën<\/span><br><\/br> <boldSpan>Cilësimet<\/boldSpan> > <boldSpan>Fjalë për fjalë<\/boldSpan>",
         "exp-tip-no-select": "",
         "experience": "Përvoja",
         "play": "Luaj Audio",

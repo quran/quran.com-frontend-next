@@ -41,7 +41,7 @@
             "title": "Gelongsor secara Atomatik"
         },
         "displaying": "Memaparkan",
-        "exp-tip": "",
+        "exp-tip": "<span>Tukar kandungan yang dipaparkan di bawah<\/span><br><\/br> <boldSpan>Tetapan<\/boldSpan> > <boldSpan>Perkataan Demi Perkataan<\/boldSpan>",
         "exp-tip-no-select": "",
         "experience": "Pengalaman",
         "play": "Mainkan Audio",

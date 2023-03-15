@@ -41,7 +41,7 @@
             "title": "تحريك تلقائي"
         },
         "displaying": "العرض",
-        "exp-tip": "",
+        "exp-tip": "<span>تغيير المحتوى المعروض ضمن<\/span><br><\/br> <boldSpan>الإعدادات<\/boldSpan> > <boldSpan>كلمة بكلمة<\/boldSpan>",
         "exp-tip-no-select": "",
         "experience": "خبرة",
         "play": "تشغيل الصوت",

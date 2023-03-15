@@ -41,7 +41,7 @@
             "title": "播放声音时自动滚屏"
         },
         "displaying": "展示中",
-        "exp-tip": "",
+        "exp-tip": "<span>更改下显示的内容<\/span><br><\/br> <boldSpan>设置<\/boldSpan> > <boldSpan>逐字显示<\/boldSpan>",
         "exp-tip-no-select": "",
         "experience": "经验",
         "play": "播放音频",

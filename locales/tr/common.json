@@ -41,7 +41,7 @@
             "title": "Otomatik kaydırma"
         },
         "displaying": "gösteriliyor",
-        "exp-tip": "",
+        "exp-tip": "<span>altında görüntülenen içeriği değiştirin<\/span><br><\/br> <boldSpan>Kelime Kelime<\/boldSpan> > <boldSpan>Ayarlar<\/boldSpan>",
         "exp-tip-no-select": "",
         "experience": "Deneyim",
         "play": "Okut",

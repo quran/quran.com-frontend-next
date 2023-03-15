@@ -41,7 +41,7 @@
             "title": "অটো স্ক্রল"
         },
         "displaying": "প্রদর্শন করা হচ্ছে",
-        "exp-tip": "",
+        "exp-tip": "<span>এর অধীনে প্রদর্শিত বিষয়বস্তু পরিবর্তন করুন<\/span><br><\/br> <boldSpan>শব্দ দ্বারা শব্দ<\/boldSpan> > <boldSpan>সেটিংস<\/boldSpan>",
         "exp-tip-no-select": "",
         "experience": "অভিজ্ঞতা",
         "play": "অডিও চালান",

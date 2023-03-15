@@ -41,7 +41,7 @@
             "title": "Автопрокрутка"
         },
         "displaying": "Отображение",
-        "exp-tip": "",
+        "exp-tip": "<span>Изменить содержимое, отображаемое в разделе<\/span><br><\/br> <boldSpan>Настройки<\/boldSpan> > <boldSpan>Слово за словом<\/boldSpan>",
         "exp-tip-no-select": "",
         "experience": "Опыт",
         "play": "Воспроизвести аудио",

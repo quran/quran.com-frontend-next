@@ -41,7 +41,7 @@
             "title": "Auto rolagem"
         },
         "displaying": "Exibindo",
-        "exp-tip": "",
+        "exp-tip": "<span>Alterar o conteúdo exibido em<\/span><br><\/br> <boldSpan>Configurações<\/boldSpan> > <boldSpan>Palavra por palavra<\/boldSpan>",
         "exp-tip-no-select": "",
         "experience": "Experiência",
         "play": "Tocar áudio",
