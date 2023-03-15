@@ -42,7 +42,7 @@
         },
         "displaying": "展示中",
         "exp-tip": "<span>更改下显示的内容<\/span><br><\/br> <boldSpan>设置<\/boldSpan> > <boldSpan>逐字显示<\/boldSpan>",
-        "exp-tip-no-select": "",
+        "exp-tip-no-select": "<span>勾选工具提示显示选项并选择 <br><\/br> 翻译和\/或音译选项<\/span><br><\/br><span> 下 <\/span><boldSpan>设置<\/boldSpan> > <boldSpan>逐字逐句<\/boldSpan><span>，以<\/span><br><\/br> <span>启用此功能.<\/span>",
         "experience": "经验",
         "play": "播放音频",
         "playback-normal": "普通",

@@ -42,7 +42,7 @@
         },
         "displaying": "دکھانا",
         "exp-tip": "<span>کے تحت دکھائے گئے مواد کو تبدیل کریں<\/span><br><\/br> <boldSpan>ترتیبات<\/boldSpan> > <boldSpan>لفظ بہ لفظ<\/boldSpan>",
-        "exp-tip-no-select": "",
+        "exp-tip-no-select": "<span>ٹول ٹپ ڈسپلے کے آپشن پر نشان لگائیں اور <br><\/br> ترجمہ اور\/یا نقل حرفی کا اختیار منتخب کریں<\/span><br><\/br><span> کے تحت <\/span><boldSpan>ترتیبات<\/boldSpan> > <boldSpan>لفظ بہ لفظ<\/boldSpan><span>, to<\/span><br><\/br> <span>اس خصوصیت کو فعال کرنے کے لیے.<\/span>",
         "experience": "تجربہ",
         "play": "آڈیو چلائیں۔",
         "playback-normal": "نارمل",

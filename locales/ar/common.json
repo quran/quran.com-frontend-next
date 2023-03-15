@@ -42,7 +42,7 @@
         },
         "displaying": "العرض",
         "exp-tip": "<span>تغيير المحتوى المعروض ضمن<\/span><br><\/br> <boldSpan>الإعدادات<\/boldSpan> > <boldSpan>كلمة بكلمة<\/boldSpan>",
-        "exp-tip-no-select": "",
+        "exp-tip-no-select": "<span>حدد خيار عرض تلميح الأداة وحدد <br><\/br> الترجمة و \/ أو خيار كتابة لغة بأحرف لغة أخرى<\/span><br><\/br><span> ضمن <\/span><boldSpan>الإعدادات<\/boldSpan> > <boldSpan>كلمة بكلمة<\/boldSpan><span>، إلى <\/span><br><\/br> <span>تمكين هذه الميزة.<\/span>",
         "experience": "خبرة",
         "play": "تشغيل الصوت",
         "playback-normal": "طبيعي",

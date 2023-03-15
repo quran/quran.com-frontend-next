@@ -42,7 +42,7 @@
         },
         "displaying": "กำลังแสดง",
         "exp-tip": "<span>เปลี่ยนเนื้อหาที่แสดงภายใต้<\/span><br><\/br> <boldSpan>การตั้งค่า<\/boldSpan> > <boldSpan>ทีละคำ<\/boldSpan>",
-        "exp-tip-no-select": "",
+        "exp-tip-no-select": "<span>ทำเครื่องหมายที่ตัวเลือกการแสดงคำแนะนำเครื่องมือและเลือกตัวเลือก <br><\/br> การแปลและ\/หรือการทับศัพท์<\/span><br><\/br><span> ภายใต้ <\/span><boldSpan>การตั้งค่า<\/boldSpan> > <boldSpan>ทีละคำ<\/boldSpan><span>, เพื่อ<\/span><br><\/br> <span>เปิดใช้งานคุณลักษณะนี้.<\/span>",
         "experience": "ประสบการณ์",
         "play": "เล่นเสียง",
         "playback-normal": "ปกติ",

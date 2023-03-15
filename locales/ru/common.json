@@ -42,7 +42,7 @@
         },
         "displaying": "Отображение",
         "exp-tip": "<span>Изменить содержимое, отображаемое в разделе<\/span><br><\/br> <boldSpan>Настройки<\/boldSpan> > <boldSpan>Слово за словом<\/boldSpan>",
-        "exp-tip-no-select": "",
+        "exp-tip-no-select": "<span>Отметьте параметр отображения всплывающей подсказки и выберите параметр <br><\/br> Перевод и\/или Транслитерация<\/span><br><\/br><span> в разделе <\/span><boldSpan>Настройки<\/boldSpan> > <boldSpan>Слово за слово<\/boldSpan><span>, чтобы<\/span><br><\/br> <span>включить эту функцию.<\/span>",
         "experience": "Опыт",
         "play": "Воспроизвести аудио",
         "playback-normal": "Обычный",

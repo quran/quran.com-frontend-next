@@ -42,7 +42,7 @@
         },
         "displaying": "gösteriliyor",
         "exp-tip": "<span>altında görüntülenen içeriği değiştirin<\/span><br><\/br> <boldSpan>Kelime Kelime<\/boldSpan> > <boldSpan>Ayarlar<\/boldSpan>",
-        "exp-tip-no-select": "",
+        "exp-tip-no-select": "<span>Araç ipucu görüntüleme seçeneğini işaretleyin ve <br><\/br>Ayarlar<\/span><br><\/br><span> Çeviri ve\/veya Harf Çevirisi <\/span><boldSpan>seçin<\/boldSpan> > <boldSpan>Kelime kelime<\/boldSpan><span>, bu özelliği<\/span><br><\/br> <span>etkinleştirmek için.<\/span>",
         "experience": "Deneyim",
         "play": "Okut",
         "playback-normal": "Normal",

@@ -42,7 +42,7 @@
         },
         "displaying": "در حال نمایش",
         "exp-tip": "<span>تغییر محتوای نمایش داده شده در<\/span><br><\/br> <boldSpan>تنظیمات<\/boldSpan> > <boldSpan>کلمه به کلمه<\/boldSpan>",
-        "exp-tip-no-select": "",
+        "exp-tip-no-select": "<span>گزینه نمایش راهنمای راهنمای ابزار را علامت بزنید و گزینه <br><\/br> ترجمه و\/یا نویسه‌گردانی را انتخاب کنید<\/span><br><\/br><span> در <\/span><boldSpan>تنظیمات<\/boldSpan> > <boldSpan>کلمه به کلمه<\/boldSpan><span>, تا<\/span><br><\/br> <span>این ویژگی را فعال کنید.<\/span>",
         "experience": "تجربه",
         "play": "پخش صدا",
         "playback-normal": "طبیعی",

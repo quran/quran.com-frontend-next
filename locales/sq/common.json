@@ -42,7 +42,7 @@
         },
         "displaying": "Duke u shfaqur",
         "exp-tip": "<span>Ndrysho përmbajtjen e shfaqur nën<\/span><br><\/br> <boldSpan>Cilësimet<\/boldSpan> > <boldSpan>Fjalë për fjalë<\/boldSpan>",
-        "exp-tip-no-select": "",
+        "exp-tip-no-select": "<span>Shënoni opsionin e shfaqjes së këshillës së veglave dhe zgjidhni opsionin <br><\/br> Përkthimi dhe\/ose Transliterimi<\/span><br><\/br><span> nën <\/span><boldSpan>Cilësimet<\/boldSpan> > <boldSpan>Fjalë për fjalë<\/boldSpan><span>, për të<\/span><br><\/br> <span>aktivizuar këtë veçori.<\/span>",
         "experience": "Përvoja",
         "play": "Luaj Audio",
         "playback-normal": "Normale",

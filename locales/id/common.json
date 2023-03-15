@@ -42,7 +42,7 @@
         },
         "displaying": "Menampilkan",
         "exp-tip": "<span>Ubah konten yang ditampilkan di bawah<\/span><br><\/br> <boldSpan>Pengaturan<\/boldSpan> > <boldSpan>Kata Demi Kata<\/boldSpan>",
-        "exp-tip-no-select": "",
+        "exp-tip-no-select": "<span>Centang opsi tampilan tooltip dan pilih opsi <br><\/br> Terjemahan dan\/atau Transliterasi<\/span><br><\/br><span> di bawah <\/span><boldSpan>Pengaturan<\/boldSpan> > <boldSpan>Kata Demi Kata<\/boldSpan><span>, untuk<\/span><br><\/br> <span>mengaktifkan fitur ini.<\/span>",
         "experience": "Pengalaman",
         "play": "Putar Audio",
         "playback-normal": "Normal",

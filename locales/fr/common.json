@@ -42,7 +42,7 @@
         },
         "displaying": "Affichage",
         "exp-tip": "<span>Modifier le contenu affiché sous<\/span><br><\/br> <boldSpan>Paramètres<\/boldSpan> > <boldSpan>Mot par mot<\/boldSpan>",
-        "exp-tip-no-select": "",
+        "exp-tip-no-select": "<span>Cochez l'option d'affichage de l'info-bulle et sélectionnez l'option <br><\/br> Traduction et\/ou Translittération<\/span><br><\/br><span> sous <\/span><boldSpan>Paramètres<\/boldSpan> > <boldSpan>mot par mot<\/boldSpan><span>, pour<\/span><br><\/br> <span>activer cette fonctionnalité.<\/span>",
         "experience": "Expérience",
         "play": "Lire le son",
         "playback-normal": "Normal",

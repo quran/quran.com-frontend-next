@@ -42,7 +42,7 @@
         },
         "displaying": "প্রদর্শন করা হচ্ছে",
         "exp-tip": "<span>এর অধীনে প্রদর্শিত বিষয়বস্তু পরিবর্তন করুন<\/span><br><\/br> <boldSpan>শব্দ দ্বারা শব্দ<\/boldSpan> > <boldSpan>সেটিংস<\/boldSpan>",
-        "exp-tip-no-select": "",
+        "exp-tip-no-select": "<span>টুলটিপ প্রদর্শন বিকল্পে টিক দিন এব <br><\/br> অনুবাদ এবং\/অথবা প্রতিবর্ণীকরণ বিকল্প<\/span><br><\/br><span> সেটিংস <\/span><boldSpan>এর অধীনে নির্বাচন করুন<\/boldSpan> > <boldSpan>শব্দ দ্বারা শব্<\/boldSpan><span>,<\/span><br><\/br> <span>এই বৈশিষ্ট্যটি সক্ষম করতে৷.<\/span>",
         "experience": "অভিজ্ঞতা",
         "play": "অডিও চালান",
         "playback-normal": "স্বাভাবিক",

@@ -42,7 +42,7 @@
         },
         "displaying": "Weergeven",
         "exp-tip": "<span>Wijzig de weergegeven inhoud onder<\/span><br><\/br> <boldSpan>Instellingen<\/boldSpan> > <boldSpan>Woord voor woord<\/boldSpan>",
-        "exp-tip-no-select": "",
+        "exp-tip-no-select": "<span>Vink de tooltip-weergaveoptie aan en selecteer de <br><\/br> optie Vertaling en\/of transliteratie<\/span><br><\/br><span> onder <\/span><boldSpan>Instellingen<\/boldSpan> > <boldSpan>Woord voor woord<\/boldSpan><span>, om<\/span><br><\/br> <span>deze functie in te schakelen.<\/span>",
         "experience": "Ervaring",
         "play": "Audio afspelen",
         "playback-normal": "normaal",

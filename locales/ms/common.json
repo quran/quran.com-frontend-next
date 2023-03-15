@@ -42,7 +42,7 @@
         },
         "displaying": "Memaparkan",
         "exp-tip": "<span>Tukar kandungan yang dipaparkan di bawah<\/span><br><\/br> <boldSpan>Tetapan<\/boldSpan> > <boldSpan>Perkataan Demi Perkataan<\/boldSpan>",
-        "exp-tip-no-select": "",
+        "exp-tip-no-select": "<span>Tandakan pilihan paparan petua alat dan pilih pilihan <br><\/br> Terjemahan dan\/atau Transliterasi<\/span><br><\/br><span> di bawah <\/span><boldSpan>Tetapan<\/boldSpan> > <boldSpan>Perkataan Demi Perkataan<\/boldSpan><span>, untuk<\/span><br><\/br> <span>mendayakan ciri ini.<\/span>",
         "experience": "Pengalaman",
         "play": "Mainkan Audio",
         "playback-normal": "Normal",

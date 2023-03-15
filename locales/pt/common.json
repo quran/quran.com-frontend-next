@@ -42,7 +42,7 @@
         },
         "displaying": "Exibindo",
         "exp-tip": "<span>Alterar o conteúdo exibido em<\/span><br><\/br> <boldSpan>Configurações<\/boldSpan> > <boldSpan>Palavra por palavra<\/boldSpan>",
-        "exp-tip-no-select": "",
+        "exp-tip-no-select": "<span>Marque a opção de exibição de dica de ferramenta e selecione a opção <br><\/br> Tradução e\/ou transliteração<\/span><br><\/br><span> em <\/span><boldSpan>Configurações<\/boldSpan> > <boldSpan>Palavra por palavra<\/boldSpan><span>, para<\/span><br><\/br> <span>habilitar este recurso.<\/span>",
         "experience": "Experiência",
         "play": "Tocar áudio",
         "playback-normal": "Normal",
