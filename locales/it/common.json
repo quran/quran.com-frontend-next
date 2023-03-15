@@ -76,8 +76,7 @@
         "repeat-moved": "Le impostazioni di ripetizione sono state spostate sul lettore audio. Fare clic sull'icona <0> <\/0> per accedervi",
         "select-reciter": "Seleziona Relatore",
         "speed": "Velocità",
-        "title": "Audio",
-        "update-notice": "<p> 📣 L'impostazione \"Audio\" verrà spostata da Impostazioni al menu del lettore audio il {{month}} {{day}} . <\/p> <learnMore> Ulteriori informazioni su queste modifiche nella pagina degli aggiornamenti del prodotto <\/learnMore>"
+        "title": "Audio"
     },
     "ayah": "Ayah",
     "ayahs": "ayah",

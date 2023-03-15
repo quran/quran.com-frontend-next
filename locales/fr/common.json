@@ -76,8 +76,7 @@
         "repeat-moved": "Les paramètres de répétition ont été déplacés vers le lecteur audio. Cliquez sur l' <0> <\/0> pour y accéder",
         "select-reciter": "Sélectionnez le récitant",
         "speed": "Vitesse",
-        "title": "l'audio",
-        "update-notice": "<p> 📣 Le paramètre 'Audio' passe de Paramètres au menu Lecteur audio le {{month}} {{day}} . <\/p> <learnMore> En savoir plus sur ces changements sur la page Mises à jour du produit <\/learnMore>"
+        "title": "l'audio"
     },
     "ayah": "Ayah",
     "ayahs": "Ayahs",

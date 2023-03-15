@@ -76,8 +76,7 @@
         "repeat-moved": "Cilësimet e përsëritjes janë zhvendosur te luajtësi audio. Klikoni në <0> <\/0> për t'iu qasur atyre",
         "select-reciter": "Zgjidhni Recitues",
         "speed": "Shpejtësia",
-        "title": "Audio",
-        "update-notice": "<p> 📣 Cilësimi \"Audio\" po zhvendoset nga \"Cilësimet\" në menynë \"Player audio\" më {{month}} {{day}} . <\/p> <learnMore> Mësoni më shumë rreth këtyre ndryshimeve në faqen e përditësimeve të produktit <\/learnMore>"
+        "title": "Audio"
     },
     "ayah": "Ajeti",
     "ayahs": "Ajetet",

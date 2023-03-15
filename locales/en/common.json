@@ -76,8 +76,7 @@
         "repeat-moved": "The repeat settings have moved to the audio player. Click on the <0><\/0> icon to access them",
         "select-reciter": "Select Reciter",
         "speed": "Speed",
-        "title": "Audio",
-        "update-notice": "<p>📣 The 'Audio' setting is moving from Settings to the Audio Player menu on {{month}} {{day}}.<\/p><learnMore>Learn more about these changes on the Product Updates page<\/learnMore>"
+        "title": "Audio"
     },
     "ayah": "Ayah",
     "ayahs": "Ayahs",
@@ -218,7 +217,7 @@
     },
     "recitation": "Recitation",
     "reciter": "Reciter",
-    "reciter-summary": "Word by word reciter: <span>%1$s<\/span>. Click on a word to listen to its recitation.",
+    "reciter-summary": "Word by word reciter: <span>{{reciterName}}<\/span>. Click on a word to listen to its recitation.",
     "reciters": "Reciters",
     "reflect": "Reflect",
     "remove": "Remove",
@@ -332,7 +331,7 @@
         "voice-search-powered-by": "Voice Search Powered by"
     },
     "wbw": "Word By Word",
-    "wbw-lang-summary": "Word by word translation source: <link>%1$s<\/link>. This source is independent of the verse translation selection.",
+    "wbw-lang-summary": "Word by word translation source: <link>{{source}}<\/link>. This source is independent of the verse translation selection.",
     "wbw-trans-lang": "Word By Word Language",
     "wbw-translation": "Word By Word Translation",
     "wbw-transliteration": "Word By Word Transliteration",

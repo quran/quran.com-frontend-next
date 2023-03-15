@@ -76,8 +76,7 @@
         "repeat-moved": "Tekrarlama ayarları müzik çalara taşındı. Erişmek için <0> <\/0> simgesine tıklayın",
         "select-reciter": "Okuyucu Seçin",
         "speed": "Hız",
-        "title": "Ses",
-        "update-notice": "<p> 📣 'Ses' ayarı, {{month}} {{day}} tarihinde Ayarlar'dan Ses Çalar menüsüne taşınıyor. <\/p> <learnMore> Ürün Güncellemeleri sayfasında bu değişiklikler hakkında daha fazla bilgi edinin <\/learnMore>"
+        "title": "Ses"
     },
     "ayah": "Ayet",
     "ayahs": "Ayet",

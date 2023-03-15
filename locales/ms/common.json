@@ -76,8 +76,7 @@
         "repeat-moved": "Ketetapan ulangan telah pindah ke pemain audio. Klik pada <0> <\/0> untuk akses",
         "select-reciter": "Pilih Qari (Pembaca)",
         "speed": "Kelajuan",
-        "title": "Audio",
-        "update-notice": "<p> 📣 Tetapan 'Audio' beralih daripada Tetapan ke menu Pemain Audio pada {{month}} {{day}} . <\/p> <learnMore> Ketahui lebih lanjut tentang perubahan ini pada halaman Kemas Kini Produk <\/learnMore>"
+        "title": "Audio"
     },
     "ayah": "Ayat",
     "ayahs": "Ayat-ayat",

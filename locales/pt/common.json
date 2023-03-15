@@ -76,8 +76,7 @@
         "repeat-moved": "As configurações de repetição foram movidas para o reprodutor de áudio. Clique no <0> <\/0> para acessá-los",
         "select-reciter": "Selecione o recitador",
         "speed": "Velocidade",
-        "title": "Áudio",
-        "update-notice": "<p> 📣 A configuração 'Áudio' será movida de Configurações para o menu Reprodutor de áudio em {{month}} {{day}} . <\/p> <learnMore> Saiba mais sobre essas alterações na página de atualizações de produtos <\/learnMore>"
+        "title": "Áudio"
     },
     "ayah": "Ayah",
     "ayahs": "Ayahs",
