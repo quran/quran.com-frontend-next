@@ -217,7 +217,7 @@
     },
     "recitation": "การบรรยาย",
     "reciter": "ผู้อ่าน",
-    "reciter-summary": "",
+    "reciter-summary": "ผู้อ่านคำต่อคำ: <span> {{reciterName}} <\/span> คลิกที่คำเพื่อฟังการบรรยาย",
     "reciters": "ผู้อ่าน",
     "reflect": "สะท้อน",
     "remove": "ลบ",

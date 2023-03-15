@@ -217,7 +217,7 @@
     },
     "recitation": "okuma",
     "reciter": "Okuyucu",
-    "reciter-summary": "",
+    "reciter-summary": "Kelime kelime okuyucu: <span> {{reciterName}} <\/span> . Okunuşunu dinlemek için bir kelimeye tıklayın.",
     "reciters": "Okuyucular",
     "reflect": "Yansıt",
     "remove": "Kaldırmak",

@@ -217,7 +217,7 @@
     },
     "recitation": "Pembacaan",
     "reciter": "Qari",
-    "reciter-summary": "",
+    "reciter-summary": "Pembaca kata demi kata: <span> {{reciterName}} <\/span> . Klik pada sebuah kata untuk mendengarkan bacaannya.",
     "reciters": "Qari",
     "reflect": "Mencerminkan",
     "remove": "Keluarkan",

@@ -217,7 +217,7 @@
     },
     "recitation": "Tilawah",
     "reciter": "Qari",
-    "reciter-summary": "",
+    "reciter-summary": "Kata demi perkataan qari: <span> {{reciterName}} <\/span> . Klik pada perkataan untuk mendengar bacaannya.",
     "reciters": "qari",
     "reflect": "Renungkan",
     "remove": "Keluarkan",

@@ -217,7 +217,7 @@
     },
     "recitation": "التلاوة",
     "reciter": "القارئ",
-    "reciter-summary": "",
+    "reciter-summary": "قارئ كلمة بكلمة: <span> {{reciterName}} <\/span> . اضغط على كلمة للاستماع إلى تلاوتها.",
     "reciters": "القراء",
     "reflect": "تدبر",
     "remove": "إزالة",

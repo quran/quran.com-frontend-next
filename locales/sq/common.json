@@ -217,7 +217,7 @@
     },
     "recitation": "Recitim",
     "reciter": "Recitues",
-    "reciter-summary": "",
+    "reciter-summary": "Recitues fjalë për fjalë: <span> {{reciterName}} <\/span> . Klikoni mbi një fjalë për të dëgjuar recitimin e saj.",
     "reciters": "Recituesit",
     "reflect": "Pasqyrim",
     "remove": "Hiq",

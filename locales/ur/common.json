@@ -217,7 +217,7 @@
     },
     "recitation": "تلاوت",
     "reciter": "تلاوت کرنے والا",
-    "reciter-summary": "",
+    "reciter-summary": "لفظ بہ لفظ تلاوت کرنے والا: <span> {{reciterName}} <\/span> ۔ کسی لفظ کی تلاوت سننے کے لیے اس پر کلک کریں۔",
     "reciters": "تلاوت کرنے والے",
     "reflect": "عکاسی کرنا",
     "remove": "دور",

@@ -217,7 +217,7 @@
     },
     "recitation": "voordracht",
     "reciter": "Voordrager",
-    "reciter-summary": "",
+    "reciter-summary": "Woord voor woord voordrager: <span> {{reciterName}} <\/span> . Klik op een woord om naar de recitatie te luisteren.",
     "reciters": "voordragers",
     "reflect": "Reflecteren",
     "remove": "Verwijderen",

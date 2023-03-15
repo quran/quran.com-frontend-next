@@ -217,7 +217,7 @@
     },
     "recitation": "Чтение",
     "reciter": "Чтец",
-    "reciter-summary": "",
+    "reciter-summary": "Пословный чтец: <span> {{reciterName}} <\/span> . Нажмите на слово, чтобы прослушать его чтение.",
     "reciters": "Чтецы",
     "reflect": "Отражать",
     "remove": "Удалять",

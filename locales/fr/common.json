@@ -217,7 +217,7 @@
     },
     "recitation": "Récitation",
     "reciter": "Récitant",
-    "reciter-summary": "",
+    "reciter-summary": "Récitant mot à mot : <span> {{reciterName}} <\/span> . Cliquez sur un mot pour écouter sa récitation.",
     "reciters": "Récitants",
     "reflect": "Réfléchir",
     "remove": "Supprimer",

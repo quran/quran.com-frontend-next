@@ -217,7 +217,7 @@
     },
     "recitation": "بازگو کردن",
     "reciter": "قاری",
-    "reciter-summary": "",
+    "reciter-summary": "کلمه به کلمه تلاوت کننده: <span> {{reciterName}} <\/span> . برای گوش دادن به تلاوت آن کلمه، روی آن کلیک کنید.",
     "reciters": "قاریان",
     "reflect": "منعکس کنید",
     "remove": "برداشتن",
