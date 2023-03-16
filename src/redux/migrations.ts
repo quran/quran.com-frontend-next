@@ -4,6 +4,7 @@ import { migrateRecentReadingSessions } from './migration-scripts/migrating-rece
 import { initialSidebarIsVisible } from './slices/QuranReader/sidebarNavigation';
 import { initialState as welcomeMessageInitialState } from './slices/welcomeMessage';
 
+import { consolidateWordByWordState } from '@/utils/wordByWord';
 import { MushafLines } from 'types/QuranReader';
 
 export default {
@@ -157,4 +158,27 @@ export default {
       },
     };
   },
+  23: (state) => ({
+    // remove unused selectedWordByWordTranslation, selectedWordByWordTransliteration
+    ...state,
+    readingPreferences: {
+      ...state.readingPreferences,
+      selectedWordByWordTranslation: undefined,
+      selectedWordByWordTransliteration: undefined,
+    },
+  }),
+  24: (state) => ({
+    ...state,
+    readingPreferences: {
+      ...state.readingPreferences,
+      ...consolidateWordByWordState(
+        state.readingPreferences.showWordByWordTranslation,
+        state.readingPreferences.showWordByWordTransliteration,
+        state.readingPreferences.showTooltipFor,
+      ),
+      showWordByWordTranslation: undefined,
+      showWordByWordTransliteration: undefined,
+      showTooltipFor: undefined,
+    },
+  }),
 };

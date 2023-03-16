@@ -78,7 +78,6 @@ const usePersistPreferenceGroup = (): PersistPreferences => {
           callback();
         }
       },
-      // TODO: add onSetttingsChange xstate
       onXstateSettingsChange: (
         key: string,
         value: string | number | boolean | Record<string, any>,

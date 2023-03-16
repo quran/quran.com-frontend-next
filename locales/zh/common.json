@@ -40,6 +40,10 @@
             "on": "在",
             "title": "播放声音时自动滚屏"
         },
+        "displaying": "展示中",
+        "exp-tip": "<span>更改下显示的内容<\/span><br><\/br> <boldSpan>设置<\/boldSpan> > <boldSpan>逐字显示<\/boldSpan>",
+        "exp-tip-no-select": "<span>勾选工具提示显示选项并选择 <br><\/br> 翻译和\/或音译选项<\/span><br><\/br><span> 下 <\/span><boldSpan>设置<\/boldSpan> > <boldSpan>逐字逐句<\/boldSpan><span>，以<\/span><br><\/br> <span>启用此功能.<\/span>",
+        "experience": "经验",
         "play": "播放音频",
         "playback-normal": "普通",
         "playback-speed": "播放速度",
@@ -50,6 +54,7 @@
             "delay-verse": "每节之间停顿",
             "download": "下载",
             "full-surah": "播放整章",
+            "manage-repeat-settings": "管理重复设置",
             "mismatch": "{{currentReadingChapter}}单击“重新开始”",
             "pause": "暂停",
             "pause-audio": "暂停音频",
@@ -70,8 +75,8 @@
         },
         "repeat-moved": "重复播放设置已移至音频播放器。单击<0> <\/0>图标以访问它们",
         "select-reciter": "选择诵读家",
-        "title": "音频",
-        "update-notice": "<p> 📣 在{{month}} {{day}} ，“音频”设置从“设置”移动到“音频播放器”菜单。 <\/p> <learnMore>在产品更新页面上了解有关这些更改的更多信息<\/learnMore>"
+        "speed": "速度",
+        "title": "音频"
     },
     "ayah": "节",
     "ayahs": "节",
@@ -108,6 +113,7 @@
     },
     "default-description": "古兰经翻译成多种语言，界面简单易用",
     "developers": "开发者",
+    "display": "展示",
     "donate": "捐",
     "email-verification": {
         "check-spam": "没有收到验证邮件？检查您的垃圾邮件收件箱",
@@ -160,6 +166,7 @@
     "help": "帮助",
     "hizb": "希兹布",
     "home": "首页",
+    "inline": "排队",
     "input": {
         "clear": "清除"
     },
@@ -208,7 +215,9 @@
         "reading": "诵读",
         "translation": "翻译"
     },
+    "recitation": "朗诵",
     "reciter": "诵读家",
+    "reciter-summary": "逐字朗诵者： <span> {{reciterName}} <\/span> 。单击一个单词以收听其朗读。",
     "reciters": "朗诵者",
     "reflect": "参悟",
     "remove": "消除",
@@ -295,6 +304,7 @@
     "to": "到",
     "tooltip": "工具提示",
     "tooltip-trans-lang": "翻译成：",
+    "trans-lang": "翻译语言",
     "translation": "意译",
     "translations": "翻译",
     "transliteration": "音译",
@@ -321,6 +331,7 @@
         "voice-search-powered-by": "语音搜索 技术支持单位"
     },
     "wbw": "在单词下方显示其译文",
+    "wbw-lang-summary": "逐字翻译来源： <link> {{source}} <\/link> 。此来源独立于诗歌翻译选择。",
     "wbw-trans-lang": "翻译成：",
     "wbw-translation": "逐字意译",
     "wbw-transliteration": "逐字音译",

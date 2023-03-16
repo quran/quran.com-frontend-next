@@ -42,3 +42,13 @@ export const areArraysEqual = <T>(array1: T[], array2: T[]): boolean =>
  */
 export const removeItemFromArray = <T>(itemToRemove: T, array: T[]): T[] =>
   array.filter((item) => item !== itemToRemove);
+
+/**
+ * Merge items of two arrays where each item is unique.
+ *
+ * @param {T[]} array1
+ * @param {T[]} array2
+ * @returns {T[]}
+ */
+export const mergeTwoArraysUniquely = <T>(array1: T[], array2: T[]): T[] =>
+  array1.filter((t) => !array2.includes(t)).concat(array2);

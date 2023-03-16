@@ -40,6 +40,10 @@
             "on": "Au",
             "title": "Défilement automatique"
         },
+        "displaying": "Affichage",
+        "exp-tip": "<span>Modifier le contenu affiché sous<\/span><br><\/br> <boldSpan>Paramètres<\/boldSpan> > <boldSpan>Mot par mot<\/boldSpan>",
+        "exp-tip-no-select": "<span>Cochez l'option d'affichage de l'info-bulle et sélectionnez l'option <br><\/br> Traduction et\/ou Translittération<\/span><br><\/br><span> sous <\/span><boldSpan>Paramètres<\/boldSpan> > <boldSpan>mot par mot<\/boldSpan><span>, pour<\/span><br><\/br> <span>activer cette fonctionnalité.<\/span>",
+        "experience": "Expérience",
         "play": "Lire le son",
         "playback-normal": "Normal",
         "playback-speed": "Vitesse de lecture",
@@ -50,6 +54,7 @@
             "delay-verse": "Délai entre le verset",
             "download": "Télécharger",
             "full-surah": "Sourate complète",
+            "manage-repeat-settings": "Gérer les paramètres de répétition",
             "mismatch": "Cliquez sur « Recommencer » si vous souhaitez plutôt {{currentReadingChapter}}",
             "pause": "Pause",
             "pause-audio": "Suspendre le son",
@@ -70,8 +75,8 @@
         },
         "repeat-moved": "Les paramètres de répétition ont été déplacés vers le lecteur audio. Cliquez sur l' <0> <\/0> pour y accéder",
         "select-reciter": "Sélectionnez le récitant",
-        "title": "l'audio",
-        "update-notice": "<p> 📣 Le paramètre 'Audio' passe de Paramètres au menu Lecteur audio le {{month}} {{day}} . <\/p> <learnMore> En savoir plus sur ces changements sur la page Mises à jour du produit <\/learnMore>"
+        "speed": "Vitesse",
+        "title": "l'audio"
     },
     "ayah": "Ayah",
     "ayahs": "Ayahs",
@@ -108,6 +113,7 @@
     },
     "default-description": "Le Coran traduit dans de nombreuses langues dans une interface simple et facile",
     "developers": "Développeurs",
+    "display": "Afficher",
     "donate": "Donner",
     "email-verification": {
         "check-spam": "Vous n'avez pas reçu l'e-mail de vérification ? Vérifiez votre boîte de réception de spam",
@@ -160,6 +166,7 @@
     "help": "Aider",
     "hizb": "Hizb",
     "home": "Accueil",
+    "inline": "En ligne",
     "input": {
         "clear": "Dégager"
     },
@@ -208,7 +215,9 @@
         "reading": "En train de lire",
         "translation": "Traduction"
     },
+    "recitation": "Récitation",
     "reciter": "Récitant",
+    "reciter-summary": "Récitant mot à mot : <span> {{reciterName}} <\/span> . Cliquez sur un mot pour écouter sa récitation.",
     "reciters": "Récitants",
     "reflect": "Réfléchir",
     "remove": "Supprimer",
@@ -295,6 +304,7 @@
     "to": "À",
     "tooltip": "Info-bulle",
     "tooltip-trans-lang": "Langue de l'info-bulle",
+    "trans-lang": "Langue de traduction",
     "translation": "Traduction",
     "translations": "Traductions",
     "transliteration": "Translitération",
@@ -321,6 +331,7 @@
         "voice-search-powered-by": "Recherche vocale optimisée par"
     },
     "wbw": "Mot par mot",
+    "wbw-lang-summary": "Source de la traduction mot à mot : <link> {{source}} <\/link> . Cette source est indépendante de la sélection de traduction verset.",
     "wbw-trans-lang": "Langage mot à mot",
     "wbw-translation": "Traduction mot à mot",
     "wbw-transliteration": "Translittération mot à mot",
