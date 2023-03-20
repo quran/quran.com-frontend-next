@@ -12,6 +12,7 @@
     "baseUrl": "src",
     "paths": {
       "@/icons/*": ["../public/icons/*"],
+      "@/public/*": ["../public/*"],
       "@/dls/*": ["./components/dls/*"],
       "@/api/*": ["./api/*"],
       "@/data/*": ["../data/*"],

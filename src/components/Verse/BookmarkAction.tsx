@@ -7,10 +7,10 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { useSWRConfig } from 'swr';
 import useSWRImmutable from 'swr/immutable';
 
-import BookmarkedIcon from '../../../public/icons/bookmark.svg';
-import UnBookmarkedIcon from '../../../public/icons/unbookmarked.svg';
 import PopoverMenu from '../dls/PopoverMenu/PopoverMenu';
 
+import BookmarkedIcon from '@/icons/bookmark.svg';
+import UnBookmarkedIcon from '@/icons/unbookmarked.svg';
 import Spinner from 'src/components/dls/Spinner/Spinner';
 import { ToastStatus, useToast } from 'src/components/dls/Toast/Toast';
 import { selectBookmarks, toggleVerseBookmark } from 'src/redux/slices/QuranReader/bookmarks';

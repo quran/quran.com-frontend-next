@@ -1,7 +1,6 @@
-import ChevronDownIcon from '../../../../public/icons/chevron-down.svg';
-
 import styles from './CollectionSorter.module.scss';
 
+import ChevronDownIcon from '@/icons/chevron-down.svg';
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
 
 const CollectionSorter = ({ options, selectedOptionId, onChange }) => {

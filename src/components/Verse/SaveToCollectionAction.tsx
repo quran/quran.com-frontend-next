@@ -7,12 +7,12 @@ import { shallowEqual, useSelector } from 'react-redux';
 import useSWR, { useSWRConfig } from 'swr';
 import useSWRImmutable from 'swr/immutable';
 
-import PlusIcon from '../../../public/icons/plus.svg';
 import SaveToCollectionModal, {
   Collection,
 } from '../Collection/SaveToCollectionModal/SaveToCollectionModal';
 import PopoverMenu from '../dls/PopoverMenu/PopoverMenu';
 
+import PlusIcon from '@/icons/plus.svg';
 import { ToastStatus, useToast } from 'src/components/dls/Toast/Toast';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import { getMushafId } from 'src/utils/api';

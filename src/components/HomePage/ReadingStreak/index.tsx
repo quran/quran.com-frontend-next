@@ -4,8 +4,6 @@ import { useContext, useMemo } from 'react';
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 
-import MoonIllustrationSVG from '../../../../public/images/moon-illustration.svg';
-
 import CurrentWeekProgress from './CurrentWeekProgress';
 import LoggedOutReadingStreak from './LoggedOutReadingStreak';
 import styles from './ReadingStreak.module.scss';
@@ -17,6 +15,7 @@ import Link, { LinkVariant } from '@/dls/Link/Link';
 import Progress from '@/dls/Progress';
 import Skeleton from '@/dls/Skeleton/Skeleton';
 import useGetStreakWithMetadata from '@/hooks/auth/useGetStreakWithMetadata';
+import MoonIllustrationSVG from '@/public/images/moon-illustration.svg';
 import { ReadingGoalType } from '@/types/auth/ReadingGoal';
 import { isLoggedIn } from '@/utils/auth/login';
 import { getChapterData } from '@/utils/chapter';

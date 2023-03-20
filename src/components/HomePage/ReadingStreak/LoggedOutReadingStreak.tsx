@@ -1,10 +1,9 @@
 import useTranslation from 'next-translate/useTranslation';
 
-import MoonIllustrationSVG from '../../../../public/images/moon-illustration.svg';
-
 import styles from './ReadingStreak.module.scss';
 
 import Button from '@/dls/Button/Button';
+import MoonIllustrationSVG from '@/public/images/moon-illustration.svg';
 
 const LoggedOutReadingStreak = () => {
   const { t } = useTranslation('reading-goal');

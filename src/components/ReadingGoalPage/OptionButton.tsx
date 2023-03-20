@@ -1,9 +1,9 @@
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 
-import MoonIllustrationSVG from '../../../public/images/moon-illustration.svg';
-
 import styles from './OptionButton.module.scss';
+
+import MoonIllustrationSVG from '@/public/images/moon-illustration.svg';
 
 interface OptionButtonProps {
   option: string;
