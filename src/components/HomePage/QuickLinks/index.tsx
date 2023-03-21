@@ -65,6 +65,7 @@ const QuickLinks: React.FC = () => {
         logKey="ramadanofreflection"
         text="Ramadan of Reflection"
         className={styles.link}
+        isExternalLink
       />
     </div>
   );
