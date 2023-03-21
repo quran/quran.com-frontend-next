@@ -6,7 +6,7 @@
   box-sizing: border-box;
   height: var(--banner-height);
   position: relative;
-  background-color: #f7f0f0; // hard coded value, to take more attention
+  background-color: var(--color-text-default);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -36,7 +36,7 @@
   align-items: center;
   font-size: 14px; // hard coded value, because it's not available in our design system
   font-weight: var(--font-weight-semibold);
-  color: #ff7878;
+  color: var(--color-text-default);
   @include breakpoints.tablet {
     font-size: var(--font-size-normal);
     margin-inline-end: var(--spacing-large);
@@ -58,23 +58,6 @@
   @include breakpoints.tablet {
     padding-inline-end: calc(1.5 * var(--spacing-medium));
   }
-}
-.cta {
-  margin-inline-start: var(--spacing-medium);
-  font-size: var(--font-size-xsmall);
-  padding-inline: var(--spacing-small);
-  padding-block: var(--spacing-xxsmall);
-  font-weight: var(--font-weight-semibold);
-  height: auto;
-  background-color: #ff7878;
-  border-color: #ff7878;
-  @include breakpoints.tablet {
-    font-size: 14px; // hard code value for tablet to make the sizing looks right
-  }
-  &:hover {
-    color: #ff7878;
-  }
-  white-space: nowrap;
 }
 
 .closeButton {

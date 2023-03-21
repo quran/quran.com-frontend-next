@@ -16,45 +16,53 @@ type HomePageMessageProps = {
   onClose?: () => void;
 };
 
-const HomePageMessage = ({
-  // title, subtitle,
-  body,
-  onClose,
-}: HomePageMessageProps) => {
+const HomePageMessage = ({ title, subtitle, body, onClose }: HomePageMessageProps) => {
   const { t } = useTranslation('common');
-  const onDonateClicked = () => {
-    logEvent('donate_button_clicked', {
-      source: 'cta_welcome_message',
-    });
-  };
   return (
     <div className={styles.container}>
-      <div>
-        {/* <h3 className={styles.title}>{title}</h3> */}
-        {/* <p className={styles.description}>{subtitle}</p> */}
-        {body}
-      </div>
+      <h3 className={styles.title}>{title}</h3>
+      <p className={styles.description}>{subtitle}</p>
+      {body}
 
+      <div className={styles.closeIcon}>
+        <Button
+          size={ButtonSize.Small}
+          shape={ButtonShape.Circle}
+          variant={ButtonVariant.Ghost}
+          onClick={onClose}
+          ariaLabel={t('aria.msg-close')}
+        >
+          <CloseIcon />
+        </Button>
+      </div>
       <div className={styles.ctaContainer}>
         <Button
           isNewTab
-          onClick={onDonateClicked}
-          className={styles.ctaPrimary}
           href={makeDonateUrl(true)}
+          onClick={() => {
+            logEvent('donate_button_clicked', {
+              source: 'cta_welcome_message',
+            });
+          }}
+          className={styles.ctaPrimary}
+          size={ButtonSize.Medium}
+          variant={ButtonVariant.Shadow}
         >
           {t('fundraising-sticky-banner.cta')}
         </Button>
-        <div className={styles.closeIcon}>
-          <Button
-            size={ButtonSize.Large}
-            variant={ButtonVariant.Compact}
-            shape={ButtonShape.Circle}
-            onClick={onClose}
-            ariaLabel={t('aria.msg-close')}
-          >
-            <CloseIcon />
-          </Button>
-        </div>
+
+        <Button
+          isNewTab
+          href="https://donate.quran.com"
+          onClick={() => {
+            logEvent('donate_button_clicked', {
+              source: 'learn_more_welcome_message',
+            });
+          }}
+          variant={ButtonVariant.Compact}
+        >
+          {t('fundraising.learn-more')}
+        </Button>
       </div>
     </div>
   );

@@ -28,7 +28,7 @@ const HomePageWelcomeMessage = () => {
 
   return (
     <HomePageMessage
-      title={t('home:welcome.title')}
+      title={t('welcome.title')}
       body={
         <Trans
           i18nKey="home:welcome.body"

@@ -1,38 +1,34 @@
 @use "src/styles/theme";
-@use "src/styles/breakpoints";
 
 .container {
   position: relative;
   padding-block-start: var(--spacing-medium);
   padding-block-end: var(--spacing-medium);
   padding-inline-start: var(--spacing-medium);
+  padding-inline-end: var(--spacing-medium);
   border-radius: var(--border-radius-default);
-  border: 1px solid #ff7878;
+  border: 1px solid var(--color-success-medium);
 
-  background-color: #ffaeae;
-  color: var(--shade-9);
-  padding-inline-end: calc(2 * var(--spacing-medium));
-  box-sizing: border-box;
-  @include breakpoints.tablet {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding-inline-end: var(--spacing-xxsmall);
-  }
+  background-color: var(--color-background-elevated);
+  color: var(--color-text-default);
 }
 
 .title {
   font-weight: var(--font-weight-semibold);
   font-size: var(--font-size-large);
+  margin-block-end: var(--spacing-medium);
   line-height: var(--line-height-large);
 }
 
 .link {
   margin-block-start: var(--spacing-small);
 }
+.description {
+  margin-block-end: var(--spacing-medium);
+}
 .version {
   font-weight: var(--font-weight-bold);
-  font-size: var(--font-size-xsmall);
+  font-size: var(--font-size-small);
   color: var(--color-text-faded);
   display: flex;
   align-items: center;
@@ -50,34 +46,9 @@
   position: absolute;
   inset-block-start: var(--spacing-xxsmall);
   inset-inline-end: var(--spacing-xxsmall);
-  @include breakpoints.tablet {
-    position: static;
-  }
 }
 
 .ctaPrimary {
-  font-weight: var(--font-weight-bold);
+  margin-block-start: var(--spacing-large);
   margin-inline-end: var(--spacing-small);
-  white-space: nowrap;
-
-  --themed-fg: var(--shade-1);
-  --themed-bg: var(--shade-9);
-  --themed-border: var(--shade-9);
-}
-
-.ctaContainer {
-  display: flex;
-  align-items: center;
-  margin-block-start: var(--spacing-medium);
-  @include breakpoints.tablet {
-    margin-block-start: 0;
-  }
-}
-
-.ctaSecondary {
-  white-space: nowrap;
-
-  --themed-fg: var(--shade-1);
-  --themed-bg: var(--shade-9);
-  --themed-border: var(--shade-9);
 }
