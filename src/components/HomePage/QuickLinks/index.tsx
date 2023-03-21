@@ -60,6 +60,12 @@ const QuickLinks: React.FC = () => {
           className={styles.link}
         />
       ))}
+      <QuickLink
+        slug="https://quranreflect.com/ramadanofreflection"
+        logKey="ramadanofreflection"
+        text="Ramadan of Reflection"
+        className={styles.link}
+      />
     </div>
   );
 };
