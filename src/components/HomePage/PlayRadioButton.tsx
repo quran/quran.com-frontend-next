@@ -64,7 +64,7 @@ const PlayRadioButton = () => {
         isNewTab
         variant={ButtonVariant.Shadow}
         className={styles.reflectionCta}
-        size={ButtonSize.Medium}
+        size={ButtonSize.Small}
         type={ButtonType.Secondary}
         onClick={onReflectionClicked}
       >
