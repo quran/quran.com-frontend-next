@@ -158,6 +158,10 @@
         "lastName": "Nama keluarga"
     },
     "from": "Dari",
+    "fundraising-sticky-banner": {
+        "cta": "Menyumbangkan",
+        "title": "Dukung Quran.com Ramadhan ini"
+    },
     "fundraising": {
         "description": "Donasi bulanan membantu kami meningkatkan Quran.com dan mempertahankan operasi sehingga kami kurang fokus pada penggalangan dana dan lebih pada menciptakan dampak.",
         "learn-more": "Belajarlah lagi",

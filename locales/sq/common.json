@@ -158,6 +158,10 @@
         "lastName": "Mbiemri"
     },
     "from": "Nga",
+    "fundraising-sticky-banner": {
+        "cta": "Dhuroni",
+        "title": "Mbështetni Quran.com këtë Ramazan"
+    },
     "fundraising": {
         "description": "Donacionet mujore na ndihmojnë të përmirësojmë Quran.com dhe të mbajmë operacionet, kështu që ne fokusohemi më pak në mbledhjen e fondeve dhe më shumë në krijimin e ndikimit.",
         "learn-more": "Mëso më shumë",
