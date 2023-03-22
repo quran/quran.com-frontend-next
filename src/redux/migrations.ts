@@ -190,4 +190,13 @@ export default {
       },
     };
   },
+  26: (state) => {
+    return {
+      ...state,
+      banner: {
+        ...state.banner,
+        isBannerVisible: true,
+      },
+    };
+  },
 };
