@@ -158,6 +158,10 @@
         "lastName": "Achternaam"
     },
     "from": "Van",
+    "fundraising-sticky-banner": {
+        "cta": "Doneer",
+        "title": "Steun Quran.com deze Ramadan"
+    },
     "fundraising": {
         "description": "Maandelijkse donaties helpen ons Quran.com te verbeteren en activiteiten te ondersteunen, zodat we ons minder richten op fondsenwerving en meer op het creëren van impact.",
         "learn-more": "Leer meer",

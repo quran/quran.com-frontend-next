@@ -158,6 +158,10 @@
         "lastName": "Sobrenome"
     },
     "from": "A partir de",
+    "fundraising-sticky-banner": {
+        "cta": "Doar",
+        "title": "Apoie o Quran.com neste Ramadã"
+    },
     "fundraising": {
         "description": "As doações mensais nos ajudam a melhorar o Quran.com e sustentar as operações, de modo que nos concentramos menos na arrecadação de fundos e mais na criação de impacto.",
         "learn-more": "Saber mais",
