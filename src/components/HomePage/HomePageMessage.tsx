@@ -45,7 +45,7 @@ const HomePageMessage = ({ title, subtitle, body, onClose }: HomePageMessageProp
             });
           }}
           className={styles.ctaPrimary}
-          size={ButtonSize.Medium}
+          size={ButtonSize.Small}
           variant={ButtonVariant.Shadow}
         >
           {t('fundraising-sticky-banner.cta')}

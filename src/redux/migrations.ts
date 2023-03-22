@@ -181,4 +181,13 @@ export default {
       showTooltipFor: undefined,
     },
   }),
+  25: (state) => {
+    return {
+      ...state,
+      welcomeMessage: {
+        ...state.welcomeMessage,
+        isVisible: true,
+      },
+    };
+  },
 };

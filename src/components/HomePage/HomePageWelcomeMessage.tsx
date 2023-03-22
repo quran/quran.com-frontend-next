@@ -2,7 +2,6 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import React from 'react';
 
-import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 
@@ -12,8 +11,6 @@ import {
   selectWelcomeMessage,
   setIsVisible as setIsWelcomeMessageVisible,
 } from '@/redux/slices/welcomeMessage';
-import { makeDonateUrl } from '@/utils/apiPaths';
-import { logEvent } from '@/utils/eventLogger';
 
 const HomePageWelcomeMessage = () => {
   const { t } = useTranslation('home');
@@ -26,32 +23,7 @@ const HomePageWelcomeMessage = () => {
 
   if (!isVisible) return null;
 
-  return (
-    <HomePageMessage
-      title={t('welcome.title')}
-      body={
-        <Trans
-          i18nKey="home:welcome.body"
-          components={[
-            <a
-              onClick={() =>
-                logEvent('donate_button_clicked', {
-                  source: 'welcome_message',
-                })
-              }
-              href={makeDonateUrl(true)}
-              target="_blank"
-              rel="noreferrer"
-              key="0"
-            />,
-            <span key="1" />,
-            <br key="2" />,
-          ]}
-        />
-      }
-      onClose={onClose}
-    />
-  );
+  return <HomePageMessage title={t('welcome.title')} body={null} onClose={onClose} />;
 };
 
 export default HomePageWelcomeMessage;

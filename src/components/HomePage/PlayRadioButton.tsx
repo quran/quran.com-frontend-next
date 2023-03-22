@@ -4,7 +4,6 @@ import { useContext } from 'react';
 import { useSelector } from '@xstate/react';
 import useTranslation from 'next-translate/useTranslation';
 
-import Button from '../dls/Button/Button';
 import Spinner from '../dls/Spinner/Spinner';
 import { getRandomCuratedStationId } from '../Radio/curatedStations';
 import { StationType } from '../Radio/types';
@@ -12,9 +11,10 @@ import { StationType } from '../Radio/types';
 import styles from './PlayRadioButton.module.scss';
 import RadioInformation from './RadioInformation';
 
+import Button, { ButtonVariant, ButtonType, ButtonSize } from '@/dls/Button/Button';
 import PauseIcon from '@/icons/pause.svg';
 import PlayIcon from '@/icons/play-arrow.svg';
-import { logEvent } from '@/utils/eventLogger';
+import { logButtonClick, logEvent } from '@/utils/eventLogger';
 import { selectIsLoading } from 'src/xstate/actors/audioPlayer/selectors';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 
@@ -52,9 +52,24 @@ const PlayRadioButton = () => {
     audioService.send('TOGGLE');
   };
 
+  const onReflectionClicked = () => {
+    logButtonClick('homepage_reflection_cta');
+  };
+
   const { radioActor } = audioService.getSnapshot().context;
   return (
     <div className={styles.container}>
+      <Button
+        href="https://quranreflect.com/ramadanofreflection"
+        isNewTab
+        variant={ButtonVariant.Shadow}
+        className={styles.reflectionCta}
+        size={ButtonSize.Medium}
+        type={ButtonType.Secondary}
+        onClick={onReflectionClicked}
+      >
+        {t('quick-links:qr')}
+      </Button>
       <div className={styles.playRadioSection}>
         {isAudioPlaying && isRadioMode ? (
           <Button

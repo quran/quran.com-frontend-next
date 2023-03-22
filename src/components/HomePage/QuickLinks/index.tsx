@@ -60,13 +60,6 @@ const QuickLinks: React.FC = () => {
           className={styles.link}
         />
       ))}
-      <QuickLink
-        slug="https://quranreflect.com/ramadanofreflection"
-        logKey="ramadanofreflection"
-        text={t('qr')}
-        className={styles.link}
-        isExternalLink
-      />
     </div>
   );
 };

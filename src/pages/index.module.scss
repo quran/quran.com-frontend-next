@@ -5,7 +5,7 @@ $list-max-width: 80rem;
 
 .pageContainer {
   @include breakpoints.smallerThanTablet {
-    padding-block-start: var(--spacing-mega);
+    padding-block-start: calc(1.4 * var(--spacing-mega));
   }
   padding-block-end: var(--spacing-small);
   padding-inline-start: 0;
