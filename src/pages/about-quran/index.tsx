@@ -31,7 +31,7 @@ const AboutQuranPage: NextPage = (): JSX.Element => {
             The most conventional answer is that the Quran is a book – but it is not like most
             books. It is made up of words which contain truth and guidance for every human being,
             and Muslims believe that these are words revealed directly by God, in the Arabic
-            language, to last of His prophets and messengers, Muhammad ﷺ (peace be upon him).
+            language, to the last of His prophets and messengers, Muhammad ﷺ (peace be upon him).
           </div>
           <div>
             The Quran presents itself with a number of names and descriptions which are worth
@@ -146,12 +146,10 @@ const AboutQuranPage: NextPage = (): JSX.Element => {
             I have never read the Quran before. Do you have any suggestions on where I can start?
           </h1>
           <div>
-            <i>
-              Approach the Quran with an open mind and a willingness to learn: It is important to
-              approach the Quran with a positive attitude and a desire to understand its message.
-              Try to put aside any preconceived notions or biases you may have, and approach the
-              Quran with an open mind.
-            </i>
+            <i>Approach the Quran with an open mind and a willingness to learn</i>: It is important
+            to approach the Quran with a positive attitude and a desire to understand its message.
+            Try to put aside any preconceived notions or biases you may have, and approach the Quran
+            with an open mind.
           </div>
           <h2>
             <u>Recommendation on where to begin:</u>
