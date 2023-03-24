@@ -28,10 +28,8 @@ const FundraisingBanner = () => {
       <p className={styles.paragraph}>{t('fundraising.description')}</p>
       <Button
         onClick={onDonateClicked}
-        isNewTab
-        href={makeDonateUrl(true)}
         type={ButtonType.Warning}
-        className={styles.cta}
+        className={`${styles.cta} donate-button`}
       >
         {t('donate')}
       </Button>
