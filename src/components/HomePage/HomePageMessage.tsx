@@ -6,6 +6,7 @@ import styles from './HomePageMessage.module.scss';
 
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import CloseIcon from '@/icons/close.svg';
+import { makeDonateUrl } from '@/utils/apiPaths';
 import { logEvent } from '@/utils/eventLogger';
 
 type HomePageMessageProps = {
@@ -36,12 +37,14 @@ const HomePageMessage = ({ title, subtitle, body, onClose }: HomePageMessageProp
       </div>
       <div className={styles.ctaContainer}>
         <Button
+          isNewTab
+          href={makeDonateUrl(true)}
           onClick={() => {
             logEvent('donate_button_clicked', {
               source: 'cta_welcome_message',
             });
           }}
-          className={`${styles.ctaPrimary} donate-button`}
+          className={styles.ctaPrimary}
           size={ButtonSize.Small}
           variant={ButtonVariant.Shadow}
         >

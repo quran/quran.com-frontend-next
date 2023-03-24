@@ -1,13 +1,7 @@
 import React from 'react';
 
-import ClassyScript from './ClassyScript';
 import GoogleAnalyticsScript from './GoogleAnalyticsScript';
 
-const ThirdPartyScripts = () => (
-  <>
-    <ClassyScript />
-    <GoogleAnalyticsScript />
-  </>
-);
+const ThirdPartyScripts = () => <GoogleAnalyticsScript />;
 
 export default ThirdPartyScripts;
