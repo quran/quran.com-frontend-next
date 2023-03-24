@@ -7,7 +7,6 @@ import styles from './Banner.module.scss';
 
 import Button, { ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import { selectIsBannerVisible } from '@/redux/slices/banner';
-import { makeDonateUrl } from '@/utils/apiPaths';
 import { logEvent } from '@/utils/eventLogger';
 
 type BannerProps = {
@@ -40,11 +39,10 @@ const Banner = ({ text, cta }: BannerProps) => {
       </div>
       <div className={styles.ctaContainer}>
         <Button
-          isNewTab
           onClick={onDonateClicked}
-          href={makeDonateUrl()}
           size={ButtonSize.Small}
           variant={ButtonVariant.Shadow}
+          className="donate-button"
         >
           {cta}
         </Button>
