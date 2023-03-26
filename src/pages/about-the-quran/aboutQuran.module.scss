@@ -1,5 +1,13 @@
+@use "src/styles/breakpoints";
+
 .container {
+  text-align: justify;
+  margin: auto;
+  @include breakpoints.desktop {
+    width: 65%;
+  }
   h1 {
+    padding-block-start: var(--spacing-xxsmall);
     font-size: var(--font-size-xlarge);
     line-height: var(--line-height-xlarge);
     font-weight: var(--font-weight-bold);

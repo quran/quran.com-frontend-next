@@ -20,7 +20,7 @@ const AboutQuranPage: NextPage = (): JSX.Element => {
   return (
     <>
       <NextSeoWrapper
-        title={t('about-quran')}
+        title={t('about-the-quran')}
         url={getCanonicalUrl(lang, PATH)}
         languageAlternates={getLanguageAlternates(PATH)}
       />
@@ -66,7 +66,10 @@ const AboutQuranPage: NextPage = (): JSX.Element => {
           </div>
           <div>
             "˹This is˺ a blessed Book which We have revealed to you ˹O Prophet˺ so that they may
-            contemplate its verses, and people of reason may be mindful." 38:29
+            contemplate its verses, and people of reason may be mindful."{' '}
+            <Link href="/38:29" isNewTab>
+              38:29
+            </Link>
           </div>
           <div>
             We welcome you to Quran.com and invite you to read and listen to the Quran with an open
@@ -233,9 +236,13 @@ const AboutQuranPage: NextPage = (): JSX.Element => {
           </div>
           <div>
             For those who prefer to listen to the recitation of the Quran, Quran.com offers a
-            diverse library of Quranic recitations by renowned reciters from around the world. The
-            website also provides advanced repeat options for users who are working on memorizing
-            the Quran, helping them to easily repeat and practice specific verses.
+            diverse library of Quranic recitations by renowned{' '}
+            <Link href="/reciters" isNewTab>
+              reciters
+            </Link>{' '}
+            from around the world. The website also provides advanced repeat options for users who
+            are working on memorizing the Quran, helping them to easily repeat and practice specific
+            verses.
           </div>
           <div>
             To further aid users in their understanding of the Quranic text, Quran.com provides
@@ -244,8 +251,12 @@ const AboutQuranPage: NextPage = (): JSX.Element => {
             accessible and understandable to readers who are still learning the Arabic language.
           </div>
           <div>
-            Additionally, Quran.com offers QuranRadio, a streaming service that provides continuous
-            recitation of the Quran, allowing users to listen to the Quran at any time.
+            Additionally, Quran.com offers{' '}
+            <Link href="/radio" isNewTab>
+              QuranRadio
+            </Link>
+            , a streaming service that provides continuous recitation of the Quran, allowing users
+            to listen to the Quran at any time.
           </div>
           <div>
             We hope you find these features beneficial as you explore the Quran. We strive to
