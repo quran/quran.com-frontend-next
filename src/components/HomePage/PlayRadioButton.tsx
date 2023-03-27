@@ -11,10 +11,10 @@ import { StationType } from '../Radio/types';
 import styles from './PlayRadioButton.module.scss';
 import RadioInformation from './RadioInformation';
 
-import Button from '@/dls/Button/Button';
+import Button, { ButtonVariant, ButtonType, ButtonSize } from '@/dls/Button/Button';
 import PauseIcon from '@/icons/pause.svg';
 import PlayIcon from '@/icons/play-arrow.svg';
-import { logEvent } from '@/utils/eventLogger';
+import { logButtonClick, logEvent } from '@/utils/eventLogger';
 import { selectIsLoading } from 'src/xstate/actors/audioPlayer/selectors';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 
@@ -52,14 +52,14 @@ const PlayRadioButton = () => {
     audioService.send('TOGGLE');
   };
 
-  // const onReflectionClicked = () => {
-  //   logButtonClick('homepage_reflection_cta');
-  // };
+  const onReflectionClicked = () => {
+    logButtonClick('homepage_reflection_cta');
+  };
 
   const { radioActor } = audioService.getSnapshot().context;
   return (
     <div className={styles.container}>
-      {/* <Button
+      <Button
         href="https://quranreflect.com/ramadanofreflection"
         isNewTab
         variant={ButtonVariant.Shadow}
@@ -69,7 +69,7 @@ const PlayRadioButton = () => {
         onClick={onReflectionClicked}
       >
         {t('quick-links:qr')}
-      </Button> */}
+      </Button>
       <div className={styles.playRadioSection}>
         {isAudioPlaying && isRadioMode ? (
           <Button

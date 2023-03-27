@@ -65,12 +65,16 @@
 .sectionsContainer {
   width: 100%;
   padding-block-start: var(--spacing-micro);
+  @include breakpoints.smallerThanTablet {
+    padding-block-start: calc(1.4 * var(--spacing-mega));
+  }
   padding-block-end: var(--spacing-micro);
   display: flex;
   align-items: center;
   box-sizing: border-box;
   padding-inline: calc(1.3 * var(--spacing-large));
   @include breakpoints.tablet {
+    padding-block-start: var(--spacing-micro);
     padding-inline: calc(1.2 * var(--spacing-mega));
   }
 }
