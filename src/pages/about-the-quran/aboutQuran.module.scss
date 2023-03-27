@@ -1,6 +1,7 @@
 @use "src/styles/breakpoints";
 
 .container {
+  direction: ltr; // TODO: revert this once we have RTL content
   text-align: justify;
   margin: auto;
   @include breakpoints.desktop {
