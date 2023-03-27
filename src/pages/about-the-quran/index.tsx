@@ -23,6 +23,7 @@ const AboutQuranPage: NextPage = (): JSX.Element => {
         title={t('about-the-quran')}
         url={getCanonicalUrl(lang, PATH)}
         languageAlternates={getLanguageAlternates(PATH)}
+        description={t('desc')}
       />
       <PageContainer>
         <div className={styles.container}>
