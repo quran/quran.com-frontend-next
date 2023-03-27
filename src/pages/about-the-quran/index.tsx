@@ -10,20 +10,27 @@ import styles from './aboutQuran.module.scss';
 
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import PageContainer from '@/components/PageContainer';
+import Button, { ButtonVariant } from '@/dls/Button/Button';
 import Link from '@/dls/Link/Link';
+import { logButtonClick } from '@/utils/eventLogger';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl } from '@/utils/navigation';
 
 const PATH = '/about-quran';
 const AboutQuranPage: NextPage = (): JSX.Element => {
   const { t, lang } = useTranslation('about-quran');
+
+  const onStartReadingClicked = () => {
+    logButtonClick('about_quran_start_reading');
+  };
+
   return (
     <>
       <NextSeoWrapper
         title={t('about-the-quran')}
         url={getCanonicalUrl(lang, PATH)}
         languageAlternates={getLanguageAlternates(PATH)}
-        description={t('desc')}
+        description={t('about-quran-desc')}
       />
       <PageContainer>
         <div className={styles.container}>
@@ -265,6 +272,16 @@ const AboutQuranPage: NextPage = (): JSX.Element => {
             features that improve the learning experience. We are constantly researching and
             exploring new ways to help individuals who are seeking to learn and engage with the
             Quran.
+          </div>
+          <div className={styles.ctaContainer}>
+            <Button
+              onClick={onStartReadingClicked}
+              variant={ButtonVariant.Shadow}
+              href="/al-fatihah"
+              className={styles.button}
+            >
+              {t('about-quran-cta')}
+            </Button>
           </div>
         </div>
       </PageContainer>
