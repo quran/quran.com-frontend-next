@@ -14,6 +14,7 @@ import HelperTooltip from '@/dls/HelperTooltip/HelperTooltip';
 import Link, { LinkVariant } from '@/dls/Link/Link';
 import Progress from '@/dls/Progress';
 import Skeleton from '@/dls/Skeleton/Skeleton';
+import useGetRecentlyReadVerseKeys from '@/hooks/auth/useGetRecentlyReadVerseKeys';
 import useGetStreakWithMetadata from '@/hooks/auth/useGetStreakWithMetadata';
 import MoonIllustrationSVG from '@/public/images/moon-illustration.svg';
 import { ReadingGoalType } from '@/types/auth/ReadingGoal';
@@ -43,9 +44,13 @@ const ReadingStreak: React.FC<ReadingStreakProps> = ({ layout = ReadingStreakLay
   const chaptersData = useContext(DataContext);
 
   const { isLoading, error, streak, readingGoal, weekData } = useGetStreakWithMetadata();
+  const { recentlyReadVerseKeys } = useGetRecentlyReadVerseKeys();
 
   const isQuranReader = layout === ReadingStreakLayout.QuranReader;
-  const nextVerseToRead = readingGoal?.progress?.nextVerseToRead;
+  const nextVerseToRead = useMemo(() => {
+    const nextVerseToReadFromGoal = readingGoal?.progress?.nextVerseToRead;
+    return nextVerseToReadFromGoal ?? recentlyReadVerseKeys[0];
+  }, [readingGoal?.progress?.nextVerseToRead, recentlyReadVerseKeys]);
 
   const localizedStreak = useMemo(() => {
     return toLocalizedNumber(streak, lang);
@@ -234,6 +239,7 @@ const ReadingStreak: React.FC<ReadingStreakProps> = ({ layout = ReadingStreakLay
         <div className={styles.actionsContainer}>
           <Button
             href={nextVerseToRead ? getChapterWithStartingVerseUrl(nextVerseToRead) : undefined}
+            isDisabled={!nextVerseToRead}
           >
             {t('continue-reading')}
           </Button>
