@@ -63,7 +63,7 @@ const SearchDrawer: React.FC = () => {
       logTextSearchQuery(debouncedSearchQuery, SearchQuerySource.SearchDrawer);
       setIsSearching(true);
       getNewSearchResults({
-        mode: SearchMode.Quick,
+        mode: SearchMode.Advanced,
         query: debouncedSearchQuery,
         size: PAGE_SIZE,
         words: true,
