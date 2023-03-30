@@ -34,6 +34,7 @@ const VoiceSearchBodyContainer = dynamic(
 );
 
 const DEBOUNCING_PERIOD_MS = 1000;
+const PAGE_SIZE = 10;
 
 const SearchDrawer: React.FC = () => {
   const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
@@ -64,12 +65,13 @@ const SearchDrawer: React.FC = () => {
       getNewSearchResults({
         mode: SearchMode.Quick,
         query: debouncedSearchQuery,
+        size: PAGE_SIZE,
         words: true,
         ...(selectedTranslations &&
           !!selectedTranslations.length && {
             filterTranslations: selectedTranslations.join(','),
+            translationFields: 'resource_name',
           }),
-        getText: 1,
       })
         .then((response) => {
           setSearchResult(response);

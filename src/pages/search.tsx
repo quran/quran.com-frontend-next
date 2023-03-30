@@ -136,9 +136,8 @@ const Search: NextPage<SearchProps> = ({ translations, chaptersData }): JSX.Elem
         query,
         size: PAGE_SIZE,
         filterLanguages: language,
-        getText: 1,
         // translations will be included only when there is a selected translation
-        ...(translation && { filterTranslations: translation }),
+        ...(translation && { filterTranslations: translation, translationFields: 'resource_name' }),
         page,
       })
         .then((response) => {

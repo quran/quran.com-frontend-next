@@ -11,6 +11,7 @@ interface AdvancedSearchRequestParams {
 
 interface QuickSearchRequestParams {
   indexes?: string;
+  disableHighlighting?: SearchBoolean;
 }
 
 export type SearchRequestParams<Mode extends SearchMode> = {

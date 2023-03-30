@@ -206,8 +206,8 @@ const CommandBarBody: React.FC = () => {
                 ? makeNewSearchResultsUrl({
                     mode: SearchMode.Quick,
                     query: searchQuery,
-                    getText: 1,
                     indexes: 'autocomplete_quran_chapters',
+                    disableHighlighting: 1,
                   })
                 : null
             }
