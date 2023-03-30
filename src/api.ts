@@ -1,9 +1,8 @@
 /* eslint-disable max-lines */
 import { camelizeKeys } from 'humps';
 
-import SearchRequestParams, { SearchMode } from '@/types/Search/SearchRequestParams';
+import { SearchRequestParams, SearchMode } from '@/types/Search/SearchRequestParams';
 import NewSearchResponse from '@/types/Search/SearchResponse';
-import SuggestSearchResponse from '@/types/Search/SuggestSearchResponse';
 import {
   makeAdvancedCopyUrl,
   makeTafsirsUrl,
@@ -205,20 +204,6 @@ export const getSearchResults = async (params: SearchRequest): Promise<SearchRes
 export const getNewSearchResults = async <T extends SearchMode>(
   params: SearchRequestParams<T>,
 ): Promise<NewSearchResponse> => fetcher(makeNewSearchResultsUrl(params), SEARCH_FETCH_OPTIONS);
-
-/**
- * Get the search results of a query.
- *
- * @param {SearchRequestParams} params
- * @returns  {Promise<NewSearchResponse>}
- */
-export const getSuggestSearchResults = async <T extends SearchMode>(
-  params: SearchRequestParams<T>,
-): Promise<SuggestSearchResponse> =>
-  fetcher(
-    makeNewSearchResultsUrl({ ...params, indexes: 'autocomplete_quran_chapters' }),
-    SEARCH_FETCH_OPTIONS,
-  );
 
 /**
  * Get the list of tafsirs.
