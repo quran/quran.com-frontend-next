@@ -14,11 +14,12 @@ import { selectNavbar } from '@/redux/slices/navbar';
 import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
 import { addSearchHistoryRecord } from '@/redux/slices/Search/search';
 import { selectIsSearchDrawerVoiceFlowStarted } from '@/redux/slices/voiceSearch';
+import { SearchMode } from '@/types/Search/SearchRequestParams';
 import SearchQuerySource from '@/types/SearchQuerySource';
 import { areArraysEqual } from '@/utils/array';
 import { logButtonClick, logEmptySearchResults, logTextSearchQuery } from '@/utils/eventLogger';
-import { getSearchResults } from 'src/api';
-import { SearchResponse } from 'types/ApiResponses';
+import { getNewSearchResults } from 'src/api';
+import SearchResponse from 'types/Search/SearchResponse';
 
 const SearchBodyContainer = dynamic(() => import('@/components/Search/SearchBodyContainer'), {
   ssr: false,
@@ -60,22 +61,21 @@ const SearchDrawer: React.FC = () => {
       dispatch({ type: addSearchHistoryRecord.type, payload: debouncedSearchQuery });
       logTextSearchQuery(debouncedSearchQuery, SearchQuerySource.SearchDrawer);
       setIsSearching(true);
-      getSearchResults({
+      getNewSearchResults({
+        mode: SearchMode.Quick,
         query: debouncedSearchQuery,
+        words: true,
         ...(selectedTranslations &&
           !!selectedTranslations.length && {
             filterTranslations: selectedTranslations.join(','),
           }),
+        getText: 1,
       })
         .then((response) => {
-          if (response.status === 500) {
-            setHasError(true);
-          } else {
-            setSearchResult(response);
-            // if there is no navigations nor verses in the response
-            if (response.pagination.totalRecords === 0 && !response.result.navigation.length) {
-              logEmptySearchResults(debouncedSearchQuery, SearchQuerySource.SearchDrawer);
-            }
+          setSearchResult(response);
+          // if there is no navigations nor verses in the response
+          if (response.pagination.totalRecords === 0 && !response.result.navigation.length) {
+            logEmptySearchResults(debouncedSearchQuery, SearchQuerySource.SearchDrawer);
           }
         })
         .catch(() => {

@@ -9,12 +9,12 @@ import styles from './SearchResultItem.module.scss';
 import Link from '@/dls/Link/Link';
 import QuranWord from '@/dls/QuranWord/QuranWord';
 import useGetChaptersData from '@/hooks/useGetChaptersData';
+import SearchResultItem from '@/types/Search/SearchVerseItem';
 import { getChapterData } from '@/utils/chapter';
 import { logButtonClick } from '@/utils/eventLogger';
 import { toLocalizedVerseKey } from '@/utils/locale';
 import { getChapterWithStartingVerseUrl } from '@/utils/navigation';
 import { getChapterNumberFromKey } from '@/utils/verse';
-import Verse from 'types/Verse';
 
 export enum Source {
   SearchDrawer = 'search_drawer',
@@ -23,7 +23,7 @@ export enum Source {
 }
 
 interface Props {
-  result: Verse;
+  result: SearchResultItem;
   source: Source;
 }
 
@@ -57,12 +57,12 @@ const SearchResultItem: React.FC<Props> = ({ result, source }) => {
         </Link>
         <div className={styles.quranTextContainer}>
           <div className={styles.quranTextResult} translate="no">
-            {result.words.map((word, index) => {
+            {result.words?.map((word, index) => {
               return (
                 <QuranWord
                   isHighlighted={!!word.highlight}
                   key={`${result.verseKey}:${index + 1}`}
-                  word={word}
+                  word={{ ...word, verseKey: result.verseKey }}
                   isWordByWordAllowed={false}
                   isAudioHighlightingAllowed={false}
                 />
@@ -70,7 +70,11 @@ const SearchResultItem: React.FC<Props> = ({ result, source }) => {
             })}
           </div>
         </div>
-        {result.translations?.map((translation) => (
+        {result.kalimatData?.matches ? (
+             <div className={styles.translationContainer}>
+             <div dangerouslySetInnerHTML={{ __html: result.kalimatData.matches }} />
+             </div>
+        ) : result.translations?.map((translation) => (
           <div key={translation.resourceId} className={styles.translationContainer}>
             <div dangerouslySetInnerHTML={{ __html: translation.text }} />
             {/* eslint-disable-next-line i18next/no-literal-string */}

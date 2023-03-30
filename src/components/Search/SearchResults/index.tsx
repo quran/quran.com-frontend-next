@@ -10,7 +10,7 @@ import Link from '@/dls/Link/Link';
 import Pagination from '@/dls/Pagination/Pagination';
 import { logButtonClick } from '@/utils/eventLogger';
 import { toLocalizedNumber } from '@/utils/locale';
-import { SearchResponse } from 'types/ApiResponses';
+import SearchResponse from 'types/Search/SearchResponse';
 
 interface Props {
   searchResult: SearchResponse;
@@ -32,12 +32,15 @@ const SearchResults: React.FC<Props> = ({
   onSearchResultClicked,
 }) => {
   const { t, lang } = useTranslation();
+  const navigationResults = searchResult.result.navigation;
+  const versesResults = searchResult.result.verses;
+
   return (
     <>
       <div>
-        {!!searchResult.result.navigation?.length && (
+        {!!navigationResults?.length && (
           <div className={styles.navigationItemsListContainer}>
-            {searchResult.result.navigation.map((navigationResult) => (
+            {navigationResults.map((navigationResult) => (
               <span className={styles.navigationItemContainer} key={navigationResult.key}>
                 <NavigationItem isSearchDrawer={isSearchDrawer} navigation={navigationResult} />
               </span>
@@ -50,9 +53,9 @@ const SearchResults: React.FC<Props> = ({
           })}
         </p>
         <>
-          {searchResult.result.verses.map((result) => (
+          {versesResults.map((result) => (
             <SearchResultItem
-              key={result.verseKey}
+              key={result.id}
               result={result}
               source={isSearchDrawer ? Source.SearchDrawer : Source.SearchPage}
             />

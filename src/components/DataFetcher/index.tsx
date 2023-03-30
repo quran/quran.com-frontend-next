@@ -9,6 +9,7 @@ import { BaseResponse } from 'types/ApiResponses';
 
 interface Props {
   queryKey: string;
+  queryOptions?: RequestInit;
   render: (data: BaseResponse) => JSX.Element;
   initialData?: BaseResponse;
   loading?: () => JSX.Element;
@@ -29,13 +30,14 @@ interface Props {
 const DataFetcher: React.FC<Props> = ({
   queryKey,
   render,
+  queryOptions,
   initialData,
   loading = () => <Spinner />,
 }: Props): JSX.Element => {
   const { data, error, isValidating, mutate } = useSWRImmutable(
     queryKey,
     () =>
-      fetcher(queryKey)
+      fetcher(queryKey, queryOptions)
         .then((res) => Promise.resolve(res))
         .catch((err) => Promise.reject(err)),
     {

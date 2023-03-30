@@ -1,6 +1,9 @@
 /* eslint-disable max-lines */
 import { camelizeKeys } from 'humps';
 
+import SearchRequestParams, { SearchMode } from '@/types/Search/SearchRequestParams';
+import NewSearchResponse from '@/types/Search/SearchResponse';
+import SuggestSearchResponse from '@/types/Search/SuggestSearchResponse';
 import {
   makeAdvancedCopyUrl,
   makeTafsirsUrl,
@@ -22,6 +25,7 @@ import {
   makeReciterUrl,
   makeTafsirContentUrl,
   makePagesLookupUrl,
+  makeNewSearchResultsUrl,
 } from '@/utils/apiPaths';
 import { SearchRequest, AdvancedCopyRequest, PagesLookUpRequest } from 'types/ApiRequests';
 import {
@@ -45,6 +49,15 @@ import AudioData from 'types/AudioData';
 import { MushafLines, QuranFont } from 'types/QuranReader';
 
 export const OFFLINE_ERROR = 'OFFLINE';
+
+// TODO: UNDO this
+export const SEARCH_FETCH_OPTIONS = {
+  headers: {
+    // 'api-key': 'c6BkZfBS3k7FnqvaLMmcpvpy',
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    'x-api-key': 'test-api-key',
+  },
+};
 
 export const fetcher = async function fetcher<T>(
   input: RequestInfo,
@@ -182,6 +195,30 @@ export const getAdvancedCopyRawResult = async (
  */
 export const getSearchResults = async (params: SearchRequest): Promise<SearchResponse> =>
   fetcher(makeSearchResultsUrl(params));
+
+/**
+ * Get the search results of a query.
+ *
+ * @param {SearchRequestParams} params
+ * @returns  {Promise<NewSearchResponse>}
+ */
+export const getNewSearchResults = async <T extends SearchMode>(
+  params: SearchRequestParams<T>,
+): Promise<NewSearchResponse> => fetcher(makeNewSearchResultsUrl(params), SEARCH_FETCH_OPTIONS);
+
+/**
+ * Get the search results of a query.
+ *
+ * @param {SearchRequestParams} params
+ * @returns  {Promise<NewSearchResponse>}
+ */
+export const getSuggestSearchResults = async <T extends SearchMode>(
+  params: SearchRequestParams<T>,
+): Promise<SuggestSearchResponse> =>
+  fetcher(
+    makeNewSearchResultsUrl({ ...params, indexes: 'autocomplete_quran_chapters' }),
+    SEARCH_FETCH_OPTIONS,
+  );
 
 /**
  * Get the list of tafsirs.

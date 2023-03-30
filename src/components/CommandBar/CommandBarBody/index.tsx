@@ -10,6 +10,7 @@ import CommandsList, { Command } from '../CommandsList';
 
 import styles from './CommandBarBody.module.scss';
 
+import { SEARCH_FETCH_OPTIONS } from '@/api';
 import DataFetcher from '@/components/DataFetcher';
 import TarteelAttribution from '@/components/TarteelAttribution/TarteelAttribution';
 import VoiceSearchBodyContainer from '@/components/TarteelVoiceSearch/BodyContainer';
@@ -18,37 +19,38 @@ import useDebounce from '@/hooks/useDebounce';
 import IconSearch from '@/icons/search.svg';
 import { selectRecentNavigations } from '@/redux/slices/CommandBar/state';
 import { selectIsCommandBarVoiceFlowStarted } from '@/redux/slices/voiceSearch';
+import { SearchMode } from '@/types/Search/SearchRequestParams';
 import SearchQuerySource from '@/types/SearchQuerySource';
-import { makeSearchResultsUrl } from '@/utils/apiPaths';
+import { makeNewSearchResultsUrl } from '@/utils/apiPaths';
 import { areArraysEqual } from '@/utils/array';
 import { logButtonClick, logTextSearchQuery } from '@/utils/eventLogger';
-import { SearchResponse } from 'types/ApiResponses';
+import SearchResponse from 'types/Search/SearchResponse';
 import { SearchNavigationType } from 'types/SearchNavigationResult';
 
 const NAVIGATE_TO = [
   {
     name: 'Juz 1',
-    key: 1,
+    key: '1',
     resultType: SearchNavigationType.JUZ,
   },
   {
     name: 'Hizb 1',
-    key: 1,
+    key: '1',
     resultType: SearchNavigationType.HIZB,
   },
   {
     name: 'Rub el Hizb 1',
-    key: 1,
+    key: '1',
     resultType: SearchNavigationType.RUB_EL_HIZB,
   },
   {
     name: 'Page 1',
-    key: 1,
+    key: '1',
     resultType: SearchNavigationType.PAGE,
   },
   {
     name: 'Surah Yasin',
-    key: 36,
+    key: '36',
     resultType: SearchNavigationType.SURAH,
   },
   {
@@ -198,7 +200,17 @@ const CommandBarBody: React.FC = () => {
           <VoiceSearchBodyContainer isCommandBar />
         ) : (
           <DataFetcher
-            queryKey={searchQuery ? makeSearchResultsUrl({ query: searchQuery }) : null}
+            queryOptions={SEARCH_FETCH_OPTIONS}
+            queryKey={
+              searchQuery
+                ? makeNewSearchResultsUrl({
+                    mode: SearchMode.Quick,
+                    query: searchQuery,
+                    getText: 1,
+                    indexes: 'autocomplete_quran_chapters',
+                  })
+                : null
+            }
             render={dataFetcherRender}
           />
         )}

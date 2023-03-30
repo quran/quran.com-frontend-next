@@ -24,6 +24,7 @@ import { SearchNavigationResult } from 'types/SearchNavigationResult';
 
 export interface Command extends SearchNavigationResult {
   group: string;
+  name?: string;
   index?: number;
   isClearable?: boolean;
 }
@@ -72,9 +73,9 @@ const CommandsList: React.FC<Props> = ({ commandGroups: { groups, numberOfComman
   );
   const navigateToLink = useCallback(
     (command: Command) => {
-      const { name, resultType, key } = command;
+      const { resultType, key } = command;
       router.push(resolveUrlBySearchNavigationType(resultType, key)).then(() => {
-        dispatch({ type: addRecentNavigation.type, payload: { name, resultType, key } });
+        dispatch({ type: addRecentNavigation.type, payload: { resultType, key } });
         dispatch({ type: setIsOpen.type, payload: false });
       });
     },
@@ -144,7 +145,7 @@ const CommandsList: React.FC<Props> = ({ commandGroups: { groups, numberOfComman
               </div>
               <ul role="group" aria-labelledby={commandGroup}>
                 {groups[commandGroup].map((command) => {
-                  const { name, resultType } = command;
+                  const { name, resultType, key } = command;
                   const isSelected = selectedCommandIndex === command.index;
                   return (
                     <li
@@ -156,7 +157,7 @@ const CommandsList: React.FC<Props> = ({ commandGroups: { groups, numberOfComman
                       onClick={() => navigateToLink(command)}
                       onMouseOver={() => setSelectedCommandIndex(command.index)}
                     >
-                      <CommandPrefix name={name} type={resultType} />
+                      <CommandPrefix name={name} type={resultType} navigationKey={key} />
                       <div className={styles.keyboardInputContainer}>
                         <CommandControl
                           isClearable={command.isClearable}

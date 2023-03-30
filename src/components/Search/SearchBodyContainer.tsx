@@ -10,7 +10,7 @@ import styles from './SearchBodyContainer.module.scss';
 import SearchResults from '@/components/Search/SearchResults';
 import Spinner, { SpinnerSize } from '@/dls/Spinner/Spinner';
 import { getSearchQueryNavigationUrl } from '@/utils/navigation';
-import { SearchResponse } from 'types/ApiResponses';
+import SearchResponse from 'types/Search/SearchResponse';
 
 interface Props {
   searchQuery: string;
@@ -39,10 +39,7 @@ const SearchBodyContainer: React.FC<Props> = ({
 }) => {
   const { t } = useTranslation('common');
   const searchUrl = getSearchQueryNavigationUrl(searchQuery);
-  const isEmptyResponse =
-    searchResult &&
-    searchResult.pagination.totalRecords === 0 &&
-    !searchResult.result.navigation.length;
+  const isEmptyResponse = searchResult && searchResult.pagination.totalRecords === 0;
   const isPreInputLayout =
     !searchQuery || isSearching || hasError || (!isSearching && !hasError && isEmptyResponse);
   return (

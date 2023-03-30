@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 
 import styles from './search.module.scss';
 
+import { getAvailableLanguages, getAvailableTranslations, getNewSearchResults } from '@/api';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import TranslationsFilter from '@/components/Search/Filters/TranslationsFilter';
 import SearchBodyContainer from '@/components/Search/SearchBodyContainer';
@@ -20,6 +21,7 @@ import FilterIcon from '@/icons/filter.svg';
 import SearchIcon from '@/icons/search.svg';
 import { getTranslationsInitialState } from '@/redux/defaultSettings/util';
 import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
+import { SearchMode } from '@/types/Search/SearchRequestParams';
 import SearchQuerySource from '@/types/SearchQuerySource';
 import { areArraysEqual } from '@/utils/array';
 import { getAllChaptersData } from '@/utils/chapter';
@@ -33,12 +35,11 @@ import {
 import filterTranslations from '@/utils/filter-translations';
 import { getLanguageAlternates, toLocalizedNumber } from '@/utils/locale';
 import { getCanonicalUrl } from '@/utils/navigation';
-import { getAvailableLanguages, getAvailableTranslations, getSearchResults } from 'src/api';
 import DataContext from 'src/contexts/DataContext';
-import { SearchResponse } from 'types/ApiResponses';
 import AvailableLanguage from 'types/AvailableLanguage';
 import AvailableTranslation from 'types/AvailableTranslation';
 import ChaptersData from 'types/ChaptersData';
+import SearchResponse from 'types/Search/SearchResponse';
 
 const PAGE_SIZE = 10;
 const DEBOUNCING_PERIOD_MS = 1000;
@@ -130,22 +131,20 @@ const Search: NextPage<SearchProps> = ({ translations, chaptersData }): JSX.Elem
     (query: string, page: number, translation: string, language: string) => {
       setIsSearching(true);
       logTextSearchQuery(query, SearchQuerySource.SearchPage);
-      getSearchResults({
+      getNewSearchResults({
+        mode: SearchMode.Advanced,
         query,
-        filterLanguages: language,
         size: PAGE_SIZE,
+        filterLanguages: language,
+        getText: 1,
+        // translations will be included only when there is a selected translation
+        ...(translation && { filterTranslations: translation }),
         page,
-        ...(translation && { filterTranslations: translation }), // translations will be included only when there is a selected translation
       })
         .then((response) => {
-          if (response.status === 500) {
-            setHasError(true);
-          } else {
-            setSearchResult(response);
-            // if there is no navigations nor verses in the response
-            if (response.pagination.totalRecords === 0 && !response.result.navigation.length) {
-              logEmptySearchResults(query, SearchQuerySource.SearchPage);
-            }
+          setSearchResult(response);
+          if (response.pagination.totalRecords === 0) {
+            logEmptySearchResults(query, SearchQuerySource.SearchPage);
           }
         })
         .catch(() => {
