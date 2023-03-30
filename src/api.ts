@@ -52,9 +52,8 @@ export const OFFLINE_ERROR = 'OFFLINE';
 // TODO: UNDO this
 export const SEARCH_FETCH_OPTIONS = {
   headers: {
-    // 'api-key': 'c6BkZfBS3k7FnqvaLMmcpvpy',
     // eslint-disable-next-line @typescript-eslint/naming-convention
-    'x-api-key': 'test-api-key',
+    'x-api-key': process.env.NEXT_PUBLIC_SEARCH_API_KEY,
   },
 };
 

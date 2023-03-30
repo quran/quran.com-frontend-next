@@ -8,11 +8,11 @@ import CommandsList from '@/components/CommandBar/CommandsList';
 import DataFetcher from '@/components/DataFetcher';
 import SearchResultItem, { Source } from '@/components/Search/SearchResults/SearchResultItem';
 import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
+import SearchResponse from '@/types/Search/SearchResponse';
 import { makeVersesFilterUrl } from '@/utils/apiPaths';
 import { areArraysEqual } from '@/utils/array';
 import { toLocalizedVerseKey } from '@/utils/locale';
 import { truncateString } from '@/utils/string';
-import { VersesResponse } from 'types/ApiResponses';
 import { SearchNavigationType } from 'types/SearchNavigationResult';
 import SearchResult from 'types/Tarteel/SearchResult';
 
@@ -39,7 +39,9 @@ const SearchResults: React.FC<Props> = ({ searchResult, isCommandBar }) => {
   };
 
   const responseRender = useCallback(
-    (data: VersesResponse) => {
+    (response: SearchResponse) => {
+      const data = response.result;
+
       if (isCommandBar) {
         const toBeGroupedCommands = data.verses.map((verse) => {
           return {
