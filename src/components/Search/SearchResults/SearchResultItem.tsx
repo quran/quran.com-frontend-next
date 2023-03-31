@@ -70,11 +70,6 @@ const SearchResultItem: React.FC<Props> = ({ result, source }) => {
             })}
           </div>
         </div>
-        {/* {result.kalimatData?.matches ? (
-          <div className={styles.translationContainer}>
-            <div dangerouslySetInnerHTML={{ __html: result.kalimatData.matches }} />
-          </div>
-        ) : ( */}
         {result.translations?.map((translation) => (
           <div key={translation.resourceId} className={styles.translationContainer}>
             <div dangerouslySetInnerHTML={{ __html: translation.text }} />
@@ -82,7 +77,6 @@ const SearchResultItem: React.FC<Props> = ({ result, source }) => {
             <p className={styles.translationName}> - {translation.resourceName}</p>
           </div>
         ))}
-        {/* )} */}
       </div>
     </div>
   );

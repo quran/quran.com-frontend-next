@@ -49,7 +49,6 @@ import { MushafLines, QuranFont } from 'types/QuranReader';
 
 export const OFFLINE_ERROR = 'OFFLINE';
 
-// TODO: UNDO this
 export const SEARCH_FETCH_OPTIONS = {
   headers: {
     // eslint-disable-next-line @typescript-eslint/naming-convention
