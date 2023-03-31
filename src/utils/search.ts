@@ -43,8 +43,9 @@ export const getSearchNavigationResult = (
 
   if (resultType === SearchNavigationType.JUZ) {
     const juzNumber = idToJuzNumber(key);
+
     return {
-      name: `${t('common:juz')} ${juzNumber}`,
+      name: `${t('common:juz')} ${toLocalizedNumber(Number(juzNumber), locale)}`,
       key: juzNumber,
       resultType: SearchNavigationType.JUZ,
     };
@@ -52,8 +53,9 @@ export const getSearchNavigationResult = (
 
   if (resultType === SearchNavigationType.PAGE) {
     const pageNumber = idToPageNumber(key);
+
     return {
-      name: `${t('common:page')} ${pageNumber}`,
+      name: `${t('common:page')} ${toLocalizedNumber(Number(pageNumber), locale)}`,
       key: pageNumber,
       resultType: SearchNavigationType.PAGE,
     };

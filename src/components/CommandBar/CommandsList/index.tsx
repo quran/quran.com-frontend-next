@@ -20,7 +20,6 @@ import {
   setIsOpen,
 } from '@/redux/slices/CommandBar/state';
 import { resolveUrlBySearchNavigationType } from '@/utils/navigation';
-import { searchIdToNavigationKey } from '@/utils/search';
 import { SearchNavigationResult } from 'types/SearchNavigationResult';
 
 export interface Command extends SearchNavigationResult {
@@ -75,11 +74,10 @@ const CommandsList: React.FC<Props> = ({ commandGroups: { groups, numberOfComman
   const navigateToLink = useCallback(
     (command: Command) => {
       const { resultType, key, name } = command;
-      const navigationKey = searchIdToNavigationKey(resultType, key);
-      router.push(resolveUrlBySearchNavigationType(resultType, navigationKey)).then(() => {
+      router.push(resolveUrlBySearchNavigationType(resultType, key)).then(() => {
         dispatch({
           type: addRecentNavigation.type,
-          payload: { name, resultType, key: navigationKey },
+          payload: { name, resultType, key },
         });
         dispatch({ type: setIsOpen.type, payload: false });
       });
