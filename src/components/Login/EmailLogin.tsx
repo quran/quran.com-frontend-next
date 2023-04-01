@@ -85,11 +85,11 @@ export const sendMagicLink = async (email) => {
     method: 'post',
     headers: {
       // eslint-disable-next-line @typescript-eslint/naming-convention
-      'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
+      'Content-Type': 'application/json',
     },
-    body: new URLSearchParams({
+    body: JSON.stringify({
       destination: email,
-    }).toString(),
+    }),
   });
   const responseJson = await response.json();
   const { success, code } = responseJson;

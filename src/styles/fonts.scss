@@ -13,15 +13,6 @@
   font-display: swap;
 }
 
-// TODO: we're not rendering text_uthmani anymore, do we need this font face?
-@font-face {
-  font-family: "meQuran";
-  src: local("me_quran2"),
-    url("/fonts/quran/hafs/me_quran/me_quran-2.woff2") format("woff2"),
-    url("/fonts/quran/hafs/me_quran/me_quran-2.woff2") format("truetype");
-  font-display: swap;
-}
-
 @font-face {
   font-family: "UthmanicHafs";
   src: local("KFGQPC HAFS Uthmanic Script"),

@@ -1,8 +1,6 @@
 $separator-size: 1px;
 
 .base {
-  background-color: var(--color-borders-hairline);
-
   &[data-orientation="horizontal"] {
     height: $separator-size;
     width: 100%;
@@ -11,5 +9,20 @@ $separator-size: 1px;
   &[data-orientation="vertical"] {
     height: 100%;
     width: $separator-size;
+  }
+}
+
+.semiBold {
+  background-color: var(--color-borders-hairline);
+}
+
+.bold {
+  background-color: var(--color-primary-medium);
+  &[data-orientation="horizontal"] {
+    height: calc(1.28 * $separator-size);
+  }
+
+  &[data-orientation="vertical"] {
+    width: calc(1.28 * $separator-size);
   }
 }

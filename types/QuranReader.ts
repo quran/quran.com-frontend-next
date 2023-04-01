@@ -60,4 +60,9 @@ export const QuranFontMushaf: Record<QuranFont, Mushaf> = {
   [QuranFont.Tajweed]: Mushaf.Tajweeed,
 };
 
+export enum WordByWordDisplay {
+  INLINE = 'inline',
+  TOOLTIP = 'tooltip',
+}
+
 export default { ReadingPreference, QuranFont };

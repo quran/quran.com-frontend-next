@@ -40,6 +40,10 @@
             "on": "بر",
             "title": "اسکرول خودکار"
         },
+        "displaying": "در حال نمایش",
+        "exp-tip": "<span>تغییر محتوای نمایش داده شده در<\/span><br><\/br> <boldSpan>تنظیمات<\/boldSpan> > <boldSpan>کلمه به کلمه<\/boldSpan>",
+        "exp-tip-no-select": "<span>گزینه نمایش راهنمای راهنمای ابزار را علامت بزنید و گزینه <br><\/br> ترجمه و\/یا نویسه‌گردانی را انتخاب کنید<\/span><br><\/br><span> در <\/span><boldSpan>تنظیمات<\/boldSpan> > <boldSpan>کلمه به کلمه<\/boldSpan><span>, تا<\/span><br><\/br> <span>این ویژگی را فعال کنید.<\/span>",
+        "experience": "تجربه",
         "play": "پخش صدا",
         "playback-normal": "طبیعی",
         "playback-speed": "سرعت پخش",
@@ -50,6 +54,7 @@
             "delay-verse": "تأخیر بین آیه",
             "download": "دانلود",
             "full-surah": "سوره کامل",
+            "manage-repeat-settings": "تنظیمات تکرار را مدیریت کنید",
             "mismatch": "اگر می خواهید به جای آن {{currentReadingChapter}} را بازی کنید، روی \"شروع دوباره\" کلیک کنید",
             "pause": "مکث کنید",
             "pause-audio": "مکث صدا",
@@ -70,6 +75,7 @@
         },
         "repeat-moved": "تنظیمات تکرار به پخش کننده صدا منتقل شده است. برای دسترسی به آنها روی نماد <0> <\/0> کلیک کنید",
         "select-reciter": "خواننده را انتخاب کنید",
+        "speed": "سرعت",
         "title": "سمعی"
     },
     "ayah": "آیه",
@@ -107,6 +113,7 @@
     },
     "default-description": "قرآن در یک رابط کاربری ساده و آسان به بسیاری از زبان ها ترجمه شده است",
     "developers": "توسعه دهندگان",
+    "display": "نمایش دادن",
     "donate": "اهدا کنید",
     "email-verification": {
         "check-spam": "ایمیل تأیید را دریافت نکردید؟ صندوق ورودی هرزنامه خود را بررسی کنید",
@@ -151,6 +158,10 @@
         "lastName": "نام خانوادگی"
     },
     "from": "از جانب",
+    "fundraising-sticky-banner": {
+        "cta": "اهدا کنید",
+        "title": "ماه رمضان امسال از Quran.com حمایت کنید"
+    },
     "fundraising": {
         "description": "کمک‌های ماهانه به ما کمک می‌کند تا Quran.com را بهبود بخشیم و عملیات‌ها را حفظ کنیم، بنابراین کمتر روی جمع‌آوری کمک‌های مالی و بیشتر بر ایجاد تأثیر تمرکز می‌کنیم.",
         "learn-more": "بیشتر بدانید",
@@ -159,6 +170,7 @@
     "help": "کمک",
     "hizb": "حزب",
     "home": "صفحه اصلی",
+    "inline": "در خط",
     "input": {
         "clear": "پاک کردن"
     },
@@ -186,6 +198,7 @@
     "page": "صفحه",
     "pages": "صفحات",
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} از {{totalNumberOfResults}} نتایج جستجو",
+    "pbuh": "درود خدا بر او باد",
     "popular-links": "لینک های محبوب",
     "popup": {
         "footnote": "کمک های مالی ماهانه به ما امکان می دهد کمتر روی جمع آوری کمک های مالی تمرکز کنیم",
@@ -206,7 +219,9 @@
         "reading": "خواندن",
         "translation": "ترجمه"
     },
+    "recitation": "بازگو کردن",
     "reciter": "قاری",
+    "reciter-summary": "کلمه به کلمه تلاوت کننده: <span> {{reciterName}} <\/span> . برای گوش دادن به تلاوت آن کلمه، روی آن کلیک کنید.",
     "reciters": "قاریان",
     "reflect": "منعکس کنید",
     "remove": "برداشتن",
@@ -293,6 +308,7 @@
     "to": "به",
     "tooltip": "راهنمای ابزار",
     "tooltip-trans-lang": "زبان راهنمای ابزار",
+    "trans-lang": "زبان ترجمه",
     "translation": "ترجمه",
     "translations": "ترجمه ها",
     "transliteration": "نویسه گردانی",
@@ -319,6 +335,7 @@
         "voice-search-powered-by": "جستجوی صوتی ارائه شده توسط"
     },
     "wbw": "کلمه به کلمه",
+    "wbw-lang-summary": "منبع ترجمه کلمه به کلمه: <link> {{source}} <\/link> . این منبع مستقل از انتخاب ترجمه آیات است.",
     "wbw-trans-lang": "زبان کلمه به کلمه",
     "wbw-translation": "ترجمه کلمه به کلمه",
     "wbw-transliteration": "نویسه گردانی کلمه به کلمه",

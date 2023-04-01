@@ -6,7 +6,7 @@ import styles from './ReadingViewSkeleton.module.scss';
 
 import verseTextStyles from '@/components/Verse/VerseText.module.scss';
 import Skeleton from '@/dls/Skeleton/Skeleton';
-import { selectWordByWordPreferences } from '@/redux/slices/QuranReader/readingPreferences';
+import { selectInlineDisplayWordByWordPreferences } from '@/redux/slices/QuranReader/readingPreferences';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import { getFontClassName } from '@/utils/fontFaceHelper';
 import { getMushafLinesNumber } from '@/utils/page';
@@ -17,7 +17,7 @@ const ReadingViewSkeleton = () => {
     shallowEqual,
   );
   const { showWordByWordTranslation, showWordByWordTransliteration } = useSelector(
-    selectWordByWordPreferences,
+    selectInlineDisplayWordByWordPreferences,
     shallowEqual,
   );
   const numberOfLines = getMushafLinesNumber(quranFont, mushafLines);

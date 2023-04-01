@@ -1,5 +1,3 @@
-/* eslint-disable react-func/max-lines-per-function */
-/* eslint-disable max-lines */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { REHYDRATE } from 'redux-persist';
 

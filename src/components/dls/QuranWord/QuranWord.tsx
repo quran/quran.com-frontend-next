@@ -19,8 +19,8 @@ import { selectShowTooltipWhenPlayingAudio } from '@/redux/slices/AudioPlayer/st
 import {
   selectWordClickFunctionality,
   selectReadingPreference,
-  selectShowTooltipFor,
-  selectWordByWordPreferences,
+  selectTooltipContentType,
+  selectInlineDisplayWordByWordPreferences,
 } from '@/redux/slices/QuranReader/readingPreferences';
 import { areArraysEqual } from '@/utils/array';
 import { milliSecondsToSeconds } from '@/utils/datetime';
@@ -60,11 +60,11 @@ const QuranWord = ({
 
   const [isTooltipOpened, setIsTooltipOpened] = useState(false);
   const { showWordByWordTranslation, showWordByWordTransliteration } = useSelector(
-    selectWordByWordPreferences,
+    selectInlineDisplayWordByWordPreferences,
     shallowEqual,
   );
   const readingPreference = useSelector(selectReadingPreference);
-  const showTooltipFor = useSelector(selectShowTooltipFor, areArraysEqual);
+  const showTooltipFor = useSelector(selectTooltipContentType, areArraysEqual);
 
   // creating wordLocation instead of using `word.location` because
   // the value of `word.location` is `1:3:5-7`, but we want `1:3:5`
@@ -110,9 +110,10 @@ const QuranWord = ({
     () => (isWordByWordAllowed ? getTooltipText(showTooltipFor, word) : null),
     [isWordByWordAllowed, showTooltipFor, word],
   );
+  const isRecitationEnabled = wordClickFunctionality === WordClickFunctionality.PlayAudio;
 
   const onClick = useCallback(() => {
-    if (wordClickFunctionality === WordClickFunctionality.PlayAudio) {
+    if (isRecitationEnabled) {
       logButtonClick('quran_word_pronounce');
       const currentState = audioService.getSnapshot();
       const isPlaying = currentState.matches('VISIBLE.AUDIO_PLAYER_INITIATED.PLAYING');
@@ -130,7 +131,7 @@ const QuranWord = ({
     } else {
       logButtonClick('quran_word');
     }
-  }, [audioService, word, wordClickFunctionality]);
+  }, [audioService, isRecitationEnabled, word]);
 
   const shouldHandleWordClicking =
     readingPreference === ReadingPreference.Translation && word.charTypeName !== CharType.End;
@@ -144,6 +145,7 @@ const QuranWord = ({
         [DATA_ATTRIBUTE_WORD_LOCATION]: wordLocation,
       }}
       className={classNames(styles.container, {
+        [styles.highlightOnHover]: isRecitationEnabled,
         [styles.highlighted]: shouldBeHighLighted,
         [styles.secondaryHighlight]: shouldShowSecondaryHighlight,
         [styles.wbwContainer]: isWordByWordLayout,
