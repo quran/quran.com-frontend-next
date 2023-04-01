@@ -1,3 +1,4 @@
+/* eslint-disable react-func/max-lines-per-function */
 /* eslint-disable react/no-multi-comp */
 import React, { useEffect, useState, RefObject } from 'react';
 
@@ -67,6 +68,7 @@ const SearchDrawer: React.FC = () => {
         query: debouncedSearchQuery,
         size: PAGE_SIZE,
         words: true,
+        exactMatchesOnly: 0,
         ...(selectedTranslations &&
           !!selectedTranslations.length && {
             filterTranslations: selectedTranslations.join(','),
