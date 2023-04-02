@@ -16,7 +16,7 @@
   justify-content: space-between;
   flex-direction: column;
   width: 100%;
-  
+
   @include breakpoints.tablet {
     align-items: center;
     flex-direction: row;
@@ -32,7 +32,7 @@
 .streakTitle {
   font-size: var(--font-size-large);
   color: var(--color-success-medium);
-  font-size: calc(var(--font-size-jumbo) * 1.3);
+  font-size: var(--font-size-jumbo);
   font-weight: bold;
   display: flex;
   align-items: center;
@@ -56,7 +56,7 @@
 }
 
 .circleContainer {
-  margin-top: var(--spacing-xsmall);
+  margin-block-start: var(--spacing-xsmall);
   display: flex;
   align-items: center;
 }
@@ -96,7 +96,7 @@
 }
 
 .actionsContainer {
-  margin-block-start: var(--spacing-medium);
+  margin-block-start: var(--spacing-large);
   display: flex;
   align-items: center;
 
@@ -121,7 +121,7 @@
 
 .dailyGoal {
   margin-block-start: var(--spacing-xsmall);
-  font-size:var(--font-size-large);
+  font-size: var(--font-size-large);
   font-weight: var(--font-weight-medium);
 }
 
@@ -134,9 +134,9 @@
   justify-content: space-between;
   align-items: center;
   margin-block-start: var(--spacing-small);
-  
+
   > p {
-    font-size:var(--font-size-large);
+    font-size: var(--font-size-large);
     font-weight: var(--font-weight-bold);
   }
 }

@@ -1,0 +1,100 @@
+{
+    "continue-reading": "Continue lendo",
+    "continuous": {
+        "description": "Sua meta calculará seu progresso ao longo de alguns dias",
+        "title": "Ao longo de uma duração"
+    },
+    "create-plan": "Criar plano",
+    "create-reading-goal": "Criar meta",
+    "daily-progress": "Progresso diário",
+    "daily": {
+        "description": "Seu objetivo será redefinido todos os dias",
+        "title": "meta diária"
+    },
+    "day-x": "Dia {{day}}",
+    "days": "Dias",
+    "duration": "Duração (dias)",
+    "ending-chapter": "Surata Final",
+    "ending-verse": "Fim de Ayah",
+    "examples-subtitle": "Aqui está uma lista de objetivos comuns. Você também pode criar seu próprio objetivo.",
+    "examples-title": "Escolha um objetivo predefinido ou crie o seu próprio",
+    "examples": {
+        "custom": {
+            "description": "Defina uma meta personalizada adequada a você",
+            "title": "Personalizado"
+        },
+        "khatm": {
+            "description": "Um gol clássico de Khatm. Leia 1 Juz por dia",
+            "title": "Leia o Alcorão em 30 dias"
+        },
+        "time": {
+            "description": "Um objetivo simples para iniciantes",
+            "title": "Leia 10 minutos por dia"
+        }
+    },
+    "frequency-tab": {
+        "description": "Sua meta deve ser redefinida todos os dias ou a cada número de dias? Não se preocupe, acompanharemos seu progresso independentemente da frequência que você escolher.",
+        "title": "Escolha uma frequência para o seu objetivo"
+    },
+    "goal-done": {
+        "description": "Qualquer leitura adicional ainda será registrada",
+        "title": "Você completou a meta de hoje"
+    },
+    "goal-target": {
+        "description": "Quanto tempo, páginas ou versículos você deve ler para completar seu objetivo?",
+        "title": "Defina uma meta para o seu objetivo"
+    },
+    "goal-type": {
+        "description": "Seu objetivo deve ser baseado em tempo, páginas ou um intervalo personalizado (ou seja, 3 Juzs do Alcorão)?",
+        "title": "Escolha um critério para sua meta"
+    },
+    "goal-types": {
+        "pages": {
+            "description": "Sua meta será baseada em páginas",
+            "title": "Páginas"
+        },
+        "range": {
+            "description": "Seu objetivo será baseado em uma gama personalizada de versículos (pode ser uma Surata, um Juz ou até mesmo todo o Alcorão)",
+            "title": "Intervalo personalizado"
+        },
+        "time": {
+            "description": "Seu objetivo será baseado no tempo",
+            "title": "Tempo"
+        }
+    },
+    "preview-schedule": {
+        "description": "É assim que seu objetivo ficará. Você sempre pode alterá-lo mais tarde.",
+        "title": "Aqui está uma prévia da sua programação"
+    },
+    "progress": {
+        "complete": "A meta de hoje está completa 🎉",
+        "pages-goal": "leia {{pages}} páginas do Alcorão",
+        "range-goal": "leia {{from}} para {{to}}",
+        "time-goal": "leia {{time}} do Alcorão"
+    },
+    "reading-goal": "meta de leitura",
+    "reading-goal-description": "Você quer terminar de ler o Alcorão em um mês, um ano ou criar o hábito de ler 10 minutos por dia? Crie uma meta abaixo e o Quran.com criará um plano personalizado para você e o ajustará conforme você progride para ajudá-lo a atingir sua meta.",
+    "reading-goal-label": "você está em um",
+    "reading-goal-title": "Apresentando o Rastreamento Quran.com",
+    "recommended": "Recomendado",
+    "remaining": "Restante para hoje",
+    "remaining-days_one": "{{days}} dia restante",
+    "remaining-days_other": "{{days}} dias restantes",
+    "set-reading-goal-success": "Sua meta de leitura foi definida com sucesso.",
+    "starting-chapter": "Surata Inicial",
+    "starting-verse": "Começando Ayah",
+    "streak": "sequência de {{days}} dias",
+    "streak-definition": "Uma sequência é o número de dias consecutivos em que você leu o Alcorão.",
+    "todays-goal": "Gol de hoje",
+    "view-progress": "Ver Progresso",
+    "x-days_one": "{{days}} dia",
+    "x-days_other": "{{days}} dias",
+    "x-hours_one": "{{hours}} hora",
+    "x-hours_other": "{{hours}} horas",
+    "x-minutes_one": "{{minutes}} minuto",
+    "x-minutes_other": "{{minutes}} minutos",
+    "x-pages_one": "{{pages}} página",
+    "x-pages_other": "{{pages}} páginas",
+    "x-seconds_one": "{{seconds}} segundo",
+    "x-seconds_other": "{{seconds}} segundos"
+}

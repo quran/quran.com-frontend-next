@@ -2,10 +2,10 @@ import { useContext } from 'react';
 
 import { useSelector } from '@xstate/react';
 
+import CloseButton from './Buttons/CloseButton';
 import PlayPauseButton from './Buttons/PlayPauseButton';
 import OverflowAudioPlayerActionsMenu from './OverflowAudioPlayerActionsMenu';
 import styles from './PlaybackControls.module.scss';
-import RepeatAudioButton from './RepeatButton';
 import SeekButton, { SeekButtonType } from './SeekButton';
 
 import { selectIsLoading } from 'src/xstate/actors/audioPlayer/selectors';
@@ -18,7 +18,7 @@ const PlaybackControls = () => {
   return (
     <div className={styles.container}>
       <div className={styles.actionItem}>
-        <RepeatAudioButton isLoading={isLoading} />
+        <OverflowAudioPlayerActionsMenu />
       </div>
       <div className={styles.actionItem}>
         <SeekButton type={SeekButtonType.PrevAyah} isLoading={isLoading} />
@@ -30,7 +30,7 @@ const PlaybackControls = () => {
         <SeekButton type={SeekButtonType.NextAyah} isLoading={isLoading} />
       </div>
       <div className={styles.actionItem}>
-        <OverflowAudioPlayerActionsMenu />
+        <CloseButton />
       </div>
     </div>
   );

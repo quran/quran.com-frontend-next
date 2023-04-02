@@ -1,8 +1,8 @@
 import useTranslation from 'next-translate/useTranslation';
 
+import { ReadingGoalTabProps } from './hooks/useReadingGoalReducer';
 import OptionButton from './OptionButton';
 import styles from './ReadingGoalPage.module.scss';
-import { ReadingGoalTabProps } from './useReadingGoalReducer';
 
 import BookIcon from '@/icons/book.svg';
 import ClockIcon from '@/icons/clock.svg';

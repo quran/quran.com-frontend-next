@@ -40,6 +40,10 @@
             "on": "Açık",
             "title": "Otomatik kaydırma"
         },
+        "displaying": "gösteriliyor",
+        "exp-tip": "<span>altında görüntülenen içeriği değiştirin<\/span><br><\/br> <boldSpan>Kelime Kelime<\/boldSpan> > <boldSpan>Ayarlar<\/boldSpan>",
+        "exp-tip-no-select": "<span>Araç ipucu görüntüleme seçeneğini işaretleyin ve <br><\/br>Ayarlar<\/span><br><\/br><span> Çeviri ve\/veya Harf Çevirisi <\/span><boldSpan>seçin<\/boldSpan> > <boldSpan>Kelime kelime<\/boldSpan><span>, bu özelliği<\/span><br><\/br> <span>etkinleştirmek için.<\/span>",
+        "experience": "Deneyim",
         "play": "Okut",
         "playback-normal": "Normal",
         "playback-speed": "Oynatma Hızı",
@@ -50,6 +54,7 @@
             "delay-verse": "Ayet arası gecikme",
             "download": "İndir",
             "full-surah": "Tam sure",
+            "manage-repeat-settings": "Yineleme ayarlarını yönet",
             "mismatch": "Bunun yerine {{currentReadingChapter}} çalmak istiyorsanız \"Baştan Başla\"yı tıklayın.",
             "pause": "Duraklat",
             "pause-audio": "Sesi Duraklat",
@@ -70,6 +75,7 @@
         },
         "repeat-moved": "Tekrarlama ayarları müzik çalara taşındı. Erişmek için <0> <\/0> simgesine tıklayın",
         "select-reciter": "Okuyucu Seçin",
+        "speed": "Hız",
         "title": "Ses"
     },
     "ayah": "Ayet",
@@ -107,6 +113,7 @@
     },
     "default-description": "Kuran, basit ve kolay bir arayüzde birçok dile çevrildi",
     "developers": "Geliştiriciler",
+    "display": "Görüntülemek",
     "donate": "Bağış Yapın",
     "email-verification": {
         "check-spam": "Doğrulama e-postasını almadınız mı? Spam gelen kutunuzu kontrol edin",
@@ -151,6 +158,10 @@
         "lastName": "Soy isim"
     },
     "from": "İtibaren",
+    "fundraising-sticky-banner": {
+        "cta": "Bağış yapmak",
+        "title": "Bu Ramazan Kuran.com'u destekleyin"
+    },
     "fundraising": {
         "description": "Aylık bağışlar, Kuran.com'u iyileştirmemize ve operasyonları sürdürmemize yardımcı oluyor, böylece bağış toplamaya daha az ve etki yaratmaya daha fazla odaklanıyoruz.",
         "learn-more": "Daha fazla bilgi edinin",
@@ -159,6 +170,7 @@
     "help": "Yardım",
     "hizb": "Hizb",
     "home": "Anasayfa",
+    "inline": "Çizgide",
     "input": {
         "clear": "Açık"
     },
@@ -186,6 +198,7 @@
     "page": "Sayfa",
     "pages": "Sayfalar",
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} \/ {{totalNumberOfResults}} arama sonucu",
+    "pbuh": "Allah'ın selamı onun üzerine olsun",
     "popular-links": "Popüler Bağlantılar",
     "popup": {
         "footnote": "Aylık bağışlar, bağış toplamaya daha az odaklanmamızı sağlıyor",
@@ -206,7 +219,9 @@
         "reading": "Okuma",
         "translation": "Meal"
     },
+    "recitation": "okuma",
     "reciter": "Okuyucu",
+    "reciter-summary": "Kelime kelime okuyucu: <span> {{reciterName}} <\/span> . Okunuşunu dinlemek için bir kelimeye tıklayın.",
     "reciters": "Okuyucular",
     "reflect": "Yansıt",
     "remove": "Kaldırmak",
@@ -293,6 +308,7 @@
     "to": "NS",
     "tooltip": "Araç ipucu",
     "tooltip-trans-lang": "Araç İpucu Dili",
+    "trans-lang": "Çeviri Dili",
     "translation": "Meal",
     "translations": "Çeviriler",
     "transliteration": "Okunuş",
@@ -319,6 +335,7 @@
         "voice-search-powered-by": "Sesli Aramayı Destekleyen"
     },
     "wbw": "Kelime kelime",
+    "wbw-lang-summary": "Kelime kelime çeviri kaynağı: <link> {{source}} <\/link> . Bu kaynak ayet çeviri seçiminden bağımsızdır.",
     "wbw-trans-lang": "Kelime Dilinden Kelime",
     "wbw-translation": "Kelime Kelime Okunuş",
     "wbw-transliteration": "Kelime Kelime Meal",

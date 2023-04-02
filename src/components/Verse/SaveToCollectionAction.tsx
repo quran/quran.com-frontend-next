@@ -7,12 +7,12 @@ import { shallowEqual, useSelector } from 'react-redux';
 import useSWR, { useSWRConfig } from 'swr';
 import useSWRImmutable from 'swr/immutable';
 
-import PlusIcon from '../../../public/icons/plus.svg';
 import SaveToCollectionModal, {
   Collection,
 } from '../Collection/SaveToCollectionModal/SaveToCollectionModal';
 import PopoverMenu from '../dls/PopoverMenu/PopoverMenu';
 
+import PlusIcon from '@/icons/plus.svg';
 import { ToastStatus, useToast } from 'src/components/dls/Toast/Toast';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import { getMushafId } from 'src/utils/api';
@@ -33,7 +33,7 @@ import { isLoggedIn } from 'src/utils/auth/login';
 import { logButtonClick } from 'src/utils/eventLogger';
 import BookmarkType from 'types/BookmarkType';
 
-const SaveToCollectionAction = ({ verse, bookmarksRangeUrl }) => {
+const SaveToCollectionAction = ({ verse, bookmarksRangeUrl, isTranslationView }) => {
   const [isSaveCollectionModalOpen, setIsSaveCollectionModalOpen] = useState(false);
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const mushafId = getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines).mushaf;
@@ -70,7 +70,11 @@ const SaveToCollectionAction = ({ verse, bookmarksRangeUrl }) => {
 
   const onMenuClicked = () => {
     setIsSaveCollectionModalOpen(true);
-    logButtonClick('save_to_collection_menu');
+    if (isTranslationView) {
+      logButtonClick('save_to_collection_menu_trans_view');
+    } else {
+      logButtonClick('save_to_collection_menu_reading_view');
+    }
   };
 
   const closeModal = () => {
@@ -214,6 +218,7 @@ const SaveToCollectionAction = ({ verse, bookmarksRangeUrl }) => {
           onClose={closeModal}
           isAddingNewCollection
           collections={collections}
+          verseKey={`${verse.chapterId}:${verse.verseNumber}`}
         />
       )}
     </>

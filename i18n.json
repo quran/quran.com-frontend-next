@@ -33,6 +33,7 @@
     "/reciters/[reciterId]/[chapterId]": ["reciter"],
     "/reciters": ["reciter", "home"],
     "/profile": ["home", "profile", "collection"],
-    "/login": ["login"]
+    "/login": ["login"],
+    "/about-the-quran": ["about-quran"]
   }
 }

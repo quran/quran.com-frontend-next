@@ -27,3 +27,22 @@ export const truncateString = (rawString: string, length: number): string => {
  * @returns {string}
  */
 export const stripHTMLTags = (rawString: string): string => rawString.replace(/(<([^>]+)>)/gi, '');
+
+/**
+ * Convert a slugified collection id to collection id only after
+ * removing the slug.
+ *
+ * @param {string} slugifiedCollectionId
+ * @returns {string}
+ */
+export const slugifiedCollectionIdToCollectionId = (slugifiedCollectionId: string): string => {
+  if (!slugifiedCollectionId) {
+    return '';
+  }
+  const splits = slugifiedCollectionId.split('-');
+  // if there is no slug in the url (collections with a name that cannot be slugified e.g. emoticons)
+  if (splits.length === 1) {
+    return splits[0];
+  }
+  return splits[splits.length - 1];
+};

@@ -2,6 +2,7 @@
     "all-saved-verses": "تمام محفوظ شدہ آیات",
     "alphabetical": "AZ",
     "back-to-collection-list": "جمع کرنے کی فہرست پر واپس جائیں۔",
+    "collapse-all": "تمام آیات کو ختم کریں۔",
     "collection-list-empty": "جمع کرنے کی فہرست خالی ہے۔ آپ نے ابھی تک کوئی مجموعہ نہیں بنایا ہے۔",
     "collections": "مجموعے",
     "delete": "حذف کریں۔",
@@ -14,6 +15,7 @@
         "title": "مجموعہ کو حذف کریں۔"
     },
     "empty": "مجموعہ خالی ہے۔",
+    "expand-all": "تمام آیات کو وسعت دیں۔",
     "go-to-ayah": "آیت پر جائیں۔",
     "load-more": "مزید لوڈ کریں",
     "recently-added": "حال ہی میں شامل",

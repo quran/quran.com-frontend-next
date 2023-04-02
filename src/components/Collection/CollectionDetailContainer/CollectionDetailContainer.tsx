@@ -1,5 +1,3 @@
-import { useEffect } from 'react';
-
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
@@ -13,7 +11,6 @@ import NextSeoWrapper from '@/components/NextSeoWrapper';
 import Spinner, { SpinnerSize } from '@/dls/Spinner/Spinner';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import ArrowLeft from '@/icons/west.svg';
-import { isLoggedIn } from '@/utils/auth/login';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getLanguageAlternates } from '@/utils/locale';
 import {
@@ -21,6 +18,7 @@ import {
   getCollectionNavigationUrl,
   getProfileNavigationUrl,
 } from '@/utils/navigation';
+import { slugifiedCollectionIdToCollectionId } from '@/utils/string';
 import CollectionDetail from 'src/components/Collection/CollectionDetail/CollectionDetail';
 import Button, { ButtonVariant } from 'src/components/dls/Button/Button';
 import DataContext from 'src/contexts/DataContext';
@@ -55,12 +53,6 @@ const CollectionDetailContainer = ({
   const collectionId = router.query.collectionId as string;
   const toast = useToast();
 
-  useEffect(() => {
-    if (!isLoggedIn()) {
-      router.replace('/');
-    }
-  }, [router]);
-
   const { data, size, setSize, mutate, isValidating, error } =
     useSWRInfinite<GetBookmarkCollectionsIdResponse>(getSWRKey, privateFetcher);
 
@@ -85,10 +77,14 @@ const CollectionDetailContainer = ({
 
   const bookmarks = data.map((response) => response.data.bookmarks).flat();
   const collectionTitle = title || data[0].data.collection.name;
+  const isOwner = data[0]?.data?.isOwner;
 
   const loadMore = () => {
     setSize(size + 1);
-    logButtonClick('collection_detail_page_load_more');
+    logButtonClick('collection_detail_page_load_more', {
+      collectionId: slugifiedCollectionIdToCollectionId(collectionId),
+      page: size + 1,
+    });
   };
 
   const navigationUrl = getCollectionNavigationUrl(collectionId);
@@ -140,13 +136,14 @@ const CollectionDetailContainer = ({
                 <ArrowLeft />
               </Button>
               <CollectionDetail
-                id={collectionId}
+                id={slugifiedCollectionIdToCollectionId(collectionId)}
                 title={collectionTitle}
                 bookmarks={bookmarks}
                 sortBy={sortBy}
                 onSortByChange={onSortByChange}
                 onUpdated={onUpdated}
                 onItemDeleted={onItemDeleted}
+                isOwner={isOwner}
               />
               {isLoadingMoreData && <Spinner size={SpinnerSize.Large} />}
               {hasNextPage && (

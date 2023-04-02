@@ -9,6 +9,7 @@ export interface GetBookmarkCollectionsIdResponse {
 export interface Data {
   collection: Collection;
   bookmarks: Bookmark[];
+  isOwner: boolean;
 }
 
 export interface Pagination {

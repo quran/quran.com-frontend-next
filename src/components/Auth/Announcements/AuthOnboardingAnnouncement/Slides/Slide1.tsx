@@ -1,6 +1,5 @@
-import MoonIllustrationSVG from '../../../../../../public/images/moon-illustration.svg';
-
 import Slide from '@/dls/Carousel/Slide';
+import MoonIllustrationSVG from '@/public/images/moon-illustration.svg';
 
 const Slide1 = ({ action }) => {
   return (

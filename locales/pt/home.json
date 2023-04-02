@@ -3,7 +3,7 @@
     "noble-quran": "O Nobre Alcorão",
     "read-juz": "Leia Juz",
     "recently-read": "Lidos recentemente",
-    "revelation-order-disclaimer": "Esta exibição mostra a ordem cronológica das suratas no Alcorão com base em quando foram reveladas ao profeta Muhammad (PECE). A ordem é um assunto de opinião acadêmica e algumas suratas foram reveladas em partes em diferentes épocas. A ordem aqui é baseada no trabalho de <link> Tanzil.net <\/link> .",
+    "revelation-order-disclaimer": "Esta exibição mostra a ordem cronológica das suratas no Alcorão com base em quando foram reveladas ao Profeta Muhammad <hover> ﷺ <\/hover> . A cronologia é um assunto de opinião acadêmica e algumas suratas foram reveladas em partes em diferentes épocas. A ordem aqui é baseada no trabalho de <link> Tanzil.net <\/link> . [Nota: a ordem de Mushaf compilada de al-Fatiha a al-Nas é uma questão de consenso.]",
     "tab": {
         "bookmarks": "Favoritos",
         "popular": "Popular"
@@ -13,7 +13,6 @@
         "trigger": "Acesso rápido a qualquer coisa"
     },
     "welcome": {
-        "body": "As doações mensais nos ajudam a reter os melhores talentos e sustentar as operações, para que possamos nos concentrar menos na captação de recursos e mais na criação de impacto.",
-        "title": "Doe para Quran.com hoje"
+        "title": "É o mês do Alcorão! Ajude milhões de usuários a obter acesso à orientação do Alcorão."
     }
 }

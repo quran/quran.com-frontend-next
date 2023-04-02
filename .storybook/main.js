@@ -40,6 +40,7 @@ module.exports = {
         config.resolve.alias = {
             ...(config.resolve.alias || {}),
             '@/icons': path.resolve(__dirname, "../public/icons"),
+            '@/public': path.resolve(__dirname, "../public"),
             '@/dls': path.resolve(__dirname, "../src/components/dls"),
             '@/api': path.resolve(__dirname, "../src/api"),
             '@/data': path.resolve(__dirname, "../data"),

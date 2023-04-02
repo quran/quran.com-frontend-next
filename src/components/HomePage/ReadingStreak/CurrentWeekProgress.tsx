@@ -1,34 +1,44 @@
 import classNames from 'classnames';
 
-import useGetWeekDays from './hooks/useGetWeekDays';
 import styles from './ReadingStreak.module.scss';
 
+import useGetStreakWithMetadata from '@/hooks/auth/useGetStreakWithMetadata';
 import CheckIcon from '@/icons/check.svg';
+import { convertFractionToPercent } from '@/utils/number';
 
-interface Props {
-  isTodaysGoalDone: boolean;
-  weekData: ReturnType<typeof useGetWeekDays>;
+enum DayState {
+  None = 'none',
+  Stroked = 'stroked',
+  Filled = 'filled',
+  Checked = 'checked',
 }
 
-const CurrentWeekProgress: React.FC<Props> = ({ isTodaysGoalDone, weekData }) => {
-  const { weekDays, readingDaysMap } = weekData;
+interface Props {
+  weekData: ReturnType<typeof useGetStreakWithMetadata>['weekData'];
+}
 
-  const getDayState = (day: typeof weekDays[number]) => {
-    const hasRead = readingDaysMap[day.date]?.hasRead;
+const CurrentWeekProgress: React.FC<Props> = ({ weekData }) => {
+  const { days, readingDaysMap } = weekData;
+
+  const getDayState = (day: typeof days[number]): DayState => {
+    const readingDay = readingDaysMap[day.date];
+    const hasRead = readingDay?.hasRead;
+
+    const isGoalDone = convertFractionToPercent(readingDay?.progress || 0) >= 100;
 
     if (day.current) {
-      if (isTodaysGoalDone) return 'checked';
-      if (hasRead) return 'filled';
-      return 'stroked';
+      if (isGoalDone) return DayState.Checked;
+      if (hasRead) return DayState.Filled;
+      return DayState.Stroked;
     }
 
-    if (hasRead) return 'checked';
-    return 'none';
+    if (hasRead) return DayState.Checked;
+    return DayState.None;
   };
 
   return (
     <div className={styles.week}>
-      {weekDays.map((day, idx) => {
+      {days.map((day, idx) => {
         const dayState = getDayState(day);
 
         return (
@@ -37,13 +47,13 @@ const CurrentWeekProgress: React.FC<Props> = ({ isTodaysGoalDone, weekData }) =>
             <div className={styles.circleContainer}>
               <div
                 className={classNames(styles.dayCircle, {
-                  [styles.filled]: dayState === 'filled' || dayState === 'checked',
-                  [styles.stroked]: dayState === 'stroked',
+                  [styles.filled]: dayState === DayState.Filled || dayState === DayState.Checked,
+                  [styles.stroked]: dayState === DayState.Stroked,
                 })}
               >
-                {dayState === 'checked' ? <CheckIcon /> : null}
+                {dayState === DayState.Checked ? <CheckIcon /> : null}
               </div>
-              {idx !== weekDays.length - 1 && <div className={styles.dayDivider} />}
+              {idx !== days.length - 1 && <div className={styles.dayDivider} />}
             </div>
           </div>
         );

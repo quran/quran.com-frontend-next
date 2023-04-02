@@ -1,0 +1,100 @@
+{
+    "continue-reading": "Continua a leggere",
+    "continuous": {
+        "description": "Il tuo obiettivo calcolerà i tuoi progressi su una durata di giorni",
+        "title": "Per una durata"
+    },
+    "create-plan": "Crea piano",
+    "create-reading-goal": "Crea obiettivo",
+    "daily-progress": "Progresso quotidiano",
+    "daily": {
+        "description": "Il tuo obiettivo verrà reimpostato ogni giorno",
+        "title": "Obiettivo giornaliero"
+    },
+    "day-x": "Giorno {{day}}",
+    "days": "Giorni",
+    "duration": "Durata (giorni)",
+    "ending-chapter": "Sura finale",
+    "ending-verse": "Fine Ayah",
+    "examples-subtitle": "Ecco un elenco di obiettivi comuni. Puoi anche creare il tuo obiettivo.",
+    "examples-title": "Scegli un obiettivo preimpostato o creane uno tuo",
+    "examples": {
+        "custom": {
+            "description": "Imposta un obiettivo personalizzato adatto a te",
+            "title": "Costume"
+        },
+        "khatm": {
+            "description": "Un classico gol di Khatm. Leggi 1 Juz al giorno",
+            "title": "Leggi il Corano in 30 giorni"
+        },
+        "time": {
+            "description": "Un semplice obiettivo adatto ai principianti",
+            "title": "Leggi 10 minuti al giorno"
+        }
+    },
+    "frequency-tab": {
+        "description": "Il tuo obiettivo dovrebbe reimpostarsi ogni giorno o ogni numero di giorni? Non preoccuparti, monitoreremo i tuoi progressi indipendentemente dalla frequenza che scegli.",
+        "title": "Scegli una frequenza per il tuo obiettivo"
+    },
+    "goal-done": {
+        "description": "Qualsiasi lettura aggiuntiva verrà comunque registrata",
+        "title": "Hai completato l'obiettivo di oggi"
+    },
+    "goal-target": {
+        "description": "Quanto tempo, pagine o versi dovresti leggere per completare il tuo obiettivo?",
+        "title": "Stabilisci un obiettivo per il tuo obiettivo"
+    },
+    "goal-type": {
+        "description": "Il tuo obiettivo dovrebbe essere basato su tempo, pagine o un intervallo personalizzato (ad esempio, 3 Juzs del Corano)?",
+        "title": "Scegli un criterio per il tuo obiettivo"
+    },
+    "goal-types": {
+        "pages": {
+            "description": "Il tuo obiettivo sarà basato sulle pagine",
+            "title": "Pagine"
+        },
+        "range": {
+            "description": "Il tuo obiettivo sarà basato su una gamma personalizzata di versi (può essere una Surah, un Juz o anche l'intero Corano)",
+            "title": "Gamma personalizzata"
+        },
+        "time": {
+            "description": "Il tuo obiettivo sarà basato sul tempo",
+            "title": "Tempo"
+        }
+    },
+    "preview-schedule": {
+        "description": "Ecco come sarà il tuo obiettivo. Puoi sempre cambiarlo in seguito.",
+        "title": "Ecco un'anteprima del tuo programma"
+    },
+    "progress": {
+        "complete": "L'obiettivo di oggi è completo 🎉",
+        "pages-goal": "leggi {{pages}} pagine del Corano",
+        "range-goal": "leggi {{from}} a {{to}}",
+        "time-goal": "leggi {{time}} del Corano"
+    },
+    "reading-goal": "Obiettivo di lettura",
+    "reading-goal-description": "Vuoi finire di leggere il Corano in un mese, un anno o prendere l'abitudine di leggere 10 minuti al giorno? Crea un obiettivo di seguito e Quran.com creerà un piano personalizzato per te e lo adatterà man mano che avanzi per aiutarti a raggiungere il tuo obiettivo.",
+    "reading-goal-label": "Sei su un",
+    "reading-goal-title": "Presentazione del monitoraggio di Quran.com",
+    "recommended": "Consigliato",
+    "remaining": "Rimanendo per oggi",
+    "remaining-days_one": "{{days}} giorno rimanente",
+    "remaining-days_other": "{{days}} giorni rimanenti",
+    "set-reading-goal-success": "Il tuo obiettivo di lettura è stato impostato correttamente.",
+    "starting-chapter": "Sura iniziale",
+    "starting-verse": "A partire Ayah",
+    "streak": "{{days}} serie di giorni",
+    "streak-definition": "Una striscia è il numero di giorni consecutivi in cui hai letto il Corano.",
+    "todays-goal": "Obiettivo di oggi",
+    "view-progress": "Visualizza i progressi",
+    "x-days_one": "{{days}} giorno",
+    "x-days_other": "{{days}} giorni",
+    "x-hours_one": "{{hours}} ora",
+    "x-hours_other": "{{hours}} ore",
+    "x-minutes_one": "{{minutes}} minuto",
+    "x-minutes_other": "{{minutes}} minuti",
+    "x-pages_one": "{{pages}} pagina",
+    "x-pages_other": "{{pages}} pagine",
+    "x-seconds_one": "{{seconds}} secondo",
+    "x-seconds_other": "{{seconds}} secondi"
+}

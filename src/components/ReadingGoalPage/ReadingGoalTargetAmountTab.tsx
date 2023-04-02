@@ -4,8 +4,8 @@ import { useContext, useMemo, useState } from 'react';
 import { Translate } from 'next-translate';
 import useTranslation from 'next-translate/useTranslation';
 
+import { ReadingGoalPeriod, ReadingGoalTabProps } from './hooks/useReadingGoalReducer';
 import styles from './ReadingGoalPage.module.scss';
-import { ReadingGoalTabProps } from './useReadingGoalReducer';
 
 import DataContext from '@/contexts/DataContext';
 import Combobox from '@/dls/Forms/Combobox';
@@ -324,7 +324,7 @@ const ReadingGoalTargetAmountTab: React.FC<ReadingGoalTabProps> = ({ state, disp
       </div>
       <div className={styles.optionsContainer}>
         {getInput()}
-        {period === 'continuous' && (
+        {period === ReadingGoalPeriod.Continuous && (
           <div className={styles.inputContainer}>
             <label htmlFor="duration" className={styles.label}>
               {t('duration')}

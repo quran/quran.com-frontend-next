@@ -1,9 +1,0 @@
-.iconContainer {
-  display: inline-block;
-  & > span > svg {
-    position: relative;
-    inset-block-start: calc(0.5 * var(--spacing-xxsmall));
-    box-sizing: border-box;
-    padding-block-start: calc(0.2 * var(--spacing-medium));
-  }
-}

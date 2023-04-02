@@ -8,6 +8,7 @@ import {
   ReadingGoal,
   ReadingGoalStatus,
 } from '@/types/auth/ReadingGoal';
+import { StreakWithMetadataParams, StreakWithUserMetadata } from '@/types/auth/Streak';
 import {
   makeBookmarksUrl,
   makeCompleteSignupUrl,
@@ -40,6 +41,7 @@ import {
   makeReadingGoalProgressUrl,
   makeAllReadingDaysUrl,
   makeEstimateReadingGoalUrl,
+  makeStreakUrl,
 } from '@/utils/auth/apiPaths';
 import { fetcher } from 'src/api';
 import CompleteAnnouncementRequest from 'types/auth/CompleteAnnouncementRequest';
@@ -181,6 +183,10 @@ export const addReadingSession = async (chapterNumber: number, verseNumber: numb
 
 export const updateReadingDay = async (body: UpdateReadingDayBody): Promise<ReadingDay> =>
   postRequest(makeReadingDaysUrl(), body);
+
+export const getStreakWithUserMetadata = async (
+  params: StreakWithMetadataParams,
+): Promise<{ data: StreakWithUserMetadata }> => privateFetcher(makeStreakUrl(params));
 
 export const syncUserLocalData = async (
   payload: Record<SyncDataType, any>,

@@ -8,4 +8,16 @@
  * @param {string} number
  * @returns {string}
  */
-export const formatStringNumber = (number: string) => String(Number(number));
+export const formatStringNumber = (number: string): string => String(Number(number));
+
+/**
+ * This function takes a fraction (a number between 0 and 1) and converts it to a percent number (limited to 100).
+ *
+ * @param {string | number} fraction a number between 0 and 1
+ * @param {number} decimalPoints number of decimal points
+ * @returns {number} a number between 0 and 100
+ */
+export const convertFractionToPercent = (fraction: string | number, decimalPoints = 1): number => {
+  const number = Number((Number(fraction) * 100).toFixed(decimalPoints));
+  return Math.min(number, 100);
+};

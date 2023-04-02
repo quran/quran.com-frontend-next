@@ -26,7 +26,6 @@
   text-transform: capitalize;
   cursor: pointer;
 
-
   @media (hover: hover) {
     &:hover {
       background-color: var(--color-background-alternative-faded);
@@ -101,7 +100,7 @@
   padding-block: var(--spacing-micro);
   font-size: var(--font-size-small);
   position: absolute;
-  top: 0;
-  right: 0;
+  inset-block-start: 0;
+  inset-inline-end: 0;
   transform: translate(-30%, -50%);
 }

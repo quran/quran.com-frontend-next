@@ -29,8 +29,8 @@ $fallbackColor: #22a5ad;
   flex-direction: column;
   height: 100%;
   align-items: center;
-  padding-block-start: calc(2 * var(--spacing-mega));
-  padding-block-end: calc(1 * var(--spacing-mega));
+  padding-block-start: var(--spacing-mega);
+  padding-block-end: var(--spacing-small);
   padding-inline: var(--spacing-small);
   @include breakpoints.tablet {
     max-width: calc(25 * var(--spacing-mega));

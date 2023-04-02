@@ -419,3 +419,18 @@ export const getOpenGraphAlternateLocales = (currentLocale: string): MetaTag[] =
       content: `${LANG_LOCALE_MAP[languageCode]}`.replace('-', '_'),
     }));
 };
+
+/**
+ * Convert a month number to the corresponding localized month name.
+ *
+ * @param {number} monthNumber
+ * @param {string} locale
+ * @returns {string}
+ */
+export const toLocalizedMonthName = (monthNumber: number, locale: string): string => {
+  const objDate = new Date();
+  objDate.setDate(1);
+  objDate.setMonth(monthNumber - 1);
+
+  return objDate.toLocaleString(locale, { month: 'long' });
+};

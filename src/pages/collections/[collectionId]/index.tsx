@@ -4,6 +4,7 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
 
 import CollectionDetailContainer from '@/components/Collection/CollectionDetailContainer/CollectionDetailContainer';
+import useRequireAuth from '@/hooks/auth/useRequireAuth';
 import { isLoggedIn } from '@/utils/auth/login';
 import { logValueChange } from '@/utils/eventLogger';
 import { makeGetBookmarkByCollectionId } from 'src/utils/auth/apiPaths';
@@ -11,8 +12,9 @@ import { getAllChaptersData } from 'src/utils/chapter';
 import { CollectionDetailSortOption } from 'types/CollectionSortOptions';
 
 const CollectionDetailPage = ({ chaptersData }) => {
+  useRequireAuth();
   const router = useRouter();
-  const [sortBy, setSortBy] = useState(CollectionDetailSortOption.RecentlyAdded);
+  const [sortBy, setSortBy] = useState(CollectionDetailSortOption.VerseKey);
 
   const onSortByChange = (newSortByVal) => {
     logValueChange('collection_detail_page_sort_by', sortBy, newSortByVal);
