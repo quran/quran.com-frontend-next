@@ -150,10 +150,10 @@ const ReadingStreak: React.FC<ReadingStreakProps> = ({ layout = ReadingStreakLay
       <>
         {/* eslint-disable-next-line i18next/no-literal-string */}
         {prefix}: {action}
-        {typeof readingGoal.progress.daysLeft !== 'undefined' && (
+        {typeof readingGoal.progress.daysLeft === 'number' && (
           <>
             <br />
-            {t('remaining-days', {
+            {t('reading-goal:remaining-days', {
               count: readingGoal.progress.daysLeft,
               days: toLocalizedNumber(readingGoal.progress.daysLeft, lang),
             })}

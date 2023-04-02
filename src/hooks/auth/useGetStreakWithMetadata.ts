@@ -1,6 +1,5 @@
 import { useMemo } from 'react';
 
-import { Translate } from 'next-translate';
 import useTranslation from 'next-translate/useTranslation';
 import useSWR from 'swr';
 
@@ -10,22 +9,12 @@ import { getStreakWithUserMetadata } from '@/utils/auth/api';
 import { makeStreakUrl } from '@/utils/auth/apiPaths';
 import { isLoggedIn } from '@/utils/auth/login';
 import { getTimezone, dateToDateString } from '@/utils/datetime';
-
-const getDaysOfWeek = (t: Translate) => [
-  t('week.saturday'),
-  t('week.sunday'),
-  t('week.monday'),
-  t('week.tuesday'),
-  t('week.wednesday'),
-  t('week.thursday'),
-  t('week.friday'),
-];
+import { toLocalizedNumber } from '@/utils/locale';
 
 const useGetWeekDays = () => {
-  const { t } = useTranslation('reading-goal');
+  const { t, lang } = useTranslation('reading-goal');
 
   return useMemo(() => {
-    const daysOfWeek = getDaysOfWeek(t);
     const days: { name: string; current: boolean; date: string }[] = [];
     const today = new Date();
 
@@ -42,14 +31,14 @@ const useGetWeekDays = () => {
       const day = new Date(saturday);
       day.setDate(saturday.getDate() + i);
       days.push({
-        name: daysOfWeek[i],
+        name: t('day-x', { day: toLocalizedNumber(i + 1, lang) }),
         current: day.getDate() === today.getDate(),
         date: dateToDateString(day),
       });
     }
 
     return days;
-  }, [t]);
+  }, [t, lang]);
 };
 
 const useGetStreakWithMetadata = () => {

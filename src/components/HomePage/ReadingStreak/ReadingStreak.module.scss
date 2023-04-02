@@ -16,8 +16,10 @@
   justify-content: space-between;
   flex-direction: column;
   width: 100%;
+  gap: var(--spacing-mega);
 
-  @include breakpoints.tablet {
+  @include breakpoints.desktop {
+    gap: 0;
     align-items: center;
     flex-direction: row;
   }
@@ -53,6 +55,7 @@
 
 .day {
   color: var(--color-success-medium);
+  font-size: var(--font-size-small);
 }
 
 .circleContainer {
@@ -62,7 +65,7 @@
 }
 
 .dayDivider {
-  width: calc(var(--spacing-large) * 1.2);
+  width: calc(var(--spacing-large) * 2);
   height: 2px;
   background-color: var(--color-success-medium);
 }
@@ -92,7 +95,7 @@
 }
 
 .goalContainer {
-  margin-block-start: var(--spacing-large);
+  margin-block-start: var(--spacing-mega);
 }
 
 .actionsContainer {
