@@ -9,7 +9,7 @@
     },
     "khatm": {
       "title": "Read the Quran in 30 days",
-      "description": "A classic khatm goal. Read 1 Juz a day"
+      "description": "A classic Khatm goal. Read 1 Juz a day"
     },
     "custom": {
       "title": "Custom",
@@ -30,7 +30,7 @@
   },
   "goal-type": {
     "title": "Choose a criteria for your goal",
-    "description": "Should your goal be based on time, pages, or a custom range (ie: 3 Juzs of the Quran)?"
+    "description": "Should your goal be based on time, pages, or a custom range (i.e., 3 Juzs of the Quran)?"
   },
   "goal-types": {
     "time": {
@@ -43,7 +43,7 @@
     },
     "range": {
       "title": "Custom range",
-      "description": "Your goal will be based on a custom range of verses (this can be a chapter, a juz, or even the whole Quran)"
+      "description": "Your goal will be based on a custom range of verses (this can be a Surah, a Juz, or even the whole Quran)"
     }
   },
   "goal-target": {
@@ -51,10 +51,10 @@
     "description": "How much time, pages, or verses should you read to complete your goal?"
   },
   "duration": "Duration (days)",
-  "starting-chapter": "Starting chapter",
-  "ending-chapter": "Ending chapter",
-  "starting-verse": "Starting verse",
-  "ending-verse": "Ending verse",
+  "starting-chapter": "Starting Surah",
+  "ending-chapter": "Ending Surah",
+  "starting-verse": "Starting Ayah",
+  "ending-verse": "Ending Ayah",
   "preview-schedule": {
     "title": "Here is a preview of your schedule",
     "description": "This is how your goal will look like. You can always change it later."
@@ -71,18 +71,18 @@
   "reading-goal": "Reading Goal",
   "todays-goal": "Today's Goal",
   "remaining": "Remaining for today",
-  "streak-definition": "A streak is a number of consecutive days you have read Quran.",
+  "streak-definition": "A streak is the number of consecutive days you have read the Quran.",
   "progress": {
-    "time-goal": "read {{time}} of Quran",
-    "pages-goal": "read {{pages}} pages of Quran",
+    "time-goal": "read {{time}} of the Quran",
+    "pages-goal": "read {{pages}} pages of the Quran",
     "range-goal": "read {{from}} to {{to}}",
     "complete": "Today's goal is complete 🎉"
   },
-  "set-reading-goal": "Set a reading goal",
+  "create-reading-goal": "Create Goal",
   "set-reading-goal-success": "Your reading goal has been set successfully.",
   "delete-account": "Delete Reading Goal",
-  "reading-plan": "Reading Plan",
-  "reading-plan-description": "Create a reading plan and Quran.com will automatically track your progress and help you reach your goal.",
+  "reading-goal-title": "Introducing Quran.com Tracking",
+  "reading-goal-description": "Do you want to finish reading the Quran in a month, a year, or build a habit of reading 10 mins a day? Create a goal below and Quran.com will create a personalized plan for you and adjust it as you progress to help you reach your goal. ",
   "create-plan": "Create plan",
   "days": "Days",
   "delete-confirmation": {

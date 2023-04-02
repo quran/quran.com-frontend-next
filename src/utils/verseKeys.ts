@@ -54,11 +54,13 @@ type VerseRangeInfo<T> = [
   {
     chapter: T;
     verse: T;
+    verseKey: string;
   },
   // to
   {
     chapter: T;
     verse: T;
+    verseKey: string;
   },
 ];
 
@@ -68,8 +70,13 @@ export const parseVerseRange = <AsNumbers extends boolean>(
   verseRange: string,
   parseAsNumbers?: AsNumbers,
 ): VerseRangeInfo<VerseInfoFormat<AsNumbers>> => {
-  const [, startChapter, startVerse, endChapter, endVerse] =
-    verseRange.match(/(\d+):(\d+)-(\d+):(\d+)/);
+  const result = verseRange.match(/(\d+):(\d+)-(\d+):(\d+)/);
+
+  if (!result) {
+    return null;
+  }
+
+  const [, startChapter, startVerse, endChapter, endVerse] = result;
 
   if (!startChapter || !startVerse || !endChapter || !endVerse) {
     return null;
@@ -82,10 +89,12 @@ export const parseVerseRange = <AsNumbers extends boolean>(
     {
       chapter: parse(startChapter),
       verse: parse(startVerse),
+      verseKey: `${startChapter}:${startVerse}`,
     },
     {
       chapter: parse(endChapter),
       verse: parse(endVerse),
+      verseKey: `${endChapter}:${endVerse}`,
     },
   ];
 };

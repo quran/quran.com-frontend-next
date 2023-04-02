@@ -3,13 +3,12 @@ import { useState } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import { useSelector } from 'react-redux';
 
-import MoonIllustrationSVG from '../../../public/images/moon-illustration.svg';
-
 import styles from './DonatePopup.module.scss';
 
 import Button, { ButtonShape, ButtonSize, ButtonType, ButtonVariant } from '@/dls/Button/Button';
 import Modal from '@/dls/Modal/Modal';
 import CloseIcon from '@/icons/close.svg';
+import MoonIllustrationSVG from '@/public/images/moon-illustration.svg';
 import { selectSessionCount } from '@/redux/slices/session';
 import { makeDonateUrl } from '@/utils/apiPaths';
 import { logEvent } from '@/utils/eventLogger';

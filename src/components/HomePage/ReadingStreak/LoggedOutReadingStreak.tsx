@@ -1,10 +1,9 @@
 import useTranslation from 'next-translate/useTranslation';
 
-import MoonIllustrationSVG from '../../../../public/images/moon-illustration.svg';
-
 import styles from './ReadingStreak.module.scss';
 
 import Button from '@/dls/Button/Button';
+import MoonIllustrationSVG from '@/public/images/moon-illustration.svg';
 
 const LoggedOutReadingStreak = () => {
   const { t } = useTranslation('reading-goal');
@@ -17,13 +16,13 @@ const LoggedOutReadingStreak = () => {
 
       <div className={styles.container}>
         <div>
-          <p className={styles.streakTitle}>{t('reading-plan')}</p>
+          <p className={styles.streakTitle}>{t('reading-goal-title')}</p>
         </div>
       </div>
-      <div className={styles.goalContainer}>{t('reading-plan-description')}</div>
+      <div className={styles.goalContainer}>{t('reading-goal-description')}</div>
 
       <div className={styles.actionsContainer}>
-        <Button href="/login">{t('create-plan')}</Button>
+        <Button href="/login">{t('create-reading-goal')}</Button>
       </div>
     </div>
   );

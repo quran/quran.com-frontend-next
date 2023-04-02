@@ -1,19 +1,19 @@
 import useTranslation from 'next-translate/useTranslation';
 
+import { ReadingGoalPeriod, ReadingGoalTabProps } from './hooks/useReadingGoalReducer';
 import OptionButton from './OptionButton';
 import styles from './ReadingGoalPage.module.scss';
-import { ReadingGoalTabProps } from './useReadingGoalReducer';
 
 import CalendarIcon from '@/icons/calendar.svg';
 import RepeatIcon from '@/icons/repeat.svg';
 
 const options = [
   {
-    key: 'daily',
+    key: ReadingGoalPeriod.Daily,
     icon: RepeatIcon,
   },
   {
-    key: 'continuous',
+    key: ReadingGoalPeriod.Continuous,
     icon: CalendarIcon,
   },
 ] as const;

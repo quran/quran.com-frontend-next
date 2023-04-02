@@ -4,8 +4,8 @@ import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 import useSWR from 'swr';
 
+import { ReadingGoalPeriod, ReadingGoalTabProps } from './hooks/useReadingGoalReducer';
 import styles from './ReadingGoalPage.module.scss';
-import { ReadingGoalTabProps } from './useReadingGoalReducer';
 
 import DataContext from '@/contexts/DataContext';
 import Spinner from '@/dls/Spinner/Spinner';
@@ -15,7 +15,7 @@ import { makeEstimateReadingGoalUrl } from '@/utils/auth/apiPaths';
 import { getChapterData } from '@/utils/chapter';
 import { secondsToReadableFormat } from '@/utils/datetime';
 import { toLocalizedNumber } from '@/utils/locale';
-import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
+import { parseVerseRange } from '@/utils/verseKeys';
 
 const getPayload = (state: ReadingGoalTabProps['state']): CreateReadingGoalRequest => {
   const payload: CreateReadingGoalRequest = {
@@ -27,7 +27,7 @@ const getPayload = (state: ReadingGoalTabProps['state']): CreateReadingGoalReque
     }[state.type],
   };
 
-  if (state.period === 'continuous') payload.duration = state.duration;
+  if (state.period === ReadingGoalPeriod.Continuous) payload.duration = state.duration;
 
   return payload;
 };
@@ -60,9 +60,10 @@ const ReadingGoalWeekPreviewTab: React.FC<ReadingGoalTabProps> = ({ state, nav }
   const getDailyAmount = (idx: number) => {
     if (data.data.type === ReadingGoalType.RANGE) {
       const range = 'ranges' in data.data ? data.data.ranges[idx] : data.data.dailyAmount;
-      const [start, end] = range.split('-');
-      const [startingChapter, startingVerse] = getVerseAndChapterNumbersFromKey(start);
-      const [endingChapter, endingVerse] = getVerseAndChapterNumbersFromKey(end);
+      const [
+        { chapter: startingChapter, verse: startingVerse },
+        { chapter: endingChapter, verse: endingVerse },
+      ] = parseVerseRange(range);
 
       const startingChapterName = getChapterData(chaptersData, startingChapter).transliteratedName;
       const endingChapterName = getChapterData(chaptersData, endingChapter).transliteratedName;

@@ -1,10 +1,9 @@
 import useTranslation from 'next-translate/useTranslation';
 
-import MoonIllustrationSVG from '../../../public/images/moon-illustration.svg';
-
 import styles from './FundraisingBanner.module.scss';
 
 import Button, { ButtonType, ButtonVariant } from '@/dls/Button/Button';
+import MoonIllustrationSVG from '@/public/images/moon-illustration.svg';
 import { makeDonateUrl } from '@/utils/apiPaths';
 import { logEvent } from '@/utils/eventLogger';
 
