@@ -29,6 +29,7 @@ import { QuranReaderDataType } from 'types/QuranReader';
 import Verse from 'types/Verse';
 
 interface Props {
+  totalPages: number;
   pageNumber: number;
   quranReaderDataType: QuranReaderDataType;
   quranReaderStyles: QuranReaderStyles;
@@ -41,6 +42,7 @@ interface Props {
 }
 
 const TranslationPage: React.FC<Props> = ({
+  totalPages,
   pageNumber,
   quranReaderDataType,
   quranReaderStyles,
@@ -121,7 +123,7 @@ const TranslationPage: React.FC<Props> = ({
     return <TranslationViewSkeleton numberOfSkeletons={initialData.pagination.perPage} />;
   }
 
-  const isLastPage = pageNumber === initialData.pagination.totalPages;
+  const isLastPage = pageNumber === totalPages;
 
   return (
     <div className={styles.container}>
