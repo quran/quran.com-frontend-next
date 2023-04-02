@@ -4,8 +4,10 @@ import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 
+import { getHizbVerses, getPagesLookup } from '@/api';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import QuranReader from '@/components/QuranReader';
+import Error from '@/pages/_error';
 import { getQuranReaderStylesInitialState } from '@/redux/defaultSettings/util';
 import { getDefaultWordFields, getMushafId } from '@/utils/api';
 import { getAllChaptersData } from '@/utils/chapter';
@@ -19,9 +21,6 @@ import {
 } from '@/utils/staticPageGeneration';
 import { isValidHizbId } from '@/utils/validator';
 import { generateVerseKeysBetweenTwoVerseKeys } from '@/utils/verseKeys';
-import { getHizbVerses, getPagesLookup } from 'src/api';
-import DataContext from 'src/contexts/DataContext';
-import Error from 'src/pages/_error';
 import { VersesResponse } from 'types/ApiResponses';
 import ChaptersData from 'types/ChaptersData';
 import { QuranReaderDataType } from 'types/QuranReader';
@@ -32,7 +31,7 @@ interface HizbPageProps {
   chaptersData: ChaptersData;
 }
 
-const HizbPage: NextPage<HizbPageProps> = ({ hasError, hizbVerses, chaptersData }) => {
+const HizbPage: NextPage<HizbPageProps> = ({ hasError, hizbVerses }) => {
   const { t, lang } = useTranslation('common');
   const {
     query: { hizbId },
@@ -40,11 +39,9 @@ const HizbPage: NextPage<HizbPageProps> = ({ hasError, hizbVerses, chaptersData 
 
   if (hasError) return <Error statusCode={500} />;
 
-  // console.log(hizbVerses);
-
   const path = getHizbNavigationUrl(Number(hizbId));
   return (
-    <DataContext.Provider value={chaptersData}>
+    <>
       <NextSeoWrapper
         title={`${t('hizb')} ${toLocalizedNumber(Number(hizbId), lang)}`}
         description={getPageOrJuzMetaDescription(hizbVerses)}
@@ -56,7 +53,7 @@ const HizbPage: NextPage<HizbPageProps> = ({ hasError, hizbVerses, chaptersData 
         id={String(hizbId)}
         quranReaderDataType={QuranReaderDataType.Hizb}
       />
-    </DataContext.Provider>
+    </>
   );
 };
 

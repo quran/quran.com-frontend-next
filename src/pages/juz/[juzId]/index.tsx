@@ -4,8 +4,10 @@ import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 
+import { getJuzVerses, getPagesLookup } from '@/api';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import QuranReader from '@/components/QuranReader';
+import Error from '@/pages/_error';
 import { getQuranReaderStylesInitialState } from '@/redux/defaultSettings/util';
 import { getDefaultWordFields, getMushafId } from '@/utils/api';
 import { getAllChaptersData } from '@/utils/chapter';
@@ -19,9 +21,6 @@ import {
 } from '@/utils/staticPageGeneration';
 import { isValidJuzId } from '@/utils/validator';
 import { generateVerseKeysBetweenTwoVerseKeys } from '@/utils/verseKeys';
-import { getJuzVerses, getPagesLookup } from 'src/api';
-import DataContext from 'src/contexts/DataContext';
-import Error from 'src/pages/_error';
 import { VersesResponse } from 'types/ApiResponses';
 import ChaptersData from 'types/ChaptersData';
 import { QuranReaderDataType } from 'types/QuranReader';
@@ -32,7 +31,7 @@ interface JuzPageProps {
   chaptersData: ChaptersData;
 }
 
-const JuzPage: NextPage<JuzPageProps> = ({ hasError, juzVerses, chaptersData }) => {
+const JuzPage: NextPage<JuzPageProps> = ({ hasError, juzVerses }) => {
   const { t, lang } = useTranslation('common');
   const {
     query: { juzId },
@@ -40,9 +39,10 @@ const JuzPage: NextPage<JuzPageProps> = ({ hasError, juzVerses, chaptersData }) 
   if (hasError) {
     return <Error statusCode={500} />;
   }
+
   const path = getJuzNavigationUrl(Number(juzId));
   return (
-    <DataContext.Provider value={chaptersData}>
+    <>
       <NextSeoWrapper
         title={`${t('juz')} ${toLocalizedNumber(Number(juzId), lang)}`}
         description={getPageOrJuzMetaDescription(juzVerses)}
@@ -54,7 +54,7 @@ const JuzPage: NextPage<JuzPageProps> = ({ hasError, juzVerses, chaptersData }) 
         id={String(juzId)}
         quranReaderDataType={QuranReaderDataType.Juz}
       />
-    </DataContext.Provider>
+    </>
   );
 };
 
