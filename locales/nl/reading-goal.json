@@ -1,0 +1,100 @@
+{
+    "continue-reading": "Lees verder",
+    "continuous": {
+        "description": "Je doel berekent je voortgang over een periode van dagen",
+        "title": "Over een duur"
+    },
+    "create-plan": "Plan maken",
+    "create-reading-goal": "Doel maken",
+    "daily-progress": "Dagelijkse voortgang",
+    "daily": {
+        "description": "Je doel wordt elke dag gereset",
+        "title": "Dagelijks doel"
+    },
+    "day-x": "Dag {{day}}",
+    "days": "Dagen",
+    "duration": "Duur (dagen)",
+    "ending-chapter": "Einde soera",
+    "ending-verse": "Ayah beëindigen",
+    "examples-subtitle": "Hier is een lijst met gemeenschappelijke doelen. Je kunt ook je eigen doel maken.",
+    "examples-title": "Kies een vooraf ingesteld doel of maak je eigen doel",
+    "examples": {
+        "custom": {
+            "description": "Stel een aangepast doel in dat bij u past",
+            "title": "Aangepast"
+        },
+        "khatm": {
+            "description": "Een klassiek Khatm-doelpunt. Lees 1 Juz per dag",
+            "title": "Lees de koran in 30 dagen"
+        },
+        "time": {
+            "description": "Een eenvoudig beginnersvriendelijk doel",
+            "title": "Lees 10 minuten per dag"
+        }
+    },
+    "frequency-tab": {
+        "description": "Moet uw doel elke dag of elk aantal dagen worden gereset? Maak je geen zorgen, we houden je voortgang bij, ongeacht de frequentie die je kiest.",
+        "title": "Kies een frequentie voor je doel"
+    },
+    "goal-done": {
+        "description": "Eventuele extra metingen worden nog steeds geregistreerd",
+        "title": "Je hebt het doel van vandaag behaald"
+    },
+    "goal-target": {
+        "description": "Hoeveel tijd, pagina's of verzen moet je lezen om je doel te bereiken?",
+        "title": "Stel een doel voor je doel"
+    },
+    "goal-type": {
+        "description": "Moet uw doel gebaseerd zijn op tijd, pagina's of een aangepast bereik (dwz 3 juzs van de koran)?",
+        "title": "Kies een criterium voor je doel"
+    },
+    "goal-types": {
+        "pages": {
+            "description": "Je doel wordt gebaseerd op pagina's",
+            "title": "Pagina's"
+        },
+        "range": {
+            "description": "Je doel zal gebaseerd zijn op een aangepaste reeks verzen (dit kan een soera, een juz of zelfs de hele koran zijn)",
+            "title": "Aangepast bereik"
+        },
+        "time": {
+            "description": "Je doel is gebaseerd op tijd",
+            "title": "Tijd"
+        }
+    },
+    "preview-schedule": {
+        "description": "Zo ziet je doel eruit. Je kunt het later altijd wijzigen.",
+        "title": "Hier is een voorproefje van je schema"
+    },
+    "progress": {
+        "complete": "Het doel van vandaag is behaald 🎉",
+        "pages-goal": "lees {{pages}} pagina's van de koran",
+        "range-goal": "lees {{from}} tot {{to}}",
+        "time-goal": "lees {{time}} van de koran"
+    },
+    "reading-goal": "Doel lezen",
+    "reading-goal-description": "Wil je de koran binnen een maand of een jaar uitlezen, of een gewoonte aanleren om 10 minuten per dag te lezen? Maak hieronder een doel aan en Quran.com zal een persoonlijk plan voor je maken en dit aanpassen naarmate je verder komt om je te helpen je doel te bereiken.",
+    "reading-goal-label": "Je bent op een",
+    "reading-goal-title": "Introductie van Quran.com-tracking",
+    "recommended": "Aanbevolen",
+    "remaining": "Blijft over voor vandaag",
+    "remaining-days_one": "{{days}} resterende dag",
+    "remaining-days_other": "{{days}} dagen resterend",
+    "set-reading-goal-success": "Je leesdoel is succesvol ingesteld.",
+    "starting-chapter": "Soera beginnen",
+    "starting-verse": "Ayah beginnen",
+    "streak": "{{days}} dagenreeks",
+    "streak-definition": "Een streak is het aantal opeenvolgende dagen dat je de koran hebt gelezen.",
+    "todays-goal": "Het doel van vandaag",
+    "view-progress": "Voortgang bekijken",
+    "x-days_one": "{{days}} dag",
+    "x-days_other": "{{days}} dagen",
+    "x-hours_one": "{{hours}} uur",
+    "x-hours_other": "{{hours}} uur",
+    "x-minutes_one": "{{minutes}} minuut",
+    "x-minutes_other": "{{minutes}} minuten",
+    "x-pages_one": "{{pages}} pagina",
+    "x-pages_other": "{{pages}} pagina's",
+    "x-seconds_one": "{{seconds}} seconde",
+    "x-seconds_other": "{{seconds}} seconden"
+}

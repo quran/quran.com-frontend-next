@@ -1,0 +1,100 @@
+{
+    "continue-reading": "Teruskan membaca",
+    "continuous": {
+        "description": "Matlamat anda akan mengira kemajuan anda dalam tempoh beberapa hari",
+        "title": "Dalam satu tempoh"
+    },
+    "create-plan": "Buat rancangan",
+    "create-reading-goal": "Cipta Matlamat",
+    "daily-progress": "Kemajuan Harian",
+    "daily": {
+        "description": "Matlamat anda akan ditetapkan semula setiap hari",
+        "title": "Matlamat harian"
+    },
+    "day-x": "Hari {{day}}",
+    "days": "hari-hari",
+    "duration": "Tempoh (hari)",
+    "ending-chapter": "Ending Surah",
+    "ending-verse": "Ending Ayah",
+    "examples-subtitle": "Berikut ialah senarai matlamat bersama. Anda juga boleh membuat matlamat anda sendiri.",
+    "examples-title": "Pilih matlamat pratetap atau buat matlamat anda sendiri",
+    "examples": {
+        "custom": {
+            "description": "Tetapkan matlamat tersuai yang sesuai dengan anda",
+            "title": "Adat"
+        },
+        "khatm": {
+            "description": "Matlamat Khatm klasik. Baca 1 Juz sehari",
+            "title": "Baca Al-Quran dalam masa 30 hari"
+        },
+        "time": {
+            "description": "Matlamat mesra pemula yang mudah",
+            "title": "Baca 10 minit sehari"
+        }
+    },
+    "frequency-tab": {
+        "description": "Adakah matlamat anda perlu ditetapkan semula setiap hari atau setiap bilangan hari? Jangan risau, kami akan menjejaki kemajuan anda tanpa mengira kekerapan yang anda pilih.",
+        "title": "Pilih kekerapan untuk matlamat anda"
+    },
+    "goal-done": {
+        "description": "Sebarang bacaan tambahan masih akan direkodkan",
+        "title": "Anda telah melengkapkan matlamat hari ini"
+    },
+    "goal-target": {
+        "description": "Berapa banyak masa, halaman atau ayat yang perlu anda baca untuk melengkapkan matlamat anda?",
+        "title": "Tetapkan sasaran untuk matlamat anda"
+    },
+    "goal-type": {
+        "description": "Adakah matlamat anda harus berdasarkan masa, halaman atau julat tersuai (iaitu, 3 Juz Al-Quran)?",
+        "title": "Pilih kriteria untuk matlamat anda"
+    },
+    "goal-types": {
+        "pages": {
+            "description": "Matlamat anda akan berdasarkan halaman",
+            "title": "muka surat"
+        },
+        "range": {
+            "description": "Matlamat anda akan berdasarkan julat ayat tersuai (ini boleh menjadi Surah, Juz, atau bahkan keseluruhan Al-Quran)",
+            "title": "Julat tersuai"
+        },
+        "time": {
+            "description": "Matlamat anda akan berdasarkan masa",
+            "title": "Masa"
+        }
+    },
+    "preview-schedule": {
+        "description": "Beginilah rupa matlamat anda. Anda sentiasa boleh menukarnya kemudian.",
+        "title": "Berikut ialah pratonton jadual anda"
+    },
+    "progress": {
+        "complete": "Matlamat hari ini selesai 🎉",
+        "pages-goal": "baca {{pages}} halaman al-Quran",
+        "range-goal": "baca {{from}} hingga {{to}}",
+        "time-goal": "membaca {{time}} al-Quran"
+    },
+    "reading-goal": "Matlamat Membaca",
+    "reading-goal-description": "Adakah anda ingin menghabiskan bacaan Al-Quran dalam masa sebulan, setahun, atau membina tabiat membaca 10 minit sehari? Buat matlamat di bawah dan Quran.com akan membuat pelan yang diperibadikan untuk anda dan melaraskannya semasa anda maju untuk membantu anda mencapai matlamat anda.",
+    "reading-goal-label": "Anda berada di a",
+    "reading-goal-title": "Memperkenalkan Penjejakan Quran.com",
+    "recommended": "Disyorkan",
+    "remaining": "Berbaki untuk hari ini",
+    "remaining-days_one": "{{days}} hari lagi",
+    "remaining-days_other": "{{days}} hari lagi",
+    "set-reading-goal-success": "Matlamat membaca anda telah berjaya ditetapkan.",
+    "starting-chapter": "Memulakan Surah",
+    "starting-verse": "Memula Ayah",
+    "streak": "{{days}} hari berturut-turut",
+    "streak-definition": "Satu coretan ialah bilangan hari berturut-turut anda telah membaca Al-Quran.",
+    "todays-goal": "Matlamat Hari Ini",
+    "view-progress": "Lihat Kemajuan",
+    "x-days_one": "{{days}} hari",
+    "x-days_other": "{{days}} hari",
+    "x-hours_one": "{{hours}} jam",
+    "x-hours_other": "{{hours}} jam",
+    "x-minutes_one": "{{minutes}} minit",
+    "x-minutes_other": "{{minutes}} minit",
+    "x-pages_one": "{{pages}} halaman",
+    "x-pages_other": "{{pages}} halaman",
+    "x-seconds_one": "{{seconds}} saat",
+    "x-seconds_other": "{{seconds}} saat"
+}
