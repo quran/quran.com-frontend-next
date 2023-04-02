@@ -23,6 +23,7 @@ type PopoverMenuProps = {
   isModal?: boolean;
   onOpenChange?: (open: boolean) => void;
   expandDirection?: PopoverMenuExpandDirection;
+  contentClassName?: string;
 };
 const PopoverMenu = ({
   children,
@@ -32,10 +33,14 @@ const PopoverMenu = ({
   isModal = true,
   onOpenChange,
   expandDirection: side = PopoverMenuExpandDirection.BOTTOM,
+  contentClassName,
 }: PopoverMenuProps) => {
   const direction = useDirection();
   const content = (
-    <PrimitiveDropdownMenu.Content className={styles.content} side={side}>
+    <PrimitiveDropdownMenu.Content
+      className={classNames(styles.content, contentClassName)}
+      side={side}
+    >
       {children}
     </PrimitiveDropdownMenu.Content>
   );

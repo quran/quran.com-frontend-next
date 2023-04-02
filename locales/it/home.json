@@ -3,7 +3,7 @@
     "noble-quran": "Il Nobile Corano",
     "read-juz": "Leggi Juz",
     "recently-read": "Letto di recente",
-    "revelation-order-disclaimer": "Questa visione mostra l'ordine cronologico delle sure nel Corano in base a quando furono rivelate al profeta Maometto (pace su di lui). L'ordine è oggetto di opinione accademica e alcune sure sono state rivelate in parti in tempi diversi. L'ordinamento qui si basa sul lavoro di <link> Tanzil.net <\/link> .",
+    "revelation-order-disclaimer": "Questa visione mostra l'ordine cronologico delle sure nel Corano in base a quando furono rivelate al profeta Maometto <hover> ﷺ <\/hover> . La cronologia è oggetto di opinione accademica e alcune sure sono state rivelate in parti in tempi diversi. L'ordinamento qui si basa sul lavoro di <link> Tanzil.net <\/link> . [Nota: l'ordine Mushaf compilato da al-Fatiha ad al-Nas è una questione di consenso.]",
     "tab": {
         "bookmarks": "segnalibri",
         "popular": "Popolare"
@@ -13,7 +13,6 @@
         "trigger": "Accesso rapido a qualsiasi cosa"
     },
     "welcome": {
-        "body": "Le donazioni mensili ci aiutano a trattenere i migliori talenti e sostenere le operazioni, in modo da poterci concentrare meno sulla raccolta fondi e più sulla creazione di impatto.",
-        "title": "Dona a Quran.com oggi"
+        "title": "È il mese del Corano! Aiuta milioni di utenti ad accedere alla guida del Corano."
     }
 }

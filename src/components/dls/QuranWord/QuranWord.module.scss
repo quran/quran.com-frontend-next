@@ -36,6 +36,12 @@
   padding-inline-end: var(--spacing-micro);
 }
 
+.highlightOnHover {
+  &:hover {
+    color: var(--color-success-medium);
+  }
+}
+
 .highlighted {
   color: var(--color-success-medium);
 }

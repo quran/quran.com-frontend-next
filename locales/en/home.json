@@ -3,7 +3,7 @@
     "noble-quran": "The Noble Quran",
     "read-juz": "Read Juz",
     "recently-read": "Recently Read",
-    "revelation-order-disclaimer": "This view shows the chronological order of Surahs in the Quran based on when they were revealed to the prophet Muhammad (PBUH). The order is a subject of scholarly opinion and some Surahs were revealed in parts at different times. The ordering here is based on the work of <link>Tanzil.net<\/link>.",
+    "revelation-order-disclaimer": "This view shows the chronological order of Surahs in the Quran based on when they were revealed to the Prophet Muhammad <hover>ﷺ<\/hover>. The chronology is a subject of scholarly opinion and some Surahs were revealed in parts at different times. The ordering here is based on the work of <link>Tanzil.net<\/link>. [Note: the compiled Mushaf order from al-Fatiha to al-Nas is a matter of consensus.]",
     "tab": {
         "bookmarks": "Bookmarks",
         "popular": "Popular"
@@ -13,7 +13,6 @@
         "trigger": "Quick access to anything"
     },
     "welcome": {
-        "body": "Monthly donations help us retain top talent and sustain operations, so that we can focus less on fundraising and more on creating impact.",
-        "title": "Donate to Quran.com today"
+        "title": "It's the Month of the Quran! Help millions of users get access to the guidance of the Quran."
     }
 }

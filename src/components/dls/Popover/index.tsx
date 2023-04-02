@@ -34,6 +34,7 @@ interface Props {
   triggerStyles?: string;
   contentStyles?: string;
   contentSideOffset?: number;
+  isContainerSpan?: boolean;
 }
 
 const Popover: React.FC<Props> = ({
@@ -52,6 +53,7 @@ const Popover: React.FC<Props> = ({
   contentSideOffset = 2,
   triggerStyles,
   contentStyles,
+  isContainerSpan = false,
 }) => {
   const content = (
     <RadixPopover.Content
@@ -68,26 +70,33 @@ const Popover: React.FC<Props> = ({
       {tip && <RadixPopover.Arrow />}
     </RadixPopover.Content>
   );
-  return (
-    <div className={classNames({ [styles.container]: defaultStyling })}>
-      <RadixPopover.Root
-        modal={isModal}
-        {...(typeof open !== 'undefined' && { open })}
-        {...(onOpenChange && { onOpenChange })}
-      >
-        <RadixPopover.Trigger aria-label="Open popover" asChild>
-          <span
-            className={classNames(styles.trigger, {
-              [triggerStyles]: triggerStyles,
-            })}
-          >
-            {trigger}
-          </span>
-        </RadixPopover.Trigger>
-        {isPortalled ? <RadixPopover.Portal>{content}</RadixPopover.Portal> : content}
-      </RadixPopover.Root>
-    </div>
+
+  const containerChild = (
+    <RadixPopover.Root
+      modal={isModal}
+      {...(typeof open !== 'undefined' && { open })}
+      {...(onOpenChange && { onOpenChange })}
+    >
+      <RadixPopover.Trigger aria-label="Open popover" asChild>
+        <span
+          className={classNames(styles.trigger, {
+            [triggerStyles]: triggerStyles,
+          })}
+        >
+          {trigger}
+        </span>
+      </RadixPopover.Trigger>
+      {isPortalled ? <RadixPopover.Portal>{content}</RadixPopover.Portal> : content}
+    </RadixPopover.Root>
   );
+
+  if (isContainerSpan) {
+    return (
+      <span className={classNames({ [styles.container]: defaultStyling })}>{containerChild}</span>
+    );
+  }
+
+  return <div className={classNames({ [styles.container]: defaultStyling })}>{containerChild}</div>;
 };
 
 export default Popover;

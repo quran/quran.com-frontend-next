@@ -2,6 +2,7 @@
     "all-saved-verses": "Të gjitha vargjet e ruajtura",
     "alphabetical": "AZ",
     "back-to-collection-list": "Kthehu te lista e koleksioneve",
+    "collapse-all": "Palos të gjitha vargjet",
     "collection-list-empty": "Lista e koleksioneve është bosh. Nuk keni krijuar ende asnjë koleksion",
     "collections": "Koleksionet",
     "delete": "Fshije",
@@ -14,6 +15,7 @@
         "title": "Fshi koleksionin"
     },
     "empty": "Koleksioni është bosh",
+    "expand-all": "Zgjero të gjitha vargjet",
     "go-to-ayah": "Shko te ajah",
     "load-more": "Ngarko më shumë",
     "recently-added": "Shtuar së fundmi",
