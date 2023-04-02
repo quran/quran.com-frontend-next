@@ -5,6 +5,7 @@ import debounce from 'lodash/debounce';
 import { useDispatch } from 'react-redux';
 import { useSWRConfig } from 'swr';
 
+import { useReadingProgressContext } from '../contexts/ReadingProgressContext';
 import { getObservedVersePayload, getOptions, QURAN_READER_OBSERVER_ID } from '../observer';
 
 import DataContext from '@/contexts/DataContext';
@@ -36,7 +37,7 @@ const useSyncReadingProgress = ({ isReadingPreference }: UseSyncReadingProgressP
   // this is a queue of verse keys that we need to send to the backend
   // we will clear the queue every {READING_DAY_SYNC_TIME} milliseconds after sending the data to the backend
   // it is also a Set not an array to avoid duplicate verse keys
-  const verseQueue = useRef<Set<string>>(new Set());
+  const verseKeysQueue = useReadingProgressContext();
   const elapsedReadingTimeInSeconds = useRef(0);
   const dispatch = useDispatch();
   const { cache } = useSWRConfig();
@@ -71,7 +72,7 @@ const useSyncReadingProgress = ({ isReadingPreference }: UseSyncReadingProgressP
       const lastReadVerse = getObservedVersePayload(element);
 
       // add the verse key to the queue
-      verseQueue.current.add(lastReadVerse.verseKey);
+      verseKeysQueue.current.add(lastReadVerse.verseKey);
 
       dispatch(
         setLastReadVerse({
@@ -87,7 +88,7 @@ const useSyncReadingProgress = ({ isReadingPreference }: UseSyncReadingProgressP
         debouncedAddReadingSession(Number(chapterNumber), Number(verseNumber));
       }
     },
-    [chaptersData, debouncedAddReadingSession, dispatch],
+    [chaptersData, debouncedAddReadingSession, dispatch, verseKeysQueue],
   );
 
   // eslint-disable-next-line consistent-return
@@ -100,17 +101,17 @@ const useSyncReadingProgress = ({ isReadingPreference }: UseSyncReadingProgressP
 
     const interval = setInterval(() => {
       // nothing to send
-      if (verseQueue.current.size === 0 && elapsedReadingTimeInSeconds.current === 0) {
+      if (verseKeysQueue.current.size === 0 && elapsedReadingTimeInSeconds.current === 0) {
         return;
       }
 
       // an array of verse ranges that we will send to the backend
       // we will get them by merging the verse keys in the queue
       let verseRanges: string[] = null;
-      if (verseQueue.current.size > 0) {
+      if (verseKeysQueue.current.size > 0) {
         // merge the verse keys and clear the queue
-        verseRanges = Array.from(mergeVerseKeys(verseQueue.current));
-        verseQueue.current.clear();
+        verseRanges = Array.from(mergeVerseKeys(verseKeysQueue.current));
+        verseKeysQueue.current.clear();
       }
 
       let seconds: number = null;
@@ -137,7 +138,7 @@ const useSyncReadingProgress = ({ isReadingPreference }: UseSyncReadingProgressP
     return () => {
       clearInterval(interval);
     };
-  }, [chaptersData, updateReadingDayAndClearCache]);
+  }, [chaptersData, updateReadingDayAndClearCache, verseKeysQueue]);
 
   // this will track user's reading time
   // also, if the user is not on the same tab, we will pause the timer

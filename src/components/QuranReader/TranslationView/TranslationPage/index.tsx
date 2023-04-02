@@ -9,9 +9,9 @@ import useSWRImmutable from 'swr/immutable';
 
 import styles from '../TranslationView.module.scss';
 
-import ChapterHeader from '@/components/chapters/ChapterHeader';
+import TranslationPageVerse from './TranslationPageVerse';
+
 import { getTranslationViewRequestKey, verseFetcher } from '@/components/QuranReader/api';
-import TranslationViewCell from '@/components/QuranReader/TranslationView/TranslationViewCell';
 import TranslationViewSkeleton from '@/components/QuranReader/TranslationView/TranslationViewSkeleton';
 import { getTranslationsInitialState } from '@/redux/defaultSettings/util';
 import { selectIsUsingDefaultWordByWordLocale } from '@/redux/slices/QuranReader/readingPreferences';
@@ -20,15 +20,12 @@ import { selectIsUsingDefaultTranslations } from '@/redux/slices/QuranReader/tra
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
 import { getMushafId } from '@/utils/api';
 import { areArraysEqual } from '@/utils/array';
-import { getPageBookmarks } from '@/utils/auth/api';
 import { makeBookmarksRangeUrl } from '@/utils/auth/apiPaths';
 import { isLoggedIn } from '@/utils/auth/login';
-import { toLocalizedNumber } from '@/utils/locale';
 import { selectIsUsingDefaultReciter } from 'src/xstate/actors/audioPlayer/selectors';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import { VersesResponse } from 'types/ApiResponses';
 import { QuranReaderDataType } from 'types/QuranReader';
-import Translation from 'types/Translation';
 import Verse from 'types/Verse';
 
 interface Props {
@@ -54,7 +51,7 @@ const TranslationPage: React.FC<Props> = ({
   resourceId,
   setApiPageToVersesMap,
 }) => {
-  const { lang, t } = useTranslation('common');
+  const { lang } = useTranslation('common');
   const router = useRouter();
   const defaultTranslations = getTranslationsInitialState(lang).selectedTranslations;
   const translationParams = useMemo(
@@ -109,15 +106,6 @@ const TranslationPage: React.FC<Props> = ({
           initialData.pagination.perPage,
         )
       : null;
-  const { data: pageBookmarks } = useSWRImmutable(bookmarksRangeUrl, async () => {
-    const response = await getPageBookmarks(
-      mushafId,
-      Number(verses[0].chapterId),
-      Number(verses[0].verseNumber),
-      initialData.pagination.perPage,
-    );
-    return response;
-  });
 
   useEffect(() => {
     if (verses) {
@@ -133,50 +121,27 @@ const TranslationPage: React.FC<Props> = ({
     return <TranslationViewSkeleton numberOfSkeletons={initialData.pagination.perPage} />;
   }
 
-  const getTranslationNameString = (translations?: Translation[]) => {
-    let translationName = t('settings.no-translation-selected');
-    if (translations?.length === 1) translationName = translations?.[0].resourceName;
-    if (translations?.length === 2) {
-      translationName = t('settings.value-and-other', {
-        value: translations?.[0].resourceName,
-        othersCount: toLocalizedNumber(translations.length - 1, lang),
-      });
-    }
-    if (translations?.length > 2) {
-      translationName = t('settings.value-and-others', {
-        value: translations?.[0].resourceName,
-        othersCount: toLocalizedNumber(translations.length - 1, lang),
-      });
-    }
-
-    return translationName;
-  };
+  const isLastPage = pageNumber === initialData.pagination.totalPages;
 
   return (
     <div className={styles.container}>
       {verses.map((verse, index) => {
         const currentVerseIndex =
           pageNumber === 1 ? index : index + (pageNumber - 1) * initialData.pagination.perPage;
+
         return (
-          <div key={currentVerseIndex}>
-            {verse.verseNumber === 1 && (
-              <ChapterHeader
-                translationName={getTranslationNameString(verse.translations)}
-                chapterId={String(verse.chapterId)}
-                pageNumber={verse.pageNumber}
-                hizbNumber={verse.hizbNumber}
-                isTranslationSelected={selectedTranslations?.length > 0}
-              />
-            )}
-            <TranslationViewCell
-              verseIndex={currentVerseIndex}
-              verse={verse}
-              key={verse.id}
-              quranReaderStyles={quranReaderStyles}
-              pageBookmarks={pageBookmarks}
-              bookmarksRangeUrl={bookmarksRangeUrl}
-            />
-          </div>
+          <TranslationPageVerse
+            isLastVerseInView={isLastPage && index === verses.length - 1}
+            verse={verse}
+            key={currentVerseIndex}
+            verseIdx={currentVerseIndex}
+            mushafId={mushafId}
+            quranReaderStyles={quranReaderStyles}
+            selectedTranslations={selectedTranslations}
+            bookmarksRangeUrl={bookmarksRangeUrl}
+            initialData={initialData}
+            firstVerseInPage={verses[0]}
+          />
         );
       })}
     </div>
