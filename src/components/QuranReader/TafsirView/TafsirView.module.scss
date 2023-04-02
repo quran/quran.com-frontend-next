@@ -69,7 +69,8 @@ $container-max-width: calc(23 * var(--spacing-mega));
   }
   // target any item which has a class that contains uthmani
   *[class~="uthmani"] {
-    font-family: meQuran;
+    font-family: UthmanicHafs;
+    font-size: larger;
   }
 }
 

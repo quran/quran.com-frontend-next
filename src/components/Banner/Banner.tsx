@@ -5,7 +5,7 @@ import MoonIllustrationSVG from '../../../public/images/moon-illustration.svg';
 
 import styles from './Banner.module.scss';
 
-import Button, { ButtonSize, ButtonType } from '@/dls/Button/Button';
+import Button, { ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import { selectIsBannerVisible } from '@/redux/slices/banner';
 import { makeDonateUrl } from '@/utils/apiPaths';
 import { logEvent } from '@/utils/eventLogger';
@@ -43,9 +43,8 @@ const Banner = ({ text, cta }: BannerProps) => {
           isNewTab
           onClick={onDonateClicked}
           href={makeDonateUrl()}
-          className={styles.cta}
           size={ButtonSize.Small}
-          type={ButtonType.Success}
+          variant={ButtonVariant.Shadow}
         >
           {cta}
         </Button>

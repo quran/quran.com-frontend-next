@@ -1,0 +1,54 @@
+@use "src/styles/breakpoints";
+
+.container {
+  direction: ltr; // TODO: revert this once we have RTL content
+  text-align: justify;
+  margin: auto;
+  @include breakpoints.desktop {
+    width: 65%;
+  }
+  h1 {
+    padding-block-start: var(--spacing-xxsmall);
+    font-size: var(--font-size-xlarge);
+    line-height: var(--line-height-xlarge);
+    font-weight: var(--font-weight-bold);
+  }
+  h2 {
+    font-size: var(--font-size-normal);
+    line-height: var(--line-height-jumbo);
+    margin-block-end: var(--spacing-xsmall);
+    font-weight: var(--font-weight-bold);
+  }
+  div {
+    padding-block: var(--spacing-xsmall);
+  }
+  ol {
+    list-style: lower-latin;
+  }
+  li {
+    margin-inline-start: var(--spacing-mega);
+  }
+  ul li {
+    list-style: disc;
+  }
+  i {
+    font-style: italic;
+  }
+  a {
+    text-decoration: underline;
+    font-weight: var(--font-weight-normal);
+    &:hover {
+      opacity: var(--opacity-50);
+    }
+  }
+}
+
+.ctaContainer {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  a {
+    text-decoration: none;
+  }
+}

@@ -3,7 +3,7 @@
     "noble-quran": "Al-Quran yang mulia",
     "read-juz": "Baca Juz",
     "recently-read": "Bacaan Terkini",
-    "revelation-order-disclaimer": "Pandangan ini menunjukkan susunan kronologi Surah dalam al-Quran berdasarkan ketika ia diturunkan kepada nabi Muhammad (SAW). Perintah tersebut adalah subjek pendapat ulama dan beberapa Surah diturunkan dalam beberapa bahagian pada masa yang berbeza. Pesanan di sini adalah berdasarkan hasil kerja <link> Tanzil.net <\/link> .",
+    "revelation-order-disclaimer": "Pandangan ini menunjukkan susunan kronologi Surah dalam al-Quran berdasarkan apabila ia diturunkan kepada Nabi Muhammad <hover> ﷺ <\/hover> . Kronologi adalah subjek pendapat ulama dan beberapa Surah diturunkan dalam bahagian pada masa yang berbeza. Pesanan di sini adalah berdasarkan hasil kerja <link> Tanzil.net <\/link> . [Nota: susunan Mushaf yang disusun daripada al-Fatiha kepada al-Nas adalah perkara yang disepakati.]",
     "tab": {
         "bookmarks": "Penanda buku",
         "popular": "Popular"
@@ -13,7 +13,6 @@
         "trigger": "Akses pantas kepada apa sahaja"
     },
     "welcome": {
-        "body": "Derma bulanan membantu kami mengekalkan bakat terbaik dan mengekalkan operasi, supaya kami boleh kurang menumpukan pada pengumpulan dana dan lebih kepada mencipta impak.",
-        "title": "Derma kepada Quran.com hari ini"
+        "title": "Ia adalah Bulan Al-Quran! Bantu berjuta-juta pengguna mendapat akses kepada bimbingan al-Quran."
     }
 }

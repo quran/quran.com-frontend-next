@@ -40,6 +40,10 @@
             "on": "บน",
             "title": "เลื่อนอัตโนมัติ"
         },
+        "displaying": "กำลังแสดง",
+        "exp-tip": "<span>เปลี่ยนเนื้อหาที่แสดงภายใต้<\/span><br><\/br> <boldSpan>การตั้งค่า<\/boldSpan> > <boldSpan>ทีละคำ<\/boldSpan>",
+        "exp-tip-no-select": "<span>ทำเครื่องหมายที่ตัวเลือกการแสดงคำแนะนำเครื่องมือและเลือกตัวเลือก <br><\/br> การแปลและ\/หรือการทับศัพท์<\/span><br><\/br><span> ภายใต้ <\/span><boldSpan>การตั้งค่า<\/boldSpan> > <boldSpan>ทีละคำ<\/boldSpan><span>, เพื่อ<\/span><br><\/br> <span>เปิดใช้งานคุณลักษณะนี้.<\/span>",
+        "experience": "ประสบการณ์",
         "play": "เล่นเสียง",
         "playback-normal": "ปกติ",
         "playback-speed": "ความเร็วในการเล่น",
@@ -50,6 +54,7 @@
             "delay-verse": "ความล่าช้าระหว่างข้อ",
             "download": "ดาวน์โหลด",
             "full-surah": "ทั้งซูเราะห์",
+            "manage-repeat-settings": "จัดการการตั้งค่าซ้ำ",
             "mismatch": "คลิกที่ \"เริ่มใหม่\" หากคุณต้องการเล่น {{currentReadingChapter}} แทน",
             "pause": "หยุดชั่วคราว",
             "pause-audio": "หยุดเสียงชั่วคราว",
@@ -70,6 +75,7 @@
         },
         "repeat-moved": "การตั้งค่าซ้ำได้ย้ายไปที่เครื่องเล่นเสียงแล้ว คลิกที่ <0> <\/0> เพื่อเข้าถึง",
         "select-reciter": "เลือกผู้อ่าน",
+        "speed": "ความเร็ว",
         "title": "เครื่องเสียง"
     },
     "ayah": "อายา",
@@ -107,6 +113,7 @@
     },
     "default-description": "คัมภีร์กุรอานแปลเป็นหลายภาษาในอินเทอร์เฟซที่ง่ายและสะดวก",
     "developers": "นักพัฒนา",
+    "display": "แสดง",
     "donate": "บริจาค",
     "email-verification": {
         "check-spam": "ไม่ได้รับอีเมลยืนยัน? ตรวจสอบกล่องจดหมายสแปมของคุณ",
@@ -151,6 +158,10 @@
         "lastName": "นามสกุล"
     },
     "from": "จาก",
+    "fundraising-sticky-banner": {
+        "cta": "บริจาค",
+        "title": "สนับสนุน Quran.com เดือนรอมฎอนนี้"
+    },
     "fundraising": {
         "description": "การบริจาครายเดือนช่วยให้เราปรับปรุง Quran.com และรักษาให้คงอยู่ต่อไปได้ เมื่อเราไม่ต้องกังวลเรื่องการหาเงินทุน ดังนั้นเราจึงสามารถมุ่งเน้นที่การสร้างผลลัพธ์ได้มากขึ้น ",
         "learn-more": "เรียนรู้เพิ่มเติม",
@@ -159,6 +170,7 @@
     "help": "ช่วย",
     "hizb": "ฮิซบี",
     "home": "บ้าน",
+    "inline": "ในบรรทัด",
     "input": {
         "clear": "ชัดเจน"
     },
@@ -186,6 +198,7 @@
     "page": "หน้าหนังสือ",
     "pages": "หน้า",
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} จาก {{totalNumberOfResults}} ผลการค้นหา",
+    "pbuh": "ความจำเริญจากอัลลอฮฺจงมีแด่เขา",
     "popular-links": "ลิงค์ยอดนิยม",
     "popup": {
         "footnote": "การบริจาครายเดือนทำให้เราโฟกัสไปที่การระดมทุนน้อยลง",
@@ -206,7 +219,9 @@
         "reading": "การอ่าน",
         "translation": "การแปล"
     },
+    "recitation": "การบรรยาย",
     "reciter": "ผู้อ่าน",
+    "reciter-summary": "ผู้อ่านคำต่อคำ: <span> {{reciterName}} <\/span> คลิกที่คำเพื่อฟังการบรรยาย",
     "reciters": "ผู้อ่าน",
     "reflect": "สะท้อน",
     "remove": "ลบ",
@@ -293,6 +308,7 @@
     "to": "ถึง",
     "tooltip": "เคล็ดลับเครื่องมือ",
     "tooltip-trans-lang": "ภาษาเคล็ดลับเครื่องมือ",
+    "trans-lang": "ภาษาแปล",
     "translation": "การแปล",
     "translations": "คำแปล",
     "transliteration": "การทับศัพท์",
@@ -319,6 +335,7 @@
         "voice-search-powered-by": "ค้นหาด้วยเสียงขับเคลื่อนโดย"
     },
     "wbw": "คำต่อคำ",
+    "wbw-lang-summary": "แหล่งที่มาของการแปลคำต่อคำ: <link> {{source}} <\/link> แหล่งข้อมูลนี้ไม่ขึ้นกับการเลือกคำแปลร้อยกรอง",
     "wbw-trans-lang": "คำต่อคำ ภาษา",
     "wbw-translation": "การแปลคำต่อคำ",
     "wbw-transliteration": "คำต่อคำทับศัพท์",

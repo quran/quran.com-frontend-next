@@ -13,7 +13,7 @@ import { CollectionDetailSortOption } from 'types/CollectionSortOptions';
 
 const CollectionDetailPage = ({ chaptersData }) => {
   useRequireAuth();
-  const [sortBy, setSortBy] = useState(CollectionDetailSortOption.RecentlyAdded);
+  const [sortBy, setSortBy] = useState(CollectionDetailSortOption.VerseKey);
   const { t } = useTranslation();
 
   const onSortByChange = (newSortByVal) => {

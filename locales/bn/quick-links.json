@@ -1,9 +1,12 @@
 {
-  "ayat-ul-kursi": "Ayatul Kursi",
-  "yaseen": "Surah Yaseen",
-  "mulk": "Surah Al Mulk",
-  "rahman": "Surah Ar-Rahman",
-  "waqiah": "Surah Al Waqi'ah",
-  "kahf": "Surah Al Kahf",
-  "muzzammil": "Surah Al Muzzammil"
+    "about-quran": "কুরআন সম্পর্কে",
+    "ayat-ul-kursi": "Ayatul Kursi",
+    "kahf": "Surah Al Kahf",
+    "mulk": "Surah Al Mulk",
+    "muzzammil": "Surah Al Muzzammil",
+    "qr": "প্রতিফলনের রমজানে যোগ দিন",
+    "rahman": "Surah Ar-Rahman",
+    "sunnah": "সুন্নাহ সম্পর্কে আয়াত",
+    "waqiah": "Surah Al Waqi'ah",
+    "yaseen": "Surah Yaseen"
 }

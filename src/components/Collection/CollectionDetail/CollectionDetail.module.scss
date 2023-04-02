@@ -1,3 +1,5 @@
+@use "src/styles/breakpoints";
+
 .header {
   display: flex;
   justify-content: space-between;
@@ -40,4 +42,14 @@
 
 .backToCollectionButtonContainer {
   margin-block-start: var(--spacing-large);
+}
+
+.bookmarkLink {
+  text-decoration: underline;
+}
+
+.linkContainer {
+  @include breakpoints.smallerThanTablet {
+    margin-inline-start: var(--spacing-small);
+  }
 }

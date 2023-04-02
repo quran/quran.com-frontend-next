@@ -10,7 +10,7 @@ import Checkbox from '@/dls/Forms/Checkbox/Checkbox';
 import Modal from '@/dls/Modal/Modal';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import PlusIcon from '@/icons/plus.svg';
-import { logButtonClick } from '@/utils/eventLogger';
+import { logButtonClick, logEvent } from '@/utils/eventLogger';
 import { RuleType } from 'types/FieldRule';
 import { FormFieldType } from 'types/FormField';
 
@@ -27,6 +27,7 @@ type SaveToCollectionModalProps = {
   onNewCollectionCreated: (name: string) => Promise<void>;
   isAddingNewCollection?: boolean;
   onClose?: () => void;
+  verseKey: string;
 };
 
 const SaveToCollectionModal = ({
@@ -35,6 +36,7 @@ const SaveToCollectionModal = ({
   onCollectionToggled,
   onNewCollectionCreated,
   onClose,
+  verseKey,
 }: SaveToCollectionModalProps) => {
   const [isAddingNewCollection, setIsAddingNewCollection] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -65,8 +67,18 @@ const SaveToCollectionModal = ({
     logButtonClick('save_to_collection_add_new_collection');
   };
 
-  const handleCheckboxChange = (collection) => (checked) =>
+  const handleCheckboxChange = (collection: Collection) => (checked: boolean) => {
+    const eventData = {
+      verseKey,
+      collectionId: collection.id,
+    };
+    if (checked) {
+      logEvent('ayah_added_to_collection_checkbox', eventData);
+    } else {
+      logEvent('ayah_removed_from_collection_checkbox', eventData);
+    }
     onCollectionToggled(collection, checked);
+  };
 
   return (
     <Modal isOpen={isOpen} onClickOutside={onClose}>

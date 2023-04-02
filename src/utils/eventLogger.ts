@@ -19,8 +19,8 @@ export const logEvent = async (eventName: string, params?: { [key: string]: any 
  *
  * @param {string} buttonName
  */
-export const logButtonClick = (buttonName: string) => {
-  logEvent(`${buttonName}_clicked`);
+export const logButtonClick = (buttonName: string, params?: { [key: string]: any }) => {
+  logEvent(`${buttonName}_clicked`, params);
 };
 
 /**

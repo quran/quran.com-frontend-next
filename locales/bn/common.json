@@ -40,6 +40,10 @@
             "on": "চালু",
             "title": "অটো স্ক্রল"
         },
+        "displaying": "প্রদর্শন করা হচ্ছে",
+        "exp-tip": "<span>এর অধীনে প্রদর্শিত বিষয়বস্তু পরিবর্তন করুন<\/span><br><\/br> <boldSpan>শব্দ দ্বারা শব্দ<\/boldSpan> > <boldSpan>সেটিংস<\/boldSpan>",
+        "exp-tip-no-select": "<span>টুলটিপ প্রদর্শন বিকল্পে টিক দিন এব <br><\/br> অনুবাদ এবং\/অথবা প্রতিবর্ণীকরণ বিকল্প<\/span><br><\/br><span> সেটিংস <\/span><boldSpan>এর অধীনে নির্বাচন করুন<\/boldSpan> > <boldSpan>শব্দ দ্বারা শব্<\/boldSpan><span>,<\/span><br><\/br> <span>এই বৈশিষ্ট্যটি সক্ষম করতে৷.<\/span>",
+        "experience": "অভিজ্ঞতা",
         "play": "অডিও চালান",
         "playback-normal": "স্বাভাবিক",
         "playback-speed": "প্লেব্যাক গতি",
@@ -50,6 +54,7 @@
             "delay-verse": "আয়াতের মধ্যে বিলম্ব",
             "download": "ডাউনলোড করুন",
             "full-surah": "সম্পূর্ণ সূরা",
+            "manage-repeat-settings": "পুনরাবৃত্তি সেটিংস পরিচালনা করুন",
             "mismatch": "আপনি যদি পরিবর্তে {{currentReadingChapter}} খেলতে চান তাহলে \"Start Over\" এ ক্লিক করুন",
             "pause": "বিরতি",
             "pause-audio": "অডিও পজ করুন",
@@ -70,6 +75,7 @@
         },
         "repeat-moved": "পুনরাবৃত্তি সেটিংস অডিও প্লেয়ারে সরানো হয়েছে। সেগুলি অ্যাক্সেস করতে <0> <\/0>",
         "select-reciter": "আবৃত্তিকারী নির্বাচন করুন",
+        "speed": "গতি",
         "title": "শ্রুতি"
     },
     "ayah": "আয়াহ",
@@ -107,6 +113,7 @@
     },
     "default-description": "একটি সহজ এবং সহজ ইন্টারফেসে কুরআন বহু ভাষায় অনুবাদ করা হয়েছে",
     "developers": "বিকাশকারীরা",
+    "display": "প্রদর্শন",
     "donate": "দান করুন",
     "email-verification": {
         "check-spam": "যাচাইকরণ ইমেল পাননি? আপনার স্প্যাম ইনবক্স চেক করুন",
@@ -151,6 +158,10 @@
         "lastName": "নামের শেষাংশ"
     },
     "from": "থেকে",
+    "fundraising-sticky-banner": {
+        "cta": "দান করুন",
+        "title": "এই রমজানে কুরআন ডট কমকে সাপোর্ট করুন"
+    },
     "fundraising": {
         "description": "মাসিক অনুদান আমাদেরকে Quran.com এর উন্নতি করতে এবং ক্রিয়াকলাপকে টিকিয়ে রাখতে সাহায্য করে যাতে আমরা তহবিল সংগ্রহে কম এবং প্রভাব তৈরিতে আরও বেশি মনোযোগ দিই।",
         "learn-more": "আরও জানুন",
@@ -159,6 +170,7 @@
     "help": "সাহায্য",
     "hizb": "হিযব",
     "home": "বাড়ি",
+    "inline": "সঙ্গতিপূর্ণভাবে",
     "input": {
         "clear": "পরিষ্কার"
     },
@@ -186,6 +198,7 @@
     "page": "পাতা",
     "pages": "পাতা",
     "pagination-summary": "{{currentResultNumber}} totalNumberOfResults}}টি ফলাফলের মধ্যে {{totalNumberOfResults}} - {{endOfResultNumber}}",
+    "pbuh": "তার উপর আল্লাহর রহমত বর্ষিত হোক",
     "popular-links": "জনপ্রিয় লিঙ্ক",
     "popup": {
         "footnote": "মাসিক অনুদান আমাদের তহবিল সংগ্রহে কম ফোকাস করার অনুমতি দেয়",
@@ -206,7 +219,9 @@
         "reading": "পড়া",
         "translation": "অনুবাদ"
     },
+    "recitation": "আবৃত্তি",
     "reciter": "আবৃত্তিকারী",
+    "reciter-summary": "শব্দ দ্বারা শব্দ আবৃত্তিকারী: <span> {{reciterName}} <\/span> । একটি শব্দের আবৃত্তি শুনতে ক্লিক করুন।",
     "reciters": "আবৃত্তিকারী",
     "reflect": "প্রতিফলিত করা",
     "remove": "অপসারণ",
@@ -293,6 +308,7 @@
     "to": "প্রতি",
     "tooltip": "টুলটিপ",
     "tooltip-trans-lang": "টুলটিপ ভাষা",
+    "trans-lang": "অনুবাদের ভাষা",
     "translation": "অনুবাদ",
     "translations": "অনুবাদ",
     "transliteration": "ট্রান্সলিটারেশন",
@@ -319,6 +335,7 @@
         "voice-search-powered-by": "ভয়েস অনুসন্ধান দ্বারা চালিত"
     },
     "wbw": "শব্দ দ্বারা শব্দ",
+    "wbw-lang-summary": "শব্দ দ্বারা শব্দ অনুবাদ উৎস: <link> {{source}} <\/link> । এই উৎসটি শ্লোক অনুবাদ নির্বাচন থেকে স্বাধীন।",
     "wbw-trans-lang": "শব্দ দ্বারা শব্দ ভাষা",
     "wbw-translation": "শব্দ দ্বারা শব্দ অনুবাদ",
     "wbw-transliteration": "শব্দ দ্বারা শব্দ প্রতিবর্ণীকরণ",

@@ -40,6 +40,10 @@
             "on": "ہاں",
             "title": "آٹو سکرول"
         },
+        "displaying": "دکھانا",
+        "exp-tip": "<span>کے تحت دکھائے گئے مواد کو تبدیل کریں<\/span><br><\/br> <boldSpan>ترتیبات<\/boldSpan> > <boldSpan>لفظ بہ لفظ<\/boldSpan>",
+        "exp-tip-no-select": "<span>ٹول ٹپ ڈسپلے کے آپشن پر نشان لگائیں اور <br><\/br> ترجمہ اور\/یا نقل حرفی کا اختیار منتخب کریں<\/span><br><\/br><span> کے تحت <\/span><boldSpan>ترتیبات<\/boldSpan> > <boldSpan>لفظ بہ لفظ<\/boldSpan><span>, to<\/span><br><\/br> <span>اس خصوصیت کو فعال کرنے کے لیے.<\/span>",
+        "experience": "تجربہ",
         "play": "آڈیو چلائیں۔",
         "playback-normal": "نارمل",
         "playback-speed": "پلے بیک کی رفتار",
@@ -50,6 +54,7 @@
             "delay-verse": "آیت کے درمیان وقفہ",
             "download": "ڈاؤن لوڈ کریں",
             "full-surah": "مکمل سورہ",
+            "manage-repeat-settings": "دہرانے کی ترتیبات کا نظم کریں۔",
             "mismatch": "اگر آپ اس کے بجائے {{currentReadingChapter}} کھیلنا چاہتے ہیں تو \"Start Over\" پر کلک کریں۔",
             "pause": "توقف",
             "pause-audio": "آڈیو موقوف کریں۔",
@@ -70,6 +75,7 @@
         },
         "repeat-moved": "دہرائی جانے والی ترتیبات آڈیو پلیئر میں منتقل ہو گئی ہیں۔ ان تک رسائی کے لیے <0> <\/0> آئیکن پر کلک کریں۔",
         "select-reciter": "قاری منتخب کریں.",
+        "speed": "رفتار",
         "title": "آڈیو"
     },
     "ayah": "آیہ",
@@ -107,6 +113,7 @@
     },
     "default-description": "قرآن مجید کا ایک سادہ اور آسان انٹرفیس میں متعدد زبانوں میں ترجمہ کیا گیا ہے۔",
     "developers": "ڈویلپرز",
+    "display": "ڈسپلے",
     "donate": "عطیہ کریں۔",
     "email-verification": {
         "check-spam": "تصدیقی ای میل موصول نہیں ہوا؟ اپنا اسپام ان باکس چیک کریں۔",
@@ -151,6 +158,10 @@
         "lastName": "آخری نام"
     },
     "from": "سے",
+    "fundraising-sticky-banner": {
+        "cta": "عطیہ کریں۔",
+        "title": "اس رمضان میں Quran.com کو سپورٹ کریں۔"
+    },
     "fundraising": {
         "description": "ماہانہ عطیات قرآن ڈاٹ کام کو بہتر بنانے اور آپریشنز کو برقرار رکھنے میں ہماری مدد کرتے ہیں تاکہ ہم فنڈ ریزنگ پر کم اور اثر پیدا کرنے پر زیادہ توجہ دیں۔",
         "learn-more": "اورجانیے",
@@ -159,6 +170,7 @@
     "help": "مدد",
     "hizb": "حزب",
     "home": "گھر",
+    "inline": "ترتیب سے",
     "input": {
         "clear": "صاف"
     },
@@ -186,6 +198,7 @@
     "page": "صفحہ",
     "pages": "صفحات",
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} کی {{totalNumberOfResults}} تلاش کے نتائج",
+    "pbuh": "آپ پر اللہ کی رحمتیں نازل ہوں۔",
     "popular-links": "مقبول لنکس",
     "popup": {
         "footnote": "ماہانہ عطیات ہمیں فنڈ ریزنگ پر کم توجہ مرکوز کرنے کی اجازت دیتے ہیں۔",
@@ -206,7 +219,9 @@
         "reading": "پڑہائی",
         "translation": "ترجمہ"
     },
+    "recitation": "تلاوت",
     "reciter": "تلاوت کرنے والا",
+    "reciter-summary": "لفظ بہ لفظ تلاوت کرنے والا: <span> {{reciterName}} <\/span> ۔ کسی لفظ کی تلاوت سننے کے لیے اس پر کلک کریں۔",
     "reciters": "تلاوت کرنے والے",
     "reflect": "عکاسی کرنا",
     "remove": "دور",
@@ -293,6 +308,7 @@
     "to": "کو",
     "tooltip": "ٹول ٹِپ",
     "tooltip-trans-lang": "ٹول ٹپ کی زبان",
+    "trans-lang": "ترجمہ کی زبان",
     "translation": "ترجمہ",
     "translations": "ترجمے",
     "transliteration": "تلفظ",
@@ -319,6 +335,7 @@
         "voice-search-powered-by": "آواز کی تلاش بذریعہ تقویت یافتہ"
     },
     "wbw": "لفظ بہ لفظ",
+    "wbw-lang-summary": "لفظ بہ لفظ ترجمہ ماخذ: <link> {{source}} <\/link> ۔ یہ ماخذ آیت کے ترجمے کے انتخاب سے آزاد ہے۔",
     "wbw-trans-lang": "لفظ بہ لفظ زبان",
     "wbw-translation": "لفظ بہ لفظ ترجمہ",
     "wbw-transliteration": "لفظ بہ لفظ نقل",

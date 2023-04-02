@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 /* eslint-disable react/no-multi-comp */
 import React, { useState, useMemo } from 'react';
 
@@ -27,6 +28,10 @@ enum View {
 const JuzView = dynamic(() => import('./JuzView'), {
   ssr: false,
   loading: () => <ChapterAndJuzListSkeleton />,
+});
+
+const MobilePopover = dynamic(() => import('@/dls/Popover/HoverablePopover'), {
+  ssr: false,
 });
 
 const RevelationOrderView = dynamic(() => import('./RevelationOrderView'), {
@@ -116,20 +121,23 @@ const ChapterAndJuzList: React.FC<ChapterAndJuzListProps> = ({
         </div>
         {view === View.RevelationOrder && (
           <div className={styles.revelationOrderDisclaimer}>
-            {/* {t('home:revelation-order-disclaimer')} */}
-            <Trans
-              i18nKey="home:revelation-order-disclaimer"
-              components={{
-                link: (
-                  // eslint-disable-next-line jsx-a11y/control-has-associated-label, jsx-a11y/anchor-has-content
-                  <a
-                    href="https://tanzil.net/docs/revelation_order"
-                    target="_blank"
-                    rel="noreferrer"
-                  />
-                ),
-              }}
-            />
+            <span>
+              <Trans
+                i18nKey="home:revelation-order-disclaimer"
+                components={{
+                  link: (
+                    // eslint-disable-next-line jsx-a11y/control-has-associated-label, jsx-a11y/anchor-has-content
+                    <a
+                      href="https://tanzil.net/docs/revelation_order"
+                      target="_blank"
+                      rel="noreferrer"
+                    />
+                  ),
+                  // @ts-ignore
+                  hover: <MobilePopover isContainerSpan content={t('common:pbuh')} />,
+                }}
+              />
+            </span>
           </div>
         )}
       </div>
