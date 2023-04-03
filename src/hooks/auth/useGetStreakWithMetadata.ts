@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
-import useSWR from 'swr';
+import useSWRImmutable from 'swr/immutable';
 
 import { ReadingDay } from '@/types/auth/ReadingDay';
 import { StreakWithMetadataParams } from '@/types/auth/Streak';
@@ -51,7 +51,7 @@ const useGetStreakWithMetadata = () => {
   };
 
   // we don't pass the params to `makeStreakUrl` in the key so that we can invalidate the cache without getting the other params
-  const { data, isValidating, error } = useSWR(isLoggedIn() ? makeStreakUrl() : null, () =>
+  const { data, isValidating, error } = useSWRImmutable(isLoggedIn() ? makeStreakUrl() : null, () =>
     getStreakWithUserMetadata(params),
   );
 

@@ -15,25 +15,26 @@ enum DayState {
 
 interface Props {
   weekData: ReturnType<typeof useGetStreakWithMetadata>['weekData'];
+  readingGoal?: ReturnType<typeof useGetStreakWithMetadata>['readingGoal'];
 }
 
-const CurrentWeekProgress: React.FC<Props> = ({ weekData }) => {
+const CurrentWeekProgress: React.FC<Props> = ({ weekData, readingGoal }) => {
   const { days, readingDaysMap } = weekData;
 
   const getDayState = (day: typeof days[number]): DayState => {
     const readingDay = readingDaysMap[day.date];
     const hasRead = readingDay?.hasRead;
 
-    const isGoalDone = convertFractionToPercent(readingDay?.progress || 0) >= 100;
+    // if the user has a goal, we want to show a checked circle if the user has completed his goal for the day
+    // otherwise, we want to show a filled circle if the user has read at all for the day
+    const isGoalDone = readingGoal
+      ? convertFractionToPercent(readingDay?.progress || 0) >= 100
+      : hasRead;
 
-    if (day.current) {
-      if (isGoalDone) return DayState.Checked;
-      if (hasRead) return DayState.Filled;
-      return DayState.Stroked;
-    }
+    if (isGoalDone) return DayState.Checked;
+    if (hasRead) return DayState.Filled;
 
-    if (hasRead) return DayState.Checked;
-    return DayState.None;
+    return day.current ? DayState.Stroked : DayState.None;
   };
 
   return (

@@ -42,37 +42,24 @@ interface ReadingStreakProps {
 const ReadingStreak: React.FC<ReadingStreakProps> = ({ layout = ReadingStreakLayout.Home }) => {
   const { t, lang } = useTranslation('reading-goal');
   const chaptersData = useContext(DataContext);
+  const isQuranReader = layout === ReadingStreakLayout.QuranReader;
 
   const { isLoading, error, streak, readingGoal, weekData } = useGetStreakWithMetadata();
   const { recentlyReadVerseKeys } = useGetRecentlyReadVerseKeys();
-
-  const isQuranReader = layout === ReadingStreakLayout.QuranReader;
-  const nextVerseToRead = useMemo(() => {
-    const nextVerseToReadFromGoal = readingGoal?.progress?.nextVerseToRead;
-    return nextVerseToReadFromGoal ?? recentlyReadVerseKeys[0];
-  }, [readingGoal?.progress?.nextVerseToRead, recentlyReadVerseKeys]);
-
-  const localizedStreak = useMemo(() => {
-    return toLocalizedNumber(streak, lang);
-  }, [streak, lang]);
 
   const currentReadingDay = useMemo(() => {
     return weekData.readingDaysMap[weekData.days.find((d) => d.current)?.date];
   }, [weekData]);
 
-  const percent = useMemo(() => {
-    return convertFractionToPercent(currentReadingDay?.progress || 0);
-  }, [currentReadingDay]);
-
-  const localizedPercent = useMemo(() => {
-    return toLocalizedNumber(percent, lang);
-  }, [percent, lang]);
-
+  const nextVerseToRead = readingGoal?.progress?.nextVerseToRead ?? recentlyReadVerseKeys[0];
+  const localizedStreak = toLocalizedNumber(streak, lang);
+  const percent = convertFractionToPercent(currentReadingDay?.progress || 0);
+  const localizedPercent = toLocalizedNumber(percent, lang);
   const isGoalDone = percent >= 100;
   const hasUserReadToday = (isQuranReader && !isGoalDone) || currentReadingDay?.hasRead;
 
   const streakUI = (
-    <p
+    <div
       className={classNames(
         styles.streakTitle,
         !hasUserReadToday && streak > 0 && styles.streakTitleWarning,
@@ -80,7 +67,7 @@ const ReadingStreak: React.FC<ReadingStreakProps> = ({ layout = ReadingStreakLay
     >
       {t('streak', { days: localizedStreak })}
       <HelperTooltip>{t('streak-definition')}</HelperTooltip>
-    </p>
+    </div>
   );
 
   // eslint-disable-next-line react-func/max-lines-per-function
@@ -185,7 +172,7 @@ const ReadingStreak: React.FC<ReadingStreakProps> = ({ layout = ReadingStreakLay
             <span className={styles.streakSubtitle}>{t('reading-goal-label')}</span>
             {isLoading ? <Skeleton>{streakUI}</Skeleton> : streakUI}
           </div>
-          <CurrentWeekProgress weekData={weekData} />
+          <CurrentWeekProgress readingGoal={readingGoal} weekData={weekData} />
         </>
       );
     }
@@ -211,10 +198,15 @@ const ReadingStreak: React.FC<ReadingStreakProps> = ({ layout = ReadingStreakLay
           <p className={styles.streakTitle}>{t('goal-done.title')}</p>
           <p className={styles.dailyGoal}>{t('goal-done.description')}</p>
         </div>
-        <CurrentWeekProgress weekData={weekData} />
+        <CurrentWeekProgress readingGoal={readingGoal} weekData={weekData} />
       </>
     );
   };
+
+  // if this is QuranReader, don't render anything if there is no reading goal
+  if (isQuranReader && !readingGoal) {
+    return null;
+  }
 
   return (
     <div className={styles.wrapper}>
@@ -226,10 +218,10 @@ const ReadingStreak: React.FC<ReadingStreakProps> = ({ layout = ReadingStreakLay
 
       {!isQuranReader && (
         <div className={styles.goalContainer}>
-          {!readingGoal ? (
-            <Button href={getReadingGoalNavigationUrl()}>{t('create-reading-goal')}</Button>
-          ) : (
+          {readingGoal ? (
             getGoalStatus()
+          ) : (
+            <Button href={getReadingGoalNavigationUrl()}>{t('create-reading-goal')}</Button>
           )}
         </div>
       )}
