@@ -199,4 +199,13 @@ export default {
       },
     };
   },
+  27: (state) => {
+    return {
+      ...state,
+      welcomeMessage: {
+        ...state.welcomeMessage,
+        isVisible: true,
+      },
+    };
+  },
 };
