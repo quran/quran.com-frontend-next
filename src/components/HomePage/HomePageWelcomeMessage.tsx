@@ -13,7 +13,7 @@ import {
 } from '@/redux/slices/welcomeMessage';
 
 const HomePageWelcomeMessage = () => {
-  const { t } = useTranslation('home');
+  const { t } = useTranslation('common');
   const { isVisible } = useSelector(selectWelcomeMessage, shallowEqual);
   const dispatch = useDispatch();
 
@@ -23,7 +23,14 @@ const HomePageWelcomeMessage = () => {
 
   if (!isVisible) return null;
 
-  return <HomePageMessage title={t('welcome.title')} body={null} onClose={onClose} />;
+  return (
+    <HomePageMessage
+      title={t('fundraising.title')}
+      subtitle={t('fundraising.description')}
+      body={null}
+      onClose={onClose}
+    />
+  );
 };
 
 export default HomePageWelcomeMessage;
