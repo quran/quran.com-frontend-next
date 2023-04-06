@@ -2,19 +2,16 @@ import useTranslation from 'next-translate/useTranslation';
 
 import MoonIllustrationSVG from '../../../public/images/moon-illustration.svg';
 
+import DonateButton from './DonateButton';
 import styles from './FundraisingBanner.module.scss';
 
 import Button, { ButtonType, ButtonVariant } from '@/dls/Button/Button';
+import DonateButtonClickSource from '@/types/DonateButtonClickSource';
 import { makeDonateUrl } from '@/utils/apiPaths';
 import { logEvent } from '@/utils/eventLogger';
 
 const FundraisingBanner = () => {
   const { t } = useTranslation('common');
-  const onDonateClicked = () => {
-    logEvent('donate_button_clicked', {
-      source: 'sidebar_banner',
-    });
-  };
 
   const onLearnMoreClicked = () => {
     logEvent('learn_more_button_clicked', {
@@ -26,15 +23,7 @@ const FundraisingBanner = () => {
     <div className={styles.container}>
       <h1 className={styles.header}>{t('fundraising.title')}</h1>
       <p className={styles.paragraph}>{t('fundraising.description')}</p>
-      <Button
-        onClick={onDonateClicked}
-        isNewTab
-        href={makeDonateUrl(true)}
-        type={ButtonType.Warning}
-        className={styles.cta}
-      >
-        {t('donate')}
-      </Button>
+      <DonateButton source={DonateButtonClickSource.SIDEBAR_BANNER} />
       <Button
         href={makeDonateUrl()}
         onClick={onLearnMoreClicked}

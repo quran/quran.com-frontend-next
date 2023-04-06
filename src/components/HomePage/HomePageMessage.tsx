@@ -2,10 +2,13 @@ import React from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
+import DonateButton from '../Fundraising/DonateButton';
+
 import styles from './HomePageMessage.module.scss';
 
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import CloseIcon from '@/icons/close.svg';
+import DonateButtonClickSource from '@/types/DonateButtonClickSource';
 import { makeDonateUrl } from '@/utils/apiPaths';
 import { logEvent } from '@/utils/eventLogger';
 
@@ -36,26 +39,12 @@ const HomePageMessage = ({ title, subtitle, body, onClose }: HomePageMessageProp
         </Button>
       </div>
       <div className={styles.ctaContainer}>
+        <DonateButton source={DonateButtonClickSource.CTA_WELCOME_MESSAGE} />
         <Button
           isNewTab
-          href={makeDonateUrl(true)}
+          href={makeDonateUrl()}
           onClick={() => {
-            logEvent('donate_button_clicked', {
-              source: 'cta_welcome_message',
-            });
-          }}
-          className={styles.ctaPrimary}
-          size={ButtonSize.Small}
-          variant={ButtonVariant.Shadow}
-        >
-          {t('fundraising-sticky-banner.cta')}
-        </Button>
-
-        <Button
-          isNewTab
-          href="https://donate.quran.com"
-          onClick={() => {
-            logEvent('donate_button_clicked', {
+            logEvent('learn_more_button_clicked', {
               source: 'learn_more_welcome_message',
             });
           }}
