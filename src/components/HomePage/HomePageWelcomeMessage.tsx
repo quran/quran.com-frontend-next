@@ -11,6 +11,7 @@ import {
   selectWelcomeMessage,
   setIsVisible as setIsWelcomeMessageVisible,
 } from '@/redux/slices/welcomeMessage';
+import { logButtonClick } from '@/utils/eventLogger';
 
 const HomePageWelcomeMessage = () => {
   const { t } = useTranslation('common');
@@ -18,6 +19,7 @@ const HomePageWelcomeMessage = () => {
   const dispatch = useDispatch();
 
   const onClose = () => {
+    logButtonClick('homepage_welcome_message_close');
     dispatch(setIsWelcomeMessageVisible(false));
   };
 

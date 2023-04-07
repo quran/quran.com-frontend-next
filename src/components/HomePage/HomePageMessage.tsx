@@ -3,14 +3,14 @@ import React from 'react';
 import useTranslation from 'next-translate/useTranslation';
 
 import DonateButton from '../Fundraising/DonateButton';
+import LearnMoreButton from '../Fundraising/DonateButton/LearnMoreButton';
 
 import styles from './HomePageMessage.module.scss';
 
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import CloseIcon from '@/icons/close.svg';
 import DonateButtonClickSource from '@/types/DonateButtonClickSource';
-import { makeDonateUrl } from '@/utils/apiPaths';
-import { logEvent } from '@/utils/eventLogger';
+import LearnMoreClickSource from '@/types/LearnMoreClickSource';
 
 type HomePageMessageProps = {
   title?: string;
@@ -40,18 +40,7 @@ const HomePageMessage = ({ title, subtitle, body, onClose }: HomePageMessageProp
       </div>
       <div className={styles.ctaContainer}>
         <DonateButton source={DonateButtonClickSource.CTA_WELCOME_MESSAGE} />
-        <Button
-          isNewTab
-          href={makeDonateUrl()}
-          onClick={() => {
-            logEvent('learn_more_button_clicked', {
-              source: 'learn_more_welcome_message',
-            });
-          }}
-          variant={ButtonVariant.Compact}
-        >
-          {t('fundraising.learn-more')}
-        </Button>
+        <LearnMoreButton source={LearnMoreClickSource.LEARN_MORE_WELCOME_MESSAGE} />
       </div>
     </div>
   );
