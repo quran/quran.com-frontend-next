@@ -1,8 +1,8 @@
 {
     "awaiting-confirmation": "รอการยืนยัน",
-    "continue-apple": "ต่อด้วยApple",
+    "continue-apple": "ดำเนินการต่อด้วย Apple",
     "continue-email": "ดำเนินการต่อด้วยอีเมล",
-    "continue-facebook": "ต่อด้วยเฟสบุ๊ค",
+    "continue-facebook": "ดำเนินการต่อด้วย Facebook",
     "continue-google": "ดำเนินการต่อด้วย Google",
     "email-placeholder": "ที่อยู่อีเมล",
     "login-error": {
@@ -11,5 +11,5 @@
     },
     "login-title": "เข้าสู่ระบบ Quran.com",
     "other-options": "ตัวเลือกการเข้าสู่ระบบอื่น ๆ",
-    "verify-code": "ตรวจสอบว่ารหัสความปลอดภัยที่ให้มาตรงกับข้อความต่อไปนี้:"
+    "verify-code": "กรุณาตรวจสอบว่ารหัสความปลอดภัยตรงกับข้อความต่อไปนี้:"
 }

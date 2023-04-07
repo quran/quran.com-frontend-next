@@ -1,24 +1,24 @@
 {
-    "all-saved-verses": "โองการที่บันทึกไว้ทั้งหมด",
-    "alphabetical": "AZ",
+    "all-saved-verses": "อายะห์ที่บันทึกไว้ทั้งหมด",
+    "alphabetical": "A-Z",
     "back-to-collection-list": "กลับไปที่รายการคอลเลกชัน",
-    "collapse-all": "ยุบโองการทั้งหมด",
+    "collapse-all": "ย่ออายะห์ทั้งหมด",
     "collection-list-empty": "รายการคอลเลกชันว่างเปล่า คุณยังไม่ได้สร้างคอลเล็กชันใดๆ เลย",
-    "collections": "ของสะสม",
+    "collections": "คอลเลกชัน",
     "delete": "ลบ",
     "delete-bookmark": {
         "subtitle": "คุณแน่ใจหรือไม่ว่าต้องการลบ {{bookmarkName}} จาก {{collectionName}}",
-        "title": "ลบบุ๊คมาร์ค"
+        "title": "ลบบุ๊คมาร์ก"
     },
     "delete-collection": {
         "subtitle": "คุณแน่ใจหรือไม่ว่าต้องการลบ {{collectionName}}",
         "title": "ลบคอลเลกชัน"
     },
     "empty": "คอลเลกชันว่างเปล่า",
-    "expand-all": "ขยายความทุกข้อ",
-    "go-to-ayah": "ไปที่อายะ",
-    "load-more": "โหลดเพิ่ม",
-    "recently-added": "เพิ่มมาเร็ว ๆ นี้",
+    "expand-all": "ขยายอายะห์ทั้งหมด",
+    "go-to-ayah": "ไปที่อายะห์",
+    "load-more": "โหลดเพิ่มเติม",
+    "recently-added": "เพิ่มล่าสุด",
     "recently-updated": "อัพเดทล่าสุด",
-    "verse-key": "บทที่และหมายเลขกลอน"
+    "verse-key": "เลขที่ซุเราะห์และอายะห์"
 }
