@@ -1,12 +1,14 @@
 /* eslint-disable max-lines */
 import { configureRefreshFetch } from 'refresh-fetch';
 
-import { ReadingDay, UpdateReadingDayBody } from '@/types/auth/ReadingDay';
+import { getTimezone } from '../datetime';
+
+import { FilterReadingDaysParams, ReadingDay, UpdateReadingDayBody } from '@/types/auth/ReadingDay';
 import {
   CreateReadingGoalRequest,
   EstimatedReadingGoal,
   ReadingGoal,
-  ReadingGoalStatus,
+  UpdateReadingGoalRequest,
 } from '@/types/auth/ReadingGoal';
 import { StreakWithMetadataParams, StreakWithUserMetadata } from '@/types/auth/Streak';
 import {
@@ -38,8 +40,7 @@ import {
   makeDeleteBookmarkUrl,
   makeReadingDaysUrl,
   makeReadingGoalUrl,
-  makeReadingGoalProgressUrl,
-  makeAllReadingDaysUrl,
+  makeFilterReadingDaysUrl,
   makeEstimateReadingGoalUrl,
   makeStreakUrl,
 } from '@/utils/auth/apiPaths';
@@ -97,8 +98,25 @@ const deleteRequest = <T>(url: string, requestData?: RequestData): Promise<T> =>
     }),
   });
 
-export const getUserProfile = async (timezone?: string): Promise<UserProfile> =>
-  privateFetcher(makeUserProfileUrl(timezone));
+/**
+ * Execute a PATCH request.
+ *
+ * @param {string} url
+ * @param {RequestData} requestData
+ * @returns {Promise<T>}
+ */
+const patchRequest = <T>(url: string, requestData?: RequestData): Promise<T> =>
+  privateFetcher(url, {
+    method: 'PATCH',
+    ...(requestData && {
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(requestData),
+    }),
+  });
+
+export const getUserProfile = async (): Promise<UserProfile> =>
+  privateFetcher(makeUserProfileUrl({ timezone: getTimezone() }));
 
 export const refreshToken = async (): Promise<RefreshToken> =>
   privateFetcher(makeRefreshTokenUrl());
@@ -153,24 +171,30 @@ export const getBookmarkCollections = async (
 export const getReadingGoal = async (): Promise<{ data?: ReadingGoal }> =>
   privateFetcher(makeReadingGoalUrl());
 
-export const getReadingGoalProgress = async (
-  timezone: string,
-): Promise<{ data?: ReadingGoalStatus }> => privateFetcher(makeReadingGoalProgressUrl(timezone));
-
 export const addReadingGoal = async (
   data: CreateReadingGoalRequest,
 ): Promise<{ data?: ReadingGoal }> => postRequest(makeReadingGoalUrl(), data);
+
+export const updateReadingGoal = async (
+  data: UpdateReadingGoalRequest,
+): Promise<{ data?: ReadingGoal }> =>
+  patchRequest(
+    makeReadingGoalUrl({
+      timezone: getTimezone(),
+    }),
+    data,
+  );
 
 export const estimateReadingGoal = async (
   data: CreateReadingGoalRequest,
 ): Promise<{ data?: EstimatedReadingGoal }> => postRequest(makeEstimateReadingGoalUrl(), data);
 
-export const deleteReadingGoal = async (): Promise<void> => deleteRequest(makeReadingGoalUrl());
+export const deleteReadingGoal = async (): Promise<void> =>
+  deleteRequest(makeReadingGoalUrl({ timezone: getTimezone() }));
 
-export const getAllReadingDays = async (
-  from: string,
-  to: string,
-): Promise<{ data: ReadingDay[] }> => privateFetcher(makeAllReadingDaysUrl(from, to));
+export const filterReadingDays = async (
+  params: FilterReadingDaysParams,
+): Promise<{ data: ReadingDay[] }> => privateFetcher(makeFilterReadingDaysUrl(params));
 
 export const getReadingDay = async (timezone: string): Promise<{ data?: ReadingDay }> =>
   privateFetcher(makeReadingDaysUrl(timezone));

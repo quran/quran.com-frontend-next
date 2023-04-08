@@ -1,9 +1,10 @@
 /* eslint-disable max-lines */
-import { useState, useContext } from 'react';
+import { useState, useContext, useCallback } from 'react';
 
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
+import { useSWRConfig } from 'swr';
 
 import useReadingGoalReducer, { ReadingGoalPeriod } from './hooks/useReadingGoalReducer';
 import ReadingGoalExamplesTab from './ReadingGoalExamplesTab';
@@ -23,6 +24,7 @@ import ChevronRightIcon from '@/icons/chevron-right.svg';
 import layoutStyle from '@/pages/index.module.scss';
 import { CreateReadingGoalRequest, ReadingGoalType } from '@/types/auth/ReadingGoal';
 import { addReadingGoal } from '@/utils/auth/api';
+import { makeStreakUrl } from '@/utils/auth/apiPaths';
 import { isValidPageId, isValidVerseKey } from '@/utils/validator';
 
 const tabs = {
@@ -46,6 +48,16 @@ const ReadingGoalOnboarding: React.FC = () => {
   const [tabIdx, setTabIdx] = useState(0);
   const [state, dispatch] = useReadingGoalReducer();
   const toast = useToast();
+  const { cache } = useSWRConfig();
+
+  const addReadingGoalAndClearCache = useCallback(
+    async (data: CreateReadingGoalRequest) => {
+      await addReadingGoal(data).then(() => {
+        cache.delete(makeStreakUrl());
+      });
+    },
+    [cache],
+  );
 
   const Tab = tabsArray[tabIdx];
 
@@ -65,7 +77,7 @@ const ReadingGoalOnboarding: React.FC = () => {
     setLoading(true);
 
     try {
-      await addReadingGoal(data);
+      await addReadingGoalAndClearCache(data);
       toast(t('reading-goal:set-reading-goal-success'), {
         status: ToastStatus.Success,
       });

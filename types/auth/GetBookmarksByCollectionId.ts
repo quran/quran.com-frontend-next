@@ -13,7 +13,7 @@ export interface Data {
 }
 
 export interface Pagination {
-  startCursor: string;
-  endCursor: string;
+  startCursor?: string;
+  endCursor?: string;
   hasNextPage: boolean;
 }

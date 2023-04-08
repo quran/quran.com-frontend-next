@@ -156,3 +156,29 @@ export const dateToDateString = (date: Date): string => {
 
   return `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
 };
+
+/**
+ * Gets the full day name in a given locale.
+ * Example: `Monday` in `en`
+ *
+ * @param {Date} day
+ * @param {string} locale
+ * @returns {string}
+ *
+ */
+export const getFullDayName = (day: Date, locale: string): string => {
+  return day.toLocaleDateString(locale, { weekday: 'long' });
+};
+
+/**
+ * Gets the full month name in a given locale.
+ * Example: `April` in `en`
+ *
+ * @param {Date} month
+ * @param {string} locale
+ * @returns {string}
+ *
+ */
+export const getFullMonthName = (month: Date, locale: string): string => {
+  return month.toLocaleDateString(locale, { month: 'long' });
+};

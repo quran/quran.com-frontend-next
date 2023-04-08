@@ -13,6 +13,8 @@ export type CreateReadingGoalRequest = {
   duration?: number;
 };
 
+export type UpdateReadingGoalRequest = Partial<CreateReadingGoalRequest>;
+
 export enum ReadingGoalType {
   TIME = 'TIME',
   PAGES = 'PAGES',

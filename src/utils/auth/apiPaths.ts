@@ -1,5 +1,6 @@
 import stringify from '../qs-stringify';
 
+import { FilterReadingDaysParams } from '@/types/auth/ReadingDay';
 import { StreakWithMetadataParams } from '@/types/auth/Streak';
 import { getAuthApiPath } from '@/utils/url';
 import BookmarkType from 'types/BookmarkType';
@@ -11,8 +12,8 @@ const makeUrl = (url: string, parameters?: Record<string, unknown>): string => {
   return getAuthApiPath(`${url}${`?${stringify(parameters)}`}`);
 };
 
-export const makeUserProfileUrl = (timezone?: string): string =>
-  makeUrl('users/profile', timezone ? { timezone } : undefined);
+export const makeUserProfileUrl = (params: { timezone?: string } = {}): string =>
+  makeUrl('users/profile', params);
 
 export const makeCompleteSignupUrl = (): string => makeUrl('users/completeSignup');
 
@@ -103,10 +104,11 @@ export const makeReadingSessionsUrl = () => makeUrl('reading-sessions');
 export const makeReadingDaysUrl = (timezone?: string) =>
   makeUrl('reading-days', timezone ? { timezone } : undefined);
 
-export const makeAllReadingDaysUrl = (from: string, to: string) =>
-  makeUrl('reading-days/all', { from, to });
+export const makeFilterReadingDaysUrl = (params: FilterReadingDaysParams) =>
+  makeUrl('reading-days/filter', params);
 
-export const makeReadingGoalUrl = () => makeUrl('reading-goal');
+export const makeReadingGoalUrl = (params: { timezone?: string } = {}) =>
+  makeUrl('reading-goal', params);
 
 export const makeEstimateReadingGoalUrl = () => makeUrl('reading-goal/estimate');
 

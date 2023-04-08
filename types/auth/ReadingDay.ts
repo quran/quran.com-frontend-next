@@ -1,6 +1,8 @@
 export type ReadingDay = {
+  id: string;
   ranges: string[];
   pagesRead: number;
+  versesRead: number;
   secondsRead: number;
   progress: number;
   dailyTargetPages?: number;
@@ -14,4 +16,11 @@ export type UpdateReadingDayBody = {
   pages?: number;
   seconds?: number;
   timezone: string;
+};
+
+export type FilterReadingDaysParams = {
+  from: string;
+  to: string;
+  limit?: number;
+  cursor?: string;
 };

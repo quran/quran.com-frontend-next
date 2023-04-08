@@ -4,13 +4,13 @@ import Row from './Row';
 import styles from './Section.module.scss';
 import Title from './Title';
 
-import Separator, { SeparatorWeight } from '@/dls/Separator/Separator';
+import Separator from '@/dls/Separator/Separator';
 
 const Section = ({ children }) => (
   <div className={styles.section}>
     {children}
     <div className={styles.separator}>
-      <Separator weight={SeparatorWeight.Bold} />
+      <Separator />
     </div>
   </div>
 );

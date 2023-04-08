@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
 
 import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
+import { useSWRConfig } from 'swr';
 
 import styles from './DeleteReadingGoalModal.module.scss';
 
@@ -9,6 +10,7 @@ import Button, { ButtonType, ButtonVariant } from '@/dls/Button/Button';
 import Input from '@/dls/Forms/Input';
 import Modal from '@/dls/Modal/Modal';
 import { deleteReadingGoal } from '@/utils/auth/api';
+import { makeStreakUrl } from '@/utils/auth/apiPaths';
 import { logButtonClick } from '@/utils/eventLogger';
 
 type DeleteReadingGoalButtonProps = {
@@ -16,9 +18,16 @@ type DeleteReadingGoalButtonProps = {
 };
 
 const DeleteReadingGoalModal = ({ isDisabled }: DeleteReadingGoalButtonProps) => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('reading-goal');
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [confirmationText, setConfirmationText] = useState('');
+  const { cache } = useSWRConfig();
+
+  const deleteReadingGoalAndClearCache = useCallback(() => {
+    deleteReadingGoal().then(() => {
+      cache.delete(makeStreakUrl());
+    });
+  }, [cache]);
 
   const closeModal = () => {
     setConfirmationText('');
@@ -28,7 +37,7 @@ const DeleteReadingGoalModal = ({ isDisabled }: DeleteReadingGoalButtonProps) =>
   const onDeleteConfirmed = () => {
     logButtonClick('reading_goal_confirm_delete');
     closeModal();
-    deleteReadingGoal();
+    deleteReadingGoalAndClearCache();
   };
 
   const onDeleteAccountClicked = () => {
@@ -36,8 +45,8 @@ const DeleteReadingGoalModal = ({ isDisabled }: DeleteReadingGoalButtonProps) =>
     setIsModalVisible(true);
   };
 
-  const CONFIRMATION_TEXT = t('reading-goal:delete-confirmation.confirmation-text');
-  const canDeleteAccount = confirmationText.toLowerCase() === CONFIRMATION_TEXT.toLowerCase();
+  const CONFIRMATION_TEXT = t('delete-confirmation.confirmation-text');
+  const canDeleteGoal = confirmationText.toLowerCase() === CONFIRMATION_TEXT.toLowerCase();
 
   return (
     <>
@@ -47,13 +56,13 @@ const DeleteReadingGoalModal = ({ isDisabled }: DeleteReadingGoalButtonProps) =>
         onClick={onDeleteAccountClicked}
         isDisabled={isDisabled}
       >
-        {t('reading-goal:delete-account')}
+        {t('delete-goal')}
       </Button>
       <Modal isOpen={isModalVisible} onClickOutside={closeModal}>
         <Modal.Body>
           <Modal.Header>
-            <Modal.Title>{t('reading-goal:delete-confirmation.title')}</Modal.Title>
-            <Modal.Subtitle>{t('reading-goal:delete-confirmation.subtitle')}</Modal.Subtitle>
+            <Modal.Title>{t('delete-confirmation.title')}</Modal.Title>
+            <Modal.Subtitle>{t('delete-confirmation.subtitle')}</Modal.Subtitle>
 
             <p className={styles.instructionText}>
               <Trans
@@ -65,7 +74,7 @@ const DeleteReadingGoalModal = ({ isDisabled }: DeleteReadingGoalButtonProps) =>
               />
             </p>
             <Input
-              id="delete-account-confimation"
+              id="delete-goal-confimation"
               value={confirmationText}
               onChange={setConfirmationText}
               fixedWidth={false}
@@ -78,9 +87,9 @@ const DeleteReadingGoalModal = ({ isDisabled }: DeleteReadingGoalButtonProps) =>
               variant={ButtonVariant.Outlined}
               className={styles.deleteButton}
               onClick={onDeleteConfirmed}
-              isDisabled={!canDeleteAccount}
+              isDisabled={!canDeleteGoal}
             >
-              {t('reading-goal:delete-confirmation.action-text')}
+              {t('delete-confirmation.action-text')}
             </Button>
           </Modal.Footer>
         </Modal.Body>

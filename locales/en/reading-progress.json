@@ -1,0 +1,9 @@
+{
+  "header": "Your Progress",
+  "history": "Reading History",
+  "history-for": "Reading history for {{date}}",
+  "no-reading-history-for": "No reading history for {{date}}",
+  "manage-goal": "Manage your reading goal",
+  "you-read": "You read:",
+  "streak": "Streak"
+}

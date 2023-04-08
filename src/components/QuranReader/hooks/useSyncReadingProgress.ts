@@ -17,7 +17,7 @@ import { getTimezone } from '@/utils/datetime';
 import mergeVerseKeys from '@/utils/mergeVerseKeys';
 import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
 
-const READING_DAY_SYNC_TIME_MS = 15000; // 15 seconds
+const READING_DAY_SYNC_TIME_MS = 5000; // 5 seconds
 const READING_SESSION_DEBOUNCE_WAIT_TIME = 2000; // 2 seconds
 
 interface UseSyncReadingProgressProps {

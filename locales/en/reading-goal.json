@@ -81,6 +81,7 @@
     "remaining-days_one": "{{days}} day remaining",
     "remaining-days_other": "{{days}} days remaining",
     "set-reading-goal-success": "Your reading goal has been set successfully.",
+    "update-reading-goal-success": "Your reading goal has been updated successfully.",
     "starting-chapter": "Starting Surah",
     "starting-verse": "Starting Ayah",
     "streak": "{{days}} day streak",
@@ -96,5 +97,14 @@
     "x-pages_one": "{{pages}} page",
     "x-pages_other": "{{pages}} pages",
     "x-seconds_one": "{{seconds}} second",
-    "x-seconds_other": "{{seconds}} seconds"
+    "x-seconds_other": "{{seconds}} seconds",
+    "delete-goal": "Delete Goal",
+    "edit-goal": "Edit Goal",
+    "delete-confirmation": {
+        "action-text": "I understand the consequence, delete my goal",
+        "confirmation-text": "delete my goal",
+        "instruction-text": "Please type <strong>{{text}}<\/strong> to confirm",
+        "subtitle": "This action cannot be undone. This will permanently delete your goal, and we'll stop tracking your progress.",
+        "title": "Are you absolutely sure?"
+    }
 }

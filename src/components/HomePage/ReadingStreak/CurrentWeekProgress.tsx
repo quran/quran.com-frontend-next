@@ -16,9 +16,16 @@ enum DayState {
 interface Props {
   weekData: ReturnType<typeof useGetStreakWithMetadata>['weekData'];
   readingGoal?: ReturnType<typeof useGetStreakWithMetadata>['readingGoal'];
+  shouldHideOnTablet?: boolean;
+  fixedWidth?: boolean;
 }
 
-const CurrentWeekProgress: React.FC<Props> = ({ weekData, readingGoal }) => {
+const CurrentWeekProgress: React.FC<Props> = ({
+  weekData,
+  readingGoal,
+  shouldHideOnTablet = true,
+  fixedWidth = true,
+}) => {
   const { days, readingDaysMap } = weekData;
 
   const getDayState = (day: typeof days[number]): DayState => {
@@ -38,8 +45,13 @@ const CurrentWeekProgress: React.FC<Props> = ({ weekData, readingGoal }) => {
   };
 
   return (
-    <div className={styles.week}>
-      {days.map((day, idx) => {
+    <div
+      className={classNames(styles.week, {
+        [styles.hideOnTablet]: shouldHideOnTablet,
+        [styles.fixedWidth]: fixedWidth,
+      })}
+    >
+      {days.map((day) => {
         const dayState = getDayState(day);
 
         return (
@@ -54,7 +66,7 @@ const CurrentWeekProgress: React.FC<Props> = ({ weekData, readingGoal }) => {
               >
                 {dayState === DayState.Checked ? <CheckIcon /> : null}
               </div>
-              {idx !== days.length - 1 && <div className={styles.dayDivider} />}
+              <div className={styles.dayDivider} />
             </div>
           </div>
         );
