@@ -13,12 +13,15 @@ interface Props {
   name: string;
   type: SearchNavigationType;
   navigationKey: string;
+  isVoiceSearch?: boolean;
 }
 
-const CommandPrefix: React.FC<Props> = ({ name, type, navigationKey }) => {
+const CommandPrefix: React.FC<Props> = ({ name, type, navigationKey, isVoiceSearch }) => {
   const { t, lang } = useTranslation('common');
   const chapterData = useContext(DataContext);
   const getName = () => {
+    if (isVoiceSearch) return name;
+
     if (type === SearchNavigationType.SEARCH_PAGE) {
       return t('search-for', {
         searchQuery: name,

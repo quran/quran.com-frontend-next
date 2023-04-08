@@ -23,7 +23,7 @@ export enum Source {
 }
 
 interface Props {
-  result: SearchResultItem;
+  result: Omit<SearchResultItem, 'kalimatData'>;
   source: Source;
 }
 
