@@ -26,7 +26,6 @@ import { getAllChaptersData } from '@/utils/chapter';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl, getProfileNavigationUrl } from '@/utils/navigation';
-import DataContext from 'src/contexts/DataContext';
 import Error from 'src/pages/_error';
 import ChaptersData from 'types/ChaptersData';
 
@@ -36,7 +35,7 @@ interface Props {
 
 const nameSample = 'Mohammad Ali';
 const emailSample = 'mohammadali@quran.com';
-const ProfilePage: NextPage<Props> = ({ chaptersData }) => {
+const ProfilePage: NextPage<Props> = () => {
   const dispatch = useDispatch();
   const { t, lang } = useTranslation();
   const router = useRouter();
@@ -92,7 +91,7 @@ const ProfilePage: NextPage<Props> = ({ chaptersData }) => {
   );
 
   return (
-    <DataContext.Provider value={chaptersData}>
+    <>
       <NextSeoWrapper
         title={t('common:profile')}
         url={getCanonicalUrl(lang, getProfileNavigationUrl())}
@@ -155,7 +154,7 @@ const ProfilePage: NextPage<Props> = ({ chaptersData }) => {
           </div>
         </div>
       </div>
-    </DataContext.Provider>
+    </>
   );
 };
 

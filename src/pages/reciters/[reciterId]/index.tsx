@@ -8,6 +8,7 @@ import useTranslation from 'next-translate/useTranslation';
 import layoutStyle from '../../index.module.scss';
 import pageStyle from '../reciterPage.module.scss';
 
+import { getReciterData } from '@/api';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import ChaptersList from '@/components/Reciter/ChaptersList';
 import ReciterInfo from '@/components/Reciter/ReciterInfo';
@@ -18,8 +19,6 @@ import { getAllChaptersData } from '@/utils/chapter';
 import { logEmptySearchResults } from '@/utils/eventLogger';
 import { getLanguageAlternates, toLocalizedNumber } from '@/utils/locale';
 import { getCanonicalUrl, getReciterNavigationUrl } from '@/utils/navigation';
-import { getReciterData } from 'src/api';
-import DataContext from 'src/contexts/DataContext';
 import Chapter from 'types/Chapter';
 import ChaptersData from 'types/ChaptersData';
 import Reciter from 'types/Reciter';
@@ -69,7 +68,7 @@ const ReciterPage = ({ selectedReciter, chaptersData }: ReciterPageProps) => {
   const navigationUrl = getReciterNavigationUrl(selectedReciter.id.toString());
 
   return (
-    <DataContext.Provider value={chaptersData}>
+    <>
       <NextSeoWrapper
         title={selectedReciter?.translatedName?.name}
         canonical={getCanonicalUrl(lang, navigationUrl)}
@@ -100,7 +99,7 @@ const ReciterPage = ({ selectedReciter, chaptersData }: ReciterPageProps) => {
           <ChaptersList filteredChapters={filteredChapters} selectedReciter={selectedReciter} />
         </div>
       </div>
-    </DataContext.Provider>
+    </>
   );
 };
 
