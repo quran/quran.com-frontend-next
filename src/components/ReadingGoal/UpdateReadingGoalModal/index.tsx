@@ -62,7 +62,7 @@ const UpdateReadingGoalModal = ({ isDisabled, readingGoal }: UpdateReadingGoalBu
   const [seconds, setSeconds] = useState(getSeconds(readingGoal));
   const [range, setRange] = useState(getRange(readingGoal));
 
-  const [duration, setDuration] = useState(readingGoal.duration);
+  const [duration, setDuration] = useState(readingGoal.duration || 0);
   const toast = useToast();
 
   const { mutate } = useSWRConfig();
