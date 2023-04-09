@@ -21,7 +21,7 @@ const ProgressPageGoalWidget = ({
   readingGoal,
 }: ProgressPageGoalWidgetProps) => {
   const { t, lang } = useTranslation('reading-progress');
-  const percent = readingGoal?.progress?.percent || 0;
+  const percent = Math.min(readingGoal?.progress?.percent || 0, 100);
   const localizedPercent = toLocalizedNumber(percent, lang);
 
   if (!readingGoal) {

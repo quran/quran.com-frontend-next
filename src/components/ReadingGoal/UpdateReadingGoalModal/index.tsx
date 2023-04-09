@@ -65,15 +65,15 @@ const UpdateReadingGoalModal = ({ isDisabled, readingGoal }: UpdateReadingGoalBu
   const [duration, setDuration] = useState(readingGoal.duration);
   const toast = useToast();
 
-  const { cache } = useSWRConfig();
+  const { mutate } = useSWRConfig();
 
   const updateReadingGoalAndClearCache = useCallback(
     async (data: UpdateReadingGoalRequest) => {
       await updateReadingGoal(data).then(() => {
-        cache.delete(makeStreakUrl());
+        mutate(makeStreakUrl());
       });
     },
-    [cache],
+    [mutate],
   );
 
   const closeModal = () => {

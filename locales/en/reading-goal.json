@@ -82,6 +82,7 @@
     "remaining-days_other": "{{days}} days remaining",
     "set-reading-goal-success": "Your reading goal has been set successfully.",
     "update-reading-goal-success": "Your reading goal has been updated successfully.",
+    "delete-reading-goal-success": "Your reading goal has been deleted successfully.",
     "starting-chapter": "Starting Surah",
     "starting-verse": "Starting Ayah",
     "streak": "{{days}} day streak",

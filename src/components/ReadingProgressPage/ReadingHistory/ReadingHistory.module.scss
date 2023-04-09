@@ -36,7 +36,7 @@
   .backButton {
     position: absolute;
     pointer-events: initial;
-    left: 0;
+    inset-inline-start: 0;
   }
 }
 
@@ -133,6 +133,12 @@
       display: flex;
       align-items: center;
       gap: var(--spacing-small);
+
+      [dir="rtl"] & {
+        svg {
+          transform: rotate(180deg);
+        }
+      }
     }
   }
 }

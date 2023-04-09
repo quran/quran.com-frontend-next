@@ -39,14 +39,17 @@ const ReadingGoalWeekPreviewTab: React.FC<ReadingGoalTabProps> = ({ state, nav }
   const week = useMemo(() => {
     // get an array of today + next 6 days
     const days: Date[] = [];
-    for (let i = 0; i < 7; i += 1) {
+
+    const total = state.period === ReadingGoalPeriod.Continuous ? state.duration : 7;
+
+    for (let i = 0; i < total; i += 1) {
       const date = new Date();
       date.setDate(date.getDate() + i);
       days.push(date);
     }
 
     return days;
-  }, []);
+  }, [state.duration, state.period]);
 
   const { data, isValidating } = useSWR(
     makeEstimateReadingGoalUrl(),
@@ -55,7 +58,6 @@ const ReadingGoalWeekPreviewTab: React.FC<ReadingGoalTabProps> = ({ state, nav }
       revalidateOnMount: true,
     },
   );
-  const isLoading = !data && isValidating;
 
   const getDailyAmount = (idx: number) => {
     if (data.data.type === ReadingGoalType.RANGE) {
@@ -98,18 +100,24 @@ const ReadingGoalWeekPreviewTab: React.FC<ReadingGoalTabProps> = ({ state, nav }
         <p className={styles.subtitle}>{t('preview-schedule.description')}</p>
       </div>
       <ol className={classNames(styles.optionsContainer, styles.previewWrapper)}>
-        {week.map((day, idx) => (
-          <li key={day.getDate()} className={styles.dayPreview}>
-            <h3>{t('day-x', { day: idx + 1 })}</h3>
-            {isLoading ? (
-              <div>
-                <Spinner />
-              </div>
-            ) : (
-              <p>{getDailyAmount(idx)}</p>
-            )}
-          </li>
-        ))}
+        {/* eslint-disable-next-line @typescript-eslint/naming-convention */}
+        {(data?.data && 'ranges' in data.data ? data.data.ranges : week).map((_, idx: number) => {
+          const day = week[idx];
+
+          return (
+            <li key={day.getDate()} className={styles.dayPreview}>
+              <h3>{t('day-x', { day: idx + 1 })}</h3>
+
+              {isValidating ? (
+                <div>
+                  <Spinner />
+                </div>
+              ) : (
+                <p>{getDailyAmount(idx)}</p>
+              )}
+            </li>
+          );
+        })}
         {nav}
       </ol>
     </>

@@ -37,7 +37,7 @@ const useSyncReadingProgress = ({ isReadingPreference }: UseSyncReadingProgressP
   // it is also a Set not an array to avoid duplicate verse keys
   const verseQueue = useRef<Set<string>>(new Set());
   const dispatch = useDispatch();
-  const { cache } = useSWRConfig();
+  const { cache, mutate } = useSWRConfig();
 
   const addReadingSessionAndClearCache = useCallback(
     (chapterNumber, verseNumber) => {
@@ -57,10 +57,10 @@ const useSyncReadingProgress = ({ isReadingPreference }: UseSyncReadingProgressP
   const updateReadingDayAndClearCache = useCallback(
     (body: UpdateReadingDayBody) => {
       updateReadingDay(body).then(() => {
-        cache.delete(makeStreakUrl());
+        mutate(makeStreakUrl());
       });
     },
-    [cache],
+    [mutate],
   );
 
   // this function will be called when an element is triggered by the intersection observer

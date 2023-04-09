@@ -9,6 +9,7 @@ import styles from './DeleteReadingGoalModal.module.scss';
 import Button, { ButtonType, ButtonVariant } from '@/dls/Button/Button';
 import Input from '@/dls/Forms/Input';
 import Modal from '@/dls/Modal/Modal';
+import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import { deleteReadingGoal } from '@/utils/auth/api';
 import { makeStreakUrl } from '@/utils/auth/apiPaths';
 import { logButtonClick } from '@/utils/eventLogger';
@@ -21,23 +22,27 @@ const DeleteReadingGoalModal = ({ isDisabled }: DeleteReadingGoalButtonProps) =>
   const { t } = useTranslation('reading-goal');
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [confirmationText, setConfirmationText] = useState('');
-  const { cache } = useSWRConfig();
+  const { mutate } = useSWRConfig();
+  const toast = useToast();
 
   const deleteReadingGoalAndClearCache = useCallback(() => {
-    deleteReadingGoal().then(() => {
-      cache.delete(makeStreakUrl());
+    return deleteReadingGoal().then(() => {
+      mutate(makeStreakUrl());
     });
-  }, [cache]);
+  }, [mutate]);
 
   const closeModal = () => {
     setConfirmationText('');
     setIsModalVisible(false);
   };
 
-  const onDeleteConfirmed = () => {
+  const onDeleteConfirmed = async () => {
     logButtonClick('reading_goal_confirm_delete');
+    await deleteReadingGoalAndClearCache();
+    toast(t('delete-reading-goal-success'), {
+      status: ToastStatus.Success,
+    });
     closeModal();
-    deleteReadingGoalAndClearCache();
   };
 
   const onDeleteAccountClicked = () => {
