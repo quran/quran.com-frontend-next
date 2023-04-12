@@ -1,10 +1,16 @@
+import { useEffect } from 'react';
+
+import classNames from 'classnames';
 import { NextPage, GetStaticProps } from 'next';
 import useTranslation from 'next-translate/useTranslation';
+import { useRouter } from 'next/router';
 
 import layoutStyle from '../index.module.scss';
 
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import ReadingGoalOnboarding from '@/components/ReadingGoalPage';
+import Spinner from '@/dls/Spinner/Spinner';
+import useGetStreakWithMetadata from '@/hooks/auth/useGetStreakWithMetadata';
 import useRequireAuth from '@/hooks/auth/useRequireAuth';
 import { getAllChaptersData } from '@/utils/chapter';
 import { getLanguageAlternates } from '@/utils/locale';
@@ -15,6 +21,17 @@ const ReadingGoalPage: NextPage = () => {
   useRequireAuth();
 
   const { t, lang } = useTranslation('reading-goal');
+  const router = useRouter();
+
+  // if the user already has a goal, redirect them to the home page
+  const { readingGoal, isLoading: isLoadingReadingGoal } = useGetStreakWithMetadata();
+  const isLoading = isLoadingReadingGoal || !router.isReady || !!readingGoal;
+
+  useEffect(() => {
+    if (readingGoal) {
+      router.push('/');
+    }
+  }, [router, readingGoal]);
 
   return (
     <>
@@ -25,9 +42,10 @@ const ReadingGoalPage: NextPage = () => {
         nofollow
         noindex
       />
+
       <div className={layoutStyle.pageContainer}>
-        <div className={layoutStyle.flow}>
-          <ReadingGoalOnboarding />
+        <div className={classNames(layoutStyle.flow, isLoading && layoutStyle.loadingContainer)}>
+          {isLoading ? <Spinner /> : <ReadingGoalOnboarding />}
         </div>
       </div>
     </>

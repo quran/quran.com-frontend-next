@@ -15,6 +15,7 @@ import useGetRecentlyReadVerseKeys from '@/hooks/auth/useGetRecentlyReadVerseKey
 import useGetStreakWithMetadata from '@/hooks/auth/useGetStreakWithMetadata';
 import MoonIllustrationSVG from '@/public/images/moon-illustration.svg';
 import { isLoggedIn } from '@/utils/auth/login';
+import { logButtonClick } from '@/utils/eventLogger';
 import { toLocalizedNumber } from '@/utils/locale';
 import {
   getChapterWithStartingVerseUrl,
@@ -63,10 +64,27 @@ const ReadingStreak: React.FC<ReadingStreakProps> = ({ layout = ReadingStreakLay
     if (!readingGoal) return null;
 
     if (percent < 100) {
-      return <ReadingGoalAmount currentReadingDay={currentReadingDay} readingGoal={readingGoal} />;
+      return (
+        <ReadingGoalAmount
+          currentReadingDay={currentReadingDay}
+          readingGoal={readingGoal}
+          context={isQuranReader ? 'quran_reader' : 'home_page'}
+        />
+      );
     }
 
     return t('progress.complete');
+  };
+
+  const onContinueReadingClick = () => {
+    logButtonClick('homepage_streak_widget_continue_reading', {
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      verse_key: nextVerseToRead,
+    });
+  };
+
+  const onViewProgressClick = () => {
+    logButtonClick('homepage_streak_widget_view_progress');
   };
 
   if (error || !isLoggedIn()) {
@@ -91,7 +109,11 @@ const ReadingStreak: React.FC<ReadingStreakProps> = ({ layout = ReadingStreakLay
         <div className={styles.dailyProgressContainer}>
           <p className={styles.streakTitle}>{t('daily-progress')}</p>
           <p className={styles.dailyGoal}>
-            <ReadingGoalAmount currentReadingDay={currentReadingDay} readingGoal={readingGoal} />
+            <ReadingGoalAmount
+              currentReadingDay={currentReadingDay}
+              readingGoal={readingGoal}
+              context={isQuranReader ? 'quran_reader' : 'home_page'}
+            />
           </p>
           <div className={styles.progressContainer}>
             <Progress value={percent} />
@@ -143,10 +165,15 @@ const ReadingStreak: React.FC<ReadingStreakProps> = ({ layout = ReadingStreakLay
           <Button
             href={nextVerseToRead ? getChapterWithStartingVerseUrl(nextVerseToRead) : undefined}
             isDisabled={!nextVerseToRead}
+            onClick={onContinueReadingClick}
           >
             {t('continue-reading')}
           </Button>
-          <Button variant={ButtonVariant.Ghost} href={getReadingGoalProgressNavigationUrl()}>
+          <Button
+            variant={ButtonVariant.Ghost}
+            href={getReadingGoalProgressNavigationUrl()}
+            onClick={onViewProgressClick}
+          >
             {t('view-progress')}
           </Button>
         </div>

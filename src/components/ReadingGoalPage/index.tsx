@@ -25,11 +25,12 @@ import layoutStyle from '@/pages/index.module.scss';
 import { CreateReadingGoalRequest, ReadingGoalType } from '@/types/auth/ReadingGoal';
 import { addReadingGoal } from '@/utils/auth/api';
 import { makeStreakUrl } from '@/utils/auth/apiPaths';
+import { logButtonClick, logFormSubmission } from '@/utils/eventLogger';
 import { isValidPageId, isValidVerseKey } from '@/utils/validator';
 
 const tabs = {
   examples: ReadingGoalExamplesTab,
-  time: ReadingGoalTimeTab,
+  continuity: ReadingGoalTimeTab,
   type: ReadingGoalTypeTab,
   amount: ReadingGoalTargetAmountTab,
   preview: ReadingGoalWeekPreviewTab,
@@ -39,6 +40,10 @@ const tabsArray = (Object.keys(tabs) as (keyof typeof tabs)[]).map((key) => ({
   key,
   Component: tabs[key],
 }));
+
+const logTabClick = (tab: typeof tabsArray[number]['key'], event: string) => {
+  logButtonClick(`create_goal_${tab}_tab_${event}`);
+};
 
 const ReadingGoalOnboarding: React.FC = () => {
   const { t } = useTranslation();
@@ -97,20 +102,27 @@ const ReadingGoalOnboarding: React.FC = () => {
   const onPrev = () => {
     if (tabIdx !== 0 && state.exampleKey !== 'custom') {
       setTabIdx(0);
+      logTabClick(Tab.key, 'previous');
     } else {
       setTabIdx((prevIdx) => prevIdx - 1);
+      logTabClick(Tab.key, 'previous');
     }
   };
 
   const onNext = () => {
     if (!isPreviewTab) {
       if (tabIdx === 0 && state.exampleKey !== 'custom') {
+        // if the user selected an example, skip to the preview tab
         setTabIdx(tabsArray.length - 1);
       } else {
+        // otherwise, go to the next tab
         setTabIdx((prevIdx) => prevIdx + 1);
+        // logTabClick(Tab.key, 'custom');
       }
+      logTabClick(Tab.key, 'next');
     } else {
       onSubmit();
+      logFormSubmission('create_goal');
     }
   };
 
@@ -163,6 +175,7 @@ const ReadingGoalOnboarding: React.FC = () => {
             onTabChange={setTabIdx}
             state={state}
             dispatch={dispatch}
+            logTabEvent={(event: string) => logTabClick(Tab.key, event)}
             nav={
               <div className={styles.navigationContainer}>
                 {tabIdx > 0 && (

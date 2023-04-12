@@ -5,6 +5,7 @@ import CurrentWeekProgress from '../HomePage/ReadingStreak/CurrentWeekProgress';
 
 import styles from './ReadingProgressPage.module.scss';
 
+import Skeleton from '@/dls/Skeleton/Skeleton';
 import { StreakWithMetadata } from '@/hooks/auth/useGetStreakWithMetadata';
 import { toLocalizedNumber } from '@/utils/locale';
 
@@ -12,18 +13,20 @@ interface ProgressPageStreakWidgetProps {
   weekData: StreakWithMetadata['weekData'];
   readingGoal?: StreakWithMetadata['readingGoal'];
   streak: number;
+  isLoading: boolean;
 }
 
 const ProgressPageStreakWidget = ({
   weekData,
   readingGoal,
   streak,
+  isLoading,
 }: ProgressPageStreakWidgetProps) => {
   const { t, lang } = useTranslation('reading-progress');
   const localizedStreak = toLocalizedNumber(streak, lang);
 
-  return (
-    <div className={classNames(styles.widget, styles.streakWidget)}>
+  const widget = (
+    <>
       <div className={styles.streakContainer}>
         <h2>{t('streak')}</h2>
         <p>{t('reading-goal:x-days', { days: localizedStreak, count: streak })}</p>
@@ -35,8 +38,11 @@ const ProgressPageStreakWidget = ({
         shouldHideOnTablet={false}
         fixedWidth={false}
       />
-    </div>
+    </>
   );
+
+  const Wrapper = isLoading ? Skeleton : 'div';
+  return <Wrapper className={classNames(styles.widget, styles.streakWidget)}>{widget}</Wrapper>;
 };
 
 export default ProgressPageStreakWidget;

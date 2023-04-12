@@ -4,7 +4,12 @@ import { readingGoalExamples, ReadingGoalTabProps } from './hooks/useReadingGoal
 import OptionButton from './OptionButton';
 import styles from './ReadingGoalPage.module.scss';
 
-const ReadingGoalExamplesTab: React.FC<ReadingGoalTabProps> = ({ state, dispatch, nav }) => {
+const ReadingGoalExamplesTab: React.FC<ReadingGoalTabProps> = ({
+  state,
+  dispatch,
+  nav,
+  logTabEvent,
+}) => {
   const { t } = useTranslation('reading-goal');
 
   return (
@@ -20,6 +25,8 @@ const ReadingGoalExamplesTab: React.FC<ReadingGoalTabProps> = ({ state, dispatch
             icon={example.icon}
             onSelect={() => {
               dispatch({ type: 'SET_EXAMPLE', payload: { exampleKey: example.i18nKey } });
+
+              logTabEvent(example.i18nKey === 'time' ? '10_mins' : example.i18nKey);
             }}
             selected={state.exampleKey === example.i18nKey}
             option={t(`examples.${example.i18nKey}.title`)}

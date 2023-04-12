@@ -173,7 +173,13 @@ export const getReadingGoal = async (): Promise<{ data?: ReadingGoal }> =>
 
 export const addReadingGoal = async (
   data: CreateReadingGoalRequest,
-): Promise<{ data?: ReadingGoal }> => postRequest(makeReadingGoalUrl(), data);
+): Promise<{ data?: ReadingGoal }> =>
+  postRequest(
+    makeReadingGoalUrl({
+      timezone: getTimezone(),
+    }),
+    data,
+  );
 
 export const updateReadingGoal = async (
   data: UpdateReadingGoalRequest,

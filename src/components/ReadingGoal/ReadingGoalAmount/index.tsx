@@ -8,6 +8,7 @@ import { StreakWithMetadata } from '@/hooks/auth/useGetStreakWithMetadata';
 import { ReadingGoalType } from '@/types/auth/ReadingGoal';
 import { getChapterData } from '@/utils/chapter';
 import { secondsToReadableFormat } from '@/utils/datetime';
+import { logButtonClick } from '@/utils/eventLogger';
 import { toLocalizedNumber } from '@/utils/locale';
 import { getChapterWithStartingVerseUrl } from '@/utils/navigation';
 import { convertFractionToPercent } from '@/utils/number';
@@ -16,11 +17,13 @@ import { parseVerseRange } from '@/utils/verseKeys';
 interface ReadingGoalAmountProps {
   readingGoal?: StreakWithMetadata['readingGoal'];
   currentReadingDay?: StreakWithMetadata['weekData']['readingDaysMap'][string];
+  context: 'home_page' | 'quran_reader' | 'progress_page';
 }
 
 const ReadingGoalAmount: React.FC<ReadingGoalAmountProps> = ({
   readingGoal,
   currentReadingDay,
+  context,
 }) => {
   const { t, lang } = useTranslation('reading-goal');
   const chaptersData = useContext(DataContext);
@@ -29,10 +32,16 @@ const ReadingGoalAmount: React.FC<ReadingGoalAmountProps> = ({
   if (!readingGoal || !readingGoal.progress) return null;
 
   const { progress, type: goalType } = readingGoal;
-
   const prefix = percent === 0 ? t('todays-goal') : t('remaining');
 
   let action: string | React.ReactNode = '';
+
+  const handleRangeClick = (range: 'from' | 'to', verseKey: string) => {
+    return () => {
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      logButtonClick(`${context}_goal_range_${range}`, { verse_key: verseKey });
+    };
+  };
 
   if (goalType === ReadingGoalType.TIME) {
     action = t('progress.time-goal', {
@@ -64,11 +73,19 @@ const ReadingGoalAmount: React.FC<ReadingGoalAmountProps> = ({
 
       all.push(
         <>
-          <Link href={getChapterWithStartingVerseUrl(rangeFrom)} variant={LinkVariant.Blend}>
+          <Link
+            href={getChapterWithStartingVerseUrl(rangeFrom)}
+            variant={LinkVariant.Blend}
+            onClick={handleRangeClick('from', rangeFrom)}
+          >
             {from}
           </Link>
           {` ${t('common:to')} `}
-          <Link href={getChapterWithStartingVerseUrl(rangeTo)} variant={LinkVariant.Blend}>
+          <Link
+            href={getChapterWithStartingVerseUrl(rangeTo)}
+            variant={LinkVariant.Blend}
+            onClick={handleRangeClick('to', rangeFrom)}
+          >
             {to}
           </Link>
         </>,

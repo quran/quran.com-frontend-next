@@ -13,6 +13,7 @@ import RightArrow from '@/icons/east.svg';
 import { ReadingDay } from '@/types/auth/ReadingDay';
 import { getChapterData } from '@/utils/chapter';
 import { secondsToReadableFormat } from '@/utils/datetime';
+import { logButtonClick } from '@/utils/eventLogger';
 import { toLocalizedNumber } from '@/utils/locale';
 import { getChapterWithStartingVerseUrl } from '@/utils/navigation';
 import { parseVerseRange } from '@/utils/verseKeys';
@@ -52,6 +53,15 @@ const DaysCalendar: React.FC<DaysCalendarProps> = ({
     return map;
   }, [days]);
 
+  const handleVerseClick = (range: 'from' | 'to', verseKey: string) => {
+    return () => {
+      logButtonClick(`reading_history_range_${range}`, {
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        verse_key: verseKey,
+      });
+    };
+  };
+
   if (selectedDate) {
     const readingDay = dateToDayMap[selectedDate];
     const pages = Number(readingDay.pagesRead.toFixed(1));
@@ -68,7 +78,7 @@ const DaysCalendar: React.FC<DaysCalendarProps> = ({
           </p>
           <p>
             <BookIcon />
-            {`${localizedVerses} ${t('common:ayah').toLocaleLowerCase(lang)}`}
+            {`${localizedVerses} ${t('common:ayahs').toLocaleLowerCase(lang)}`}
           </p>
           <p>
             <ClockIcon />
@@ -99,6 +109,7 @@ const DaysCalendar: React.FC<DaysCalendarProps> = ({
                   <Link
                     href={getChapterWithStartingVerseUrl(rangeFrom)}
                     variant={LinkVariant.Primary}
+                    onClick={handleVerseClick('from', rangeFrom)}
                   >
                     {from}
                   </Link>
@@ -106,6 +117,7 @@ const DaysCalendar: React.FC<DaysCalendarProps> = ({
                   <Link
                     href={getChapterWithStartingVerseUrl(rangeTo)}
                     variant={LinkVariant.Primary}
+                    onClick={handleVerseClick('to', rangeTo)}
                   >
                     {to}
                   </Link>
@@ -117,6 +129,15 @@ const DaysCalendar: React.FC<DaysCalendarProps> = ({
       </div>
     );
   }
+
+  const onDayClick = (date: string, dayNumber: number) => {
+    logButtonClick('reading_history_day', {
+      month: month.id,
+      year,
+      day: dayNumber,
+    });
+    setSelectedDate(date);
+  };
 
   return (
     <div className={styles.calendarContainer}>
@@ -134,7 +155,7 @@ const DaysCalendar: React.FC<DaysCalendarProps> = ({
               type="button"
               disabled={isDisabled}
               className={classNames({ [styles.disabled]: isDisabled })}
-              onClick={() => setSelectedDate(date)}
+              onClick={() => onDayClick(date, day)}
             >
               <time dateTime={date}>{toLocalizedNumber(day, lang)}</time>
             </button>

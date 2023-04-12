@@ -7,6 +7,7 @@ import styles from './ReadingProgressPage.module.scss';
 
 import Button from '@/dls/Button/Button';
 import CircularProgressbar from '@/dls/CircularProgress';
+import Skeleton from '@/dls/Skeleton/Skeleton';
 import { StreakWithMetadata } from '@/hooks/auth/useGetStreakWithMetadata';
 import { toLocalizedNumber } from '@/utils/locale';
 import { getReadingGoalNavigationUrl } from '@/utils/navigation';
@@ -14,15 +15,28 @@ import { getReadingGoalNavigationUrl } from '@/utils/navigation';
 interface ProgressPageGoalWidgetProps {
   currentReadingDay: StreakWithMetadata['currentReadingDay'];
   readingGoal?: StreakWithMetadata['readingGoal'];
+  isLoading: boolean;
 }
 
 const ProgressPageGoalWidget = ({
   currentReadingDay,
   readingGoal,
+  isLoading,
 }: ProgressPageGoalWidgetProps) => {
   const { t, lang } = useTranslation('reading-progress');
   const percent = Math.min(readingGoal?.progress?.percent || 0, 100);
+  const isGoalDone = percent >= 100;
   const localizedPercent = toLocalizedNumber(percent, lang);
+
+  if (isLoading) {
+    return (
+      <Skeleton className={classNames(styles.widget, styles.emptyWidget)}>
+        <Button href={getReadingGoalNavigationUrl()}>
+          {t('reading-goal:create-reading-goal')}
+        </Button>
+      </Skeleton>
+    );
+  }
 
   if (!readingGoal) {
     return (
@@ -37,7 +51,15 @@ const ProgressPageGoalWidget = ({
   return (
     <div className={styles.widget}>
       <div>
-        <ReadingGoalAmount readingGoal={readingGoal} currentReadingDay={currentReadingDay} />
+        {isGoalDone ? (
+          <p>{t('reading-goal:goal-done.title')}</p>
+        ) : (
+          <ReadingGoalAmount
+            readingGoal={readingGoal}
+            currentReadingDay={currentReadingDay}
+            context="progress_page"
+          />
+        )}
       </div>
 
       <div className={styles.circularProgressbar}>

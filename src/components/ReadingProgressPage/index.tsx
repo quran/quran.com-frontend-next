@@ -1,7 +1,7 @@
 import useTranslation from 'next-translate/useTranslation';
 
 import DeleteReadingGoalModal from '../ReadingGoal/DeleteReadingGoalModal';
-import UpdateReadingGoalModal from '../ReadingGoal/UpdateReadingGoalModal';
+// import UpdateReadingGoalModal from '../ReadingGoal/UpdateReadingGoalModal';
 
 import ProgressPageGoalWidget from './ProgressPageGoalWidget';
 import ProgressPageStreakWidget from './ProgressPageStreakWidget';
@@ -16,9 +16,10 @@ import { getCanonicalUrl, getReadingGoalProgressNavigationUrl } from '@/utils/na
 
 const ReadingProgressPage = () => {
   const { t, lang } = useTranslation('reading-progress');
-  const { error, readingGoal, weekData, streak, currentReadingDay } = useGetStreakWithMetadata({
-    showDayName: true,
-  });
+  const { error, readingGoal, weekData, streak, currentReadingDay, isLoading } =
+    useGetStreakWithMetadata({
+      showDayName: true,
+    });
 
   if (error) return null;
 
@@ -41,10 +42,13 @@ const ReadingProgressPage = () => {
               weekData={weekData}
               readingGoal={readingGoal}
               streak={streak}
+              isLoading={isLoading}
             />
+
             <ProgressPageGoalWidget
               currentReadingDay={currentReadingDay}
               readingGoal={readingGoal}
+              isLoading={isLoading}
             />
           </div>
 
@@ -56,7 +60,7 @@ const ReadingProgressPage = () => {
 
               <div className={styles.manageGoalContainer}>
                 <DeleteReadingGoalModal />
-                <UpdateReadingGoalModal readingGoal={readingGoal} />
+                {/* <UpdateReadingGoalModal readingGoal={readingGoal} /> */}
               </div>
             </div>
           )}

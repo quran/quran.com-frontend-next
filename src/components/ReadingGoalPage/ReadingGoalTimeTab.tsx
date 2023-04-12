@@ -18,7 +18,12 @@ const options = [
   },
 ] as const;
 
-const ReadingGoalTimeTab: React.FC<ReadingGoalTabProps> = ({ state, dispatch, nav }) => {
+const ReadingGoalTimeTab: React.FC<ReadingGoalTabProps> = ({
+  state,
+  dispatch,
+  nav,
+  logTabEvent,
+}) => {
   const { t } = useTranslation('reading-goal');
 
   return (
@@ -33,7 +38,10 @@ const ReadingGoalTimeTab: React.FC<ReadingGoalTabProps> = ({ state, dispatch, na
           <OptionButton
             key={option.key}
             icon={option.icon}
-            onSelect={() => dispatch({ type: 'SET_PERIOD', payload: { period: option.key } })}
+            onSelect={() => {
+              dispatch({ type: 'SET_PERIOD', payload: { period: option.key } });
+              logTabEvent(option.key);
+            }}
             selected={state.period === option.key}
             option={t(`${option.key}.title`)}
             description={t(`${option.key}.description`)}

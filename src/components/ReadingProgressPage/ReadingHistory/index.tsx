@@ -11,6 +11,7 @@ import styles from './ReadingHistory.module.scss';
 import Select from '@/dls/Forms/Select';
 import SelectionCard from '@/dls/SelectionCard/SelectionCard';
 import { getFullMonthName } from '@/utils/datetime';
+import { logButtonClick } from '@/utils/eventLogger';
 import { toLocalizedNumber } from '@/utils/locale';
 
 const ReadingHistory = () => {
@@ -53,6 +54,14 @@ const ReadingHistory = () => {
     useGrouping: false,
   });
 
+  const onMonthClick = (month: number) => {
+    logButtonClick('reading_history_month', {
+      month,
+      year: selectedYear,
+    });
+    setSelectedMonth(month);
+  };
+
   return (
     <div className={pageStyles.historySection}>
       {!!selectedMonth && (
@@ -82,7 +91,7 @@ const ReadingHistory = () => {
             key={month.id}
             label={localizedSelectedYear}
             value={month.name}
-            onClick={() => setSelectedMonth(month.id)}
+            onClick={() => onMonthClick(month.id)}
           />
         ))}
       </div>
