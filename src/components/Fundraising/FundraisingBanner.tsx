@@ -7,6 +7,7 @@ import LearnMoreButton from './DonateButton/LearnMoreButton';
 import styles from './FundraisingBanner.module.scss';
 
 import DonateButtonClickSource from '@/types/DonateButtonClickSource';
+import DonateButtonType from '@/types/DonateButtonType';
 import LearnMoreClickSource from '@/types/LearnMoreClickSource';
 
 const FundraisingBanner = () => {
@@ -16,7 +17,10 @@ const FundraisingBanner = () => {
       <h1 className={styles.header}>{t('fundraising.title')}</h1>
       <p className={styles.paragraph}>{t('fundraising.description')}</p>
       <div className={styles.buttonsContainer}>
-        <DonateButton source={DonateButtonClickSource.SIDEBAR_BANNER} />
+        <DonateButton
+          type={DonateButtonType.MONTHLY}
+          source={DonateButtonClickSource.SIDEBAR_BANNER}
+        />
         <LearnMoreButton source={LearnMoreClickSource.SIDEBAR_BANNER} />
       </div>
       <div className={styles.backgroundImageContainer}>

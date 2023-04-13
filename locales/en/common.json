@@ -115,6 +115,8 @@
     "developers": "Developers",
     "display": "Display",
     "donate": "Donate",
+    "donate_monthly": "Donate monthly",
+    "donate_once": "Donate once",
     "email-verification": {
         "check-spam": "Didn't receive the verification email? Check your spam inbox",
         "email-sent": "We just sent an email to <strong>{{email}}<\/strong>",
