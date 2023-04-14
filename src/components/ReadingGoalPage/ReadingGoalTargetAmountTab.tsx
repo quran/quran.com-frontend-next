@@ -1,6 +1,5 @@
 import { useMemo } from 'react';
 
-import { Translate } from 'next-translate';
 import useTranslation from 'next-translate/useTranslation';
 
 import ReadingGoalInput from '../ReadingGoal/ReadingGoalInput';
@@ -8,26 +7,25 @@ import ReadingGoalInput from '../ReadingGoal/ReadingGoalInput';
 import { ReadingGoalPeriod, ReadingGoalTabProps } from './hooks/useReadingGoalReducer';
 import styles from './ReadingGoalPage.module.scss';
 
-import Select, { SelectOption, SelectSize } from '@/dls/Forms/Select';
-import { toLocalizedNumber } from '@/utils/locale';
+import Select, { SelectSize } from '@/dls/Forms/Select';
+import { generateDurationDaysOptions } from '@/utils/generators';
 
-const generateDaysOptions = (t: Translate, locale: string) => {
-  // eslint-disable-next-line @typescript-eslint/naming-convention
-  const options: SelectOption[] = new Array(90).fill(null).map((_, i) => {
-    const day = i + 1;
-    return {
-      value: day.toString(),
-      label: t('x-days', { count: day, days: toLocalizedNumber(day, locale) }),
-    };
-  });
-
-  return options;
-};
-
-const ReadingGoalTargetAmountTab: React.FC<ReadingGoalTabProps> = ({ state, dispatch, nav }) => {
+const ReadingGoalTargetAmountTab: React.FC<ReadingGoalTabProps> = ({
+  state,
+  dispatch,
+  nav,
+  logChange,
+}) => {
   const { t, lang } = useTranslation('reading-goal');
   const { type, period, pages, seconds, rangeStartVerse, rangeEndVerse, duration } = state;
-  const dayOptions = useMemo(() => generateDaysOptions(t, lang), [t, lang]);
+  const dayOptions = useMemo(() => generateDurationDaysOptions(t, lang), [t, lang]);
+
+  const onDurationChange = (d: string) => {
+    const newDuration = Number(d);
+    logChange('duration', { currentValue: duration, newValue: newDuration });
+
+    dispatch({ type: 'SET_DURATION', payload: { duration: newDuration } });
+  };
 
   return (
     <>
@@ -49,6 +47,7 @@ const ReadingGoalTargetAmountTab: React.FC<ReadingGoalTabProps> = ({ state, disp
           onSecondsChange={(newSeconds) =>
             dispatch({ type: 'SET_SECONDS', payload: { seconds: newSeconds } })
           }
+          logChange={logChange}
         />
         {period === ReadingGoalPeriod.Continuous && (
           <div className={styles.inputContainer}>
@@ -62,7 +61,7 @@ const ReadingGoalTargetAmountTab: React.FC<ReadingGoalTabProps> = ({ state, disp
               className={styles.input}
               options={dayOptions}
               value={duration.toString()}
-              onChange={(d) => dispatch({ type: 'SET_DURATION', payload: { duration: Number(d) } })}
+              onChange={onDurationChange}
             />
           </div>
         )}

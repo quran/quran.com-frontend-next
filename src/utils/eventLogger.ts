@@ -53,10 +53,12 @@ export const logValueChange = (
   name: string,
   currentValue: string | number | boolean | string[] | number[] | Record<string, any>,
   newValue: string | number | boolean | string[] | number[] | Record<string, any>,
+  params: Record<string, unknown> = {},
 ) => {
   logEvent(`${name}_change`, {
     current_value: currentValue,
     new_value: newValue,
+    ...params,
   });
 };
 

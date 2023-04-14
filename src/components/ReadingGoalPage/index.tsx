@@ -1,3 +1,4 @@
+/* eslint-disable react-func/max-lines-per-function */
 /* eslint-disable max-lines */
 import { useState, useContext, useCallback } from 'react';
 
@@ -25,8 +26,9 @@ import layoutStyle from '@/pages/index.module.scss';
 import { CreateReadingGoalRequest, ReadingGoalType } from '@/types/auth/ReadingGoal';
 import { addReadingGoal } from '@/utils/auth/api';
 import { makeStreakUrl } from '@/utils/auth/apiPaths';
-import { logButtonClick, logFormSubmission } from '@/utils/eventLogger';
+import { logButtonClick, logFormSubmission, logValueChange } from '@/utils/eventLogger';
 import { isValidPageId, isValidVerseKey } from '@/utils/validator';
+import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
 
 const tabs = {
   examples: ReadingGoalExamplesTab,
@@ -43,6 +45,15 @@ const tabsArray = (Object.keys(tabs) as (keyof typeof tabs)[]).map((key) => ({
 
 const logTabClick = (tab: typeof tabsArray[number]['key'], event: string) => {
   logButtonClick(`create_goal_${tab}_tab_${event}`);
+};
+
+const logTabInputChange = (
+  tab: typeof tabsArray[number]['key'],
+  input: string,
+  values: { currentValue: unknown; newValue: unknown },
+  metadata?: Record<string, unknown>,
+) => {
+  logValueChange(`create_goal_${tab}_tab_${input}`, values.currentValue, values.newValue, metadata);
 };
 
 const ReadingGoalOnboarding: React.FC = () => {
@@ -149,14 +160,24 @@ const ReadingGoalOnboarding: React.FC = () => {
       }
 
       // if the user selected a range goal and didn't enter a valid range, disable the next button
-      if (
-        state.type === ReadingGoalType.RANGE &&
-        (!state.rangeStartVerse ||
-          !state.rangeEndVerse ||
+      if (state.type === ReadingGoalType.RANGE) {
+        if (!state.rangeStartVerse || !state.rangeEndVerse) return true;
+        if (
           !isValidVerseKey(chaptersData, state.rangeStartVerse) ||
-          !isValidVerseKey(chaptersData, state.rangeEndVerse))
-      ) {
-        return true;
+          !isValidVerseKey(chaptersData, state.rangeEndVerse)
+        ) {
+          return true;
+        }
+
+        // check if the starting verse key is greater than the ending verse key
+        const [startingChapter, startingVerse] = getVerseAndChapterNumbersFromKey(
+          state.rangeStartVerse,
+        );
+        const [endingChapter, endingVerse] = getVerseAndChapterNumbersFromKey(state.rangeEndVerse);
+
+        if (startingChapter === endingChapter && Number(startingVerse) > Number(endingVerse)) {
+          return true;
+        }
       }
     }
 
@@ -175,7 +196,10 @@ const ReadingGoalOnboarding: React.FC = () => {
             onTabChange={setTabIdx}
             state={state}
             dispatch={dispatch}
-            logTabEvent={(event: string) => logTabClick(Tab.key, event)}
+            logClick={(event: string) => logTabClick(Tab.key, event)}
+            logChange={(input, values, metadata) =>
+              logTabInputChange(Tab.key, input, values, metadata)
+            }
             nav={
               <div className={styles.navigationContainer}>
                 {tabIdx > 0 && (

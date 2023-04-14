@@ -155,6 +155,9 @@ const UpdateReadingGoalModal = ({ isDisabled, readingGoal }: UpdateReadingGoalBu
                 onPagesChange={setPages}
                 onSecondsChange={setSeconds}
                 widthFull={false}
+                logChange={() => {
+                  // TODO: implement this when we uncomment the update modal
+                }}
               />
 
               <div className={styles.inputContainer}>

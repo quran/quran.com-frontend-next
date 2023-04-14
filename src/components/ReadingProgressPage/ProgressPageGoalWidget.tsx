@@ -9,6 +9,7 @@ import Button from '@/dls/Button/Button';
 import CircularProgressbar from '@/dls/CircularProgress';
 import Skeleton from '@/dls/Skeleton/Skeleton';
 import { StreakWithMetadata } from '@/hooks/auth/useGetStreakWithMetadata';
+import { logButtonClick } from '@/utils/eventLogger';
 import { toLocalizedNumber } from '@/utils/locale';
 import { getReadingGoalNavigationUrl } from '@/utils/navigation';
 
@@ -39,9 +40,13 @@ const ProgressPageGoalWidget = ({
   }
 
   if (!readingGoal) {
+    const onCreateReadingGoalClick = () => {
+      logButtonClick('progress_page_create_goal');
+    };
+
     return (
       <div className={classNames(styles.widget, styles.emptyWidget)}>
-        <Button href={getReadingGoalNavigationUrl()}>
+        <Button href={getReadingGoalNavigationUrl()} onClick={onCreateReadingGoalClick}>
           {t('reading-goal:create-reading-goal')}
         </Button>
       </div>

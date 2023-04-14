@@ -27,12 +27,7 @@ const options = [
   },
 ];
 
-const ReadingGoalTypeTab: React.FC<ReadingGoalTabProps> = ({
-  state,
-  dispatch,
-  nav,
-  logTabEvent,
-}) => {
+const ReadingGoalTypeTab: React.FC<ReadingGoalTabProps> = ({ state, dispatch, nav, logClick }) => {
   const { t } = useTranslation('reading-goal');
 
   return (
@@ -47,7 +42,7 @@ const ReadingGoalTypeTab: React.FC<ReadingGoalTabProps> = ({
             key={option.key}
             onSelect={() => {
               dispatch({ type: 'SET_TYPE', payload: { type: option.type } });
-              logTabEvent(option.key);
+              logClick(option.key);
             }}
             selected={state.type === option.type}
             option={t(`goal-types.${option.key}.title`)}

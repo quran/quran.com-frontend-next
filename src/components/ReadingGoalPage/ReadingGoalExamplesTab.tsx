@@ -8,7 +8,7 @@ const ReadingGoalExamplesTab: React.FC<ReadingGoalTabProps> = ({
   state,
   dispatch,
   nav,
-  logTabEvent,
+  logClick,
 }) => {
   const { t } = useTranslation('reading-goal');
 
@@ -26,7 +26,7 @@ const ReadingGoalExamplesTab: React.FC<ReadingGoalTabProps> = ({
             onSelect={() => {
               dispatch({ type: 'SET_EXAMPLE', payload: { exampleKey: example.i18nKey } });
 
-              logTabEvent(example.i18nKey === 'time' ? '10_mins' : example.i18nKey);
+              logClick(example.i18nKey === 'time' ? '10_mins' : example.i18nKey);
             }}
             selected={state.exampleKey === example.i18nKey}
             option={t(`examples.${example.i18nKey}.title`)}

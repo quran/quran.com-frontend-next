@@ -68,11 +68,11 @@ const ProfileAvatarButton = () => {
   if (isUserLoggedIn) {
     return (
       <PopoverMenu trigger={trigger} isOpen={isOpen} onOpenChange={setIsOpen}>
-        <PopoverMenu.Item onClick={onReadingHistoryClicked} icon={<ClockIcon />}>
-          {t('reading-history')}
-        </PopoverMenu.Item>
         <PopoverMenu.Item onClick={onProfileClicked} icon={<ArrowIcon />}>
           {t('profile')}
+        </PopoverMenu.Item>
+        <PopoverMenu.Item onClick={onReadingHistoryClicked} icon={<ClockIcon />}>
+          {t('reading-history')}
         </PopoverMenu.Item>
         <PopoverMenu.Item onClick={onLogoutClicked} icon={<LogoutIcon />}>
           {t('logout')}

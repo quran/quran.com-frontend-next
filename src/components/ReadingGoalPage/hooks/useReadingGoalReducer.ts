@@ -176,7 +176,12 @@ export interface ReadingGoalTabProps {
   state: ReturnType<typeof useReadingGoalReducer>[0];
   dispatch: ReturnType<typeof useReadingGoalReducer>[1];
   nav: React.ReactNode;
-  logTabEvent: (event: string) => void;
+  logClick: (event: string) => void;
+  logChange: (
+    input: string,
+    values: { currentValue: unknown; newValue: unknown },
+    metadata?: Record<string, unknown>,
+  ) => void;
 }
 
 export default useReadingGoalReducer;

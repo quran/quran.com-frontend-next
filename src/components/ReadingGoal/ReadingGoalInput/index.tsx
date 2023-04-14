@@ -1,47 +1,25 @@
+/* eslint-disable react-func/max-lines-per-function */
 /* eslint-disable max-lines */
 import { useMemo, useContext, useState } from 'react';
 
 import classNames from 'classnames';
-import { Translate } from 'next-translate';
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from './ReadingGoalInput.module.scss';
 
+import { ReadingGoalTabProps } from '@/components/ReadingGoalPage/hooks/useReadingGoalReducer';
 import DataContext from '@/contexts/DataContext';
 import Combobox from '@/dls/Forms/Combobox';
-import { DropdownItem } from '@/dls/Forms/Combobox/ComboboxItem';
 import ComboboxSize from '@/dls/Forms/Combobox/types/ComboboxSize';
 import Input, { InputSize } from '@/dls/Forms/Input';
-import Select, { SelectOption, SelectSize } from '@/dls/Forms/Select';
+import Select, { SelectSize } from '@/dls/Forms/Select';
 import { ReadingGoalType } from '@/types/auth/ReadingGoal';
-import { getChapterData } from '@/utils/chapter';
-import { secondsToReadableFormat } from '@/utils/datetime';
-import { toLocalizedNumber } from '@/utils/locale';
-
-const generateTimeOptions = (t: Translate, locale: string) => {
-  // for the first 10 minutes, we want to show 1 until 10
-  // but after that, we want to increment by 5 minutes
-  // and our limit is 4 hours
-  // eslint-disable-next-line @typescript-eslint/naming-convention
-  const options: SelectOption[] = new Array(56).fill(null).map((_, i) => {
-    let minutes: number;
-
-    if (i < 10) {
-      minutes = i + 1;
-    } else {
-      minutes = (i - 9) * 5 + 10;
-    }
-
-    const seconds = minutes * 60;
-
-    return {
-      value: seconds,
-      label: secondsToReadableFormat(seconds, t, locale),
-    };
-  });
-
-  return options;
-};
+import {
+  generateChapterOptions,
+  generateTimeOptions,
+  generateVerseOptions,
+} from '@/utils/generators';
+import { getVerseNumberFromKey, getChapterNumberFromKey } from '@/utils/verse';
 
 interface ReadingGoalInputProps {
   type: ReadingGoalType;
@@ -55,6 +33,8 @@ interface ReadingGoalInputProps {
   onRangeChange: (range: { startVerse: string | null; endVerse: string | null }) => void;
   onPagesChange: (pages: number) => void;
   onSecondsChange: (seconds: number) => void;
+
+  logChange: ReadingGoalTabProps['logChange'];
 }
 
 const ReadingGoalInput: React.FC<ReadingGoalInputProps> = ({
@@ -69,97 +49,75 @@ const ReadingGoalInput: React.FC<ReadingGoalInputProps> = ({
   onSecondsChange,
 
   widthFull = true,
+
+  logChange,
 }) => {
   const { t, lang } = useTranslation('reading-goal');
   const chaptersData = useContext(DataContext);
 
   const timeOptions = useMemo(() => generateTimeOptions(t, lang), [t, lang]);
   const [startChapter, setStartChapter] = useState<string>(
-    rangeStartVerse ? rangeStartVerse.split(':')[0] : undefined,
+    rangeStartVerse ? getChapterNumberFromKey(rangeStartVerse).toString() : undefined,
   );
 
   const [endChapter, setEndChapter] = useState<string>(
-    rangeEndVerse ? rangeEndVerse.split(':')[0] : undefined,
+    rangeEndVerse ? getChapterNumberFromKey(rangeEndVerse).toString() : undefined,
   );
 
-  const chapterOptions = useMemo(() => {
-    const data: DropdownItem[] = Object.keys(chaptersData).map((chapterId) => {
-      const chapter = getChapterData(chaptersData, chapterId);
-      const localizedChapterId = toLocalizedNumber(parseInt(chapterId, 10), lang);
+  const chapterOptions = useMemo(
+    () => generateChapterOptions(chaptersData, lang),
+    [chaptersData, lang],
+  );
 
-      return {
-        id: chapterId,
-        name: chapterId,
-        value: chapterId,
-        label: `${localizedChapterId} - ${chapter.transliteratedName}`,
-      };
-    });
+  const startingVerseOptions = useMemo(
+    () => generateVerseOptions(chaptersData, t, lang, startChapter),
+    [t, lang, chaptersData, startChapter],
+  );
 
-    return data;
-  }, [chaptersData, lang]);
-
-  const startingVerseOptions = useMemo(() => {
-    if (!startChapter) return [];
-
-    const chapter = getChapterData(chaptersData, startChapter);
-    // eslint-disable-next-line @typescript-eslint/naming-convention
-    const options: DropdownItem[] = new Array(chapter.versesCount).fill(null).map((_, index) => {
-      const localizedVerseId = toLocalizedNumber(index + 1, lang);
-      const verseId = String(index + 1);
-
-      return {
-        id: verseId,
-        name: verseId,
-        value: verseId,
-        label: `${t('common:verse')} ${localizedVerseId}`,
-      };
-    });
-
-    return options;
-  }, [t, lang, chaptersData, startChapter]);
-
-  const endingVerseOptions = useMemo(() => {
-    if (!endChapter) return [];
-
-    const chapter = getChapterData(chaptersData, endChapter);
-    // eslint-disable-next-line @typescript-eslint/naming-convention
-    const options: DropdownItem[] = new Array(chapter.versesCount).fill(null).map((_, index) => {
-      const localizedVerseId = toLocalizedNumber(index + 1, lang);
-      const verseId = String(index + 1);
-
-      return {
-        id: verseId,
-        name: verseId,
-        value: verseId,
-        label: `${t('common:verse')} ${localizedVerseId}`,
-      };
-    });
-
-    return options;
-  }, [t, lang, chaptersData, endChapter]);
+  const endingVerseOptions = useMemo(
+    () => generateVerseOptions(chaptersData, t, lang, endChapter),
+    [t, lang, chaptersData, endChapter],
+  );
 
   const endingVerse = useMemo(() => {
     if (!rangeEndVerse) return undefined;
-    return rangeEndVerse.split(':')[1];
+    return getVerseNumberFromKey(rangeEndVerse).toString();
   }, [rangeEndVerse]);
 
   const startingVerse = useMemo(() => {
     if (!rangeStartVerse) return undefined;
-    return rangeStartVerse.split(':')[1];
+    return getVerseNumberFromKey(rangeStartVerse).toString();
   }, [rangeStartVerse]);
 
   const onChapterChange = (chapterType: 'start' | 'end') => (chapterId: string) => {
-    const oldChapterId = chapterType === 'start' ? startChapter : endChapter;
-    const setChapter = chapterType === 'start' ? setStartChapter : setEndChapter;
+    const isStartChapter = chapterType === 'start';
+    const oldChapterId = isStartChapter ? startChapter : endChapter;
+    const setChapter = isStartChapter ? setStartChapter : setEndChapter;
 
     if (!chapterId || chapterId !== oldChapterId) {
       onRangeChange(
-        chapterType === 'start'
+        isStartChapter
           ? { startVerse: null, endVerse: rangeEndVerse }
           : {
               startVerse: rangeStartVerse,
               endVerse: null,
             },
+      );
+    }
+
+    // if the current value is null, we don't need to log it
+    const currentVerse = isStartChapter ? rangeStartVerse : rangeEndVerse;
+    if (currentVerse) {
+      logChange(
+        isStartChapter ? 'start_verse' : 'end_verse',
+        {
+          currentValue: currentVerse,
+          newValue: null,
+        },
+        {
+          chapter: chapterId || null,
+          verse: (isStartChapter ? startingVerse : endingVerse) || null,
+        },
       );
     }
 
@@ -187,16 +145,32 @@ const ReadingGoalInput: React.FC<ReadingGoalInputProps> = ({
   }, [chapterOptions, startChapter]);
 
   const onVerseChange = (verseType: 'start' | 'end') => (verseId: string) => {
-    const newRange =
-      verseType === 'start' ? `${startChapter}:${verseId}` : `${endChapter}:${verseId}`;
+    const isStartVerse = verseType === 'start';
+
+    let newVerseKey: string | null = null;
+    if (verseId) {
+      newVerseKey = isStartVerse ? `${startChapter}:${verseId}` : `${endChapter}:${verseId}`;
+    }
 
     onRangeChange(
-      verseType === 'start'
-        ? { startVerse: newRange, endVerse: rangeEndVerse }
+      isStartVerse
+        ? { startVerse: newVerseKey, endVerse: rangeEndVerse }
         : {
             startVerse: rangeStartVerse,
-            endVerse: newRange,
+            endVerse: newVerseKey,
           },
+    );
+
+    logChange(
+      isStartVerse ? 'start_verse' : 'end_verse',
+      {
+        currentValue: isStartVerse ? rangeStartVerse : rangeEndVerse,
+        newValue: newVerseKey,
+      },
+      {
+        chapter: (isStartVerse ? startChapter : endChapter) || null,
+        verse: verseId || null,
+      },
     );
   };
 
@@ -297,6 +271,7 @@ const ReadingGoalInput: React.FC<ReadingGoalInputProps> = ({
           onChange={(p) => {
             const parsedPages = Number(p);
             onPagesChange(parsedPages);
+            logChange('pages', { currentValue: pages, newValue: parsedPages });
           }}
         />
       </div>
@@ -318,6 +293,8 @@ const ReadingGoalInput: React.FC<ReadingGoalInputProps> = ({
         onChange={(s) => {
           const parsedSeconds = Number(s);
           onSecondsChange(parsedSeconds);
+
+          logChange('seconds', { currentValue: seconds, newValue: parsedSeconds });
         }}
       />
     </div>
