@@ -5,6 +5,7 @@ import React from 'react';
 import { NextPage, GetStaticProps, GetStaticPaths } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 
+import { getChapterIdBySlug, getChapterVerses, getPagesLookup } from '@/api';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import QuranReader from '@/components/QuranReader';
 import { getChapterOgImageUrl } from '@/lib/og';
@@ -21,8 +22,6 @@ import {
 import { isValidChapterId, isValidVerseKey } from '@/utils/validator';
 import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
 import { generateVerseKeysBetweenTwoVerseKeys } from '@/utils/verseKeys';
-import { getChapterIdBySlug, getChapterVerses, getPagesLookup } from 'src/api';
-import DataContext from 'src/contexts/DataContext';
 import Error from 'src/pages/_error';
 import { ChapterResponse, VersesResponse } from 'types/ApiResponses';
 import ChaptersData from 'types/ChaptersData';
@@ -44,7 +43,6 @@ const Chapter: NextPage<ChapterProps> = ({
   versesResponse,
   hasError,
   isChapter,
-  chaptersData,
 }) => {
   const { t, lang } = useTranslation('common');
   if (hasError) {
@@ -90,7 +88,7 @@ const Chapter: NextPage<ChapterProps> = ({
   };
 
   return (
-    <DataContext.Provider value={chaptersData}>
+    <>
       <NextSeoWrapper
         title={`${t('surah')} ${chapterResponse.chapter.transliteratedName} - ${getTitle()}`}
         canonical={getCanonicalUrlValue()}
@@ -120,7 +118,7 @@ const Chapter: NextPage<ChapterProps> = ({
         id={chapterResponse.chapter.id}
         quranReaderDataType={isChapter ? QuranReaderDataType.Chapter : QuranReaderDataType.Verse}
       />
-    </DataContext.Provider>
+    </>
   );
 };
 

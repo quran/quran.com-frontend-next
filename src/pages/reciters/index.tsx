@@ -9,6 +9,7 @@ import layoutStyle from '../index.module.scss';
 
 import pageStyle from './reciterPage.module.scss';
 
+import { getAvailableReciters } from '@/api';
 import { filterReciters } from '@/components/Navbar/SettingsDrawer/ReciterSelectionBody';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import QuranReciterListHero from '@/components/Reciter/QuranReciterListHero';
@@ -16,12 +17,10 @@ import RecitersList from '@/components/Reciter/RecitersList';
 import { getAllChaptersData } from '@/utils/chapter';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl } from '@/utils/navigation';
-import { getAvailableReciters } from 'src/api';
-import DataContext from 'src/contexts/DataContext';
 
 const NAVIGATION_URL = '/reciters';
 
-const RecitersListPage = ({ reciters, hasError, chaptersData }) => {
+const RecitersListPage = ({ reciters, hasError }) => {
   const { t, lang } = useTranslation('reciter');
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -33,7 +32,7 @@ const RecitersListPage = ({ reciters, hasError, chaptersData }) => {
   if (hasError) return <Error statusCode={500} />;
 
   return (
-    <DataContext.Provider value={chaptersData}>
+    <>
       <NextSeoWrapper
         title={t('quran-reciters')}
         description={t('reciters-desc')}
@@ -46,7 +45,7 @@ const RecitersListPage = ({ reciters, hasError, chaptersData }) => {
           <RecitersList reciters={filteredReciters} />
         </div>
       </div>
-    </DataContext.Provider>
+    </>
   );
 };
 

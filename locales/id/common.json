@@ -115,6 +115,8 @@
     "developers": "Pengembang (Developers)",
     "display": "Menampilkan",
     "donate": "Menyumbangkan",
+    "donate_monthly": "Donasi setiap bulan",
+    "donate_once": "Donasi sekali",
     "email-verification": {
         "check-spam": "Tidak menerima email verifikasi? Periksa kotak masuk spam Anda",
         "email-sent": "Kami baru saja mengirim email ke <strong> {{email}} <\/strong>",

@@ -6,8 +6,10 @@ import { SWRConfig } from 'swr';
 
 import styles from './tafsirs.module.scss';
 
+import { fetcher, getChapterIdBySlug } from '@/api';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import TafsirBody from '@/components/QuranReader/TafsirView/TafsirBody';
+import Error from '@/pages/_error';
 import {
   getQuranReaderStylesInitialState,
   getTafsirsInitialState,
@@ -26,9 +28,6 @@ import {
 } from '@/utils/staticPageGeneration';
 import { isValidVerseId } from '@/utils/validator';
 import { makeVerseKey } from '@/utils/verse';
-import { fetcher, getChapterIdBySlug } from 'src/api';
-import DataContext from 'src/contexts/DataContext';
-import Error from 'src/pages/_error';
 import { ChapterResponse, VersesResponse } from 'types/ApiResponses';
 import ChaptersData from 'types/ChaptersData';
 
@@ -40,7 +39,7 @@ type AyahTafsirProp = {
   fallback: any;
 };
 
-const AyahTafsir: NextPage<AyahTafsirProp> = ({ hasError, chapter, fallback, chaptersData }) => {
+const AyahTafsir: NextPage<AyahTafsirProp> = ({ hasError, chapter, fallback }) => {
   const { t, lang } = useTranslation('common');
   const router = useRouter();
   const {
@@ -53,7 +52,7 @@ const AyahTafsir: NextPage<AyahTafsirProp> = ({ hasError, chapter, fallback, cha
 
   const localizedVerseNumber = toLocalizedNumber(Number(verseId), lang);
   return (
-    <DataContext.Provider value={chaptersData}>
+    <>
       <NextSeoWrapper
         title={`${t('tafsir.surah')} ${
           chapter.chapter.transliteratedName
@@ -87,7 +86,7 @@ const AyahTafsir: NextPage<AyahTafsirProp> = ({ hasError, chapter, fallback, cha
           />
         </div>
       </SWRConfig>
-    </DataContext.Provider>
+    </>
   );
 };
 

@@ -11,7 +11,7 @@ import { makeAllCollectionsItemsUrl } from 'src/utils/auth/apiPaths';
 import { getAllChaptersData } from 'src/utils/chapter';
 import { CollectionDetailSortOption } from 'types/CollectionSortOptions';
 
-const CollectionDetailPage = ({ chaptersData }) => {
+const CollectionDetailPage = () => {
   useRequireAuth();
   const [sortBy, setSortBy] = useState(CollectionDetailSortOption.VerseKey);
   const { t } = useTranslation();
@@ -53,7 +53,6 @@ const CollectionDetailPage = ({ chaptersData }) => {
     <CollectionDetailContainer
       title={t('collection:all-saved-verses')}
       getSWRKey={getKey}
-      chaptersData={chaptersData}
       onSortByChange={onSortByChange}
       sortBy={sortBy}
       shouldDeleteBookmark
