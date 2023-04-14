@@ -27,7 +27,7 @@ const LearnMoreButton: React.FC<Props> = ({ source }) => {
       isNewTab
       href={makeDonateUrl()}
       onClick={onButtonClicked}
-      variant={ButtonVariant.Outlined}
+      variant={ButtonVariant.Compact}
       className={styles.cta}
     >
       {t('fundraising.learn-more')}
