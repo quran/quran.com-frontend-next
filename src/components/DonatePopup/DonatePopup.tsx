@@ -61,7 +61,7 @@ const DonatePopup = () => {
             />
             <LearnMoreButton source={LearnMoreClickSource.DONATE_POPOVER} />
           </div>
-          <div className={styles.text}>{t('popup.footnote')}</div>
+          <div className={styles.text}>{t('popup.footnote')}.</div>
         </div>
       </div>
     </Modal>
