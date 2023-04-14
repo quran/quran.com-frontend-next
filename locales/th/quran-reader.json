@@ -2,7 +2,7 @@
     "add-collection": "เพิ่มเข้าคอลเลคชั่น",
     "advanced-copy": "คัดลอกขั้นสูง",
     "aria": {
-        "read-ayah-refls": "อ่าน Ayah Reflections",
+        "read-ayah-refls": "อ่านบทสะท้อนบทเรียนจากอายะห์",
         "read-tafsirs": "อ่านตัฟซีรอายะห์"
     },
     "ayatul-kursi": "อยาตุล กุรซี",
@@ -42,11 +42,11 @@
     "prev-surah": "ซูเราะห์ก่อนหน้า",
     "query-param-message": "คุณกำลังแสดงตัวอย่างของการตั้งค่า <0> <\/0> <1> ยกเลิกการตั้งค่า<\/1> หรือ <2> บันทึกการตั้งค่า <\/2>",
     "ramadan-of-reflection": "เข้าร่วม QuranReflect \"รอมฎอนเดือนแห่งการทบทวน\"",
-    "read-more-quran-reflect": "อ่านเพิ่มเติมเกี่ยวกับคัมภีร์กุรอานสะท้อน",
+    "read-more-quran-reflect": "อ่านเพิ่มเติมบน QuranReflect",
     "referencing": "อ้างอิง",
     "reflection-disclaimer": "การไตร่ตรองไม่ได้เป็นตัวแทนของความคิดเห็นของ Quran.com และไม่ควรนำออกจากบริบท",
     "reflection-not-available": "ยังไม่มีการทบทวนบทเรียนสำหรับอายะห์นี้",
-    "reflections-desc": "อ่านและแบ่งปันการสะท้อนบทเรียนอัลกุรอานของอายะห์ที่  {{ayahNumber}} ของซูเราะห์ {{surahName}}",
+    "reflections-desc": "อ่านและแบ่งปันการสะท้อนบทเรียนอัลกุรอาน อายะห์ที่  {{ayahNumber}} ของซูเราะห์ {{surahName}}",
     "remove-bookmark": "ลบบุ๊คมาร์ก",
     "removed-from": "ลบออกจาก {{collectionName}}",
     "revelation-order-notice": "หมายเหตุ: คุณกำลังท่องอัลกุรอานตามลำดับการเปิดเผย <link> คลิกที่นี่ <\/link> เพื่อเปลี่ยนกลับเป็นลำดับเริ่มต้น",
