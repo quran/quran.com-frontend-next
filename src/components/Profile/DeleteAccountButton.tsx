@@ -42,7 +42,7 @@ const DeleteAccountButton = ({ isDisabled }: DeleteAccountButtonProps) => {
     setIsModalVisible(true);
   };
 
-  const CONFIRMATION_TEXT = t('profile:delete-confirmation.confirmation-text');
+  const CONFIRMATION_TEXT = t('profile:delete-goal-confirmation.confirmation-text');
   const canDeleteAccount = confirmationText.toLowerCase() === CONFIRMATION_TEXT.toLowerCase();
 
   return (
@@ -58,12 +58,12 @@ const DeleteAccountButton = ({ isDisabled }: DeleteAccountButtonProps) => {
       <Modal isOpen={isModalVisible} onClickOutside={closeModal}>
         <Modal.Body>
           <Modal.Header>
-            <Modal.Title>{t('profile:delete-confirmation.title')}</Modal.Title>
-            <Modal.Subtitle>{t('profile:delete-confirmation.subtitle')}</Modal.Subtitle>
+            <Modal.Title>{t('profile:delete-goal-confirmation.title')}</Modal.Title>
+            <Modal.Subtitle>{t('profile:delete-goal-confirmation.subtitle')}</Modal.Subtitle>
 
             <p className={styles.instructionText}>
               <Trans
-                i18nKey="profile:delete-confirmation.instruction-text"
+                i18nKey="profile:delete-goal-confirmation.instruction-text"
                 values={{ text: CONFIRMATION_TEXT }}
                 components={{
                   strong: <strong className={styles.confirmationText} />,
@@ -71,7 +71,7 @@ const DeleteAccountButton = ({ isDisabled }: DeleteAccountButtonProps) => {
               />
             </p>
             <Input
-              id="delete-account-confimation"
+              id="delete-account-confirmation"
               value={confirmationText}
               onChange={setConfirmationText}
               fixedWidth={false}
@@ -86,7 +86,7 @@ const DeleteAccountButton = ({ isDisabled }: DeleteAccountButtonProps) => {
               onClick={onDeleteConfirmed}
               isDisabled={!canDeleteAccount}
             >
-              {t('profile:delete-confirmation.action-text')}
+              {t('profile:delete-goal-confirmation.action-text')}
             </Button>
           </Modal.Footer>
         </Modal.Body>

@@ -1,0 +1,9 @@
+{
+    "history": "Чтение истории",
+    "history-for": "Чтение истории за {{date}}",
+    "manage-goal": "Управляйте своей целью чтения",
+    "no-reading-history-for": "Нет истории чтения за {{date}}",
+    "reading-progress-header": "Ваш прогресс",
+    "reading-progress-streak": "Полоса",
+    "you-read": "Ты читаешь:"
+}

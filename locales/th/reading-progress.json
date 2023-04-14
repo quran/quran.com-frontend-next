@@ -1,0 +1,9 @@
+{
+    "history": "ประวัติการอ่าน",
+    "history-for": "ประวัติการอ่านสำหรับ {{date}}",
+    "manage-goal": "จัดการเป้าหมายการอ่านของคุณ",
+    "no-reading-history-for": "ไม่มีประวัติการอ่านสำหรับ {{date}}",
+    "reading-progress-header": "ความก้าวหน้าของคุณ",
+    "reading-progress-streak": "ริ้ว",
+    "you-read": "เธออ่าน:"
+}

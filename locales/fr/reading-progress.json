@@ -1,0 +1,9 @@
+{
+    "history": "Lecture de l'histoire",
+    "history-for": "Historique de lecture pour {{date}}",
+    "manage-goal": "Gérez votre objectif de lecture",
+    "no-reading-history-for": "Aucun historique de lecture pour {{date}}",
+    "reading-progress-header": "Votre progression",
+    "reading-progress-streak": "Traînée",
+    "you-read": "Tu lis:"
+}

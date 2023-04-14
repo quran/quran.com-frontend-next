@@ -1,0 +1,9 @@
+{
+    "history": "阅读历史",
+    "history-for": "{{date}}的阅读历史",
+    "manage-goal": "管理你的阅读目标",
+    "no-reading-history-for": "{{date}}没有阅读记录",
+    "reading-progress-header": "你的进步",
+    "reading-progress-streak": "条纹",
+    "you-read": "你读："
+}

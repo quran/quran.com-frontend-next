@@ -1,0 +1,9 @@
+{
+    "history": "ইতিহাস পড়া",
+    "history-for": "{{date}} এর ইতিহাস পড়ার",
+    "manage-goal": "আপনার পড়ার লক্ষ্য পরিচালনা করুন",
+    "no-reading-history-for": "{{date}} এর জন্য কোনো পড়ার ইতিহাস নেই",
+    "reading-progress-header": "আপনার অগ্রগতি",
+    "reading-progress-streak": "স্ট্রিক",
+    "you-read": "আপনি পড়েছেন:"
+}

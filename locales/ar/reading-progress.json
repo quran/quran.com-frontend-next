@@ -1,0 +1,9 @@
+{
+    "history": "قراءة التاريخ",
+    "history-for": "سجل القراءة لـ {{date}}",
+    "manage-goal": "إدارة هدف القراءة الخاص بك",
+    "no-reading-history-for": "لا يوجد سجل قراءة لـ {{date}}",
+    "reading-progress-header": "التقدم المحرز الخاص بك",
+    "reading-progress-streak": "أثَر",
+    "you-read": "أنت تقرأ:"
+}

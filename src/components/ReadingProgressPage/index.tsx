@@ -26,7 +26,7 @@ const ReadingProgressPage = () => {
   return (
     <>
       <NextSeoWrapper
-        title={t('header')}
+        title={t('reading-progress-header')}
         url={getCanonicalUrl(lang, getReadingGoalProgressNavigationUrl())}
         languageAlternates={getLanguageAlternates(getReadingGoalProgressNavigationUrl())}
         nofollow
@@ -35,7 +35,7 @@ const ReadingProgressPage = () => {
 
       <PageContainer>
         <div className={styles.contentContainer}>
-          <h1>{t('header')}</h1>
+          <h1>{t('reading-progress-header')}</h1>
 
           <div className={styles.widgetsContainer}>
             <ProgressPageStreakWidget
