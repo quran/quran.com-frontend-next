@@ -279,3 +279,6 @@ export const makeFootnoteUrl = (footnoteId: string): string => makeUrl(`/foot_no
 
 export const makeDonateUrl = (showDonationPopup = false) =>
   `https://donate.quran.com${showDonationPopup ? '?showDonationPopup' : ''}`;
+
+export const makeDonatePageUrl = (isOnce = true) =>
+  `https://give.quran.com/give/${isOnce ? 482507 : 474400}/#!/donation/checkout`;

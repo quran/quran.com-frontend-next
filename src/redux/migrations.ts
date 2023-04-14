@@ -199,4 +199,20 @@ export default {
       },
     };
   },
+  27: (state) => {
+    return {
+      ...state,
+      welcomeMessage: {
+        ...state.welcomeMessage,
+        isVisible: true,
+      },
+    };
+  },
+  28: (state) => ({
+    ...state,
+    session: {
+      count: 0,
+      isDonationPopupVisible: true,
+    },
+  }),
 };

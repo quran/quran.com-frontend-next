@@ -5,6 +5,11 @@
   padding: var(--spacing-mega);
   background-color: var(--color-success-faded);
 }
+
+.buttonsContainer {
+  margin-block-start: var(--spacing-small);
+}
+
 .header {
   color: var(--color-success-deep);
   font-size: var(--font-size-large);
@@ -13,16 +18,6 @@
 .paragraph {
   margin-block-start: var(--spacing-small);
   color: var(--color-success-deep);
-}
-
-.cta {
-  text-transform: capitalize;
-  margin-block-start: var(--spacing-medium);
-  margin-inline-end: var(--spacing-xxsmall);
-  font-weight: var(--font-weight-bold);
-  --themed-fg: var(--shade-0);
-  --themed-bg: var(--color-success-medium);
-  --themed-border: var(--color-success-medium);
 }
 
 .backgroundImageContainer {

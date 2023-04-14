@@ -2,12 +2,16 @@ import React from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
+import DonateButton from '../Fundraising/DonateButton';
+import LearnMoreButton from '../Fundraising/DonateButton/LearnMoreButton';
+
 import styles from './HomePageMessage.module.scss';
 
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import CloseIcon from '@/icons/close.svg';
-import { makeDonateUrl } from '@/utils/apiPaths';
-import { logEvent } from '@/utils/eventLogger';
+import DonateButtonClickSource from '@/types/DonateButtonClickSource';
+import DonateButtonType from '@/types/DonateButtonType';
+import LearnMoreClickSource from '@/types/LearnMoreClickSource';
 
 type HomePageMessageProps = {
   title?: string;
@@ -36,33 +40,16 @@ const HomePageMessage = ({ title, subtitle, body, onClose }: HomePageMessageProp
         </Button>
       </div>
       <div className={styles.ctaContainer}>
-        <Button
-          isNewTab
-          href={makeDonateUrl(true)}
-          onClick={() => {
-            logEvent('donate_button_clicked', {
-              source: 'cta_welcome_message',
-            });
-          }}
-          className={styles.ctaPrimary}
-          size={ButtonSize.Small}
-          variant={ButtonVariant.Shadow}
-        >
-          {t('fundraising-sticky-banner.cta')}
-        </Button>
-
-        <Button
-          isNewTab
-          href="https://donate.quran.com"
-          onClick={() => {
-            logEvent('donate_button_clicked', {
-              source: 'learn_more_welcome_message',
-            });
-          }}
-          variant={ButtonVariant.Compact}
-        >
-          {t('fundraising.learn-more')}
-        </Button>
+        <DonateButton
+          type={DonateButtonType.MONTHLY}
+          source={DonateButtonClickSource.CTA_WELCOME_MESSAGE}
+        />
+        <DonateButton
+          type={DonateButtonType.ONCE}
+          isOutlined
+          source={DonateButtonClickSource.CTA_WELCOME_MESSAGE}
+        />
+        <LearnMoreButton source={LearnMoreClickSource.LEARN_MORE_WELCOME_MESSAGE} />
       </div>
     </div>
   );

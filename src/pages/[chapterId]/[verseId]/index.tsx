@@ -4,9 +4,11 @@ import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 
+import { getChapterIdBySlug, getChapterVerses, getPagesLookup } from '@/api';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import QuranReader from '@/components/QuranReader';
 import { getChapterOgImageUrl } from '@/lib/og';
+import Error from '@/pages/_error';
 import { getQuranReaderStylesInitialState } from '@/redux/defaultSettings/util';
 import { getDefaultWordFields, getMushafId } from '@/utils/api';
 import { getAllChaptersData, getChapterData } from '@/utils/chapter';
@@ -24,9 +26,6 @@ import {
   isValidVerseNumber,
 } from '@/utils/validator';
 import { generateVerseKeysBetweenTwoVerseKeys } from '@/utils/verseKeys';
-import { getChapterIdBySlug, getChapterVerses, getPagesLookup } from 'src/api';
-import DataContext from 'src/contexts/DataContext';
-import Error from 'src/pages/_error';
 import { ChapterResponse, VersesResponse } from 'types/ApiResponses';
 import ChaptersData from 'types/ChaptersData';
 import MetaData from 'types/MetaData';
@@ -40,13 +39,7 @@ type VerseProps = {
   chaptersData?: ChaptersData;
 };
 
-const Verse: NextPage<VerseProps> = ({
-  chapterResponse,
-  versesResponse,
-  hasError,
-  isVerse,
-  chaptersData,
-}) => {
+const Verse: NextPage<VerseProps> = ({ chapterResponse, versesResponse, hasError, isVerse }) => {
   const { t, lang } = useTranslation('common');
   const {
     query: { verseId },
@@ -54,9 +47,10 @@ const Verse: NextPage<VerseProps> = ({
   if (hasError || !versesResponse.verses.length) {
     return <Error statusCode={500} />;
   }
+
   const path = getVerseNavigationUrl(chapterResponse.chapter.slug, verseId as string);
   return (
-    <DataContext.Provider value={chaptersData}>
+    <>
       <NextSeoWrapper
         title={`${t('surah')} ${chapterResponse.chapter.transliteratedName} - ${
           isVerse
@@ -79,7 +73,7 @@ const Verse: NextPage<VerseProps> = ({
         id={chapterResponse.chapter.id}
         quranReaderDataType={isVerse ? QuranReaderDataType.Verse : QuranReaderDataType.VerseRange}
       />
-    </DataContext.Provider>
+    </>
   );
 };
 

@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 
 import styles from './search.module.scss';
 
+import { getAvailableLanguages, getAvailableTranslations, getSearchResults } from '@/api';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import TranslationsFilter from '@/components/Search/Filters/TranslationsFilter';
 import SearchBodyContainer from '@/components/Search/SearchBodyContainer';
@@ -33,8 +34,6 @@ import {
 import filterTranslations from '@/utils/filter-translations';
 import { getLanguageAlternates, toLocalizedNumber } from '@/utils/locale';
 import { getCanonicalUrl } from '@/utils/navigation';
-import { getAvailableLanguages, getAvailableTranslations, getSearchResults } from 'src/api';
-import DataContext from 'src/contexts/DataContext';
 import { SearchResponse } from 'types/ApiResponses';
 import AvailableLanguage from 'types/AvailableLanguage';
 import AvailableTranslation from 'types/AvailableTranslation';
@@ -49,7 +48,7 @@ type SearchProps = {
   chaptersData: ChaptersData;
 };
 
-const Search: NextPage<SearchProps> = ({ translations, chaptersData }): JSX.Element => {
+const Search: NextPage<SearchProps> = ({ translations }): JSX.Element => {
   const { t, lang } = useTranslation('common');
   const router = useRouter();
   const userTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
@@ -271,7 +270,7 @@ const Search: NextPage<SearchProps> = ({ translations, chaptersData }): JSX.Elem
   };
 
   return (
-    <DataContext.Provider value={chaptersData}>
+    <>
       <NextSeoWrapper
         title={
           debouncedSearchQuery !== ''
@@ -365,7 +364,7 @@ const Search: NextPage<SearchProps> = ({ translations, chaptersData }): JSX.Elem
           </div>
         </div>
       </div>
-    </DataContext.Provider>
+    </>
   );
 };
 

@@ -36,7 +36,7 @@ type LanguageSelectorProps = {
 };
 
 const LanguageSelector = ({
-  shouldShowSelectedLang,
+  shouldShowSelectedLang: isFooter,
   expandDirection = PopoverMenuExpandDirection.BOTTOM,
 }: LanguageSelectorProps) => {
   const isUsingDefaultSettings = useSelector(selectIsUsingDefaultSettings);
@@ -97,11 +97,28 @@ const LanguageSelector = ({
     }
   };
 
+  const onOpenChange = (open: boolean) => {
+    if (open) {
+      if (isFooter) {
+        logEvent(`footer_language_selector_open`);
+      } else {
+        logEvent(`navbar_language_selector_open`);
+      }
+      return;
+    }
+
+    if (isFooter) {
+      logEvent(`footer_language_selector_close`);
+    } else {
+      logEvent(`navbar_language_selector_close`);
+    }
+  };
+
   return (
     <PopoverMenu
       expandDirection={expandDirection}
       trigger={
-        shouldShowSelectedLang ? (
+        isFooter ? (
           <Button
             className={styles.triggerButton}
             prefix={
@@ -132,13 +149,7 @@ const LanguageSelector = ({
           </Button>
         )
       }
-      onOpenChange={(open: boolean) => {
-        logEvent(
-          `${shouldShowSelectedLang ? 'footer' : 'navbar'}_language_selector_${
-            open ? 'open' : 'close'
-          }`,
-        );
-      }}
+      onOpenChange={onOpenChange}
       isPortalled={false}
     >
       {options.map((option) => (

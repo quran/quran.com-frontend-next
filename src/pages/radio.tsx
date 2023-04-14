@@ -5,14 +5,13 @@ import useTranslation from 'next-translate/useTranslation';
 import pageStyle from './index.module.scss';
 import radioStyle from './radio.module.scss';
 
+import { getAvailableReciters } from '@/api';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import CuratedStationList from '@/components/Radio/CuratedStationList';
 import ReciterStationList from '@/components/Radio/ReciterStationList';
 import { getAllChaptersData } from '@/utils/chapter';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl } from '@/utils/navigation';
-import { getAvailableReciters } from 'src/api';
-import DataContext from 'src/contexts/DataContext';
 import ChaptersData from 'types/ChaptersData';
 import Reciter from 'types/Reciter';
 
@@ -23,10 +22,11 @@ type RadioPageProps = {
 
 const NAVIGATION_URL = '/radio';
 
-const RadioPage = ({ reciters, chaptersData }: RadioPageProps) => {
+const RadioPage = ({ reciters }: RadioPageProps) => {
   const { t, lang } = useTranslation('radio');
+
   return (
-    <DataContext.Provider value={chaptersData}>
+    <>
       <NextSeoWrapper
         title={t('common:quran-radio')}
         canonical={getCanonicalUrl(lang, NAVIGATION_URL)}
@@ -52,7 +52,7 @@ const RadioPage = ({ reciters, chaptersData }: RadioPageProps) => {
           </div>
         </div>
       </div>
-    </DataContext.Provider>
+    </>
   );
 };
 

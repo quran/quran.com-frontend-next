@@ -1,9 +1,11 @@
+/* eslint-disable react-func/max-lines-per-function */
 import { useCallback, useContext, useEffect, useRef, useMemo } from 'react';
 
 import debounce from 'lodash/debounce';
 import { useDispatch } from 'react-redux';
 import { useSWRConfig } from 'swr';
 
+import { useReadingProgressContext } from '../contexts/ReadingProgressContext';
 import { getObservedVersePayload, getOptions, QURAN_READER_OBSERVER_ID } from '../observer';
 
 import DataContext from '@/contexts/DataContext';
@@ -35,7 +37,8 @@ const useSyncReadingProgress = ({ isReadingPreference }: UseSyncReadingProgressP
   // this is a queue of verse keys that we need to send to the backend
   // we will clear the queue every {READING_DAY_SYNC_TIME} milliseconds after sending the data to the backend
   // it is also a Set not an array to avoid duplicate verse keys
-  const verseQueue = useRef<Set<string>>(new Set());
+  const verseKeysQueue = useReadingProgressContext();
+  const elapsedReadingTimeInSeconds = useRef(0);
   const dispatch = useDispatch();
   const { cache, mutate } = useSWRConfig();
 
@@ -69,7 +72,7 @@ const useSyncReadingProgress = ({ isReadingPreference }: UseSyncReadingProgressP
       const lastReadVerse = getObservedVersePayload(element);
 
       // add the verse key to the queue
-      verseQueue.current.add(lastReadVerse.verseKey);
+      verseKeysQueue.current.add(lastReadVerse.verseKey);
 
       dispatch(
         setLastReadVerse({
@@ -85,45 +88,85 @@ const useSyncReadingProgress = ({ isReadingPreference }: UseSyncReadingProgressP
         debouncedAddReadingSession(Number(chapterNumber), Number(verseNumber));
       }
     },
-    [chaptersData, debouncedAddReadingSession, dispatch],
+    [chaptersData, debouncedAddReadingSession, dispatch, verseKeysQueue],
   );
 
   // eslint-disable-next-line consistent-return
   useEffect(() => {
     // if the user is not logged in, we don't need to sync the reading day
     // TODO: maybe we can save this in the local storage and sync it when the user logs in?
-    if (isLoggedIn()) {
-      const interval = setInterval(() => {
-        // an array of verse ranges that we will send to the backend
-        // we will get them by merging the verse keys in the queue
-        let verseRanges: string[] = null;
-
-        if (verseQueue.current.size > 0) {
-          // merge the verse keys and clear the queue
-          verseRanges = Array.from(mergeVerseKeys(verseQueue.current));
-          verseQueue.current.clear();
-        }
-
-        const body: UpdateReadingDayBody = {
-          // since this function will get called every {READING_DAY_SYNC_TIME} milliseconds,
-          // we can use this value as time the user spent reading
-          seconds: READING_DAY_SYNC_TIME_MS / 1000,
-          timezone: getTimezone(),
-        };
-
-        if (verseRanges) {
-          body.ranges = verseRanges;
-        }
-
-        // TODO: only send if the user is on this tab
-        updateReadingDayAndClearCache(body);
-      }, READING_DAY_SYNC_TIME_MS);
-
-      return () => {
-        clearInterval(interval);
-      };
+    if (!isLoggedIn()) {
+      return () => null;
     }
-  }, [chaptersData, updateReadingDayAndClearCache]);
+
+    const interval = setInterval(() => {
+      // nothing to send
+      if (verseKeysQueue.current.size === 0 && elapsedReadingTimeInSeconds.current === 0) {
+        return;
+      }
+
+      // an array of verse ranges that we will send to the backend
+      // we will get them by merging the verse keys in the queue
+      let verseRanges: string[] = null;
+      if (verseKeysQueue.current.size > 0) {
+        // merge the verse keys and clear the queue
+        verseRanges = Array.from(mergeVerseKeys(verseKeysQueue.current));
+        verseKeysQueue.current.clear();
+      }
+
+      let seconds: number = null;
+      if (elapsedReadingTimeInSeconds.current > 0) {
+        seconds = elapsedReadingTimeInSeconds.current;
+        elapsedReadingTimeInSeconds.current = 0;
+      }
+
+      const body: UpdateReadingDayBody = {
+        timezone: getTimezone(),
+      };
+
+      if (verseRanges) {
+        body.ranges = verseRanges;
+      }
+
+      if (seconds) {
+        body.seconds = seconds;
+      }
+
+      updateReadingDayAndClearCache(body);
+    }, READING_DAY_SYNC_TIME_MS);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [chaptersData, updateReadingDayAndClearCache, verseKeysQueue]);
+
+  // this will track user's reading time
+  // also, if the user is not on the same tab, we will pause the timer
+  useEffect(() => {
+    if (!isLoggedIn()) {
+      return () => null;
+    }
+
+    let interval: NodeJS.Timeout = null;
+
+    const handleFocus = () => {
+      interval = setInterval(() => {
+        elapsedReadingTimeInSeconds.current += 1;
+      }, 1000);
+    };
+
+    const handleBlur = () => {
+      clearInterval(interval);
+    };
+
+    window.addEventListener('focus', handleFocus);
+    window.addEventListener('blur', handleBlur);
+
+    return () => {
+      window.removeEventListener('focus', handleFocus);
+      window.removeEventListener('blur', handleBlur);
+    };
+  }, []);
 
   useGlobalIntersectionObserver(
     getOptions(isReadingPreference),
