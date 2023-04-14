@@ -1,5 +1,6 @@
 import React from 'react';
 
+import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from './DonateButton.module.scss';
@@ -27,8 +28,8 @@ const LearnMoreButton: React.FC<Props> = ({ source }) => {
       isNewTab
       href={makeDonateUrl()}
       onClick={onButtonClicked}
-      variant={ButtonVariant.Outlined}
-      className={styles.cta}
+      variant={ButtonVariant.Compact}
+      className={classNames(styles.cta, styles.learnMore)}
     >
       {t('fundraising.learn-more')}
     </Button>

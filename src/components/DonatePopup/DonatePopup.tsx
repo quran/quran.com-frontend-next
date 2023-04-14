@@ -12,6 +12,7 @@ import Modal from '@/dls/Modal/Modal';
 import CloseIcon from '@/icons/close.svg';
 import { selectIsDonationPopupVisible, setIsDonationPopupVisible } from '@/redux/slices/session';
 import DonateButtonClickSource from '@/types/DonateButtonClickSource';
+import DonateButtonType from '@/types/DonateButtonType';
 import LearnMoreClickSource from '@/types/LearnMoreClickSource';
 import { logButtonClick } from '@/utils/eventLogger';
 
@@ -49,10 +50,18 @@ const DonatePopup = () => {
             <p className={styles.text}>{t('popup.text-2')}</p>
           </div>
           <div className={styles.actionsContainer}>
-            <DonateButton source={DonateButtonClickSource.DONATE_POPOVER} />
+            <DonateButton
+              type={DonateButtonType.MONTHLY}
+              source={DonateButtonClickSource.DONATE_POPOVER}
+            />
+            <DonateButton
+              type={DonateButtonType.ONCE}
+              isOutlined
+              source={DonateButtonClickSource.DONATE_POPOVER}
+            />
             <LearnMoreButton source={LearnMoreClickSource.DONATE_POPOVER} />
           </div>
-          <div className={styles.text}>{t('popup.footnote')}</div>
+          <div className={styles.text}>{t('popup.footnote')}.</div>
         </div>
       </div>
     </Modal>

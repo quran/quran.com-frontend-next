@@ -115,6 +115,8 @@
     "developers": "ڈویلپرز",
     "display": "ڈسپلے",
     "donate": "عطیہ کریں۔",
+    "donate_monthly": "ماہانہ عطیہ کریں۔",
+    "donate_once": "ایک بار عطیہ کریں۔",
     "email-verification": {
         "check-spam": "تصدیقی ای میل موصول نہیں ہوا؟ اپنا اسپام ان باکس چیک کریں۔",
         "email-sent": "ہم نے ابھی <strong> {{email}} <\/strong> پر ایک ای میل بھیجی ہے۔",
