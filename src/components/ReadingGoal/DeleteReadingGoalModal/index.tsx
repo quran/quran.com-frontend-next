@@ -45,7 +45,7 @@ const DeleteReadingGoalModal = ({ isDisabled }: DeleteReadingGoalButtonProps) =>
     closeModal();
   };
 
-  const onDeleteAccountClicked = () => {
+  const onDeleteReadingGoalClicked = () => {
     logButtonClick('reading_goal_delete');
     setIsModalVisible(true);
   };
@@ -58,7 +58,7 @@ const DeleteReadingGoalModal = ({ isDisabled }: DeleteReadingGoalButtonProps) =>
       <Button
         type={ButtonType.Error}
         variant={ButtonVariant.Ghost}
-        onClick={onDeleteAccountClicked}
+        onClick={onDeleteReadingGoalClicked}
         isDisabled={isDisabled}
       >
         {t('delete-goal')}
