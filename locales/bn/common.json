@@ -115,6 +115,8 @@
     "developers": "বিকাশকারীরা",
     "display": "প্রদর্শন",
     "donate": "দান করুন",
+    "donate_monthly": "মাসিক দান করুন",
+    "donate_once": "একবার দান করুন",
     "email-verification": {
         "check-spam": "যাচাইকরণ ইমেল পাননি? আপনার স্প্যাম ইনবক্স চেক করুন",
         "email-sent": "আমরা এইমাত্র <strong> {{email}} <\/strong> -এ একটি ইমেল পাঠিয়েছি",

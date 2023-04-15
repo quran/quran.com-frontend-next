@@ -115,6 +115,8 @@
     "developers": "Sviluppatori",
     "display": "Schermo",
     "donate": "Donare",
+    "donate_monthly": "Dona mensilmente",
+    "donate_once": "Dona una volta",
     "email-verification": {
         "check-spam": "Non hai ricevuto l'email di verifica? Controlla la tua casella di posta indesiderata",
         "email-sent": "Abbiamo appena inviato un'email a <strong> {{email}} <\/strong>",

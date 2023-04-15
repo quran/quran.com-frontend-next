@@ -10,6 +10,7 @@ import { themeIcons } from '@/components/Navbar/SettingsDrawer/ThemeSection';
 import ChevronSelectIcon from '@/icons/chevron-select.svg';
 import { selectTheme, setTheme } from '@/redux/slices/theme';
 import ThemeType from '@/redux/types/ThemeType';
+import { logEvent } from '@/utils/eventLogger';
 
 const FooterThemeSwitcher = () => {
   const { t } = useTranslation('common');
@@ -22,8 +23,17 @@ const FooterThemeSwitcher = () => {
     value: themeValue,
   }));
 
+  const onOpenChange = (open: boolean) => {
+    if (open) {
+      logEvent(`footer_theme_selector_open`);
+      return;
+    }
+    logEvent(`footer_theme_selector_close`);
+  };
+
   return (
     <PopoverMenu
+      onOpenChange={onOpenChange}
       trigger={
         <Button
           className={styles.triggerContainer}

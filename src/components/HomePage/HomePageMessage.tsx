@@ -10,6 +10,7 @@ import styles from './HomePageMessage.module.scss';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import CloseIcon from '@/icons/close.svg';
 import DonateButtonClickSource from '@/types/DonateButtonClickSource';
+import DonateButtonType from '@/types/DonateButtonType';
 import LearnMoreClickSource from '@/types/LearnMoreClickSource';
 
 type HomePageMessageProps = {
@@ -39,7 +40,15 @@ const HomePageMessage = ({ title, subtitle, body, onClose }: HomePageMessageProp
         </Button>
       </div>
       <div className={styles.ctaContainer}>
-        <DonateButton source={DonateButtonClickSource.CTA_WELCOME_MESSAGE} />
+        <DonateButton
+          type={DonateButtonType.MONTHLY}
+          source={DonateButtonClickSource.CTA_WELCOME_MESSAGE}
+        />
+        <DonateButton
+          type={DonateButtonType.ONCE}
+          isOutlined
+          source={DonateButtonClickSource.CTA_WELCOME_MESSAGE}
+        />
         <LearnMoreButton source={LearnMoreClickSource.LEARN_MORE_WELCOME_MESSAGE} />
       </div>
     </div>

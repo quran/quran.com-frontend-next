@@ -5,6 +5,20 @@ import SearchQuerySource from '@/types/SearchQuerySource';
 import SearchType from '@/types/SearchType';
 import { isFirebaseEnabled } from 'src/lib/firebase';
 
+/**
+ * Filter out empty search queries.
+ *
+ * @param {string} rawSearchQuery
+ * @returns {string}
+ */
+const getSearchQuery = (rawSearchQuery: string): string => {
+  if (!rawSearchQuery) {
+    return '';
+  }
+  // trim search query so we don't log a query like ' '.
+  return rawSearchQuery.trim();
+};
+
 export const logEvent = async (eventName: string, params?: { [key: string]: any }) => {
   if (isFirebaseEnabled) {
     import('src/lib/firebase').then((firebaseModule) => {
@@ -72,10 +86,11 @@ export const logEmptySearchResults = (
   source: SearchQuerySource,
   type = SearchType.Text,
 ) => {
+  const query = getSearchQuery(searchQuery);
   // if the searchQuery is not empty
-  if (searchQuery) {
+  if (query !== '') {
     logEvent(`${type}_search_query_with_no_result`, {
-      query: searchQuery,
+      query,
       source,
     });
   }
@@ -88,10 +103,11 @@ export const logEmptySearchResults = (
  * @param {SearchQuerySource} source
  */
 export const logTextSearchQuery = (searchQuery: string, source: SearchQuerySource) => {
+  const query = getSearchQuery(searchQuery);
   // if the searchQuery is not empty
-  if (searchQuery) {
+  if (query !== '') {
     logEvent('search_query', {
-      query: searchQuery,
+      query,
       source,
     });
   }

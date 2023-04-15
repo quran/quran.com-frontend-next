@@ -51,3 +51,9 @@
 .ctaPrimary {
   margin-inline-end: var(--spacing-small);
 }
+
+.ctaContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-small) 0px;
+}

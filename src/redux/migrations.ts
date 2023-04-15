@@ -208,4 +208,11 @@ export default {
       },
     };
   },
+  28: (state) => ({
+    ...state,
+    session: {
+      count: 0,
+      isDonationPopupVisible: true,
+    },
+  }),
 };
