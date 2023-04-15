@@ -5,7 +5,9 @@ import { NextPage, GetStaticProps } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 
-import layoutStyle from '../index.module.scss';
+import layoutStyles from '../index.module.scss';
+
+import styles from './reading-goal.module.scss';
 
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import ReadingGoalOnboarding from '@/components/ReadingGoalPage';
@@ -43,8 +45,8 @@ const ReadingGoalPage: NextPage = () => {
         noindex
       />
 
-      <div className={layoutStyle.pageContainer}>
-        <div className={classNames(layoutStyle.flow, isLoading && layoutStyle.loadingContainer)}>
+      <div className={layoutStyles.pageContainer}>
+        <div className={classNames(layoutStyles.flow, isLoading && styles.loadingContainer)}>
           {isLoading ? <Spinner /> : <ReadingGoalOnboarding />}
         </div>
       </div>
