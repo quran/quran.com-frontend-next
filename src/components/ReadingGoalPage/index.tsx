@@ -7,9 +7,12 @@ import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 import { useSWRConfig } from 'swr';
 
-import useReadingGoalReducer, { ReadingGoalPeriod } from './hooks/useReadingGoalReducer';
+import useReadingGoalReducer, {
+  ReadingGoalPeriod,
+  ReadingGoalTabProps,
+} from './hooks/useReadingGoalReducer';
 import styles from './ReadingGoalPage.module.scss';
-import { logTabClick, logTabInputChange, logTabNextClick, tabsArray } from './utils/tabs';
+import { logTabClick, logTabInputChange, logTabNextClick, TabKey, tabsArray } from './utils/tabs';
 
 import DataContext from '@/contexts/DataContext';
 import Button, { ButtonSize } from '@/dls/Button/Button';
@@ -79,7 +82,7 @@ const ReadingGoalOnboarding: React.FC = () => {
     setLoading(false);
   };
 
-  const isPreviewTab = Tab.key === 'preview';
+  const isPreviewTab = Tab.key === TabKey.PreviewTab;
   const percentage = isPreviewTab ? 100 : (tabIdx / tabsArray.length) * 100;
 
   const onPrev = () => {
@@ -113,9 +116,9 @@ const ReadingGoalOnboarding: React.FC = () => {
     const MIN_SECONDS = 60; // 1 minute
 
     // if the user is on the examples tab and hasn't selected an example, disable the next button
-    if (Tab.key === 'examples' && !state.exampleKey) return true;
+    if (Tab.key === TabKey.ExamplesTab && !state.exampleKey) return true;
 
-    if (Tab.key === 'amount') {
+    if (Tab.key === TabKey.AmountTab) {
       // if the user selected a pages goal and didn't enter a valid amount of pages, disable the next button
       if (state.type === ReadingGoalType.PAGES && !isValidPageId(state.pages)) return true;
 
@@ -155,6 +158,14 @@ const ReadingGoalOnboarding: React.FC = () => {
     return false;
   };
 
+  const logClick: ReadingGoalTabProps['logClick'] = (event) => {
+    logTabClick(Tab.key, event);
+  };
+
+  const logChange: ReadingGoalTabProps['logChange'] = (input, values, metadata) => {
+    logTabInputChange(Tab.key, input, values, metadata);
+  };
+
   return (
     <div className={classNames(layoutStyle.flowItem)}>
       <Progress value={percentage} />
@@ -167,10 +178,8 @@ const ReadingGoalOnboarding: React.FC = () => {
             onTabChange={setTabIdx}
             state={state}
             dispatch={dispatch}
-            logClick={(event: string) => logTabClick(Tab.key, event)}
-            logChange={(input, values, metadata) =>
-              logTabInputChange(Tab.key, input, values, metadata)
-            }
+            logClick={logClick}
+            logChange={logChange}
             nav={
               <div className={styles.navigationContainer}>
                 {tabIdx > 0 && (

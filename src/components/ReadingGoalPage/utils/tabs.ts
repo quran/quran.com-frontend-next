@@ -8,39 +8,43 @@ import ReadingGoalWeekPreviewTab from '../ReadingGoalWeekPreviewTab';
 import { ReadingGoalType } from '@/types/auth/ReadingGoal';
 import { logButtonClick, logValueChange } from '@/utils/eventLogger';
 
-const tabs = {
-  examples: ReadingGoalExamplesTab,
-  continuity: ReadingGoalTimeTab,
-  type: ReadingGoalTypeTab,
-  amount: ReadingGoalTargetAmountTab,
-  preview: ReadingGoalWeekPreviewTab,
-} as const;
+export enum TabKey {
+  ExamplesTab = 'examples',
+  ContinuityTab = 'continuity',
+  TypeTab = 'type',
+  AmountTab = 'amount',
+  PreviewTab = 'preview',
+}
 
-export const tabsArray = (Object.keys(tabs) as (keyof typeof tabs)[]).map((key) => ({
+const tabs = {
+  [TabKey.ExamplesTab]: ReadingGoalExamplesTab,
+  [TabKey.ContinuityTab]: ReadingGoalTimeTab,
+  [TabKey.TypeTab]: ReadingGoalTypeTab,
+  [TabKey.AmountTab]: ReadingGoalTargetAmountTab,
+  [TabKey.PreviewTab]: ReadingGoalWeekPreviewTab,
+};
+
+export const tabsArray = (Object.keys(tabs) as TabKey[]).map((key) => ({
   key,
   Component: tabs[key],
 }));
 
-export const logTabClick = (
-  tab: keyof typeof tabs,
-  event: string,
-  metadata?: Record<string, unknown>,
-) => {
+export const logTabClick = (tab: TabKey, event: string, metadata?: Record<string, unknown>) => {
   logButtonClick(`create_goal_${tab}_tab_${event}`, metadata);
 };
 
 export const logTabNextClick = (
-  tab: keyof typeof tabs,
+  tab: TabKey,
   state: ReturnType<typeof useReadingGoalReducer>[0],
 ) => {
   let metadata: Record<string, unknown> | undefined;
 
-  if (tab === 'examples') {
+  if (tab === TabKey.ExamplesTab) {
     metadata = { example: state.exampleKey };
-  } else if (tab === 'type') {
+  } else if (tab === TabKey.TypeTab) {
     // eslint-disable-next-line @typescript-eslint/naming-convention
     metadata = { goal_type: state.type };
-  } else if (tab === 'amount') {
+  } else if (tab === TabKey.AmountTab) {
     metadata = {
       pages: state.type === ReadingGoalType.PAGES ? state.pages : null,
       seconds: state.type === ReadingGoalType.TIME ? state.seconds : null,
@@ -50,7 +54,7 @@ export const logTabNextClick = (
           : null,
       duration: state.period === ReadingGoalPeriod.Continuous ? state.duration : null,
     };
-  } else if (tab === 'continuity') {
+  } else if (tab === TabKey.ContinuityTab) {
     // eslint-disable-next-line @typescript-eslint/naming-convention
     metadata = { goal_period: state.period };
   }
@@ -59,7 +63,7 @@ export const logTabNextClick = (
 };
 
 export const logTabInputChange = (
-  tab: keyof typeof tabs,
+  tab: TabKey,
   input: string,
   values: { currentValue: unknown; newValue: unknown },
   metadata?: Record<string, unknown>,
