@@ -150,6 +150,8 @@ const useSyncReadingProgress = ({ isReadingPreference }: UseSyncReadingProgressP
     let interval: NodeJS.Timeout = null;
 
     const handleFocus = () => {
+      if (interval) clearInterval(interval);
+
       interval = setInterval(() => {
         elapsedReadingTimeInSeconds.current += 1;
       }, 1000);
@@ -161,6 +163,8 @@ const useSyncReadingProgress = ({ isReadingPreference }: UseSyncReadingProgressP
 
     window.addEventListener('focus', handleFocus);
     window.addEventListener('blur', handleBlur);
+
+    handleFocus();
 
     return () => {
       window.removeEventListener('focus', handleFocus);

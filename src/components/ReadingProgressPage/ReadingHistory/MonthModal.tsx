@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
-import useSWRImmutable from 'swr/immutable';
+import useSWR from 'swr';
 
 import DaysCalendar from './DaysCalendar';
 import styles from './ReadingHistory.module.scss';
@@ -43,13 +43,12 @@ const MonthModal = ({ month, year, onClose }: MonthModalProps) => {
     limit: 31,
   };
 
-  const { data, isValidating } = useSWRImmutable<{
+  const { data, isValidating } = useSWR<{
     data: ReadingDay[];
     pagination: Pagination;
   }>(makeFilterReadingDaysUrl(params), (url) => privateFetcher(url), {
     revalidateOnFocus: false,
     revalidateIfStale: false,
-    revalidateOnReconnect: false,
   });
 
   const isLoading = !data && isValidating;

@@ -86,7 +86,7 @@ const ReadingGoalWeekPreviewTab: React.FC<ReadingGoalTabProps> = ({ state, nav }
       return `${t('reciter:read')} ${secondsToReadableFormat(data.data.dailyAmount, t, lang)}`;
     }
 
-    const pages = data.data.dailyAmount;
+    const pages = Number(data.data.dailyAmount.toFixed(2));
     return `${t('reciter:read')} ${t('x-pages', {
       count: pages,
       pages: toLocalizedNumber(pages, lang),

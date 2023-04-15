@@ -1,9 +1,13 @@
 import classNames from 'classnames';
+import useTranslation from 'next-translate/useTranslation';
 
 import styles from './ReadingStreak.module.scss';
 
+import { ContentSide } from '@/dls/Popover';
+import HoverablePopover from '@/dls/Popover/HoverablePopover';
 import useGetStreakWithMetadata from '@/hooks/auth/useGetStreakWithMetadata';
 import CheckIcon from '@/icons/check.svg';
+import { toLocalizedNumber } from '@/utils/locale';
 import { convertFractionToPercent } from '@/utils/number';
 
 enum DayState {
@@ -16,16 +20,11 @@ enum DayState {
 interface Props {
   weekData: ReturnType<typeof useGetStreakWithMetadata>['weekData'];
   readingGoal?: ReturnType<typeof useGetStreakWithMetadata>['readingGoal'];
-  shouldHideOnTablet?: boolean;
   fixedWidth?: boolean;
 }
 
-const CurrentWeekProgress: React.FC<Props> = ({
-  weekData,
-  readingGoal,
-  shouldHideOnTablet = true,
-  fixedWidth = true,
-}) => {
+const CurrentWeekProgress: React.FC<Props> = ({ weekData, readingGoal, fixedWidth = true }) => {
+  const { lang } = useTranslation();
   const { days, readingDaysMap } = weekData;
 
   const getDayState = (day: typeof days[number]): DayState => {
@@ -47,16 +46,27 @@ const CurrentWeekProgress: React.FC<Props> = ({
   return (
     <div
       className={classNames(styles.week, {
-        [styles.hideOnTablet]: shouldHideOnTablet,
         [styles.fixedWidth]: fixedWidth,
       })}
     >
-      {days.map((day) => {
+      {days.map((day, idx) => {
         const dayState = getDayState(day);
+        const localizedDayNumber = toLocalizedNumber(idx + 1, lang);
 
         return (
           <div key={day.name} className={styles.day}>
-            {day.name}
+            <HoverablePopover
+              content={new Date(day.date).toLocaleDateString(lang, {
+                day: 'numeric',
+                month: 'long',
+                weekday: 'long',
+              })}
+              contentSide={ContentSide.TOP}
+            >
+              <span className={styles.fullName}>{day.name}</span>
+              <span className={styles.shortName}>{localizedDayNumber}</span>
+            </HoverablePopover>
+
             <div className={styles.circleContainer}>
               <div
                 className={classNames(styles.dayCircle, {

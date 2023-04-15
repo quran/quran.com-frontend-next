@@ -38,8 +38,8 @@ const ReadingGoalTimeTab: React.FC<ReadingGoalTabProps> = ({ state, dispatch, na
               logClick(option.key);
             }}
             selected={state.period === option.key}
-            option={t(`${option.key}.title`)}
-            description={t(`${option.key}.description`)}
+            option={t(`${option.key.toLowerCase()}.title`)}
+            description={t(`${option.key.toLowerCase()}.description`)}
           />
         ))}
         {nav}

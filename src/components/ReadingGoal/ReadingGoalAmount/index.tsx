@@ -50,7 +50,7 @@ const ReadingGoalAmount: React.FC<ReadingGoalAmountProps> = ({
   }
 
   if (goalType === ReadingGoalType.PAGES) {
-    action = t('progress.pages-goal', { pages: progress.amountLeft.toFixed(1) });
+    action = t('progress.pages-goal', { pages: progress.amountLeft.toFixed(2) });
   }
 
   if (goalType === ReadingGoalType.RANGE) {

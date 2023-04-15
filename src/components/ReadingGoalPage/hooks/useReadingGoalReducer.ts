@@ -8,8 +8,8 @@ import SettingsIcon from '@/icons/settings-stroke.svg';
 import { ReadingGoalType } from '@/types/auth/ReadingGoal';
 
 export enum ReadingGoalPeriod {
-  Daily = 'daily',
-  Continuous = 'continuous',
+  Daily = 'DAILY',
+  Continuous = 'CONTINUOUS',
 }
 
 interface ReadingGoalState {
@@ -127,7 +127,7 @@ const reducer = (state: ReadingGoalState, action: ReadingGoalAction): ReadingGoa
 };
 
 export const readingGoalExamples = {
-  time: {
+  '10_mins': {
     i18nKey: 'time',
     icon: ClockIcon,
     recommended: true,
@@ -176,7 +176,7 @@ export interface ReadingGoalTabProps {
   state: ReturnType<typeof useReadingGoalReducer>[0];
   dispatch: ReturnType<typeof useReadingGoalReducer>[1];
   nav: React.ReactNode;
-  logClick: (event: string) => void;
+  logClick: (event: string, metadata?: Record<string, unknown>) => void;
   logChange: (
     input: string,
     values: { currentValue: unknown; newValue: unknown },

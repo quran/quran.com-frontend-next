@@ -8,12 +8,8 @@ import { useRouter } from 'next/router';
 import { useSWRConfig } from 'swr';
 
 import useReadingGoalReducer, { ReadingGoalPeriod } from './hooks/useReadingGoalReducer';
-import ReadingGoalExamplesTab from './ReadingGoalExamplesTab';
 import styles from './ReadingGoalPage.module.scss';
-import ReadingGoalTargetAmountTab from './ReadingGoalTargetAmountTab';
-import ReadingGoalTimeTab from './ReadingGoalTimeTab';
-import ReadingGoalTypeTab from './ReadingGoalTypeTab';
-import ReadingGoalWeekPreviewTab from './ReadingGoalWeekPreviewTab';
+import { logTabClick, logTabInputChange, logTabNextClick, tabsArray } from './utils/tabs';
 
 import DataContext from '@/contexts/DataContext';
 import Button, { ButtonSize } from '@/dls/Button/Button';
@@ -26,35 +22,9 @@ import layoutStyle from '@/pages/index.module.scss';
 import { CreateReadingGoalRequest, ReadingGoalType } from '@/types/auth/ReadingGoal';
 import { addReadingGoal } from '@/utils/auth/api';
 import { makeStreakUrl } from '@/utils/auth/apiPaths';
-import { logButtonClick, logFormSubmission, logValueChange } from '@/utils/eventLogger';
+import { logFormSubmission } from '@/utils/eventLogger';
 import { isValidPageId, isValidVerseKey } from '@/utils/validator';
 import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
-
-const tabs = {
-  examples: ReadingGoalExamplesTab,
-  continuity: ReadingGoalTimeTab,
-  type: ReadingGoalTypeTab,
-  amount: ReadingGoalTargetAmountTab,
-  preview: ReadingGoalWeekPreviewTab,
-} as const;
-
-const tabsArray = (Object.keys(tabs) as (keyof typeof tabs)[]).map((key) => ({
-  key,
-  Component: tabs[key],
-}));
-
-const logTabClick = (tab: typeof tabsArray[number]['key'], event: string) => {
-  logButtonClick(`create_goal_${tab}_tab_${event}`);
-};
-
-const logTabInputChange = (
-  tab: typeof tabsArray[number]['key'],
-  input: string,
-  values: { currentValue: unknown; newValue: unknown },
-  metadata?: Record<string, unknown>,
-) => {
-  logValueChange(`create_goal_${tab}_tab_${input}`, values.currentValue, values.newValue, metadata);
-};
 
 const ReadingGoalOnboarding: React.FC = () => {
   const { t } = useTranslation();
@@ -89,6 +59,8 @@ const ReadingGoalOnboarding: React.FC = () => {
       amount,
     };
     if (state.period === ReadingGoalPeriod.Continuous) data.duration = state.duration;
+
+    logFormSubmission('create_goal', { duration: null, ...data });
 
     setLoading(true);
 
@@ -128,12 +100,11 @@ const ReadingGoalOnboarding: React.FC = () => {
       } else {
         // otherwise, go to the next tab
         setTabIdx((prevIdx) => prevIdx + 1);
-        // logTabClick(Tab.key, 'custom');
       }
-      logTabClick(Tab.key, 'next');
+
+      logTabNextClick(Tab.key, state);
     } else {
       onSubmit();
-      logFormSubmission('create_goal');
     }
   };
 

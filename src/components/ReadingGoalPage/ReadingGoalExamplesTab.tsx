@@ -19,21 +19,24 @@ const ReadingGoalExamplesTab: React.FC<ReadingGoalTabProps> = ({
         <p className={styles.subtitle}>{t('examples-subtitle')}</p>
       </div>
       <div className={styles.optionsContainer}>
-        {Object.values(readingGoalExamples).map((example) => (
-          <OptionButton
-            key={example.i18nKey}
-            icon={example.icon}
-            onSelect={() => {
-              dispatch({ type: 'SET_EXAMPLE', payload: { exampleKey: example.i18nKey } });
+        {Object.keys(readingGoalExamples).map((exampleKey: keyof typeof readingGoalExamples) => {
+          const example = readingGoalExamples[exampleKey];
 
-              logClick(example.i18nKey === 'time' ? '10_mins' : example.i18nKey);
-            }}
-            selected={state.exampleKey === example.i18nKey}
-            option={t(`examples.${example.i18nKey}.title`)}
-            recommended={'recommended' in example && example.recommended}
-            description={t(`examples.${example.i18nKey}.description`)}
-          />
-        ))}
+          return (
+            <OptionButton
+              key={example.i18nKey}
+              icon={example.icon}
+              onSelect={() => {
+                dispatch({ type: 'SET_EXAMPLE', payload: { exampleKey } });
+                logClick(exampleKey);
+              }}
+              selected={state.exampleKey === example.i18nKey}
+              option={t(`examples.${example.i18nKey}.title`)}
+              recommended={'recommended' in example && example.recommended}
+              description={t(`examples.${example.i18nKey}.description`)}
+            />
+          );
+        })}
         {nav}
       </div>
     </>

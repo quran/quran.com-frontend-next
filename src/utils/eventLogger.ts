@@ -42,8 +42,8 @@ export const logButtonClick = (buttonName: string, params?: { [key: string]: any
  *
  * @param {string} formName
  */
-export const logFormSubmission = (formName: string) => {
-  logEvent(`${formName}_form_submitted`);
+export const logFormSubmission = (formName: string, params?: { [key: string]: any }) => {
+  logEvent(`${formName}_form_submitted`, params);
 };
 
 /**
