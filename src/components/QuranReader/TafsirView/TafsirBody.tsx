@@ -129,6 +129,40 @@ const TafsirBody = ({
     fetcher,
   );
 
+  const onSelectLanguage = useCallback(
+    (newSelectedLanguage: string) => {
+      logValueChange('tafsir_locale', selectedLanguage, newSelectedLanguage);
+      setSelectedLanguage(newSelectedLanguage);
+      const tafsirsInNewSelectedLanguage = tafsirSelectionList?.tafsirs?.filter(
+        (tafsir) => tafsir.languageName === newSelectedLanguage,
+      );
+      const slug = tafsirsInNewSelectedLanguage[0]?.slug;
+      if (slug) {
+        setSelectedTafsirIdOrSlug(slug);
+        onSettingsChange(
+          'selectedTafsirs',
+          [slug],
+          setSelectedTafsirs({
+            tafsirs: [slug],
+            locale: lang,
+          }),
+          setSelectedTafsirs({
+            tafsirs: tafsirsState.selectedTafsirs,
+            locale: lang,
+          }),
+          PreferenceGroup.TAFSIRS,
+        );
+      }
+    },
+    [
+      lang,
+      onSettingsChange,
+      selectedLanguage,
+      tafsirSelectionList?.tafsirs,
+      tafsirsState.selectedTafsirs,
+    ],
+  );
+
   // selectedLanguage is based on selectedTafir's language
   // but we need to fetch the data from the API first to know what is the lanaguage of `selectedTafsirIdOrSlug`
   // so we get the data from the API and set the selectedLanguage once it is loaded
@@ -267,10 +301,7 @@ const TafsirBody = ({
       selectedTafsirIdOrSlug={selectedTafsirIdOrSlug}
       selectedLanguage={selectedLanguage}
       onTafsirSelected={onTafsirSelected}
-      onSelectLanguage={(newLang) => {
-        logValueChange('tafsir_locale', selectedLanguage, newLang);
-        setSelectedLanguage(newLang);
-      }}
+      onSelectLanguage={onSelectLanguage}
       languageOptions={languageOptions}
       data={tafsirSelectionList}
       isLoading={isLoading}

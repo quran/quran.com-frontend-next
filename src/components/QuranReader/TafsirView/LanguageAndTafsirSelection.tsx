@@ -48,12 +48,7 @@ const LanguageAndTafsirSelection = ({
           value={selectedLanguage}
         />
         {data.tafsirs
-          .filter(
-            (tafsir) =>
-              tafsir.languageName === selectedLanguage ||
-              selectedTafsirIdOrSlug === tafsir.slug ||
-              Number(selectedTafsirIdOrSlug) === tafsir.id,
-          )
+          .filter((tafsir) => tafsir.languageName === selectedLanguage)
           .map((tafsir) => {
             const selected =
               selectedTafsirIdOrSlug === tafsir.slug ||
