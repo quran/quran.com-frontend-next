@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
-import ReadingGoalInput from '../ReadingGoal/ReadingGoalInput';
+import ReadingGoalInput, { ReadingGoalInputProps } from '../ReadingGoal/ReadingGoalInput';
 
 import { ReadingGoalPeriod, ReadingGoalTabProps } from './hooks/useReadingGoalReducer';
 import styles from './ReadingGoalPage.module.scss';
@@ -27,6 +27,18 @@ const ReadingGoalTargetAmountTab: React.FC<ReadingGoalTabProps> = ({
     dispatch({ type: 'SET_DURATION', payload: { duration: newDuration } });
   };
 
+  const onRangeChange: ReadingGoalInputProps['onRangeChange'] = (newRange) => {
+    dispatch({ type: 'SET_RANGE', payload: newRange });
+  };
+
+  const onPagesChange: ReadingGoalInputProps['onPagesChange'] = (newPages) => {
+    dispatch({ type: 'SET_PAGES', payload: { pages: newPages } });
+  };
+
+  const onSecondsChange: ReadingGoalInputProps['onSecondsChange'] = (newSeconds) => {
+    dispatch({ type: 'SET_SECONDS', payload: { seconds: newSeconds } });
+  };
+
   return (
     <>
       <div className={styles.titleContainer}>
@@ -40,13 +52,9 @@ const ReadingGoalTargetAmountTab: React.FC<ReadingGoalTabProps> = ({
           seconds={seconds}
           rangeStartVerse={rangeStartVerse}
           rangeEndVerse={rangeEndVerse}
-          onRangeChange={(newRange) => dispatch({ type: 'SET_RANGE', payload: newRange })}
-          onPagesChange={(newPages) =>
-            dispatch({ type: 'SET_PAGES', payload: { pages: newPages } })
-          }
-          onSecondsChange={(newSeconds) =>
-            dispatch({ type: 'SET_SECONDS', payload: { seconds: newSeconds } })
-          }
+          onRangeChange={onRangeChange}
+          onPagesChange={onPagesChange}
+          onSecondsChange={onSecondsChange}
           logChange={logChange}
         />
         {period === ReadingGoalPeriod.Continuous && (

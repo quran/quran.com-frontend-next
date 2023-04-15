@@ -21,7 +21,7 @@ import {
 } from '@/utils/generators';
 import { getVerseNumberFromKey, getChapterNumberFromKey } from '@/utils/verse';
 
-interface ReadingGoalInputProps {
+export interface ReadingGoalInputProps {
   type: ReadingGoalType;
 
   rangeStartVerse?: string;
