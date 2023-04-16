@@ -11,6 +11,7 @@ import BookIcon from '@/icons/book.svg';
 import ClockIcon from '@/icons/clock.svg';
 import RightArrow from '@/icons/east.svg';
 import { ReadingDay } from '@/types/auth/ReadingDay';
+import { RangeItemDirection } from '@/types/Range';
 import { getChapterData } from '@/utils/chapter';
 import { secondsToReadableFormat } from '@/utils/datetime';
 import { logButtonClick } from '@/utils/eventLogger';
@@ -24,11 +25,6 @@ interface DaysCalendarProps {
   days: ReadingDay[];
   selectedDate: string | null;
   setSelectedDate: (date: string | null) => void;
-}
-
-enum RangePosition {
-  From = 'from',
-  To = 'to',
 }
 
 const DaysCalendar: React.FC<DaysCalendarProps> = ({
@@ -58,7 +54,7 @@ const DaysCalendar: React.FC<DaysCalendarProps> = ({
     return map;
   }, [days]);
 
-  const handleVerseClick = (position: RangePosition, verseKey: string) => {
+  const handleVerseClick = (position: RangeItemDirection, verseKey: string) => {
     return () => {
       logButtonClick(`reading_history_range_${position}`, {
         // eslint-disable-next-line @typescript-eslint/naming-convention
@@ -114,7 +110,7 @@ const DaysCalendar: React.FC<DaysCalendarProps> = ({
                   <Link
                     href={getChapterWithStartingVerseUrl(rangeFrom)}
                     variant={LinkVariant.Primary}
-                    onClick={handleVerseClick(RangePosition.From, rangeFrom)}
+                    onClick={handleVerseClick(RangeItemDirection.From, rangeFrom)}
                   >
                     {from}
                   </Link>
@@ -122,7 +118,7 @@ const DaysCalendar: React.FC<DaysCalendarProps> = ({
                   <Link
                     href={getChapterWithStartingVerseUrl(rangeTo)}
                     variant={LinkVariant.Primary}
-                    onClick={handleVerseClick(RangePosition.To, rangeTo)}
+                    onClick={handleVerseClick(RangeItemDirection.To, rangeTo)}
                   >
                     {to}
                   </Link>

@@ -14,12 +14,13 @@ import ComboboxSize from '@/dls/Forms/Combobox/types/ComboboxSize';
 import Input, { InputSize } from '@/dls/Forms/Input';
 import Select, { SelectSize } from '@/dls/Forms/Select';
 import { ReadingGoalType } from '@/types/auth/ReadingGoal';
+import { RangeItem, RangeItemPosition } from '@/types/Range';
 import {
   generateChapterOptions,
   generateTimeOptions,
   generateVerseOptions,
 } from '@/utils/generators';
-import { getVerseNumberFromKey, getChapterNumberFromKey } from '@/utils/verse';
+import { getVerseNumberFromKey, getChapterNumberFromKey, makeVerseKey } from '@/utils/verse';
 
 export interface ReadingGoalInputProps {
   type: ReadingGoalType;
@@ -89,8 +90,8 @@ const ReadingGoalInput: React.FC<ReadingGoalInputProps> = ({
     return getVerseNumberFromKey(rangeStartVerse).toString();
   }, [rangeStartVerse]);
 
-  const onChapterChange = (chapterType: 'start' | 'end') => (chapterId: string) => {
-    const isStartChapter = chapterType === 'start';
+  const onChapterChange = (chapterPosition: RangeItemPosition) => (chapterId: string) => {
+    const isStartChapter = chapterPosition === RangeItemPosition.Start;
     const oldChapterId = isStartChapter ? startChapter : endChapter;
     const setChapter = isStartChapter ? setStartChapter : setEndChapter;
 
@@ -144,13 +145,12 @@ const ReadingGoalInput: React.FC<ReadingGoalInputProps> = ({
     return chapterOptions.slice(startChapterIdx);
   }, [chapterOptions, startChapter]);
 
-  const onVerseChange = (verseType: 'start' | 'end') => (verseId: string) => {
-    const isStartVerse = verseType === 'start';
+  const onVerseChange = (versePosition: RangeItemPosition) => (verseId: string) => {
+    const isStartVerse = versePosition === RangeItemPosition.Start;
 
-    let newVerseKey: string | null = null;
-    if (verseId) {
-      newVerseKey = isStartVerse ? `${startChapter}:${verseId}` : `${endChapter}:${verseId}`;
-    }
+    const newVerseKey = verseId
+      ? makeVerseKey(isStartVerse ? startChapter : endChapter, verseId)
+      : null;
 
     onRangeChange(
       isStartVerse
@@ -174,21 +174,19 @@ const ReadingGoalInput: React.FC<ReadingGoalInputProps> = ({
     );
   };
 
-  const getInitialInputValue = (
-    inputType: 'start-chapter' | 'start-verse' | 'end-chapter' | 'end-verse',
-  ) => {
-    if (inputType === 'start-chapter' || inputType === 'end-chapter') {
-      const chapterId = inputType === 'start-chapter' ? startChapter : endChapter;
+  const getInitialInputValue = (inputType: RangeItem) => {
+    if (inputType === RangeItem.StartingChapter || inputType === RangeItem.EndingChapter) {
+      const chapterId = inputType === RangeItem.StartingChapter ? startChapter : endChapter;
       if (!chapterId) return undefined;
 
       return chapterOptions[Number(chapterId) - 1]?.label;
     }
 
-    // inputType === 'start-verse' || inputType === 'end-verse'
-    const verseId = inputType === 'start-verse' ? startingVerse : endingVerse;
+    const verseId = inputType === RangeItem.StartingVerse ? startingVerse : endingVerse;
     if (!verseId) return '';
 
-    const verseOptions = inputType === 'start-verse' ? startingVerseOptions : endingVerseOptions;
+    const verseOptions =
+      inputType === RangeItem.StartingVerse ? startingVerseOptions : endingVerseOptions;
     return verseOptions[Number(verseId) - 1]?.label;
   };
 
@@ -204,8 +202,8 @@ const ReadingGoalInput: React.FC<ReadingGoalInputProps> = ({
               label={<p className={styles.label}>{t('starting-chapter')}</p>}
               items={startChapterOptions}
               value={startChapter}
-              initialInputValue={getInitialInputValue('start-chapter')}
-              onChange={onChapterChange('start')}
+              initialInputValue={getInitialInputValue(RangeItem.StartingChapter)}
+              onChange={onChapterChange(RangeItemPosition.Start)}
             />
           </div>
 
@@ -218,8 +216,8 @@ const ReadingGoalInput: React.FC<ReadingGoalInputProps> = ({
               label={<p className={styles.label}>{t('starting-verse')}</p>}
               items={startingVerseOptions}
               value={startingVerse}
-              initialInputValue={getInitialInputValue('start-verse')}
-              onChange={onVerseChange('start')}
+              initialInputValue={getInitialInputValue(RangeItem.StartingVerse)}
+              onChange={onVerseChange(RangeItemPosition.Start)}
             />
           </div>
         </div>
@@ -232,8 +230,8 @@ const ReadingGoalInput: React.FC<ReadingGoalInputProps> = ({
               label={<p className={styles.label}>{t('ending-chapter')}</p>}
               items={endChapterOptions}
               value={endChapter}
-              initialInputValue={getInitialInputValue('end-chapter')}
-              onChange={onChapterChange('end')}
+              initialInputValue={getInitialInputValue(RangeItem.EndingChapter)}
+              onChange={onChapterChange(RangeItemPosition.End)}
             />
           </div>
 
@@ -246,8 +244,8 @@ const ReadingGoalInput: React.FC<ReadingGoalInputProps> = ({
               items={endingVerseOptions}
               value={endingVerse}
               disabled={!endChapter}
-              initialInputValue={getInitialInputValue('end-verse')}
-              onChange={onVerseChange('end')}
+              initialInputValue={getInitialInputValue(RangeItem.EndingVerse)}
+              onChange={onVerseChange(RangeItemPosition.End)}
             />
           </div>
         </div>
