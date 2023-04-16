@@ -25,7 +25,7 @@ export const secondsFormatter = (seconds: number, locale: string) => {
  * @param {string} locale locale
  * @returns {string}
  */
-export const secondsToReadableFormat = (s: number, t: Translate, locale: string) => {
+export const secondsToReadableFormat = (s: number, t: Translate, locale: string): string => {
   const results: string[] = [];
 
   let seconds = s;
@@ -102,7 +102,11 @@ export const parseDate = (date: string): number => Date.parse(date);
  * @param {string} locale
  * @returns {string} date
  */
-export const formatDateRelatively = (date: Date, locale: string, now: Date = new Date()) => {
+export const formatDateRelatively = (
+  date: Date,
+  locale: string,
+  now: Date = new Date(),
+): string => {
   const fullLocale = LANG_LOCALE_MAP[locale];
 
   // Formatter for "Today" and "Yesterday" etc
@@ -181,4 +185,30 @@ export const getFullDayName = (day: Date, locale: string): string => {
  */
 export const getFullMonthName = (month: Date, locale: string): string => {
   return month.toLocaleDateString(locale, { month: 'long' });
+};
+
+/**
+ * Formats a date to a readable format.
+ *
+ * Example output: `Sunday, April 16`
+ *
+ * @param {Date | string} date Date instance or date string
+ * @param {string} locale
+ * @param {Intl.DateTimeFormatOptions} options
+ * @returns {string}
+ *
+ */
+export const dateToReadableFormat = (
+  date: Date | string,
+  locale: string,
+  options: Intl.DateTimeFormatOptions = {},
+): string => {
+  const dateInstance = typeof date === 'string' ? new Date(date) : date;
+
+  return dateInstance.toLocaleDateString(getLangFullLocale(locale), {
+    day: 'numeric',
+    month: 'long',
+    weekday: 'long',
+    ...options,
+  });
 };

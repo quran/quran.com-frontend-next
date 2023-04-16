@@ -7,6 +7,7 @@ import { ContentSide } from '@/dls/Popover';
 import HoverablePopover from '@/dls/Popover/HoverablePopover';
 import useGetStreakWithMetadata from '@/hooks/auth/useGetStreakWithMetadata';
 import CheckIcon from '@/icons/check.svg';
+import { dateToReadableFormat } from '@/utils/datetime';
 import { toLocalizedNumber } from '@/utils/locale';
 import { convertFractionToPercent } from '@/utils/number';
 
@@ -56,11 +57,7 @@ const CurrentWeekProgress: React.FC<Props> = ({ weekData, readingGoal, fixedWidt
         return (
           <div key={day.name} className={styles.day}>
             <HoverablePopover
-              content={new Date(day.date).toLocaleDateString(lang, {
-                day: 'numeric',
-                month: 'long',
-                weekday: 'long',
-              })}
+              content={dateToReadableFormat(day.date, lang)}
               contentSide={ContentSide.TOP}
             >
               <span className={styles.fullName}>{day.name}</span>

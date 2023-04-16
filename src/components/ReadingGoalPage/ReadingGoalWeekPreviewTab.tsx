@@ -8,12 +8,13 @@ import { ReadingGoalPeriod, ReadingGoalTabProps } from './hooks/useReadingGoalRe
 import styles from './ReadingGoalPage.module.scss';
 
 import DataContext from '@/contexts/DataContext';
+import HoverablePopover from '@/dls/Popover/HoverablePopover';
 import Spinner from '@/dls/Spinner/Spinner';
 import { CreateReadingGoalRequest, ReadingGoalType } from '@/types/auth/ReadingGoal';
 import { estimateReadingGoal } from '@/utils/auth/api';
 import { makeEstimateReadingGoalUrl } from '@/utils/auth/apiPaths';
 import { getChapterData } from '@/utils/chapter';
-import { secondsToReadableFormat } from '@/utils/datetime';
+import { dateToReadableFormat, secondsToReadableFormat } from '@/utils/datetime';
 import { toLocalizedNumber } from '@/utils/locale';
 import { parseVerseRange } from '@/utils/verseKeys';
 
@@ -56,8 +57,11 @@ const ReadingGoalWeekPreviewTab: React.FC<ReadingGoalTabProps> = ({ state, nav }
     () => estimateReadingGoal(getPayload(state)),
     {
       revalidateOnMount: true,
+      revalidateOnFocus: false,
     },
   );
+
+  const isLoading = !data && isValidating;
 
   const getDailyAmount = (idx: number) => {
     if (data.data.type === ReadingGoalType.RANGE) {
@@ -106,9 +110,11 @@ const ReadingGoalWeekPreviewTab: React.FC<ReadingGoalTabProps> = ({ state, nav }
 
           return (
             <li key={day.getDate()} className={styles.dayPreview}>
-              <h3>{t('day-x', { day: toLocalizedNumber(idx + 1, lang) })}</h3>
+              <HoverablePopover content={dateToReadableFormat(day, lang)}>
+                <h3>{t('day-x', { day: toLocalizedNumber(idx + 1, lang) })}</h3>
+              </HoverablePopover>
 
-              {isValidating ? (
+              {isLoading ? (
                 <div>
                   <Spinner />
                 </div>
