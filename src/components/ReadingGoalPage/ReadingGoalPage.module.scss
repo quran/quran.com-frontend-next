@@ -59,8 +59,7 @@
   // margin-block: var(--spacing-medium);
 }
 
-.navigateButton {
-}
+.navigateButton {}
 
 $circle-size: var(--spacing-small);
 $circle-spacing: var(--spacing-xxsmall);
@@ -93,6 +92,11 @@ $circle-border: 4px;
     position: absolute;
     inset-inline-start: 0;
     transform: translateX(calc(-100% - $circle-spacing));
+
+    [dir="rtl"] & {
+      transform: translateX(calc(100% + $circle-spacing));
+    }
+
     width: $circle-size;
     height: $circle-size;
     border: $circle-border solid var(--color-success-medium);
@@ -104,12 +108,14 @@ $circle-border: 4px;
     position: absolute;
     inset-inline-start: 0;
     // we need to translate the line directly under the circle and in the middle of it
-    transform: translate(
-      calc(
-        -100% + ($circle-spacing * -1) + ($circle-size + $circle-border) / -2
-      ),
-      calc(50% + ($circle-size + $circle-border) / 2)
-    );
+    transform: translate(calc(-100% + ($circle-spacing * -1) + ($circle-size + $circle-border) / -2),
+        calc(50% + ($circle-size + $circle-border) / 2));
+
+    [dir="rtl"] & {
+      transform: translate(calc(100% + $circle-spacing + ($circle-size + $circle-border) / 2),
+          calc(50% + ($circle-size + $circle-border) / 2));
+    }
+
     width: 3px;
     height: 100%;
     background-color: var(--color-success-medium);
@@ -135,7 +141,7 @@ $circle-border: 4px;
   gap: var(--spacing-medium);
   margin-block-end: var(--spacing-large);
 
-  & > div {
+  &>div {
     flex: 1;
   }
 }
@@ -150,7 +156,7 @@ $circle-border: 4px;
 .input {
   width: 100%;
 
-  > select {
+  >select {
     width: 100%;
   }
 }

@@ -106,7 +106,7 @@ const ReadingGoalWeekPreviewTab: React.FC<ReadingGoalTabProps> = ({ state, nav }
 
           return (
             <li key={day.getDate()} className={styles.dayPreview}>
-              <h3>{t('day-x', { day: idx + 1 })}</h3>
+              <h3>{t('day-x', { day: toLocalizedNumber(idx + 1, lang) })}</h3>
 
               {isValidating ? (
                 <div>
