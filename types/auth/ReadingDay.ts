@@ -15,7 +15,6 @@ export type UpdateReadingDayBody = {
   ranges?: string[];
   pages?: number;
   seconds?: number;
-  timezone: string;
 };
 
 export type FilterReadingDaysParams = {

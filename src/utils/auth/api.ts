@@ -116,7 +116,7 @@ const patchRequest = <T>(url: string, requestData?: RequestData): Promise<T> =>
   });
 
 export const getUserProfile = async (): Promise<UserProfile> =>
-  privateFetcher(makeUserProfileUrl({ timezone: getTimezone() }));
+  privateFetcher(makeUserProfileUrl());
 
 export const refreshToken = async (): Promise<RefreshToken> =>
   privateFetcher(makeRefreshTokenUrl());
@@ -173,37 +173,24 @@ export const getReadingGoal = async (): Promise<{ data?: ReadingGoal }> =>
 
 export const addReadingGoal = async (
   data: CreateReadingGoalRequest,
-): Promise<{ data?: ReadingGoal }> =>
-  postRequest(
-    makeReadingGoalUrl({
-      timezone: getTimezone(),
-    }),
-    data,
-  );
+): Promise<{ data?: ReadingGoal }> => postRequest(makeReadingGoalUrl(), data);
 
 export const updateReadingGoal = async (
   data: UpdateReadingGoalRequest,
-): Promise<{ data?: ReadingGoal }> =>
-  patchRequest(
-    makeReadingGoalUrl({
-      timezone: getTimezone(),
-    }),
-    data,
-  );
+): Promise<{ data?: ReadingGoal }> => patchRequest(makeReadingGoalUrl(), data);
 
 export const estimateReadingGoal = async (
   data: CreateReadingGoalRequest,
 ): Promise<{ data?: EstimatedReadingGoal }> => postRequest(makeEstimateReadingGoalUrl(), data);
 
-export const deleteReadingGoal = async (): Promise<void> =>
-  deleteRequest(makeReadingGoalUrl({ timezone: getTimezone() }));
+export const deleteReadingGoal = async (): Promise<void> => deleteRequest(makeReadingGoalUrl());
 
 export const filterReadingDays = async (
   params: FilterReadingDaysParams,
 ): Promise<{ data: ReadingDay[] }> => privateFetcher(makeFilterReadingDaysUrl(params));
 
-export const getReadingDay = async (timezone: string): Promise<{ data?: ReadingDay }> =>
-  privateFetcher(makeReadingDaysUrl(timezone));
+export const getReadingDay = async (): Promise<{ data?: ReadingDay }> =>
+  privateFetcher(makeReadingDaysUrl());
 
 export const addReadingSession = async (chapterNumber: number, verseNumber: number) =>
   postRequest(makeReadingSessionsUrl(), {
@@ -314,7 +301,15 @@ export const withCredentialsFetcher = async <T>(
   init?: RequestInit,
 ): Promise<T> => {
   try {
-    const data = await fetcher<T>(input, { ...init, credentials: 'include' });
+    const data = await fetcher<T>(input, {
+      ...init,
+      credentials: 'include',
+      headers: {
+        ...init?.headers,
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        'x-timezone': getTimezone(),
+      },
+    });
     return data;
   } catch (error) {
     await handleErrors(error);

@@ -15,7 +15,6 @@ import { UpdateReadingDayBody } from '@/types/auth/ReadingDay';
 import { addReadingSession, updateReadingDay } from '@/utils/auth/api';
 import { makeReadingSessionsUrl, makeStreakUrl } from '@/utils/auth/apiPaths';
 import { isLoggedIn } from '@/utils/auth/login';
-import { getTimezone } from '@/utils/datetime';
 import mergeVerseKeys from '@/utils/mergeVerseKeys';
 import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
 
@@ -120,9 +119,7 @@ const useSyncReadingProgress = ({ isReadingPreference }: UseSyncReadingProgressP
         elapsedReadingTimeInSeconds.current = 0;
       }
 
-      const body: UpdateReadingDayBody = {
-        timezone: getTimezone(),
-      };
+      const body: UpdateReadingDayBody = {};
 
       if (verseRanges) {
         body.ranges = verseRanges;

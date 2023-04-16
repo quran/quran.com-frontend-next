@@ -8,7 +8,7 @@ import { StreakWithMetadataParams } from '@/types/auth/Streak';
 import { getStreakWithUserMetadata } from '@/utils/auth/api';
 import { makeStreakUrl } from '@/utils/auth/apiPaths';
 import { isLoggedIn } from '@/utils/auth/login';
-import { getTimezone, dateToDateString, getFullDayName } from '@/utils/datetime';
+import { dateToDateString, getFullDayName } from '@/utils/datetime';
 import { toLocalizedNumber } from '@/utils/locale';
 
 const useGetWeekDays = (showDayName = false) => {
@@ -52,7 +52,6 @@ const useGetStreakWithMetadata = ({
   const week = useGetWeekDays(showDayName);
 
   const params: StreakWithMetadataParams = {
-    timezone: getTimezone(),
     from: week[0].date,
     to: week[week.length - 1].date,
   };
