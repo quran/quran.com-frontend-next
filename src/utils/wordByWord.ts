@@ -48,3 +48,20 @@ export const consolidateWordByWordState = (
     wordByWordContentType,
   };
 };
+
+/**
+ * Given the current state, if the word by word display is empty,
+ * we will set to Tooltip.
+ *
+ * @param {WordByWordDisplay[]} wordByWordDisplay
+ * @returns {WordByWordDisplay[]}
+ */
+export const getDefaultWordByWordDisplay = (
+  wordByWordDisplay?: WordByWordDisplay[],
+): WordByWordDisplay[] => {
+  // if word by word display settings are empty (current default), we will set tooltip
+  if (!wordByWordDisplay || (wordByWordDisplay && wordByWordDisplay.length === 0)) {
+    return [WordByWordDisplay.TOOLTIP];
+  }
+  return wordByWordDisplay;
+};
