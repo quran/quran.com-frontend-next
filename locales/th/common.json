@@ -41,8 +41,8 @@
             "title": "เลื่อนอัตโนมัติ"
         },
         "displaying": "กำลังแสดง",
-        "exp-tip": "<span>เปลี่ยนเนื้อหาที่แสดงภายใต้<\/span><br><\/br> <boldSpan>การตั้งค่า<\/boldSpan> > <boldSpan>ทีละคำ<\/boldSpan>",
-        "exp-tip-no-select": "<span>ทำเครื่องหมายที่ตัวเลือกการแสดงคำแนะนำเครื่องมือและเลือกตัวเลือก <br><\/br> การแปลและ\/หรือการทับศัพท์<\/span><br><\/br><span> ภายใต้ <\/span><boldSpan>การตั้งค่า<\/boldSpan> > <boldSpan>ทีละคำ<\/boldSpan><span>, เพื่อ<\/span><br><\/br> <span>เปิดใช้งานคุณลักษณะนี้.<\/span>",
+        "exp-tip": "<span>เปลี่ยนเนื้อหาที่แสดงภายใต้<\/span><br><\/br> <boldSpan>การตั้งค่า<\/boldSpan> > <boldSpan>คำต่อคำ<\/boldSpan>",
+        "exp-tip-no-select": "<span>ติ๊กเลือกการตั้งค่าการแสดงคำแนะนำ และเลือกตัวเลือก <br><\/br> ตัวเลือกการแปล และ\/หรือ การสะกดคำ<\/span><br><\/br><span> ซึ่งอยู่ภายใต้ <\/span><boldSpan>การตั้งค่า<\/boldSpan> > <boldSpan>คำต่อคำ<\/boldSpan><span>, เพื่อ<\/span><br><\/br> <span>เปิดใช้งานคุณลักษณะนี้.<\/span>",
         "experience": "ประสบการณ์",
         "play": "เล่นเสียง",
         "playback-normal": "ปกติ",
@@ -113,8 +113,10 @@
     },
     "default-description": "คัมภีร์กุรอานแปลเป็นหลายภาษาในอินเทอร์เฟซที่ง่ายและสะดวก",
     "developers": "นักพัฒนา",
-    "display": "แสดง",
+    "display": "การแสดงผล",
     "donate": "บริจาค",
+    "donate_monthly": "บริจาครายเดือน",
+    "donate_once": "บริจาคครั้งเดียว",
     "email-verification": {
         "check-spam": "ไม่ได้รับอีเมลยืนยัน? ตรวจสอบกล่องจดหมายสแปมของคุณ",
         "email-sent": "เราเพิ่งส่งอีเมลไปที่ <strong> {{email}} <\/strong>",
@@ -149,7 +151,7 @@
     "footer": {
         "description": "Quran.com เป็น Sadaqah Jariyah เราหวังว่าจะทำให้ทุกคนอ่าน ศึกษา และเรียนรู้คัมภีร์อัลกุรอานได้อย่างง่ายดาย Noble Quran มีหลายชื่อรวมถึง Al-Quran Al-Kareem, Al-Ketab, Al-Furqan, Al-Maw'itha, Al-Thikr และ Al-Noor",
         "rights": "สงวนลิขสิทธิ์",
-        "title": "อ่านศึกษาและเรียนรู้คัมภีร์อัลกุรอานอันสูงส่ง"
+        "title": "อ่านศึกษาและเรียนรู้คัมภีร์อัลกุรอาน"
     },
     "form": {
         "code": "รหัสยืนยัน",
@@ -158,6 +160,10 @@
         "lastName": "นามสกุล"
     },
     "from": "จาก",
+    "fundraising-sticky-banner": {
+        "cta": "บริจาค",
+        "title": "สนับสนุน Quran.com เดือนรอมฎอนนี้"
+    },
     "fundraising": {
         "description": "การบริจาครายเดือนช่วยให้เราปรับปรุง Quran.com และรักษาให้คงอยู่ต่อไปได้ เมื่อเราไม่ต้องกังวลเรื่องการหาเงินทุน ดังนั้นเราจึงสามารถมุ่งเน้นที่การสร้างผลลัพธ์ได้มากขึ้น ",
         "learn-more": "เรียนรู้เพิ่มเติม",
@@ -253,9 +259,9 @@
         "selected-reciter": "ผู้อ่านที่เลือก",
         "selected-tafsirs": "Tafsirs ที่เลือก",
         "selected-translations": "การแปลที่เลือก",
-        "show-tooltip-when-playing-audio": "แสดงคำแนะนำเครื่องมือเมื่อเล่นเสียง",
+        "show-tooltip-when-playing-audio": "แสดงคำแนะนำเมื่อเล่นเสียง",
         "title": "การตั้งค่า",
-        "tooltip-playing-audio-helper": "แสดงการแปลคำในคำแนะนำเครื่องมือขณะเล่น ayah",
+        "tooltip-playing-audio-helper": "แสดงการแปลคำในคำแนะนำขณะเล่นอายะห์",
         "value-and-other": "{{value}} และอีก {{othersCount}}",
         "value-and-others": "{{value}} และ {{othersCount}} อื่นๆ",
         "wbw-helper": "แสดงคำแปลหรือทับศัพท์โดยตรงใต้คำว่า",
@@ -302,8 +308,8 @@
         "system-desc": "ชุดรูปแบบของระบบจะนำไปใช้กับการตั้งค่าโหมดแสง\/มืดของคุณโดยอัตโนมัติ"
     },
     "to": "ถึง",
-    "tooltip": "เคล็ดลับเครื่องมือ",
-    "tooltip-trans-lang": "ภาษาเคล็ดลับเครื่องมือ",
+    "tooltip": "คำแนะนำ",
+    "tooltip-trans-lang": "ภาษาของคำแนะนำ",
     "trans-lang": "ภาษาแปล",
     "translation": "การแปล",
     "translations": "คำแปล",

@@ -115,6 +115,8 @@
     "developers": "Pengembang (Developers)",
     "display": "Menampilkan",
     "donate": "Menyumbangkan",
+    "donate_monthly": "Donasi setiap bulan",
+    "donate_once": "Donasi sekali",
     "email-verification": {
         "check-spam": "Tidak menerima email verifikasi? Periksa kotak masuk spam Anda",
         "email-sent": "Kami baru saja mengirim email ke <strong> {{email}} <\/strong>",
@@ -158,6 +160,10 @@
         "lastName": "Nama keluarga"
     },
     "from": "Dari",
+    "fundraising-sticky-banner": {
+        "cta": "Menyumbangkan",
+        "title": "Dukung Quran.com Ramadhan ini"
+    },
     "fundraising": {
         "description": "Donasi bulanan membantu kami meningkatkan Quran.com dan mempertahankan operasi sehingga kami kurang fokus pada penggalangan dana dan lebih pada menciptakan dampak.",
         "learn-more": "Belajarlah lagi",

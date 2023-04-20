@@ -115,6 +115,8 @@
     "developers": "Développeurs",
     "display": "Afficher",
     "donate": "Donner",
+    "donate_monthly": "Faire un don mensuel",
+    "donate_once": "Faire un don une fois",
     "email-verification": {
         "check-spam": "Vous n'avez pas reçu l'e-mail de vérification ? Vérifiez votre boîte de réception de spam",
         "email-sent": "Nous venons d'envoyer un e-mail à <strong> {{email}} <\/strong>",
@@ -158,6 +160,10 @@
         "lastName": "Nom de famille"
     },
     "from": "De",
+    "fundraising-sticky-banner": {
+        "cta": "Donner",
+        "title": "Soutenez Quran.com ce Ramadan"
+    },
     "fundraising": {
         "description": "Les dons mensuels nous aident à améliorer Quran.com et à maintenir les opérations afin que nous nous concentrions moins sur la collecte de fonds et plus sur la création d'impact.",
         "learn-more": "Apprendre encore plus",

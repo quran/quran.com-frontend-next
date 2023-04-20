@@ -4,6 +4,12 @@
 $list-max-width: 80rem;
 
 .pageContainer {
+  @include breakpoints.smallerThanTablet {
+    $tablet-padding: calc(1.4 * var(--spacing-mega));
+
+    // TODO: change this to `$tablet-padding` when we remove banner
+    padding-block-start: calc($tablet-padding + var(--banner-height));
+  }
   padding-block-end: var(--spacing-small);
   padding-inline-start: 0;
   padding-inline-end: 0;

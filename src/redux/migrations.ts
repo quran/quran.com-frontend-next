@@ -181,4 +181,38 @@ export default {
       showTooltipFor: undefined,
     },
   }),
+  25: (state) => {
+    return {
+      ...state,
+      welcomeMessage: {
+        ...state.welcomeMessage,
+        isVisible: true,
+      },
+    };
+  },
+  26: (state) => {
+    return {
+      ...state,
+      banner: {
+        ...state.banner,
+        isBannerVisible: true,
+      },
+    };
+  },
+  27: (state) => {
+    return {
+      ...state,
+      welcomeMessage: {
+        ...state.welcomeMessage,
+        isVisible: true,
+      },
+    };
+  },
+  28: (state) => ({
+    ...state,
+    session: {
+      count: 0,
+      isDonationPopupVisible: true,
+    },
+  }),
 };

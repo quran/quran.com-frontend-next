@@ -115,6 +115,8 @@
     "developers": "Geliştiriciler",
     "display": "Görüntülemek",
     "donate": "Bağış Yapın",
+    "donate_monthly": "Aylık bağış yapın",
+    "donate_once": "Bir kez bağış yapın",
     "email-verification": {
         "check-spam": "Doğrulama e-postasını almadınız mı? Spam gelen kutunuzu kontrol edin",
         "email-sent": "Az önce <strong> {{email}} <\/strong> adresine bir e-posta gönderdik.",
@@ -158,6 +160,10 @@
         "lastName": "Soy isim"
     },
     "from": "İtibaren",
+    "fundraising-sticky-banner": {
+        "cta": "Bağış yapmak",
+        "title": "Bu Ramazan Kuran.com'u destekleyin"
+    },
     "fundraising": {
         "description": "Aylık bağışlar, Kuran.com'u iyileştirmemize ve operasyonları sürdürmemize yardımcı oluyor, böylece bağış toplamaya daha az ve etki yaratmaya daha fazla odaklanıyoruz.",
         "learn-more": "Daha fazla bilgi edinin",

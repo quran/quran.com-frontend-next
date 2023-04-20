@@ -115,6 +115,8 @@
     "developers": "ontwikkelaars",
     "display": "Weergave",
     "donate": "Doneren",
+    "donate_monthly": "Doneer maandelijks",
+    "donate_once": "Doneer eenmalig",
     "email-verification": {
         "check-spam": "Heb je de verificatie-e-mail niet ontvangen? Check je spam-inbox",
         "email-sent": "We hebben zojuist een e-mail gestuurd naar <strong> {{email}} <\/strong>",
@@ -158,6 +160,10 @@
         "lastName": "Achternaam"
     },
     "from": "Van",
+    "fundraising-sticky-banner": {
+        "cta": "Doneer",
+        "title": "Steun Quran.com deze Ramadan"
+    },
     "fundraising": {
         "description": "Maandelijkse donaties helpen ons Quran.com te verbeteren en activiteiten te ondersteunen, zodat we ons minder richten op fondsenwerving en meer op het creëren van impact.",
         "learn-more": "Leer meer",

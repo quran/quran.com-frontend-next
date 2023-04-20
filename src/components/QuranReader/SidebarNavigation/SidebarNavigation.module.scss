@@ -17,15 +17,19 @@
 
 .container {
   --sidebar-size: calc(100% - (2 * var(--spacing-mega)));
-  @include breakpoints.tablet {
-    --sidebar-size: calc(10 * var(--spacing-mega));
-  }
   height: 100vh;
   max-height: 100vh;
   position: fixed;
   inset-block-start: 0;
   inset-inline-start: 0;
   padding-block-start: calc(1.5 * var(--spacing-mega));
+  @include breakpoints.smallerThanTablet {
+    padding-block-start: calc(2.5 * var(--spacing-mega));
+  }
+  @include breakpoints.tablet {
+    --sidebar-size: calc(10 * var(--spacing-mega));
+    padding-block-start: calc(1.5 * var(--spacing-mega));
+  }
   background-color: var(--color-background-elevated);
   overflow-x: hidden;
   z-index: var(--z-index-default);
@@ -137,6 +141,12 @@
 
 .spaceOnTop {
   padding-block-start: calc(3.5 * var(--spacing-mega));
+  @include breakpoints.smallerThanTablet {
+    padding-block-start: calc(4.5 * var(--spacing-mega));
+  }
+  @include breakpoints.tablet {
+    padding-block-start: calc(3.5 * var(--spacing-mega));
+  }
 }
 
 .chapterNumber {

@@ -115,6 +115,8 @@
     "developers": "Pemaju (Developers)",
     "display": "Paparan",
     "donate": "Menderma",
+    "donate_monthly": "Menderma bulanan",
+    "donate_once": "Derma sekali",
     "email-verification": {
         "check-spam": "Tidak menerima e-mel pengesahan? Semak peti masuk spam anda",
         "email-sent": "Kami baru sahaja menghantar e-mel kepada <strong> {{email}} <\/strong>",
@@ -158,6 +160,10 @@
         "lastName": "Nama terakhir"
     },
     "from": "Dari",
+    "fundraising-sticky-banner": {
+        "cta": "Menderma",
+        "title": "Sokong Quran.com Ramadhan ini"
+    },
     "fundraising": {
         "description": "Derma bulanan membantu kami menambah baik Quran.com dan mengekalkan operasi supaya kami kurang menumpukan pada pengumpulan dana dan lebih kepada mencipta impak.",
         "learn-more": "Ketahui lebih lanjut",
