@@ -5,10 +5,10 @@ import useTranslation from 'next-translate/useTranslation';
 import CurrentWeekProgress from './CurrentWeekProgress';
 import LoggedOutReadingStreak from './LoggedOutReadingStreak';
 import styles from './ReadingStreak.module.scss';
+import StreakDefinitionModal from './StreakDefinitionModal';
 
 import ReadingGoalAmount from '@/components/ReadingGoal/ReadingGoalAmount';
 import Button, { ButtonVariant } from '@/dls/Button/Button';
-import HelperTooltip from '@/dls/HelperTooltip/HelperTooltip';
 import Progress from '@/dls/Progress';
 import Skeleton from '@/dls/Skeleton/Skeleton';
 import useGetRecentlyReadVerseKeys from '@/hooks/auth/useGetRecentlyReadVerseKeys';
@@ -55,8 +55,8 @@ const ReadingStreak: React.FC<ReadingStreakProps> = ({ layout = ReadingStreakLay
         !hasUserReadToday && streak > 0 && styles.streakTitleWarning,
       )}
     >
-      {t('streak', { days: localizedStreak })}
-      <HelperTooltip>{t('streak-definition')}</HelperTooltip>
+      {t('x-days-streak', { days: localizedStreak })}
+      <StreakDefinitionModal />
     </div>
   );
 

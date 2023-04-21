@@ -1,22 +1,15 @@
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 
+import DayCircle, { DayState } from './DayCircle';
 import styles from './ReadingStreak.module.scss';
 
 import { ContentSide } from '@/dls/Popover';
 import HoverablePopover from '@/dls/Popover/HoverablePopover';
 import useGetStreakWithMetadata from '@/hooks/auth/useGetStreakWithMetadata';
-import CheckIcon from '@/icons/check.svg';
 import { dateToReadableFormat } from '@/utils/datetime';
 import { toLocalizedNumber } from '@/utils/locale';
 import { convertFractionToPercent } from '@/utils/number';
-
-enum DayState {
-  None = 'none',
-  Stroked = 'stroked',
-  Filled = 'filled',
-  Checked = 'checked',
-}
 
 interface Props {
   weekData: ReturnType<typeof useGetStreakWithMetadata>['weekData'];
@@ -65,14 +58,8 @@ const CurrentWeekProgress: React.FC<Props> = ({ weekData, readingGoal, fixedWidt
             </HoverablePopover>
 
             <div className={styles.circleContainer}>
-              <div
-                className={classNames(styles.dayCircle, {
-                  [styles.filled]: dayState === DayState.Filled || dayState === DayState.Checked,
-                  [styles.stroked]: dayState === DayState.Stroked,
-                })}
-              >
-                {dayState === DayState.Checked ? <CheckIcon /> : null}
-              </div>
+              <DayCircle state={dayState} />
+
               <div className={styles.dayDivider} />
             </div>
           </div>

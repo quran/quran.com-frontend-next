@@ -25,6 +25,7 @@ export const secondsFormatter = (seconds: number, locale: string) => {
  * @param {string} locale locale
  * @returns {string}
  */
+// eslint-disable-next-line react-func/max-lines-per-function
 export const secondsToReadableFormat = (s: number, t: Translate, locale: string): string => {
   const results: string[] = [];
 
@@ -34,7 +35,10 @@ export const secondsToReadableFormat = (s: number, t: Translate, locale: string)
 
   if (hours > 0) {
     results.push(
-      t('reading-goal:x-hours', { count: hours, hours: toLocalizedNumber(hours, locale) }),
+      t('reading-goal:x-hours', {
+        count: hours,
+        hours: toLocalizedNumber(Number(hours.toFixed(1)), locale),
+      }),
     );
     minutes %= 60;
     seconds %= 60;
@@ -44,7 +48,7 @@ export const secondsToReadableFormat = (s: number, t: Translate, locale: string)
     results.push(
       t('reading-goal:x-minutes', {
         count: minutes,
-        minutes: toLocalizedNumber(minutes, locale),
+        minutes: toLocalizedNumber(Number(minutes.toFixed(1)), locale),
       }),
     );
     seconds %= 60;
@@ -54,7 +58,7 @@ export const secondsToReadableFormat = (s: number, t: Translate, locale: string)
     results.push(
       t('reading-goal:x-seconds', {
         count: seconds,
-        seconds: toLocalizedNumber(seconds, locale),
+        seconds: toLocalizedNumber(Number(seconds.toFixed(1)), locale),
       }),
     );
   }

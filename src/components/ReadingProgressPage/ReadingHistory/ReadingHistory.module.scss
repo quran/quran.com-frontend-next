@@ -93,7 +93,7 @@
       border-radius: var(--border-radius-pill);
 
       &.disabled {
-        color: var(--color-text-faded);
+        opacity: var(--opacity-50);
         cursor: not-allowed;
       }
 

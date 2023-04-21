@@ -93,8 +93,16 @@
     "set-reading-goal-success": "Your reading goal has been set successfully.",
     "starting-chapter": "Starting Surah",
     "starting-verse": "Starting Ayah",
-    "streak": "{{days}} day streak",
+    "streak": "Streak",
+    "x-days-streak": "{{days}} day streak",
     "streak-definition": "A streak is the number of consecutive days you have read the Quran.",
+    "timeline-meaning": "What does your timeline mean?",
+    "timeline-states": {
+        "none": "You haven't read anything yet on this day",
+        "stroked": "You haven't read anything today",
+        "filled": "You have read something but not enough to complete your goal",
+        "checked": "You have completed your goal"
+    },
     "todays-goal": "Today's Goal",
     "update-reading-goal-success": "Your reading goal has been updated successfully.",
     "view-progress": "View Progress",

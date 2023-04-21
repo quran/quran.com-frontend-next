@@ -28,7 +28,7 @@ const ProgressPageStreakWidget = ({
   const widget = (
     <>
       <div className={styles.streakContainer}>
-        <h2>{t('reading-progress-streak')}</h2>
+        <h2>{t('reading-goal:streak')}</h2>
         <p>{t('reading-goal:x-days', { days: localizedStreak, count: streak })}</p>
       </div>
 

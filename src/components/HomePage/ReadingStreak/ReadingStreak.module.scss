@@ -2,7 +2,6 @@
 @use "src/styles/breakpoints";
 
 $widget-wrapper-background-color: var(--color-success-faded);
-$day-circle-color: var(--color-success-medium);
 
 .wrapper {
   background-color: $widget-wrapper-background-color;
@@ -13,9 +12,8 @@ $day-circle-color: var(--color-success-medium);
     border-radius: var(--border-radius-rounded);
   }
 
-  .dayCircle {
-    --day-circle-color: #{$widget-wrapper-background-color};
-  }
+
+  --day-circle-color: #{$widget-wrapper-background-color};
 }
 
 .container {
@@ -64,7 +62,7 @@ $day-circle-color: var(--color-success-medium);
 }
 
 .day {
-  color: $day-circle-color;
+  color: var(--color-success-medium);
   font-size: var(--font-size-small);
   width: 100%;
   display: flex;
@@ -100,37 +98,9 @@ $day-circle-color: var(--color-success-medium);
 .dayDivider {
   width: 100%;
   height: 2px;
-  background-color: $day-circle-color;
+  background-color: var(--color-success-medium);
 }
 
-.dayCircle {
-  width: var(--spacing-large);
-  height: var(--spacing-large);
-  border-radius: var(--border-radius-circle);
-  border: 2px solid $day-circle-color;
-  background-color: var(--day-circle-color);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
-
-  & svg {
-    width: 90%;
-    height: 90%;
-    color: white;
-  }
-}
-
-.filled {
-  background-color: $day-circle-color !important;
-}
-
-.stroked {
-  border-style: dashed;
-}
 
 .goalContainer {
   margin-block-start: var(--spacing-mega);

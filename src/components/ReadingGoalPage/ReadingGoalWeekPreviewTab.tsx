@@ -1,4 +1,4 @@
-import { useMemo, useContext } from 'react';
+import { useContext } from 'react';
 
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
@@ -10,11 +10,15 @@ import styles from './ReadingGoalPage.module.scss';
 import DataContext from '@/contexts/DataContext';
 import HoverablePopover from '@/dls/Popover/HoverablePopover';
 import Spinner from '@/dls/Spinner/Spinner';
-import { CreateReadingGoalRequest, ReadingGoalType } from '@/types/auth/ReadingGoal';
+import {
+  CreateReadingGoalRequest,
+  EstimatedReadingGoal,
+  ReadingGoalType,
+} from '@/types/auth/ReadingGoal';
 import { estimateReadingGoal } from '@/utils/auth/api';
 import { makeEstimateReadingGoalUrl } from '@/utils/auth/apiPaths';
 import { getChapterData } from '@/utils/chapter';
-import { dateToReadableFormat, secondsToReadableFormat } from '@/utils/datetime';
+import { dateToReadableFormat, secondsToReadableFormat, getFullDayName } from '@/utils/datetime';
 import { toLocalizedNumber } from '@/utils/locale';
 import { parseVerseRange } from '@/utils/verseKeys';
 
@@ -37,21 +41,6 @@ const ReadingGoalWeekPreviewTab: React.FC<ReadingGoalTabProps> = ({ state, nav }
   const { t, lang } = useTranslation('reading-goal');
   const chaptersData = useContext(DataContext);
 
-  const week = useMemo(() => {
-    // get an array of today + next 6 days
-    const days: Date[] = [];
-
-    const total = state.period === ReadingGoalPeriod.Continuous ? state.duration : 7;
-
-    for (let i = 0; i < total; i += 1) {
-      const date = new Date();
-      date.setDate(date.getDate() + i);
-      days.push(date);
-    }
-
-    return days;
-  }, [state.duration, state.period]);
-
   const { data, isValidating } = useSWR(
     makeEstimateReadingGoalUrl(),
     () => estimateReadingGoal(getPayload(state)),
@@ -61,11 +50,13 @@ const ReadingGoalWeekPreviewTab: React.FC<ReadingGoalTabProps> = ({ state, nav }
     },
   );
 
-  const isLoading = !data && isValidating;
-
   const getDailyAmount = (idx: number) => {
-    if (data.data.type === ReadingGoalType.RANGE) {
-      const range = 'ranges' in data.data ? data.data.ranges[idx] : data.data.dailyAmount;
+    const { type } = state;
+    const day = data.data.week[idx];
+
+    if (type === ReadingGoalType.RANGE) {
+      const range = day.amount as string;
+
       const [
         { chapter: startingChapter, verse: startingVerse },
         { chapter: endingChapter, verse: endingVerse },
@@ -86,15 +77,28 @@ const ReadingGoalWeekPreviewTab: React.FC<ReadingGoalTabProps> = ({ state, nav }
       );
     }
 
-    if (data.data.type === ReadingGoalType.TIME) {
-      return `${t('reciter:read')} ${secondsToReadableFormat(data.data.dailyAmount, t, lang)}`;
+    const numberAmount = day.amount as number;
+    if (type === ReadingGoalType.TIME) {
+      return `${t('reciter:read')} ${secondsToReadableFormat(numberAmount, t, lang)}`;
     }
 
-    const pages = Number(data.data.dailyAmount.toFixed(2));
+    const pages = Number(numberAmount.toFixed(2));
     return `${t('reciter:read')} ${t('x-pages', {
       count: pages,
       pages: toLocalizedNumber(pages, lang),
     })}`;
+  };
+
+  const getSkeleton = () => {
+    return Array.from({
+      length: Math.min(state.period === ReadingGoalPeriod.Continuous ? state.duration : 7, 7),
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+    }).map((_, idx) => (
+      // eslint-disable-next-line react/no-array-index-key
+      <li key={idx} className={styles.dayPreview}>
+        <Spinner />
+      </li>
+    ));
   };
 
   return (
@@ -104,26 +108,23 @@ const ReadingGoalWeekPreviewTab: React.FC<ReadingGoalTabProps> = ({ state, nav }
         <p className={styles.subtitle}>{t('preview-schedule.description')}</p>
       </div>
       <ol className={classNames(styles.optionsContainer, styles.previewWrapper)}>
-        {/* eslint-disable-next-line @typescript-eslint/naming-convention */}
-        {(data?.data && 'ranges' in data.data ? data.data.ranges : week).map((_, idx: number) => {
-          const day = week[idx];
+        {isValidating
+          ? getSkeleton()
+          : data.data.week.map((day: EstimatedReadingGoal['week'][number], idx: number) => {
+              const date = new Date(day.date);
 
-          return (
-            <li key={day.getDate()} className={styles.dayPreview}>
-              <HoverablePopover content={dateToReadableFormat(day, lang)}>
-                <h3>{t('day-x', { day: toLocalizedNumber(idx + 1, lang) })}</h3>
-              </HoverablePopover>
+              return (
+                // eslint-disable-next-line react/no-array-index-key
+                <li key={idx} className={styles.dayPreview}>
+                  <HoverablePopover content={dateToReadableFormat(date, lang)}>
+                    <h3>{getFullDayName(date, lang)}</h3>
+                  </HoverablePopover>
 
-              {isLoading ? (
-                <div>
-                  <Spinner />
-                </div>
-              ) : (
-                <p>{getDailyAmount(idx)}</p>
-              )}
-            </li>
-          );
-        })}
+                  <p>{getDailyAmount(idx)}</p>
+                </li>
+              );
+            })}
+
         {nav}
       </ol>
     </>

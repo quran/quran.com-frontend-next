@@ -35,15 +35,16 @@ export type ReadingGoalStatus = ReadingGoal & {
 
 export type EstimatedReadingGoal =
   | {
-      type: ReadingGoalType.PAGES | ReadingGoalType.TIME;
+      dailyAmount: string;
+      week: {
+        date: string;
+        amount: string;
+      }[];
+    }
+  | {
       dailyAmount: number;
-    }
-  | {
-      type: ReadingGoalType.RANGE;
-      dailyAmount: number; // number of verses
-      ranges: string[];
-    }
-  | {
-      type: ReadingGoalType.RANGE;
-      dailyAmount: string; // single range
+      week: {
+        date: string;
+        amount: number;
+      }[];
     };
