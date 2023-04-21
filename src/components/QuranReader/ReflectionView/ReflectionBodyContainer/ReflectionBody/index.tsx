@@ -9,7 +9,7 @@ import ReflectionItem from '@/components/QuranReader/ReflectionView/ReflectionIt
 import ReflectionNotAvailableMessage from '@/components/QuranReader/ReflectionView/ReflectionNotAvailableMessage';
 import TafsirEndOfScrollingActions from '@/components/QuranReader/TafsirView/TafsirEndOfScrollingActions';
 import VerseAndTranslation from '@/components/Verse/VerseAndTranslation';
-import Button, { ButtonVariant } from '@/dls/Button/Button';
+import Button from '@/dls/Button/Button';
 import Separator from '@/dls/Separator/Separator';
 import { logButtonClick } from '@/utils/eventLogger';
 import { fakeNavigate, getVerseReflectionNavigationUrl } from '@/utils/navigation';
@@ -79,22 +79,8 @@ const ReflectionBody: React.FC<Props> = ({
     logButtonClick('read_more_reflections');
   };
 
-  const onRamadanOfReflectionClicked = () => {
-    logButtonClick('qr_ramadan_of_reflection');
-  };
-
   return (
     <div className={styles.container}>
-      <div className={styles.ramadanReflectionContainer}>
-        <Button
-          variant={ButtonVariant.Outlined}
-          href="https://quranreflect.com/ramadanofreflection?utm_source=qdc"
-          isNewTab
-          onClick={onRamadanOfReflectionClicked}
-        >
-          {t('ramadan-of-reflection')}
-        </Button>
-      </div>
       <VerseAndTranslation
         from={Number(selectedVerseNumber)}
         to={Number(selectedVerseNumber)}
