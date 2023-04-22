@@ -12,7 +12,8 @@ import HoverablePopover from '@/dls/Popover/HoverablePopover';
 import Spinner from '@/dls/Spinner/Spinner';
 import {
   CreateReadingGoalRequest,
-  EstimatedReadingGoal,
+  EstimatedReadingGoalWeek,
+  RangeEstimatedReadingGoalWeek,
   ReadingGoalType,
 } from '@/types/auth/ReadingGoal';
 import { estimateReadingGoal } from '@/utils/auth/api';
@@ -20,6 +21,7 @@ import { makeEstimateReadingGoalUrl } from '@/utils/auth/apiPaths';
 import { getChapterData } from '@/utils/chapter';
 import { dateToReadableFormat, secondsToReadableFormat, getFullDayName } from '@/utils/datetime';
 import { toLocalizedNumber } from '@/utils/locale';
+import { convertNumberToDecimal } from '@/utils/number';
 import { parseVerseRange } from '@/utils/verseKeys';
 
 const getPayload = (state: ReadingGoalTabProps['state']): CreateReadingGoalRequest => {
@@ -68,10 +70,12 @@ const ReadingGoalWeekPreviewTab: React.FC<ReadingGoalTabProps> = ({ state, nav }
       return (
         <div className={styles.rangePreview}>
           <p>
-            {t('reciter:read')} {startingChapterName} {startingVerse}
+            {t('reciter:read')} {startingChapterName}{' '}
+            {toLocalizedNumber(Number(startingVerse), lang)}
           </p>
           <p>
-            {t('common:to').toLowerCase()} {endingChapterName} {endingVerse}
+            {t('common:to').toLowerCase()} {endingChapterName}{' '}
+            {toLocalizedNumber(Number(endingVerse), lang)}
           </p>
         </div>
       );
@@ -82,7 +86,7 @@ const ReadingGoalWeekPreviewTab: React.FC<ReadingGoalTabProps> = ({ state, nav }
       return `${t('reciter:read')} ${secondsToReadableFormat(numberAmount, t, lang)}`;
     }
 
-    const pages = Number(numberAmount.toFixed(2));
+    const pages = convertNumberToDecimal(numberAmount, 2);
     return `${t('reciter:read')} ${t('x-pages', {
       count: pages,
       pages: toLocalizedNumber(pages, lang),
@@ -110,20 +114,21 @@ const ReadingGoalWeekPreviewTab: React.FC<ReadingGoalTabProps> = ({ state, nav }
       <ol className={classNames(styles.optionsContainer, styles.previewWrapper)}>
         {isValidating
           ? getSkeleton()
-          : data.data.week.map((day: EstimatedReadingGoal['week'][number], idx: number) => {
-              const date = new Date(day.date);
+          : data.data.week.map(
+              (day: EstimatedReadingGoalWeek | RangeEstimatedReadingGoalWeek, idx: number) => {
+                const date = new Date(day.date);
 
-              return (
-                // eslint-disable-next-line react/no-array-index-key
-                <li key={idx} className={styles.dayPreview}>
-                  <HoverablePopover content={dateToReadableFormat(date, lang)}>
-                    <h3>{getFullDayName(date, lang)}</h3>
-                  </HoverablePopover>
+                return (
+                  <li key={day.date} className={styles.dayPreview}>
+                    <HoverablePopover content={dateToReadableFormat(date, lang)}>
+                      <h3>{getFullDayName(date, lang)}</h3>
+                    </HoverablePopover>
 
-                  <p>{getDailyAmount(idx)}</p>
-                </li>
-              );
-            })}
+                    <p>{getDailyAmount(idx)}</p>
+                  </li>
+                );
+              },
+            )}
 
         {nav}
       </ol>

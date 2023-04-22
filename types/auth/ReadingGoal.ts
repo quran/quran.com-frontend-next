@@ -33,18 +33,21 @@ export type ReadingGoalStatus = ReadingGoal & {
   };
 };
 
+export interface EstimatedReadingGoalWeek {
+  date: string;
+  amount: number;
+}
+
+export type RangeEstimatedReadingGoalWeek = Omit<EstimatedReadingGoalWeek, 'amount'> & {
+  amount: string;
+};
+
 export type EstimatedReadingGoal =
   | {
-      dailyAmount: string;
-      week: {
-        date: string;
-        amount: string;
-      }[];
+      dailyAmount: number;
+      week: EstimatedReadingGoalWeek[];
     }
   | {
       dailyAmount: number;
-      week: {
-        date: string;
-        amount: number;
-      }[];
+      week: RangeEstimatedReadingGoalWeek[];
     };
