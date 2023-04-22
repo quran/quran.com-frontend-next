@@ -90,6 +90,8 @@
     "remaining": "Remaining for today",
     "remaining-days_one": "{{days}} day remaining",
     "remaining-days_other": "{{days}} days remaining",
+    "remaining-days_few": "{{days}} days remaining",
+    "remaining-days_many": "{{days}} days remaining",
     "set-reading-goal-success": "Your reading goal has been set successfully.",
     "starting-chapter": "Starting Surah",
     "starting-verse": "Starting Ayah",
@@ -122,7 +124,7 @@
     "x-pages_many": "{{pages}} pages",
     "x-pages_one": "{{pages}} page",
     "x-pages_other": "{{pages}} pages",
-    "x-seconds_few": "{{seconds}} second",
+    "x-seconds_few": "{{seconds}} seconds",
     "x-seconds_many": "{{seconds}} seconds",
     "x-seconds_one": "{{seconds}} second",
     "x-seconds_other": "{{seconds}} seconds"
