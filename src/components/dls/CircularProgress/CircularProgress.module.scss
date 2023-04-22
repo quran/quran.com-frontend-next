@@ -3,7 +3,7 @@
  * All of the styles in this file are configurable!
  */
 
- .progressbar {
+.progressbar {
   /*
    * This fixes an issue where the CircularProgressbar svg has
    * 0 width inside a "display: flex" container, and thus not visible.
@@ -26,14 +26,14 @@
     /* Used when trail is not full diameter, i.e. when props.circleRatio is set */
     stroke-linecap: round;
   }
-  
+
   .text {
     fill: var(--color-success-medium);
     font-size: 20px;
     dominant-baseline: middle;
     text-anchor: middle;
   }
-  
+
   .background {
     fill: #d6d6d6;
   }

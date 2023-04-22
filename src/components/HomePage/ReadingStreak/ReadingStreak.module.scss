@@ -12,7 +12,6 @@ $widget-wrapper-background-color: var(--color-success-faded);
     border-radius: var(--border-radius-rounded);
   }
 
-
   --day-circle-color: #{$widget-wrapper-background-color};
 }
 
@@ -101,7 +100,6 @@ $widget-wrapper-background-color: var(--color-success-faded);
   background-color: var(--color-success-medium);
 }
 
-
 .goalContainer {
   margin-block-start: var(--spacing-mega);
 }
@@ -111,7 +109,7 @@ $widget-wrapper-background-color: var(--color-success-faded);
   display: flex;
   align-items: center;
 
-  &> :first-child {
+  & > :first-child {
     margin-inline-end: var(--spacing-xxsmall);
   }
 }
@@ -147,7 +145,7 @@ $widget-wrapper-background-color: var(--color-success-faded);
   align-items: center;
   margin-block-start: var(--spacing-small);
 
-  >p {
+  > p {
     font-size: var(--font-size-large);
     font-weight: var(--font-weight-bold);
   }

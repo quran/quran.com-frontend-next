@@ -6,7 +6,7 @@
   color: var(--color-background-alternative-deep);
   margin-inline: var(--spacing-xsmall);
 
-  &>svg {
+  & > svg {
     width: var(--spacing-large);
   }
 }
