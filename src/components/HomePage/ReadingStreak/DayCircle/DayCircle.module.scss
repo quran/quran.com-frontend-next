@@ -12,6 +12,10 @@
   inset-block-start: 50%;
   transform: translate(-50%, -50%);
 
+  [dir='rtl'] & {
+    transform: translate(50%, -50%);
+  }
+
   & svg {
     width: 90%;
     height: 90%;
