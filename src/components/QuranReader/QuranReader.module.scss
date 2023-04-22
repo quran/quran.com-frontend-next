@@ -3,7 +3,6 @@
 @use "src/styles/utility";
 
 $quran-reader-padding: 3rem;
-$quran-reader-padding-mobile: 4.5rem;
 $virtual-scrolling-height-bandage: calc(
   4 * var(--spacing-mega)
 ); // library react-virtuoso's inline `height` is less than the required `height`.
@@ -35,9 +34,6 @@ $virtual-scrolling-height-bandage: calc(
 }
 
 .container {
-  @include breakpoints.smallerThanTablet {
-    padding-block-start: $quran-reader-padding-mobile;
-  }
   padding-block-start: $quran-reader-padding;
   padding-inline-start: 0;
   padding-inline-end: 0;
