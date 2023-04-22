@@ -34,17 +34,8 @@
 }
 
 .visibleContainer {
-  // https://ptgamr.github.io/2014-09-13-translate3d-vs-translate-performance/
   transform: translate3d(0, var(--navbar-container-height), 0);
-
-  // TODO: remove when banner is removed
-  @include breakpoints.smallerThanTablet {
-    transform: translate3d(
-      0,
-      calc(var(--navbar-container-height) + var(--banner-height)),
-      0
-    );
-  }
+  // https://ptgamr.github.io/2014-09-13-translate3d-vs-translate-performance/
 }
 
 .withVisibleBanner {
@@ -74,17 +65,12 @@
 .sectionsContainer {
   width: 100%;
   padding-block-start: var(--spacing-micro);
-  // TODO: uncomment when we remvoe banner
-  // @include breakpoints.smallerThanTablet {
-  // padding-block-start: calc(1.4 * var(--spacing-mega));
-  // }
   padding-block-end: var(--spacing-micro);
   display: flex;
   align-items: center;
   box-sizing: border-box;
   padding-inline: calc(1.3 * var(--spacing-large));
   @include breakpoints.tablet {
-    padding-block-start: var(--spacing-micro);
     padding-inline: calc(1.2 * var(--spacing-mega));
   }
 }
