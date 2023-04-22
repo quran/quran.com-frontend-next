@@ -88,6 +88,8 @@
     "reading-goal-title": "Prezantimi i gjurmimit të Quran.com",
     "recommended": "Rekomanduar",
     "remaining": "Mbetet për sot",
+    "remaining-days_few": "Kanë mbetur edhe {{days}} ditë",
+    "remaining-days_many": "Kanë mbetur edhe {{days}} ditë",
     "remaining-days_one": "Ka mbetur edhe {{days}} ditë",
     "remaining-days_other": "Kanë mbetur edhe {{days}} ditë",
     "set-reading-goal-success": "Qëllimi juaj i leximit është vendosur me sukses.",
@@ -122,7 +124,7 @@
     "x-pages_many": "{{pages}} faqe",
     "x-pages_one": "{{pages}} faqe",
     "x-pages_other": "{{pages}} faqe",
-    "x-seconds_few": "{{seconds}} sekondë",
+    "x-seconds_few": "{{seconds}} sekonda",
     "x-seconds_many": "{{seconds}} sekonda",
     "x-seconds_one": "{{seconds}} sekondë",
     "x-seconds_other": "{{seconds}} sekonda"

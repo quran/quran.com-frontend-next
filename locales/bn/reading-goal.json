@@ -88,6 +88,8 @@
     "reading-goal-title": "কোরান ডট কম ট্র্যাকিং চালু করছি",
     "recommended": "প্রস্তাবিত",
     "remaining": "আজকের জন্য বাকি",
+    "remaining-days_few": "{{days}} দিন বাকি",
+    "remaining-days_many": "{{days}} দিন বাকি",
     "remaining-days_one": "{{days}} দিন বাকি",
     "remaining-days_other": "{{days}} দিন বাকি",
     "set-reading-goal-success": "আপনার পড়ার লক্ষ্য সফলভাবে সেট করা হয়েছে।",

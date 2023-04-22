@@ -88,6 +88,8 @@
     "reading-goal-title": "แนะนำระบบติดตามของ Quran.com",
     "recommended": "ที่แนะนำ",
     "remaining": "ที่เหลืออยู่สำหรับวันนี้",
+    "remaining-days_few": "เหลืออีก {{days}} วัน",
+    "remaining-days_many": "เหลืออีก {{days}} วัน",
     "remaining-days_one": "เหลืออีก {{days}} วัน",
     "remaining-days_other": "เหลืออีก {{days}} วัน",
     "set-reading-goal-success": "กำหนดเป้าหมายการอ่านของคุณสำเร็จแล้ว",

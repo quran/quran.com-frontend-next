@@ -88,6 +88,8 @@
     "reading-goal-title": "Представляем отслеживание Quran.com",
     "recommended": "рекомендуемые",
     "remaining": "Осталось на сегодня",
+    "remaining-days_few": "Осталось {{days}} дней",
+    "remaining-days_many": "Осталось {{days}} дней",
     "remaining-days_one": "Осталось {{days}} дня",
     "remaining-days_other": "Осталось {{days}} дней",
     "set-reading-goal-success": "Ваша цель чтения была успешно установлена.",
@@ -122,7 +124,7 @@
     "x-pages_many": "{{pages}} страниц",
     "x-pages_one": "{{pages}} страница",
     "x-pages_other": "{{pages}} страниц",
-    "x-seconds_few": "{{seconds}} секунды",
+    "x-seconds_few": "{{seconds}} секунд",
     "x-seconds_many": "{{seconds}} секунд",
     "x-seconds_one": "{{seconds}} секунды",
     "x-seconds_other": "{{seconds}} секунд"

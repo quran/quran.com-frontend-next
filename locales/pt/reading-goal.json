@@ -88,6 +88,8 @@
     "reading-goal-title": "Apresentando o Rastreamento Quran.com",
     "recommended": "Recomendado",
     "remaining": "Restante para hoje",
+    "remaining-days_few": "{{days}} dias restantes",
+    "remaining-days_many": "{{days}} dias restantes",
     "remaining-days_one": "{{days}} dia restante",
     "remaining-days_other": "{{days}} dias restantes",
     "set-reading-goal-success": "Sua meta de leitura foi definida com sucesso.",
@@ -122,7 +124,7 @@
     "x-pages_many": "{{pages}} páginas",
     "x-pages_one": "{{pages}} página",
     "x-pages_other": "{{pages}} páginas",
-    "x-seconds_few": "{{seconds}} segundo",
+    "x-seconds_few": "{{seconds}} segundos",
     "x-seconds_many": "{{seconds}} segundos",
     "x-seconds_one": "{{seconds}} segundo",
     "x-seconds_other": "{{seconds}} segundos"

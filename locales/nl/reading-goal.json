@@ -88,6 +88,8 @@
     "reading-goal-title": "Introductie van Quran.com-tracking",
     "recommended": "Aanbevolen",
     "remaining": "Blijft over voor vandaag",
+    "remaining-days_few": "{{days}} dagen resterend",
+    "remaining-days_many": "{{days}} dagen resterend",
     "remaining-days_one": "{{days}} resterende dag",
     "remaining-days_other": "{{days}} dagen resterend",
     "set-reading-goal-success": "Je leesdoel is succesvol ingesteld.",
@@ -122,7 +124,7 @@
     "x-pages_many": "{{pages}} pagina's",
     "x-pages_one": "{{pages}} pagina",
     "x-pages_other": "{{pages}} pagina's",
-    "x-seconds_few": "{{seconds}} seconde",
+    "x-seconds_few": "{{seconds}} seconden",
     "x-seconds_many": "{{seconds}} seconden",
     "x-seconds_one": "{{seconds}} seconde",
     "x-seconds_other": "{{seconds}} seconden"

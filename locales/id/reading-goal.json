@@ -88,6 +88,8 @@
     "reading-goal-title": "Memperkenalkan Pelacakan Quran.com",
     "recommended": "Direkomendasikan",
     "remaining": "Sisa untuk hari ini",
+    "remaining-days_few": "{{days}} hari tersisa",
+    "remaining-days_many": "{{days}} hari tersisa",
     "remaining-days_one": "{{days}} hari tersisa",
     "remaining-days_other": "{{days}} hari tersisa",
     "set-reading-goal-success": "Tujuan membaca Anda telah berhasil ditetapkan.",

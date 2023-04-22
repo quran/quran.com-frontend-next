@@ -88,6 +88,8 @@
     "reading-goal-title": "Memperkenalkan Penjejakan Quran.com",
     "recommended": "Disyorkan",
     "remaining": "Berbaki untuk hari ini",
+    "remaining-days_few": "{{days}} hari lagi",
+    "remaining-days_many": "{{days}} hari lagi",
     "remaining-days_one": "{{days}} hari lagi",
     "remaining-days_other": "{{days}} hari lagi",
     "set-reading-goal-success": "Matlamat membaca anda telah berjaya ditetapkan.",

@@ -88,6 +88,8 @@
     "reading-goal-title": "引入 Quran.com 跟踪",
     "recommended": "受到推崇的",
     "remaining": "今天剩余",
+    "remaining-days_few": "剩余{{days}}天",
+    "remaining-days_many": "剩余{{days}}天",
     "remaining-days_one": "剩余{{days}}天",
     "remaining-days_other": "剩余{{days}}天",
     "set-reading-goal-success": "您的阅读目标已成功设定。",

@@ -88,6 +88,8 @@
     "reading-goal-title": "Presentazione del monitoraggio di Quran.com",
     "recommended": "Consigliato",
     "remaining": "Rimanendo per oggi",
+    "remaining-days_few": "{{days}} giorni rimanenti",
+    "remaining-days_many": "{{days}} giorni rimanenti",
     "remaining-days_one": "{{days}} giorno rimanente",
     "remaining-days_other": "{{days}} giorni rimanenti",
     "set-reading-goal-success": "Il tuo obiettivo di lettura è stato impostato correttamente.",
@@ -122,7 +124,7 @@
     "x-pages_many": "{{pages}} pagine",
     "x-pages_one": "{{pages}} pagina",
     "x-pages_other": "{{pages}} pagine",
-    "x-seconds_few": "{{seconds}} secondo",
+    "x-seconds_few": "{{seconds}} secondi",
     "x-seconds_many": "{{seconds}} secondi",
     "x-seconds_one": "{{seconds}} secondo",
     "x-seconds_other": "{{seconds}} secondi"

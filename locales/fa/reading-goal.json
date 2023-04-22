@@ -88,6 +88,8 @@
     "reading-goal-title": "ردیابی قرآن دات کام را معرفی می کنیم",
     "recommended": "توصیه شده",
     "remaining": "باقی مانده برای امروز",
+    "remaining-days_few": "{{days}} روز باقی مانده است",
+    "remaining-days_many": "{{days}} روز باقی مانده است",
     "remaining-days_one": "{{days}} روز باقی مانده است",
     "remaining-days_other": "{{days}} روز باقی مانده است",
     "set-reading-goal-success": "هدف خواندن شما با موفقیت تنظیم شده است.",

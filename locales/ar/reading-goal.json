@@ -88,6 +88,8 @@
     "reading-goal-title": "تقديم تتبع موقع قرآن دوت كوم",
     "recommended": "مُستَحسَن",
     "remaining": "المتبقي لهذا اليوم",
+    "remaining-days_few": "{{days}} الأيام متبقية",
+    "remaining-days_many": "{{days}} الأيام متبقية",
     "remaining-days_one": "يتبقى {{days}} يوم",
     "remaining-days_other": "{{days}} أيام متبقية",
     "set-reading-goal-success": "تم تعيين هدف القراءة الخاص بك بنجاح.",

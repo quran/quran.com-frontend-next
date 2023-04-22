@@ -88,6 +88,8 @@
     "reading-goal-title": "Kuran.com Takibine Giriş",
     "recommended": "Tavsiye edilen",
     "remaining": "Bugün için kalan",
+    "remaining-days_few": "{{days}} gün kaldı",
+    "remaining-days_many": "{{days}} gün kaldı",
     "remaining-days_one": "{{days}} gün kaldı",
     "remaining-days_other": "{{days}} gün kaldı",
     "set-reading-goal-success": "Okuma hedefiniz başarıyla belirlendi.",
