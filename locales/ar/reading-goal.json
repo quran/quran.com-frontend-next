@@ -15,17 +15,17 @@
     "days": "أيام",
     "delete-goal": "احذف الهدف",
     "delete-goal-confirmation": {
-        "action-text": "أفهم النتيجة ، احذف هدفي",
+        "action-text": "أفهم التبعات، احذف هدفي",
         "confirmation-text": "حذف هدفي",
         "instruction-text": "الرجاء كتابة <strong> {{text}} <\/strong> للتأكيد",
-        "subtitle": "لا يمكن التراجع عن هذا الإجراء. سيؤدي هذا إلى حذف هدفك نهائيًا ، وسنتوقف عن تتبع تقدمك.",
+        "subtitle": "لا يمكن التراجع عن هذا الإجراء. سيؤدي هذا إلى حذف هدفك نهائيًا، وسنتوقف عن تتبع تقدمك.",
         "title": "هل أنت متأكد؟"
     },
     "delete-reading-goal-success": "تم حذف هدف القراءة الخاص بك بنجاح.",
     "duration": "المدة (أيام)",
-    "edit-goal": "تحرير الهدف",
+    "edit-goal": "تعديل الهدف",
     "ending-chapter": "سورة الختام",
-    "ending-verse": "الآية المنتهية",
+    "ending-verse": "آية الختام",
     "examples-subtitle": "فيما يلي قائمة بالأهداف المشتركة. يمكنك أيضًا إنشاء هدفك الخاص.",
     "examples-title": "اختر هدفًا محددًا مسبقًا أو أنشئ هدفك الخاص",
     "examples": {
@@ -34,16 +34,16 @@
             "title": "مخصص"
         },
         "khatm": {
-            "description": "هدف ختمة تلاوة. اقرأ جزء واحد في اليوم",
+            "description": "هدف ختمة تلاوة. اقرأ جزءا واحدا في اليوم",
             "title": "اقرأ القرآن في 30 يومًا"
         },
         "time": {
-            "description": "هدف بسيط وسهل للمبتدئين",
+            "description": "هدف سهل مناسب للمبتدئين",
             "title": "اقرأ 10 دقائق في اليوم"
         }
     },
     "frequency-tab": {
-        "description": "هل يجب إعادة ضبط هدفك كل يوم أم كل عدد من الأيام؟ لا تقلق ، سنتتبع تقدمك بغض النظر عن التردد الذي تختاره.",
+        "description": "هل يجب إعادة ضبط هدفك كل يوم أم كل عدد من الأيام؟ لا تقلق، سنتتبع تقدمك بغض النظر عن التكرار الذي تختاره.",
         "title": "اختر وتيرة لهدفك"
     },
     "goal-done": {
@@ -55,7 +55,7 @@
         "title": "حدد هدفًا لهدفك"
     },
     "goal-type": {
-        "description": "هل يجب أن يعتمد هدفك على الوقت أو الصفحات أو نطاق مخصص (على سبيل المثال ، 3 أجزاء من القرآن)؟",
+        "description": "هل يجب أن يعتمد هدفك على الوقت أو الصفحات أو نطاق مخصص (على سبيل المثال، 3 أجزاء من القرآن)؟",
         "title": "اختر معيارًا لهدفك"
     },
     "goal-types": {
@@ -73,7 +73,7 @@
         }
     },
     "preview-schedule": {
-        "description": "هكذا سيبدو هدفك. يمكنك دائما تغيير في وقت لاحق.",
+        "description": "هكذا سيبدو هدفك. يمكنك دائما تغييره لاحقا.",
         "title": "هنا معاينة لجدولك الزمني"
     },
     "progress": {
@@ -83,39 +83,47 @@
         "time-goal": "اقرأ {{time}} من القرآن"
     },
     "reading-goal": "هدف القراءة",
-    "reading-goal-description": "هل تريد إنهاء قراءة القرآن في شهر ، أو سنة ، أو بناء عادة قراءة 10 دقائق في اليوم؟ قم بإنشاء هدف أدناه وسيقوم موقع Quran.com بإنشاء خطة مخصصة لك وتعديلها مع تقدمك لمساعدتك في الوصول إلى هدفك.",
+    "reading-goal-description": "هل تريد إنهاء قراءة القرآن في شهر، أو سنة، أو بناء عادة قراءة 10 دقائق في اليوم؟ قم بإنشاء هدف أدناه وسيقوم موقع قرآن دوت كوم بإنشاء خطة مخصصة لك وتعديلها مع تقدمك لمساعدتك في الوصول إلى هدفك.",
     "reading-goal-label": "أنت على",
-    "reading-goal-title": "إدخال تتبع موقع Quran.com",
+    "reading-goal-title": "تقديم تتبع موقع قرآن دوت كوم",
     "recommended": "مُستَحسَن",
     "remaining": "المتبقي لهذا اليوم",
     "remaining-days_one": "يتبقى {{days}} يوم",
-    "remaining-days_other": "{{days}} الأيام متبقية",
+    "remaining-days_other": "{{days}} أيام متبقية",
     "set-reading-goal-success": "تم تعيين هدف القراءة الخاص بك بنجاح.",
-    "starting-chapter": "بدء السورة",
-    "starting-verse": "بدء الآية",
-    "streak": "خط {{days}}",
-    "streak-definition": "الخط هو عدد الأيام المتتالية التي قرأت فيها القرآن.",
+    "starting-chapter": "سورة البدء",
+    "starting-verse": "آية البدء",
+    "streak": "أثَر",
+    "streak-definition": "الأثر هو عدد الأيام المتتالية التي قرأت فيها القرآن.",
+    "timeline-meaning": "ماذا يعني الجدول الزمني الخاص بك؟",
+    "timeline-states": {
+        "checked": "لقد أكملت هدفك",
+        "filled": "لقد قرأت شيئًا ولكن ليس بالقدر الكافي لإكمال هدفك",
+        "none": "لم تقرأ أي شيء بعد في ذلك اليوم",
+        "stroked": "أنت لم تقرأ أي شيء اليوم"
+    },
     "todays-goal": "هدف اليوم",
     "update-reading-goal-success": "تم تحديث هدف القراءة الخاص بك بنجاح.",
     "view-progress": "مشاهدة التقدم",
-    "x-days_one": "{{days}} يوم",
-    "x-days_other": "{{days}} أيام",
+    "x-days-streak": "أثر {{days}}",
     "x-days_few": "{{days}} أيام",
     "x-days_many": "{{days}} أيام",
-    "x-hours_one": "{{hours}} ساعة",
-    "x-hours_other": "{{hours}} ساعات",
+    "x-days_one": "{{days}} يوم",
+    "x-days_other": "{{days}} أيام",
     "x-hours_few": "{{hours}} ساعات",
     "x-hours_many": "{{hours}} ساعات",
-    "x-minutes_one": "{{minutes}} دقيقة",
-    "x-minutes_other": "{{minutes}} دقائق",
+    "x-hours_one": "{{hours}} ساعة",
+    "x-hours_other": "{{hours}} ساعات",
     "x-minutes_few": "{{minutes}} دقائق",
     "x-minutes_many": "{{minutes}} دقائق",
-    "x-pages_one": "{{pages}} صفحة",
-    "x-pages_other": "{{pages}} صفحات",
+    "x-minutes_one": "{{minutes}} دقيقة",
+    "x-minutes_other": "{{minutes}} دقيقة",
     "x-pages_few": "{{pages}} صفحات",
     "x-pages_many": "{{pages}} صفحات",
-    "x-seconds_one": "{{seconds}} ثانية",
-    "x-seconds_other": "{{seconds}} ثانية",
+    "x-pages_one": "{{pages}} صفحة",
+    "x-pages_other": "{{pages}} صفحة",
     "x-seconds_few": "{{seconds}} ثانية",
-    "x-seconds_many": "{{seconds}} ثواني"
+    "x-seconds_many": "{{seconds}} ثواني",
+    "x-seconds_one": "{{seconds}} ثانية",
+    "x-seconds_other": "{{seconds}} ثانية"
 }

@@ -4,6 +4,6 @@
     "manage-goal": "จัดการเป้าหมายการอ่านของคุณ",
     "no-reading-history-for": "ไม่มีประวัติการอ่านสำหรับ {{date}}",
     "reading-progress-header": "ความก้าวหน้าของคุณ",
-    "reading-progress-streak": "ริ้ว",
-    "you-read": "เธออ่าน:"
+    "reading-progress-streak": "ช่วงเวลา",
+    "you-read": "คุณกำลังอ่าน:"
 }
