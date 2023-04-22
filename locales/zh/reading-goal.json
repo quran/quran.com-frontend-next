@@ -88,10 +88,9 @@
     "reading-goal-title": "引入 Quran.com 跟踪",
     "recommended": "受到推崇的",
     "remaining": "今天剩余",
-    "remaining-days_few": "剩余{{days}}天",
-    "remaining-days_many": "剩余{{days}}天",
-    "remaining-days_one": "剩余{{days}}天",
-    "remaining-days_other": "剩余{{days}}天",
+    "remaining-days": {
+        "other": "还剩 {{days}} 天"
+    },
     "set-reading-goal-success": "您的阅读目标已成功设定。",
     "starting-chapter": "开始古兰经",
     "starting-verse": "启动 Ayah",
@@ -107,25 +106,20 @@
     "todays-goal": "今天的目标",
     "update-reading-goal-success": "您的阅读目标已成功更新。",
     "view-progress": "查看进度",
+    "x-days": {
+        "other": "{{days}} 天"
+    },
     "x-days-streak": "{{days}}天连续",
-    "x-days_few": "{{days}}天",
-    "x-days_many": "{{days}}天",
-    "x-days_one": "{{days}}天",
-    "x-days_other": "{{days}}天",
-    "x-hours_few": "{{hours}}小时",
-    "x-hours_many": "{{hours}}小时",
-    "x-hours_one": "{{hours}}小时",
-    "x-hours_other": "{{hours}}小时",
-    "x-minutes_few": "{{minutes}}分钟",
-    "x-minutes_many": "{{minutes}}分钟",
-    "x-minutes_one": "{{minutes}}分钟",
-    "x-minutes_other": "{{minutes}}分钟",
-    "x-pages_few": "{{pages}}页",
-    "x-pages_many": "{{pages}}页",
-    "x-pages_one": "{{pages}}页",
-    "x-pages_other": "{{pages}}页",
-    "x-seconds_few": "{{seconds}}秒",
-    "x-seconds_many": "{{seconds}}秒",
-    "x-seconds_one": "{{seconds}}秒",
-    "x-seconds_other": "{{seconds}}秒"
+    "x-hours": {
+        "other": "{{hours}} 小时"
+    },
+    "x-minutes": {
+        "other": "{{minutes}} 分钟"
+    },
+    "x-pages": {
+        "other": "{{pages}} 页数"
+    },
+    "x-seconds": {
+        "other": "{{seconds}} 秒"
+    }
 }

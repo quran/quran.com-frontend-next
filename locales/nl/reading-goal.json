@@ -88,10 +88,10 @@
     "reading-goal-title": "Introductie van Quran.com-tracking",
     "recommended": "Aanbevolen",
     "remaining": "Blijft over voor vandaag",
-    "remaining-days_few": "{{days}} dagen resterend",
-    "remaining-days_many": "{{days}} dagen resterend",
-    "remaining-days_one": "{{days}} resterende dag",
-    "remaining-days_other": "{{days}} dagen resterend",
+    "remaining-days": {
+        "one": "Nog {{days}} dag over",
+        "other": "Nog {{days}} dagen"
+    },
     "set-reading-goal-success": "Je leesdoel is succesvol ingesteld.",
     "starting-chapter": "Soera beginnen",
     "starting-verse": "Ayah beginnen",
@@ -107,25 +107,25 @@
     "todays-goal": "Het doel van vandaag",
     "update-reading-goal-success": "Je leesdoel is succesvol geüpdatet.",
     "view-progress": "Voortgang bekijken",
+    "x-days": {
+        "one": "{{days}} dag",
+        "other": "{{days}} dagen"
+    },
     "x-days-streak": "{{days}} dagenreeks",
-    "x-days_few": "{{days}} dagen",
-    "x-days_many": "{{days}} dagen",
-    "x-days_one": "{{days}} dag",
-    "x-days_other": "{{days}} dagen",
-    "x-hours_few": "{{hours}} uur",
-    "x-hours_many": "{{hours}} uur",
-    "x-hours_one": "{{hours}} uur",
-    "x-hours_other": "{{hours}} uur",
-    "x-minutes_few": "{{minutes}} minuten",
-    "x-minutes_many": "{{minutes}} minuten",
-    "x-minutes_one": "{{minutes}} minuut",
-    "x-minutes_other": "{{minutes}} minuten",
-    "x-pages_few": "{{pages}} pagina's",
-    "x-pages_many": "{{pages}} pagina's",
-    "x-pages_one": "{{pages}} pagina",
-    "x-pages_other": "{{pages}} pagina's",
-    "x-seconds_few": "{{seconds}} seconden",
-    "x-seconds_many": "{{seconds}} seconden",
-    "x-seconds_one": "{{seconds}} seconde",
-    "x-seconds_other": "{{seconds}} seconden"
+    "x-hours": {
+        "one": "{{hours}} uur",
+        "other": "{{hours}} uren"
+    },
+    "x-minutes": {
+        "one": "{{minutes}} minuut",
+        "other": "{{minutes}} minuten"
+    },
+    "x-pages": {
+        "one": "{{pages}} pagina",
+        "other": "{{pages}} pagina's"
+    },
+    "x-seconds": {
+        "one": "{{seconds}} seconde",
+        "other": "{{seconds}} seconden"
+    }
 }

@@ -88,10 +88,9 @@
     "reading-goal-title": "แนะนำระบบติดตามของ Quran.com",
     "recommended": "ที่แนะนำ",
     "remaining": "ที่เหลืออยู่สำหรับวันนี้",
-    "remaining-days_few": "เหลืออีก {{days}} วัน",
-    "remaining-days_many": "เหลืออีก {{days}} วัน",
-    "remaining-days_one": "เหลืออีก {{days}} วัน",
-    "remaining-days_other": "เหลืออีก {{days}} วัน",
+    "remaining-days": {
+        "other": "เหลืออีก {{days}} วัน"
+    },
     "set-reading-goal-success": "กำหนดเป้าหมายการอ่านของคุณสำเร็จแล้ว",
     "starting-chapter": "เริ่มซูเราะห์",
     "starting-verse": "เริ่มอายะห์",
@@ -107,25 +106,20 @@
     "todays-goal": "เป้าหมายวันนี้",
     "update-reading-goal-success": "อัปเดตเป้าหมายการอ่านของคุณเรียบร้อยแล้ว",
     "view-progress": "ดูความคืบหน้า",
+    "x-days": {
+        "other": "{{days}} วัน"
+    },
     "x-days-streak": "ช่วงเวลา {{days}} วัน",
-    "x-days_few": "{{days}} วัน",
-    "x-days_many": "{{days}} วัน",
-    "x-days_one": "{{days}} วัน",
-    "x-days_other": "{{days}} วัน",
-    "x-hours_few": "{{hours}} ชั่วโมง",
-    "x-hours_many": "{{hours}} ชั่วโมง",
-    "x-hours_one": "{{hours}} ชั่วโมง",
-    "x-hours_other": "{{hours}} ชั่วโมง",
-    "x-minutes_few": "{{minutes}} นาที",
-    "x-minutes_many": "{{minutes}} นาที",
-    "x-minutes_one": "{{minutes}} นาที",
-    "x-minutes_other": "{{minutes}} นาที",
-    "x-pages_few": "{{pages}} หน้า",
-    "x-pages_many": "{{pages}} หน้า",
-    "x-pages_one": "{{pages}} หน้า",
-    "x-pages_other": "{{pages}} หน้า",
-    "x-seconds_few": "{{seconds}} วินาที",
-    "x-seconds_many": "{{seconds}} วินาที",
-    "x-seconds_one": "{{seconds}} วินาที",
-    "x-seconds_other": "{{seconds}} วินาที"
+    "x-hours": {
+        "other": "{{hours}} ชั่วโมง"
+    },
+    "x-minutes": {
+        "other": "{{minutes}} นาที"
+    },
+    "x-pages": {
+        "other": "{{pages}} หน้า"
+    },
+    "x-seconds": {
+        "other": "{{seconds}} วินาที"
+    }
 }

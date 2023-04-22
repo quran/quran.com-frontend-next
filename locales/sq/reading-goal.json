@@ -88,10 +88,10 @@
     "reading-goal-title": "Prezantimi i gjurmimit të Quran.com",
     "recommended": "Rekomanduar",
     "remaining": "Mbetet për sot",
-    "remaining-days_few": "Kanë mbetur edhe {{days}} ditë",
-    "remaining-days_many": "Kanë mbetur edhe {{days}} ditë",
-    "remaining-days_one": "Ka mbetur edhe {{days}} ditë",
-    "remaining-days_other": "Kanë mbetur edhe {{days}} ditë",
+    "remaining-days": {
+        "one": "Ka mbetur edhe {{days}} dite",
+        "other": "Kanë mbetur edhe {{days}} ditë"
+    },
     "set-reading-goal-success": "Qëllimi juaj i leximit është vendosur me sukses.",
     "starting-chapter": "Fillimi i sures",
     "starting-verse": "Fillimi i ajetit",
@@ -107,25 +107,25 @@
     "todays-goal": "Goli i sotëm",
     "update-reading-goal-success": "Qëllimi juaj i leximit është përditësuar me sukses.",
     "view-progress": "Shiko Progresin",
+    "x-days": {
+        "one": "{{days}} dite",
+        "other": "{{days}} dite"
+    },
     "x-days-streak": "{{days}} varg ditësh",
-    "x-days_few": "{{days}} ditë",
-    "x-days_many": "{{days}} ditë",
-    "x-days_one": "{{days}} ditë",
-    "x-days_other": "{{days}} ditë",
-    "x-hours_few": "{{hours}} orë",
-    "x-hours_many": "{{hours}} orë",
-    "x-hours_one": "{{hours}} orë",
-    "x-hours_other": "{{hours}} orë",
-    "x-minutes_few": "{{minutes}} minuta",
-    "x-minutes_many": "{{minutes}} minuta",
-    "x-minutes_one": "{{minutes}} minutë",
-    "x-minutes_other": "{{minutes}} minuta",
-    "x-pages_few": "{{pages}} faqe",
-    "x-pages_many": "{{pages}} faqe",
-    "x-pages_one": "{{pages}} faqe",
-    "x-pages_other": "{{pages}} faqe",
-    "x-seconds_few": "{{seconds}} sekonda",
-    "x-seconds_many": "{{seconds}} sekonda",
-    "x-seconds_one": "{{seconds}} sekondë",
-    "x-seconds_other": "{{seconds}} sekonda"
+    "x-hours": {
+        "one": "{{hours}} orë",
+        "other": "{{hours}} ore"
+    },
+    "x-minutes": {
+        "one": "{{minutes}} minutë",
+        "other": "{{minutes}} minuta"
+    },
+    "x-pages": {
+        "one": "{{pages}} faqe",
+        "other": "{{pages}} faqe"
+    },
+    "x-seconds": {
+        "one": "{{seconds}} sekondë",
+        "other": "{{seconds}} sekonda"
+    }
 }

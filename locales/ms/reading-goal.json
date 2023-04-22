@@ -88,10 +88,9 @@
     "reading-goal-title": "Memperkenalkan Penjejakan Quran.com",
     "recommended": "Disyorkan",
     "remaining": "Berbaki untuk hari ini",
-    "remaining-days_few": "{{days}} hari lagi",
-    "remaining-days_many": "{{days}} hari lagi",
-    "remaining-days_one": "{{days}} hari lagi",
-    "remaining-days_other": "{{days}} hari lagi",
+    "remaining-days": {
+        "other": "{{days}} hari lagi"
+    },
     "set-reading-goal-success": "Matlamat membaca anda telah berjaya ditetapkan.",
     "starting-chapter": "Memulakan Surah",
     "starting-verse": "Memula Ayah",
@@ -107,25 +106,20 @@
     "todays-goal": "Matlamat Hari Ini",
     "update-reading-goal-success": "Matlamat membaca anda telah berjaya dikemas kini.",
     "view-progress": "Lihat Kemajuan",
+    "x-days": {
+        "other": "{{days}} hari"
+    },
     "x-days-streak": "{{days}} hari berturut-turut",
-    "x-days_few": "{{days}} hari",
-    "x-days_many": "{{days}} hari",
-    "x-days_one": "{{days}} hari",
-    "x-days_other": "{{days}} hari",
-    "x-hours_few": "{{hours}} jam",
-    "x-hours_many": "{{hours}} jam",
-    "x-hours_one": "{{hours}} jam",
-    "x-hours_other": "{{hours}} jam",
-    "x-minutes_few": "{{minutes}} minit",
-    "x-minutes_many": "{{minutes}} minit",
-    "x-minutes_one": "{{minutes}} minit",
-    "x-minutes_other": "{{minutes}} minit",
-    "x-pages_few": "{{pages}} halaman",
-    "x-pages_many": "{{pages}} halaman",
-    "x-pages_one": "{{pages}} halaman",
-    "x-pages_other": "{{pages}} halaman",
-    "x-seconds_few": "{{seconds}} saat",
-    "x-seconds_many": "{{seconds}} saat",
-    "x-seconds_one": "{{seconds}} saat",
-    "x-seconds_other": "{{seconds}} saat"
+    "x-hours": {
+        "other": "{{hours}} jam"
+    },
+    "x-minutes": {
+        "other": "{{minutes}} minit"
+    },
+    "x-pages": {
+        "other": "{{pages}} muka surat"
+    },
+    "x-seconds": {
+        "other": "{{seconds}} saat"
+    }
 }

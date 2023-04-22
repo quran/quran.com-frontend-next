@@ -88,10 +88,12 @@
     "reading-goal-title": "Представляем отслеживание Quran.com",
     "recommended": "рекомендуемые",
     "remaining": "Осталось на сегодня",
-    "remaining-days_few": "Осталось {{days}} дней",
-    "remaining-days_many": "Осталось {{days}} дней",
-    "remaining-days_one": "Осталось {{days}} дня",
-    "remaining-days_other": "Осталось {{days}} дней",
+    "remaining-days": {
+        "one": "Остался {{days}} день",
+        "few": "осталось {{days}} дня",
+        "many": "осталось {{days}} дней",
+        "other": "осталось {{days}} дней"
+    },
     "set-reading-goal-success": "Ваша цель чтения была успешно установлена.",
     "starting-chapter": "Начальная сура",
     "starting-verse": "Начиная с ая",
@@ -107,25 +109,35 @@
     "todays-goal": "Сегодняшняя цель",
     "update-reading-goal-success": "Ваша цель по чтению успешно обновлена.",
     "view-progress": "Посмотреть прогресс",
+    "x-days": {
+        "one": "{{days}} день",
+        "few": "{{days}} дня",
+        "many": "{{days}} дней",
+        "other": "{{days}} дней"
+    },
     "x-days-streak": "{{days}} дневная серия",
-    "x-days_few": "{{days}} дней",
-    "x-days_many": "{{days}} дней",
-    "x-days_one": "{{days}} день",
-    "x-days_other": "{{days}} дней",
-    "x-hours_few": "{{hours}} часов",
-    "x-hours_many": "{{hours}} часов",
-    "x-hours_one": "{{hours}} час",
-    "x-hours_other": "{{hours}} часов",
-    "x-minutes_few": "{{minutes}} минут",
-    "x-minutes_many": "{{minutes}} минут",
-    "x-minutes_one": "{{minutes}} минут",
-    "x-minutes_other": "{{minutes}} минут",
-    "x-pages_few": "{{pages}} страниц",
-    "x-pages_many": "{{pages}} страниц",
-    "x-pages_one": "{{pages}} страница",
-    "x-pages_other": "{{pages}} страниц",
-    "x-seconds_few": "{{seconds}} секунд",
-    "x-seconds_many": "{{seconds}} секунд",
-    "x-seconds_one": "{{seconds}} секунды",
-    "x-seconds_other": "{{seconds}} секунд"
+    "x-hours": {
+        "one": "{{hours}} час",
+        "few": "{{hours}} часа",
+        "many": "{{hours}} часов",
+        "other": "{{hours}} часов"
+    },
+    "x-minutes": {
+        "one": "{{minutes}} минута",
+        "few": "{{minutes}} минуты",
+        "many": "{{minutes}} минут",
+        "other": "{{minutes}} минут"
+    },
+    "x-pages": {
+        "one": "{{pages}} страница",
+        "few": "{{pages}} страницы",
+        "many": "{{pages}} страниц",
+        "other": "{{pages}} страниц"
+    },
+    "x-seconds": {
+        "one": "{{seconds}} секунда",
+        "few": "{{seconds}} секунды",
+        "many": "{{seconds}} секунд",
+        "other": "{{seconds}} секунд"
+    }
 }

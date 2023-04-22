@@ -88,10 +88,10 @@
     "reading-goal-title": "কোরান ডট কম ট্র্যাকিং চালু করছি",
     "recommended": "প্রস্তাবিত",
     "remaining": "আজকের জন্য বাকি",
-    "remaining-days_few": "{{days}} দিন বাকি",
-    "remaining-days_many": "{{days}} দিন বাকি",
-    "remaining-days_one": "{{days}} দিন বাকি",
-    "remaining-days_other": "{{days}} দিন বাকি",
+    "remaining-days": {
+        "one": "{{days}} দিন বাকি",
+        "other": "{{days}} দিন বাকি"
+    },
     "set-reading-goal-success": "আপনার পড়ার লক্ষ্য সফলভাবে সেট করা হয়েছে।",
     "starting-chapter": "সূরা শুরু",
     "starting-verse": "শুরু করছি আয়াত",
@@ -107,25 +107,25 @@
     "todays-goal": "আজকের গোল",
     "update-reading-goal-success": "আপনার পড়ার লক্ষ্য সফলভাবে আপডেট করা হয়েছে।",
     "view-progress": "অগ্রগতি দেখুন",
+    "x-days": {
+        "one": "{{days}} দিন",
+        "other": "{{days}} দিন"
+    },
     "x-days-streak": "{{days}} দিনের ধারা",
-    "x-days_few": "{{days}} দিন",
-    "x-days_many": "{{days}} দিন",
-    "x-days_one": "{{days}} দিন",
-    "x-days_other": "{{days}} দিন",
-    "x-hours_few": "{{hours}} ঘণ্টা",
-    "x-hours_many": "{{hours}} ঘণ্টা",
-    "x-hours_one": "{{hours}} ঘণ্টা",
-    "x-hours_other": "{{hours}} ঘণ্টা",
-    "x-minutes_few": "{{minutes}} মিনিট",
-    "x-minutes_many": "{{minutes}} মিনিট",
-    "x-minutes_one": "{{minutes}} মিনিট",
-    "x-minutes_other": "{{minutes}} মিনিট",
-    "x-pages_few": "{{pages}} পৃষ্ঠা",
-    "x-pages_many": "{{pages}} পৃষ্ঠা",
-    "x-pages_one": "{{pages}} পৃষ্ঠা",
-    "x-pages_other": "{{pages}} পৃষ্ঠা",
-    "x-seconds_few": "{{seconds}} সেকেন্ড",
-    "x-seconds_many": "{{seconds}} সেকেন্ড",
-    "x-seconds_one": "{{seconds}} সেকেন্ড",
-    "x-seconds_other": "{{seconds}} সেকেন্ড"
+    "x-hours": {
+        "one": "{{hours}} ঘন্টা",
+        "other": "{{hours}} ঘন্টা"
+    },
+    "x-minutes": {
+        "one": "{{minutes}} মিনিট",
+        "other": "{{minutes}} মিনিট"
+    },
+    "x-pages": {
+        "one": "{{pages}} পৃষ্ঠা",
+        "other": "{{pages}} পৃষ্ঠা"
+    },
+    "x-seconds": {
+        "one": "{{seconds}} সেকেন্ড",
+        "other": "{{seconds}} সেকেন্ড"
+    }
 }

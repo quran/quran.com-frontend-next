@@ -88,10 +88,10 @@
     "reading-goal-title": "ردیابی قرآن دات کام را معرفی می کنیم",
     "recommended": "توصیه شده",
     "remaining": "باقی مانده برای امروز",
-    "remaining-days_few": "{{days}} روز باقی مانده است",
-    "remaining-days_many": "{{days}} روز باقی مانده است",
-    "remaining-days_one": "{{days}} روز باقی مانده است",
-    "remaining-days_other": "{{days}} روز باقی مانده است",
+    "remaining-days": {
+        "one": "{{days}} روز باقی مانده است",
+        "other": "{{days}} روز باقی مانده است"
+    },
     "set-reading-goal-success": "هدف خواندن شما با موفقیت تنظیم شده است.",
     "starting-chapter": "شروع سوره",
     "starting-verse": "شروع آیه",
@@ -107,25 +107,25 @@
     "todays-goal": "هدف امروز",
     "update-reading-goal-success": "هدف خواندن شما با موفقیت به روز شد.",
     "view-progress": "مشاهده پیشرفت",
+    "x-days": {
+        "one": "{{days}} روز",
+        "other": "{{days}} روز"
+    },
     "x-days-streak": "{{days}} رگه روز",
-    "x-days_few": "{{days}} روز",
-    "x-days_many": "{{days}} روز",
-    "x-days_one": "{{days}} روز",
-    "x-days_other": "{{days}} روز",
-    "x-hours_few": "{{hours}} ساعت",
-    "x-hours_many": "{{hours}} ساعت",
-    "x-hours_one": "{{hours}} ساعت",
-    "x-hours_other": "{{hours}} ساعت",
-    "x-minutes_few": "{{minutes}} دقیقه",
-    "x-minutes_many": "{{minutes}} دقیقه",
-    "x-minutes_one": "{{minutes}} دقیقه",
-    "x-minutes_other": "{{minutes}} دقیقه",
-    "x-pages_few": "{{pages}} صفحه",
-    "x-pages_many": "{{pages}} صفحه",
-    "x-pages_one": "صفحه {{pages}}",
-    "x-pages_other": "{{pages}} صفحه",
-    "x-seconds_few": "{{seconds}} ثانیه",
-    "x-seconds_many": "{{seconds}} ثانیه",
-    "x-seconds_one": "{{seconds}} ثانیه",
-    "x-seconds_other": "{{seconds}} ثانیه"
+    "x-hours": {
+        "one": "{{hours}} ساعت",
+        "other": "{{hours}} ساعت"
+    },
+    "x-minutes": {
+        "one": "{{minutes}} دقیقه",
+        "other": "{{minutes}} دقیقه"
+    },
+    "x-pages": {
+        "one": "{{pages}} صفحه",
+        "other": "{{pages}} صفحه"
+    },
+    "x-seconds": {
+        "one": "{{seconds}} ثانیه",
+        "other": "{{seconds}} ثانیه"
+    }
 }

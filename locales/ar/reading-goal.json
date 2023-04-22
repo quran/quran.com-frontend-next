@@ -88,44 +88,68 @@
     "reading-goal-title": "تقديم تتبع موقع قرآن دوت كوم",
     "recommended": "مُستَحسَن",
     "remaining": "المتبقي لهذا اليوم",
-    "remaining-days_few": "{{days}} الأيام متبقية",
-    "remaining-days_many": "{{days}} الأيام متبقية",
-    "remaining-days_one": "يتبقى {{days}} يوم",
-    "remaining-days_other": "{{days}} أيام متبقية",
+    "remaining-days": {
+        "zero": "بقي صفر يوم",
+        "one": "بقي يوم واحد",
+        "two": "بقي يومان",
+        "few": "بقي {{days}} أيام",
+        "many": "بقي {{days}} يوما",
+        "other": "بقي {{days}} يوم"
+    },
     "set-reading-goal-success": "تم تعيين هدف القراءة الخاص بك بنجاح.",
     "starting-chapter": "سورة البدء",
     "starting-verse": "آية البدء",
-    "streak": "أثَر",
+    "streak": "الأثر",
     "streak-definition": "الأثر هو عدد الأيام المتتالية التي قرأت فيها القرآن.",
-    "timeline-meaning": "ماذا يعني الجدول الزمني الخاص بك؟",
+    "timeline-meaning": "ماذا يعني جدولك الزمني؟",
     "timeline-states": {
         "checked": "لقد أكملت هدفك",
         "filled": "لقد قرأت شيئًا ولكن ليس بالقدر الكافي لإكمال هدفك",
-        "none": "لم تقرأ أي شيء بعد في ذلك اليوم",
-        "stroked": "أنت لم تقرأ أي شيء اليوم"
+        "none": "لم تقرأ شيئا بعد في ذلك اليوم",
+        "stroked": "لم تقرأ شيئا اليوم"
     },
     "todays-goal": "هدف اليوم",
     "update-reading-goal-success": "تم تحديث هدف القراءة الخاص بك بنجاح.",
     "view-progress": "مشاهدة التقدم",
-    "x-days-streak": "أثر {{days}}",
-    "x-days_few": "{{days}} أيام",
-    "x-days_many": "{{days}} أيام",
-    "x-days_one": "{{days}} يوم",
-    "x-days_other": "{{days}} أيام",
-    "x-hours_few": "{{hours}} ساعات",
-    "x-hours_many": "{{hours}} ساعات",
-    "x-hours_one": "{{hours}} ساعة",
-    "x-hours_other": "{{hours}} ساعات",
-    "x-minutes_few": "{{minutes}} دقائق",
-    "x-minutes_many": "{{minutes}} دقائق",
-    "x-minutes_one": "{{minutes}} دقيقة",
-    "x-minutes_other": "{{minutes}} دقيقة",
-    "x-pages_few": "{{pages}} صفحات",
-    "x-pages_many": "{{pages}} صفحات",
-    "x-pages_one": "{{pages}} صفحة",
-    "x-pages_other": "{{pages}} صفحة",
-    "x-seconds_few": "{{seconds}} ثانية",
-    "x-seconds_many": "{{seconds}} ثواني",
-    "x-seconds_one": "{{seconds}} ثانية",
-    "x-seconds_other": "{{seconds}} ثانية"
+    "x-days": {
+        "zero": "صفر يوم",
+        "one": "يوم",
+        "two": "يومان",
+        "few": "{{days}} أيام",
+        "many": "{{days}} يوما",
+        "other": "{{days}} يوما"
+    },
+    "x-days-streak": "أثر {{days}} من الأيام",
+    "x-hours": {
+        "zero": "صفر ساعة",
+        "one": "ساعة",
+        "two": "ساعتان",
+        "few": "{{hours}} ساعات",
+        "many": "{{hours}} ساعة",
+        "other": "{{hours}} ساعة"
+    },
+    "x-minutes": {
+        "zero": "صفر دقيقة",
+        "one": "دقيقة",
+        "two": "دقيقتان",
+        "few": "{{minutes}} دقائق",
+        "many": "{{minutes}} دقيقة",
+        "other": "{{minutes}} دقائق"
+    },
+    "x-pages": {
+        "zero": "صفر صفحة",
+        "one": "صفحة",
+        "two": "صفحتان",
+        "few": "{{pages}} صفحات",
+        "many": "{{pages}} صفحة",
+        "other": "{{pages}} صفحات"
+    },
+    "x-seconds": {
+        "zero": "صفر ثانية",
+        "one": "ثانية",
+        "two": "ثانيتان",
+        "few": "{{seconds}} ثوان",
+        "many": "{{seconds}} ثانية",
+        "other": "{{seconds}} ثانية"
+    }
 }

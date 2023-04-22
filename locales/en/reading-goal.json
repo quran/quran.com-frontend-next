@@ -83,17 +83,13 @@
         "time-goal": "read {{time}} of the Quran"
     },
     "reading-goal": "Reading Goal",
-    "reading-goal-description": "Do you want to finish reading the Quran in a month, a year, or build a habit of reading 10 mins a day? Create a goal below and Quran.com will create a personalized plan for you and adjust it as you progress to help you reach your goal. ",
+    "reading-goal-description": "Do you want to finish reading the Quran in a month, a year, or build a habit of reading 10 mins a day? Create a goal below and Quran.com will create a personalized plan for you and adjust it as you progress to help you reach your goal.",
     "reading-goal-label": "You're on a",
     "reading-goal-title": "Introducing Quran.com Tracking",
     "recommended": "Recommended",
     "remaining": "Remaining for today",
     "remaining-days": {
-        "zero": "{{days}} days remaining",
         "one": "{{days}} day remaining",
-        "two": "{{days}} days remaining",
-        "few": "{{days}} days remaining",
-        "many": "{{days}} days remaining",
         "other": "{{days}} days remaining"
     },
     "set-reading-goal-success": "Your reading goal has been set successfully.",
@@ -111,45 +107,25 @@
     "todays-goal": "Today's Goal",
     "update-reading-goal-success": "Your reading goal has been updated successfully.",
     "view-progress": "View Progress",
-    "x-days-streak": "{{days}} day streak",
     "x-days": {
-        "zero": "{{days}} day",
         "one": "{{days}} day",
-        "two": "{{days}} day",
-        "few": "{{days}} days",
-        "many": "{{days}} days",
         "other": "{{days}} days"
     },
+    "x-days-streak": "{{days}} day streak",
     "x-hours": {
-        "zero": "{{hours}} hours",
         "one": "{{hours}} hour",
-        "two": "{{hours}} hours",
-        "few": "{{hours}} hours",
-        "many": "{{hours}} hours",
         "other": "{{hours}} hours"
     },
     "x-minutes": {
-        "zero": "{{minutes}} minutes",
         "one": "{{minutes}} minute",
-        "two": "{{minutes}} minutes",
-        "few": "{{minutes}} minutes",
-        "many": "{{minutes}} minutes",
         "other": "{{minutes}} minutes"
     },
-    "x-seconds": {
-        "zero": "{{seconds}} seconds",
-        "one": "{{seconds}} second",
-        "two": "{{seconds}} seconds",
-        "few": "{{seconds}} seconds",
-        "many": "{{seconds}} seconds",
-        "other": "{{seconds}} seconds"
-    },
     "x-pages": {
-        "zero": "{{pages}} pages",
         "one": "{{pages}} page",
-        "two": "{{pages}} pages",
-        "few": "{{pages}} pages",
-        "many": "{{pages}} pages",
         "other": "{{pages}} pages"
+    },
+    "x-seconds": {
+        "one": "{{seconds}} second",
+        "other": "{{seconds}} seconds"
     }
 }

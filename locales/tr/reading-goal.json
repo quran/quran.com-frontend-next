@@ -88,10 +88,10 @@
     "reading-goal-title": "Kuran.com Takibine Giriş",
     "recommended": "Tavsiye edilen",
     "remaining": "Bugün için kalan",
-    "remaining-days_few": "{{days}} gün kaldı",
-    "remaining-days_many": "{{days}} gün kaldı",
-    "remaining-days_one": "{{days}} gün kaldı",
-    "remaining-days_other": "{{days}} gün kaldı",
+    "remaining-days": {
+        "one": "{{days}} gün kaldı",
+        "other": "{{days}} gün kaldı"
+    },
     "set-reading-goal-success": "Okuma hedefiniz başarıyla belirlendi.",
     "starting-chapter": "Başlangıç Suresi",
     "starting-verse": "Ayah'a Başlamak",
@@ -107,25 +107,25 @@
     "todays-goal": "bugünün hedefi",
     "update-reading-goal-success": "Okuma hedefiniz başarıyla güncellendi.",
     "view-progress": "İlerlemeyi Görüntüle",
+    "x-days": {
+        "one": "{{days}} gün",
+        "other": "{{days}} gün"
+    },
     "x-days-streak": "{{days}} günlük seri",
-    "x-days_few": "{{days}} gün",
-    "x-days_many": "{{days}} gün",
-    "x-days_one": "{{days}} gün",
-    "x-days_other": "{{days}} gün",
-    "x-hours_few": "{{hours}} saat",
-    "x-hours_many": "{{hours}} saat",
-    "x-hours_one": "{{hours}} saat",
-    "x-hours_other": "{{hours}} saat",
-    "x-minutes_few": "{{minutes}} dakika",
-    "x-minutes_many": "{{minutes}} dakika",
-    "x-minutes_one": "{{minutes}} dakika",
-    "x-minutes_other": "{{minutes}} dakika",
-    "x-pages_few": "{{pages}} sayfa",
-    "x-pages_many": "{{pages}} sayfa",
-    "x-pages_one": "{{pages}} sayfa",
-    "x-pages_other": "{{pages}} sayfa",
-    "x-seconds_few": "{{seconds}} saniye",
-    "x-seconds_many": "{{seconds}} saniye",
-    "x-seconds_one": "{{seconds}} saniye",
-    "x-seconds_other": "{{seconds}} saniye"
+    "x-hours": {
+        "one": "{{hours}} saat",
+        "other": "{{hours}} saat"
+    },
+    "x-minutes": {
+        "one": "{{minutes}} dakika",
+        "other": "{{minutes}} dakika"
+    },
+    "x-pages": {
+        "one": "{{pages}} sayfa",
+        "other": "{{pages}} sayfa"
+    },
+    "x-seconds": {
+        "one": "{{seconds}} saniye",
+        "other": "{{seconds}} saniye"
+    }
 }

@@ -88,10 +88,10 @@
     "reading-goal-title": "Presentazione del monitoraggio di Quran.com",
     "recommended": "Consigliato",
     "remaining": "Rimanendo per oggi",
-    "remaining-days_few": "{{days}} giorni rimanenti",
-    "remaining-days_many": "{{days}} giorni rimanenti",
-    "remaining-days_one": "{{days}} giorno rimanente",
-    "remaining-days_other": "{{days}} giorni rimanenti",
+    "remaining-days": {
+        "one": "{{days}} giorno rimanente",
+        "other": "{{days}} giorni rimanenti"
+    },
     "set-reading-goal-success": "Il tuo obiettivo di lettura è stato impostato correttamente.",
     "starting-chapter": "Sura iniziale",
     "starting-verse": "A partire Ayah",
@@ -107,25 +107,25 @@
     "todays-goal": "Obiettivo di oggi",
     "update-reading-goal-success": "Il tuo obiettivo di lettura è stato aggiornato correttamente.",
     "view-progress": "Visualizza i progressi",
+    "x-days": {
+        "one": "{{days}} giorno",
+        "other": "{{days}} giorni"
+    },
     "x-days-streak": "{{days}} serie di giorni",
-    "x-days_few": "{{days}} giorni",
-    "x-days_many": "{{days}} giorni",
-    "x-days_one": "{{days}} giorno",
-    "x-days_other": "{{days}} giorni",
-    "x-hours_few": "{{hours}} ore",
-    "x-hours_many": "{{hours}} ore",
-    "x-hours_one": "{{hours}} ora",
-    "x-hours_other": "{{hours}} ore",
-    "x-minutes_few": "{{minutes}} minuti",
-    "x-minutes_many": "{{minutes}} minuti",
-    "x-minutes_one": "{{minutes}} minuto",
-    "x-minutes_other": "{{minutes}} minuti",
-    "x-pages_few": "{{pages}} pagine",
-    "x-pages_many": "{{pages}} pagine",
-    "x-pages_one": "{{pages}} pagina",
-    "x-pages_other": "{{pages}} pagine",
-    "x-seconds_few": "{{seconds}} secondi",
-    "x-seconds_many": "{{seconds}} secondi",
-    "x-seconds_one": "{{seconds}} secondo",
-    "x-seconds_other": "{{seconds}} secondi"
+    "x-hours": {
+        "one": "{{hours}} ora",
+        "other": "{{hours}} ore"
+    },
+    "x-minutes": {
+        "one": "{{minutes}} minuto",
+        "other": "{{minutes}} minuti"
+    },
+    "x-pages": {
+        "one": "{{pages}} pagina",
+        "other": "{{pages}} pagine"
+    },
+    "x-seconds": {
+        "one": "{{seconds}} secondo",
+        "other": "{{seconds}} secondi"
+    }
 }
