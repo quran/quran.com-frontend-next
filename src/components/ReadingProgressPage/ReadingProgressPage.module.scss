@@ -4,7 +4,6 @@ $section-spacing: calc(var(--spacing-mega) * 1.5);
 $section-padding: calc(var(--spacing-large));
 
 .contentContainer {
-  min-height: 50vh;
   padding-block: $section-spacing;
 
   h1 {
