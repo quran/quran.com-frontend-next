@@ -88,10 +88,14 @@
     "reading-goal-title": "Introducing Quran.com Tracking",
     "recommended": "Recommended",
     "remaining": "Remaining for today",
-    "remaining-days_few": "{{days}} days remaining",
-    "remaining-days_many": "{{days}} days remaining",
-    "remaining-days_one": "{{days}} day remaining",
-    "remaining-days_other": "{{days}} days remaining",
+    "remaining-days": {
+        "zero": "{{days}} days remaining",
+        "one": "{{days}} day remaining",
+        "two": "{{days}} days remaining",
+        "few": "{{days}} days remaining",
+        "many": "{{days}} days remaining",
+        "other": "{{days}} days remaining"
+    },
     "set-reading-goal-success": "Your reading goal has been set successfully.",
     "starting-chapter": "Starting Surah",
     "starting-verse": "Starting Ayah",
@@ -108,24 +112,44 @@
     "update-reading-goal-success": "Your reading goal has been updated successfully.",
     "view-progress": "View Progress",
     "x-days-streak": "{{days}} day streak",
-    "x-days_few": "{{days}} days",
-    "x-days_many": "{{days}} days",
-    "x-days_one": "{{days}} day",
-    "x-days_other": "{{days}} days",
-    "x-hours_few": "{{hours}} hours",
-    "x-hours_many": "{{hours}} hours",
-    "x-hours_one": "{{hours}} hour",
-    "x-hours_other": "{{hours}} hours",
-    "x-minutes_few": "{{minutes}} minutes",
-    "x-minutes_many": "{{minutes}} minutes",
-    "x-minutes_one": "{{minutes}} minute",
-    "x-minutes_other": "{{minutes}} minutes",
-    "x-pages_few": "{{pages}} pages",
-    "x-pages_many": "{{pages}} pages",
-    "x-pages_one": "{{pages}} page",
-    "x-pages_other": "{{pages}} pages",
-    "x-seconds_few": "{{seconds}} seconds",
-    "x-seconds_many": "{{seconds}} seconds",
-    "x-seconds_one": "{{seconds}} second",
-    "x-seconds_other": "{{seconds}} seconds"
+    "x-days": {
+        "zero": "{{days}} day",
+        "one": "{{days}} day",
+        "two": "{{days}} day",
+        "few": "{{days}} days",
+        "many": "{{days}} days",
+        "other": "{{days}} days"
+    },
+    "x-hours": {
+        "zero": "{{hours}} hours",
+        "one": "{{hours}} hour",
+        "two": "{{hours}} hours",
+        "few": "{{hours}} hours",
+        "many": "{{hours}} hours",
+        "other": "{{hours}} hours"
+    },
+    "x-minutes": {
+        "zero": "{{minutes}} minutes",
+        "one": "{{minutes}} minute",
+        "two": "{{minutes}} minutes",
+        "few": "{{minutes}} minutes",
+        "many": "{{minutes}} minutes",
+        "other": "{{minutes}} minutes"
+    },
+    "x-seconds": {
+        "zero": "{{seconds}} seconds",
+        "one": "{{seconds}} second",
+        "two": "{{seconds}} seconds",
+        "few": "{{seconds}} seconds",
+        "many": "{{seconds}} seconds",
+        "other": "{{seconds}} seconds"
+    },
+    "x-pages": {
+        "zero": "{{pages}} pages",
+        "one": "{{pages}} page",
+        "two": "{{pages}} pages",
+        "few": "{{pages}} pages",
+        "many": "{{pages}} pages",
+        "other": "{{pages}} pages"
+    }
 }
