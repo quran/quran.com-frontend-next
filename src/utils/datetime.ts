@@ -1,6 +1,7 @@
 import { Translate } from 'next-translate';
 
 import { getLangFullLocale, LANG_LOCALE_MAP, toLocalizedNumber } from './locale';
+import { convertNumberToDecimal } from './number';
 
 // Converts seconds to (hours), minutes, and seconds
 export const secondsFormatter = (seconds: number, locale: string) => {
@@ -37,7 +38,7 @@ export const secondsToReadableFormat = (s: number, t: Translate, locale: string)
     results.push(
       t('reading-goal:x-hours', {
         count: hours,
-        hours: toLocalizedNumber(Number(hours.toFixed(1)), locale),
+        hours: toLocalizedNumber(convertNumberToDecimal(hours), locale),
       }),
     );
     minutes %= 60;
@@ -48,7 +49,7 @@ export const secondsToReadableFormat = (s: number, t: Translate, locale: string)
     results.push(
       t('reading-goal:x-minutes', {
         count: minutes,
-        minutes: toLocalizedNumber(Number(minutes.toFixed(1)), locale),
+        minutes: toLocalizedNumber(convertNumberToDecimal(minutes), locale),
       }),
     );
     seconds %= 60;
@@ -58,7 +59,7 @@ export const secondsToReadableFormat = (s: number, t: Translate, locale: string)
     results.push(
       t('reading-goal:x-seconds', {
         count: seconds,
-        seconds: toLocalizedNumber(Number(seconds.toFixed(1)), locale),
+        seconds: toLocalizedNumber(convertNumberToDecimal(seconds), locale),
       }),
     );
   }

@@ -11,7 +11,7 @@ import { secondsToReadableFormat } from '@/utils/datetime';
 import { logButtonClick } from '@/utils/eventLogger';
 import { toLocalizedNumber } from '@/utils/locale';
 import { getChapterWithStartingVerseUrl } from '@/utils/navigation';
-import { convertFractionToPercent } from '@/utils/number';
+import { convertFractionToPercent, convertNumberToDecimal } from '@/utils/number';
 import { parseVerseRange } from '@/utils/verseKeys';
 
 interface ReadingGoalAmountProps {
@@ -50,7 +50,9 @@ const ReadingGoalAmount: React.FC<ReadingGoalAmountProps> = ({
   }
 
   if (goalType === ReadingGoalType.PAGES) {
-    action = t('progress.pages-goal', { pages: progress.amountLeft.toFixed(2) });
+    action = t('progress.pages-goal', {
+      pages: toLocalizedNumber(convertNumberToDecimal(progress.amountLeft, 2), lang),
+    });
   }
 
   if (goalType === ReadingGoalType.RANGE) {

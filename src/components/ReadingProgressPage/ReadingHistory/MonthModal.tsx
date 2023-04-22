@@ -14,6 +14,7 @@ import { Pagination } from '@/types/auth/GetBookmarksByCollectionId';
 import { FilterReadingDaysParams, ReadingDay } from '@/types/auth/ReadingDay';
 import { privateFetcher } from '@/utils/auth/api';
 import { makeFilterReadingDaysUrl } from '@/utils/auth/apiPaths';
+import { dateToReadableFormat } from '@/utils/datetime';
 import { toLocalizedNumber } from '@/utils/locale';
 
 interface MonthModalProps {
@@ -60,9 +61,7 @@ const MonthModal = ({ month, year, onClose }: MonthModalProps) => {
   });
 
   const readableDate = selectedDate
-    ? new Date(selectedDate).toLocaleDateString(lang, {
-        day: 'numeric',
-        month: 'long',
+    ? dateToReadableFormat(selectedDate, lang, {
         year: 'numeric',
       })
     : `${month.name}, ${localizedYear}`;
