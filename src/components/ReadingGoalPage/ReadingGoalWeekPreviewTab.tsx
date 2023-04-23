@@ -12,8 +12,8 @@ import HoverablePopover from '@/dls/Popover/HoverablePopover';
 import Spinner from '@/dls/Spinner/Spinner';
 import {
   CreateReadingGoalRequest,
-  EstimatedReadingGoalWeek,
-  RangeEstimatedReadingGoalWeek,
+  EstimatedReadingGoalDay,
+  RangeEstimatedReadingGoalDay,
   ReadingGoalType,
 } from '@/types/auth/ReadingGoal';
 import { estimateReadingGoal } from '@/utils/auth/api';
@@ -115,7 +115,7 @@ const ReadingGoalWeekPreviewTab: React.FC<ReadingGoalTabProps> = ({ state, nav }
         {isValidating
           ? getSkeleton()
           : data.data.week.map(
-              (day: EstimatedReadingGoalWeek | RangeEstimatedReadingGoalWeek, idx: number) => {
+              (day: EstimatedReadingGoalDay | RangeEstimatedReadingGoalDay, idx: number) => {
                 const date = new Date(day.date);
 
                 return (
