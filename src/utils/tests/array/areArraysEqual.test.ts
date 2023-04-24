@@ -36,12 +36,3 @@ it('should not modify the original arrays', () => {
   expect(array1).toEqual([1, 2, 3]);
   expect(array2).toEqual([2, 3, 1]);
 });
-
-it('should return a new array instance', () => {
-  const array1 = [1, 2, 3];
-  const array2 = [2, 3, 1];
-  const result = areArraysEqual(array1, array2);
-
-  expect(result).not.toBe(array1);
-  expect(result).not.toBe(array2);
-});
