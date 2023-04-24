@@ -1,5 +1,3 @@
-import isEqual from 'lodash/isEqual';
-
 /**
  * Convert an array of numbers to an array of strings.
  *
@@ -27,8 +25,21 @@ export const stringsToNumbersArray = (stringsArray: string[]): number[] =>
  * @param {T[]} array2
  * @returns {boolean}
  */
-export const areArraysEqual = <T>(array1: T[], array2: T[]): boolean =>
-  isEqual([...array1].sort(), [...array2].sort());
+export const areArraysEqual = <T>(array1: T[], array2: T[]): boolean => {
+  if (array1?.length !== array2?.length) return false;
+
+  const array1Map = new Map();
+
+  array1.map((item) => array1Map.set(item, true));
+
+  for (let i = 0; i < array2.length; i += 1) {
+    if (array1Map.get(array2[i]) == null) return false;
+
+    array1Map.delete(array2[i]);
+  }
+
+  return array1Map.size === 0;
+};
 
 /**
  * Remove `itemToRemove` from `array`
