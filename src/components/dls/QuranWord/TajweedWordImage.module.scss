@@ -23,83 +23,83 @@ $light-theme-filter: contrast(100%) hue-rotate(50deg);
 
 .xs {
   img {
-    zoom: 0.4;
+    height: 40px;
     @include breakpoints.tablet {
-      zoom: 0.5;
+      height: 50px;
     }
   }
 }
 .sm {
   img {
-    zoom: 0.5;
+    height: 50px;
     @include breakpoints.tablet {
-      zoom: 0.65;
+      height: 65px;
     }
   }
 }
 .md {
   img {
-    zoom: 0.7;
+    height: 70px;
     @include breakpoints.tablet {
-      zoom: 0.75;
+      height: 75px;
     }
   }
 }
 .lg {
   img {
-    zoom: 0.8;
+    height: 80px;
     @include breakpoints.tablet {
-      zoom: 0.9;
+      height: 90px;
     }
   }
 }
 .xl {
   img {
-    zoom: 0.9;
+    height: 90px;
     @include breakpoints.tablet {
-      zoom: 0.92;
+      height: 92px;
     }
   }
 }
 
 .xl2 {
   img {
-    zoom: 1;
+    height: 100px;
   }
 }
 
 .xl3 {
   img {
-    zoom: 1.1;
+    height: 110px;
     @include breakpoints.tablet {
-      zoom: 1.02;
+      height: 102px;
     }
   }
 }
 
 .xl4 {
   img {
-    zoom: 1.2;
+    height: 120px;
     @include breakpoints.tablet {
-      zoom: 1.04;
+      height: 104px;
     }
   }
 }
 
 .xl5 {
   img {
-    zoom: 1.3;
+    height: 130px;
     @include breakpoints.tablet {
-      zoom: 1.06;
+      height: 106px;
     }
   }
 }
 
 .xl6 {
   img {
-    zoom: 1.4;
+    height: 140px;
     @include breakpoints.tablet {
-      zoom: 1.08;
+      height: 108px;
     }
   }
 }
