@@ -68,12 +68,5 @@ export const removeItemFromArray = <T>(itemToRemove: T, array: T[]): T[] =>
  * @returns {T[]}
  */
 export const mergeTwoArraysUniquely = <T>(array1: T[], array2: T[]): T[] => {
-  // Create a Map object of the second array, with each element as a key and true as the value
-  const array2Map = new Map();
-
-  array2.map((item) => array2Map.set(item, true));
-
-  // Filter the first array to remove any elements that are in the second array
-  // Concatenate the filtered first array with the second array to get the merged array with unique items
-  return array1.filter((t) => array2Map.get(t) == null).concat(array2);
+  return Array.from(new Set(array1.concat(array2)));
 };
