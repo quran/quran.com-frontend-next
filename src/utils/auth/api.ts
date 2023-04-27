@@ -169,9 +169,6 @@ export const getBookmarkCollections = async (
 ): Promise<string[]> =>
   privateFetcher(makeBookmarkCollectionsUrl(mushafId, key, type, verseNumber));
 
-// export const getReadingGoal = async (): Promise<{ data?: ReadingGoal }> =>
-//   privateFetcher(makeReadingGoalUrl());
-
 export const addReadingGoal = async ({
   mushafId,
   ...data
