@@ -84,7 +84,7 @@ const RevelationOrderView = ({ isDescending, chapters }: RevelationOrderViewProp
           onKeyPress={() => onSurahClicked(chapter.id)}
         >
           <SurahPreviewRow
-            chapterId={REVELATION_ORDER[revelationOrderIndex]}
+            chapterId={+chapter.id}
             description={getChapterDescription(chapter, t)}
             surahName={`${chapter.transliteratedName}`}
             surahNumber={
