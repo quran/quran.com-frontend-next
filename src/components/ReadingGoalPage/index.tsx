@@ -5,6 +5,7 @@ import { useState, useContext, useCallback } from 'react';
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
+import { shallowEqual, useSelector } from 'react-redux';
 import { useSWRConfig } from 'swr';
 
 import useReadingGoalReducer, {
@@ -22,7 +23,9 @@ import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import ChevronLeftIcon from '@/icons/chevron-left.svg';
 import ChevronRightIcon from '@/icons/chevron-right.svg';
 import layoutStyle from '@/pages/index.module.scss';
+import { selectQuranFont, selectQuranMushafLines } from '@/redux/slices/QuranReader/styles';
 import { CreateReadingGoalRequest, ReadingGoalType } from '@/types/auth/ReadingGoal';
+import { getMushafId } from '@/utils/api';
 import { addReadingGoal } from '@/utils/auth/api';
 import { makeStreakUrl } from '@/utils/auth/apiPaths';
 import { logFormSubmission } from '@/utils/eventLogger';
@@ -33,6 +36,11 @@ const ReadingGoalOnboarding: React.FC = () => {
   const { t } = useTranslation();
   const router = useRouter();
   const chaptersData = useContext(DataContext);
+
+  const quranFont = useSelector(selectQuranFont, shallowEqual);
+  const mushafLines = useSelector(selectQuranMushafLines, shallowEqual);
+  const { mushaf } = getMushafId(quranFont, mushafLines);
+
   const [loading, setLoading] = useState(false);
   const [tabIdx, setTabIdx] = useState(0);
   const [state, dispatch] = useReadingGoalReducer();
@@ -58,6 +66,7 @@ const ReadingGoalOnboarding: React.FC = () => {
     else amount = `${state.rangeStartVerse}-${state.rangeEndVerse}`;
 
     const data: CreateReadingGoalRequest = {
+      mushafId: mushaf,
       type: state.type,
       amount,
     };

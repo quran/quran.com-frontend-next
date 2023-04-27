@@ -4,6 +4,7 @@ import { getLocaleInitialState } from '../defaultSettings/util';
 
 import { RootState } from '@/redux/RootState';
 import SliceName from '@/redux/types/SliceName';
+import { getMushafId } from '@/utils/api';
 import { addOrUpdateBulkUserPreferences } from '@/utils/auth/api';
 import { stateToPreferenceGroups } from '@/utils/auth/preferencesMapper';
 
@@ -31,7 +32,11 @@ export const persistDefaultSettings = createAsyncThunk<void, string, { state: Ro
       ...getLocaleInitialState(locale),
       [SliceName.LOCALE]: locale,
     });
-    await addOrUpdateBulkUserPreferences(localeDefaultSettings);
+
+    const { quranReaderStyles } = localeDefaultSettings;
+    const { mushaf } = getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines);
+
+    await addOrUpdateBulkUserPreferences(localeDefaultSettings, mushaf);
   },
 );
 
