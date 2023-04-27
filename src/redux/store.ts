@@ -44,7 +44,7 @@ import SliceName from './types/SliceName';
 
 const persistConfig = {
   key: 'root',
-  version: 26,
+  version: 29,
   storage,
   migrate: createMigrate(migrations, {
     debug: process.env.NEXT_PUBLIC_VERCEL_ENV === 'development',

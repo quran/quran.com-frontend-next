@@ -4,7 +4,12 @@ import { readingGoalExamples, ReadingGoalTabProps } from './hooks/useReadingGoal
 import OptionButton from './OptionButton';
 import styles from './ReadingGoalPage.module.scss';
 
-const ReadingGoalExamplesTab: React.FC<ReadingGoalTabProps> = ({ state, dispatch, nav }) => {
+const ReadingGoalExamplesTab: React.FC<ReadingGoalTabProps> = ({
+  state,
+  dispatch,
+  nav,
+  logClick,
+}) => {
   const { t } = useTranslation('reading-goal');
 
   return (
@@ -14,19 +19,24 @@ const ReadingGoalExamplesTab: React.FC<ReadingGoalTabProps> = ({ state, dispatch
         <p className={styles.subtitle}>{t('examples-subtitle')}</p>
       </div>
       <div className={styles.optionsContainer}>
-        {Object.values(readingGoalExamples).map((example) => (
-          <OptionButton
-            key={example.i18nKey}
-            icon={example.icon}
-            onSelect={() => {
-              dispatch({ type: 'SET_EXAMPLE', payload: { exampleKey: example.i18nKey } });
-            }}
-            selected={state.exampleKey === example.i18nKey}
-            option={t(`examples.${example.i18nKey}.title`)}
-            recommended={'recommended' in example && example.recommended}
-            description={t(`examples.${example.i18nKey}.description`)}
-          />
-        ))}
+        {Object.keys(readingGoalExamples).map((exampleKey: keyof typeof readingGoalExamples) => {
+          const example = readingGoalExamples[exampleKey];
+
+          return (
+            <OptionButton
+              key={example.i18nKey}
+              icon={example.icon}
+              onSelect={() => {
+                dispatch({ type: 'SET_EXAMPLE', payload: { exampleKey } });
+                logClick(exampleKey);
+              }}
+              selected={state.exampleKey === exampleKey}
+              option={t(`examples.${example.i18nKey}.title`)}
+              recommended={'recommended' in example && example.recommended}
+              description={t(`examples.${example.i18nKey}.description`)}
+            />
+          );
+        })}
         {nav}
       </div>
     </>

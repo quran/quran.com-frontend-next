@@ -1,17 +1,18 @@
+/* eslint-disable react-func/max-lines-per-function */
 /* eslint-disable max-lines */
-import { useState, useContext } from 'react';
+import { useState, useContext, useCallback } from 'react';
 
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
+import { useSWRConfig } from 'swr';
 
-import useReadingGoalReducer, { ReadingGoalPeriod } from './hooks/useReadingGoalReducer';
-import ReadingGoalExamplesTab from './ReadingGoalExamplesTab';
+import useReadingGoalReducer, {
+  ReadingGoalPeriod,
+  ReadingGoalTabProps,
+} from './hooks/useReadingGoalReducer';
 import styles from './ReadingGoalPage.module.scss';
-import ReadingGoalTargetAmountTab from './ReadingGoalTargetAmountTab';
-import ReadingGoalTimeTab from './ReadingGoalTimeTab';
-import ReadingGoalTypeTab from './ReadingGoalTypeTab';
-import ReadingGoalWeekPreviewTab from './ReadingGoalWeekPreviewTab';
+import { logTabClick, logTabInputChange, logTabNextClick, TabKey, tabsArray } from './utils/tabs';
 
 import DataContext from '@/contexts/DataContext';
 import Button, { ButtonSize } from '@/dls/Button/Button';
@@ -23,20 +24,10 @@ import ChevronRightIcon from '@/icons/chevron-right.svg';
 import layoutStyle from '@/pages/index.module.scss';
 import { CreateReadingGoalRequest, ReadingGoalType } from '@/types/auth/ReadingGoal';
 import { addReadingGoal } from '@/utils/auth/api';
+import { makeStreakUrl } from '@/utils/auth/apiPaths';
+import { logFormSubmission } from '@/utils/eventLogger';
 import { isValidPageId, isValidVerseKey } from '@/utils/validator';
-
-const tabs = {
-  examples: ReadingGoalExamplesTab,
-  time: ReadingGoalTimeTab,
-  type: ReadingGoalTypeTab,
-  amount: ReadingGoalTargetAmountTab,
-  preview: ReadingGoalWeekPreviewTab,
-} as const;
-
-const tabsArray = (Object.keys(tabs) as (keyof typeof tabs)[]).map((key) => ({
-  key,
-  Component: tabs[key],
-}));
+import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
 
 const ReadingGoalOnboarding: React.FC = () => {
   const { t } = useTranslation();
@@ -46,6 +37,16 @@ const ReadingGoalOnboarding: React.FC = () => {
   const [tabIdx, setTabIdx] = useState(0);
   const [state, dispatch] = useReadingGoalReducer();
   const toast = useToast();
+  const { cache } = useSWRConfig();
+
+  const addReadingGoalAndClearCache = useCallback(
+    async (data: CreateReadingGoalRequest) => {
+      await addReadingGoal(data).then(() => {
+        cache.delete(makeStreakUrl());
+      });
+    },
+    [cache],
+  );
 
   const Tab = tabsArray[tabIdx];
 
@@ -62,10 +63,12 @@ const ReadingGoalOnboarding: React.FC = () => {
     };
     if (state.period === ReadingGoalPeriod.Continuous) data.duration = state.duration;
 
+    logFormSubmission('create_goal', { duration: null, ...data });
+
     setLoading(true);
 
     try {
-      await addReadingGoal(data);
+      await addReadingGoalAndClearCache(data);
       toast(t('reading-goal:set-reading-goal-success'), {
         status: ToastStatus.Success,
       });
@@ -79,24 +82,30 @@ const ReadingGoalOnboarding: React.FC = () => {
     setLoading(false);
   };
 
-  const isPreviewTab = Tab.key === 'preview';
+  const isPreviewTab = Tab.key === TabKey.PreviewTab;
   const percentage = isPreviewTab ? 100 : (tabIdx / tabsArray.length) * 100;
 
   const onPrev = () => {
     if (tabIdx !== 0 && state.exampleKey !== 'custom') {
       setTabIdx(0);
+      logTabClick(Tab.key, 'previous');
     } else {
       setTabIdx((prevIdx) => prevIdx - 1);
+      logTabClick(Tab.key, 'previous');
     }
   };
 
   const onNext = () => {
     if (!isPreviewTab) {
       if (tabIdx === 0 && state.exampleKey !== 'custom') {
+        // if the user selected an example, skip to the preview tab
         setTabIdx(tabsArray.length - 1);
       } else {
+        // otherwise, go to the next tab
         setTabIdx((prevIdx) => prevIdx + 1);
       }
+
+      logTabNextClick(Tab.key, state);
     } else {
       onSubmit();
     }
@@ -107,9 +116,9 @@ const ReadingGoalOnboarding: React.FC = () => {
     const MIN_SECONDS = 60; // 1 minute
 
     // if the user is on the examples tab and hasn't selected an example, disable the next button
-    if (Tab.key === 'examples' && !state.exampleKey) return true;
+    if (Tab.key === TabKey.ExamplesTab && !state.exampleKey) return true;
 
-    if (Tab.key === 'amount') {
+    if (Tab.key === TabKey.AmountTab) {
       // if the user selected a pages goal and didn't enter a valid amount of pages, disable the next button
       if (state.type === ReadingGoalType.PAGES && !isValidPageId(state.pages)) return true;
 
@@ -125,18 +134,36 @@ const ReadingGoalOnboarding: React.FC = () => {
       }
 
       // if the user selected a range goal and didn't enter a valid range, disable the next button
-      if (
-        state.type === ReadingGoalType.RANGE &&
-        (!state.rangeStartVerse ||
-          !state.rangeEndVerse ||
+      if (state.type === ReadingGoalType.RANGE) {
+        if (!state.rangeStartVerse || !state.rangeEndVerse) return true;
+        if (
           !isValidVerseKey(chaptersData, state.rangeStartVerse) ||
-          !isValidVerseKey(chaptersData, state.rangeEndVerse))
-      ) {
-        return true;
+          !isValidVerseKey(chaptersData, state.rangeEndVerse)
+        ) {
+          return true;
+        }
+
+        // check if the starting verse key is greater than the ending verse key
+        const [startingChapter, startingVerse] = getVerseAndChapterNumbersFromKey(
+          state.rangeStartVerse,
+        );
+        const [endingChapter, endingVerse] = getVerseAndChapterNumbersFromKey(state.rangeEndVerse);
+
+        if (startingChapter === endingChapter && Number(startingVerse) > Number(endingVerse)) {
+          return true;
+        }
       }
     }
 
     return false;
+  };
+
+  const logClick: ReadingGoalTabProps['logClick'] = (event) => {
+    logTabClick(Tab.key, event);
+  };
+
+  const logChange: ReadingGoalTabProps['logChange'] = (input, values, metadata) => {
+    logTabInputChange(Tab.key, input, values, metadata);
   };
 
   return (
@@ -151,6 +178,8 @@ const ReadingGoalOnboarding: React.FC = () => {
             onTabChange={setTabIdx}
             state={state}
             dispatch={dispatch}
+            logClick={logClick}
+            logChange={logChange}
             nav={
               <div className={styles.navigationContainer}>
                 {tabIdx > 0 && (

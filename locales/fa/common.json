@@ -115,6 +115,8 @@
     "developers": "توسعه دهندگان",
     "display": "نمایش دادن",
     "donate": "اهدا کنید",
+    "donate_monthly": "ماهانه اهدا کنید",
+    "donate_once": "یکبار اهدا کنید",
     "email-verification": {
         "check-spam": "ایمیل تأیید را دریافت نکردید؟ صندوق ورودی هرزنامه خود را بررسی کنید",
         "email-sent": "ما همین الان یک ایمیل به <strong> {{email}} <\/strong> ارسال کردیم",
@@ -215,6 +217,7 @@
     "q-reflect": "قرآن انعکاس",
     "quran-com": "قرآن دات کام",
     "quran-radio": "رادیو قرآن",
+    "reading-history": "خواندن تاریخ",
     "reading-preference": {
         "reading": "خواندن",
         "translation": "ترجمه"

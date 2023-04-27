@@ -13,7 +13,17 @@
     },
     "day-x": "Day {{day}}",
     "days": "Days",
+    "delete-goal": "Delete Goal",
+    "delete-goal-confirmation": {
+        "action-text": "I understand the consequence, delete my goal",
+        "confirmation-text": "delete my goal",
+        "instruction-text": "Please type <strong>{{text}}<\/strong> to confirm",
+        "subtitle": "This action cannot be undone. This will permanently delete your goal, and we'll stop tracking your progress.",
+        "title": "Are you sure?"
+    },
+    "delete-reading-goal-success": "Your reading goal has been deleted successfully.",
     "duration": "Duration (days)",
+    "edit-goal": "Edit Goal",
     "ending-chapter": "Ending Surah",
     "ending-verse": "Ending Ayah",
     "examples-subtitle": "Here is a list of common goals. You can also create your own goal.",
@@ -73,28 +83,49 @@
         "time-goal": "read {{time}} of the Quran"
     },
     "reading-goal": "Reading Goal",
-    "reading-goal-description": "Do you want to finish reading the Quran in a month, a year, or build a habit of reading 10 mins a day? Create a goal below and Quran.com will create a personalized plan for you and adjust it as you progress to help you reach your goal. ",
+    "reading-goal-description": "Do you want to finish reading the Quran in a month, a year, or build a habit of reading 10 mins a day? Create a goal below and Quran.com will create a personalized plan for you and adjust it as you progress to help you reach your goal.",
     "reading-goal-label": "You're on a",
     "reading-goal-title": "Introducing Quran.com Tracking",
     "recommended": "Recommended",
     "remaining": "Remaining for today",
-    "remaining-days_one": "{{days}} day remaining",
-    "remaining-days_other": "{{days}} days remaining",
+    "remaining-days": {
+        "one": "{{days}} day remaining",
+        "other": "{{days}} days remaining"
+    },
     "set-reading-goal-success": "Your reading goal has been set successfully.",
     "starting-chapter": "Starting Surah",
     "starting-verse": "Starting Ayah",
-    "streak": "{{days}} day streak",
+    "streak": "Streak",
     "streak-definition": "A streak is the number of consecutive days you have read the Quran.",
+    "timeline-meaning": "What does your timeline mean?",
+    "timeline-states": {
+        "checked": "You have completed your goal",
+        "filled": "You have read something but not enough to complete your goal",
+        "none": "You haven't read anything yet on that day",
+        "stroked": "You haven't read anything today"
+    },
     "todays-goal": "Today's Goal",
+    "update-reading-goal-success": "Your reading goal has been updated successfully.",
     "view-progress": "View Progress",
-    "x-days_one": "{{days}} day",
-    "x-days_other": "{{days}} days",
-    "x-hours_one": "{{hours}} hour",
-    "x-hours_other": "{{hours}} hours",
-    "x-minutes_one": "{{minutes}} minute",
-    "x-minutes_other": "{{minutes}} minutes",
-    "x-pages_one": "{{pages}} page",
-    "x-pages_other": "{{pages}} pages",
-    "x-seconds_one": "{{seconds}} second",
-    "x-seconds_other": "{{seconds}} seconds"
+    "x-days": {
+        "one": "{{days}} day",
+        "other": "{{days}} days"
+    },
+    "x-days-streak": "{{days}} day streak",
+    "x-hours": {
+        "one": "{{hours}} hour",
+        "other": "{{hours}} hours"
+    },
+    "x-minutes": {
+        "one": "{{minutes}} minute",
+        "other": "{{minutes}} minutes"
+    },
+    "x-pages": {
+        "one": "{{pages}} page",
+        "other": "{{pages}} pages"
+    },
+    "x-seconds": {
+        "one": "{{seconds}} second",
+        "other": "{{seconds}} seconds"
+    }
 }

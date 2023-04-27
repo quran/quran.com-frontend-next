@@ -115,6 +115,8 @@
     "developers": "Zhvilluesit",
     "display": "Ekrani",
     "donate": "Dhuroni",
+    "donate_monthly": "Dhuroni çdo muaj",
+    "donate_once": "Dhuroni një herë",
     "email-verification": {
         "check-spam": "Nuk e morët emailin e verifikimit? Kontrolloni kutinë tuaj të postës së padëshiruar",
         "email-sent": "Sapo dërguam një email te <strong> {{email}} <\/strong>",
@@ -215,6 +217,7 @@
     "q-reflect": "Kurani Reflekto",
     "quran-com": "Quran.com",
     "quran-radio": "Kuran Radio",
+    "reading-history": "Leximi i historisë",
     "reading-preference": {
         "reading": "Leximi",
         "translation": "Përkthimi"

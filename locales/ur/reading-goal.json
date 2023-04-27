@@ -13,7 +13,17 @@
     },
     "day-x": "دن {{day}}",
     "days": "دن",
+    "delete-goal": "گول کو حذف کریں۔",
+    "delete-goal-confirmation": {
+        "action-text": "میں نتیجہ سمجھتا ہوں، اپنے مقصد کو حذف کر دیتا ہوں۔",
+        "confirmation-text": "میرا مقصد حذف کریں",
+        "instruction-text": "تصدیق کرنے کے لیے براہ کرم <strong> {{text}} <\/strong> ٹائپ کریں۔",
+        "subtitle": "اس کارروائی کو کالعدم نہیں کیا جا سکتا۔ اس سے آپ کا ہدف مستقل طور پر حذف ہو جائے گا، اور ہم آپ کی پیشرفت کو ٹریک کرنا بند کر دیں گے۔",
+        "title": "کیا تمہیں یقین ہے؟"
+    },
+    "delete-reading-goal-success": "آپ کا پڑھنے کا مقصد کامیابی کے ساتھ حذف کر دیا گیا ہے۔",
     "duration": "دورانیہ (دن)",
+    "edit-goal": "گول میں ترمیم کریں۔",
     "ending-chapter": "ختم سورہ",
     "ending-verse": "ختم ہونے والی آیت",
     "examples-subtitle": "یہاں مشترکہ اہداف کی فہرست ہے۔ آپ اپنا مقصد بھی بنا سکتے ہیں۔",
@@ -78,23 +88,44 @@
     "reading-goal-title": "Quran.com ٹریکنگ کا تعارف",
     "recommended": "تجویز کردہ",
     "remaining": "آج کے لیے باقی ہے۔",
-    "remaining-days_one": "{{days}} دن باقی ہے۔",
-    "remaining-days_other": "{{days}} دن باقی ہیں۔",
+    "remaining-days": {
+        "one": "{{days}} دن باقی ہے۔",
+        "other": "{{days}} دن باقی ہیں۔"
+    },
     "set-reading-goal-success": "آپ کے پڑھنے کا ہدف کامیابی سے طے ہو گیا ہے۔",
     "starting-chapter": "شروع سورہ",
     "starting-verse": "شروع ہو رہی ہے آیت",
-    "streak": "{{days}} دن کا سلسلہ",
+    "streak": "اسٹریک",
     "streak-definition": "ایک سلسلہ ان دنوں کی تعداد ہے جو آپ نے لگاتار قرآن پڑھا ہے۔",
+    "timeline-meaning": "آپ کی ٹائم لائن کا کیا مطلب ہے؟",
+    "timeline-states": {
+        "checked": "آپ نے اپنا مقصد پورا کر لیا ہے۔",
+        "filled": "آپ نے کچھ پڑھا ہے لیکن اپنا مقصد پورا کرنے کے لیے کافی نہیں۔",
+        "none": "اس دن آپ نے ابھی تک کچھ نہیں پڑھا ہے۔",
+        "stroked": "آپ نے آج کچھ نہیں پڑھا؟"
+    },
     "todays-goal": "آج کا مقصد",
+    "update-reading-goal-success": "آپ کے پڑھنے کا مقصد کامیابی کے ساتھ اپ ڈیٹ ہو گیا ہے۔",
     "view-progress": "پیشرفت دیکھیں",
-    "x-days_one": "{{days}} دن",
-    "x-days_other": "{{days}} دن",
-    "x-hours_one": "{{hours}} گھنٹے",
-    "x-hours_other": "{{hours}} گھنٹے",
-    "x-minutes_one": "{{minutes}} منٹ",
-    "x-minutes_other": "{{minutes}} منٹ",
-    "x-pages_one": "{{pages}} صفحہ",
-    "x-pages_other": "{{pages}} صفحات",
-    "x-seconds_one": "{{seconds}} سیکنڈ",
-    "x-seconds_other": "{{seconds}} سیکنڈ"
+    "x-days": {
+        "one": "{{days}} دن",
+        "other": "{{days}} دن"
+    },
+    "x-days-streak": "{{days}} دن کا سلسلہ",
+    "x-hours": {
+        "one": "{{hours}} گھنٹہ",
+        "other": "{{hours}} گھنٹے"
+    },
+    "x-minutes": {
+        "one": "{{minutes}} منٹ",
+        "other": "{{minutes}} منٹ"
+    },
+    "x-pages": {
+        "one": "{{pages}} صفحہ",
+        "other": "{{pages}} صفحات"
+    },
+    "x-seconds": {
+        "one": "{{seconds}} سیکنڈ",
+        "other": "{{seconds}} سیکنڈ"
+    }
 }

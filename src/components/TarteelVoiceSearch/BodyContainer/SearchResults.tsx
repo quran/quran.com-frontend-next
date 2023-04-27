@@ -24,8 +24,13 @@ interface Props {
 const SearchResults: React.FC<Props> = ({ searchResult, isCommandBar }) => {
   const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
   const { t, lang } = useTranslation('common');
+
   const params = {
-    filters: searchResult.matches.map((match) => `${match.surahNum}:${match.ayahNum}`).join(','),
+    // only get the first 10 results
+    filters: searchResult.matches
+      .slice(0, 10)
+      .map((match) => `${match.surahNum}:${match.ayahNum}`)
+      .join(','),
     fields: 'text_uthmani',
     // when it's the search drawer
     ...(!isCommandBar && {

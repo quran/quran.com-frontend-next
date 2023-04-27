@@ -115,6 +115,8 @@
     "developers": "Pemaju (Developers)",
     "display": "Paparan",
     "donate": "Menderma",
+    "donate_monthly": "Menderma bulanan",
+    "donate_once": "Derma sekali",
     "email-verification": {
         "check-spam": "Tidak menerima e-mel pengesahan? Semak peti masuk spam anda",
         "email-sent": "Kami baru sahaja menghantar e-mel kepada <strong> {{email}} <\/strong>",
@@ -215,6 +217,7 @@
     "q-reflect": "QuranReflect",
     "quran-com": "Quran",
     "quran-radio": "Radio Al-Quran",
+    "reading-history": "Membaca sejarah",
     "reading-preference": {
         "reading": "Membaca",
         "translation": "Terjemahan"

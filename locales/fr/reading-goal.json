@@ -13,7 +13,17 @@
     },
     "day-x": "Jour {{day}}",
     "days": "Jours",
+    "delete-goal": "Supprimer l'objectif",
+    "delete-goal-confirmation": {
+        "action-text": "Je comprends la conséquence, supprime mon objectif",
+        "confirmation-text": "supprimer mon objectif",
+        "instruction-text": "Veuillez saisir <strong> {{text}} <\/strong> pour confirmer",
+        "subtitle": "Cette action ne peut pas être annulée. Cela supprimera définitivement votre objectif et nous cesserons de suivre votre progression.",
+        "title": "Es-tu sûr?"
+    },
+    "delete-reading-goal-success": "Votre objectif de lecture a été supprimé avec succès.",
     "duration": "Durée (jours)",
+    "edit-goal": "Modifier l'objectif",
     "ending-chapter": "Fin de la sourate",
     "ending-verse": "Terminer Ayah",
     "examples-subtitle": "Voici une liste d'objectifs communs. Vous pouvez également créer votre propre objectif.",
@@ -78,23 +88,44 @@
     "reading-goal-title": "Présentation du suivi Quran.com",
     "recommended": "Recommandé",
     "remaining": "Reste pour aujourd'hui",
-    "remaining-days_one": "{{days}} jour restant",
-    "remaining-days_other": "{{days}} jours restants",
+    "remaining-days": {
+        "one": "{{days}} jour restant",
+        "other": "{{days}} jours restants"
+    },
     "set-reading-goal-success": "Votre objectif de lecture a été défini avec succès.",
     "starting-chapter": "Sourate de départ",
     "starting-verse": "Commencer Ayah",
-    "streak": "{{days}} jours consécutifs",
+    "streak": "Traînée",
     "streak-definition": "Une séquence est le nombre de jours consécutifs pendant lesquels vous avez lu le Coran.",
+    "timeline-meaning": "Que signifie votre chronologie ?",
+    "timeline-states": {
+        "checked": "Vous avez atteint votre objectif",
+        "filled": "Vous avez lu quelque chose mais pas assez pour atteindre votre objectif",
+        "none": "Vous n'avez encore rien lu ce jour-là",
+        "stroked": "Vous n'avez rien lu aujourd'hui"
+    },
     "todays-goal": "L'objectif d'aujourd'hui",
+    "update-reading-goal-success": "Votre objectif de lecture a été mis à jour avec succès.",
     "view-progress": "Voir la progression",
-    "x-days_one": "{{days}} jour",
-    "x-days_other": "{{days}} jours",
-    "x-hours_one": "{{hours}} heure",
-    "x-hours_other": "{{hours}} heures",
-    "x-minutes_one": "{{minutes}} minutes",
-    "x-minutes_other": "{{minutes}} minutes",
-    "x-pages_one": "{{pages}} pages",
-    "x-pages_other": "{{pages}} pages",
-    "x-seconds_one": "{{seconds}} seconde",
-    "x-seconds_other": "{{seconds}} secondes"
+    "x-days": {
+        "one": "{{days}} jour",
+        "other": "{{days}} jours"
+    },
+    "x-days-streak": "{{days}} jours consécutifs",
+    "x-hours": {
+        "one": "{{hours}} heure",
+        "other": "{{hours}} heures"
+    },
+    "x-minutes": {
+        "one": "{{minutes}} minute",
+        "other": "{{minutes}} minutes"
+    },
+    "x-pages": {
+        "one": "{{pages}} page",
+        "other": "{{pages}} pages"
+    },
+    "x-seconds": {
+        "one": "{{seconds}} seconde",
+        "other": "{{seconds}} secondes"
+    }
 }

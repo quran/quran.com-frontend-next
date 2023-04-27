@@ -5,7 +5,7 @@
     "*": ["common", "error", "radio", "quick-links"],
     "/": ["home", "radio", "collection", "reading-goal", "reciter"],
     "/reading-goal": ["reading-goal", "reciter"],
-    "/reading-goal/progress": ["reading-goal"],
+    "/reading-goal/progress": ["reading-goal", "reading-progress"],
     "/[chapterId]": ["quran-reader", "reading-goal", "chapter", "surah-info"],
     "/[chapterId]/reflections": ["quran-reader", "reading-goal"],
     "/[chapterId]/[verseId]": ["quran-reader", "reading-goal"],

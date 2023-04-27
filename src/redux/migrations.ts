@@ -4,7 +4,7 @@ import { migrateRecentReadingSessions } from './migration-scripts/migrating-rece
 import { initialSidebarIsVisible } from './slices/QuranReader/sidebarNavigation';
 import { initialState as welcomeMessageInitialState } from './slices/welcomeMessage';
 
-import { consolidateWordByWordState } from '@/utils/wordByWord';
+import { consolidateWordByWordState, getDefaultWordByWordDisplay } from '@/utils/wordByWord';
 import { MushafLines } from 'types/QuranReader';
 
 export default {
@@ -199,4 +199,28 @@ export default {
       },
     };
   },
+  27: (state) => {
+    return {
+      ...state,
+      welcomeMessage: {
+        ...state.welcomeMessage,
+        isVisible: true,
+      },
+    };
+  },
+  28: (state) => ({
+    ...state,
+    session: {
+      count: 0,
+      isDonationPopupVisible: true,
+    },
+  }),
+  29: (state) => ({
+    // set the default word by word display to tooltip.
+    ...state,
+    readingPreferences: {
+      ...state.readingPreferences,
+      wordByWordDisplay: getDefaultWordByWordDisplay(state.readingPreferences.wordByWordDisplay),
+    },
+  }),
 };

@@ -13,7 +13,17 @@
     },
     "day-x": "Dag {{day}}",
     "days": "Dagen",
+    "delete-goal": "Doel verwijderen",
+    "delete-goal-confirmation": {
+        "action-text": "Ik begrijp de consequentie, verwijder mijn doel",
+        "confirmation-text": "verwijder mijn doel",
+        "instruction-text": "Typ <strong> {{text}} <\/strong> om te bevestigen",
+        "subtitle": "Deze actie kan niet ongedaan gemaakt worden. Hiermee wordt je doel definitief verwijderd en stoppen we met het bijhouden van je voortgang.",
+        "title": "Weet je het zeker?"
+    },
+    "delete-reading-goal-success": "Je leesdoel is succesvol verwijderd.",
     "duration": "Duur (dagen)",
+    "edit-goal": "Doel bewerken",
     "ending-chapter": "Einde soera",
     "ending-verse": "Ayah beëindigen",
     "examples-subtitle": "Hier is een lijst met gemeenschappelijke doelen. Je kunt ook je eigen doel maken.",
@@ -78,23 +88,44 @@
     "reading-goal-title": "Introductie van Quran.com-tracking",
     "recommended": "Aanbevolen",
     "remaining": "Blijft over voor vandaag",
-    "remaining-days_one": "{{days}} resterende dag",
-    "remaining-days_other": "{{days}} dagen resterend",
+    "remaining-days": {
+        "one": "Nog {{days}} dag over",
+        "other": "Nog {{days}} dagen"
+    },
     "set-reading-goal-success": "Je leesdoel is succesvol ingesteld.",
     "starting-chapter": "Soera beginnen",
     "starting-verse": "Ayah beginnen",
-    "streak": "{{days}} dagenreeks",
+    "streak": "Streep",
     "streak-definition": "Een streak is het aantal opeenvolgende dagen dat je de koran hebt gelezen.",
+    "timeline-meaning": "Wat betekent uw tijdlijn?",
+    "timeline-states": {
+        "checked": "Je hebt je doel bereikt",
+        "filled": "Je hebt iets gelezen, maar niet genoeg om je doel te bereiken",
+        "none": "Je hebt die dag nog niets gelezen",
+        "stroked": "Je hebt vandaag niets gelezen"
+    },
     "todays-goal": "Het doel van vandaag",
+    "update-reading-goal-success": "Je leesdoel is succesvol geüpdatet.",
     "view-progress": "Voortgang bekijken",
-    "x-days_one": "{{days}} dag",
-    "x-days_other": "{{days}} dagen",
-    "x-hours_one": "{{hours}} uur",
-    "x-hours_other": "{{hours}} uur",
-    "x-minutes_one": "{{minutes}} minuut",
-    "x-minutes_other": "{{minutes}} minuten",
-    "x-pages_one": "{{pages}} pagina",
-    "x-pages_other": "{{pages}} pagina's",
-    "x-seconds_one": "{{seconds}} seconde",
-    "x-seconds_other": "{{seconds}} seconden"
+    "x-days": {
+        "one": "{{days}} dag",
+        "other": "{{days}} dagen"
+    },
+    "x-days-streak": "{{days}} dagenreeks",
+    "x-hours": {
+        "one": "{{hours}} uur",
+        "other": "{{hours}} uren"
+    },
+    "x-minutes": {
+        "one": "{{minutes}} minuut",
+        "other": "{{minutes}} minuten"
+    },
+    "x-pages": {
+        "one": "{{pages}} pagina",
+        "other": "{{pages}} pagina's"
+    },
+    "x-seconds": {
+        "one": "{{seconds}} seconde",
+        "other": "{{seconds}} seconden"
+    }
 }

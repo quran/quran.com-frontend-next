@@ -115,6 +115,8 @@
     "developers": "Développeurs",
     "display": "Afficher",
     "donate": "Donner",
+    "donate_monthly": "Faire un don mensuel",
+    "donate_once": "Faire un don une fois",
     "email-verification": {
         "check-spam": "Vous n'avez pas reçu l'e-mail de vérification ? Vérifiez votre boîte de réception de spam",
         "email-sent": "Nous venons d'envoyer un e-mail à <strong> {{email}} <\/strong>",
@@ -215,6 +217,7 @@
     "q-reflect": "CoranRéfléchir",
     "quran-com": "Coran.com",
     "quran-radio": "Radio Coran",
+    "reading-history": "Lecture de l'histoire",
     "reading-preference": {
         "reading": "En train de lire",
         "translation": "Traduction"

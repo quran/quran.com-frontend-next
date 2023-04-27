@@ -1,0 +1,9 @@
+{
+    "history": "Okuma Tarihi",
+    "history-for": "{{date}} için okuma geçmişi",
+    "manage-goal": "Okuma hedefinizi yönetin",
+    "no-reading-history-for": "{{date}} için okuma geçmişi yok",
+    "reading-progress-header": "Senin ilerlemen",
+    "reading-progress-streak": "Rüzgâr gibi geçmek",
+    "you-read": "Sen okumak:"
+}

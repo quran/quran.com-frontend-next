@@ -39,7 +39,7 @@ export const onShareClicked = (
 ) => {
   logButtonClick(
     // eslint-disable-next-line i18next/no-literal-string
-    `${isTranslationView ? 'translation_view' : 'reading_view'}_verse_actions_menu_copy`,
+    `${isTranslationView ? 'translation_view' : 'reading_view'}_verse_actions_menu_copy_link`,
   );
   const origin = getWindowOrigin(locale);
   const [chapter, verse] = getVerseAndChapterNumbersFromKey(verseKey);
@@ -144,7 +144,7 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
         />
       ) : null}
 
-      <VerseActionRepeatAudio verseKey={verse.verseKey} />
+      <VerseActionRepeatAudio isTranslationView={isTranslationView} verseKey={verse.verseKey} />
     </div>
   );
 };

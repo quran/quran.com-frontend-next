@@ -115,6 +115,8 @@
     "developers": "ontwikkelaars",
     "display": "Weergave",
     "donate": "Doneren",
+    "donate_monthly": "Doneer maandelijks",
+    "donate_once": "Doneer eenmalig",
     "email-verification": {
         "check-spam": "Heb je de verificatie-e-mail niet ontvangen? Check je spam-inbox",
         "email-sent": "We hebben zojuist een e-mail gestuurd naar <strong> {{email}} <\/strong>",
@@ -215,6 +217,7 @@
     "q-reflect": "KoranReflect",
     "quran-com": "koran.com",
     "quran-radio": "Koran Radio",
+    "reading-history": "Geschiedenis lezen",
     "reading-preference": {
         "reading": "Lezing",
         "translation": "Vertaling"

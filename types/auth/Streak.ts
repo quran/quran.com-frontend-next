@@ -10,7 +10,6 @@ export type StreakWithUserMetadata = {
 };
 
 export type StreakWithMetadataParams = {
-  timezone?: string;
   from: string;
   to: string;
 };

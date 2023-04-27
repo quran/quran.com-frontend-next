@@ -115,6 +115,8 @@
     "developers": "Разработчики",
     "display": "Отображать",
     "donate": "Пожертвовать",
+    "donate_monthly": "Пожертвовать ежемесячно",
+    "donate_once": "Пожертвовать один раз",
     "email-verification": {
         "check-spam": "Не получили письмо с подтверждением? Проверьте папку со спамом",
         "email-sent": "Мы только что отправили электронное письмо на адрес <strong> {{email}} <\/strong>",
@@ -215,6 +217,7 @@
     "q-reflect": "Коран",
     "quran-com": "Quran.com",
     "quran-radio": "Коран Радио",
+    "reading-history": "Чтение истории",
     "reading-preference": {
         "reading": "Чтение",
         "translation": "Перевод"

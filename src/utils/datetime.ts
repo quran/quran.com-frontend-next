@@ -1,6 +1,7 @@
 import { Translate } from 'next-translate';
 
 import { getLangFullLocale, LANG_LOCALE_MAP, toLocalizedNumber } from './locale';
+import { convertNumberToDecimal } from './number';
 
 // Converts seconds to (hours), minutes, and seconds
 export const secondsFormatter = (seconds: number, locale: string) => {
@@ -25,7 +26,8 @@ export const secondsFormatter = (seconds: number, locale: string) => {
  * @param {string} locale locale
  * @returns {string}
  */
-export const secondsToReadableFormat = (s: number, t: Translate, locale: string) => {
+// eslint-disable-next-line react-func/max-lines-per-function
+export const secondsToReadableFormat = (s: number, t: Translate, locale: string): string => {
   const results: string[] = [];
 
   let seconds = s;
@@ -34,7 +36,10 @@ export const secondsToReadableFormat = (s: number, t: Translate, locale: string)
 
   if (hours > 0) {
     results.push(
-      t('reading-goal:x-hours', { count: hours, hours: toLocalizedNumber(hours, locale) }),
+      t('reading-goal:x-hours', {
+        count: hours,
+        hours: toLocalizedNumber(convertNumberToDecimal(hours), locale),
+      }),
     );
     minutes %= 60;
     seconds %= 60;
@@ -44,7 +49,7 @@ export const secondsToReadableFormat = (s: number, t: Translate, locale: string)
     results.push(
       t('reading-goal:x-minutes', {
         count: minutes,
-        minutes: toLocalizedNumber(minutes, locale),
+        minutes: toLocalizedNumber(convertNumberToDecimal(minutes), locale),
       }),
     );
     seconds %= 60;
@@ -54,7 +59,7 @@ export const secondsToReadableFormat = (s: number, t: Translate, locale: string)
     results.push(
       t('reading-goal:x-seconds', {
         count: seconds,
-        seconds: toLocalizedNumber(seconds, locale),
+        seconds: toLocalizedNumber(convertNumberToDecimal(seconds), locale),
       }),
     );
   }
@@ -102,7 +107,11 @@ export const parseDate = (date: string): number => Date.parse(date);
  * @param {string} locale
  * @returns {string} date
  */
-export const formatDateRelatively = (date: Date, locale: string, now: Date = new Date()) => {
+export const formatDateRelatively = (
+  date: Date,
+  locale: string,
+  now: Date = new Date(),
+): string => {
   const fullLocale = LANG_LOCALE_MAP[locale];
 
   // Formatter for "Today" and "Yesterday" etc
@@ -155,4 +164,56 @@ export const dateToDateString = (date: Date): string => {
   const day = date.getDate();
 
   return `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
+};
+
+/**
+ * Gets the full day name in a given locale.
+ * Example: `Monday` in `en`
+ *
+ * @param {Date} day
+ * @param {string} locale
+ * @returns {string}
+ *
+ */
+export const getFullDayName = (day: Date, locale: string): string => {
+  return day.toLocaleDateString(locale, { weekday: 'long' });
+};
+
+/**
+ * Gets the full month name in a given locale.
+ * Example: `April` in `en`
+ *
+ * @param {Date} month
+ * @param {string} locale
+ * @returns {string}
+ *
+ */
+export const getFullMonthName = (month: Date, locale: string): string => {
+  return month.toLocaleDateString(locale, { month: 'long' });
+};
+
+/**
+ * Formats a date to a readable format.
+ *
+ * Example output: `Sunday, April 16`
+ *
+ * @param {Date | string} date Date instance or date string
+ * @param {string} locale
+ * @param {Intl.DateTimeFormatOptions} options
+ * @returns {string}
+ *
+ */
+export const dateToReadableFormat = (
+  date: Date | string,
+  locale: string,
+  options: Intl.DateTimeFormatOptions = {},
+): string => {
+  const dateInstance = typeof date === 'string' ? new Date(date) : date;
+
+  return dateInstance.toLocaleDateString(getLangFullLocale(locale), {
+    day: 'numeric',
+    month: 'long',
+    weekday: 'long',
+    ...options,
+  });
 };

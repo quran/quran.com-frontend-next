@@ -4,16 +4,21 @@
 $list-max-width: 80rem;
 
 .pageContainer {
-  @include breakpoints.smallerThanTablet {
-    padding-block-start: calc(1.4 * var(--spacing-mega));
-  }
   padding-block-end: var(--spacing-small);
   padding-inline-start: 0;
   padding-inline-end: 0;
 }
 
+.loadingContainer {
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .flow > .flowItem {
   margin-block-start: calc(1.5 * var(--spacing-medium));
+
   @include breakpoints.tablet {
     margin-block-start: calc(2 * var(--spacing-medium));
   }

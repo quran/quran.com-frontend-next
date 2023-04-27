@@ -115,6 +115,8 @@
     "developers": "المطورون",
     "display": "عرض",
     "donate": "تبرع",
+    "donate_monthly": "تبرع شهريا",
+    "donate_once": "تبرع مرة واحدة",
     "email-verification": {
         "check-spam": "ألم تتلق رسالة التحقق؟ تحقق من البريد الإلكتروني العشوائي",
         "email-sent": "لقد أرسلنا للتو بريدًا إلكترونيًا إلى <strong> {{email}} <\/strong>",
@@ -215,6 +217,7 @@
     "q-reflect": "QuranReflect",
     "quran-com": "Quran.com",
     "quran-radio": "راديو القرآن",
+    "reading-history": "قراءة التاريخ",
     "reading-preference": {
         "reading": "القراءة",
         "translation": "الترجمة"

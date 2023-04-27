@@ -8,30 +8,24 @@ import NextSeoWrapper from '@/components/NextSeoWrapper';
 import { getChapterOgImageUrl } from '@/lib/og';
 import { getLanguageAlternates, toLocalizedNumber } from '@/utils/locale';
 import { getCanonicalUrl, getSurahInfoNavigationUrl } from '@/utils/navigation';
-import DataContext from 'src/contexts/DataContext';
 import Error from 'src/pages/_error';
 import { ChapterInfoResponse, ChapterResponse } from 'types/ApiResponses';
-import ChaptersData from 'types/ChaptersData';
 
 interface Props {
   chapterResponse?: ChapterResponse;
   chapterInfoResponse?: ChapterInfoResponse;
   hasError?: boolean;
-  chaptersData: ChaptersData;
 }
-const InfoPage: React.FC<Props> = ({
-  hasError,
-  chapterInfoResponse,
-  chapterResponse,
-  chaptersData,
-}) => {
+
+const InfoPage: React.FC<Props> = ({ hasError, chapterInfoResponse, chapterResponse }) => {
   const { t, lang } = useTranslation('common');
   if (hasError) {
     return <Error statusCode={500} />;
   }
   const navigationUrl = getSurahInfoNavigationUrl(chapterResponse.chapter.slug);
+
   return (
-    <DataContext.Provider value={chaptersData}>
+    <>
       <NextSeoWrapper
         title={`${t('surah')} ${chapterResponse.chapter.transliteratedName} - ${toLocalizedNumber(
           1,
@@ -48,7 +42,7 @@ const InfoPage: React.FC<Props> = ({
         description={chapterInfoResponse.chapterInfo.shortText}
       />
       <Info chapter={chapterResponse.chapter} chapterInfo={chapterInfoResponse.chapterInfo} />
-    </DataContext.Provider>
+    </>
   );
 };
 
