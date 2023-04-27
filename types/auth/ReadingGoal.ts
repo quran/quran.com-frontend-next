@@ -1,3 +1,5 @@
+import { Mushaf } from '../QuranReader';
+
 export type ReadingGoal = {
   id: string;
   type: ReadingGoalType;
@@ -11,6 +13,7 @@ export type CreateReadingGoalRequest = {
   type: ReadingGoalType;
   amount: string | number;
   duration?: number;
+  mushafId: Mushaf;
 };
 
 export type UpdateReadingGoalRequest = Partial<CreateReadingGoalRequest>;

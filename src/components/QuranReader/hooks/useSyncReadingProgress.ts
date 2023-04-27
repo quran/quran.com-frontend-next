@@ -2,7 +2,7 @@
 import { useCallback, useContext, useEffect, useRef, useMemo } from 'react';
 
 import debounce from 'lodash/debounce';
-import { useDispatch } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { useSWRConfig } from 'swr';
 
 import { useReadingProgressContext } from '../contexts/ReadingProgressContext';
@@ -11,7 +11,9 @@ import { getObservedVersePayload, getOptions, QURAN_READER_OBSERVER_ID } from '.
 import DataContext from '@/contexts/DataContext';
 import useGlobalIntersectionObserver from '@/hooks/useGlobalIntersectionObserver';
 import { setLastReadVerse } from '@/redux/slices/QuranReader/readingTracker';
+import { selectQuranFont, selectQuranMushafLines } from '@/redux/slices/QuranReader/styles';
 import { UpdateReadingDayBody } from '@/types/auth/ReadingDay';
+import { getMushafId } from '@/utils/api';
 import { addReadingSession, updateReadingDay } from '@/utils/auth/api';
 import { makeReadingSessionsUrl, makeStreakUrl } from '@/utils/auth/apiPaths';
 import { isLoggedIn } from '@/utils/auth/login';
@@ -32,6 +34,10 @@ interface UseSyncReadingProgressProps {
  */
 const useSyncReadingProgress = ({ isReadingPreference }: UseSyncReadingProgressProps) => {
   const chaptersData = useContext(DataContext);
+
+  const quranFont = useSelector(selectQuranFont, shallowEqual);
+  const mushafLines = useSelector(selectQuranMushafLines, shallowEqual);
+  const { mushaf } = getMushafId(quranFont, mushafLines);
 
   // this is a queue of verse keys that we need to send to the backend
   // we will clear the queue every {READING_DAY_SYNC_TIME} milliseconds after sending the data to the backend
@@ -119,7 +125,7 @@ const useSyncReadingProgress = ({ isReadingPreference }: UseSyncReadingProgressP
         elapsedReadingTimeInSeconds.current = 0;
       }
 
-      const body: UpdateReadingDayBody = {};
+      const body: UpdateReadingDayBody = { mushafId: mushaf };
 
       if (verseRanges) {
         body.ranges = verseRanges;
@@ -135,7 +141,7 @@ const useSyncReadingProgress = ({ isReadingPreference }: UseSyncReadingProgressP
     return () => {
       clearInterval(interval);
     };
-  }, [chaptersData, updateReadingDayAndClearCache, verseKeysQueue]);
+  }, [chaptersData, updateReadingDayAndClearCache, verseKeysQueue, mushaf]);
 
   // this will track user's reading time
   // also, if the user is not on the same tab, we will pause the timer

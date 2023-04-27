@@ -2,6 +2,7 @@ import stringify from '../qs-stringify';
 
 import { FilterReadingDaysParams } from '@/types/auth/ReadingDay';
 import { StreakWithMetadataParams } from '@/types/auth/Streak';
+import { Mushaf } from '@/types/QuranReader';
 import { getAuthApiPath } from '@/utils/url';
 import BookmarkType from 'types/BookmarkType';
 
@@ -100,22 +101,42 @@ export const makeBookmarkUrl = (
 
 export const makeReadingSessionsUrl = () => makeUrl('reading-sessions');
 
-export const makeReadingDaysUrl = () => makeUrl('reading-days');
+export const makeReadingDaysUrl = (mushafId?: Mushaf) =>
+  makeUrl('reading-days', mushafId && { mushafId });
 
 export const makeFilterReadingDaysUrl = (params: FilterReadingDaysParams) =>
   makeUrl('reading-days/filter', params);
 
-export const makeReadingGoalUrl = () => makeUrl('reading-goal');
+export const makeReadingGoalUrl = (mushafId?: Mushaf) =>
+  makeUrl(
+    'reading-goal',
+    mushafId && {
+      mushafId,
+    },
+  );
 
-export const makeEstimateReadingGoalUrl = () => makeUrl('reading-goal/estimate');
+export const makeEstimateReadingGoalUrl = (mushafId: Mushaf) =>
+  makeUrl('reading-goal/estimate', { mushafId });
 
 export const makeStreakUrl = (params?: StreakWithMetadataParams) => makeUrl('streak', params);
 
-export const makeReadingGoalProgressUrl = () => makeUrl('reading-goal/status');
+export const makeReadingGoalProgressUrl = (mushafId: Mushaf) =>
+  makeUrl('reading-goal/status', {
+    mushafId,
+  });
 
-export const makeUserPreferencesUrl = () => makeUrl('preferences');
+export const makeUserPreferencesUrl = (mushafId?: Mushaf) =>
+  makeUrl(
+    'preferences',
+    mushafId && {
+      mushafId,
+    },
+  );
 
-export const makeUserBulkPreferencesUrl = () => makeUrl('preferences/bulk');
+export const makeUserBulkPreferencesUrl = (mushafId: Mushaf) =>
+  makeUrl('preferences/bulk', {
+    mushafId,
+  });
 
 export const makeLogoutUrl = () => makeUrl('auth/logout');
 

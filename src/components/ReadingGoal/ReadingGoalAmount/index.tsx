@@ -58,7 +58,7 @@ const ReadingGoalAmount: React.FC<ReadingGoalAmountProps> = ({
   if (goalType === ReadingGoalType.RANGE) {
     const all = [];
 
-    currentReadingDay?.dailyTargetRanges?.forEach((range) => {
+    currentReadingDay?.remainingDailyTargetRanges?.forEach((range) => {
       const [
         { chapter: fromChapter, verse: fromVerse, verseKey: rangeFrom },
         { chapter: toChapter, verse: toVerse, verseKey: rangeTo },

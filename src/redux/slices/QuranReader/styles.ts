@@ -126,6 +126,7 @@ export const {
 
 export const selectQuranReaderStyles = (state: RootState) => state.quranReaderStyles;
 export const selectQuranFont = (state: RootState) => state.quranReaderStyles.quranFont;
+export const selectQuranMushafLines = (state: RootState) => state.quranReaderStyles.mushafLines;
 export const selectIsUsingDefaultFont = (state: RootState) =>
   !!state.quranReaderStyles.isUsingDefaultFont;
 
