@@ -1,4 +1,4 @@
-import { useMemo, useContext } from 'react';
+import { useContext } from 'react';
 
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
@@ -8,13 +8,20 @@ import { ReadingGoalPeriod, ReadingGoalTabProps } from './hooks/useReadingGoalRe
 import styles from './ReadingGoalPage.module.scss';
 
 import DataContext from '@/contexts/DataContext';
+import HoverablePopover from '@/dls/Popover/HoverablePopover';
 import Spinner from '@/dls/Spinner/Spinner';
-import { CreateReadingGoalRequest, ReadingGoalType } from '@/types/auth/ReadingGoal';
+import {
+  CreateReadingGoalRequest,
+  EstimatedReadingGoalDay,
+  RangeEstimatedReadingGoalDay,
+  ReadingGoalType,
+} from '@/types/auth/ReadingGoal';
 import { estimateReadingGoal } from '@/utils/auth/api';
 import { makeEstimateReadingGoalUrl } from '@/utils/auth/apiPaths';
 import { getChapterData } from '@/utils/chapter';
-import { secondsToReadableFormat } from '@/utils/datetime';
+import { dateToReadableFormat, secondsToReadableFormat, getFullDayName } from '@/utils/datetime';
 import { toLocalizedNumber } from '@/utils/locale';
+import { convertNumberToDecimal } from '@/utils/number';
 import { parseVerseRange } from '@/utils/verseKeys';
 
 const getPayload = (state: ReadingGoalTabProps['state']): CreateReadingGoalRequest => {
@@ -36,30 +43,22 @@ const ReadingGoalWeekPreviewTab: React.FC<ReadingGoalTabProps> = ({ state, nav }
   const { t, lang } = useTranslation('reading-goal');
   const chaptersData = useContext(DataContext);
 
-  const week = useMemo(() => {
-    // get an array of today + next 6 days
-    const days: Date[] = [];
-    for (let i = 0; i < 7; i += 1) {
-      const date = new Date();
-      date.setDate(date.getDate() + i);
-      days.push(date);
-    }
-
-    return days;
-  }, []);
-
   const { data, isValidating } = useSWR(
     makeEstimateReadingGoalUrl(),
     () => estimateReadingGoal(getPayload(state)),
     {
       revalidateOnMount: true,
+      revalidateOnFocus: false,
     },
   );
-  const isLoading = !data && isValidating;
 
   const getDailyAmount = (idx: number) => {
-    if (data.data.type === ReadingGoalType.RANGE) {
-      const range = 'ranges' in data.data ? data.data.ranges[idx] : data.data.dailyAmount;
+    const { type } = state;
+    const day = data.data.week[idx];
+
+    if (type === ReadingGoalType.RANGE) {
+      const range = day.amount as string;
+
       const [
         { chapter: startingChapter, verse: startingVerse },
         { chapter: endingChapter, verse: endingVerse },
@@ -71,24 +70,39 @@ const ReadingGoalWeekPreviewTab: React.FC<ReadingGoalTabProps> = ({ state, nav }
       return (
         <div className={styles.rangePreview}>
           <p>
-            {t('reciter:read')} {startingChapterName} {startingVerse}
+            {t('reciter:read')} {startingChapterName}{' '}
+            {toLocalizedNumber(Number(startingVerse), lang)}
           </p>
           <p>
-            {t('common:to').toLowerCase()} {endingChapterName} {endingVerse}
+            {t('common:to').toLowerCase()} {endingChapterName}{' '}
+            {toLocalizedNumber(Number(endingVerse), lang)}
           </p>
         </div>
       );
     }
 
-    if (data.data.type === ReadingGoalType.TIME) {
-      return `${t('reciter:read')} ${secondsToReadableFormat(data.data.dailyAmount, t, lang)}`;
+    const numberAmount = day.amount as number;
+    if (type === ReadingGoalType.TIME) {
+      return `${t('reciter:read')} ${secondsToReadableFormat(numberAmount, t, lang)}`;
     }
 
-    const pages = data.data.dailyAmount;
+    const pages = convertNumberToDecimal(numberAmount, 2);
     return `${t('reciter:read')} ${t('x-pages', {
       count: pages,
       pages: toLocalizedNumber(pages, lang),
     })}`;
+  };
+
+  const getSkeleton = () => {
+    return Array.from({
+      length: Math.min(state.period === ReadingGoalPeriod.Continuous ? state.duration : 7, 7),
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+    }).map((_, idx) => (
+      // eslint-disable-next-line react/no-array-index-key
+      <li key={idx} className={styles.dayPreview}>
+        <Spinner />
+      </li>
+    ));
   };
 
   return (
@@ -98,18 +112,24 @@ const ReadingGoalWeekPreviewTab: React.FC<ReadingGoalTabProps> = ({ state, nav }
         <p className={styles.subtitle}>{t('preview-schedule.description')}</p>
       </div>
       <ol className={classNames(styles.optionsContainer, styles.previewWrapper)}>
-        {week.map((day, idx) => (
-          <li key={day.getDate()} className={styles.dayPreview}>
-            <h3>{t('day-x', { day: idx + 1 })}</h3>
-            {isLoading ? (
-              <div>
-                <Spinner />
-              </div>
-            ) : (
-              <p>{getDailyAmount(idx)}</p>
+        {isValidating
+          ? getSkeleton()
+          : data.data.week.map(
+              (day: EstimatedReadingGoalDay | RangeEstimatedReadingGoalDay, idx: number) => {
+                const date = new Date(day.date);
+
+                return (
+                  <li key={day.date} className={styles.dayPreview}>
+                    <HoverablePopover content={dateToReadableFormat(date, lang)}>
+                      <h3>{getFullDayName(date, lang)}</h3>
+                    </HoverablePopover>
+
+                    <p>{getDailyAmount(idx)}</p>
+                  </li>
+                );
+              },
             )}
-          </li>
-        ))}
+
         {nav}
       </ol>
     </>

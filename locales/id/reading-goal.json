@@ -13,7 +13,17 @@
     },
     "day-x": "Hari {{day}}",
     "days": "Hari",
+    "delete-goal": "Hapus Sasaran",
+    "delete-goal-confirmation": {
+        "action-text": "Saya mengerti konsekuensinya, hapus tujuan saya",
+        "confirmation-text": "hapus tujuan saya",
+        "instruction-text": "Harap ketik <strong> {{text}} <\/strong> untuk mengonfirmasi",
+        "subtitle": "Tindakan ini tidak bisa dibatalkan. Ini akan menghapus tujuan Anda secara permanen, dan kami akan berhenti melacak kemajuan Anda.",
+        "title": "Apa kamu yakin?"
+    },
+    "delete-reading-goal-success": "Tujuan membaca Anda telah berhasil dihapus.",
     "duration": "Durasi (hari)",
+    "edit-goal": "Sunting Sasaran",
     "ending-chapter": "Surah penutup",
     "ending-verse": "Mengakhiri Ayah",
     "examples-subtitle": "Berikut adalah daftar tujuan bersama. Anda juga dapat membuat tujuan Anda sendiri.",
@@ -78,23 +88,38 @@
     "reading-goal-title": "Memperkenalkan Pelacakan Quran.com",
     "recommended": "Direkomendasikan",
     "remaining": "Sisa untuk hari ini",
-    "remaining-days_one": "{{days}} hari tersisa",
-    "remaining-days_other": "{{days}} hari tersisa",
+    "remaining-days": {
+        "other": "{{days}} hari tersisa"
+    },
     "set-reading-goal-success": "Tujuan membaca Anda telah berhasil ditetapkan.",
     "starting-chapter": "Memulai Surah",
     "starting-verse": "Mulai Ayah",
-    "streak": "{{days}} hari berturut-turut",
+    "streak": "Garis",
     "streak-definition": "Coretan adalah jumlah hari berturut-turut Anda telah membaca Al-Qur'an.",
+    "timeline-meaning": "Apa arti garis waktu Anda?",
+    "timeline-states": {
+        "checked": "Anda telah menyelesaikan tujuan Anda",
+        "filled": "Anda telah membaca sesuatu tetapi tidak cukup untuk menyelesaikan tujuan Anda",
+        "none": "Anda belum membaca apa pun pada hari itu",
+        "stroked": "Anda belum membaca apa pun hari ini"
+    },
     "todays-goal": "Tujuan hari ini",
+    "update-reading-goal-success": "Tujuan membaca Anda telah berhasil diperbarui.",
     "view-progress": "Lihat Kemajuan",
-    "x-days_one": "{{days}} hari",
-    "x-days_other": "{{days}} hari",
-    "x-hours_one": "{{hours}} jam",
-    "x-hours_other": "{{hours}} jam",
-    "x-minutes_one": "{{minutes}} menit",
-    "x-minutes_other": "{{minutes}} menit",
-    "x-pages_one": "{{pages}} halaman",
-    "x-pages_other": "{{pages}} halaman",
-    "x-seconds_one": "{{seconds}} detik",
-    "x-seconds_other": "{{seconds}} detik"
+    "x-days": {
+        "other": "{{days}} hari"
+    },
+    "x-days-streak": "{{days}} hari berturut-turut",
+    "x-hours": {
+        "other": "{{hours}} jam"
+    },
+    "x-minutes": {
+        "other": "{{minutes}} menit"
+    },
+    "x-pages": {
+        "other": "{{pages}} halaman"
+    },
+    "x-seconds": {
+        "other": "{{seconds}} detik"
+    }
 }

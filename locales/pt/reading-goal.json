@@ -13,7 +13,17 @@
     },
     "day-x": "Dia {{day}}",
     "days": "Dias",
+    "delete-goal": "Excluir meta",
+    "delete-goal-confirmation": {
+        "action-text": "Eu entendo a consequência, exclua meu objetivo",
+        "confirmation-text": "excluir meu objetivo",
+        "instruction-text": "Digite <strong> {{text}} <\/strong> para confirmar",
+        "subtitle": "Essa ação não pode ser desfeita. Isso excluirá permanentemente sua meta e deixaremos de acompanhar seu progresso.",
+        "title": "Tem certeza?"
+    },
+    "delete-reading-goal-success": "Sua meta de leitura foi excluída com sucesso.",
     "duration": "Duração (dias)",
+    "edit-goal": "Editar meta",
     "ending-chapter": "Surata Final",
     "ending-verse": "Fim de Ayah",
     "examples-subtitle": "Aqui está uma lista de objetivos comuns. Você também pode criar seu próprio objetivo.",
@@ -78,23 +88,44 @@
     "reading-goal-title": "Apresentando o Rastreamento Quran.com",
     "recommended": "Recomendado",
     "remaining": "Restante para hoje",
-    "remaining-days_one": "{{days}} dia restante",
-    "remaining-days_other": "{{days}} dias restantes",
+    "remaining-days": {
+        "one": "{{days}} dia restante",
+        "other": "{{days}} dias restantes"
+    },
     "set-reading-goal-success": "Sua meta de leitura foi definida com sucesso.",
     "starting-chapter": "Surata Inicial",
     "starting-verse": "Começando Ayah",
-    "streak": "sequência de {{days}} dias",
+    "streak": "Onda",
     "streak-definition": "Uma sequência é o número de dias consecutivos em que você leu o Alcorão.",
+    "timeline-meaning": "O que significa sua linha do tempo?",
+    "timeline-states": {
+        "checked": "Você completou seu objetivo",
+        "filled": "Você leu alguma coisa, mas não o suficiente para completar seu objetivo",
+        "none": "Você ainda não leu nada naquele dia",
+        "stroked": "Você não leu nada hoje"
+    },
     "todays-goal": "Gol de hoje",
+    "update-reading-goal-success": "Sua meta de leitura foi atualizada com sucesso.",
     "view-progress": "Ver Progresso",
-    "x-days_one": "{{days}} dia",
-    "x-days_other": "{{days}} dias",
-    "x-hours_one": "{{hours}} hora",
-    "x-hours_other": "{{hours}} horas",
-    "x-minutes_one": "{{minutes}} minuto",
-    "x-minutes_other": "{{minutes}} minutos",
-    "x-pages_one": "{{pages}} página",
-    "x-pages_other": "{{pages}} páginas",
-    "x-seconds_one": "{{seconds}} segundo",
-    "x-seconds_other": "{{seconds}} segundos"
+    "x-days": {
+        "one": "{{days}} dia",
+        "other": "{{days}} dias"
+    },
+    "x-days-streak": "sequência de {{days}} dias",
+    "x-hours": {
+        "one": "{{hours}} hora",
+        "other": "{{hours}} horas"
+    },
+    "x-minutes": {
+        "one": "{{minutes}} minuto",
+        "other": "{{minutes}} minutos"
+    },
+    "x-pages": {
+        "one": "{{pages}} página",
+        "other": "{{pages}} páginas"
+    },
+    "x-seconds": {
+        "one": "{{seconds}} segundo",
+        "other": "{{seconds}} segundos"
+    }
 }

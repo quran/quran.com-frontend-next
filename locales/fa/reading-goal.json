@@ -13,7 +13,17 @@
     },
     "day-x": "روز {{day}}",
     "days": "روزها",
+    "delete-goal": "حذف هدف",
+    "delete-goal-confirmation": {
+        "action-text": "من نتیجه را درک می کنم، هدف من را حذف کنید",
+        "confirmation-text": "هدفم را حذف کن",
+        "instruction-text": "لطفاً <strong> {{text}} <\/strong> را برای تأیید تایپ کنید",
+        "subtitle": "این عمل قابل لغو نیست. با این کار هدف شما برای همیشه حذف می شود و ما ردیابی پیشرفت شما را متوقف می کنیم.",
+        "title": "مطمئنی؟"
+    },
+    "delete-reading-goal-success": "هدف خواندن شما با موفقیت حذف شد.",
     "duration": "مدت زمان (روزها)",
+    "edit-goal": "ویرایش هدف",
     "ending-chapter": "پایان سوره",
     "ending-verse": "پایان آیه",
     "examples-subtitle": "در اینجا لیستی از اهداف مشترک آورده شده است. شما همچنین می توانید هدف خود را ایجاد کنید.",
@@ -78,23 +88,44 @@
     "reading-goal-title": "ردیابی قرآن دات کام را معرفی می کنیم",
     "recommended": "توصیه شده",
     "remaining": "باقی مانده برای امروز",
-    "remaining-days_one": "{{days}} روز باقی مانده است",
-    "remaining-days_other": "{{days}} روز باقی مانده است",
+    "remaining-days": {
+        "one": "{{days}} روز باقی مانده است",
+        "other": "{{days}} روز باقی مانده است"
+    },
     "set-reading-goal-success": "هدف خواندن شما با موفقیت تنظیم شده است.",
     "starting-chapter": "شروع سوره",
     "starting-verse": "شروع آیه",
-    "streak": "{{days}} رگه روز",
+    "streak": "خط",
     "streak-definition": "رگه به تعداد روزهای متوالی قرآن می گویند.",
+    "timeline-meaning": "جدول زمانی شما به چه معناست؟",
+    "timeline-states": {
+        "checked": "شما هدف خود را کامل کرده اید",
+        "filled": "شما چیزی خوانده اید اما برای تکمیل هدفتان کافی نیست",
+        "none": "تو آن روز هنوز چیزی نخوانده ای",
+        "stroked": "امروز چیزی نخوانده ای"
+    },
     "todays-goal": "هدف امروز",
+    "update-reading-goal-success": "هدف خواندن شما با موفقیت به روز شد.",
     "view-progress": "مشاهده پیشرفت",
-    "x-days_one": "{{days}} روز",
-    "x-days_other": "{{days}} روز",
-    "x-hours_one": "{{hours}} ساعت",
-    "x-hours_other": "{{hours}} ساعت",
-    "x-minutes_one": "{{minutes}} دقیقه",
-    "x-minutes_other": "{{minutes}} دقیقه",
-    "x-pages_one": "صفحه {{pages}}",
-    "x-pages_other": "{{pages}} صفحه",
-    "x-seconds_one": "{{seconds}} ثانیه",
-    "x-seconds_other": "{{seconds}} ثانیه"
+    "x-days": {
+        "one": "{{days}} روز",
+        "other": "{{days}} روز"
+    },
+    "x-days-streak": "{{days}} رگه روز",
+    "x-hours": {
+        "one": "{{hours}} ساعت",
+        "other": "{{hours}} ساعت"
+    },
+    "x-minutes": {
+        "one": "{{minutes}} دقیقه",
+        "other": "{{minutes}} دقیقه"
+    },
+    "x-pages": {
+        "one": "{{pages}} صفحه",
+        "other": "{{pages}} صفحه"
+    },
+    "x-seconds": {
+        "one": "{{seconds}} ثانیه",
+        "other": "{{seconds}} ثانیه"
+    }
 }

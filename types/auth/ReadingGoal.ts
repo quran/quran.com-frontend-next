@@ -13,6 +13,8 @@ export type CreateReadingGoalRequest = {
   duration?: number;
 };
 
+export type UpdateReadingGoalRequest = Partial<CreateReadingGoalRequest>;
+
 export enum ReadingGoalType {
   TIME = 'TIME',
   PAGES = 'PAGES',
@@ -31,17 +33,19 @@ export type ReadingGoalStatus = ReadingGoal & {
   };
 };
 
+export interface EstimatedReadingGoalDay {
+  date: string;
+  amount: number;
+}
+
+export type RangeEstimatedReadingGoalDay = Omit<EstimatedReadingGoalDay, 'amount'> & {
+  amount: string;
+};
+
 export type EstimatedReadingGoal =
   | {
-      type: ReadingGoalType.PAGES | ReadingGoalType.TIME;
-      dailyAmount: number;
+      week: EstimatedReadingGoalDay[];
     }
   | {
-      type: ReadingGoalType.RANGE;
-      dailyAmount: number; // number of verses
-      ranges: string[];
-    }
-  | {
-      type: ReadingGoalType.RANGE;
-      dailyAmount: string; // single range
+      week: RangeEstimatedReadingGoalDay[];
     };

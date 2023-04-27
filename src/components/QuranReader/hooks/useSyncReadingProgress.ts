@@ -15,11 +15,10 @@ import { UpdateReadingDayBody } from '@/types/auth/ReadingDay';
 import { addReadingSession, updateReadingDay } from '@/utils/auth/api';
 import { makeReadingSessionsUrl, makeStreakUrl } from '@/utils/auth/apiPaths';
 import { isLoggedIn } from '@/utils/auth/login';
-import { getTimezone } from '@/utils/datetime';
 import mergeVerseKeys from '@/utils/mergeVerseKeys';
 import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
 
-const READING_DAY_SYNC_TIME_MS = 15000; // 15 seconds
+const READING_DAY_SYNC_TIME_MS = 5000; // 5 seconds
 const READING_SESSION_DEBOUNCE_WAIT_TIME = 2000; // 2 seconds
 
 interface UseSyncReadingProgressProps {
@@ -40,7 +39,7 @@ const useSyncReadingProgress = ({ isReadingPreference }: UseSyncReadingProgressP
   const verseKeysQueue = useReadingProgressContext();
   const elapsedReadingTimeInSeconds = useRef(0);
   const dispatch = useDispatch();
-  const { cache } = useSWRConfig();
+  const { cache, mutate } = useSWRConfig();
 
   const addReadingSessionAndClearCache = useCallback(
     (chapterNumber, verseNumber) => {
@@ -60,10 +59,10 @@ const useSyncReadingProgress = ({ isReadingPreference }: UseSyncReadingProgressP
   const updateReadingDayAndClearCache = useCallback(
     (body: UpdateReadingDayBody) => {
       updateReadingDay(body).then(() => {
-        cache.delete(makeStreakUrl());
+        mutate(makeStreakUrl());
       });
     },
-    [cache],
+    [mutate],
   );
 
   // this function will be called when an element is triggered by the intersection observer
@@ -120,9 +119,7 @@ const useSyncReadingProgress = ({ isReadingPreference }: UseSyncReadingProgressP
         elapsedReadingTimeInSeconds.current = 0;
       }
 
-      const body: UpdateReadingDayBody = {
-        timezone: getTimezone(),
-      };
+      const body: UpdateReadingDayBody = {};
 
       if (verseRanges) {
         body.ranges = verseRanges;
@@ -150,6 +147,8 @@ const useSyncReadingProgress = ({ isReadingPreference }: UseSyncReadingProgressP
     let interval: NodeJS.Timeout = null;
 
     const handleFocus = () => {
+      if (interval) clearInterval(interval);
+
       interval = setInterval(() => {
         elapsedReadingTimeInSeconds.current += 1;
       }, 1000);
@@ -161,6 +160,8 @@ const useSyncReadingProgress = ({ isReadingPreference }: UseSyncReadingProgressP
 
     window.addEventListener('focus', handleFocus);
     window.addEventListener('blur', handleBlur);
+
+    handleFocus();
 
     return () => {
       window.removeEventListener('focus', handleFocus);

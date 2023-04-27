@@ -18,6 +18,17 @@ export const formatStringNumber = (number: string): string => String(Number(numb
  * @returns {number} a number between 0 and 100
  */
 export const convertFractionToPercent = (fraction: string | number, decimalPoints = 1): number => {
-  const number = Number((Number(fraction) * 100).toFixed(decimalPoints));
+  const number = convertNumberToDecimal(Number(fraction) * 100, decimalPoints);
   return Math.min(number, 100);
+};
+
+/**
+ * This function takes a number and converts it to a decimal number.
+ *
+ * @param {string | number} number
+ * @param {number} decimalPoints number of decimal points
+ * @returns {number}
+ */
+export const convertNumberToDecimal = (number: string | number, decimalPoints = 1): number => {
+  return Number((typeof number === 'string' ? Number(number) : number).toFixed(decimalPoints));
 };

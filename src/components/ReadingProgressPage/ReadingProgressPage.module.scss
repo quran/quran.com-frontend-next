@@ -1,0 +1,87 @@
+@use "src/styles/breakpoints";
+
+$section-spacing: calc(var(--spacing-mega) * 1.5);
+$section-padding: calc(var(--spacing-large));
+
+.contentContainer {
+  padding-block: $section-spacing;
+
+  h1 {
+    font-size: var(--font-size-jumbo);
+    line-height: var(--line-height-jumbo);
+    font-weight: var(--font-weight-bold);
+  }
+}
+
+.historySection {
+  margin-block-start: $section-spacing;
+}
+
+.historyContainer {
+  margin-block-start: $section-padding;
+}
+
+.manageGoalSection {
+  margin-block-start: $section-spacing;
+}
+
+.manageGoalContainer {
+  margin-block-start: $section-padding;
+  display: flex;
+  gap: var(--spacing-large);
+}
+
+.widgetsContainer {
+  display: flex;
+  flex-direction: row;
+  gap: var(--spacing-large);
+  margin-block-start: $section-padding;
+
+  @include breakpoints.smallerThanDesktop {
+    flex-direction: column;
+  }
+}
+
+.widget {
+  --day-circle-color: var(--color-success-faded) !important;
+  flex: 1;
+  background-color: var(--color-success-faded);
+  padding: var(--spacing-mega);
+  border-radius: var(--border-radius-rounded);
+  border: 1px solid var(--color-success-faint);
+  display: flex;
+  justify-content: space-between;
+
+  &.streakWidget {
+    flex-direction: column;
+  }
+}
+
+.streakContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-block-end: var(--spacing-mega);
+
+  h2 {
+    font-size: var(--font-size-jumbo);
+    color: var(--color-primary-medium);
+  }
+
+  p {
+    font-size: var(--font-size-jumbo);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-success-medium);
+  }
+}
+
+.emptyWidget {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.circularProgressbar {
+  height: 130px;
+  width: 130px;
+}
