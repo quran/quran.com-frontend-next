@@ -5,7 +5,8 @@
 
 .verseText {
   display: flex;
-  align-items: center;
+  // flex-start for when the inline wbw translation/transliteration is enabled and its content is wrapped across multiple lines.
+  align-items: flex-start;
   line-height: var(--line-height);
 }
 .verseTextContainer {
