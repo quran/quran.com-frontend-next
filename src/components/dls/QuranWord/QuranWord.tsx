@@ -176,8 +176,8 @@ const QuranWord = ({
       </Wrapper>
       {isWordByWordAllowed && (
         <>
-          {showWordByWordTransliteration && <InlineWordByWord word={word.transliteration?.text} />}
-          {showWordByWordTranslation && <InlineWordByWord word={word.translation?.text} />}
+          {showWordByWordTransliteration && <InlineWordByWord text={word.transliteration?.text} />}
+          {showWordByWordTranslation && <InlineWordByWord text={word.translation?.text} />}
         </>
       )}
     </div>
