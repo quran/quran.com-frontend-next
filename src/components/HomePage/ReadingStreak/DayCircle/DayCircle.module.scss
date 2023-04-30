@@ -12,7 +12,7 @@
   inset-block-start: 50%;
   transform: translate(-50%, -50%);
 
-  [dir='rtl'] & {
+  [dir="rtl"] & {
     transform: translate(50%, -50%);
   }
 
