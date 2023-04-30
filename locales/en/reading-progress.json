@@ -5,5 +5,22 @@
     "no-reading-history-for": "No reading history for {{date}}",
     "reading-progress-header": "Your Progress",
     "reading-progress-streak": "Streak",
-    "you-read": "You read:"
+    "you-read": "You read:",
+    "edit-goal": {
+        "title": "Edit your reading goal",
+        "subtitle": "Take care, you're progress for your current goal will be lost.",
+        "action": "Edit Goal",
+        "success": "Your reading goal has been updated successfully."
+    },
+    "delete-goal": {
+        "action": "Delete Goal",
+        "success": "Your reading goal has been deleted successfully.",
+        "confirmation": {
+            "action-text": "I understand the consequence, delete my goal",
+            "confirmation-text": "delete my goal",
+            "instruction-text": "Please type <strong>{{text}}<\/strong> to confirm",
+            "subtitle": "This action cannot be undone. This will permanently delete your goal, and we'll stop tracking your progress.",
+            "title": "Are you sure?"
+        }
+    }
 }

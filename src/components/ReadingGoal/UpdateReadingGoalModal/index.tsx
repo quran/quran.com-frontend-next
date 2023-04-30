@@ -1,7 +1,8 @@
 /* eslint-disable max-lines */
-import { useCallback, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
+import { useSelector, shallowEqual } from 'react-redux';
 import { useSWRConfig } from 'swr';
 
 import ReadingGoalInput from '../ReadingGoalInput';
@@ -9,14 +10,18 @@ import ReadingGoalInput from '../ReadingGoalInput';
 import styles from './UpdateReadingGoalModal.module.scss';
 
 import Button, { ButtonType, ButtonVariant } from '@/dls/Button/Button';
-import Input, { InputSize } from '@/dls/Forms/Input';
+import RadioGroup from '@/dls/Forms/RadioGroup/RadioGroup';
+import { RadioRootOrientation } from '@/dls/Forms/RadioGroup/Root';
 import Select, { SelectSize } from '@/dls/Forms/Select';
 import Modal from '@/dls/Modal/Modal';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
+import { selectQuranFont, selectQuranMushafLines } from '@/redux/slices/QuranReader/styles';
 import { ReadingGoal, ReadingGoalType, UpdateReadingGoalRequest } from '@/types/auth/ReadingGoal';
+import { getMushafId } from '@/utils/api';
 import { updateReadingGoal } from '@/utils/auth/api';
 import { makeStreakUrl } from '@/utils/auth/apiPaths';
 import { logButtonClick } from '@/utils/eventLogger';
+import { generateDurationDaysOptions } from '@/utils/generators';
 import { parseVerseRange } from '@/utils/verseKeys';
 
 type UpdateReadingGoalButtonProps = {
@@ -53,27 +58,32 @@ const types = [
 ] as const;
 
 const UpdateReadingGoalModal = ({ isDisabled, readingGoal }: UpdateReadingGoalButtonProps) => {
-  const { t } = useTranslation('reading-goal');
+  const { t, lang } = useTranslation('reading-progress');
   const [isModalVisible, setIsModalVisible] = useState(false);
 
+  const quranFont = useSelector(selectQuranFont, shallowEqual);
+  const mushafLines = useSelector(selectQuranMushafLines, shallowEqual);
+  const { mushaf } = getMushafId(quranFont, mushafLines);
+  const dayOptions = useMemo(() => generateDurationDaysOptions(t, lang), [t, lang]);
+
+  const [isContinuous, setIsContinuous] = useState(!!readingGoal.duration);
+  const [duration, setDuration] = useState(readingGoal.duration || 30);
   const [type, setType] = useState(readingGoal.type);
 
   const [pages, setPages] = useState(getPages(readingGoal));
   const [seconds, setSeconds] = useState(getSeconds(readingGoal));
   const [range, setRange] = useState(getRange(readingGoal));
 
-  const [duration, setDuration] = useState(readingGoal.duration || 0);
   const toast = useToast();
 
   const { mutate } = useSWRConfig();
 
   const updateReadingGoalAndClearCache = useCallback(
     async (data: UpdateReadingGoalRequest) => {
-      await updateReadingGoal(data).then(() => {
-        mutate(makeStreakUrl());
-      });
+      await updateReadingGoal({ ...data, mushafId: mushaf });
+      mutate(makeStreakUrl());
     },
-    [mutate],
+    [mutate, mushaf],
   );
 
   const closeModal = () => {
@@ -105,11 +115,11 @@ const UpdateReadingGoalModal = ({ isDisabled, readingGoal }: UpdateReadingGoalBu
       type,
       amount,
     };
-    if (duration) data.duration = duration;
+    if (isContinuous) data.duration = duration;
 
     try {
       await updateReadingGoalAndClearCache(data);
-      toast(t('update-reading-goal-success'), { status: ToastStatus.Success });
+      toast(t('edit-goal.success'), { status: ToastStatus.Success });
       closeModal();
     } catch {
       toast(t('common:error.general'), { status: ToastStatus.Error });
@@ -119,18 +129,38 @@ const UpdateReadingGoalModal = ({ isDisabled, readingGoal }: UpdateReadingGoalBu
   return (
     <>
       <Button onClick={onUpdateGoalClicked} isDisabled={isDisabled}>
-        {t('edit-goal')}
+        {t('edit-goal.action')}
       </Button>
       <Modal isOpen={isModalVisible} onClickOutside={closeModal}>
         <Modal.Body>
           <Modal.Header>
-            <Modal.Title>{t('delete-confirmation.title')}</Modal.Title>
-            <Modal.Subtitle>{t('delete-confirmation.subtitle')}</Modal.Subtitle>
+            <Modal.Title>{t('edit-goal.title')}</Modal.Title>
+            <Modal.Subtitle>{t('edit-goal.subtitle')}</Modal.Subtitle>
+
+            {/* <div className={styles.radioGroup}> */}
+            <RadioGroup.Root
+              label="Continuity"
+              orientation={RadioRootOrientation.Horizontal}
+              value={isContinuous ? 'continuous' : 'daily'}
+              onChange={(value) => setIsContinuous(value === 'continuous')}
+              className={styles.radioGroup}
+            >
+              <div className={styles.radioItem}>
+                <RadioGroup.Item value="continuous" />
+                {t('reading-goal:continuous.title')}
+              </div>
+
+              <div className={styles.radioItem}>
+                <RadioGroup.Item value="daily" />
+                {t('reading-goal:daily.title')}
+              </div>
+            </RadioGroup.Root>
+            {/* </div> */}
 
             <div className={styles.inputs}>
               <div className={styles.inputContainer}>
                 <label htmlFor="goal-type" className={styles.label}>
-                  {t('goal-type.title')}
+                  {t('reading-goal:goal-type.title')}
                 </label>
                 <Select
                   id="goal-type"
@@ -140,7 +170,7 @@ const UpdateReadingGoalModal = ({ isDisabled, readingGoal }: UpdateReadingGoalBu
                   size={SelectSize.Large}
                   options={types.map((typeObject) => ({
                     value: typeObject.value,
-                    label: t(`goal-types.${typeObject.key}.title`),
+                    label: t(`reading-goal:goal-types.${typeObject.key}.title`),
                   }))}
                 />
               </div>
@@ -160,19 +190,24 @@ const UpdateReadingGoalModal = ({ isDisabled, readingGoal }: UpdateReadingGoalBu
                 }}
               />
 
-              <div className={styles.inputContainer}>
-                <label htmlFor="goal-duration" className={styles.label}>
-                  {t('duration')}
-                </label>
-                <Input
-                  id="goal-duration"
-                  value={duration.toString()}
-                  onChange={(d) => setDuration(Number(d))}
-                  size={InputSize.Large}
-                  fixedWidth={false}
-                  htmlType="number"
-                />
-              </div>
+              {isContinuous && (
+                <div className={styles.inputContainer}>
+                  <label htmlFor="goal-duration" className={styles.label}>
+                    {t('reading-goal:duration')}
+                  </label>
+                  <Select
+                    id="duration"
+                    name="duration"
+                    size={SelectSize.Large}
+                    className={styles.input}
+                    options={dayOptions}
+                    value={duration.toString()}
+                    onChange={(value) => {
+                      setDuration(Number(value));
+                    }}
+                  />
+                </div>
+              )}
             </div>
           </Modal.Header>
           <Modal.Footer>
@@ -182,7 +217,7 @@ const UpdateReadingGoalModal = ({ isDisabled, readingGoal }: UpdateReadingGoalBu
               className={styles.deleteButton}
               onClick={onUpdateClicked}
             >
-              {t('edit-goal')}
+              {t('edit-goal.action')}
             </Button>
           </Modal.Footer>
         </Modal.Body>
