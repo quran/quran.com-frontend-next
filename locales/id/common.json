@@ -140,7 +140,7 @@
         "code_v2": "Kompleks Raja Fahad V2",
         "font-size": "Ukuran huruf",
         "lines": "Garis",
-        "qcf-desc": "Font KPFG memberikan kualitas yang lebih tinggi tetapi membutuhkan waktu lebih lama untuk dimuat.",
+        "qcf-desc": "Font Kompleks Raja Fahad (V1 dan V2) memberikan kualitas yang lebih tinggi tetapi membutuhkan waktu lebih lama untuk dimuat.",
         "qpc_uthmani_hafs": "QPC Utsmani Hafs",
         "quran-font": "Huruf Quran",
         "tajweed": "Tajwid",
@@ -174,7 +174,7 @@
     "home": "Halaman Utama",
     "inline": "Di barisan",
     "input": {
-        "clear": "Jernih"
+        "clear": "bersihkan"
     },
     "juz": "Juz",
     "language": "Bahasa",
@@ -186,7 +186,7 @@
     "meccan": "Mekah",
     "medinan": "Madinah",
     "menu": "Menu",
-    "mobile-apps": "Aplikasi ",
+    "mobile-apps": "Aplikasi",
     "mode": "Mode",
     "more": "Lagi",
     "navigate": "Navigasi",
