@@ -11,6 +11,7 @@ import { shallowEqual, useSelector } from 'react-redux';
 import Section from './Section';
 import styles from './WordByWordSection.module.scss';
 
+import Counter from '@/dls/Counter/Counter';
 import Checkbox from '@/dls/Forms/Checkbox/Checkbox';
 import Select, { SelectSize } from '@/dls/Forms/Select';
 import Link, { LinkVariant } from '@/dls/Link/Link';
@@ -23,6 +24,13 @@ import {
   setWordByWordContentType,
   setWordClickFunctionality,
 } from '@/redux/slices/QuranReader/readingPreferences';
+import {
+  MAXIMUM_WORD_BY_WORD_FONT_STEP,
+  MINIMUM_FONT_STEP,
+  decreaseWordByWordFontScale,
+  increaseWordByWordFontScale,
+  selectWordByWordFontScale,
+} from '@/redux/slices/QuranReader/styles';
 import QueryParam from '@/types/QueryParam';
 import { WordByWordDisplay, WordByWordType, WordClickFunctionality } from '@/types/QuranReader';
 import { removeItemFromArray } from '@/utils/array';
@@ -51,6 +59,9 @@ const WordByWordSection = () => {
     wordByWordContentType,
     wordClickFunctionality,
   } = readingPreferences;
+
+  const wordByWordFontScale = useSelector(selectWordByWordFontScale, shallowEqual);
+
   /**
    * Persist settings in the DB if the user is logged in before dispatching
    * Redux action, otherwise just dispatch it.
@@ -64,8 +75,39 @@ const WordByWordSection = () => {
     value: string | number | boolean | string[],
     action: Action,
     undoAction: Action,
+    isReaderStyles = false,
   ) => {
-    onSettingsChange(key, value, action, undoAction, PreferenceGroup.READING);
+    onSettingsChange(
+      key,
+      value,
+      action,
+      undoAction,
+      isReaderStyles ? PreferenceGroup.QURAN_READER_STYLES : PreferenceGroup.READING,
+    );
+  };
+
+  const onFontScaleIncreaseClicked = () => {
+    const newValue = wordByWordFontScale + 1;
+    logValueChange('word_by_word_font_scale', wordByWordFontScale, newValue);
+    onWordByWordSettingsChange(
+      'wordByWordFontScale',
+      newValue,
+      increaseWordByWordFontScale(),
+      decreaseWordByWordFontScale(),
+      true,
+    );
+  };
+
+  const onFontScaleDecreaseClicked = () => {
+    const newValue = wordByWordFontScale - 1;
+    logValueChange('word_by_word_font_scale', wordByWordFontScale, newValue);
+    onWordByWordSettingsChange(
+      'wordByWordFontScale',
+      newValue,
+      decreaseWordByWordFontScale(),
+      increaseWordByWordFontScale(),
+      true,
+    );
   };
 
   const onWordByWordLocaleChange = (value: string) => {
@@ -208,6 +250,20 @@ const WordByWordSection = () => {
             onChange={(isChecked) => onDisplaySettingChange(false, isChecked)}
           />
         </div>
+      </Section.Row>
+      <Section.Row>
+        <Section.Label>{t('fonts.font-size')}</Section.Label>
+        <Counter
+          count={wordByWordFontScale}
+          onIncrement={
+            MAXIMUM_WORD_BY_WORD_FONT_STEP === wordByWordFontScale
+              ? null
+              : onFontScaleIncreaseClicked
+          }
+          onDecrement={
+            MINIMUM_FONT_STEP === wordByWordFontScale ? null : onFontScaleDecreaseClicked
+          }
+        />
       </Section.Row>
     </Section>
   );

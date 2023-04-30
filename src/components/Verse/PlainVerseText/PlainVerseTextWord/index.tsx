@@ -2,6 +2,7 @@ import React, { ReactNode } from 'react';
 
 import styles from './PlainVerseTextWord.module.scss';
 
+import InlineWordByWord from '@/dls/InlineWordByWord';
 import Word from 'types/Word';
 
 interface Props {
@@ -21,10 +22,10 @@ const PlainVerseTextWord: React.FC<Props> = ({
     <div className={styles.plainVerseWordContainer} key={word.location}>
       {children}
       {shouldShowWordByWordTranslation && (
-        <p className={styles.plainVerseWbwText}>{word?.translation?.text}</p>
+        <InlineWordByWord className={styles.plainVerseWbwText} text={word?.translation?.text} />
       )}
       {shouldShowWordByWordTransliteration && (
-        <p className={styles.plainVerseWbwText}>{word?.transliteration?.text}</p>
+        <InlineWordByWord className={styles.plainVerseWbwText} text={word?.transliteration?.text} />
       )}
     </div>
   );
