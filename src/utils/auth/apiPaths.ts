@@ -1,6 +1,7 @@
 import stringify from '../qs-stringify';
 
 import { FilterReadingDaysParams } from '@/types/auth/ReadingDay';
+import { CreateReadingGoalRequest } from '@/types/auth/ReadingGoal';
 import { StreakWithMetadataParams } from '@/types/auth/Streak';
 import { Mushaf } from '@/types/QuranReader';
 import { getAuthApiPath } from '@/utils/url';
@@ -115,8 +116,8 @@ export const makeReadingGoalUrl = (mushafId?: Mushaf) =>
     },
   );
 
-export const makeEstimateReadingGoalUrl = (mushafId: Mushaf) =>
-  makeUrl('reading-goal/estimate', { mushafId });
+export const makeEstimateReadingGoalUrl = (data: CreateReadingGoalRequest) =>
+  makeUrl('reading-goal/estimate', data);
 
 export const makeStreakUrl = (params?: StreakWithMetadataParams) => makeUrl('streak', params);
 
