@@ -13,17 +13,7 @@
     },
     "day-x": "Dag {{day}}",
     "days": "Dagen",
-    "delete-goal": "Doel verwijderen",
-    "delete-goal-confirmation": {
-        "action-text": "Ik begrijp de consequentie, verwijder mijn doel",
-        "confirmation-text": "verwijder mijn doel",
-        "instruction-text": "Typ <strong> {{text}} <\/strong> om te bevestigen",
-        "subtitle": "Deze actie kan niet ongedaan gemaakt worden. Hiermee wordt je doel definitief verwijderd en stoppen we met het bijhouden van je voortgang.",
-        "title": "Weet je het zeker?"
-    },
-    "delete-reading-goal-success": "Je leesdoel is succesvol verwijderd.",
     "duration": "Duur (dagen)",
-    "edit-goal": "Doel bewerken",
     "ending-chapter": "Einde soera",
     "ending-verse": "Ayah beëindigen",
     "examples-subtitle": "Hier is een lijst met gemeenschappelijke doelen. Je kunt ook je eigen doel maken.",
@@ -105,7 +95,6 @@
         "stroked": "Je hebt vandaag niets gelezen"
     },
     "todays-goal": "Het doel van vandaag",
-    "update-reading-goal-success": "Je leesdoel is succesvol geüpdatet.",
     "view-progress": "Voortgang bekijken",
     "x-days": {
         "one": "{{days}} dag",

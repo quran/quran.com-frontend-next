@@ -1,4 +1,21 @@
 {
+    "delete-goal": {
+        "action": "Fshi objektivin",
+        "confirmation": {
+            "action-text": "E kuptoj pasojën, fshije qëllimin tim",
+            "confirmation-text": "fshije qëllimin tim",
+            "instruction-text": "Ju lutemi shkruani <strong> {{text}} <\/strong> për të konfirmuar",
+            "subtitle": "Ky veprim nuk mund të zhbëhet. Kjo do të fshijë përgjithmonë objektivin tuaj dhe ne do të ndalojmë së gjurmuari përparimin tuaj.",
+            "title": "A je i sigurt?"
+        },
+        "success": "Qëllimi juaj i leximit është fshirë me sukses."
+    },
+    "edit-goal": {
+        "action": "Redakto objektivin",
+        "subtitle": "Kini kujdes, përparimi juaj për qëllimin tuaj aktual do të humbet.",
+        "success": "Qëllimi juaj i leximit është përditësuar me sukses.",
+        "title": "Ndryshoni qëllimin tuaj të leximit"
+    },
     "history": "Leximi i Historisë",
     "history-for": "Leximi i historisë për {{date}}",
     "manage-goal": "Menaxhoni qëllimin tuaj të leximit",

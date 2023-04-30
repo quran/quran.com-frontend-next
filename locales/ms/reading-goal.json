@@ -13,17 +13,7 @@
     },
     "day-x": "Hari {{day}}",
     "days": "hari-hari",
-    "delete-goal": "Padamkan Matlamat",
-    "delete-goal-confirmation": {
-        "action-text": "Saya faham akibatnya, padamkan matlamat saya",
-        "confirmation-text": "padamkan matlamat saya",
-        "instruction-text": "Sila taip <strong> {{text}} <\/strong> untuk mengesahkan",
-        "subtitle": "Tindakan ini tidak boleh dibuat asal. Ini akan memadamkan matlamat anda secara kekal dan kami akan berhenti menjejaki kemajuan anda.",
-        "title": "Adakah anda pasti?"
-    },
-    "delete-reading-goal-success": "Matlamat membaca anda telah berjaya dipadamkan.",
     "duration": "Tempoh (hari)",
-    "edit-goal": "Edit Matlamat",
     "ending-chapter": "Ending Surah",
     "ending-verse": "Ending Ayah",
     "examples-subtitle": "Berikut ialah senarai matlamat bersama. Anda juga boleh membuat matlamat anda sendiri.",
@@ -104,7 +94,6 @@
         "stroked": "Anda tidak membaca apa-apa hari ini"
     },
     "todays-goal": "Matlamat Hari Ini",
-    "update-reading-goal-success": "Matlamat membaca anda telah berjaya dikemas kini.",
     "view-progress": "Lihat Kemajuan",
     "x-days": {
         "other": "{{days}} hari"

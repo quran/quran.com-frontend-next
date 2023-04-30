@@ -13,17 +13,7 @@
     },
     "day-x": "Giorno {{day}}",
     "days": "Giorni",
-    "delete-goal": "Elimina obiettivo",
-    "delete-goal-confirmation": {
-        "action-text": "Capisco la conseguenza, cancella il mio obiettivo",
-        "confirmation-text": "cancella il mio obiettivo",
-        "instruction-text": "Digita <strong> {{text}} <\/strong> per confermare",
-        "subtitle": "Questa azione non può essere annullata. Questa operazione eliminerà definitivamente il tuo obiettivo e interromperemo il monitoraggio dei tuoi progressi.",
-        "title": "Sei sicuro?"
-    },
-    "delete-reading-goal-success": "Il tuo obiettivo di lettura è stato eliminato correttamente.",
     "duration": "Durata (giorni)",
-    "edit-goal": "Modifica obiettivo",
     "ending-chapter": "Sura finale",
     "ending-verse": "Fine Ayah",
     "examples-subtitle": "Ecco un elenco di obiettivi comuni. Puoi anche creare il tuo obiettivo.",
@@ -105,7 +95,6 @@
         "stroked": "Non hai letto niente oggi"
     },
     "todays-goal": "Obiettivo di oggi",
-    "update-reading-goal-success": "Il tuo obiettivo di lettura è stato aggiornato correttamente.",
     "view-progress": "Visualizza i progressi",
     "x-days": {
         "one": "{{days}} giorno",

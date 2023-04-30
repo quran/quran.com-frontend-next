@@ -13,17 +13,7 @@
     },
     "day-x": "Hari {{day}}",
     "days": "Hari",
-    "delete-goal": "Hapus Sasaran",
-    "delete-goal-confirmation": {
-        "action-text": "Saya mengerti konsekuensinya, hapus tujuan saya",
-        "confirmation-text": "hapus tujuan saya",
-        "instruction-text": "Harap ketik <strong> {{text}} <\/strong> untuk mengonfirmasi",
-        "subtitle": "Tindakan ini tidak bisa dibatalkan. Ini akan menghapus tujuan Anda secara permanen, dan kami akan berhenti melacak kemajuan Anda.",
-        "title": "Apa kamu yakin?"
-    },
-    "delete-reading-goal-success": "Tujuan membaca Anda telah berhasil dihapus.",
     "duration": "Durasi (hari)",
-    "edit-goal": "Sunting Sasaran",
     "ending-chapter": "Surah penutup",
     "ending-verse": "Mengakhiri Ayah",
     "examples-subtitle": "Berikut adalah daftar tujuan bersama. Anda juga dapat membuat tujuan Anda sendiri.",
@@ -104,7 +94,6 @@
         "stroked": "Anda belum membaca apa pun hari ini"
     },
     "todays-goal": "Tujuan hari ini",
-    "update-reading-goal-success": "Tujuan membaca Anda telah berhasil diperbarui.",
     "view-progress": "Lihat Kemajuan",
     "x-days": {
         "other": "{{days}} hari"

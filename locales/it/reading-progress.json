@@ -1,4 +1,21 @@
 {
+    "delete-goal": {
+        "action": "Elimina obiettivo",
+        "confirmation": {
+            "action-text": "Capisco la conseguenza, cancella il mio obiettivo",
+            "confirmation-text": "cancella il mio obiettivo",
+            "instruction-text": "Digita <strong> {{text}} <\/strong> per confermare",
+            "subtitle": "Questa azione non può essere annullata. Questa operazione eliminerà definitivamente il tuo obiettivo e interromperemo il monitoraggio dei tuoi progressi.",
+            "title": "Sei sicuro?"
+        },
+        "success": "Il tuo obiettivo di lettura è stato eliminato correttamente."
+    },
+    "edit-goal": {
+        "action": "Modifica obiettivo",
+        "subtitle": "Abbi cura di te, i tuoi progressi per il tuo obiettivo attuale andranno persi.",
+        "success": "Il tuo obiettivo di lettura è stato aggiornato correttamente.",
+        "title": "Modifica il tuo obiettivo di lettura"
+    },
     "history": "Leggere la Storia",
     "history-for": "Cronologia di lettura per {{date}}",
     "manage-goal": "Gestisci il tuo obiettivo di lettura",
