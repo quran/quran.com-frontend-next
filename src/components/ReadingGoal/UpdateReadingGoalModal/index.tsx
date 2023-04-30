@@ -1,5 +1,5 @@
 /* eslint-disable max-lines */
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import { useSelector, shallowEqual } from 'react-redux';
@@ -86,16 +86,26 @@ const UpdateReadingGoalModal = ({ isDisabled, readingGoal }: UpdateReadingGoalBu
     [mutate, mushaf],
   );
 
-  const closeModal = () => {
-    setIsModalVisible(false);
-
+  const resetState = useCallback(() => {
     // reset everything to the reading goal
     setType(readingGoal.type);
+    setIsContinuous(!!readingGoal.duration);
+    setDuration(readingGoal.duration || 30);
 
     setPages(getPages(readingGoal));
     setSeconds(getSeconds(readingGoal));
     setRange(getRange(readingGoal));
+  }, [readingGoal]);
+
+  const closeModal = () => {
+    setIsModalVisible(false);
+
+    resetState();
   };
+
+  useEffect(() => {
+    resetState();
+  }, [resetState, readingGoal]);
 
   const onUpdateGoalClicked = () => {
     logButtonClick('reading_goal_update_modal');
