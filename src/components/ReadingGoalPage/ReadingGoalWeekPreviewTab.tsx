@@ -28,7 +28,7 @@ import { toLocalizedNumber } from '@/utils/locale';
 import { convertNumberToDecimal } from '@/utils/number';
 import { parseVerseRange } from '@/utils/verseKeys';
 
-const getPayload = (
+const makePayload = (
   state: ReadingGoalTabProps['state'],
   mushafId: Mushaf,
 ): CreateReadingGoalRequest => {
@@ -55,9 +55,10 @@ const ReadingGoalWeekPreviewTab: React.FC<ReadingGoalTabProps> = ({ state, nav }
   const mushafLines = useSelector(selectQuranMushafLines, shallowEqual);
   const { mushaf } = getMushafId(quranFont, mushafLines);
 
+  const payload = makePayload(state, mushaf);
   const { data, isValidating } = useSWR(
-    makeEstimateReadingGoalUrl(getPayload(state, mushaf)),
-    () => estimateReadingGoal(getPayload(state, mushaf)),
+    makeEstimateReadingGoalUrl(payload),
+    () => estimateReadingGoal(payload),
     {
       revalidateOnMount: true,
       revalidateOnFocus: false,

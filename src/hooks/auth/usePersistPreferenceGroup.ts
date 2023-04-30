@@ -62,7 +62,9 @@ const usePersistPreferenceGroup = (): PersistPreferences => {
   const quranFont = useSelector(selectQuranFont, shallowEqual);
   const mushafLines = useSelector(selectQuranMushafLines, shallowEqual);
 
-  const getLastMushafId = useCallback(
+  // this function is used to get the updated mushafId and pass it to addOrUpdateUserPreference
+  // if the preferenceGroup is not QURAN_READER_STYLES, it will return undefined
+  const getUpdatedMushafId = useCallback(
     (
       preferenceGroup: PreferenceGroup,
       key: string,
@@ -92,7 +94,7 @@ const usePersistPreferenceGroup = (): PersistPreferences => {
             key,
             value,
             preferenceGroup,
-            getLastMushafId(preferenceGroup, key, value),
+            getUpdatedMushafId(preferenceGroup, key, value),
           )
             .then(() => {
               callback();
@@ -119,7 +121,7 @@ const usePersistPreferenceGroup = (): PersistPreferences => {
             key,
             value,
             preferenceGroup,
-            getLastMushafId(preferenceGroup, key, value),
+            getUpdatedMushafId(preferenceGroup, key, value),
           )
             .then(() => {
               if (successCallback) {
@@ -172,7 +174,7 @@ const usePersistPreferenceGroup = (): PersistPreferences => {
             key,
             value,
             preferenceGroup,
-            getLastMushafId(preferenceGroup, key, value),
+            getUpdatedMushafId(preferenceGroup, key, value),
           )
             .then(() => {
               if (successCallback) {
@@ -210,7 +212,7 @@ const usePersistPreferenceGroup = (): PersistPreferences => {
         }
       },
     }),
-    [dispatch, t, toast, getLastMushafId],
+    [dispatch, t, toast, getUpdatedMushafId],
   );
 
   return { actions, isLoading };
