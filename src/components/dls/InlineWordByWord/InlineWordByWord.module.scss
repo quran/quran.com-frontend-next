@@ -1,0 +1,56 @@
+@use "src/styles/breakpoints";
+
+.word {
+  /**
+        This is needed for when the translation/transliteration content
+        is too big to be fit into one line on mobile
+        or on desktop to be able to maintain the reading view's alignment without overflowing.
+        {@see https://quran.com/3:125?wbw_locale=ur}
+    **/
+  white-space: normal;
+  overflow-wrap: break-word;
+  // center the text content inside the container
+  margin: auto;
+}
+
+/**
+    We have 6 different font sizes for word by word. We will need to set max-width
+    of the translation/transliteration content on Desktop so that we are able to maintain
+    the reading view's alignment without overflowing. {@see https://quran.com/3:125?wbw_locale=ur}
+**/
+.xs {
+  font-size: var(--font-size-xsmall-dangerous);
+  @include breakpoints.tablet {
+    max-width: calc(3 * var(--spacing-mega));
+  }
+}
+.sm {
+  font-size: var(--font-size-xsmall);
+  @include breakpoints.tablet {
+    max-width: calc(3.5 * var(--spacing-mega));
+  }
+}
+.md {
+  font-size: var(--font-size-small);
+  @include breakpoints.tablet {
+    max-width: calc(3.7 * var(--spacing-mega));
+  }
+}
+.lg {
+  font-size: var(--font-size-normal);
+  @include breakpoints.tablet {
+    max-width: calc(3.9 * var(--spacing-mega));
+  }
+}
+.xl {
+  font-size: var(--font-size-large);
+  @include breakpoints.tablet {
+    max-width: calc(4 * var(--spacing-mega));
+  }
+}
+.xxl {
+  font-size: var(--font-size-xlarge);
+  @include breakpoints.tablet {
+    max-width: calc(4.2 * var(--spacing-mega));
+  }
+}
