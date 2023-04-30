@@ -5,6 +5,8 @@ import { useSelector as useXstateSelector } from '@xstate/react';
 import classNames from 'classnames';
 import { shallowEqual, useSelector } from 'react-redux';
 
+import InlineWordByWord from '../InlineWordByWord';
+
 import getTooltipText from './getToolTipText';
 import GlyphWord from './GlyphWord';
 import playWordAudio from './playWordAudio';
@@ -174,10 +176,8 @@ const QuranWord = ({
       </Wrapper>
       {isWordByWordAllowed && (
         <>
-          {showWordByWordTransliteration && (
-            <p className={styles.wbwText}>{word.transliteration?.text}</p>
-          )}
-          {showWordByWordTranslation && <p className={styles.wbwText}>{word.translation?.text}</p>}
+          {showWordByWordTransliteration && <InlineWordByWord text={word.transliteration?.text} />}
+          {showWordByWordTranslation && <InlineWordByWord text={word.translation?.text} />}
         </>
       )}
     </div>

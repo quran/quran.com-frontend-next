@@ -67,5 +67,6 @@ export const removeItemFromArray = <T>(itemToRemove: T, array: T[]): T[] =>
  * @param {T[]} array2
  * @returns {T[]}
  */
-export const mergeTwoArraysUniquely = <T>(array1: T[], array2: T[]): T[] =>
-  array1.filter((t) => !array2.includes(t)).concat(array2);
+export const mergeTwoArraysUniquely = <T>(array1: T[], array2: T[]): T[] => {
+  return Array.from(new Set(array1.concat(array2)));
+};
