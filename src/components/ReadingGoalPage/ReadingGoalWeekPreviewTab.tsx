@@ -56,7 +56,7 @@ const ReadingGoalWeekPreviewTab: React.FC<ReadingGoalTabProps> = ({ state, nav }
   const { mushaf } = getMushafId(quranFont, mushafLines);
 
   const { data, isValidating } = useSWR(
-    makeEstimateReadingGoalUrl(mushaf),
+    makeEstimateReadingGoalUrl(getPayload(state, mushaf)),
     () => estimateReadingGoal(getPayload(state, mushaf)),
     {
       revalidateOnMount: true,
