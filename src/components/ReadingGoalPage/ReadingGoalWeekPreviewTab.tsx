@@ -5,7 +5,7 @@ import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useSelector } from 'react-redux';
 import useSWR from 'swr';
 
-import { ReadingGoalPeriod, ReadingGoalTabProps } from './hooks/useReadingGoalReducer';
+import { ReadingGoalTabProps } from './hooks/useReadingGoalReducer';
 import styles from './ReadingGoalPage.module.scss';
 
 import DataContext from '@/contexts/DataContext';
@@ -16,6 +16,7 @@ import {
   CreateReadingGoalRequest,
   EstimatedReadingGoalDay,
   RangeEstimatedReadingGoalDay,
+  ReadingGoalPeriod,
   ReadingGoalType,
 } from '@/types/auth/ReadingGoal';
 import { Mushaf } from '@/types/QuranReader';

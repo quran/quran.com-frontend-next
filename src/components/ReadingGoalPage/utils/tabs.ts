@@ -1,11 +1,11 @@
-import useReadingGoalReducer, { ReadingGoalPeriod } from '../hooks/useReadingGoalReducer';
+import useReadingGoalReducer from '../hooks/useReadingGoalReducer';
 import ReadingGoalExamplesTab from '../ReadingGoalExamplesTab';
 import ReadingGoalTargetAmountTab from '../ReadingGoalTargetAmountTab';
 import ReadingGoalTimeTab from '../ReadingGoalTimeTab';
 import ReadingGoalTypeTab from '../ReadingGoalTypeTab';
 import ReadingGoalWeekPreviewTab from '../ReadingGoalWeekPreviewTab';
 
-import { ReadingGoalType } from '@/types/auth/ReadingGoal';
+import { ReadingGoalPeriod, ReadingGoalType } from '@/types/auth/ReadingGoal';
 import { logButtonClick, logValueChange } from '@/utils/eventLogger';
 
 export enum TabKey {

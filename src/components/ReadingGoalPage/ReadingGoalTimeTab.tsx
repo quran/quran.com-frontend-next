@@ -1,11 +1,12 @@
 import useTranslation from 'next-translate/useTranslation';
 
-import { ReadingGoalPeriod, ReadingGoalTabProps } from './hooks/useReadingGoalReducer';
+import { ReadingGoalTabProps } from './hooks/useReadingGoalReducer';
 import OptionButton from './OptionButton';
 import styles from './ReadingGoalPage.module.scss';
 
 import CalendarIcon from '@/icons/calendar.svg';
 import RepeatIcon from '@/icons/repeat.svg';
+import { ReadingGoalPeriod } from '@/types/auth/ReadingGoal';
 
 const options = [
   {

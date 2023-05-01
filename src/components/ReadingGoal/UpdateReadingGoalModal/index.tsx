@@ -16,11 +16,16 @@ import Select, { SelectSize } from '@/dls/Forms/Select';
 import Modal from '@/dls/Modal/Modal';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import { selectQuranFont, selectQuranMushafLines } from '@/redux/slices/QuranReader/styles';
-import { ReadingGoal, ReadingGoalType, UpdateReadingGoalRequest } from '@/types/auth/ReadingGoal';
+import {
+  ReadingGoal,
+  ReadingGoalPeriod,
+  ReadingGoalType,
+  UpdateReadingGoalRequest,
+} from '@/types/auth/ReadingGoal';
 import { getMushafId } from '@/utils/api';
 import { updateReadingGoal } from '@/utils/auth/api';
 import { makeStreakUrl } from '@/utils/auth/apiPaths';
-import { logButtonClick } from '@/utils/eventLogger';
+import { logButtonClick, logFormSubmission, logValueChange } from '@/utils/eventLogger';
 import { generateDurationDaysOptions } from '@/utils/generators';
 import { parseVerseRange } from '@/utils/verseKeys';
 
@@ -108,13 +113,11 @@ const UpdateReadingGoalModal = ({ isDisabled, readingGoal }: UpdateReadingGoalBu
   }, [resetState, readingGoal]);
 
   const onUpdateGoalClicked = () => {
-    logButtonClick('reading_goal_update_modal');
+    logButtonClick('edit_reading_goal');
     setIsModalVisible(true);
   };
 
   const onUpdateClicked = async () => {
-    logButtonClick('reading_goal_update');
-
     let amount: string | number;
 
     if (type === ReadingGoalType.PAGES) amount = pages;
@@ -125,7 +128,11 @@ const UpdateReadingGoalModal = ({ isDisabled, readingGoal }: UpdateReadingGoalBu
       type,
       amount,
     };
-    if (isContinuous) data.duration = duration;
+    if (isContinuous) {
+      data.duration = duration;
+    }
+
+    logFormSubmission('edit_goal', data);
 
     try {
       await updateReadingGoalAndClearCache(data);
@@ -136,36 +143,64 @@ const UpdateReadingGoalModal = ({ isDisabled, readingGoal }: UpdateReadingGoalBu
     }
   };
 
+  const onContinuityChange = (value: ReadingGoalPeriod) => {
+    setIsContinuous(value === ReadingGoalPeriod.Continuous);
+    logValueChange(
+      'edit_goal_continuity',
+      isContinuous ? ReadingGoalPeriod.Continuous : ReadingGoalPeriod.Daily,
+      value,
+    );
+  };
+
+  const logAmountChange = (
+    input: string,
+    values: { currentValue: unknown; newValue: unknown },
+    metadata?: Record<string, unknown>,
+  ) => {
+    logValueChange(`edit_goal_${input}`, values.currentValue, values.newValue, metadata);
+  };
+
+  const onGoalTypeChange = (newType: ReadingGoalType) => {
+    setType(newType);
+    logValueChange('edit_goal_type', type, newType);
+  };
+
+  const onDurationChange = (value: string) => {
+    setDuration(Number(value));
+    logValueChange('edit_goal_duration', duration, value);
+  };
+
   return (
     <>
       <Button onClick={onUpdateGoalClicked} isDisabled={isDisabled}>
         {t('edit-goal.action')}
       </Button>
+
       <Modal isOpen={isModalVisible} onClickOutside={closeModal}>
         <Modal.Body>
           <Modal.Header>
             <Modal.Title>{t('edit-goal.title')}</Modal.Title>
             <Modal.Subtitle>{t('edit-goal.subtitle')}</Modal.Subtitle>
 
-            {/* <div className={styles.radioGroup}> */}
-            <RadioGroup.Root
+            <RadioGroup
               label="Continuity"
               orientation={RadioRootOrientation.Horizontal}
-              value={isContinuous ? 'continuous' : 'daily'}
-              onChange={(value) => setIsContinuous(value === 'continuous')}
+              value={isContinuous ? ReadingGoalPeriod.Continuous : ReadingGoalPeriod.Daily}
+              onChange={onContinuityChange}
               className={styles.radioGroup}
-            >
-              <div className={styles.radioItem}>
-                <RadioGroup.Item value="continuous" />
-                {t('reading-goal:continuous.title')}
-              </div>
-
-              <div className={styles.radioItem}>
-                <RadioGroup.Item value="daily" />
-                {t('reading-goal:daily.title')}
-              </div>
-            </RadioGroup.Root>
-            {/* </div> */}
+              items={[
+                {
+                  id: ReadingGoalPeriod.Continuous,
+                  label: t('reading-goal:continuous.title'),
+                  value: ReadingGoalPeriod.Continuous,
+                },
+                {
+                  id: ReadingGoalPeriod.Daily,
+                  label: t('reading-goal:daily.title'),
+                  value: ReadingGoalPeriod.Daily,
+                },
+              ]}
+            />
 
             <div className={styles.inputs}>
               <div className={styles.inputContainer}>
@@ -176,7 +211,7 @@ const UpdateReadingGoalModal = ({ isDisabled, readingGoal }: UpdateReadingGoalBu
                   id="goal-type"
                   name="goal-type"
                   value={type}
-                  onChange={(key) => setType(ReadingGoalType[key] as ReadingGoalType)}
+                  onChange={onGoalTypeChange}
                   size={SelectSize.Large}
                   options={types.map((typeObject) => ({
                     value: typeObject.value,
@@ -195,9 +230,7 @@ const UpdateReadingGoalModal = ({ isDisabled, readingGoal }: UpdateReadingGoalBu
                 onPagesChange={setPages}
                 onSecondsChange={setSeconds}
                 widthFull={false}
-                logChange={() => {
-                  // TODO: implement this when we uncomment the update modal
-                }}
+                logChange={logAmountChange}
               />
 
               {isContinuous && (
@@ -212,9 +245,7 @@ const UpdateReadingGoalModal = ({ isDisabled, readingGoal }: UpdateReadingGoalBu
                     className={styles.input}
                     options={dayOptions}
                     value={duration.toString()}
-                    onChange={(value) => {
-                      setDuration(Number(value));
-                    }}
+                    onChange={onDurationChange}
                   />
                 </div>
               )}

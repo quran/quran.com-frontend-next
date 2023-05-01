@@ -52,3 +52,8 @@ export type EstimatedReadingGoal =
   | {
       week: RangeEstimatedReadingGoalDay[];
     };
+
+export enum ReadingGoalPeriod {
+  Daily = 'DAILY',
+  Continuous = 'CONTINUOUS',
+}

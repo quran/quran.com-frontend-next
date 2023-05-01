@@ -5,12 +5,7 @@ import { Dispatch, SetStateAction, useReducer } from 'react';
 import BookIcon from '@/icons/book.svg';
 import ClockIcon from '@/icons/clock.svg';
 import SettingsIcon from '@/icons/settings-stroke.svg';
-import { ReadingGoalType } from '@/types/auth/ReadingGoal';
-
-export enum ReadingGoalPeriod {
-  Daily = 'DAILY',
-  Continuous = 'CONTINUOUS',
-}
+import { ReadingGoalPeriod, ReadingGoalType } from '@/types/auth/ReadingGoal';
 
 interface ReadingGoalState {
   period: ReadingGoalPeriod;
