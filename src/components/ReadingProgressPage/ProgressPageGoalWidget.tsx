@@ -59,7 +59,7 @@ const ProgressPageGoalWidget = ({
     }
 
     if (isGoalDone) {
-      <p>{t('reading-goal:progress.complete')}</p>;
+      return <p>{t('reading-goal:progress.complete')}</p>;
     }
 
     return (
