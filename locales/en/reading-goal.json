@@ -13,17 +13,7 @@
     },
     "day-x": "Day {{day}}",
     "days": "Days",
-    "delete-goal": "Delete Goal",
-    "delete-goal-confirmation": {
-        "action-text": "I understand the consequence, delete my goal",
-        "confirmation-text": "delete my goal",
-        "instruction-text": "Please type <strong>{{text}}<\/strong> to confirm",
-        "subtitle": "This action cannot be undone. This will permanently delete your goal, and we'll stop tracking your progress.",
-        "title": "Are you sure?"
-    },
-    "delete-reading-goal-success": "Your reading goal has been deleted successfully.",
     "duration": "Duration (days)",
-    "edit-goal": "Edit Goal",
     "ending-chapter": "Ending Surah",
     "ending-verse": "Ending Ayah",
     "examples-subtitle": "Here is a list of common goals. You can also create your own goal.",
@@ -77,6 +67,7 @@
         "title": "Here is a preview of your schedule"
     },
     "progress": {
+        "goal-complete": "Your whole goal is complete 🎉",
         "complete": "Today's goal is complete 🎉",
         "pages-goal": "read {{pages}} pages of the Quran",
         "range-goal": "read {{from}} to {{to}}",
@@ -105,7 +96,6 @@
         "stroked": "You haven't read anything today"
     },
     "todays-goal": "Today's Goal",
-    "update-reading-goal-success": "Your reading goal has been updated successfully.",
     "view-progress": "View Progress",
     "x-days": {
         "one": "{{days}} day",

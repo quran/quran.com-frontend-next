@@ -5,7 +5,7 @@ import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useSelector } from 'react-redux';
 import useSWR from 'swr';
 
-import { ReadingGoalPeriod, ReadingGoalTabProps } from './hooks/useReadingGoalReducer';
+import { ReadingGoalTabProps } from './hooks/useReadingGoalReducer';
 import styles from './ReadingGoalPage.module.scss';
 
 import DataContext from '@/contexts/DataContext';
@@ -16,6 +16,7 @@ import {
   CreateReadingGoalRequest,
   EstimatedReadingGoalDay,
   RangeEstimatedReadingGoalDay,
+  ReadingGoalPeriod,
   ReadingGoalType,
 } from '@/types/auth/ReadingGoal';
 import { Mushaf } from '@/types/QuranReader';
@@ -28,7 +29,7 @@ import { toLocalizedNumber } from '@/utils/locale';
 import { convertNumberToDecimal } from '@/utils/number';
 import { parseVerseRange } from '@/utils/verseKeys';
 
-const getPayload = (
+const makePayload = (
   state: ReadingGoalTabProps['state'],
   mushafId: Mushaf,
 ): CreateReadingGoalRequest => {
@@ -55,9 +56,10 @@ const ReadingGoalWeekPreviewTab: React.FC<ReadingGoalTabProps> = ({ state, nav }
   const mushafLines = useSelector(selectQuranMushafLines, shallowEqual);
   const { mushaf } = getMushafId(quranFont, mushafLines);
 
+  const payload = makePayload(state, mushaf);
   const { data, isValidating } = useSWR(
-    makeEstimateReadingGoalUrl(mushaf),
-    () => estimateReadingGoal(getPayload(state, mushaf)),
+    makeEstimateReadingGoalUrl(payload),
+    () => estimateReadingGoal(payload),
     {
       revalidateOnMount: true,
       revalidateOnFocus: false,

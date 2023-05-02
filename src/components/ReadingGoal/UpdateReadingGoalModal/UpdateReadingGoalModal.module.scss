@@ -31,3 +31,17 @@
 .instructionText {
   padding-block: var(--spacing-medium);
 }
+
+.radioGroup {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-block: var(--spacing-large) !important;
+  width: 100%;
+}
+
+.radioItem {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xsmall);
+}

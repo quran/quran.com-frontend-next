@@ -63,6 +63,10 @@ const ReadingStreak: React.FC<ReadingStreakProps> = ({ layout = ReadingStreakLay
   const getGoalStatus = () => {
     if (!readingGoal) return null;
 
+    if (readingGoal.isCompleted) {
+      return t('progress.goal-complete');
+    }
+
     if (percent < 100) {
       return (
         <ReadingGoalAmount
@@ -104,7 +108,7 @@ const ReadingStreak: React.FC<ReadingStreakProps> = ({ layout = ReadingStreakLay
       );
     }
 
-    if (!isGoalDone) {
+    if (!isGoalDone && !readingGoal.isCompleted) {
       return (
         <div className={styles.dailyProgressContainer}>
           <p className={styles.streakTitle}>{t('daily-progress')}</p>

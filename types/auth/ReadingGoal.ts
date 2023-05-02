@@ -5,6 +5,7 @@ export type ReadingGoal = {
   type: ReadingGoalType;
   targetAmount: string;
   duration?: number;
+  isCompleted: boolean;
   createdAt: Date;
   updatedAt: Date;
 };
@@ -52,3 +53,8 @@ export type EstimatedReadingGoal =
   | {
       week: RangeEstimatedReadingGoalDay[];
     };
+
+export enum ReadingGoalPeriod {
+  Daily = 'DAILY',
+  Continuous = 'CONTINUOUS',
+}

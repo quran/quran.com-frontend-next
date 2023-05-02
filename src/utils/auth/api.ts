@@ -181,11 +181,9 @@ export const updateReadingGoal = async ({
 }: UpdateReadingGoalRequest): Promise<{ data?: ReadingGoal }> =>
   patchRequest(makeReadingGoalUrl(mushafId), data);
 
-export const estimateReadingGoal = async ({
-  mushafId,
-  ...data
-}: CreateReadingGoalRequest): Promise<{ data?: EstimatedReadingGoal }> =>
-  postRequest(makeEstimateReadingGoalUrl(mushafId), data);
+export const estimateReadingGoal = async (
+  data: CreateReadingGoalRequest,
+): Promise<{ data?: EstimatedReadingGoal }> => privateFetcher(makeEstimateReadingGoalUrl(data));
 
 export const deleteReadingGoal = async (): Promise<void> => deleteRequest(makeReadingGoalUrl());
 

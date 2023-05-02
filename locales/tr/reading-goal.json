@@ -13,17 +13,7 @@
     },
     "day-x": "Gün {{day}}",
     "days": "günler",
-    "delete-goal": "Hedefi Sil",
-    "delete-goal-confirmation": {
-        "action-text": "Sonucu anlıyorum, hedefimi sil",
-        "confirmation-text": "hedefimi sil",
-        "instruction-text": "Onaylamak için lütfen <strong> {{text}} <\/strong> yazın",
-        "subtitle": "Bu işlem geri alınamaz. Bu, hedefinizi kalıcı olarak silecek ve ilerlemenizi takip etmeyi bırakacağız.",
-        "title": "Emin misin?"
-    },
-    "delete-reading-goal-success": "Okuma hedefiniz başarıyla silindi.",
     "duration": "Süre (gün)",
-    "edit-goal": "Hedefi Düzenle",
     "ending-chapter": "Bitiş Suresi",
     "ending-verse": "Biten Ayah",
     "examples-subtitle": "İşte ortak hedeflerin bir listesi. Kendi hedefinizi de oluşturabilirsiniz.",
@@ -105,7 +95,6 @@
         "stroked": "bugün hiçbir şey okumadın"
     },
     "todays-goal": "bugünün hedefi",
-    "update-reading-goal-success": "Okuma hedefiniz başarıyla güncellendi.",
     "view-progress": "İlerlemeyi Görüntüle",
     "x-days": {
         "one": "{{days}} gün",

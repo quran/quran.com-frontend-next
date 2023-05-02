@@ -8,10 +8,7 @@ import { useRouter } from 'next/router';
 import { shallowEqual, useSelector } from 'react-redux';
 import { useSWRConfig } from 'swr';
 
-import useReadingGoalReducer, {
-  ReadingGoalPeriod,
-  ReadingGoalTabProps,
-} from './hooks/useReadingGoalReducer';
+import useReadingGoalReducer, { ReadingGoalTabProps } from './hooks/useReadingGoalReducer';
 import styles from './ReadingGoalPage.module.scss';
 import { logTabClick, logTabInputChange, logTabNextClick, TabKey, tabsArray } from './utils/tabs';
 
@@ -24,7 +21,11 @@ import ChevronLeftIcon from '@/icons/chevron-left.svg';
 import ChevronRightIcon from '@/icons/chevron-right.svg';
 import layoutStyle from '@/pages/index.module.scss';
 import { selectQuranFont, selectQuranMushafLines } from '@/redux/slices/QuranReader/styles';
-import { CreateReadingGoalRequest, ReadingGoalType } from '@/types/auth/ReadingGoal';
+import {
+  CreateReadingGoalRequest,
+  ReadingGoalPeriod,
+  ReadingGoalType,
+} from '@/types/auth/ReadingGoal';
 import { getMushafId } from '@/utils/api';
 import { addReadingGoal } from '@/utils/auth/api';
 import { makeStreakUrl } from '@/utils/auth/apiPaths';
@@ -70,7 +71,9 @@ const ReadingGoalOnboarding: React.FC = () => {
       type: state.type,
       amount,
     };
-    if (state.period === ReadingGoalPeriod.Continuous) data.duration = state.duration;
+    if (state.period === ReadingGoalPeriod.Continuous) {
+      data.duration = state.duration;
+    }
 
     logFormSubmission('create_goal', { duration: null, ...data });
 

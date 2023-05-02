@@ -1,7 +1,7 @@
 import useTranslation from 'next-translate/useTranslation';
 
 import DeleteReadingGoalModal from '../ReadingGoal/DeleteReadingGoalModal';
-// import UpdateReadingGoalModal from '../ReadingGoal/UpdateReadingGoalModal';
+import UpdateReadingGoalModal from '../ReadingGoal/UpdateReadingGoalModal';
 
 import ProgressPageGoalWidget from './ProgressPageGoalWidget';
 import ProgressPageStreakWidget from './ProgressPageStreakWidget';
@@ -60,7 +60,7 @@ const ReadingProgressPage = () => {
 
               <div className={styles.manageGoalContainer}>
                 <DeleteReadingGoalModal />
-                {/* <UpdateReadingGoalModal readingGoal={readingGoal} /> */}
+                <UpdateReadingGoalModal readingGoal={readingGoal} />
               </div>
             </div>
           )}

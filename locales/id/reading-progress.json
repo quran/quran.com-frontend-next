@@ -1,4 +1,21 @@
 {
+    "delete-goal": {
+        "action": "Hapus Sasaran",
+        "confirmation": {
+            "action-text": "Saya mengerti konsekuensinya, hapus tujuan saya",
+            "confirmation-text": "hapus tujuan saya",
+            "instruction-text": "Harap ketik <strong> {{text}} <\/strong> untuk mengonfirmasi",
+            "subtitle": "Tindakan ini tidak bisa dibatalkan. Ini akan menghapus tujuan Anda secara permanen, dan kami akan berhenti melacak kemajuan Anda.",
+            "title": "Apa kamu yakin?"
+        },
+        "success": "Tujuan membaca Anda telah berhasil dihapus."
+    },
+    "edit-goal": {
+        "action": "Sunting Sasaran",
+        "subtitle": "Berhati-hatilah, kemajuan Anda karena tujuan Anda saat ini akan hilang.",
+        "success": "Tujuan membaca Anda telah berhasil diperbarui.",
+        "title": "Edit tujuan membaca Anda"
+    },
     "history": "Membaca Sejarah",
     "history-for": "Riwayat membaca untuk {{date}}",
     "manage-goal": "Kelola tujuan membaca Anda",
