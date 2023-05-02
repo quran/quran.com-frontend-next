@@ -53,19 +53,27 @@ const ProgressPageGoalWidget = ({
     );
   }
 
+  const getContent = () => {
+    if (readingGoal.isCompleted) {
+      return <p>{t('reading-goal:progress.goal-complete')}</p>;
+    }
+
+    if (isGoalDone) {
+      <p>{t('reading-goal:progress.complete')}</p>;
+    }
+
+    return (
+      <ReadingGoalAmount
+        readingGoal={readingGoal}
+        currentReadingDay={currentReadingDay}
+        context="progress_page"
+      />
+    );
+  };
+
   return (
     <div className={styles.widget}>
-      <div>
-        {isGoalDone ? (
-          <p>{t('reading-goal:goal-done.title')}</p>
-        ) : (
-          <ReadingGoalAmount
-            readingGoal={readingGoal}
-            currentReadingDay={currentReadingDay}
-            context="progress_page"
-          />
-        )}
-      </div>
+      <div>{getContent()}</div>
 
       <div className={styles.circularProgressbar}>
         <CircularProgressbar

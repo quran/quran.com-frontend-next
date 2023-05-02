@@ -5,6 +5,7 @@ export type ReadingGoal = {
   type: ReadingGoalType;
   targetAmount: string;
   duration?: number;
+  isCompleted: boolean;
   createdAt: Date;
   updatedAt: Date;
 };

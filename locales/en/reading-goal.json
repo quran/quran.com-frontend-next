@@ -67,6 +67,7 @@
         "title": "Here is a preview of your schedule"
     },
     "progress": {
+        "goal-complete": "Your whole goal is complete 🎉",
         "complete": "Today's goal is complete 🎉",
         "pages-goal": "read {{pages}} pages of the Quran",
         "range-goal": "read {{from}} to {{to}}",
