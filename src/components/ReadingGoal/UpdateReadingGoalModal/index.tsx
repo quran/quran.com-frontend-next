@@ -1,5 +1,5 @@
 /* eslint-disable max-lines */
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import { useSelector, shallowEqual } from 'react-redux';
@@ -9,6 +9,8 @@ import ReadingGoalInput from '../ReadingGoalInput';
 
 import styles from './UpdateReadingGoalModal.module.scss';
 
+import { validateReadingGoalData } from '@/components/ReadingGoalPage/utils/validator';
+import DataContext from '@/contexts/DataContext';
 import Button, { ButtonType, ButtonVariant } from '@/dls/Button/Button';
 import RadioGroup from '@/dls/Forms/RadioGroup/RadioGroup';
 import { RadioRootOrientation } from '@/dls/Forms/RadioGroup/Root';
@@ -64,6 +66,7 @@ const types = [
 
 const UpdateReadingGoalModal = ({ isDisabled, readingGoal }: UpdateReadingGoalButtonProps) => {
   const { t, lang } = useTranslation('reading-progress');
+  const chaptersData = useContext(DataContext);
   const [isModalVisible, setIsModalVisible] = useState(false);
 
   const quranFont = useSelector(selectQuranFont, shallowEqual);
@@ -170,6 +173,15 @@ const UpdateReadingGoalModal = ({ isDisabled, readingGoal }: UpdateReadingGoalBu
     logValueChange('edit_goal_duration', duration, value);
   };
 
+  const getIsUpdateDisabled = () => {
+    return !validateReadingGoalData(chaptersData, {
+      type,
+      pages,
+      seconds,
+      range,
+    });
+  };
+
   return (
     <>
       <Button onClick={onUpdateGoalClicked} isDisabled={isDisabled}>
@@ -257,6 +269,7 @@ const UpdateReadingGoalModal = ({ isDisabled, readingGoal }: UpdateReadingGoalBu
               variant={ButtonVariant.Outlined}
               className={styles.deleteButton}
               onClick={onUpdateClicked}
+              isDisabled={getIsUpdateDisabled()}
             >
               {t('edit-goal.action')}
             </Button>

@@ -11,6 +11,7 @@ import { useSWRConfig } from 'swr';
 import useReadingGoalReducer, { ReadingGoalTabProps } from './hooks/useReadingGoalReducer';
 import styles from './ReadingGoalPage.module.scss';
 import { logTabClick, logTabInputChange, logTabNextClick, TabKey, tabsArray } from './utils/tabs';
+import { validateReadingGoalData } from './utils/validator';
 
 import DataContext from '@/contexts/DataContext';
 import Button, { ButtonSize } from '@/dls/Button/Button';
@@ -30,8 +31,6 @@ import { getMushafId } from '@/utils/api';
 import { addReadingGoal } from '@/utils/auth/api';
 import { makeStreakUrl } from '@/utils/auth/apiPaths';
 import { logFormSubmission } from '@/utils/eventLogger';
-import { isValidPageId, isValidVerseKey } from '@/utils/validator';
-import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
 
 const ReadingGoalOnboarding: React.FC = () => {
   const { t } = useTranslation();
@@ -124,47 +123,16 @@ const ReadingGoalOnboarding: React.FC = () => {
   };
 
   const getIsNextDisabled = () => {
-    const SECONDS_LIMIT = 4 * 60 * 60; // 4 hours
-    const MIN_SECONDS = 60; // 1 minute
-
     // if the user is on the examples tab and hasn't selected an example, disable the next button
     if (Tab.key === TabKey.ExamplesTab && !state.exampleKey) return true;
 
     if (Tab.key === TabKey.AmountTab) {
-      // if the user selected a pages goal and didn't enter a valid amount of pages, disable the next button
-      if (state.type === ReadingGoalType.PAGES && !isValidPageId(state.pages)) return true;
-
-      // if the user selected a time goal and didn't enter a valid amount of seconds, disable the next button
-      // in theory, this should never happen because the input is a select, but just in case
-      if (
-        state.type === ReadingGoalType.TIME &&
-        (Number.isNaN(state.seconds) ||
-          state.seconds > SECONDS_LIMIT ||
-          state.seconds < MIN_SECONDS)
-      ) {
-        return true;
-      }
-
-      // if the user selected a range goal and didn't enter a valid range, disable the next button
-      if (state.type === ReadingGoalType.RANGE) {
-        if (!state.rangeStartVerse || !state.rangeEndVerse) return true;
-        if (
-          !isValidVerseKey(chaptersData, state.rangeStartVerse) ||
-          !isValidVerseKey(chaptersData, state.rangeEndVerse)
-        ) {
-          return true;
-        }
-
-        // check if the starting verse key is greater than the ending verse key
-        const [startingChapter, startingVerse] = getVerseAndChapterNumbersFromKey(
-          state.rangeStartVerse,
-        );
-        const [endingChapter, endingVerse] = getVerseAndChapterNumbersFromKey(state.rangeEndVerse);
-
-        if (startingChapter === endingChapter && Number(startingVerse) > Number(endingVerse)) {
-          return true;
-        }
-      }
+      return !validateReadingGoalData(chaptersData, {
+        type: state.type,
+        pages: state.pages,
+        seconds: state.seconds,
+        range: { startVerse: state.rangeStartVerse, endVerse: state.rangeEndVerse },
+      });
     }
 
     return false;
