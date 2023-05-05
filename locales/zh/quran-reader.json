@@ -1,12 +1,17 @@
 {
     "add-collection": "添加收藏",
     "advanced-copy": "高级复制",
+    "aria": {
+        "read-ayah-refls": "阅读相关参悟",
+        "read-tafsirs": "阅读 Ayah Tafsirs"
+    },
     "ayatul-kursi": "阿叶提库尔西",
     "back-to-ayah": "回到阿亚",
     "copy-arabic": "阿拉伯文（纳斯赫体）",
     "copy-footnote-q": "还要复制脚注？",
     "copy-success": "文本已成功复制到剪贴板中。",
     "copy-text": "复制文本",
+    "copy-verse": "复制文本",
     "cpy-link": "复制链接",
     "current-verse": "当前节文",
     "download-copy": "如果你想下载文本文件。",
@@ -36,6 +41,7 @@
     "prev-rub": "以前的 Rub el Hizb",
     "prev-surah": "上一章",
     "query-param-message": "您正在使用<0> <\/0>预览设置。 <1>关闭预览设置<\/1>或<2>保存预览设置<\/2>",
+    "ramadan-of-reflection": "加入 QuranReflect “反思的斋月”",
     "read-more-quran-reflect": "阅读更多关于古兰经的参悟",
     "referencing": "参考",
     "reflection-disclaimer": "这些参悟不代表 Quran.com 的观点，不应断章取义",
@@ -43,6 +49,7 @@
     "reflections-desc": "阅读并分享《古兰经》对《古兰经》{{surahName}} 的 Ayah {{ayahNumber}}的{{surahName}}",
     "remove-bookmark": "删除书签",
     "removed-from": "从{{collectionName}}中移除",
+    "revelation-order-notice": "注意：您正在按照启示的顺序浏览《古兰经》。 <link>单击此处<\/link>恢复默认排序。",
     "rub-beginning": "Rub el Hizb 的开始",
     "save-to": "存到...",
     "saved-to": "已保存到{{collectionName}}",

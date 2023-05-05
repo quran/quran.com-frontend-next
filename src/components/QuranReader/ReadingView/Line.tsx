@@ -12,7 +12,7 @@ import ChapterHeader from '@/components/chapters/ChapterHeader';
 import VerseText from '@/components/Verse/VerseText';
 import useScroll, { SMOOTH_SCROLL_TO_CENTER } from '@/hooks/useScrollToElement';
 import { selectEnableAutoScrolling } from '@/redux/slices/AudioPlayer/state';
-import { selectWordByWordPreferences } from '@/redux/slices/QuranReader/readingPreferences';
+import { selectInlineDisplayWordByWordPreferences } from '@/redux/slices/QuranReader/readingPreferences';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
 import { getWordDataByLocation } from '@/utils/verse';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
@@ -40,7 +40,7 @@ const Line = ({ lineKey, words, isBigTextLayout, pageIndex, lineIndex }: LinePro
 
   const enableAutoScrolling = useSelector(selectEnableAutoScrolling, shallowEqual);
   const { showWordByWordTranslation, showWordByWordTransliteration } = useSelector(
-    selectWordByWordPreferences,
+    selectInlineDisplayWordByWordPreferences,
     shallowEqual,
   );
 

@@ -4,13 +4,17 @@ import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 
+import { getChapterIdBySlug, getChapterVerses, getPagesLookup } from '@/api';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import QuranReader from '@/components/QuranReader';
+import { getChapterOgImageUrl } from '@/lib/og';
+import Error from '@/pages/_error';
 import { getQuranReaderStylesInitialState } from '@/redux/defaultSettings/util';
 import { getDefaultWordFields, getMushafId } from '@/utils/api';
 import { getAllChaptersData, getChapterData } from '@/utils/chapter';
 import { getLanguageAlternates, toLocalizedNumber, toLocalizedVersesRange } from '@/utils/locale';
 import { getCanonicalUrl, getVerseNavigationUrl } from '@/utils/navigation';
+import getPlainTranslationText from '@/utils/plainTranslationText';
 import {
   REVALIDATION_PERIOD_ON_ERROR_SECONDS,
   ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
@@ -22,9 +26,6 @@ import {
   isValidVerseNumber,
 } from '@/utils/validator';
 import { generateVerseKeysBetweenTwoVerseKeys } from '@/utils/verseKeys';
-import { getChapterIdBySlug, getChapterVerses, getPagesLookup } from 'src/api';
-import DataContext from 'src/contexts/DataContext';
-import Error from 'src/pages/_error';
 import { ChapterResponse, VersesResponse } from 'types/ApiResponses';
 import ChaptersData from 'types/ChaptersData';
 import MetaData from 'types/MetaData';
@@ -38,13 +39,7 @@ type VerseProps = {
   chaptersData?: ChaptersData;
 };
 
-const Verse: NextPage<VerseProps> = ({
-  chapterResponse,
-  versesResponse,
-  hasError,
-  isVerse,
-  chaptersData,
-}) => {
+const Verse: NextPage<VerseProps> = ({ chapterResponse, versesResponse, hasError, isVerse }) => {
   const { t, lang } = useTranslation('common');
   const {
     query: { verseId },
@@ -52,25 +47,33 @@ const Verse: NextPage<VerseProps> = ({
   if (hasError || !versesResponse.verses.length) {
     return <Error statusCode={500} />;
   }
+
   const path = getVerseNavigationUrl(chapterResponse.chapter.slug, verseId as string);
   return (
-    <DataContext.Provider value={chaptersData}>
+    <>
       <NextSeoWrapper
         title={`${t('surah')} ${chapterResponse.chapter.transliteratedName} - ${
           isVerse
             ? toLocalizedNumber(Number(verseId), lang)
             : toLocalizedVersesRange(verseId as string, lang)
         }`}
+        image={getChapterOgImageUrl({
+          chapterId: chapterResponse.chapter.id,
+          verseNumber: isVerse ? Number(verseId) : undefined,
+          locale: lang,
+        })}
+        imageWidth={1200}
+        imageHeight={630}
         canonical={getCanonicalUrl(lang, path)}
         languageAlternates={getLanguageAlternates(path)}
-        description={versesResponse.verses[0].textImlaeiSimple}
+        description={getOgDescription(versesResponse, isVerse, lang)}
       />
       <QuranReader
         initialData={versesResponse}
         id={chapterResponse.chapter.id}
         quranReaderDataType={isVerse ? QuranReaderDataType.Verse : QuranReaderDataType.VerseRange}
       />
-    </DataContext.Provider>
+    </>
   );
 };
 
@@ -172,6 +175,40 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   }
 };
 
+// Generates the description and open graph description for the page.
+const getOgDescription = (versesResponse: VersesResponse, isVerse: boolean, lang: string) => {
+  let ogText = '';
+
+  // Single verse pages
+  if (isVerse) {
+    const verse = versesResponse.verses[0];
+    ogText =
+      verse?.translations?.length > 0
+        ? getPlainTranslationText(verse?.translations[0]?.text)
+        : verse?.textImlaeiSimple;
+  }
+
+  // For verse ranges, return the first 3 verses in the format of `(verse number) verse translation text`
+  else {
+    const firstThreeVerses = versesResponse.verses.slice(0, 3);
+    ogText = firstThreeVerses
+      .map((verse) => {
+        return `(${toLocalizedNumber(Number(verse.verseNumber), lang)}) ${
+          verse?.translations?.length > 0
+            ? getPlainTranslationText(verse?.translations[0]?.text)
+            : verse?.textImlaeiSimple
+        }`;
+      })
+      .join(' ');
+  }
+
+  // Check if the text is longer than 300 characters, if it is, trim it and add ellipsis.
+  if (ogText.length > 300) {
+    ogText = `${ogText.substring(0, 297)}...`;
+  }
+
+  return ogText;
+};
 export const getStaticPaths: GetStaticPaths = async () => ({
   paths: [], // no pre-rendered chapters at build time.
   fallback: 'blocking', // will server-render pages on-demand if the path doesn't exist.

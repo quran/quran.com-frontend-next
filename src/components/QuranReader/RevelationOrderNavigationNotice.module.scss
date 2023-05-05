@@ -1,0 +1,29 @@
+@use "src/styles/breakpoints";
+
+.sideDrawerViewContainer {
+  margin-block-end: var(--spacing-medium);
+  padding: var(--spacing-small);
+  border: 1px var(--color-borders-hairline) solid;
+  border-radius: var(--border-radius-rounded);
+}
+
+.endOfScrollingViewContainer {
+  text-align: center;
+
+  // Matches the Quran Reader's container width
+  max-width: 100%;
+  @include breakpoints.tablet {
+    max-width: 80%;
+  }
+
+  margin: var(--spacing-medium) auto;
+}
+
+.link {
+  color: var(--color-text-link);
+  text-decoration: underline;
+
+  &:hover {
+    cursor: pointer;
+  }
+}

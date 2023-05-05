@@ -31,9 +31,7 @@
         "msg-close": "پیغام بند کریں۔",
         "nav-drawer-open": "نیویگیشن دراز کھولیں۔",
         "play-surah": "سورہ {{surahName}} کھیلیں",
-        "read-ayah-refls": "آیات مظاہر پڑھیں",
         "select-lng": "زبان منتخب کریں۔",
-        "share-ayah": "شیئر کریں آیت",
         "sidebar-nav-close": "نیویگیشن سائڈبار بند کریں۔"
     },
     "audio": {
@@ -42,16 +40,21 @@
             "on": "ہاں",
             "title": "آٹو سکرول"
         },
+        "displaying": "دکھانا",
+        "exp-tip": "<span>کے تحت دکھائے گئے مواد کو تبدیل کریں<\/span><br><\/br> <boldSpan>ترتیبات<\/boldSpan> > <boldSpan>لفظ بہ لفظ<\/boldSpan>",
+        "exp-tip-no-select": "<span>ٹول ٹپ ڈسپلے کے آپشن پر نشان لگائیں اور <br><\/br> ترجمہ اور\/یا نقل حرفی کا اختیار منتخب کریں<\/span><br><\/br><span> کے تحت <\/span><boldSpan>ترتیبات<\/boldSpan> > <boldSpan>لفظ بہ لفظ<\/boldSpan><span>, to<\/span><br><\/br> <span>اس خصوصیت کو فعال کرنے کے لیے.<\/span>",
+        "experience": "تجربہ",
         "play": "آڈیو چلائیں۔",
         "playback-normal": "نارمل",
         "playback-speed": "پلے بیک کی رفتار",
         "playback-speed-unit": "ایکس",
         "player": {
-            "close": "آڈیو پلیئر بند کریں۔",
+            "close-audio-player": "آڈیو پلیئر بند کریں۔",
             "currently-playing": "آپ فی الحال کھیل رہے ہیں۔",
             "delay-verse": "آیت کے درمیان وقفہ",
             "download": "ڈاؤن لوڈ کریں",
             "full-surah": "مکمل سورہ",
+            "manage-repeat-settings": "دہرانے کی ترتیبات کا نظم کریں۔",
             "mismatch": "اگر آپ اس کے بجائے {{currentReadingChapter}} کھیلنا چاہتے ہیں تو \"Start Over\" پر کلک کریں۔",
             "pause": "توقف",
             "pause-audio": "آڈیو موقوف کریں۔",
@@ -72,6 +75,7 @@
         },
         "repeat-moved": "دہرائی جانے والی ترتیبات آڈیو پلیئر میں منتقل ہو گئی ہیں۔ ان تک رسائی کے لیے <0> <\/0> آئیکن پر کلک کریں۔",
         "select-reciter": "قاری منتخب کریں.",
+        "speed": "رفتار",
         "title": "آڈیو"
     },
     "ayah": "آیہ",
@@ -109,7 +113,10 @@
     },
     "default-description": "قرآن مجید کا ایک سادہ اور آسان انٹرفیس میں متعدد زبانوں میں ترجمہ کیا گیا ہے۔",
     "developers": "ڈویلپرز",
+    "display": "ڈسپلے",
     "donate": "عطیہ کریں۔",
+    "donate_monthly": "ماہانہ عطیہ کریں۔",
+    "donate_once": "ایک بار عطیہ کریں۔",
     "email-verification": {
         "check-spam": "تصدیقی ای میل موصول نہیں ہوا؟ اپنا اسپام ان باکس چیک کریں۔",
         "email-sent": "ہم نے ابھی <strong> {{email}} <\/strong> پر ایک ای میل بھیجی ہے۔",
@@ -133,7 +140,7 @@
         "code_v2": "کنگ فہد کمپلیکس V2",
         "font-size": "حرف کا سائز",
         "lines": "سطریں",
-        "qcf-desc": "کنگ فہد کمپلیکس کے فونٹس اعلیٰ معیار فراہم کے ہیں لیکن لوڈ ہونے میں زیادہ وقت لیتے ہیں۔",
+        "qcf-desc": "کنگ فہد کمپلیکس (V1 اور V2) کے فونٹس اعلیٰ معیار فراہم کے ہیں لیکن لوڈ ہونے میں زیادہ وقت لیتے ہیں۔",
         "qpc_uthmani_hafs": "QPC عثمانی حفص",
         "quran-font": "قرآن کا فونٹ",
         "tajweed": "تجوید",
@@ -153,6 +160,10 @@
         "lastName": "آخری نام"
     },
     "from": "سے",
+    "fundraising-sticky-banner": {
+        "cta": "عطیہ کریں۔",
+        "title": "اس رمضان میں Quran.com کو سپورٹ کریں۔"
+    },
     "fundraising": {
         "description": "ماہانہ عطیات قرآن ڈاٹ کام کو بہتر بنانے اور آپریشنز کو برقرار رکھنے میں ہماری مدد کرتے ہیں تاکہ ہم فنڈ ریزنگ پر کم اور اثر پیدا کرنے پر زیادہ توجہ دیں۔",
         "learn-more": "اورجانیے",
@@ -161,6 +172,7 @@
     "help": "مدد",
     "hizb": "حزب",
     "home": "گھر",
+    "inline": "ترتیب سے",
     "input": {
         "clear": "صاف"
     },
@@ -171,6 +183,8 @@
     "loading": "لوڈ ہو رہا ہے۔",
     "login": "لاگ ان کریں",
     "logout": "لاگ آوٹ",
+    "meccan": "مکہ",
+    "medinan": "مدینہ",
     "menu": "مینو",
     "mobile-apps": "موبائل ایپس",
     "mode": "موڈ",
@@ -186,6 +200,7 @@
     "page": "صفحہ",
     "pages": "صفحات",
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} کی {{totalNumberOfResults}} تلاش کے نتائج",
+    "pbuh": "آپ پر اللہ کی رحمتیں نازل ہوں۔",
     "popular-links": "مقبول لنکس",
     "popup": {
         "footnote": "ماہانہ عطیات ہمیں فنڈ ریزنگ پر کم توجہ مرکوز کرنے کی اجازت دیتے ہیں۔",
@@ -206,12 +221,15 @@
         "reading": "پڑہائی",
         "translation": "ترجمہ"
     },
+    "recitation": "تلاوت",
     "reciter": "تلاوت کرنے والا",
+    "reciter-summary": "لفظ بہ لفظ تلاوت کرنے والا: <span> {{reciterName}} <\/span> ۔ کسی لفظ کی تلاوت سننے کے لیے اس پر کلک کریں۔",
     "reciters": "تلاوت کرنے والے",
     "reflect": "عکاسی کرنا",
     "remove": "دور",
     "rename": "نام تبدیل کریں۔",
     "retry": "دوبارہ کوشش کریں۔",
+    "revelation_order": "وحی کا حکم",
     "rub": "راب ال حزب",
     "save-to-collection": "مجموعہ میں محفوظ کریں۔",
     "search-for": "'{{searchQuery}}' تلاش کریں",
@@ -292,6 +310,7 @@
     "to": "کو",
     "tooltip": "ٹول ٹِپ",
     "tooltip-trans-lang": "ٹول ٹپ کی زبان",
+    "trans-lang": "ترجمہ کی زبان",
     "translation": "ترجمہ",
     "translations": "ترجمے",
     "transliteration": "تلفظ",
@@ -318,6 +337,7 @@
         "voice-search-powered-by": "آواز کی تلاش بذریعہ تقویت یافتہ"
     },
     "wbw": "لفظ بہ لفظ",
+    "wbw-lang-summary": "لفظ بہ لفظ ترجمہ ماخذ: <link> {{source}} <\/link> ۔ یہ ماخذ آیت کے ترجمے کے انتخاب سے آزاد ہے۔",
     "wbw-trans-lang": "لفظ بہ لفظ زبان",
     "wbw-translation": "لفظ بہ لفظ ترجمہ",
     "wbw-transliteration": "لفظ بہ لفظ نقل",

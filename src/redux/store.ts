@@ -22,6 +22,7 @@ import commandBarPersistConfig from './slices/CommandBar/persistConfig';
 import commandBar from './slices/CommandBar/state';
 import defaultSettings from './slices/defaultSettings';
 import navbar from './slices/navbar';
+import persistGateHydration from './slices/persistGateHydration';
 import bookmarks from './slices/QuranReader/bookmarks';
 import contextMenu from './slices/QuranReader/contextMenu';
 import fontFaces from './slices/QuranReader/font-faces';
@@ -33,6 +34,7 @@ import sidebarNavigation from './slices/QuranReader/sidebarNavigation';
 import quranReaderStyles from './slices/QuranReader/styles';
 import tafsirs from './slices/QuranReader/tafsirs';
 import translations from './slices/QuranReader/translations';
+import revelationOrder from './slices/revelationOrder';
 import search from './slices/Search/search';
 import session from './slices/session';
 import theme from './slices/theme';
@@ -42,7 +44,7 @@ import SliceName from './types/SliceName';
 
 const persistConfig = {
   key: 'root',
-  version: 22,
+  version: 30,
   storage,
   migrate: createMigrate(migrations, {
     debug: process.env.NEXT_PUBLIC_VERCEL_ENV === 'development',
@@ -62,6 +64,7 @@ const persistConfig = {
     SliceName.SESSION,
     SliceName.BOOKMARKS,
     SliceName.USER_DATA_SYNC,
+    SliceName.REVELATION_ORDER,
   ], // Reducers defined here will be have their values saved in local storage and persist across sessions. See: https://github.com/rt2zz/redux-persist#blacklist--whitelist
 };
 
@@ -88,6 +91,8 @@ export const rootReducer = combineReducers({
   banner,
   session,
   userDataSync,
+  persistGateHydration,
+  revelationOrder,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

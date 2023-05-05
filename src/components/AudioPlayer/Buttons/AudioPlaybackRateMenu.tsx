@@ -3,7 +3,6 @@ import { useCallback, useContext } from 'react';
 import { useSelector } from '@xstate/react';
 import useTranslation from 'next-translate/useTranslation';
 
-import { playbackRates } from '@/components/Navbar/SettingsDrawer/AudioSection';
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import Spinner from '@/dls/Spinner/Spinner';
 import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
@@ -13,6 +12,8 @@ import { logButtonClick, logValueChange } from '@/utils/eventLogger';
 import { toLocalizedNumber } from '@/utils/locale';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
+
+const playbackRates = [0.25, 0.5, 0.75, 1, 1.25, 1.5, 1.75, 2];
 
 const AudioPlaybackRateMenu = ({ onBack }) => {
   const { t, lang } = useTranslation('common');

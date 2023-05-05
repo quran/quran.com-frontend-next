@@ -8,6 +8,7 @@ import styles from './SurahPreviewRow.module.scss';
 import ChapterIconContainer, {
   ChapterIconsSize,
 } from '@/components/chapters/ChapterIcon/ChapterIconContainer';
+import Spinner from '@/dls/Spinner/Spinner';
 import { toLocalizedNumber } from '@/utils/locale';
 
 type SurahPreviewRowProps = {
@@ -17,6 +18,7 @@ type SurahPreviewRowProps = {
   description: string;
   chapterId: number;
   isMinimalLayout?: boolean;
+  isLoading?: boolean;
 };
 const SurahPreviewRow = ({
   surahName,
@@ -25,12 +27,14 @@ const SurahPreviewRow = ({
   description,
   chapterId,
   isMinimalLayout = false,
+  isLoading = false,
 }: SurahPreviewRowProps) => {
   const { lang } = useTranslation('home');
   const localizedSurahNumber = useMemo(
     () => toLocalizedNumber(surahNumber, lang),
     [surahNumber, lang],
   );
+
   if (isMinimalLayout) {
     return (
       <div className={styles.container}>
@@ -56,13 +60,14 @@ const SurahPreviewRow = ({
     <div className={styles.container}>
       <div className={styles.left}>
         <div className={styles.surahNumber}>
-          <span>{surahNumber}</span>
+          <span>{localizedSurahNumber}</span>
         </div>
         <div className={styles.surahNameContainer}>
           <div className={styles.surahName}>{surahName}</div>
           <div className={styles.translatedSurahName}>{translatedSurahName}</div>
         </div>
       </div>
+      {isLoading && <Spinner />}
       <div className={styles.right}>
         <div>
           <ChapterIconContainer chapterId={chapterId.toString()} hasSurahPrefix={false} />

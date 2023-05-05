@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 /* eslint-disable react-func/max-lines-per-function */
 import React from 'react';
 
@@ -5,8 +6,11 @@ import { NextPage, GetStaticProps, GetStaticPaths } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 import { SWRConfig } from 'swr';
 
+import { fetcher } from '@/api';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import ReflectionBodyContainer from '@/components/QuranReader/ReflectionView/ReflectionBodyContainer';
+import { getChapterOgImageUrl } from '@/lib/og';
+import Error from '@/pages/_error';
 import layoutStyle from '@/pages/index.module.scss';
 import {
   getQuranReaderStylesInitialState,
@@ -28,9 +32,6 @@ import {
 } from '@/utils/staticPageGeneration';
 import { isValidVerseKey } from '@/utils/validator';
 import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
-import { fetcher } from 'src/api';
-import DataContext from 'src/contexts/DataContext';
-import Error from 'src/pages/_error';
 import { ChapterResponse } from 'types/ApiResponses';
 import ChaptersData from 'types/ChaptersData';
 
@@ -48,7 +49,6 @@ const SelectedAyahReflection: NextPage<AyahReflectionProp> = ({
   chapter,
   verseNumber,
   chapterId,
-  chaptersData,
   fallback,
 }) => {
   const { t, lang } = useTranslation('quran-reader');
@@ -58,12 +58,19 @@ const SelectedAyahReflection: NextPage<AyahReflectionProp> = ({
 
   const navigationUrl = getVerseReflectionNavigationUrl(`${chapterId}:${verseNumber}`);
   return (
-    <DataContext.Provider value={chaptersData}>
+    <>
       <NextSeoWrapper
         title={`${t('common:reflect')} ${chapter.chapter.transliteratedName} - ${toLocalizedNumber(
           Number(verseNumber),
           lang,
         )}`}
+        image={getChapterOgImageUrl({
+          chapterId,
+          verseNumber,
+          locale: lang,
+        })}
+        imageWidth={1200}
+        imageHeight={630}
         canonical={getCanonicalUrl(lang, navigationUrl)}
         languageAlternates={getLanguageAlternates(navigationUrl)}
         description={t('reflections-desc', {
@@ -92,7 +99,7 @@ const SelectedAyahReflection: NextPage<AyahReflectionProp> = ({
           </div>
         </div>
       </SWRConfig>
-    </DataContext.Provider>
+    </>
   );
 };
 

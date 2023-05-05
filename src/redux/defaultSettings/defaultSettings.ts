@@ -12,6 +12,7 @@ import {
   WordClickFunctionality,
   MushafLines,
   QuranFont,
+  WordByWordDisplay,
 } from 'types/QuranReader';
 import Reciter from 'types/Reciter';
 
@@ -52,24 +53,20 @@ const QURAN_READER_STYLES_INITIAL_STATE: QuranReaderStyles = {
   tafsirFontScale: 3,
   quranTextFontScale: 3,
   translationFontScale: 3,
+  wordByWordFontScale: 3,
   quranFont: QuranFont.MadaniV1,
   mushafLines: MushafLines.SixteenLines,
   isUsingDefaultFont: true,
 };
 
-const DEFAULT_WBW_TRANSLATION = 20;
-const DEFAULT_WBW_TRANSLITERATION = 12;
 const DEFAULT_WBW_LOCALE = 'en';
 
 const READING_PREFERENCES_INITIAL_STATE: ReadingPreferences = {
   readingPreference: ReadingPreference.Translation,
-  showWordByWordTranslation: false,
-  selectedWordByWordTranslation: DEFAULT_WBW_TRANSLATION,
-  showWordByWordTransliteration: false,
-  selectedWordByWordTransliteration: DEFAULT_WBW_TRANSLITERATION,
   selectedWordByWordLocale: DEFAULT_WBW_LOCALE,
   isUsingDefaultWordByWordLocale: true,
-  showTooltipFor: [WordByWordType.Translation],
+  wordByWordContentType: [WordByWordType.Translation],
+  wordByWordDisplay: [WordByWordDisplay.TOOLTIP],
   wordClickFunctionality: WordClickFunctionality.PlayAudio,
 };
 

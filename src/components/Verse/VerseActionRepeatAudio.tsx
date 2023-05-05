@@ -10,6 +10,7 @@ import RepeatAudioModal from '@/components/AudioPlayer/RepeatAudioModal/RepeatAu
 import RepeatIcon from '@/icons/repeat.svg';
 import { logEvent } from '@/utils/eventLogger';
 import { fakeNavigate } from '@/utils/navigation';
+import { logButtonClick } from '@/utils/eventLogger';
 import { getChapterNumberFromKey } from '@/utils/verse';
 
 type VerseActionRepeatAudioProps = {
@@ -25,6 +26,7 @@ const VerseActionRepeatAudio = ({
   onActionTriggered,
   isTranslationView,
 }: VerseActionRepeatAudioProps) => {
+
   const { t } = useTranslation('common');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const chapterId = getChapterNumberFromKey(verseKey);
@@ -46,6 +48,15 @@ const VerseActionRepeatAudio = ({
     }
   };
 
+  const onItemClicked = () => {
+    if (isTranslationView) {
+      logButtonClick('translation_view_verse_actions_menu_repeat');
+    } else {
+      logButtonClick('reading_view_verse_actions_menu_repeat');
+    }
+    setIsModalOpen(true);
+  };
+
   return (
     <>
       <RepeatAudioModal
@@ -55,12 +66,7 @@ const VerseActionRepeatAudio = ({
         isOpen={isModalOpen}
         onClose={onModalClose}
       />
-      <PopoverMenu.Item
-        icon={<RepeatIcon />}
-        onClick={() => {
-          setIsModalOpen(true);
-        }}
-      >
+      <PopoverMenu.Item icon={<RepeatIcon />} onClick={onItemClicked}>
         {t('audio.player.repeat-1-verse')}
       </PopoverMenu.Item>
     </>

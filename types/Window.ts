@@ -8,5 +8,6 @@ declare global {
     wordByWordAudioPlayerEl: HTMLAudioElement;
     webkitAudioContext: typeof AudioContext;
     gtag: any;
+    isPersistGateHydrated?: boolean;
   }
 }

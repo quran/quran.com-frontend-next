@@ -4,7 +4,6 @@ import { useContext } from 'react';
 import { useSelector } from '@xstate/react';
 import useTranslation from 'next-translate/useTranslation';
 
-import Button from '../dls/Button/Button';
 import Spinner from '../dls/Spinner/Spinner';
 import { getRandomCuratedStationId } from '../Radio/curatedStations';
 import { StationType } from '../Radio/types';
@@ -12,6 +11,7 @@ import { StationType } from '../Radio/types';
 import styles from './PlayRadioButton.module.scss';
 import RadioInformation from './RadioInformation';
 
+import Button from '@/dls/Button/Button';
 import PauseIcon from '@/icons/pause.svg';
 import PlayIcon from '@/icons/play-arrow.svg';
 import { logEvent } from '@/utils/eventLogger';

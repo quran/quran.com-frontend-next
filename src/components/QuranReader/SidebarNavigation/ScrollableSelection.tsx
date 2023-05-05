@@ -7,7 +7,8 @@ import styles from './SidebarNavigation.module.scss';
 
 import Link from '@/dls/Link/Link';
 import { SCROLL_TO_NEAREST_ELEMENT, useScrollToElement } from '@/hooks/useScrollToElement';
-import { logEmptySearchResults } from '@/utils/eventLogger';
+import SearchQuerySource from '@/types/SearchQuerySource';
+import { logEmptySearchResults, logTextSearchQuery } from '@/utils/eventLogger';
 
 const ScrollableSelection = ({
   items,
@@ -28,8 +29,19 @@ const ScrollableSelection = ({
 
   useEffect(() => {
     if (!filteredItems.length) {
-      // eslint-disable-next-line i18next/no-literal-string
-      logEmptySearchResults(searchQuery, `sidebar_navigation_${isJuz ? 'juz' : 'page'}_list`);
+      logEmptySearchResults(
+        searchQuery,
+        isJuz
+          ? SearchQuerySource.SidebarNavigationJuzsList
+          : SearchQuerySource.SidebarNavigationPagesList,
+      );
+    } else {
+      logTextSearchQuery(
+        searchQuery,
+        isJuz
+          ? SearchQuerySource.SidebarNavigationJuzsList
+          : SearchQuerySource.SidebarNavigationPagesList,
+      );
     }
   }, [searchQuery, filteredItems, isJuz]);
 

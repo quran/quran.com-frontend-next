@@ -31,9 +31,7 @@
         "msg-close": "إغلاق الرسالة",
         "nav-drawer-open": "افتح درج التنقل",
         "play-surah": "تشغيل السورة {{surahName}}",
-        "read-ayah-refls": "اقرأ تأملات آية",
         "select-lng": "اختر اللغة",
-        "share-ayah": "مشاركة آية",
         "sidebar-nav-close": "إغلاق شريط التنقل الجانبي"
     },
     "audio": {
@@ -42,16 +40,21 @@
             "on": "تشغيل",
             "title": "تحريك تلقائي"
         },
+        "displaying": "العرض",
+        "exp-tip": "<span>تغيير المحتوى المعروض ضمن<\/span><br><\/br> <boldSpan>الإعدادات<\/boldSpan> > <boldSpan>كلمة بكلمة<\/boldSpan>",
+        "exp-tip-no-select": "<span>حدد خيار عرض تلميح الأداة وحدد <br><\/br> الترجمة و \/ أو خيار كتابة لغة بأحرف لغة أخرى<\/span><br><\/br><span> ضمن <\/span><boldSpan>الإعدادات<\/boldSpan> > <boldSpan>كلمة بكلمة<\/boldSpan><span>، إلى <\/span><br><\/br> <span>تمكين هذه الميزة.<\/span>",
+        "experience": "النمط",
         "play": "تشغيل الصوت",
         "playback-normal": "طبيعي",
         "playback-speed": "سرعة التشغيل",
         "playback-speed-unit": "x",
         "player": {
-            "close": "أغلق مشغل الصوت",
+            "close-audio-player": "أغلق مشغل الصوت",
             "currently-playing": "أنت تستمع حاليا",
             "delay-verse": "الفاصل بين الآيات",
             "download": "تحميل",
-            "full-surah": "سورة كاملة",
+            "full-surah": "السورة كاملة",
+            "manage-repeat-settings": "إدارة إعدادات التكرار",
             "mismatch": "انقر فوق \"البدء من جديد\" إذا كنت ترغب في تشغيل {{currentReadingChapter}} بدلاً من ذلك",
             "pause": "إيقاف",
             "pause-audio": "إيقاف الصوت",
@@ -72,6 +75,7 @@
         },
         "repeat-moved": "تم نقل إعدادات التكرار إلى مشغل الصوت. انقر فوق <0> <\/0> للوصول إليها",
         "select-reciter": "حدد القارئ",
+        "speed": "السرعة",
         "title": "الصوت"
     },
     "ayah": "آية",
@@ -109,7 +113,10 @@
     },
     "default-description": "القرآن وترجمة معانيه إلى العديد من اللغات في واجهة بسيطة وسهلة",
     "developers": "المطورون",
+    "display": "عرض",
     "donate": "تبرع",
+    "donate_monthly": "تبرع شهريا",
+    "donate_once": "تبرع مرة واحدة",
     "email-verification": {
         "check-spam": "ألم تتلق رسالة التحقق؟ تحقق من البريد الإلكتروني العشوائي",
         "email-sent": "لقد أرسلنا للتو بريدًا إلكترونيًا إلى <strong> {{email}} <\/strong>",
@@ -133,7 +140,7 @@
         "code_v2": "مجمع الملك فهد الإصدار 2",
         "font-size": "حجم الخط",
         "lines": "الأسطر",
-        "qcf-desc": "توفر خطوط مجمع الملك فهد الإصدارين 1 و 2 جودة أعلى ولكنها تستغرق وقتًا أطول للتحميل.",
+        "qcf-desc": "توفر خطوط مجمع الملك فهد (الإصدارين 1 و 2) جودة أعلى ولكنها تستغرق وقتًا أطول للتحميل.",
         "qpc_uthmani_hafs": "خط الرسم العثماني - حفص - مجمع الملك فهد",
         "quran-font": "خط القرآن",
         "tajweed": "التجويد",
@@ -153,6 +160,10 @@
         "lastName": "الاسم الأخير"
     },
     "from": "من",
+    "fundraising-sticky-banner": {
+        "cta": "تبرع",
+        "title": "ادعم قرآن دوت كوم في رمضان"
+    },
     "fundraising": {
         "description": "تساعدنا التبرعات الشهرية على تحسين موقع قرآن دوت كوم والحفاظ على العمليات، لذا فإننا نركز بشكل أقل على جمع التبرعات وأكثر على إحداث التأثير.",
         "learn-more": "اعرف أكثر",
@@ -161,6 +172,7 @@
     "help": "مساعدة",
     "hizb": "حزب",
     "home": "الصفحة الرئيسة",
+    "inline": "في النسق",
     "input": {
         "clear": "مسح"
     },
@@ -171,8 +183,10 @@
     "loading": "التحميل جارٍ",
     "login": "تسجيل الدخول",
     "logout": "تسجيل الخروج",
+    "meccan": "مكية",
+    "medinan": "مدنية",
     "menu": "القائمة",
-    "mobile-apps": "تطبيقات الموبايل",
+    "mobile-apps": "تطبيقات المحمول",
     "mode": "الوضع",
     "more": "المزيد",
     "navigate": "التنقل",
@@ -186,6 +200,7 @@
     "page": "صفحة",
     "pages": "الصفحات",
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} من {{totalNumberOfResults}} نتيجة للبحث",
+    "pbuh": "صلى الله عليه وسلم",
     "popular-links": "روابط شائعة",
     "popup": {
         "footnote": "تتيح لنا التبرعات الشهرية التركيز بشكل أقل على جمع التبرعات",
@@ -206,12 +221,15 @@
         "reading": "القراءة",
         "translation": "الترجمة"
     },
+    "recitation": "التلاوة",
     "reciter": "القارئ",
+    "reciter-summary": "قارئ كلمة بكلمة: <span> {{reciterName}} <\/span> . اضغط على كلمة للاستماع إلى تلاوتها.",
     "reciters": "القراء",
     "reflect": "تدبر",
     "remove": "إزالة",
     "rename": "إعادة تسمية",
     "retry": "أعد المحاولة",
+    "revelation_order": "ترتيب نزول الوحي",
     "rub": "ربع الحزب",
     "save-to-collection": "حفظ في المجموعة",
     "search-for": "ابحث عن '{{searchQuery}}'",
@@ -292,6 +310,7 @@
     "to": "إلى",
     "tooltip": "أداة إرشادية",
     "tooltip-trans-lang": "لغة الأداة الإرشادية",
+    "trans-lang": "لغة الترجمة",
     "translation": "الترجمة",
     "translations": "الترجمات",
     "transliteration": "النقل الحرفي",
@@ -318,6 +337,7 @@
         "voice-search-powered-by": "البحث الصوتي مدعوم من"
     },
     "wbw": "كلمة بكلمة",
+    "wbw-lang-summary": "مصدر الترجمة كلمة بكلمة: <link> {{source}} <\/link> . هذا المصدر مستقل عن اختيار ترجمة الآية.",
     "wbw-trans-lang": "لغة الترجمة كلمة بكلمة",
     "wbw-translation": "ترجمة الكلمات",
     "wbw-transliteration": "النقل الحرفي للكلمات",

@@ -1,12 +1,17 @@
 {
     "add-collection": "Collectie toevoegen",
     "advanced-copy": "Geavanceerd kopiëren",
+    "aria": {
+        "read-ayah-refls": "Lees Ayah Reflections",
+        "read-tafsirs": "Lees Ayah Tafsirs"
+    },
     "ayatul-kursi": "Ayatul Kursi",
     "back-to-ayah": "terug naar Ayah",
     "copy-arabic": "Arabische tekst (Uthmani-tekst)",
     "copy-footnote-q": "Ook voetnoot(en) kopiëren?",
     "copy-success": "Tekst is succesvol gekopieerd naar uw klembord.",
     "copy-text": "Kopieer tekst",
+    "copy-verse": "Kopieer tekst",
     "cpy-link": "Kopieer link",
     "current-verse": "huidige vers",
     "download-copy": "als u een tekstbestand wilt downloaden.",
@@ -36,6 +41,7 @@
     "prev-rub": "Vorige Rub el Hizb",
     "prev-surah": "vorige soera",
     "query-param-message": "U gebruikt <0> <\/0> voorbeeldinstellingen. <1> Preview-instellingen negeren <\/1> of <2> Preview-instellingen opslaan <\/2>",
+    "ramadan-of-reflection": "Sluit je aan bij QuranReflect \"Ramadan van reflectie\"",
     "read-more-quran-reflect": "Lees meer over Koran Reflect",
     "referencing": "Verwijzen naar",
     "reflection-disclaimer": "Reflecties vertegenwoordigen niet de mening van Quran.com en mogen niet uit hun verband worden gehaald",
@@ -43,6 +49,7 @@
     "reflections-desc": "Lees en deel Koranische reflecties van Ayah {{ayahNumber}} van Surah {{surahName}}",
     "remove-bookmark": "Bladwijzer verwijderen",
     "removed-from": "Verwijderd uit {{collectionName}}",
+    "revelation-order-notice": "Let op: je navigeert door de koran op volgorde van openbaring. <link> Klik hier <\/link> om terug te gaan naar de standaardvolgorde.",
     "rub-beginning": "Begin van Rub el Hizb",
     "save-to": "Opslaan in...",
     "saved-to": "Opgeslagen in {{collectionName}}",

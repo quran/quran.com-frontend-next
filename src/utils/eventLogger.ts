@@ -1,7 +1,23 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/naming-convention */
 
+import SearchQuerySource from '@/types/SearchQuerySource';
+import SearchType from '@/types/SearchType';
 import { isFirebaseEnabled } from 'src/lib/firebase';
+
+/**
+ * Filter out empty search queries.
+ *
+ * @param {string} rawSearchQuery
+ * @returns {string}
+ */
+const getSearchQuery = (rawSearchQuery: string): string => {
+  if (!rawSearchQuery) {
+    return '';
+  }
+  // trim search query so we don't log a query like ' '.
+  return rawSearchQuery.trim();
+};
 
 export const logEvent = async (eventName: string, params?: { [key: string]: any }) => {
   if (isFirebaseEnabled) {
@@ -17,8 +33,8 @@ export const logEvent = async (eventName: string, params?: { [key: string]: any 
  *
  * @param {string} buttonName
  */
-export const logButtonClick = (buttonName: string) => {
-  logEvent(`${buttonName}_clicked`);
+export const logButtonClick = (buttonName: string, params?: { [key: string]: any }) => {
+  logEvent(`${buttonName}_clicked`, params);
 };
 
 /**
@@ -62,14 +78,19 @@ export const logValueChange = (
  * Log when the user makes a search query whether through typing or voice search when there are no results.
  *
  * @param {string} searchQuery
- * @param {string} source the source of the query e.g settings drawer translation view/command bar.
- * @param {string} type the type of the search query. can be voice or text.
+ * @param {SearchQuerySource} source the source of the query e.g settings drawer translation view/command bar.
+ * @param {SearchType} type the type of the search query. can be voice or text.
  */
-export const logEmptySearchResults = (searchQuery: string, source: string, type = 'text') => {
+export const logEmptySearchResults = (
+  searchQuery: string,
+  source: SearchQuerySource,
+  type = SearchType.Text,
+) => {
+  const query = getSearchQuery(searchQuery);
   // if the searchQuery is not empty
-  if (searchQuery) {
+  if (query !== '') {
     logEvent(`${type}_search_query_with_no_result`, {
-      query: searchQuery,
+      query,
       source,
     });
   }
@@ -79,13 +100,14 @@ export const logEmptySearchResults = (searchQuery: string, source: string, type 
  * Log text search queries entered by the user.
  *
  * @param {string} searchQuery
- * @param {string} source
+ * @param {SearchQuerySource} source
  */
-export const logTextSearchQuery = (searchQuery: string, source: string) => {
+export const logTextSearchQuery = (searchQuery: string, source: SearchQuerySource) => {
+  const query = getSearchQuery(searchQuery);
   // if the searchQuery is not empty
-  if (searchQuery) {
+  if (query !== '') {
     logEvent('search_query', {
-      query: searchQuery,
+      query,
       source,
     });
   }

@@ -35,7 +35,6 @@ const JuzControls: React.FC<Props> = ({ lastVerse }) => {
       )}
       <Button
         type={ButtonType.Secondary}
-        href={getJuzNavigationUrl(juzNumber - 1)}
         onClick={() => {
           logButtonClick('juz_control_scroll_to_beginning');
           scrollToTop();

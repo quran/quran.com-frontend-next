@@ -36,12 +36,14 @@
   padding-inline-end: var(--spacing-micro);
 }
 
-.highlighted {
-  color: var(--color-success-medium);
+.highlightOnHover {
+  &:hover {
+    color: var(--color-success-medium);
+  }
 }
 
-.wbwText {
-  font-size: var(--font-size-xsmall);
+.highlighted {
+  color: var(--color-success-medium);
 }
 
 .tooltipText {

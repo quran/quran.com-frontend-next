@@ -16,7 +16,6 @@ import RecentReadingSessions from '@/components/Verses/RecentReadingSessions';
 import { getAllChaptersData } from '@/utils/chapter';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl } from '@/utils/navigation';
-import DataContext from 'src/contexts/DataContext';
 import { ChaptersResponse } from 'types/ApiResponses';
 import ChaptersData from 'types/ChaptersData';
 
@@ -25,37 +24,32 @@ type IndexProps = {
   chaptersData: ChaptersData;
 };
 
-const Index: NextPage<IndexProps> = ({
-  chaptersData,
-  chaptersResponse: { chapters },
-}): JSX.Element => {
+const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }): JSX.Element => {
   const { t, lang } = useTranslation('home');
   return (
     <>
       <Head>
         <link rel="preload" as="image" href="/images/background.jpg" crossOrigin="anonymous" />
       </Head>
-      <DataContext.Provider value={chaptersData}>
-        <NextSeoWrapper
-          title={t('home:noble-quran')}
-          url={getCanonicalUrl(lang, '')}
-          languageAlternates={getLanguageAlternates('')}
-        />
-        <div className={styles.pageContainer}>
-          <div className={styles.flow}>
-            <HomePageHero />
-            <div className={classNames(styles.flowItem, styles.fullWidth)}>
-              <RecentReadingSessions />
-            </div>
-            <div className={classNames(styles.flowItem, styles.fullWidth)}>
-              <BookmarksAndCollectionsSection />
-            </div>
-            <div className={styles.flowItem}>
-              <ChapterAndJuzListWrapper chapters={chapters} />
-            </div>
+      <NextSeoWrapper
+        title={t('home:noble-quran')}
+        url={getCanonicalUrl(lang, '')}
+        languageAlternates={getLanguageAlternates('')}
+      />
+      <div className={styles.pageContainer}>
+        <div className={styles.flow}>
+          <HomePageHero />
+          <div className={classNames(styles.flowItem, styles.fullWidth)}>
+            <RecentReadingSessions />
+          </div>
+          <div className={classNames(styles.flowItem, styles.fullWidth)}>
+            <BookmarksAndCollectionsSection />
+          </div>
+          <div className={styles.flowItem}>
+            <ChapterAndJuzListWrapper chapters={chapters} />
           </div>
         </div>
-      </DataContext.Provider>
+      </div>
     </>
   );
 };

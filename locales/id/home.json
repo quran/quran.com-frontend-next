@@ -1,16 +1,18 @@
 {
     "no-bookmarks": "Anda belum memiliki penanda apa pun",
     "noble-quran": "Al-Quran yang mulia",
+    "read-juz": "Baca Juz",
     "recently-read": "Baru-baru ini dibaca",
+    "revelation-order-disclaimer": "Pandangan ini menunjukkan urutan kronologis surat-surat dalam Al-Qur'an berdasarkan saat diturunkan kepada Nabi Muhammad <hover> ﷺ <\/hover> . Kronologi adalah subjek pendapat ilmiah dan beberapa Surat diturunkan di beberapa bagian pada waktu yang berbeda. Urutan di sini didasarkan pada karya <link> Tanzil.net <\/link> . [Catatan: urutan Mushaf yang disusun dari al-Fatiha hingga al-Nas adalah soal kesepakatan.]",
     "tab": {
         "bookmarks": "Penanda",
         "popular": "Populer"
     },
+    "view-all-bookmarks": "Lihat semua bookmark",
     "voice": {
         "trigger": "Akses cepat ke semuanya"
     },
     "welcome": {
-        "body": "Donasi bulanan membantu kami mempertahankan talenta terbaik dan mempertahankan operasi, sehingga kami dapat kurang fokus pada penggalangan dana dan lebih banyak menciptakan dampak.",
-        "title": "Donasi ke Quran.com hari ini"
+        "title": "Ini Bulan Al Quran! Bantu jutaan pengguna mendapatkan akses ke panduan Alquran."
     }
 }

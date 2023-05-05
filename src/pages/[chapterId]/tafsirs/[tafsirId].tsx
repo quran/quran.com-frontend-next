@@ -7,8 +7,11 @@ import { SWRConfig } from 'swr';
 
 import styles from '../[verseId]/tafsirs.module.scss';
 
+import { fetcher } from '@/api';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import TafsirBody from '@/components/QuranReader/TafsirView/TafsirBody';
+import { getChapterOgImageUrl } from '@/lib/og';
+import Error from '@/pages/_error';
 import { getQuranReaderStylesInitialState } from '@/redux/defaultSettings/util';
 import { makeTafsirContentUrl, makeTafsirsUrl } from '@/utils/apiPaths';
 import { getAllChaptersData, getChapterData } from '@/utils/chapter';
@@ -24,9 +27,6 @@ import {
 } from '@/utils/staticPageGeneration';
 import { isValidVerseKey } from '@/utils/validator';
 import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
-import { fetcher } from 'src/api';
-import DataContext from 'src/contexts/DataContext';
-import Error from 'src/pages/_error';
 import { ChapterResponse, TafsirContentResponse } from 'types/ApiResponses';
 import ChaptersData from 'types/ChaptersData';
 
@@ -48,7 +48,6 @@ const SelectedTafsirOfAyah: NextPage<AyahTafsirProp> = ({
   chapterId,
   tafsirData,
   tafsirIdOrSlug,
-  chaptersData,
   fallback,
 }) => {
   const { t, lang } = useTranslation('common');
@@ -62,12 +61,20 @@ const SelectedTafsirOfAyah: NextPage<AyahTafsirProp> = ({
     tafsirData.tafsir.slug,
   );
   const localizedVerseNumber = toLocalizedNumber(Number(verseNumber), lang);
+
   return (
-    <DataContext.Provider value={chaptersData}>
+    <>
       <NextSeoWrapper
         title={`${t('tafsir.surah')} ${
           chapter.chapter.transliteratedName
         } - ${localizedVerseNumber}`}
+        image={getChapterOgImageUrl({
+          chapterId,
+          verseNumber,
+          locale: lang,
+        })}
+        imageWidth={1200}
+        imageHeight={630}
         canonical={getCanonicalUrl(lang, navigationUrl)}
         description={t('tafsir.tafsir-desc', {
           verseNumber: localizedVerseNumber,
@@ -96,7 +103,7 @@ const SelectedTafsirOfAyah: NextPage<AyahTafsirProp> = ({
           />
         </div>
       </SWRConfig>
-    </DataContext.Provider>
+    </>
   );
 };
 

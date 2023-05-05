@@ -1,12 +1,17 @@
 {
     "add-collection": "Koleksiyon Ekle",
-    "advanced-copy": "Gelişmiş Kopya",
+    "advanced-copy": "Gelişmiş Kopyalama",
+    "aria": {
+        "read-ayah-refls": "Ayetin Yansımalarını Okuyun",
+        "read-tafsirs": "Ayetin Tefsirlerini Okuyun"
+    },
     "ayatul-kursi": "Ayetel Kürsi",
     "back-to-ayah": "Ayete geri dön",
     "copy-arabic": "Arapça metin (Osmani metin)",
     "copy-footnote-q": "Dipnot(lar) da kopyalansın mı?",
     "copy-success": "Metin panonuza başarıyla kopyalandı.",
     "copy-text": "Metni kopyala",
+    "copy-verse": "Metni kopyala",
     "cpy-link": "Bağlantıyı kopyala",
     "current-verse": "Geçerli ayet",
     "download-copy": "Metin dosyasını indirmek istiyorsanız.",
@@ -36,6 +41,7 @@
     "prev-rub": "Önceki Rub el Hizb",
     "prev-surah": "Önceki Sure",
     "query-param-message": "<0> <\/0> önizleme ayarlarını kullanıyorsunuz. <1> Önizleme ayarlarını kapat <\/1> veya <2> Önizleme ayarlarını kaydet <\/2>",
+    "ramadan-of-reflection": "KuranReflect'e Katılın \"Yansıma Ramazanı\"",
     "read-more-quran-reflect": "Kuran Yansıtması hakkında devamını oku",
     "referencing": "referans",
     "reflection-disclaimer": "Düşünceler Kuran.com'un görüşünü temsil etmemektedir ve bağlamdan çıkarılmamalıdır.",
@@ -43,6 +49,7 @@
     "reflections-desc": "{{ayahNumber}} {{surahName}} yansımalarını okuyun ve paylaşın",
     "remove-bookmark": "Yer işaretini kaldır",
     "removed-from": "{{collectionName}} kaldırıldı",
+    "revelation-order-notice": "Not: Kuran'da nüzul sırasına göre geziniyorsunuz. Varsayılan sıralamaya geri dönmek için <link> burayı tıklayın <\/link> .",
     "rub-beginning": "Rub el Hizb'in Başlangıcı",
     "save-to": "Şuraya kaydet...",
     "saved-to": "{{collectionName}} kaydedildi",
@@ -54,7 +61,7 @@
     "surah-info": "Sure Bilgileri",
     "tafsirs": "Tefsirler",
     "text-copied": "Metin panoya kopyalandı!",
-    "trans-change": "Değiştirmek",
+    "trans-change": "Değiştir",
     "translation-by": "Çeviri:",
     "verses-range": "Ayet aralığı",
     "view-on-quran-reflect": "Kuran'da görüntüle"

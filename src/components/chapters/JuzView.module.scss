@@ -31,6 +31,14 @@
 
 .juzTitle {
   margin-block-end: var(--spacing-xsmall);
+  display: flex;
+  flex-direction: row;
+  align-content: space-between;
+  justify-content: space-between;
+}
+
+.readJuz {
+  text-decoration: underline;
 }
 
 .loadingContainer {

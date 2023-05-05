@@ -1,16 +1,18 @@
 {
     "no-bookmarks": "Nuk keni ende asnjë faqeshënues",
     "noble-quran": "Kurani Fisnik",
+    "read-juz": "Lexoni Juz",
     "recently-read": "Lexuar së fundmi",
+    "revelation-order-disclaimer": "Ky këndvështrim tregon rendin kronologjik të sureve në Kuran bazuar në kohën kur ato iu shpallën Profetit Muhamed <hover> ﷺ <\/hover> . Kronologjia është temë e mendimit të studiuesve dhe disa sure janë shpallur pjesë-pjesë në kohë të ndryshme. Renditja këtu bazohet në punën e <link> Tanzil.net <\/link> . [Shënim: urdhri i përpiluar i Mushaf nga el-Fatiha në el-Nas është një çështje konsensusi.]",
     "tab": {
         "bookmarks": "Faqeruajtësit",
         "popular": "Popullore"
     },
+    "view-all-bookmarks": "Shikoni të gjithë faqeshënuesit",
     "voice": {
         "trigger": "Qasje e shpejtë në çdo gjë"
     },
     "welcome": {
-        "body": "Donacionet mujore na ndihmojnë të mbajmë talentet më të mira dhe të mbajmë operacionet, në mënyrë që të mund të fokusohemi më pak në mbledhjen e fondeve dhe më shumë në krijimin e ndikimit.",
-        "title": "Dhuroni për Quran.com sot"
+        "title": "Është muaji i Kuranit! Ndihmoni miliona përdorues të kenë qasje në udhëzimet e Kuranit."
     }
 }

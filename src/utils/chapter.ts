@@ -3,6 +3,7 @@
 import random from 'lodash/random';
 
 import { formatStringNumber } from './number';
+import REVELATION_ORDER from './revelationOrder';
 
 import Chapter from 'types/Chapter';
 import ChaptersData from 'types/ChaptersData';
@@ -122,18 +123,30 @@ export const getChapterAndVerseMappingForJuz = async (
  * Whether the current surah is the first surah.
  *
  * @param {number} surahNumber
+ * @param {boolean} isReadingByRevelationOrder
  * @returns  {boolean}
  */
-export const isFirstSurah = (surahNumber: number): boolean => surahNumber === 1;
+export const isFirstSurah = (
+  surahNumber: number,
+  isReadingByRevelationOrder?: boolean,
+): boolean => {
+  if (!isReadingByRevelationOrder) return surahNumber === 1;
+
+  return REVELATION_ORDER[0] === surahNumber;
+};
 
 /**
  * Whether the current surah is the last surah.
  *
  * @param {number} surahNumber
+ * @param {boolean} isReadingByRevelationOrder
  * @returns  {boolean}
  */
-export const isLastSurah = (surahNumber: number): boolean => surahNumber === 114;
+export const isLastSurah = (surahNumber: number, isReadingByRevelationOrder?: boolean): boolean => {
+  if (!isReadingByRevelationOrder) return surahNumber === 114;
 
+  return REVELATION_ORDER[REVELATION_ORDER.length - 1] === surahNumber;
+};
 /**
  * Get how much percentage of the chapter has been read.
  *

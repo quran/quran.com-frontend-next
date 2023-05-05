@@ -31,9 +31,7 @@
         "msg-close": "Close Message",
         "nav-drawer-open": "Open Navigation Drawer",
         "play-surah": "Play Surah {{surahName}}",
-        "read-ayah-refls": "Read Ayah Reflections",
         "select-lng": "Select Language",
-        "share-ayah": "Share Ayah",
         "sidebar-nav-close": "Close Navigation Sidebar"
     },
     "audio": {
@@ -42,16 +40,21 @@
             "on": "On",
             "title": "Auto Scroll"
         },
+        "displaying": "Displaying",
+        "exp-tip": "<span>Change the content displayed under<\/span><br><\/br> <boldSpan>Settings<\/boldSpan> > <boldSpan>Word By Word<\/boldSpan>",
+        "exp-tip-no-select": "<span>Tick the tooltip display option and select the <br><\/br> Translation and\/or Transliteration option<\/span><br><\/br><span> under <\/span><boldSpan>Settings<\/boldSpan> > <boldSpan>Word By Word<\/boldSpan><span>, to<\/span><br><\/br> <span>enable this feature.<\/span>",
+        "experience": "Experience",
         "play": "Play Audio",
         "playback-normal": "Normal",
         "playback-speed": "Playback Speed",
         "playback-speed-unit": "x",
         "player": {
-            "close": "Close Audio Player",
+            "close-audio-player": "Close Audio Player",
             "currently-playing": "You are currently playing",
             "delay-verse": "Delay between verse",
             "download": "Download",
             "full-surah": "Full Surah",
+            "manage-repeat-settings": "Manage repeat settings",
             "mismatch": "Click on \"Start Over\" if you would like to play {{currentReadingChapter}} instead",
             "pause": "Pause",
             "pause-audio": "Pause Audio",
@@ -72,6 +75,7 @@
         },
         "repeat-moved": "The repeat settings have moved to the audio player. Click on the <0><\/0> icon to access them",
         "select-reciter": "Select Reciter",
+        "speed": "Speed",
         "title": "Audio"
     },
     "ayah": "Ayah",
@@ -109,7 +113,10 @@
     },
     "default-description": "The Quran translated into many languages in a simple and easy interface",
     "developers": "Developers",
+    "display": "Display",
     "donate": "Donate",
+    "donate_monthly": "Donate monthly",
+    "donate_once": "Donate once",
     "email-verification": {
         "check-spam": "Didn't receive the verification email? Check your spam inbox",
         "email-sent": "We just sent an email to <strong>{{email}}<\/strong>",
@@ -133,7 +140,7 @@
         "code_v2": "King Fahad Complex V2",
         "font-size": "Font size",
         "lines": "Lines",
-        "qcf-desc": "KPFG Fonts provide higher quality but take longer to load.",
+        "qcf-desc": "King Fahad Complex (V1 and V2) Fonts provide higher quality but take longer to load.",
         "qpc_uthmani_hafs": "QPC Uthmani Hafs",
         "quran-font": "Quran Font",
         "tajweed": "Tajweed",
@@ -153,6 +160,10 @@
         "lastName": "Last Name"
     },
     "from": "From",
+    "fundraising-sticky-banner": {
+        "cta": "Donate",
+        "title": "Support Quran.com this Ramadan"
+    },
     "fundraising": {
         "description": "Monthly donations help us improve Quran.com and sustain operations so we focus less on fundraising and more on creating impact.",
         "learn-more": "Learn more",
@@ -161,6 +172,7 @@
     "help": "Help",
     "hizb": "Hizb",
     "home": "Home",
+    "inline": "In-line",
     "input": {
         "clear": "Clear"
     },
@@ -171,6 +183,8 @@
     "loading": "Loading",
     "login": "Login",
     "logout": "Logout",
+    "meccan": "Meccan",
+    "medinan": "Medinan",
     "menu": "Menu",
     "mobile-apps": "Mobile Apps",
     "mode": "Mode",
@@ -186,6 +200,7 @@
     "page": "Page",
     "pages": "Pages",
     "pagination-summary": "{{currentResultNumber}}-{{endOfResultNumber}} of {{totalNumberOfResults}} search results",
+    "pbuh": "Blessings of Allah be upon him",
     "popular-links": "Popular Links",
     "popup": {
         "footnote": "Monthly donations allow us to focus less on fundraising",
@@ -206,12 +221,15 @@
         "reading": "Reading",
         "translation": "Translation"
     },
+    "recitation": "Recitation",
     "reciter": "Reciter",
+    "reciter-summary": "Word by word reciter: <span>{{reciterName}}<\/span>. Click on a word to listen to its recitation.",
     "reciters": "Reciters",
     "reflect": "Reflect",
     "remove": "Remove",
     "rename": "Rename",
     "retry": "Retry",
+    "revelation_order": "Revelation Order",
     "rub": "Rub el Hizb",
     "save-to-collection": "Save to Collection",
     "search-for": "Search for '{{searchQuery}}'",
@@ -292,6 +310,7 @@
     "to": "To",
     "tooltip": "Tooltip",
     "tooltip-trans-lang": "Tooltip Language",
+    "trans-lang": "Translation Language",
     "translation": "Translation",
     "translations": "Translations",
     "transliteration": "Transliteration",
@@ -318,6 +337,7 @@
         "voice-search-powered-by": "Voice Search Powered by"
     },
     "wbw": "Word By Word",
+    "wbw-lang-summary": "Word by word translation source: <link>{{source}}<\/link>. This source is independent of the verse translation selection.",
     "wbw-trans-lang": "Word By Word Language",
     "wbw-translation": "Word By Word Translation",
     "wbw-transliteration": "Word By Word Transliteration",

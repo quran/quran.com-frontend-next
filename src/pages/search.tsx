@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 
 import styles from './search.module.scss';
 
+import { getAvailableLanguages, getAvailableTranslations, getSearchResults } from '@/api';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import TranslationsFilter from '@/components/Search/Filters/TranslationsFilter';
 import SearchBodyContainer from '@/components/Search/SearchBodyContainer';
@@ -20,6 +21,7 @@ import FilterIcon from '@/icons/filter.svg';
 import SearchIcon from '@/icons/search.svg';
 import { getTranslationsInitialState } from '@/redux/defaultSettings/util';
 import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
+import SearchQuerySource from '@/types/SearchQuerySource';
 import { areArraysEqual } from '@/utils/array';
 import { getAllChaptersData } from '@/utils/chapter';
 import {
@@ -32,8 +34,6 @@ import {
 import filterTranslations from '@/utils/filter-translations';
 import { getLanguageAlternates, toLocalizedNumber } from '@/utils/locale';
 import { getCanonicalUrl } from '@/utils/navigation';
-import { getAvailableLanguages, getAvailableTranslations, getSearchResults } from 'src/api';
-import DataContext from 'src/contexts/DataContext';
 import { SearchResponse } from 'types/ApiResponses';
 import AvailableLanguage from 'types/AvailableLanguage';
 import AvailableTranslation from 'types/AvailableTranslation';
@@ -48,7 +48,7 @@ type SearchProps = {
   chaptersData: ChaptersData;
 };
 
-const Search: NextPage<SearchProps> = ({ translations, chaptersData }): JSX.Element => {
+const Search: NextPage<SearchProps> = ({ translations }): JSX.Element => {
   const { t, lang } = useTranslation('common');
   const router = useRouter();
   const userTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
@@ -128,7 +128,7 @@ const Search: NextPage<SearchProps> = ({ translations, chaptersData }): JSX.Elem
   const getResults = useCallback(
     (query: string, page: number, translation: string, language: string) => {
       setIsSearching(true);
-      logTextSearchQuery(query, 'search_page');
+      logTextSearchQuery(query, SearchQuerySource.SearchPage);
       getSearchResults({
         query,
         filterLanguages: language,
@@ -143,7 +143,7 @@ const Search: NextPage<SearchProps> = ({ translations, chaptersData }): JSX.Elem
             setSearchResult(response);
             // if there is no navigations nor verses in the response
             if (response.pagination.totalRecords === 0 && !response.result.navigation.length) {
-              logEmptySearchResults(query, 'search_page');
+              logEmptySearchResults(query, SearchQuerySource.SearchPage);
             }
           }
         })
@@ -188,7 +188,7 @@ const Search: NextPage<SearchProps> = ({ translations, chaptersData }): JSX.Elem
   }, [debouncedSearchQuery, getResults, selectedLanguages, selectedTranslations]);
 
   const onPageChange = (page: number) => {
-    logEvent('search_page_number_change');
+    logEvent('search_page_number_change', { page });
     setCurrentPage(page);
     getResults(debouncedSearchQuery, page, selectedTranslations, selectedLanguages);
   };
@@ -264,8 +264,13 @@ const Search: NextPage<SearchProps> = ({ translations, chaptersData }): JSX.Elem
     setTranslationSearchQuery('');
   };
 
+  const onTranslationsFiltersClicked = () => {
+    logButtonClick('search_page_translation_filter');
+    setIsContentModalOpen(true);
+  };
+
   return (
-    <DataContext.Provider value={chaptersData}>
+    <>
       <NextSeoWrapper
         title={
           debouncedSearchQuery !== ''
@@ -331,7 +336,7 @@ const Search: NextPage<SearchProps> = ({ translations, chaptersData }): JSX.Elem
             </ContentModal>
             <div className={styles.filtersContainer}>
               <Button
-                onClick={() => setIsContentModalOpen(true)}
+                onClick={onTranslationsFiltersClicked}
                 size={ButtonSize.Small}
                 variant={ButtonVariant.Compact}
                 prefix={<FilterIcon />}
@@ -359,7 +364,7 @@ const Search: NextPage<SearchProps> = ({ translations, chaptersData }): JSX.Elem
           </div>
         </div>
       </div>
-    </DataContext.Provider>
+    </>
   );
 };
 

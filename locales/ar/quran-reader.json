@@ -1,12 +1,17 @@
 {
     "add-collection": "أضف المجموعة",
     "advanced-copy": "نسخ مفصل",
+    "aria": {
+        "read-ayah-refls": "اقرأ تأملات آية",
+        "read-tafsirs": "اقرأ تفسيرات الآية"
+    },
     "ayatul-kursi": "آية الكرسي",
     "back-to-ayah": "العودة إلى آية",
     "copy-arabic": "النص القرآني (نص عثماني)",
     "copy-footnote-q": "هل تريد أيضًا نسخ الهوامش؟",
     "copy-success": "تم نسخ النص بنجاح في الحافظة الخاصة بك.",
     "copy-text": "نسخ النص",
+    "copy-verse": "نسخ النص",
     "cpy-link": "نسخ الوصلة",
     "current-verse": "الآية الحالية",
     "download-copy": "إذا كنت تريد تنزيل ملف نصي.",
@@ -36,6 +41,7 @@
     "prev-rub": "ربع الحزب السابق",
     "prev-surah": "السورة السابقة",
     "query-param-message": "أنت تستخدم <0> <\/0> إعدادات المعاينة. <1> رفض إعدادات المعاينة <\/1> أو <2> حفظ إعدادات المعاينة <\/2>",
+    "ramadan-of-reflection": "انضم إلى \"رمضان التدبر\"",
     "read-more-quran-reflect": "اقرأ المزيد على موقع تأملات قرآنية",
     "referencing": "الرجوع",
     "reflection-disclaimer": "لا تمثل الأفكار رأي موقع Quran.com ولا يجب إخراجها من سياقها",
@@ -43,6 +49,7 @@
     "reflections-desc": "قراءة ومشاركة تدبرات قرآنية للآية {{ayahNumber}} من سورة {{surahName}}",
     "remove-bookmark": "إزالة الإشارة المرجعية",
     "removed-from": "تمت إزالته من {{collectionName}}",
+    "revelation-order-notice": "ملاحظة: أنت تتنقل في القرآن بترتيب نزول الوحي. <link> انقر هنا <\/link> للعودة إلى الترتيب الافتراضي.",
     "rub-beginning": "بداية ربع الحزب",
     "save-to": "حفظ في...",
     "saved-to": "تم الحفظ في {{collectionName}}",

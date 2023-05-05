@@ -22,6 +22,8 @@ enum SliceName {
   SEARCH = 'search',
   LOCALE = 'locale',
   USER_DATA_SYNC = 'userDataSync',
+  PERSIST_GATE_HYDRATION = 'persistGateHydration',
+  REVELATION_ORDER = 'revelationOrder',
 }
 
 export default SliceName;

@@ -31,9 +31,7 @@
         "msg-close": "Chiudi messaggio",
         "nav-drawer-open": "Apri il cassetto di navigazione",
         "play-surah": "Suona Sura {{surahName}}",
-        "read-ayah-refls": "Leggi Ayah Riflessioni",
         "select-lng": "Seleziona la lingua",
-        "share-ayah": "Condividi Sì",
         "sidebar-nav-close": "Chiudi la barra laterale di navigazione"
     },
     "audio": {
@@ -42,16 +40,21 @@
             "on": "Sopra",
             "title": "Scorrimento automatico"
         },
+        "displaying": "Visualizzazione",
+        "exp-tip": "<span>Modifica il contenuto visualizzato in<\/span><br><\/br> <boldSpan>Impostazioni<\/boldSpan> > <boldSpan>Parola per parola<\/boldSpan>",
+        "exp-tip-no-select": "<span>Seleziona l'opzione di visualizzazione del suggerimento e seleziona l'opzione <br><\/br> Traduzione e\/o traslitterazione<\/span><br><\/br><span> in <\/span><boldSpan>Impostazioni<\/boldSpan> > <boldSpan>Parola per parola<\/boldSpan><span>, per<\/span><br><\/br> <span>abilitare questa funzione.<\/span>",
+        "experience": "Esperienza",
         "play": "Riproduci audio",
         "playback-normal": "Normale",
         "playback-speed": "Velocità di riproduzione",
         "playback-speed-unit": "X",
         "player": {
-            "close": "Chiudi lettore audio",
+            "close-audio-player": "Chiudi lettore audio",
             "currently-playing": "Stai giocando attualmente",
             "delay-verse": "Ritardo tra i versi",
             "download": "Scarica",
             "full-surah": "Sura completa",
+            "manage-repeat-settings": "Gestisci le impostazioni di ripetizione",
             "mismatch": "Fai clic su \"Ricomincia\" se invece vuoi giocare a {{currentReadingChapter}}",
             "pause": "Pausa",
             "pause-audio": "Metti in pausa l'audio",
@@ -72,6 +75,7 @@
         },
         "repeat-moved": "Le impostazioni di ripetizione sono state spostate sul lettore audio. Fare clic sull'icona <0> <\/0> per accedervi",
         "select-reciter": "Seleziona Relatore",
+        "speed": "Velocità",
         "title": "Audio"
     },
     "ayah": "Ayah",
@@ -109,7 +113,10 @@
     },
     "default-description": "Il Corano tradotto in molte lingue con un'interfaccia semplice e facile",
     "developers": "Sviluppatori",
+    "display": "Schermo",
     "donate": "Donare",
+    "donate_monthly": "Dona mensilmente",
+    "donate_once": "Dona una volta",
     "email-verification": {
         "check-spam": "Non hai ricevuto l'email di verifica? Controlla la tua casella di posta indesiderata",
         "email-sent": "Abbiamo appena inviato un'email a <strong> {{email}} <\/strong>",
@@ -129,11 +136,11 @@
     "fonts": {
         "15_lines": "15 linee",
         "16_lines": "16 linee",
-        "code_v1": "Complesso di Re Fahad V1",
-        "code_v2": "Complesso di Re Fahad V2",
+        "code_v1": "Complesso King Fahad V1",
+        "code_v2": "Complesso King Fahad V2",
         "font-size": "Dimensione del font",
         "lines": "Linee",
-        "qcf-desc": "I caratteri KPFG forniscono una qualità superiore ma richiedono più tempo per il caricamento.",
+        "qcf-desc": "I font Complesso King Fahad (V1 e V2) offrono una qualità superiore ma richiedono un caricamento più lungo.",
         "qpc_uthmani_hafs": "QPC Uthmani Hafs",
         "quran-font": "Carattere del Corano",
         "tajweed": "Tajweed",
@@ -153,6 +160,10 @@
         "lastName": "Cognome"
     },
     "from": "A partire dal",
+    "fundraising-sticky-banner": {
+        "cta": "Donare",
+        "title": "Sostieni Quran.com questo Ramadan"
+    },
     "fundraising": {
         "description": "Le donazioni mensili ci aiutano a migliorare Quran.com e sostenere le operazioni, quindi ci concentriamo meno sulla raccolta fondi e più sulla creazione di impatto.",
         "learn-more": "Scopri di più",
@@ -161,6 +172,7 @@
     "help": "Aiuto",
     "hizb": "Hizb",
     "home": "Casa",
+    "inline": "In linea",
     "input": {
         "clear": "Chiaro"
     },
@@ -171,6 +183,8 @@
     "loading": "Caricamento in corso",
     "login": "Login",
     "logout": "Disconnettersi",
+    "meccan": "Meccanico",
+    "medinan": "Medinan",
     "menu": "Menù",
     "mobile-apps": "App mobili",
     "mode": "Modalità",
@@ -186,6 +200,7 @@
     "page": "Pagina",
     "pages": "Pagine",
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} di {{totalNumberOfResults}} risultati di ricerca",
+    "pbuh": "Le benedizioni di Allah siano su di lui",
     "popular-links": "Link popolari",
     "popup": {
         "footnote": "Le donazioni mensili ci consentono di concentrarci meno sulla raccolta fondi",
@@ -206,12 +221,15 @@
         "reading": "Lettura",
         "translation": "Traduzione"
     },
+    "recitation": "Recitazione",
     "reciter": "Recitatore",
+    "reciter-summary": "Recitatore parola per parola: <span> {{reciterName}} <\/span> . Clicca su una parola per ascoltare la sua recitazione.",
     "reciters": "Recitatori",
     "reflect": "Riflettere",
     "remove": "Rimuovere",
     "rename": "Rinominare",
     "retry": "Riprova",
+    "revelation_order": "Ordine di rivelazione",
     "rub": "Rub el Hizb",
     "save-to-collection": "Salva nella raccolta",
     "search-for": "Cerca '{{searchQuery}}'",
@@ -292,6 +310,7 @@
     "to": "Per",
     "tooltip": "Descrizione comando",
     "tooltip-trans-lang": "Lingua dei suggerimenti",
+    "trans-lang": "Lingua di traduzione",
     "translation": "Traduzione",
     "translations": "Traduzioni",
     "transliteration": "Traslitterazione",
@@ -318,6 +337,7 @@
         "voice-search-powered-by": "Ricerca vocale Powered by"
     },
     "wbw": "Parola per parola",
+    "wbw-lang-summary": "Fonte della traduzione parola per parola: <link> {{source}} <\/link> . Questa fonte è indipendente dalla selezione della traduzione in versi.",
     "wbw-trans-lang": "Parola per parola lingua",
     "wbw-translation": "Traduzione parola per parola",
     "wbw-transliteration": "Traslitterazione parola per parola",

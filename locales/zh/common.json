@@ -31,9 +31,7 @@
         "msg-close": "关闭消息",
         "nav-drawer-open": "打开导航抽屉",
         "play-surah": "播放古兰经{{surahName}}",
-        "read-ayah-refls": "阅读相关参悟",
         "select-lng": "选择语言",
-        "share-ayah": "分享Ayah",
         "sidebar-nav-close": "关闭导航侧边栏"
     },
     "audio": {
@@ -42,16 +40,21 @@
             "on": "在",
             "title": "播放声音时自动滚屏"
         },
+        "displaying": "展示中",
+        "exp-tip": "<span>更改下显示的内容<\/span><br><\/br> <boldSpan>设置<\/boldSpan> > <boldSpan>逐字显示<\/boldSpan>",
+        "exp-tip-no-select": "<span>勾选工具提示显示选项并选择 <br><\/br> 翻译和\/或音译选项<\/span><br><\/br><span> 下 <\/span><boldSpan>设置<\/boldSpan> > <boldSpan>逐字逐句<\/boldSpan><span>，以<\/span><br><\/br> <span>启用此功能.<\/span>",
+        "experience": "经验",
         "play": "播放音频",
         "playback-normal": "普通",
         "playback-speed": "播放速度",
         "playback-speed-unit": "X",
         "player": {
-            "close": "关闭音频播放器",
+            "close-audio-player": "关闭音频播放器",
             "currently-playing": "您正在播放",
             "delay-verse": "每节之间停顿",
             "download": "下载",
             "full-surah": "播放整章",
+            "manage-repeat-settings": "管理重复设置",
             "mismatch": "{{currentReadingChapter}}单击“重新开始”",
             "pause": "暂停",
             "pause-audio": "暂停音频",
@@ -72,6 +75,7 @@
         },
         "repeat-moved": "重复播放设置已移至音频播放器。单击<0> <\/0>图标以访问它们",
         "select-reciter": "选择诵读家",
+        "speed": "速度",
         "title": "音频"
     },
     "ayah": "节",
@@ -109,7 +113,10 @@
     },
     "default-description": "古兰经翻译成多种语言，界面简单易用",
     "developers": "开发者",
+    "display": "展示",
     "donate": "捐",
+    "donate_monthly": "每月捐款",
+    "donate_once": "捐赠一次",
     "email-verification": {
         "check-spam": "没有收到验证邮件？检查您的垃圾邮件收件箱",
         "email-sent": "我们刚刚向<strong> {{email}} <\/strong>发送了一封电子邮件",
@@ -133,7 +140,7 @@
         "code_v2": "King Fahad Complex V2",
         "font-size": "字体大小",
         "lines": "线",
-        "qcf-desc": "KPFG 字体提供更高的质量，但加载时间更长。",
+        "qcf-desc": "King Fahad Complex (V1 和 V2) 字体提供更高的质量，但加载时间更长。",
         "qpc_uthmani_hafs": "QPC Uthmani Hafs",
         "quran-font": "经文字体",
         "tajweed": "泰之卫德",
@@ -153,6 +160,10 @@
         "lastName": "姓"
     },
     "from": "从",
+    "fundraising-sticky-banner": {
+        "cta": "捐",
+        "title": "在这个斋月支持 Quran.com"
+    },
     "fundraising": {
         "description": "每月的捐款帮助我们改进 Quran.com 并维持运营，因此我们减少对筹款的关注，而更多地关注创造影响。",
         "learn-more": "学到更多",
@@ -161,6 +172,7 @@
     "help": "帮助",
     "hizb": "希兹布",
     "home": "首页",
+    "inline": "排队",
     "input": {
         "clear": "清除"
     },
@@ -171,6 +183,8 @@
     "loading": "加载中",
     "login": "登录",
     "logout": "登出",
+    "meccan": "麦加",
+    "medinan": "麦地那",
     "menu": "菜单",
     "mobile-apps": "手机App",
     "mode": "模式",
@@ -186,6 +200,7 @@
     "page": "页",
     "pages": "页面",
     "pagination-summary": "{{currentResultNumber}} - {{totalNumberOfResults}}搜索结果，共{{endOfResultNumber}}",
+    "pbuh": "真主的祝福降临在他身上",
     "popular-links": "热门链接",
     "popup": {
         "footnote": "每月捐款让我们可以减少对筹款的关注",
@@ -206,12 +221,15 @@
         "reading": "诵读",
         "translation": "翻译"
     },
+    "recitation": "朗诵",
     "reciter": "诵读家",
+    "reciter-summary": "逐字朗诵者： <span> {{reciterName}} <\/span> 。单击一个单词以收听其朗读。",
     "reciters": "朗诵者",
     "reflect": "参悟",
     "remove": "消除",
     "rename": "改名",
     "retry": "重试",
+    "revelation_order": "天启令",
     "rub": "鲁布埃尔希兹",
     "save-to-collection": "保存到收藏",
     "search-for": "搜索 '{{searchQuery}}'",
@@ -292,6 +310,7 @@
     "to": "到",
     "tooltip": "工具提示",
     "tooltip-trans-lang": "翻译成：",
+    "trans-lang": "翻译语言",
     "translation": "意译",
     "translations": "翻译",
     "transliteration": "音译",
@@ -318,6 +337,7 @@
         "voice-search-powered-by": "语音搜索 技术支持单位"
     },
     "wbw": "在单词下方显示其译文",
+    "wbw-lang-summary": "逐字翻译来源： <link> {{source}} <\/link> 。此来源独立于诗歌翻译选择。",
     "wbw-trans-lang": "翻译成：",
     "wbw-translation": "逐字意译",
     "wbw-transliteration": "逐字音译",

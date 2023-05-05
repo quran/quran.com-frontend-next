@@ -31,9 +31,7 @@
         "msg-close": "Bericht sluiten",
         "nav-drawer-open": "Navigatielade openen",
         "play-surah": "Speel Surah {{surahName}}",
-        "read-ayah-refls": "Lees Ayah Reflections",
         "select-lng": "Selecteer taal",
-        "share-ayah": "Deel Ayah",
         "sidebar-nav-close": "Navigatiezijbalk sluiten"
     },
     "audio": {
@@ -42,16 +40,21 @@
             "on": "Op",
             "title": "Automatisch scrollen"
         },
+        "displaying": "Weergeven",
+        "exp-tip": "<span>Wijzig de weergegeven inhoud onder<\/span><br><\/br> <boldSpan>Instellingen<\/boldSpan> > <boldSpan>Woord voor woord<\/boldSpan>",
+        "exp-tip-no-select": "<span>Vink de tooltip-weergaveoptie aan en selecteer de <br><\/br> optie Vertaling en\/of transliteratie<\/span><br><\/br><span> onder <\/span><boldSpan>Instellingen<\/boldSpan> > <boldSpan>Woord voor woord<\/boldSpan><span>, om<\/span><br><\/br> <span>deze functie in te schakelen.<\/span>",
+        "experience": "Ervaring",
         "play": "Audio afspelen",
         "playback-normal": "normaal",
         "playback-speed": "Afspeelsnelheid",
         "playback-speed-unit": "x",
         "player": {
-            "close": "Sluit audiospeler",
+            "close-audio-player": "Sluit audiospeler",
             "currently-playing": "Je speelt momenteel",
             "delay-verse": "Vertraging tussen vers",
             "download": "Downloaden",
             "full-surah": "volledige soera",
+            "manage-repeat-settings": "Herhaalinstellingen beheren",
             "mismatch": "Klik op \"Overnieuw beginnen\" als je in plaats daarvan {{currentReadingChapter}}",
             "pause": "Pauze",
             "pause-audio": "Audio pauzeren",
@@ -72,6 +75,7 @@
         },
         "repeat-moved": "De herhaalinstellingen zijn verplaatst naar de audiospeler. Klik op het <0> <\/0> om ze te openen",
         "select-reciter": "Selecteer voordrager",
+        "speed": "Snelheid",
         "title": "Audio"
     },
     "ayah": "Aya",
@@ -109,7 +113,10 @@
     },
     "default-description": "De Koran vertaald in vele talen in een eenvoudige en gemakkelijke interface",
     "developers": "ontwikkelaars",
+    "display": "Weergave",
     "donate": "Doneren",
+    "donate_monthly": "Doneer maandelijks",
+    "donate_once": "Doneer eenmalig",
     "email-verification": {
         "check-spam": "Heb je de verificatie-e-mail niet ontvangen? Check je spam-inbox",
         "email-sent": "We hebben zojuist een e-mail gestuurd naar <strong> {{email}} <\/strong>",
@@ -129,11 +136,11 @@
     "fonts": {
         "15_lines": "15 lijnen",
         "16_lines": "16 lijnen",
-        "code_v1": "King Fahad Complex V1",
-        "code_v2": "King Fahad Complex V2",
+        "code_v1": "Koning Fahad Complex V1",
+        "code_v2": "Koning Fahad Complex V2",
         "font-size": "Lettertypegrootte",
         "lines": "lijnen",
-        "qcf-desc": "KPFG-lettertypen bieden een hogere kwaliteit, maar het laden duurt langer.",
+        "qcf-desc": "Koning Fahad Complex (V1 en V2) Fonts bieden een hogere kwaliteit, maar laden duurt langer.",
         "qpc_uthmani_hafs": "QPC Uthmani Hafs",
         "quran-font": "Koran lettertype",
         "tajweed": "Tajweed",
@@ -153,6 +160,10 @@
         "lastName": "Achternaam"
     },
     "from": "Van",
+    "fundraising-sticky-banner": {
+        "cta": "Doneer",
+        "title": "Steun Quran.com deze Ramadan"
+    },
     "fundraising": {
         "description": "Maandelijkse donaties helpen ons Quran.com te verbeteren en activiteiten te ondersteunen, zodat we ons minder richten op fondsenwerving en meer op het creëren van impact.",
         "learn-more": "Leer meer",
@@ -161,6 +172,7 @@
     "help": "Helpen",
     "hizb": "Hizb",
     "home": "Huis",
+    "inline": "In lijn",
     "input": {
         "clear": "Duidelijk"
     },
@@ -171,6 +183,8 @@
     "loading": "Bezig met laden",
     "login": "Log in",
     "logout": "Uitloggen",
+    "meccan": "Mekkaans",
+    "medinan": "Medina",
     "menu": "Menu",
     "mobile-apps": "Mobiele apps",
     "mode": "Modus",
@@ -186,6 +200,7 @@
     "page": "Bladzijde",
     "pages": "Pagina's",
     "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} van {{totalNumberOfResults}} zoekresultaten",
+    "pbuh": "De zegeningen van Allah zij met hem",
     "popular-links": "Populaire links",
     "popup": {
         "footnote": "Dankzij maandelijkse donaties kunnen we ons minder richten op fondsenwerving",
@@ -206,12 +221,15 @@
         "reading": "Lezing",
         "translation": "Vertaling"
     },
+    "recitation": "voordracht",
     "reciter": "Voordrager",
+    "reciter-summary": "Woord voor woord voordrager: <span> {{reciterName}} <\/span> . Klik op een woord om naar de recitatie te luisteren.",
     "reciters": "voordragers",
     "reflect": "Reflecteren",
     "remove": "Verwijderen",
     "rename": "Hernoemen",
     "retry": "Opnieuw proberen",
+    "revelation_order": "Openbaring orde",
     "rub": "Rub el Hizb",
     "save-to-collection": "Opslaan in collectie",
     "search-for": "Zoeken naar '{{searchQuery}}'",
@@ -292,6 +310,7 @@
     "to": "Tot",
     "tooltip": "Knopinfo",
     "tooltip-trans-lang": "Taal voor knopinfo",
+    "trans-lang": "Vertaling Taal",
     "translation": "Vertaling",
     "translations": "Vertalingen",
     "transliteration": "Transliteratie",
@@ -318,6 +337,7 @@
         "voice-search-powered-by": "Gesproken zoekopdracht Mogelijk gemaakt door"
     },
     "wbw": "Woord voor woord",
+    "wbw-lang-summary": "Woord voor woord vertalingsbron: <link> {{source}} <\/link> . Deze bron is onafhankelijk van de selectie van de versvertaling.",
     "wbw-trans-lang": "Woord voor woord taal",
     "wbw-translation": "Woord voor woord vertaling",
     "wbw-transliteration": "Woord voor woord transliteratie",

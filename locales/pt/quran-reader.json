@@ -1,12 +1,17 @@
 {
     "add-collection": "Adicionar coleção",
     "advanced-copy": "Cópia Avançada",
+    "aria": {
+        "read-ayah-refls": "Leia Reflexões Ayah",
+        "read-tafsirs": "Leia Ayah Tafsirs"
+    },
     "ayatul-kursi": "Ayatul Kursi",
     "back-to-ayah": "Voltar para Ayah",
     "copy-arabic": "Texto árabe (texto Uthmani)",
     "copy-footnote-q": "Copiar também a (s) nota (s) de rodapé?",
     "copy-success": "O texto foi copiado com sucesso para a sua área de transferência.",
     "copy-text": "Copiar texto",
+    "copy-verse": "Copiar Texto",
     "cpy-link": "Link de cópia",
     "current-verse": "Verso atual",
     "download-copy": "se você deseja baixar o arquivo de texto.",
@@ -36,6 +41,7 @@
     "prev-rub": "Anterior Rub el Hizb",
     "prev-surah": "Surah anterior",
     "query-param-message": "Você está usando <0> <\/0> configurações de visualização. <1> Dispensar configurações de visualização <\/1> ou <2> Salvar configurações de visualização <\/2>",
+    "ramadan-of-reflection": "Junte-se ao QuranReflect \"Ramadan of Reflection\"",
     "read-more-quran-reflect": "Leia mais sobre o Alcorão Refletir",
     "referencing": "Referência",
     "reflection-disclaimer": "As reflexões não representam a opinião do Quran.com e não devem ser tiradas do contexto",
@@ -43,6 +49,7 @@
     "reflections-desc": "Leia e compartilhe reflexões corânicas de Ayah {{ayahNumber}} da Surata {{surahName}}",
     "remove-bookmark": "Remover favorito",
     "removed-from": "Removido de {{collectionName}}",
+    "revelation-order-notice": "Nota: você está navegando no Alcorão pela ordem da revelação. <link> Clique aqui <\/link> para voltar à ordem padrão.",
     "rub-beginning": "Começo de Rub el Hizb",
     "save-to": "Salvar para...",
     "saved-to": "Salvo em {{collectionName}}",

@@ -9,7 +9,7 @@ import styles from './Page.module.scss';
 import PageFooter from './PageFooter';
 
 import useIsFontLoaded from '@/components/QuranReader/hooks/useIsFontLoaded';
-import { selectWordByWordPreferences } from '@/redux/slices/QuranReader/readingPreferences';
+import { selectInlineDisplayWordByWordPreferences } from '@/redux/slices/QuranReader/readingPreferences';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
 import { getLineWidthClassName } from '@/utils/fontFaceHelper';
 import { FALLBACK_FONT, QuranFont } from 'types/QuranReader';
@@ -29,7 +29,7 @@ const Page = ({ verses, pageNumber, quranReaderStyles, pageIndex }: PageProps) =
   );
   const { quranTextFontScale, quranFont, mushafLines } = quranReaderStyles;
   const { showWordByWordTranslation, showWordByWordTransliteration } = useSelector(
-    selectWordByWordPreferences,
+    selectInlineDisplayWordByWordPreferences,
     shallowEqual,
   );
   const isWordByWordLayout = showWordByWordTranslation || showWordByWordTransliteration;

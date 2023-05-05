@@ -5,8 +5,10 @@ import React from 'react';
 import { NextPage, GetStaticProps, GetStaticPaths } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 
+import { getChapterIdBySlug, getChapterVerses, getPagesLookup } from '@/api';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import QuranReader from '@/components/QuranReader';
+import { getChapterOgImageUrl } from '@/lib/og';
 import { getQuranReaderStylesInitialState } from '@/redux/defaultSettings/util';
 import { getDefaultWordFields, getMushafId } from '@/utils/api';
 import { getAllChaptersData, getChapterData } from '@/utils/chapter';
@@ -20,8 +22,6 @@ import {
 import { isValidChapterId, isValidVerseKey } from '@/utils/validator';
 import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
 import { generateVerseKeysBetweenTwoVerseKeys } from '@/utils/verseKeys';
-import { getChapterIdBySlug, getChapterVerses, getPagesLookup } from 'src/api';
-import DataContext from 'src/contexts/DataContext';
 import Error from 'src/pages/_error';
 import { ChapterResponse, VersesResponse } from 'types/ApiResponses';
 import ChaptersData from 'types/ChaptersData';
@@ -43,7 +43,6 @@ const Chapter: NextPage<ChapterProps> = ({
   versesResponse,
   hasError,
   isChapter,
-  chaptersData,
 }) => {
   const { t, lang } = useTranslation('common');
   if (hasError) {
@@ -89,10 +88,17 @@ const Chapter: NextPage<ChapterProps> = ({
   };
 
   return (
-    <DataContext.Provider value={chaptersData}>
+    <>
       <NextSeoWrapper
         title={`${t('surah')} ${chapterResponse.chapter.transliteratedName} - ${getTitle()}`}
         canonical={getCanonicalUrlValue()}
+        image={getChapterOgImageUrl({
+          chapterId: chapterResponse.chapter.id,
+          verseNumber: !isChapter ? versesResponse.verses[0]?.verseNumber : undefined,
+          locale: lang,
+        })}
+        imageWidth={1200}
+        imageHeight={630}
         description={
           !isChapter
             ? versesResponse.verses[0].textImlaeiSimple
@@ -112,7 +118,7 @@ const Chapter: NextPage<ChapterProps> = ({
         id={chapterResponse.chapter.id}
         quranReaderDataType={isChapter ? QuranReaderDataType.Chapter : QuranReaderDataType.Verse}
       />
-    </DataContext.Provider>
+    </>
   );
 };
 

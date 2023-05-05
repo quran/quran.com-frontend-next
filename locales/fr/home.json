@@ -1,16 +1,18 @@
 {
     "no-bookmarks": "Vous n'avez pas encore de favoris",
     "noble-quran": "Le Noble Coran",
+    "read-juz": "Lire Juz",
     "recently-read": "Lu récemment",
+    "revelation-order-disclaimer": "Cette vue montre l'ordre chronologique des sourates dans le Coran en fonction du moment où elles ont été révélées au Prophète Muhammad <hover> ﷺ <\/hover> . La chronologie est un sujet d'opinion scientifique et certaines sourates ont été révélées en parties à des moments différents. La commande ici est basée sur le travail de <link> Tanzil.net <\/link> . [Remarque : l'ordre Mushaf compilé d'al-Fatiha à al-Nas est une question de consensus.]",
     "tab": {
         "bookmarks": "Signets",
         "popular": "Populaire"
     },
+    "view-all-bookmarks": "Afficher tous les marque-pages",
     "voice": {
         "trigger": "Accès rapide à tout"
     },
     "welcome": {
-        "body": "Les dons mensuels nous aident à retenir les meilleurs talents et à soutenir les opérations, afin que nous puissions nous concentrer moins sur la collecte de fonds et plus sur la création d'impact.",
-        "title": "Faites un don à Quran.com aujourd'hui"
+        "title": "C'est le Mois du Coran ! Aidez des millions d'utilisateurs à accéder aux conseils du Coran."
     }
 }

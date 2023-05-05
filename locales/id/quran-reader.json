@@ -1,12 +1,17 @@
 {
     "add-collection": "Tambahkan Koleksi",
     "advanced-copy": "Salinan Lanjutan",
+    "aria": {
+        "read-ayah-refls": "Baca Refleksi Ayat",
+        "read-tafsirs": "Baca Ayah Tafsir"
+    },
     "ayatul-kursi": "Ayat Kursi",
     "back-to-ayah": "Kembali ke Ayat",
     "copy-arabic": "Teks Arab (teks Utsmani)",
     "copy-footnote-q": "Salin juga Catatan Kaki?",
     "copy-success": "Teks berhasil disalin di papan klip Anda.",
     "copy-text": "Salin teks",
+    "copy-verse": "Salin Teks",
     "cpy-link": "Salin tautan",
     "current-verse": "Ayat saat ini",
     "download-copy": "jika Anda ingin mengunduh file teks.",
@@ -36,6 +41,7 @@
     "prev-rub": "Sebelumnya Rub el Hizb",
     "prev-surah": "Surah sebelumnya",
     "query-param-message": "Anda menggunakan <0> <\/0> pengaturan pratinjau. <1> Abaikan pengaturan pratinjau <\/1> atau <2> Simpan pengaturan pratinjau <\/2>",
+    "ramadan-of-reflection": "Bergabunglah dengan QuranRefleksi \"Ramadan of Reflection\"",
     "read-more-quran-reflect": "Baca Selengkapnya di Quran Reflect",
     "referencing": "Referensi",
     "reflection-disclaimer": "Refleksi tidak mewakili pendapat Quran.com dan tidak boleh keluar dari konteks",
@@ -43,6 +49,7 @@
     "reflections-desc": "Baca dan bagikan renungan Alquran dari Ayat {{ayahNumber}} Surah {{surahName}}",
     "remove-bookmark": "Hapus penanda",
     "removed-from": "Dihapus dari {{collectionName}}",
+    "revelation-order-notice": "Catatan: Anda menavigasi Al-Qur'an berdasarkan urutan wahyu. <link> Klik di sini <\/link> untuk kembali ke urutan default.",
     "rub-beginning": "Awal dari Rub el Hizb",
     "save-to": "Menyimpan ke...",
     "saved-to": "Disimpan ke {{collectionName}}",

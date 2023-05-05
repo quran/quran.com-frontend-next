@@ -10,9 +10,9 @@ import { makeGetBookmarkByCollectionId } from 'src/utils/auth/apiPaths';
 import { getAllChaptersData } from 'src/utils/chapter';
 import { CollectionDetailSortOption } from 'types/CollectionSortOptions';
 
-const CollectionDetailPage = ({ chaptersData }) => {
+const CollectionDetailPage = () => {
   const router = useRouter();
-  const [sortBy, setSortBy] = useState(CollectionDetailSortOption.RecentlyAdded);
+  const [sortBy, setSortBy] = useState(CollectionDetailSortOption.VerseKey);
 
   const onSortByChange = (newSortByVal) => {
     logValueChange('collection_detail_page_sort_by', sortBy, newSortByVal);
@@ -49,12 +49,7 @@ const CollectionDetailPage = ({ chaptersData }) => {
   };
 
   return (
-    <CollectionDetailContainer
-      sortBy={sortBy}
-      getSWRKey={getKey}
-      chaptersData={chaptersData}
-      onSortByChange={onSortByChange}
-    />
+    <CollectionDetailContainer sortBy={sortBy} getSWRKey={getKey} onSortByChange={onSortByChange} />
   );
 };
 

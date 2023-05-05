@@ -6,7 +6,7 @@ import NavigationDrawerItem from '../NavigationDrawerItem';
 
 import styles from './NavigationDrawerBody.module.scss';
 
-import FundraisingBanner from '@/components/Fundaraising/FundraisingBanner';
+import FundraisingBanner from '@/components/Fundraising/FundraisingBanner';
 import IconDevelopers from '@/icons/developers.svg';
 import IconFeedback from '@/icons/feedback.svg';
 import IconHome from '@/icons/home.svg';

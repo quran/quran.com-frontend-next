@@ -2,8 +2,9 @@ import { useContext } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
-import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
+import Button, { ButtonShape, ButtonVariant } from '@/dls/Button/Button';
 import CloseIcon from '@/icons/close.svg';
+import { withStopPropagation } from '@/utils/event';
 import { logButtonClick } from '@/utils/eventLogger';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 
@@ -11,16 +12,18 @@ const CloseButton = () => {
   const { t } = useTranslation('common');
   const audioService = useContext(AudioPlayerMachineContext);
   return (
-    <PopoverMenu.Item
-      shouldCloseMenuAfterClick
-      onClick={() => {
+    <Button
+      tooltip={t('audio.player.close-audio-player')}
+      shape={ButtonShape.Circle}
+      variant={ButtonVariant.Ghost}
+      onClick={withStopPropagation(() => {
         logButtonClick(`audio_player_overflow_menu_close`);
         audioService.send({ type: 'CLOSE' });
-      }}
-      icon={<CloseIcon />}
+      })}
+      shouldFlipOnRTL={false}
     >
-      {t('audio.player.close')}
-    </PopoverMenu.Item>
+      <CloseIcon />
+    </Button>
   );
 };
 

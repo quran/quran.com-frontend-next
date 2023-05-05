@@ -143,7 +143,11 @@ const RepeatAudioModal = ({
   };
 
   const onRangeChange = (range) => {
-    logValueChange('repeat_verse_range', verseRepetition.repeatRange, range);
+    const isFrom = !!range.from;
+    const logKey = isFrom ? 'repeat_verse_range_from' : 'repeat_verse_range_to';
+    const oldValue = isFrom ? verseRepetition.from : verseRepetition.to;
+    const newValue = isFrom ? range.from : range.to;
+    logValueChange(logKey, oldValue, newValue);
     setVerseRepetition({ ...verseRepetition, ...range });
   };
 

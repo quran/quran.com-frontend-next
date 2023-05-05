@@ -1,5 +1,3 @@
-import isEqual from 'lodash/isEqual';
-
 /**
  * Convert an array of numbers to an array of strings.
  *
@@ -27,8 +25,27 @@ export const stringsToNumbersArray = (stringsArray: string[]): number[] =>
  * @param {T[]} array2
  * @returns {boolean}
  */
-export const areArraysEqual = <T>(array1: T[], array2: T[]): boolean =>
-  isEqual([...array1].sort(), [...array2].sort());
+export const areArraysEqual = <T>(array1: T[], array2: T[]): boolean => {
+  // If the arrays have different lengths, they are not equal
+  if (array1?.length !== array2?.length) return false;
+
+  // Create a map of the first array, with each element as a key and true as the value
+  const array1Map = new Map();
+
+  array1.map((item) => array1Map.set(item, true));
+
+  // Loop through the second array
+  for (let i = 0; i < array2.length; i += 1) {
+    // If an element in the second array is not found in the map of the first array, they are not equal
+    if (array1Map.get(array2[i]) == null) return false;
+
+    // Delete the element from the map of the first array
+    array1Map.delete(array2[i]);
+  }
+
+  // If the map of the first array has no elements left, the arrays are equal
+  return array1Map.size === 0;
+};
 
 /**
  * Remove `itemToRemove` from `array`
@@ -42,3 +59,14 @@ export const areArraysEqual = <T>(array1: T[], array2: T[]): boolean =>
  */
 export const removeItemFromArray = <T>(itemToRemove: T, array: T[]): T[] =>
   array.filter((item) => item !== itemToRemove);
+
+/**
+ * Merge items of two arrays where each item is unique.
+ *
+ * @param {T[]} array1
+ * @param {T[]} array2
+ * @returns {T[]}
+ */
+export const mergeTwoArraysUniquely = <T>(array1: T[], array2: T[]): T[] => {
+  return Array.from(new Set(array1.concat(array2)));
+};

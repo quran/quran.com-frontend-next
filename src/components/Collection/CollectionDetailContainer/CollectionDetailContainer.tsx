@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { useEffect } from 'react';
 
 import classNames from 'classnames';
@@ -21,9 +22,9 @@ import {
   getCollectionNavigationUrl,
   getProfileNavigationUrl,
 } from '@/utils/navigation';
+import { slugifiedCollectionIdToCollectionId } from '@/utils/string';
 import CollectionDetail from 'src/components/Collection/CollectionDetail/CollectionDetail';
 import Button, { ButtonVariant } from 'src/components/dls/Button/Button';
-import DataContext from 'src/contexts/DataContext';
 import Error from 'src/pages/_error';
 import {
   deleteBookmarkById,
@@ -31,19 +32,17 @@ import {
   privateFetcher,
 } from 'src/utils/auth/api';
 import { GetBookmarkCollectionsIdResponse } from 'types/auth/GetBookmarksByCollectionId';
-import Chapter from 'types/Chapter';
 import { CollectionDetailSortOption } from 'types/CollectionSortOptions';
 
 type CollectionDetailContainerProps = {
-  chaptersData: Record<string, Chapter>;
   title?: string;
   getSWRKey: (pageIndex, previousData) => string;
   onSortByChange: (newVal) => void;
   sortBy: CollectionDetailSortOption;
   shouldDeleteBookmark?: boolean; // should delete the bookmark instead of just deleting the connection between the bookmark and collection
 };
+
 const CollectionDetailContainer = ({
-  chaptersData,
   title,
   getSWRKey,
   onSortByChange,
@@ -85,10 +84,14 @@ const CollectionDetailContainer = ({
 
   const bookmarks = data.map((response) => response.data.bookmarks).flat();
   const collectionTitle = title || data[0].data.collection.name;
+  const isOwner = data[0]?.data?.isOwner;
 
   const loadMore = () => {
     setSize(size + 1);
-    logButtonClick('collection_detail_page_load_more');
+    logButtonClick('collection_detail_page_load_more', {
+      collectionId: slugifiedCollectionIdToCollectionId(collectionId),
+      page: size + 1,
+    });
   };
 
   const navigationUrl = getCollectionNavigationUrl(collectionId);
@@ -120,7 +123,7 @@ const CollectionDetailContainer = ({
   const isLoadingMoreData = bookmarks?.length > 0 && size > 1 && isValidating;
 
   return (
-    <DataContext.Provider value={chaptersData}>
+    <>
       <NextSeoWrapper
         title={collectionTitle}
         canonical={getCanonicalUrl(lang, navigationUrl)}
@@ -140,13 +143,14 @@ const CollectionDetailContainer = ({
                 <ArrowLeft />
               </Button>
               <CollectionDetail
-                id={collectionId}
+                id={slugifiedCollectionIdToCollectionId(collectionId)}
                 title={collectionTitle}
                 bookmarks={bookmarks}
                 sortBy={sortBy}
                 onSortByChange={onSortByChange}
                 onUpdated={onUpdated}
                 onItemDeleted={onItemDeleted}
+                isOwner={isOwner}
               />
               {isLoadingMoreData && <Spinner size={SpinnerSize.Large} />}
               {hasNextPage && (
@@ -158,7 +162,7 @@ const CollectionDetailContainer = ({
           </div>
         </div>
       </div>
-    </DataContext.Provider>
+    </>
   );
 };
 

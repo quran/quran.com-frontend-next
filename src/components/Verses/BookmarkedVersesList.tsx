@@ -1,38 +1,34 @@
+/* eslint-disable max-lines */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useContext, useMemo } from 'react';
+import React, { useMemo } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
-import Link from 'next/link';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux';
 import useSWR from 'swr';
 
 import styles from './BookmarkedVersesList.module.scss';
+import BookmarkedVersesListSkeleton from './BookmarkedVesesListSkeleton';
+import BookmarkPill from './BookmarkPill';
 
+import Link from '@/dls/Link/Link';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
-import CloseIcon from '@/icons/close.svg';
 import { selectBookmarks, toggleVerseBookmark } from '@/redux/slices/QuranReader/bookmarks';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import { getMushafId } from '@/utils/api';
 import { deleteBookmarkById, privateFetcher } from '@/utils/auth/api';
 import { makeBookmarksUrl } from '@/utils/auth/apiPaths';
 import { isLoggedIn } from '@/utils/auth/login';
-import { getChapterData } from '@/utils/chapter';
 import { logButtonClick } from '@/utils/eventLogger';
-import { toLocalizedVerseKey } from '@/utils/locale';
-import { getVerseNavigationUrlByVerseKey } from '@/utils/navigation';
-import {
-  getChapterNumberFromKey,
-  getVerseAndChapterNumbersFromKey,
-  makeVerseKey,
-} from '@/utils/verse';
-import DataContext from 'src/contexts/DataContext';
+import { getVerseAndChapterNumbersFromKey, makeVerseKey } from '@/utils/verse';
 import Bookmark from 'types/Bookmark';
 
-const BookmarkedVersesList: React.FC = () => {
-  const { t, lang } = useTranslation('home');
-  const chaptersData = useContext(DataContext);
+const BOOKMARKS_API_LIMIT = 10; // The number of bookmarks to fetch from the api
+
+const BookmarkedVersesList = () => {
+  const { t } = useTranslation('home');
+
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const dispatch = useDispatch();
 
@@ -44,6 +40,7 @@ const BookmarkedVersesList: React.FC = () => {
     isLoggedIn() // only fetch the data when user is loggedIn
       ? makeBookmarksUrl(
           getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines).mushaf,
+          BOOKMARKS_API_LIMIT,
         )
       : null,
     privateFetcher,
@@ -64,11 +61,17 @@ const BookmarkedVersesList: React.FC = () => {
     return [];
   }, [bookmarkedVerses, data, isValidating]);
 
-  if (!bookmarkedVersesKeys.length) {
-    return null;
-  }
+  // Flag when a user is using the API and has more bookmarks than the api limit
+  const hasReachedBookmarksLimit = useMemo(() => {
+    const isUserLoggedIn = isLoggedIn();
 
-  const onBookmarkDeleted = (verseKey) => () => {
+    if (isUserLoggedIn && data && data.length >= BOOKMARKS_API_LIMIT) {
+      return true;
+    }
+    return false;
+  }, [data]);
+
+  const onBookmarkDeleted = (verseKey: string) => {
     logButtonClick('bookmarked_verses_list_delete');
     if (isLoggedIn()) {
       const selectedBookmark = data.find((bookmark) => {
@@ -93,41 +96,39 @@ const BookmarkedVersesList: React.FC = () => {
     }
   };
 
-  const onLinkClicked = () => {
-    logButtonClick('bookmarked_verses_list_link');
+  const onViewAllBookmarksClicked = () => {
+    logButtonClick('view_all_bookmarks');
   };
+
+  if (isValidating) {
+    return (
+      <div className={styles.container}>
+        <div className={styles.bookmarksContainer}>
+          <div className={styles.verseLinksContainer}>
+            <BookmarkedVersesListSkeleton />
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className={styles.container}>
       {bookmarkedVersesKeys.length > 0 ? (
         <div className={styles.bookmarksContainer}>
           <div className={styles.verseLinksContainer}>
-            {bookmarkedVersesKeys?.map((verseKey) => {
-              const chapterNumber = getChapterNumberFromKey(verseKey);
-              const chapterData = getChapterData(chaptersData, chapterNumber.toString());
-              const bookmarkText = `${chapterData.transliteratedName} ${toLocalizedVerseKey(
-                verseKey,
-                lang,
-              )}`;
-              return (
-                <div key={verseKey} className={styles.bookmarkItem}>
-                  <Link href={getVerseNavigationUrlByVerseKey(verseKey)}>
-                    <a className={styles.linkButtonContainer} onClick={onLinkClicked}>
-                      {bookmarkText}
-                    </a>
-                  </Link>
-                  <button
-                    onClick={onBookmarkDeleted(verseKey)}
-                    type="button"
-                    className={styles.closeIconContainer}
-                  >
-                    <span>
-                      <CloseIcon />
-                    </span>
-                  </button>
-                </div>
-              );
-            })}
+            {bookmarkedVersesKeys?.map((verseKey) => (
+              <BookmarkPill key={verseKey} verseKey={verseKey} onDeleted={onBookmarkDeleted} />
+            ))}
+            {hasReachedBookmarksLimit && (
+              <Link
+                href="/collections/all"
+                className={styles.viewAllBookmarksContainer}
+                onClick={onViewAllBookmarksClicked}
+              >
+                {t('view-all-bookmarks')}
+              </Link>
+            )}
           </div>
         </div>
       ) : (

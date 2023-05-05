@@ -5,7 +5,12 @@
 
 .verseText {
   display: flex;
-  align-items: center;
+  /**
+    flex-start for when the inline word by word translation/transliteration is enabled
+    and its content is wrapped across multiple lines.
+    {@see https://quran.com/2:74} on mobile with Inline word by word translation enabled.
+  **/
+  align-items: flex-start;
   line-height: var(--line-height);
 }
 .verseTextContainer {

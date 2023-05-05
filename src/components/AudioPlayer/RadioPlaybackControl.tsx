@@ -1,5 +1,6 @@
 import { useActor } from '@xstate/react';
 
+import CloseRadioButton from './Buttons/CloseRadioButton';
 import PlayPauseButton from './Buttons/PlayPauseButton';
 import styles from './RadioPlaybackControl.module.scss';
 
@@ -14,7 +15,10 @@ const RadioPlaybackControl = ({ radioActor }) => {
         <div className={styles.title}>{stationInfo.title}</div>
         <div className={styles.description}>{stationInfo.description}</div>
       </div>
-      <PlayPauseButton />
+      <div className={styles.actions}>
+        <PlayPauseButton />
+        <CloseRadioButton />
+      </div>
     </div>
   );
 };

@@ -1,4 +1,8 @@
+import { Provider } from 'react-redux';
+
 import Footer from './Footer';
+
+import getStore from '@/redux/store';
 
 export default {
   title: 'dls/Footer',
@@ -6,7 +10,9 @@ export default {
 };
 
 export const Preview = () => (
-  <span className="previewWrapper">
-    <Footer />
-  </span>
+  <Provider store={getStore('en')}>
+    <span className="previewWrapper">
+      <Footer />
+    </span>
+  </Provider>
 );
