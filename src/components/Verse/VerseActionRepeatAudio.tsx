@@ -13,8 +13,9 @@ import { getChapterNumberFromKey } from '@/utils/verse';
 type VerseActionRepeatAudioProps = {
   verseKey: string;
   isTranslationView: boolean;
+  onActionTriggered?: () => void;
 };
-const VerseActionRepeatAudio = ({ verseKey, isTranslationView }: VerseActionRepeatAudioProps) => {
+const VerseActionRepeatAudio = ({ verseKey, isTranslationView, onActionTriggered }: VerseActionRepeatAudioProps) => {
   const { t } = useTranslation('common');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const chapterId = getChapterNumberFromKey(verseKey);
@@ -35,7 +36,7 @@ const VerseActionRepeatAudio = ({ verseKey, isTranslationView }: VerseActionRepe
         selectedVerseKey={verseKey}
         chapterId={chapterId.toString()}
         isOpen={isModalOpen}
-        onClose={() => setIsModalOpen(false)}
+        onClose={() => onActionTriggered()}
       />
       <PopoverMenu.Item icon={<RepeatIcon />} onClick={onItemClicked}>
         {t('audio.player.repeat-1-verse')}

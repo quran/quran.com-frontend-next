@@ -144,7 +144,7 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
         />
       ) : null}
 
-      <VerseActionRepeatAudio isTranslationView={isTranslationView} verseKey={verse.verseKey} />
+      <VerseActionRepeatAudio isTranslationView={isTranslationView} verseKey={verse.verseKey} onActionTriggered={onActionTriggered}/>
     </div>
   );
 };
