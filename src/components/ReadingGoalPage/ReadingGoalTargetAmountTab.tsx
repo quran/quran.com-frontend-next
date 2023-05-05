@@ -4,10 +4,11 @@ import useTranslation from 'next-translate/useTranslation';
 
 import ReadingGoalInput, { ReadingGoalInputProps } from '../ReadingGoal/ReadingGoalInput';
 
-import { ReadingGoalPeriod, ReadingGoalTabProps } from './hooks/useReadingGoalReducer';
+import { ReadingGoalTabProps } from './hooks/useReadingGoalReducer';
 import styles from './ReadingGoalPage.module.scss';
 
 import Select, { SelectSize } from '@/dls/Forms/Select';
+import { ReadingGoalPeriod } from '@/types/auth/ReadingGoal';
 import { generateDurationDaysOptions } from '@/utils/generators';
 
 const ReadingGoalTargetAmountTab: React.FC<ReadingGoalTabProps> = ({

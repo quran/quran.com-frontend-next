@@ -13,17 +13,7 @@
     },
     "day-x": "روز {{day}}",
     "days": "روزها",
-    "delete-goal": "حذف هدف",
-    "delete-goal-confirmation": {
-        "action-text": "من نتیجه را درک می کنم، هدف من را حذف کنید",
-        "confirmation-text": "هدفم را حذف کن",
-        "instruction-text": "لطفاً <strong> {{text}} <\/strong> را برای تأیید تایپ کنید",
-        "subtitle": "این عمل قابل لغو نیست. با این کار هدف شما برای همیشه حذف می شود و ما ردیابی پیشرفت شما را متوقف می کنیم.",
-        "title": "مطمئنی؟"
-    },
-    "delete-reading-goal-success": "هدف خواندن شما با موفقیت حذف شد.",
     "duration": "مدت زمان (روزها)",
-    "edit-goal": "ویرایش هدف",
     "ending-chapter": "پایان سوره",
     "ending-verse": "پایان آیه",
     "examples-subtitle": "در اینجا لیستی از اهداف مشترک آورده شده است. شما همچنین می توانید هدف خود را ایجاد کنید.",
@@ -105,7 +95,6 @@
         "stroked": "امروز چیزی نخوانده ای"
     },
     "todays-goal": "هدف امروز",
-    "update-reading-goal-success": "هدف خواندن شما با موفقیت به روز شد.",
     "view-progress": "مشاهده پیشرفت",
     "x-days": {
         "one": "{{days}} روز",

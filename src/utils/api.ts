@@ -57,13 +57,13 @@ export const getDefaultWordFields = (
  *
  * @param {QuranFont} quranFont
  * @param {MushafLines} mushafLines
- * @returns {{mushaf: number}}
+ * @returns {{mushaf: Mushaf}}
  */
 export const getMushafId = (
   // eslint-disable-next-line default-param-last
   quranFont: QuranFont = QuranFont.QPCHafs,
   mushafLines?: MushafLines,
-): { mushaf: number } => {
+): { mushaf: Mushaf } => {
   let mushaf = QuranFontMushaf[quranFont];
   // convert the Indopak mushaf to either 15 or 16 lines Mushaf
   if (quranFont === QuranFont.IndoPak && mushafLines) {

@@ -1,3 +1,5 @@
+import { Mushaf } from '../QuranReader';
+
 import { ReadingDay } from './ReadingDay';
 import { ReadingGoalStatus } from './ReadingGoal';
 
@@ -12,4 +14,5 @@ export type StreakWithUserMetadata = {
 export type StreakWithMetadataParams = {
   from: string;
   to: string;
+  mushafId: Mushaf;
 };

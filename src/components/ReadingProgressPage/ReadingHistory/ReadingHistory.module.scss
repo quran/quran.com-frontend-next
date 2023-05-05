@@ -54,7 +54,7 @@
     color: var(--color-primary-medium);
   }
 
-  &>div {
+  & > div {
     margin-block-start: var(--spacing-xxsmall);
   }
 }
@@ -73,14 +73,14 @@
   max-width: calc(var(--spacing-mega) * 12);
   margin-inline: auto;
 
-  &>div {
+  & > div {
     padding-block: var(--spacing-small);
 
     &.bordered {
       border-block-start: 1px solid var(--color-background-alternative-medium);
     }
 
-    &>button {
+    & > button {
       background: none;
       border: none;
       color: var(--color-text-default);

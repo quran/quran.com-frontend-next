@@ -1,8 +1,11 @@
+import { Mushaf } from '../QuranReader';
+
 export type ReadingGoal = {
   id: string;
   type: ReadingGoalType;
   targetAmount: string;
   duration?: number;
+  isCompleted: boolean;
   createdAt: Date;
   updatedAt: Date;
 };
@@ -11,6 +14,7 @@ export type CreateReadingGoalRequest = {
   type: ReadingGoalType;
   amount: string | number;
   duration?: number;
+  mushafId: Mushaf;
 };
 
 export type UpdateReadingGoalRequest = Partial<CreateReadingGoalRequest>;
@@ -49,3 +53,8 @@ export type EstimatedReadingGoal =
   | {
       week: RangeEstimatedReadingGoalDay[];
     };
+
+export enum ReadingGoalPeriod {
+  Daily = 'DAILY',
+  Continuous = 'CONTINUOUS',
+}

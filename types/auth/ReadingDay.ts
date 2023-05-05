@@ -1,3 +1,5 @@
+import { Mushaf } from '../QuranReader';
+
 export type ReadingDay = {
   id: string;
   ranges: string[];
@@ -8,6 +10,7 @@ export type ReadingDay = {
   dailyTargetPages?: number;
   dailyTargetSeconds?: number;
   dailyTargetRanges: string[];
+  remainingDailyTargetRanges: string[];
   date: Date;
 };
 
@@ -15,6 +18,7 @@ export type UpdateReadingDayBody = {
   ranges?: string[];
   pages?: number;
   seconds?: number;
+  mushafId: Mushaf;
 };
 
 export type FilterReadingDaysParams = {

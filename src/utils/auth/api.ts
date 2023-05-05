@@ -11,6 +11,7 @@ import {
   UpdateReadingGoalRequest,
 } from '@/types/auth/ReadingGoal';
 import { StreakWithMetadataParams, StreakWithUserMetadata } from '@/types/auth/Streak';
+import { Mushaf } from '@/types/QuranReader';
 import {
   makeBookmarksUrl,
   makeCompleteSignupUrl,
@@ -168,20 +169,21 @@ export const getBookmarkCollections = async (
 ): Promise<string[]> =>
   privateFetcher(makeBookmarkCollectionsUrl(mushafId, key, type, verseNumber));
 
-export const getReadingGoal = async (): Promise<{ data?: ReadingGoal }> =>
-  privateFetcher(makeReadingGoalUrl());
+export const addReadingGoal = async ({
+  mushafId,
+  ...data
+}: CreateReadingGoalRequest): Promise<{ data?: ReadingGoal }> =>
+  postRequest(makeReadingGoalUrl(mushafId), data);
 
-export const addReadingGoal = async (
-  data: CreateReadingGoalRequest,
-): Promise<{ data?: ReadingGoal }> => postRequest(makeReadingGoalUrl(), data);
-
-export const updateReadingGoal = async (
-  data: UpdateReadingGoalRequest,
-): Promise<{ data?: ReadingGoal }> => patchRequest(makeReadingGoalUrl(), data);
+export const updateReadingGoal = async ({
+  mushafId,
+  ...data
+}: UpdateReadingGoalRequest): Promise<{ data?: ReadingGoal }> =>
+  patchRequest(makeReadingGoalUrl(mushafId), data);
 
 export const estimateReadingGoal = async (
   data: CreateReadingGoalRequest,
-): Promise<{ data?: EstimatedReadingGoal }> => postRequest(makeEstimateReadingGoalUrl(), data);
+): Promise<{ data?: EstimatedReadingGoal }> => privateFetcher(makeEstimateReadingGoalUrl(data));
 
 export const deleteReadingGoal = async (): Promise<void> => deleteRequest(makeReadingGoalUrl());
 
@@ -198,8 +200,10 @@ export const addReadingSession = async (chapterNumber: number, verseNumber: numb
     verseNumber,
   });
 
-export const updateReadingDay = async (body: UpdateReadingDayBody): Promise<ReadingDay> =>
-  postRequest(makeReadingDaysUrl(), body);
+export const updateReadingDay = async ({
+  mushafId,
+  ...body
+}: UpdateReadingDayBody): Promise<ReadingDay> => postRequest(makeReadingDaysUrl(mushafId), body);
 
 export const getStreakWithUserMetadata = async (
   params: StreakWithMetadataParams,
@@ -216,8 +220,13 @@ export const getUserPreferences = async (): Promise<UserPreferencesResponse> => 
   return userPreferences;
 };
 
-export const addOrUpdateUserPreference = async (key: string, value: any, group: PreferenceGroup) =>
-  postRequest(makeUserPreferencesUrl(), {
+export const addOrUpdateUserPreference = async (
+  key: string,
+  value: any,
+  group: PreferenceGroup,
+  mushafId?: Mushaf,
+) =>
+  postRequest(makeUserPreferencesUrl(mushafId), {
     key,
     value,
     group,
@@ -285,8 +294,10 @@ export const addCollection = async (collectionName: string) => {
 export const requestVerificationCode = async (emailToVerify) => {
   return postRequest(makeVerificationCodeUrl(), { email: emailToVerify });
 };
-export const addOrUpdateBulkUserPreferences = async (preferences: Record<PreferenceGroup, any>) =>
-  postRequest(makeUserBulkPreferencesUrl(), preferences);
+export const addOrUpdateBulkUserPreferences = async (
+  preferences: Record<PreferenceGroup, any>,
+  mushafId: Mushaf,
+) => postRequest(makeUserBulkPreferencesUrl(mushafId), preferences);
 
 export const logoutUser = async () => {
   return postRequest(makeLogoutUrl(), {});

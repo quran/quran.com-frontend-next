@@ -2,20 +2,25 @@ import { useContext } from 'react';
 
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
+import { shallowEqual, useSelector } from 'react-redux';
 import useSWR from 'swr';
 
-import { ReadingGoalPeriod, ReadingGoalTabProps } from './hooks/useReadingGoalReducer';
+import { ReadingGoalTabProps } from './hooks/useReadingGoalReducer';
 import styles from './ReadingGoalPage.module.scss';
 
 import DataContext from '@/contexts/DataContext';
 import HoverablePopover from '@/dls/Popover/HoverablePopover';
 import Spinner from '@/dls/Spinner/Spinner';
+import { selectQuranFont, selectQuranMushafLines } from '@/redux/slices/QuranReader/styles';
 import {
   CreateReadingGoalRequest,
   EstimatedReadingGoalDay,
   RangeEstimatedReadingGoalDay,
+  ReadingGoalPeriod,
   ReadingGoalType,
 } from '@/types/auth/ReadingGoal';
+import { Mushaf } from '@/types/QuranReader';
+import { getMushafId } from '@/utils/api';
 import { estimateReadingGoal } from '@/utils/auth/api';
 import { makeEstimateReadingGoalUrl } from '@/utils/auth/apiPaths';
 import { getChapterData } from '@/utils/chapter';
@@ -24,8 +29,12 @@ import { toLocalizedNumber } from '@/utils/locale';
 import { convertNumberToDecimal } from '@/utils/number';
 import { parseVerseRange } from '@/utils/verseKeys';
 
-const getPayload = (state: ReadingGoalTabProps['state']): CreateReadingGoalRequest => {
+const makePayload = (
+  state: ReadingGoalTabProps['state'],
+  mushafId: Mushaf,
+): CreateReadingGoalRequest => {
   const payload: CreateReadingGoalRequest = {
+    mushafId,
     type: state.type,
     amount: {
       [ReadingGoalType.PAGES]: state.pages,
@@ -43,9 +52,14 @@ const ReadingGoalWeekPreviewTab: React.FC<ReadingGoalTabProps> = ({ state, nav }
   const { t, lang } = useTranslation('reading-goal');
   const chaptersData = useContext(DataContext);
 
+  const quranFont = useSelector(selectQuranFont, shallowEqual);
+  const mushafLines = useSelector(selectQuranMushafLines, shallowEqual);
+  const { mushaf } = getMushafId(quranFont, mushafLines);
+
+  const payload = makePayload(state, mushaf);
   const { data, isValidating } = useSWR(
-    makeEstimateReadingGoalUrl(),
-    () => estimateReadingGoal(getPayload(state)),
+    makeEstimateReadingGoalUrl(payload),
+    () => estimateReadingGoal(payload),
     {
       revalidateOnMount: true,
       revalidateOnFocus: false,

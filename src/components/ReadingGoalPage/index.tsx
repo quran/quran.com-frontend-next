@@ -5,14 +5,13 @@ import { useState, useContext, useCallback } from 'react';
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
+import { shallowEqual, useSelector } from 'react-redux';
 import { useSWRConfig } from 'swr';
 
-import useReadingGoalReducer, {
-  ReadingGoalPeriod,
-  ReadingGoalTabProps,
-} from './hooks/useReadingGoalReducer';
+import useReadingGoalReducer, { ReadingGoalTabProps } from './hooks/useReadingGoalReducer';
 import styles from './ReadingGoalPage.module.scss';
 import { logTabClick, logTabInputChange, logTabNextClick, TabKey, tabsArray } from './utils/tabs';
+import { validateReadingGoalData } from './utils/validator';
 
 import DataContext from '@/contexts/DataContext';
 import Button, { ButtonSize } from '@/dls/Button/Button';
@@ -22,17 +21,26 @@ import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import ChevronLeftIcon from '@/icons/chevron-left.svg';
 import ChevronRightIcon from '@/icons/chevron-right.svg';
 import layoutStyle from '@/pages/index.module.scss';
-import { CreateReadingGoalRequest, ReadingGoalType } from '@/types/auth/ReadingGoal';
+import { selectQuranFont, selectQuranMushafLines } from '@/redux/slices/QuranReader/styles';
+import {
+  CreateReadingGoalRequest,
+  ReadingGoalPeriod,
+  ReadingGoalType,
+} from '@/types/auth/ReadingGoal';
+import { getMushafId } from '@/utils/api';
 import { addReadingGoal } from '@/utils/auth/api';
 import { makeStreakUrl } from '@/utils/auth/apiPaths';
 import { logFormSubmission } from '@/utils/eventLogger';
-import { isValidPageId, isValidVerseKey } from '@/utils/validator';
-import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
 
 const ReadingGoalOnboarding: React.FC = () => {
   const { t } = useTranslation();
   const router = useRouter();
   const chaptersData = useContext(DataContext);
+
+  const quranFont = useSelector(selectQuranFont, shallowEqual);
+  const mushafLines = useSelector(selectQuranMushafLines, shallowEqual);
+  const { mushaf } = getMushafId(quranFont, mushafLines);
+
   const [loading, setLoading] = useState(false);
   const [tabIdx, setTabIdx] = useState(0);
   const [state, dispatch] = useReadingGoalReducer();
@@ -58,10 +66,13 @@ const ReadingGoalOnboarding: React.FC = () => {
     else amount = `${state.rangeStartVerse}-${state.rangeEndVerse}`;
 
     const data: CreateReadingGoalRequest = {
+      mushafId: mushaf,
       type: state.type,
       amount,
     };
-    if (state.period === ReadingGoalPeriod.Continuous) data.duration = state.duration;
+    if (state.period === ReadingGoalPeriod.Continuous) {
+      data.duration = state.duration;
+    }
 
     logFormSubmission('create_goal', { duration: null, ...data });
 
@@ -112,47 +123,16 @@ const ReadingGoalOnboarding: React.FC = () => {
   };
 
   const getIsNextDisabled = () => {
-    const SECONDS_LIMIT = 4 * 60 * 60; // 4 hours
-    const MIN_SECONDS = 60; // 1 minute
-
     // if the user is on the examples tab and hasn't selected an example, disable the next button
     if (Tab.key === TabKey.ExamplesTab && !state.exampleKey) return true;
 
     if (Tab.key === TabKey.AmountTab) {
-      // if the user selected a pages goal and didn't enter a valid amount of pages, disable the next button
-      if (state.type === ReadingGoalType.PAGES && !isValidPageId(state.pages)) return true;
-
-      // if the user selected a time goal and didn't enter a valid amount of seconds, disable the next button
-      // in theory, this should never happen because the input is a select, but just in case
-      if (
-        state.type === ReadingGoalType.TIME &&
-        (Number.isNaN(state.seconds) ||
-          state.seconds > SECONDS_LIMIT ||
-          state.seconds < MIN_SECONDS)
-      ) {
-        return true;
-      }
-
-      // if the user selected a range goal and didn't enter a valid range, disable the next button
-      if (state.type === ReadingGoalType.RANGE) {
-        if (!state.rangeStartVerse || !state.rangeEndVerse) return true;
-        if (
-          !isValidVerseKey(chaptersData, state.rangeStartVerse) ||
-          !isValidVerseKey(chaptersData, state.rangeEndVerse)
-        ) {
-          return true;
-        }
-
-        // check if the starting verse key is greater than the ending verse key
-        const [startingChapter, startingVerse] = getVerseAndChapterNumbersFromKey(
-          state.rangeStartVerse,
-        );
-        const [endingChapter, endingVerse] = getVerseAndChapterNumbersFromKey(state.rangeEndVerse);
-
-        if (startingChapter === endingChapter && Number(startingVerse) > Number(endingVerse)) {
-          return true;
-        }
-      }
+      return !validateReadingGoalData(chaptersData, {
+        type: state.type,
+        pages: state.pages,
+        seconds: state.seconds,
+        range: { startVerse: state.rangeStartVerse, endVerse: state.rangeEndVerse },
+      });
     }
 
     return false;

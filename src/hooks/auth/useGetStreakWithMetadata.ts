@@ -1,10 +1,13 @@
 import { useMemo } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
+import { useSelector, shallowEqual } from 'react-redux';
 import useSWR from 'swr';
 
+import { selectQuranFont, selectQuranMushafLines } from '@/redux/slices/QuranReader/styles';
 import { ReadingDay } from '@/types/auth/ReadingDay';
 import { StreakWithMetadataParams } from '@/types/auth/Streak';
+import { getMushafId } from '@/utils/api';
 import { getStreakWithUserMetadata } from '@/utils/auth/api';
 import { makeStreakUrl } from '@/utils/auth/apiPaths';
 import { isLoggedIn } from '@/utils/auth/login';
@@ -50,8 +53,12 @@ const useGetStreakWithMetadata = ({
   showDayName?: boolean;
 } = {}) => {
   const week = useGetWeekDays(showDayName);
+  const quranFont = useSelector(selectQuranFont, shallowEqual);
+  const mushafLines = useSelector(selectQuranMushafLines, shallowEqual);
+  const { mushaf } = getMushafId(quranFont, mushafLines);
 
   const params: StreakWithMetadataParams = {
+    mushafId: mushaf,
     from: week[0].date,
     to: week[week.length - 1].date,
   };
