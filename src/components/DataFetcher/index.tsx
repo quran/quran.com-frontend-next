@@ -12,6 +12,7 @@ interface Props {
   render: (data: BaseResponse) => JSX.Element;
   initialData?: BaseResponse;
   loading?: () => JSX.Element;
+  fetcher?: (queryKey: string) => Promise<BaseResponse>;
 }
 
 /**
@@ -31,11 +32,12 @@ const DataFetcher: React.FC<Props> = ({
   render,
   initialData,
   loading = () => <Spinner />,
+  fetcher: dataFetcher = fetcher,
 }: Props): JSX.Element => {
   const { data, error, isValidating, mutate } = useSWRImmutable(
     queryKey,
     () =>
-      fetcher(queryKey)
+      dataFetcher(queryKey)
         .then((res) => Promise.resolve(res))
         .catch((err) => Promise.reject(err)),
     {
