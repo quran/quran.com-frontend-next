@@ -1,4 +1,5 @@
 @use "src/styles/breakpoints";
+@use "src/styles/theme";
 
 .monthsContainer {
   display: grid;
@@ -54,7 +55,7 @@
     color: var(--color-primary-medium);
   }
 
-  & > div {
+  &>div {
     margin-block-start: var(--spacing-xxsmall);
   }
 }
@@ -63,6 +64,12 @@
   font-size: var(--font-size-large);
   font-weight: var(--font-weight-bold);
   color: var(--color-secondary-medium);
+
+  @include theme.light {
+    opacity: var(--opacity-85);
+    color: var(--color-secondary-faint);
+  }
+
   text-align: center;
   margin-block-end: var(--spacing-medium);
 }
@@ -73,14 +80,14 @@
   max-width: calc(var(--spacing-mega) * 12);
   margin-inline: auto;
 
-  & > div {
+  &>div {
     padding-block: var(--spacing-small);
 
     &.bordered {
       border-block-start: 1px solid var(--color-background-alternative-medium);
     }
 
-    & > button {
+    &>button {
       background: none;
       border: none;
       color: var(--color-text-default);

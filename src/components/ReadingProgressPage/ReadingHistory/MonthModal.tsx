@@ -1,11 +1,11 @@
 import { useRef, useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
-import useSWR from 'swr';
 
 import DaysCalendar from './DaysCalendar';
 import styles from './ReadingHistory.module.scss';
 
+import DataFetcher from '@/components/DataFetcher';
 import Button, { ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import ContentModal from '@/dls/ContentModal/ContentModal';
 import ContentModalHandles from '@/dls/ContentModal/types/ContentModalHandles';
@@ -44,18 +44,6 @@ const MonthModal = ({ month, year, onClose }: MonthModalProps) => {
     limit: 31,
   };
 
-  const { data, isValidating } = useSWR<{
-    data: ReadingDay[];
-    pagination: Pagination;
-  }>(makeFilterReadingDaysUrl(params), (url) => privateFetcher(url), {
-    revalidateOnFocus: false,
-    revalidateIfStale: false,
-  });
-
-  const isLoading = !data && isValidating;
-  const allData = data?.data ?? [];
-  const isEmpty = !isLoading && allData.length === 0;
-
   const localizedYear = toLocalizedNumber(year, lang, undefined, {
     useGrouping: false,
   });
@@ -90,17 +78,31 @@ const MonthModal = ({ month, year, onClose }: MonthModalProps) => {
       }
     >
       <div className={styles.modalContentContainer}>
-        {isEmpty && (
-          <p className={styles.emptyMessage}>
-            {t('no-reading-history-for', { date: readableDate })}
-          </p>
-        )}
-        <DaysCalendar
-          month={month}
-          year={year}
-          days={allData}
-          selectedDate={selectedDate}
-          setSelectedDate={setSelectedDate}
+        <DataFetcher
+          queryKey={makeFilterReadingDaysUrl(params)}
+          fetcher={privateFetcher}
+          render={(response) => {
+            const data = response as { data: ReadingDay[]; pagination: Pagination };
+            const isEmpty = data.data.length === 0;
+
+            return (
+              <>
+                {isEmpty && (
+                  <p className={styles.emptyMessage}>
+                    {t('no-reading-history-for', { date: readableDate })}
+                  </p>
+                )}
+
+                <DaysCalendar
+                  month={month}
+                  year={year}
+                  days={data.data}
+                  selectedDate={selectedDate}
+                  setSelectedDate={setSelectedDate}
+                />
+              </>
+            );
+          }}
         />
       </div>
     </ContentModal>
