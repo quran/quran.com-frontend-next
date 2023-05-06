@@ -9,6 +9,7 @@ import DataFetcher from '@/components/DataFetcher';
 import Button, { ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import ContentModal from '@/dls/ContentModal/ContentModal';
 import ContentModalHandles from '@/dls/ContentModal/types/ContentModalHandles';
+import Spinner from '@/dls/Spinner/Spinner';
 import ArrowLeft from '@/icons/west.svg';
 import { Pagination } from '@/types/auth/GetBookmarksByCollectionId';
 import { FilterReadingDaysParams, ReadingDay } from '@/types/auth/ReadingDay';
@@ -80,6 +81,20 @@ const MonthModal = ({ month, year, onClose }: MonthModalProps) => {
       <div className={styles.modalContentContainer}>
         <DataFetcher
           queryKey={makeFilterReadingDaysUrl(params)}
+          loading={() => {
+            return (
+              <>
+                <Spinner className={styles.calendarSpinner} />
+                <DaysCalendar
+                  month={month}
+                  year={year}
+                  days={[]}
+                  selectedDate={selectedDate}
+                  setSelectedDate={setSelectedDate}
+                />
+              </>
+            );
+          }}
           fetcher={privateFetcher}
           render={(response) => {
             const data = response as { data: ReadingDay[]; pagination: Pagination };
