@@ -12,7 +12,7 @@
     },
     "edit-goal": {
         "action": "تعديل الهدف",
-        "subtitle": "انتبه ، ستفقد تقدمك نحو هدفك الحالي.",
+        "subtitle": "سنعيد حساب تقدمك بناءً على الهدف الجديد.",
         "success": "تم تحديث هدف القراءة الخاص بك بنجاح.",
         "title": "قم بتعديل هدف القراءة الخاص بك"
     },
@@ -21,6 +21,6 @@
     "manage-goal": "إدارة هدفك في القراءة",
     "no-reading-history-for": "لا يوجد سجل قراءة لـ {{date}}",
     "reading-progress-header": "تقدمك",
-    "reading-progress-streak": "الأثر",
+    "reading-progress-streak": "الاستمرارية",
     "you-read": "أنت تقرأ:"
 }

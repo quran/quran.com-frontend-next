@@ -68,6 +68,7 @@
     },
     "progress": {
         "complete": "آج کا مقصد پورا ہوا 🎉",
+        "goal-complete": "آپ کا پورا مقصد مکمل ہے 🎉",
         "pages-goal": "قرآن کے {{pages}} صفحات پڑھیں",
         "range-goal": "{{from}} سے {{to}} تک پڑھیں",
         "time-goal": "قرآن کا {{time}} پڑھیں"

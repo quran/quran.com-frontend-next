@@ -68,6 +68,7 @@
     },
     "progress": {
         "complete": "Bugünün hedefi tamamlandı 🎉",
+        "goal-complete": "Tüm hedefiniz tamamlandı 🎉",
         "pages-goal": "Kuran'ın {{pages}} sayfasını oku",
         "range-goal": "{{from}} ile {{to}} arasında oku",
         "time-goal": "Kuran'ı {{time}} oku"

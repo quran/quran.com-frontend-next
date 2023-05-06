@@ -68,6 +68,7 @@
     },
     "progress": {
         "complete": "Qëllimi i sotëm është i plotë 🎉",
+        "goal-complete": "I gjithë qëllimi juaj është i plotë 🎉",
         "pages-goal": "lexoni {{pages}} faqe të Kuranit",
         "range-goal": "lexo {{from}} në {{to}}",
         "time-goal": "lexoni {{time}} të Kuranit"

@@ -12,7 +12,7 @@
     },
     "edit-goal": {
         "action": "Edit Goal",
-        "subtitle": "Take care, your progress for your current goal will be lost.",
+        "subtitle": "We will re-calculate your progress based on the new goal.",
         "success": "Your reading goal has been updated successfully.",
         "title": "Edit your reading goal"
     },

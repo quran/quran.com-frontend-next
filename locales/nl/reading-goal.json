@@ -68,6 +68,7 @@
     },
     "progress": {
         "complete": "Het doel van vandaag is behaald 🎉",
+        "goal-complete": "Je hele doel is voltooid 🎉",
         "pages-goal": "lees {{pages}} pagina's van de koran",
         "range-goal": "lees {{from}} tot {{to}}",
         "time-goal": "lees {{time}} van de koran"

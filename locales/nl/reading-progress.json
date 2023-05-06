@@ -12,7 +12,7 @@
     },
     "edit-goal": {
         "action": "Doel bewerken",
-        "subtitle": "Pas op, je voortgang voor je huidige doel gaat verloren.",
+        "subtitle": "We zullen je voortgang opnieuw berekenen op basis van het nieuwe doel.",
         "success": "Je leesdoel is succesvol geüpdatet.",
         "title": "Pas je leesdoel aan"
     },

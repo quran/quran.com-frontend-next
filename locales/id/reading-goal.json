@@ -68,6 +68,7 @@
     },
     "progress": {
         "complete": "Target hari ini selesai 🎉",
+        "goal-complete": "Seluruh tujuan Anda selesai 🎉",
         "pages-goal": "baca {{pages}} halaman Quran",
         "range-goal": "baca {{from}} sampai {{to}}",
         "time-goal": "baca {{time}} Quran"

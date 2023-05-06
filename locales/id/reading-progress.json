@@ -12,7 +12,7 @@
     },
     "edit-goal": {
         "action": "Sunting Sasaran",
-        "subtitle": "Berhati-hatilah, kemajuan Anda karena tujuan Anda saat ini akan hilang.",
+        "subtitle": "Kami akan menghitung ulang kemajuan Anda berdasarkan tujuan baru.",
         "success": "Tujuan membaca Anda telah berhasil diperbarui.",
         "title": "Edit tujuan membaca Anda"
     },

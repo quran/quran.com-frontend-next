@@ -12,7 +12,7 @@
     },
     "edit-goal": {
         "action": "Modifier l'objectif",
-        "subtitle": "Faites attention, votre progression vers votre objectif actuel sera perdue.",
+        "subtitle": "Nous recalculerons votre progression en fonction du nouvel objectif.",
         "success": "Votre objectif de lecture a été mis à jour avec succès.",
         "title": "Modifier votre objectif de lecture"
     },
