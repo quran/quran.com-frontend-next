@@ -20,9 +20,7 @@ const addEnvSuffixToAuthCookie = (cookieName: string) => {
   return `${cookieName}_${appEnv}`;
 };
 
-// NOTE: IF THOSE VALUES CHANGE, WE SHOULD CHANGE IT IN OUR AUTH REPO
-export const REFRESH_TOKEN_COOKIE_NAME = addEnvSuffixToAuthCookie('rt');
-export const ACCESS_TOKEN_COOKIE_NAME = addEnvSuffixToAuthCookie('at');
+// NOTE: IF THIS VALUE CHANGE, WE SHOULD CHANGE IT IN OUR AUTH REPO
 export const USER_ID = addEnvSuffixToAuthCookie('id');
 
 export const DEFAULT_PHOTO_URL = `https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y`;
