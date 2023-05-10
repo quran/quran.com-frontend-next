@@ -15,7 +15,11 @@ type VerseActionRepeatAudioProps = {
   isTranslationView: boolean;
   onActionTriggered?: () => void;
 };
-const VerseActionRepeatAudio = ({ verseKey, isTranslationView, onActionTriggered }: VerseActionRepeatAudioProps) => {
+const VerseActionRepeatAudio = ({
+  verseKey,
+  isTranslationView,
+  onActionTriggered,
+}: VerseActionRepeatAudioProps) => {
   const { t } = useTranslation('common');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const chapterId = getChapterNumberFromKey(verseKey);
