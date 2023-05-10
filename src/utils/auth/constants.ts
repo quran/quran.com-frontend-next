@@ -1,3 +1,5 @@
+import AppEnv from '@/types/AppEnv';
+
 /**
  * This function adds a suffix to the cookie name based on the environment.
  * We do this to enable users to login to multiple environments at the same time without one deployment overriding the other's cookies.
@@ -8,21 +10,14 @@
  * @returns {string}
  */
 const addEnvSuffixToAuthCookie = (cookieName: string) => {
-  const branch = process.env.NEXT_PUBLIC_VERCEL_GIT_COMMIT_REF;
-  const repo = process.env.NEXT_PUBLIC_VERCEL_GIT_REPO_OWNER;
+  const appEnv = process.env.NEXT_PUBLIC_APP_ENV as AppEnv | undefined;
 
   // handle preview deployments from forked repos
-  if (repo === process.env.NEXT_PUBLIC_GITHUB_REPO_OWNER) {
-    if (branch === 'production') {
-      return cookieName;
-    }
-
-    if (branch === 'staging2') {
-      return `${cookieName}_staging2`;
-    }
+  if (!appEnv || appEnv === AppEnv.PRODUCTION) {
+    return cookieName;
   }
 
-  return `${cookieName}_staging`;
+  return `${cookieName}_${appEnv}`;
 };
 
 // NOTE: IF THOSE VALUES CHANGE, WE SHOULD CHANGE IT IN OUR AUTH REPO
