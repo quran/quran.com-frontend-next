@@ -27,6 +27,10 @@
             "description": "A classic Khatm goal. Read 1 Juz a day",
             "title": "Read the Quran in 30 days"
         },
+        "year": {
+            "description": "Read the Quran at your own pace over the next year",
+            "title": "Read the Quran in a year"
+        },
         "time": {
             "description": "A simple beginner-friendly goal",
             "title": "Read 10 minutes a day"
