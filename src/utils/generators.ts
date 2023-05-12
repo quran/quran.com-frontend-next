@@ -105,10 +105,12 @@ export const generateVerseOptions = (
   return options;
 };
 
+const MAXIMUM_DURATION_DAYS = 365;
+
 /**
  * Generates options for the reading goal duration input.
  *
- * The options are within a range of 1 day to 90 days in this format:
+ * The options are within a range of 1 day to 365 days in this format:
  * "1 day", "2 days", "3 days", etc...
  *
  * @param {Translate} t
@@ -117,7 +119,7 @@ export const generateVerseOptions = (
  */
 export const generateDurationDaysOptions = (t: Translate, locale: string): SelectOption[] => {
   // eslint-disable-next-line @typescript-eslint/naming-convention
-  const options: SelectOption[] = new Array(90).fill(null).map((_, i) => {
+  const options: SelectOption[] = new Array(MAXIMUM_DURATION_DAYS).fill(null).map((_, i) => {
     const day = i + 1;
     return {
       value: day.toString(),
