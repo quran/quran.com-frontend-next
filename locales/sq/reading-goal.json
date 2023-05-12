@@ -30,6 +30,10 @@
         "time": {
             "description": "Një objektiv i thjeshtë miqësor për fillestarët",
             "title": "Lexoni 10 minuta në ditë"
+        },
+        "year": {
+            "description": "Lexoni Kuranin me ritmin tuaj gjatë vitit të ardhshëm",
+            "title": "Lexoni Kuranin brenda një viti"
         }
     },
     "frequency-tab": {

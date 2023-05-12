@@ -30,6 +30,10 @@
         "time": {
             "description": "Un semplice obiettivo adatto ai principianti",
             "title": "Leggi 10 minuti al giorno"
+        },
+        "year": {
+            "description": "Leggi il Corano al tuo ritmo nel corso del prossimo anno",
+            "title": "Leggi il Corano in un anno"
         }
     },
     "frequency-tab": {

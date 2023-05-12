@@ -30,6 +30,10 @@
         "time": {
             "description": "一个简单的初学者友好的目标",
             "title": "每天阅读10分钟"
+        },
+        "year": {
+            "description": "明年按照自己的节奏阅读《古兰经》",
+            "title": "一年内阅读古兰经"
         }
     },
     "frequency-tab": {

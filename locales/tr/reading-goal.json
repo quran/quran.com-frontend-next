@@ -30,6 +30,10 @@
         "time": {
             "description": "Yeni başlayanlar için basit bir hedef",
             "title": "Günde 10 dakika okuyun"
+        },
+        "year": {
+            "description": "Gelecek yıl boyunca Kuran'ı kendi hızınızda okuyun",
+            "title": "Bir yılda Kur'an oku"
         }
     },
     "frequency-tab": {

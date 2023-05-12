@@ -30,6 +30,10 @@
         "time": {
             "description": "Een eenvoudig beginnersvriendelijk doel",
             "title": "Lees 10 minuten per dag"
+        },
+        "year": {
+            "description": "Lees de koran het komende jaar in je eigen tempo",
+            "title": "Lees de Koran in een jaar"
         }
     },
     "frequency-tab": {

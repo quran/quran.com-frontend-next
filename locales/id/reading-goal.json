@@ -30,6 +30,10 @@
         "time": {
             "description": "Tujuan ramah-pemula yang sederhana",
             "title": "Baca 10 menit sehari"
+        },
+        "year": {
+            "description": "Baca Quran dengan kecepatan Anda sendiri selama setahun ke depan",
+            "title": "Baca Quran dalam setahun"
         }
     },
     "frequency-tab": {

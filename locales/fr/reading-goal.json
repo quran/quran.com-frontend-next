@@ -30,6 +30,10 @@
         "time": {
             "description": "Un objectif simple et adapté aux débutants",
             "title": "Lire 10 minutes par jour"
+        },
+        "year": {
+            "description": "Lisez le Coran à votre rythme au cours de la prochaine année",
+            "title": "Lire le Coran en un an"
         }
     },
     "frequency-tab": {
