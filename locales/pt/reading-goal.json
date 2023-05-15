@@ -30,6 +30,10 @@
         "time": {
             "description": "Um objetivo simples para iniciantes",
             "title": "Leia 10 minutos por dia"
+        },
+        "year": {
+            "description": "Leia o Alcorão no seu próprio ritmo durante o próximo ano",
+            "title": "Leia o Alcorão em um ano"
         }
     },
     "frequency-tab": {
@@ -68,6 +72,7 @@
     },
     "progress": {
         "complete": "A meta de hoje está completa 🎉",
+        "goal-complete": "Todo o seu objetivo está completo 🎉",
         "pages-goal": "leia {{pages}} páginas do Alcorão",
         "range-goal": "leia {{from}} para {{to}}",
         "time-goal": "leia {{time}} do Alcorão"

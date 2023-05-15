@@ -12,7 +12,7 @@
     },
     "edit-goal": {
         "action": "Edit Matlamat",
-        "subtitle": "Berhati-hati, kemajuan anda untuk matlamat semasa anda akan hilang.",
+        "subtitle": "Kami akan mengira semula kemajuan anda berdasarkan matlamat baharu.",
         "success": "Matlamat membaca anda telah berjaya dikemas kini.",
         "title": "Edit matlamat membaca anda"
     },

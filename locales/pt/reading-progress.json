@@ -12,7 +12,7 @@
     },
     "edit-goal": {
         "action": "Editar meta",
-        "subtitle": "Tome cuidado, seu progresso para seu objetivo atual será perdido.",
+        "subtitle": "Vamos recalcular seu progresso com base na nova meta.",
         "success": "Sua meta de leitura foi atualizada com sucesso.",
         "title": "Edite sua meta de leitura"
     },

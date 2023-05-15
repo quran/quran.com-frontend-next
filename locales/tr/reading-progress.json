@@ -12,7 +12,7 @@
     },
     "edit-goal": {
         "action": "Hedefi Düzenle",
-        "subtitle": "Kendine iyi bak, ilerleyişin şu anki hedefin için kaybolacak.",
+        "subtitle": "İlerlemenizi yeni hedefe göre yeniden hesaplayacağız.",
         "success": "Okuma hedefiniz başarıyla güncellendi.",
         "title": "Okuma hedefinizi düzenleyin"
     },

@@ -30,6 +30,10 @@
         "time": {
             "description": "Yeni başlayanlar için basit bir hedef",
             "title": "Günde 10 dakika okuyun"
+        },
+        "year": {
+            "description": "Gelecek yıl boyunca Kuran'ı kendi hızınızda okuyun",
+            "title": "Bir yılda Kur'an oku"
         }
     },
     "frequency-tab": {
@@ -68,6 +72,7 @@
     },
     "progress": {
         "complete": "Bugünün hedefi tamamlandı 🎉",
+        "goal-complete": "Tüm hedefiniz tamamlandı 🎉",
         "pages-goal": "Kuran'ın {{pages}} sayfasını oku",
         "range-goal": "{{from}} ile {{to}} arasında oku",
         "time-goal": "Kuran'ı {{time}} oku"

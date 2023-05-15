@@ -30,6 +30,10 @@
         "time": {
             "description": "Een eenvoudig beginnersvriendelijk doel",
             "title": "Lees 10 minuten per dag"
+        },
+        "year": {
+            "description": "Lees de koran het komende jaar in je eigen tempo",
+            "title": "Lees de Koran in een jaar"
         }
     },
     "frequency-tab": {
@@ -68,6 +72,7 @@
     },
     "progress": {
         "complete": "Het doel van vandaag is behaald 🎉",
+        "goal-complete": "Je hele doel is voltooid 🎉",
         "pages-goal": "lees {{pages}} pagina's van de koran",
         "range-goal": "lees {{from}} tot {{to}}",
         "time-goal": "lees {{time}} van de koran"

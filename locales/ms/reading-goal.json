@@ -30,6 +30,10 @@
         "time": {
             "description": "Matlamat mesra pemula yang mudah",
             "title": "Baca 10 minit sehari"
+        },
+        "year": {
+            "description": "Bacalah Al-Quran mengikut kadar anda sendiri pada tahun hadapan",
+            "title": "Baca Al-Quran dalam setahun"
         }
     },
     "frequency-tab": {
@@ -68,6 +72,7 @@
     },
     "progress": {
         "complete": "Matlamat hari ini selesai 🎉",
+        "goal-complete": "Keseluruhan matlamat anda telah selesai 🎉",
         "pages-goal": "baca {{pages}} halaman al-Quran",
         "range-goal": "baca {{from}} hingga {{to}}",
         "time-goal": "membaca {{time}} al-Quran"

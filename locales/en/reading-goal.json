@@ -30,6 +30,10 @@
         "time": {
             "description": "A simple beginner-friendly goal",
             "title": "Read 10 minutes a day"
+        },
+        "year": {
+            "description": "Read the Quran at your own pace over the next year",
+            "title": "Read the Quran in a year"
         }
     },
     "frequency-tab": {
@@ -67,8 +71,8 @@
         "title": "Here is a preview of your schedule"
     },
     "progress": {
-        "goal-complete": "Your whole goal is complete 🎉",
         "complete": "Today's goal is complete 🎉",
+        "goal-complete": "Your whole goal is complete 🎉",
         "pages-goal": "read {{pages}} pages of the Quran",
         "range-goal": "read {{from}} to {{to}}",
         "time-goal": "read {{time}} of the Quran"

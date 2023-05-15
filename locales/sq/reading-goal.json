@@ -30,6 +30,10 @@
         "time": {
             "description": "Një objektiv i thjeshtë miqësor për fillestarët",
             "title": "Lexoni 10 minuta në ditë"
+        },
+        "year": {
+            "description": "Lexoni Kuranin me ritmin tuaj gjatë vitit të ardhshëm",
+            "title": "Lexoni Kuranin brenda një viti"
         }
     },
     "frequency-tab": {
@@ -68,6 +72,7 @@
     },
     "progress": {
         "complete": "Qëllimi i sotëm është i plotë 🎉",
+        "goal-complete": "I gjithë qëllimi juaj është i plotë 🎉",
         "pages-goal": "lexoni {{pages}} faqe të Kuranit",
         "range-goal": "lexo {{from}} në {{to}}",
         "time-goal": "lexoni {{time}} të Kuranit"

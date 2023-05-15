@@ -3,6 +3,7 @@
 import { Dispatch, SetStateAction, useReducer } from 'react';
 
 import BookIcon from '@/icons/book.svg';
+import CalendarIcon from '@/icons/calendar.svg';
 import ClockIcon from '@/icons/clock.svg';
 import SettingsIcon from '@/icons/settings-stroke.svg';
 import { ReadingGoalPeriod, ReadingGoalType } from '@/types/auth/ReadingGoal';
@@ -140,6 +141,17 @@ export const readingGoalExamples = {
       rangeStartVerse: '1:1',
       rangeEndVerse: '114:6',
       duration: 30,
+      period: ReadingGoalPeriod.Continuous,
+    },
+  },
+  yearly: {
+    i18nKey: 'year',
+    icon: CalendarIcon,
+    values: {
+      type: ReadingGoalType.RANGE,
+      rangeStartVerse: '1:1',
+      rangeEndVerse: '114:6',
+      duration: 365,
       period: ReadingGoalPeriod.Continuous,
     },
   },
