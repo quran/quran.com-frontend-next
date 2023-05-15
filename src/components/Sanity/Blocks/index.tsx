@@ -1,3 +1,5 @@
+import classNames from 'classnames';
+
 import styles from './Blocks.module.scss';
 
 import Link, { LinkVariant } from '@/dls/Link/Link';
@@ -12,7 +14,7 @@ const PageBlocks: React.FC<Props> = ({ page }) => {
   const [bodyObject] = body;
   const { body: bodyElements } = bodyObject;
   return bodyElements.map((bodyElement) => {
-    const { _key: bodyElementKey, children, markDefs, listItem } = bodyElement;
+    const { _key: bodyElementKey, children, markDefs, listItem, level } = bodyElement;
     const isList = !!listItem;
     const elementBlocks = [];
     children.forEach((childElement) => {
@@ -58,10 +60,17 @@ const PageBlocks: React.FC<Props> = ({ page }) => {
       }
       if (isList) {
         elementBlocks.push(
-          <li className={styles.list} key={`${bodyElementKey}-${childElementKey}`}>
+          <li
+            className={classNames(styles.list, styles[`li-${level}`])}
+            key={`${bodyElementKey}-${childElementKey}`}
+          >
             {text}
           </li>,
         );
+        return;
+      }
+      if (text === '') {
+        elementBlocks.push(<br key={`${bodyElementKey}-${childElementKey}`} />);
         return;
       }
       elementBlocks.push(
