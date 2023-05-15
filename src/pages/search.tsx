@@ -1,5 +1,5 @@
 /* eslint-disable max-lines */
-import React, { useState, useEffect, useMemo, useCallback, useRef } from 'react';
+import React, { useState, useEffect, useMemo, useCallback, useRef, RefObject } from 'react';
 
 import { GetStaticProps, NextPage } from 'next';
 import useTranslation from 'next-translate/useTranslation';
@@ -17,6 +17,7 @@ import ContentModal, { ContentModalSize } from '@/dls/ContentModal/ContentModal'
 import Input, { InputVariant } from '@/dls/Forms/Input';
 import useAddQueryParamsToUrl from '@/hooks/useAddQueryParamsToUrl';
 import useDebounce from '@/hooks/useDebounce';
+import useFocus from '@/hooks/useFocusElement';
 import FilterIcon from '@/icons/filter.svg';
 import SearchIcon from '@/icons/search.svg';
 import { getTranslationsInitialState } from '@/redux/defaultSettings/util';
@@ -53,6 +54,7 @@ const Search: NextPage<SearchProps> = ({ translations }): JSX.Element => {
   const router = useRouter();
   const userTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
   const [searchQuery, setSearchQuery] = useState<string>('');
+  const [focusInput, searchInputRef]: [() => void, RefObject<HTMLInputElement>] = useFocus();
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [selectedLanguages, setSelectedLanguages] = useState<string>('');
   const [selectedTranslations, setSelectedTranslations] = useState<string>(() =>
@@ -99,8 +101,9 @@ const Search: NextPage<SearchProps> = ({ translations }): JSX.Element => {
       if (router.query.translations) {
         setSelectedTranslations(router.query.translations as string);
       }
+      focusInput();
     }
-  }, [router]);
+  }, [focusInput, router]);
 
   /**
    * Handle when the search query is changed.
@@ -291,6 +294,7 @@ const Search: NextPage<SearchProps> = ({ translations }): JSX.Element => {
               prefix={<SearchIcon />}
               onChange={onSearchQueryChange}
               onClearClicked={onClearClicked}
+              inputRef={searchInputRef}
               clearable
               value={searchQuery}
               disabled={isSearching}
@@ -309,6 +313,7 @@ const Search: NextPage<SearchProps> = ({ translations }): JSX.Element => {
                       prefix={<SearchIcon />}
                       onChange={onTranslationSearchQueryChange}
                       onClearClicked={onTranslationSearchClearClicked}
+                      inputRef={searchInputRef}
                       clearable
                       value={translationSearchQuery}
                       placeholder={t('search.title')}
