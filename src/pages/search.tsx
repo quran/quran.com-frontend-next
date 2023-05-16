@@ -313,7 +313,6 @@ const Search: NextPage<SearchProps> = ({ translations }): JSX.Element => {
                       prefix={<SearchIcon />}
                       onChange={onTranslationSearchQueryChange}
                       onClearClicked={onTranslationSearchClearClicked}
-                      inputRef={searchInputRef}
                       clearable
                       value={translationSearchQuery}
                       placeholder={t('search.title')}
