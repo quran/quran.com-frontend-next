@@ -22,11 +22,7 @@ import ChevronLeftIcon from '@/icons/chevron-left.svg';
 import ChevronRightIcon from '@/icons/chevron-right.svg';
 import layoutStyle from '@/pages/index.module.scss';
 import { selectQuranFont, selectQuranMushafLines } from '@/redux/slices/QuranReader/styles';
-import {
-  CreateReadingGoalRequest,
-  ReadingGoalPeriod,
-  ReadingGoalType,
-} from '@/types/auth/ReadingGoal';
+import { CreateGoalRequest, QuranGoalPeriod, GoalType, GoalCategory } from '@/types/auth/Goal';
 import { getMushafId } from '@/utils/api';
 import { addReadingGoal } from '@/utils/auth/api';
 import { makeStreakUrl } from '@/utils/auth/apiPaths';
@@ -48,7 +44,7 @@ const ReadingGoalOnboarding: React.FC = () => {
   const { cache } = useSWRConfig();
 
   const addReadingGoalAndClearCache = useCallback(
-    async (data: CreateReadingGoalRequest) => {
+    async (data: CreateGoalRequest) => {
       await addReadingGoal(data).then(() => {
         cache.delete(makeStreakUrl());
       });
@@ -61,16 +57,17 @@ const ReadingGoalOnboarding: React.FC = () => {
   const onSubmit = async () => {
     let amount: string | number;
 
-    if (state.type === ReadingGoalType.PAGES) amount = state.pages;
-    else if (state.type === ReadingGoalType.TIME) amount = state.seconds;
+    if (state.type === GoalType.PAGES) amount = state.pages;
+    else if (state.type === GoalType.TIME) amount = state.seconds;
     else amount = `${state.rangeStartVerse}-${state.rangeEndVerse}`;
 
-    const data: CreateReadingGoalRequest = {
+    const data: CreateGoalRequest = {
       mushafId: mushaf,
       type: state.type,
       amount,
+      category: GoalCategory.QURAN,
     };
-    if (state.period === ReadingGoalPeriod.Continuous) {
+    if (state.period === QuranGoalPeriod.Continuous) {
       data.duration = state.duration;
     }
 

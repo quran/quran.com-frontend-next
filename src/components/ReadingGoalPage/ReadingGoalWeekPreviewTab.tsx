@@ -13,12 +13,13 @@ import HoverablePopover from '@/dls/Popover/HoverablePopover';
 import Spinner from '@/dls/Spinner/Spinner';
 import { selectQuranFont, selectQuranMushafLines } from '@/redux/slices/QuranReader/styles';
 import {
-  CreateReadingGoalRequest,
-  EstimatedReadingGoalDay,
-  RangeEstimatedReadingGoalDay,
-  ReadingGoalPeriod,
-  ReadingGoalType,
-} from '@/types/auth/ReadingGoal';
+  CreateGoalRequest,
+  EstimatedGoalDay,
+  RangeEstimatedQuranGoalDay,
+  QuranGoalPeriod,
+  GoalType,
+  GoalCategory,
+} from '@/types/auth/Goal';
 import { Mushaf } from '@/types/QuranReader';
 import { getMushafId } from '@/utils/api';
 import { estimateReadingGoal } from '@/utils/auth/api';
@@ -29,21 +30,19 @@ import { toLocalizedNumber } from '@/utils/locale';
 import { convertNumberToDecimal } from '@/utils/number';
 import { parseVerseRange } from '@/utils/verseKeys';
 
-const makePayload = (
-  state: ReadingGoalTabProps['state'],
-  mushafId: Mushaf,
-): CreateReadingGoalRequest => {
-  const payload: CreateReadingGoalRequest = {
+const makePayload = (state: ReadingGoalTabProps['state'], mushafId: Mushaf): CreateGoalRequest => {
+  const payload: CreateGoalRequest = {
     mushafId,
     type: state.type,
     amount: {
-      [ReadingGoalType.PAGES]: state.pages,
-      [ReadingGoalType.TIME]: state.seconds,
-      [ReadingGoalType.RANGE]: `${state.rangeStartVerse}-${state.rangeEndVerse}`,
+      [GoalType.PAGES]: state.pages,
+      [GoalType.TIME]: state.seconds,
+      [GoalType.RANGE]: `${state.rangeStartVerse}-${state.rangeEndVerse}`,
     }[state.type],
+    category: GoalCategory.QURAN,
   };
 
-  if (state.period === ReadingGoalPeriod.Continuous) payload.duration = state.duration;
+  if (state.period === QuranGoalPeriod.Continuous) payload.duration = state.duration;
 
   return payload;
 };
@@ -70,7 +69,7 @@ const ReadingGoalWeekPreviewTab: React.FC<ReadingGoalTabProps> = ({ state, nav }
     const { type } = state;
     const day = data.data.week[idx];
 
-    if (type === ReadingGoalType.RANGE) {
+    if (type === GoalType.RANGE) {
       const range = day.amount as string;
 
       const [
@@ -96,7 +95,7 @@ const ReadingGoalWeekPreviewTab: React.FC<ReadingGoalTabProps> = ({ state, nav }
     }
 
     const numberAmount = day.amount as number;
-    if (type === ReadingGoalType.TIME) {
+    if (type === GoalType.TIME) {
       return `${t('reciter:read')} ${secondsToReadableFormat(numberAmount, t, lang)}`;
     }
 
@@ -109,7 +108,7 @@ const ReadingGoalWeekPreviewTab: React.FC<ReadingGoalTabProps> = ({ state, nav }
 
   const getSkeleton = () => {
     return Array.from({
-      length: Math.min(state.period === ReadingGoalPeriod.Continuous ? state.duration : 7, 7),
+      length: Math.min(state.period === QuranGoalPeriod.Continuous ? state.duration : 7, 7),
       // eslint-disable-next-line @typescript-eslint/naming-convention
     }).map((_, idx) => (
       // eslint-disable-next-line react/no-array-index-key
@@ -129,7 +128,7 @@ const ReadingGoalWeekPreviewTab: React.FC<ReadingGoalTabProps> = ({ state, nav }
         {isValidating
           ? getSkeleton()
           : data.data.week.map(
-              (day: EstimatedReadingGoalDay | RangeEstimatedReadingGoalDay, idx: number) => {
+              (day: EstimatedGoalDay | RangeEstimatedQuranGoalDay, idx: number) => {
                 const date = new Date(day.date);
 
                 return (

@@ -9,7 +9,7 @@ import Link, { LinkVariant } from '@/dls/Link/Link';
 import BookIcon from '@/icons/book.svg';
 import ClockIcon from '@/icons/clock.svg';
 import RightArrow from '@/icons/east.svg';
-import { ReadingDay } from '@/types/auth/ReadingDay';
+import { ActivityDay } from '@/types/auth/ActivityDay';
 import { RangeItemDirection } from '@/types/Range';
 import { getChapterData } from '@/utils/chapter';
 import { secondsToReadableFormat } from '@/utils/datetime';
@@ -19,16 +19,16 @@ import { getChapterWithStartingVerseUrl } from '@/utils/navigation';
 import { parseVerseRange } from '@/utils/verseKeys';
 
 interface ReadingStatsProps {
-  readingDay: ReadingDay;
+  activityDay: ActivityDay;
 }
 
-const ReadingStats: React.FC<ReadingStatsProps> = ({ readingDay }) => {
+const ReadingStats: React.FC<ReadingStatsProps> = ({ activityDay }) => {
   const { t, lang } = useTranslation('reading-progress');
   const chaptersData = useContext(DataContext);
 
-  const pages = Number(readingDay.pagesRead.toFixed(1));
+  const pages = Number(activityDay.pagesRead.toFixed(1));
   const localizedPages = toLocalizedNumber(pages, lang);
-  const verses = readingDay.versesRead;
+  const verses = activityDay.versesRead;
   const localizedVerses = toLocalizedNumber(verses, lang);
 
   const handleVerseClick = (position: RangeItemDirection, verseKey: string) => {
@@ -53,14 +53,14 @@ const ReadingStats: React.FC<ReadingStatsProps> = ({ readingDay }) => {
         </p>
         <p>
           <ClockIcon />
-          {secondsToReadableFormat(readingDay.secondsRead, t, lang)}
+          {secondsToReadableFormat(activityDay.secondsRead, t, lang)}
         </p>
       </div>
 
       <h3>{t('you-read')}</h3>
-      {readingDay.ranges.length > 0 && (
+      {activityDay.ranges.length > 0 && (
         <ul>
-          {readingDay.ranges.map((range, rangeIdx) => {
+          {activityDay.ranges.map((range, rangeIdx) => {
             const [
               { chapter: fromChapter, verse: fromVerse, verseKey: rangeFrom },
               { chapter: toChapter, verse: toVerse, verseKey: rangeTo },

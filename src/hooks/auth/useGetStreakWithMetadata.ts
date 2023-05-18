@@ -5,7 +5,7 @@ import { useSelector, shallowEqual } from 'react-redux';
 import useSWR from 'swr';
 
 import { selectQuranFont, selectQuranMushafLines } from '@/redux/slices/QuranReader/styles';
-import { ReadingDay } from '@/types/auth/ReadingDay';
+import { ActivityDay } from '@/types/auth/ActivityDay';
 import { StreakWithMetadataParams } from '@/types/auth/Streak';
 import { getMushafId } from '@/utils/api';
 import { getStreakWithUserMetadata } from '@/utils/auth/api';
@@ -74,18 +74,18 @@ const useGetStreakWithMetadata = ({
 
   const isLoading = isValidating && !data;
 
-  const { readingDays, readingGoal, streak } = data?.data || {
-    readingDays: [],
-    readingGoal: undefined,
+  const { activityDays, goal, streak } = data?.data || {
+    activityDays: [],
+    goal: undefined,
     streak: 0,
   };
 
-  const readingDaysMap = useMemo<Record<string, ReadingDay & { hasRead: boolean }>>(() => {
-    if (!readingDays) return {};
+  const readingDaysMap = useMemo<Record<string, ActivityDay & { hasRead: boolean }>>(() => {
+    if (!activityDays) return {};
 
     const result = {};
 
-    readingDays.forEach((day) => {
+    activityDays.forEach((day) => {
       result[day.date] = {
         ...day,
         hasRead: day.pagesRead > 0 || day.secondsRead > 0 || day.ranges.length > 0,
@@ -93,9 +93,9 @@ const useGetStreakWithMetadata = ({
     });
 
     return result;
-  }, [readingDays]);
+  }, [activityDays]);
 
-  const currentReadingDay = useMemo(() => {
+  const currentActivityDay = useMemo(() => {
     return readingDaysMap[week.find((d) => d.current)?.date];
   }, [readingDaysMap, week]);
 
@@ -107,9 +107,9 @@ const useGetStreakWithMetadata = ({
       readingDaysMap,
     },
     streak,
-    readingGoal,
-    readingDays,
-    currentReadingDay,
+    goal,
+    activityDays,
+    currentActivityDay,
   };
 };
 

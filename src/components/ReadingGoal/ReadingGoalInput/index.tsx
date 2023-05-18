@@ -13,7 +13,7 @@ import Combobox from '@/dls/Forms/Combobox';
 import ComboboxSize from '@/dls/Forms/Combobox/types/ComboboxSize';
 import Input, { InputSize } from '@/dls/Forms/Input';
 import Select, { SelectSize } from '@/dls/Forms/Select';
-import { ReadingGoalType } from '@/types/auth/ReadingGoal';
+import { GoalType } from '@/types/auth/Goal';
 import { RangeItem, RangeItemPosition } from '@/types/Range';
 import {
   generateChapterOptions,
@@ -23,7 +23,7 @@ import {
 import { getVerseNumberFromKey, getChapterNumberFromKey, makeVerseKey } from '@/utils/verse';
 
 export interface ReadingGoalInputProps {
-  type: ReadingGoalType;
+  type: GoalType;
 
   rangeStartVerse?: string;
   rangeEndVerse?: string;
@@ -190,7 +190,7 @@ const ReadingGoalInput: React.FC<ReadingGoalInputProps> = ({
     return verseOptions[Number(verseId) - 1]?.label;
   };
 
-  if (type === ReadingGoalType.RANGE) {
+  if (type === GoalType.RANGE) {
     return (
       <>
         <div className={styles.rangeInputContainer}>
@@ -253,7 +253,7 @@ const ReadingGoalInput: React.FC<ReadingGoalInputProps> = ({
     );
   }
 
-  if (type === ReadingGoalType.PAGES) {
+  if (type === GoalType.PAGES) {
     return (
       <div className={styles.inputContainer}>
         <label htmlFor="pages" className={styles.label}>

@@ -1,6 +1,10 @@
 import { Mushaf } from '../QuranReader';
 
-export type ReadingDay = {
+export enum ActivityDayType {
+  QURAN = 'QURAN',
+}
+
+export type ActivityDay = {
   id: string;
   ranges: string[];
   pagesRead: number;
@@ -14,16 +18,18 @@ export type ReadingDay = {
   date: Date;
 };
 
-export type UpdateReadingDayBody = {
+export type UpdateActivityDayBody = {
   ranges?: string[];
   pages?: number;
   seconds?: number;
   mushafId: Mushaf;
+  type: ActivityDayType;
 };
 
-export type FilterReadingDaysParams = {
+export type FilterActivityDaysParams = {
   from: string;
   to: string;
   limit?: number;
   cursor?: string;
+  type: ActivityDayType;
 };

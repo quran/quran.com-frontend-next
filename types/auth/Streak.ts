@@ -1,12 +1,16 @@
 import { Mushaf } from '../QuranReader';
 
-import { ReadingDay } from './ReadingDay';
-import { ReadingGoalStatus } from './ReadingGoal';
+import { ActivityDay } from './ActivityDay';
+import { QuranGoalStatus } from './Goal';
+
+export enum StreakType {
+  QURAN = 'QURAN',
+}
 
 export type StreakWithUserMetadata = {
   streak: number;
-  readingGoal?: ReadingGoalStatus;
-  readingDays: (Omit<ReadingDay, 'date'> & {
+  goal?: QuranGoalStatus;
+  activityDays: (Omit<ActivityDay, 'date'> & {
     date: string;
   })[];
 };
@@ -15,4 +19,5 @@ export type StreakWithMetadataParams = {
   from: string;
   to: string;
   mushafId: Mushaf;
+  type: StreakType;
 };

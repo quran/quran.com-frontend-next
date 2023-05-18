@@ -1,5 +1,5 @@
 /* eslint-disable import/prefer-default-export */
-import { ReadingGoalType } from '@/types/auth/ReadingGoal';
+import { GoalType } from '@/types/auth/Goal';
 import ChaptersData from '@/types/ChaptersData';
 import { isValidPageId, isValidVerseKey } from '@/utils/validator';
 import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
@@ -8,7 +8,7 @@ const SECONDS_LIMIT = 4 * 60 * 60; // 4 hours
 const MIN_SECONDS = 60; // 1 minute
 
 interface ReadingGoalPayload {
-  type: ReadingGoalType;
+  type: GoalType;
   pages?: number;
   seconds?: number;
   range?: { startVerse: string; endVerse: string };
@@ -26,19 +26,19 @@ export const validateReadingGoalData = (
   { type, pages, seconds, range }: ReadingGoalPayload,
 ): boolean => {
   // if the user selected a pages goal and didn't enter a valid amount of pages, disable the next button
-  if (type === ReadingGoalType.PAGES && !isValidPageId(pages)) return false;
+  if (type === GoalType.PAGES && !isValidPageId(pages)) return false;
 
   // if the user selected a time goal and didn't enter a valid amount of seconds, disable the next button
   // in theory, this should never happen because the input is a select, but just in case
   if (
-    type === ReadingGoalType.TIME &&
+    type === GoalType.TIME &&
     (Number.isNaN(seconds) || seconds > SECONDS_LIMIT || seconds < MIN_SECONDS)
   ) {
     return false;
   }
 
   // if the user selected a range goal and didn't enter a valid range, disable the next button
-  if (type === ReadingGoalType.RANGE) {
+  if (type === GoalType.RANGE) {
     if (!range?.startVerse || !range?.endVerse) return false;
     if (
       !isValidVerseKey(chaptersData, range.startVerse) ||

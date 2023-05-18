@@ -12,9 +12,9 @@ import DataContext from '@/contexts/DataContext';
 import useGlobalIntersectionObserver from '@/hooks/useGlobalIntersectionObserver';
 import { setLastReadVerse } from '@/redux/slices/QuranReader/readingTracker';
 import { selectQuranFont, selectQuranMushafLines } from '@/redux/slices/QuranReader/styles';
-import { UpdateReadingDayBody } from '@/types/auth/ReadingDay';
+import { ActivityDayType, UpdateActivityDayBody } from '@/types/auth/ActivityDay';
 import { getMushafId } from '@/utils/api';
-import { addReadingSession, updateReadingDay } from '@/utils/auth/api';
+import { addReadingSession, updateActivityDay } from '@/utils/auth/api';
 import { makeReadingSessionsUrl, makeStreakUrl } from '@/utils/auth/apiPaths';
 import { isLoggedIn } from '@/utils/auth/login';
 import mergeVerseKeys from '@/utils/mergeVerseKeys';
@@ -63,8 +63,8 @@ const useSyncReadingProgress = ({ isReadingPreference }: UseSyncReadingProgressP
 
   // send the data to the backend and clear the SWR cache
   const updateReadingDayAndClearCache = useCallback(
-    (body: UpdateReadingDayBody) => {
-      updateReadingDay(body).then(() => {
+    (body: UpdateActivityDayBody) => {
+      updateActivityDay(body).then(() => {
         mutate(makeStreakUrl());
       });
     },
@@ -125,7 +125,7 @@ const useSyncReadingProgress = ({ isReadingPreference }: UseSyncReadingProgressP
         elapsedReadingTimeInSeconds.current = 0;
       }
 
-      const body: UpdateReadingDayBody = { mushafId: mushaf };
+      const body: UpdateActivityDayBody = { mushafId: mushaf, type: ActivityDayType.QURAN };
 
       if (verseRanges) {
         body.ranges = verseRanges;

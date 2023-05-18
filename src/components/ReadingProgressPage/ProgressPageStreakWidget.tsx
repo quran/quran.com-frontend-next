@@ -11,14 +11,14 @@ import { toLocalizedNumber } from '@/utils/locale';
 
 interface ProgressPageStreakWidgetProps {
   weekData: StreakWithMetadata['weekData'];
-  readingGoal?: StreakWithMetadata['readingGoal'];
+  goal?: StreakWithMetadata['goal'];
   streak: number;
   isLoading: boolean;
 }
 
 const ProgressPageStreakWidget = ({
   weekData,
-  readingGoal,
+  goal,
   streak,
   isLoading,
 }: ProgressPageStreakWidgetProps) => {
@@ -32,7 +32,7 @@ const ProgressPageStreakWidget = ({
         <p>{t('reading-goal:x-days', { days: localizedStreak, count: streak })}</p>
       </div>
 
-      <CurrentWeekProgress weekData={weekData} readingGoal={readingGoal} fixedWidth={false} />
+      <CurrentWeekProgress weekData={weekData} goal={goal} fixedWidth={false} />
     </>
   );
 
