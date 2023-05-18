@@ -26,14 +26,14 @@ const ReadingGoalPage: NextPage = () => {
   const router = useRouter();
 
   // if the user already has a goal, redirect them to the home page
-  const { readingGoal, isLoading: isLoadingReadingGoal } = useGetStreakWithMetadata();
-  const isLoading = isLoadingReadingGoal || !router.isReady || !!readingGoal;
+  const { goal, isLoading: isLoadingReadingGoal } = useGetStreakWithMetadata();
+  const isLoading = isLoadingReadingGoal || !router.isReady || !!goal;
 
   useEffect(() => {
-    if (readingGoal) {
+    if (goal) {
       router.push('/');
     }
-  }, [router, readingGoal]);
+  }, [router, goal]);
 
   return (
     <>
