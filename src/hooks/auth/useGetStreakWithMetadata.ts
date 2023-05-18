@@ -6,7 +6,7 @@ import useSWR from 'swr';
 
 import { selectQuranFont, selectQuranMushafLines } from '@/redux/slices/QuranReader/styles';
 import { ActivityDay } from '@/types/auth/ActivityDay';
-import { StreakWithMetadataParams } from '@/types/auth/Streak';
+import { StreakType, StreakWithMetadataParams } from '@/types/auth/Streak';
 import { getMushafId } from '@/utils/api';
 import { getStreakWithUserMetadata } from '@/utils/auth/api';
 import { makeStreakUrl } from '@/utils/auth/apiPaths';
@@ -61,6 +61,7 @@ const useGetStreakWithMetadata = ({
     mushafId: mushaf,
     from: week[0].date,
     to: week[week.length - 1].date,
+    type: StreakType.QURAN,
   };
 
   // we don't pass the params to `makeStreakUrl` in the key so that we can invalidate the cache without getting the other params
