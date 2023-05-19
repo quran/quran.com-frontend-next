@@ -180,21 +180,21 @@ export const addReadingGoal = async ({
   category,
   ...data
 }: CreateGoalRequest): Promise<{ data?: Goal }> =>
-  postRequest(makeGoalUrl({ mushafId, category }), data);
+  postRequest(makeGoalUrl({ mushafId, type: category }), data);
 
 export const updateReadingGoal = async ({
   mushafId,
   category,
   ...data
 }: UpdateGoalRequest): Promise<{ data?: Goal }> =>
-  patchRequest(makeGoalUrl({ mushafId, category }), data);
+  patchRequest(makeGoalUrl({ mushafId, type: category }), data);
 
 export const estimateReadingGoal = async (
   data: CreateGoalRequest,
 ): Promise<{ data?: EstimatedQuranGoal }> => privateFetcher(makeEstimateReadingGoalUrl(data));
 
 export const deleteReadingGoal = async (params: { category: GoalCategory }): Promise<void> =>
-  deleteRequest(makeGoalUrl(params));
+  deleteRequest(makeGoalUrl({ ...params, type: params.category }));
 
 export const filterReadingDays = async (
   params: FilterActivityDaysParams,
