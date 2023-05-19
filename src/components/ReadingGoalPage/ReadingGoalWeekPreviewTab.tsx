@@ -13,12 +13,11 @@ import HoverablePopover from '@/dls/Popover/HoverablePopover';
 import Spinner from '@/dls/Spinner/Spinner';
 import { selectQuranFont, selectQuranMushafLines } from '@/redux/slices/QuranReader/styles';
 import {
-  CreateGoalRequest,
   EstimatedGoalDay,
   RangeEstimatedQuranGoalDay,
   QuranGoalPeriod,
   GoalType,
-  GoalCategory,
+  EstimateGoalRequest,
 } from '@/types/auth/Goal';
 import { Mushaf } from '@/types/QuranReader';
 import { getMushafId } from '@/utils/api';
@@ -30,8 +29,11 @@ import { toLocalizedNumber } from '@/utils/locale';
 import { convertNumberToDecimal } from '@/utils/number';
 import { parseVerseRange } from '@/utils/verseKeys';
 
-const makePayload = (state: ReadingGoalTabProps['state'], mushafId: Mushaf): CreateGoalRequest => {
-  const payload: CreateGoalRequest = {
+const makePayload = (
+  state: ReadingGoalTabProps['state'],
+  mushafId: Mushaf,
+): EstimateGoalRequest => {
+  const payload: EstimateGoalRequest = {
     mushafId,
     type: state.type,
     amount: {
@@ -39,7 +41,6 @@ const makePayload = (state: ReadingGoalTabProps['state'], mushafId: Mushaf): Cre
       [GoalType.TIME]: state.seconds,
       [GoalType.RANGE]: `${state.rangeStartVerse}-${state.rangeEndVerse}`,
     }[state.type],
-    category: GoalCategory.QURAN,
   };
 
   if (state.period === QuranGoalPeriod.Continuous) payload.duration = state.duration;

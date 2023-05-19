@@ -28,6 +28,8 @@ export type CreateGoalRequest = {
   category: GoalCategory;
 };
 
+export type EstimateGoalRequest = Omit<CreateGoalRequest, 'category'>;
+
 export type UpdateGoalRequest = Partial<CreateGoalRequest>;
 
 export type QuranGoalStatus = Goal & {

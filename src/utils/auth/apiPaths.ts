@@ -1,7 +1,7 @@
 import stringify from '../qs-stringify';
 
 import { ActivityDayType, FilterActivityDaysParams } from '@/types/auth/ActivityDay';
-import { CreateGoalRequest, GoalCategory } from '@/types/auth/Goal';
+import { EstimateGoalRequest, GoalCategory } from '@/types/auth/Goal';
 import { StreakWithMetadataParams } from '@/types/auth/Streak';
 import { Mushaf } from '@/types/QuranReader';
 import { getAuthApiPath } from '@/utils/url';
@@ -111,7 +111,7 @@ export const makeFilterActivityDaysUrl = (params: FilterActivityDaysParams) =>
 export const makeGoalUrl = (params: { mushafId?: Mushaf; type: GoalCategory }) =>
   makeUrl('goal', params);
 
-export const makeEstimateReadingGoalUrl = (data: CreateGoalRequest) =>
+export const makeEstimateReadingGoalUrl = (data: EstimateGoalRequest) =>
   makeUrl('goal/estimate', data);
 
 export const makeStreakUrl = (params?: StreakWithMetadataParams) => makeUrl('streak', params);

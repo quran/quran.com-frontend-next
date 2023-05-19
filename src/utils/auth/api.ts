@@ -12,6 +12,7 @@ import {
 import {
   CreateGoalRequest,
   EstimatedQuranGoal,
+  EstimateGoalRequest,
   Goal,
   GoalCategory,
   UpdateGoalRequest,
@@ -190,11 +191,11 @@ export const updateReadingGoal = async ({
   patchRequest(makeGoalUrl({ mushafId, type: category }), data);
 
 export const estimateReadingGoal = async (
-  data: CreateGoalRequest,
+  data: EstimateGoalRequest,
 ): Promise<{ data?: EstimatedQuranGoal }> => privateFetcher(makeEstimateReadingGoalUrl(data));
 
 export const deleteReadingGoal = async (params: { category: GoalCategory }): Promise<void> =>
-  deleteRequest(makeGoalUrl({ ...params, type: params.category }));
+  deleteRequest(makeGoalUrl({ type: params.category }));
 
 export const filterReadingDays = async (
   params: FilterActivityDaysParams,
