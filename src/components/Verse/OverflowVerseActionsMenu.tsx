@@ -39,7 +39,9 @@ const OverflowVerseActionsMenu: React.FC<Props> = ({
 
   const closePopover = () => {
     setIsPopoverOpen(false);
-    return onActionTriggered;
+    if (onActionTriggered) {
+      onActionTriggered();
+    }
   };
 
   return (
