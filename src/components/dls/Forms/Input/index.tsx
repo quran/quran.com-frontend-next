@@ -1,4 +1,4 @@
-import React, { ReactNode, useState, useEffect, ChangeEvent } from 'react';
+import React, { ReactNode, useState, useEffect, ChangeEvent, RefObject } from 'react';
 
 import classNames from 'classnames';
 
@@ -44,6 +44,7 @@ interface Props {
   containerClassName?: string;
   htmlType?: React.HTMLInputTypeAttribute;
   isRequired?: boolean;
+  inputRef?: RefObject<HTMLInputElement>;
 }
 
 const Input: React.FC<Props> = ({
@@ -66,6 +67,7 @@ const Input: React.FC<Props> = ({
   containerClassName,
   htmlType,
   isRequired,
+  inputRef,
 }) => {
   const [inputValue, setInputValue] = useState(value);
   // listen to any change in value in-case the value gets populated after and API call.
@@ -111,6 +113,7 @@ const Input: React.FC<Props> = ({
           required={isRequired}
           dir="auto"
           id={id}
+          ref={inputRef}
           disabled={disabled}
           onChange={onValueChange}
           value={inputValue}
