@@ -40,7 +40,7 @@ const VerseActionRepeatAudio = ({
         selectedVerseKey={verseKey}
         chapterId={chapterId.toString()}
         isOpen={isModalOpen}
-        onClose={() => onActionTriggered()}
+        onClose={onActionTriggered}
       />
       <PopoverMenu.Item icon={<RepeatIcon />} onClick={onItemClicked}>
         {t('audio.player.repeat-1-verse')}
