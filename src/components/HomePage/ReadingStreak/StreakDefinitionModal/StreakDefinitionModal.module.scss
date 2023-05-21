@@ -1,3 +1,5 @@
+@use "src/styles/theme";
+
 .button {
   display: flex;
   background: none;
@@ -32,8 +34,8 @@
     li {
       display: flex;
       align-items: center;
-      color: var(--color-background-alternative-deep);
       font-size: var(--font-size-small);
+      color: var(--color-text-default);
     }
   }
 }
