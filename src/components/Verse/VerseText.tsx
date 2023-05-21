@@ -175,7 +175,6 @@ const VerseText = ({
       secondaryHighlightedIndexEnd,
     );
     const wordsAfterSecondaryHighlighted = words.slice(secondaryHighlightedIndexEnd);
-    // console.log('wordsAfterSecondaryHighlighted', wordsAfterSecondaryHighlighted);
 
     return (
       <div className={wrapperClassname}>
