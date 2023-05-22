@@ -11,8 +11,9 @@ import ContentModal from '@/dls/ContentModal/ContentModal';
 import ContentModalHandles from '@/dls/ContentModal/types/ContentModalHandles';
 import Spinner from '@/dls/Spinner/Spinner';
 import ArrowLeft from '@/icons/west.svg';
-import { FilterActivityDaysParams, ActivityDay, ActivityDayType } from '@/types/auth/ActivityDay';
+import { ActivityDay } from '@/types/auth/ActivityDay';
 import { Pagination } from '@/types/auth/GetBookmarksByCollectionId';
+import { getFilterActivityDaysParams } from '@/utils/activity-day';
 import { privateFetcher } from '@/utils/auth/api';
 import { makeFilterActivityDaysUrl } from '@/utils/auth/apiPaths';
 import { dateToReadableFormat } from '@/utils/datetime';
@@ -24,30 +25,14 @@ interface MonthModalProps {
   onClose: () => void;
 }
 
-const makeDateRangeFromMonth = (month: number, year: number) => {
-  const from = `${year}-${month.toString().padStart(2, '0')}-01`;
-  const to = `${year}-${month.toString().padStart(2, '0')}-${new Date(year, month, 0)
-    .getDate()
-    .toString()
-    .padStart(2, '0')}`;
-
-  return { from, to };
-};
-
 const MonthModal = ({ month, year, onClose }: MonthModalProps) => {
   const contentModalRef = useRef<ContentModalHandles>();
   const { t, lang } = useTranslation('reading-progress');
-  const { from, to } = makeDateRangeFromMonth(month.id, year);
 
   // YYYY-MM-DD
   const [selectedDate, setSelectedDate] = useState<string | null>();
 
-  const params: FilterActivityDaysParams = {
-    from,
-    to,
-    limit: 31,
-    type: ActivityDayType.QURAN,
-  };
+  const params = getFilterActivityDaysParams(month.id, year);
 
   const localizedYear = toLocalizedNumber(year, lang, undefined, {
     useGrouping: false,
@@ -57,7 +42,7 @@ const MonthModal = ({ month, year, onClose }: MonthModalProps) => {
     ? dateToReadableFormat(selectedDate, lang, {
         year: 'numeric',
       })
-    : `${month.name}, ${localizedYear}`;
+    : `${month.name} ${localizedYear}`;
 
   return (
     <ContentModal

@@ -166,7 +166,6 @@
     },
     "fundraising": {
         "description": "Le donazioni mensili ci aiutano a migliorare Quran.com e sostenere le operazioni, quindi ci concentriamo meno sulla raccolta fondi e più sulla creazione di impatto.",
-        "learn-more": "Scopri di più",
         "title": "Diventa un donatore mensile"
     },
     "help": "Aiuto",
@@ -179,6 +178,7 @@
     "juz": "Juz",
     "language": "Lingua",
     "languages": "Le lingue",
+    "learn-more": "Scopri di più",
     "less": "Meno",
     "loading": "Caricamento in corso",
     "login": "Login",
@@ -191,6 +191,7 @@
     "more": "Di più",
     "navigate": "Navigare",
     "network": "Rete",
+    "new": "Nuovo!",
     "next": "Prossimo",
     "next-ayah": "Avanti Sì",
     "no": "No",
