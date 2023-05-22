@@ -112,7 +112,9 @@ $circle-border: 4px;
     inset-inline-start: 0;
     // we need to translate the line directly under the circle and in the middle of it
     transform: translate(
-      calc(-100% + ($circle-spacing * -1) + ($circle-size + $circle-border) / -2),
+      calc(
+        -100% + ($circle-spacing * -1) + ($circle-size + $circle-border) / -2
+      ),
       calc(50% + ($circle-size + $circle-border) / 2)
     );
 
