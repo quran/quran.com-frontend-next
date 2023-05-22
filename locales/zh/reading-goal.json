@@ -66,6 +66,9 @@
             "title": "时间"
         }
     },
+    "plus-x-more-days": {
+        "other": "+{{days}} 天"
+    },
     "preview-schedule": {
         "description": "这就是您的目标的样子。您以后可以随时更改它。",
         "title": "这是您的日程安排的预览"
@@ -87,6 +90,8 @@
         "other": "还剩 {{days}} 天"
     },
     "set-reading-goal-success": "您的阅读目标已成功设定。",
+    "start-journey": "开始你的旅程！",
+    "start-reading": "开始阅读",
     "starting-chapter": "开始古兰经",
     "starting-verse": "启动 Ayah",
     "streak": "条纹",

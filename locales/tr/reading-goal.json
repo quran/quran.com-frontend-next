@@ -66,6 +66,10 @@
             "title": "Zaman"
         }
     },
+    "plus-x-more-days": {
+        "one": "+{{days}} gün daha",
+        "other": "+{{days}} gün daha"
+    },
     "preview-schedule": {
         "description": "Hedefiniz böyle görünecek. Daha sonra her zaman değiştirebilirsiniz.",
         "title": "İşte programınızın bir önizlemesi"
@@ -88,6 +92,8 @@
         "other": "{{days}} gün kaldı"
     },
     "set-reading-goal-success": "Okuma hedefiniz başarıyla belirlendi.",
+    "start-journey": "Yolculuğunuza başlayın!",
+    "start-reading": "Okumaya başlamak",
     "starting-chapter": "Başlangıç Suresi",
     "starting-verse": "Ayah'a Başlamak",
     "streak": "Rüzgâr gibi geçmek",

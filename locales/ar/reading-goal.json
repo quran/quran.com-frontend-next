@@ -66,6 +66,14 @@
             "title": "وقت"
         }
     },
+    "plus-x-more-days": {
+        "zero": "ليس هناك أيام أخري",
+        "one": "يوم آخر",
+        "two": "يومين آخرين",
+        "few": "+{{days}} أيام أخرى",
+        "many": "+{{days}} أيام أخرى",
+        "other": "+{{days}} أيام أخرى"
+    },
     "preview-schedule": {
         "description": "هكذا سيبدو هدفك. يمكنك دائما تغييره لاحقا.",
         "title": "هنا معاينة لجدولك الزمني"
@@ -92,6 +100,8 @@
         "other": "بقي {{days}} يوم"
     },
     "set-reading-goal-success": "تم تعيين هدف القراءة الخاص بك بنجاح.",
+    "start-journey": "ابدأ رحلتك!",
+    "start-reading": "إبدأ القراءة",
     "starting-chapter": "سورة البدء",
     "starting-verse": "آية البدء",
     "streak": "الاستمرارية",

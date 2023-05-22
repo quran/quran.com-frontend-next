@@ -66,6 +66,10 @@
             "title": "Temps"
         }
     },
+    "plus-x-more-days": {
+        "one": "+{{days}} jour de plus",
+        "other": "+{{days}} jours de plus"
+    },
     "preview-schedule": {
         "description": "Voici à quoi ressemblera votre objectif. Vous pouvez toujours le changer plus tard.",
         "title": "Voici un aperçu de votre emploi du temps"
@@ -88,6 +92,8 @@
         "other": "{{days}} jours restants"
     },
     "set-reading-goal-success": "Votre objectif de lecture a été défini avec succès.",
+    "start-journey": "Commencez votre voyage !",
+    "start-reading": "Commencez à lire",
     "starting-chapter": "Sourate de départ",
     "starting-verse": "Commencer Ayah",
     "streak": "Traînée",

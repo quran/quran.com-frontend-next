@@ -4,9 +4,8 @@
         "description": "Your goal will calculate your progress over a duration of days",
         "title": "Over a duration"
     },
+    "create-plan": "Create plan",
     "create-reading-goal": "Create Goal",
-    "start-journey": "Start your journey!",
-    "start-reading": "Start Reading",
     "daily-progress": "Daily Progress",
     "daily": {
         "description": "Your goal will reset every day",
@@ -67,6 +66,10 @@
             "title": "Time"
         }
     },
+    "plus-x-more-days": {
+        "one": "+{{days}} more day",
+        "other": "+{{days}} more days"
+    },
     "preview-schedule": {
         "description": "This is how your goal will look like. You can always change it later.",
         "title": "Here is a preview of your schedule"
@@ -89,6 +92,8 @@
         "other": "{{days}} days remaining"
     },
     "set-reading-goal-success": "Your reading goal has been set successfully.",
+    "start-journey": "Start your journey!",
+    "start-reading": "Start Reading",
     "starting-chapter": "Starting Surah",
     "starting-verse": "Starting Ayah",
     "streak": "Streak",
@@ -122,9 +127,5 @@
     "x-seconds": {
         "one": "{{seconds}} second",
         "other": "{{seconds}} seconds"
-    },
-    "plus-x-more-days": {
-        "one": "+{{days}} more day",
-        "other": "+{{days}} more days"
     }
 }

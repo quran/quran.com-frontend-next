@@ -66,6 +66,10 @@
             "title": "Koha"
         }
     },
+    "plus-x-more-days": {
+        "one": "+{{days}} ditë më shumë",
+        "other": "+{{days}} ditë të tjera"
+    },
     "preview-schedule": {
         "description": "Kështu do të duket qëllimi juaj. Mund ta ndryshoni gjithmonë më vonë.",
         "title": "Këtu është një pamje paraprake e orarit tuaj"
@@ -88,6 +92,8 @@
         "other": "Kanë mbetur edhe {{days}} ditë"
     },
     "set-reading-goal-success": "Qëllimi juaj i leximit është vendosur me sukses.",
+    "start-journey": "Filloni udhëtimin tuaj!",
+    "start-reading": "Filloni të lexoni",
     "starting-chapter": "Fillimi i sures",
     "starting-verse": "Fillimi i ajetit",
     "streak": "brez",
