@@ -10,6 +10,7 @@ import Button, { ButtonType, ButtonVariant } from '@/dls/Button/Button';
 import Input from '@/dls/Forms/Input';
 import Modal from '@/dls/Modal/Modal';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
+import { GoalCategory } from '@/types/auth/Goal';
 import { deleteReadingGoal } from '@/utils/auth/api';
 import { makeStreakUrl } from '@/utils/auth/apiPaths';
 import { logButtonClick } from '@/utils/eventLogger';
@@ -26,7 +27,7 @@ const DeleteReadingGoalModal = ({ isDisabled }: DeleteReadingGoalButtonProps) =>
   const toast = useToast();
 
   const deleteReadingGoalAndClearCache = useCallback(async () => {
-    await deleteReadingGoal();
+    await deleteReadingGoal({ category: GoalCategory.QURAN });
     mutate(makeStreakUrl());
   }, [mutate]);
 

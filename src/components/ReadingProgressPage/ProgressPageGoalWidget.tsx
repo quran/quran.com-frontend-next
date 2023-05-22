@@ -14,18 +14,18 @@ import { toLocalizedNumber } from '@/utils/locale';
 import { getReadingGoalNavigationUrl } from '@/utils/navigation';
 
 interface ProgressPageGoalWidgetProps {
-  currentReadingDay: StreakWithMetadata['currentReadingDay'];
-  readingGoal?: StreakWithMetadata['readingGoal'];
+  currentActivityDay: StreakWithMetadata['currentActivityDay'];
+  goal?: StreakWithMetadata['goal'];
   isLoading: boolean;
 }
 
 const ProgressPageGoalWidget = ({
-  currentReadingDay,
-  readingGoal,
+  currentActivityDay,
+  goal,
   isLoading,
 }: ProgressPageGoalWidgetProps) => {
   const { t, lang } = useTranslation('reading-progress');
-  const percent = Math.min(readingGoal?.progress?.percent || 0, 100);
+  const percent = Math.min(goal?.progress?.percent || 0, 100);
   const isGoalDone = percent >= 100;
   const localizedPercent = toLocalizedNumber(percent, lang);
 
@@ -39,7 +39,7 @@ const ProgressPageGoalWidget = ({
     );
   }
 
-  if (!readingGoal) {
+  if (!goal) {
     const onCreateReadingGoalClick = () => {
       logButtonClick('progress_page_create_goal');
     };
@@ -54,7 +54,7 @@ const ProgressPageGoalWidget = ({
   }
 
   const getContent = () => {
-    if (readingGoal.isCompleted) {
+    if (goal.isCompleted) {
       return <p>{t('reading-goal:progress.goal-complete')}</p>;
     }
 
@@ -64,8 +64,8 @@ const ProgressPageGoalWidget = ({
 
     return (
       <ReadingGoalAmount
-        readingGoal={readingGoal}
-        currentReadingDay={currentReadingDay}
+        goal={goal}
+        currentActivityDay={currentActivityDay}
         context="progress_page"
       />
     );

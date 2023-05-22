@@ -6,14 +6,14 @@ import useTranslation from 'next-translate/useTranslation';
 import styles from './ReadingHistory.module.scss';
 import ReadingStats from './ReadingStats';
 
-import { ReadingDay } from '@/types/auth/ReadingDay';
+import { ActivityDay } from '@/types/auth/ActivityDay';
 import { logButtonClick } from '@/utils/eventLogger';
 import { toLocalizedNumber } from '@/utils/locale';
 
 interface DaysCalendarProps {
   month: { id: number; name: string; daysCount: number };
   year: number;
-  days: ReadingDay[];
+  days: ActivityDay[];
   selectedDate: string | null;
   setSelectedDate: (date: string | null) => void;
 }
@@ -31,7 +31,7 @@ const DaysCalendar: React.FC<DaysCalendarProps> = ({
   const monthDate = `${year}-${month.id.toString().padStart(2, '0')}`;
 
   const dateToDayMap = useMemo(() => {
-    const map: Record<string, ReadingDay> = {};
+    const map: Record<string, ActivityDay> = {};
 
     days.forEach((day) => {
       if (!day.pagesRead && !day.secondsRead && !day.ranges.length) {
@@ -46,7 +46,7 @@ const DaysCalendar: React.FC<DaysCalendarProps> = ({
 
   if (selectedDate) {
     const readingDay = dateToDayMap[selectedDate];
-    return <ReadingStats readingDay={readingDay} />;
+    return <ReadingStats activityDay={readingDay} />;
   }
 
   const onDayClick = (date: string, dayNumber: number) => {

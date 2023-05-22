@@ -66,6 +66,9 @@
             "title": "Masa"
         }
     },
+    "plus-x-more-days": {
+        "other": "+{{days}} hari lagi"
+    },
     "preview-schedule": {
         "description": "Beginilah rupa matlamat anda. Anda sentiasa boleh menukarnya kemudian.",
         "title": "Berikut ialah pratonton jadual anda"
@@ -87,6 +90,8 @@
         "other": "{{days}} hari lagi"
     },
     "set-reading-goal-success": "Matlamat membaca anda telah berjaya ditetapkan.",
+    "start-journey": "Mulakan perjalanan anda!",
+    "start-reading": "Mulakan Membaca",
     "starting-chapter": "Memulakan Surah",
     "starting-verse": "Memula Ayah",
     "streak": "coretan",

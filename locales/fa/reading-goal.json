@@ -66,6 +66,10 @@
             "title": "زمان"
         }
     },
+    "plus-x-more-days": {
+        "one": "+{{days}} روز دیگر",
+        "other": "+{{days}} روز دیگر"
+    },
     "preview-schedule": {
         "description": "هدف شما اینگونه خواهد بود. همیشه می توانید بعداً آن را تغییر دهید.",
         "title": "در اینجا پیش نمایشی از برنامه شما است"
@@ -88,6 +92,8 @@
         "other": "{{days}} روز باقی مانده است"
     },
     "set-reading-goal-success": "هدف خواندن شما با موفقیت تنظیم شده است.",
+    "start-journey": "سفر خود را آغاز کنید!",
+    "start-reading": "شروع به خواندن کنید",
     "starting-chapter": "شروع سوره",
     "starting-verse": "شروع آیه",
     "streak": "خط",

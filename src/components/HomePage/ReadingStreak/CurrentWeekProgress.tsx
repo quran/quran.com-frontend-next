@@ -13,11 +13,11 @@ import { convertFractionToPercent } from '@/utils/number';
 
 interface Props {
   weekData: ReturnType<typeof useGetStreakWithMetadata>['weekData'];
-  readingGoal?: ReturnType<typeof useGetStreakWithMetadata>['readingGoal'];
+  goal?: ReturnType<typeof useGetStreakWithMetadata>['goal'];
   fixedWidth?: boolean;
 }
 
-const CurrentWeekProgress: React.FC<Props> = ({ weekData, readingGoal, fixedWidth = true }) => {
+const CurrentWeekProgress: React.FC<Props> = ({ weekData, goal, fixedWidth = true }) => {
   const { lang } = useTranslation();
   const { days, readingDaysMap } = weekData;
 
@@ -27,9 +27,7 @@ const CurrentWeekProgress: React.FC<Props> = ({ weekData, readingGoal, fixedWidt
 
     // if the user has a goal, we want to show a checked circle if the user has completed his goal for the day
     // otherwise, we want to show a filled circle if the user has read at all for the day
-    const isGoalDone = readingGoal
-      ? convertFractionToPercent(readingDay?.progress || 0) >= 100
-      : hasRead;
+    const isGoalDone = goal ? convertFractionToPercent(readingDay?.progress || 0) >= 100 : hasRead;
 
     if (isGoalDone) return DayState.Checked;
     if (hasRead) return DayState.Filled;

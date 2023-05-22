@@ -66,6 +66,10 @@
             "title": "সময়"
         }
     },
+    "plus-x-more-days": {
+        "one": "আরও {{days}} দিন",
+        "other": "আরও {{days}} দিন"
+    },
     "preview-schedule": {
         "description": "এভাবেই আপনার লক্ষ্য দেখাবে। আপনি সর্বদা এটি পরে পরিবর্তন করতে পারেন।",
         "title": "এখানে আপনার সময়সূচীর একটি পূর্বরূপ আছে"
@@ -88,6 +92,8 @@
         "other": "{{days}} দিন বাকি"
     },
     "set-reading-goal-success": "আপনার পড়ার লক্ষ্য সফলভাবে সেট করা হয়েছে।",
+    "start-journey": "আপনার যাত্রা শুরু করুন!",
+    "start-reading": "পড়া শুরু করুন",
     "starting-chapter": "সূরা শুরু",
     "starting-verse": "শুরু করছি আয়াত",
     "streak": "স্ট্রিক",

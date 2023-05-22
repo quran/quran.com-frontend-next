@@ -66,6 +66,10 @@
             "title": "وقت"
         }
     },
+    "plus-x-more-days": {
+        "one": "مزید {{days}} دن",
+        "other": "مزید {{days}} دن"
+    },
     "preview-schedule": {
         "description": "اس طرح آپ کا مقصد نظر آئے گا۔ آپ اسے بعد میں ہمیشہ تبدیل کر سکتے ہیں۔",
         "title": "یہاں آپ کے شیڈول کا ایک پیش نظارہ ہے۔"
@@ -88,6 +92,8 @@
         "other": "{{days}} دن باقی ہیں۔"
     },
     "set-reading-goal-success": "آپ کے پڑھنے کا ہدف کامیابی سے طے ہو گیا ہے۔",
+    "start-journey": "اپنا سفر شروع کریں!",
+    "start-reading": "پڑھنا شروع کریں۔",
     "starting-chapter": "شروع سورہ",
     "starting-verse": "شروع ہو رہی ہے آیت",
     "streak": "اسٹریک",

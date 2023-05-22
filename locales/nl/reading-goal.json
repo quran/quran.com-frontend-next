@@ -66,6 +66,10 @@
             "title": "Tijd"
         }
     },
+    "plus-x-more-days": {
+        "one": "+ nog {{days}} dag",
+        "other": "+ nog {{days}} dagen"
+    },
     "preview-schedule": {
         "description": "Zo ziet je doel eruit. Je kunt het later altijd wijzigen.",
         "title": "Hier is een voorproefje van je schema"
@@ -88,6 +92,8 @@
         "other": "Nog {{days}} dagen"
     },
     "set-reading-goal-success": "Je leesdoel is succesvol ingesteld.",
+    "start-journey": "Begin je reis!",
+    "start-reading": "Start met lezen",
     "starting-chapter": "Soera beginnen",
     "starting-verse": "Ayah beginnen",
     "streak": "Streep",

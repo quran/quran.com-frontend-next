@@ -6,15 +6,15 @@ import styles from './ReadingGoalPage.module.scss';
 
 import CalendarIcon from '@/icons/calendar.svg';
 import RepeatIcon from '@/icons/repeat.svg';
-import { ReadingGoalPeriod } from '@/types/auth/ReadingGoal';
+import { QuranGoalPeriod } from '@/types/auth/Goal';
 
 const options = [
   {
-    key: ReadingGoalPeriod.Daily,
+    key: QuranGoalPeriod.Daily,
     icon: RepeatIcon,
   },
   {
-    key: ReadingGoalPeriod.Continuous,
+    key: QuranGoalPeriod.Continuous,
     icon: CalendarIcon,
   },
 ] as const;

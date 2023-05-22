@@ -19,11 +19,12 @@ import Modal from '@/dls/Modal/Modal';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import { selectQuranFont, selectQuranMushafLines } from '@/redux/slices/QuranReader/styles';
 import {
-  ReadingGoal,
-  ReadingGoalPeriod,
-  ReadingGoalType,
-  UpdateReadingGoalRequest,
-} from '@/types/auth/ReadingGoal';
+  Goal,
+  QuranGoalPeriod,
+  GoalType,
+  UpdateGoalRequest,
+  GoalCategory,
+} from '@/types/auth/Goal';
 import { getMushafId } from '@/utils/api';
 import { updateReadingGoal } from '@/utils/auth/api';
 import { makeStreakUrl } from '@/utils/auth/apiPaths';
@@ -33,21 +34,21 @@ import { parseVerseRange } from '@/utils/verseKeys';
 
 type UpdateReadingGoalButtonProps = {
   isDisabled?: boolean;
-  readingGoal: ReadingGoal;
+  goal: Goal;
 };
 
-const getPages = (readingGoal: ReadingGoal) => {
-  if (readingGoal.type === ReadingGoalType.PAGES) return Number(readingGoal.targetAmount);
+const getPages = (readingGoal: Goal) => {
+  if (readingGoal.type === GoalType.PAGES) return Number(readingGoal.targetAmount);
   return 1;
 };
 
-const getSeconds = (readingGoal: ReadingGoal) => {
-  if (readingGoal.type === ReadingGoalType.TIME) return Number(readingGoal.targetAmount);
+const getSeconds = (readingGoal: Goal) => {
+  if (readingGoal.type === GoalType.TIME) return Number(readingGoal.targetAmount);
   return 60;
 };
 
-const getRange = (readingGoal: ReadingGoal) => {
-  if (readingGoal.type !== ReadingGoalType.RANGE) return { startVerse: null, endVerse: null };
+const getRange = (readingGoal: Goal) => {
+  if (readingGoal.type !== GoalType.RANGE) return { startVerse: null, endVerse: null };
   const [{ verseKey: startVerse }, { verseKey: endVerse }] = parseVerseRange(
     readingGoal.targetAmount,
   );
@@ -59,12 +60,12 @@ const getRange = (readingGoal: ReadingGoal) => {
 };
 
 const types = [
-  { value: ReadingGoalType.TIME, key: 'time' },
-  { value: ReadingGoalType.PAGES, key: 'pages' },
-  { value: ReadingGoalType.RANGE, key: 'range' },
+  { value: GoalType.TIME, key: 'time' },
+  { value: GoalType.PAGES, key: 'pages' },
+  { value: GoalType.RANGE, key: 'range' },
 ] as const;
 
-const UpdateReadingGoalModal = ({ isDisabled, readingGoal }: UpdateReadingGoalButtonProps) => {
+const UpdateReadingGoalModal = ({ isDisabled, goal }: UpdateReadingGoalButtonProps) => {
   const { t, lang } = useTranslation('reading-progress');
   const chaptersData = useContext(DataContext);
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -74,21 +75,21 @@ const UpdateReadingGoalModal = ({ isDisabled, readingGoal }: UpdateReadingGoalBu
   const { mushaf } = getMushafId(quranFont, mushafLines);
   const dayOptions = useMemo(() => generateDurationDaysOptions(t, lang), [t, lang]);
 
-  const [isContinuous, setIsContinuous] = useState(!!readingGoal.duration);
-  const [duration, setDuration] = useState(readingGoal.duration || 30);
-  const [type, setType] = useState(readingGoal.type);
+  const [isContinuous, setIsContinuous] = useState(!!goal.duration);
+  const [duration, setDuration] = useState(goal.duration || 30);
+  const [type, setType] = useState(goal.type);
 
-  const [pages, setPages] = useState(getPages(readingGoal));
-  const [seconds, setSeconds] = useState(getSeconds(readingGoal));
-  const [range, setRange] = useState(getRange(readingGoal));
+  const [pages, setPages] = useState(getPages(goal));
+  const [seconds, setSeconds] = useState(getSeconds(goal));
+  const [range, setRange] = useState(getRange(goal));
 
   const toast = useToast();
 
   const { mutate } = useSWRConfig();
 
   const updateReadingGoalAndClearCache = useCallback(
-    async (data: UpdateReadingGoalRequest) => {
-      await updateReadingGoal({ ...data, mushafId: mushaf });
+    async (data: UpdateGoalRequest) => {
+      await updateReadingGoal({ ...data, mushafId: mushaf, category: GoalCategory.QURAN });
       mutate(makeStreakUrl());
     },
     [mutate, mushaf],
@@ -96,14 +97,14 @@ const UpdateReadingGoalModal = ({ isDisabled, readingGoal }: UpdateReadingGoalBu
 
   const resetState = useCallback(() => {
     // reset everything to the reading goal
-    setType(readingGoal.type);
-    setIsContinuous(!!readingGoal.duration);
-    setDuration(readingGoal.duration || 30);
+    setType(goal.type);
+    setIsContinuous(!!goal.duration);
+    setDuration(goal.duration || 30);
 
-    setPages(getPages(readingGoal));
-    setSeconds(getSeconds(readingGoal));
-    setRange(getRange(readingGoal));
-  }, [readingGoal]);
+    setPages(getPages(goal));
+    setSeconds(getSeconds(goal));
+    setRange(getRange(goal));
+  }, [goal]);
 
   const closeModal = () => {
     setIsModalVisible(false);
@@ -113,7 +114,7 @@ const UpdateReadingGoalModal = ({ isDisabled, readingGoal }: UpdateReadingGoalBu
 
   useEffect(() => {
     resetState();
-  }, [resetState, readingGoal]);
+  }, [resetState, goal]);
 
   const onUpdateGoalClicked = () => {
     logButtonClick('edit_reading_goal');
@@ -123,11 +124,11 @@ const UpdateReadingGoalModal = ({ isDisabled, readingGoal }: UpdateReadingGoalBu
   const onUpdateClicked = async () => {
     let amount: string | number;
 
-    if (type === ReadingGoalType.PAGES) amount = pages;
-    else if (type === ReadingGoalType.TIME) amount = seconds;
+    if (type === GoalType.PAGES) amount = pages;
+    else if (type === GoalType.TIME) amount = seconds;
     else amount = `${range.startVerse}-${range.endVerse}`;
 
-    const data: UpdateReadingGoalRequest = {
+    const data: UpdateGoalRequest = {
       type,
       amount,
     };
@@ -146,11 +147,11 @@ const UpdateReadingGoalModal = ({ isDisabled, readingGoal }: UpdateReadingGoalBu
     }
   };
 
-  const onContinuityChange = (value: ReadingGoalPeriod) => {
-    setIsContinuous(value === ReadingGoalPeriod.Continuous);
+  const onContinuityChange = (value: QuranGoalPeriod) => {
+    setIsContinuous(value === QuranGoalPeriod.Continuous);
     logValueChange(
       'edit_goal_continuity',
-      isContinuous ? ReadingGoalPeriod.Continuous : ReadingGoalPeriod.Daily,
+      isContinuous ? QuranGoalPeriod.Continuous : QuranGoalPeriod.Daily,
       value,
     );
   };
@@ -163,7 +164,7 @@ const UpdateReadingGoalModal = ({ isDisabled, readingGoal }: UpdateReadingGoalBu
     logValueChange(`edit_goal_${input}`, values.currentValue, values.newValue, metadata);
   };
 
-  const onGoalTypeChange = (newType: ReadingGoalType) => {
+  const onGoalTypeChange = (newType: GoalType) => {
     setType(newType);
     logValueChange('edit_goal_type', type, newType);
   };
@@ -197,19 +198,19 @@ const UpdateReadingGoalModal = ({ isDisabled, readingGoal }: UpdateReadingGoalBu
             <RadioGroup
               label="Continuity"
               orientation={RadioRootOrientation.Horizontal}
-              value={isContinuous ? ReadingGoalPeriod.Continuous : ReadingGoalPeriod.Daily}
+              value={isContinuous ? QuranGoalPeriod.Continuous : QuranGoalPeriod.Daily}
               onChange={onContinuityChange}
               className={styles.radioGroup}
               items={[
                 {
-                  id: ReadingGoalPeriod.Continuous,
+                  id: QuranGoalPeriod.Continuous,
                   label: t('reading-goal:continuous.title'),
-                  value: ReadingGoalPeriod.Continuous,
+                  value: QuranGoalPeriod.Continuous,
                 },
                 {
-                  id: ReadingGoalPeriod.Daily,
+                  id: QuranGoalPeriod.Daily,
                   label: t('reading-goal:daily.title'),
-                  value: ReadingGoalPeriod.Daily,
+                  value: QuranGoalPeriod.Daily,
                 },
               ]}
             />

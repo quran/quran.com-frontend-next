@@ -5,7 +5,7 @@ import ReadingGoalTimeTab from '../ReadingGoalTimeTab';
 import ReadingGoalTypeTab from '../ReadingGoalTypeTab';
 import ReadingGoalWeekPreviewTab from '../ReadingGoalWeekPreviewTab';
 
-import { ReadingGoalPeriod, ReadingGoalType } from '@/types/auth/ReadingGoal';
+import { QuranGoalPeriod, GoalType } from '@/types/auth/Goal';
 import { logButtonClick, logValueChange } from '@/utils/eventLogger';
 
 export enum TabKey {
@@ -46,13 +46,11 @@ export const logTabNextClick = (
     metadata = { goal_type: state.type };
   } else if (tab === TabKey.AmountTab) {
     metadata = {
-      pages: state.type === ReadingGoalType.PAGES ? state.pages : null,
-      seconds: state.type === ReadingGoalType.TIME ? state.seconds : null,
+      pages: state.type === GoalType.PAGES ? state.pages : null,
+      seconds: state.type === GoalType.TIME ? state.seconds : null,
       range:
-        state.type === ReadingGoalType.RANGE
-          ? `${state.rangeStartVerse}-${state.rangeEndVerse}`
-          : null,
-      duration: state.period === ReadingGoalPeriod.Continuous ? state.duration : null,
+        state.type === GoalType.RANGE ? `${state.rangeStartVerse}-${state.rangeEndVerse}` : null,
+      duration: state.period === QuranGoalPeriod.Continuous ? state.duration : null,
     };
   } else if (tab === TabKey.ContinuityTab) {
     // eslint-disable-next-line @typescript-eslint/naming-convention

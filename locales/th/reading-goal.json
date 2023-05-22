@@ -66,6 +66,9 @@
             "title": "เวลา"
         }
     },
+    "plus-x-more-days": {
+        "other": "อีก {{days}} วัน"
+    },
     "preview-schedule": {
         "description": "นี่คือลักษณะเป้าหมายของคุณ คุณสามารถเปลี่ยนได้ในภายหลัง",
         "title": "นี่คือตัวอย่างกำหนดการของคุณ"
@@ -87,6 +90,8 @@
         "other": "เหลืออีก {{days}} วัน"
     },
     "set-reading-goal-success": "กำหนดเป้าหมายการอ่านของคุณสำเร็จแล้ว",
+    "start-journey": "เริ่มการเดินทางของคุณ!",
+    "start-reading": "เริ่มอ่าน",
     "starting-chapter": "เริ่มซูเราะห์",
     "starting-verse": "เริ่มอายะห์",
     "streak": "ริ้ว",

@@ -66,6 +66,9 @@
             "title": "Waktu"
         }
     },
+    "plus-x-more-days": {
+        "other": "+{{days}} hari lagi"
+    },
     "preview-schedule": {
         "description": "Seperti inilah tujuan Anda nantinya. Anda selalu dapat mengubahnya nanti.",
         "title": "Ini adalah pratinjau jadwal Anda"
@@ -87,6 +90,8 @@
         "other": "{{days}} hari tersisa"
     },
     "set-reading-goal-success": "Tujuan membaca Anda telah berhasil ditetapkan.",
+    "start-journey": "Mulailah perjalanan Anda!",
+    "start-reading": "Mulai Membaca",
     "starting-chapter": "Memulai Surah",
     "starting-verse": "Mulai Ayah",
     "streak": "Garis",

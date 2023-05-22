@@ -16,10 +16,11 @@ import { getCanonicalUrl, getReadingGoalProgressNavigationUrl } from '@/utils/na
 
 const ReadingProgressPage = () => {
   const { t, lang } = useTranslation('reading-progress');
-  const { error, readingGoal, weekData, streak, currentReadingDay, isLoading } =
-    useGetStreakWithMetadata({
+  const { error, goal, weekData, streak, currentActivityDay, isLoading } = useGetStreakWithMetadata(
+    {
       showDayName: true,
-    });
+    },
+  );
 
   if (error) return null;
 
@@ -40,27 +41,27 @@ const ReadingProgressPage = () => {
           <div className={styles.widgetsContainer}>
             <ProgressPageStreakWidget
               weekData={weekData}
-              readingGoal={readingGoal}
+              goal={goal}
               streak={streak}
               isLoading={isLoading}
             />
 
             <ProgressPageGoalWidget
-              currentReadingDay={currentReadingDay}
-              readingGoal={readingGoal}
+              currentActivityDay={currentActivityDay}
+              goal={goal}
               isLoading={isLoading}
             />
           </div>
 
           <ReadingHistory />
 
-          {readingGoal && (
+          {goal && (
             <div className={styles.manageGoalSection}>
               <h1>{t('manage-goal')}</h1>
 
               <div className={styles.manageGoalContainer}>
                 <DeleteReadingGoalModal />
-                <UpdateReadingGoalModal readingGoal={readingGoal} />
+                <UpdateReadingGoalModal goal={goal} />
               </div>
             </div>
           )}
