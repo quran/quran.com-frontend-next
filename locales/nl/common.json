@@ -166,7 +166,6 @@
     },
     "fundraising": {
         "description": "Maandelijkse donaties helpen ons Quran.com te verbeteren en activiteiten te ondersteunen, zodat we ons minder richten op fondsenwerving en meer op het creëren van impact.",
-        "learn-more": "Leer meer",
         "title": "Word een maandelijkse donateur"
     },
     "help": "Helpen",
@@ -179,6 +178,7 @@
     "juz": "Juz",
     "language": "Taal",
     "languages": "Talen",
+    "learn-more": "Leer meer",
     "less": "Minder",
     "loading": "Bezig met laden",
     "login": "Log in",
@@ -191,6 +191,7 @@
     "more": "Meer",
     "navigate": "Navigeren",
     "network": "Netwerk",
+    "new": "Nieuw!",
     "next": "Volgende",
     "next-ayah": "Volgende Aya",
     "no": "Nee",
