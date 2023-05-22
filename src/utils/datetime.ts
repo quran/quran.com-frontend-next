@@ -217,3 +217,22 @@ export const dateToReadableFormat = (
     ...options,
   });
 };
+
+type DateRange = { from: string; to: string };
+
+/**
+ * Given a month and a year, this function returns the first and last day of the month in format: YYYY-MM-DD.
+ *
+ * @param {number} month
+ * @param {number} year
+ * @returns {DateRange}
+ */
+export const makeDateRangeFromMonth = (month: number, year: number): DateRange => {
+  const from = `${year}-${month.toString().padStart(2, '0')}-01`;
+  const to = `${year}-${month.toString().padStart(2, '0')}-${new Date(year, month, 0)
+    .getDate()
+    .toString()
+    .padStart(2, '0')}`;
+
+  return { from, to };
+};

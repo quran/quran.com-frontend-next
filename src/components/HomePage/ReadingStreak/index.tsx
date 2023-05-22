@@ -3,12 +3,13 @@ import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 
 import CurrentWeekProgress from './CurrentWeekProgress';
-import LoggedOutReadingStreak from './LoggedOutReadingStreak';
 import styles from './ReadingStreak.module.scss';
 import StreakDefinitionModal from './StreakDefinitionModal';
+import StreakIntroductionWidget from './StreakIntroductionWidget';
 
 import ReadingGoalAmount from '@/components/ReadingGoal/ReadingGoalAmount';
 import Button, { ButtonVariant } from '@/dls/Button/Button';
+import Link from '@/dls/Link/Link';
 import Progress from '@/dls/Progress';
 import Skeleton from '@/dls/Skeleton/Skeleton';
 import useGetRecentlyReadVerseKeys from '@/hooks/auth/useGetRecentlyReadVerseKeys';
@@ -96,8 +97,8 @@ const ReadingStreak: React.FC<ReadingStreakProps> = ({ layout = ReadingStreakLay
     return null;
   }
 
-  if (error) {
-    return <LoggedOutReadingStreak />;
+  if (error || streak === 0) {
+    return <StreakIntroductionWidget />;
   }
 
   const getContent = () => {
@@ -152,6 +153,9 @@ const ReadingStreak: React.FC<ReadingStreakProps> = ({ layout = ReadingStreakLay
 
   return (
     <div className={styles.wrapper}>
+      <Link href="/product-updates/quran-reading-streaks" className={styles.announcementPill}>
+        {t('common:new')} {t('common:learn-more')}
+      </Link>
       <div className={styles.illustrationContainer}>
         <MoonIllustrationSVG />
       </div>

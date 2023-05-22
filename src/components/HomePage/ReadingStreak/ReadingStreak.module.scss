@@ -149,3 +149,12 @@ $widget-wrapper-background-color: var(--color-success-faded);
     font-weight: var(--font-weight-bold);
   }
 }
+
+.announcementPill {
+  position: absolute;
+  inset-block-start: 0;
+  transform: translateY(-50%);
+  background-color: var(--color-success-medium);
+  padding: var(--spacing-xxsmall) var(--spacing-small);
+  border-radius: var(--border-radius-pill);
+}

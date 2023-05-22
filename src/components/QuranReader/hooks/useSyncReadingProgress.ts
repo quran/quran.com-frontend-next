@@ -13,9 +13,14 @@ import useGlobalIntersectionObserver from '@/hooks/useGlobalIntersectionObserver
 import { setLastReadVerse } from '@/redux/slices/QuranReader/readingTracker';
 import { selectQuranFont, selectQuranMushafLines } from '@/redux/slices/QuranReader/styles';
 import { ActivityDayType, UpdateActivityDayBody } from '@/types/auth/ActivityDay';
+import { getFilterActivityDaysParamsOfCurrentMonth } from '@/utils/activity-day';
 import { getMushafId } from '@/utils/api';
 import { addReadingSession, updateActivityDay } from '@/utils/auth/api';
-import { makeReadingSessionsUrl, makeStreakUrl } from '@/utils/auth/apiPaths';
+import {
+  makeFilterActivityDaysUrl,
+  makeReadingSessionsUrl,
+  makeStreakUrl,
+} from '@/utils/auth/apiPaths';
 import { isLoggedIn } from '@/utils/auth/login';
 import mergeVerseKeys from '@/utils/mergeVerseKeys';
 import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
@@ -65,10 +70,16 @@ const useSyncReadingProgress = ({ isReadingPreference }: UseSyncReadingProgressP
   const updateReadingDayAndClearCache = useCallback(
     (body: UpdateActivityDayBody) => {
       updateActivityDay(body).then(() => {
+        // invalidate the current month's history cache to refetch the data if we navigated to it
+        const currentMonthHistoryUrl = makeFilterActivityDaysUrl(
+          getFilterActivityDaysParamsOfCurrentMonth(),
+        );
+        cache.delete(currentMonthHistoryUrl);
+
         mutate(makeStreakUrl());
       });
     },
-    [mutate],
+    [mutate, cache],
   );
 
   // this function will be called when an element is triggered by the intersection observer
