@@ -3,13 +3,14 @@
 import { Dispatch, SetStateAction, useReducer } from 'react';
 
 import BookIcon from '@/icons/book.svg';
+import CalendarIcon from '@/icons/calendar.svg';
 import ClockIcon from '@/icons/clock.svg';
 import SettingsIcon from '@/icons/settings-stroke.svg';
-import { ReadingGoalPeriod, ReadingGoalType } from '@/types/auth/ReadingGoal';
+import { QuranGoalPeriod, GoalType } from '@/types/auth/Goal';
 
 interface ReadingGoalState {
-  period: ReadingGoalPeriod;
-  type: ReadingGoalType;
+  period: QuranGoalPeriod;
+  type: GoalType;
   pages: number;
   seconds: number;
   exampleKey: keyof typeof readingGoalExamples | null;
@@ -73,7 +74,7 @@ const reducer = (state: ReadingGoalState, action: ReadingGoalAction): ReadingGoa
     case 'SET_PERIOD':
       return {
         ...state,
-        duration: action.payload.period === ReadingGoalPeriod.Continuous ? 30 : null,
+        duration: action.payload.period === QuranGoalPeriod.Continuous ? 30 : null,
         period: action.payload.period,
       };
     case 'SET_TYPE':
@@ -95,7 +96,7 @@ const reducer = (state: ReadingGoalState, action: ReadingGoalAction): ReadingGoa
       return {
         ...state,
         duration: action.payload.duration,
-        period: action.payload.duration ? ReadingGoalPeriod.Continuous : ReadingGoalPeriod.Daily,
+        period: action.payload.duration ? QuranGoalPeriod.Continuous : QuranGoalPeriod.Daily,
       };
     case 'SET_RANGE':
       return {
@@ -127,20 +128,31 @@ export const readingGoalExamples = {
     icon: ClockIcon,
     recommended: true,
     values: {
-      type: ReadingGoalType.TIME,
+      type: GoalType.TIME,
       seconds: 10 * 60,
-      period: ReadingGoalPeriod.Daily,
+      period: QuranGoalPeriod.Daily,
     },
   },
   khatm: {
     i18nKey: 'khatm',
     icon: BookIcon,
     values: {
-      type: ReadingGoalType.RANGE,
+      type: GoalType.RANGE,
       rangeStartVerse: '1:1',
       rangeEndVerse: '114:6',
       duration: 30,
-      period: ReadingGoalPeriod.Continuous,
+      period: QuranGoalPeriod.Continuous,
+    },
+  },
+  yearly: {
+    i18nKey: 'year',
+    icon: CalendarIcon,
+    values: {
+      type: GoalType.RANGE,
+      rangeStartVerse: '1:1',
+      rangeEndVerse: '114:6',
+      duration: 365,
+      period: QuranGoalPeriod.Continuous,
     },
   },
   custom: {
@@ -150,8 +162,8 @@ export const readingGoalExamples = {
 } as const;
 
 const initialState: ReadingGoalState = {
-  period: ReadingGoalPeriod.Daily,
-  type: ReadingGoalType.PAGES,
+  period: QuranGoalPeriod.Daily,
+  type: GoalType.PAGES,
   exampleKey: null,
   pages: 1,
   seconds: 60,

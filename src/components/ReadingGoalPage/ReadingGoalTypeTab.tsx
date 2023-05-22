@@ -7,21 +7,21 @@ import styles from './ReadingGoalPage.module.scss';
 import BookIcon from '@/icons/book.svg';
 import ClockIcon from '@/icons/clock.svg';
 import SettingsIcon from '@/icons/settings-stroke.svg';
-import { ReadingGoalType } from '@/types/auth/ReadingGoal';
+import { GoalType } from '@/types/auth/Goal';
 
 const options = [
   {
-    type: ReadingGoalType.TIME,
+    type: GoalType.TIME,
     key: 'time',
     icon: ClockIcon,
   },
   {
-    type: ReadingGoalType.PAGES,
+    type: GoalType.PAGES,
     key: 'pages',
     icon: BookIcon,
   },
   {
-    type: ReadingGoalType.RANGE,
+    type: GoalType.RANGE,
     key: 'range',
     icon: SettingsIcon,
   },

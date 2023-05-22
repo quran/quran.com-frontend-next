@@ -37,16 +37,16 @@ const ReadingStreak: React.FC<ReadingStreakProps> = ({ layout = ReadingStreakLay
   const { t, lang } = useTranslation('reading-goal');
   const isQuranReader = layout === ReadingStreakLayout.QuranReader;
 
-  const { isLoading, error, streak, readingGoal, weekData, currentReadingDay } =
+  const { isLoading, error, streak, goal, weekData, currentActivityDay } =
     useGetStreakWithMetadata();
   const { recentlyReadVerseKeys } = useGetRecentlyReadVerseKeys();
 
-  const nextVerseToRead = readingGoal?.progress?.nextVerseToRead ?? recentlyReadVerseKeys[0];
+  const nextVerseToRead = goal?.progress?.nextVerseToRead ?? recentlyReadVerseKeys[0];
   const localizedStreak = toLocalizedNumber(streak, lang);
-  const percent = convertFractionToPercent(currentReadingDay?.progress || 0);
+  const percent = convertFractionToPercent(currentActivityDay?.progress || 0);
   const localizedPercent = toLocalizedNumber(percent, lang);
   const isGoalDone = percent >= 100;
-  const hasUserReadToday = (isQuranReader && !isGoalDone) || currentReadingDay?.hasRead;
+  const hasUserReadToday = (isQuranReader && !isGoalDone) || currentActivityDay?.hasRead;
 
   const streakUI = (
     <div
@@ -61,17 +61,17 @@ const ReadingStreak: React.FC<ReadingStreakProps> = ({ layout = ReadingStreakLay
   );
 
   const getGoalStatus = () => {
-    if (!readingGoal) return null;
+    if (!goal) return null;
 
-    if (readingGoal.isCompleted) {
+    if (goal.isCompleted) {
       return t('progress.goal-complete');
     }
 
     if (percent < 100) {
       return (
         <ReadingGoalAmount
-          currentReadingDay={currentReadingDay}
-          readingGoal={readingGoal}
+          currentActivityDay={currentActivityDay}
+          goal={goal}
           context={isQuranReader ? 'quran_reader' : 'home_page'}
         />
       );
@@ -103,19 +103,19 @@ const ReadingStreak: React.FC<ReadingStreakProps> = ({ layout = ReadingStreakLay
             <span className={styles.streakSubtitle}>{t('reading-goal-label')}</span>
             {isLoading ? <Skeleton>{streakUI}</Skeleton> : streakUI}
           </div>
-          <CurrentWeekProgress readingGoal={readingGoal} weekData={weekData} />
+          <CurrentWeekProgress goal={goal} weekData={weekData} />
         </>
       );
     }
 
-    if (!isGoalDone && !readingGoal.isCompleted) {
+    if (!isGoalDone && !goal.isCompleted) {
       return (
         <div className={styles.dailyProgressContainer}>
           <p className={styles.streakTitle}>{t('daily-progress')}</p>
           <p className={styles.dailyGoal}>
             <ReadingGoalAmount
-              currentReadingDay={currentReadingDay}
-              readingGoal={readingGoal}
+              currentActivityDay={currentActivityDay}
+              goal={goal}
               context={isQuranReader ? 'quran_reader' : 'home_page'}
             />
           </p>
@@ -135,13 +135,13 @@ const ReadingStreak: React.FC<ReadingStreakProps> = ({ layout = ReadingStreakLay
           <p className={styles.streakTitle}>{t('goal-done.title')}</p>
           <p className={styles.dailyGoal}>{t('goal-done.description')}</p>
         </div>
-        <CurrentWeekProgress readingGoal={readingGoal} weekData={weekData} />
+        <CurrentWeekProgress goal={goal} weekData={weekData} />
       </>
     );
   };
 
   // if this is QuranReader, don't render anything if there is no reading goal
-  if (isQuranReader && !readingGoal) {
+  if (isQuranReader && !goal) {
     return null;
   }
 
@@ -155,7 +155,7 @@ const ReadingStreak: React.FC<ReadingStreakProps> = ({ layout = ReadingStreakLay
 
       {!isQuranReader && (
         <div className={styles.goalContainer}>
-          {readingGoal ? (
+          {goal ? (
             getGoalStatus()
           ) : (
             <Button href={getReadingGoalNavigationUrl()}>{t('create-reading-goal')}</Button>
@@ -164,14 +164,14 @@ const ReadingStreak: React.FC<ReadingStreakProps> = ({ layout = ReadingStreakLay
       )}
 
       {/* Render these buttons only if this is not in the QuranReader && there is a reading goal  */}
-      {!isQuranReader && readingGoal ? (
+      {!isQuranReader && goal ? (
         <div className={styles.actionsContainer}>
           <Button
             href={nextVerseToRead ? getChapterWithStartingVerseUrl(nextVerseToRead) : undefined}
             isDisabled={!nextVerseToRead}
             onClick={onContinueReadingClick}
           >
-            {t('continue-reading')}
+            {t(currentActivityDay?.ranges.length ? 'continue-reading' : 'start-reading')}
           </Button>
           <Button
             variant={ButtonVariant.Ghost}

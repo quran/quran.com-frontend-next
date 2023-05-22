@@ -30,6 +30,10 @@
         "time": {
             "description": "Matlamat mesra pemula yang mudah",
             "title": "Baca 10 minit sehari"
+        },
+        "year": {
+            "description": "Bacalah Al-Quran mengikut kadar anda sendiri pada tahun hadapan",
+            "title": "Baca Al-Quran dalam setahun"
         }
     },
     "frequency-tab": {
@@ -62,26 +66,32 @@
             "title": "Masa"
         }
     },
+    "plus-x-more-days": {
+        "other": "+{{days}} hari lagi"
+    },
     "preview-schedule": {
         "description": "Beginilah rupa matlamat anda. Anda sentiasa boleh menukarnya kemudian.",
         "title": "Berikut ialah pratonton jadual anda"
     },
     "progress": {
         "complete": "Matlamat hari ini selesai 🎉",
+        "goal-complete": "Keseluruhan matlamat anda telah selesai 🎉",
         "pages-goal": "baca {{pages}} halaman al-Quran",
         "range-goal": "baca {{from}} hingga {{to}}",
         "time-goal": "membaca {{time}} al-Quran"
     },
     "reading-goal": "Matlamat Membaca",
-    "reading-goal-description": "Adakah anda ingin menghabiskan bacaan Al-Quran dalam masa sebulan, setahun, atau membina tabiat membaca 10 minit sehari? Buat matlamat di bawah dan Quran.com akan membuat pelan yang diperibadikan untuk anda dan melaraskannya semasa anda maju untuk membantu anda mencapai matlamat anda.",
+    "reading-goal-description": "Adakah anda merasa sukar untuk mengekalkan konsistensi dengan matlamat membaca Al-Quran anda? <br\/> <br\/> Perjalanan Pertumbuhan Al-Quran ialah ciri dinamik yang dibangunkan untuk membantu anda kekal konsisten dalam perjalanan anda dengan Al-Quran. Sama ada anda menyasarkan untuk membaca 10 minit sehari, menghabiskan satu Juz dalam sebulan, atau menghabiskan keseluruhan Al-Quran dalam setahun, dsb., Quran.com kini boleh membantu anda menetapkan matlamat tersuai dan menjejaki coretan bacaan harian anda, sementara menyesuaikan diri semasa anda membuat kemajuan. Ia adalah percuma untuk digunakan dan kami berharap ia akan membantu anda kekal bermotivasi untuk mencapai matlamat anda!",
     "reading-goal-label": "Anda berada di a",
-    "reading-goal-title": "Memperkenalkan Penjejakan Quran.com",
+    "reading-goal-title": "Memperkenalkan Kembara Pertumbuhan Al-Quran",
     "recommended": "Disyorkan",
     "remaining": "Berbaki untuk hari ini",
     "remaining-days": {
         "other": "{{days}} hari lagi"
     },
     "set-reading-goal-success": "Matlamat membaca anda telah berjaya ditetapkan.",
+    "start-journey": "Mulakan perjalanan anda!",
+    "start-reading": "Mulakan Membaca",
     "starting-chapter": "Memulakan Surah",
     "starting-verse": "Memula Ayah",
     "streak": "coretan",

@@ -12,7 +12,7 @@
     },
     "edit-goal": {
         "action": "Redakto objektivin",
-        "subtitle": "Kini kujdes, përparimi juaj për qëllimin tuaj aktual do të humbet.",
+        "subtitle": "Ne do të rillogaritim progresin tuaj bazuar në qëllimin e ri.",
         "success": "Qëllimi juaj i leximit është përditësuar me sukses.",
         "title": "Ndryshoni qëllimin tuaj të leximit"
     },

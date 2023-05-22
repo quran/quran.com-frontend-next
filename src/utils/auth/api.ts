@@ -3,13 +3,20 @@ import { configureRefreshFetch } from 'refresh-fetch';
 
 import { getTimezone } from '../datetime';
 
-import { FilterReadingDaysParams, ReadingDay, UpdateReadingDayBody } from '@/types/auth/ReadingDay';
 import {
-  CreateReadingGoalRequest,
-  EstimatedReadingGoal,
-  ReadingGoal,
-  UpdateReadingGoalRequest,
-} from '@/types/auth/ReadingGoal';
+  FilterActivityDaysParams,
+  ActivityDay,
+  UpdateActivityDayBody,
+  ActivityDayType,
+} from '@/types/auth/ActivityDay';
+import {
+  CreateGoalRequest,
+  EstimatedQuranGoal,
+  EstimateGoalRequest,
+  Goal,
+  GoalCategory,
+  UpdateGoalRequest,
+} from '@/types/auth/Goal';
 import { StreakWithMetadataParams, StreakWithUserMetadata } from '@/types/auth/Streak';
 import { Mushaf } from '@/types/QuranReader';
 import {
@@ -39,9 +46,9 @@ import {
   makeDeleteCollectionBookmarkByIdUrl,
   makeDeleteCollectionBookmarkByKeyUrl,
   makeDeleteBookmarkUrl,
-  makeReadingDaysUrl,
-  makeReadingGoalUrl,
-  makeFilterReadingDaysUrl,
+  makeActivityDaysUrl,
+  makeGoalUrl,
+  makeFilterActivityDaysUrl,
   makeEstimateReadingGoalUrl,
   makeStreakUrl,
 } from '@/utils/auth/apiPaths';
@@ -171,28 +178,31 @@ export const getBookmarkCollections = async (
 
 export const addReadingGoal = async ({
   mushafId,
+  category,
   ...data
-}: CreateReadingGoalRequest): Promise<{ data?: ReadingGoal }> =>
-  postRequest(makeReadingGoalUrl(mushafId), data);
+}: CreateGoalRequest): Promise<{ data?: Goal }> =>
+  postRequest(makeGoalUrl({ mushafId, type: category }), data);
 
 export const updateReadingGoal = async ({
   mushafId,
+  category,
   ...data
-}: UpdateReadingGoalRequest): Promise<{ data?: ReadingGoal }> =>
-  patchRequest(makeReadingGoalUrl(mushafId), data);
+}: UpdateGoalRequest): Promise<{ data?: Goal }> =>
+  patchRequest(makeGoalUrl({ mushafId, type: category }), data);
 
 export const estimateReadingGoal = async (
-  data: CreateReadingGoalRequest,
-): Promise<{ data?: EstimatedReadingGoal }> => privateFetcher(makeEstimateReadingGoalUrl(data));
+  data: EstimateGoalRequest,
+): Promise<{ data?: EstimatedQuranGoal }> => privateFetcher(makeEstimateReadingGoalUrl(data));
 
-export const deleteReadingGoal = async (): Promise<void> => deleteRequest(makeReadingGoalUrl());
+export const deleteReadingGoal = async (params: { category: GoalCategory }): Promise<void> =>
+  deleteRequest(makeGoalUrl({ type: params.category }));
 
 export const filterReadingDays = async (
-  params: FilterReadingDaysParams,
-): Promise<{ data: ReadingDay[] }> => privateFetcher(makeFilterReadingDaysUrl(params));
+  params: FilterActivityDaysParams,
+): Promise<{ data: ActivityDay[] }> => privateFetcher(makeFilterActivityDaysUrl(params));
 
-export const getReadingDay = async (): Promise<{ data?: ReadingDay }> =>
-  privateFetcher(makeReadingDaysUrl());
+export const getActivityDay = async (type: ActivityDayType): Promise<{ data?: ActivityDay }> =>
+  privateFetcher(makeActivityDaysUrl({ type }));
 
 export const addReadingSession = async (chapterNumber: number, verseNumber: number) =>
   postRequest(makeReadingSessionsUrl(), {
@@ -200,10 +210,12 @@ export const addReadingSession = async (chapterNumber: number, verseNumber: numb
     verseNumber,
   });
 
-export const updateReadingDay = async ({
+export const updateActivityDay = async ({
   mushafId,
+  type,
   ...body
-}: UpdateReadingDayBody): Promise<ReadingDay> => postRequest(makeReadingDaysUrl(mushafId), body);
+}: UpdateActivityDayBody): Promise<ActivityDay> =>
+  postRequest(makeActivityDaysUrl({ mushafId, type }), body);
 
 export const getStreakWithUserMetadata = async (
   params: StreakWithMetadataParams,

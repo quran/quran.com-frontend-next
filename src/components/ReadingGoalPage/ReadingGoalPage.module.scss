@@ -59,9 +59,6 @@
   // margin-block: var(--spacing-medium);
 }
 
-.navigateButton {
-}
-
 $circle-size: var(--spacing-small);
 $circle-spacing: var(--spacing-xxsmall);
 $circle-border: 4px;
@@ -83,6 +80,10 @@ $circle-border: 4px;
   background-color: var(--color-background-alternative-faded);
   font-size: var(--font-size-large);
 
+  &.lastDay {
+    background: transparent;
+  }
+
   h3 {
     font-size: var(--font-size-xlarge);
     font-weight: var(--font-weight-bold);
@@ -102,6 +103,7 @@ $circle-border: 4px;
     height: $circle-size;
     border: $circle-border solid var(--color-success-medium);
     border-radius: var(--border-radius-circle);
+    background-color: var(--color-background-default);
   }
 
   &::after {

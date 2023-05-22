@@ -30,6 +30,10 @@
         "time": {
             "description": "Un semplice obiettivo adatto ai principianti",
             "title": "Leggi 10 minuti al giorno"
+        },
+        "year": {
+            "description": "Leggi il Corano al tuo ritmo nel corso del prossimo anno",
+            "title": "Leggi il Corano in un anno"
         }
     },
     "frequency-tab": {
@@ -62,20 +66,25 @@
             "title": "Tempo"
         }
     },
+    "plus-x-more-days": {
+        "one": "+{{days}} giorno in più",
+        "other": "+{{days}} giorni in più"
+    },
     "preview-schedule": {
         "description": "Ecco come sarà il tuo obiettivo. Puoi sempre cambiarlo in seguito.",
         "title": "Ecco un'anteprima del tuo programma"
     },
     "progress": {
         "complete": "L'obiettivo di oggi è completo 🎉",
+        "goal-complete": "Il tuo intero obiettivo è completo 🎉",
         "pages-goal": "leggi {{pages}} pagine del Corano",
         "range-goal": "leggi {{from}} a {{to}}",
         "time-goal": "leggi {{time}} del Corano"
     },
     "reading-goal": "Obiettivo di lettura",
-    "reading-goal-description": "Vuoi finire di leggere il Corano in un mese, un anno o prendere l'abitudine di leggere 10 minuti al giorno? Crea un obiettivo di seguito e Quran.com creerà un piano personalizzato per te e lo adatterà man mano che avanzi per aiutarti a raggiungere il tuo obiettivo.",
+    "reading-goal-description": "Trovi difficile mantenere la coerenza con i tuoi obiettivi di lettura del Corano? <br\/> <br\/> Quran Growth Journey è una funzione dinamica sviluppata per aiutarti a rimanere coerente nel tuo viaggio con il Corano. Sia che tu miri a leggere 10 minuti al giorno, completare un Juz in un mese o finire l'intero Corano in un anno, ecc., Quran.com ora può aiutarti a impostare un obiettivo personalizzato e tenere traccia delle tue serie di letture quotidiane, mentre adattandosi man mano che si fanno progressi. È completamente gratuito e speriamo che ti aiuti a rimanere motivato a raggiungere il tuo obiettivo!",
     "reading-goal-label": "Sei su un",
-    "reading-goal-title": "Presentazione del monitoraggio di Quran.com",
+    "reading-goal-title": "Presentazione del viaggio di crescita del Corano",
     "recommended": "Consigliato",
     "remaining": "Rimanendo per oggi",
     "remaining-days": {
@@ -83,6 +92,8 @@
         "other": "{{days}} giorni rimanenti"
     },
     "set-reading-goal-success": "Il tuo obiettivo di lettura è stato impostato correttamente.",
+    "start-journey": "Inizia il tuo viaggio!",
+    "start-reading": "Inizia a leggere",
     "starting-chapter": "Sura iniziale",
     "starting-verse": "A partire Ayah",
     "streak": "Strisciante",

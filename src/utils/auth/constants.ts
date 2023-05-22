@@ -1,9 +1,28 @@
-// NOTE: IF THOSE VALUES CHANGE, WE SHOULD CHANGE IT IN OUR AUTH REPO
-export const REFRESH_TOKEN_COOKIE_NAME = 'rt_staging2';
-export const ACCESS_TOKEN_COOKIE_NAME = 'at_staging2';
-export const USER_ID = 'id_staging2';
+import AppEnv from '@/types/AppEnv';
 
-export const ACCESS_TOKEN_EXPIRATION_COOKIE_NAME = 'atexp';
+/**
+ * This function adds a suffix to the cookie name based on the environment.
+ * We do this to enable users to login to multiple environments at the same time without one deployment overriding the other's cookies.
+ *
+ * Note: these suffixes are also used in the backend, so if they're changed there, they should be changed here as well.
+ *
+ * @param {string} cookieName
+ * @returns {string}
+ */
+const addEnvSuffixToAuthCookie = (cookieName: string) => {
+  const appEnv = process.env.NEXT_PUBLIC_APP_ENV as AppEnv | undefined;
+
+  // handle preview deployments from forked repos
+  if (!appEnv || appEnv === AppEnv.PRODUCTION) {
+    return cookieName;
+  }
+
+  return `${cookieName}_${appEnv}`;
+};
+
+// NOTE: IF THIS VALUE CHANGE, WE SHOULD CHANGE IT IN OUR AUTH REPO
+export const USER_ID_COOKIE_NAME = addEnvSuffixToAuthCookie('id');
+
 export const DEFAULT_PHOTO_URL = `https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y`;
 
 export const AUTH_ONBOARDING_ANNOUNCEMENT_TYPE = 'auth-onboarding';

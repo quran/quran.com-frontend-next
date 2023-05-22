@@ -5,7 +5,7 @@ import useTranslation from 'next-translate/useTranslation';
 import DataContext from '@/contexts/DataContext';
 import Link, { LinkVariant } from '@/dls/Link/Link';
 import { StreakWithMetadata } from '@/hooks/auth/useGetStreakWithMetadata';
-import { ReadingGoalType } from '@/types/auth/ReadingGoal';
+import { GoalType } from '@/types/auth/Goal';
 import { getChapterData } from '@/utils/chapter';
 import { secondsToReadableFormat } from '@/utils/datetime';
 import { logButtonClick } from '@/utils/eventLogger';
@@ -15,23 +15,23 @@ import { convertFractionToPercent, convertNumberToDecimal } from '@/utils/number
 import { parseVerseRange } from '@/utils/verseKeys';
 
 interface ReadingGoalAmountProps {
-  readingGoal?: StreakWithMetadata['readingGoal'];
-  currentReadingDay?: StreakWithMetadata['weekData']['readingDaysMap'][string];
+  goal?: StreakWithMetadata['goal'];
+  currentActivityDay?: StreakWithMetadata['weekData']['readingDaysMap'][string];
   context: 'home_page' | 'quran_reader' | 'progress_page';
 }
 
 const ReadingGoalAmount: React.FC<ReadingGoalAmountProps> = ({
-  readingGoal,
-  currentReadingDay,
+  goal,
+  currentActivityDay,
   context,
 }) => {
   const { t, lang } = useTranslation('reading-goal');
   const chaptersData = useContext(DataContext);
-  const percent = convertFractionToPercent(currentReadingDay?.progress || 0);
+  const percent = convertFractionToPercent(currentActivityDay?.progress || 0);
 
-  if (!readingGoal || !readingGoal.progress) return null;
+  if (!goal || !goal.progress) return null;
 
-  const { progress, type: goalType } = readingGoal;
+  const { progress, type: goalType } = goal;
   const prefix = percent === 0 ? t('todays-goal') : t('remaining');
 
   let action: string | React.ReactNode = '';
@@ -43,22 +43,22 @@ const ReadingGoalAmount: React.FC<ReadingGoalAmountProps> = ({
     };
   };
 
-  if (goalType === ReadingGoalType.TIME) {
+  if (goalType === GoalType.TIME) {
     action = t('progress.time-goal', {
       time: secondsToReadableFormat(progress.amountLeft, t, lang),
     });
   }
 
-  if (goalType === ReadingGoalType.PAGES) {
+  if (goalType === GoalType.PAGES) {
     action = t('progress.pages-goal', {
       pages: toLocalizedNumber(convertNumberToDecimal(progress.amountLeft, 2), lang),
     });
   }
 
-  if (goalType === ReadingGoalType.RANGE) {
+  if (goalType === GoalType.RANGE) {
     const all = [];
 
-    currentReadingDay?.remainingDailyTargetRanges?.forEach((range) => {
+    currentActivityDay?.remainingDailyTargetRanges?.forEach((range) => {
       const [
         { chapter: fromChapter, verse: fromVerse, verseKey: rangeFrom },
         { chapter: toChapter, verse: toVerse, verseKey: rangeTo },
@@ -111,12 +111,12 @@ const ReadingGoalAmount: React.FC<ReadingGoalAmountProps> = ({
     <>
       {/* eslint-disable-next-line i18next/no-literal-string */}
       {prefix}: {action}
-      {typeof readingGoal.progress.daysLeft === 'number' && (
+      {typeof goal.progress.daysLeft === 'number' && (
         <>
           <br />
           {t('reading-goal:remaining-days', {
-            count: readingGoal.progress.daysLeft,
-            days: toLocalizedNumber(readingGoal.progress.daysLeft, lang),
+            count: goal.progress.daysLeft,
+            days: toLocalizedNumber(goal.progress.daysLeft, lang),
           })}
         </>
       )}

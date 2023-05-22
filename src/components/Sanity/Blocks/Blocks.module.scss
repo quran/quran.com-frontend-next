@@ -56,3 +56,13 @@ $paragraph-line-height: 1.75rem;
   padding-block-end: calc(0.5 * var(--spacing-xxsmall));
   padding-inline-start: 1rem;
 }
+
+.li-2 {
+  list-style-type: circle;
+  margin-inline-start: var(--spacing-large);
+}
+
+.li-3 {
+  list-style-type: square;
+  margin-inline-start: var(--spacing-mega);
+}

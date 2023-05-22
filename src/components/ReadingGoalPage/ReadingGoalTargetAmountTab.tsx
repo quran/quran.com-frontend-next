@@ -8,7 +8,7 @@ import { ReadingGoalTabProps } from './hooks/useReadingGoalReducer';
 import styles from './ReadingGoalPage.module.scss';
 
 import Select, { SelectSize } from '@/dls/Forms/Select';
-import { ReadingGoalPeriod } from '@/types/auth/ReadingGoal';
+import { QuranGoalPeriod } from '@/types/auth/Goal';
 import { generateDurationDaysOptions } from '@/utils/generators';
 
 const ReadingGoalTargetAmountTab: React.FC<ReadingGoalTabProps> = ({
@@ -58,7 +58,7 @@ const ReadingGoalTargetAmountTab: React.FC<ReadingGoalTabProps> = ({
           onSecondsChange={onSecondsChange}
           logChange={logChange}
         />
-        {period === ReadingGoalPeriod.Continuous && (
+        {period === QuranGoalPeriod.Continuous && (
           <div className={styles.inputContainer}>
             <label htmlFor="duration" className={styles.label}>
               {t('duration')}

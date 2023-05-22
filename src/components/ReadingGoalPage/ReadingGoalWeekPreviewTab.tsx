@@ -13,12 +13,12 @@ import HoverablePopover from '@/dls/Popover/HoverablePopover';
 import Spinner from '@/dls/Spinner/Spinner';
 import { selectQuranFont, selectQuranMushafLines } from '@/redux/slices/QuranReader/styles';
 import {
-  CreateReadingGoalRequest,
-  EstimatedReadingGoalDay,
-  RangeEstimatedReadingGoalDay,
-  ReadingGoalPeriod,
-  ReadingGoalType,
-} from '@/types/auth/ReadingGoal';
+  EstimatedGoalDay,
+  RangeEstimatedQuranGoalDay,
+  QuranGoalPeriod,
+  GoalType,
+  EstimateGoalRequest,
+} from '@/types/auth/Goal';
 import { Mushaf } from '@/types/QuranReader';
 import { getMushafId } from '@/utils/api';
 import { estimateReadingGoal } from '@/utils/auth/api';
@@ -32,21 +32,25 @@ import { parseVerseRange } from '@/utils/verseKeys';
 const makePayload = (
   state: ReadingGoalTabProps['state'],
   mushafId: Mushaf,
-): CreateReadingGoalRequest => {
-  const payload: CreateReadingGoalRequest = {
+): EstimateGoalRequest => {
+  const payload: EstimateGoalRequest = {
     mushafId,
     type: state.type,
     amount: {
-      [ReadingGoalType.PAGES]: state.pages,
-      [ReadingGoalType.TIME]: state.seconds,
-      [ReadingGoalType.RANGE]: `${state.rangeStartVerse}-${state.rangeEndVerse}`,
+      [GoalType.PAGES]: state.pages,
+      [GoalType.TIME]: state.seconds,
+      [GoalType.RANGE]: `${state.rangeStartVerse}-${state.rangeEndVerse}`,
     }[state.type],
   };
 
-  if (state.period === ReadingGoalPeriod.Continuous) payload.duration = state.duration;
+  if (state.period === QuranGoalPeriod.Continuous) payload.duration = state.duration;
 
   return payload;
 };
+
+// this is the maximum number of days that we'll show in the preview for continuous goals
+// if the user selects a duration that is longer than this, we will show in the last day "+X more days"
+const MAX_DAYS = 6;
 
 const ReadingGoalWeekPreviewTab: React.FC<ReadingGoalTabProps> = ({ state, nav }) => {
   const { t, lang } = useTranslation('reading-goal');
@@ -70,7 +74,7 @@ const ReadingGoalWeekPreviewTab: React.FC<ReadingGoalTabProps> = ({ state, nav }
     const { type } = state;
     const day = data.data.week[idx];
 
-    if (type === ReadingGoalType.RANGE) {
+    if (type === GoalType.RANGE) {
       const range = day.amount as string;
 
       const [
@@ -96,7 +100,7 @@ const ReadingGoalWeekPreviewTab: React.FC<ReadingGoalTabProps> = ({ state, nav }
     }
 
     const numberAmount = day.amount as number;
-    if (type === ReadingGoalType.TIME) {
+    if (type === GoalType.TIME) {
       return `${t('reciter:read')} ${secondsToReadableFormat(numberAmount, t, lang)}`;
     }
 
@@ -109,7 +113,7 @@ const ReadingGoalWeekPreviewTab: React.FC<ReadingGoalTabProps> = ({ state, nav }
 
   const getSkeleton = () => {
     return Array.from({
-      length: Math.min(state.period === ReadingGoalPeriod.Continuous ? state.duration : 7, 7),
+      length: Math.min(state.period === QuranGoalPeriod.Continuous ? state.duration : 7, 7),
       // eslint-disable-next-line @typescript-eslint/naming-convention
     }).map((_, idx) => (
       // eslint-disable-next-line react/no-array-index-key
@@ -129,16 +133,34 @@ const ReadingGoalWeekPreviewTab: React.FC<ReadingGoalTabProps> = ({ state, nav }
         {isValidating
           ? getSkeleton()
           : data.data.week.map(
-              (day: EstimatedReadingGoalDay | RangeEstimatedReadingGoalDay, idx: number) => {
+              (day: EstimatedGoalDay | RangeEstimatedQuranGoalDay, idx: number) => {
                 const date = new Date(day.date);
 
-                return (
-                  <li key={day.date} className={styles.dayPreview}>
-                    <HoverablePopover content={dateToReadableFormat(date, lang)}>
-                      <h3>{getFullDayName(date, lang)}</h3>
-                    </HoverablePopover>
+                const shouldShowNumberOfDaysAfterPreview =
+                  state.duration > MAX_DAYS && state.period === QuranGoalPeriod.Continuous;
+                const isLastElement = shouldShowNumberOfDaysAfterPreview && idx > MAX_DAYS - 1;
 
-                    <p>{getDailyAmount(idx)}</p>
+                return (
+                  <li
+                    key={day.date}
+                    className={classNames(styles.dayPreview, isLastElement && styles.lastDay)}
+                  >
+                    {isLastElement ? (
+                      <h3>
+                        {t('plus-x-more-days', {
+                          count: state.duration - MAX_DAYS,
+                          days: toLocalizedNumber(state.duration - MAX_DAYS, lang),
+                        })}
+                      </h3>
+                    ) : (
+                      <>
+                        <HoverablePopover content={dateToReadableFormat(date, lang)}>
+                          <h3>{getFullDayName(date, lang)}</h3>
+                        </HoverablePopover>
+
+                        <p>{getDailyAmount(idx)}</p>
+                      </>
+                    )}
                   </li>
                 );
               },

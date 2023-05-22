@@ -5,8 +5,8 @@ import { useSelector, shallowEqual } from 'react-redux';
 import useSWR from 'swr';
 
 import { selectQuranFont, selectQuranMushafLines } from '@/redux/slices/QuranReader/styles';
-import { ReadingDay } from '@/types/auth/ReadingDay';
-import { StreakWithMetadataParams } from '@/types/auth/Streak';
+import { ActivityDay } from '@/types/auth/ActivityDay';
+import { StreakType, StreakWithMetadataParams } from '@/types/auth/Streak';
 import { getMushafId } from '@/utils/api';
 import { getStreakWithUserMetadata } from '@/utils/auth/api';
 import { makeStreakUrl } from '@/utils/auth/apiPaths';
@@ -61,6 +61,7 @@ const useGetStreakWithMetadata = ({
     mushafId: mushaf,
     from: week[0].date,
     to: week[week.length - 1].date,
+    type: StreakType.QURAN,
   };
 
   // we don't pass the params to `makeStreakUrl` in the key so that we can invalidate the cache without getting the other params
@@ -74,18 +75,18 @@ const useGetStreakWithMetadata = ({
 
   const isLoading = isValidating && !data;
 
-  const { readingDays, readingGoal, streak } = data?.data || {
-    readingDays: [],
-    readingGoal: undefined,
+  const { activityDays, goal, streak } = data?.data || {
+    activityDays: [],
+    goal: undefined,
     streak: 0,
   };
 
-  const readingDaysMap = useMemo<Record<string, ReadingDay & { hasRead: boolean }>>(() => {
-    if (!readingDays) return {};
+  const readingDaysMap = useMemo<Record<string, ActivityDay & { hasRead: boolean }>>(() => {
+    if (!activityDays) return {};
 
     const result = {};
 
-    readingDays.forEach((day) => {
+    activityDays.forEach((day) => {
       result[day.date] = {
         ...day,
         hasRead: day.pagesRead > 0 || day.secondsRead > 0 || day.ranges.length > 0,
@@ -93,9 +94,9 @@ const useGetStreakWithMetadata = ({
     });
 
     return result;
-  }, [readingDays]);
+  }, [activityDays]);
 
-  const currentReadingDay = useMemo(() => {
+  const currentActivityDay = useMemo(() => {
     return readingDaysMap[week.find((d) => d.current)?.date];
   }, [readingDaysMap, week]);
 
@@ -107,9 +108,9 @@ const useGetStreakWithMetadata = ({
       readingDaysMap,
     },
     streak,
-    readingGoal,
-    readingDays,
-    currentReadingDay,
+    goal,
+    activityDays,
+    currentActivityDay,
   };
 };
 

@@ -8,6 +8,9 @@ import { getChapterData } from '@/utils/chapter';
 import { secondsToReadableFormat } from '@/utils/datetime';
 import { toLocalizedNumber } from '@/utils/locale';
 
+const TIME_OPTIONS_LIMIT = 4 * 60; // 4 hours
+const DURATION_DAYS_LIMIT = 365; // 1 year, 365 days
+
 /**
  * Generates options for the reading goal time input.
  *
@@ -22,24 +25,26 @@ import { toLocalizedNumber } from '@/utils/locale';
 export const generateTimeOptions = (t: Translate, locale: string): SelectOption[] => {
   // for the first 10 minutes, we want to show 1 until 10
   // but after that, we want to increment by 5 minutes
-  // and our limit is 4 hours
-  // eslint-disable-next-line @typescript-eslint/naming-convention
-  const options: SelectOption[] = new Array(56).fill(null).map((_, i) => {
-    let minutes: number;
+  // and our limit is TIME_OPTIONS_LIMIT
+  const options: SelectOption[] = new Array(10 + (TIME_OPTIONS_LIMIT - 10) / 5)
+    .fill(null)
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    .map((_, i) => {
+      let minutes: number;
 
-    if (i < 10) {
-      minutes = i + 1;
-    } else {
-      minutes = (i - 9) * 5 + 10;
-    }
+      if (i < 10) {
+        minutes = i + 1;
+      } else {
+        minutes = (i - 9) * 5 + 10;
+      }
 
-    const seconds = minutes * 60;
+      const seconds = minutes * 60;
 
-    return {
-      value: seconds,
-      label: secondsToReadableFormat(seconds, t, locale),
-    };
-  });
+      return {
+        value: seconds,
+        label: secondsToReadableFormat(seconds, t, locale),
+      };
+    });
 
   return options;
 };
@@ -108,7 +113,7 @@ export const generateVerseOptions = (
 /**
  * Generates options for the reading goal duration input.
  *
- * The options are within a range of 1 day to 90 days in this format:
+ * The options are within a range of 1 day to 365 days in this format:
  * "1 day", "2 days", "3 days", etc...
  *
  * @param {Translate} t
@@ -116,14 +121,25 @@ export const generateVerseOptions = (
  * @returns {SelectOption[]}
  */
 export const generateDurationDaysOptions = (t: Translate, locale: string): SelectOption[] => {
-  // eslint-disable-next-line @typescript-eslint/naming-convention
-  const options: SelectOption[] = new Array(90).fill(null).map((_, i) => {
-    const day = i + 1;
-    return {
-      value: day.toString(),
-      label: t('reading-goal:x-days', { count: day, days: toLocalizedNumber(day, locale) }),
-    };
-  });
+  // for the first 10 days, we want to show 1 until 10
+  // but after that, we want to increment by 5 days
+  // and our limit is DURATION_DAYS_LIMIT
+  const options: SelectOption[] = new Array(10 + (DURATION_DAYS_LIMIT - 10) / 5)
+    .fill(null)
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    .map((_, i) => {
+      let day: number;
+      if (i < 10) {
+        day = i + 1;
+      } else {
+        day = (i - 9) * 5 + 10;
+      }
+
+      return {
+        value: day.toString(),
+        label: t('reading-goal:x-days', { count: day, days: toLocalizedNumber(day, locale) }),
+      };
+    });
 
   return options;
 };

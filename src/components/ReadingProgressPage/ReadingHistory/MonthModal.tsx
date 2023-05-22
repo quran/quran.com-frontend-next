@@ -11,10 +11,10 @@ import ContentModal from '@/dls/ContentModal/ContentModal';
 import ContentModalHandles from '@/dls/ContentModal/types/ContentModalHandles';
 import Spinner from '@/dls/Spinner/Spinner';
 import ArrowLeft from '@/icons/west.svg';
+import { FilterActivityDaysParams, ActivityDay, ActivityDayType } from '@/types/auth/ActivityDay';
 import { Pagination } from '@/types/auth/GetBookmarksByCollectionId';
-import { FilterReadingDaysParams, ReadingDay } from '@/types/auth/ReadingDay';
 import { privateFetcher } from '@/utils/auth/api';
-import { makeFilterReadingDaysUrl } from '@/utils/auth/apiPaths';
+import { makeFilterActivityDaysUrl } from '@/utils/auth/apiPaths';
 import { dateToReadableFormat } from '@/utils/datetime';
 import { toLocalizedNumber } from '@/utils/locale';
 
@@ -26,7 +26,10 @@ interface MonthModalProps {
 
 const makeDateRangeFromMonth = (month: number, year: number) => {
   const from = `${year}-${month.toString().padStart(2, '0')}-01`;
-  const to = `${year}-${month}-${new Date(year, month, 0).getDate()}`;
+  const to = `${year}-${month.toString().padStart(2, '0')}-${new Date(year, month, 0)
+    .getDate()
+    .toString()
+    .padStart(2, '0')}`;
 
   return { from, to };
 };
@@ -39,10 +42,11 @@ const MonthModal = ({ month, year, onClose }: MonthModalProps) => {
   // YYYY-MM-DD
   const [selectedDate, setSelectedDate] = useState<string | null>();
 
-  const params: FilterReadingDaysParams = {
+  const params: FilterActivityDaysParams = {
     from,
     to,
     limit: 31,
+    type: ActivityDayType.QURAN,
   };
 
   const localizedYear = toLocalizedNumber(year, lang, undefined, {
@@ -80,7 +84,7 @@ const MonthModal = ({ month, year, onClose }: MonthModalProps) => {
     >
       <div className={styles.modalContentContainer}>
         <DataFetcher
-          queryKey={makeFilterReadingDaysUrl(params)}
+          queryKey={makeFilterActivityDaysUrl(params)}
           loading={() => {
             return (
               <>
@@ -97,7 +101,7 @@ const MonthModal = ({ month, year, onClose }: MonthModalProps) => {
           }}
           fetcher={privateFetcher}
           render={(response) => {
-            const data = response as { data: ReadingDay[]; pagination: Pagination };
+            const data = response as { data: ActivityDay[]; pagination: Pagination };
             const isEmpty = data.data.length === 0;
 
             return (

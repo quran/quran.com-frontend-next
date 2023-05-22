@@ -223,4 +223,11 @@ export default {
       wordByWordDisplay: getDefaultWordByWordDisplay(state.readingPreferences.wordByWordDisplay),
     },
   }),
+  30: (state) => ({
+    ...state,
+    quranReaderStyles: {
+      ...state.quranReaderStyles,
+      wordByWordFontScale: initialState.quranReaderStyles.wordByWordFontScale,
+    },
+  }),
 };
