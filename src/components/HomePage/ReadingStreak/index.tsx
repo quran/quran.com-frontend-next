@@ -91,7 +91,12 @@ const ReadingStreak: React.FC<ReadingStreakProps> = ({ layout = ReadingStreakLay
     logButtonClick('homepage_streak_widget_view_progress');
   };
 
-  if (error || !isLoggedIn()) {
+  // TODO: remove this after release
+  if (!isLoggedIn()) {
+    return null;
+  }
+
+  if (error) {
     return <LoggedOutReadingStreak />;
   }
 
