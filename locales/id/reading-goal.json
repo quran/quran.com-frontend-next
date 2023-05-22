@@ -30,6 +30,10 @@
         "time": {
             "description": "Tujuan ramah-pemula yang sederhana",
             "title": "Baca 10 menit sehari"
+        },
+        "year": {
+            "description": "Baca Quran dengan kecepatan Anda sendiri selama setahun ke depan",
+            "title": "Baca Quran dalam setahun"
         }
     },
     "frequency-tab": {
@@ -74,9 +78,9 @@
         "time-goal": "baca {{time}} Quran"
     },
     "reading-goal": "Tujuan Membaca",
-    "reading-goal-description": "Apakah Anda ingin menyelesaikan membaca Al-Qur'an dalam sebulan, setahun, atau membangun kebiasaan membaca 10 menit sehari? Buat tujuan di bawah ini dan Quran.com akan membuat rencana yang dipersonalisasi untuk Anda dan menyesuaikannya seiring kemajuan Anda untuk membantu Anda mencapai tujuan.",
+    "reading-goal-description": "Apakah Anda merasa sulit untuk mempertahankan konsistensi dengan tujuan membaca Al-Qur'an Anda? <br\/> <br\/> Quran Goal Tracker adalah fitur dinamis yang dikembangkan untuk membantu Anda tetap konsisten dalam perjalanan Anda dengan Quran. Apakah Anda bertujuan untuk membaca 10 menit sehari, menyelesaikan Juz dalam sebulan, atau menyelesaikan seluruh Quran dalam setahun, dll., Quran.com sekarang dapat membantu Anda menetapkan tujuan khusus dan melacak bacaan harian Anda, sementara menyesuaikan saat Anda membuat kemajuan. Ini sepenuhnya gratis untuk digunakan dan kami harap ini akan membantu Anda tetap termotivasi untuk mencapai tujuan Anda!",
     "reading-goal-label": "Anda berada di",
-    "reading-goal-title": "Memperkenalkan Pelacakan Quran.com",
+    "reading-goal-title": "Memperkenalkan Perjalanan Pertumbuhan Quran",
     "recommended": "Direkomendasikan",
     "remaining": "Sisa untuk hari ini",
     "remaining-days": {

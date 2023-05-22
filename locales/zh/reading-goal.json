@@ -30,6 +30,10 @@
         "time": {
             "description": "一个简单的初学者友好的目标",
             "title": "每天阅读10分钟"
+        },
+        "year": {
+            "description": "明年按照自己的节奏阅读《古兰经》",
+            "title": "一年内阅读古兰经"
         }
     },
     "frequency-tab": {
@@ -74,9 +78,9 @@
         "time-goal": "阅读《古兰经》 {{time}}"
     },
     "reading-goal": "阅读目标",
-    "reading-goal-description": "您想在一个月、一年内读完《古兰经》，还是养成每天阅读 10 分钟的习惯？在下方创建一个目标，Quran.com 将为您创建一个个性化的计划，并随着您的进步进行调整以帮助您实现目标。",
+    "reading-goal-description": "您是否觉得与古兰经阅读目标保持一致具有挑战性？ <br\/> <br\/> 《古兰经》目标追踪器是一项动态功能，旨在帮助您在《古兰经》的旅程中保持一致。无论您的目标是每天阅读 10 分钟、在一个月内完成一个 Juz 还是在一年内完成整个古兰经等，Quran.com 现在都可以帮助您设定自定义目标并跟踪您的每日阅读记录，同时随着您的进步进行调整。它完全免费使用，我们希望它能帮助您保持实现目标的动力！",
     "reading-goal-label": "你在一个",
-    "reading-goal-title": "引入 Quran.com 跟踪",
+    "reading-goal-title": "介绍古兰经成长之旅",
     "recommended": "受到推崇的",
     "remaining": "今天剩余",
     "remaining-days": {

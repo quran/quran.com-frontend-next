@@ -30,6 +30,10 @@
         "time": {
             "description": "Një objektiv i thjeshtë miqësor për fillestarët",
             "title": "Lexoni 10 minuta në ditë"
+        },
+        "year": {
+            "description": "Lexoni Kuranin me ritmin tuaj gjatë vitit të ardhshëm",
+            "title": "Lexoni Kuranin brenda një viti"
         }
     },
     "frequency-tab": {
@@ -74,9 +78,9 @@
         "time-goal": "lexoni {{time}} të Kuranit"
     },
     "reading-goal": "Qëllimi i leximit",
-    "reading-goal-description": "Dëshironi ta përfundoni leximin e Kuranit brenda një muaji, një viti apo të krijoni një zakon për të lexuar 10 minuta në ditë? Krijoni një qëllim më poshtë dhe Quran.com do të krijojë një plan të personalizuar për ju dhe do ta rregullojë atë ndërsa përparoni për t'ju ndihmuar të arrini qëllimin tuaj.",
+    "reading-goal-description": "A ju duket e vështirë të ruani konsistencën me qëllimet tuaja të leximit të Kuranit? <br\/> <br\/> Gjurmuesi i Qëllimeve të Kuranit është një veçori dinamike e zhvilluar për t'ju ndihmuar të qëndroni të qëndrueshëm në udhëtimin tuaj me Kuranin. Pavarësisht nëse synoni të lexoni 10 minuta në ditë, të përfundoni një Xhuz në një muaj, ose të përfundoni të gjithë Kuranin në një vit, etj., Quran.com tani mund t'ju ndihmojë të vendosni një qëllim të personalizuar dhe të mbani gjurmët e vijave tuaja të përditshme të leximit, ndërsa duke u përshtatur ndërsa përparoni. Është plotësisht falas për t'u përdorur dhe shpresojmë se do t'ju ndihmojë të qëndroni të motivuar për të arritur qëllimin tuaj!",
     "reading-goal-label": "Ju jeni në një",
-    "reading-goal-title": "Prezantimi i gjurmimit të Quran.com",
+    "reading-goal-title": "Prezantimi i Udhëtimit të Rritjes së Kuranit",
     "recommended": "Rekomanduar",
     "remaining": "Mbetet për sot",
     "remaining-days": {

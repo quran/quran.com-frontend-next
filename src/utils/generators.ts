@@ -9,7 +9,7 @@ import { secondsToReadableFormat } from '@/utils/datetime';
 import { toLocalizedNumber } from '@/utils/locale';
 
 const TIME_OPTIONS_LIMIT = 4 * 60; // 4 hours
-const DURATION_DAYS_LIMIT = 90; // 90 days
+const DURATION_DAYS_LIMIT = 365; // 1 year, 365 days
 
 /**
  * Generates options for the reading goal time input.
@@ -113,7 +113,7 @@ export const generateVerseOptions = (
 /**
  * Generates options for the reading goal duration input.
  *
- * The options are within a range of 1 day to 90 days in this format:
+ * The options are within a range of 1 day to 365 days in this format:
  * "1 day", "2 days", "3 days", etc...
  *
  * @param {Translate} t

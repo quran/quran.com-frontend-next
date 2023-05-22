@@ -1,3 +1,4 @@
+import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from './ReadingStreak.module.scss';
@@ -19,8 +20,10 @@ const LoggedOutReadingStreak = () => {
           <p className={styles.streakTitle}>{t('reading-goal-title')}</p>
         </div>
       </div>
-      <div className={styles.goalContainer}>{t('reading-goal-description')}</div>
 
+      <div className={styles.goalContainer}>
+        <Trans components={{ br: <br /> }} i18nKey="reading-goal:reading-goal-description" />
+      </div>
       <div className={styles.actionsContainer}>
         <Button href="/login">{t('create-reading-goal')}</Button>
       </div>

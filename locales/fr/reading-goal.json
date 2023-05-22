@@ -30,6 +30,10 @@
         "time": {
             "description": "Un objectif simple et adapté aux débutants",
             "title": "Lire 10 minutes par jour"
+        },
+        "year": {
+            "description": "Lisez le Coran à votre rythme au cours de la prochaine année",
+            "title": "Lire le Coran en un an"
         }
     },
     "frequency-tab": {
@@ -74,9 +78,9 @@
         "time-goal": "lire {{time}} du Coran"
     },
     "reading-goal": "Objectif de lecture",
-    "reading-goal-description": "Voulez-vous terminer la lecture du Coran en un mois, un an ou prendre l'habitude de lire 10 minutes par jour ? Créez un objectif ci-dessous et Quran.com créera un plan personnalisé pour vous et l'ajustera au fur et à mesure de votre progression pour vous aider à atteindre votre objectif.",
+    "reading-goal-description": "Trouvez-vous difficile de maintenir la cohérence avec vos objectifs de lecture du Coran ? <br\/> <br\/> Quran Goal Tracker est une fonctionnalité dynamique développée pour vous aider à rester cohérent dans votre cheminement avec le Coran. Que vous visiez à lire 10 minutes par jour, à terminer un Juz en un mois ou à terminer tout le Coran en un an, etc., Quran.com peut désormais vous aider à définir un objectif personnalisé et à suivre vos séquences de lecture quotidiennes, tout en ajuster au fur et à mesure que vous progressez. Son utilisation est entièrement gratuite et nous espérons qu'elle vous aidera à rester motivé pour atteindre votre objectif !",
     "reading-goal-label": "Vous êtes sur un",
-    "reading-goal-title": "Présentation du suivi Quran.com",
+    "reading-goal-title": "Présentation du parcours de croissance du Coran",
     "recommended": "Recommandé",
     "remaining": "Reste pour aujourd'hui",
     "remaining-days": {
