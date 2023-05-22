@@ -31,7 +31,7 @@ const LearnMoreButton: React.FC<Props> = ({ source }) => {
       variant={ButtonVariant.Compact}
       className={classNames(styles.cta, styles.learnMore)}
     >
-      {t('fundraising.learn-more')}
+      {t('learn-more')}
     </Button>
   );
 };
