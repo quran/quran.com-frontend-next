@@ -171,7 +171,7 @@ const ReadingStreak: React.FC<ReadingStreakProps> = ({ layout = ReadingStreakLay
             isDisabled={!nextVerseToRead}
             onClick={onContinueReadingClick}
           >
-            {t('continue-reading')}
+            {t(currentActivityDay?.ranges.length ? 'continue-reading' : 'start-reading')}
           </Button>
           <Button
             variant={ButtonVariant.Ghost}

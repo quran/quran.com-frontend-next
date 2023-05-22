@@ -14,7 +14,7 @@ import { logTabClick, logTabInputChange, logTabNextClick, TabKey, tabsArray } fr
 import { validateReadingGoalData } from './utils/validator';
 
 import DataContext from '@/contexts/DataContext';
-import Button, { ButtonSize } from '@/dls/Button/Button';
+import Button, { ButtonSize, ButtonType } from '@/dls/Button/Button';
 import Progress from '@/dls/Progress';
 import Spinner, { SpinnerSize } from '@/dls/Spinner/Spinner';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
@@ -29,7 +29,7 @@ import { makeStreakUrl } from '@/utils/auth/apiPaths';
 import { logFormSubmission } from '@/utils/eventLogger';
 
 const ReadingGoalOnboarding: React.FC = () => {
-  const { t } = useTranslation();
+  const { t } = useTranslation('reading-goal');
   const router = useRouter();
   const chaptersData = useContext(DataContext);
 
@@ -77,7 +77,7 @@ const ReadingGoalOnboarding: React.FC = () => {
 
     try {
       await addReadingGoalAndClearCache(data);
-      toast(t('reading-goal:set-reading-goal-success'), {
+      toast(t('set-reading-goal-success'), {
         status: ToastStatus.Success,
       });
       router.push('/');
@@ -165,6 +165,7 @@ const ReadingGoalOnboarding: React.FC = () => {
                     size={ButtonSize.Large}
                     prefix={<ChevronLeftIcon />}
                     onClick={onPrev}
+                    type={ButtonType.Secondary}
                   >
                     {t('common:prev')}
                   </Button>
@@ -177,7 +178,7 @@ const ReadingGoalOnboarding: React.FC = () => {
                   isDisabled={getIsNextDisabled()}
                   onClick={onNext}
                 >
-                  {!isPreviewTab ? t('common:next') : t('common:submit')}
+                  {!isPreviewTab ? t('common:next') : t('start-journey')}
                 </Button>
               </div>
             }

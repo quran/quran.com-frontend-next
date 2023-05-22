@@ -48,6 +48,10 @@ const makePayload = (
   return payload;
 };
 
+// this is the maximum number of days that we'll show in the preview for continuous goals
+// if the user selects a duration that is longer than this, we will show in the last day "+X more days"
+const MAX_DAYS = 6;
+
 const ReadingGoalWeekPreviewTab: React.FC<ReadingGoalTabProps> = ({ state, nav }) => {
   const { t, lang } = useTranslation('reading-goal');
   const chaptersData = useContext(DataContext);
@@ -132,13 +136,31 @@ const ReadingGoalWeekPreviewTab: React.FC<ReadingGoalTabProps> = ({ state, nav }
               (day: EstimatedGoalDay | RangeEstimatedQuranGoalDay, idx: number) => {
                 const date = new Date(day.date);
 
-                return (
-                  <li key={day.date} className={styles.dayPreview}>
-                    <HoverablePopover content={dateToReadableFormat(date, lang)}>
-                      <h3>{getFullDayName(date, lang)}</h3>
-                    </HoverablePopover>
+                const shouldShowNumberOfDaysAfterPreview =
+                  state.duration > MAX_DAYS && state.period === QuranGoalPeriod.Continuous;
+                const isLastElement = shouldShowNumberOfDaysAfterPreview && idx > MAX_DAYS - 1;
 
-                    <p>{getDailyAmount(idx)}</p>
+                return (
+                  <li
+                    key={day.date}
+                    className={classNames(styles.dayPreview, isLastElement && styles.lastDay)}
+                  >
+                    {isLastElement ? (
+                      <h3>
+                        {t('plus-x-more-days', {
+                          count: state.duration - MAX_DAYS,
+                          days: toLocalizedNumber(state.duration - MAX_DAYS, lang),
+                        })}
+                      </h3>
+                    ) : (
+                      <>
+                        <HoverablePopover content={dateToReadableFormat(date, lang)}>
+                          <h3>{getFullDayName(date, lang)}</h3>
+                        </HoverablePopover>
+
+                        <p>{getDailyAmount(idx)}</p>
+                      </>
+                    )}
                   </li>
                 );
               },

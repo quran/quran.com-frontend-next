@@ -4,8 +4,9 @@
         "description": "Your goal will calculate your progress over a duration of days",
         "title": "Over a duration"
     },
-    "create-plan": "Create plan",
     "create-reading-goal": "Create Goal",
+    "start-journey": "Start your journey!",
+    "start-reading": "Start Reading",
     "daily-progress": "Daily Progress",
     "daily": {
         "description": "Your goal will reset every day",
@@ -117,5 +118,9 @@
     "x-seconds": {
         "one": "{{seconds}} second",
         "other": "{{seconds}} seconds"
+    },
+    "plus-x-more-days": {
+        "one": "+{{days}} more day",
+        "other": "+{{days}} more days"
     }
 }
