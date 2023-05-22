@@ -148,11 +148,11 @@ export const readingGoalExamples = {
     i18nKey: 'year',
     icon: CalendarIcon,
     values: {
-      type: ReadingGoalType.RANGE,
+      type: GoalType.RANGE,
       rangeStartVerse: '1:1',
       rangeEndVerse: '114:6',
       duration: 365,
-      period: ReadingGoalPeriod.Continuous,
+      period: QuranGoalPeriod.Continuous,
     },
   },
   custom: {
