@@ -155,6 +155,8 @@ $widget-wrapper-background-color: var(--color-success-faded);
   inset-block-start: 0;
   transform: translateY(-50%);
   background-color: var(--color-success-medium);
-  padding: var(--spacing-xxsmall) var(--spacing-small);
+  color: var(--color-primary-deep);
+  padding-inline: var(--spacing-medium);
+  padding-block: var(--spacing-xxsmall);
   border-radius: var(--border-radius-pill);
 }
