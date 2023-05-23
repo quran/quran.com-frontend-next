@@ -97,7 +97,7 @@ const ReadingStreak: React.FC<ReadingStreakProps> = ({ layout = ReadingStreakLay
     return null;
   }
 
-  if (error || streak === 0) {
+  if (error || (!isLoading && streak === 0 && !goal)) {
     return <StreakIntroductionWidget />;
   }
 
