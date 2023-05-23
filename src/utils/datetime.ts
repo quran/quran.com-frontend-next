@@ -22,7 +22,7 @@ export const secondsFormatter = (seconds: number, locale: string) => {
  * Or any combination of the three.
  *
  * @param {numbers} s seconds
- * @param {Tramslate} t translate function
+ * @param {Translate} t translate function
  * @param {string} locale locale
  * @returns {string}
  */
@@ -214,6 +214,7 @@ export const dateToReadableFormat = (
     day: 'numeric',
     month: 'long',
     weekday: 'long',
+    timeZone: 'UTC',
     ...options,
   });
 };
