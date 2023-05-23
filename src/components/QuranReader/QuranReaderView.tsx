@@ -3,6 +3,7 @@ import React from 'react';
 
 import dynamic from 'next/dynamic';
 
+import useSyncReadingProgress from './hooks/useSyncReadingProgress';
 import ReadingPreferenceSwitcher from './ReadingPreferenceSwitcher';
 import TranslationView from './TranslationView';
 
@@ -27,6 +28,10 @@ const QuranReaderView: React.FC<Props> = ({
   initialData,
   resourceId,
 }) => {
+  useSyncReadingProgress({
+    isReadingPreference,
+  });
+
   if (isReadingPreference) {
     return (
       <>
@@ -40,6 +45,7 @@ const QuranReaderView: React.FC<Props> = ({
       </>
     );
   }
+
   return (
     <>
       <ReadingPreferenceSwitcher />

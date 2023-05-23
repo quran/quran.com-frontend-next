@@ -129,8 +129,8 @@ const TafsirBody = ({
     fetcher,
   );
 
-  // selectedLanguage is based on selectedTafir's language
-  // but we need to fetch the data from the API first to know what is the lanaguage of `selectedTafsirIdOrSlug`
+  // selectedLanguage is based on selectedTafsir's language
+  // but we need to fetch the data from the API first to know what is the language of `selectedTafsirIdOrSlug`
   // so we get the data from the API and set the selectedLanguage once it is loaded
   useEffect(() => {
     if (tafsirSelectionList) {

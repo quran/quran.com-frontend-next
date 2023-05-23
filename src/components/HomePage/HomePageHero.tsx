@@ -1,12 +1,11 @@
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
 
-import AlQuranulKarimSVG from '../../../public/images/alquranul-karim.svg';
-
 import styles from './HomePageHero.module.scss';
 import QuickLinks from './QuickLinks';
 
 import CommandBarTrigger from '@/components/CommandBar/CommandBarTrigger';
+import AlQuranulKarimSVG from '@/public/images/alquranul-karim.svg';
 
 const PlayRadioButton = dynamic(() => import('./PlayRadioButton'));
 

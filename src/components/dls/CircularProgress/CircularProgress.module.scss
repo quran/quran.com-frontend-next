@@ -1,0 +1,41 @@
+/*
+ * react-circular-progressbar styles
+ * All of the styles in this file are configurable!
+ */
+
+.progressbar {
+  /*
+   * This fixes an issue where the CircularProgressbar svg has
+   * 0 width inside a "display: flex" container, and thus not visible.
+   */
+  width: 100%;
+  /*
+   * This fixes a centering issue with CircularProgressbarWithChildren:
+   * https://github.com/kevinsqi/react-circular-progressbar/issues/94
+   */
+  vertical-align: middle;
+
+  .path {
+    stroke: var(--color-success-medium);
+    stroke-linecap: round;
+    transition: stroke-dashoffset 0.5s ease 0s;
+  }
+
+  .trail {
+    stroke: var(--color-success-faint);
+    /* Used when trail is not full diameter, i.e. when props.circleRatio is set */
+    stroke-linecap: round;
+  }
+
+  .text {
+    fill: var(--color-success-medium);
+    font-size: 20px;
+    dominant-baseline: middle;
+    text-anchor: middle;
+    font-weight: var(--font-weight-semibold);
+  }
+
+  .background {
+    fill: #d6d6d6;
+  }
+}

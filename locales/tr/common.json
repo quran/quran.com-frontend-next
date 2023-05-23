@@ -166,7 +166,6 @@
     },
     "fundraising": {
         "description": "Aylık bağışlar, Kuran.com'u iyileştirmemize ve operasyonları sürdürmemize yardımcı oluyor, böylece bağış toplamaya daha az ve etki yaratmaya daha fazla odaklanıyoruz.",
-        "learn-more": "Daha fazla bilgi edinin",
         "title": "Aylık Bağışçımız Olun"
     },
     "help": "Yardım",
@@ -179,6 +178,7 @@
     "juz": "Cüz",
     "language": "Dil",
     "languages": "Diller",
+    "learn-more": "Daha fazla bilgi edinin",
     "less": "Daha az",
     "loading": "Yükleniyor",
     "login": "Oturum aç",
@@ -191,6 +191,7 @@
     "more": "Daha fazla",
     "navigate": "Keşfedin",
     "network": "Ağ",
+    "new": "Yeni!",
     "next": "Sonraki",
     "next-ayah": "Sonraki Ayah",
     "no": "Numara",
@@ -217,6 +218,7 @@
     "q-reflect": "KuranYansıtmak",
     "quran-com": "Quran.com",
     "quran-radio": "Kuran Radyo",
+    "reading-history": "tarih okuma",
     "reading-preference": {
         "reading": "Okuma",
         "translation": "Meal"

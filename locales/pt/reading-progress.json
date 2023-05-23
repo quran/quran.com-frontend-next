@@ -1,0 +1,26 @@
+{
+    "delete-goal": {
+        "action": "Excluir meta",
+        "confirmation": {
+            "action-text": "Eu entendo a consequência, exclua meu objetivo",
+            "confirmation-text": "excluir meu objetivo",
+            "instruction-text": "Digite <strong> {{text}} <\/strong> para confirmar",
+            "subtitle": "Essa ação não pode ser desfeita. Isso excluirá permanentemente sua meta e deixaremos de acompanhar seu progresso.",
+            "title": "Tem certeza?"
+        },
+        "success": "Sua meta de leitura foi excluída com sucesso."
+    },
+    "edit-goal": {
+        "action": "Editar meta",
+        "subtitle": "Vamos recalcular seu progresso com base na nova meta.",
+        "success": "Sua meta de leitura foi atualizada com sucesso.",
+        "title": "Edite sua meta de leitura"
+    },
+    "history": "História de leitura",
+    "history-for": "Lendo o histórico de {{date}}",
+    "manage-goal": "Gerencie sua meta de leitura",
+    "no-reading-history-for": "Sem histórico de leitura para {{date}}",
+    "reading-progress-header": "Seu progresso",
+    "reading-progress-streak": "Onda",
+    "you-read": "Você lê:"
+}

@@ -166,7 +166,6 @@
     },
     "fundraising": {
         "description": "Derma bulanan membantu kami menambah baik Quran.com dan mengekalkan operasi supaya kami kurang menumpukan pada pengumpulan dana dan lebih kepada mencipta impak.",
-        "learn-more": "Ketahui lebih lanjut",
         "title": "Menjadi Penderma Bulanan"
     },
     "help": "Bantuan",
@@ -179,6 +178,7 @@
     "juz": "Juz",
     "language": "Bahasa",
     "languages": "Bahasa",
+    "learn-more": "Ketahui lebih lanjut",
     "less": "Kurang",
     "loading": "Sedang proses",
     "login": "Log masuk",
@@ -191,6 +191,7 @@
     "more": "Lagi",
     "navigate": "Navigasi",
     "network": "Rangkaian",
+    "new": "Baru!",
     "next": "Seterusnya",
     "next-ayah": "Seterusnya Ayah",
     "no": "Tidak",
@@ -217,6 +218,7 @@
     "q-reflect": "QuranReflect",
     "quran-com": "Quran",
     "quran-radio": "Radio Al-Quran",
+    "reading-history": "Membaca sejarah",
     "reading-preference": {
         "reading": "Membaca",
         "translation": "Terjemahan"

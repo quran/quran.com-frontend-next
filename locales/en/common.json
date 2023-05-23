@@ -166,7 +166,6 @@
     },
     "fundraising": {
         "description": "Monthly donations help us improve Quran.com and sustain operations so we focus less on fundraising and more on creating impact.",
-        "learn-more": "Learn more",
         "title": "Become A Monthly Donor"
     },
     "help": "Help",
@@ -179,6 +178,7 @@
     "juz": "Juz",
     "language": "Language",
     "languages": "Languages",
+    "learn-more": "Learn more",
     "less": "Less",
     "loading": "Loading",
     "login": "Login",
@@ -191,6 +191,7 @@
     "more": "More",
     "navigate": "Navigate",
     "network": "Network",
+    "new": "New!",
     "next": "Next",
     "next-ayah": "Next Ayah",
     "no": "No",
@@ -217,6 +218,7 @@
     "q-reflect": "QuranReflect",
     "quran-com": "Quran.com",
     "quran-radio": "Quran Radio",
+    "reading-history": "Reading history",
     "reading-preference": {
         "reading": "Reading",
         "translation": "Translation"

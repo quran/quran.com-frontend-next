@@ -1,0 +1,26 @@
+{
+    "delete-goal": {
+        "action": "Hapus Sasaran",
+        "confirmation": {
+            "action-text": "Saya mengerti konsekuensinya, hapus tujuan saya",
+            "confirmation-text": "hapus tujuan saya",
+            "instruction-text": "Harap ketik <strong> {{text}} <\/strong> untuk mengonfirmasi",
+            "subtitle": "Tindakan ini tidak bisa dibatalkan. Ini akan menghapus tujuan Anda secara permanen, dan kami akan berhenti melacak kemajuan Anda.",
+            "title": "Apa kamu yakin?"
+        },
+        "success": "Tujuan membaca Anda telah berhasil dihapus."
+    },
+    "edit-goal": {
+        "action": "Sunting Sasaran",
+        "subtitle": "Kami akan menghitung ulang kemajuan Anda berdasarkan tujuan baru.",
+        "success": "Tujuan membaca Anda telah berhasil diperbarui.",
+        "title": "Edit tujuan membaca Anda"
+    },
+    "history": "Membaca Sejarah",
+    "history-for": "Riwayat membaca untuk {{date}}",
+    "manage-goal": "Kelola tujuan membaca Anda",
+    "no-reading-history-for": "Tidak ada riwayat membaca untuk {{date}}",
+    "reading-progress-header": "Kemajuan Anda",
+    "reading-progress-streak": "Garis",
+    "you-read": "Bacalah:"
+}
