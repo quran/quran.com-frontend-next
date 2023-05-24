@@ -23,7 +23,7 @@ import { isValidChapterId, isValidVerseKey } from '@/utils/validator';
 import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
 import { generateVerseKeysBetweenTwoVerseKeys } from '@/utils/verseKeys';
 import Error from 'src/pages/_error';
-import { ChapterResponse, VersesResponse } from 'types/ApiResponses';
+import { ChapterResponse, VersesResponse, PagesLookUpResponse } from 'types/ApiResponses';
 import ChaptersData from 'types/ChaptersData';
 import { QuranReaderDataType } from 'types/QuranReader';
 
@@ -156,7 +156,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     mushaf: defaultMushafId,
   };
   let numberOfVerses = 1;
-  let pagesLookupResponse = null;
+  let pagesLookupResponse: PagesLookUpResponse | null = null;
   try {
     // if it's a verseKey
     if (!isChapter) {
@@ -195,8 +195,10 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     }
     const versesResponse = await getChapterVerses(formatStringNumber(chapterId), locale, apiParams);
     const metaData = { numberOfVerses };
+
     versesResponse.metaData = metaData;
     versesResponse.pagesLookup = pagesLookupResponse;
+
     return {
       props: {
         chaptersData,
