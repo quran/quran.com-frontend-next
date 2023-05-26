@@ -286,21 +286,28 @@ export const getLocaleNameByFullName = (fullName: string): string =>
  * @returns {string}
  */
 // Intl.NumberFormat is performance heavy so we are caching the formatter.
-let numberFormatter: Intl.NumberFormat = null;
+const numberFormatters: Map<Intl.NumberFormatOptions | string, Intl.NumberFormat> = new Map();
 let currentLanguageLocale: string = null;
+
 export const toLocalizedNumber = (
   value: number,
   locale: string,
   showLeadingZero = false,
-  options: Intl.NumberFormatOptions = {},
+  options: Intl.NumberFormatOptions = undefined,
 ) => {
-  if (numberFormatter && currentLanguageLocale === locale) {
-    return getFormattedNumber(numberFormatter, value, showLeadingZero);
+  // we do this because an empty object will result in a new formatter being created everytime since we don't have it's reference.
+  const formatterKey = options ?? 'DEFAULT_OPTIONS';
+
+  if (numberFormatters.has(formatterKey) && currentLanguageLocale === locale) {
+    return getFormattedNumber(numberFormatters.get(formatterKey), value, showLeadingZero);
   }
+
   currentLanguageLocale = locale;
   const fullLocale = LANG_LOCALE_MAP[locale];
-  numberFormatter = new Intl.NumberFormat(fullLocale, options);
-  return getFormattedNumber(numberFormatter, value, showLeadingZero);
+
+  const newNumberFormatter = new Intl.NumberFormat(fullLocale, options);
+  numberFormatters.set(formatterKey, newNumberFormatter);
+  return getFormattedNumber(newNumberFormatter, value, showLeadingZero);
 };
 
 /**

@@ -1,11 +1,11 @@
 import classNames from 'classnames';
 import { useSelector } from 'react-redux';
 
-import MoonIllustrationSVG from '../../../public/images/moon-illustration.svg';
 import DonateButton from '../Fundraising/DonateButton';
 
 import styles from './Banner.module.scss';
 
+import MoonIllustrationSVG from '@/public/images/moon-illustration.svg';
 import { selectIsBannerVisible } from '@/redux/slices/banner';
 import DonateButtonClickSource from '@/types/DonateButtonClickSource';
 

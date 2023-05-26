@@ -1,12 +1,14 @@
 /* eslint-disable max-lines */
 /* eslint-disable react-func/max-lines-per-function */
-import { useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 
 import { Action, AsyncThunkAction } from '@reduxjs/toolkit';
 import useTranslation from 'next-translate/useTranslation';
-import { useDispatch } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
+import { selectQuranFont, selectQuranMushafLines } from '@/redux/slices/QuranReader/styles';
+import { getMushafId } from '@/utils/api';
 import { addOrUpdateUserPreference } from '@/utils/auth/api';
 import { isLoggedIn } from '@/utils/auth/login';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
@@ -57,6 +59,27 @@ const usePersistPreferenceGroup = (): PersistPreferences => {
   const { t } = useTranslation('common');
   const [isLoading, setIsLoading] = useState(false);
 
+  const quranFont = useSelector(selectQuranFont, shallowEqual);
+  const mushafLines = useSelector(selectQuranMushafLines, shallowEqual);
+
+  // this function is used to get the updated mushafId and pass it to addOrUpdateUserPreference
+  // if the preferenceGroup is not QURAN_READER_STYLES, it will return undefined
+  const getUpdatedMushafId = useCallback(
+    (
+      preferenceGroup: PreferenceGroup,
+      key: string,
+      value: string | number | boolean | Record<string, any>,
+    ) => {
+      if (preferenceGroup !== PreferenceGroup.QURAN_READER_STYLES) return undefined;
+
+      const font = key === 'quranFont' ? value : quranFont;
+      const lines = key === 'mushafLines' ? value : mushafLines;
+
+      return getMushafId(font, lines).mushaf;
+    },
+    [quranFont, mushafLines],
+  );
+
   const actions = useMemo(
     () => ({
       onSettingsChangeWithoutDispatch: (
@@ -67,7 +90,12 @@ const usePersistPreferenceGroup = (): PersistPreferences => {
       ) => {
         if (isLoggedIn()) {
           setIsLoading(true);
-          addOrUpdateUserPreference(key, value, preferenceGroup)
+          addOrUpdateUserPreference(
+            key,
+            value,
+            preferenceGroup,
+            getUpdatedMushafId(preferenceGroup, key, value),
+          )
             .then(() => {
               callback();
             })
@@ -89,7 +117,12 @@ const usePersistPreferenceGroup = (): PersistPreferences => {
         if (isLoggedIn()) {
           action();
           setIsLoading(true);
-          addOrUpdateUserPreference(key, value, preferenceGroup)
+          addOrUpdateUserPreference(
+            key,
+            value,
+            preferenceGroup,
+            getUpdatedMushafId(preferenceGroup, key, value),
+          )
             .then(() => {
               if (successCallback) {
                 successCallback();
@@ -137,7 +170,12 @@ const usePersistPreferenceGroup = (): PersistPreferences => {
           // 1. dispatch the action first
           dispatch(action);
           setIsLoading(true);
-          addOrUpdateUserPreference(key, value, preferenceGroup)
+          addOrUpdateUserPreference(
+            key,
+            value,
+            preferenceGroup,
+            getUpdatedMushafId(preferenceGroup, key, value),
+          )
             .then(() => {
               if (successCallback) {
                 successCallback();
@@ -174,7 +212,7 @@ const usePersistPreferenceGroup = (): PersistPreferences => {
         }
       },
     }),
-    [dispatch, t, toast],
+    [dispatch, t, toast, getUpdatedMushafId],
   );
 
   return { actions, isLoading };

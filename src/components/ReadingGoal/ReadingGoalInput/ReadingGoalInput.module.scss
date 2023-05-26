@@ -1,0 +1,34 @@
+.rangeInputContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--spacing-medium);
+  margin-block-end: var(--spacing-large);
+
+  & > div {
+    flex: 1;
+  }
+}
+
+.inputContainer {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.fullWidth {
+  width: 100%;
+}
+
+.input {
+  > select {
+    width: 100%;
+  }
+}
+
+.label {
+  font-size: var(--font-size-large);
+  font-weight: var(--font-weight-bold);
+  margin-block-end: var(--spacing-small);
+}

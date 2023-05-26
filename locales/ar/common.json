@@ -166,7 +166,6 @@
     },
     "fundraising": {
         "description": "تساعدنا التبرعات الشهرية على تحسين موقع قرآن دوت كوم والحفاظ على العمليات، لذا فإننا نركز بشكل أقل على جمع التبرعات وأكثر على إحداث التأثير.",
-        "learn-more": "اعرف أكثر",
         "title": "كن متبرعا شهريا"
     },
     "help": "مساعدة",
@@ -179,6 +178,7 @@
     "juz": "جزء",
     "language": "لغة",
     "languages": "اللغات",
+    "learn-more": "اعرف أكثر",
     "less": "أقل",
     "loading": "التحميل جارٍ",
     "login": "تسجيل الدخول",
@@ -191,6 +191,7 @@
     "more": "المزيد",
     "navigate": "التنقل",
     "network": "الشبكة",
+    "new": "جديد!",
     "next": "التالي",
     "next-ayah": "الآية التالية",
     "no": "لا",
@@ -217,6 +218,7 @@
     "q-reflect": "QuranReflect",
     "quran-com": "Quran.com",
     "quran-radio": "راديو القرآن",
+    "reading-history": "سجل القراءة",
     "reading-preference": {
         "reading": "القراءة",
         "translation": "الترجمة"

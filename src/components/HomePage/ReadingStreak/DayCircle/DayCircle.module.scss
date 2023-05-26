@@ -1,0 +1,32 @@
+.dayCircle {
+  width: var(--spacing-large);
+  height: var(--spacing-large);
+  border-radius: var(--border-radius-circle);
+  border: 2px solid var(--color-success-medium);
+  background-color: var(--day-circle-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  inset-inline-start: 50%;
+  inset-block-start: 50%;
+  transform: translate(-50%, -50%);
+
+  [dir="rtl"] & {
+    transform: translate(50%, -50%);
+  }
+
+  & svg {
+    width: 90%;
+    height: 90%;
+    color: white;
+  }
+}
+
+.filled {
+  background-color: var(--color-success-medium) !important;
+}
+
+.stroked {
+  border-style: dashed;
+}

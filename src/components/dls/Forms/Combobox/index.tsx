@@ -82,14 +82,28 @@ const Combobox: React.FC<Props> = ({
   const [filteredItems, setFilteredItems] = useState<DropdownItem[]>(items);
   const [focusInput, inputRef]: [() => void, RefObject<HTMLInputElement>] = useFocus();
   const comboBoxRef = useRef(null);
+
+  // instead of running items.find in the closeCombobox function, we can create a map to memoize the result
+  const valueToLabelMap = useMemo(() => {
+    const map: Record<string, string> = {};
+
+    items.forEach((item) => {
+      map[item.value] = item.label;
+    });
+
+    return map;
+  }, [items]);
+
   const closeCombobox = useCallback(() => {
     if (!isMultiSelect) {
-      setInputValue(selectedValue as string);
+      const currentValue = selectedValue as string;
+      setInputValue(valueToLabelMap[currentValue] ?? currentValue);
     } else {
       setInputValue('');
     }
     setIsOpened(false);
-  }, [isMultiSelect, selectedValue]);
+  }, [isMultiSelect, selectedValue, valueToLabelMap]);
+
   useOutsideClickDetector(comboBoxRef, closeCombobox, isOpened);
   useHotkeys('Escape', closeCombobox, { enabled: isOpened, enableOnTags: ['INPUT'] });
 
@@ -101,6 +115,19 @@ const Combobox: React.FC<Props> = ({
   useEffect(() => {
     setFilteredItems(items);
   }, [items]);
+
+  // filter items when the search query changes
+  useEffect(() => {
+    // if the search query is empty it means it has been cleared so we set the original items back.
+    setFilteredItems(
+      !inputValue
+        ? items
+        : items.filter((item) =>
+            // we convert the search query and the item's label to lowercase first then check if the label contains a part/all of the search query.
+            item.label.toLowerCase().includes(inputValue.toLowerCase()),
+          ),
+    );
+  }, [inputValue, items]);
 
   // if there are any changes in the value, we should update the selectedValue.
   useEffect(() => {
@@ -219,7 +246,6 @@ const Combobox: React.FC<Props> = ({
           });
         }
         setInputValue(''); // reset the input value even if it's selecting.
-        setFilteredItems(items); // reset the filtered items.
       } else if (shouldProcessChange) {
         setInputValue(isUnSelect ? '' : itemLabel);
         setSelectedValue(() => {
@@ -230,7 +256,7 @@ const Combobox: React.FC<Props> = ({
       }
       setIsOpened(false); // close the items container
     },
-    [preventUnselectingItems, invokeOnChangeCallback, isMultiSelect, items],
+    [preventUnselectingItems, invokeOnChangeCallback, isMultiSelect],
   );
 
   /**
@@ -241,15 +267,6 @@ const Combobox: React.FC<Props> = ({
    */
   const onInputValueChange = (event: React.FormEvent<HTMLInputElement>): void => {
     const newInputValue = event.currentTarget.value;
-    // if the search query is empty it means it has been cleared so we set the original items back.
-    setFilteredItems(
-      newInputValue === ''
-        ? items
-        : items.filter((item) =>
-            // we convert the search query and the item's label to lowercase first then check if the label contains a part/all of the search query.
-            item.label.toLowerCase().includes(newInputValue.toLowerCase()),
-          ),
-    );
     setInputValue(newInputValue);
     setIsOpened(true);
   };
@@ -281,7 +298,6 @@ const Combobox: React.FC<Props> = ({
           return defaultSelectedValue;
         });
       }
-      setFilteredItems(items);
     }
   };
 

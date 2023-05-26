@@ -48,3 +48,53 @@ export const generateVerseKeysBetweenTwoVerseKeys = (
 
   return verseKeys;
 };
+
+type VerseRangeInfo<T> = [
+  // from
+  {
+    chapter: T;
+    verse: T;
+    verseKey: string;
+  },
+  // to
+  {
+    chapter: T;
+    verse: T;
+    verseKey: string;
+  },
+];
+
+type VerseInfoFormat<AsNumbers extends boolean> = [AsNumbers] extends [true] ? number : string;
+
+export const parseVerseRange = <AsNumbers extends boolean>(
+  verseRange: string,
+  parseAsNumbers?: AsNumbers,
+): VerseRangeInfo<VerseInfoFormat<AsNumbers>> => {
+  const result = verseRange.match(/(\d+):(\d+)-(\d+):(\d+)/);
+
+  if (!result) {
+    return null;
+  }
+
+  const [, startChapter, startVerse, endChapter, endVerse] = result;
+
+  if (!startChapter || !startVerse || !endChapter || !endVerse) {
+    return null;
+  }
+
+  const parse = (value: string) =>
+    (parseAsNumbers ? Number(value) : value) as VerseInfoFormat<AsNumbers>;
+
+  return [
+    {
+      chapter: parse(startChapter),
+      verse: parse(startVerse),
+      verseKey: `${startChapter}:${startVerse}`,
+    },
+    {
+      chapter: parse(endChapter),
+      verse: parse(endVerse),
+      verseKey: `${endChapter}:${endVerse}`,
+    },
+  ];
+};
