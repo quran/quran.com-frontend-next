@@ -20,7 +20,7 @@ type DeleteAccountButtonProps = {
 };
 const DeleteAccountButton = ({ isDisabled }: DeleteAccountButtonProps) => {
   const dispatch = useDispatch();
-  const { t } = useTranslation();
+  const { t } = useTranslation('profile');
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [confirmationText, setConfirmationText] = useState('');
 
@@ -42,7 +42,7 @@ const DeleteAccountButton = ({ isDisabled }: DeleteAccountButtonProps) => {
     setIsModalVisible(true);
   };
 
-  const CONFIRMATION_TEXT = t('profile:delete-goal-confirmation.confirmation-text');
+  const CONFIRMATION_TEXT = t('delete-confirmation.confirmation-text');
   const canDeleteAccount = confirmationText.toLowerCase() === CONFIRMATION_TEXT.toLowerCase();
 
   return (
@@ -53,17 +53,17 @@ const DeleteAccountButton = ({ isDisabled }: DeleteAccountButtonProps) => {
         onClick={onDeleteAccountClicked}
         isDisabled={isDisabled}
       >
-        {t('profile:delete-account')}
+        {t('delete-account')}
       </Button>
       <Modal isOpen={isModalVisible} onClickOutside={closeModal}>
         <Modal.Body>
           <Modal.Header>
-            <Modal.Title>{t('profile:delete-goal-confirmation.title')}</Modal.Title>
-            <Modal.Subtitle>{t('profile:delete-goal-confirmation.subtitle')}</Modal.Subtitle>
+            <Modal.Title>{t('delete-confirmation.title')}</Modal.Title>
+            <Modal.Subtitle>{t('delete-confirmation.subtitle')}</Modal.Subtitle>
 
             <p className={styles.instructionText}>
               <Trans
-                i18nKey="profile:delete-goal-confirmation.instruction-text"
+                i18nKey="profile:delete-confirmation.instruction-text"
                 values={{ text: CONFIRMATION_TEXT }}
                 components={{
                   strong: <strong className={styles.confirmationText} />,
@@ -86,7 +86,7 @@ const DeleteAccountButton = ({ isDisabled }: DeleteAccountButtonProps) => {
               onClick={onDeleteConfirmed}
               isDisabled={!canDeleteAccount}
             >
-              {t('profile:delete-goal-confirmation.action-text')}
+              {t('delete-confirmation.action-text')}
             </Button>
           </Modal.Footer>
         </Modal.Body>
