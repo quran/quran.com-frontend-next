@@ -54,7 +54,7 @@ const TranslationViewVerse: React.FC<Props> = ({
 
   if (!verse) {
     return (
-      <div className={styles.container} data-skeleton-verse-index={verseIdx}>
+      <div className={styles.container}>
         <TranslationViewCellSkeleton />
       </div>
     );
