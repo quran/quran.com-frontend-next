@@ -18,6 +18,7 @@ import Verse from '@/types/Verse';
 import { areArraysEqual } from '@/utils/array';
 import { makeBookmarksRangeUrl } from '@/utils/auth/apiPaths';
 import { isLoggedIn } from '@/utils/auth/login';
+import { getPageNumberFromIndexAndPerPage } from '@/utils/number';
 import { selectIsUsingDefaultReciter } from 'src/xstate/actors/audioPlayer/selectors';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 
@@ -34,6 +35,20 @@ interface QuranReaderParams {
   verseIdx: number;
 }
 
+interface UseDedupedFetchVerseResult {
+  verse: Verse | null;
+  firstVerseInPage: Verse | null;
+  bookmarksRangeUrl: string | null;
+}
+
+/**
+ * This hook fetches the verse of the given `verseIdx` and dedupes the data based on their page number.
+ *
+ * For an example, passing `verseIdx` of `0 | 1 | 2 | 3 | 4` should only trigger one API request because they are all in the same page.
+ *
+ * @param {QuranReaderParams} params
+ * @returns {UseDedupedFetchVerseResult}
+ */
 const useDedupedFetchVerse = ({
   quranReaderDataType,
   quranReaderStyles,
@@ -45,7 +60,7 @@ const useDedupedFetchVerse = ({
   setApiPageToVersesMap,
   mushafId,
   verseIdx,
-}: QuranReaderParams) => {
+}: QuranReaderParams): UseDedupedFetchVerseResult => {
   const router = useRouter();
 
   const { lang } = useTranslation();
@@ -66,7 +81,7 @@ const useDedupedFetchVerse = ({
   const isUsingDefaultTranslations = useSelector(selectIsUsingDefaultTranslations);
   const isUsingDefaultFont = useSelector(selectIsUsingDefaultFont);
 
-  const pageNumber = Math.ceil((verseIdx + 1) / initialData.pagination.perPage);
+  const pageNumber = getPageNumberFromIndexAndPerPage(verseIdx, initialData.pagination.perPage);
 
   const idxInPage = verseIdx % initialData.pagination.perPage;
 
@@ -94,7 +109,6 @@ const useDedupedFetchVerse = ({
     verseFetcher,
     {
       fallbackData: shouldUseInitialData ? initialData.verses : undefined,
-      // revalidateOnMount: !shouldUseInitialData,
     },
   );
 

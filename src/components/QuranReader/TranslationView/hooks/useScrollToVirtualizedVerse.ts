@@ -1,9 +1,12 @@
-import { useCallback, useEffect, useState, useRef } from 'react';
+import { useCallback, useEffect, useState, useRef, useContext } from 'react';
 
 import { useRouter } from 'next/router';
 import { VirtuosoHandle } from 'react-virtuoso';
 
+import DataContext from '@/contexts/DataContext';
 import Verse from '@/types/Verse';
+import { getPageNumberFromIndexAndPerPage } from '@/utils/number';
+import { isValidVerseId } from '@/utils/validator';
 import { QuranReaderDataType } from 'types/QuranReader';
 import ScrollAlign from 'types/ScrollAlign';
 
@@ -16,75 +19,85 @@ import ScrollAlign from 'types/ScrollAlign';
  * @param {QuranReaderDataType} quranReaderDataType
  * @param {React.MutableRefObject<VirtuosoHandle>} virtuosoRef
  * @param {Record<number, Verse[]>} apiPageToVersesMap
+ * @param {string} chapterId
  * @param {number} versesPerPage
  */
 const useScrollToVirtualizedTranslationView = (
   quranReaderDataType: QuranReaderDataType,
   virtuosoRef: React.MutableRefObject<VirtuosoHandle>,
   apiPageToVersesMap: Record<number, Verse[]>,
+  chapterId: string,
   versesPerPage: number,
 ) => {
   const router = useRouter();
+  const chaptersData = useContext(DataContext);
   const [shouldReadjustScroll, setShouldReadjustScroll] = useState(false);
 
   const { startingVerse } = router.query;
   const startingVerseNumber = Number(startingVerse);
-  // if the startingVerse is a valid integer and is above 1
   const isValidStartingVerse =
-    startingVerseNumber && Number.isInteger(startingVerseNumber) && startingVerseNumber > 0;
+    startingVerse && isValidVerseId(chaptersData, chapterId, String(startingVerse));
 
-  const scrollToArabicVerse = useCallback(
-    (verseNumber: number, done?: () => void) => {
+  const scrollToBeginningOfVerseCell = useCallback(
+    (verseNumber: number) => {
       const verseIndex = verseNumber - 1;
       virtuosoRef.current.scrollToIndex({
         index: verseIndex,
         align: ScrollAlign.Start,
+        // this offset is to push the scroll a little bit down so that the context menu doesn't cover the verse
         offset: -70,
       });
-
-      done?.();
     },
     [virtuosoRef],
   );
 
+  // this effect runs when there is initially a `startingVerse` in the url or when the user navigates to a new verse
+  // it scrolls to the beginning of the verse cell and we set `shouldReadjustScroll` to true so that the other effect
+  // adjusts the scroll to the correct position
   useEffect(() => {
-    // if startingVerse is present in the url
     if (quranReaderDataType === QuranReaderDataType.Chapter && isValidStartingVerse) {
-      scrollToArabicVerse(startingVerseNumber, () => {
-        setShouldReadjustScroll(true);
-      });
+      scrollToBeginningOfVerseCell(startingVerseNumber);
+      setShouldReadjustScroll(true);
     }
-  }, [quranReaderDataType, startingVerseNumber, isValidStartingVerse, scrollToArabicVerse]);
+  }, [
+    quranReaderDataType,
+    startingVerseNumber,
+    isValidStartingVerse,
+    scrollToBeginningOfVerseCell,
+  ]);
 
   const oldApiPageToVersesMap = useRef<Record<number, Verse[]>>(apiPageToVersesMap);
 
   // this effect handles the case when the user navigates to a verse that is not yet loaded
   // we need to wait for the verse to be loaded and then scroll to it
   useEffect(() => {
-    if (quranReaderDataType === QuranReaderDataType.Chapter && isValidStartingVerse) {
-      const pageNumber = Math.ceil((startingVerseNumber + 1) / versesPerPage);
-
-      const isFirstVerseInPage = (startingVerseNumber + 1) % versesPerPage === 1;
-      const isLastVerseInPage = (startingVerseNumber + 1) % versesPerPage === 0;
+    if (
+      quranReaderDataType === QuranReaderDataType.Chapter &&
+      isValidStartingVerse &&
+      // we only want to run this effect when the user navigates to a new verse
+      // and not when the user is scrolling through the verses while apiPageToVersesMap is being populated
+      shouldReadjustScroll
+    ) {
+      const pageNumber = getPageNumberFromIndexAndPerPage(startingVerseNumber - 1, versesPerPage);
+      const isFirstVerseInPage = startingVerseNumber % versesPerPage === 1;
+      const isLastVerseInPage = startingVerseNumber % versesPerPage === 0;
 
       const isNewPageLoaded = (page: number) => {
         return !oldApiPageToVersesMap.current[page] && apiPageToVersesMap[page];
       };
 
-      if (shouldReadjustScroll) {
-        if (
-          isNewPageLoaded(pageNumber) ||
-          (pageNumber > 1 && isFirstVerseInPage && isNewPageLoaded(pageNumber - 1)) ||
-          (isLastVerseInPage && isNewPageLoaded(pageNumber + 1))
-        ) {
-          scrollToArabicVerse(startingVerseNumber);
-        } else {
-          setTimeout(() => {
-            scrollToArabicVerse(startingVerseNumber);
-          }, 1000);
+      if (
+        isNewPageLoaded(pageNumber) ||
+        (pageNumber > 1 && isFirstVerseInPage && isNewPageLoaded(pageNumber - 1)) ||
+        (isLastVerseInPage && isNewPageLoaded(pageNumber + 1))
+      ) {
+        scrollToBeginningOfVerseCell(startingVerseNumber);
+      } else {
+        setTimeout(() => {
+          scrollToBeginningOfVerseCell(startingVerseNumber);
+        }, 1000);
 
-          setShouldReadjustScroll(false);
-        }
+        setShouldReadjustScroll(false);
       }
     }
 
@@ -96,7 +109,7 @@ const useScrollToVirtualizedTranslationView = (
     apiPageToVersesMap,
     quranReaderDataType,
     versesPerPage,
-    scrollToArabicVerse,
+    scrollToBeginningOfVerseCell,
     virtuosoRef,
   ]);
 };

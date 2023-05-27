@@ -64,14 +64,11 @@ const TranslationView = ({
     QueryParam.WBW_LOCALE,
   );
   const virtuosoRef = useRef<VirtuosoHandle>(null);
-  // const numberOfPages = useMemo(
-  //   () => getNumberOfPages(initialData.metaData.numberOfVerses, initialData.pagination.perPage),
-  //   [initialData.metaData.numberOfVerses, initialData.pagination.perPage],
-  // );
   useScrollToVirtualizedVerse(
     quranReaderDataType,
     virtuosoRef,
     apiPageToVersesMap,
+    String(resourceId),
     initialData.pagination.perPage,
   );
   const verses = useMemo(() => Object.values(apiPageToVersesMap).flat(), [apiPageToVersesMap]);
