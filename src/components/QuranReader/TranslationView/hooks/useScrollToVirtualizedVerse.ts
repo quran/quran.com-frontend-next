@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState, useRef, useContext } from 'react';
+import { useCallback, useEffect, useState, useContext } from 'react';
 
 import { useRouter } from 'next/router';
 import { VirtuosoHandle } from 'react-virtuoso';
@@ -66,8 +66,6 @@ const useScrollToVirtualizedTranslationView = (
     scrollToBeginningOfVerseCell,
   ]);
 
-  const oldApiPageToVersesMap = useRef<Record<number, Verse[]>>(apiPageToVersesMap);
-
   // this effect handles the case when the user navigates to a verse that is not yet loaded
   // we need to wait for the verse to be loaded and then scroll to it
   useEffect(() => {
@@ -80,28 +78,25 @@ const useScrollToVirtualizedTranslationView = (
     ) {
       const pageNumber = getPageNumberFromIndexAndPerPage(startingVerseNumber - 1, versesPerPage);
       const isFirstVerseInPage = startingVerseNumber % versesPerPage === 1;
-      const isLastVerseInPage = startingVerseNumber % versesPerPage === 0;
 
-      const isNewPageLoaded = (page: number) => {
-        return !oldApiPageToVersesMap.current[page] && apiPageToVersesMap[page];
-      };
+      const isBeforeDoneLoading =
+        pageNumber > 1 && isFirstVerseInPage ? !!apiPageToVersesMap[pageNumber - 1] : true;
+      const isDoneLoading = !!apiPageToVersesMap[pageNumber] && isBeforeDoneLoading;
 
-      if (
-        isNewPageLoaded(pageNumber) ||
-        (pageNumber > 1 && isFirstVerseInPage && isNewPageLoaded(pageNumber - 1)) ||
-        (isLastVerseInPage && isNewPageLoaded(pageNumber + 1))
-      ) {
-        scrollToBeginningOfVerseCell(startingVerseNumber);
-      } else {
+      // if the verse finished loading, or the one right before, we `setTimeout` and scroll to the beginning of the verse cell (this is a hacky solution so that the verse renders before we scroll to it)
+      // and set `shouldReadjustScroll` to false so that this effect doesn't run again
+      //
+      // otherwise, we use `scrollToBeginningOfVerseCell` to scroll near the beginning of the verse cell without setting `shouldReadjustScroll` to false so that this effect runs again when the data loads
+      if (isDoneLoading) {
         setTimeout(() => {
           scrollToBeginningOfVerseCell(startingVerseNumber);
         }, 1000);
 
         setShouldReadjustScroll(false);
+      } else {
+        scrollToBeginningOfVerseCell(startingVerseNumber);
       }
     }
-
-    oldApiPageToVersesMap.current = apiPageToVersesMap;
   }, [
     shouldReadjustScroll,
     startingVerseNumber,
