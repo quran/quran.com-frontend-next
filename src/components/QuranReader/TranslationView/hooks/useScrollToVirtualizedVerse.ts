@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState, useContext } from 'react';
+import { useCallback, useEffect, useState, useContext, useRef } from 'react';
 
 import { useRouter } from 'next/router';
 import { VirtuosoHandle } from 'react-virtuoso';
@@ -32,6 +32,7 @@ const useScrollToVirtualizedTranslationView = (
   const router = useRouter();
   const chaptersData = useContext(DataContext);
   const [shouldReadjustScroll, setShouldReadjustScroll] = useState(false);
+  const timeoutId = useRef<ReturnType<typeof setTimeout>>(null);
 
   const { startingVerse } = router.query;
   const startingVerseNumber = Number(startingVerse);
@@ -88,7 +89,7 @@ const useScrollToVirtualizedTranslationView = (
       //
       // otherwise, we use `scrollToBeginningOfVerseCell` to scroll near the beginning of the verse cell without setting `shouldReadjustScroll` to false so that this effect runs again when the data loads
       if (isDoneLoading) {
-        setTimeout(() => {
+        timeoutId.current = setTimeout(() => {
           scrollToBeginningOfVerseCell(startingVerseNumber);
         }, 1000);
 
@@ -107,6 +108,15 @@ const useScrollToVirtualizedTranslationView = (
     scrollToBeginningOfVerseCell,
     virtuosoRef,
   ]);
+
+  // this effect clears the timeout when the component unmounts
+  useEffect(() => {
+    return () => {
+      if (timeoutId.current !== null) {
+        clearTimeout(timeoutId.current);
+      }
+    };
+  }, []);
 };
 
 export default useScrollToVirtualizedTranslationView;
