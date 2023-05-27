@@ -2,11 +2,11 @@
 import React from 'react';
 
 import styles from '../TranslationView.module.scss';
+import TranslationViewCellSkeleton from '../TranslationViewCellSkeleton';
 
 import useDedupedFetchVerse from './hooks/useDedupedFetchVerse';
 import TranslationPageVerse from './TranslationPageVerse';
 
-import TranslationViewSkeleton from '@/components/QuranReader/TranslationView/TranslationViewSkeleton';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
 import { getMushafId } from '@/utils/api';
 import { VersesResponse } from 'types/ApiResponses';
@@ -53,7 +53,11 @@ const TranslationViewVerse: React.FC<Props> = ({
   });
 
   if (!verse) {
-    return <TranslationViewSkeleton numberOfSkeletons={1} />;
+    return (
+      <div className={styles.container} data-skeleton-verse-index={verseIdx}>
+        <TranslationViewCellSkeleton />
+      </div>
+    );
   }
 
   return (

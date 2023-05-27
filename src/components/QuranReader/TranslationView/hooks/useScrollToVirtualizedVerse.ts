@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useCallback, useEffect, useState, useRef } from 'react';
 
 import { useRouter } from 'next/router';
 import { VirtuosoHandle } from 'react-virtuoso';
@@ -25,21 +25,36 @@ const useScrollToVirtualizedTranslationView = (
   versesPerPage: number,
 ) => {
   const router = useRouter();
+  const [shouldReadjustScroll, setShouldReadjustScroll] = useState(false);
+
   const { startingVerse } = router.query;
   const startingVerseNumber = Number(startingVerse);
   // if the startingVerse is a valid integer and is above 1
   const isValidStartingVerse =
     startingVerseNumber && Number.isInteger(startingVerseNumber) && startingVerseNumber > 0;
 
+  const scrollToArabicVerse = useCallback(
+    (verseNumber: number, done?: () => void) => {
+      const verseIndex = verseNumber - 1;
+      virtuosoRef.current.scrollToIndex({
+        index: verseIndex,
+        align: ScrollAlign.Start,
+        offset: -70,
+      });
+
+      done?.();
+    },
+    [virtuosoRef],
+  );
+
   useEffect(() => {
     // if startingVerse is present in the url
     if (quranReaderDataType === QuranReaderDataType.Chapter && isValidStartingVerse) {
-      virtuosoRef.current.scrollToIndex({
-        index: startingVerseNumber - 1,
-        align: ScrollAlign.Center,
+      scrollToArabicVerse(startingVerseNumber, () => {
+        setShouldReadjustScroll(true);
       });
     }
-  }, [quranReaderDataType, startingVerseNumber, isValidStartingVerse, virtuosoRef]);
+  }, [quranReaderDataType, startingVerseNumber, isValidStartingVerse, scrollToArabicVerse]);
 
   const oldApiPageToVersesMap = useRef<Record<number, Verse[]>>(apiPageToVersesMap);
 
@@ -48,23 +63,40 @@ const useScrollToVirtualizedTranslationView = (
   useEffect(() => {
     if (quranReaderDataType === QuranReaderDataType.Chapter && isValidStartingVerse) {
       const pageNumber = Math.ceil((startingVerseNumber + 1) / versesPerPage);
-      if (!oldApiPageToVersesMap.current[pageNumber] && apiPageToVersesMap[pageNumber]) {
-        // scroll on the next tick so that the verse is rendered
-        setTimeout(() => {
-          virtuosoRef.current.scrollIntoView({
-            index: startingVerseNumber - 1,
-            align: ScrollAlign.Center,
-          });
-        }, 0);
-        oldApiPageToVersesMap.current = apiPageToVersesMap;
+
+      const isFirstVerseInPage = (startingVerseNumber + 1) % versesPerPage === 1;
+      const isLastVerseInPage = (startingVerseNumber + 1) % versesPerPage === 0;
+
+      const isNewPageLoaded = (page: number) => {
+        return !oldApiPageToVersesMap.current[page] && apiPageToVersesMap[page];
+      };
+
+      if (shouldReadjustScroll) {
+        if (
+          isNewPageLoaded(pageNumber) ||
+          (pageNumber > 1 && isFirstVerseInPage && isNewPageLoaded(pageNumber - 1)) ||
+          (isLastVerseInPage && isNewPageLoaded(pageNumber + 1))
+        ) {
+          scrollToArabicVerse(startingVerseNumber);
+        } else {
+          setTimeout(() => {
+            scrollToArabicVerse(startingVerseNumber);
+          }, 1000);
+
+          setShouldReadjustScroll(false);
+        }
       }
     }
+
+    oldApiPageToVersesMap.current = apiPageToVersesMap;
   }, [
+    shouldReadjustScroll,
     startingVerseNumber,
     isValidStartingVerse,
     apiPageToVersesMap,
     quranReaderDataType,
     versesPerPage,
+    scrollToArabicVerse,
     virtuosoRef,
   ]);
 };

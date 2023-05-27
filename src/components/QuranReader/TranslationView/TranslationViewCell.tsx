@@ -106,7 +106,7 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
         </div>
 
         <div className={classNames(styles.contentContainer)}>
-          <div className={styles.arabicVerseContainer}>
+          <div className={styles.arabicVerseContainer} data-verse-index={verseIndex}>
             <VerseText words={getVerseWords(verse)} shouldShowH1ForSEO={verseIndex === 0} />
           </div>
           <div className={styles.verseTranslationsContainer}>
