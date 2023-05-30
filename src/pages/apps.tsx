@@ -4,15 +4,14 @@ import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
 import Image from 'next/image';
 
-import QuranAppLogo from '../../public/images/quran-app-logo.png';
-import QuranAppImage from '../../public/images/quran-app.png';
-import TarteelAppImage from '../../public/images/tarteel-app.png';
-
 import styles from './apps.module.scss';
 
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import PageContainer from '@/components/PageContainer';
 import Link from '@/dls/Link/Link';
+import QuranAppLogo from '@/public/images/quran-app-logo.png';
+import QuranAppImage from '@/public/images/quran-app.png';
+import TarteelAppImage from '@/public/images/tarteel-app.png';
 import { logTarteelLinkClick } from '@/utils/eventLogger';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl } from '@/utils/navigation';

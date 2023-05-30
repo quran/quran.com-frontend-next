@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 /* eslint-disable import/no-extraneous-dependencies */
 import path from 'path';
 
@@ -13,8 +14,8 @@ export default defineConfig({
   },
   resolve: {
     alias: {
-      // eslint-disable-next-line @typescript-eslint/naming-convention
       '@/data': path.resolve(__dirname, './data'),
+      '@/utils': path.resolve(__dirname, './src/utils'),
     },
   },
 });

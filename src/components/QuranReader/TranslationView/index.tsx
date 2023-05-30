@@ -76,6 +76,7 @@ const TranslationView = ({
   const itemContentRenderer = (currentPageIndex: number) => {
     return (
       <TranslationPage
+        totalPages={numberOfPages}
         pageNumber={currentPageIndex + 1}
         quranReaderDataType={quranReaderDataType}
         quranReaderStyles={quranReaderStyles}

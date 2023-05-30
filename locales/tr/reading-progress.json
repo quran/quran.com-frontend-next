@@ -1,0 +1,26 @@
+{
+    "delete-goal": {
+        "action": "Hedefi Sil",
+        "confirmation": {
+            "action-text": "Sonucu anlıyorum, hedefimi sil",
+            "confirmation-text": "hedefimi sil",
+            "instruction-text": "Onaylamak için lütfen <strong> {{text}} <\/strong> yazın",
+            "subtitle": "Bu işlem geri alınamaz. Bu, hedefinizi kalıcı olarak silecek ve ilerlemenizi takip etmeyi bırakacağız.",
+            "title": "Emin misin?"
+        },
+        "success": "Okuma hedefiniz başarıyla silindi."
+    },
+    "edit-goal": {
+        "action": "Hedefi Düzenle",
+        "subtitle": "İlerlemenizi yeni hedefe göre yeniden hesaplayacağız.",
+        "success": "Okuma hedefiniz başarıyla güncellendi.",
+        "title": "Okuma hedefinizi düzenleyin"
+    },
+    "history": "Okuma Tarihi",
+    "history-for": "{{date}} için okuma geçmişi",
+    "manage-goal": "Okuma hedefinizi yönetin",
+    "no-reading-history-for": "{{date}} için okuma geçmişi yok",
+    "reading-progress-header": "Senin ilerlemen",
+    "reading-progress-streak": "Rüzgâr gibi geçmek",
+    "you-read": "Sen okumak:"
+}

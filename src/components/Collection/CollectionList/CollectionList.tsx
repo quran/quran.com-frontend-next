@@ -5,8 +5,6 @@ import useTranslation from 'next-translate/useTranslation';
 import Link from 'next/link';
 import useSWR from 'swr';
 
-import OverflowMenuIcon from '../../../../public/icons/menu_more_horiz.svg';
-import BookmarkIcon from '../../../../public/icons/unbookmarked.svg';
 import CollectionSorter from '../CollectionSorter/CollectionSorter';
 import RenameCollectionModal from '../RenameCollectionModal/RenameCollectionModal';
 
@@ -16,6 +14,8 @@ import RenameCollectionAction from './RenameCollectionAction';
 
 import ConfirmationModal from '@/dls/ConfirmationModal/ConfirmationModal';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
+import OverflowMenuIcon from '@/icons/menu_more_horiz.svg';
+import BookmarkIcon from '@/icons/unbookmarked.svg';
 import { logButtonClick, logEvent, logValueChange } from '@/utils/eventLogger';
 import { toLocalizedNumber } from '@/utils/locale';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';

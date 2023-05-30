@@ -1,6 +1,24 @@
 /* eslint-disable max-lines */
 import { configureRefreshFetch } from 'refresh-fetch';
 
+import { getTimezone } from '../datetime';
+
+import {
+  FilterActivityDaysParams,
+  ActivityDay,
+  UpdateActivityDayBody,
+  ActivityDayType,
+} from '@/types/auth/ActivityDay';
+import {
+  CreateGoalRequest,
+  EstimatedQuranGoal,
+  EstimateGoalRequest,
+  Goal,
+  GoalCategory,
+  UpdateGoalRequest,
+} from '@/types/auth/Goal';
+import { StreakWithMetadataParams, StreakWithUserMetadata } from '@/types/auth/Streak';
+import { Mushaf } from '@/types/QuranReader';
 import {
   makeBookmarksUrl,
   makeCompleteSignupUrl,
@@ -28,6 +46,11 @@ import {
   makeDeleteCollectionBookmarkByIdUrl,
   makeDeleteCollectionBookmarkByKeyUrl,
   makeDeleteBookmarkUrl,
+  makeActivityDaysUrl,
+  makeGoalUrl,
+  makeFilterActivityDaysUrl,
+  makeEstimateReadingGoalUrl,
+  makeStreakUrl,
 } from '@/utils/auth/apiPaths';
 import { fetcher } from 'src/api';
 import CompleteAnnouncementRequest from 'types/auth/CompleteAnnouncementRequest';
@@ -76,6 +99,23 @@ export const postRequest = <T>(url: string, requestData: RequestData): Promise<T
 const deleteRequest = <T>(url: string, requestData?: RequestData): Promise<T> =>
   privateFetcher(url, {
     method: 'DELETE',
+    ...(requestData && {
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(requestData),
+    }),
+  });
+
+/**
+ * Execute a PATCH request.
+ *
+ * @param {string} url
+ * @param {RequestData} requestData
+ * @returns {Promise<T>}
+ */
+const patchRequest = <T>(url: string, requestData?: RequestData): Promise<T> =>
+  privateFetcher(url, {
+    method: 'PATCH',
     ...(requestData && {
       // eslint-disable-next-line @typescript-eslint/naming-convention
       headers: { 'Content-Type': 'application/json' },
@@ -136,11 +176,50 @@ export const getBookmarkCollections = async (
 ): Promise<string[]> =>
   privateFetcher(makeBookmarkCollectionsUrl(mushafId, key, type, verseNumber));
 
+export const addReadingGoal = async ({
+  mushafId,
+  category,
+  ...data
+}: CreateGoalRequest): Promise<{ data?: Goal }> =>
+  postRequest(makeGoalUrl({ mushafId, type: category }), data);
+
+export const updateReadingGoal = async ({
+  mushafId,
+  category,
+  ...data
+}: UpdateGoalRequest): Promise<{ data?: Goal }> =>
+  patchRequest(makeGoalUrl({ mushafId, type: category }), data);
+
+export const estimateReadingGoal = async (
+  data: EstimateGoalRequest,
+): Promise<{ data?: EstimatedQuranGoal }> => privateFetcher(makeEstimateReadingGoalUrl(data));
+
+export const deleteReadingGoal = async (params: { category: GoalCategory }): Promise<void> =>
+  deleteRequest(makeGoalUrl({ type: params.category }));
+
+export const filterReadingDays = async (
+  params: FilterActivityDaysParams,
+): Promise<{ data: ActivityDay[] }> => privateFetcher(makeFilterActivityDaysUrl(params));
+
+export const getActivityDay = async (type: ActivityDayType): Promise<{ data?: ActivityDay }> =>
+  privateFetcher(makeActivityDaysUrl({ type }));
+
 export const addReadingSession = async (chapterNumber: number, verseNumber: number) =>
   postRequest(makeReadingSessionsUrl(), {
     chapterNumber,
     verseNumber,
   });
+
+export const updateActivityDay = async ({
+  mushafId,
+  type,
+  ...body
+}: UpdateActivityDayBody): Promise<ActivityDay> =>
+  postRequest(makeActivityDaysUrl({ mushafId, type }), body);
+
+export const getStreakWithUserMetadata = async (
+  params: StreakWithMetadataParams,
+): Promise<{ data: StreakWithUserMetadata }> => privateFetcher(makeStreakUrl(params));
 
 export const syncUserLocalData = async (
   payload: Record<SyncDataType, any>,
@@ -153,8 +232,13 @@ export const getUserPreferences = async (): Promise<UserPreferencesResponse> => 
   return userPreferences;
 };
 
-export const addOrUpdateUserPreference = async (key: string, value: any, group: PreferenceGroup) =>
-  postRequest(makeUserPreferencesUrl(), {
+export const addOrUpdateUserPreference = async (
+  key: string,
+  value: any,
+  group: PreferenceGroup,
+  mushafId?: Mushaf,
+) =>
+  postRequest(makeUserPreferencesUrl(mushafId), {
     key,
     value,
     group,
@@ -222,8 +306,10 @@ export const addCollection = async (collectionName: string) => {
 export const requestVerificationCode = async (emailToVerify) => {
   return postRequest(makeVerificationCodeUrl(), { email: emailToVerify });
 };
-export const addOrUpdateBulkUserPreferences = async (preferences: Record<PreferenceGroup, any>) =>
-  postRequest(makeUserBulkPreferencesUrl(), preferences);
+export const addOrUpdateBulkUserPreferences = async (
+  preferences: Record<PreferenceGroup, any>,
+  mushafId: Mushaf,
+) => postRequest(makeUserBulkPreferencesUrl(mushafId), preferences);
 
 export const logoutUser = async () => {
   return postRequest(makeLogoutUrl(), {});
@@ -238,7 +324,15 @@ export const withCredentialsFetcher = async <T>(
   init?: RequestInit,
 ): Promise<T> => {
   try {
-    const data = await fetcher<T>(input, { ...init, credentials: 'include' });
+    const data = await fetcher<T>(input, {
+      ...init,
+      credentials: 'include',
+      headers: {
+        ...init?.headers,
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        'x-timezone': getTimezone(),
+      },
+    });
     return data;
   } catch (error) {
     await handleErrors(error);

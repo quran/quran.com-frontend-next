@@ -1,0 +1,177 @@
+@use "src/styles/utility";
+@use "src/styles/breakpoints";
+
+.tabContainer {
+  margin-block: var(--spacing-large);
+  min-height: 80vh;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: row;
+  gap: calc(2 * var(--spacing-mega));
+
+  @include breakpoints.smallerThanDesktop {
+    flex-direction: column;
+    gap: var(--spacing-mega);
+  }
+}
+
+.optionsContainer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-large);
+  margin-block: var(--spacing-medium);
+  flex: 1;
+
+  @include breakpoints.smallerThanDesktop {
+    width: 100%;
+  }
+}
+
+.titleContainer {
+  flex: 1;
+
+  @include breakpoints.smallerThanDesktop {
+    width: 100%;
+    text-align: center;
+    margin-block-start: calc(2 * var(--spacing-mega));
+  }
+}
+
+.title {
+  font-size: var(--font-size-jumbo);
+  font-weight: var(--font-weight-bold);
+}
+
+.subtitle {
+  font-size: var(--font-size-large);
+  margin-block-start: var(--spacing-medium);
+  color: var(--color-text-faded);
+}
+
+.navigationContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--spacing-medium);
+
+  // margin-block: var(--spacing-medium);
+}
+
+$circle-size: var(--spacing-small);
+$circle-spacing: var(--spacing-xxsmall);
+$circle-border: 4px;
+
+.previewWrapper {
+  position: relative;
+  $spacing: calc($circle-size + $circle-spacing + $circle-border);
+  padding-inline-start: $spacing;
+  width: calc(100% - $spacing);
+}
+
+.dayPreview {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--spacing-large);
+  border-radius: var(--border-radius-rounded);
+  background-color: var(--color-background-alternative-faded);
+  font-size: var(--font-size-large);
+
+  &.lastDay {
+    background: transparent;
+  }
+
+  h3 {
+    font-size: var(--font-size-xlarge);
+    font-weight: var(--font-weight-bold);
+  }
+
+  &::before {
+    content: "";
+    position: absolute;
+    inset-inline-start: 0;
+    transform: translateX(calc(-100% - $circle-spacing));
+
+    [dir="rtl"] & {
+      transform: translateX(calc(100% + $circle-spacing));
+    }
+
+    width: $circle-size;
+    height: $circle-size;
+    border: $circle-border solid var(--color-success-medium);
+    border-radius: var(--border-radius-circle);
+    background-color: var(--color-background-default);
+  }
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset-inline-start: 0;
+    // we need to translate the line directly under the circle and in the middle of it
+    transform: translate(
+      calc(
+        -100% + ($circle-spacing * -1) + ($circle-size + $circle-border) / -2
+      ),
+      calc(50% + ($circle-size + $circle-border) / 2)
+    );
+
+    [dir="rtl"] & {
+      transform: translate(
+        calc(100% + $circle-spacing + ($circle-size + $circle-border) / 2),
+        calc(50% + ($circle-size + $circle-border) / 2)
+      );
+    }
+
+    width: 3px;
+    height: 100%;
+    background-color: var(--color-success-medium);
+  }
+
+  &:last-of-type {
+    &::after {
+      display: none !important;
+    }
+  }
+}
+
+.rangePreview {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+}
+
+.rangeInputContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--spacing-medium);
+  margin-block-end: var(--spacing-large);
+
+  & > div {
+    flex: 1;
+  }
+}
+
+.inputContainer {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.input {
+  width: 100%;
+
+  > select {
+    width: 100%;
+  }
+}
+
+.label {
+  font-size: var(--font-size-large);
+  font-weight: var(--font-weight-bold);
+  margin-block-end: var(--spacing-small);
+}

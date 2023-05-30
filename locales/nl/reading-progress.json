@@ -1,0 +1,26 @@
+{
+    "delete-goal": {
+        "action": "Doel verwijderen",
+        "confirmation": {
+            "action-text": "Ik begrijp de consequentie, verwijder mijn doel",
+            "confirmation-text": "verwijder mijn doel",
+            "instruction-text": "Typ <strong> {{text}} <\/strong> om te bevestigen",
+            "subtitle": "Deze actie kan niet ongedaan gemaakt worden. Hiermee wordt je doel definitief verwijderd en stoppen we met het bijhouden van je voortgang.",
+            "title": "Weet je het zeker?"
+        },
+        "success": "Je leesdoel is succesvol verwijderd."
+    },
+    "edit-goal": {
+        "action": "Doel bewerken",
+        "subtitle": "We zullen je voortgang opnieuw berekenen op basis van het nieuwe doel.",
+        "success": "Je leesdoel is succesvol geüpdatet.",
+        "title": "Pas je leesdoel aan"
+    },
+    "history": "Geschiedenis lezen",
+    "history-for": "Leesgeschiedenis voor {{date}}",
+    "manage-goal": "Beheer uw leesdoel",
+    "no-reading-history-for": "Geen leesgeschiedenis voor {{date}}",
+    "reading-progress-header": "Jouw vooruitgang",
+    "reading-progress-streak": "Streep",
+    "you-read": "Jij leest:"
+}

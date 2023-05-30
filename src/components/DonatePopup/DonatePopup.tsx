@@ -1,8 +1,6 @@
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch, useSelector } from 'react-redux';
 
-import MoonIllustrationSVG from '../../../public/images/moon-illustration.svg';
-
 import styles from './DonatePopup.module.scss';
 
 import DonateButton from '@/components/Fundraising/DonateButton';
@@ -10,6 +8,7 @@ import LearnMoreButton from '@/components/Fundraising/DonateButton/LearnMoreButt
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import Modal from '@/dls/Modal/Modal';
 import CloseIcon from '@/icons/close.svg';
+import MoonIllustrationSVG from '@/public/images/moon-illustration.svg';
 import { selectIsDonationPopupVisible, setIsDonationPopupVisible } from '@/redux/slices/session';
 import DonateButtonClickSource from '@/types/DonateButtonClickSource';
 import DonateButtonType from '@/types/DonateButtonType';

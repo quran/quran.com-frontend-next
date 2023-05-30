@@ -166,7 +166,6 @@
     },
     "fundraising": {
         "description": "Donasi bulanan membantu kami meningkatkan Quran.com dan mempertahankan operasi sehingga kami kurang fokus pada penggalangan dana dan lebih pada menciptakan dampak.",
-        "learn-more": "Belajarlah lagi",
         "title": "Menjadi Donatur Bulanan"
     },
     "help": "Bantuan",
@@ -179,6 +178,7 @@
     "juz": "Juz",
     "language": "Bahasa",
     "languages": "Bahasa",
+    "learn-more": "Belajarlah lagi",
     "less": "Kurang",
     "loading": "Memuat",
     "login": "Gabung",
@@ -191,6 +191,7 @@
     "more": "Lagi",
     "navigate": "Navigasi",
     "network": "Jaringan",
+    "new": "Baru!",
     "next": "Lanjut",
     "next-ayah": "Ayat Berikutnya",
     "no": "Tidak",
@@ -217,6 +218,7 @@
     "q-reflect": "QuranReflect",
     "quran-com": "Quran",
     "quran-radio": "Radio Al-Quran",
+    "reading-history": "Membaca sejarah",
     "reading-preference": {
         "reading": "Membaca",
         "translation": "Terjemahan"

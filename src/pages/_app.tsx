@@ -43,10 +43,7 @@ function MyApp({ Component, pageProps }): JSX.Element {
   const { t } = useTranslation('common');
   const { data: userData } = useSWRImmutable(
     isLoggedIn() ? makeUserProfileUrl() : null,
-    async () => {
-      const response = await getUserProfile();
-      return response;
-    },
+    getUserProfile,
   );
 
   // listen to in-app changes of the locale and update the HTML dir accordingly.

@@ -1,0 +1,47 @@
+.inputs {
+  width: 100%;
+}
+
+.inputContainer {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  justify-content: center;
+  margin-block: var(--spacing-large);
+
+  select {
+    width: 100%;
+  }
+}
+
+.label {
+  font-size: var(--font-size-large);
+  font-weight: var(--font-weight-bold);
+  margin-block-end: var(--spacing-small);
+}
+
+.deleteButton {
+  width: 100%;
+}
+
+.confirmationText {
+  font-weight: var(--font-weight-bold);
+}
+
+.instructionText {
+  padding-block: var(--spacing-medium);
+}
+
+.radioGroup {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-block: var(--spacing-large) !important;
+  width: 100%;
+}
+
+.radioItem {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xsmall);
+}

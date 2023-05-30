@@ -1,32 +1,23 @@
 /* eslint-disable react/no-multi-comp */
-import React, { useCallback, useContext, useMemo } from 'react';
+import React from 'react';
 
 import classNames from 'classnames';
-import debounce from 'lodash/debounce';
 import useTranslation from 'next-translate/useTranslation';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
-import { useSWRConfig } from 'swr';
+import { shallowEqual, useSelector } from 'react-redux';
 
 import ContextMenu from './ContextMenu';
+import { ReadingProgressContextProvider } from './contexts/ReadingProgressContext';
 import DebuggingObserverWindow from './DebuggingObserverWindow';
 import Notes from './Notes/Notes';
-import { getObservedVersePayload, getOptions, QURAN_READER_OBSERVER_ID } from './observer';
 import styles from './QuranReader.module.scss';
 import QuranReaderView from './QuranReaderView';
 import SidebarNavigation from './SidebarNavigation/SidebarNavigation';
 
 import FontPreLoader from '@/components/Fonts/FontPreLoader';
-import useGlobalIntersectionObserver from '@/hooks/useGlobalIntersectionObserver';
 import { selectNotes } from '@/redux/slices/QuranReader/notes';
 import { selectReadingPreference } from '@/redux/slices/QuranReader/readingPreferences';
-import { setLastReadVerse } from '@/redux/slices/QuranReader/readingTracker';
 import { selectIsSidebarNavigationVisible } from '@/redux/slices/QuranReader/sidebarNavigation';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
-import { addReadingSession } from '@/utils/auth/api';
-import { makeReadingSessionsUrl } from '@/utils/auth/apiPaths';
-import { isLoggedIn } from '@/utils/auth/login';
-import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
-import DataContext from 'src/contexts/DataContext';
 import { VersesResponse } from 'types/ApiResponses';
 import { QuranReaderDataType, ReadingPreference } from 'types/QuranReader';
 
@@ -35,8 +26,6 @@ type QuranReaderProps = {
   id: number | string; // can be the chapter, verse, tafsir, hizb, juz, rub or page's ID.
   quranReaderDataType?: QuranReaderDataType;
 };
-
-const READING_SESSION_DEBOUNCE_WAIT_TIME = 2000; // 2 seconds
 
 const QuranReader = ({
   initialData,
@@ -49,47 +38,6 @@ const QuranReader = ({
   const isSidebarNavigationVisible = useSelector(selectIsSidebarNavigationVisible);
   const readingPreference = useSelector(selectReadingPreference) as ReadingPreference;
   const isReadingPreference = readingPreference === ReadingPreference.Reading;
-  const chaptersData = useContext(DataContext);
-  const dispatch = useDispatch();
-  const { cache } = useSWRConfig();
-
-  const addReadingSessionAndClearCache = useCallback(
-    (chapterNumber, verseNumber) => {
-      addReadingSession(chapterNumber, verseNumber).then(() => {
-        cache.delete(makeReadingSessionsUrl());
-      });
-    },
-    [cache],
-  );
-
-  const debouncedAddReadingSession = useMemo(
-    () => debounce(addReadingSessionAndClearCache, READING_SESSION_DEBOUNCE_WAIT_TIME),
-    [addReadingSessionAndClearCache],
-  );
-
-  const onElementVisible = useCallback(
-    (element: Element) => {
-      const lastReadVerse = getObservedVersePayload(element);
-      const [chapterNumber, verseNumber] = getVerseAndChapterNumbersFromKey(lastReadVerse.verseKey);
-      dispatch(
-        setLastReadVerse({
-          lastReadVerse,
-          chaptersData,
-        }),
-      );
-
-      if (isLoggedIn()) {
-        debouncedAddReadingSession(Number(chapterNumber), Number(verseNumber));
-      }
-    },
-    [chaptersData, debouncedAddReadingSession, dispatch],
-  );
-
-  useGlobalIntersectionObserver(
-    getOptions(isReadingPreference),
-    onElementVisible,
-    QURAN_READER_OBSERVER_ID,
-  );
 
   return (
     <>
@@ -107,13 +55,15 @@ const QuranReader = ({
             [styles.readingView]: isReadingPreference,
           })}
         >
-          <QuranReaderView
-            isReadingPreference={isReadingPreference}
-            quranReaderStyles={quranReaderStyles}
-            initialData={initialData}
-            quranReaderDataType={quranReaderDataType}
-            resourceId={id}
-          />
+          <ReadingProgressContextProvider>
+            <QuranReaderView
+              isReadingPreference={isReadingPreference}
+              quranReaderStyles={quranReaderStyles}
+              initialData={initialData}
+              quranReaderDataType={quranReaderDataType}
+              resourceId={id}
+            />
+          </ReadingProgressContextProvider>
         </div>
       </div>
       <SidebarNavigation />

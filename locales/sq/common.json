@@ -166,7 +166,6 @@
     },
     "fundraising": {
         "description": "Donacionet mujore na ndihmojnë të përmirësojmë Quran.com dhe të mbajmë operacionet, kështu që ne fokusohemi më pak në mbledhjen e fondeve dhe më shumë në krijimin e ndikimit.",
-        "learn-more": "Mëso më shumë",
         "title": "Bëhuni një donator mujor"
     },
     "help": "Ndihmë",
@@ -179,6 +178,7 @@
     "juz": "Xhuz",
     "language": "Gjuhë",
     "languages": "Gjuhët",
+    "learn-more": "Mëso më shumë",
     "less": "Më pak",
     "loading": "Po ngarkohet",
     "login": "Identifikohu",
@@ -191,6 +191,7 @@
     "more": "Më shumë",
     "navigate": "Navigoni",
     "network": "Rrjeti",
+    "new": "I ri!",
     "next": "Tjetra",
     "next-ayah": "Ajeti tjetër",
     "no": "Jo",
@@ -217,6 +218,7 @@
     "q-reflect": "Kurani Reflekto",
     "quran-com": "Quran.com",
     "quran-radio": "Kuran Radio",
+    "reading-history": "Leximi i historisë",
     "reading-preference": {
         "reading": "Leximi",
         "translation": "Përkthimi"
