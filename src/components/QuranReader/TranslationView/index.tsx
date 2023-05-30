@@ -7,11 +7,10 @@ import { Virtuoso, VirtuosoHandle } from 'react-virtuoso';
 
 import onCopyQuranWords from '../onCopyQuranWords';
 import QueryParamMessage from '../QueryParamMessage';
-import { getNumberOfPages } from '../utils/page';
 
 import useScrollToVirtualizedVerse from './hooks/useScrollToVirtualizedVerse';
-import TranslationPage from './TranslationPage';
 import styles from './TranslationView.module.scss';
+import TranslationViewVerse from './TranslationViewVerse';
 
 import Spinner from '@/dls/Spinner/Spinner';
 import useGetQueryParamOrReduxValue from '@/hooks/useGetQueryParamOrReduxValue';
@@ -65,19 +64,21 @@ const TranslationView = ({
     QueryParam.WBW_LOCALE,
   );
   const virtuosoRef = useRef<VirtuosoHandle>(null);
-  const numberOfPages = useMemo(
-    () => getNumberOfPages(initialData.metaData.numberOfVerses, initialData.pagination.perPage),
-    [initialData.metaData.numberOfVerses, initialData.pagination.perPage],
+  useScrollToVirtualizedVerse(
+    quranReaderDataType,
+    virtuosoRef,
+    apiPageToVersesMap,
+    String(resourceId),
+    initialData.pagination.perPage,
   );
-  useScrollToVirtualizedVerse(quranReaderDataType, virtuosoRef, initialData.pagination.perPage);
   const verses = useMemo(() => Object.values(apiPageToVersesMap).flat(), [apiPageToVersesMap]);
   useQcfFont(quranReaderStyles.quranFont, verses);
 
-  const itemContentRenderer = (currentPageIndex: number) => {
+  const itemContentRenderer = (verseIdx: number) => {
     return (
-      <TranslationPage
-        totalPages={numberOfPages}
-        pageNumber={currentPageIndex + 1}
+      <TranslationViewVerse
+        verseIdx={verseIdx}
+        totalVerses={initialData.metaData.numberOfVerses}
         quranReaderDataType={quranReaderDataType}
         quranReaderStyles={quranReaderStyles}
         setApiPageToVersesMap={setApiPageToVersesMap}
@@ -104,7 +105,7 @@ const TranslationView = ({
         <Virtuoso
           ref={virtuosoRef}
           useWindowScroll
-          totalCount={numberOfPages}
+          totalCount={initialData.metaData.numberOfVerses}
           increaseViewportBy={INCREASE_VIEWPORT_BY_PIXELS}
           initialItemCount={1} // needed for SSR.
           itemContent={itemContentRenderer}

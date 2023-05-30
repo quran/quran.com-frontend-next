@@ -32,3 +32,20 @@ export const convertFractionToPercent = (fraction: string | number, decimalPoint
 export const convertNumberToDecimal = (number: string | number, decimalPoints = 1): number => {
   return Number((typeof number === 'string' ? Number(number) : number).toFixed(decimalPoints));
 };
+
+/**
+ * This function takes an item index and the number of items per page and returns the page number.
+ *
+ * Example:
+ * index: 0, perPage: 10 -> 1
+ * index: 1, perPage: 10 -> 1
+ * index: 10, perPage: 10 -> 2
+ * index: 11, perPage: 10 -> 2
+ *
+ * @param {number} index
+ * @param {number} perPage
+ * @returns {number}
+ */
+export const getPageNumberFromIndexAndPerPage = (index: number, perPage: number): number => {
+  return Math.ceil((index + 1) / perPage);
+};
