@@ -154,19 +154,35 @@ const ReadingView = ({
   useHotkeys('Up', onUpClicked, { enabled: allowKeyboardNavigation }, [scrollToPreviousPage]);
   useHotkeys('Down', onDownClicked, { enabled: allowKeyboardNavigation }, [scrollToNextPage]);
 
-  const itemContentRenderer = (pageIndex: number) => (
-    <PageContainer
-      isUsingDefaultFont={isUsingDefaultFont}
-      pagesVersesRange={pagesVersesRange}
-      quranReaderStyles={quranReaderStyles}
-      reciterId={reciterId}
-      lang={lang}
-      wordByWordLocale={wordByWordLocale}
-      pageIndex={pageIndex}
-      setMushafPageToVersesMap={setMushafPageToVersesMap}
-      initialData={initialData}
-    />
-  );
+  const itemContentRenderer = (pageIndex: number) => {
+    if (pageIndex === pagesCount) {
+      const pageVerses = mushafPageToVersesMap[lastReadPageNumber];
+      const lastVerse = pageVerses?.[pageVerses.length - 1];
+      if (!lastVerse) return null;
+
+      return (
+        <EndOfScrollingControls
+          quranReaderDataType={quranReaderDataType}
+          lastVerse={lastVerse}
+          initialData={initialData}
+        />
+      );
+    }
+
+    return (
+      <PageContainer
+        isUsingDefaultFont={isUsingDefaultFont}
+        pagesVersesRange={pagesVersesRange}
+        quranReaderStyles={quranReaderStyles}
+        reciterId={reciterId}
+        lang={lang}
+        wordByWordLocale={wordByWordLocale}
+        pageIndex={pageIndex}
+        setMushafPageToVersesMap={setMushafPageToVersesMap}
+        initialData={initialData}
+      />
+    );
+  };
 
   if (hasError) {
     return <Error />;
@@ -197,24 +213,8 @@ const ReadingView = ({
             increaseViewportBy={INCREASE_VIEWPORT_BY_PIXELS}
             className={styles.virtuosoScroller}
             initialItemCount={1} // needed for SSR.
-            totalCount={pagesCount}
+            totalCount={pagesCount + 1}
             itemContent={itemContentRenderer}
-            components={{
-              Footer: () => {
-                const pageVerses = mushafPageToVersesMap[lastReadPageNumber];
-                const lastVerse = pageVerses?.[pageVerses.length - 1];
-                if (lastVerse) {
-                  return (
-                    <EndOfScrollingControls
-                      quranReaderDataType={quranReaderDataType}
-                      lastVerse={lastVerse}
-                      initialData={initialData}
-                    />
-                  );
-                }
-                return null;
-              },
-            }}
           />
         )}
       </div>

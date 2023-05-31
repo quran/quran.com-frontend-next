@@ -75,6 +75,16 @@ const TranslationView = ({
   useQcfFont(quranReaderStyles.quranFont, verses);
 
   const itemContentRenderer = (verseIdx: number) => {
+    if (verseIdx === initialData.metaData.numberOfVerses) {
+      return (
+        <EndOfScrollingControls
+          quranReaderDataType={quranReaderDataType}
+          lastVerse={verses[verses.length - 1]}
+          initialData={initialData}
+        />
+      );
+    }
+
     return (
       <TranslationViewVerse
         verseIdx={verseIdx}
@@ -105,19 +115,10 @@ const TranslationView = ({
         <Virtuoso
           ref={virtuosoRef}
           useWindowScroll
-          totalCount={initialData.metaData.numberOfVerses}
+          totalCount={initialData.metaData.numberOfVerses + 1}
           increaseViewportBy={INCREASE_VIEWPORT_BY_PIXELS}
           initialItemCount={1} // needed for SSR.
           itemContent={itemContentRenderer}
-          components={{
-            Footer: () => (
-              <EndOfScrollingControls
-                quranReaderDataType={quranReaderDataType}
-                lastVerse={verses[verses.length - 1]}
-                initialData={initialData}
-              />
-            ),
-          }}
         />
       </div>
     </>
