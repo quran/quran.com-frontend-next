@@ -89,6 +89,10 @@ const useScrollToVirtualizedTranslationView = (
       //
       // otherwise, we use `scrollToBeginningOfVerseCell` to scroll near the beginning of the verse cell without setting `shouldReadjustScroll` to false so that this effect runs again when the data loads
       if (isDoneLoading) {
+        if (timeoutId.current !== null) {
+          clearTimeout(timeoutId.current);
+        }
+
         timeoutId.current = setTimeout(() => {
           scrollToBeginningOfVerseCell(startingVerseNumber);
         }, 1000);
