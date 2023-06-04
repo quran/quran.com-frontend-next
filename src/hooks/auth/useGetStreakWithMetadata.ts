@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import { useSelector, shallowEqual } from 'react-redux';
@@ -49,13 +49,17 @@ const useGetWeekDays = (showDayName = false) => {
 
 const useGetStreakWithMetadata = ({
   showDayName,
+  disableIfNoGoalExists,
 }: {
   showDayName?: boolean;
+  disableIfNoGoalExists?: boolean;
 } = {}) => {
   const week = useGetWeekDays(showDayName);
   const quranFont = useSelector(selectQuranFont, shallowEqual);
   const mushafLines = useSelector(selectQuranMushafLines, shallowEqual);
   const { mushaf } = getMushafId(quranFont, mushafLines);
+
+  const [disabled, setDisabled] = useState<boolean | null>(null);
 
   const params: StreakWithMetadataParams = {
     mushafId: mushaf,
@@ -66,12 +70,24 @@ const useGetStreakWithMetadata = ({
 
   // we don't pass the params to `makeStreakUrl` in the key so that we can invalidate the cache without getting the other params
   const { data, isValidating, error } = useSWR(
-    isLoggedIn() ? makeStreakUrl() : null,
+    isLoggedIn() && disabled !== true ? makeStreakUrl() : null,
     () => getStreakWithUserMetadata(params),
     {
       revalidateOnFocus: false,
     },
   );
+
+  useEffect(() => {
+    if (disabled !== null || !disableIfNoGoalExists || !data) {
+      return;
+    }
+
+    /**
+     * We don't want to re-fetch the data if the user has no goal.
+     * This is useful for the quran reader widget when we invalidate the cache after the user has read something.
+     */
+    setDisabled(!data.data.goal);
+  }, [disableIfNoGoalExists, disabled, data]);
 
   const isLoading = isValidating && !data;
 
