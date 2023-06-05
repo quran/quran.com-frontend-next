@@ -3,14 +3,15 @@ import { useContext } from 'react';
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useSelector } from 'react-redux';
-import useSWR from 'swr';
+
+import DataFetcher from '../DataFetcher';
 
 import { ReadingGoalTabProps } from './hooks/useReadingGoalReducer';
 import styles from './ReadingGoalPage.module.scss';
+import ReadingGoalWeekPreviewTabSkeleton from './ReadingGoalWeekPreviewTabSkeleton';
 
 import DataContext from '@/contexts/DataContext';
 import HoverablePopover from '@/dls/Popover/HoverablePopover';
-import Spinner from '@/dls/Spinner/Spinner';
 import { selectQuranFont, selectQuranMushafLines } from '@/redux/slices/QuranReader/styles';
 import {
   EstimatedGoalDay,
@@ -18,10 +19,11 @@ import {
   QuranGoalPeriod,
   GoalType,
   EstimateGoalRequest,
+  EstimatedQuranGoal,
 } from '@/types/auth/Goal';
 import { Mushaf } from '@/types/QuranReader';
 import { getMushafId } from '@/utils/api';
-import { estimateReadingGoal } from '@/utils/auth/api';
+import { privateFetcher } from '@/utils/auth/api';
 import { makeEstimateReadingGoalUrl } from '@/utils/auth/apiPaths';
 import { getChapterData } from '@/utils/chapter';
 import { dateToReadableFormat, secondsToReadableFormat, getFullDayName } from '@/utils/datetime';
@@ -61,18 +63,10 @@ const ReadingGoalWeekPreviewTab: React.FC<ReadingGoalTabProps> = ({ state, nav }
   const { mushaf } = getMushafId(quranFont, mushafLines);
 
   const payload = makePayload(state, mushaf);
-  const { data, isValidating } = useSWR(
-    makeEstimateReadingGoalUrl(payload),
-    () => estimateReadingGoal(payload),
-    {
-      revalidateOnMount: true,
-      revalidateOnFocus: false,
-    },
-  );
 
-  const getDailyAmount = (idx: number) => {
+  const getDailyAmount = (data: EstimatedQuranGoal, idx: number) => {
     const { type } = state;
-    const day = data.data.week[idx];
+    const day = data.week[idx];
 
     if (type === GoalType.RANGE) {
       const range = day.amount as string;
@@ -111,18 +105,6 @@ const ReadingGoalWeekPreviewTab: React.FC<ReadingGoalTabProps> = ({ state, nav }
     })}`;
   };
 
-  const getSkeleton = () => {
-    return Array.from({
-      length: Math.min(state.period === QuranGoalPeriod.Continuous ? state.duration : 7, 7),
-      // eslint-disable-next-line @typescript-eslint/naming-convention
-    }).map((_, idx) => (
-      // eslint-disable-next-line react/no-array-index-key
-      <li key={idx} className={styles.dayPreview}>
-        <Spinner />
-      </li>
-    ));
-  };
-
   return (
     <>
       <div className={styles.titleContainer}>
@@ -130,41 +112,56 @@ const ReadingGoalWeekPreviewTab: React.FC<ReadingGoalTabProps> = ({ state, nav }
         <p className={styles.subtitle}>{t('preview-schedule.description')}</p>
       </div>
       <ol className={classNames(styles.optionsContainer, styles.previewWrapper)}>
-        {isValidating
-          ? getSkeleton()
-          : data.data.week.map(
-              (day: EstimatedGoalDay | RangeEstimatedQuranGoalDay, idx: number) => {
-                const date = new Date(day.date);
+        <DataFetcher
+          queryKey={makeEstimateReadingGoalUrl(payload)}
+          fetcher={privateFetcher}
+          loading={() => (
+            <ReadingGoalWeekPreviewTabSkeleton
+              numberOfDays={state.period === QuranGoalPeriod.Continuous ? state.duration : 7}
+            />
+          )}
+          render={(response) => {
+            const { data } = response as { data: EstimatedQuranGoal };
 
-                const shouldShowNumberOfDaysAfterPreview =
-                  state.duration > MAX_DAYS && state.period === QuranGoalPeriod.Continuous;
-                const isLastElement = shouldShowNumberOfDaysAfterPreview && idx > MAX_DAYS - 1;
+            return (
+              <>
+                {data.week.map(
+                  (day: EstimatedGoalDay | RangeEstimatedQuranGoalDay, idx: number) => {
+                    const date = new Date(day.date);
 
-                return (
-                  <li
-                    key={day.date}
-                    className={classNames(styles.dayPreview, isLastElement && styles.lastDay)}
-                  >
-                    {isLastElement ? (
-                      <h3>
-                        {t('plus-x-more-days', {
-                          count: state.duration - MAX_DAYS,
-                          days: toLocalizedNumber(state.duration - MAX_DAYS, lang),
-                        })}
-                      </h3>
-                    ) : (
-                      <>
-                        <HoverablePopover content={dateToReadableFormat(date, lang)}>
-                          <h3>{getFullDayName(date, lang)}</h3>
-                        </HoverablePopover>
+                    const shouldShowNumberOfDaysAfterPreview =
+                      state.duration > MAX_DAYS && state.period === QuranGoalPeriod.Continuous;
+                    const isLastElement = shouldShowNumberOfDaysAfterPreview && idx > MAX_DAYS - 1;
 
-                        <p>{getDailyAmount(idx)}</p>
-                      </>
-                    )}
-                  </li>
-                );
-              },
-            )}
+                    return (
+                      <li
+                        key={day.date}
+                        className={classNames(styles.dayPreview, isLastElement && styles.lastDay)}
+                      >
+                        {isLastElement ? (
+                          <h3>
+                            {t('plus-x-more-days', {
+                              count: state.duration - MAX_DAYS,
+                              days: toLocalizedNumber(state.duration - MAX_DAYS, lang),
+                            })}
+                          </h3>
+                        ) : (
+                          <>
+                            <HoverablePopover content={dateToReadableFormat(date, lang)}>
+                              <h3>{getFullDayName(date, lang)}</h3>
+                            </HoverablePopover>
+
+                            <p>{getDailyAmount(data, idx)}</p>
+                          </>
+                        )}
+                      </li>
+                    );
+                  },
+                )}
+              </>
+            );
+          }}
+        />
 
         {nav}
       </ol>
