@@ -5,6 +5,7 @@ import AnnouncementBody from '../AnnouncementBody';
 import Slide1 from './Slides/Slide1';
 import Slide2 from './Slides/Slide2';
 import Slide3 from './Slides/Slide3';
+import Slide4 from './Slides/Slide4';
 
 import Button from '@/dls/Button/Button';
 import Carousel from '@/dls/Carousel';
@@ -58,8 +59,20 @@ const AuthOnboardingAnnouncement = ({ onCompleted }: AuthOnboardingAnnouncementP
             component: (
               <Slide3
                 action={
-                  <Button href="#announcement-slide-3" onClick={onLastSlideCompleted}>
+                  <Button href="#announcement-slide-4" onClick={() => logSlideCompletedClick(3)}>
                     {t('announcements.auth-onboarding.slide-3.action')}
+                  </Button>
+                }
+              />
+            ),
+          },
+          {
+            id: 'announcement-slide-4',
+            component: (
+              <Slide4
+                action={
+                  <Button href="#announcement-slide-4" onClick={onLastSlideCompleted}>
+                    {t('announcements.auth-onboarding.slide-4.action')}
                   </Button>
                 }
               />
