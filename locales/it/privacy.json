@@ -1,6 +1,44 @@
 {
-    "ga": "Utilizziamo <0> Google Analytics <\/0> per garantire che il sito continui a funzionare come previsto e per sapere a quali funzioni dare priorità al lavoro. Queste informazioni sono anonime e non possiamo risalire a nessun individuo in particolare.",
-    "header": "Politica sulla riservatezza",
-    "main-privacy-desc": "Questo progetto è gestito da un gruppo di musulmani che fanno questo lavoro per amore di Allah. Non ti pubblichiamo annunci, quindi non abbiamo bisogno di tracciarti o utilizzare i tuoi dati personali per fornirti annunci migliori per aumentare i nostri ricavi. Non raccogliamo alcuna informazione di identificazione personale. Non c'è accesso, non c'è nemmeno richiesta di permessi di posizione (tranne facoltativamente sulla home page allo scopo di calcolare tempi Salah più accurati).",
-    "privacy-footer": "Il nostro codice è open source, quindi la community può facilmente ispezionare e garantire che la nostra posizione sulla privacy sia mantenuta al suo livello più alto."
+    "communication": {
+        "desc": "Potremmo utilizzare il tuo indirizzo e-mail per inviarti importanti aggiornamenti, newsletter o notifiche relative ai nostri servizi, contenuti, ecc. Avrai la possibilità di annullare l'iscrizione a queste comunicazioni in qualsiasi momento.",
+        "title": "Comunicazione"
+    },
+    "contact-us": {
+        "desc": "In caso di domande, dubbi o richieste relative alla presente Informativa sulla privacy o al trattamento delle informazioni personali, si prega di contattarci <0> qui <\/0> . Utilizzando il nostro sito Web, riconosci di aver letto e compreso la presente Informativa sulla privacy e acconsenti alla raccolta, all'uso e alla divulgazione delle tue informazioni personali come descritto.",
+        "title": "Contattaci"
+    },
+    "cookies": {
+        "desc": "Quran.com utilizza i cookie per migliorare la tua esperienza di navigazione, fornire contenuti personalizzati e analizzare il traffico del sito web. Accedendo e utilizzando il nostro sito Web, acconsenti all'uso dei cookie in conformità con la presente Informativa sulla privacy. <br\/> <br\/> <li> Tipi di cookie che utilizziamo: <\/li> <subLi> Cookie necessari: questi cookie sono essenziali per il corretto funzionamento del nostro sito Web e consentono funzionalità di base, come la navigazione della pagina e l'accesso a zone sicure. Non raccolgono alcuna informazione di identificazione personale. Senza questi cookie, alcune parti del sito potrebbero non funzionare correttamente. <\/subLi> <subLi> Cookie analitici e di prestazione: utilizziamo questi cookie per raccogliere informazioni su come i visitatori utilizzano il nostro sito Web, incluso il numero di visitatori, le pagine che visitano e il tempo trascorso su ciascuna pagina. Questi dati ci aiutano ad analizzare e migliorare le prestazioni e la funzionalità del nostro sito web. Questi cookie non ti identificano personalmente; tutti i dati sono aggregati e anonimi. <\/subLi>",
+        "title": "Uso dei cookie"
+    },
+    "data-analysis": {
+        "desc": "Utilizziamo Google Analytics per garantire che il sito continui a funzionare come previsto e per sapere su quali funzionalità dare la priorità al lavoro, ecc. Queste informazioni sono anonime e non le riconduciamo a nessun individuo in particolare.",
+        "title": "Analisi dei dati"
+    },
+    "data-deletion": {
+        "desc": "Per garantire la tua privacy e il controllo sulle tue informazioni personali, forniamo un semplice processo di cancellazione dell'account. Quando scegli di eliminare il tuo account, tutti i dati personali associati verranno automaticamente e permanentemente rimossi dai nostri sistemi. Puoi avviare la cancellazione dell'account accedendo alla pagina del tuo profilo. Una volta avviata la cancellazione, i tuoi dati personali verranno eliminati in modo sicuro dai nostri server entro un periodo di tempo ragionevole.",
+        "title": "Cancellazione dei dati"
+    },
+    "data-security": {
+        "desc": "Adottiamo misure appropriate per proteggere le tue informazioni personali da accesso non autorizzato, alterazione, divulgazione o distruzione. Utilizziamo protocolli di sicurezza standard del settore e impieghiamo misure di salvaguardia fisiche, elettroniche e gestionali per garantire la riservatezza e l'integrità dei dati.",
+        "title": "La sicurezza dei dati"
+    },
+    "data-sharing": {
+        "desc": "Non vendiamo, scambiamo o affittiamo le tue informazioni personali a terzi.",
+        "title": "Condivisione dei dati"
+    },
+    "info-collection": {
+        "desc": "Raccogliamo alcune informazioni personali dagli utenti che scelgono di creare un account su Quran.com. Queste informazioni possono includere: <br\/> <br\/> <underline> Indirizzo e-mail <\/underline> : raccogliamo il tuo indirizzo e-mail per facilitare il processo di creazione dell'account e per scopi di comunicazione relativi al tuo account, incluso il recupero dell'account e le notifiche di sicurezza.",
+        "title": "Raccolta di informazioni"
+    },
+    "log-data": {
+        "desc": "Raccogliamo informazioni che il tuo browser invia ogni volta che visiti il nostro Servizio (\"Dati di registro\"). Questi dati di registro possono includere informazioni come l'indirizzo del protocollo Internet (\"IP\") del tuo computer, il tipo di browser, la versione del browser, le pagine del nostro servizio che visiti, l'ora e la data della tua visita, il tempo trascorso su tali pagine e altri statistiche.",
+        "title": "Dati di registro"
+    },
+    "main-privacy-desc": "La Quran.Foundation (che include Quran.com) è un'organizzazione senza scopo di lucro 501 (c) (3) che si impegna a consentire a ogni essere umano di beneficiare del Corano. Quran.Foundation apprezza e rispetta la privacy di tutti i nostri utenti.",
+    "personal-info-use": {
+        "desc": "Utilizziamo le informazioni personali che raccogliamo per i seguenti scopi: <br\/> <li> <underline> Creazione e gestione dell'account <\/underline> : il tuo indirizzo email viene utilizzato per creare e gestire il tuo account sul nostro sito web. Ti consente di accedere, accedere alle tue impostazioni e memorizzare i tuoi segnalibri e la cronologia di lettura. <\/li> <li> <underline> Personalizzazione <\/underline> : potremmo utilizzare la tua cronologia di lettura per fornire consigli e suggerimenti personalizzati in base alle tue preferenze e ai tuoi interessi. <\/li>",
+        "title": "Uso delle informazioni personali"
+    },
+    "privacy-header": "politica sulla riservatezza"
 }
