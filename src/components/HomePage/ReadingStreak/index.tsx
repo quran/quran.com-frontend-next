@@ -38,8 +38,11 @@ const ReadingStreak: React.FC<ReadingStreakProps> = ({ layout = ReadingStreakLay
   const { t, lang } = useTranslation('reading-goal');
   const isQuranReader = layout === ReadingStreakLayout.QuranReader;
 
-  const { isLoading, error, streak, goal, weekData, currentActivityDay } =
-    useGetStreakWithMetadata();
+  const { isLoading, error, streak, goal, weekData, currentActivityDay } = useGetStreakWithMetadata(
+    {
+      disableIfNoGoalExists: isQuranReader,
+    },
+  );
   const { recentlyReadVerseKeys } = useGetRecentlyReadVerseKeys();
 
   const nextVerseToRead = goal?.progress?.nextVerseToRead ?? recentlyReadVerseKeys[0];
@@ -97,7 +100,7 @@ const ReadingStreak: React.FC<ReadingStreakProps> = ({ layout = ReadingStreakLay
     return null;
   }
 
-  if (error || (!isLoading && streak === 0 && !goal)) {
+  if (!isQuranReader && (error || (!isLoading && streak === 0 && !goal))) {
     return <StreakIntroductionWidget />;
   }
 
@@ -147,7 +150,7 @@ const ReadingStreak: React.FC<ReadingStreakProps> = ({ layout = ReadingStreakLay
   };
 
   // if this is QuranReader, don't render anything if there is no reading goal
-  if (isQuranReader && !goal) {
+  if (isQuranReader && (isLoading || !goal)) {
     return null;
   }
 

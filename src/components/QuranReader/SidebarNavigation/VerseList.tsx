@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux';
 import styles from './SidebarNavigation.module.scss';
 import VerseListItem from './VerseListItem';
 
+import useChapterIdsByUrlPath from '@/hooks/useChapterId';
 import { selectLastReadVerseKey } from '@/redux/slices/QuranReader/readingTracker';
 import SearchQuerySource from '@/types/SearchQuerySource';
 import { logEmptySearchResults, logTextSearchQuery } from '@/utils/eventLogger';
@@ -18,10 +19,24 @@ import DataContext from 'src/contexts/DataContext';
 const VerseList = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const { t, lang } = useTranslation('common');
-  const chaptersData = useContext(DataContext);
   const lastReadVerseKey = useSelector(selectLastReadVerseKey);
-  const currentChapterId = lastReadVerseKey.chapterId;
   const router = useRouter();
+  const chaptersData = useContext(DataContext);
+
+  const chapterIds = useChapterIdsByUrlPath(lang);
+  const urlChapterId = chapterIds && chapterIds.length > 0 ? chapterIds[0] : null;
+
+  const [currentChapterId, setCurrentChapterId] = useState(urlChapterId);
+
+  useEffect(() => {
+    setCurrentChapterId(lastReadVerseKey.chapterId);
+  }, [lastReadVerseKey]);
+
+  useEffect(() => {
+    // when the user navigates to a new chapter, reset the search query, and update the current chapter id
+    setSearchQuery('');
+    setCurrentChapterId(urlChapterId);
+  }, [urlChapterId]);
 
   const verseKeys = useMemo(
     () => (currentChapterId ? generateChapterVersesKeys(chaptersData, currentChapterId) : []),

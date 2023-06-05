@@ -1,5 +1,4 @@
-/* eslint-disable max-lines */
-import React, { useContext, useEffect, useMemo } from 'react';
+import { useContext, useEffect, useMemo } from 'react';
 
 import { useSelector as useXstateSelector } from '@xstate/react';
 import useTranslation from 'next-translate/useTranslation';
@@ -7,54 +6,65 @@ import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 import useSWRImmutable from 'swr/immutable';
 
-import styles from '../TranslationView.module.scss';
-
-import TranslationPageVerse from './TranslationPageVerse';
-
 import { getTranslationViewRequestKey, verseFetcher } from '@/components/QuranReader/api';
-import TranslationViewSkeleton from '@/components/QuranReader/TranslationView/TranslationViewSkeleton';
 import { getTranslationsInitialState } from '@/redux/defaultSettings/util';
 import { selectIsUsingDefaultWordByWordLocale } from '@/redux/slices/QuranReader/readingPreferences';
 import { selectIsUsingDefaultFont } from '@/redux/slices/QuranReader/styles';
 import { selectIsUsingDefaultTranslations } from '@/redux/slices/QuranReader/translations';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
-import { getMushafId } from '@/utils/api';
+import { VersesResponse } from '@/types/ApiResponses';
+import { Mushaf, QuranReaderDataType } from '@/types/QuranReader';
+import Verse from '@/types/Verse';
 import { areArraysEqual } from '@/utils/array';
 import { makeBookmarksRangeUrl } from '@/utils/auth/apiPaths';
 import { isLoggedIn } from '@/utils/auth/login';
+import { getPageNumberFromIndexAndPerPage } from '@/utils/number';
 import { selectIsUsingDefaultReciter } from 'src/xstate/actors/audioPlayer/selectors';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
-import { VersesResponse } from 'types/ApiResponses';
-import { QuranReaderDataType } from 'types/QuranReader';
-import Verse from 'types/Verse';
 
-interface Props {
-  totalPages: number;
-  pageNumber: number;
+interface QuranReaderParams {
   quranReaderDataType: QuranReaderDataType;
-  quranReaderStyles: QuranReaderStyles;
-  setApiPageToVersesMap: (data: Record<number, Verse[]>) => void;
-  selectedTranslations: number[];
   wordByWordLocale: string;
   reciterId: number;
-  initialData: VersesResponse;
   resourceId: number | string;
+  initialData: VersesResponse;
+  quranReaderStyles: QuranReaderStyles;
+  mushafId: Mushaf;
+  selectedTranslations: number[];
+  setApiPageToVersesMap: (data: Record<number, Verse[]>) => void;
+  verseIdx: number;
 }
 
-const TranslationPage: React.FC<Props> = ({
-  totalPages,
-  pageNumber,
+interface UseDedupedFetchVerseResult {
+  verse: Verse | null;
+  firstVerseInPage: Verse | null;
+  bookmarksRangeUrl: string | null;
+}
+
+/**
+ * This hook fetches the verse of the given `verseIdx` and dedupes the data based on their page number.
+ *
+ * For an example, passing `verseIdx` of `0 | 1 | 2 | 3 | 4` should only trigger one API request because they are all in the same page.
+ *
+ * @param {QuranReaderParams} params
+ * @returns {UseDedupedFetchVerseResult}
+ */
+const useDedupedFetchVerse = ({
   quranReaderDataType,
   quranReaderStyles,
-  selectedTranslations,
   wordByWordLocale,
   reciterId,
-  initialData,
   resourceId,
+  selectedTranslations,
+  initialData,
   setApiPageToVersesMap,
-}) => {
-  const { lang } = useTranslation('common');
+  mushafId,
+  verseIdx,
+}: QuranReaderParams): UseDedupedFetchVerseResult => {
   const router = useRouter();
+
+  const { lang } = useTranslation();
+
   const defaultTranslations = getTranslationsInitialState(lang).selectedTranslations;
   const translationParams = useMemo(
     () =>
@@ -70,6 +80,11 @@ const TranslationPage: React.FC<Props> = ({
   const isUsingDefaultWordByWordLocale = useSelector(selectIsUsingDefaultWordByWordLocale);
   const isUsingDefaultTranslations = useSelector(selectIsUsingDefaultTranslations);
   const isUsingDefaultFont = useSelector(selectIsUsingDefaultFont);
+
+  const pageNumber = getPageNumberFromIndexAndPerPage(verseIdx, initialData.pagination.perPage);
+
+  const idxInPage = verseIdx % initialData.pagination.perPage;
+
   const shouldUseInitialData =
     pageNumber === 1 &&
     isUsingDefaultFont &&
@@ -94,20 +109,8 @@ const TranslationPage: React.FC<Props> = ({
     verseFetcher,
     {
       fallbackData: shouldUseInitialData ? initialData.verses : undefined,
-      revalidateOnMount: !shouldUseInitialData,
     },
   );
-
-  const mushafId = getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines).mushaf;
-  const bookmarksRangeUrl =
-    verses && verses.length && isLoggedIn()
-      ? makeBookmarksRangeUrl(
-          mushafId,
-          Number(verses?.[0].chapterId),
-          Number(verses?.[0].verseNumber),
-          initialData.pagination.perPage,
-        )
-      : null;
 
   useEffect(() => {
     if (verses) {
@@ -119,35 +122,21 @@ const TranslationPage: React.FC<Props> = ({
     }
   }, [pageNumber, setApiPageToVersesMap, verses]);
 
-  if (!verses) {
-    return <TranslationViewSkeleton numberOfSkeletons={initialData.pagination.perPage} />;
-  }
+  const bookmarksRangeUrl =
+    verses && verses.length && isLoggedIn()
+      ? makeBookmarksRangeUrl(
+          mushafId,
+          Number(verses?.[0].chapterId),
+          Number(verses?.[0].verseNumber),
+          initialData.pagination.perPage,
+        )
+      : null;
 
-  const isLastPage = pageNumber === totalPages;
-
-  return (
-    <div className={styles.container}>
-      {verses.map((verse, index) => {
-        const currentVerseIndex =
-          pageNumber === 1 ? index : index + (pageNumber - 1) * initialData.pagination.perPage;
-
-        return (
-          <TranslationPageVerse
-            isLastVerseInView={isLastPage && index === verses.length - 1}
-            verse={verse}
-            key={currentVerseIndex}
-            verseIdx={currentVerseIndex}
-            mushafId={mushafId}
-            quranReaderStyles={quranReaderStyles}
-            selectedTranslations={selectedTranslations}
-            bookmarksRangeUrl={bookmarksRangeUrl}
-            initialData={initialData}
-            firstVerseInPage={verses[0]}
-          />
-        );
-      })}
-    </div>
-  );
+  return {
+    verse: verses ? verses[idxInPage] : null,
+    firstVerseInPage: verses ? verses[0] : null,
+    bookmarksRangeUrl,
+  };
 };
 
-export default TranslationPage;
+export default useDedupedFetchVerse;

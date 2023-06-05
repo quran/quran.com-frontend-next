@@ -9,14 +9,7 @@ import {
   UpdateActivityDayBody,
   ActivityDayType,
 } from '@/types/auth/ActivityDay';
-import {
-  CreateGoalRequest,
-  EstimatedQuranGoal,
-  EstimateGoalRequest,
-  Goal,
-  GoalCategory,
-  UpdateGoalRequest,
-} from '@/types/auth/Goal';
+import { CreateGoalRequest, Goal, GoalCategory, UpdateGoalRequest } from '@/types/auth/Goal';
 import { StreakWithMetadataParams, StreakWithUserMetadata } from '@/types/auth/Streak';
 import { Mushaf } from '@/types/QuranReader';
 import {
@@ -49,7 +42,6 @@ import {
   makeActivityDaysUrl,
   makeGoalUrl,
   makeFilterActivityDaysUrl,
-  makeEstimateReadingGoalUrl,
   makeStreakUrl,
 } from '@/utils/auth/apiPaths';
 import { fetcher } from 'src/api';
@@ -189,10 +181,6 @@ export const updateReadingGoal = async ({
   ...data
 }: UpdateGoalRequest): Promise<{ data?: Goal }> =>
   patchRequest(makeGoalUrl({ mushafId, type: category }), data);
-
-export const estimateReadingGoal = async (
-  data: EstimateGoalRequest,
-): Promise<{ data?: EstimatedQuranGoal }> => privateFetcher(makeEstimateReadingGoalUrl(data));
 
 export const deleteReadingGoal = async (params: { category: GoalCategory }): Promise<void> =>
   deleteRequest(makeGoalUrl({ type: params.category }));
