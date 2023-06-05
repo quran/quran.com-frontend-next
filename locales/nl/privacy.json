@@ -1,6 +1,44 @@
 {
-    "ga": "We gebruiken <0>Google Analytics<\/0> om ervoor te zorgen dat de site blijft werken zoals verwacht en om te weten aan welke functies prioriteit moet worden gegeven. Deze informatie is anoniem en we kunnen deze niet herleiden tot een bepaalde persoon.",
-    "header": "Privacybeleid",
-    "main-privacy-desc": "Dit project wordt gerund door een groep moslims die dit werk doen omwille van Allah. We tonen u geen advertenties, dus we hoeven u niet te volgen of uw persoonlijke gegevens te gebruiken om u betere advertenties te bieden om onze inkomsten te verhogen. We verzamelen geen persoonlijk identificeerbare informatie. Er is geen login, er is ook geen verzoek om locatietoestemmingen (behalve optioneel op de startpagina om nauwkeurigere Salah-timings te berekenen).",
-    "privacy-footer": "Onze code is open source, zodat de gemeenschap gemakkelijk kan inspecteren en ervoor kan zorgen dat ons standpunt over privacy op het hoogste niveau wordt gehouden."
+    "communication": {
+        "desc": "We kunnen uw e-mailadres gebruiken om u belangrijke updates, nieuwsbrieven of meldingen met betrekking tot onze diensten, inhoud, enz. te sturen. U kunt zich op elk moment afmelden voor deze berichten.",
+        "title": "Communicatie"
+    },
+    "contact-us": {
+        "desc": "Als u vragen, zorgen of verzoeken < > < > op. Door onze website te gebruiken, erkent u dat u dit privacybeleid hebt gelezen en begrepen en dat u instemt met het verzamelen, gebruiken en openbaar maken van uw persoonlijke informatie zoals beschreven.",
+        "title": "Neem contact met ons op"
+    },
+    "cookies": {
+        "desc": "Quran.com maakt gebruik van cookies om uw browse-ervaring te verbeteren, gepersonaliseerde inhoud te bieden en websiteverkeer te analyseren. Door onze website te bezoeken en te gebruiken, stemt u in met het gebruik van cookies in overeenstemming met dit privacybeleid. <br\/> <br\/> <li> Soorten cookies die we gebruiken: <\/li> <subLi> Noodzakelijke cookies: deze cookies zijn essentieel voor het goed functioneren van onze website en maken basisfuncties mogelijk, zoals paginanavigatie en toegang tot beveiligde gebieden. Ze verzamelen geen persoonlijk identificeerbare informatie. Zonder deze cookies kunnen sommige onderdelen van de website niet goed werken. <\/subLi> <subLi> Analytische en prestatiecookies: we gebruiken deze cookies om informatie te verzamelen over hoe bezoekers onze website gebruiken, inclusief het aantal bezoekers, de pagina's die ze bezoeken en de tijd die op elke pagina wordt doorgebracht. Deze gegevens helpen ons de prestaties en functionaliteit van onze website te analyseren en te verbeteren. Deze cookies identificeren u niet persoonlijk; alle gegevens zijn geaggregeerd en anoniem. <\/subLi>",
+        "title": "Gebruik van cookies"
+    },
+    "data-analysis": {
+        "desc": "We gebruiken Google Analytics om ervoor te zorgen dat de site blijft werken zoals verwacht en om te weten aan welke functies prioriteit moet worden gegeven, enz. Deze informatie is anoniem en we herleiden deze niet tot een bepaald individu.",
+        "title": "Gegevensanalyse"
+    },
+    "data-deletion": {
+        "desc": "Om uw privacy en controle over uw persoonlijke gegevens te waarborgen, bieden we een eenvoudig accountverwijderingsproces. Wanneer u ervoor kiest om uw account te verwijderen, worden alle bijbehorende persoonsgegevens automatisch en permanent uit onze systemen verwijderd. U kunt het verwijderen van uw account starten door naar uw profielpagina te gaan. Zodra de verwijdering is gestart, worden uw persoonlijke gegevens binnen een redelijke termijn veilig van onze servers verwijderd.",
+        "title": "Gegevens verwijderen"
+    },
+    "data-security": {
+        "desc": "We nemen passende maatregelen om uw persoonlijke gegevens te beschermen tegen ongeoorloofde toegang, wijziging, openbaarmaking of vernietiging. We gebruiken industriestandaard beveiligingsprotocollen en gebruiken fysieke, elektronische en bestuurlijke beveiligingen om de vertrouwelijkheid en integriteit van uw gegevens te waarborgen.",
+        "title": "Dataveiligheid"
+    },
+    "data-sharing": {
+        "desc": "We verkopen, verhandelen of verhuren uw persoonlijke gegevens niet aan derden.",
+        "title": "Het delen van gegevens"
+    },
+    "info-collection": {
+        "desc": "We verzamelen bepaalde persoonlijke informatie van gebruikers die ervoor kiezen om een account aan te maken op Quran.com. Deze informatie kan het volgende omvatten: <br\/> <br\/> <underline> E-mailadres <\/underline> : we verzamelen uw e-mailadres om het maken van een account te vergemakkelijken en voor communicatiedoeleinden met betrekking tot uw account, inclusief accountherstel en beveiligingsmeldingen.",
+        "title": "Informatie verzameling"
+    },
+    "log-data": {
+        "desc": "We verzamelen informatie die uw browser verzendt wanneer u onze Service bezoekt (\"Loggegevens\"). Deze loggegevens kunnen informatie bevatten zoals het Internet Protocol (\"IP\")-adres van uw computer, browsertype, browserversie, de pagina's van onze Service die u bezoekt, de tijd en datum van uw bezoek, de tijd besteed aan die pagina's en andere statistieken.",
+        "title": "Loggegevens"
+    },
+    "main-privacy-desc": "De Quran.Foundation (waartoe ook Quran.com behoort) is een 501(c)(3) non-profitorganisatie die ernaar streeft om ieder mens in staat te stellen te profiteren van de Koran. Quran.Foundation waardeert en respecteert de privacy van al onze gebruikers.",
+    "personal-info-use": {
+        "desc": "We gebruiken de persoonlijke informatie die we verzamelen voor de volgende doeleinden: <br\/> <li> <underline> Account aanmaken en beheren <\/underline> : Uw e-mailadres wordt gebruikt om uw account op onze website aan te maken en te beheren. Hiermee kunt u inloggen, toegang krijgen tot uw instellingen en uw bladwijzers en leesgeschiedenis opslaan. <\/li> <li> <underline> Personalisatie <\/underline> : we kunnen uw leesgeschiedenis gebruiken om gepersonaliseerde aanbevelingen en suggesties te doen op basis van uw voorkeuren en interesses. <\/li>",
+        "title": "Gebruik van persoonlijke informatie"
+    },
+    "privacy-header": "Privacybeleid"
 }
