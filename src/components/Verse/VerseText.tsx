@@ -6,6 +6,7 @@ import { shallowEqual, useSelector } from 'react-redux';
 import { QURAN_READER_OBSERVER_ID } from '../QuranReader/observer';
 
 import isCenterAlignedPage from './pageUtils';
+import TajweedFontPalettes from './TajweedFontPalettes';
 import styles from './VerseText.module.scss';
 
 import useIsFontLoaded from '@/components/QuranReader/hooks/useIsFontLoaded';
@@ -69,6 +70,7 @@ const VerseText = ({
     : getFontClassName(FALLBACK_FONT, quranTextFontScale, mushafLines, true);
   return (
     <>
+      <TajweedFontPalettes pageNumber={pageNumber} quranFont={quranFont} />
       <VerseTextContainer
         ref={textRef}
         data-verse-key={verseKey}

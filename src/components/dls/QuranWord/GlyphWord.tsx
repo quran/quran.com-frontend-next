@@ -7,13 +7,14 @@ import { shallowEqual, useSelector } from 'react-redux';
 import styles from './GlyphWord.module.scss';
 
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
-import { getFontClassName } from '@/utils/fontFaceHelper';
+import { getFontClassName, getFontFaceNameForPage } from '@/utils/fontFaceHelper';
 import { FALLBACK_FONT, QuranFont } from 'types/QuranReader';
 
 type UthmaniWordTextProps = {
   qpcUthmaniHafs: string;
   textCodeV1?: string;
   textCodeV2?: string;
+  textCodeV4?: string;
   pageNumber: number;
   font: QuranFont;
   isFontLoaded: boolean;
@@ -39,6 +40,10 @@ const getWordText = (
 ): string => {
   if (!isFontLoaded) {
     return qpcUthmaniHafs;
+  }
+  // TODO: remove this when BE is ready
+  if (font === QuranFont.MadaniV4) {
+    return textCodeV2;
   }
   return font === QuranFont.MadaniV1 ? textCodeV1 : textCodeV2;
 };
@@ -67,7 +72,7 @@ const GlyphWord = ({
       })}
       {...(isFontLoaded && {
         // eslint-disable-next-line i18next/no-literal-string
-        style: { fontFamily: `p${pageNumber}-${font.replace('code_', '')}` },
+        style: { fontFamily: getFontFaceNameForPage(font, pageNumber) },
       })}
     />
   );

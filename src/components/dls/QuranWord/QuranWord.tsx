@@ -89,6 +89,7 @@ const QuranWord = ({
         pageNumber={word.pageNumber}
         textCodeV1={word.codeV1}
         textCodeV2={word.codeV2}
+        textCodeV4={word.codeV4}
         isFontLoaded={isFontLoaded}
       />
     );

@@ -39,6 +39,7 @@ const QuranFontSection = () => {
   } = usePersistPreferenceGroup();
   const { quranFont, quranTextFontScale, mushafLines } = quranReaderStyles;
   // when one of the view is selected, user can choose which font they want to use
+  // eslint-disable-next-line react-func/max-lines-per-function
   const fonts = useMemo(() => {
     return {
       [QuranFont.IndoPak]: [
@@ -46,6 +47,11 @@ const QuranFontSection = () => {
       ],
       [QuranFont.Tajweed]: [
         { id: QuranFont.Tajweed, label: t(`fonts.${QuranFont.Tajweed}`), value: QuranFont.Tajweed },
+        {
+          id: QuranFont.MadaniV4,
+          label: t(`fonts.${QuranFont.MadaniV4}`),
+          value: QuranFont.MadaniV4,
+        },
       ],
       [QuranFont.Uthmani]: [
         {

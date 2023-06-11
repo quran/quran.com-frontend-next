@@ -9,7 +9,7 @@ import PlainVerseText from '@/components/Verse/PlainVerseText';
 import Skeleton from '@/dls/Skeleton/Skeleton';
 import { addLoadedFontFace } from '@/redux/slices/QuranReader/font-faces';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
-import { getFontFaceNameForPage, getV1OrV2FontFaceSource, isQCFFont } from '@/utils/fontFaceHelper';
+import { getFontFaceNameForPage, getQCFFontFaceSource, isQCFFont } from '@/utils/fontFaceHelper';
 import getSampleVerse from '@/utils/sampleVerse';
 import { QuranFont } from 'types/QuranReader';
 import Word from 'types/Word';
@@ -22,12 +22,13 @@ const VersePreview = () => {
   const dispatch = useDispatch();
   useEffect(() => {
     if (isQCFFont(quranReaderStyles.quranFont) && sampleVerse) {
-      const isV1 = quranReaderStyles.quranFont === QuranFont.MadaniV1;
-      // eslint-disable-next-line i18next/no-literal-string
-      const fontFaceName = getFontFaceNameForPage(isV1, sampleVerse.pageNumber);
+      const fontFaceName = getFontFaceNameForPage(
+        quranReaderStyles.quranFont as QuranFont,
+        sampleVerse.pageNumber,
+      );
       const fontFace = new FontFace(
         fontFaceName,
-        getV1OrV2FontFaceSource(isV1, sampleVerse.pageNumber),
+        getQCFFontFaceSource(quranReaderStyles.quranFont as QuranFont, sampleVerse.pageNumber),
       );
       document.fonts.add(fontFace);
       fontFace.load().then(() => {
