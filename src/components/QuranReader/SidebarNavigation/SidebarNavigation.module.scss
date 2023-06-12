@@ -88,8 +88,9 @@
 .list {
   position: absolute;
   inset: 0;
-  overflow-y: scroll;
-  padding-block-end: calc(9 * var(--spacing-mega));
+  overflow-x: hidden;
+  overflow-y: auto;
+  padding-block-end: calc(2 * var(--spacing-mega));
 }
 
 .listItem {
