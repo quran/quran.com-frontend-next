@@ -14,10 +14,10 @@ type UthmaniWordTextProps = {
   qpcUthmaniHafs: string;
   textCodeV1?: string;
   textCodeV2?: string;
-  textCodeV4?: string;
   pageNumber: number;
   font: QuranFont;
   isFontLoaded: boolean;
+  isHighlighted?: boolean;
 };
 
 /**
@@ -42,7 +42,7 @@ const getWordText = (
     return qpcUthmaniHafs;
   }
   // TODO: remove this when BE is ready
-  if (font === QuranFont.MadaniV4) {
+  if (font === QuranFont.TajweedV4) {
     return textCodeV2;
   }
   return font === QuranFont.MadaniV1 ? textCodeV1 : textCodeV2;
@@ -55,6 +55,7 @@ const GlyphWord = ({
   pageNumber,
   font,
   isFontLoaded,
+  isHighlighted,
 }: UthmaniWordTextProps) => {
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const { quranTextFontScale, mushafLines } = quranReaderStyles;
@@ -66,6 +67,7 @@ const GlyphWord = ({
       data-font-scale={quranTextFontScale}
       data-font={font}
       className={classNames(styles.styledWord, {
+        [styles.tajweedTextHighlighted]: font === QuranFont.TajweedV4 && isHighlighted,
         [styles.fallbackText]: !isFontLoaded,
         [styles[getFontClassName(FALLBACK_FONT, quranTextFontScale, mushafLines, true)]]:
           !isFontLoaded,

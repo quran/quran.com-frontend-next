@@ -49,7 +49,7 @@ export const getDefaultWordFields = (
 ): { wordFields: string } => ({
   // TODO: undo this when BE is ready
   wordFields: `verse_key,verse_id,page_number,location,text_uthmani,${
-    quranFont === QuranFont.MadaniV4 ? QuranFont.MadaniV2 : quranFont
+    quranFont === QuranFont.TajweedV4 ? QuranFont.MadaniV2 : quranFont
   }${quranFont === QuranFont.QPCHafs ? '' : `,${QuranFont.QPCHafs}`}`,
 });
 

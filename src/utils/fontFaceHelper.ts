@@ -3,7 +3,7 @@ import range from 'lodash/range';
 import { MushafLines, QuranFont } from 'types/QuranReader';
 import Verse from 'types/Verse';
 
-const QCFFontCodes = [QuranFont.MadaniV1, QuranFont.MadaniV2, QuranFont.MadaniV4];
+const QCFFontCodes = [QuranFont.MadaniV1, QuranFont.MadaniV2, QuranFont.TajweedV4];
 
 export enum QCFFontVersion {
   V1 = 'v1',
@@ -43,7 +43,7 @@ export const getQCFFontFaceSource = (quranFont: QuranFont, pageNumber: number): 
   const prefixesMap = {
     [QuranFont.MadaniV1]: 'QCF_P',
     [QuranFont.MadaniV2]: 'QCF2',
-    [QuranFont.MadaniV4]: 'QCF4_P',
+    [QuranFont.TajweedV4]: 'QCF4_P',
   };
 
   const woff2 = `/fonts/quran/hafs/${version}/woff2/p${pageNumber}.woff2`;
@@ -54,13 +54,13 @@ export const getQCFFontFaceSource = (quranFont: QuranFont, pageNumber: number): 
 
 /**
  * Convert Quran font name to version
- * code_v1 -> v1, code_v2 -> v2, code_v4 -> v4
+ * code_v1 -> v1, code_v2 -> v2, tajweed_v4 -> v4
  *
  * @param {QuranFont} quranFont
  * @returns {QCFFontVersion}
  */
 export const quranFontToVersion = (quranFont: QuranFont): QCFFontVersion =>
-  quranFont.replace('code_', '') as QCFFontVersion;
+  quranFont.replace('code_', '').replace('tajweed_', '') as QCFFontVersion;
 
 /**
  * A function that will return the value of the font-face of QCF's font V1, V2 and V4.

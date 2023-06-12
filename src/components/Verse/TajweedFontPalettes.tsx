@@ -10,7 +10,7 @@ type Props = {
 
 const TajweedFontPalettes: React.FC<Props> = ({ quranFont, pageNumber }) => {
   // don't load if it's not V4 font
-  if (quranFont !== QuranFont.MadaniV4) {
+  if (quranFont !== QuranFont.TajweedV4) {
     return <></>;
   }
   const fontFamily = getFontFaceNameForPage(quranFont, pageNumber);

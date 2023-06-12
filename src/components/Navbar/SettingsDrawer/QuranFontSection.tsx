@@ -48,9 +48,9 @@ const QuranFontSection = () => {
       [QuranFont.Tajweed]: [
         { id: QuranFont.Tajweed, label: t(`fonts.${QuranFont.Tajweed}`), value: QuranFont.Tajweed },
         {
-          id: QuranFont.MadaniV4,
-          label: t(`fonts.${QuranFont.MadaniV4}`),
-          value: QuranFont.MadaniV4,
+          id: QuranFont.TajweedV4,
+          label: t(`fonts.${QuranFont.TajweedV4}`),
+          value: QuranFont.TajweedV4,
         },
       ],
       [QuranFont.Uthmani]: [
