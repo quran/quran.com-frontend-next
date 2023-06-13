@@ -15,13 +15,15 @@
 }
 
 .tajweedTextHighlighted {
-  @include theme.light {
-    filter: drop-shadow(0.01em 0.01em 1px var(--color-text-default));
-  }
-  @include theme.dark {
-    filter: drop-shadow(0.01em 0.01em 2px var(--color-warning-medium));
-  }
-  @include theme.sepia {
-    filter: drop-shadow(0.01em 0.01em 1px var(--color-text-default));
-  }
+  color: transparent;
+  text-shadow: 0px 0px var(--color-success-medium);
+  // @include theme.light {
+  //   filter: drop-shadow(0.01em 0.01em 1px var(--color-text-default));
+  // }
+  // @include theme.dark {
+  //   filter: drop-shadow(0.01em 0.01em 2px var(--color-warning-medium));
+  // }
+  // @include theme.sepia {
+  //   filter: drop-shadow(0.01em 0.01em 1px var(--color-text-default));
+  // }
 }
