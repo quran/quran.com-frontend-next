@@ -5,7 +5,7 @@ import debounce from 'lodash/debounce';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { useSWRConfig } from 'swr';
 
-import { useReadingProgressContext } from '../contexts/ReadingProgressContext';
+import { useVerseTrackerContext } from '../contexts/VerseTrackerContext';
 import { getObservedVersePayload, getOptions, QURAN_READER_OBSERVER_ID } from '../observer';
 
 import DataContext from '@/contexts/DataContext';
@@ -44,10 +44,13 @@ const useSyncReadingProgress = ({ isReadingPreference }: UseSyncReadingProgressP
   const mushafLines = useSelector(selectQuranMushafLines, shallowEqual);
   const { mushaf } = getMushafId(quranFont, mushafLines);
 
-  // this is a queue of verse keys that we need to send to the backend
-  // we will clear the queue every {READING_DAY_SYNC_TIME} milliseconds after sending the data to the backend
-  // it is also a Set not an array to avoid duplicate verse keys
-  const verseKeysQueue = useReadingProgressContext();
+  /**
+   * `verseKeysQueue` is a queue of verse keys that we need to send to the backend
+   * we will clear the queue every {READING_DAY_SYNC_TIME} milliseconds after sending the data to the backend
+   * it is also a Set not an array to avoid duplicate verse keys
+   */
+  const { verseKeysQueue, shouldTrackObservedVerses } = useVerseTrackerContext();
+
   const elapsedReadingTimeInSeconds = useRef(0);
   const dispatch = useDispatch();
   const { cache, mutate } = useSWRConfig();
@@ -87,9 +90,6 @@ const useSyncReadingProgress = ({ isReadingPreference }: UseSyncReadingProgressP
     (element: Element) => {
       const lastReadVerse = getObservedVersePayload(element);
 
-      // add the verse key to the queue
-      verseKeysQueue.current.add(lastReadVerse.verseKey);
-
       dispatch(
         setLastReadVerse({
           lastReadVerse,
@@ -97,14 +97,20 @@ const useSyncReadingProgress = ({ isReadingPreference }: UseSyncReadingProgressP
         }),
       );
 
-      if (isLoggedIn()) {
+      if (isLoggedIn() && shouldTrackObservedVerses.current) {
+        /**
+         * Add the verse key to the queue.
+         * We make sure the user is logged-in first so that we don't add it to the queue and never clear it (which causes a memory leak).
+         */
+        verseKeysQueue.current.add(lastReadVerse.verseKey);
+
         const [chapterNumber, verseNumber] = getVerseAndChapterNumbersFromKey(
           lastReadVerse.verseKey,
         );
         debouncedAddReadingSession(Number(chapterNumber), Number(verseNumber));
       }
     },
-    [chaptersData, debouncedAddReadingSession, dispatch, verseKeysQueue],
+    [chaptersData, debouncedAddReadingSession, dispatch, verseKeysQueue, shouldTrackObservedVerses],
   );
 
   // eslint-disable-next-line consistent-return
@@ -136,7 +142,10 @@ const useSyncReadingProgress = ({ isReadingPreference }: UseSyncReadingProgressP
         elapsedReadingTimeInSeconds.current = 0;
       }
 
-      const body: UpdateActivityDayBody = { mushafId: mushaf, type: ActivityDayType.QURAN };
+      const body: UpdateActivityDayBody = {
+        mushafId: mushaf,
+        type: ActivityDayType.QURAN,
+      };
 
       if (verseRanges) {
         body.ranges = verseRanges;

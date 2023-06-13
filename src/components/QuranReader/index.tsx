@@ -6,7 +6,7 @@ import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useSelector } from 'react-redux';
 
 import ContextMenu from './ContextMenu';
-import { ReadingProgressContextProvider } from './contexts/ReadingProgressContext';
+import { VerseTrackerContextProvider } from './contexts/VerseTrackerContext';
 import DebuggingObserverWindow from './DebuggingObserverWindow';
 import Notes from './Notes/Notes';
 import styles from './QuranReader.module.scss';
@@ -55,7 +55,7 @@ const QuranReader = ({
             [styles.readingView]: isReadingPreference,
           })}
         >
-          <ReadingProgressContextProvider>
+          <VerseTrackerContextProvider>
             <QuranReaderView
               isReadingPreference={isReadingPreference}
               quranReaderStyles={quranReaderStyles}
@@ -63,7 +63,7 @@ const QuranReader = ({
               quranReaderDataType={quranReaderDataType}
               resourceId={id}
             />
-          </ReadingProgressContextProvider>
+          </VerseTrackerContextProvider>
         </div>
       </div>
       <SidebarNavigation />
