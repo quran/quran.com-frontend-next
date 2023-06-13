@@ -1,4 +1,4 @@
-import { Mushaf } from '../QuranReader';
+import { MushafID } from '../QuranReader';
 
 export enum ActivityDayType {
   QURAN = 'QURAN',
@@ -22,7 +22,7 @@ export type UpdateActivityDayBody = {
   ranges?: string[];
   pages?: number;
   seconds?: number;
-  mushafId: Mushaf;
+  mushafId: MushafID;
   type: ActivityDayType;
 };
 

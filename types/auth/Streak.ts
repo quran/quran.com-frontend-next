@@ -1,4 +1,4 @@
-import { Mushaf } from '../QuranReader';
+import { MushafID } from '../QuranReader';
 
 import { ActivityDay } from './ActivityDay';
 import { QuranGoalStatus } from './Goal';
@@ -18,6 +18,6 @@ export type StreakWithUserMetadata = {
 export type StreakWithMetadataParams = {
   from: string;
   to: string;
-  mushafId: Mushaf;
+  mushafId: MushafID;
   type: StreakType;
 };

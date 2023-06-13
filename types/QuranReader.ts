@@ -41,7 +41,7 @@ export enum MushafLines {
   SixteenLines = '16_lines',
 }
 
-export enum Mushaf {
+export enum MushafID {
   QCFV2 = 1,
   QCFV1 = 2,
   Indopak = 3,
@@ -50,17 +50,17 @@ export enum Mushaf {
   Indopak15Lines = 6,
   Indopak16Lines = 7,
   Tajweeed = 11,
-  QCFV4 = 1, // TODO: revert this back and add ID 17 when BE is ready
+  QCFTajweedV4 = 1, // TODO: revert this back and add ID 17 when BE is ready
 }
 
-export const QuranFontMushaf: Record<QuranFont, Mushaf> = {
-  [QuranFont.MadaniV1]: Mushaf.QCFV1,
-  [QuranFont.MadaniV2]: Mushaf.QCFV2,
-  [QuranFont.TajweedV4]: Mushaf.QCFV4,
-  [QuranFont.Uthmani]: Mushaf.UthmaniHafs,
-  [QuranFont.IndoPak]: Mushaf.Indopak,
-  [QuranFont.QPCHafs]: Mushaf.KFGQPCHAFS,
-  [QuranFont.Tajweed]: Mushaf.Tajweeed,
+export const QuranFontMushaf: Record<QuranFont, MushafID> = {
+  [QuranFont.MadaniV1]: MushafID.QCFV1,
+  [QuranFont.MadaniV2]: MushafID.QCFV2,
+  [QuranFont.TajweedV4]: MushafID.QCFTajweedV4,
+  [QuranFont.Uthmani]: MushafID.UthmaniHafs,
+  [QuranFont.IndoPak]: MushafID.Indopak,
+  [QuranFont.QPCHafs]: MushafID.KFGQPCHAFS,
+  [QuranFont.Tajweed]: MushafID.Tajweeed,
 };
 
 export enum WordByWordDisplay {

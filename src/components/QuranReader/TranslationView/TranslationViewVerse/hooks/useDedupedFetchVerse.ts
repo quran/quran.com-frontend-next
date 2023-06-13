@@ -13,7 +13,7 @@ import { selectIsUsingDefaultFont } from '@/redux/slices/QuranReader/styles';
 import { selectIsUsingDefaultTranslations } from '@/redux/slices/QuranReader/translations';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
 import { VersesResponse } from '@/types/ApiResponses';
-import { Mushaf, QuranReaderDataType } from '@/types/QuranReader';
+import { MushafID, QuranReaderDataType } from '@/types/QuranReader';
 import Verse from '@/types/Verse';
 import { areArraysEqual } from '@/utils/array';
 import { makeBookmarksRangeUrl } from '@/utils/auth/apiPaths';
@@ -29,7 +29,7 @@ interface QuranReaderParams {
   resourceId: number | string;
   initialData: VersesResponse;
   quranReaderStyles: QuranReaderStyles;
-  mushafId: Mushaf;
+  mushafId: MushafID;
   selectedTranslations: number[];
   setApiPageToVersesMap: (data: Record<number, Verse[]>) => void;
   verseIdx: number;

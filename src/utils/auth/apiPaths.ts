@@ -3,7 +3,7 @@ import stringify from '../qs-stringify';
 import { ActivityDayType, FilterActivityDaysParams } from '@/types/auth/ActivityDay';
 import { EstimateGoalRequest, GoalCategory } from '@/types/auth/Goal';
 import { StreakWithMetadataParams } from '@/types/auth/Streak';
-import { Mushaf } from '@/types/QuranReader';
+import { MushafID } from '@/types/QuranReader';
 import { getAuthApiPath } from '@/utils/url';
 import BookmarkType from 'types/BookmarkType';
 
@@ -102,13 +102,13 @@ export const makeBookmarkUrl = (
 
 export const makeReadingSessionsUrl = () => makeUrl('reading-sessions');
 
-export const makeActivityDaysUrl = (params: { mushafId?: Mushaf; type: ActivityDayType }) =>
+export const makeActivityDaysUrl = (params: { mushafId?: MushafID; type: ActivityDayType }) =>
   makeUrl('activity-days', params);
 
 export const makeFilterActivityDaysUrl = (params: FilterActivityDaysParams) =>
   makeUrl('activity-days/filter', params);
 
-export const makeGoalUrl = (params: { mushafId?: Mushaf; type: GoalCategory }) =>
+export const makeGoalUrl = (params: { mushafId?: MushafID; type: GoalCategory }) =>
   makeUrl('goal', params);
 
 export const makeEstimateReadingGoalUrl = (data: EstimateGoalRequest) =>
@@ -116,12 +116,12 @@ export const makeEstimateReadingGoalUrl = (data: EstimateGoalRequest) =>
 
 export const makeStreakUrl = (params?: StreakWithMetadataParams) => makeUrl('streak', params);
 
-export const makeReadingGoalProgressUrl = (mushafId: Mushaf) =>
+export const makeReadingGoalProgressUrl = (mushafId: MushafID) =>
   makeUrl('goal/status', {
     mushafId,
   });
 
-export const makeUserPreferencesUrl = (mushafId?: Mushaf) =>
+export const makeUserPreferencesUrl = (mushafId?: MushafID) =>
   makeUrl(
     'preferences',
     mushafId && {
@@ -129,7 +129,7 @@ export const makeUserPreferencesUrl = (mushafId?: Mushaf) =>
     },
   );
 
-export const makeUserBulkPreferencesUrl = (mushafId: Mushaf) =>
+export const makeUserBulkPreferencesUrl = (mushafId: MushafID) =>
   makeUrl('preferences/bulk', {
     mushafId,
   });

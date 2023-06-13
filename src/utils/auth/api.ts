@@ -11,7 +11,7 @@ import {
 } from '@/types/auth/ActivityDay';
 import { CreateGoalRequest, Goal, GoalCategory, UpdateGoalRequest } from '@/types/auth/Goal';
 import { StreakWithMetadataParams, StreakWithUserMetadata } from '@/types/auth/Streak';
-import { Mushaf } from '@/types/QuranReader';
+import { MushafID } from '@/types/QuranReader';
 import {
   makeBookmarksUrl,
   makeCompleteSignupUrl,
@@ -224,7 +224,7 @@ export const addOrUpdateUserPreference = async (
   key: string,
   value: any,
   group: PreferenceGroup,
-  mushafId?: Mushaf,
+  mushafId?: MushafID,
 ) =>
   postRequest(makeUserPreferencesUrl(mushafId), {
     key,
@@ -296,7 +296,7 @@ export const requestVerificationCode = async (emailToVerify) => {
 };
 export const addOrUpdateBulkUserPreferences = async (
   preferences: Record<PreferenceGroup, any>,
-  mushafId: Mushaf,
+  mushafId: MushafID,
 ) => postRequest(makeUserBulkPreferencesUrl(mushafId), preferences);
 
 export const logoutUser = async () => {
