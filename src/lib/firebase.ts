@@ -8,7 +8,7 @@ const firebaseConfig = {
   storageBucket: process.env.NEXT_PUBLIC_FS_STORAGE_BUCKET,
   messagingSenderId: process.env.NEXT_PUBLIC_FS_MESSAGING_SENDER_ID,
   appId: process.env.NEXT_PUBLIC_FS_APP_ID,
-  // measurementId: process.env.NEXT_PUBLIC_FS_MEASUREMENT_ID,
+  measurementId: process.env.NEXT_PUBLIC_FS_MEASUREMENT_ID,
 };
 
 export const isFirebaseEnabled =
