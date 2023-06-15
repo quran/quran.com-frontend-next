@@ -85,13 +85,6 @@ const Search: NextPage<SearchProps> = ({ translations }): JSX.Element => {
   // in the query object. @see https://nextjs.org/docs/routing/dynamic-routes#caveats
   useEffect(() => {
     if (router.isReady) {
-      if (router.query.q || router.query.query) {
-        let query = router.query.q as string;
-        if (router.query.query) {
-          query = router.query.query as string;
-        }
-        setSearchQuery(query);
-      }
       if (router.query.page) {
         setCurrentPage(Number(router.query.page));
       }
@@ -104,6 +97,16 @@ const Search: NextPage<SearchProps> = ({ translations }): JSX.Element => {
       focusInput();
     }
   }, [focusInput, router]);
+
+  useEffect(() => {
+    if (router.query.q || router.query.query) {
+      let query = router.query.q as string;
+      if (router.query.query) {
+        query = router.query.query as string;
+      }
+      setSearchQuery(query);
+    }
+  }, [router?.query?.q, router?.query?.query]);
 
   /**
    * Handle when the search query is changed.
