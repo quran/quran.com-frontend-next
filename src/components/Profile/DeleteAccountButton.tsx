@@ -3,7 +3,6 @@ import { useState } from 'react';
 import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
 import router from 'next/router';
-import { useDispatch } from 'react-redux';
 
 import Button, { ButtonType, ButtonVariant } from '../dls/Button/Button';
 import Input from '../dls/Forms/Input';
@@ -11,15 +10,14 @@ import Modal from '../dls/Modal/Modal';
 
 import styles from './DeleteAccountButton.module.scss';
 
-import { removeLastSyncAt } from '@/redux/slices/Auth/userDataSync';
 import { deleteAccount } from '@/utils/auth/api';
+import { removeLastSyncAt } from '@/utils/auth/userDataSync';
 import { logButtonClick } from '@/utils/eventLogger';
 
 type DeleteAccountButtonProps = {
   isDisabled?: boolean;
 };
 const DeleteAccountButton = ({ isDisabled }: DeleteAccountButtonProps) => {
-  const dispatch = useDispatch();
   const { t } = useTranslation('profile');
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [confirmationText, setConfirmationText] = useState('');
@@ -29,12 +27,13 @@ const DeleteAccountButton = ({ isDisabled }: DeleteAccountButtonProps) => {
     setIsModalVisible(false);
   };
 
-  const onDeleteConfirmed = () => {
+  const onDeleteConfirmed = async () => {
     logButtonClick('profile_confirm_delete_account');
     closeModal();
-    deleteAccount()
-      .then(() => router.push('/'))
-      .then(() => dispatch({ type: removeLastSyncAt.type }));
+
+    await deleteAccount();
+    removeLastSyncAt();
+    router.push('/');
   };
 
   const onDeleteAccountClicked = () => {

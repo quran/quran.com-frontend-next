@@ -3,7 +3,6 @@ import classNames from 'classnames';
 import { NextPage, GetStaticProps } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
-import { useDispatch } from 'react-redux';
 
 import layoutStyle from './index.module.scss';
 import styles from './profile.module.scss';
@@ -16,10 +15,10 @@ import Button from '@/dls/Button/Button';
 import Skeleton from '@/dls/Skeleton/Skeleton';
 import useCurrentUser from '@/hooks/auth/useCurrentUser';
 import useRequireAuth from '@/hooks/auth/useRequireAuth';
-import { removeLastSyncAt } from '@/redux/slices/Auth/userDataSync';
 import { logoutUser } from '@/utils/auth/api';
 import { DEFAULT_PHOTO_URL } from '@/utils/auth/constants';
 import { isLoggedIn } from '@/utils/auth/login';
+import { removeLastSyncAt } from '@/utils/auth/userDataSync';
 import { getAllChaptersData } from '@/utils/chapter';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getLanguageAlternates } from '@/utils/locale';
@@ -36,21 +35,20 @@ const emailSample = 'mohammadali@quran.com';
 const ProfilePage: NextPage<Props> = () => {
   // we don't want to show the profile page if the user is not logged in
   useRequireAuth();
-  const dispatch = useDispatch();
   const { t, lang } = useTranslation();
   const router = useRouter();
   const { user, isLoading, error } = useCurrentUser();
 
-  const onLogoutClicked = () => {
+  const onLogoutClicked = async () => {
     if (!isLoggedIn()) {
       return;
     }
     logButtonClick('profile_logout');
-    logoutUser().then(() => {
-      dispatch({ type: removeLastSyncAt.type });
-      router.push('/login');
-      router.reload();
-    });
+
+    await logoutUser();
+    removeLastSyncAt();
+    router.push('/login');
+    router.reload();
   };
 
   if (error) {
