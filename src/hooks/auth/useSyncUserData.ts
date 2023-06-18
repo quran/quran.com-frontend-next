@@ -3,7 +3,6 @@ import { useEffect } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { useSWRConfig } from 'swr';
 
-import { selectLastSyncAt, setLastSyncAt } from '@/redux/slices/Auth/userDataSync';
 import { selectBookmarks } from '@/redux/slices/QuranReader/bookmarks';
 import {
   RecentReadingSessions,
@@ -14,6 +13,7 @@ import { getMushafId } from '@/utils/api';
 import { syncUserLocalData } from '@/utils/auth/api';
 import { makeReadingSessionsUrl, makeUserProfileUrl } from '@/utils/auth/apiPaths';
 import { isLoggedIn } from '@/utils/auth/login';
+import { getLastSyncAt, setLastSyncAt } from '@/utils/auth/userDataSync';
 import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
 import SyncDataType from 'types/auth/SyncDataType';
 import UserProfile from 'types/auth/UserProfile';
@@ -58,12 +58,11 @@ const useSyncUserData = () => {
     shallowEqual,
   );
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
-  const localLastSyncAt = useSelector(selectLastSyncAt, shallowEqual);
   const { quranFont, mushafLines } = quranReaderStyles;
   const { mushaf: mushafId } = getMushafId(quranFont, mushafLines);
   useEffect(() => {
     // if there is no local last sync stored, we should sync the local data to the DB
-    if (isLoggedIn() && !localLastSyncAt) {
+    if (isLoggedIn() && !getLastSyncAt()) {
       const requestPayload = {
         [SyncDataType.BOOKMARKS]: Object.keys(bookmarkedVerses).map((ayahKey) =>
           formatLocalBookmarkRecord(ayahKey, bookmarkedVerses[ayahKey], mushafId),
@@ -77,11 +76,11 @@ const useSyncUserData = () => {
           const { lastSyncAt } = response;
           mutate(makeUserProfileUrl(), (data: UserProfile) => ({ ...data, lastSyncAt }));
           mutate(makeReadingSessionsUrl());
-          dispatch({ type: setLastSyncAt.type, payload: lastSyncAt });
+          setLastSyncAt(new Date(lastSyncAt));
         })
         // eslint-disable-next-line @typescript-eslint/no-empty-function
         .catch(() => {});
     }
-  }, [bookmarkedVerses, cache, dispatch, localLastSyncAt, mushafId, mutate, recentReadingSessions]);
+  }, [bookmarkedVerses, cache, dispatch, mushafId, mutate, recentReadingSessions]);
 };
 export default useSyncUserData;
