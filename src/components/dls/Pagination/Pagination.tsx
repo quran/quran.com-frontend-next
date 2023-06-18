@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 import React, { useMemo } from 'react';
 
 import classNames from 'classnames';
@@ -102,9 +103,9 @@ const Pagination: React.FC<Props> = ({
           <PreviousIcon />
         </Button>
       </div>
-      {paginationRange.map((pageNumber) => {
+      {paginationRange.map((pageNumber, index) => {
         if (pageNumber === DOTS) {
-          return <div>{DOTS}</div>;
+          return <div key={`${pageNumber}-${index}`}>{DOTS}</div>;
         }
 
         return (
@@ -112,7 +113,7 @@ const Pagination: React.FC<Props> = ({
             className={classNames(styles.buttonContainer, {
               [styles.selectedButton]: pageNumber === currentPage,
             })}
-            key={pageNumber}
+            key={`${pageNumber}-${index}`}
           >
             <Button
               variant={ButtonVariant.Ghost}
