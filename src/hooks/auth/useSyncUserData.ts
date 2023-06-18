@@ -76,7 +76,7 @@ const useSyncUserData = () => {
           const { lastSyncAt } = response;
           mutate(makeUserProfileUrl(), (data: UserProfile) => ({ ...data, lastSyncAt }));
           mutate(makeReadingSessionsUrl());
-          setLastSyncAt(lastSyncAt);
+          setLastSyncAt(new Date(lastSyncAt));
         })
         // eslint-disable-next-line @typescript-eslint/no-empty-function
         .catch(() => {});

@@ -8,11 +8,11 @@ export const getLastSyncAt = (): Date | null => {
     return null;
   }
 
-  const dateValue = Date.parse(value);
-  return !Number.isNaN(dateValue) ? new Date(dateValue) : null;
+  const dateValue = new Date(value);
+  return !Number.isNaN(dateValue.getTime()) ? dateValue : null;
 };
 
 export const removeLastSyncAt = () => Cookies.remove(USER_DATA_SYNC_COOKIE_NAME);
 
 export const setLastSyncAt = (lastSyncAt: Date) =>
-  Cookies.set(USER_DATA_SYNC_COOKIE_NAME, lastSyncAt.getTime().toString());
+  Cookies.set(USER_DATA_SYNC_COOKIE_NAME, lastSyncAt.toString());
