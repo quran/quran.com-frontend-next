@@ -93,6 +93,7 @@ const QuranWord = ({
         textCodeV2={word.codeV2}
         isFontLoaded={isFontLoaded}
         isHighlighted={shouldBeHighLighted}
+        charType={word.charTypeName}
       />
     );
   } else if (font === QuranFont.Tajweed) {
