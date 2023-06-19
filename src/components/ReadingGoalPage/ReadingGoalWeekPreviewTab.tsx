@@ -21,7 +21,7 @@ import {
   EstimateGoalRequest,
   EstimatedQuranGoal,
 } from '@/types/auth/Goal';
-import { MushafID } from '@/types/QuranReader';
+import { Mushaf } from '@/types/QuranReader';
 import { getMushafId } from '@/utils/api';
 import { privateFetcher } from '@/utils/auth/api';
 import { makeEstimateReadingGoalUrl } from '@/utils/auth/apiPaths';
@@ -33,7 +33,7 @@ import { parseVerseRange } from '@/utils/verseKeys';
 
 const makePayload = (
   state: ReadingGoalTabProps['state'],
-  mushafId: MushafID,
+  mushafId: Mushaf,
 ): EstimateGoalRequest => {
   const payload: EstimateGoalRequest = {
     mushafId,

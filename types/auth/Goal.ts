@@ -1,4 +1,4 @@
-import { MushafID } from '../QuranReader';
+import { Mushaf } from '../QuranReader';
 
 export enum GoalCategory {
   QURAN = 'QURAN',
@@ -24,7 +24,7 @@ export type CreateGoalRequest = {
   type: GoalType;
   amount: string | number;
   duration?: number;
-  mushafId: MushafID;
+  mushafId: Mushaf;
   category: GoalCategory;
 };
 
