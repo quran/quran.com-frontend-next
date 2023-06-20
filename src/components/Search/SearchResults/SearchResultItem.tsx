@@ -47,7 +47,6 @@ const SearchResultItem: React.FC<Props> = ({ result, source }) => {
         <Link
           className={styles.verseKey}
           href={getChapterWithStartingVerseUrl(result.verseKey)}
-          shouldPassHref
           onClick={() => {
             logButtonClick(`${source}_result_item`);
           }}

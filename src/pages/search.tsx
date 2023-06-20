@@ -84,6 +84,7 @@ const Search: NextPage<SearchProps> = ({ translations }): JSX.Element => {
   // After hydration, Next.js will trigger an update to provide the route parameters
   // in the query object. @see https://nextjs.org/docs/routing/dynamic-routes#caveats
   useEffect(() => {
+    // we don't want to focus the main search input when the translation filter modal is open.
     if (router.isReady && !isContentModalOpen) {
       focusInput();
     }
@@ -108,11 +109,11 @@ const Search: NextPage<SearchProps> = ({ translations }): JSX.Element => {
       setSelectedTranslations(router.query.translations as string);
     }
   }, [
-    router?.query?.q,
-    router?.query?.query,
-    router?.query?.page,
-    router?.query?.languages,
-    router?.query?.translations,
+    router.query.q,
+    router.query.query,
+    router.query.page,
+    router.query.languages,
+    router.query.translations,
   ]);
 
   /**
