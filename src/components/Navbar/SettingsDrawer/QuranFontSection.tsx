@@ -134,8 +134,11 @@ const QuranFontSection = () => {
   ) => {
     onSettingsChange(key, value, action, undoAction, PreferenceGroup.QURAN_READER_STYLES);
 
-    // reset the loaded Fonts when we switch the font
-    dispatch(resetLoadedFontFaces());
+    // only reset the loaded fonts when font settings change
+    if (key !== 'quranTextFontScale') {
+      // reset the loaded Fonts when we switch the font
+      dispatch(resetLoadedFontFaces());
+    }
   };
 
   const onFontChange = (value: QuranFont) => {
