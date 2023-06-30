@@ -160,7 +160,7 @@ export const getChapterReadingProgress = (
 ): number => Math.ceil((currentVerse * 100) / totalNumberOfVerses);
 
 /**
- * Whether the current surah is the last surah.
+ * returns the correct grammatical format for the ayahs depending on count.
  *
  * @param {number} verseCount
  * @param {string} lang
