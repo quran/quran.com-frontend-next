@@ -157,7 +157,7 @@ const ChapterAndJuzList: React.FC<ChapterAndJuzListProps> = ({
                 <SurahPreviewRow
                   chapterId={Number(chapter.id)}
                   description={`${toLocalizedNumber(chapter.versesCount, lang)} ${t(
-                    'common:ayahs',
+                    chapter.versesCount > 10 ? 'common:ayah' : 'common:ayahs',
                   )}`}
                   surahName={chapter.transliteratedName}
                   surahNumber={Number(chapter.id)}
