@@ -159,6 +159,19 @@ export const getChapterReadingProgress = (
   totalNumberOfVerses: number,
 ): number => Math.ceil((currentVerse * 100) / totalNumberOfVerses);
 
+/**
+ * Whether the current surah is the last surah.
+ *
+ * @param {number} verseCount
+ * @param {string} lang
+ * @returns {string}
+ */
+export const ayahFormatLocale = (verseCount: number, lang: string): string => {
+  if (lang !== 'ar') return 'common:ayahs';
+
+  return verseCount > 10 ? 'common:ayah' : 'common:ayahs';
+};
+
 export const QURAN_CHAPTERS_COUNT = 114;
 export const getRandomChapterId = () => {
   return random(1, QURAN_CHAPTERS_COUNT);
