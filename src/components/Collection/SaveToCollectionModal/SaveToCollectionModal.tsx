@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
@@ -6,8 +6,9 @@ import styles from './SaveToCollectionModal.module.scss';
 
 import FormBuilder from '@/components/FormBuilder/FormBuilder';
 import Button, { ButtonVariant } from '@/dls/Button/Button';
+import ContentModal, { ContentModalSize } from '@/dls/ContentModal/ContentModal';
+import ContentModalHandles from '@/dls/ContentModal/types/ContentModalHandles';
 import Checkbox from '@/dls/Forms/Checkbox/Checkbox';
-import Modal from '@/dls/Modal/Modal';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import PlusIcon from '@/icons/plus.svg';
 import { logButtonClick, logEvent } from '@/utils/eventLogger';
@@ -40,6 +41,7 @@ const SaveToCollectionModal = ({
 }: SaveToCollectionModalProps) => {
   const [isAddingNewCollection, setIsAddingNewCollection] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const contentModalRef = useRef<ContentModalHandles>();
   const { t } = useTranslation();
   const toast = useToast();
 
@@ -81,52 +83,53 @@ const SaveToCollectionModal = ({
   };
 
   return (
-    <Modal isOpen={isOpen} onClickOutside={onClose}>
-      <Modal.Body>
-        <div className={styles.header}>{t('quran-reader:save-to')}</div>
-        <div className={styles.collectionList}>
-          {collections.map((collection) => (
-            <div className={styles.collectionItem} key={collection.id}>
-              <Checkbox
-                id={collection.name}
-                defaultChecked={collection.checked}
-                label={collection.name}
-                onChange={handleCheckboxChange(collection)}
-              />
-            </div>
-          ))}
-        </div>
-        <div>
-          {!isAddingNewCollection && (
-            <Button
-              variant={ButtonVariant.Ghost}
-              prefix={<PlusIcon />}
-              onClick={onAddNewCollection}
-            >
-              {t('quran-reader:add-collection')}
-            </Button>
-          )}
+    <ContentModal
+      innerRef={contentModalRef}
+      isOpen={isOpen}
+      header={<p className={styles.header}>{t('quran-reader:save-to')}</p>}
+      hasCloseButton
+      onClose={onClose}
+      onEscapeKeyDown={onClose}
+      size={ContentModalSize.SMALL}
+    >
+      <div className={styles.collectionList}>
+        {collections.map((collection) => (
+          <div className={styles.collectionItem} key={collection.id}>
+            <Checkbox
+              id={collection.name}
+              defaultChecked={collection.checked}
+              label={collection.name}
+              onChange={handleCheckboxChange(collection)}
+            />
+          </div>
+        ))}
+      </div>
+      <div>
+        {!isAddingNewCollection && (
+          <Button variant={ButtonVariant.Ghost} prefix={<PlusIcon />} onClick={onAddNewCollection}>
+            {t('quran-reader:add-collection')}
+          </Button>
+        )}
 
-          {isAddingNewCollection && (
-            <div className={styles.newCollectionFormContainer}>
-              <FormBuilder
-                formFields={[
-                  {
-                    field: 'name',
-                    label: t('quran-reader:new-collection-name'),
-                    rules: [{ type: RuleType.Required, value: true, errorMessage: 'Required' }],
-                    type: FormFieldType.Text,
-                  },
-                ]}
-                actionText={t('common:submit')}
-                isSubmitting={isSubmitting}
-                onSubmit={handleSubmit}
-              />
-            </div>
-          )}
-        </div>
-      </Modal.Body>
-    </Modal>
+        {isAddingNewCollection && (
+          <div className={styles.newCollectionFormContainer}>
+            <FormBuilder
+              formFields={[
+                {
+                  field: 'name',
+                  label: t('quran-reader:new-collection-name'),
+                  rules: [{ type: RuleType.Required, value: true, errorMessage: 'Required' }],
+                  type: FormFieldType.Text,
+                },
+              ]}
+              actionText={t('common:submit')}
+              isSubmitting={isSubmitting}
+              onSubmit={handleSubmit}
+            />
+          </div>
+        )}
+      </div>
+    </ContentModal>
   );
 };
 
