@@ -105,13 +105,7 @@ const SaveToCollectionModal = ({
         ))}
       </div>
       <div>
-        {!isAddingNewCollection && (
-          <Button variant={ButtonVariant.Ghost} prefix={<PlusIcon />} onClick={onAddNewCollection}>
-            {t('quran-reader:add-collection')}
-          </Button>
-        )}
-
-        {isAddingNewCollection && (
+        {isAddingNewCollection ? (
           <div className={styles.newCollectionFormContainer}>
             <FormBuilder
               formFields={[
@@ -127,6 +121,10 @@ const SaveToCollectionModal = ({
               onSubmit={handleSubmit}
             />
           </div>
+        ) : (
+          <Button variant={ButtonVariant.Ghost} prefix={<PlusIcon />} onClick={onAddNewCollection}>
+            {t('quran-reader:add-collection')}
+          </Button>
         )}
       </div>
     </ContentModal>
