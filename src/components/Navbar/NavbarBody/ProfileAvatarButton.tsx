@@ -7,6 +7,7 @@ import Button, { ButtonShape, ButtonVariant } from '@/dls/Button/Button';
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import ClockIcon from '@/icons/clock.svg';
 import ArrowIcon from '@/icons/east.svg';
+import LoggedInPersonIcon from '@/icons/logged-in-person.svg';
 import LogoutIcon from '@/icons/logout.svg';
 import IconPerson from '@/icons/person.svg';
 import { logoutUser } from '@/utils/auth/api';
@@ -37,7 +38,7 @@ const ProfileAvatarButton = () => {
       shape={ButtonShape.Circle}
       onClick={onTriggerClicked}
     >
-      <IconPerson />
+      {isUserLoggedIn ? <LoggedInPersonIcon /> : <IconPerson />}
     </Button>
   );
 
