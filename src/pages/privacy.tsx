@@ -18,34 +18,70 @@ const PrivacyPage: NextPage = (): JSX.Element => {
   return (
     <>
       <NextSeoWrapper
-        title={t('header')}
+        title={t('privacy-header')}
         url={getCanonicalUrl(lang, PATH)}
         languageAlternates={getLanguageAlternates(PATH)}
       />
       <PageContainer>
         <div className={styles.contentPage}>
-          <h1>{t('header')}</h1>
+          <h1>{t('privacy-header')}</h1>
+          <p>{t('main-privacy-desc')}</p>
+          <h2>{t('info-collection.title')}</h2>
           <p>
             <Trans
-              i18nKey="privacy:main-privacy-desc"
-              components={[<a key={0} href="salah.com" target="_blank" />]}
+              components={{
+                br: <br />,
+                underline: <span className={styles.underline} />,
+              }}
+              i18nKey="privacy:info-collection.desc"
             />
           </p>
+          <h2>{t('personal-info-use.title')}</h2>
           <p>
             <Trans
-              i18nKey="privacy:ga"
-              components={[
-                <a
-                  key={0}
-                  href="https://policies.google.com/technologies/partner-sites"
-                  target="_blank"
-                  rel="nofollow noreferrer noopener"
-                />,
-              ]}
+              components={{
+                br: <br />,
+                li: <li />,
+                underline: <span className={styles.underline} />,
+              }}
+              i18nKey="privacy:personal-info-use.desc"
             />
           </p>
+          <h2>{t('log-data.title')}</h2>
+          <p>{t('log-data.desc')}</p>
+          <h2>{t('communication.title')}</h2>
+          <p>{t('communication.desc')}</p>
+          <h2>{t('data-security.title')}</h2>
+          <p>{t('data-security.desc')}</p>
+          <h2>{t('data-sharing.title')}</h2>
+          <p>{t('data-sharing.desc')}</p>
+          <h2>{t('data-analysis.title')}</h2>
+          <p>{t('data-analysis.desc')}</p>
+          <h2>{t('data-deletion.title')}</h2>
+          <p>{t('data-deletion.desc')}</p>
+          <h2>{t('cookies.title')}</h2>
           <p>
-            <Trans i18nKey="privacy:privacy-footer" />
+            <Trans
+              components={{
+                br: <br />,
+                li: <li />,
+                subLi: <li className={styles.subListItem} />,
+                underline: <span className={styles.underline} />,
+              }}
+              i18nKey="privacy:cookies.desc"
+            />
+          </p>
+          <h2>{t('contact-us.title')}</h2>
+          <p>
+            <Trans
+              components={{
+                br: <br />,
+                li: <li />,
+                underline: <span className={styles.underline} />,
+                0: <a key={0} href="mailto:donors@quran.com" target="_blank" rel="noreferrer" />,
+              }}
+              i18nKey="privacy:contact-us.desc"
+            />
           </p>
         </div>
       </PageContainer>

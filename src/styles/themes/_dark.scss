@@ -57,4 +57,10 @@
   --shadow-jumbo: 0 30px 60px var(--shade-9);
   --shadow-hover: 0 30px 60px var(--shade-9);
   --shadow-sticky: 0 12px 10px -10px var(--shade-9);
+
+  // scrollbar styles
+  --scrollbar-background: var(--shade-9);
+  --scrollbar-thumb: var(--shade-7);
+  --scrollbar-thumb-hover: var(--shade-6);
+  --scrollbar-thumb-active: var(--shade-5);
 }

@@ -22,6 +22,7 @@ const addEnvSuffixToAuthCookie = (cookieName: string) => {
 
 // NOTE: IF THIS VALUE CHANGE, WE SHOULD CHANGE IT IN OUR AUTH REPO
 export const USER_ID_COOKIE_NAME = addEnvSuffixToAuthCookie('id');
+export const USER_DATA_SYNC_COOKIE_NAME = addEnvSuffixToAuthCookie('lastSyncAt');
 
 export const DEFAULT_PHOTO_URL = `https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y`;
 

@@ -84,26 +84,37 @@ const Search: NextPage<SearchProps> = ({ translations }): JSX.Element => {
   // After hydration, Next.js will trigger an update to provide the route parameters
   // in the query object. @see https://nextjs.org/docs/routing/dynamic-routes#caveats
   useEffect(() => {
-    if (router.isReady) {
-      if (router.query.q || router.query.query) {
-        let query = router.query.q as string;
-        if (router.query.query) {
-          query = router.query.query as string;
-        }
-        setSearchQuery(query);
-      }
-      if (router.query.page) {
-        setCurrentPage(Number(router.query.page));
-      }
-      if (router.query.languages) {
-        setSelectedLanguages(router.query.languages as string);
-      }
-      if (router.query.translations) {
-        setSelectedTranslations(router.query.translations as string);
-      }
+    // we don't want to focus the main search input when the translation filter modal is open.
+    if (router.isReady && !isContentModalOpen) {
       focusInput();
     }
-  }, [focusInput, router]);
+  }, [focusInput, router, isContentModalOpen]);
+
+  useEffect(() => {
+    if (router.query.q || router.query.query) {
+      let query = router.query.q as string;
+      if (router.query.query) {
+        query = router.query.query as string;
+      }
+      setSearchQuery(query);
+    }
+
+    if (router.query.page) {
+      setCurrentPage(Number(router.query.page));
+    }
+    if (router.query.languages) {
+      setSelectedLanguages(router.query.languages as string);
+    }
+    if (router.query.translations) {
+      setSelectedTranslations(router.query.translations as string);
+    }
+  }, [
+    router.query.q,
+    router.query.query,
+    router.query.page,
+    router.query.languages,
+    router.query.translations,
+  ]);
 
   /**
    * Handle when the search query is changed.
@@ -199,7 +210,8 @@ const Search: NextPage<SearchProps> = ({ translations }): JSX.Element => {
   const onTranslationChange = useCallback((translationIds: string[]) => {
     // convert the array into a string
     setSelectedTranslations((prevTranslationIds) => {
-      const newTranslationIds = translationIds.join(',');
+      // filter out the empty strings
+      const newTranslationIds = translationIds.filter((id) => id !== '').join(',');
       logValueChange('search_page_selected_translations', prevTranslationIds, newTranslationIds);
       return newTranslationIds;
     });

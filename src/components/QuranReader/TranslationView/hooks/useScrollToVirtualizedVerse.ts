@@ -3,10 +3,13 @@ import { useCallback, useEffect, useState, useContext, useRef } from 'react';
 import { useRouter } from 'next/router';
 import { VirtuosoHandle } from 'react-virtuoso';
 
+import { useVerseTrackerContext } from '../../contexts/VerseTrackerContext';
+
 import DataContext from '@/contexts/DataContext';
 import Verse from '@/types/Verse';
 import { getPageNumberFromIndexAndPerPage } from '@/utils/number';
 import { isValidVerseId } from '@/utils/validator';
+import { makeVerseKey } from '@/utils/verse';
 import { QuranReaderDataType } from 'types/QuranReader';
 import ScrollAlign from 'types/ScrollAlign';
 
@@ -33,6 +36,7 @@ const useScrollToVirtualizedTranslationView = (
   const chaptersData = useContext(DataContext);
   const [shouldReadjustScroll, setShouldReadjustScroll] = useState(false);
   const timeoutId = useRef<ReturnType<typeof setTimeout>>(null);
+  const { verseKeysQueue, shouldTrackObservedVerses } = useVerseTrackerContext();
 
   const { startingVerse } = router.query;
   const startingVerseNumber = Number(startingVerse);
@@ -77,6 +81,7 @@ const useScrollToVirtualizedTranslationView = (
       // and not when the user is scrolling through the verses while apiPageToVersesMap is being populated
       shouldReadjustScroll
     ) {
+      shouldTrackObservedVerses.current = false;
       const pageNumber = getPageNumberFromIndexAndPerPage(startingVerseNumber - 1, versesPerPage);
       const isFirstVerseInPage = startingVerseNumber % versesPerPage === 1;
 
@@ -95,6 +100,10 @@ const useScrollToVirtualizedTranslationView = (
 
         timeoutId.current = setTimeout(() => {
           scrollToBeginningOfVerseCell(startingVerseNumber);
+          shouldTrackObservedVerses.current = true;
+
+          // we need to add the verse we scrolled to to the queue
+          verseKeysQueue.current.add(makeVerseKey(chapterId, startingVerseNumber));
         }, 1000);
 
         setShouldReadjustScroll(false);
@@ -111,6 +120,9 @@ const useScrollToVirtualizedTranslationView = (
     versesPerPage,
     scrollToBeginningOfVerseCell,
     virtuosoRef,
+    shouldTrackObservedVerses,
+    verseKeysQueue,
+    chapterId,
   ]);
 
   // this effect clears the timeout when the component unmounts

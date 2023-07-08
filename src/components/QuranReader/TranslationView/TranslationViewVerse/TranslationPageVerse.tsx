@@ -3,7 +3,7 @@ import { useEffect, useRef } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import useSWRImmutable from 'swr/immutable';
 
-import { useReadingProgressContext } from '../../contexts/ReadingProgressContext';
+import { useVerseTrackerContext } from '../../contexts/VerseTrackerContext';
 import TranslationViewCell from '../TranslationViewCell';
 
 import ChapterHeader from '@/components/chapters/ChapterHeader';
@@ -39,7 +39,7 @@ const TranslationPageVerse: React.FC<TranslationPageVerse> = ({
 }) => {
   const { t, lang } = useTranslation('common');
   const containerRef = useRef<HTMLDivElement>(null);
-  const verseKeysQueue = useReadingProgressContext();
+  const { verseKeysQueue } = useVerseTrackerContext();
 
   const { data: pageBookmarks } = useSWRImmutable(bookmarksRangeUrl, async () => {
     const response = await getPageBookmarks(

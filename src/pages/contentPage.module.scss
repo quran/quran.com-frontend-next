@@ -39,3 +39,12 @@
   list-style: unset;
   padding-inline-start: var(--spacing-mega);
 }
+
+.underline {
+  text-decoration: underline;
+}
+
+.subListItem {
+  list-style-type: circle;
+  margin-inline-start: var(--spacing-large);
+}
