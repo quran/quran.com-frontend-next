@@ -1,6 +1,5 @@
 import { useState } from 'react';
 
-import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 
@@ -32,28 +31,6 @@ const ProfileAvatarButton = () => {
     }
   };
 
-  const trigger = (
-    <Button
-      tooltip={isUserLoggedIn ? t('profile') : t('login')}
-      ariaLabel={isUserLoggedIn ? t('profile') : t('login')}
-      variant={ButtonVariant.Ghost}
-      href={isUserLoggedIn ? null : '/login'}
-      shape={ButtonShape.Circle}
-      onClick={onTriggerClicked}
-      className={classNames({ [styles.loggedIn]: isUserLoggedIn })}
-      shouldFlipOnRTL={false}
-    >
-      {isUserLoggedIn ? (
-        <>
-          <TickIcon />
-          <IconPerson />
-        </>
-      ) : (
-        <IconPerson />
-      )}
-    </Button>
-  );
-
   const onLogoutClicked = async () => {
     logButtonClick('profile_avatar_logout');
 
@@ -78,7 +55,26 @@ const ProfileAvatarButton = () => {
 
   if (isUserLoggedIn) {
     return (
-      <PopoverMenu isModal={false} trigger={trigger} isOpen={isOpen} onOpenChange={setIsOpen}>
+      <PopoverMenu
+        isModal={false}
+        trigger={
+          <Button
+            tooltip={t('profile')}
+            ariaLabel={t('profile')}
+            variant={ButtonVariant.Ghost}
+            href={null}
+            shape={ButtonShape.Circle}
+            onClick={onTriggerClicked}
+            className={styles.loggedIn}
+            shouldFlipOnRTL={false}
+          >
+            <TickIcon />
+            <IconPerson />
+          </Button>
+        }
+        isOpen={isOpen}
+        onOpenChange={setIsOpen}
+      >
         <PopoverMenu.Item onClick={onProfileClicked} icon={<ArrowIcon />}>
           {t('profile')}
         </PopoverMenu.Item>
@@ -92,7 +88,18 @@ const ProfileAvatarButton = () => {
     );
   }
 
-  return trigger;
+  return (
+    <Button
+      tooltip={t('login')}
+      ariaLabel={t('login')}
+      variant={ButtonVariant.Ghost}
+      href="/login"
+      shape={ButtonShape.Circle}
+      onClick={onTriggerClicked}
+    >
+      <IconPerson />
+    </Button>
+  );
 };
 
 export default ProfileAvatarButton;
