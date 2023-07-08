@@ -3,19 +3,24 @@
     "and": "和",
     "announcements": {
         "auth-onboarding": {
-            "slide-1": {
-                "action": "看看有什么新鲜事",
-                "title": "欢迎来到 Quran.com <br> <\/br>用户帐户"
-            },
-            "slide-2": {
+            "data-sync": {
                 "action": "下一个",
                 "description": "无论您是在手机还是笔记本电脑上使用 Quran.com，您的书签、最后阅读的经文和您的偏好都将可用",
                 "title": "您的数据将在设备间同步<br> <\/br>"
             },
-            "slide-3": {
+            "feedback": {
                 "action": "好，知道了",
                 "description": "感谢您使用 Quran.com，我们很高兴听到您对<link> feedback.quran.com <\/link> 的反馈",
                 "title": "我们想听听你的想法"
+            },
+            "quran-growth-journey": {
+                "action": "下一个",
+                "description": "保持你的《古兰经》阅读连续性并在实现你的目标方面取得进展，同时养成新的习惯",
+                "title": "开始你的《古兰经》成长之旅！"
+            },
+            "welcome": {
+                "action": "看看有什么新鲜事",
+                "title": "欢迎来到 Quran.com <br> <\/br>用户帐户"
             }
         },
         "collections-announcement": {

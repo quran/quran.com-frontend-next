@@ -3,19 +3,24 @@
     "and": "dan",
     "announcements": {
         "auth-onboarding": {
-            "slide-1": {
-                "action": "Lihat apa yang baharu",
-                "title": "Selamat datang ke Akaun Pengguna <br> <\/br>"
-            },
-            "slide-2": {
+            "data-sync": {
                 "action": "Seterusnya",
                 "description": "Sama ada anda menggunakan Quran.com pada telefon atau komputer riba anda, penanda halaman anda, ayat terakhir dibaca dan pilihan anda akan tersedia",
                 "title": "Data anda akan disegerakkan <br> <\/br> merentas peranti"
             },
-            "slide-3": {
+            "feedback": {
                 "action": "Okay, faham",
                 "description": "Terima kasih kerana menggunakan Quran.com dan kami berbesar hati untuk mendengar maklum balas anda tentang <link> feedback.quran.com <\/link>",
                 "title": "Kami mahu mendengar fikiran anda"
+            },
+            "quran-growth-journey": {
+                "action": "Seterusnya",
+                "description": "Kekalkan bacaan Al-Quran anda dan maju melalui matlamat anda sambil membina tabiat baharu",
+                "title": "Mulakan Perjalanan Pertumbuhan Al-Quran anda!"
+            },
+            "welcome": {
+                "action": "Lihat apa yang baharu",
+                "title": "Selamat datang ke Akaun Pengguna <br> <\/br>"
             }
         },
         "collections-announcement": {

@@ -3,19 +3,24 @@
     "and": "dan",
     "announcements": {
         "auth-onboarding": {
-            "slide-1": {
-                "action": "Lihat apa yang baru",
-                "title": "Selamat datang di Quran.com <br> <\/br> Akun Pengguna"
-            },
-            "slide-2": {
+            "data-sync": {
                 "action": "Lanjut",
                 "description": "Baik Anda menggunakan Quran.com di ponsel atau laptop Anda, bookmark Anda, ayat yang terakhir dibaca, dan preferensi Anda akan tersedia",
                 "title": "Data Anda akan disinkronkan <br> <\/br> di seluruh perangkat"
             },
-            "slide-3": {
+            "feedback": {
                 "action": "OK saya mengerti",
                 "description": "Terima kasih telah menggunakan Quran.com dan kami akan senang mendengar tanggapan Anda di <link> feedback.quran.com <\/link>",
                 "title": "Kami ingin mendengar pendapat Anda"
+            },
+            "quran-growth-journey": {
+                "action": "Berikutnya",
+                "description": "Pertahankan bacaan Quran Anda dan tingkatkan tujuan Anda sambil membangun kebiasaan baru",
+                "title": "Mulailah Perjalanan Pertumbuhan Quran Anda!"
+            },
+            "welcome": {
+                "action": "Lihat apa yang baru",
+                "title": "Selamat datang di Quran.com <br> <\/br> Akun Pengguna"
             }
         },
         "collections-announcement": {
