@@ -1,0 +1,15 @@
+.loggedIn {
+  svg {
+    // tick svg
+    &:first-child {
+      position: absolute;
+      width: 33px;
+      height: 33px;
+      path {
+        color: var(--color-text-link);
+        stroke: var(--color-text-link);
+        stroke-width: 3;
+      }
+    }
+  }
+}
