@@ -3,19 +3,24 @@
     "and": "and",
     "announcements": {
         "auth-onboarding": {
-            "slide-1": {
-                "action": "See what's new",
-                "title": "Welcome to Quran.com <br><\/br> User Account"
-            },
-            "slide-2": {
+            "data-sync": {
                 "action": "Next",
                 "description": "Whether you’re using Quran.com on your phone or your laptop, your bookmarks, last read verses, and your preferences will be available",
                 "title": "Your data will be synced <br><\/br> across devices"
             },
-            "slide-3": {
+            "feedback": {
                 "action": "Okay, got it",
                 "description": "Thank you for using Quran.com and we would be glad to hear your feedback on <link>feedback.quran.com<\/link>",
                 "title": "We wanna hear your thoughts"
+            },
+            "quran-growth-journey": {
+                "action": "Next",
+                "description": "Maintain your Quran reading streak and progress through your goals while building new habits",
+                "title": "Start your Quran Growth Journey!"
+            },
+            "welcome": {
+                "action": "See what's new",
+                "title": "Welcome to Quran.com <br><\/br> User Account"
             }
         },
         "collections-announcement": {

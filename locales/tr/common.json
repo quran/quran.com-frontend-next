@@ -3,19 +3,24 @@
     "and": "ve",
     "announcements": {
         "auth-onboarding": {
-            "slide-1": {
-                "action": "Yeniliklere bakın",
-                "title": "Kuran.com'a Hoş Geldiniz <br> <\/br> Kullanıcı Hesabı"
-            },
-            "slide-2": {
+            "data-sync": {
                 "action": "Sonraki",
                 "description": "Kuran.com'u telefonunuzda veya dizüstü bilgisayarınızda kullanıyor olsanız da, yer imleriniz, son okunan ayetler ve tercihleriniz mevcut olacak.",
                 "title": "Verileriniz cihazlar arasında <br> <\/br> senkronize edilecek"
             },
-            "slide-3": {
+            "feedback": {
                 "action": "Tamam, anladım.",
                 "description": "Kuran.com'u kullandığınız için teşekkür ederiz ve <link> feedback.quran.com <\/link> ile ilgili görüşlerinizi duymaktan memnuniyet duyarız.",
                 "title": "Düşüncelerinizi duymak istiyoruz"
+            },
+            "quran-growth-journey": {
+                "action": "Sonraki",
+                "description": "Kuran okuma çizginizi koruyun ve yeni alışkanlıklar edinirken hedeflerinizde ilerleyin",
+                "title": "Kuran Büyüme Yolculuğunuza başlayın!"
+            },
+            "welcome": {
+                "action": "Yeniliklere bakın",
+                "title": "Kuran.com'a Hoş Geldiniz <br> <\/br> Kullanıcı Hesabı"
             }
         },
         "collections-announcement": {

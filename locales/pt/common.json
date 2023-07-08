@@ -3,19 +3,24 @@
     "and": "e",
     "announcements": {
         "auth-onboarding": {
-            "slide-1": {
-                "action": "Veja o que é novo",
-                "title": "Bem-vindo ao Quran.com <br> <\/br> Conta de usuário"
-            },
-            "slide-2": {
+            "data-sync": {
                 "action": "Próximo",
                 "description": "Se você estiver usando o Quran.com em seu telefone ou laptop, seus favoritos, os últimos versículos lidos e suas preferências estarão disponíveis",
                 "title": "Seus dados serão sincronizados <br> <\/br> entre dispositivos"
             },
-            "slide-3": {
+            "feedback": {
                 "action": "Ok, entendi",
                 "description": "Obrigado por usar o Quran.com e ficaríamos felizes em ouvir seus comentários sobre <link> feedback.quran.com <\/link>",
                 "title": "Queremos ouvir seus pensamentos"
+            },
+            "quran-growth-journey": {
+                "action": "Próximo",
+                "description": "Mantenha sua série de leitura do Alcorão e progrida em seus objetivos enquanto constrói novos hábitos",
+                "title": "Comece sua jornada de crescimento do Alcorão!"
+            },
+            "welcome": {
+                "action": "Veja o que é novo",
+                "title": "Bem-vindo ao Quran.com <br> <\/br> Conta de usuário"
             }
         },
         "collections-announcement": {
