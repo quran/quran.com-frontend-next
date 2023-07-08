@@ -41,6 +41,7 @@ const ProfileAvatarButton = () => {
       shape={ButtonShape.Circle}
       onClick={onTriggerClicked}
       className={classNames({ [styles.loggedIn]: isUserLoggedIn })}
+      shouldFlipOnRTL={false}
     >
       {isUserLoggedIn ? (
         <>
