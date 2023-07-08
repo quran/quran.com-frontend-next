@@ -1,0 +1,12 @@
+.loggedIn {
+  svg {
+    &:first-child {
+      position: absolute;
+      inset-block-end: var(--spacing-xsmall);
+    }
+    path {
+      color: var(--color-text-default);
+      stroke: var(--color-text-default);
+    }
+  }
+}
