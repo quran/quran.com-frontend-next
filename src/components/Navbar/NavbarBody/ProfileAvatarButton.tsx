@@ -66,7 +66,7 @@ const ProfileAvatarButton = () => {
 
   if (isUserLoggedIn) {
     return (
-      <PopoverMenu trigger={trigger} isOpen={isOpen} onOpenChange={setIsOpen}>
+      <PopoverMenu isModal={false} trigger={trigger} isOpen={isOpen} onOpenChange={setIsOpen}>
         <PopoverMenu.Item onClick={onProfileClicked} icon={<ArrowIcon />}>
           {t('profile')}
         </PopoverMenu.Item>
