@@ -3,19 +3,24 @@
     "and": "dhe",
     "announcements": {
         "auth-onboarding": {
-            "slide-1": {
-                "action": "Shihni çfarë ka të re",
-                "title": "Mirë se vini në llogarinë e përdoruesit <br> <\/br> të Quran.com"
-            },
-            "slide-2": {
+            "data-sync": {
                 "action": "Tjetra",
                 "description": "Pavarësisht nëse jeni duke përdorur Quran.com në telefonin ose laptopin tuaj, faqeshënuesit, vargjet e fundit të lexuara dhe preferencat tuaja do të jenë të disponueshme",
                 "title": "Të dhënat tuaja do të sinkronizohen <br> <\/br> nëpër pajisje"
             },
-            "slide-3": {
+            "feedback": {
                 "action": "Mirë, e kuptova",
                 "description": "Faleminderit që përdorni Quran.com dhe do të ishim të lumtur të dëgjonim komentet tuaja në <link> feedback.quran.com <\/link>",
                 "title": "Ne duam të dëgjojmë mendimet tuaja"
+            },
+            "quran-growth-journey": {
+                "action": "Tjetra",
+                "description": "Mbani brezin tuaj të leximit të Kuranit dhe përparoni në qëllimet tuaja duke ndërtuar zakone të reja",
+                "title": "Filloni Udhëtimin tuaj të Rritjes në Kuran!"
+            },
+            "welcome": {
+                "action": "Shihni çfarë ka të re",
+                "title": "Mirë se vini në llogarinë e përdoruesit <br> <\/br> të Quran.com"
             }
         },
         "collections-announcement": {
