@@ -8,7 +8,6 @@ import { ContentSide } from '@/dls/Popover';
 import HoverablePopover from '@/dls/Popover/HoverablePopover';
 import useGetStreakWithMetadata from '@/hooks/auth/useGetStreakWithMetadata';
 import { dateToReadableFormat } from '@/utils/datetime';
-import { toLocalizedNumber } from '@/utils/locale';
 import { convertFractionToPercent } from '@/utils/number';
 
 interface Props {
@@ -18,11 +17,11 @@ interface Props {
 }
 
 const CurrentWeekProgress: React.FC<Props> = ({ weekData, goal, fixedWidth = true }) => {
-  const { lang } = useTranslation();
+  const { lang, t } = useTranslation();
   const { days, readingDaysMap } = weekData;
 
   const getDayState = (day: typeof days[number]): DayState => {
-    const readingDay = readingDaysMap[day.date];
+    const readingDay = readingDaysMap[day.dateString];
     const hasRead = readingDay?.hasRead;
 
     // if the user has a goal, we want to show a checked circle if the user has completed his goal for the day
@@ -36,33 +35,35 @@ const CurrentWeekProgress: React.FC<Props> = ({ weekData, goal, fixedWidth = tru
   };
 
   return (
-    <div
-      className={classNames(styles.week, {
-        [styles.fixedWidth]: fixedWidth,
-      })}
-    >
-      {days.map((day, idx) => {
-        const dayState = getDayState(day);
-        const localizedDayNumber = toLocalizedNumber(idx + 1, lang);
+    <div>
+      <p className={styles.weekProgressLabel}>{t('reading-goal:week-progress')}</p>
+      <div
+        className={classNames(styles.week, {
+          [styles.fixedWidth]: fixedWidth,
+        })}
+      >
+        {days.map((day) => {
+          const dayState = getDayState(day);
 
-        return (
-          <div key={day.name} className={styles.day}>
-            <HoverablePopover
-              content={dateToReadableFormat(day.date, lang)}
-              contentSide={ContentSide.TOP}
-            >
-              <span className={styles.fullName}>{day.name}</span>
-              <span className={styles.shortName}>{localizedDayNumber}</span>
-            </HoverablePopover>
+          return (
+            <div key={day.info.localizedNumber} className={styles.day}>
+              <HoverablePopover
+                content={dateToReadableFormat(day.date, lang)}
+                contentSide={ContentSide.TOP}
+              >
+                <span className={styles.fullName}>{day.info.title}</span>
+                <span className={styles.shortName}>{day.info.localizedNumber}</span>
+              </HoverablePopover>
 
-            <div className={styles.circleContainer}>
-              <DayCircle state={dayState} />
+              <div className={styles.circleContainer}>
+                <DayCircle state={dayState} />
 
-              <div className={styles.dayDivider} />
+                <div className={styles.dayDivider} />
+              </div>
             </div>
-          </div>
-        );
-      })}
+          );
+        })}
+      </div>
     </div>
   );
 };
