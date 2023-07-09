@@ -107,6 +107,7 @@
     },
     "todays-goal": "bugünün hedefi",
     "view-progress": "İlerlemeyi Görüntüle",
+    "week-progress": "Bu haftaki ilerleme",
     "x-days": {
         "one": "{{days}} gün",
         "other": "{{days}} gün"

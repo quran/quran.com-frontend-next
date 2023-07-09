@@ -107,6 +107,7 @@
     },
     "todays-goal": "Goli i sotëm",
     "view-progress": "Shiko Progresin",
+    "week-progress": "Progresi i kësaj jave",
     "x-days": {
         "one": "{{days}} dite",
         "other": "{{days}} dite"
