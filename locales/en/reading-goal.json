@@ -1,5 +1,4 @@
 {
-    "week-progress": "This week's progress",
     "continue-reading": "Continue Reading",
     "continuous": {
         "description": "Your goal will calculate your progress over a duration of days",
@@ -108,6 +107,7 @@
     },
     "todays-goal": "Today's Goal",
     "view-progress": "View Progress",
+    "week-progress": "This week's progress",
     "x-days": {
         "one": "{{days}} day",
         "other": "{{days}} days"

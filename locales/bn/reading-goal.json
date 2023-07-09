@@ -107,6 +107,7 @@
     },
     "todays-goal": "আজকের গোল",
     "view-progress": "অগ্রগতি দেখুন",
+    "week-progress": "এই সপ্তাহের অগ্রগতি",
     "x-days": {
         "one": "{{days}} দিন",
         "other": "{{days}} দিন"

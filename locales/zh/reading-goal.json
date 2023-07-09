@@ -105,6 +105,7 @@
     },
     "todays-goal": "今天的目标",
     "view-progress": "查看进度",
+    "week-progress": "本周进展",
     "x-days": {
         "other": "{{days}} 天"
     },

@@ -107,6 +107,7 @@
     },
     "todays-goal": "Gol de hoje",
     "view-progress": "Ver Progresso",
+    "week-progress": "Progresso desta semana",
     "x-days": {
         "one": "{{days}} dia",
         "other": "{{days}} dias"
