@@ -44,6 +44,9 @@
 .modalContentContainer {
   width: 100%;
   margin-block-start: calc(var(--spacing-mega) * 2);
+  @include breakpoints.smallerThanTablet {
+    margin-block-end: calc(var(--spacing-mega) * 2);
+  }
 }
 
 .readingDay {
