@@ -12,6 +12,7 @@ import NextSeoWrapper from '@/components/NextSeoWrapper';
 import PageContainer from '@/components/PageContainer';
 import Button, { ButtonVariant } from '@/dls/Button/Button';
 import Link from '@/dls/Link/Link';
+import { getAboutTheQuranImageUrl } from '@/lib/og';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl } from '@/utils/navigation';
@@ -31,6 +32,11 @@ const AboutQuranPage: NextPage = (): JSX.Element => {
         url={getCanonicalUrl(lang, PATH)}
         languageAlternates={getLanguageAlternates(PATH)}
         description={t('about-quran-desc')}
+        image={getAboutTheQuranImageUrl({
+          locale: lang,
+        })}
+        imageWidth={1200}
+        imageHeight={630}
       />
       <PageContainer>
         <div className={styles.container}>
