@@ -1,15 +1,13 @@
-import { useState } from "react";
+import { useState } from 'react';
 
-import Slider from "react-rangeslider";
+import Slider from 'react-rangeslider';
+import 'react-rangeslider/lib/index.css';
 
-// To include the default styles
-import "react-rangeslider/lib/index.css";
-
-import styles from "@/components/AudioPlayer/OverflowAudioPlayerActionsMenu.module.scss";
-import Button, { ButtonShape, ButtonVariant } from "@/dls/Button/Button";
-import PopoverMenu from "@/dls/PopoverMenu/PopoverMenu";
-import useDirection from "@/hooks/useDirection";
-import VolumeUpIcon from "@/icons/volume_up.svg";
+import styles from '@/components/AudioPlayer/OverflowAudioPlayerActionsMenu.module.scss';
+import Button, { ButtonShape, ButtonVariant } from '@/dls/Button/Button';
+import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
+import useDirection from '@/hooks/useDirection';
+import VolumeUpIcon from '@/icons/volume_up.svg';
 
 const VolumeControl = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
@@ -31,7 +29,6 @@ const VolumeControl = () => {
               <VolumeUpIcon />
             </Button>
           }
-          onOpenChange={() => console.log("Open")}
           contentClassName={styles.overriddenPopoverMenuContentPositioning}
         >
           <Slider
