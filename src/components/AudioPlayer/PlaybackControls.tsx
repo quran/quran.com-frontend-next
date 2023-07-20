@@ -8,6 +8,7 @@ import OverflowAudioPlayerActionsMenu from './OverflowAudioPlayerActionsMenu';
 import styles from './PlaybackControls.module.scss';
 import SeekButton, { SeekButtonType } from './SeekButton';
 
+import VolumeControl from '@/components/AudioPlayer/Buttons/VolumeControl';
 import { selectIsLoading } from 'src/xstate/actors/audioPlayer/selectors';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 
@@ -28,6 +29,9 @@ const PlaybackControls = () => {
       </div>
       <div className={styles.actionItem}>
         <SeekButton type={SeekButtonType.NextAyah} isLoading={isLoading} />
+      </div>
+      <div className={styles.actionItem}>
+        <VolumeControl />
       </div>
       <div className={styles.actionItem}>
         <CloseButton />

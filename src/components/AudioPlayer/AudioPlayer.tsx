@@ -127,6 +127,10 @@ const AudioPlayer = () => {
     audioService.send({ type: 'PROGRESS', timestamp: getAudioPlayerDownloadProgress(e.target) });
   };
 
+  const onVolumeChange = (e) => {
+    audioPlayerRef.current.volume = e.target.value / 100;
+  };
+
   return (
     <>
       <div
@@ -141,6 +145,7 @@ const AudioPlayer = () => {
           ref={audioPlayerRef}
           autoPlay
           preload="auto"
+          onVolumeChange={onVolumeChange}
           onCanPlay={onCanPlay}
           onTimeUpdate={onTimeUpdate}
           onEnded={onEnded}
