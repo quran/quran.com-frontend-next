@@ -57,7 +57,8 @@ const useGlobalIntersectionObserverWithDelay = (
             elementIntersectionDebuggerNode = nodes[0] as HTMLElement;
           }
         }
-        const elementId = visibleEntry.target.dataset[elementIdKey];
+        const targetNode = visibleEntry.target as HTMLElement;
+        const elementId = targetNode.dataset[elementIdKey];
         // if the element content container is interacting
         if (visibleEntry.isIntersecting) {
           setIntersectionDebuggerNodeText(
