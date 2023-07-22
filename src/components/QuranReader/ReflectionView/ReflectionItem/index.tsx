@@ -1,4 +1,5 @@
-import { useCallback, useContext, useMemo, useState } from 'react';
+/* eslint-disable max-lines */
+import { useCallback, useContext, useMemo, useRef, useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
@@ -7,8 +8,10 @@ import HeaderMenu from './HeaderMenu';
 import styles from './ReflectionItem.module.scss';
 import SocialInteraction from './SocialInteraction';
 
+import { REFLECTIONS_OBSERVER_ID } from '@/components/QuranReader/observer';
 import VerseAndTranslation from '@/components/Verse/VerseAndTranslation';
 import DataContext from '@/contexts/DataContext';
+import useIntersectionObserver from '@/hooks/useObserveElement';
 import { getChapterData } from '@/utils/chapter';
 import { logButtonClick } from '@/utils/eventLogger';
 import truncate from '@/utils/html-truncate';
@@ -39,6 +42,8 @@ const ReflectionItem: React.FC<Props> = ({
   const { t } = useTranslation();
   const [shouldShowReferredVerses, setShouldShowReferredVerses] = useState(false);
   const chaptersData = useContext(DataContext);
+  const reflectionBodyRef = useRef(null);
+  useIntersectionObserver(reflectionBodyRef, REFLECTIONS_OBSERVER_ID);
 
   const onReferredVersesHeaderClicked = () => {
     setShouldShowReferredVerses((prevShouldShowReferredVerses) => {
@@ -129,7 +134,12 @@ const ReflectionItem: React.FC<Props> = ({
           ))}
         </div>
       )}
-      <div className={isRTLReflection(reflection.language) ? styles.rtl : styles.ltr}>
+      <div
+        ref={reflectionBodyRef}
+        data-post-id={id}
+        className={isRTLReflection(reflection.language) ? styles.rtl : styles.ltr}
+      >
+        <p className="debugger" />
         <span
           className={styles.body}
           // eslint-disable-next-line react/no-danger

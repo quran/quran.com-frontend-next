@@ -42,6 +42,16 @@ export const makeAyahReflectionsUrl = ({
   });
 };
 
+const makeReflectionViewsUrl = (postId: string) => {
+  return makeQuranReflectApiUrl(`v1/posts/${postId}/views`);
+};
+
+export const postReflectionViews = async (postId: string): Promise<AyahReflectionsResponse> =>
+  fetcher(makeReflectionViewsUrl(postId), {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+  });
+
 export const getAyahReflections = async (
   ayahReflectionsUrl: string,
 ): Promise<AyahReflectionsResponse> => fetcher(ayahReflectionsUrl);
