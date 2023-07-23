@@ -76,6 +76,7 @@ export const audioPlayerMachine =
         repeatActor: null,
         radioActor: null,
         verseDelay: 0,
+        volume: 1,
       },
       tsTypes: {} as import('./audioPlayerMachine.typegen').Typegen0,
       schema: {
@@ -139,6 +140,10 @@ export const audioPlayerMachine =
                 description: 'User changes the reciter',
               },
             ],
+            SET_VOLUME: {
+              actions: 'setVolume',
+              description: 'User changes the volume',
+            },
           },
         },
         VISIBLE: {
@@ -751,6 +756,9 @@ export const audioPlayerMachine =
         SET_RECITERS_LIST: {
           actions: 'setRecitersList',
         },
+        SET_VOLUME: {
+          actions: 'setVolume',
+        },
       },
     },
     {
@@ -768,6 +776,7 @@ export const audioPlayerMachine =
         setInitialContext: assign({
           reciterId: (context, event) => event.reciterId,
           playbackRate: (context, event) => event.playbackRate,
+          volume: (context, event) => event.volume,
         }),
         updateRepeatAyah: pure((context, event) => {
           if (context.repeatActor) {
@@ -906,6 +915,13 @@ export const audioPlayerMachine =
           context.audioPlayer.playbackRate = playbackRate;
           return assign({
             playbackRate,
+          });
+        }),
+        setVolume: pure((context: AudioPlayerContext, event) => {
+          const { volume } = event;
+          context.audioPlayer.volume = volume;
+          return assign({
+            volume,
           });
         }),
         updateTiming: pure((context) => {

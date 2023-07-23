@@ -1,5 +1,7 @@
-import { useState } from 'react';
+/* eslint-disable react-hooks/exhaustive-deps */
+import { useContext, useState } from 'react';
 
+import { useSelector } from '@xstate/react';
 import Slider from 'react-rangeslider';
 import 'react-rangeslider/lib/index.css';
 
@@ -8,11 +10,20 @@ import Button, { ButtonShape, ButtonVariant } from '@/dls/Button/Button';
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import useDirection from '@/hooks/useDirection';
 import VolumeUpIcon from '@/icons/volume_up.svg';
+import { AudioPlayerMachineContext } from '@/xstate/AudioPlayerMachineContext';
 
 const VolumeControl = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
-  const [level, setLevel] = useState<number>(100);
+  const audioService = useContext(AudioPlayerMachineContext);
+  const volume = useSelector(audioService, (state) => state.context.volume);
   const direction = useDirection();
+
+  const onVolumeChange = (value) => {
+    audioService.send({
+      type: 'SET_VOLUME',
+      volume: value / 100,
+    });
+  };
 
   return (
     <>
@@ -32,10 +43,10 @@ const VolumeControl = () => {
           contentClassName={styles.overriddenPopoverMenuContentPositioning}
         >
           <Slider
-            value={level}
+            value={volume * 100}
             orientation="vertical"
-            format={(p) => `${p}%`}
-            onChange={(value) => setLevel(value)}
+            format={(p) => `${Math.trunc(p)}%`}
+            onChange={onVolumeChange}
           />
         </PopoverMenu>
       </div>

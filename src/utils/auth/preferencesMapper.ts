@@ -40,6 +40,7 @@ const getPreferenceGroupValue = (
     return {
       reciter: DEFAULT_XSTATE_INITIAL_STATE.reciterId,
       playbackRate: DEFAULT_XSTATE_INITIAL_STATE.playbackRate,
+      volume: DEFAULT_XSTATE_INITIAL_STATE.volume,
       showTooltipWhenPlayingAudio,
       enableAutoScrolling,
     };
