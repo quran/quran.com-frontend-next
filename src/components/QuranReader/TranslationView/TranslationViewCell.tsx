@@ -5,6 +5,7 @@ import classNames from 'classnames';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 
+import MarkAsReadButton from '../MarkAsReadButton';
 import {
   verseFontChanged,
   verseTranslationChanged,
@@ -96,6 +97,9 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
             </div>
             <div className={classNames(styles.actionItem)}>
               <QuranReflectButton verseKey={verse.verseKey} />
+            </div>
+            <div className={classNames(styles.actionItem)}>
+              <MarkAsReadButton verseKey={verse.verseKey} />
             </div>
           </div>
           <div className={styles.actionContainerRight}>

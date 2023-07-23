@@ -237,3 +237,25 @@ export const makeDateRangeFromMonth = (month: number, year: number): DateRange =
 
   return { from, to };
 };
+
+type Month = { id: number; name: string; daysCount: number };
+
+/**
+ * This function returns an array of months in a given year.
+ *
+ * @param {number} year
+ * @param {string} locale
+ * @returns {Month[]}
+ */
+export const getMonthsInYear = (year: number, locale: string): Month[] => {
+  const all: Month[] = [];
+
+  for (let i = 1; i <= 12; i += 1) {
+    const monthDate = new Date(year, i, 0);
+    const daysInMonth = monthDate.getDate();
+
+    all.push({ id: i, name: getFullMonthName(monthDate, locale), daysCount: daysInMonth });
+  }
+
+  return all;
+};

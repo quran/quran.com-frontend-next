@@ -74,49 +74,6 @@
   margin-block-end: var(--spacing-medium);
 }
 
-.calendarContainer {
-  display: grid;
-  grid-template-columns: repeat(7, 1fr);
-  max-width: calc(var(--spacing-mega) * 12);
-  margin-inline: auto;
-
-  & > div {
-    padding-block: var(--spacing-small);
-
-    &.bordered {
-      border-block-start: 1px solid var(--color-background-alternative-medium);
-    }
-
-    & > button {
-      background: none;
-      border: none;
-      color: var(--color-text-default);
-      font-weight: var(--font-weight-bold);
-      margin-inline: auto;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 32px;
-      height: 32px;
-      border-radius: var(--border-radius-pill);
-
-      &.disabled {
-        opacity: var(--opacity-50);
-        font-weight: var(--font-weight-normal);
-        cursor: not-allowed;
-      }
-
-      &:hover {
-        background: var(--color-background-alternative-medium);
-      }
-    }
-  }
-}
-
-.calendarSpinner {
-  margin-block-end: var(--spacing-medium);
-}
-
 .readingInfo {
   font-size: var(--font-size-large);
   display: flex;
@@ -184,4 +141,14 @@
       height: calc(var(--spacing-mega) * 1.2);
     }
   }
+}
+
+.calendarMonthSelector {
+  margin-block-end: var(--spacing-medium);
+  display: flex;
+  align-items: center;
+  margin-inline: auto;
+  justify-content: center;
+  gap: var(--spacing-medium);
+  font-size: var(--font-size-large);
 }

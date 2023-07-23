@@ -5,12 +5,13 @@ import useTranslation from 'next-translate/useTranslation';
 
 import pageStyles from '../ReadingProgressPage.module.scss';
 
+import AddReading from './AddReading';
 import MonthModal from './MonthModal';
 import styles from './ReadingHistory.module.scss';
 
 import Select from '@/dls/Forms/Select';
 import SelectionCard from '@/dls/SelectionCard/SelectionCard';
-import { getFullMonthName } from '@/utils/datetime';
+import { getMonthsInYear } from '@/utils/datetime';
 import { logButtonClick, logValueChange } from '@/utils/eventLogger';
 import { toLocalizedNumber } from '@/utils/locale';
 
@@ -32,18 +33,7 @@ const ReadingHistory = () => {
     );
   }, [lang]);
 
-  const { months } = useMemo(() => {
-    const all: { id: number; name: string; daysCount: number }[] = [];
-
-    for (let i = 1; i <= 12; i += 1) {
-      const monthDate = new Date(selectedYear, i, 0);
-      const daysInMonth = monthDate.getDate();
-
-      all.push({ id: i, name: getFullMonthName(monthDate, lang), daysCount: daysInMonth });
-    }
-
-    return { months: all };
-  }, [selectedYear, lang]);
+  const months = useMemo(() => getMonthsInYear(selectedYear, lang), [selectedYear, lang]);
 
   const selectedMonthObj = useMemo(() => {
     if (!selectedMonth) return null;
@@ -88,6 +78,7 @@ const ReadingHistory = () => {
           value={selectedYear.toString()}
           onChange={onYearChange}
         />
+        <AddReading />
       </div>
 
       <div className={classNames(pageStyles.historyContainer, styles.monthsContainer)}>
