@@ -45,7 +45,7 @@ const useGlobalIntersectionObserverWithDelay = (
    * the ID of the timeout function that will trigger when the element
    * is visible for delayForMS number of seconds.
    */
-  const timeouts = useRef<Record<any, number>>({});
+  const timeouts = useRef<Map<any, number>>(new Map());
   const updateEntry = useCallback(
     (entries: IntersectionObserverEntry[]): void => {
       entries.forEach((visibleEntry) => {
@@ -66,16 +66,16 @@ const useGlobalIntersectionObserverWithDelay = (
             elementIntersectionDebuggerNode,
           );
           // Call the API after delayForMS
-          timeouts.current = {
-            ...timeouts.current,
-            [elementId]: window.setTimeout(() => {
+          timeouts.current.set(
+            elementId,
+            window.setTimeout(() => {
               onElementVisible(visibleEntry.target);
               setIntersectionDebuggerNodeText(
                 `Element callback triggered`,
                 elementIntersectionDebuggerNode,
               );
             }, delayForMS),
-          };
+          );
         } else {
           // if it's no longer intersecting, clear the timeout
           clearTimeout(timeouts.current[elementId]);
@@ -84,9 +84,7 @@ const useGlobalIntersectionObserverWithDelay = (
            * needed and next time if the same element intersects, a new ID will be generated
            * for that element.
            */
-          const tempTimeouts = { ...timeouts.current };
-          delete tempTimeouts[elementId];
-          timeouts.current = tempTimeouts;
+          timeouts.current.delete(elementId);
           setIntersectionDebuggerNodeText(
             `Element is not fully visible, won't trigger callback`,
             elementIntersectionDebuggerNode,
@@ -114,6 +112,10 @@ const useGlobalIntersectionObserverWithDelay = (
       });
     }
     return () => {
+      // manually clear all the timeouts (if any are still around)
+      timeouts.current.forEach((value) => {
+        clearTimeout(value);
+      });
       if (window[observerId]) {
         window[observerId].disconnect();
         window[observerId] = undefined;

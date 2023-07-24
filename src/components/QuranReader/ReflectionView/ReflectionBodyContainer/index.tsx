@@ -7,7 +7,7 @@ import { shallowEqual, useSelector } from 'react-redux';
 import DataFetcher from '@/components/DataFetcher';
 import { REFLECTIONS_OBSERVER_ID } from '@/components/QuranReader/observer';
 import TafsirSkeleton from '@/components/QuranReader/TafsirView/TafsirSkeleton';
-import useIntersectionObserver from '@/hooks/useGlobalIntersectionObserverWithDelay';
+import useGlobalIntersectionObserverWithDelay from '@/hooks/useGlobalIntersectionObserverWithDelay';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import { makeAyahReflectionsUrl, postReflectionViews } from '@/utils/quranReflect/apiPaths';
 import AyahReflectionsResponse from 'types/QuranReflect/AyahReflectionsResponse';
@@ -45,7 +45,7 @@ const ReflectionBodyContainer = ({
     // eslint-disable-next-line @typescript-eslint/no-empty-function
     postReflectionViews(postId).catch(() => {});
   }, []);
-  useIntersectionObserver(
+  useGlobalIntersectionObserverWithDelay(
     { threshold: 1 },
     onReflectionViewed,
     REFLECTIONS_OBSERVER_ID,
