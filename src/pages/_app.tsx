@@ -32,6 +32,7 @@ import ThemeProvider from 'src/styles/ThemeProvider';
 import { AudioPlayerMachineProvider } from 'src/xstate/AudioPlayerMachineContext';
 
 import 'src/styles/reset.scss';
+import 'src/styles/overrides.scss';
 import 'src/styles/fonts.scss';
 import 'src/styles/theme.scss';
 import 'src/styles/global.scss';

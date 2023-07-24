@@ -3,6 +3,7 @@ import { useContext, useEffect, useState } from 'react';
 
 import { useSelector } from '@xstate/react';
 import Slider from 'react-rangeslider';
+
 import 'react-rangeslider/lib/index.css';
 
 import styles from '@/components/AudioPlayer/OverflowAudioPlayerActionsMenu.module.scss';
