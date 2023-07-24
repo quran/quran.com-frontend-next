@@ -5,8 +5,8 @@ import useTranslation from 'next-translate/useTranslation';
 import Slider from 'react-rangeslider';
 
 import 'react-rangeslider/lib/index.css';
+import styles from './VolumeControl.module.scss';
 
-import styles from '@/components/AudioPlayer/OverflowAudioPlayerActionsMenu.module.scss';
 import Button, { ButtonShape, ButtonVariant } from '@/dls/Button/Button';
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import useDirection from '@/hooks/useDirection';
@@ -49,7 +49,7 @@ const VolumeControl = () => {
         <PopoverMenu
           isPortalled
           isModal
-          contentClassName={styles.overriddenPopoverMenuContentPositioning}
+          contentClassName={styles.VolumeControl__DropdownMenuContentOverride}
           trigger={
             <Button
               tooltip={t('audio.player.volume-ctrl')}

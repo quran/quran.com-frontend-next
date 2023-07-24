@@ -1,0 +1,5 @@
+.VolumeControl__DropdownMenuContentOverride {
+  margin-block-end: var(--spacing-large);
+  width: var(--radix-dropdown-menu-trigger-width);
+  max-height: var(--radix-dropdown-menu-content-available-height);
+}
