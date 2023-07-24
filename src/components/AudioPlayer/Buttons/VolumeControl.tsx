@@ -1,12 +1,11 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useContext, useEffect, useState } from 'react';
 
 import { useSelector } from '@xstate/react';
+import useTranslation from 'next-translate/useTranslation';
 import Slider from 'react-rangeslider';
 
 import 'react-rangeslider/lib/index.css';
 
-import styles from '@/components/AudioPlayer/OverflowAudioPlayerActionsMenu.module.scss';
 import Button, { ButtonShape, ButtonVariant } from '@/dls/Button/Button';
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import useDirection from '@/hooks/useDirection';
@@ -17,7 +16,8 @@ import VolumeUpIcon from '@/icons/volume_up.svg';
 import { AudioPlayerMachineContext } from '@/xstate/AudioPlayerMachineContext';
 
 const VolumeControl = () => {
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const { t } = useTranslation('common');
+
   const audioService = useContext(AudioPlayerMachineContext);
   const volume = useSelector(audioService, (state) => state.context.volume);
   const [volumeIcon, setVolumeIcon] = useState(<VolumeUpIcon />);
@@ -50,14 +50,13 @@ const VolumeControl = () => {
           isModal
           trigger={
             <Button
+              tooltip={t('audio.player.volume-ctrl')}
               shape={ButtonShape.Circle}
               variant={ButtonVariant.Ghost}
-              onClick={() => setIsOpen(!isOpen)}
             >
               {volumeIcon}
             </Button>
           }
-          contentClassName={styles.overriddenPopoverMenuContentPositioning}
         >
           <Slider
             value={volume * 100}

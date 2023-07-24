@@ -76,7 +76,8 @@
             "start-playing": "Mula Bermain",
             "stop-repeating": "Hentikan Ulangan",
             "times": "kali",
-            "verses-range": "Jangka rangka ayat"
+            "verses-range": "Jangka rangka ayat",
+            "volume-ctrl": "kawalan kelantangan"
         },
         "repeat-moved": "Ketetapan ulangan telah pindah ke pemain audio. Klik pada <0> <\/0> untuk akses",
         "select-reciter": "Pilih Qari (Pembaca)",

@@ -1,4 +1,11 @@
 .rangeslider__fill {
-  //background-color: var(--color-success-deep) !important;
   background-color: var(--color-success-deep) !important;
+}
+
+.rangeslider__handle {
+  width: 20px !important;
+  height: 20px !important;
+  left: -6px !important;
+  box-shadow: none !important;
+  border-radius: 50%;
 }

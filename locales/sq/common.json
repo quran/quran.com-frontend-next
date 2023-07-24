@@ -76,7 +76,8 @@
             "start-playing": "Filloni të luani",
             "stop-repeating": "Ndalo përsëritjen",
             "times": "herë",
-            "verses-range": "Gama e vargjeve"
+            "verses-range": "Gama e vargjeve",
+            "volume-ctrl": "Kontrolli i volumit"
         },
         "repeat-moved": "Cilësimet e përsëritjes janë zhvendosur te luajtësi audio. Klikoni në <0> <\/0> për t'iu qasur atyre",
         "select-reciter": "Zgjidhni Recitues",

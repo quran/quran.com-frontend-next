@@ -76,7 +76,8 @@
             "start-playing": "开始播放",
             "stop-repeating": "停止重复播放",
             "times": "次",
-            "verses-range": "播放多节"
+            "verses-range": "播放多节",
+            "volume-ctrl": "音量控制"
         },
         "repeat-moved": "重复播放设置已移至音频播放器。单击<0> <\/0>图标以访问它们",
         "select-reciter": "选择诵读家",
