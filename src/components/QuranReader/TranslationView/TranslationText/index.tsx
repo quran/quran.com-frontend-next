@@ -33,6 +33,8 @@ const TranslationText: React.FC<Props> = ({
   const [isLoading, setIsLoading] = useState(false);
   const [showFootnote, setShowFootnote] = useState(true);
   const [footnote, setFootnote] = useState<Footnote>(null);
+  const [footnoteNumberStr, setFootnoteNumberStr] = useState("");
+  const [subFootnoteNumberStr, setSubFootnoteNumberStr] = useState("");
   const [subFootnote, setSubFootnote] = useState<Footnote>(null);
 
   const PRE_DEFINED_FOOTNOTES = {
@@ -70,7 +72,7 @@ const TranslationText: React.FC<Props> = ({
    *       is, we get the value from the pre-defined footnotes and assign it as the footnote
    *       text without having to call BE (only happens with Bridge's Foundation translation)
    * 2. If it's a sub-footnote it will only have pre-defined footnotes so we handle it the same
-   *    way as above (only happens with Bridge's Foundation translation).
+   *    way as above (only happens with Bridge's Foundation translation, ex: Surah 30, Verse 11).
    *
    * @param {MouseEvent} event
    * @param {boolean} isSubFootnote whether we are handling a footnote or a sub-footnote (only happens
@@ -83,6 +85,8 @@ const TranslationText: React.FC<Props> = ({
       // if it's the main footnote and not the sub footnote.
       if (!isSubFootnote) {
         const footNoteId = target.getAttribute('foot_note');
+        // Set the footnoteNumberStr to the current number of the footnote from the <sup> innerHTML
+        setFootnoteNumberStr(target.innerText.trim());
         // if it's the normal case that needs us to call BE and not a fixed footnote like the ones found for Bridge's translation.
         if (footNoteId) {
           // if this is the second time to click the footnote, close it
@@ -123,6 +127,8 @@ const TranslationText: React.FC<Props> = ({
       } else {
         // we get the text inside the sup element and trim the extra spaces.
         const footnoteText = target.innerText.trim();
+        // Set the subFootnoteNumberStr to the current number of the footnote from the <sup> innerHTML
+        setSubFootnoteNumberStr(footnoteText);
         const subFootnoteId = `${footnote.id} - ${footnoteText}`;
         // if this is the second time we are clicking on the sub footnote, we close it.
         if (subFootnote && subFootnote.id === subFootnoteId) {
@@ -151,6 +157,7 @@ const TranslationText: React.FC<Props> = ({
       />
       {shouldShowFootnote && (
         <FootnoteText
+          footnoteNumberStr={footnoteNumberStr}
           footnote={footnote}
           isLoading={isLoading}
           onCloseClicked={() => {
@@ -164,7 +171,7 @@ const TranslationText: React.FC<Props> = ({
           onTextClicked={(event) => onTextClicked(event, true)}
         />
       )}
-      {subFootnote && <FootnoteText footnote={subFootnote} onCloseClicked={resetSubFootnote} />}
+      {subFootnote && <FootnoteText footnoteNumberStr={subFootnoteNumberStr} footnote={subFootnote} onCloseClicked={resetSubFootnote} />}
       {resourceName && (
         <p
           className={classNames(
