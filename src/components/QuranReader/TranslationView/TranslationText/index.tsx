@@ -33,8 +33,8 @@ const TranslationText: React.FC<Props> = ({
   const [isLoading, setIsLoading] = useState(false);
   const [showFootnote, setShowFootnote] = useState(true);
   const [footnote, setFootnote] = useState<Footnote>(null);
-  const [footnoteNumberStr, setFootnoteNumberStr] = useState("");
-  const [subFootnoteNumberStr, setSubFootnoteNumberStr] = useState("");
+  const [footnoteNumberStr, setFootnoteNumberStr] = useState('');
+  const [subFootnoteNumberStr, setSubFootnoteNumberStr] = useState('');
   const [subFootnote, setSubFootnote] = useState<Footnote>(null);
 
   const PRE_DEFINED_FOOTNOTES = {
@@ -171,7 +171,13 @@ const TranslationText: React.FC<Props> = ({
           onTextClicked={(event) => onTextClicked(event, true)}
         />
       )}
-      {subFootnote && <FootnoteText footnoteNumberStr={subFootnoteNumberStr} footnote={subFootnote} onCloseClicked={resetSubFootnote} />}
+      {subFootnote && (
+        <FootnoteText
+          footnoteNumberStr={subFootnoteNumberStr}
+          footnote={subFootnote}
+          onCloseClicked={resetSubFootnote}
+        />
+      )}
       {resourceName && (
         <p
           className={classNames(
