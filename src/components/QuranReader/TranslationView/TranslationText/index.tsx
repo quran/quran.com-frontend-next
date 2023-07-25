@@ -33,8 +33,8 @@ const TranslationText: React.FC<Props> = ({
   const [isLoading, setIsLoading] = useState(false);
   const [showFootnote, setShowFootnote] = useState(true);
   const [footnote, setFootnote] = useState<Footnote>(null);
-  const [activeFootnoteNumber, setActiveFootnoteNumber] = useState<number | null>(null);
-  const [activeSubFootnoteNumber, setActiveSubFootnoteNumber] = useState<number | null>(null);
+  const [activeFootnoteName, setActiveFootnoteName] = useState<string | null>(null);
+  const [activeSubFootnoteName, setActiveSubFootnoteName] = useState<string | null>(null);
   const [subFootnote, setSubFootnote] = useState<Footnote>(null);
 
   const PRE_DEFINED_FOOTNOTES = {
@@ -47,13 +47,13 @@ const TranslationText: React.FC<Props> = ({
     setFootnote(null);
     setSubFootnote(null);
     setIsLoading(false);
-    setActiveFootnoteNumber(null);
-    setActiveSubFootnoteNumber(null);
+    setActiveFootnoteName(null);
+    setActiveSubFootnoteName(null);
   };
 
   const resetSubFootnote = () => {
     setSubFootnote(null);
-    setActiveSubFootnoteNumber(null);
+    setActiveSubFootnoteName(null);
   };
 
   /**
@@ -96,7 +96,7 @@ const TranslationText: React.FC<Props> = ({
       const footNoteId = target.getAttribute('foot_note');
 
       // Set the activeFootnoteNumber to the current number of the footnote from the <sup> innerHTML
-      setActiveFootnoteNumber(Number(footnoteText));
+      setActiveFootnoteName(footnoteText);
 
       // if it's the normal case that needs us to call BE and not a fixed footnote like the ones found for Bridge's translation.
       if (footNoteId) {
@@ -133,7 +133,7 @@ const TranslationText: React.FC<Props> = ({
       }
     } else {
       // Set the activeSubFootnoteNumber to the current number of the footnote from the <sup> innerHTML
-      setActiveSubFootnoteNumber(Number(footnoteText));
+      setActiveSubFootnoteName(footnoteText);
 
       const subFootnoteId = `${footnote.id} - ${footnoteText}`;
       // if this is the second time we are clicking on the sub footnote, we close it.
@@ -162,7 +162,7 @@ const TranslationText: React.FC<Props> = ({
       />
       {shouldShowFootnote && (
         <FootnoteText
-          footnoteNumber={activeFootnoteNumber}
+          footnoteName={activeFootnoteName || undefined}
           footnote={footnote}
           isLoading={isLoading}
           onCloseClicked={() => {
@@ -178,7 +178,7 @@ const TranslationText: React.FC<Props> = ({
       )}
       {subFootnote && (
         <FootnoteText
-          footnoteNumber={activeSubFootnoteNumber}
+          footnoteName={activeSubFootnoteName || undefined}
           footnote={subFootnote}
           onCloseClicked={resetSubFootnote}
         />
