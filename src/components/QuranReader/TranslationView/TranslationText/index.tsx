@@ -33,8 +33,8 @@ const TranslationText: React.FC<Props> = ({
   const [isLoading, setIsLoading] = useState(false);
   const [showFootnote, setShowFootnote] = useState(true);
   const [footnote, setFootnote] = useState<Footnote>(null);
-  const [footnoteNumberStr, setFootnoteNumberStr] = useState('');
-  const [subFootnoteNumberStr, setSubFootnoteNumberStr] = useState('');
+  const [activeFootnoteNumber, setActiveFootnoteNumber] = useState<number | null>(null);
+  const [activeSubFootnoteNumber, setActiveSubFootnoteNumber] = useState<number | null>(null);
   const [subFootnote, setSubFootnote] = useState<Footnote>(null);
 
   const PRE_DEFINED_FOOTNOTES = {
@@ -47,10 +47,13 @@ const TranslationText: React.FC<Props> = ({
     setFootnote(null);
     setSubFootnote(null);
     setIsLoading(false);
+    setActiveFootnoteNumber(null);
+    setActiveSubFootnoteNumber(null);
   };
 
   const resetSubFootnote = () => {
     setSubFootnote(null);
+    setActiveSubFootnoteNumber(null);
   };
 
   /**
@@ -80,67 +83,69 @@ const TranslationText: React.FC<Props> = ({
    */
   const onTextClicked = (event: MouseEvent, isSubFootnote = false) => {
     const target = event.target as HTMLElement;
-    // if we just clicked on the footnote element
-    if (target.tagName === 'SUP') {
-      // if it's the main footnote and not the sub footnote.
-      if (!isSubFootnote) {
-        const footNoteId = target.getAttribute('foot_note');
-        // Set the footnoteNumberStr to the current number of the footnote from the <sup> innerHTML
-        setFootnoteNumberStr(target.innerText.trim());
-        // if it's the normal case that needs us to call BE and not a fixed footnote like the ones found for Bridge's translation.
-        if (footNoteId) {
-          // if this is the second time to click the footnote, close it
-          if (showFootnote && footnote && footnote.id === Number(footNoteId)) {
-            logButtonClick('translation_footnote_double_click_to_close');
-            resetFootnote();
-          } else {
-            logButtonClick('translation_show_footnote');
-            resetSubFootnote();
-            setShowFootnote(true);
-            setIsLoading(true);
-            getFootnote(footNoteId)
-              .then((res) => {
-                if (res.status !== 500) {
-                  setFootnote(res.footNote);
-                }
-              })
-              .finally(() => {
-                setIsLoading(false);
-              });
-          }
+
+    // if we just clicked on anything other than a footnote element, return early.
+    if (target.tagName !== 'SUP') {
+      return;
+    }
+    // we get the text inside the sup element and trim the extra spaces.
+    const footnoteText = target.innerText.trim();
+
+    // if it's the main footnote and not the sub footnote.
+    if (!isSubFootnote) {
+      const footNoteId = target.getAttribute('foot_note');
+
+      // Set the activeFootnoteNumber to the current number of the footnote from the <sup> innerHTML
+      setActiveFootnoteNumber(Number(footnoteText));
+
+      // if it's the normal case that needs us to call BE and not a fixed footnote like the ones found for Bridge's translation.
+      if (footNoteId) {
+        // if this is the second time to click the footnote, close it
+        if (showFootnote && footnote && footnote.id === Number(footNoteId)) {
+          logButtonClick('translation_footnote_double_click_to_close');
+          resetFootnote();
         } else {
-          // we get the text inside the sup element and trim the extra spaces.
-          const footnoteText = target.innerText.trim();
-          // if this is the second time we are clicking on the footnote, we close it.
-          if (footnote && footnote.id === footnoteText) {
-            logButtonClick('translation_pre_defined_footnote_double_click_to_close');
-            resetFootnote();
-          } else if (PRE_DEFINED_FOOTNOTES[footnoteText]) {
-            logButtonClick('translation_pre_defined_footnote');
-            resetSubFootnote();
-            setFootnote({
-              id: footnoteText,
-              text: PRE_DEFINED_FOOTNOTES[footnoteText],
-            });
-          }
-        }
-      } else {
-        // we get the text inside the sup element and trim the extra spaces.
-        const footnoteText = target.innerText.trim();
-        // Set the subFootnoteNumberStr to the current number of the footnote from the <sup> innerHTML
-        setSubFootnoteNumberStr(footnoteText);
-        const subFootnoteId = `${footnote.id} - ${footnoteText}`;
-        // if this is the second time we are clicking on the sub footnote, we close it.
-        if (subFootnote && subFootnote.id === subFootnoteId) {
-          logButtonClick('translation_sub_footnote_double_click_to_close');
+          logButtonClick('translation_show_footnote');
           resetSubFootnote();
-        } else if (PRE_DEFINED_FOOTNOTES[footnoteText]) {
-          logButtonClick('translation_show_sub_footnote');
-          setSubFootnote({
-            id: subFootnoteId,
-            text: PRE_DEFINED_FOOTNOTES[footnoteText],
-          });
+          setShowFootnote(true);
+          setIsLoading(true);
+          getFootnote(footNoteId)
+            .then((res) => {
+              if (res.status !== 500) {
+                setFootnote(res.footNote);
+              }
+            })
+            .finally(() => {
+              setIsLoading(false);
+            });
         }
+      } else if (footnote && footnote.id === footnoteText) {
+        // if this is the second time we are clicking on the footnote, we close it.
+        logButtonClick('translation_pre_defined_footnote_double_click_to_close');
+        resetFootnote();
+      } else if (PRE_DEFINED_FOOTNOTES[footnoteText]) {
+        logButtonClick('translation_pre_defined_footnote');
+        resetSubFootnote();
+        setFootnote({
+          id: footnoteText,
+          text: PRE_DEFINED_FOOTNOTES[footnoteText],
+        });
+      }
+    } else {
+      // Set the activeSubFootnoteNumber to the current number of the footnote from the <sup> innerHTML
+      setActiveSubFootnoteNumber(Number(footnoteText));
+
+      const subFootnoteId = `${footnote.id} - ${footnoteText}`;
+      // if this is the second time we are clicking on the sub footnote, we close it.
+      if (subFootnote && subFootnote.id === subFootnoteId) {
+        logButtonClick('translation_sub_footnote_double_click_to_close');
+        resetSubFootnote();
+      } else if (PRE_DEFINED_FOOTNOTES[footnoteText]) {
+        logButtonClick('translation_show_sub_footnote');
+        setSubFootnote({
+          id: subFootnoteId,
+          text: PRE_DEFINED_FOOTNOTES[footnoteText],
+        });
       }
     }
   };
@@ -157,7 +162,7 @@ const TranslationText: React.FC<Props> = ({
       />
       {shouldShowFootnote && (
         <FootnoteText
-          footnoteNumberStr={footnoteNumberStr}
+          footnoteNumber={activeFootnoteNumber}
           footnote={footnote}
           isLoading={isLoading}
           onCloseClicked={() => {
@@ -173,7 +178,7 @@ const TranslationText: React.FC<Props> = ({
       )}
       {subFootnote && (
         <FootnoteText
-          footnoteNumberStr={subFootnoteNumberStr}
+          footnoteNumber={activeSubFootnoteNumber}
           footnote={subFootnote}
           onCloseClicked={resetSubFootnote}
         />

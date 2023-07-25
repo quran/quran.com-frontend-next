@@ -11,11 +11,11 @@ import transStyles from './TranslationText.module.scss';
 import Button, { ButtonSize, ButtonShape, ButtonVariant } from '@/dls/Button/Button';
 import Spinner from '@/dls/Spinner/Spinner';
 import CloseIcon from '@/icons/close.svg';
-import { getLanguageDataById, findLanguageIdByLocale } from '@/utils/locale';
+import { getLanguageDataById, findLanguageIdByLocale, toLocalizedNumber } from '@/utils/locale';
 import Footnote from 'types/Footnote';
 
 interface FootnoteTextProps {
-  footnoteNumberStr: string;
+  footnoteNumber?: number | null;
   footnote: Footnote;
   onCloseClicked: () => void;
   onTextClicked?: (event: MouseEvent, isSubFootnote?: boolean) => void;
@@ -23,7 +23,7 @@ interface FootnoteTextProps {
 }
 
 const FootnoteText: React.FC<FootnoteTextProps> = ({
-  footnoteNumberStr,
+  footnoteNumber,
   footnote,
   onCloseClicked,
   onTextClicked,
@@ -37,7 +37,9 @@ const FootnoteText: React.FC<FootnoteTextProps> = ({
   return (
     <div className={styles.footnoteContainer}>
       <div className={styles.header}>
-        <p>{t(`footnote - ${footnoteNumberStr}`)}</p>
+        <p>
+          {t('footnote')} {footnoteNumber ? toLocalizedNumber(footnoteNumber, lang) : null}
+        </p>
         <Button
           size={ButtonSize.Small}
           variant={ButtonVariant.Ghost}
