@@ -1,6 +1,6 @@
 /* eslint-disable react/no-danger */
 
-import React, { MouseEvent, useMemo } from 'react';
+import React, { MouseEvent } from 'react';
 
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
@@ -11,7 +11,7 @@ import transStyles from './TranslationText.module.scss';
 import Button, { ButtonSize, ButtonShape, ButtonVariant } from '@/dls/Button/Button';
 import Spinner from '@/dls/Spinner/Spinner';
 import CloseIcon from '@/icons/close.svg';
-import { getLanguageDataById, findLanguageIdByLocale, toLocalizedNumber } from '@/utils/locale';
+import { getLanguageDataById, findLanguageIdByLocale } from '@/utils/locale';
 import Footnote from 'types/Footnote';
 
 interface FootnoteTextProps {
@@ -34,23 +34,11 @@ const FootnoteText: React.FC<FootnoteTextProps> = ({
   const languageId = footnote?.languageId || findLanguageIdByLocale(lang);
   const landData = getLanguageDataById(languageId);
 
-  const formattedFootnoteName = useMemo(() => {
-    if (!footnoteName) return null;
-
-    const footnoteNumber = Number(footnoteName);
-
-    // if footnoteName is not numeric, return it
-    if (Number.isNaN(footnoteNumber)) return footnoteName;
-
-    // otherwise, localize the footnote number
-    return toLocalizedNumber(footnoteNumber, lang);
-  }, [footnoteName, lang]);
-
   return (
     <div className={styles.footnoteContainer}>
       <div className={styles.header}>
         <p>
-          {t('footnote')} {formattedFootnoteName ? `- ${formattedFootnoteName}` : null}
+          {t('footnote')} {footnoteName ? `- ${footnoteName}` : null}
         </p>
         <Button
           size={ButtonSize.Small}
