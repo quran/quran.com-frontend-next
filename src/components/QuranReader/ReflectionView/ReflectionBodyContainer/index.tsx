@@ -27,8 +27,6 @@ type ReflectionBodyProps = {
   render: (renderProps: { surahAndAyahSelection: JSX.Element; body: JSX.Element }) => JSX.Element;
 };
 
-const OBSERVER_DELAY_FOR_MS = 3000; // 3 seconds
-
 const ReflectionBodyContainer = ({
   render,
   initialChapterId,
@@ -50,7 +48,7 @@ const ReflectionBodyContainer = ({
     onReflectionViewed,
     REFLECTIONS_OBSERVER_ID,
     'postId',
-    OBSERVER_DELAY_FOR_MS,
+    'countAsViewedAfter',
   );
 
   const renderBody = useCallback(

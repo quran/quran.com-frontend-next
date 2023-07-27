@@ -31,14 +31,14 @@ const setIntersectionDebuggerNodeText = (text: string, intersectionDebuggerNode:
  * @param {(element:Element)=>void} onElementVisible
  * @param {string} observerId the name of the observer
  * @param {string} elementIdKey the key of the unique identifier of each element.
- * @param {string} delayForMS the number of milliseconds after which the observer should trigger the callback
+ * @param {string} delayForMSKey the key holding the number of milliseconds after which the observer should trigger the callback
  */
 const useGlobalIntersectionObserverWithDelay = (
   { threshold = 1, root = null, rootMargin = '0%' }: IntersectionObserverInit,
   onElementVisible: (element: Element) => void,
   observerId: string,
   elementIdKey: string,
-  delayForMS: number,
+  delayForMSKey: string,
 ) => {
   /**
    * An object that will hold a reference of each unique identifier and
@@ -59,6 +59,7 @@ const useGlobalIntersectionObserverWithDelay = (
         }
         const targetNode = visibleEntry.target as HTMLElement;
         const elementId = targetNode.dataset[elementIdKey];
+        const delayForMS = targetNode.dataset[delayForMSKey] as number;
         // if the element content container is interacting
         if (visibleEntry.isIntersecting) {
           setIntersectionDebuggerNodeText(
@@ -92,7 +93,7 @@ const useGlobalIntersectionObserverWithDelay = (
         }
       });
     },
-    [delayForMS, elementIdKey, onElementVisible],
+    [delayForMSKey, elementIdKey, onElementVisible],
   );
 
   /**

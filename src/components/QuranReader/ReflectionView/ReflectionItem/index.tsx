@@ -18,10 +18,13 @@ import truncate from '@/utils/html-truncate';
 import { isRTLReflection } from '@/utils/quranReflect/locale';
 import { getQuranReflectTagUrl } from '@/utils/quranReflect/navigation';
 import { getVerseReferencesFromReflectionFilters } from '@/utils/quranReflect/string';
+import {
+  MAX_REFLECTION_LENGTH,
+  getInitialVisiblePostPercentage,
+  estimateReadingTimeOfInitialVisiblePortion,
+} from '@/utils/quranReflect/views';
 import { makeVerseKey } from '@/utils/verse';
 import AyahReflection from 'types/QuranReflect/AyahReflection';
-
-const MAX_REFLECTION_LENGTH = 220;
 
 type Props = {
   reflection: AyahReflection;
@@ -34,7 +37,7 @@ const ReflectionItem: React.FC<Props> = ({
   selectedChapterId,
   selectedVerseNumber,
 }) => {
-  const { id, createdAt, author } = reflection;
+  const { id, createdAt, author, estimatedReadingTime } = reflection;
   const reflectionText = reflection?.body;
   // TODO: here
   const verseReferences = getVerseReferencesFromReflectionFilters(reflection.filters);
@@ -77,6 +80,16 @@ const ReflectionItem: React.FC<Props> = ({
     },
     [chaptersData, t],
   );
+
+  const reflectionTextLength = useMemo(() => {
+    return reflectionText?.length;
+  }, [reflectionText?.length]);
+  const estimatedReadingTimeOfInitialVisiblePortion = useMemo(() => {
+    return estimateReadingTimeOfInitialVisiblePortion(
+      getInitialVisiblePostPercentage(reflectionTextLength),
+      estimatedReadingTime,
+    );
+  }, [estimatedReadingTime, reflectionTextLength]);
 
   const formattedText = useMemo(
     () =>
@@ -137,6 +150,7 @@ const ReflectionItem: React.FC<Props> = ({
       <div
         ref={reflectionBodyRef}
         data-post-id={id}
+        data-count-as-viewed-after={estimatedReadingTimeOfInitialVisiblePortion}
         className={isRTLReflection(reflection.language) ? styles.rtl : styles.ltr}
       >
         <p className="debugger" />
@@ -147,7 +161,7 @@ const ReflectionItem: React.FC<Props> = ({
             __html: isExpanded ? formattedText : truncate(formattedText, MAX_REFLECTION_LENGTH),
           }}
         />
-        {reflectionText.length > MAX_REFLECTION_LENGTH && (
+        {reflectionTextLength > MAX_REFLECTION_LENGTH && (
           // eslint-disable-next-line jsx-a11y/click-events-have-key-events
           <span
             className={styles.moreOrLessText}
