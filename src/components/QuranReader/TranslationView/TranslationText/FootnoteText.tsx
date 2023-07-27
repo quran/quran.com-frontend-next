@@ -15,6 +15,7 @@ import { getLanguageDataById, findLanguageIdByLocale } from '@/utils/locale';
 import Footnote from 'types/Footnote';
 
 interface FootnoteTextProps {
+  footnoteName?: string; // can be a number or a string (e.g. "sg" or "pl")
   footnote: Footnote;
   onCloseClicked: () => void;
   onTextClicked?: (event: MouseEvent, isSubFootnote?: boolean) => void;
@@ -22,6 +23,7 @@ interface FootnoteTextProps {
 }
 
 const FootnoteText: React.FC<FootnoteTextProps> = ({
+  footnoteName,
   footnote,
   onCloseClicked,
   onTextClicked,
@@ -35,7 +37,9 @@ const FootnoteText: React.FC<FootnoteTextProps> = ({
   return (
     <div className={styles.footnoteContainer}>
       <div className={styles.header}>
-        <p>{t('footnote')}</p>
+        <p>
+          {t('footnote')} {footnoteName ? `- ${footnoteName}` : null}
+        </p>
         <Button
           size={ButtonSize.Small}
           variant={ButtonVariant.Ghost}
