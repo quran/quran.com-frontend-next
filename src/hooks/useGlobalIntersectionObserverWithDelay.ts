@@ -79,7 +79,7 @@ const useGlobalIntersectionObserverWithDelay = (
           );
         } else {
           // if it's no longer intersecting, clear the timeout
-          clearTimeout(timeouts.current[elementId]);
+          clearTimeout(timeouts.current.get(elementId));
           /**
            * Delete the timeout function's ID from the global array since it's no longer
            * needed and next time if the same element intersects, a new ID will be generated
