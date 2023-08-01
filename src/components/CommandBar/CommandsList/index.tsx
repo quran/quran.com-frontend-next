@@ -16,7 +16,7 @@ import CommandPrefix from './CommandPrefix';
 import useScroll, { SMOOTH_SCROLL_TO_CENTER } from '@/hooks/useScrollToElement';
 import {
   removeRecentNavigation,
-  setIsOpen,
+  setIsOpenAction,
   addRecentNavigationAction,
 } from '@/redux/slices/CommandBar/state';
 import { logButtonClick } from '@/utils/eventLogger';
@@ -79,7 +79,7 @@ const CommandsList: React.FC<Props> = ({ commandGroups: { groups, numberOfComman
       const { name, resultType, key } = command;
       router.push(resolveUrlBySearchNavigationType(resultType, key)).then(() => {
         dispatch(addRecentNavigationAction({ name, resultType, key }));
-        dispatch({ type: setIsOpen.type, payload: false });
+        dispatch(setIsOpenAction(false));
       });
     },
     [dispatch, router],
