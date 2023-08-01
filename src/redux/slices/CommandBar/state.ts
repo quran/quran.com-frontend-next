@@ -68,6 +68,11 @@ export const setIsOpenAction = (isOpen: boolean) => ({
   payload: isOpen,
 });
 
+export const addRecentNavigationAction = (recentNavigation: SearchNavigationResult) => ({
+  type: addRecentNavigation.type,
+  payload: recentNavigation,
+});
+
 export const selectCommandBarIsOpen = (state: RootState) => state.commandBar.isOpen;
 export const selectRecentNavigations = (state: RootState) => state.commandBar.recentNavigations;
 
