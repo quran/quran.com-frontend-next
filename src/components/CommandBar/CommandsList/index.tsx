@@ -15,7 +15,7 @@ import CommandPrefix from './CommandPrefix';
 
 import useScroll, { SMOOTH_SCROLL_TO_CENTER } from '@/hooks/useScrollToElement';
 import {
-  removeRecentNavigation,
+  removeRecentNavigationAction,
   setIsOpenAction,
   addRecentNavigationAction,
 } from '@/redux/slices/CommandBar/state';
@@ -126,7 +126,7 @@ const CommandsList: React.FC<Props> = ({ commandGroups: { groups, numberOfComman
     logButtonClick('remove_command_bar_navigation');
     // to not allow the event to bubble up to the parent container
     event.stopPropagation();
-    dispatch({ type: removeRecentNavigation.type, payload: navigationItemKey });
+    dispatch(removeRecentNavigationAction(navigationItemKey));
   };
 
   if (numberOfCommands === 0) {
