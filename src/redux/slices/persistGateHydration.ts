@@ -56,3 +56,13 @@ export const selectIsPersistGateHydrationComplete = (state: RootState) =>
   state.persistGateHydration.isPersistGateHydrationComplete;
 
 export default persistGateHydrationSlice.reducer;
+
+export const setIsPersistGateHydrationInProgressAction = (isInProgress: boolean) => ({
+  type: setIsPersistGateHydrationInProgress.type,
+  payload: isInProgress,
+});
+
+export const setIsPersistGateHydrationCompleteAction = (isComplete: boolean) => ({
+  type: setIsPersistGateHydrationComplete.type,
+  payload: isComplete,
+});

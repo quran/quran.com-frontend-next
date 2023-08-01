@@ -4,8 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import {
   selectIsPersistGateHydrationInProgress,
-  setIsPersistGateHydrationComplete,
-  setIsPersistGateHydrationInProgress,
+  setIsPersistGateHydrationInProgressAction,
+  setIsPersistGateHydrationCompleteAction,
 } from '@/redux/slices/persistGateHydration';
 
 const PERSIST_GATE_HYDRATION_DURATION_MS = 50; // This number is mostly arbitrary. Long enough to ensure that the hydration is complete.
@@ -15,6 +15,7 @@ const PERSIST_GATE_HYDRATION_DURATION_MS = 50; // This number is mostly arbitrar
 // The component works by setting a timeout to fire after the REHYDRATE event.
 // Because the redux store is synchronous, there's no way to ensure the order of actions.
 // So we have to use a timeout to ensure that the hydration complete event happens *after* REHYDRATE.
+
 const GlobalPersistGateHydrationListener = () => {
   const dispatch = useDispatch();
   const isPersistGateHydrationInProgress = useSelector(selectIsPersistGateHydrationInProgress);
@@ -22,11 +23,12 @@ const GlobalPersistGateHydrationListener = () => {
   useEffect(() => {
     if (isPersistGateHydrationInProgress) {
       setTimeout(() => {
-        dispatch({ type: setIsPersistGateHydrationComplete.type, payload: true });
-        dispatch({ type: setIsPersistGateHydrationInProgress.type, payload: false });
+        dispatch(setIsPersistGateHydrationCompleteAction(true));
+        dispatch(setIsPersistGateHydrationInProgressAction(false));
       }, PERSIST_GATE_HYDRATION_DURATION_MS);
     }
   }, [dispatch, isPersistGateHydrationInProgress]);
+
   return <></>;
 };
 
