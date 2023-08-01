@@ -3,7 +3,7 @@ import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
 import useScrollDirection, { ScrollDirection } from '@/hooks/useScrollDirection';
-import { setIsVisible } from '@/redux/slices/navbar';
+import { setIsVisibleAction } from '@/redux/slices/navbar';
 import { setIsExpandedAction } from '@/redux/slices/QuranReader/contextMenu';
 
 const GlobalScrollListener = () => {
@@ -18,10 +18,11 @@ const GlobalScrollListener = () => {
        */
       if (newYPosition > 50 && direction === ScrollDirection.Down) {
         dispatch(setIsExpandedAction(false));
-        dispatch({ type: setIsVisible.type, payload: false });
+
+        dispatch(setIsVisibleAction(false));
       } else if (newYPosition >= 0 && direction === ScrollDirection.Up) {
         dispatch(setIsExpandedAction(true));
-        dispatch({ type: setIsVisible.type, payload: true });
+        dispatch(setIsVisibleAction(true));
       }
     },
     [dispatch],

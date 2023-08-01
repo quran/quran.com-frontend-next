@@ -62,6 +62,11 @@ export const {
   setSettingsView,
 } = navbarSlice.actions;
 
+export const setIsVisibleAction = (isVisible: boolean) => ({
+  type: setIsVisible.type,
+  payload: isVisible,
+});
+
 export const selectNavbar = (state: RootState) => state.navbar;
 
 export default navbarSlice.reducer;
