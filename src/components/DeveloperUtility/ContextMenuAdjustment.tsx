@@ -3,7 +3,7 @@ import React from 'react';
 
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
-import { selectContextMenu, setIsExpanded } from '@/redux/slices/QuranReader/contextMenu';
+import { selectContextMenu, setIsExpandedAction } from '@/redux/slices/QuranReader/contextMenu';
 
 const ContextMenuAdjustment = () => {
   const dispatch = useDispatch();
@@ -11,10 +11,7 @@ const ContextMenuAdjustment = () => {
   return (
     <div>
       Context Menu{' '}
-      <button
-        type="button"
-        onClick={() => dispatch({ type: setIsExpanded.type, payload: !isExpanded })}
-      >
+      <button type="button" onClick={() => dispatch(setIsExpandedAction(!isExpanded))}>
         Toggle Expansion
       </button>
     </div>
