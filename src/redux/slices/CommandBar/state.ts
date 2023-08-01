@@ -59,6 +59,15 @@ export const commandBarSlice = createSlice({
 export const { setIsOpen, toggleIsOpen, addRecentNavigation, removeRecentNavigation } =
   commandBarSlice.actions;
 
+export const toggleIsOpenAction = () => ({
+  type: toggleIsOpen.type,
+});
+
+export const setIsOpenAction = (isOpen: boolean) => ({
+  type: setIsOpen.type,
+  payload: isOpen,
+});
+
 export const selectCommandBarIsOpen = (state: RootState) => state.commandBar.isOpen;
 export const selectRecentNavigations = (state: RootState) => state.commandBar.recentNavigations;
 

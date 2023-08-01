@@ -9,8 +9,12 @@ import styles from './CommandBar.module.scss';
 import CommandBarBase from './CommandBarBase/CommandBarBase';
 
 import Spinner from '@/dls/Spinner/Spinner';
-import { selectCommandBarIsOpen, setIsOpen, toggleIsOpen } from '@/redux/slices/CommandBar/state';
-import { stopCommandBarVoiceFlow } from '@/redux/slices/voiceSearch';
+import {
+  selectCommandBarIsOpen,
+  toggleIsOpenAction,
+  setIsOpenAction,
+} from '@/redux/slices/CommandBar/state';
+import { stopCommandBarVoiceFlowAction } from '@/redux/slices/voiceSearch';
 import { logEvent } from '@/utils/eventLogger';
 
 const CommandBarBody = dynamic(() => import('./CommandBarBody'), {
@@ -43,7 +47,7 @@ const CommandBar: React.FC = () => {
         keyboard_shortcut: getPressedShortcut(event),
       });
       event.preventDefault();
-      dispatch({ type: toggleIsOpen.type });
+      dispatch(toggleIsOpenAction());
     },
     [dispatch, isOpen],
   );
@@ -52,8 +56,8 @@ const CommandBar: React.FC = () => {
       const isClickedOutside = !event;
       // eslint-disable-next-line i18next/no-literal-string
       logEvent(`command_bar_close_${isClickedOutside ? 'outside_click' : 'esc_key'}`);
-      dispatch({ type: setIsOpen.type, payload: false });
-      dispatch({ type: stopCommandBarVoiceFlow.type });
+      dispatch(setIsOpenAction(false));
+      dispatch(stopCommandBarVoiceFlowAction());
     },
     [dispatch],
   );
