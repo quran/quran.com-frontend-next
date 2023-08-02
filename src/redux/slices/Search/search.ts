@@ -49,6 +49,11 @@ export const searchSlice = createSlice({
 
 export const { addSearchHistoryRecord, removeSearchHistoryRecord } = searchSlice.actions;
 
+export const addSearchHistoryRecordAction = (searchQuery: string) => ({
+  type: addSearchHistoryRecord.type,
+  payload: searchQuery,
+});
+
 export const selectSearchHistory = (state: RootState) => state.search.searchHistory;
 
 export default searchSlice.reducer;
