@@ -20,7 +20,7 @@ import {
   setIsSettingsDrawerOpen,
   setIsVisible,
 } from '@/redux/slices/navbar';
-import { stopSearchDrawerVoiceFlow } from '@/redux/slices/voiceSearch';
+import { stopSearchDrawerVoiceFlowAction } from '@/redux/slices/voiceSearch';
 import { logEvent } from '@/utils/eventLogger';
 
 export enum DrawerType {
@@ -63,12 +63,12 @@ const getIsOpen = (type: DrawerType, navbar: Navbar): boolean => {
 
 const getActionCreator = (type: DrawerType) => {
   if (type === DrawerType.Navigation) {
-    return setIsNavigationDrawerOpen.type;
+    return { type: setIsNavigationDrawerOpen.type, payload: false };
   }
   if (type === DrawerType.Settings) {
-    return setIsSettingsDrawerOpen.type;
+    return { type: setIsSettingsDrawerOpen.type, payload: false };
   }
-  return setIsSearchDrawerOpen.type;
+  return { type: setIsSearchDrawerOpen.type, payload: false };
 };
 
 const logDrawerCloseEvent = (type: string, actionSource: string) => {
@@ -94,9 +94,9 @@ const Drawer: React.FC<Props> = ({
 
   const closeDrawer = useCallback(
     (actionSource = 'click') => {
-      dispatch({ type: getActionCreator(type), payload: false });
+      dispatch(getActionCreator(type));
       if (type === DrawerType.Search) {
-        dispatch({ type: stopSearchDrawerVoiceFlow.type });
+        dispatch(stopSearchDrawerVoiceFlowAction());
       }
       logDrawerCloseEvent(type, actionSource);
     },
