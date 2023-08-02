@@ -3,7 +3,7 @@ import React from 'react';
 
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
-import { selectNavbar, setIsVisible } from '@/redux/slices/navbar';
+import { selectNavbar, setIsVisibleAction } from '@/redux/slices/navbar';
 
 const NavbarAdjustment = () => {
   const dispatch = useDispatch();
@@ -11,10 +11,7 @@ const NavbarAdjustment = () => {
   return (
     <div>
       Navbar{' '}
-      <button
-        type="button"
-        onClick={() => dispatch({ type: setIsVisible.type, payload: !isVisible })}
-      >
+      <button type="button" onClick={() => dispatch(setIsVisibleAction(!isVisible))}>
         Toggle Navbar visibility
       </button>
     </div>
