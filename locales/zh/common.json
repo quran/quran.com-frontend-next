@@ -13,6 +13,11 @@
                 "description": "感谢您使用 Quran.com，我们很高兴听到您对<link> feedback.quran.com <\/link> 的反馈",
                 "title": "我们想听听你的想法"
             },
+            "quran-foundation-link": {
+                "action": "下一个",
+                "description": "使用您的 Quran.com 登录名访问 QuranReflect.com — 一个致力于反思古兰经的蓬勃发展的全球社区。",
+                "title": "在 Quran.Foundation 应用程序中使用您的帐户！"
+            },
             "quran-growth-journey": {
                 "action": "下一个",
                 "description": "保持你的《古兰经》阅读连续性并在实现你的目标方面取得进展，同时养成新的习惯",

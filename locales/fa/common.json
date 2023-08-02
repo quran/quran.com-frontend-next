@@ -13,6 +13,11 @@
                 "description": "از اینکه از Quran.com استفاده کردید متشکریم و خوشحال می شویم نظرات شما را در مورد <link> feedback.quran.com <\/link> بشنویم",
                 "title": "ما می خواهیم افکار شما را بشنویم"
             },
+            "quran-foundation-link": {
+                "action": "بعد",
+                "description": "از لاگین Quran.com خود برای دسترسی به QuranReflect.com استفاده کنید - یک جامعه جهانی پر رونق که درگیر تفکر قرآنی است.",
+                "title": "از حساب خود در برنامه های Quran.Foundation استفاده کنید!"
+            },
             "quran-growth-journey": {
                 "action": "بعد",
                 "description": "خط قرائت قرآن خود را حفظ کنید و در اهداف خود پیشرفت کنید و در عین حال عادت های جدید ایجاد کنید",

@@ -13,6 +13,11 @@
                 "description": "Kuran.com'u kullandığınız için teşekkür ederiz ve <link> feedback.quran.com <\/link> ile ilgili görüşlerinizi duymaktan memnuniyet duyarız.",
                 "title": "Düşüncelerinizi duymak istiyoruz"
             },
+            "quran-foundation-link": {
+                "action": "Sonraki",
+                "description": "Kuran'ın yansımasıyla ilgilenen gelişen küresel bir topluluk olan Qur'anReflect.com'a erişim için Kuran.com oturum açma bilgilerinizi kullanın.",
+                "title": "Hesabınızı Kuran.Vakıf uygulamalarında kullanın!"
+            },
             "quran-growth-journey": {
                 "action": "Sonraki",
                 "description": "Kuran okuma çizginizi koruyun ve yeni alışkanlıklar edinirken hedeflerinizde ilerleyin",

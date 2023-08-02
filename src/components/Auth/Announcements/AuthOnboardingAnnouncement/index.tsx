@@ -5,6 +5,7 @@ import AnnouncementBody from '../AnnouncementBody';
 
 import DataSyncSlide from './Slides/DataSyncSlide';
 import FeedbackSlide from './Slides/FeedbackSlide';
+import QuranFoundationLinkSlide from './Slides/QuranFoundationLinkSlide';
 import QuranGrowthJourneySlide from './Slides/QuranGrowthJourneySlide';
 import WelcomeSlide from './Slides/WelcomeSlide';
 
@@ -16,6 +17,7 @@ enum SlideId {
   Welcome = 'welcome',
   DataSync = 'data-sync',
   QuranGrowthJourney = 'quran-growth-journey',
+  QuranFoundationLink = 'quran-foundation-link',
   Feedback = 'feedback',
 }
 
@@ -23,6 +25,7 @@ const slideIdToAnalyticsName: Record<SlideId, string> = {
   [SlideId.Welcome]: 'welcome',
   [SlideId.DataSync]: 'data_sync',
   [SlideId.QuranGrowthJourney]: 'quran_growth_journey',
+  [SlideId.QuranFoundationLink]: 'quran_foundation_link',
   [SlideId.Feedback]: 'feedback',
 };
 
@@ -42,6 +45,10 @@ const slides = [
   {
     id: SlideId.QuranGrowthJourney,
     component: QuranGrowthJourneySlide,
+  },
+  {
+    id: SlideId.QuranFoundationLink,
+    component: QuranFoundationLinkSlide,
   },
   {
     id: SlideId.Feedback,

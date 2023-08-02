@@ -13,6 +13,11 @@
                 "description": "Terima kasih telah menggunakan Quran.com dan kami akan senang mendengar tanggapan Anda di <link> feedback.quran.com <\/link>",
                 "title": "Kami ingin mendengar pendapat Anda"
             },
+            "quran-foundation-link": {
+                "action": "Berikutnya",
+                "description": "Gunakan login Quran.com Anda untuk akses ke QuranReflect.com — sebuah komunitas global yang berkembang yang terlibat dalam refleksi Alquran.",
+                "title": "Gunakan akun Anda di seluruh aplikasi Quran.Foundation!"
+            },
             "quran-growth-journey": {
                 "action": "Berikutnya",
                 "description": "Pertahankan bacaan Quran Anda dan tingkatkan tujuan Anda sambil membangun kebiasaan baru",
