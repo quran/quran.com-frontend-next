@@ -79,6 +79,11 @@ export const {
   setWordByWordDisplay,
 } = readingPreferencesSlice.actions;
 
+export const setReadingPreferenceAction = (readingPreference: string) => ({
+  type: setReadingPreference.type,
+  payload: readingPreference,
+});
+
 /**
  * Check whether we should display inline wbw translation/transliteration.
  *
