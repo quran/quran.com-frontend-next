@@ -50,6 +50,11 @@ export const tafsirsSlice = createSlice({
 
 export const { setSelectedTafsirs } = tafsirsSlice.actions;
 
+export const setSelectedTafsirsAction = (tafsirs: number[], locale: string) => ({
+  type: setSelectedTafsirs.type,
+  payload: { tafsirs, locale },
+});
+
 export const selectTafsirs = (state: RootState) => state.tafsirs;
 export const selectSelectedTafsirs = (state: RootState) => state.tafsirs.selectedTafsirs;
 export const selectIsUsingDefaultTafsirs = (state: RootState) =>
