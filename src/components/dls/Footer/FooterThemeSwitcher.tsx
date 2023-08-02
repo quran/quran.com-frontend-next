@@ -8,7 +8,7 @@ import styles from './FooterThemeSwitcher.module.scss';
 
 import { themeIcons } from '@/components/Navbar/SettingsDrawer/ThemeSection';
 import ChevronSelectIcon from '@/icons/chevron-select.svg';
-import { selectTheme, setTheme } from '@/redux/slices/theme';
+import { selectTheme, setThemeAction } from '@/redux/slices/theme';
 import ThemeType from '@/redux/types/ThemeType';
 import { logEvent } from '@/utils/eventLogger';
 
@@ -55,7 +55,7 @@ const FooterThemeSwitcher = () => {
           isSelected={option.value === theme.type}
           shouldCloseMenuAfterClick
           key={option.value}
-          onClick={() => dispatch({ type: setTheme.type, payload: option.value })}
+          onClick={() => dispatch(setThemeAction(option.value))}
         >
           {option.label}
         </PopoverMenu.Item>
