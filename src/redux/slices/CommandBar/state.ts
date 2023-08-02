@@ -73,6 +73,11 @@ export const addRecentNavigationAction = (recentNavigation: SearchNavigationResu
   payload: recentNavigation,
 });
 
+export const removeRecentNavigationAction = (key: number | string) => ({
+  type: removeRecentNavigation.type,
+  payload: key,
+});
+
 export const selectCommandBarIsOpen = (state: RootState) => state.commandBar.isOpen;
 export const selectRecentNavigations = (state: RootState) => state.commandBar.recentNavigations;
 
