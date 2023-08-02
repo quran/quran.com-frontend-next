@@ -9,7 +9,10 @@ import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/But
 import Modal from '@/dls/Modal/Modal';
 import CloseIcon from '@/icons/close.svg';
 import MoonIllustrationSVG from '@/public/images/moon-illustration.svg';
-import { selectIsDonationPopupVisible, setIsDonationPopupVisible } from '@/redux/slices/session';
+import {
+  selectIsDonationPopupVisible,
+  setIsDonationPopupVisibleAction,
+} from '@/redux/slices/session';
 import DonateButtonClickSource from '@/types/DonateButtonClickSource';
 import DonateButtonType from '@/types/DonateButtonType';
 import LearnMoreClickSource from '@/types/LearnMoreClickSource';
@@ -22,7 +25,7 @@ const DonatePopup = () => {
 
   const onCloseButtonClicked = () => {
     logButtonClick('donate_popup_close');
-    dispatch({ type: setIsDonationPopupVisible.type, payload: false });
+    dispatch(setIsDonationPopupVisibleAction(false));
   };
 
   if (!isPopupVisible) return null;

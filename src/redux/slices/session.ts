@@ -31,6 +31,11 @@ export const sessionSlice = createSlice({
 
 export const { incrementSessionCount, setIsDonationPopupVisible } = sessionSlice.actions;
 
+export const setIsDonationPopupVisibleAction = (isVisible: boolean) => ({
+  type: setIsDonationPopupVisible.type,
+  payload: isVisible,
+});
+
 export const selectSessionCount = (state: RootState) => state.session.count;
 
 export const selectIsDonationPopupVisible = (state: RootState) =>
