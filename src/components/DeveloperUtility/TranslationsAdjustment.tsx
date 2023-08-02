@@ -8,7 +8,7 @@ import styles from './TranslationsAdjustment.module.scss';
 
 import {
   selectSelectedTranslations,
-  setSelectedTranslations,
+  setSelectedTranslationsAction,
 } from '@/redux/slices/QuranReader/translations';
 import { areArraysEqual, numbersToStringsArray } from '@/utils/array';
 import { getAvailableTranslations } from 'src/api';
@@ -51,10 +51,7 @@ const TranslationsAdjustment = () => {
     const selectedTranslationsIDs = Array.from(e.target.selectedOptions, (option) =>
       Number(option.value),
     );
-    dispatch({
-      type: setSelectedTranslations.type,
-      payload: { translations: selectedTranslationsIDs, locale: lang },
-    });
+    dispatch(setSelectedTranslationsAction(selectedTranslationsIDs, lang));
   };
 
   return (
