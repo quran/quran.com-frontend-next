@@ -4,6 +4,16 @@ import { readingGoalExamples, ReadingGoalTabProps } from './hooks/useReadingGoal
 import OptionButton from './OptionButton';
 import styles from './ReadingGoalPage.module.scss';
 
+type SetExampleAction = {
+  type: 'SET_EXAMPLE';
+  payload: { exampleKey: keyof typeof readingGoalExamples };
+};
+
+const setExampleAction = (exampleKey: keyof typeof readingGoalExamples): SetExampleAction => ({
+  type: 'SET_EXAMPLE',
+  payload: { exampleKey },
+});
+
 const ReadingGoalExamplesTab: React.FC<ReadingGoalTabProps> = ({
   state,
   dispatch,
@@ -27,7 +37,7 @@ const ReadingGoalExamplesTab: React.FC<ReadingGoalTabProps> = ({
               key={example.i18nKey}
               icon={example.icon}
               onSelect={() => {
-                dispatch({ type: 'SET_EXAMPLE', payload: { exampleKey } });
+                dispatch(setExampleAction(exampleKey));
                 logClick(exampleKey);
               }}
               selected={state.exampleKey === exampleKey}
