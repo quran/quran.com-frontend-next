@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import resetSettings from '@/redux/actions/reset-settings';
@@ -134,6 +135,32 @@ export const {
   decreaseWordByWordFontScale,
   setMushafLines,
 } = quranReaderStylesSlice.actions;
+
+export const setQuranFontAction = (event: string) => ({
+  type: setQuranFont.type,
+  payload: { event },
+});
+export const increaseQuranTextFontScaleAction = () => ({
+  type: increaseQuranTextFontScale.type,
+});
+export const decreaseQuranTextFontScaleAction = () => ({
+  type: decreaseQuranTextFontScale.type,
+});
+export const increaseTranslationFontScaleAction = () => ({
+  type: increaseTranslationFontScale.type,
+});
+export const decreaseTranslationFontScaleAction = () => ({
+  type: decreaseTranslationFontScale.type,
+});
+export const increaseTafsirFontScaleAction = () => ({
+  type: increaseTafsirFontScale.type,
+});
+export const decreaseTafsirFontScaleAction = () => ({
+  type: decreaseTafsirFontScale.type,
+});
+export const increaseWordByWordFontScaleAction = () => ({
+  type: increaseWordByWordFontScale.type,
+});
 
 export const selectQuranReaderStyles = (state: RootState) => state.quranReaderStyles;
 export const selectQuranFont = (state: RootState) => state.quranReaderStyles.quranFont;
