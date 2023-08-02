@@ -17,9 +17,9 @@ import IconMenu from '@/icons/menu.svg';
 import IconSearch from '@/icons/search.svg';
 import IconSettings from '@/icons/settings.svg';
 import {
-  setIsSearchDrawerOpen,
-  setIsNavigationDrawerOpen,
-  setIsSettingsDrawerOpen,
+  setIsNavigationDrawerOpenAction,
+  setIsSearchDrawerOpenAction,
+  setIsSettingsDrawerOpenAction,
 } from '@/redux/slices/navbar';
 import { logEvent } from '@/utils/eventLogger';
 
@@ -38,17 +38,17 @@ const NavbarBody: React.FC = () => {
   const dispatch = useDispatch();
   const openNavigationDrawer = () => {
     logDrawerOpenEvent('navigation');
-    dispatch({ type: setIsNavigationDrawerOpen.type, payload: true });
+    dispatch(setIsNavigationDrawerOpenAction(true));
   };
 
   const openSearchDrawer = () => {
     logDrawerOpenEvent('search');
-    dispatch({ type: setIsSearchDrawerOpen.type, payload: true });
+    dispatch(setIsSearchDrawerOpenAction(true));
   };
 
   const openSettingsDrawer = () => {
     logDrawerOpenEvent('settings');
-    dispatch({ type: setIsSettingsDrawerOpen.type, payload: true });
+    dispatch(setIsSettingsDrawerOpenAction(true));
   };
   return (
     <div className={styles.itemsContainer}>
