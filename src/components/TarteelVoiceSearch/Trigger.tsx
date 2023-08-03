@@ -21,6 +21,12 @@ interface Props {
   onClick: (startFlow: boolean) => void;
 }
 
+const isCommandBarAction = (isCommandBar: boolean) => ({
+  type: isCommandBar
+    ? toggleIsCommandBarVoiceFlowStarted.type
+    : toggleIsSearchDrawerVoiceFlowStarted.type,
+});
+
 const TarteelVoiceSearchTrigger: React.FC<Props> = ({ isCommandBar = false, onClick }) => {
   const { t } = useTranslation('common');
   const isSupported = useRef(true);
@@ -40,11 +46,7 @@ const TarteelVoiceSearchTrigger: React.FC<Props> = ({ isCommandBar = false, onCl
 
   const onMicClicked = () => {
     onClick(!showCloseIcon);
-    dispatch({
-      type: isCommandBar
-        ? toggleIsCommandBarVoiceFlowStarted.type
-        : toggleIsSearchDrawerVoiceFlowStarted.type,
-    });
+    dispatch(isCommandBarAction(isCommandBar));
   };
 
   // check whether the microphone is supported first.
