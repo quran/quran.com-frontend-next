@@ -54,6 +54,11 @@ export const addSearchHistoryRecordAction = (searchQuery: string) => ({
   payload: searchQuery,
 });
 
+export const removeSearchHistoryRecordAction = (searchQuery: string) => ({
+  type: removeSearchHistoryRecord.type,
+  payload: searchQuery,
+});
+
 export const selectSearchHistory = (state: RootState) => state.search.searchHistory;
 
 export default searchSlice.reducer;

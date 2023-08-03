@@ -7,7 +7,7 @@ import styles from './SearchHistory.module.scss';
 
 import Header from '@/components/Search/PreInput/Header';
 import SearchQuerySuggestion from '@/components/Search/PreInput/SearchQuerySuggestion';
-import { removeSearchHistoryRecord, selectSearchHistory } from '@/redux/slices/Search/search';
+import { removeSearchHistoryRecordAction, selectSearchHistory } from '@/redux/slices/Search/search';
 import { areArraysEqual } from '@/utils/array';
 import { logButtonClick } from '@/utils/eventLogger';
 
@@ -25,7 +25,7 @@ const SearchHistory: React.FC<Props> = ({ onSearchKeywordClicked, isSearchDrawer
     (searchQuery: string) => {
       // eslint-disable-next-line i18next/no-literal-string
       logButtonClick(`search_${isSearchDrawer ? 'drawer' : 'page'}_remove_query`);
-      dispatch({ type: removeSearchHistoryRecord.type, payload: searchQuery });
+      dispatch(removeSearchHistoryRecordAction(searchQuery));
     },
     [dispatch, isSearchDrawer],
   );
