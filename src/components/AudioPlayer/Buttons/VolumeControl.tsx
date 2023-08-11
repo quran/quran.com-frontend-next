@@ -2,13 +2,13 @@ import { useContext, useEffect, useState } from 'react';
 
 import { useSelector } from '@xstate/react';
 import useTranslation from 'next-translate/useTranslation';
-import Slider from 'react-rangeslider';
 
 import 'react-rangeslider/lib/index.css';
 import styles from './VolumeControl.module.scss';
 
 import Button, { ButtonShape, ButtonVariant } from '@/dls/Button/Button';
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
+import Slider, { Orientation, SliderVariant } from '@/dls/Slider';
 import useDirection from '@/hooks/useDirection';
 import VolumeDownIcon from '@/icons/volume_down.svg';
 import VolumeMuteIcon from '@/icons/volume_mute.svg';
@@ -41,6 +41,12 @@ const VolumeControl = () => {
     } else {
       setVolumeIcon(<VolumeUpIcon />);
     }
+
+    // issue with radix range height, setting part of slider to fill in
+    (document.querySelector(':root') as HTMLElement).style.setProperty(
+      '--volume',
+      `${volume * 100}%`,
+    );
   }, [volume]);
 
   return (
@@ -60,12 +66,20 @@ const VolumeControl = () => {
             </Button>
           }
         >
-          <Slider
-            value={volume * 100}
-            orientation="vertical"
-            format={(p) => `${Math.trunc(p)}%`}
-            onChange={onVolumeChange}
-          />
+          <div className={styles.VolumeControl__SlideContainer}>
+            <Slider
+              min={0}
+              max={100}
+              step={1}
+              label="Volume"
+              name="Volume"
+              withBackground
+              value={[volume * 100]}
+              onValueChange={onVolumeChange}
+              variant={SliderVariant.Primary}
+              orientation={Orientation.Vertical}
+            />
+          </div>
         </PopoverMenu>
       </div>
     </>
