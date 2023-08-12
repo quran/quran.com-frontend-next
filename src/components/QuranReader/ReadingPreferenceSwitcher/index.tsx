@@ -6,6 +6,7 @@ import styles from './ReadingPreferenceSwitcher.module.scss';
 
 import Switch from '@/dls/Switch/Switch';
 import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
+import { selectLastReadVerseKey } from "@/redux/slices/QuranReader/readingTracker";
 import {
   selectReadingPreferences,
   setReadingPreference,
@@ -14,8 +15,10 @@ import { logValueChange } from '@/utils/eventLogger';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 import { ReadingPreference } from 'types/QuranReader';
 
-const ReadingPreferenceSwitcher = () => {
+const ReadingPreferenceSwitcher = ({ size }) => {
   const readingPreferences = useSelector(selectReadingPreferences);
+  const lastReadVerseKey = useSelector(selectLastReadVerseKey);
+  const lastReadVerse = lastReadVerseKey.verseKey?.split(':')[1];
   const { readingPreference } = readingPreferences;
   const {
     actions: { onSettingsChange },
@@ -50,8 +53,7 @@ const ReadingPreferenceSwitcher = () => {
     logValueChange('reading_preference', readingPreference, view);
 
     // drop `startingVerse` from query params
-    const newQueryParams = { ...router.query };
-    delete newQueryParams.startingVerse;
+    const newQueryParams = { ...router.query, startingVerse: lastReadVerse };
     const newUrlObject = {
       pathname: router.pathname,
       query: newQueryParams,
@@ -74,6 +76,7 @@ const ReadingPreferenceSwitcher = () => {
         items={readingPreferencesOptions}
         selected={readingPreference}
         onSelect={onViewSwitched}
+        size={size}
       />
     </div>
   );

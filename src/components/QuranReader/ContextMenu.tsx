@@ -7,7 +7,9 @@ import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import styles from './ContextMenu.module.scss';
+import ReadingPreferenceSwitcher from './ReadingPreferenceSwitcher';
 
+import { SwitchSize } from '@/dls/Switch/Switch';
 import ChevronDownIcon from '@/icons/chevron-down.svg';
 import { selectNavbar } from '@/redux/slices/navbar';
 import { selectContextMenu } from '@/redux/slices/QuranReader/contextMenu';
@@ -31,7 +33,10 @@ const ContextMenu = () => {
   const isSidebarNavigationVisible = useSelector(selectIsSidebarNavigationVisible);
   const { t, lang } = useTranslation('common');
   const isSideBarVisible = useSelector(selectNotes, shallowEqual).isVisible;
-  const { isExpanded } = useSelector(selectContextMenu, shallowEqual);
+  const { isExpanded, showReadingPreferenceSwitcher } = useSelector(
+    selectContextMenu,
+    shallowEqual,
+  );
   const isNavbarVisible = useSelector(selectNavbar, shallowEqual).isVisible;
   const { verseKey, chapterId, page, hizb } = useSelector(selectLastReadVerseKey, shallowEqual);
   const chapterData = useMemo(() => {
@@ -53,6 +58,15 @@ const ContextMenu = () => {
   }
   const verse = getVerseNumberFromKey(verseKey);
   const progress = getChapterReadingProgress(verse, chapterData.versesCount);
+ 
+  let readingPreferenceSize; // defaults to Normal
+  if (showReadingPreferenceSwitcher) {
+    if (isMobile()) {
+      readingPreferenceSize = SwitchSize.Small;
+    } else {
+      readingPreferenceSize = SwitchSize.Normal;
+    }
+  }
 
   return (
     <div
@@ -66,7 +80,7 @@ const ContextMenu = () => {
       style={{ '--progress': `${progress}%` }} // this is to pass the value to css so it can be used to show the progress bar.
     >
       <div className={styles.sectionsContainer}>
-        <div className={styles.section}>
+        <div className={showReadingPreferenceSwitcher ? styles.section : styles.halfSection}>
           <div className={classNames(styles.row)}>
             <p
               className={classNames(styles.bold, styles.alignStart, styles.surahName, {
@@ -100,7 +114,12 @@ const ContextMenu = () => {
             </p>
           </div>
         </div>
-        <div className={classNames(styles.section, styles.leftSection)}>
+        {showReadingPreferenceSwitcher && 
+          <div className={styles.middleSection}>
+            <ReadingPreferenceSwitcher size={readingPreferenceSize} />
+          </div>
+        }
+        <div className={showReadingPreferenceSwitcher ? styles.section : styles.halfSection}>
           <div className={classNames(styles.row)}>
             <p
               className={classNames(styles.alignEnd, {
@@ -108,7 +127,7 @@ const ContextMenu = () => {
               })}
             />
             <p className={classNames(styles.alignEnd)}>
-              {isExpanded && (
+              {isExpanded && !(isMobile() && showReadingPreferenceSwitcher) && (
                 <span className={styles.secondaryInfo}>
                   {/* eslint-disable-next-line i18next/no-literal-string */}
                   {t('juz')} {juzNumber} / {t('hizb')} {localizedHizb} -{' '}
