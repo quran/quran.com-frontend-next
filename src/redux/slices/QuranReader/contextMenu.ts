@@ -21,7 +21,7 @@ export const contextMenuSlice = createSlice({
     setShowReadingPreferenceSwitcher: (state: ContextMenu, action: PayloadAction<boolean>) => ({
       ...state,
       showReadingPreferenceSwitcher: action.payload,
-    })
+    }),
   },
 });
 

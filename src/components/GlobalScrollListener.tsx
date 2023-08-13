@@ -4,8 +4,8 @@ import { useDispatch } from 'react-redux';
 
 import useScrollDirection, { ScrollDirection } from '@/hooks/useScrollDirection';
 import { setIsVisible } from '@/redux/slices/navbar';
-import { 
-  setIsExpanded, 
+import {
+  setIsExpanded,
   setShowReadingPreferenceSwitcher,
 } from '@/redux/slices/QuranReader/contextMenu';
 

@@ -6,11 +6,11 @@ import styles from './ReadingPreferenceSwitcher.module.scss';
 
 import Switch, { SwitchSize } from '@/dls/Switch/Switch';
 import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
-import { selectLastReadVerseKey } from "@/redux/slices/QuranReader/readingTracker";
 import {
   selectReadingPreferences,
   setReadingPreference,
 } from '@/redux/slices/QuranReader/readingPreferences';
+import { selectLastReadVerseKey } from '@/redux/slices/QuranReader/readingTracker';
 import { logValueChange } from '@/utils/eventLogger';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 import { ReadingPreference } from 'types/QuranReader';

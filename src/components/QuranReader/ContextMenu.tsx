@@ -33,7 +33,10 @@ const ContextMenu = () => {
   const isSidebarNavigationVisible = useSelector(selectIsSidebarNavigationVisible);
   const { t, lang } = useTranslation('common');
   const isSideBarVisible = useSelector(selectNotes, shallowEqual).isVisible;
-  const { isExpanded, showReadingPreferenceSwitcher } = useSelector(selectContextMenu, shallowEqual);
+  const { isExpanded, showReadingPreferenceSwitcher } = useSelector(
+    selectContextMenu,
+    shallowEqual,
+  );
   const isNavbarVisible = useSelector(selectNavbar, shallowEqual).isVisible;
   const { verseKey, chapterId, page, hizb } = useSelector(selectLastReadVerseKey, shallowEqual);
   const chapterData = useMemo(() => {
@@ -55,7 +58,7 @@ const ContextMenu = () => {
   }
   const verse = getVerseNumberFromKey(verseKey);
   const progress = getChapterReadingProgress(verse, chapterData.versesCount);
- 
+
   let readingPreferenceSize; // defaults to Normal
   if (showReadingPreferenceSwitcher) {
     if (isMobile()) {
@@ -111,11 +114,11 @@ const ContextMenu = () => {
             </p>
           </div>
         </div>
-        {showReadingPreferenceSwitcher && 
+        {showReadingPreferenceSwitcher && (
           <div className={styles.middleSection}>
             <ReadingPreferenceSwitcher size={readingPreferenceSize} />
           </div>
-        }
+        )}
         <div className={showReadingPreferenceSwitcher ? styles.section : styles.halfSection}>
           <div className={classNames(styles.row)}>
             <p
