@@ -8,7 +8,7 @@ export type ContextMenu = {
   showReadingPreferenceSwitcher: boolean;
 };
 
-const initialState: ContextMenu = { isExpanded: true };
+const initialState: ContextMenu = { isExpanded: true, showReadingPreferenceSwitcher: false };
 
 export const contextMenuSlice = createSlice({
   name: SliceName.CONTEXT_MENU,

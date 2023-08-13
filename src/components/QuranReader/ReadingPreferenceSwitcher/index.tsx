@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import LoadingSwitcher from './ReadingPreferenceOption';
 import styles from './ReadingPreferenceSwitcher.module.scss';
 
-import Switch from '@/dls/Switch/Switch';
+import Switch, { SwitchSize } from '@/dls/Switch/Switch';
 import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
 import { selectLastReadVerseKey } from "@/redux/slices/QuranReader/readingTracker";
 import {
@@ -15,7 +15,11 @@ import { logValueChange } from '@/utils/eventLogger';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 import { ReadingPreference } from 'types/QuranReader';
 
-const ReadingPreferenceSwitcher = ({ size }) => {
+interface Props {
+  size?: SwitchSize;
+}
+
+const ReadingPreferenceSwitcher: React.FC<Props> = ({ size }) => {
   const readingPreferences = useSelector(selectReadingPreferences);
   const lastReadVerseKey = useSelector(selectLastReadVerseKey);
   const lastReadVerse = lastReadVerseKey.verseKey?.split(':')[1];
