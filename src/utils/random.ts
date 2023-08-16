@@ -1,4 +1,8 @@
+/* eslint-disable react-func/max-lines-per-function */
 import random from 'lodash/random';
+
+import { formatChapter } from './chapter';
+import { formatChapterVerse } from './verse';
 
 import ChaptersData from '@/types/ChaptersData';
 
@@ -48,4 +52,57 @@ export const getRandomSurahAyahId = (
   const { id: surahId, lastRead } = surahs[randomIndex];
   const ayahId = getRandomAyahId(data, surahId, lastRead);
   return `${surahId}:${ayahId}`;
+};
+
+export const getRandomAll = (data: ChaptersData, verse: string) => {
+  //  TODO replace this with dynamic list of read surahs and ayahs
+  const surahs = [
+    {
+      id: '1',
+      lastRead: '5',
+    },
+    {
+      id: '5',
+      lastRead: '64',
+    },
+    {
+      id: '114',
+      lastRead: '6',
+    },
+    {
+      id: '51',
+      lastRead: '30',
+    },
+    {
+      id: '64',
+      lastRead: '14',
+    },
+    {
+      id: '89',
+      lastRead: '30',
+    },
+  ];
+
+  const randomSurahId = getRandomSurahId();
+  const randomSurahAyahId = getRandomSurahAyahId(data);
+  const randomReadSurahId = getRandomSurahId(surahs);
+  const randomReadSurahAyahId = getRandomSurahAyahId(data, surahs);
+
+  const randomSurah = formatChapter(data, randomSurahId);
+  const randomSurahAyah = formatChapterVerse(data, randomSurahAyahId, verse);
+
+  const randomReadSurah = formatChapter(data, randomReadSurahId);
+  const randomReadSurahAyah = formatChapterVerse(data, randomReadSurahAyahId, verse);
+
+  return [
+    randomSurahId,
+    randomSurahAyahId,
+    randomReadSurahId,
+    randomReadSurahAyahId,
+
+    randomSurah,
+    randomSurahAyah,
+    randomReadSurah,
+    randomReadSurahAyah,
+  ];
 };

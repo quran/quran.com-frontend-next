@@ -1,0 +1,19 @@
+@use "src/styles/breakpoints";
+@use "src/styles/theme";
+
+.buttonContainer {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.button {
+	background-color: transparent;
+	border: none;
+	color: #fff;
+
+	&:hover {
+		color: #fff;
+		background-color: rgba(#000000, 0.3);
+	}
+}

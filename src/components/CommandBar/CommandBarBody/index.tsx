@@ -23,10 +23,8 @@ import { selectIsCommandBarVoiceFlowStarted } from '@/redux/slices/voiceSearch';
 import SearchQuerySource from '@/types/SearchQuerySource';
 import { makeSearchResultsUrl } from '@/utils/apiPaths';
 import { areArraysEqual } from '@/utils/array';
-import { formatChapter } from '@/utils/chapter';
 import { logButtonClick, logTextSearchQuery } from '@/utils/eventLogger';
-import { getRandomSurahAyahId, getRandomSurahId } from '@/utils/random';
-import { formatChapterVerse } from '@/utils/verse';
+import { getRandomAll } from '@/utils/random';
 import { SearchResponse } from 'types/ApiResponses';
 import { SearchNavigationType } from 'types/SearchNavigationResult';
 
@@ -98,52 +96,17 @@ const CommandBarBody: React.FC = () => {
    * We should only need it to generate the random keys once each time the command bar opens.
    */
   const PICK_RANDOM = useMemo(() => {
-    //  TODO replace this with dynamic list of read surahs and ayahs
-    const surahs = [
-      {
-        id: '1',
-        lastRead: '5',
-      },
-      {
-        id: '5',
-        lastRead: '64',
-      },
-      {
-        id: '114',
-        lastRead: '6',
-      },
-      {
-        id: '51',
-        lastRead: '30',
-      },
-      {
-        id: '64',
-        lastRead: '14',
-      },
-      {
-        id: '89',
-        lastRead: '30',
-      },
-    ];
-
-    const randomSurahId = getRandomSurahId();
-    const randomSurahAyahId = getRandomSurahAyahId(chaptersData);
-    const randomReadSurahId = getRandomSurahId(surahs);
-    const randomReadSurahAyahId = getRandomSurahAyahId(chaptersData, surahs);
-
-    const randomSurah = formatChapter(chaptersData, randomSurahId);
-    const randomSurahAyah = formatChapterVerse(
-      chaptersData,
+    const [
+      randomSurahId,
       randomSurahAyahId,
-      t('verse').toLowerCase(),
-    );
-
-    const randomReadSurah = formatChapter(chaptersData, randomReadSurahId);
-    const randomReadSurahAyah = formatChapterVerse(
-      chaptersData,
+      randomReadSurahId,
       randomReadSurahAyahId,
-      t('verse').toLowerCase(),
-    );
+
+      randomSurah,
+      randomSurahAyah,
+      randomReadSurah,
+      randomReadSurahAyah,
+    ] = getRandomAll(chaptersData, t('verse').toLowerCase());
 
     return [
       {
