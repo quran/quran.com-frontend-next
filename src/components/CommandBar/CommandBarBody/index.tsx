@@ -1,5 +1,6 @@
 /* eslint-disable max-lines */
-import React, { useState, useCallback, useEffect, useMemo } from 'react';
+/* eslint-disable react-func/max-lines-per-function */
+import React, { useState, useCallback, useEffect, useMemo, useContext } from 'react';
 
 import classNames from 'classnames';
 import groupBy from 'lodash/groupBy';
@@ -14,6 +15,7 @@ import DataFetcher from '@/components/DataFetcher';
 import TarteelAttribution from '@/components/TarteelAttribution/TarteelAttribution';
 import VoiceSearchBodyContainer from '@/components/TarteelVoiceSearch/BodyContainer';
 import TarteelVoiceSearchTrigger from '@/components/TarteelVoiceSearch/Trigger';
+import DataContext from '@/contexts/DataContext';
 import useDebounce from '@/hooks/useDebounce';
 import IconSearch from '@/icons/search.svg';
 import { selectRecentNavigations } from '@/redux/slices/CommandBar/state';
@@ -21,7 +23,10 @@ import { selectIsCommandBarVoiceFlowStarted } from '@/redux/slices/voiceSearch';
 import SearchQuerySource from '@/types/SearchQuerySource';
 import { makeSearchResultsUrl } from '@/utils/apiPaths';
 import { areArraysEqual } from '@/utils/array';
+import { formatChapter } from '@/utils/chapter';
 import { logButtonClick, logTextSearchQuery } from '@/utils/eventLogger';
+import { getRandomSurahAyahId, getRandomSurahId } from '@/utils/random';
+import { formatChapterVerse } from '@/utils/verse';
 import { SearchResponse } from 'types/ApiResponses';
 import { SearchNavigationType } from 'types/SearchNavigationResult';
 
@@ -62,6 +67,7 @@ const DEBOUNCING_PERIOD_MS = 1500;
 
 const CommandBarBody: React.FC = () => {
   const { t } = useTranslation('common');
+  const chaptersData = useContext(DataContext);
   const recentNavigations = useSelector(selectRecentNavigations, areArraysEqual);
   const isVoiceSearchFlowStarted = useSelector(selectIsCommandBarVoiceFlowStarted, shallowEqual);
   const [searchQuery, setSearchQuery] = useState<string>(null);
@@ -86,38 +92,86 @@ const CommandBarBody: React.FC = () => {
   }, []);
 
   /**
-   * Memoize this list so that it is not re-generated on every re-render.
-   * We should only need it to generate the random keys once per page load.
+   * This is the list of commands shown in the pre-input view that picks random surahs/ayahs
+   *
+   * We need to memoize this list so that it is not re-generated on every re-render.
+   * We should only need it to generate the random keys once each time the command bar opens.
    */
-  const PICK_RANDOM = useMemo(
-    () => [
+  const PICK_RANDOM = useMemo(() => {
+    //  TODO replace this with dynamic list of read surahs and ayahs
+    const surahs = [
+      {
+        id: '1',
+        lastRead: '5',
+      },
+      {
+        id: '5',
+        lastRead: '64',
+      },
+      {
+        id: '114',
+        lastRead: '6',
+      },
+      {
+        id: '51',
+        lastRead: '30',
+      },
+      {
+        id: '64',
+        lastRead: '14',
+      },
+      {
+        id: '89',
+        lastRead: '30',
+      },
+    ];
+
+    const randomSurahId = getRandomSurahId();
+    const randomSurahAyahId = getRandomSurahAyahId(chaptersData);
+    const randomReadSurahId = getRandomSurahId(surahs);
+    const randomReadSurahAyahId = getRandomSurahAyahId(chaptersData, surahs);
+
+    const randomSurah = formatChapter(chaptersData, randomSurahId);
+    const randomSurahAyah = formatChapterVerse(
+      chaptersData,
+      randomSurahAyahId,
+      t('verse').toLowerCase(),
+    );
+
+    const randomReadSurah = formatChapter(chaptersData, randomReadSurahId);
+    const randomReadSurahAyah = formatChapterVerse(
+      chaptersData,
+      randomReadSurahAyahId,
+      t('verse').toLowerCase(),
+    );
+
+    return [
       {
         name: 'Any surah',
-        key: 36,
+        key: randomSurahId,
         resultType: SearchNavigationType.SURAH,
-        displayName: 'Surah Yasin',
+        displayName: randomSurah,
       },
       {
         name: 'Any ayah',
-        key: '36:5',
+        key: randomSurahAyahId,
         resultType: SearchNavigationType.AYAH,
-        displayName: 'Surah Yasin, verse 5',
+        displayName: randomSurahAyah,
       },
       {
         name: 'Previously read surah',
-        key: 36,
+        key: randomReadSurahId,
         resultType: SearchNavigationType.SURAH,
-        displayName: 'Surah Yasin',
+        displayName: randomReadSurah,
       },
       {
         name: 'Previously read ayah',
-        key: '36:5',
+        key: randomReadSurahAyahId,
         resultType: SearchNavigationType.AYAH,
-        displayName: 'Surah Yasin, verse 5',
+        displayName: randomReadSurahAyah,
       },
-    ],
-    [],
-  );
+    ];
+  }, []);
 
   /**
    * Generate an array of commands that will show in the pre-input view.

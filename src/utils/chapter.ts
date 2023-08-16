@@ -1,7 +1,5 @@
 /* eslint-disable @typescript-eslint/no-var-requires */
 /* eslint-disable global-require */
-import random from 'lodash/random';
-
 import { formatStringNumber } from './number';
 import REVELATION_ORDER from './revelationOrder';
 
@@ -120,6 +118,19 @@ export const getChapterAndVerseMappingForJuz = async (
 };
 
 /**
+ * Formats the given chapter id in a more readable format.
+ *
+ * @param {ChaptersData} data - All chapters data, obtained from ReactContext
+ * @param id - ID of the chapter to format in the following format: "1" or "114"
+ * @returns {string} Formatted chapter name
+ *
+ * @example
+ * formatChapter(data, "1") // "Al-Fatihah"
+ */
+export const formatChapter = (data: ChaptersData, id: string): string =>
+  getChapterData(data, id).transliteratedName;
+
+/**
  * Whether the current surah is the first surah.
  *
  * @param {number} surahNumber
@@ -158,8 +169,3 @@ export const getChapterReadingProgress = (
   currentVerse: number,
   totalNumberOfVerses: number,
 ): number => Math.ceil((currentVerse * 100) / totalNumberOfVerses);
-
-export const QURAN_CHAPTERS_COUNT = 114;
-export const getRandomChapterId = () => {
-  return random(1, QURAN_CHAPTERS_COUNT);
-};
