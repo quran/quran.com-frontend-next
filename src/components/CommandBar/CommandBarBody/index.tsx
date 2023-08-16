@@ -1,5 +1,5 @@
 /* eslint-disable max-lines */
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useCallback, useEffect, useMemo } from 'react';
 
 import classNames from 'classnames';
 import groupBy from 'lodash/groupBy';
@@ -86,8 +86,38 @@ const CommandBarBody: React.FC = () => {
   }, []);
 
   /**
+   * Memoize this list so that it is not re-generated on every re-render.
+   * We should only need it to generate the random keys once per page load.
+   */
+  const PICK_RANDOM = useMemo(
+    () => [
+      {
+        name: 'Any surah',
+        key: 36,
+        resultType: SearchNavigationType.SURAH,
+      },
+      {
+        name: 'Any ayah',
+        key: '36:5',
+        resultType: SearchNavigationType.AYAH,
+      },
+      {
+        name: 'Previously read surah',
+        key: 36,
+        resultType: SearchNavigationType.SURAH,
+      },
+      {
+        name: 'Previously read ayah',
+        key: '36:5',
+        resultType: SearchNavigationType.AYAH,
+      },
+    ],
+    [],
+  );
+
+  /**
    * Generate an array of commands that will show in the pre-input view.
-   * The function takes the original recentNavigations + NAVIGATE_TO and appends
+   * The function takes the original recentNavigations + PICK_RANDOM + NAVIGATE_TO and appends
    * to each the group name + which command is clearable and which is not. The group
    * will be used by {@see groupBy} to compose the list of commands for each group.
    *
@@ -95,20 +125,23 @@ const CommandBarBody: React.FC = () => {
    * @returns {Command[]}
    */
   const getPreInputCommands = useCallback(
-    (): Command[] =>
-      recentNavigations
-        .map((recentNavigation) => ({
-          ...recentNavigation,
-          group: t('command-bar.recent-navigations'),
-          isClearable: true,
-        }))
-        .concat(
-          NAVIGATE_TO.map((navigateToItem) => ({
-            ...navigateToItem,
-            group: t('command-bar.try-navigating'),
-            isClearable: false,
-          })),
-        ),
+    (): Command[] => [
+      ...recentNavigations.map((recentNavigation) => ({
+        ...recentNavigation,
+        group: t('command-bar.recent-navigations'),
+        isClearable: true,
+      })),
+      ...PICK_RANDOM.map((pickRandomItem) => ({
+        ...pickRandomItem,
+        group: t('command-bar.pick-random'),
+        isClearable: false,
+      })),
+      ...NAVIGATE_TO.map((navigateToItem) => ({
+        ...navigateToItem,
+        group: t('command-bar.try-navigating'),
+        isClearable: false,
+      })),
+    ],
     [recentNavigations, t],
   );
 
