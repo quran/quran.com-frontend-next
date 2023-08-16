@@ -73,7 +73,8 @@ const CommandsList: React.FC<Props> = ({ commandGroups: { groups, numberOfComman
   );
   const navigateToLink = useCallback(
     (command: Command) => {
-      const { name, resultType, key } = command;
+      const { name: commandName, resultType, key, displayName } = command;
+      const name = displayName || commandName;
       router.push(resolveUrlBySearchNavigationType(resultType, key)).then(() => {
         dispatch({ type: addRecentNavigation.type, payload: { name, resultType, key } });
         dispatch({ type: setIsOpen.type, payload: false });
