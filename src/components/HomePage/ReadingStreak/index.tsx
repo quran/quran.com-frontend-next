@@ -15,7 +15,6 @@ import Skeleton from '@/dls/Skeleton/Skeleton';
 import useGetRecentlyReadVerseKeys from '@/hooks/auth/useGetRecentlyReadVerseKeys';
 import useGetStreakWithMetadata from '@/hooks/auth/useGetStreakWithMetadata';
 import MoonIllustrationSVG from '@/public/images/moon-illustration.svg';
-import { isLoggedIn } from '@/utils/auth/login';
 import { logButtonClick } from '@/utils/eventLogger';
 import { toLocalizedNumber } from '@/utils/locale';
 import {
@@ -94,11 +93,6 @@ const ReadingStreak: React.FC<ReadingStreakProps> = ({ layout = ReadingStreakLay
   const onViewProgressClick = () => {
     logButtonClick('homepage_streak_widget_view_progress');
   };
-
-  // TODO: remove this after release
-  if (!isLoggedIn()) {
-    return null;
-  }
 
   if (!isQuranReader && (error || (!isLoading && streak === 0 && !goal))) {
     return <StreakIntroductionWidget />;
