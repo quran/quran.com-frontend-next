@@ -110,19 +110,19 @@ export const getFirstWordOfSurah = (
  * Formats the given verse and chapter key in a more readable format.
  *
  * @param {ChaptersData} data - All chapters data, obtained from ReactContext
- * @param id - ID of the chapter to format in the following format: "1" or "114"
- * @param verse - verse string in the user's locale, for example "verse" in english or "آية" in arabic.
+ * @param {string} id - ID of the chapter to format in the following format: "1" or "114"
+ * @param {string} verseString - verse string in the user's locale, for example "verse" in english or "آية" in arabic.
  * @returns {string} Formatted verse and chapter name
  *
  * @example
  * formatChapter(data, "61:10") // returns "Surah As-Saf, verse 10"
  */
-export const formatChapterVerse = (data: ChaptersData, id: string, verse: string): string => {
+export const formatChapterVerse = (data: ChaptersData, id: string, verseString: string): string => {
   const chapterId = getChapterNumberFromKey(id).toString();
   const verseId = getVerseNumberFromKey(id).toString();
   const chapterString = `${getChapterData(data, chapterId).transliteratedName}`;
-  const verseString = `${verse} ${verseId}`;
-  return `${chapterString}, ${verseString}`;
+  const verse = `${verseString} ${verseId}`;
+  return `${chapterString}, ${verse}`;
 };
 
 /**

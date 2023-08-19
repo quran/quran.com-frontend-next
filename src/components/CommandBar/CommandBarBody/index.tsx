@@ -19,6 +19,7 @@ import DataContext from '@/contexts/DataContext';
 import useDebounce from '@/hooks/useDebounce';
 import IconSearch from '@/icons/search.svg';
 import { selectRecentNavigations } from '@/redux/slices/CommandBar/state';
+import { selectSurahLogs } from '@/redux/slices/QuranReader/readingTracker';
 import { selectIsCommandBarVoiceFlowStarted } from '@/redux/slices/voiceSearch';
 import SearchQuerySource from '@/types/SearchQuerySource';
 import { makeSearchResultsUrl } from '@/utils/apiPaths';
@@ -66,6 +67,7 @@ const DEBOUNCING_PERIOD_MS = 1500;
 const CommandBarBody: React.FC = () => {
   const { t } = useTranslation('common');
   const chaptersData = useContext(DataContext);
+  const surahLogs = useSelector(selectSurahLogs, shallowEqual);
   const recentNavigations = useSelector(selectRecentNavigations, areArraysEqual);
   const isVoiceSearchFlowStarted = useSelector(selectIsCommandBarVoiceFlowStarted, shallowEqual);
   const [searchQuery, setSearchQuery] = useState<string>(null);
@@ -96,7 +98,7 @@ const CommandBarBody: React.FC = () => {
    * We should only need it to generate the random keys once each time the command bar opens.
    */
   const PICK_RANDOM = useMemo(() => {
-    const [
+    const {
       randomSurahId,
       randomSurahAyahId,
       randomReadSurahId,
@@ -106,7 +108,7 @@ const CommandBarBody: React.FC = () => {
       randomSurahAyah,
       randomReadSurah,
       randomReadSurahAyah,
-    ] = getRandomAll(chaptersData, t('verse').toLowerCase());
+    } = getRandomAll(chaptersData, surahLogs, t('verse').toLowerCase());
 
     return [
       {
@@ -134,7 +136,7 @@ const CommandBarBody: React.FC = () => {
         displayName: randomReadSurahAyah,
       },
     ];
-  }, []);
+  }, [chaptersData, surahLogs, t]);
 
   /**
    * Generate an array of commands that will show in the pre-input view.

@@ -14,7 +14,8 @@ interface LastReadVerse {
 }
 
 interface SurahReadingLog {
-  lastRead: number;
+  chapterId: string;
+  lastRead: string;
   timestamp: number;
 }
 
@@ -55,9 +56,9 @@ export const readingTrackerSlice = createSlice({
 
       // Create a new surah reading log, making sure that the current verse is further than the last
       const verseNumber = getVerseNumberFromKey(verseKey);
-      const { lastRead: prevVerse = 0 } = surahLogs[chapterId] || {};
-      if (verseNumber > prevVerse) {
-        surahLogs[chapterId] = { lastRead: verseNumber, timestamp: curTime };
+      const { lastRead: prevVerse = '0' } = surahLogs[chapterId] || {};
+      if (verseNumber > parseInt(prevVerse, 10)) {
+        surahLogs[chapterId] = { chapterId, lastRead: verseNumber.toString(), timestamp: curTime };
       }
 
       // if the verse key already exists, and he re-visited it again, we need to mark it as the latest session.

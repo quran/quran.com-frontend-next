@@ -121,7 +121,7 @@ export const getChapterAndVerseMappingForJuz = async (
  * Formats the given chapter id in a more readable format.
  *
  * @param {ChaptersData} data - All chapters data, obtained from ReactContext
- * @param id - ID of the chapter to format in the following format: "1" or "114"
+ * @param {string} id - ID of the chapter to format in the following format: "1" or "114"
  * @returns {string} Formatted chapter name
  *
  * @example
