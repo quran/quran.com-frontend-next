@@ -17,10 +17,10 @@ import { ReadingPreference } from 'types/QuranReader';
 
 interface Props {
   size?: SwitchSize;
-  iconsOnly?: boolean;
+  isIconsOnly?: boolean;
 }
 
-const ReadingPreferenceSwitcher: React.FC<Props> = ({ size, iconsOnly = false }) => {
+const ReadingPreferenceSwitcher: React.FC<Props> = ({ size, isIconsOnly = false }) => {
   const readingPreferences = useSelector(selectReadingPreferences);
   const lastReadVerseKey = useSelector(selectLastReadVerseKey);
   const lastReadVerse = lastReadVerseKey.verseKey?.split(':')[1];
@@ -38,7 +38,7 @@ const ReadingPreferenceSwitcher: React.FC<Props> = ({ size, iconsOnly = false })
           readingPreference={readingPreference}
           selectedReadingPreference={ReadingPreference.Translation}
           isLoading={isLoading}
-          iconsOnly={iconsOnly}
+          isIconsOnly={isIconsOnly}
         />
       ),
       value: ReadingPreference.Translation,
@@ -48,7 +48,8 @@ const ReadingPreferenceSwitcher: React.FC<Props> = ({ size, iconsOnly = false })
         <LoadingSwitcher
           readingPreference={readingPreference}
           selectedReadingPreference={ReadingPreference.Reading}
-          iconsOnly={iconsOnly}
+          isLoading={isLoading}
+          isIconsOnly={isIconsOnly}
         />
       ),
       value: ReadingPreference.Reading,
@@ -60,11 +61,11 @@ const ReadingPreferenceSwitcher: React.FC<Props> = ({ size, iconsOnly = false })
 
     const newQueryParams = { ...router.query };
 
-    // Track `startingVerse` once we're past the start of the page so we can 
+    // Track `startingVerse` once we're past the start of the page so we can
     // continue from the same ayah when switching views. Without the > 1 check,
     // switching views at the start of the page causes unnecessary scrolls
-    if (parseInt(lastReadVerse) > 1) {
-      newQueryParams.startingVerse = lastReadVerse 
+    if (parseInt(lastReadVerse, 10) > 1) {
+      newQueryParams.startingVerse = lastReadVerse;
     }
 
     const newUrlObject = {

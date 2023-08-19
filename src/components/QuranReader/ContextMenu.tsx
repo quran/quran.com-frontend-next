@@ -116,7 +116,7 @@ const ContextMenu = () => {
         </div>
         {showReadingPreferenceSwitcher && (
           <div className={styles.halfSection}>
-            <ReadingPreferenceSwitcher size={readingPreferenceSize} iconsOnly={true} />
+            <ReadingPreferenceSwitcher size={readingPreferenceSize} isIconsOnly />
           </div>
         )}
         <div className={showReadingPreferenceSwitcher ? styles.section : styles.halfSection}>
