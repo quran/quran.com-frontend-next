@@ -1,5 +1,5 @@
 /* eslint-disable react/no-multi-comp */
-import { useRef } from 'react';
+import { useRef, useEffect} from 'react';
 
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
@@ -65,6 +65,10 @@ const SidebarNavigation = () => {
       value: NavigationItem.Page,
     },
   ];
+
+  useEffect(() => {
+    return () => dispatch(setIsVisible(false));
+  }, [])
 
   return (
     <div
