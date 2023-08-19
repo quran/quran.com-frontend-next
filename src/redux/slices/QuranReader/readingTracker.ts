@@ -3,7 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { RootState } from '@/redux/RootState';
 import SliceName from '@/redux/types/SliceName';
-import { getDistanceBetweenVerses } from '@/utils/verse';
+import { getDistanceBetweenVerses, getVerseNumberFromKey } from '@/utils/verse';
 import ChaptersData from 'types/ChaptersData';
 
 interface LastReadVerse {
@@ -13,16 +13,24 @@ interface LastReadVerse {
   hizb: string;
 }
 
+interface SurahReadingLog {
+  lastRead: number;
+  timestamp: number;
+}
+
 export type RecentReadingSessions = Record<string, number>;
+export type SurahLogs = Record<string, SurahReadingLog>;
 
 export type ReadingTracker = {
   lastReadVerse: LastReadVerse;
   recentReadingSessions: RecentReadingSessions;
+  surahLogs: SurahLogs;
 };
 
 const initialState: ReadingTracker = {
   lastReadVerse: { verseKey: null, chapterId: null, page: null, hizb: null },
   recentReadingSessions: {},
+  surahLogs: {},
 };
 
 const NEW_SESSION_BOUNDARY = 20;
@@ -40,17 +48,28 @@ export const readingTrackerSlice = createSlice({
       }>,
     ) => {
       const { lastReadVerse, chaptersData } = action.payload;
+      const { verseKey, chapterId } = lastReadVerse;
+      const surahLogs = { ...state.surahLogs };
       let newRecentReadingSessions = { ...state.recentReadingSessions };
+      const curTime = +new Date();
+
+      // Create a new surah reading log, making sure that the current verse is further than the last
+      const verseNumber = getVerseNumberFromKey(verseKey);
+      const { lastRead: prevVerse = 0 } = surahLogs[chapterId] || {};
+      if (verseNumber > prevVerse) {
+        surahLogs[chapterId] = { lastRead: verseNumber, timestamp: curTime };
+      }
+
       // if the verse key already exists, and he re-visited it again, we need to mark it as the latest session.
       if (newRecentReadingSessions[lastReadVerse.verseKey]) {
         // delete the old entry
         delete newRecentReadingSessions[lastReadVerse.verseKey];
         // insert the same entry again but at the beginning
         newRecentReadingSessions = {
-          [lastReadVerse.verseKey]: +new Date(),
+          [lastReadVerse.verseKey]: curTime,
           ...newRecentReadingSessions,
         };
-        return generateNewState(state, lastReadVerse, newRecentReadingSessions);
+        return generateNewState(state, lastReadVerse, newRecentReadingSessions, surahLogs);
       }
       const sessionsVerseKeys = Object.keys(newRecentReadingSessions);
       const numberOfSessions = sessionsVerseKeys.length;
@@ -66,22 +85,22 @@ export const readingTrackerSlice = createSlice({
       ) {
         delete newRecentReadingSessions[lastReadingSessionVerseKey];
         newRecentReadingSessions = {
-          [lastReadVerse.verseKey]: +new Date(),
+          [lastReadVerse.verseKey]: curTime,
           ...newRecentReadingSessions,
         };
-        return generateNewState(state, lastReadVerse, newRecentReadingSessions);
+        return generateNewState(state, lastReadVerse, newRecentReadingSessions, surahLogs);
       }
       const earliestSession = sessionsVerseKeys[numberOfSessions - 1];
       // insert a new entry at the beginning
       newRecentReadingSessions = {
-        [lastReadVerse.verseKey]: +new Date(),
+        [lastReadVerse.verseKey]: curTime,
         ...newRecentReadingSessions,
       };
       // if the number of sessions already exceeded the maximum, delete the latest session
       if (numberOfSessions + 1 > MAXIMUM_NUMBER_OF_SESSIONS) {
         delete newRecentReadingSessions[earliestSession];
       }
-      return generateNewState(state, lastReadVerse, newRecentReadingSessions);
+      return generateNewState(state, lastReadVerse, newRecentReadingSessions, surahLogs);
     },
   },
 });
@@ -98,11 +117,13 @@ const generateNewState = (
   state: ReadingTracker,
   lastReadVerse: LastReadVerse,
   newRecentReadingSessions: Record<string, number>,
+  surahLogs: SurahLogs,
 ): ReadingTracker => {
   return {
     ...state,
     lastReadVerse,
     recentReadingSessions: newRecentReadingSessions,
+    surahLogs,
   };
 };
 
@@ -111,6 +132,7 @@ export const { setLastReadVerse } = readingTrackerSlice.actions;
 export const selectLastReadVerseKey = (state: RootState) => state.readingTracker.lastReadVerse;
 export const selectRecentReadingSessions = (state: RootState) =>
   state.readingTracker.recentReadingSessions;
+export const selectSurahLogs = (state: RootState) => state.readingTracker.surahLogs;
 export const selectedLastReadPage = (state: RootState) => state.readingTracker.lastReadVerse.page;
 export const selectIsVerseKeySelected = (verseKey: string) => (state: RootState) => {
   const lastReadVerseKey = selectLastReadVerseKey(state);
