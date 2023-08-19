@@ -115,8 +115,8 @@ const ContextMenu = () => {
           </div>
         </div>
         {showReadingPreferenceSwitcher && (
-          <div className={styles.middleSection}>
-            <ReadingPreferenceSwitcher size={readingPreferenceSize} />
+          <div className={styles.halfSection}>
+            <ReadingPreferenceSwitcher size={readingPreferenceSize} iconsOnly={true} />
           </div>
         )}
         <div className={showReadingPreferenceSwitcher ? styles.section : styles.halfSection}>
@@ -127,7 +127,7 @@ const ContextMenu = () => {
               })}
             />
             <p className={classNames(styles.alignEnd)}>
-              {isExpanded && !(isMobile() && showReadingPreferenceSwitcher) && (
+              {isExpanded && (
                 <span className={styles.secondaryInfo}>
                   {/* eslint-disable-next-line i18next/no-literal-string */}
                   {t('juz')} {juzNumber} / {t('hizb')} {localizedHizb} -{' '}

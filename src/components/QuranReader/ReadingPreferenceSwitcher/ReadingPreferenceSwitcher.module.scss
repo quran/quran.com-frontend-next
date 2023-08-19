@@ -1,3 +1,5 @@
+@use "src/styles/breakpoints";
+
 $readingPreferenceMaxWidth: calc(20 * var(--spacing-large));
 .container {
   max-width: $readingPreferenceMaxWidth;
@@ -9,4 +11,23 @@ $readingPreferenceMaxWidth: calc(20 * var(--spacing-large));
   padding-block-end: 0;
   padding-inline-start: var(--spacing-small);
   padding-inline-end: var(--spacing-small);
+
+  button {
+    max-height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    @include breakpoints.smallerThanTablet {
+      max-height: 25px;
+
+      // To ensure active buttons aligns correctly
+      &:nth-child(1) {
+        margin-left: -7px
+      }
+      &:nth-child(2) {
+        margin-right: -7px;
+      }
+    }
+  }
 }
