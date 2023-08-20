@@ -21,7 +21,7 @@ import {
 } from '@/redux/slices/CommandBar/state';
 import { logButtonClick } from '@/utils/eventLogger';
 import { resolveUrlBySearchNavigationType } from '@/utils/navigation';
-import { SearchNavigationResult } from 'types/SearchNavigationResult';
+import { SearchNavigationResult, SearchNavigationType } from 'types/SearchNavigationResult';
 
 export interface Command extends SearchNavigationResult {
   group: string;
@@ -76,7 +76,9 @@ const CommandsList: React.FC<Props> = ({ commandGroups: { groups, numberOfComman
       const { name: commandName, resultType, key, displayName } = command;
       const name = displayName || commandName;
       router.push(resolveUrlBySearchNavigationType(resultType, key)).then(() => {
-        dispatch({ type: addRecentNavigation.type, payload: { name, resultType, key } });
+        if (resultType !== SearchNavigationType.RANDOM_PAGE) {
+          dispatch({ type: addRecentNavigation.type, payload: { name, resultType, key } });
+        }
         dispatch({ type: setIsOpen.type, payload: false });
       });
     },
