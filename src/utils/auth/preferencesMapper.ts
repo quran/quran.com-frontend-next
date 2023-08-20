@@ -32,8 +32,9 @@ const getPreferenceGroupValue = (
   currentSliceValue: any,
 ): Record<string, any> => {
   if (sliceName === SliceName.LOCALE) {
-    return currentSliceValue;
+    return { language: currentSliceValue };
   }
+
   if (sliceName === SliceName.AUDIO_PLAYER_STATE) {
     const { showTooltipWhenPlayingAudio, enableAutoScrolling } = currentSliceValue as AudioState;
     // only partially pick those props
@@ -44,6 +45,7 @@ const getPreferenceGroupValue = (
       enableAutoScrolling,
     };
   }
+
   if (sliceName === SliceName.READING_PREFERENCES) {
     const newPreferences = {
       ...currentSliceValue,
@@ -51,6 +53,7 @@ const getPreferenceGroupValue = (
     delete newPreferences.isUsingDefaultWordByWordLocale;
     return newPreferences;
   }
+
   if (sliceName === SliceName.TRANSLATIONS) {
     const newPreferences = {
       ...currentSliceValue,
@@ -58,6 +61,7 @@ const getPreferenceGroupValue = (
     delete newPreferences.isUsingDefaultTranslations;
     return newPreferences;
   }
+
   if (sliceName === SliceName.TAFSIRS) {
     const newPreferences = {
       ...currentSliceValue,
@@ -65,6 +69,7 @@ const getPreferenceGroupValue = (
     delete newPreferences.isUsingDefaultTafsirs;
     return newPreferences;
   }
+
   if (sliceName === SliceName.QURAN_READER_STYLES) {
     const newPreferences = {
       ...currentSliceValue,
@@ -72,6 +77,7 @@ const getPreferenceGroupValue = (
     delete newPreferences.isUsingDefaultFont;
     return newPreferences;
   }
+
   return {
     ...currentSliceValue,
   };
