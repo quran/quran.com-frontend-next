@@ -254,6 +254,7 @@
         "no-results": "No results found",
         "no-results-suggestion": "We could not find any matching search results for \"{{searchQuery}}\". try searching for a different keyword.",
         "popular": "Popular searches",
+        "random": "Randomly pick",
         "recent": "Recent searches",
         "results": "results",
         "show-all": "Show all results",

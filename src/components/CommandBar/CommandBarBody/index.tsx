@@ -165,7 +165,7 @@ const CommandBarBody: React.FC = () => {
         isClearable: false,
       })),
     ],
-    [recentNavigations, t],
+    [recentNavigations, PICK_RANDOM, t],
   );
 
   /**
