@@ -2,6 +2,7 @@
 import React, { useCallback, useContext, useMemo } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useSelector, shallowEqual } from 'react-redux';
 
@@ -58,6 +59,11 @@ const RandomButton: React.FC = () => {
         },
       );
     }
+    output.push({
+      name: 'Custom selection',
+      key: 'randomPage',
+      slug: 'random',
+    });
     return output;
   }, [chaptersData, surahLogs, t]);
 
@@ -77,9 +83,16 @@ const RandomButton: React.FC = () => {
 
   return (
     <div className={styles.buttonContainer}>
-      <Button prefix={<RepeatIcon />} size={ButtonSize.Small} className={styles.button}>
-        {t('pick-random')}
-      </Button>
+      <Link href="/random">
+        <Button
+          prefix={<RepeatIcon />}
+          size={ButtonSize.Small}
+          href="/random"
+          className={styles.button}
+        >
+          {t('pick-random')}
+        </Button>
+      </Link>
       <PopoverMenu
         trigger={
           <Button shape={ButtonShape.Square} size={ButtonSize.Small} className={styles.button}>

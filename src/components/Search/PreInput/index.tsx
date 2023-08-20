@@ -86,6 +86,11 @@ const PreInput: React.FC<Props> = ({ onSearchKeywordClicked, isSearchDrawer }) =
         url: randomReadSurahAyahId.replace(':', '?startingVerse='),
         surahName: randomReadSurahAyah,
       },
+      {
+        title: 'Custom selection',
+        url: 'random',
+        surahName: 'random_page',
+      },
     ];
   }, [chaptersData, surahLogs, t]);
 

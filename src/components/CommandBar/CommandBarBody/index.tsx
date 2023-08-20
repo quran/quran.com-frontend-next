@@ -135,6 +135,11 @@ const CommandBarBody: React.FC = () => {
         resultType: SearchNavigationType.AYAH,
         displayName: randomReadSurahAyah,
       },
+      {
+        name: 'Custom selection',
+        key: 'random',
+        resultType: SearchNavigationType.RANDOM_PAGE,
+      },
     ];
   }, [chaptersData, surahLogs, t]);
 

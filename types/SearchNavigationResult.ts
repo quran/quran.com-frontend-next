@@ -5,6 +5,7 @@ export enum SearchNavigationType {
   AYAH = 'ayah',
   RUB_EL_HIZB = 'rub_el_hizb',
   SEARCH_PAGE = 'search_page',
+  RANDOM_PAGE = 'random_page',
   PAGE = 'page',
   RANGE = 'range',
 }
