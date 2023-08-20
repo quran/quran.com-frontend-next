@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
-import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from './SurahInput.module.scss';
@@ -17,7 +16,6 @@ type SurahInputProps = {
   surahNumber: number;
   surahName: string;
   versesCount: number;
-  description: string;
   chapterId: number;
   lastVerse?: number;
   isMinimalLayout?: boolean;
@@ -29,7 +27,6 @@ const SurahInput = ({
   surahName,
   surahNumber,
   versesCount,
-  description,
   chapterId,
   lastVerse,
   isMinimalLayout = false,
@@ -41,6 +38,10 @@ const SurahInput = ({
   const localizedSurahNumber = useMemo(
     () => toLocalizedNumber(surahNumber, lang),
     [surahNumber, lang],
+  );
+  const localizedVersesCount = useMemo(
+    () => toLocalizedNumber(versesCount, lang),
+    [versesCount, lang],
   );
 
   useEffect(() => {
@@ -75,9 +76,19 @@ const SurahInput = ({
           />
         </div>
         <div className={styles.right}>
-          {description && (
-            <div className={classNames(styles.description, styles.largeText)}>{description}</div>
-          )}
+          <Input
+            id={`last_ayah_${chapterId}`}
+            size={InputSize.Small}
+            fixedWidth={false}
+            htmlType="number"
+            htmlMin={1}
+            htmlMax={versesCount}
+            value={lastVerse && lastVerse.toString()}
+            onChange={onChangeLastVerse}
+            containerClassName={styles.inputContainer}
+          />
+          <p>/</p>
+          <p className={styles.versesCount}>{localizedVersesCount}</p>
         </div>
       </div>
     );
@@ -111,7 +122,7 @@ const SurahInput = ({
           containerClassName={styles.inputContainer}
         />
         <p>/</p>
-        <p className={styles.versesCount}>{versesCount}</p>
+        <p className={styles.versesCount}>{localizedVersesCount}</p>
       </div>
     </div>
   );

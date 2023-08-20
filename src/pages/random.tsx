@@ -24,7 +24,7 @@ import {
   setCustomSelection,
 } from '@/redux/slices/QuranReader/readingTracker';
 import { getAllChaptersData } from '@/utils/chapter';
-import { getLanguageAlternates, shouldUseMinimalLayout, toLocalizedNumber } from '@/utils/locale';
+import { getLanguageAlternates, shouldUseMinimalLayout } from '@/utils/locale';
 import { getCanonicalUrl } from '@/utils/navigation';
 import { getRandomAll } from '@/utils/random';
 import ChaptersData from 'types/ChaptersData';
@@ -113,7 +113,6 @@ const RandomizerPage = ({ chaptersData }: ReciterPageProps) => {
         <div className={pageStyle.chapterContainer} key={chapterId}>
           <SurahInput
             chapterId={Number(chapterId)}
-            description={`${toLocalizedNumber(versesCount, lang)} ${t('common:ayahs')}`}
             surahName={transliteratedName}
             surahNumber={Number(chapterId)}
             versesCount={versesCount}
@@ -137,7 +136,7 @@ const RandomizerPage = ({ chaptersData }: ReciterPageProps) => {
         </div>
       );
     });
-  }, [chaptersData, search, view, lastVerses, t, lang]);
+  }, [chaptersData, search, view, lastVerses, lang]);
 
   // Load custom selection from redux state, falling back to the surah logs if it doesn't exist
   useEffect(() => {
