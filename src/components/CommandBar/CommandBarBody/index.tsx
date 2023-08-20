@@ -111,7 +111,8 @@ const CommandBarBody: React.FC = () => {
       randomReadSurahAyah,
     } = getRandomAll(chaptersData, customSelection || surahLogs, t('verse').toLowerCase());
 
-    return [
+    //  If the user has no previously read surahs, we need to hide the last 2 options
+    const output = [
       {
         name: t('random.any-surah'),
         key: randomSurahId,
@@ -124,24 +125,31 @@ const CommandBarBody: React.FC = () => {
         resultType: SearchNavigationType.AYAH,
         displayName: randomSurahAyah,
       },
-      {
-        name: t('random.selected-surah'),
-        key: randomReadSurahId,
-        resultType: SearchNavigationType.SURAH,
-        displayName: randomReadSurah,
-      },
-      {
-        name: t('random.selected-ayah'),
-        key: randomReadSurahAyahId,
-        resultType: SearchNavigationType.AYAH,
-        displayName: randomReadSurahAyah,
-      },
-      {
-        name: t('random.edit'),
-        key: 'random',
-        resultType: SearchNavigationType.RANDOM_PAGE,
-      },
     ];
+    if (randomReadSurahId && randomReadSurahAyahId) {
+      output.push(
+        {
+          name: t('random.selected-surah'),
+          key: randomReadSurahId,
+          resultType: SearchNavigationType.SURAH,
+          displayName: randomReadSurah,
+        },
+        {
+          name: t('random.selected-ayah'),
+          key: randomReadSurahAyahId,
+          resultType: SearchNavigationType.AYAH,
+          displayName: randomReadSurahAyah,
+        },
+      );
+    }
+    output.push({
+      name: t('random.edit'),
+      key: 'random',
+      resultType: SearchNavigationType.RANDOM_PAGE,
+      displayName: t('random.edit'),
+    });
+
+    return output;
   }, [chaptersData, customSelection, surahLogs, t]);
 
   /**

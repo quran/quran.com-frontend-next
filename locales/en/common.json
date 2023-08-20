@@ -230,6 +230,7 @@
     "quran-com": "Quran.com",
     "quran-radio": "Quran Radio",
     "random": {
+        "pick-random": "Randomly pick",
         "any-surah": "Any surah",
         "any-ayah": "Any ayah",
         "selected-surah": "Surah from custom selection",

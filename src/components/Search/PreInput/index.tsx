@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 /* eslint-disable react-func/max-lines-per-function */
 import React, { useMemo } from 'react';
 
@@ -66,7 +67,8 @@ const PreInput: React.FC<Props> = ({ onSearchKeywordClicked, isSearchDrawer }) =
       randomReadSurahAyah,
     } = getRandomAll(chaptersData, customSelection || surahLogs, t('verse').toLowerCase());
 
-    return [
+    //  If the user has no previously read surahs, we need to hide the last 2 options
+    const output = [
       {
         title: t('random.any-surah'),
         url: randomSurahId,
@@ -77,22 +79,28 @@ const PreInput: React.FC<Props> = ({ onSearchKeywordClicked, isSearchDrawer }) =
         url: randomSurahAyahId.replace(':', '?startingVerse='),
         surahName: randomSurahAyah,
       },
-      {
-        title: t('random.selected-surah'),
-        url: randomReadSurahId,
-        surahName: randomReadSurah,
-      },
-      {
-        title: t('random.selected-ayah'),
-        url: randomReadSurahAyahId.replace(':', '?startingVerse='),
-        surahName: randomReadSurahAyah,
-      },
-      {
-        title: t('random.edit'),
-        url: 'random',
-        surahName: 'random_page',
-      },
     ];
+    if (randomReadSurahId && randomReadSurahAyahId) {
+      output.push(
+        {
+          title: t('random.selected-surah'),
+          url: randomReadSurahId,
+          surahName: randomReadSurah,
+        },
+        {
+          title: t('random.selected-ayah'),
+          url: randomReadSurahAyahId.replace(':', '?startingVerse='),
+          surahName: randomReadSurahAyah,
+        },
+      );
+    }
+    output.push({
+      title: t('random.edit'),
+      url: 'random',
+      surahName: 'random_page',
+    });
+
+    return output;
   }, [chaptersData, customSelection, surahLogs, t]);
 
   if (!chaptersData) {

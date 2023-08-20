@@ -17,7 +17,7 @@ import { selectCustomSelection, selectSurahLogs } from '@/redux/slices/QuranRead
 import { getRandomAll } from '@/utils/random';
 
 const RandomButton: React.FC = () => {
-  const { t } = useTranslation('quick-links');
+  const { t } = useTranslation('common');
   const router = useRouter();
   const chaptersData = useContext(DataContext);
   const surahLogs = useSelector(selectSurahLogs, shallowEqual);
@@ -91,7 +91,7 @@ const RandomButton: React.FC = () => {
           href="/random"
           className={styles.button}
         >
-          {t('pick-random')}
+          {t('random.pick-random')}
         </Button>
       </Link>
       <PopoverMenu

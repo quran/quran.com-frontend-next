@@ -33,7 +33,7 @@ const initialState: ReadingTracker = {
   lastReadVerse: { verseKey: null, chapterId: null, page: null, hizb: null },
   recentReadingSessions: {},
   surahLogs: {},
-  customSelection: {},
+  customSelection: undefined,
 };
 
 const NEW_SESSION_BOUNDARY = 20;
