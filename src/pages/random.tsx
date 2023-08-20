@@ -172,9 +172,10 @@ const RandomizerPage = ({ chaptersData }: ReciterPageProps) => {
           <div className={pageStyle.flowItem}>
             <Toolbar
               numSelected={Object.keys(lastVerses).length}
-              handlePrimaryOnClick={saveSelection}
-              handleSecondaryOnClick={() => loadPreviouslyRead(false)}
-              handleCheckboxOnChange={handleCheckboxOnChange}
+              handleSaveOnClick={saveSelection}
+              handleLoadOnClick={() => loadPreviouslyRead(false)}
+              handleResetOnClick={() => loadPreviouslyRead(true)}
+              handleSelectOnChange={handleCheckboxOnChange}
             />
           </div>
           <div className={pageStyle.flowItem}>
@@ -186,9 +187,10 @@ const RandomizerPage = ({ chaptersData }: ReciterPageProps) => {
           <div className={pageStyle.flowItem}>
             <Toolbar
               numSelected={Object.keys(lastVerses).length}
-              handlePrimaryOnClick={saveSelection}
-              handleSecondaryOnClick={() => loadPreviouslyRead(false)}
-              handleCheckboxOnChange={handleCheckboxOnChange}
+              handleSaveOnClick={saveSelection}
+              handleLoadOnClick={() => loadPreviouslyRead(false)}
+              handleResetOnClick={() => loadPreviouslyRead(true)}
+              handleSelectOnChange={handleCheckboxOnChange}
             />
           </div>
         </div>

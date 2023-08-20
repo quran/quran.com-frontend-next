@@ -12,16 +12,18 @@ const TOTAL_NUMBER_OF_SURAHS = 114;
 
 type ToolbarProps = {
   numSelected: number;
-  handlePrimaryOnClick: () => void;
-  handleSecondaryOnClick: () => void;
-  handleCheckboxOnChange: (checked: boolean) => void;
+  handleSaveOnClick: () => void;
+  handleLoadOnClick: () => void;
+  handleResetOnClick: () => void;
+  handleSelectOnChange: (checked: boolean) => void;
 };
 
 const Toolbar = ({
   numSelected,
-  handlePrimaryOnClick,
-  handleSecondaryOnClick,
-  handleCheckboxOnChange,
+  handleSaveOnClick,
+  handleLoadOnClick,
+  handleResetOnClick,
+  handleSelectOnChange,
 }: ToolbarProps) => {
   const { t, lang } = useTranslation('random');
   const [isChecked, setIsChecked] = useState<boolean | 'indeterminate'>(false);
@@ -39,14 +41,17 @@ const Toolbar = ({
           id="selectAll"
           checked={isChecked}
           label={`${toLocalizedNumber(numSelected, lang)} ${t('selected')}`}
-          onChange={handleCheckboxOnChange}
+          onChange={handleSelectOnChange}
         />
       </div>
       <div className={styles.right}>
-        <Button type={ButtonType.Secondary} onClick={handleSecondaryOnClick}>
+        <Button type={ButtonType.Secondary} onClick={handleResetOnClick}>
+          {t('reset-changes')}
+        </Button>
+        <Button type={ButtonType.Secondary} onClick={handleLoadOnClick}>
           {t('load-previous')}
         </Button>
-        <Button type={ButtonType.Primary} onClick={handlePrimaryOnClick}>
+        <Button type={ButtonType.Primary} onClick={handleSaveOnClick}>
           {t('save-randomize')}
         </Button>
       </div>
