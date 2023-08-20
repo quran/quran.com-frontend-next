@@ -49,9 +49,7 @@ const SurahPreviewRow = ({
           />
         </div>
         <div className={styles.right}>
-					{description && (
-						<div className={classNames(styles.surahInfoText, styles.description, styles.largeText)}>{description}</div>
-					)}
+					{description && (<div className={classNames(styles.surahInfoText, styles.description, styles.largeText)}>{description}</div>)}
         </div>
       </div>
     );
