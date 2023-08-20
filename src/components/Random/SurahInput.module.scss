@@ -17,8 +17,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: calc(2.5 * var(--spacing-medium));
-  height: calc(2.5 * var(--spacing-medium));
+  width: calc(2 * var(--spacing-medium));
+  height: calc(2 * var(--spacing-medium));
   border-radius: var(--border-radius-default);
   transform: rotate(45deg);
   margin-inline-end: var(--spacing-large);
@@ -36,8 +36,8 @@
 
   & button {
     border: none;
-    width: calc(2.5 * var(--spacing-medium));
-    height: calc(2.5 * var(--spacing-medium));
+    width: calc(2 * var(--spacing-medium));
+    height: calc(2 * var(--spacing-medium));
     font-weight: var(--font-weight-bold);
 
     & span {
