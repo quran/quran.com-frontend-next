@@ -170,7 +170,7 @@ const CommandBarBody: React.FC = () => {
       })),
       ...PICK_RANDOM.map((pickRandomItem) => ({
         ...pickRandomItem,
-        group: t('command-bar.pick-random'),
+        group: t('random.pick-random'),
         isClearable: false,
       })),
       ...NAVIGATE_TO.map((navigateToItem) => ({
