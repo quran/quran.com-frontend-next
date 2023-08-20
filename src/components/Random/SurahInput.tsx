@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
@@ -19,8 +19,10 @@ type SurahInputProps = {
   versesCount: number;
   description: string;
   chapterId: number;
+  lastVerse?: number;
   isMinimalLayout?: boolean;
   isLoading?: boolean;
+  onChangeLastVerse: (lastVerse: string) => void;
 };
 
 const SurahInput = ({
@@ -29,13 +31,30 @@ const SurahInput = ({
   versesCount,
   description,
   chapterId,
+  lastVerse,
   isMinimalLayout = false,
   isLoading = false,
+  onChangeLastVerse,
 }: SurahInputProps) => {
   const { lang } = useTranslation('home');
+  const [isChecked, setIsChecked] = useState<boolean | 'indeterminate'>(false);
   const localizedSurahNumber = useMemo(
     () => toLocalizedNumber(surahNumber, lang),
     [surahNumber, lang],
+  );
+
+  useEffect(() => {
+    if (!lastVerse) setIsChecked(false);
+    else if (lastVerse === versesCount) setIsChecked(true);
+    else setIsChecked('indeterminate');
+  }, [lastVerse, versesCount]);
+
+  const handleCheckboxOnChange = useCallback(
+    (checked: boolean) => {
+      setIsChecked(checked);
+      onChangeLastVerse(checked ? versesCount.toString() : '');
+    },
+    [versesCount, onChangeLastVerse, setIsChecked],
   );
 
   if (isMinimalLayout) {
@@ -43,7 +62,11 @@ const SurahInput = ({
       <div className={styles.container}>
         <div className={styles.left}>
           <div className={styles.checboxContainer}>
-            <Checkbox id={`selection_${chapterId}`} onChange={console.log} />
+            <Checkbox
+              id={`selection_${chapterId}`}
+              checked={isChecked}
+              onChange={handleCheckboxOnChange}
+            />
           </div>
           <ChapterIconContainer
             chapterId={chapterId.toString()}
@@ -63,7 +86,11 @@ const SurahInput = ({
     <div className={styles.container}>
       <div className={styles.left}>
         <div className={styles.checboxContainer}>
-          <Checkbox id={`selection_${chapterId}`} onChange={console.log} />
+          <Checkbox
+            id={`selection_${chapterId}`}
+            checked={isChecked}
+            onChange={handleCheckboxOnChange}
+          />
         </div>
         <div className={styles.surahNameContainer}>
           <div className={styles.surahNumber}>{localizedSurahNumber}</div>
@@ -79,6 +106,8 @@ const SurahInput = ({
           htmlType="number"
           htmlMin={1}
           htmlMax={versesCount}
+          value={lastVerse && lastVerse.toString()}
+          onChange={onChangeLastVerse}
           containerClassName={styles.inputContainer}
         />
         <p>/</p>

@@ -13,7 +13,7 @@ interface LastReadVerse {
   hizb: string;
 }
 
-interface SurahReadingLog {
+export interface SurahReadingLog {
   chapterId: string;
   lastRead: string;
   timestamp: number;
