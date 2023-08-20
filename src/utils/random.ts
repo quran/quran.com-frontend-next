@@ -8,16 +8,15 @@ import { formatChapterVerse } from './verse';
 import { SurahLogs } from '@/redux/slices/QuranReader/readingTracker';
 import ChaptersData from '@/types/ChaptersData';
 
-export const QURAN_CHAPTERS_COUNT = 114;
-
 /**
- * Randomly picks a surah from the 114 surahs in the Quran.
+ * Randomly picks a surah from the given chapter data in the Quran.
  *
+ * @param {ChaptersData} data - The chapter data given from the ReactContext.
  * @param {SurahLogs} surahs - An optional array of surahs to pick from.
  * @returns {string} The surah number.
  */
-export const getRandomSurahId = (surahs?: SurahLogs): string => {
-  if (!surahs) return random(1, QURAN_CHAPTERS_COUNT).toString();
+export const getRandomSurahId = (data: ChaptersData, surahs?: SurahLogs): string => {
+  if (!surahs) return random(1, Object.keys(data).length).toString();
   return sample(Object.keys(surahs));
 };
 
@@ -42,7 +41,7 @@ export const getRandomAyahId = (data: ChaptersData, surah: string, max?: string)
  */
 export const getRandomSurahAyahId = (data: ChaptersData, surahs?: SurahLogs): string => {
   if (!surahs) {
-    const surahId = getRandomSurahId(surahs);
+    const surahId = getRandomSurahId(data, surahs);
     const ayahId = getRandomAyahId(data, surahId);
     return `${surahId}:${ayahId}`;
   }
@@ -66,14 +65,14 @@ export const getRandomAll = (
   surahs: SurahLogs,
   verseString: string,
 ): Record<string, string> => {
-  const randomSurahId = getRandomSurahId();
+  const randomSurahId = getRandomSurahId(data);
   const randomSurahAyahId = getRandomSurahAyahId(data);
 
   const randomSurah = formatChapter(data, randomSurahId);
   const randomSurahAyah = formatChapterVerse(data, randomSurahAyahId, verseString);
 
   if (surahs && Object.keys(surahs).length > 0) {
-    const randomReadSurahId = getRandomSurahId(surahs);
+    const randomReadSurahId = getRandomSurahId(data, surahs);
     const randomReadSurahAyahId = getRandomSurahAyahId(data, surahs);
     const randomReadSurah = formatChapter(data, randomReadSurahId);
     const randomReadSurahAyah = formatChapterVerse(data, randomReadSurahAyahId, verseString);

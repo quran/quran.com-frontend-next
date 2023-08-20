@@ -6,9 +6,8 @@ import styles from './Toolbar.module.scss';
 
 import Button, { ButtonType } from '@/dls/Button/Button';
 import Checkbox from '@/dls/Forms/Checkbox/Checkbox';
+import { QURAN_CHAPTERS_COUNT } from '@/utils/chapter';
 import { toLocalizedNumber } from '@/utils/locale';
-
-const TOTAL_NUMBER_OF_SURAHS = 114;
 
 type ToolbarProps = {
   numSelected: number;
@@ -30,7 +29,7 @@ const Toolbar = ({
 
   useEffect(() => {
     if (!numSelected) setIsChecked(false);
-    else if (numSelected === TOTAL_NUMBER_OF_SURAHS) setIsChecked(true);
+    else if (numSelected === QURAN_CHAPTERS_COUNT) setIsChecked(true);
     else setIsChecked('indeterminate');
   }, [numSelected]);
 

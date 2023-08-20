@@ -21,6 +21,8 @@ const SUPPORTED_CHAPTER_LOCALES = [
   'zh',
 ];
 
+export const QURAN_CHAPTERS_COUNT = 114;
+
 /**
  * Get chapters data from the json file, by language
  *
@@ -154,7 +156,7 @@ export const isFirstSurah = (
  * @returns  {boolean}
  */
 export const isLastSurah = (surahNumber: number, isReadingByRevelationOrder?: boolean): boolean => {
-  if (!isReadingByRevelationOrder) return surahNumber === 114;
+  if (!isReadingByRevelationOrder) return surahNumber === QURAN_CHAPTERS_COUNT;
 
   return REVELATION_ORDER[REVELATION_ORDER.length - 1] === surahNumber;
 };
