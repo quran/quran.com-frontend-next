@@ -36,12 +36,12 @@ const RandomButton: React.FC = () => {
     //  If the user has no previously read surahs, we need to hide the last 2 options
     const output = [
       {
-        name: 'Any surah',
+        name: t('random.any-surah'),
         key: randomSurahId,
         slug: randomSurahId,
       },
       {
-        name: 'Any ayah',
+        name: t('random.any-ayah'),
         key: randomSurahAyahId,
         slug: randomSurahAyahId.replace(':', '?startingVerse='),
       },
@@ -49,19 +49,19 @@ const RandomButton: React.FC = () => {
     if (randomReadSurahId && randomReadSurahAyahId) {
       output.push(
         {
-          name: 'Surah from custom selection',
+          name: t('random.selected-surah'),
           key: randomReadSurahId,
           slug: randomReadSurahId,
         },
         {
-          name: 'Ayah from custom selection',
+          name: t('random.selected-ayah'),
           key: randomReadSurahAyahId,
           slug: randomReadSurahAyahId.replace(':', '?startingVerse='),
         },
       );
     }
     output.push({
-      name: 'Custom selection',
+      name: t('random.edit'),
       key: 'randomPage',
       slug: 'random',
     });

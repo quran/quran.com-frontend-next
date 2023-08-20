@@ -229,6 +229,13 @@
     "q-reflect": "QuranReflect",
     "quran-com": "Quran.com",
     "quran-radio": "Quran Radio",
+    "random": {
+        "any-surah": "Any surah",
+        "any-ayah": "Any ayah",
+        "selected-surah": "Surah from custom selection",
+        "selected-ayah": "Ayah from custom selection",
+        "edit": "Edit custom selection"
+    },
     "reading-history": "Reading history",
     "reading-preference": {
         "reading": "Reading",

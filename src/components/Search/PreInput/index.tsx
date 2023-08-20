@@ -68,27 +68,27 @@ const PreInput: React.FC<Props> = ({ onSearchKeywordClicked, isSearchDrawer }) =
 
     return [
       {
-        title: 'Any surah',
+        title: t('random.any-surah'),
         url: randomSurahId,
         surahName: randomSurah,
       },
       {
-        title: 'Any ayah',
+        title: t('random.any-ayah'),
         url: randomSurahAyahId.replace(':', '?startingVerse='),
         surahName: randomSurahAyah,
       },
       {
-        title: 'Surah from custom selection',
+        title: t('random.selected-surah'),
         url: randomReadSurahId,
         surahName: randomReadSurah,
       },
       {
-        title: 'Ayah from custom selection',
+        title: t('random.selected-ayah'),
         url: randomReadSurahAyahId.replace(':', '?startingVerse='),
         surahName: randomReadSurahAyah,
       },
       {
-        title: 'Edit custom selection',
+        title: t('random.edit'),
         url: 'random',
         surahName: 'random_page',
       },

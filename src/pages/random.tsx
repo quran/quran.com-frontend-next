@@ -144,9 +144,6 @@ const RandomizerPage = ({ chaptersData }: ReciterPageProps) => {
     loadPreviouslyRead(customSelection && Object.keys(customSelection).length > 0);
   }, [customSelection, loadPreviouslyRead]);
 
-  useEffect(() => console.log(customSelection), [customSelection]);
-  useEffect(() => console.log(surahLogs), [surahLogs]);
-
   return (
     <>
       <NextSeoWrapper
