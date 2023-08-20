@@ -12,11 +12,17 @@ const TOTAL_NUMBER_OF_SURAHS = 114;
 
 type ToolbarProps = {
   numSelected: number;
-  loadPreviouslyRead: () => void;
+  handlePrimaryOnClick: () => void;
+  handleSecondaryOnClick: () => void;
   handleCheckboxOnChange: (checked: boolean) => void;
 };
 
-const Toolbar = ({ numSelected, loadPreviouslyRead, handleCheckboxOnChange }: ToolbarProps) => {
+const Toolbar = ({
+  numSelected,
+  handlePrimaryOnClick,
+  handleSecondaryOnClick,
+  handleCheckboxOnChange,
+}: ToolbarProps) => {
   const { t, lang } = useTranslation('random');
   const [isChecked, setIsChecked] = useState<boolean | 'indeterminate'>(false);
 
@@ -37,10 +43,12 @@ const Toolbar = ({ numSelected, loadPreviouslyRead, handleCheckboxOnChange }: To
         />
       </div>
       <div className={styles.right}>
-        <Button type={ButtonType.Secondary} onClick={loadPreviouslyRead}>
+        <Button type={ButtonType.Secondary} onClick={handleSecondaryOnClick}>
           {t('load-previous')}
         </Button>
-        <Button type={ButtonType.Primary}>{t('save-randomize')}</Button>
+        <Button type={ButtonType.Primary} onClick={handlePrimaryOnClick}>
+          {t('save-randomize')}
+        </Button>
       </div>
     </div>
   );

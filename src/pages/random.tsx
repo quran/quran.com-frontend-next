@@ -5,7 +5,8 @@ import classNames from 'classnames';
 import { clamp } from 'lodash';
 import { GetStaticProps } from 'next';
 import useTranslation from 'next-translate/useTranslation';
-import { shallowEqual, useSelector } from 'react-redux';
+import { useRouter } from 'next/router';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import layoutStyle from './index.module.scss';
 import pageStyle from './random.module.scss';
@@ -16,10 +17,16 @@ import Toolbar from '@/components/Random/Toolbar';
 import Input, { InputVariant } from '@/dls/Forms/Input';
 import Tabs from '@/dls/Tabs/Tabs';
 import SearchIcon from '@/icons/search.svg';
-import { SurahReadingLog, selectSurahLogs } from '@/redux/slices/QuranReader/readingTracker';
+import {
+  SurahReadingLog,
+  selectCustomSelection,
+  selectSurahLogs,
+  setCustomSelection,
+} from '@/redux/slices/QuranReader/readingTracker';
 import { getAllChaptersData } from '@/utils/chapter';
 import { getLanguageAlternates, shouldUseMinimalLayout, toLocalizedNumber } from '@/utils/locale';
 import { getCanonicalUrl } from '@/utils/navigation';
+import { getRandomAll } from '@/utils/random';
 import ChaptersData from 'types/ChaptersData';
 
 type ReciterPageProps = {
@@ -34,20 +41,46 @@ const RandomizerPage = ({ chaptersData }: ReciterPageProps) => {
   const [view, setView] = useState('all');
   const [lastVerses, setLastVerses] = useState({});
   const surahLogs = useSelector(selectSurahLogs, shallowEqual);
+  const customSelection = useSelector(selectCustomSelection, shallowEqual);
+  const dispatch = useDispatch();
+  const router = useRouter();
+
+  // Save the custom list of last verses to redux state
+  const saveSelection = useCallback(() => {
+    // eslint-disable-next-line unicorn/no-array-reduce
+    const newSelection = Object.entries(lastVerses).reduce(
+      (acc, [id, lastVerse]) => ({
+        ...acc,
+        [id]: { chapterId: id, lastRead: lastVerse.toString() },
+      }),
+      {},
+    );
+    dispatch(setCustomSelection(newSelection));
+
+    const { randomReadSurahId } = getRandomAll(
+      chaptersData,
+      newSelection,
+      t('verse').toLowerCase(),
+    );
+    router.push(randomReadSurahId);
+  }, [chaptersData, lastVerses, router, dispatch, t]);
 
   // Import last verses from the surah logs
-  const loadPreviouslyRead = useCallback(() => {
-    setLastVerses(
-      // eslint-disable-next-line unicorn/no-array-reduce
-      Object.values(surahLogs).reduce(
-        (acc: Record<string, string>, { chapterId, lastRead }: SurahReadingLog) => ({
-          ...acc,
-          [chapterId]: lastRead.toString(),
-        }),
-        {},
-      ),
-    );
-  }, [surahLogs]);
+  const loadPreviouslyRead = useCallback(
+    (useCustomSelection = false) => {
+      setLastVerses(
+        // eslint-disable-next-line unicorn/no-array-reduce
+        Object.values(useCustomSelection ? customSelection : surahLogs).reduce(
+          (acc: Record<string, string>, { chapterId, lastRead }: SurahReadingLog) => ({
+            ...acc,
+            [chapterId]: lastRead.toString(),
+          }),
+          {},
+        ),
+      );
+    },
+    [customSelection, surahLogs],
+  );
 
   const handleCheckboxOnChange = useCallback(
     (checked: boolean) => {
@@ -106,11 +139,13 @@ const RandomizerPage = ({ chaptersData }: ReciterPageProps) => {
     });
   }, [chaptersData, search, view, lastVerses, t, lang]);
 
+  // Load custom selection from redux state, falling back to the surah logs if it doesn't exist
   useEffect(() => {
-    loadPreviouslyRead();
-  }, [loadPreviouslyRead]);
+    loadPreviouslyRead(customSelection && Object.keys(customSelection).length > 0);
+  }, [customSelection, loadPreviouslyRead]);
 
-  useEffect(() => console.log(lastVerses), [lastVerses]);
+  useEffect(() => console.log(customSelection), [customSelection]);
+  useEffect(() => console.log(surahLogs), [surahLogs]);
 
   return (
     <>
@@ -137,8 +172,9 @@ const RandomizerPage = ({ chaptersData }: ReciterPageProps) => {
           <div className={pageStyle.flowItem}>
             <Toolbar
               numSelected={Object.keys(lastVerses).length}
+              handlePrimaryOnClick={saveSelection}
+              handleSecondaryOnClick={() => loadPreviouslyRead(false)}
               handleCheckboxOnChange={handleCheckboxOnChange}
-              loadPreviouslyRead={loadPreviouslyRead}
             />
           </div>
           <div className={pageStyle.flowItem}>
@@ -150,8 +186,9 @@ const RandomizerPage = ({ chaptersData }: ReciterPageProps) => {
           <div className={pageStyle.flowItem}>
             <Toolbar
               numSelected={Object.keys(lastVerses).length}
+              handlePrimaryOnClick={saveSelection}
+              handleSecondaryOnClick={() => loadPreviouslyRead(false)}
               handleCheckboxOnChange={handleCheckboxOnChange}
-              loadPreviouslyRead={loadPreviouslyRead}
             />
           </div>
         </div>

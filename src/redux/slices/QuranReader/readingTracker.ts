@@ -26,12 +26,14 @@ export type ReadingTracker = {
   lastReadVerse: LastReadVerse;
   recentReadingSessions: RecentReadingSessions;
   surahLogs: SurahLogs;
+  customSelection: SurahLogs;
 };
 
 const initialState: ReadingTracker = {
   lastReadVerse: { verseKey: null, chapterId: null, page: null, hizb: null },
   recentReadingSessions: {},
   surahLogs: {},
+  customSelection: {},
 };
 
 const NEW_SESSION_BOUNDARY = 20;
@@ -103,6 +105,13 @@ export const readingTrackerSlice = createSlice({
       }
       return generateNewState(state, lastReadVerse, newRecentReadingSessions, surahLogs);
     },
+    setCustomSelection: (state: ReadingTracker, action: PayloadAction<SurahLogs>) => {
+      const { payload } = action;
+      return {
+        ...state,
+        customSelection: payload,
+      };
+    },
   },
 });
 
@@ -128,12 +137,13 @@ const generateNewState = (
   };
 };
 
-export const { setLastReadVerse } = readingTrackerSlice.actions;
+export const { setLastReadVerse, setCustomSelection } = readingTrackerSlice.actions;
 
 export const selectLastReadVerseKey = (state: RootState) => state.readingTracker.lastReadVerse;
 export const selectRecentReadingSessions = (state: RootState) =>
   state.readingTracker.recentReadingSessions;
 export const selectSurahLogs = (state: RootState) => state.readingTracker.surahLogs;
+export const selectCustomSelection = (state: RootState) => state.readingTracker.customSelection;
 export const selectedLastReadPage = (state: RootState) => state.readingTracker.lastReadVerse.page;
 export const selectIsVerseKeySelected = (verseKey: string) => (state: RootState) => {
   const lastReadVerseKey = selectLastReadVerseKey(state);

@@ -13,7 +13,7 @@ import Button, { ButtonShape, ButtonSize } from '@/dls/Button/Button';
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import CaretDownIcon from '@/icons/caret-down.svg';
 import RepeatIcon from '@/icons/repeat.svg';
-import { selectSurahLogs } from '@/redux/slices/QuranReader/readingTracker';
+import { selectCustomSelection, selectSurahLogs } from '@/redux/slices/QuranReader/readingTracker';
 import { getRandomAll } from '@/utils/random';
 
 const RandomButton: React.FC = () => {
@@ -21,6 +21,7 @@ const RandomButton: React.FC = () => {
   const router = useRouter();
   const chaptersData = useContext(DataContext);
   const surahLogs = useSelector(selectSurahLogs, shallowEqual);
+  const customSelection = useSelector(selectCustomSelection, shallowEqual);
 
   /**
    * This is the list of options shown in the popover menu to pick a random surah/ayah.
@@ -30,7 +31,7 @@ const RandomButton: React.FC = () => {
    */
   const MENU_OPTIONS = useMemo(() => {
     const { randomSurahId, randomSurahAyahId, randomReadSurahId, randomReadSurahAyahId } =
-      getRandomAll(chaptersData, surahLogs, t('verse').toLowerCase());
+      getRandomAll(chaptersData, customSelection || surahLogs, t('verse').toLowerCase());
 
     //  If the user has no previously read surahs, we need to hide the last 2 options
     const output = [
@@ -65,7 +66,7 @@ const RandomButton: React.FC = () => {
       slug: 'random',
     });
     return output;
-  }, [chaptersData, surahLogs, t]);
+  }, [chaptersData, customSelection, surahLogs, t]);
 
   const renderOptions = useCallback(
     () =>

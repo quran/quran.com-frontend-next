@@ -14,7 +14,7 @@ import Link from '@/dls/Link/Link';
 import useGetChaptersData from '@/hooks/useGetChaptersData';
 import RepeatIcon from '@/icons/repeat.svg';
 import TrendUpIcon from '@/icons/trend-up.svg';
-import { selectSurahLogs } from '@/redux/slices/QuranReader/readingTracker';
+import { selectCustomSelection, selectSurahLogs } from '@/redux/slices/QuranReader/readingTracker';
 import { getChapterData } from '@/utils/chapter';
 import { logButtonClick } from '@/utils/eventLogger';
 import { toLocalizedNumber, toLocalizedVerseKey } from '@/utils/locale';
@@ -32,6 +32,7 @@ const PreInput: React.FC<Props> = ({ onSearchKeywordClicked, isSearchDrawer }) =
   const { t, lang } = useTranslation('common');
   const chaptersData = useGetChaptersData(lang);
   const surahLogs = useSelector(selectSurahLogs, shallowEqual);
+  const customSelection = useSelector(selectCustomSelection, shallowEqual);
 
   const SEARCH_FOR_KEYWORDS = useMemo(() => {
     if (!chaptersData) return [];
@@ -63,7 +64,7 @@ const PreInput: React.FC<Props> = ({ onSearchKeywordClicked, isSearchDrawer }) =
       randomSurahAyah,
       randomReadSurah,
       randomReadSurahAyah,
-    } = getRandomAll(chaptersData, surahLogs, t('verse').toLowerCase());
+    } = getRandomAll(chaptersData, customSelection || surahLogs, t('verse').toLowerCase());
 
     return [
       {
@@ -92,7 +93,7 @@ const PreInput: React.FC<Props> = ({ onSearchKeywordClicked, isSearchDrawer }) =
         surahName: 'random_page',
       },
     ];
-  }, [chaptersData, surahLogs, t]);
+  }, [chaptersData, customSelection, surahLogs, t]);
 
   if (!chaptersData) {
     return <></>;

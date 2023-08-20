@@ -19,7 +19,7 @@ import DataContext from '@/contexts/DataContext';
 import useDebounce from '@/hooks/useDebounce';
 import IconSearch from '@/icons/search.svg';
 import { selectRecentNavigations } from '@/redux/slices/CommandBar/state';
-import { selectSurahLogs } from '@/redux/slices/QuranReader/readingTracker';
+import { selectCustomSelection, selectSurahLogs } from '@/redux/slices/QuranReader/readingTracker';
 import { selectIsCommandBarVoiceFlowStarted } from '@/redux/slices/voiceSearch';
 import SearchQuerySource from '@/types/SearchQuerySource';
 import { makeSearchResultsUrl } from '@/utils/apiPaths';
@@ -68,6 +68,7 @@ const CommandBarBody: React.FC = () => {
   const { t } = useTranslation('common');
   const chaptersData = useContext(DataContext);
   const surahLogs = useSelector(selectSurahLogs, shallowEqual);
+  const customSelection = useSelector(selectCustomSelection, shallowEqual);
   const recentNavigations = useSelector(selectRecentNavigations, areArraysEqual);
   const isVoiceSearchFlowStarted = useSelector(selectIsCommandBarVoiceFlowStarted, shallowEqual);
   const [searchQuery, setSearchQuery] = useState<string>(null);
@@ -108,7 +109,7 @@ const CommandBarBody: React.FC = () => {
       randomSurahAyah,
       randomReadSurah,
       randomReadSurahAyah,
-    } = getRandomAll(chaptersData, surahLogs, t('verse').toLowerCase());
+    } = getRandomAll(chaptersData, customSelection || surahLogs, t('verse').toLowerCase());
 
     return [
       {
@@ -141,7 +142,7 @@ const CommandBarBody: React.FC = () => {
         resultType: SearchNavigationType.RANDOM_PAGE,
       },
     ];
-  }, [chaptersData, surahLogs, t]);
+  }, [chaptersData, customSelection, surahLogs, t]);
 
   /**
    * Generate an array of commands that will show in the pre-input view.
