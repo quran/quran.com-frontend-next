@@ -48,12 +48,12 @@ const RandomButton: React.FC = () => {
     if (randomReadSurahId && randomReadSurahAyahId) {
       output.push(
         {
-          name: 'Previously read surah',
+          name: 'Surah from custom selection',
           key: randomReadSurahId,
           slug: randomReadSurahId,
         },
         {
-          name: 'Previously read ayah',
+          name: 'Ayah from custom selection',
           key: randomReadSurahAyahId,
           slug: randomReadSurahAyahId.replace(':', '?startingVerse='),
         },

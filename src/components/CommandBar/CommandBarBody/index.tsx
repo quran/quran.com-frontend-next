@@ -124,19 +124,19 @@ const CommandBarBody: React.FC = () => {
         displayName: randomSurahAyah,
       },
       {
-        name: 'Previously read surah',
+        name: 'Surah from custom selection',
         key: randomReadSurahId,
         resultType: SearchNavigationType.SURAH,
         displayName: randomReadSurah,
       },
       {
-        name: 'Previously read ayah',
+        name: 'Ayah from custom selection',
         key: randomReadSurahAyahId,
         resultType: SearchNavigationType.AYAH,
         displayName: randomReadSurahAyah,
       },
       {
-        name: 'Custom selection',
+        name: 'Edit custom selection',
         key: 'random',
         resultType: SearchNavigationType.RANDOM_PAGE,
       },
