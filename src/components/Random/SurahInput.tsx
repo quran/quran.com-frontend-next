@@ -45,7 +45,7 @@ const SurahInput = ({
 
   useEffect(() => {
     if (!lastVerse) setIsChecked(false);
-    else if (lastVerse === versesCount) setIsChecked(true);
+    else if (lastVerse.toString() === versesCount.toString()) setIsChecked(true);
     else setIsChecked('indeterminate');
   }, [lastVerse, versesCount]);
 
