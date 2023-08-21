@@ -161,6 +161,7 @@ const RandomizerPage = ({ chaptersData }: ReciterPageProps) => {
               placeholder={t('search')}
               fixedWidth={false}
               variant={InputVariant.Main}
+              value={search}
               onChange={setSearch}
               onClearClicked={() => setSearch('')}
             />
