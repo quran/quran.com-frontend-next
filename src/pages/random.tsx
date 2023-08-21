@@ -12,6 +12,7 @@ import layoutStyle from './index.module.scss';
 import pageStyle from './random.module.scss';
 
 import NextSeoWrapper from '@/components/NextSeoWrapper';
+import { filterSurah } from '@/components/QuranReader/SidebarNavigation/SurahList';
 import SurahInput from '@/components/Random/SurahInput';
 import Toolbar from '@/components/Random/Toolbar';
 import Input, { InputVariant } from '@/dls/Forms/Input';
@@ -24,7 +25,7 @@ import {
   setCustomSelection,
 } from '@/redux/slices/QuranReader/readingTracker';
 import { getAllChaptersData } from '@/utils/chapter';
-import { getLanguageAlternates, shouldUseMinimalLayout } from '@/utils/locale';
+import { getLanguageAlternates, shouldUseMinimalLayout, toLocalizedNumber } from '@/utils/locale';
 import { getCanonicalUrl } from '@/utils/navigation';
 import { getRandomAll } from '@/utils/random';
 import ChaptersData from 'types/ChaptersData';
@@ -106,9 +107,16 @@ const RandomizerPage = ({ chaptersData }: ReciterPageProps) => {
   );
 
   const SURAHS = useMemo(() => {
-    return Object.entries(chaptersData).map(([chapterId, { transliteratedName, versesCount }]) => {
+    const surahList = Object.entries(chaptersData).map(([id, chapter]) => ({
+      ...chapter,
+      id,
+      localizedId: toLocalizedNumber(Number(id), lang),
+    }));
+    const filteredSurahs = search
+      ? filterSurah(surahList, search).sort((a, b) => Number(a.id) - Number(b.id))
+      : surahList;
+    return filteredSurahs.map(({ id: chapterId, transliteratedName, versesCount }) => {
       if (view === 'selected' && !lastVerses[chapterId]) return null;
-      if (!transliteratedName.toLocaleLowerCase().includes(search.toLocaleLowerCase())) return null;
       return (
         <div className={pageStyle.chapterContainer} key={chapterId}>
           <SurahInput

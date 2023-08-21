@@ -21,7 +21,7 @@ import REVELATION_ORDER from '@/utils/revelationOrder';
 import DataContext from 'src/contexts/DataContext';
 import Chapter from 'types/Chapter';
 
-const filterSurah = (surahs: Chapter[], searchQuery: string) => {
+export const filterSurah = (surahs: Chapter[], searchQuery: string) => {
   const fuse = new Fuse(surahs, {
     threshold: 0.3,
     keys: ['id', 'localizedId', 'transliteratedName'],
