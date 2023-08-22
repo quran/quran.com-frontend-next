@@ -7,6 +7,7 @@ import Spinner from '../Spinner/Spinner';
 
 import styles from './Calendar.module.scss';
 
+import { getMonthDateObject, numberToPaddedString } from '@/utils/datetime';
 import { toLocalizedNumber } from '@/utils/locale';
 
 interface CalendarProps {
@@ -21,9 +22,9 @@ const Calendar = ({ month, year, getIsDayDisabled, onDayClick, isLoading }: Cale
   const { lang } = useTranslation();
 
   // YYYY-MM
-  const monthDateString = `${year}-${month.toString().padStart(2, '0')}`;
+  const monthDateString = `${year}-${numberToPaddedString(month)}`;
 
-  const monthDateObj = new Date(year, month, 0);
+  const monthDateObj = getMonthDateObject(year, month);
   const daysInMonth = monthDateObj.getDate();
 
   const getIsDisabled = useCallback(
@@ -46,7 +47,7 @@ const Calendar = ({ month, year, getIsDayDisabled, onDayClick, isLoading }: Cale
         {/* eslint-disable-next-line @typescript-eslint/naming-convention */}
         {Array.from({ length: daysInMonth }).map((_, index) => {
           const day = index + 1;
-          const dateString = `${monthDateString}-${day.toString().padStart(2, '0')}`;
+          const dateString = `${monthDateString}-${numberToPaddedString(day)}`;
 
           const isDisabled = getIsDisabled(day, dateString);
 

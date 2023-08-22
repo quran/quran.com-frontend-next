@@ -1,9 +1,9 @@
-import { makeDateRangeFromMonth } from './datetime';
+import { getCurrentMonth, makeDateRangeFromMonth } from './datetime';
 
 import { ActivityDayType, FilterActivityDaysParams } from '@/types/auth/ActivityDay';
 
 export const getFilterActivityDaysParamsOfCurrentMonth = (): FilterActivityDaysParams => {
-  const currentMonth = new Date().getMonth() + 1;
+  const currentMonth = getCurrentMonth();
   const currentYear = new Date().getFullYear();
 
   return getFilterActivityDaysParams(currentMonth, currentYear);

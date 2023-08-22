@@ -153,17 +153,40 @@ export const getTimezone = (): string => {
 };
 
 /**
+ * Given a Date, return the year, month and day values
+ *
+ * @param {Date} date
+ * @returns {{year: number, month: number, day: number}}
+ */
+export const dateToYearMonthDay = (date: Date): { year: number; month: number; day: number } => {
+  const year = date.getFullYear();
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
+  return { year, month, day };
+};
+
+export const getCurrentMonth = () => new Date().getMonth() + 1;
+
+/**
+ * Converts day, month and year numbers to a formatted string (YYYY-MM-DD).
+ *
+ * @param {number} day
+ * @param {number} month
+ * @param {number} year
+ * @returns {string}
+ */
+export const dateNumbersToString = (day: number, month: number, year: number): string =>
+  `${year}-${numberToPaddedString(month)}-${numberToPaddedString(day)}`;
+
+/**
  * Converts a date instance to a string in this format: YYYY-MM-DD
  *
  * @param {Date} date
  * @returns {string}
  */
 export const dateToDateString = (date: Date): string => {
-  const year = date.getFullYear();
-  const month = date.getMonth() + 1;
-  const day = date.getDate();
-
-  return `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
+  const { year, month, day } = dateToYearMonthDay(date);
+  return dateNumbersToString(day, month, year);
 };
 
 /**
@@ -219,6 +242,16 @@ export const dateToReadableFormat = (
   });
 };
 
+/**
+ * Convert a number into a padded string with 0. E.g. 1 -> 01
+ *
+ * @param {number} number
+ * @returns {string}
+ */
+export const numberToPaddedString = (number: number): string => {
+  return number.toString().padStart(2, '0');
+};
+
 type DateRange = { from: string; to: string };
 
 /**
@@ -229,16 +262,26 @@ type DateRange = { from: string; to: string };
  * @returns {DateRange}
  */
 export const makeDateRangeFromMonth = (month: number, year: number): DateRange => {
-  const from = `${year}-${month.toString().padStart(2, '0')}-01`;
-  const to = `${year}-${month.toString().padStart(2, '0')}-${new Date(year, month, 0)
-    .getDate()
-    .toString()
-    .padStart(2, '0')}`;
+  const from = `${year}-${numberToPaddedString(month)}-01`;
+  const to = `${year}-${numberToPaddedString(month)}-${numberToPaddedString(
+    new Date(year, month, 0).getDate(),
+  )}`;
 
   return { from, to };
 };
 
 type Month = { id: number; name: string; daysCount: number };
+
+/**
+ * Get a Date out of year and month numbers.
+ *
+ * @param {year} year
+ * @param {month} month
+ * @returns {Date}
+ */
+export const getMonthDateObject = (year: number, month: number): Date => {
+  return new Date(year, month, 0);
+};
 
 /**
  * This function returns an array of months in a given year.
@@ -251,7 +294,7 @@ export const getMonthsInYear = (year: number, locale: string): Month[] => {
   const all: Month[] = [];
 
   for (let i = 1; i <= 12; i += 1) {
-    const monthDate = new Date(year, i, 0);
+    const monthDate = getMonthDateObject(year, i);
     const daysInMonth = monthDate.getDate();
 
     all.push({ id: i, name: getFullMonthName(monthDate, locale), daysCount: daysInMonth });

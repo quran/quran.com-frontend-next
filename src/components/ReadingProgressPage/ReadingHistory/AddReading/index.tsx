@@ -25,10 +25,17 @@ import { ActivityDayType } from '@/types/auth/ActivityDay';
 import { getFilterActivityDaysParamsOfCurrentMonth } from '@/utils/activity-day';
 import { updateActivityDay } from '@/utils/auth/api';
 import { makeFilterActivityDaysUrl, makeStreakUrl } from '@/utils/auth/apiPaths';
-import { dateToReadableFormat, getMonthsInYear } from '@/utils/datetime';
+import {
+  dateNumbersToString,
+  dateToReadableFormat,
+  dateToYearMonthDay,
+  getCurrentMonth,
+  getMonthDateObject,
+  getMonthsInYear,
+} from '@/utils/datetime';
 import { logValueChange, logButtonClick, logFormSubmission } from '@/utils/eventLogger';
 
-const ManualReadingLog = () => {
+const AddReading = () => {
   const chaptersData = useContext(DataContext);
   const { t, lang } = useTranslation('reading-progress');
   const [isOpen, setIsOpen] = useState(false);
@@ -36,7 +43,7 @@ const ManualReadingLog = () => {
   const [rangeStart, setRangeStart] = useState<string | null>(null);
   const [rangeEnd, setRangeEnd] = useState<string | null>(null);
   const [ranges, setRanges] = useState<string[]>([]);
-  const [selectedMonth, setSelectedMonth] = useState<number>(new Date().getMonth() + 1);
+  const [selectedMonth, setSelectedMonth] = useState<number>(() => getCurrentMonth());
   const [selectedDate, setSelectedDate] = useState<string | null>(null);
   const selectedYear = useMemo(() => new Date().getFullYear(), []);
   const months = useMemo(() => getMonthsInYear(selectedYear, lang), [selectedYear, lang]);
@@ -109,6 +116,47 @@ const ManualReadingLog = () => {
       startVerse: rangeStart,
       endVerse: rangeEnd,
     });
+  };
+
+  const currentMonthDisabledDaysMap = useMemo(() => {
+    const { month: currentMonth, day: currentDay } = dateToYearMonthDay(new Date());
+    const disabledDays = new Map();
+    // if the current month is the selected month
+    if (selectedMonth === currentMonth) {
+      const daysInMonth = getMonthDateObject(selectedYear, currentMonth).getDate();
+      // eslint-disable-next-line @typescript-eslint/naming-convention
+      Array.from({ length: daysInMonth }).forEach((_, index) => {
+        const dayNumber = index + 1;
+        // if the day of the loop exceeds the current day, disable it
+        if (dayNumber > currentDay) {
+          // YYYY-MM-DD
+          disabledDays.set(dateNumbersToString(dayNumber, currentMonth, selectedYear), true);
+        }
+      });
+    }
+
+    return disabledDays;
+  }, [selectedMonth, selectedYear]);
+
+  /**
+   * Check if a day is disabled. A day is disabled if it's later than today.
+   *
+   * @param {number} day
+   * @param {string} dateString
+   * @returns {boolean}
+   */
+  const getIsDayDisabled = (day: number, dateString: string): boolean => {
+    const currentMonth = getCurrentMonth();
+    // if the selected month is before the current month, don't disable any day
+    if (selectedMonth < currentMonth) {
+      return false;
+    }
+    // if the selected month is after the current month, disable all of the days
+    if (selectedMonth > currentMonth) {
+      return true;
+    }
+    // for the current month, we need to check which days are later than today and disable them
+    return !!currentMonthDisabledDaysMap.has(dateString);
   };
 
   const onSubmitClick = () => {
@@ -199,6 +247,7 @@ const ManualReadingLog = () => {
                 month={selectedMonthObj?.id as any}
                 year={selectedYear}
                 onDayClick={onDayClick}
+                getIsDayDisabled={getIsDayDisabled}
               />
             </>
           ) : (
@@ -235,4 +284,4 @@ const ManualReadingLog = () => {
   );
 };
 
-export default ManualReadingLog;
+export default AddReading;
