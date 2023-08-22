@@ -92,13 +92,6 @@
   opacity: var(--opacity-50);
 }
 
-.successVerseAction {
-  color: var(--color-success-deep) !important;
-  background-color: var(--color-success-deep) !important;
-  @include utility.lighten-background-color;
-  cursor: disabled;
-}
-
 .icon {
   display: inline-flex;
   align-items: center;
