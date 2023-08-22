@@ -24,7 +24,7 @@ import ArrowLeft from '@/icons/west.svg';
 import { ActivityDayType } from '@/types/auth/ActivityDay';
 import { getFilterActivityDaysParamsOfCurrentMonth } from '@/utils/activity-day';
 import { updateActivityDay } from '@/utils/auth/api';
-import { makeFilterActivityDaysUrl } from '@/utils/auth/apiPaths';
+import { makeFilterActivityDaysUrl, makeStreakUrl } from '@/utils/auth/apiPaths';
 import { dateToReadableFormat, getMonthsInYear } from '@/utils/datetime';
 import { logValueChange, logButtonClick, logFormSubmission } from '@/utils/eventLogger';
 
@@ -42,7 +42,7 @@ const ManualReadingLog = () => {
   const months = useMemo(() => getMonthsInYear(selectedYear, lang), [selectedYear, lang]);
   const mushaf = useGetMushaf();
   const toast = useToast();
-  const { cache } = useSWRConfig();
+  const { cache, mutate } = useSWRConfig();
 
   const onClose = () => {
     setIsOpen(false);
@@ -127,6 +127,7 @@ const ManualReadingLog = () => {
           getFilterActivityDaysParamsOfCurrentMonth(),
         );
         cache.delete(currentMonthHistoryUrl);
+        mutate(makeStreakUrl());
         // close the modal
         onClose();
         toast(t('add-data-success'), {
