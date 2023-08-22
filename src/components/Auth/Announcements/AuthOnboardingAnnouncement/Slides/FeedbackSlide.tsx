@@ -11,7 +11,7 @@ const FeedbackSlide = ({ action }) => {
       description={
         <Trans
           components={{
-            link: <Link href="https://feedback.quran.com" variant={LinkVariant.Blend} />,
+            link: <Link href="https://feedback.quran.com" variant={LinkVariant.Blend} isNewTab />,
           }}
           i18nKey="common:announcements.auth-onboarding.feedback.description"
         />

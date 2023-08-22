@@ -5,9 +5,11 @@ import dynamic from 'next/dynamic';
 import { shallowEqual, useSelector } from 'react-redux';
 
 import DataFetcher from '@/components/DataFetcher';
+import { REFLECTIONS_OBSERVER_ID } from '@/components/QuranReader/observer';
 import TafsirSkeleton from '@/components/QuranReader/TafsirView/TafsirSkeleton';
+import useGlobalIntersectionObserverWithDelay from '@/hooks/useGlobalIntersectionObserverWithDelay';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
-import { makeAyahReflectionsUrl } from '@/utils/quranReflect/apiPaths';
+import { makeAyahReflectionsUrl, postReflectionViews } from '@/utils/quranReflect/apiPaths';
 import AyahReflectionsResponse from 'types/QuranReflect/AyahReflectionsResponse';
 
 const ReflectionSurahAndAyahSelection = dynamic(() => import('./ReflectionSurahAndAyahSelection'), {
@@ -35,6 +37,19 @@ const ReflectionBodyContainer = ({
   const [selectedVerseNumber, setSelectedVerseNumber] = useState(initialVerseNumber);
   const { translationFontScale } = useSelector(selectQuranReaderStyles, shallowEqual);
   const { lang } = useTranslation();
+
+  const onReflectionViewed = useCallback((reflectionContainer: Element) => {
+    const postId = reflectionContainer.getAttribute('data-post-id');
+    // eslint-disable-next-line @typescript-eslint/no-empty-function
+    postReflectionViews(postId).catch(() => {});
+  }, []);
+  useGlobalIntersectionObserverWithDelay(
+    { threshold: 1 },
+    onReflectionViewed,
+    REFLECTIONS_OBSERVER_ID,
+    'postId',
+    'countAsViewedAfter',
+  );
 
   const renderBody = useCallback(
     (data: AyahReflectionsResponse) => (

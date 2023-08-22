@@ -13,6 +13,11 @@
                 "description": "Bedankt voor het gebruik van Quran.com en we horen graag uw feedback op <link> feedback.quran.com <\/link>",
                 "title": "We willen je gedachten horen"
             },
+            "quran-foundation-link": {
+                "action": "Volgende",
+                "description": "Gebruik uw Quran.com-login voor toegang tot QuranReflect.com - een bloeiende wereldwijde gemeenschap die zich bezighoudt met koranreflectie.",
+                "title": "Gebruik uw account in alle Quran.Foundation-apps!"
+            },
             "quran-growth-journey": {
                 "action": "Volgende",
                 "description": "Behoud uw koranleesreeks en boek vooruitgang bij het behalen van uw doelen terwijl u nieuwe gewoonten opbouwt",

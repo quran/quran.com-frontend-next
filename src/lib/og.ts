@@ -7,6 +7,9 @@ interface BaseOgOptions {
 export const getDefaultOgImageUrl = ({ locale }: BaseOgOptions) =>
   `${BASE_OG_URL}/api/og?lang=${locale}`;
 
+export const getAboutTheQuranImageUrl = ({ locale }: BaseOgOptions) =>
+  `${BASE_OG_URL}/api/og/about-the-quran?lang=${locale}`;
+
 export const getChapterOgImageUrl = ({
   chapterId,
   locale,

@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 /* eslint-disable jsx-a11y/anchor-has-content */
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import Trans from 'next-translate/Trans';
@@ -63,6 +64,19 @@ const DevelopersPage = () => {
                   <a
                     key={0}
                     href="https://github.com/quran/quran.com-api"
+                    target="_blank"
+                    rel="noreferrer"
+                  />,
+                ]}
+              />
+            </p>
+            <p>
+              <Trans
+                i18nKey="developers:projects.q-api-docs"
+                components={[
+                  <a
+                    key={0}
+                    href="https://api-docs.quran.com/quran.com/v4"
                     target="_blank"
                     rel="noreferrer"
                   />,

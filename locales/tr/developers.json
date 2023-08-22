@@ -8,6 +8,7 @@
         "all": "Tamamı Github'da barındırılan bir dizi projemiz var. Hepsi <0>burada<\/0> . Özetlemek gerekirse:",
         "q-android": "<0>Kuran Android<\/0>",
         "q-api": "<0>Quran.com API'si<\/0> - Ruby on Rails ile yazılmıştır.",
+        "q-api-docs": "<0> Kuran.com API Belgeleri <\/0> - API belgeleri portalımız.",
         "q-audio": "<0>Kuran Sesleri<\/0> ve <1>Kuran Sesleri mobil uygulamaları<\/1>",
         "q-audio-segments": "<0>Kuran Ses Bölümleri<\/0>",
         "q-ios": "<0>Kuran iOS<\/0>",

@@ -34,6 +34,7 @@ type AyahReflection = {
   language: ReflectionLanguage;
   trimmedCitationTexts: TrimmedCitationTexts;
   filters: ReflectionFilter[];
+  estimatedReadingTime: number;
 };
 
 export default AyahReflection;

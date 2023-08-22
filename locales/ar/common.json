@@ -13,6 +13,11 @@
                 "description": "شكرا لاستخدامك موقع قرآن دوت كوم ويسعدنا سماع ملاحظاتك على <link> feedback.quran.com <\/link>",
                 "title": "نريد أن نسمع أفكارك"
             },
+            "quran-foundation-link": {
+                "action": "التالي",
+                "description": "استخدم تسجيل الدخول الخاص بك إلى موقع Quran.com للوصول إلى موقع QuranReflect.com - مجتمع عالمي مزدهر يشارك في التفكير القرآني.",
+                "title": "استخدم حسابك عبر تطبيقات Quran.Foundation."
+            },
             "quran-growth-journey": {
                 "action": "التالي",
                 "description": "حافظ على خطة قراءة القرآن الخاص بك وحقق أهدافك من خلال بناء عادات جديدة",
