@@ -21,6 +21,7 @@ export type ActivityDay = {
 export type UpdateActivityDayBody = {
   ranges?: string[];
   pages?: number;
+  date?: string;
   seconds?: number;
   mushafId: Mushaf;
   type: ActivityDayType;

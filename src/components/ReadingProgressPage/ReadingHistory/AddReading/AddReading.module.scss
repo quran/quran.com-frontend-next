@@ -1,0 +1,17 @@
+.calendarMonthSelector {
+  margin-block-end: var(--spacing-medium);
+  display: flex;
+  align-items: center;
+  margin-inline: auto;
+  justify-content: center;
+  gap: var(--spacing-medium);
+  font-size: var(--font-size-large);
+}
+
+.verseRangesListContainer {
+  margin-block-start: var(--spacing-mega);
+}
+
+.selectedDateHeaderContainer {
+  display: flex;
+}

@@ -20,6 +20,7 @@
   display: flex;
   align-items: center;
   gap: var(--spacing-medium);
+  justify-content: space-between;
 }
 
 .modalHeader {
@@ -144,14 +145,4 @@
       height: calc(var(--spacing-mega) * 1.2);
     }
   }
-}
-
-.calendarMonthSelector {
-  margin-block-end: var(--spacing-medium);
-  display: flex;
-  align-items: center;
-  margin-inline: auto;
-  justify-content: center;
-  gap: var(--spacing-medium);
-  font-size: var(--font-size-large);
 }

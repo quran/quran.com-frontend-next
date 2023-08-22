@@ -70,14 +70,16 @@ const ReadingHistory = () => {
       )}
 
       <div className={styles.title}>
-        <h1>{t('history')}</h1>
-        <Select
-          id="reading-history-year-select"
-          name="reading-history-year-select"
-          options={availableYears}
-          value={selectedYear.toString()}
-          onChange={onYearChange}
-        />
+        <div>
+          <h1>{t('history')}</h1>
+          <Select
+            id="reading-history-year-select"
+            name="reading-history-year-select"
+            options={availableYears}
+            value={selectedYear.toString()}
+            onChange={onYearChange}
+          />
+        </div>
         <AddReading />
       </div>
 

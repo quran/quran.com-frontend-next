@@ -22,5 +22,8 @@
     "no-reading-history-for": "No reading history for {{date}}",
     "reading-progress-header": "Your Progress",
     "reading-progress-streak": "Streak",
-    "you-read": "You read:"
+    "you-read": "You read:",
+    "manually-add": "Manually add readings",
+    "add": "Add",
+    "add-data-success": "Your reading data has been added successfully."
 }

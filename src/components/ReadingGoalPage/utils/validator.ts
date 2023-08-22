@@ -1,17 +1,22 @@
 /* eslint-disable import/prefer-default-export */
-import { GoalType } from '@/types/auth/Goal';
-import ChaptersData from '@/types/ChaptersData';
 import { isValidPageId, isValidVerseKey } from '@/utils/validator';
 import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
+import { GoalType } from 'types/auth/Goal';
+import ChaptersData from 'types/ChaptersData';
 
 const SECONDS_LIMIT = 4 * 60 * 60; // 4 hours
 const MIN_SECONDS = 60; // 1 minute
+
+interface Range {
+  startVerse: string;
+  endVerse: string;
+}
 
 interface ReadingGoalPayload {
   type: GoalType;
   pages?: number;
   seconds?: number;
-  range?: { startVerse: string; endVerse: string };
+  range?: Range;
 }
 
 /**
@@ -39,22 +44,38 @@ export const validateReadingGoalData = (
 
   // if the user selected a range goal and didn't enter a valid range, disable the next button
   if (type === GoalType.RANGE) {
-    if (!range?.startVerse || !range?.endVerse) return false;
-    if (
-      !isValidVerseKey(chaptersData, range.startVerse) ||
-      !isValidVerseKey(chaptersData, range.endVerse)
-    ) {
-      return false;
-    }
-
-    // check if the starting verse key is greater than the ending verse key
-    const [startingChapter, startingVerse] = getVerseAndChapterNumbersFromKey(range.startVerse);
-    const [endingChapter, endingVerse] = getVerseAndChapterNumbersFromKey(range.endVerse);
-
-    if (startingChapter === endingChapter && Number(startingVerse) > Number(endingVerse)) {
-      return false;
-    }
+    return areValidReadingRanges(chaptersData, range);
   }
 
+  return true;
+};
+
+/**
+ * Check wether the ranges are valid or not.
+ *
+ * @param {ChaptersData} chaptersData
+ * @param {Range} range
+ * @returns {boolean}
+ */
+export const areValidReadingRanges = (chaptersData: ChaptersData, range?: Range): boolean => {
+  if (!range?.startVerse || !range?.endVerse) return false;
+  if (
+    !isValidVerseKey(chaptersData, range.startVerse) ||
+    !isValidVerseKey(chaptersData, range.endVerse)
+  ) {
+    return false;
+  }
+
+  // check if the starting verse key is greater than the ending verse key
+  const [startingChapter, startingVerse] = getVerseAndChapterNumbersFromKey(range.startVerse);
+  const [endingChapter, endingVerse] = getVerseAndChapterNumbersFromKey(range.endVerse);
+  // if it's the same Surah but in reverse order
+  if (startingChapter === endingChapter && Number(startingVerse) > Number(endingVerse)) {
+    return false;
+  }
+  // if it's the range Surahs are in reverse order
+  if (Number(startingChapter) > Number(endingChapter)) {
+    return false;
+  }
   return true;
 };

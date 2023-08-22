@@ -2,10 +2,14 @@ import { useContext } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
+import styles from './VerseRangesList.module.scss';
+
 import DataContext from '@/contexts/DataContext';
+import Button, { ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import Link, { LinkVariant } from '@/dls/Link/Link';
 import { RangeItemDirection } from '@/types/Range';
 import { getChapterData } from '@/utils/chapter';
+import { logButtonClick } from '@/utils/eventLogger';
 import { toLocalizedNumber } from '@/utils/locale';
 import { getChapterWithStartingVerseUrl } from '@/utils/navigation';
 import { parseVerseRange } from '@/utils/verseKeys';
@@ -13,9 +17,16 @@ import { parseVerseRange } from '@/utils/verseKeys';
 interface VerseRangesListProps {
   ranges: string[];
   onVerseClick?: (position: RangeItemDirection, verseKey: string) => void;
+  allowClearingRanges?: boolean;
+  setRanges?: (ranges: string[]) => void;
 }
 
-const VerseRangesList = ({ ranges, onVerseClick }: VerseRangesListProps) => {
+const VerseRangesList = ({
+  ranges,
+  onVerseClick,
+  allowClearingRanges,
+  setRanges,
+}: VerseRangesListProps) => {
   const { t, lang } = useTranslation('reading-goal');
   const chaptersData = useContext(DataContext);
 
@@ -23,6 +34,14 @@ const VerseRangesList = ({ ranges, onVerseClick }: VerseRangesListProps) => {
     if (!onVerseClick) return;
 
     onVerseClick(position, verseKey);
+  };
+
+  const handleRangeDeleteClick = (toBeRemovedRange: string) => {
+    logButtonClick('add_reading_range_remove', {
+      range: toBeRemovedRange,
+    });
+    const newRanges = ranges.filter((range) => range !== toBeRemovedRange);
+    setRanges(newRanges);
   };
 
   const all: React.ReactNode[] = [];
@@ -43,23 +62,35 @@ const VerseRangesList = ({ ranges, onVerseClick }: VerseRangesListProps) => {
     )}`;
 
     all.push(
-      <>
-        <Link
-          href={getChapterWithStartingVerseUrl(rangeFrom)}
-          variant={LinkVariant.Blend}
-          onClick={() => handleVerseClick(RangeItemDirection.From, rangeFrom)}
-        >
-          {from}
-        </Link>
-        {` ${t('common:to')} `}
-        <Link
-          href={getChapterWithStartingVerseUrl(rangeTo)}
-          variant={LinkVariant.Blend}
-          onClick={() => handleVerseClick(RangeItemDirection.To, rangeTo)}
-        >
-          {to}
-        </Link>
-      </>,
+      <div className={styles.rowContainer}>
+        <div>
+          <Link
+            href={getChapterWithStartingVerseUrl(rangeFrom)}
+            variant={LinkVariant.Blend}
+            onClick={() => handleVerseClick(RangeItemDirection.From, rangeFrom)}
+          >
+            {from}
+          </Link>
+          {` ${t('common:to')} `}
+          <Link
+            href={getChapterWithStartingVerseUrl(rangeTo)}
+            variant={LinkVariant.Blend}
+            onClick={() => handleVerseClick(RangeItemDirection.To, rangeTo)}
+          >
+            {to}
+          </Link>
+        </div>
+        {allowClearingRanges && (
+          <Button
+            size={ButtonSize.Small}
+            variant={ButtonVariant.Compact}
+            onClick={() => handleRangeDeleteClick(range)}
+            // eslint-disable-next-line i18next/no-literal-string
+          >
+            X
+          </Button>
+        )}
+      </div>,
     );
   });
 
