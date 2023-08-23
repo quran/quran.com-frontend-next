@@ -1,3 +1,7 @@
+.outerContainer {
+  min-height: calc(var(--spacing-mega) * 9.3);
+}
+
 .calendarContainer {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
@@ -35,8 +39,4 @@
       }
     }
   }
-}
-
-.calendarSpinner {
-  margin-block-end: var(--spacing-medium);
 }

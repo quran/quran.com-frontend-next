@@ -4,9 +4,7 @@ import { useMemo, useState, useContext } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import { useSWRConfig } from 'swr';
 
-import styles from '../ReadingHistory.module.scss';
-
-import addReadingStyles from './AddReading.module.scss';
+import styles from './AddReading.module.scss';
 
 import VerseRangesList from '@/components/ReadingGoal/ReadingGoalAmount/VerseRangesList';
 import VerseRangeInput from '@/components/ReadingGoal/ReadingGoalInput/VerseRangeInput';
@@ -55,6 +53,8 @@ const AddReading = () => {
     setIsOpen(false);
     // reset ranges
     setRanges([]);
+    // reset selected date
+    setSelectedDate(null);
   };
 
   const onOpenClick = () => {
@@ -200,7 +200,7 @@ const AddReading = () => {
           <Modal.Header>
             <Modal.Title>
               {selectedDate ? (
-                <div className={addReadingStyles.selectedDateHeaderContainer}>
+                <div className={styles.selectedDateHeaderContainer}>
                   <Button
                     size={ButtonSize.Medium}
                     variant={ButtonVariant.Ghost}
@@ -224,7 +224,7 @@ const AddReading = () => {
           </Modal.Header>
           {!selectedDate ? (
             <>
-              <div className={addReadingStyles.calendarMonthSelector}>
+              <div className={styles.calendarMonthSelector}>
                 <Button
                   variant={ButtonVariant.Ghost}
                   shape={ButtonShape.Circle}
@@ -233,7 +233,7 @@ const AddReading = () => {
                 >
                   <ChevronLeft />
                 </Button>
-                <p>{selectedMonthObj.name}</p>
+                <p className={styles.monthName}>{selectedMonthObj.name}</p>
                 <Button
                   variant={ButtonVariant.Ghost}
                   shape={ButtonShape.Circle}
@@ -261,7 +261,7 @@ const AddReading = () => {
                 {t('add')}
               </Button>
 
-              <div className={addReadingStyles.verseRangesListContainer}>
+              <div className={styles.verseRangesListContainer}>
                 <VerseRangesList ranges={ranges} allowClearingRanges setRanges={setRanges} />
               </div>
             </>

@@ -15,3 +15,16 @@
 .selectedDateHeaderContainer {
   display: flex;
 }
+
+.modalHeader {
+  .backButton {
+    position: absolute;
+    pointer-events: initial;
+    inset-inline-start: 0;
+  }
+}
+
+.monthName {
+  width: calc(3 * var(--spacing-mega));
+  text-align: center;
+}

@@ -41,8 +41,8 @@ const Calendar = ({ month, year, getIsDayDisabled, onDayClick, isLoading }: Cale
   );
 
   return (
-    <>
-      {isLoading && <Spinner className={styles.calendarSpinner} />}
+    <div className={styles.outerContainer}>
+      {isLoading && <Spinner />}
       <div className={styles.calendarContainer}>
         {/* eslint-disable-next-line @typescript-eslint/naming-convention */}
         {Array.from({ length: daysInMonth }).map((_, index) => {
@@ -65,7 +65,7 @@ const Calendar = ({ month, year, getIsDayDisabled, onDayClick, isLoading }: Cale
           );
         })}
       </div>
-    </>
+    </div>
   );
 };
 
