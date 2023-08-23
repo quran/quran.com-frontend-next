@@ -9,7 +9,12 @@ import { REFLECTIONS_OBSERVER_ID } from '@/components/QuranReader/observer';
 import TafsirSkeleton from '@/components/QuranReader/TafsirView/TafsirSkeleton';
 import useGlobalIntersectionObserverWithDelay from '@/hooks/useGlobalIntersectionObserverWithDelay';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
-import { makeAyahReflectionsUrl, postReflectionViews } from '@/utils/quranReflect/apiPaths';
+import { postReflectionViews } from '@/utils/auth/api';
+import { isLoggedIn } from '@/utils/auth/login';
+import {
+  makeAyahReflectionsUrl,
+  postReflectionViews as postReflectionViewsToQuranReflect,
+} from '@/utils/quranReflect/apiPaths';
 import AyahReflectionsResponse from 'types/QuranReflect/AyahReflectionsResponse';
 
 const ReflectionSurahAndAyahSelection = dynamic(() => import('./ReflectionSurahAndAyahSelection'), {
@@ -38,10 +43,21 @@ const ReflectionBodyContainer = ({
   const { translationFontScale } = useSelector(selectQuranReaderStyles, shallowEqual);
   const { lang } = useTranslation();
 
+  /**
+   * Handle when the reflection is viewed:
+   *
+   * 1. If the user is logged in, we will call QDC's backend API.
+   * 2. Otherwise, we will call QR's API directly.
+   */
   const onReflectionViewed = useCallback((reflectionContainer: Element) => {
     const postId = reflectionContainer.getAttribute('data-post-id');
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
-    postReflectionViews(postId).catch(() => {});
+    if (isLoggedIn()) {
+      // eslint-disable-next-line @typescript-eslint/no-empty-function
+      postReflectionViews(postId).catch(() => {});
+    } else {
+      // eslint-disable-next-line @typescript-eslint/no-empty-function
+      postReflectionViewsToQuranReflect(postId).catch(() => {});
+    }
   }, []);
   useGlobalIntersectionObserverWithDelay(
     { threshold: 1 },
