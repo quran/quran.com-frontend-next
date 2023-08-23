@@ -62,6 +62,8 @@ export const makeDeleteCollectionBookmarkByIdUrl = (collectionId: string, bookma
 export const makeDeleteCollectionBookmarkByKeyUrl = (collectionId: string) =>
   makeUrl(`collections/${collectionId}/bookmarks`);
 
+export const makePostReflectionViewsUrl = (postId: string) => makeUrl(`posts/${postId}/views`);
+
 export const makeBookmarkCollectionsUrl = (
   mushafId: number,
   key: number,
