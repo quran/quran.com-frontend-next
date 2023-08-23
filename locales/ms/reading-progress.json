@@ -1,4 +1,6 @@
 {
+    "add": "Tambah",
+    "add-data-success": "Data bacaan anda telah berjaya ditambahkan.",
     "delete-goal": {
         "action": "Padamkan Matlamat",
         "confirmation": {
@@ -19,6 +21,7 @@
     "history": "Membaca Sejarah",
     "history-for": "Sejarah membaca untuk {{date}}",
     "manage-goal": "Urus matlamat membaca anda",
+    "manually-add": "Tambah bacaan secara manual",
     "no-reading-history-for": "Tiada sejarah bacaan untuk {{date}}",
     "reading-progress-header": "Kemajuan Anda",
     "reading-progress-streak": "coretan",

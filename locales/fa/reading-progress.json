@@ -1,4 +1,6 @@
 {
+    "add": "اضافه کردن",
+    "add-data-success": "اطلاعات خواندن شما با موفقیت اضافه شد.",
     "delete-goal": {
         "action": "حذف هدف",
         "confirmation": {
@@ -19,6 +21,7 @@
     "history": "خواندن تاریخ",
     "history-for": "خواندن تاریخچه برای {{date}}",
     "manage-goal": "هدف مطالعه خود را مدیریت کنید",
+    "manually-add": "خوانش ها را به صورت دستی اضافه کنید",
     "no-reading-history-for": "بدون سابقه خواندن برای {{date}}",
     "reading-progress-header": "پیشرفت شما",
     "reading-progress-streak": "خط",

@@ -1,4 +1,6 @@
 {
+    "add": "Ajouter",
+    "add-data-success": "Vos données de lecture ont été ajoutées avec succès.",
     "delete-goal": {
         "action": "Supprimer l'objectif",
         "confirmation": {
@@ -19,6 +21,7 @@
     "history": "Lecture de l'histoire",
     "history-for": "Historique de lecture pour {{date}}",
     "manage-goal": "Gérez votre objectif de lecture",
+    "manually-add": "Ajouter manuellement des lectures",
     "no-reading-history-for": "Aucun historique de lecture pour {{date}}",
     "reading-progress-header": "Votre progression",
     "reading-progress-streak": "Traînée",

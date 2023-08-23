@@ -1,11 +1,9 @@
 {
     "add-collection": "Add Collection",
-    "mark-as-read": "Mark as read",
     "advanced-copy": "Advanced Copy",
     "aria": {
         "read-ayah-refls": "Read Ayah Reflections",
-        "read-tafsirs": "Read Ayah Tafsirs",
-        "mark-as-read": "Mark Ayah as read"
+        "read-tafsirs": "Read Ayah Tafsirs"
     },
     "ayatul-kursi": "Ayatul Kursi",
     "back-to-ayah": "Back to Ayah",

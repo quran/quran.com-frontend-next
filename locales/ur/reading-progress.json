@@ -1,4 +1,6 @@
 {
+    "add": "شامل کریں۔",
+    "add-data-success": "آپ کا پڑھنے کا ڈیٹا کامیابی کے ساتھ شامل کر دیا گیا ہے۔",
     "delete-goal": {
         "action": "گول کو حذف کریں۔",
         "confirmation": {
@@ -19,6 +21,7 @@
     "history": "تاریخ پڑھنا",
     "history-for": "{{date}} کی تاریخ پڑھنا",
     "manage-goal": "اپنے پڑھنے کے مقصد کا نظم کریں۔",
+    "manually-add": "دستی طور پر ریڈنگز شامل کریں۔",
     "no-reading-history-for": "{{date}} کے لیے پڑھنے کی کوئی سرگزشت نہیں",
     "reading-progress-header": "آپ کی پیشرفت",
     "reading-progress-streak": "اسٹریک",

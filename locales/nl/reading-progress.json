@@ -1,4 +1,6 @@
 {
+    "add": "Toevoegen",
+    "add-data-success": "Uw leesgegevens zijn succesvol toegevoegd.",
     "delete-goal": {
         "action": "Doel verwijderen",
         "confirmation": {
@@ -19,6 +21,7 @@
     "history": "Geschiedenis lezen",
     "history-for": "Leesgeschiedenis voor {{date}}",
     "manage-goal": "Beheer uw leesdoel",
+    "manually-add": "Handmatig metingen toevoegen",
     "no-reading-history-for": "Geen leesgeschiedenis voor {{date}}",
     "reading-progress-header": "Jouw vooruitgang",
     "reading-progress-streak": "Streep",

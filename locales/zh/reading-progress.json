@@ -1,4 +1,6 @@
 {
+    "add": "添加",
+    "add-data-success": "您的阅读数据已成功添加。",
     "delete-goal": {
         "action": "删除目标",
         "confirmation": {
@@ -19,6 +21,7 @@
     "history": "阅读历史",
     "history-for": "{{date}}的阅读历史",
     "manage-goal": "管理你的阅读目标",
+    "manually-add": "手动添加读数",
     "no-reading-history-for": "{{date}}没有阅读记录",
     "reading-progress-header": "你的进步",
     "reading-progress-streak": "条纹",

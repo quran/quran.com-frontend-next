@@ -1,4 +1,6 @@
 {
+    "add": "Добавлять",
+    "add-data-success": "Ваши данные о чтении были успешно добавлены.",
     "delete-goal": {
         "action": "Удалить цель",
         "confirmation": {
@@ -19,6 +21,7 @@
     "history": "Чтение истории",
     "history-for": "Чтение истории за {{date}}",
     "manage-goal": "Управляйте своей целью чтения",
+    "manually-add": "Добавление показаний вручную",
     "no-reading-history-for": "Нет истории чтения за {{date}}",
     "reading-progress-header": "Ваш прогресс",
     "reading-progress-streak": "Полоса",

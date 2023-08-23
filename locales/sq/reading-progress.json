@@ -1,4 +1,6 @@
 {
+    "add": "Shto",
+    "add-data-success": "Të dhënat tuaja të leximit janë shtuar me sukses.",
     "delete-goal": {
         "action": "Fshi objektivin",
         "confirmation": {
@@ -19,6 +21,7 @@
     "history": "Leximi i Historisë",
     "history-for": "Leximi i historisë për {{date}}",
     "manage-goal": "Menaxhoni qëllimin tuaj të leximit",
+    "manually-add": "Shtoni manualisht leximet",
     "no-reading-history-for": "Nuk ka histori leximi për {{date}}",
     "reading-progress-header": "Përparimi juaj",
     "reading-progress-streak": "brez",

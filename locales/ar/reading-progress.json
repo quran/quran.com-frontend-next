@@ -1,4 +1,6 @@
 {
+    "add": "يضيف",
+    "add-data-success": "تمت إضافة بيانات القراءة الخاصة بك بنجاح.",
     "delete-goal": {
         "action": "احذف الهدف",
         "confirmation": {
@@ -19,6 +21,7 @@
     "history": "سجل القراءة",
     "history-for": "سجل القراءة لـ {{date}}",
     "manage-goal": "إدارة هدفك في القراءة",
+    "manually-add": "إضافة القراءات يدويا",
     "no-reading-history-for": "لا يوجد سجل قراءة لـ {{date}}",
     "reading-progress-header": "تقدمك",
     "reading-progress-streak": "الاستمرارية",
