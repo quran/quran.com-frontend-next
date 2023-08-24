@@ -8,7 +8,7 @@ import styles from './AddReading.module.scss';
 
 import VerseRangesList from '@/components/ReadingGoal/ReadingGoalAmount/VerseRangesList';
 import VerseRangeInput from '@/components/ReadingGoal/ReadingGoalInput/VerseRangeInput';
-import { areValidReadingRanges } from '@/components/ReadingGoalPage/utils/validator';
+import { isValidVerseRange } from '@/components/ReadingGoalPage/utils/validator';
 import DataContext from '@/contexts/DataContext';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import Calendar from '@/dls/Calendar';
@@ -112,7 +112,7 @@ const AddReading = () => {
   };
 
   const getIsAddButtonDisabled = () => {
-    return !areValidReadingRanges(chaptersData, {
+    return !isValidVerseRange(chaptersData, {
       startVerse: rangeStart,
       endVerse: rangeEnd,
     });

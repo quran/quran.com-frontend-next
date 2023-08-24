@@ -44,7 +44,7 @@ export const validateReadingGoalData = (
 
   // if the user selected a range goal and didn't enter a valid range, disable the next button
   if (type === GoalType.RANGE) {
-    return areValidReadingRanges(chaptersData, range);
+    return isValidVerseRange(chaptersData, range);
   }
 
   return true;
@@ -57,7 +57,7 @@ export const validateReadingGoalData = (
  * @param {Range} range
  * @returns {boolean}
  */
-export const areValidReadingRanges = (chaptersData: ChaptersData, range?: Range): boolean => {
+export const isValidVerseRange = (chaptersData: ChaptersData, range?: Range): boolean => {
   if (!range?.startVerse || !range?.endVerse) return false;
   if (
     !isValidVerseKey(chaptersData, range.startVerse) ||

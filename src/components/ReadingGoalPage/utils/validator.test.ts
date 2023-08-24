@@ -3,13 +3,13 @@ import { it, expect, describe } from 'vitest';
 
 import { getAllChaptersData } from '../../../utils/chapter';
 
-import { areValidReadingRanges } from './validator';
+import { isValidVerseRange } from './validator';
 
 describe('areValidReadingRanges', () => {
   it('invalid startVerse should fail', async () => {
     const chaptersData = await getAllChaptersData();
     expect(
-      areValidReadingRanges(chaptersData, {
+      isValidVerseRange(chaptersData, {
         startVerse: '111111',
         endVerse: '1:2',
       }),
@@ -19,7 +19,7 @@ describe('areValidReadingRanges', () => {
   it('invalid endVerse should fail', async () => {
     const chaptersData = await getAllChaptersData();
     expect(
-      areValidReadingRanges(chaptersData, {
+      isValidVerseRange(chaptersData, {
         startVerse: '1:2',
         endVerse: '111111',
       }),
@@ -29,7 +29,7 @@ describe('areValidReadingRanges', () => {
   it('invalid startVerse and endVerse should fail', async () => {
     const chaptersData = await getAllChaptersData();
     expect(
-      areValidReadingRanges(chaptersData, {
+      isValidVerseRange(chaptersData, {
         startVerse: '111111',
         endVerse: '111111',
       }),
@@ -39,7 +39,7 @@ describe('areValidReadingRanges', () => {
   it('valid startVerse and endVerse should succeed', async () => {
     const chaptersData = await getAllChaptersData();
     expect(
-      areValidReadingRanges(chaptersData, {
+      isValidVerseRange(chaptersData, {
         startVerse: '1:1',
         endVerse: '5:1',
       }),
@@ -49,7 +49,7 @@ describe('areValidReadingRanges', () => {
   it('startVerse ahead of endVerse should fail', async () => {
     const chaptersData = await getAllChaptersData();
     expect(
-      areValidReadingRanges(chaptersData, {
+      isValidVerseRange(chaptersData, {
         startVerse: '5:1',
         endVerse: '1:1',
       }),
@@ -59,7 +59,7 @@ describe('areValidReadingRanges', () => {
   it('same startVerse and endVerse should succeed', async () => {
     const chaptersData = await getAllChaptersData();
     expect(
-      areValidReadingRanges(chaptersData, {
+      isValidVerseRange(chaptersData, {
         startVerse: '1:1',
         endVerse: '1:1',
       }),
