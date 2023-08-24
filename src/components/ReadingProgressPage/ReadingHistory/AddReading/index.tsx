@@ -118,9 +118,11 @@ const AddReading = () => {
     });
   };
 
-  const currentMonthDisabledDaysMap = useMemo(() => {
+  const currentMonthDisabledDaysSet = useMemo(() => {
     const { month: currentMonth, day: currentDay } = dateToYearMonthDay(new Date());
-    const disabledDays = new Map();
+
+    const disabledDays = new Set();
+
     // if the current month is the selected month
     if (selectedMonth === currentMonth) {
       const daysInMonth = getMonthDateObject(selectedYear, currentMonth).getDate();
@@ -130,9 +132,8 @@ const AddReading = () => {
         // if the day of the loop exceeds the current day, disable it
         if (dayNumber > currentDay) {
           // YYYY-MM-DD
-          disabledDays.set(
+          disabledDays.add(
             dateToDateString({ day: dayNumber, month: currentMonth, year: selectedYear }),
-            true,
           );
         }
       });
@@ -159,7 +160,7 @@ const AddReading = () => {
       return true;
     }
     // for the current month, we need to check which days are later than today and disable them
-    return !!currentMonthDisabledDaysMap.has(dateString);
+    return currentMonthDisabledDaysSet.has(dateString);
   };
 
   const onSubmitClick = () => {
