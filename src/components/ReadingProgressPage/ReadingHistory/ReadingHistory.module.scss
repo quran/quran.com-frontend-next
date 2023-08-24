@@ -16,6 +16,18 @@
   gap: var(--spacing-large);
 }
 
+.titleContainer {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-medium);
+  justify-content: space-between;
+
+  @include breakpoints.smallerThanTablet {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
 .title {
   display: flex;
   align-items: center;
@@ -33,6 +45,12 @@
   p {
     max-width: 75%;
     margin-inline: auto;
+  }
+
+  .backButton {
+    position: absolute;
+    pointer-events: initial;
+    inset-inline-start: 0;
   }
 }
 

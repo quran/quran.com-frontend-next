@@ -69,8 +69,8 @@ const ReadingHistory = () => {
         />
       )}
 
-      <div className={styles.title}>
-        <div>
+      <div className={styles.titleContainer}>
+        <div className={styles.title}>
           <h1>{t('history')}</h1>
           <Select
             id="reading-history-year-select"
