@@ -5,8 +5,9 @@ import useTranslation from 'next-translate/useTranslation';
 import styles from './VerseRangesList.module.scss';
 
 import DataContext from '@/contexts/DataContext';
-import Button, { ButtonSize, ButtonVariant } from '@/dls/Button/Button';
+import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import Link, { LinkVariant } from '@/dls/Link/Link';
+import CloseIcon from '@/icons/close.svg';
 import { RangeItemDirection } from '@/types/Range';
 import { getChapterData } from '@/utils/chapter';
 import { logButtonClick } from '@/utils/eventLogger';
@@ -83,11 +84,11 @@ const VerseRangesList = ({
         {allowClearingRanges && (
           <Button
             size={ButtonSize.Small}
-            variant={ButtonVariant.Compact}
+            variant={ButtonVariant.Ghost}
             onClick={() => handleRangeDeleteClick(range)}
-            // eslint-disable-next-line i18next/no-literal-string
+            shape={ButtonShape.Circle}
           >
-            X
+            <CloseIcon />
           </Button>
         )}
       </div>,
