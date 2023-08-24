@@ -168,25 +168,16 @@ export const dateToYearMonthDay = (date: Date): { year: number; month: number; d
 export const getCurrentMonth = () => new Date().getMonth() + 1;
 
 /**
- * Converts day, month and year numbers to a formatted string (YYYY-MM-DD).
- *
- * @param {number} day
- * @param {number} month
- * @param {number} year
- * @returns {string}
- */
-export const dateNumbersToString = (day: number, month: number, year: number): string =>
-  `${year}-${numberToPaddedString(month)}-${numberToPaddedString(day)}`;
-
-/**
  * Converts a date instance to a string in this format: YYYY-MM-DD
  *
  * @param {Date} date
  * @returns {string}
  */
-export const dateToDateString = (date: Date): string => {
-  const { year, month, day } = dateToYearMonthDay(date);
-  return dateNumbersToString(day, month, year);
+export const dateToDateString = (
+  date: Date | { day: number; month: number; year: number },
+): string => {
+  const { year, month, day } = date instanceof Date ? dateToYearMonthDay(date) : date;
+  return `${year}-${numberToPaddedString(month)}-${numberToPaddedString(day)}`;
 };
 
 /**

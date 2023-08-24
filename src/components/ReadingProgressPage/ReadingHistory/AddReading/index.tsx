@@ -24,7 +24,7 @@ import { getFilterActivityDaysParamsOfCurrentMonth } from '@/utils/activity-day'
 import { updateActivityDay } from '@/utils/auth/api';
 import { makeFilterActivityDaysUrl, makeStreakUrl } from '@/utils/auth/apiPaths';
 import {
-  dateNumbersToString,
+  dateToDateString,
   dateToReadableFormat,
   dateToYearMonthDay,
   getCurrentMonth,
@@ -130,7 +130,10 @@ const AddReading = () => {
         // if the day of the loop exceeds the current day, disable it
         if (dayNumber > currentDay) {
           // YYYY-MM-DD
-          disabledDays.set(dateNumbersToString(dayNumber, currentMonth, selectedYear), true);
+          disabledDays.set(
+            dateToDateString({ day: dayNumber, month: currentMonth, year: selectedYear }),
+            true,
+          );
         }
       });
     }
