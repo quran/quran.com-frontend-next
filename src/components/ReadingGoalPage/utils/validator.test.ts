@@ -15,6 +15,7 @@ describe('areValidReadingRanges', () => {
       }),
     ).toEqual(false);
   });
+
   it('invalid endVerse should fail', async () => {
     const chaptersData = await getAllChaptersData();
     expect(
@@ -24,6 +25,7 @@ describe('areValidReadingRanges', () => {
       }),
     ).toEqual(false);
   });
+
   it('invalid startVerse and endVerse should fail', async () => {
     const chaptersData = await getAllChaptersData();
     expect(
@@ -33,6 +35,7 @@ describe('areValidReadingRanges', () => {
       }),
     ).toEqual(false);
   });
+
   it('valid startVerse and endVerse should succeed', async () => {
     const chaptersData = await getAllChaptersData();
     expect(
@@ -42,7 +45,8 @@ describe('areValidReadingRanges', () => {
       }),
     ).toEqual(true);
   });
-  it('reversed startVerse and endVerse order should fail', async () => {
+
+  it('startVerse ahead of endVerse should fail', async () => {
     const chaptersData = await getAllChaptersData();
     expect(
       areValidReadingRanges(chaptersData, {
@@ -51,6 +55,7 @@ describe('areValidReadingRanges', () => {
       }),
     ).toEqual(false);
   });
+
   it('same startVerse and endVerse should succeed', async () => {
     const chaptersData = await getAllChaptersData();
     expect(
