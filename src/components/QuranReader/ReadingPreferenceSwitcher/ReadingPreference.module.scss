@@ -3,30 +3,26 @@
 .container {
   display: flex;
   align-items: center;
+  justify-content: center;
   width: 100%;
-  padding: 0 var(--spacing-large);
 }
 
 .spinner {
   margin-inline-end: var(--spacing-xsmall);
 }
-.iconsCenter {
-  padding-right: 0 !important;
-  margin-inline-start: var(--spacing-xxsmall);
-  margin-inline-end: var(--spacing-xxsmall);
+
+.preferenceTextContainer {
+  padding-left: var(--spacing-xsmall);
 }
 
 .iconContainer {
-  padding-top: 0.4rem;
-
   & > svg {
-    width: var(--spacing-medium);
-    -webkit-margin-end: var(--spacing-large);
-    margin-inline-end: var(--spacing-large);
+    width: var(--spacing-mega);
+    display: block;
+    margin: auto;
   }
 
   @include breakpoints.smallerThanTablet {
-    padding-right: var(--spacing-large);
     & > svg {
       width: var(--spacing-small);
       -webkit-margin-end: 0;

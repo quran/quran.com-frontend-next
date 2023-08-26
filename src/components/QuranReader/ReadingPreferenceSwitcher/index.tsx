@@ -15,12 +15,22 @@ import { logValueChange } from '@/utils/eventLogger';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 import { ReadingPreference } from 'types/QuranReader';
 
+export enum ReadingPreferenceSwitcherType {
+  SurahHeader = 'surah_header',
+  ContextMenu = 'context_menu',
+}
+
 interface Props {
   size?: SwitchSize;
   isIconsOnly?: boolean;
+  type: ReadingPreferenceSwitcherType;
 }
 
-const ReadingPreferenceSwitcher: React.FC<Props> = ({ size, isIconsOnly = false }) => {
+const ReadingPreferenceSwitcher: React.FC<Props> = ({
+  size,
+  isIconsOnly = false,
+  type = ReadingPreferenceSwitcherType.SurahHeader,
+}) => {
   const readingPreferences = useSelector(selectReadingPreferences);
   const lastReadVerseKey = useSelector(selectLastReadVerseKey);
   const lastReadVerse = lastReadVerseKey.verseKey?.split(':')[1];
@@ -57,14 +67,17 @@ const ReadingPreferenceSwitcher: React.FC<Props> = ({ size, isIconsOnly = false 
   ];
 
   const onViewSwitched = (view: ReadingPreference) => {
-    logValueChange('reading_preference', readingPreference, view);
+    logValueChange(`${type}.reading_preference`, readingPreference, view);
 
     const newQueryParams = { ...router.query };
 
     // Track `startingVerse` once we're past the start of the page so we can
     // continue from the same ayah when switching views. Without the > 1 check,
     // switching views at the start of the page causes unnecessary scrolls
-    if (parseInt(lastReadVerse, 10) > 1) {
+
+    if (type === ReadingPreferenceSwitcherType.SurahHeader) {
+      delete newQueryParams.startingVerse;
+    } else if (parseInt(lastReadVerse, 10) > 1) {
       newQueryParams.startingVerse = lastReadVerse;
     }
 

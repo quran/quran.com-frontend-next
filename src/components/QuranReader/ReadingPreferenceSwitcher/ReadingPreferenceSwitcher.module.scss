@@ -17,16 +17,22 @@ $readingPreferenceMaxWidth: calc(20 * var(--spacing-large));
     display: flex;
     align-items: center;
     justify-content: center;
-
+    
+    // Open to suggestions to implement this in a better way
+    &:nth-child(1) {
+      margin-right: var(--spacing-small);
+    }
+    &:nth-child(2) {
+      margin-left: var(--spacing-micro);
+    }
+    
     @include breakpoints.smallerThanTablet {
       max-height: 25px;
-
-      // To ensure active buttons aligns correctly
       &:nth-child(1) {
-        margin-left: -7px
+        margin-right: var(--spacing-micro);
       }
       &:nth-child(2) {
-        margin-right: -7px;
+        margin-left: var(--spacing-micro);
       }
     }
   }

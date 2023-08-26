@@ -5,9 +5,8 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from '@/components/QuranReader/ReadingPreferenceSwitcher/ReadingPreference.module.scss';
 import Spinner from '@/dls/Spinner/Spinner';
-import BookOpen from '@/icons/book-open.svg';
-import ReaderIcon from '@/icons/collection.svg';
-import { isMobile } from '@/utils/responsive';
+import BookIcon from '@/icons/book.svg';
+import ReaderIcon from '@/icons/reader.svg';
 import { ReadingPreference } from 'types/QuranReader';
 
 type Props = {
@@ -18,8 +17,8 @@ type Props = {
 };
 
 export const readingPreferenceIcons = {
-  [ReadingPreference.Reading]: <BookOpen />,
-  [ReadingPreference.Translation]: <ReaderIcon />,
+  [ReadingPreference.Reading]: <ReaderIcon />,
+  [ReadingPreference.Translation]: <BookIcon />,
 };
 
 const LoadingSwitcher: React.FC<Props> = ({
@@ -29,23 +28,24 @@ const LoadingSwitcher: React.FC<Props> = ({
   isLoading,
 }) => {
   const { t } = useTranslation('common');
-  const showOnlyIconsOnMobile = isMobile() && isIconsOnly;
   return isLoading && readingPreference === selectedReadingPreference ? (
     <div className={styles.container}>
       <span>
         <Spinner className={styles.spinner} />
       </span>
-      <span>{t(`reading-preference.${readingPreference}`)}</span>
+      {!isIconsOnly && (
+        <span className={styles.preferenceTextContainer}>
+          {t(`reading-preference.${selectedReadingPreference}`)}
+        </span>
+      )}
     </div>
   ) : (
     <div className={styles.container}>
-      <span
-        className={classNames(styles.iconContainer, showOnlyIconsOnMobile && styles.iconsCenter)}
-      >
+      <span className={classNames(styles.iconContainer, isIconsOnly && styles.iconsCenter)}>
         {readingPreferenceIcons[selectedReadingPreference]}
       </span>
-      {!showOnlyIconsOnMobile && (
-        <span className={styles.themeNameContainer}>
+      {!isIconsOnly && (
+        <span className={styles.preferenceTextContainer}>
           {t(`reading-preference.${selectedReadingPreference}`)}
         </span>
       )}

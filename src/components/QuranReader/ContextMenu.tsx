@@ -7,7 +7,9 @@ import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import styles from './ContextMenu.module.scss';
-import ReadingPreferenceSwitcher from './ReadingPreferenceSwitcher';
+import ReadingPreferenceSwitcher, {
+  ReadingPreferenceSwitcherType,
+} from './ReadingPreferenceSwitcher';
 
 import { SwitchSize } from '@/dls/Switch/Switch';
 import ChevronDownIcon from '@/icons/chevron-down.svg';
@@ -116,7 +118,11 @@ const ContextMenu = () => {
         </div>
         {showReadingPreferenceSwitcher && (
           <div className={styles.halfSection}>
-            <ReadingPreferenceSwitcher size={readingPreferenceSize} isIconsOnly />
+            <ReadingPreferenceSwitcher
+              size={readingPreferenceSize}
+              isIconsOnly
+              type={ReadingPreferenceSwitcherType.ContextMenu}
+            />
           </div>
         )}
         <div className={showReadingPreferenceSwitcher ? styles.section : styles.halfSection}>
