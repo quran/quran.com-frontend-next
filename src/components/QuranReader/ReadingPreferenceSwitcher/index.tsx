@@ -23,7 +23,7 @@ export enum ReadingPreferenceSwitcherType {
 interface Props {
   size?: SwitchSize;
   isIconsOnly?: boolean;
-  type: ReadingPreferenceSwitcherType;
+  type?: ReadingPreferenceSwitcherType;
 }
 
 const ReadingPreferenceSwitcher: React.FC<Props> = ({
