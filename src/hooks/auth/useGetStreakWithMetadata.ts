@@ -170,7 +170,11 @@ const useGetStreakWithMetadata = ({
     activityDays.forEach((day) => {
       result[day.date] = {
         ...day,
-        hasRead: day.pagesRead > 0 || day.secondsRead > 0 || day.ranges.length > 0,
+        hasRead:
+          day.pagesRead > 0 ||
+          day.secondsRead > 0 ||
+          day.ranges.length > 0 ||
+          day.manuallyAddedSeconds > 0,
       };
     });
 

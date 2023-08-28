@@ -53,7 +53,11 @@ const ReadingStats: React.FC<ReadingStatsProps> = ({ activityDay }) => {
         </p>
         <p>
           <ClockIcon />
-          {secondsToReadableFormat(activityDay.secondsRead, t, lang)}
+          {secondsToReadableFormat(
+            activityDay.secondsRead + (activityDay.manuallyAddedSeconds || 0),
+            t,
+            lang,
+          )}
         </p>
       </div>
 

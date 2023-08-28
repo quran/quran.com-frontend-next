@@ -10,6 +10,7 @@ export type ActivityDay = {
   pagesRead: number;
   versesRead: number;
   secondsRead: number;
+  manuallyAddedSeconds?: number;
   progress: number;
   dailyTargetPages?: number;
   dailyTargetSeconds?: number;
