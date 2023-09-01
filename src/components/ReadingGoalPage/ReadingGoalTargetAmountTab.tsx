@@ -11,6 +11,49 @@ import Select, { SelectSize } from '@/dls/Forms/Select';
 import { QuranGoalPeriod } from '@/types/auth/Goal';
 import { generateDurationDaysOptions } from '@/utils/generators';
 
+type SetDurationAction = {
+  type: 'SET_DURATION';
+  payload: { duration: number };
+};
+
+type SetRangeAction = {
+  type: 'SET_RANGE';
+  payload: {
+    startVerse: string;
+    endVerse: string;
+  };
+};
+
+type SetPagesAction = {
+  type: 'SET_PAGES';
+  payload: { pages: number };
+};
+
+type SetSecondsAction = {
+  type: 'SET_SECONDS';
+  payload: { seconds: number };
+};
+
+const setDurationAction = (duration: number): SetDurationAction => ({
+  type: 'SET_DURATION',
+  payload: { duration },
+});
+
+const setRangeAction = (range): SetRangeAction => ({
+  type: 'SET_RANGE',
+  payload: range,
+});
+
+const setPagesAction = (pages: number): SetPagesAction => ({
+  type: 'SET_PAGES',
+  payload: { pages },
+});
+
+const setSecondsAction = (seconds: number): SetSecondsAction => ({
+  type: 'SET_SECONDS',
+  payload: { seconds },
+});
+
 const ReadingGoalTargetAmountTab: React.FC<ReadingGoalTabProps> = ({
   state,
   dispatch,
@@ -25,19 +68,19 @@ const ReadingGoalTargetAmountTab: React.FC<ReadingGoalTabProps> = ({
     const newDuration = Number(d);
     logChange('duration', { currentValue: duration, newValue: newDuration });
 
-    dispatch({ type: 'SET_DURATION', payload: { duration: newDuration } });
+    dispatch(setDurationAction(newDuration));
   };
 
   const onRangeChange: ReadingGoalInputProps['onRangeChange'] = (newRange) => {
-    dispatch({ type: 'SET_RANGE', payload: newRange });
+    dispatch(setRangeAction(newRange));
   };
 
   const onPagesChange: ReadingGoalInputProps['onPagesChange'] = (newPages) => {
-    dispatch({ type: 'SET_PAGES', payload: { pages: newPages } });
+    dispatch(setPagesAction(newPages));
   };
 
   const onSecondsChange: ReadingGoalInputProps['onSecondsChange'] = (newSeconds) => {
-    dispatch({ type: 'SET_SECONDS', payload: { seconds: newSeconds } });
+    dispatch(setSecondsAction(newSeconds));
   };
 
   return (

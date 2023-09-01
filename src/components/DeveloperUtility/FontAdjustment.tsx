@@ -4,17 +4,17 @@ import React from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import {
-  decreaseQuranTextFontScale,
-  increaseQuranTextFontScale,
-  increaseTafsirFontScale,
-  decreaseTafsirFontScale,
   selectQuranReaderStyles,
-  setQuranFont,
   MAXIMUM_TAFSIR_FONT_STEP,
   MAXIMUM_QURAN_FONT_STEP,
   MAXIMUM_TRANSLATIONS_FONT_STEP,
-  decreaseTranslationFontScale,
-  increaseTranslationFontScale,
+  setQuranFontAction,
+  increaseQuranTextFontScaleAction,
+  decreaseQuranTextFontScaleAction,
+  decreaseTranslationFontScaleAction,
+  increaseTranslationFontScaleAction,
+  decreaseTafsirFontScaleAction,
+  increaseTafsirFontScaleAction,
 } from '@/redux/slices/QuranReader/styles';
 import { QuranFont } from 'types/QuranReader';
 
@@ -39,7 +39,7 @@ const FontAdjustment = (): JSX.Element => {
         Font style{' '}
         <select
           name="font-styles"
-          onChange={(event) => dispatch({ type: setQuranFont.type, payload: event.target.value })}
+          onChange={(event) => dispatch(setQuranFontAction(event.target.value))}
           value={quranFont}
         >
           {availableFonts.map((font) => (
@@ -53,14 +53,14 @@ const FontAdjustment = (): JSX.Element => {
       <div>
         Quran font size ({quranTextFontScale}){' '}
         <button
-          onClick={() => dispatch({ type: decreaseQuranTextFontScale.type })}
+          onClick={() => dispatch(decreaseQuranTextFontScaleAction())}
           type="button"
           disabled={quranTextFontScale === 1}
         >
           -
         </button>{' '}
         <button
-          onClick={() => dispatch({ type: increaseQuranTextFontScale.type })}
+          onClick={() => dispatch(increaseQuranTextFontScaleAction())}
           type="button"
           disabled={quranTextFontScale === MAXIMUM_QURAN_FONT_STEP}
         >
@@ -71,14 +71,14 @@ const FontAdjustment = (): JSX.Element => {
       <div>
         Translation font size ({translationFontScale}){' '}
         <button
-          onClick={() => dispatch({ type: decreaseTranslationFontScale.type })}
+          onClick={() => dispatch(decreaseTranslationFontScaleAction())}
           type="button"
           disabled={translationFontScale === 1}
         >
           -
         </button>{' '}
         <button
-          onClick={() => dispatch({ type: increaseTranslationFontScale.type })}
+          onClick={() => dispatch(increaseTranslationFontScaleAction())}
           type="button"
           disabled={translationFontScale === MAXIMUM_TRANSLATIONS_FONT_STEP}
         >
@@ -89,14 +89,14 @@ const FontAdjustment = (): JSX.Element => {
       <div>
         Tafsir font size ({tafsirFontScale}){' '}
         <button
-          onClick={() => dispatch({ type: decreaseTafsirFontScale.type })}
+          onClick={() => dispatch(decreaseTafsirFontScaleAction())}
           type="button"
           disabled={tafsirFontScale === 1}
         >
           -
         </button>{' '}
         <button
-          onClick={() => dispatch({ type: increaseTafsirFontScale.type })}
+          onClick={() => dispatch(increaseTafsirFontScaleAction())}
           type="button"
           disabled={tafsirFontScale === MAXIMUM_TAFSIR_FONT_STEP}
         >

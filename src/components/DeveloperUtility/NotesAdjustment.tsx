@@ -3,7 +3,7 @@ import React from 'react';
 
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
-import { selectNotes, setIsVisible } from '@/redux/slices/QuranReader/notes';
+import { selectNotes, setIsVisibleAction } from '@/redux/slices/QuranReader/notes';
 
 const NotesAdjustment = () => {
   const dispatch = useDispatch();
@@ -11,10 +11,7 @@ const NotesAdjustment = () => {
   return (
     <div>
       Notes{' '}
-      <button
-        type="button"
-        onClick={() => dispatch({ type: setIsVisible.type, payload: !isVisible })}
-      >
+      <button type="button" onClick={() => dispatch(setIsVisibleAction(!isVisible))}>
         Toggle notes
       </button>
     </div>

@@ -3,7 +3,7 @@ import React from 'react';
 
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
-import { selectTheme, setTheme } from '@/redux/slices/theme';
+import { selectTheme, setThemeAction } from '@/redux/slices/theme';
 import ThemeType from '@/redux/types/ThemeType';
 
 const ThemeAdjustment = () => {
@@ -19,7 +19,7 @@ const ThemeAdjustment = () => {
         Theme{' '}
         <select
           name="theme-selector"
-          onChange={(event) => dispatch({ type: setTheme.type, payload: event.target.value })}
+          onChange={(event) => dispatch(setThemeAction(event.target.value))}
           value={theme.type}
         >
           {availableThemes.map((type) => (

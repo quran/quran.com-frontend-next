@@ -54,6 +54,10 @@ export const translationsSlice = createSlice({
 });
 
 export const { setSelectedTranslations } = translationsSlice.actions;
+export const setSelectedTranslationsAction = (translationIDs: number[], locale: string) => ({
+  type: setSelectedTranslations.type,
+  payload: { translations: translationIDs, locale },
+});
 
 export const selectTranslations = (state: RootState) => state.translations;
 export const selectSelectedTranslations = (state: RootState) =>

@@ -3,8 +3,8 @@ import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
 import useScrollDirection, { ScrollDirection } from '@/hooks/useScrollDirection';
-import { setIsVisible } from '@/redux/slices/navbar';
-import { setIsExpanded } from '@/redux/slices/QuranReader/contextMenu';
+import { setIsVisibleAction } from '@/redux/slices/navbar';
+import { setIsExpandedAction } from '@/redux/slices/QuranReader/contextMenu';
 
 const GlobalScrollListener = () => {
   const dispatch = useDispatch();
@@ -17,11 +17,12 @@ const GlobalScrollListener = () => {
        * a down direction and hides the navbar, context menu and audioPlayer.
        */
       if (newYPosition > 50 && direction === ScrollDirection.Down) {
-        dispatch({ type: setIsExpanded.type, payload: false });
-        dispatch({ type: setIsVisible.type, payload: false });
+        dispatch(setIsExpandedAction(false));
+
+        dispatch(setIsVisibleAction(false));
       } else if (newYPosition >= 0 && direction === ScrollDirection.Up) {
-        dispatch({ type: setIsExpanded.type, payload: true });
-        dispatch({ type: setIsVisible.type, payload: true });
+        dispatch(setIsExpandedAction(true));
+        dispatch(setIsVisibleAction(true));
       }
     },
     [dispatch],

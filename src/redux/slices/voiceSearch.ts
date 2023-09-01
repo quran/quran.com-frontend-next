@@ -47,4 +47,13 @@ export const {
   stopSearchDrawerVoiceFlow,
   stopCommandBarVoiceFlow,
 } = voiceSearchSlice.actions;
+
+export const stopSearchDrawerVoiceFlowAction = () => ({
+  type: stopSearchDrawerVoiceFlow.type,
+});
+
+export const stopCommandBarVoiceFlowAction = () => ({
+  type: stopCommandBarVoiceFlow.type,
+});
+
 export default voiceSearchSlice.reducer;

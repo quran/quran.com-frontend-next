@@ -22,6 +22,11 @@ export const notesSlice = createSlice({
 
 export const { setIsVisible } = notesSlice.actions;
 
+export const setIsVisibleAction = (isVisible: boolean) => ({
+  type: setIsVisible.type,
+  payload: isVisible,
+});
+
 export const selectNotes = (state: RootState) => state.notes;
 
 export default notesSlice.reducer;

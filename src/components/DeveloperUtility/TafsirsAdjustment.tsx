@@ -7,7 +7,10 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import styles from './TafsirsAdjustment.module.scss';
 
-import { selectSelectedTafsirs, setSelectedTafsirs } from '@/redux/slices/QuranReader/tafsirs';
+import {
+  selectSelectedTafsirs,
+  setSelectedTafsirsAction,
+} from '@/redux/slices/QuranReader/tafsirs';
 import { areArraysEqual } from '@/utils/array';
 import { getTafsirs } from 'src/api';
 import TafsirInfo from 'types/TafsirInfo';
@@ -49,10 +52,7 @@ const TafsirsAdjustment = () => {
     const selectedTafsirsIDs = Array.from(e.target.selectedOptions, (option) =>
       Number(option.value),
     );
-    dispatch({
-      type: setSelectedTafsirs.type,
-      payload: { tafsirs: selectedTafsirsIDs, locale: lang },
-    });
+    dispatch(setSelectedTafsirsAction(selectedTafsirsIDs, lang));
   };
 
   return (

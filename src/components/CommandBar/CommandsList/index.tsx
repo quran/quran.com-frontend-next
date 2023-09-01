@@ -15,9 +15,9 @@ import CommandPrefix from './CommandPrefix';
 
 import useScroll, { SMOOTH_SCROLL_TO_CENTER } from '@/hooks/useScrollToElement';
 import {
-  addRecentNavigation,
-  removeRecentNavigation,
-  setIsOpen,
+  removeRecentNavigationAction,
+  setIsOpenAction,
+  addRecentNavigationAction,
 } from '@/redux/slices/CommandBar/state';
 import { logButtonClick } from '@/utils/eventLogger';
 import { resolveUrlBySearchNavigationType } from '@/utils/navigation';
@@ -30,7 +30,10 @@ export interface Command extends SearchNavigationResult {
 }
 
 interface Props {
-  commandGroups: { groups: Record<string, Command[]>; numberOfCommands: number };
+  commandGroups: {
+    groups: Record<string, Command[]>;
+    numberOfCommands: number;
+  };
 }
 
 const CommandsList: React.FC<Props> = ({ commandGroups: { groups, numberOfCommands } }) => {
@@ -75,8 +78,8 @@ const CommandsList: React.FC<Props> = ({ commandGroups: { groups, numberOfComman
     (command: Command) => {
       const { name, resultType, key } = command;
       router.push(resolveUrlBySearchNavigationType(resultType, key)).then(() => {
-        dispatch({ type: addRecentNavigation.type, payload: { name, resultType, key } });
-        dispatch({ type: setIsOpen.type, payload: false });
+        dispatch(addRecentNavigationAction({ name, resultType, key }));
+        dispatch(setIsOpenAction(false));
       });
     },
     [dispatch, router],
@@ -123,7 +126,7 @@ const CommandsList: React.FC<Props> = ({ commandGroups: { groups, numberOfComman
     logButtonClick('remove_command_bar_navigation');
     // to not allow the event to bubble up to the parent container
     event.stopPropagation();
-    dispatch({ type: removeRecentNavigation.type, payload: navigationItemKey });
+    dispatch(removeRecentNavigationAction(navigationItemKey));
   };
 
   if (numberOfCommands === 0) {
@@ -154,7 +157,9 @@ const CommandsList: React.FC<Props> = ({ commandGroups: { groups, numberOfComman
                       role="option"
                       aria-selected={isSelected}
                       key={command.index}
-                      className={classNames(styles.command, { [styles.selected]: isSelected })}
+                      className={classNames(styles.command, {
+                        [styles.selected]: isSelected,
+                      })}
                       onClick={() => navigateToLink(command)}
                       onMouseOver={() => setSelectedCommandIndex(command.index)}
                     >

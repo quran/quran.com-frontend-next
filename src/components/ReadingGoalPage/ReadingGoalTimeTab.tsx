@@ -19,6 +19,16 @@ const options = [
   },
 ] as const;
 
+type SetPeriodAction = {
+  type: 'SET_PERIOD';
+  payload: { period: QuranGoalPeriod };
+};
+
+const setPeriodAction = (period: QuranGoalPeriod): SetPeriodAction => ({
+  type: 'SET_PERIOD',
+  payload: { period },
+});
+
 const ReadingGoalTimeTab: React.FC<ReadingGoalTabProps> = ({ state, dispatch, nav, logClick }) => {
   const { t } = useTranslation('reading-goal');
 
@@ -35,7 +45,7 @@ const ReadingGoalTimeTab: React.FC<ReadingGoalTabProps> = ({ state, dispatch, na
             key={option.key}
             icon={option.icon}
             onSelect={() => {
-              dispatch({ type: 'SET_PERIOD', payload: { period: option.key } });
+              dispatch(setPeriodAction(option.key));
               logClick(option.key);
             }}
             selected={state.period === option.key}

@@ -6,7 +6,7 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import styles from './Notes.module.scss';
 
-import { setIsVisible, selectNotes } from '@/redux/slices/QuranReader/notes';
+import { setIsVisibleAction, selectNotes } from '@/redux/slices/QuranReader/notes';
 
 const Notes = () => {
   const dispatch = useDispatch();
@@ -16,7 +16,7 @@ const Notes = () => {
     <div className={classNames(styles.container, { [styles.visibleContainer]: isVisible })}>
       Notes placeholders
       <br />
-      <button type="button" onClick={() => dispatch({ type: setIsVisible.type, payload: false })}>
+      <button type="button" onClick={() => dispatch(setIsVisibleAction(false))}>
         close
       </button>
     </div>

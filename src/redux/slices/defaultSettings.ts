@@ -42,6 +42,11 @@ export const persistDefaultSettings = createAsyncThunk<void, string, { state: Ro
 
 export const { setIsUsingDefaultSettings } = defaultSettingsSlice.actions;
 
+export const setIsUsingDefaultSettingsAction = (isUsingDefaultSettings: boolean) => ({
+  type: setIsUsingDefaultSettings.type,
+  payload: isUsingDefaultSettings,
+});
+
 export default defaultSettingsSlice.reducer;
 
 export const selectIsUsingDefaultSettings = (state: RootState) =>

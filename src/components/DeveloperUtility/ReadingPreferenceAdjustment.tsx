@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import {
   selectReadingPreference,
-  setReadingPreference,
+  setReadingPreferenceAction,
 } from '@/redux/slices/QuranReader/readingPreferences';
 import { ReadingPreference } from 'types/QuranReader';
 
@@ -23,9 +23,7 @@ const ReadingPreferenceAdjustment = () => {
         Reading preference{' '}
         <select
           name="font-styles"
-          onChange={(event) =>
-            dispatch({ type: setReadingPreference.type, payload: event.target.value })
-          }
+          onChange={(event) => dispatch(setReadingPreferenceAction(event.target.value))}
           value={quranReadingPreference}
         >
           {availableReadingPreferences.map((readingPreference) => (

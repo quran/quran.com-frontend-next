@@ -62,6 +62,26 @@ export const {
   setSettingsView,
 } = navbarSlice.actions;
 
+export const setIsVisibleAction = (isVisible: boolean) => ({
+  type: setIsVisible.type,
+  payload: isVisible,
+});
+
+export const setIsNavigationDrawerOpenAction = (isNavigationDrawerOpen: boolean) => ({
+  type: setIsNavigationDrawerOpen.type,
+  payload: isNavigationDrawerOpen,
+});
+
+export const setIsSearchDrawerOpenAction = (isSearchDrawerOpen: boolean) => ({
+  type: setIsSearchDrawerOpen.type,
+  payload: isSearchDrawerOpen,
+});
+
+export const setIsSettingsDrawerOpenAction = (isSettingsDrawerOpen: boolean) => ({
+  type: setIsSettingsDrawerOpen.type,
+  payload: isSettingsDrawerOpen,
+});
+
 export const selectNavbar = (state: RootState) => state.navbar;
 
 export default navbarSlice.reducer;
