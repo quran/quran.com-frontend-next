@@ -14,6 +14,7 @@ import DataContext from '@/contexts/DataContext';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import Calendar from '@/dls/Calendar';
 import DurationInput from '@/dls/DurationInput';
+import { ModalSize } from '@/dls/Modal/Content';
 import Modal from '@/dls/Modal/Modal';
 import Spinner from '@/dls/Spinner/Spinner';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
@@ -215,7 +216,12 @@ const AddReading = () => {
       <Button onClick={onOpenClick} variant={ButtonVariant.Outlined}>
         {t('manually-add')}
       </Button>
-      <Modal isOpen={isOpen} onClickOutside={onClose} onEscapeKeyDown={onClose}>
+      <Modal
+        isOpen={isOpen}
+        onClickOutside={onClose}
+        onEscapeKeyDown={onClose}
+        size={ModalSize.LARGE}
+      >
         <Modal.Body>
           <Modal.Header>
             <Modal.Title>
