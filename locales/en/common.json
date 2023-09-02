@@ -359,5 +359,8 @@
         "title": "Word Click"
     },
     "word-tooltip": "Word Tooltip",
-    "yes": "Yes"
+    "yes": "Yes",
+    "hours": "Hours",
+    "minutes": "Minutes",
+    "seconds": "Seconds"
 }

@@ -1,8 +1,9 @@
 /* eslint-disable max-lines */
-import { useMemo, useState, useContext } from 'react';
+import { useMemo, useState, useContext, useEffect } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import { useSWRConfig } from 'swr';
+import useSWRImmutable from 'swr/immutable';
 
 import styles from './AddReading.module.scss';
 
@@ -12,6 +13,7 @@ import { isValidVerseRange } from '@/components/ReadingGoalPage/utils/validator'
 import DataContext from '@/contexts/DataContext';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import Calendar from '@/dls/Calendar';
+import DurationInput from '@/dls/DurationInput';
 import Modal from '@/dls/Modal/Modal';
 import Spinner from '@/dls/Spinner/Spinner';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
@@ -21,8 +23,12 @@ import ChevronRight from '@/icons/chevron-right.svg';
 import ArrowLeft from '@/icons/west.svg';
 import { ActivityDayType } from '@/types/auth/ActivityDay';
 import { getFilterActivityDaysParamsOfCurrentMonth } from '@/utils/activity-day';
-import { updateActivityDay } from '@/utils/auth/api';
-import { makeFilterActivityDaysUrl, makeStreakUrl } from '@/utils/auth/apiPaths';
+import { estimateReadingTime, updateActivityDay } from '@/utils/auth/api';
+import {
+  makeEstimateReadingTimeUrl,
+  makeFilterActivityDaysUrl,
+  makeStreakUrl,
+} from '@/utils/auth/apiPaths';
 import {
   dateToDateString,
   dateToReadableFormat,
@@ -48,6 +54,15 @@ const AddReading = () => {
   const mushaf = useGetMushaf();
   const toast = useToast();
   const { cache, mutate } = useSWRConfig();
+
+  const [totalSeconds, setTotalSeconds] = useState<number>(0);
+  const { isValidating, data } = useSWRImmutable(makeEstimateReadingTimeUrl({ ranges }), () =>
+    estimateReadingTime({ ranges }),
+  );
+
+  useEffect(() => {
+    setTotalSeconds(data?.data?.seconds || 0);
+  }, [data]);
 
   const onClose = () => {
     setIsOpen(false);
@@ -166,6 +181,7 @@ const AddReading = () => {
   const onSubmitClick = () => {
     const payload = {
       ranges,
+      seconds: totalSeconds,
       date: selectedDate,
       type: ActivityDayType.QURAN,
       mushafId: mushaf,
@@ -264,6 +280,15 @@ const AddReading = () => {
               <Button isDisabled={getIsAddButtonDisabled()} onClick={onAddClick}>
                 {t('add')}
               </Button>
+
+              <div className={styles.durationInputWrapper}>
+                <DurationInput
+                  totalSeconds={totalSeconds}
+                  onTotalSecondsChange={setTotalSeconds}
+                  disabled={isValidating}
+                  label={t('reading-time')}
+                />
+              </div>
 
               <div className={styles.verseRangesListContainer}>
                 <VerseRangesList ranges={ranges} allowClearingRanges setRanges={setRanges} />

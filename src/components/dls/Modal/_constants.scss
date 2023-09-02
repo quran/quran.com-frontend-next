@@ -1,5 +1,8 @@
 $animationDuration: 0.35s;
 $animationEasing: cubic-bezier(0.4, 0, 0.2, 1);
+
 $desktopWidth: 90vw;
-$desktopMaxWidth: calc(30.5 * var(--spacing-medium));
+$desktopMaxWidthMedium: calc(30.5 * var(--spacing-medium));
+$desktopMaxWidthLarge: calc(36 * var(--spacing-large));
+
 $mobileWidth: 100vw;

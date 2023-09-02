@@ -25,5 +25,6 @@
     "no-reading-history-for": "No reading history for {{date}}",
     "reading-progress-header": "Your Progress",
     "reading-progress-streak": "Streak",
-    "you-read": "You read:"
+    "you-read": "You read:",
+    "reading-time": "Reading time"
 }
