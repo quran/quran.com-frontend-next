@@ -181,6 +181,7 @@
     "help": "Helpen",
     "hizb": "Hizb",
     "home": "Huis",
+    "hours": "Uur",
     "inline": "In lijn",
     "input": {
         "clear": "Duidelijk"
@@ -196,6 +197,7 @@
     "meccan": "Mekkaans",
     "medinan": "Medina",
     "menu": "Menu",
+    "minutes": "Minuten",
     "mobile-apps": "Mobiele apps",
     "mode": "Modus",
     "more": "Meer",
@@ -259,6 +261,7 @@
         "switch-mode": "Overschakelen naar Geavanceerd zoeken",
         "title": "Zoeken"
     },
+    "seconds": "Seconden",
     "settings": {
         "no-tafsir-selected": "Geen tafsir geselecteerd",
         "no-translation-selected": "Geen vertaling geselecteerd",

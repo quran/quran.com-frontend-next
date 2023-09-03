@@ -25,5 +25,6 @@
     "no-reading-history-for": "بدون سابقه خواندن برای {{date}}",
     "reading-progress-header": "پیشرفت شما",
     "reading-progress-streak": "خط",
+    "reading-time": "زمان خواندن",
     "you-read": "تو می خوانی:"
 }

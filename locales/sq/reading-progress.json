@@ -25,5 +25,6 @@
     "no-reading-history-for": "Nuk ka histori leximi për {{date}}",
     "reading-progress-header": "Përparimi juaj",
     "reading-progress-streak": "brez",
+    "reading-time": "Koha e leximit",
     "you-read": "Ti lexon:"
 }

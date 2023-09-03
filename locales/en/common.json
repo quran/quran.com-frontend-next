@@ -181,6 +181,7 @@
     "help": "Help",
     "hizb": "Hizb",
     "home": "Home",
+    "hours": "Hours",
     "inline": "In-line",
     "input": {
         "clear": "Clear"
@@ -196,6 +197,7 @@
     "meccan": "Meccan",
     "medinan": "Medinan",
     "menu": "Menu",
+    "minutes": "Minutes",
     "mobile-apps": "Mobile Apps",
     "mode": "Mode",
     "more": "More",
@@ -259,6 +261,7 @@
         "switch-mode": "Switch to Advanced Search",
         "title": "Search"
     },
+    "seconds": "Seconds",
     "settings": {
         "no-tafsir-selected": "No tafsir selected",
         "no-translation-selected": "No translation selected",
@@ -359,8 +362,5 @@
         "title": "Word Click"
     },
     "word-tooltip": "Word Tooltip",
-    "yes": "Yes",
-    "hours": "Hours",
-    "minutes": "Minutes",
-    "seconds": "Seconds"
+    "yes": "Yes"
 }

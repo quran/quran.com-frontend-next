@@ -181,6 +181,7 @@
     "help": "帮助",
     "hizb": "希兹布",
     "home": "首页",
+    "hours": "小时",
     "inline": "排队",
     "input": {
         "clear": "清除"
@@ -196,6 +197,7 @@
     "meccan": "麦加",
     "medinan": "麦地那",
     "menu": "菜单",
+    "minutes": "分钟",
     "mobile-apps": "手机App",
     "mode": "模式",
     "more": "更多的",
@@ -259,6 +261,7 @@
         "switch-mode": "切换到高级搜索",
         "title": "搜索"
     },
+    "seconds": "秒数",
     "settings": {
         "no-tafsir-selected": "尚未选择经注",
         "no-translation-selected": "尚未选择译文",
