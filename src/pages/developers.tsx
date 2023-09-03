@@ -76,7 +76,7 @@ const DevelopersPage = () => {
                 components={[
                   <a
                     key={0}
-                    href="https://api-docs.quran.com/quran.com/v4"
+                    href="https://api-docs.quran.com/docs/category/quran.com-api"
                     target="_blank"
                     rel="noreferrer"
                   />,

@@ -43,6 +43,7 @@ import {
   makeGoalUrl,
   makeFilterActivityDaysUrl,
   makeStreakUrl,
+  makePostReflectionViewsUrl,
 } from '@/utils/auth/apiPaths';
 import { fetcher } from 'src/api';
 import CompleteAnnouncementRequest from 'types/auth/CompleteAnnouncementRequest';
@@ -212,6 +213,9 @@ export const getStreakWithUserMetadata = async (
 export const syncUserLocalData = async (
   payload: Record<SyncDataType, any>,
 ): Promise<SyncUserLocalDataResponse> => postRequest(makeSyncLocalDataUrl(), payload);
+
+export const postReflectionViews = async (postId: string): Promise<{ success: boolean }> =>
+  postRequest(makePostReflectionViewsUrl(postId), {});
 
 export const getUserPreferences = async (): Promise<UserPreferencesResponse> => {
   const userPreferences = (await privateFetcher(
