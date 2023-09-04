@@ -81,7 +81,7 @@
 
 .section {
   width: calc(100% / 3);
-  @include breakpoints.smallerThanMobileM {
+  @include breakpoints.smallerThanTablet {
     width: 50%;
   }
 }
