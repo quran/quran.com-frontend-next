@@ -167,6 +167,8 @@ export const dateToYearMonthDay = (date: Date): { year: number; month: number; d
 
 export const getCurrentMonth = () => new Date().getMonth() + 1;
 
+export const getCurrentDay = () => new Date().getDate();
+
 /**
  * Converts a date instance to a string in this format: YYYY-MM-DD
  *
@@ -190,7 +192,7 @@ export const dateToDateString = (
  *
  */
 export const getFullDayName = (day: Date, locale: string): string => {
-  return day.toLocaleDateString(locale, { weekday: 'long' });
+  return day.toLocaleDateString(locale, { weekday: 'long', timeZone: 'UTC' });
 };
 
 /**
@@ -203,7 +205,7 @@ export const getFullDayName = (day: Date, locale: string): string => {
  *
  */
 export const getFullMonthName = (month: Date, locale: string): string => {
-  return month.toLocaleDateString(locale, { month: 'long' });
+  return month.toLocaleDateString(locale, { month: 'long', timeZone: 'UTC' });
 };
 
 /**

@@ -14,6 +14,11 @@ interface DurationInputProps {
   label?: string;
 }
 
+const commonInputProps: React.InputHTMLAttributes<HTMLInputElement> = {
+  type: 'number',
+  min: 0,
+};
+
 const DurationInput = ({
   totalSeconds,
   onTotalSecondsChange,
@@ -27,6 +32,8 @@ const DurationInput = ({
 
   const handleChange = (setter: (value: number) => void) => (e: ChangeEvent<HTMLInputElement>) => {
     const value = Number(e.target.value);
+    if (value < 0) return;
+
     setter(value);
   };
 
@@ -57,9 +64,9 @@ const DurationInput = ({
           <input
             value={hours.toString()}
             id="hours"
-            type="number"
             onChange={handleChange(setHours)}
             disabled={disabled}
+            {...commonInputProps}
           />
           <label htmlFor="hours">{t('hours')}</label>
         </div>
@@ -68,9 +75,9 @@ const DurationInput = ({
           <input
             value={minutes.toString()}
             id="minutes"
-            type="number"
             onChange={handleChange(setMinutes)}
             disabled={disabled}
+            {...commonInputProps}
           />
           <label htmlFor="minutes">{t('minutes')}</label>
         </div>
@@ -79,9 +86,9 @@ const DurationInput = ({
           <input
             value={seconds.toString()}
             id="seconds"
-            type="number"
             onChange={handleChange(setSeconds)}
             disabled={disabled}
+            {...commonInputProps}
           />
           <label htmlFor="seconds">{t('seconds')}</label>
         </div>

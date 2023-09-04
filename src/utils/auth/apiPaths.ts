@@ -108,7 +108,7 @@ export const makeActivityDaysUrl = (params: { mushafId?: Mushaf; type: ActivityD
 export const makeFilterActivityDaysUrl = (params: FilterActivityDaysParams) =>
   makeUrl('activity-days/filter', params);
 
-export const makeEstimateReadingTimeUrl = (params: { ranges: string[] }) =>
+export const makeEstimateRangesReadingTimeUrl = (params: { ranges: string[] }) =>
   makeUrl('activity-days/estimate-reading-time', { ranges: params.ranges.join(',') });
 
 export const makeGoalUrl = (params: { mushafId?: Mushaf; type: GoalCategory }) =>
