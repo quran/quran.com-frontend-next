@@ -24,6 +24,7 @@ const LOCALE_TO_REFLECTION_LANGUAGE_MAP = {
   id: ReflectionLanguage.MALAY,
   ur: ReflectionLanguage.URDU,
   ar: ReflectionLanguage.ARABIC,
+  fr: ReflectionLanguage.FRENCH,
 };
 
 /**
