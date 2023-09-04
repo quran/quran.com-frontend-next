@@ -68,7 +68,7 @@ const ReadingPreferenceSwitcher: React.FC<Props> = ({
   ];
 
   const onViewSwitched = (view: ReadingPreference) => {
-    logValueChange(`${type}.reading_preference`, readingPreference, view);
+    logValueChange(`${type}_reading_preference`, readingPreference, view);
 
     const newQueryParams = { ...router.query };
 
