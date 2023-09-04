@@ -181,6 +181,7 @@
     "help": "Yardım",
     "hizb": "Hizb",
     "home": "Anasayfa",
+    "hours": "Saat",
     "inline": "Çizgide",
     "input": {
         "clear": "Açık"
@@ -196,6 +197,7 @@
     "meccan": "Mekkeli",
     "medinan": "Medine",
     "menu": "Menü",
+    "minutes": "dakika",
     "mobile-apps": "Mobil Uygulamalar",
     "mode": "Mod",
     "more": "Daha fazla",
@@ -259,6 +261,7 @@
         "switch-mode": "Gelişmiş Aramaya Geç",
         "title": "Ara"
     },
+    "seconds": "Saniye",
     "settings": {
         "no-tafsir-selected": "Tefsir seçilmedi",
         "no-translation-selected": "Çeviri seçilmedi",

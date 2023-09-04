@@ -25,5 +25,6 @@
     "no-reading-history-for": "ไม่มีประวัติการอ่านสำหรับ {{date}}",
     "reading-progress-header": "ความก้าวหน้าของคุณ",
     "reading-progress-streak": "ช่วงเวลา",
+    "reading-time": "เวลาอ่านหนังสือ",
     "you-read": "คุณกำลังอ่าน:"
 }

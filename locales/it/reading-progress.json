@@ -25,5 +25,6 @@
     "no-reading-history-for": "Nessuna cronologia di lettura per {{date}}",
     "reading-progress-header": "I tuoi progressi",
     "reading-progress-streak": "Strisciante",
+    "reading-time": "Momento della lettura",
     "you-read": "Tu leggi:"
 }

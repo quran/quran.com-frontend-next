@@ -15,8 +15,8 @@
             },
             "quran-foundation-link": {
                 "action": "التالي",
-                "description": "استخدم تسجيل الدخول الخاص بك إلى موقع Quran.com للوصول إلى موقع QuranReflect.com - مجتمع عالمي مزدهر يشارك في التفكير القرآني.",
-                "title": "استخدم حسابك عبر تطبيقات Quran.Foundation."
+                "description": "استخدم تسجيل الدخول الخاص بك إلى موقع قرآن دوت كوم (Quran.com) للوصول إلى موقع تأملات قرآنية (QuranReflect.com) - مجتمع عالمي مزدهر يشارك في التفكير القرآني.",
+                "title": "استخدم حسابك عبر تطبيقات مؤسسة القرآن!"
             },
             "quran-growth-journey": {
                 "action": "التالي",
@@ -181,6 +181,7 @@
     "help": "مساعدة",
     "hizb": "حزب",
     "home": "الصفحة الرئيسة",
+    "hours": "ساعات",
     "inline": "في النسق",
     "input": {
         "clear": "مسح"
@@ -196,6 +197,7 @@
     "meccan": "مكية",
     "medinan": "مدنية",
     "menu": "القائمة",
+    "minutes": "دقائق",
     "mobile-apps": "تطبيقات المحمول",
     "mode": "الوضع",
     "more": "المزيد",
@@ -259,6 +261,7 @@
         "switch-mode": "تحول إلى البحث المفصل",
         "title": "بحث"
     },
+    "seconds": "ثواني",
     "settings": {
         "no-tafsir-selected": "لم يتم اختيار تفسير",
         "no-translation-selected": "لم يتم اختيار ترجمة",

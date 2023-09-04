@@ -181,6 +181,7 @@
     "help": "Ndihmë",
     "hizb": "Hizb",
     "home": "Shtëpi",
+    "hours": "orët",
     "inline": "Ne rresht",
     "input": {
         "clear": "Qartë"
@@ -196,6 +197,7 @@
     "meccan": "mekas",
     "medinan": "Medinas",
     "menu": "Menu",
+    "minutes": "Minutat",
     "mobile-apps": "Aplikacionet celulare",
     "mode": "Modaliteti",
     "more": "Më shumë",
@@ -259,6 +261,7 @@
         "switch-mode": "Kalo te Kërkimi i Avancuar",
         "title": "Kërko"
     },
+    "seconds": "Sekonda",
     "settings": {
         "no-tafsir-selected": "Nuk është zgjedhur asnjë tefsir",
         "no-translation-selected": "Nuk u zgjodh asnjë përkthim",

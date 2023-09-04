@@ -25,5 +25,6 @@
     "no-reading-history-for": "{{date}} için okuma geçmişi yok",
     "reading-progress-header": "Senin ilerlemen",
     "reading-progress-streak": "Rüzgâr gibi geçmek",
+    "reading-time": "Okuma zamanı",
     "you-read": "Sen okumak:"
 }

@@ -181,6 +181,7 @@
     "help": "Bantuan",
     "hizb": "Hizb",
     "home": "Halaman Utama",
+    "hours": "Jam",
     "inline": "Dalam barisan",
     "input": {
         "clear": "Hilangkan"
@@ -196,6 +197,7 @@
     "meccan": "Mekah",
     "medinan": "Madinah",
     "menu": "Menu",
+    "minutes": "minit",
     "mobile-apps": "Aplikasi Fon",
     "mode": "Mod",
     "more": "Lagi",
@@ -259,6 +261,7 @@
         "switch-mode": "Tukar kepada Carian Terperinci",
         "title": "Cari"
     },
+    "seconds": "Detik",
     "settings": {
         "no-tafsir-selected": "Tiada tafsir yang dipilih",
         "no-translation-selected": "Tiada terjemahan yang dipilih",

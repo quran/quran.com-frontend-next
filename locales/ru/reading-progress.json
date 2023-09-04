@@ -25,5 +25,6 @@
     "no-reading-history-for": "Нет истории чтения за {{date}}",
     "reading-progress-header": "Ваш прогресс",
     "reading-progress-streak": "Полоса",
+    "reading-time": "Время чтения",
     "you-read": "Ты читаешь:"
 }
