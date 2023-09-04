@@ -51,13 +51,15 @@ const Calendar = ({ month, year, getIsDayDisabled, onDayClick, isLoading }: Cale
 
           const isDisabled = getIsDisabled(day, dateString);
 
+          const handleDayClick = () => onDayClick?.(day, dateString);
+
           return (
             <div key={dateString} className={classNames(index > 6 && styles.bordered)}>
               <button
                 type="button"
                 disabled={isDisabled}
                 className={classNames({ [styles.disabled]: isDisabled })}
-                onClick={() => onDayClick?.(day, dateString)}
+                onClick={handleDayClick}
               >
                 <time dateTime={dateString}>{toLocalizedNumber(day, lang)}</time>
               </button>
