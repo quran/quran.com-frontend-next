@@ -1,39 +1,20 @@
-@use "src/styles/breakpoints";
-
 $readingPreferenceMaxWidth: calc(20 * var(--spacing-large));
+$contextMenuReadingPreferenceMaxWidth: calc(10 * var(--spacing-large));
 .container {
   max-width: $readingPreferenceMaxWidth;
-  margin-block-start: var(--spacing-small);
-  margin-block-end: var(--spacing-xxsmall);
   margin-inline-start: auto;
   margin-inline-end: auto;
   padding-block-start: 0;
   padding-block-end: 0;
   padding-inline-start: var(--spacing-small);
   padding-inline-end: var(--spacing-small);
+}
 
-  button {
-    max-height: 40px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    
-    // Open to suggestions to implement this in a better way
-    &:nth-child(1) {
-      margin-right: var(--spacing-small);
-    }
-    &:nth-child(2) {
-      margin-left: var(--spacing-micro);
-    }
-    
-    @include breakpoints.smallerThanTablet {
-      max-height: 25px;
-      &:nth-child(1) {
-        margin-right: var(--spacing-micro);
-      }
-      &:nth-child(2) {
-        margin-left: var(--spacing-micro);
-      }
-    }
-  }
+.surahHeaderContainer {
+  margin-block-start: var(--spacing-small);
+  margin-block-end: var(--spacing-xxsmall);
+}
+
+.contextMenuContainer {
+  max-width: $contextMenuReadingPreferenceMaxWidth;
 }

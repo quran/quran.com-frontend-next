@@ -12,19 +12,18 @@
 }
 
 .preferenceTextContainer {
-  padding-left: var(--spacing-xsmall);
+  padding-inline-start: var(--spacing-xsmall);
 }
 
 .iconContainer {
   & > svg {
-    width: var(--spacing-mega);
+    width: 15px;
     display: block;
     margin: auto;
   }
 
   @include breakpoints.smallerThanTablet {
     & > svg {
-      width: var(--spacing-small);
       -webkit-margin-end: 0;
       margin-inline-end: 0;
     }

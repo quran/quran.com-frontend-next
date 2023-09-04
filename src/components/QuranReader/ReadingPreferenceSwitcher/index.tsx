@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 
@@ -98,7 +99,12 @@ const ReadingPreferenceSwitcher: React.FC<Props> = ({
   };
 
   return (
-    <div className={styles.container}>
+    <div
+      className={classNames(styles.container, {
+        [styles.surahHeaderContainer]: type === ReadingPreferenceSwitcherType.SurahHeader,
+        [styles.contextMenuContainer]: type === ReadingPreferenceSwitcherType.ContextMenu,
+      })}
+    >
       <Switch
         items={readingPreferencesOptions}
         selected={readingPreference}

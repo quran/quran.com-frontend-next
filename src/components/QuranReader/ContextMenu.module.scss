@@ -14,7 +14,6 @@
   inset-block-start: -1px;
   min-height: var(--spacing-medium);
   will-change: transform;
-  transform: translate3d(0, calc(-100% + var(--spacing-micro)), 0); // '+ spacing micro' to accommodate progress bar
   &:after {
     display: block;
     content: "";
@@ -82,6 +81,9 @@
 
 .section {
   width: calc(100% / 3);
+  @include breakpoints.smallerThanMobileM {
+    width: 50%;
+  }
 }
 
 .alignStart {

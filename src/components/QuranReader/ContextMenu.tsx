@@ -61,15 +61,6 @@ const ContextMenu = () => {
   const verse = getVerseNumberFromKey(verseKey);
   const progress = getChapterReadingProgress(verse, chapterData.versesCount);
 
-  let readingPreferenceSize; // defaults to Normal
-  if (showReadingPreferenceSwitcher) {
-    if (isMobile()) {
-      readingPreferenceSize = SwitchSize.Small;
-    } else {
-      readingPreferenceSize = SwitchSize.Normal;
-    }
-  }
-
   return (
     <div
       className={classNames(styles.container, {
@@ -119,7 +110,7 @@ const ContextMenu = () => {
         {showReadingPreferenceSwitcher && (
           <div className={styles.halfSection}>
             <ReadingPreferenceSwitcher
-              size={readingPreferenceSize}
+              size={SwitchSize.XSmall}
               isIconsOnly
               type={ReadingPreferenceSwitcherType.ContextMenu}
             />
