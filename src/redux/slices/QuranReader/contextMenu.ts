@@ -5,9 +5,10 @@ import SliceName from '@/redux/types/SliceName';
 
 export type ContextMenu = {
   isExpanded: boolean;
+  showReadingPreferenceSwitcher: boolean;
 };
 
-const initialState: ContextMenu = { isExpanded: true };
+const initialState: ContextMenu = { isExpanded: true, showReadingPreferenceSwitcher: false };
 
 export const contextMenuSlice = createSlice({
   name: SliceName.CONTEXT_MENU,
@@ -17,10 +18,14 @@ export const contextMenuSlice = createSlice({
       ...state,
       isExpanded: action.payload,
     }),
+    setShowReadingPreferenceSwitcher: (state: ContextMenu, action: PayloadAction<boolean>) => ({
+      ...state,
+      showReadingPreferenceSwitcher: action.payload,
+    }),
   },
 });
 
-export const { setIsExpanded } = contextMenuSlice.actions;
+export const { setIsExpanded, setShowReadingPreferenceSwitcher } = contextMenuSlice.actions;
 
 export const selectContextMenu = (state: RootState) => state.contextMenu;
 
