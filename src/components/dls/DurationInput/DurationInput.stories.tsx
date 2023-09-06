@@ -19,3 +19,13 @@ export const Default = (args) => {
     />
   );
 };
+
+export const WithDisabled = Default.bind({});
+WithDisabled.args = {
+  disabled: true,
+};
+
+export const WithLoading = Default.bind({});
+WithLoading.args = {
+  isLoading: true,
+};

@@ -54,13 +54,13 @@
   // first input, border radius on left only
   & > div:first-child > input {
     [dir="ltr"] & {
-      border-top-left-radius: var(--border-radius-rounded);
-      border-bottom-left-radius: var(--border-radius-rounded);
+      border-start-start-radius: var(--border-radius-rounded);
+      border-end-start-radius: var(--border-radius-rounded);
     }
 
     [dir="rtl"] & {
-      border-top-right-radius: var(--border-radius-rounded);
-      border-bottom-right-radius: var(--border-radius-rounded);
+      border-start-end-radius: var(--border-radius-rounded);
+      border-end-end-radius: var(--border-radius-rounded);
     }
 
     border: 1px solid var(--color-borders-hairline);
@@ -69,13 +69,13 @@
   // last input, border radius on right only
   & > div:last-child > input {
     [dir="ltr"] & {
-      border-top-right-radius: var(--border-radius-rounded);
-      border-bottom-right-radius: var(--border-radius-rounded);
+      border-start-end-radius: var(--border-radius-rounded);
+      border-end-end-radius: var(--border-radius-rounded);
     }
 
     [dir="rtl"] & {
-      border-top-left-radius: var(--border-radius-rounded);
-      border-bottom-left-radius: var(--border-radius-rounded);
+      border-start-start-radius: var(--border-radius-rounded);
+      border-end-start-radius: var(--border-radius-rounded);
     }
 
     border: 1px solid var(--color-borders-hairline);
@@ -83,7 +83,17 @@
 }
 
 .disabled {
-  opacity: var(--opacity-75);
+  opacity: var(--opacity-50);
+}
+
+.disabledInput {
+  background-color: var(--color-background-alternative-faded) !important;
+}
+
+.loadingSpinner {
+  margin: auto;
+  position: fixed;
+  inset-inline-start: 50%;
 }
 
 .error {

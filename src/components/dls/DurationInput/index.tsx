@@ -5,12 +5,14 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from './DurationInput.module.scss';
 
+import Spinner from '@/dls/Spinner/Spinner';
 import { convertNumberToDecimal } from '@/utils/number';
 
 interface DurationInputProps {
   totalSeconds: number;
   onTotalSecondsChange: (totalSeconds: number) => void;
   disabled?: boolean;
+  isLoading?: boolean;
   label?: string;
   error?: string;
 }
@@ -23,7 +25,8 @@ const commonInputProps: React.InputHTMLAttributes<HTMLInputElement> = {
 const DurationInput = ({
   totalSeconds,
   onTotalSecondsChange,
-  disabled,
+  disabled = false,
+  isLoading = false,
   label,
   error,
 }: DurationInputProps) => {
@@ -31,6 +34,8 @@ const DurationInput = ({
   const [minutes, setMinutes] = useState<number>(0);
   const [seconds, setSeconds] = useState<number>(0);
   const { t } = useTranslation('common');
+
+  const isDisabled = disabled || isLoading;
 
   const handleChange = (setter: (value: number) => void) => (e: ChangeEvent<HTMLInputElement>) => {
     const value = Number(e.target.value);
@@ -53,8 +58,13 @@ const DurationInput = ({
     setSeconds(convertNumberToDecimal(newSeconds, 1));
   }, [totalSeconds]);
 
+  const commonInputClassName = classNames({
+    [styles.disabledInput]: isDisabled,
+  });
+
   return (
     <div>
+      {isLoading && <Spinner className={styles.loadingSpinner} />}
       {label && (
         <label className={styles.label} htmlFor="hours">
           {label}
@@ -64,7 +74,7 @@ const DurationInput = ({
       <div
         className={classNames(
           styles.durationInputContainer,
-          disabled && styles.disabled,
+          isDisabled && styles.disabled,
           error && styles.error,
         )}
       >
@@ -73,7 +83,8 @@ const DurationInput = ({
             value={hours.toString()}
             id="hours"
             onChange={handleChange(setHours)}
-            disabled={disabled}
+            disabled={isDisabled}
+            className={commonInputClassName}
             {...commonInputProps}
           />
           <label htmlFor="hours">{t('hours')}</label>
@@ -84,7 +95,8 @@ const DurationInput = ({
             value={minutes.toString()}
             id="minutes"
             onChange={handleChange(setMinutes)}
-            disabled={disabled}
+            disabled={isDisabled}
+            className={commonInputClassName}
             {...commonInputProps}
           />
           <label htmlFor="minutes">{t('minutes')}</label>
@@ -95,7 +107,8 @@ const DurationInput = ({
             value={seconds.toString()}
             id="seconds"
             onChange={handleChange(setSeconds)}
-            disabled={disabled}
+            disabled={isDisabled}
+            className={commonInputClassName}
             {...commonInputProps}
           />
           <label htmlFor="seconds">{t('seconds')}</label>

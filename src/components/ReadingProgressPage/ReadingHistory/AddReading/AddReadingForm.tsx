@@ -75,7 +75,7 @@ const AddReadingForm = ({
         <DurationInput
           totalSeconds={totalSeconds}
           onTotalSecondsChange={setTotalSeconds}
-          disabled={isFetchingSeconds}
+          isLoading={isFetchingSeconds}
           label={t('reading-time')}
           error={totalSecondsError}
         />
