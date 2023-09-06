@@ -1,5 +1,5 @@
 /* eslint-disable max-lines */
-import { useMemo, useState, useEffect } from 'react';
+import { useMemo, useState, useEffect, useCallback } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import { useSWRConfig } from 'swr';
@@ -8,6 +8,7 @@ import useSWRImmutable from 'swr/immutable';
 import styles from './AddReading.module.scss';
 import AddReadingForm from './AddReadingForm';
 
+import buildTranslatedErrorMessageByErrorId from '@/components/FormBuilder/buildTranslatedErrorMessageByErrorId';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import Calendar from '@/dls/Calendar';
 import { ModalSize } from '@/dls/Modal/Content';
@@ -19,6 +20,7 @@ import ChevronLeft from '@/icons/chevron-left.svg';
 import ChevronRight from '@/icons/chevron-right.svg';
 import ArrowLeft from '@/icons/west.svg';
 import { ActivityDayType } from '@/types/auth/ActivityDay';
+import ErrorMessageId from '@/types/ErrorMessageId';
 import { getFilterActivityDaysParamsOfCurrentMonth } from '@/utils/activity-day';
 import { estimateRangesReadingTime, updateActivityDay } from '@/utils/auth/api';
 import {
@@ -45,6 +47,7 @@ const AddReading = () => {
 
   const [ranges, setRanges] = useState<string[]>([]);
   const [totalSeconds, setTotalSeconds] = useState<number>(0);
+  const [totalSecondsError, setTotalSecondsError] = useState<string | null>(null);
 
   const months = useMemo(() => getMonthsInYear(selectedYear, lang), [selectedYear, lang]);
   const mushaf = useGetMushaf();
@@ -106,6 +109,16 @@ const AddReading = () => {
     setSelectedDate(dateString);
   };
 
+  const onTotalSecondsChange = useCallback(
+    (newTotalSeconds: number) => {
+      setTotalSeconds(newTotalSeconds);
+      if (totalSecondsError && newTotalSeconds > 0) {
+        setTotalSecondsError(null);
+      }
+    },
+    [totalSecondsError],
+  );
+
   /**
    * Check if a day is disabled. A day is disabled if it's later than today.
    *
@@ -133,7 +146,15 @@ const AddReading = () => {
     return false;
   };
 
+  // eslint-disable-next-line react-func/max-lines-per-function
   const onSubmitClick = async () => {
+    if (totalSeconds < 1) {
+      setTotalSecondsError(
+        buildTranslatedErrorMessageByErrorId(ErrorMessageId.RequiredField, t('reading-time'), t),
+      );
+      return;
+    }
+
     const payload = {
       ranges,
       seconds: totalSeconds,
@@ -236,8 +257,9 @@ const AddReading = () => {
               ranges={ranges}
               setRanges={setRanges}
               totalSeconds={totalSeconds}
-              setTotalSeconds={setTotalSeconds}
+              setTotalSeconds={onTotalSecondsChange}
               isFetchingSeconds={isValidating}
+              totalSecondsError={totalSecondsError}
             />
           )}
         </Modal.Body>

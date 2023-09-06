@@ -55,6 +55,7 @@ export const secondsToReadableFormat = (s: number, t: Translate, locale: string)
     seconds %= 60;
   }
 
+  // if there are seconds left, or if the duration is 0 (in this case, `results.length` = 0), add seconds
   if (seconds > 0 || results.length === 0) {
     results.push(
       t('reading-goal:x-seconds', {

@@ -20,6 +20,7 @@ interface AddReadingFormProps {
   setTotalSeconds: (totalSeconds: number) => void;
 
   isFetchingSeconds: boolean;
+  totalSecondsError?: string;
 }
 
 const AddReadingForm = ({
@@ -28,6 +29,7 @@ const AddReadingForm = ({
   totalSeconds,
   setTotalSeconds,
   isFetchingSeconds,
+  totalSecondsError,
 }: AddReadingFormProps) => {
   const chaptersData = useContext(DataContext);
   const { t } = useTranslation('reading-progress');
@@ -75,6 +77,7 @@ const AddReadingForm = ({
           onTotalSecondsChange={setTotalSeconds}
           disabled={isFetchingSeconds}
           label={t('reading-time')}
+          error={totalSecondsError}
         />
       </div>
 

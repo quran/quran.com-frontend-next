@@ -85,3 +85,20 @@
 .disabled {
   opacity: var(--opacity-75);
 }
+
+.error {
+  input {
+    border-color: var(--color-text-error) !important;
+    color: var(--color-text-error);
+  }
+
+  label {
+    color: var(--color-text-error) !important;
+  }
+}
+
+.errorMessage {
+  color: var(--color-text-error);
+  border-color: var(--color-text-error);
+  margin-block-start: var(--spacing-xsmall);
+}
