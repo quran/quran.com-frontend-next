@@ -69,6 +69,8 @@ const AddReading = () => {
     setRanges([]);
     // reset selected date
     setSelectedDate(null);
+    // reset seconds error
+    setTotalSecondsError(null);
   };
 
   const onOpenClick = () => {
