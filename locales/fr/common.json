@@ -181,6 +181,7 @@
     "help": "Aider",
     "hizb": "Hizb",
     "home": "Accueil",
+    "hours": "Heures",
     "inline": "En ligne",
     "input": {
         "clear": "Dégager"
@@ -196,6 +197,7 @@
     "meccan": "La Mecque",
     "medinan": "Médinan",
     "menu": "Menu",
+    "minutes": "Minutes",
     "mobile-apps": "Application mobile",
     "mode": "Mode",
     "more": "Suite",
@@ -259,6 +261,7 @@
         "switch-mode": "Passer à la recherche avancée",
         "title": "Chercher"
     },
+    "seconds": "Secondes",
     "settings": {
         "no-tafsir-selected": "Aucun tafsir sélectionné",
         "no-translation-selected": "Aucune traduction sélectionnée",

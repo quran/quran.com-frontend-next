@@ -43,6 +43,7 @@ import {
   makeGoalUrl,
   makeFilterActivityDaysUrl,
   makeStreakUrl,
+  makeEstimateRangesReadingTimeUrl,
   makePostReflectionViewsUrl,
 } from '@/utils/auth/apiPaths';
 import { fetcher } from 'src/api';
@@ -205,6 +206,12 @@ export const updateActivityDay = async ({
   ...body
 }: UpdateActivityDayBody): Promise<ActivityDay> =>
   postRequest(makeActivityDaysUrl({ mushafId, type }), body);
+
+export const estimateRangesReadingTime = async (body: {
+  ranges: string[];
+}): Promise<{ data: { seconds: number } }> => {
+  return privateFetcher(makeEstimateRangesReadingTimeUrl(body));
+};
 
 export const getStreakWithUserMetadata = async (
   params: StreakWithMetadataParams,

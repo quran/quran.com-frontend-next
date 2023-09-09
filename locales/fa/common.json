@@ -181,6 +181,7 @@
     "help": "کمک",
     "hizb": "حزب",
     "home": "صفحه اصلی",
+    "hours": "ساعت ها",
     "inline": "در خط",
     "input": {
         "clear": "پاک کردن"
@@ -196,6 +197,7 @@
     "meccan": "مکه",
     "medinan": "مدینه",
     "menu": "منو",
+    "minutes": "دقایق",
     "mobile-apps": "برنامه های موبایل",
     "mode": "حالت",
     "more": "بیشتر",
@@ -259,6 +261,7 @@
         "switch-mode": "به جستجوی پیشرفته بروید",
         "title": "جستجو کردن"
     },
+    "seconds": "ثانیه ها",
     "settings": {
         "no-tafsir-selected": "هیچ تفسیری انتخاب نشده است",
         "no-translation-selected": "ترجمه ای انتخاب نشده است",

@@ -1,14 +1,10 @@
 import { useMemo } from 'react';
 
-import classNames from 'classnames';
-import useTranslation from 'next-translate/useTranslation';
-
-import styles from './ReadingHistory.module.scss';
 import ReadingStats from './ReadingStats';
 
+import Calendar from '@/dls/Calendar';
 import { ActivityDay } from '@/types/auth/ActivityDay';
 import { logButtonClick } from '@/utils/eventLogger';
-import { toLocalizedNumber } from '@/utils/locale';
 
 interface DaysCalendarProps {
   month: { id: number; name: string; daysCount: number };
@@ -16,6 +12,7 @@ interface DaysCalendarProps {
   days: ActivityDay[];
   selectedDate: string | null;
   setSelectedDate: (date: string | null) => void;
+  isLoading?: boolean;
 }
 
 const DaysCalendar: React.FC<DaysCalendarProps> = ({
@@ -24,12 +21,8 @@ const DaysCalendar: React.FC<DaysCalendarProps> = ({
   days,
   selectedDate,
   setSelectedDate,
+  isLoading,
 }) => {
-  const { lang } = useTranslation('reading-progress');
-
-  // YYYY-MM
-  const monthDate = `${year}-${month.id.toString().padStart(2, '0')}`;
-
   const dateToDayMap = useMemo(() => {
     const map: Record<string, ActivityDay> = {};
 
@@ -49,39 +42,26 @@ const DaysCalendar: React.FC<DaysCalendarProps> = ({
     return <ReadingStats activityDay={readingDay} />;
   }
 
-  const onDayClick = (date: string, dayNumber: number) => {
+  const onDayClick = (dayNumber: number, dateString: string) => {
     logButtonClick('reading_history_day', {
       month: month.id,
       year,
       day: dayNumber,
     });
-    setSelectedDate(date);
+    setSelectedDate(dateString);
   };
 
   return (
-    <div className={styles.calendarContainer}>
-      {/* eslint-disable-next-line @typescript-eslint/naming-convention */}
-      {Array.from({ length: month.daysCount }).map((_, index) => {
-        const day = index + 1;
-        const date = `${monthDate}-${day.toString().padStart(2, '0')}`;
-        const dayData = dateToDayMap[date];
-
-        const isDisabled = !dayData;
-
-        return (
-          <div key={date} className={classNames(index > 6 && styles.bordered)}>
-            <button
-              type="button"
-              disabled={isDisabled}
-              className={classNames({ [styles.disabled]: isDisabled })}
-              onClick={() => onDayClick(date, day)}
-            >
-              <time dateTime={date}>{toLocalizedNumber(day, lang)}</time>
-            </button>
-          </div>
-        );
-      })}
-    </div>
+    <Calendar
+      year={year}
+      isLoading={isLoading}
+      month={month.id as any}
+      onDayClick={onDayClick}
+      getIsDayDisabled={(day, dateString) => {
+        const dayData = dateToDayMap[dateString];
+        return !dayData;
+      }}
+    />
   );
 };
 

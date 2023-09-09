@@ -1,4 +1,6 @@
 {
+    "add": "Eklemek",
+    "add-data-success": "Okuma verileriniz başarıyla eklendi.",
     "delete-goal": {
         "action": "Hedefi Sil",
         "confirmation": {
@@ -19,8 +21,10 @@
     "history": "Okuma Tarihi",
     "history-for": "{{date}} için okuma geçmişi",
     "manage-goal": "Okuma hedefinizi yönetin",
+    "manually-add": "Okumaları manuel olarak ekleme",
     "no-reading-history-for": "{{date}} için okuma geçmişi yok",
     "reading-progress-header": "Senin ilerlemen",
     "reading-progress-streak": "Rüzgâr gibi geçmek",
+    "reading-time": "Okuma zamanı",
     "you-read": "Sen okumak:"
 }

@@ -1,4 +1,6 @@
 {
+    "add": "Menambahkan",
+    "add-data-success": "Data bacaan Anda telah berhasil ditambahkan.",
     "delete-goal": {
         "action": "Hapus Sasaran",
         "confirmation": {
@@ -19,8 +21,10 @@
     "history": "Membaca Sejarah",
     "history-for": "Riwayat membaca untuk {{date}}",
     "manage-goal": "Kelola tujuan membaca Anda",
+    "manually-add": "Tambahkan bacaan secara manual",
     "no-reading-history-for": "Tidak ada riwayat membaca untuk {{date}}",
     "reading-progress-header": "Kemajuan Anda",
     "reading-progress-streak": "Garis",
+    "reading-time": "Waktu membaca",
     "you-read": "Bacalah:"
 }

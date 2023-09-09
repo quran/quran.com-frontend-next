@@ -1,4 +1,6 @@
 {
+    "add": "যোগ করুন",
+    "add-data-success": "আপনার পড়ার ডেটা সফলভাবে যোগ করা হয়েছে।",
     "delete-goal": {
         "action": "লক্ষ্য মুছুন",
         "confirmation": {
@@ -19,8 +21,10 @@
     "history": "ইতিহাস পড়া",
     "history-for": "{{date}} এর ইতিহাস পড়ার",
     "manage-goal": "আপনার পড়ার লক্ষ্য পরিচালনা করুন",
+    "manually-add": "ম্যানুয়ালি রিডিং যোগ করুন",
     "no-reading-history-for": "{{date}} এর জন্য কোনো পড়ার ইতিহাস নেই",
     "reading-progress-header": "আপনার অগ্রগতি",
     "reading-progress-streak": "স্ট্রিক",
+    "reading-time": "পড়ার সময়",
     "you-read": "আপনি পড়েছেন:"
 }

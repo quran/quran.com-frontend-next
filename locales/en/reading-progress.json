@@ -1,4 +1,6 @@
 {
+    "add": "Add",
+    "add-data-success": "Your reading data has been added successfully.",
     "delete-goal": {
         "action": "Delete Goal",
         "confirmation": {
@@ -19,8 +21,10 @@
     "history": "Reading History",
     "history-for": "Reading history for {{date}}",
     "manage-goal": "Manage your reading goal",
+    "manually-add": "Manually add readings",
     "no-reading-history-for": "No reading history for {{date}}",
     "reading-progress-header": "Your Progress",
     "reading-progress-streak": "Streak",
+    "reading-time": "Reading time",
     "you-read": "You read:"
 }

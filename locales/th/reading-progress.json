@@ -1,4 +1,6 @@
 {
+    "add": "เพิ่ม",
+    "add-data-success": "เพิ่มข้อมูลการอ่านของคุณสำเร็จแล้ว",
     "delete-goal": {
         "action": "ลบเป้าหมาย",
         "confirmation": {
@@ -19,8 +21,10 @@
     "history": "ประวัติการอ่าน",
     "history-for": "ประวัติการอ่านสำหรับ {{date}}",
     "manage-goal": "จัดการเป้าหมายการอ่านของคุณ",
+    "manually-add": "เพิ่มการอ่านด้วยตนเอง",
     "no-reading-history-for": "ไม่มีประวัติการอ่านสำหรับ {{date}}",
     "reading-progress-header": "ความก้าวหน้าของคุณ",
     "reading-progress-streak": "ช่วงเวลา",
+    "reading-time": "เวลาอ่านหนังสือ",
     "you-read": "คุณกำลังอ่าน:"
 }

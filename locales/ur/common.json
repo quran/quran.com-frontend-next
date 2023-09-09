@@ -181,6 +181,7 @@
     "help": "مدد",
     "hizb": "حزب",
     "home": "گھر",
+    "hours": "گھنٹے",
     "inline": "ترتیب سے",
     "input": {
         "clear": "صاف"
@@ -196,6 +197,7 @@
     "meccan": "مکہ",
     "medinan": "مدینہ",
     "menu": "مینو",
+    "minutes": "منٹس",
     "mobile-apps": "موبائل ایپس",
     "mode": "موڈ",
     "more": "مزید",
@@ -259,6 +261,7 @@
         "switch-mode": "اعلی درجے کی تلاش پر جائیں۔",
         "title": "تلاش کریں۔"
     },
+    "seconds": "سیکنڈز",
     "settings": {
         "no-tafsir-selected": "کوئی تفسیر منتخب نہیں ہے۔",
         "no-translation-selected": "کوئی ترجمہ منتخب نہیں کیا گیا۔",

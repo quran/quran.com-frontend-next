@@ -1,4 +1,6 @@
 {
+    "add": "Adicionar",
+    "add-data-success": "Seus dados de leitura foram adicionados com sucesso.",
     "delete-goal": {
         "action": "Excluir meta",
         "confirmation": {
@@ -19,8 +21,10 @@
     "history": "História de leitura",
     "history-for": "Lendo o histórico de {{date}}",
     "manage-goal": "Gerencie sua meta de leitura",
+    "manually-add": "Adicionar leituras manualmente",
     "no-reading-history-for": "Sem histórico de leitura para {{date}}",
     "reading-progress-header": "Seu progresso",
     "reading-progress-streak": "Onda",
+    "reading-time": "Tempo de leitura",
     "you-read": "Você lê:"
 }
