@@ -15,7 +15,7 @@ import { areArraysEqual } from '@/utils/array';
 import { selectIsUsingDefaultReciter } from '@/xstate/actors/audioPlayer/selectors';
 import { AudioPlayerMachineContext } from '@/xstate/AudioPlayerMachineContext';
 
-const useIsUsingDefaultSettings = ({ translations }: { translations?: number[] }) => {
+const useIsUsingDefaultSettings = ({ translations }: { translations?: number[] } = {}) => {
   const { lang } = useTranslation();
   const audioService = useContext(AudioPlayerMachineContext);
   const isUsingDefaultReciter = useXstateSelector(audioService, (state) =>
@@ -39,16 +39,21 @@ const useIsUsingDefaultSettings = ({ translations }: { translations?: number[] }
     defaultState.quranReaderStyles.mushafLines === mushafLines;
 
   const areTranslationsEqual = useMemo(() => {
+    if (!translations) {
+      return false;
+    }
+
     return areArraysEqual(defaultState.translations.selectedTranslations, translations);
   }, [translations, defaultState.translations.selectedTranslations]);
 
-  return (
-    isUsingDefaultFont &&
-    isUsingDefaultReciter &&
-    isUsingDefaultWordByWordLocale &&
-    isUsingDefaultTranslations &&
-    areTranslationsEqual
-  );
+  const isUsingDefaultSettings =
+    isUsingDefaultFont && isUsingDefaultReciter && isUsingDefaultWordByWordLocale;
+
+  if (translations) {
+    return isUsingDefaultSettings && isUsingDefaultTranslations && areTranslationsEqual;
+  }
+
+  return isUsingDefaultSettings;
 };
 
 export default useIsUsingDefaultSettings;

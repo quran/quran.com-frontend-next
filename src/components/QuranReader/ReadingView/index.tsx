@@ -171,7 +171,6 @@ const ReadingView = ({
 
     return (
       <PageContainer
-        isUsingDefaultFont={isUsingDefaultFont}
         pagesVersesRange={pagesVersesRange}
         quranReaderStyles={quranReaderStyles}
         reciterId={reciterId}

@@ -1,7 +1,5 @@
-import React, { useEffect, useMemo, useContext } from 'react';
+import React, { useEffect, useMemo } from 'react';
 
-import { useSelector as useXstateSelector } from '@xstate/react';
-import { useSelector } from 'react-redux';
 import useSWRImmutable from 'swr/immutable';
 
 import { getPageNumberByPageIndex } from '../utils/page';
@@ -10,10 +8,8 @@ import Page from './Page';
 import ReadingViewSkeleton from './ReadingViewSkeleton';
 
 import { getReaderViewRequestKey, verseFetcher } from '@/components/QuranReader/api';
-import { selectIsUsingDefaultWordByWordLocale } from '@/redux/slices/QuranReader/readingPreferences';
+import useIsUsingDefaultSettings from '@/hooks/useIsUsingDefaultSettings';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
-import { selectIsUsingDefaultReciter } from 'src/xstate/actors/audioPlayer/selectors';
-import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import { VersesResponse } from 'types/ApiResponses';
 import LookupRecord from 'types/LookupRecord';
 import Verse from 'types/Verse';
@@ -27,7 +23,6 @@ type Props = {
   pageIndex: number;
   setMushafPageToVersesMap: (data: Record<number, Verse[]>) => void;
   initialData: VersesResponse;
-  isUsingDefaultFont: boolean;
 };
 
 const getPageVersesRange = (
@@ -75,7 +70,6 @@ const PageContainer: React.FC<Props> = ({
   pageIndex,
   setMushafPageToVersesMap,
   initialData,
-  isUsingDefaultFont,
 }: Props): JSX.Element => {
   const pageNumber = useMemo(
     () => getPageNumberByPageIndex(pageIndex, pagesVersesRange),
@@ -86,16 +80,8 @@ const PageContainer: React.FC<Props> = ({
     [initialData.verses, pageIndex, pageNumber],
   );
 
-  const audioService = useContext(AudioPlayerMachineContext);
-  const isUsingDefaultReciter = useXstateSelector(audioService, (state) =>
-    selectIsUsingDefaultReciter(state),
-  );
-  const isUsingDefaultWordByWordLocale = useSelector(selectIsUsingDefaultWordByWordLocale);
-  const shouldUseInitialData =
-    pageIndex === 0 &&
-    isUsingDefaultFont &&
-    isUsingDefaultReciter &&
-    isUsingDefaultWordByWordLocale;
+  const isUsingDefaultSettings = useIsUsingDefaultSettings();
+  const shouldUseInitialData = pageIndex === 0 && isUsingDefaultSettings;
   const { data: verses, isValidating } = useSWRImmutable(
     getReaderViewRequestKey({
       pageNumber,
