@@ -1,26 +1,18 @@
-import { useContext, useEffect, useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 
-import { useSelector as useXstateSelector } from '@xstate/react';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
-import { useSelector } from 'react-redux';
 import useSWRImmutable from 'swr/immutable';
 
 import { getTranslationViewRequestKey, verseFetcher } from '@/components/QuranReader/api';
-import { getTranslationsInitialState } from '@/redux/defaultSettings/util';
-import { selectIsUsingDefaultWordByWordLocale } from '@/redux/slices/QuranReader/readingPreferences';
-import { selectIsUsingDefaultFont } from '@/redux/slices/QuranReader/styles';
-import { selectIsUsingDefaultTranslations } from '@/redux/slices/QuranReader/translations';
+import useIsUsingDefaultSettings from '@/hooks/useIsUsingDefaultSettings';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
 import { VersesResponse } from '@/types/ApiResponses';
 import { Mushaf, QuranReaderDataType } from '@/types/QuranReader';
 import Verse from '@/types/Verse';
-import { areArraysEqual } from '@/utils/array';
 import { makeBookmarksRangeUrl } from '@/utils/auth/apiPaths';
 import { isLoggedIn } from '@/utils/auth/login';
 import { getPageNumberFromIndexAndPerPage } from '@/utils/number';
-import { selectIsUsingDefaultReciter } from 'src/xstate/actors/audioPlayer/selectors';
-import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 
 interface QuranReaderParams {
   quranReaderDataType: QuranReaderDataType;
@@ -65,34 +57,18 @@ const useDedupedFetchVerse = ({
 
   const { lang } = useTranslation();
 
-  const defaultTranslations = getTranslationsInitialState(lang).selectedTranslations;
   const translationParams = useMemo(
     () =>
       (router.query.translations as string)?.split(',')?.map((translation) => Number(translation)),
     [router.query.translations],
   );
 
-  const audioService = useContext(AudioPlayerMachineContext);
-
-  const isUsingDefaultReciter = useXstateSelector(audioService, (state) =>
-    selectIsUsingDefaultReciter(state),
-  );
-  const isUsingDefaultWordByWordLocale = useSelector(selectIsUsingDefaultWordByWordLocale);
-  const isUsingDefaultTranslations = useSelector(selectIsUsingDefaultTranslations);
-  const isUsingDefaultFont = useSelector(selectIsUsingDefaultFont);
-
   const pageNumber = getPageNumberFromIndexAndPerPage(verseIdx, initialData.pagination.perPage);
 
   const idxInPage = verseIdx % initialData.pagination.perPage;
 
-  const shouldUseInitialData =
-    pageNumber === 1 &&
-    isUsingDefaultFont &&
-    isUsingDefaultReciter &&
-    isUsingDefaultWordByWordLocale &&
-    isUsingDefaultTranslations &&
-    (!translationParams || areArraysEqual(defaultTranslations, translationParams));
-
+  const isUsingDefaultSettings = useIsUsingDefaultSettings({ translations: translationParams });
+  const shouldUseInitialData = pageNumber === 1 && isUsingDefaultSettings;
   const { data: verses } = useSWRImmutable(
     getTranslationViewRequestKey({
       quranReaderDataType,

@@ -110,11 +110,14 @@ export const quranReaderStylesSlice = createSlice({
         PreferenceGroup.QURAN_READER_STYLES
       ] as QuranReaderStyles;
       if (remotePreferences) {
-        const { quranFont: defaultQuranFont } = getQuranReaderStylesInitialState(locale);
+        const { quranFont: defaultQuranFont, mushafLines: defaultMushafLines } =
+          getQuranReaderStylesInitialState(locale);
         return {
           ...state,
           ...remotePreferences,
-          isUsingDefaultFont: defaultQuranFont === remotePreferences.quranFont,
+          isUsingDefaultFont:
+            defaultQuranFont === remotePreferences.quranFont &&
+            defaultMushafLines === remotePreferences.mushafLines,
         };
       }
       return state;
