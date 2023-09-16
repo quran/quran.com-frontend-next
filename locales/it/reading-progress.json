@@ -26,5 +26,6 @@
     "reading-progress-header": "I tuoi progressi",
     "reading-progress-streak": "Strisciante",
     "reading-time": "Momento della lettura",
+    "seconds-read-tooltip": "Questo è il tempo che hai trascorso leggendo i versetti che hai inserito. Lo compiliamo automaticamente con la velocità di lettura media su Quran.com, ma puoi sovrascriverlo con il tuo tempo di lettura effettivo.",
     "you-read": "Tu leggi:"
 }
