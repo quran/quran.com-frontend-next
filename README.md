@@ -38,28 +38,28 @@
 [![Stargazers][stars-shield]][stars-url]
 [![MIT License][license-shield]][license-url]
 
-This project is the frontend for Quran.com. It is built on top of [next.js](https://nextjs.org/docs/getting-started), a popular framework that takes the trouble and setup of setting up an isomorphic react app. We deploy it on now.sh automatically with automatic generation of builds for PRs.
+This project is the frontend for Quran.com. It is built on top of [Next.js](https://nextjs.org/docs/getting-started), a popular framework that takes the trouble and setup of setting up an isomorphic react app. We deploy it on now.sh automatically with automatic generation of builds for PRs.
 
-### How to contribute
+### How to Contribute
 
 We trust that you will not copy this idea/project, this is at the end for the sake of Allah and we all have good intentions while working with this project. But we must stress that copying the code/project is unacceptable.
 
-### Running the app locally
+### Running the App Locally
 
-- Ensure you have the latest `nodejs` and `npm` installed. Prefer 10+.
+- Ensure you have the latest `nodejs` and `npm` installed. Prefer 10+
 - Ensure you have `yarn` installed. Simply `npm i -g yarn`
 - Clone this repo
 - Run `yarn` on the repo to install `node_modules`
 - Run `yarn dev` to start the app. If you wish to run on a different port, run `yarn dev -p 8000`
-- Open `localhost:3000`
+- Open `localhost:3000` in your browser
 
-The app runs on next.js and will automatically hot reload when you make changes.
+The app runs on Next.js and will automatically hot reload when you make changes.
 
-### Environment variables
+### Environment Variables
 
-If you have access to a Quran.com associated vercel account, run `vercel env pull`. Otherwise, rename the `env.example` file to  `env.local` and you should be good to go. 
+If you have access to a Quran.com associated Vercel account, run `vercel env pull`. Otherwise, rename the `env.example` file to `env.local` and you should be good to go.
 
-### DLS (design language system)
+### DLS (Design Language System)
 
 One mistake we made previously is treated each component as unique. This made our work not scalable. Secondly, when looking at large companies, they often develop a design style language that can be used across the app without the need to create unique components and ensure better consistency across the product. We are trying to take a similar approach. If something can be used elsewhere, please put it inside the `dls/` directory and create stories for it.
 
@@ -72,19 +72,21 @@ Our components are built within Storybook.js. See files with name `.stories.tsx`
 ### Recommended Extensions
 
 Check `.vscode/extensions.json` for recommended VSCode Extensions
-### Typescript
 
-We chose typescript as the language of choice of it's ease of type-safety. Please create types where you see fit.
+### TypeScript
 
-### Helping out and issues
+We chose TypeScript as the language of choice of it's ease of type-safety. Please create types where you see fit.
 
-If you are interested to help out, please look at issues on the Github repo. This is a good place to start.
+### Helping Out and Issues
 
-### Filing bugs
+If you are interested to help out, please look at issues on the GitHub repo. This is a good place to start.
+
+### Filing Bugs
 
 Thank you for taking time to file a bug! We'd appreciate your help on fixing it 🙏. Please [open an issue](https://github.com/quran/quran.com-frontend-next/issues).
 
-### Community 
+### Community
+
 <a href="https://discord.gg/SpEeJ5bWEQ"><strong>Join Quran.com Discord community »</strong></a>
 
 <!-- MARKDOWN LINKS & IMAGES -->
@@ -115,4 +117,3 @@ Thank you for taking time to file a bug! We'd appreciate your help on fixing it 
 <p align="center">
   <img src="https://user-images.githubusercontent.com/15169499/147745340-b7e84819-d1b0-4399-87a0-d5276ba21bca.png" width="250">
 </p>
-
