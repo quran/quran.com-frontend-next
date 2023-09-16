@@ -26,5 +26,6 @@
     "reading-progress-header": "你的进步",
     "reading-progress-streak": "条纹",
     "reading-time": "阅读时间",
+    "seconds-read-tooltip": "这是您花在阅读输入的 Ayahs 上的时间。我们会使用 Quran.com 上的平均阅读速度自动填充它，但您可以使用您的实际阅读时间覆盖它。",
     "you-read": "你读："
 }
