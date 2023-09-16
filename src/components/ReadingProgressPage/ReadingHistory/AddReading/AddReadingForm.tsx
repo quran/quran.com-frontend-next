@@ -10,6 +10,7 @@ import { isValidVerseRange } from '@/components/ReadingGoalPage/utils/validator'
 import DataContext from '@/contexts/DataContext';
 import Button from '@/dls/Button/Button';
 import DurationInput from '@/dls/DurationInput';
+import HelperTooltip from '@/dls/HelperTooltip/HelperTooltip';
 import { logButtonClick } from '@/utils/eventLogger';
 
 interface AddReadingFormProps {
@@ -76,7 +77,12 @@ const AddReadingForm = ({
           totalSeconds={totalSeconds}
           onTotalSecondsChange={setTotalSeconds}
           isLoading={isFetchingSeconds}
-          label={t('reading-time')}
+          label={
+            <div className={styles.inputLabelContainer}>
+              {t('reading-time')}
+              <HelperTooltip>{t('seconds-read-tooltip')}</HelperTooltip>
+            </div>
+          }
           error={totalSecondsError}
         />
       </div>

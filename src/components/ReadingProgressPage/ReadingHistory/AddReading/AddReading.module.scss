@@ -32,3 +32,8 @@
 .durationInputWrapper {
   margin-block-start: var(--spacing-large);
 }
+
+.inputLabelContainer {
+  display: flex;
+  align-items: center;
+}

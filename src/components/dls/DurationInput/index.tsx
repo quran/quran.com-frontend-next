@@ -13,7 +13,7 @@ interface DurationInputProps {
   onTotalSecondsChange: (totalSeconds: number) => void;
   disabled?: boolean;
   isLoading?: boolean;
-  label?: string;
+  label?: React.ReactNode;
   error?: string;
 }
 
