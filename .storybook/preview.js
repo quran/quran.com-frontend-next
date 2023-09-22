@@ -6,7 +6,6 @@ import GlobalStyles from "../src/styles/global.scss";
 import ResetCSS from "../src/styles/reset.scss";
 import Theme from "../src/styles/theme.scss";
 import Styles from "./styles.scss";
-// import { RouterDecorator } from "storybook-addon-next/dist/routing/decorator";
 
 import commonEn from "../locales/en/common.json";
 import homeEn from "../locales/en/home.json";
