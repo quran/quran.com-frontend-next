@@ -25,6 +25,19 @@
   margin-block-end: var(--spacing-small);
 }
 
+.searchInput {
+  width: 100%;
+  border: 0;
+  color: var(--color-text-default);
+  background: transparent;
+  &:focus {
+    outline: none;
+  }
+  &:disabled {
+    background: none;
+  }
+}
+
 .label {
   display: flex;
   flex-direction: column;
