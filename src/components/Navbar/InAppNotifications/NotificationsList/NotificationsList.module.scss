@@ -1,0 +1,17 @@
+.bellContainer {
+  max-height: calc(15 * var(--spacing-mega));
+  overflow-y: scroll;
+  min-width: calc(13 * var(--spacing-mega));
+  max-width: calc(13 * var(--spacing-mega));
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  margin: var(--spacing-small);
+}
+
+.buttonsContainer {
+  display: flex;
+  align-items: center;
+}

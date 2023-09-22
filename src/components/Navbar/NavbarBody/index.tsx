@@ -3,6 +3,7 @@ import React, { memo } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch } from 'react-redux';
 
+import InAppNotifications from '../InAppNotifications';
 import LanguageSelector from '../LanguageSelector';
 import NavbarLogoWrapper from '../Logo/NavbarLogoWrapper';
 import NavigationDrawer from '../NavigationDrawer/NavigationDrawer';
@@ -73,6 +74,7 @@ const NavbarBody: React.FC = () => {
         <div className={styles.rightCTA}>
           <>
             <ProfileAvatarButton />
+            <InAppNotifications />
             <LanguageSelector />
             <Button
               tooltip={t('settings.title')}

@@ -1,0 +1,19 @@
+.count {
+    position: absolute;
+    border-radius: 50%;
+    color: var(--color-text-inverse);
+    background-color: var(--color-error-deep);
+    z-index: var(--z-index-default);
+    margin-inline-start: var(--spacing-xsmall);
+    width: var(--spacing-small);
+    height: var(--spacing-small);
+    display: flex;
+    align-items: center;
+}
+
+.countText {
+    width: 100%;
+    text-align: center;
+    font-size: var(--font-size-xsmall-dangerous);
+    font-weight: var(--font-weight-bold);
+}
