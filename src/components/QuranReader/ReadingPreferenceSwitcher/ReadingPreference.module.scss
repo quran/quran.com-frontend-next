@@ -1,8 +1,31 @@
+@use "src/styles/breakpoints";
+
 .container {
   display: flex;
+  align-items: center;
   justify-content: center;
+  width: 100%;
 }
 
 .spinner {
   margin-inline-end: var(--spacing-xsmall);
+}
+
+.preferenceTextContainer {
+  padding-inline-start: var(--spacing-xsmall);
+}
+
+.iconContainer {
+  & > svg {
+    width: 15px;
+    display: block;
+    margin: auto;
+  }
+
+  @include breakpoints.smallerThanTablet {
+    & > svg {
+      -webkit-margin-end: 0;
+      margin-inline-end: 0;
+    }
+  }
 }

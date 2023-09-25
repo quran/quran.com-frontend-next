@@ -1,0 +1,31 @@
+{
+    "add": "添加",
+    "add-data-success": "您的阅读数据已成功添加。",
+    "delete-goal": {
+        "action": "删除目标",
+        "confirmation": {
+            "action-text": "我明白后果，删除我的目标",
+            "confirmation-text": "删除我的目标",
+            "instruction-text": "请输入<strong> {{text}} <\/strong>进行确认",
+            "subtitle": "此操作无法撤消。这将永久删除您的目标，我们将停止跟踪您的进度。",
+            "title": "你确定吗？"
+        },
+        "success": "您的阅读目标已成功删除。"
+    },
+    "edit-goal": {
+        "action": "编辑目标",
+        "subtitle": "我们将根据新目标重新计算您的进度。",
+        "success": "您的阅读目标已成功更新。",
+        "title": "编辑你的阅读目标"
+    },
+    "history": "阅读历史",
+    "history-for": "{{date}}的阅读历史",
+    "manage-goal": "管理你的阅读目标",
+    "manually-add": "手动添加读数",
+    "no-reading-history-for": "{{date}}没有阅读记录",
+    "reading-progress-header": "你的进步",
+    "reading-progress-streak": "条纹",
+    "reading-time": "阅读时间",
+    "seconds-read-tooltip": "这是您花在阅读输入的 Ayahs 上的时间。我们会使用 Quran.com 上的平均阅读速度自动填充它，但您可以使用您的实际阅读时间覆盖它。",
+    "you-read": "你读："
+}

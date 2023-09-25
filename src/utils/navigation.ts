@@ -282,6 +282,11 @@ export const getProfileNavigationUrl = () => {
 export const getCollectionNavigationUrl = (collectionId: string) => {
   return `/collections/${collectionId}`;
 };
+
+export const getReadingGoalNavigationUrl = () => '/reading-goal';
+
+export const getReadingGoalProgressNavigationUrl = () => '/reading-goal/progress';
+
 /**
  * Update the browser history with the new url.
  * without actually navigating into that url.

@@ -3,19 +3,29 @@
     "and": "en",
     "announcements": {
         "auth-onboarding": {
-            "slide-1": {
-                "action": "Zie wat nieuw is",
-                "title": "Welkom bij Quran.com <br> <\/br> Gebruikersaccount"
-            },
-            "slide-2": {
+            "data-sync": {
                 "action": "Volgende",
                 "description": "Of je nu Quran.com op je telefoon of je laptop gebruikt, je bladwijzers, laatst gelezen verzen en je voorkeuren zijn beschikbaar",
                 "title": "Uw gegevens worden <br> <\/br> op verschillende apparaten gesynchroniseerd"
             },
-            "slide-3": {
+            "feedback": {
                 "action": "Oké, snap het",
                 "description": "Bedankt voor het gebruik van Quran.com en we horen graag uw feedback op <link> feedback.quran.com <\/link>",
                 "title": "We willen je gedachten horen"
+            },
+            "quran-foundation-link": {
+                "action": "Volgende",
+                "description": "Gebruik uw Quran.com-login voor toegang tot QuranReflect.com - een bloeiende wereldwijde gemeenschap die zich bezighoudt met koranreflectie.",
+                "title": "Gebruik uw account in alle Quran.Foundation-apps!"
+            },
+            "quran-growth-journey": {
+                "action": "Volgende",
+                "description": "Behoud uw koranleesreeks en boek vooruitgang bij het behalen van uw doelen terwijl u nieuwe gewoonten opbouwt",
+                "title": "Begin uw korangroeireis!"
+            },
+            "welcome": {
+                "action": "Zie wat nieuw is",
+                "title": "Welkom bij Quran.com <br> <\/br> Gebruikersaccount"
             }
         },
         "collections-announcement": {
@@ -115,6 +125,8 @@
     "developers": "ontwikkelaars",
     "display": "Weergave",
     "donate": "Doneren",
+    "donate_monthly": "Doneer maandelijks",
+    "donate_once": "Doneer eenmalig",
     "email-verification": {
         "check-spam": "Heb je de verificatie-e-mail niet ontvangen? Check je spam-inbox",
         "email-sent": "We hebben zojuist een e-mail gestuurd naar <strong> {{email}} <\/strong>",
@@ -134,11 +146,11 @@
     "fonts": {
         "15_lines": "15 lijnen",
         "16_lines": "16 lijnen",
-        "code_v1": "King Fahad Complex V1",
-        "code_v2": "King Fahad Complex V2",
+        "code_v1": "Koning Fahad Complex V1",
+        "code_v2": "Koning Fahad Complex V2",
         "font-size": "Lettertypegrootte",
         "lines": "lijnen",
-        "qcf-desc": "KPFG-lettertypen bieden een hogere kwaliteit, maar het laden duurt langer.",
+        "qcf-desc": "Koning Fahad Complex (V1 en V2) Fonts bieden een hogere kwaliteit, maar laden duurt langer.",
         "qpc_uthmani_hafs": "QPC Uthmani Hafs",
         "quran-font": "Koran lettertype",
         "tajweed": "Tajweed",
@@ -158,14 +170,18 @@
         "lastName": "Achternaam"
     },
     "from": "Van",
+    "fundraising-sticky-banner": {
+        "cta": "Doneer",
+        "title": "Steun Quran.com deze Ramadan"
+    },
     "fundraising": {
         "description": "Maandelijkse donaties helpen ons Quran.com te verbeteren en activiteiten te ondersteunen, zodat we ons minder richten op fondsenwerving en meer op het creëren van impact.",
-        "learn-more": "Leer meer",
         "title": "Word een maandelijkse donateur"
     },
     "help": "Helpen",
     "hizb": "Hizb",
     "home": "Huis",
+    "hours": "Uur",
     "inline": "In lijn",
     "input": {
         "clear": "Duidelijk"
@@ -173,6 +189,7 @@
     "juz": "Juz",
     "language": "Taal",
     "languages": "Talen",
+    "learn-more": "Leer meer",
     "less": "Minder",
     "loading": "Bezig met laden",
     "login": "Log in",
@@ -180,11 +197,13 @@
     "meccan": "Mekkaans",
     "medinan": "Medina",
     "menu": "Menu",
+    "minutes": "Minuten",
     "mobile-apps": "Mobiele apps",
     "mode": "Modus",
     "more": "Meer",
     "navigate": "Navigeren",
     "network": "Netwerk",
+    "new": "Nieuw!",
     "next": "Volgende",
     "next-ayah": "Volgende Aya",
     "no": "Nee",
@@ -211,6 +230,7 @@
     "q-reflect": "KoranReflect",
     "quran-com": "koran.com",
     "quran-radio": "Koran Radio",
+    "reading-history": "Geschiedenis lezen",
     "reading-preference": {
         "reading": "Lezing",
         "translation": "Vertaling"
@@ -241,6 +261,7 @@
         "switch-mode": "Overschakelen naar Geavanceerd zoeken",
         "title": "Zoeken"
     },
+    "seconds": "Seconden",
     "settings": {
         "no-tafsir-selected": "Geen tafsir geselecteerd",
         "no-translation-selected": "Geen vertaling geselecteerd",

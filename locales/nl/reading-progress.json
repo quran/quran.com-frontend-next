@@ -1,0 +1,31 @@
+{
+    "add": "Toevoegen",
+    "add-data-success": "Uw leesgegevens zijn succesvol toegevoegd.",
+    "delete-goal": {
+        "action": "Doel verwijderen",
+        "confirmation": {
+            "action-text": "Ik begrijp de consequentie, verwijder mijn doel",
+            "confirmation-text": "verwijder mijn doel",
+            "instruction-text": "Typ <strong> {{text}} <\/strong> om te bevestigen",
+            "subtitle": "Deze actie kan niet ongedaan gemaakt worden. Hiermee wordt je doel definitief verwijderd en stoppen we met het bijhouden van je voortgang.",
+            "title": "Weet je het zeker?"
+        },
+        "success": "Je leesdoel is succesvol verwijderd."
+    },
+    "edit-goal": {
+        "action": "Doel bewerken",
+        "subtitle": "We zullen je voortgang opnieuw berekenen op basis van het nieuwe doel.",
+        "success": "Je leesdoel is succesvol geüpdatet.",
+        "title": "Pas je leesdoel aan"
+    },
+    "history": "Geschiedenis lezen",
+    "history-for": "Leesgeschiedenis voor {{date}}",
+    "manage-goal": "Beheer uw leesdoel",
+    "manually-add": "Handmatig metingen toevoegen",
+    "no-reading-history-for": "Geen leesgeschiedenis voor {{date}}",
+    "reading-progress-header": "Jouw vooruitgang",
+    "reading-progress-streak": "Streep",
+    "reading-time": "Leestijd",
+    "seconds-read-tooltip": "Dit is de tijd die je hebt besteed aan het lezen van de Ayahs die je hebt ingevoerd. We vullen het automatisch in met de gemiddelde leessnelheid op Quran.com, maar u kunt dit overschrijven met uw werkelijke leestijd.",
+    "you-read": "Jij leest:"
+}

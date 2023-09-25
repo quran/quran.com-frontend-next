@@ -1,0 +1,31 @@
+{
+    "add": "Ajouter",
+    "add-data-success": "Vos données de lecture ont été ajoutées avec succès.",
+    "delete-goal": {
+        "action": "Supprimer l'objectif",
+        "confirmation": {
+            "action-text": "Je comprends la conséquence, supprime mon objectif",
+            "confirmation-text": "supprimer mon objectif",
+            "instruction-text": "Veuillez saisir <strong> {{text}} <\/strong> pour confirmer",
+            "subtitle": "Cette action ne peut pas être annulée. Cela supprimera définitivement votre objectif et nous cesserons de suivre votre progression.",
+            "title": "Es-tu sûr?"
+        },
+        "success": "Votre objectif de lecture a été supprimé avec succès."
+    },
+    "edit-goal": {
+        "action": "Modifier l'objectif",
+        "subtitle": "Nous recalculerons votre progression en fonction du nouvel objectif.",
+        "success": "Votre objectif de lecture a été mis à jour avec succès.",
+        "title": "Modifier votre objectif de lecture"
+    },
+    "history": "Lecture de l'histoire",
+    "history-for": "Historique de lecture pour {{date}}",
+    "manage-goal": "Gérez votre objectif de lecture",
+    "manually-add": "Ajouter manuellement des lectures",
+    "no-reading-history-for": "Aucun historique de lecture pour {{date}}",
+    "reading-progress-header": "Votre progression",
+    "reading-progress-streak": "Traînée",
+    "reading-time": "Temps de lecture",
+    "seconds-read-tooltip": "C'est le temps que vous avez passé à lire les versets que vous avez saisis. Nous le remplissons automatiquement avec la vitesse de lecture moyenne sur Quran.com, mais vous pouvez la remplacer par votre temps de lecture réel.",
+    "you-read": "Tu lis:"
+}

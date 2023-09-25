@@ -6,6 +6,12 @@
     margin-block-end: var(--spacing-xsmall);
     font-weight: var(--font-weight-bold);
   }
+  h2 {
+    font-size: var(--font-size-normal);
+    line-height: var(--line-height-jumbo);
+    margin-block-end: var(--spacing-xsmall);
+    font-weight: var(--font-weight-bold);
+  }
   p {
     line-height: var(--line-height-large);
     margin-block-end: var(--spacing-medium);
@@ -32,4 +38,13 @@
 .list {
   list-style: unset;
   padding-inline-start: var(--spacing-mega);
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+.subListItem {
+  list-style-type: circle;
+  margin-inline-start: var(--spacing-large);
 }

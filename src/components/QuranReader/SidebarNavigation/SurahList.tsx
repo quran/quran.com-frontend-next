@@ -9,6 +9,7 @@ import { useSelector } from 'react-redux';
 import styles from './SidebarNavigation.module.scss';
 
 import Link from '@/dls/Link/Link';
+import useChapterIdsByUrlPath from '@/hooks/useChapterId';
 import { SCROLL_TO_NEAREST_ELEMENT, useScrollToElement } from '@/hooks/useScrollToElement';
 import { selectLastReadVerseKey } from '@/redux/slices/QuranReader/readingTracker';
 import { selectIsReadingByRevelationOrder } from '@/redux/slices/revelationOrder';
@@ -20,8 +21,8 @@ import REVELATION_ORDER from '@/utils/revelationOrder';
 import DataContext from 'src/contexts/DataContext';
 import Chapter from 'types/Chapter';
 
-const filterSurah = (surah, searchQuery: string) => {
-  const fuse = new Fuse(surah, {
+const filterSurah = (surahs: Chapter[], searchQuery: string) => {
+  const fuse = new Fuse(surahs, {
     threshold: 0.3,
     keys: ['id', 'localizedId', 'transliteratedName'],
   });
@@ -32,6 +33,7 @@ const filterSurah = (surah, searchQuery: string) => {
   } else {
     logTextSearchQuery(searchQuery, SearchQuerySource.SidebarNavigationChaptersList);
   }
+
   return filteredSurah as Chapter[];
 };
 
@@ -39,11 +41,22 @@ const SurahList = () => {
   const { t, lang } = useTranslation('common');
   const lastReadVerseKey = useSelector(selectLastReadVerseKey);
   const isReadingByRevelationOrder = useSelector(selectIsReadingByRevelationOrder);
-
-  const currentChapterId = lastReadVerseKey.chapterId;
-
   const router = useRouter();
   const chaptersData = useContext(DataContext);
+
+  const chapterIds = useChapterIdsByUrlPath(lang);
+  const urlChapterId = chapterIds && chapterIds.length > 0 ? chapterIds[0] : null;
+
+  const [currentChapterId, setCurrentChapterId] = useState(urlChapterId);
+
+  useEffect(() => {
+    setCurrentChapterId(lastReadVerseKey.chapterId);
+  }, [lastReadVerseKey]);
+
+  useEffect(() => {
+    // when the user navigates to a new chapter, the current chapter id
+    setCurrentChapterId(urlChapterId);
+  }, [urlChapterId]);
 
   const [searchQuery, setSearchQuery] = useState('');
 

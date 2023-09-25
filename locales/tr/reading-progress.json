@@ -1,0 +1,31 @@
+{
+    "add": "Eklemek",
+    "add-data-success": "Okuma verileriniz başarıyla eklendi.",
+    "delete-goal": {
+        "action": "Hedefi Sil",
+        "confirmation": {
+            "action-text": "Sonucu anlıyorum, hedefimi sil",
+            "confirmation-text": "hedefimi sil",
+            "instruction-text": "Onaylamak için lütfen <strong> {{text}} <\/strong> yazın",
+            "subtitle": "Bu işlem geri alınamaz. Bu, hedefinizi kalıcı olarak silecek ve ilerlemenizi takip etmeyi bırakacağız.",
+            "title": "Emin misin?"
+        },
+        "success": "Okuma hedefiniz başarıyla silindi."
+    },
+    "edit-goal": {
+        "action": "Hedefi Düzenle",
+        "subtitle": "İlerlemenizi yeni hedefe göre yeniden hesaplayacağız.",
+        "success": "Okuma hedefiniz başarıyla güncellendi.",
+        "title": "Okuma hedefinizi düzenleyin"
+    },
+    "history": "Okuma Tarihi",
+    "history-for": "{{date}} için okuma geçmişi",
+    "manage-goal": "Okuma hedefinizi yönetin",
+    "manually-add": "Okumaları manuel olarak ekleme",
+    "no-reading-history-for": "{{date}} için okuma geçmişi yok",
+    "reading-progress-header": "Senin ilerlemen",
+    "reading-progress-streak": "Rüzgâr gibi geçmek",
+    "reading-time": "Okuma zamanı",
+    "seconds-read-tooltip": "Bu, girdiğiniz ayetleri okuyarak geçirdiğiniz süredir. Bunu Kuran.com'daki ortalama okuma hızıyla otomatik olarak dolduruyoruz, ancak siz bunu gerçek okuma sürenizle geçersiz kılabilirsiniz.",
+    "you-read": "Sen okumak:"
+}

@@ -202,17 +202,20 @@ export const sortVersesObjectByVerseKeys = (object: Record<string, any>): Record
  * make verseKey from chapterNumber and verseNumber, example "1:5"
  *
  * @param {number|string} chapterNumber
- * @param {number} verseNumber
- * @returns
+ * @param {number|string} verseNumberOrRangeFrom
+ * @param {number|string} rangeTo
+ * @returns {string}
  */
-
 export const makeVerseKey = (
   chapterNumber: number | string,
-  from: number | string,
-  to?: number | string,
+  verseNumberOrRangeFrom: number | string,
+  rangeTo?: number | string,
 ): string => {
-  if (to && from !== to) return `${chapterNumber}:${from}-${to}`;
-  return `${chapterNumber}:${from}`;
+  if (rangeTo && verseNumberOrRangeFrom !== rangeTo) {
+    return `${chapterNumber}:${verseNumberOrRangeFrom}-${rangeTo}`;
+  }
+
+  return `${chapterNumber}:${verseNumberOrRangeFrom}`;
 };
 
 /**

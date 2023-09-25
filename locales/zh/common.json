@@ -3,19 +3,29 @@
     "and": "和",
     "announcements": {
         "auth-onboarding": {
-            "slide-1": {
-                "action": "看看有什么新鲜事",
-                "title": "欢迎来到 Quran.com <br> <\/br>用户帐户"
-            },
-            "slide-2": {
+            "data-sync": {
                 "action": "下一个",
                 "description": "无论您是在手机还是笔记本电脑上使用 Quran.com，您的书签、最后阅读的经文和您的偏好都将可用",
                 "title": "您的数据将在设备间同步<br> <\/br>"
             },
-            "slide-3": {
+            "feedback": {
                 "action": "好，知道了",
                 "description": "感谢您使用 Quran.com，我们很高兴听到您对<link> feedback.quran.com <\/link> 的反馈",
                 "title": "我们想听听你的想法"
+            },
+            "quran-foundation-link": {
+                "action": "下一个",
+                "description": "使用您的 Quran.com 登录名访问 QuranReflect.com — 一个致力于反思古兰经的蓬勃发展的全球社区。",
+                "title": "在 Quran.Foundation 应用程序中使用您的帐户！"
+            },
+            "quran-growth-journey": {
+                "action": "下一个",
+                "description": "保持你的《古兰经》阅读连续性并在实现你的目标方面取得进展，同时养成新的习惯",
+                "title": "开始你的《古兰经》成长之旅！"
+            },
+            "welcome": {
+                "action": "看看有什么新鲜事",
+                "title": "欢迎来到 Quran.com <br> <\/br>用户帐户"
             }
         },
         "collections-announcement": {
@@ -115,6 +125,8 @@
     "developers": "开发者",
     "display": "展示",
     "donate": "捐",
+    "donate_monthly": "每月捐款",
+    "donate_once": "捐赠一次",
     "email-verification": {
         "check-spam": "没有收到验证邮件？检查您的垃圾邮件收件箱",
         "email-sent": "我们刚刚向<strong> {{email}} <\/strong>发送了一封电子邮件",
@@ -138,7 +150,7 @@
         "code_v2": "King Fahad Complex V2",
         "font-size": "字体大小",
         "lines": "线",
-        "qcf-desc": "KPFG 字体提供更高的质量，但加载时间更长。",
+        "qcf-desc": "King Fahad Complex (V1 和 V2) 字体提供更高的质量，但加载时间更长。",
         "qpc_uthmani_hafs": "QPC Uthmani Hafs",
         "quran-font": "经文字体",
         "tajweed": "泰之卫德",
@@ -158,14 +170,18 @@
         "lastName": "姓"
     },
     "from": "从",
+    "fundraising-sticky-banner": {
+        "cta": "捐",
+        "title": "在这个斋月支持 Quran.com"
+    },
     "fundraising": {
         "description": "每月的捐款帮助我们改进 Quran.com 并维持运营，因此我们减少对筹款的关注，而更多地关注创造影响。",
-        "learn-more": "学到更多",
         "title": "成为每月捐助者"
     },
     "help": "帮助",
     "hizb": "希兹布",
     "home": "首页",
+    "hours": "小时",
     "inline": "排队",
     "input": {
         "clear": "清除"
@@ -173,6 +189,7 @@
     "juz": "卷",
     "language": "语",
     "languages": "语言",
+    "learn-more": "学到更多",
     "less": "较少的",
     "loading": "加载中",
     "login": "登录",
@@ -180,11 +197,13 @@
     "meccan": "麦加",
     "medinan": "麦地那",
     "menu": "菜单",
+    "minutes": "分钟",
     "mobile-apps": "手机App",
     "mode": "模式",
     "more": "更多的",
     "navigate": "导航",
     "network": "友情链接",
+    "new": "新的！",
     "next": "下一个",
     "next-ayah": "下一节文",
     "no": "不",
@@ -211,6 +230,7 @@
     "q-reflect": "古兰经反射",
     "quran-com": "Quran.com",
     "quran-radio": "在线听古兰经",
+    "reading-history": "阅读历史",
     "reading-preference": {
         "reading": "诵读",
         "translation": "翻译"
@@ -241,6 +261,7 @@
         "switch-mode": "切换到高级搜索",
         "title": "搜索"
     },
+    "seconds": "秒数",
     "settings": {
         "no-tafsir-selected": "尚未选择经注",
         "no-translation-selected": "尚未选择译文",

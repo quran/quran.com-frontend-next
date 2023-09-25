@@ -3,19 +3,29 @@
     "and": "dhe",
     "announcements": {
         "auth-onboarding": {
-            "slide-1": {
-                "action": "Shihni çfarë ka të re",
-                "title": "Mirë se vini në llogarinë e përdoruesit <br> <\/br> të Quran.com"
-            },
-            "slide-2": {
+            "data-sync": {
                 "action": "Tjetra",
                 "description": "Pavarësisht nëse jeni duke përdorur Quran.com në telefonin ose laptopin tuaj, faqeshënuesit, vargjet e fundit të lexuara dhe preferencat tuaja do të jenë të disponueshme",
                 "title": "Të dhënat tuaja do të sinkronizohen <br> <\/br> nëpër pajisje"
             },
-            "slide-3": {
+            "feedback": {
                 "action": "Mirë, e kuptova",
                 "description": "Faleminderit që përdorni Quran.com dhe do të ishim të lumtur të dëgjonim komentet tuaja në <link> feedback.quran.com <\/link>",
                 "title": "Ne duam të dëgjojmë mendimet tuaja"
+            },
+            "quran-foundation-link": {
+                "action": "Tjetra",
+                "description": "Përdorni hyrjen tuaj në Quran.com për të hyrë në QuranReflec.com - një komunitet i lulëzuar global i angazhuar në reflektimin Kur'anor.",
+                "title": "Përdorni llogarinë tuaj nëpër aplikacionet Quran.Foundation!"
+            },
+            "quran-growth-journey": {
+                "action": "Tjetra",
+                "description": "Mbani brezin tuaj të leximit të Kuranit dhe përparoni në qëllimet tuaja duke ndërtuar zakone të reja",
+                "title": "Filloni Udhëtimin tuaj të Rritjes në Kuran!"
+            },
+            "welcome": {
+                "action": "Shihni çfarë ka të re",
+                "title": "Mirë se vini në llogarinë e përdoruesit <br> <\/br> të Quran.com"
             }
         },
         "collections-announcement": {
@@ -115,6 +125,8 @@
     "developers": "Zhvilluesit",
     "display": "Ekrani",
     "donate": "Dhuroni",
+    "donate_monthly": "Dhuroni çdo muaj",
+    "donate_once": "Dhuroni një herë",
     "email-verification": {
         "check-spam": "Nuk e morët emailin e verifikimit? Kontrolloni kutinë tuaj të postës së padëshiruar",
         "email-sent": "Sapo dërguam një email te <strong> {{email}} <\/strong>",
@@ -134,11 +146,11 @@
     "fonts": {
         "15_lines": "15 rreshta",
         "16_lines": "16 rreshta",
-        "code_v1": "Kompleksi Mbreti Fahad V1",
+        "code_v1": "Kompleksi King Fahad V1",
         "code_v2": "Kompleksi King Fahad V2",
         "font-size": "Përmasa e gërmave",
         "lines": "Linjat",
-        "qcf-desc": "Fontet KPFG ofrojnë cilësi më të lartë, por kërkojnë më shumë kohë për t'u ngarkuar.",
+        "qcf-desc": "Fontet Kompleksi King Fahad (V1 dhe V2) ofrojnë cilësi më të lartë, por kërkojnë më shumë kohë për t'u ngarkuar.",
         "qpc_uthmani_hafs": "QPC Uthmani Hafs",
         "quran-font": "Fonti i Kuranit",
         "tajweed": "Texhvidi",
@@ -158,14 +170,18 @@
         "lastName": "Mbiemri"
     },
     "from": "Nga",
+    "fundraising-sticky-banner": {
+        "cta": "Dhuroni",
+        "title": "Mbështetni Quran.com këtë Ramazan"
+    },
     "fundraising": {
         "description": "Donacionet mujore na ndihmojnë të përmirësojmë Quran.com dhe të mbajmë operacionet, kështu që ne fokusohemi më pak në mbledhjen e fondeve dhe më shumë në krijimin e ndikimit.",
-        "learn-more": "Mëso më shumë",
         "title": "Bëhuni një donator mujor"
     },
     "help": "Ndihmë",
     "hizb": "Hizb",
     "home": "Shtëpi",
+    "hours": "orët",
     "inline": "Ne rresht",
     "input": {
         "clear": "Qartë"
@@ -173,6 +189,7 @@
     "juz": "Xhuz",
     "language": "Gjuhë",
     "languages": "Gjuhët",
+    "learn-more": "Mëso më shumë",
     "less": "Më pak",
     "loading": "Po ngarkohet",
     "login": "Identifikohu",
@@ -180,11 +197,13 @@
     "meccan": "mekas",
     "medinan": "Medinas",
     "menu": "Menu",
+    "minutes": "Minutat",
     "mobile-apps": "Aplikacionet celulare",
     "mode": "Modaliteti",
     "more": "Më shumë",
     "navigate": "Navigoni",
     "network": "Rrjeti",
+    "new": "I ri!",
     "next": "Tjetra",
     "next-ayah": "Ajeti tjetër",
     "no": "Jo",
@@ -211,6 +230,7 @@
     "q-reflect": "Kurani Reflekto",
     "quran-com": "Quran.com",
     "quran-radio": "Kuran Radio",
+    "reading-history": "Leximi i historisë",
     "reading-preference": {
         "reading": "Leximi",
         "translation": "Përkthimi"
@@ -241,6 +261,7 @@
         "switch-mode": "Kalo te Kërkimi i Avancuar",
         "title": "Kërko"
     },
+    "seconds": "Sekonda",
     "settings": {
         "no-tafsir-selected": "Nuk është zgjedhur asnjë tefsir",
         "no-translation-selected": "Nuk u zgjodh asnjë përkthim",

@@ -3,19 +3,29 @@
     "and": "et",
     "announcements": {
         "auth-onboarding": {
-            "slide-1": {
-                "action": "Regardez ce qu'il y a de nouveau",
-                "title": "Bienvenue sur Quran.com <br> <\/br> Compte utilisateur"
-            },
-            "slide-2": {
+            "data-sync": {
                 "action": "Prochain",
                 "description": "Que vous utilisiez Quran.com sur votre téléphone ou votre ordinateur portable, vos signets, les derniers versets lus et vos préférences seront disponibles",
                 "title": "Vos données seront synchronisées <br> <\/br> sur tous les appareils"
             },
-            "slide-3": {
+            "feedback": {
                 "action": "OK, j'ai compris",
                 "description": "Merci d'utiliser Quran.com et nous serions heureux d'entendre vos commentaires sur <link> feedback.quran.com <\/link>",
                 "title": "Nous voulons entendre vos pensées"
+            },
+            "quran-foundation-link": {
+                "action": "Suivant",
+                "description": "Utilisez votre connexion Quran.com pour accéder à QuranReflect.com - une communauté mondiale florissante engagée dans la réflexion coranique.",
+                "title": "Utilisez votre compte sur toutes les applications Quran.Foundation !"
+            },
+            "quran-growth-journey": {
+                "action": "Suivant",
+                "description": "Maintenez votre séquence de lecture du Coran et progressez dans vos objectifs tout en créant de nouvelles habitudes",
+                "title": "Commencez votre voyage de croissance du Coran !"
+            },
+            "welcome": {
+                "action": "Regardez ce qu'il y a de nouveau",
+                "title": "Bienvenue sur Quran.com <br> <\/br> Compte utilisateur"
             }
         },
         "collections-announcement": {
@@ -115,6 +125,8 @@
     "developers": "Développeurs",
     "display": "Afficher",
     "donate": "Donner",
+    "donate_monthly": "Faire un don mensuel",
+    "donate_once": "Faire un don une fois",
     "email-verification": {
         "check-spam": "Vous n'avez pas reçu l'e-mail de vérification ? Vérifiez votre boîte de réception de spam",
         "email-sent": "Nous venons d'envoyer un e-mail à <strong> {{email}} <\/strong>",
@@ -134,11 +146,11 @@
     "fonts": {
         "15_lines": "15 lignes",
         "16_lines": "16 lignes",
-        "code_v1": "Complexe Roi Fahad V1",
+        "code_v1": "Complexe King Fahad V1",
         "code_v2": "Complexe King Fahad V2",
         "font-size": "Taille de police",
         "lines": "Lignes",
-        "qcf-desc": "Les polices KPFG offrent une qualité supérieure mais prennent plus de temps à charger.",
+        "qcf-desc": "Les polices Complexe King Fahad (V1 et V2) offrent une qualité supérieure mais prennent plus de temps à charger.",
         "qpc_uthmani_hafs": "QPC Uthmani Hafs",
         "quran-font": "Police du Coran",
         "tajweed": "Tajweed",
@@ -158,14 +170,18 @@
         "lastName": "Nom de famille"
     },
     "from": "De",
+    "fundraising-sticky-banner": {
+        "cta": "Donner",
+        "title": "Soutenez Quran.com ce Ramadan"
+    },
     "fundraising": {
         "description": "Les dons mensuels nous aident à améliorer Quran.com et à maintenir les opérations afin que nous nous concentrions moins sur la collecte de fonds et plus sur la création d'impact.",
-        "learn-more": "Apprendre encore plus",
         "title": "Devenez un donateur mensuel"
     },
     "help": "Aider",
     "hizb": "Hizb",
     "home": "Accueil",
+    "hours": "Heures",
     "inline": "En ligne",
     "input": {
         "clear": "Dégager"
@@ -173,6 +189,7 @@
     "juz": "Juz",
     "language": "Langue",
     "languages": "Langues",
+    "learn-more": "Apprendre encore plus",
     "less": "Moins",
     "loading": "Chargement",
     "login": "Connexion",
@@ -180,11 +197,13 @@
     "meccan": "La Mecque",
     "medinan": "Médinan",
     "menu": "Menu",
+    "minutes": "Minutes",
     "mobile-apps": "Application mobile",
     "mode": "Mode",
     "more": "Suite",
     "navigate": "Naviguer",
     "network": "Réseau",
+    "new": "Nouveau!",
     "next": "Prochain",
     "next-ayah": "Ayah suivant",
     "no": "Non",
@@ -211,6 +230,7 @@
     "q-reflect": "CoranRéfléchir",
     "quran-com": "Coran.com",
     "quran-radio": "Radio Coran",
+    "reading-history": "Lecture de l'histoire",
     "reading-preference": {
         "reading": "En train de lire",
         "translation": "Traduction"
@@ -241,6 +261,7 @@
         "switch-mode": "Passer à la recherche avancée",
         "title": "Chercher"
     },
+    "seconds": "Secondes",
     "settings": {
         "no-tafsir-selected": "Aucun tafsir sélectionné",
         "no-translation-selected": "Aucune traduction sélectionnée",

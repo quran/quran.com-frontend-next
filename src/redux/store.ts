@@ -16,7 +16,6 @@ import DefaultSettingsMiddleware from './middleware/defaultSettingsMiddleware';
 import migrations from './migrations';
 import audioPlayerPersistConfig from './slices/AudioPlayer/persistConfig';
 import audioPlayerState from './slices/AudioPlayer/state';
-import userDataSync from './slices/Auth/userDataSync';
 import banner from './slices/banner';
 import commandBarPersistConfig from './slices/CommandBar/persistConfig';
 import commandBar from './slices/CommandBar/state';
@@ -44,7 +43,7 @@ import SliceName from './types/SliceName';
 
 const persistConfig = {
   key: 'root',
-  version: 24,
+  version: 30,
   storage,
   migrate: createMigrate(migrations, {
     debug: process.env.NEXT_PUBLIC_VERCEL_ENV === 'development',
@@ -90,7 +89,6 @@ export const rootReducer = combineReducers({
   readingViewVerse,
   banner,
   session,
-  userDataSync,
   persistGateHydration,
   revelationOrder,
 });

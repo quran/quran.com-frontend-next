@@ -33,7 +33,11 @@ import {
 } from '@/utils/eventLogger';
 import { getLanguageDataById } from '@/utils/locale';
 import { fakeNavigate, getVerseSelectedTafsirNavigationUrl } from '@/utils/navigation';
-import { getSelectedTafsirLanguage, getTafsirsLanguageOptions } from '@/utils/tafsir';
+import {
+  getFirstTafsirOfLanguage,
+  getSelectedTafsirLanguage,
+  getTafsirsLanguageOptions,
+} from '@/utils/tafsir';
 import {
   getVerseNumberFromKey,
   getFirstAndLastVerseKeys,
@@ -129,8 +133,8 @@ const TafsirBody = ({
     fetcher,
   );
 
-  // selectedLanguage is based on selectedTafir's language
-  // but we need to fetch the data from the API first to know what is the lanaguage of `selectedTafsirIdOrSlug`
+  // selectedLanguage is based on selectedTafsir's language
+  // but we need to fetch the data from the API first to know what is the language of `selectedTafsirIdOrSlug`
   // so we get the data from the API and set the selectedLanguage once it is loaded
   useEffect(() => {
     if (tafsirSelectionList) {
@@ -150,6 +154,26 @@ const TafsirBody = ({
   const languageOptions = tafsirSelectionList
     ? getTafsirsLanguageOptions(tafsirSelectionList.tafsirs)
     : [];
+
+  /**
+   * Handle when the language of the Tafsir is changed. When it does,
+   * we auto-select the first Tafsir of the new language based on the
+   * response from BE.
+   *
+   * @param {string} newLang
+   */
+  const onLanguageSelected = (newLang: string) => {
+    logValueChange('tafsir_locale', selectedLanguage, newLang);
+    setSelectedLanguage(newLang);
+
+    if (tafsirSelectionList) {
+      const firstTafsirOfLanguage = getFirstTafsirOfLanguage(tafsirSelectionList, newLang);
+      if (firstTafsirOfLanguage) {
+        const { id, slug } = firstTafsirOfLanguage;
+        onTafsirSelected(id, slug);
+      }
+    }
+  };
 
   const renderTafsir = useCallback(
     (data: TafsirContentResponse) => {
@@ -230,35 +254,35 @@ const TafsirBody = ({
     [chaptersData, lang, scrollToTop, selectedChapterId, selectedTafsirIdOrSlug, t],
   );
 
+  const onChapterIdChange = (newChapterId) => {
+    logItemSelectionChange('tafsir_chapter_id', newChapterId);
+    fakeNavigate(
+      getVerseSelectedTafsirNavigationUrl(Number(newChapterId), Number(1), selectedTafsirIdOrSlug),
+      lang,
+    );
+    setSelectedChapterId(newChapterId.toString());
+    setSelectedVerseNumber('1'); // reset verse number to 1 every time chapter changes
+  };
+
+  const onVerseNumberChange = (newVerseNumber) => {
+    logItemSelectionChange('tafsir_verse_number', newVerseNumber);
+    setSelectedVerseNumber(newVerseNumber);
+    fakeNavigate(
+      getVerseSelectedTafsirNavigationUrl(
+        Number(selectedChapterId),
+        Number(newVerseNumber),
+        selectedTafsirIdOrSlug,
+      ),
+      lang,
+    );
+  };
+
   const surahAndAyahSelection = (
     <SurahAndAyahSelection
       selectedChapterId={selectedChapterId}
       selectedVerseNumber={selectedVerseNumber}
-      onChapterIdChange={(newChapterId) => {
-        logItemSelectionChange('tafsir_chapter_id', newChapterId);
-        fakeNavigate(
-          getVerseSelectedTafsirNavigationUrl(
-            Number(newChapterId),
-            Number(1),
-            selectedTafsirIdOrSlug,
-          ),
-          lang,
-        );
-        setSelectedChapterId(newChapterId.toString());
-        setSelectedVerseNumber('1'); // reset verse number to 1 every time chapter changes
-      }}
-      onVerseNumberChange={(newVerseNumber) => {
-        logItemSelectionChange('tafsir_verse_number', newVerseNumber);
-        setSelectedVerseNumber(newVerseNumber);
-        fakeNavigate(
-          getVerseSelectedTafsirNavigationUrl(
-            Number(selectedChapterId),
-            Number(newVerseNumber),
-            selectedTafsirIdOrSlug,
-          ),
-          lang,
-        );
-      }}
+      onChapterIdChange={onChapterIdChange}
+      onVerseNumberChange={onVerseNumberChange}
     />
   );
 
@@ -267,10 +291,7 @@ const TafsirBody = ({
       selectedTafsirIdOrSlug={selectedTafsirIdOrSlug}
       selectedLanguage={selectedLanguage}
       onTafsirSelected={onTafsirSelected}
-      onSelectLanguage={(newLang) => {
-        logValueChange('tafsir_locale', selectedLanguage, newLang);
-        setSelectedLanguage(newLang);
-      }}
+      onSelectLanguage={onLanguageSelected}
       languageOptions={languageOptions}
       data={tafsirSelectionList}
       isLoading={isLoading}

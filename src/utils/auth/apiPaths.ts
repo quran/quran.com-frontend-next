@@ -1,5 +1,9 @@
 import stringify from '../qs-stringify';
 
+import { ActivityDayType, FilterActivityDaysParams } from '@/types/auth/ActivityDay';
+import { EstimateGoalRequest, GoalCategory } from '@/types/auth/Goal';
+import { StreakWithMetadataParams } from '@/types/auth/Streak';
+import { Mushaf } from '@/types/QuranReader';
 import { getAuthApiPath } from '@/utils/url';
 import BookmarkType from 'types/BookmarkType';
 
@@ -58,6 +62,8 @@ export const makeDeleteCollectionBookmarkByIdUrl = (collectionId: string, bookma
 export const makeDeleteCollectionBookmarkByKeyUrl = (collectionId: string) =>
   makeUrl(`collections/${collectionId}/bookmarks`);
 
+export const makePostReflectionViewsUrl = (postId: string) => makeUrl(`posts/${postId}/views`);
+
 export const makeBookmarkCollectionsUrl = (
   mushafId: number,
   key: number,
@@ -98,9 +104,40 @@ export const makeBookmarkUrl = (
 
 export const makeReadingSessionsUrl = () => makeUrl('reading-sessions');
 
-export const makeUserPreferencesUrl = () => makeUrl('preferences');
+export const makeActivityDaysUrl = (params: { mushafId?: Mushaf; type: ActivityDayType }) =>
+  makeUrl('activity-days', params);
 
-export const makeUserBulkPreferencesUrl = () => makeUrl('preferences/bulk');
+export const makeFilterActivityDaysUrl = (params: FilterActivityDaysParams) =>
+  makeUrl('activity-days/filter', params);
+
+export const makeEstimateRangesReadingTimeUrl = (params: { ranges: string[] }) =>
+  makeUrl('activity-days/estimate-reading-time', { ranges: params.ranges.join(',') });
+
+export const makeGoalUrl = (params: { mushafId?: Mushaf; type: GoalCategory }) =>
+  makeUrl('goal', params);
+
+export const makeEstimateReadingGoalUrl = (data: EstimateGoalRequest) =>
+  makeUrl('goal/estimate', data);
+
+export const makeStreakUrl = (params?: StreakWithMetadataParams) => makeUrl('streak', params);
+
+export const makeReadingGoalProgressUrl = (mushafId: Mushaf) =>
+  makeUrl('goal/status', {
+    mushafId,
+  });
+
+export const makeUserPreferencesUrl = (mushafId?: Mushaf) =>
+  makeUrl(
+    'preferences',
+    mushafId && {
+      mushafId,
+    },
+  );
+
+export const makeUserBulkPreferencesUrl = (mushafId: Mushaf) =>
+  makeUrl('preferences/bulk', {
+    mushafId,
+  });
 
 export const makeLogoutUrl = () => makeUrl('auth/logout');
 

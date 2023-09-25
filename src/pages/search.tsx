@@ -1,5 +1,5 @@
 /* eslint-disable max-lines */
-import React, { useState, useEffect, useMemo, useCallback, useRef } from 'react';
+import React, { useState, useEffect, useMemo, useCallback, useRef, RefObject } from 'react';
 
 import { GetStaticProps, NextPage } from 'next';
 import useTranslation from 'next-translate/useTranslation';
@@ -17,6 +17,7 @@ import ContentModal, { ContentModalSize } from '@/dls/ContentModal/ContentModal'
 import Input, { InputVariant } from '@/dls/Forms/Input';
 import useAddQueryParamsToUrl from '@/hooks/useAddQueryParamsToUrl';
 import useDebounce from '@/hooks/useDebounce';
+import useFocus from '@/hooks/useFocusElement';
 import FilterIcon from '@/icons/filter.svg';
 import SearchIcon from '@/icons/search.svg';
 import { getTranslationsInitialState } from '@/redux/defaultSettings/util';
@@ -35,7 +36,6 @@ import {
 import filterTranslations from '@/utils/filter-translations';
 import { getLanguageAlternates, toLocalizedNumber } from '@/utils/locale';
 import { getCanonicalUrl } from '@/utils/navigation';
-import DataContext from 'src/contexts/DataContext';
 import AvailableLanguage from 'types/AvailableLanguage';
 import AvailableTranslation from 'types/AvailableTranslation';
 import ChaptersData from 'types/ChaptersData';
@@ -50,11 +50,12 @@ type SearchProps = {
   chaptersData: ChaptersData;
 };
 
-const Search: NextPage<SearchProps> = ({ translations, chaptersData }): JSX.Element => {
+const Search: NextPage<SearchProps> = ({ translations }): JSX.Element => {
   const { t, lang } = useTranslation('common');
   const router = useRouter();
   const userTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
   const [searchQuery, setSearchQuery] = useState<string>('');
+  const [focusInput, searchInputRef]: [() => void, RefObject<HTMLInputElement>] = useFocus();
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [selectedLanguages, setSelectedLanguages] = useState<string>('');
   const [selectedTranslations, setSelectedTranslations] = useState<string>(() =>
@@ -84,25 +85,37 @@ const Search: NextPage<SearchProps> = ({ translations, chaptersData }): JSX.Elem
   // After hydration, Next.js will trigger an update to provide the route parameters
   // in the query object. @see https://nextjs.org/docs/routing/dynamic-routes#caveats
   useEffect(() => {
-    if (router.isReady) {
-      if (router.query.q || router.query.query) {
-        let query = router.query.q as string;
-        if (router.query.query) {
-          query = router.query.query as string;
-        }
-        setSearchQuery(query);
-      }
-      if (router.query.page) {
-        setCurrentPage(Number(router.query.page));
-      }
-      if (router.query.languages) {
-        setSelectedLanguages(router.query.languages as string);
-      }
-      if (router.query.translations) {
-        setSelectedTranslations(router.query.translations as string);
-      }
+    // we don't want to focus the main search input when the translation filter modal is open.
+    if (router.isReady && !isContentModalOpen) {
+      focusInput();
     }
-  }, [router]);
+  }, [focusInput, router, isContentModalOpen]);
+
+  useEffect(() => {
+    if (router.query.q || router.query.query) {
+      let query = router.query.q as string;
+      if (router.query.query) {
+        query = router.query.query as string;
+      }
+      setSearchQuery(query);
+    }
+
+    if (router.query.page) {
+      setCurrentPage(Number(router.query.page));
+    }
+    if (router.query.languages) {
+      setSelectedLanguages(router.query.languages as string);
+    }
+    if (router.query.translations) {
+      setSelectedTranslations(router.query.translations as string);
+    }
+  }, [
+    router.query.q,
+    router.query.query,
+    router.query.page,
+    router.query.languages,
+    router.query.translations,
+  ]);
 
   /**
    * Handle when the search query is changed.
@@ -196,7 +209,8 @@ const Search: NextPage<SearchProps> = ({ translations, chaptersData }): JSX.Elem
   const onTranslationChange = useCallback((translationIds: string[]) => {
     // convert the array into a string
     setSelectedTranslations((prevTranslationIds) => {
-      const newTranslationIds = translationIds.join(',');
+      // filter out the empty strings
+      const newTranslationIds = translationIds.filter((id) => id !== '').join(',');
       logValueChange('search_page_selected_translations', prevTranslationIds, newTranslationIds);
       return newTranslationIds;
     });
@@ -270,7 +284,7 @@ const Search: NextPage<SearchProps> = ({ translations, chaptersData }): JSX.Elem
   };
 
   return (
-    <DataContext.Provider value={chaptersData}>
+    <>
       <NextSeoWrapper
         title={
           debouncedSearchQuery !== ''
@@ -291,6 +305,7 @@ const Search: NextPage<SearchProps> = ({ translations, chaptersData }): JSX.Elem
               prefix={<SearchIcon />}
               onChange={onSearchQueryChange}
               onClearClicked={onClearClicked}
+              inputRef={searchInputRef}
               clearable
               value={searchQuery}
               disabled={isSearching}
@@ -364,7 +379,7 @@ const Search: NextPage<SearchProps> = ({ translations, chaptersData }): JSX.Elem
           </div>
         </div>
       </div>
-    </DataContext.Provider>
+    </>
   );
 };
 

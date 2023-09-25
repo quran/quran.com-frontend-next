@@ -1,0 +1,31 @@
+{
+    "add": "Add",
+    "add-data-success": "Your reading data has been added successfully.",
+    "delete-goal": {
+        "action": "Delete Goal",
+        "confirmation": {
+            "action-text": "I understand the consequence, delete my goal",
+            "confirmation-text": "delete my goal",
+            "instruction-text": "Please type <strong>{{text}}<\/strong> to confirm",
+            "subtitle": "This action cannot be undone. This will permanently delete your goal, and we'll stop tracking your progress.",
+            "title": "Are you sure?"
+        },
+        "success": "Your reading goal has been deleted successfully."
+    },
+    "edit-goal": {
+        "action": "Edit Goal",
+        "subtitle": "We will re-calculate your progress based on the new goal.",
+        "success": "Your reading goal has been updated successfully.",
+        "title": "Edit your reading goal"
+    },
+    "history": "Reading History",
+    "history-for": "Reading history for {{date}}",
+    "manage-goal": "Manage your reading goal",
+    "manually-add": "Manually add readings",
+    "no-reading-history-for": "No reading history for {{date}}",
+    "reading-progress-header": "Your Progress",
+    "reading-progress-streak": "Streak",
+    "reading-time": "Reading time",
+    "seconds-read-tooltip": "This is the time you have spent reading the Ayahs you entered. We auto-populate it with the average reading speed on Quran.com, but you can override it with your actual reading time.",
+    "you-read": "You read:"
+}

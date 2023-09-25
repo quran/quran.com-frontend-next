@@ -6,6 +6,12 @@ $button-hover-color: rgba(
   $alpha: 0.3,
 );
 
+.reflectionCta {
+  padding-inline: 8px;
+  font-size: 15px;
+  font-weight: var(--font-weight-bold);
+}
+
 .container {
   position: absolute;
   inset-block-start: 0;

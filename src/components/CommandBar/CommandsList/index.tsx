@@ -19,6 +19,7 @@ import {
   removeRecentNavigation,
   setIsOpen,
 } from '@/redux/slices/CommandBar/state';
+import { logButtonClick } from '@/utils/eventLogger';
 import { resolveUrlBySearchNavigationType } from '@/utils/navigation';
 import { SearchNavigationResult } from 'types/SearchNavigationResult';
 
@@ -124,6 +125,7 @@ const CommandsList: React.FC<Props> = ({ commandGroups: { groups, numberOfComman
     event: MouseEvent<Element>,
     navigationItemKey: number | string,
   ) => {
+    logButtonClick('remove_command_bar_navigation');
     // to not allow the event to bubble up to the parent container
     event.stopPropagation();
     dispatch({ type: removeRecentNavigation.type, payload: navigationItemKey });

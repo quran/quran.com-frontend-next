@@ -1,0 +1,132 @@
+{
+    "continue-reading": "Continuer la lecture",
+    "continuous": {
+        "description": "Votre objectif calculera votre progression sur une durée de jours",
+        "title": "Sur une durée"
+    },
+    "create-plan": "Créer un forfait",
+    "create-reading-goal": "Créer un objectif",
+    "daily-progress": "Progression quotidienne",
+    "daily": {
+        "description": "Votre objectif sera réinitialisé chaque jour",
+        "title": "Objectif quotidien"
+    },
+    "day-x": "Jour {{day}}",
+    "days": "Jours",
+    "duration": "Durée (jours)",
+    "ending-chapter": "Fin de la sourate",
+    "ending-verse": "Terminer Ayah",
+    "examples-subtitle": "Voici une liste d'objectifs communs. Vous pouvez également créer votre propre objectif.",
+    "examples-title": "Choisissez un objectif prédéfini ou créez le vôtre",
+    "examples": {
+        "custom": {
+            "description": "Définissez un objectif personnalisé qui vous convient",
+            "title": "Coutume"
+        },
+        "khatm": {
+            "description": "Un but classique de Khatm. Lire 1 Juz par jour",
+            "title": "Lire le Coran en 30 jours"
+        },
+        "time": {
+            "description": "Un objectif simple et adapté aux débutants",
+            "title": "Lire 10 minutes par jour"
+        },
+        "year": {
+            "description": "Lisez le Coran à votre rythme au cours de la prochaine année",
+            "title": "Lire le Coran en un an"
+        }
+    },
+    "frequency-tab": {
+        "description": "Votre objectif doit-il être réinitialisé tous les jours ou tous les jours ? Ne vous inquiétez pas, nous suivrons vos progrès quelle que soit la fréquence que vous choisissez.",
+        "title": "Choisissez une fréquence pour votre objectif"
+    },
+    "goal-done": {
+        "description": "Toute lecture supplémentaire sera toujours enregistrée",
+        "title": "Vous avez atteint l'objectif d'aujourd'hui"
+    },
+    "goal-target": {
+        "description": "Combien de temps, de pages ou de versets devez-vous lire pour atteindre votre objectif ?",
+        "title": "Fixez-vous une cible pour votre objectif"
+    },
+    "goal-type": {
+        "description": "Votre objectif doit-il être basé sur le temps, les pages ou une plage personnalisée (par exemple, 3 Juzs du Coran) ?",
+        "title": "Choisissez un critère pour votre objectif"
+    },
+    "goal-types": {
+        "pages": {
+            "description": "Votre objectif sera basé sur les pages",
+            "title": "pages"
+        },
+        "range": {
+            "description": "Votre objectif sera basé sur une gamme personnalisée de versets (cela peut être une sourate, un Juz ou même tout le Coran)",
+            "title": "Gamme personnalisée"
+        },
+        "time": {
+            "description": "Votre objectif sera basé sur le temps",
+            "title": "Temps"
+        }
+    },
+    "plus-x-more-days": {
+        "one": "+{{days}} jour de plus",
+        "other": "+{{days}} jours de plus"
+    },
+    "preview-schedule": {
+        "description": "Voici à quoi ressemblera votre objectif. Vous pouvez toujours le changer plus tard.",
+        "title": "Voici un aperçu de votre emploi du temps"
+    },
+    "progress": {
+        "complete": "L'objectif d'aujourd'hui est atteint 🎉",
+        "goal-complete": "Tout ton objectif est atteint 🎉",
+        "pages-goal": "lire {{pages}} pages du Coran",
+        "range-goal": "lire {{from}} à {{to}}",
+        "time-goal": "lire {{time}} du Coran"
+    },
+    "reading-goal": "Objectif de lecture",
+    "reading-goal-description": "Trouvez-vous difficile de maintenir la cohérence avec vos objectifs de lecture du Coran ? <br\/> <br\/> Quran Growth Journey est une fonctionnalité dynamique développée pour vous aider à rester cohérent dans votre parcours avec le Coran. Que vous visiez à lire 10 minutes par jour, à terminer un Juz en un mois ou à terminer tout le Coran en un an, etc., Quran.com peut désormais vous aider à définir un objectif personnalisé et à suivre vos séquences de lecture quotidiennes, tout en ajuster au fur et à mesure que vous progressez. Son utilisation est entièrement gratuite et nous espérons qu'elle vous aidera à rester motivé pour atteindre votre objectif !",
+    "reading-goal-label": "Vous êtes sur un",
+    "reading-goal-title": "Présentation du parcours de croissance du Coran",
+    "recommended": "Recommandé",
+    "remaining": "Reste pour aujourd'hui",
+    "remaining-days": {
+        "one": "{{days}} jour restant",
+        "other": "{{days}} jours restants"
+    },
+    "set-reading-goal-success": "Votre objectif de lecture a été défini avec succès.",
+    "start-journey": "Commencez votre voyage !",
+    "start-reading": "Commencez à lire",
+    "starting-chapter": "Sourate de départ",
+    "starting-verse": "Commencer Ayah",
+    "streak": "Traînée",
+    "streak-definition": "Une séquence est le nombre de jours consécutifs pendant lesquels vous avez lu le Coran.",
+    "timeline-meaning": "Que signifie votre chronologie ?",
+    "timeline-states": {
+        "checked": "Vous avez atteint votre objectif",
+        "filled": "Vous avez lu quelque chose mais pas assez pour atteindre votre objectif",
+        "none": "Vous n'avez encore rien lu ce jour-là",
+        "stroked": "Vous n'avez rien lu aujourd'hui"
+    },
+    "todays-goal": "L'objectif d'aujourd'hui",
+    "view-progress": "Voir la progression",
+    "week-progress": "L'avancée de cette semaine",
+    "x-days": {
+        "one": "{{days}} jour",
+        "other": "{{days}} jours"
+    },
+    "x-days-streak": "{{days}} jours consécutifs",
+    "x-hours": {
+        "one": "{{hours}} heure",
+        "other": "{{hours}} heures"
+    },
+    "x-minutes": {
+        "one": "{{minutes}} minute",
+        "other": "{{minutes}} minutes"
+    },
+    "x-pages": {
+        "one": "{{pages}} page",
+        "other": "{{pages}} pages"
+    },
+    "x-seconds": {
+        "one": "{{seconds}} seconde",
+        "other": "{{seconds}} secondes"
+    }
+}

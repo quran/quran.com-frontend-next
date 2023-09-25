@@ -1,0 +1,106 @@
+@use "src/styles/utility";
+@use "src/styles/theme";
+
+.icon {
+  $size: calc(1.3 * var(--spacing-mega));
+  width: $size;
+  height: $size;
+  margin-inline-end: var(--spacing-large);
+  flex-shrink: 0;
+}
+
+.button {
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  font-size: calc(1.4 * var(--font-size-large));
+  width: 100%;
+  flex: 1;
+  padding-inline: calc(1.5 * var(--spacing-large));
+  padding-block: calc(var(--spacing-large));
+  background-color: transparent;
+  border: 1px solid var(--color-borders-hairline);
+  color: var(--color-background-inverse);
+  border-radius: var(--border-radius-rounded);
+  text-transform: capitalize;
+  cursor: pointer;
+
+  @media (hover: hover) {
+    &:hover {
+      background-color: var(--color-background-alternative-faded);
+    }
+  }
+}
+
+.textContainer {
+  display: flex;
+  flex-direction: column;
+  text-align: initial;
+  font-size: var(--font-size-small);
+  gap: var(--spacing-xxsmall);
+}
+
+.title {
+  font-size: var(--font-size-large);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text);
+}
+
+.description {
+  font-size: var(--font-size-normal);
+  color: var(--color-text-faded);
+}
+
+.selected {
+  background-color: var(--color-background-alternative-faded);
+  border-color: var(--color-success-medium);
+  color: var(--color-success-medium);
+
+  @include theme.light {
+    color: var(--color-success-deep);
+  }
+
+  @include theme.sepia {
+    border-color: var(--color-success-medium);
+    background-color: var(--color-background-alternative-faint);
+  }
+
+  @include theme.dark {
+    background-color: var(--color-background-alternative-faded);
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      background-color: var(--color-background-alternative-faint);
+      @include theme.dark {
+        background-color: var(--color-background-alternative-faded);
+      }
+    }
+  }
+}
+
+.recommended {
+  background-color: var(--color-success-medium);
+
+  @include theme.light {
+    color: var(--color-background-default);
+  }
+
+  @include theme.dark {
+    color: var(--color-background-inverse);
+  }
+
+  @include theme.sepia {
+    color: var(--color-background-default);
+  }
+
+  border-radius: var(--border-radius-pill);
+  padding-inline: var(--spacing-small);
+  padding-block: var(--spacing-micro);
+  font-size: var(--font-size-small);
+  position: absolute;
+  inset-block-start: 0;
+  inset-inline-end: 0;
+  transform: translate(-30%, -50%);
+}

@@ -95,15 +95,24 @@
   &:focus {
     outline: none;
   }
+
   @include breakpoints.desktop {
     border-radius: var(--border-radius-rounded);
     width: constants.$desktopWidth;
-    max-width: constants.$desktopMaxWidth;
     bottom: inherit;
     left: 50%;
     top: 50%;
     transform: translate(-50%, -50%);
+
+    &.medium {
+      max-width: constants.$desktopMaxWidthMedium;
+    }
+
+    &.large {
+      max-width: constants.$desktopMaxWidthLarge;
+    }
   }
+
   &.topSheetOnMobile {
     @include breakpoints.smallerThanTablet {
       // add 2.5% spacing on the left and right, on mobile
@@ -115,40 +124,41 @@
       bottom: unset;
     }
   }
+
   z-index: var(--z-index-modal);
 }
 
 .content[data-state="open"] {
-  animation: mobileContentIn constants.$animationDuration
-      constants.$animationEasing,
+  animation:
+    mobileContentIn constants.$animationDuration constants.$animationEasing,
     fadeIn constants.$animationDuration constants.$animationEasing;
   &.topSheetOnMobile {
     @include breakpoints.smallerThanTablet {
-      animation: topSheetOnMobileIn constants.$animationDuration
-          constants.$animationEasing,
+      animation:
+        topSheetOnMobileIn constants.$animationDuration constants.$animationEasing,
         fadeIn constants.$animationDuration constants.$animationEasing;
     }
   }
   @include breakpoints.tablet {
-    animation: desktopContentIn constants.$animationDuration
-        constants.$animationEasing,
+    animation:
+      desktopContentIn constants.$animationDuration constants.$animationEasing,
       fadeIn constants.$animationDuration constants.$animationEasing;
   }
 }
 .content[data-state="closed"] {
-  animation: mobileContentOut constants.$animationDuration
-      constants.$animationEasing,
+  animation:
+    mobileContentOut constants.$animationDuration constants.$animationEasing,
     fadeIn constants.$animationDuration constants.$animationEasing;
   &.topSheetOnMobile {
     @include breakpoints.smallerThanTablet {
-      animation: topSheetOnMobileOut constants.$animationDuration
-          constants.$animationEasing,
+      animation:
+        topSheetOnMobileOut constants.$animationDuration constants.$animationEasing,
         fadeOut constants.$animationDuration constants.$animationEasing;
     }
   }
   @include breakpoints.tablet {
-    animation: desktopContentOut constants.$animationDuration
-        constants.$animationEasing,
+    animation:
+      desktopContentOut constants.$animationDuration constants.$animationEasing,
       fadeOut constants.$animationDuration constants.$animationEasing;
   }
 }

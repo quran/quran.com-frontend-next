@@ -3,6 +3,7 @@
 /* eslint-disable no-alert */
 import { useState } from 'react';
 
+import { ModalSize } from './Content';
 import Modal from './Modal';
 
 import Button, { ButtonVariant, ButtonType } from '@/dls/Button/Button';
@@ -28,6 +29,13 @@ export default {
       table: {
         category: 'Optional',
       },
+    },
+    size: {
+      control: {
+        type: 'select',
+        options: [...Object.values(ModalSize)],
+      },
+      defaultValue: ModalSize.MEDIUM,
     },
     isPropagationStopped: {
       control: {

@@ -1,12 +1,8 @@
 /* eslint-disable max-lines */
-import { useEffect } from 'react';
-
 import classNames from 'classnames';
 import { NextPage, GetStaticProps } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
-import { useDispatch } from 'react-redux';
-import useSWR from 'swr';
 
 import layoutStyle from './index.module.scss';
 import styles from './profile.module.scss';
@@ -17,16 +13,16 @@ import BookmarksAndCollectionsSection from '@/components/Verses/BookmarksAndColl
 import RecentReadingSessions from '@/components/Verses/RecentReadingSessions';
 import Button from '@/dls/Button/Button';
 import Skeleton from '@/dls/Skeleton/Skeleton';
-import { removeLastSyncAt } from '@/redux/slices/Auth/userDataSync';
-import { getUserProfile, logoutUser } from '@/utils/auth/api';
-import { makeUserProfileUrl } from '@/utils/auth/apiPaths';
+import useCurrentUser from '@/hooks/auth/useCurrentUser';
+import useRequireAuth from '@/hooks/auth/useRequireAuth';
+import { logoutUser } from '@/utils/auth/api';
 import { DEFAULT_PHOTO_URL } from '@/utils/auth/constants';
 import { isLoggedIn } from '@/utils/auth/login';
+import { removeLastSyncAt } from '@/utils/auth/userDataSync';
 import { getAllChaptersData } from '@/utils/chapter';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl, getProfileNavigationUrl } from '@/utils/navigation';
-import DataContext from 'src/contexts/DataContext';
 import Error from 'src/pages/_error';
 import ChaptersData from 'types/ChaptersData';
 
@@ -36,42 +32,30 @@ interface Props {
 
 const nameSample = 'Mohammad Ali';
 const emailSample = 'mohammadali@quran.com';
-const ProfilePage: NextPage<Props> = ({ chaptersData }) => {
-  const dispatch = useDispatch();
+const ProfilePage: NextPage<Props> = () => {
+  // we don't want to show the profile page if the user is not logged in
+  useRequireAuth();
   const { t, lang } = useTranslation();
   const router = useRouter();
+  const { user, isLoading, error } = useCurrentUser();
 
-  const {
-    data: userData,
-    isValidating,
-    error,
-  } = useSWR(isLoggedIn() ? makeUserProfileUrl() : null, getUserProfile);
-
-  useEffect(() => {
-    if (!isLoggedIn()) {
-      router.replace('/login');
-    }
-  }, [router]);
-
-  const onLogoutClicked = () => {
+  const onLogoutClicked = async () => {
     if (!isLoggedIn()) {
       return;
     }
     logButtonClick('profile_logout');
-    logoutUser().then(() => {
-      dispatch({ type: removeLastSyncAt.type });
-      router.push('/login');
-      router.reload();
-    });
-  };
 
-  const isLoading = isValidating || !userData;
+    await logoutUser();
+    removeLastSyncAt();
+    router.push('/login');
+    router.reload();
+  };
 
   if (error) {
     return <Error statusCode={500} />;
   }
 
-  const { email, firstName, lastName, photoUrl } = userData || {};
+  const { email, firstName, lastName, photoUrl } = user;
 
   const profileSkeletonInfoSkeleton = (
     <div className={classNames(styles.profileInfoContainer, styles.skeletonContainer)}>
@@ -92,7 +76,7 @@ const ProfilePage: NextPage<Props> = ({ chaptersData }) => {
   );
 
   return (
-    <DataContext.Provider value={chaptersData}>
+    <>
       <NextSeoWrapper
         title={t('common:profile')}
         url={getCanonicalUrl(lang, getProfileNavigationUrl())}
@@ -155,7 +139,7 @@ const ProfilePage: NextPage<Props> = ({ chaptersData }) => {
           </div>
         </div>
       </div>
-    </DataContext.Provider>
+    </>
   );
 };
 

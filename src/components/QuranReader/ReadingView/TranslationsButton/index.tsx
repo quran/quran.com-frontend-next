@@ -9,7 +9,7 @@ import styles from './TranslationsButton.module.scss';
 
 import DataFetcher from '@/components/DataFetcher';
 import TranslationsView from '@/components/QuranReader/ReadingView/TranslationsView';
-import TranslationViewCellSkeleton from '@/components/QuranReader/TranslationView/TranslatioViewCellSkeleton';
+import TranslationViewCellSkeleton from '@/components/QuranReader/TranslationView/TranslationViewCellSkeleton';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import ContentModalHandles from '@/dls/ContentModal/types/ContentModalHandles';
 import TranslationsIcon from '@/icons/translation.svg';

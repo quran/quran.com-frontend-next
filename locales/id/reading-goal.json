@@ -1,0 +1,125 @@
+{
+    "continue-reading": "Lanjut membaca",
+    "continuous": {
+        "description": "Sasaran Anda akan menghitung kemajuan Anda selama beberapa hari",
+        "title": "Selama durasi"
+    },
+    "create-plan": "Buat rencana",
+    "create-reading-goal": "Buat Tujuan",
+    "daily-progress": "Kemajuan Harian",
+    "daily": {
+        "description": "Sasaran Anda akan disetel ulang setiap hari",
+        "title": "Tujuan harian"
+    },
+    "day-x": "Hari {{day}}",
+    "days": "Hari",
+    "duration": "Durasi (hari)",
+    "ending-chapter": "Surah penutup",
+    "ending-verse": "Mengakhiri Ayah",
+    "examples-subtitle": "Berikut adalah daftar tujuan bersama. Anda juga dapat membuat tujuan Anda sendiri.",
+    "examples-title": "Pilih tujuan yang telah ditetapkan atau buat tujuan Anda sendiri",
+    "examples": {
+        "custom": {
+            "description": "Tetapkan sasaran khusus yang cocok untuk Anda",
+            "title": "Kebiasaan"
+        },
+        "khatm": {
+            "description": "Gol klasik Khatm. Baca 1 Juz sehari",
+            "title": "Baca Quran dalam 30 hari"
+        },
+        "time": {
+            "description": "Tujuan ramah-pemula yang sederhana",
+            "title": "Baca 10 menit sehari"
+        },
+        "year": {
+            "description": "Baca Quran dengan kecepatan Anda sendiri selama setahun ke depan",
+            "title": "Baca Quran dalam setahun"
+        }
+    },
+    "frequency-tab": {
+        "description": "Haruskah sasaran Anda diatur ulang setiap hari atau setiap beberapa hari? Jangan khawatir, kami akan melacak kemajuan Anda terlepas dari frekuensi yang Anda pilih.",
+        "title": "Pilih frekuensi untuk sasaran Anda"
+    },
+    "goal-done": {
+        "description": "Bacaan tambahan apa pun akan tetap direkam",
+        "title": "Anda menyelesaikan target hari ini"
+    },
+    "goal-target": {
+        "description": "Berapa banyak waktu, halaman, atau ayat yang harus Anda baca untuk menyelesaikan tujuan Anda?",
+        "title": "Tetapkan target untuk tujuan Anda"
+    },
+    "goal-type": {
+        "description": "Haruskah tujuan Anda didasarkan pada waktu, halaman, atau rentang khusus (yaitu, 3 Juz Quran)?",
+        "title": "Pilih kriteria untuk tujuan Anda"
+    },
+    "goal-types": {
+        "pages": {
+            "description": "Tujuan Anda akan didasarkan pada halaman",
+            "title": "Halaman"
+        },
+        "range": {
+            "description": "Tujuan Anda akan didasarkan pada berbagai ayat khusus (ini bisa berupa Surat, Juz, atau bahkan seluruh Alquran)",
+            "title": "Rentang khusus"
+        },
+        "time": {
+            "description": "Tujuan Anda akan didasarkan pada waktu",
+            "title": "Waktu"
+        }
+    },
+    "plus-x-more-days": {
+        "other": "+{{days}} hari lagi"
+    },
+    "preview-schedule": {
+        "description": "Seperti inilah tujuan Anda nantinya. Anda selalu dapat mengubahnya nanti.",
+        "title": "Ini adalah pratinjau jadwal Anda"
+    },
+    "progress": {
+        "complete": "Target hari ini selesai 🎉",
+        "goal-complete": "Seluruh tujuan Anda selesai 🎉",
+        "pages-goal": "baca {{pages}} halaman Quran",
+        "range-goal": "baca {{from}} sampai {{to}}",
+        "time-goal": "baca {{time}} Quran"
+    },
+    "reading-goal": "Tujuan Membaca",
+    "reading-goal-description": "Apakah Anda merasa sulit untuk mempertahankan konsistensi dengan tujuan membaca Al-Qur'an Anda? <br\/> <br\/> Quran Growth Journey adalah fitur dinamis yang dikembangkan untuk membantu Anda tetap konsisten dalam perjalanan Anda dengan Quran. Apakah Anda bertujuan untuk membaca 10 menit sehari, menyelesaikan Juz dalam sebulan, atau menyelesaikan seluruh Quran dalam setahun, dll., Quran.com sekarang dapat membantu Anda menetapkan tujuan khusus dan melacak bacaan harian Anda, sementara menyesuaikan saat Anda membuat kemajuan. Ini sepenuhnya gratis untuk digunakan dan kami harap ini akan membantu Anda tetap termotivasi untuk mencapai tujuan Anda!",
+    "reading-goal-label": "Anda berada di",
+    "reading-goal-title": "Memperkenalkan Perjalanan Pertumbuhan Quran",
+    "recommended": "Direkomendasikan",
+    "remaining": "Sisa untuk hari ini",
+    "remaining-days": {
+        "other": "{{days}} hari tersisa"
+    },
+    "set-reading-goal-success": "Tujuan membaca Anda telah berhasil ditetapkan.",
+    "start-journey": "Mulailah perjalanan Anda!",
+    "start-reading": "Mulai Membaca",
+    "starting-chapter": "Memulai Surah",
+    "starting-verse": "Mulai Ayah",
+    "streak": "Garis",
+    "streak-definition": "Coretan adalah jumlah hari berturut-turut Anda telah membaca Al-Qur'an.",
+    "timeline-meaning": "Apa arti garis waktu Anda?",
+    "timeline-states": {
+        "checked": "Anda telah menyelesaikan tujuan Anda",
+        "filled": "Anda telah membaca sesuatu tetapi tidak cukup untuk menyelesaikan tujuan Anda",
+        "none": "Anda belum membaca apa pun pada hari itu",
+        "stroked": "Anda belum membaca apa pun hari ini"
+    },
+    "todays-goal": "Tujuan hari ini",
+    "view-progress": "Lihat Kemajuan",
+    "week-progress": "Progres minggu ini",
+    "x-days": {
+        "other": "{{days}} hari"
+    },
+    "x-days-streak": "{{days}} hari berturut-turut",
+    "x-hours": {
+        "other": "{{hours}} jam"
+    },
+    "x-minutes": {
+        "other": "{{minutes}} menit"
+    },
+    "x-pages": {
+        "other": "{{pages}} halaman"
+    },
+    "x-seconds": {
+        "other": "{{seconds}} detik"
+    }
+}

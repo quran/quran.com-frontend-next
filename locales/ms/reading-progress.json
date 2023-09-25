@@ -1,0 +1,31 @@
+{
+    "add": "Tambah",
+    "add-data-success": "Data bacaan anda telah berjaya ditambahkan.",
+    "delete-goal": {
+        "action": "Padamkan Matlamat",
+        "confirmation": {
+            "action-text": "Saya faham akibatnya, padamkan matlamat saya",
+            "confirmation-text": "padamkan matlamat saya",
+            "instruction-text": "Sila taip <strong> {{text}} <\/strong> untuk mengesahkan",
+            "subtitle": "Tindakan ini tidak boleh dibuat asal. Ini akan memadamkan matlamat anda secara kekal dan kami akan berhenti menjejaki kemajuan anda.",
+            "title": "Adakah anda pasti?"
+        },
+        "success": "Matlamat membaca anda telah berjaya dipadamkan."
+    },
+    "edit-goal": {
+        "action": "Edit Matlamat",
+        "subtitle": "Kami akan mengira semula kemajuan anda berdasarkan matlamat baharu.",
+        "success": "Matlamat membaca anda telah berjaya dikemas kini.",
+        "title": "Edit matlamat membaca anda"
+    },
+    "history": "Membaca Sejarah",
+    "history-for": "Sejarah membaca untuk {{date}}",
+    "manage-goal": "Urus matlamat membaca anda",
+    "manually-add": "Tambah bacaan secara manual",
+    "no-reading-history-for": "Tiada sejarah bacaan untuk {{date}}",
+    "reading-progress-header": "Kemajuan Anda",
+    "reading-progress-streak": "coretan",
+    "reading-time": "Waktu membaca",
+    "seconds-read-tooltip": "Inilah masa yang anda habiskan untuk membaca Ayat yang anda masukkan. Kami mengisinya secara automatik dengan purata kelajuan membaca di Quran.com, tetapi anda boleh mengatasinya dengan masa membaca sebenar anda.",
+    "you-read": "Anda baca:"
+}

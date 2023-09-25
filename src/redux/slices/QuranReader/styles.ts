@@ -12,6 +12,7 @@ import { MushafLines, QuranFont } from 'types/QuranReader';
 export const MAXIMUM_QURAN_FONT_STEP = 10;
 export const MAXIMUM_TRANSLATIONS_FONT_STEP = 10;
 export const MAXIMUM_TAFSIR_FONT_STEP = 10;
+export const MAXIMUM_WORD_BY_WORD_FONT_STEP = 6;
 export const MINIMUM_FONT_STEP = 1;
 
 export const quranReaderStylesSlice = createSlice({
@@ -41,6 +42,14 @@ export const quranReaderStylesSlice = createSlice({
     decreaseTafsirFontScale: (state) => ({
       ...state,
       tafsirFontScale: state.tafsirFontScale - 1,
+    }),
+    increaseWordByWordFontScale: (state) => ({
+      ...state,
+      wordByWordFontScale: state.wordByWordFontScale + 1,
+    }),
+    decreaseWordByWordFontScale: (state) => ({
+      ...state,
+      wordByWordFontScale: state.wordByWordFontScale - 1,
     }),
     setMushafLines: (
       state,
@@ -101,11 +110,14 @@ export const quranReaderStylesSlice = createSlice({
         PreferenceGroup.QURAN_READER_STYLES
       ] as QuranReaderStyles;
       if (remotePreferences) {
-        const { quranFont: defaultQuranFont } = getQuranReaderStylesInitialState(locale);
+        const { quranFont: defaultQuranFont, mushafLines: defaultMushafLines } =
+          getQuranReaderStylesInitialState(locale);
         return {
           ...state,
           ...remotePreferences,
-          isUsingDefaultFont: defaultQuranFont === remotePreferences.quranFont,
+          isUsingDefaultFont:
+            defaultQuranFont === remotePreferences.quranFont &&
+            defaultMushafLines === remotePreferences.mushafLines,
         };
       }
       return state;
@@ -121,11 +133,16 @@ export const {
   decreaseQuranTextFontScale,
   increaseTranslationFontScale,
   decreaseTranslationFontScale,
+  increaseWordByWordFontScale,
+  decreaseWordByWordFontScale,
   setMushafLines,
 } = quranReaderStylesSlice.actions;
 
 export const selectQuranReaderStyles = (state: RootState) => state.quranReaderStyles;
 export const selectQuranFont = (state: RootState) => state.quranReaderStyles.quranFont;
+export const selectQuranMushafLines = (state: RootState) => state.quranReaderStyles.mushafLines;
+export const selectWordByWordFontScale = (state: RootState) =>
+  state.quranReaderStyles.wordByWordFontScale;
 export const selectIsUsingDefaultFont = (state: RootState) =>
   !!state.quranReaderStyles.isUsingDefaultFont;
 

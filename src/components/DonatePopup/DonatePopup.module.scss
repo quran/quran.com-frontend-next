@@ -22,7 +22,11 @@
 }
 
 .actionsContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-small) 0px;
   margin-block-start: var(--spacing-medium);
+  margin-block-end: var(--spacing-medium);
 }
 
 .action {

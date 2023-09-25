@@ -1,0 +1,132 @@
+{
+    "continue-reading": "Vazhdo te lexosh",
+    "continuous": {
+        "description": "Qëllimi juaj do të llogarisë përparimin tuaj për një kohëzgjatje prej ditësh",
+        "title": "Për një kohëzgjatje"
+    },
+    "create-plan": "Krijo plan",
+    "create-reading-goal": "Krijo një qëllim",
+    "daily-progress": "Progresi ditor",
+    "daily": {
+        "description": "Qëllimi juaj do të rivendoset çdo ditë",
+        "title": "Qëllimi i përditshëm"
+    },
+    "day-x": "dita {{day}}",
+    "days": "Ditët",
+    "duration": "Kohëzgjatja (ditë)",
+    "ending-chapter": "Surja përfunduese",
+    "ending-verse": "Përfundimi i Ajetit",
+    "examples-subtitle": "Këtu është një listë e qëllimeve të përbashkëta. Ju gjithashtu mund të krijoni qëllimin tuaj.",
+    "examples-title": "Zgjidhni një qëllim të paracaktuar ose krijoni tuajin",
+    "examples": {
+        "custom": {
+            "description": "Vendosni një qëllim personal që ju përshtatet",
+            "title": "Me porosi"
+        },
+        "khatm": {
+            "description": "Një gol klasik Khatm. Lexoni 1 Juz në ditë",
+            "title": "Lexoni Kuranin për 30 ditë"
+        },
+        "time": {
+            "description": "Një objektiv i thjeshtë miqësor për fillestarët",
+            "title": "Lexoni 10 minuta në ditë"
+        },
+        "year": {
+            "description": "Lexoni Kuranin me ritmin tuaj gjatë vitit të ardhshëm",
+            "title": "Lexoni Kuranin brenda një viti"
+        }
+    },
+    "frequency-tab": {
+        "description": "A duhet të rivendoset qëllimi juaj çdo ditë apo çdo numër ditësh? Mos u shqetësoni, ne do të gjurmojmë përparimin tuaj pavarësisht nga frekuenca që ju zgjidhni.",
+        "title": "Zgjidhni një frekuencë për qëllimin tuaj"
+    },
+    "goal-done": {
+        "description": "Çdo lexim shtesë do të regjistrohet ende",
+        "title": "E përfunduat qëllimin e sotëm"
+    },
+    "goal-target": {
+        "description": "Sa kohë, faqe ose vargje duhet të lexoni për të përmbushur qëllimin tuaj?",
+        "title": "Vendosni një objektiv për qëllimin tuaj"
+    },
+    "goal-type": {
+        "description": "A duhet që qëllimi juaj të bazohet në kohë, faqe ose një gamë të personalizuar (dmth. 3 Xhuza të Kuranit)?",
+        "title": "Zgjidhni një kriter për qëllimin tuaj"
+    },
+    "goal-types": {
+        "pages": {
+            "description": "Qëllimi juaj do të bazohet në faqe",
+            "title": "Faqet"
+        },
+        "range": {
+            "description": "Qëllimi juaj do të bazohet në një varg vargjesh të personalizuara (kjo mund të jetë një sure, një xhuz, apo edhe i gjithë Kurani)",
+            "title": "Gama e personalizuar"
+        },
+        "time": {
+            "description": "Qëllimi juaj do të bazohet në kohë",
+            "title": "Koha"
+        }
+    },
+    "plus-x-more-days": {
+        "one": "+{{days}} ditë më shumë",
+        "other": "+{{days}} ditë të tjera"
+    },
+    "preview-schedule": {
+        "description": "Kështu do të duket qëllimi juaj. Mund ta ndryshoni gjithmonë më vonë.",
+        "title": "Këtu është një pamje paraprake e orarit tuaj"
+    },
+    "progress": {
+        "complete": "Qëllimi i sotëm është i plotë 🎉",
+        "goal-complete": "I gjithë qëllimi juaj është i plotë 🎉",
+        "pages-goal": "lexoni {{pages}} faqe të Kuranit",
+        "range-goal": "lexo {{from}} në {{to}}",
+        "time-goal": "lexoni {{time}} të Kuranit"
+    },
+    "reading-goal": "Qëllimi i leximit",
+    "reading-goal-description": "A ju duket e vështirë të ruani konsistencën me qëllimet tuaja të leximit të Kuranit? <br\/> <br\/> Udhëtimi i Rritjes së Kuranit është një veçori dinamike e zhvilluar për t'ju ndihmuar të qëndroni të qëndrueshëm në udhëtimin tuaj me Kuranin. Pavarësisht nëse synoni të lexoni 10 minuta në ditë, të përfundoni një Xhuz në një muaj, ose të përfundoni të gjithë Kuranin në një vit, etj., Quran.com tani mund t'ju ndihmojë të vendosni një qëllim të personalizuar dhe të mbani gjurmët e vijave tuaja të përditshme të leximit, ndërsa duke u përshtatur ndërsa përparoni. Është plotësisht falas për t'u përdorur dhe shpresojmë se do t'ju ndihmojë të qëndroni të motivuar për të arritur qëllimin tuaj!",
+    "reading-goal-label": "Ju jeni në një",
+    "reading-goal-title": "Prezantimi i Udhëtimit të Rritjes së Kuranit",
+    "recommended": "Rekomanduar",
+    "remaining": "Mbetet për sot",
+    "remaining-days": {
+        "one": "Ka mbetur edhe {{days}} dite",
+        "other": "Kanë mbetur edhe {{days}} ditë"
+    },
+    "set-reading-goal-success": "Qëllimi juaj i leximit është vendosur me sukses.",
+    "start-journey": "Filloni udhëtimin tuaj!",
+    "start-reading": "Filloni të lexoni",
+    "starting-chapter": "Fillimi i sures",
+    "starting-verse": "Fillimi i ajetit",
+    "streak": "brez",
+    "streak-definition": "Një varg është numri i ditëve të njëpasnjëshme që keni lexuar Kuranin.",
+    "timeline-meaning": "Çfarë do të thotë afati juaj kohor?",
+    "timeline-states": {
+        "checked": "Ju keni përfunduar qëllimin tuaj",
+        "filled": "Ju keni lexuar diçka, por jo mjaftueshëm për të përmbushur qëllimin tuaj",
+        "none": "Nuk keni lexuar ende asgjë atë ditë",
+        "stroked": "Ju nuk keni lexuar asgjë sot"
+    },
+    "todays-goal": "Goli i sotëm",
+    "view-progress": "Shiko Progresin",
+    "week-progress": "Progresi i kësaj jave",
+    "x-days": {
+        "one": "{{days}} dite",
+        "other": "{{days}} dite"
+    },
+    "x-days-streak": "{{days}} varg ditësh",
+    "x-hours": {
+        "one": "{{hours}} orë",
+        "other": "{{hours}} ore"
+    },
+    "x-minutes": {
+        "one": "{{minutes}} minutë",
+        "other": "{{minutes}} minuta"
+    },
+    "x-pages": {
+        "one": "{{pages}} faqe",
+        "other": "{{pages}} faqe"
+    },
+    "x-seconds": {
+        "one": "{{seconds}} sekondë",
+        "other": "{{seconds}} sekonda"
+    }
+}

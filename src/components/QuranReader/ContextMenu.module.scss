@@ -75,10 +75,15 @@
   }
 }
 
+.halfSection {
+  width: 50%; // when reading preference toggle is hidden
+}
+
 .section {
-  width: 50%;
-  display: flex;
-  align-items: center;
+  width: calc(100% / 3);
+  @include breakpoints.smallerThanTablet {
+    width: 50%;
+  }
 }
 
 .alignStart {

@@ -1,0 +1,46 @@
+@use "src/styles/theme";
+
+.button {
+  display: flex;
+  background: none;
+  border: none;
+  align-items: center;
+  color: var(--color-background-alternative-deep);
+  margin-inline: var(--spacing-xsmall);
+
+  & > svg {
+    width: var(--spacing-large);
+  }
+}
+
+.timelineSection {
+  margin-block-start: var(--spacing-mega);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  h2 {
+    font-size: var(--font-size-large);
+    font-weight: var(--font-weight-semibold);
+  }
+
+  ul {
+    margin-block-start: var(--spacing-large);
+    gap: var(--spacing-large);
+    display: flex;
+    flex-direction: column;
+
+    li {
+      display: flex;
+      align-items: center;
+      font-size: var(--font-size-small);
+      color: var(--color-text-default);
+    }
+  }
+}
+
+.dayCircleWrapper {
+  position: relative;
+  margin-inline-end: var(--spacing-mega);
+}

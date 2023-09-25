@@ -12,6 +12,7 @@ import {
   WordClickFunctionality,
   MushafLines,
   QuranFont,
+  WordByWordDisplay,
 } from 'types/QuranReader';
 import Reciter from 'types/Reciter';
 
@@ -52,6 +53,7 @@ const QURAN_READER_STYLES_INITIAL_STATE: QuranReaderStyles = {
   tafsirFontScale: 3,
   quranTextFontScale: 3,
   translationFontScale: 3,
+  wordByWordFontScale: 3,
   quranFont: QuranFont.MadaniV1,
   mushafLines: MushafLines.SixteenLines,
   isUsingDefaultFont: true,
@@ -64,7 +66,7 @@ const READING_PREFERENCES_INITIAL_STATE: ReadingPreferences = {
   selectedWordByWordLocale: DEFAULT_WBW_LOCALE,
   isUsingDefaultWordByWordLocale: true,
   wordByWordContentType: [WordByWordType.Translation],
-  wordByWordDisplay: [],
+  wordByWordDisplay: [WordByWordDisplay.TOOLTIP],
   wordClickFunctionality: WordClickFunctionality.PlayAudio,
 };
 

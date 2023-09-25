@@ -3,19 +3,29 @@
     "and": "ve",
     "announcements": {
         "auth-onboarding": {
-            "slide-1": {
-                "action": "Yeniliklere bakın",
-                "title": "Kuran.com'a Hoş Geldiniz <br> <\/br> Kullanıcı Hesabı"
-            },
-            "slide-2": {
+            "data-sync": {
                 "action": "Sonraki",
                 "description": "Kuran.com'u telefonunuzda veya dizüstü bilgisayarınızda kullanıyor olsanız da, yer imleriniz, son okunan ayetler ve tercihleriniz mevcut olacak.",
                 "title": "Verileriniz cihazlar arasında <br> <\/br> senkronize edilecek"
             },
-            "slide-3": {
+            "feedback": {
                 "action": "Tamam, anladım.",
                 "description": "Kuran.com'u kullandığınız için teşekkür ederiz ve <link> feedback.quran.com <\/link> ile ilgili görüşlerinizi duymaktan memnuniyet duyarız.",
                 "title": "Düşüncelerinizi duymak istiyoruz"
+            },
+            "quran-foundation-link": {
+                "action": "Sonraki",
+                "description": "Kuran'ın yansımasıyla ilgilenen gelişen küresel bir topluluk olan Qur'anReflect.com'a erişim için Kuran.com oturum açma bilgilerinizi kullanın.",
+                "title": "Hesabınızı Kuran.Vakıf uygulamalarında kullanın!"
+            },
+            "quran-growth-journey": {
+                "action": "Sonraki",
+                "description": "Kuran okuma çizginizi koruyun ve yeni alışkanlıklar edinirken hedeflerinizde ilerleyin",
+                "title": "Kuran Büyüme Yolculuğunuza başlayın!"
+            },
+            "welcome": {
+                "action": "Yeniliklere bakın",
+                "title": "Kuran.com'a Hoş Geldiniz <br> <\/br> Kullanıcı Hesabı"
             }
         },
         "collections-announcement": {
@@ -115,6 +125,8 @@
     "developers": "Geliştiriciler",
     "display": "Görüntülemek",
     "donate": "Bağış Yapın",
+    "donate_monthly": "Aylık bağış yapın",
+    "donate_once": "Bir kez bağış yapın",
     "email-verification": {
         "check-spam": "Doğrulama e-postasını almadınız mı? Spam gelen kutunuzu kontrol edin",
         "email-sent": "Az önce <strong> {{email}} <\/strong> adresine bir e-posta gönderdik.",
@@ -138,7 +150,7 @@
         "code_v2": "Kral Fehd Kompleksi V2",
         "font-size": "Yazı Boyutu",
         "lines": "Çizgiler",
-        "qcf-desc": "KPFG Yazı Tipleri daha yüksek kalite sağlar ancak yüklenmesi daha uzun sürer.",
+        "qcf-desc": "Kral Fehd Kompleksi (V1 ve V2) Yazı Tipleri daha yüksek kalite sağlar ancak yüklenmesi daha uzun sürer.",
         "qpc_uthmani_hafs": "QPC Uthmani Hafs",
         "quran-font": "Kuran Yazı Tipi",
         "tajweed": "Tecvid",
@@ -158,14 +170,18 @@
         "lastName": "Soy isim"
     },
     "from": "İtibaren",
+    "fundraising-sticky-banner": {
+        "cta": "Bağış yapmak",
+        "title": "Bu Ramazan Kuran.com'u destekleyin"
+    },
     "fundraising": {
         "description": "Aylık bağışlar, Kuran.com'u iyileştirmemize ve operasyonları sürdürmemize yardımcı oluyor, böylece bağış toplamaya daha az ve etki yaratmaya daha fazla odaklanıyoruz.",
-        "learn-more": "Daha fazla bilgi edinin",
         "title": "Aylık Bağışçımız Olun"
     },
     "help": "Yardım",
     "hizb": "Hizb",
     "home": "Anasayfa",
+    "hours": "Saat",
     "inline": "Çizgide",
     "input": {
         "clear": "Açık"
@@ -173,6 +189,7 @@
     "juz": "Cüz",
     "language": "Dil",
     "languages": "Diller",
+    "learn-more": "Daha fazla bilgi edinin",
     "less": "Daha az",
     "loading": "Yükleniyor",
     "login": "Oturum aç",
@@ -180,11 +197,13 @@
     "meccan": "Mekkeli",
     "medinan": "Medine",
     "menu": "Menü",
+    "minutes": "dakika",
     "mobile-apps": "Mobil Uygulamalar",
     "mode": "Mod",
     "more": "Daha fazla",
     "navigate": "Keşfedin",
     "network": "Ağ",
+    "new": "Yeni!",
     "next": "Sonraki",
     "next-ayah": "Sonraki Ayah",
     "no": "Numara",
@@ -211,6 +230,7 @@
     "q-reflect": "KuranYansıtmak",
     "quran-com": "Quran.com",
     "quran-radio": "Kuran Radyo",
+    "reading-history": "tarih okuma",
     "reading-preference": {
         "reading": "Okuma",
         "translation": "Meal"
@@ -241,6 +261,7 @@
         "switch-mode": "Gelişmiş Aramaya Geç",
         "title": "Ara"
     },
+    "seconds": "Saniye",
     "settings": {
         "no-tafsir-selected": "Tefsir seçilmedi",
         "no-translation-selected": "Çeviri seçilmedi",

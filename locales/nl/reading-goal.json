@@ -1,0 +1,132 @@
+{
+    "continue-reading": "Lees verder",
+    "continuous": {
+        "description": "Je doel berekent je voortgang over een periode van dagen",
+        "title": "Over een duur"
+    },
+    "create-plan": "Plan maken",
+    "create-reading-goal": "Doel maken",
+    "daily-progress": "Dagelijkse voortgang",
+    "daily": {
+        "description": "Je doel wordt elke dag gereset",
+        "title": "Dagelijks doel"
+    },
+    "day-x": "Dag {{day}}",
+    "days": "Dagen",
+    "duration": "Duur (dagen)",
+    "ending-chapter": "Einde soera",
+    "ending-verse": "Ayah beëindigen",
+    "examples-subtitle": "Hier is een lijst met gemeenschappelijke doelen. Je kunt ook je eigen doel maken.",
+    "examples-title": "Kies een vooraf ingesteld doel of maak je eigen doel",
+    "examples": {
+        "custom": {
+            "description": "Stel een aangepast doel in dat bij u past",
+            "title": "Aangepast"
+        },
+        "khatm": {
+            "description": "Een klassiek Khatm-doelpunt. Lees 1 Juz per dag",
+            "title": "Lees de koran in 30 dagen"
+        },
+        "time": {
+            "description": "Een eenvoudig beginnersvriendelijk doel",
+            "title": "Lees 10 minuten per dag"
+        },
+        "year": {
+            "description": "Lees de koran het komende jaar in je eigen tempo",
+            "title": "Lees de Koran in een jaar"
+        }
+    },
+    "frequency-tab": {
+        "description": "Moet uw doel elke dag of elk aantal dagen worden gereset? Maak je geen zorgen, we houden je voortgang bij, ongeacht de frequentie die je kiest.",
+        "title": "Kies een frequentie voor je doel"
+    },
+    "goal-done": {
+        "description": "Eventuele extra metingen worden nog steeds geregistreerd",
+        "title": "Je hebt het doel van vandaag behaald"
+    },
+    "goal-target": {
+        "description": "Hoeveel tijd, pagina's of verzen moet je lezen om je doel te bereiken?",
+        "title": "Stel een doel voor je doel"
+    },
+    "goal-type": {
+        "description": "Moet uw doel gebaseerd zijn op tijd, pagina's of een aangepast bereik (dwz 3 juzs van de koran)?",
+        "title": "Kies een criterium voor je doel"
+    },
+    "goal-types": {
+        "pages": {
+            "description": "Je doel wordt gebaseerd op pagina's",
+            "title": "Pagina's"
+        },
+        "range": {
+            "description": "Je doel zal gebaseerd zijn op een aangepaste reeks verzen (dit kan een soera, een juz of zelfs de hele koran zijn)",
+            "title": "Aangepast bereik"
+        },
+        "time": {
+            "description": "Je doel is gebaseerd op tijd",
+            "title": "Tijd"
+        }
+    },
+    "plus-x-more-days": {
+        "one": "+ nog {{days}} dag",
+        "other": "+ nog {{days}} dagen"
+    },
+    "preview-schedule": {
+        "description": "Zo ziet je doel eruit. Je kunt het later altijd wijzigen.",
+        "title": "Hier is een voorproefje van je schema"
+    },
+    "progress": {
+        "complete": "Het doel van vandaag is behaald 🎉",
+        "goal-complete": "Je hele doel is voltooid 🎉",
+        "pages-goal": "lees {{pages}} pagina's van de koran",
+        "range-goal": "lees {{from}} tot {{to}}",
+        "time-goal": "lees {{time}} van de koran"
+    },
+    "reading-goal": "Doel lezen",
+    "reading-goal-description": "Vind je het een uitdaging om consistent te blijven met je koranleesdoelen? <br\/> <br\/> Quran Growth Journey is een dynamische functie die is ontwikkeld om u te helpen consistent te blijven op uw reis met de Koran. Of je nu 10 minuten per dag wilt lezen, een Juz in een maand wilt voltooien, of de hele koran in een jaar wilt uitlezen, enz., Quran.com kan je nu helpen een aangepast doel te stellen en je dagelijkse leesreeksen bij te houden, terwijl aanpassen terwijl u vooruitgang boekt. Het is volledig gratis te gebruiken en we hopen dat het je zal helpen gemotiveerd te blijven om je doel te bereiken!",
+    "reading-goal-label": "Je bent op een",
+    "reading-goal-title": "Introductie van de reis van de groei van de koran",
+    "recommended": "Aanbevolen",
+    "remaining": "Blijft over voor vandaag",
+    "remaining-days": {
+        "one": "Nog {{days}} dag over",
+        "other": "Nog {{days}} dagen"
+    },
+    "set-reading-goal-success": "Je leesdoel is succesvol ingesteld.",
+    "start-journey": "Begin je reis!",
+    "start-reading": "Start met lezen",
+    "starting-chapter": "Soera beginnen",
+    "starting-verse": "Ayah beginnen",
+    "streak": "Streep",
+    "streak-definition": "Een streak is het aantal opeenvolgende dagen dat je de koran hebt gelezen.",
+    "timeline-meaning": "Wat betekent uw tijdlijn?",
+    "timeline-states": {
+        "checked": "Je hebt je doel bereikt",
+        "filled": "Je hebt iets gelezen, maar niet genoeg om je doel te bereiken",
+        "none": "Je hebt die dag nog niets gelezen",
+        "stroked": "Je hebt vandaag niets gelezen"
+    },
+    "todays-goal": "Het doel van vandaag",
+    "view-progress": "Voortgang bekijken",
+    "week-progress": "De vorderingen van deze week",
+    "x-days": {
+        "one": "{{days}} dag",
+        "other": "{{days}} dagen"
+    },
+    "x-days-streak": "{{days}} dagenreeks",
+    "x-hours": {
+        "one": "{{hours}} uur",
+        "other": "{{hours}} uren"
+    },
+    "x-minutes": {
+        "one": "{{minutes}} minuut",
+        "other": "{{minutes}} minuten"
+    },
+    "x-pages": {
+        "one": "{{pages}} pagina",
+        "other": "{{pages}} pagina's"
+    },
+    "x-seconds": {
+        "one": "{{seconds}} seconde",
+        "other": "{{seconds}} seconden"
+    }
+}

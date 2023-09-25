@@ -6,6 +6,7 @@
 }
 
 $fallbackColor: #22a5ad;
+
 .backgroundImage {
   position: absolute;
   z-index: -1;
@@ -13,12 +14,15 @@ $fallbackColor: #22a5ad;
   background-color: $fallbackColor;
   background-image: url("/images/background.jpg");
   background-size: cover;
+
   @include theme.dark {
     filter: saturate(0.1) brightness(0.3) contrast(1.1);
   }
+
   @include theme.light {
     filter: none;
   }
+
   @include theme.sepia {
     filter: sepia(1);
   }
@@ -29,12 +33,14 @@ $fallbackColor: #22a5ad;
   flex-direction: column;
   height: 100%;
   align-items: center;
-  padding-block-start: calc(2 * var(--spacing-mega));
-  padding-block-end: calc(1 * var(--spacing-mega));
+  padding-block-start: var(--spacing-mega);
+  padding-block-end: var(--spacing-small);
   padding-inline: var(--spacing-small);
+
   @include breakpoints.tablet {
     max-width: calc(25 * var(--spacing-mega));
   }
+
   margin-inline: auto;
 }
 
@@ -44,11 +50,13 @@ $fallbackColor: #22a5ad;
   max-width: calc(8 * var(--spacing-mega));
   margin-block-end: var(--spacing-medium);
   margin-block-start: var(--spacing-mega);
+
   @include breakpoints.tablet {
     margin-block-end: var(--spacing-mega);
     margin-block-start: var(--spacing-xxsmall);
   }
-  & > svg {
+
+  &>svg {
     fill: var(--color-text-inverse);
   }
 }

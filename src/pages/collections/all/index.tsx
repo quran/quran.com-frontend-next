@@ -4,13 +4,15 @@ import { GetStaticProps } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 
 import CollectionDetailContainer from '@/components/Collection/CollectionDetailContainer/CollectionDetailContainer';
+import useRequireAuth from '@/hooks/auth/useRequireAuth';
 import { isLoggedIn } from '@/utils/auth/login';
 import { logValueChange } from '@/utils/eventLogger';
 import { makeAllCollectionsItemsUrl } from 'src/utils/auth/apiPaths';
 import { getAllChaptersData } from 'src/utils/chapter';
 import { CollectionDetailSortOption } from 'types/CollectionSortOptions';
 
-const CollectionDetailPage = ({ chaptersData }) => {
+const CollectionDetailPage = () => {
+  useRequireAuth();
   const [sortBy, setSortBy] = useState(CollectionDetailSortOption.VerseKey);
   const { t } = useTranslation();
 
@@ -51,7 +53,6 @@ const CollectionDetailPage = ({ chaptersData }) => {
     <CollectionDetailContainer
       title={t('collection:all-saved-verses')}
       getSWRKey={getKey}
-      chaptersData={chaptersData}
       onSortByChange={onSortByChange}
       sortBy={sortBy}
       shouldDeleteBookmark

@@ -6,7 +6,7 @@ import AyahReflectionsRequestParams from 'types/QuranReflect/AyahReflectionsRequ
 import AyahReflectionsResponse from 'types/QuranReflect/AyahReflectionsResponse';
 import Tab from 'types/QuranReflect/Tab';
 
-const STAGING_API_HOST = 'https://quranreflect.org';
+const STAGING_API_HOST = 'https://quranreflect.com';
 const PRODUCTION_API_HOST = 'https://quranreflect.com';
 const isProd = process.env.NEXT_PUBLIC_VERCEL_ENV === 'production';
 
@@ -41,6 +41,16 @@ export const makeAyahReflectionsUrl = ({
     feed: true,
   });
 };
+
+const makeReflectionViewsUrl = (postId: string) => {
+  return makeQuranReflectApiUrl(`v1/posts/${postId}/views`);
+};
+
+export const postReflectionViews = async (postId: string): Promise<AyahReflectionsResponse> =>
+  fetcher(makeReflectionViewsUrl(postId), {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+  });
 
 export const getAyahReflections = async (
   ayahReflectionsUrl: string,

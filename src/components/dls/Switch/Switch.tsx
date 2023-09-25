@@ -14,6 +14,7 @@ type Item = {
   disabled?: boolean;
 };
 export enum SwitchSize {
+  XSmall = 'xsmall',
   Small = 'small',
   Normal = 'normal',
   Large = 'large',
@@ -29,7 +30,11 @@ const Switch = ({ items, onSelect, selected, size = SwitchSize.Normal }: SwitchP
   const selectedIndex = items.findIndex((item) => item.value === selected);
   const { locale } = useRouter();
   return (
-    <div className={styles.container}>
+    <div
+      className={classNames(styles.container, {
+        [styles.xSmallContainer]: size === SwitchSize.XSmall,
+      })}
+    >
       {items.map((item) => (
         <button
           disabled={item.disabled}
@@ -38,6 +43,7 @@ const Switch = ({ items, onSelect, selected, size = SwitchSize.Normal }: SwitchP
             [styles.itemLarge]: size === SwitchSize.Large,
             [styles.itemNormal]: size === SwitchSize.Normal,
             [styles.itemSmall]: size === SwitchSize.Small,
+            [styles.itemXSmall]: size === SwitchSize.XSmall,
           })}
           key={item.value}
           onClick={() => onSelect(item.value)}

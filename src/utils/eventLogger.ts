@@ -5,6 +5,20 @@ import SearchQuerySource from '@/types/SearchQuerySource';
 import SearchType from '@/types/SearchType';
 import { isFirebaseEnabled } from 'src/lib/firebase';
 
+/**
+ * Filter out empty search queries.
+ *
+ * @param {string} rawSearchQuery
+ * @returns {string}
+ */
+const getSearchQuery = (rawSearchQuery: string): string => {
+  if (!rawSearchQuery) {
+    return '';
+  }
+  // trim search query so we don't log a query like ' '.
+  return rawSearchQuery.trim();
+};
+
 export const logEvent = async (eventName: string, params?: { [key: string]: any }) => {
   if (isFirebaseEnabled) {
     import('src/lib/firebase').then((firebaseModule) => {
@@ -28,8 +42,8 @@ export const logButtonClick = (buttonName: string, params?: { [key: string]: any
  *
  * @param {string} formName
  */
-export const logFormSubmission = (formName: string) => {
-  logEvent(`${formName}_form_submitted`);
+export const logFormSubmission = (formName: string, params?: { [key: string]: any }) => {
+  logEvent(`${formName}_form_submitted`, params);
 };
 
 /**
@@ -53,10 +67,12 @@ export const logValueChange = (
   name: string,
   currentValue: string | number | boolean | string[] | number[] | Record<string, any>,
   newValue: string | number | boolean | string[] | number[] | Record<string, any>,
+  params: Record<string, unknown> = {},
 ) => {
   logEvent(`${name}_change`, {
     current_value: currentValue,
     new_value: newValue,
+    ...params,
   });
 };
 
@@ -72,10 +88,11 @@ export const logEmptySearchResults = (
   source: SearchQuerySource,
   type = SearchType.Text,
 ) => {
+  const query = getSearchQuery(searchQuery);
   // if the searchQuery is not empty
-  if (searchQuery) {
+  if (query !== '') {
     logEvent(`${type}_search_query_with_no_result`, {
-      query: searchQuery,
+      query,
       source,
     });
   }
@@ -88,10 +105,11 @@ export const logEmptySearchResults = (
  * @param {SearchQuerySource} source
  */
 export const logTextSearchQuery = (searchQuery: string, source: SearchQuerySource) => {
+  const query = getSearchQuery(searchQuery);
   // if the searchQuery is not empty
-  if (searchQuery) {
+  if (query !== '') {
     logEvent('search_query', {
-      query: searchQuery,
+      query,
       source,
     });
   }

@@ -1,0 +1,132 @@
+{
+    "continue-reading": "Okumaya devam et",
+    "continuous": {
+        "description": "Hedefiniz, ilerlemenizi bir gün boyunca hesaplar",
+        "title": "bir süre boyunca"
+    },
+    "create-plan": "Plan oluştur",
+    "create-reading-goal": "Hedef Oluştur",
+    "daily-progress": "Günlük İlerleme",
+    "daily": {
+        "description": "Hedefiniz her gün sıfırlanacak",
+        "title": "günlük hedef"
+    },
+    "day-x": "Gün {{day}}",
+    "days": "günler",
+    "duration": "Süre (gün)",
+    "ending-chapter": "Bitiş Suresi",
+    "ending-verse": "Biten Ayah",
+    "examples-subtitle": "İşte ortak hedeflerin bir listesi. Kendi hedefinizi de oluşturabilirsiniz.",
+    "examples-title": "Önceden ayarlanmış bir hedef seçin veya kendi hedefinizi oluşturun",
+    "examples": {
+        "custom": {
+            "description": "Size uygun özel bir hedef belirleyin",
+            "title": "Gelenek"
+        },
+        "khatm": {
+            "description": "Klasik bir Hatm golü. Günde 1 Cüz okuyun",
+            "title": "Kuran'ı 30 günde okuyun"
+        },
+        "time": {
+            "description": "Yeni başlayanlar için basit bir hedef",
+            "title": "Günde 10 dakika okuyun"
+        },
+        "year": {
+            "description": "Gelecek yıl boyunca Kuran'ı kendi hızınızda okuyun",
+            "title": "Bir yılda Kur'an oku"
+        }
+    },
+    "frequency-tab": {
+        "description": "Hedefiniz her gün mü yoksa her gün mü sıfırlanmalı? Endişelenmeyin, seçtiğiniz sıklıktan bağımsız olarak ilerlemenizi takip edeceğiz.",
+        "title": "Hedefiniz için bir sıklık seçin"
+    },
+    "goal-done": {
+        "description": "Herhangi bir ek okuma yine de kaydedilecektir.",
+        "title": "Bugünün hedefini tamamladınız"
+    },
+    "goal-target": {
+        "description": "Hedefinizi tamamlamak için ne kadar süre, sayfa veya ayet okumalısınız?",
+        "title": "Hedefiniz için bir hedef belirleyin"
+    },
+    "goal-type": {
+        "description": "Hedefiniz zamana mı, sayfalara mı yoksa özel bir aralığa mı (yani Kuran'ın 3 Cüz'ü) dayalı mı olmalı?",
+        "title": "Hedefiniz için bir kriter seçin"
+    },
+    "goal-types": {
+        "pages": {
+            "description": "Hedefiniz sayfalara dayalı olacak",
+            "title": "Sayfalar"
+        },
+        "range": {
+            "description": "Hedefiniz, özel bir dizi ayete dayalı olacaktır (bu bir Sure, bir Cüz ve hatta Kuran'ın tamamı olabilir)",
+            "title": "özel aralık"
+        },
+        "time": {
+            "description": "Hedefiniz zamana dayalı olacak",
+            "title": "Zaman"
+        }
+    },
+    "plus-x-more-days": {
+        "one": "+{{days}} gün daha",
+        "other": "+{{days}} gün daha"
+    },
+    "preview-schedule": {
+        "description": "Hedefiniz böyle görünecek. Daha sonra her zaman değiştirebilirsiniz.",
+        "title": "İşte programınızın bir önizlemesi"
+    },
+    "progress": {
+        "complete": "Bugünün hedefi tamamlandı 🎉",
+        "goal-complete": "Tüm hedefiniz tamamlandı 🎉",
+        "pages-goal": "Kuran'ın {{pages}} sayfasını oku",
+        "range-goal": "{{from}} ile {{to}} arasında oku",
+        "time-goal": "Kuran'ı {{time}} oku"
+    },
+    "reading-goal": "Okuma Hedefi",
+    "reading-goal-description": "Kuran okuma hedeflerinizle tutarlılığı korumayı zor buluyor musunuz? <br\/> <br\/> Kuran Büyüme Yolculuğu, Kuran yolculuğunuzda tutarlı kalmanıza yardımcı olmak için geliştirilmiş dinamik bir özelliktir. Hedefiniz ister günde 10 dakika okumayı, ister bir ayda bir cüz tamamlamayı veya bir yılda Kuran'ın tamamını bitirmeyi vb. hedefleyin, Kuran.com artık özel bir hedef belirlemenize ve günlük okuma serilerinizi takip etmenize yardımcı olabilir. ilerleme kaydettikçe ayarlanıyor. Kullanımı tamamen ücretsizdir ve umarız hedefinize ulaşmak için motive olmanıza yardımcı olur!",
+    "reading-goal-label": "sen bir",
+    "reading-goal-title": "Karşınızda Kuran Büyüme Yolculuğu",
+    "recommended": "Tavsiye edilen",
+    "remaining": "Bugün için kalan",
+    "remaining-days": {
+        "one": "{{days}} gün kaldı",
+        "other": "{{days}} gün kaldı"
+    },
+    "set-reading-goal-success": "Okuma hedefiniz başarıyla belirlendi.",
+    "start-journey": "Yolculuğunuza başlayın!",
+    "start-reading": "Okumaya başlamak",
+    "starting-chapter": "Başlangıç Suresi",
+    "starting-verse": "Ayah'a Başlamak",
+    "streak": "Rüzgâr gibi geçmek",
+    "streak-definition": "Bir çizgi, Kuran'ı arka arkaya okuduğunuz günlerin sayısıdır.",
+    "timeline-meaning": "Zaman çizelgeniz ne anlama geliyor?",
+    "timeline-states": {
+        "checked": "hedefini tamamladın",
+        "filled": "Bir şey okudunuz ama hedefinizi tamamlamak için yeterli değil",
+        "none": "O gün henüz hiçbir şey okumadın",
+        "stroked": "bugün hiçbir şey okumadın"
+    },
+    "todays-goal": "bugünün hedefi",
+    "view-progress": "İlerlemeyi Görüntüle",
+    "week-progress": "Bu haftaki ilerleme",
+    "x-days": {
+        "one": "{{days}} gün",
+        "other": "{{days}} gün"
+    },
+    "x-days-streak": "{{days}} günlük seri",
+    "x-hours": {
+        "one": "{{hours}} saat",
+        "other": "{{hours}} saat"
+    },
+    "x-minutes": {
+        "one": "{{minutes}} dakika",
+        "other": "{{minutes}} dakika"
+    },
+    "x-pages": {
+        "one": "{{pages}} sayfa",
+        "other": "{{pages}} sayfa"
+    },
+    "x-seconds": {
+        "one": "{{seconds}} saniye",
+        "other": "{{seconds}} saniye"
+    }
+}

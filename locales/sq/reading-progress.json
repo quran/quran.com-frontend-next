@@ -1,0 +1,31 @@
+{
+    "add": "Shto",
+    "add-data-success": "Të dhënat tuaja të leximit janë shtuar me sukses.",
+    "delete-goal": {
+        "action": "Fshi objektivin",
+        "confirmation": {
+            "action-text": "E kuptoj pasojën, fshije qëllimin tim",
+            "confirmation-text": "fshije qëllimin tim",
+            "instruction-text": "Ju lutemi shkruani <strong> {{text}} <\/strong> për të konfirmuar",
+            "subtitle": "Ky veprim nuk mund të zhbëhet. Kjo do të fshijë përgjithmonë objektivin tuaj dhe ne do të ndalojmë së gjurmuari përparimin tuaj.",
+            "title": "A je i sigurt?"
+        },
+        "success": "Qëllimi juaj i leximit është fshirë me sukses."
+    },
+    "edit-goal": {
+        "action": "Redakto objektivin",
+        "subtitle": "Ne do të rillogaritim progresin tuaj bazuar në qëllimin e ri.",
+        "success": "Qëllimi juaj i leximit është përditësuar me sukses.",
+        "title": "Ndryshoni qëllimin tuaj të leximit"
+    },
+    "history": "Leximi i Historisë",
+    "history-for": "Leximi i historisë për {{date}}",
+    "manage-goal": "Menaxhoni qëllimin tuaj të leximit",
+    "manually-add": "Shtoni manualisht leximet",
+    "no-reading-history-for": "Nuk ka histori leximi për {{date}}",
+    "reading-progress-header": "Përparimi juaj",
+    "reading-progress-streak": "brez",
+    "reading-time": "Koha e leximit",
+    "seconds-read-tooltip": "Kjo është koha që keni kaluar duke lexuar ajetet që keni futur. Ne e plotësojmë automatikisht atë me shpejtësinë mesatare të leximit në Quran.com, por ju mund ta anashkaloni atë me kohën tuaj aktuale të leximit.",
+    "you-read": "Ti lexon:"
+}

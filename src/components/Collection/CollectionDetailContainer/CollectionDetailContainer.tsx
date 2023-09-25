@@ -1,6 +1,3 @@
-/* eslint-disable max-lines */
-import { useEffect } from 'react';
-
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
@@ -14,7 +11,6 @@ import NextSeoWrapper from '@/components/NextSeoWrapper';
 import Spinner, { SpinnerSize } from '@/dls/Spinner/Spinner';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import ArrowLeft from '@/icons/west.svg';
-import { isLoggedIn } from '@/utils/auth/login';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getLanguageAlternates } from '@/utils/locale';
 import {
@@ -25,7 +21,6 @@ import {
 import { slugifiedCollectionIdToCollectionId } from '@/utils/string';
 import CollectionDetail from 'src/components/Collection/CollectionDetail/CollectionDetail';
 import Button, { ButtonVariant } from 'src/components/dls/Button/Button';
-import DataContext from 'src/contexts/DataContext';
 import Error from 'src/pages/_error';
 import {
   deleteBookmarkById,
@@ -33,19 +28,17 @@ import {
   privateFetcher,
 } from 'src/utils/auth/api';
 import { GetBookmarkCollectionsIdResponse } from 'types/auth/GetBookmarksByCollectionId';
-import Chapter from 'types/Chapter';
 import { CollectionDetailSortOption } from 'types/CollectionSortOptions';
 
 type CollectionDetailContainerProps = {
-  chaptersData: Record<string, Chapter>;
   title?: string;
   getSWRKey: (pageIndex, previousData) => string;
   onSortByChange: (newVal) => void;
   sortBy: CollectionDetailSortOption;
   shouldDeleteBookmark?: boolean; // should delete the bookmark instead of just deleting the connection between the bookmark and collection
 };
+
 const CollectionDetailContainer = ({
-  chaptersData,
   title,
   getSWRKey,
   onSortByChange,
@@ -56,12 +49,6 @@ const CollectionDetailContainer = ({
   const router = useRouter();
   const collectionId = router.query.collectionId as string;
   const toast = useToast();
-
-  useEffect(() => {
-    if (!isLoggedIn()) {
-      router.replace('/');
-    }
-  }, [router]);
 
   const { data, size, setSize, mutate, isValidating, error } =
     useSWRInfinite<GetBookmarkCollectionsIdResponse>(getSWRKey, privateFetcher);
@@ -126,7 +113,7 @@ const CollectionDetailContainer = ({
   const isLoadingMoreData = bookmarks?.length > 0 && size > 1 && isValidating;
 
   return (
-    <DataContext.Provider value={chaptersData}>
+    <>
       <NextSeoWrapper
         title={collectionTitle}
         canonical={getCanonicalUrl(lang, navigationUrl)}
@@ -165,7 +152,7 @@ const CollectionDetailContainer = ({
           </div>
         </div>
       </div>
-    </DataContext.Provider>
+    </>
   );
 };
 

@@ -1,21 +1,40 @@
+import classNames from 'classnames';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 
 import LoadingSwitcher from './ReadingPreferenceOption';
 import styles from './ReadingPreferenceSwitcher.module.scss';
 
-import Switch from '@/dls/Switch/Switch';
+import Switch, { SwitchSize } from '@/dls/Switch/Switch';
 import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
 import {
   selectReadingPreferences,
   setReadingPreference,
 } from '@/redux/slices/QuranReader/readingPreferences';
+import { selectLastReadVerseKey } from '@/redux/slices/QuranReader/readingTracker';
 import { logValueChange } from '@/utils/eventLogger';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 import { ReadingPreference } from 'types/QuranReader';
 
-const ReadingPreferenceSwitcher = () => {
+export enum ReadingPreferenceSwitcherType {
+  SurahHeader = 'surah_header',
+  ContextMenu = 'context_menu',
+}
+
+interface Props {
+  size?: SwitchSize;
+  isIconsOnly?: boolean;
+  type?: ReadingPreferenceSwitcherType;
+}
+
+const ReadingPreferenceSwitcher: React.FC<Props> = ({
+  size,
+  isIconsOnly = false,
+  type = ReadingPreferenceSwitcherType.SurahHeader,
+}) => {
   const readingPreferences = useSelector(selectReadingPreferences);
+  const lastReadVerseKey = useSelector(selectLastReadVerseKey);
+  const lastReadVerse = lastReadVerseKey.verseKey?.split(':')[1];
   const { readingPreference } = readingPreferences;
   const {
     actions: { onSettingsChange },
@@ -30,6 +49,7 @@ const ReadingPreferenceSwitcher = () => {
           readingPreference={readingPreference}
           selectedReadingPreference={ReadingPreference.Translation}
           isLoading={isLoading}
+          isIconsOnly={isIconsOnly}
         />
       ),
       value: ReadingPreference.Translation,
@@ -40,6 +60,7 @@ const ReadingPreferenceSwitcher = () => {
           readingPreference={readingPreference}
           selectedReadingPreference={ReadingPreference.Reading}
           isLoading={isLoading}
+          isIconsOnly={isIconsOnly}
         />
       ),
       value: ReadingPreference.Reading,
@@ -47,11 +68,20 @@ const ReadingPreferenceSwitcher = () => {
   ];
 
   const onViewSwitched = (view: ReadingPreference) => {
-    logValueChange('reading_preference', readingPreference, view);
+    logValueChange(`${type}_reading_preference`, readingPreference, view);
 
-    // drop `startingVerse` from query params
     const newQueryParams = { ...router.query };
-    delete newQueryParams.startingVerse;
+
+    // Track `startingVerse` once we're past the start of the page so we can
+    // continue from the same ayah when switching views. Without the > 1 check,
+    // switching views at the start of the page causes unnecessary scrolls
+
+    if (type === ReadingPreferenceSwitcherType.SurahHeader) {
+      delete newQueryParams.startingVerse;
+    } else if (parseInt(lastReadVerse, 10) > 1) {
+      newQueryParams.startingVerse = lastReadVerse;
+    }
+
     const newUrlObject = {
       pathname: router.pathname,
       query: newQueryParams,
@@ -69,11 +99,17 @@ const ReadingPreferenceSwitcher = () => {
   };
 
   return (
-    <div className={styles.container}>
+    <div
+      className={classNames(styles.container, {
+        [styles.surahHeaderContainer]: type === ReadingPreferenceSwitcherType.SurahHeader,
+        [styles.contextMenuContainer]: type === ReadingPreferenceSwitcherType.ContextMenu,
+      })}
+    >
       <Switch
         items={readingPreferencesOptions}
         selected={readingPreference}
         onSelect={onViewSwitched}
+        size={size}
       />
     </div>
   );

@@ -1,0 +1,31 @@
+{
+    "add": "Menambahkan",
+    "add-data-success": "Data bacaan Anda telah berhasil ditambahkan.",
+    "delete-goal": {
+        "action": "Hapus Sasaran",
+        "confirmation": {
+            "action-text": "Saya mengerti konsekuensinya, hapus tujuan saya",
+            "confirmation-text": "hapus tujuan saya",
+            "instruction-text": "Harap ketik <strong> {{text}} <\/strong> untuk mengonfirmasi",
+            "subtitle": "Tindakan ini tidak bisa dibatalkan. Ini akan menghapus tujuan Anda secara permanen, dan kami akan berhenti melacak kemajuan Anda.",
+            "title": "Apa kamu yakin?"
+        },
+        "success": "Tujuan membaca Anda telah berhasil dihapus."
+    },
+    "edit-goal": {
+        "action": "Sunting Sasaran",
+        "subtitle": "Kami akan menghitung ulang kemajuan Anda berdasarkan tujuan baru.",
+        "success": "Tujuan membaca Anda telah berhasil diperbarui.",
+        "title": "Edit tujuan membaca Anda"
+    },
+    "history": "Membaca Sejarah",
+    "history-for": "Riwayat membaca untuk {{date}}",
+    "manage-goal": "Kelola tujuan membaca Anda",
+    "manually-add": "Tambahkan bacaan secara manual",
+    "no-reading-history-for": "Tidak ada riwayat membaca untuk {{date}}",
+    "reading-progress-header": "Kemajuan Anda",
+    "reading-progress-streak": "Garis",
+    "reading-time": "Waktu membaca",
+    "seconds-read-tooltip": "Ini adalah waktu yang Anda habiskan untuk membaca Ayah yang Anda masukkan. Kami secara otomatis mengisinya dengan kecepatan membaca rata-rata di Quran.com, namun Anda dapat menggantinya dengan waktu membaca Anda yang sebenarnya.",
+    "you-read": "Bacalah:"
+}

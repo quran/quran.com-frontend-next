@@ -3,19 +3,29 @@
     "and": "e",
     "announcements": {
         "auth-onboarding": {
-            "slide-1": {
-                "action": "Veja o que é novo",
-                "title": "Bem-vindo ao Quran.com <br> <\/br> Conta de usuário"
-            },
-            "slide-2": {
+            "data-sync": {
                 "action": "Próximo",
                 "description": "Se você estiver usando o Quran.com em seu telefone ou laptop, seus favoritos, os últimos versículos lidos e suas preferências estarão disponíveis",
                 "title": "Seus dados serão sincronizados <br> <\/br> entre dispositivos"
             },
-            "slide-3": {
+            "feedback": {
                 "action": "Ok, entendi",
                 "description": "Obrigado por usar o Quran.com e ficaríamos felizes em ouvir seus comentários sobre <link> feedback.quran.com <\/link>",
                 "title": "Queremos ouvir seus pensamentos"
+            },
+            "quran-foundation-link": {
+                "action": "Próximo",
+                "description": "Use seu login do Quran.com para acessar o QuranReflect.com — uma próspera comunidade global engajada na reflexão do Alcorão.",
+                "title": "Use sua conta nos aplicativos Quran.Foundation!"
+            },
+            "quran-growth-journey": {
+                "action": "Próximo",
+                "description": "Mantenha sua série de leitura do Alcorão e progrida em seus objetivos enquanto constrói novos hábitos",
+                "title": "Comece sua jornada de crescimento do Alcorão!"
+            },
+            "welcome": {
+                "action": "Veja o que é novo",
+                "title": "Bem-vindo ao Quran.com <br> <\/br> Conta de usuário"
             }
         },
         "collections-announcement": {
@@ -115,6 +125,8 @@
     "developers": "Desenvolvedores",
     "display": "Mostrar",
     "donate": "Doar",
+    "donate_monthly": "Doe mensalmente",
+    "donate_once": "Doe uma vez",
     "email-verification": {
         "check-spam": "Não recebeu o e-mail de verificação? Verifique sua caixa de spam",
         "email-sent": "Acabamos de enviar um e-mail para <strong> {{email}} <\/strong>",
@@ -138,7 +150,7 @@
         "code_v2": "Complexo King Fahad V2",
         "font-size": "Tamanho da fonte",
         "lines": "Linhas",
-        "qcf-desc": "As fontes KPFG fornecem qualidade superior, mas demoram mais para carregar.",
+        "qcf-desc": "As fontes Complexo King Fahad (V1 and V2) fornecem qualidade superior, mas demoram mais para carregar.",
         "qpc_uthmani_hafs": "QPC Uthmani Hafs",
         "quran-font": "Fonte do Alcorão",
         "tajweed": "Tajweed",
@@ -158,14 +170,18 @@
         "lastName": "Sobrenome"
     },
     "from": "A partir de",
+    "fundraising-sticky-banner": {
+        "cta": "Doar",
+        "title": "Apoie o Quran.com neste Ramadã"
+    },
     "fundraising": {
         "description": "As doações mensais nos ajudam a melhorar o Quran.com e sustentar as operações, de modo que nos concentramos menos na arrecadação de fundos e mais na criação de impacto.",
-        "learn-more": "Saber mais",
         "title": "Seja um doador mensal"
     },
     "help": "Ajuda",
     "hizb": "Hizb",
     "home": "Casa",
+    "hours": "Horas",
     "inline": "Em linha",
     "input": {
         "clear": "Claro"
@@ -173,6 +189,7 @@
     "juz": "Juz",
     "language": "Língua",
     "languages": "línguas",
+    "learn-more": "Saber mais",
     "less": "Menos",
     "loading": "Carregando",
     "login": "Conecte-se",
@@ -180,11 +197,13 @@
     "meccan": "Meca",
     "medinan": "Medina",
     "menu": "Cardápio",
+    "minutes": "Minutos",
     "mobile-apps": "Aplicativos móveis",
     "mode": "Modo",
     "more": "Mais",
     "navigate": "Navegar",
     "network": "Rede",
+    "new": "Novo!",
     "next": "Próximo",
     "next-ayah": "Próxima Aia",
     "no": "Não",
@@ -211,6 +230,7 @@
     "q-reflect": "QuranReflect",
     "quran-com": "Quran.com",
     "quran-radio": "Rádio Alcorão",
+    "reading-history": "Lendo o histórico",
     "reading-preference": {
         "reading": "Lendo",
         "translation": "Tradução"
@@ -241,6 +261,7 @@
         "switch-mode": "Mudar para pesquisa avançada",
         "title": "Procurar"
     },
+    "seconds": "Segundos",
     "settings": {
         "no-tafsir-selected": "Nenhum tafsir selecionado",
         "no-translation-selected": "Nenhuma tradução selecionada",

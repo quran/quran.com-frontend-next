@@ -3,19 +3,29 @@
     "and": "dan",
     "announcements": {
         "auth-onboarding": {
-            "slide-1": {
-                "action": "Lihat apa yang baru",
-                "title": "Selamat datang di Quran.com <br> <\/br> Akun Pengguna"
-            },
-            "slide-2": {
+            "data-sync": {
                 "action": "Lanjut",
                 "description": "Baik Anda menggunakan Quran.com di ponsel atau laptop Anda, bookmark Anda, ayat yang terakhir dibaca, dan preferensi Anda akan tersedia",
                 "title": "Data Anda akan disinkronkan <br> <\/br> di seluruh perangkat"
             },
-            "slide-3": {
+            "feedback": {
                 "action": "OK saya mengerti",
                 "description": "Terima kasih telah menggunakan Quran.com dan kami akan senang mendengar tanggapan Anda di <link> feedback.quran.com <\/link>",
                 "title": "Kami ingin mendengar pendapat Anda"
+            },
+            "quran-foundation-link": {
+                "action": "Berikutnya",
+                "description": "Gunakan login Quran.com Anda untuk akses ke QuranReflect.com — sebuah komunitas global yang berkembang yang terlibat dalam refleksi Alquran.",
+                "title": "Gunakan akun Anda di seluruh aplikasi Quran.Foundation!"
+            },
+            "quran-growth-journey": {
+                "action": "Berikutnya",
+                "description": "Pertahankan bacaan Quran Anda dan tingkatkan tujuan Anda sambil membangun kebiasaan baru",
+                "title": "Mulailah Perjalanan Pertumbuhan Quran Anda!"
+            },
+            "welcome": {
+                "action": "Lihat apa yang baru",
+                "title": "Selamat datang di Quran.com <br> <\/br> Akun Pengguna"
             }
         },
         "collections-announcement": {
@@ -115,6 +125,8 @@
     "developers": "Pengembang (Developers)",
     "display": "Menampilkan",
     "donate": "Menyumbangkan",
+    "donate_monthly": "Donasi setiap bulan",
+    "donate_once": "Donasi sekali",
     "email-verification": {
         "check-spam": "Tidak menerima email verifikasi? Periksa kotak masuk spam Anda",
         "email-sent": "Kami baru saja mengirim email ke <strong> {{email}} <\/strong>",
@@ -138,7 +150,7 @@
         "code_v2": "Kompleks Raja Fahad V2",
         "font-size": "Ukuran huruf",
         "lines": "Garis",
-        "qcf-desc": "Font KPFG memberikan kualitas yang lebih tinggi tetapi membutuhkan waktu lebih lama untuk dimuat.",
+        "qcf-desc": "Font Kompleks Raja Fahad (V1 dan V2) memberikan kualitas yang lebih tinggi tetapi membutuhkan waktu lebih lama untuk dimuat.",
         "qpc_uthmani_hafs": "QPC Utsmani Hafs",
         "quran-font": "Huruf Quran",
         "tajweed": "Tajwid",
@@ -158,21 +170,26 @@
         "lastName": "Nama keluarga"
     },
     "from": "Dari",
+    "fundraising-sticky-banner": {
+        "cta": "Menyumbangkan",
+        "title": "Dukung Quran.com Ramadhan ini"
+    },
     "fundraising": {
         "description": "Donasi bulanan membantu kami meningkatkan Quran.com dan mempertahankan operasi sehingga kami kurang fokus pada penggalangan dana dan lebih pada menciptakan dampak.",
-        "learn-more": "Belajarlah lagi",
         "title": "Menjadi Donatur Bulanan"
     },
     "help": "Bantuan",
     "hizb": "Hizb",
     "home": "Halaman Utama",
+    "hours": "Jam",
     "inline": "Di barisan",
     "input": {
-        "clear": "Jernih"
+        "clear": "bersihkan"
     },
     "juz": "Juz",
     "language": "Bahasa",
     "languages": "Bahasa",
+    "learn-more": "Belajarlah lagi",
     "less": "Kurang",
     "loading": "Memuat",
     "login": "Gabung",
@@ -180,11 +197,13 @@
     "meccan": "Mekah",
     "medinan": "Madinah",
     "menu": "Menu",
-    "mobile-apps": "Aplikasi ",
+    "minutes": "Menit",
+    "mobile-apps": "Aplikasi",
     "mode": "Mode",
     "more": "Lagi",
     "navigate": "Navigasi",
     "network": "Jaringan",
+    "new": "Baru!",
     "next": "Lanjut",
     "next-ayah": "Ayat Berikutnya",
     "no": "Tidak",
@@ -211,6 +230,7 @@
     "q-reflect": "QuranReflect",
     "quran-com": "Quran",
     "quran-radio": "Radio Al-Quran",
+    "reading-history": "Membaca sejarah",
     "reading-preference": {
         "reading": "Membaca",
         "translation": "Terjemahan"
@@ -241,6 +261,7 @@
         "switch-mode": "Beralih ke Pencarian Lanjutan",
         "title": "Mencari"
     },
+    "seconds": "Detik",
     "settings": {
         "no-tafsir-selected": "Tidak ada tafsir yang dipilih",
         "no-translation-selected": "Tidak ada terjemahan yang dipilih",

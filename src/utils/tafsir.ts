@@ -1,5 +1,6 @@
 import uniq from 'lodash/uniq';
 
+import TafsirInfo from '@/types/TafsirInfo';
 import { TafsirsResponse } from 'types/ApiResponses';
 import Tafsir from 'types/Tafsir';
 
@@ -19,6 +20,21 @@ export const getSelectedTafsirLanguage = (
       tafsir.slug === selectedTafsirIdOrSlug || tafsir.id === Number(selectedTafsirIdOrSlug),
   );
   return selectedTafsir?.languageName;
+};
+
+/**
+ * Get the first Tafsir of a language.
+ *
+ * @param {TafsirsResponse} tafsirListData
+ * @param {string} language
+ * @returns {TafsirInfo}
+ */
+export const getFirstTafsirOfLanguage = (
+  tafsirListData: TafsirsResponse,
+  language: string,
+): TafsirInfo => {
+  const selectedTafsir = tafsirListData?.tafsirs.find((tafsir) => tafsir.languageName === language);
+  return selectedTafsir;
 };
 
 /**

@@ -22,6 +22,7 @@
     "incremental": true,
     "paths": {
       "@/icons/*": ["./public/icons/*"],
+      "@/public/*": ["./public/*"],
       "@/dls/*": ["./src/components/dls/*"],
       "@/data/*": ["./data/*"],
       "@/types/*": ["./types/*"],

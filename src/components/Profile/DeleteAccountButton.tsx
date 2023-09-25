@@ -3,7 +3,6 @@ import { useState } from 'react';
 import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
 import router from 'next/router';
-import { useDispatch } from 'react-redux';
 
 import Button, { ButtonType, ButtonVariant } from '../dls/Button/Button';
 import Input from '../dls/Forms/Input';
@@ -11,16 +10,15 @@ import Modal from '../dls/Modal/Modal';
 
 import styles from './DeleteAccountButton.module.scss';
 
-import { removeLastSyncAt } from '@/redux/slices/Auth/userDataSync';
 import { deleteAccount } from '@/utils/auth/api';
+import { removeLastSyncAt } from '@/utils/auth/userDataSync';
 import { logButtonClick } from '@/utils/eventLogger';
 
 type DeleteAccountButtonProps = {
   isDisabled?: boolean;
 };
 const DeleteAccountButton = ({ isDisabled }: DeleteAccountButtonProps) => {
-  const dispatch = useDispatch();
-  const { t } = useTranslation();
+  const { t } = useTranslation('profile');
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [confirmationText, setConfirmationText] = useState('');
 
@@ -29,12 +27,13 @@ const DeleteAccountButton = ({ isDisabled }: DeleteAccountButtonProps) => {
     setIsModalVisible(false);
   };
 
-  const onDeleteConfirmed = () => {
+  const onDeleteConfirmed = async () => {
     logButtonClick('profile_confirm_delete_account');
     closeModal();
-    deleteAccount()
-      .then(() => router.push('/'))
-      .then(() => dispatch({ type: removeLastSyncAt.type }));
+
+    await deleteAccount();
+    removeLastSyncAt();
+    router.push('/');
   };
 
   const onDeleteAccountClicked = () => {
@@ -42,7 +41,7 @@ const DeleteAccountButton = ({ isDisabled }: DeleteAccountButtonProps) => {
     setIsModalVisible(true);
   };
 
-  const CONFIRMATION_TEXT = t('profile:delete-confirmation.confirmation-text');
+  const CONFIRMATION_TEXT = t('delete-confirmation.confirmation-text');
   const canDeleteAccount = confirmationText.toLowerCase() === CONFIRMATION_TEXT.toLowerCase();
 
   return (
@@ -53,13 +52,13 @@ const DeleteAccountButton = ({ isDisabled }: DeleteAccountButtonProps) => {
         onClick={onDeleteAccountClicked}
         isDisabled={isDisabled}
       >
-        {t('profile:delete-account')}
+        {t('delete-account')}
       </Button>
       <Modal isOpen={isModalVisible} onClickOutside={closeModal}>
         <Modal.Body>
           <Modal.Header>
-            <Modal.Title>{t('profile:delete-confirmation.title')}</Modal.Title>
-            <Modal.Subtitle>{t('profile:delete-confirmation.subtitle')}</Modal.Subtitle>
+            <Modal.Title>{t('delete-confirmation.title')}</Modal.Title>
+            <Modal.Subtitle>{t('delete-confirmation.subtitle')}</Modal.Subtitle>
 
             <p className={styles.instructionText}>
               <Trans
@@ -71,7 +70,7 @@ const DeleteAccountButton = ({ isDisabled }: DeleteAccountButtonProps) => {
               />
             </p>
             <Input
-              id="delete-account-confimation"
+              id="delete-account-confirmation"
               value={confirmationText}
               onChange={setConfirmationText}
               fixedWidth={false}
@@ -86,7 +85,7 @@ const DeleteAccountButton = ({ isDisabled }: DeleteAccountButtonProps) => {
               onClick={onDeleteConfirmed}
               isDisabled={!canDeleteAccount}
             >
-              {t('profile:delete-confirmation.action-text')}
+              {t('delete-confirmation.action-text')}
             </Button>
           </Modal.Footer>
         </Modal.Body>

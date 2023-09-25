@@ -12,6 +12,7 @@ import layoutStyle from '../../index.module.scss';
 
 import styles from './chapterId.module.scss';
 
+import { getChapterAudioData, getChapterIdBySlug, getReciterData } from '@/api';
 import { download } from '@/components/AudioPlayer/Buttons/DownloadAudioButton';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import Button, { ButtonType } from '@/dls/Button/Button';
@@ -32,10 +33,8 @@ import {
 } from '@/utils/navigation';
 import { getCurrentPath } from '@/utils/url';
 import { isValidChapterId } from '@/utils/validator';
-import { getChapterAudioData, getChapterIdBySlug, getReciterData } from 'src/api';
-import DataContext from 'src/contexts/DataContext';
-import { selectCurrentAudioReciterId } from 'src/xstate/actors/audioPlayer/selectors';
-import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
+import { selectCurrentAudioReciterId } from '@/xstate/actors/audioPlayer/selectors';
+import { AudioPlayerMachineContext } from '@/xstate/AudioPlayerMachineContext';
 import Chapter from 'types/Chapter';
 import ChaptersData from 'types/ChaptersData';
 import Reciter from 'types/Reciter';
@@ -45,11 +44,8 @@ type ShareRecitationPageProps = {
   selectedChapter: Chapter;
   chaptersData: ChaptersData;
 };
-const RecitationPage = ({
-  selectedReciter,
-  selectedChapter,
-  chaptersData,
-}: ShareRecitationPageProps) => {
+
+const RecitationPage = ({ selectedReciter, selectedChapter }: ShareRecitationPageProps) => {
   const { t, lang } = useTranslation();
   const toast = useToast();
   const router = useRouter();
@@ -104,7 +100,7 @@ const RecitationPage = ({
   };
 
   return (
-    <DataContext.Provider value={chaptersData}>
+    <>
       <NextSeoWrapper
         title={`${selectedReciter.translatedName.name} - ${selectedChapter.transliteratedName}`}
         description={t('reciter:reciter-chapter-desc', {
@@ -180,7 +176,7 @@ const RecitationPage = ({
           </div>
         </div>
       </div>
-    </DataContext.Provider>
+    </>
   );
 };
 

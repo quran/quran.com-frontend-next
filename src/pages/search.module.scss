@@ -4,6 +4,12 @@ $tablet-max-width: 50rem;
 
 .pageContainer {
   margin-block-start: var(--spacing-medium);
+
+  // TODO: remove this when we remove banner
+  @include breakpoints.smallerThanTablet {
+    padding-block-start: calc(var(--spacing-medium) + var(--banner-height));
+  }
+
   margin-block-end: calc(2 * var(--spacing-mega));
 }
 

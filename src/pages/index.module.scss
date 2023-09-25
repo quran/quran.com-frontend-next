@@ -9,8 +9,16 @@ $list-max-width: 80rem;
   padding-inline-end: 0;
 }
 
+.loadingContainer {
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .flow > .flowItem {
   margin-block-start: calc(1.5 * var(--spacing-medium));
+
   @include breakpoints.tablet {
     margin-block-start: calc(2 * var(--spacing-medium));
   }
