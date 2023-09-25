@@ -7,6 +7,8 @@ import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 
+import DrawerSearchIcon from '../SearchDrawer/Buttons/DrawerSearchIcon';
+
 import styles from './SearchSelectionBody.module.scss';
 
 import DataFetcher from '@/components/DataFetcher';
@@ -27,7 +29,6 @@ import { TranslationsResponse } from 'types/ApiResponses';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 import AvailableTranslation from 'types/AvailableTranslation';
 import QueryParam from 'types/QueryParam';
-import DrawerSearchIcon from '../SearchDrawer/Buttons/DrawerSearchIcon';
 
 const TranslationSelectionBody = () => {
   const {
@@ -173,4 +174,5 @@ const TranslationSelectionBody = () => {
   );
 };
 
+// eslint-disable-next-line max-lines
 export default TranslationSelectionBody;
