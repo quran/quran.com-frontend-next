@@ -364,6 +364,7 @@
     "word-tooltip": "Word Tooltip",
     "yes": "Yes",
     "notifications": "Notifications",
+    "no-notifications": "No notifications yet",
     "notification": {
         "mark-all-as-read": "Mark all as read",
         "mark-as-read": "Mark as read"

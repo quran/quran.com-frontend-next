@@ -28,7 +28,6 @@ import * as gtag from '@/utils/gtag';
 import { getDir } from '@/utils/locale';
 import { createSEOConfig } from '@/utils/seo';
 import DataContext from 'src/contexts/DataContext';
-import { NotificationProvider } from 'src/contexts/NotificationContext';
 import ThemeProvider from 'src/styles/ThemeProvider';
 import { AudioPlayerMachineProvider } from 'src/xstate/AudioPlayerMachineContext';
 
@@ -87,9 +86,9 @@ function MyApp({ Component, pageProps }): JSX.Element {
                       {...createSEOConfig({ locale, description: t('default-description') })}
                     />
                     <GlobalListeners />
-                    <NotificationProvider>
-                      <Navbar />
-                    </NotificationProvider>
+
+                    <Navbar />
+
                     <DeveloperUtility />
                     <Component {...pageProps} />
                     <AudioPlayer />

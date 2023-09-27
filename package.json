@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev -p 3005",
     "dev:https": "node server.js",
     "build": "next build",
     "postbuild": "yarn run generate-sitemap",

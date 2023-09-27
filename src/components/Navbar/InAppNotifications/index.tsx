@@ -1,24 +1,32 @@
 import { useState } from 'react';
 
+import { useSelector } from 'react-redux';
+
 import NotificationBell from './NotificationBell';
 import NotificationsList from './NotificationsList';
 
 import Popover from '@/dls/Popover';
 import { ContentSide } from '@/dls/Tooltip';
-import { useNotification } from 'src/contexts/NotificationContext';
+import { useNotifications } from '@/notifications/NotificationContext';
+import { selectUnseenCount } from '@/redux/slices/notifications';
 
 const InAppNotifications = () => {
   const [showModal, setShowModal] = useState(false);
 
-  const { fetchNotifications, unseenCount } = useNotification();
+  const { fetchNotifications } = useNotifications();
+  const unseenCount = useSelector(selectUnseenCount);
 
   const onBellClicked = async () => {
     setShowModal((prevShowModal) => !prevShowModal);
-    await fetchNotifications(true);
   };
 
   const onOpenChange = (open: boolean) => {
     setShowModal(open);
+    fetchNotifications.fetch({
+      page: 0,
+      shouldMarkAsSeenOnSuccess: true,
+      shouldResetOldData: true,
+    });
   };
 
   return (

@@ -1,6 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-import { IMessageId } from '@novu/headless';
 import type { IMessage } from '@novu/shared';
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
@@ -9,41 +8,47 @@ import styles from './NotificationItem.module.scss';
 
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
+import Spinner from '@/dls/Spinner/Spinner';
 import CloseIcon from '@/icons/close.svg';
 import OverflowMenuIcon from '@/icons/menu_more_horiz.svg';
 import TickIcon from '@/icons/tick.svg';
+import { useNotifications } from '@/notifications/NotificationContext';
 import { formatDateRelatively } from '@/utils/datetime';
+import { logButtonClick } from '@/utils/eventLogger';
 
 type Props = {
   notification: IMessage;
-  markNotificationsAsRead: (messageId: IMessageId) => void;
-  deleteNotification: (messageId: IMessageId) => void;
 };
 
-const NotificationItem: React.FC<Props> = ({
-  notification,
-  markNotificationsAsRead,
-  deleteNotification,
-}) => {
+const NotificationItem: React.FC<Props> = ({ notification }) => {
   const { t, lang } = useTranslation('common');
+  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+  const { markNotificationAsRead, deleteNotification } = useNotifications();
 
   const onMarkNotificationAsReadClicked = (notificationId: string) => {
-    // TODO: add logging
-    markNotificationsAsRead(notificationId);
+    logButtonClick('notification_mark_as_read', { content: notification.content, notificationId });
+    markNotificationAsRead.mutate(notificationId);
+    setIsPopoverOpen(false);
   };
 
   const onDeletedNotificationClicked = (notificationId: string) => {
-    // TODO: add logging
-    deleteNotification(notificationId);
+    logButtonClick('notification_delete', { content: notification.content, notificationId });
+    deleteNotification.mutate(notificationId);
   };
 
   const onOpenChange = (open: boolean) => {
-    // TODO: add logging
+    logButtonClick('notification_more', {
+      content: notification.content,
+      // eslint-disable-next-line no-underscore-dangle
+      notificationId: notification._id,
+      open,
+    });
+    setIsPopoverOpen(open);
   };
 
   const isNotRead = !notification?.read;
 
-  const formattedDate = formatDateRelatively(new Date(notification.createdAt), lang);
+  const formattedDate = formatDateRelatively(new Date(), lang);
 
   return (
     <div
@@ -69,21 +74,27 @@ const NotificationItem: React.FC<Props> = ({
               </Button>
             }
             isModal={false}
+            isOpen={isPopoverOpen}
             isPortalled={false}
             onOpenChange={onOpenChange}
           >
             {isNotRead && (
               <PopoverMenu.Item
-                onClick={() => onMarkNotificationAsReadClicked(notification?.id)}
-                icon={<TickIcon />}
+                // eslint-disable-next-line no-underscore-dangle
+                onClick={() => onMarkNotificationAsReadClicked(notification?._id)}
+                icon={markNotificationAsRead.isMutating ? <Spinner /> : <TickIcon />}
+                isDisabled={markNotificationAsRead.isMutating}
                 className={styles.tickIcon}
               >
                 {t('notification.mark-as-read')}
               </PopoverMenu.Item>
             )}
+
             <PopoverMenu.Item
-              onClick={() => onDeletedNotificationClicked(notification?.id)}
-              icon={<CloseIcon />}
+              // eslint-disable-next-line no-underscore-dangle
+              onClick={() => onDeletedNotificationClicked(notification?._id)}
+              icon={deleteNotification.isMutating ? <Spinner /> : <CloseIcon />}
+              isDisabled={deleteNotification.isMutating}
             >
               {t('remove')}
             </PopoverMenu.Item>
