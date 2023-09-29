@@ -1,5 +1,6 @@
 import React from 'react';
 
+import type { IMessage } from '@novu/shared';
 import useTranslation from 'next-translate/useTranslation';
 import { useSelector } from 'react-redux';
 import { Virtuoso } from 'react-virtuoso';
@@ -11,6 +12,7 @@ import Button, { ButtonSize, ButtonType } from '@/dls/Button/Button';
 import Separator from '@/dls/Separator/Separator';
 import Spinner from '@/dls/Spinner/Spinner';
 import { useNotifications } from '@/notifications/NotificationContext';
+import useMarkAllAsRead from '@/notifications/useMarkAllAsRead';
 import {
   selectHasMoreNotifications,
   selectLastLoadedNotificationsPage,
@@ -23,7 +25,8 @@ import { logButtonClick } from '@/utils/eventLogger';
 
 const NotificationsList = () => {
   const { t } = useTranslation('common');
-  const { markAllAsRead, fetchNotifications } = useNotifications();
+  const { fetchNotifications } = useNotifications();
+  const markAllAsRead = useMarkAllAsRead();
   const notifications = useSelector(selectNotifications, areArraysEqual);
   const hasMoreNotifications = useSelector(selectHasMoreNotifications);
   const lastPage = useSelector(selectLastLoadedNotificationsPage);
@@ -37,17 +40,24 @@ const NotificationsList = () => {
   };
 
   const loadMoreNotifications = () => {
-    console.log({ hasMoreNotifications, lastPage });
-
     if (!hasMoreNotifications) return;
     fetchNotifications.fetch({
       page: lastPage + 1,
-      shouldMarkAsSeenOnSuccess: false,
+      shouldMarkAsSeenOnSuccess: true,
+      shouldResetOldData: false,
     });
   };
 
+  const renderNotificationItem = (index: number, notification: IMessage) => (
+    // eslint-disable-next-line no-underscore-dangle
+    <React.Fragment key={notification._id}>
+      <NotificationItem notification={notification} />
+      {index === notifications.length - 1 && isFetching ? <Spinner /> : null}
+    </React.Fragment>
+  );
+
   return (
-    <div className={styles.bellContainer}>
+    <div className={styles.notificationsContainer}>
       <div className={styles.header}>
         <p className={styles.title}>{t('notifications')}</p>
         <div className={styles.buttonsContainer}>
@@ -62,20 +72,15 @@ const NotificationsList = () => {
         </div>
       </div>
       <Separator />
-      <div>
+      <div className={styles.listContainer}>
         {notifications.length > 0 ? (
           <Virtuoso
             data={notifications}
-            overscan={100}
+            overscan={10}
+            increaseViewportBy={{ top: 10, bottom: 10 }}
             className={styles.notificationsList}
             endReached={loadMoreNotifications}
-            itemContent={(index, notification) => (
-              // eslint-disable-next-line no-underscore-dangle
-              <React.Fragment key={notification._id}>
-                <NotificationItem notification={notification} />
-                {index === notifications.length - 1 && isFetching ? <Spinner /> : null}
-              </React.Fragment>
-            )}
+            itemContent={renderNotificationItem}
           />
         ) : (
           <div className={styles.emptyMessage}>

@@ -5,7 +5,7 @@ import useTranslation from 'next-translate/useTranslation';
 import styles from './NotificationBell.module.scss';
 
 import Button, { ButtonShape, ButtonVariant } from '@/dls/Button/Button';
-import GlobeIcon from '@/icons/notification-bell.svg';
+import NotificationBellIcon from '@/icons/notification-bell.svg';
 import { toLocalizedNumber } from '@/utils/locale';
 
 type Props = {
@@ -13,15 +13,19 @@ type Props = {
   unseenNotificationsCount: number;
 };
 
+const MAX_NOTIFICATIONS_COUNT = 9;
+
 const NotificationBell: React.FC<Props> = ({ onBellClicked, unseenNotificationsCount }) => {
   const { t, lang } = useTranslation('common');
+
   let count = null;
   if (unseenNotificationsCount > 0) {
     count =
-      unseenNotificationsCount > 9
-        ? `${toLocalizedNumber(9, lang)}+`
+      unseenNotificationsCount > MAX_NOTIFICATIONS_COUNT
+        ? `${toLocalizedNumber(MAX_NOTIFICATIONS_COUNT, lang)}+`
         : toLocalizedNumber(unseenNotificationsCount, lang);
   }
+
   return (
     <Button
       tooltip={t('notifications')}
@@ -30,7 +34,8 @@ const NotificationBell: React.FC<Props> = ({ onBellClicked, unseenNotificationsC
       ariaLabel={t('aria.select-lng')}
       onClick={onBellClicked}
     >
-      <GlobeIcon />
+      <NotificationBellIcon />
+
       {count && (
         <div className={styles.count}>
           <p className={styles.countText}>{count}</p>

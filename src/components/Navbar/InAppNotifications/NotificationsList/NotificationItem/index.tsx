@@ -12,7 +12,8 @@ import Spinner from '@/dls/Spinner/Spinner';
 import CloseIcon from '@/icons/close.svg';
 import OverflowMenuIcon from '@/icons/menu_more_horiz.svg';
 import TickIcon from '@/icons/tick.svg';
-import { useNotifications } from '@/notifications/NotificationContext';
+import useDeleteNotification from '@/notifications/useDeleteNotification';
+import useMarkNotificationAsRead from '@/notifications/useMarkNotificationAsRead';
 import { formatDateRelatively } from '@/utils/datetime';
 import { logButtonClick } from '@/utils/eventLogger';
 
@@ -23,22 +24,22 @@ type Props = {
 const NotificationItem: React.FC<Props> = ({ notification }) => {
   const { t, lang } = useTranslation('common');
   const [isPopoverOpen, setIsPopoverOpen] = useState(false);
-  const { markNotificationAsRead, deleteNotification } = useNotifications();
+  const markNotificationAsRead = useMarkNotificationAsRead();
+  const deleteNotification = useDeleteNotification();
 
   const onMarkNotificationAsReadClicked = (notificationId: string) => {
-    logButtonClick('notification_mark_as_read', { content: notification.content, notificationId });
+    logButtonClick('notification_mark_as_read', { notificationId });
     markNotificationAsRead.mutate(notificationId);
     setIsPopoverOpen(false);
   };
 
   const onDeletedNotificationClicked = (notificationId: string) => {
-    logButtonClick('notification_delete', { content: notification.content, notificationId });
+    logButtonClick('notification_delete', { notificationId });
     deleteNotification.mutate(notificationId);
   };
 
   const onOpenChange = (open: boolean) => {
     logButtonClick('notification_more', {
-      content: notification.content,
       // eslint-disable-next-line no-underscore-dangle
       notificationId: notification._id,
       open,
@@ -48,7 +49,7 @@ const NotificationItem: React.FC<Props> = ({ notification }) => {
 
   const isNotRead = !notification?.read;
 
-  const formattedDate = formatDateRelatively(new Date(), lang);
+  const formattedDate = formatDateRelatively(new Date(notification.createdAt), lang);
 
   return (
     <div

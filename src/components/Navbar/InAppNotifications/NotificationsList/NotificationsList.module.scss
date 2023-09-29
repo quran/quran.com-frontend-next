@@ -1,19 +1,22 @@
-.bellContainer {
-  // height: calc(15 * var(--spacing-mega));
-  overflow-y: scroll;
-  min-width: calc(13 * var(--spacing-mega));
-  max-width: calc(13 * var(--spacing-mega));
+.notificationsContainer {
+  width: calc(13 * var(--spacing-mega));
+  max-width: 100vw;
 }
 
 .notificationsList {
   height: calc(14 * var(--spacing-mega)) !important;
 }
 
+.listContainer {
+  padding-block: var(--spacing-xxsmall);
+}
+
 .header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin: var(--spacing-small);
+  padding-block: var(--spacing-large);
+  padding-inline: var(--spacing-medium);
 }
 
 .buttonsContainer {

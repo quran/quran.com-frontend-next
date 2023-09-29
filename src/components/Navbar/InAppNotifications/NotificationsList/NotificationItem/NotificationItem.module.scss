@@ -6,7 +6,6 @@
 
 .container {
     padding: var(--spacing-large);
-    margin: var(--spacing-micro) var(--spacing-micro);
     border-radius: var(--border-radius-default);
     &:hover {
         background-color: var(--color-background-alternative-faded);

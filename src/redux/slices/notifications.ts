@@ -1,4 +1,5 @@
 /* eslint-disable max-lines */
+import type { IMessage } from '@novu/shared';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { getNotificationsInitialState } from '../defaultSettings/util';
@@ -6,6 +7,33 @@ import NotificationsState from '../types/NotificationsState';
 
 import { RootState } from '@/redux/RootState';
 import SliceName from '@/redux/types/SliceName';
+
+// A helper function to clone and process the notifications while keeping the pagination intact.
+const cloneAndProcessNotifications = (
+  state: NotificationsState,
+  processor: (data: IMessage[]) => IMessage[],
+) => {
+  const newPagedNotifications: NotificationsState['paginatedNotifications'] = {};
+  const newNotifications: NotificationsState['notifications'] = [];
+
+  Object.keys(state.paginatedNotifications).forEach((pageKey) => {
+    const old = {
+      ...state.paginatedNotifications[pageKey],
+      data: [...state.paginatedNotifications[pageKey].data],
+    };
+    const newData = processor(old.data);
+    newPagedNotifications[pageKey] = {
+      ...old,
+      data: newData,
+    };
+    newNotifications.push(...newData);
+  });
+
+  return {
+    notifications: newNotifications,
+    paginatedNotifications: newPagedNotifications,
+  };
+};
 
 export const notificationsSlice = createSlice({
   name: SliceName.NOTIFICATIONS,
@@ -22,6 +50,11 @@ export const notificationsSlice = createSlice({
       ...state,
       isLoadingNotifications: action.payload.isLoading,
       isFetchingNotifications: action.payload.isFetching,
+
+      /**
+       * reset the notifications if the flag is set to true
+       * this is useful when we want to fetch the data from the beginning when the user re-opens the notification widget
+       */
       ...(action.payload.shouldResetOldData
         ? { notifications: [], paginatedNotifications: {} }
         : {}),
@@ -55,122 +88,49 @@ export const notificationsSlice = createSlice({
       ...state,
       unseenCount: action.payload,
     }),
-    setAllAsSeen: (state: NotificationsState) => {
-      const newPagedNotifications = {};
-      const newNotifications = [];
-      Object.keys(state.paginatedNotifications).forEach((pageKey) => {
-        const old = {
-          ...state.paginatedNotifications[pageKey],
-          data: [...state.paginatedNotifications[pageKey].data],
-        };
-
-        const newData = old.data.map((notification) => ({
-          ...notification,
-          seen: true,
-        }));
-        newPagedNotifications[pageKey] = {
-          ...old,
-          data: newData,
-        };
-        newNotifications.push(...newData);
-      });
-
-      return {
-        ...state,
-        unseenCount: 0,
-        notifications: newNotifications,
-        paginatedNotifications: newPagedNotifications,
-      };
-    },
     setAllAsRead: (state: NotificationsState) => {
-      const newPagedNotifications = {};
-      const newNotifications = [];
-      Object.keys(state.paginatedNotifications).forEach((pageKey) => {
-        const old = {
-          ...state.paginatedNotifications[pageKey],
-          data: [...state.paginatedNotifications[pageKey].data],
-        };
-
-        const newData = old.data.map((notification) => ({
-          ...notification,
-          read: true,
-        }));
-        newPagedNotifications[pageKey] = {
-          ...old,
-          data: newData,
-        };
-        newNotifications.push(...newData);
-      });
-
       return {
         ...state,
-        notifications: newNotifications,
-        paginatedNotifications: newPagedNotifications,
+        ...cloneAndProcessNotifications(state, (notifications) =>
+          notifications.map((notification) => ({
+            ...notification,
+            read: true,
+          })),
+        ),
       };
     },
     setNotificationAsRead: (
       state: NotificationsState,
       action: PayloadAction<{ messageId: string }>,
     ) => {
-      const newPagedNotifications = {};
-      const newNotifications = [];
-
-      Object.keys(state.paginatedNotifications).forEach((pageKey) => {
-        const old = {
-          ...state.paginatedNotifications[pageKey],
-          data: [...state.paginatedNotifications[pageKey].data],
-        };
-        const newData = old.data.map((notification) => {
-          // eslint-disable-next-line no-underscore-dangle
-          if (notification._id === action.payload.messageId) {
-            return {
-              ...notification,
-              read: true,
-            };
-          }
-          return notification;
-        });
-        newPagedNotifications[pageKey] = {
-          ...old,
-          data: newData,
-        };
-        newNotifications.push(...newData);
-      });
-
       return {
         ...state,
-        notifications: newNotifications,
-        paginatedNotifications: newPagedNotifications,
+        ...cloneAndProcessNotifications(state, (notifications) =>
+          notifications.map((notification) => {
+            // eslint-disable-next-line no-underscore-dangle
+            if (notification._id === action.payload.messageId) {
+              return {
+                ...notification,
+                read: true,
+              };
+            }
+            return notification;
+          }),
+        ),
       };
     },
     setDeleteNotification: (
       state: NotificationsState,
       action: PayloadAction<{ messageId: string }>,
     ) => {
-      const newPagedNotifications = {};
-      const newNotifications = [];
-      Object.keys(state.paginatedNotifications).forEach((pageKey) => {
-        const old = {
-          ...state.paginatedNotifications[pageKey],
-          data: [...state.paginatedNotifications[pageKey].data],
-        };
-
-        const newData = old.data.filter((notification) => {
-          // eslint-disable-next-line no-underscore-dangle
-          return notification._id !== action.payload.messageId;
-        });
-
-        newPagedNotifications[pageKey] = {
-          ...old,
-          data: newData,
-        };
-        newNotifications.push(...newData);
-      });
-
       return {
         ...state,
-        notifications: newNotifications,
-        paginatedNotifications: newPagedNotifications,
+        ...cloneAndProcessNotifications(state, (notifications) =>
+          notifications.filter((notification) => {
+            // eslint-disable-next-line no-underscore-dangle
+            return notification._id !== action.payload.messageId;
+          }),
+        ),
       };
     },
   },
@@ -180,7 +140,6 @@ export const {
   setNotificationsLoading,
   setNotificationsPageAndFinishLoading,
   setUnseenCount,
-  setAllAsSeen,
   setAllAsRead,
   setNotificationAsRead,
   setDeleteNotification,
@@ -196,6 +155,10 @@ export const selectHasMoreNotifications = (state: RootState) => {
 export const selectLastLoadedNotificationsPage = (state: RootState) => {
   const { paginatedNotifications } = state.notifications;
   return Math.max(...(Object.keys(paginatedNotifications) as unknown as number[]));
+};
+export const selectLoadedNotificationsPages = (state: RootState) => {
+  const { paginatedNotifications } = state.notifications;
+  return Object.keys(paginatedNotifications) as unknown as number[];
 };
 export const selectNotificationsIsLoading = (state: RootState) =>
   state.notifications.isLoadingNotifications;

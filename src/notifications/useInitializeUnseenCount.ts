@@ -2,17 +2,17 @@ import { useEffect, useState } from 'react';
 
 import { useDispatch } from 'react-redux';
 
-import { HeadlessServiceStatus, useHeadlessService } from './useHeadlessService';
+import { useHeadlessService } from './useHeadlessService';
 
 import { setUnseenCount } from '@/redux/slices/notifications';
 
 const useInitializeUnseenCount = () => {
-  const { headlessService, status } = useHeadlessService();
+  const { headlessService, isReady } = useHeadlessService();
   const [error, setError] = useState<unknown>(null);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    if (status === HeadlessServiceStatus.READY) {
+    if (isReady) {
       headlessService.fetchUnseenCount({
         // eslint-disable-next-line @typescript-eslint/no-empty-function
         listener: () => {},
@@ -31,7 +31,7 @@ const useInitializeUnseenCount = () => {
         },
       });
     }
-  }, [headlessService, status, dispatch]);
+  }, [headlessService, isReady, dispatch]);
 
   return { error };
 };

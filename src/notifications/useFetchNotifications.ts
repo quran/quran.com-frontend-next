@@ -1,14 +1,19 @@
 import { useCallback, useState } from 'react';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { useHeadlessService } from './useHeadlessService';
 import useMarkNotificationAsSeen from './useMarkNotificationAsSeen';
 
 import {
+  selectLoadedNotificationsPages,
+  selectNotificationsIsFetching,
   setNotificationsLoading,
   setNotificationsPageAndFinishLoading,
 } from '@/redux/slices/notifications';
+import { areArraysEqual } from '@/utils/array';
+
+const NOTIFICATIONS_PAGE_SIZE = 10;
 
 const useFetchNotifications = () => {
   const { headlessService, isReady } = useHeadlessService();
@@ -18,12 +23,14 @@ const useFetchNotifications = () => {
   const dispatch = useDispatch();
 
   const { mutate: markNotificationAsSeen } = useMarkNotificationAsSeen();
+  const loadedPages = useSelector(selectLoadedNotificationsPages, areArraysEqual);
+  const isFetchingNotifications = useSelector(selectNotificationsIsFetching);
 
   const fetchNotifications = useCallback(
     // eslint-disable-next-line react-func/max-lines-per-function
     ({
       shouldMarkAsSeenOnSuccess = true,
-      page: forcedPage,
+      page,
       shouldResetOldData = false,
     }: {
       shouldMarkAsSeenOnSuccess?: boolean;
@@ -31,10 +38,14 @@ const useFetchNotifications = () => {
       page: number;
     }) => {
       if (isReady) {
+        if (isFetchingNotifications || loadedPages.includes(page)) {
+          return;
+        }
+
         headlessService.fetchNotifications({
-          page: forcedPage, // page number to be fetched
+          page,
           query: {
-            limit: 10,
+            limit: NOTIFICATIONS_PAGE_SIZE,
           },
           listener: ({ isLoading: loading, isFetching: fetching, data, error: err, isError }) => {
             if (data) {
@@ -74,7 +85,14 @@ const useFetchNotifications = () => {
         });
       }
     },
-    [dispatch, headlessService, isReady, markNotificationAsSeen],
+    [
+      dispatch,
+      headlessService,
+      isReady,
+      markNotificationAsSeen,
+      loadedPages,
+      isFetchingNotifications,
+    ],
   );
 
   return { fetch: fetchNotifications, error };

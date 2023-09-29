@@ -1,13 +1,16 @@
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 
 import { HeadlessService } from '@novu/headless';
+import useTranslation from 'next-translate/useTranslation';
 
+import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import { getNotificationSubscriberHashCookie, getUserIdCookie } from '@/utils/auth/login';
 
 const HeadlessServiceContext = createContext<{
   headlessService: HeadlessService;
   status: HeadlessServiceStatus;
   isReady: boolean;
+  error: unknown | null;
 }>(null);
 
 export enum HeadlessServiceStatus {
@@ -18,6 +21,9 @@ export enum HeadlessServiceStatus {
 
 export const HeadlessServiceProvider = ({ children }) => {
   const [status, setStatus] = useState<HeadlessServiceStatus>(HeadlessServiceStatus.INITIALIZING);
+  const [error, setError] = useState<unknown | null>(null);
+  const toast = useToast();
+  const { t } = useTranslation('common');
 
   const headlessService = useMemo(() => {
     return new HeadlessService({
@@ -36,16 +42,17 @@ export const HeadlessServiceProvider = ({ children }) => {
       onSuccess: () => {
         setStatus(HeadlessServiceStatus.READY);
       },
-      onError: (error) => {
+      onError: (err) => {
+        toast(t('error.general'), { status: ToastStatus.Error });
+        setError(err);
         setStatus(HeadlessServiceStatus.ERROR);
-        console.log('headless error:', error);
       },
     });
-  }, [headlessService]);
+  }, [headlessService, toast, t]);
 
   const value = useMemo(
-    () => ({ headlessService, status, isReady: status === HeadlessServiceStatus.READY }),
-    [headlessService, status],
+    () => ({ headlessService, status, isReady: status === HeadlessServiceStatus.READY, error }),
+    [headlessService, status, error],
   );
   return (
     <HeadlessServiceContext.Provider value={value}>{children}</HeadlessServiceContext.Provider>

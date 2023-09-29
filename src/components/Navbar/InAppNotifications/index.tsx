@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import { useSelector } from 'react-redux';
 
+import styles from './InAppNotifications.module.scss';
 import NotificationBell from './NotificationBell';
 import NotificationsList from './NotificationsList';
 
@@ -9,6 +10,7 @@ import Popover from '@/dls/Popover';
 import { ContentSide } from '@/dls/Tooltip';
 import { useNotifications } from '@/notifications/NotificationContext';
 import { selectUnseenCount } from '@/redux/slices/notifications';
+import { logButtonClick } from '@/utils/eventLogger';
 
 const InAppNotifications = () => {
   const [showModal, setShowModal] = useState(false);
@@ -17,30 +19,33 @@ const InAppNotifications = () => {
   const unseenCount = useSelector(selectUnseenCount);
 
   const onBellClicked = async () => {
+    logButtonClick('notification_bell', { open: !showModal });
     setShowModal((prevShowModal) => !prevShowModal);
   };
 
   const onOpenChange = (open: boolean) => {
     setShowModal(open);
-    fetchNotifications.fetch({
-      page: 0,
-      shouldMarkAsSeenOnSuccess: true,
-      shouldResetOldData: true,
-    });
+
+    if (open) {
+      fetchNotifications.fetch({
+        page: 0,
+        shouldMarkAsSeenOnSuccess: true,
+        shouldResetOldData: true,
+      });
+    }
   };
 
   return (
     <Popover
       contentSide={ContentSide.TOP}
-      contentSideOffset={-10}
       trigger={
         <NotificationBell unseenNotificationsCount={unseenCount} onBellClicked={onBellClicked} />
       }
       isModal
-      open={showModal}
       tip
+      contentStyles={styles.notificationsPopover}
+      open={showModal}
       onOpenChange={onOpenChange}
-      defaultStyling
       isPortalled={false}
     >
       <NotificationsList />

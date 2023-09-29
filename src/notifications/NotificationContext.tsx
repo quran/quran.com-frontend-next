@@ -1,18 +1,12 @@
 /* eslint-disable max-lines */
 import { useContext, createContext, useMemo } from 'react';
 
-import useDeleteNotification from './useDeleteNotification';
 import useFetchNotifications from './useFetchNotifications';
 import { HeadlessServiceProvider } from './useHeadlessService';
-import useMarkAllAsRead from './useMarkAllAsRead';
-import useMarkNotificationAsRead from './useMarkNotificationAsRead';
-import useInitializeUnseenCount from './useUnseenCount';
+import useInitializeUnseenCount from './useInitializeUnseenCount';
 
 type NotificationContextType = {
   fetchNotifications: ReturnType<typeof useFetchNotifications>;
-  markAllAsRead: ReturnType<typeof useMarkAllAsRead>;
-  deleteNotification: ReturnType<typeof useDeleteNotification>;
-  markNotificationAsRead: ReturnType<typeof useMarkNotificationAsRead>;
 };
 
 const NotificationContext = createContext<NotificationContextType>({} as NotificationContextType);
@@ -22,18 +16,12 @@ const NotificationsProviderInner = ({ children }: { children: React.ReactNode })
   useInitializeUnseenCount();
 
   const fetchNotifications = useFetchNotifications();
-  const markAllAsRead = useMarkAllAsRead();
-  const deleteNotification = useDeleteNotification();
-  const markNotificationAsRead = useMarkNotificationAsRead();
 
   const value = useMemo(
     () => ({
       fetchNotifications,
-      markAllAsRead,
-      deleteNotification,
-      markNotificationAsRead,
     }),
-    [fetchNotifications, markAllAsRead, deleteNotification, markNotificationAsRead],
+    [fetchNotifications],
   );
 
   return <NotificationContext.Provider value={value}>{children}</NotificationContext.Provider>;
