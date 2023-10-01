@@ -48,12 +48,14 @@ export const HeadlessServiceProvider = ({ children }) => {
         setStatus(HeadlessServiceStatus.ERROR);
       },
     });
-  }, [headlessService, toast, t]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [headlessService]);
 
   const value = useMemo(
     () => ({ headlessService, status, isReady: status === HeadlessServiceStatus.READY, error }),
     [headlessService, status, error],
   );
+
   return (
     <HeadlessServiceContext.Provider value={value}>{children}</HeadlessServiceContext.Provider>
   );
