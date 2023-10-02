@@ -217,7 +217,9 @@ const AboutQuranPage: NextPage = (): JSX.Element => {
               Muslims around the world.
             </div>
             <div className={styles.innerSection}>
-              <i>Should I read the Quran from the beginning to the end?</i>
+              <i className={styles.italicLarge}>
+                Should I read the Quran from the beginning to the end?
+              </i>
             </div>
             <div>
               While the Quran is compiled in a particular order, there is no strict requirement for

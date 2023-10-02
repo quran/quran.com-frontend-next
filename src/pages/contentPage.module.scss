@@ -1,7 +1,6 @@
 @use "src/styles/breakpoints";
 
 .contentPage {
-  padding-block-start: var(--spacing-medium);
   text-align: justify;
   margin: auto;
   @include breakpoints.desktop {
@@ -51,6 +50,9 @@
   }
   i {
     font-style: italic;
+    &.italicLarge {
+      font-size: var(--font-size-large);
+    }
   }
 }
 
