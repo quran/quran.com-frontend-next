@@ -2,7 +2,7 @@ import * as Sentry from '@sentry/nextjs';
 
 import { getUserIdCookie } from '@/utils/auth/login';
 
-const SENTRY_ENABLED = process.env.NEXT_PUBLIC_VERCEL_ENV === 'production';
+const SENTRY_ENABLED = process.env.NEXT_PUBLIC_CLIENT_SENTRY_ENABLED === 'true';
 
 interface LogOptions {
   metadata?: Record<string, unknown>;
