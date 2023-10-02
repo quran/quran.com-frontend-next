@@ -16,17 +16,14 @@ const useMarkNotificationAsSeen = () => {
       if (isReady) {
         headlessService.markNotificationsAsSeen({
           messageId: messageIds,
-          listener: ({ isLoading, isError, error: err }) => {
+          listener: ({ isLoading }) => {
             setIsMutating(isLoading);
-
-            if (isError) {
-              setError(err);
-            }
           },
           onSuccess: () => {
             setError(null);
           },
           onError: (err) => {
+            setError(err);
             logErrorToSentry(err, {
               transactionName: 'useMarkNotificationAsSeen',
               metadata: { messageIds },

@@ -22,18 +22,15 @@ const useDeleteNotification = () => {
       if (isReady) {
         headlessService.removeNotification({
           messageId,
-          listener: ({ isLoading, isError, error: err }) => {
+          listener: ({ isLoading }) => {
             setIsMutating(isLoading);
-
-            if (isError) {
-              setError(err);
-            }
           },
           onSuccess: () => {
             setError(null);
             dispatch({ type: setDeleteNotification.type, payload: { messageId } });
           },
           onError: (err) => {
+            setError(err);
             toast(t('error.general'), { status: ToastStatus.Error });
             logErrorToSentry(err, {
               transactionName: 'useDeleteNotification',

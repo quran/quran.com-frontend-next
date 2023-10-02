@@ -46,7 +46,7 @@ const useFetchNotifications = () => {
           query: {
             limit: NOTIFICATIONS_PAGE_SIZE,
           },
-          listener: ({ isLoading: loading, isFetching: fetching, data, error: err, isError }) => {
+          listener: ({ isLoading: loading, isFetching: fetching, data }) => {
             if (data) {
               dispatch({
                 type: setNotificationsPageAndFinishLoading.type,
@@ -66,10 +66,6 @@ const useFetchNotifications = () => {
                 },
               });
             }
-
-            if (isError) {
-              setError(err);
-            }
           },
           onSuccess: (response) => {
             setError(null);
@@ -82,6 +78,7 @@ const useFetchNotifications = () => {
             }
           },
           onError: (err) => {
+            setError(err);
             logErrorToSentry(err, {
               transactionName: 'useFetchNotifications',
               metadata: {

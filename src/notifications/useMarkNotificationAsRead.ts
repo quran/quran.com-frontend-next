@@ -22,12 +22,8 @@ const useMarkNotificationAsRead = () => {
       if (isReady) {
         headlessService.markNotificationsAsRead({
           messageId,
-          listener: ({ isLoading, isError, error: err }) => {
+          listener: ({ isLoading }) => {
             setIsMutating(isLoading);
-
-            if (isError) {
-              setError(err);
-            }
           },
           onSuccess: () => {
             setError(null);
@@ -36,6 +32,7 @@ const useMarkNotificationAsRead = () => {
             dispatch({ type: setNotificationAsRead.type, payload: { messageId } });
           },
           onError: (err) => {
+            setError(err);
             toast(t('error.general'), { status: ToastStatus.Error });
             logErrorToSentry(err, {
               transactionName: 'useMarkNotificationAsRead',

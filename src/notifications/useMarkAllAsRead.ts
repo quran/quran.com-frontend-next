@@ -20,12 +20,8 @@ const useMarkAllAsRead = () => {
 
   const markAllMessagesAsRead = (feedId?: IFeedId) => {
     headlessService.markAllMessagesAsRead({
-      listener: ({ isLoading, isError, error: err }) => {
+      listener: ({ isLoading }) => {
         setIsMutating(isLoading);
-
-        if (isError) {
-          setError(err);
-        }
       },
       onSuccess: () => {
         setError(null);
@@ -34,6 +30,7 @@ const useMarkAllAsRead = () => {
         dispatch({ type: setAllAsRead.type });
       },
       onError: (err) => {
+        setError(err);
         toast(t('error.general'), { status: ToastStatus.Error });
         logErrorToSentry(err, { transactionName: 'useMarkAllAsRead', metadata: { feedId } });
       },
