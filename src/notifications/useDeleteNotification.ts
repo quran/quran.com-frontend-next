@@ -35,7 +35,10 @@ const useDeleteNotification = () => {
           },
           onError: (err) => {
             toast(t('error.general'), { status: ToastStatus.Error });
-            logErrorToSentry(err, { transactionName: 'useDeleteNotification' });
+            logErrorToSentry(err, {
+              transactionName: 'useDeleteNotification',
+              metadata: { messageId },
+            });
           },
         });
       }
