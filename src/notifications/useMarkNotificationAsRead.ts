@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import { useHeadlessService } from './useHeadlessService';
 
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
+import { logErrorToSentry } from '@/lib/sentry';
 import { setNotificationAsRead } from '@/redux/slices/notifications';
 
 const useMarkNotificationAsRead = () => {
@@ -34,8 +35,12 @@ const useMarkNotificationAsRead = () => {
             // manually update the read state of the notification instead of calling the API again
             dispatch({ type: setNotificationAsRead.type, payload: { messageId } });
           },
-          onError: () => {
+          onError: (err) => {
             toast(t('error.general'), { status: ToastStatus.Error });
+            logErrorToSentry(err, {
+              transactionName: 'useMarkNotificationAsRead',
+              metadata: { messageId },
+            });
           },
         });
       }

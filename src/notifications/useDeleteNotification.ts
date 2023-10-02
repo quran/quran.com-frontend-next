@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import { useHeadlessService } from './useHeadlessService';
 
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
+import { logErrorToSentry } from '@/lib/sentry';
 import { setDeleteNotification } from '@/redux/slices/notifications';
 
 const useDeleteNotification = () => {
@@ -32,8 +33,9 @@ const useDeleteNotification = () => {
             setError(null);
             dispatch({ type: setDeleteNotification.type, payload: { messageId } });
           },
-          onError: () => {
+          onError: (err) => {
             toast(t('error.general'), { status: ToastStatus.Error });
+            logErrorToSentry(err, { transactionName: 'useDeleteNotification' });
           },
         });
       }

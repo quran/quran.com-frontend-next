@@ -4,6 +4,8 @@ import { IMessageId } from '@novu/headless';
 
 import { useHeadlessService } from './useHeadlessService';
 
+import { logErrorToSentry } from '@/lib/sentry';
+
 const useMarkNotificationAsSeen = () => {
   const { headlessService, isReady } = useHeadlessService();
   const [isMutating, setIsMutating] = useState(false);
@@ -23,6 +25,12 @@ const useMarkNotificationAsSeen = () => {
           },
           onSuccess: () => {
             setError(null);
+          },
+          onError: (err) => {
+            logErrorToSentry(err, {
+              transactionName: 'useMarkNotificationAsSeen',
+              metadata: { messageIds },
+            });
           },
         });
       }

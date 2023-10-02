@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 
 import { useHeadlessService } from './useHeadlessService';
 
+import { logErrorToSentry } from '@/lib/sentry';
 import { setUnseenCount } from '@/redux/slices/notifications';
 
 const useInitializeUnseenCount = () => {
@@ -22,6 +23,7 @@ const useInitializeUnseenCount = () => {
         },
         onError: (err: unknown) => {
           setError(err);
+          logErrorToSentry(err, { transactionName: 'useInitializeUnseenCount' });
         },
       });
 

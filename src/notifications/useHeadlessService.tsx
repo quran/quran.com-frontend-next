@@ -1,9 +1,8 @@
 import { createContext, useContext, useEffect, useMemo, useState } from 'react';
 
 import { HeadlessService } from '@novu/headless';
-import useTranslation from 'next-translate/useTranslation';
 
-import { ToastStatus, useToast } from '@/dls/Toast/Toast';
+import { logErrorToSentry } from '@/lib/sentry';
 import { getNotificationSubscriberHashCookie, getUserIdCookie } from '@/utils/auth/login';
 
 const HeadlessServiceContext = createContext<{
@@ -22,8 +21,6 @@ export enum HeadlessServiceStatus {
 export const HeadlessServiceProvider = ({ children }) => {
   const [status, setStatus] = useState<HeadlessServiceStatus>(HeadlessServiceStatus.INITIALIZING);
   const [error, setError] = useState<unknown | null>(null);
-  const toast = useToast();
-  const { t } = useTranslation('common');
 
   const headlessService = useMemo(() => {
     return new HeadlessService({
@@ -43,9 +40,9 @@ export const HeadlessServiceProvider = ({ children }) => {
         setStatus(HeadlessServiceStatus.READY);
       },
       onError: (err) => {
-        toast(t('error.general'), { status: ToastStatus.Error });
         setError(err);
         setStatus(HeadlessServiceStatus.ERROR);
+        logErrorToSentry(err, { transactionName: 'useHeadlessService' });
       },
     });
     // eslint-disable-next-line react-hooks/exhaustive-deps

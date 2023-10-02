@@ -5,6 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHeadlessService } from './useHeadlessService';
 import useMarkNotificationAsSeen from './useMarkNotificationAsSeen';
 
+import { logErrorToSentry } from '@/lib/sentry';
 import {
   selectLoadedNotificationsPages,
   selectNotificationsIsFetching,
@@ -17,8 +18,6 @@ const NOTIFICATIONS_PAGE_SIZE = 10;
 
 const useFetchNotifications = () => {
   const { headlessService, isReady } = useHeadlessService();
-
-  // const [pageNumber, setPageNumber] = useState(0);
   const [error, setError] = useState<unknown>(null);
   const dispatch = useDispatch();
 
@@ -81,6 +80,16 @@ const useFetchNotifications = () => {
               });
               markNotificationAsSeen(messageIds);
             }
+          },
+          onError: (err) => {
+            logErrorToSentry(err, {
+              transactionName: 'useFetchNotifications',
+              metadata: {
+                page,
+                shouldMarkAsSeenOnSuccess,
+                shouldResetOldData,
+              },
+            });
           },
         });
       }

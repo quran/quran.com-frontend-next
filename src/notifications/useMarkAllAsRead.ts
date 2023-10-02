@@ -7,6 +7,7 @@ import { useDispatch } from 'react-redux';
 import { useHeadlessService } from './useHeadlessService';
 
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
+import { logErrorToSentry } from '@/lib/sentry';
 import { setAllAsRead } from '@/redux/slices/notifications';
 
 const useMarkAllAsRead = () => {
@@ -32,8 +33,9 @@ const useMarkAllAsRead = () => {
         // manually set all notifications to read instead of calling the API again
         dispatch({ type: setAllAsRead.type });
       },
-      onError: () => {
+      onError: (err) => {
         toast(t('error.general'), { status: ToastStatus.Error });
+        logErrorToSentry(err, { transactionName: 'useMarkAllAsRead', metadata: { feedId } });
       },
       feedId, // Pass the feed ID here, it can be an array or a single ID
     });
