@@ -18,7 +18,7 @@ const NOTIFICATIONS_PAGE_SIZE = 10;
 
 const useFetchNotifications = () => {
   const { headlessService, isReady } = useHeadlessService();
-  const [error, setError] = useState<unknown>(null);
+  const [error, setError] = useState<unknown | null>(null);
   const dispatch = useDispatch();
 
   const { mutate: markNotificationAsSeen } = useMarkNotificationAsSeen();

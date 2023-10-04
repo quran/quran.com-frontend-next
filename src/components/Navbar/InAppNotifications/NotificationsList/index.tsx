@@ -8,6 +8,7 @@ import { Virtuoso } from 'react-virtuoso';
 import NotificationItem from './NotificationItem';
 import styles from './NotificationsList.module.scss';
 
+import Error from '@/components/Error';
 import Button, { ButtonSize, ButtonType } from '@/dls/Button/Button';
 import Separator from '@/dls/Separator/Separator';
 import Spinner from '@/dls/Spinner/Spinner';
@@ -48,6 +49,14 @@ const NotificationsList = () => {
     });
   };
 
+  const onRetryClicked = () => {
+    fetchNotifications.fetch({
+      page: 1,
+      shouldMarkAsSeenOnSuccess: true,
+      shouldResetOldData: true,
+    });
+  };
+
   const renderNotificationItem = (index: number, notification: IMessage) => (
     // eslint-disable-next-line no-underscore-dangle
     <React.Fragment key={notification._id}>
@@ -55,6 +64,31 @@ const NotificationsList = () => {
       {index === notifications.length - 1 && isFetching ? <Spinner /> : null}
     </React.Fragment>
   );
+
+  const renderList = () => {
+    const hasError = !!fetchNotifications.error;
+
+    if (hasError) {
+      return <Error error={fetchNotifications.error as Error} onRetryClicked={onRetryClicked} />;
+    }
+
+    if (notifications.length > 0) {
+      return (
+        <Virtuoso
+          data={notifications}
+          overscan={10}
+          increaseViewportBy={{ top: 10, bottom: 10 }}
+          className={styles.notificationsList}
+          endReached={loadMoreNotifications}
+          itemContent={renderNotificationItem}
+        />
+      );
+    }
+
+    return (
+      <div className={styles.emptyMessage}>{isLoading ? <Spinner /> : t('no-notifications')}</div>
+    );
+  };
 
   return (
     <div className={styles.notificationsContainer}>
@@ -72,22 +106,7 @@ const NotificationsList = () => {
         </div>
       </div>
       <Separator />
-      <div className={styles.listContainer}>
-        {notifications.length > 0 ? (
-          <Virtuoso
-            data={notifications}
-            overscan={10}
-            increaseViewportBy={{ top: 10, bottom: 10 }}
-            className={styles.notificationsList}
-            endReached={loadMoreNotifications}
-            itemContent={renderNotificationItem}
-          />
-        ) : (
-          <div className={styles.emptyMessage}>
-            {isLoading ? <Spinner /> : t('no-notifications')}
-          </div>
-        )}
-      </div>
+      <div className={styles.listContainer}>{renderList()}</div>
     </div>
   );
 };
