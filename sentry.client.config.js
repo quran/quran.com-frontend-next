@@ -11,9 +11,7 @@ const isDev = process.env.NODE_ENV === 'development';
 Sentry.init({
   enabled: SENTRY_ENABLED,
   dsn: SENTRY_ENABLED ? SENTRY_DSN : null,
-  // Set tracesSampleRate to 1.0 to capture 100%
-  // of transactions for performance monitoring.
-  // We recommend adjusting this value in production
-  tracesSampleRate: isDev ? 1 : 0.2,
   debug: isDev,
+  defaultIntegrations: false,
+  autoSessionTracking: false,
 });
