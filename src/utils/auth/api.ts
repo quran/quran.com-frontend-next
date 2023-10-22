@@ -45,6 +45,7 @@ import {
   makeStreakUrl,
   makeEstimateRangesReadingTimeUrl,
   makePostReflectionViewsUrl,
+  makeUserFeatureFlagsUrl,
 } from '@/utils/auth/apiPaths';
 import { fetcher } from 'src/api';
 import CompleteAnnouncementRequest from 'types/auth/CompleteAnnouncementRequest';
@@ -119,6 +120,9 @@ const patchRequest = <T>(url: string, requestData?: RequestData): Promise<T> =>
 
 export const getUserProfile = async (): Promise<UserProfile> =>
   privateFetcher(makeUserProfileUrl());
+
+export const getUserFeatureFlags = async (): Promise<Record<string, boolean>> =>
+  privateFetcher(makeUserFeatureFlagsUrl());
 
 export const refreshToken = async (): Promise<RefreshToken> =>
   privateFetcher(makeRefreshTokenUrl());

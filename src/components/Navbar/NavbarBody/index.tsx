@@ -14,6 +14,7 @@ import styles from './NavbarBody.module.scss';
 import ProfileAvatarButton from './ProfileAvatarButton';
 
 import Button, { ButtonShape, ButtonVariant } from '@/dls/Button/Button';
+import useGetUserFeatureFlags from '@/hooks/auth/useGetUserFeatureFlags';
 import IconMenu from '@/icons/menu.svg';
 import IconSearch from '@/icons/search.svg';
 import IconSettings from '@/icons/settings.svg';
@@ -38,6 +39,7 @@ const logDrawerOpenEvent = (drawerName: string) => {
 
 const NavbarBody: React.FC = () => {
   const { t } = useTranslation('common');
+  const { data: featureFlags, isLoading, error } = useGetUserFeatureFlags();
   const dispatch = useDispatch();
   const openNavigationDrawer = () => {
     logDrawerOpenEvent('navigation');
@@ -53,6 +55,9 @@ const NavbarBody: React.FC = () => {
     logDrawerOpenEvent('settings');
     dispatch({ type: setIsSettingsDrawerOpen.type, payload: true });
   };
+
+  const inAppNotificationsAllowed =
+    isLoggedIn() && !isLoading && !error && featureFlags?.inAppNotifications;
 
   return (
     <div className={styles.itemsContainer}>
@@ -77,7 +82,7 @@ const NavbarBody: React.FC = () => {
         <div className={styles.rightCTA}>
           <>
             <ProfileAvatarButton />
-            {isLoggedIn() && (
+            {inAppNotificationsAllowed && (
               <NotificationsProvider>
                 <InAppNotifications />
               </NotificationsProvider>

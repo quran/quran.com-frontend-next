@@ -16,6 +16,8 @@ const makeUrl = (url: string, parameters?: Record<string, unknown>): string => {
 
 export const makeUserProfileUrl = (): string => makeUrl('users/profile');
 
+export const makeUserFeatureFlagsUrl = (): string => makeUrl('feature-flags');
+
 export const makeCompleteSignupUrl = (): string => makeUrl('users/completeSignup');
 
 export const makeCompleteAnnouncementUrl = (): string => makeUrl('users/completeAnnouncement');
