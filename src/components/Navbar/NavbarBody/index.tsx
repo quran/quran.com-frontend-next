@@ -24,7 +24,6 @@ import {
   setIsNavigationDrawerOpen,
   setIsSettingsDrawerOpen,
 } from '@/redux/slices/navbar';
-import { isLoggedIn } from '@/utils/auth/login';
 import { logEvent } from '@/utils/eventLogger';
 
 /**
@@ -39,7 +38,7 @@ const logDrawerOpenEvent = (drawerName: string) => {
 
 const NavbarBody: React.FC = () => {
   const { t } = useTranslation('common');
-  const { data: featureFlags, isLoading, error } = useGetUserFeatureFlags();
+  const { isEnabled: isInAppNotificationsEnabled } = useGetUserFeatureFlags('inAppNotifications');
   const dispatch = useDispatch();
   const openNavigationDrawer = () => {
     logDrawerOpenEvent('navigation');
@@ -55,9 +54,6 @@ const NavbarBody: React.FC = () => {
     logDrawerOpenEvent('settings');
     dispatch({ type: setIsSettingsDrawerOpen.type, payload: true });
   };
-
-  const inAppNotificationsAllowed =
-    isLoggedIn() && !isLoading && !error && featureFlags?.inAppNotifications;
 
   return (
     <div className={styles.itemsContainer}>
@@ -82,7 +78,7 @@ const NavbarBody: React.FC = () => {
         <div className={styles.rightCTA}>
           <>
             <ProfileAvatarButton />
-            {inAppNotificationsAllowed && (
+            {isInAppNotificationsEnabled && (
               <NotificationsProvider>
                 <InAppNotifications />
               </NotificationsProvider>

@@ -4,15 +4,17 @@ import { getUserFeatureFlags } from '@/utils/auth/api';
 import { makeUserFeatureFlagsUrl } from '@/utils/auth/apiPaths';
 import { isLoggedIn } from '@/utils/auth/login';
 
-const useGetUserFeatureFlags = () => {
+const useGetUserFeatureFlags = (flag: string) => {
   const { data, isValidating, error } = useSWR(
     isLoggedIn() ? makeUserFeatureFlagsUrl() : null,
     getUserFeatureFlags,
   );
 
+  const isLoading = isValidating && !data;
+
   return {
-    data,
-    isLoading: isValidating && !data,
+    isEnabled: isLoggedIn() && !isLoading && !error && data?.[flag],
+    isLoading,
     error,
   };
 };
