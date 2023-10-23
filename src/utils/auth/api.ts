@@ -9,6 +9,7 @@ import {
   UpdateActivityDayBody,
   ActivityDayType,
 } from '@/types/auth/ActivityDay';
+import ConsentType from '@/types/auth/ConsentType';
 import { CreateGoalRequest, Goal, GoalCategory, UpdateGoalRequest } from '@/types/auth/Goal';
 import { StreakWithMetadataParams, StreakWithUserMetadata } from '@/types/auth/Streak';
 import { Mushaf } from '@/types/QuranReader';
@@ -46,6 +47,7 @@ import {
   makeEstimateRangesReadingTimeUrl,
   makePostReflectionViewsUrl,
   makeUserFeatureFlagsUrl,
+  makeUserConsentsUrl,
 } from '@/utils/auth/apiPaths';
 import { fetcher } from 'src/api';
 import CompleteAnnouncementRequest from 'types/auth/CompleteAnnouncementRequest';
@@ -132,6 +134,13 @@ export const completeSignup = async (data: CompleteSignupRequest): Promise<UserP
 
 export const completeAnnouncement = async (data: CompleteAnnouncementRequest): Promise<any> => {
   return postRequest(makeCompleteAnnouncementUrl(), data);
+};
+
+export const userConsent = async (data: {
+  consentType: ConsentType;
+  consented: boolean;
+}): Promise<any> => {
+  return postRequest(makeUserConsentsUrl(), data);
 };
 
 export const deleteAccount = async (): Promise<void> => deleteRequest(makeDeleteAccountUrl());
