@@ -4,5 +4,11 @@
 
 .submitButton {
   margin-block-start: var(--spacing-small);
-  width: 100%;
+  width: 48%;
+}
+
+.buttonsContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }

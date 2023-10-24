@@ -9,23 +9,38 @@ import Button, { ButtonType } from '@/dls/Button/Button';
 type Props = {
   children: React.ReactNode;
   isLoading?: boolean;
-  onSubmitClicked: () => void;
+  onButtonClicked: (consented: boolean) => void;
 };
 
-const ConsentBody: React.FC<Props> = ({ children, isLoading = false, onSubmitClicked }) => {
+const ConsentBody: React.FC<Props> = ({ children, isLoading = false, onButtonClicked }) => {
   const { t } = useTranslation('common');
   return (
     <div className={styles.container}>
       {children}
-      <Button
-        isDisabled={isLoading}
-        isLoading={isLoading}
-        onClick={onSubmitClicked}
-        type={ButtonType.Primary}
-        className={styles.submitButton}
-      >
-        {t('submit')}
-      </Button>
+      <div className={styles.buttonsContainer}>
+        <Button
+          isDisabled={isLoading}
+          isLoading={isLoading}
+          onClick={() => {
+            onButtonClicked(true);
+          }}
+          type={ButtonType.Primary}
+          className={styles.submitButton}
+        >
+          {t('allow')}
+        </Button>
+        <Button
+          isDisabled={isLoading}
+          isLoading={isLoading}
+          onClick={() => {
+            onButtonClicked(false);
+          }}
+          type={ButtonType.Secondary}
+          className={styles.submitButton}
+        >
+          {t('not-now')}
+        </Button>
+      </div>
     </div>
   );
 };
