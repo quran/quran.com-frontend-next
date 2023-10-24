@@ -9,6 +9,7 @@ import styles from './CommunicationConsent.module.scss';
 
 import Switch from '@/dls/Switch/Switch';
 import ConsentType from '@/types/auth/ConsentType';
+import { logValueChange } from '@/utils/eventLogger';
 
 type Props = {
   consentType: ConsentType;
@@ -28,6 +29,12 @@ const CommunicationConsent: React.FC<Props> = ({ onCompleted, consentType, isLoa
   const onSubmitClicked = () => {
     onCompleted(consentType, selected === 'true');
   };
+
+  const onSwitchClicked = (value: string) => {
+    logValueChange(`${consentType}_consent`, selected, value);
+    setSelected(value);
+  };
+
   return (
     <ConsentBody onSubmitClicked={onSubmitClicked} isLoading={isLoading}>
       <p className={styles.header}>
@@ -46,7 +53,7 @@ const CommunicationConsent: React.FC<Props> = ({ onCompleted, consentType, isLoa
         />
       </p>
 
-      <Switch items={ITEMS} selected={selected} onSelect={setSelected} />
+      <Switch items={ITEMS} selected={selected} onSelect={onSwitchClicked} />
     </ConsentBody>
   );
 };

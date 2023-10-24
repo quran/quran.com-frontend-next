@@ -8,6 +8,7 @@ import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import ConsentType from '@/types/auth/ConsentType';
 import { userConsent } from '@/utils/auth/api';
 import { makeUserProfileUrl } from '@/utils/auth/apiPaths';
+import { logFormSubmission } from '@/utils/eventLogger';
 import UserProfile from 'types/auth/UserProfile';
 
 const CommunicationConsent = dynamic(
@@ -25,6 +26,7 @@ const ConsentModalBodyResolver = ({ missingConsents }: Props) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const onCompleted = async (consentType: ConsentType, consented: boolean) => {
+    logFormSubmission(`${consentType}_consent`, { consented });
     setIsLoading(true);
     userConsent({
       consentType,
