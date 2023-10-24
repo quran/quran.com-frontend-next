@@ -3505,27 +3505,27 @@
     "@nodelib/fs.scandir" "2.1.5"
     fastq "^1.6.0"
 
-"@novu/client@^0.19.0":
-  version "0.19.0"
-  resolved "https://registry.yarnpkg.com/@novu/client/-/client-0.19.0.tgz#1e9a10fcad4225da9c7891fec2382757108b2cfd"
-  integrity sha512-XDWFja3hHZs430AMqL7FIbgKR8QEptkvat7L8Wid8/tJ/HSrEutFGxwoH0FqbV0oDAdIvO75rXfVYwrQCb2LeQ==
+"@novu/client@^0.20.0":
+  version "0.20.0"
+  resolved "https://registry.yarnpkg.com/@novu/client/-/client-0.20.0.tgz#16edb8da594fa161ff81dee07908a61b851be5b1"
+  integrity sha512-/Tum+CKaWwxA1qSNvPVXAyYIiX0kdMJQFvBl3q2l0znacbRcFzVWvTXzTm9zp8h0Ba9ey9WssqwchV11mZbhng==
   dependencies:
-    "@novu/shared" "^0.19.0"
+    "@novu/shared" "^0.20.0"
 
-"@novu/headless@^0.19.0":
-  version "0.19.0"
-  resolved "https://registry.yarnpkg.com/@novu/headless/-/headless-0.19.0.tgz#ebf3dd6e2c2bd7c09d3fc5c78a4fb5da7668f95a"
-  integrity sha512-lVHbH0Q0F2MZN7+geqgJDdzwXfEYEoo2ts6aJq2U6Efm5BGZ2lk4BJtaUEe5o2xxSEXtYNTb1VxMkmfUAMKXLA==
+"@novu/headless@^0.20.0":
+  version "0.20.0"
+  resolved "https://registry.yarnpkg.com/@novu/headless/-/headless-0.20.0.tgz#4b1b0fdabd2545c4fd0dc66909f1152c62cde6ef"
+  integrity sha512-yVUzjdK9SxrrVmtnYhkdMeKbldCUeHI1KBF9zclIeHMUv5F2gb2Ed0XLg6hKrz/nuuOlRN21W8mt6oQ2UWDL7w==
   dependencies:
-    "@novu/client" "^0.19.0"
-    "@novu/shared" "^0.19.0"
+    "@novu/client" "^0.20.0"
+    "@novu/shared" "^0.20.0"
     "@tanstack/query-core" "^4.15.1"
     socket.io-client "4.7.2"
 
-"@novu/shared@^0.19.0":
-  version "0.19.0"
-  resolved "https://registry.yarnpkg.com/@novu/shared/-/shared-0.19.0.tgz#1f08726c9998a57403c2a49c68766451e08c6be9"
-  integrity sha512-qvauixX5OOMcIduxnsF+Kh8CIB7r14kjB9Dt4SLgkWIGGrxVFmiSpJjaOEjUZ4RAHsO7CZEdmAPQDJj2wwNDOQ==
+"@novu/shared@^0.20.0":
+  version "0.20.0"
+  resolved "https://registry.yarnpkg.com/@novu/shared/-/shared-0.20.0.tgz#17f069cf5877c58e9ea3e6f3719a626d2b039dc3"
+  integrity sha512-RaCjreB38uPnxXLRpupGgBSgNOn9nT1ug2ArRl8gYeMwM/YjdqRo+f3kOLGdupxJQ9ioepHes824Q71AYMekRA==
   dependencies:
     axios "^1.4.0"
     class-transformer "0.5.1"
