@@ -136,7 +136,7 @@ export const completeAnnouncement = async (data: CompleteAnnouncementRequest): P
   return postRequest(makeCompleteAnnouncementUrl(), data);
 };
 
-export const userConsent = async (data: {
+export const updateUserConsent = async (data: {
   consentType: ConsentType;
   consented: boolean;
 }): Promise<any> => {

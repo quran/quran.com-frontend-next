@@ -4,7 +4,7 @@ import Trans from 'next-translate/Trans';
 
 import ConsentBody from '../ConsentBody';
 
-import styles from './CommunicationConsent.module.scss';
+import styles from './ConsentModal.module.scss';
 
 import ConsentType from '@/types/auth/ConsentType';
 import { logButtonClick } from '@/utils/eventLogger';
@@ -15,7 +15,7 @@ type Props = {
   onCompleted: (consentType: ConsentType, consented: boolean) => void;
 };
 
-const CommunicationConsent: React.FC<Props> = ({ onCompleted, consentType, isLoading }) => {
+const ConsentModal: React.FC<Props> = ({ onCompleted, consentType, isLoading }) => {
   const onButtonClicked = (consented: boolean) => {
     logButtonClick(`${consentType}_${consentType}`);
     onCompleted(consentType, consented);
@@ -26,7 +26,7 @@ const CommunicationConsent: React.FC<Props> = ({ onCompleted, consentType, isLoa
       <p className={styles.header}>
         <Trans
           components={{ boldSpan: <span key={0} className={styles.boldSpan} /> }}
-          i18nKey="common:consents.communication.header"
+          i18nKey={`common:consents.${consentType}.header`}
         />
       </p>
       <Trans
@@ -34,10 +34,10 @@ const CommunicationConsent: React.FC<Props> = ({ onCompleted, consentType, isLoa
           br: <br key={0} />,
           boldSpan: <span key={1} className={styles.boldSpan} />,
         }}
-        i18nKey="common:consents.communication.body"
+        i18nKey={`common:consents.${consentType}.body`}
       />
     </ConsentBody>
   );
 };
 
-export default CommunicationConsent;
+export default ConsentModal;

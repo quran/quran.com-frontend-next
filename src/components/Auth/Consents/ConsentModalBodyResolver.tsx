@@ -6,14 +6,11 @@ import { useSWRConfig } from 'swr';
 
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import ConsentType from '@/types/auth/ConsentType';
-import { userConsent } from '@/utils/auth/api';
+import { updateUserConsent } from '@/utils/auth/api';
 import { makeUserProfileUrl } from '@/utils/auth/apiPaths';
-import { logFormSubmission } from '@/utils/eventLogger';
 import UserProfile from 'types/auth/UserProfile';
 
-const CommunicationConsent = dynamic(
-  () => import('@/components/Auth/Consents/CommunicationConsent'),
-);
+const ConsentModal = dynamic(() => import('@/components/Auth/Consents/ConsentModal'));
 
 type Props = {
   missingConsents: ConsentType[];
@@ -26,9 +23,8 @@ const ConsentModalBodyResolver = ({ missingConsents }: Props) => {
   const [isLoading, setIsLoading] = useState(false);
 
   const onCompleted = async (consentType: ConsentType, consented: boolean) => {
-    logFormSubmission(`${consentType}_consent`, { consented });
     setIsLoading(true);
-    userConsent({
+    updateUserConsent({
       consentType,
       consented,
     })
@@ -56,16 +52,13 @@ const ConsentModalBodyResolver = ({ missingConsents }: Props) => {
       });
   };
 
-  if (missingConsents[0] === ConsentType.COMMUNICATION) {
-    return (
-      <CommunicationConsent
-        isLoading={isLoading}
-        consentType={missingConsents[0]}
-        onCompleted={onCompleted}
-      />
-    );
-  }
-  return <></>;
+  return (
+    <ConsentModal
+      isLoading={isLoading}
+      consentType={missingConsents[0]}
+      onCompleted={onCompleted}
+    />
+  );
 };
 
 export default ConsentModalBodyResolver;
