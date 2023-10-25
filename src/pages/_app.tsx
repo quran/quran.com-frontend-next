@@ -81,6 +81,7 @@ function MyApp({ Component, pageProps }): JSX.Element {
                     <UserAccountModal
                       requiredFields={userData?.requiredFields}
                       announcement={userData?.announcement}
+                      consents={userData?.consents}
                     />
                     <DefaultSeo
                       {...createSEOConfig({ locale, description: t('default-description') })}

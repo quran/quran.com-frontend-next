@@ -18,6 +18,8 @@ export const makeUserProfileUrl = (): string => makeUrl('users/profile');
 
 export const makeUserFeatureFlagsUrl = (): string => makeUrl('feature-flags');
 
+export const makeUserConsentsUrl = (): string => makeUrl('consent/userConsents');
+
 export const makeCompleteSignupUrl = (): string => makeUrl('users/completeSignup');
 
 export const makeCompleteAnnouncementUrl = (): string => makeUrl('users/completeAnnouncement');
