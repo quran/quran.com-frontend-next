@@ -1,0 +1,13 @@
+div.VolumeControl__DropdownMenuContentOverride {
+  margin-block-end: var(--spacing-large);
+  max-width: 100px !important;
+  width: 100px !important;
+}
+
+div.VolumeControl__SlideContainer > :first-child {
+  margin: 0 auto;
+  & > :first-child > :first-child {
+    width: 100%;
+    height: var(--volume) !important;
+  }
+}

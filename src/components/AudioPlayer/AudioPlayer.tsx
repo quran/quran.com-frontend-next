@@ -52,11 +52,16 @@ const AudioPlayer = () => {
   const audioPlayerRef = useRef<HTMLAudioElement>();
   const audioService = useContext(AudioPlayerMachineContext);
   const isVisible = useSelector(audioService, (state) => state.matches('VISIBLE'));
+  const volume = useSelector(audioService, (state) => state.context.volume);
 
   useEffect(() => {
     window.audioPlayerEl = audioPlayerRef.current;
     audioService.send({ type: 'SET_AUDIO_REF', audioPlayerRef: audioPlayerRef.current });
   }, [audioService]);
+
+  useEffect(() => {
+    audioPlayerRef.current.volume = volume;
+  }, [volume, audioPlayerRef]);
 
   const onCanPlay = () => {
     audioService.send({ type: 'CAN_PLAY' });

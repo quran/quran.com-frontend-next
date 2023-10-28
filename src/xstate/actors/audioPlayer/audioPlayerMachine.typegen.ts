@@ -105,6 +105,7 @@ export interface Typegen0 {
     setRadioStationDetails: "PLAY_RADIO_TRACK";
     setReciterId: "CHANGE_RECITER";
     setRecitersList: "SET_RECITERS_LIST";
+    setVolume: "SET_VOLUME";
     setSurahAndAyahNumbers: "PLAY_AYAH";
     setSurahAndResetAyahNumber: "PLAY_SURAH";
     stopRepeatActor:

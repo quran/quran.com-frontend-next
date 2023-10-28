@@ -22,6 +22,7 @@ interface AudioPlayerContext {
   repeatActor: InterpreterFrom<ReturnType<typeof createRepeatMachine>>;
   radioActor: RadioActorRef;
   recitersList?: any;
+  volume: number;
 }
 
 export default AudioPlayerContext;

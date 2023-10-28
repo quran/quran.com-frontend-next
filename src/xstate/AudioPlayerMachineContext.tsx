@@ -18,7 +18,11 @@ export const AudioPlayerMachineContext = createContext(
   {} as InterpreterFrom<typeof audioPlayerMachine>,
 );
 
-const LOCAL_STORAGE_PERSISTENCE_EVENT_TRIGGER = ['CHANGE_RECITER', 'SET_PLAYBACK_SPEED'];
+const LOCAL_STORAGE_PERSISTENCE_EVENT_TRIGGER = [
+  'CHANGE_RECITER',
+  'SET_PLAYBACK_SPEED',
+  'SET_VOLUME',
+];
 
 export const AudioPlayerMachineProvider = ({ children }) => {
   const toast = useToast();
@@ -38,13 +42,13 @@ export const AudioPlayerMachineProvider = ({ children }) => {
       },
     },
     (state) => {
-      const { playbackRate, reciterId } = state.context;
+      const { playbackRate, reciterId, volume } = state.context;
       if (state.matches('VISIBLE.FAILED')) {
         toast(t('error.general'), { status: ToastStatus.Error });
       }
 
       if (LOCAL_STORAGE_PERSISTENCE_EVENT_TRIGGER.includes(state.event.type)) {
-        persistXstateToLocalStorage({ playbackRate, reciterId });
+        persistXstateToLocalStorage({ playbackRate, reciterId, volume });
       }
     },
   );
