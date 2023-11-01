@@ -1,12 +1,13 @@
 {
     "about": "Tentang kami",
+    "allow": "Mengizinkan",
     "and": "dan",
     "announcements": {
         "auth-onboarding": {
             "data-sync": {
                 "action": "Lanjut",
                 "description": "Baik Anda menggunakan Quran.com di ponsel atau laptop Anda, bookmark Anda, ayat yang terakhir dibaca, dan preferensi Anda akan tersedia",
-                "title": "Data Anda akan disinkronkan <br> <\/br> di seluruh perangkat"
+                "title": "Data Anda akan disinkronkan <br><\/br> di seluruh perangkat"
             },
             "feedback": {
                 "action": "OK saya mengerti",
@@ -25,7 +26,7 @@
             },
             "welcome": {
                 "action": "Lihat apa yang baru",
-                "title": "Selamat datang di Quran.com <br> <\/br> Akun Pengguna"
+                "title": "Selamat datang di Quran.com <br><\/br> Akun Pengguna"
             }
         },
         "collections-announcement": {
@@ -113,6 +114,12 @@
         "title": "Komunitas"
     },
     "complete-sign-up": "Lengkapi pendaftaran Anda",
+    "consents": {
+        "communication": {
+            "body": "🚀 Tingkatkan kemajuan Anda melalui pemberitahuan <boldSpan> yang dipersonalisasi <\/boldSpan> tentang kemajuan tujuan Anda, pertahankan rekor, dan tingkatkan penggunaan fitur kami saat ini. <br><\/br> <br><\/br> Bisakah kami terus mengabari Anda melalui email dan saluran lainnya? Anda memegang kendali – silakan sesuaikan preferensi ini kapan saja di pengaturan akun Anda. <br><\/br> <br><\/br> Cukup pilih 'Izinkan' untuk <boldSpan> pengingat yang menginspirasi <\/boldSpan> atau 'Jangan Sekarang' untuk menolaknya.",
+            "header": "Kami ingin membantu Anda tetap <boldSpan> berkomitmen dan konsisten <\/boldSpan> dengan Perjalanan Pertumbuhan Quran Anda! 📖🌟"
+        }
+    },
     "continue": "Melanjutkan",
     "copied": "disalin",
     "copied-to-clipboard": "Disalin ke papan klip",
@@ -207,7 +214,14 @@
     "next": "Lanjut",
     "next-ayah": "Ayat Berikutnya",
     "no": "Tidak",
+    "no-notifications": "Belum ada pemberitahuan",
     "none": "Tidak ada",
+    "not-now": "Tidak sekarang",
+    "notification": {
+        "mark-all-as-read": "tandai semua telah dibaca",
+        "mark-as-read": "tandai sebagai membaca"
+    },
+    "notifications": "Pemberitahuan",
     "off": "Mati",
     "on": "Hidup",
     "page": "Halaman",
