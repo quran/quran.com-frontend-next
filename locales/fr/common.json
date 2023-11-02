@@ -1,12 +1,13 @@
 {
     "about": "À propos de nous",
+    "allow": "Permettre",
     "and": "et",
     "announcements": {
         "auth-onboarding": {
             "data-sync": {
                 "action": "Prochain",
                 "description": "Que vous utilisiez Quran.com sur votre téléphone ou votre ordinateur portable, vos signets, les derniers versets lus et vos préférences seront disponibles",
-                "title": "Vos données seront synchronisées <br> <\/br> sur tous les appareils"
+                "title": "Vos données seront synchronisées <br><\/br> sur tous les appareils"
             },
             "feedback": {
                 "action": "OK, j'ai compris",
@@ -25,7 +26,7 @@
             },
             "welcome": {
                 "action": "Regardez ce qu'il y a de nouveau",
-                "title": "Bienvenue sur Quran.com <br> <\/br> Compte utilisateur"
+                "title": "Bienvenue sur Quran.com <br><\/br> Compte utilisateur"
             }
         },
         "collections-announcement": {
@@ -113,6 +114,12 @@
         "title": "Communauté"
     },
     "complete-sign-up": "Complétez votre inscription",
+    "consents": {
+        "communication": {
+            "body": "🚀 Boostez vos progrès grâce à des notifications <boldSpan> personnalisées <\/boldSpan> sur la progression de votre objectif, le maintien de séquences et l'amélioration de votre utilisation de nos fonctionnalités actuelles. <br><\/br> <br><\/br> Pouvons-nous vous tenir au courant par e-mail et par d'autres canaux ? Vous avez le contrôle – n'hésitez pas à ajuster ces préférences à tout moment dans les paramètres de votre compte. <br><\/br> <br><\/br> Sélectionnez simplement « Autoriser » pour <boldSpan> rappels inspirants <\/boldSpan> ou « Pas maintenant » pour refuser.",
+            "header": "Nous serions ravis de vous aider à rester <boldSpan> engagé et cohérent <\/boldSpan> dans votre parcours de croissance du Coran ! 📖🌟"
+        }
+    },
     "continue": "Continuer",
     "copied": "Copié",
     "copied-to-clipboard": "Copié dans le presse-papier",
@@ -207,7 +214,14 @@
     "next": "Prochain",
     "next-ayah": "Ayah suivant",
     "no": "Non",
+    "no-notifications": "Aucune notification pour l'instant",
     "none": "Rien",
+    "not-now": "Pas maintenant",
+    "notification": {
+        "mark-all-as-read": "tout marquer comme lu",
+        "mark-as-read": "Marquer comme lu"
+    },
+    "notifications": "Notifications",
     "off": "Désactivé",
     "on": "Au",
     "page": "Page",

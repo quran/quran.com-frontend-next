@@ -1,12 +1,13 @@
 {
     "about": "Rreth Nesh",
+    "allow": "Lejo",
     "and": "dhe",
     "announcements": {
         "auth-onboarding": {
             "data-sync": {
                 "action": "Tjetra",
                 "description": "Pavarësisht nëse jeni duke përdorur Quran.com në telefonin ose laptopin tuaj, faqeshënuesit, vargjet e fundit të lexuara dhe preferencat tuaja do të jenë të disponueshme",
-                "title": "Të dhënat tuaja do të sinkronizohen <br> <\/br> nëpër pajisje"
+                "title": "Të dhënat tuaja do të sinkronizohen <br><\/br> nëpër pajisje"
             },
             "feedback": {
                 "action": "Mirë, e kuptova",
@@ -25,7 +26,7 @@
             },
             "welcome": {
                 "action": "Shihni çfarë ka të re",
-                "title": "Mirë se vini në llogarinë e përdoruesit <br> <\/br> të Quran.com"
+                "title": "Mirë se vini në llogarinë e përdoruesit <br><\/br> të Quran.com"
             }
         },
         "collections-announcement": {
@@ -113,6 +114,12 @@
         "title": "Komuniteti"
     },
     "complete-sign-up": "Plotësoni regjistrimin tuaj",
+    "consents": {
+        "communication": {
+            "body": "🚀 Mbushni progresin tuaj nëpërmjet njoftimeve të personalizuara <boldSpan> <\/boldSpan> në lidhje me përparimin e qëllimit tuaj, ruajtjen e vijave dhe përmirësimin e përdorimit të veçorive tona aktuale. <br><\/br> <br><\/br> A mund t'ju mbajmë të informuar përmes emailit dhe kanaleve të tjera? Ju keni kontrollin - mos ngurroni t'i rregulloni këto preferenca në çdo kohë në cilësimet e llogarisë tuaj. <br><\/br> <br><\/br> Thjesht zgjidhni \"Lejo\" për rikujtuesit frymëzues <boldSpan> <\/boldSpan> ose \"Jo tani\" për t'i refuzuar.",
+            "header": "Do të donim t'ju ndihmonim të qëndroni <boldSpan> të përkushtuar dhe të qëndrueshëm <\/boldSpan> me Udhëtimin tuaj të Rritjes në Kuran! 📖🌟"
+        }
+    },
     "continue": "Vazhdoni",
     "copied": "E kopjuar",
     "copied-to-clipboard": "Kopjuar në kujtesën tuaj",
@@ -207,7 +214,14 @@
     "next": "Tjetra",
     "next-ayah": "Ajeti tjetër",
     "no": "Jo",
+    "no-notifications": "Nuk ka ende njoftime",
     "none": "Asnjëra",
+    "not-now": "Jo tani",
+    "notification": {
+        "mark-all-as-read": "Shënoni të gjitha si të lexuara",
+        "mark-as-read": "Shënoni si të lexuar"
+    },
+    "notifications": "Njoftimet",
     "off": "Joaktiv",
     "on": "Aktiv",
     "page": "Faqe",
