@@ -14,6 +14,7 @@ const ConsentModalBodyResolver = dynamic(
   () => import('@/components/Auth/Consents/ConsentModalBodyResolver'),
 );
 
+const requiredConsentsEnabled = process.env.NEXT_PUBLIC_ENABLE_REQUIRED_CONSENTS === 'true';
 const REQUIRED_CONSENTS = [ConsentType.COMMUNICATION];
 
 type Props = {
@@ -29,7 +30,7 @@ const UserAccountModal: React.FC<Props> = ({ requiredFields, announcement, conse
     modalBody = <CompleteSignupForm requiredFields={requiredFields} />;
   } else if (announcement) {
     modalBody = <AnnouncementModalBodyResolver announcement={announcement} />;
-  } else if (consents) {
+  } else if (requiredConsentsEnabled && consents) {
     const missingConsents = REQUIRED_CONSENTS.filter(
       (consent) => !Object.keys(consents).includes(consent),
     );
