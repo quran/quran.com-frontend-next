@@ -14,4 +14,5 @@ Sentry.init({
   debug: isDev,
   defaultIntegrations: false,
   autoSessionTracking: false,
+  tracesSampleRate: isDev ? 1 : 0.2,
 });
