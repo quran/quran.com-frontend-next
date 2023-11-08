@@ -1,0 +1,12 @@
+.menuItem {
+    background-color: transparent;
+    color: var(--color-text-default);
+    padding: var(--spacing-micro);
+    margin: var(--spacing-micro);
+
+    &:hover,
+    &.isActive {
+        color: var(--color-text-inverse);
+        background-color: var(--color-background-inverse);
+    }
+}

@@ -1,0 +1,10 @@
+.floatingMenu {
+    border-radius: var(--border-radius-rounded);
+    background-color: var(--color-background-alternative-medium);
+    display: flex;
+    padding: var(--spacing-micro);
+}
+
+.isActive {
+    color: var(--color-text-inverse);
+}

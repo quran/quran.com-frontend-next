@@ -5,6 +5,7 @@ import useTranslation from 'next-translate/useTranslation';
 import { useSelector, shallowEqual } from 'react-redux';
 
 import BookmarkAction from './BookmarkAction';
+import VerseNotes from './Notes';
 import SaveToCollectionAction from './SaveToCollectionAction';
 import VerseActionAdvancedCopy from './VerseActionAdvancedCopy';
 import VerseActionRepeatAudio from './VerseActionRepeatAudio';
@@ -126,6 +127,7 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
         verse={verse}
         isTranslationView={isTranslationView}
       />
+      <VerseNotes verseKey={verse.verseKey} isTranslationView={isTranslationView} />
       {!isTranslationView && (
         <WordByWordVerseAction verse={verse} onActionTriggered={onActionTriggered} />
       )}
