@@ -1,0 +1,17 @@
+.header {
+    align-items: center;
+    background: var(--color-background-alternative-medium);
+    border-block-end: 1px solid var(--color-background-inverse);
+    border-radius: var(--border-radius-rounded);
+    display: flex;
+    flex: 0 0 auto;
+    flex-wrap: wrap;
+    padding: var(--spacing-micro);
+}
+
+.section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-left: 2px;
+}

@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 
+import { MilkdownProvider } from '@milkdown/react';
 import { DirectionProvider } from '@radix-ui/react-direction';
 import { TooltipProvider } from '@radix-ui/react-tooltip';
 import { DefaultSeo } from 'next-seo';
@@ -91,7 +92,9 @@ function MyApp({ Component, pageProps }): JSX.Element {
                     <Navbar />
 
                     <DeveloperUtility />
-                    <Component {...pageProps} />
+                    <MilkdownProvider>
+                      <Component {...pageProps} />
+                    </MilkdownProvider>
                     <AudioPlayer />
                     <Footer />
                   </ThemeProvider>
