@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+import { MilkdownProvider } from '@milkdown/react';
 import useTranslation from 'next-translate/useTranslation';
 
 import NoteModal from '@/components/Notes/NoteModal';
@@ -28,7 +29,7 @@ const VerseNotes = ({ verseKey, isTranslationView }: VerseNotesProps) => {
   };
 
   return (
-    <>
+    <MilkdownProvider>
       <NoteModal
         isOpen={isModalOpen}
         onClose={onClose}
@@ -40,7 +41,7 @@ const VerseNotes = ({ verseKey, isTranslationView }: VerseNotesProps) => {
       <PopoverMenu.Item icon={<NoteIcon />} onClick={onItemClicked}>
         {t('notes.add-notes')}
       </PopoverMenu.Item>
-    </>
+    </MilkdownProvider>
   );
 };
 

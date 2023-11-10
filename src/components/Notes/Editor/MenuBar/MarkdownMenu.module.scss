@@ -9,9 +9,9 @@
     padding: var(--spacing-micro);
 }
 
-.section {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding-left: 2px;
+.divider {
+    background-color: var(--color-background-inverse);
+    height: 1.25rem;
+    margin: var(--spacing-micro);
+    width: 1px;
 }

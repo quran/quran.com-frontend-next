@@ -3,16 +3,23 @@ import React, { useRef, useState } from 'react';
 import { editorViewCtx, serializerCtx } from '@milkdown/core';
 import { useInstance } from '@milkdown/react';
 import useTranslation from 'next-translate/useTranslation';
+import dynamic from 'next/dynamic';
+
+import LazyLoadingSpinner from '../Editor/LazyLoadingSpinner';
 
 import NoteModalHeader from './Header';
 import styles from './NoteModal.module.scss';
 
-import NotesEditor, { NotesEditorRef } from '@/components/Notes/Editor';
 import Button, { ButtonType } from '@/dls/Button/Button';
 import ContentModal, { ContentModalSize } from '@/dls/ContentModal/ContentModal';
 import ContentModalHandles from '@/dls/ContentModal/types/ContentModalHandles';
 import NoteType from '@/types/NoteType';
 import { logButtonClick } from '@/utils/eventLogger';
+
+const NotesEditor = dynamic(() => import('@/components/Notes/Editor'), {
+  ssr: false,
+  loading: LazyLoadingSpinner,
+});
 
 type Props = {
   isOpen: boolean;
