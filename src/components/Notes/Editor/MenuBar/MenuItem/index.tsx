@@ -13,7 +13,8 @@ type Props = {
 };
 
 const MenuItem: React.FC<Props> = ({ itemKey, icon, title, action }) => {
-  const onButtonClicked = () => {
+  const onButtonClicked = (e) => {
+    e.preventDefault();
     logButtonClick(`notes_editor_menu_${itemKey}`);
     action();
   };
@@ -26,6 +27,7 @@ const MenuItem: React.FC<Props> = ({ itemKey, icon, title, action }) => {
       onClick={onButtonClicked}
     >
       {title}
+      {icon}
     </Button>
   );
 };

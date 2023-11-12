@@ -30,16 +30,9 @@ const VerseNotes = ({ verseKey, isTranslationView }: VerseNotesProps) => {
 
   return (
     <MilkdownProvider>
-      <NoteModal
-        isOpen={isModalOpen}
-        onClose={onClose}
-        type={NoteType.Ayah}
-        typeMetadata={{
-          identifier: verseKey,
-        }}
-      />
+      <NoteModal isOpen={isModalOpen} onClose={onClose} type={NoteType.Ayah} typeId={verseKey} />
       <PopoverMenu.Item icon={<NoteIcon />} onClick={onItemClicked}>
-        {t('notes.add-notes')}
+        {t('notes.notes')}
       </PopoverMenu.Item>
     </MilkdownProvider>
   );

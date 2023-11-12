@@ -8,6 +8,7 @@
 
 .editor {
     min-height: calc(var(--spacing-mega) * 10);
+    padding-inline: var(--spacing-small);
     em,
     strong {
         all: revert;

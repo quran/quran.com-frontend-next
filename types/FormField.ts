@@ -11,6 +11,7 @@ type FormField = {
   field: string;
   rules?: FieldRule[];
   type: FormFieldType;
+  defaultValue?: unknown;
 };
 
 export default FormField;

@@ -4,9 +4,7 @@ import styles from './LazyLoadingSpinner.module.scss';
 
 import Spinner from '@/dls/Spinner/Spinner';
 
-type Props = {};
-
-const LazyLoadingSpinner = (props: Props) => {
+const LazyLoadingSpinner = () => {
   return (
     <div className={styles.loadingContainer}>
       <Spinner />

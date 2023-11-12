@@ -15,6 +15,7 @@ type FormBuilderProps<T> = {
   isSubmitting?: boolean;
   actionText: string;
   actionProps?: ButtonProps;
+  extraElement?: React.ReactNode;
 };
 
 const FormBuilder = <T,>({
@@ -23,6 +24,7 @@ const FormBuilder = <T,>({
   actionText,
   actionProps = {},
   isSubmitting,
+  extraElement,
 }: FormBuilderProps<T>) => {
   const { handleSubmit, control, setError } = useForm({ mode: 'onBlur' });
 
@@ -70,6 +72,7 @@ const FormBuilder = <T,>({
           />
         );
       })}
+      {extraElement}
       <Button
         {...actionProps}
         htmlType="submit"

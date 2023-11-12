@@ -1,0 +1,6 @@
+{
+  "delete-note": "Delete note",
+  "save-success": "Note {{title}} saved successfully",
+  "update-success": "Note {{title}} updated successfully",
+  "delete-success": "Note {{title}} deleted successfully"
+}

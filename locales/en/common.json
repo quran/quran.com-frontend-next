@@ -3,7 +3,7 @@
   "allow": "Allow",
   "and": "and",
   "notes": {
-    "add-notes": "Add Notes",
+    "notes": "Notes",
     "save": "Save"
   },
   "announcements": {
@@ -178,7 +178,8 @@
     "code": "Verification Code",
     "email": "Email",
     "firstName": "First Name",
-    "lastName": "Last Name"
+    "lastName": "Last Name",
+    "title": "Title"
   },
   "from": "From",
   "fundraising-sticky-banner": {

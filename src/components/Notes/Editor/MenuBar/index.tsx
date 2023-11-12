@@ -1,3 +1,4 @@
+/* eslint-disable i18next/no-literal-string */
 /* eslint-disable react/no-array-index-key */
 import { Fragment } from 'react';
 
@@ -11,6 +12,7 @@ import {
   wrapInHeadingCommand,
   insertHrCommand,
   turnIntoTextCommand,
+  insertHardbreakCommand,
 } from '@milkdown/preset-commonmark';
 
 import styles from './MarkdownMenu.module.scss';
@@ -101,6 +103,12 @@ const MenuBar: React.FC<Props> = ({ call }) => {
       icon: <>HR</>,
       title: 'HR',
       action: () => call(insertHrCommand.key),
+    },
+    {
+      itemKey: 'br',
+      icon: <>BR</>,
+      title: 'BR',
+      action: () => call(insertHardbreakCommand.key),
     },
   ];
   return (
