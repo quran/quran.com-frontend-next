@@ -3,6 +3,8 @@ import { configureRefreshFetch } from 'refresh-fetch';
 
 import { getTimezone } from '../datetime';
 
+import BookmarkByCollectionIdQueryParams from './types/BookmarkByCollectionIdQueryParams';
+
 import {
   FilterActivityDaysParams,
   ActivityDay,
@@ -34,7 +36,6 @@ import {
   makeBookmarkCollectionsUrl,
   CollectionsQueryParams,
   makeUpdateCollectionUrl,
-  BookmarkByCollectionIdQueryParams,
   makeDeleteCollectionUrl,
   makeAddCollectionBookmarkUrl,
   makeDeleteCollectionBookmarkByIdUrl,
@@ -48,6 +49,8 @@ import {
   makePostReflectionViewsUrl,
   makeUserFeatureFlagsUrl,
   makeUserConsentsUrl,
+  makeAddNoteUrl,
+  makeDeleteOrUpdateNoteUrl,
 } from '@/utils/auth/apiPaths';
 import { fetcher } from 'src/api';
 import CompleteAnnouncementRequest from 'types/auth/CompleteAnnouncementRequest';
@@ -314,6 +317,37 @@ export const getBookmarksByCollectionId = async (
 export const addCollection = async (collectionName: string) => {
   return postRequest(makeAddCollectionUrl(), { name: collectionName });
 };
+
+export const addNote = async ({ type, typeId, typeMetadata, title, body }) => {
+  let attachedEntityPayload = {};
+  if (type || typeId) {
+    attachedEntityPayload = {
+      attachedEntity: {
+        entityType: type,
+        entityId: typeId,
+        ...(typeMetadata && {
+          entityMetadata: typeMetadata,
+        }),
+      },
+    };
+  }
+
+  const payload = {
+    title,
+    body,
+    ...attachedEntityPayload,
+  };
+
+  return postRequest(makeAddNoteUrl(), payload);
+};
+
+export const updateNote = async (id: string, title: string, body: string) =>
+  patchRequest(makeDeleteOrUpdateNoteUrl(id), {
+    title,
+    body,
+  });
+
+export const deleteNote = async (id: string) => deleteRequest(makeDeleteOrUpdateNoteUrl(id));
 
 export const requestVerificationCode = async (emailToVerify) => {
   return postRequest(makeVerificationCodeUrl(), { email: emailToVerify });

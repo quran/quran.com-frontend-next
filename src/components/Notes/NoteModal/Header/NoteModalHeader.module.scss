@@ -1,0 +1,8 @@
+@use "src/styles/breakpoints";
+
+.container {
+    padding: var(--spacing-large) 0;
+    @include breakpoints.smallerThanTablet {
+        padding: var(--spacing-medium) 0;
+    }
+}

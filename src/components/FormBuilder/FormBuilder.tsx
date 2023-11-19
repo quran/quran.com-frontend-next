@@ -3,10 +3,13 @@ import { Controller, useForm } from 'react-hook-form';
 
 import Button, { ButtonProps } from '../dls/Button/Button';
 import Input from '../dls/Forms/Input';
+import TextArea from '../dls/Forms/TextArea';
 
 import buildReactHookFormRules from './buildReactHookFormRules';
 import styles from './FormBuilder.module.scss';
 import { FormBuilderFormField } from './FormBuilderTypes';
+
+import { FormFieldType } from '@/types/FormField';
 
 export type SubmissionResult<T> = Promise<void | { errors: { [key in keyof T]: string } }>;
 type FormBuilderProps<T> = {
@@ -52,17 +55,29 @@ const FormBuilder = <T,>({
             render={({ field, fieldState: { error } }) => {
               return (
                 <div className={styles.inputContainer}>
-                  <Input
-                    htmlType={formField.type}
-                    key={formField.field}
-                    value={field.value}
-                    onChange={(val) => field.onChange(val)}
-                    id={formField.field}
-                    name={formField.field}
-                    containerClassName={styles.input}
-                    fixedWidth={false}
-                    placeholder={formField.label}
-                  />
+                  {formField.type === FormFieldType.TextArea ? (
+                    <TextArea
+                      key={formField.field}
+                      value={field.value}
+                      onChange={(val) => field.onChange(val)}
+                      id={formField.field}
+                      name={formField.field}
+                      containerClassName={styles.input}
+                      placeholder={formField.label}
+                    />
+                  ) : (
+                    <Input
+                      htmlType={formField.type}
+                      key={formField.field}
+                      value={field.value}
+                      onChange={(val) => field.onChange(val)}
+                      id={formField.field}
+                      name={formField.field}
+                      containerClassName={styles.input}
+                      fixedWidth={false}
+                      placeholder={formField.label}
+                    />
+                  )}
                   {error && <span className={styles.errorText}>{error.message}</span>}
                 </div>
               );
