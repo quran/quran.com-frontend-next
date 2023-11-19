@@ -35,6 +35,7 @@ const buildFormBuilderFormField = (formField: FormField, t: Translate): FormBuil
         field: capitalize(formField.field),
       }),
     })),
+    ...(formField.defaultValue && { defaultValue: formField.defaultValue }),
   };
 };
 
