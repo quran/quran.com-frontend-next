@@ -54,6 +54,11 @@ export const makeCollectionsUrl = (queryParams: CollectionsQueryParams): string 
 
 export const makeAddCollectionUrl = () => makeUrl('collections');
 
+export const makeGetNotesByVerseUrl = (verseKey: string) => makeUrl(`notes/by-verse/${verseKey}`);
+
+export const makeCountNotesWithinRangeUrl = (startVerseKey: string, endVerseKey: string) =>
+  makeUrl(`notes/count-within-range`, { from: startVerseKey, to: endVerseKey });
+
 export const makeAddNoteUrl = () => makeUrl('notes');
 
 export const makeGetNoteByAttachedEntityUrl = (queryParams: GetNoteByAttachedEntityParams) =>
