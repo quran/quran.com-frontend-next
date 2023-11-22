@@ -1,6 +1,19 @@
+@use "src/styles/breakpoints";
+
 .buttonContainer {
     display: flex;
     align-items: center;
     flex-direction: column;
     padding-block: var(--spacing-small);
+}
+
+.headerContainer {
+    display: flex;
+    gap: var(--spacing-small);
+    align-items: center;
+
+    padding-block: var(--spacing-large);
+    @include breakpoints.smallerThanTablet {
+        padding-block: var(--spacing-medium);
+    }
 }

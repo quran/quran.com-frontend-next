@@ -14,9 +14,9 @@ const DeleteNoteButton: React.FC<Props> = ({ onDeleteClicked, isButtonDisabled }
   const { t } = useTranslation('notes');
   return (
     <Button
-      type={ButtonType.Secondary}
+      type={ButtonType.Error}
       size={ButtonSize.Small}
-      suffix={<CloseIcon />}
+      prefix={<CloseIcon />}
       onClick={onDeleteClicked}
       isDisabled={isButtonDisabled}
       shouldFlipOnRTL={false}

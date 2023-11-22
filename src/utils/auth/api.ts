@@ -51,6 +51,8 @@ import {
   makeUserConsentsUrl,
   makeAddNoteUrl,
   makeDeleteOrUpdateNoteUrl,
+  makeGetNotesByVerseUrl,
+  makeCountNotesWithinRangeUrl,
 } from '@/utils/auth/apiPaths';
 import { fetcher } from 'src/api';
 import CompleteAnnouncementRequest from 'types/auth/CompleteAnnouncementRequest';
@@ -318,24 +320,33 @@ export const addCollection = async (collectionName: string) => {
   return postRequest(makeAddCollectionUrl(), { name: collectionName });
 };
 
-export const addNote = async ({ type, typeId, typeMetadata, title, body }) => {
-  let attachedEntityPayload = {};
-  if (type || typeId) {
-    attachedEntityPayload = {
-      attachedEntity: {
-        entityType: type,
-        entityId: typeId,
-        ...(typeMetadata && {
-          entityMetadata: typeMetadata,
-        }),
-      },
-    };
-  }
+export const getNotesByVerseKey = async (verseKey: string) => {
+  return privateFetcher(makeGetNotesByVerseUrl(verseKey));
+};
+
+export const countNotesWithinRange = async (from: string, to: string) => {
+  return privateFetcher(makeCountNotesWithinRangeUrl(from, to));
+};
+
+export const addNote = async ({ title, body, ranges }) => {
+  // let attachedEntityPayload = {};
+  // // if (type || typeId) {
+  // //   attachedEntityPayload = {
+  // //     attachedEntity: {
+  // //       entityType: type,
+  // //       entityId: typeId,
+  // //       ...(typeMetadata && {
+  // //         entityMetadata: typeMetadata,
+  // //       }),
+  // //     },
+  // //   };
+  // // }
 
   const payload = {
     title,
     body,
-    ...attachedEntityPayload,
+    ranges,
+    // ...attachedEntityPayload,
   };
 
   return postRequest(makeAddNoteUrl(), payload);
