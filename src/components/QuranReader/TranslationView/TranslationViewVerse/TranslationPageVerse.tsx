@@ -13,6 +13,7 @@ import { VersesResponse } from '@/types/ApiResponses';
 import Translation from '@/types/Translation';
 import Verse from '@/types/Verse';
 import { countNotesWithinRange, getPageBookmarks } from '@/utils/auth/api';
+import { isLoggedIn } from '@/utils/auth/login';
 import { toLocalizedNumber } from '@/utils/locale';
 
 interface TranslationPageVerse {
@@ -58,7 +59,7 @@ const TranslationPageVerse: React.FC<TranslationPageVerse> = ({
   });
 
   const { data: notesCount } = useSWR(
-    notesRange ? `countNotes/${notesRange.from}-${notesRange.to}` : null,
+    notesRange && isLoggedIn() ? `countNotes/${notesRange.from}-${notesRange.to}` : null,
     async () => {
       return countNotesWithinRange(notesRange.from, notesRange.to);
     },
