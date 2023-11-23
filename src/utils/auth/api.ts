@@ -4,6 +4,7 @@ import { configureRefreshFetch } from 'refresh-fetch';
 import { getTimezone } from '../datetime';
 
 import BookmarkByCollectionIdQueryParams from './types/BookmarkByCollectionIdQueryParams';
+import GetAllNotesQueryParams from './types/GetAllNotesQueryParams';
 
 import {
   FilterActivityDaysParams,
@@ -49,7 +50,7 @@ import {
   makePostReflectionViewsUrl,
   makeUserFeatureFlagsUrl,
   makeUserConsentsUrl,
-  makeAddNoteUrl,
+  makeNotesUrl,
   makeDeleteOrUpdateNoteUrl,
   makeGetNotesByVerseUrl,
   makeCountNotesWithinRangeUrl,
@@ -320,6 +321,10 @@ export const addCollection = async (collectionName: string) => {
   return postRequest(makeAddCollectionUrl(), { name: collectionName });
 };
 
+export const getAllNotes = async (params: GetAllNotesQueryParams) => {
+  return privateFetcher(makeNotesUrl(params));
+};
+
 export const getNotesByVerseKey = async (verseKey: string) => {
   return privateFetcher(makeGetNotesByVerseUrl(verseKey));
 };
@@ -349,7 +354,7 @@ export const addNote = async ({ title, body, ranges }) => {
     // ...attachedEntityPayload,
   };
 
-  return postRequest(makeAddNoteUrl(), payload);
+  return postRequest(makeNotesUrl(), payload);
 };
 
 export const updateNote = async (id: string, title: string, body: string) =>

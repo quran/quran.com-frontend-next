@@ -17,3 +17,33 @@
         padding-block: var(--spacing-medium);
     }
 }
+
+.titleInput {
+    & > div {
+        border: none;
+    }
+
+    input {
+        font-size: var(--font-size-jumbo);
+        font-weight: var(--font-weight-bold);
+    }
+}
+
+.bodyInput {
+    & > div {
+        border: none;
+        margin-block-start: var(--spacing-large);
+    }
+
+    textarea {
+        font-size: var(--font-size-large);
+        font-weight: var(--font-weight-medium);
+    }
+}
+
+.actionContainer {
+    display: flex;
+    margin-block-start: var(--spacing-small);
+    justify-content: space-between;
+    align-items: center;
+}

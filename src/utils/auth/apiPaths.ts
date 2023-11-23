@@ -1,6 +1,7 @@
 import stringify from '../qs-stringify';
 
 import BookmarkByCollectionIdQueryParams from './types/BookmarkByCollectionIdQueryParams';
+import GetAllNotesQueryParams from './types/GetAllNotesQueryParams';
 import GetNoteByAttachedEntityParams from './types/GetNoteByAttachedEntityParams';
 
 import { ActivityDayType, FilterActivityDaysParams } from '@/types/auth/ActivityDay';
@@ -56,10 +57,12 @@ export const makeAddCollectionUrl = () => makeUrl('collections');
 
 export const makeGetNotesByVerseUrl = (verseKey: string) => makeUrl(`notes/by-verse/${verseKey}`);
 
+export const makeGetNoteByIdUrl = (id: string) => makeUrl(`notes/${id}`);
+
 export const makeCountNotesWithinRangeUrl = (startVerseKey: string, endVerseKey: string) =>
   makeUrl(`notes/count-within-range`, { from: startVerseKey, to: endVerseKey });
 
-export const makeAddNoteUrl = () => makeUrl('notes');
+export const makeNotesUrl = (params?: GetAllNotesQueryParams) => makeUrl('notes', params as any);
 
 export const makeGetNoteByAttachedEntityUrl = (queryParams: GetNoteByAttachedEntityParams) =>
   makeUrl(`notes`, queryParams);
