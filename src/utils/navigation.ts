@@ -278,6 +278,8 @@ export const getReadingGoalNavigationUrl = () => '/reading-goal';
 
 export const getReadingGoalProgressNavigationUrl = () => '/reading-goal/progress';
 
+export const getNotesNavigationUrl = () => '/notes';
+
 /**
  * Update the browser history with the new url.
  * without actually navigating into that url.

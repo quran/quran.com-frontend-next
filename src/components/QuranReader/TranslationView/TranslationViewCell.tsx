@@ -73,7 +73,7 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
     <div ref={selectedItemRef}>
       <div
         className={classNames(styles.cellContainer, {
-          [styles.highlightedContainer]: isHighlighted || hasNotes,
+          [styles.highlightedContainer]: isHighlighted,
         })}
       >
         <div className={styles.actionContainer}>

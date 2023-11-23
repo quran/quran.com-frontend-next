@@ -1,5 +1,7 @@
 import { BaseResponse } from '../ApiResponses';
 
+import { Pagination } from './GetBookmarksByCollectionId';
+
 export type NoteResponse = {
   id: string;
   title: string;
@@ -9,5 +11,10 @@ export type NoteResponse = {
 };
 
 type NotesByTypeAndTypeIdResponse = BaseResponse & NoteResponse[];
+
+export type GetAllNotesResponse = {
+  data: NoteResponse[];
+  pagination: Pagination;
+};
 
 export default NotesByTypeAndTypeIdResponse;

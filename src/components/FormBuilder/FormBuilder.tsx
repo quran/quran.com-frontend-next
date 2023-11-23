@@ -16,8 +16,9 @@ type FormBuilderProps<T> = {
   formFields: FormBuilderFormField[];
   onSubmit: (data: T) => void | SubmissionResult<T>;
   isSubmitting?: boolean;
-  actionText: string;
+  actionText?: string;
   actionProps?: ButtonProps;
+  renderAction?: (props: ButtonProps) => React.ReactNode;
 };
 
 const FormBuilder = <T,>({
@@ -26,6 +27,7 @@ const FormBuilder = <T,>({
   actionText,
   actionProps = {},
   isSubmitting,
+  renderAction,
 }: FormBuilderProps<T>) => {
   const { handleSubmit, control, setError } = useForm({ mode: 'onBlur' });
 
@@ -54,7 +56,7 @@ const FormBuilder = <T,>({
             name={formField.field}
             render={({ field, fieldState: { error } }) => {
               return (
-                <div className={styles.inputContainer}>
+                <div className={classNames(styles.inputContainer, formField.containerClassName)}>
                   {formField.type === FormFieldType.TextArea ? (
                     <TextArea
                       key={formField.field}
@@ -85,17 +87,27 @@ const FormBuilder = <T,>({
           />
         );
       })}
-      <Button
-        {...actionProps}
-        htmlType="submit"
-        isLoading={isSubmitting}
-        onClick={(e) => {
-          e.stopPropagation();
-        }}
-        className={classNames(styles.submitButton, actionProps.className)}
-      >
-        {actionText}
-      </Button>
+      {renderAction ? (
+        renderAction({
+          htmlType: 'submit',
+          isLoading: isSubmitting,
+          onClick: (e) => {
+            e.stopPropagation();
+          },
+        })
+      ) : (
+        <Button
+          {...actionProps}
+          htmlType="submit"
+          isLoading={isSubmitting}
+          onClick={(e) => {
+            e.stopPropagation();
+          }}
+          className={classNames(styles.submitButton, actionProps.className)}
+        >
+          {actionText}
+        </Button>
+      )}
     </form>
   );
 };

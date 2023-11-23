@@ -6,4 +6,5 @@ export type FormBuilderFormField = Pick<FormField, 'field' | 'type'> & {
   defaultValue?: any;
   label?: string;
   rules?: FormBuilderFieldRule[];
+  containerClassName?: string;
 };
