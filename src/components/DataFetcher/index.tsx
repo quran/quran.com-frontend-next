@@ -14,6 +14,7 @@ interface Props {
   loading?: () => JSX.Element;
   fetcher?: (queryKey: string) => Promise<BaseResponse>;
   showSpinnerOnRevalidate?: boolean;
+  onFetchSuccess?: (data: BaseResponse) => void;
 }
 
 /**
@@ -35,12 +36,16 @@ const DataFetcher: React.FC<Props> = ({
   loading = () => <Spinner />,
   fetcher: dataFetcher = fetcher,
   showSpinnerOnRevalidate = true,
+  onFetchSuccess,
 }: Props): JSX.Element => {
   const { data, error, isValidating, mutate } = useSWRImmutable(
     queryKey,
     () =>
       dataFetcher(queryKey)
-        .then((res) => Promise.resolve(res))
+        .then((res) => {
+          onFetchSuccess?.(res);
+          return Promise.resolve(res);
+        })
         .catch((err) => Promise.reject(err)),
     {
       fallbackData: initialData,

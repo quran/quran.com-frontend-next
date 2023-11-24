@@ -1,6 +1,6 @@
 /* eslint-disable max-lines */
 /* eslint-disable react-func/max-lines-per-function */
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import { useSWRConfig } from 'swr';
@@ -50,9 +50,14 @@ type NoteFormData = {
 };
 
 const TITLE_MAXIMUM_LENGTH = 150;
+const BODY_MIN_LENGTH = 6;
 
 const TITLE_VALIDATION_PARAMS = {
   value: TITLE_MAXIMUM_LENGTH,
+};
+
+const BODY_MIN_VALIDATION_PARAMS = {
+  value: BODY_MIN_LENGTH,
 };
 
 const NoteModal: React.FC<NoteModalProps> = ({
@@ -66,6 +71,8 @@ const NoteModal: React.FC<NoteModalProps> = ({
 }) => {
   const { t } = useTranslation('common');
   const contentModalRef = useRef<ContentModalHandles>();
+  // we want to keep the note body in state so that we can pass it to the export to QR button in-case the user decides to export before clicking save
+  const [noteBody, setNoteBody] = useState<string>(null);
   const toast = useToast();
   const { mutate, cache } = useSWRConfig();
   const { mutate: deleteNote, isMutating: isDeletingNote } = useMutation<unknown, string>(
@@ -212,9 +219,12 @@ const NoteModal: React.FC<NoteModalProps> = ({
         queryKey={queryKey}
         fetcher={privateFetcher}
         showSpinnerOnRevalidate={false}
+        onFetchSuccess={(response: (Note | Note[]) & BaseResponse) => {
+          const note = noteId ? (response as Note) : (response[0] as Note);
+          setNoteBody(note?.body);
+        }}
         render={(response: (Note | Note[]) & BaseResponse) => {
           const note = noteId ? (response as Note) : (response[0] as Note);
-
           return (
             <FormBuilder
               formFields={[
@@ -250,11 +260,30 @@ const NoteModal: React.FC<NoteModalProps> = ({
                 {
                   field: 'body',
                   defaultValue: note?.body || '',
+                  onChange: (val: string) => {
+                    setNoteBody(val);
+                  },
                   rules: [
                     {
                       type: RuleType.Required,
                       errorId: ErrorMessageId.RequiredField,
                       value: true,
+                    },
+                    {
+                      ...BODY_MIN_VALIDATION_PARAMS,
+                      type: RuleType.MinimumLength,
+                      errorId: ErrorMessageId.MinimumLength,
+                      errorExtraParams: {
+                        ...BODY_MIN_VALIDATION_PARAMS,
+                      },
+                      errorMessage: buildTranslatedErrorMessageByErrorId(
+                        ErrorMessageId.MinimumLength,
+                        'body',
+                        t,
+                        {
+                          ...BODY_MIN_VALIDATION_PARAMS,
+                        },
+                      ),
                     },
                   ],
                   type: FormFieldType.TextArea,
@@ -274,7 +303,7 @@ const NoteModal: React.FC<NoteModalProps> = ({
                         isDeletingNote={isDeletingNote}
                         deleteNote={deleteNote}
                       />
-                      <ExportToQRButton />
+                      <ExportToQRButton ranges={note.ranges} body={noteBody} />
                     </div>
                   )}
                 </div>

@@ -55,30 +55,26 @@ const FormBuilder = <T,>({
             rules={buildReactHookFormRules(formField)}
             name={formField.field}
             render={({ field, fieldState: { error } }) => {
+              const commonProps = {
+                key: formField.field,
+                value: field.value,
+                id: formField.field,
+                name: formField.field,
+                containerClassName: styles.input,
+                placeholder: formField.label,
+                onChange: (val) => {
+                  field.onChange(val);
+                  if (formField?.onChange) {
+                    formField.onChange(val);
+                  }
+                },
+              };
               return (
                 <div className={classNames(styles.inputContainer, formField.containerClassName)}>
                   {formField.type === FormFieldType.TextArea ? (
-                    <TextArea
-                      key={formField.field}
-                      value={field.value}
-                      onChange={(val) => field.onChange(val)}
-                      id={formField.field}
-                      name={formField.field}
-                      containerClassName={styles.input}
-                      placeholder={formField.label}
-                    />
+                    <TextArea {...commonProps} />
                   ) : (
-                    <Input
-                      htmlType={formField.type}
-                      key={formField.field}
-                      value={field.value}
-                      onChange={(val) => field.onChange(val)}
-                      id={formField.field}
-                      name={formField.field}
-                      containerClassName={styles.input}
-                      fixedWidth={false}
-                      placeholder={formField.label}
-                    />
+                    <Input {...commonProps} htmlType={formField.type} fixedWidth={false} />
                   )}
                   {error && <span className={styles.errorText}>{error.message}</span>}
                 </div>
