@@ -33,19 +33,31 @@ import { makeGetNoteByIdUrl, makeGetNotesByVerseUrl } from '@/utils/auth/apiPath
 import { logButtonClick } from '@/utils/eventLogger';
 import { isVerseKeyWithinRanges } from '@/utils/verse';
 
-type Props = {
+interface NoteModalProps {
   isOpen: boolean;
   onClose: () => void;
   verseKey?: string;
   noteId?: string;
-};
+
+  onNoteAdded?: (data: NoteResponse) => void;
+  onNoteUpdated?: (data: NoteResponse) => void;
+  onNoteDeleted?: () => void;
+}
 
 type NoteFormData = {
   title: string;
   body: string;
 };
 
-const NoteModal: React.FC<Props> = ({ onClose, isOpen, verseKey, noteId }) => {
+const NoteModal: React.FC<NoteModalProps> = ({
+  onClose,
+  isOpen,
+  verseKey,
+  noteId,
+  onNoteAdded,
+  onNoteDeleted,
+  onNoteUpdated,
+}) => {
   const { t } = useTranslation('common');
   const contentModalRef = useRef<ContentModalHandles>();
   const toast = useToast();
@@ -59,6 +71,7 @@ const NoteModal: React.FC<Props> = ({ onClose, isOpen, verseKey, noteId }) => {
         toast(t('notes:delete-success'), {
           status: ToastStatus.Success,
         });
+        onNoteDeleted?.();
         onClose();
         mutateCache([]);
         clearCountCache();
@@ -71,17 +84,18 @@ const NoteModal: React.FC<Props> = ({ onClose, isOpen, verseKey, noteId }) => {
     },
   );
   const { mutate: updateNote, isMutating: isUpdatingNote } = useMutation<
-    unknown,
+    NoteResponse,
     { id: string; title: string; body: string }
   >(
     async ({ id, title, body }) => {
-      return baseUpdateNote(id, title, body);
+      return baseUpdateNote(id, title, body) as Promise<NoteResponse>;
     },
     {
       onSuccess: (data) => {
         toast(t('notes:update-success'), {
           status: ToastStatus.Success,
         });
+        onNoteUpdated?.(data);
         mutateCache([data]);
       },
       onError: () => {
@@ -92,7 +106,7 @@ const NoteModal: React.FC<Props> = ({ onClose, isOpen, verseKey, noteId }) => {
     },
   );
   const { mutate: addNote, isMutating: isAddingNote } = useMutation<
-    unknown,
+    NoteResponse,
     { title: string; body: string }
   >(
     async ({ title, body }) => {
@@ -102,13 +116,14 @@ const NoteModal: React.FC<Props> = ({ onClose, isOpen, verseKey, noteId }) => {
         ...(verseKey && {
           ranges: [`${verseKey}-${verseKey}`],
         }),
-      });
+      }) as Promise<NoteResponse>;
     },
     {
       onSuccess: (data) => {
         toast(t('notes:save-success'), {
           status: ToastStatus.Success,
         });
+        onNoteAdded?.(data);
         mutateCache([data]);
         clearCountCache();
       },
@@ -142,6 +157,11 @@ const NoteModal: React.FC<Props> = ({ onClose, isOpen, verseKey, noteId }) => {
         // check if the note is within the range
         const rangeString = key.replace('countNotes/', '');
         return isVerseKeyWithinRanges(verseKey, rangeString);
+      }
+
+      if (noteId) {
+        // if we're on the notes page, just invalidate all keys
+        return true;
       }
 
       // if we're not on the quran reader page, we can just invalidate all the keys

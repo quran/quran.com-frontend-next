@@ -10,7 +10,7 @@ import styles from './index.module.scss';
 
 import Button, { ButtonVariant } from '@/components/dls/Button/Button';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
-import NoteModal from '@/components/Notes/NoteModal';
+import NotesList from '@/components/Notes/NotesPage/NotesList';
 import NotesSorter from '@/components/Notes/NotesPage/NotesSorter/NotesSorter';
 import Spinner, { SpinnerSize } from '@/dls/Spinner/Spinner';
 import useRequireAuth from '@/hooks/auth/useRequireAuth';
@@ -31,12 +31,12 @@ const NotesPage = () => {
   useRequireAuth();
 
   const [sortBy, setSortBy] = useState(NotesSortOption.Newest);
-  const [selectedNoteId, setSelectedNoteId] = useState(null); // for the note modal
+
   const { t, lang } = useTranslation();
 
   const sortOptions = [
-    { id: NotesSortOption.Newest, label: t('newest') },
-    { id: NotesSortOption.Oldest, label: t('oldest') },
+    { id: NotesSortOption.Newest, label: t('common:newest') },
+    { id: NotesSortOption.Oldest, label: t('common:oldest') },
   ];
 
   const onSortByChange = (newSortByVal) => {
@@ -57,7 +57,7 @@ const NotesPage = () => {
    *
    * @returns {string} swr key
    */
-  const getKey = (pageIndex, previousPageData) => {
+  const getKey = (pageIndex: number, previousPageData: GetAllNotesResponse) => {
     if (!isLoggedIn()) return null;
     if (previousPageData && !previousPageData.data) return null;
     if (pageIndex === 0) {
@@ -66,16 +66,31 @@ const NotesPage = () => {
       });
     }
 
-    const cursor = previousPageData.pagination?.endCursor;
+    const { endCursor, hasNextPage } = previousPageData.pagination;
+
+    if (!endCursor || !hasNextPage) return null;
+
     return makeNotesUrl({
       sortBy,
-      cursor,
+      cursor: endCursor,
     });
   };
 
-  const { data, size, setSize, isValidating, error } = useSWRInfinite<GetAllNotesResponse>(
+  const { data, size, setSize, isValidating, error, mutate } = useSWRInfinite<GetAllNotesResponse>(
     getKey,
-    privateFetcher,
+    (key) => {
+      // append key to the response
+      return privateFetcher(key).then((response) => {
+        return {
+          ...(response as any),
+          key,
+        };
+      });
+    },
+    {
+      revalidateOnFocus: false,
+      revalidateOnReconnect: false,
+    },
   );
 
   if (error) {
@@ -89,17 +104,6 @@ const NotesPage = () => {
       </div>
     );
   }
-
-  const lastPageData = data[data.length - 1];
-  const { hasNextPage } = lastPageData.pagination;
-
-  const notes = data.map((response) => response.data).flat();
-
-  const loadMore = () => {
-    setSize(size + 1);
-  };
-
-  const isLoadingMoreData = notes?.length > 0 && size > 1 && isValidating;
 
   const navigationUrl = getNotesNavigationUrl();
 
@@ -132,36 +136,13 @@ const NotesPage = () => {
                 </div>
               </div>
 
-              <div className={styles.notesListContainer}>
-                {selectedNoteId && (
-                  <NoteModal
-                    isOpen
-                    onClose={() => setSelectedNoteId(null)}
-                    noteId={selectedNoteId}
-                  />
-                )}
-
-                {(notes || []).map((note) => (
-                  // eslint-disable-next-line jsx-a11y/click-events-have-key-events
-                  <div
-                    className={styles.note}
-                    key={note.id}
-                    role="button"
-                    tabIndex={0}
-                    onClick={() => setSelectedNoteId(note.id)}
-                  >
-                    <h3>{note.title}</h3>
-                    <p>{note.body}</p>
-                  </div>
-                ))}
-              </div>
-
-              {isLoadingMoreData && <Spinner size={SpinnerSize.Large} />}
-              {hasNextPage && (
-                <div className={styles.loadMoreContainer} role="button">
-                  <Button onClick={loadMore}>{t('collection:load-more')}</Button>
-                </div>
-              )}
+              <NotesList
+                data={data}
+                isValidating={isValidating}
+                size={size}
+                setSize={setSize}
+                mutateCache={mutate}
+              />
             </div>
           </div>
         </div>
