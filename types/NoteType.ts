@@ -1,5 +1,3 @@
-enum NoteType {
-  AyahsRange = 'ayahsRange',
-}
+enum NoteType {}
 
 export default NoteType;

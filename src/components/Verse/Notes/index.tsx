@@ -33,6 +33,7 @@ const VerseNotes = ({
   const onItemClicked = () => {
     logButtonClick('verse_actions_menu_note', {
       isTranslationView,
+      trigger,
     });
     setIsModalOpen(true);
   };

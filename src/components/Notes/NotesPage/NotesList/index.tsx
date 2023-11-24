@@ -7,7 +7,7 @@ import NoteModal from '../../NoteModal';
 import styles from './NotesList.module.scss';
 
 import Spinner, { SpinnerSize } from '@/dls/Spinner/Spinner';
-import { GetAllNotesResponse } from '@/types/auth/NotesByTypeAndTypeIdResponse';
+import { GetAllNotesResponse } from '@/types/auth/Note';
 
 interface NotesListProps {
   data: GetAllNotesResponse[];
