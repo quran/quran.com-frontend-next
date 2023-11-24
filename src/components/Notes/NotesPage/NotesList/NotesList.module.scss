@@ -4,22 +4,3 @@
   flex-direction: column;
   gap: var(--spacing-large);
 }
-
-.note {
-  padding: var(--spacing-large) var(--spacing-medium);
-  cursor: pointer;
-
-  h3 {
-    font-size: var(--font-size-large);
-    font-weight: var(--font-weight-semibold);
-  }
-
-  p {
-    margin-block-start: var(--spacing-small);
-    font-size: var(--font-size-medium);
-  }
-
-  &:hover {
-    background-color: var(--color-background-alternative-faded);
-  }
-}

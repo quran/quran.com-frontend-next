@@ -32,6 +32,7 @@ const buildFormBuilderFormField = (formField: FormField, t: Translate): FormBuil
       value: rule.value,
       errorMessage: t(`validation.${rule.errorId}`, {
         field: capitalize(formField.field),
+        ...rule.errorExtraParams,
       }),
     })),
     ...(formField.defaultValue && { defaultValue: formField.defaultValue }),
