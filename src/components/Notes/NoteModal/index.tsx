@@ -5,18 +5,19 @@ import { useRef } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import { useSWRConfig } from 'swr';
 
+import DeleteButton from './Buttons/DeleteButton';
+import ExportToQRButton from './Buttons/ExportToQRButton';
 import styles from './NoteModal.module.scss';
 
 import DataFetcher from '@/components/DataFetcher';
 import buildFormBuilderFormField from '@/components/FormBuilder/buildFormBuilderFormField';
+import buildTranslatedErrorMessageByErrorId from '@/components/FormBuilder/buildTranslatedErrorMessageByErrorId';
 import FormBuilder from '@/components/FormBuilder/FormBuilder';
-import Button, { ButtonType, ButtonVariant } from '@/dls/Button/Button';
+import Button from '@/dls/Button/Button';
 import ContentModal, { ContentModalSize } from '@/dls/ContentModal/ContentModal';
 import ContentModalHandles from '@/dls/ContentModal/types/ContentModalHandles';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import useMutation from '@/hooks/useMutation';
-import ChatIcon from '@/icons/chat.svg';
-import TrashIcon from '@/icons/trash.svg';
 import { BaseResponse } from '@/types/ApiResponses';
 import { Note } from '@/types/auth/Note';
 import ErrorMessageId from '@/types/ErrorMessageId';
@@ -46,6 +47,12 @@ interface NoteModalProps {
 type NoteFormData = {
   title: string;
   body: string;
+};
+
+const TITLE_MAXIMUM_LENGTH = 150;
+
+const TITLE_VALIDATION_PARAMS = {
+  value: TITLE_MAXIMUM_LENGTH,
 };
 
 const NoteModal: React.FC<NoteModalProps> = ({
@@ -175,18 +182,13 @@ const NoteModal: React.FC<NoteModalProps> = ({
     }
   };
 
-  const onDeleteClicked = (id: string) => {
-    logButtonClick('delete_note');
-    deleteNote(id);
-  };
-
   const onSubmit = async ({ title, body }: NoteFormData, currentNote?: Note) => {
-    logButtonClick('save_note');
-
     // if the note exits, it's an update
     if (currentNote) {
       updateNote({ id: currentNote.id, title, body });
+      logButtonClick('update_note');
     } else {
+      logButtonClick('add_note');
       addNote({
         title,
         body,
@@ -204,7 +206,7 @@ const NoteModal: React.FC<NoteModalProps> = ({
       hasCloseButton
       onClose={onClose}
       onEscapeKeyDown={onClose}
-      size={ContentModalSize.SMALL}
+      size={ContentModalSize.MEDIUM}
     >
       <DataFetcher
         queryKey={queryKey}
@@ -224,6 +226,22 @@ const NoteModal: React.FC<NoteModalProps> = ({
                       type: RuleType.Required,
                       errorId: ErrorMessageId.RequiredField,
                       value: true,
+                    },
+                    {
+                      ...TITLE_VALIDATION_PARAMS,
+                      type: RuleType.MaximumLength,
+                      errorId: ErrorMessageId.MaximumLength,
+                      errorExtraParams: {
+                        ...TITLE_VALIDATION_PARAMS,
+                      },
+                      errorMessage: buildTranslatedErrorMessageByErrorId(
+                        ErrorMessageId.MaximumLength,
+                        'title',
+                        t,
+                        {
+                          ...TITLE_VALIDATION_PARAMS,
+                        },
+                      ),
                     },
                   ],
                   type: FormFieldType.Text,
@@ -251,24 +269,12 @@ const NoteModal: React.FC<NoteModalProps> = ({
 
                   {note && (
                     <div>
-                      <Button
-                        type={ButtonType.Error}
-                        variant={ButtonVariant.Ghost}
-                        onClick={() => onDeleteClicked(note.id)}
-                        isLoading={isDeletingNote}
-                        htmlType="button"
-                        tooltip={t('notes:delete-note')}
-                      >
-                        <TrashIcon />
-                      </Button>
-
-                      <Button
-                        variant={ButtonVariant.Ghost}
-                        tooltip={t('notes:share-as-reflection')}
-                        htmlType="button"
-                      >
-                        <ChatIcon />
-                      </Button>
+                      <DeleteButton
+                        noteId={note.id}
+                        isDeletingNote={isDeletingNote}
+                        deleteNote={deleteNote}
+                      />
+                      <ExportToQRButton />
                     </div>
                   )}
                 </div>

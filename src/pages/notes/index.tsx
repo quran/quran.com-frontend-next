@@ -23,7 +23,7 @@ import { privateFetcher } from '@/utils/auth/api';
 import { makeNotesUrl } from '@/utils/auth/apiPaths';
 import { isLoggedIn } from '@/utils/auth/login';
 import { getAllChaptersData } from '@/utils/chapter';
-import { logValueChange } from '@/utils/eventLogger';
+import { logButtonClick, logValueChange } from '@/utils/eventLogger';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl, getNotesNavigationUrl } from '@/utils/navigation';
 
@@ -42,6 +42,10 @@ const NotesPage = () => {
   const onSortByChange = (newSortByVal) => {
     logValueChange('notes_page_sort_by', sortBy, newSortByVal);
     setSortBy(newSortByVal);
+  };
+
+  const onBackButtonClicked = () => {
+    logButtonClick('notes_page_back_button');
   };
 
   /**
@@ -63,6 +67,7 @@ const NotesPage = () => {
     if (pageIndex === 0) {
       return makeNotesUrl({
         sortBy,
+        limit: 10,
       });
     }
 
@@ -73,6 +78,7 @@ const NotesPage = () => {
     return makeNotesUrl({
       sortBy,
       cursor: endCursor,
+      limit: 10,
     });
   };
 
@@ -86,10 +92,6 @@ const NotesPage = () => {
           key,
         };
       });
-    },
-    {
-      revalidateOnFocus: false,
-      revalidateOnReconnect: false,
     },
   );
 
@@ -122,7 +124,12 @@ const NotesPage = () => {
             <div className={styles.container}>
               <div className={styles.header}>
                 <div className={styles.titleContainer}>
-                  <Button href="/" variant={ButtonVariant.Ghost} hasSidePadding={false}>
+                  <Button
+                    onClick={onBackButtonClicked}
+                    href="/"
+                    variant={ButtonVariant.Ghost}
+                    hasSidePadding={false}
+                  >
                     <ArrowLeft />
                   </Button>
                   <h1>{t('common:notes.notes')}</h1>

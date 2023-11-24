@@ -356,7 +356,8 @@
   "validation": {
     "invalid-email": "{{field}} must be a valid email address",
     "invalid-field": "Please input a valid {{field}} value",
-    "required-field": "{{field}} is required"
+    "required-field": "{{field}} is required",
+    "maximum-length": "{{field}} cannot exceed {{value}} characters"
   },
   "verse": "Verse",
   "verse-bookmark-removed": "Verse bookmark removed!",

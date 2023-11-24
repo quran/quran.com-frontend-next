@@ -5,6 +5,7 @@ import { Virtuoso } from 'react-virtuoso';
 import NoteModal from '../../NoteModal';
 
 import styles from './NotesList.module.scss';
+import NotesListItem from './NotesListItem';
 
 import Spinner, { SpinnerSize } from '@/dls/Spinner/Spinner';
 import { GetAllNotesResponse } from '@/types/auth/Note';
@@ -33,19 +34,7 @@ const NotesList = ({ data, isValidating, size, setSize, mutateCache }: NotesList
   };
 
   const renderNote = (index: number, note: typeof notes[number]) => {
-    return (
-      // eslint-disable-next-line jsx-a11y/click-events-have-key-events
-      <div
-        className={styles.note}
-        key={note.id}
-        role="button"
-        tabIndex={0}
-        onClick={() => setSelectedNoteId(note.id)}
-      >
-        <h3>{note.title}</h3>
-        <p>{note.body}</p>
-      </div>
-    );
+    return <NotesListItem key={note.id} note={note} setSelectedNoteId={setSelectedNoteId} />;
   };
 
   const onNoteDeleted = () => {

@@ -1,7 +1,7 @@
 {
   "delete-note": "Delete note",
-  "save-success": "Note saved successfully",
-  "update-success": "Note updated successfully",
-  "delete-success": "Note deleted successfully",
+  "save-success": "Note has been saved successfully",
+  "update-success": "Note has been updated successfully",
+  "delete-success": "Note has been deleted successfully",
   "share-as-reflection": "Share on QuranReflect"
 }
