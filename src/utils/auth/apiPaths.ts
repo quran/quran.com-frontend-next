@@ -84,6 +84,8 @@ export const makeDeleteCollectionBookmarkByIdUrl = (collectionId: string, bookma
 export const makeDeleteCollectionBookmarkByKeyUrl = (collectionId: string) =>
   makeUrl(`collections/${collectionId}/bookmarks`);
 
+export const makePostReflectionToQrUrl = () => makeUrl('posts');
+
 export const makePostReflectionViewsUrl = (postId: string) => makeUrl(`posts/${postId}/views`);
 
 export const makeBookmarkCollectionsUrl = (

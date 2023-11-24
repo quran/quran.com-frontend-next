@@ -31,11 +31,18 @@ const buildReactHookFormRules = (formField: FormBuilderFormField) => {
   }
 
   const maximumLengthRule = formField.rules?.find((rule) => rule.type === RuleType.MaximumLength);
-  // if contains a rule with type `required`
   if (maximumLengthRule) {
     rules.maxLength = {
       message: maximumLengthRule.errorMessage,
       value: maximumLengthRule.value as number,
+    };
+  }
+
+  const minimumLength = formField.rules?.find((rule) => rule.type === RuleType.MinimumLength);
+  if (minimumLength) {
+    rules.minLength = {
+      message: minimumLength.errorMessage,
+      value: minimumLength.value as number,
     };
   }
 

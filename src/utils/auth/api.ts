@@ -55,6 +55,7 @@ import {
   makeDeleteOrUpdateNoteUrl,
   makeGetNotesByVerseUrl,
   makeCountNotesWithinRangeUrl,
+  makePostReflectionToQrUrl,
 } from '@/utils/auth/apiPaths';
 import { fetcher } from 'src/api';
 import CompleteAnnouncementRequest from 'types/auth/CompleteAnnouncementRequest';
@@ -337,6 +338,12 @@ export const countNotesWithinRange = async (from: string, to: string) => {
 export const addNote = async (payload: Pick<Note, 'title' | 'body' | 'ranges'>) => {
   return postRequest(makeNotesUrl(), payload);
 };
+
+export const postToQR = async (payload: {
+  body: string;
+  isPrivate: boolean;
+  ranges?: string[];
+}): Promise<{ success: boolean }> => postRequest(makePostReflectionToQrUrl(), payload);
 
 export const updateNote = async (id: string, title: string, body: string) =>
   patchRequest(makeDeleteOrUpdateNoteUrl(id), {

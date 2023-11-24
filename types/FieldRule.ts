@@ -4,6 +4,7 @@ export enum RuleType {
   Required = 'required',
   Regex = 'regex',
   MaximumLength = 'maxLength',
+  MinimumLength = 'minLength',
 }
 
 type RuleValue = string | boolean | number;

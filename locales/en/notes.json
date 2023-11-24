@@ -3,5 +3,6 @@
   "save-success": "Note has been saved successfully",
   "update-success": "Note has been updated successfully",
   "delete-success": "Note has been deleted successfully",
+  "export-success": "Note has been export to your account on QuranReflect successfully",
   "share-as-reflection": "Share on QuranReflect"
 }
