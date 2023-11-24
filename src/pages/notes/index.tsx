@@ -17,7 +17,7 @@ import useRequireAuth from '@/hooks/auth/useRequireAuth';
 import ArrowLeft from '@/icons/west.svg';
 import Error from '@/pages/_error';
 import layoutStyles from '@/pages/index.module.scss';
-import { GetAllNotesResponse } from '@/types/auth/NotesByTypeAndTypeIdResponse';
+import { GetAllNotesResponse } from '@/types/auth/Note';
 import NotesSortOption from '@/types/NotesSortOptions';
 import { privateFetcher } from '@/utils/auth/api';
 import { makeNotesUrl } from '@/utils/auth/apiPaths';

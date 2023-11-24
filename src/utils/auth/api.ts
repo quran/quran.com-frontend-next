@@ -14,6 +14,7 @@ import {
 } from '@/types/auth/ActivityDay';
 import ConsentType from '@/types/auth/ConsentType';
 import { CreateGoalRequest, Goal, GoalCategory, UpdateGoalRequest } from '@/types/auth/Goal';
+import { Note } from '@/types/auth/Note';
 import { StreakWithMetadataParams, StreakWithUserMetadata } from '@/types/auth/Streak';
 import { Mushaf } from '@/types/QuranReader';
 import {
@@ -333,27 +334,7 @@ export const countNotesWithinRange = async (from: string, to: string) => {
   return privateFetcher(makeCountNotesWithinRangeUrl(from, to));
 };
 
-export const addNote = async ({ title, body, ranges }) => {
-  // let attachedEntityPayload = {};
-  // // if (type || typeId) {
-  // //   attachedEntityPayload = {
-  // //     attachedEntity: {
-  // //       entityType: type,
-  // //       entityId: typeId,
-  // //       ...(typeMetadata && {
-  // //         entityMetadata: typeMetadata,
-  // //       }),
-  // //     },
-  // //   };
-  // // }
-
-  const payload = {
-    title,
-    body,
-    ranges,
-    // ...attachedEntityPayload,
-  };
-
+export const addNote = async (payload: Pick<Note, 'title' | 'body' | 'ranges'>) => {
   return postRequest(makeNotesUrl(), payload);
 };
 

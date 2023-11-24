@@ -1,7 +1,6 @@
 import { useEffect, useRef } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
-import useSWR from 'swr';
 import useSWRImmutable from 'swr/immutable';
 
 import { useVerseTrackerContext } from '../../contexts/VerseTrackerContext';
@@ -58,15 +57,10 @@ const TranslationPageVerse: React.FC<TranslationPageVerse> = ({
     return response;
   });
 
-  const { data: notesCount } = useSWR(
+  const { data: notesCount } = useSWRImmutable(
     notesRange && isLoggedIn() ? `countNotes/${notesRange.from}-${notesRange.to}` : null,
     async () => {
       return countNotesWithinRange(notesRange.from, notesRange.to);
-    },
-    {
-      revalidateIfStale: false,
-      revalidateOnFocus: false,
-      revalidateOnReconnect: false,
     },
   );
 

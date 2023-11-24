@@ -17,9 +17,8 @@ import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import useMutation from '@/hooks/useMutation';
 import ChatIcon from '@/icons/chat.svg';
 import TrashIcon from '@/icons/trash.svg';
-import NotesByTypeAndTypeIdResponse, {
-  NoteResponse,
-} from '@/types/auth/NotesByTypeAndTypeIdResponse';
+import { BaseResponse } from '@/types/ApiResponses';
+import { Note } from '@/types/auth/Note';
 import ErrorMessageId from '@/types/ErrorMessageId';
 import { RuleType } from '@/types/FieldRule';
 import { FormFieldType } from '@/types/FormField';
@@ -39,8 +38,8 @@ interface NoteModalProps {
   verseKey?: string;
   noteId?: string;
 
-  onNoteAdded?: (data: NoteResponse) => void;
-  onNoteUpdated?: (data: NoteResponse) => void;
+  onNoteAdded?: (data: Note) => void;
+  onNoteUpdated?: (data: Note) => void;
   onNoteDeleted?: () => void;
 }
 
@@ -84,11 +83,11 @@ const NoteModal: React.FC<NoteModalProps> = ({
     },
   );
   const { mutate: updateNote, isMutating: isUpdatingNote } = useMutation<
-    NoteResponse,
+    Note,
     { id: string; title: string; body: string }
   >(
     async ({ id, title, body }) => {
-      return baseUpdateNote(id, title, body) as Promise<NoteResponse>;
+      return baseUpdateNote(id, title, body) as Promise<Note>;
     },
     {
       onSuccess: (data) => {
@@ -106,7 +105,7 @@ const NoteModal: React.FC<NoteModalProps> = ({
     },
   );
   const { mutate: addNote, isMutating: isAddingNote } = useMutation<
-    NoteResponse,
+    Note,
     { title: string; body: string }
   >(
     async ({ title, body }) => {
@@ -116,7 +115,7 @@ const NoteModal: React.FC<NoteModalProps> = ({
         ...(verseKey && {
           ranges: [`${verseKey}-${verseKey}`],
         }),
-      }) as Promise<NoteResponse>;
+      }) as Promise<Note>;
     },
     {
       onSuccess: (data) => {
@@ -181,7 +180,7 @@ const NoteModal: React.FC<NoteModalProps> = ({
     deleteNote(id);
   };
 
-  const onSubmit = async ({ title, body }: NoteFormData, currentNote?: NoteResponse) => {
+  const onSubmit = async ({ title, body }: NoteFormData, currentNote?: Note) => {
     logButtonClick('save_note');
 
     // if the note exits, it's an update
@@ -211,10 +210,8 @@ const NoteModal: React.FC<NoteModalProps> = ({
         queryKey={queryKey}
         fetcher={privateFetcher}
         showSpinnerOnRevalidate={false}
-        render={(response: NotesByTypeAndTypeIdResponse) => {
-          const note = noteId
-            ? (response as unknown as NotesByTypeAndTypeIdResponse[number])
-            : response[0];
+        render={(response: (Note | Note[]) & BaseResponse) => {
+          const note = noteId ? (response as Note) : (response[0] as Note);
 
           return (
             <FormBuilder
