@@ -13,6 +13,7 @@ import AutoIcon from '@/icons/auto.svg';
 import MoonIcon from '@/icons/moon-outline.svg';
 import SunIcon from '@/icons/sun-outline.svg';
 import SunsetIcon from '@/icons/sunset.svg';
+// import TurquoiseIcon from '@/icons/turquoise.svg';
 import { selectTheme, setTheme } from '@/redux/slices/theme';
 import ThemeType from '@/redux/types/ThemeType';
 import { logValueChange } from '@/utils/eventLogger';
@@ -23,6 +24,7 @@ export const themeIcons = {
   [ThemeType.Light]: <SunIcon />,
   [ThemeType.Auto]: <AutoIcon />,
   [ThemeType.Sepia]: <SunsetIcon />,
+  // [ThemeType.Turquoise]: <TurquoiseIcon />,
 };
 
 const ThemeSection = () => {

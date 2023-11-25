@@ -3,18 +3,27 @@
 
 $dark-theme-filter: invert(76%) contrast(100%) saturate(500%) hue-rotate(274deg);
 $light-theme-filter: contrast(100%) hue-rotate(50deg);
+
 .imageContainer {
   @include theme.light {
     img {
       filter: $light-theme-filter;
     }
   }
+
   @include theme.dark {
     img {
       filter: $dark-theme-filter;
     }
   }
+
   @include theme.sepia {
+    img {
+      filter: $light-theme-filter;
+    }
+  }
+
+  @include theme.turquoise {
     img {
       filter: $light-theme-filter;
     }
@@ -24,38 +33,47 @@ $light-theme-filter: contrast(100%) hue-rotate(50deg);
 .xs {
   img {
     height: 40px;
+
     @include breakpoints.tablet {
       height: 50px;
     }
   }
 }
+
 .sm {
   img {
     height: 50px;
+
     @include breakpoints.tablet {
       height: 65px;
     }
   }
 }
+
 .md {
   img {
     height: 70px;
+
     @include breakpoints.tablet {
       height: 75px;
     }
   }
 }
+
 .lg {
   img {
     height: 80px;
+
     @include breakpoints.tablet {
       height: 90px;
     }
   }
 }
+
 .xl {
   img {
     height: 90px;
+
     @include breakpoints.tablet {
       height: 92px;
     }
@@ -71,6 +89,7 @@ $light-theme-filter: contrast(100%) hue-rotate(50deg);
 .xl3 {
   img {
     height: 110px;
+
     @include breakpoints.tablet {
       height: 102px;
     }
@@ -80,6 +99,7 @@ $light-theme-filter: contrast(100%) hue-rotate(50deg);
 .xl4 {
   img {
     height: 120px;
+
     @include breakpoints.tablet {
       height: 104px;
     }
@@ -89,6 +109,7 @@ $light-theme-filter: contrast(100%) hue-rotate(50deg);
 .xl5 {
   img {
     height: 130px;
+
     @include breakpoints.tablet {
       height: 106px;
     }
@@ -98,6 +119,7 @@ $light-theme-filter: contrast(100%) hue-rotate(50deg);
 .xl6 {
   img {
     height: 140px;
+
     @include breakpoints.tablet {
       height: 108px;
     }

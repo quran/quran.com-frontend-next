@@ -334,7 +334,8 @@
         "light": "Licht",
         "sepia": "Sepia",
         "system": "Systeem",
-        "system-desc": "Het systeemthema past zich automatisch aan uw instellingen voor licht\/donkermodus aan"
+        "system-desc": "Het systeemthema past zich automatisch aan uw instellingen voor licht\/donkermodus aan",
+        "turquoise": "Turkoois"
     },
     "to": "Tot",
     "tooltip": "Knopinfo",

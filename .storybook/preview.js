@@ -48,7 +48,7 @@ export const globalTypes = {
     defaultValue: 'light',
     toolbar: {
       icon: 'circlehollow',
-      items: ['light', 'dark', 'sepia'],
+      items: ['light', 'dark', 'sepia', 'turquoise'],
       showName: true,
     },
   },

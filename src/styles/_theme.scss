@@ -2,6 +2,7 @@
   @media (prefers-color-scheme: dark) {
     @content;
   }
+
   [data-theme="dark"] & {
     @content;
   }
@@ -11,6 +12,7 @@
   @media (prefers-color-scheme: light) {
     @content;
   }
+
   [data-theme="light"] & {
     @content;
   }
@@ -18,6 +20,12 @@
 
 @mixin sepia {
   [data-theme="sepia"] & {
+    @content;
+  }
+}
+
+@mixin turquoise {
+  [data-theme="turquoise"] & {
     @content;
   }
 }

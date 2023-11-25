@@ -334,7 +334,8 @@
         "light": "Luz",
         "sepia": "Sépia",
         "system": "Sistema",
-        "system-desc": "O tema do sistema adota automaticamente as configurações do modo claro \/ escuro"
+        "system-desc": "O tema do sistema adota automaticamente as configurações do modo claro \/ escuro",
+        "turquoise": "Turquesa"
     },
     "to": "Para",
     "tooltip": "Dica de ferramenta",

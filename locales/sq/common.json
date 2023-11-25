@@ -334,7 +334,8 @@
         "light": "Dritë",
         "sepia": "Sepia",
         "system": "Sistemi",
-        "system-desc": "Tema e sistemit përshtatet automatikisht me cilësimet tuaja të modalitetit dritë\/errësirë"
+        "system-desc": "Tema e sistemit përshtatet automatikisht me cilësimet tuaja të modalitetit dritë\/errësirë",
+        "turquoise": "Turkuaz"
     },
     "to": "tek",
     "tooltip": "Mesazh sugjerues",

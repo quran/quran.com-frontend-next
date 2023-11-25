@@ -32,7 +32,12 @@
 .googleButton {
   --themed-bg: var(--color-primary-faded);
   --themed-fg: var(--shade-9);
+
   @include theme.sepia {
+    --themed-border: transparent;
+  }
+
+  @include theme.turquoise {
     --themed-border: transparent;
   }
 
@@ -50,6 +55,7 @@
   --themed-bg: var(--facebook-brand-color);
   --themed-fg: var(--shade-0);
   --themed-border: var(--facebook-brand-color);
+
   @media (hover: hover) {
     &:hover {
       --themed-bg: var(--color-text-default);
@@ -61,9 +67,11 @@
 .emailSentContainer {
   text-align: center;
 }
+
 .paragraphContainer {
   margin-block-end: var(--spacing-medium);
 }
+
 .emailContainer {
   font-weight: var(--font-weight-bold);
 }

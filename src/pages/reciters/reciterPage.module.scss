@@ -31,10 +31,17 @@
     background-color: var(--color-success-medium);
     color: #fff; // white text on "success" background;
   }
+
   @include theme.dark {
     background-color: var(--color-background-elevated);
   }
+
   @include theme.sepia {
+    background-color: var(--color-background-alternative-deep);
+    color: var(--color-text-default);
+  }
+
+  @include theme.turquoise {
     background-color: var(--color-background-alternative-deep);
     color: var(--color-text-default);
   }

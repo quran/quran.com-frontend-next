@@ -13,10 +13,16 @@ $iconSize: calc(1.5 * var(--spacing-medium));
   @include theme.dark {
     background-color: var(--shade-7);
   }
+
   @include theme.light {
     background-color: var(--color-background-alternative-faded);
   }
+
   @include theme.sepia {
+    background-color: var(--color-background-alternative-faded);
+  }
+
+  @include theme.turquoise {
     background-color: var(--color-background-alternative-faded);
   }
 }
@@ -34,9 +40,10 @@ $iconSize: calc(1.5 * var(--spacing-medium));
   display: flex;
   align-items: center;
 
-  & > svg {
+  &>svg {
     height: $iconSize;
     width: $iconSize;
+
     [dir="rtl"] & {
       transform: scaleX(-1);
     }

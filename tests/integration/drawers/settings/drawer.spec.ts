@@ -16,4 +16,5 @@ test('Settings drawer icon should open the drawer when clicked', async ({ page, 
   await expect(page.locator('button:has-text("Light")')).toBeVisible();
   await expect(page.locator('button:has-text("Sepia")')).toBeVisible();
   await expect(page.locator('button:has-text("Dark")')).toBeVisible();
+  await expect(page.locator('button:has-text("Turquoise")')).toBeVisible();
 });

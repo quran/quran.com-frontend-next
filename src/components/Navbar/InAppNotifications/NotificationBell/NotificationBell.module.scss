@@ -17,6 +17,10 @@
         color: var(--color-text-inverse);
     }
 
+    @include theme.turquoise {
+        color: var(--color-text-inverse);
+    }
+
     z-index: var(--z-index-default);
     margin-inline-start: var(--spacing-xsmall);
     margin-block-start: calc(var(--spacing-xxsmall) * -1);

@@ -12,6 +12,7 @@
 }
 
 $text-color: #fff; // text color is always white because the background is green (success)
+
 .title {
   font-weight: var(--font-weight-bold);
   font-size: calc(1.5 * var(--font-size-xlarge));
@@ -19,6 +20,7 @@ $text-color: #fff; // text color is always white because the background is green
 }
 
 $fallbackColor: #22a5ad;
+
 .backgroundImage {
   position: absolute;
   z-index: -1;
@@ -26,14 +28,21 @@ $fallbackColor: #22a5ad;
   background-color: $fallbackColor;
   background-image: url("/images/background.jpg");
   background-size: cover;
+
   @include theme.dark {
     filter: saturate(0.1) brightness(0.3) contrast(1.1);
   }
+
   @include theme.light {
     filter: none;
   }
+
   @include theme.sepia {
     filter: sepia(1);
+  }
+
+  @include theme.turquoise {
+    filter: turquoise(1);
   }
 }
 
