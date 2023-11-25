@@ -1,21 +1,32 @@
 {
     "about": "About Us",
+    "allow": "Allow",
     "and": "and",
     "announcements": {
         "auth-onboarding": {
-            "slide-1": {
-                "action": "See what's new",
-                "title": "Welcome to Quran.com <br><\/br> User Account"
-            },
-            "slide-2": {
+            "data-sync": {
                 "action": "Next",
                 "description": "Whether you’re using Quran.com on your phone or your laptop, your bookmarks, last read verses, and your preferences will be available",
                 "title": "Your data will be synced <br><\/br> across devices"
             },
-            "slide-3": {
+            "feedback": {
                 "action": "Okay, got it",
                 "description": "Thank you for using Quran.com and we would be glad to hear your feedback on <link>feedback.quran.com<\/link>",
                 "title": "We wanna hear your thoughts"
+            },
+            "quran-foundation-link": {
+                "action": "Next",
+                "description": "Use your Quran.com login for access to QuranReflect.com — a thriving global community engaged in Quranic reflection.",
+                "title": "Use your account across Quran.Foundation apps!"
+            },
+            "quran-growth-journey": {
+                "action": "Next",
+                "description": "Maintain your Quran reading streak and progress through your goals while building new habits",
+                "title": "Start your Quran Growth Journey!"
+            },
+            "welcome": {
+                "action": "See what's new",
+                "title": "Welcome to Quran.com <br><\/br> User Account"
             }
         },
         "collections-announcement": {
@@ -103,6 +114,12 @@
         "title": "Community"
     },
     "complete-sign-up": "Complete your registration",
+    "consents": {
+        "communication": {
+            "body": "🚀 Supercharge your progress through <boldSpan>personalized<\/boldSpan> notifications about your goal progress, maintaining streaks, and enhancing your usage of our current features.<br><\/br><br><\/br> Can we keep you in the loop through email and other channels? You're in control – feel free to adjust these preferences anytime in your account settings.<br><\/br><br><\/br> Simply select 'Allow' for <boldSpan>inspiring reminders<\/boldSpan> or 'Not Now' to decline.",
+            "header": "We'd love to help you stay <boldSpan>committed and consistent<\/boldSpan> with your Quran Growth Journey! 📖🌟"
+        }
+    },
     "continue": "Continue",
     "copied": "Copied",
     "copied-to-clipboard": "Copied to clipboard",
@@ -173,6 +190,7 @@
     "help": "Help",
     "hizb": "Hizb",
     "home": "Home",
+    "hours": "Hours",
     "inline": "In-line",
     "input": {
         "clear": "Clear"
@@ -188,6 +206,7 @@
     "meccan": "Meccan",
     "medinan": "Medinan",
     "menu": "Menu",
+    "minutes": "Minutes",
     "mobile-apps": "Mobile Apps",
     "mode": "Mode",
     "more": "More",
@@ -197,7 +216,14 @@
     "next": "Next",
     "next-ayah": "Next Ayah",
     "no": "No",
+    "no-notifications": "No notifications yet",
     "none": "None",
+    "not-now": "Not Now",
+    "notification": {
+        "mark-all-as-read": "Mark all as read",
+        "mark-as-read": "Mark as read"
+    },
+    "notifications": "Notifications",
     "off": "Off",
     "on": "On",
     "page": "Page",
@@ -251,6 +277,7 @@
         "switch-mode": "Switch to Advanced Search",
         "title": "Search"
     },
+    "seconds": "Seconds",
     "settings": {
         "no-tafsir-selected": "No tafsir selected",
         "no-translation-selected": "No translation selected",

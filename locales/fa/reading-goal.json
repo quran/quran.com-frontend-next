@@ -107,6 +107,7 @@
     },
     "todays-goal": "هدف امروز",
     "view-progress": "مشاهده پیشرفت",
+    "week-progress": "پیشرفت این هفته",
     "x-days": {
         "one": "{{days}} روز",
         "other": "{{days}} روز"

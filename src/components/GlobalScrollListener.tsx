@@ -4,7 +4,10 @@ import { useDispatch } from 'react-redux';
 
 import useScrollDirection, { ScrollDirection } from '@/hooks/useScrollDirection';
 import { setIsVisible } from '@/redux/slices/navbar';
-import { setIsExpanded } from '@/redux/slices/QuranReader/contextMenu';
+import {
+  setIsExpanded,
+  setShowReadingPreferenceSwitcher,
+} from '@/redux/slices/QuranReader/contextMenu';
 
 const GlobalScrollListener = () => {
   const dispatch = useDispatch();
@@ -22,6 +25,11 @@ const GlobalScrollListener = () => {
       } else if (newYPosition >= 0 && direction === ScrollDirection.Up) {
         dispatch({ type: setIsExpanded.type, payload: true });
         dispatch({ type: setIsVisible.type, payload: true });
+      }
+      if (newYPosition > 150 && direction === ScrollDirection.Down) {
+        dispatch({ type: setShowReadingPreferenceSwitcher.type, payload: true });
+      } else if (newYPosition <= 150 && direction === ScrollDirection.Up) {
+        dispatch({ type: setShowReadingPreferenceSwitcher.type, payload: false });
       }
     },
     [dispatch],

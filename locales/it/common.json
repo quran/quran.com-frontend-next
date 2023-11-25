@@ -1,21 +1,32 @@
 {
     "about": "Chi siamo",
+    "allow": "Permettere",
     "and": "e",
     "announcements": {
         "auth-onboarding": {
-            "slide-1": {
-                "action": "Guarda cosa c'è di nuovo",
-                "title": "Benvenuto su Quran.com <br> <\/br> Account utente"
-            },
-            "slide-2": {
+            "data-sync": {
                 "action": "Prossimo",
                 "description": "Sia che tu stia utilizzando Quran.com sul tuo telefono o sul tuo laptop, i tuoi segnalibri, gli ultimi versetti letti e le tue preferenze saranno disponibili",
-                "title": "I tuoi dati verranno sincronizzati <br> <\/br> su tutti i dispositivi"
+                "title": "I tuoi dati verranno sincronizzati <br><\/br> su tutti i dispositivi"
             },
-            "slide-3": {
+            "feedback": {
                 "action": "Ok, capito",
                 "description": "Grazie per aver utilizzato Quran.com e saremo lieti di ricevere il tuo feedback su <link> feedback.quran.com <\/link>",
                 "title": "Vogliamo ascoltare i tuoi pensieri"
+            },
+            "quran-foundation-link": {
+                "action": "Prossimo",
+                "description": "Usa il tuo login Quran.com per accedere a QuranReflect.com, una fiorente comunità globale impegnata nella riflessione coranica.",
+                "title": "Usa il tuo account su tutte le app Quran.Foundation!"
+            },
+            "quran-growth-journey": {
+                "action": "Prossimo",
+                "description": "Mantieni la tua serie di letture del Corano e progredisci attraverso i tuoi obiettivi costruendo nuove abitudini",
+                "title": "Inizia il tuo viaggio di crescita del Corano!"
+            },
+            "welcome": {
+                "action": "Guarda cosa c'è di nuovo",
+                "title": "Benvenuto su Quran.com <br><\/br> Account utente"
             }
         },
         "collections-announcement": {
@@ -103,6 +114,12 @@
         "title": "Comunità"
     },
     "complete-sign-up": "Completa la tua registrazione",
+    "consents": {
+        "communication": {
+            "body": "🚀 Potenzia i tuoi progressi tramite notifiche <boldSpan> personalizzate <\/boldSpan> sui progressi del tuo obiettivo, sul mantenimento dei successi e sul miglioramento dell'utilizzo delle nostre funzionalità attuali. <br><\/br> <br><\/br> Possiamo tenerti aggiornato tramite e-mail e altri canali? Hai il controllo: sentiti libero di modificare queste preferenze in qualsiasi momento nelle impostazioni del tuo account. <br><\/br> <br><\/br> Seleziona semplicemente \"Consenti\" per <boldSpan> promemoria stimolanti <\/boldSpan> o \"Non ora\" per rifiutarli.",
+            "header": "Ci piacerebbe aiutarti a rimanere <boldSpan> impegnato e coerente <\/boldSpan> nel tuo percorso di crescita nel Corano! 📖🌟"
+        }
+    },
     "continue": "Continua",
     "copied": "copiato",
     "copied-to-clipboard": "Copiato negli appunti",
@@ -171,6 +188,7 @@
     "help": "Aiuto",
     "hizb": "Hizb",
     "home": "Casa",
+    "hours": "Ore",
     "inline": "In linea",
     "input": {
         "clear": "Chiaro"
@@ -186,6 +204,7 @@
     "meccan": "Meccanico",
     "medinan": "Medinan",
     "menu": "Menù",
+    "minutes": "Minuti",
     "mobile-apps": "App mobili",
     "mode": "Modalità",
     "more": "Di più",
@@ -195,7 +214,14 @@
     "next": "Prossimo",
     "next-ayah": "Avanti Sì",
     "no": "No",
+    "no-notifications": "Nessuna notifica ancora",
     "none": "Nessuno",
+    "not-now": "Non adesso",
+    "notification": {
+        "mark-all-as-read": "Segna tutti come letti",
+        "mark-as-read": "segna come letto"
+    },
+    "notifications": "Notifiche",
     "off": "Spento",
     "on": "Sopra",
     "page": "Pagina",
@@ -249,6 +275,7 @@
         "switch-mode": "Passa alla ricerca avanzata",
         "title": "Ricerca"
     },
+    "seconds": "Secondi",
     "settings": {
         "no-tafsir-selected": "Nessun tafsir selezionato",
         "no-translation-selected": "Nessuna traduzione selezionata",

@@ -1,12 +1,20 @@
 $readingPreferenceMaxWidth: calc(20 * var(--spacing-large));
+$contextMenuReadingPreferenceMaxWidth: calc(10 * var(--spacing-large));
 .container {
   max-width: $readingPreferenceMaxWidth;
-  margin-block-start: var(--spacing-small);
-  margin-block-end: var(--spacing-xxsmall);
   margin-inline-start: auto;
   margin-inline-end: auto;
   padding-block-start: 0;
   padding-block-end: 0;
   padding-inline-start: var(--spacing-small);
   padding-inline-end: var(--spacing-small);
+}
+
+.surahHeaderContainer {
+  margin-block-start: var(--spacing-small);
+  margin-block-end: var(--spacing-xxsmall);
+}
+
+.contextMenuContainer {
+  max-width: $contextMenuReadingPreferenceMaxWidth;
 }

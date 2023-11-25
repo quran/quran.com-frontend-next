@@ -1,21 +1,32 @@
 {
     "about": "Over ons",
+    "allow": "Toestaan",
     "and": "en",
     "announcements": {
         "auth-onboarding": {
-            "slide-1": {
-                "action": "Zie wat nieuw is",
-                "title": "Welkom bij Quran.com <br> <\/br> Gebruikersaccount"
-            },
-            "slide-2": {
+            "data-sync": {
                 "action": "Volgende",
                 "description": "Of je nu Quran.com op je telefoon of je laptop gebruikt, je bladwijzers, laatst gelezen verzen en je voorkeuren zijn beschikbaar",
-                "title": "Uw gegevens worden <br> <\/br> op verschillende apparaten gesynchroniseerd"
+                "title": "Uw gegevens worden <br><\/br> op verschillende apparaten gesynchroniseerd"
             },
-            "slide-3": {
+            "feedback": {
                 "action": "Oké, snap het",
                 "description": "Bedankt voor het gebruik van Quran.com en we horen graag uw feedback op <link> feedback.quran.com <\/link>",
                 "title": "We willen je gedachten horen"
+            },
+            "quran-foundation-link": {
+                "action": "Volgende",
+                "description": "Gebruik uw Quran.com-login voor toegang tot QuranReflect.com - een bloeiende wereldwijde gemeenschap die zich bezighoudt met koranreflectie.",
+                "title": "Gebruik uw account in alle Quran.Foundation-apps!"
+            },
+            "quran-growth-journey": {
+                "action": "Volgende",
+                "description": "Behoud uw koranleesreeks en boek vooruitgang bij het behalen van uw doelen terwijl u nieuwe gewoonten opbouwt",
+                "title": "Begin uw korangroeireis!"
+            },
+            "welcome": {
+                "action": "Zie wat nieuw is",
+                "title": "Welkom bij Quran.com <br><\/br> Gebruikersaccount"
             }
         },
         "collections-announcement": {
@@ -103,6 +114,12 @@
         "title": "Gemeenschap"
     },
     "complete-sign-up": "Voltooi je registratie",
+    "consents": {
+        "communication": {
+            "body": "🚀 Verbeter uw voortgang via <boldSpan> gepersonaliseerde <\/boldSpan> meldingen over uw doelvoortgang, het bijhouden van streaks en het verbeteren van uw gebruik van onze huidige functies. <br><\/br> <br><\/br> Kunnen we u op de hoogte houden via e-mail en andere kanalen? U heeft de controle. U kunt deze voorkeuren op elk gewenst moment aanpassen in uw accountinstellingen. <br><\/br> <br><\/br> Selecteer eenvoudig 'Toestaan' voor <boldSpan> inspirerende herinneringen <\/boldSpan> of 'Niet nu' om te weigeren.",
+            "header": "We helpen u graag <boldSpan> toegewijd en consistent <\/boldSpan> te blijven tijdens uw Korangroeireis! 📖🌟"
+        }
+    },
     "continue": "Doorgaan met",
     "copied": "gekopieerd",
     "copied-to-clipboard": "Gekopieerd naar het klembord",
@@ -171,6 +188,7 @@
     "help": "Helpen",
     "hizb": "Hizb",
     "home": "Huis",
+    "hours": "Uur",
     "inline": "In lijn",
     "input": {
         "clear": "Duidelijk"
@@ -186,6 +204,7 @@
     "meccan": "Mekkaans",
     "medinan": "Medina",
     "menu": "Menu",
+    "minutes": "Minuten",
     "mobile-apps": "Mobiele apps",
     "mode": "Modus",
     "more": "Meer",
@@ -195,7 +214,14 @@
     "next": "Volgende",
     "next-ayah": "Volgende Aya",
     "no": "Nee",
+    "no-notifications": "Nog geen meldingen",
     "none": "Geen",
+    "not-now": "Niet nu",
+    "notification": {
+        "mark-all-as-read": "Alles als gelezen markeren",
+        "mark-as-read": "Markeer als gelezen"
+    },
+    "notifications": "Meldingen",
     "off": "Uit",
     "on": "Op",
     "page": "Bladzijde",
@@ -249,6 +275,7 @@
         "switch-mode": "Overschakelen naar Geavanceerd zoeken",
         "title": "Zoeken"
     },
+    "seconds": "Seconden",
     "settings": {
         "no-tafsir-selected": "Geen tafsir geselecteerd",
         "no-translation-selected": "Geen vertaling geselecteerd",

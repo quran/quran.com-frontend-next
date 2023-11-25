@@ -2,7 +2,8 @@ import { useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
-import { useDispatch } from 'react-redux';
+
+import styles from './ProfileAvatarButton.module.scss';
 
 import Button, { ButtonShape, ButtonVariant } from '@/dls/Button/Button';
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
@@ -10,14 +11,14 @@ import ClockIcon from '@/icons/clock.svg';
 import ArrowIcon from '@/icons/east.svg';
 import LogoutIcon from '@/icons/logout.svg';
 import IconPerson from '@/icons/person.svg';
-import { removeLastSyncAt } from '@/redux/slices/Auth/userDataSync';
+import TickIcon from '@/icons/tick.svg';
 import { logoutUser } from '@/utils/auth/api';
 import { isLoggedIn } from '@/utils/auth/login';
+import { removeLastSyncAt } from '@/utils/auth/userDataSync';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getReadingGoalProgressNavigationUrl } from '@/utils/navigation';
 
 const ProfileAvatarButton = () => {
-  const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState(false);
   const { t } = useTranslation('common');
   const router = useRouter();
@@ -30,25 +31,12 @@ const ProfileAvatarButton = () => {
     }
   };
 
-  const trigger = (
-    <Button
-      tooltip={isUserLoggedIn ? t('profile') : t('login')}
-      ariaLabel={isUserLoggedIn ? t('profile') : t('login')}
-      variant={ButtonVariant.Ghost}
-      href={isUserLoggedIn ? null : '/login'}
-      shape={ButtonShape.Circle}
-      onClick={onTriggerClicked}
-    >
-      <IconPerson />
-    </Button>
-  );
-
-  const onLogoutClicked = () => {
+  const onLogoutClicked = async () => {
     logButtonClick('profile_avatar_logout');
-    logoutUser().then(() => {
-      dispatch({ type: removeLastSyncAt.type });
-      router.reload();
-    });
+
+    await logoutUser();
+    removeLastSyncAt();
+    router.reload();
   };
 
   const onProfileClicked = () => {
@@ -67,7 +55,26 @@ const ProfileAvatarButton = () => {
 
   if (isUserLoggedIn) {
     return (
-      <PopoverMenu trigger={trigger} isOpen={isOpen} onOpenChange={setIsOpen}>
+      <PopoverMenu
+        isModal={false}
+        trigger={
+          <Button
+            tooltip={t('profile')}
+            ariaLabel={t('profile')}
+            variant={ButtonVariant.Ghost}
+            href={null}
+            shape={ButtonShape.Circle}
+            onClick={onTriggerClicked}
+            className={styles.loggedIn}
+            shouldFlipOnRTL={false}
+          >
+            <TickIcon />
+            <IconPerson />
+          </Button>
+        }
+        isOpen={isOpen}
+        onOpenChange={setIsOpen}
+      >
         <PopoverMenu.Item onClick={onProfileClicked} icon={<ArrowIcon />}>
           {t('profile')}
         </PopoverMenu.Item>
@@ -81,7 +88,18 @@ const ProfileAvatarButton = () => {
     );
   }
 
-  return trigger;
+  return (
+    <Button
+      tooltip={t('login')}
+      ariaLabel={t('login')}
+      variant={ButtonVariant.Ghost}
+      href="/login"
+      shape={ButtonShape.Circle}
+      onClick={onTriggerClicked}
+    >
+      <IconPerson />
+    </Button>
+  );
 };
 
 export default ProfileAvatarButton;

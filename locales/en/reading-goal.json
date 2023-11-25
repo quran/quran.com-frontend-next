@@ -107,6 +107,7 @@
     },
     "todays-goal": "Today's Goal",
     "view-progress": "View Progress",
+    "week-progress": "This week's progress",
     "x-days": {
         "one": "{{days}} day",
         "other": "{{days}} days"

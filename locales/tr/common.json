@@ -1,21 +1,32 @@
 {
     "about": "Hakkımızda",
+    "allow": "İzin vermek",
     "and": "ve",
     "announcements": {
         "auth-onboarding": {
-            "slide-1": {
-                "action": "Yeniliklere bakın",
-                "title": "Kuran.com'a Hoş Geldiniz <br> <\/br> Kullanıcı Hesabı"
-            },
-            "slide-2": {
+            "data-sync": {
                 "action": "Sonraki",
                 "description": "Kuran.com'u telefonunuzda veya dizüstü bilgisayarınızda kullanıyor olsanız da, yer imleriniz, son okunan ayetler ve tercihleriniz mevcut olacak.",
-                "title": "Verileriniz cihazlar arasında <br> <\/br> senkronize edilecek"
+                "title": "Verileriniz cihazlar arasında <br><\/br> senkronize edilecek"
             },
-            "slide-3": {
+            "feedback": {
                 "action": "Tamam, anladım.",
                 "description": "Kuran.com'u kullandığınız için teşekkür ederiz ve <link> feedback.quran.com <\/link> ile ilgili görüşlerinizi duymaktan memnuniyet duyarız.",
                 "title": "Düşüncelerinizi duymak istiyoruz"
+            },
+            "quran-foundation-link": {
+                "action": "Sonraki",
+                "description": "Kuran'ın yansımasıyla ilgilenen gelişen küresel bir topluluk olan Qur'anReflect.com'a erişim için Kuran.com oturum açma bilgilerinizi kullanın.",
+                "title": "Hesabınızı Kuran.Vakıf uygulamalarında kullanın!"
+            },
+            "quran-growth-journey": {
+                "action": "Sonraki",
+                "description": "Kuran okuma çizginizi koruyun ve yeni alışkanlıklar edinirken hedeflerinizde ilerleyin",
+                "title": "Kuran Büyüme Yolculuğunuza başlayın!"
+            },
+            "welcome": {
+                "action": "Yeniliklere bakın",
+                "title": "Kuran.com'a Hoş Geldiniz <br><\/br> Kullanıcı Hesabı"
             }
         },
         "collections-announcement": {
@@ -103,6 +114,12 @@
         "title": "Toplum"
     },
     "complete-sign-up": "Kaydınızı tamamlayın",
+    "consents": {
+        "communication": {
+            "body": "🚀 Hedef ilerlemeniz, serilerinizi sürdürmeniz ve mevcut özelliklerimizi daha iyi kullanmanızı sağlayan <boldSpan> kişiselleştirilmiş <\/boldSpan> bildirimleri aracılığıyla ilerlemenizi güçlendirin. <br><\/br> <br><\/br> Sizi e-posta ve diğer kanallar aracılığıyla gelişmelerden haberdar edebilir miyiz? Kontrol sizde; bu tercihleri istediğiniz zaman hesap ayarlarınızdan değiştirmekten çekinmeyin. <br><\/br> <br><\/br> <boldSpan> ilham veren hatırlatıcılar <\/boldSpan> için 'İzin Ver'i veya reddetmek için 'Şimdi Değil'i seçmeniz yeterli.",
+            "header": "Kuran Büyüme Yolculuğunuzda <boldSpan> kararlı ve tutarlı <\/boldSpan> kalmanıza yardımcı olmayı çok isteriz! 📖🌟"
+        }
+    },
     "continue": "Devam et",
     "copied": "kopyalandı",
     "copied-to-clipboard": "Panoya kopyalandı",
@@ -171,6 +188,7 @@
     "help": "Yardım",
     "hizb": "Hizb",
     "home": "Anasayfa",
+    "hours": "Saat",
     "inline": "Çizgide",
     "input": {
         "clear": "Açık"
@@ -186,6 +204,7 @@
     "meccan": "Mekkeli",
     "medinan": "Medine",
     "menu": "Menü",
+    "minutes": "dakika",
     "mobile-apps": "Mobil Uygulamalar",
     "mode": "Mod",
     "more": "Daha fazla",
@@ -195,7 +214,14 @@
     "next": "Sonraki",
     "next-ayah": "Sonraki Ayah",
     "no": "Numara",
+    "no-notifications": "Henüz bildirim yok",
     "none": "Hiçbiri",
+    "not-now": "Şimdi değil",
+    "notification": {
+        "mark-all-as-read": "Tümünü okundu olarak işaretle",
+        "mark-as-read": "Okundu olarak işaretle"
+    },
+    "notifications": "Bildirimler",
     "off": "Kapalı",
     "on": "Açık",
     "page": "Sayfa",
@@ -249,6 +275,7 @@
         "switch-mode": "Gelişmiş Aramaya Geç",
         "title": "Ara"
     },
+    "seconds": "Saniye",
     "settings": {
         "no-tafsir-selected": "Tefsir seçilmedi",
         "no-translation-selected": "Çeviri seçilmedi",

@@ -6,7 +6,7 @@ import classNames from 'classnames';
 import Action from './Action';
 import Body from './Body';
 import CloseAction from './CloseAction';
-import Content from './Content';
+import Content, { ModalSize } from './Content';
 import Footer from './Footer';
 import Header from './Header';
 import styles from './Modal.module.scss';
@@ -23,7 +23,9 @@ type ModalProps = {
   isPropagationStopped?: boolean;
   contentClassName?: string;
   onEscapeKeyDown?: () => void;
+  size?: ModalSize;
 };
+
 const Modal = ({
   children,
   trigger,
@@ -34,6 +36,7 @@ const Modal = ({
   contentClassName,
   isBottomSheetOnMobile = true,
   isInvertedOverlay = false,
+  size,
 }: ModalProps) => (
   <DialogPrimitive.Root open={isOpen}>
     {trigger && (
@@ -51,6 +54,7 @@ const Modal = ({
         onPointerDownOutside={onClickOutside}
         isBottomSheetOnMobile={isBottomSheetOnMobile}
         contentClassName={contentClassName}
+        size={size}
       >
         {children}
       </Content>

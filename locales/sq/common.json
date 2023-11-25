@@ -1,21 +1,32 @@
 {
     "about": "Rreth Nesh",
+    "allow": "Lejo",
     "and": "dhe",
     "announcements": {
         "auth-onboarding": {
-            "slide-1": {
-                "action": "Shihni çfarë ka të re",
-                "title": "Mirë se vini në llogarinë e përdoruesit <br> <\/br> të Quran.com"
-            },
-            "slide-2": {
+            "data-sync": {
                 "action": "Tjetra",
                 "description": "Pavarësisht nëse jeni duke përdorur Quran.com në telefonin ose laptopin tuaj, faqeshënuesit, vargjet e fundit të lexuara dhe preferencat tuaja do të jenë të disponueshme",
-                "title": "Të dhënat tuaja do të sinkronizohen <br> <\/br> nëpër pajisje"
+                "title": "Të dhënat tuaja do të sinkronizohen <br><\/br> nëpër pajisje"
             },
-            "slide-3": {
+            "feedback": {
                 "action": "Mirë, e kuptova",
                 "description": "Faleminderit që përdorni Quran.com dhe do të ishim të lumtur të dëgjonim komentet tuaja në <link> feedback.quran.com <\/link>",
                 "title": "Ne duam të dëgjojmë mendimet tuaja"
+            },
+            "quran-foundation-link": {
+                "action": "Tjetra",
+                "description": "Përdorni hyrjen tuaj në Quran.com për të hyrë në QuranReflec.com - një komunitet i lulëzuar global i angazhuar në reflektimin Kur'anor.",
+                "title": "Përdorni llogarinë tuaj nëpër aplikacionet Quran.Foundation!"
+            },
+            "quran-growth-journey": {
+                "action": "Tjetra",
+                "description": "Mbani brezin tuaj të leximit të Kuranit dhe përparoni në qëllimet tuaja duke ndërtuar zakone të reja",
+                "title": "Filloni Udhëtimin tuaj të Rritjes në Kuran!"
+            },
+            "welcome": {
+                "action": "Shihni çfarë ka të re",
+                "title": "Mirë se vini në llogarinë e përdoruesit <br><\/br> të Quran.com"
             }
         },
         "collections-announcement": {
@@ -103,6 +114,12 @@
         "title": "Komuniteti"
     },
     "complete-sign-up": "Plotësoni regjistrimin tuaj",
+    "consents": {
+        "communication": {
+            "body": "🚀 Mbushni progresin tuaj nëpërmjet njoftimeve të personalizuara <boldSpan> <\/boldSpan> në lidhje me përparimin e qëllimit tuaj, ruajtjen e vijave dhe përmirësimin e përdorimit të veçorive tona aktuale. <br><\/br> <br><\/br> A mund t'ju mbajmë të informuar përmes emailit dhe kanaleve të tjera? Ju keni kontrollin - mos ngurroni t'i rregulloni këto preferenca në çdo kohë në cilësimet e llogarisë tuaj. <br><\/br> <br><\/br> Thjesht zgjidhni \"Lejo\" për rikujtuesit frymëzues <boldSpan> <\/boldSpan> ose \"Jo tani\" për t'i refuzuar.",
+            "header": "Do të donim t'ju ndihmonim të qëndroni <boldSpan> të përkushtuar dhe të qëndrueshëm <\/boldSpan> me Udhëtimin tuaj të Rritjes në Kuran! 📖🌟"
+        }
+    },
     "continue": "Vazhdoni",
     "copied": "E kopjuar",
     "copied-to-clipboard": "Kopjuar në kujtesën tuaj",
@@ -171,6 +188,7 @@
     "help": "Ndihmë",
     "hizb": "Hizb",
     "home": "Shtëpi",
+    "hours": "orët",
     "inline": "Ne rresht",
     "input": {
         "clear": "Qartë"
@@ -186,6 +204,7 @@
     "meccan": "mekas",
     "medinan": "Medinas",
     "menu": "Menu",
+    "minutes": "Minutat",
     "mobile-apps": "Aplikacionet celulare",
     "mode": "Modaliteti",
     "more": "Më shumë",
@@ -195,7 +214,14 @@
     "next": "Tjetra",
     "next-ayah": "Ajeti tjetër",
     "no": "Jo",
+    "no-notifications": "Nuk ka ende njoftime",
     "none": "Asnjëra",
+    "not-now": "Jo tani",
+    "notification": {
+        "mark-all-as-read": "Shënoni të gjitha si të lexuara",
+        "mark-as-read": "Shënoni si të lexuar"
+    },
+    "notifications": "Njoftimet",
     "off": "Joaktiv",
     "on": "Aktiv",
     "page": "Faqe",
@@ -249,6 +275,7 @@
         "switch-mode": "Kalo te Kërkimi i Avancuar",
         "title": "Kërko"
     },
+    "seconds": "Sekonda",
     "settings": {
         "no-tafsir-selected": "Nuk është zgjedhur asnjë tefsir",
         "no-translation-selected": "Nuk u zgjodh asnjë përkthim",

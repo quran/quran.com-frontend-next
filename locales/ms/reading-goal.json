@@ -105,6 +105,7 @@
     },
     "todays-goal": "Matlamat Hari Ini",
     "view-progress": "Lihat Kemajuan",
+    "week-progress": "Kemajuan minggu ini",
     "x-days": {
         "other": "{{days}} hari"
     },

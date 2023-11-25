@@ -1,4 +1,6 @@
 {
+    "add": "Adicionar",
+    "add-data-success": "Seus dados de leitura foram adicionados com sucesso.",
     "delete-goal": {
         "action": "Excluir meta",
         "confirmation": {
@@ -19,8 +21,11 @@
     "history": "História de leitura",
     "history-for": "Lendo o histórico de {{date}}",
     "manage-goal": "Gerencie sua meta de leitura",
+    "manually-add": "Adicionar leituras manualmente",
     "no-reading-history-for": "Sem histórico de leitura para {{date}}",
     "reading-progress-header": "Seu progresso",
     "reading-progress-streak": "Onda",
+    "reading-time": "Tempo de leitura",
+    "seconds-read-tooltip": "Este é o tempo que você gastou lendo os Ayahs inseridos. Nós o preenchemos automaticamente com a velocidade média de leitura no Quran.com, mas você pode substituí-lo pelo seu tempo real de leitura.",
     "you-read": "Você lê:"
 }

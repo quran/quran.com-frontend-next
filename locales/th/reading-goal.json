@@ -105,6 +105,7 @@
     },
     "todays-goal": "เป้าหมายวันนี้",
     "view-progress": "ดูความคืบหน้า",
+    "week-progress": "ความคืบหน้าในสัปดาห์นี้",
     "x-days": {
         "other": "{{days}} วัน"
     },

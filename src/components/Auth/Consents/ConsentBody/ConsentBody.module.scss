@@ -1,0 +1,14 @@
+.container {
+  padding: var(--spacing-mega);
+}
+
+.submitButton {
+  margin-block-start: var(--spacing-small);
+  width: 48%;
+}
+
+.buttonsContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}

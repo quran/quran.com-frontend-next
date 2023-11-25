@@ -16,12 +16,12 @@ import DefaultSettingsMiddleware from './middleware/defaultSettingsMiddleware';
 import migrations from './migrations';
 import audioPlayerPersistConfig from './slices/AudioPlayer/persistConfig';
 import audioPlayerState from './slices/AudioPlayer/state';
-import userDataSync from './slices/Auth/userDataSync';
 import banner from './slices/banner';
 import commandBarPersistConfig from './slices/CommandBar/persistConfig';
 import commandBar from './slices/CommandBar/state';
 import defaultSettings from './slices/defaultSettings';
 import navbar from './slices/navbar';
+import notifications from './slices/notifications';
 import persistGateHydration from './slices/persistGateHydration';
 import bookmarks from './slices/QuranReader/bookmarks';
 import contextMenu from './slices/QuranReader/contextMenu';
@@ -90,9 +90,9 @@ export const rootReducer = combineReducers({
   readingViewVerse,
   banner,
   session,
-  userDataSync,
   persistGateHydration,
   revelationOrder,
+  notifications,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

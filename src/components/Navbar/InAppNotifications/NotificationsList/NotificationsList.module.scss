@@ -1,0 +1,40 @@
+.notificationsContainer {
+  width: calc(13 * var(--spacing-mega));
+  max-width: 100vw;
+}
+
+.notificationsList {
+  height: calc(14 * var(--spacing-mega)) !important;
+}
+
+.listContainer {
+  padding-block: var(--spacing-xxsmall);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-block: var(--spacing-large);
+  padding-inline: var(--spacing-medium);
+}
+
+.buttonsContainer {
+  display: flex;
+  align-items: center;
+}
+
+.title {
+  font-size: var(--font-size-large);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-default);
+}
+
+.emptyMessage {
+  font-size: var(--font-size-medium);
+  color: var(--color-text-faded);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-block: var(--spacing-mega);
+}

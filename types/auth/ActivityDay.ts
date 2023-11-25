@@ -10,6 +10,7 @@ export type ActivityDay = {
   pagesRead: number;
   versesRead: number;
   secondsRead: number;
+  manuallyAddedSeconds?: number;
   progress: number;
   dailyTargetPages?: number;
   dailyTargetSeconds?: number;
@@ -21,6 +22,7 @@ export type ActivityDay = {
 export type UpdateActivityDayBody = {
   ranges?: string[];
   pages?: number;
+  date?: string;
   seconds?: number;
   mushafId: Mushaf;
   type: ActivityDayType;

@@ -7,7 +7,11 @@ import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import styles from './ContextMenu.module.scss';
+import ReadingPreferenceSwitcher, {
+  ReadingPreferenceSwitcherType,
+} from './ReadingPreferenceSwitcher';
 
+import { SwitchSize } from '@/dls/Switch/Switch';
 import ChevronDownIcon from '@/icons/chevron-down.svg';
 import { selectNavbar } from '@/redux/slices/navbar';
 import { selectContextMenu } from '@/redux/slices/QuranReader/contextMenu';
@@ -31,7 +35,10 @@ const ContextMenu = () => {
   const isSidebarNavigationVisible = useSelector(selectIsSidebarNavigationVisible);
   const { t, lang } = useTranslation('common');
   const isSideBarVisible = useSelector(selectNotes, shallowEqual).isVisible;
-  const { isExpanded } = useSelector(selectContextMenu, shallowEqual);
+  const { isExpanded, showReadingPreferenceSwitcher } = useSelector(
+    selectContextMenu,
+    shallowEqual,
+  );
   const isNavbarVisible = useSelector(selectNavbar, shallowEqual).isVisible;
   const { verseKey, chapterId, page, hizb } = useSelector(selectLastReadVerseKey, shallowEqual);
   const chapterData = useMemo(() => {
@@ -66,7 +73,7 @@ const ContextMenu = () => {
       style={{ '--progress': `${progress}%` }} // this is to pass the value to css so it can be used to show the progress bar.
     >
       <div className={styles.sectionsContainer}>
-        <div className={styles.section}>
+        <div className={showReadingPreferenceSwitcher ? styles.section : styles.halfSection}>
           <div className={classNames(styles.row)}>
             <p
               className={classNames(styles.bold, styles.alignStart, styles.surahName, {
@@ -100,7 +107,16 @@ const ContextMenu = () => {
             </p>
           </div>
         </div>
-        <div className={classNames(styles.section, styles.leftSection)}>
+        {showReadingPreferenceSwitcher && (
+          <div className={styles.halfSection}>
+            <ReadingPreferenceSwitcher
+              size={SwitchSize.XSmall}
+              isIconsOnly
+              type={ReadingPreferenceSwitcherType.ContextMenu}
+            />
+          </div>
+        )}
+        <div className={showReadingPreferenceSwitcher ? styles.section : styles.halfSection}>
           <div className={classNames(styles.row)}>
             <p
               className={classNames(styles.alignEnd, {

@@ -8,6 +8,7 @@
         "all": "Kami mempunyai beberapa projek yang dihoskan di Github. Anda boleh menemui kesemuanya <0> di sini <\/0> . Ianya adalah seperti berikut:",
         "q-android": "<0> Quran Android <\/0>",
         "q-api": "<0> API Quran.com <\/0> - ditulis dalam Ruby on Rails.",
+        "q-api-docs": "<0> Dokumen API Quran.com <\/0> - Portal dokumen API kami.",
         "q-audio": "<0> Audio Al-Quran <\/0> dan <1> Aplikasi mudah alih Audio Al-Quran <\/1>",
         "q-audio-segments": "<0> Segmen Audio Al-Quran <\/0>",
         "q-ios": "<0> Al-Quran iOS <\/0>",

@@ -1,3 +1,4 @@
+/* eslint-disable react-func/max-lines-per-function */
 import { useEffect, useMemo, useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
@@ -14,37 +15,101 @@ import { isLoggedIn } from '@/utils/auth/login';
 import { dateToDateString, getFullDayName } from '@/utils/datetime';
 import { toLocalizedNumber } from '@/utils/locale';
 
-const useGetWeekDays = (showDayName = false) => {
-  const { t, lang } = useTranslation('reading-goal');
+type Day = { current: boolean; dateString: string; date: Date };
 
+const useGetWeekDays = () => {
   return useMemo(() => {
-    const days: { name: string; current: boolean; date: string }[] = [];
+    const days: Day[] = [];
     const today = new Date();
 
-    const saturday = new Date(today);
-
-    if (today.getDay() !== 6) {
-      saturday.setDate(today.getDate() - today.getDay() - 1);
+    // we want to timeline to start from Sunday
+    const sunday = new Date(today);
+    if (today.getDay() !== 0) {
+      sunday.setDate(today.getDate() - today.getDay());
     }
 
-    const friday = new Date(saturday);
-    friday.setDate(saturday.getDate() + 5);
-
     for (let i = 0; i < 7; i += 1) {
-      const day = new Date(saturday);
-      day.setDate(saturday.getDate() + i);
+      const day = new Date(sunday);
+      day.setDate(sunday.getDate() + i);
 
       days.push({
-        name: showDayName
-          ? getFullDayName(day, lang)
-          : t('day-x', { day: toLocalizedNumber(i + 1, lang) }),
         current: day.getDate() === today.getDate(),
-        date: dateToDateString(day),
+        date: day,
+        dateString: dateToDateString(day),
       });
     }
 
     return days;
-  }, [t, lang, showDayName]);
+  }, []);
+};
+
+const useGetWeekDayNames = (week: Day[], streak: number, showWeekdayName = false) => {
+  const { t, lang } = useTranslation('reading-goal');
+
+  return useMemo(() => {
+    const names: { localizedNumber: string; title: string }[] = [];
+
+    let showIncrement = streak > 1;
+    let currentDayIndex = 0;
+    if (!showWeekdayName && showIncrement) {
+      week.forEach((day, index) => {
+        /**
+         * we need to make sure that the streak is bigger than
+         * the current day's number.
+         *
+         * Example:
+         * Streak: 3
+         * Timeline:
+         * 1  2  3  4  (5 <- current day)  6  7
+         *
+         * In this case, we don't want to show the increment and start counting days from 1
+         */
+        if (day.current) {
+          showIncrement = streak > index + 1;
+          currentDayIndex = index;
+        }
+      });
+    }
+
+    for (let i = 0; i < 7; i += 1) {
+      let dayName: { localizedNumber: string; title: string };
+      if (showWeekdayName) {
+        dayName = {
+          localizedNumber: toLocalizedNumber(i + 1, lang),
+          title: getFullDayName(week[i].date, lang),
+        };
+      } else {
+        /**
+         * If we're showing the increment, we need to subtract all days from the beginning of the week till the current day, and after that increment it based on the day's index.
+         *
+         * Example:
+         * Streak: 10
+         * Timeline:
+         * 1  (2 <- current day)  3  4  5  6  7
+         *
+         * We need to render "1" as Day 9, and "2" as Day 10.
+         * "1" -> i = 0; currentDayIndex = 1; streak = 10; 10 - 1 + 0 = 9
+         * "2" -> i = 1; currentDayIndex = 1; streak = 10; 10 - 1 + 1 = 10
+         *
+         */
+        const localizedNumber = toLocalizedNumber(
+          showIncrement ? streak - currentDayIndex + i : i + 1,
+          lang,
+        );
+
+        dayName = {
+          localizedNumber,
+          title: t('day-x', {
+            day: localizedNumber,
+          }),
+        };
+      }
+
+      names.push(dayName);
+    }
+
+    return names;
+  }, [lang, showWeekdayName, streak, t, week]);
 };
 
 const useGetStreakWithMetadata = ({
@@ -54,7 +119,7 @@ const useGetStreakWithMetadata = ({
   showDayName?: boolean;
   disableIfNoGoalExists?: boolean;
 } = {}) => {
-  const week = useGetWeekDays(showDayName);
+  const week = useGetWeekDays();
   const quranFont = useSelector(selectQuranFont, shallowEqual);
   const mushafLines = useSelector(selectQuranMushafLines, shallowEqual);
   const { mushaf } = getMushafId(quranFont, mushafLines);
@@ -63,8 +128,8 @@ const useGetStreakWithMetadata = ({
 
   const params: StreakWithMetadataParams = {
     mushafId: mushaf,
-    from: week[0].date,
-    to: week[week.length - 1].date,
+    from: week[0].dateString,
+    to: week[week.length - 1].dateString,
     type: StreakType.QURAN,
   };
 
@@ -105,7 +170,11 @@ const useGetStreakWithMetadata = ({
     activityDays.forEach((day) => {
       result[day.date] = {
         ...day,
-        hasRead: day.pagesRead > 0 || day.secondsRead > 0 || day.ranges.length > 0,
+        hasRead:
+          day.pagesRead > 0 ||
+          day.secondsRead > 0 ||
+          day.ranges.length > 0 ||
+          day.manuallyAddedSeconds > 0,
       };
     });
 
@@ -113,16 +182,24 @@ const useGetStreakWithMetadata = ({
   }, [activityDays]);
 
   const currentActivityDay = useMemo(() => {
-    return readingDaysMap[week.find((d) => d.current)?.date];
+    return readingDaysMap[week.find((d) => d.current)?.dateString];
   }, [readingDaysMap, week]);
+
+  const weekDayNames = useGetWeekDayNames(week, streak, showDayName);
+  const weekData = useMemo(() => {
+    return {
+      days: week.map((day, idx) => ({
+        ...day,
+        info: weekDayNames[idx],
+      })),
+      readingDaysMap,
+    };
+  }, [week, weekDayNames, readingDaysMap]);
 
   return {
     isLoading,
     error,
-    weekData: {
-      days: week,
-      readingDaysMap,
-    },
+    weekData,
     streak,
     goal,
     activityDays,

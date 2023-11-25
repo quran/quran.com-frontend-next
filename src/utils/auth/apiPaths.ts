@@ -16,6 +16,10 @@ const makeUrl = (url: string, parameters?: Record<string, unknown>): string => {
 
 export const makeUserProfileUrl = (): string => makeUrl('users/profile');
 
+export const makeUserFeatureFlagsUrl = (): string => makeUrl('feature-flags');
+
+export const makeUserConsentsUrl = (): string => makeUrl('consent/userConsents');
+
 export const makeCompleteSignupUrl = (): string => makeUrl('users/completeSignup');
 
 export const makeCompleteAnnouncementUrl = (): string => makeUrl('users/completeAnnouncement');
@@ -62,6 +66,8 @@ export const makeDeleteCollectionBookmarkByIdUrl = (collectionId: string, bookma
 export const makeDeleteCollectionBookmarkByKeyUrl = (collectionId: string) =>
   makeUrl(`collections/${collectionId}/bookmarks`);
 
+export const makePostReflectionViewsUrl = (postId: string) => makeUrl(`posts/${postId}/views`);
+
 export const makeBookmarkCollectionsUrl = (
   mushafId: number,
   key: number,
@@ -107,6 +113,9 @@ export const makeActivityDaysUrl = (params: { mushafId?: Mushaf; type: ActivityD
 
 export const makeFilterActivityDaysUrl = (params: FilterActivityDaysParams) =>
   makeUrl('activity-days/filter', params);
+
+export const makeEstimateRangesReadingTimeUrl = (params: { ranges: string[] }) =>
+  makeUrl('activity-days/estimate-reading-time', { ranges: params.ranges.join(',') });
 
 export const makeGoalUrl = (params: { mushafId?: Mushaf; type: GoalCategory }) =>
   makeUrl('goal', params);

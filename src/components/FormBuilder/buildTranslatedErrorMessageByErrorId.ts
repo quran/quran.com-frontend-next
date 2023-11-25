@@ -11,9 +11,9 @@ const buildTranslatedErrorMessageByErrorId = (
   t: Translate,
 ) => {
   if (Object.values(ErrorMessageId).includes(errorId)) {
-    return t(`validation.${errorId}`, { field: capitalize(fieldName) });
+    return t(`common:validation.${errorId}`, { field: capitalize(fieldName) });
   }
-  return t(`validation.${DEFAULT_ERROR_ID}`, { field: capitalize(fieldName) });
+  return t(`common:validation.${DEFAULT_ERROR_ID}`, { field: capitalize(fieldName) });
 };
 
 export default buildTranslatedErrorMessageByErrorId;

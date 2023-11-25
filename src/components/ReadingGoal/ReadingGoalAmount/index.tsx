@@ -1,18 +1,14 @@
-import { useContext } from 'react';
-
 import useTranslation from 'next-translate/useTranslation';
 
-import DataContext from '@/contexts/DataContext';
-import Link, { LinkVariant } from '@/dls/Link/Link';
+import VerseRangesList from './VerseRangesList';
+
 import { StreakWithMetadata } from '@/hooks/auth/useGetStreakWithMetadata';
 import { GoalType } from '@/types/auth/Goal';
-import { getChapterData } from '@/utils/chapter';
+import { RangeItemDirection } from '@/types/Range';
 import { secondsToReadableFormat } from '@/utils/datetime';
 import { logButtonClick } from '@/utils/eventLogger';
 import { toLocalizedNumber } from '@/utils/locale';
-import { getChapterWithStartingVerseUrl } from '@/utils/navigation';
 import { convertFractionToPercent, convertNumberToDecimal } from '@/utils/number';
-import { parseVerseRange } from '@/utils/verseKeys';
 
 interface ReadingGoalAmountProps {
   goal?: StreakWithMetadata['goal'];
@@ -26,7 +22,6 @@ const ReadingGoalAmount: React.FC<ReadingGoalAmountProps> = ({
   context,
 }) => {
   const { t, lang } = useTranslation('reading-goal');
-  const chaptersData = useContext(DataContext);
   const percent = convertFractionToPercent(currentActivityDay?.progress || 0);
 
   if (!goal || !goal.progress) return null;
@@ -36,10 +31,10 @@ const ReadingGoalAmount: React.FC<ReadingGoalAmountProps> = ({
 
   let action: string | React.ReactNode = '';
 
-  const handleRangeClick = (range: 'from' | 'to', verseKey: string) => {
+  const handleVerseClick = (direction: RangeItemDirection, verseKey: string) => {
     return () => {
       // eslint-disable-next-line @typescript-eslint/naming-convention
-      logButtonClick(`${context}_goal_range_${range}`, { verse_key: verseKey });
+      logButtonClick(`${context}_goal_range_${direction}`, { verse_key: verseKey });
     };
   };
 
@@ -56,55 +51,12 @@ const ReadingGoalAmount: React.FC<ReadingGoalAmountProps> = ({
   }
 
   if (goalType === GoalType.RANGE) {
-    const all = [];
-
-    currentActivityDay?.remainingDailyTargetRanges?.forEach((range) => {
-      const [
-        { chapter: fromChapter, verse: fromVerse, verseKey: rangeFrom },
-        { chapter: toChapter, verse: toVerse, verseKey: rangeTo },
-      ] = parseVerseRange(range);
-
-      const from = `${
-        getChapterData(chaptersData, fromChapter).transliteratedName
-      } ${toLocalizedNumber(Number(fromVerse), lang)}`;
-
-      const to = `${getChapterData(chaptersData, toChapter).transliteratedName} ${toLocalizedNumber(
-        Number(toVerse),
-        lang,
-      )}`;
-
-      all.push(
-        <>
-          <Link
-            href={getChapterWithStartingVerseUrl(rangeFrom)}
-            variant={LinkVariant.Blend}
-            onClick={handleRangeClick('from', rangeFrom)}
-          >
-            {from}
-          </Link>
-          {` ${t('common:to')} `}
-          <Link
-            href={getChapterWithStartingVerseUrl(rangeTo)}
-            variant={LinkVariant.Blend}
-            onClick={handleRangeClick('to', rangeFrom)}
-          >
-            {to}
-          </Link>
-        </>,
-      );
-    });
-
-    action =
-      all.length > 1 ? (
-        <ul>
-          {all.map((range, idx) => (
-            // eslint-disable-next-line react/no-array-index-key
-            <div key={idx}>{range}</div>
-          ))}
-        </ul>
-      ) : (
-        all
-      );
+    action = (
+      <VerseRangesList
+        ranges={currentActivityDay?.remainingDailyTargetRanges || []}
+        onVerseClick={handleVerseClick}
+      />
+    );
   }
 
   return (

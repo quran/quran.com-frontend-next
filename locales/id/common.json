@@ -1,21 +1,32 @@
 {
     "about": "Tentang kami",
+    "allow": "Mengizinkan",
     "and": "dan",
     "announcements": {
         "auth-onboarding": {
-            "slide-1": {
-                "action": "Lihat apa yang baru",
-                "title": "Selamat datang di Quran.com <br> <\/br> Akun Pengguna"
-            },
-            "slide-2": {
+            "data-sync": {
                 "action": "Lanjut",
                 "description": "Baik Anda menggunakan Quran.com di ponsel atau laptop Anda, bookmark Anda, ayat yang terakhir dibaca, dan preferensi Anda akan tersedia",
-                "title": "Data Anda akan disinkronkan <br> <\/br> di seluruh perangkat"
+                "title": "Data Anda akan disinkronkan <br><\/br> di seluruh perangkat"
             },
-            "slide-3": {
+            "feedback": {
                 "action": "OK saya mengerti",
                 "description": "Terima kasih telah menggunakan Quran.com dan kami akan senang mendengar tanggapan Anda di <link> feedback.quran.com <\/link>",
                 "title": "Kami ingin mendengar pendapat Anda"
+            },
+            "quran-foundation-link": {
+                "action": "Berikutnya",
+                "description": "Gunakan login Quran.com Anda untuk akses ke QuranReflect.com — sebuah komunitas global yang berkembang yang terlibat dalam refleksi Alquran.",
+                "title": "Gunakan akun Anda di seluruh aplikasi Quran.Foundation!"
+            },
+            "quran-growth-journey": {
+                "action": "Berikutnya",
+                "description": "Pertahankan bacaan Quran Anda dan tingkatkan tujuan Anda sambil membangun kebiasaan baru",
+                "title": "Mulailah Perjalanan Pertumbuhan Quran Anda!"
+            },
+            "welcome": {
+                "action": "Lihat apa yang baru",
+                "title": "Selamat datang di Quran.com <br><\/br> Akun Pengguna"
             }
         },
         "collections-announcement": {
@@ -103,6 +114,12 @@
         "title": "Komunitas"
     },
     "complete-sign-up": "Lengkapi pendaftaran Anda",
+    "consents": {
+        "communication": {
+            "body": "🚀 Tingkatkan kemajuan Anda melalui pemberitahuan <boldSpan> yang dipersonalisasi <\/boldSpan> tentang kemajuan tujuan Anda, pertahankan rekor, dan tingkatkan penggunaan fitur kami saat ini. <br><\/br> <br><\/br> Bisakah kami terus mengabari Anda melalui email dan saluran lainnya? Anda memegang kendali – silakan sesuaikan preferensi ini kapan saja di pengaturan akun Anda. <br><\/br> <br><\/br> Cukup pilih 'Izinkan' untuk <boldSpan> pengingat yang menginspirasi <\/boldSpan> atau 'Jangan Sekarang' untuk menolaknya.",
+            "header": "Kami ingin membantu Anda tetap <boldSpan> berkomitmen dan konsisten <\/boldSpan> dengan Perjalanan Pertumbuhan Quran Anda! 📖🌟"
+        }
+    },
     "continue": "Melanjutkan",
     "copied": "disalin",
     "copied-to-clipboard": "Disalin ke papan klip",
@@ -171,6 +188,7 @@
     "help": "Bantuan",
     "hizb": "Hizb",
     "home": "Halaman Utama",
+    "hours": "Jam",
     "inline": "Di barisan",
     "input": {
         "clear": "bersihkan"
@@ -186,6 +204,7 @@
     "meccan": "Mekah",
     "medinan": "Madinah",
     "menu": "Menu",
+    "minutes": "Menit",
     "mobile-apps": "Aplikasi",
     "mode": "Mode",
     "more": "Lagi",
@@ -195,7 +214,14 @@
     "next": "Lanjut",
     "next-ayah": "Ayat Berikutnya",
     "no": "Tidak",
+    "no-notifications": "Belum ada pemberitahuan",
     "none": "Tidak ada",
+    "not-now": "Tidak sekarang",
+    "notification": {
+        "mark-all-as-read": "tandai semua telah dibaca",
+        "mark-as-read": "tandai sebagai membaca"
+    },
+    "notifications": "Pemberitahuan",
     "off": "Mati",
     "on": "Hidup",
     "page": "Halaman",
@@ -249,6 +275,7 @@
         "switch-mode": "Beralih ke Pencarian Lanjutan",
         "title": "Mencari"
     },
+    "seconds": "Detik",
     "settings": {
         "no-tafsir-selected": "Tidak ada tafsir yang dipilih",
         "no-translation-selected": "Tidak ada terjemahan yang dipilih",

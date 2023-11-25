@@ -27,6 +27,7 @@
   "dependencies": {
     "@babel/eslint-parser": "^7.19.1",
     "@next/bundle-analyzer": "^12.3.1",
+    "@novu/headless": "^0.20.0",
     "@radix-ui/react-checkbox": "^1.0.0",
     "@radix-ui/react-collapsible": "^1.0.0",
     "@radix-ui/react-dialog": "^1.0.0",
@@ -45,7 +46,7 @@
     "@reduxjs/toolkit": "^1.8.5",
     "@sanity/client": "^5.2.1",
     "@sanity/image-url": "^1.0.2",
-    "@sentry/nextjs": "^7.13.0",
+    "@sentry/nextjs": "^7.77.0",
     "@xstate/react": "^3.0.1",
     "classnames": "^2.3.2",
     "clipboard-copy": "^4.0.1",

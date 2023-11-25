@@ -107,6 +107,7 @@
     },
     "todays-goal": "Het doel van vandaag",
     "view-progress": "Voortgang bekijken",
+    "week-progress": "De vorderingen van deze week",
     "x-days": {
         "one": "{{days}} dag",
         "other": "{{days}} dagen"

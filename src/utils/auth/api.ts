@@ -9,6 +9,7 @@ import {
   UpdateActivityDayBody,
   ActivityDayType,
 } from '@/types/auth/ActivityDay';
+import ConsentType from '@/types/auth/ConsentType';
 import { CreateGoalRequest, Goal, GoalCategory, UpdateGoalRequest } from '@/types/auth/Goal';
 import { StreakWithMetadataParams, StreakWithUserMetadata } from '@/types/auth/Streak';
 import { Mushaf } from '@/types/QuranReader';
@@ -43,6 +44,10 @@ import {
   makeGoalUrl,
   makeFilterActivityDaysUrl,
   makeStreakUrl,
+  makeEstimateRangesReadingTimeUrl,
+  makePostReflectionViewsUrl,
+  makeUserFeatureFlagsUrl,
+  makeUserConsentsUrl,
 } from '@/utils/auth/apiPaths';
 import { fetcher } from 'src/api';
 import CompleteAnnouncementRequest from 'types/auth/CompleteAnnouncementRequest';
@@ -118,6 +123,9 @@ const patchRequest = <T>(url: string, requestData?: RequestData): Promise<T> =>
 export const getUserProfile = async (): Promise<UserProfile> =>
   privateFetcher(makeUserProfileUrl());
 
+export const getUserFeatureFlags = async (): Promise<Record<string, boolean>> =>
+  privateFetcher(makeUserFeatureFlagsUrl());
+
 export const refreshToken = async (): Promise<RefreshToken> =>
   privateFetcher(makeRefreshTokenUrl());
 
@@ -126,6 +134,13 @@ export const completeSignup = async (data: CompleteSignupRequest): Promise<UserP
 
 export const completeAnnouncement = async (data: CompleteAnnouncementRequest): Promise<any> => {
   return postRequest(makeCompleteAnnouncementUrl(), data);
+};
+
+export const updateUserConsent = async (data: {
+  consentType: ConsentType;
+  consented: boolean;
+}): Promise<any> => {
+  return postRequest(makeUserConsentsUrl(), data);
 };
 
 export const deleteAccount = async (): Promise<void> => deleteRequest(makeDeleteAccountUrl());
@@ -205,6 +220,12 @@ export const updateActivityDay = async ({
 }: UpdateActivityDayBody): Promise<ActivityDay> =>
   postRequest(makeActivityDaysUrl({ mushafId, type }), body);
 
+export const estimateRangesReadingTime = async (body: {
+  ranges: string[];
+}): Promise<{ data: { seconds: number } }> => {
+  return privateFetcher(makeEstimateRangesReadingTimeUrl(body));
+};
+
 export const getStreakWithUserMetadata = async (
   params: StreakWithMetadataParams,
 ): Promise<{ data: StreakWithUserMetadata }> => privateFetcher(makeStreakUrl(params));
@@ -212,6 +233,9 @@ export const getStreakWithUserMetadata = async (
 export const syncUserLocalData = async (
   payload: Record<SyncDataType, any>,
 ): Promise<SyncUserLocalDataResponse> => postRequest(makeSyncLocalDataUrl(), payload);
+
+export const postReflectionViews = async (postId: string): Promise<{ success: boolean }> =>
+  postRequest(makePostReflectionViewsUrl(postId), {});
 
 export const getUserPreferences = async (): Promise<UserPreferencesResponse> => {
   const userPreferences = (await privateFetcher(

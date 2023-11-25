@@ -17,6 +17,13 @@ $separatorOpacity: 0.2;
   ); // use grid to prevent layout shift when `font-family: bold` on item selected https://css-tricks.com/bold-on-hover-without-the-layout-shift/
 }
 
+.xSmallContainer {
+  padding-block-start: 0;
+  padding-block-end: 0;
+  padding-inline-start: 0;
+  padding-inline-end: 0;
+}
+
 .item {
   cursor: pointer;
   color: var(--color-text-default);
@@ -93,4 +100,11 @@ $background-container: calc(0.8 * var(--spacing-xxsmall));
   padding-block-end: var(--spacing-xxsmall);
   padding-inline-start: var(--spacing-small);
   padding-inline-end: var(--spacing-small);
+}
+
+.itemXSmall {
+  padding-block-start: var(--spacing-micro);
+  padding-block-end: var(--spacing-micro);
+  padding-inline-start: var(--spacing-micro);
+  padding-inline-end: var(--spacing-micro);
 }

@@ -11,6 +11,7 @@ interface UserProfile {
   photoUrl?: string;
   requiredFields: FormField[];
   announcement: Announcement;
+  consents: Record<string, boolean>;
   lastSyncAt?: Date;
 }
 

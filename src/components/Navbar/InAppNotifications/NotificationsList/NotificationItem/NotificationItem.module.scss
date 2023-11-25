@@ -1,0 +1,49 @@
+.individualNotif {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.container {
+    padding: var(--spacing-large);
+    border-radius: var(--border-radius-default);
+    &:hover {
+        background-color: var(--color-background-alternative-faded);
+    }
+}
+
+.buttonContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.readText {
+    color: var(--color-text-faded);
+}
+
+.tickIcon {
+    svg {
+        position: absolute;
+        path {
+            color: var(--color-background-inverse);
+            stroke: var(--color-background-inverse);
+            stroke-width: 1;
+        }
+    }
+}
+
+.popoverContainer {
+    display: flex;
+    align-items: center;
+}
+
+.dot {
+    color: var(--color-success-deep);
+    font-size: var(--font-size-jumbo);
+    font-weight: var(--font-weight-bold);
+}
+
+.date {
+    font-size: var(--font-size-xsmall);
+}

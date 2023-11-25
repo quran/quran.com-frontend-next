@@ -1,21 +1,32 @@
 {
     "about": "Sobre nós",
+    "allow": "Permitir",
     "and": "e",
     "announcements": {
         "auth-onboarding": {
-            "slide-1": {
-                "action": "Veja o que é novo",
-                "title": "Bem-vindo ao Quran.com <br> <\/br> Conta de usuário"
-            },
-            "slide-2": {
+            "data-sync": {
                 "action": "Próximo",
                 "description": "Se você estiver usando o Quran.com em seu telefone ou laptop, seus favoritos, os últimos versículos lidos e suas preferências estarão disponíveis",
-                "title": "Seus dados serão sincronizados <br> <\/br> entre dispositivos"
+                "title": "Seus dados serão sincronizados <br><\/br> entre dispositivos"
             },
-            "slide-3": {
+            "feedback": {
                 "action": "Ok, entendi",
                 "description": "Obrigado por usar o Quran.com e ficaríamos felizes em ouvir seus comentários sobre <link> feedback.quran.com <\/link>",
                 "title": "Queremos ouvir seus pensamentos"
+            },
+            "quran-foundation-link": {
+                "action": "Próximo",
+                "description": "Use seu login do Quran.com para acessar o QuranReflect.com — uma próspera comunidade global engajada na reflexão do Alcorão.",
+                "title": "Use sua conta nos aplicativos Quran.Foundation!"
+            },
+            "quran-growth-journey": {
+                "action": "Próximo",
+                "description": "Mantenha sua série de leitura do Alcorão e progrida em seus objetivos enquanto constrói novos hábitos",
+                "title": "Comece sua jornada de crescimento do Alcorão!"
+            },
+            "welcome": {
+                "action": "Veja o que é novo",
+                "title": "Bem-vindo ao Quran.com <br><\/br> Conta de usuário"
             }
         },
         "collections-announcement": {
@@ -103,6 +114,12 @@
         "title": "Comunidade"
     },
     "complete-sign-up": "Complete seu cadastro",
+    "consents": {
+        "communication": {
+            "body": "🚀 Acelere seu progresso com notificações <boldSpan> personalizadas <\/boldSpan> sobre o progresso de sua meta, mantendo sequências e melhorando o uso de nossos recursos atuais. <br><\/br> <br><\/br> Podemos mantê-lo informado por e-mail e outros canais? Você está no controle – sinta-se à vontade para ajustar essas preferências a qualquer momento nas configurações da sua conta. <br><\/br> <br><\/br> Basta selecionar 'Permitir' para <boldSpan> lembretes inspiradores <\/boldSpan> ou 'Agora não' para recusar.",
+            "header": "Adoraríamos ajudá-lo a permanecer <boldSpan> comprometido e consistente <\/boldSpan> em sua jornada de crescimento do Alcorão! 📖🌟"
+        }
+    },
     "continue": "Prosseguir",
     "copied": "Copiado",
     "copied-to-clipboard": "Copiado para a área de transferência",
@@ -171,6 +188,7 @@
     "help": "Ajuda",
     "hizb": "Hizb",
     "home": "Casa",
+    "hours": "Horas",
     "inline": "Em linha",
     "input": {
         "clear": "Claro"
@@ -186,6 +204,7 @@
     "meccan": "Meca",
     "medinan": "Medina",
     "menu": "Cardápio",
+    "minutes": "Minutos",
     "mobile-apps": "Aplicativos móveis",
     "mode": "Modo",
     "more": "Mais",
@@ -195,7 +214,14 @@
     "next": "Próximo",
     "next-ayah": "Próxima Aia",
     "no": "Não",
+    "no-notifications": "Nenhuma notificação ainda",
     "none": "Nenhum",
+    "not-now": "Agora não",
+    "notification": {
+        "mark-all-as-read": "marcar tudo como lido",
+        "mark-as-read": "marcar como Lido"
+    },
+    "notifications": "Notificações",
     "off": "Desligado",
     "on": "Sobre",
     "page": "Página",
@@ -249,6 +275,7 @@
         "switch-mode": "Mudar para pesquisa avançada",
         "title": "Procurar"
     },
+    "seconds": "Segundos",
     "settings": {
         "no-tafsir-selected": "Nenhum tafsir selecionado",
         "no-translation-selected": "Nenhuma tradução selecionada",

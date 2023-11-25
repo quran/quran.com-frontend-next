@@ -1,21 +1,32 @@
 {
     "about": "À propos de nous",
+    "allow": "Permettre",
     "and": "et",
     "announcements": {
         "auth-onboarding": {
-            "slide-1": {
-                "action": "Regardez ce qu'il y a de nouveau",
-                "title": "Bienvenue sur Quran.com <br> <\/br> Compte utilisateur"
-            },
-            "slide-2": {
+            "data-sync": {
                 "action": "Prochain",
                 "description": "Que vous utilisiez Quran.com sur votre téléphone ou votre ordinateur portable, vos signets, les derniers versets lus et vos préférences seront disponibles",
-                "title": "Vos données seront synchronisées <br> <\/br> sur tous les appareils"
+                "title": "Vos données seront synchronisées <br><\/br> sur tous les appareils"
             },
-            "slide-3": {
+            "feedback": {
                 "action": "OK, j'ai compris",
                 "description": "Merci d'utiliser Quran.com et nous serions heureux d'entendre vos commentaires sur <link> feedback.quran.com <\/link>",
                 "title": "Nous voulons entendre vos pensées"
+            },
+            "quran-foundation-link": {
+                "action": "Suivant",
+                "description": "Utilisez votre connexion Quran.com pour accéder à QuranReflect.com - une communauté mondiale florissante engagée dans la réflexion coranique.",
+                "title": "Utilisez votre compte sur toutes les applications Quran.Foundation !"
+            },
+            "quran-growth-journey": {
+                "action": "Suivant",
+                "description": "Maintenez votre séquence de lecture du Coran et progressez dans vos objectifs tout en créant de nouvelles habitudes",
+                "title": "Commencez votre voyage de croissance du Coran !"
+            },
+            "welcome": {
+                "action": "Regardez ce qu'il y a de nouveau",
+                "title": "Bienvenue sur Quran.com <br><\/br> Compte utilisateur"
             }
         },
         "collections-announcement": {
@@ -103,6 +114,12 @@
         "title": "Communauté"
     },
     "complete-sign-up": "Complétez votre inscription",
+    "consents": {
+        "communication": {
+            "body": "🚀 Boostez vos progrès grâce à des notifications <boldSpan> personnalisées <\/boldSpan> sur la progression de votre objectif, le maintien de séquences et l'amélioration de votre utilisation de nos fonctionnalités actuelles. <br><\/br> <br><\/br> Pouvons-nous vous tenir au courant par e-mail et par d'autres canaux ? Vous avez le contrôle – n'hésitez pas à ajuster ces préférences à tout moment dans les paramètres de votre compte. <br><\/br> <br><\/br> Sélectionnez simplement « Autoriser » pour <boldSpan> rappels inspirants <\/boldSpan> ou « Pas maintenant » pour refuser.",
+            "header": "Nous serions ravis de vous aider à rester <boldSpan> engagé et cohérent <\/boldSpan> dans votre parcours de croissance du Coran ! 📖🌟"
+        }
+    },
     "continue": "Continuer",
     "copied": "Copié",
     "copied-to-clipboard": "Copié dans le presse-papier",
@@ -171,6 +188,7 @@
     "help": "Aider",
     "hizb": "Hizb",
     "home": "Accueil",
+    "hours": "Heures",
     "inline": "En ligne",
     "input": {
         "clear": "Dégager"
@@ -186,6 +204,7 @@
     "meccan": "La Mecque",
     "medinan": "Médinan",
     "menu": "Menu",
+    "minutes": "Minutes",
     "mobile-apps": "Application mobile",
     "mode": "Mode",
     "more": "Suite",
@@ -195,7 +214,14 @@
     "next": "Prochain",
     "next-ayah": "Ayah suivant",
     "no": "Non",
+    "no-notifications": "Aucune notification pour l'instant",
     "none": "Rien",
+    "not-now": "Pas maintenant",
+    "notification": {
+        "mark-all-as-read": "tout marquer comme lu",
+        "mark-as-read": "Marquer comme lu"
+    },
+    "notifications": "Notifications",
     "off": "Désactivé",
     "on": "Au",
     "page": "Page",
@@ -249,6 +275,7 @@
         "switch-mode": "Passer à la recherche avancée",
         "title": "Chercher"
     },
+    "seconds": "Secondes",
     "settings": {
         "no-tafsir-selected": "Aucun tafsir sélectionné",
         "no-translation-selected": "Aucune traduction sélectionnée",

@@ -106,6 +106,7 @@ $separator-size: 1px;
   [dir="rtl"] & .iconWrapper.shouldFlipOnRTL {
     transform: scaleX(-1);
   }
+
   & .iconWrapper {
     margin-inline-end: var(--spacing-small);
     display: flex;
@@ -113,6 +114,11 @@ $separator-size: 1px;
     justify-content: center;
     height: var(--spacing-medium);
     width: var(--spacing-medium);
+
+    svg {
+      width: 100%;
+      height: 100%;
+    }
   }
 }
 

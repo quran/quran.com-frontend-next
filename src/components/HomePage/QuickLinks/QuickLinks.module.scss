@@ -13,7 +13,7 @@ $link-shadow: 0px 3px 11px 1px rgb(0 0 0 / 3%);
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  overflow-x: scroll;
+  overflow-x: auto;
   margin-inline: auto;
   &::-webkit-scrollbar {
     -webkit-appearance: none;
