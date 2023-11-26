@@ -4,6 +4,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from './NotesListItem.module.scss';
 
+import NoteRangesIndicator from '@/components/Notes/NoteModal/NoteRangesIndicator';
 import { Note } from '@/types/auth/Note';
 import { dateToReadableFormat } from '@/utils/datetime';
 import { logButtonClick } from '@/utils/eventLogger';
@@ -32,6 +33,7 @@ const NotesListItem: React.FC<NotesListItemProps> = ({ note, setSelectedNoteId }
       onClick={() => onNoteClicked(note.id)}
       onKeyDown={() => onNoteClicked(note.id)}
     >
+      <NoteRangesIndicator ranges={note.ranges} />
       <h3>{note.title}</h3>
       <p>{note.body}</p>
       <time className={styles.noteDate} dateTime={note.createdAt.toString()}>
