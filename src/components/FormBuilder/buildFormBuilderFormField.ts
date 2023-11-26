@@ -25,16 +25,17 @@ import FormField from 'types/FormField';
  */
 const buildFormBuilderFormField = (formField: FormField, t: Translate): FormBuilderFormField => {
   return {
-    field: formField.field,
-    type: formField.type,
+    ...formField,
     label: t(`form.${formField.field}`),
     rules: formField.rules.map((rule) => ({
       type: rule.type,
       value: rule.value,
       errorMessage: t(`validation.${rule.errorId}`, {
         field: capitalize(formField.field),
+        ...rule.errorExtraParams,
       }),
     })),
+    ...(formField.defaultValue && { defaultValue: formField.defaultValue }),
   };
 };
 

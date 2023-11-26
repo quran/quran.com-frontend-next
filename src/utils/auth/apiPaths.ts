@@ -1,5 +1,9 @@
 import stringify from '../qs-stringify';
 
+import BookmarkByCollectionIdQueryParams from './types/BookmarkByCollectionIdQueryParams';
+import GetAllNotesQueryParams from './types/GetAllNotesQueryParams';
+import GetNoteByAttachedEntityParams from './types/GetNoteByAttachedEntityParams';
+
 import { ActivityDayType, FilterActivityDaysParams } from '@/types/auth/ActivityDay';
 import { EstimateGoalRequest, GoalCategory } from '@/types/auth/Goal';
 import { StreakWithMetadataParams } from '@/types/auth/Streak';
@@ -51,6 +55,20 @@ export const makeCollectionsUrl = (queryParams: CollectionsQueryParams): string 
 
 export const makeAddCollectionUrl = () => makeUrl('collections');
 
+export const makeGetNotesByVerseUrl = (verseKey: string) => makeUrl(`notes/by-verse/${verseKey}`);
+
+export const makeGetNoteByIdUrl = (id: string) => makeUrl(`notes/${id}`);
+
+export const makeCountNotesWithinRangeUrl = (startVerseKey: string, endVerseKey: string) =>
+  makeUrl(`notes/count-within-range`, { from: startVerseKey, to: endVerseKey });
+
+export const makeNotesUrl = (params?: GetAllNotesQueryParams) => makeUrl('notes', params as any);
+
+export const makeGetNoteByAttachedEntityUrl = (queryParams: GetNoteByAttachedEntityParams) =>
+  makeUrl(`notes`, queryParams);
+
+export const makeDeleteOrUpdateNoteUrl = (id: string) => makeUrl(`notes/${id}`);
+
 export const makeUpdateCollectionUrl = (collectionId: string) =>
   makeUrl(`collections/${collectionId}`);
 
@@ -66,6 +84,8 @@ export const makeDeleteCollectionBookmarkByIdUrl = (collectionId: string, bookma
 export const makeDeleteCollectionBookmarkByKeyUrl = (collectionId: string) =>
   makeUrl(`collections/${collectionId}/bookmarks`);
 
+export const makePostReflectionToQrUrl = () => makeUrl('posts');
+
 export const makePostReflectionViewsUrl = (postId: string) => makeUrl(`posts/${postId}/views`);
 
 export const makeBookmarkCollectionsUrl = (
@@ -76,11 +96,6 @@ export const makeBookmarkCollectionsUrl = (
 ): string =>
   makeUrl('bookmarks/collections', { mushafId, key, type, ...(verseNumber && { verseNumber }) });
 
-export type BookmarkByCollectionIdQueryParams = {
-  cursor?: string;
-  limit?: number;
-  sortBy?: string;
-};
 export const makeGetBookmarkByCollectionId = (
   collectionId: string,
   queryParams: BookmarkByCollectionIdQueryParams,

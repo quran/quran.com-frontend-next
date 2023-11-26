@@ -1,0 +1,26 @@
+.container {
+  min-height: 100vh;
+}
+
+.loadingContainer {
+  display: flex;
+  justify-content: center;
+  margin-block-start: var(--spacing-mega);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.titleContainer {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-large);
+
+  h1 {
+    font-size: var(--font-size-xlarge);
+    font-weight: var(--font-weight-bold);
+  }
+}

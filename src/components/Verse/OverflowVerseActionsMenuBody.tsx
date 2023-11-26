@@ -5,6 +5,7 @@ import useTranslation from 'next-translate/useTranslation';
 import { useSelector, shallowEqual } from 'react-redux';
 
 import BookmarkAction from './BookmarkAction';
+import VerseNotes from './Notes';
 import SaveToCollectionAction from './SaveToCollectionAction';
 import VerseActionAdvancedCopy from './VerseActionAdvancedCopy';
 import VerseActionRepeatAudio from './VerseActionRepeatAudio';
@@ -112,6 +113,8 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
     }
   };
 
+  const isUserLoggedIn = isLoggedIn();
+
   return (
     <div>
       <PopoverMenu.Item onClick={onCopyClicked} icon={<CopyIcon />}>
@@ -126,6 +129,9 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
         verse={verse}
         isTranslationView={isTranslationView}
       />
+      {isUserLoggedIn && (
+        <VerseNotes verseKey={verse.verseKey} isTranslationView={isTranslationView} />
+      )}
       {!isTranslationView && (
         <WordByWordVerseAction verse={verse} onActionTriggered={onActionTriggered} />
       )}
@@ -136,13 +142,14 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
         onActionTriggered={onActionTriggered}
         bookmarksRangeUrl={bookmarksRangeUrl}
       />
-      {isLoggedIn() ? (
+
+      {isUserLoggedIn && (
         <SaveToCollectionAction
           verse={verse}
           bookmarksRangeUrl={bookmarksRangeUrl}
           isTranslationView={isTranslationView}
         />
-      ) : null}
+      )}
 
       <VerseActionRepeatAudio isTranslationView={isTranslationView} verseKey={verse.verseKey} />
     </div>

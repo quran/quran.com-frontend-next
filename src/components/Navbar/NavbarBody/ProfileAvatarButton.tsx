@@ -11,12 +11,13 @@ import ClockIcon from '@/icons/clock.svg';
 import ArrowIcon from '@/icons/east.svg';
 import LogoutIcon from '@/icons/logout.svg';
 import IconPerson from '@/icons/person.svg';
+import NoteIcon from '@/icons/reader.svg';
 import TickIcon from '@/icons/tick.svg';
 import { logoutUser } from '@/utils/auth/api';
 import { isLoggedIn } from '@/utils/auth/login';
 import { removeLastSyncAt } from '@/utils/auth/userDataSync';
 import { logButtonClick } from '@/utils/eventLogger';
-import { getReadingGoalProgressNavigationUrl } from '@/utils/navigation';
+import { getNotesNavigationUrl, getReadingGoalProgressNavigationUrl } from '@/utils/navigation';
 
 const ProfileAvatarButton = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -53,6 +54,13 @@ const ProfileAvatarButton = () => {
     });
   };
 
+  const onNotesClicked = () => {
+    logButtonClick('profile_avatar_notes');
+    router.push(getNotesNavigationUrl()).then(() => {
+      setIsOpen(false);
+    });
+  };
+
   if (isUserLoggedIn) {
     return (
       <PopoverMenu
@@ -80,6 +88,9 @@ const ProfileAvatarButton = () => {
         </PopoverMenu.Item>
         <PopoverMenu.Item onClick={onReadingHistoryClicked} icon={<ClockIcon />}>
           {t('reading-history')}
+        </PopoverMenu.Item>
+        <PopoverMenu.Item onClick={onNotesClicked} icon={<NoteIcon />}>
+          {t('notes.notes')}
         </PopoverMenu.Item>
         <PopoverMenu.Item onClick={onLogoutClicked} icon={<LogoutIcon />}>
           {t('logout')}

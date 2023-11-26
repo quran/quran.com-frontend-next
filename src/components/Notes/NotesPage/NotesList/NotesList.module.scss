@@ -1,0 +1,15 @@
+.notesListContainer {
+  margin-block-start: var(--spacing-mega);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-large);
+}
+
+.emptyNotesContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  margin-block-start: calc(2 * var(--spacing-mega));
+  font-size: var(--font-size-xlarge);
+}

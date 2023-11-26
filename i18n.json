@@ -1,18 +1,41 @@
 {
-  "locales": ["en", "ar", "bn", "fa", "fr", "id", "it", "nl", "pt", "ru", "sq", "th", "tr", "ur", "zh", "ms"],
+  "locales": [
+    "en",
+    "ar",
+    "bn",
+    "fa",
+    "fr",
+    "id",
+    "it",
+    "nl",
+    "pt",
+    "ru",
+    "sq",
+    "th",
+    "tr",
+    "ur",
+    "zh",
+    "ms"
+  ],
   "defaultLocale": "en",
   "pages": {
     "*": ["common", "error", "radio", "quick-links"],
     "/": ["home", "radio", "collection", "reading-goal", "reciter"],
     "/reading-goal": ["reading-goal", "reciter"],
     "/reading-goal/progress": ["reading-goal", "reading-progress"],
-    "/[chapterId]": ["quran-reader", "reading-goal", "chapter", "surah-info"],
-    "/[chapterId]/reflections": ["quran-reader", "reading-goal"],
-    "/[chapterId]/[verseId]": ["quran-reader", "reading-goal"],
-    "/[chapterId]/[verseId]/tafsirs": ["quran-reader", "reading-goal"],
-    "/page/[pageId]": ["quran-reader", "reading-goal"],
-    "/juz/[juzId]": ["quran-reader", "reading-goal"],
-    "/hizb/[hizbId]": ["quran-reader", "reading-goal"],
+    "/[chapterId]": [
+      "quran-reader",
+      "reading-goal",
+      "notes",
+      "chapter",
+      "surah-info"
+    ],
+    "/[chapterId]/reflections": ["quran-reader", "reading-goal", "notes"],
+    "/[chapterId]/[verseId]": ["quran-reader", "reading-goal", "notes"],
+    "/[chapterId]/[verseId]/tafsirs": ["quran-reader", "reading-goal", "notes"],
+    "/page/[pageId]": ["quran-reader", "reading-goal", "notes"],
+    "/juz/[juzId]": ["quran-reader", "reading-goal", "notes"],
+    "/hizb/[hizbId]": ["quran-reader", "reading-goal", "notes"],
     "/surah/[chapterId]/info": ["surah-info"],
     "/chapter_info/[chapterId]": ["surah-info"],
     "/surah-info/[chapterId]": ["surah-info"],
@@ -22,7 +45,7 @@
     "/about-us": ["about"],
     "/developers": ["developers"],
     "/privacy": ["privacy"],
-    "/rub/[rubId]": ["quran-reader", "reading-goal"],
+    "/rub/[rubId]": ["quran-reader", "reading-goal", "notes"],
     "/support": ["support"],
     "/tajweed-colors": ["tajweed"],
     "/product-updates": ["product-updates"],
@@ -34,6 +57,7 @@
     "/reciters": ["reciter", "home"],
     "/profile": ["home", "profile", "collection"],
     "/login": ["login"],
-    "/about-the-quran": ["about-quran"]
+    "/about-the-quran": ["about-quran"],
+    "/notes": ["notes"]
   }
 }

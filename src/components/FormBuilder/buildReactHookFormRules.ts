@@ -1,3 +1,4 @@
+/* eslint-disable react-func/max-lines-per-function */
 import { UseControllerProps } from 'react-hook-form';
 
 import { FormBuilderFormField } from './FormBuilderTypes';
@@ -26,6 +27,22 @@ const buildReactHookFormRules = (formField: FormBuilderFormField) => {
     rules.required = {
       message: requiredRule.errorMessage,
       value: true,
+    };
+  }
+
+  const maximumLengthRule = formField.rules?.find((rule) => rule.type === RuleType.MaximumLength);
+  if (maximumLengthRule) {
+    rules.maxLength = {
+      message: maximumLengthRule.errorMessage,
+      value: maximumLengthRule.value as number,
+    };
+  }
+
+  const minimumLength = formField.rules?.find((rule) => rule.type === RuleType.MinimumLength);
+  if (minimumLength) {
+    rules.minLength = {
+      message: minimumLength.errorMessage,
+      value: minimumLength.value as number,
     };
   }
 

@@ -1,0 +1,20 @@
+.sorter {
+  display: flex;
+  align-items: center;
+  font-size: var(--font-size-small);
+  cursor: pointer;
+}
+
+.sortTrigger {
+  display: flex;
+  align-items: center;
+}
+
+.itemIcon {
+  display: flex;
+  --icon-size: var(--spacing-medium);
+  width: var(--icon-size);
+  > svg {
+    width: 100%;
+  }
+}

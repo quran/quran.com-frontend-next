@@ -5,12 +5,14 @@ export enum FormFieldType {
   Password = 'password',
   Phone = 'phone',
   Number = 'number',
+  TextArea = 'textarea',
 }
 
 type FormField = {
   field: string;
   rules?: FieldRule[];
   type: FormFieldType;
+  defaultValue?: unknown;
 };
 
 export default FormField;

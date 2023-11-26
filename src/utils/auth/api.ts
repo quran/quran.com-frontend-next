@@ -3,6 +3,9 @@ import { configureRefreshFetch } from 'refresh-fetch';
 
 import { getTimezone } from '../datetime';
 
+import BookmarkByCollectionIdQueryParams from './types/BookmarkByCollectionIdQueryParams';
+import GetAllNotesQueryParams from './types/GetAllNotesQueryParams';
+
 import {
   FilterActivityDaysParams,
   ActivityDay,
@@ -11,6 +14,7 @@ import {
 } from '@/types/auth/ActivityDay';
 import ConsentType from '@/types/auth/ConsentType';
 import { CreateGoalRequest, Goal, GoalCategory, UpdateGoalRequest } from '@/types/auth/Goal';
+import { Note } from '@/types/auth/Note';
 import { StreakWithMetadataParams, StreakWithUserMetadata } from '@/types/auth/Streak';
 import { Mushaf } from '@/types/QuranReader';
 import {
@@ -34,7 +38,6 @@ import {
   makeBookmarkCollectionsUrl,
   CollectionsQueryParams,
   makeUpdateCollectionUrl,
-  BookmarkByCollectionIdQueryParams,
   makeDeleteCollectionUrl,
   makeAddCollectionBookmarkUrl,
   makeDeleteCollectionBookmarkByIdUrl,
@@ -48,6 +51,11 @@ import {
   makePostReflectionViewsUrl,
   makeUserFeatureFlagsUrl,
   makeUserConsentsUrl,
+  makeNotesUrl,
+  makeDeleteOrUpdateNoteUrl,
+  makeGetNotesByVerseUrl,
+  makeCountNotesWithinRangeUrl,
+  makePostReflectionToQrUrl,
 } from '@/utils/auth/apiPaths';
 import { fetcher } from 'src/api';
 import CompleteAnnouncementRequest from 'types/auth/CompleteAnnouncementRequest';
@@ -314,6 +322,36 @@ export const getBookmarksByCollectionId = async (
 export const addCollection = async (collectionName: string) => {
   return postRequest(makeAddCollectionUrl(), { name: collectionName });
 };
+
+export const getAllNotes = async (params: GetAllNotesQueryParams) => {
+  return privateFetcher(makeNotesUrl(params));
+};
+
+export const getNotesByVerseKey = async (verseKey: string) => {
+  return privateFetcher(makeGetNotesByVerseUrl(verseKey));
+};
+
+export const countNotesWithinRange = async (from: string, to: string) => {
+  return privateFetcher(makeCountNotesWithinRangeUrl(from, to));
+};
+
+export const addNote = async (payload: Pick<Note, 'title' | 'body' | 'ranges'>) => {
+  return postRequest(makeNotesUrl(), payload);
+};
+
+export const postToQR = async (payload: {
+  body: string;
+  isPrivate: boolean;
+  ranges?: string[];
+}): Promise<{ success: boolean }> => postRequest(makePostReflectionToQrUrl(), payload);
+
+export const updateNote = async (id: string, title: string, body: string) =>
+  patchRequest(makeDeleteOrUpdateNoteUrl(id), {
+    title,
+    body,
+  });
+
+export const deleteNote = async (id: string) => deleteRequest(makeDeleteOrUpdateNoteUrl(id));
 
 export const requestVerificationCode = async (emailToVerify) => {
   return postRequest(makeVerificationCodeUrl(), { email: emailToVerify });

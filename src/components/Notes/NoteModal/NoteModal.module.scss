@@ -1,0 +1,54 @@
+@use "src/styles/breakpoints";
+
+.buttonContainer {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding-block: var(--spacing-small);
+}
+
+.headerContainer {
+    display: flex;
+    gap: var(--spacing-small);
+    align-items: center;
+
+    padding-block: var(--spacing-large);
+    @include breakpoints.smallerThanTablet {
+        padding-block: var(--spacing-medium);
+    }
+}
+
+.titleInput {
+    & > div {
+        border: none;
+    }
+
+    input {
+        height: 100%;
+        font-size: var(--font-size-jumbo);
+        font-weight: var(--font-weight-bold);
+    }
+}
+
+.bodyInput {
+    & > div {
+        border: none;
+        margin-block-start: var(--spacing-large);
+    }
+
+    textarea {
+        font-size: var(--font-size-large);
+        font-weight: var(--font-weight-medium);
+
+        @include breakpoints.smallerThanTablet {
+            min-height: 70vh;
+        }
+    }
+}
+
+.actionContainer {
+    display: flex;
+    margin-block-start: var(--spacing-small);
+    justify-content: space-between;
+    align-items: center;
+}
