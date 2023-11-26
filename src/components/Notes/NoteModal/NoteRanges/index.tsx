@@ -1,13 +1,13 @@
 import React from 'react';
 
 import NoteRangesIndicator from '../NoteRangesIndicator';
-import { parseNoteRanges } from '../utils/ranges';
 
 import styles from './NoteRanges.module.scss';
 
 import EmbeddableVerseCell from '@/components/QuranReader/TranslationView/EmbeddableVerseCell';
 import ChevronDownIcon from '@/icons/chevron-down.svg';
 import { logEvent } from '@/utils/eventLogger';
+import { parseVerseRange } from '@/utils/verseKeys';
 import Collapsible from 'src/components/dls/Collapsible/Collapsible';
 
 type Props = {
@@ -47,9 +47,10 @@ const NoteRanges: React.FC<Props> = ({ ranges, noteId }: Props) => {
       >
         {({ isOpen: isOpenRenderProp }) => {
           if (!isOpenRenderProp) return null;
-          const [, chapterId, verseNumber] = parseNoteRanges(ranges);
+          // TODO: ranges[0] is temporary and assumes that a note has only one range and 1 Ayah inside that range
+          const [{ chapter, verse }] = parseVerseRange(ranges[0]);
 
-          return <EmbeddableVerseCell chapterId={chapterId} verseNumber={verseNumber} />;
+          return <EmbeddableVerseCell chapterId={Number(chapter)} verseNumber={Number(verse)} />;
         }}
       </Collapsible>
     </div>
