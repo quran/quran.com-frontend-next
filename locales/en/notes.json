@@ -1,4 +1,5 @@
 {
+  "empty": "No notes found",
   "delete-note": "Delete note",
   "save-success": "Note has been saved successfully",
   "update-success": "Note has been updated successfully",

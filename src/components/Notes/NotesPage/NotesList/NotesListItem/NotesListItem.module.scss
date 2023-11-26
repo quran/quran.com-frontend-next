@@ -8,7 +8,7 @@
     }
 
     p {
-        margin-block-start: var(--spacing-small);
+        margin-block-start: var(--spacing-xsmall);
         font-size: var(--font-size-medium);
     }
 
@@ -16,4 +16,11 @@
         background-color: var(--color-background-alternative-faded);
         border-radius: var(--border-radius-rounded);
     }
+}
+
+.noteDate {
+    display: block;
+    margin-block-start: var(--spacing-small);
+    font-size: var(--font-size-xsmall);
+    color: var(--color-text-faded);
 }
