@@ -39,6 +39,10 @@
     textarea {
         font-size: var(--font-size-large);
         font-weight: var(--font-weight-medium);
+
+        @include breakpoints.smallerThanTablet {
+            min-height: 70vh;
+        }
     }
 }
 

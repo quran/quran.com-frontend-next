@@ -62,8 +62,7 @@ const NotesPage = () => {
    * @returns {string} swr key
    */
   const getKey = (pageIndex: number, previousPageData: GetAllNotesResponse) => {
-    if (!isLoggedIn()) return null;
-    if (previousPageData && !previousPageData.data) return null;
+    if (!isLoggedIn() || (previousPageData && !previousPageData.data)) return null;
     if (pageIndex === 0) {
       return makeNotesUrl({
         sortBy,
@@ -92,6 +91,11 @@ const NotesPage = () => {
           key,
         };
       });
+    },
+    {
+      revalidateOnFocus: false,
+      revalidateFirstPage: false,
+      revalidateOnMount: true,
     },
   );
 

@@ -5,15 +5,13 @@ import { useRef, useState } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import { useSWRConfig } from 'swr';
 
-import DeleteButton from './Buttons/DeleteButton';
-import ExportToQRButton from './Buttons/ExportToQRButton';
+import NoteActions from './NoteActions';
 import styles from './NoteModal.module.scss';
 
 import DataFetcher from '@/components/DataFetcher';
 import buildFormBuilderFormField from '@/components/FormBuilder/buildFormBuilderFormField';
 import buildTranslatedErrorMessageByErrorId from '@/components/FormBuilder/buildTranslatedErrorMessageByErrorId';
 import FormBuilder from '@/components/FormBuilder/FormBuilder';
-import Button from '@/dls/Button/Button';
 import ContentModal, { ContentModalSize } from '@/dls/ContentModal/ContentModal';
 import ContentModalHandles from '@/dls/ContentModal/types/ContentModalHandles';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
@@ -26,7 +24,6 @@ import { FormFieldType } from '@/types/FormField';
 import {
   addNote as baseAddNote,
   updateNote as baseUpdateNote,
-  deleteNote as baseDeleteNote,
   privateFetcher,
 } from '@/utils/auth/api';
 import { makeGetNoteByIdUrl, makeGetNotesByVerseUrl } from '@/utils/auth/apiPaths';
@@ -75,27 +72,7 @@ const NoteModal: React.FC<NoteModalProps> = ({
   const [noteBody, setNoteBody] = useState<string>(null);
   const toast = useToast();
   const { mutate, cache } = useSWRConfig();
-  const { mutate: deleteNote, isMutating: isDeletingNote } = useMutation<unknown, string>(
-    async (id) => {
-      return baseDeleteNote(id);
-    },
-    {
-      onSuccess: () => {
-        toast(t('notes:delete-success'), {
-          status: ToastStatus.Success,
-        });
-        onNoteDeleted?.();
-        onClose();
-        mutateCache([]);
-        clearCountCache();
-      },
-      onError: () => {
-        toast(t('common:error.general'), {
-          status: ToastStatus.Error,
-        });
-      },
-    },
-  );
+
   const { mutate: updateNote, isMutating: isUpdatingNote } = useMutation<
     Note,
     { id: string; title: string; body: string }
@@ -203,6 +180,13 @@ const NoteModal: React.FC<NoteModalProps> = ({
     }
   };
 
+  const onDelete = () => {
+    onClose();
+    onNoteDeleted?.();
+    mutateCache([]);
+    clearCountCache();
+  };
+
   const queryKey = noteId ? makeGetNoteByIdUrl(noteId) : makeGetNotesByVerseUrl(verseKey);
 
   return (
@@ -293,20 +277,12 @@ const NoteModal: React.FC<NoteModalProps> = ({
               onSubmit={(data) => onSubmit(data as NoteFormData, note)}
               isSubmitting={isUpdatingNote || isAddingNote}
               renderAction={(props) => (
-                <div className={styles.actionContainer}>
-                  <Button {...props}>{t('common:notes.save')}</Button>
-
-                  {note && (
-                    <div>
-                      <DeleteButton
-                        noteId={note.id}
-                        isDeletingNote={isDeletingNote}
-                        deleteNote={deleteNote}
-                      />
-                      <ExportToQRButton ranges={note.ranges} body={noteBody} />
-                    </div>
-                  )}
-                </div>
+                <NoteActions
+                  note={note}
+                  isSubmitting={props.isLoading}
+                  onDeleted={onDelete}
+                  body={noteBody}
+                />
               )}
             />
           );

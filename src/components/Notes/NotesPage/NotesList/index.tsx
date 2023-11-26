@@ -1,5 +1,6 @@
 import { useMemo, useState } from 'react';
 
+import useTranslation from 'next-translate/useTranslation';
 import { Virtuoso } from 'react-virtuoso';
 
 import NoteModal from '../../NoteModal';
@@ -19,14 +20,19 @@ interface NotesListProps {
 }
 
 const NotesList = ({ data, isValidating, size, setSize, mutateCache }: NotesListProps) => {
+  const { t } = useTranslation();
   const [selectedNoteId, setSelectedNoteId] = useState<string | null>(null); // for the note modal
 
   const lastPageData = data[data.length - 1];
   const { hasNextPage } = lastPageData.pagination;
+
   const notes = useMemo(() => {
     return data ? data.map((response) => response.data).flat() : [];
   }, [data]);
+
+  const isLoading = !data && isValidating;
   const isLoadingMoreData = notes?.length > 0 && size > 1 && isValidating;
+  const isEmpty = !isLoading && notes.length === 0;
 
   const loadMore = () => {
     if (!hasNextPage || isValidating) return;
@@ -38,38 +44,65 @@ const NotesList = ({ data, isValidating, size, setSize, mutateCache }: NotesList
   };
 
   const onNoteDeleted = () => {
+    const noteId = selectedNoteId;
     // remove the note from the cache
     mutateCache((cachedPages: GetAllNotesResponse[]) => {
-      const newPages = cachedPages.map((page) => {
-        return {
-          ...page,
-          data: page.data.filter((note) => note.id !== selectedNoteId),
-        };
-      });
+      const newPages = cachedPages;
+
+      for (let i = 0; i < newPages.length; i += 1) {
+        const page = newPages[i];
+        const newData = page.data.filter((note) => note.id !== noteId);
+
+        if (newData.length !== page.data.length) {
+          newPages[i] = {
+            ...page,
+            data: newData,
+          };
+          break;
+        }
+      }
 
       return newPages;
     });
   };
 
   const onNoteUpdated = (updatedNote) => {
+    const noteId = selectedNoteId;
+
     // update the note in the cache
     mutateCache((cachedPages: GetAllNotesResponse[]) => {
-      const newPages = cachedPages.map((page) => {
-        return {
-          ...page,
-          data: page.data.map((note) => {
-            if (note.id === selectedNoteId) {
-              return updatedNote;
-            }
+      const newPages = cachedPages;
 
-            return note;
-          }),
-        };
-      });
+      for (let i = 0; i < newPages.length; i += 1) {
+        const page = newPages[i];
+        const noteIdx = page.data.findIndex((note) => note.id === noteId);
+
+        if (noteIdx !== -1) {
+          const newData = [...page.data];
+          newData[noteIdx] = updatedNote;
+
+          newPages[i] = {
+            ...page,
+            data: newData,
+          };
+          break;
+        }
+      }
 
       return newPages;
     });
   };
+
+  let content = null;
+  if (isLoadingMoreData || isLoading) {
+    content = <Spinner size={SpinnerSize.Large} />;
+  } else if (isEmpty) {
+    content = (
+      <div className={styles.emptyNotesContainer}>
+        <span>{t('notes:empty')}</span>
+      </div>
+    );
+  }
 
   return (
     <>
@@ -93,7 +126,7 @@ const NotesList = ({ data, isValidating, size, setSize, mutateCache }: NotesList
         useWindowScroll
       />
 
-      {isLoadingMoreData && <Spinner size={SpinnerSize.Large} />}
+      {content}
     </>
   );
 };
