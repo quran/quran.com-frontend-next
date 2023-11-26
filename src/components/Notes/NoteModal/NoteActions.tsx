@@ -20,6 +20,8 @@ interface NoteActionsProps {
   isSubmitting: boolean;
 }
 
+const isProduction = process.env.NEXT_PUBLIC_VERCEL_ENV === 'production';
+
 const NoteActions = ({ note, onDeleted, isSubmitting, body }: NoteActionsProps) => {
   const { t } = useTranslation();
   const toast = useToast();
@@ -104,16 +106,18 @@ const NoteActions = ({ note, onDeleted, isSubmitting, body }: NoteActionsProps) 
             <TrashIcon />
           </Button>
 
-          <Button
-            variant={ButtonVariant.Ghost}
-            tooltip={t('notes:share-as-reflection')}
-            htmlType="button"
-            onClick={onExportClicked}
-            isLoading={isPostingOnQuranReflect}
-            isDisabled={shouldDisableActions}
-          >
-            <ChatIcon />
-          </Button>
+          {isProduction && (
+            <Button
+              variant={ButtonVariant.Ghost}
+              tooltip={t('notes:share-as-reflection')}
+              htmlType="button"
+              onClick={onExportClicked}
+              isLoading={isPostingOnQuranReflect}
+              isDisabled={shouldDisableActions}
+            >
+              <ChatIcon />
+            </Button>
+          )}
         </div>
       )}
     </div>
