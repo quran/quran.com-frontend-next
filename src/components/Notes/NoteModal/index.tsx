@@ -7,6 +7,7 @@ import { useSWRConfig } from 'swr';
 
 import NoteActions from './NoteActions';
 import styles from './NoteModal.module.scss';
+import NoteRanges from './NoteRanges';
 
 import DataFetcher from '@/components/DataFetcher';
 import buildFormBuilderFormField from '@/components/FormBuilder/buildFormBuilderFormField';
@@ -210,81 +211,84 @@ const NoteModal: React.FC<NoteModalProps> = ({
         render={(response: (Note | Note[]) & BaseResponse) => {
           const note = noteId ? (response as Note) : (response[0] as Note);
           return (
-            <FormBuilder
-              formFields={[
-                {
-                  field: 'title',
-                  defaultValue: note?.title || '',
-                  rules: [
-                    {
-                      type: RuleType.Required,
-                      errorId: ErrorMessageId.RequiredField,
-                      value: true,
-                    },
-                    {
-                      ...TITLE_VALIDATION_PARAMS,
-                      type: RuleType.MaximumLength,
-                      errorId: ErrorMessageId.MaximumLength,
-                      errorExtraParams: {
-                        ...TITLE_VALIDATION_PARAMS,
+            <>
+              {note?.ranges && <NoteRanges noteId={note.id} ranges={note.ranges} />}
+              <FormBuilder
+                formFields={[
+                  {
+                    field: 'title',
+                    defaultValue: note?.title || '',
+                    rules: [
+                      {
+                        type: RuleType.Required,
+                        errorId: ErrorMessageId.RequiredField,
+                        value: true,
                       },
-                      errorMessage: buildTranslatedErrorMessageByErrorId(
-                        ErrorMessageId.MaximumLength,
-                        'title',
-                        t,
-                        {
+                      {
+                        ...TITLE_VALIDATION_PARAMS,
+                        type: RuleType.MaximumLength,
+                        errorId: ErrorMessageId.MaximumLength,
+                        errorExtraParams: {
                           ...TITLE_VALIDATION_PARAMS,
                         },
-                      ),
-                    },
-                  ],
-                  type: FormFieldType.Text,
-                  containerClassName: styles.titleInput,
-                },
-                {
-                  field: 'body',
-                  defaultValue: note?.body || '',
-                  onChange: (val: string) => {
-                    setNoteBody(val);
-                  },
-                  rules: [
-                    {
-                      type: RuleType.Required,
-                      errorId: ErrorMessageId.RequiredField,
-                      value: true,
-                    },
-                    {
-                      ...BODY_MIN_VALIDATION_PARAMS,
-                      type: RuleType.MinimumLength,
-                      errorId: ErrorMessageId.MinimumLength,
-                      errorExtraParams: {
-                        ...BODY_MIN_VALIDATION_PARAMS,
+                        errorMessage: buildTranslatedErrorMessageByErrorId(
+                          ErrorMessageId.MaximumLength,
+                          'title',
+                          t,
+                          {
+                            ...TITLE_VALIDATION_PARAMS,
+                          },
+                        ),
                       },
-                      errorMessage: buildTranslatedErrorMessageByErrorId(
-                        ErrorMessageId.MinimumLength,
-                        'body',
-                        t,
-                        {
+                    ],
+                    type: FormFieldType.Text,
+                    containerClassName: styles.titleInput,
+                  },
+                  {
+                    field: 'body',
+                    defaultValue: note?.body || '',
+                    onChange: (val: string) => {
+                      setNoteBody(val);
+                    },
+                    rules: [
+                      {
+                        type: RuleType.Required,
+                        errorId: ErrorMessageId.RequiredField,
+                        value: true,
+                      },
+                      {
+                        ...BODY_MIN_VALIDATION_PARAMS,
+                        type: RuleType.MinimumLength,
+                        errorId: ErrorMessageId.MinimumLength,
+                        errorExtraParams: {
                           ...BODY_MIN_VALIDATION_PARAMS,
                         },
-                      ),
-                    },
-                  ],
-                  type: FormFieldType.TextArea,
-                  containerClassName: styles.bodyInput,
-                },
-              ].map((field) => buildFormBuilderFormField(field, t))}
-              onSubmit={(data) => onSubmit(data as NoteFormData, note)}
-              isSubmitting={isUpdatingNote || isAddingNote}
-              renderAction={(props) => (
-                <NoteActions
-                  note={note}
-                  isSubmitting={props.isLoading}
-                  onDeleted={onDelete}
-                  body={noteBody}
-                />
-              )}
-            />
+                        errorMessage: buildTranslatedErrorMessageByErrorId(
+                          ErrorMessageId.MinimumLength,
+                          'body',
+                          t,
+                          {
+                            ...BODY_MIN_VALIDATION_PARAMS,
+                          },
+                        ),
+                      },
+                    ],
+                    type: FormFieldType.TextArea,
+                    containerClassName: styles.bodyInput,
+                  },
+                ].map((field) => buildFormBuilderFormField(field, t))}
+                onSubmit={(data) => onSubmit(data as NoteFormData, note)}
+                isSubmitting={isUpdatingNote || isAddingNote}
+                renderAction={(props) => (
+                  <NoteActions
+                    note={note}
+                    isSubmitting={props.isLoading}
+                    onDeleted={onDelete}
+                    body={noteBody}
+                  />
+                )}
+              />
+            </>
           );
         }}
       />
