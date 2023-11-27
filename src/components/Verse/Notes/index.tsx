@@ -42,7 +42,7 @@ const VerseNotes = ({
       isLoggedIn,
     });
     if (!isUserLoggedIn) {
-      router.replace(getLoginNavigationUrl());
+      router.push(getLoginNavigationUrl());
     } else {
       setIsModalOpen(true);
     }
