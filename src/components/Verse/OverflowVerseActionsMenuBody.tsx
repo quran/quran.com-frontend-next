@@ -113,8 +113,6 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
     }
   };
 
-  const isUserLoggedIn = isLoggedIn();
-
   return (
     <div>
       <PopoverMenu.Item onClick={onCopyClicked} icon={<CopyIcon />}>
@@ -129,9 +127,7 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
         verse={verse}
         isTranslationView={isTranslationView}
       />
-      {isUserLoggedIn && (
-        <VerseNotes verseKey={verse.verseKey} isTranslationView={isTranslationView} />
-      )}
+      <VerseNotes verseKey={verse.verseKey} isTranslationView={isTranslationView} />
       {!isTranslationView && (
         <WordByWordVerseAction verse={verse} onActionTriggered={onActionTriggered} />
       )}
@@ -143,7 +139,7 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
         bookmarksRangeUrl={bookmarksRangeUrl}
       />
 
-      {isUserLoggedIn && (
+      {isLoggedIn() && (
         <SaveToCollectionAction
           verse={verse}
           bookmarksRangeUrl={bookmarksRangeUrl}

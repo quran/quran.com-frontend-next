@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
+import { useRouter } from 'next/router';
 
 import styles from '../../QuranReader/TranslationView/TranslationViewCell.module.scss';
 
@@ -9,7 +10,9 @@ import NoteModal from '@/components/Notes/NoteModal';
 import Button, { ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import NoteIcon from '@/icons/reader.svg';
+import { isLoggedIn } from '@/utils/auth/login';
 import { logButtonClick } from '@/utils/eventLogger';
+import { getLoginNavigationUrl } from '@/utils/navigation';
 
 export enum VerseNotesTrigger {
   IconButton = 'button',
@@ -29,13 +32,20 @@ const VerseNotes = ({
 }: VerseNotesProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { t } = useTranslation('common');
+  const router = useRouter();
 
   const onItemClicked = () => {
+    const isUserLoggedIn = isLoggedIn();
     logButtonClick('verse_actions_menu_note', {
       isTranslationView,
       trigger,
+      isLoggedIn,
     });
-    setIsModalOpen(true);
+    if (!isUserLoggedIn) {
+      router.replace(getLoginNavigationUrl());
+    } else {
+      setIsModalOpen(true);
+    }
   };
 
   const onClose = () => {
