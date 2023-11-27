@@ -49,6 +49,7 @@ type NoteFormData = {
 
 const TITLE_MAXIMUM_LENGTH = 150;
 const BODY_MIN_LENGTH = 6;
+const BODY_MAX_LENGTH = 10000;
 
 const TITLE_VALIDATION_PARAMS = {
   value: TITLE_MAXIMUM_LENGTH,
@@ -56,6 +57,9 @@ const TITLE_VALIDATION_PARAMS = {
 
 const BODY_MIN_VALIDATION_PARAMS = {
   value: BODY_MIN_LENGTH,
+};
+const BODY_MAX_VALIDATION_PARAMS = {
+  value: BODY_MAX_LENGTH,
 };
 
 const NoteModal: React.FC<NoteModalProps> = ({
@@ -269,6 +273,22 @@ const NoteModal: React.FC<NoteModalProps> = ({
                           t,
                           {
                             ...BODY_MIN_VALIDATION_PARAMS,
+                          },
+                        ),
+                      },
+                      {
+                        ...BODY_MAX_VALIDATION_PARAMS,
+                        type: RuleType.MaximumLength,
+                        errorId: ErrorMessageId.MaximumLength,
+                        errorExtraParams: {
+                          ...BODY_MAX_VALIDATION_PARAMS,
+                        },
+                        errorMessage: buildTranslatedErrorMessageByErrorId(
+                          ErrorMessageId.MaximumLength,
+                          'body',
+                          t,
+                          {
+                            ...BODY_MAX_VALIDATION_PARAMS,
                           },
                         ),
                       },
