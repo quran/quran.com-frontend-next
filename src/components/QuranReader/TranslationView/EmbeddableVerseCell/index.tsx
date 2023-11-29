@@ -7,6 +7,7 @@ import TranslationText from '../TranslationText';
 
 import styles from './EmbeddableVerseCell.module.scss';
 
+import { fetcher } from '@/api';
 import DataFetcher from '@/components/DataFetcher';
 import VerseTextPreview from '@/components/QuranReader/VerseTextPreview';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
@@ -38,13 +39,16 @@ const EmbeddableVerseCell: React.FC<Props> = ({ chapterId, verseNumber }) => {
   };
   return (
     <DataFetcher
-      queryKey={makeVersesUrl(chapterId.toString(), lang, apiParams)}
+      // TODO: if we want to make this more optimized, we can use a shared cache with the QuranReader
+      queryKey={`embeddable-verse-${chapterId}:${verseNumber}`}
+      fetcher={() => fetcher(makeVersesUrl(chapterId.toString(), lang, apiParams))}
       render={(data: VersesResponse) => {
         if (!data) return null;
         const firstVerse = data.verses?.[0];
         return (
           <div className={styles.verseContainer}>
             <VerseTextPreview verses={data.verses} />
+
             <div>
               {firstVerse.translations?.map((translation) => {
                 return (
