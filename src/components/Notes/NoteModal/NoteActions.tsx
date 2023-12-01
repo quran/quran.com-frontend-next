@@ -6,7 +6,6 @@ import Button, { ButtonType, ButtonVariant } from '@/dls/Button/Button';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import useMutation from '@/hooks/useMutation';
 import ChatIcon from '@/icons/chat.svg';
-import TrashIcon from '@/icons/trash.svg';
 import { Note } from '@/types/auth/Note';
 import { deleteNote as baseDeleteNote, postToQR } from '@/utils/auth/api';
 import { logButtonClick } from '@/utils/eventLogger';
@@ -102,8 +101,9 @@ const NoteActions = ({ note, onDeleted, isSubmitting, body }: NoteActionsProps) 
             tooltip={t('notes:delete-note')}
             isLoading={isDeletingNote}
             isDisabled={shouldDisableActions}
+            // eslint-disable-next-line i18next/no-literal-string
           >
-            <TrashIcon />
+            ❌
           </Button>
 
           {isProduction && (
