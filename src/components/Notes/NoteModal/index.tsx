@@ -295,6 +295,7 @@ const NoteModal: React.FC<NoteModalProps> = ({
                     ],
                     type: FormFieldType.TextArea,
                     containerClassName: styles.bodyInput,
+                    fieldSetLegend: t('notes:note'),
                   },
                 ].map((field) => buildFormBuilderFormField(field, t))}
                 onSubmit={(data) => onSubmit(data as NoteFormData, note)}

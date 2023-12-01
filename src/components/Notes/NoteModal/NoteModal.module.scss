@@ -31,6 +31,9 @@
 }
 
 .bodyInput {
+    border: none !important;
+    border-radius: 0 !important;
+    padding-inline: 0 !important;
     & > div {
         border: none;
         margin-block-start: var(--spacing-large);
@@ -41,7 +44,7 @@
         font-weight: var(--font-weight-medium);
 
         @include breakpoints.smallerThanTablet {
-            min-height: 70vh;
+            min-height: 50vh;
         }
     }
 }

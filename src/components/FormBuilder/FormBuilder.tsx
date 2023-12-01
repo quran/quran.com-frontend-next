@@ -60,7 +60,8 @@ const FormBuilder = <T,>({
                 value: field.value,
                 id: formField.field,
                 name: formField.field,
-                containerClassName: styles.input,
+                containerClassName: formField.containerClassName,
+                fieldSetLegend: formField.fieldSetLegend,
                 placeholder: formField.label,
                 onChange: (val) => {
                   field.onChange(val);

@@ -7,5 +7,6 @@ export type FormBuilderFormField = Pick<FormField, 'field' | 'type'> & {
   label?: string;
   rules?: FormBuilderFieldRule[];
   containerClassName?: string;
+  fieldSetLegend?: string;
   onChange?: (value: unknown) => void;
 };

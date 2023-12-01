@@ -30,6 +30,7 @@ interface Props {
   id: string;
   name?: string;
   placeholder?: string;
+  fieldSetLegend?: string;
   disabled?: boolean;
   onChange?: (value: string) => void;
   value?: string;
@@ -58,6 +59,7 @@ const TextArea: React.FC<Props> = ({
   isRequired,
   inputRef,
   size = TextAreaSize.Medium,
+  fieldSetLegend = null,
 }) => {
   const [inputValue, setTextAreaValue] = useState(value);
   // listen to any change in value in-case the value gets populated after an API call.
@@ -73,7 +75,7 @@ const TextArea: React.FC<Props> = ({
     }
   };
 
-  return (
+  const content = (
     <>
       {label && <p className={styles.label}>{label}</p>}
       <div
@@ -106,6 +108,17 @@ const TextArea: React.FC<Props> = ({
       </div>
     </>
   );
+
+  if (fieldSetLegend) {
+    return (
+      <fieldset>
+        <legend> {fieldSetLegend} </legend>
+        {content}
+      </fieldset>
+    );
+  }
+
+  return content;
 };
 
 export default TextArea;
