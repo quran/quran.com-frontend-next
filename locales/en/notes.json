@@ -2,6 +2,7 @@
   "note": "Note",
   "empty": "No notes found",
   "delete-note": "Delete note",
+  "body-placeholder": "Write your note here",
   "save-success": "Note has been saved successfully",
   "update-success": "Note has been updated successfully",
   "delete-success": "Note has been deleted successfully",

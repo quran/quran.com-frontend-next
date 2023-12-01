@@ -5,6 +5,7 @@ export type FormBuilderFieldRule = Pick<FieldRule, 'type' | 'value'> & { errorMe
 export type FormBuilderFormField = Pick<FormField, 'field' | 'type'> & {
   defaultValue?: any;
   label?: string;
+  placeholder?: string;
   rules?: FormBuilderFieldRule[];
   containerClassName?: string;
   fieldSetLegend?: string;

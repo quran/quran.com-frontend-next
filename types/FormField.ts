@@ -10,6 +10,8 @@ export enum FormFieldType {
 
 type FormField = {
   field: string;
+  placeholder?: string;
+  label?: string;
   rules?: FieldRule[];
   type: FormFieldType;
   defaultValue?: unknown;

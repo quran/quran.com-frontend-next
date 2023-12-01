@@ -210,6 +210,7 @@ const NoteModal: React.FC<NoteModalProps> = ({
                 formFields={[
                   {
                     field: 'body',
+                    placeholder: t('notes:body-placeholder'),
                     defaultValue: note?.body || '',
                     onChange: (val: string) => {
                       setNoteBody(val);

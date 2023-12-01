@@ -35,7 +35,7 @@ const EmailLogin = ({ back, onSubmit }: EmailLoginProps) => {
           {
             field: fieldName,
             type: FormFieldType.Text,
-            label: t('form.email'),
+            placeholder: t('form.email'),
             rules: [
               {
                 type: RuleType.Required,

@@ -62,7 +62,8 @@ const FormBuilder = <T,>({
                 name: formField.field,
                 containerClassName: formField.containerClassName,
                 fieldSetLegend: formField.fieldSetLegend,
-                placeholder: formField.label,
+                label: formField.label,
+                placeholder: formField.placeholder,
                 onChange: (val) => {
                   field.onChange(val);
                   if (formField?.onChange) {

@@ -55,7 +55,7 @@
     "/reciters/[reciterId]": ["home", "radio", "reciter"],
     "/reciters/[reciterId]/[chapterId]": ["reciter"],
     "/reciters": ["reciter", "home"],
-    "/profile": ["home", "profile", "collection"],
+    "/profile": ["home", "profile", "collection", "quran-reader"],
     "/login": ["login"],
     "/about-the-quran": ["about-quran"],
     "/notes": ["notes"]
