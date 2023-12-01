@@ -34,7 +34,6 @@ const NotesListItem: React.FC<NotesListItemProps> = ({ note, setSelectedNoteId }
       onKeyDown={() => onNoteClicked(note.id)}
     >
       <NoteRangesIndicator ranges={note.ranges} />
-      <h3>{note.title}</h3>
       <p>{note.body}</p>
       <time className={styles.noteDate} dateTime={note.createdAt.toString()}>
         {dateToReadableFormat(note.createdAt, lang, {

@@ -335,7 +335,7 @@ export const countNotesWithinRange = async (from: string, to: string) => {
   return privateFetcher(makeCountNotesWithinRangeUrl(from, to));
 };
 
-export const addNote = async (payload: Pick<Note, 'title' | 'body' | 'ranges'>) => {
+export const addNote = async (payload: Pick<Note, 'body' | 'ranges'>) => {
   return postRequest(makeNotesUrl(), payload);
 };
 
@@ -345,9 +345,8 @@ export const postToQR = async (payload: {
   ranges?: string[];
 }): Promise<{ success: boolean }> => postRequest(makePostReflectionToQrUrl(), payload);
 
-export const updateNote = async (id: string, title: string, body: string) =>
+export const updateNote = async (id: string, body: string) =>
   patchRequest(makeDeleteOrUpdateNoteUrl(id), {
-    title,
     body,
   });
 

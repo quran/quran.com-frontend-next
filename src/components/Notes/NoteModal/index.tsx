@@ -43,17 +43,11 @@ interface NoteModalProps {
 }
 
 type NoteFormData = {
-  title: string;
   body: string;
 };
 
-const TITLE_MAXIMUM_LENGTH = 150;
 const BODY_MIN_LENGTH = 6;
 const BODY_MAX_LENGTH = 10000;
-
-const TITLE_VALIDATION_PARAMS = {
-  value: TITLE_MAXIMUM_LENGTH,
-};
 
 const BODY_MIN_VALIDATION_PARAMS = {
   value: BODY_MIN_LENGTH,
@@ -80,10 +74,10 @@ const NoteModal: React.FC<NoteModalProps> = ({
 
   const { mutate: updateNote, isMutating: isUpdatingNote } = useMutation<
     Note,
-    { id: string; title: string; body: string }
+    { id: string; body: string }
   >(
-    async ({ id, title, body }) => {
-      return baseUpdateNote(id, title, body) as Promise<Note>;
+    async ({ id, body }) => {
+      return baseUpdateNote(id, body) as Promise<Note>;
     },
     {
       onSuccess: (data) => {
@@ -100,13 +94,9 @@ const NoteModal: React.FC<NoteModalProps> = ({
       },
     },
   );
-  const { mutate: addNote, isMutating: isAddingNote } = useMutation<
-    Note,
-    { title: string; body: string }
-  >(
-    async ({ title, body }) => {
+  const { mutate: addNote, isMutating: isAddingNote } = useMutation<Note, { body: string }>(
+    async ({ body }) => {
       return baseAddNote({
-        title,
         body,
         ...(verseKey && {
           ranges: [`${verseKey}-${verseKey}`],
@@ -171,15 +161,14 @@ const NoteModal: React.FC<NoteModalProps> = ({
     }
   };
 
-  const onSubmit = async ({ title, body }: NoteFormData, currentNote?: Note) => {
+  const onSubmit = async ({ body }: NoteFormData, currentNote?: Note) => {
     // if the note exits, it's an update
     if (currentNote) {
-      updateNote({ id: currentNote.id, title, body });
+      updateNote({ id: currentNote.id, body });
       logButtonClick('update_note');
     } else {
       logButtonClick('add_note');
       addNote({
-        title,
         body,
       });
     }
@@ -219,35 +208,6 @@ const NoteModal: React.FC<NoteModalProps> = ({
               {note?.ranges && <NoteRanges noteId={note.id} ranges={note.ranges} />}
               <FormBuilder
                 formFields={[
-                  {
-                    field: 'title',
-                    defaultValue: note?.title || '',
-                    rules: [
-                      {
-                        type: RuleType.Required,
-                        errorId: ErrorMessageId.RequiredField,
-                        value: true,
-                      },
-                      {
-                        ...TITLE_VALIDATION_PARAMS,
-                        type: RuleType.MaximumLength,
-                        errorId: ErrorMessageId.MaximumLength,
-                        errorExtraParams: {
-                          ...TITLE_VALIDATION_PARAMS,
-                        },
-                        errorMessage: buildTranslatedErrorMessageByErrorId(
-                          ErrorMessageId.MaximumLength,
-                          'title',
-                          t,
-                          {
-                            ...TITLE_VALIDATION_PARAMS,
-                          },
-                        ),
-                      },
-                    ],
-                    type: FormFieldType.Text,
-                    containerClassName: styles.titleInput,
-                  },
                   {
                     field: 'body',
                     defaultValue: note?.body || '',
