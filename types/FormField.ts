@@ -6,12 +6,13 @@ export enum FormFieldType {
   Phone = 'phone',
   Number = 'number',
   TextArea = 'textarea',
+  Checkbox = 'checkbox',
 }
 
 type FormField = {
   field: string;
   placeholder?: string;
-  label?: string;
+  label?: string | JSX.Element;
   rules?: FieldRule[];
   type: FormFieldType;
   defaultValue?: unknown;

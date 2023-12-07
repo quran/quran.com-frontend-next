@@ -386,5 +386,7 @@
     "title": "Word Click"
   },
   "word-tooltip": "Word Tooltip",
-  "yes": "Yes"
+  "yes": "Yes",
+  "edit": "Edit",
+  "delete": "Delete"
 }

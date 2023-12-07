@@ -1,6 +1,6 @@
 import React from 'react';
 
-import NoteRangesIndicator from '../NoteRangesIndicator';
+import NoteRangesIndicator from '../../NoteRangesIndicator';
 
 import styles from './NoteRanges.module.scss';
 
@@ -12,7 +12,6 @@ import Collapsible from 'src/components/dls/Collapsible/Collapsible';
 
 type Props = {
   ranges: string[];
-  noteId: string;
 };
 
 /**
@@ -22,15 +21,12 @@ type Props = {
  * @param {React.FC<Props>} param
  * @returns {React.ReactElement<any, any>}
  */
-const NoteRanges: React.FC<Props> = ({ ranges, noteId }: Props) => {
+const NoteRanges: React.FC<Props> = ({ ranges }: Props) => {
   const onOpenChange = (isCollapseOpen: boolean) => {
-    const eventData = {
-      noteId,
-    };
     if (isCollapseOpen) {
-      logEvent('note_range_collapse_opened', eventData);
+      logEvent('note_range_collapse_opened');
     } else {
-      logEvent('note_range_collapse_closed', eventData);
+      logEvent('note_range_collapse_closed');
     }
   };
   return (

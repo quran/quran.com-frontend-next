@@ -7,5 +7,9 @@
   "update-success": "Note has been updated successfully",
   "delete-success": "Note has been deleted successfully",
   "export-success": "Note has been export to your account on QuranReflect successfully",
-  "share-as-reflection": "Share on QuranReflect"
+  "share-to-qr": "Share to QuranReflect.com",
+  "share-on-qr": "Share On QuranReflect",
+  "save-and-share": "Save & share On QuranReflect",
+  "share-to-qr-desc": "Share as <b>{{name}}</b>. Audience is <b>Followers</b>",
+  "qr-tooltip": "<span><link>QuranReflect</link> is a social platform for sharing reflections on the Quran. Connect around the Quran, connect with what matters.</span>"
 }

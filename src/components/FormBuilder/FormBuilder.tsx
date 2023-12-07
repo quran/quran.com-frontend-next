@@ -1,14 +1,14 @@
 import classNames from 'classnames';
 import { Controller, useForm } from 'react-hook-form';
 
-import Button, { ButtonProps } from '../dls/Button/Button';
-import Input from '../dls/Forms/Input';
-import TextArea from '../dls/Forms/TextArea';
-
 import buildReactHookFormRules from './buildReactHookFormRules';
 import styles from './FormBuilder.module.scss';
 import { FormBuilderFormField } from './FormBuilderTypes';
 
+import Button, { ButtonProps } from '@/dls/Button/Button';
+import Checkbox from '@/dls/Forms/Checkbox/Checkbox';
+import Input from '@/dls/Forms/Input';
+import TextArea from '@/dls/Forms/TextArea';
 import { FormFieldType } from '@/types/FormField';
 
 export type SubmissionResult<T> = Promise<void | { errors: { [key in keyof T]: string } }>;
@@ -19,6 +19,27 @@ type FormBuilderProps<T> = {
   actionText?: string;
   actionProps?: ButtonProps;
   renderAction?: (props: ButtonProps) => React.ReactNode;
+};
+
+/**
+ * {@see https://legacy.reactjs.org/docs/jsx-in-depth.html#choosing-the-type-at-runtime}
+ */
+const FormFieldTypeToComponentMap = {
+  [FormFieldType.TextArea]: TextArea,
+  [FormFieldType.Text]: Input,
+  [FormFieldType.Password]: Input,
+  [FormFieldType.Phone]: Input,
+  [FormFieldType.Number]: Input,
+  [FormFieldType.Checkbox]: Checkbox,
+};
+
+const isFieldTextInput = (type: FormFieldType) => {
+  return [
+    FormFieldType.Text,
+    FormFieldType.Password,
+    FormFieldType.Phone,
+    FormFieldType.Number,
+  ].includes(type);
 };
 
 const FormBuilder = <T,>({
@@ -55,7 +76,7 @@ const FormBuilder = <T,>({
             rules={buildReactHookFormRules(formField)}
             name={formField.field}
             render={({ field, fieldState: { error } }) => {
-              const commonProps = {
+              const inputFieldProps = {
                 key: formField.field,
                 value: field.value,
                 id: formField.field,
@@ -70,14 +91,19 @@ const FormBuilder = <T,>({
                     formField.onChange(val);
                   }
                 },
+                ...(isFieldTextInput(formField.type) && {
+                  htmlType: formField.type,
+                  fixedWidth: false,
+                }),
+                ...(formField.type === FormFieldType.Checkbox &&
+                  typeof formField.checked !== 'undefined' && {
+                    checked: formField.checked,
+                  }),
               };
+              const InputField = FormFieldTypeToComponentMap[formField.type];
               return (
                 <div className={classNames(styles.inputContainer, formField.containerClassName)}>
-                  {formField.type === FormFieldType.TextArea ? (
-                    <TextArea {...commonProps} />
-                  ) : (
-                    <Input {...commonProps} htmlType={formField.type} fixedWidth={false} />
-                  )}
+                  <InputField {...inputFieldProps} />
                   {error && <span className={styles.errorText}>{error.message}</span>}
                 </div>
               );

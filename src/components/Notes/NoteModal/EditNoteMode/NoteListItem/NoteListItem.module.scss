@@ -1,0 +1,36 @@
+.container {
+    margin-block: var(--spacing-xsmall);
+    border: 1px var(--color-borders-hairline) solid;
+    padding: var(--spacing-small);
+    border-radius: var(--border-radius-rounded);
+    box-shadow: var(--shadow-small);
+}
+
+.headerContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.noteDate {
+    display: block;
+    font-size: var(--font-size-xsmall);
+    color: var(--color-text-faded);
+}
+
+.noteBody {
+    margin-block-end: var(--spacing-small);
+    line-break: anywhere;
+}
+
+.shareButtonContainer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.buttonsContainer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
