@@ -34,7 +34,8 @@ export const makeSyncLocalDataUrl = (): string => makeUrl('users/syncLocalData')
 
 export const makeVerificationCodeUrl = (): string => makeUrl('users/verificationCode');
 
-export const makeSendMagicLinkUrl = (): string => makeUrl('auth/magiclogin');
+export const makeSendMagicLinkUrl = (redirect?: string): string =>
+  makeUrl('auth/magiclogin', redirect ? { redirect } : undefined);
 
 export const makeGoogleLoginUrl = (): string => makeUrl('auth/google');
 
