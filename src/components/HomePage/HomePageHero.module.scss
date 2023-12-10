@@ -24,7 +24,11 @@ $fallbackColor: #22a5ad;
   }
 
   @include theme.sepia {
-    filter: sepia(1);
+    filter: none;
+  }
+
+  @include theme.turquoise {
+    filter: none;
   }
 }
 

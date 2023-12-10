@@ -334,7 +334,8 @@
         "light": "Terang",
         "sepia": "Sepia",
         "system": "Sistem",
-        "system-desc": "Tema sistem secara automatik digunakan pada tetapan mod terang\/gelap anda"
+        "system-desc": "Tema sistem secara automatik digunakan pada tetapan mod terang\/gelap anda",
+        "turquoise": "Turqois"
     },
     "to": "Ke",
     "tooltip": "Alat",

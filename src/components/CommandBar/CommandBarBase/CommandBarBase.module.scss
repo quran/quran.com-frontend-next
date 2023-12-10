@@ -4,6 +4,7 @@ $content-animation-easing: cubic-bezier(0.16, 1, 0.3, 1);
 $overlay-background-light: hsla(0, 0%, 100%, 0.8);
 $overlay-background-dark: rgba(0, 0, 0, 0.8);
 $overlay-background-sepia: rgba(239, 226, 205, 0.7);
+$overlay-background-turquoise: rgba(173, 216, 230, 0.8);
 $shadow: 0 16px 70px rgb(0 0 0 / 20%); // using custom shadow for now until we fix our token and design in dark theme;
 $width: 95vw;
 $max-width: calc(20 * var(--spacing-mega));
@@ -15,6 +16,7 @@ $min-height: calc(9 * var(--spacing-mega));
     opacity: 0;
     transform: var(--content-translate-position) scale(0.96);
   }
+
   100% {
     opacity: 1;
     transform: var(--content-translate-position) scale(1);
@@ -26,6 +28,7 @@ $min-height: calc(9 * var(--spacing-mega));
     opacity: 1;
     transform: var(--content-translate-position) scale(1);
   }
+
   100% {
     opacity: 0;
     transform: var(--content-translate-position) scale(0.96);
@@ -34,6 +37,7 @@ $min-height: calc(9 * var(--spacing-mega));
 
 .content {
   --content-translate-position: translate(-50%, -50%);
+
   [dir="rtl"] & {
     --content-translate-position: translate(50%, -50%);
   }
@@ -51,17 +55,21 @@ $min-height: calc(9 * var(--spacing-mega));
   min-height: $min-height;
   display: flex;
   flex-direction: column;
+
   @media (prefers-reduced-motion: no-preference) {
     &[data-state="open"] {
       animation: contentShow var(--transition-fast) $content-animation-easing;
     }
+
     &[data-state="closed"] {
       animation: contentHide var(--transition-fast) $content-animation-easing;
     }
   }
+
   &:focus {
     outline: none;
   }
+
   z-index: var(--z-index-modal);
 }
 
@@ -69,6 +77,7 @@ $min-height: calc(9 * var(--spacing-mega));
   from {
     opacity: 0;
   }
+
   to {
     opacity: 1;
   }
@@ -78,6 +87,7 @@ $min-height: calc(9 * var(--spacing-mega));
   from {
     opacity: 1;
   }
+
   to {
     opacity: 0;
   }
@@ -87,12 +97,22 @@ $min-height: calc(9 * var(--spacing-mega));
   @include theme.light {
     background-color: $overlay-background-light;
   }
+
   @include theme.dark {
     background-color: $overlay-background-dark;
   }
+
   @include theme.sepia {
     background-color: $overlay-background-sepia;
   }
+
+  @include theme.turquoise {
+    background-color: $overlay-background-turquoise;
+  }
+
+  // @include theme.turquoise {
+  //   background-color: $overlay-background-turquoise; //$overlay-background-turquoise
+  // }
   backdrop-filter: blur(6px);
   position: fixed;
   inset: 0;
@@ -101,9 +121,11 @@ $min-height: calc(9 * var(--spacing-mega));
     &[data-state="open"] {
       animation: overlayShow var(--transition-fast) ease;
     }
+
     &[data-state="closed"] {
       animation: overlayHide var(--transition-fast) ease;
     }
   }
+
   z-index: var(--z-index-overlay);
 }

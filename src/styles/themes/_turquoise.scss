@@ -1,0 +1,65 @@
+@use "src/styles/shades";
+
+@mixin mode {
+  --color-primary-faded: #000;
+  --color-primary-faint: #000;
+  --color-primary-medium: #000;
+  --color-primary-deep: #000;
+
+  --color-secondary-faded: #c1e1e6;
+  --color-secondary-faint: #66b3cc;
+  --color-secondary-medium: #3399cc;
+  --color-secondary-deep: #005c99;
+
+  --color-success-faded: #f5fafd;
+  --color-success-faint: #d2eaf4;
+  --color-success-medium: #33a1bd;
+  --color-success-deep: #006b82;
+
+  --color-error-faded: #ffe5e5;
+  --color-error-faint: #ff3333;
+  --color-error-medium: #cc0000;
+  --color-error-deep: #990000;
+
+  --color-warning-faded: #fff9e5;
+  --color-warning-faint: #ffd966;
+  --color-warning-medium: #ffcc00;
+  --color-warning-deep: #b39800;
+
+  --color-text-default: #000;
+  --color-text-faded: #666;
+  --color-text-inverse: #fff;
+  --color-text-link: #2ca4ab;
+  --color-text-warning: #b39800;
+  --color-text-error: #990000;
+
+  --color-background-default: #e5f3f8;
+  --color-background-elevated: #f4fbff;
+
+  --color-background-alternative-faded: #c1e1e6;
+  --color-background-alternative-faint: #cce6f2;
+  --color-background-alternative-medium: #c1e1e6;
+  --color-background-alternative-deep: #3399cc;
+
+  --color-background-inverse: #000;
+  --color-background-backdrop: rgba(0, 0, 0, 0.25);
+  --color-background-lighten: rgba(173, 216, 230, 0.8);
+
+  --color-borders-hairline: #3399cc;
+
+  --color-highlight: #50e3c2;
+
+  --shadow-small: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  --shadow-normal: 0px 4px 8px rgba(0, 0, 0, 0.12);
+  --shadow-large: 0 5px 10px rgba(0, 0, 0, 0.12);
+  --shadow-xlarge: 0 8px 30px rgba(0, 0, 0, 0.12);
+  --shadow-jumbo: 0 30px 60px rgba(0, 0, 0, 0.12);
+  --shadow-hover: 0 30px 60px rgba(0, 0, 0, 0.12);
+  --shadow-sticky: 0 12px 10px -10px rgba(0, 0, 0, 0.12);
+
+  // scrollbar styles
+  --scrollbar-background: #33a1bd;
+  --scrollbar-thumb: #bfe8ee;
+  --scrollbar-thumb-hover: #99d6e6;
+  --scrollbar-thumb-active: #005c99;
+}

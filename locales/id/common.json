@@ -334,7 +334,8 @@
         "light": "Terang",
         "sepia": "sepia",
         "system": "Sistem",
-        "system-desc": "Tema sistem secara otomatis mengadopsi pengaturan mode terang\/gelap Anda"
+        "system-desc": "Tema sistem secara otomatis mengadopsi pengaturan mode terang\/gelap Anda",
+        "turquoise": "Turkis"
     },
     "to": "Ke",
     "tooltip": "Keterangan alat",

@@ -334,7 +334,8 @@
         "light": "Léger",
         "sepia": "Sépia",
         "system": "Système",
-        "system-desc": "Le thème du système s'adapte automatiquement à vos paramètres de mode clair\/sombre"
+        "system-desc": "Le thème du système s'adapte automatiquement à vos paramètres de mode clair\/sombre",
+        "turquoise": "Turquoise"
     },
     "to": "À",
     "tooltip": "Info-bulle",

@@ -334,7 +334,8 @@
         "light": "Light",
         "sepia": "Sepia",
         "system": "System",
-        "system-desc": "The system theme automatically adopts to your light\/dark mode settings"
+        "system-desc": "The system theme automatically adopts to your light\/dark mode settings",
+        "turquoise": "Turquoise"
     },
     "to": "To",
     "tooltip": "Tooltip",

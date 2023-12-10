@@ -21,10 +21,16 @@ $size: var(--spacing-medium);
   @include theme.dark {
     background-color: var(--color-background-inverse);
   }
+
   @include theme.light {
     background-color: var(--color-background-default);
   }
+
   @include theme.sepia {
+    background-color: var(--color-background-default);
+  }
+
+  @include theme.turquoise {
     background-color: var(--color-background-default);
   }
 
@@ -35,8 +41,9 @@ $size: var(--spacing-medium);
   transition: transform var(--transition-fast) ease;
 }
 
-.checked > .handleOn {
+.checked>.handleOn {
   transform: translateX($handleTranslateX);
+
   [dir="rtl"] & {
     transform: translateX(-$handleTranslateX);
   }

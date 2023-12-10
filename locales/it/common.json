@@ -334,7 +334,8 @@
         "light": "Leggero",
         "sepia": "Seppia",
         "system": "Sistema",
-        "system-desc": "Il tema del sistema si adatta automaticamente alle impostazioni della modalità chiaro\/scuro"
+        "system-desc": "Il tema del sistema si adatta automaticamente alle impostazioni della modalità chiaro\/scuro",
+        "turquoise": "Turchese"
     },
     "to": "Per",
     "tooltip": "Descrizione comando",

@@ -66,6 +66,11 @@
     background-color: var(--color-background-alternative-faint);
   }
 
+  @include theme.turquoise {
+    border-color: var(--color-success-medium);
+    background-color: var(--color-background-alternative-faint);
+  }
+
   @include theme.dark {
     background-color: var(--color-background-alternative-faded);
   }
@@ -73,6 +78,7 @@
   @media (hover: hover) {
     &:hover {
       background-color: var(--color-background-alternative-faint);
+
       @include theme.dark {
         background-color: var(--color-background-alternative-faded);
       }
@@ -92,6 +98,10 @@
   }
 
   @include theme.sepia {
+    color: var(--color-background-default);
+  }
+
+  @include theme.turquoise {
     color: var(--color-background-default);
   }
 

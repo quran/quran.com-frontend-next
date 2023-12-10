@@ -334,7 +334,8 @@
         "light": "Aydınlık",
         "sepia": "Sepya",
         "system": "Sistem",
-        "system-desc": "Sistem teması, aydınlık\/karanlık modu ayarlarınıza otomatik olarak uyarlar"
+        "system-desc": "Sistem teması, aydınlık\/karanlık modu ayarlarınıza otomatik olarak uyarlar",
+        "turquoise": "Turkuaz"
     },
     "to": "NS",
     "tooltip": "Araç ipucu",

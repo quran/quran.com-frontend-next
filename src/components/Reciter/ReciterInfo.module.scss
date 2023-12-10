@@ -6,6 +6,7 @@
   align-items: center;
   flex-direction: column;
   justify-content: center;
+
   @include breakpoints.tablet {
     flex-direction: row;
     align-items: flex-start;
@@ -22,18 +23,24 @@
 
 .reciterBio {
   margin-block-end: var(--spacing-medium);
+
   span {
     @include theme.light {
       background-color: var(--color-success-medium) !important;
-      color: var(
-        --color-text-inverse
-      ) !important; // white text on "success" background;
+      color: var(--color-text-inverse) !important; // white text on "success" background;
     }
+
     @include theme.dark {
       background-color: var(--color-background-elevated) !important;
       color: var(--color-text-default) !important;
     }
+
     @include theme.sepia {
+      background-color: var(--color-background-alternative-deep) !important;
+      color: var(--color-text-default) !important;
+    }
+
+    @include theme.turquoise {
       background-color: var(--color-background-alternative-deep) !important;
       color: var(--color-text-default) !important;
     }
@@ -45,6 +52,7 @@
   font-size: var(--font-size-xlarge);
   text-align: center;
   margin-block-end: var(--spacing-xxsmall);
+
   @include breakpoints.tablet {
     text-align: start;
     margin-block-end: var(--spacing-medium);
@@ -61,6 +69,7 @@
   overflow: hidden;
 
   margin-block-end: var(--spacing-medium);
+
   @include breakpoints.tablet {
     margin-block-end: initial;
   }
@@ -74,12 +83,15 @@
 .actionContainer {
   display: flex;
   justify-content: center;
+
   @include breakpoints.tablet {
     display: block;
   }
 }
+
 .playButton {
   width: 100%;
+
   @include breakpoints.tablet {
     width: auto;
   }

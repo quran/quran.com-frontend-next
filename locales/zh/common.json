@@ -334,7 +334,8 @@
         "light": "明",
         "sepia": "棕褐色",
         "system": "系统",
-        "system-desc": "系统主题自动采用您的明\/暗模式设置"
+        "system-desc": "系统主题自动采用您的明\/暗模式设置",
+        "turquoise": "绿松石"
     },
     "to": "到",
     "tooltip": "工具提示",
