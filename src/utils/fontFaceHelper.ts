@@ -1,5 +1,7 @@
 import range from 'lodash/range';
 
+import { isSafari } from './device-detector';
+
 import { MushafLines, QuranFont } from 'types/QuranReader';
 import Verse from 'types/Verse';
 
@@ -46,10 +48,21 @@ export const getQCFFontFaceSource = (quranFont: QuranFont, pageNumber: number): 
     [QuranFont.TajweedV4]: 'QCF4_P',
   };
 
-  const woff2 = `/fonts/quran/hafs/${version}/woff2/p${pageNumber}.woff2`;
-  const woff = `/fonts/quran/hafs/${version}/woff/p${pageNumber}.woff`;
-  const ttf = `/fonts/quran/hafs/${version}/ttf/p${pageNumber}.ttf`;
+  const { woff2, woff, ttf } = getFontPath(quranFont, pageNumber, version);
   return `local(${prefixesMap[quranFont]}${pageName}), url('${woff2}') format('woff2'), url('${woff}') format('woff'), url('${ttf}') format('truetype')`;
+};
+
+const getFontPath = (quranFont: QuranFont, pageNumber: string, version: QCFFontVersion) => {
+  let path = version as string;
+  // if it's TajweedV4, we need to add the ot-svg or colrv1 path base on the browser
+  if (quranFont === QuranFont.TajweedV4) {
+    path = isSafari() ? `${path}/ot-svg` : `${path}/colrv1`;
+  }
+
+  const woff2 = `/fonts/quran/hafs/${path}/woff2/p${pageNumber}.woff2`;
+  const woff = `/fonts/quran/hafs/${path}/woff/p${pageNumber}.woff`;
+  const ttf = `/fonts/quran/hafs/${path}/ttf/p${pageNumber}.ttf`;
+  return { woff2, woff, ttf };
 };
 
 /**
