@@ -10,8 +10,10 @@ const listDir = (dir, fileList = []) => {
       fileList = listDir(path.join(dir, file), fileList);
     } else {
       const fileDetails = file.split('.');
+      console.log(file)
       const currentFileNameWithoutExtension = fileDetails[0];
       const fileExtension = fileDetails[1];
+      console.log(currentFileNameWithoutExtension)
       // e.g. QCF4001_COLOR-Regular will be converted to [ '4001' ]
       const matchesArray = currentFileNameWithoutExtension.match(/[^QCF[](\d+)[^_\]]/g);
       // since first page starts from 4001, subtracting 4000 will give us the actual number 4001 -> 1
