@@ -52,7 +52,7 @@ export const getQCFFontFaceSource = (quranFont: QuranFont, pageNumber: number): 
   return `local(${prefixesMap[quranFont]}${pageName}), url('${woff2}') format('woff2'), url('${woff}') format('woff'), url('${ttf}') format('truetype')`;
 };
 
-const getFontPath = (quranFont: QuranFont, pageNumber: string, version: QCFFontVersion) => {
+const getFontPath = (quranFont: QuranFont, pageNumber: number, version: QCFFontVersion) => {
   let path = version as string;
   // if it's TajweedV4, we need to add the ot-svg or colrv1 path base on the browser
   if (quranFont === QuranFont.TajweedV4) {
