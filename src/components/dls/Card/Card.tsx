@@ -1,8 +1,8 @@
 import { ReactNode } from 'react';
 
 import classNames from 'classnames';
-import useTranslation from 'next-translate/useTranslation';
 import Image from 'next/image';
+import useTranslation from 'next-translate/useTranslation';
 
 import Button, { ButtonVariant } from '../Button/Button';
 

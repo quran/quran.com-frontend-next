@@ -1,8 +1,8 @@
 /* eslint-disable react/no-multi-comp */
 import classNames from 'classnames';
+import Image from 'next/image';
 import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
-import Image from 'next/image';
 
 import styles from './apps.module.scss';
 
