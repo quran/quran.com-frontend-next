@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "engines": {
-    "node": ">=20.10.0"
+    "node": "18.x"
   },
   "scripts": {
     "dev": "next dev",
