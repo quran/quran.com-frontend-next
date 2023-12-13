@@ -7,7 +7,6 @@ module.exports = {
     "@storybook/addon-essentials",
     "@storybook/addon-a11y",
     "@storybook/addon-storysource",
-    "@storybook/addon-styling-webpack"
   ],
   framework: {
     name: '@storybook/nextjs',
