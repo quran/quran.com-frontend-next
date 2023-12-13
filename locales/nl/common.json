@@ -1,12 +1,13 @@
 {
     "about": "Over ons",
+    "allow": "Toestaan",
     "and": "en",
     "announcements": {
         "auth-onboarding": {
             "data-sync": {
                 "action": "Volgende",
                 "description": "Of je nu Quran.com op je telefoon of je laptop gebruikt, je bladwijzers, laatst gelezen verzen en je voorkeuren zijn beschikbaar",
-                "title": "Uw gegevens worden <br> <\/br> op verschillende apparaten gesynchroniseerd"
+                "title": "Uw gegevens worden <br><\/br> op verschillende apparaten gesynchroniseerd"
             },
             "feedback": {
                 "action": "Oké, snap het",
@@ -25,7 +26,7 @@
             },
             "welcome": {
                 "action": "Zie wat nieuw is",
-                "title": "Welkom bij Quran.com <br> <\/br> Gebruikersaccount"
+                "title": "Welkom bij Quran.com <br><\/br> Gebruikersaccount"
             }
         },
         "collections-announcement": {
@@ -113,6 +114,12 @@
         "title": "Gemeenschap"
     },
     "complete-sign-up": "Voltooi je registratie",
+    "consents": {
+        "communication": {
+            "body": "🚀 Verbeter uw voortgang via <boldSpan> gepersonaliseerde <\/boldSpan> meldingen over uw doelvoortgang, het bijhouden van streaks en het verbeteren van uw gebruik van onze huidige functies. <br><\/br> <br><\/br> Kunnen we u op de hoogte houden via e-mail en andere kanalen? U heeft de controle. U kunt deze voorkeuren op elk gewenst moment aanpassen in uw accountinstellingen. <br><\/br> <br><\/br> Selecteer eenvoudig 'Toestaan' voor <boldSpan> inspirerende herinneringen <\/boldSpan> of 'Niet nu' om te weigeren.",
+            "header": "We helpen u graag <boldSpan> toegewijd en consistent <\/boldSpan> te blijven tijdens uw Korangroeireis! 📖🌟"
+        }
+    },
     "continue": "Doorgaan met",
     "copied": "gekopieerd",
     "copied-to-clipboard": "Gekopieerd naar het klembord",
@@ -207,7 +214,14 @@
     "next": "Volgende",
     "next-ayah": "Volgende Aya",
     "no": "Nee",
+    "no-notifications": "Nog geen meldingen",
     "none": "Geen",
+    "not-now": "Niet nu",
+    "notification": {
+        "mark-all-as-read": "Alles als gelezen markeren",
+        "mark-as-read": "Markeer als gelezen"
+    },
+    "notifications": "Meldingen",
     "off": "Uit",
     "on": "Op",
     "page": "Bladzijde",

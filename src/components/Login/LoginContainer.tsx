@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
+import { useRouter } from 'next/router';
 
 import { SubmissionResult } from '../FormBuilder/FormBuilder';
 
@@ -22,13 +23,15 @@ enum LoginType {
 const LoginContainer = () => {
   const [loginType, setLoginType] = useState(LoginType.Social);
   const { t } = useTranslation();
+  const { query } = useRouter();
+  const redirect = query.r ? decodeURIComponent(query.r.toString()) : undefined;
 
   const [magicLinkVerificationCode, setMagicLinkVerificationCode] = useState('');
   const [email, setEmail] = useState('');
 
   const onEmailLoginSubmit = ({ email: emailInput }): SubmissionResult<EmailLoginData> => {
     setEmail(emailInput);
-    return sendMagicLink(emailInput)
+    return sendMagicLink(emailInput, redirect)
       .then(setMagicLinkVerificationCode)
       .catch(() => {
         return {

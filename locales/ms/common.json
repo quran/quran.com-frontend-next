@@ -1,12 +1,13 @@
 {
     "about": "Tentang Kami",
+    "allow": "benarkan",
     "and": "dan",
     "announcements": {
         "auth-onboarding": {
             "data-sync": {
                 "action": "Seterusnya",
                 "description": "Sama ada anda menggunakan Quran.com pada telefon atau komputer riba anda, penanda halaman anda, ayat terakhir dibaca dan pilihan anda akan tersedia",
-                "title": "Data anda akan disegerakkan <br> <\/br> merentas peranti"
+                "title": "Data anda akan disegerakkan <br><\/br> merentas peranti"
             },
             "feedback": {
                 "action": "Okay, faham",
@@ -25,7 +26,7 @@
             },
             "welcome": {
                 "action": "Lihat apa yang baharu",
-                "title": "Selamat datang ke Akaun Pengguna <br> <\/br>"
+                "title": "Selamat datang ke Akaun Pengguna <br><\/br>"
             }
         },
         "collections-announcement": {
@@ -113,6 +114,12 @@
         "title": "Komuniti"
     },
     "complete-sign-up": "Lengkapkan pendaftaran anda",
+    "consents": {
+        "communication": {
+            "body": "🚀 Tingkatkan kemajuan anda melalui pemberitahuan <boldSpan> diperibadikan <\/boldSpan> tentang kemajuan matlamat anda, mengekalkan coretan dan meningkatkan penggunaan ciri semasa kami oleh anda. <br><\/br> <br><\/br> Bolehkah kami sentiasa memantau anda melalui e-mel dan saluran lain? Anda mempunyai kawalan – jangan ragu untuk melaraskan pilihan ini pada bila-bila masa dalam tetapan akaun anda. <br><\/br> <br><\/br> Hanya pilih 'Benarkan' untuk <boldSpan> peringatan yang memberi inspirasi <\/boldSpan> atau 'Bukan Sekarang' untuk menolak.",
+            "header": "Kami ingin membantu anda kekal <boldSpan> komited dan konsisten <\/boldSpan> dengan Perjalanan Pertumbuhan Al-Quran anda! 📖🌟"
+        }
+    },
     "continue": "Teruskan",
     "copied": "Selesai salin",
     "copied-to-clipboard": "Disalin ke papan keratan",
@@ -207,7 +214,14 @@
     "next": "Seterusnya",
     "next-ayah": "Seterusnya Ayah",
     "no": "Tidak",
+    "no-notifications": "Tiada pemberitahuan lagi",
     "none": "Tiada",
+    "not-now": "Bukan sekarang",
+    "notification": {
+        "mark-all-as-read": "Tandai semua sebagai dibaca",
+        "mark-as-read": "tanda sebagai telah dibaca"
+    },
+    "notifications": "Pemberitahuan",
     "off": "Tutup",
     "on": "Pasang",
     "page": "Halaman",

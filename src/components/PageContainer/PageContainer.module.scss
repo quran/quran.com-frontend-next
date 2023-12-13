@@ -31,8 +31,4 @@
       --flow-side-spacing: 0;
     }
   }
-
-  @include breakpoints.smallerThanTablet {
-    margin-block-start: calc(1.4 * var(--spacing-mega));
-  }
 }
