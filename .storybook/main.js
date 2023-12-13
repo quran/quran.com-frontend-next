@@ -2,19 +2,18 @@ const path = require("path");
 
 module.exports = {
   stories: ["../src/**/*.stories.tsx"],
-
   addons: [
     "@storybook/addon-links",
     "@storybook/addon-essentials",
     "@storybook/addon-a11y",
     "@storybook/addon-storysource",
+    "@storybook/addon-styling-webpack"
   ],
-
   framework: {
-    name: "@storybook/nextjs",
+    name: '@storybook/nextjs',
     options: {},
   },
-
+  staticDirs: ['./../public'],
   typescript: {
     check: false,
     checkOptions: {},
@@ -26,7 +25,6 @@ module.exports = {
     //   propFilter: (prop) => (prop.parent ? !/node_modules/.test(prop.parent.fileName) : true),
     // },
   },
-
   webpackFinal: async (config) => {
     // Add support for absolute paths
     config.resolve.modules = [
