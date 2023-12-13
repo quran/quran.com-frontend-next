@@ -1,11 +1,12 @@
+/* eslint-disable jsx-a11y/control-has-associated-label */
 /* eslint-disable max-lines */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/mouse-events-have-key-events */
 import React, { MouseEvent, useState, useCallback, RefObject, useEffect } from 'react';
 
 import classNames from 'classnames';
-import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
+import useTranslation from 'next-translate/useTranslation';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { useDispatch } from 'react-redux';
 

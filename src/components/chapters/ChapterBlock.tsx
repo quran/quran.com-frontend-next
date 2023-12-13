@@ -1,8 +1,8 @@
 import React from 'react';
 
 import classNames from 'classnames';
-import useTranslation from 'next-translate/useTranslation';
 import Link from 'next/link';
+import useTranslation from 'next-translate/useTranslation';
 
 import styles from './ChapterBlock.module.scss';
 import ChapterIconContainer from './ChapterIcon/ChapterIconContainer';

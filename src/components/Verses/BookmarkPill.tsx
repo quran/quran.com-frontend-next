@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/control-has-associated-label */
 import { useContext } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
