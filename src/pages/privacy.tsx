@@ -51,6 +51,16 @@ const PrivacyPage: NextPage = (): JSX.Element => {
           <p>{t('log-data.desc')}</p>
           <h2>{t('communication.title')}</h2>
           <p>{t('communication.desc')}</p>
+          <h2>{t('data-protection.title')}</h2>
+          <p>
+            <Trans
+              components={{
+                br: <br />,
+                boldSpan: <span key={2} className={styles.bold} />,
+              }}
+              i18nKey="privacy:data-protection.desc"
+            />
+          </p>
           <h2>{t('data-security.title')}</h2>
           <p>{t('data-security.desc')}</p>
           <h2>{t('data-sharing.title')}</h2>
