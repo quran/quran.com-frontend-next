@@ -1,10 +1,9 @@
 import React, { memo } from 'react';
 
-import groupBy from 'lodash/groupBy';
-
 import styles from './Filter.module.scss';
 import TranslationGroup from './TranslationGroup';
 
+import { getTranslationByLanguages } from '@/utils/search';
 import AvailableTranslation from 'types/AvailableTranslation';
 
 interface Props {
@@ -15,7 +14,7 @@ interface Props {
 
 const TranslationsFilter: React.FC<Props> = memo(
   ({ translations, selectedTranslations, onTranslationChange }) => {
-    const translationByLanguages = groupBy(translations, 'languageName');
+    const translationByLanguages = getTranslationByLanguages(translations);
     return (
       <div className={styles.comboboxItems}>
         {Object.entries(translationByLanguages).map(([language, languageTranslations]) => {
