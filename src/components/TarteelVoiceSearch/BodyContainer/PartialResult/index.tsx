@@ -1,5 +1,3 @@
-import React from 'react';
-
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 
@@ -11,11 +9,18 @@ import { getVolumeLevelMultiplier } from 'src/audioInput/voice';
 interface Props {
   partialTranscript: string;
   volume: number;
+  stopRecording: () => void;
   verticalLayout?: boolean;
 }
 
-const PartialResult: React.FC<Props> = ({ partialTranscript, volume, verticalLayout }) => {
+const PartialResult: React.FC<Props> = ({
+  partialTranscript,
+  volume,
+  verticalLayout,
+  stopRecording,
+}) => {
   const { t } = useTranslation('common');
+
   return (
     <div className={classNames(styles.outerContainer, verticalLayout && styles.verticalLyaout)}>
       <div className={styles.innerContainer}>
@@ -23,7 +28,8 @@ const PartialResult: React.FC<Props> = ({ partialTranscript, volume, verticalLay
           <h3 className={styles.suggestTitle}>{t('voice.suggest-title')}</h3>
           <p className={styles.suggestSubtitle}>{t('voice.suggest-subtitle')}</p>
         </div>
-        <div className={styles.circlesContainer}>
+        {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
+        <div className={styles.circlesContainer} onClick={stopRecording}>
           <div
             className={styles.volumeCircle}
             // @ts-ignore
