@@ -52,6 +52,10 @@ export const makeCollectionsUrl = (queryParams: CollectionsQueryParams): string 
 
 export const makeAddCollectionUrl = () => makeUrl('collections');
 
+export const makeGetCoursesUrl = () => makeUrl('courses');
+
+export const makeGetCourseUrl = (courseId: string) => makeUrl(`courses/${courseId}`);
+
 export const makeUpdateCollectionUrl = (collectionId: string) =>
   makeUrl(`collections/${collectionId}`);
 

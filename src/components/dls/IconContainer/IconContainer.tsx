@@ -22,6 +22,7 @@ type IconContainerProps = {
   icon: React.ReactNode;
   size?: IconSize;
   color?: IconColor;
+  className?: string;
   shouldFlipOnRTL?: boolean;
 };
 const IconContainer = ({
@@ -29,11 +30,12 @@ const IconContainer = ({
   size = IconSize.Medium,
   color = IconColor.default,
   shouldFlipOnRTL = true,
+  className,
 }: IconContainerProps) => {
   const dir = useDirection();
   return (
     <span
-      className={classNames(styles.container, {
+      className={classNames(className, styles.container, {
         [styles.defaultColor]: color === IconColor.default || color === IconColor.primary,
         [styles.secondaryColor]: color === IconColor.secondary,
         [styles.xsmallIcon]: size === IconSize.Xsmall,

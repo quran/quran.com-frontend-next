@@ -16,7 +16,7 @@ import { logoutUser } from '@/utils/auth/api';
 import { isLoggedIn } from '@/utils/auth/login';
 import { removeLastSyncAt } from '@/utils/auth/userDataSync';
 import { logButtonClick } from '@/utils/eventLogger';
-import { getReadingGoalProgressNavigationUrl } from '@/utils/navigation';
+import { getLearnNavigationUrl, getReadingGoalProgressNavigationUrl } from '@/utils/navigation';
 
 const ProfileAvatarButton = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -53,6 +53,13 @@ const ProfileAvatarButton = () => {
     });
   };
 
+  const onLearnClicked = () => {
+    logButtonClick('profile_avatar_learn');
+    router.push(getLearnNavigationUrl()).then(() => {
+      setIsOpen(false);
+    });
+  };
+
   if (isUserLoggedIn) {
     return (
       <PopoverMenu
@@ -80,6 +87,9 @@ const ProfileAvatarButton = () => {
         </PopoverMenu.Item>
         <PopoverMenu.Item onClick={onReadingHistoryClicked} icon={<ClockIcon />}>
           {t('reading-history')}
+        </PopoverMenu.Item>
+        <PopoverMenu.Item onClick={onLearnClicked} icon={<ClockIcon />}>
+          {t('learn')}
         </PopoverMenu.Item>
         <PopoverMenu.Item onClick={onLogoutClicked} icon={<LogoutIcon />}>
           {t('logout')}

@@ -1,0 +1,22 @@
+.backText {
+    padding-inline-start: var(--spacing-micro);
+}
+.headerContainer {
+    padding-block-end: var(--spacing-small);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.title {
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-jumbo);
+}
+
+.imgContainer {
+    width: 100%;
+    height: calc(var(--spacing-mega) * 10);
+    position: relative;
+    margin-block-end: var(--spacing-small);
+}

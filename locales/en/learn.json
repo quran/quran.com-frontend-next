@@ -1,0 +1,14 @@
+{
+  "enroll": "Enroll",
+  "day": "Day",
+  "author": "Author",
+  "duration": "Duration",
+  "duration-daily": "{{dailyMins}} minutes/day over {{days}} days",
+  "description": "Description",
+  "category": "Category",
+  "tabs": {
+    "main": "Main Details",
+    "syllabus": "Syllabus"
+  },
+  "back-to-courses": "Back to courses"
+}
