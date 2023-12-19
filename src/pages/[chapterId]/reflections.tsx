@@ -78,6 +78,7 @@ const SelectedAyahReflection: NextPage<AyahReflectionProp> = ({
           surahName: chapter.chapter.transliteratedName,
         })}
       />
+      {/* @ts-ignore */}
       <SWRConfig value={{ fallback }}>
         <div className={layoutStyle.pageContainer}>
           <div className={layoutStyle.flow}>

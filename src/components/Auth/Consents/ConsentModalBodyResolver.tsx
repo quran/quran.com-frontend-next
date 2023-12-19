@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
-import dynamic from 'next/dynamic';
 import useTranslation from 'next-translate/useTranslation';
+import dynamic from 'next/dynamic';
 import { useSWRConfig } from 'swr';
 
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';

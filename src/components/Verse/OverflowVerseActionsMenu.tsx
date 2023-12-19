@@ -2,8 +2,8 @@
 import React from 'react';
 
 import classNames from 'classnames';
-import dynamic from 'next/dynamic';
 import useTranslation from 'next-translate/useTranslation';
+import dynamic from 'next/dynamic';
 
 import cellStyles from '../QuranReader/TranslationView/TranslationViewCell.module.scss';
 
