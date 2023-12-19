@@ -7,5 +7,6 @@
     "search": "Ricerca",
     "search-desc": "Cerca nel corpus del Sacro Corano e nelle sue traduzioni utilizzando un motore di ricerca multilingue potente e altamente accurato.",
     "search-title": "Cerca ' {{searchQuery}} '",
+    "searching-translations": "Ricerca di traduzioni",
     "translation-select": "Seleziona una traduzione"
 }
