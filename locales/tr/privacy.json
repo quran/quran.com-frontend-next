@@ -19,6 +19,10 @@
         "desc": "Gizliliğinizi sağlamak ve kişisel bilgileriniz üzerinde kontrol sahibi olmak için basit bir hesap silme işlemi sağlıyoruz. Hesabınızı silmeyi seçtiğinizde, ilişkili tüm kişisel veriler otomatik olarak ve kalıcı olarak sistemlerimizden kaldırılacaktır. Profil sayfanıza erişerek hesap silme işlemini başlatabilirsiniz. Silme işlemi başlatıldıktan sonra, kişisel verileriniz makul bir süre içinde sunucularımızdan güvenli bir şekilde silinecektir.",
         "title": "Veri Silme"
     },
+    "data-protection": {
+        "desc": "<boldSpan> Erişim hakkı: <\/boldSpan> Kişisel verilerinizin kopyalarını Kuran Vakfı'ndan talep etme hakkına sahipsiniz. Bu hizmet için sizden küçük bir ücret talep edebiliriz. <br\/> <br\/> <boldSpan> Düzeltme hakkı <\/boldSpan> : Yanlış olduğuna inandığınız bilgilerin Kuran Vakfı'ndan düzeltilmesini talep etme hakkına sahipsiniz. Eksik olduğuna inandığınız bilgilerin Kuran Vakfı'ndan tamamlanmasını talep etme hakkınız da bulunmaktadır. <br\/> <br\/> <boldSpan> Silme hakkı: <\/boldSpan> Belirli koşullar altında, Kuran Vakfı'ndan kişisel verilerinizin silinmesini talep etme hakkına sahipsiniz. <br\/> <br\/> <boldSpan> İşlemeyi kısıtlama hakkı: <\/boldSpan> Belirli koşullar altında, Kuran Vakfı'ndan kişisel verilerinizin işlenmesini kısıtlamasını talep etme hakkına sahipsiniz. <br\/> <br\/> <boldSpan> İşleme itiraz hakkı <\/boldSpan> : Belirli koşullar altında, Kuran Vakfı'nın kişisel verilerinizi işlemesine itiraz etme hakkına sahipsiniz. <br\/> <br\/> <boldSpan> Veri taşınabilirliği hakkı <\/boldSpan> : Kuran Vakfı'nın topladığımız verileri belirli koşullar altında başka bir kuruluşa veya doğrudan size aktarmasını talep etme hakkına sahipsiniz. .",
+        "title": "Veri Koruma Hakları"
+    },
     "data-security": {
         "desc": "Kişisel bilgilerinizi yetkisiz erişime, değişikliğe, ifşaya veya imhaya karşı korumak için uygun önlemleri alıyoruz. Verilerinizin gizliliğini ve bütünlüğünü sağlamak için endüstri standardı güvenlik protokolleri kullanıyoruz ve fiziksel, elektronik ve yönetimsel korumalar uyguluyoruz.",
         "title": "Veri güvenliği"

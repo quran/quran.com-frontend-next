@@ -2,8 +2,8 @@
 import { useContext } from 'react';
 
 import { unwrapResult } from '@reduxjs/toolkit';
-import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
+import useTranslation from 'next-translate/useTranslation';
 import { useDispatch } from 'react-redux';
 
 import styles from './ResetButton.module.scss';

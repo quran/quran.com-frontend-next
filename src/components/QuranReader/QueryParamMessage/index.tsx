@@ -5,9 +5,9 @@
 import React, { useContext, useMemo } from 'react';
 
 import { useSelector as useXstateSelector } from '@xstate/react';
+import { useRouter } from 'next/router';
 import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
-import { useRouter } from 'next/router';
 import { shallowEqual, useSelector } from 'react-redux';
 
 import styles from './QueryParamMessage.module.scss';

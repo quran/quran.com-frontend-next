@@ -1,8 +1,8 @@
 import { useRef, useState } from 'react';
 
 import classNames from 'classnames';
-import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
+import useTranslation from 'next-translate/useTranslation';
 
 import ContentModal from '@/components/dls/ContentModal/ContentModal';
 import ReflectionBodyContainer from '@/components/QuranReader/ReflectionView/ReflectionBodyContainer';

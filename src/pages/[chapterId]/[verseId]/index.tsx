@@ -1,8 +1,8 @@
 /* eslint-disable max-lines */
 /* eslint-disable react-func/max-lines-per-function */
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
-import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
+import useTranslation from 'next-translate/useTranslation';
 
 import { getChapterIdBySlug, getChapterVerses, getPagesLookup } from '@/api';
 import NextSeoWrapper from '@/components/NextSeoWrapper';

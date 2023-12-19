@@ -7,5 +7,6 @@
     "search": "Zoekopdracht",
     "search-desc": "Doorzoek het corpus van de Heilige Koran en zijn vertalingen met behulp van een krachtige en zeer nauwkeurige meertalige zoekmachine.",
     "search-title": "Zoeken naar ' {{searchQuery}} '",
+    "searching-translations": "Vertalingen zoeken",
     "translation-select": "Selecteer een vertaling"
 }

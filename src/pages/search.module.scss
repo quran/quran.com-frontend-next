@@ -95,6 +95,10 @@ $tablet-max-width: 50rem;
   margin-inline-end: var(--spacing-medium);
 }
 
+.searching {
+  font-weight: var(--font-weight-bold);
+}
+
 .languagePopover,
 .translationPopover {
   display: inline-block;
