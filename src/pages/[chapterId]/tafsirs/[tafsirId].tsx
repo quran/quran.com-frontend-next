@@ -83,6 +83,7 @@ const SelectedTafsirOfAyah: NextPage<AyahTafsirProp> = ({
         })}
         languageAlternates={getLanguageAlternates(navigationUrl)}
       />
+      {/* @ts-ignore */}
       <SWRConfig value={{ fallback }}>
         <div className={styles.tafsirContainer}>
           <TafsirBody
