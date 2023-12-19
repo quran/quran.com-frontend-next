@@ -7,5 +7,6 @@
     "search": "ค้นหา",
     "search-desc": "ค้นหาคลังข้อมูลของอัลกุรอานและคำแปลโดยใช้เครื่องมือค้นหาหลายภาษาที่ทรงพลังและแม่นยำสูง",
     "search-title": "ค้นหา ' {{searchQuery}} '",
+    "searching-translations": "กำลังค้นหาคำแปล",
     "translation-select": "เลือกคำแปล"
 }
