@@ -4,14 +4,17 @@ module.exports = {
     "stories": [
         "../src/**/*.stories.tsx"
     ],
-    "addons": [
+    addons: [
         "@storybook/addon-links",
         "@storybook/addon-essentials",
         "@storybook/addon-a11y",
         "@storybook/addon-storysource",
-        "storybook-addon-next",
-    ],
-    framework: '@storybook/react',
+      ],
+      framework: {
+        name: '@storybook/nextjs',
+        options: {},
+      },
+      staticDirs: ['./../public'],
     typescript: {
         check: false,
         checkOptions: {},

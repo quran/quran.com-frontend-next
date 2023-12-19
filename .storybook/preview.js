@@ -1,12 +1,13 @@
-import ResetCSS from '../src/styles/reset.scss';
 import { TooltipProvider } from '@radix-ui/react-tooltip';
-import Theme from '../src/styles/theme.scss'
-import GlobalFonts from '../src/styles/fonts.scss';
-import GlobalStyles from '../src/styles/global.scss';
-import Styles from './styles.scss';
 import I18nProvider from 'next-translate/I18nProvider';
 import { themes } from '@storybook/theming';
 import { RouterDecorator } from 'storybook-addon-next/dist/routing/decorator';
+
+import "../src/styles/fonts.scss";
+import "../src/styles/global.scss";
+import "../src/styles/reset.scss";
+import "../src/styles/theme.scss";
+import "./styles.scss";
 
 import commonEn from '../locales/en/common.json';
 import homeEn from '../locales/en/home.json';
@@ -15,11 +16,7 @@ const themeDecorator = (Story, context) => {
   const theme = context.globals.theme;
   return (
     <>
-      <link rel="stylesheet" href={GlobalFonts} />
-      <link rel="stylesheet" href={ResetCSS} />
-      <link rel="stylesheet" href={Theme} />
-      <link rel="stylesheet" href={GlobalStyles} />
-      <link rel="stylesheet" href={Styles} />
+
       <div data-theme={theme}>
         <div style={{
            backgroundColor: 'var(--color-background-default)',
