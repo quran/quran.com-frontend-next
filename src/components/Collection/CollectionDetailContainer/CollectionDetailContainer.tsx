@@ -1,6 +1,6 @@
 import classNames from 'classnames';
-import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
+import { useRouter } from 'next/router';
 import useSWRInfinite from 'swr/infinite';
 
 import layoutStyles from '../../../pages/index.module.scss';

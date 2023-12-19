@@ -1,8 +1,8 @@
 import { useRef, useState } from 'react';
 
+import useTranslation from 'next-translate/useTranslation';
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
-import useTranslation from 'next-translate/useTranslation';
 import { useSelector } from 'react-redux';
 
 import ContentModalHandles from '@/dls/ContentModal/types/ContentModalHandles';
