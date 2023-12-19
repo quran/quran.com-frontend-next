@@ -171,3 +171,10 @@
 .donateButton {
   font-weight: var(--font-weight-semibold);
 }
+
+.hiringAnnouncementContainer {
+  background-color: var(--color-secondary-faded);
+  padding: var(--spacing-small);
+  margin-block: var(--spacing-small);
+  border-radius: var(--border-radius-default);
+}
