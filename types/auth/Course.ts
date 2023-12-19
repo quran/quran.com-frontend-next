@@ -1,27 +1,28 @@
 import { BaseResponse } from '../ApiResponses';
 
-export type SyllabusDay = {
+export type Lesson = {
+  id: string;
   title: string;
-  body: string;
+  slug: string;
+  language: string; // language code
+  description: string;
+  updatedAt: string;
+  createdAt: string;
 };
 
 export type Course = {
-  id: number;
-  slug: string;
+  id: string;
   title: string;
+  slug: string;
+  author: string;
+  language: string; // language code
+  description: string;
   image: string;
-  language?: string;
-  description?: string;
-  tags?: string[];
-  author?: string;
-  dailyMins?: number;
-  days?: SyllabusDay[];
+  tags: string[];
+  dailyMinutes: number;
+  lessons?: Lesson[];
 };
 
 export interface CoursesResponse extends BaseResponse {
-  courses: Course[];
-}
-
-export interface CourseResponse extends BaseResponse {
-  course: Course;
+  data: Course[];
 }

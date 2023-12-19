@@ -51,7 +51,16 @@ const Card = ({
         onKeyPress={onImgClick}
         onClick={onImgClick}
       >
-        {imgSrc && <Image alt={imgAlt} className={styles.img} src={imgSrc} layout="fill" />}
+        {imgSrc && (
+          <img
+            alt={imgAlt}
+            className={styles.img}
+            src={imgSrc}
+            style={{
+              objectFit: 'fill',
+            }}
+          />
+        )}
 
         {actionIcon && (
           <div className={styles.cardHoverEffectContainer} data-theme="dark">

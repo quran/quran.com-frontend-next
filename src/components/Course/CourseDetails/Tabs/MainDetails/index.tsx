@@ -13,7 +13,7 @@ type Props = {
 
 const MainDetails: React.FC<Props> = ({ course }) => {
   const { t } = useTranslation('learn');
-  const { description, tags, author, dailyMins, days } = course;
+  const { description, tags, author, dailyMinutes, lessons = [] } = course;
 
   const tagsString = tags?.reduce((acc, currentValue) => {
     return `${acc}, ${currentValue}`;
@@ -25,8 +25,8 @@ const MainDetails: React.FC<Props> = ({ course }) => {
       <DetailSection
         title={t('duration')}
         description={t('duration-daily', {
-          dailyMins,
-          days: days.length,
+          dailyMins: dailyMinutes,
+          days: lessons.length,
         })}
       />
       <DetailSection title={t('description')} description={description} />

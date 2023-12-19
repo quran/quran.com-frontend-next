@@ -11,26 +11,23 @@ import CoursesList from '@/components/Course/CoursesList';
 import DataFetcher from '@/components/DataFetcher';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import Spinner from '@/dls/Spinner/Spinner';
-import useRequireAuth from '@/hooks/auth/useRequireAuth';
 import { CoursesResponse } from '@/types/auth/Course';
+import { makeGetCoursesUrl } from '@/utils/auth/apiPaths';
 import { getAllChaptersData } from '@/utils/chapter';
 import { getLanguageAlternates } from '@/utils/locale';
-import { makeGetCoursesUrl } from '@/utils/mockoon/apiPath';
-import { getCanonicalUrl, getLearnNavigationUrl } from '@/utils/navigation';
+import { getCanonicalUrl, getCoursesNavigationUrl } from '@/utils/navigation';
 
 const Loading = () => <Spinner />;
 
 const LearnPage: NextPage = () => {
-  // we don't want to show the reading goal page if the user is not logged in
-  useRequireAuth();
-
   const { t, lang } = useTranslation('learn');
+
   return (
     <>
       <NextSeoWrapper
         title={t('common:learn')}
-        url={getCanonicalUrl(lang, getLearnNavigationUrl())}
-        languageAlternates={getLanguageAlternates(getLearnNavigationUrl())}
+        url={getCanonicalUrl(lang, getCoursesNavigationUrl())}
+        languageAlternates={getLanguageAlternates(getCoursesNavigationUrl())}
         nofollow
         noindex
       />
@@ -39,7 +36,7 @@ const LearnPage: NextPage = () => {
           <DataFetcher
             loading={Loading}
             queryKey={makeGetCoursesUrl()}
-            render={(data: CoursesResponse) => <CoursesList courses={data.courses} />}
+            render={(data: CoursesResponse) => <CoursesList courses={data.data} />}
           />
         </div>
       </div>

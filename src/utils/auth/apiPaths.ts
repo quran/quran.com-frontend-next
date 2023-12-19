@@ -54,7 +54,12 @@ export const makeAddCollectionUrl = () => makeUrl('collections');
 
 export const makeGetCoursesUrl = () => makeUrl('courses');
 
-export const makeGetCourseUrl = (courseId: string) => makeUrl(`courses/${courseId}`);
+export const makeGetCourseUrl = (
+  courseId: string,
+  params?: {
+    withLessons: boolean;
+  },
+) => makeUrl(`courses/${courseId}`, params);
 
 export const makeUpdateCollectionUrl = (collectionId: string) =>
   makeUrl(`collections/${collectionId}`);

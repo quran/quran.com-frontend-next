@@ -6,7 +6,7 @@ import Card, { CardSize } from '@/dls/Card/Card';
 import Link from '@/dls/Link/Link';
 import SearchIcon from '@/icons/search.svg';
 import { Course } from '@/types/auth/Course';
-import { getLessonNavigationUrl } from '@/utils/navigation';
+import { getCourseNavigationUrl } from '@/utils/navigation';
 
 type Props = {
   courses: Course[];
@@ -17,7 +17,7 @@ const CoursesList: React.FC<Props> = ({ courses }) => {
     <div className={styles.container}>
       {courses.map((course) => {
         return (
-          <Link key={course.id} href={getLessonNavigationUrl(course.slug)}>
+          <Link key={course.id} href={getCourseNavigationUrl(course.slug)}>
             <Card
               imgSrc={course.image}
               key={course.id}

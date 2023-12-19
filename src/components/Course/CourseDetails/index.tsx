@@ -14,7 +14,7 @@ import SyllabusIcon from '@/icons/developers.svg';
 import ArrowLeft from '@/icons/west.svg';
 import { Course } from '@/types/auth/Course';
 import { logButtonClick, logEvent } from '@/utils/eventLogger';
-import { getLearnNavigationUrl } from '@/utils/navigation';
+import { getCoursesNavigationUrl } from '@/utils/navigation';
 
 type Props = {
   course: Course;
@@ -65,7 +65,7 @@ const CourseDetails: React.FC<Props> = ({ course }) => {
     <div>
       <Button
         onClick={onBackButtonClicked}
-        href={getLearnNavigationUrl()}
+        href={getCoursesNavigationUrl()}
         variant={ButtonVariant.Ghost}
       >
         <ArrowLeft />
@@ -75,9 +75,18 @@ const CourseDetails: React.FC<Props> = ({ course }) => {
         <p className={styles.title}>{title}</p>
         <Button onClick={onEnrollClicked}>{t('enroll')}</Button>
       </div>
+
       <div className={styles.imgContainer}>
-        <Image className={styles.imgContainer} alt={title} src={image} layout="fill" />
+        <img
+          className={styles.imgContainer}
+          alt={title}
+          src={image}
+          style={{
+            objectFit: 'fill',
+          }}
+        />
       </div>
+
       <Tabs defaultValue={Tab.MAIN} onValueChange={onTabChange} tabs={tabs} />
     </div>
   );

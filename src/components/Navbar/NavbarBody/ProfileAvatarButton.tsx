@@ -16,7 +16,7 @@ import { logoutUser } from '@/utils/auth/api';
 import { isLoggedIn } from '@/utils/auth/login';
 import { removeLastSyncAt } from '@/utils/auth/userDataSync';
 import { logButtonClick } from '@/utils/eventLogger';
-import { getLearnNavigationUrl, getReadingGoalProgressNavigationUrl } from '@/utils/navigation';
+import { getCoursesNavigationUrl, getReadingGoalProgressNavigationUrl } from '@/utils/navigation';
 
 const ProfileAvatarButton = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -55,7 +55,7 @@ const ProfileAvatarButton = () => {
 
   const onLearnClicked = () => {
     logButtonClick('profile_avatar_learn');
-    router.push(getLearnNavigationUrl()).then(() => {
+    router.push(getCoursesNavigationUrl()).then(() => {
       setIsOpen(false);
     });
   };
