@@ -29,7 +29,7 @@ export const LOCALE_TO_TRANSLATION_LANGUAGE = {
  * @param {AvailableTranslation[]} translations
  * @returns {Record<string, AvailableTranslation[]>}
  */
-export const getTranslationByLanguages = (
+export const getTranslationsByLanguages = (
   translations: AvailableTranslation[],
 ): Record<string, AvailableTranslation[]> => {
   const translationByLanguages = groupBy(translations, (translation) =>
@@ -51,11 +51,11 @@ export const getDefaultTranslationIdsByLang = (
   lang: string,
   returnAsString: boolean = true,
 ): string | string[] => {
-  const translationByLanguages = getTranslationByLanguages(translations);
+  const translationsByLanguages = getTranslationsByLanguages(translations);
   let translationIds: string[] = [];
   // If the language is in the map, return list of its translation ids
-  if (translationByLanguages[LOCALE_TO_TRANSLATION_LANGUAGE[lang]]) {
-    translationIds = translationByLanguages[LOCALE_TO_TRANSLATION_LANGUAGE[lang]].map(
+  if (translationsByLanguages[LOCALE_TO_TRANSLATION_LANGUAGE[lang]]) {
+    translationIds = translationsByLanguages[LOCALE_TO_TRANSLATION_LANGUAGE[lang]].map(
       (translation) => translation.id.toString(),
     );
   }
