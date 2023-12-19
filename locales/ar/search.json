@@ -7,5 +7,6 @@
     "search": "بحث",
     "search-desc": "ابحث في نصوص القرآن الكريم وترجماته باستخدام محرك بحث متعدد اللغات قوي ودقيق للغاية.",
     "search-title": "ابحث عن ' {{searchQuery}} '",
+    "searching-translations": "البحث في الترجمات",
     "translation-select": "اختر ترجمة"
 }

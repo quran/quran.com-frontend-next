@@ -332,7 +332,7 @@ const Search: NextPage<SearchProps> = ({ translations }): JSX.Element => {
                       onClearClicked={onTranslationSearchClearClicked}
                       clearable
                       value={translationSearchQuery}
-                      placeholder={t('search.title')}
+                      placeholder={t('settings.search-translations')}
                       fixedWidth={false}
                       variant={InputVariant.Main}
                     />
@@ -365,7 +365,10 @@ const Search: NextPage<SearchProps> = ({ translations }): JSX.Element => {
               >
                 {t('search:filter')}
               </Button>
-              <div>{formattedSelectedTranslations}</div>
+              <div>
+                <span className={styles.searching}>{t('search:searching-translations')}: </span>
+                {formattedSelectedTranslations}
+              </div>
             </div>
           </div>
         </div>

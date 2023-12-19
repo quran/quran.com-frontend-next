@@ -7,5 +7,6 @@
     "search": "Mencari",
     "search-desc": "Cari korpus Al-Qur'an dan terjemahannya menggunakan mesin pencari multi-bahasa yang kuat dan sangat akurat.",
     "search-title": "Telusuri ' {{searchQuery}} '",
+    "searching-translations": "Mencari terjemahan",
     "translation-select": "Pilih terjemahan"
 }
