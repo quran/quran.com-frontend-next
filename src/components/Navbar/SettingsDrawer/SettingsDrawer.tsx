@@ -1,8 +1,8 @@
 /* eslint-disable react/no-multi-comp */
 import React from 'react';
 
-import dynamic from 'next/dynamic';
 import useTranslation from 'next-translate/useTranslation';
+import dynamic from 'next/dynamic';
 import { useDispatch, useSelector } from 'react-redux';
 
 import SettingsBodySkeleton from './SettingsBodySkeleton';

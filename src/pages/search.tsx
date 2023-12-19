@@ -2,8 +2,8 @@
 import React, { useState, useEffect, useMemo, useCallback, useRef, RefObject } from 'react';
 
 import { GetStaticProps, NextPage } from 'next';
-import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
+import { useRouter } from 'next/router';
 
 import styles from './search.module.scss';
 
@@ -366,6 +366,7 @@ const Search: NextPage<SearchProps> = ({ translations }): JSX.Element => {
                 {t('search:filter')}
               </Button>
               <div>
+                {/* eslint-disable-next-line i18next/no-literal-string */}
                 <span className={styles.searching}>{t('search:searching-translations')}: </span>
                 {formattedSelectedTranslations}
               </div>
