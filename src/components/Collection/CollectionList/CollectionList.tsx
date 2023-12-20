@@ -1,8 +1,8 @@
 /* eslint-disable max-lines */
 import { useState } from 'react';
 
-import Link from 'next/link';
 import useTranslation from 'next-translate/useTranslation';
+import Link from 'next/link';
 import useSWR from 'swr';
 
 import CollectionSorter from '../CollectionSorter/CollectionSorter';

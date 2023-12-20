@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
-import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
+import { useRouter } from 'next/router';
 
 import styles from './ProfileAvatarButton.module.scss';
 

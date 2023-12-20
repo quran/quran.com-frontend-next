@@ -7,5 +7,6 @@
     "search": "Arama",
     "search-desc": "Güçlü ve son derece doğru çok dilli bir arama motoru kullanarak Kur'an-ı Kerim külliyatını ve çevirilerini arayın.",
     "search-title": "' {{searchQuery}} ' için arama yapın",
+    "searching-translations": "Çevirileri arama",
     "translation-select": "Bir çeviri seçin"
 }
