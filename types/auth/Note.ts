@@ -1,5 +1,7 @@
 import { Pagination } from './GetBookmarksByCollectionId';
 
+import NoteVisibility from '@/utils/auth/types/Notes/NoteVisibility';
+
 export type NoteReference = {
   surahId: number;
   fromAyah: number | null;
@@ -16,6 +18,7 @@ export type Note = {
   createdAt: Date;
   updatedAt: Date;
   isPublic?: boolean;
+  visibility?: NoteVisibility;
 };
 
 export type GetAllNotesResponse = {

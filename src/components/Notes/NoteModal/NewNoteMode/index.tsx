@@ -19,6 +19,7 @@ import { RuleType } from '@/types/FieldRule';
 import { FormFieldType } from '@/types/FormField';
 import { addNote as baseAddNote } from '@/utils/auth/api';
 import { makeGetNotesByVerseUrl } from '@/utils/auth/apiPaths';
+import NoteVisibility from '@/utils/auth/types/Notes/NoteVisibility';
 import { logButtonClick } from '@/utils/eventLogger';
 import { isVerseKeyWithinRanges } from '@/utils/verse';
 
@@ -50,7 +51,7 @@ const NewNoteMode: React.FC<Props> = ({ verseKey }) => {
     async ({ body, isPublic }) => {
       return baseAddNote({
         body,
-        isPublic,
+        visibility: isPublic ? NoteVisibility.BOTH : NoteVisibility.PRIVATE,
         ...(verseKey && {
           ranges: [`${verseKey}-${verseKey}`],
         }),
@@ -58,11 +59,22 @@ const NewNoteMode: React.FC<Props> = ({ verseKey }) => {
     },
     {
       onSuccess: (data) => {
-        toast(t('notes:save-success'), {
-          status: ToastStatus.Success,
-        });
-        mutateCache([data]);
-        clearCountCache();
+        // if publishing the note publicly call failed after saving the note succeeded
+        // @ts-ignore
+        if (data?.error === true) {
+          toast(t('notes:save-publish-failed'), {
+            status: ToastStatus.Error,
+          });
+          // @ts-ignore
+          mutateCache([data.note]);
+          clearCountCache();
+        } else {
+          toast(t('notes:save-success'), {
+            status: ToastStatus.Success,
+          });
+          mutateCache([data]);
+          clearCountCache();
+        }
       },
       onError: () => {
         toast(t('common:error.general'), {

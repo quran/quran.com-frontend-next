@@ -4,7 +4,8 @@ import { configureRefreshFetch } from 'refresh-fetch';
 import { getTimezone } from '../datetime';
 
 import BookmarkByCollectionIdQueryParams from './types/BookmarkByCollectionIdQueryParams';
-import GetAllNotesQueryParams from './types/GetAllNotesQueryParams';
+import GetAllNotesQueryParams from './types/Notes/GetAllNotesQueryParams';
+import NoteVisibility from './types/Notes/NoteVisibility';
 
 import {
   FilterActivityDaysParams,
@@ -334,19 +335,19 @@ export const countNotesWithinRange = async (from: string, to: string) => {
   return privateFetcher(makeCountNotesWithinRangeUrl(from, to));
 };
 
-export const addNote = async (payload: Pick<Note, 'body' | 'ranges' | 'isPublic'>) => {
+export const addNote = async (payload: Pick<Note, 'body' | 'ranges' | 'visibility'>) => {
   return postRequest(makeNotesUrl(), payload);
 };
 
 export const updateNote = async (
   id: string,
   body: string,
-  isPublic: boolean,
+  visibility: NoteVisibility,
   references: NoteReference[],
 ) =>
   patchRequest(makeDeleteOrUpdateNoteUrl(id), {
     body,
-    isPublic,
+    visibility,
     references,
   });
 

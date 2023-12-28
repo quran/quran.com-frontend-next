@@ -17,6 +17,7 @@ import { RuleType } from '@/types/FieldRule';
 import { FormFieldType } from '@/types/FormField';
 import { updateNote as baseUpdateNote } from '@/utils/auth/api';
 import { makeGetNoteByIdUrl, makeGetNotesByVerseUrl } from '@/utils/auth/apiPaths';
+import NoteVisibility from '@/utils/auth/types/Notes/NoteVisibility';
 import { logButtonClick } from '@/utils/eventLogger';
 
 type Props = {
@@ -48,7 +49,7 @@ const EditForm: React.FC<Props> = ({
   onCancelEditClicked,
 }) => {
   const { t } = useTranslation('common');
-  const [isPublicReflection, setIsPublicReflection] = useState(false);
+  const [visibility, setVisibility] = useState(NoteVisibility.PRIVATE);
   const toast = useToast();
   const { mutate } = useSWRConfig();
 
@@ -67,15 +68,27 @@ const EditForm: React.FC<Props> = ({
     { id: string; body: string; references: NoteReference[] }
   >(
     async ({ id, body, references }) => {
-      return baseUpdateNote(id, body, isPublicReflection, references) as Promise<Note>;
+      return baseUpdateNote(id, body, visibility, references) as Promise<Note>;
     },
     {
       onSuccess: (data) => {
-        toast(t('notes:update-success'), {
-          status: ToastStatus.Success,
-        });
-        onNoteUpdated?.(data);
-        mutateCache([data]);
+        // if publishing the note publicly call failed after saving the note succeeded
+        // @ts-ignore
+        if (data?.error === true) {
+          toast(t('notes:update-publish-failed'), {
+            status: ToastStatus.Error,
+          });
+          // @ts-ignore
+          onNoteUpdated?.(data.note);
+          // @ts-ignore
+          mutateCache([data.note]);
+        } else {
+          toast(t('notes:update-success'), {
+            status: ToastStatus.Success,
+          });
+          onNoteUpdated?.(data);
+          mutateCache([data]);
+        }
       },
       onError: () => {
         toast(t('common:error.general'), {
@@ -87,7 +100,7 @@ const EditForm: React.FC<Props> = ({
 
   const onSubmit = async ({ body }: NoteFormData) => {
     logButtonClick('update_note', {
-      isPublicReflection,
+      visibility,
     });
     updateNote({ id: note.id, body, references: note.references });
   };
@@ -159,7 +172,7 @@ const EditForm: React.FC<Props> = ({
             >
               {t('cancel')}
             </Button>
-            <div>
+            <div className={styles.buttonsContainer}>
               <Button
                 htmlType="submit"
                 isLoading={isLoading}
@@ -167,7 +180,7 @@ const EditForm: React.FC<Props> = ({
                 className={styles.saveButton}
                 onClick={(e) => {
                   e.stopPropagation();
-                  setIsPublicReflection(false);
+                  setVisibility(NoteVisibility.PRIVATE);
                 }}
               >
                 {t('common:notes.save')}
@@ -178,7 +191,7 @@ const EditForm: React.FC<Props> = ({
                 isDisabled={isLoading}
                 onClick={(e) => {
                   e.stopPropagation();
-                  setIsPublicReflection(true);
+                  setVisibility(NoteVisibility.BOTH);
                 }}
               >
                 {t('notes:save-and-share')}

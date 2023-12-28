@@ -15,6 +15,7 @@ import EditIcon from '@/icons/edit.svg';
 import { Note } from '@/types/auth/Note';
 import { deleteNote as baseDeleteNote, addNote as baseAddNote } from '@/utils/auth/api';
 import { makeGetNoteByIdUrl, makeGetNotesByVerseUrl } from '@/utils/auth/apiPaths';
+import NoteVisibility from '@/utils/auth/types/Notes/NoteVisibility';
 import { dateToReadableFormat } from '@/utils/datetime';
 import { logButtonClick } from '@/utils/eventLogger';
 import { isVerseKeyWithinRanges } from '@/utils/verse';
@@ -76,7 +77,7 @@ const NoteListItem: React.FC<Props> = ({ note, verseKey, noteId, onNoteUpdated }
   const { mutate: shareOnQuranReflect, isMutating: isPostingOnQuranReflect } = useMutation(
     () => {
       return baseAddNote({
-        isPublic: true,
+        visibility: NoteVisibility.PUBLIC,
         body: note.body,
         ranges: note?.ranges || [],
       });
