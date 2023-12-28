@@ -7,12 +7,13 @@ import { useSWRConfig } from 'swr';
 import EditForm from './EditForm';
 import styles from './NoteListItem.module.scss';
 
+import NoteReferences from '@/components/Notes/NoteModal/EditNoteMode/NoteReferences';
 import Button, { ButtonSize, ButtonType, ButtonVariant } from '@/dls/Button/Button';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import useMutation from '@/hooks/useMutation';
 import EditIcon from '@/icons/edit.svg';
 import { Note } from '@/types/auth/Note';
-import { deleteNote as baseDeleteNote, postToQR } from '@/utils/auth/api';
+import { deleteNote as baseDeleteNote, addNote as baseAddNote } from '@/utils/auth/api';
 import { makeGetNoteByIdUrl, makeGetNotesByVerseUrl } from '@/utils/auth/apiPaths';
 import { dateToReadableFormat } from '@/utils/datetime';
 import { logButtonClick } from '@/utils/eventLogger';
@@ -74,8 +75,8 @@ const NoteListItem: React.FC<Props> = ({ note, verseKey, noteId, onNoteUpdated }
 
   const { mutate: shareOnQuranReflect, isMutating: isPostingOnQuranReflect } = useMutation(
     () => {
-      return postToQR({
-        isPrivate: true,
+      return baseAddNote({
+        isPublic: true,
         body: note.body,
         ranges: note?.ranges || [],
       });
@@ -146,6 +147,7 @@ const NoteListItem: React.FC<Props> = ({ note, verseKey, noteId, onNoteUpdated }
 
   return (
     <div className={styles.container}>
+      {note?.references && <NoteReferences references={note.references} />}
       {isInEditMode ? (
         <EditForm
           onCancelEditClicked={onCancelEditClicked}

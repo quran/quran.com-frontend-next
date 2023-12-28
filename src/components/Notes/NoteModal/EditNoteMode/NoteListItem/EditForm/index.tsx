@@ -11,7 +11,7 @@ import styles from '@/components/Notes/NoteModal/NoteModal.module.scss';
 import Button, { ButtonVariant } from '@/dls/Button/Button';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import useMutation from '@/hooks/useMutation';
-import { Note } from '@/types/auth/Note';
+import { Note, NoteReference } from '@/types/auth/Note';
 import ErrorMessageId from '@/types/ErrorMessageId';
 import { RuleType } from '@/types/FieldRule';
 import { FormFieldType } from '@/types/FormField';
@@ -48,7 +48,7 @@ const EditForm: React.FC<Props> = ({
   onCancelEditClicked,
 }) => {
   const { t } = useTranslation('common');
-  const [shareToQR, setShareToQR] = useState(false);
+  const [isPublicReflection, setIsPublicReflection] = useState(false);
   const toast = useToast();
   const { mutate } = useSWRConfig();
 
@@ -64,10 +64,10 @@ const EditForm: React.FC<Props> = ({
 
   const { mutate: updateNote, isMutating: isUpdatingNote } = useMutation<
     Note,
-    { id: string; body: string }
+    { id: string; body: string; references: NoteReference[] }
   >(
-    async ({ id, body }) => {
-      return baseUpdateNote(id, body, shareToQR) as Promise<Note>;
+    async ({ id, body, references }) => {
+      return baseUpdateNote(id, body, isPublicReflection, references) as Promise<Note>;
     },
     {
       onSuccess: (data) => {
@@ -87,9 +87,9 @@ const EditForm: React.FC<Props> = ({
 
   const onSubmit = async ({ body }: NoteFormData) => {
     logButtonClick('update_note', {
-      shareToQR,
+      isPublicReflection,
     });
-    updateNote({ id: note.id, body });
+    updateNote({ id: note.id, body, references: note.references });
   };
 
   return (
@@ -167,7 +167,7 @@ const EditForm: React.FC<Props> = ({
                 className={styles.saveButton}
                 onClick={(e) => {
                   e.stopPropagation();
-                  setShareToQR(false);
+                  setIsPublicReflection(false);
                 }}
               >
                 {t('common:notes.save')}
@@ -178,7 +178,7 @@ const EditForm: React.FC<Props> = ({
                 isDisabled={isLoading}
                 onClick={(e) => {
                   e.stopPropagation();
-                  setShareToQR(true);
+                  setIsPublicReflection(true);
                 }}
               >
                 {t('notes:save-and-share')}

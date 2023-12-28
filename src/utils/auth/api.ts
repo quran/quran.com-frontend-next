@@ -14,7 +14,7 @@ import {
 } from '@/types/auth/ActivityDay';
 import ConsentType from '@/types/auth/ConsentType';
 import { CreateGoalRequest, Goal, GoalCategory, UpdateGoalRequest } from '@/types/auth/Goal';
-import { Note } from '@/types/auth/Note';
+import { Note, NoteReference } from '@/types/auth/Note';
 import { StreakWithMetadataParams, StreakWithUserMetadata } from '@/types/auth/Streak';
 import { Mushaf } from '@/types/QuranReader';
 import {
@@ -55,7 +55,6 @@ import {
   makeDeleteOrUpdateNoteUrl,
   makeGetNotesByVerseUrl,
   makeCountNotesWithinRangeUrl,
-  makePostReflectionToQrUrl,
 } from '@/utils/auth/apiPaths';
 import { fetcher } from 'src/api';
 import CompleteAnnouncementRequest from 'types/auth/CompleteAnnouncementRequest';
@@ -335,20 +334,20 @@ export const countNotesWithinRange = async (from: string, to: string) => {
   return privateFetcher(makeCountNotesWithinRangeUrl(from, to));
 };
 
-export const addNote = async (payload: Pick<Note, 'body' | 'ranges' | 'saveToQR'>) => {
+export const addNote = async (payload: Pick<Note, 'body' | 'ranges' | 'isPublic'>) => {
   return postRequest(makeNotesUrl(), payload);
 };
 
-export const postToQR = async (payload: {
-  body: string;
-  isPrivate: boolean;
-  ranges?: string[];
-}): Promise<{ success: boolean }> => postRequest(makePostReflectionToQrUrl(), payload);
-
-export const updateNote = async (id: string, body: string, saveToQR: boolean) =>
+export const updateNote = async (
+  id: string,
+  body: string,
+  isPublic: boolean,
+  references: NoteReference[],
+) =>
   patchRequest(makeDeleteOrUpdateNoteUrl(id), {
     body,
-    saveToQR,
+    isPublic,
+    references,
   });
 
 export const deleteNote = async (id: string) => deleteRequest(makeDeleteOrUpdateNoteUrl(id));

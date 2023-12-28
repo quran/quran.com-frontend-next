@@ -2,7 +2,6 @@ import React from 'react';
 
 import NoteListItem from './NoteListItem';
 
-import NoteRanges from '@/components/Notes/NoteModal/EditNoteMode/NoteRanges';
 import { Note } from '@/types/auth/Note';
 
 type Props = {
@@ -15,7 +14,6 @@ type Props = {
 const EditNoteMode: React.FC<Props> = ({ notes, verseKey, onNoteUpdated, noteId }) => {
   return (
     <>
-      {notes[0]?.ranges && <NoteRanges ranges={notes[0].ranges} />}
       {notes.map((note) => {
         return (
           <NoteListItem

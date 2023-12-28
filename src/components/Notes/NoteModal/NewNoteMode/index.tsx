@@ -34,7 +34,7 @@ const BODY_MAX_VALIDATION_PARAMS = {
 
 type NoteFormData = {
   body: string;
-  saveToQR: boolean;
+  isPublic: boolean;
 };
 
 type Props = {
@@ -47,10 +47,10 @@ const NewNoteMode: React.FC<Props> = ({ verseKey }) => {
   const { mutate, cache } = useSWRConfig();
 
   const { mutate: addNote, isMutating: isAddingNote } = useMutation<Note, NoteFormData>(
-    async ({ body, saveToQR }) => {
+    async ({ body, isPublic }) => {
       return baseAddNote({
         body,
-        saveToQR,
+        isPublic,
         ...(verseKey && {
           ranges: [`${verseKey}-${verseKey}`],
         }),
@@ -104,11 +104,11 @@ const NewNoteMode: React.FC<Props> = ({ verseKey }) => {
     }
   };
 
-  const onSubmit = async ({ body, saveToQR }: NoteFormData) => {
+  const onSubmit = async ({ body, isPublic }: NoteFormData) => {
     logButtonClick('add_note');
     addNote({
       body,
-      saveToQR,
+      isPublic,
     });
   };
   return (
@@ -161,9 +161,9 @@ const NewNoteMode: React.FC<Props> = ({ verseKey }) => {
           fieldSetLegend: t('notes:note'),
         },
         {
-          field: 'saveToQR',
+          field: 'isPublic',
           label: <ShareToQrCheckboxLabel />,
-          defaultValue: true,
+          defaultValue: false,
           type: FormFieldType.Checkbox,
         },
       ].map((field) => buildFormBuilderFormField(field, t))}

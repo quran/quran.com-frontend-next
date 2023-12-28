@@ -1,5 +1,4 @@
 /* eslint-disable max-lines */
-import { useState } from 'react';
 
 import classNames from 'classnames';
 import { GetStaticProps } from 'next';
@@ -11,38 +10,23 @@ import styles from './index.module.scss';
 import Button, { ButtonVariant } from '@/components/dls/Button/Button';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import NotesList from '@/components/Notes/NotesPage/NotesList';
-import NotesSorter from '@/components/Notes/NotesPage/NotesSorter/NotesSorter';
 import Spinner, { SpinnerSize } from '@/dls/Spinner/Spinner';
 import useRequireAuth from '@/hooks/auth/useRequireAuth';
 import ArrowLeft from '@/icons/west.svg';
 import Error from '@/pages/_error';
 import layoutStyles from '@/pages/index.module.scss';
 import { GetAllNotesResponse } from '@/types/auth/Note';
-import NotesSortOption from '@/types/NotesSortOptions';
 import { privateFetcher } from '@/utils/auth/api';
 import { makeNotesUrl } from '@/utils/auth/apiPaths';
 import { isLoggedIn } from '@/utils/auth/login';
 import { getAllChaptersData } from '@/utils/chapter';
-import { logButtonClick, logValueChange } from '@/utils/eventLogger';
+import { logButtonClick } from '@/utils/eventLogger';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl, getNotesNavigationUrl } from '@/utils/navigation';
 
 const NotesPage = () => {
   useRequireAuth();
-
-  const [sortBy, setSortBy] = useState(NotesSortOption.Newest);
-
   const { t, lang } = useTranslation();
-
-  const sortOptions = [
-    { id: NotesSortOption.Newest, label: t('common:newest') },
-    { id: NotesSortOption.Oldest, label: t('common:oldest') },
-  ];
-
-  const onSortByChange = (newSortByVal) => {
-    logValueChange('notes_page_sort_by', sortBy, newSortByVal);
-    setSortBy(newSortByVal);
-  };
 
   const onBackButtonClicked = () => {
     logButtonClick('notes_page_back_button');
@@ -63,21 +47,19 @@ const NotesPage = () => {
    */
   const getKey = (pageIndex: number, previousPageData: GetAllNotesResponse) => {
     if (!isLoggedIn() || (previousPageData && !previousPageData.data)) return null;
+    const page = pageIndex + 1;
     if (pageIndex === 0) {
       return makeNotesUrl({
-        sortBy,
-        limit: 10,
+        page,
       });
     }
 
-    const { endCursor, hasNextPage } = previousPageData.pagination;
+    const { hasNextPage } = previousPageData.pagination;
 
-    if (!endCursor || !hasNextPage) return null;
+    if (!hasNextPage) return null;
 
     return makeNotesUrl({
-      sortBy,
-      cursor: endCursor,
-      limit: 10,
+      page,
     });
   };
 
@@ -137,13 +119,6 @@ const NotesPage = () => {
                     <ArrowLeft />
                   </Button>
                   <h1>{t('common:notes.notes')}</h1>
-                </div>
-                <div>
-                  <NotesSorter
-                    options={sortOptions}
-                    selectedOptionId={sortBy}
-                    onChange={onSortByChange}
-                  />
                 </div>
               </div>
 

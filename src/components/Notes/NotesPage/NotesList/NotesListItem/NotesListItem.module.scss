@@ -24,3 +24,18 @@
     font-size: var(--font-size-xsmall);
     color: var(--color-text-faded);
 }
+
+.indicatorsContainer {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    & > div {
+        margin-inline: var(--spacing-micro);
+        margin-block: var(--spacing-micro);
+    }
+}
+
+.seeMore {
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-link);
+}

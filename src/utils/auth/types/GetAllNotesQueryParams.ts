@@ -1,7 +1,5 @@
 interface GetAllNotesQueryParams {
-  cursor?: string;
-  limit?: number;
-  sortBy?: string;
+  page: number;
 }
 
 export default GetAllNotesQueryParams;
