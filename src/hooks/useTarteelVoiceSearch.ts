@@ -105,7 +105,7 @@ const useTarteelVoiceSearch = () => {
   // otherwise, the user just clicked on the mic button to stop the recording
   // and the websocket should remain open to receive the final results.
   const stopRecording = useCallback(
-    async (closeWebsocket: boolean = true) => {
+    async (closeWebsocket = true) => {
       if (!closeWebsocket && !partialTranscript) {
         // if the user didn't say anything and clicked on the mic button, don't stop the flow
         return;

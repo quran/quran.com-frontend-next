@@ -39,7 +39,11 @@ const SearchResults: React.FC<Props> = ({
           <div className={styles.navigationItemsListContainer}>
             {searchResult.result.navigation.map((navigationResult) => (
               <span className={styles.navigationItemContainer} key={navigationResult.key}>
-                <NavigationItem isSearchDrawer={isSearchDrawer} navigation={navigationResult} />
+                <NavigationItem
+                  isSearchDrawer={isSearchDrawer}
+                  navigation={navigationResult}
+                  service={searchResult.service}
+                />
               </span>
             ))}
           </div>
@@ -55,6 +59,7 @@ const SearchResults: React.FC<Props> = ({
               key={result.verseKey}
               result={result}
               source={isSearchDrawer ? Source.SearchDrawer : Source.SearchPage}
+              service={searchResult.service}
             />
           ))}
           {isSearchDrawer ? (

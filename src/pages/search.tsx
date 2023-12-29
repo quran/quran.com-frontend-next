@@ -1,3 +1,4 @@
+/* eslint-disable react-func/max-lines-per-function */
 /* eslint-disable max-lines */
 import React, { useState, useEffect, useMemo, useCallback, useRef, RefObject } from 'react';
 
@@ -7,7 +8,12 @@ import { useRouter } from 'next/router';
 
 import styles from './search.module.scss';
 
-import { getAvailableLanguages, getAvailableTranslations, getSearchResults } from '@/api';
+import {
+  getAvailableLanguages,
+  getAvailableTranslations,
+  getSearchResults,
+  getNewSearchResults,
+} from '@/api';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import TranslationsFilter from '@/components/Search/Filters/TranslationsFilter';
 import SearchBodyContainer from '@/components/Search/SearchBodyContainer';
@@ -19,6 +25,8 @@ import useDebounce from '@/hooks/useDebounce';
 import useFocus from '@/hooks/useFocusElement';
 import FilterIcon from '@/icons/filter.svg';
 import SearchIcon from '@/icons/search.svg';
+import { SearchMode } from '@/types/Search/SearchRequestParams';
+import SearchService from '@/types/Search/SearchService';
 import SearchQuerySource from '@/types/SearchQuerySource';
 import { getAllChaptersData } from '@/utils/chapter';
 import {
@@ -151,14 +159,40 @@ const Search: NextPage<SearchProps> = ({ translations }): JSX.Element => {
         page,
         ...(translation && { filterTranslations: translation }), // translations will be included only when there is a selected translation
       })
-        .then((response) => {
+        .then(async (response) => {
           if (response.status === 500) {
             setHasError(true);
           } else {
-            setSearchResult(response);
+            setSearchResult({ ...response, service: SearchService.QDC });
+            const qdcNoResults =
+              response.pagination.totalRecords === 0 && !response.result.navigation.length;
             // if there is no navigations nor verses in the response
-            if (response.pagination.totalRecords === 0 && !response.result.navigation.length) {
-              logEmptySearchResults(query, SearchQuerySource.SearchPage);
+            if (qdcNoResults) {
+              logEvent(`${SearchService.QDC}_no_results_${SearchQuerySource.SearchPage}`, {
+                query,
+              });
+              const kalimatResponse = await getNewSearchResults({
+                mode: SearchMode.Advanced,
+                query,
+                size: PAGE_SIZE,
+                filterLanguages: language,
+                page,
+                exactMatchesOnly: 0,
+                // translations will be included only when there is a selected translation
+                ...(translation && {
+                  filterTranslations: translation,
+                  translationFields: 'resource_name',
+                }),
+              });
+              setSearchResult({ ...kalimatResponse, service: SearchService.KALIMAT });
+              if (kalimatResponse.pagination.totalRecords === 0) {
+                logEvent(`${SearchService.KALIMAT}_no_results_${SearchQuerySource.SearchPage}`, {
+                  query,
+                });
+                logEmptySearchResults(query, SearchQuerySource.SearchPage);
+              } else {
+                logEvent(`kalimat_results_${SearchQuerySource.SearchPage}`, { query });
+              }
             }
           }
         })

@@ -9,6 +9,7 @@ import styles from './SearchResultItem.module.scss';
 import Link from '@/dls/Link/Link';
 import QuranWord from '@/dls/QuranWord/QuranWord';
 import useGetChaptersData from '@/hooks/useGetChaptersData';
+import SearchService from '@/types/Search/SearchService';
 import { getChapterData } from '@/utils/chapter';
 import { logButtonClick } from '@/utils/eventLogger';
 import { toLocalizedVerseKey } from '@/utils/locale';
@@ -25,9 +26,10 @@ export enum Source {
 interface Props {
   result: Verse;
   source: Source;
+  service?: SearchService;
 }
 
-const SearchResultItem: React.FC<Props> = ({ result, source }) => {
+const SearchResultItem: React.FC<Props> = ({ result, source, service = SearchService.QDC }) => {
   const { lang } = useTranslation('quran-reader');
   const localizedVerseKey = useMemo(
     () => toLocalizedVerseKey(result.verseKey, lang),
@@ -41,15 +43,20 @@ const SearchResultItem: React.FC<Props> = ({ result, source }) => {
   const chapterNumber = getChapterNumberFromKey(result.verseKey);
   const chapterData = getChapterData(chaptersData, chapterNumber.toString());
 
+  const onResultItemClicked = () => {
+    logButtonClick(`${source}_result_item`, {
+      service,
+    });
+    logButtonClick(`${service}_result_item`);
+  };
+
   return (
     <div className={styles.container}>
       <div className={styles.itemContainer}>
         <Link
           className={styles.verseKey}
           href={getChapterWithStartingVerseUrl(result.verseKey)}
-          onClick={() => {
-            logButtonClick(`${source}_result_item`);
-          }}
+          onClick={onResultItemClicked}
         >
           {chapterData.transliteratedName} {localizedVerseKey}
         </Link>
