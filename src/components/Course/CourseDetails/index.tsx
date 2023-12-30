@@ -1,7 +1,7 @@
 import React, { useMemo } from 'react';
 
-import Image from 'next/image';
 import useTranslation from 'next-translate/useTranslation';
+import Image from 'next/image';
 
 import styles from './CourseDetails.module.scss';
 import MainDetails from './Tabs/MainDetails';
@@ -77,14 +77,7 @@ const CourseDetails: React.FC<Props> = ({ course }) => {
       </div>
 
       <div className={styles.imgContainer}>
-        <img
-          className={styles.imgContainer}
-          alt={title}
-          src={image}
-          style={{
-            objectFit: 'fill',
-          }}
-        />
+        <Image className={styles.imgContainer} alt={title} src={image} layout="fill" />
       </div>
 
       <Tabs defaultValue={Tab.MAIN} onValueChange={onTabChange} tabs={tabs} />

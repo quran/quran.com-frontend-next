@@ -1,7 +1,7 @@
 /* eslint-disable react/no-multi-comp */
 import { NextPage } from 'next';
-import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
+import { useRouter } from 'next/router';
 
 import layoutStyles from '../../index.module.scss';
 

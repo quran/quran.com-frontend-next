@@ -16,16 +16,23 @@ const Syllabus: React.FC<Props> = ({ course }) => {
   const { lessons = [] } = course;
   const { t, lang } = useTranslation('learn');
 
-  return lessons.map((lesson, index) => {
-    const dayNumber = index + 1;
+  return (
+    <>
+      {lessons.map((lesson, index) => {
+        const dayNumber = index + 1;
 
-    return (
-      <p className={styles.container} key={index}>
-        <span className={styles.day}>{`${t('day')} ${toLocalizedNumber(dayNumber, lang)}`}</span>:{' '}
-        {lesson.title}
-      </p>
-    );
-  });
+        return (
+          <p className={styles.container} key={index}>
+            <span className={styles.day}>{`${t('day')} ${toLocalizedNumber(
+              dayNumber,
+              lang,
+            )}`}</span>
+            <span>{`: ${lesson.title}`}</span>
+          </p>
+        );
+      })}
+    </>
+  );
 };
 
 export default Syllabus;
