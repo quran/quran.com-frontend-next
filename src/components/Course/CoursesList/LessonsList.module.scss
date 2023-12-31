@@ -10,3 +10,12 @@
         grid-template-columns: repeat(4, 1fr);
     }
 }
+
+.cardContainer {
+    @include breakpoints.tablet {
+        max-width: var(--spacing-mega) !important;
+    }
+    @include breakpoints.smallerThanTablet {
+        max-width: calc(10 * var(--spacing-mega));
+    }
+}

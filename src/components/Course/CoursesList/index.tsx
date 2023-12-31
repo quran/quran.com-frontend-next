@@ -17,14 +17,16 @@ const CoursesList: React.FC<Props> = ({ courses }) => {
     <div className={styles.container}>
       {courses.map((course) => {
         return (
-          <Link key={course.id} href={getCourseNavigationUrl(course.slug)}>
+          <Link className={styles.link} key={course.id} href={getCourseNavigationUrl(course.slug)}>
             <Card
+              shouldShowFullTitle
               imgSrc={course.image}
               key={course.id}
               title={course.title}
               imgAlt={course.title}
               size={CardSize.Medium}
               actionIcon={<SearchIcon />}
+              className={styles.cardContainer}
             />
           </Link>
         );

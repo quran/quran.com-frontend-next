@@ -16,6 +16,7 @@ const MainDetails: React.FC<Props> = ({ course }) => {
   const { description, tags, author, dailyMinutes, lessons = [] } = course;
 
   const tagsString = tags?.reduce((acc, currentValue) => {
+    if (!acc) return currentValue;
     return `${acc}, ${currentValue}`;
   }, '');
 

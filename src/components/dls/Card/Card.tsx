@@ -19,10 +19,12 @@ type CardProps = {
   description?: React.ReactNode;
   onImgClick?: () => void;
   imgSrc?: string;
+  className?: string;
   imgAlt?: string;
   actionIcon?: ReactNode;
   shouldFlipIconOnRTL?: boolean;
   onActionIconClick?: () => void;
+  shouldShowFullTitle?: boolean;
 };
 
 const Card = ({
@@ -35,11 +37,13 @@ const Card = ({
   imgAlt,
   shouldFlipIconOnRTL = true,
   onActionIconClick,
+  className,
+  shouldShowFullTitle = false,
 }: CardProps) => {
   const { t } = useTranslation('common');
   return (
     <div
-      className={classNames(styles.container, {
+      className={classNames(className, styles.container, {
         [styles.large]: size === CardSize.Large,
         [styles.medium]: size === CardSize.Medium,
       })}
@@ -61,7 +65,13 @@ const Card = ({
       </div>
       <div className={styles.bodyContainer}>
         <div className={styles.textsContainer}>
-          <div className={styles.title}>{title}</div>
+          <div
+            className={classNames({
+              [styles.title]: !shouldShowFullTitle,
+            })}
+          >
+            {title}
+          </div>
           <div className={styles.description}>{description}</div>
         </div>
         {size === CardSize.Large && (
