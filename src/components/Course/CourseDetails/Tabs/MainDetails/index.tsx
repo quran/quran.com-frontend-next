@@ -1,10 +1,12 @@
 /* eslint-disable unicorn/no-array-reduce */
 import React from 'react';
 
+import { MilkdownProvider } from '@milkdown/react';
 import useTranslation from 'next-translate/useTranslation';
 
 import DetailSection from './DetailSection';
 
+import MarkdownEditor from '@/components/MarkdownEditor';
 import { Course } from '@/types/auth/Course';
 
 type Props = {
@@ -13,7 +15,7 @@ type Props = {
 
 const MainDetails: React.FC<Props> = ({ course }) => {
   const { t } = useTranslation('learn');
-  const { description, tags, author, dailyMinutes, lessons = [] } = course;
+  const { description, tags, dailyMinutes, lessons = [] } = course;
 
   const tagsString = tags?.reduce((acc, currentValue) => {
     if (!acc) return currentValue;
@@ -22,7 +24,6 @@ const MainDetails: React.FC<Props> = ({ course }) => {
 
   return (
     <>
-      <DetailSection title={t('author')} description={author} />
       <DetailSection
         title={t('duration')}
         description={t('duration-daily', {
@@ -30,7 +31,12 @@ const MainDetails: React.FC<Props> = ({ course }) => {
           days: lessons.length,
         })}
       />
-      <DetailSection title={t('description')} description={description} />
+      <MilkdownProvider>
+        <DetailSection
+          title={t('description')}
+          description={<MarkdownEditor isEditable={false} defaultValue={description} />}
+        />
+      </MilkdownProvider>
       {tagsString && <DetailSection title={t('category')} description={tagsString} />}
     </>
   );

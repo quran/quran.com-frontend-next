@@ -4,8 +4,9 @@ export type Lesson = {
   id: string;
   title: string;
   slug: string;
+  day: number;
   language: string; // language code
-  description: string;
+  content: string;
   updatedAt: string;
   createdAt: string;
 };

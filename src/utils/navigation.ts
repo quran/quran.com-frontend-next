@@ -238,12 +238,21 @@ export const getSurahInfoNavigationUrl = (chapterIdOrSlug: string): string =>
 export const getReciterNavigationUrl = (reciterId: string): string => `/reciters/${reciterId}`;
 
 /**
+ * Get href link to the course page
+ *
+ * @param {string} courseSlug
+ * @returns {string} coursePageUrl
+ */
+export const getCourseNavigationUrl = (courseSlug: string): string => `/courses/${courseSlug}`;
+
+/**
  * Get href link to the lesson page
  *
- * @param {string} lessonSlug
+ * @param {string} courseSlug
  * @returns {string} lessonPageUrl
  */
-export const getCourseNavigationUrl = (lessonSlug: string): string => `/courses/${lessonSlug}`;
+export const getLessonNavigationUrl = (courseSlug: string, lessonSlug: string): string =>
+  `/courses/${courseSlug}/lessons/${lessonSlug}`;
 
 /**
  * Get href link to an audio recitation page by reciterId and chapterId

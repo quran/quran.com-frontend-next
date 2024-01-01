@@ -3,8 +3,6 @@ import { NextPage } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
 
-import layoutStyles from '../../index.module.scss';
-
 import styles from './courses.module.scss';
 
 import CourseDetails from '@/components/Course/CourseDetails';
@@ -12,6 +10,7 @@ import DataFetcher from '@/components/DataFetcher';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import PageContainer from '@/components/PageContainer';
 import Spinner from '@/dls/Spinner/Spinner';
+import layoutStyles from '@/pages/index.module.scss';
 import { Course } from '@/types/auth/Course';
 import { makeGetCourseUrl } from '@/utils/auth/apiPaths';
 import { getCanonicalUrl, getCourseNavigationUrl } from '@/utils/navigation';
@@ -27,7 +26,7 @@ interface Props {
   page?: any[];
 }
 
-const LessonPage: NextPage<Props> = () => {
+const CoursePage: NextPage<Props> = () => {
   const { lang } = useTranslation();
   const router = useRouter();
   const { slug } = router.query;
@@ -57,4 +56,4 @@ const LessonPage: NextPage<Props> = () => {
   );
 };
 
-export default LessonPage;
+export default CoursePage;

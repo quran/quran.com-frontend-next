@@ -55,11 +55,14 @@ export const makeAddCollectionUrl = () => makeUrl('collections');
 export const makeGetCoursesUrl = () => makeUrl('courses');
 
 export const makeGetCourseUrl = (
-  courseId: string,
+  courseSlugOrId: string,
   params?: {
     withLessons: boolean;
   },
-) => makeUrl(`courses/${courseId}`, params);
+) => makeUrl(`courses/${courseSlugOrId}`, params);
+
+export const makeGetLessonUrl = (courseSlugOrId: string, lessonSlugOrId: string) =>
+  makeUrl(`courses/${courseSlugOrId}/lessons/${lessonSlugOrId}`);
 
 export const makeUpdateCollectionUrl = (collectionId: string) =>
   makeUrl(`collections/${collectionId}`);

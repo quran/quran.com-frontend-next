@@ -5,8 +5,10 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from './Syllabus.module.scss';
 
+import Link, { LinkVariant } from '@/dls/Link/Link';
 import { Course } from '@/types/auth/Course';
 import { toLocalizedNumber } from '@/utils/locale';
+import { getLessonNavigationUrl } from '@/utils/navigation';
 
 type Props = {
   course: Course;
@@ -15,6 +17,8 @@ type Props = {
 const Syllabus: React.FC<Props> = ({ course }) => {
   const { lessons = [] } = course;
   const { t, lang } = useTranslation('learn');
+
+  const onDayClick = (dayNumber: number, lessonId: string) => {};
 
   return (
     <>
@@ -27,7 +31,16 @@ const Syllabus: React.FC<Props> = ({ course }) => {
               dayNumber,
               lang,
             )}`}</span>
-            <span>{`: ${lesson.title}`}</span>
+            <span>
+              {`: `}
+              <Link
+                onClick={() => onDayClick(dayNumber, lesson.id)}
+                href={getLessonNavigationUrl(course.slug, lesson.slug)}
+                variant={LinkVariant.Highlight}
+              >
+                {lesson.title}
+              </Link>
+            </span>
           </p>
         );
       })}

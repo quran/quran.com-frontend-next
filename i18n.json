@@ -24,6 +24,7 @@
     "/reading-goal": ["reading-goal", "reciter"],
     "/learn": ["learn"],
     "/courses/[slug]": ["learn"],
+    "/courses/[slug]/lessons/[lessonSlugOrId]": ["learn"],
     "/reading-goal/progress": ["reading-goal", "reading-progress"],
     "/[chapterId]": ["quran-reader", "reading-goal", "chapter", "surah-info"],
     "/[chapterId]/reflections": ["quran-reader", "reading-goal"],

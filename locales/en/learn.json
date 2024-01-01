@@ -2,6 +2,7 @@
   "enroll": "Enroll",
   "day": "Day",
   "author": "Author",
+  "by-author": "By: {{author}}",
   "duration": "Duration",
   "duration-daily": "{{dailyMins}} minutes/day over {{days}} days",
   "description": "Description",
