@@ -64,6 +64,8 @@ export const makeGetCourseUrl = (
 export const makeGetLessonUrl = (courseSlugOrId: string, lessonSlugOrId: string) =>
   makeUrl(`courses/${courseSlugOrId}/lessons/${lessonSlugOrId}`);
 
+export const makeEnrollUserUrl = () => makeUrl('courses/enroll');
+
 export const makeUpdateCollectionUrl = (collectionId: string) =>
   makeUrl(`collections/${collectionId}`);
 

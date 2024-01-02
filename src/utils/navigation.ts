@@ -294,6 +294,8 @@ export const getCollectionNavigationUrl = (collectionId: string) => {
 export const getReadingGoalNavigationUrl = () => '/reading-goal';
 export const getCoursesNavigationUrl = () => '/courses';
 
+export const getLoginNavigationUrl = () => '/login';
+
 export const getReadingGoalProgressNavigationUrl = () => '/reading-goal/progress';
 
 /**

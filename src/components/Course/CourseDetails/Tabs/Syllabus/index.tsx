@@ -7,6 +7,7 @@ import styles from './Syllabus.module.scss';
 
 import Link, { LinkVariant } from '@/dls/Link/Link';
 import { Course } from '@/types/auth/Course';
+import { logButtonClick } from '@/utils/eventLogger';
 import { toLocalizedNumber } from '@/utils/locale';
 import { getLessonNavigationUrl } from '@/utils/navigation';
 
@@ -18,7 +19,13 @@ const Syllabus: React.FC<Props> = ({ course }) => {
   const { lessons = [] } = course;
   const { t, lang } = useTranslation('learn');
 
-  const onDayClick = (dayNumber: number, lessonId: string) => {};
+  const onDayClick = (dayNumber: number, lessonId: string) => {
+    logButtonClick('course_syllabus_day', {
+      courseId: course.id,
+      dayNumber,
+      lessonId,
+    });
+  };
 
   return (
     <>

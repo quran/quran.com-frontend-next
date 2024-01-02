@@ -22,6 +22,7 @@ export type Course = {
   tags: string[];
   dailyMinutes: number;
   lessons?: Lesson[];
+  isUserEnrolled?: boolean;
 };
 
 export interface CoursesResponse extends BaseResponse {

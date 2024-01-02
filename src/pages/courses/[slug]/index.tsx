@@ -1,7 +1,7 @@
 /* eslint-disable react/no-multi-comp */
 import { NextPage } from 'next';
-import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
+import useTranslation from 'next-translate/useTranslation';
 
 import styles from './courses.module.scss';
 
@@ -12,6 +12,7 @@ import PageContainer from '@/components/PageContainer';
 import Spinner from '@/dls/Spinner/Spinner';
 import layoutStyles from '@/pages/index.module.scss';
 import { Course } from '@/types/auth/Course';
+import { privateFetcher } from '@/utils/auth/api';
 import { makeGetCourseUrl } from '@/utils/auth/apiPaths';
 import { getCanonicalUrl, getCourseNavigationUrl } from '@/utils/navigation';
 
@@ -38,6 +39,7 @@ const CoursePage: NextPage<Props> = () => {
           <DataFetcher
             loading={Loading}
             queryKey={makeGetCourseUrl(slug as string, { withLessons: true })}
+            fetcher={privateFetcher}
             render={
               ((course: Course) => (
                 <>

@@ -1,7 +1,7 @@
 /* eslint-disable react/no-multi-comp */
 import { NextPage } from 'next';
-import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
+import useTranslation from 'next-translate/useTranslation';
 
 import LessonView from '@/components/Course/LessonView';
 import DataFetcher from '@/components/DataFetcher';
@@ -11,6 +11,7 @@ import Spinner from '@/dls/Spinner/Spinner';
 import useRequireAuth from '@/hooks/auth/useRequireAuth';
 import styles from '@/pages/courses/[slug]/courses.module.scss';
 import layoutStyles from '@/pages/index.module.scss';
+import ApiErrorMessage from '@/types/ApiErrorMessage';
 import { Lesson } from '@/types/auth/Course';
 import { privateFetcher } from '@/utils/auth/api';
 import { makeGetLessonUrl } from '@/utils/auth/apiPaths';
@@ -29,9 +30,29 @@ const Loading = () => (
 
 const LessonPage: NextPage<Props> = () => {
   useRequireAuth();
-  const { lang } = useTranslation();
+  const { lang, t } = useTranslation('learn');
   const router = useRouter();
   const { slug, lessonSlugOrId } = router.query;
+
+  const errorRenderer = (error: any) => {
+    if (error?.message === ApiErrorMessage.CourseNotEnrolled) {
+      return <>{t('not-enrolled')}</>;
+    }
+    return false;
+  };
+
+  const bodyRenderer = ((lesson: Lesson) => (
+    <>
+      <NextSeoWrapper
+        title={lesson.title}
+        url={getCanonicalUrl(
+          lang,
+          getLessonNavigationUrl(slug as string, lessonSlugOrId as string),
+        )}
+      />
+      <LessonView lesson={lesson} />
+    </>
+  )) as any;
 
   return (
     <div className={layoutStyles.pageContainer}>
@@ -41,20 +62,8 @@ const LessonPage: NextPage<Props> = () => {
             loading={Loading}
             queryKey={makeGetLessonUrl(slug as string, lessonSlugOrId as string)}
             fetcher={privateFetcher}
-            render={
-              ((lesson: Lesson) => (
-                <>
-                  <NextSeoWrapper
-                    title={lesson.title}
-                    url={getCanonicalUrl(
-                      lang,
-                      getLessonNavigationUrl(slug as string, lessonSlugOrId as string),
-                    )}
-                  />
-                  <LessonView lesson={lesson} />
-                </>
-              )) as any
-            }
+            errorRenderer={errorRenderer}
+            render={bodyRenderer}
           />
         </PageContainer>
       </div>

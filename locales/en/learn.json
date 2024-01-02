@@ -11,5 +11,8 @@
     "main": "Main Details",
     "syllabus": "Syllabus"
   },
-  "back-to-courses": "Back to courses"
+  "back-to-courses": "Back to courses",
+  "enroll-success": "You have been enrolled successfully!",
+  "enrolled": "You are enrolled in this course",
+  "not-enrolled": "You are enrolled in this course"
 }

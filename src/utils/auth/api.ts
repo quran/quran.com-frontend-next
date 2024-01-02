@@ -48,6 +48,7 @@ import {
   makePostReflectionViewsUrl,
   makeUserFeatureFlagsUrl,
   makeUserConsentsUrl,
+  makeEnrollUserUrl,
 } from '@/utils/auth/apiPaths';
 import { fetcher } from 'src/api';
 import CompleteAnnouncementRequest from 'types/auth/CompleteAnnouncementRequest';
@@ -310,6 +311,11 @@ export const getBookmarksByCollectionId = async (
 ): Promise<GetBookmarkCollectionsIdResponse> => {
   return privateFetcher(makeGetBookmarkByCollectionId(collectionId, queryParams));
 };
+
+export const postEnrollUser = async (courseId: string): Promise<{ success: boolean }> =>
+  postRequest(makeEnrollUserUrl(), {
+    courseId,
+  });
 
 export const addCollection = async (collectionName: string) => {
   return postRequest(makeAddCollectionUrl(), { name: collectionName });
