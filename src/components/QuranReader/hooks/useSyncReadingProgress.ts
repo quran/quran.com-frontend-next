@@ -146,7 +146,7 @@ const useSyncReadingProgress = ({ isReadingPreference }: UseSyncReadingProgressP
         elapsedReadingTimeInSeconds.current = 0;
       }
 
-      const body: UpdateQuranActivityDayBody = {
+      const body: UpdateActivityDayBody<UpdateQuranActivityDayBody> = {
         mushafId: mushaf,
         type: ActivityDayType.QURAN,
       };
