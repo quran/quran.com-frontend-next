@@ -9,6 +9,10 @@ export type Lesson = {
   content: string;
   updatedAt: string;
   createdAt: string;
+  isFirst: boolean;
+  isLast: boolean;
+  course: Course;
+  isCompleted: boolean;
 };
 
 export type Course = {
@@ -23,6 +27,7 @@ export type Course = {
   dailyMinutes: number;
   lessons?: Lesson[];
   isUserEnrolled?: boolean;
+  isCompleted?: boolean;
 };
 
 export interface CoursesResponse extends BaseResponse {

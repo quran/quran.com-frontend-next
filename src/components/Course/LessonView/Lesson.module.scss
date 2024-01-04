@@ -14,3 +14,28 @@
     font-size: var(--font-size-jumbo);
     padding-inline-end: var(--spacing-small);
 }
+
+.tickIcon {
+    span {
+        align-items: center;
+    }
+    &:hover {
+        svg {
+            path {
+                color: var(--color-background-inverse);
+                stroke: var(--color-background-inverse);
+            }
+        }
+    }
+    svg {
+        path {
+            color: var(--color-background-default);
+            stroke: var(--color-background-default);
+            stroke-width: 1;
+        }
+    }
+}
+
+.contentContainer {
+    min-height: calc(var(--spacing-mega) * 10);
+}

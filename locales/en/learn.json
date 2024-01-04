@@ -12,7 +12,13 @@
     "syllabus": "Syllabus"
   },
   "back-to-courses": "Back to courses",
-  "enroll-success": "You have been enrolled successfully!",
-  "enrolled": "You are enrolled in this course",
-  "not-enrolled": "You are enrolled in this course"
+  "back-to-course": "Back to course",
+  "enroll-success": "Congratulations, You added {{title}} to your list!",
+  "enrolled": "Enrolled",
+  "completed": "Completed",
+  "not-enrolled": "You are not enrolled in the <link>course</link> yet.",
+  "prev-lesson": "Previous Lesson",
+  "next-lesson": "Next Lesson",
+  "mark-complete": "Mark as complete",
+  "mark-complete-success": "Lesson has been marked as complete successfully!"
 }

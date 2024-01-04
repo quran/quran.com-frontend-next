@@ -7,20 +7,23 @@ import styles from './Syllabus.module.scss';
 
 import Link, { LinkVariant } from '@/dls/Link/Link';
 import { Course } from '@/types/auth/Course';
+import { isLoggedIn } from '@/utils/auth/login';
 import { logButtonClick } from '@/utils/eventLogger';
 import { toLocalizedNumber } from '@/utils/locale';
-import { getLessonNavigationUrl } from '@/utils/navigation';
+import { getLessonNavigationUrl, getLoginNavigationUrl } from '@/utils/navigation';
 
 type Props = {
   course: Course;
 };
 
 const Syllabus: React.FC<Props> = ({ course }) => {
-  const { lessons = [] } = course;
+  const { lessons = [], slug: courseSlug } = course;
   const { t, lang } = useTranslation('learn');
 
+  const isUserLoggedIn = isLoggedIn();
+
   const onDayClick = (dayNumber: number, lessonId: string) => {
-    logButtonClick('course_syllabus_day', {
+    logButtonClick(isUserLoggedIn ? 'course_syllabus_day' : 'guest_course_syllabus_day', {
       courseId: course.id,
       dayNumber,
       lessonId,
@@ -31,9 +34,11 @@ const Syllabus: React.FC<Props> = ({ course }) => {
     <>
       {lessons.map((lesson, index) => {
         const dayNumber = index + 1;
+        const { title, isCompleted, id, slug } = lesson;
 
         return (
           <p className={styles.container} key={index}>
+            {isCompleted ? '✔️' : ''}
             <span className={styles.day}>{`${t('day')} ${toLocalizedNumber(
               dayNumber,
               lang,
@@ -41,11 +46,15 @@ const Syllabus: React.FC<Props> = ({ course }) => {
             <span>
               {`: `}
               <Link
-                onClick={() => onDayClick(dayNumber, lesson.id)}
-                href={getLessonNavigationUrl(course.slug, lesson.slug)}
+                onClick={() => onDayClick(dayNumber, id)}
+                href={
+                  isUserLoggedIn
+                    ? getLessonNavigationUrl(courseSlug, slug)
+                    : getLoginNavigationUrl()
+                }
                 variant={LinkVariant.Highlight}
               >
-                {lesson.title}
+                {title}
               </Link>
             </span>
           </p>

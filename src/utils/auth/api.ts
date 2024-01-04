@@ -5,9 +5,13 @@ import { getTimezone } from '../datetime';
 
 import {
   FilterActivityDaysParams,
-  ActivityDay,
-  UpdateActivityDayBody,
+  QuranActivityDay,
+  UpdateQuranActivityDayBody,
   ActivityDayType,
+  UpdateActivityDayBody,
+  ActivityDay,
+  UpdateLessonActivityDayBody,
+  UpdateActivityDayParams,
 } from '@/types/auth/ActivityDay';
 import ConsentType from '@/types/auth/ConsentType';
 import { CreateGoalRequest, Goal, GoalCategory, UpdateGoalRequest } from '@/types/auth/Goal';
@@ -203,9 +207,12 @@ export const deleteReadingGoal = async (params: { category: GoalCategory }): Pro
 
 export const filterReadingDays = async (
   params: FilterActivityDaysParams,
-): Promise<{ data: ActivityDay[] }> => privateFetcher(makeFilterActivityDaysUrl(params));
+): Promise<{ data: ActivityDay<QuranActivityDay>[] }> =>
+  privateFetcher(makeFilterActivityDaysUrl(params));
 
-export const getActivityDay = async (type: ActivityDayType): Promise<{ data?: ActivityDay }> =>
+export const getActivityDay = async (
+  type: ActivityDayType,
+): Promise<{ data?: ActivityDay<QuranActivityDay> }> =>
   privateFetcher(makeActivityDaysUrl({ type }));
 
 export const addReadingSession = async (chapterNumber: number, verseNumber: number) =>
@@ -214,12 +221,16 @@ export const addReadingSession = async (chapterNumber: number, verseNumber: numb
     verseNumber,
   });
 
-export const updateActivityDay = async ({
-  mushafId,
-  type,
-  ...body
-}: UpdateActivityDayBody): Promise<ActivityDay> =>
-  postRequest(makeActivityDaysUrl({ mushafId, type }), body);
+export const updateActivityDay = async (
+  params: UpdateActivityDayParams,
+): Promise<ActivityDay<QuranActivityDay>> => {
+  if (params.type === ActivityDayType.QURAN) {
+    const { mushafId, type, ...body } = params as UpdateActivityDayBody<UpdateQuranActivityDayBody>;
+    return postRequest(makeActivityDaysUrl({ mushafId, type }), body);
+  }
+  const { type, ...body } = params as UpdateActivityDayBody<UpdateLessonActivityDayBody>;
+  return postRequest(makeActivityDaysUrl({ type }), body);
+};
 
 export const estimateRangesReadingTime = async (body: {
   ranges: string[];

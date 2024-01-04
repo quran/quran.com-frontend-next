@@ -2003,7 +2003,7 @@
     tslib "^2.5.0"
     unified "^11.0.3"
 
-"@milkdown/utils@7.3.3":
+"@milkdown/utils@7.3.3", "@milkdown/utils@^7.3.3":
   version "7.3.3"
   resolved "https://registry.yarnpkg.com/@milkdown/utils/-/utils-7.3.3.tgz#a576d3347eb0be83527745c90ebceacbcb1936a8"
   integrity sha512-PwM43+YLuvS+RUaiFWZPS6vBxGcEp9nUY2U0h00FHRJjbTSriDHcnTgpkRX5u2JKBaWaRCDTFGjVmfJI6q6LGA==

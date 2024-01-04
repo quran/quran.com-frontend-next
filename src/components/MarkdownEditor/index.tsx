@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { defaultValueCtx, Editor, rootCtx, editorViewOptionsCtx } from '@milkdown/core';
 import { commonmark } from '@milkdown/preset-commonmark';
 import { Milkdown, useEditor } from '@milkdown/react';
+import { replaceAll } from '@milkdown/utils';
 
 import styles from '@/components/MarkdownEditor/MarkdownEditor.module.scss';
 
@@ -12,7 +13,7 @@ type Props = {
 };
 
 const MarkdownEditor: React.FC<Props> = ({ isEditable = true, defaultValue }) => {
-  useEditor((root) => {
+  const { get } = useEditor((root) => {
     return Editor.make()
       .config((ctx) => {
         ctx.set(rootCtx, root);
@@ -28,6 +29,12 @@ const MarkdownEditor: React.FC<Props> = ({ isEditable = true, defaultValue }) =>
       })
       .use(commonmark);
   }, []);
+
+  useEffect(() => {
+    if (defaultValue) {
+      get()?.action(replaceAll(defaultValue));
+    }
+  }, [defaultValue, get]);
 
   return (
     <div className={styles.content}>
