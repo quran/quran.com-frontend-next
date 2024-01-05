@@ -17,11 +17,7 @@ import { logoutUser } from '@/utils/auth/api';
 import { isLoggedIn } from '@/utils/auth/login';
 import { removeLastSyncAt } from '@/utils/auth/userDataSync';
 import { logButtonClick } from '@/utils/eventLogger';
-import {
-  getCoursesNavigationUrl,
-  getMyCoursesNavigationUrl,
-  getReadingGoalProgressNavigationUrl,
-} from '@/utils/navigation';
+import { getMyCoursesNavigationUrl, getReadingGoalProgressNavigationUrl } from '@/utils/navigation';
 
 const ProfileAvatarButton = () => {
   const [isOpen, setIsOpen] = useState(false);
