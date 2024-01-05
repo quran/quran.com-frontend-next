@@ -11,12 +11,17 @@ import ClockIcon from '@/icons/clock.svg';
 import ArrowIcon from '@/icons/east.svg';
 import LogoutIcon from '@/icons/logout.svg';
 import IconPerson from '@/icons/person.svg';
+import ReaderIcon from '@/icons/reader.svg';
 import TickIcon from '@/icons/tick.svg';
 import { logoutUser } from '@/utils/auth/api';
 import { isLoggedIn } from '@/utils/auth/login';
 import { removeLastSyncAt } from '@/utils/auth/userDataSync';
 import { logButtonClick } from '@/utils/eventLogger';
-import { getCoursesNavigationUrl, getReadingGoalProgressNavigationUrl } from '@/utils/navigation';
+import {
+  getCoursesNavigationUrl,
+  getMyCoursesNavigationUrl,
+  getReadingGoalProgressNavigationUrl,
+} from '@/utils/navigation';
 
 const ProfileAvatarButton = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -53,9 +58,9 @@ const ProfileAvatarButton = () => {
     });
   };
 
-  const onLearnClicked = () => {
-    logButtonClick('profile_avatar_learn');
-    router.push(getCoursesNavigationUrl()).then(() => {
+  const onMyCoursesClicked = () => {
+    logButtonClick('profile_avatar_my_courses');
+    router.push(getMyCoursesNavigationUrl()).then(() => {
       setIsOpen(false);
     });
   };
@@ -88,8 +93,8 @@ const ProfileAvatarButton = () => {
         <PopoverMenu.Item onClick={onReadingHistoryClicked} icon={<ClockIcon />}>
           {t('reading-history')}
         </PopoverMenu.Item>
-        <PopoverMenu.Item onClick={onLearnClicked} icon={<ClockIcon />}>
-          {t('learn')}
+        <PopoverMenu.Item onClick={onMyCoursesClicked} icon={<ReaderIcon />}>
+          {t('my-courses')}
         </PopoverMenu.Item>
         <PopoverMenu.Item onClick={onLogoutClicked} icon={<LogoutIcon />}>
           {t('logout')}

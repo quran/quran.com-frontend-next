@@ -52,7 +52,7 @@ export const makeCollectionsUrl = (queryParams: CollectionsQueryParams): string 
 
 export const makeAddCollectionUrl = () => makeUrl('collections');
 
-export const makeGetCoursesUrl = () => makeUrl('courses');
+export const makeGetCoursesUrl = (params?: { myCourses: boolean }) => makeUrl('courses', params);
 
 export const makeGetCourseUrl = (
   courseSlugOrId: string,

@@ -46,6 +46,8 @@ const CoursePage: NextPage<Props> = () => {
                   <NextSeoWrapper
                     title={course.title}
                     url={getCanonicalUrl(lang, getCourseNavigationUrl(course.id))}
+                    nofollow
+                    noindex
                   />
                   <CourseDetails course={course} />
                 </>

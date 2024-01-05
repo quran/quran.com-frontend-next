@@ -292,6 +292,7 @@ export const getCollectionNavigationUrl = (collectionId: string) => {
 };
 
 export const getReadingGoalNavigationUrl = () => '/reading-goal';
+export const getMyCoursesNavigationUrl = () => '/my-courses';
 export const getCoursesNavigationUrl = () => '/courses';
 
 export const getLoginNavigationUrl = () => '/login';

@@ -3,10 +3,10 @@ import React, { useState } from 'react';
 
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
-import { useSWRConfig } from 'swr';
 
 import Button from '@/dls/Button/Button';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
+import useMutateWithoutRevalidation from '@/hooks/useMutateWithoutRevalidation';
 import { Course } from '@/types/auth/Course';
 import { postEnrollUser } from '@/utils/auth/api';
 import { makeGetCourseUrl } from '@/utils/auth/apiPaths';
@@ -20,11 +20,11 @@ type Props = {
 
 const StatusHeader: React.FC<Props> = ({ course }) => {
   const { title, id, isUserEnrolled, slug, isCompleted } = course;
-  const { mutate } = useSWRConfig();
   const [isLoading, setIsLoading] = useState(false);
   const toast = useToast();
   const router = useRouter();
   const { t } = useTranslation('learn');
+  const mutate = useMutateWithoutRevalidation();
 
   const onEnrollClicked = () => {
     if (isLoggedIn()) {
@@ -40,18 +40,12 @@ const StatusHeader: React.FC<Props> = ({ course }) => {
               status: ToastStatus.Success,
             },
           );
-          mutate(
-            makeGetCourseUrl(slug, { withLessons: true }),
-            (currentCourse: Course) => {
-              return {
-                ...currentCourse,
-                isUserEnrolled: true,
-              };
-            },
-            {
-              revalidate: false,
-            },
-          );
+          mutate(makeGetCourseUrl(slug, { withLessons: true }), (currentCourse: Course) => {
+            return {
+              ...currentCourse,
+              isUserEnrolled: true,
+            };
+          });
         })
         .catch(() => {
           toast(t('common:error.general'), {
