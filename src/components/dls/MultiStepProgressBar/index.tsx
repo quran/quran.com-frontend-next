@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 
+import classNames from 'classnames';
+
 import styles from './MultiStepProgressBar.module.scss';
 
-import Button, { ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import { logButtonClick } from '@/utils/eventLogger';
 
 type Props = {
@@ -27,26 +28,32 @@ const MultiStepProgressBar: React.FC<Props> = ({ identifier, steps, defaultActiv
   };
 
   return (
-    <div className={styles.progressBar}>
-      {steps.map((step, index) => {
-        const { isCompleted, id, onClick } = step;
+    <div className={styles.container}>
+      <div className={styles.steps}>
+        {steps.map((step, index) => {
+          const { id, isCompleted, onClick } = step;
 
-        return (
-          <Button
-            size={ButtonSize.Small}
-            {...(index === activeIndex && { variant: ButtonVariant.Outlined })}
-            key={id}
-            onClick={() => {
-              onStepClicked(index);
-              onClick();
-            }}
-            className={styles.step}
-          >
-            {/* eslint-disable-next-line i18next/no-literal-string */}
-            {isCompleted ? '✓' : index + 1}
-          </Button>
-        );
-      })}
+          const onClicked = () => {
+            onClick();
+            onStepClicked(index);
+          };
+
+          return (
+            <span
+              key={id}
+              className={classNames(styles.circle, {
+                [styles.active]: index === activeIndex,
+              })}
+              role="button"
+              tabIndex={0}
+              onClick={onClicked}
+              onKeyDown={onClicked}
+            >
+              {isCompleted ? '✓' : index + 1}
+            </span>
+          );
+        })}
+      </div>
     </div>
   );
 };
