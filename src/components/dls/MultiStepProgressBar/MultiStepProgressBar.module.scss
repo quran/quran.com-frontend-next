@@ -1,0 +1,13 @@
+.progressBar {
+  display: flex;
+  flex-direction: row;
+  padding: var(--spacing-micro);
+  flex-wrap: wrap;
+}
+
+.step {
+  max-width: var(--spacing-small);
+  max-height: var(--spacing-small);
+  flex: 1;
+  margin: var(--spacing-micro);
+}

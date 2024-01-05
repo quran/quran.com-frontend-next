@@ -9,6 +9,7 @@ import DataFetcher from '@/components/DataFetcher';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import PageContainer from '@/components/PageContainer';
 import Link, { LinkVariant } from '@/dls/Link/Link';
+import MultiStepProgressBar from '@/dls/MultiStepProgressBar';
 import Spinner from '@/dls/Spinner/Spinner';
 import useRequireAuth from '@/hooks/auth/useRequireAuth';
 import styles from '@/pages/courses/[slug]/courses.module.scss';
@@ -81,6 +82,22 @@ const LessonPage: NextPage<Props> = () => {
             lesson={lesson}
             lessonSlugOrId={lessonSlugOrId as string}
             courseSlug={slug as string}
+          />
+          <MultiStepProgressBar
+            identifier="lesson"
+            defaultActiveIndex={lesson.day - 1}
+            steps={lesson.course.lessons.map((loopLesson) => {
+              return {
+                id: loopLesson.id,
+                isCompleted: loopLesson.isCompleted,
+                onClick: () => {
+                  logButtonClick('lesson_progress_bar', {
+                    lessonId: loopLesson.id,
+                  });
+                  router.push(getLessonNavigationUrl(slug as string, loopLesson.slug));
+                },
+              };
+            })}
           />
         </>
       );
