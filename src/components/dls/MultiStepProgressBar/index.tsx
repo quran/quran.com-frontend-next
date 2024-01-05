@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import classNames from 'classnames';
 
@@ -18,6 +18,10 @@ type Props = {
 
 const MultiStepProgressBar: React.FC<Props> = ({ identifier, steps, defaultActiveIndex = 0 }) => {
   const [activeIndex, setActiveIndex] = useState(defaultActiveIndex);
+
+  useEffect(() => {
+    setActiveIndex(defaultActiveIndex);
+  }, [defaultActiveIndex]);
 
   const onStepClicked = (index: number) => {
     logButtonClick('multi_step_progress-bar', {

@@ -1,5 +1,6 @@
 import React from 'react';
 
+import classNames from 'classnames';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
@@ -37,14 +38,7 @@ const ActionButtons: React.FC<Props> = ({ isLoading, markLessonAsCompleted, less
     });
     const lessonIndex = day - 1;
     const previousLessonSlug = course.lessons[lessonIndex - 1].slug;
-    // if the lesson is completed, just navigate to the previous lesson
-    if (isCompleted) {
-      navigateToLesson(course.slug, previousLessonSlug);
-      return;
-    }
-    markLessonAsCompleted(id, () => {
-      navigateToLesson(course.slug, previousLessonSlug);
-    });
+    navigateToLesson(course.slug, previousLessonSlug);
   };
 
   const onMarkAsCompletedClicked = () => {
@@ -65,17 +59,14 @@ const ActionButtons: React.FC<Props> = ({ isLoading, markLessonAsCompleted, less
     });
     const lessonIndex = day - 1;
     const nextLessonSlug = course.lessons[lessonIndex + 1].slug;
-    // if the lesson is completed, just navigate to the next lesson
-    if (isCompleted) {
-      navigateToLesson(course.slug, nextLessonSlug);
-      return;
-    }
-    markLessonAsCompleted(id, () => {
-      navigateToLesson(course.slug, nextLessonSlug);
-    });
+    navigateToLesson(course.slug, nextLessonSlug);
   };
   return (
-    <div className={styles.buttonsContainer}>
+    <div
+      className={classNames(styles.buttonsContainer, {
+        [styles.singleButton]: isCompleted && isFirst,
+      })}
+    >
       {!isFirst && (
         <Button
           isLoading={isLoading}

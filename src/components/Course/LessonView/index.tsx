@@ -35,18 +35,29 @@ const LessonView: React.FC<Props> = ({ lesson, courseSlug, lessonSlugOrId }) => 
 
   const markLessonAsCompleted = useCallback(
     (lessonId: string, successCallback?: () => void) => {
+      // TODO: check issue with mark as completed lessons get unchecked
       setIsLoading(true);
       updateActivityDay({ type: ActivityDayType.LESSON, lessonId })
         .then(() => {
           // update local cache of the lesson to completed
           mutate(makeGetLessonUrl(courseSlug, lessonSlugOrId), (currentLesson: Lesson) => {
+            if (currentLesson?.course?.lessons) {
+              const newCurrentLesson = { ...currentLesson };
+              const lessonIndex = newCurrentLesson.course.lessons.findIndex(
+                (loopLesson) => loopLesson.id === lessonId,
+              );
+              if (lessonIndex !== -1) {
+                newCurrentLesson.course.lessons[lessonIndex].isCompleted = true;
+              }
+              return newCurrentLesson;
+            }
             return {
               ...currentLesson,
               isCompleted: true,
             };
           });
           // update local cache of the course to set the current lesson as completed in the lessons array
-          mutate(makeGetCourseUrl(courseSlug, { withLessons: true }), (currentCourse: Course) => {
+          mutate(makeGetCourseUrl(courseSlug), (currentCourse: Course) => {
             // if lessons exist
             if (currentCourse?.lessons) {
               // TODO: handle case when the current lesson is the last un-completed lesson of the course, we should also set the course isCompleted to true

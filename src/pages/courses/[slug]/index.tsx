@@ -38,7 +38,7 @@ const CoursePage: NextPage<Props> = () => {
         <PageContainer>
           <DataFetcher
             loading={Loading}
-            queryKey={makeGetCourseUrl(slug as string, { withLessons: true })}
+            queryKey={makeGetCourseUrl(slug as string)}
             fetcher={privateFetcher}
             render={
               ((course: Course) => (

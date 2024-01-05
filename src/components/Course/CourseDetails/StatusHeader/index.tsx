@@ -40,7 +40,7 @@ const StatusHeader: React.FC<Props> = ({ course }) => {
               status: ToastStatus.Success,
             },
           );
-          mutate(makeGetCourseUrl(slug, { withLessons: true }), (currentCourse: Course) => {
+          mutate(makeGetCourseUrl(slug), (currentCourse: Course) => {
             return {
               ...currentCourse,
               isUserEnrolled: true,
