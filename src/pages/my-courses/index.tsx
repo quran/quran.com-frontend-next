@@ -19,7 +19,7 @@ const MyCoursesPage: NextPage = () => {
         url={getCanonicalUrl(lang, getMyCoursesNavigationUrl())}
         languageAlternates={getLanguageAlternates(getMyCoursesNavigationUrl())}
       />
-      <CoursesPageLayout />
+      <CoursesPageLayout isMyCourses />
     </>
   );
 };

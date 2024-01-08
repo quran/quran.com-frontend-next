@@ -1,5 +1,6 @@
 {
   "enroll": "Enroll",
+  "all-courses": "All Courses",
   "day": "Day",
   "author": "Author",
   "by-author": "By: {{author}}",
@@ -19,6 +20,7 @@
   "not-enrolled": "You are not enrolled in the <link>course</link> yet.",
   "prev-lesson": "Previous Lesson",
   "next-lesson": "Next Lesson",
-  "mark-complete": "Mark as complete",
-  "mark-complete-success": "Lesson has been marked as complete successfully!"
+  "mark-complete": "Completed",
+  "mark-complete-success": "Lesson has been marked as complete successfully!",
+  "empty-courses": "You are not enrolled in any <link>courses</link> yet."
 }

@@ -1,6 +1,6 @@
 import { useCallback } from 'react';
 
-import { useSWRConfig, MutatorCallback, MutatorOptions } from 'swr';
+import { useSWRConfig, MutatorCallback, MutatorOptions, Key } from 'swr';
 
 const MUTATOR_OPTIONS: MutatorOptions = { revalidate: false };
 
@@ -9,10 +9,10 @@ const MUTATOR_OPTIONS: MutatorOptions = { revalidate: false };
  *
  * @returns {(url: string, callback: MutatorCallback) => void} mutateWithoutRevalidation
  */
-const useMutateWithoutRevalidation = (): ((url: string, callback: MutatorCallback) => void) => {
+const useMutateWithoutRevalidation = (): ((url: Key, callback: MutatorCallback) => void) => {
   const { mutate } = useSWRConfig();
   const mutateWithoutRevalidation = useCallback(
-    (url: string, callback: MutatorCallback) => {
+    (url: Key, callback: MutatorCallback) => {
       mutate(url, callback, MUTATOR_OPTIONS);
     },
     [mutate],

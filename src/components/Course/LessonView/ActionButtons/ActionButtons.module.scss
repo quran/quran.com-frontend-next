@@ -2,9 +2,11 @@
     margin-block-start: var(--spacing-small);
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-}
+    justify-content: center;
+    flex-wrap: wrap;
 
-.singleButton {
-    justify-content: end;
+    & > button {
+        margin-inline: var(--spacing-xxsmall);
+        margin-block: var(--spacing-xxsmall);
+    }
 }

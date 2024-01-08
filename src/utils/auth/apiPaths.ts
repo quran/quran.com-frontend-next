@@ -56,8 +56,11 @@ export const makeGetCoursesUrl = (params?: { myCourses: boolean }) => makeUrl('c
 
 export const makeGetCourseUrl = (courseSlugOrId: string) => makeUrl(`courses/${courseSlugOrId}`);
 
+export const makeGetLessonUrlPrefix = (courseSlugOrId: string) =>
+  makeUrl(`courses/${courseSlugOrId}/lessons`);
+
 export const makeGetLessonUrl = (courseSlugOrId: string, lessonSlugOrId: string) =>
-  makeUrl(`courses/${courseSlugOrId}/lessons/${lessonSlugOrId}`);
+  `${makeGetLessonUrlPrefix(courseSlugOrId)}/${lessonSlugOrId}`;
 
 export const makeEnrollUserUrl = () => makeUrl('courses/enroll');
 
