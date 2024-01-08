@@ -21,6 +21,7 @@ const onClick = () => {};
 
 const generateSteps = (numberOfSteps) => {
   const steps = [];
+  // eslint-disable-next-line no-plusplus
   for (let index = 0; index < numberOfSteps; index++) {
     steps.push({
       id: `${index + 1}`,

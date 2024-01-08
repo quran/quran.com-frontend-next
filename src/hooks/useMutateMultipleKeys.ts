@@ -14,6 +14,7 @@ const useMutateMultipleKeys = (): ((url: string, callback: MutatorCallback) => v
   const { cache, mutate } = useSWRConfig();
   const mutateMultipleKeys = useCallback(
     (regexExpression: string, callback: MutatorCallback, options?: MutatorOptions) => {
+      // @ts-ignore
       const cacheKeys = Array.from(cache.keys());
       cacheKeys.forEach((key: string) => {
         const pattern = new RegExp(regexExpression);

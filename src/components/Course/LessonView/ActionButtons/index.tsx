@@ -168,4 +168,5 @@ const ActionButtons: React.FC<Props> = ({ lesson, courseSlug }) => {
   );
 };
 
+// eslint-disable-next-line max-lines
 export default ActionButtons;
