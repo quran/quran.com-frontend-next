@@ -1,3 +1,5 @@
+@use "src/styles/breakpoints";
+
 .backText {
     padding-inline-start: var(--spacing-micro);
 }
@@ -25,4 +27,8 @@
     position: relative;
     margin: auto;
     margin-block-end: var(--spacing-small);
+    @include breakpoints.smallerThanTablet {
+        width: 100%;
+        height: calc(var(--spacing-mega) * 7);
+    }
 }
