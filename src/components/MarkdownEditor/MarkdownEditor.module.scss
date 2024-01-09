@@ -31,20 +31,16 @@
         border-top: 2px solid var(--color-background-inverse);
     }
     blockquote {
+        background-color: var(--color-success-faint);
         display: block;
-        padding: var(--spacing-large);
+        padding: var(--spacing-mega);
         margin-block: var(--spacing-large);
         position: relative;
+        border-radius: var(--border-radius-rounded);
 
         /*Font*/
         line-height: var(--line-height-jumbo);
         color: var(--color-text-default);
-
-        /*Borders - (Optional)*/
-        border-inline-start-style: solid;
-        border-inline-start-width: var(--spacing-small);
-        border-inline-end: solid;
-        border-inline-end-width: calc(0.8 * var(--spacing-micro));
 
         &::before {
             content: "\201C"; /*Unicode for Left Double Quote*/
@@ -58,7 +54,7 @@
             /*Positioning*/
             position: absolute;
             inset-inline-start: var(--spacing-medium);
-            inset-block-start: var(--spacing-micro);
+            inset-block-start: var(--spacing-medium);
         }
 
         &::after {
@@ -69,6 +65,7 @@
         p {
             font-size: var(--font-size-xlarge);
             font-weight: var(--font-weight-semibold);
+            line-height: var(--line-height-xlarge);
             text-align: center;
         }
     }

@@ -29,19 +29,24 @@ export const mutateLessonAsCompleted = (lessons: Lesson[], lessonId: string): Le
  * @returns {void}
  */
 export const mutateCachedLessons = (
-  mutatorFunction,
+  mutatorFunction: any,
   courseSlug: string,
   lessonId: string,
 ): void => {
-  mutatorFunction(`${makeGetLessonUrlPrefix(courseSlug)}/.+`, (currentLesson: Lesson) => {
-    const newCurrentLesson = { ...currentLesson, isCompleted: true };
-    if (currentLesson?.course?.lessons) {
-      newCurrentLesson.course.lessons = mutateLessonAsCompleted(
-        newCurrentLesson.course.lessons,
-        lessonId,
-      );
+  const courseLessonsUrlRegex = `${makeGetLessonUrlPrefix(courseSlug)}/.+`;
+  mutatorFunction(courseLessonsUrlRegex, (currentLesson: Lesson) => {
+    if (currentLesson) {
+      const newCurrentLesson = { ...currentLesson, isCompleted: true };
+      // if the lesson has a course, we should update the lessons array of the course
+      if (currentLesson?.course?.lessons) {
+        newCurrentLesson.course.lessons = mutateLessonAsCompleted(
+          newCurrentLesson.course.lessons,
+          lessonId,
+        );
+      }
+      return newCurrentLesson;
     }
-    return newCurrentLesson;
+    return currentLesson;
   });
 };
 
@@ -62,7 +67,8 @@ export const mutateCachedCourse = (
   mutatorFunction(makeGetCourseUrl(courseSlug), (currentCourse: Course) => {
     if (currentCourse) {
       const newCurrentCourse = { ...currentCourse };
-      if (newCurrentCourse.lessons) {
+      // if the course has lessons, we should update the lessons array
+      if (newCurrentCourse?.lessons) {
         const completedLessons = newCurrentCourse.lessons.filter(
           (loopLesson) => loopLesson.isCompleted,
         );

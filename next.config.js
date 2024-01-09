@@ -20,7 +20,15 @@ const config = {
   productionBrowserSourceMaps: true, // {@see https://nextjs.org/docs/advanced-features/source-maps}
   images: {
     formats: ['image/avif', 'image/webp'],
-    domains: ['cdn.qurancdn.com', 'static.qurancdn.com', 'vercel.com', 'now.sh', 'quran.com'],
+    domains: [
+      'placehold.co',
+      'cdn.qurancdn.com',
+      'static.qurancdn.com',
+      'vercel.com',
+      'now.sh',
+      'quran.com',
+      'images.quran.com',
+    ],
   },
   pwa: {
     disable: !isProduction,
