@@ -1,10 +1,10 @@
-/* eslint-disable react-func/max-lines-per-function */
 import React, { useState } from 'react';
 
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from './ActionButtons.module.scss';
+import { mutateCachedCourse, mutateCachedLessons } from './mutations';
 
 import Button, { ButtonSize } from '@/dls/Button/Button';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
@@ -14,9 +14,8 @@ import ChevronLeftIcon from '@/icons/chevron-left.svg';
 import ChevronRightIcon from '@/icons/chevron-right.svg';
 import TickIcon from '@/icons/tick.svg';
 import { ActivityDayType } from '@/types/auth/ActivityDay';
-import { Course, Lesson } from '@/types/auth/Course';
+import { Lesson } from '@/types/auth/Course';
 import { updateActivityDay } from '@/utils/auth/api';
-import { makeGetCourseUrl, makeGetLessonUrlPrefix } from '@/utils/auth/apiPaths';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getLessonNavigationUrl } from '@/utils/navigation';
 
@@ -34,54 +33,12 @@ const ActionButtons: React.FC<Props> = ({ lesson, courseSlug }) => {
   const [isLoading, setIsLoading] = useState(false);
   const toast = useToast();
 
-  const mutateLessonAsCompleted = (lessons: Lesson[], lessonId: string) => {
-    const newLessons = [...lessons];
-    const lessonIndex = newLessons.findIndex((loopLesson) => loopLesson.id === lessonId);
-    // safety check: if the lesson was found in the lessons array, set it as completed
-    if (lessonIndex !== -1) {
-      newLessons[lessonIndex].isCompleted = true;
-    }
-    return newLessons;
-  };
-
   const markLessonAsCompleted = (lessonId: string, successCallback?: () => void) => {
     setIsLoading(true);
     updateActivityDay({ type: ActivityDayType.LESSON, lessonId })
       .then(() => {
-        // we need to update all the cached lessons of the course to set the current lesson as completed
-        mutateMultipleKeys(`${makeGetLessonUrlPrefix(courseSlug)}/.+`, (currentLesson: Lesson) => {
-          const newCurrentLesson = { ...currentLesson, isCompleted: true };
-          if (currentLesson?.course?.lessons) {
-            newCurrentLesson.course.lessons = mutateLessonAsCompleted(
-              newCurrentLesson.course.lessons,
-              lessonId,
-            );
-          }
-          return newCurrentLesson;
-        });
-
-        // update local cache of the course to set the current lesson as completed in the lessons array
-        mutateWithoutRevalidation(makeGetCourseUrl(courseSlug), (currentCourse: Course) => {
-          if (currentCourse) {
-            const newCurrentCourse = { ...currentCourse };
-            if (newCurrentCourse.lessons) {
-              const completedLessons = newCurrentCourse.lessons.filter(
-                (loopLesson) => loopLesson.isCompleted,
-              );
-              // if we are marking the last un-completed lesson in the course, we should mark the course itself as completed
-              if (completedLessons.length + 1 === newCurrentCourse.lessons.length) {
-                newCurrentCourse.isCompleted = true;
-              }
-              newCurrentCourse.lessons = mutateLessonAsCompleted(
-                newCurrentCourse.lessons,
-                lessonId,
-              );
-            }
-            return newCurrentCourse;
-          }
-          return currentCourse;
-        });
-
+        mutateCachedLessons(mutateMultipleKeys, courseSlug, lessonId);
+        mutateCachedCourse(mutateWithoutRevalidation, courseSlug, lessonId);
         if (successCallback) {
           successCallback();
         }
@@ -168,5 +125,4 @@ const ActionButtons: React.FC<Props> = ({ lesson, courseSlug }) => {
   );
 };
 
-// eslint-disable-next-line max-lines
 export default ActionButtons;
