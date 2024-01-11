@@ -3,6 +3,7 @@
 .backText {
     padding-inline-start: var(--spacing-micro);
 }
+
 .headerContainer {
     padding-block-end: var(--spacing-small);
     display: flex;
@@ -22,13 +23,22 @@
 }
 
 .imgContainer {
-    width: 50%;
-    height: calc(var(--spacing-mega) * 10);
-    position: relative;
-    margin: auto;
-    margin-block-end: var(--spacing-small);
     @include breakpoints.smallerThanTablet {
         width: 100%;
         height: calc(var(--spacing-mega) * 7);
     }
+
+    @include breakpoints.tablet {
+        width: 70%;
+        height: calc(var(--spacing-mega) * 10);
+    }
+
+    @include breakpoints.desktop {
+        width: 40%;
+        height: calc(var(--spacing-mega) * 10);
+    }
+
+    position: relative;
+    margin: auto;
+    margin-block-end: var(--spacing-small);
 }

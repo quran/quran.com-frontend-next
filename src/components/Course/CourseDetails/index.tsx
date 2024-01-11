@@ -76,7 +76,7 @@ const CourseDetails: React.FC<Props> = ({ course }) => {
       </div>
 
       <div className={styles.imgContainer}>
-        <Image className={styles.imgContainer} alt={title} src={image} layout="fill" />
+        <Image alt={title} src={image} layout="fill" />
       </div>
 
       <Tabs defaultValue={Tab.MAIN} onValueChange={onTabChange} tabs={tabs} />
