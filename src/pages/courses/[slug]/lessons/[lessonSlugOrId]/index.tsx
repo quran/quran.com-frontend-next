@@ -4,9 +4,12 @@ import { useRouter } from 'next/router';
 import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
 
+import styles from './lessons.module.scss';
+
 import LessonView from '@/components/Course/LessonView';
 import DataFetcher from '@/components/DataFetcher';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
+import PageContainer from '@/components/PageContainer';
 import Link, { LinkVariant } from '@/dls/Link/Link';
 import Spinner from '@/dls/Spinner/Spinner';
 import useRequireAuth from '@/hooks/auth/useRequireAuth';
@@ -46,19 +49,23 @@ const LessonPage: NextPage<Props> = () => {
   const errorRenderer = (error: any) => {
     if (error?.message === ApiErrorMessage.CourseNotEnrolled) {
       return (
-        <Trans
-          i18nKey="learn:not-enrolled"
-          components={{
-            link: (
-              <Link
-                onClick={onUnEnrolledNavigationLinkClicked}
-                key={0}
-                href={getCourseNavigationUrl(slug as string)}
-                variant={LinkVariant.Blend}
-              />
-            ),
-          }}
-        />
+        <div className={styles.container}>
+          <PageContainer>
+            <Trans
+              i18nKey="learn:not-enrolled"
+              components={{
+                link: (
+                  <Link
+                    onClick={onUnEnrolledNavigationLinkClicked}
+                    key={0}
+                    href={getCourseNavigationUrl(slug as string)}
+                    variant={LinkVariant.Blend}
+                  />
+                ),
+              }}
+            />
+          </PageContainer>
+        </div>
       );
     }
     return false;
