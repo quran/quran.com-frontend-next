@@ -62,7 +62,7 @@ const CoursesList: React.FC<Props> = ({ courses, isMyCourses }) => {
                 shouldShowFullTitle
                 imgSrc={course.image}
                 key={course.id}
-                title={course.title}
+                title={`${course.title} ${course.isCompleted ? '✓' : ''}`}
                 imgAlt={course.title}
                 size={CardSize.Medium}
                 actionIcon={<SearchIcon />}
