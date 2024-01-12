@@ -33,7 +33,7 @@ export const mutateCachedLessons = (
   courseSlug: string,
   lessonId: string,
 ): void => {
-  const courseLessonsUrlRegex = `${makeGetLessonUrlPrefix(courseSlug)}/.+`;
+  const courseLessonsUrlRegex = `^${makeGetLessonUrlPrefix(courseSlug)}/.+`;
   mutatorFunction(courseLessonsUrlRegex, (currentLesson: Lesson) => {
     if (currentLesson) {
       const newCurrentLesson = { ...currentLesson, isCompleted: true };
