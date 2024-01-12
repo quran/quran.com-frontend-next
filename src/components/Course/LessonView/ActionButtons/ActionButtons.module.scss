@@ -10,3 +10,10 @@
         margin-block: var(--spacing-xxsmall);
     }
 }
+
+
+.addReflectionButton {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}

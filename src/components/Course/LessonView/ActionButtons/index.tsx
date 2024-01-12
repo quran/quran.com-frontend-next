@@ -4,15 +4,15 @@ import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from './ActionButtons.module.scss';
+import CompleteButton from './CompleteButton';
 import { mutateCachedCourse, mutateCachedLessons } from './mutations';
 
-import Button, { ButtonSize } from '@/dls/Button/Button';
+import Button, { ButtonSize, ButtonType } from '@/dls/Button/Button';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import useMutateMultipleKeys from '@/hooks/useMutateMultipleKeys';
 import useMutateWithoutRevalidation from '@/hooks/useMutateWithoutRevalidation';
 import ChevronLeftIcon from '@/icons/chevron-left.svg';
 import ChevronRightIcon from '@/icons/chevron-right.svg';
-import TickIcon from '@/icons/tick.svg';
 import { ActivityDayType } from '@/types/auth/ActivityDay';
 import { Lesson } from '@/types/auth/Course';
 import { updateActivityDay } from '@/utils/auth/api';
@@ -67,17 +67,6 @@ const ActionButtons: React.FC<Props> = ({ lesson, courseSlug }) => {
     navigateToLesson(course.slug, previousLessonSlug);
   };
 
-  const onMarkAsCompletedClicked = () => {
-    logButtonClick('mark_lesson_as_completed', {
-      lessonId: id,
-    });
-    markLessonAsCompleted(id, () => {
-      toast(t('mark-complete-success'), {
-        status: ToastStatus.Success,
-      });
-    });
-  };
-
   const onNextLessonClicked = () => {
     logButtonClick('next_lesson', {
       lessonId: id,
@@ -87,41 +76,57 @@ const ActionButtons: React.FC<Props> = ({ lesson, courseSlug }) => {
     const nextLessonSlug = course.lessons[lessonIndex + 1].slug;
     navigateToLesson(course.slug, nextLessonSlug);
   };
+
+  const onAddReflectionClick = () => {
+    logButtonClick('add_lesson_reflection', {
+      lessonId: id,
+      isCompleted,
+    });
+  };
+
   return (
-    <div className={styles.buttonsContainer}>
-      {!isFirst && (
+    <>
+      <div className={styles.buttonsContainer}>
+        {!isFirst && (
+          <Button
+            isLoading={isLoading}
+            isDisabled={isLoading}
+            size={ButtonSize.Small}
+            onClick={onPreviousLessonClicked}
+          >
+            <ChevronLeftIcon />
+          </Button>
+        )}
+        {!isCompleted && (
+          <CompleteButton
+            id={id}
+            isLoading={isLoading}
+            markLessonAsCompleted={markLessonAsCompleted}
+          />
+        )}
+        {!isLast && (
+          <Button
+            isLoading={isLoading}
+            isDisabled={isLoading}
+            size={ButtonSize.Small}
+            onClick={onNextLessonClicked}
+          >
+            <ChevronRightIcon />
+          </Button>
+        )}
+      </div>
+      <div className={styles.addReflectionButton}>
         <Button
-          isLoading={isLoading}
-          isDisabled={isLoading}
           size={ButtonSize.Small}
-          // prefix={<ChevronLeftIcon />}
-          onClick={onPreviousLessonClicked}
+          onClick={onAddReflectionClick}
+          href="https://quranreflect.com"
+          isNewTab
+          type={ButtonType.Secondary}
         >
-          <ChevronLeftIcon />
+          {t('add-reflection')}
         </Button>
-      )}
-      {!isCompleted && (
-        <Button
-          isLoading={isLoading}
-          isDisabled={isLoading}
-          prefix={<TickIcon />}
-          size={ButtonSize.Small}
-          onClick={onMarkAsCompletedClicked}
-        >
-          {t('mark-complete')}
-        </Button>
-      )}
-      {!isLast && (
-        <Button
-          isLoading={isLoading}
-          isDisabled={isLoading}
-          size={ButtonSize.Small}
-          onClick={onNextLessonClicked}
-        >
-          <ChevronRightIcon />
-        </Button>
-      )}
-    </div>
+      </div>
+    </>
   );
 };
 

@@ -1,0 +1,42 @@
+@use "src/styles/breakpoints";
+
+.container {
+  &.modalContainer {
+    display: block;
+  }
+  // hide on all devices but desktop
+  display: none;
+  @include breakpoints.desktop {
+    padding-block-start: var(--spacing-medium);
+    display: block;
+    padding-inline: 2%;
+    inline-size: 23%; // = 25% - ${padding-inline}
+  }
+}
+
+
+.heading {
+  font-size: var(--font-size-large);
+  font-weight: var(--font-weight-bold);
+  margin-block-end: var(--spacing-small);
+}
+
+.currentLesson {
+  background-color: var(--color-success-faint);
+  border-radius: var(--border-radius-rounded);
+}
+
+
+.lessonContainer {
+  padding: var(--spacing-micro);
+  &:hover {
+    background-color: var(--color-success-faint);
+    cursor: pointer;
+    border-radius: var(--border-radius-rounded);
+  }
+}
+
+.day {
+  min-inline-size: var(--spacing-mega);
+  display: inline-block;
+}

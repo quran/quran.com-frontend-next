@@ -1,3 +1,24 @@
+@use "src/styles/breakpoints";
+
+.viewContainer {
+    @include breakpoints.desktop {
+        display: flex;
+        align-items: start;
+    }
+}
+.modalHeading {
+    font-size: var(--font-size-large);
+  font-weight: var(--font-weight-bold);
+  margin-block-end: var(--spacing-small);
+}
+
+.container {
+  min-block-size: 70vh;
+  @include breakpoints.desktop {
+    width: 50%;
+  }
+}
+
 .backText {
     padding-inline-start: var(--spacing-micro);
 }
@@ -38,4 +59,16 @@
 
 .contentContainer {
     min-height: calc(var(--spacing-mega) * 10);
+}
+
+.headerButtonsContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.courseMaterialButton {
+    @include breakpoints.desktop {
+        display: none;
+    }
 }

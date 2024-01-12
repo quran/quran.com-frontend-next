@@ -38,7 +38,6 @@ const Syllabus: React.FC<Props> = ({ course }) => {
 
         return (
           <p className={styles.container} key={index}>
-            {isCompleted ? '✔️' : ''}
             <span className={styles.day}>{`${t('day')} ${toLocalizedNumber(
               dayNumber,
               lang,
@@ -56,6 +55,7 @@ const Syllabus: React.FC<Props> = ({ course }) => {
               >
                 {title}
               </Link>
+              {isCompleted ? '✓' : ''}
             </span>
           </p>
         );

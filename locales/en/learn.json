@@ -3,6 +3,7 @@
   "all-courses": "All Courses",
   "day": "Day",
   "author": "Author",
+  "course-material": "Course Material",
   "by-author": "By: {{author}}",
   "duration": "Duration",
   "duration-daily": "{{dailyMins}} minutes/day over {{days}} days",
@@ -22,5 +23,6 @@
   "next-lesson": "Next Lesson",
   "mark-complete": "Completed",
   "mark-complete-success": "Lesson has been marked as complete successfully!",
-  "empty-courses": "You are not enrolled in any <link>courses</link> yet."
+  "empty-courses": "You are not enrolled in any <link>courses</link> yet.",
+  "add-reflection": "Add Reflection"
 }

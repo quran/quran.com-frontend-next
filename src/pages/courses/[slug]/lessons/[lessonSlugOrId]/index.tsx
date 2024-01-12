@@ -7,12 +7,9 @@ import useTranslation from 'next-translate/useTranslation';
 import LessonView from '@/components/Course/LessonView';
 import DataFetcher from '@/components/DataFetcher';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
-import PageContainer from '@/components/PageContainer';
 import Link, { LinkVariant } from '@/dls/Link/Link';
-import MultiStepProgressBar from '@/dls/MultiStepProgressBar';
 import Spinner from '@/dls/Spinner/Spinner';
 import useRequireAuth from '@/hooks/auth/useRequireAuth';
-import styles from '@/pages/courses/[slug]/courses.module.scss';
 import layoutStyles from '@/pages/index.module.scss';
 import ApiErrorMessage from '@/types/ApiErrorMessage';
 import { Lesson } from '@/types/auth/Course';
@@ -83,22 +80,6 @@ const LessonPage: NextPage<Props> = () => {
             lessonSlugOrId={lessonSlugOrId as string}
             courseSlug={slug as string}
           />
-          <MultiStepProgressBar
-            identifier="lesson"
-            defaultActiveIndex={lesson.day - 1}
-            steps={lesson.course.lessons.map((loopLesson) => {
-              return {
-                id: loopLesson.id,
-                isCompleted: loopLesson.isCompleted,
-                onClick: () => {
-                  logButtonClick('lesson_progress_bar', {
-                    lessonId: loopLesson.id,
-                  });
-                  router.push(getLessonNavigationUrl(slug as string, loopLesson.slug));
-                },
-              };
-            })}
-          />
         </>
       );
     }
@@ -107,17 +88,13 @@ const LessonPage: NextPage<Props> = () => {
 
   return (
     <div className={layoutStyles.pageContainer}>
-      <div className={styles.container}>
-        <PageContainer>
-          <DataFetcher
-            loading={Loading}
-            queryKey={makeGetLessonUrl(slug as string, lessonSlugOrId as string)}
-            fetcher={privateFetcher}
-            errorRenderer={errorRenderer}
-            render={bodyRenderer}
-          />
-        </PageContainer>
-      </div>
+      <DataFetcher
+        loading={Loading}
+        queryKey={makeGetLessonUrl(slug as string, lessonSlugOrId as string)}
+        fetcher={privateFetcher}
+        errorRenderer={errorRenderer}
+        render={bodyRenderer}
+      />
     </div>
   );
 };
