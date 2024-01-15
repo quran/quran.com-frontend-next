@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 
 import Image from 'next/image';
 import useTranslation from 'next-translate/useTranslation';
@@ -7,9 +7,10 @@ import styles from './CourseDetails.module.scss';
 import StatusHeader from './StatusHeader';
 import MainDetails from './Tabs/MainDetails';
 import Syllabus from './Tabs/Syllabus';
+import TabSwitcherItem from './TabSwitcherItem';
 
 import Button, { ButtonVariant } from '@/dls/Button/Button';
-import Tabs from '@/dls/TabsNew/Tabs';
+import Switch from '@/dls/Switch/Switch';
 import DetailsIcon from '@/icons/collection.svg';
 import SyllabusIcon from '@/icons/developers.svg';
 import ArrowLeft from '@/icons/west.svg';
@@ -24,15 +25,16 @@ type Props = {
 enum Tab {
   MAIN = 'main',
   SYLLABUS = 'syllabus',
-  REVIEWS = 'reviews',
 }
 
 const CourseDetails: React.FC<Props> = ({ course }) => {
   const { title, image, id, author } = course;
   const { t } = useTranslation('learn');
+  const [selectedTab, setSelectedTab] = useState(Tab.MAIN);
 
   const onTabChange = (value: Tab) => {
     logEvent('course_details_tab_change', { courseId: id, tab: value });
+    setSelectedTab(value);
   };
 
   const onBackButtonClicked = () => {
@@ -42,19 +44,15 @@ const CourseDetails: React.FC<Props> = ({ course }) => {
   const tabs = useMemo(
     () => [
       {
-        title: t('tabs.main'),
+        name: <TabSwitcherItem icon={<DetailsIcon />} value={t('tabs.main')} />,
         value: Tab.MAIN,
-        body: <MainDetails course={course} />,
-        icon: <DetailsIcon />,
       },
       {
-        title: t('tabs.syllabus'),
+        name: <TabSwitcherItem icon={<SyllabusIcon />} value={t('tabs.syllabus')} />,
         value: Tab.SYLLABUS,
-        body: <Syllabus course={course} />,
-        icon: <SyllabusIcon />,
       },
     ],
-    [course, t],
+    [t],
   );
 
   return (
@@ -79,7 +77,8 @@ const CourseDetails: React.FC<Props> = ({ course }) => {
         <Image alt={title} src={image} layout="fill" />
       </div>
 
-      <Tabs defaultValue={Tab.MAIN} onValueChange={onTabChange} tabs={tabs} />
+      <Switch selected={selectedTab} items={tabs} onSelect={onTabChange} />
+      {selectedTab === Tab.MAIN ? <MainDetails course={course} /> : <Syllabus course={course} />}
     </div>
   );
 };
