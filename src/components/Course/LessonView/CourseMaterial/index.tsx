@@ -6,6 +6,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from './CourseMaterial.module.scss';
 
+import CompletedTick from '@/components/Course/CompletedTick';
 import { Lesson } from '@/types/auth/Course';
 import { logButtonClick } from '@/utils/eventLogger';
 import { toLocalizedNumber } from '@/utils/locale';
@@ -62,10 +63,11 @@ const CourseMaterial: React.FC<Props> = ({
             })}
           >
             <div>
-              <span className={styles.day}>{`${
-                isCompleted ? '✓' : toLocalizedNumber(dayNumber, lang)
-              }: `}</span>
-              <span>{title}</span>
+              <span className={styles.day}>{`${toLocalizedNumber(dayNumber, lang)}: `}</span>
+              <span>
+                {title}
+                {isCompleted ? <CompletedTick /> : ''}
+              </span>
             </div>
           </div>
         );

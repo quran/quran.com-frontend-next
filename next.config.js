@@ -21,7 +21,6 @@ const config = {
   images: {
     formats: ['image/avif', 'image/webp'],
     domains: [
-      'placehold.co',
       'cdn.qurancdn.com',
       'static.qurancdn.com',
       'vercel.com',

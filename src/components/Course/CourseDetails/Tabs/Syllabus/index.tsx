@@ -5,6 +5,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from './Syllabus.module.scss';
 
+import CompletedTick from '@/components/Course/CompletedTick';
 import Link, { LinkVariant } from '@/dls/Link/Link';
 import { Course } from '@/types/auth/Course';
 import { isLoggedIn } from '@/utils/auth/login';
@@ -55,7 +56,7 @@ const Syllabus: React.FC<Props> = ({ course }) => {
               >
                 {title}
               </Link>
-              {isCompleted ? '✓' : ''}
+              {isCompleted ? <CompletedTick /> : ''}
             </span>
           </p>
         );

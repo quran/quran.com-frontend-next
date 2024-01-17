@@ -4,6 +4,7 @@ import classNames from 'classnames';
 
 import styles from './MultiStepProgressBar.module.scss';
 
+import CompletedTick from '@/components/Course/CompletedTick';
 import { logButtonClick } from '@/utils/eventLogger';
 
 type Props = {
@@ -53,7 +54,7 @@ const MultiStepProgressBar: React.FC<Props> = ({ identifier, steps, defaultActiv
               onClick={onClicked}
               onKeyDown={onClicked}
             >
-              {isCompleted ? '✓' : index + 1}
+              {isCompleted ? <CompletedTick /> : index + 1}
             </span>
           );
         })}

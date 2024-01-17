@@ -1,0 +1,16 @@
+.icon {
+  line-height: normal!important;
+    svg {
+        // tick svg
+        &:first-child {
+          position: absolute;
+          width: 33px;
+          height: 33px;
+          path {
+            color: var(--color-text-default);
+            stroke: var(--color-text-default);
+            // stroke-width: 3;
+          }
+        }
+      }
+}

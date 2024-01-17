@@ -5,6 +5,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from './LessonsList.module.scss';
 
+import CompletedTick from '@/components/Course/CompletedTick';
 import Card, { CardSize } from '@/dls/Card/Card';
 import Link, { LinkVariant } from '@/dls/Link/Link';
 import SearchIcon from '@/icons/search.svg';
@@ -62,7 +63,12 @@ const CoursesList: React.FC<Props> = ({ courses, isMyCourses }) => {
                 shouldShowFullTitle
                 imgSrc={course.image}
                 key={course.id}
-                title={`${course.title} ${course.isCompleted ? '✓' : ''}`}
+                title={
+                  <>
+                    {course.title}
+                    {course.isCompleted ? <CompletedTick /> : ''}
+                  </>
+                }
                 imgAlt={course.title}
                 size={CardSize.Medium}
                 actionIcon={<SearchIcon />}

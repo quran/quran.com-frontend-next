@@ -16,8 +16,8 @@ const useMutateMultipleKeys = (): ((url: string, callback: MutatorCallback) => v
     (regexExpression: string, callback: MutatorCallback, options?: MutatorOptions) => {
       // @ts-ignore
       const cacheKeys = Array.from(cache.keys());
+      const pattern = new RegExp(regexExpression);
       cacheKeys.forEach((key: string) => {
-        const pattern = new RegExp(regexExpression);
         const keyMatches = pattern.test(key);
         if (keyMatches) {
           mutate(key, callback, options);
