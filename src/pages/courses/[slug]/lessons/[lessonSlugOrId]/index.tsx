@@ -46,7 +46,7 @@ const LessonPage: NextPage<Props> = () => {
     logButtonClick('unenrolled_course_link', { courseSlugOrId: slug, lessonSlugOrId });
   };
 
-  const errorRenderer = (error: any) => {
+  const renderError = (error: any) => {
     if (error?.message === ApiErrorMessage.CourseNotEnrolled) {
       return (
         <div className={styles.container}>
@@ -99,7 +99,7 @@ const LessonPage: NextPage<Props> = () => {
         loading={Loading}
         queryKey={makeGetLessonUrl(slug as string, lessonSlugOrId as string)}
         fetcher={privateFetcher}
-        errorRenderer={errorRenderer}
+        renderError={renderError}
         render={bodyRenderer}
       />
     </div>
