@@ -323,7 +323,7 @@ export const getBookmarksByCollectionId = async (
   return privateFetcher(makeGetBookmarkByCollectionId(collectionId, queryParams));
 };
 
-export const postEnrollUser = async (courseId: string): Promise<{ success: boolean }> =>
+export const enrollUser = async (courseId: string): Promise<{ success: boolean }> =>
   postRequest(makeEnrollUserUrl(), {
     courseId,
   });

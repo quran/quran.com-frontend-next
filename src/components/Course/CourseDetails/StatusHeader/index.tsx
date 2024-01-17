@@ -9,7 +9,7 @@ import Button from '@/dls/Button/Button';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import useMutateWithoutRevalidation from '@/hooks/useMutateWithoutRevalidation';
 import { Course } from '@/types/auth/Course';
-import { postEnrollUser } from '@/utils/auth/api';
+import { enrollUser } from '@/utils/auth/api';
 import { makeGetCourseUrl } from '@/utils/auth/apiPaths';
 import { isLoggedIn } from '@/utils/auth/login';
 import { logButtonClick } from '@/utils/eventLogger';
@@ -31,7 +31,7 @@ const StatusHeader: React.FC<Props> = ({ course }) => {
     if (isLoggedIn()) {
       logButtonClick('user_enroll_course', { courseId: id });
       setIsLoading(true);
-      postEnrollUser(course.id)
+      enrollUser(course.id)
         .then(() => {
           toast(
             t('enroll-success', {
