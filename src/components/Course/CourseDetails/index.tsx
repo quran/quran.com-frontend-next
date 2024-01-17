@@ -55,6 +55,14 @@ const CourseDetails: React.FC<Props> = ({ course }) => {
     [t],
   );
 
+  const tabComponents = useMemo(
+    () => ({
+      [Tab.MAIN]: <MainDetails course={course} />,
+      [Tab.SYLLABUS]: <Syllabus course={course} />,
+    }),
+    [course],
+  );
+
   return (
     <div>
       <Button
@@ -78,7 +86,7 @@ const CourseDetails: React.FC<Props> = ({ course }) => {
       </div>
 
       <Switch selected={selectedTab} items={tabs} onSelect={onTabChange} />
-      {selectedTab === Tab.MAIN ? <MainDetails course={course} /> : <Syllabus course={course} />}
+      {tabComponents[selectedTab]}
     </div>
   );
 };
