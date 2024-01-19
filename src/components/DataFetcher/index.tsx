@@ -10,7 +10,7 @@ import { BaseResponse } from 'types/ApiResponses';
 interface Props {
   queryKey: string;
   render: (data: BaseResponse) => JSX.Element;
-  renderError?: (error: any) => JSX.Element | false;
+  renderError?: (error: any) => JSX.Element | undefined;
   initialData?: BaseResponse;
   loading?: () => JSX.Element;
   fetcher?: (queryKey: string) => Promise<BaseResponse>;
@@ -64,7 +64,7 @@ const DataFetcher: React.FC<Props> = ({
     if (renderError) {
       const errorComponent = renderError(error);
       // if the custom error renderer returns false, it means that it doesn't want to render anything special.
-      if (errorComponent !== false) {
+      if (typeof errorComponent !== 'undefined') {
         return errorComponent;
       }
     }

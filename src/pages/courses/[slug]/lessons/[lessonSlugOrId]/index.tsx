@@ -68,7 +68,7 @@ const LessonPage: NextPage<Props> = () => {
         </div>
       );
     }
-    return false;
+    return undefined;
   };
 
   const bodyRenderer = ((lesson: Lesson) => {
