@@ -8,7 +8,6 @@ import styles from './LessonsList.module.scss';
 import CompletedTick from '@/components/Course/CompletedTick';
 import Card, { CardSize } from '@/dls/Card/Card';
 import Link, { LinkVariant } from '@/dls/Link/Link';
-import SearchIcon from '@/icons/search.svg';
 import { Course } from '@/types/auth/Course';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getCoursesNavigationUrl, getCourseNavigationUrl } from '@/utils/navigation';
