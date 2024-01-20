@@ -23,19 +23,17 @@
 }
 
 .imgContainer {
+    height: calc(var(--spacing-mega) * 10);
     @include breakpoints.smallerThanTablet {
         width: 100%;
-        height: calc(var(--spacing-mega) * 7);
     }
 
     @include breakpoints.tablet {
         width: 70%;
-        height: calc(var(--spacing-mega) * 10);
     }
 
     @include breakpoints.desktop {
         width: 40%;
-        height: calc(var(--spacing-mega) * 10);
     }
 
     position: relative;
