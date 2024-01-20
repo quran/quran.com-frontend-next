@@ -1,12 +1,13 @@
 {
     "about": "Chi siamo",
+    "allow": "Permettere",
     "and": "e",
     "announcements": {
         "auth-onboarding": {
             "data-sync": {
                 "action": "Prossimo",
                 "description": "Sia che tu stia utilizzando Quran.com sul tuo telefono o sul tuo laptop, i tuoi segnalibri, gli ultimi versetti letti e le tue preferenze saranno disponibili",
-                "title": "I tuoi dati verranno sincronizzati <br> <\/br> su tutti i dispositivi"
+                "title": "I tuoi dati verranno sincronizzati <br><\/br> su tutti i dispositivi"
             },
             "feedback": {
                 "action": "Ok, capito",
@@ -25,7 +26,7 @@
             },
             "welcome": {
                 "action": "Guarda cosa c'è di nuovo",
-                "title": "Benvenuto su Quran.com <br> <\/br> Account utente"
+                "title": "Benvenuto su Quran.com <br><\/br> Account utente"
             }
         },
         "collections-announcement": {
@@ -113,6 +114,12 @@
         "title": "Comunità"
     },
     "complete-sign-up": "Completa la tua registrazione",
+    "consents": {
+        "communication": {
+            "body": "🚀 Potenzia i tuoi progressi tramite notifiche <boldSpan> personalizzate <\/boldSpan> sui progressi del tuo obiettivo, sul mantenimento dei successi e sul miglioramento dell'utilizzo delle nostre funzionalità attuali. <br><\/br> <br><\/br> Possiamo tenerti aggiornato tramite e-mail e altri canali? Hai il controllo: sentiti libero di modificare queste preferenze in qualsiasi momento nelle impostazioni del tuo account. <br><\/br> <br><\/br> Seleziona semplicemente \"Consenti\" per <boldSpan> promemoria stimolanti <\/boldSpan> o \"Non ora\" per rifiutarli.",
+            "header": "Ci piacerebbe aiutarti a rimanere <boldSpan> impegnato e coerente <\/boldSpan> nel tuo percorso di crescita nel Corano! 📖🌟"
+        }
+    },
     "continue": "Continua",
     "copied": "copiato",
     "copied-to-clipboard": "Copiato negli appunti",
@@ -160,6 +167,7 @@
     },
     "footer": {
         "description": "Quran.com è un Sadaqah Jariyah. Speriamo di rendere facile per tutti la lettura, lo studio e l'apprendimento del Nobile Corano. Il Nobile Corano ha molti nomi tra cui Al-Quran Al-Kareem, Al-Ketab, Al-Furqan, Al-Maw'itha, Al-Thikr e Al-Noor.",
+        "hiring": "Stiamo assumendo! Unisciti al team della QuranFoundation e contribuisci alla nostra missione. <link> Candidati ora! <\/link>",
         "rights": "Tutti i diritti riservati",
         "title": "Leggi, studia e impara Il Nobile Corano."
     },
@@ -207,7 +215,14 @@
     "next": "Prossimo",
     "next-ayah": "Avanti Sì",
     "no": "No",
+    "no-notifications": "Nessuna notifica ancora",
     "none": "Nessuno",
+    "not-now": "Non adesso",
+    "notification": {
+        "mark-all-as-read": "Segna tutti come letti",
+        "mark-as-read": "segna come letto"
+    },
+    "notifications": "Notifiche",
     "off": "Spento",
     "on": "Sopra",
     "page": "Pagina",

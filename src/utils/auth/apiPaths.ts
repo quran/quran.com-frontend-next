@@ -16,6 +16,10 @@ const makeUrl = (url: string, parameters?: Record<string, unknown>): string => {
 
 export const makeUserProfileUrl = (): string => makeUrl('users/profile');
 
+export const makeUserFeatureFlagsUrl = (): string => makeUrl('feature-flags');
+
+export const makeUserConsentsUrl = (): string => makeUrl('consent/userConsents');
+
 export const makeCompleteSignupUrl = (): string => makeUrl('users/completeSignup');
 
 export const makeCompleteAnnouncementUrl = (): string => makeUrl('users/completeAnnouncement');
@@ -26,7 +30,8 @@ export const makeSyncLocalDataUrl = (): string => makeUrl('users/syncLocalData')
 
 export const makeVerificationCodeUrl = (): string => makeUrl('users/verificationCode');
 
-export const makeSendMagicLinkUrl = (): string => makeUrl('auth/magiclogin');
+export const makeSendMagicLinkUrl = (redirect?: string): string =>
+  makeUrl('auth/magiclogin', redirect ? { redirect } : undefined);
 
 export const makeGoogleLoginUrl = (): string => makeUrl('auth/google');
 

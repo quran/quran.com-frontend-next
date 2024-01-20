@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/control-has-associated-label */
 import { useMemo, useState } from 'react';
 
 import { Translate } from 'next-translate';

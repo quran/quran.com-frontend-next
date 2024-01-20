@@ -1,12 +1,13 @@
 {
     "about": "Hakkımızda",
+    "allow": "İzin vermek",
     "and": "ve",
     "announcements": {
         "auth-onboarding": {
             "data-sync": {
                 "action": "Sonraki",
                 "description": "Kuran.com'u telefonunuzda veya dizüstü bilgisayarınızda kullanıyor olsanız da, yer imleriniz, son okunan ayetler ve tercihleriniz mevcut olacak.",
-                "title": "Verileriniz cihazlar arasında <br> <\/br> senkronize edilecek"
+                "title": "Verileriniz cihazlar arasında <br><\/br> senkronize edilecek"
             },
             "feedback": {
                 "action": "Tamam, anladım.",
@@ -25,7 +26,7 @@
             },
             "welcome": {
                 "action": "Yeniliklere bakın",
-                "title": "Kuran.com'a Hoş Geldiniz <br> <\/br> Kullanıcı Hesabı"
+                "title": "Kuran.com'a Hoş Geldiniz <br><\/br> Kullanıcı Hesabı"
             }
         },
         "collections-announcement": {
@@ -113,6 +114,12 @@
         "title": "Toplum"
     },
     "complete-sign-up": "Kaydınızı tamamlayın",
+    "consents": {
+        "communication": {
+            "body": "🚀 Hedef ilerlemeniz, serilerinizi sürdürmeniz ve mevcut özelliklerimizi daha iyi kullanmanızı sağlayan <boldSpan> kişiselleştirilmiş <\/boldSpan> bildirimleri aracılığıyla ilerlemenizi güçlendirin. <br><\/br> <br><\/br> Sizi e-posta ve diğer kanallar aracılığıyla gelişmelerden haberdar edebilir miyiz? Kontrol sizde; bu tercihleri istediğiniz zaman hesap ayarlarınızdan değiştirmekten çekinmeyin. <br><\/br> <br><\/br> <boldSpan> ilham veren hatırlatıcılar <\/boldSpan> için 'İzin Ver'i veya reddetmek için 'Şimdi Değil'i seçmeniz yeterli.",
+            "header": "Kuran Büyüme Yolculuğunuzda <boldSpan> kararlı ve tutarlı <\/boldSpan> kalmanıza yardımcı olmayı çok isteriz! 📖🌟"
+        }
+    },
     "continue": "Devam et",
     "copied": "kopyalandı",
     "copied-to-clipboard": "Panoya kopyalandı",
@@ -160,6 +167,7 @@
     },
     "footer": {
         "description": "Kuran.com bir sadaka-i cariyedir. Herkesin Kur'an-ı Kerim'i okumasını, incelemesini ve öğrenmesini kolaylaştırmayı umuyoruz. Kur'an-ı Kerim'in Al-Quran Al-Kareem, Al-Ketab, Al-Furqan, Al-Maw'itha, Al-Thikr ve Al-Noor gibi birçok ismi vardır.",
+        "hiring": "İşe alıyoruz! Kuran Vakfı ekibine katılın ve misyonumuza katkıda bulunun. <link> Şimdi başvurun! <\/link>",
         "rights": "Her hakkı saklıdır",
         "title": "Kur'an-ı Kerim'i okuyun, inceleyin ve öğrenin."
     },
@@ -207,7 +215,14 @@
     "next": "Sonraki",
     "next-ayah": "Sonraki Ayah",
     "no": "Numara",
+    "no-notifications": "Henüz bildirim yok",
     "none": "Hiçbiri",
+    "not-now": "Şimdi değil",
+    "notification": {
+        "mark-all-as-read": "Tümünü okundu olarak işaretle",
+        "mark-as-read": "Okundu olarak işaretle"
+    },
+    "notifications": "Bildirimler",
     "off": "Kapalı",
     "on": "Açık",
     "page": "Sayfa",

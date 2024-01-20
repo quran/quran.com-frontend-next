@@ -1,3 +1,5 @@
+import NotificationsState from '../types/NotificationsState';
+
 import AudioState from '@/redux/types/AudioState';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
 import ReadingPreferences from '@/redux/types/ReadingPreferences';
@@ -24,6 +26,7 @@ export interface DefaultSettings {
   [SliceName.TAFSIRS]: TafsirsSettings;
   [SliceName.AUDIO_PLAYER_STATE]: AudioState;
   [SliceName.DEFAULT_SETTINGS]: { isUsingDefaultSettings: boolean };
+  [SliceName.NOTIFICATIONS]: NotificationsState;
 }
 
 // Tafsir Ibn Kathir in English
@@ -85,6 +88,14 @@ export const DEFAULT_XSTATE_INITIAL_STATE = {
   reciterId: DEFAULT_RECITER.id,
 };
 
+const NOTIFICATIONS_INITIAL_STATE: NotificationsState = {
+  notifications: [],
+  paginatedNotifications: {},
+  isFetchingNotifications: false,
+  isLoadingNotifications: false,
+  unseenCount: 0,
+};
+
 export default {
   [SliceName.THEME]: THEME_INITIAL_STATE,
   [SliceName.READING_PREFERENCES]: READING_PREFERENCES_INITIAL_STATE,
@@ -92,4 +103,5 @@ export default {
   [SliceName.TRANSLATIONS]: TRANSLATIONS_INITIAL_STATE,
   [SliceName.TAFSIRS]: TAFSIRS_INITIAL_STATE,
   [SliceName.AUDIO_PLAYER_STATE]: AUDIO_INITIAL_STATE,
+  [SliceName.NOTIFICATIONS]: NOTIFICATIONS_INITIAL_STATE,
 } as DefaultSettings;

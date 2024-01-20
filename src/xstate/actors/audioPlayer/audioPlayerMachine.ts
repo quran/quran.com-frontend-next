@@ -638,7 +638,7 @@ export const audioPlayerMachine =
                               verseTimings: context.audioData.verseTimings,
                               delayMultiplier: event.data.delayMultiplier,
                             }),
-                          );
+                          ) as any;
                         },
                       }),
                     ],

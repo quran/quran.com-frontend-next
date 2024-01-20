@@ -1,5 +1,6 @@
 {
     "about": "About Us",
+    "allow": "Allow",
     "and": "and",
     "announcements": {
         "auth-onboarding": {
@@ -113,6 +114,12 @@
         "title": "Community"
     },
     "complete-sign-up": "Complete your registration",
+    "consents": {
+        "communication": {
+            "body": "🚀 Supercharge your progress through <boldSpan>personalized<\/boldSpan> notifications about your goal progress, maintaining streaks, and enhancing your usage of our current features.<br><\/br><br><\/br> Can we keep you in the loop through email and other channels? You're in control – feel free to adjust these preferences anytime in your account settings.<br><\/br><br><\/br> Simply select 'Allow' for <boldSpan>inspiring reminders<\/boldSpan> or 'Not Now' to decline.",
+            "header": "We'd love to help you stay <boldSpan>committed and consistent<\/boldSpan> with your Quran Growth Journey! 📖🌟"
+        }
+    },
     "continue": "Continue",
     "copied": "Copied",
     "copied-to-clipboard": "Copied to clipboard",
@@ -160,6 +167,7 @@
     },
     "footer": {
         "description": "Quran.com is a Sadaqah Jariyah. We hope to make it easy for everyone to read, study, and learn The Noble Quran. The Noble Quran has many names including Al-Quran Al-Kareem, Al-Ketab, Al-Furqan, Al-Maw'itha, Al-Thikr, and Al-Noor.",
+        "hiring": "We're hiring! Join the QuranFoundation team and contribute to our mission. <link>Apply now!<\/link>",
         "rights": "All Rights Reserved",
         "title": "Read, study, and learn The Noble Quran."
     },
@@ -207,7 +215,14 @@
     "next": "Next",
     "next-ayah": "Next Ayah",
     "no": "No",
+    "no-notifications": "No notifications yet",
     "none": "None",
+    "not-now": "Not Now",
+    "notification": {
+        "mark-all-as-read": "Mark all as read",
+        "mark-as-read": "Mark as read"
+    },
+    "notifications": "Notifications",
     "off": "Off",
     "on": "On",
     "page": "Page",

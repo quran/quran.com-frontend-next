@@ -64,6 +64,7 @@ const AyahTafsir: NextPage<AyahTafsirProp> = ({ hasError, chapter, fallback }) =
           surahName: chapter.chapter.transliteratedName,
         })}
       />
+      {/* @ts-ignore */}
       <SWRConfig value={{ fallback }}>
         <div className={styles.tafsirContainer}>
           <TafsirBody

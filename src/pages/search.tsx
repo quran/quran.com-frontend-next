@@ -4,7 +4,6 @@ import React, { useState, useEffect, useMemo, useCallback, useRef, RefObject } f
 import { GetStaticProps, NextPage } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
-import { useSelector } from 'react-redux';
 
 import styles from './search.module.scss';
 
@@ -20,11 +19,8 @@ import useDebounce from '@/hooks/useDebounce';
 import useFocus from '@/hooks/useFocusElement';
 import FilterIcon from '@/icons/filter.svg';
 import SearchIcon from '@/icons/search.svg';
-import { getTranslationsInitialState } from '@/redux/defaultSettings/util';
-import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
 import { SearchMode } from '@/types/Search/SearchRequestParams';
 import SearchQuerySource from '@/types/SearchQuerySource';
-import { areArraysEqual } from '@/utils/array';
 import { getAllChaptersData } from '@/utils/chapter';
 import {
   logButtonClick,
@@ -36,6 +32,7 @@ import {
 import filterTranslations from '@/utils/filter-translations';
 import { getLanguageAlternates, toLocalizedNumber } from '@/utils/locale';
 import { getCanonicalUrl } from '@/utils/navigation';
+import { getDefaultTranslationIdsByLang } from '@/utils/search';
 import AvailableLanguage from 'types/AvailableLanguage';
 import AvailableTranslation from 'types/AvailableTranslation';
 import ChaptersData from 'types/ChaptersData';
@@ -53,14 +50,13 @@ type SearchProps = {
 const Search: NextPage<SearchProps> = ({ translations }): JSX.Element => {
   const { t, lang } = useTranslation('common');
   const router = useRouter();
-  const userTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [focusInput, searchInputRef]: [() => void, RefObject<HTMLInputElement>] = useFocus();
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [selectedLanguages, setSelectedLanguages] = useState<string>('');
-  const [selectedTranslations, setSelectedTranslations] = useState<string>(() =>
-    userTranslations.join(','),
-  );
+  const [selectedTranslations, setSelectedTranslations] = useState<string>(() => {
+    return getDefaultTranslationIdsByLang(translations, lang) as string;
+  });
   const [translationSearchQuery, setTranslationSearchQuery] = useState('');
   const [isContentModalOpen, setIsContentModalOpen] = useState<boolean>(false);
   const [isSearching, setIsSearching] = useState(false);
@@ -90,6 +86,11 @@ const Search: NextPage<SearchProps> = ({ translations }): JSX.Element => {
       focusInput();
     }
   }, [focusInput, router, isContentModalOpen]);
+
+  // handle when language changes
+  useEffect(() => {
+    setSelectedTranslations(getDefaultTranslationIdsByLang(translations, lang) as string);
+  }, [lang, translations]);
 
   useEffect(() => {
     if (router.query.q || router.query.query) {
@@ -260,8 +261,12 @@ const Search: NextPage<SearchProps> = ({ translations }): JSX.Element => {
 
   const onResetButtonClicked = () => {
     logButtonClick('search_page_reset_button');
-    const defaultTranslations = getTranslationsInitialState(lang).selectedTranslations;
-    onTranslationChange(defaultTranslations.map((translation) => translation.toString()));
+    const defaultLangTranslationIds = getDefaultTranslationIdsByLang(
+      translations,
+      lang,
+      false,
+    ) as string[];
+    onTranslationChange(defaultLangTranslationIds);
   };
 
   const onTranslationSearchQueryChange = (newTranslationSearchQuery: string) => {
@@ -326,7 +331,7 @@ const Search: NextPage<SearchProps> = ({ translations }): JSX.Element => {
                       onClearClicked={onTranslationSearchClearClicked}
                       clearable
                       value={translationSearchQuery}
-                      placeholder={t('search.title')}
+                      placeholder={t('settings.search-translations')}
                       fixedWidth={false}
                       variant={InputVariant.Main}
                     />
@@ -359,7 +364,11 @@ const Search: NextPage<SearchProps> = ({ translations }): JSX.Element => {
               >
                 {t('search:filter')}
               </Button>
-              <div>{formattedSelectedTranslations}</div>
+              <div>
+                {/* eslint-disable-next-line i18next/no-literal-string */}
+                <span className={styles.searching}>{t('search:searching-translations')}: </span>
+                {formattedSelectedTranslations}
+              </div>
             </div>
           </div>
         </div>
