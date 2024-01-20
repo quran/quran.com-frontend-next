@@ -1,26 +1,31 @@
 @use "src/styles/breakpoints";
 
 .container {
-    @include breakpoints.tablet {
-        display: grid;
-        grid-template-columns: repeat(3, 1fr);
-        gap: var(--spacing-small);
-    }
-    @include breakpoints.desktop {
-        grid-template-columns: repeat(4, 1fr);
-    }
+  @include breakpoints.tablet {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    gap: var(--spacing-small);
+  }
+  @include breakpoints.desktop {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 .cardContainer {
-    @include breakpoints.tablet {
-        max-width: var(--spacing-mega) !important;
-    }
-    @include breakpoints.smallerThanTablet {
-        max-width: calc(10 * var(--spacing-mega));
-    }
+  @include breakpoints.tablet {
+    max-inline-size: var(--spacing-mega) !important;
+  }
+  @include breakpoints.smallerThanTablet {
+    max-inline-size: calc(10 * var(--spacing-mega));
+  }
+  // image container
+  & > div:first-child {
+    min-block-size: unset !important;
+    block-size: calc(18 * var(--spacing-medium));
+  }
 }
 
 .allCourses {
-    margin-block-start: var(--spacing-mega);
-    text-align: center;
+  margin-block-start: var(--spacing-mega);
+  text-align: center;
 }

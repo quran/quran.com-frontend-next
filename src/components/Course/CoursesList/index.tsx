@@ -70,8 +70,7 @@ const CoursesList: React.FC<Props> = ({ courses, isMyCourses }) => {
                   </>
                 }
                 imgAlt={course.title}
-                size={CardSize.Medium}
-                actionIcon={<SearchIcon />}
+                size={CardSize.Large}
                 className={styles.cardContainer}
               />
             </Link>

@@ -2,9 +2,8 @@ import { ReactNode } from 'react';
 
 import classNames from 'classnames';
 import Image from 'next/image';
-import useTranslation from 'next-translate/useTranslation';
 
-import Button, { ButtonVariant } from '../Button/Button';
+import Button, { ButtonVariant } from '@/dls/Button/Button';
 
 import styles from './Card.module.scss';
 
@@ -25,6 +24,8 @@ type CardProps = {
   shouldFlipIconOnRTL?: boolean;
   onActionIconClick?: () => void;
   shouldShowFullTitle?: boolean;
+  ariaLabel?: string;
+  tooltip?: string;
 };
 
 const Card = ({
@@ -39,8 +40,9 @@ const Card = ({
   onActionIconClick,
   className,
   shouldShowFullTitle = false,
+  ariaLabel,
+  tooltip
 }: CardProps) => {
-  const { t } = useTranslation('common');
   return (
     <div
       className={classNames(className, styles.container, {
@@ -74,7 +76,7 @@ const Card = ({
           </div>
           <div className={styles.description}>{description}</div>
         </div>
-        {size === CardSize.Large && (
+        {(size === CardSize.Large && actionIcon) && (
           <Button
             onClick={() => {
               if (onActionIconClick) onActionIconClick();
@@ -82,8 +84,8 @@ const Card = ({
             className={styles.playIconContainer}
             variant={ButtonVariant.Ghost}
             shouldFlipOnRTL={shouldFlipIconOnRTL}
-            tooltip={t('audio.play')}
-            ariaLabel={t('audio.play')}
+            tooltip={tooltip}
+            ariaLabel={ariaLabel}
           >
             {actionIcon}
           </Button>
