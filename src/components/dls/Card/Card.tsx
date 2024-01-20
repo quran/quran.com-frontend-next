@@ -3,9 +3,9 @@ import { ReactNode } from 'react';
 import classNames from 'classnames';
 import Image from 'next/image';
 
-import Button, { ButtonVariant } from '@/dls/Button/Button';
-
 import styles from './Card.module.scss';
+
+import Button, { ButtonVariant } from '@/dls/Button/Button';
 
 export enum CardSize {
   Medium = 'medium',
@@ -41,7 +41,7 @@ const Card = ({
   className,
   shouldShowFullTitle = false,
   ariaLabel,
-  tooltip
+  tooltip,
 }: CardProps) => {
   return (
     <div
@@ -76,7 +76,7 @@ const Card = ({
           </div>
           <div className={styles.description}>{description}</div>
         </div>
-        {(size === CardSize.Large && actionIcon) && (
+        {size === CardSize.Large && actionIcon && (
           <Button
             onClick={() => {
               if (onActionIconClick) onActionIconClick();
