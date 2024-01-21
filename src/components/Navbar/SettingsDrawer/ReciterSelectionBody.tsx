@@ -2,8 +2,8 @@ import { useContext, useState } from 'react';
 
 import { useSelector } from '@xstate/react';
 import Fuse from 'fuse.js';
-import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
+import { useRouter } from 'next/router';
 
 import styles from './ReciterSelectionBody.module.scss';
 
