@@ -7,6 +7,7 @@ import { useState, useCallback, useRef } from 'react';
 import { AudioWorklet } from 'audio-worklet';
 
 import useBrowserLayoutEffect from '@/hooks/useBrowserLayoutEffect';
+import SearchService from '@/types/Search/SearchService';
 import SearchQuerySource from '@/types/SearchQuerySource';
 import SearchType from '@/types/SearchType';
 import { logEmptySearchResults, logEvent } from '@/utils/eventLogger';
@@ -148,7 +149,12 @@ const useTarteelVoiceSearch = () => {
           setIsLoading(false);
           setSearchResult(data as SearchResult);
           if (!(data as SearchResult).matches?.length) {
-            logEmptySearchResults(data.queryText, SearchQuerySource.Tarteel, SearchType.Voice);
+            logEmptySearchResults({
+              query: data.queryText,
+              source: SearchQuerySource.Tarteel,
+              type: SearchType.Voice,
+              service: SearchService.Tarteel,
+            });
           }
           stopRecording();
           break;

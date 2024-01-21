@@ -10,6 +10,7 @@ import Link from '@/dls/Link/Link';
 import QuranWord from '@/dls/QuranWord/QuranWord';
 import useGetChaptersData from '@/hooks/useGetChaptersData';
 import SearchService from '@/types/Search/SearchService';
+import SearchQuerySource from '@/types/SearchQuerySource';
 import { getChapterData } from '@/utils/chapter';
 import { logButtonClick } from '@/utils/eventLogger';
 import { toLocalizedVerseKey } from '@/utils/locale';
@@ -17,15 +18,9 @@ import { getChapterWithStartingVerseUrl } from '@/utils/navigation';
 import { getChapterNumberFromKey } from '@/utils/verse';
 import Verse from 'types/Verse';
 
-export enum Source {
-  SearchDrawer = 'search_drawer',
-  SearchPage = 'search_page',
-  Tarteel = 'tarteel',
-}
-
 interface Props {
   result: Verse;
-  source: Source;
+  source: SearchQuerySource;
   service?: SearchService;
 }
 
@@ -44,10 +39,10 @@ const SearchResultItem: React.FC<Props> = ({ result, source, service = SearchSer
   const chapterData = getChapterData(chaptersData, chapterNumber.toString());
 
   const onResultItemClicked = () => {
-    logButtonClick(`${source}_result_item`, {
+    logButtonClick(`search_result_item`, {
       service,
+      source,
     });
-    logButtonClick(`${service}_result_item`);
   };
 
   return (

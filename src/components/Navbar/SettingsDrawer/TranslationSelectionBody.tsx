@@ -3,8 +3,8 @@ import { useCallback, useState } from 'react';
 import { Action } from '@reduxjs/toolkit';
 import groupBy from 'lodash/groupBy';
 import omit from 'lodash/omit';
-import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
+import useTranslation from 'next-translate/useTranslation';
 import { useSelector } from 'react-redux';
 
 import styles from './SearchSelectionBody.module.scss';
@@ -144,7 +144,10 @@ const TranslationSelectionBody = () => {
             : data.translations;
 
           if (!filteredTranslations.length) {
-            logEmptySearchResults(searchQuery, SearchQuerySource.TranslationSettingsDrawer);
+            logEmptySearchResults({
+              query: searchQuery,
+              source: SearchQuerySource.TranslationSettingsDrawer,
+            });
           }
 
           const translationByLanguages = groupBy(filteredTranslations, 'languageName');

@@ -3,8 +3,8 @@
 import React, { useState, useEffect, useMemo, useCallback, useRef, RefObject } from 'react';
 
 import { GetStaticProps, NextPage } from 'next';
-import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
+import useTranslation from 'next-translate/useTranslation';
 
 import styles from './search.module.scss';
 
@@ -33,6 +33,7 @@ import {
   logButtonClick,
   logEmptySearchResults,
   logEvent,
+  logSearchResults,
   logTextSearchQuery,
   logValueChange,
 } from '@/utils/eventLogger';
@@ -164,14 +165,16 @@ const Search: NextPage<SearchProps> = ({ translations }): JSX.Element => {
             setHasError(true);
           } else {
             setSearchResult({ ...response, service: SearchService.QDC });
-            const qdcNoResults =
+            const noQdcResults =
               response.pagination.totalRecords === 0 && !response.result.navigation.length;
             // if there is no navigations nor verses in the response
-            if (qdcNoResults) {
-              logEvent(`${SearchService.QDC}_no_results_${SearchQuerySource.SearchPage}`, {
+            if (noQdcResults) {
+              logEmptySearchResults({
                 query,
+                source: SearchQuerySource.SearchPage,
+                service: SearchService.QDC,
               });
-              const kalimatResponse = await getNewSearchResults({
+              getNewSearchResults({
                 mode: SearchMode.Advanced,
                 query,
                 size: PAGE_SIZE,
@@ -183,16 +186,26 @@ const Search: NextPage<SearchProps> = ({ translations }): JSX.Element => {
                   filterTranslations: translation,
                   translationFields: 'resource_name',
                 }),
-              });
-              setSearchResult({ ...kalimatResponse, service: SearchService.KALIMAT });
-              if (kalimatResponse.pagination.totalRecords === 0) {
-                logEvent(`${SearchService.KALIMAT}_no_results_${SearchQuerySource.SearchPage}`, {
-                  query,
+              })
+                .then((kalimatResponse) => {
+                  setSearchResult({ ...kalimatResponse, service: SearchService.KALIMAT });
+                  if (kalimatResponse.pagination.totalRecords === 0) {
+                    logEmptySearchResults({
+                      query,
+                      source: SearchQuerySource.SearchPage,
+                      service: SearchService.KALIMAT,
+                    });
+                  } else {
+                    logSearchResults({
+                      query,
+                      source: SearchQuerySource.SearchPage,
+                      service: SearchService.KALIMAT,
+                    });
+                  }
+                })
+                .catch(() => {
+                  setHasError(true);
                 });
-                logEmptySearchResults(query, SearchQuerySource.SearchPage);
-              } else {
-                logEvent(`kalimat_results_${SearchQuerySource.SearchPage}`, { query });
-              }
             }
           }
         })

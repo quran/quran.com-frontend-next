@@ -2,12 +2,13 @@ import React from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
-import SearchResultItem, { Source } from './SearchResultItem';
+import SearchResultItem from './SearchResultItem';
 import styles from './SearchResults.module.scss';
 
 import NavigationItem from '@/components/Search/NavigationItem';
 import Link from '@/dls/Link/Link';
 import Pagination from '@/dls/Pagination/Pagination';
+import SearchQuerySource from '@/types/SearchQuerySource';
 import { logButtonClick } from '@/utils/eventLogger';
 import { toLocalizedNumber } from '@/utils/locale';
 import { SearchResponse } from 'types/ApiResponses';
@@ -58,7 +59,9 @@ const SearchResults: React.FC<Props> = ({
             <SearchResultItem
               key={result.verseKey}
               result={result}
-              source={isSearchDrawer ? Source.SearchDrawer : Source.SearchPage}
+              source={
+                isSearchDrawer ? SearchQuerySource.SearchDrawer : SearchQuerySource.SearchPage
+              }
               service={searchResult.service}
             />
           ))}
