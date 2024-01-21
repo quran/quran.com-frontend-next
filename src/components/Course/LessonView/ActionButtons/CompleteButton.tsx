@@ -4,7 +4,6 @@ import useTranslation from 'next-translate/useTranslation';
 
 import Button, { ButtonSize } from '@/dls/Button/Button';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
-import TickIcon from '@/icons/tick.svg';
 import { logButtonClick } from '@/utils/eventLogger';
 
 type Props = {
@@ -31,7 +30,6 @@ const CompleteButton: React.FC<Props> = ({ isLoading, id, markLessonAsCompleted 
     <Button
       isLoading={isLoading}
       isDisabled={isLoading}
-      prefix={<TickIcon />}
       size={ButtonSize.Small}
       onClick={onMarkAsCompletedClicked}
     >

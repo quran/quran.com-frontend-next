@@ -121,7 +121,7 @@ const ActionButtons: React.FC<Props> = ({ lesson, courseSlug }) => {
           onClick={onAddReflectionClick}
           href="https://quranreflect.com"
           isNewTab
-          type={ButtonType.Secondary}
+          type={ButtonType.Success}
         >
           {t('add-reflection')}
         </Button>

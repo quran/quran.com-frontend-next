@@ -21,7 +21,7 @@
   "not-enrolled": "You are not enrolled in the <link>course</link> yet.",
   "prev-lesson": "Previous Lesson",
   "next-lesson": "Next Lesson",
-  "mark-complete": "Completed",
+  "mark-complete": "Mark as completed",
   "mark-complete-success": "Lesson has been marked as complete successfully!",
   "empty-courses": "You are not enrolled in any <link>courses</link> yet.",
   "add-reflection": "Add Reflection"

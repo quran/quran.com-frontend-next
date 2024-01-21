@@ -3,11 +3,11 @@
 .container {
   @include breakpoints.tablet {
     display: grid;
-    grid-template-columns: repeat(1, 1fr);
+    grid-template-columns: repeat(2, 1fr);
     gap: var(--spacing-small);
   }
   @include breakpoints.desktop {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(3, 1fr);
   }
 }
 
