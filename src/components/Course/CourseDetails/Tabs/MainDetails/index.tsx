@@ -15,12 +15,12 @@ type Props = {
 
 const MainDetails: React.FC<Props> = ({ course }) => {
   const { t } = useTranslation('learn');
-  const { description, tags, dailyMinutes, lessons = [] } = course;
+  const { description, dailyMinutes, lessons = [] } = course;
 
-  const tagsString = tags?.reduce((acc, currentValue) => {
-    if (!acc) return currentValue;
-    return `${acc}, ${currentValue}`;
-  }, '');
+  // const tagsString = tags?.reduce((acc, currentValue) => {
+  //   if (!acc) return currentValue;
+  //   return `${acc}, ${currentValue}`;
+  // }, '');
 
   return (
     <>
@@ -37,7 +37,7 @@ const MainDetails: React.FC<Props> = ({ course }) => {
           description={<MarkdownEditor isEditable={false} defaultValue={description} />}
         />
       </MilkdownProvider>
-      {tagsString && <DetailSection title={t('category')} description={tagsString} />}
+      {/* {tagsString && <DetailSection title={t('category')} description={tagsString} />} */}
     </>
   );
 };

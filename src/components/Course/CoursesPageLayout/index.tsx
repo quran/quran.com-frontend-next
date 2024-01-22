@@ -4,6 +4,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from './CoursesPageLayout.module.scss';
 
+import ContentContainer from '@/components/Course/ContentContainer';
 import CoursesList from '@/components/Course/CoursesList';
 import DataFetcher from '@/components/DataFetcher';
 import Spinner from '@/dls/Spinner/Spinner';
@@ -22,17 +23,19 @@ const CoursesPageLayout: React.FC<Props> = ({ isMyCourses = false }) => {
   const { t } = useTranslation('learn');
   return (
     <div className={layoutStyles.pageContainer}>
-      <p className={styles.title}>{isMyCourses ? t('common:my-courses') : t('common:courses')}</p>
-      <div className={classNames(layoutStyles.flow, styles.container)}>
-        <DataFetcher
-          loading={Loading}
-          fetcher={privateFetcher}
-          queryKey={makeGetCoursesUrl({ myCourses: isMyCourses })}
-          render={(data: CoursesResponse) => (
-            <CoursesList courses={data.data} isMyCourses={isMyCourses} />
-          )}
-        />
-      </div>
+      <ContentContainer>
+        <p className={styles.title}>{isMyCourses ? t('common:my-courses') : t('common:courses')}</p>
+        <div className={classNames(layoutStyles.flow, styles.container)}>
+          <DataFetcher
+            loading={Loading}
+            fetcher={privateFetcher}
+            queryKey={makeGetCoursesUrl({ myCourses: isMyCourses })}
+            render={(data: CoursesResponse) => (
+              <CoursesList courses={data.data} isMyCourses={isMyCourses} />
+            )}
+          />
+        </div>
+      </ContentContainer>
     </div>
   );
 };

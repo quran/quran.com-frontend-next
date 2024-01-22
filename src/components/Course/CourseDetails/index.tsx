@@ -9,6 +9,7 @@ import MainDetails from './Tabs/MainDetails';
 import Syllabus from './Tabs/Syllabus';
 import TabSwitcherItem from './TabSwitcherItem';
 
+import ContentContainer from '@/components/Course/ContentContainer';
 import Button, { ButtonVariant } from '@/dls/Button/Button';
 import Switch from '@/dls/Switch/Switch';
 import DetailsIcon from '@/icons/collection.svg';
@@ -64,7 +65,7 @@ const CourseDetails: React.FC<Props> = ({ course }) => {
   );
 
   return (
-    <div>
+    <ContentContainer>
       <Button
         onClick={onBackButtonClicked}
         href={getCoursesNavigationUrl()}
@@ -87,7 +88,7 @@ const CourseDetails: React.FC<Props> = ({ course }) => {
 
       <Switch selected={selectedTab} items={tabs} onSelect={onTabChange} />
       {tabComponents[selectedTab]}
-    </div>
+    </ContentContainer>
   );
 };
 

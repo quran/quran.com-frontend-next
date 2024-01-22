@@ -7,6 +7,7 @@ import ActionButtons from './ActionButtons';
 import CourseMaterial from './CourseMaterial';
 import styles from './Lesson.module.scss';
 
+import ContentContainer from '@/components/Course/ContentContainer';
 import MarkdownEditor from '@/components/MarkdownEditor';
 import PageContainer from '@/components/PageContainer';
 import Button, { ButtonVariant } from '@/dls/Button/Button';
@@ -38,61 +39,63 @@ const LessonView: React.FC<Props> = ({ lesson, courseSlug, lessonSlugOrId }) => 
   };
 
   return (
-    <div className={styles.viewContainer}>
-      <ContentModal
-        isOpen={isCourseMaterialModalOpen}
-        onClose={() => {
-          setCourseMaterialModalOpen(false);
-        }}
-        hasCloseButton
-        header={<p className={styles.modalHeading}>{t('course-material')}</p>}
-      >
+    <ContentContainer>
+      <div className={styles.viewContainer}>
+        <ContentModal
+          isOpen={isCourseMaterialModalOpen}
+          onClose={() => {
+            setCourseMaterialModalOpen(false);
+          }}
+          hasCloseButton
+          header={<p className={styles.modalHeading}>{t('course-material')}</p>}
+        >
+          <CourseMaterial
+            isModal
+            courseSlug={courseSlug}
+            currentLessonId={lesson.id}
+            lessons={lesson.course.lessons}
+          />
+        </ContentModal>
         <CourseMaterial
-          isModal
           courseSlug={courseSlug}
           currentLessonId={lesson.id}
           lessons={lesson.course.lessons}
         />
-      </ContentModal>
-      <CourseMaterial
-        courseSlug={courseSlug}
-        currentLessonId={lesson.id}
-        lessons={lesson.course.lessons}
-      />
-      <div className={styles.container}>
-        <PageContainer>
-          <div className={styles.headerButtonsContainer}>
-            <Button
-              onClick={onBackButtonClicked}
-              href={getCourseNavigationUrl(courseSlug)}
-              variant={ButtonVariant.Ghost}
-            >
-              <ArrowLeft />
-              <p className={styles.backText}>{t('back-to-course')}</p>
-            </Button>
-            <Button
-              onClick={onCourseMaterialClicked}
-              variant={ButtonVariant.Ghost}
-              className={styles.courseMaterialButton}
-            >
-              {t('course-material')}
-            </Button>
-          </div>
-          <div className={styles.headerContainer}>
-            <p className={styles.title}>
-              {`${t('day')} ${toLocalizedNumber(day, lang)}`}
-              {`: ${title}`}
-            </p>
-          </div>
-          <div className={styles.contentContainer}>
-            <MilkdownProvider>
-              <MarkdownEditor isEditable={false} defaultValue={content} />
-            </MilkdownProvider>
-          </div>
-          <ActionButtons lesson={lesson} courseSlug={courseSlug} />
-        </PageContainer>
+        <div className={styles.container}>
+          <PageContainer>
+            <div className={styles.headerButtonsContainer}>
+              <Button
+                onClick={onBackButtonClicked}
+                href={getCourseNavigationUrl(courseSlug)}
+                variant={ButtonVariant.Ghost}
+              >
+                <ArrowLeft />
+                <p className={styles.backText}>{t('back-to-course')}</p>
+              </Button>
+              <Button
+                onClick={onCourseMaterialClicked}
+                variant={ButtonVariant.Ghost}
+                className={styles.courseMaterialButton}
+              >
+                {t('course-material')}
+              </Button>
+            </div>
+            <div className={styles.headerContainer}>
+              <p className={styles.title}>
+                {`${t('day')} ${toLocalizedNumber(day, lang)}`}
+                {`: ${title}`}
+              </p>
+            </div>
+            <div className={styles.contentContainer}>
+              <MilkdownProvider>
+                <MarkdownEditor isEditable={false} defaultValue={content} />
+              </MilkdownProvider>
+            </div>
+            <ActionButtons lesson={lesson} courseSlug={courseSlug} />
+          </PageContainer>
+        </div>
       </div>
-    </div>
+    </ContentContainer>
   );
 };
 
