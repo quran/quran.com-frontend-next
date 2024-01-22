@@ -4,8 +4,8 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
-import CompletedTick from '@/components/Course/CompletedTick';
 import Button from '@/dls/Button/Button';
+import Pill from '@/dls/Pill';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import useMutateWithoutRevalidation from '@/hooks/useMutateWithoutRevalidation';
 import { Course } from '@/types/auth/Course';
@@ -63,12 +63,7 @@ const StatusHeader: React.FC<Props> = ({ course }) => {
   };
 
   if (isCompleted) {
-    return (
-      <span>
-        {`${t('completed')}`}
-        <CompletedTick />
-      </span>
-    );
+    return <Pill>{t('completed')}</Pill>;
   }
   if (isUserEnrolled === true) {
     return <>{t('enrolled')}</>;

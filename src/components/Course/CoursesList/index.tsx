@@ -5,9 +5,9 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from './LessonsList.module.scss';
 
-import CompletedTick from '@/components/Course/CompletedTick';
 import Card, { CardSize } from '@/dls/Card/Card';
 import Link, { LinkVariant } from '@/dls/Link/Link';
+import Pill from '@/dls/Pill';
 import { Course } from '@/types/auth/Course';
 import { logButtonClick } from '@/utils/eventLogger';
 import {
@@ -66,10 +66,10 @@ const CoursesList: React.FC<Props> = ({ courses, isMyCourses }) => {
                 imgSrc={course.image}
                 key={course.id}
                 title={
-                  <>
+                  <div className={styles.titleContainer}>
                     {course.title}
-                    {course.isCompleted ? <CompletedTick /> : ''}
-                  </>
+                    {course.isCompleted ? <Pill>{t('completed')}</Pill> : ''}
+                  </div>
                 }
                 imgAlt={course.title}
                 size={CardSize.Large}

@@ -33,3 +33,9 @@
   margin-block-start: var(--spacing-mega);
   text-align: center;
 }
+
+.titleContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
