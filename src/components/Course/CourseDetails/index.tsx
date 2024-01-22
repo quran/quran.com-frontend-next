@@ -72,7 +72,7 @@ const CourseDetails: React.FC<Props> = ({ course }) => {
         variant={ButtonVariant.Ghost}
       >
         <ArrowLeft />
-        <p className={styles.backText}>{t('back-to-courses')}</p>
+        <p className={styles.backText}>{t('back-to-knowledge-boosters')}</p>
       </Button>
       <div className={styles.headerContainer}>
         <div>

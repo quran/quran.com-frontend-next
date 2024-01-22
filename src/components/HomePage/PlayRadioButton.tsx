@@ -68,7 +68,7 @@ const PlayRadioButton = () => {
         type={ButtonType.Secondary}
         onClick={onCoursesClicked}
       >
-        {t('common:courses')}
+        {t('common:knowledge-boosters')}
       </Button>
       <div className={styles.playRadioSection}>
         {isAudioPlaying && isRadioMode ? (

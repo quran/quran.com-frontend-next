@@ -1,9 +1,9 @@
 {
   "enroll": "Enroll",
-  "all-courses": "All Courses",
+  "all-knowledge-boosters": "All Knowledge Boosters",
   "day": "Day",
   "author": "Author",
-  "course-material": "Course Material",
+  "knowledge-booster-material": "Knowledge Booster Material",
   "by-author": "By: {{author}}",
   "duration": "Duration",
   "duration-daily": "{{dailyMins}} minutes/day over {{days}} days",
@@ -13,16 +13,16 @@
     "main": "Main Details",
     "syllabus": "Syllabus"
   },
-  "back-to-courses": "Back to courses",
-  "back-to-course": "Back to course",
+  "back-to-knowledge-boosters": "Back to knowledge boosters",
+  "back-to-knowledge-booster": "Back to knowledge booster",
   "enroll-success": "Congratulations, You added {{title}} to your list!",
   "enrolled": "Enrolled",
   "completed": "Completed",
-  "not-enrolled": "You are not enrolled in the <link>course</link> yet.",
+  "not-enrolled": "You are not enrolled in the <link>knowledge booster</link> yet.",
   "prev-lesson": "Previous Lesson",
   "next-lesson": "Next Lesson",
   "mark-complete": "Mark as completed",
   "mark-complete-success": "Lesson has been marked as complete successfully!",
-  "empty-courses": "You are not enrolled in any <link>courses</link> yet.",
+  "empty-knowledge-boosters": "You are not enrolled in any <link>knowledge boosters</link> yet.",
   "add-reflection": "Add Reflection"
 }

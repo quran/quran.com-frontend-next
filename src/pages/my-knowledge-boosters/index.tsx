@@ -3,21 +3,23 @@ import useTranslation from 'next-translate/useTranslation';
 
 import CoursesPageLayout from '@/components/Course/CoursesPageLayout';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
+import useRequireAuth from '@/hooks/auth/useRequireAuth';
 import { getAllChaptersData } from '@/utils/chapter';
 import { getLanguageAlternates } from '@/utils/locale';
-import { getCanonicalUrl, getCoursesNavigationUrl } from '@/utils/navigation';
+import { getCanonicalUrl, getMyCoursesNavigationUrl } from '@/utils/navigation';
 
-const CoursesPage: NextPage = () => {
+const MyCoursesPage: NextPage = () => {
   const { t, lang } = useTranslation('learn');
+  useRequireAuth();
 
   return (
     <>
       <NextSeoWrapper
-        title={t('common:courses')}
-        url={getCanonicalUrl(lang, getCoursesNavigationUrl())}
-        languageAlternates={getLanguageAlternates(getCoursesNavigationUrl())}
+        title={t('common:my-knowledge-boosters')}
+        url={getCanonicalUrl(lang, getMyCoursesNavigationUrl())}
+        languageAlternates={getLanguageAlternates(getMyCoursesNavigationUrl())}
       />
-      <CoursesPageLayout />
+      <CoursesPageLayout isMyCourses />
     </>
   );
 };
@@ -32,4 +34,4 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   };
 };
 
-export default CoursesPage;
+export default MyCoursesPage;

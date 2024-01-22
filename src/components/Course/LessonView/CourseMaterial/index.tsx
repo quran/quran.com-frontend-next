@@ -42,7 +42,7 @@ const CourseMaterial: React.FC<Props> = ({
         [styles.modalContainer]: isModal,
       })}
     >
-      {!isModal && <p className={styles.heading}>{t('course-material')}</p>}
+      {!isModal && <p className={styles.heading}>{t('knowledge-booster-material')}</p>}
       {lessons.map((lesson, index) => {
         const dayNumber = index + 1;
         const { title, isCompleted, id, slug } = lesson;
