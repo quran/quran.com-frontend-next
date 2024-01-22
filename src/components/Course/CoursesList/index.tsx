@@ -10,7 +10,11 @@ import Card, { CardSize } from '@/dls/Card/Card';
 import Link, { LinkVariant } from '@/dls/Link/Link';
 import { Course } from '@/types/auth/Course';
 import { logButtonClick } from '@/utils/eventLogger';
-import { getCoursesNavigationUrl, getCourseNavigationUrl } from '@/utils/navigation';
+import {
+  getCoursesNavigationUrl,
+  getCourseNavigationUrl,
+  getLessonNavigationUrl,
+} from '@/utils/navigation';
 
 type Props = {
   courses: Course[];
@@ -52,12 +56,11 @@ const CoursesList: React.FC<Props> = ({ courses, isMyCourses }) => {
     <div>
       <div className={styles.container}>
         {courses.map((course) => {
+          const navigateTo = course.continueFromLesson
+            ? getLessonNavigationUrl(course.slug, course.continueFromLesson)
+            : getCourseNavigationUrl(course.slug);
           return (
-            <Link
-              className={styles.link}
-              key={course.id}
-              href={getCourseNavigationUrl(course.slug)}
-            >
+            <Link className={styles.link} key={course.id} href={navigateTo}>
               <Card
                 shouldShowFullTitle
                 imgSrc={course.image}

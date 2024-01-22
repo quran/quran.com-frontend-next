@@ -28,6 +28,7 @@ export type Course = {
   lessons?: Lesson[];
   isUserEnrolled?: boolean;
   isCompleted?: boolean;
+  continueFromLesson?: string;
 };
 
 export interface CoursesResponse extends BaseResponse {
