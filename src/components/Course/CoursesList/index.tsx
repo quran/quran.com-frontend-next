@@ -89,6 +89,7 @@ const CoursesList: React.FC<Props> = ({ courses, isMyCourses }) => {
             </Link>
           );
         })}
+        {/* eslint-disable-next-line @typescript-eslint/naming-convention */}
         {comingSoonCourses.map((_, i) => {
           return (
             <Card
