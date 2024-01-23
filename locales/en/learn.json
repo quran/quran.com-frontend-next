@@ -25,5 +25,6 @@
   "mark-complete": "Mark as completed",
   "mark-complete-success": "Lesson has been marked as complete successfully!",
   "empty-knowledge-boosters": "You are not enrolled in any <link>knowledge boosters</link> yet.",
-  "add-reflection": "Add Reflection"
+  "add-reflection": "Add Reflection",
+  "coming-soon": "Coming Soon..."
 }

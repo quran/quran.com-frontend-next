@@ -1,5 +1,6 @@
 import React from 'react';
 
+import classNames from 'classnames';
 import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
 
@@ -20,6 +21,8 @@ type Props = {
   courses: Course[];
   isMyCourses: boolean;
 };
+
+const MIN_COURSES_COUNT = 6;
 
 const CoursesList: React.FC<Props> = ({ courses, isMyCourses }) => {
   const { t } = useTranslation('learn');
@@ -52,6 +55,13 @@ const CoursesList: React.FC<Props> = ({ courses, isMyCourses }) => {
     );
   }
 
+  let comingSoonCourses = [];
+  // if we should put a coming soon placeholder
+  if (!isMyCourses && courses.length < MIN_COURSES_COUNT) {
+    // just fill the array with 0s
+    comingSoonCourses = new Array(MIN_COURSES_COUNT - courses.length).fill(0);
+  }
+
   return (
     <div>
       <div className={styles.container}>
@@ -61,7 +71,7 @@ const CoursesList: React.FC<Props> = ({ courses, isMyCourses }) => {
             ? getLessonNavigationUrl(slug, continueFromLesson)
             : getCourseNavigationUrl(slug);
           return (
-            <Link className={styles.link} key={id} href={navigateTo}>
+            <Link key={id} href={navigateTo}>
               <Card
                 shouldShowFullTitle
                 imgSrc={image}
@@ -77,6 +87,17 @@ const CoursesList: React.FC<Props> = ({ courses, isMyCourses }) => {
                 className={styles.cardContainer}
               />
             </Link>
+          );
+        })}
+        {comingSoonCourses.map((_, i) => {
+          return (
+            <Card
+              // eslint-disable-next-line react/no-array-index-key
+              key={i}
+              size={CardSize.Large}
+              className={classNames(styles.cardContainer, styles.comingSoonContainer)}
+              title={t('coming-soon')}
+            />
           );
         })}
       </div>

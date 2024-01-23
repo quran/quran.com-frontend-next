@@ -42,3 +42,9 @@
     flex-direction: column;
   }
 }
+
+.comingSoonContainer {
+  & > div:first-child {
+    cursor: unset;
+  }
+}
