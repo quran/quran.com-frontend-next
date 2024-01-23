@@ -9,9 +9,7 @@
   justify-content: center;
   color: var(--color-text-inverse);
   font-weight: var(--font-weight-bold);
-  border: 1px solid var(--themed-border);
-
-  border-radius: var(--border-radius-default);
+  border-radius: var(--border-radius-pill);
   padding-inline: var(--spacing-small);
   text-transform: uppercase;
 }

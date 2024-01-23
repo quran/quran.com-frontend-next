@@ -88,6 +88,7 @@ const CourseDetails: React.FC<Props> = ({ course }) => {
 
       <Switch selected={selectedTab} items={tabs} onSelect={onTabChange} />
       {tabComponents[selectedTab]}
+      {!course.isUserEnrolled && <StatusHeader course={course} isCTA />}
     </ContentContainer>
   );
 };

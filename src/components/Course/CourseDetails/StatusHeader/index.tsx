@@ -17,9 +17,10 @@ import { getLoginNavigationUrl } from '@/utils/navigation';
 
 type Props = {
   course: Course;
+  isCTA?: boolean;
 };
 
-const StatusHeader: React.FC<Props> = ({ course }) => {
+const StatusHeader: React.FC<Props> = ({ course, isCTA = false }) => {
   const { title, id, isUserEnrolled, slug, isCompleted } = course;
   const [isLoading, setIsLoading] = useState(false);
   const toast = useToast();
@@ -29,7 +30,7 @@ const StatusHeader: React.FC<Props> = ({ course }) => {
 
   const onEnrollClicked = () => {
     if (isLoggedIn()) {
-      logButtonClick('user_enroll_course', { courseId: id });
+      logButtonClick('user_enroll_course', { courseId: id, isCTA });
       setIsLoading(true);
       enrollUser(course.id)
         .then(() => {
@@ -57,16 +58,26 @@ const StatusHeader: React.FC<Props> = ({ course }) => {
           setIsLoading(false);
         });
     } else {
-      logButtonClick('guest_enroll_course', { courseId: id });
+      logButtonClick('guest_enroll_course', { courseId: id, isCTA });
       router.replace(getLoginNavigationUrl());
     }
   };
 
+  if (isCTA) {
+    if (isUserEnrolled === true) {
+      return <></>;
+    }
+    return (
+      <Button isDisabled={isLoading} isLoading={isLoading} onClick={onEnrollClicked}>
+        {t('enroll-now')}
+      </Button>
+    );
+  }
   if (isCompleted) {
     return <Pill>{t('completed')}</Pill>;
   }
   if (isUserEnrolled === true) {
-    return <>{t('enrolled')}</>;
+    return <Pill>{t('enrolled')}</Pill>;
   }
 
   return (
