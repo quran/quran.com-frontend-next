@@ -15,6 +15,9 @@
 
 .cardContainer {
   border: 1px solid var(--color-borders-hairline);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
   @include breakpoints.tablet {
     max-inline-size: var(--spacing-mega) !important;
   }
@@ -26,6 +29,10 @@
   & > div:first-child {
     min-block-size: unset !important;
     block-size: calc(18 * var(--spacing-medium));
+  }
+  // text container
+  & > div:last-child {
+    flex-grow: 1;
   }
 }
 

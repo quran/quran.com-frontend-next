@@ -71,22 +71,22 @@ const CoursesList: React.FC<Props> = ({ courses, isMyCourses }) => {
             ? getLessonNavigationUrl(slug, continueFromLesson)
             : getCourseNavigationUrl(slug);
           return (
-            <Link key={id} href={navigateTo}>
-              <Card
-                shouldShowFullTitle
-                imgSrc={image}
-                key={id}
-                title={
+            <Card
+              shouldShowFullTitle
+              imgSrc={image}
+              key={id}
+              title={
+                <Link href={navigateTo}>
                   <div className={styles.titleContainer}>
                     {title}
                     {isCompleted ? <Pill>{t('completed')}</Pill> : ''}
                   </div>
-                }
-                imgAlt={title}
-                size={CardSize.Large}
-                className={styles.cardContainer}
-              />
-            </Link>
+                </Link>
+              }
+              imgAlt={title}
+              size={CardSize.Large}
+              className={classNames(styles.cardContainer, styles.comingSoonContainer)}
+            />
           );
         })}
         {/* eslint-disable-next-line @typescript-eslint/naming-convention */}
