@@ -32,7 +32,7 @@ const Syllabus: React.FC<Props> = ({ course }) => {
   };
 
   return (
-    <>
+    <div className={styles.syllabusContainer}>
       {lessons.map((lesson, index) => {
         const dayNumber = index + 1;
         const { title, isCompleted, id, slug } = lesson;
@@ -61,7 +61,7 @@ const Syllabus: React.FC<Props> = ({ course }) => {
           </p>
         );
       })}
-    </>
+    </div>
   );
 };
 
