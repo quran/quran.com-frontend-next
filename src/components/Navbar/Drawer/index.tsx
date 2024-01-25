@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import React, { useRef, useEffect, useCallback, ReactNode } from 'react';
 
 import classNames from 'classnames';
@@ -41,6 +42,7 @@ interface Props {
   hideCloseButton?: boolean;
   children: ReactNode;
   closeOnNavigation?: boolean;
+  closeOnBlur?: boolean;
 }
 
 /**
@@ -83,6 +85,7 @@ const Drawer: React.FC<Props> = ({
   children,
   hideCloseButton = false,
   closeOnNavigation = true,
+  closeOnBlur = true,
 }) => {
   const { isVisible: isNavbarVisible } = useSelector(selectNavbar, shallowEqual);
   const drawerRef = useRef(null);
@@ -94,13 +97,17 @@ const Drawer: React.FC<Props> = ({
 
   const closeDrawer = useCallback(
     (actionSource = 'click') => {
+      if ((actionSource === 'esc_key' || actionSource === 'outside_click') && !closeOnBlur) {
+        return;
+      }
+
       dispatch({ type: getActionCreator(type), payload: false });
       if (type === DrawerType.Search) {
         dispatch({ type: stopSearchDrawerVoiceFlow.type });
       }
       logDrawerCloseEvent(type, actionSource);
     },
-    [dispatch, type],
+    [dispatch, type, closeOnBlur],
   );
   // enableOnTags is added for when Search Drawer's input field is focused or when Settings Drawer's select input is focused
   useHotkeys(

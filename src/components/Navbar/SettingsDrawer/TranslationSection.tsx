@@ -133,7 +133,7 @@ const TranslationSection = () => {
 
   return (
     <div className={styles.container}>
-      <Section>
+      <Section id="translation-section">
         <Section.Title isLoading={isLoading}>{t('translation')}</Section.Title>
         <Section.Row>
           <DataFetcher

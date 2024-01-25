@@ -70,6 +70,7 @@ const PlayVerseAudioButton: React.FC<PlayVerseAudioProps> = ({
         type={ButtonType.Success}
         shape={ButtonShape.Circle}
         variant={ButtonVariant.Ghost}
+        className="play-audio-button" // this class is for onboarding
       >
         <Spinner />
       </Button>
@@ -84,9 +85,14 @@ const PlayVerseAudioButton: React.FC<PlayVerseAudioProps> = ({
       onClick={onPlayClicked}
       shouldFlipOnRTL={false}
       shape={ButtonShape.Circle}
-      className={classNames(styles.iconContainer, styles.verseAction, {
-        [styles.fadedVerseAction]: isTranslationView,
-      })}
+      className={classNames(
+        styles.iconContainer,
+        styles.verseAction,
+        {
+          [styles.fadedVerseAction]: isTranslationView,
+        },
+        'play-verse-button', // this class is for onboarding
+      )}
       ariaLabel={t('aria.play-surah', { surahName: chapterData.transliteratedName })}
     >
       <span className={classNames(styles.icon, styles.playIcon)}>

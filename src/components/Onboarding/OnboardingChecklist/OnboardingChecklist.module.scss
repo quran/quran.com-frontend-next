@@ -1,0 +1,93 @@
+@use "src/styles/breakpoints";
+
+.checklistPosition {
+  position: fixed;
+  bottom: 20px;
+  inset-inline-end: 20px;
+  box-sizing: border-box;
+  z-index: var(--z-index-overlay);
+
+  @include breakpoints.smallerThanMobileL {
+    inset-inline-end: 0;
+    inset-inline-start: 0;
+    bottom: 0;
+  }
+}
+
+.checklist {
+  background: var(--color-background-alternative-faded);
+  border: 1px solid var(--color-borders-hairline);
+  box-shadow: var(--shadow-small);
+  border-radius: var(--border-radius-rounded);
+  padding: var(--spacing-large) var(--spacing-large);
+  max-width: 100%;
+  width: 380px;
+
+  @include breakpoints.smallerThanMobileL {
+    width: 100%;
+  }
+
+  h4 {
+    font-size: var(--font-size-large);
+    font-weight: var(--font-weight-bold);
+  }
+}
+
+.helpIcon {
+  width: var(--spacing-mega) !important;
+  height: var(--spacing-mega) !important;
+}
+
+.checklistHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.checkContainer {
+  position: relative;
+}
+
+.checklist ul {
+  margin-top: var(--spacing-large);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-small);
+
+  li > button {
+    width: 100%;
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: calc(var(--spacing-medium) / 2);
+    background: var(--color-background-elevated);
+    border-radius: var(--border-radius-default);
+    padding: var(--spacing-small);
+    color: var(--color-text-default);
+
+    &.completed {
+      background: var(--color-success-faint);
+    }
+  }
+}
+
+.checkCircle {
+  width: var(--spacing-medium);
+  height: var(--spacing-medium);
+  border-radius: var(--border-radius-circle);
+  border: 2px solid var(--color-success-medium);
+  background-color: var(--day-circle-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  & svg {
+    width: 90%;
+    height: 90%;
+    color: white;
+  }
+}
+
+.filled {
+  background-color: var(--color-success-medium) !important;
+}

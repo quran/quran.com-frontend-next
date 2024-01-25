@@ -15,6 +15,7 @@ import BookmarkIcon from './BookmarkIcon';
 import TranslationText from './TranslationText';
 import styles from './TranslationViewCell.module.scss';
 
+import { useOnboarding } from '@/components/Onboarding/OnboardingProvider';
 import QuranReflectButton from '@/components/QuranReader/QuranReflectButton';
 import TafsirButton from '@/components/QuranReader/TafsirButton';
 import OverflowVerseActionsMenu from '@/components/Verse/OverflowVerseActionsMenu';
@@ -55,7 +56,10 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
     const { ayahNumber, surah } = state.context;
     return makeVerseKey(surah, ayahNumber) === verse.verseKey;
   });
-  const enableAutoScrolling = useSelector(selectEnableAutoScrolling);
+
+  const { isActive } = useOnboarding();
+  // disable auto scrolling when the user is onboarding
+  const enableAutoScrolling = useSelector(selectEnableAutoScrolling) && !isActive;
 
   const [scrollToSelectedItem, selectedItemRef]: [() => void, RefObject<HTMLDivElement>] =
     useScroll(SMOOTH_SCROLL_TO_TOP);

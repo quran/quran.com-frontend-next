@@ -6,8 +6,10 @@ import Title from './Title';
 
 import Separator, { SeparatorWeight } from '@/dls/Separator/Separator';
 
-const Section = ({ children }) => (
-  <div className={styles.section}>
+interface SectionProps extends React.HTMLAttributes<HTMLDivElement> {}
+
+const Section = ({ children, ...props }: SectionProps) => (
+  <div className={styles.section} {...props}>
     {children}
     <div className={styles.separator}>
       <Separator weight={SeparatorWeight.Bold} />

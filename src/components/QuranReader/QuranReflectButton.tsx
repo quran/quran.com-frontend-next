@@ -56,9 +56,14 @@ const QuranReflectButton = ({
         tooltip={t('reflect')}
         shouldFlipOnRTL={false}
         shape={ButtonShape.Circle}
-        className={classNames(styles.iconContainer, styles.verseAction, {
-          [styles.fadedVerseAction]: isTranslationView,
-        })}
+        className={classNames(
+          styles.iconContainer,
+          styles.verseAction,
+          {
+            [styles.fadedVerseAction]: isTranslationView,
+          },
+          'reflection-verse-button', // for onboarding
+        )}
         ariaLabel={t('quran-reader:aria.read-ayah-refls')}
       >
         <span className={styles.icon}>

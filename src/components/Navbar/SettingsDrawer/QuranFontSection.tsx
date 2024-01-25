@@ -186,7 +186,7 @@ const QuranFontSection = () => {
   };
 
   return (
-    <Section>
+    <Section id="quran-font-section">
       <Section.Title isLoading={isLoading}>{t('fonts.quran-font')}</Section.Title>
       <Section.Row>
         <Switch items={types} selected={selectedType} onSelect={onFontChange} />
@@ -213,7 +213,7 @@ const QuranFontSection = () => {
           />
         </Section.Row>
       )}
-      <Section.Row>
+      <Section.Row id="font-size-section">
         <Section.Label>{t('fonts.font-size')}</Section.Label>
         <Counter
           count={quranTextFontScale}

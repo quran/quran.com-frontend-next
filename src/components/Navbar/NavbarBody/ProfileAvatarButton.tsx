@@ -96,6 +96,7 @@ const ProfileAvatarButton = () => {
       href="/login"
       shape={ButtonShape.Circle}
       onClick={onTriggerClicked}
+      id="login-button"
     >
       <IconPerson />
     </Button>

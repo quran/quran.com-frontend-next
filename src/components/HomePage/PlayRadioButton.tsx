@@ -61,6 +61,7 @@ const PlayRadioButton = () => {
             prefix={isLoading ? <Spinner /> : <PauseIcon />}
             onClick={onPauseClicked}
             className={styles.playPauseButton}
+            id="radio-button"
           >
             {t('pause-radio')}
           </Button>
@@ -70,6 +71,7 @@ const PlayRadioButton = () => {
             className={styles.playPauseButton}
             onClick={onPlayClicked}
             shouldFlipOnRTL={false}
+            id="radio-button"
           >
             {t('play-radio')}
           </Button>

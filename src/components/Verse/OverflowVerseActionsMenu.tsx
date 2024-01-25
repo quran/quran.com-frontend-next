@@ -44,9 +44,14 @@ const OverflowVerseActionsMenu: React.FC<Props> = ({
             tooltip={t('more')}
             variant={ButtonVariant.Ghost}
             shape={ButtonShape.Circle}
-            className={classNames(cellStyles.iconContainer, cellStyles.verseAction, {
-              [cellStyles.fadedVerseAction]: isTranslationView,
-            })}
+            className={classNames(
+              cellStyles.iconContainer,
+              cellStyles.verseAction,
+              {
+                [cellStyles.fadedVerseAction]: isTranslationView,
+              },
+              'overflow-verse-actions-menu-trigger', // for onboarding
+            )}
             ariaLabel={t('more')}
           >
             <span className={cellStyles.icon}>

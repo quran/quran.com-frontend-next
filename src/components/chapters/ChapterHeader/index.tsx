@@ -99,6 +99,7 @@ const ChapterHeader: React.FC<Props> = ({
                 onClick={() => {
                   logButtonClick('chapter_header_info');
                 }}
+                id="surah-info-button"
               >
                 {t('quran-reader:surah-info')}
               </Button>
@@ -117,6 +118,7 @@ const ChapterHeader: React.FC<Props> = ({
               onClick={() => {
                 logButtonClick('chapter_header_info');
               }}
+              id="surah-info-button"
             >
               {t('quran-reader:surah-info')}
             </Button>
