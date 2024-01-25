@@ -6,12 +6,6 @@
   inset-inline-end: 20px;
   box-sizing: border-box;
   z-index: var(--z-index-overlay);
-
-  @include breakpoints.smallerThanMobileL {
-    inset-inline-end: 0;
-    inset-inline-start: 0;
-    bottom: 0;
-  }
 }
 
 .checklist {
@@ -25,6 +19,9 @@
 
   @include breakpoints.smallerThanMobileL {
     width: 100%;
+    inset-inline-end: 0;
+    inset-inline-start: 0;
+    bottom: 0;
   }
 
   h4 {
