@@ -29,7 +29,7 @@ enum Tab {
 }
 
 const CourseDetails: React.FC<Props> = ({ course }) => {
-  const { title, image, id, author } = course;
+  const { title, image, id } = course;
   const { t } = useTranslation('learn');
   const [selectedTab, setSelectedTab] = useState(Tab.MAIN);
 
@@ -77,7 +77,6 @@ const CourseDetails: React.FC<Props> = ({ course }) => {
       <div className={styles.headerContainer}>
         <div>
           <p className={styles.title}>{title}</p>
-          <p className={styles.author}>{t('by-author', { author })}</p>
         </div>
         <StatusHeader course={course} />
       </div>

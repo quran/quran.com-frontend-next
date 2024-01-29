@@ -5,7 +5,6 @@
   "day": "Day",
   "author": "Author",
   "knowledge-booster-material": "Knowledge Booster Material",
-  "by-author": "By: {{author}}",
   "duration": "Duration",
   "duration-daily": "{{dailyMins}} minutes/day over {{days}} days",
   "description": "Description",
@@ -26,5 +25,6 @@
   "mark-complete-success": "Lesson has been marked as complete successfully!",
   "empty-knowledge-boosters": "You are not enrolled in any <link>knowledge boosters</link> yet.",
   "add-reflection": "Add Reflection",
-  "coming-soon": "Coming Soon..."
+  "coming-soon": "Coming Soon...",
+  "about-author": "About the author"
 }

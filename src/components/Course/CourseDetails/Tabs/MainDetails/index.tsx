@@ -5,6 +5,7 @@ import { MilkdownProvider } from '@milkdown/react';
 import useTranslation from 'next-translate/useTranslation';
 
 import DetailSection from './DetailSection';
+import AuthorDetail from './DetailSection/AuthorDetail';
 
 import MarkdownEditor from '@/components/MarkdownEditor';
 import { Course } from '@/types/auth/Course';
@@ -15,7 +16,7 @@ type Props = {
 
 const MainDetails: React.FC<Props> = ({ course }) => {
   const { t } = useTranslation('learn');
-  const { description, dailyMinutes, lessons = [] } = course;
+  const { description, dailyMinutes, lessons = [], author } = course;
 
   // const tagsString = tags?.reduce((acc, currentValue) => {
   //   if (!acc) return currentValue;
@@ -37,7 +38,7 @@ const MainDetails: React.FC<Props> = ({ course }) => {
           description={<MarkdownEditor isEditable={false} defaultValue={description} />}
         />
       </MilkdownProvider>
-      {/* {tagsString && <DetailSection title={t('category')} description={tagsString} />} */}
+      <DetailSection title={t('about-author')} description={<AuthorDetail author={author} />} />
     </>
   );
 };

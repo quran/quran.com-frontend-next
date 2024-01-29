@@ -10,7 +10,7 @@ type Props = {
 const DetailSection: React.FC<Props> = ({ title, description }) => {
   return (
     <div className={styles.container}>
-      <span className={styles.title}>{`${title}: `} </span>
+      <div className={styles.title}>{`${title}: `} </div>
       <span className={styles.description}>{description}</span>
     </div>
   );

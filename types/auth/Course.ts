@@ -15,11 +15,17 @@ export type Lesson = {
   isCompleted: boolean;
 };
 
+export type CourseAuthor = {
+  id: string;
+  name: string;
+  biography: string;
+};
+
 export type Course = {
   id: string;
   title: string;
   slug: string;
-  author: string;
+  author: CourseAuthor;
   language: string; // language code
   description: string;
   image: string;
