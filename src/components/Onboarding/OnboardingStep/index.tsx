@@ -87,7 +87,7 @@ const OnboardingStep = ({
       <h4 className={styles.title}>{stepData.title}</h4>
       <p className={styles.description}>{stepData.description}</p>
 
-      {(showSkipButton || showNextButton) && (
+      {(showSkipButton || showNextButton || showPrevButton) && (
         <div className={styles.actionContainer}>
           {isFirstStep && showSkipButton && (
             <Button

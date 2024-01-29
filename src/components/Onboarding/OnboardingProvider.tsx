@@ -12,7 +12,7 @@ import { selectOnboarding, setActiveStepIndex } from '@/redux/slices/onboarding'
 import OnboardingGroup from '@/types/OnboardingGroup';
 
 interface OnboardingContextType {
-  startTour: (group?: OnboardingGroup) => void;
+  startTour: (group?: OnboardingGroup, startIndex?: number) => void;
   stopTour: () => void;
   setStep: (group: OnboardingGroup, index: number) => void;
   nextStep: () => void;
@@ -21,6 +21,7 @@ interface OnboardingContextType {
   activeStepIndex: number;
   isActive: boolean;
   allSteps: ReturnType<typeof checklistIndexToOnboardingSteps>;
+  allGroups: OnboardingGroup[];
 }
 
 const OnboardingContext = React.createContext<OnboardingContextType>(null);
@@ -33,15 +34,24 @@ export const OnboardingProvider = React.memo(({ children }: { children: React.Re
   const { t } = useTranslation('common');
   const dispatch = useDispatch();
 
+  const allSteps = useMemo(() => {
+    return checklistIndexToOnboardingSteps(t, OnboardingStep);
+  }, [t]);
+
   const startTour = useCallback(
-    (group = OnboardingGroup.HOMEPAGE) => {
+    (group = OnboardingGroup.HOMEPAGE, startIndex = 0) => {
       setIsOnboarding(true);
 
       setTimeout(() => {
         dispatch(
           setActiveStepIndex({
             group,
-            index: 0,
+            index: startIndex,
+            // Mark all previous steps as completed
+            ...(startIndex !== 0 && {
+              // eslint-disable-next-line @typescript-eslint/naming-convention
+              indicesToMarkAsCompleted: new Array(startIndex).fill(null).map((_, i) => i),
+            }),
           }),
         );
       }, 0);
@@ -57,9 +67,10 @@ export const OnboardingProvider = React.memo(({ children }: { children: React.Re
 
   const setStep = useCallback(
     (group: OnboardingGroup, step: number) => {
-      setTimeout(() => dispatch(setActiveStepIndex({ group, index: step })), 0);
+      const isGroupCompleted = step === allSteps[group].length - 1;
+      setTimeout(() => dispatch(setActiveStepIndex({ group, index: step, isGroupCompleted })), 0);
     },
-    [dispatch],
+    [dispatch, allSteps],
   );
 
   const nextStep = useCallback(() => {
@@ -72,10 +83,6 @@ export const OnboardingProvider = React.memo(({ children }: { children: React.Re
     setStep(activeStep.group, activeStep.index - 1);
   }, [activeStep, setStep]);
 
-  const allSteps = useMemo(() => {
-    return checklistIndexToOnboardingSteps(t, OnboardingStep);
-  }, [t]);
-
   const value = useMemo(
     () => ({
       startTour,
@@ -87,6 +94,7 @@ export const OnboardingProvider = React.memo(({ children }: { children: React.Re
       nextStep,
       prevStep,
       allSteps,
+      allGroups: Object.keys(allSteps) as OnboardingGroup[],
     }),
     [startTour, stopTour, setStep, activeStep, isOnboarding, nextStep, prevStep, allSteps],
   );

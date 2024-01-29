@@ -4,8 +4,8 @@
   color: var(--color-text-inverse);
   background-color: var(--color-background-inverse);
   max-width: 100%;
-  width: 340px;
-  z-index: 1100;
+  width: calc(var(--spacing-mega) * 10);
+  z-index: var(--z-index-onboarding-step);
 }
 
 .title {

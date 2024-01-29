@@ -13,7 +13,7 @@ const StreakIntroductionWidget = () => {
   const { t } = useTranslation('reading-goal');
 
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.wrapper} id="streak-widget">
       <Link href="/product-updates/quran-reading-streaks" className={styles.announcementPill}>
         {t('common:new')} {t('common:learn-more')}
       </Link>

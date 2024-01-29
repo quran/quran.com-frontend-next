@@ -12,7 +12,14 @@ const SettingsBody = () => {
   const { isActive, nextStep } = useOnboarding();
 
   useEffect(() => {
-    if (isActive) setTimeout(() => nextStep(), 400); // wait for transition to finish (.4s)
+    let timeout: NodeJS.Timeout = null;
+
+    // wait for transition to finish (.4s)
+    if (isActive) timeout = setTimeout(() => nextStep(), 400);
+
+    return () => {
+      if (timeout !== null) clearTimeout(timeout);
+    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

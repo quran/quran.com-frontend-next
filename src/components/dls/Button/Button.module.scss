@@ -72,6 +72,14 @@
   --themed-bg: var(--color-text-inverse);
   --themed-fg: var(--color-primary-medium);
   --themed-border: var(--color-text-inverse);
+
+  &.ghost {
+    @media (hover: hover) {
+      &:hover {
+        color: var(--color-text-default);
+      }
+    }
+  }
 }
 
 // size

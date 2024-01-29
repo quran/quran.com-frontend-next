@@ -63,7 +63,7 @@ const SettingsDrawer = () => {
       type={DrawerType.Settings}
       header={header}
       closeOnNavigation={false}
-      closeOnBlur={!isActive}
+      canCloseDrawer={!isActive}
     >
       {isSettingsDrawerOpen && settingsView === SettingsView.Body && <SettingsBody />}
       {isSettingsDrawerOpen && settingsView === SettingsView.Translation && (

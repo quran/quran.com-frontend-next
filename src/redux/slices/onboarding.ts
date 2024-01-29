@@ -4,17 +4,23 @@ import { RootState } from '@/redux/RootState';
 import SliceName from '@/redux/types/SliceName';
 import OnboardingGroup from '@/types/OnboardingGroup';
 
-type ActiveStepPayload = { group: OnboardingGroup; index: number };
+type ActiveStepPayload = {
+  group: OnboardingGroup;
+  index: number;
+  isGroupCompleted?: boolean;
+  indicesToMarkAsCompleted?: number[];
+};
 
 export type OnboardingState = {
   isChecklistVisible: boolean;
   checklistDismissals: number;
-  lastChecklistDismissal: Date | null;
+  lastChecklistDismissal: number | null;
   activeStep: ActiveStepPayload;
-  groups: Partial<
+  completedGroups: Partial<
     Record<
       OnboardingGroup,
       {
+        isCompleted: boolean;
         completedSteps: number[];
       }
     >
@@ -29,7 +35,7 @@ const initialState: OnboardingState = {
     group: OnboardingGroup.HOMEPAGE,
     index: 0,
   },
-  groups: {},
+  completedGroups: {},
 };
 
 export const onboardingSlice = createSlice({
@@ -37,38 +43,42 @@ export const onboardingSlice = createSlice({
   initialState,
   reducers: {
     // checklist state
-    dismissChecklist: (
-      state: OnboardingState,
-      action: PayloadAction<{ countDismiss: boolean }>,
-    ) => ({
+    dismissChecklist: (state: OnboardingState) => ({
       ...state,
       isChecklistVisible: false,
-      ...(action.payload.countDismiss && {
-        checklistDismissals: state.checklistDismissals + 1,
-        lastChecklistDismissal: new Date(),
-      }),
+      checklistDismissals: state.checklistDismissals + 1,
+      lastChecklistDismissal: new Date().getTime(),
     }),
     setIsChecklistVisible: (state: OnboardingState, action: PayloadAction<boolean>) => ({
       ...state,
       isChecklistVisible: action.payload,
     }),
     setActiveStepIndex: (state: OnboardingState, action: PayloadAction<ActiveStepPayload>) => {
-      const group = state.groups[action.payload.group];
+      const group = state.completedGroups[action.payload.group];
 
       const newCompletedSteps = group?.completedSteps ? [...group.completedSteps] : [];
       if (!newCompletedSteps.includes(action.payload.index)) {
         newCompletedSteps.push(action.payload.index);
       }
 
+      if (action.payload.indicesToMarkAsCompleted) {
+        action.payload.indicesToMarkAsCompleted.forEach((index) => {
+          if (!newCompletedSteps.includes(index)) {
+            newCompletedSteps.push(index);
+          }
+        });
+      }
+
       const newGroupData = {
         completedSteps: newCompletedSteps,
+        isCompleted: action.payload.isGroupCompleted ?? group?.isCompleted,
       };
 
       return {
         ...state,
         activeStep: action.payload,
-        groups: {
-          ...state.groups,
+        completedGroups: {
+          ...state.completedGroups,
           [action.payload.group]: newGroupData,
         },
       };

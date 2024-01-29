@@ -42,7 +42,7 @@ interface Props {
   hideCloseButton?: boolean;
   children: ReactNode;
   closeOnNavigation?: boolean;
-  closeOnBlur?: boolean;
+  canCloseDrawer?: boolean;
 }
 
 /**
@@ -78,6 +78,13 @@ const logDrawerCloseEvent = (type: string, actionSource: string) => {
   logEvent(`drawer_${type}_close_${actionSource}`);
 };
 
+enum ActionSource {
+  Click = 'click',
+  EscKey = 'esc_key',
+  OutsideClick = 'outside_click',
+  Navigation = 'navigation',
+}
+
 const Drawer: React.FC<Props> = ({
   type,
   side = DrawerSide.Right,
@@ -85,7 +92,7 @@ const Drawer: React.FC<Props> = ({
   children,
   hideCloseButton = false,
   closeOnNavigation = true,
-  closeOnBlur = true,
+  canCloseDrawer = true,
 }) => {
   const { isVisible: isNavbarVisible } = useSelector(selectNavbar, shallowEqual);
   const drawerRef = useRef(null);
@@ -96,8 +103,8 @@ const Drawer: React.FC<Props> = ({
   const router = useRouter();
 
   const closeDrawer = useCallback(
-    (actionSource = 'click') => {
-      if ((actionSource === 'esc_key' || actionSource === 'outside_click') && !closeOnBlur) {
+    (actionSource: ActionSource = ActionSource.Click) => {
+      if (!canCloseDrawer) {
         return;
       }
 
@@ -107,13 +114,13 @@ const Drawer: React.FC<Props> = ({
       }
       logDrawerCloseEvent(type, actionSource);
     },
-    [dispatch, type, closeOnBlur],
+    [dispatch, type, canCloseDrawer],
   );
   // enableOnTags is added for when Search Drawer's input field is focused or when Settings Drawer's select input is focused
   useHotkeys(
     'Escape',
     () => {
-      closeDrawer('esc_key');
+      closeDrawer(ActionSource.EscKey);
     },
     { enabled: isOpen, enableOnTags: ['INPUT', 'SELECT'] },
   );
@@ -127,7 +134,7 @@ const Drawer: React.FC<Props> = ({
     // Hide navbar after successful navigation
     router.events.on('routeChangeComplete', () => {
       if (isOpen && closeOnNavigation) {
-        closeDrawer('navigation');
+        closeDrawer(ActionSource.Navigation);
       }
     });
   }, [closeDrawer, dispatch, router.events, isNavbarVisible, isOpen, closeOnNavigation]);
@@ -135,7 +142,7 @@ const Drawer: React.FC<Props> = ({
   useOutsideClickDetector(
     drawerRef,
     () => {
-      closeDrawer('outside_click');
+      closeDrawer(ActionSource.OutsideClick);
     },
     isOpen,
   );

@@ -18,6 +18,7 @@ const AudioPlayerBody = () => {
   const isRadioMode = useSelector(audioService, (state) => !!state.context.radioActor);
   const { isActive, activeStepGroup, activeStepIndex, nextStep } = useOnboarding();
 
+  // If the user is in the reading experience onboarding and clicked on the play button, then we should automatically go to the next step when the audio player is mounted.
   useEffect(() => {
     if (
       isActive &&

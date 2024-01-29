@@ -33,9 +33,9 @@ export const checklistIndexToOnboardingSteps = (
     disableOverlayClose: true,
     tooltipComponent: component as any,
     floaterProps: {
-      hideArrow: true,
+      hideArrow: false,
     },
-    spotlightPadding: 10,
+    spotlightPadding: 5,
   };
 
   const getDetails = (key: string) => ({
@@ -95,7 +95,7 @@ export const checklistIndexToOnboardingSteps = (
           target: '#theme-section',
           spotlightClicks: true,
           placement: 'left-start',
-          disableScrolling: true,
+          // disableScrolling: true,
         },
       },
       {
@@ -105,7 +105,7 @@ export const checklistIndexToOnboardingSteps = (
           target: '#quran-font-section',
           spotlightClicks: true,
           placement: 'left-start',
-          disableScrolling: true,
+          // disableScrolling: true,
         },
       },
       {
@@ -115,14 +115,14 @@ export const checklistIndexToOnboardingSteps = (
           target: '#font-size-section',
           spotlightClicks: true,
           placement: 'left-start',
-          disableScrolling: true,
+          // disableScrolling: true,
         },
       },
       {
         ...getDetails('wbw-translation'),
         step: {
           ...commonStepOptions,
-          target: '#word-by-word-section',
+          target: '#wbw-translation-section',
           spotlightClicks: true,
           placement: 'left-start',
         },
@@ -131,30 +131,30 @@ export const checklistIndexToOnboardingSteps = (
         ...getDetails('wbw-transliteration'),
         step: {
           ...commonStepOptions,
-          target: '#word-by-word-section',
+          target: '#wbw-transliteration-section',
           spotlightClicks: true,
           placement: 'left-start',
-          disableScrolling: true,
+          // disableScrolling: true,
         },
       },
       {
         ...getDetails('wbw-audio'),
         step: {
           ...commonStepOptions,
-          target: '#word-by-word-section',
+          target: '#wbw-recitation-section',
           spotlightClicks: true,
           placement: 'left-start',
-          disableScrolling: true,
+          // disableScrolling: true,
         },
       },
       {
         ...getDetails('inline-wbw'),
         step: {
           ...commonStepOptions,
-          target: '#word-by-word-section',
+          target: '#wbw-display-section',
           spotlightClicks: true,
           placement: 'left-start',
-          disableScrolling: true,
+          // disableScrolling: true,
         },
       },
       {
@@ -174,6 +174,7 @@ export const checklistIndexToOnboardingSteps = (
           ...commonStepOptions,
           target: '#surah-info-button',
           placement: 'left-start',
+          showSkipButton: true,
         },
       },
       {
@@ -184,7 +185,7 @@ export const checklistIndexToOnboardingSteps = (
           target: '.play-verse-button:first-child',
           spotlightClicks: true,
           showNextButton: false,
-          showPrevButton: false,
+          showPrevButton: true,
         },
       },
       {
@@ -233,6 +234,20 @@ export const checklistIndexToOnboardingSteps = (
           target: '#login-button',
         },
       },
+      {
+        ...getDetails('streak'),
+        step: {
+          ...commonStepOptions,
+          target: '#streak-widget',
+        },
+      },
+      {
+        ...getDetails('reading-sessions'),
+        step: {
+          ...commonStepOptions,
+          target: '#reading-sessions',
+        },
+      },
     ],
   };
 };
@@ -256,6 +271,6 @@ export const onboardingChecklist = (t: Translate) => [
   {
     group: OnboardingGroup.PERSONALIZED_FEATURES,
     title: t('onboarding:checklist.4'),
-    href: '/login',
+    href: '/',
   },
 ];

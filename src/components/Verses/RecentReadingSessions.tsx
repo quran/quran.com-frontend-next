@@ -26,7 +26,7 @@ const RecentReadingSessions = () => {
 
   if (isLoading) {
     return (
-      <div className={styles.sessionsContainer}>
+      <div className={styles.sessionsContainer} id="reading-sessions">
         <p className={styles.sessionsHeader}>{t('recently-read')}</p>
         <div className={styles.verseLinksContainer}>
           <RecentReadingSessionsSkeleton />
@@ -38,7 +38,7 @@ const RecentReadingSessions = () => {
   if (recentlyReadVerseKeys.length === 0) return null;
 
   return (
-    <div className={styles.sessionsContainer}>
+    <div className={styles.sessionsContainer} id="reading-sessions">
       <p className={styles.sessionsHeader}>{t('recently-read')}</p>
       <div className={styles.verseLinksContainer}>
         {recentlyReadVerseKeys.map((verseKey) => {

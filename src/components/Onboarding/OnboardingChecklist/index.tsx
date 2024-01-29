@@ -1,5 +1,3 @@
-import { useEffect } from 'react';
-
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
@@ -8,9 +6,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useOnboarding } from '../OnboardingProvider';
 import { onboardingChecklist } from '../steps';
 
+import useShowChecklistAfterInterval from './hooks/useShowChecklistAfterInterval';
 import styles from './OnboardingChecklist.module.scss';
 
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
+import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
 import CheckIcon from '@/icons/check.svg';
 import IconClose from '@/icons/close.svg';
 import IconQuestionMark from '@/icons/question-mark-icon.svg';
@@ -19,61 +19,43 @@ import {
   selectOnboarding,
   setIsChecklistVisible,
 } from '@/redux/slices/onboarding';
+import {
+  selectReadingPreferences,
+  setReadingPreference,
+} from '@/redux/slices/QuranReader/readingPreferences';
+import PreferenceGroup from '@/types/auth/PreferenceGroup';
 import OnboardingGroup from '@/types/OnboardingGroup';
-import { logButtonClick, logEvent } from '@/utils/eventLogger';
+import { ReadingPreference } from '@/types/QuranReader';
+import { isLoggedIn } from '@/utils/auth/login';
+import { logButtonClick } from '@/utils/eventLogger';
 
 const OnboardingChecklist = () => {
   const { t } = useTranslation('common');
   const checklistItems = onboardingChecklist(t);
   const router = useRouter();
 
+  useShowChecklistAfterInterval();
+
   const dispatch = useDispatch();
   const { allSteps, startTour, isActive } = useOnboarding();
+  const { isChecklistVisible, checklistDismissals, completedGroups } =
+    useSelector(selectOnboarding);
+
+  const readingPreferences = useSelector(selectReadingPreferences);
+  const { readingPreference } = readingPreferences;
   const {
-    isChecklistVisible,
-    checklistDismissals,
-    lastChecklistDismissal,
-    groups: completedGroups,
-  } = useSelector(selectOnboarding);
+    actions: { onSettingsChange },
+  } = usePersistPreferenceGroup();
 
   const handleDismiss = () => {
     logButtonClick('onboarding_checklist_dismiss', { totalDismissals: checklistDismissals + 1 });
-    dispatch(dismissChecklist({ countDismiss: true }));
+    dispatch(dismissChecklist());
   };
 
   const openChecklist = () => {
     logButtonClick('onboarding_checklist_open');
     dispatch(setIsChecklistVisible(true));
   };
-
-  useEffect(() => {
-    // If the user didn’t finish onboarding then we should show the onboarding again after 1 month from the last time. Repeat this behaviuor for 3 months (once per month) and finally, the system should not alert the user anymore for this onboarding.
-    const didNotFinishOnboarding = !!checklistItems.find(({ group }) => {
-      const completedSteps = completedGroups[group]?.completedSteps;
-      return completedSteps?.length !== allSteps[group].length;
-    });
-
-    if (
-      checklistDismissals >= 3 ||
-      isChecklistVisible ||
-      !lastChecklistDismissal ||
-      !didNotFinishOnboarding
-    ) {
-      return;
-    }
-
-    const now = Date.now();
-    const oneMonth = 1000 * 60 * 60 * 24 * 30;
-    const lastDismissal = new Date(lastChecklistDismissal);
-
-    if (now - lastDismissal.getTime() > oneMonth) {
-      dispatch(setIsChecklistVisible(true));
-      logEvent('onboarding_checklist_auto_open', {
-        totalDismissals: checklistDismissals,
-      });
-    }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [completedGroups, checklistDismissals, lastChecklistDismissal]);
 
   // If the onboarding is active, don't show the checklist
   if (isActive) {
@@ -100,12 +82,33 @@ const OnboardingChecklist = () => {
 
   const handleChecklistItemClick = async (group: OnboardingGroup) => {
     const item = checklistItems.find((i) => i.group === group);
+    let startIndex = 0;
     if (!item) return;
+
+    if (group === OnboardingGroup.READING_EXPERIENCE) {
+      // make sure we're on translation mode
+      if (readingPreference !== ReadingPreference.Translation) {
+        onSettingsChange(
+          'readingPreference',
+          ReadingPreference.Translation,
+          setReadingPreference(ReadingPreference.Translation),
+          setReadingPreference(readingPreference),
+          PreferenceGroup.READING,
+        );
+      }
+    }
+
+    if (group === OnboardingGroup.PERSONALIZED_FEATURES) {
+      if (isLoggedIn()) {
+        startIndex = 1;
+      }
+    }
 
     if (item.href) {
       await router.push(item.href);
-      startTour(group);
     }
+
+    startTour(group, startIndex);
 
     logButtonClick('onboarding_checklist_item', {
       group,

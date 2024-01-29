@@ -94,6 +94,14 @@
     "login": {
       "title": "Log in",
       "description": "Log in and save settings across devices and gain access to additional features."
+    },
+    "streak": {
+      "title": "Keep track of reading streaks & reading plans",
+      "description": "Set personalized reading goals, track your progress, and build a consistent Quranic reading habit with our Reading Streaks and Plans feature."
+    },
+    "reading-sessions": {
+      "title": "View reading history",
+      "description": "Easily review your Quranic journey with a glance at your personalized reading history, keeping track of the verses you've explored on Quran.com."
     }
   }
 }
