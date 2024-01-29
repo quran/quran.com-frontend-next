@@ -29,6 +29,7 @@ export type Course = {
   language: string; // language code
   description: string;
   image: string;
+  thumbnail: string;
   tags: string[];
   dailyMinutes: number;
   lessons?: Lesson[];

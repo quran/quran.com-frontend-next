@@ -66,14 +66,14 @@ const CoursesList: React.FC<Props> = ({ courses, isMyCourses }) => {
     <div>
       <div className={styles.container}>
         {courses.map((course) => {
-          const { slug, image, id, continueFromLesson, title, isCompleted } = course;
+          const { slug, id, continueFromLesson, title, isCompleted, thumbnail } = course;
           const navigateTo = continueFromLesson
             ? getLessonNavigationUrl(slug, continueFromLesson)
             : getCourseNavigationUrl(slug);
           return (
             <Card
               shouldShowFullTitle
-              imgSrc={image}
+              imgSrc={thumbnail}
               key={id}
               title={
                 <Link href={navigateTo}>
