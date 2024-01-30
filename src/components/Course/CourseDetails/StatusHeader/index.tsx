@@ -69,7 +69,7 @@ const StatusHeader: React.FC<Props> = ({ course, isCTA = false }) => {
     }
     return (
       <Button isDisabled={isLoading} isLoading={isLoading} onClick={onEnrollClicked}>
-        {t('enroll-now')}
+        {t('enroll')}
       </Button>
     );
   }

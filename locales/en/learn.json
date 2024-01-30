@@ -1,6 +1,5 @@
 {
   "enroll": "Enroll",
-  "enroll-now": "Enroll Now!",
   "all-knowledge-boosters": "All Knowledge Boosters",
   "day": "Day",
   "author": "Author",
@@ -13,17 +12,17 @@
     "main": "Main Details",
     "syllabus": "Syllabus"
   },
-  "back-to-knowledge-boosters": "Back to knowledge boosters",
-  "back-to-knowledge-booster": "Back to knowledge booster",
+  "back-to-knowledge-boosters": "Back to Knowledge Boosters",
+  "back-to-knowledge-booster": "Back to Knowledge Booster",
   "enroll-success": "Congratulations, You added {{title}} to your list!",
   "enrolled": "Enrolled",
   "completed": "Completed",
-  "not-enrolled": "You are not enrolled in the <link>knowledge booster</link> yet.",
+  "not-enrolled": "You are not enrolled in the <link>Knowledge Booster</link> yet.",
   "prev-lesson": "Previous Lesson",
   "next-lesson": "Next Lesson",
   "mark-complete": "Mark as completed",
   "mark-complete-success": "Lesson has been marked as complete successfully!",
-  "empty-knowledge-boosters": "You are not enrolled in any <link>knowledge boosters</link> yet.",
+  "empty-knowledge-boosters": "You are not enrolled in any <link>Knowledge Boosters</link> yet.",
   "add-reflection": "Add Reflection",
   "coming-soon": "Coming Soon...",
   "about-author": "About the author"
