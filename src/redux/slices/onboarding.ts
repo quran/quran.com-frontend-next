@@ -7,7 +7,7 @@ import OnboardingGroup from '@/types/OnboardingGroup';
 type ActiveStepPayload = {
   group: OnboardingGroup;
   index: number;
-  isGroupCompleted?: boolean;
+  totalSteps?: number;
   indicesToMarkAsCompleted?: number[];
 };
 
@@ -54,24 +54,26 @@ export const onboardingSlice = createSlice({
       isChecklistVisible: action.payload,
     }),
     setActiveStepIndex: (state: OnboardingState, action: PayloadAction<ActiveStepPayload>) => {
-      const group = state.completedGroups[action.payload.group];
+      const { group: groupKey, index, indicesToMarkAsCompleted, totalSteps } = action.payload;
+
+      const group = state.completedGroups[groupKey];
 
       const newCompletedSteps = group?.completedSteps ? [...group.completedSteps] : [];
-      if (!newCompletedSteps.includes(action.payload.index)) {
-        newCompletedSteps.push(action.payload.index);
+      if (!newCompletedSteps.includes(index)) {
+        newCompletedSteps.push(index);
       }
 
-      if (action.payload.indicesToMarkAsCompleted) {
-        action.payload.indicesToMarkAsCompleted.forEach((index) => {
-          if (!newCompletedSteps.includes(index)) {
-            newCompletedSteps.push(index);
+      if (indicesToMarkAsCompleted) {
+        indicesToMarkAsCompleted.forEach((stepIdx) => {
+          if (!newCompletedSteps.includes(stepIdx)) {
+            newCompletedSteps.push(stepIdx);
           }
         });
       }
 
       const newGroupData = {
         completedSteps: newCompletedSteps,
-        isCompleted: action.payload.isGroupCompleted ?? group?.isCompleted,
+        isCompleted: totalSteps ? newCompletedSteps.length === totalSteps : group?.isCompleted,
       };
 
       return {
@@ -79,7 +81,7 @@ export const onboardingSlice = createSlice({
         activeStep: action.payload,
         completedGroups: {
           ...state.completedGroups,
-          [action.payload.group]: newGroupData,
+          [groupKey]: newGroupData,
         },
       };
     },
@@ -90,5 +92,6 @@ export const { dismissChecklist, setIsChecklistVisible, setActiveStepIndex } =
   onboardingSlice.actions;
 
 export const selectOnboarding = (state: RootState) => state.onboarding;
+export const selectOnboardingActiveStep = (state: RootState) => state.onboarding.activeStep;
 
 export default onboardingSlice.reducer;

@@ -90,7 +90,12 @@ const SelectReciterMenu = ({ onBack }) => {
 
   return (
     <>
-      <PopoverMenu.Item icon={<ChevronLeftIcon />} onClick={onBack} shouldFlipOnRTL>
+      <PopoverMenu.Item
+        icon={<ChevronLeftIcon />}
+        onClick={onBack}
+        shouldFlipOnRTL
+        id="audio-player-reciter-select-item"
+      >
         {t('audio.select-reciter')}
       </PopoverMenu.Item>
       <PopoverMenu.Divider />

@@ -25,11 +25,9 @@ export const checklistIndexToOnboardingSteps = (
   }[]
 > => {
   const commonStepOptions: Partial<Step> = {
-    content: '',
     placement: 'auto',
     disableBeacon: true,
     hideBackButton: true,
-    disableOverlay: false,
     disableOverlayClose: true,
     tooltipComponent: component as any,
     floaterProps: {
@@ -51,6 +49,7 @@ export const checklistIndexToOnboardingSteps = (
           ...commonStepOptions,
           target: '#radio-button',
           showSkipButton: true,
+          placement: 'bottom',
         },
       },
       {
@@ -86,6 +85,7 @@ export const checklistIndexToOnboardingSteps = (
           showNextButton: false,
           showSkipButton: true,
           spotlightClicks: true,
+          placement: 'bottom',
         },
       },
       {
@@ -162,7 +162,6 @@ export const checklistIndexToOnboardingSteps = (
         step: {
           ...commonStepOptions,
           target: '#translation-section',
-          spotlightClicks: true,
           placement: 'left-start',
         },
       },
@@ -173,7 +172,7 @@ export const checklistIndexToOnboardingSteps = (
         step: {
           ...commonStepOptions,
           target: '#surah-info-button',
-          placement: 'left-start',
+          placement: 'bottom',
           showSkipButton: true,
         },
       },
@@ -184,16 +183,6 @@ export const checklistIndexToOnboardingSteps = (
           // first element with class play-verse-button
           target: '.play-verse-button:first-child',
           spotlightClicks: true,
-          showNextButton: false,
-          showPrevButton: true,
-        },
-      },
-      {
-        ...getDetails('select-reciter'),
-        step: {
-          ...commonStepOptions,
-          target: '#audio-player-overflow-menu-trigger',
-          disableScrolling: true,
         },
       },
       {
@@ -232,6 +221,7 @@ export const checklistIndexToOnboardingSteps = (
         step: {
           ...commonStepOptions,
           target: '#login-button',
+          placement: 'bottom',
         },
       },
       {

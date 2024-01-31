@@ -20,6 +20,10 @@
   will-change: transform;
 }
 
+.containerOnboarding {
+  z-index: var(--z-index-max);
+}
+
 .containerHidden {
   display: none;
 }

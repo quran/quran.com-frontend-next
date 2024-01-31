@@ -26,7 +26,6 @@ import {
 import PreferenceGroup from '@/types/auth/PreferenceGroup';
 import OnboardingGroup from '@/types/OnboardingGroup';
 import { ReadingPreference } from '@/types/QuranReader';
-import { isLoggedIn } from '@/utils/auth/login';
 import { logButtonClick } from '@/utils/eventLogger';
 
 const OnboardingChecklist = () => {
@@ -37,7 +36,7 @@ const OnboardingChecklist = () => {
   useShowChecklistAfterInterval();
 
   const dispatch = useDispatch();
-  const { allSteps, startTour, isActive } = useOnboarding();
+  const { startTour, isActive } = useOnboarding();
   const { isChecklistVisible, checklistDismissals, completedGroups } =
     useSelector(selectOnboarding);
 
@@ -82,7 +81,6 @@ const OnboardingChecklist = () => {
 
   const handleChecklistItemClick = async (group: OnboardingGroup) => {
     const item = checklistItems.find((i) => i.group === group);
-    let startIndex = 0;
     if (!item) return;
 
     if (group === OnboardingGroup.READING_EXPERIENCE) {
@@ -98,17 +96,11 @@ const OnboardingChecklist = () => {
       }
     }
 
-    if (group === OnboardingGroup.PERSONALIZED_FEATURES) {
-      if (isLoggedIn()) {
-        startIndex = 1;
-      }
-    }
-
     if (item.href) {
       await router.push(item.href);
     }
 
-    startTour(group, startIndex);
+    startTour(group, 0);
 
     logButtonClick('onboarding_checklist_item', {
       group,
@@ -134,8 +126,7 @@ const OnboardingChecklist = () => {
 
       <ul>
         {checklistItems.map((item) => {
-          const checked =
-            completedGroups[item.group]?.completedSteps?.length === allSteps[item.group].length;
+          const checked = completedGroups[item.group]?.isCompleted;
 
           return (
             <li key={item.group}>

@@ -73,6 +73,7 @@ type PopoverMenuItemProps = {
   shouldCloseMenuAfterClick?: boolean;
   shouldFlipOnRTL?: boolean;
   className?: string;
+  id?: string;
   isSelected?: boolean;
   shouldStopPropagation?: boolean;
 };
@@ -84,6 +85,7 @@ PopoverMenu.Item = ({
   shouldCloseMenuAfterClick = false,
   shouldFlipOnRTL = false,
   className,
+  id,
   isSelected,
   shouldStopPropagation,
 }: PopoverMenuItemProps) => {
@@ -100,6 +102,7 @@ PopoverMenu.Item = ({
         if (onClick) onClick();
       }}
       disabled={isDisabled}
+      id={id}
     >
       {icon && (
         <span
