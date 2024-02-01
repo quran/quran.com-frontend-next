@@ -82,7 +82,6 @@ export const checklistIndexToOnboardingSteps = (
         step: {
           ...commonStepOptions,
           target: '#settings-button',
-          showNextButton: false,
           showSkipButton: true,
           spotlightClicks: true,
           placement: 'bottom',

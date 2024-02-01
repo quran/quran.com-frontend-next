@@ -3,8 +3,8 @@ import { useMemo } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import { Step, TooltipRenderProps } from 'react-joyride';
-import { useDispatch } from 'react-redux';
 
+import useHandleOnboardingEvents from '../OnboardingChecklist/hooks/useHandleOnboardingEvents';
 // eslint-disable-next-line import/no-cycle
 import { useOnboarding } from '../OnboardingProvider';
 
@@ -13,7 +13,6 @@ import styles from './OnboardingStep.module.scss';
 import Button, { ButtonSize, ButtonType, ButtonVariant } from '@/dls/Button/Button';
 import ChevronLeftIcon from '@/icons/chevron-left.svg';
 import ChevronRightIcon from '@/icons/chevron-right.svg';
-import { setIsSettingsDrawerOpen } from '@/redux/slices/navbar';
 import OnboardingGroup from '@/types/OnboardingGroup';
 import { isLoggedIn } from '@/utils/auth/login';
 import { logButtonClick } from '@/utils/eventLogger';
@@ -37,7 +36,12 @@ const OnboardingStep = ({
   const { t } = useTranslation('onboarding');
   const isFirstStep = index === 0;
   const { activeStepGroup, allSteps } = useOnboarding();
-  const dispatch = useDispatch();
+
+  const { beforePrev, beforeNext, beforeSkip } = useHandleOnboardingEvents({
+    group: activeStepGroup,
+    index,
+    isLastStep,
+  });
 
   const stepData = useMemo(() => {
     if (activeStepGroup === OnboardingGroup.PERSONALIZED_FEATURES && isLoggedIn()) {
@@ -52,7 +56,17 @@ const OnboardingStep = ({
       group: activeStepGroup,
       step: index,
     });
-    skipProps.onClick(e);
+
+    const result = beforeSkip();
+    if (result.automaticallyProceed !== false) {
+      if (result.delay) {
+        setTimeout(() => {
+          skipProps.onClick(e);
+        }, result.delay);
+      } else {
+        skipProps.onClick(e);
+      }
+    }
   };
 
   const handlePrevClick = (e) => {
@@ -60,14 +74,16 @@ const OnboardingStep = ({
       group: activeStepGroup,
       step: index,
     });
-    if (activeStepGroup === OnboardingGroup.SETTINGS && index === 1) {
-      // close sidebar
-      dispatch(setIsSettingsDrawerOpen(false));
-      setTimeout(() => {
+
+    const result = beforePrev();
+    if (result.automaticallyProceed !== false) {
+      if (result?.delay) {
+        setTimeout(() => {
+          backProps.onClick(e);
+        }, result.delay);
+      } else {
         backProps.onClick(e);
-      }, 400);
-    } else {
-      backProps.onClick(e);
+      }
     }
   };
 
@@ -76,21 +92,23 @@ const OnboardingStep = ({
       logButtonClick('onboarding_step_finish', {
         group: activeStepGroup,
       });
-      primaryProps.onClick(e);
-
-      if (activeStepGroup === OnboardingGroup.SETTINGS) {
-        // close sidebar
-        dispatch(setIsSettingsDrawerOpen(false));
-      }
-
-      return;
+    } else {
+      logButtonClick('onboarding_step_next', {
+        group: activeStepGroup,
+        step: index,
+      });
     }
 
-    logButtonClick('onboarding_step_next', {
-      group: activeStepGroup,
-      step: index,
-    });
-    primaryProps.onClick(e);
+    const result = beforeNext();
+    if (result.automaticallyProceed !== false) {
+      if (result?.delay) {
+        setTimeout(() => {
+          primaryProps.onClick(e);
+        }, result.delay);
+      } else {
+        primaryProps.onClick(e);
+      }
+    }
   };
 
   return (
