@@ -174,7 +174,7 @@ const Search: NextPage<SearchProps> = ({ translations }): JSX.Element => {
                 source: SearchQuerySource.SearchPage,
                 service: SearchService.QDC,
               });
-              getNewSearchResults({
+              const kalimatResponse = await getNewSearchResults({
                 mode: SearchMode.Advanced,
                 query,
                 size: PAGE_SIZE,
@@ -186,26 +186,24 @@ const Search: NextPage<SearchProps> = ({ translations }): JSX.Element => {
                   filterTranslations: translation,
                   translationFields: 'resource_name',
                 }),
-              })
-                .then((kalimatResponse) => {
-                  setSearchResult({ ...kalimatResponse, service: SearchService.KALIMAT });
-                  if (kalimatResponse.pagination.totalRecords === 0) {
-                    logEmptySearchResults({
-                      query,
-                      source: SearchQuerySource.SearchPage,
-                      service: SearchService.KALIMAT,
-                    });
-                  } else {
-                    logSearchResults({
-                      query,
-                      source: SearchQuerySource.SearchPage,
-                      service: SearchService.KALIMAT,
-                    });
-                  }
-                })
-                .catch(() => {
-                  setHasError(true);
+              });
+              setSearchResult({
+                ...kalimatResponse,
+                service: SearchService.KALIMAT,
+              });
+              if (kalimatResponse.pagination.totalRecords === 0) {
+                logEmptySearchResults({
+                  query,
+                  source: SearchQuerySource.SearchPage,
+                  service: SearchService.KALIMAT,
                 });
+              } else {
+                logSearchResults({
+                  query,
+                  source: SearchQuerySource.SearchPage,
+                  service: SearchService.KALIMAT,
+                });
+              }
             }
           }
         })
@@ -286,7 +284,9 @@ const Search: NextPage<SearchProps> = ({ translations }): JSX.Element => {
 
     if (!firstSelectedTranslation) return t('search:all-translations');
 
-    if (selectedTranslationsArray.length === 1) selectedValueString = firstSelectedTranslation.name;
+    if (selectedTranslationsArray.length === 1) {
+      selectedValueString = firstSelectedTranslation.name;
+    }
     if (selectedTranslationsArray.length === 2) {
       selectedValueString = t('settings.value-and-other', {
         value: firstSelectedTranslation?.name,
