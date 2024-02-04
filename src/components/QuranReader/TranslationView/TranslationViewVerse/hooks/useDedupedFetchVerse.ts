@@ -67,7 +67,10 @@ const useDedupedFetchVerse = ({
 
   const idxInPage = verseIdx % initialData.pagination.perPage;
 
-  const isUsingDefaultSettings = useIsUsingDefaultSettings({ translations: translationParams });
+  const isUsingDefaultSettings = useIsUsingDefaultSettings({
+    translationParams,
+    selectedTranslations,
+  });
   const shouldUseInitialData = pageNumber === 1 && isUsingDefaultSettings;
   const { data: verses } = useSWRImmutable(
     getTranslationViewRequestKey({

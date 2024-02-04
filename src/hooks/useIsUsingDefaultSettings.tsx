@@ -11,11 +11,17 @@ import {
 import { selectIsUsingDefaultWordByWordLocale } from '@/redux/slices/QuranReader/readingPreferences';
 import { selectQuranFont, selectQuranMushafLines } from '@/redux/slices/QuranReader/styles';
 import { selectIsUsingDefaultTranslations } from '@/redux/slices/QuranReader/translations';
-import { areArraysEqual } from '@/utils/array';
+import { areArraysEqual, mergeTwoArraysUniquely } from '@/utils/array';
 import { selectIsUsingDefaultReciter } from '@/xstate/actors/audioPlayer/selectors';
 import { AudioPlayerMachineContext } from '@/xstate/AudioPlayerMachineContext';
 
-const useIsUsingDefaultSettings = ({ translations }: { translations?: number[] } = {}) => {
+const useIsUsingDefaultSettings = ({
+  translationParams,
+  selectedTranslations,
+}: {
+  translationParams?: number[];
+  selectedTranslations?: number[];
+} = {}) => {
   const { lang } = useTranslation();
   const audioService = useContext(AudioPlayerMachineContext);
   const isUsingDefaultReciter = useXstateSelector(audioService, (state) =>
@@ -39,17 +45,22 @@ const useIsUsingDefaultSettings = ({ translations }: { translations?: number[] }
     defaultState.quranReaderStyles.mushafLines === mushafLines;
 
   const areTranslationsEqual = useMemo(() => {
-    if (!translations) {
+    if (!translationParams && !selectedTranslations) {
       return false;
     }
 
+    const translations = mergeTwoArraysUniquely(
+      translationParams ?? [],
+      selectedTranslations ?? [],
+    );
+
     return areArraysEqual(defaultState.translations.selectedTranslations, translations);
-  }, [translations, defaultState.translations.selectedTranslations]);
+  }, [translationParams, selectedTranslations, defaultState.translations.selectedTranslations]);
 
   const isUsingDefaultSettings =
     isUsingDefaultFont && isUsingDefaultReciter && isUsingDefaultWordByWordLocale;
 
-  if (translations) {
+  if (translationParams || selectedTranslations) {
     return isUsingDefaultSettings && isUsingDefaultTranslations && areTranslationsEqual;
   }
 
