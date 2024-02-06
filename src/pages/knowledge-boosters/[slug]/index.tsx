@@ -1,5 +1,5 @@
 /* eslint-disable react/no-multi-comp */
-import { NextPage } from 'next';
+import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
@@ -12,9 +12,14 @@ import PageContainer from '@/components/PageContainer';
 import Spinner from '@/dls/Spinner/Spinner';
 import layoutStyles from '@/pages/index.module.scss';
 import { Course } from '@/types/auth/Course';
-import { privateFetcher } from '@/utils/auth/api';
+import { getCourse, privateFetcher } from '@/utils/auth/api';
 import { makeGetCourseUrl } from '@/utils/auth/apiPaths';
+import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl, getCourseNavigationUrl } from '@/utils/navigation';
+import {
+  ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
+  REVALIDATION_PERIOD_ON_ERROR_SECONDS,
+} from '@/utils/staticPageGeneration';
 
 const Loading = () => (
   <div className={layoutStyles.loadingContainer}>
@@ -25,39 +30,67 @@ const Loading = () => (
 interface Props {
   hasError?: boolean;
   page?: any[];
+  course: Course;
 }
 
-const CoursePage: NextPage<Props> = () => {
-  const { lang } = useTranslation();
+const CoursePage: NextPage<Props> = ({ course }) => {
+  const { lang, t } = useTranslation('learn');
   const router = useRouter();
   const { slug } = router.query;
+  const url = getCourseNavigationUrl(course.slug);
 
   return (
-    <div className={layoutStyles.pageContainer}>
-      <div className={styles.container}>
-        <PageContainer>
-          <DataFetcher
-            loading={Loading}
-            queryKey={makeGetCourseUrl(slug as string)}
-            fetcher={privateFetcher}
-            render={
-              ((course: Course) => (
-                <>
-                  <NextSeoWrapper
-                    title={course.title}
-                    url={getCanonicalUrl(lang, getCourseNavigationUrl(course.id))}
-                    nofollow
-                    noindex
-                  />
-                  <CourseDetails course={course} />
-                </>
-              )) as any
-            }
-          />
-        </PageContainer>
+    <>
+      <NextSeoWrapper
+        title={course.title}
+        canonical={getCanonicalUrl(lang, url)}
+        description={t('booster-meta-desc')}
+        languageAlternates={getLanguageAlternates(url)}
+      />
+      <div className={layoutStyles.pageContainer}>
+        <div className={styles.container}>
+          <PageContainer>
+            <DataFetcher
+              loading={Loading}
+              queryKey={makeGetCourseUrl(slug as string)}
+              fetcher={privateFetcher}
+              render={
+                ((courseDetailsResponse: Course) => (
+                  <>
+                    <CourseDetails course={courseDetailsResponse} />
+                  </>
+                )) as any
+              }
+            />
+          </PageContainer>
+        </div>
       </div>
-    </div>
+    </>
   );
+};
+
+export const getStaticPaths: GetStaticPaths = async () => ({
+  paths: [], // no pre-rendered chapters at build time.
+  fallback: 'blocking', // will server-render pages on-demand if the path doesn't exist.
+});
+
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  try {
+    const course = await getCourse(params.slug as string);
+    return {
+      props: {
+        course,
+      },
+      revalidate: ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
+    };
+  } catch (error) {
+    return {
+      props: {
+        hasError: true,
+      },
+      revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS, // 35 seconds will be enough time before we re-try generating the page again.
+    };
+  }
 };
 
 export default CoursePage;

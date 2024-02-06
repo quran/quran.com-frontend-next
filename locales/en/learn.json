@@ -25,5 +25,7 @@
   "empty-knowledge-boosters": "You are not enrolled in any <link>Knowledge Boosters</link> yet.",
   "add-reflection": "Add Reflection",
   "coming-soon": "Coming Soon...",
-  "about-author": "About the author"
+  "about-author": "About the author",
+  "boosters-meta-desc": "Knowledge Booster",
+  "booster-meta-desc": "Knowledge Booster"
 }

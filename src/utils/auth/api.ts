@@ -14,6 +14,7 @@ import {
   UpdateActivityDayParams,
 } from '@/types/auth/ActivityDay';
 import ConsentType from '@/types/auth/ConsentType';
+import { Course } from '@/types/auth/Course';
 import { CreateGoalRequest, Goal, GoalCategory, UpdateGoalRequest } from '@/types/auth/Goal';
 import { StreakWithMetadataParams, StreakWithUserMetadata } from '@/types/auth/Streak';
 import { Mushaf } from '@/types/QuranReader';
@@ -53,6 +54,8 @@ import {
   makeUserFeatureFlagsUrl,
   makeUserConsentsUrl,
   makeEnrollUserUrl,
+  makeGetCoursesUrl,
+  makeGetCourseUrl,
 } from '@/utils/auth/apiPaths';
 import { fetcher } from 'src/api';
 import CompleteAnnouncementRequest from 'types/auth/CompleteAnnouncementRequest';
@@ -327,6 +330,11 @@ export const enrollUser = async (courseId: string): Promise<{ success: boolean }
   postRequest(makeEnrollUserUrl(), {
     courseId,
   });
+
+export const getCourses = async (): Promise<Course[]> => privateFetcher(makeGetCoursesUrl());
+
+export const getCourse = async (courseSlugOrId: string): Promise<Course> =>
+  privateFetcher(makeGetCourseUrl(courseSlugOrId));
 
 export const addCollection = async (collectionName: string) => {
   return postRequest(makeAddCollectionUrl(), { name: collectionName });

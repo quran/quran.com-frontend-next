@@ -14,8 +14,9 @@ const CoursesPage: NextPage = () => {
     <>
       <NextSeoWrapper
         title={t('common:knowledge-boosters')}
-        url={getCanonicalUrl(lang, getCoursesNavigationUrl())}
+        canonical={getCanonicalUrl(lang, getCoursesNavigationUrl())}
         languageAlternates={getLanguageAlternates(getCoursesNavigationUrl())}
+        description={t('boosters-meta-desc')}
       />
       <CoursesPageLayout />
     </>

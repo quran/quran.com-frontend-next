@@ -18,6 +18,8 @@ const MyCoursesPage: NextPage = () => {
         title={t('common:my-knowledge-boosters')}
         url={getCanonicalUrl(lang, getMyCoursesNavigationUrl())}
         languageAlternates={getLanguageAlternates(getMyCoursesNavigationUrl())}
+        nofollow
+        noindex
       />
       <CoursesPageLayout isMyCourses />
     </>
