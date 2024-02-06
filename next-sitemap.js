@@ -197,6 +197,7 @@ module.exports = {
     // TODO: handle pagination in the future when we have more than 10 knowledge boosters
     knowledgeBoosters.data.forEach((knowledgeBooster) => {
       const location = `/knowledge-boosters/${knowledgeBooster.slug}`;
+      // TODO: handle per language knowledge boosters e.g. Arabic knowledge booster should only show under /ar/[knowledge-booster-slug]
       result.push({
         loc: location,
         alternateRefs: getAlternateRefs('', false, '', location),

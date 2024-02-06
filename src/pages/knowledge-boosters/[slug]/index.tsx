@@ -44,7 +44,7 @@ const CoursePage: NextPage<Props> = ({ course }) => {
       <NextSeoWrapper
         title={course.title}
         canonical={getCanonicalUrl(lang, url)}
-        description={t('booster-meta-desc')}
+        description={course?.metaDescription || t('booster-meta-desc')}
         languageAlternates={getLanguageAlternates(url)}
       />
       <div className={layoutStyles.pageContainer}>

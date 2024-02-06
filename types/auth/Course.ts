@@ -28,6 +28,7 @@ export type Course = {
   author: CourseAuthor;
   language: string; // language code
   description: string;
+  metaDescription?: string;
   image: string;
   thumbnail: string;
   tags: string[];
