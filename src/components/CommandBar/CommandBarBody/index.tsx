@@ -1,5 +1,6 @@
 /* eslint-disable max-lines */
-import React, { useState, useCallback, useEffect } from 'react';
+/* eslint-disable react-func/max-lines-per-function */
+import React, { useState, useCallback, useEffect, useMemo, useContext } from 'react';
 
 import classNames from 'classnames';
 import groupBy from 'lodash/groupBy';
@@ -14,14 +15,17 @@ import DataFetcher from '@/components/DataFetcher';
 import TarteelAttribution from '@/components/TarteelAttribution/TarteelAttribution';
 import VoiceSearchBodyContainer from '@/components/TarteelVoiceSearch/BodyContainer';
 import TarteelVoiceSearchTrigger from '@/components/TarteelVoiceSearch/Trigger';
+import DataContext from '@/contexts/DataContext';
 import useDebounce from '@/hooks/useDebounce';
 import IconSearch from '@/icons/search.svg';
 import { selectRecentNavigations } from '@/redux/slices/CommandBar/state';
+import { selectCustomSelection, selectSurahLogs } from '@/redux/slices/QuranReader/readingTracker';
 import { selectIsCommandBarVoiceFlowStarted } from '@/redux/slices/voiceSearch';
 import SearchQuerySource from '@/types/SearchQuerySource';
 import { makeSearchResultsUrl } from '@/utils/apiPaths';
 import { areArraysEqual } from '@/utils/array';
 import { logButtonClick, logTextSearchQuery } from '@/utils/eventLogger';
+import { getRandomAll } from '@/utils/random';
 import { SearchResponse } from 'types/ApiResponses';
 import { SearchNavigationType } from 'types/SearchNavigationResult';
 
@@ -62,6 +66,9 @@ const DEBOUNCING_PERIOD_MS = 1500;
 
 const CommandBarBody: React.FC = () => {
   const { t } = useTranslation('common');
+  const chaptersData = useContext(DataContext);
+  const surahLogs = useSelector(selectSurahLogs, shallowEqual);
+  const customSelection = useSelector(selectCustomSelection, shallowEqual);
   const recentNavigations = useSelector(selectRecentNavigations, areArraysEqual);
   const isVoiceSearchFlowStarted = useSelector(selectIsCommandBarVoiceFlowStarted, shallowEqual);
   const [searchQuery, setSearchQuery] = useState<string>(null);
@@ -86,8 +93,68 @@ const CommandBarBody: React.FC = () => {
   }, []);
 
   /**
+   * This is the list of commands shown in the pre-input view that picks random surahs/ayahs
+   *
+   * We need to memoize this list so that it is not re-generated on every re-render.
+   * We should only need it to generate the random keys once each time the command bar opens.
+   */
+  const PICK_RANDOM = useMemo(() => {
+    const {
+      randomSurahId,
+      randomSurahAyahId,
+      randomReadSurahId,
+      randomReadSurahAyahId,
+
+      randomSurah,
+      randomSurahAyah,
+      randomReadSurah,
+      randomReadSurahAyah,
+    } = getRandomAll(chaptersData, customSelection || surahLogs, t('verse').toLowerCase());
+
+    //  If the user has no previously read surahs, we need to hide the last 2 options
+    const output = [
+      {
+        name: t('random.any-surah'),
+        key: randomSurahId,
+        resultType: SearchNavigationType.SURAH,
+        displayName: randomSurah,
+      },
+      {
+        name: t('random.any-ayah'),
+        key: randomSurahAyahId,
+        resultType: SearchNavigationType.AYAH,
+        displayName: randomSurahAyah,
+      },
+    ];
+    if (randomReadSurahId && randomReadSurahAyahId) {
+      output.push(
+        {
+          name: t('random.selected-surah'),
+          key: randomReadSurahId,
+          resultType: SearchNavigationType.SURAH,
+          displayName: randomReadSurah,
+        },
+        {
+          name: t('random.selected-ayah'),
+          key: randomReadSurahAyahId,
+          resultType: SearchNavigationType.AYAH,
+          displayName: randomReadSurahAyah,
+        },
+      );
+    }
+    output.push({
+      name: t('random.edit'),
+      key: 'random',
+      resultType: SearchNavigationType.RANDOM_PAGE,
+      displayName: t('random.edit'),
+    });
+
+    return output;
+  }, [chaptersData, customSelection, surahLogs, t]);
+
+  /**
    * Generate an array of commands that will show in the pre-input view.
-   * The function takes the original recentNavigations + NAVIGATE_TO and appends
+   * The function takes the original recentNavigations + PICK_RANDOM + NAVIGATE_TO and appends
    * to each the group name + which command is clearable and which is not. The group
    * will be used by {@see groupBy} to compose the list of commands for each group.
    *
@@ -95,21 +162,24 @@ const CommandBarBody: React.FC = () => {
    * @returns {Command[]}
    */
   const getPreInputCommands = useCallback(
-    (): Command[] =>
-      recentNavigations
-        .map((recentNavigation) => ({
-          ...recentNavigation,
-          group: t('command-bar.recent-navigations'),
-          isClearable: true,
-        }))
-        .concat(
-          NAVIGATE_TO.map((navigateToItem) => ({
-            ...navigateToItem,
-            group: t('command-bar.try-navigating'),
-            isClearable: false,
-          })),
-        ),
-    [recentNavigations, t],
+    (): Command[] => [
+      ...recentNavigations.map((recentNavigation) => ({
+        ...recentNavigation,
+        group: t('command-bar.recent-navigations'),
+        isClearable: true,
+      })),
+      ...PICK_RANDOM.map((pickRandomItem) => ({
+        ...pickRandomItem,
+        group: t('random.pick-random'),
+        isClearable: false,
+      })),
+      ...NAVIGATE_TO.map((navigateToItem) => ({
+        ...navigateToItem,
+        group: t('command-bar.try-navigating'),
+        isClearable: false,
+      })),
+    ],
+    [recentNavigations, PICK_RANDOM, t],
   );
 
   /**

@@ -1,0 +1,10 @@
+{
+	"all": "All",
+	"desc": "Randomly pick a surah or ayah from the Qur'an, or optionally specify a range of surahs and/or ayahs to pick from.",
+	"load-previous": "Load previously read surahs",
+	"reset-changes": "Reset changes",
+	"save-randomize": "Save and Randomize",
+	"search": "Search for a surah",
+	"selected": "Selected",
+	"title": "Random Picker"
+}

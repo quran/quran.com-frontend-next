@@ -1,0 +1,36 @@
+@use "src/styles/breakpoints";
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: flex-start;
+  gap: var(--spacing-medium);
+
+  @include breakpoints.desktop {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+}
+
+.left {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--spacing-xsmall);
+}
+
+.right {
+  display: flex;
+  flex-direction: column;
+  align-self: stretch;
+  align-items: stretch;
+  gap: var(--spacing-xsmall);
+
+  @include breakpoints.tablet {
+    flex-direction: row;
+    align-items: center;
+    gap: var(--spacing-xsmall);
+  }
+}

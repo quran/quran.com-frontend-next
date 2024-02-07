@@ -4,6 +4,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import QuickLink from './QuickLink';
 import styles from './QuickLinks.module.scss';
+import RandomButton from './RandomButton';
 
 import { isLoggedIn } from '@/utils/auth/login';
 
@@ -60,6 +61,7 @@ const QuickLinks: React.FC = () => {
           className={styles.link}
         />
       ))}
+      <RandomButton />
     </div>
   );
 };

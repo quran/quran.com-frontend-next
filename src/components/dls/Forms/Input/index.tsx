@@ -43,6 +43,8 @@ interface Props {
   variant?: InputVariant;
   containerClassName?: string;
   htmlType?: React.HTMLInputTypeAttribute;
+  htmlMin?: number;
+  htmlMax?: number;
   isRequired?: boolean;
   inputRef?: RefObject<HTMLInputElement>;
 }
@@ -66,8 +68,11 @@ const Input: React.FC<Props> = ({
   shouldFlipOnRTL = true,
   containerClassName,
   htmlType,
+  htmlMin,
+  htmlMax,
   isRequired,
   inputRef,
+  ...props
 }) => {
   const [inputValue, setInputValue] = useState(value);
   // listen to any change in value in-case the value gets populated after and API call.
@@ -117,8 +122,11 @@ const Input: React.FC<Props> = ({
           disabled={disabled}
           onChange={onValueChange}
           value={inputValue}
+          min={htmlMin}
+          max={htmlMax}
           {...(placeholder && { placeholder })}
           {...(name && { name })}
+          {...props}
         />
         {clearable ? (
           <>

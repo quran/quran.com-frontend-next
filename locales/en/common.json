@@ -245,6 +245,14 @@
     "q-reflect": "QuranReflect",
     "quran-com": "Quran.com",
     "quran-radio": "Quran Radio",
+    "random": {
+        "pick-random": "Randomly pick",
+        "any-surah": "Any surah",
+        "any-ayah": "Any ayah",
+        "selected-surah": "Surah from custom selection",
+        "selected-ayah": "Ayah from custom selection",
+        "edit": "Edit custom selection"
+    },
     "reading-history": "Reading history",
     "reading-preference": {
         "reading": "Reading",
@@ -270,6 +278,7 @@
         "no-results": "No results found",
         "no-results-suggestion": "We could not find any matching search results for \"{{searchQuery}}\". try searching for a different keyword.",
         "popular": "Popular searches",
+        "random": "Randomly pick",
         "recent": "Recent searches",
         "results": "results",
         "show-all": "Show all results",

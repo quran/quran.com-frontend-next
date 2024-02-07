@@ -34,6 +34,7 @@
     "/reciters": ["reciter", "home"],
     "/profile": ["home", "profile", "collection"],
     "/login": ["login"],
-    "/about-the-quran": ["about-quran"]
+    "/about-the-quran": ["about-quran"],
+    "/random": ["random"]
   }
 }
