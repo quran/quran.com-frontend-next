@@ -8,11 +8,12 @@ import CommandsList from '@/components/CommandBar/CommandsList';
 import DataFetcher from '@/components/DataFetcher';
 import SearchResultItem, { Source } from '@/components/Search/SearchResults/SearchResultItem';
 import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
+import { VersesResponse } from '@/types/ApiResponses';
+import SearchResponse from '@/types/Search/SearchResponse';
 import { makeVersesFilterUrl } from '@/utils/apiPaths';
 import { areArraysEqual } from '@/utils/array';
 import { toLocalizedVerseKey } from '@/utils/locale';
 import { truncateString } from '@/utils/string';
-import { VersesResponse } from 'types/ApiResponses';
 import { SearchNavigationType } from 'types/SearchNavigationResult';
 import SearchResult from 'types/Tarteel/SearchResult';
 
@@ -44,9 +45,11 @@ const SearchResults: React.FC<Props> = ({ searchResult, isCommandBar }) => {
   };
 
   const responseRender = useCallback(
-    (data: VersesResponse) => {
+    (response: SearchResponse | VersesResponse) => {
+      const verses = 'result' in response ? response.result.verses : response.verses;
+
       if (isCommandBar) {
-        const toBeGroupedCommands = data.verses.map((verse) => {
+        const toBeGroupedCommands = verses.map((verse) => {
           return {
             key: verse.verseKey,
             resultType: SearchNavigationType.AYAH,
@@ -55,6 +58,7 @@ const SearchResults: React.FC<Props> = ({ searchResult, isCommandBar }) => {
               80,
             )}`,
             group: t('command-bar.navigations'),
+            isVoiceSearch: true,
           };
         });
 
@@ -65,14 +69,15 @@ const SearchResults: React.FC<Props> = ({ searchResult, isCommandBar }) => {
                 toBeGroupedCommands.map((item, index) => ({ ...item, index })), // append the index so that it can be used for keyboard navigation.
                 (item) => item.group, // we group by the group name that has been attached to each command.
               ),
-              numberOfCommands: data.verses.length, // this is needed so that we can know when we have reached the last command when using keyboard navigation across multiple groups
+              numberOfCommands: verses.length, // this is needed so that we can know when we have reached the last command when using keyboard navigation across multiple groups
             }}
           />
         );
       }
+
       return (
         <>
-          {data.verses.map((verse) => (
+          {verses.map((verse) => (
             <SearchResultItem key={verse.verseKey} result={verse} source={Source.Tarteel} />
           ))}
         </>

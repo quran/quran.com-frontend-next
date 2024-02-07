@@ -11,6 +11,5 @@ export enum SearchNavigationType {
 
 export interface SearchNavigationResult {
   resultType: SearchNavigationType;
-  name: string;
-  key: number | string;
+  key: string;
 }

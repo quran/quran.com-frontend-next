@@ -18,7 +18,7 @@
 
 .navigationItemsListContainer {
   margin-block-start: var(--spacing-large);
-}
-.navigationItemContainer {
-  margin-inline-end: var(--spacing-small);
+  gap: var(--spacing-small);
+  display: flex;
+  flex-wrap: wrap;
 }
