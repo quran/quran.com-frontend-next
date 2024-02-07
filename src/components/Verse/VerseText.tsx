@@ -18,7 +18,7 @@ import {
 } from '@/redux/slices/QuranReader/readingViewVerse';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import { getFontClassName } from '@/utils/fontFaceHelper';
-import { getFirstWordOfSurah } from '@/utils/verse';
+import { getFirstWordOfSurah, getVerseNumberFromKey } from '@/utils/verse';
 import { FALLBACK_FONT, QuranFont } from 'types/QuranReader';
 import Word from 'types/Word';
 
@@ -26,6 +26,7 @@ type VerseTextProps = {
   words: Word[];
   isReadingMode?: boolean;
   isHighlighted?: boolean;
+  startingVerse?: number;
   shouldShowH1ForSEO?: boolean;
 };
 
@@ -34,8 +35,10 @@ const VerseText = ({
   isReadingMode = false,
   isHighlighted,
   shouldShowH1ForSEO = false,
+  startingVerse,
 }: VerseTextProps) => {
   const textRef = useRef(null);
+
   useIntersectionObserver(textRef, QURAN_READER_OBSERVER_ID);
   const { quranFont, quranTextFontScale, mushafLines } = useSelector(
     selectQuranReaderStyles,
@@ -50,6 +53,7 @@ const VerseText = ({
   );
   const selectedVerseKey = useSelector(selectReadingViewSelectedVerseKey, shallowEqual);
   const hoveredVerseKey = useSelector(selectReadingViewHoveredVerseKey, shallowEqual);
+
   const centerAlignPage = useMemo(
     () => isCenterAlignedPage(pageNumber, lineNumber, quranFont),
     [pageNumber, lineNumber, quranFont],
@@ -98,7 +102,10 @@ const VerseText = ({
               font={quranFont}
               isFontLoaded={isFontLoaded}
               isHighlighted={word.verseKey === selectedVerseKey}
-              shouldShowSecondaryHighlight={word.verseKey === hoveredVerseKey}
+              shouldShowSecondaryHighlight={
+                getVerseNumberFromKey(word.verseKey) === startingVerse ||
+                word.verseKey === hoveredVerseKey
+              }
             />
           ))}
         </div>
