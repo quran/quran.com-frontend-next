@@ -13,7 +13,7 @@ import { enrollUser } from '@/utils/auth/api';
 import { makeGetCourseUrl } from '@/utils/auth/apiPaths';
 import { isLoggedIn } from '@/utils/auth/login';
 import { logButtonClick } from '@/utils/eventLogger';
-import { getLoginNavigationUrl } from '@/utils/navigation';
+import { getLessonNavigationUrl, getLoginNavigationUrl } from '@/utils/navigation';
 
 type Props = {
   course: Course;
@@ -21,7 +21,7 @@ type Props = {
 };
 
 const StatusHeader: React.FC<Props> = ({ course, isCTA = false }) => {
-  const { title, id, isUserEnrolled, slug, isCompleted } = course;
+  const { title, id, isUserEnrolled, slug, isCompleted, lessons } = course;
   const [isLoading, setIsLoading] = useState(false);
   const toast = useToast();
   const router = useRouter();
@@ -48,6 +48,10 @@ const StatusHeader: React.FC<Props> = ({ course, isCTA = false }) => {
               isUserEnrolled: true,
             };
           });
+          // if the course has lessons, redirect to the first lesson
+          if (lessons?.length > 0) {
+            router.replace(getLessonNavigationUrl(slug, lessons[0].slug));
+          }
         })
         .catch(() => {
           toast(t('common:error.general'), {
