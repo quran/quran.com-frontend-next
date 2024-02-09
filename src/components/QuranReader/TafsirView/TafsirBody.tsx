@@ -304,6 +304,9 @@ const TafsirBody = ({
         styles.tafsirContainer,
         styles[`tafsir-font-size-${quranReaderStyles.tafsirFontScale}`],
       )}
+      // disable browser translation for tafsir content
+      // @see {https://developer.mozilla.org/en-US/docs/Web/HTML/Global_attributes/translate}
+      translate="no"
     >
       <DataFetcher
         loading={TafsirSkeleton}
