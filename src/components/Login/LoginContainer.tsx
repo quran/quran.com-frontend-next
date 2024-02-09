@@ -1,8 +1,8 @@
 import { useState } from 'react';
 
-import { useRouter } from 'next/router';
 import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
+import { useRouter } from 'next/router';
 
 import EmailSent from './EmailSent';
 import Feature from './Feature';
