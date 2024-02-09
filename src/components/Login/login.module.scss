@@ -16,10 +16,15 @@
   width: calc(10 * var(--spacing-mega));
 }
 
+.cta {
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-large);
+  padding-block: var(--spacing-large);
+}
+
 .title {
   font-size: var(--font-size-jumbo);
   font-weight: var(--font-weight-bold);
-  text-align: center;
   margin-block-end: var(--spacing-large);
 }
 
