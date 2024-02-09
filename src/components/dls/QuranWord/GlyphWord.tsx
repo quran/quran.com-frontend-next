@@ -7,7 +7,8 @@ import { shallowEqual, useSelector } from 'react-redux';
 import styles from './GlyphWord.module.scss';
 
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
-import { getFontClassName } from '@/utils/fontFaceHelper';
+import { CharType } from '@/types/Word';
+import { getFontClassName, getFontFaceNameForPage } from '@/utils/fontFaceHelper';
 import { FALLBACK_FONT, QuranFont } from 'types/QuranReader';
 
 type UthmaniWordTextProps = {
@@ -17,6 +18,8 @@ type UthmaniWordTextProps = {
   pageNumber: number;
   font: QuranFont;
   isFontLoaded: boolean;
+  isHighlighted?: boolean;
+  charType?: CharType;
 };
 
 /**
@@ -40,6 +43,10 @@ const getWordText = (
   if (!isFontLoaded) {
     return qpcUthmaniHafs;
   }
+  // TODO: remove this when BE is ready
+  if (font === QuranFont.TajweedV4) {
+    return textCodeV2;
+  }
   return font === QuranFont.MadaniV1 ? textCodeV1 : textCodeV2;
 };
 
@@ -50,6 +57,8 @@ const GlyphWord = ({
   pageNumber,
   font,
   isFontLoaded,
+  isHighlighted,
+  charType,
 }: UthmaniWordTextProps) => {
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const { quranTextFontScale, mushafLines } = quranReaderStyles;
@@ -61,13 +70,15 @@ const GlyphWord = ({
       data-font-scale={quranTextFontScale}
       data-font={font}
       className={classNames(styles.styledWord, {
+        [styles.tajweedTextHighlighted]:
+          font === QuranFont.TajweedV4 && charType !== CharType.End && isHighlighted,
         [styles.fallbackText]: !isFontLoaded,
         [styles[getFontClassName(FALLBACK_FONT, quranTextFontScale, mushafLines, true)]]:
           !isFontLoaded,
       })}
       {...(isFontLoaded && {
         // eslint-disable-next-line i18next/no-literal-string
-        style: { fontFamily: `p${pageNumber}-${font.replace('code_', '')}` },
+        style: { fontFamily: getFontFaceNameForPage(font, pageNumber) },
       })}
     />
   );

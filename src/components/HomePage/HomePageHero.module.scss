@@ -56,7 +56,7 @@ $fallbackColor: #22a5ad;
     margin-block-start: var(--spacing-xxsmall);
   }
 
-  &>svg {
+  & > svg {
     fill: var(--color-text-inverse);
   }
 }

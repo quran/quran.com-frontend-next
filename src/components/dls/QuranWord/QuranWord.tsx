@@ -80,6 +80,8 @@ const QuranWord = ({
 
   const isWordByWordLayout = showWordByWordTranslation || showWordByWordTransliteration;
   let wordText = null;
+  const shouldBeHighLighted =
+    isHighlighted || isTooltipOpened || (isAudioHighlightingAllowed && isAudioPlayingWord);
 
   if (isQCFFont(font)) {
     wordText = (
@@ -90,6 +92,8 @@ const QuranWord = ({
         textCodeV1={word.codeV1}
         textCodeV2={word.codeV2}
         isFontLoaded={isFontLoaded}
+        isHighlighted={shouldBeHighLighted}
+        charType={word.charTypeName}
       />
     );
   } else if (font === QuranFont.Tajweed) {
@@ -106,8 +110,6 @@ const QuranWord = ({
   */
   const showTooltip =
     word.charTypeName === CharType.Word && isWordByWordAllowed && !!showTooltipFor.length;
-  const shouldBeHighLighted =
-    isHighlighted || isTooltipOpened || (isAudioHighlightingAllowed && isAudioPlayingWord);
   const translationViewTooltipContent = useMemo(
     () => (isWordByWordAllowed ? getTooltipText(showTooltipFor, word) : null),
     [isWordByWordAllowed, showTooltipFor, word],
@@ -148,7 +150,15 @@ const QuranWord = ({
       }}
       className={classNames(styles.container, {
         [styles.highlightOnHover]: isRecitationEnabled,
-        [styles.highlighted]: shouldBeHighLighted,
+        /**
+         * If the font is Tajweed V4, color: xyz syntax does not work
+         * since the COLOR glyph is a separate vector graphic made with
+         * set of member glyphs of different colors. They all together
+         * sit on top of the normal glyph and in browsers the render engine
+         * does not deactivate the color layer of glyph that is sitting on
+         * top of the normal/black glyph.
+         */
+        [styles.highlighted]: shouldBeHighLighted && font !== QuranFont.TajweedV4,
         [styles.secondaryHighlight]: shouldShowSecondaryHighlight,
         [styles.wbwContainer]: isWordByWordLayout,
         [styles.additionalWordGap]: readingPreference === ReadingPreference.Translation,

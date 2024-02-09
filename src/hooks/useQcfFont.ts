@@ -6,7 +6,7 @@ import { selectLoadedFontFaces, addLoadedFontFace } from '@/redux/slices/QuranRe
 import { removeItemFromArray } from '@/utils/array';
 import {
   getFontFaceNameForPage,
-  getV1OrV2FontFaceSource,
+  getQCFFontFaceSource,
   getPagesByVerses,
   isQCFFont,
 } from '@/utils/fontFaceHelper';
@@ -42,9 +42,8 @@ const useQcfFont = (quranFont: QuranFont, verses: Verse[]) => {
     if (isFontQCF && verses.length > 0) {
       // loop through unique page numbers of the current verses
       getPagesByVerses(verses).forEach((pageNumber) => {
-        const isV1 = quranFont === QuranFont.MadaniV1;
-        const fontFaceName = getFontFaceNameForPage(isV1, pageNumber);
-        const fontFace = new FontFace(fontFaceName, getV1OrV2FontFaceSource(isV1, pageNumber));
+        const fontFaceName = getFontFaceNameForPage(quranFont, pageNumber);
+        const fontFace = new FontFace(fontFaceName, getQCFFontFaceSource(quranFont, pageNumber));
         // we only want to load fonts that were not loaded and also are not currently being loaded
         if (
           !currentlyFetchingFonts.current.includes(fontFaceName) &&

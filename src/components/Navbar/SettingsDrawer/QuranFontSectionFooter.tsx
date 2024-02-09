@@ -6,7 +6,7 @@ import Link from 'next/link';
 
 import Section from './Section';
 
-import { isQCFFont } from '@/utils/fontFaceHelper';
+import { isQCFFont, quranFontToVersion, QCFFontVersion } from '@/utils/fontFaceHelper';
 import { QuranFont } from 'types/QuranReader';
 
 interface Props {
@@ -24,7 +24,11 @@ const QuranFontSectionFooter: React.FC<Props> = ({ quranFont }) => {
           components={[<Link key={0} href="/tajweed-colors" prefetch={false} />]}
         />
       ) : (
-        t('fonts.qcf-desc')
+        <>
+          {quranFontToVersion(quranFont) === QCFFontVersion.V4
+            ? t('fonts.qcf-v4-desc')
+            : t('fonts.qcf-desc')}
+        </>
       )}
     </Section.Footer>
   );

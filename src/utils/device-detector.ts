@@ -14,3 +14,16 @@ export const isAppleDevice = () => {
   const isOSX = /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform);
   return isOSX || isMacOs();
 };
+
+export const isSafari = () => {
+  if (!isClient) {
+    return false;
+  }
+  return (
+    navigator.vendor &&
+    navigator.vendor.indexOf('Apple') > -1 &&
+    navigator.userAgent &&
+    navigator.userAgent.indexOf('CriOS') === -1 &&
+    navigator.userAgent.indexOf('FxiOS') === -1
+  );
+};
