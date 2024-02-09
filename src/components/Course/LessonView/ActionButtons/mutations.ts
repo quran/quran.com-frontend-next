@@ -20,34 +20,88 @@ export const mutateLessonAsCompleted = (lessons: Lesson[], lessonId: string): Le
 };
 
 /**
+ * This function receives the cached lesson data and the id of the lesson that was just completed
+ * and expects to return the updated lesson data with the lesson marked as completed
+ * which will be used to update the local cache without having to call the API again.
+ *
+ * @param {Lesson} cachedLessonData
+ * @param {string} completedLessonId
+ * @returns {Lesson}
+ */
+export const getUpdatedLessonData = (
+  cachedLessonData: Lesson,
+  completedLessonId: string,
+): Lesson => {
+  if (cachedLessonData) {
+    const updatedLessonData = { ...cachedLessonData };
+    // only set the completed lesson data to completed
+    if (updatedLessonData.id === completedLessonId) {
+      updatedLessonData.isCompleted = true;
+    }
+    // if the lesson has a course, we should update the lessons array of the course
+    if (cachedLessonData?.course?.lessons) {
+      updatedLessonData.course.lessons = mutateLessonAsCompleted(
+        updatedLessonData.course.lessons,
+        completedLessonId,
+      );
+    }
+    return updatedLessonData;
+  }
+  return cachedLessonData;
+};
+
+/**
+ * This function receives the cached course data and the id of the lesson that was just completed
+ * and expects to return the updated course data with the lesson marked as completed
+ * which will be used to update the local cache without having to call the API again.
+ *
+ * @param {Course} cachedCourseData
+ * @param {string} completedLessonId
+ * @returns {Course}
+ */
+export const getUpdatedCourseData = (
+  cachedCourseData: Course,
+  completedLessonId: string,
+): Course => {
+  if (cachedCourseData) {
+    const updatedCourseData = { ...cachedCourseData };
+    // if the course has lessons, we should update the lessons array
+    if (updatedCourseData?.lessons) {
+      const completedLessons = updatedCourseData.lessons.filter(
+        (loopLesson) => loopLesson.isCompleted,
+      );
+      // if we are marking the last un-completed lesson in the course, we should mark the course itself as completed
+      if (completedLessons.length + 1 === updatedCourseData.lessons.length) {
+        updatedCourseData.isCompleted = true;
+      }
+      updatedCourseData.lessons = mutateLessonAsCompleted(
+        updatedCourseData.lessons,
+        completedLessonId,
+      );
+    }
+    return updatedCourseData;
+  }
+  return cachedCourseData;
+};
+
+/**
  * we need to update all the cached lessons of the course to set the current lesson as completed
  *
  * @param {any} mutatorFunction
  * @param {string} courseSlug
- * @param {string} lessonId
+ * @param {string} completedLessonId
  *
  * @returns {void}
  */
 export const mutateCachedLessons = (
   mutatorFunction: any,
   courseSlug: string,
-  lessonId: string,
+  completedLessonId: string,
 ): void => {
   const courseLessonsUrlRegex = `^${makeGetLessonUrlPrefix(courseSlug)}/.+`;
-  mutatorFunction(courseLessonsUrlRegex, (currentLesson: Lesson) => {
-    if (currentLesson) {
-      const newCurrentLesson = { ...currentLesson, isCompleted: true };
-      // if the lesson has a course, we should update the lessons array of the course
-      if (currentLesson?.course?.lessons) {
-        newCurrentLesson.course.lessons = mutateLessonAsCompleted(
-          newCurrentLesson.course.lessons,
-          lessonId,
-        );
-      }
-      return newCurrentLesson;
-    }
-    return currentLesson;
-  });
+  mutatorFunction(courseLessonsUrlRegex, (cachedLessonData: Lesson) =>
+    getUpdatedLessonData(cachedLessonData, completedLessonId),
+  );
 };
 
 /**
@@ -55,31 +109,16 @@ export const mutateCachedLessons = (
  *
  * @param {any} mutatorFunction
  * @param {string} courseSlug
- * @param {string} lessonId
+ * @param {string} completedLessonId
  *
  * @returns {void}
  */
 export const mutateCachedCourse = (
   mutatorFunction: any,
   courseSlug: string,
-  lessonId: string,
+  completedLessonId: string,
 ): void => {
-  mutatorFunction(makeGetCourseUrl(courseSlug), (currentCourse: Course) => {
-    if (currentCourse) {
-      const newCurrentCourse = { ...currentCourse };
-      // if the course has lessons, we should update the lessons array
-      if (newCurrentCourse?.lessons) {
-        const completedLessons = newCurrentCourse.lessons.filter(
-          (loopLesson) => loopLesson.isCompleted,
-        );
-        // if we are marking the last un-completed lesson in the course, we should mark the course itself as completed
-        if (completedLessons.length + 1 === newCurrentCourse.lessons.length) {
-          newCurrentCourse.isCompleted = true;
-        }
-        newCurrentCourse.lessons = mutateLessonAsCompleted(newCurrentCourse.lessons, lessonId);
-      }
-      return newCurrentCourse;
-    }
-    return currentCourse;
-  });
+  mutatorFunction(makeGetCourseUrl(courseSlug), (cachedCourseData: Course) =>
+    getUpdatedCourseData(cachedCourseData, completedLessonId),
+  );
 };
