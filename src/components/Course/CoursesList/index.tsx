@@ -94,6 +94,7 @@ const CoursesList: React.FC<Props> = ({ courses, isMyCourses }) => {
             <Card
               // eslint-disable-next-line react/no-array-index-key
               key={i}
+              imgSrc="https://images.quran.com/coming-soon.png"
               size={CardSize.Large}
               className={classNames(styles.cardContainer, styles.comingSoonContainer)}
               title={t('coming-soon')}
