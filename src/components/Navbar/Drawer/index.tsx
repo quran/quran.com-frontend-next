@@ -43,6 +43,7 @@ interface Props {
   children: ReactNode;
   closeOnNavigation?: boolean;
   canCloseDrawer?: boolean;
+  bodyId?: string;
 }
 
 /**
@@ -93,6 +94,7 @@ const Drawer: React.FC<Props> = ({
   hideCloseButton = false,
   closeOnNavigation = true,
   canCloseDrawer = true,
+  bodyId,
 }) => {
   const { isVisible: isNavbarVisible } = useSelector(selectNavbar, shallowEqual);
   const drawerRef = useRef(null);
@@ -179,6 +181,7 @@ const Drawer: React.FC<Props> = ({
           [styles.bodyWithBottomPadding]: !isSearchDrawer,
           [styles.searchContainer]: isSearchDrawer,
         })}
+        id={bodyId}
       >
         {children}
         {isSearchDrawer && <SearchDrawerFooter />}

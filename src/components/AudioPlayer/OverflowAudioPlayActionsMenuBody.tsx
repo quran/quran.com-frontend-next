@@ -1,7 +1,9 @@
-import { useState, useMemo, useContext } from 'react';
+import { useState, useMemo, useContext, useEffect } from 'react';
 
 import { useSelector } from '@xstate/react';
 import useTranslation from 'next-translate/useTranslation';
+
+import { useOnboarding } from '../Onboarding/OnboardingProvider';
 
 import AudioExperienceMenu from './Buttons/AudioExperienceMenu';
 import AudioPlaybackRateMenu from './Buttons/AudioPlaybackRateMenu';
@@ -43,6 +45,17 @@ const OverflowAudioPlayActionsMenuBody = () => {
   const audioService = useContext(AudioPlayerMachineContext);
   const { t } = useTranslation('common');
   const playbackRate = useSelector(audioService, (state) => state.context.playbackRate);
+  const { prevStep } = useOnboarding();
+
+  useEffect(() => {
+    const handler = () => {
+      setSelectedMenu(AudioPlayerOverflowMenu.Main);
+      prevStep();
+    };
+
+    window.addEventListener('onboardingPrevStep4', handler);
+    return () => window.removeEventListener('onboardingPrevStep4', handler);
+  }, [prevStep]);
 
   const menus = useMemo(
     () => ({
@@ -88,6 +101,7 @@ const OverflowAudioPlayActionsMenuBody = () => {
             logButtonClick(`audio_player_overflow_menu_reciter`);
             setSelectedMenu(AudioPlayerOverflowMenu.Reciter);
           }}
+          id="audio-player-overflow-menu-reciter"
         >
           <div className={styles.menuWithNestedItems}>
             {t('reciter')}

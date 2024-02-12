@@ -1,5 +1,7 @@
 /* eslint-disable react/no-multi-comp */
 
+import { useEffect, useState } from 'react';
+
 import * as PrimitiveDropdownMenu from '@radix-ui/react-dropdown-menu';
 import classNames from 'classnames';
 
@@ -24,17 +26,21 @@ type PopoverMenuProps = {
   onOpenChange?: (open: boolean) => void;
   expandDirection?: PopoverMenuExpandDirection;
   contentClassName?: string;
+  shouldClose?: boolean;
 };
+
 const PopoverMenu = ({
   children,
   isOpen,
   trigger,
   isPortalled = true,
   isModal = true,
+  shouldClose = true,
   onOpenChange,
   expandDirection: side = PopoverMenuExpandDirection.BOTTOM,
   contentClassName,
 }: PopoverMenuProps) => {
+  const [open, setOpen] = useState(isOpen);
   const direction = useDirection();
   const content = (
     <PrimitiveDropdownMenu.Content
@@ -44,15 +50,32 @@ const PopoverMenu = ({
       {children}
     </PrimitiveDropdownMenu.Content>
   );
+
+  const handleOpenChange = (newOpen: boolean) => {
+    if (!shouldClose) {
+      return;
+    }
+
+    if (onOpenChange) {
+      onOpenChange(newOpen);
+    }
+
+    setOpen(newOpen);
+  };
+
+  useEffect(() => {
+    setOpen(isOpen);
+  }, [isOpen]);
+
   return (
     <PrimitiveDropdownMenu.Root
       dir={direction as Direction}
-      open={isOpen}
+      open={open}
       modal={isModal}
-      {...(onOpenChange && { onOpenChange })}
+      onOpenChange={handleOpenChange}
     >
       {trigger && (
-        <PrimitiveDropdownMenu.Trigger asChild>
+        <PrimitiveDropdownMenu.Trigger asChild onClick={() => setOpen(true)}>
           <span>{trigger}</span>
         </PrimitiveDropdownMenu.Trigger>
       )}

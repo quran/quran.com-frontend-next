@@ -1,6 +1,6 @@
 import { useDispatch } from 'react-redux';
 
-import { setIsSettingsDrawerOpen } from '@/redux/slices/navbar';
+import { SettingsView, setIsSettingsDrawerOpen, setSettingsView } from '@/redux/slices/navbar';
 import OnboardingGroup from '@/types/OnboardingGroup';
 
 interface UseHandleOnboardingEventsParams {
@@ -39,14 +39,47 @@ const useHandleOnboardingEvents = ({
   const dispatch = useDispatch();
 
   const beforePrev = (): EventHookResult => {
-    if (group === OnboardingGroup.SETTINGS && index === 1) {
-      // when the user clicks "back" in
-      // the second step of the settings onboarding, close the drawer
-      dispatch(setIsSettingsDrawerOpen(false));
+    if (group === OnboardingGroup.SETTINGS) {
+      if (index === 1) {
+        // when the user clicks "back" in
+        // the second step of the settings onboarding, close the drawer
+        dispatch(setIsSettingsDrawerOpen(false));
 
-      // add a delay to the animation so that the drawer has time to close
-      // tip: this comes from Drawer.module.scss (--transition-regular)
-      return { delay: 400 };
+        // add a delay to the animation so that the drawer has time to close
+        // tip: this comes from Drawer.module.scss (--transition-regular)
+        return { delay: 400 };
+      }
+
+      if (isLastStep) {
+        // when the user clicks "back" in
+        // the last step of the settings onboarding, close the translations view
+        dispatch(setSettingsView(SettingsView.Body));
+
+        setTimeout(() => {
+          // scroll to translation section
+          const translationSection = document.getElementById('settings-drawer-body').parentElement;
+
+          // scroll to the bottom of the translation section
+          translationSection.scrollTo({
+            top: translationSection.scrollHeight,
+            behavior: 'smooth',
+          });
+        }, 100);
+
+        return {};
+      }
+    }
+
+    if (group === OnboardingGroup.READING_EXPERIENCE) {
+      if (index === 4) {
+        window.dispatchEvent(new Event('onboardingPrevStep4'));
+        return { automaticallyProceed: false };
+      }
+
+      if (index === 3) {
+        window.dispatchEvent(new Event('onboardingPrevStep3'));
+        return { automaticallyProceed: false };
+      }
     }
 
     return {};
@@ -67,6 +100,22 @@ const useHandleOnboardingEvents = ({
         dispatch(setIsSettingsDrawerOpen(true));
 
         // we'll let the drawer handle the proceeding when it's done opening
+        return { automaticallyProceed: false };
+      }
+
+      if (index === 8) {
+        // if the user clicks "next" in translations step,
+        // switch to translations view
+        dispatch(setSettingsView(SettingsView.Translation));
+
+        // we'll let the translations view handle the proceeding when it's done opening
+        return { automaticallyProceed: true };
+      }
+    }
+
+    if (group === OnboardingGroup.READING_EXPERIENCE) {
+      if (index === 4) {
+        window.dispatchEvent(new Event('onboardingNextStep4'));
         return { automaticallyProceed: false };
       }
     }

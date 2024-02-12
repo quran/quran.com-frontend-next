@@ -162,6 +162,17 @@ export const checklistIndexToOnboardingSteps = (
           ...commonStepOptions,
           target: '#translation-section',
           placement: 'left-start',
+          spotlightClicks: true,
+          disableScrollParentFix: true,
+        },
+      },
+      {
+        ...getDetails('translations'),
+        step: {
+          ...commonStepOptions,
+          target: '#settings-drawer-body',
+          placement: 'left-start',
+          spotlightClicks: true,
         },
       },
     ],
@@ -182,6 +193,40 @@ export const checklistIndexToOnboardingSteps = (
           // first element with class play-verse-button
           target: '.play-verse-button:first-child',
           spotlightClicks: true,
+          showNextButton: false,
+        },
+      },
+      {
+        ...getDetails('select-reciter'),
+        step: {
+          ...commonStepOptions,
+          target: '#audio-player-overflow-menu-trigger',
+          spotlightClicks: true,
+          showNextButton: false,
+          disableScrolling: true,
+        },
+      },
+      {
+        ...getDetails('select-reciter'),
+        step: {
+          ...commonStepOptions,
+          // first element with class play-verse-button
+          target: '#audio-player-overflow-menu-reciter',
+          placement: 'left',
+          spotlightClicks: true,
+          showNextButton: false,
+          disableScrolling: true,
+        },
+      },
+      {
+        ...getDetails('select-reciter'),
+        step: {
+          ...commonStepOptions,
+          // first element with class play-verse-button
+          target: '#audio-player-reciter-list',
+          placement: 'right',
+          spotlightClicks: true,
+          disableScrolling: true,
         },
       },
       {

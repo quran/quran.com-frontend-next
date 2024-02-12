@@ -1,15 +1,17 @@
 import React, { useContext } from 'react';
 
-import { useSelector as useXstateSelector } from '@xstate/react';
+import { useSelector, useSelector as useXstateSelector } from '@xstate/react';
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 
 import Spinner from '../dls/Spinner/Spinner';
+import { useOnboarding } from '../Onboarding/OnboardingProvider';
 import styles from '../QuranReader/TranslationView/TranslationViewCell.module.scss';
 
 import Button, { ButtonShape, ButtonSize, ButtonType, ButtonVariant } from '@/dls/Button/Button';
 import useGetQueryParamOrXstateValue from '@/hooks/useGetQueryParamOrXstateValue';
 import PlayIcon from '@/icons/play-outline.svg';
+import OnboardingGroup from '@/types/OnboardingGroup';
 import QueryParam from '@/types/QueryParam';
 import { getChapterData } from '@/utils/chapter';
 import { logButtonClick } from '@/utils/eventLogger';
@@ -37,6 +39,8 @@ const PlayVerseAudioButton: React.FC<PlayVerseAudioProps> = ({
   }: { value: number; isQueryParamDifferent: boolean } = useGetQueryParamOrXstateValue(
     QueryParam.Reciter,
   );
+  const isVisible = useSelector(audioService, (state) => state.matches('VISIBLE'));
+  const { isActive, activeStepGroup, nextStep } = useOnboarding();
 
   const isVerseLoading = useXstateSelector(audioService, (state) =>
     selectIsVerseLoading(state, verseKey),
@@ -59,6 +63,10 @@ const PlayVerseAudioButton: React.FC<PlayVerseAudioProps> = ({
 
     if (onActionTriggered) {
       onActionTriggered();
+    }
+
+    if (isActive && activeStepGroup === OnboardingGroup.READING_EXPERIENCE && isVisible) {
+      nextStep();
     }
   };
 
