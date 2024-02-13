@@ -3,13 +3,14 @@ import React, { useMemo, useState } from 'react';
 import Image from 'next/image';
 import useTranslation from 'next-translate/useTranslation';
 
-import styles from './CourseDetails.module.scss';
-import StatusHeader from './StatusHeader';
-import MainDetails from './Tabs/MainDetails';
-import Syllabus from './Tabs/Syllabus';
-import TabSwitcherItem from './TabSwitcherItem';
-
 import ContentContainer from '@/components/Course/ContentContainer';
+import styles from '@/components/Course/CourseDetails/CourseDetails.module.scss';
+import StatusHeader from '@/components/Course/CourseDetails/StatusHeader';
+import MainDetails from '@/components/Course/CourseDetails/Tabs/MainDetails';
+import DetailSection from '@/components/Course/CourseDetails/Tabs/MainDetails/DetailSection';
+import AuthorDetail from '@/components/Course/CourseDetails/Tabs/MainDetails/DetailSection/AuthorDetail';
+import Syllabus from '@/components/Course/CourseDetails/Tabs/Syllabus';
+import TabSwitcherItem from '@/components/Course/CourseDetails/TabSwitcherItem';
 import Button, { ButtonVariant } from '@/dls/Button/Button';
 import Switch from '@/dls/Switch/Switch';
 import DetailsIcon from '@/icons/collection.svg';
@@ -87,7 +88,15 @@ const CourseDetails: React.FC<Props> = ({ course }) => {
 
       <Switch selected={selectedTab} items={tabs} onSelect={onTabChange} />
       {tabComponents[selectedTab]}
-      {!course.isUserEnrolled && <StatusHeader course={course} isCTA />}
+      {selectedTab === Tab.MAIN && !course.isUserEnrolled && (
+        <>
+          <StatusHeader course={course} isCTA />
+          <DetailSection
+            title={t('about-author')}
+            description={<AuthorDetail author={course.author} />}
+          />
+        </>
+      )}
     </ContentContainer>
   );
 };

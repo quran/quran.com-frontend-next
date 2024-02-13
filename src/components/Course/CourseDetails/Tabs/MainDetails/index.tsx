@@ -5,7 +5,6 @@ import { MilkdownProvider } from '@milkdown/react';
 import useTranslation from 'next-translate/useTranslation';
 
 import DetailSection from './DetailSection';
-import AuthorDetail from './DetailSection/AuthorDetail';
 
 import MarkdownEditor from '@/components/MarkdownEditor';
 import { Course } from '@/types/auth/Course';
@@ -38,7 +37,6 @@ const MainDetails: React.FC<Props> = ({ course }) => {
           description={<MarkdownEditor isEditable={false} defaultValue={description} />}
         />
       </MilkdownProvider>
-      <DetailSection title={t('about-author')} description={<AuthorDetail author={author} />} />
     </>
   );
 };
