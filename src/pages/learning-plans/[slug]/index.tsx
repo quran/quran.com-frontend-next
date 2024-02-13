@@ -33,7 +33,7 @@ interface Props {
   course: Course;
 }
 
-const CoursePage: NextPage<Props> = ({ course }) => {
+const LearningPlanPage: NextPage<Props> = ({ course }) => {
   const { lang, t } = useTranslation('learn');
   const router = useRouter();
   const { slug } = router.query;
@@ -44,7 +44,7 @@ const CoursePage: NextPage<Props> = ({ course }) => {
       <NextSeoWrapper
         title={course.title}
         canonical={getCanonicalUrl(lang, url)}
-        description={course?.metaDescription || t('booster-meta-desc')}
+        description={course?.metaDescription || t('learning-plan-meta-desc')}
         languageAlternates={getLanguageAlternates(url)}
       />
       <div className={layoutStyles.pageContainer}>
@@ -93,4 +93,4 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
   }
 };
 
-export default CoursePage;
+export default LearningPlanPage;

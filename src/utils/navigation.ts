@@ -244,7 +244,7 @@ export const getReciterNavigationUrl = (reciterId: string): string => `/reciters
  * @returns {string} coursePageUrl
  */
 export const getCourseNavigationUrl = (courseSlug: string): string =>
-  `/knowledge-boosters/${courseSlug}`;
+  `/learning-plans/${courseSlug}`;
 
 /**
  * Get href link to the lesson page
@@ -253,7 +253,7 @@ export const getCourseNavigationUrl = (courseSlug: string): string =>
  * @returns {string} lessonPageUrl
  */
 export const getLessonNavigationUrl = (courseSlug: string, lessonSlug: string): string =>
-  `/knowledge-boosters/${courseSlug}/lessons/${lessonSlug}`;
+  `/learning-plans/${courseSlug}/lessons/${lessonSlug}`;
 
 /**
  * Get href link to an audio recitation page by reciterId and chapterId
@@ -293,8 +293,8 @@ export const getCollectionNavigationUrl = (collectionId: string) => {
 };
 
 export const getReadingGoalNavigationUrl = () => '/reading-goal';
-export const getMyCoursesNavigationUrl = () => '/my-knowledge-boosters';
-export const getCoursesNavigationUrl = () => '/knowledge-boosters';
+export const getMyCoursesNavigationUrl = () => '/my-learning-plans';
+export const getCoursesNavigationUrl = () => '/learning-plans';
 
 export const getLoginNavigationUrl = () => '/login';
 

@@ -90,7 +90,7 @@ const ProfileAvatarButton = () => {
           {t('reading-history')}
         </PopoverMenu.Item>
         <PopoverMenu.Item onClick={onMyCoursesClicked} icon={<ReaderIcon />}>
-          {t('my-knowledge-boosters')}
+          {t('my-learning-plans')}
         </PopoverMenu.Item>
         <PopoverMenu.Item onClick={onLogoutClicked} icon={<LogoutIcon />}>
           {t('logout')}

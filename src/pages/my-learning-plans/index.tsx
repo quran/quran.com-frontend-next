@@ -8,14 +8,14 @@ import { getAllChaptersData } from '@/utils/chapter';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl, getMyCoursesNavigationUrl } from '@/utils/navigation';
 
-const MyCoursesPage: NextPage = () => {
+const MyLearningPlanPage: NextPage = () => {
   const { t, lang } = useTranslation('learn');
   useRequireAuth();
 
   return (
     <>
       <NextSeoWrapper
-        title={t('common:my-knowledge-boosters')}
+        title={t('common:my-learning-plans')}
         url={getCanonicalUrl(lang, getMyCoursesNavigationUrl())}
         languageAlternates={getLanguageAlternates(getMyCoursesNavigationUrl())}
         nofollow
@@ -36,4 +36,4 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   };
 };
 
-export default MyCoursesPage;
+export default MyLearningPlanPage;

@@ -47,7 +47,7 @@ const LessonView: React.FC<Props> = ({ lesson, courseSlug, lessonSlugOrId }) => 
             setCourseMaterialModalOpen(false);
           }}
           hasCloseButton
-          header={<p className={styles.modalHeading}>{t('knowledge-booster-material')}</p>}
+          header={<p className={styles.modalHeading}>{t('learning-plan-material')}</p>}
         >
           <CourseMaterial
             isModal
@@ -70,14 +70,14 @@ const LessonView: React.FC<Props> = ({ lesson, courseSlug, lessonSlugOrId }) => 
                 variant={ButtonVariant.Ghost}
               >
                 <ArrowLeft />
-                <p className={styles.backText}>{t('back-to-knowledge-booster')}</p>
+                <p className={styles.backText}>{t('back-to-learning-plan')}</p>
               </Button>
               <Button
                 onClick={onCourseMaterialClicked}
                 variant={ButtonVariant.Ghost}
                 className={styles.courseMaterialButton}
               >
-                {t('knowledge-booster-material')}
+                {t('learning-plan-material')}
               </Button>
             </div>
             <div className={styles.headerContainer}>

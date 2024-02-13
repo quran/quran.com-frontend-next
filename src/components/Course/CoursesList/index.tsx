@@ -39,7 +39,7 @@ const CoursesList: React.FC<Props> = ({ courses, isMyCourses }) => {
     return (
       <span>
         <Trans
-          i18nKey="learn:empty-knowledge-boosters"
+          i18nKey="learn:empty-learning-plans"
           components={{
             link: (
               <Link
@@ -109,7 +109,7 @@ const CoursesList: React.FC<Props> = ({ courses, isMyCourses }) => {
             onClick={onAllCoursesClicked}
             href={getCoursesNavigationUrl()}
           >
-            {t('all-knowledge-boosters')}
+            {t('all-learning-plans')}
           </Link>
         </div>
       )}

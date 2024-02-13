@@ -25,7 +25,7 @@ const CoursesPageLayout: React.FC<Props> = ({ isMyCourses = false }) => {
     <div className={layoutStyles.pageContainer}>
       <ContentContainer>
         <p className={styles.title}>
-          {isMyCourses ? t('common:my-knowledge-boosters') : t('common:knowledge-boosters')}
+          {isMyCourses ? t('common:my-learning-plans') : t('common:learning-plans')}
         </p>
         <div className={classNames(layoutStyles.flow, styles.container)}>
           <DataFetcher

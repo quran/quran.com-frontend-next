@@ -83,7 +83,7 @@ module.exports = {
     ...locales.map((locale) => `/${locale}`),
     '/*/product-updates*',
     '/*/search',
-    '/*my-knowledge-boosters',
+    '/*my-learning-plans',
   ],
   alternateRefs: locales.map((locale) => ({
     href: `${BASE_PATH}/${locale}`,
@@ -192,12 +192,12 @@ module.exports = {
       });
     });
 
-    // 12. /knowledge-boosters/[knowledgeBoosterSlug]
-    const knowledgeBoosters = await getAvailableCourses();
-    // TODO: handle pagination in the future when we have more than 10 knowledge boosters
-    knowledgeBoosters.data.forEach((knowledgeBooster) => {
-      const location = `/knowledge-boosters/${knowledgeBooster.slug}`;
-      // TODO: handle per language knowledge boosters e.g. Arabic knowledge booster should only show under /ar/[knowledge-booster-slug]
+    // 12. /learning-plans/[learningPlanSlug]
+    const learningPlans = await getAvailableCourses();
+    // TODO: handle pagination in the future when we have more than 10 learning plans
+    learningPlans.data.forEach((learningPlan) => {
+      const location = `/learning-plans/${learningPlan.slug}`;
+      // TODO: handle per language learning plans e.g. Arabic learning plan should only show under /ar/[learning-plan-slug]
       result.push({
         loc: location,
         alternateRefs: getAlternateRefs('', false, '', location),

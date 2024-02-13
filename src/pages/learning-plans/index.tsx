@@ -7,16 +7,16 @@ import { getAllChaptersData } from '@/utils/chapter';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl, getCoursesNavigationUrl } from '@/utils/navigation';
 
-const CoursesPage: NextPage = () => {
+const LearningPlansPage: NextPage = () => {
   const { t, lang } = useTranslation('learn');
 
   return (
     <>
       <NextSeoWrapper
-        title={t('common:knowledge-boosters')}
+        title={t('common:learning-plans')}
         canonical={getCanonicalUrl(lang, getCoursesNavigationUrl())}
         languageAlternates={getLanguageAlternates(getCoursesNavigationUrl())}
-        description={t('boosters-meta-desc')}
+        description={t('learning-plans-meta-desc')}
       />
       <CoursesPageLayout />
     </>
@@ -33,4 +33,4 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   };
 };
 
-export default CoursesPage;
+export default LearningPlansPage;
