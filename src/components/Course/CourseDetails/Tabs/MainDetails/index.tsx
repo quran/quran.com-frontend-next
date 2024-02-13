@@ -15,7 +15,7 @@ type Props = {
 
 const MainDetails: React.FC<Props> = ({ course }) => {
   const { t } = useTranslation('learn');
-  const { description, dailyMinutes, lessons = [], author } = course;
+  const { description, dailyMinutes, lessons = [] } = course;
 
   // const tagsString = tags?.reduce((acc, currentValue) => {
   //   if (!acc) return currentValue;
