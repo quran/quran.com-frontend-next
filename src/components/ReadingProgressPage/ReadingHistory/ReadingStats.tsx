@@ -9,7 +9,7 @@ import Link, { LinkVariant } from '@/dls/Link/Link';
 import BookIcon from '@/icons/book.svg';
 import ClockIcon from '@/icons/clock.svg';
 import RightArrow from '@/icons/east.svg';
-import { ActivityDay } from '@/types/auth/ActivityDay';
+import { ActivityDay, QuranActivityDay } from '@/types/auth/ActivityDay';
 import { RangeItemDirection } from '@/types/Range';
 import { getChapterData } from '@/utils/chapter';
 import { secondsToReadableFormat } from '@/utils/datetime';
@@ -19,7 +19,7 @@ import { getChapterWithStartingVerseUrl } from '@/utils/navigation';
 import { parseVerseRange } from '@/utils/verseKeys';
 
 interface ReadingStatsProps {
-  activityDay: ActivityDay;
+  activityDay: ActivityDay<QuranActivityDay>;
 }
 
 const ReadingStats: React.FC<ReadingStatsProps> = ({ activityDay }) => {

@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
 
-import useTranslation from 'next-translate/useTranslation';
 import dynamic from 'next/dynamic';
+import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useSelector } from 'react-redux';
 
 import DataFetcher from '@/components/DataFetcher';

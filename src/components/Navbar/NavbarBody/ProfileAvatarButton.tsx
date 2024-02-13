@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
-import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
+import useTranslation from 'next-translate/useTranslation';
 
 import styles from './ProfileAvatarButton.module.scss';
 
@@ -11,12 +11,13 @@ import ClockIcon from '@/icons/clock.svg';
 import ArrowIcon from '@/icons/east.svg';
 import LogoutIcon from '@/icons/logout.svg';
 import IconPerson from '@/icons/person.svg';
+import ReaderIcon from '@/icons/reader.svg';
 import TickIcon from '@/icons/tick.svg';
 import { logoutUser } from '@/utils/auth/api';
 import { isLoggedIn } from '@/utils/auth/login';
 import { removeLastSyncAt } from '@/utils/auth/userDataSync';
 import { logButtonClick } from '@/utils/eventLogger';
-import { getReadingGoalProgressNavigationUrl } from '@/utils/navigation';
+import { getMyCoursesNavigationUrl, getReadingGoalProgressNavigationUrl } from '@/utils/navigation';
 
 const ProfileAvatarButton = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -53,6 +54,13 @@ const ProfileAvatarButton = () => {
     });
   };
 
+  const onMyCoursesClicked = () => {
+    logButtonClick('profile_avatar_my_courses');
+    router.push(getMyCoursesNavigationUrl()).then(() => {
+      setIsOpen(false);
+    });
+  };
+
   if (isUserLoggedIn) {
     return (
       <PopoverMenu
@@ -80,6 +88,9 @@ const ProfileAvatarButton = () => {
         </PopoverMenu.Item>
         <PopoverMenu.Item onClick={onReadingHistoryClicked} icon={<ClockIcon />}>
           {t('reading-history')}
+        </PopoverMenu.Item>
+        <PopoverMenu.Item onClick={onMyCoursesClicked} icon={<ReaderIcon />}>
+          {t('my-learning-plans')}
         </PopoverMenu.Item>
         <PopoverMenu.Item onClick={onLogoutClicked} icon={<LogoutIcon />}>
           {t('logout')}
