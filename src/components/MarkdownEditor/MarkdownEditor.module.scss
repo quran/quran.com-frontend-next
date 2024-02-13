@@ -16,6 +16,10 @@
         list-style-type: decimal !important;
     }
 
+    li {
+        padding-block: var(--spacing-micro);
+    }
+
     h1,
     h2,
     h3,
