@@ -1,5 +1,6 @@
 /* eslint-disable react/no-multi-comp */
 import classNames from 'classnames';
+import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from './CoursesPageLayout.module.scss';
@@ -27,6 +28,17 @@ const CoursesPageLayout: React.FC<Props> = ({ isMyCourses = false }) => {
         <p className={styles.title}>
           {isMyCourses ? t('common:my-learning-plans') : t('common:learning-plans')}
         </p>
+        {!isMyCourses && (
+          <div className={styles.desc}>
+            <Trans
+              i18nKey="learn:learning-plans-desc"
+              components={{
+                br: <br key={0} />,
+              }}
+            />
+          </div>
+        )}
+
         <div className={classNames(layoutStyles.flow, styles.container)}>
           <DataFetcher
             loading={Loading}
