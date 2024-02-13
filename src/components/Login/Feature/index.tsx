@@ -12,7 +12,7 @@ type Props = {
 const Feature: React.FC<Props> = ({ text, icon }) => {
   return (
     <div className={styles.container}>
-      <IconContainer icon={icon} shouldFlipOnRTL={false} />
+      <IconContainer shouldForceSetColors={false} icon={icon} shouldFlipOnRTL={false} />
       <p className={styles.text}>{text}</p>
     </div>
   );

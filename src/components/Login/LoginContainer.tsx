@@ -14,10 +14,10 @@ import EmailLogin, { EmailLoginData, sendMagicLink } from '@/components/Login/Em
 import SocialLogin from '@/components/Login/SocialLogin';
 import Button, { ButtonType, ButtonVariant } from '@/dls/Button/Button';
 import Link, { LinkVariant } from '@/dls/Link/Link';
-import CalendarIcon from '@/icons/calendar.svg';
-import GoalIcon from '@/icons/goal.svg';
+import CalendarIcon from '@/icons/calendar-1.svg';
+import GoalIcon from '@/icons/goal-1.svg';
 import HeartIcon from '@/icons/love.svg';
-import MobileIcon from '@/icons/mobile.svg';
+import MobileIcon from '@/icons/mobile-1.svg';
 import MoreIcon from '@/icons/sun-outline.svg';
 import { logButtonClick, logFormSubmission } from '@/utils/eventLogger';
 import AuthType from 'types/auth/AuthType';

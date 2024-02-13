@@ -23,19 +23,22 @@ type IconContainerProps = {
   size?: IconSize;
   color?: IconColor;
   shouldFlipOnRTL?: boolean;
+  shouldForceSetColors?: boolean;
 };
 const IconContainer = ({
   icon,
   size = IconSize.Medium,
   color = IconColor.default,
   shouldFlipOnRTL = true,
+  shouldForceSetColors = true,
 }: IconContainerProps) => {
   const dir = useDirection();
   return (
     <span
       className={classNames(styles.container, {
-        [styles.defaultColor]: color === IconColor.default || color === IconColor.primary,
-        [styles.secondaryColor]: color === IconColor.secondary,
+        [styles.defaultColor]:
+          (shouldForceSetColors && color === IconColor.default) || color === IconColor.primary,
+        [styles.secondaryColor]: shouldForceSetColors && color === IconColor.secondary,
         [styles.xsmallIcon]: size === IconSize.Xsmall,
         [styles.smallIcon]: size === IconSize.Small,
         [styles.mediumIcon]: size === IconSize.Medium,
