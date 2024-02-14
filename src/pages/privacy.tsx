@@ -51,6 +51,16 @@ const PrivacyPage: NextPage = (): JSX.Element => {
           <p>{t('log-data.desc')}</p>
           <h2>{t('communication.title')}</h2>
           <p>{t('communication.desc')}</p>
+          <h2>{t('data-protection.title')}</h2>
+          <p>
+            <Trans
+              components={{
+                br: <br />,
+                boldSpan: <span key={2} className={styles.bold} />,
+              }}
+              i18nKey="privacy:data-protection.desc"
+            />
+          </p>
           <h2>{t('data-security.title')}</h2>
           <p>{t('data-security.desc')}</p>
           <h2>{t('data-sharing.title')}</h2>
@@ -78,7 +88,9 @@ const PrivacyPage: NextPage = (): JSX.Element => {
                 br: <br />,
                 li: <li />,
                 underline: <span className={styles.underline} />,
-                0: <a key={0} href="mailto:donors@quran.com" target="_blank" rel="noreferrer" />,
+                0: (
+                  <a key={0} href="mailto:info@quran.foundation" target="_blank" rel="noreferrer" />
+                ),
               }}
               i18nKey="privacy:contact-us.desc"
             />

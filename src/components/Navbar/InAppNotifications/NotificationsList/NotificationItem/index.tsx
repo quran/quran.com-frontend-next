@@ -58,7 +58,7 @@ const NotificationItem: React.FC<Props> = ({ notification }) => {
       })}
     >
       <div className={styles.individualNotif}>
-        <p>{notification?.content}</p>
+        <p>{notification?.content as string}</p>
         <div className={styles.popoverContainer}>
           {/* eslint-disable-next-line i18next/no-literal-string */}
           {isNotRead && <p className={styles.dot}>&#x2022;</p>}
