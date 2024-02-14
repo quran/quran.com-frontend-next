@@ -178,6 +178,10 @@
     "lastName": "Last Name"
   },
   "from": "From",
+  "prepare-hearts": {
+    "cta": "Learn more",
+    "title": "Ready for Ramadan?"
+  },
   "fundraising-sticky-banner": {
     "cta": "Donate",
     "title": "Support Quran.com this Ramadan"
