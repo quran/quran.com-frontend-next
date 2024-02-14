@@ -1,19 +1,17 @@
 import classNames from 'classnames';
 import { useSelector } from 'react-redux';
 
-import DonateButton from '../Fundraising/DonateButton';
-
 import styles from './Banner.module.scss';
 
 import MoonIllustrationSVG from '@/public/images/moon-illustration.svg';
 import { selectIsBannerVisible } from '@/redux/slices/banner';
-import DonateButtonClickSource from '@/types/DonateButtonClickSource';
 
 type BannerProps = {
   text: string;
+  ctaButton?: React.ReactNode;
 };
 
-const Banner = ({ text }: BannerProps) => {
+const Banner = ({ text, ctaButton }: BannerProps) => {
   const isBannerVisible = useSelector(selectIsBannerVisible);
 
   return (
@@ -28,9 +26,7 @@ const Banner = ({ text }: BannerProps) => {
         </div>
         <div className={styles.text}>{text}</div>
       </div>
-      <div className={styles.ctaContainer}>
-        <DonateButton source={DonateButtonClickSource.BANNER} />
-      </div>
+      {ctaButton && <div className={styles.ctaContainer}>{ctaButton}</div>}
     </div>
   );
 };
