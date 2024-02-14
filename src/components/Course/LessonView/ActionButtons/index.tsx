@@ -11,6 +11,7 @@ import Button, { ButtonSize, ButtonType } from '@/dls/Button/Button';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import useMutateMultipleKeys from '@/hooks/useMutateMultipleKeys';
 import useMutateWithoutRevalidation from '@/hooks/useMutateWithoutRevalidation';
+import useScrollToTop from '@/hooks/useScrollToTop';
 import ChevronLeftIcon from '@/icons/chevron-left.svg';
 import ChevronRightIcon from '@/icons/chevron-right.svg';
 import { ActivityDayType } from '@/types/auth/ActivityDay';
@@ -25,6 +26,7 @@ type Props = {
 };
 
 const ActionButtons: React.FC<Props> = ({ lesson, courseSlug }) => {
+  const scrollToTop = useScrollToTop();
   const { day, id, isFirst, isLast, course, isCompleted } = lesson;
   const router = useRouter();
   const { t } = useTranslation('learn');
@@ -64,6 +66,7 @@ const ActionButtons: React.FC<Props> = ({ lesson, courseSlug }) => {
     });
     const lessonIndex = day - 1;
     const previousLessonSlug = course.lessons[lessonIndex - 1].slug;
+    scrollToTop();
     navigateToLesson(course.slug, previousLessonSlug);
   };
 
@@ -74,6 +77,7 @@ const ActionButtons: React.FC<Props> = ({ lesson, courseSlug }) => {
     });
     const lessonIndex = day - 1;
     const nextLessonSlug = course.lessons[lessonIndex + 1].slug;
+    scrollToTop();
     navigateToLesson(course.slug, nextLessonSlug);
   };
 
