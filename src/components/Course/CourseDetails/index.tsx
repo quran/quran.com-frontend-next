@@ -102,15 +102,19 @@ const CourseDetails: React.FC<Props> = ({ course }) => {
 
       <Switch selected={selectedTab} items={tabs} onSelect={onTabChange} />
       {tabComponents[selectedTab]}
-      {selectedTab === Tab.MAIN && !course.isUserEnrolled && (
+      {selectedTab === Tab.MAIN && (
         <>
-          <StatusHeader course={course} isCTA />
+          {!course.isUserEnrolled && (
+            <>
+              <StatusHeader course={course} isCTA />
+            </>
+          )}
+          <DetailSection
+            title={t('about-author')}
+            description={<AuthorDetail author={course.author} />}
+          />
         </>
       )}
-      <DetailSection
-        title={t('about-author')}
-        description={<AuthorDetail author={course.author} />}
-      />
     </ContentContainer>
   );
 };
