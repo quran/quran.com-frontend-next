@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 /* eslint-disable jsdoc/require-returns */
 /* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable react-func/max-lines-per-function */
@@ -15,8 +16,15 @@ const isDevelopment = process.env.NEXT_PUBLIC_VERCEL_ENV === 'development';
 const BASE_PATH =
   `${isDevelopment ? 'http' : 'https'}://${process.env.NEXT_PUBLIC_VERCEL_URL}` ||
   'https://quran.com';
+const BASE_AUTH_PATH = process.env.NEXT_PUBLIC_AUTH_BASE_URL;
 
 const chapters = range(1, 115);
+
+const getAvailableCourses = async () => {
+  const res = await fetch(`${BASE_AUTH_PATH}/courses`);
+  const data = await res.json();
+  return data;
+};
 
 const getAvailableTafsirs = async () => {
   const res = await fetch(`https://api.qurancdn.com/api/qdc/resources/tafsirs`);
@@ -71,7 +79,12 @@ module.exports = {
   siteUrl: BASE_PATH,
   sitemapSize: 20000,
   generateRobotsTxt: isProduction,
-  exclude: [...locales.map((locale) => `/${locale}`), '/*/product-updates*', '/*/search'],
+  exclude: [
+    ...locales.map((locale) => `/${locale}`),
+    '/*/product-updates*',
+    '/*/search',
+    '/*my-learning-plans',
+  ],
   alternateRefs: locales.map((locale) => ({
     href: `${BASE_PATH}/${locale}`,
     hreflang: locale,
@@ -173,6 +186,18 @@ module.exports = {
     // 11. /reciters/[reciterId]
     reciterIds.forEach((reciterId) => {
       const location = `/reciters/${reciterId}`;
+      result.push({
+        loc: location,
+        alternateRefs: getAlternateRefs('', false, '', location),
+      });
+    });
+
+    // 12. /learning-plans/[learningPlanSlug]
+    const learningPlans = await getAvailableCourses();
+    // TODO: handle pagination in the future when we have more than 10 learning plans
+    learningPlans.data.forEach((learningPlan) => {
+      const location = `/learning-plans/${learningPlan.slug}`;
+      // TODO: handle per language learning plans e.g. Arabic learning plan should only show under /ar/[learning-plan-slug]
       result.push({
         loc: location,
         alternateRefs: getAlternateRefs('', false, '', location),

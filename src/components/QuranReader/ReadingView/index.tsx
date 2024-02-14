@@ -4,8 +4,8 @@
 import React, { useCallback, useMemo, useRef, useState } from 'react';
 
 import classNames from 'classnames';
-import useTranslation from 'next-translate/useTranslation';
 import dynamic from 'next/dynamic';
+import useTranslation from 'next-translate/useTranslation';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { shallowEqual, useSelector } from 'react-redux';
 import { Virtuoso, VirtuosoHandle } from 'react-virtuoso';

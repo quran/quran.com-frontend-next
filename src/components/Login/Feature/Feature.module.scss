@@ -1,0 +1,13 @@
+.container {
+    font-weight: var(--font-weight-semibold);
+    font-size: var(--font-size-large);
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: start;
+    padding-block: var(--spacing-micro);
+}
+
+.text {
+    padding-inline-start: var(--spacing-xsmall);
+}
