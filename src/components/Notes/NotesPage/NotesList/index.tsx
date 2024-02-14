@@ -39,7 +39,7 @@ const NotesList = ({ data, isValidating, size, setSize, mutateCache }: NotesList
     setSize(size + 1);
   };
 
-  const renderNote = (index: number, note: typeof notes[number]) => {
+  const renderNote = (index: number, note: (typeof notes)[number]) => {
     return <NotesListItem key={note.id} note={note} setSelectedNoteId={setSelectedNoteId} />;
   };
 
