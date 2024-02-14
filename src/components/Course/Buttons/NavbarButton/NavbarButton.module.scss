@@ -1,0 +1,8 @@
+.cta {
+    text-transform: capitalize;
+    font-weight: var(--font-weight-bold);
+    margin-inline-end: var(--spacing-xxsmall);
+    --themed-fg: var(--shade-0);
+    --themed-bg: var(--color-success-medium);
+    --themed-border: var(--color-success-medium);
+}

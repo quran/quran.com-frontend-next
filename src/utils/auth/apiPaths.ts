@@ -70,6 +70,18 @@ export const makeGetNoteByAttachedEntityUrl = (queryParams: GetNoteByAttachedEnt
 
 export const makeDeleteOrUpdateNoteUrl = (id: string) => makeUrl(`notes/${id}`);
 
+export const makeGetCoursesUrl = (params?: { myCourses: boolean }) => makeUrl('courses', params);
+
+export const makeGetCourseUrl = (courseSlugOrId: string) => makeUrl(`courses/${courseSlugOrId}`);
+
+export const makeGetLessonUrlPrefix = (courseSlugOrId: string) =>
+  makeUrl(`courses/${courseSlugOrId}/lessons`);
+
+export const makeGetLessonUrl = (courseSlugOrId: string, lessonSlugOrId: string) =>
+  `${makeGetLessonUrlPrefix(courseSlugOrId)}/${lessonSlugOrId}`;
+
+export const makeEnrollUserUrl = () => makeUrl('courses/enroll');
+
 export const makeUpdateCollectionUrl = (collectionId: string) =>
   makeUrl(`collections/${collectionId}`);
 

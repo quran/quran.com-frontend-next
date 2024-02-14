@@ -22,6 +22,10 @@
     "*": ["common", "error", "radio", "quick-links"],
     "/": ["home", "radio", "collection", "reading-goal", "reciter"],
     "/reading-goal": ["reading-goal", "reciter"],
+    "/my-learning-plans": ["learn"],
+    "/learning-plans": ["learn"],
+    "/learning-plans/[slug]": ["learn"],
+    "/learning-plans/[slug]/lessons/[lessonSlugOrId]": ["learn"],
     "/reading-goal/progress": ["reading-goal", "reading-progress"],
     "/[chapterId]": [
       "quran-reader",

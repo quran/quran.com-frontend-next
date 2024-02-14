@@ -20,7 +20,7 @@ const CurrentWeekProgress: React.FC<Props> = ({ weekData, goal, fixedWidth = tru
   const { lang, t } = useTranslation();
   const { days, readingDaysMap } = weekData;
 
-  const getDayState = (day: typeof days[number]): DayState => {
+  const getDayState = (day: (typeof days)[number]): DayState => {
     const readingDay = readingDaysMap[day.dateString];
     const hasRead = readingDay?.hasRead;
 

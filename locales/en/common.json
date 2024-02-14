@@ -186,6 +186,10 @@
     "body": "Body"
   },
   "from": "From",
+  "prepare-hearts": {
+    "cta": "Learn more",
+    "title": "Ready for Ramadan?"
+  },
   "fundraising-sticky-banner": {
     "cta": "Donate",
     "title": "Support Quran.com this Ramadan"
@@ -254,6 +258,8 @@
   "quran-com": "Quran.com",
   "quran-radio": "Quran Radio",
   "reading-history": "Reading history",
+  "my-learning-plans": "My Learning Plans",
+  "learning-plans": "Learning Plans",
   "reading-preference": {
     "reading": "Reading",
     "translation": "Translation"

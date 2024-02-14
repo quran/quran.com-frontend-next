@@ -10,7 +10,7 @@ import Button, { ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import ContentModal from '@/dls/ContentModal/ContentModal';
 import ContentModalHandles from '@/dls/ContentModal/types/ContentModalHandles';
 import ArrowLeft from '@/icons/west.svg';
-import { ActivityDay } from '@/types/auth/ActivityDay';
+import { ActivityDay, QuranActivityDay } from '@/types/auth/ActivityDay';
 import { Pagination } from '@/types/auth/GetBookmarksByCollectionId';
 import { getFilterActivityDaysParams } from '@/utils/activity-day';
 import { privateFetcher } from '@/utils/auth/api';
@@ -81,7 +81,10 @@ const MonthModal = ({ month, year, onClose }: MonthModalProps) => {
           )}
           fetcher={privateFetcher}
           render={(response) => {
-            const data = response as { data: ActivityDay[]; pagination: Pagination };
+            const data = response as {
+              data: ActivityDay<QuranActivityDay>[];
+              pagination: Pagination;
+            };
             const isEmpty = data.data.length === 0;
 
             return (
