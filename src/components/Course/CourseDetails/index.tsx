@@ -91,12 +91,12 @@ const CourseDetails: React.FC<Props> = ({ course }) => {
       {selectedTab === Tab.MAIN && !course.isUserEnrolled && (
         <>
           <StatusHeader course={course} isCTA />
-          <DetailSection
-            title={t('about-author')}
-            description={<AuthorDetail author={course.author} />}
-          />
         </>
       )}
+      <DetailSection
+        title={t('about-author')}
+        description={<AuthorDetail author={course.author} />}
+      />
     </ContentContainer>
   );
 };

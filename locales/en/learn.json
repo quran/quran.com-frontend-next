@@ -5,7 +5,7 @@
   "author": "Author",
   "learning-plan-material": "Learning Plan Material",
   "duration": "Duration",
-  "duration-daily": "{{dailyMins}} minutes/day over {{days}} days",
+  "duration-daily": "Each short Lesson takes less than {{dailyMins}} minutes to complete {{days}} Lessons total",
   "description": "Description",
   "category": "Category",
   "tabs": {
