@@ -1,16 +1,22 @@
 {
-    "awaiting-confirmation": "Menunggu konfirmasi",
-    "continue-apple": "Lanjutkan dengan Apple",
-    "continue-email": "Lanjutkan dengan Email",
-    "continue-facebook": "Lanjutkan dengan Facebook",
-    "continue-google": "Lanjutkan dengan Google",
-    "email-placeholder": "Alamat email",
-    "login-error": {
-        "AuthenticationError": "Otentikasi gagal. Silakan coba lagi nanti",
-        "TokenExpiredError": "Anda telah logout, silakan login kembali."
-    },
-    "login-title": "Masuk ke Quran.com",
-    "other-options": "Opsi Masuk Lainnya",
-    "privacy-policy": "Melindungi privasi Anda adalah prioritas kami – Dengan mendaftar, Anda menyetujui <link> Kebijakan Privasi <\/link> kami",
-    "verify-code": "Verifikasi bahwa kode keamanan yang diberikan cocok dengan teks berikut:"
+  "awaiting-confirmation": "Menunggu konfirmasi",
+  "continue-apple": "Lanjutkan dengan Apple",
+  "continue-email": "Lanjutkan dengan Email",
+  "continue-facebook": "Lanjutkan dengan Facebook",
+  "continue-google": "Lanjutkan dengan Google",
+  "email-placeholder": "Alamat email",
+  "feature-1": "Lacak tujuan Anda",
+  "feature-2": "Pertahankan coretan bacaan",
+  "feature-3": "Buat koleksi",
+  "feature-4": "Sinkronkan data Anda di seluruh browser",
+  "feature-5": "Dan banyak lagi!",
+  "login-cta": "Masuk atau Daftar sekarang:",
+  "login-error": {
+    "AuthenticationError": "Otentikasi gagal. Silakan coba lagi nanti",
+    "TokenExpiredError": "Anda telah logout, silakan login kembali."
+  },
+  "login-title": "Masuk ke Quran.com",
+  "other-options": "Opsi Masuk Lainnya",
+  "privacy-policy": "Melindungi privasi Anda adalah prioritas kami – Dengan mendaftar, Anda menyetujui <link> Kebijakan Privasi </link> kami",
+  "verify-code": "Verifikasi bahwa kode keamanan yang diberikan cocok dengan teks berikut:"
 }
