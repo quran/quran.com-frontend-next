@@ -5,18 +5,18 @@
   "continue-facebook": "Continue with Facebook",
   "continue-google": "Continue with Google",
   "email-placeholder": "Email Address",
-  "login-error": {
-    "AuthenticationError": "Authentication failed. Please try again later",
-    "TokenExpiredError": "You have been logged out, please login again."
-  },
-  "login-title": "Welcome!",
-  "other-options": "Other Login Options",
-  "privacy-policy": "Protecting your privacy is our priority – By signing up, you consent to our <link>Privacy Policy</link>",
-  "verify-code": "Verify that the provided security code matches the following text:",
   "feature-1": "Track your goals",
   "feature-2": "Maintain reading streaks",
   "feature-3": "Create collections",
   "feature-4": "Sync your data across browsers",
   "feature-5": "And more!",
-  "login-cta": "Log-in or Sign up now:"
+  "login-cta": "Log-in or Sign up now:",
+  "login-error": {
+    "AuthenticationError": "Authentication failed. Please try again later",
+    "TokenExpiredError": "You have been logged out, please login again."
+  },
+  "login-title": "Login to Quran.com",
+  "other-options": "Other Login Options",
+  "privacy-policy": "Protecting your privacy is our priority – By signing up, you consent to our <link>Privacy Policy</link>",
+  "verify-code": "Verify that the provided security code matches the following text:"
 }

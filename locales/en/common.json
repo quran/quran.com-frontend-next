@@ -178,10 +178,6 @@
     "lastName": "Last Name"
   },
   "from": "From",
-  "prepare-hearts": {
-    "cta": "Learn more",
-    "title": "Ready for Ramadan?"
-  },
   "fundraising-sticky-banner": {
     "cta": "Donate",
     "title": "Support Quran.com this Ramadan"
@@ -202,6 +198,7 @@
   "language": "Language",
   "languages": "Languages",
   "learn-more": "Learn more",
+  "learning-plans": "Learning Plans",
   "less": "Less",
   "loading": "Loading",
   "login": "Login",
@@ -213,6 +210,7 @@
   "mobile-apps": "Mobile Apps",
   "mode": "Mode",
   "more": "More",
+  "my-learning-plans": "My Learning Plans",
   "navigate": "Navigate",
   "network": "Network",
   "new": "New!",
@@ -241,6 +239,10 @@
     "title": "Dear Companion of the Quran,"
   },
   "powered-by": "Powered by",
+  "prepare-hearts": {
+    "cta": "Learn more",
+    "title": "Ready for Ramadan?"
+  },
   "prev": "Previous",
   "previous-ayah": "Previous Ayah",
   "privacy": "Privacy",
@@ -250,8 +252,6 @@
   "quran-com": "Quran.com",
   "quran-radio": "Quran Radio",
   "reading-history": "Reading history",
-  "my-learning-plans": "My Learning Plans",
-  "learning-plans": "Learning Plans",
   "reading-preference": {
     "reading": "Reading",
     "translation": "Translation"

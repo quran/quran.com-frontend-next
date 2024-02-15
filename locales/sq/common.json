@@ -1,381 +1,387 @@
 {
-    "about": "Rreth Nesh",
-    "allow": "Lejo",
-    "and": "dhe",
-    "announcements": {
-        "auth-onboarding": {
-            "data-sync": {
-                "action": "Tjetra",
-                "description": "Pavarësisht nëse jeni duke përdorur Quran.com në telefonin ose laptopin tuaj, faqeshënuesit, vargjet e fundit të lexuara dhe preferencat tuaja do të jenë të disponueshme",
-                "title": "Të dhënat tuaja do të sinkronizohen <br><\/br> nëpër pajisje"
-            },
-            "feedback": {
-                "action": "Mirë, e kuptova",
-                "description": "Faleminderit që përdorni Quran.com dhe do të ishim të lumtur të dëgjonim komentet tuaja në <link> feedback.quran.com <\/link>",
-                "title": "Ne duam të dëgjojmë mendimet tuaja"
-            },
-            "quran-foundation-link": {
-                "action": "Tjetra",
-                "description": "Përdorni hyrjen tuaj në Quran.com për të hyrë në QuranReflec.com - një komunitet i lulëzuar global i angazhuar në reflektimin Kur'anor.",
-                "title": "Përdorni llogarinë tuaj nëpër aplikacionet Quran.Foundation!"
-            },
-            "quran-growth-journey": {
-                "action": "Tjetra",
-                "description": "Mbani brezin tuaj të leximit të Kuranit dhe përparoni në qëllimet tuaja duke ndërtuar zakone të reja",
-                "title": "Filloni Udhëtimin tuaj të Rritjes në Kuran!"
-            },
-            "welcome": {
-                "action": "Shihni çfarë ka të re",
-                "title": "Mirë se vini në llogarinë e përdoruesit <br><\/br> të Quran.com"
-            }
-        },
-        "collections-announcement": {
-            "slide-1": {
-                "description": "Jemi shumë të lumtur të njoftojmë se tani ju mund të gruponi faqerojtësit nën \"koleksione\"! <br\/> <br\/> <li> Shtoni sa më shumë koleksione që dëshironi <\/li> <li> Shtoni një faqeshënues në një ose më shumë koleksione <\/li> <li> Dhe më shumë! <\/li>",
-                "title": "Koleksionet e faqeshënuesve janë këtu!"
-            }
-        }
+  "about": "Rreth Nesh",
+  "allow": "Lejo",
+  "and": "dhe",
+  "announcements": {
+    "auth-onboarding": {
+      "data-sync": {
+        "action": "Tjetra",
+        "description": "Pavarësisht nëse jeni duke përdorur Quran.com në telefonin ose laptopin tuaj, faqeshënuesit, vargjet e fundit të lexuara dhe preferencat tuaja do të jenë të disponueshme",
+        "title": "Të dhënat tuaja do të sinkronizohen <br></br> nëpër pajisje"
+      },
+      "feedback": {
+        "action": "Mirë, e kuptova",
+        "description": "Faleminderit që përdorni Quran.com dhe do të ishim të lumtur të dëgjonim komentet tuaja në <link> feedback.quran.com </link>",
+        "title": "Ne duam të dëgjojmë mendimet tuaja"
+      },
+      "quran-foundation-link": {
+        "action": "Tjetra",
+        "description": "Përdorni hyrjen tuaj në Quran.com për të hyrë në QuranReflec.com - një komunitet i lulëzuar global i angazhuar në reflektimin Kur'anor.",
+        "title": "Përdorni llogarinë tuaj nëpër aplikacionet Quran.Foundation!"
+      },
+      "quran-growth-journey": {
+        "action": "Tjetra",
+        "description": "Mbani brezin tuaj të leximit të Kuranit dhe përparoni në qëllimet tuaja duke ndërtuar zakone të reja",
+        "title": "Filloni Udhëtimin tuaj të Rritjes në Kuran!"
+      },
+      "welcome": {
+        "action": "Shihni çfarë ka të re",
+        "title": "Mirë se vini në llogarinë e përdoruesit <br></br> të Quran.com"
+      }
     },
-    "aria": {
-        "change-settings": "Ndrysho Cilësimet",
-        "drawer-close": "Mbylle sirtarin",
-        "msg-close": "Mbyll Mesazhin",
-        "nav-drawer-open": "Hapni sirtarin e navigimit",
-        "play-surah": "Luaj suren {{surahName}}",
-        "select-lng": "Zgjidh gjuhen",
-        "sidebar-nav-close": "Mbyllni shiritin anësor të navigimit"
+    "collections-announcement": {
+      "slide-1": {
+        "description": "Jemi shumë të lumtur të njoftojmë se tani ju mund të gruponi faqerojtësit nën \"koleksione\"! <br/> <br/> <li> Shtoni sa më shumë koleksione që dëshironi </li> <li> Shtoni një faqeshënues në një ose më shumë koleksione </li> <li> Dhe më shumë! </li>",
+        "title": "Koleksionet e faqeshënuesve janë këtu!"
+      }
+    }
+  },
+  "aria": {
+    "change-settings": "Ndrysho Cilësimet",
+    "drawer-close": "Mbylle sirtarin",
+    "msg-close": "Mbyll Mesazhin",
+    "nav-drawer-open": "Hapni sirtarin e navigimit",
+    "play-surah": "Luaj suren {{surahName}}",
+    "select-lng": "Zgjidh gjuhen",
+    "sidebar-nav-close": "Mbyllni shiritin anësor të navigimit"
+  },
+  "audio": {
+    "auto-scroll": {
+      "off": "Joaktiv",
+      "on": "Aktiv",
+      "title": "Lëvizja automatike"
     },
-    "audio": {
-        "auto-scroll": {
-            "off": "Joaktiv",
-            "on": "Aktiv",
-            "title": "Lëvizja automatike"
-        },
-        "displaying": "Duke u shfaqur",
-        "exp-tip": "<span>Ndrysho përmbajtjen e shfaqur nën<\/span><br><\/br> <boldSpan>Cilësimet<\/boldSpan> > <boldSpan>Fjalë për fjalë<\/boldSpan>",
-        "exp-tip-no-select": "<span>Shënoni opsionin e shfaqjes së këshillës së veglave dhe zgjidhni opsionin <br><\/br> Përkthimi dhe\/ose Transliterimi<\/span><br><\/br><span> nën <\/span><boldSpan>Cilësimet<\/boldSpan> > <boldSpan>Fjalë për fjalë<\/boldSpan><span>, për të<\/span><br><\/br> <span>aktivizuar këtë veçori.<\/span>",
-        "experience": "Përvoja",
-        "play": "Luaj Audio",
-        "playback-normal": "Normale",
-        "playback-speed": "Shpejtësia e riprodhimit",
-        "playback-speed-unit": "x",
-        "player": {
-            "close-audio-player": "Mbyll luajtësin e audios",
-            "currently-playing": "Aktualisht jeni duke luajtur",
-            "delay-verse": "Vonesa mes vargjeve",
-            "download": "Shkarko",
-            "full-surah": "Surja e plotë",
-            "manage-repeat-settings": "Menaxho cilësimet e përsëritjes",
-            "mismatch": "Klikoni në \"Start Over\" nëse dëshironi të luani {{currentReadingChapter}} në vend të kësaj",
-            "pause": "Ndalo",
-            "pause-audio": "Ndalo audion",
-            "play": "Luaj",
-            "play-audio": "Luaj Audio",
-            "play-range": "Gama e luajtjes",
-            "previous-ayah": "Ajeti i mëparshëm",
-            "repeat-1-verse": "Përsëritni vargun",
-            "repeat-settings": "Përsëritni Cilësimet",
-            "repeat-verse": "Përsëritni çdo varg",
-            "search-verse": "Kërkoni për një varg",
-            "single-verse": "Një varg",
-            "start-over": "Filloje nga e para",
-            "start-playing": "Filloni të luani",
-            "stop-repeating": "Ndalo përsëritjen",
-            "times": "herë",
-            "verses-range": "Gama e vargjeve"
-        },
-        "repeat-moved": "Cilësimet e përsëritjes janë zhvendosur te luajtësi audio. Klikoni në <0> <\/0> për t'iu qasur atyre",
-        "select-reciter": "Zgjidhni Recitues",
-        "speed": "Shpejtësia",
-        "title": "Audio"
+    "displaying": "Duke u shfaqur",
+    "exp-tip": "<span>Ndrysho përmbajtjen e shfaqur nën</span><br></br> <boldSpan>Cilësimet</boldSpan> > <boldSpan>Fjalë për fjalë</boldSpan>",
+    "exp-tip-no-select": "<span>Shënoni opsionin e shfaqjes së këshillës së veglave dhe zgjidhni opsionin <br></br> Përkthimi dhe/ose Transliterimi</span><br></br><span> nën </span><boldSpan>Cilësimet</boldSpan> > <boldSpan>Fjalë për fjalë</boldSpan><span>, për të</span><br></br> <span>aktivizuar këtë veçori.</span>",
+    "experience": "Përvoja",
+    "play": "Luaj Audio",
+    "playback-normal": "Normale",
+    "playback-speed": "Shpejtësia e riprodhimit",
+    "playback-speed-unit": "x",
+    "player": {
+      "close-audio-player": "Mbyll luajtësin e audios",
+      "currently-playing": "Aktualisht jeni duke luajtur",
+      "delay-verse": "Vonesa mes vargjeve",
+      "download": "Shkarko",
+      "full-surah": "Surja e plotë",
+      "manage-repeat-settings": "Menaxho cilësimet e përsëritjes",
+      "mismatch": "Klikoni në \"Start Over\" nëse dëshironi të luani {{currentReadingChapter}} në vend të kësaj",
+      "pause": "Ndalo",
+      "pause-audio": "Ndalo audion",
+      "play": "Luaj",
+      "play-audio": "Luaj Audio",
+      "play-range": "Gama e luajtjes",
+      "previous-ayah": "Ajeti i mëparshëm",
+      "repeat-1-verse": "Përsëritni vargun",
+      "repeat-settings": "Përsëritni Cilësimet",
+      "repeat-verse": "Përsëritni çdo varg",
+      "search-verse": "Kërkoni për një varg",
+      "single-verse": "Një varg",
+      "start-over": "Filloje nga e para",
+      "start-playing": "Filloni të luani",
+      "stop-repeating": "Ndalo përsëritjen",
+      "times": "herë",
+      "verses-range": "Gama e vargjeve"
     },
-    "ayah": "Ajeti",
-    "ayahs": "Ajetet",
-    "beta": "Beta",
-    "bookmark": "Shënoni faqeshënues",
-    "bookmarked": "Shënuar si faqeshënues",
-    "both": "të dyja",
-    "cancel": "Anullo",
-    "click-here": "Kliko këtu",
-    "close": "Mbylle",
-    "command-bar": {
-        "navigations": "Lundrimet",
-        "no-nav-results": "Nuk ka rezultate navigimi",
-        "placeholder": "Çfarë doni të lexoni?",
-        "powered-by": "Kërkimi zanor i mundësuar nga Tarteel.ai",
-        "recent-navigations": "Lundrimet e fundit",
-        "search-by-voice": "Kërko me zë",
-        "try-navigating": "Provoni të lundroni në"
-    },
-    "community": {
-        "cta": "Bashkohuni me komunitetin",
-        "header": "Bashkohuni me Komunitetin QDC të ndërtuesve dhe teknologëve muslimanë.",
-        "sub-header": "Regjistrohu për Quran.com Discord për të marrë pjesë dhe për të bashkëpunuar me komunitetin kryesor që ndërton teknologjinë islame.",
-        "title": "Komuniteti"
-    },
-    "complete-sign-up": "Plotësoni regjistrimin tuaj",
-    "consents": {
-        "communication": {
-            "body": "🚀 Mbushni progresin tuaj nëpërmjet njoftimeve të personalizuara <boldSpan> <\/boldSpan> në lidhje me përparimin e qëllimit tuaj, ruajtjen e vijave dhe përmirësimin e përdorimit të veçorive tona aktuale. <br><\/br> <br><\/br> A mund t'ju mbajmë të informuar përmes emailit dhe kanaleve të tjera? Ju keni kontrollin - mos ngurroni t'i rregulloni këto preferenca në çdo kohë në cilësimet e llogarisë tuaj. <br><\/br> <br><\/br> Thjesht zgjidhni \"Lejo\" për rikujtuesit frymëzues <boldSpan> <\/boldSpan> ose \"Jo tani\" për t'i refuzuar.",
-            "header": "Do të donim t'ju ndihmonim të qëndroni <boldSpan> të përkushtuar dhe të qëndrueshëm <\/boldSpan> me Udhëtimin tuaj të Rritjes në Kuran! 📖🌟"
-        }
-    },
-    "continue": "Vazhdoni",
-    "copied": "E kopjuar",
-    "copied-to-clipboard": "Kopjuar në kujtesën tuaj",
-    "copy": "Kopjo",
-    "counter": {
-        "decrease": "Ulje",
-        "increase": "Rrit"
-    },
-    "default-description": "Kurani i përkthyer në shumë gjuhë në një ndërfaqe të thjeshtë dhe të lehtë",
-    "developers": "Zhvilluesit",
-    "display": "Ekrani",
-    "donate": "Dhuroni",
-    "donate_monthly": "Dhuroni çdo muaj",
-    "donate_once": "Dhuroni një herë",
-    "email-verification": {
-        "check-spam": "Nuk e morët emailin e verifikimit? Kontrolloni kutinë tuaj të postës së padëshiruar",
-        "email-sent": "Sapo dërguam një email te <strong> {{email}} <\/strong>",
-        "email-verification": "Verifikimi me email",
-        "resend-email": "Ridërgo email",
-        "resend-email-in": "Ridërgo email-in e verifikimit për {{remainingTime}} sek...",
-        "verify-code": "Verifiko kodin"
-    },
-    "error": {
-        "bookmark-sync": "Faqeshënuesi është jashtë sinkronizimit.",
-        "email-login-fail": "Identifikimi me email dështoi. Ju lutemi provoni përsëri",
-        "general": "Dicka shkoi keq. Ju lutemi provoni përsëri.",
-        "offline": "Duket sikur e humbe lidhjen. Ju lutemi kontrolloni dhe provoni përsëri.",
-        "pref-persist-fail": "Sinkronizimi i cilësimeve tuaja me renë kompjuterike dështoi."
-    },
-    "feedback": "Feedback",
-    "fonts": {
-        "15_lines": "15 rreshta",
-        "16_lines": "16 rreshta",
-        "code_v1": "Kompleksi King Fahad V1",
-        "code_v2": "Kompleksi King Fahad V2",
-        "font-size": "Përmasa e gërmave",
-        "lines": "Linjat",
-        "qcf-desc": "Fontet Kompleksi King Fahad (V1 dhe V2) ofrojnë cilësi më të lartë, por kërkojnë më shumë kohë për t'u ngarkuar.",
-        "qpc_uthmani_hafs": "QPC Uthmani Hafs",
-        "quran-font": "Fonti i Kuranit",
-        "tajweed": "Texhvidi",
-        "tajweed-desc": "Fonti Tajweed tregon një Mushaf me ngjyrë Tajweed. Mund të lexoni më shumë rreth rregullave të ngjyrave të Tajweed <0>këtu<\/0>",
-        "text_indopak": "IndoPak",
-        "text_uthmani": "Osmani"
-    },
-    "footer": {
-        "description": "Quran.com është një Jariyah Sadakah. Shpresojmë t'ua bëjmë të lehtë të gjithëve leximin, studimin dhe mësimin e Kuranit Fisnik. Kurani Fisnik ka shumë emra duke përfshirë Al-Kuran Al-Kareem, Al-Ketab, Al-Furkan, Al-Maw'itha, Al-Thikr dhe Al-Noor.",
-        "hiring": "Ne po punësojmë! Bashkohuni me ekipin e QuranFoundation dhe kontribuoni në misionin tonë. <link> Apliko tani! <\/link>",
-        "rights": "Të gjitha të drejtat e rezervuara",
-        "title": "Lexoni, studioni dhe mësoni Kuranin Fisnik."
-    },
-    "form": {
-        "code": "Kodi i Verifikimit",
-        "email": "Email",
-        "firstName": "Emri",
-        "lastName": "Mbiemri"
-    },
-    "from": "Nga",
-    "fundraising-sticky-banner": {
-        "cta": "Dhuroni",
-        "title": "Mbështetni Quran.com këtë Ramazan"
-    },
-    "fundraising": {
-        "description": "Donacionet mujore na ndihmojnë të përmirësojmë Quran.com dhe të mbajmë operacionet, kështu që ne fokusohemi më pak në mbledhjen e fondeve dhe më shumë në krijimin e ndikimit.",
-        "title": "Bëhuni një donator mujor"
-    },
-    "help": "Ndihmë",
-    "hizb": "Hizb",
-    "home": "Shtëpi",
-    "hours": "orët",
-    "inline": "Ne rresht",
-    "input": {
-        "clear": "Qartë"
-    },
-    "juz": "Xhuz",
-    "language": "Gjuhë",
-    "languages": "Gjuhët",
-    "learn-more": "Mëso më shumë",
-    "less": "Më pak",
-    "loading": "Po ngarkohet",
-    "login": "Identifikohu",
-    "logout": "Shkyç",
-    "meccan": "mekas",
-    "medinan": "Medinas",
-    "menu": "Menu",
-    "minutes": "Minutat",
-    "mobile-apps": "Aplikacionet celulare",
-    "mode": "Modaliteti",
-    "more": "Më shumë",
-    "navigate": "Navigoni",
-    "network": "Rrjeti",
-    "new": "I ri!",
-    "next": "Tjetra",
-    "next-ayah": "Ajeti tjetër",
-    "no": "Jo",
-    "no-notifications": "Nuk ka ende njoftime",
-    "none": "Asnjëra",
-    "not-now": "Jo tani",
-    "notification": {
-        "mark-all-as-read": "Shënoni të gjitha si të lexuara",
-        "mark-as-read": "Shënoni si të lexuar"
-    },
-    "notifications": "Njoftimet",
-    "off": "Joaktiv",
-    "on": "Aktiv",
-    "page": "Faqe",
-    "pages": "Faqet",
-    "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} nga {{totalNumberOfResults}} rezultate kërkimi",
-    "pbuh": "Bekimet e Allahut qofshin mbi të",
-    "popular-links": "Kërkimet e preferuara",
-    "popup": {
-        "footnote": "Donacionet mujore na lejojnë të fokusohemi më pak në mbledhjen e fondeve",
-        "text-1": "Ne jemi të përkushtuar t'i shërbejmë njohurive dhe teknologjisë botërore kuranore, gjithmonë falas.",
-        "text-2": "Quran.com është një mundësi e përkryer për bamirësi të vazhdueshme (Sadakah Jariyah). Ju lutemi, konsideroni të investoni në Ahiretin tuaj si donator mujor (ose një herë).",
-        "title": "I dashur shok i Kur'anit,"
-    },
-    "powered-by": "Mundësuar nga",
-    "prev": "E mëparshme",
-    "previous-ayah": "Ajeti i mëparshëm",
-    "privacy": "Privatësia",
-    "product-updates": "Përditësimet e produktit",
-    "profile": "Profili",
-    "q-reflect": "Kurani Reflekto",
-    "quran-com": "Quran.com",
-    "quran-radio": "Kuran Radio",
-    "reading-history": "Leximi i historisë",
-    "reading-preference": {
-        "reading": "Leximi",
-        "translation": "Përkthimi"
-    },
-    "recitation": "Recitim",
-    "reciter": "Recitues",
-    "reciter-summary": "Recitues fjalë për fjalë: <span> {{reciterName}} <\/span> . Klikoni mbi një fjalë për të dëgjuar recitimin e saj.",
-    "reciters": "Recituesit",
-    "reflect": "Pasqyrim",
-    "remove": "Hiq",
-    "rename": "Riemërto",
-    "retry": "Provo sërish",
-    "revelation_order": "Urdhri i Zbulesës",
-    "rub": "Rub el Hizb",
-    "save-to-collection": "Ruaje në Koleksion",
-    "search-for": "Kërko për \"{{searchQuery}}\"",
-    "search-results": "{{count}} rezultatet e  kërkimit",
-    "search": {
-        "filters": "Filtrat",
-        "hint": "Provoni të kërkoni për",
-        "jump-to": "Kërce Te",
-        "no-results": "Nuk u gjet asnjë rezultat",
-        "no-results-suggestion": "Nuk gjetëm asnjë rezultat kërkimi që përputhej për \" {{searchQuery}} \". provoni të kërkoni për një fjalë kyçe të ndryshme.",
-        "popular": "Kërkimet popullore",
-        "recent": "Kërkimet e fundit",
-        "results": "rezultatet",
-        "show-all": "Shfaq të gjitha rezultatet",
-        "switch-mode": "Kalo te Kërkimi i Avancuar",
-        "title": "Kërko"
-    },
-    "seconds": "Sekonda",
-    "settings": {
-        "no-tafsir-selected": "Nuk është zgjedhur asnjë tefsir",
-        "no-translation-selected": "Nuk u zgjodh asnjë përkthim",
-        "reading-experience": "Përvoja e të lexuarit",
-        "reset-cta": "Rivendos cilësimet e paracaktuara",
-        "reset-notif": "Cilësimet tuaja janë rivendosur në ato të paracaktuara",
-        "search-reciter": "Kërko Recitues",
-        "search-tafsirs": "Kërkoni tefsirë",
-        "search-translations": "Kërko Përkthime",
-        "selected-reciter": "Recitues i zgjedhur",
-        "selected-tafsirs": "Tefsire të zgjedhura",
-        "selected-translations": "Përkthime të zgjedhura",
-        "show-tooltip-when-playing-audio": "Shfaq mesazhin sugjerues kur luhet audio",
-        "title": "Cilësimet",
-        "tooltip-playing-audio-helper": "Trego përkthimin e fjalëve në mesazhin sugjerues ndërsa luani ayah",
-        "value-and-other": "{{value}} , dhe {{othersCount}} të tjera",
-        "value-and-others": "{{value}} , dhe {{othersCount}} tjerë",
-        "wbw-helper": "Shfaq përkthimin ose transliterimin direkt nën fjalë",
-        "word-tooltip-helper": "Shfaq përkthimin ose transliterimin kur rri pezull ose klikon fjalën"
-    },
-    "share": "Shpërndaje",
-    "shared": "Lidhja është kopjuar në kujtesë!",
-    "sidebar": {
-        "search-hizb": "Kërko Hizb",
-        "search-juz": "Kërko Xhuzin",
-        "search-page": "Kërko Faqja",
-        "search-surah": "Kërko suren",
-        "try-navigating-with": "Këshillë: provoni të lundroni me"
-    },
-    "sitemap": "Harta e faqes",
-    "sort": {
-        "ascending": "Në ngjitje",
-        "by": "Ndaj sipas",
-        "descending": "Duke zbritur"
-    },
-    "style": "Stili",
-    "submit": "Paraqisni",
-    "surah": "Surja",
-    "tafsir": {
-        "font-size": "Madhësia e shkronjave Tafsir",
-        "group-message": "Po lexoni një tefsir për grupin e vargjeve {{from}} deri në {{to}}",
-        "no-text": "{{tafsirName}} nuk është i disponueshëm për vargun aktual.",
-        "surah": "Surja Tefsir",
-        "tafsir-desc": "Lexoni {{tafsirName}} për Ajetin {{Numri i {{verseNumber}} të sures {{surahName}}",
-        "tafsirs-desc": "Lexoni tefsire të ndryshme të Ajetit {{ayahNumber}} të sures {{surahName}} nga dijetarë të besuar të tefsirit",
-        "title": "Tefsir"
-    },
-    "tarteel": {
-        "app": "Aplikacioni Tarteel",
-        "name": "Tarteel.ai"
-    },
-    "theme": "Tema",
-    "themes": {
-        "auto": "Auto",
-        "dark": "E errët",
-        "light": "Dritë",
-        "sepia": "Sepia",
-        "system": "Sistemi",
-        "system-desc": "Tema e sistemit përshtatet automatikisht me cilësimet tuaja të modalitetit dritë\/errësirë"
-    },
-    "to": "tek",
-    "tooltip": "Mesazh sugjerues",
-    "tooltip-trans-lang": "Gjuha e mesazheve sugjeruese",
-    "trans-lang": "Gjuha e përkthimit",
-    "translation": "Përkthimi",
-    "translations": "Përkthime",
-    "transliteration": "Transliterimi",
-    "type": "Lloji",
-    "undo": "Zhbër",
-    "validation": {
-        "invalid-email": "{{field}} duhet të jetë një adresë e vlefshme emaili",
-        "invalid-field": "Fut një vlerë të vlefshme {{field}}",
-        "required-field": "Kërkohet {{field}}"
-    },
-    "verse": "Vargu",
-    "verse-bookmark-removed": "Faqeruajtësi i vargut u hoq!",
-    "verse-bookmarked": "Vargu u shënua!",
-    "verses": "Vargjet",
-    "view": "Pamje",
-    "voice": {
-        "ask-permission": "Ju lutemi aktivizoni lejen e mikrofonit për të filluar përdorimin e Kërkimit me zë",
-        "error": "Një gabim ka ndodhur.Ju lutemi, provojeni përsëri më vonë. Ose shkarkoni",
-        "no-permission": "Me sa duket nuk i ke të aktivizuara lejet e mikrofonit. Aktivizo lejet e mikrofonit dhe provo sërish ose shkarko",
-        "not-supported": "Duket sikur shfletuesi juaj nuk e mbështet mikrofonin. Ju lutemi provoni një shfletues tjetër ose shkarkoni",
-        "suggest": "Ju lutemi filloni të recitoni dhe vargu juaj do të shfaqet.",
-        "suggest-subtitle": "Recitoni çdo varg në arabisht dhe vargu do të shfaqet",
-        "suggest-title": "Recitoni tani",
-        "voice-search-powered-by": "Kërkimi me zë Mundësuar nga"
-    },
-    "wbw": "Fjalë Për Fjalë",
-    "wbw-lang-summary": "Burimi i përkthimit fjalë për fjalë: <link> {{source}} <\/link> . Ky burim është i pavarur nga përzgjedhja e përkthimit të vargjeve.",
-    "wbw-trans-lang": "Fjalë për fjalë Gjuha",
-    "wbw-translation": "Përkthimi fjalë pas fjale",
-    "wbw-transliteration": "Përkthimi fjalë për fjalë",
-    "word-click": {
-        "no-audio": "Nuk ka audio",
-        "play-audio": "Luaj Audio",
-        "title": "Klikoni në fjalë"
-    },
-    "word-tooltip": "Mesazh sugjerues për fjalët",
-    "yes": "Po"
+    "repeat-moved": "Cilësimet e përsëritjes janë zhvendosur te luajtësi audio. Klikoni në <0> </0> për t'iu qasur atyre",
+    "select-reciter": "Zgjidhni Recitues",
+    "speed": "Shpejtësia",
+    "title": "Audio"
+  },
+  "ayah": "Ajeti",
+  "ayahs": "Ajetet",
+  "beta": "Beta",
+  "bookmark": "Shënoni faqeshënues",
+  "bookmarked": "Shënuar si faqeshënues",
+  "both": "të dyja",
+  "cancel": "Anullo",
+  "click-here": "Kliko këtu",
+  "close": "Mbylle",
+  "command-bar": {
+    "navigations": "Lundrimet",
+    "no-nav-results": "Nuk ka rezultate navigimi",
+    "placeholder": "Çfarë doni të lexoni?",
+    "powered-by": "Kërkimi zanor i mundësuar nga Tarteel.ai",
+    "recent-navigations": "Lundrimet e fundit",
+    "search-by-voice": "Kërko me zë",
+    "try-navigating": "Provoni të lundroni në"
+  },
+  "community": {
+    "cta": "Bashkohuni me komunitetin",
+    "header": "Bashkohuni me Komunitetin QDC të ndërtuesve dhe teknologëve muslimanë.",
+    "sub-header": "Regjistrohu për Quran.com Discord për të marrë pjesë dhe për të bashkëpunuar me komunitetin kryesor që ndërton teknologjinë islame.",
+    "title": "Komuniteti"
+  },
+  "complete-sign-up": "Plotësoni regjistrimin tuaj",
+  "consents": {
+    "communication": {
+      "body": "🚀 Mbushni progresin tuaj nëpërmjet njoftimeve të personalizuara <boldSpan> </boldSpan> në lidhje me përparimin e qëllimit tuaj, ruajtjen e vijave dhe përmirësimin e përdorimit të veçorive tona aktuale. <br></br> <br></br> A mund t'ju mbajmë të informuar përmes emailit dhe kanaleve të tjera? Ju keni kontrollin - mos ngurroni t'i rregulloni këto preferenca në çdo kohë në cilësimet e llogarisë tuaj. <br></br> <br></br> Thjesht zgjidhni \"Lejo\" për rikujtuesit frymëzues <boldSpan> </boldSpan> ose \"Jo tani\" për t'i refuzuar.",
+      "header": "Do të donim t'ju ndihmonim të qëndroni <boldSpan> të përkushtuar dhe të qëndrueshëm </boldSpan> me Udhëtimin tuaj të Rritjes në Kuran! 📖🌟"
+    }
+  },
+  "continue": "Vazhdoni",
+  "copied": "E kopjuar",
+  "copied-to-clipboard": "Kopjuar në kujtesën tuaj",
+  "copy": "Kopjo",
+  "counter": {
+    "decrease": "Ulje",
+    "increase": "Rrit"
+  },
+  "default-description": "Kurani i përkthyer në shumë gjuhë në një ndërfaqe të thjeshtë dhe të lehtë",
+  "developers": "Zhvilluesit",
+  "display": "Ekrani",
+  "donate": "Dhuroni",
+  "donate_monthly": "Dhuroni çdo muaj",
+  "donate_once": "Dhuroni një herë",
+  "email-verification": {
+    "check-spam": "Nuk e morët emailin e verifikimit? Kontrolloni kutinë tuaj të postës së padëshiruar",
+    "email-sent": "Sapo dërguam një email te <strong> {{email}} </strong>",
+    "email-verification": "Verifikimi me email",
+    "resend-email": "Ridërgo email",
+    "resend-email-in": "Ridërgo email-in e verifikimit për {{remainingTime}} sek...",
+    "verify-code": "Verifiko kodin"
+  },
+  "error": {
+    "bookmark-sync": "Faqeshënuesi është jashtë sinkronizimit.",
+    "email-login-fail": "Identifikimi me email dështoi. Ju lutemi provoni përsëri",
+    "general": "Dicka shkoi keq. Ju lutemi provoni përsëri.",
+    "offline": "Duket sikur e humbe lidhjen. Ju lutemi kontrolloni dhe provoni përsëri.",
+    "pref-persist-fail": "Sinkronizimi i cilësimeve tuaja me renë kompjuterike dështoi."
+  },
+  "feedback": "Feedback",
+  "fonts": {
+    "15_lines": "15 rreshta",
+    "16_lines": "16 rreshta",
+    "code_v1": "Kompleksi King Fahad V1",
+    "code_v2": "Kompleksi King Fahad V2",
+    "font-size": "Përmasa e gërmave",
+    "lines": "Linjat",
+    "qcf-desc": "Fontet Kompleksi King Fahad (V1 dhe V2) ofrojnë cilësi më të lartë, por kërkojnë më shumë kohë për t'u ngarkuar.",
+    "qpc_uthmani_hafs": "QPC Uthmani Hafs",
+    "quran-font": "Fonti i Kuranit",
+    "tajweed": "Texhvidi",
+    "tajweed-desc": "Fonti Tajweed tregon një Mushaf me ngjyrë Tajweed. Mund të lexoni më shumë rreth rregullave të ngjyrave të Tajweed <0>këtu</0>",
+    "text_indopak": "IndoPak",
+    "text_uthmani": "Osmani"
+  },
+  "footer": {
+    "description": "Quran.com është një Jariyah Sadakah. Shpresojmë t'ua bëjmë të lehtë të gjithëve leximin, studimin dhe mësimin e Kuranit Fisnik. Kurani Fisnik ka shumë emra duke përfshirë Al-Kuran Al-Kareem, Al-Ketab, Al-Furkan, Al-Maw'itha, Al-Thikr dhe Al-Noor.",
+    "hiring": "Ne po punësojmë! Bashkohuni me ekipin e QuranFoundation dhe kontribuoni në misionin tonë. <link> Apliko tani! </link>",
+    "rights": "Të gjitha të drejtat e rezervuara",
+    "title": "Lexoni, studioni dhe mësoni Kuranin Fisnik."
+  },
+  "form": {
+    "code": "Kodi i Verifikimit",
+    "email": "Email",
+    "firstName": "Emri",
+    "lastName": "Mbiemri"
+  },
+  "from": "Nga",
+  "fundraising-sticky-banner": {
+    "cta": "Dhuroni",
+    "title": "Mbështetni Quran.com këtë Ramazan"
+  },
+  "fundraising": {
+    "description": "Donacionet mujore na ndihmojnë të përmirësojmë Quran.com dhe të mbajmë operacionet, kështu që ne fokusohemi më pak në mbledhjen e fondeve dhe më shumë në krijimin e ndikimit.",
+    "title": "Bëhuni një donator mujor"
+  },
+  "help": "Ndihmë",
+  "hizb": "Hizb",
+  "home": "Shtëpi",
+  "hours": "orët",
+  "inline": "Ne rresht",
+  "input": {
+    "clear": "Qartë"
+  },
+  "juz": "Xhuz",
+  "language": "Gjuhë",
+  "languages": "Gjuhët",
+  "learn-more": "Mëso më shumë",
+  "learning-plans": "Planet mësimore",
+  "less": "Më pak",
+  "loading": "Po ngarkohet",
+  "login": "Identifikohu",
+  "logout": "Shkyç",
+  "meccan": "mekas",
+  "medinan": "Medinas",
+  "menu": "Menu",
+  "minutes": "Minutat",
+  "mobile-apps": "Aplikacionet celulare",
+  "mode": "Modaliteti",
+  "more": "Më shumë",
+  "my-learning-plans": "Planet e mia të mësimit",
+  "navigate": "Navigoni",
+  "network": "Rrjeti",
+  "new": "I ri!",
+  "next": "Tjetra",
+  "next-ayah": "Ajeti tjetër",
+  "no": "Jo",
+  "no-notifications": "Nuk ka ende njoftime",
+  "none": "Asnjëra",
+  "not-now": "Jo tani",
+  "notification": {
+    "mark-all-as-read": "Shënoni të gjitha si të lexuara",
+    "mark-as-read": "Shënoni si të lexuar"
+  },
+  "notifications": "Njoftimet",
+  "off": "Joaktiv",
+  "on": "Aktiv",
+  "page": "Faqe",
+  "pages": "Faqet",
+  "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} nga {{totalNumberOfResults}} rezultate kërkimi",
+  "pbuh": "Bekimet e Allahut qofshin mbi të",
+  "popular-links": "Kërkimet e preferuara",
+  "popup": {
+    "footnote": "Donacionet mujore na lejojnë të fokusohemi më pak në mbledhjen e fondeve",
+    "text-1": "Ne jemi të përkushtuar t'i shërbejmë njohurive dhe teknologjisë botërore kuranore, gjithmonë falas.",
+    "text-2": "Quran.com është një mundësi e përkryer për bamirësi të vazhdueshme (Sadakah Jariyah). Ju lutemi, konsideroni të investoni në Ahiretin tuaj si donator mujor (ose një herë).",
+    "title": "I dashur shok i Kur'anit,"
+  },
+  "powered-by": "Mundësuar nga",
+  "prepare-hearts": {
+    "cta": "Mëso më shumë",
+    "title": "Gati për Ramazan?"
+  },
+  "prev": "E mëparshme",
+  "previous-ayah": "Ajeti i mëparshëm",
+  "privacy": "Privatësia",
+  "product-updates": "Përditësimet e produktit",
+  "profile": "Profili",
+  "q-reflect": "Kurani Reflekto",
+  "quran-com": "Quran.com",
+  "quran-radio": "Kuran Radio",
+  "reading-history": "Leximi i historisë",
+  "reading-preference": {
+    "reading": "Leximi",
+    "translation": "Përkthimi"
+  },
+  "recitation": "Recitim",
+  "reciter": "Recitues",
+  "reciter-summary": "Recitues fjalë për fjalë: <span> {{reciterName}} </span> . Klikoni mbi një fjalë për të dëgjuar recitimin e saj.",
+  "reciters": "Recituesit",
+  "reflect": "Pasqyrim",
+  "remove": "Hiq",
+  "rename": "Riemërto",
+  "retry": "Provo sërish",
+  "revelation_order": "Urdhri i Zbulesës",
+  "rub": "Rub el Hizb",
+  "save-to-collection": "Ruaje në Koleksion",
+  "search-for": "Kërko për \"{{searchQuery}}\"",
+  "search-results": "{{count}} rezultatet e  kërkimit",
+  "search": {
+    "filters": "Filtrat",
+    "hint": "Provoni të kërkoni për",
+    "jump-to": "Kërce Te",
+    "no-results": "Nuk u gjet asnjë rezultat",
+    "no-results-suggestion": "Nuk gjetëm asnjë rezultat kërkimi që përputhej për \" {{searchQuery}} \". provoni të kërkoni për një fjalë kyçe të ndryshme.",
+    "popular": "Kërkimet popullore",
+    "recent": "Kërkimet e fundit",
+    "results": "rezultatet",
+    "show-all": "Shfaq të gjitha rezultatet",
+    "switch-mode": "Kalo te Kërkimi i Avancuar",
+    "title": "Kërko"
+  },
+  "seconds": "Sekonda",
+  "settings": {
+    "no-tafsir-selected": "Nuk është zgjedhur asnjë tefsir",
+    "no-translation-selected": "Nuk u zgjodh asnjë përkthim",
+    "reading-experience": "Përvoja e të lexuarit",
+    "reset-cta": "Rivendos cilësimet e paracaktuara",
+    "reset-notif": "Cilësimet tuaja janë rivendosur në ato të paracaktuara",
+    "search-reciter": "Kërko Recitues",
+    "search-tafsirs": "Kërkoni tefsirë",
+    "search-translations": "Kërko Përkthime",
+    "selected-reciter": "Recitues i zgjedhur",
+    "selected-tafsirs": "Tefsire të zgjedhura",
+    "selected-translations": "Përkthime të zgjedhura",
+    "show-tooltip-when-playing-audio": "Shfaq mesazhin sugjerues kur luhet audio",
+    "title": "Cilësimet",
+    "tooltip-playing-audio-helper": "Trego përkthimin e fjalëve në mesazhin sugjerues ndërsa luani ayah",
+    "value-and-other": "{{value}} , dhe {{othersCount}} të tjera",
+    "value-and-others": "{{value}} , dhe {{othersCount}} tjerë",
+    "wbw-helper": "Shfaq përkthimin ose transliterimin direkt nën fjalë",
+    "word-tooltip-helper": "Shfaq përkthimin ose transliterimin kur rri pezull ose klikon fjalën"
+  },
+  "share": "Shpërndaje",
+  "shared": "Lidhja është kopjuar në kujtesë!",
+  "sidebar": {
+    "search-hizb": "Kërko Hizb",
+    "search-juz": "Kërko Xhuzin",
+    "search-page": "Kërko Faqja",
+    "search-surah": "Kërko suren",
+    "try-navigating-with": "Këshillë: provoni të lundroni me"
+  },
+  "sitemap": "Harta e faqes",
+  "sort": {
+    "ascending": "Në ngjitje",
+    "by": "Ndaj sipas",
+    "descending": "Duke zbritur"
+  },
+  "style": "Stili",
+  "submit": "Paraqisni",
+  "surah": "Surja",
+  "tafsir": {
+    "font-size": "Madhësia e shkronjave Tafsir",
+    "group-message": "Po lexoni një tefsir për grupin e vargjeve {{from}} deri në {{to}}",
+    "no-text": "{{tafsirName}} nuk është i disponueshëm për vargun aktual.",
+    "surah": "Surja Tefsir",
+    "tafsir-desc": "Lexoni {{tafsirName}} për Ajetin {{Numri i {{verseNumber}} të sures {{surahName}}",
+    "tafsirs-desc": "Lexoni tefsire të ndryshme të Ajetit {{ayahNumber}} të sures {{surahName}} nga dijetarë të besuar të tefsirit",
+    "title": "Tefsir"
+  },
+  "tarteel": {
+    "app": "Aplikacioni Tarteel",
+    "name": "Tarteel.ai"
+  },
+  "theme": "Tema",
+  "themes": {
+    "auto": "Auto",
+    "dark": "E errët",
+    "light": "Dritë",
+    "sepia": "Sepia",
+    "system": "Sistemi",
+    "system-desc": "Tema e sistemit përshtatet automatikisht me cilësimet tuaja të modalitetit dritë/errësirë"
+  },
+  "to": "tek",
+  "tooltip": "Mesazh sugjerues",
+  "tooltip-trans-lang": "Gjuha e mesazheve sugjeruese",
+  "trans-lang": "Gjuha e përkthimit",
+  "translation": "Përkthimi",
+  "translations": "Përkthime",
+  "transliteration": "Transliterimi",
+  "type": "Lloji",
+  "undo": "Zhbër",
+  "validation": {
+    "invalid-email": "{{field}} duhet të jetë një adresë e vlefshme emaili",
+    "invalid-field": "Fut një vlerë të vlefshme {{field}}",
+    "required-field": "Kërkohet {{field}}"
+  },
+  "verse": "Vargu",
+  "verse-bookmark-removed": "Faqeruajtësi i vargut u hoq!",
+  "verse-bookmarked": "Vargu u shënua!",
+  "verses": "Vargjet",
+  "view": "Pamje",
+  "voice": {
+    "ask-permission": "Ju lutemi aktivizoni lejen e mikrofonit për të filluar përdorimin e Kërkimit me zë",
+    "error": "Një gabim ka ndodhur.Ju lutemi, provojeni përsëri më vonë. Ose shkarkoni",
+    "no-permission": "Me sa duket nuk i ke të aktivizuara lejet e mikrofonit. Aktivizo lejet e mikrofonit dhe provo sërish ose shkarko",
+    "not-supported": "Duket sikur shfletuesi juaj nuk e mbështet mikrofonin. Ju lutemi provoni një shfletues tjetër ose shkarkoni",
+    "suggest": "Ju lutemi filloni të recitoni dhe vargu juaj do të shfaqet.",
+    "suggest-subtitle": "Recitoni çdo varg në arabisht dhe vargu do të shfaqet",
+    "suggest-title": "Recitoni tani",
+    "voice-search-powered-by": "Kërkimi me zë Mundësuar nga"
+  },
+  "wbw": "Fjalë Për Fjalë",
+  "wbw-lang-summary": "Burimi i përkthimit fjalë për fjalë: <link> {{source}} </link> . Ky burim është i pavarur nga përzgjedhja e përkthimit të vargjeve.",
+  "wbw-trans-lang": "Fjalë për fjalë Gjuha",
+  "wbw-translation": "Përkthimi fjalë pas fjale",
+  "wbw-transliteration": "Përkthimi fjalë për fjalë",
+  "word-click": {
+    "no-audio": "Nuk ka audio",
+    "play-audio": "Luaj Audio",
+    "title": "Klikoni në fjalë"
+  },
+  "word-tooltip": "Mesazh sugjerues për fjalët",
+  "yes": "Po"
 }

@@ -1,0 +1,31 @@
+{
+  "about-author": "Mengenai Pengarang",
+  "add-reflection": "Tambah Refleksi",
+  "all-learning-plans": "Semua Rancangan Pembelajaran",
+  "author": "Pengarang",
+  "back-to-learning-plan": "Kembali ke Rancangan Pembelajaran",
+  "back-to-learning-plans": "Kembali ke Rancangan Pembelajaran",
+  "category": "kategori",
+  "coming-soon": "Akan datang...",
+  "completed": "Selesai",
+  "day": "Hari",
+  "description": "Penerangan",
+  "duration-daily": "Setiap Pelajaran pendek mengambil masa kurang daripada {{dailyMins}} minit untuk menyelesaikan {{days}} Jumlah pelajaran",
+  "empty-learning-plans": "Anda belum mendaftar dalam mana-mana <link> Rancangan Pembelajaran </link> lagi.",
+  "enroll": "Daftar",
+  "enroll-success": "Tahniah, Anda telah menambahkan {{title}} pada senarai anda!",
+  "enrolled": "Didaftarkan",
+  "learning-plan-material": "Bahan Rancangan Pembelajaran",
+  "learning-plan-meta-desc": "Pelan Pembelajaran ini akan membantu mengubah cara anda melibatkan diri dengan Al-Quran, mulakan perjalanan anda hari ini!",
+  "learning-plans-desc": "Tingkatkan pengetahuan anda dengan pelajaran yang mudah diikuti yang memastikan anda terus berkembang dalam perjalanan anda dengan al-Quran. <br></br> Mulakan Rancangan Pembelajaran hari ini! Kemajuan anda dijejaki sehingga anda sampai ke garisan penamat.",
+  "learning-plans-meta-desc": "Rancangan Pembelajaran Quran.com akan membantu mengubah cara anda melibatkan diri dengan Al-Quran. Terokai koleksi pelajaran pilihan susun kami dan mulakan perjalanan anda hari ini!",
+  "mark-complete": "Tandai sebagai selesai",
+  "mark-complete-success": "Pelajaran telah ditanda sebagai selesai dengan jayanya!",
+  "next-lesson": "Pelajaran Seterusnya",
+  "not-enrolled": "Anda belum mendaftar dalam <link> Rancangan Pembelajaran </link> lagi.",
+  "prev-lesson": "Pelajaran Sebelumnya",
+  "tabs": {
+    "main": "Butiran Utama",
+    "syllabus": "Silibus"
+  }
+}
