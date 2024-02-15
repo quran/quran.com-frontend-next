@@ -25,7 +25,7 @@ const MainDetails: React.FC<Props> = ({ course }) => {
   return (
     <>
       <DetailSection
-        title={t('duration')}
+        title={t('learn-duration')}
         description={t('duration-daily', {
           dailyMins: dailyMinutes,
           days: lessons.length,
