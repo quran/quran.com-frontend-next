@@ -3,8 +3,10 @@ import React, { useMemo, useState } from 'react';
 import Image from 'next/image';
 import useTranslation from 'next-translate/useTranslation';
 
+import styles from './CourseDetails.module.scss';
+
+import StartOrContinueLearning from '@/components/Course/Buttons/StartOrContinueLearning';
 import ContentContainer from '@/components/Course/ContentContainer';
-import styles from '@/components/Course/CourseDetails/CourseDetails.module.scss';
 import StatusHeader from '@/components/Course/CourseDetails/StatusHeader';
 import MainDetails from '@/components/Course/CourseDetails/Tabs/MainDetails';
 import DetailSection from '@/components/Course/CourseDetails/Tabs/MainDetails/DetailSection';
@@ -99,6 +101,11 @@ const CourseDetails: React.FC<Props> = ({ course }) => {
             title={t('about-author')}
             description={<AuthorDetail author={course.author} />}
           />
+          {course.isUserEnrolled && (
+            <div className={styles.startLearningButton}>
+              <StartOrContinueLearning course={course} isHeaderButton={false} />
+            </div>
+          )}
         </>
       )}
     </ContentContainer>
