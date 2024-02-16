@@ -1,7 +1,6 @@
 import React, { useMemo, useState } from 'react';
 
 import Image from 'next/image';
-import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
 import ContentContainer from '@/components/Course/ContentContainer';
@@ -19,7 +18,7 @@ import SyllabusIcon from '@/icons/developers.svg';
 import ArrowLeft from '@/icons/west.svg';
 import { Course } from '@/types/auth/Course';
 import { logButtonClick, logEvent } from '@/utils/eventLogger';
-import { getCoursesNavigationUrl, getLessonNavigationUrl } from '@/utils/navigation';
+import { getCoursesNavigationUrl } from '@/utils/navigation';
 
 type Props = {
   course: Course;
@@ -31,11 +30,9 @@ enum Tab {
 }
 
 const CourseDetails: React.FC<Props> = ({ course }) => {
-  const { title, image, id, continueFromLesson, slug } = course;
+  const { title, image, id } = course;
   const { t } = useTranslation('learn');
   const [selectedTab, setSelectedTab] = useState(Tab.MAIN);
-  const router = useRouter();
-  const { shouldRedirectToLesson } = router.query;
 
   const onTabChange = (value: Tab) => {
     logEvent('course_details_tab_change', { courseId: id, tab: value });
@@ -67,17 +64,6 @@ const CourseDetails: React.FC<Props> = ({ course }) => {
     }),
     [course],
   );
-
-  /**
-   * if the user is enrolled in a course and we are supposed
-   * to redirect them to lesson directly which happens when
-   * the user clicks on the navbar CTA button.
-   */
-  if (shouldRedirectToLesson === 'true' && !!continueFromLesson) {
-    // Note: replace is used so we don't keep the url containing `shouldRedirectToLesson` in the history
-    router.replace(getLessonNavigationUrl(slug, continueFromLesson));
-    return <></>;
-  }
 
   return (
     <ContentContainer>
