@@ -2,8 +2,7 @@ import React, { useContext } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
-import styles from './NoteRangesIndicator.module.scss';
-
+import styles from '@/components/Notes/NoteModal/NoteRangesIndicator/NoteRangesIndicator.module.scss';
 import DataContext from '@/contexts/DataContext';
 import ReflectionReference from '@/types/QuranReflect/ReflectionReference';
 import { getChapterData } from '@/utils/chapter';
@@ -13,7 +12,7 @@ type Props = {
   reference: ReflectionReference;
 };
 
-const NoteReferenceIndicator: React.FC<Props> = ({ reference }) => {
+const ReflectionReferenceIndicator: React.FC<Props> = ({ reference }) => {
   const { lang, t } = useTranslation('common');
   const chaptersData = useContext(DataContext);
   if (!reference) {
@@ -40,4 +39,4 @@ const NoteReferenceIndicator: React.FC<Props> = ({ reference }) => {
   return <div className={styles.container}>{referenceKey}</div>;
 };
 
-export default NoteReferenceIndicator;
+export default ReflectionReferenceIndicator;

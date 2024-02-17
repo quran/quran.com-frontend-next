@@ -5,6 +5,7 @@ import { getTimezone } from '../datetime';
 
 import BookmarkByCollectionIdQueryParams from './types/BookmarkByCollectionIdQueryParams';
 import GetAllNotesQueryParams from './types/GetAllNotesQueryParams';
+import GetAllUserReflectionsQueryParams from './types/GetAllUserReflectionsQueryParams';
 
 import {
   FilterActivityDaysParams,
@@ -64,6 +65,7 @@ import {
   makeGetCoursesUrl,
   makeGetCourseUrl,
   makePublishNoteUrl,
+  makeGetUserReflectionsUrl,
 } from '@/utils/auth/apiPaths';
 import { fetcher } from 'src/api';
 import CompleteAnnouncementRequest from 'types/auth/CompleteAnnouncementRequest';
@@ -350,6 +352,10 @@ export const addCollection = async (collectionName: string) => {
 
 export const getAllNotes = async (params: GetAllNotesQueryParams) => {
   return privateFetcher(makeNotesUrl(params));
+};
+
+export const getAllUserReflections = async (params: GetAllUserReflectionsQueryParams) => {
+  return privateFetcher(makeGetUserReflectionsUrl(params));
 };
 
 export const getNotesByVerseKey = async (verseKey: string) => {

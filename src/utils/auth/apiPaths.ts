@@ -2,6 +2,7 @@ import stringify from '../qs-stringify';
 
 import BookmarkByCollectionIdQueryParams from './types/BookmarkByCollectionIdQueryParams';
 import GetAllNotesQueryParams from './types/GetAllNotesQueryParams';
+import GetAllUserReflectionsQueryParams from './types/GetAllUserReflectionsQueryParams';
 import GetNoteByAttachedEntityParams from './types/GetNoteByAttachedEntityParams';
 
 import { ActivityDayType, FilterActivityDaysParams } from '@/types/auth/ActivityDay';
@@ -99,7 +100,8 @@ export const makeDeleteCollectionBookmarkByIdUrl = (collectionId: string, bookma
 export const makeDeleteCollectionBookmarkByKeyUrl = (collectionId: string) =>
   makeUrl(`collections/${collectionId}/bookmarks`);
 
-export const makePostReflectionToQrUrl = () => makeUrl('posts');
+export const makeGetUserReflectionsUrl = (params?: GetAllUserReflectionsQueryParams) =>
+  makeUrl('posts', params as any);
 
 export const makePostReflectionViewsUrl = (postId: string) => makeUrl(`posts/${postId}/views`);
 

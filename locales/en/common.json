@@ -4,9 +4,9 @@
   "and": "and",
   "newest": "Newest",
   "oldest": "Oldest",
+  "save": "Save",
   "notes": {
-    "notes": "Notes",
-    "save": "Save"
+    "my-notes": "My Notes"
   },
   "announcements": {
     "auth-onboarding": {

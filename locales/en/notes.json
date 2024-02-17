@@ -1,6 +1,7 @@
 {
   "note": "Note",
   "empty": "No notes found",
+  "empty-reflections": "No reflections found",
   "delete-note": "Delete note",
   "body-placeholder": "Write your note here",
   "save-success": "Note has been saved successfully",
@@ -14,5 +15,7 @@
   "save-and-share": "Save & publish On QuranReflect",
   "share-to-qr-desc": "Share as <b>{{name}}</b>. Audience is <b>QuranReflect users</b>",
   "qr-tooltip": "<span><link>QuranReflect</link> is a social platform for sharing reflections on the Quran. Connect around the Quran, connect with what matters.</span>",
-  "click-to-see-more": "click to see more"
+  "click-to-see-more": "click to see more",
+  "private-notes": "Notes",
+  "public-reflections": "Public Reflections"
 }

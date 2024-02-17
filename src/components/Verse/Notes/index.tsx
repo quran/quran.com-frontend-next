@@ -55,7 +55,7 @@ const VerseNotes = ({ verseKey, isTranslationView, hasNotes }: VerseNotesProps) 
           [internalStyles.hasNotes]: !!hasNotes,
         })}
         onClick={onItemClicked}
-        tooltip={t('notes.notes')}
+        tooltip={t('notes.my-notes')}
         variant={ButtonVariant.Ghost}
         size={ButtonSize.Small}
       >

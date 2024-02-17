@@ -182,7 +182,7 @@ const EditForm: React.FC<Props> = ({
                   setSaveToQR(false);
                 }}
               >
-                {t('common:notes.save')}
+                {t('common:save')}
               </Button>
               <Button
                 htmlType="submit"

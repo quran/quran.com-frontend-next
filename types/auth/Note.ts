@@ -1,4 +1,4 @@
-import { Pagination } from './GetBookmarksByCollectionId';
+import Pagination from './Pagination';
 
 export type Note = {
   id: string;

@@ -10,6 +10,7 @@
     p {
         margin-block-start: var(--spacing-xsmall);
         font-size: var(--font-size-medium);
+        word-wrap: break-word;
     }
 
     &:hover {

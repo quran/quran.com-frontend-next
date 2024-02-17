@@ -3,7 +3,7 @@ import { useMemo, useState } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import { Virtuoso } from 'react-virtuoso';
 
-import NoteModal from '../../NoteModal';
+import NoteModal from '../../../../NoteModal';
 
 import styles from './NotesList.module.scss';
 import NotesListItem from './NotesListItem';

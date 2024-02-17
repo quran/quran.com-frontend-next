@@ -190,7 +190,7 @@ const NewNoteMode: React.FC<Props> = ({ verseKey }) => {
               e.stopPropagation();
             }}
           >
-            {t('common:notes.save')}
+            {t('common:save')}
           </Button>
         </div>
       )}
