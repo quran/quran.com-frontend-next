@@ -8,14 +8,17 @@ import NoteRangesIndicator from '@/components/Notes/NoteModal/NoteRangesIndicato
 import { Note } from '@/types/auth/Note';
 import { dateToReadableFormat } from '@/utils/datetime';
 import { logButtonClick } from '@/utils/eventLogger';
+import { truncateString } from '@/utils/string';
 
 interface NotesListItemProps {
   note: Note;
   setSelectedNoteId: (noteId: string) => void;
 }
 
+const MAX_BODY_SIZE = 250;
+
 const NotesListItem: React.FC<NotesListItemProps> = ({ note, setSelectedNoteId }) => {
-  const { lang } = useTranslation();
+  const { lang, t } = useTranslation('notes');
 
   const onNoteClicked = (noteId: string) => {
     logButtonClick('note_list_item', {
@@ -34,7 +37,12 @@ const NotesListItem: React.FC<NotesListItemProps> = ({ note, setSelectedNoteId }
       onKeyDown={() => onNoteClicked(note.id)}
     >
       <NoteRangesIndicator ranges={note.ranges} />
-      <p>{note.body}</p>
+      <p>
+        {truncateString(note.body, MAX_BODY_SIZE, '...')}
+        {note.body.length > MAX_BODY_SIZE && (
+          <span className={styles.seeMore}>{`  ${t('click-to-see-more')}`}</span>
+        )}
+      </p>
       <time className={styles.noteDate} dateTime={note.createdAt.toString()}>
         {dateToReadableFormat(note.createdAt, lang, {
           year: 'numeric',

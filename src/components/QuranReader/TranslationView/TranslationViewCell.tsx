@@ -17,7 +17,7 @@ import styles from './TranslationViewCell.module.scss';
 
 import QuranReflectButton from '@/components/QuranReader/QuranReflectButton';
 import TafsirButton from '@/components/QuranReader/TafsirButton';
-import VerseNotes, { VerseNotesTrigger } from '@/components/Verse/Notes';
+import VerseNotes from '@/components/Verse/Notes';
 import OverflowVerseActionsMenu from '@/components/Verse/OverflowVerseActionsMenu';
 import PlayVerseAudioButton from '@/components/Verse/PlayVerseAudioButton';
 import VerseLink from '@/components/Verse/VerseLink';
@@ -88,15 +88,7 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
                 bookmarksRangeUrl={bookmarksRangeUrl}
               />
             </div>
-            {hasNotes && (
-              <div className={styles.actionItem}>
-                <VerseNotes
-                  verseKey={verse.verseKey}
-                  trigger={VerseNotesTrigger.IconButton}
-                  isTranslationView
-                />
-              </div>
-            )}
+            <VerseNotes verseKey={verse.verseKey} isTranslationView hasNotes={hasNotes} />
             <div className={classNames(styles.actionItem, styles.priorityAction)}>
               <PlayVerseAudioButton
                 verseKey={verse.verseKey}

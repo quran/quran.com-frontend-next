@@ -60,8 +60,16 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    flex-wrap: wrap;
 }
 
 .saveButton {
     margin-inline-end: var(--spacing-small);
+}
+
+.buttonsContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-block-start: var(--spacing-small);
 }

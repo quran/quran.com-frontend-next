@@ -75,7 +75,7 @@ const NoteListItem: React.FC<Props> = ({ note, verseKey, noteId, onNoteUpdated }
   const { mutate: shareOnQuranReflect, isMutating: isPostingOnQuranReflect } = useMutation(
     () => {
       return postToQR({
-        isPrivate: true,
+        isPrivate: false,
         body: note.body,
         ranges: note?.ranges || [],
       });

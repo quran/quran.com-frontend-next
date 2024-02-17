@@ -48,7 +48,7 @@ const EditForm: React.FC<Props> = ({
   onCancelEditClicked,
 }) => {
   const { t } = useTranslation('common');
-  const [shareToQR, setShareToQR] = useState(false);
+  const [saveToQR, setSaveToQR] = useState(false);
   const toast = useToast();
   const { mutate } = useSWRConfig();
 
@@ -67,15 +67,27 @@ const EditForm: React.FC<Props> = ({
     { id: string; body: string }
   >(
     async ({ id, body }) => {
-      return baseUpdateNote(id, body, shareToQR) as Promise<Note>;
+      return baseUpdateNote(id, body, saveToQR) as Promise<Note>;
     },
     {
       onSuccess: (data) => {
-        toast(t('notes:update-success'), {
-          status: ToastStatus.Success,
-        });
-        onNoteUpdated?.(data);
-        mutateCache([data]);
+        // if publishing the note publicly call failed after saving the note succeeded
+        // @ts-ignore
+        if (data?.error === true) {
+          toast(t('notes:update-publish-failed'), {
+            status: ToastStatus.Error,
+          });
+          // @ts-ignore
+          onNoteUpdated?.(data.note);
+          // @ts-ignore
+          mutateCache([data.note]);
+        } else {
+          toast(t('notes:update-success'), {
+            status: ToastStatus.Success,
+          });
+          onNoteUpdated?.(data);
+          mutateCache([data]);
+        }
       },
       onError: () => {
         toast(t('common:error.general'), {
@@ -87,7 +99,7 @@ const EditForm: React.FC<Props> = ({
 
   const onSubmit = async ({ body }: NoteFormData) => {
     logButtonClick('update_note', {
-      shareToQR,
+      saveToQR,
     });
     updateNote({ id: note.id, body });
   };
@@ -167,7 +179,7 @@ const EditForm: React.FC<Props> = ({
                 className={styles.saveButton}
                 onClick={(e) => {
                   e.stopPropagation();
-                  setShareToQR(false);
+                  setSaveToQR(false);
                 }}
               >
                 {t('common:notes.save')}
@@ -178,7 +190,7 @@ const EditForm: React.FC<Props> = ({
                 isDisabled={isLoading}
                 onClick={(e) => {
                   e.stopPropagation();
-                  setShareToQR(true);
+                  setSaveToQR(true);
                 }}
               >
                 {t('notes:save-and-share')}
