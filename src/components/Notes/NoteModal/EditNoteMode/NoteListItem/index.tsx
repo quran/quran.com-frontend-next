@@ -12,7 +12,7 @@ import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import useMutation from '@/hooks/useMutation';
 import EditIcon from '@/icons/edit.svg';
 import { Note } from '@/types/auth/Note';
-import { deleteNote as baseDeleteNote, postToQR } from '@/utils/auth/api';
+import { deleteNote as baseDeleteNote, publishNoteToQR } from '@/utils/auth/api';
 import { makeGetNoteByIdUrl, makeGetNotesByVerseUrl } from '@/utils/auth/apiPaths';
 import { dateToReadableFormat } from '@/utils/datetime';
 import { logButtonClick } from '@/utils/eventLogger';
@@ -72,10 +72,9 @@ const NoteListItem: React.FC<Props> = ({ note, verseKey, noteId, onNoteUpdated }
     }
   };
 
-  const { mutate: shareOnQuranReflect, isMutating: isPostingOnQuranReflect } = useMutation(
+  const { mutate: publishOnQuranReflect, isMutating: isPostingOnQuranReflect } = useMutation(
     () => {
-      return postToQR({
-        isPrivate: false,
+      return publishNoteToQR(note.id, {
         body: note.body,
         ranges: note?.ranges || [],
       });
@@ -119,10 +118,10 @@ const NoteListItem: React.FC<Props> = ({ note, verseKey, noteId, onNoteUpdated }
     logButtonClick('cancel_edit_note');
   };
 
-  const onShareOnQRClicked = (e) => {
+  const onPublishOnQrClicked = (e) => {
     e.stopPropagation();
-    logButtonClick('qr_share_note');
-    shareOnQuranReflect();
+    logButtonClick('qr_publish_note');
+    publishOnQuranReflect();
   };
 
   const onEditClicked = (e) => {
@@ -190,8 +189,8 @@ const NoteListItem: React.FC<Props> = ({ note, verseKey, noteId, onNoteUpdated }
           </div>
           <div className={styles.noteBody}>{note.body}</div>
           <div className={styles.shareButtonContainer}>
-            <Button size={ButtonSize.Small} onClick={onShareOnQRClicked} {...buttonProps}>
-              {t('notes:share-on-qr')}
+            <Button size={ButtonSize.Small} onClick={onPublishOnQrClicked} {...buttonProps}>
+              {t('notes:publish-on-qr')}
             </Button>
           </div>
         </>

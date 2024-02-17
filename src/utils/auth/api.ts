@@ -60,10 +60,10 @@ import {
   makeDeleteOrUpdateNoteUrl,
   makeGetNotesByVerseUrl,
   makeCountNotesWithinRangeUrl,
-  makePostReflectionToQrUrl,
   makeEnrollUserUrl,
   makeGetCoursesUrl,
   makeGetCourseUrl,
+  makePublishNoteUrl,
 } from '@/utils/auth/apiPaths';
 import { fetcher } from 'src/api';
 import CompleteAnnouncementRequest from 'types/auth/CompleteAnnouncementRequest';
@@ -364,11 +364,13 @@ export const addNote = async (payload: Pick<Note, 'body' | 'ranges' | 'saveToQR'
   return postRequest(makeNotesUrl(), payload);
 };
 
-export const postToQR = async (payload: {
-  body: string;
-  isPrivate: boolean;
-  ranges?: string[];
-}): Promise<{ success: boolean }> => postRequest(makePostReflectionToQrUrl(), payload);
+export const publishNoteToQR = async (
+  noteId: string,
+  payload: {
+    body: string;
+    ranges?: string[];
+  },
+): Promise<{ success: boolean }> => postRequest(makePublishNoteUrl(noteId), payload);
 
 export const updateNote = async (id: string, body: string, saveToQR: boolean) =>
   patchRequest(makeDeleteOrUpdateNoteUrl(id), {
