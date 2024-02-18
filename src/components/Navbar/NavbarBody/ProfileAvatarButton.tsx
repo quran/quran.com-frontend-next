@@ -10,6 +10,7 @@ import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import ClockIcon from '@/icons/clock.svg';
 import ArrowIcon from '@/icons/east.svg';
 import LogoutIcon from '@/icons/logout.svg';
+import NotesIcon from '@/icons/notes-filled.svg';
 import IconPerson from '@/icons/person.svg';
 import ReaderIcon from '@/icons/reader.svg';
 import TickIcon from '@/icons/tick.svg';
@@ -100,7 +101,7 @@ const ProfileAvatarButton = () => {
         <PopoverMenu.Item onClick={onReadingHistoryClicked} icon={<ClockIcon />}>
           {t('reading-history')}
         </PopoverMenu.Item>
-        <PopoverMenu.Item onClick={onNotesClicked} icon={<ReaderIcon />}>
+        <PopoverMenu.Item onClick={onNotesClicked} icon={<NotesIcon />}>
           {t('notes.my-notes')}
         </PopoverMenu.Item>
         <PopoverMenu.Item onClick={onMyCoursesClicked} icon={<ReaderIcon />}>

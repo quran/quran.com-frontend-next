@@ -4,12 +4,11 @@ import classNames from 'classnames';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
-import internalStyles from './Notes.module.scss';
-
 import NoteModal from '@/components/Notes/NoteModal';
 import styles from '@/components/QuranReader/TranslationView/TranslationViewCell.module.scss';
-import Button, { ButtonSize, ButtonVariant } from '@/dls/Button/Button';
-import NoteIcon from '@/icons/reader.svg';
+import Button, { ButtonShape, ButtonSize, ButtonType, ButtonVariant } from '@/dls/Button/Button';
+import EmptyNotesIcon from '@/icons/notes-empty.svg';
+import NotesIcon from '@/icons/notes-filled.svg';
 import { isLoggedIn } from '@/utils/auth/login';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getLoginNavigationUrl } from '@/utils/navigation';
@@ -51,15 +50,15 @@ const VerseNotes = ({ verseKey, isTranslationView, hasNotes }: VerseNotesProps) 
     <>
       <NoteModal isOpen={isModalOpen} onClose={onClose} verseKey={verseKey} />
       <Button
-        className={classNames(styles.iconContainer, styles.verseAction, {
-          [internalStyles.hasNotes]: !!hasNotes,
-        })}
+        className={classNames(styles.iconContainer, styles.verseAction)}
         onClick={onItemClicked}
         tooltip={t('notes.my-notes')}
+        type={ButtonType.Success}
+        shape={ButtonShape.Circle}
         variant={ButtonVariant.Ghost}
         size={ButtonSize.Small}
       >
-        <NoteIcon />
+        {hasNotes ? <NotesIcon /> : <EmptyNotesIcon />}
       </Button>
     </>
   );

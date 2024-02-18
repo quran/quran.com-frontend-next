@@ -6,7 +6,6 @@ import styles from './WordActionsMenu.module.scss';
 
 import TranslationsButton from '@/components/QuranReader/ReadingView/TranslationsButton';
 import TafsirButton from '@/components/QuranReader/TafsirButton';
-import VerseNotes from '@/components/Verse/Notes';
 import OverflowVerseActionsMenu from '@/components/Verse/OverflowVerseActionsMenu';
 import PlayVerseAudioButton from '@/components/Verse/PlayVerseAudioButton';
 import Word from 'types/Word';
@@ -30,7 +29,6 @@ const ReadingViewWordActionsMenu: React.FC<Props> = ({ word, onActionTriggered }
         onActionTriggered={onActionTriggered}
       />
       <TranslationsButton verse={word.verse} onActionTriggered={onActionTriggered} />
-      <VerseNotes verseKey={word.verseKey} isTranslationView={false} />
       {word?.verse?.timestamps && (
         <PlayVerseAudioButton
           verseKey={word.verseKey}
