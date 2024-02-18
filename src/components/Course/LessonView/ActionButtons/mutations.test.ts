@@ -3,7 +3,12 @@
 /* eslint-disable react-func/max-lines-per-function */
 import { it, expect, describe } from 'vitest';
 
-import { mutateLessonAsCompleted, getUpdatedCourseData, getUpdatedLessonData } from './mutations';
+import {
+  mutateLessonAsCompleted,
+  getUpdatedCourseData,
+  getUpdatedLessonData,
+  getContinueFromLesson,
+} from './mutations';
 
 import { Lesson } from '@/types/auth/Course';
 
@@ -380,5 +385,157 @@ describe('getUpdateLessonData', () => {
         ],
       },
     });
+  });
+});
+
+describe('getContinueFromLesson', () => {
+  it('Returns null when no lessons passed', async () => {
+    expect(getContinueFromLesson(null)).toEqual(null);
+  });
+  it('Returns first lesson slug when no lessons are completed', async () => {
+    expect(
+      getContinueFromLesson([
+        // @ts-ignore
+        {
+          id: '1',
+          slug: 'slug-1',
+          day: 1,
+          content: '1',
+          isCompleted: false,
+        },
+        // @ts-ignore
+        {
+          id: '2',
+          slug: 'slug-2',
+          day: 2,
+          content: '2',
+          isCompleted: false,
+        },
+        // @ts-ignore
+        {
+          id: '3',
+          slug: 'slug-3',
+          day: 3,
+          content: '3',
+          isCompleted: false,
+        },
+      ]),
+    ).toEqual('slug-1');
+  });
+  it('Returns correct lesson slug when some lessons are completed', async () => {
+    expect(
+      getContinueFromLesson([
+        // @ts-ignore
+        {
+          id: '1',
+          slug: 'slug-1',
+          day: 1,
+          content: '1',
+          isCompleted: true,
+        },
+        // @ts-ignore
+        {
+          id: '2',
+          slug: 'slug-2',
+          day: 2,
+          content: '2',
+          isCompleted: false,
+        },
+        // @ts-ignore
+        {
+          id: '3',
+          slug: 'slug-3',
+          day: 3,
+          content: '3',
+          isCompleted: true,
+        },
+      ]),
+    ).toEqual('slug-2');
+    expect(
+      getContinueFromLesson([
+        // @ts-ignore
+        {
+          id: '1',
+          slug: 'slug-1',
+          day: 1,
+          content: '1',
+          isCompleted: false,
+        },
+        // @ts-ignore
+        {
+          id: '2',
+          slug: 'slug-2',
+          day: 2,
+          content: '2',
+          isCompleted: true,
+        },
+        // @ts-ignore
+        {
+          id: '3',
+          slug: 'slug-3',
+          day: 3,
+          content: '3',
+          isCompleted: true,
+        },
+      ]),
+    ).toEqual('slug-1');
+    expect(
+      getContinueFromLesson([
+        // @ts-ignore
+        {
+          id: '1',
+          slug: 'slug-1',
+          day: 1,
+          content: '1',
+          isCompleted: true,
+        },
+        // @ts-ignore
+        {
+          id: '2',
+          slug: 'slug-2',
+          day: 2,
+          content: '2',
+          isCompleted: true,
+        },
+        // @ts-ignore
+        {
+          id: '3',
+          slug: 'slug-3',
+          day: 3,
+          content: '3',
+          isCompleted: false,
+        },
+      ]),
+    ).toEqual('slug-3');
+  });
+  it('Returns first lesson slug when all lessons are completed', async () => {
+    expect(
+      getContinueFromLesson([
+        // @ts-ignore
+        {
+          id: '1',
+          slug: 'slug-1',
+          day: 1,
+          content: '1',
+          isCompleted: true,
+        },
+        // @ts-ignore
+        {
+          id: '2',
+          slug: 'slug-2',
+          day: 2,
+          content: '2',
+          isCompleted: true,
+        },
+        // @ts-ignore
+        {
+          id: '3',
+          slug: 'slug-3',
+          day: 3,
+          content: '3',
+          isCompleted: true,
+        },
+      ]),
+    ).toEqual('slug-1');
   });
 });
