@@ -3,11 +3,10 @@ import { useMemo, useState } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import { Virtuoso } from 'react-virtuoso';
 
-import NoteModal from '../../../../NoteModal';
-
 import styles from './NotesList.module.scss';
 import NotesListItem from './NotesListItem';
 
+import NoteModal from '@/components/Notes/NoteModal';
 import Spinner, { SpinnerSize } from '@/dls/Spinner/Spinner';
 import { GetAllNotesResponse } from '@/types/auth/Note';
 

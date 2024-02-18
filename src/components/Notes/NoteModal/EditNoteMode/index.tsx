@@ -9,10 +9,17 @@ type Props = {
   notes: Note[];
   verseKey: string;
   onNoteUpdated?: (data: Note) => void;
+  onNoteDeleted?: () => void;
   noteId: string;
 };
 
-const EditNoteMode: React.FC<Props> = ({ notes, verseKey, onNoteUpdated, noteId }) => {
+const EditNoteMode: React.FC<Props> = ({
+  notes,
+  verseKey,
+  onNoteUpdated,
+  onNoteDeleted,
+  noteId,
+}) => {
   return (
     <>
       {notes[0]?.ranges && <NoteRanges ranges={notes[0].ranges} />}
@@ -21,6 +28,7 @@ const EditNoteMode: React.FC<Props> = ({ notes, verseKey, onNoteUpdated, noteId 
           <NoteListItem
             verseKey={verseKey}
             onNoteUpdated={onNoteUpdated}
+            onNoteDeleted={onNoteDeleted}
             key={note.id}
             noteId={noteId}
             note={note}

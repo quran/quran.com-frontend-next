@@ -31,11 +31,16 @@ const NoteModal: React.FC<NoteModalProps> = ({
   verseKey,
   noteId,
   onNoteUpdated,
+  onNoteDeleted,
 }) => {
   const contentModalRef = useRef<ContentModalHandles>();
 
   const queryKey = noteId ? makeGetNoteByIdUrl(noteId) : makeGetNotesByVerseUrl(verseKey);
 
+  const deleteAndClose = () => {
+    onNoteDeleted();
+    onClose();
+  };
   return (
     <ContentModal
       innerRef={contentModalRef}
@@ -56,6 +61,7 @@ const NoteModal: React.FC<NoteModalProps> = ({
             return (
               <EditNoteMode
                 onNoteUpdated={onNoteUpdated}
+                onNoteDeleted={onNoteDeleted ? deleteAndClose : undefined}
                 verseKey={verseKey}
                 notes={isArray(response) ? response : [response]}
                 noteId={noteId}

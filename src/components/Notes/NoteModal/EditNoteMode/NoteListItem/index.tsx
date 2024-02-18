@@ -23,9 +23,16 @@ type Props = {
   verseKey: string;
   noteId: string;
   onNoteUpdated?: (data: Note) => void;
+  onNoteDeleted?: () => void;
 };
 
-const NoteListItem: React.FC<Props> = ({ note, verseKey, noteId, onNoteUpdated }) => {
+const NoteListItem: React.FC<Props> = ({
+  note,
+  verseKey,
+  noteId,
+  onNoteUpdated,
+  onNoteDeleted,
+}) => {
   const { lang, t } = useTranslation('common');
   const toast = useToast();
   const { mutate, cache } = useSWRConfig();
@@ -104,6 +111,9 @@ const NoteListItem: React.FC<Props> = ({ note, verseKey, noteId, onNoteUpdated }
         });
         mutateCache([]);
         clearCountCache();
+        if (onNoteDeleted) {
+          onNoteDeleted();
+        }
       },
       onError: () => {
         toast(t('common:error.general'), {

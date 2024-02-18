@@ -62,7 +62,7 @@ const PublicReflections = () => {
   );
 
   if (error) {
-    return <Error statusCode={403} />;
+    return <Error statusCode={403} hasFullWidth={false} />;
   }
 
   if (!data) {
