@@ -150,6 +150,7 @@ describe('getUpdatedCourseData', () => {
       title: 'Title 1',
       isCompleted: true,
       slug: 'course-1',
+      continueFromLesson: 'lesson-1',
       lessons: [
         {
           id: '1',
@@ -201,6 +202,7 @@ describe('getUpdatedCourseData', () => {
       title: 'Title 1',
       isCompleted: false,
       slug: 'course-1',
+      continueFromLesson: 'lesson-1',
       lessons: [
         {
           id: '1',
