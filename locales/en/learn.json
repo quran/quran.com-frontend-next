@@ -28,5 +28,7 @@
   "tabs": {
     "main": "Main Details",
     "syllabus": "Syllabus"
-  }
+  },
+  "continue-learning": "Continue Learning",
+  "start-learning": "Start Learning"
 }

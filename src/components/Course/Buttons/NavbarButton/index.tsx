@@ -17,7 +17,7 @@ const NavbarButton = () => {
 
   const onLearnMoreClicked = () => {
     logButtonClick('navbar_learning_plan');
-    router.push(`${getCourseNavigationUrl(LEARNING_PLAN_SLUG)}?shouldRedirectToLesson=true`);
+    router.push(`${getCourseNavigationUrl(LEARNING_PLAN_SLUG)}`);
   };
 
   return (

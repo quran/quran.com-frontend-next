@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
+import StartOrContinueLearning from '@/components/Course/Buttons/StartOrContinueLearning';
 import Button from '@/dls/Button/Button';
 import Pill from '@/dls/Pill';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
@@ -81,7 +82,7 @@ const StatusHeader: React.FC<Props> = ({ course, isCTA = false }) => {
     return <Pill>{t('completed')}</Pill>;
   }
   if (isUserEnrolled === true) {
-    return <Pill>{t('enrolled')}</Pill>;
+    return <StartOrContinueLearning course={course} />;
   }
 
   return (
