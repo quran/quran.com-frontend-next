@@ -5,6 +5,7 @@ import useTranslation from 'next-translate/useTranslation';
 import styles from './UserPublicReflectionsListItem.module.scss';
 
 import useReflectionBodyParser from '@/components/QuranReflect/hooks/useReflectionBodyParser';
+import ReflectionSocialInteractions from '@/components/QuranReflect/ReflectionModal/ReflectionSocialInteractions';
 import ReflectionReferenceIndicator from '@/components/QuranReflect/ReflectionReferenceIndicator';
 import AyahReflection from '@/types/QuranReflect/AyahReflection';
 import { dateToReadableFormat } from '@/utils/datetime';
@@ -26,7 +27,7 @@ const UserPublicReflectionsListItem: React.FC<UserPublicReflectionsListItemProps
   const formattedText = useReflectionBodyParser(reflection.body, styles.hashtag);
 
   const onReflectionClicked = (selectedReflection: AyahReflection) => {
-    logButtonClick('note_list_item', {
+    logButtonClick('public_reflection_list_item', {
       postId: selectedReflection.id,
     });
     setSelectedReflection(selectedReflection);
@@ -64,6 +65,7 @@ const UserPublicReflectionsListItem: React.FC<UserPublicReflectionsListItemProps
           year: 'numeric',
         })}
       </time>
+      <ReflectionSocialInteractions reflection={reflection} />
     </div>
   );
 };

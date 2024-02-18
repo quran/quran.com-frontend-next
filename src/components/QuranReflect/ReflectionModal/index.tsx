@@ -5,7 +5,6 @@ import useTranslation from 'next-translate/useTranslation';
 import styles from './ReflectionModal.module.scss';
 
 import useReflectionBodyParser from '@/components/QuranReflect/hooks/useReflectionBodyParser';
-import ReflectionSocialInteractions from '@/components/QuranReflect/ReflectionModal/ReflectionSocialInteractions';
 import ReflectionReferences from '@/components/QuranReflect/ReflectionReferences';
 import ContentModal, { ContentModalSize } from '@/dls/ContentModal/ContentModal';
 import ContentModalHandles from '@/dls/ContentModal/types/ContentModalHandles';
@@ -50,7 +49,6 @@ const ReflectionModal: React.FC<ReflectionModalProps> = ({ onClose, isOpen, refl
           __html: formattedText,
         }}
       />
-      <ReflectionSocialInteractions reflection={reflection} />
     </ContentModal>
   );
 };

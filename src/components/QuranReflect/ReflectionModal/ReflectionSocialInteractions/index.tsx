@@ -19,14 +19,16 @@ type Props = {
 const ReflectionSocialInteractions: React.FC<Props> = ({ reflection }) => {
   const { lang } = useTranslation();
 
-  const onLikesCountClicked = () => {
-    logButtonClick('reflection_modal_likes', {
+  const onLikesCountClicked = (e) => {
+    e.stopPropagation();
+    logButtonClick('reflection_likes', {
       postId: reflection.id,
     });
   };
 
-  const onCommentsCountClicked = () => {
-    logButtonClick('reflection_modal_comments', {
+  const onCommentsCountClicked = (e) => {
+    e.stopPropagation();
+    logButtonClick('reflection_comments', {
       postId: reflection.id,
     });
   };

@@ -24,14 +24,14 @@ type Props = {
 const ReflectionReferences: React.FC<Props> = ({ references }: Props) => {
   const onOpenChange = (isCollapseOpen: boolean) => {
     if (isCollapseOpen) {
-      logEvent('note_reference_collapse_opened');
+      logEvent('reflection_reference_collapse_opened');
     } else {
-      logEvent('note_reference_collapse_closed');
+      logEvent('reflection_reference_collapse_closed');
     }
   };
 
   const onNoteSurahReferenceClicked = () => {
-    logButtonClick('note_surah_reference');
+    logButtonClick('reflection_surah_reference');
   };
 
   return (
