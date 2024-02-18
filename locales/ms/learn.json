@@ -8,6 +8,7 @@
   "category": "kategori",
   "coming-soon": "Akan datang...",
   "completed": "Selesai",
+  "continue-learning": "Teruskan Belajar",
   "day": "Hari",
   "description": "Penerangan",
   "duration-daily": "Setiap Pelajaran pendek mengambil masa kurang daripada {{dailyMins}} minit untuk menyelesaikan {{days}} Jumlah pelajaran",
@@ -25,6 +26,7 @@
   "next-lesson": "Pelajaran Seterusnya",
   "not-enrolled": "Anda belum mendaftar dalam <link> Rancangan Pembelajaran </link> lagi.",
   "prev-lesson": "Pelajaran Sebelumnya",
+  "start-learning": "Mula Belajar",
   "tabs": {
     "main": "Butiran Utama",
     "syllabus": "Silibus"

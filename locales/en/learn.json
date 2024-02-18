@@ -8,6 +8,7 @@
   "category": "Category",
   "coming-soon": "Coming Soon...",
   "completed": "Completed",
+  "continue-learning": "Continue Learning",
   "day": "Day",
   "description": "Description",
   "duration-daily": "Each short Lesson takes less than {{dailyMins}} minutes to complete {{days}} Lessons total",
@@ -25,10 +26,9 @@
   "next-lesson": "Next Lesson",
   "not-enrolled": "You are not enrolled in the <link>Learning Plan</link> yet.",
   "prev-lesson": "Previous Lesson",
+  "start-learning": "Start Learning",
   "tabs": {
     "main": "Main Details",
     "syllabus": "Syllabus"
-  },
-  "continue-learning": "Continue Learning",
-  "start-learning": "Start Learning"
+  }
 }

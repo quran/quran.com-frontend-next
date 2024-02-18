@@ -8,6 +8,7 @@
   "category": "Kategori",
   "coming-soon": "Yakında gelecek...",
   "completed": "Tamamlanmış",
+  "continue-learning": "Öğrenmeye Devam Et",
   "day": "Gün",
   "description": "Tanım",
   "duration-daily": "Her kısa Dersin toplam {{days}} Dersi tamamlaması {{dailyMins}} dakikadan az sürer",
@@ -25,6 +26,7 @@
   "next-lesson": "Gelecek ders",
   "not-enrolled": "Henüz <link> Öğrenim Planına </link> kaydolmadınız.",
   "prev-lesson": "Önceki Ders",
+  "start-learning": "Öğrenmeye başla",
   "tabs": {
     "main": "Ana Detaylar",
     "syllabus": "Müfredat"

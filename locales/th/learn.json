@@ -8,6 +8,7 @@
   "category": "หมวดหมู่",
   "coming-soon": "เร็วๆ นี้...",
   "completed": "สมบูรณ์",
+  "continue-learning": "เรียนรู้ต่อ",
   "day": "วัน",
   "description": "คำอธิบาย",
   "duration-daily": "บทเรียนสั้นแต่ละบทเรียนใช้เวลาน้อยกว่า {{dailyMins}} นาทีในการเรียนจบทั้งหมด {{days}} บทเรียน",
@@ -25,6 +26,7 @@
   "next-lesson": "บทเรียนถัดไป",
   "not-enrolled": "คุณยังไม่ได้ลงทะเบียนใน <link> แผนการเรียนรู้ </link>",
   "prev-lesson": "บทเรียนก่อนหน้า",
+  "start-learning": "เริ่มการเรียนรู้",
   "tabs": {
     "main": "รายละเอียดหลัก",
     "syllabus": "หลักสูตร"

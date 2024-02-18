@@ -8,6 +8,7 @@
   "category": "Kategoria",
   "coming-soon": "Vjen së shpejti...",
   "completed": "E përfunduar",
+  "continue-learning": "Vazhdoni të mësoni",
   "day": "Dita",
   "description": "Përshkrim",
   "duration-daily": "Çdo mësim i shkurtër merr më pak se {{dailyMins}} minuta për të përfunduar {{days}} mësime në total",
@@ -25,6 +26,7 @@
   "next-lesson": "Mësimi tjetër",
   "not-enrolled": "Nuk jeni regjistruar ende në <link> planin mësimor </link> .",
   "prev-lesson": "Mësimi i mëparshëm",
+  "start-learning": "Filloni të mësoni",
   "tabs": {
     "main": "Detajet kryesore",
     "syllabus": "Programi mësimor"

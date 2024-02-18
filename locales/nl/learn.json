@@ -8,6 +8,7 @@
   "category": "Categorie",
   "coming-soon": "Binnenkort beschikbaar...",
   "completed": "Voltooid",
+  "continue-learning": "Ga door met leren",
   "day": "Dag",
   "description": "Beschrijving",
   "duration-daily": "Elke korte les duurt minder dan {{dailyMins}} minuten om in totaal {{days}} lessen te voltooien",
@@ -25,6 +26,7 @@
   "next-lesson": "Volgende les",
   "not-enrolled": "Je bent nog niet ingeschreven voor het <link> Leerplan </link> .",
   "prev-lesson": "Vorige les",
+  "start-learning": "Begin met leren",
   "tabs": {
     "main": "Belangrijkste details",
     "syllabus": "Syllabus"

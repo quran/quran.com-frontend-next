@@ -8,6 +8,7 @@
   "category": "类别",
   "coming-soon": "即将推出...",
   "completed": "完全的",
+  "continue-learning": "继续学习",
   "day": "天",
   "description": "描述",
   "duration-daily": "每节简短课程只需不到{{dailyMins}}分钟即可完成总共{{days}}节课程",
@@ -25,6 +26,7 @@
   "next-lesson": "下一课",
   "not-enrolled": "您尚未加入<link>学习计划</link> 。",
   "prev-lesson": "上一课",
+  "start-learning": "开始学习",
   "tabs": {
     "main": "主要细节",
     "syllabus": "教学大纲"
