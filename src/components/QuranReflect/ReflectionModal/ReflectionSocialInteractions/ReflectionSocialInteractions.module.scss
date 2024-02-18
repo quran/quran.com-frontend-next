@@ -1,3 +1,6 @@
 .socialInteractionContainer {
     margin-block-start: var(--spacing-xxsmall);
+    & > a:last-child {
+        margin-inline-start: var(--spacing-small);
+    }
 }
