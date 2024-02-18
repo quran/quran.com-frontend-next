@@ -2,6 +2,45 @@ import { Course, Lesson } from '@/types/auth/Course';
 import { makeGetCourseUrl, makeGetLessonUrlPrefix } from '@/utils/auth/apiPaths';
 
 /**
+ * Given an ordered list of lessons and a list of completed lessons:
+ *
+ * – If all of them are completed, return the first
+ * - If none of them are completed, return the first
+ * - If only some of them are completed, return the 1st uncompleted lesson.
+ *
+ * @param {Lesson[]} lessons
+ *
+ * @returns {string}
+ */
+export const getContinueFromLesson = (lessons: Lesson[]): string => {
+  if (!lessons) {
+    return null;
+  }
+  const completedLessonIds = lessons
+    .filter((lesson) => lesson.isCompleted)
+    .map((lesson) => lesson.id);
+  const numberOfCompletedLessons = completedLessonIds.length;
+  // if no lessons were completed, return the first lesson
+  if (numberOfCompletedLessons === 0) {
+    return lessons[0].slug;
+  }
+  // if all lessons were completed, return the first lesson
+  if (numberOfCompletedLessons === lessons.length) {
+    return lessons[0].slug;
+  }
+  // 1. make sure the lessons are sorted by day
+  const sortedLessons = lessons.sort((a, b) => a.day - b.day);
+  // 2. pick first uncompleted lesson
+  for (let index = 0; index < sortedLessons.length; index += 1) {
+    // if the lessons has not been completed, return in
+    if (!completedLessonIds.includes(sortedLessons[index].id)) {
+      return sortedLessons[index].slug;
+    }
+  }
+  return null;
+};
+
+/**
  * Given a lessons array and a lesson id, it returns a new lessons array
  * after setting the lesson with the given id set as completed.
  *
@@ -78,6 +117,7 @@ export const getUpdatedCourseData = (
         updatedCourseData.lessons,
         completedLessonId,
       );
+      updatedCourseData.continueFromLesson = getContinueFromLesson(updatedCourseData.lessons);
     }
     return updatedCourseData;
   }
