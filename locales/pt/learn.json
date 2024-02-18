@@ -8,6 +8,7 @@
   "category": "Categoria",
   "coming-soon": "Em breve...",
   "completed": "Concluído",
+  "continue-learning": "Continuar aprendendo",
   "day": "Dia",
   "description": "Descrição",
   "duration-daily": "Cada aula curta leva menos de {{dailyMins}} minutos para ser concluída {{days}} aulas no total",
@@ -25,6 +26,7 @@
   "next-lesson": "Próxima lição",
   "not-enrolled": "Você ainda não está inscrito no <link> Plano de aprendizagem </link> .",
   "prev-lesson": "Lição Anterior",
+  "start-learning": "Comece a aprender",
   "tabs": {
     "main": "Detalhes principais",
     "syllabus": "Programa de Estudos"

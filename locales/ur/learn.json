@@ -8,6 +8,7 @@
   "category": "قسم",
   "coming-soon": "جلد آ رہا ہے...",
   "completed": "مکمل",
+  "continue-learning": "سیکھنا جاری رکھیں",
   "day": "دن",
   "description": "تفصیل",
   "duration-daily": "ہر مختصر اسباق کو کل {{days}} اسباق مکمل ہونے میں {{dailyMins}} منٹ سے بھی کم وقت لگتا ہے",
@@ -25,6 +26,7 @@
   "next-lesson": "اگلا سبق",
   "not-enrolled": "آپ ابھی تک <link> لرننگ پلان </link> میں اندراج نہیں ہوئے ہیں۔",
   "prev-lesson": "پچھلا سبق",
+  "start-learning": "سیکھنا شروع کریں۔",
   "tabs": {
     "main": "اہم تفصیلات",
     "syllabus": "نصاب"

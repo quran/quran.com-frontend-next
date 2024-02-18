@@ -8,6 +8,7 @@
   "category": "শ্রেণী",
   "coming-soon": "শীঘ্রই আসছে...",
   "completed": "সম্পন্ন",
+  "continue-learning": "শেখা চালিয়ে যান",
   "day": "দিন",
   "description": "বর্ণনা",
   "duration-daily": "প্রতিটি ছোট পাঠের মোট {{days}} টি পাঠ শেষ হতে {{dailyMins}} মিনিটেরও কম সময় লাগে",
@@ -25,6 +26,7 @@
   "next-lesson": "পরবর্তী পাঠ",
   "not-enrolled": "আপনি এখনও <link> লার্নিং প্ল্যান </link> এ নথিভুক্ত নন।",
   "prev-lesson": "পূর্ববর্তী পাঠ",
+  "start-learning": "শেখা শুরু করো",
   "tabs": {
     "main": "প্রধান বিবরণ",
     "syllabus": "পাঠ্যক্রম"

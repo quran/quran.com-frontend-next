@@ -8,6 +8,7 @@
   "category": "دسته بندی",
   "coming-soon": "به زودی...",
   "completed": "تکمیل شد",
+  "continue-learning": "به یادگیری ادامه دهید",
   "day": "روز",
   "description": "شرح",
   "duration-daily": "هر درس کوتاه کمتر از {{dailyMins}} دقیقه طول می‌کشد تا {{days}} کل دروس تکمیل شود.",
@@ -25,6 +26,7 @@
   "next-lesson": "درس بعدی",
   "not-enrolled": "شما هنوز در <link> طرح یادگیری </link> ثبت نام نکرده اید.",
   "prev-lesson": "درس قبلی",
+  "start-learning": "شروع به یادگیری",
   "tabs": {
     "main": "جزئیات اصلی",
     "syllabus": "سرفصل دروس"
