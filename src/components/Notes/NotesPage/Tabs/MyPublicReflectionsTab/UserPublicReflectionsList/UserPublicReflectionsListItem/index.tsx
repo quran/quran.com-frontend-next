@@ -51,6 +51,7 @@ const UserPublicReflectionsListItem: React.FC<UserPublicReflectionsListItemProps
       )}
       <p>
         <span
+          className={styles.noteBody}
           // eslint-disable-next-line react/no-danger
           dangerouslySetInnerHTML={{
             __html: truncate(formattedText, MAX_BODY_SIZE),
