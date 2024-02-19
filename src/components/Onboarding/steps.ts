@@ -94,7 +94,6 @@ export const checklistIndexToOnboardingSteps = (
           target: '#theme-section',
           spotlightClicks: true,
           placement: 'left-start',
-          // disableScrolling: true,
         },
       },
       {
@@ -104,7 +103,6 @@ export const checklistIndexToOnboardingSteps = (
           target: '#quran-font-section',
           spotlightClicks: true,
           placement: 'left-start',
-          // disableScrolling: true,
         },
       },
       {
@@ -114,7 +112,6 @@ export const checklistIndexToOnboardingSteps = (
           target: '#font-size-section',
           spotlightClicks: true,
           placement: 'left-start',
-          // disableScrolling: true,
         },
       },
       {
@@ -133,7 +130,6 @@ export const checklistIndexToOnboardingSteps = (
           target: '#wbw-transliteration-section',
           spotlightClicks: true,
           placement: 'left-start',
-          // disableScrolling: true,
         },
       },
       {
@@ -143,7 +139,6 @@ export const checklistIndexToOnboardingSteps = (
           target: '#wbw-recitation-section',
           spotlightClicks: true,
           placement: 'left-start',
-          // disableScrolling: true,
         },
       },
       {
@@ -153,7 +148,6 @@ export const checklistIndexToOnboardingSteps = (
           target: '#wbw-display-section',
           spotlightClicks: true,
           placement: 'left-start',
-          // disableScrolling: true,
         },
       },
       {
@@ -163,7 +157,6 @@ export const checklistIndexToOnboardingSteps = (
           target: '#translation-section',
           placement: 'left-start',
           spotlightClicks: true,
-          disableScrollParentFix: true,
         },
       },
       {

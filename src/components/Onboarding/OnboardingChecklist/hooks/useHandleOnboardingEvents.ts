@@ -56,17 +56,13 @@ const useHandleOnboardingEvents = ({
         dispatch(setSettingsView(SettingsView.Body));
 
         setTimeout(() => {
-          // scroll to translation section
-          const translationSection = document.getElementById('settings-drawer-body').parentElement;
+          const el = document.getElementById('settings-drawer-container');
 
-          // scroll to the bottom of the translation section
-          translationSection.scrollTo({
-            top: translationSection.scrollHeight,
-            behavior: 'smooth',
-          });
-        }, 100);
+          // scroll to the bottom of the settings view
+          if (el) el.scrollTop = el.scrollHeight;
+        }, 0);
 
-        return {};
+        return { delay: 1 };
       }
     }
 
@@ -106,7 +102,9 @@ const useHandleOnboardingEvents = ({
       if (index === 8) {
         // if the user clicks "next" in translations step,
         // switch to translations view
-        dispatch(setSettingsView(SettingsView.Translation));
+        setTimeout(() => {
+          dispatch(setSettingsView(SettingsView.Translation));
+        }, 10);
 
         // we'll let the translations view handle the proceeding when it's done opening
         return { automaticallyProceed: true };

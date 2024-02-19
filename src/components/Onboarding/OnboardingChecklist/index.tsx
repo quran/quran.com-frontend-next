@@ -10,6 +10,7 @@ import useShowChecklistAfterInterval from './hooks/useShowChecklistAfterInterval
 import styles from './OnboardingChecklist.module.scss';
 
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
+import Progress from '@/dls/Progress';
 import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
 import CheckIcon from '@/icons/check.svg';
 import IconClose from '@/icons/close.svg';
@@ -27,9 +28,11 @@ import PreferenceGroup from '@/types/auth/PreferenceGroup';
 import OnboardingGroup from '@/types/OnboardingGroup';
 import { ReadingPreference } from '@/types/QuranReader';
 import { logButtonClick } from '@/utils/eventLogger';
+import { toLocalizedNumber } from '@/utils/locale';
+import { convertFractionToPercent } from '@/utils/number';
 
 const OnboardingChecklist = () => {
-  const { t } = useTranslation('common');
+  const { t, lang } = useTranslation('common');
   const checklistItems = onboardingChecklist(t);
   const router = useRouter();
 
@@ -47,7 +50,9 @@ const OnboardingChecklist = () => {
   } = usePersistPreferenceGroup();
 
   const handleDismiss = () => {
-    logButtonClick('onboarding_checklist_dismiss', { totalDismissals: checklistDismissals + 1 });
+    logButtonClick('onboarding_checklist_dismiss', {
+      totalDismissals: checklistDismissals + 1,
+    });
     dispatch(dismissChecklist());
   };
 
@@ -107,6 +112,11 @@ const OnboardingChecklist = () => {
     });
   };
 
+  const completedPercent = convertFractionToPercent(
+    Object.keys(completedGroups).length / checklistItems.length,
+  );
+  const localizedPercent = toLocalizedNumber(completedPercent, lang);
+
   return (
     <div className={classNames(styles.checklist, styles.checklistPosition)}>
       <div className={styles.checklistHeader}>
@@ -122,6 +132,11 @@ const OnboardingChecklist = () => {
         >
           <IconClose />
         </Button>
+      </div>
+
+      <div className={styles.progressContainer}>
+        <p>{localizedPercent}%</p>
+        <Progress value={completedPercent} rootStyles={styles.progressBar} />
       </div>
 
       <ul>

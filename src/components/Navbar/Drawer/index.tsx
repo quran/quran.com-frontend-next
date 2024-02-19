@@ -158,6 +158,7 @@ const Drawer: React.FC<Props> = ({
         [styles.right]: side === DrawerSide.Right,
       })}
       ref={drawerRef}
+      id={type === DrawerType.Settings ? 'settings-drawer-container' : undefined}
     >
       <div
         className={classNames(styles.header, {

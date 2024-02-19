@@ -21,7 +21,7 @@ const SettingsBody = () => {
       if (timeout !== null) clearTimeout(timeout);
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [activeStepIndex]);
+  }, [activeStepIndex, isActive]);
 
   return (
     <>
