@@ -278,7 +278,7 @@ export const makePageVersesUrl = (
 export const makeFootnoteUrl = (footnoteId: string): string => makeUrl(`/foot_notes/${footnoteId}`);
 
 export const makeDonateUrl = (showDonationPopup = false) =>
-  `https://donate.quran.com${showDonationPopup ? '?showDonationPopup' : ''}`;
+  `https://donate.quran.foundation${showDonationPopup ? '?showDonationPopup' : ''}`;
 
 export const makeDonatePageUrl = (isOnce = true) =>
-  `https://give.quran.com/give/${isOnce ? 482507 : 474400}/#!/donation/checkout`;
+  `https://give.quran.foundation/give/${isOnce ? 482507 : 474400}/#!/donation/checkout`;
