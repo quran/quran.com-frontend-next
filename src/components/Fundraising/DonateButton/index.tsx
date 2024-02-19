@@ -4,7 +4,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from './DonateButton.module.scss';
 
-import Button, { ButtonType, ButtonVariant } from '@/dls/Button/Button';
+import Button, { ButtonSize, ButtonType, ButtonVariant } from '@/dls/Button/Button';
 import DonateButtonClickSource from '@/types/DonateButtonClickSource';
 import DonateButtonType from '@/types/DonateButtonType';
 import { makeDonatePageUrl } from '@/utils/apiPaths';
@@ -42,6 +42,7 @@ const DonateButton: React.FC<Props> = ({ source, type, isOutlined = false }) => 
     <Button
       onClick={onDonateClicked}
       type={ButtonType.Warning}
+      size={ButtonSize.Small}
       className={styles.cta}
       {...(isOutlined === true && { variant: ButtonVariant.Outlined })}
     >

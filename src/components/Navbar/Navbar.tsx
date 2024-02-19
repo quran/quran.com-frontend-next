@@ -8,8 +8,9 @@ import styles from './Navbar.module.scss';
 import NavbarBody from './NavbarBody';
 
 import Banner from '@/components/Banner/Banner';
-import LearningPlanButton from '@/components/Course/Buttons/NavbarButton';
+import DonateButton from '@/components/Fundraising/DonateButton';
 import { selectNavbar } from '@/redux/slices/navbar';
+import DonateButtonClickSource from '@/types/DonateButtonClickSource';
 
 const Navbar = () => {
   const { t } = useTranslation('common');
@@ -18,7 +19,10 @@ const Navbar = () => {
     <>
       <div className={styles.emptySpacePlaceholder} />
       <nav className={classNames(styles.container, { [styles.hiddenNav]: !isNavbarVisible })}>
-        <Banner text={t('prepare-hearts.title')} ctaButton={<LearningPlanButton />} />
+        <Banner
+          text={t('fundraising-sticky-banner.title')}
+          ctaButton={<DonateButton source={DonateButtonClickSource.BANNER} />}
+        />
         <NavbarBody />
       </nav>
     </>
