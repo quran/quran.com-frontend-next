@@ -9,9 +9,7 @@
 }
 
 .titleContainer {
-    display: flex;
-    align-items: center;
-    gap: var(--spacing-large);
+    padding-block-end: var(--spacing-xsmall);
 
     h1 {
         font-size: var(--font-size-xlarge);

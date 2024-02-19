@@ -4,15 +4,13 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from './Tabs.module.scss';
 
-import Button, { ButtonVariant } from '@/components/dls/Button/Button';
 import PrivateNotesTab from '@/components/Notes/NotesPage/Tabs/MyPrivateNotesTab';
 import PublicReflectionsTab from '@/components/Notes/NotesPage/Tabs/MyPublicReflectionsTab';
 import TabSwitcherItem from '@/components/Notes/NotesPage/Tabs/TabSwitcherItem';
 import Switch from '@/dls/Switch/Switch';
 import DetailsIcon from '@/icons/collection.svg';
 import SyllabusIcon from '@/icons/developers.svg';
-import ArrowLeft from '@/icons/west.svg';
-import { logEvent, logButtonClick } from '@/utils/eventLogger';
+import { logEvent } from '@/utils/eventLogger';
 
 enum Tab {
   PRIVATE_NOTES = 'private_notes',
@@ -50,22 +48,10 @@ const Tabs = () => {
     [],
   );
 
-  const onBackButtonClicked = () => {
-    logButtonClick('notes_page_back_button');
-  };
-
   return (
     <div className={styles.container}>
       <div className={styles.header}>
         <div className={styles.titleContainer}>
-          <Button
-            onClick={onBackButtonClicked}
-            href="/"
-            variant={ButtonVariant.Ghost}
-            hasSidePadding={false}
-          >
-            <ArrowLeft />
-          </Button>
           <h1>{t('common:notes.my-notes')}</h1>
         </div>
       </div>
