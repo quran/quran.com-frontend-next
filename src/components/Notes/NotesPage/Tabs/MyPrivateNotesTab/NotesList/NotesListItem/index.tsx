@@ -37,7 +37,7 @@ const NotesListItem: React.FC<NotesListItemProps> = ({ note, setSelectedNoteId }
       onKeyDown={() => onNoteClicked(note.id)}
     >
       <NoteRangesIndicator ranges={note.ranges} />
-      <p>
+      <p className={styles.itemBody}>
         {truncateString(note.body, MAX_BODY_SIZE, '...')}
         {note.body.length > MAX_BODY_SIZE && (
           <span className={styles.seeMore}>{`  ${t('click-to-see-more')}`}</span>
