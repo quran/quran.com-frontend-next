@@ -3,8 +3,9 @@ import * as htmlToImage from 'html-to-image';
 
 import styles from './GeneratedImage.module.scss';
 
-import PlainVerseText from '@/components/Verse/PlainVerseText';
+import ImageGeneratorVerseText from '@/components/Verse/PlainVerseText/ImageGeneratorVerseText';
 import Button from '@/dls/Button/Button';
+import { QuranFont } from '@/types/QuranReader';
 import Verse from '@/types/Verse';
 import { getVerseWords } from '@/utils/verse';
 
@@ -34,7 +35,7 @@ const GeneratedImage = ({ verse }: Props) => {
 
   const arabicText = (
     <div className={styles.arabicText}>
-      <PlainVerseText words={getVerseWords(verse)} />
+      <ImageGeneratorVerseText quranFont={QuranFont.Uthmani} words={getVerseWords(verse)} />
     </div>
   );
 
