@@ -21,6 +21,7 @@ import { getWindowOrigin } from '@/utils/url';
 import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
 import { getWordTextFieldNameByFont } from '@/utils/word';
 import Verse from 'types/Verse';
+import VerseShare from '@/components/Verse/VerseShare';
 
 interface Props {
   verse: Verse;
@@ -145,6 +146,7 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
       ) : null}
 
       <VerseActionRepeatAudio isTranslationView={isTranslationView} verseKey={verse.verseKey} />
+      <VerseShare verse={verse} isTranslationView={isTranslationView}></VerseShare>
     </div>
   );
 };

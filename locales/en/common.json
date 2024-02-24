@@ -304,6 +304,11 @@
     "word-tooltip-helper": "Display the translation or transliteration when hovering or clicking the word"
   },
   "share": "Share",
+  "share-modal": {
+    "share-image": "Share Image",
+    "title": "Spread the ayah",
+    "subtitle": "Share the profound wisdom of Quranic verses (Ayahs) to inspire unity, compassion, and enlightenment. Join us in spreading these timeless messages for a more harmonious world."
+  },
   "shared": "Link has been copied to the clipboard!",
   "sidebar": {
     "search-hizb": "Search Hizb",

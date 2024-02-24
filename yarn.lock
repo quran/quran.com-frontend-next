@@ -7041,6 +7041,11 @@ dotenv@^16.0.0, dotenv@^16.0.2:
   resolved "https://registry.yarnpkg.com/dotenv/-/dotenv-16.4.5.tgz#cdd3b3b604cb327e286b4762e13502f717cb099f"
   integrity sha512-ZmdL2rui+eB2YwhsWzjInR8LldtZHGDoQ1ugH85ppHKwpUHL7j7rN0Ti9NCnGiQbhaZ11FpR+7ao1dNsmduNUg==
 
+downloadjs@^1.4.7:
+  version "1.4.7"
+  resolved "https://registry.yarnpkg.com/downloadjs/-/downloadjs-1.4.7.tgz#f69f96f940e0d0553dac291139865a3cd0101e3c"
+  integrity sha512-LN1gO7+u9xjU5oEScGFKvXhYf7Y/empUIIEAGBs1LzUq/rg5duiDrkuH5A2lQGd5jfMOb9X9usDa2oVXwJ0U/Q==
+
 duplexer@^0.1.2:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/duplexer/-/duplexer-0.1.2.tgz#3abe43aef3835f8ae077d136ddce0f276b0400e6"
@@ -8937,6 +8942,11 @@ html-tags@^3.1.0, html-tags@^3.2.0:
   version "3.3.1"
   resolved "https://registry.yarnpkg.com/html-tags/-/html-tags-3.3.1.tgz#a04026a18c882e4bba8a01a3d39cfe465d40b5ce"
   integrity sha512-ztqyC3kLto0e9WbNp0aeP+M3kTt+nbaIveGmUxAtZa+8iFgKLUOD4YKM5j+f3QD89bra7UeumolZHKuOXnTmeQ==
+
+html-to-image@^1.11.11:
+  version "1.11.11"
+  resolved "https://registry.yarnpkg.com/html-to-image/-/html-to-image-1.11.11.tgz#c0f8a34dc9e4b97b93ff7ea286eb8562642ebbea"
+  integrity sha512-9gux8QhvjRO/erSnDPv28noDZcPZmYE7e1vFsBLKLlRlKDSqNJYebj6Qz1TGd5lsRV+X+xYyjCKjuZdABinWjA==
 
 html-webpack-plugin@^5.5.0:
   version "5.6.0"
