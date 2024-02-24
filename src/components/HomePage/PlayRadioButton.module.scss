@@ -13,7 +13,6 @@ $button-hover-color: rgba(
 }
 
 .container {
-  position: absolute;
   inset-block-start: 0;
   inset-inline: 0;
 
@@ -22,7 +21,7 @@ $button-hover-color: rgba(
 
   box-sizing: border-box;
   padding-inline: calc(1.3 * var(--spacing-medium));
-  padding-block: var(--spacing-medium);
+  padding-block-start: var(--spacing-medium);
   @include breakpoints.tablet {
     padding-inline: calc(1.3 * var(--spacing-mega));
   }

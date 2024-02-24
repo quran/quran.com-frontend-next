@@ -11,10 +11,10 @@ import styles from './EndOfScrollingControls.module.scss';
 import HizbControls from './HizbControls';
 import JuzControls from './JuzControls';
 import PageControls from './PageControls';
+import QuranReaderReadingStreak from './QuranReaderReadingStreak';
 import RubControls from './RubControls';
 import VerseControls from './VerseControls';
 
-import ReadingStreak, { ReadingStreakLayout } from '@/components/HomePage/ReadingStreak';
 import { selectIsReadingByRevelationOrder } from '@/redux/slices/revelationOrder';
 import { VersesResponse } from 'types/ApiResponses';
 import { QuranReaderDataType } from 'types/QuranReader';
@@ -36,7 +36,7 @@ const EndOfScrollingControls: React.FC<Props> = ({
   return (
     <>
       <div className={styles.progressWidgetContainer}>
-        <ReadingStreak layout={ReadingStreakLayout.QuranReader} />
+        <QuranReaderReadingStreak />
       </div>
       {isReadingByRevelationOrder && quranReaderDataType === QuranReaderDataType.Chapter && (
         <RevelationOrderNavigationNotice
