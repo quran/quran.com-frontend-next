@@ -10,6 +10,7 @@ import styles from './index.module.scss';
 
 import ChapterAndJuzListWrapper from '@/components/chapters/ChapterAndJuzList';
 import HomePageHero from '@/components/HomePage/HomePageHero';
+import HomePageWelcomeMessage from '@/components/HomePage/HomePageWelcomeMessage';
 import QuranGrowthJourneySection from '@/components/HomePage/QuranGrowthJourneySection';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import BookmarksAndCollectionsSection from '@/components/Verses/BookmarksAndCollectionsSection';
@@ -40,6 +41,9 @@ const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }): JSX.El
       <div className={styles.pageContainer}>
         <div className={styles.flow}>
           <HomePageHero />
+          <div className={classNames(styles.flowItem, styles.fullWidth)}>
+            <HomePageWelcomeMessage />
+          </div>
           <div className={classNames(styles.flowItem, styles.fullWidth)}>
             <QuranGrowthJourneySection />
           </div>
