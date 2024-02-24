@@ -1,3 +1,5 @@
+import { useContext } from 'react';
+
 import download from 'downloadjs';
 import * as htmlToImage from 'html-to-image';
 import useTranslation from 'next-translate/useTranslation';
@@ -5,12 +7,11 @@ import useTranslation from 'next-translate/useTranslation';
 import styles from './GeneratedImage.module.scss';
 
 import ImageGeneratorVerseText from '@/components/Verse/PlainVerseText/ImageGeneratorVerseText';
+import DataContext from '@/contexts/DataContext';
 import Button, { ButtonType } from '@/dls/Button/Button';
 import { QuranFont } from '@/types/QuranReader';
 import Verse from '@/types/Verse';
 import { getVerseWords } from '@/utils/verse';
-import { useContext } from 'react';
-import DataContext from '@/contexts/DataContext';
 
 const NODE_ID = 'GENERATAED-IMAGE';
 type Props = {
@@ -22,7 +23,6 @@ const GeneratedImage = ({ verse }: Props) => {
   const chaptersData = useContext(DataContext);
 
   const surah = chaptersData[verse.chapterId];
-
 
   const handleDownloadImage = () => {
     const element = document.getElementById(NODE_ID);
