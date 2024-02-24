@@ -32,10 +32,12 @@ const ImageGeneratorVerseText: React.FC<Props> = ({
   shouldShowWordByWordTransliteration = false,
   quranFont,
 }: Props): JSX.Element => {
+  const fontScale = 1; // TODO: should be dynamic based on words.length
+
   return (
     <div
       className={classNames(styles.verseTextContainer, styles.tafsirOrTranslationMode, {
-        [styles[getFontClassName(quranFont, 1, MushafLines.FifteenLines)]]:
+        [styles[getFontClassName(quranFont, fontScale, MushafLines.FifteenLines)]]:
           quranFont !== QuranFont.Tajweed,
       })}
     >
