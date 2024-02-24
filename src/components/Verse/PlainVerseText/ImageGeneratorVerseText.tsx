@@ -1,16 +1,14 @@
 import React from 'react';
 
 import classNames from 'classnames';
-import { shallowEqual, useSelector } from 'react-redux';
 
 import styles from '../VerseText.module.scss';
 
 import PlainVerseTextWord from './PlainVerseTextWord';
 
 import TextWord from '@/dls/QuranWord/TextWord';
-import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import { getFontClassName } from '@/utils/fontFaceHelper';
-import { QuranFont } from 'types/QuranReader';
+import { MushafLines, QuranFont } from 'types/QuranReader';
 import Word from 'types/Word';
 
 type Props = {
@@ -34,11 +32,10 @@ const ImageGeneratorVerseText: React.FC<Props> = ({
   shouldShowWordByWordTransliteration = false,
   quranFont,
 }: Props): JSX.Element => {
-  const { quranTextFontScale, mushafLines } = useSelector(selectQuranReaderStyles, shallowEqual);
   return (
     <div
       className={classNames(styles.verseTextContainer, styles.tafsirOrTranslationMode, {
-        [styles[getFontClassName(quranFont, quranTextFontScale, mushafLines)]]:
+        [styles[getFontClassName(quranFont, 1, MushafLines.FifteenLines)]]:
           quranFont !== QuranFont.Tajweed,
       })}
     >
@@ -51,7 +48,7 @@ const ImageGeneratorVerseText: React.FC<Props> = ({
               shouldShowWordByWordTranslation={shouldShowWordByWordTranslation}
               shouldShowWordByWordTransliteration={shouldShowWordByWordTransliteration}
             >
-              <TextWord font={quranFont} text={word.textUthmani} charType={word.charTypeName} />
+              <TextWord font={quranFont} text={word.qpcUthmaniHafs} charType={word.charTypeName} />
             </PlainVerseTextWord>
           );
         })}

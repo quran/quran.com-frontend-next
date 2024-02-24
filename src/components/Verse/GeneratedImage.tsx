@@ -4,7 +4,7 @@ import * as htmlToImage from 'html-to-image';
 import styles from './GeneratedImage.module.scss';
 
 import ImageGeneratorVerseText from '@/components/Verse/PlainVerseText/ImageGeneratorVerseText';
-import Button from '@/dls/Button/Button';
+import Button, { ButtonType } from '@/dls/Button/Button';
 import { QuranFont } from '@/types/QuranReader';
 import Verse from '@/types/Verse';
 import { getVerseWords } from '@/utils/verse';
@@ -23,6 +23,7 @@ const GeneratedImage = ({ verse }: Props) => {
       });
     }
   };
+
   const backgroundImage = (
     <img
       alt="background"
@@ -35,17 +36,33 @@ const GeneratedImage = ({ verse }: Props) => {
 
   const arabicText = (
     <div className={styles.arabicText}>
-      <ImageGeneratorVerseText quranFont={QuranFont.Uthmani} words={getVerseWords(verse)} />
+      <ImageGeneratorVerseText quranFont={QuranFont.QPCHafs} words={getVerseWords(verse)} />
     </div>
   );
+
+  const backgroundOverlay = <div className={styles.backgroundOverlay} />;
+
+  const translationText = verse.translations[0].text;
+  const translation = <div className={styles.translationText}>{translationText}</div>;
+
+  // TODO: include surah name
+  const verseKeyFootnote = <div className={styles.verseKeyFootnote}>Quran {verse.verseKey}</div>;
 
   return (
     <div>
       <div id={NODE_ID} className={styles.container}>
         {backgroundImage}
-        {arabicText}
+        {backgroundOverlay}
+        <div className={styles.content}>
+          {arabicText}
+          {translation}
+          {verseKeyFootnote}
+        </div>
       </div>
-      <Button onClick={handleDownloadImage}>Download</Button>
+      <div className={styles.actionsContainer}>
+        <Button type={ButtonType.Primary} onClick={handleDownloadImage}>Download</Button>
+        <Button type={ButtonType.Success} onClick={handleDownloadImage}>Share</Button>
+      </div>
     </div>
   );
 };

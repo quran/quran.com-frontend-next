@@ -1,9 +1,9 @@
 .container {
   display: flex;
   position: relative;
-  width: 200jpx;
-  height: 300px;
+  width: 100%;
   background-color: red;
+  flex-direction: column;
 }
 
 .backgroundImage {
@@ -18,7 +18,43 @@
   object-fit: cover;
 }
 
-.arabicText {
+.content {
   position: relative;
+  padding: 32px 32px;
+}
+
+// content's children vertical spacing
+.content > * + * {
+  margin-top: 16px;
+}
+
+.backgroundOverlay {
+  background-color: rgba(0, 0, 0, 0.3);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.arabicText {
   color: white;
+  text-align: center;
+}
+
+.translationText {
+  color: white;
+  font-weight: 500;
+}
+
+.verseKeyFootnote {
+  color: white;
+  text-align: center;
+  opacity: 0.75;
+}
+
+.actionsContainer {
+  padding: 24px 0;
+  display: flex;
+  justify-content: space-around;
 }
