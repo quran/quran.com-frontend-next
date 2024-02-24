@@ -306,8 +306,11 @@
   "share": "Share",
   "share-modal": {
     "share-image": "Share Image",
-    "title": "Spread the ayah",
-    "subtitle": "Share the profound wisdom of Quranic verses (Ayahs) to inspire unity, compassion, and enlightenment. Join us in spreading these timeless messages for a more harmonious world."
+    "title": "Share",
+    "subtitle": "Share the profound wisdom of Quranic verses (Ayahs) to inspire unity, compassion, and enlightenment. Join us in spreading these timeless messages for a more harmonious world.",
+    "download": "Download",
+    "share": "Share",
+    "ayah-citation": "Quran {{surahName}} ({{surahNumber}}) : {{ayahNumber}}"
   },
   "shared": "Link has been copied to the clipboard!",
   "sidebar": {
