@@ -1,0 +1,11 @@
+.streakTitle {
+    color: var(--color-success-medium);
+    font-size: var(--font-size-jumbo);
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+
+.streakTitleWarning {
+    color: var(--color-warning-medium);
+}

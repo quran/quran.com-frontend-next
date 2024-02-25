@@ -3,6 +3,7 @@ import useTranslation from 'next-translate/useTranslation';
 import VerseRangesList from './VerseRangesList';
 
 import { StreakWithMetadata } from '@/hooks/auth/useGetStreakWithMetadata';
+import { CurrentQuranActivityDay } from '@/types/auth/ActivityDay';
 import { GoalType } from '@/types/auth/Goal';
 import { RangeItemDirection } from '@/types/Range';
 import { secondsToReadableFormat } from '@/utils/datetime';
@@ -10,10 +11,16 @@ import { logButtonClick } from '@/utils/eventLogger';
 import { toLocalizedNumber } from '@/utils/locale';
 import { convertFractionToPercent, convertNumberToDecimal } from '@/utils/number';
 
+export enum ReadingGoalAmountContext {
+  HomePage = 'home_page',
+  QuranReader = 'quran_reader',
+  ProgressPage = 'progress_page',
+}
+
 interface ReadingGoalAmountProps {
   goal?: StreakWithMetadata['goal'];
-  currentActivityDay?: StreakWithMetadata['weekData']['readingDaysMap'][string];
-  context: 'home_page' | 'quran_reader' | 'progress_page';
+  currentActivityDay?: CurrentQuranActivityDay;
+  context: ReadingGoalAmountContext;
 }
 
 const ReadingGoalAmount: React.FC<ReadingGoalAmountProps> = ({

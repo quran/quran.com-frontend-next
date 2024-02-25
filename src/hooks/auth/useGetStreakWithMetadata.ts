@@ -7,7 +7,7 @@ import { useSelector, shallowEqual } from 'react-redux';
 import useSWR from 'swr';
 
 import { selectQuranFont, selectQuranMushafLines } from '@/redux/slices/QuranReader/styles';
-import { ActivityDay, QuranActivityDay } from '@/types/auth/ActivityDay';
+import { ActivityDay, CurrentQuranActivityDay, QuranActivityDay } from '@/types/auth/ActivityDay';
 import { StreakType, StreakWithMetadataParams } from '@/types/auth/Streak';
 import { getMushafId } from '@/utils/api';
 import { getStreakWithUserMetadata } from '@/utils/auth/api';
@@ -184,7 +184,7 @@ const useGetStreakWithMetadata = ({
     return result;
   }, [activityDays]);
 
-  const currentActivityDay = useMemo(() => {
+  const currentActivityDay: CurrentQuranActivityDay | undefined = useMemo(() => {
     return readingDaysMap[week.find((d) => d.current)?.dateString];
   }, [readingDaysMap, week]);
 

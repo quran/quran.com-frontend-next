@@ -18,8 +18,8 @@ app.prepare().then(() => {
       const parsedUrl = parse(req.url, true);
       handle(req, res, parsedUrl);
     },
-  ).listen(3000, (err) => {
+  ).listen(3005, (err) => {
     if (err) throw err;
-    console.log('> Server started on https://localhost:3000');
+    console.log('> Server started on https://localhost:3005');
   });
 });

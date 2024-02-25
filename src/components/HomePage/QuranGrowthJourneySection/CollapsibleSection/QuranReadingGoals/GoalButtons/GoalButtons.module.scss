@@ -1,0 +1,9 @@
+.actionsContainer {
+    margin-block-start: var(--spacing-large);
+    display: flex;
+    align-items: center;
+
+    & > :first-child {
+        margin-inline-end: var(--spacing-xxsmall);
+    }
+}

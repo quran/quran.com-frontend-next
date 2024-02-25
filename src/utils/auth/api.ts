@@ -56,6 +56,7 @@ import {
   makeEnrollUserUrl,
   makeGetCoursesUrl,
   makeGetCourseUrl,
+  makeGetUserCoursesCountUrl,
 } from '@/utils/auth/apiPaths';
 import { fetcher } from 'src/api';
 import CompleteAnnouncementRequest from 'types/auth/CompleteAnnouncementRequest';
@@ -335,6 +336,9 @@ export const getCourses = async (): Promise<Course[]> => privateFetcher(makeGetC
 
 export const getCourse = async (courseSlugOrId: string): Promise<Course> =>
   privateFetcher(makeGetCourseUrl(courseSlugOrId));
+
+export const getUserCoursesCount = async (): Promise<{ count: number }> =>
+  privateFetcher(makeGetUserCoursesCountUrl());
 
 export const addCollection = async (collectionName: string) => {
   return postRequest(makeAddCollectionUrl(), { name: collectionName });
