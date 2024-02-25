@@ -32,7 +32,10 @@ const filterChapters = (chapters, searchQuery: string) => {
   const filteredReciter = fuse.search(searchQuery);
   const resultItems = filteredReciter.map(({ item }) => item);
   if (!filteredReciter.length) {
-    logEmptySearchResults(searchQuery, SearchQuerySource.ReciterPageChapterList);
+    logEmptySearchResults({
+      query: searchQuery,
+      source: SearchQuerySource.ReciterPageChapterList,
+    });
   }
   return resultItems as Chapter[];
 };

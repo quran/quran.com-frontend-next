@@ -29,7 +29,10 @@ const filterSurah = (surahs: Chapter[], searchQuery: string) => {
 
   const filteredSurah = fuse.search(searchQuery).map(({ item }) => item);
   if (!filteredSurah.length) {
-    logEmptySearchResults(searchQuery, SearchQuerySource.SidebarNavigationChaptersList);
+    logEmptySearchResults({
+      query: searchQuery,
+      source: SearchQuerySource.SidebarNavigationChaptersList,
+    });
   } else {
     logTextSearchQuery(searchQuery, SearchQuerySource.SidebarNavigationChaptersList);
   }
