@@ -10,7 +10,7 @@ import QuranReadingGoals from '@/components/HomePage/QuranGrowthJourneySection/C
 import Collapsible, { CollapsibleDirection } from '@/dls/Collapsible/Collapsible';
 import ChevronDownIcon from '@/icons/chevron-down.svg';
 import GoalIcon from '@/icons/goal-1.svg';
-import MoreIcon from '@/icons/sun-outline.svg';
+import ReaderIcon from '@/icons/reader.svg';
 
 export enum CollapsibleType {
   QuranReadingGoalsType = 'quran_reading_goals',
@@ -38,7 +38,7 @@ const CollapsibleSection: React.FC<Props> = ({ onOpenChange, type }) => {
           type === CollapsibleType.QuranReadingGoalsType ? (
             <CollapsibleTitle title={t('qgj.quran-reading-goals.title')} icon={<GoalIcon />} />
           ) : (
-            <CollapsibleTitle title={t('qgj.learning-plans.title')} icon={<MoreIcon />} />
+            <CollapsibleTitle title={t('qgj.learning-plans.title')} icon={<ReaderIcon />} />
           )
         }
         prefix={<ChevronDownIcon />}
