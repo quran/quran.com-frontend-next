@@ -16,7 +16,7 @@ const QuickLink: React.FC<Props> = ({ text, slug, className, logKey, isExternalL
     size={ButtonSize.Small}
     className={className}
     href={isExternalLink ? slug : `/${slug}`}
-    type={ButtonType.Secondary}
+    type={ButtonType.Success}
     shape={ButtonShape.Pill}
     onClick={() => {
       logButtonClick(`quick_link_${logKey}`);
