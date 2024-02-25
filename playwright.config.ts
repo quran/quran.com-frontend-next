@@ -6,6 +6,15 @@ import { devices } from '@playwright/test';
  * See https://playwright.dev/docs/test-configuration.
  */
 const config: PlaywrightTestConfig = {
+  // Run your local dev server before starting the tests
+  webServer: {
+    command: 'npm run dev',
+    url: 'http://127.0.0.1:3000',
+    reuseExistingServer: !process.env.CI,
+    stdout: 'ignore',
+    stderr: 'pipe',
+  },
+
   testDir: './tests/integration',
   /* Maximum time one test can run for. */
   timeout: 30 * 1000,
