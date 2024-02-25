@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 /* eslint-disable react-func/max-lines-per-function */
 import { useEffect, useMemo, useState } from 'react';
 
@@ -6,7 +7,7 @@ import { useSelector, shallowEqual } from 'react-redux';
 import useSWR from 'swr';
 
 import { selectQuranFont, selectQuranMushafLines } from '@/redux/slices/QuranReader/styles';
-import { ActivityDay } from '@/types/auth/ActivityDay';
+import { ActivityDay, QuranActivityDay } from '@/types/auth/ActivityDay';
 import { StreakType, StreakWithMetadataParams } from '@/types/auth/Streak';
 import { getMushafId } from '@/utils/api';
 import { getStreakWithUserMetadata } from '@/utils/auth/api';
@@ -162,7 +163,9 @@ const useGetStreakWithMetadata = ({
     streak: 0,
   };
 
-  const readingDaysMap = useMemo<Record<string, ActivityDay & { hasRead: boolean }>>(() => {
+  const readingDaysMap = useMemo<
+    Record<string, ActivityDay<QuranActivityDay> & { hasRead: boolean }>
+  >(() => {
     if (!activityDays) return {};
 
     const result = {};

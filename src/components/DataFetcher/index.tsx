@@ -10,6 +10,7 @@ import { BaseResponse } from 'types/ApiResponses';
 interface Props {
   queryKey: string;
   render: (data: BaseResponse) => JSX.Element;
+  renderError?: (error: any) => JSX.Element | undefined;
   initialData?: BaseResponse;
   loading?: () => JSX.Element;
   fetcher?: (queryKey: string) => Promise<BaseResponse>;
@@ -30,6 +31,7 @@ interface Props {
 const DataFetcher: React.FC<Props> = ({
   queryKey,
   render,
+  renderError,
   initialData,
   loading = () => <Spinner />,
   fetcher: dataFetcher = fetcher,
@@ -58,6 +60,14 @@ const DataFetcher: React.FC<Props> = ({
    * or if we had an error when calling the API.
    */
   if (error) {
+    // if there is a custom error renderer, use it.
+    if (renderError) {
+      const errorComponent = renderError(error);
+      // if the custom error renderer returns false, it means that it doesn't want to render anything special.
+      if (typeof errorComponent !== 'undefined') {
+        return errorComponent;
+      }
+    }
     return <Error onRetryClicked={onRetryClicked} error={error} />;
   }
 

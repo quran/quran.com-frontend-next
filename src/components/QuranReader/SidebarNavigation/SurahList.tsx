@@ -2,8 +2,8 @@ import { useContext, useEffect, useMemo, useState } from 'react';
 
 import classNames from 'classnames';
 import Fuse from 'fuse.js';
-import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
+import useTranslation from 'next-translate/useTranslation';
 import { useSelector } from 'react-redux';
 
 import styles from './SidebarNavigation.module.scss';

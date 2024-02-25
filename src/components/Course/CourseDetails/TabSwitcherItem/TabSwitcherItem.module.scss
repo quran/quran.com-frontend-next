@@ -1,0 +1,9 @@
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.value {
+    padding-inline-start: var(--spacing-micro);
+}

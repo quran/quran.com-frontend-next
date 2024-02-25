@@ -1,19 +1,24 @@
 import { useState } from 'react';
 
+import { useRouter } from 'next/router';
 import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
-import { useRouter } from 'next/router';
-
-import { SubmissionResult } from '../FormBuilder/FormBuilder';
 
 import EmailSent from './EmailSent';
+import Feature from './Feature';
 import styles from './login.module.scss';
 import ResendEmailSection from './ResendEmailSection';
 
+import { SubmissionResult } from '@/components/FormBuilder/FormBuilder';
 import EmailLogin, { EmailLoginData, sendMagicLink } from '@/components/Login/EmailLogin';
 import SocialLogin from '@/components/Login/SocialLogin';
 import Button, { ButtonType, ButtonVariant } from '@/dls/Button/Button';
 import Link, { LinkVariant } from '@/dls/Link/Link';
+import CalendarIcon from '@/icons/calendar-1.svg';
+import GoalIcon from '@/icons/goal-1.svg';
+import HeartIcon from '@/icons/love.svg';
+import MobileIcon from '@/icons/mobile-1.svg';
+import MoreIcon from '@/icons/sun-outline.svg';
 import { logButtonClick, logFormSubmission } from '@/utils/eventLogger';
 import AuthType from 'types/auth/AuthType';
 
@@ -81,8 +86,17 @@ const LoginContainer = () => {
     <div className={styles.outerContainer}>
       <div className={styles.innerContainer}>
         <div className={styles.title}>{t('login:login-title')}</div>
-        {loginType === LoginType.Email && (
+        {loginType === LoginType.Email ? (
           <EmailLogin back={onOtherOptionsClicked} onSubmit={onLoginWithEmailSubmit} />
+        ) : (
+          <>
+            <Feature icon={<GoalIcon />} text={t('login:feature-1')} />
+            <Feature icon={<CalendarIcon />} text={t('login:feature-2')} />
+            <Feature icon={<HeartIcon />} text={t('login:feature-3')} />
+            <Feature icon={<MobileIcon />} text={t('login:feature-4')} />
+            <Feature icon={<MoreIcon />} text={t('login:feature-5')} />
+            <p className={styles.cta}>{t('login:login-cta')}</p>
+          </>
         )}
 
         {loginType === LoginType.Social && (

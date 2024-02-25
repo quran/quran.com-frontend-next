@@ -4,8 +4,8 @@ import { useCallback, useState } from 'react';
 import { Action } from '@reduxjs/toolkit';
 import groupBy from 'lodash/groupBy';
 import omit from 'lodash/omit';
-import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
+import useTranslation from 'next-translate/useTranslation';
 import { useSelector } from 'react-redux';
 
 import styles from './SearchSelectionBody.module.scss';
@@ -95,27 +95,23 @@ const TranslationSelectionBody = () => {
   );
 
   const renderTranslationGroup = useCallback(
-    (language, translations) => {
+    (language: string, translations: AvailableTranslation[]) => {
       if (!translations) {
         return <></>;
       }
       return (
         <div className={styles.group} key={language}>
           <div className={styles.language}>{language}</div>
-          {translations
-            .sort((a: AvailableTranslation, b: AvailableTranslation) =>
-              a.authorName.localeCompare(b.authorName),
-            )
-            .map((translation: AvailableTranslation) => (
-              <div key={translation.id} className={styles.item}>
-                <Checkbox
-                  id={translation.id.toString()}
-                  checked={selectedTranslations.includes(translation.id)}
-                  label={translation.translatedName.name}
-                  onChange={onTranslationsChange(translation.id)}
-                />
-              </div>
-            ))}
+          {translations.map((translation: AvailableTranslation) => (
+            <div key={translation.id} className={styles.item}>
+              <Checkbox
+                id={translation.id.toString()}
+                checked={selectedTranslations.includes(translation.id)}
+                label={translation.translatedName.name}
+                onChange={onTranslationsChange(translation.id)}
+              />
+            </div>
+          ))}
         </div>
       );
     },

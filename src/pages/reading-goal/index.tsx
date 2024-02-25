@@ -2,8 +2,8 @@ import { useEffect } from 'react';
 
 import classNames from 'classnames';
 import { NextPage, GetStaticProps } from 'next';
-import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
+import useTranslation from 'next-translate/useTranslation';
 
 import layoutStyles from '../index.module.scss';
 

@@ -1,0 +1,57 @@
+@use "src/styles/breakpoints";
+
+.container {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: var(--spacing-small);
+  @include breakpoints.tablet {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-small);
+  }
+  @include breakpoints.desktop {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.cardContainer {
+  border: 1px solid var(--color-borders-hairline);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  @include breakpoints.tablet {
+    max-inline-size: var(--spacing-mega) !important;
+  }
+  @include breakpoints.smallerThanTablet {
+    min-width: calc(9 * var(--spacing-mega)) !important;
+    max-inline-size: calc(10 * var(--spacing-mega));
+  }
+  // image container
+  & > div:first-child {
+    min-block-size: unset !important;
+    block-size: calc(18 * var(--spacing-medium));
+  }
+  // text container
+  & > div:last-child {
+    flex-grow: 1;
+  }
+}
+
+.allCourses {
+  margin-block-start: var(--spacing-mega);
+  text-align: center;
+}
+
+.titleContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  @include breakpoints.smallerThanTablet {
+    flex-direction: column;
+  }
+}
+
+.comingSoonContainer {
+  & > div:first-child {
+    cursor: unset;
+  }
+}

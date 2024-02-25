@@ -3,8 +3,8 @@
 import React, { useState, useEffect, useMemo, useCallback, useRef, RefObject } from 'react';
 
 import { GetStaticProps, NextPage } from 'next';
-import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
+import useTranslation from 'next-translate/useTranslation';
 
 import styles from './search.module.scss';
 

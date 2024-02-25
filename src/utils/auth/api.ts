@@ -5,11 +5,16 @@ import { getTimezone } from '../datetime';
 
 import {
   FilterActivityDaysParams,
-  ActivityDay,
-  UpdateActivityDayBody,
+  QuranActivityDay,
+  UpdateQuranActivityDayBody,
   ActivityDayType,
+  UpdateActivityDayBody,
+  ActivityDay,
+  UpdateLessonActivityDayBody,
+  UpdateActivityDayParams,
 } from '@/types/auth/ActivityDay';
 import ConsentType from '@/types/auth/ConsentType';
+import { Course } from '@/types/auth/Course';
 import { CreateGoalRequest, Goal, GoalCategory, UpdateGoalRequest } from '@/types/auth/Goal';
 import { StreakWithMetadataParams, StreakWithUserMetadata } from '@/types/auth/Streak';
 import { Mushaf } from '@/types/QuranReader';
@@ -48,6 +53,9 @@ import {
   makePostReflectionViewsUrl,
   makeUserFeatureFlagsUrl,
   makeUserConsentsUrl,
+  makeEnrollUserUrl,
+  makeGetCoursesUrl,
+  makeGetCourseUrl,
 } from '@/utils/auth/apiPaths';
 import { fetcher } from 'src/api';
 import CompleteAnnouncementRequest from 'types/auth/CompleteAnnouncementRequest';
@@ -202,9 +210,12 @@ export const deleteReadingGoal = async (params: { category: GoalCategory }): Pro
 
 export const filterReadingDays = async (
   params: FilterActivityDaysParams,
-): Promise<{ data: ActivityDay[] }> => privateFetcher(makeFilterActivityDaysUrl(params));
+): Promise<{ data: ActivityDay<QuranActivityDay>[] }> =>
+  privateFetcher(makeFilterActivityDaysUrl(params));
 
-export const getActivityDay = async (type: ActivityDayType): Promise<{ data?: ActivityDay }> =>
+export const getActivityDay = async (
+  type: ActivityDayType,
+): Promise<{ data?: ActivityDay<QuranActivityDay> }> =>
   privateFetcher(makeActivityDaysUrl({ type }));
 
 export const addReadingSession = async (chapterNumber: number, verseNumber: number) =>
@@ -213,12 +224,16 @@ export const addReadingSession = async (chapterNumber: number, verseNumber: numb
     verseNumber,
   });
 
-export const updateActivityDay = async ({
-  mushafId,
-  type,
-  ...body
-}: UpdateActivityDayBody): Promise<ActivityDay> =>
-  postRequest(makeActivityDaysUrl({ mushafId, type }), body);
+export const updateActivityDay = async (
+  params: UpdateActivityDayParams,
+): Promise<ActivityDay<QuranActivityDay>> => {
+  if (params.type === ActivityDayType.QURAN) {
+    const { mushafId, type, ...body } = params as UpdateActivityDayBody<UpdateQuranActivityDayBody>;
+    return postRequest(makeActivityDaysUrl({ mushafId, type }), body);
+  }
+  const { type, ...body } = params as UpdateActivityDayBody<UpdateLessonActivityDayBody>;
+  return postRequest(makeActivityDaysUrl({ type }), body);
+};
 
 export const estimateRangesReadingTime = async (body: {
   ranges: string[];
@@ -310,6 +325,16 @@ export const getBookmarksByCollectionId = async (
 ): Promise<GetBookmarkCollectionsIdResponse> => {
   return privateFetcher(makeGetBookmarkByCollectionId(collectionId, queryParams));
 };
+
+export const enrollUser = async (courseId: string): Promise<{ success: boolean }> =>
+  postRequest(makeEnrollUserUrl(), {
+    courseId,
+  });
+
+export const getCourses = async (): Promise<Course[]> => privateFetcher(makeGetCoursesUrl());
+
+export const getCourse = async (courseSlugOrId: string): Promise<Course> =>
+  privateFetcher(makeGetCourseUrl(courseSlugOrId));
 
 export const addCollection = async (collectionName: string) => {
   return postRequest(makeAddCollectionUrl(), { name: collectionName });

@@ -1,7 +1,7 @@
 import { useState, useMemo, useEffect, useContext } from 'react';
 
-import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
+import useTranslation from 'next-translate/useTranslation';
 import { useSelector } from 'react-redux';
 
 import styles from './SidebarNavigation.module.scss';

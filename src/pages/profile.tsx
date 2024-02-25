@@ -1,8 +1,8 @@
 /* eslint-disable max-lines */
 import classNames from 'classnames';
 import { NextPage, GetStaticProps } from 'next';
-import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
+import useTranslation from 'next-translate/useTranslation';
 
 import layoutStyle from './index.module.scss';
 import styles from './profile.module.scss';
