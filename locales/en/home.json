@@ -33,10 +33,10 @@
       "desc": {
         "logged-in": "Ever started a learning program and got off track halfway through? Learning plans are divided into manageable chunks and we track your progress until you reach the finish line. Explore our current offering of courses today",
         "logged-in-no-plans": "Ever started a learning program and got off track halfway through? Learning plans are divided into manageable chunks and we track your progress until you reach the finish line. Explore our current offering of courses today",
-        "logged-out": "Do you want to read 10 minutes a day, complete a Juz in a month, or finish the entire Quran in a year? It’s easy to create a custom goal and track your progress"
+        "logged-out": "Ever started a learning program and got off track halfway through? Learning plans are divided into manageable chunks and we track your progress until you reach the finish line. Explore our current offering of courses today"
       },
       "cta": {
-        "view-plans": "View Plans",
+        "view-plans": "All Plans",
         "my-plans": "My Plans"
       }
     }

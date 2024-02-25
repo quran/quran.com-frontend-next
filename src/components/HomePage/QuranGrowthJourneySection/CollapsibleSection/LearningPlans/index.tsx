@@ -38,7 +38,7 @@ const LearningPlans = () => {
       className={styles.viewPlansBtn}
       size={ButtonSize.Small}
     >
-      {t('qgj.learning-plans.cta.view-plans')}
+      {t('qgj.learning-plans.cta.all-plans')}
     </Button>
   );
 
