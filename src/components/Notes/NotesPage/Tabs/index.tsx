@@ -52,7 +52,7 @@ const Tabs = () => {
     <div className={styles.container}>
       <div className={styles.header}>
         <div className={styles.titleContainer}>
-          <h1>{t('common:notes.my-notes')}</h1>
+          <h1>{t('common:notes.title')}</h1>
         </div>
       </div>
       <Switch selected={selectedTab} items={tabs} onSelect={onTabChange} />

@@ -20,7 +20,7 @@ const NotesPage = () => {
   return (
     <>
       <NextSeoWrapper
-        title={t('common:notes.my-notes')}
+        title={t('common:notes.title')}
         canonical={getCanonicalUrl(lang, navigationUrl)}
         languageAlternates={getLanguageAlternates(navigationUrl)}
         nofollow

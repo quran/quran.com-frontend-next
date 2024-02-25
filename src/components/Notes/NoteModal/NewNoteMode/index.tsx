@@ -181,17 +181,19 @@ const NewNoteMode: React.FC<Props> = ({ verseKey }) => {
       onSubmit={onSubmit}
       isSubmitting={isAddingNote}
       renderAction={(props) => (
-        <div className={styles.actionContainer}>
-          <Button
-            htmlType="submit"
-            isLoading={props.isLoading}
-            isDisabled={props.isLoading}
-            onClick={(e) => {
-              e.stopPropagation();
-            }}
-          >
-            {t('common:save')}
-          </Button>
+        <div className={styles.submitContainer}>
+          <div className={styles.actionContainer}>
+            <Button
+              htmlType="submit"
+              isLoading={props.isLoading}
+              isDisabled={props.isLoading}
+              onClick={(e) => {
+                e.stopPropagation();
+              }}
+            >
+              {t('common:save')}
+            </Button>
+          </div>
         </div>
       )}
     />
