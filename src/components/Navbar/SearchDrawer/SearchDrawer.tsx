@@ -54,6 +54,7 @@ const SearchDrawer: React.FC = () => {
   }, [isOpen, focusInput]);
 
   // This useEffect is triggered when the debouncedSearchQuery value changes
+  // eslint-disable-next-line react-func/max-lines-per-function
   useEffect(() => {
     // only when the search query has a value we call the API.
     if (debouncedSearchQuery) {
@@ -74,7 +75,10 @@ const SearchDrawer: React.FC = () => {
             setSearchResult(response);
             // if there is no navigations nor verses in the response
             if (response.pagination.totalRecords === 0 && !response.result.navigation.length) {
-              logEmptySearchResults(debouncedSearchQuery, SearchQuerySource.SearchDrawer);
+              logEmptySearchResults({
+                query: debouncedSearchQuery,
+                source: SearchQuerySource.SearchDrawer,
+              });
             }
           }
         })

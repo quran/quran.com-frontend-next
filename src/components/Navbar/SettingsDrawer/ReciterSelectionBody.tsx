@@ -30,7 +30,10 @@ export const filterReciters = (reciters, searchQuery: string): Reciter[] => {
 
   const filteredReciter = fuse.search(searchQuery).map(({ item }) => item);
   if (!filteredReciter.length) {
-    logEmptySearchResults(searchQuery, SearchQuerySource.TranslationSettingsDrawer);
+    logEmptySearchResults({
+      query: searchQuery,
+      source: SearchQuerySource.TranslationSettingsDrawer,
+    });
   }
   return filteredReciter as Reciter[];
 };

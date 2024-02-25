@@ -54,7 +54,10 @@ const VerseList = () => {
 
   useEffect(() => {
     if (!filteredVerseKeys.length) {
-      logEmptySearchResults(searchQuery, SearchQuerySource.SidebarNavigationVersesList);
+      logEmptySearchResults({
+        query: searchQuery,
+        source: SearchQuerySource.SidebarNavigationVersesList,
+      });
     } else {
       logTextSearchQuery(searchQuery, SearchQuerySource.SidebarNavigationVersesList);
     }

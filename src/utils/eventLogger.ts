@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/naming-convention */
 
+import SearchService from '@/types/Search/SearchService';
 import SearchQuerySource from '@/types/SearchQuerySource';
 import SearchType from '@/types/SearchType';
 import { isFirebaseEnabled } from 'src/lib/firebase';
@@ -76,24 +77,54 @@ export const logValueChange = (
   });
 };
 
+type SearchResultsParams = {
+  query: string;
+  source: SearchQuerySource;
+  type?: SearchType;
+  service?: SearchService;
+};
+
 /**
  * Log when the user makes a search query whether through typing or voice search when there are no results.
  *
- * @param {string} searchQuery
- * @param {SearchQuerySource} source the source of the query e.g settings drawer translation view/command bar.
- * @param {SearchType} type the type of the search query. can be voice or text.
+ * @param {SearchResultsParams} eventData
  */
-export const logEmptySearchResults = (
-  searchQuery: string,
-  source: SearchQuerySource,
+export const logEmptySearchResults = ({
+  query: searchQuery,
+  source,
   type = SearchType.Text,
-) => {
+  service,
+}: SearchResultsParams) => {
   const query = getSearchQuery(searchQuery);
   // if the searchQuery is not empty
   if (query !== '') {
     logEvent(`${type}_search_query_with_no_result`, {
       query,
       source,
+      ...(service && { service }),
+    });
+  }
+};
+
+/**
+ * Log when the user makes a search query whether through typing or voice search when there are results.
+ *
+ * @param {SearchResultsParams} eventData
+ */
+export const logSearchResults = ({
+  query: searchQuery,
+  source,
+  type = SearchType.Text,
+  service,
+}: SearchResultsParams) => {
+  const query = getSearchQuery(searchQuery);
+  // if the searchQuery is not empty
+  if (query !== '') {
+    logEvent('search_query_with_results', {
+      type,
+      query,
+      source,
+      ...(service && { service }),
     });
   }
 };

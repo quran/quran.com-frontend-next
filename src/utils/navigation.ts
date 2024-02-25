@@ -1,6 +1,7 @@
 import { stringify } from 'querystring';
 
 import REVELATION_ORDER from './revelationOrder';
+import { searchIdToNavigationKey } from './search';
 import { getBasePath } from './url';
 import { getVerseAndChapterNumbersFromKey, getVerseNumberRangeFromKey } from './verse';
 
@@ -179,36 +180,38 @@ export const getNextSurahNavigationUrl = (
  *
  * @param {SearchNavigationType} type
  * @param {string | number} key
+ * @param {boolean} isKalimatSearch
  * @returns {string}
  */
 export const resolveUrlBySearchNavigationType = (
   type: SearchNavigationType,
   key: string | number,
+  isKalimatSearch = false,
 ): string => {
-  const stringKey = String(key);
+  const stringKey = isKalimatSearch ? searchIdToNavigationKey(type, String(key)) : String(key);
   if (type === SearchNavigationType.AYAH) {
     return getChapterWithStartingVerseUrl(stringKey);
   }
   if (type === SearchNavigationType.JUZ) {
-    return getJuzNavigationUrl(key);
+    return getJuzNavigationUrl(stringKey);
   }
   if (type === SearchNavigationType.RUB_EL_HIZB) {
-    return getRubNavigationUrl(key);
+    return getRubNavigationUrl(stringKey);
   }
   if (type === SearchNavigationType.HIZB) {
-    return getHizbNavigationUrl(key);
+    return getHizbNavigationUrl(stringKey);
   }
   if (type === SearchNavigationType.PAGE) {
-    return getPageNavigationUrl(key);
+    return getPageNavigationUrl(stringKey);
   }
   if (type === SearchNavigationType.SEARCH_PAGE) {
-    return getSearchQueryNavigationUrl(key as string);
+    return getSearchQueryNavigationUrl(stringKey);
   }
   if (type === SearchNavigationType.RANGE) {
-    return getSurahRangeNavigationUrlByVerseKey(key as string);
+    return getSurahRangeNavigationUrlByVerseKey(stringKey);
   }
   // for the Surah navigation
-  return getSurahNavigationUrl(key);
+  return getSurahNavigationUrl(stringKey);
 };
 
 /**
