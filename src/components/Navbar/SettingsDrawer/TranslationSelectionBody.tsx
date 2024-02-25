@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { useCallback, useState } from 'react';
 
 import { Action } from '@reduxjs/toolkit';
@@ -140,7 +141,10 @@ const TranslationSelectionBody = () => {
             : data.translations;
 
           if (!filteredTranslations.length) {
-            logEmptySearchResults(searchQuery, SearchQuerySource.TranslationSettingsDrawer);
+            logEmptySearchResults({
+              query: searchQuery,
+              source: SearchQuerySource.TranslationSettingsDrawer,
+            });
           }
 
           const translationByLanguages = groupBy(filteredTranslations, 'languageName');
