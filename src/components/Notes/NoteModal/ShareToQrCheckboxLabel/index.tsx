@@ -11,7 +11,7 @@ import useCurrentUser from '@/hooks/auth/useCurrentUser';
 
 const ShareToQrCheckboxLabel = () => {
   const {
-    user: { firstName, lastName },
+    user: { firstName },
   } = useCurrentUser();
   const { t } = useTranslation('notes');
   return (
@@ -40,7 +40,7 @@ const ShareToQrCheckboxLabel = () => {
         components={{
           b: <b className={styles.bold} key={0} />,
         }}
-        values={{ name: `${firstName} ${lastName}` }}
+        values={{ name: `${firstName}` }}
       />
     </div>
   );
