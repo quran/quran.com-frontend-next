@@ -3,8 +3,8 @@ import React from 'react';
 
 import classNames from 'classnames';
 import { NextPage, GetStaticProps } from 'next';
-import useTranslation from 'next-translate/useTranslation';
 import Head from 'next/head';
+import useTranslation from 'next-translate/useTranslation';
 
 import styles from './index.module.scss';
 

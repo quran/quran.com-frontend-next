@@ -88,7 +88,9 @@ const PrivacyPage: NextPage = (): JSX.Element => {
                 br: <br />,
                 li: <li />,
                 underline: <span className={styles.underline} />,
-                0: <a key={0} href="mailto:donors@quran.com" target="_blank" rel="noreferrer" />,
+                0: (
+                  <a key={0} href="mailto:info@quran.foundation" target="_blank" rel="noreferrer" />
+                ),
               }}
               i18nKey="privacy:contact-us.desc"
             />

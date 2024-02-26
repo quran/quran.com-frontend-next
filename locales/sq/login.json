@@ -1,16 +1,22 @@
 {
-    "awaiting-confirmation": "Në pritje të konfirmimit",
-    "continue-apple": "Vazhdoni me Apple",
-    "continue-email": "Vazhdo me Email",
-    "continue-facebook": "Vazhdo me Facebook",
-    "continue-google": "Vazhdo me Google",
-    "email-placeholder": "Adresa e emailit",
-    "login-error": {
-        "AuthenticationError": "Autentifikimi dështoi. Ju lutemi provoni sërish më vonë",
-        "TokenExpiredError": "Ju keni dalë nga llogaria, ju lutemi identifikohuni përsëri."
-    },
-    "login-title": "Hyni në Quran.com",
-    "other-options": "Opsione të tjera të hyrjes",
-    "privacy-policy": "Mbrojtja e privatësisë suaj është prioriteti ynë – Duke u regjistruar, ju pranoni <link> Politikën tonë të Privatësisë <\/link>",
-    "verify-code": "Verifikoni që kodi i sigurisë i dhënë përputhet me tekstin e mëposhtëm:"
+  "awaiting-confirmation": "Në pritje të konfirmimit",
+  "continue-apple": "Vazhdoni me Apple",
+  "continue-email": "Vazhdo me Email",
+  "continue-facebook": "Vazhdo me Facebook",
+  "continue-google": "Vazhdo me Google",
+  "email-placeholder": "Adresa e emailit",
+  "feature-1": "Ndiqni qëllimet tuaja",
+  "feature-2": "Ruani vijat e leximit",
+  "feature-3": "Krijo koleksione",
+  "feature-4": "Sinkronizoni të dhënat tuaja nëpër shfletues",
+  "feature-5": "Dhe me shume!",
+  "login-cta": "Identifikohu ose regjistrohu tani:",
+  "login-error": {
+    "AuthenticationError": "Autentifikimi dështoi. Ju lutemi provoni sërish më vonë",
+    "TokenExpiredError": "Ju keni dalë nga llogaria, ju lutemi identifikohuni përsëri."
+  },
+  "login-title": "Hyni në Quran.com",
+  "other-options": "Opsione të tjera të hyrjes",
+  "privacy-policy": "Mbrojtja e privatësisë suaj është prioriteti ynë – Duke u regjistruar, ju pranoni <link> Politikën tonë të Privatësisë </link>",
+  "verify-code": "Verifikoni që kodi i sigurisë i dhënë përputhet me tekstin e mëposhtëm:"
 }

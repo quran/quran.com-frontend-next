@@ -1,381 +1,387 @@
 {
-    "about": "À propos de nous",
-    "allow": "Permettre",
-    "and": "et",
-    "announcements": {
-        "auth-onboarding": {
-            "data-sync": {
-                "action": "Prochain",
-                "description": "Que vous utilisiez Quran.com sur votre téléphone ou votre ordinateur portable, vos signets, les derniers versets lus et vos préférences seront disponibles",
-                "title": "Vos données seront synchronisées <br><\/br> sur tous les appareils"
-            },
-            "feedback": {
-                "action": "OK, j'ai compris",
-                "description": "Merci d'utiliser Quran.com et nous serions heureux d'entendre vos commentaires sur <link> feedback.quran.com <\/link>",
-                "title": "Nous voulons entendre vos pensées"
-            },
-            "quran-foundation-link": {
-                "action": "Suivant",
-                "description": "Utilisez votre connexion Quran.com pour accéder à QuranReflect.com - une communauté mondiale florissante engagée dans la réflexion coranique.",
-                "title": "Utilisez votre compte sur toutes les applications Quran.Foundation !"
-            },
-            "quran-growth-journey": {
-                "action": "Suivant",
-                "description": "Maintenez votre séquence de lecture du Coran et progressez dans vos objectifs tout en créant de nouvelles habitudes",
-                "title": "Commencez votre voyage de croissance du Coran !"
-            },
-            "welcome": {
-                "action": "Regardez ce qu'il y a de nouveau",
-                "title": "Bienvenue sur Quran.com <br><\/br> Compte utilisateur"
-            }
-        },
-        "collections-announcement": {
-            "slide-1": {
-                "description": "Nous sommes très heureux de vous annoncer que vous pouvez désormais regrouper les signets sous \"collections\" ! <br\/> <br\/> <li> Ajoutez autant de collections que vous le souhaitez <\/li> <li> Ajoutez un signet à une ou plusieurs collections <\/li> <li> Et plus encore ! <\/li>",
-                "title": "Les collections de marque-pages sont là !"
-            }
-        }
+  "about": "À propos de nous",
+  "allow": "Permettre",
+  "and": "et",
+  "announcements": {
+    "auth-onboarding": {
+      "data-sync": {
+        "action": "Prochain",
+        "description": "Que vous utilisiez Quran.com sur votre téléphone ou votre ordinateur portable, vos signets, les derniers versets lus et vos préférences seront disponibles",
+        "title": "Vos données seront synchronisées <br></br> sur tous les appareils"
+      },
+      "feedback": {
+        "action": "OK, j'ai compris",
+        "description": "Merci d'utiliser Quran.com et nous serions heureux d'entendre vos commentaires sur <link> feedback.quran.com </link>",
+        "title": "Nous voulons entendre vos pensées"
+      },
+      "quran-foundation-link": {
+        "action": "Suivant",
+        "description": "Utilisez votre connexion Quran.com pour accéder à QuranReflect.com - une communauté mondiale florissante engagée dans la réflexion coranique.",
+        "title": "Utilisez votre compte sur toutes les applications Quran.Foundation !"
+      },
+      "quran-growth-journey": {
+        "action": "Suivant",
+        "description": "Maintenez votre séquence de lecture du Coran et progressez dans vos objectifs tout en créant de nouvelles habitudes",
+        "title": "Commencez votre voyage de croissance du Coran !"
+      },
+      "welcome": {
+        "action": "Regardez ce qu'il y a de nouveau",
+        "title": "Bienvenue sur Quran.com <br></br> Compte utilisateur"
+      }
     },
-    "aria": {
-        "change-settings": "Modifier les paramètres",
-        "drawer-close": "Fermer le tiroir",
-        "msg-close": "Fermer le message",
-        "nav-drawer-open": "Ouvrir le tiroir de navigation",
-        "play-surah": "Jouez la sourate {{surahName}}",
-        "select-lng": "Choisir la langue",
-        "sidebar-nav-close": "Fermer la barre latérale de navigation"
+    "collections-announcement": {
+      "slide-1": {
+        "description": "Nous sommes très heureux de vous annoncer que vous pouvez désormais regrouper les signets sous \"collections\" ! <br/> <br/> <li> Ajoutez autant de collections que vous le souhaitez </li> <li> Ajoutez un signet à une ou plusieurs collections </li> <li> Et plus encore ! </li>",
+        "title": "Les collections de marque-pages sont là !"
+      }
+    }
+  },
+  "aria": {
+    "change-settings": "Modifier les paramètres",
+    "drawer-close": "Fermer le tiroir",
+    "msg-close": "Fermer le message",
+    "nav-drawer-open": "Ouvrir le tiroir de navigation",
+    "play-surah": "Jouez la sourate {{surahName}}",
+    "select-lng": "Choisir la langue",
+    "sidebar-nav-close": "Fermer la barre latérale de navigation"
+  },
+  "audio": {
+    "auto-scroll": {
+      "off": "Désactivé",
+      "on": "Au",
+      "title": "Défilement automatique"
     },
-    "audio": {
-        "auto-scroll": {
-            "off": "Désactivé",
-            "on": "Au",
-            "title": "Défilement automatique"
-        },
-        "displaying": "Affichage",
-        "exp-tip": "<span>Modifier le contenu affiché sous<\/span><br><\/br> <boldSpan>Paramètres<\/boldSpan> > <boldSpan>Mot par mot<\/boldSpan>",
-        "exp-tip-no-select": "<span>Cochez l'option d'affichage de l'info-bulle et sélectionnez l'option <br><\/br> Traduction et\/ou Translittération<\/span><br><\/br><span> sous <\/span><boldSpan>Paramètres<\/boldSpan> > <boldSpan>mot par mot<\/boldSpan><span>, pour<\/span><br><\/br> <span>activer cette fonctionnalité.<\/span>",
-        "experience": "Expérience",
-        "play": "Lire le son",
-        "playback-normal": "Normal",
-        "playback-speed": "Vitesse de lecture",
-        "playback-speed-unit": "X",
-        "player": {
-            "close-audio-player": "Fermer le lecteur audio",
-            "currently-playing": "Vous jouez actuellement",
-            "delay-verse": "Délai entre le verset",
-            "download": "Télécharger",
-            "full-surah": "Sourate complète",
-            "manage-repeat-settings": "Gérer les paramètres de répétition",
-            "mismatch": "Cliquez sur « Recommencer » si vous souhaitez plutôt {{currentReadingChapter}}",
-            "pause": "Pause",
-            "pause-audio": "Suspendre le son",
-            "play": "Jouer",
-            "play-audio": "Lecture audio",
-            "play-range": "Plage de jeu",
-            "previous-ayah": "Précédent Ayah",
-            "repeat-1-verse": "Répéter le verset",
-            "repeat-settings": "Paramètres de répétition",
-            "repeat-verse": "Répétez chaque verset",
-            "search-verse": "Rechercher un verset",
-            "single-verse": "Verset unique",
-            "start-over": "Recommencer",
-            "start-playing": "Commencer à jouer",
-            "stop-repeating": "Arrêter de répéter",
-            "times": "fois",
-            "verses-range": "Gamme de vers"
-        },
-        "repeat-moved": "Les paramètres de répétition ont été déplacés vers le lecteur audio. Cliquez sur l' <0> <\/0> pour y accéder",
-        "select-reciter": "Sélectionnez le récitant",
-        "speed": "Vitesse",
-        "title": "l'audio"
+    "displaying": "Affichage",
+    "exp-tip": "<span>Modifier le contenu affiché sous</span><br></br> <boldSpan>Paramètres</boldSpan> > <boldSpan>Mot par mot</boldSpan>",
+    "exp-tip-no-select": "<span>Cochez l'option d'affichage de l'info-bulle et sélectionnez l'option <br></br> Traduction et/ou Translittération</span><br></br><span> sous </span><boldSpan>Paramètres</boldSpan> > <boldSpan>mot par mot</boldSpan><span>, pour</span><br></br> <span>activer cette fonctionnalité.</span>",
+    "experience": "Expérience",
+    "play": "Lire le son",
+    "playback-normal": "Normal",
+    "playback-speed": "Vitesse de lecture",
+    "playback-speed-unit": "X",
+    "player": {
+      "close-audio-player": "Fermer le lecteur audio",
+      "currently-playing": "Vous jouez actuellement",
+      "delay-verse": "Délai entre le verset",
+      "download": "Télécharger",
+      "full-surah": "Sourate complète",
+      "manage-repeat-settings": "Gérer les paramètres de répétition",
+      "mismatch": "Cliquez sur « Recommencer » si vous souhaitez plutôt {{currentReadingChapter}}",
+      "pause": "Pause",
+      "pause-audio": "Suspendre le son",
+      "play": "Jouer",
+      "play-audio": "Lecture audio",
+      "play-range": "Plage de jeu",
+      "previous-ayah": "Précédent Ayah",
+      "repeat-1-verse": "Répéter le verset",
+      "repeat-settings": "Paramètres de répétition",
+      "repeat-verse": "Répétez chaque verset",
+      "search-verse": "Rechercher un verset",
+      "single-verse": "Verset unique",
+      "start-over": "Recommencer",
+      "start-playing": "Commencer à jouer",
+      "stop-repeating": "Arrêter de répéter",
+      "times": "fois",
+      "verses-range": "Gamme de vers"
     },
-    "ayah": "Ayah",
-    "ayahs": "Ayahs",
-    "beta": "Bêta",
-    "bookmark": "Signet",
-    "bookmarked": "Marque-page",
-    "both": "Les deux",
-    "cancel": "Annuler",
-    "click-here": "Cliquez ici",
-    "close": "proche",
-    "command-bar": {
-        "navigations": "Navigation",
-        "no-nav-results": "Aucun résultat de navigation",
-        "placeholder": "Que veux-tu lire ?",
-        "powered-by": "Recherche vocale optimisée par Tarteel.ai",
-        "recent-navigations": "Navigations récentes",
-        "search-by-voice": "Recherche vocale",
-        "try-navigating": "Essayez de naviguer vers"
-    },
-    "community": {
-        "cta": "Rejoindre la communauté",
-        "header": "Rejoignez la communauté QDC de constructeurs et de technologues musulmans.",
-        "sub-header": "Inscrivez-vous sur Quran.com Discord pour participer et collaborer avec la principale technologie islamique de construction de communauté.",
-        "title": "Communauté"
-    },
-    "complete-sign-up": "Complétez votre inscription",
-    "consents": {
-        "communication": {
-            "body": "🚀 Boostez vos progrès grâce à des notifications <boldSpan> personnalisées <\/boldSpan> sur la progression de votre objectif, le maintien de séquences et l'amélioration de votre utilisation de nos fonctionnalités actuelles. <br><\/br> <br><\/br> Pouvons-nous vous tenir au courant par e-mail et par d'autres canaux ? Vous avez le contrôle – n'hésitez pas à ajuster ces préférences à tout moment dans les paramètres de votre compte. <br><\/br> <br><\/br> Sélectionnez simplement « Autoriser » pour <boldSpan> rappels inspirants <\/boldSpan> ou « Pas maintenant » pour refuser.",
-            "header": "Nous serions ravis de vous aider à rester <boldSpan> engagé et cohérent <\/boldSpan> dans votre parcours de croissance du Coran ! 📖🌟"
-        }
-    },
-    "continue": "Continuer",
-    "copied": "Copié",
-    "copied-to-clipboard": "Copié dans le presse-papier",
-    "copy": "Copie",
-    "counter": {
-        "decrease": "Diminuer",
-        "increase": "Augmenter"
-    },
-    "default-description": "Le Coran traduit dans de nombreuses langues dans une interface simple et facile",
-    "developers": "Développeurs",
-    "display": "Afficher",
-    "donate": "Donner",
-    "donate_monthly": "Faire un don mensuel",
-    "donate_once": "Faire un don une fois",
-    "email-verification": {
-        "check-spam": "Vous n'avez pas reçu l'e-mail de vérification ? Vérifiez votre boîte de réception de spam",
-        "email-sent": "Nous venons d'envoyer un e-mail à <strong> {{email}} <\/strong>",
-        "email-verification": "Vérification de l'E-mail",
-        "resend-email": "Ré-envoyer l'email",
-        "resend-email-in": "Renvoyer l'e-mail de vérification dans {{remainingTime}} s...",
-        "verify-code": "Vérifier le code"
-    },
-    "error": {
-        "bookmark-sync": "Le signet n'est pas synchronisé.",
-        "email-login-fail": "Échec de la connexion avec l'e-mail. Veuillez réessayer",
-        "general": "Quelque chose s'est mal passé. Veuillez réessayer.",
-        "offline": "On dirait que vous avez perdu votre connexion. Veuillez le vérifier et réessayer.",
-        "pref-persist-fail": "Échec de la synchronisation de vos paramètres avec le cloud."
-    },
-    "feedback": "Retour d'information",
-    "fonts": {
-        "15_lines": "15 lignes",
-        "16_lines": "16 lignes",
-        "code_v1": "Complexe King Fahad V1",
-        "code_v2": "Complexe King Fahad V2",
-        "font-size": "Taille de police",
-        "lines": "Lignes",
-        "qcf-desc": "Les polices Complexe King Fahad (V1 et V2) offrent une qualité supérieure mais prennent plus de temps à charger.",
-        "qpc_uthmani_hafs": "QPC Uthmani Hafs",
-        "quran-font": "Police du Coran",
-        "tajweed": "Tajweed",
-        "tajweed-desc": "La police Tajweed montre un Mushaf de couleur Tajweed. Vous pouvez en savoir plus sur les règles de couleur Tajweed <0> ici <\/0>",
-        "text_indopak": "IndoPak",
-        "text_uthmani": "Uthmani"
-    },
-    "footer": {
-        "description": "Quran.com est une Sadaqah Jariyah. Nous espérons faciliter la lecture, l'étude et l'apprentissage du Noble Coran pour tous. Le Noble Coran a de nombreux noms dont Al-Quran Al-Kareem, Al-Ketab, Al-Furqan, Al-Maw'itha, Al-Thikr et Al-Noor.",
-        "hiring": "Nous embauchons! Rejoignez l'équipe de QuranFoundation et contribuez à notre mission. <link> Postulez maintenant ! <\/link>",
-        "rights": "Tous les droits sont réservés",
-        "title": "Lisez, étudiez et apprenez Le Noble Coran."
-    },
-    "form": {
-        "code": "Le code de vérification",
-        "email": "E-mail",
-        "firstName": "Prénom",
-        "lastName": "Nom de famille"
-    },
-    "from": "De",
-    "fundraising-sticky-banner": {
-        "cta": "Donner",
-        "title": "Soutenez Quran.com ce Ramadan"
-    },
-    "fundraising": {
-        "description": "Les dons mensuels nous aident à améliorer Quran.com et à maintenir les opérations afin que nous nous concentrions moins sur la collecte de fonds et plus sur la création d'impact.",
-        "title": "Devenez un donateur mensuel"
-    },
-    "help": "Aider",
-    "hizb": "Hizb",
-    "home": "Accueil",
-    "hours": "Heures",
-    "inline": "En ligne",
-    "input": {
-        "clear": "Dégager"
-    },
-    "juz": "Juz",
-    "language": "Langue",
-    "languages": "Langues",
-    "learn-more": "Apprendre encore plus",
-    "less": "Moins",
-    "loading": "Chargement",
-    "login": "Connexion",
-    "logout": "Se déconnecter",
-    "meccan": "La Mecque",
-    "medinan": "Médinan",
-    "menu": "Menu",
-    "minutes": "Minutes",
-    "mobile-apps": "Application mobile",
-    "mode": "Mode",
-    "more": "Suite",
-    "navigate": "Naviguer",
-    "network": "Réseau",
-    "new": "Nouveau!",
-    "next": "Prochain",
-    "next-ayah": "Ayah suivant",
-    "no": "Non",
-    "no-notifications": "Aucune notification pour l'instant",
-    "none": "Rien",
-    "not-now": "Pas maintenant",
-    "notification": {
-        "mark-all-as-read": "tout marquer comme lu",
-        "mark-as-read": "Marquer comme lu"
-    },
-    "notifications": "Notifications",
-    "off": "Désactivé",
-    "on": "Au",
-    "page": "Page",
-    "pages": "Pages",
-    "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} sur {{totalNumberOfResults}} résultats de recherche",
-    "pbuh": "Les bénédictions d'Allah soient sur lui",
-    "popular-links": "Liens populaires",
-    "popup": {
-        "footnote": "Les dons mensuels nous permettent de moins nous concentrer sur la collecte de fonds",
-        "text-1": "Nous nous engageons à servir le monde de la connaissance et de la technologie coraniques, toujours gratuitement.",
-        "text-2": "Quran.com est une opportunité parfaite pour la charité continue (Sadaqah Jariyah). Veuillez envisager d'investir dans votre au-delà en tant que donateur mensuel (ou ponctuel).",
-        "title": "Cher Compagnon du Coran,"
-    },
-    "powered-by": "Alimenté par",
-    "prev": "Précédent",
-    "previous-ayah": "Ayah précédent",
-    "privacy": "Intimité",
-    "product-updates": "Mises à jour du produit",
-    "profile": "Profil",
-    "q-reflect": "CoranRéfléchir",
-    "quran-com": "Coran.com",
-    "quran-radio": "Radio Coran",
-    "reading-history": "Lecture de l'histoire",
-    "reading-preference": {
-        "reading": "En train de lire",
-        "translation": "Traduction"
-    },
-    "recitation": "Récitation",
-    "reciter": "Récitant",
-    "reciter-summary": "Récitant mot à mot : <span> {{reciterName}} <\/span> . Cliquez sur un mot pour écouter sa récitation.",
-    "reciters": "Récitants",
-    "reflect": "Réfléchir",
-    "remove": "Supprimer",
-    "rename": "Renommer",
-    "retry": "Réessayez",
-    "revelation_order": "Ordre de révélation",
-    "rub": "Rub el Hizb",
-    "save-to-collection": "Enregistrer dans la collection",
-    "search-for": "Rechercher '{{searchQuery}}'",
-    "search-results": "{{count}} résultats de recherche",
-    "search": {
-        "filters": "Filtres",
-        "hint": "Essayez de rechercher",
-        "jump-to": "Sauter à",
-        "no-results": "Aucun résultat trouvé",
-        "no-results-suggestion": "Nous n'avons trouvé aucun résultat de recherche correspondant pour \" {{searchQuery}} \". essayez de rechercher un mot-clé différent.",
-        "popular": "Recherches populaires",
-        "recent": "Recherches récentes",
-        "results": "résultats",
-        "show-all": "Afficher tous les résultats",
-        "switch-mode": "Passer à la recherche avancée",
-        "title": "Chercher"
-    },
-    "seconds": "Secondes",
-    "settings": {
-        "no-tafsir-selected": "Aucun tafsir sélectionné",
-        "no-translation-selected": "Aucune traduction sélectionnée",
-        "reading-experience": "Expérience de lecture",
-        "reset-cta": "Réinitialiser les options",
-        "reset-notif": "Vos paramètres ont été réinitialisés à ceux par défaut",
-        "search-reciter": "Recherche de récitant",
-        "search-tafsirs": "Rechercher des Tafsirs",
-        "search-translations": "Rechercher des traductions",
-        "selected-reciter": "Réciteur sélectionné",
-        "selected-tafsirs": "Tafsirs sélectionnés",
-        "selected-translations": "Traductions sélectionnées",
-        "show-tooltip-when-playing-audio": "Afficher l'info-bulle lors de la lecture audio",
-        "title": "Paramètres",
-        "tooltip-playing-audio-helper": "Afficher la traduction des mots dans l'info-bulle pendant la lecture d'ayah",
-        "value-and-other": "{{value}} et {{othersCount}} autre",
-        "value-and-others": "{{value}} , et {{othersCount}} autres",
-        "wbw-helper": "Afficher la traduction ou la translittération directement sous le mot",
-        "word-tooltip-helper": "Afficher la traduction ou la translittération en survolant ou en cliquant sur le mot"
-    },
-    "share": "Partager",
-    "shared": "Le lien a été copié dans le presse-papiers !",
-    "sidebar": {
-        "search-hizb": "Rechercher",
-        "search-juz": "Rechercher Juz",
-        "search-page": "Page de recherche",
-        "search-surah": "Recherche sourate",
-        "try-navigating-with": "Astuce : essayez de naviguer avec"
-    },
-    "sitemap": "Plan du site",
-    "sort": {
-        "ascending": "Ascendant",
-        "by": "Trier par",
-        "descending": "Descendant"
-    },
-    "style": "Style",
-    "submit": "Soumettre",
-    "surah": "Sourate",
-    "tafsir": {
-        "font-size": "Taille de la police Tafsir",
-        "group-message": "Vous lisez un tafsir pour le groupe de versets {{from}} à {{to}}",
-        "no-text": "{{tafsirName}} n'est pas disponible pour le verset actuel.",
-        "surah": "Sourate Tafsir",
-        "tafsir-desc": "Lisez {{tafsirName}} pour Ayah {{verseNumber}} de la sourate {{surahName}}",
-        "tafsirs-desc": "Lisez divers Tafsirs d'Ayah {{ayahNumber}} de la sourate {{surahName}} par des érudits Tafsir de confiance",
-        "title": "Tafsir"
-    },
-    "tarteel": {
-        "app": "Application Tarteel",
-        "name": "Tarteel.ai"
-    },
-    "theme": "Thème",
-    "themes": {
-        "auto": "Auto",
-        "dark": "Sombre",
-        "light": "Léger",
-        "sepia": "Sépia",
-        "system": "Système",
-        "system-desc": "Le thème du système s'adapte automatiquement à vos paramètres de mode clair\/sombre"
-    },
-    "to": "À",
-    "tooltip": "Info-bulle",
-    "tooltip-trans-lang": "Langue de l'info-bulle",
-    "trans-lang": "Langue de traduction",
-    "translation": "Traduction",
-    "translations": "Traductions",
-    "transliteration": "Translitération",
-    "type": "Taper",
-    "undo": "annuler",
-    "validation": {
-        "invalid-email": "{{field}} doit être une adresse e-mail valide",
-        "invalid-field": "Veuillez saisir une valeur {{field}} valide",
-        "required-field": "{{field}} est requis"
-    },
-    "verse": "Verset",
-    "verse-bookmark-removed": "Signet verset supprimé !",
-    "verse-bookmarked": "Verset mis en signet !",
-    "verses": "Versets",
-    "view": "Vue",
-    "voice": {
-        "ask-permission": "Veuillez activer l'autorisation du microphone pour commencer à utiliser la recherche vocale",
-        "error": "Un erreur est survenue, veuillez réessayer plus tard. Ou téléchargez le",
-        "no-permission": "Il semble que vous n'ayez pas activé les autorisations de microphone. Veuillez activer les autorisations du microphone et réessayer ou télécharger le",
-        "not-supported": "Il semble que votre navigateur ne supporte pas le microphone. Veuillez essayer un autre navigateur ou télécharger le",
-        "suggest": "Veuillez commencer à réciter et votre vers apparaîtra.",
-        "suggest-subtitle": "Récitez n'importe quel verset en arabe, et le verset apparaîtra",
-        "suggest-title": "Récitez maintenant",
-        "voice-search-powered-by": "Recherche vocale optimisée par"
-    },
-    "wbw": "Mot par mot",
-    "wbw-lang-summary": "Source de la traduction mot à mot : <link> {{source}} <\/link> . Cette source est indépendante de la sélection de traduction verset.",
-    "wbw-trans-lang": "Langage mot à mot",
-    "wbw-translation": "Traduction mot à mot",
-    "wbw-transliteration": "Translittération mot à mot",
-    "word-click": {
-        "no-audio": "Pas de son",
-        "play-audio": "Lire le son",
-        "title": "Clic sur mot"
-    },
-    "word-tooltip": "Info-bulle Word",
-    "yes": "Oui"
+    "repeat-moved": "Les paramètres de répétition ont été déplacés vers le lecteur audio. Cliquez sur l' <0> </0> pour y accéder",
+    "select-reciter": "Sélectionnez le récitant",
+    "speed": "Vitesse",
+    "title": "l'audio"
+  },
+  "ayah": "Ayah",
+  "ayahs": "Ayahs",
+  "beta": "Bêta",
+  "bookmark": "Signet",
+  "bookmarked": "Marque-page",
+  "both": "Les deux",
+  "cancel": "Annuler",
+  "click-here": "Cliquez ici",
+  "close": "proche",
+  "command-bar": {
+    "navigations": "Navigation",
+    "no-nav-results": "Aucun résultat de navigation",
+    "placeholder": "Que veux-tu lire ?",
+    "powered-by": "Recherche vocale optimisée par Tarteel.ai",
+    "recent-navigations": "Navigations récentes",
+    "search-by-voice": "Recherche vocale",
+    "try-navigating": "Essayez de naviguer vers"
+  },
+  "community": {
+    "cta": "Rejoindre la communauté",
+    "header": "Rejoignez la communauté QDC de constructeurs et de technologues musulmans.",
+    "sub-header": "Inscrivez-vous sur Quran.com Discord pour participer et collaborer avec la principale technologie islamique de construction de communauté.",
+    "title": "Communauté"
+  },
+  "complete-sign-up": "Complétez votre inscription",
+  "consents": {
+    "communication": {
+      "body": "🚀 Boostez vos progrès grâce à des notifications <boldSpan> personnalisées </boldSpan> sur la progression de votre objectif, le maintien de séquences et l'amélioration de votre utilisation de nos fonctionnalités actuelles. <br></br> <br></br> Pouvons-nous vous tenir au courant par e-mail et par d'autres canaux ? Vous avez le contrôle – n'hésitez pas à ajuster ces préférences à tout moment dans les paramètres de votre compte. <br></br> <br></br> Sélectionnez simplement « Autoriser » pour <boldSpan> rappels inspirants </boldSpan> ou « Pas maintenant » pour refuser.",
+      "header": "Nous serions ravis de vous aider à rester <boldSpan> engagé et cohérent </boldSpan> dans votre parcours de croissance du Coran ! 📖🌟"
+    }
+  },
+  "continue": "Continuer",
+  "copied": "Copié",
+  "copied-to-clipboard": "Copié dans le presse-papier",
+  "copy": "Copie",
+  "counter": {
+    "decrease": "Diminuer",
+    "increase": "Augmenter"
+  },
+  "default-description": "Le Coran traduit dans de nombreuses langues dans une interface simple et facile",
+  "developers": "Développeurs",
+  "display": "Afficher",
+  "donate": "Donner",
+  "donate_monthly": "Faire un don mensuel",
+  "donate_once": "Faire un don une fois",
+  "email-verification": {
+    "check-spam": "Vous n'avez pas reçu l'e-mail de vérification ? Vérifiez votre boîte de réception de spam",
+    "email-sent": "Nous venons d'envoyer un e-mail à <strong> {{email}} </strong>",
+    "email-verification": "Vérification de l'E-mail",
+    "resend-email": "Ré-envoyer l'email",
+    "resend-email-in": "Renvoyer l'e-mail de vérification dans {{remainingTime}} s...",
+    "verify-code": "Vérifier le code"
+  },
+  "error": {
+    "bookmark-sync": "Le signet n'est pas synchronisé.",
+    "email-login-fail": "Échec de la connexion avec l'e-mail. Veuillez réessayer",
+    "general": "Quelque chose s'est mal passé. Veuillez réessayer.",
+    "offline": "On dirait que vous avez perdu votre connexion. Veuillez le vérifier et réessayer.",
+    "pref-persist-fail": "Échec de la synchronisation de vos paramètres avec le cloud."
+  },
+  "feedback": "Retour d'information",
+  "fonts": {
+    "15_lines": "15 lignes",
+    "16_lines": "16 lignes",
+    "code_v1": "Complexe King Fahad V1",
+    "code_v2": "Complexe King Fahad V2",
+    "font-size": "Taille de police",
+    "lines": "Lignes",
+    "qcf-desc": "Les polices Complexe King Fahad (V1 et V2) offrent une qualité supérieure mais prennent plus de temps à charger.",
+    "qpc_uthmani_hafs": "QPC Uthmani Hafs",
+    "quran-font": "Police du Coran",
+    "tajweed": "Tajweed",
+    "tajweed-desc": "La police Tajweed montre un Mushaf de couleur Tajweed. Vous pouvez en savoir plus sur les règles de couleur Tajweed <0> ici </0>",
+    "text_indopak": "IndoPak",
+    "text_uthmani": "Uthmani"
+  },
+  "footer": {
+    "description": "Quran.com est une Sadaqah Jariyah. Nous espérons faciliter la lecture, l'étude et l'apprentissage du Noble Coran pour tous. Le Noble Coran a de nombreux noms dont Al-Quran Al-Kareem, Al-Ketab, Al-Furqan, Al-Maw'itha, Al-Thikr et Al-Noor.",
+    "hiring": "Nous embauchons! Rejoignez l'équipe de QuranFoundation et contribuez à notre mission. <link> Postulez maintenant ! </link>",
+    "rights": "Tous les droits sont réservés",
+    "title": "Lisez, étudiez et apprenez Le Noble Coran."
+  },
+  "form": {
+    "code": "Le code de vérification",
+    "email": "E-mail",
+    "firstName": "Prénom",
+    "lastName": "Nom de famille"
+  },
+  "from": "De",
+  "fundraising-sticky-banner": {
+    "cta": "Donner",
+    "title": "Soutenez Quran.com ce Ramadan"
+  },
+  "fundraising": {
+    "description": "Les dons mensuels nous aident à améliorer Quran.com et à maintenir les opérations afin que nous nous concentrions moins sur la collecte de fonds et plus sur la création d'impact.",
+    "title": "Devenez un donateur mensuel"
+  },
+  "help": "Aider",
+  "hizb": "Hizb",
+  "home": "Accueil",
+  "hours": "Heures",
+  "inline": "En ligne",
+  "input": {
+    "clear": "Dégager"
+  },
+  "juz": "Juz",
+  "language": "Langue",
+  "languages": "Langues",
+  "learn-more": "Apprendre encore plus",
+  "learning-plans": "Plans d'apprentissage",
+  "less": "Moins",
+  "loading": "Chargement",
+  "login": "Connexion",
+  "logout": "Se déconnecter",
+  "meccan": "La Mecque",
+  "medinan": "Médinan",
+  "menu": "Menu",
+  "minutes": "Minutes",
+  "mobile-apps": "Application mobile",
+  "mode": "Mode",
+  "more": "Suite",
+  "my-learning-plans": "Mes projets d'apprentissage",
+  "navigate": "Naviguer",
+  "network": "Réseau",
+  "new": "Nouveau!",
+  "next": "Prochain",
+  "next-ayah": "Ayah suivant",
+  "no": "Non",
+  "no-notifications": "Aucune notification pour l'instant",
+  "none": "Rien",
+  "not-now": "Pas maintenant",
+  "notification": {
+    "mark-all-as-read": "tout marquer comme lu",
+    "mark-as-read": "Marquer comme lu"
+  },
+  "notifications": "Notifications",
+  "off": "Désactivé",
+  "on": "Au",
+  "page": "Page",
+  "pages": "Pages",
+  "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} sur {{totalNumberOfResults}} résultats de recherche",
+  "pbuh": "Les bénédictions d'Allah soient sur lui",
+  "popular-links": "Liens populaires",
+  "popup": {
+    "footnote": "Les dons mensuels nous permettent de moins nous concentrer sur la collecte de fonds",
+    "text-1": "Nous nous engageons à servir le monde de la connaissance et de la technologie coraniques, toujours gratuitement.",
+    "text-2": "Quran.com est une opportunité parfaite pour la charité continue (Sadaqah Jariyah). Veuillez envisager d'investir dans votre au-delà en tant que donateur mensuel (ou ponctuel).",
+    "title": "Cher Compagnon du Coran,"
+  },
+  "powered-by": "Alimenté par",
+  "prepare-hearts": {
+    "cta": "Apprendre encore plus",
+    "title": "Prêt pour le Ramadan ?"
+  },
+  "prev": "Précédent",
+  "previous-ayah": "Ayah précédent",
+  "privacy": "Intimité",
+  "product-updates": "Mises à jour du produit",
+  "profile": "Profil",
+  "q-reflect": "CoranRéfléchir",
+  "quran-com": "Coran.com",
+  "quran-radio": "Radio Coran",
+  "reading-history": "Lecture de l'histoire",
+  "reading-preference": {
+    "reading": "En train de lire",
+    "translation": "Traduction"
+  },
+  "recitation": "Récitation",
+  "reciter": "Récitant",
+  "reciter-summary": "Récitant mot à mot : <span> {{reciterName}} </span> . Cliquez sur un mot pour écouter sa récitation.",
+  "reciters": "Récitants",
+  "reflect": "Réfléchir",
+  "remove": "Supprimer",
+  "rename": "Renommer",
+  "retry": "Réessayez",
+  "revelation_order": "Ordre de révélation",
+  "rub": "Rub el Hizb",
+  "save-to-collection": "Enregistrer dans la collection",
+  "search-for": "Rechercher '{{searchQuery}}'",
+  "search-results": "{{count}} résultats de recherche",
+  "search": {
+    "filters": "Filtres",
+    "hint": "Essayez de rechercher",
+    "jump-to": "Sauter à",
+    "no-results": "Aucun résultat trouvé",
+    "no-results-suggestion": "Nous n'avons trouvé aucun résultat de recherche correspondant pour \" {{searchQuery}} \". essayez de rechercher un mot-clé différent.",
+    "popular": "Recherches populaires",
+    "recent": "Recherches récentes",
+    "results": "résultats",
+    "show-all": "Afficher tous les résultats",
+    "switch-mode": "Passer à la recherche avancée",
+    "title": "Chercher"
+  },
+  "seconds": "Secondes",
+  "settings": {
+    "no-tafsir-selected": "Aucun tafsir sélectionné",
+    "no-translation-selected": "Aucune traduction sélectionnée",
+    "reading-experience": "Expérience de lecture",
+    "reset-cta": "Réinitialiser les options",
+    "reset-notif": "Vos paramètres ont été réinitialisés à ceux par défaut",
+    "search-reciter": "Recherche de récitant",
+    "search-tafsirs": "Rechercher des Tafsirs",
+    "search-translations": "Rechercher des traductions",
+    "selected-reciter": "Réciteur sélectionné",
+    "selected-tafsirs": "Tafsirs sélectionnés",
+    "selected-translations": "Traductions sélectionnées",
+    "show-tooltip-when-playing-audio": "Afficher l'info-bulle lors de la lecture audio",
+    "title": "Paramètres",
+    "tooltip-playing-audio-helper": "Afficher la traduction des mots dans l'info-bulle pendant la lecture d'ayah",
+    "value-and-other": "{{value}} et {{othersCount}} autre",
+    "value-and-others": "{{value}} , et {{othersCount}} autres",
+    "wbw-helper": "Afficher la traduction ou la translittération directement sous le mot",
+    "word-tooltip-helper": "Afficher la traduction ou la translittération en survolant ou en cliquant sur le mot"
+  },
+  "share": "Partager",
+  "shared": "Le lien a été copié dans le presse-papiers !",
+  "sidebar": {
+    "search-hizb": "Rechercher",
+    "search-juz": "Rechercher Juz",
+    "search-page": "Page de recherche",
+    "search-surah": "Recherche sourate",
+    "try-navigating-with": "Astuce : essayez de naviguer avec"
+  },
+  "sitemap": "Plan du site",
+  "sort": {
+    "ascending": "Ascendant",
+    "by": "Trier par",
+    "descending": "Descendant"
+  },
+  "style": "Style",
+  "submit": "Soumettre",
+  "surah": "Sourate",
+  "tafsir": {
+    "font-size": "Taille de la police Tafsir",
+    "group-message": "Vous lisez un tafsir pour le groupe de versets {{from}} à {{to}}",
+    "no-text": "{{tafsirName}} n'est pas disponible pour le verset actuel.",
+    "surah": "Sourate Tafsir",
+    "tafsir-desc": "Lisez {{tafsirName}} pour Ayah {{verseNumber}} de la sourate {{surahName}}",
+    "tafsirs-desc": "Lisez divers Tafsirs d'Ayah {{ayahNumber}} de la sourate {{surahName}} par des érudits Tafsir de confiance",
+    "title": "Tafsir"
+  },
+  "tarteel": {
+    "app": "Application Tarteel",
+    "name": "Tarteel.ai"
+  },
+  "theme": "Thème",
+  "themes": {
+    "auto": "Auto",
+    "dark": "Sombre",
+    "light": "Léger",
+    "sepia": "Sépia",
+    "system": "Système",
+    "system-desc": "Le thème du système s'adapte automatiquement à vos paramètres de mode clair/sombre"
+  },
+  "to": "À",
+  "tooltip": "Info-bulle",
+  "tooltip-trans-lang": "Langue de l'info-bulle",
+  "trans-lang": "Langue de traduction",
+  "translation": "Traduction",
+  "translations": "Traductions",
+  "transliteration": "Translitération",
+  "type": "Taper",
+  "undo": "annuler",
+  "validation": {
+    "invalid-email": "{{field}} doit être une adresse e-mail valide",
+    "invalid-field": "Veuillez saisir une valeur {{field}} valide",
+    "required-field": "{{field}} est requis"
+  },
+  "verse": "Verset",
+  "verse-bookmark-removed": "Signet verset supprimé !",
+  "verse-bookmarked": "Verset mis en signet !",
+  "verses": "Versets",
+  "view": "Vue",
+  "voice": {
+    "ask-permission": "Veuillez activer l'autorisation du microphone pour commencer à utiliser la recherche vocale",
+    "error": "Un erreur est survenue, veuillez réessayer plus tard. Ou téléchargez le",
+    "no-permission": "Il semble que vous n'ayez pas activé les autorisations de microphone. Veuillez activer les autorisations du microphone et réessayer ou télécharger le",
+    "not-supported": "Il semble que votre navigateur ne supporte pas le microphone. Veuillez essayer un autre navigateur ou télécharger le",
+    "suggest": "Veuillez commencer à réciter et votre vers apparaîtra.",
+    "suggest-subtitle": "Récitez n'importe quel verset en arabe, et le verset apparaîtra",
+    "suggest-title": "Récitez maintenant",
+    "voice-search-powered-by": "Recherche vocale optimisée par"
+  },
+  "wbw": "Mot par mot",
+  "wbw-lang-summary": "Source de la traduction mot à mot : <link> {{source}} </link> . Cette source est indépendante de la sélection de traduction verset.",
+  "wbw-trans-lang": "Langage mot à mot",
+  "wbw-translation": "Traduction mot à mot",
+  "wbw-transliteration": "Translittération mot à mot",
+  "word-click": {
+    "no-audio": "Pas de son",
+    "play-audio": "Lire le son",
+    "title": "Clic sur mot"
+  },
+  "word-tooltip": "Info-bulle Word",
+  "yes": "Oui"
 }

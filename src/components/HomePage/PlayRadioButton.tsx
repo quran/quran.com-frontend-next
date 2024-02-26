@@ -11,10 +11,11 @@ import { StationType } from '../Radio/types';
 import styles from './PlayRadioButton.module.scss';
 import RadioInformation from './RadioInformation';
 
-import Button from '@/dls/Button/Button';
+import Button, { ButtonVariant, ButtonType, ButtonSize } from '@/dls/Button/Button';
 import PauseIcon from '@/icons/pause.svg';
 import PlayIcon from '@/icons/play-arrow.svg';
-import { logEvent } from '@/utils/eventLogger';
+import { logButtonClick } from '@/utils/eventLogger';
+import { getCoursesNavigationUrl } from '@/utils/navigation';
 import { selectIsLoading } from 'src/xstate/actors/audioPlayer/selectors';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 
@@ -28,6 +29,10 @@ const PlayRadioButton = () => {
   const isRadioMode = useSelector(audioService, (state) => !!state.context.radioActor);
   const isLoading = useSelector(audioService, selectIsLoading);
 
+  const onCoursesClicked = () => {
+    logButtonClick('homepage_courses_cta');
+  };
+
   // TODO: handle continue radio from last saved session
   const onPlayClicked = () => {
     if (isRadioMode) {
@@ -36,7 +41,7 @@ const PlayRadioButton = () => {
     }
     const randomStationId = getRandomCuratedStationId();
 
-    logEvent('play_radio_clicked', {
+    logButtonClick('play_radio', {
       stationId: randomStationId,
       type: StationType.Curated,
     });
@@ -55,6 +60,16 @@ const PlayRadioButton = () => {
   const { radioActor } = audioService.getSnapshot().context;
   return (
     <div className={styles.container}>
+      <Button
+        href={getCoursesNavigationUrl()}
+        variant={ButtonVariant.Outlined}
+        className={styles.ctaButton}
+        size={ButtonSize.Small}
+        type={ButtonType.Secondary}
+        onClick={onCoursesClicked}
+      >
+        {t('common:learning-plans')}
+      </Button>
       <div className={styles.playRadioSection}>
         {isAudioPlaying && isRadioMode ? (
           <Button

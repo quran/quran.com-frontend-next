@@ -2,11 +2,11 @@ import React, { useEffect } from 'react';
 
 import { DirectionProvider } from '@radix-ui/react-direction';
 import { TooltipProvider } from '@radix-ui/react-tooltip';
-import { DefaultSeo } from 'next-seo';
-import useTranslation from 'next-translate/useTranslation';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+import { DefaultSeo } from 'next-seo';
+import useTranslation from 'next-translate/useTranslation';
 import useSWRImmutable from 'swr/immutable';
 
 import AudioPlayer from '@/components/AudioPlayer/AudioPlayer';

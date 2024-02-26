@@ -1,0 +1,15 @@
+.container {
+  border-radius: var(--border-radius-pill);
+  background-color: var(--color-success-medium);
+  border: none;
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  box-sizing: border-box;
+  justify-content: center;
+  color: var(--color-text-inverse);
+  font-weight: var(--font-weight-bold);
+  border-radius: var(--border-radius-pill);
+  padding-inline: var(--spacing-small);
+  text-transform: uppercase;
+}

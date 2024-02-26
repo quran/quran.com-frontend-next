@@ -1,7 +1,7 @@
 import { useEffect, useMemo } from 'react';
 
-import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
+import useTranslation from 'next-translate/useTranslation';
 import useSWRImmutable from 'swr/immutable';
 
 import { getTranslationViewRequestKey, verseFetcher } from '@/components/QuranReader/api';
@@ -67,7 +67,10 @@ const useDedupedFetchVerse = ({
 
   const idxInPage = verseIdx % initialData.pagination.perPage;
 
-  const isUsingDefaultSettings = useIsUsingDefaultSettings({ translations: translationParams });
+  const isUsingDefaultSettings = useIsUsingDefaultSettings({
+    translationParams,
+    selectedTranslations,
+  });
   const shouldUseInitialData = pageNumber === 1 && isUsingDefaultSettings;
   const { data: verses } = useSWRImmutable(
     getTranslationViewRequestKey({

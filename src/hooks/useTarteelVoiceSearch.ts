@@ -7,6 +7,7 @@ import { useState, useCallback, useRef } from 'react';
 import { AudioWorklet } from 'audio-worklet';
 
 import useBrowserLayoutEffect from '@/hooks/useBrowserLayoutEffect';
+import SearchService from '@/types/Search/SearchService';
 import SearchQuerySource from '@/types/SearchQuerySource';
 import SearchType from '@/types/SearchType';
 import { logEmptySearchResults, logEvent } from '@/utils/eventLogger';
@@ -105,7 +106,7 @@ const useTarteelVoiceSearch = () => {
   // otherwise, the user just clicked on the mic button to stop the recording
   // and the websocket should remain open to receive the final results.
   const stopRecording = useCallback(
-    async (closeWebsocket: boolean = true) => {
+    async (closeWebsocket = true) => {
       if (!closeWebsocket && !partialTranscript) {
         // if the user didn't say anything and clicked on the mic button, don't stop the flow
         return;
@@ -148,7 +149,12 @@ const useTarteelVoiceSearch = () => {
           setIsLoading(false);
           setSearchResult(data as SearchResult);
           if (!(data as SearchResult).matches?.length) {
-            logEmptySearchResults(data.queryText, SearchQuerySource.Tarteel, SearchType.Voice);
+            logEmptySearchResults({
+              query: data.queryText,
+              source: SearchQuerySource.Tarteel,
+              type: SearchType.Voice,
+              service: SearchService.Tarteel,
+            });
           }
           stopRecording();
           break;

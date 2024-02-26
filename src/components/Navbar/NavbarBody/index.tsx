@@ -3,7 +3,6 @@ import { memo } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch } from 'react-redux';
 
-import InAppNotifications from '../InAppNotifications';
 import LanguageSelector from '../LanguageSelector';
 import NavbarLogoWrapper from '../Logo/NavbarLogoWrapper';
 import NavigationDrawer from '../NavigationDrawer/NavigationDrawer';
@@ -14,11 +13,9 @@ import styles from './NavbarBody.module.scss';
 import ProfileAvatarButton from './ProfileAvatarButton';
 
 import Button, { ButtonShape, ButtonVariant } from '@/dls/Button/Button';
-import useGetUserFeatureFlags from '@/hooks/auth/useGetUserFeatureFlags';
 import IconMenu from '@/icons/menu.svg';
 import IconSearch from '@/icons/search.svg';
 import IconSettings from '@/icons/settings.svg';
-import { NotificationsProvider } from '@/notifications/NotificationContext';
 import {
   setIsSearchDrawerOpen,
   setIsNavigationDrawerOpen,
@@ -38,7 +35,6 @@ const logDrawerOpenEvent = (drawerName: string) => {
 
 const NavbarBody: React.FC = () => {
   const { t } = useTranslation('common');
-  const { isEnabled: isInAppNotificationsEnabled } = useGetUserFeatureFlags('inAppNotifications');
   const dispatch = useDispatch();
   const openNavigationDrawer = () => {
     logDrawerOpenEvent('navigation');
@@ -78,11 +74,6 @@ const NavbarBody: React.FC = () => {
         <div className={styles.rightCTA}>
           <>
             <ProfileAvatarButton />
-            {isInAppNotificationsEnabled && (
-              <NotificationsProvider>
-                <InAppNotifications />
-              </NotificationsProvider>
-            )}
             <LanguageSelector />
             <Button
               tooltip={t('settings.title')}

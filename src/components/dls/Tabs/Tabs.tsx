@@ -14,6 +14,7 @@ type TabsProps = {
   onSelect?: (value: string) => void;
 };
 
+// TODO: move this to Radix UI Tabs component
 const Tabs = ({ tabs, onSelect, selected }: TabsProps) => {
   return (
     <div className={styles.container} role="tablist">
