@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch, useSelector } from 'react-redux';
 
+import OnboardingProgress from '../OnboardingProgress';
 import { useOnboarding } from '../OnboardingProvider';
 import { onboardingChecklist } from '../steps';
 
@@ -10,7 +11,6 @@ import useShowChecklistAfterInterval from './hooks/useShowChecklistAfterInterval
 import styles from './OnboardingChecklist.module.scss';
 
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
-import Progress from '@/dls/Progress';
 import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
 import CheckIcon from '@/icons/check.svg';
 import IconClose from '@/icons/close.svg';
@@ -28,11 +28,9 @@ import PreferenceGroup from '@/types/auth/PreferenceGroup';
 import OnboardingGroup from '@/types/OnboardingGroup';
 import { ReadingPreference } from '@/types/QuranReader';
 import { logButtonClick } from '@/utils/eventLogger';
-import { toLocalizedNumber } from '@/utils/locale';
-import { convertFractionToPercent } from '@/utils/number';
 
 const OnboardingChecklist = () => {
-  const { t, lang } = useTranslation('common');
+  const { t } = useTranslation('common');
   const checklistItems = onboardingChecklist(t);
   const router = useRouter();
 
@@ -112,11 +110,6 @@ const OnboardingChecklist = () => {
     });
   };
 
-  const completedPercent = convertFractionToPercent(
-    Object.keys(completedGroups).length / checklistItems.length,
-  );
-  const localizedPercent = toLocalizedNumber(completedPercent, lang);
-
   return (
     <div className={classNames(styles.checklist, styles.checklistPosition)}>
       <div className={styles.checklistHeader}>
@@ -134,10 +127,7 @@ const OnboardingChecklist = () => {
         </Button>
       </div>
 
-      <div className={styles.progressContainer}>
-        <p>{localizedPercent}%</p>
-        <Progress value={completedPercent} rootStyles={styles.progressBar} />
-      </div>
+      <OnboardingProgress />
 
       <ul>
         {checklistItems.map((item) => {

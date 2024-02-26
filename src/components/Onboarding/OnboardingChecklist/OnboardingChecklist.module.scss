@@ -8,17 +8,6 @@
   z-index: var(--z-index-overlay);
 }
 
-.progressContainer {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-small);
-  margin-block: var(--spacing-small);
-}
-
-.progressBar {
-  height: var(--spacing-xxsmall) !important;
-}
-
 .checklist {
   background: var(--color-background-alternative-faded);
   border: 1px solid var(--color-borders-hairline);
