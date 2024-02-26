@@ -20,7 +20,7 @@
       "description": "Find the verses, surahs, keywords, juz and topics you are looking for by utilizing our search bar"
     },
     "voice-search": {
-      "title": "Voice search (tarteel)",
+      "title": "Voice Search (Tarteel)",
       "description": "Tap the mic icon and recite the verse you are searching for. Quick Tip! To discover where someone is reciting (Eg. Taraweeh prayers), tap the mic icon. After one or two verses are detected, press stop to find the location"
     },
     "juz": {
@@ -37,7 +37,7 @@
     },
     "font-style": {
       "title": "Choose your preferred reading script",
-      "description": "Options include Uthmani - King Fahad Complex v1, Uthmani - King Fahad Complex v2, Uthmani QPC Hafs, indopak 15 lines, indopak 16 lines"
+      "description": "Options include Uthmani - King Fahad Complex v1, Uthmani - King Fahad Complex v2, Uthmani QPC Hafs, Indopak 15 lines, Indopak 16 lines"
     },
     "font-size": {
       "title": "Font Size",
@@ -52,7 +52,7 @@
       "description": "View the transliteration of every word to help you on your Quran reading journey"
     },
     "wbw-audio": {
-      "title": "Listen to word-by-word translation by clicking on word",
+      "title": "Listen to the word-by-word transliteration by clicking on word",
       "description": "Select this option to listen to every word individually by simply clicking on the word!"
     },
     "inline-wbw": {
@@ -64,20 +64,20 @@
       "description": "Choose from a variety of translations in multiple languages. Tip: Compare translations by selecting multiple options"
     },
     "surah-info": {
-      "title": "Read surah info",
-      "description": "Get insights about each Surah conveniently located at the beginning of every surah"
+      "title": "Read About the Surah",
+      "description": "Get insights about each Surah - conveniently located at the beginning of every Surah"
     },
     "listen": {
-      "title": "Listen to Quran",
-      "description": "Play audio to listen"
+      "title": "Listen to the Surah or Ayah",
+      "description": "Start the audio player to listen to the recitation"
     },
     "select-reciter": {
       "title": "Select from a variety of reciters to listen to",
       "description": "Personalize your listening experience by selecting a reciter you enjoy listening to most!"
     },
     "ayah-tafsir": {
-      "title": "Read tafsir at the ayah level",
-      "description": "Explore Tafsir at the ayah level, offering detailed insights to enhance your understanding as you read. (Tafsir may be grouped for multiple verses when appropriate)"
+      "title": "Read Tafsir at the Ayah level",
+      "description": "Explore the Tafsir at the ayah level, offering detailed insights to enhance your understanding as you read. (Tafsir may be grouped for multiple verses when appropriate)"
     },
     "ayah-reflection": {
       "title": "Read reflections at the ayah level",
