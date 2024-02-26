@@ -9,6 +9,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import OnboardingStep from './OnboardingStep';
 import { checklistIndexToOnboardingSteps } from './steps';
 
+import useScrollToTop from '@/hooks/useScrollToTop';
 import { selectOnboardingActiveStep, setActiveStepIndex } from '@/redux/slices/onboarding';
 import OnboardingGroup from '@/types/OnboardingGroup';
 import { isLoggedIn } from '@/utils/auth/login';
@@ -35,6 +36,7 @@ export const OnboardingProvider = React.memo(({ children }: { children: React.Re
   const [joyride, setJoyride] = useState<StoreHelpers>();
   const { t } = useTranslation('common');
   const dispatch = useDispatch();
+  const scrollToTop = useScrollToTop();
 
   const allSteps = useMemo(() => {
     return checklistIndexToOnboardingSteps(t, OnboardingStep);
@@ -53,7 +55,7 @@ export const OnboardingProvider = React.memo(({ children }: { children: React.Re
       });
 
       if (group === OnboardingGroup.SETTINGS || group === OnboardingGroup.READING_EXPERIENCE) {
-        window.scrollTo(0, 0);
+        scrollToTop();
         setTimeout(() => {
           setIsOnboarding(true);
           dispatch(statePayload);
@@ -63,7 +65,7 @@ export const OnboardingProvider = React.memo(({ children }: { children: React.Re
         dispatch(statePayload);
       }
     },
-    [dispatch],
+    [dispatch, scrollToTop],
   );
 
   const stopTour = useCallback(() => {
