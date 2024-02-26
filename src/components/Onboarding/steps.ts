@@ -17,10 +17,14 @@ type Step = BaseStep & {
  * Get the placement for the tooltip based on the device
  *
  * @param {Placement} desktopPlacement
+ * @param {boolean} isDeviceMobile
  * @returns {Placement}
  */
-const getResponsivePlacement = (desktopPlacement: Placement): Placement => {
-  return isMobile() ? 'top-start' : desktopPlacement;
+const getResponsivePlacement = (
+  desktopPlacement: Placement,
+  isDeviceMobile: boolean,
+): Placement => {
+  return isDeviceMobile ? 'top-start' : desktopPlacement;
 };
 
 // eslint-disable-next-line react-func/max-lines-per-function
@@ -51,6 +55,9 @@ export const checklistIndexToOnboardingSteps = (
     title: t(`onboarding:steps.${key}.title`),
     description: t(`onboarding:steps.${key}.description`),
   });
+
+  const isDeviceMobile = isMobile();
+  const shouldDisableOverlay = isDeviceMobile;
 
   return {
     [OnboardingGroup.HOMEPAGE]: [
@@ -113,9 +120,9 @@ export const checklistIndexToOnboardingSteps = (
           ...commonStepOptions,
           target: '#quran-font-section',
           spotlightClicks: true,
-          placement: getResponsivePlacement('left-start'),
+          placement: getResponsivePlacement('left-start', isDeviceMobile),
           disableScrolling: false,
-          disableOverlay: true,
+          disableOverlay: shouldDisableOverlay,
         },
       },
       {
@@ -171,7 +178,7 @@ export const checklistIndexToOnboardingSteps = (
           placement: 'left-start',
           spotlightClicks: true,
           disableScrolling: false,
-          disableOverlay: true,
+          disableOverlay: shouldDisableOverlay,
         },
       },
       {
@@ -179,10 +186,10 @@ export const checklistIndexToOnboardingSteps = (
         step: {
           ...commonStepOptions,
           target: '#settings-drawer-body',
-          placement: getResponsivePlacement('left-start'),
+          placement: getResponsivePlacement('left-start', isDeviceMobile),
           spotlightClicks: true,
           disableScrolling: false,
-          disableOverlay: true,
+          disableOverlay: shouldDisableOverlay,
         },
       },
     ],
