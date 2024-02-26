@@ -11,7 +11,6 @@ import SearchDrawerFooter from '../SearchDrawer/Footer';
 import styles from './Drawer.module.scss';
 import DrawerCloseButton from './DrawerCloseButton';
 
-import { useOnboarding } from '@/components/Onboarding/OnboardingProvider';
 import useOutsideClickDetector from '@/hooks/useOutsideClickDetector';
 import usePreventBodyScrolling from '@/hooks/usePreventBodyScrolling';
 import {
@@ -98,13 +97,12 @@ const Drawer: React.FC<Props> = ({
   bodyId,
 }) => {
   const { isVisible: isNavbarVisible } = useSelector(selectNavbar, shallowEqual);
-  const { isActive } = useOnboarding();
   const drawerRef = useRef(null);
   const dispatch = useDispatch();
   const navbar = useSelector(selectNavbar, shallowEqual);
   const isOpen = getIsOpen(type, navbar);
   // when the drawer is open and the onboarding is not active.
-  usePreventBodyScrolling(isOpen && !isActive);
+  usePreventBodyScrolling(isOpen);
   const router = useRouter();
 
   const closeDrawer = useCallback(

@@ -1,15 +1,26 @@
 /* eslint-disable max-lines */
 import { Translate } from 'next-translate';
-import { Step as BaseStep } from 'react-joyride';
+import { Step as BaseStep, Placement } from 'react-joyride';
 
 // import OnboardingStep from './OnboardingStep';
 
 import OnboardingGroup from '@/types/OnboardingGroup';
 import { getSurahNavigationUrl } from '@/utils/navigation';
+import { isMobile } from '@/utils/responsive';
 
 type Step = BaseStep & {
   showNextButton?: boolean;
   showPrevButton?: boolean;
+};
+
+/**
+ * Get the placement for the tooltip based on the device
+ *
+ * @param {Placement} desktopPlacement
+ * @returns {Placement}
+ */
+const getResponsivePlacement = (desktopPlacement: Placement): Placement => {
+  return isMobile() ? 'top-start' : desktopPlacement;
 };
 
 // eslint-disable-next-line react-func/max-lines-per-function
@@ -102,7 +113,9 @@ export const checklistIndexToOnboardingSteps = (
           ...commonStepOptions,
           target: '#quran-font-section',
           spotlightClicks: true,
-          placement: 'left-start',
+          placement: getResponsivePlacement('left-start'),
+          disableScrolling: false,
+          disableOverlay: true,
         },
       },
       {
@@ -157,6 +170,8 @@ export const checklistIndexToOnboardingSteps = (
           target: '#translation-section',
           placement: 'left-start',
           spotlightClicks: true,
+          disableScrolling: false,
+          disableOverlay: true,
         },
       },
       {
@@ -164,8 +179,10 @@ export const checklistIndexToOnboardingSteps = (
         step: {
           ...commonStepOptions,
           target: '#settings-drawer-body',
-          placement: 'left-start',
+          placement: getResponsivePlacement('left-start'),
           spotlightClicks: true,
+          disableScrolling: false,
+          disableOverlay: true,
         },
       },
     ],
