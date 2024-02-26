@@ -239,9 +239,10 @@ export const checklistIndexToOnboardingSteps = (
           ...commonStepOptions,
           // first element with class play-verse-button
           target: '#audio-player-reciter-list',
-          placement: 'right',
           spotlightClicks: true,
-          disableScrolling: true,
+          placement: getResponsivePlacement('right', isDeviceMobile),
+          disableScrolling: false,
+          disableOverlay: shouldDisableOverlay,
         },
       },
       {

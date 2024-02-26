@@ -17,7 +17,7 @@ const OnboardingProgress = () => {
   const checklistItems = onboardingChecklist(t);
   const { completedGroups } = useSelector(selectOnboarding);
   const completedPercent = convertFractionToPercent(
-    Object.values(completedGroups).filter((group) => group.isCompleted === true).length /
+    Object.values(completedGroups).filter((group) => group?.isCompleted === true).length /
       checklistItems.length,
   );
   const localizedPercent = toLocalizedNumber(completedPercent, lang);
