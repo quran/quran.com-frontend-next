@@ -188,8 +188,6 @@ export const checklistIndexToOnboardingSteps = (
           target: '#settings-drawer-body',
           placement: getResponsivePlacement('left-start', isDeviceMobile),
           spotlightClicks: true,
-          disableScrolling: false,
-          disableOverlay: shouldDisableOverlay,
         },
       },
     ],
