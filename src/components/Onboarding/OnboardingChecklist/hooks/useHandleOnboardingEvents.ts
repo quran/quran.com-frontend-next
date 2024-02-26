@@ -87,6 +87,8 @@ const useHandleOnboardingEvents = ({
         // when the user clicks "finish" in
         // the last step of the settings onboarding, close the drawer
         dispatch(setIsSettingsDrawerOpen(false));
+        // reset the drawer to the body view in-case the user re-opens the settings tour again after having finished it.
+        dispatch(setSettingsView(SettingsView.Body));
         return {};
       }
 
