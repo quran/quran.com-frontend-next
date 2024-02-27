@@ -44,7 +44,7 @@ const OverflowAudioPlayActionsMenuBody = () => {
   const audioService = useContext(AudioPlayerMachineContext);
   const { t } = useTranslation('common');
   const playbackRate = useSelector(audioService, (state) => state.context.playbackRate);
-  const { prevStep } = useOnboarding();
+  const { prevStep, nextStep } = useOnboarding();
 
   useEffect(() => {
     const handler = () => {
@@ -52,9 +52,18 @@ const OverflowAudioPlayActionsMenuBody = () => {
       prevStep();
     };
 
+    const handleNextOpenRecitersListStep = () => {
+      setSelectedMenu(AudioPlayerOverflowMenu.Reciter);
+      nextStep();
+    };
+
     window.addEventListener('onboardingPrevStep4', handler);
-    return () => window.removeEventListener('onboardingPrevStep4', handler);
-  }, [prevStep]);
+    window.addEventListener('openNextRecitersListStep', handleNextOpenRecitersListStep);
+    return () => {
+      window.removeEventListener('onboardingPrevStep4', handler);
+      window.removeEventListener('openNextRecitersListStep', handleNextOpenRecitersListStep);
+    };
+  }, [nextStep, prevStep]);
 
   const menus = useMemo(
     () => ({

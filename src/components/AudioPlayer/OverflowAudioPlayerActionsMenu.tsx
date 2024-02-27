@@ -26,11 +26,19 @@ const OverflowAudioPlayerActionsMenu = () => {
       prevStep();
     };
 
+    const handleOpenAudioPlayerTriggerStep = () => {
+      // manually click the trigger to open the audio player settings menu
+      document.getElementById('audio-player-overflow-menu-trigger')?.click();
+      nextStep();
+    };
+
     window.addEventListener('onboardingNextStep4', handleNextStep4);
+    window.addEventListener('openAudioPlayerTriggerStep', handleOpenAudioPlayerTriggerStep);
     window.addEventListener('onboardingPrevStep3', handlePrevStep3);
 
     return () => {
       window.removeEventListener('onboardingNextStep4', handleNextStep4);
+      window.removeEventListener('openAudioPlayerTriggerStep', handleOpenAudioPlayerTriggerStep);
       window.removeEventListener('onboardingPrevStep3', handlePrevStep3);
     };
   }, [nextStep, prevStep]);

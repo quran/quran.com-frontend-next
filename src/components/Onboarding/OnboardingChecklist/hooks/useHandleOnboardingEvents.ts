@@ -1,3 +1,4 @@
+/* eslint-disable react-func/max-lines-per-function */
 import { useDispatch } from 'react-redux';
 
 import { SettingsView, setIsSettingsDrawerOpen, setSettingsView } from '@/redux/slices/navbar';
@@ -117,6 +118,16 @@ const useHandleOnboardingEvents = ({
       // if the user clicks next when the step is play audio of an Ayah
       if (index === 1) {
         window.dispatchEvent(new Event('onboardingNextPlayAudioStep'));
+        return { automaticallyProceed: false };
+      }
+      // if the user clicks next when the step is clicking on the dot icon to open the audio player settings menu
+      if (index === 2) {
+        window.dispatchEvent(new Event('openAudioPlayerTriggerStep'));
+        return { automaticallyProceed: false };
+      }
+      // if the user clicks next when the step is clicking the reciters menu item in the audio player settings menu
+      if (index === 3) {
+        window.dispatchEvent(new Event('openNextRecitersListStep'));
         return { automaticallyProceed: false };
       }
       if (index === 4) {
