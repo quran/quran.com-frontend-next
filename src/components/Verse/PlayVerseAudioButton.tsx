@@ -40,7 +40,7 @@ const PlayVerseAudioButton: React.FC<PlayVerseAudioProps> = ({
     QueryParam.Reciter,
   );
   const isVisible = useSelector(audioService, (state) => state.matches('VISIBLE'));
-  const { isActive, activeStepGroup, nextStep, activeStepIndex } = useOnboarding();
+  const { isActive, activeStepGroup, nextStep } = useOnboarding();
 
   const isVerseLoading = useXstateSelector(audioService, (state) =>
     selectIsVerseLoading(state, verseKey),
