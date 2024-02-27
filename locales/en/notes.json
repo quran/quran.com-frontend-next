@@ -9,7 +9,7 @@
   "save-publish-failed": "Note has been saved successfully but failed to publish",
   "update-publish-failed": "Note has been updated successfully but failed to publish",
   "delete-success": "Note has been deleted successfully",
-  "export-success": "Note has been export to your account on QuranReflect successfully",
+  "export-success": "Note has been published to your account on QuranReflect successfully",
   "share-to-qr": "Share to QuranReflect.com",
   "publish-on-qr": "Publish On QuranReflect",
   "save-and-share": "Save & publish On QuranReflect",
