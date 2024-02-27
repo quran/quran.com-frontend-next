@@ -1,5 +1,6 @@
 import classNames from 'classnames';
 import { useRouter } from 'next/router';
+import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -113,7 +114,14 @@ const OnboardingChecklist = () => {
   return (
     <div className={classNames(styles.checklist, styles.checklistPosition)}>
       <div className={styles.checklistHeader}>
-        <h4>{t('onboarding:onboarding-checklist')}</h4>
+        <h4>
+          <Trans
+            i18nKey="onboarding:onboarding-title"
+            components={{
+              br: <br key={0} />,
+            }}
+          />
+        </h4>
 
         <Button
           tooltip={t('close')}
