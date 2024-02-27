@@ -150,7 +150,7 @@ export const OnboardingProvider = React.memo(({ children }: { children: React.Re
         stepIndex={activeStep.index}
         steps={steps as any}
         continuous
-        scrollOffset={100}
+        scrollOffset={130}
         getHelpers={setJoyride}
         disableOverlayClose
         disableCloseOnEsc

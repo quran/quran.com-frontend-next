@@ -43,7 +43,7 @@ const ContextMenu = () => {
   const { isActive } = useOnboarding();
   const { isVisible: isNavbarVisible } = useSelector(selectNavbar, shallowEqual);
   const showNavbar = isNavbarVisible || isActive;
-  const showReadingPreferenceSwitcher = isReadingPreferenceSwitcherVisible || isActive;
+  const showReadingPreferenceSwitcher = isReadingPreferenceSwitcherVisible && !isActive;
 
   const { verseKey, chapterId, page, hizb } = useSelector(selectLastReadVerseKey, shallowEqual);
   const chapterData = useMemo(() => {
