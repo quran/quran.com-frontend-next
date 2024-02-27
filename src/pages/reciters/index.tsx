@@ -35,6 +35,7 @@ const RecitersListPage = ({ reciters, hasError }) => {
     <>
       <NextSeoWrapper
         title={t('quran-reciters')}
+
         description={t('reciters-desc')}
         canonical={getCanonicalUrl(lang, NAVIGATION_URL)}
         languageAlternates={getLanguageAlternates(NAVIGATION_URL)}
@@ -56,6 +57,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
       'cover_image',
       'bio',
     ]);
+    console.log('aareciters', reciters);
     const chaptersData = await getAllChaptersData(locale);
 
     return {

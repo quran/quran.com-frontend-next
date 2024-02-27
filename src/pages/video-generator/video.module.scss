@@ -1,0 +1,46 @@
+@use "src/styles/breakpoints";
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    min-height: calc(8 * var(--spacing-mega));
+  }
+  
+
+
+.versePreviewContainer {
+  padding: var(--spacing-large);
+  background-color: var(--color-background-alternative-faded);
+}
+
+
+.pageContainer {
+  @include breakpoints.smallerThanTablet {
+    padding-block-start: var(--banner-height);
+  }
+  @include breakpoints.tablet {
+    padding-block-start: var(--spacing-small);
+  }
+  padding-block-end: var(--spacing-small);
+  padding-inline-start: 0;
+  padding-inline-end: 0;
+}
+
+// juz layout (masonry layout)
+.settingsContainer {
+  display: grid;
+  @include breakpoints.tablet {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @include breakpoints.desktop {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  gap: 2em;
+}
+
+.headerContainer {
+  display: flex;
+  align-items: center;
+}
