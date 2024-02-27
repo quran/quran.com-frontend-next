@@ -10,6 +10,7 @@ import RepeatButton from './Buttons/RepeatButton';
 import SelectReciterMenu from './Buttons/SelectReciterMenu';
 import styles from './OverflowAudioPlayActionsMenuBody.module.scss';
 
+import OnboardingEvent from '@/components/Onboarding/OnboardingChecklist/hooks/OnboardingEvent';
 import { useOnboarding } from '@/components/Onboarding/OnboardingProvider';
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import ChevronRightIcon from '@/icons/chevron-right.svg';
@@ -57,11 +58,17 @@ const OverflowAudioPlayActionsMenuBody = () => {
       nextStep();
     };
 
-    window.addEventListener('onboardingPrevStep4', handler);
-    window.addEventListener('openNextRecitersListStep', handleNextOpenRecitersListStep);
+    window.addEventListener(OnboardingEvent.STEP_BEFORE_CHOOSING_RECITER_FROM_LIST, handler);
+    window.addEventListener(
+      OnboardingEvent.STEP_AFTER_RECITER_LIST_ITEM_CLICK,
+      handleNextOpenRecitersListStep,
+    );
     return () => {
-      window.removeEventListener('onboardingPrevStep4', handler);
-      window.removeEventListener('openNextRecitersListStep', handleNextOpenRecitersListStep);
+      window.removeEventListener(OnboardingEvent.STEP_BEFORE_CHOOSING_RECITER_FROM_LIST, handler);
+      window.removeEventListener(
+        OnboardingEvent.STEP_AFTER_RECITER_LIST_ITEM_CLICK,
+        handleNextOpenRecitersListStep,
+      );
     };
   }, [nextStep, prevStep]);
 

@@ -7,6 +7,7 @@ import useTranslation from 'next-translate/useTranslation';
 import styles from '../QuranReader/TranslationView/TranslationViewCell.module.scss';
 
 import Spinner from '@/components/dls/Spinner/Spinner';
+import OnboardingEvent from '@/components/Onboarding/OnboardingChecklist/hooks/OnboardingEvent';
 import { useOnboarding } from '@/components/Onboarding/OnboardingProvider';
 import Button, { ButtonShape, ButtonSize, ButtonType, ButtonVariant } from '@/dls/Button/Button';
 import useGetQueryParamOrXstateValue from '@/hooks/useGetQueryParamOrXstateValue';
@@ -89,10 +90,10 @@ const PlayVerseAudioButton: React.FC<PlayVerseAudioProps> = ({
       onPlayClicked();
     };
 
-    window.addEventListener('onboardingNextPlayAudioStep', handlePlayAudioStep);
+    window.addEventListener(OnboardingEvent.STEP_AFTER_PLAY_AUDIO_CLICK, handlePlayAudioStep);
 
     return () => {
-      window.removeEventListener('onboardingNextPlayAudioStep', handlePlayAudioStep);
+      window.removeEventListener(OnboardingEvent.STEP_AFTER_PLAY_AUDIO_CLICK, handlePlayAudioStep);
     };
   }, [nextStep, onPlayClicked]);
 

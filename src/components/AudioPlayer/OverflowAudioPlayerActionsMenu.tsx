@@ -1,9 +1,11 @@
+/* eslint-disable react-func/max-lines-per-function */
 import { useEffect, useState } from 'react';
 
 import AudioPlayerOverflowMenuTrigger from './AudioPlayerOverflowMenuTrigger';
 import OverflowAudioPlayActionsMenuBody from './OverflowAudioPlayActionsMenuBody';
 import styles from './OverflowAudioPlayerActionsMenu.module.scss';
 
+import OnboardingEvent from '@/components/Onboarding/OnboardingChecklist/hooks/OnboardingEvent';
 import { useOnboarding } from '@/components/Onboarding/OnboardingProvider';
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import useDirection from '@/hooks/useDirection';
@@ -16,7 +18,7 @@ const OverflowAudioPlayerActionsMenu = () => {
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    const handleNextStep4 = () => {
+    const handleAfterChooseReciterStepNext = () => {
       setOpen(false);
       nextStep();
     };
@@ -26,20 +28,35 @@ const OverflowAudioPlayerActionsMenu = () => {
       prevStep();
     };
 
-    const handleOpenAudioPlayerTriggerStep = () => {
+    const handleAfterAudioPlayerTriggerStepNext = () => {
       // manually click the trigger to open the audio player settings menu
       document.getElementById('audio-player-overflow-menu-trigger')?.click();
       nextStep();
     };
 
-    window.addEventListener('onboardingNextStep4', handleNextStep4);
-    window.addEventListener('openAudioPlayerTriggerStep', handleOpenAudioPlayerTriggerStep);
-    window.addEventListener('onboardingPrevStep3', handlePrevStep3);
+    window.addEventListener(
+      OnboardingEvent.STEP_AFTER_CHOOSING_RECITER_FROM_LIST,
+      handleAfterChooseReciterStepNext,
+    );
+    window.addEventListener(
+      OnboardingEvent.STEP_AFTER_AUDIO_PLAYER_TRIGGER,
+      handleAfterAudioPlayerTriggerStepNext,
+    );
+    window.addEventListener(OnboardingEvent.STEP_BEFORE_RECITER_LIST_ITEM_CLICK, handlePrevStep3);
 
     return () => {
-      window.removeEventListener('onboardingNextStep4', handleNextStep4);
-      window.removeEventListener('openAudioPlayerTriggerStep', handleOpenAudioPlayerTriggerStep);
-      window.removeEventListener('onboardingPrevStep3', handlePrevStep3);
+      window.removeEventListener(
+        OnboardingEvent.STEP_AFTER_CHOOSING_RECITER_FROM_LIST,
+        handleAfterChooseReciterStepNext,
+      );
+      window.removeEventListener(
+        OnboardingEvent.STEP_AFTER_AUDIO_PLAYER_TRIGGER,
+        handleAfterAudioPlayerTriggerStepNext,
+      );
+      window.removeEventListener(
+        OnboardingEvent.STEP_BEFORE_RECITER_LIST_ITEM_CLICK,
+        handlePrevStep3,
+      );
     };
   }, [nextStep, prevStep]);
 

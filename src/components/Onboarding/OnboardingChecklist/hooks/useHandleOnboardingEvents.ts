@@ -1,6 +1,8 @@
 /* eslint-disable react-func/max-lines-per-function */
 import { useDispatch } from 'react-redux';
 
+import OnboardingEvent from './OnboardingEvent';
+
 import { SettingsView, setIsSettingsDrawerOpen, setSettingsView } from '@/redux/slices/navbar';
 import OnboardingGroup from '@/types/OnboardingGroup';
 
@@ -69,12 +71,12 @@ const useHandleOnboardingEvents = ({
 
     if (group === OnboardingGroup.READING_EXPERIENCE) {
       if (index === 4) {
-        window.dispatchEvent(new Event('onboardingPrevStep4'));
+        window.dispatchEvent(new Event(OnboardingEvent.STEP_BEFORE_CHOOSING_RECITER_FROM_LIST));
         return { automaticallyProceed: false };
       }
 
       if (index === 3) {
-        window.dispatchEvent(new Event('onboardingPrevStep3'));
+        window.dispatchEvent(new Event(OnboardingEvent.STEP_BEFORE_RECITER_LIST_ITEM_CLICK));
         return { automaticallyProceed: false };
       }
     }
@@ -117,21 +119,22 @@ const useHandleOnboardingEvents = ({
     if (group === OnboardingGroup.READING_EXPERIENCE) {
       // if the user clicks next when the step is play audio of an Ayah
       if (index === 1) {
-        window.dispatchEvent(new Event('onboardingNextPlayAudioStep'));
+        window.dispatchEvent(new Event(OnboardingEvent.STEP_AFTER_PLAY_AUDIO_CLICK));
         return { automaticallyProceed: false };
       }
       // if the user clicks next when the step is clicking on the dot icon to open the audio player settings menu
       if (index === 2) {
-        window.dispatchEvent(new Event('openAudioPlayerTriggerStep'));
+        window.dispatchEvent(new Event(OnboardingEvent.STEP_AFTER_AUDIO_PLAYER_TRIGGER));
         return { automaticallyProceed: false };
       }
       // if the user clicks next when the step is clicking the reciters menu item in the audio player settings menu
       if (index === 3) {
-        window.dispatchEvent(new Event('openNextRecitersListStep'));
+        window.dispatchEvent(new Event(OnboardingEvent.STEP_AFTER_RECITER_LIST_ITEM_CLICK));
         return { automaticallyProceed: false };
       }
+      // if the user clicks next when the step is choosing a reciter from the reciters list
       if (index === 4) {
-        window.dispatchEvent(new Event('onboardingNextStep4'));
+        window.dispatchEvent(new Event(OnboardingEvent.STEP_AFTER_CHOOSING_RECITER_FROM_LIST));
         return { automaticallyProceed: false };
       }
     }
