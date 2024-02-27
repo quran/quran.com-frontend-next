@@ -114,6 +114,11 @@ const useHandleOnboardingEvents = ({
     }
 
     if (group === OnboardingGroup.READING_EXPERIENCE) {
+      // if the user clicks next when the step is play audio of an Ayah
+      if (index === 1) {
+        window.dispatchEvent(new Event('onboardingNextPlayAudioStep'));
+        return { automaticallyProceed: false };
+      }
       if (index === 4) {
         window.dispatchEvent(new Event('onboardingNextStep4'));
         return { automaticallyProceed: false };

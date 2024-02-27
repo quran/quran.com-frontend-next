@@ -1,12 +1,12 @@
-import React, { useContext } from 'react';
+import React, { useCallback, useContext, useEffect } from 'react';
 
 import { useSelector, useSelector as useXstateSelector } from '@xstate/react';
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 
-import Spinner from '../dls/Spinner/Spinner';
 import styles from '../QuranReader/TranslationView/TranslationViewCell.module.scss';
 
+import Spinner from '@/components/dls/Spinner/Spinner';
 import { useOnboarding } from '@/components/Onboarding/OnboardingProvider';
 import Button, { ButtonShape, ButtonSize, ButtonType, ButtonVariant } from '@/dls/Button/Button';
 import useGetQueryParamOrXstateValue from '@/hooks/useGetQueryParamOrXstateValue';
@@ -40,7 +40,7 @@ const PlayVerseAudioButton: React.FC<PlayVerseAudioProps> = ({
     QueryParam.Reciter,
   );
   const isVisible = useSelector(audioService, (state) => state.matches('VISIBLE'));
-  const { isActive, activeStepGroup, nextStep } = useOnboarding();
+  const { isActive, activeStepGroup, nextStep, activeStepIndex } = useOnboarding();
 
   const isVerseLoading = useXstateSelector(audioService, (state) =>
     selectIsVerseLoading(state, verseKey),
@@ -50,7 +50,7 @@ const PlayVerseAudioButton: React.FC<PlayVerseAudioProps> = ({
   const chaptersData = useContext(DataContext);
   const chapterData = getChapterData(chaptersData, chapterId.toString());
 
-  const onPlayClicked = () => {
+  const onPlayClicked = useCallback(() => {
     // eslint-disable-next-line i18next/no-literal-string
     logButtonClick(`${isTranslationView ? 'translation_view' : 'reading_view'}_play_verse`);
 
@@ -70,7 +70,31 @@ const PlayVerseAudioButton: React.FC<PlayVerseAudioProps> = ({
       // audio player menu item step
       nextStep();
     }
-  };
+  }, [
+    activeStepGroup,
+    audioService,
+    chapterId,
+    isActive,
+    isTranslationView,
+    isVisible,
+    nextStep,
+    onActionTriggered,
+    reciterId,
+    reciterQueryParamDifferent,
+    verseNumber,
+  ]);
+
+  useEffect(() => {
+    const handlePlayAudioStep = () => {
+      onPlayClicked();
+    };
+
+    window.addEventListener('onboardingNextPlayAudioStep', handlePlayAudioStep);
+
+    return () => {
+      window.removeEventListener('onboardingNextPlayAudioStep', handlePlayAudioStep);
+    };
+  }, [nextStep, onPlayClicked]);
 
   if (isVerseLoading) {
     return (
