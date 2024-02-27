@@ -4,13 +4,12 @@ import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 import { useSelector, shallowEqual } from 'react-redux';
 
-import { useOnboarding } from '../Onboarding/OnboardingProvider';
-
 import styles from './Navbar.module.scss';
 import NavbarBody from './NavbarBody';
 
 import Banner from '@/components/Banner/Banner';
 import LearningPlanButton from '@/components/Course/Buttons/NavbarButton';
+import { useOnboarding } from '@/components/Onboarding/OnboardingProvider';
 import { selectNavbar } from '@/redux/slices/navbar';
 
 const Navbar = () => {

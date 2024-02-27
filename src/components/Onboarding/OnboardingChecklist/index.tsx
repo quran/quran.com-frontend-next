@@ -5,12 +5,12 @@ import useTranslation from 'next-translate/useTranslation';
 import { useDispatch, useSelector } from 'react-redux';
 
 import OnboardingProgress from '../OnboardingProgress';
-import { useOnboarding } from '../OnboardingProvider';
 import { onboardingChecklist } from '../steps';
 
 import useShowChecklistAfterInterval from './hooks/useShowChecklistAfterInterval';
 import styles from './OnboardingChecklist.module.scss';
 
+import { useOnboarding } from '@/components/Onboarding/OnboardingProvider';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
 import CheckIcon from '@/icons/check.svg';

@@ -2,8 +2,7 @@ import { useEffect } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import { useOnboarding } from '../../OnboardingProvider';
-
+import { useOnboarding } from '@/components/Onboarding/OnboardingProvider';
 import { selectOnboarding, setIsChecklistVisible } from '@/redux/slices/onboarding';
 import { logEvent } from '@/utils/eventLogger';
 

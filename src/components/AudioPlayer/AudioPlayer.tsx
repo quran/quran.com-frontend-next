@@ -6,10 +6,9 @@ import { useSelector } from '@xstate/react';
 import classNames from 'classnames';
 import dynamic from 'next/dynamic';
 
-import { useOnboarding } from '../Onboarding/OnboardingProvider';
-
 import styles from './AudioPlayer.module.scss';
 
+import { useOnboarding } from '@/components/Onboarding/OnboardingProvider';
 import Spinner from '@/dls/Spinner/Spinner';
 import { milliSecondsToSeconds } from '@/utils/datetime';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';

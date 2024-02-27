@@ -6,13 +6,12 @@ import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
-import { useOnboarding } from '../Onboarding/OnboardingProvider';
-
 import styles from './ContextMenu.module.scss';
 import ReadingPreferenceSwitcher, {
   ReadingPreferenceSwitcherType,
 } from './ReadingPreferenceSwitcher';
 
+import { useOnboarding } from '@/components/Onboarding/OnboardingProvider';
 import { SwitchSize } from '@/dls/Switch/Switch';
 import ChevronDownIcon from '@/icons/chevron-down.svg';
 import { selectNavbar } from '@/redux/slices/navbar';

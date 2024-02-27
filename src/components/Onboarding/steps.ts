@@ -205,10 +205,9 @@ export const checklistIndexToOnboardingSteps = (
         ...getDetails('listen'),
         step: {
           ...commonStepOptions,
-          // first element with class play-verse-button
-          target: '.play-verse-button:first-child',
+          target: '#play-verse-button',
           spotlightClicks: true,
-          showNextButton: false,
+          showNextButton: true,
         },
       },
       {
@@ -225,7 +224,6 @@ export const checklistIndexToOnboardingSteps = (
         ...getDetails('select-reciter'),
         step: {
           ...commonStepOptions,
-          // first element with class play-verse-button
           target: '#audio-player-overflow-menu-reciter',
           placement: 'left',
           spotlightClicks: true,
@@ -237,7 +235,6 @@ export const checklistIndexToOnboardingSteps = (
         ...getDetails('select-reciter'),
         step: {
           ...commonStepOptions,
-          // first element with class play-verse-button
           target: '#audio-player-reciter-list',
           spotlightClicks: true,
           placement: getResponsivePlacement('right', isDeviceMobile),

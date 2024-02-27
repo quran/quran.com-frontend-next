@@ -3,8 +3,6 @@ import { useState, useMemo, useContext, useEffect } from 'react';
 import { useSelector } from '@xstate/react';
 import useTranslation from 'next-translate/useTranslation';
 
-import { useOnboarding } from '../Onboarding/OnboardingProvider';
-
 import AudioExperienceMenu from './Buttons/AudioExperienceMenu';
 import AudioPlaybackRateMenu from './Buttons/AudioPlaybackRateMenu';
 import DownloadAudioButton from './Buttons/DownloadAudioButton';
@@ -12,6 +10,7 @@ import RepeatButton from './Buttons/RepeatButton';
 import SelectReciterMenu from './Buttons/SelectReciterMenu';
 import styles from './OverflowAudioPlayActionsMenuBody.module.scss';
 
+import { useOnboarding } from '@/components/Onboarding/OnboardingProvider';
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import ChevronRightIcon from '@/icons/chevron-right.svg';
 import ExperienceIcon from '@/icons/experience.svg';

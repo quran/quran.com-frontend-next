@@ -5,11 +5,11 @@ import useTranslation from 'next-translate/useTranslation';
 import { Step, TooltipRenderProps } from 'react-joyride';
 
 import useHandleOnboardingEvents from '../OnboardingChecklist/hooks/useHandleOnboardingEvents';
-// eslint-disable-next-line import/no-cycle
-import { useOnboarding } from '../OnboardingProvider';
 
 import styles from './OnboardingStep.module.scss';
 
+// eslint-disable-next-line import/no-cycle
+import { useOnboarding } from '@/components/Onboarding/OnboardingProvider';
 import Button, { ButtonSize, ButtonType, ButtonVariant } from '@/dls/Button/Button';
 import ChevronLeftIcon from '@/icons/chevron-left.svg';
 import ChevronRightIcon from '@/icons/chevron-right.svg';

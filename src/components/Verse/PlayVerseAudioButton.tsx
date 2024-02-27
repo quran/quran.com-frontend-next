@@ -5,9 +5,9 @@ import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 
 import Spinner from '../dls/Spinner/Spinner';
-import { useOnboarding } from '../Onboarding/OnboardingProvider';
 import styles from '../QuranReader/TranslationView/TranslationViewCell.module.scss';
 
+import { useOnboarding } from '@/components/Onboarding/OnboardingProvider';
 import Button, { ButtonShape, ButtonSize, ButtonType, ButtonVariant } from '@/dls/Button/Button';
 import useGetQueryParamOrXstateValue from '@/hooks/useGetQueryParamOrXstateValue';
 import PlayIcon from '@/icons/play-outline.svg';
@@ -65,7 +65,9 @@ const PlayVerseAudioButton: React.FC<PlayVerseAudioProps> = ({
       onActionTriggered();
     }
 
+    // if the user clicks on the play button while the onboarding is active, we should automatically go to the next step
     if (isActive && activeStepGroup === OnboardingGroup.READING_EXPERIENCE && isVisible) {
+      // audio player menu item step
       nextStep();
     }
   };
@@ -93,14 +95,10 @@ const PlayVerseAudioButton: React.FC<PlayVerseAudioProps> = ({
       onClick={onPlayClicked}
       shouldFlipOnRTL={false}
       shape={ButtonShape.Circle}
-      className={classNames(
-        styles.iconContainer,
-        styles.verseAction,
-        {
-          [styles.fadedVerseAction]: isTranslationView,
-        },
-        'play-verse-button', // this class is for onboarding
-      )}
+      id="play-verse-button" // this ID is for onboarding
+      className={classNames(styles.iconContainer, styles.verseAction, {
+        [styles.fadedVerseAction]: isTranslationView,
+      })}
       ariaLabel={t('aria.play-surah', { surahName: chapterData.transliteratedName })}
     >
       <span className={classNames(styles.icon, styles.playIcon)}>

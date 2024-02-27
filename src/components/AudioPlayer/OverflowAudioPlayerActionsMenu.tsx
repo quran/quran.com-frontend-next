@@ -1,11 +1,10 @@
 import { useEffect, useState } from 'react';
 
-import { useOnboarding } from '../Onboarding/OnboardingProvider';
-
 import AudioPlayerOverflowMenuTrigger from './AudioPlayerOverflowMenuTrigger';
 import OverflowAudioPlayActionsMenuBody from './OverflowAudioPlayActionsMenuBody';
 import styles from './OverflowAudioPlayerActionsMenu.module.scss';
 
+import { useOnboarding } from '@/components/Onboarding/OnboardingProvider';
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import useDirection from '@/hooks/useDirection';
 import OnboardingGroup from '@/types/OnboardingGroup';

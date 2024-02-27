@@ -2,8 +2,7 @@ import React, { useCallback } from 'react';
 
 import { useDispatch } from 'react-redux';
 
-import { useOnboarding } from './Onboarding/OnboardingProvider';
-
+import { useOnboarding } from '@/components/Onboarding/OnboardingProvider';
 import useScrollDirection, { ScrollDirection } from '@/hooks/useScrollDirection';
 import { setIsVisible } from '@/redux/slices/navbar';
 import {
