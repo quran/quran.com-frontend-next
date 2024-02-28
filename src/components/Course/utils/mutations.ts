@@ -67,7 +67,7 @@ export const mutateLessonAsCompleted = (lessons: Lesson[], lessonId: string): Le
  * @param {string} completedLessonId
  * @returns {Lesson}
  */
-export const getUpdatedLessonData = (
+export const getUpdatedLessonDataAfterCompletion = (
   cachedLessonData: Lesson,
   completedLessonId: string,
 ): Lesson => {
@@ -98,7 +98,7 @@ export const getUpdatedLessonData = (
  * @param {string} completedLessonId
  * @returns {Course}
  */
-export const getUpdatedCourseData = (
+export const getUpdatedCourseDataAfterCompletion = (
   cachedCourseData: Course,
   completedLessonId: string,
 ): Course => {
@@ -133,14 +133,14 @@ export const getUpdatedCourseData = (
  *
  * @returns {void}
  */
-export const mutateCachedLessons = (
+export const mutateCachedLessonsAfterCompletion = (
   mutatorFunction: any,
   courseSlug: string,
   completedLessonId: string,
 ): void => {
   const courseLessonsUrlRegex = `^${makeGetLessonUrlPrefix(courseSlug)}/.+`;
   mutatorFunction(courseLessonsUrlRegex, (cachedLessonData: Lesson) =>
-    getUpdatedLessonData(cachedLessonData, completedLessonId),
+    getUpdatedLessonDataAfterCompletion(cachedLessonData, completedLessonId),
   );
 };
 
@@ -153,12 +153,84 @@ export const mutateCachedLessons = (
  *
  * @returns {void}
  */
-export const mutateCachedCourse = (
+export const mutateCachedCourseAfterCompletion = (
   mutatorFunction: any,
   courseSlug: string,
   completedLessonId: string,
 ): void => {
   mutatorFunction(makeGetCourseUrl(courseSlug), (cachedCourseData: Course) =>
-    getUpdatedCourseData(cachedCourseData, completedLessonId),
+    getUpdatedCourseDataAfterCompletion(cachedCourseData, completedLessonId),
   );
+};
+
+/**
+ * we need to update all the cached lessons of the course to set the current lesson as completed
+ *
+ * @param {any} mutatorFunction
+ * @param {string} courseSlug
+ *
+ * @returns {void}
+ */
+export const mutateCachedLessonsAfterFeedback = (
+  mutatorFunction: any,
+  courseSlug: string,
+): void => {
+  const courseLessonsUrlRegex = `^${makeGetLessonUrlPrefix(courseSlug)}/.+`;
+  mutatorFunction(courseLessonsUrlRegex, (cachedLessonData: Lesson) =>
+    getUpdatedLessonDataAfterFeedback(cachedLessonData),
+  );
+};
+
+/**
+ * update local cache of the course to set the current lesson as completed in the lessons array
+ *
+ * @param {any} mutatorFunction
+ * @param {string} courseSlug
+ *
+ * @returns {void}
+ */
+export const mutateCachedCourseAfterFeedback = (mutatorFunction: any, courseSlug: string): void => {
+  mutatorFunction(makeGetCourseUrl(courseSlug), (cachedCourseData: Course) =>
+    getUpdatedCourseDataAfterFeedback(cachedCourseData),
+  );
+};
+
+/**
+ * This function receives the cached course data and the id of the lesson that was just completed
+ * and expects to return the updated course data with the lesson marked as completed
+ * which will be used to update the local cache without having to call the API again.
+ *
+ * @param {Course} cachedCourseData
+ * @returns {Course}
+ */
+export const getUpdatedCourseDataAfterFeedback = (cachedCourseData: Course): Course => {
+  if (cachedCourseData) {
+    const updatedCourseData = { ...cachedCourseData };
+    updatedCourseData.userHasFeedback = true;
+    return updatedCourseData;
+  }
+  return cachedCourseData;
+};
+
+/**
+ * This function receives the cached lesson data and the id of the lesson that was just completed
+ * and expects to return the updated lesson data with the lesson marked as completed
+ * which will be used to update the local cache without having to call the API again.
+ *
+ * @param {Lesson} cachedLessonData
+ * @returns {Lesson}
+ */
+export const getUpdatedLessonDataAfterFeedback = (cachedLessonData: Lesson): Lesson => {
+  if (cachedLessonData) {
+    const updatedLessonData = { ...cachedLessonData };
+    // if the lesson has a course, we should update it to userHasFeedback = true
+    if (cachedLessonData?.course) {
+      updatedLessonData.course = {
+        ...updatedLessonData.course,
+        userHasFeedback: true,
+      };
+    }
+    return updatedLessonData;
+  }
+  return cachedLessonData;
 };

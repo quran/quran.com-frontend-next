@@ -8,13 +8,13 @@ interface Props extends RootProps {
   maximumRating?: number;
 }
 
-const StarRating = ({
+const StarRating: React.FC<Props> = ({
   maximumRating = 5,
   disabled = false,
   defaultValue = '1',
   value,
   ...props
-}: Props) => {
+}) => {
   return (
     <Root defaultValue={defaultValue} {...props}>
       {/* eslint-disable-next-line @typescript-eslint/naming-convention */}
@@ -36,8 +36,5 @@ const StarRating = ({
     </Root>
   );
 };
-
-StarRating.Root = Root;
-StarRating.Star = Star;
 
 export default StarRating;

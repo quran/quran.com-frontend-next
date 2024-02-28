@@ -5,8 +5,8 @@ import { it, expect, describe } from 'vitest';
 
 import {
   mutateLessonAsCompleted,
-  getUpdatedCourseData,
-  getUpdatedLessonData,
+  getUpdatedCourseDataAfterCompletion,
+  getUpdatedLessonDataAfterCompletion,
   getContinueFromLesson,
 } from './mutations';
 
@@ -115,9 +115,9 @@ describe('mutateLessonAsCompleted', () => {
   });
 });
 
-describe('getUpdatedCourseData', () => {
+describe('getUpdatedCourseDataAfterCompletion', () => {
   it('Returns undefined', async () => {
-    expect(getUpdatedCourseData(undefined, '1')).toEqual(undefined);
+    expect(getUpdatedCourseDataAfterCompletion(undefined, '1')).toEqual(undefined);
   });
   it('Updates course as completed if last lesson is completed', async () => {
     const receivedCourse = {
@@ -145,7 +145,7 @@ describe('getUpdatedCourseData', () => {
       ],
     };
     // @ts-ignore
-    expect(getUpdatedCourseData(receivedCourse, '1')).toBeEquivalentObject({
+    expect(getUpdatedCourseDataAfterCompletion(receivedCourse, '1')).toBeEquivalentObject({
       id: '1',
       title: 'Title 1',
       isCompleted: true,
@@ -197,7 +197,7 @@ describe('getUpdatedCourseData', () => {
       ],
     };
     // @ts-ignore
-    expect(getUpdatedCourseData(receivedCourse, '2')).toBeEquivalentObject({
+    expect(getUpdatedCourseDataAfterCompletion(receivedCourse, '2')).toBeEquivalentObject({
       id: '1',
       title: 'Title 1',
       isCompleted: false,
@@ -224,9 +224,9 @@ describe('getUpdatedCourseData', () => {
     });
   });
 });
-describe('getUpdateLessonData', () => {
+describe('getUpdatedLessonDataAfterCompletion', () => {
   it('Returns undefined', async () => {
-    expect(getUpdatedLessonData(undefined, '1')).toEqual(undefined);
+    expect(getUpdatedLessonDataAfterCompletion(undefined, '1')).toEqual(undefined);
   });
   it("Updates completed lesson's course lessons correctly", async () => {
     const lesson = {
@@ -268,7 +268,7 @@ describe('getUpdateLessonData', () => {
         ],
       },
     } as Lesson;
-    expect(getUpdatedLessonData(lesson, '8')).toEqual({
+    expect(getUpdatedLessonDataAfterCompletion(lesson, '8')).toEqual({
       id: '8',
       title: 'Lesson 8',
       slug: 'lesson-8',
@@ -348,7 +348,7 @@ describe('getUpdateLessonData', () => {
         ],
       },
     } as Lesson;
-    expect(getUpdatedLessonData(lesson, '7')).toEqual({
+    expect(getUpdatedLessonDataAfterCompletion(lesson, '7')).toEqual({
       id: '8',
       title: 'Lesson 8',
       slug: 'lesson-8',

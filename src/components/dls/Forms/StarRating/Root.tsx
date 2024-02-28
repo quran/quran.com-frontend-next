@@ -14,7 +14,7 @@ export enum RadioRootOrientation {
 }
 
 export interface Props {
-  label: string;
+  label?: string | JSX.Element;
   defaultValue?: string;
   onChange?: (value: string) => void;
   value?: string;
@@ -26,7 +26,6 @@ export interface Props {
 
 const Root: React.FC<Props> = ({
   className,
-  label,
   onChange,
   defaultValue,
   value,
@@ -40,7 +39,6 @@ const Root: React.FC<Props> = ({
     <RadioGroupPrimitive.Root
       className={classNames(styles.container, className)}
       dir={direction as Direction}
-      aria-label={label}
       {...(onChange && { onValueChange: onChange })}
       {...(defaultValue && { defaultValue })}
       {...(value && { value })}
