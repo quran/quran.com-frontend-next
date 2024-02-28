@@ -8,6 +8,7 @@ import { FormBuilderFormField } from './FormBuilderTypes';
 import Button, { ButtonProps } from '@/dls/Button/Button';
 import Checkbox from '@/dls/Forms/Checkbox/Checkbox';
 import Input from '@/dls/Forms/Input';
+import StarRating from '@/dls/Forms/StarRating';
 import TextArea from '@/dls/Forms/TextArea';
 import { FormFieldType } from '@/types/FormField';
 
@@ -31,6 +32,7 @@ const FormFieldTypeToComponentMap = {
   [FormFieldType.Phone]: Input,
   [FormFieldType.Number]: Input,
   [FormFieldType.Checkbox]: Checkbox,
+  [FormFieldType.StarRating]: StarRating,
 };
 
 const isFieldTextInput = (type: FormFieldType) => {
