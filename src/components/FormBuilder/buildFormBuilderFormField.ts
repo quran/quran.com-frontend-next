@@ -30,7 +30,7 @@ const buildFormBuilderFormField = (formField: FormField, t: Translate): FormBuil
       rules: formField.rules.map((rule) => ({
         type: rule.type,
         value: rule.value,
-        errorMessage: t(`validation.${rule.errorId}`, {
+        errorMessage: t(`common:validation.${rule.errorId}`, {
           field: capitalize(formField.field),
           ...rule.errorExtraParams,
         }),

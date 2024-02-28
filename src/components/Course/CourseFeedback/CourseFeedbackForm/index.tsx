@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
+import styles from './CourseFeedbackForm.module.scss';
+
 import {
   mutateCachedCourseAfterFeedback,
   mutateCachedLessonsAfterFeedback,
@@ -9,7 +11,6 @@ import {
 import buildFormBuilderFormField from '@/components/FormBuilder/buildFormBuilderFormField';
 import buildTranslatedErrorMessageByErrorId from '@/components/FormBuilder/buildTranslatedErrorMessageByErrorId';
 import FormBuilder from '@/components/FormBuilder/FormBuilder';
-import styles from '@/components/Notes/NoteModal/NoteModal.module.scss';
 import Button from '@/dls/Button/Button';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import useMutateMultipleKeys from '@/hooks/useMutateMultipleKeys';
@@ -78,7 +79,21 @@ const CourseFeedbackForm: React.FC<Props> = ({ course, onSuccess }) => {
         {
           field: 'rating',
           type: FormFieldType.StarRating,
-          defaultValue: 5,
+          // user must pick a rating
+          defaultValue: null,
+          containerClassName: styles.ratingContainer,
+          rules: [
+            {
+              type: RuleType.Required,
+              value: true,
+              errorId: ErrorMessageId.RequiredField,
+              errorMessage: buildTranslatedErrorMessageByErrorId(
+                ErrorMessageId.RequiredField,
+                'rating',
+                t,
+              ),
+            },
+          ],
         },
         {
           field: 'body',
@@ -110,9 +125,11 @@ const CourseFeedbackForm: React.FC<Props> = ({ course, onSuccess }) => {
       isSubmitting={isLoading}
       renderAction={({ isLoading: isSubmitting }) => {
         return (
-          <Button htmlType="submit" isLoading={isSubmitting} isDisabled={isSubmitting}>
-            {t('common:submit')}
-          </Button>
+          <div className={styles.submitButton}>
+            <Button htmlType="submit" isLoading={isSubmitting} isDisabled={isSubmitting}>
+              {t('common:submit')}
+            </Button>
+          </div>
         );
       }}
     />
