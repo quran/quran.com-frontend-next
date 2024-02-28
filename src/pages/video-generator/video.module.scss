@@ -8,7 +8,10 @@
     min-height: calc(8 * var(--spacing-mega));
   }
   
-
+.playerWrapper {
+  position: relative;
+  padding: var(--spacing-large);
+}
 
 .versePreviewContainer {
   padding: var(--spacing-large);
@@ -43,4 +46,48 @@
 .headerContainer {
   display: flex;
   align-items: center;
+}
+
+.verseContainer {
+  margin: 3rem 0px;
+}
+
+.verse {
+  display: flex;
+  flex-direction: row;
+  direction: rtl;
+}
+
+.number {
+  font-size: 12px;
+  text-align: right;
+  display: flex;
+  align-items: center;
+  border-radius: 50%;
+  padding: 0px 20px;
+  border: 1px solid black;
+}
+
+
+.text {
+  font-size: 3.5rem;
+  text-align: right;
+  margin-left: 10px;
+  padding: 0 2rem; 
+}
+
+.translation {
+  padding: 5px;
+  margin: 3px 0px;
+  display: flex;
+  flex-direction: row;
+}
+
+.translationText {
+  font-size: 1.4rem;
+  text-align: right;
+  margin-left: 10px;
+  margin-left: auto; 
+  margin-right: 0; 
+  padding: 0 2rem;
 }
