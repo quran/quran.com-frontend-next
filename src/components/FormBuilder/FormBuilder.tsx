@@ -1,20 +1,45 @@
 import classNames from 'classnames';
 import { Controller, useForm } from 'react-hook-form';
 
-import Button, { ButtonProps } from '../dls/Button/Button';
-import Input from '../dls/Forms/Input';
-
 import buildReactHookFormRules from './buildReactHookFormRules';
 import styles from './FormBuilder.module.scss';
 import { FormBuilderFormField } from './FormBuilderTypes';
+
+import Button, { ButtonProps } from '@/dls/Button/Button';
+import Checkbox from '@/dls/Forms/Checkbox/Checkbox';
+import Input from '@/dls/Forms/Input';
+import TextArea from '@/dls/Forms/TextArea';
+import { FormFieldType } from '@/types/FormField';
 
 export type SubmissionResult<T> = Promise<void | { errors: { [key in keyof T]: string } }>;
 type FormBuilderProps<T> = {
   formFields: FormBuilderFormField[];
   onSubmit: (data: T) => void | SubmissionResult<T>;
   isSubmitting?: boolean;
-  actionText: string;
+  actionText?: string;
   actionProps?: ButtonProps;
+  renderAction?: (props: ButtonProps) => React.ReactNode;
+};
+
+/**
+ * {@see https://legacy.reactjs.org/docs/jsx-in-depth.html#choosing-the-type-at-runtime}
+ */
+const FormFieldTypeToComponentMap = {
+  [FormFieldType.TextArea]: TextArea,
+  [FormFieldType.Text]: Input,
+  [FormFieldType.Password]: Input,
+  [FormFieldType.Phone]: Input,
+  [FormFieldType.Number]: Input,
+  [FormFieldType.Checkbox]: Checkbox,
+};
+
+const isFieldTextInput = (type: FormFieldType) => {
+  return [
+    FormFieldType.Text,
+    FormFieldType.Password,
+    FormFieldType.Phone,
+    FormFieldType.Number,
+  ].includes(type);
 };
 
 const FormBuilder = <T,>({
@@ -23,6 +48,7 @@ const FormBuilder = <T,>({
   actionText,
   actionProps = {},
   isSubmitting,
+  renderAction,
 }: FormBuilderProps<T>) => {
   const { handleSubmit, control, setError } = useForm({ mode: 'onBlur' });
 
@@ -50,19 +76,34 @@ const FormBuilder = <T,>({
             rules={buildReactHookFormRules(formField)}
             name={formField.field}
             render={({ field, fieldState: { error } }) => {
+              const inputFieldProps = {
+                key: formField.field,
+                value: field.value,
+                id: formField.field,
+                name: formField.field,
+                containerClassName: formField.containerClassName,
+                fieldSetLegend: formField.fieldSetLegend,
+                label: formField.label,
+                placeholder: formField.placeholder,
+                onChange: (val) => {
+                  field.onChange(val);
+                  if (formField?.onChange) {
+                    formField.onChange(val);
+                  }
+                },
+                ...(isFieldTextInput(formField.type) && {
+                  htmlType: formField.type,
+                  fixedWidth: false,
+                }),
+                ...(formField.type === FormFieldType.Checkbox &&
+                  typeof formField.checked !== 'undefined' && {
+                    checked: formField.checked,
+                  }),
+              };
+              const InputField = FormFieldTypeToComponentMap[formField.type];
               return (
-                <div className={styles.inputContainer}>
-                  <Input
-                    htmlType={formField.type}
-                    key={formField.field}
-                    value={field.value}
-                    onChange={(val) => field.onChange(val)}
-                    id={formField.field}
-                    name={formField.field}
-                    containerClassName={styles.input}
-                    fixedWidth={false}
-                    placeholder={formField.label}
-                  />
+                <div className={classNames(styles.inputContainer, formField.containerClassName)}>
+                  <InputField {...inputFieldProps} />
                   {error && <span className={styles.errorText}>{error.message}</span>}
                 </div>
               );
@@ -70,17 +111,27 @@ const FormBuilder = <T,>({
           />
         );
       })}
-      <Button
-        {...actionProps}
-        htmlType="submit"
-        isLoading={isSubmitting}
-        onClick={(e) => {
-          e.stopPropagation();
-        }}
-        className={classNames(styles.submitButton, actionProps.className)}
-      >
-        {actionText}
-      </Button>
+      {renderAction ? (
+        renderAction({
+          htmlType: 'submit',
+          isLoading: isSubmitting,
+          onClick: (e) => {
+            e.stopPropagation();
+          },
+        })
+      ) : (
+        <Button
+          {...actionProps}
+          htmlType="submit"
+          isLoading={isSubmitting}
+          onClick={(e) => {
+            e.stopPropagation();
+          }}
+          className={classNames(styles.submitButton, actionProps.className)}
+        >
+          {actionText}
+        </Button>
+      )}
     </form>
   );
 };

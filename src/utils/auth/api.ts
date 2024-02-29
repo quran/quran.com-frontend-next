@@ -3,6 +3,10 @@ import { configureRefreshFetch } from 'refresh-fetch';
 
 import { getTimezone } from '../datetime';
 
+import BookmarkByCollectionIdQueryParams from './types/BookmarkByCollectionIdQueryParams';
+import GetAllNotesQueryParams from './types/GetAllNotesQueryParams';
+import GetAllUserReflectionsQueryParams from './types/GetAllUserReflectionsQueryParams';
+
 import {
   FilterActivityDaysParams,
   QuranActivityDay,
@@ -16,6 +20,7 @@ import {
 import ConsentType from '@/types/auth/ConsentType';
 import { Course } from '@/types/auth/Course';
 import { CreateGoalRequest, Goal, GoalCategory, UpdateGoalRequest } from '@/types/auth/Goal';
+import { Note } from '@/types/auth/Note';
 import { StreakWithMetadataParams, StreakWithUserMetadata } from '@/types/auth/Streak';
 import { Mushaf } from '@/types/QuranReader';
 import {
@@ -39,7 +44,6 @@ import {
   makeBookmarkCollectionsUrl,
   CollectionsQueryParams,
   makeUpdateCollectionUrl,
-  BookmarkByCollectionIdQueryParams,
   makeDeleteCollectionUrl,
   makeAddCollectionBookmarkUrl,
   makeDeleteCollectionBookmarkByIdUrl,
@@ -53,9 +57,15 @@ import {
   makePostReflectionViewsUrl,
   makeUserFeatureFlagsUrl,
   makeUserConsentsUrl,
+  makeNotesUrl,
+  makeDeleteOrUpdateNoteUrl,
+  makeGetNotesByVerseUrl,
+  makeCountNotesWithinRangeUrl,
   makeEnrollUserUrl,
   makeGetCoursesUrl,
   makeGetCourseUrl,
+  makePublishNoteUrl,
+  makeGetUserReflectionsUrl,
 } from '@/utils/auth/apiPaths';
 import { fetcher } from 'src/api';
 import CompleteAnnouncementRequest from 'types/auth/CompleteAnnouncementRequest';
@@ -339,6 +349,42 @@ export const getCourse = async (courseSlugOrId: string): Promise<Course> =>
 export const addCollection = async (collectionName: string) => {
   return postRequest(makeAddCollectionUrl(), { name: collectionName });
 };
+
+export const getAllNotes = async (params: GetAllNotesQueryParams) => {
+  return privateFetcher(makeNotesUrl(params));
+};
+
+export const getAllUserReflections = async (params: GetAllUserReflectionsQueryParams) => {
+  return privateFetcher(makeGetUserReflectionsUrl(params));
+};
+
+export const getNotesByVerseKey = async (verseKey: string) => {
+  return privateFetcher(makeGetNotesByVerseUrl(verseKey));
+};
+
+export const countNotesWithinRange = async (from: string, to: string) => {
+  return privateFetcher(makeCountNotesWithinRangeUrl(from, to));
+};
+
+export const addNote = async (payload: Pick<Note, 'body' | 'ranges' | 'saveToQR'>) => {
+  return postRequest(makeNotesUrl(), payload);
+};
+
+export const publishNoteToQR = async (
+  noteId: string,
+  payload: {
+    body: string;
+    ranges?: string[];
+  },
+): Promise<{ success: boolean }> => postRequest(makePublishNoteUrl(noteId), payload);
+
+export const updateNote = async (id: string, body: string, saveToQR: boolean) =>
+  patchRequest(makeDeleteOrUpdateNoteUrl(id), {
+    body,
+    saveToQR,
+  });
+
+export const deleteNote = async (id: string) => deleteRequest(makeDeleteOrUpdateNoteUrl(id));
 
 export const requestVerificationCode = async (emailToVerify) => {
   return postRequest(makeVerificationCodeUrl(), { email: emailToVerify });

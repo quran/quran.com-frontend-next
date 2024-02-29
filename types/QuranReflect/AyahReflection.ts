@@ -1,5 +1,6 @@
 import ReflectionFilter from './ReflectionFilter';
 import ReflectionLanguage from './ReflectionLanguage';
+import ReflectionReference from './ReflectionReference';
 import TrimmedCitationTexts from './TrimmedCitationTexts';
 
 type AyahReflection = {
@@ -35,6 +36,7 @@ type AyahReflection = {
   trimmedCitationTexts: TrimmedCitationTexts;
   filters: ReflectionFilter[];
   estimatedReadingTime: number;
+  references?: ReflectionReference[];
 };
 
 export default AyahReflection;

@@ -7,7 +7,7 @@ import Button from '@/dls/Button/Button';
 import Link from '@/dls/Link/Link';
 import MoonIllustrationSVG from '@/public/images/moon-illustration.svg';
 import { isLoggedIn } from '@/utils/auth/login';
-import { getReadingGoalNavigationUrl } from '@/utils/navigation';
+import { getLoginNavigationUrl, getReadingGoalNavigationUrl } from '@/utils/navigation';
 
 const StreakIntroductionWidget = () => {
   const { t } = useTranslation('reading-goal');
@@ -31,7 +31,7 @@ const StreakIntroductionWidget = () => {
         <Trans components={{ br: <br /> }} i18nKey="reading-goal:reading-goal-description" />
       </div>
       <div className={styles.actionsContainer}>
-        <Button href={isLoggedIn() ? getReadingGoalNavigationUrl() : '/login'}>
+        <Button href={isLoggedIn() ? getReadingGoalNavigationUrl() : getLoginNavigationUrl()}>
           {t('create-reading-goal')}
         </Button>
       </div>

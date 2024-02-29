@@ -5,6 +5,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import LoginContainer from '@/components/Login/LoginContainer';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
+import { getLoginNavigationUrl } from '@/utils/navigation';
 import AuthError from 'types/AuthError';
 
 const LoginPage = () => {
@@ -28,7 +29,7 @@ const LoginPage = () => {
       toast(errorMessage, {
         status: ToastStatus.Error,
       });
-      replace('/login', null, { shallow: true });
+      replace(getLoginNavigationUrl(), null, { shallow: true });
     }
   }, [query.error, toast, replace, t, getErrorMessage]);
 

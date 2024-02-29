@@ -2,6 +2,13 @@
   "about": "About Us",
   "allow": "Allow",
   "and": "and",
+  "newest": "Newest",
+  "oldest": "Oldest",
+  "save": "Save",
+  "notes": {
+    "my-notes": "My Notes",
+    "title": "My Notes & Reflections"
+  },
   "announcements": {
     "auth-onboarding": {
       "data-sync": {
@@ -175,7 +182,9 @@
     "code": "Verification Code",
     "email": "Email",
     "firstName": "First Name",
-    "lastName": "Last Name"
+    "lastName": "Last Name",
+    "title": "Title",
+    "body": "Body"
   },
   "from": "From",
   "fundraising-sticky-banner": {
@@ -355,7 +364,9 @@
   "validation": {
     "invalid-email": "{{field}} must be a valid email address",
     "invalid-field": "Please input a valid {{field}} value",
-    "required-field": "{{field}} is required"
+    "required-field": "{{field}} is required",
+    "maximum-length": "{{field}} cannot exceed {{value}} characters",
+    "minimum-length": "{{field}} must be at least {{value}} characters"
   },
   "verse": "Verse",
   "verse-bookmark-removed": "Verse bookmark removed!",
@@ -383,5 +394,7 @@
     "title": "Word Click"
   },
   "word-tooltip": "Word Tooltip",
-  "yes": "Yes"
+  "yes": "Yes",
+  "edit": "Edit",
+  "delete": "Delete"
 }

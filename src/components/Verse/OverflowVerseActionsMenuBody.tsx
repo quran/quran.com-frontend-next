@@ -136,13 +136,14 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
         onActionTriggered={onActionTriggered}
         bookmarksRangeUrl={bookmarksRangeUrl}
       />
-      {isLoggedIn() ? (
+
+      {isLoggedIn() && (
         <SaveToCollectionAction
           verse={verse}
           bookmarksRangeUrl={bookmarksRangeUrl}
           isTranslationView={isTranslationView}
         />
-      ) : null}
+      )}
 
       <VerseActionRepeatAudio isTranslationView={isTranslationView} verseKey={verse.verseKey} />
     </div>

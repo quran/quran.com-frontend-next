@@ -11,7 +11,8 @@ import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
 import { VersesResponse } from '@/types/ApiResponses';
 import Translation from '@/types/Translation';
 import Verse from '@/types/Verse';
-import { getPageBookmarks } from '@/utils/auth/api';
+import { countNotesWithinRange, getPageBookmarks } from '@/utils/auth/api';
+import { isLoggedIn } from '@/utils/auth/login';
 import { toLocalizedNumber } from '@/utils/locale';
 
 interface TranslationPageVerse {
@@ -24,6 +25,10 @@ interface TranslationPageVerse {
   initialData: VersesResponse;
   firstVerseInPage: Verse;
   isLastVerseInView: boolean;
+  notesRange: {
+    from: string;
+    to: string;
+  } | null;
 }
 
 const TranslationPageVerse: React.FC<TranslationPageVerse> = ({
@@ -36,6 +41,7 @@ const TranslationPageVerse: React.FC<TranslationPageVerse> = ({
   initialData,
   firstVerseInPage,
   isLastVerseInView,
+  notesRange,
 }) => {
   const { t, lang } = useTranslation('common');
   const containerRef = useRef<HTMLDivElement>(null);
@@ -50,6 +56,13 @@ const TranslationPageVerse: React.FC<TranslationPageVerse> = ({
     );
     return response;
   });
+
+  const { data: notesCount } = useSWRImmutable(
+    notesRange && isLoggedIn() ? `countNotes/${notesRange.from}-${notesRange.to}` : null,
+    async () => {
+      return countNotesWithinRange(notesRange.from, notesRange.to);
+    },
+  );
 
   const getTranslationNameString = (translations?: Translation[]) => {
     let translationName = t('settings.no-translation-selected');
@@ -118,6 +131,7 @@ const TranslationPageVerse: React.FC<TranslationPageVerse> = ({
         quranReaderStyles={quranReaderStyles}
         pageBookmarks={pageBookmarks}
         bookmarksRangeUrl={bookmarksRangeUrl}
+        hasNotes={notesCount && notesCount[verse.verseKey] > 0}
       />
     </div>
   );

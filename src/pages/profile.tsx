@@ -22,7 +22,11 @@ import { removeLastSyncAt } from '@/utils/auth/userDataSync';
 import { getAllChaptersData } from '@/utils/chapter';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getLanguageAlternates } from '@/utils/locale';
-import { getCanonicalUrl, getProfileNavigationUrl } from '@/utils/navigation';
+import {
+  getCanonicalUrl,
+  getLoginNavigationUrl,
+  getProfileNavigationUrl,
+} from '@/utils/navigation';
 import Error from 'src/pages/_error';
 import ChaptersData from 'types/ChaptersData';
 
@@ -47,7 +51,7 @@ const ProfilePage: NextPage<Props> = () => {
 
     await logoutUser();
     removeLastSyncAt();
-    router.push('/login');
+    router.push(getLoginNavigationUrl());
     router.reload();
   };
 

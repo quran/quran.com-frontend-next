@@ -1,0 +1,36 @@
+.note {
+    padding: var(--spacing-large) var(--spacing-medium);
+    cursor: pointer;
+
+    h3 {
+        font-size: var(--font-size-large);
+        font-weight: var(--font-weight-semibold);
+    }
+
+    p {
+        margin-block-start: var(--spacing-xsmall);
+        font-size: var(--font-size-medium);
+        word-wrap: break-word;
+    }
+
+    &:hover {
+        background-color: var(--color-background-alternative-faint);
+        border-radius: var(--border-radius-rounded);
+    }
+}
+
+.noteDate {
+    display: block;
+    margin-block-start: var(--spacing-small);
+    font-size: var(--font-size-xsmall);
+    color: var(--color-text-faded);
+}
+
+.seeMore {
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text-link);
+}
+
+.itemBody {
+    white-space: pre-wrap;
+}

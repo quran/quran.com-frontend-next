@@ -1,0 +1,34 @@
+@use "src/styles/breakpoints";
+
+.headerContainer {
+    display: flex;
+    gap: var(--spacing-small);
+    align-items: center;
+
+    padding-block: var(--spacing-large);
+    @include breakpoints.smallerThanTablet {
+        padding-block: var(--spacing-medium);
+    }
+}
+
+.noteHeaderContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.noteDate {
+    display: block;
+    font-size: var(--font-size-xsmall);
+    color: var(--color-text-faded);
+}
+
+.noteBody {
+    margin-block-end: var(--spacing-small);
+    line-break: anywhere;
+    white-space: pre-wrap;
+}
+
+.hashtag {
+    color: var(--color-success-medium);
+}
