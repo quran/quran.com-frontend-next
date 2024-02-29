@@ -19,12 +19,22 @@ export enum Section {
   INSPIRING_READING = 'inspiring_reading',
 }
 
+export enum TitleType {
+  SHOW_MORE = 'show_more',
+  LEARN_MORE = 'learn_more',
+}
+
 type Props = {
   children: React.ReactNode;
   section: Section;
+  titleType?: TitleType;
 };
 
-const ReadMoreCollapsible: React.FC<Props> = ({ children, section }) => {
+const ReadMoreCollapsible: React.FC<Props> = ({
+  children,
+  section,
+  titleType = TitleType.LEARN_MORE,
+}) => {
   const { t } = useTranslation('common');
 
   const onCollapseOpenChange = (isCollapseOpen: boolean) => {
@@ -39,7 +49,11 @@ const ReadMoreCollapsible: React.FC<Props> = ({ children, section }) => {
       <Collapsible
         direction={CollapsibleDirection.Right}
         onOpenChange={(isCollapseOpen) => onCollapseOpenChange(isCollapseOpen)}
-        title={<span className={styles.title}>{t('learn-more')}</span>}
+        title={
+          <span className={styles.title}>
+            {t(titleType === TitleType.LEARN_MORE ? 'learn-more' : 'show-more')}
+          </span>
+        }
         prefix={<ChevronDownIcon />}
         shouldRotatePrefixOnToggle
       >

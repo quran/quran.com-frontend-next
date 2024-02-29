@@ -10,7 +10,10 @@ import NextSeoWrapper from '@/components/NextSeoWrapper';
 import PageContainer from '@/components/PageContainer';
 import Hero from '@/components/RamadanActivity/Hero';
 import InlineLink from '@/components/RamadanActivity/InlineLink';
-import ReadMoreCollapsible, { Section } from '@/components/RamadanActivity/ReadMoreCollapsible';
+import ReadMoreCollapsible, {
+  Section,
+  TitleType,
+} from '@/components/RamadanActivity/ReadMoreCollapsible';
 import Button, { ButtonVariant } from '@/dls/Button/Button';
 import styles from '@/pages/contentPage.module.scss';
 import { logButtonClick } from '@/utils/eventLogger';
@@ -338,7 +341,10 @@ const RamadanActivitiesPage: NextPage = (): JSX.Element => {
                 />
               </li>
             </ul>
-            <ReadMoreCollapsible section={Section.INSPIRING_READING}>
+            <ReadMoreCollapsible
+              section={Section.INSPIRING_READING}
+              titleType={TitleType.SHOW_MORE}
+            >
               <ul>
                 <li>
                   <InlineLink
