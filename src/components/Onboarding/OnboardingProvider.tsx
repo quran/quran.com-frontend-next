@@ -74,7 +74,12 @@ export const OnboardingProvider = React.memo(({ children }: { children: React.Re
 
   const setStep = useCallback(
     (group: OnboardingGroup, step: number) => {
-      dispatch(setActiveStepIndex({ group, index: step, totalSteps: allSteps[group].length }));
+      let totalSteps = allSteps[group].length;
+      if (isLoggedIn()) {
+        // don't count the first step (login button)
+        totalSteps -= 1;
+      }
+      dispatch(setActiveStepIndex({ group, index: step, totalSteps }));
     },
     [dispatch, allSteps],
   );
@@ -93,11 +98,11 @@ export const OnboardingProvider = React.memo(({ children }: { children: React.Re
     const result = allSteps[activeStep.group].map((s) => s.step);
     if (activeStep.group === OnboardingGroup.PERSONALIZED_FEATURES) {
       if (isLoggedIn()) {
-        // show all but the first step
+        // show all but the first step (login button)
         return result.slice(1);
       }
 
-      // only show the first step
+      // only show the first step (login button)
       return [result[0]];
     }
     return result;
