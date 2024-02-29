@@ -1,7 +1,8 @@
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 import download from 'downloadjs';
 import * as htmlToImage from 'html-to-image';
+import html2canvas from 'html2canvas';
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from './GeneratedImage.module.scss';
@@ -21,6 +22,13 @@ type Props = {
 const GeneratedImage = ({ verse }: Props) => {
   const { t } = useTranslation('common');
   const chaptersData = useContext(DataContext);
+  const [canShare, setCanShare] = useState(false);
+
+  useEffect(() => {
+    if ('share' in window.navigator) {
+      setCanShare(true);
+    }
+  }, []);
 
   const surah = chaptersData[verse.chapterId];
 
@@ -31,6 +39,23 @@ const GeneratedImage = ({ verse }: Props) => {
         download(dataUrl, 'wallpaper.png');
       });
     }
+  };
+
+  const handleShareImage = () => {
+    const element = document.getElementById(NODE_ID);
+    html2canvas(element).then(async (canvas) => {
+      const url = canvas.toDataURL('image/jpg', 1);
+      const blob = await (await fetch(url)).blob();
+      const file = new File([blob], 'konsumen-bijak.png', {
+        type: blob.type,
+      });
+
+      window.navigator
+        .share({
+          files: [file],
+        })
+        .catch(() => console.log('share: either cancelled or error'));
+    });
   };
 
   const backgroundImage = (
@@ -80,9 +105,12 @@ const GeneratedImage = ({ verse }: Props) => {
         <Button type={ButtonType.Primary} onClick={handleDownloadImage}>
           {t('share-modal.download')}
         </Button>
-        <Button type={ButtonType.Success} onClick={handleDownloadImage}>
-          {t('share-modal.share')}
-        </Button>
+
+        {canShare && (
+          <Button type={ButtonType.Success} onClick={handleShareImage}>
+            {t('share-modal.share')}
+          </Button>
+        )}
       </div>
     </div>
   );
