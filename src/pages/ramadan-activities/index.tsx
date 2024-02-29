@@ -8,6 +8,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import PageContainer from '@/components/PageContainer';
+import Hero from '@/components/RamadanActivity/Hero';
 import InlineLink from '@/components/RamadanActivity/InlineLink';
 import ReadMoreCollapsible, { Section } from '@/components/RamadanActivity/ReadMoreCollapsible';
 import Button, { ButtonVariant } from '@/dls/Button/Button';
@@ -38,9 +39,21 @@ const RamadanActivitiesPage: NextPage = (): JSX.Element => {
         // imageWidth={1200}
         // imageHeight={630}
       />
+      <Hero />
       <PageContainer>
         <div className={styles.contentPage} dir="ltr">
-          <div className={styles.section}>
+          <div>
+            <p dir="rtl">
+              يَـٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُوا۟ كُتِبَ عَلَيْكُمُ ٱلصِّيَامُ كَمَا كُتِبَ عَلَى
+              ٱلَّذِينَ مِن قَبْلِكُمْ لَعَلَّكُمْ تَتَّقُونَ - البقرة{' '}
+              <InlineLink text="٢:١٨٣" href="/2:183" />
+            </p>
+            <p>
+              O believers! Fasting is prescribed for you—as it was for those before you—so perhaps
+              you will become mindful ˹of Allah˺. Quran <InlineLink text="2:183" href="/2:183" />.
+            </p>
+          </div>
+          <div className={styles.subSection}>
             <h1>Mindful Fasting📿</h1>
             <div className={styles.subHeading}>
               A QuranReflect interactive Program with Shaykh Hammad Fahim.
@@ -76,7 +89,7 @@ const RamadanActivitiesPage: NextPage = (): JSX.Element => {
               </Button>
             </div>
           </div>
-          <div className={styles.section}>
+          <div className={styles.subSection}>
             <h1>Ayah Lookup Challenge 🔎</h1>
             <div className={styles.subHeading}>with Dr Mohannad Hakeem</div>
             <div>
@@ -121,7 +134,7 @@ const RamadanActivitiesPage: NextPage = (): JSX.Element => {
               </Button>
             </div>
           </div>
-          <div className={styles.section}>
+          <div className={styles.subSection}>
             <h1>MAS Ramadan Quiz Trivia (live) 🎙️</h1>
             <div>
               A daily 10-minute live trivia quiz featuring 10 quick questions from the Quran.
@@ -153,7 +166,7 @@ const RamadanActivitiesPage: NextPage = (): JSX.Element => {
               </Button>
             </div>
           </div>
-          <div className={styles.section}>
+          <div className={styles.subSection}>
             <h1>Learning Plans on Quran.com 📖</h1>
             <div>
               <b>Boost your knowledge with easy-to-follow lessons</b> that keep you growing in your
@@ -204,7 +217,7 @@ const RamadanActivitiesPage: NextPage = (): JSX.Element => {
               </Button>
             </div>
           </div>
-          <div className={styles.section}>
+          <div className={styles.subSection}>
             <h1>
               Keep a 30 day Quran reading streak and create a custom goal with Quran Growth Journey!
               🏅
@@ -229,7 +242,7 @@ const RamadanActivitiesPage: NextPage = (): JSX.Element => {
               </Button>
             </div>
           </div>
-          <div className={styles.section}>
+          <div className={styles.subSection}>
             <h1>Invite people to learn about the Quran this Ramadan 💌</h1>
             <div>
               Help someone who has never read the Quran learn more and begin their Quran journey!
@@ -280,7 +293,7 @@ const RamadanActivitiesPage: NextPage = (): JSX.Element => {
               </Button>
             </div>
           </div>
-          <div className={styles.section}>
+          <div className={styles.subSection}>
             <h1>Reflecting In Crisis ❤️‍🩹</h1>
             <div>
               Join the QuranReflect community for an on-going reflection theme dedicated to
@@ -305,7 +318,7 @@ const RamadanActivitiesPage: NextPage = (): JSX.Element => {
               </Button>
             </div>
           </div>
-          <div className={styles.section}>
+          <div className={styles.subSection}>
             <h1>Inspiring Ramadan Reading 🌞</h1>
             <div>
               Explore a collection of inspirational Ramadan reflections from the QuranReflect
@@ -420,7 +433,7 @@ const RamadanActivitiesPage: NextPage = (): JSX.Element => {
               </ul>
             </ReadMoreCollapsible>
           </div>
-          <div className={styles.section}>
+          <div className={styles.subSection}>
             We hope these activities enrich your Ramadan, deepening your connection with the Quran.
             Share this list of activities with anyone who may benefit.
           </div>
