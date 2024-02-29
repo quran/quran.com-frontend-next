@@ -1,20 +1,22 @@
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 
-import ReadingGoalAmount from '../ReadingGoal/ReadingGoalAmount';
-
 import styles from './ReadingProgressPage.module.scss';
 
+import ReadingGoalAmount, {
+  ReadingGoalAmountContext,
+} from '@/components/ReadingGoal/ReadingGoalAmount';
 import Button from '@/dls/Button/Button';
 import CircularProgressbar from '@/dls/CircularProgress';
 import Skeleton from '@/dls/Skeleton/Skeleton';
 import { StreakWithMetadata } from '@/hooks/auth/useGetStreakWithMetadata';
+import { CurrentQuranActivityDay } from '@/types/auth/ActivityDay';
 import { logButtonClick } from '@/utils/eventLogger';
 import { toLocalizedNumber } from '@/utils/locale';
 import { getReadingGoalNavigationUrl } from '@/utils/navigation';
 
 interface ProgressPageGoalWidgetProps {
-  currentActivityDay: StreakWithMetadata['currentActivityDay'];
+  currentActivityDay: CurrentQuranActivityDay;
   goal?: StreakWithMetadata['goal'];
   isLoading: boolean;
 }
@@ -66,7 +68,7 @@ const ProgressPageGoalWidget = ({
       <ReadingGoalAmount
         goal={goal}
         currentActivityDay={currentActivityDay}
-        context="progress_page"
+        context={ReadingGoalAmountContext.ProgressPage}
       />
     );
   };

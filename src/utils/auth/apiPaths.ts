@@ -84,6 +84,7 @@ export const makeGetLessonUrl = (courseSlugOrId: string, lessonSlugOrId: string)
   `${makeGetLessonUrlPrefix(courseSlugOrId)}/${lessonSlugOrId}`;
 
 export const makeEnrollUserUrl = () => makeUrl('courses/enroll');
+export const makeGetUserCoursesCountUrl = () => makeUrl('courses/count');
 
 export const makeCourseFeedbackUrl = (courseId: string) => makeUrl(`courses/${courseId}/feedback`);
 

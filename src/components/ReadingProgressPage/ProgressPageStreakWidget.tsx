@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 
-import CurrentWeekProgress from '../HomePage/ReadingStreak/CurrentWeekProgress';
+import CurrentWeekProgress from '../HomePage/QuranGrowthJourneySection/CollapsibleSection/QuranReadingGoals/CurrentWeekProgress';
 
 import styles from './ReadingProgressPage.module.scss';
 

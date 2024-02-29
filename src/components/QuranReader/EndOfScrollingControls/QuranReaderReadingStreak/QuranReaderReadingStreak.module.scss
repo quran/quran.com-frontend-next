@@ -1,0 +1,41 @@
+@use "src/styles/theme";
+@use "src/styles/breakpoints";
+
+$widget-wrapper-background-color: var(--color-success-faded);
+
+.wrapper {
+    background-color: $widget-wrapper-background-color;
+    padding: var(--spacing-mega);
+    position: relative;
+
+    @include breakpoints.tablet {
+        border-radius: var(--border-radius-rounded);
+    }
+
+    --day-circle-color: #{$widget-wrapper-background-color};
+}
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    width: 100%;
+    gap: var(--spacing-mega);
+
+    @include breakpoints.desktop {
+        gap: 0;
+        align-items: center;
+        flex-direction: row;
+    }
+}
+
+.illustrationContainer {
+    width: calc(5 * var(--spacing-mega));
+    height: calc(5 * var(--spacing-mega));
+    position: absolute;
+    inset-block-end: calc(-1 * var(--spacing-medium));
+    inset-inline-end: 0;
+    opacity: var(--opacity-10);
+    color: var(--color-success-deep);
+    pointer-events: none;
+}

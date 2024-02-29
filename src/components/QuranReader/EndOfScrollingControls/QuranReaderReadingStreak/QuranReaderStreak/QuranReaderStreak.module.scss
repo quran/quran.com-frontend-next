@@ -1,0 +1,33 @@
+.dailyProgressContainer {
+    width: 100%;
+}
+
+.streakTitle {
+    color: var(--color-success-medium);
+    font-size: var(--font-size-jumbo);
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+}
+
+.dailyGoal {
+    margin-block-start: var(--spacing-xsmall);
+    font-size: var(--font-size-large);
+    font-weight: var(--font-weight-medium);
+}
+
+.progressContainer {
+    margin-block-start: var(--spacing-mega);
+}
+
+.progressTextContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-block-start: var(--spacing-small);
+
+    > p {
+        font-size: var(--font-size-large);
+        font-weight: var(--font-weight-bold);
+    }
+}

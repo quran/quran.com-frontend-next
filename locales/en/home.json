@@ -1,18 +1,44 @@
 {
-    "no-bookmarks": "You do not have any bookmarks yet",
-    "noble-quran": "The Noble Quran",
-    "read-juz": "Read Juz",
-    "recently-read": "Recently Read",
-    "revelation-order-disclaimer": "This view shows the chronological order of Surahs in the Quran based on when they were revealed to the Prophet Muhammad <hover>ﷺ<\/hover>. The chronology is a subject of scholarly opinion and some Surahs were revealed in parts at different times. The ordering here is based on the work of <link>Tanzil.net<\/link>. [Note: the compiled Mushaf order from al-Fatiha to al-Nas is a matter of consensus.]",
-    "tab": {
-        "bookmarks": "Bookmarks",
-        "popular": "Popular"
+  "no-bookmarks": "You do not have any bookmarks yet",
+  "noble-quran": "The Noble Quran",
+  "read-juz": "Read Juz",
+  "recently-read": "Recently Read",
+  "revelation-order-disclaimer": "This view shows the chronological order of Surahs in the Quran based on when they were revealed to the Prophet Muhammad <hover>ﷺ</hover>. The chronology is a subject of scholarly opinion and some Surahs were revealed in parts at different times. The ordering here is based on the work of <link>Tanzil.net</link>. [Note: the compiled Mushaf order from al-Fatiha to al-Nas is a matter of consensus.]",
+  "tab": {
+    "bookmarks": "Bookmarks",
+    "popular": "Popular"
+  },
+  "view-all-bookmarks": "View all bookmarks",
+  "voice": {
+    "trigger": "Quick access to anything"
+  },
+  "welcome": {
+    "title": "It's the Month of the Quran! Help millions of users get access to the guidance of the Quran."
+  },
+  "qgj": {
+    "title": "Quran Growth Journey",
+    "desc": {
+      "logged-in": "",
+      "logged-in-no-goal": "",
+      "logged-out": "<bold>Reading Streaks</bold> - Challenge yourself to keep a 30 day streak this Ramadan! Simply <link>log in</link>"
     },
-    "view-all-bookmarks": "View all bookmarks",
-    "voice": {
-        "trigger": "Quick access to anything"
+    "quran-reading-goals": {
+      "title": "Custom Quran Reading Goals",
+      "desc": {
+        "logged-out": "Do you want to read 10 minutes a day, complete a Juz in a month, or finish the entire Quran in a year? It’s easy to create a custom goal and track your progress"
+      }
     },
-    "welcome": {
-        "title": "It's the Month of the Quran! Help millions of users get access to the guidance of the Quran."
+    "learning-plans": {
+      "title": "Learning Plans",
+      "desc": {
+        "logged-in": "Ever started a learning program and got off track halfway through? Learning plans are divided into manageable chunks and we track your progress until you reach the finish line. Explore our current offering of courses today",
+        "logged-in-no-plans": "Ever started a learning program and got off track halfway through? Learning plans are divided into manageable chunks and we track your progress until you reach the finish line. Explore our current offering of courses today",
+        "logged-out": "Ever started a learning program and got off track halfway through? Learning plans are divided into manageable chunks and we track your progress until you reach the finish line. Explore our current offering of courses today"
+      },
+      "cta": {
+        "view-plans": "All Plans",
+        "my-plans": "My Plans"
+      }
     }
+  }
 }
