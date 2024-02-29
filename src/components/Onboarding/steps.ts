@@ -283,7 +283,7 @@ export const checklistIndexToOnboardingSteps = (
         ...getDetails('streak'),
         step: {
           ...commonStepOptions,
-          target: '#streak-widget',
+          target: '#qgj-widget',
         },
       },
       {

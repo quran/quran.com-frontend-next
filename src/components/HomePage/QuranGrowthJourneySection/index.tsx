@@ -28,7 +28,7 @@ const QuranGrowthJourneySection = () => {
   };
 
   return (
-    <div className={styles.wrapper}>
+    <div className={styles.wrapper} id="qgj-widget">
       <div className={styles.illustrationContainer}>
         <MoonIllustrationSVG />
       </div>
