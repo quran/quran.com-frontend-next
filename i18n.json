@@ -62,6 +62,7 @@
     "/profile": ["home", "profile", "collection", "quran-reader"],
     "/login": ["login"],
     "/about-the-quran": ["about-quran"],
-    "/notes": ["notes"]
+    "/notes": ["notes"],
+    "/ramadan-activities": ["ramadan-activities"]
   }
 }
