@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
@@ -12,6 +12,7 @@ import { logButtonClick } from '@/utils/eventLogger';
 type Props = {
   course: Course;
   source: FeedbackSource;
+  shouldOpenModal?: boolean;
 };
 
 export enum FeedbackSource {
@@ -19,9 +20,19 @@ export enum FeedbackSource {
   LessonPage = 'lesson_page',
 }
 
-const CourseFeedback: React.FC<Props> = ({ source, course }) => {
+const CourseFeedback: React.FC<Props> = ({ source, course, shouldOpenModal = false }) => {
   const { t } = useTranslation('learn');
   const [isModalOpen, setIsModalOpen] = useState(false);
+
+  /**
+   * listen to changes from the parent component. This will happen when the user
+   * completes last lesson of the course.
+   */
+  useEffect(() => {
+    if (shouldOpenModal) {
+      setIsModalOpen(true);
+    }
+  }, [shouldOpenModal]);
 
   const onAddFeedbackClicked = () => {
     logButtonClick('add_course_feedback', {
