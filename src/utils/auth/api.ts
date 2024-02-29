@@ -66,6 +66,7 @@ import {
   makeGetCourseUrl,
   makePublishNoteUrl,
   makeGetUserReflectionsUrl,
+  makeCourseFeedbackUrl,
 } from '@/utils/auth/apiPaths';
 import { fetcher } from 'src/api';
 import CompleteAnnouncementRequest from 'types/auth/CompleteAnnouncementRequest';
@@ -339,6 +340,20 @@ export const getBookmarksByCollectionId = async (
 export const enrollUser = async (courseId: string): Promise<{ success: boolean }> =>
   postRequest(makeEnrollUserUrl(), {
     courseId,
+  });
+
+export const postCourseFeedback = async ({
+  courseId,
+  rating,
+  body,
+}: {
+  courseId: string;
+  rating: number;
+  body?: string;
+}): Promise<{ success: boolean }> =>
+  postRequest(makeCourseFeedbackUrl(courseId), {
+    rating,
+    body,
   });
 
 export const getCourses = async (): Promise<Course[]> => privateFetcher(makeGetCoursesUrl());

@@ -53,6 +53,24 @@ export const WithRequiredField = () => {
   );
 };
 
+export const WithStarRating = () => {
+  return (
+    <FormBuilder
+      formFields={[
+        {
+          defaultValue: '5',
+          field: 'rating',
+          type: FormFieldType.StarRating,
+        },
+      ]}
+      actionText="Submit"
+      onSubmit={(data) => {
+        console.log(data);
+      }}
+    />
+  );
+};
+
 export const WithEmailValidation = () => {
   return (
     <FormBuilder

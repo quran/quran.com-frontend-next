@@ -36,6 +36,7 @@ export type Course = {
   lessons?: Lesson[];
   isUserEnrolled?: boolean;
   isCompleted?: boolean;
+  userHasFeedback?: boolean;
   continueFromLesson?: string;
 };
 

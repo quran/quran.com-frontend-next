@@ -7,6 +7,7 @@ export enum FormFieldType {
   Number = 'number',
   TextArea = 'textarea',
   Checkbox = 'checkbox',
+  StarRating = 'starRating',
 }
 
 type FormField = {
