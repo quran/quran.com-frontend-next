@@ -18,9 +18,9 @@
   "qgj": {
     "title": "Quran Growth Journey",
     "desc": {
-      "logged-in": "",
-      "logged-in-no-goal": "",
-      "logged-out": "<bold>Reading Streaks</bold> - Challenge yourself to keep a 30 day streak this Ramadan! Simply <link>log in</link>"
+      "logged-out": "<bold>Reading Streaks</bold> - Challenge yourself to keep a 30 day streak this Ramadan! Simply <link>log in</link>",
+      "logged-in-no-goal": "<bold>Reading Streaks</bold> - Challenge yourself to keep a 30 day streak this Ramadan!",
+      "logged-in": ""
     },
     "quran-reading-goals": {
       "title": "Custom Quran Reading Goals",
