@@ -34,14 +34,16 @@ const LearningPlansButtons = () => {
   };
 
   const viewPlansButton = (
-    <Button
-      onClick={onViewPlansButtonClicked}
-      href={getCoursesNavigationUrl()}
-      className={styles.viewPlansBtn}
-      size={ButtonSize.Small}
-    >
-      {t('qgj.learning-plans.cta.all-plans')}
-    </Button>
+    <div className={styles.buttonsContainer}>
+      <Button
+        onClick={onViewPlansButtonClicked}
+        href={getCoursesNavigationUrl()}
+        className={styles.viewPlansBtn}
+        size={ButtonSize.Small}
+      >
+        {t('qgj.learning-plans.cta.all-plans')}
+      </Button>
+    </div>
   );
 
   if (!isLoggedIn()) {
