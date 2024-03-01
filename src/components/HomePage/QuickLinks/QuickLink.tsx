@@ -1,6 +1,6 @@
 import React from 'react';
 
-import Button, { ButtonShape, ButtonSize, ButtonType } from '@/dls/Button/Button';
+import Button, { ButtonShape, ButtonSize, ButtonType, ButtonVariant } from '@/dls/Button/Button';
 import { logButtonClick } from '@/utils/eventLogger';
 
 interface Props {
@@ -16,7 +16,8 @@ const QuickLink: React.FC<Props> = ({ text, slug, className, logKey, isExternalL
     size={ButtonSize.Small}
     className={className}
     href={isExternalLink ? slug : `/${slug}`}
-    type={ButtonType.Success}
+    type={ButtonType.Secondary}
+    variant={ButtonVariant.Compact}
     shape={ButtonShape.Pill}
     onClick={() => {
       logButtonClick(`quick_link_${logKey}`);

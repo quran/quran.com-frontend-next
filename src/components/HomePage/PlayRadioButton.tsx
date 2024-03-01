@@ -10,7 +10,7 @@ import { StationType } from '../Radio/types';
 import styles from './PlayRadioButton.module.scss';
 import RadioInformation from './RadioInformation';
 
-import Button, { ButtonType, ButtonSize } from '@/dls/Button/Button';
+import Button, { ButtonType, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import Spinner from '@/dls/Spinner/Spinner';
 import PauseIcon from '@/icons/pause.svg';
 import PlayIcon from '@/icons/play-arrow.svg';
@@ -62,7 +62,8 @@ const PlayRadioButton = () => {
     <div className={styles.container}>
       <Button
         href={getCoursesNavigationUrl()}
-        type={ButtonType.Success}
+        type={ButtonType.Secondary}
+        variant={ButtonVariant.Outlined}
         size={ButtonSize.Small}
         onClick={onCoursesClicked}
         className={styles.ctaButton}
@@ -77,7 +78,7 @@ const PlayRadioButton = () => {
             id="radio-button"
             type={ButtonType.Success}
             size={ButtonSize.Small}
-            className={styles.ctaButton}
+            className={styles.playPauseButton}
           >
             {t('pause-radio')}
           </Button>
@@ -89,7 +90,7 @@ const PlayRadioButton = () => {
             id="radio-button"
             type={ButtonType.Success}
             size={ButtonSize.Small}
-            className={styles.ctaButton}
+            className={styles.playPauseButton}
           >
             {t('play-radio')}
           </Button>
