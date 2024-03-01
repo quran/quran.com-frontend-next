@@ -34,27 +34,25 @@ const LearningPlansButtons = () => {
   };
 
   const viewPlansButton = (
-    <div className={styles.buttonsContainer}>
-      <Button
-        onClick={onViewPlansButtonClicked}
-        href={getCoursesNavigationUrl()}
-        className={styles.viewPlansBtn}
-        size={ButtonSize.Small}
-      >
-        {t('qgj.learning-plans.cta.all-plans')}
-      </Button>
-    </div>
+    <Button
+      onClick={onViewPlansButtonClicked}
+      href={getCoursesNavigationUrl()}
+      className={styles.viewPlansBtn}
+      size={ButtonSize.Small}
+    >
+      {t('qgj.learning-plans.cta.all-plans')}
+    </Button>
   );
 
   if (!isLoggedIn()) {
-    return viewPlansButton;
+    return <div className={styles.buttonsContainer}>{viewPlansButton}</div>;
   }
 
   /**
    * If we are loading, or if we have an error, or if we have no data, we show the message
    */
   if ((isValidating && !data) || error || (data?.count ?? 0) === 0) {
-    return viewPlansButton;
+    return <div className={styles.buttonsContainer}>{viewPlansButton}</div>;
   }
 
   // user has already 1 plan
