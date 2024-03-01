@@ -3,7 +3,7 @@ import React from 'react';
 
 import styles from './Hero.module.scss';
 
-const Hero = () => {
+const RamadanActivityHero = () => {
   return (
     <div className={styles.container} dir="ltr">
       <div className={styles.rowContainer}>
@@ -24,4 +24,4 @@ const Hero = () => {
   );
 };
 
-export default Hero;
+export default RamadanActivityHero;

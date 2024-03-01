@@ -3,12 +3,11 @@ import React from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useSelector } from 'react-redux';
 
-import TranslationText from '../TranslationText';
-
 import styles from './EmbeddableVerseCell.module.scss';
 
 import { fetcher } from '@/api';
 import DataFetcher from '@/components/DataFetcher';
+import TranslationText from '@/components/QuranReader/TranslationView/TranslationText';
 import VerseTextPreview from '@/components/QuranReader/VerseTextPreview';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';

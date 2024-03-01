@@ -8,8 +8,9 @@ import useTranslation from 'next-translate/useTranslation';
 
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import PageContainer from '@/components/PageContainer';
-import Hero from '@/components/RamadanActivity/Hero';
+import EmbeddableVerseCell from '@/components/QuranReader/TranslationView/EmbeddableVerseCell';
 import InlineLink from '@/components/RamadanActivity/InlineLink';
+import RamadanActivityHero from '@/components/RamadanActivity/RamadanActivityHero';
 import ReadMoreCollapsible, {
   Section,
   TitleType,
@@ -42,20 +43,10 @@ const RamadanActivitiesPage: NextPage = (): JSX.Element => {
         // imageWidth={1200}
         // imageHeight={630}
       />
-      <Hero />
+      <RamadanActivityHero />
       <PageContainer>
         <div className={styles.contentPage} dir="ltr">
-          <div>
-            <p dir="rtl">
-              يَـٰٓأَيُّهَا ٱلَّذِينَ ءَامَنُوا۟ كُتِبَ عَلَيْكُمُ ٱلصِّيَامُ كَمَا كُتِبَ عَلَى
-              ٱلَّذِينَ مِن قَبْلِكُمْ لَعَلَّكُمْ تَتَّقُونَ - البقرة{' '}
-              <InlineLink text="٢:١٨٣" href="/2:183" />
-            </p>
-            <p>
-              O believers! Fasting is prescribed for you—as it was for those before you—so perhaps
-              you will become mindful ˹of Allah˺. Quran <InlineLink text="2:183" href="/2:183" />.
-            </p>
-          </div>
+          <EmbeddableVerseCell chapterId={2} verseNumber={183} />
           <div className={styles.subSection}>
             <h1>Mindful Fasting📿</h1>
             <div className={styles.subHeading}>
