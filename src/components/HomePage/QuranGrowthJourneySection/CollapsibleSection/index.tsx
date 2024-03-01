@@ -10,7 +10,7 @@ import QuranReadingGoals from '@/components/HomePage/QuranGrowthJourneySection/C
 import Collapsible, { CollapsibleDirection } from '@/dls/Collapsible/Collapsible';
 import ChevronDownIcon from '@/icons/chevron-down.svg';
 import GoalIcon from '@/icons/goal-1.svg';
-import ReaderIcon from '@/icons/reader.svg';
+import ReaderIcon from '@/icons/learning-plan.svg';
 
 export enum CollapsibleType {
   QuranReadingGoalsType = 'quran_reading_goals',

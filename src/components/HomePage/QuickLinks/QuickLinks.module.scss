@@ -26,5 +26,6 @@ $link-shadow: 0px 3px 11px 1px rgb(0 0 0 / 3%);
   margin-block-end: var(--spacing-xxsmall);
   &:hover {
     box-shadow: var(--shadow-large);
+    color: var(--color-text-inverse);
   }
 }
