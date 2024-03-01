@@ -1,0 +1,12 @@
+@use "src/styles/breakpoints";
+
+.container {
+    text-align: left !important;
+}
+
+.verseContainer {
+    @include breakpoints.smallerThanTablet {
+        min-height: calc(9 * var(--spacing-mega));
+    }
+    min-height: calc(5 * var(--spacing-mega));
+}

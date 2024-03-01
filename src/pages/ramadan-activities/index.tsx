@@ -3,8 +3,11 @@
 /* eslint-disable i18next/no-literal-string */
 /* eslint-disable jsx-a11y/anchor-has-content */
 /* eslint-disable jsx-a11y/control-has-associated-label */
+import classNames from 'classnames';
 import { NextPage } from 'next';
 import useTranslation from 'next-translate/useTranslation';
+
+import pageStyles from './RamadanActivities.module.scss';
 
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import PageContainer from '@/components/PageContainer';
@@ -45,8 +48,10 @@ const RamadanActivitiesPage: NextPage = (): JSX.Element => {
       />
       <RamadanActivityHero />
       <PageContainer>
-        <div className={styles.contentPage} dir="ltr">
-          <EmbeddableVerseCell chapterId={2} verseNumber={183} />
+        <div className={classNames(pageStyles.container, styles.contentPage)} dir="ltr">
+          <div className={pageStyles.verseContainer}>
+            <EmbeddableVerseCell chapterId={2} verseNumber={183} />
+          </div>
           <div className={styles.subSection}>
             <h1>Mindful Fasting📿</h1>
             <div className={styles.subHeading}>
