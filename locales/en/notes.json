@@ -19,5 +19,12 @@
   "click-to-see-more": "click to see more",
   "private-notes": "Notes",
   "posted-reflections": "Posted Reflections",
-  "save-post-to-qr": "Save & post to QuranReflect"
+  "save-post-to-qr": "Save & post to QuranReflect",
+  "reflections-intro": {
+    "title": "Know more about Reflections",
+    "line-1": "To view likes, interact with comments, or edit your posted reflections, visit QuranReflect.com",
+    "line-2": "Please note: editing a post in QuranReflect will not automatically update your post on Quran.com",
+    "line-3": "If you do not have a QuranReflect.com account, you can sign in with your Quran.com account",
+    "line-4": "Content that is not suitable for public viewing will be hidden or deleted. Users posting inappropriate content will be blocked."
+  }
 }

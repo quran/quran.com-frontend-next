@@ -304,7 +304,7 @@ export const getLoginNavigationUrl = () => '/login';
 
 export const getReadingGoalProgressNavigationUrl = () => '/reading-goal/progress';
 
-export const getNotesNavigationUrl = () => '/notes';
+export const getNotesNavigationUrl = () => '/notes-and-reflections';
 
 /**
  * Update the browser history with the new url.
