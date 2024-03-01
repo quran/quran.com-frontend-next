@@ -6,6 +6,8 @@ import styles from './CollapsibleSection.module.scss';
 import CollapsibleTitle from './CollapsibleTitle';
 import LearningPlans from './LearningPlans';
 
+import LearningPlansButtons from '@/components/HomePage/QuranGrowthJourneySection/CallToActionButtons/LearningPlansButtons';
+import QuranGoalsButtons from '@/components/HomePage/QuranGrowthJourneySection/CallToActionButtons/QuranGoalsButtons';
 import QuranReadingGoals from '@/components/HomePage/QuranGrowthJourneySection/CollapsibleSection/QuranReadingGoals';
 import Collapsible, { CollapsibleDirection } from '@/dls/Collapsible/Collapsible';
 import ChevronDownIcon from '@/icons/chevron-down.svg';
@@ -36,9 +38,15 @@ const CollapsibleSection: React.FC<Props> = ({ onOpenChange, type }) => {
         shouldOpen={isOpen}
         title={
           type === CollapsibleType.QuranReadingGoalsType ? (
-            <CollapsibleTitle title={t('qgj.quran-reading-goals.title')} icon={<GoalIcon />} />
+            <div>
+              <CollapsibleTitle title={t('qgj.quran-reading-goals.title')} icon={<GoalIcon />} />
+              <QuranGoalsButtons />
+            </div>
           ) : (
-            <CollapsibleTitle title={t('qgj.learning-plans.title')} icon={<ReaderIcon />} />
+            <div>
+              <CollapsibleTitle title={t('qgj.learning-plans.title')} icon={<ReaderIcon />} />
+              <LearningPlansButtons />
+            </div>
           )
         }
         prefix={<ChevronDownIcon />}
