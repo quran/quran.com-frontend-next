@@ -298,6 +298,7 @@ export const getCollectionNavigationUrl = (collectionId: string) => {
 export const getReadingGoalNavigationUrl = () => '/reading-goal';
 export const getMyCoursesNavigationUrl = () => '/my-learning-plans';
 export const getCoursesNavigationUrl = () => '/learning-plans';
+export const getRamadanActivitiesNavigationUrl = () => '/ramadan-activities';
 
 export const getLoginNavigationUrl = () => '/login';
 

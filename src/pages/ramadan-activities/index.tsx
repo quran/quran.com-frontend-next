@@ -19,9 +19,9 @@ import Button, { ButtonVariant } from '@/dls/Button/Button';
 import styles from '@/pages/contentPage.module.scss';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getLanguageAlternates } from '@/utils/locale';
-import { getCanonicalUrl } from '@/utils/navigation';
+import { getCanonicalUrl, getRamadanActivitiesNavigationUrl } from '@/utils/navigation';
 
-const PATH = '/ramadan-activities';
+const PATH = getRamadanActivitiesNavigationUrl();
 const RamadanActivitiesPage: NextPage = (): JSX.Element => {
   const { t, lang } = useTranslation('ramadan-activities');
 
