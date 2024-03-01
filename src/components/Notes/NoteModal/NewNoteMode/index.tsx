@@ -1,5 +1,5 @@
 /* eslint-disable max-lines */
-import React from 'react';
+import React, { useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import { useSWRConfig } from 'swr';
@@ -45,6 +45,7 @@ const NewNoteMode: React.FC<Props> = ({ verseKey }) => {
   const { t } = useTranslation('common');
   const toast = useToast();
   const { mutate, cache } = useSWRConfig();
+  const [isCheckboxTicked, setIsCheckboxTicked] = useState(false);
 
   const { mutate: addNote, isMutating: isAddingNote } = useMutation<Note, NoteFormData>(
     async ({ body, saveToQR }) => {
@@ -169,13 +170,16 @@ const NewNoteMode: React.FC<Props> = ({ verseKey }) => {
           ],
           type: FormFieldType.TextArea,
           containerClassName: styles.bodyInput,
-          fieldSetLegend: t('notes:note'),
+          fieldSetLegend: t('notes:notes-and-reflcs'),
         },
         {
           field: 'saveToQR',
           label: <ShareToQrCheckboxLabel />,
           defaultValue: false,
           type: FormFieldType.Checkbox,
+          onChange: (val: boolean) => {
+            setIsCheckboxTicked(val);
+          },
         },
       ].map((field) => buildFormBuilderFormField(field, t))}
       onSubmit={onSubmit}
@@ -191,7 +195,7 @@ const NewNoteMode: React.FC<Props> = ({ verseKey }) => {
                 e.stopPropagation();
               }}
             >
-              {t('common:save')}
+              {isCheckboxTicked ? t('notes:save-post-to-qr') : t('notes:save-privately')}
             </Button>
           </div>
         </div>

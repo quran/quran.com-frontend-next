@@ -152,7 +152,7 @@ const EditForm: React.FC<Props> = ({
           ],
           type: FormFieldType.TextArea,
           containerClassName: styles.bodyInput,
-          fieldSetLegend: t('notes:note'),
+          fieldSetLegend: t('notes:notes-and-reflcs'),
         },
       ].map((field) => buildFormBuilderFormField(field, t))}
       onSubmit={onSubmit}
@@ -182,18 +182,7 @@ const EditForm: React.FC<Props> = ({
                   setSaveToQR(false);
                 }}
               >
-                {t('common:save')}
-              </Button>
-              <Button
-                htmlType="submit"
-                isLoading={isLoading}
-                isDisabled={isLoading}
-                onClick={(e) => {
-                  e.stopPropagation();
-                  setSaveToQR(true);
-                }}
-              >
-                {t('notes:save-and-share')}
+                {t('notes:save-privately')}
               </Button>
             </div>
           </div>

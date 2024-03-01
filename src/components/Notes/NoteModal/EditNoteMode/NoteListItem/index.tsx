@@ -200,7 +200,7 @@ const NoteListItem: React.FC<Props> = ({
           <div className={styles.noteBody}>{note.body}</div>
           <div className={styles.shareButtonContainer}>
             <Button size={ButtonSize.Small} onClick={onPublishOnQrClicked} {...buttonProps}>
-              {t('notes:publish-on-qr')}
+              {t('notes:post-on-qr')}
             </Button>
           </div>
         </>

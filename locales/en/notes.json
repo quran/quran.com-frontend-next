@@ -1,21 +1,23 @@
 {
   "note": "Note",
+  "notes-and-reflcs": "Notes & Reflections",
   "empty": "No notes found",
   "empty-reflections": "No reflections found",
   "delete-note": "Delete note",
-  "body-placeholder": "Write your note here",
+  "body-placeholder": "Use this space to take notes, or to write a reflection.",
   "save-success": "Note has been saved successfully",
+  "save-privately": "Save Privately",
   "update-success": "Note has been updated successfully",
   "save-publish-failed": "Note has been saved successfully but failed to publish",
   "update-publish-failed": "Note has been updated successfully but failed to publish",
   "delete-success": "Note has been deleted successfully",
   "export-success": "Note has been published to your account on QuranReflect successfully",
   "share-to-qr": "Share to QuranReflect.com",
-  "publish-on-qr": "Publish On QuranReflect",
-  "save-and-share": "Save & publish On QuranReflect",
+  "post-on-qr": "Post On QuranReflect",
   "share-to-qr-desc": "Share as <b>{{name}}</b>. Audience is <b>QuranReflect users</b>",
   "qr-tooltip": "<span><link>QuranReflect</link> is a social platform for sharing reflections on the Quran. Connect around the Quran, connect with what matters.</span>",
   "click-to-see-more": "click to see more",
   "private-notes": "Notes",
-  "public-reflections": "Public Reflections"
+  "posted-reflections": "Posted Reflections",
+  "save-post-to-qr": "Save & post to QuranReflect"
 }

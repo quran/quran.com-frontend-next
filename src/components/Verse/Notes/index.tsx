@@ -52,7 +52,7 @@ const VerseNotes = ({ verseKey, isTranslationView, hasNotes }: VerseNotesProps) 
       <Button
         className={classNames(styles.iconContainer, styles.verseAction)}
         onClick={onItemClicked}
-        tooltip={t('notes.my-notes')}
+        tooltip={t('notes.title')}
         type={ButtonType.Success}
         shape={ButtonShape.Circle}
         variant={ButtonVariant.Ghost}

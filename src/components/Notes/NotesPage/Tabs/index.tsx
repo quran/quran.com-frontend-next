@@ -33,7 +33,7 @@ const Tabs = () => {
         value: Tab.PRIVATE_NOTES,
       },
       {
-        name: <TabSwitcherItem icon={<SyllabusIcon />} value={t('public-reflections')} />,
+        name: <TabSwitcherItem icon={<SyllabusIcon />} value={t('posted-reflections')} />,
         value: Tab.PUBLIC_REFLECTIONS,
       },
     ],
