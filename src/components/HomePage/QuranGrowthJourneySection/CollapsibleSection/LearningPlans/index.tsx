@@ -28,11 +28,7 @@ const LearningPlans = () => {
    * If we are loading, or if we have an error, or if we have no data, we show the message
    */
   if ((isValidating && !data) || error || (data?.count ?? 0) === 0) {
-    return (
-      <div>
-        <p className={styles.desc}>{t('qgj.learning-plans.desc.logged-in-no-plans')}</p>
-      </div>
-    );
+    return <p className={styles.desc}>{t('qgj.learning-plans.desc.logged-in-no-plans')}</p>;
   }
   // user has at least 1 plan
   return <p className={styles.desc}>{t('qgj.learning-plans.desc.logged-in')}</p>;
