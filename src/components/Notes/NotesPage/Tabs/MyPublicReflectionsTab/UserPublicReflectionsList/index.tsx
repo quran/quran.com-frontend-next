@@ -3,6 +3,7 @@ import { useMemo, useState } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import { Virtuoso } from 'react-virtuoso';
 
+import ReflectionsTabIntroduction from './ReflectionsTabIntroduction';
 import styles from './UserPublicReflectionsList.module.scss';
 import UserPublicReflectionsListItem from './UserPublicReflectionsListItem';
 
@@ -74,6 +75,7 @@ const UserPublicReflectionsList = ({
         />
       )}
 
+      <ReflectionsTabIntroduction />
       <Virtuoso
         data={reflections}
         overscan={10}

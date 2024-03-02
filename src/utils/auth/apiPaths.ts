@@ -1,9 +1,9 @@
 import stringify from '../qs-stringify';
 
 import BookmarkByCollectionIdQueryParams from './types/BookmarkByCollectionIdQueryParams';
-import GetAllNotesQueryParams from './types/GetAllNotesQueryParams';
 import GetAllUserReflectionsQueryParams from './types/GetAllUserReflectionsQueryParams';
 import GetNoteByAttachedEntityParams from './types/GetNoteByAttachedEntityParams';
+import GetAllNotesQueryParams from './types/Note/GetAllNotesQueryParams';
 
 import { ActivityDayType, FilterActivityDaysParams } from '@/types/auth/ActivityDay';
 import { EstimateGoalRequest, GoalCategory } from '@/types/auth/Goal';

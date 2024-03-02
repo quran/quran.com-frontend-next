@@ -4,14 +4,14 @@ import { GetStaticProps } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 
 import NextSeoWrapper from '@/components/NextSeoWrapper';
-import Tabs from '@/components/Notes/NotesPage/Tabs';
+import NotesTabs from '@/components/Notes/NotesPage/Tabs';
 import useRequireAuth from '@/hooks/auth/useRequireAuth';
 import layoutStyles from '@/pages/index.module.scss';
 import { getAllChaptersData } from '@/utils/chapter';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl, getNotesNavigationUrl } from '@/utils/navigation';
 
-const NotesPage = () => {
+const NotesAndReflectionsPage = () => {
   const { t, lang } = useTranslation();
   useRequireAuth();
 
@@ -29,7 +29,7 @@ const NotesPage = () => {
       <div className={layoutStyles.pageContainer}>
         <div className={layoutStyles.flow}>
           <div className={layoutStyles.flowItem}>
-            <Tabs />
+            <NotesTabs />
           </div>
         </div>
       </div>
@@ -47,4 +47,4 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   };
 };
 
-export default NotesPage;
+export default NotesAndReflectionsPage;

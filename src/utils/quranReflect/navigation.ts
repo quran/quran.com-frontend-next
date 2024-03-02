@@ -23,7 +23,7 @@ export const getQuranReflectAuthorUrl = (username: string) => {
   return `${API_HOST}/${username}`;
 };
 
-export const getQuranReflectPostUrl = (postId: number, viewComments = false) =>
+export const getQuranReflectPostUrl = (postId: number | string, viewComments = false) =>
   `${API_HOST}/posts/${postId}${viewComments ? '#comments' : ''}`;
 
 export const getQuranReflectTagUrl = (tag: string) =>
