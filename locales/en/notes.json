@@ -14,6 +14,7 @@
   "export-success": "Note has been published to your account on QuranReflect successfully",
   "share-to-qr": "Share to QuranReflect.com",
   "post-on-qr": "Post On QuranReflect",
+  "view-on-qr": "View On QuranReflect",
   "share-to-qr-desc": "Share as <b>{{name}}</b>. Audience is <b>QuranReflect users</b>",
   "qr-tooltip": "<span><link>QuranReflect</link> is a social platform for sharing reflections on the Quran. Connect around the Quran, connect with what matters.</span>",
   "click-to-see-more": "click to see more",

@@ -4,8 +4,8 @@ import { configureRefreshFetch } from 'refresh-fetch';
 import { getTimezone } from '../datetime';
 
 import BookmarkByCollectionIdQueryParams from './types/BookmarkByCollectionIdQueryParams';
-import GetAllNotesQueryParams from './types/GetAllNotesQueryParams';
 import GetAllUserReflectionsQueryParams from './types/GetAllUserReflectionsQueryParams';
+import GetAllNotesQueryParams from './types/Note/GetAllNotesQueryParams';
 
 import {
   FilterActivityDaysParams,
@@ -59,7 +59,6 @@ import {
   makeUserConsentsUrl,
   makeNotesUrl,
   makeDeleteOrUpdateNoteUrl,
-  makeGetNotesByVerseUrl,
   makeCountNotesWithinRangeUrl,
   makeEnrollUserUrl,
   makeGetCoursesUrl,
@@ -375,10 +374,6 @@ export const getAllNotes = async (params: GetAllNotesQueryParams) => {
 
 export const getAllUserReflections = async (params: GetAllUserReflectionsQueryParams) => {
   return privateFetcher(makeGetUserReflectionsUrl(params));
-};
-
-export const getNotesByVerseKey = async (verseKey: string) => {
-  return privateFetcher(makeGetNotesByVerseUrl(verseKey));
 };
 
 export const countNotesWithinRange = async (from: string, to: string) => {

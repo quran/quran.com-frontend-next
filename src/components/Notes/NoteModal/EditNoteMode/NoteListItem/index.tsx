@@ -11,11 +11,12 @@ import Button, { ButtonSize, ButtonType, ButtonVariant } from '@/dls/Button/Butt
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import useMutation from '@/hooks/useMutation';
 import EditIcon from '@/icons/edit.svg';
-import { Note } from '@/types/auth/Note';
+import { AttachedEntityType, Note } from '@/types/auth/Note';
 import { deleteNote as baseDeleteNote, publishNoteToQR } from '@/utils/auth/api';
 import { makeGetNoteByIdUrl, makeGetNotesByVerseUrl } from '@/utils/auth/apiPaths';
 import { dateToReadableFormat } from '@/utils/datetime';
 import { logButtonClick } from '@/utils/eventLogger';
+import { getQuranReflectPostUrl } from '@/utils/quranReflect/navigation';
 import { isVerseKeyWithinRanges } from '@/utils/verse';
 
 type Props = {
@@ -146,12 +147,21 @@ const NoteListItem: React.FC<Props> = ({
     deleteNote(note.id);
   };
 
+  const onViewOnQrClicked = (e) => {
+    e.stopPropagation();
+    logButtonClick('qr_view_note_post');
+  };
+
   const shouldDisableActions = isDeletingNote || isPostingOnQuranReflect;
 
   const buttonProps = {
     isDisabled: shouldDisableActions,
     isLoading: shouldDisableActions,
   };
+
+  const noteReflectionId = note?.attachedEntities?.find(
+    (entity) => entity.type === AttachedEntityType.REFLECTION,
+  )?.id;
 
   return (
     <div className={styles.container}>
@@ -199,9 +209,21 @@ const NoteListItem: React.FC<Props> = ({
           </div>
           <div className={styles.noteBody}>{note.body}</div>
           <div className={styles.shareButtonContainer}>
-            <Button size={ButtonSize.Small} onClick={onPublishOnQrClicked} {...buttonProps}>
-              {t('notes:post-on-qr')}
-            </Button>
+            {noteReflectionId ? (
+              <Button
+                size={ButtonSize.Small}
+                href={getQuranReflectPostUrl(noteReflectionId)}
+                isNewTab
+                onClick={onViewOnQrClicked}
+                {...buttonProps}
+              >
+                {t('notes:view-on-qr')}
+              </Button>
+            ) : (
+              <Button size={ButtonSize.Small} onClick={onPublishOnQrClicked} {...buttonProps}>
+                {t('notes:post-on-qr')}
+              </Button>
+            )}
           </div>
         </>
       )}
