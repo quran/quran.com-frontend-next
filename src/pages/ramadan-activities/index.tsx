@@ -38,13 +38,7 @@ const RamadanActivitiesPage: NextPage = (): JSX.Element => {
         title={t('ramadan-activities')}
         url={getCanonicalUrl(lang, PATH)}
         languageAlternates={getLanguageAlternates(PATH)}
-        // TODO: add desc and image
         description={t('ramadan-activities-desc')}
-        // image={getAboutTheQuranImageUrl({
-        //   locale: lang,
-        // })}
-        // imageWidth={1200}
-        // imageHeight={630}
       />
       <RamadanActivityHero />
       <PageContainer>
