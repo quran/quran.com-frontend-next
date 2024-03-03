@@ -44,7 +44,7 @@ const RamadanActivitiesPage: NextPage = (): JSX.Element => {
       <PageContainer>
         <div className={classNames(pageStyles.container, styles.contentPage)} dir="ltr">
           <div className={pageStyles.verseContainer}>
-            <EmbeddableVerseCell chapterId={2} verseNumber={183} />
+            <EmbeddableVerseCell chapterId={2} verseNumber={183} fontScale={3} />
           </div>
           <div className={styles.subSection}>
             <h1>Mindful Fasting📿</h1>
