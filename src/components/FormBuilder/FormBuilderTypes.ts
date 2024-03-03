@@ -11,4 +11,5 @@ export type FormBuilderFormField = Pick<FormField, 'field' | 'type'> & {
   checked?: boolean;
   fieldSetLegend?: string;
   onChange?: (value: unknown) => void;
+  extraSection?: JSX.Element;
 };

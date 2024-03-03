@@ -1,0 +1,21 @@
+.container {
+    border: 1px var(--color-borders-hairline) solid;
+    border-radius: var(--border-radius-default);
+    padding: var(--spacing-xsmall);
+    margin-block: var(--spacing-xxsmall);
+}
+
+.title {
+    font-weight: var(--font-weight-semibold);
+}
+
+.sectionHeader {
+    font-weight: var(--font-weight-bold);
+    margin-block-end: var(--spacing-small);
+}
+
+.sectionContainer {
+    margin-block: var(--spacing-small);
+    padding-block-end: var(--spacing-small);
+    border-bottom: 1px var(--color-borders-hairline) solid;
+}
