@@ -1,201 +1,70 @@
-import { AbsoluteFill, Audio, interpolate, useCurrentFrame, Sequence, Video as RVideo } from "remotion"
-import { surahs } from './constants/surahs'
-import { audios } from './constants/audios';
-import { Player } from "@remotion/player";
-import { NextPage } from 'next';
-import useTranslation from 'next-translate/useTranslation';
-import { useRouter } from 'next/router';
+import { Player, PlayerRef } from "@remotion/player";
+import { NextPage } from "next";
+import useTranslation from "next-translate/useTranslation";
+import { useRouter } from "next/router";
+import layoutStyle from "../index.module.scss";
 
-import Error from '@/pages/_error';
-import layoutStyle from '../index.module.scss';
-import styles from './video.module.scss';
+import Error from "@/pages/_error";
+import styles from "./video.module.scss";
 
-import { getJuzNavigationUrl } from '@/utils/navigation';
-import classNames from 'classnames';
+import { getJuzNavigationUrl } from "@/utils/navigation";
+import classNames from "classnames";
 
-import { VersesResponse } from 'types/ApiResponses';
-import ChaptersData from 'types/ChaptersData';
-import QuranFontSection from './QuranFontSectionSetting';
-import ReciterSectionSetting from './ReciterSectionSetting';
+import {
+  getAvailableReciters,
+  getChapterAudioData,
+  getChapterVerses,
+} from "@/api";
+import { getAllChaptersData } from "@/utils/chapter";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
+import { VersesResponse } from "types/ApiResponses";
+import ChaptersData from "types/ChaptersData";
+import VideoContent from "./VideoContent";
+import VideoSettings from "./VideoSettings";
+import { API_PARAMS, getNormalizedTimestamps, stls } from "./VideoUtils";
 
+/**                    Discussion 1
+ + Discussion around how the UI will look like for end users
+ + Adding options to customize videos. Reciter, Translation, Translation source, Font type, range of ayahs, text alignment
+ + Ability to change ayah background color, transparency, size. Ability to change stock background videos
+ - We have to be cognizant of the video size.
+ - Think more about the workflow. Is there an option to share it directly to some apps. Or do we let the user download and upload it themselves.
+ - Talal: For this point, I feel like for adding to e.g. instagram stories, whatsapp status etc. It would be better if the user has it in their library. But for other platforms like sharing on twitter, fb, would've been easier if it was something like sharing from a youtube/dailymotion kind of platform, where u just paste the link and it "just works"
+ + Add watermark and the ability to customize locations
+ - Investigate how we will be dealing with long ayahs, including with translations. Do we split them into multiple scenes, adjust relative font size based on number of characters etc.
+ - Templates for users to select from and try their range of ayahs
+ + Preview editor. The changes that users make, how they will appear in the UI. Real-time updates of their changes? just a still frame with their changes all in one place (easier)? ability to play pause etc. Perhaps if the remotion studio editor could be embedded somehow
+ */
+
+/**                    Discussion 2
+ * try older remotion version (latest that works with react 17)
+ * try QFC font, its good wiht all pages
+ * shuold be able to reuse some bits
+ * segments
+ * settings will be independent
+ * video domain can be whitelisted in next.config
+ */
+
+let skipFirstRender = true;
 interface VideoGenerator {
   juzVerses?: VersesResponse;
   hasError?: boolean;
+  reciters: any,
+  verses: any,
+  audio: any,
+  defaultTimestamps: any,
   chaptersData: ChaptersData;
 }
 
-const Title: React.FC<{ title: string }> = ({ title }) => {
-  const frame = useCurrentFrame();
-  const opacity = interpolate(frame, [0, 20], [0, 1], {
-    extrapolateRight: "clamp",
-  });
- 
-  return (
-    <div style={{ opacity, textAlign: "center", fontSize: "7em" }}>{title}</div>
-  );
-};
-
-export const MyVideo = () => {
-  return (
-    <AbsoluteFill>
-      <Title title="Hello World" />
-    </AbsoluteFill>
-  );
-};
-
-export const SURAH = 112
-export const VIDEO_ORIENTATION = 'LANDSCAPE'
-const verseData = getVersesForSurah(SURAH);
-const timestamps = getNormalizedTimestamps(getVersesForSurah(SURAH));
-
-
-function getVersesForSurah(id) {
-  return surahs[id].verses;
-}
-function getSurahDuration(surah) {
-  surah = audios[surah];
-  return surah.audio_files[0].duration;
-}
-
-function getNormalizedIntervals(start, end) {
-  const FRAMES = 30;
-  const normalizedStart = start / 1000 * FRAMES
-  const normalizedEnd = end / 1000 * FRAMES
-  const durationInFrames = normalizedEnd - normalizedStart;
-
-  return {
-    start: normalizedStart,
-    end: normalizedEnd,
-    durationInFrames: durationInFrames
-  }
-}
-
-
-function getNormalizedTimestamps(verses) {
-  console.log('verses', verses);
-  let result = [];
-  for (let i = 0; i < verses.length; i++) {
-    const currentVerse = verses[i];
-    const nextVerse = verses[i + 1] || undefined;
-    let start = 0;
-    let end = 0;
-    if (i === 0) {
-      start = 0;
-      if (nextVerse) {
-        end = nextVerse.timestamps.timestamp_from;
-      }
-    } else if (i === verses.length - 1) {
-      start = currentVerse.timestamps.timestamp_from;
-      end = getSurahDuration(SURAH);
-    } else if (nextVerse) {
-      start = currentVerse.timestamps.timestamp_from;
-      end = nextVerse.timestamps.timestamp_from;
-    }
-
-    result.push(getNormalizedIntervals(start, end))
-  }
-  return result;
-}
-
-const Ayah = ({ data }) => {
-  return (
-    <div className="verseContainer">
-      <div className="verse">
-        <div className="text">
-          {data.text_uthmani}
-        </div>
-        <div className="number">
-          {data.verse_number}
-        </div>
-      </div>
-      {data.translations.map((t: any, i) =>
-      (
-        <div className="translation" key={i}>
-          <div className="translationText">
-            {t.text}
-          </div>
-        </div>
-      ))}
-    </div>
-  )
-
-}
-function getAudioURL(surah) {
-  return audios[surah].audio_files[0].audio_url;
-}
-
-function getVideoURL(surah) {
-  const staticVideos = [
-    'https://static.videezy.com/system/resources/previews/000/046/939/original/waterfall_and_flowers.mp4',
-    'https://static.videezy.com/system/resources/previews/000/046/143/original/Peach_Flower_Tree_2.mp4',
-    'https://static.videezy.com/system/resources/previews/000/035/955/original/4k-2018.12.02-SUNSET-LIGHT-ADJUST.mp4'
-  ]
-  return  staticVideos[Math.floor(Math.random() * staticVideos.length)]
-}
-function getBackground() {
-  const styles = {
-    justifyContent: 'center',
-    color: '#111',
-    width: VIDEO_ORIENTATION === 'LANDSCAPE' ? '70%' : '85%',
-    height: VIDEO_ORIENTATION === 'LANDSCAPE' ? '70%' : '50%',
-    margin: 'auto',
-    border: '2px gray solid',
-    borderRadius: '20px',
-    alignItems: 'center'
-  }
-  const backgrounds = [
-    {
-      backgroundColor: 'rgb(229,227,255)',
-      background: 'linear-gradient(0deg, rgba(229,227,255,1) 0%, rgba(230,246,235,1) 50%, rgba(215,249,255,1) 100%)',
-    },
-    {
-      backgroundColor: 'rgb(244,255,227)',
-      background: 'linear-gradient(0deg, rgba(244,255,227,1) 0%, rgba(255,229,215,1) 100%)'
-    }, 
-    {
-      backgroundColor: 'rgb(202,166,255)',
-      background: 'linear-gradient(330deg, rgba(202,166,255,1) 0%, rgba(152,255,148,1) 100%)'
-    }
-  ]
-  return {
-    ...styles,
-    ...backgrounds[Math.floor(Math.random() * backgrounds.length)]
-  }
-}
-
-const audio = getAudioURL(SURAH)
-const video = getVideoURL(SURAH);
-const stls = getBackground();
-
-
-const MyVideoo = () => {
-  return (
-    <AbsoluteFill style={{
-      backgroundColor: 'rgb(229,227,255)',
-      background: 'linear-gradient(0deg, rgba(229,227,255,1) 0%, rgba(230,246,235,1) 50%, rgba(215,249,255,1) 100%)',
-      justifyContent: 'center'
-    }}>
-      {/* <RVideo loop src={video} /> */}
-      <Audio placeholder="surah kawthar" src={audio} />
-      {verseData && verseData.length > 0 && verseData.map((d, i) => {
-        return (
-          <Sequence key={i} from={timestamps[i].start} durationInFrames={timestamps[i].durationInFrames}>
-            <AbsoluteFill
-              style={stls}
-            >
-              <Ayah data={d} />
-            </AbsoluteFill>
-          </Sequence>
-        )
-      }
-
-      )}
-    </AbsoluteFill>
-  )
-}
-
-const VideoGenerator: NextPage<VideoGenerator> = ({ hasError, juzVerses }) => {
-  const { t, lang } = useTranslation('common');
+const VideoGenerator: NextPage<VideoGenerator> = ({
+  hasError,
+  chaptersData,
+  reciters,
+  verses,
+  audio,
+  defaultTimestamps,
+}) => {
+  const { t, lang } = useTranslation("common");
   const {
     query: { juzId },
   } = useRouter();
@@ -203,6 +72,88 @@ const VideoGenerator: NextPage<VideoGenerator> = ({ hasError, juzVerses }) => {
     return <Error statusCode={500} />;
   }
 
+  const [sceneBackgroundColor, setSceneBackgroundColor] = useState("");
+  const [verseBackgroundColor, setVerseBackgroundColor] = useState("#d8f9fd");
+  const [fontColor, setFontColor] = useState("#071a1c");
+  const [fontSize, setFontSize] = useState("24");
+  const [reciter, setReciter] = useState(1);
+  const [chapter, setChapter] = useState(112);
+  const [verseData, setverseData] = useState(verses?.verses);
+  const [audioData, setAudioData] = useState(audio);
+  const [timestamps, setTimestamps] = useState(defaultTimestamps);
+
+  const playerRef = useRef<PlayerRef>(null);
+
+  useEffect(() => {
+    if (skipFirstRender) {
+      skipFirstRender = false;
+      setTimestamps(getNormalizedTimestamps(audioData));
+      return;
+    }
+    const fetchData = async () => {
+      const verses = await getChapterVerses(chapter, 'en', API_PARAMS);
+      const audio = await getChapterAudioData(reciter, chapter, true);
+      return [verses, audio];
+    };
+    fetchData().then(([verses, audio]) => {
+      seekToBeginning();
+      setverseData(verses?.verses);
+      setAudioData(audio);
+      setTimestamps(getNormalizedTimestamps(audio));
+    });
+  }, [reciter, chapter]);
+
+  const onChapterChange = async (val) => {
+    setChapter(val);
+  };
+
+  const seekToBeginning = useCallback(() => {
+    const { current } = playerRef;
+    if (!current) {
+      return;
+    }
+    current.pause();
+    current.seekTo(0);
+  }, []);
+
+  const recitersOptions = useMemo(() => {
+    return reciters.map((reciter) => ({
+      id: reciter.id,
+      label: reciter.name,
+      value: reciter.reciterId,
+      name: reciter.name,
+    }));
+  }, [t]);
+
+  const VideoContentComponent = () => {
+    return (
+      <VideoContent
+        verses={verseData}
+        audio={audioData}
+        timestamps={timestamps}
+        sceneBackground={sceneBackgroundColor}
+        verseBackground={verseBackgroundColor}
+        fontColor={fontColor}
+        stls={stls}
+      />
+    )
+  }
+    
+
+  const chaptersList = useMemo(() => {
+    const flattenedChaptersList = Object.entries(chaptersData).map((r) => ({
+      id: r[0],
+      ...r[1],
+    }));
+    return flattenedChaptersList.map((chapter) => {
+      return {
+        id: chapter.id,
+        label: chapter.transliteratedName,
+        value: chapter.id,
+        name: chapter.transliteratedName,
+      };
+    });
+  }, [t]);
   const path = getJuzNavigationUrl(Number(juzId));
   return (
     <>
@@ -215,32 +166,66 @@ const VideoGenerator: NextPage<VideoGenerator> = ({ hasError, juzVerses }) => {
       <div className={styles.pageContainer}>
         <div className={classNames(styles.playerWrapper, layoutStyle.flowItem)}>
           <Player
-            component={MyVideoo}
-            durationInFrames={(audios[SURAH].audio_files[0].duration / 1000) * 30}
+            component={VideoContentComponent}
+            durationInFrames={Math.ceil(
+              ((audioData.duration + 500) / 1000) * 30
+            )}
             compositionWidth={1280}
             compositionHeight={720}
             fps={30}
-            autoPlay
-            loop
+            ref={playerRef}
+            // autoPlay
             controls
           />
         </div>
         <div className={layoutStyle.flow}>
-          <div className={classNames(layoutStyle.flowItem, layoutStyle.fullWidth, styles.settingsContainer)}>
-            <div>
-              <QuranFontSection />
-            </div>
-            <div>
-              <ReciterSectionSetting />
-            </div>
-            <div>
-              <QuranFontSection />
-            </div>
-          </div>
+          {/* Rather store these in redux than passing setters like this */}
+          <VideoSettings
+            chaptersList={chaptersList}
+            chapter={chapter}
+            onChapterChange={onChapterChange}
+            recitersOptions={recitersOptions}
+            reciter={reciter}
+            setReciter={setReciter}
+            sceneBackgroundColor={sceneBackgroundColor}
+            setSceneBackgroundColor={setSceneBackgroundColor}
+            verseBackgroundColor={verseBackgroundColor}
+            setVerseBackgroundColor={setVerseBackgroundColor}
+            fontColor={fontColor}
+            setFontColor={setFontColor}
+            fontSize={fontSize}
+            setFontSize={setFontSize}
+          />
         </div>
       </div>
     </>
   );
+};
+
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
+  try {
+    const { reciters } = await getAvailableReciters(locale, []);
+    const chaptersData = await getAllChaptersData(locale);
+    const verses = await getChapterVerses(112, 'en', API_PARAMS);
+    const audio = await getChapterAudioData(1, 112, true);
+    const defaultTimestamps = getNormalizedTimestamps(audio);
+
+    return {
+      props: {
+        audio,
+        verses,
+        chaptersData,
+        defaultTimestamps,
+        reciters: reciters || [],
+      },
+    };
+  } catch (e) {
+    return {
+      props: {
+        hasError: true,
+      },
+    };
+  }
 };
 
 export default VideoGenerator;

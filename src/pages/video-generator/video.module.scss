@@ -1,13 +1,13 @@
 @use "src/styles/breakpoints";
 .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    position: relative;
-    min-height: calc(8 * var(--spacing-mega));
-  }
-  
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  min-height: calc(8 * var(--spacing-mega));
+}
+
 .playerWrapper {
   position: relative;
   padding: var(--spacing-large);
@@ -17,7 +17,6 @@
   padding: var(--spacing-large);
   background-color: var(--color-background-alternative-faded);
 }
-
 
 .pageContainer {
   @include breakpoints.smallerThanTablet {
@@ -68,12 +67,11 @@
   border: 1px solid black;
 }
 
-
 .text {
   font-size: 3.5rem;
   text-align: right;
   margin-left: 10px;
-  padding: 0 2rem; 
+  padding: 0 2rem;
 }
 
 .translation {
@@ -87,7 +85,11 @@
   font-size: 1.4rem;
   text-align: right;
   margin-left: 10px;
-  margin-left: auto; 
-  margin-right: 0; 
+  margin-left: auto;
+  margin-right: 0;
   padding: 0 2rem;
+}
+
+.colorPicker {
+  width: 50%;
 }
