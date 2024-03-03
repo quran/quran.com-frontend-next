@@ -36,6 +36,6 @@
     "your-feedback": "Your Feedback",
     "feedback-placeholder": "Write your feedback",
     "feedback-success": "Thank you for your feedback!",
-    "desc": "Congratulations, You completed '{{courseName}}' learning plan. <br></br> Please review the learning plan and share your feedback to improve the content"
+    "desc": "Congratulations! You have completed the '{{courseName}}' learning plan. <br></br>  Please review the learning plan and share your feedback to help us improve the content."
   }
 }
