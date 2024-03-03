@@ -4,7 +4,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from './GoalButtons.module.scss';
 
-import Button, { ButtonSize, ButtonVariant } from '@/dls/Button/Button';
+import Button, { ButtonSize, ButtonType, ButtonVariant } from '@/dls/Button/Button';
 import { CurrentQuranActivityDay } from '@/types/auth/ActivityDay';
 import { logButtonClick } from '@/utils/eventLogger';
 import {
@@ -41,6 +41,7 @@ const GoalButtons: React.FC<Props> = ({ nextVerseToRead, currentActivityDay }) =
         isDisabled={!nextVerseToRead}
         onClick={onContinueReadingClick}
         size={ButtonSize.Small}
+        type={ButtonType.Success}
       >
         {t(currentActivityDay?.ranges.length ? 'continue-reading' : 'start-reading')}
       </Button>
