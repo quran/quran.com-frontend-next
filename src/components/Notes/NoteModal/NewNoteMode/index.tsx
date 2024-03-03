@@ -5,10 +5,12 @@ import useTranslation from 'next-translate/useTranslation';
 import { useSWRConfig } from 'swr';
 
 import styles from '../NoteModal.module.scss';
+import PublicReflectionCheckboxDescription from '../PublicReflectionCheckboxDescription';
 
 import buildFormBuilderFormField from '@/components/FormBuilder/buildFormBuilderFormField';
 import buildTranslatedErrorMessageByErrorId from '@/components/FormBuilder/buildTranslatedErrorMessageByErrorId';
 import FormBuilder from '@/components/FormBuilder/FormBuilder';
+import ReflectionIntro from '@/components/Notes/NoteModal/ReflectionIntro';
 import ShareToQrCheckboxLabel from '@/components/Notes/NoteModal/ShareToQrCheckboxLabel';
 import Button from '@/dls/Button/Button';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
@@ -124,83 +126,87 @@ const NewNoteMode: React.FC<Props> = ({ verseKey }) => {
     });
   };
   return (
-    <FormBuilder
-      formFields={[
-        {
-          field: 'body',
-          placeholder: t('notes:body-placeholder'),
-          rules: [
-            {
-              type: RuleType.Required,
-              errorId: ErrorMessageId.RequiredField,
-              value: true,
-            },
-            {
-              ...BODY_MIN_VALIDATION_PARAMS,
-              type: RuleType.MinimumLength,
-              errorId: ErrorMessageId.MinimumLength,
-              errorExtraParams: {
-                ...BODY_MIN_VALIDATION_PARAMS,
+    <>
+      <ReflectionIntro />
+      <FormBuilder
+        formFields={[
+          {
+            field: 'body',
+            placeholder: t('notes:body-placeholder'),
+            rules: [
+              {
+                type: RuleType.Required,
+                errorId: ErrorMessageId.RequiredField,
+                value: true,
               },
-              errorMessage: buildTranslatedErrorMessageByErrorId(
-                ErrorMessageId.MinimumLength,
-                'body',
-                t,
-                {
+              {
+                ...BODY_MIN_VALIDATION_PARAMS,
+                type: RuleType.MinimumLength,
+                errorId: ErrorMessageId.MinimumLength,
+                errorExtraParams: {
                   ...BODY_MIN_VALIDATION_PARAMS,
                 },
-              ),
-            },
-            {
-              ...BODY_MAX_VALIDATION_PARAMS,
-              type: RuleType.MaximumLength,
-              errorId: ErrorMessageId.MaximumLength,
-              errorExtraParams: {
-                ...BODY_MAX_VALIDATION_PARAMS,
+                errorMessage: buildTranslatedErrorMessageByErrorId(
+                  ErrorMessageId.MinimumLength,
+                  'body',
+                  t,
+                  {
+                    ...BODY_MIN_VALIDATION_PARAMS,
+                  },
+                ),
               },
-              errorMessage: buildTranslatedErrorMessageByErrorId(
-                ErrorMessageId.MaximumLength,
-                'body',
-                t,
-                {
+              {
+                ...BODY_MAX_VALIDATION_PARAMS,
+                type: RuleType.MaximumLength,
+                errorId: ErrorMessageId.MaximumLength,
+                errorExtraParams: {
                   ...BODY_MAX_VALIDATION_PARAMS,
                 },
-              ),
-            },
-          ],
-          type: FormFieldType.TextArea,
-          containerClassName: styles.bodyInput,
-          fieldSetLegend: t('notes:notes-and-reflcs'),
-        },
-        {
-          field: 'saveToQR',
-          label: <ShareToQrCheckboxLabel />,
-          defaultValue: false,
-          type: FormFieldType.Checkbox,
-          onChange: (val: boolean) => {
-            setIsCheckboxTicked(val);
+                errorMessage: buildTranslatedErrorMessageByErrorId(
+                  ErrorMessageId.MaximumLength,
+                  'body',
+                  t,
+                  {
+                    ...BODY_MAX_VALIDATION_PARAMS,
+                  },
+                ),
+              },
+            ],
+            type: FormFieldType.TextArea,
+            containerClassName: styles.bodyInput,
+            fieldSetLegend: t('notes:notes-and-reflcs'),
           },
-        },
-      ].map((field) => buildFormBuilderFormField(field, t))}
-      onSubmit={onSubmit}
-      isSubmitting={isAddingNote}
-      renderAction={(props) => (
-        <div className={styles.submitContainer}>
-          <div className={styles.actionContainer}>
-            <Button
-              htmlType="submit"
-              isLoading={props.isLoading}
-              isDisabled={props.isLoading}
-              onClick={(e) => {
-                e.stopPropagation();
-              }}
-            >
-              {isCheckboxTicked ? t('notes:save-post-to-qr') : t('notes:save-privately')}
-            </Button>
+          {
+            field: 'saveToQR',
+            label: <ShareToQrCheckboxLabel />,
+            defaultValue: false,
+            type: FormFieldType.Checkbox,
+            extraSection: <PublicReflectionCheckboxDescription />,
+            onChange: (val: boolean) => {
+              setIsCheckboxTicked(val);
+            },
+          },
+        ].map((field) => buildFormBuilderFormField(field, t))}
+        onSubmit={onSubmit}
+        isSubmitting={isAddingNote}
+        renderAction={(props) => (
+          <div className={styles.submitContainer}>
+            <div className={styles.actionContainer}>
+              <Button
+                htmlType="submit"
+                isLoading={props.isLoading}
+                isDisabled={props.isLoading}
+                onClick={(e) => {
+                  e.stopPropagation();
+                }}
+              >
+                {isCheckboxTicked ? t('notes:save-post-to-qr') : t('notes:save-privately')}
+              </Button>
+            </div>
           </div>
-        </div>
-      )}
-    />
+        )}
+      />
+    </>
   );
 };
 

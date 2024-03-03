@@ -107,6 +107,7 @@ const FormBuilder = <T,>({
                 <div className={classNames(styles.inputContainer, formField.containerClassName)}>
                   <InputField {...inputFieldProps} />
                   {error && <span className={styles.errorText}>{error.message}</span>}
+                  {formField.extraSection && <div>{formField.extraSection}</div>}
                 </div>
               );
             }}
