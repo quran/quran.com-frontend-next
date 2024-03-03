@@ -75,7 +75,7 @@ export const OnboardingProvider = React.memo(({ children }: { children: React.Re
   const setStep = useCallback(
     (group: OnboardingGroup, step: number) => {
       let totalSteps = allSteps[group].length;
-      if (isLoggedIn()) {
+      if (isLoggedIn() && group === OnboardingGroup.PERSONALIZED_FEATURES) {
         // don't count the first step (login button)
         totalSteps -= 1;
       }
