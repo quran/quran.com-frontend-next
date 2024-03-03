@@ -5,7 +5,7 @@ import useTranslation from 'next-translate/useTranslation';
 import styles from './CallToActionButtons.module.scss';
 
 import GoalButtons from '@/components/HomePage/QuranGrowthJourneySection/CollapsibleSection/QuranReadingGoals/GoalButtons';
-import Button, { ButtonSize } from '@/dls/Button/Button';
+import Button, { ButtonSize, ButtonType } from '@/dls/Button/Button';
 import useGetRecentlyReadVerseKeys from '@/hooks/auth/useGetRecentlyReadVerseKeys';
 import useGetStreakWithMetadata from '@/hooks/auth/useGetStreakWithMetadata';
 import { logButtonClick } from '@/utils/eventLogger';
@@ -37,6 +37,7 @@ const QuranGoalsButtons = () => {
       <Button
         onClick={onCreateReadingGoalClick}
         size={ButtonSize.Small}
+        type={ButtonType.Success}
         href={getReadingGoalNavigationUrl()}
       >
         {t('create-reading-goal')}

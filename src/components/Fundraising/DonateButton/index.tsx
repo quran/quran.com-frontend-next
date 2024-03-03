@@ -41,7 +41,7 @@ const DonateButton: React.FC<Props> = ({ source, type, isOutlined = false }) => 
   return (
     <Button
       onClick={onDonateClicked}
-      type={ButtonType.Warning}
+      type={ButtonType.Primary}
       size={ButtonSize.Small}
       className={styles.cta}
       {...(isOutlined === true && { variant: ButtonVariant.Outlined })}

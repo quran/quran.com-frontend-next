@@ -5,7 +5,7 @@ import useSWRImmutable from 'swr/immutable';
 
 import styles from './CallToActionButtons.module.scss';
 
-import Button, { ButtonSize } from '@/dls/Button/Button';
+import Button, { ButtonSize, ButtonType } from '@/dls/Button/Button';
 import { getUserCoursesCount } from '@/utils/auth/api';
 import { makeGetUserCoursesCountUrl } from '@/utils/auth/apiPaths';
 import { isLoggedIn } from '@/utils/auth/login';
@@ -39,6 +39,7 @@ const LearningPlansButtons = () => {
       href={getCoursesNavigationUrl()}
       className={styles.viewPlansBtn}
       size={ButtonSize.Small}
+      type={ButtonType.Success}
     >
       {t('qgj.learning-plans.cta.all-plans')}
     </Button>
@@ -63,6 +64,7 @@ const LearningPlansButtons = () => {
         onClick={onMyPlansButtonClicked}
         href={getMyCoursesNavigationUrl()}
         size={ButtonSize.Small}
+        type={ButtonType.Success}
       >
         {t('qgj.learning-plans.cta.my-plans')}
       </Button>
