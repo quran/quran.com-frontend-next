@@ -19,9 +19,10 @@ import { areArraysEqual } from '@/utils/array';
 type Props = {
   chapterId: number;
   verseNumber: number;
+  fontScale?: number;
 };
 
-const EmbeddableVerseCell: React.FC<Props> = ({ chapterId, verseNumber }) => {
+const EmbeddableVerseCell: React.FC<Props> = ({ chapterId, verseNumber, fontScale }) => {
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const { quranFont, mushafLines } = quranReaderStyles;
   const { mushaf } = getMushafId(quranFont, mushafLines);
@@ -46,7 +47,7 @@ const EmbeddableVerseCell: React.FC<Props> = ({ chapterId, verseNumber }) => {
         const firstVerse = data.verses?.[0];
         return (
           <div className={styles.verseContainer}>
-            <VerseTextPreview verses={data.verses} />
+            <VerseTextPreview verses={data.verses} fontScale={fontScale} />
 
             <div>
               {firstVerse.translations?.map((translation) => {
