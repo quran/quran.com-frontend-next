@@ -1,17 +1,18 @@
-import { useCallback, useEffect } from 'react';
+import { useCallback, useEffect } from "react";
 
-import { useRouter } from 'next/router';
-import useTranslation from 'next-translate/useTranslation';
+import { useRouter } from "next/router";
+import useTranslation from "next-translate/useTranslation";
 
-import LoginContainer from '@/components/Login/LoginContainer';
-import { ToastStatus, useToast } from '@/dls/Toast/Toast';
-import { getLoginNavigationUrl } from '@/utils/navigation';
-import AuthError from 'types/AuthError';
+import LoginContainer from "@/components/Login/LoginContainer";
+import PageContainer from "@/components/PageContainer";
+import { ToastStatus, useToast } from "@/dls/Toast/Toast";
+import { getLoginNavigationUrl } from "@/utils/navigation";
+import AuthError from "types/AuthError";
 
 const LoginPage = () => {
   const toast = useToast();
   const { query, replace } = useRouter();
-  const { t } = useTranslation('login');
+  const { t } = useTranslation("login");
 
   const getErrorMessage = useCallback(
     (errorId) => {
@@ -20,7 +21,7 @@ const LoginPage = () => {
       }
       return t(`login-error.${AuthError.AuthenticationError}`);
     },
-    [t],
+    [t]
   );
 
   useEffect(() => {
@@ -33,7 +34,11 @@ const LoginPage = () => {
     }
   }, [query.error, toast, replace, t, getErrorMessage]);
 
-  return <LoginContainer />;
+  return (
+    <PageContainer>
+      <LoginContainer />
+    </PageContainer>
+  );
 };
 
 export default LoginPage;
