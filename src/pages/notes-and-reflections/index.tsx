@@ -3,9 +3,9 @@
 import { GetStaticProps } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 
+import withAuth from '@/components/Auth/withAuth';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import NotesTabs from '@/components/Notes/NotesPage/Tabs';
-import useRequireAuth from '@/hooks/auth/useRequireAuth';
 import layoutStyles from '@/pages/index.module.scss';
 import { getAllChaptersData } from '@/utils/chapter';
 import { getLanguageAlternates } from '@/utils/locale';
@@ -13,8 +13,6 @@ import { getCanonicalUrl, getNotesNavigationUrl } from '@/utils/navigation';
 
 const NotesAndReflectionsPage = () => {
   const { t, lang } = useTranslation();
-  useRequireAuth();
-
   const navigationUrl = getNotesNavigationUrl();
 
   return (
@@ -47,4 +45,4 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   };
 };
 
-export default NotesAndReflectionsPage;
+export default withAuth(NotesAndReflectionsPage);
