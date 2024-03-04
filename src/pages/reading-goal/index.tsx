@@ -9,19 +9,17 @@ import layoutStyles from '../index.module.scss';
 
 import styles from './reading-goal.module.scss';
 
+import withAuth from '@/components/Auth/withAuth';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import ReadingGoalOnboarding from '@/components/ReadingGoalPage';
 import Spinner from '@/dls/Spinner/Spinner';
 import useGetStreakWithMetadata from '@/hooks/auth/useGetStreakWithMetadata';
-import useRequireAuth from '@/hooks/auth/useRequireAuth';
 import { getAllChaptersData } from '@/utils/chapter';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl, getReadingGoalNavigationUrl } from '@/utils/navigation';
 
 const ReadingGoalPage: NextPage = () => {
   // we don't want to show the reading goal page if the user is not logged in
-  useRequireAuth();
-
   const { t, lang } = useTranslation('reading-goal');
   const router = useRouter();
 
@@ -64,4 +62,4 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   };
 };
 
-export default ReadingGoalPage;
+export default withAuth(ReadingGoalPage);
