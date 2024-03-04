@@ -4,7 +4,6 @@ import CurrentWeekProgress from './CurrentWeekProgress';
 import DaysCounter from './DaysCounter';
 import GoalStatus from './GoalStatus';
 import styles from './ReadingStreak.module.scss';
-import StreakIntroductionWidget from './StreakIntroductionWidget';
 
 import Skeleton from '@/dls/Skeleton/Skeleton';
 import useGetStreakWithMetadata from '@/hooks/auth/useGetStreakWithMetadata';
@@ -22,7 +21,7 @@ const HomePageReadingStreak = () => {
   const percent = convertFractionToPercent(currentActivityDay?.progress || 0);
 
   if (error || (!isLoading && streak === 0 && !goal)) {
-    return <StreakIntroductionWidget />;
+    return <p>{t('home:qgj.quran-reading-goals.desc.logged-out')}</p>;
   }
 
   return (
