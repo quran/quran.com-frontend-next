@@ -49,7 +49,11 @@ const CollapsibleSection: React.FC<Props> = ({ onOpenChange, type }) => {
             </div>
           )
         }
-        prefix={<ChevronDownIcon />}
+        prefix={
+          <div className={styles.prefixSVG}>
+            <ChevronDownIcon />
+          </div>
+        }
         shouldRotatePrefixOnToggle
       >
         {({ isOpen: isCollapsibleOpen }) => {
