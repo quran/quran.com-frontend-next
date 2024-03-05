@@ -1,0 +1,24 @@
+@use "src/styles/breakpoints";
+
+.container {
+    margin-block-end: var(--spacing-large);
+}
+
+.addNoteContainer {
+    border: 1px var(--color-borders-hairline) solid;
+    padding: var(--spacing-medium);
+    border-radius: var(--border-radius-rounded);
+}
+
+.addNoteContainerHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-block-end: var(--spacing-medium);
+}
+
+.addNoteBtnContainer {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
