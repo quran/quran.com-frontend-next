@@ -80,7 +80,7 @@ const NoteListItem: React.FC<Props> = ({
     }
   };
 
-  const { mutate: publishOnQuranReflect, isMutating: isPostingOnQuranReflect } = useMutation(
+  const { mutate: postOnQuranReflect, isMutating: isPostingOnQuranReflect } = useMutation(
     () => {
       return publishNoteToQR(note.id, {
         body: note.body,
@@ -88,9 +88,21 @@ const NoteListItem: React.FC<Props> = ({
       });
     },
     {
-      onSuccess: () => {
+      onSuccess: (response) => {
+        const { postId } = response;
         toast(t('notes:export-success'), {
           status: ToastStatus.Success,
+        });
+        mutateCache({
+          ...note,
+          attachedEntities: [
+            {
+              type: AttachedEntityType.REFLECTION,
+              id: postId,
+              createdAt: new Date(),
+              updatedAt: new Date(),
+            },
+          ],
         });
       },
       onError: () => {
@@ -129,10 +141,10 @@ const NoteListItem: React.FC<Props> = ({
     logButtonClick('cancel_edit_note');
   };
 
-  const onPublishOnQrClicked = (e) => {
+  const onPostOnQrClicked = (e) => {
     e.stopPropagation();
     logButtonClick('qr_publish_note');
-    publishOnQuranReflect();
+    postOnQuranReflect();
   };
 
   const onEditClicked = (e) => {
@@ -220,7 +232,7 @@ const NoteListItem: React.FC<Props> = ({
                 {t('notes:view-on-qr')}
               </Button>
             ) : (
-              <Button size={ButtonSize.Small} onClick={onPublishOnQrClicked} {...buttonProps}>
+              <Button size={ButtonSize.Small} onClick={onPostOnQrClicked} {...buttonProps}>
                 {t('notes:post-on-qr')}
               </Button>
             )}

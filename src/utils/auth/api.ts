@@ -390,7 +390,8 @@ export const publishNoteToQR = async (
     body: string;
     ranges?: string[];
   },
-): Promise<{ success: boolean }> => postRequest(makePublishNoteUrl(noteId), payload);
+): Promise<{ success: boolean; postId: string }> =>
+  postRequest(makePublishNoteUrl(noteId), payload);
 
 export const updateNote = async (id: string, body: string, saveToQR: boolean) =>
   patchRequest(makeDeleteOrUpdateNoteUrl(id), {

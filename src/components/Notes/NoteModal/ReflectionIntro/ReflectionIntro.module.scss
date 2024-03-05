@@ -7,6 +7,8 @@
 
 .title {
     font-weight: var(--font-weight-semibold);
+    display: flex;
+    align-items: center;
 }
 
 .sectionHeader {
