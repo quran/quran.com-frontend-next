@@ -46,7 +46,7 @@ const RamadanActivitiesPage: NextPage = (): JSX.Element => {
           <EmbeddableVerseCell chapterId={2} verseNumber={183} fontScale={3} />
         </div>
         <div className={classNames(pageStyles.container, styles.contentPage)} dir="ltr">
-          <div className={styles.subSection}>
+          <div className={styles.subSection} id="mindful">
             <h1>Mindful Fasting📿</h1>
             <div className={styles.subHeading}>
               A QuranReflect interactive Program with Shaykh Hammad Fahim.
@@ -82,7 +82,7 @@ const RamadanActivitiesPage: NextPage = (): JSX.Element => {
               </Button>
             </div>
           </div>
-          <div className={styles.subSection}>
+          <div className={styles.subSection} id="ayah-lookup">
             <h1>Ayah Lookup Challenge 🔎</h1>
             <div className={styles.subHeading}>with Dr Mohannad Hakeem</div>
             <div>
@@ -127,7 +127,7 @@ const RamadanActivitiesPage: NextPage = (): JSX.Element => {
               </Button>
             </div>
           </div>
-          <div className={styles.subSection}>
+          <div className={styles.subSection} id="mas-quiz">
             <h1>MAS Ramadan Quiz Trivia (live) 🎙️</h1>
             <div>
               A daily 10-minute live trivia quiz featuring 10 quick questions from the Quran.
@@ -311,7 +311,7 @@ const RamadanActivitiesPage: NextPage = (): JSX.Element => {
               </Button>
             </div>
           </div>
-          <div className={styles.subSection}>
+          <div className={styles.subSection} id="ramadan-reading">
             <h1>Inspiring Ramadan Reading 🌞</h1>
             <div>
               Explore a collection of inspirational Ramadan reflections from the QuranReflect
