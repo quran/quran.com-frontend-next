@@ -1,9 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-import NoteListItem from './NoteListItem';
+import useTranslation from 'next-translate/useTranslation';
+
+import NewNoteMode from '../NewNoteMode';
+
+import EditNoteListItem from './EditNoteListItem';
+import styles from './EditNoteMode.module.scss';
 
 import NoteRanges from '@/components/Notes/NoteModal/EditNoteMode/NoteRanges';
+import Button, { ButtonSize, ButtonVariant } from '@/dls/Button/Button';
+import PlusIcon from '@/icons/plus.svg';
 import { Note } from '@/types/auth/Note';
+import { logButtonClick } from '@/utils/eventLogger';
 
 type Props = {
   notes: Note[];
@@ -20,22 +28,70 @@ const EditNoteMode: React.FC<Props> = ({
   onNoteDeleted,
   noteId,
 }) => {
+  const { t } = useTranslation('notes');
+  const [shouldShowShowAddNoteForm, setShouldShowAddNoteForm] = useState(false);
+
+  const onAddNoteClicked = () => {
+    logButtonClick('add_more_notes_button');
+    setShouldShowAddNoteForm(true);
+  };
+
+  const onCloseAddNoteClicked = () => {
+    logButtonClick('close_add_more_notes_button');
+    setShouldShowAddNoteForm(false);
+  };
+
+  const onSuccess = () => {
+    setShouldShowAddNoteForm(false);
+  };
+
   return (
-    <>
-      {notes[0]?.ranges && <NoteRanges ranges={notes[0].ranges} />}
-      {notes.map((note) => {
+    <div className={styles.container}>
+      {notes.map((note, index) => {
         return (
-          <NoteListItem
-            verseKey={verseKey}
-            onNoteUpdated={onNoteUpdated}
-            onNoteDeleted={onNoteDeleted}
-            key={note.id}
-            noteId={noteId}
-            note={note}
-          />
+          <div key={note.id}>
+            <p>{`${t('notes:note')} ${index + 1}`}</p>
+            {note?.ranges && <NoteRanges ranges={note.ranges} />}
+            <EditNoteListItem
+              verseKey={verseKey}
+              onNoteUpdated={onNoteUpdated}
+              onNoteDeleted={onNoteDeleted}
+              key={note.id}
+              noteId={noteId}
+              note={note}
+            />
+          </div>
         );
       })}
-    </>
+
+      {!noteId && (
+        <>
+          {shouldShowShowAddNoteForm ? (
+            <div className={styles.addNoteContainer}>
+              <div className={styles.addNoteContainerHeader}>
+                <p>{t('add-another-note')}</p>
+                <Button
+                  variant={ButtonVariant.Ghost}
+                  size={ButtonSize.Small}
+                  onClick={onCloseAddNoteClicked}
+                  tooltip={t('common:close')}
+                  // eslint-disable-next-line i18next/no-literal-string
+                >
+                  X
+                </Button>
+              </div>
+              <NewNoteMode verseKey={verseKey} onSuccess={onSuccess} />
+            </div>
+          ) : (
+            <div className={styles.addNoteBtnContainer}>
+              <Button size={ButtonSize.Small} prefix={<PlusIcon />} onClick={onAddNoteClicked}>
+                {t('add-another-note')}
+              </Button>
+            </div>
+          )}
+        </>
+      )}
+    </div>
   );
 };
 

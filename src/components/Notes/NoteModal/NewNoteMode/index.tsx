@@ -41,9 +41,10 @@ type NoteFormData = {
 
 type Props = {
   verseKey: string;
+  onSuccess?: () => void;
 };
 
-const NewNoteMode: React.FC<Props> = ({ verseKey }) => {
+const NewNoteMode: React.FC<Props> = ({ verseKey, onSuccess }) => {
   const { t } = useTranslation('common');
   const toast = useToast();
   const { mutate, cache } = useSWRConfig();
@@ -76,6 +77,10 @@ const NewNoteMode: React.FC<Props> = ({ verseKey }) => {
           });
           mutateCache([data]);
           clearCountCache();
+        }
+
+        if (onSuccess) {
+          onSuccess();
         }
       },
       onError: () => {

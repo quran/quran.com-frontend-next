@@ -27,7 +27,7 @@ type Props = {
   onNoteDeleted?: () => void;
 };
 
-const NoteListItem: React.FC<Props> = ({
+const EditNoteListItem: React.FC<Props> = ({
   note,
   verseKey,
   noteId,
@@ -175,13 +175,20 @@ const NoteListItem: React.FC<Props> = ({
     (entity) => entity.type === AttachedEntityType.REFLECTION,
   )?.id;
 
+  const onNoteUpdatedHandler = (updatedNote: Note) => {
+    setIsInEditMode(false);
+    if (onNoteUpdated) {
+      onNoteUpdated(updatedNote);
+    }
+  };
+
   return (
     <div className={styles.container}>
       {isInEditMode ? (
         <EditForm
           onCancelEditClicked={onCancelEditClicked}
           note={note}
-          onNoteUpdated={onNoteUpdated}
+          onNoteUpdated={onNoteUpdatedHandler}
           verseKey={verseKey}
           noteId={noteId}
         />
@@ -243,4 +250,4 @@ const NoteListItem: React.FC<Props> = ({
   );
 };
 
-export default NoteListItem;
+export default EditNoteListItem;
