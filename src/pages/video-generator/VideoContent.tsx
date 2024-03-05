@@ -20,7 +20,11 @@ const VideoContent = ({
     sceneBackground, 
     verseBackground, 
     fontColor, 
-    stls}) => {
+    stls,
+    verseAlignment,
+    translationAlignment,
+    opacity
+  }) => {
   const quranReaderStyles = useSelector(selectQuranReaderStyles);
 
   return (
@@ -35,6 +39,7 @@ const VideoContent = ({
             ? "linear-gradient(0deg, rgba(229,227,255,1) 0%, rgba(230,246,235,1) 50%, rgba(215,249,255,1) 100%)"
             : sceneBackground,
         justifyContent: "center",
+        // opacity: opacity
       }}
     >
       <Audio src={audio.audioUrl} />
@@ -55,7 +60,7 @@ const VideoContent = ({
                 }}
               >
                 {/* <Ayah data={d} /> */}
-                <div style={{marginBottom: '1rem'}}>
+                <div style={{marginBottom: '1rem'}} className={verseAlignment === 'centre' ? styles.verseCentre : styles.verseJustified}>
                   <VerseText 
                     words={getVerseWords(verse)} 
                     shouldShowH1ForSEO={false}
@@ -64,7 +69,7 @@ const VideoContent = ({
                 
 
                 {verse.translations?.map((translation: Translation) => (
-                  <div key={translation.id} className={styles.verseTranslationContainer}>
+                  <div key={translation.id} className={translationAlignment === 'centre' ? styles.verseTranslationCentre : styles.verseTranslationJustified}>
                     <TranslationText
                       translationFontScale={quranReaderStyles.translationFontScale}
                       text={translation.text}

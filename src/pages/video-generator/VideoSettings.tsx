@@ -6,6 +6,8 @@ import layoutStyle from "../index.module.scss";
 import classNames from "classnames";
 import styles from "./video.module.scss";
 import QuranFontSection from "./QuranFontSectionSetting";
+import TranslationSetting from "./TranslationSectionSetting";
+import Switch from "@/dls/Switch/Switch";
 
 const VideoSettings = ({ 
     chaptersList,
@@ -20,8 +22,14 @@ const VideoSettings = ({
     setVerseBackgroundColor,
     fontColor,
     setFontColor,
-    fontSize,
-    setFontSize,
+    selectedTranslations,
+    setSelectedTranslations,
+    verseAlignment,
+    setVerseAlignment,
+    translationAlignment,
+    setTranslationAlignment,
+    opacity,
+    setOpacity
   }) => {
   const { t } = useTranslation("common");
 
@@ -33,9 +41,6 @@ const VideoSettings = ({
         styles.settingsContainer
       )}
     >
-      <div>
-        <QuranFontSection />
-      </div>
       <div>
         <Section>
           <Section.Title>{t("surah")}</Section.Title>
@@ -65,6 +70,24 @@ const VideoSettings = ({
             />
           </Section.Row>
         </Section>
+      </div>
+      <div>
+        <Section>
+          <Section.Title>Verse Background Opacity</Section.Title>
+          <Section.Row>
+            <Switch  items={[{name: '0%', value: '0'}, { name: '20%', value: '0.2'}, { name: '40%', value: '0.4'}, { name: '60%', value: '0.6'}, { name: '80%', value: '0.8'}, { name: '100%', value: '1'}]} selected={opacity} onSelect={(val) => {setOpacity(val)}} />
+          </Section.Row>
+
+        </Section>
+      </div>
+      <div>
+        <QuranFontSection />
+      </div>
+      <div>
+          <TranslationSetting
+            selectedTranslation={selectedTranslations}
+            setSelectedTranslation={setSelectedTranslations}
+          />
       </div>
       <div>
         <Section>
@@ -98,14 +121,21 @@ const VideoSettings = ({
           </Section.Row>
         </Section>
       </div>
+
       <div>
-        <p>Font size</p>
-        <input
-          className={styles.colorPicker}
-          type="text"
-          value={fontSize}
-          onChange={(e) => setFontSize(e.target.value)}
-        />
+        <Section>
+          <Section.Title>Text alignment</Section.Title>
+          {/* TODO: Add localization to labels */}
+          <Section.Title>Verse</Section.Title>
+          <Section.Row>
+            <Switch  items={[{name: 'Centre', value: 'centre'}, { name: 'Justified', value: 'justified'}]} selected={verseAlignment} onSelect={(val) => {setVerseAlignment(val)}} />
+          </Section.Row>
+          <br />
+          <Section.Title>Translation</Section.Title>
+          <Section.Row>
+            <Switch items={[{name: 'Centre', value: 'centre'}, { name: 'Justified', value: 'justified'}]} selected={translationAlignment} onSelect={(val) => {setTranslationAlignment(val)}} />
+          </Section.Row>
+        </Section>
       </div>
     </div>
   )

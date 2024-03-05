@@ -82,8 +82,9 @@ export function getBackground() {
   };
 }
 
-export const API_PARAMS = {
+export const DEFAULT_API_PARAMS = {
   wordFields: 'verse_key,verse_id,page_number,location,text_uthmani,code_v1,qpc_uthmani_hafs',
+  translations: [131, 97]
 }
 
 export const stls = getBackground();

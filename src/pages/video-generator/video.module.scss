@@ -33,6 +33,7 @@
 // juz layout (masonry layout)
 .settingsContainer {
   display: grid;
+  margin: 0 auto;
   @include breakpoints.tablet {
     grid-template-columns: repeat(2, 1fr);
   }
@@ -92,4 +93,89 @@
 
 .colorPicker {
   width: 50%;
+}
+
+.titleContainer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.language {
+  text-transform: capitalize;
+  margin-block-end: var(--spacing-xsmall);
+  font-size: var(--font-size-large);
+  font-weight: var(--font-weight-semibold);
+}
+
+.item {
+  margin-block-end: var(--spacing-xsmall);
+  display: flex;
+  align-items: center;
+}
+
+.group {
+  margin-block-end: var(--spacing-large);
+}
+
+.searchInputContainer {
+  margin-block-end: var(--spacing-small);
+}
+
+.label {
+  display: flex;
+  flex-direction: column;
+}
+
+.author {
+  font-size: var(--font-size-xsmall);
+  color: var(--color-text-faded);
+}
+
+.input {
+  width: 95%;
+}
+
+.container {
+  min-height: calc(4 * var(--spacing-mega));
+}
+.changeReciterButtonContainer {
+  display: flex;
+  flex-direction: column;
+  margin-block-start: var(--spacing-xsmall);
+}
+
+.skeleton {
+  height: calc(2.2 * var(--spacing-mega));
+  width: 100%;
+}
+
+.translationControlButtons {
+  display: flex;
+  justify-content: start;
+  width: 100%;
+}
+
+
+.translationControlButtons > button {
+  margin: 0 1rem 1rem 0;
+}
+
+.verseCentre {
+  padding: 0 2rem;
+}
+
+.verseJustified {
+  width: 100%;
+  text-align: left;
+  padding: 0 2rem;
+}
+
+.verseTranslationCentre {
+  padding: 0.5rem 2rem;
+}
+
+.verseTranslationJustified {
+  width: 100%;
+  padding: 0.5rem 2rem;
 }

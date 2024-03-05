@@ -1,5 +1,5 @@
 import { Player, PlayerRef } from "@remotion/player";
-import { NextPage } from "next";
+import { GetStaticProps, NextPage } from "next";
 import useTranslation from "next-translate/useTranslation";
 import { useRouter } from "next/router";
 import layoutStyle from "../index.module.scss";
@@ -21,7 +21,7 @@ import { VersesResponse } from "types/ApiResponses";
 import ChaptersData from "types/ChaptersData";
 import VideoContent from "./VideoContent";
 import VideoSettings from "./VideoSettings";
-import { API_PARAMS, getNormalizedTimestamps, stls } from "./VideoUtils";
+import { DEFAULT_API_PARAMS, getNormalizedTimestamps, stls } from "./VideoUtils";
 
 /**                    Discussion 1
  + Discussion around how the UI will look like for end users
@@ -36,10 +36,12 @@ import { API_PARAMS, getNormalizedTimestamps, stls } from "./VideoUtils";
  + Preview editor. The changes that users make, how they will appear in the UI. Real-time updates of their changes? just a still frame with their changes all in one place (easier)? ability to play pause etc. Perhaps if the remotion studio editor could be embedded somehow
  */
 
+// limits of renders? requires auth? any way to cache similar videos? disabling multiple renders?
+
 /**                    Discussion 2
  * try older remotion version (latest that works with react 17)
  * try QFC font, its good wiht all pages
- * shuold be able to reuse some bits
+ * should be able to reuse some bits
  * segments
  * settings will be independent
  * video domain can be whitelisted in next.config
@@ -54,6 +56,10 @@ interface VideoGenerator {
   audio: any,
   defaultTimestamps: any,
   chaptersData: ChaptersData;
+}
+// TODO: FIXME:
+function setOpacity(bg, opct) {
+
 }
 
 const VideoGenerator: NextPage<VideoGenerator> = ({
@@ -73,14 +79,19 @@ const VideoGenerator: NextPage<VideoGenerator> = ({
   }
 
   const [sceneBackgroundColor, setSceneBackgroundColor] = useState("");
-  const [verseBackgroundColor, setVerseBackgroundColor] = useState("#d8f9fd");
+  const [opacity, setOpacity] = useState('1');
+  const [verseBackgroundColor, setVerseBackgroundColor] = useState(`rgba(216, 249, 253, ${opacity})`);
   const [fontColor, setFontColor] = useState("#071a1c");
-  const [fontSize, setFontSize] = useState("24");
   const [reciter, setReciter] = useState(1);
   const [chapter, setChapter] = useState(112);
   const [verseData, setverseData] = useState(verses?.verses);
   const [audioData, setAudioData] = useState(audio);
   const [timestamps, setTimestamps] = useState(defaultTimestamps);
+  const [selectedTranslations, setSelectedTranslations] = useState([131]);
+  const [verseAlignment, setVerseAlignment] = useState('centre');
+  const [translationAlignment, setTranslationAlignment] = useState('centre');
+  console.log('verseBackgroundColor', verseBackgroundColor);
+
 
   const playerRef = useRef<PlayerRef>(null);
 
@@ -91,7 +102,7 @@ const VideoGenerator: NextPage<VideoGenerator> = ({
       return;
     }
     const fetchData = async () => {
-      const verses = await getChapterVerses(chapter, 'en', API_PARAMS);
+      const verses = await getChapterVerses(chapter, 'en', {...DEFAULT_API_PARAMS, translations: selectedTranslations, perPage: chaptersData[chapter].versesCount} );
       const audio = await getChapterAudioData(reciter, chapter, true);
       return [verses, audio];
     };
@@ -101,7 +112,7 @@ const VideoGenerator: NextPage<VideoGenerator> = ({
       setAudioData(audio);
       setTimestamps(getNormalizedTimestamps(audio));
     });
-  }, [reciter, chapter]);
+  }, [reciter, chapter, selectedTranslations]);
 
   const onChapterChange = async (val) => {
     setChapter(val);
@@ -135,10 +146,12 @@ const VideoGenerator: NextPage<VideoGenerator> = ({
         verseBackground={verseBackgroundColor}
         fontColor={fontColor}
         stls={stls}
+        verseAlignment={verseAlignment}
+        translationAlignment={translationAlignment}
+        opacity={opacity}
       />
     )
   }
-    
 
   const chaptersList = useMemo(() => {
     const flattenedChaptersList = Object.entries(chaptersData).map((r) => ({
@@ -179,7 +192,7 @@ const VideoGenerator: NextPage<VideoGenerator> = ({
           />
         </div>
         <div className={layoutStyle.flow}>
-          {/* Rather store these in redux than passing setters like this */}
+          {/* This is just horrible. Rather store these settings in redux and persist than passing like this */}
           <VideoSettings
             chaptersList={chaptersList}
             chapter={chapter}
@@ -193,8 +206,14 @@ const VideoGenerator: NextPage<VideoGenerator> = ({
             setVerseBackgroundColor={setVerseBackgroundColor}
             fontColor={fontColor}
             setFontColor={setFontColor}
-            fontSize={fontSize}
-            setFontSize={setFontSize}
+            selectedTranslations={selectedTranslations}
+            setSelectedTranslations={setSelectedTranslations}
+            verseAlignment={verseAlignment}
+            setVerseAlignment={setVerseAlignment}
+            translationAlignment={translationAlignment}
+            setTranslationAlignment={setTranslationAlignment}
+            opacity={opacity}
+            setOpacity={setOpacity}
           />
         </div>
       </div>
@@ -206,7 +225,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   try {
     const { reciters } = await getAvailableReciters(locale, []);
     const chaptersData = await getAllChaptersData(locale);
-    const verses = await getChapterVerses(112, 'en', API_PARAMS);
+    const verses = await getChapterVerses(112, 'en', DEFAULT_API_PARAMS);
     const audio = await getChapterAudioData(1, 112, true);
     const defaultTimestamps = getNormalizedTimestamps(audio);
 
