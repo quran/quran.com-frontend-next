@@ -11,6 +11,7 @@
 .playerWrapper {
   position: relative;
   padding: var(--spacing-large);
+  height: 720px
 }
 
 .versePreviewContainer {
@@ -40,7 +41,7 @@
   @include breakpoints.desktop {
     grid-template-columns: repeat(3, 1fr);
   }
-  gap: 2em;
+  gap: 0em 2em;
 }
 
 .headerContainer {
@@ -178,4 +179,50 @@
 .verseTranslationJustified {
   width: 100%;
   padding: 0.5rem 2rem;
+}
+
+.backgroundColorsWrapper {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 5px;
+  margin: var(--spacing-large) 0;
+}
+
+.colorBox {
+  min-width: 1rem;
+  min-height: 1rem;
+  aspect-ratio: 1;
+  transition: all 100ms ease-in-out;
+  cursor: pointer;
+}
+
+.colorBox:hover {
+  transform: translateY(-2%);
+  box-shadow: 10px 10px 48px -25px rgba(0,0,0,0.75);
+  -webkit-box-shadow: 10px 10px 48px -25px rgba(0,0,0,0.75);
+  -moz-box-shadow: 10px 10px 48px -25px rgba(0,0,0,0.75);
+}
+
+.orientationWrapper {
+  padding: var(--spacing-medium) 0;  
+}
+
+.landscape {
+  margin: auto;
+  padding: 1rem;
+  width: 80%;
+  border-radius: 5px;
+  background: gray;
+  aspect-ratio: 1280 / 720;
+}
+
+.portrait {
+  margin: 0 auto;
+  border-radius: 15px;
+  max-width: 60%;
+  max-height: 200px;
+  background: gray;
+  aspect-ratio: 720 / 1280;
 }

@@ -23,9 +23,20 @@ const VideoContent = ({
     stls,
     verseAlignment,
     translationAlignment,
-    opacity
+    border,
+    dimensions
   }) => {
   const quranReaderStyles = useSelector(selectQuranReaderStyles);
+
+  if (border === 'false') {
+    stls = {...stls, border: 'none'};
+  } else {
+    stls = { ...stls, border: '2px gray solid' }
+  }
+  if (dimensions === 'portrait') {
+    stls = {...stls, border: 'none'};
+  }
+  
 
   return (
     <AbsoluteFill

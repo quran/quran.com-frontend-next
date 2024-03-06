@@ -8,6 +8,11 @@ import styles from "./video.module.scss";
 import QuranFontSection from "./QuranFontSectionSetting";
 import TranslationSetting from "./TranslationSectionSetting";
 import Switch from "@/dls/Switch/Switch";
+import { getAllBackgrounds } from "./VideoUtils";
+import BackgroundColors from "./BackgroundColors";
+import { useState } from "react";
+
+const backgroundColors = getAllBackgrounds();
 
 const VideoSettings = ({ 
     chaptersList,
@@ -29,9 +34,14 @@ const VideoSettings = ({
     translationAlignment,
     setTranslationAlignment,
     opacity,
-    setOpacity
+    setOpacity,
+    border,
+    setBorder,
+    dimensions,
+    setDimensions
   }) => {
   const { t } = useTranslation("common");
+  const [backgroundType, setBackgroundType] = useState('verse');
 
   return (
     <div
@@ -73,43 +83,7 @@ const VideoSettings = ({
       </div>
       <div>
         <Section>
-          <Section.Title>Verse Background Opacity</Section.Title>
-          <Section.Row>
-            <Switch  items={[{name: '0%', value: '0'}, { name: '20%', value: '0.2'}, { name: '40%', value: '0.4'}, { name: '60%', value: '0.6'}, { name: '80%', value: '0.8'}, { name: '100%', value: '1'}]} selected={opacity} onSelect={(val) => {setOpacity(val)}} />
-          </Section.Row>
-
-        </Section>
-      </div>
-      <div>
-        <QuranFontSection />
-      </div>
-      <div>
-          <TranslationSetting
-            selectedTranslation={selectedTranslations}
-            setSelectedTranslation={setSelectedTranslations}
-          />
-      </div>
-      <div>
-        <Section>
           <Section.Title>Colors</Section.Title>
-          <Section.Row>
-            <Section.Label>Scene Background</Section.Label>
-            <input
-              className={styles.colorPicker}
-              type="color"
-              value={sceneBackgroundColor}
-              onChange={(e) => setSceneBackgroundColor(e.target.value)}
-            />
-          </Section.Row>
-          <Section.Row>
-            <Section.Label>Verse Background</Section.Label>
-            <input
-              className={styles.colorPicker}
-              type="color"
-              value={verseBackgroundColor}
-              onChange={(e) => setVerseBackgroundColor(e.target.value)}
-            />
-          </Section.Row>
           <Section.Row>
             <Section.Label>Font color</Section.Label>
             <input
@@ -121,6 +95,16 @@ const VideoSettings = ({
           </Section.Row>
         </Section>
       </div>
+      <div>
+        <QuranFontSection />
+      </div>
+      <div>
+          <TranslationSetting
+            selectedTranslation={selectedTranslations}
+            setSelectedTranslation={setSelectedTranslations}
+          />
+      </div>
+
 
       <div>
         <Section>
@@ -134,6 +118,57 @@ const VideoSettings = ({
           <Section.Title>Translation</Section.Title>
           <Section.Row>
             <Switch items={[{name: 'Centre', value: 'centre'}, { name: 'Justified', value: 'justified'}]} selected={translationAlignment} onSelect={(val) => {setTranslationAlignment(val)}} />
+          </Section.Row>
+        </Section>
+      </div>
+      <div>
+        <Section>
+          <Section.Title>Backrgound</Section.Title>
+          <Section.Row>
+            <Switch  items={[{name: 'Verse', value: 'verse'}, { name: 'Background', value: 'scene'}]} selected={backgroundType} onSelect={(val) => {
+              setBackgroundType(val)
+
+            }} />
+          </Section.Row>
+          <Section.Row>
+            <BackgroundColors setOpacity={setOpacity} type={backgroundType} setSceneBackground={setSceneBackgroundColor} setVerseBackground={setVerseBackgroundColor} colors={backgroundColors} />
+          </Section.Row>
+          <br />
+          {backgroundType === 'verse' ? (
+            <>
+              <Section.Label>Opacity</Section.Label>
+              <Section.Row>
+                <Switch  items={[{name: '0%', value: '0'}, { name: '20%', value: '0.2'}, { name: '40%', value: '0.4'}, { name: '60%', value: '0.6'}, { name: '80%', value: '0.8'}, { name: '100%', value: '1'}]} selected={opacity} onSelect={(val) => {
+                  if (val === opacity) {
+                    return;
+                  }
+                  setOpacity(val)
+                  const verse = verseBackgroundColor;
+                  const backgroundColors = getAllBackgrounds(val);
+                  const correctBg1 = backgroundColors.find(color => color.id === verse.id);
+                  setVerseBackgroundColor(correctBg1);
+                }} />
+              </Section.Row>
+              <br />
+              <Section.Label>Border</Section.Label>
+              <Section.Row>
+                <Switch  items={[{name: 'Yes', value: 'true'}, { name: 'No', value: 'false'}]} selected={border} onSelect={(val) => setBorder(val)} />
+              </Section.Row>
+            </>
+          ) : null}
+        </Section>
+      </div>
+      <div>
+        <Section>
+          <Section.Title>Orientation</Section.Title>
+          <Section.Row>
+            <Switch  items={[{name: 'Landscape', value: 'landscape'}, { name: 'Portrait', value: 'portrait'}]} selected={dimensions} onSelect={(val) => setDimensions(val)} />
+
+          </Section.Row>
+          <Section.Row>
+            <div className={styles.orientationWrapper}>
+              <div className={dimensions === 'landscape' ? styles.landscape : styles.portrait} />
+            </div>
           </Section.Row>
         </Section>
       </div>

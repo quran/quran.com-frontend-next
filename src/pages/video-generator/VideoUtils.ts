@@ -1,5 +1,4 @@
 export const SURAH = 112;
-export const VIDEO_ORIENTATION = "LANDSCAPE";
 
 export function getNormalizedIntervals(start, end) {
   const FRAMES = 30;
@@ -48,37 +47,58 @@ export function getVideoURL() {
   return staticVideos[Math.floor(Math.random() * staticVideos.length)];
 }
 
-export function getBackground() {
-  const styles = {
+export const getAllBackgrounds = (alpha = '1') => {
+  return  [
+    {
+      id: 1,
+      background:
+        `linear-gradient(0deg, rgba(229,227,255,${alpha}) 0%, rgba(230,246,235,${alpha}) 50%, rgba(215,249,255,${alpha}) 100%)`,
+    },
+    {
+      id: 2,
+      background:
+        `linear-gradient(0deg, rgba(244,255,227,${alpha}) 0%, rgba(255,229,215,${alpha}) 100%)`,
+    },
+    {
+      id: 3,
+      background:
+        `linear-gradient(330deg, rgba(202,166,255,${alpha}) 0%, rgba(152,255,148,${alpha}) 100%)`,
+    },
+    {
+      id: 4,
+      background: `linear-gradient(to bottom,rgba(219, 225, 111, ${alpha}), rgba(248, 119, 40, ${alpha}))`
+    },
+    {
+      id: 5,
+      background: `linear-gradient(to bottom,rgba(157, 106, 32, ${alpha}),rgba(68, 155, 169, ${alpha}))`
+    },
+    {
+      id: 6,
+      background: `linear-gradient(to bottom,rgba(144, 240, 134, ${alpha}),rgba(232, 60, 194, ${alpha}))`
+    },
+    {
+      id: 7,
+      background: `linear-gradient(to top,rgba(111, 62, 26, ${alpha}),rgba(6, 81, 104, ${alpha}))`
+    },
+    {
+      id: 8,
+      background: `linear-gradient(to top,rgba(103, 243, 206, ${alpha}),rgba(16, 125, 64, ${alpha}))`
+    },
+  ];
+};
+
+export function getStyles(dimensions) {
+  return {
     justifyContent: "center",
     color: "#111",
-    width: VIDEO_ORIENTATION === "LANDSCAPE" ? "70%" : "85%",
-    height: VIDEO_ORIENTATION === "LANDSCAPE" ? "70%" : "50%",
+    minWidth: dimensions === "landscape" ? "70%" : "60%",
+    minHeight: dimensions === "landscape" ? "60%" : '25%',
+    width: "fit-content",
+    height: "fit-content",
     margin: "auto",
     border: "2px gray solid",
     borderRadius: "20px",
     alignItems: "center",
-  };
-  const backgrounds = [
-    {
-      backgroundColor: "rgb(229,227,255)",
-      background:
-        "linear-gradient(0deg, rgba(229,227,255,1) 0%, rgba(230,246,235,1) 50%, rgba(215,249,255,1) 100%)",
-    },
-    {
-      backgroundColor: "rgb(244,255,227)",
-      background:
-        "linear-gradient(0deg, rgba(244,255,227,1) 0%, rgba(255,229,215,1) 100%)",
-    },
-    {
-      backgroundColor: "rgb(202,166,255)",
-      background:
-        "linear-gradient(330deg, rgba(202,166,255,1) 0%, rgba(152,255,148,1) 100%)",
-    },
-  ];
-  return {
-    ...styles,
-    ...backgrounds[Math.floor(Math.random() * backgrounds.length)],
   };
 }
 
@@ -87,4 +107,4 @@ export const DEFAULT_API_PARAMS = {
   translations: [131, 97]
 }
 
-export const stls = getBackground();
+export const stls = getStyles('landscape');

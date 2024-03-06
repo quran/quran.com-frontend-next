@@ -1,15 +1,10 @@
 import { Player, PlayerRef } from "@remotion/player";
 import { GetStaticProps, NextPage } from "next";
 import useTranslation from "next-translate/useTranslation";
-import { useRouter } from "next/router";
 import layoutStyle from "../index.module.scss";
-
 import Error from "@/pages/_error";
 import styles from "./video.module.scss";
-
-import { getJuzNavigationUrl } from "@/utils/navigation";
 import classNames from "classnames";
-
 import {
   getAvailableReciters,
   getChapterAudioData,
@@ -21,31 +16,7 @@ import { VersesResponse } from "types/ApiResponses";
 import ChaptersData from "types/ChaptersData";
 import VideoContent from "./VideoContent";
 import VideoSettings from "./VideoSettings";
-import { DEFAULT_API_PARAMS, getNormalizedTimestamps, stls } from "./VideoUtils";
-
-/**                    Discussion 1
- + Discussion around how the UI will look like for end users
- + Adding options to customize videos. Reciter, Translation, Translation source, Font type, range of ayahs, text alignment
- + Ability to change ayah background color, transparency, size. Ability to change stock background videos
- - We have to be cognizant of the video size.
- - Think more about the workflow. Is there an option to share it directly to some apps. Or do we let the user download and upload it themselves.
- - Talal: For this point, I feel like for adding to e.g. instagram stories, whatsapp status etc. It would be better if the user has it in their library. But for other platforms like sharing on twitter, fb, would've been easier if it was something like sharing from a youtube/dailymotion kind of platform, where u just paste the link and it "just works"
- + Add watermark and the ability to customize locations
- - Investigate how we will be dealing with long ayahs, including with translations. Do we split them into multiple scenes, adjust relative font size based on number of characters etc.
- - Templates for users to select from and try their range of ayahs
- + Preview editor. The changes that users make, how they will appear in the UI. Real-time updates of their changes? just a still frame with their changes all in one place (easier)? ability to play pause etc. Perhaps if the remotion studio editor could be embedded somehow
- */
-
-// limits of renders? requires auth? any way to cache similar videos? disabling multiple renders?
-
-/**                    Discussion 2
- * try older remotion version (latest that works with react 17)
- * try QFC font, its good wiht all pages
- * should be able to reuse some bits
- * segments
- * settings will be independent
- * video domain can be whitelisted in next.config
- */
+import { DEFAULT_API_PARAMS, getAllBackgrounds, getNormalizedTimestamps, getStyles } from "./VideoUtils";
 
 let skipFirstRender = true;
 interface VideoGenerator {
@@ -57,10 +28,7 @@ interface VideoGenerator {
   defaultTimestamps: any,
   chaptersData: ChaptersData;
 }
-// TODO: FIXME:
-function setOpacity(bg, opct) {
-
-}
+const defaultBackground = getAllBackgrounds('1')[0]
 
 const VideoGenerator: NextPage<VideoGenerator> = ({
   hasError,
@@ -71,16 +39,13 @@ const VideoGenerator: NextPage<VideoGenerator> = ({
   defaultTimestamps,
 }) => {
   const { t, lang } = useTranslation("common");
-  const {
-    query: { juzId },
-  } = useRouter();
   if (hasError) {
     return <Error statusCode={500} />;
   }
 
-  const [sceneBackgroundColor, setSceneBackgroundColor] = useState("");
   const [opacity, setOpacity] = useState('1');
-  const [verseBackgroundColor, setVerseBackgroundColor] = useState(`rgba(216, 249, 253, ${opacity})`);
+  const [sceneBackgroundColor, setSceneBackgroundColor] = useState(defaultBackground);
+  const [verseBackgroundColor, setVerseBackgroundColor] = useState(defaultBackground);
   const [fontColor, setFontColor] = useState("#071a1c");
   const [reciter, setReciter] = useState(1);
   const [chapter, setChapter] = useState(112);
@@ -90,8 +55,8 @@ const VideoGenerator: NextPage<VideoGenerator> = ({
   const [selectedTranslations, setSelectedTranslations] = useState([131]);
   const [verseAlignment, setVerseAlignment] = useState('centre');
   const [translationAlignment, setTranslationAlignment] = useState('centre');
-  console.log('verseBackgroundColor', verseBackgroundColor);
-
+  const [border, setBorder] = useState('true');
+  const [dimensions, setDimensions] = useState('landscape');
 
   const playerRef = useRef<PlayerRef>(null);
 
@@ -142,13 +107,14 @@ const VideoGenerator: NextPage<VideoGenerator> = ({
         verses={verseData}
         audio={audioData}
         timestamps={timestamps}
-        sceneBackground={sceneBackgroundColor}
-        verseBackground={verseBackgroundColor}
+        sceneBackground={sceneBackgroundColor?.background}
+        verseBackground={verseBackgroundColor?.background}
         fontColor={fontColor}
-        stls={stls}
+        stls={getStyles(dimensions)}
         verseAlignment={verseAlignment}
         translationAlignment={translationAlignment}
-        opacity={opacity}
+        border={border}
+        dimensions={dimensions}
       />
     )
   }
@@ -167,57 +133,52 @@ const VideoGenerator: NextPage<VideoGenerator> = ({
       };
     });
   }, [t]);
-  const path = getJuzNavigationUrl(Number(juzId));
   return (
-    <>
-      {/* <NextSeoWrapper
-        title={`${t('juz')} ${toLocalizedNumber(Number(juzId), lang)}`}
-        description={getPageOrJuzMetaDescription(juzVerses)}
-        canonical={getCanonicalUrl(lang, path)}
-        languageAlternates={getLanguageAlternates(path)}
-      /> */}
-      <div className={styles.pageContainer}>
-        <div className={classNames(styles.playerWrapper, layoutStyle.flowItem)}>
-          <Player
-            component={VideoContentComponent}
-            durationInFrames={Math.ceil(
-              ((audioData.duration + 500) / 1000) * 30
-            )}
-            compositionWidth={1280}
-            compositionHeight={720}
-            fps={30}
-            ref={playerRef}
-            // autoPlay
-            controls
-          />
-        </div>
-        <div className={layoutStyle.flow}>
-          {/* This is just horrible. Rather store these settings in redux and persist than passing like this */}
-          <VideoSettings
-            chaptersList={chaptersList}
-            chapter={chapter}
-            onChapterChange={onChapterChange}
-            recitersOptions={recitersOptions}
-            reciter={reciter}
-            setReciter={setReciter}
-            sceneBackgroundColor={sceneBackgroundColor}
-            setSceneBackgroundColor={setSceneBackgroundColor}
-            verseBackgroundColor={verseBackgroundColor}
-            setVerseBackgroundColor={setVerseBackgroundColor}
-            fontColor={fontColor}
-            setFontColor={setFontColor}
-            selectedTranslations={selectedTranslations}
-            setSelectedTranslations={setSelectedTranslations}
-            verseAlignment={verseAlignment}
-            setVerseAlignment={setVerseAlignment}
-            translationAlignment={translationAlignment}
-            setTranslationAlignment={setTranslationAlignment}
-            opacity={opacity}
-            setOpacity={setOpacity}
-          />
-        </div>
+    <div className={styles.pageContainer}>
+      <div className={classNames(styles.playerWrapper, layoutStyle.flowItem)}>
+        <Player
+          style={{ width: "100%", height: "100%" }}
+          component={VideoContentComponent}
+          durationInFrames={Math.ceil(
+            ((audioData.duration + 500) / 1000) * 30
+          )}
+          compositionWidth={dimensions === 'landscape' ? 1280 : 720}
+          compositionHeight={dimensions === 'landscape' ? 720 : 1280}
+          fps={30}
+          ref={playerRef}
+          controls
+        />
       </div>
-    </>
+      <div className={layoutStyle.flow}>
+        {/* This is just horrible. Rather store these settings in redux and persist than passing like this */}
+        <VideoSettings
+          chaptersList={chaptersList}
+          chapter={chapter}
+          onChapterChange={onChapterChange}
+          recitersOptions={recitersOptions}
+          reciter={reciter}
+          setReciter={setReciter}
+          sceneBackgroundColor={sceneBackgroundColor}
+          setSceneBackgroundColor={setSceneBackgroundColor}
+          verseBackgroundColor={verseBackgroundColor}
+          setVerseBackgroundColor={setVerseBackgroundColor}
+          fontColor={fontColor}
+          setFontColor={setFontColor}
+          selectedTranslations={selectedTranslations}
+          setSelectedTranslations={setSelectedTranslations}
+          verseAlignment={verseAlignment}
+          setVerseAlignment={setVerseAlignment}
+          translationAlignment={translationAlignment}
+          setTranslationAlignment={setTranslationAlignment}
+          opacity={opacity}
+          setOpacity={setOpacity}
+          border={border}
+          setBorder={setBorder}
+          dimensions={dimensions}
+          setDimensions={setDimensions}
+        />
+      </div>
+    </div>
   );
 };
 
