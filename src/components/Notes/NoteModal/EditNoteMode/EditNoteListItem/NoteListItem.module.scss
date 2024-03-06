@@ -12,12 +12,6 @@
     align-items: center;
 }
 
-.noteDate {
-    display: block;
-    font-size: var(--font-size-xsmall);
-    color: var(--color-text-faded);
-}
-
 .noteBody {
     margin-block-end: var(--spacing-small);
     line-break: anywhere;

@@ -47,6 +47,14 @@
             min-height: 50vh;
         }
     }
+
+    legend {
+        color: var(--color-text-inverse);
+        font-weight: var(--font-weight-semibold);
+        background-color: var(--color-success-medium);
+        border-radius: var(--border-radius-rounded);
+        padding-inline: var(--spacing-xsmall);
+    }
 }
 
 .actionContainer {

@@ -11,6 +11,7 @@ import NoteRanges from '@/components/Notes/NoteModal/EditNoteMode/NoteRanges';
 import Button, { ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import PlusIcon from '@/icons/plus.svg';
 import { Note } from '@/types/auth/Note';
+import { dateToReadableFormat } from '@/utils/datetime';
 import { logButtonClick } from '@/utils/eventLogger';
 
 type Props = {
@@ -28,7 +29,7 @@ const EditNoteMode: React.FC<Props> = ({
   onNoteDeleted,
   noteId,
 }) => {
-  const { t } = useTranslation('notes');
+  const { t, lang } = useTranslation('notes');
   const [shouldShowShowAddNoteForm, setShouldShowAddNoteForm] = useState(false);
 
   const onAddNoteClicked = () => {
@@ -47,23 +48,6 @@ const EditNoteMode: React.FC<Props> = ({
 
   return (
     <div className={styles.container}>
-      {notes.map((note, index) => {
-        return (
-          <div key={note.id}>
-            <p>{`${t('notes:note')} ${index + 1}`}</p>
-            {note?.ranges && <NoteRanges ranges={note.ranges} />}
-            <EditNoteListItem
-              verseKey={verseKey}
-              onNoteUpdated={onNoteUpdated}
-              onNoteDeleted={onNoteDeleted}
-              key={note.id}
-              noteId={noteId}
-              note={note}
-            />
-          </div>
-        );
-      })}
-
       {!noteId && (
         <>
           {shouldShowShowAddNoteForm ? (
@@ -91,6 +75,31 @@ const EditNoteMode: React.FC<Props> = ({
           )}
         </>
       )}
+      {notes.map((note, index) => {
+        return (
+          <div key={note.id}>
+            <div className={styles.noteHeaderContainer}>
+              <p>{`${t('notes:note')} ${index + 1}`}</p>
+              <time className={styles.noteDate} dateTime={note.createdAt.toString()}>
+                {dateToReadableFormat(note.createdAt, lang, {
+                  year: 'numeric',
+                  weekday: undefined,
+                  month: 'short',
+                })}
+              </time>
+            </div>
+            {note?.ranges && <NoteRanges ranges={note.ranges} />}
+            <EditNoteListItem
+              verseKey={verseKey}
+              onNoteUpdated={onNoteUpdated}
+              onNoteDeleted={onNoteDeleted}
+              key={note.id}
+              noteId={noteId}
+              note={note}
+            />
+          </div>
+        );
+      })}
     </div>
   );
 };

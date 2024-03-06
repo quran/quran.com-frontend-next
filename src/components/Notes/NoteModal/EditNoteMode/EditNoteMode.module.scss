@@ -7,6 +7,7 @@
 .addNoteContainer {
     border: 1px var(--color-borders-hairline) solid;
     padding: var(--spacing-medium);
+    margin-block-end: var(--spacing-medium);
     border-radius: var(--border-radius-rounded);
 }
 
@@ -19,6 +20,19 @@
 
 .addNoteBtnContainer {
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     flex-direction: column;
+    margin-block-end: var(--spacing-medium);
+}
+
+.noteDate {
+    display: block;
+    font-size: var(--font-size-xsmall);
+    color: var(--color-text-faded);
+}
+
+.noteHeaderContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }

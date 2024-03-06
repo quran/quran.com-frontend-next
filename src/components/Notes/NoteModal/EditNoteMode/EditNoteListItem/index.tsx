@@ -14,7 +14,6 @@ import EditIcon from '@/icons/edit.svg';
 import { AttachedEntityType, Note } from '@/types/auth/Note';
 import { deleteNote as baseDeleteNote, publishNoteToQR } from '@/utils/auth/api';
 import { makeGetNoteByIdUrl, makeGetNotesByVerseUrl } from '@/utils/auth/apiPaths';
-import { dateToReadableFormat } from '@/utils/datetime';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getQuranReflectPostUrl } from '@/utils/quranReflect/navigation';
 import { isVerseKeyWithinRanges } from '@/utils/verse';
@@ -194,37 +193,28 @@ const EditNoteListItem: React.FC<Props> = ({
         />
       ) : (
         <>
-          <div className={styles.headerContainer}>
-            <time className={styles.noteDate} dateTime={note.createdAt.toString()}>
-              {dateToReadableFormat(note.createdAt, lang, {
-                year: 'numeric',
-                weekday: undefined,
-                month: 'short',
-              })}
-            </time>
-            <div className={styles.buttonsContainer}>
-              <Button
-                shouldFlipOnRTL={false}
-                variant={ButtonVariant.Ghost}
-                onClick={onEditClicked}
-                tooltip={t('edit')}
-                size={ButtonSize.Small}
-                {...buttonProps}
-              >
-                <EditIcon />
-              </Button>
-              <Button
-                variant={ButtonVariant.Ghost}
-                onClick={onDeleteClicked}
-                tooltip={t('delete')}
-                size={ButtonSize.Small}
-                type={ButtonType.Warning}
-                {...buttonProps}
-                // eslint-disable-next-line i18next/no-literal-string
-              >
-                X
-              </Button>
-            </div>
+          <div className={styles.buttonsContainer}>
+            <Button
+              shouldFlipOnRTL={false}
+              variant={ButtonVariant.Ghost}
+              onClick={onEditClicked}
+              tooltip={t('edit')}
+              size={ButtonSize.Small}
+              {...buttonProps}
+            >
+              <EditIcon />
+            </Button>
+            <Button
+              variant={ButtonVariant.Ghost}
+              onClick={onDeleteClicked}
+              tooltip={t('delete')}
+              size={ButtonSize.Small}
+              type={ButtonType.Warning}
+              {...buttonProps}
+              // eslint-disable-next-line i18next/no-literal-string
+            >
+              X
+            </Button>
           </div>
           <div className={styles.noteBody}>{note.body}</div>
           <div className={styles.shareButtonContainer}>
