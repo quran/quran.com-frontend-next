@@ -33,7 +33,7 @@ const EditNoteListItem: React.FC<Props> = ({
   onNoteUpdated,
   onNoteDeleted,
 }) => {
-  const { lang, t } = useTranslation('common');
+  const { t } = useTranslation('common');
   const toast = useToast();
   const { mutate, cache } = useSWRConfig();
   const [isInEditMode, setIsInEditMode] = useState<boolean>(false);
