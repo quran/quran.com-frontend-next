@@ -7,9 +7,8 @@ export function getNormalizedIntervals(start, end) {
   const durationInFrames = normalizedEnd - normalizedStart;
 
   return {
-    start: normalizedStart,
-    end: normalizedEnd,
-    durationInFrames: durationInFrames,
+    start: Math.ceil(normalizedStart),
+    durationInFrames: Math.ceil(durationInFrames),
   };
 }
 
@@ -17,23 +16,7 @@ export function getNormalizedTimestamps(audio) {
   let result = [];
   for (let i = 0; i < audio.verseTimings.length; i++) {
     const currentVerse = audio.verseTimings[i];
-    const nextVerse = audio.verseTimings[i + 1] || undefined;
-    let start = 0;
-    let end = 0;
-    if (i === 0) {
-      start = 0;
-      if (nextVerse) {
-        end = nextVerse.timestampFrom;
-      }
-    } else if (i === audio.verseTimings.length - 1) {
-      start = currentVerse.timestampFrom;
-      end = audio.duration + 500;
-    } else if (nextVerse) {
-      start = currentVerse.timestampFrom;
-      end = nextVerse.timestampFrom;
-    }
-
-    result.push(getNormalizedIntervals(start, end));
+    result.push(getNormalizedIntervals(currentVerse.timestampFrom, currentVerse.timestampTo));
   }
   return result;
 }
