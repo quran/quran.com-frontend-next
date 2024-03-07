@@ -134,6 +134,7 @@
   "donate": "Menyumbangkan",
   "donate_monthly": "Donasi setiap bulan",
   "donate_once": "Donasi sekali",
+  "edit": "Sunting",
   "email-verification": {
     "check-spam": "Tidak menerima email verifikasi? Periksa kotak masuk spam Anda",
     "email-sent": "Kami baru saja mengirim email ke <strong> {{email}} </strong>",
@@ -172,10 +173,12 @@
     "title": "Baca, pelajari, dan pelajari The Noble Quran."
   },
   "form": {
+    "body": "Tubuh",
     "code": "Kode verifikasi",
     "email": "Surel",
     "firstName": "Nama depan",
-    "lastName": "Nama keluarga"
+    "lastName": "Nama keluarga",
+    "title": "Judul"
   },
   "from": "Dari",
   "fundraising-sticky-banner": {
@@ -214,18 +217,23 @@
   "navigate": "Navigasi",
   "network": "Jaringan",
   "new": "Baru!",
+  "newest": "Terbaru",
   "next": "Lanjut",
   "next-ayah": "Ayat Berikutnya",
   "no": "Tidak",
   "no-notifications": "Belum ada pemberitahuan",
   "none": "Tidak ada",
   "not-now": "Tidak sekarang",
+  "notes": {
+    "title": "Catatan & Refleksi Saya"
+  },
   "notification": {
     "mark-all-as-read": "tandai semua telah dibaca",
     "mark-as-read": "tandai sebagai membaca"
   },
   "notifications": "Pemberitahuan",
   "off": "Mati",
+  "oldest": "Tertua",
   "on": "Hidup",
   "page": "Halaman",
   "pages": "halaman-halaman",
@@ -266,6 +274,7 @@
   "retry": "Cuba lagi (Retry)",
   "revelation_order": "Urutan Wahyu",
   "rub": "Rub el Hizb",
+  "save": "Menyimpan",
   "save-to-collection": "Simpan ke Koleksi",
   "search-for": "Telusuri '{{searchQuery}}'",
   "search-results": "{{count}} hasil penelusuran",
@@ -305,6 +314,7 @@
   },
   "share": "Membagikan",
   "shared": "Tautan telah disalin ke papan klip!",
+  "show-more": "Menampilkan lebih banyak",
   "sidebar": {
     "search-hizb": "Cari Hizbut Tahrir",
     "search-juz": "Cari Juz",
@@ -355,6 +365,8 @@
   "validation": {
     "invalid-email": "{{field}} harus berupa alamat email yang valid",
     "invalid-field": "Harap masukkan nilai {{field}} yang valid",
+    "maximum-length": "{{field}} tidak boleh melebihi {{value}} karakter",
+    "minimum-length": "{{field}} minimal harus berisi {{value}} karakter",
     "required-field": "{{field}} wajib diisi"
   },
   "verse": "Ayat",

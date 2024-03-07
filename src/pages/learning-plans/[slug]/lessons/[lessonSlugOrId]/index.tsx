@@ -6,13 +6,13 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from './lessons.module.scss';
 
+import withAuth from '@/components/Auth/withAuth';
 import LessonView from '@/components/Course/LessonView';
 import DataFetcher from '@/components/DataFetcher';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import PageContainer from '@/components/PageContainer';
 import Link, { LinkVariant } from '@/dls/Link/Link';
 import Spinner from '@/dls/Spinner/Spinner';
-import useRequireAuth from '@/hooks/auth/useRequireAuth';
 import layoutStyles from '@/pages/index.module.scss';
 import ApiErrorMessage from '@/types/ApiErrorMessage';
 import { Lesson } from '@/types/auth/Course';
@@ -37,7 +37,6 @@ const Loading = () => (
 );
 
 const LessonPage: NextPage<Props> = () => {
-  useRequireAuth();
   const { lang } = useTranslation('learn');
   const router = useRouter();
   const { slug, lessonSlugOrId } = router.query;
@@ -106,4 +105,4 @@ const LessonPage: NextPage<Props> = () => {
   );
 };
 
-export default LessonPage;
+export default withAuth(LessonPage);

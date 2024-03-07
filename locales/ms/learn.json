@@ -16,6 +16,13 @@
   "enroll": "Daftar",
   "enroll-success": "Tahniah, Anda telah menambahkan {{title}} pada senarai anda!",
   "enrolled": "Didaftarkan",
+  "feedback": {
+    "add-feedback": "Tambah Maklum Balas",
+    "desc": "tahniah! Anda telah melengkapkan rancangan pembelajaran ' {{courseName}} '. <br> </br> Sila semak pelan pembelajaran dan kongsi maklum balas anda untuk membantu kami menambah baik kandungan.",
+    "feedback-placeholder": "Tulis maklum balas anda",
+    "feedback-success": "Terima kasih atas maklum balas anda!",
+    "your-feedback": "Maklum Balas Anda"
+  },
   "learn-duration": "Tempoh",
   "learning-plan-material": "Bahan Rancangan Pembelajaran",
   "learning-plan-meta-desc": "Pelan Pembelajaran ini akan membantu mengubah cara anda melibatkan diri dengan Al-Quran, mulakan perjalanan anda hari ini!",

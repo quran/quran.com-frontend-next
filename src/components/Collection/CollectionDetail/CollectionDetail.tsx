@@ -2,35 +2,26 @@
 import { useContext, useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
-import { useSelector, shallowEqual } from 'react-redux';
 
 import CollectionSorter from '../CollectionSorter/CollectionSorter';
 
 import styles from './CollectionDetail.module.scss';
 
+import EmbeddableVerseCell from '@/components/QuranReader/TranslationView/EmbeddableVerseCell';
 import ConfirmationModal from '@/dls/ConfirmationModal/ConfirmationModal';
 import { useConfirm } from '@/dls/ConfirmationModal/hooks';
 import ChevronDownIcon from '@/icons/chevron-down.svg';
 import OverflowMenuIcon from '@/icons/menu_more_horiz.svg';
-import { getDefaultWordFields, getMushafId } from '@/utils/api';
-import { makeVersesUrl } from '@/utils/apiPaths';
-import { areArraysEqual } from '@/utils/array';
 import { getChapterData } from '@/utils/chapter';
 import { logButtonClick, logEvent } from '@/utils/eventLogger';
 import { toLocalizedVerseKey } from '@/utils/locale';
 import { getVerseNavigationUrlByVerseKey } from '@/utils/navigation';
 import { navigateToExternalUrl } from '@/utils/url';
 import { makeVerseKey } from '@/utils/verse';
-import DataFetcher from 'src/components/DataFetcher';
 import Button, { ButtonVariant } from 'src/components/dls/Button/Button';
 import Collapsible from 'src/components/dls/Collapsible/Collapsible';
 import PopoverMenu from 'src/components/dls/PopoverMenu/PopoverMenu';
-import TranslationText from 'src/components/QuranReader/TranslationView/TranslationText';
-import VerseTextPreview from 'src/components/QuranReader/VerseTextPreview';
 import DataContext from 'src/contexts/DataContext';
-import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
-import { selectSelectedTranslations } from 'src/redux/slices/QuranReader/translations';
-import { VersesResponse } from 'types/ApiResponses';
 import Bookmark from 'types/Bookmark';
 import { CollectionDetailSortOption } from 'types/CollectionSortOptions';
 
@@ -56,11 +47,6 @@ const CollectionDetail = ({
 }: CollectionDetailProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const { t, lang } = useTranslation();
-  const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
-  const { quranFont, mushafLines } = quranReaderStyles;
-  const { mushaf } = getMushafId(quranFont, mushafLines);
-  const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
-
   const confirm = useConfirm();
 
   const sortOptions = [
@@ -230,40 +216,10 @@ const CollectionDetail = ({
                   {({ isOpen: isOpenRenderProp }) => {
                     if (!isOpenRenderProp) return null;
                     const chapterId = bookmark.key;
-                    const params = {
-                      words: true,
-                      perPage: 1,
-                      translations: selectedTranslations.join(','),
-                      page: bookmark.verseNumber,
-                      ...getDefaultWordFields(quranReaderStyles.quranFont),
-                      mushaf,
-                    };
-
                     return (
-                      <DataFetcher
-                        queryKey={makeVersesUrl(chapterId.toString(), lang, params)}
-                        render={(data: VersesResponse) => {
-                          if (!data) return null;
-                          const firstVerse = data.verses?.[0];
-                          return (
-                            <div className={styles.verseContainer}>
-                              <VerseTextPreview verses={data.verses} />
-                              <div>
-                                {firstVerse.translations?.map((translation) => {
-                                  return (
-                                    <TranslationText
-                                      key={translation.id}
-                                      translationFontScale={quranReaderStyles.translationFontScale}
-                                      text={translation.text}
-                                      languageId={translation.languageId}
-                                      resourceName={translation.resourceName}
-                                    />
-                                  );
-                                })}
-                              </div>
-                            </div>
-                          );
-                        }}
+                      <EmbeddableVerseCell
+                        chapterId={chapterId}
+                        verseNumber={bookmark.verseNumber}
                       />
                     );
                   }}

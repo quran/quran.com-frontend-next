@@ -134,6 +134,7 @@
   "donate": "บริจาค",
   "donate_monthly": "บริจาครายเดือน",
   "donate_once": "บริจาคครั้งเดียว",
+  "edit": "แก้ไข",
   "email-verification": {
     "check-spam": "ไม่ได้รับอีเมลยืนยัน? ลองตรวจสอบในกล่องจดหมายขยะของคุณ",
     "email-sent": "เราได้ส่งอีเมลไปที่ <strong> {{email}} </strong> แล้ว",
@@ -172,10 +173,12 @@
     "title": "อ่านศึกษาและเรียนรู้คัมภีร์อัลกุรอาน"
   },
   "form": {
+    "body": "ร่างกาย",
     "code": "รหัสยืนยัน",
     "email": "อีเมล",
     "firstName": "ชื่อจริง",
-    "lastName": "นามสกุล"
+    "lastName": "นามสกุล",
+    "title": "ชื่อ"
   },
   "from": "จาก",
   "fundraising-sticky-banner": {
@@ -214,18 +217,23 @@
   "navigate": "นำทาง",
   "network": "เครือข่าย",
   "new": "ใหม่!",
+  "newest": "ใหม่ล่าสุด",
   "next": "ต่อไป",
   "next-ayah": "อายะห์ต่อไป",
   "no": "ไม่",
   "no-notifications": "ยังไม่มีการแจ้งเตือน",
   "none": "ไม่มี",
   "not-now": "ไม่ใช่ตอนนี้",
+  "notes": {
+    "title": "บันทึกและภาพสะท้อนของฉัน"
+  },
   "notification": {
     "mark-all-as-read": "ทำเครื่องหมายทั้งหมดว่าอ่านแล้ว",
     "mark-as-read": "ทำเครื่องหมายว่าอ่านแล้ว"
   },
   "notifications": "การแจ้งเตือน",
   "off": "ปิด",
+  "oldest": "เก่าแก่ที่สุด",
   "on": "เปิด",
   "page": "หน้า",
   "pages": "หน้า",
@@ -266,6 +274,7 @@
   "retry": "ลองอีกครั้ง",
   "revelation_order": "ลำดับการประทาน",
   "rub": "รุบอุลฮิซบ์",
+  "save": "บันทึก",
   "save-to-collection": "บันทึกลงในคอลเล็กชัน",
   "search-for": "ค้นหา '{{searchQuery}}'",
   "search-results": "{{count}} ผลการค้นหา",
@@ -305,6 +314,7 @@
   },
   "share": "แชร์",
   "shared": "คัดลอกลิงก์ไปยังคลิปบอร์ดแล้ว!",
+  "show-more": "แสดงมากขึ้น",
   "sidebar": {
     "search-hizb": "ค้นหาอัลฮิซบ์",
     "search-juz": "ค้นหา ญุซ",
@@ -355,6 +365,8 @@
   "validation": {
     "invalid-email": "{{field}} ต้องเป็นที่อยู่อีเมลที่ถูกต้อง",
     "invalid-field": "โปรดป้อนค่า {{field}} ที่ถูกต้อง",
+    "maximum-length": "{{field}} ต้องไม่เกิน {{value}} อักขระ",
+    "minimum-length": "{{field}} ต้องมีอักขระอย่างน้อย {{value}} ตัว",
     "required-field": "{{field}} จำเป็นต้องระบุ"
   },
   "verse": "อายะห์",

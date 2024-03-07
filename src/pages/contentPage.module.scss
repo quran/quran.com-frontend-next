@@ -54,6 +54,9 @@
       font-size: var(--font-size-large);
     }
   }
+  b {
+    font-weight: var(--font-weight-bold);
+  }
 }
 
 .image {
@@ -103,4 +106,8 @@
 
 .bold {
   font-weight: bold;
+}
+
+.subHeading {
+  font-weight: var(--font-weight-bold);
 }

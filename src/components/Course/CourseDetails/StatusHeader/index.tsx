@@ -4,7 +4,10 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
+import styles from './StatusHeader.module.scss';
+
 import StartOrContinueLearning from '@/components/Course/Buttons/StartOrContinueLearning';
+import CourseFeedback, { FeedbackSource } from '@/components/Course/CourseFeedback';
 import Button from '@/dls/Button/Button';
 import Pill from '@/dls/Pill';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
@@ -79,7 +82,14 @@ const StatusHeader: React.FC<Props> = ({ course, isCTA = false }) => {
     );
   }
   if (isCompleted) {
-    return <Pill>{t('completed')}</Pill>;
+    return (
+      <div className={styles.completedContainer}>
+        <Pill>{t('completed')}</Pill>
+        {course?.userHasFeedback === false && (
+          <CourseFeedback course={course} source={FeedbackSource.CoursePage} />
+        )}
+      </div>
+    );
   }
   if (isUserEnrolled === true) {
     return <StartOrContinueLearning course={course} />;

@@ -29,6 +29,7 @@ export enum ButtonType {
   Success = 'success',
   Error = 'error',
   Warning = 'warning',
+  Inverse = 'inverse',
 }
 
 export enum ButtonVariant {
@@ -60,6 +61,7 @@ export type ButtonProps = {
   ariaLabel?: string;
   htmlType?: ButtonHTMLAttributes<HTMLButtonElement>['type'];
   children?: React.ReactNode;
+  id?: string;
 };
 
 const Button: React.FC<ButtonProps> = ({
@@ -96,6 +98,7 @@ const Button: React.FC<ButtonProps> = ({
     [styles.success]: type === ButtonType.Success,
     [styles.warning]: type === ButtonType.Warning,
     [styles.error]: type === ButtonType.Error,
+    [styles.inverse]: type === ButtonType.Inverse,
 
     // size
     [styles.large]: size === ButtonSize.Large,

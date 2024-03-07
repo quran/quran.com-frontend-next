@@ -7,6 +7,7 @@ import { useVerseTrackerContext } from '../../contexts/VerseTrackerContext';
 import TranslationViewCell from '../TranslationViewCell';
 
 import ChapterHeader from '@/components/chapters/ChapterHeader';
+import useCountRangeNotes from '@/hooks/auth/useCountRangeNotes';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
 import { VersesResponse } from '@/types/ApiResponses';
 import Translation from '@/types/Translation';
@@ -24,6 +25,10 @@ interface TranslationPageVerse {
   initialData: VersesResponse;
   firstVerseInPage: Verse;
   isLastVerseInView: boolean;
+  notesRange: {
+    from: string;
+    to: string;
+  } | null;
 }
 
 const TranslationPageVerse: React.FC<TranslationPageVerse> = ({
@@ -36,6 +41,7 @@ const TranslationPageVerse: React.FC<TranslationPageVerse> = ({
   initialData,
   firstVerseInPage,
   isLastVerseInView,
+  notesRange,
 }) => {
   const { t, lang } = useTranslation('common');
   const containerRef = useRef<HTMLDivElement>(null);
@@ -50,6 +56,8 @@ const TranslationPageVerse: React.FC<TranslationPageVerse> = ({
     );
     return response;
   });
+
+  const { data: notesCount } = useCountRangeNotes(notesRange);
 
   const getTranslationNameString = (translations?: Translation[]) => {
     let translationName = t('settings.no-translation-selected');
@@ -118,6 +126,7 @@ const TranslationPageVerse: React.FC<TranslationPageVerse> = ({
         quranReaderStyles={quranReaderStyles}
         pageBookmarks={pageBookmarks}
         bookmarksRangeUrl={bookmarksRangeUrl}
+        hasNotes={notesCount && notesCount[verse.verseKey] > 0}
       />
     </div>
   );

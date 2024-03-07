@@ -33,8 +33,6 @@ $fallbackColor: #22a5ad;
   flex-direction: column;
   height: 100%;
   align-items: center;
-  padding-block-start: var(--spacing-mega);
-  padding-block-end: var(--spacing-small);
   padding-inline: var(--spacing-small);
 
   @include breakpoints.tablet {
@@ -56,11 +54,11 @@ $fallbackColor: #22a5ad;
     margin-block-start: var(--spacing-xxsmall);
   }
 
-  &>svg {
+  & > svg {
     fill: var(--color-text-inverse);
   }
 }
 
 .quickLinksContainer {
-  margin-block-start: var(--spacing-mega);
+  margin-block-start: var(--spacing-xxsmall);
 }

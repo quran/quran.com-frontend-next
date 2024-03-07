@@ -1,0 +1,30 @@
+.starButton {
+  all: unset;
+  width: var(--spacing-mega);
+  height: var(--spacing-mega);
+  display: inline-grid;
+  place-items: center;
+  color: hsl(50, 100%, 50%);
+  border-radius: var(--border-radius-default);
+
+  // if the star is selected but disabled, we still need to show it colorful
+  &:disabled.selected {
+    color: hsl(50, 100%, 50%);
+  }
+  // if the star is selected and disabled, we need to show it dimmed
+  &:disabled {
+    color: var(--color-error-faded);
+  }
+}
+
+.starButton:hover {
+  // if the star is not disabled, make it colorful
+  &:not(:disabled) {
+    color: hsl(50, 100%, 45%);
+  }
+}
+
+.starButton:focus-visible {
+  background-color: hsl(50, 100%, 90%);
+  box-shadow: 0 0 0 var(--spacing-micro) hsl(50, 100%, 80%);
+}

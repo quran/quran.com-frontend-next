@@ -37,7 +37,7 @@ interface Props {
   onClearClicked?: () => void;
   onChange?: (value: string) => void;
   value?: string;
-  label?: string;
+  label?: string | JSX.Element;
   type?: InputType;
   shouldFlipOnRTL?: boolean;
   variant?: InputVariant;

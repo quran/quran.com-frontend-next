@@ -4,6 +4,7 @@ import range from 'lodash/range';
 
 import { getChapterData } from './chapter';
 import { formatStringNumber } from './number';
+import { parseVerseRange } from './verseKeys';
 
 import ChaptersData from 'types/ChaptersData';
 import Verse from 'types/Verse';
@@ -401,4 +402,55 @@ export const shortenVerseText = (text: string, length = 150): string => {
 export const getFirstAndLastVerseKeys = (verses: Record<string, Verse>): string[] => {
   const verseKeys = Object.keys(verses).sort(sortByVerseKey);
   return [verseKeys[0], verseKeys[verseKeys.length - 1]];
+};
+
+/**
+ * This function checks if a verse key is within a range or an array of ranges.
+ *
+ * Examples:
+ * - `isVerseKeyWithinRanges('1:1', '1:1-1:7')` -> `true`
+ * - `isVerseKeyWithinRanges('1:1', '1:2-1:7')` -> `false`
+ * - `isVerseKeyWithinRanges('2:4', ['1:1-1:7', '2:1-2:5'])` -> `true`
+ * - `isVerseKeyWithinRanges('2:10', ['1:2-1:7', '2:1-2:5'])` -> `false`
+ *
+ * @param {string} verseKey - verse key, e.g. 1:1
+ * @param {string[] | string} ranges - verse range or array of verse ranges, e.g. `1:1-1:7` or `['1:1-1:7', '2:1-2:5']`
+ * @returns {boolean}
+ */
+export const isVerseKeyWithinRanges = (verseKey: string, ranges: string[] | string) => {
+  const [chapter, verse] = getVerseAndChapterNumbersFromKey(verseKey).map(Number);
+  const rangesArray = Array.isArray(ranges) ? ranges : [ranges];
+
+  for (let i = 0; i < rangesArray.length; i += 1) {
+    const verseRange = rangesArray[i];
+    const [from, to] = parseVerseRange(verseRange, true);
+
+    // if the chapter is less than or greater than the range, then skip this range
+    if (chapter < from.chapter || chapter > to.chapter) {
+      // eslint-disable-next-line no-continue
+      continue;
+    }
+
+    // if the chapter is equal to the chapter of the range start, then check if the verse is within the range
+    // if the verse is less than the range, then skip this range
+    if (chapter === from.chapter && verse < from.verse) {
+      // eslint-disable-next-line no-continue
+      continue;
+    }
+
+    // if the chapter is equal to the chapter of the range end, then check if the verse is within the range
+    // if the verse is greater than the range, then skip this range
+    if (chapter === to.chapter && verse > to.verse) {
+      // eslint-disable-next-line no-continue
+      continue;
+    }
+
+    // if we're here, it means that the verse is within the range
+    // so we can return true directly and end the loop
+    return true;
+  }
+
+  // if we're here, it means that the verse is not within any of the ranges
+  // so we can return false
+  return false;
 };

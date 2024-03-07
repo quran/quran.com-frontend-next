@@ -134,6 +134,7 @@
   "donate": "Menderma",
   "donate_monthly": "Menderma bulanan",
   "donate_once": "Derma sekali",
+  "edit": "Sunting",
   "email-verification": {
     "check-spam": "Tidak menerima e-mel pengesahan? Semak peti masuk spam anda",
     "email-sent": "Kami baru sahaja menghantar e-mel kepada <strong> {{email}} </strong>",
@@ -172,10 +173,12 @@
     "title": "Baca, kaji dan pelajari Al-Quran."
   },
   "form": {
+    "body": "Badan",
     "code": "Kod pengesahan",
     "email": "E-mel",
     "firstName": "Nama pertama",
-    "lastName": "Nama terakhir"
+    "lastName": "Nama terakhir",
+    "title": "Tajuk"
   },
   "from": "Dari",
   "fundraising-sticky-banner": {
@@ -214,18 +217,23 @@
   "navigate": "Navigasi",
   "network": "Rangkaian",
   "new": "Baru!",
+  "newest": "Terbaru",
   "next": "Seterusnya",
   "next-ayah": "Seterusnya Ayah",
   "no": "Tidak",
   "no-notifications": "Tiada pemberitahuan lagi",
   "none": "Tiada",
   "not-now": "Bukan sekarang",
+  "notes": {
+    "title": "Nota & Renungan Saya"
+  },
   "notification": {
     "mark-all-as-read": "Tandai semua sebagai dibaca",
     "mark-as-read": "tanda sebagai telah dibaca"
   },
   "notifications": "Pemberitahuan",
   "off": "Tutup",
+  "oldest": "Tertua",
   "on": "Pasang",
   "page": "Halaman",
   "pages": "Muka Surat",
@@ -266,6 +274,7 @@
   "retry": "Cuba lagi (Retry)",
   "revelation_order": "Perintah Wahyu",
   "rub": "Gosok el Hizb",
+  "save": "Jimat",
   "save-to-collection": "Simpan ke Koleksi",
   "search-for": "Cari '{{searchQuery}}'",
   "search-results": "{{count}} hasil carian",
@@ -305,6 +314,7 @@
   },
   "share": "Kongsi",
   "shared": "Pautan telah disalin ke papan keratan!",
+  "show-more": "Tunjukkan lagi",
   "sidebar": {
     "search-hizb": "Cari Hizb",
     "search-juz": "Cari Juzuk",
@@ -355,6 +365,8 @@
   "validation": {
     "invalid-email": "{{field}} mestilah alamat e-mel yang sah",
     "invalid-field": "Sila masukkan nilai {{field}} yang sah",
+    "maximum-length": "{{field}} tidak boleh melebihi {{value}} aksara",
+    "minimum-length": "{{field}} mestilah sekurang-kurangnya {{value}} aksara",
     "required-field": "{{field}} diperlukan"
   },
   "verse": "Ayat",

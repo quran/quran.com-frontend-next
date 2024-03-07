@@ -1,18 +1,44 @@
 {
-    "no-bookmarks": "Vous n'avez pas encore de favoris",
-    "noble-quran": "Le Noble Coran",
-    "read-juz": "Lire Juz",
-    "recently-read": "Lu récemment",
-    "revelation-order-disclaimer": "Cette vue montre l'ordre chronologique des sourates dans le Coran en fonction du moment où elles ont été révélées au Prophète Muhammad <hover> ﷺ <\/hover> . La chronologie est un sujet d'opinion scientifique et certaines sourates ont été révélées en parties à des moments différents. La commande ici est basée sur le travail de <link> Tanzil.net <\/link> . [Remarque : l'ordre Mushaf compilé d'al-Fatiha à al-Nas est une question de consensus.]",
-    "tab": {
-        "bookmarks": "Signets",
-        "popular": "Populaire"
+  "no-bookmarks": "Vous n'avez pas encore de favoris",
+  "noble-quran": "Le Noble Coran",
+  "qgj": {
+    "desc": {
+      "logged-in-no-goal": "<bold> Séries de lecture </bold> - Mettez-vous au défi de maintenir une séquence de 30 jours pendant ce Ramadan !",
+      "logged-out": "<bold> Séries de lecture </bold> - Mettez-vous au défi de maintenir une séquence de 30 jours pendant ce Ramadan ! <link> connectez-vous simplement </link>"
     },
-    "view-all-bookmarks": "Afficher tous les marque-pages",
-    "voice": {
-        "trigger": "Accès rapide à tout"
+    "learning-plans": {
+      "cta": {
+        "all-plans": "Tous les forfaits",
+        "my-plans": "Mes plans"
+      },
+      "desc": {
+        "logged-in": "Avez-vous déjà commencé un programme d’apprentissage et avez-vous déraillé à mi-parcours ? Les plans d'apprentissage sont divisés en morceaux gérables et nous suivons vos progrès jusqu'à ce que vous atteigniez la ligne d'arrivée. Découvrez notre offre actuelle de cours dès aujourd'hui",
+        "logged-in-no-plans": "Avez-vous déjà commencé un programme d’apprentissage et avez-vous déraillé à mi-parcours ? Les plans d'apprentissage sont divisés en morceaux gérables et nous suivons vos progrès jusqu'à ce que vous atteigniez la ligne d'arrivée. Découvrez notre offre actuelle de cours dès aujourd'hui",
+        "logged-out": "Avez-vous déjà commencé un programme d’apprentissage et avez-vous déraillé à mi-parcours ? Les plans d'apprentissage sont divisés en morceaux gérables et nous suivons vos progrès jusqu'à ce que vous atteigniez la ligne d'arrivée. Découvrez notre offre actuelle de cours dès aujourd'hui"
+      },
+      "title": "Plans d'apprentissage"
     },
-    "welcome": {
-        "title": "C'est le Mois du Coran ! Aidez des millions d'utilisateurs à accéder aux conseils du Coran."
-    }
+    "quran-reading-goals": {
+      "desc": {
+        "logged-out": "Voulez-vous lire 10 minutes par jour, terminer un Juz en un mois ou terminer le Coran en entier en un an ? Il est facile de créer un objectif personnalisé et de suivre vos progrès"
+      },
+      "title": "Objectifs de lecture du Coran personnalisés"
+    },
+    "title": "Parcours de croissance du Coran"
+  },
+  "ramadan-activities-cta": "Découvrez dès aujourd'hui les <link> activités enrichissantes du Ramadan </link> de cette année !",
+  "read-juz": "Lire Juz",
+  "recently-read": "Lu récemment",
+  "revelation-order-disclaimer": "Cette vue montre l'ordre chronologique des sourates dans le Coran en fonction du moment où elles ont été révélées au Prophète Muhammad <hover> ﷺ </hover> . La chronologie est un sujet d'opinion scientifique et certaines sourates ont été révélées en parties à des moments différents. La commande ici est basée sur le travail de <link> Tanzil.net </link> . [Remarque : l'ordre Mushaf compilé d'al-Fatiha à al-Nas est une question de consensus.]",
+  "tab": {
+    "bookmarks": "Signets",
+    "popular": "Populaire"
+  },
+  "view-all-bookmarks": "Afficher tous les marque-pages",
+  "voice": {
+    "trigger": "Accès rapide à tout"
+  },
+  "welcome": {
+    "title": "C'est le Mois du Coran ! Aidez des millions d'utilisateurs à accéder aux conseils du Coran."
+  }
 }

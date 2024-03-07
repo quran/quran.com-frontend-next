@@ -8,6 +8,7 @@ import dynamic from 'next/dynamic';
 
 import styles from './AudioPlayer.module.scss';
 
+import { useOnboarding } from '@/components/Onboarding/OnboardingProvider';
 import Spinner from '@/dls/Spinner/Spinner';
 import { milliSecondsToSeconds } from '@/utils/datetime';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
@@ -52,6 +53,7 @@ const AudioPlayer = () => {
   const audioPlayerRef = useRef<HTMLAudioElement>();
   const audioService = useContext(AudioPlayerMachineContext);
   const isVisible = useSelector(audioService, (state) => state.matches('VISIBLE'));
+  const { isActive } = useOnboarding();
 
   useEffect(() => {
     window.audioPlayerEl = audioPlayerRef.current;
@@ -132,6 +134,7 @@ const AudioPlayer = () => {
       <div
         className={classNames(styles.container, styles.containerDefault, {
           [styles.containerHidden]: !isVisible,
+          [styles.containerOnboarding]: isActive,
         })}
       >
         {/* We have to create an inline audio player and hide it due to limitations of how safari requires a play action to trigger: https://stackoverflow.com/questions/31776548/why-cant-javascript-play-audio-files-on-iphone-safari */}

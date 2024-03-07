@@ -7,6 +7,7 @@ import useTranslation from 'next-translate/useTranslation';
 import layoutStyle from './index.module.scss';
 import styles from './profile.module.scss';
 
+import withAuth from '@/components/Auth/withAuth';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import DeleteAccountButton from '@/components/Profile/DeleteAccountButton';
 import BookmarksAndCollectionsSection from '@/components/Verses/BookmarksAndCollectionsSection';
@@ -14,7 +15,6 @@ import RecentReadingSessions from '@/components/Verses/RecentReadingSessions';
 import Button from '@/dls/Button/Button';
 import Skeleton from '@/dls/Skeleton/Skeleton';
 import useCurrentUser from '@/hooks/auth/useCurrentUser';
-import useRequireAuth from '@/hooks/auth/useRequireAuth';
 import { logoutUser } from '@/utils/auth/api';
 import { DEFAULT_PHOTO_URL } from '@/utils/auth/constants';
 import { isLoggedIn } from '@/utils/auth/login';
@@ -22,7 +22,11 @@ import { removeLastSyncAt } from '@/utils/auth/userDataSync';
 import { getAllChaptersData } from '@/utils/chapter';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getLanguageAlternates } from '@/utils/locale';
-import { getCanonicalUrl, getProfileNavigationUrl } from '@/utils/navigation';
+import {
+  getCanonicalUrl,
+  getLoginNavigationUrl,
+  getProfileNavigationUrl,
+} from '@/utils/navigation';
 import Error from 'src/pages/_error';
 import ChaptersData from 'types/ChaptersData';
 
@@ -33,8 +37,6 @@ interface Props {
 const nameSample = 'Mohammad Ali';
 const emailSample = 'mohammadali@quran.com';
 const ProfilePage: NextPage<Props> = () => {
-  // we don't want to show the profile page if the user is not logged in
-  useRequireAuth();
   const { t, lang } = useTranslation();
   const router = useRouter();
   const { user, isLoading, error } = useCurrentUser();
@@ -47,7 +49,7 @@ const ProfilePage: NextPage<Props> = () => {
 
     await logoutUser();
     removeLastSyncAt();
-    router.push('/login');
+    router.push(getLoginNavigationUrl());
     router.reload();
   };
 
@@ -153,4 +155,4 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   };
 };
 
-export default ProfilePage;
+export default withAuth(ProfilePage);

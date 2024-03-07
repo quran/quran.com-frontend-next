@@ -134,6 +134,7 @@
   "donate": "Doar",
   "donate_monthly": "Doe mensalmente",
   "donate_once": "Doe uma vez",
+  "edit": "Editar",
   "email-verification": {
     "check-spam": "Não recebeu o e-mail de verificação? Verifique sua caixa de spam",
     "email-sent": "Acabamos de enviar um e-mail para <strong> {{email}} </strong>",
@@ -172,10 +173,12 @@
     "title": "Leia, estude e aprenda O Nobre Alcorão."
   },
   "form": {
+    "body": "Corpo",
     "code": "Código de verificação",
     "email": "E-mail",
     "firstName": "Primeiro nome",
-    "lastName": "Sobrenome"
+    "lastName": "Sobrenome",
+    "title": "Título"
   },
   "from": "A partir de",
   "fundraising-sticky-banner": {
@@ -214,18 +217,23 @@
   "navigate": "Navegar",
   "network": "Rede",
   "new": "Novo!",
+  "newest": "O mais novo",
   "next": "Próximo",
   "next-ayah": "Próxima Aia",
   "no": "Não",
   "no-notifications": "Nenhuma notificação ainda",
   "none": "Nenhum",
   "not-now": "Agora não",
+  "notes": {
+    "title": "Minhas notas e reflexões"
+  },
   "notification": {
     "mark-all-as-read": "marcar tudo como lido",
     "mark-as-read": "marcar como Lido"
   },
   "notifications": "Notificações",
   "off": "Desligado",
+  "oldest": "Mais antigo",
   "on": "Sobre",
   "page": "Página",
   "pages": "Páginas",
@@ -266,6 +274,7 @@
   "retry": "Tentar novamente",
   "revelation_order": "Ordem Revelação",
   "rub": "Rub el Hizb",
+  "save": "Salvar",
   "save-to-collection": "Salvar na coleção",
   "search-for": "Procure por '{{searchQuery}}'",
   "search-results": "{{count}} resultados de pesquisa",
@@ -305,6 +314,7 @@
   },
   "share": "Compartilhado",
   "shared": "O link foi copiado para a área de transferência!",
+  "show-more": "Mostre mais",
   "sidebar": {
     "search-hizb": "Pesquisar hizb",
     "search-juz": "Pesquisar Juz",
@@ -355,6 +365,8 @@
   "validation": {
     "invalid-email": "{{field}} deve ser um endereço de e-mail válido",
     "invalid-field": "Insira um valor {{field}} válido",
+    "maximum-length": "{{field}} não pode exceder {{value}} caracteres",
+    "minimum-length": "{{field}} deve ter pelo menos {{value}} caracteres",
     "required-field": "{{field}} é obrigatório"
   },
   "verse": "Versículo",

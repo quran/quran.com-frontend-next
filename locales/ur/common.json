@@ -134,6 +134,7 @@
   "donate": "عطیہ کریں۔",
   "donate_monthly": "ماہانہ عطیہ کریں۔",
   "donate_once": "ایک بار عطیہ کریں۔",
+  "edit": "ترمیم",
   "email-verification": {
     "check-spam": "تصدیقی ای میل موصول نہیں ہوا؟ اپنا اسپام ان باکس چیک کریں۔",
     "email-sent": "ہم نے ابھی <strong> {{email}} </strong> پر ایک ای میل بھیجی ہے۔",
@@ -172,10 +173,12 @@
     "title": "نوبل قرآن پڑھیں، مطالعہ کریں اور سیکھیں۔"
   },
   "form": {
+    "body": "جسم",
     "code": "تصدیقی کوڈ",
     "email": "ای میل",
     "firstName": "پہلا نام",
-    "lastName": "آخری نام"
+    "lastName": "آخری نام",
+    "title": "عنوان"
   },
   "from": "سے",
   "fundraising-sticky-banner": {
@@ -214,18 +217,23 @@
   "navigate": "نیویگیٹ کریں۔",
   "network": "نیٹ ورک",
   "new": "نئی!",
+  "newest": "تازہ ترین",
   "next": "اگلے",
   "next-ayah": "اگلی آیت",
   "no": "نہیں",
   "no-notifications": "ابھی تک کوئی اطلاع نہیں ہے۔",
   "none": "کوئی نہیں۔",
   "not-now": "ابھی نہیں",
+  "notes": {
+    "title": "میرے نوٹس اور عکاسی۔"
+  },
   "notification": {
     "mark-all-as-read": "سب کو پڑھا ہوا شمار کریں",
     "mark-as-read": "پڑھا ہوا نشان زد کریں۔"
   },
   "notifications": "اطلاعات",
   "off": "بند",
+  "oldest": "قدیم ترین",
   "on": "پر",
   "page": "صفحہ",
   "pages": "صفحات",
@@ -266,6 +274,7 @@
   "retry": "دوبارہ کوشش کریں۔",
   "revelation_order": "وحی کا حکم",
   "rub": "راب ال حزب",
+  "save": "محفوظ کریں۔",
   "save-to-collection": "مجموعہ میں محفوظ کریں۔",
   "search-for": "'{{searchQuery}}' تلاش کریں",
   "search-results": "{{count}} تلاش کے نتائج",
@@ -305,6 +314,7 @@
   },
   "share": "بانٹیں",
   "shared": "لنک کو کلپ بورڈ پر کاپی کر دیا گیا ہے!",
+  "show-more": "مزید دکھائیں",
   "sidebar": {
     "search-hizb": "حزب کو تلاش کریں۔",
     "search-juz": "سپارے میں تلاش کریں۔",
@@ -355,6 +365,8 @@
   "validation": {
     "invalid-email": "{{field}} ایک درست ای میل پتہ ہونا چاہیے۔",
     "invalid-field": "براہ کرم ایک درست {{field}} قدر درج کریں۔",
+    "maximum-length": "{{field}} {{value}} حروف سے زیادہ نہیں ہو سکتا",
+    "minimum-length": "{{field}} کم از کم {{value}} حروف کا ہونا چاہیے۔",
     "required-field": "{{field}} درکار ہے۔"
   },
   "verse": "آیت",

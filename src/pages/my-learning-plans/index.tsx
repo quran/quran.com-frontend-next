@@ -1,17 +1,15 @@
 import { NextPage, GetStaticProps } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 
+import withAuth from '@/components/Auth/withAuth';
 import CoursesPageLayout from '@/components/Course/CoursesPageLayout';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
-import useRequireAuth from '@/hooks/auth/useRequireAuth';
 import { getAllChaptersData } from '@/utils/chapter';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl, getMyCoursesNavigationUrl } from '@/utils/navigation';
 
 const MyLearningPlanPage: NextPage = () => {
   const { t, lang } = useTranslation('learn');
-  useRequireAuth();
-
   return (
     <>
       <NextSeoWrapper
@@ -36,4 +34,4 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   };
 };
 
-export default MyLearningPlanPage;
+export default withAuth(MyLearningPlanPage);
