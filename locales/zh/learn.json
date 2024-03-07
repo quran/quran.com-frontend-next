@@ -16,6 +16,13 @@
   "enroll": "注册",
   "enroll-success": "恭喜，您已将{{title}}添加到您的列表中！",
   "enrolled": "已注册",
+  "feedback": {
+    "add-feedback": "添加反馈",
+    "desc": "恭喜！您已完成“ {{courseName}} ”学习计划。 <br> </br>请查看学习计划并分享您的反馈，以帮助我们改进内容。",
+    "feedback-placeholder": "写下您的反馈",
+    "feedback-success": "感谢您的反馈意见！",
+    "your-feedback": "您的反馈"
+  },
   "learn-duration": "期间",
   "learning-plan-material": "学习计划材料",
   "learning-plan-meta-desc": "该学习计划将帮助您改变学习《古兰经》的方式，今天就开始您的旅程吧！",

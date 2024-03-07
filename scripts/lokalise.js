@@ -46,7 +46,7 @@ if (!API_KEY || !PROJECT_ID) {
         // 1. Request the url that contained the zipped file of all the translations files.
         lokaliseApi
           .files()
-          .download(PROJECT_ID, { format: 'json', original_filenames: true, indentation: 2 })
+          .download(PROJECT_ID, { format: 'json', original_filenames: true, indentation: '2sp' })
           .then((response) => {
             console.log('Starting to download the zipped file...');
             // 2. Download the zipped file.

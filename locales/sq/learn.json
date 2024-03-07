@@ -16,6 +16,13 @@
   "enroll": "Regjistrohu",
   "enroll-success": "Urime, keni shtuar {{title}} në listën tuaj!",
   "enrolled": "I regjistruar",
+  "feedback": {
+    "add-feedback": "Shto koment",
+    "desc": "urime! Ju keni përfunduar planin mësimor \" {{courseName}} \". <br> </br> Ju lutemi rishikoni planin mësimor dhe ndani komentet tuaja për të na ndihmuar të përmirësojmë përmbajtjen.",
+    "feedback-placeholder": "Shkruani komentet tuaja",
+    "feedback-success": "Faleminderit për komentin tuaj!",
+    "your-feedback": "Komentet tuaja"
+  },
   "learn-duration": "Kohëzgjatja",
   "learning-plan-material": "Materiali i planit mësimor",
   "learning-plan-meta-desc": "Ky Plan Mësimi do të ndihmojë në transformimin e mënyrës se si angazhoheni me Kuranin, filloni udhëtimin tuaj sot!",
