@@ -1,5 +1,6 @@
 import React from 'react';
 
+import classNames from 'classnames';
 import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
 
@@ -42,41 +43,25 @@ const ReflectionIntro = () => {
             <div>
               <div className={styles.sectionContainer}>
                 <div className={styles.sectionHeader}>
-                  {t('new-note-reflc-intro.what-is-qr.title')}
-                </div>
-                <Trans
-                  components={{
-                    br: <br key={0} />,
-                    link: (
-                      <Link
-                        key={1}
-                        href="https://quranreflect.com/faq"
-                        variant={LinkVariant.Blend}
-                        isNewTab
-                      />
-                    ),
-                  }}
-                  i18nKey="notes:new-note-reflc-intro.what-is-qr.desc"
-                />
-              </div>
-              <div className={styles.sectionContainer}>
-                <div className={styles.sectionHeader}>
                   {t('new-note-reflc-intro.what-is-reflc.title')}
                 </div>
                 <Trans
                   components={{
                     br: <br key={0} />,
-                    link: (
+                    link1: <Link key={1} href="/38:29" variant={LinkVariant.Blend} isNewTab />,
+                    link2: <Link key={2} href="/47:24" variant={LinkVariant.Blend} isNewTab />,
+                    link3: <Link key={3} href="/4:82" variant={LinkVariant.Blend} isNewTab />,
+                    link4: (
                       <Link
-                        key={1}
-                        href="https://quranreflect.com/faq"
+                        key={4}
+                        href="https://quranReflect.com/faq"
                         variant={LinkVariant.Blend}
                         isNewTab
                       />
                     ),
-                    link1: (
+                    link5: (
                       <Link
-                        key={2}
+                        key={5}
                         href="/learning-plans/five-lenses-to-reflect-on-the-quran"
                         variant={LinkVariant.Blend}
                         isNewTab
@@ -90,12 +75,25 @@ const ReflectionIntro = () => {
                 <div className={styles.sectionHeader}>
                   {t('new-note-reflc-intro.reflc-prompts.title')}
                 </div>
+                <div className={styles.sectionHeader}>
+                  {t('new-note-reflc-intro.reflc-prompts.personal.title')}
+                </div>
                 <Trans
                   components={{
                     br: <br key={0} />,
                     li: <li key={1} />,
                   }}
-                  i18nKey="notes:new-note-reflc-intro.reflc-prompts.desc"
+                  i18nKey="notes:new-note-reflc-intro.reflc-prompts.personal.desc"
+                />
+                <div className={classNames(styles.sectionHeader, styles.subSectionHeader)}>
+                  {t('new-note-reflc-intro.reflc-prompts.deeper.title')}
+                </div>
+                <Trans
+                  components={{
+                    br: <br key={0} />,
+                    li: <li key={1} />,
+                  }}
+                  i18nKey="notes:new-note-reflc-intro.reflc-prompts.deeper.desc"
                 />
               </div>
             </div>

@@ -14,38 +14,44 @@
   "delete-success": "Note has been deleted successfully",
   "export-success": "Note has been published to your account on QuranReflect successfully",
   "share-to-qr": "Share to QuranReflect.com",
-  "post-on-qr": "Post On QuranReflect",
-  "view-on-qr": "View On QuranReflect",
+  "post-on-qr": "Post on QuranReflect",
+  "view-on-qr": "View on QuranReflect",
   "share-to-qr-desc": "Share as <b>{{name}}</b>. Audience is <b>QuranReflect users</b>",
   "qr-tooltip": "<span><link>QuranReflect</link> is a social platform for sharing reflections on the Quran. Connect around the Quran, connect with what matters.</span>",
   "click-to-see-more": "click to see more",
   "private-notes": "Notes",
   "posted-reflections": "Posted Reflections",
-  "save-post-to-qr": "Save & post to QuranReflect",
+  "save-post-to-qr": "Save & Post to QuranReflect",
   "reflections-intro": {
-    "title": "Know more about Reflections",
-    "line-1": "To view likes, interact with comments, or edit your posted reflections, visit QuranReflect.com.",
-    "line-2": "Note: Editing post in QuranReflect will not automatically update your post on Quran.com",
-    "line-3": "If you do not have a QuranReflect account, you can sign in with your Quran.com account username and password.",
-    "line-4": "Content that is not suitable for public viewing will be hidden or deleted. Users posting inappropriate content will be blocked."
+    "title": "Learn more about Posted Reflections",
+    "line-1": "To view and interact with comments, engage with the community, and do more, visit <link>QuranReflect.com</link>.",
+    "line-2": "You can log into your linked QuranReflect account by logging in or signing up with the same quran.com email used in your sign-in.",
+    "line-3": "Content that is not suitable for public viewing will be hidden or deleted. Users posting inappropriate content will be blocked."
   },
   "new-note-reflc-intro": {
     "title": "Need help reflecting on the Quran? Learn more",
-    "what-is-qr": {
-      "title": "What is QuranReflect?",
-      "desc": "QuranReflect is a social platform for sharing personal reflections on the Qur'an, encouraging users to internalize its messages and share insights that inspire positive change. Unlike tafsir, which is a scholarly interpretation, reflections are personal thoughts and experiences related to the verses. QuranReflect has a moderation system managed by scholars that guides users to share personal insights and experiences without delving into speculative interpretations,  fostering a spiritually uplifting, Quran-focused community. <br></br> <br></br>Learn more: <link>quranreflect.com/faq</link>"
-    },
     "what-is-reflc": {
       "title": "What is a Reflection?",
-      "desc": "Reflection on the Quran is internal and personal: it is to read or listen carefully to Allah’s words, engage with its meanings and allow it to affect and change you for the better. This is referred to as `Tadabbur`. Tafsir, in contrast, is a scholarly interpretation of the Quran, providing detailed explanations of its verses based on classical sources and scholarly analysis.<br></br> <br></br>For the purposes of this feature, we have provided a space to save your general notes and/or reflections for personal reference. Sometimes our personal reflections can deeply resonate with others, aiding their connection to the Quran. That’s why we have added an option to share your reflection to QuranReflect as part of our efforts to help people grow together in their journey with the Quran. To learn more, visit: <link>quranreflect.com/faq</link> and <link1>Five Lenses to Reflect on the Quran</link1>"
+      "desc": "Reflecting or pondering upon the Quran involves reading or listening carefully to Allah’s words, engaging with its meanings, and allowing it to affect and change us for the better. This is referred to as `Tadabbur`. Tafsir,  in contrast, is a scholarly interpretation of the Quran, providing detailed explanations of its verses based on classical sources and scholarly analysis. While Tafsir is reserved for the scholars, Allah SWT asks everyone to engage in Tadabbur (Quran <link1>38:29</link1>, <link2>47:24</link2>, <link3>4:82</link3>, and many more).<br></br><br></br>Users can save their notes and personal reflections privately. Oftentimes our reflections can deeply resonate with others, aiding their connection to the Quran, and their relationship with Allah SWT. That’s why users have the option to share their reflection to QuranReflect as part of our efforts to help people grow together in their journey. To learn more, visit: <link4>QuranReflect.com/faq</link4> and <link5>Five Lenses to Reflect on the Quran</link5>"
     },
     "reflc-prompts": {
-      "title": "View Reflection Prompts",
-      "desc": "Here is a list of prompts that can help begin reflecting on the Quran:<br></br><br></br> <li>What made you stop and think of the verse?</li><li>What feelings and emotions did you experience in your mind and heart regarding this verse?</li><li>Are there any names of Allah being mentioned in this verse? How does the attribute mentioned relate to the verse?</li><li>Are there any particular words or linguistic points which fascinate you in relation to this verse?</li><li>Are there any connections that you can derive from the verse and its context, or with the previous and next surah, or a connection to a hadith or an event from the seerah?</li><li>Are there any commands or prohibitions in this verse that I need to follow or avoid? How am I doing in relation to these?</li><li>Does this verse mention any qualities or actions that Allah loves or dislikes? Could these apply to me? How can I improve?</li><li>Is there a promise or warning in this verse? How can I apply this in my life to become a better Muslim?</li><li>Is there a promise or warning in this verse? How can I apply this in my life to become a better Muslim?</li><li>What changes would you like to see in yourself and others based on this verse, and what practical advice can you offer to help follow its guidance?</li>"
+      "title": "Reflection Prompts",
+      "personal": {
+        "title": "Personal Reflection Questions:",
+        "desc": "<li>In what ways has this verse moved or inspired you?</li><li>Are there qualities or actions mentioned that you can improve upon?</li><li>Is there a promise or a warning/prohibition that you can apply to your life?</li><li>Do you have a personal story related to this verse?</li><li>What changes do you want to make based on this verse, and how can you or someone else practically implement them?</li>"
+      },
+      "deeper": {
+        "title": "Deeper Insights:",
+        "desc": "<li>Are there any names of Allah mentioned, and how do they relate to the verse?</li><li>Which words or linguistic aspects caught your attention?</li><li>Can you draw connections to the verse’s context, other Quranic verses, hadith, or events?</li>"
+      }
     }
   },
   "checkbox-refl-intro": {
-    "title": "What happens if I click this checkbox?",
-    "desc": "<li>Posting to QuranReflect means that your reflection will be posted on QuranReflect under your username where it will be reviewed by the moderation team and the QuranReflect community.</li><li>You may view your notes and posted reflections on your Quran.com login profile in the “notes” section, or log into <link>QuranReflect</link> using your Quran.com sign-in.</li>"
+    "title": "What is QuranReflect and what happens if I check this box?",
+    "qr-intro": "QuranReflect, along with Quran.com, is a part of the Quran.Foundation family. It is a social platform for sharing personal reflections on the Quran, encouraging users to internalize its messages and share insights that inspire positive change. Unlike tafsir, which is a scholarly interpretation, reflections are personal thoughts and experiences related to the verses. User posts to QuranReflect are reviewed and moderated by a qualified team, who will help ensure quality of content, etiquettes when interacting with the Quran, and they will empower users by sharing feedback and highlighting valuable discourse thus fostering a spiritually uplifting, Quran-focused community. Learn more: <link>quranreflect.com/faq</link>",
+    "checkbox": {
+      "title": "What happens if I check this box?",
+      "desc": "<li>Posting means that your reflection will be shared on QuranReflect under your name where it will be reviewed by the moderation team and visible to the QuranReflect community.</li><li>Once your post is reviewed and approved or promoted by our moderation team, you may get likes, comments and follow notifications. Upon signing into QuranReflect, you can update your notification settings to suit your preferences.</li><li>You may view your notes and posted reflections under your Quran.com login profile in the “My Notes and Reflections” section, or log into <link>QuranReflect</link> using your Quran.com sign-in email.</li>"
+    }
   }
 }

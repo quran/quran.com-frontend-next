@@ -33,20 +33,37 @@ const PublicReflectionCheckboxDescription = () => {
           if (!isOpenRenderProp) return null;
 
           return (
-            <Trans
-              components={{
-                li: <li key={0} />,
-                link: (
-                  <Link
-                    key={0}
-                    href="https://quranreflect.com"
-                    variant={LinkVariant.Blend}
-                    isNewTab
-                  />
-                ),
-              }}
-              i18nKey="notes:checkbox-refl-intro.desc"
-            />
+            <div className={styles.contentContainer}>
+              <Trans
+                components={{
+                  li: <li key={0} />,
+                  link: (
+                    <Link
+                      key={0}
+                      href="https://quranreflect.com/faq"
+                      variant={LinkVariant.Blend}
+                      isNewTab
+                    />
+                  ),
+                }}
+                i18nKey="notes:checkbox-refl-intro.qr-intro"
+              />
+              <p className={styles.checkboxTitle}>{t('checkbox-refl-intro.checkbox.title')}</p>
+              <Trans
+                components={{
+                  li: <li key={0} />,
+                  link: (
+                    <Link
+                      key={0}
+                      href="https://quranreflect.com"
+                      variant={LinkVariant.Blend}
+                      isNewTab
+                    />
+                  ),
+                }}
+                i18nKey="notes:checkbox-refl-intro.checkbox.desc"
+              />
+            </div>
           );
         }}
       </Collapsible>

@@ -1,44 +1,38 @@
-import React, { useState } from 'react';
+import React from 'react';
 
+import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from './ReflectionsTabIntroduction.module.scss';
 
-import Collapsible, { CollapsibleDirection } from '@/dls/Collapsible/Collapsible';
-import ChevronDownIcon from '@/icons/chevron-down.svg';
-import { logEvent } from '@/utils/eventLogger';
+import Link, { LinkVariant } from '@/dls/Link/Link';
 
 const ReflectionsTabIntroduction = () => {
   const { t } = useTranslation('notes');
-  const [isOpen, setIsOpen] = useState(false);
-
-  const onOpenChange = (newOpen: boolean) => {
-    logEvent(`public_reflections_intro${newOpen ? 'open' : 'close'}`);
-    setIsOpen(newOpen);
-  };
 
   return (
     <div className={styles.container}>
-      <Collapsible
-        direction={CollapsibleDirection.Right}
-        onOpenChange={onOpenChange}
-        shouldOpen={isOpen}
-        title={<div className={styles.title}>{t('reflections-intro.title')}</div>}
-        prefix={<ChevronDownIcon />}
-        shouldRotatePrefixOnToggle
-      >
-        {({ isOpen: isCollapsibleOpen }) => {
-          if (!isCollapsibleOpen) return null;
-          return (
-            <ul>
-              <li>{t('reflections-intro.line-1')}</li>
-              <li>{t('reflections-intro.line-2')}</li>
-              <li>{t('reflections-intro.line-3')}</li>
-              <li>{t('reflections-intro.line-4')}</li>
-            </ul>
-          );
-        }}
-      </Collapsible>
+      <div className={styles.title}>{t('reflections-intro.title')}</div>
+      <ul>
+        <li>
+          <Trans
+            components={{
+              li: <li key={0} />,
+              link: (
+                <Link
+                  key={0}
+                  href="https://quranreflect.com"
+                  variant={LinkVariant.Blend}
+                  isNewTab
+                />
+              ),
+            }}
+            i18nKey="notes:reflections-intro.line-1"
+          />
+        </li>
+        <li>{t('reflections-intro.line-2')}</li>
+        <li>{t('reflections-intro.line-3')}</li>
+      </ul>
     </div>
   );
 };

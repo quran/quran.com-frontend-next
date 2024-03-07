@@ -8,3 +8,13 @@
 .title {
     font-weight: var(--font-weight-semibold);
 }
+
+.contentContainer {
+    margin-block-start: var(--spacing-small);
+}
+
+.checkboxTitle {
+    font-weight: var(--font-weight-semibold);
+    margin-block: var(--spacing-small);
+    text-decoration: underline;
+}
