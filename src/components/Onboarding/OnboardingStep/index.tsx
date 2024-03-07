@@ -152,7 +152,7 @@ const OnboardingStep = ({
               onClick={handleNextClick}
               suffix={isLastStep ? null : <ChevronRightIcon className={styles.icon} />}
             >
-              {isLastStep ? t('finish') : t('next')}
+              {isLastStep ? t('finish') : t('common:next')}
             </Button>
           )}
         </div>
