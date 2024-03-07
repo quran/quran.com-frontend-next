@@ -134,6 +134,7 @@
   "donate": "দান করুন",
   "donate_monthly": "মাসিক দান করুন",
   "donate_once": "একবার দান করুন",
+  "edit": "সম্পাদনা করুন",
   "email-verification": {
     "check-spam": "যাচাইকরণ ইমেল পাননি? আপনার স্প্যাম ইনবক্স চেক করুন",
     "email-sent": "আমরা এইমাত্র <strong> {{email}} </strong> -এ একটি ইমেল পাঠিয়েছি",
@@ -172,10 +173,12 @@
     "title": "মহান কুরআন পড়ুন, অধ্যয়ন করুন এবং শিখুন।"
   },
   "form": {
+    "body": "শরীর",
     "code": "যাচাইকরণ কোড",
     "email": "ইমেইল",
     "firstName": "নামের প্রথম অংশ",
-    "lastName": "নামের শেষাংশ"
+    "lastName": "নামের শেষাংশ",
+    "title": "শিরোনাম"
   },
   "from": "থেকে",
   "fundraising-sticky-banner": {
@@ -214,18 +217,23 @@
   "navigate": "নেভিগেট করুন",
   "network": "অন্তর্জাল",
   "new": "নতুন!",
+  "newest": "সবথেকে নতুন",
   "next": "পরবর্তী",
   "next-ayah": "পরবর্তী আয়াত",
   "no": "না",
   "no-notifications": "এখনও কোন বিজ্ঞপ্তি নেই",
   "none": "কোনোটিই নয়",
   "not-now": "এখন না",
+  "notes": {
+    "title": "আমার নোট এবং প্রতিফলন"
+  },
   "notification": {
     "mark-all-as-read": "সবগুলো পঠিত বলে সনাক্ত কর",
     "mark-as-read": "পঠিত হিসেবে চিহ্নিত করুন"
   },
   "notifications": "বিজ্ঞপ্তি",
   "off": "বন্ধ",
+  "oldest": "প্রবীণতম",
   "on": "চালু",
   "page": "পাতা",
   "pages": "পাতা",
@@ -266,6 +274,7 @@
   "retry": "পুনরায় চেষ্টা করা",
   "revelation_order": "উদ্ঘাটন আদেশ",
   "rub": "রুব এল হিযব",
+  "save": "সংরক্ষণ",
   "save-to-collection": "সংগ্রহে সংরক্ষণ করুন",
   "search-for": "'{{searchQuery}}' অনুসন্ধান করুন",
   "search-results": "{{count}} সার্চ ফলাফল",
@@ -305,6 +314,7 @@
   },
   "share": "শেয়ার করুন",
   "shared": "লিঙ্কটি ক্লিপবোর্ডে অনুলিপি করা হয়েছে!",
+  "show-more": "আরো দেখুন",
   "sidebar": {
     "search-hizb": "হিজব অনুসন্ধান করুন",
     "search-juz": "Juz অনুসন্ধান করুন",
@@ -355,6 +365,8 @@
   "validation": {
     "invalid-email": "{{field}} অবশ্যই একটি বৈধ ইমেল ঠিকানা হতে হবে৷",
     "invalid-field": "অনুগ্রহ করে একটি বৈধ {{field}} মান ইনপুট করুন৷",
+    "maximum-length": "{{field}} {{value}} অক্ষরের বেশি হতে পারে না৷",
+    "minimum-length": "{{field}} অবশ্যই কমপক্ষে {{value}} অক্ষর হতে হবে",
     "required-field": "{{field}} প্রয়োজন৷"
   },
   "verse": "আয়াত",

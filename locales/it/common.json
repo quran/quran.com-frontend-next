@@ -134,6 +134,7 @@
   "donate": "Donare",
   "donate_monthly": "Dona mensilmente",
   "donate_once": "Dona una volta",
+  "edit": "Modificare",
   "email-verification": {
     "check-spam": "Non hai ricevuto l'email di verifica? Controlla la tua casella di posta indesiderata",
     "email-sent": "Abbiamo appena inviato un'email a <strong> {{email}} </strong>",
@@ -172,10 +173,12 @@
     "title": "Leggi, studia e impara Il Nobile Corano."
   },
   "form": {
+    "body": "Corpo",
     "code": "Codice di verifica",
     "email": "E-mail",
     "firstName": "Nome di battesimo",
-    "lastName": "Cognome"
+    "lastName": "Cognome",
+    "title": "Titolo"
   },
   "from": "A partire dal",
   "fundraising-sticky-banner": {
@@ -214,18 +217,23 @@
   "navigate": "Navigare",
   "network": "Rete",
   "new": "Nuovo!",
+  "newest": "Più recente",
   "next": "Prossimo",
   "next-ayah": "Avanti Sì",
   "no": "No",
   "no-notifications": "Nessuna notifica ancora",
   "none": "Nessuno",
   "not-now": "Non adesso",
+  "notes": {
+    "title": "I miei appunti e riflessioni"
+  },
   "notification": {
     "mark-all-as-read": "Segna tutti come letti",
     "mark-as-read": "segna come letto"
   },
   "notifications": "Notifiche",
   "off": "Spento",
+  "oldest": "Il più antico",
   "on": "Sopra",
   "page": "Pagina",
   "pages": "Pagine",
@@ -266,6 +274,7 @@
   "retry": "Riprova",
   "revelation_order": "Ordine di rivelazione",
   "rub": "Rub el Hizb",
+  "save": "Salva",
   "save-to-collection": "Salva nella raccolta",
   "search-for": "Cerca '{{searchQuery}}'",
   "search-results": "{{count}} risultati di ricerca",
@@ -305,6 +314,7 @@
   },
   "share": "Condividere",
   "shared": "Il link è stato copiato negli appunti!",
+  "show-more": "Mostra di più",
   "sidebar": {
     "search-hizb": "Cerca Hizb",
     "search-juz": "Cerca Juz",
@@ -355,6 +365,8 @@
   "validation": {
     "invalid-email": "{{field}} deve essere un indirizzo email valido",
     "invalid-field": "Inserisci un valore {{field}} valido",
+    "maximum-length": "{{field}} non può contenere più di {{value}} caratteri",
+    "minimum-length": "{{field}} deve contenere almeno {{value}} caratteri",
     "required-field": "{{field}} è obbligatorio"
   },
   "verse": "Versetto",

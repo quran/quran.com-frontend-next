@@ -61,7 +61,7 @@
     "playback-speed-unit": "ایکس",
     "player": {
       "close-audio-player": "پخش کننده صوتی را ببندید",
-      "currently-playing": "شما در حال حاضر در حال بازی هستید",
+      "currently-playing": "شما در حال حاضر در حال پخش هستید",
       "delay-verse": "تأخیر بین آیه",
       "download": "دانلود",
       "full-surah": "سوره کامل",
@@ -69,9 +69,9 @@
       "mismatch": "اگر می خواهید به جای آن {{currentReadingChapter}} را بازی کنید، روی \"شروع دوباره\" کلیک کنید",
       "pause": "مکث کنید",
       "pause-audio": "مکث صدا",
-      "play": "بازی",
+      "play": "پخش",
       "play-audio": "پخش صدا",
-      "play-range": "محدوده بازی",
+      "play-range": "محدوده پخش",
       "previous-ayah": "آیه قبلی",
       "repeat-1-verse": "آیه را تکرار کن",
       "repeat-settings": "تنظیمات را تکرار کنید",
@@ -79,7 +79,7 @@
       "search-verse": "جستجوی یک آیه",
       "single-verse": "تک آیه",
       "start-over": "شروع دوباره",
-      "start-playing": "شروع به بازی کنید",
+      "start-playing": "شروع به پخش کنید",
       "stop-repeating": "تکرار را متوقف کنید",
       "times": "بار",
       "verses-range": "طیف آیات"
@@ -134,6 +134,7 @@
   "donate": "اهدا کنید",
   "donate_monthly": "ماهانه اهدا کنید",
   "donate_once": "یکبار اهدا کنید",
+  "edit": "ویرایش کنید",
   "email-verification": {
     "check-spam": "ایمیل تأیید را دریافت نکردید؟ صندوق ورودی هرزنامه خود را بررسی کنید",
     "email-sent": "ما همین الان یک ایمیل به <strong> {{email}} </strong> ارسال کردیم",
@@ -172,10 +173,12 @@
     "title": "قرآن کریم را بخوانید، مطالعه کنید و یاد بگیرید."
   },
   "form": {
+    "body": "بدن",
     "code": "کد تایید",
     "email": "پست الکترونیک",
     "firstName": "نام کوچک",
-    "lastName": "نام خانوادگی"
+    "lastName": "نام خانوادگی",
+    "title": "عنوان"
   },
   "from": "از جانب",
   "fundraising-sticky-banner": {
@@ -194,7 +197,7 @@
   "input": {
     "clear": "پاک کردن"
   },
-  "juz": "جوز",
+  "juz": "جزء",
   "language": "زبان",
   "languages": "زبان ها",
   "learn-more": "بیشتر بدانید",
@@ -214,18 +217,23 @@
   "navigate": "پیمایش کنید",
   "network": "شبکه",
   "new": "جدید!",
+  "newest": "جدیدترین",
   "next": "بعد",
   "next-ayah": "آیه بعدی",
   "no": "خیر",
   "no-notifications": "هنوز اطلاعیه ای وجود ندارد",
   "none": "هیچ یک",
   "not-now": "الان نه",
+  "notes": {
+    "title": "یادداشت ها و بازتاب های من"
+  },
   "notification": {
     "mark-all-as-read": "همه را به عنوان خوانده شده علامت بزن",
     "mark-as-read": "به عنوان خوانده شده علامت بزن"
   },
   "notifications": "اطلاعیه",
   "off": "خاموش",
+  "oldest": "قدیمی ترین",
   "on": "بر",
   "page": "صفحه",
   "pages": "صفحات",
@@ -251,7 +259,7 @@
   "q-reflect": "قرآن انعکاس",
   "quran-com": "قرآن دات کام",
   "quran-radio": "رادیو قرآن",
-  "reading-history": "خواندن تاریخ",
+  "reading-history": "سابقه قرآئت",
   "reading-preference": {
     "reading": "خواندن",
     "translation": "ترجمه"
@@ -266,6 +274,7 @@
   "retry": "دوباره امتحان کنید",
   "revelation_order": "دستور وحی",
   "rub": "روب الحزب",
+  "save": "صرفه جویی",
   "save-to-collection": "ذخیره در مجموعه",
   "search-for": "جستجوی \"{{searchQuery}}\"",
   "search-results": "{{count}} نتایج جستجو",
@@ -305,6 +314,7 @@
   },
   "share": "اشتراک گذاری",
   "shared": "پیوند در کلیپ بورد کپی شده است!",
+  "show-more": "بیشتر نشان بده، اطلاعات بیشتر",
   "sidebar": {
     "search-hizb": "جستجو در حزب",
     "search-juz": "جستجوی Juz",
@@ -334,7 +344,7 @@
     "app": "اپلیکیشن تارتیل",
     "name": "Tarteel.ai"
   },
-  "theme": "موضوع",
+  "theme": "سبک نمایش",
   "themes": {
     "auto": "خودکار",
     "dark": "تاریک",
@@ -355,6 +365,8 @@
   "validation": {
     "invalid-email": "{{field}} باید یک آدرس ایمیل معتبر باشد",
     "invalid-field": "لطفاً یک مقدار معتبر {{field}} وارد کنید",
+    "maximum-length": "{{field}} نمی تواند بیش از {{value}} نویسه باشد",
+    "minimum-length": "{{field}} باید حداقل {{value}} کاراکتر باشد",
     "required-field": "{{field}} لازم است"
   },
   "verse": "آیه",

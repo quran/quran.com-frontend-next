@@ -134,6 +134,7 @@
   "donate": "Bağış Yapın",
   "donate_monthly": "Aylık bağış yapın",
   "donate_once": "Bir kez bağış yapın",
+  "edit": "Düzenlemek",
   "email-verification": {
     "check-spam": "Doğrulama e-postasını almadınız mı? Spam gelen kutunuzu kontrol edin",
     "email-sent": "Az önce <strong> {{email}} </strong> adresine bir e-posta gönderdik.",
@@ -172,10 +173,12 @@
     "title": "Kur'an-ı Kerim'i okuyun, inceleyin ve öğrenin."
   },
   "form": {
+    "body": "Vücut",
     "code": "Doğrulama kodu",
     "email": "E-posta",
     "firstName": "İlk adı",
-    "lastName": "Soy isim"
+    "lastName": "Soy isim",
+    "title": "Başlık"
   },
   "from": "İtibaren",
   "fundraising-sticky-banner": {
@@ -214,18 +217,23 @@
   "navigate": "Keşfedin",
   "network": "Ağ",
   "new": "Yeni!",
+  "newest": "En yeni",
   "next": "Sonraki",
   "next-ayah": "Sonraki Ayah",
   "no": "Numara",
   "no-notifications": "Henüz bildirim yok",
   "none": "Hiçbiri",
   "not-now": "Şimdi değil",
+  "notes": {
+    "title": "Notlarım ve Düşüncelerim"
+  },
   "notification": {
     "mark-all-as-read": "Tümünü okundu olarak işaretle",
     "mark-as-read": "Okundu olarak işaretle"
   },
   "notifications": "Bildirimler",
   "off": "Kapalı",
+  "oldest": "En eski",
   "on": "Açık",
   "page": "Sayfa",
   "pages": "Sayfalar",
@@ -266,6 +274,7 @@
   "retry": "Yeniden dene",
   "revelation_order": "Vahiy Düzeni",
   "rub": "El Hizb'i ovmak",
+  "save": "Kaydetmek",
   "save-to-collection": "Koleksiyona Kaydet",
   "search-for": "'{{searchQuery}}' için arama yapın",
   "search-results": "{{count}} arama sonucu",
@@ -305,6 +314,7 @@
   },
   "share": "Paylaş",
   "shared": "Bağlantı panoya kopyalandı!",
+  "show-more": "Daha fazla göster",
   "sidebar": {
     "search-hizb": "Hizb'de Ara",
     "search-juz": "Cüz ara",
@@ -355,6 +365,8 @@
   "validation": {
     "invalid-email": "{{field}} geçerli bir e-posta adresi olmalıdır",
     "invalid-field": "Lütfen geçerli bir {{field}} değeri girin",
+    "maximum-length": "{{field}} {{value}} karakteri aşamaz",
+    "minimum-length": "{{field}} en az {{value}} karakter olmalıdır",
     "required-field": "{{field}} gerekli"
   },
   "verse": "Ayet",

@@ -134,6 +134,7 @@
   "donate": "捐",
   "donate_monthly": "每月捐款",
   "donate_once": "捐赠一次",
+  "edit": "编辑",
   "email-verification": {
     "check-spam": "没有收到验证邮件？检查您的垃圾邮件收件箱",
     "email-sent": "我们刚刚向<strong> {{email}} </strong>发送了一封电子邮件",
@@ -172,10 +173,12 @@
     "title": "阅读、学习和学习《古兰经》。"
   },
   "form": {
+    "body": "身体",
     "code": "验证码",
     "email": "电子邮件",
     "firstName": "名",
-    "lastName": "姓"
+    "lastName": "姓",
+    "title": "标题"
   },
   "from": "从",
   "fundraising-sticky-banner": {
@@ -214,18 +217,23 @@
   "navigate": "导航",
   "network": "友情链接",
   "new": "新的！",
+  "newest": "最新",
   "next": "下一个",
   "next-ayah": "下一节文",
   "no": "不",
   "no-notifications": "还没有通知",
   "none": "无",
   "not-now": "现在不要",
+  "notes": {
+    "title": "我的笔记和思考"
+  },
   "notification": {
     "mark-all-as-read": "标记为已读",
     "mark-as-read": "标记为已读"
   },
   "notifications": "通知",
   "off": "离开",
+  "oldest": "最老的",
   "on": "在",
   "page": "页",
   "pages": "页面",
@@ -266,6 +274,7 @@
   "retry": "重试",
   "revelation_order": "天启令",
   "rub": "鲁布埃尔希兹",
+  "save": "节省",
   "save-to-collection": "保存到收藏",
   "search-for": "搜索 '{{searchQuery}}'",
   "search-results": "{{count}}搜索结果",
@@ -305,6 +314,7 @@
   },
   "share": "分享",
   "shared": "链接已复制到剪贴板！",
+  "show-more": "展示更多",
   "sidebar": {
     "search-hizb": "搜索 Hizb",
     "search-juz": "按卷搜索",
@@ -355,6 +365,8 @@
   "validation": {
     "invalid-email": "{{field}}必须是有效的电子邮件地址",
     "invalid-field": "请输入有效的{{field}}值",
+    "maximum-length": "{{field}}不能超过{{value}}个字符",
+    "minimum-length": "{{field}}必须至少包含{{value}}个字符",
     "required-field": "{{field}}是必需的"
   },
   "verse": "节",
