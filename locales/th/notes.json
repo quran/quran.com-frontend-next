@@ -12,6 +12,7 @@
   "click-to-see-more": "คลิกเพื่อดูเพิ่มเติม",
   "delete-note": "ลบบันทึก",
   "delete-success": "ลบบันทึกเรียบร้อยแล้ว",
+  "empty-notes": "ไม่พบบันทึกย่อ",
   "empty-reflections": "ไม่พบภาพสะท้อน",
   "export-success": "หมายเหตุได้รับการเผยแพร่ไปยังบัญชีของคุณใน QuranReflect เรียบร้อยแล้ว",
   "new-note-reflc-intro": {

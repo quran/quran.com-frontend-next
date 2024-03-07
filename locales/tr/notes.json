@@ -12,6 +12,7 @@
   "click-to-see-more": "Daha fazlasını görmek için tıklayın",
   "delete-note": "Notu sil",
   "delete-success": "Not başarıyla silindi",
+  "empty-notes": "Hiçbir not bulunamadı",
   "empty-reflections": "Hiçbir yansıma bulunamadı",
   "export-success": "Not, KuranReflect'teki hesabınıza başarıyla yayınlandı",
   "new-note-reflc-intro": {

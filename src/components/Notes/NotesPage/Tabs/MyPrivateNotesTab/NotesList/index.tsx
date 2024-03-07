@@ -98,7 +98,7 @@ const NotesList = ({ data, isValidating, size, setSize, mutateCache }: NotesList
   } else if (isEmpty) {
     content = (
       <div className={styles.emptyNotesContainer}>
-        <span>{t('notes:empty')}</span>
+        <span>{t('notes:empty-notes')}</span>
       </div>
     );
   }

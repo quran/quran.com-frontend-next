@@ -12,6 +12,7 @@
   "click-to-see-more": "点击查看更多",
   "delete-note": "删除注释",
   "delete-success": "注释已成功删除",
+  "empty-notes": "没有找到注释",
   "empty-reflections": "未发现反射",
   "export-success": "注释已成功发布到您在 QuranReflect 上的帐户",
   "new-note-reflc-intro": {
