@@ -22,6 +22,12 @@ describe('Test truncateString', () => {
 
     expect(result).toEqual('test');
   });
+  it('should shorten text correctly with suffix', () => {
+    const verseText = 'test';
+    const result = truncateString(verseText, 1, '....');
+
+    expect(result).toEqual('t....');
+  });
 });
 
 describe('Test stripHTMLTags', () => {

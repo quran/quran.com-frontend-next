@@ -1,0 +1,107 @@
+{
+  "checklist": {
+    "1": "Fonctionnalités de la page d'accueil",
+    "2": "Personnalisez vos paramètres",
+    "3": "Enrichissez votre expérience de lecture Ayah",
+    "4": "Fonctionnalités personnalisées"
+  },
+  "finish": "Finition",
+  "onboarding-checklist": "Liste de contrôle d'intégration",
+  "onboarding-title": "Maximisez votre expérience Quran.com ! <br></br> Commencez votre visite maintenant :",
+  "previous": "Précédent",
+  "skip": "Sauter",
+  "steps": {
+    "3-dot-menu": {
+      "description": "Cliquez sur le menu à 3 points pour découvrir les options de copie, de mise en signet et de répétition de versets. Découvrez une variété d'options pour répéter des versets",
+      "title": "Menu à 3 points"
+    },
+    "ayah-reflection": {
+      "description": "Lisez les réflexions (tadabbur) d'érudits, d'étudiants en sciences et de gens ordinaires pour vous aider à développer une connexion plus personnelle avec le Coran.",
+      "title": "Lire les réflexions au niveau de l'ayah"
+    },
+    "ayah-tafsir": {
+      "description": "Explorez le Tafsir au niveau de l'ayah, offrant des informations détaillées pour améliorer votre compréhension au fur et à mesure que vous lisez. (Le Tafsir peut être regroupé pour plusieurs versets, le cas échéant)",
+      "title": "Lire le Tafsir au niveau Ayah"
+    },
+    "font-size": {
+      "description": "Personnalisez votre lecture du Coran avec des tailles de police faciles à ajuster pour une expérience de lecture confortable",
+      "title": "Taille de police"
+    },
+    "font-style": {
+      "description": "Les options incluent Uthmani - King Fahad Complex v1, Uthmani - King Fahad Complex v2, Uthmani QPC Hafs, Indopak 15 lignes, Indopak 16 lignes",
+      "title": "Choisissez votre script de lecture préféré"
+    },
+    "inline-wbw": {
+      "description": "Visualisez la traduction de chaque mot en ligne (sous le mot) ou dans une bulle au-dessus du mot tout en écoutant le Coran",
+      "title": "Afficher la traduction mot à mot en ligne (sous le mot) ou afficher une info-bulle"
+    },
+    "juz": {
+      "description": "Voir le Coran par Juz",
+      "title": "Voir le Coran par Juz"
+    },
+    "listen": {
+      "description": "Démarrez le lecteur audio pour écouter la récitation",
+      "title": "Écoutez la sourate ou le verset"
+    },
+    "login": {
+      "description": "Connectez-vous et enregistrez les paramètres sur tous les appareils et accédez à des fonctionnalités supplémentaires.",
+      "title": "Se connecter"
+    },
+    "quran-radio": {
+      "description": "Écoutez QuranRadio - diffusez le Coran sans publicité",
+      "title": "Radio Coran"
+    },
+    "reading-sessions": {
+      "description": "Révisez facilement votre voyage coranique en jetant un coup d'œil à votre historique de lecture personnalisé, en gardant une trace des versets que vous avez explorés sur Quran.com.",
+      "title": "Afficher l'historique de lecture"
+    },
+    "reading-view": {
+      "description": "Afficher le Coran en mode lecture mushaf",
+      "title": "Mode lecture"
+    },
+    "search-bar": {
+      "description": "Trouvez les versets, sourates, mots-clés, juz et sujets que vous recherchez en utilisant notre barre de recherche",
+      "title": "Barre de recherche"
+    },
+    "select-reciter": {
+      "description": "Personnalisez votre expérience d'écoute en sélectionnant un récitant que vous aimez le plus écouter !",
+      "title": "Choisissez parmi une variété de récitants à écouter"
+    },
+    "settings": {
+      "description": "Contrôlez vos préférences",
+      "title": "Paramètres"
+    },
+    "streak": {
+      "description": "Fixez des objectifs de lecture personnalisés, suivez vos progrès et développez une habitude de lecture coranique cohérente grâce à notre fonctionnalité Séries et plans de lecture.",
+      "title": "Gardez une trace des séquences de lecture et des plans de lecture"
+    },
+    "surah-info": {
+      "description": "Obtenez des informations sur chaque sourate - idéalement situé au début de chaque sourate",
+      "title": "Lire à propos de la sourate"
+    },
+    "theme": {
+      "description": "Choisissez votre look préféré (mode clair, sépia ou sombre) pour une expérience de lecture du Coran confortable et personnalisée.",
+      "title": "Lisez le Coran en mode clair, sépia ou sombre"
+    },
+    "translations": {
+      "description": "Choisissez parmi une variété de traductions dans plusieurs langues. Astuce : Comparez les traductions en sélectionnant plusieurs options",
+      "title": "Traductions"
+    },
+    "voice-search": {
+      "description": "Appuyez sur l'icône du micro et récitez le verset que vous recherchez. Conseil rapide! Pour découvrir où quelqu'un récite (par exemple, les prières Taraweeh), appuyez sur l'icône du micro. Après qu'un ou deux versets soient détectés, appuyez sur stop pour trouver l'emplacement",
+      "title": "Recherche vocale (Tarteel)"
+    },
+    "wbw-audio": {
+      "description": "Sélectionnez cette option pour écouter chaque mot individuellement en cliquant simplement sur le mot !",
+      "title": "Écoutez la translittération mot à mot en cliquant sur le mot"
+    },
+    "wbw-translation": {
+      "description": "Affichez la signification de mots individuels pendant que vous lisez ou écoutez le Coran pour vous aider à améliorer votre vocabulaire coranique.",
+      "title": "Lire la traduction mot à mot"
+    },
+    "wbw-transliteration": {
+      "description": "Consultez la translittération de chaque mot pour vous aider dans votre parcours de lecture du Coran",
+      "title": "Lire la translittération mot à mot"
+    }
+  }
+}

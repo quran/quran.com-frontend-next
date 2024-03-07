@@ -1,18 +1,44 @@
 {
-    "no-bookmarks": "Henüz yer işaretiniz yok",
-    "noble-quran": "Kur'an-ı Kerim",
-    "read-juz": "Cüz oku",
-    "recently-read": "Son Okunanlar",
-    "revelation-order-disclaimer": "Bu görüş, Kuran'daki surelerin Hz. Muhammed <hover> ﷺ <\/hover> >'e indirildikleri zamana göre kronolojik sırasını gösterir. Kronoloji ilmî bir görüş konusudur ve bazı sûreler farklı zamanlarda bölümler halinde nazil olmuştur. Buradaki sıralama <link> Tanzil.net <\/link> çalışmasına dayanmaktadır. [Not: Fâtiha'dan Nâs'a kadar derlenen Mushaf düzeni, icma meselesidir.]",
-    "tab": {
-        "bookmarks": "Yer imleri",
-        "popular": "Popüler"
+  "no-bookmarks": "Henüz yer işaretiniz yok",
+  "noble-quran": "Kur'an-ı Kerim",
+  "qgj": {
+    "desc": {
+      "logged-in-no-goal": "<bold> Okuma Serileri </bold> - Bu Ramazan'da 30 günlük bir seriyi sürdürmek için kendinize meydan okuyun!",
+      "logged-out": "<bold> Okuma Serileri </bold> - Bu Ramazan'da 30 günlük bir seriyi sürdürmek için kendinize meydan okuyun! Basitçe <link> giriş yapın </link>"
     },
-    "view-all-bookmarks": "Tüm yer imlerini görüntüle",
-    "voice": {
-        "trigger": "Her şeye hızlı erişim"
+    "learning-plans": {
+      "cta": {
+        "all-plans": "Tüm Planlar",
+        "my-plans": "Planlarım"
+      },
+      "desc": {
+        "logged-in": "Hiç bir öğrenme programına başlayıp yarı yolda kaldığınız oldu mu? Öğrenme planları yönetilebilir parçalara bölünmüştür ve bitiş çizgisine ulaşana kadar ilerlemenizi takip ederiz. Bugün mevcut kurs tekliflerimizi keşfedin",
+        "logged-in-no-plans": "Hiç bir öğrenme programına başlayıp yarı yolda kaldığınız oldu mu? Öğrenme planları yönetilebilir parçalara bölünmüştür ve bitiş çizgisine ulaşana kadar ilerlemenizi takip ederiz. Bugün mevcut kurs tekliflerimizi keşfedin",
+        "logged-out": "Hiç bir öğrenme programına başlayıp yarı yolda kaldığınız oldu mu? Öğrenme planları yönetilebilir parçalara bölünmüştür ve bitiş çizgisine ulaşana kadar ilerlemenizi takip ederiz. Bugün mevcut kurs tekliflerimizi keşfedin"
+      },
+      "title": "Öğrenme Planları"
     },
-    "welcome": {
-        "title": "Bu, Kuran Ayı! Milyonlarca kullanıcının Kuran'ın rehberliğine erişmesine yardımcı olun."
-    }
+    "quran-reading-goals": {
+      "desc": {
+        "logged-out": "Günde 10 dakika okumak mı, bir ayda bir Cüz tamamlamak mı, yoksa bir yılda Kur'an'ın tamamını mı bitirmek istiyorsunuz? Özel bir hedef oluşturmak ve ilerlemenizi takip etmek kolaydır"
+      },
+      "title": "Özel Kur'an Okuma Hedefleri"
+    },
+    "title": "Kuran Büyüme Yolculuğu"
+  },
+  "ramadan-activities-cta": "Bu yılın zenginleştirici <link> Ramazan etkinliklerini </link> bugün keşfedin!",
+  "read-juz": "Cüz oku",
+  "recently-read": "Son Okunanlar",
+  "revelation-order-disclaimer": "Bu görüş, Kuran'daki surelerin Hz. Muhammed <hover> ﷺ </hover> >'e indirildikleri zamana göre kronolojik sırasını gösterir. Kronoloji ilmî bir görüş konusudur ve bazı sûreler farklı zamanlarda bölümler halinde nazil olmuştur. Buradaki sıralama <link> Tanzil.net </link> çalışmasına dayanmaktadır. [Not: Fâtiha'dan Nâs'a kadar derlenen Mushaf düzeni, icma meselesidir.]",
+  "tab": {
+    "bookmarks": "Yer imleri",
+    "popular": "Popüler"
+  },
+  "view-all-bookmarks": "Tüm yer imlerini görüntüle",
+  "voice": {
+    "trigger": "Her şeye hızlı erişim"
+  },
+  "welcome": {
+    "title": "Bu, Kuran Ayı! Milyonlarca kullanıcının Kuran'ın rehberliğine erişmesine yardımcı olun."
+  }
 }

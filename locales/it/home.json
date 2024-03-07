@@ -1,18 +1,44 @@
 {
-    "no-bookmarks": "Non hai ancora nessun segnalibro",
-    "noble-quran": "Il Nobile Corano",
-    "read-juz": "Leggi Juz",
-    "recently-read": "Letto di recente",
-    "revelation-order-disclaimer": "Questa visione mostra l'ordine cronologico delle sure nel Corano in base a quando furono rivelate al profeta Maometto <hover> ﷺ <\/hover> . La cronologia è oggetto di opinione accademica e alcune sure sono state rivelate in parti in tempi diversi. L'ordinamento qui si basa sul lavoro di <link> Tanzil.net <\/link> . [Nota: l'ordine Mushaf compilato da al-Fatiha ad al-Nas è una questione di consenso.]",
-    "tab": {
-        "bookmarks": "segnalibri",
-        "popular": "Popolare"
+  "no-bookmarks": "Non hai ancora nessun segnalibro",
+  "noble-quran": "Il Nobile Corano",
+  "qgj": {
+    "desc": {
+      "logged-in-no-goal": "<bold> Serie di letture </bold> - Sfida te stesso a mantenere una serie di 30 giorni durante questo Ramadan!",
+      "logged-out": "<bold> Serie di letture </bold> - Sfida te stesso a mantenere una serie di 30 giorni durante questo Ramadan! Basta <link> accedere </link>"
     },
-    "view-all-bookmarks": "Visualizza tutti i segnalibri",
-    "voice": {
-        "trigger": "Accesso rapido a qualsiasi cosa"
+    "learning-plans": {
+      "cta": {
+        "all-plans": "Tutti i piani",
+        "my-plans": "I miei piani"
+      },
+      "desc": {
+        "logged-in": "Hai mai iniziato un programma di apprendimento e sei uscito dal percorso a metà? I piani di apprendimento sono divisi in parti gestibili e monitoriamo i tuoi progressi fino al raggiungimento del traguardo. Esplora oggi stesso la nostra attuale offerta di corsi",
+        "logged-in-no-plans": "Hai mai iniziato un programma di apprendimento e sei uscito dal percorso a metà? I piani di apprendimento sono divisi in parti gestibili e monitoriamo i tuoi progressi fino al raggiungimento del traguardo. Esplora oggi stesso la nostra attuale offerta di corsi",
+        "logged-out": "Hai mai iniziato un programma di apprendimento e sei uscito dal percorso a metà? I piani di apprendimento sono divisi in parti gestibili e monitoriamo i tuoi progressi fino al raggiungimento del traguardo. Esplora oggi stesso la nostra attuale offerta di corsi"
+      },
+      "title": "Piani di apprendimento"
     },
-    "welcome": {
-        "title": "È il mese del Corano! Aiuta milioni di utenti ad accedere alla guida del Corano."
-    }
+    "quran-reading-goals": {
+      "desc": {
+        "logged-out": "Vuoi leggere 10 minuti al giorno, completare un Juz in un mese o finire l'intero Corano in un anno? È facile creare un obiettivo personalizzato e monitorare i tuoi progressi"
+      },
+      "title": "Obiettivi di lettura del Corano personalizzati"
+    },
+    "title": "Viaggio di crescita del Corano"
+  },
+  "ramadan-activities-cta": "Esplora oggi stesso le arricchenti <link> attività del Ramadan </link> di quest'anno!",
+  "read-juz": "Leggi Juz",
+  "recently-read": "Letto di recente",
+  "revelation-order-disclaimer": "Questa visione mostra l'ordine cronologico delle sure nel Corano in base a quando furono rivelate al profeta Maometto <hover> ﷺ </hover> . La cronologia è oggetto di opinione accademica e alcune sure sono state rivelate in parti in tempi diversi. L'ordinamento qui si basa sul lavoro di <link> Tanzil.net </link> . [Nota: l'ordine Mushaf compilato da al-Fatiha ad al-Nas è una questione di consenso.]",
+  "tab": {
+    "bookmarks": "segnalibri",
+    "popular": "Popolare"
+  },
+  "view-all-bookmarks": "Visualizza tutti i segnalibri",
+  "voice": {
+    "trigger": "Accesso rapido a qualsiasi cosa"
+  },
+  "welcome": {
+    "title": "È il mese del Corano! Aiuta milioni di utenti ad accedere alla guida del Corano."
+  }
 }

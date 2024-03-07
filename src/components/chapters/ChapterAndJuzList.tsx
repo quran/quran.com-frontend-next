@@ -80,7 +80,7 @@ const ChapterAndJuzList: React.FC<ChapterAndJuzListProps> = ({
   const tabs = useMemo(
     () => [
       { title: t(`common:${View.Surah}`), value: View.Surah },
-      { title: t(`common:${View.Juz}`), value: View.Juz },
+      { title: t(`common:${View.Juz}`), value: View.Juz, id: 'juz-tab' },
       { title: t(`common:${View.RevelationOrder}`), value: View.RevelationOrder },
     ],
     [t],

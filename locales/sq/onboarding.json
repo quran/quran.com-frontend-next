@@ -1,0 +1,107 @@
+{
+  "checklist": {
+    "1": "Karakteristikat e faqes kryesore",
+    "2": "Personalizo cilësimet e tua",
+    "3": "Pasuroni përvojën tuaj të leximit të ajetit",
+    "4": "Karakteristikat e personalizuara"
+  },
+  "finish": "Përfundo",
+  "onboarding-checklist": "Lista kontrolluese e hyrjes në bord",
+  "onboarding-title": "Maksimizoni përvojën tuaj në Quran.com! <br></br> Filloni turneun tuaj tani:",
+  "previous": "E mëparshme",
+  "skip": "Kapërce",
+  "steps": {
+    "3-dot-menu": {
+      "description": "Klikoni në menunë me 3 pika për të zbuluar opsionet për kopjimin, shënimin dhe përsëritjen e vargjeve. Zbuloni një shumëllojshmëri opsionesh për të përsëritur vargjet",
+      "title": "Menyja me 3 pika"
+    },
+    "ayah-reflection": {
+      "description": "Lexoni reflektime (tadabbur) nga studiues, studentë të dijes dhe njerëz të zakonshëm për t'ju ndihmuar të zhvilloni një lidhje më personale me Kuranin",
+      "title": "Lexoni reflektimet në nivelin e ajetit"
+    },
+    "ayah-tafsir": {
+      "description": "Eksploroni Tefsirin në nivelin e ajetit, duke ofruar njohuri të hollësishme për të përmirësuar të kuptuarit tuaj ndërsa lexoni. (Tefsir mund të grupohet për vargje të shumta kur është e përshtatshme)",
+      "title": "Lexoni Tefsirin në nivelin e Ajetit"
+    },
+    "font-size": {
+      "description": "Personalizoni leximin tuaj të Kuranit me madhësitë e shkronjave që rregullohen lehtë për një përvojë të rehatshme leximi",
+      "title": "Përmasa e germave"
+    },
+    "font-style": {
+      "description": "Opsionet përfshijnë Uthmani - Kompleksi i Mbretit Fahad v1, Uthmani - Kompleksi i Mbretit Fahad v2, Uthmani QPC Hafs, Indopak 15 rreshta, Indopak 16 rreshta",
+      "title": "Zgjidhni skenarin tuaj të preferuar të leximit"
+    },
+    "inline-wbw": {
+      "description": "Shikoni përkthimin e çdo fjale në rresht (nën fjalën) ose në një flluskë sipër fjalës gjatë dëgjimit të Kuranit",
+      "title": "Shfaq përkthimin fjalë për fjalë në linjë (nën fjalën) ose shfaq këshillën e veglave"
+    },
+    "juz": {
+      "description": "Shiko Kuranin nga Juz",
+      "title": "Shiko Kuranin nga Juz"
+    },
+    "listen": {
+      "description": "Nisni riprodhuesin audio për të dëgjuar recitimin",
+      "title": "Dëgjoni suren ose ajetin"
+    },
+    "login": {
+      "description": "Identifikohuni dhe ruani cilësimet nëpër pajisje dhe fitoni akses në veçori shtesë.",
+      "title": "Identifikohu"
+    },
+    "quran-radio": {
+      "description": "Dëgjoni QuranRadio - transmetoni Kuranin pa reklama",
+      "title": "Radio Kurani"
+    },
+    "reading-sessions": {
+      "description": "Rishikoni me lehtësi udhëtimin tuaj Kur'anor me një vështrim në historinë tuaj të personalizuar të leximit, duke mbajtur gjurmët e vargjeve që keni eksploruar në Quran.com.",
+      "title": "Shikoni historinë e leximit"
+    },
+    "reading-view": {
+      "description": "Shikoni Kuranin në modalitetin e leximit të mushafit",
+      "title": "Mënyra e leximit"
+    },
+    "search-bar": {
+      "description": "Gjeni ajetet, suret, fjalë kyçe, xhuz dhe temat që kërkoni duke përdorur shiritin tonë të kërkimit",
+      "title": "Shiriti i Kërkimit"
+    },
+    "select-reciter": {
+      "description": "Personalizoni përvojën tuaj të dëgjimit duke zgjedhur një recitues që ju pëlqen të dëgjoni më shumë!",
+      "title": "Zgjidhni nga një shumëllojshmëri recituesish për të dëgjuar"
+    },
+    "settings": {
+      "description": "Kontrolloni preferencat tuaja",
+      "title": "Cilësimet"
+    },
+    "streak": {
+      "description": "Vendosni synime të personalizuara të leximit, gjurmoni përparimin tuaj dhe ndërtoni një zakon të qëndrueshëm të leximit të Kuranit me veçorinë tonë Rrjedha dhe Planet e Leximit.",
+      "title": "Mbani gjurmët e vijave të leximit dhe planeve të leximit"
+    },
+    "surah-info": {
+      "description": "Merrni njohuri për secilën sure - e vendosur në mënyrë të përshtatshme në fillim të çdo sureje",
+      "title": "Lexoni rreth sures"
+    },
+    "theme": {
+      "description": "Zgjidhni pamjen tuaj të preferuar—Modaliteti i dritës, sepia ose i errët—për një përvojë të rehatshme dhe të personalizuar të leximit të Kuranit.",
+      "title": "Lexoni Kuranin në modalitetin e dritës, sepisë ose të errët"
+    },
+    "translations": {
+      "description": "Zgjidhni nga një shumëllojshmëri përkthimesh në shumë gjuhë. Këshillë: Krahasoni përkthimet duke zgjedhur opsione të shumta",
+      "title": "Përkthime"
+    },
+    "voice-search": {
+      "description": "Prekni ikonën e mikrofonit dhe recitoni vargun që po kërkoni. Këshillë e shpejtë! Për të zbuluar se ku po reciton dikush (p.sh. lutjet e teravive), trokitni lehtë mbi ikonën e mikrofonit. Pasi të zbulohen një ose dy vargje, shtypni stop për të gjetur vendndodhjen",
+      "title": "Kërkimi me zë (Tarteel)"
+    },
+    "wbw-audio": {
+      "description": "Zgjidhni këtë opsion për të dëgjuar çdo fjalë veç e veç duke klikuar thjesht mbi fjalën!",
+      "title": "Dëgjoni transliterimin fjalë për fjalë duke klikuar fjalën"
+    },
+    "wbw-translation": {
+      "description": "Shikoni kuptimin e fjalëve individuale ndërsa lexoni ose dëgjoni Kuranin për t'ju ndihmuar të përmirësoni fjalorin tuaj kuranor",
+      "title": "Lexoni përkthimin fjalë për fjalë"
+    },
+    "wbw-transliteration": {
+      "description": "Shikoni transliterimin e çdo fjale për t'ju ndihmuar në udhëtimin tuaj të leximit të Kuranit",
+      "title": "Lexoni transliterimin fjalë për fjalë"
+    }
+  }
+}

@@ -134,6 +134,7 @@
   "donate": "Doneren",
   "donate_monthly": "Doneer maandelijks",
   "donate_once": "Doneer eenmalig",
+  "edit": "Bewerking",
   "email-verification": {
     "check-spam": "Heb je de verificatie-e-mail niet ontvangen? Check je spam-inbox",
     "email-sent": "We hebben zojuist een e-mail gestuurd naar <strong> {{email}} </strong>",
@@ -172,10 +173,12 @@
     "title": "Lees, bestudeer en leer de Edele Koran."
   },
   "form": {
+    "body": "Lichaam",
     "code": "Verificatie code",
     "email": "E-mail",
     "firstName": "Voornaam",
-    "lastName": "Achternaam"
+    "lastName": "Achternaam",
+    "title": "Titel"
   },
   "from": "Van",
   "fundraising-sticky-banner": {
@@ -214,18 +217,23 @@
   "navigate": "Navigeren",
   "network": "Netwerk",
   "new": "Nieuw!",
+  "newest": "Nieuwste",
   "next": "Volgende",
   "next-ayah": "Volgende Aya",
   "no": "Nee",
   "no-notifications": "Nog geen meldingen",
   "none": "Geen",
   "not-now": "Niet nu",
+  "notes": {
+    "title": "Mijn aantekeningen en reflecties"
+  },
   "notification": {
     "mark-all-as-read": "Alles als gelezen markeren",
     "mark-as-read": "Markeer als gelezen"
   },
   "notifications": "Meldingen",
   "off": "Uit",
+  "oldest": "Oudste",
   "on": "Op",
   "page": "Bladzijde",
   "pages": "Pagina's",
@@ -266,6 +274,7 @@
   "retry": "Opnieuw proberen",
   "revelation_order": "Openbaring orde",
   "rub": "Rub el Hizb",
+  "save": "Redden",
   "save-to-collection": "Opslaan in collectie",
   "search-for": "Zoeken naar '{{searchQuery}}'",
   "search-results": "{{count}} zoekresultaten",
@@ -305,6 +314,7 @@
   },
   "share": "Deel",
   "shared": "Link is gekopieerd naar het klembord!",
+  "show-more": "Laat meer zien",
   "sidebar": {
     "search-hizb": "Zoek Hizb",
     "search-juz": "Zoek Juz",
@@ -355,6 +365,8 @@
   "validation": {
     "invalid-email": "{{field}} moet een geldig e-mailadres zijn",
     "invalid-field": "Voer een geldige {{field}} waarde in",
+    "maximum-length": "{{field}} mag niet langer zijn dan {{value}} tekens",
+    "minimum-length": "{{field}} moet minimaal {{value}} tekens bevatten",
     "required-field": "{{field}} is vereist"
   },
   "verse": "Vers",

@@ -3,7 +3,7 @@ import { Translate } from 'next-translate';
 
 import { FormBuilderFormField } from './FormBuilderTypes';
 
-import FormField from 'types/FormField';
+import FormField, { FormFieldType } from 'types/FormField';
 
 /**
  * Transform FormField to be FormBuilderFormField
@@ -25,16 +25,23 @@ import FormField from 'types/FormField';
  */
 const buildFormBuilderFormField = (formField: FormField, t: Translate): FormBuilderFormField => {
   return {
-    field: formField.field,
-    type: formField.type,
-    label: t(`form.${formField.field}`),
-    rules: formField.rules.map((rule) => ({
-      type: rule.type,
-      value: rule.value,
-      errorMessage: t(`validation.${rule.errorId}`, {
-        field: capitalize(formField.field),
-      }),
-    })),
+    ...formField,
+    ...(formField.rules && {
+      rules: formField.rules.map((rule) => ({
+        type: rule.type,
+        value: rule.value,
+        errorMessage: t(`common:validation.${rule.errorId}`, {
+          field: capitalize(formField.field),
+          ...rule.errorExtraParams,
+        }),
+      })),
+    }),
+    ...(formField.label && {
+      label:
+        formField.type === FormFieldType.Checkbox ? formField.label : t(`form.${formField.label}`),
+    }),
+    ...(formField.defaultValue && { defaultValue: formField.defaultValue }),
+    ...(formField.placeholder && { placeholder: formField.placeholder }),
   };
 };
 

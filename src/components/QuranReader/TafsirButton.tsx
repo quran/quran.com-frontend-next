@@ -67,9 +67,14 @@ const TafsirButton: React.FC<Props> = ({
         tooltip={t('quran-reader:tafsirs')}
         shouldFlipOnRTL={false}
         shape={ButtonShape.Circle}
-        className={classNames(styles.iconContainer, styles.verseAction, {
-          [styles.fadedVerseAction]: isTranslationView,
-        })}
+        className={classNames(
+          styles.iconContainer,
+          styles.verseAction,
+          {
+            [styles.fadedVerseAction]: isTranslationView,
+          },
+          'tafsir-verse-button', // for onboarding
+        )}
         ariaLabel={t('quran-reader:aria.read-tafsirs')}
       >
         <span className={styles.icon}>

@@ -2,6 +2,11 @@ import React from 'react';
 
 import styles from './Row.module.scss';
 
-const Row = ({ children }) => <div className={styles.row}>{children}</div>;
+interface RowProps {
+  id?: string;
+  children?: React.ReactNode;
+}
+
+const Row = (props: RowProps) => <div className={styles.row} {...props} />;
 
 export default Row;

@@ -134,6 +134,7 @@
   "donate": "Donner",
   "donate_monthly": "Faire un don mensuel",
   "donate_once": "Faire un don une fois",
+  "edit": "Modifier",
   "email-verification": {
     "check-spam": "Vous n'avez pas reçu l'e-mail de vérification ? Vérifiez votre boîte de réception de spam",
     "email-sent": "Nous venons d'envoyer un e-mail à <strong> {{email}} </strong>",
@@ -172,10 +173,12 @@
     "title": "Lisez, étudiez et apprenez Le Noble Coran."
   },
   "form": {
+    "body": "Corps",
     "code": "Le code de vérification",
     "email": "E-mail",
     "firstName": "Prénom",
-    "lastName": "Nom de famille"
+    "lastName": "Nom de famille",
+    "title": "Titre"
   },
   "from": "De",
   "fundraising-sticky-banner": {
@@ -214,18 +217,23 @@
   "navigate": "Naviguer",
   "network": "Réseau",
   "new": "Nouveau!",
+  "newest": "Le plus récent",
   "next": "Prochain",
   "next-ayah": "Ayah suivant",
   "no": "Non",
   "no-notifications": "Aucune notification pour l'instant",
   "none": "Rien",
   "not-now": "Pas maintenant",
+  "notes": {
+    "title": "Mes notes et réflexions"
+  },
   "notification": {
     "mark-all-as-read": "tout marquer comme lu",
     "mark-as-read": "Marquer comme lu"
   },
   "notifications": "Notifications",
   "off": "Désactivé",
+  "oldest": "Le plus ancien",
   "on": "Au",
   "page": "Page",
   "pages": "Pages",
@@ -266,6 +274,7 @@
   "retry": "Réessayez",
   "revelation_order": "Ordre de révélation",
   "rub": "Rub el Hizb",
+  "save": "Sauvegarder",
   "save-to-collection": "Enregistrer dans la collection",
   "search-for": "Rechercher '{{searchQuery}}'",
   "search-results": "{{count}} résultats de recherche",
@@ -305,6 +314,7 @@
   },
   "share": "Partager",
   "shared": "Le lien a été copié dans le presse-papiers !",
+  "show-more": "Montre plus",
   "sidebar": {
     "search-hizb": "Rechercher",
     "search-juz": "Rechercher Juz",
@@ -355,6 +365,8 @@
   "validation": {
     "invalid-email": "{{field}} doit être une adresse e-mail valide",
     "invalid-field": "Veuillez saisir une valeur {{field}} valide",
+    "maximum-length": "{{field}} ne peut pas dépasser {{value}} caractères",
+    "minimum-length": "{{field}} doit contenir au moins {{value}} caractères",
     "required-field": "{{field}} est requis"
   },
   "verse": "Verset",

@@ -1,4 +1,4 @@
-import { useState, useMemo, useContext } from 'react';
+import { useState, useMemo, useContext, useEffect } from 'react';
 
 import { useSelector } from '@xstate/react';
 import useTranslation from 'next-translate/useTranslation';
@@ -10,6 +10,8 @@ import RepeatButton from './Buttons/RepeatButton';
 import SelectReciterMenu from './Buttons/SelectReciterMenu';
 import styles from './OverflowAudioPlayActionsMenuBody.module.scss';
 
+import OnboardingEvent from '@/components/Onboarding/OnboardingChecklist/hooks/OnboardingEvent';
+import { useOnboarding } from '@/components/Onboarding/OnboardingProvider';
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import ChevronRightIcon from '@/icons/chevron-right.svg';
 import ExperienceIcon from '@/icons/experience.svg';
@@ -43,6 +45,32 @@ const OverflowAudioPlayActionsMenuBody = () => {
   const audioService = useContext(AudioPlayerMachineContext);
   const { t } = useTranslation('common');
   const playbackRate = useSelector(audioService, (state) => state.context.playbackRate);
+  const { prevStep, nextStep } = useOnboarding();
+
+  useEffect(() => {
+    const handler = () => {
+      setSelectedMenu(AudioPlayerOverflowMenu.Main);
+      prevStep();
+    };
+
+    const handleNextOpenRecitersListStep = () => {
+      setSelectedMenu(AudioPlayerOverflowMenu.Reciter);
+      nextStep();
+    };
+
+    window.addEventListener(OnboardingEvent.STEP_BEFORE_CHOOSING_RECITER_FROM_LIST, handler);
+    window.addEventListener(
+      OnboardingEvent.STEP_AFTER_RECITER_LIST_ITEM_CLICK,
+      handleNextOpenRecitersListStep,
+    );
+    return () => {
+      window.removeEventListener(OnboardingEvent.STEP_BEFORE_CHOOSING_RECITER_FROM_LIST, handler);
+      window.removeEventListener(
+        OnboardingEvent.STEP_AFTER_RECITER_LIST_ITEM_CLICK,
+        handleNextOpenRecitersListStep,
+      );
+    };
+  }, [nextStep, prevStep]);
 
   const menus = useMemo(
     () => ({
@@ -88,6 +116,7 @@ const OverflowAudioPlayActionsMenuBody = () => {
             logButtonClick(`audio_player_overflow_menu_reciter`);
             setSelectedMenu(AudioPlayerOverflowMenu.Reciter);
           }}
+          id="audio-player-overflow-menu-reciter"
         >
           <div className={styles.menuWithNestedItems}>
             {t('reciter')}

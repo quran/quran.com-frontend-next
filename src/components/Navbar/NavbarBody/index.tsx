@@ -81,6 +81,7 @@ const NavbarBody: React.FC = () => {
               variant={ButtonVariant.Ghost}
               onClick={openSettingsDrawer}
               ariaLabel={t('aria.change-settings')}
+              id="settings-button"
             >
               <IconSettings />
             </Button>

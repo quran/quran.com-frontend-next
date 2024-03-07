@@ -25,6 +25,7 @@ enum SliceName {
   PERSIST_GATE_HYDRATION = 'persistGateHydration',
   REVELATION_ORDER = 'revelationOrder',
   NOTIFICATIONS = 'notifications',
+  ONBOARDING = 'onboarding',
 }
 
 export default SliceName;

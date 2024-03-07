@@ -10,9 +10,10 @@ import Verse from 'types/Verse';
 
 interface Props {
   verses: Verse[];
+  fontScale?: number;
 }
 
-const VerseTextPreview: React.FC<Props> = ({ verses }) => {
+const VerseTextPreview: React.FC<Props> = ({ verses, fontScale }) => {
   const { quranFont } = useSelector(selectQuranReaderStyles, shallowEqual);
   const tafsirVerses = useMemo(
     () =>
@@ -24,7 +25,7 @@ const VerseTextPreview: React.FC<Props> = ({ verses }) => {
   );
   useQcfFont(quranFont, tafsirVerses);
   const words = useMemo(() => verses.map((verse) => getVerseWords(verse)).flat(), [verses]);
-  return <PlainVerseText words={words} />;
+  return <PlainVerseText fontScale={fontScale} words={words} />;
 };
 
 export default VerseTextPreview;

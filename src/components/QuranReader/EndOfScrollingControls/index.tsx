@@ -1,5 +1,6 @@
 import React from 'react';
 
+import useTranslation from 'next-translate/useTranslation';
 import { useSelector } from 'react-redux';
 
 import RevelationOrderNavigationNotice, {
@@ -11,11 +12,14 @@ import styles from './EndOfScrollingControls.module.scss';
 import HizbControls from './HizbControls';
 import JuzControls from './JuzControls';
 import PageControls from './PageControls';
+import QuranReaderReadingStreak from './QuranReaderReadingStreak';
 import RubControls from './RubControls';
 import VerseControls from './VerseControls';
 
-import ReadingStreak, { ReadingStreakLayout } from '@/components/HomePage/ReadingStreak';
+import Banner from '@/components/Banner/Banner';
+import DonateButton from '@/components/Fundraising/DonateButton';
 import { selectIsReadingByRevelationOrder } from '@/redux/slices/revelationOrder';
+import DonateButtonClickSource from '@/types/DonateButtonClickSource';
 import { VersesResponse } from 'types/ApiResponses';
 import { QuranReaderDataType } from 'types/QuranReader';
 import Verse from 'types/Verse';
@@ -31,12 +35,13 @@ const EndOfScrollingControls: React.FC<Props> = ({
   lastVerse,
   initialData,
 }) => {
+  const { t } = useTranslation('common');
   const isReadingByRevelationOrder = useSelector(selectIsReadingByRevelationOrder);
 
   return (
     <>
       <div className={styles.progressWidgetContainer}>
-        <ReadingStreak layout={ReadingStreakLayout.QuranReader} />
+        <QuranReaderReadingStreak />
       </div>
       {isReadingByRevelationOrder && quranReaderDataType === QuranReaderDataType.Chapter && (
         <RevelationOrderNavigationNotice
@@ -61,6 +66,12 @@ const EndOfScrollingControls: React.FC<Props> = ({
             <HizbControls lastVerse={lastVerse} />
           )}
         </div>
+      </div>
+      <div className={styles.donationBannerContainer}>
+        <Banner
+          text={t('common:fundraising-sticky-banner.title')}
+          ctaButton={<DonateButton source={DonateButtonClickSource.QURAN_READER} />}
+        />
       </div>
     </>
   );

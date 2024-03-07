@@ -3,6 +3,10 @@ import { configureRefreshFetch } from 'refresh-fetch';
 
 import { getTimezone } from '../datetime';
 
+import BookmarkByCollectionIdQueryParams from './types/BookmarkByCollectionIdQueryParams';
+import GetAllUserReflectionsQueryParams from './types/GetAllUserReflectionsQueryParams';
+import GetAllNotesQueryParams from './types/Note/GetAllNotesQueryParams';
+
 import {
   FilterActivityDaysParams,
   QuranActivityDay,
@@ -16,6 +20,7 @@ import {
 import ConsentType from '@/types/auth/ConsentType';
 import { Course } from '@/types/auth/Course';
 import { CreateGoalRequest, Goal, GoalCategory, UpdateGoalRequest } from '@/types/auth/Goal';
+import { Note } from '@/types/auth/Note';
 import { StreakWithMetadataParams, StreakWithUserMetadata } from '@/types/auth/Streak';
 import { Mushaf } from '@/types/QuranReader';
 import {
@@ -39,7 +44,6 @@ import {
   makeBookmarkCollectionsUrl,
   CollectionsQueryParams,
   makeUpdateCollectionUrl,
-  BookmarkByCollectionIdQueryParams,
   makeDeleteCollectionUrl,
   makeAddCollectionBookmarkUrl,
   makeDeleteCollectionBookmarkByIdUrl,
@@ -53,9 +57,16 @@ import {
   makePostReflectionViewsUrl,
   makeUserFeatureFlagsUrl,
   makeUserConsentsUrl,
+  makeNotesUrl,
+  makeDeleteOrUpdateNoteUrl,
+  makeCountNotesWithinRangeUrl,
   makeEnrollUserUrl,
   makeGetCoursesUrl,
   makeGetCourseUrl,
+  makePublishNoteUrl,
+  makeGetUserReflectionsUrl,
+  makeCourseFeedbackUrl,
+  makeGetUserCoursesCountUrl,
 } from '@/utils/auth/apiPaths';
 import { fetcher } from 'src/api';
 import CompleteAnnouncementRequest from 'types/auth/CompleteAnnouncementRequest';
@@ -331,14 +342,64 @@ export const enrollUser = async (courseId: string): Promise<{ success: boolean }
     courseId,
   });
 
+export const postCourseFeedback = async ({
+  courseId,
+  rating,
+  body,
+}: {
+  courseId: string;
+  rating: number;
+  body?: string;
+}): Promise<{ success: boolean }> =>
+  postRequest(makeCourseFeedbackUrl(courseId), {
+    rating,
+    body,
+  });
+
 export const getCourses = async (): Promise<Course[]> => privateFetcher(makeGetCoursesUrl());
 
 export const getCourse = async (courseSlugOrId: string): Promise<Course> =>
   privateFetcher(makeGetCourseUrl(courseSlugOrId));
 
+export const getUserCoursesCount = async (): Promise<{ count: number }> =>
+  privateFetcher(makeGetUserCoursesCountUrl());
+
 export const addCollection = async (collectionName: string) => {
   return postRequest(makeAddCollectionUrl(), { name: collectionName });
 };
+
+export const getAllNotes = async (params: GetAllNotesQueryParams) => {
+  return privateFetcher(makeNotesUrl(params));
+};
+
+export const getAllUserReflections = async (params: GetAllUserReflectionsQueryParams) => {
+  return privateFetcher(makeGetUserReflectionsUrl(params));
+};
+
+export const countNotesWithinRange = async (from: string, to: string) => {
+  return privateFetcher(makeCountNotesWithinRangeUrl(from, to));
+};
+
+export const addNote = async (payload: Pick<Note, 'body' | 'ranges' | 'saveToQR'>) => {
+  return postRequest(makeNotesUrl(), payload);
+};
+
+export const publishNoteToQR = async (
+  noteId: string,
+  payload: {
+    body: string;
+    ranges?: string[];
+  },
+): Promise<{ success: boolean; postId: string }> =>
+  postRequest(makePublishNoteUrl(noteId), payload);
+
+export const updateNote = async (id: string, body: string, saveToQR: boolean) =>
+  patchRequest(makeDeleteOrUpdateNoteUrl(id), {
+    body,
+    saveToQR,
+  });
+
+export const deleteNote = async (id: string) => deleteRequest(makeDeleteOrUpdateNoteUrl(id));
 
 export const requestVerificationCode = async (emailToVerify) => {
   return postRequest(makeVerificationCodeUrl(), { email: emailToVerify });

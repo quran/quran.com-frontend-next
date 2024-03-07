@@ -16,6 +16,13 @@
   "enroll": "Iscriversi",
   "enroll-success": "Congratulazioni, hai aggiunto {{title}} alla tua lista!",
   "enrolled": "Iscritto",
+  "feedback": {
+    "add-feedback": "Aggiungi feedback",
+    "desc": "Congratulazioni! Hai completato il piano di apprendimento \" {{courseName}} \". <br> </br> Controlla il piano di apprendimento e condividi il tuo feedback per aiutarci a migliorare il contenuto.",
+    "feedback-placeholder": "Scrivi il tuo feedback",
+    "feedback-success": "Grazie per il tuo feedback!",
+    "your-feedback": "I tuoi commenti"
+  },
   "learn-duration": "Durata",
   "learning-plan-material": "Materiale del piano di apprendimento",
   "learning-plan-meta-desc": "Questo piano di apprendimento ti aiuterà a trasformare il modo in cui interagisci con il Corano, inizia il tuo viaggio oggi!",

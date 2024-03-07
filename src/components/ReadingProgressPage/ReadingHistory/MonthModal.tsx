@@ -11,7 +11,7 @@ import ContentModal from '@/dls/ContentModal/ContentModal';
 import ContentModalHandles from '@/dls/ContentModal/types/ContentModalHandles';
 import ArrowLeft from '@/icons/west.svg';
 import { ActivityDay, QuranActivityDay } from '@/types/auth/ActivityDay';
-import { Pagination } from '@/types/auth/GetBookmarksByCollectionId';
+import Pagination from '@/types/auth/Pagination';
 import { getFilterActivityDaysParams } from '@/utils/activity-day';
 import { privateFetcher } from '@/utils/auth/api';
 import { makeFilterActivityDaysUrl } from '@/utils/auth/apiPaths';

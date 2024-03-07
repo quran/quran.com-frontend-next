@@ -15,6 +15,7 @@ import { logButtonClick } from '@/utils/eventLogger';
 
 const HomePageWelcomeMessage = () => {
   const { t } = useTranslation('common');
+
   const { isVisible } = useSelector(selectWelcomeMessage, shallowEqual);
   const dispatch = useDispatch();
 

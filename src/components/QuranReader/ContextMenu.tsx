@@ -11,6 +11,7 @@ import ReadingPreferenceSwitcher, {
   ReadingPreferenceSwitcherType,
 } from './ReadingPreferenceSwitcher';
 
+import { useOnboarding } from '@/components/Onboarding/OnboardingProvider';
 import { SwitchSize } from '@/dls/Switch/Switch';
 import ChevronDownIcon from '@/icons/chevron-down.svg';
 import { selectNavbar } from '@/redux/slices/navbar';
@@ -35,11 +36,14 @@ const ContextMenu = () => {
   const isSidebarNavigationVisible = useSelector(selectIsSidebarNavigationVisible);
   const { t, lang } = useTranslation('common');
   const isSideBarVisible = useSelector(selectNotes, shallowEqual).isVisible;
-  const { isExpanded, showReadingPreferenceSwitcher } = useSelector(
-    selectContextMenu,
-    shallowEqual,
-  );
-  const isNavbarVisible = useSelector(selectNavbar, shallowEqual).isVisible;
+  const { isExpanded, showReadingPreferenceSwitcher: isReadingPreferenceSwitcherVisible } =
+    useSelector(selectContextMenu, shallowEqual);
+
+  const { isActive } = useOnboarding();
+  const { isVisible: isNavbarVisible } = useSelector(selectNavbar, shallowEqual);
+  const showNavbar = isNavbarVisible || isActive;
+  const showReadingPreferenceSwitcher = isReadingPreferenceSwitcherVisible && !isActive;
+
   const { verseKey, chapterId, page, hizb } = useSelector(selectLastReadVerseKey, shallowEqual);
   const chapterData = useMemo(() => {
     return chapterId ? getChapterData(chaptersData, chapterId) : null;
@@ -64,7 +68,7 @@ const ContextMenu = () => {
   return (
     <div
       className={classNames(styles.container, {
-        [styles.visibleContainer]: isNavbarVisible,
+        [styles.visibleContainer]: showNavbar,
         [styles.expandedContainer]: isExpanded,
         [styles.withVisibleSideBar]: isSideBarVisible,
       })}

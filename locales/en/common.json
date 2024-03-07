@@ -134,6 +134,7 @@
   "donate": "Donate",
   "donate_monthly": "Donate monthly",
   "donate_once": "Donate once",
+  "edit": "Edit",
   "email-verification": {
     "check-spam": "Didn't receive the verification email? Check your spam inbox",
     "email-sent": "We just sent an email to <strong>{{email}}</strong>",
@@ -172,10 +173,12 @@
     "title": "Read, study, and learn The Noble Quran."
   },
   "form": {
+    "body": "Body",
     "code": "Verification Code",
     "email": "Email",
     "firstName": "First Name",
-    "lastName": "Last Name"
+    "lastName": "Last Name",
+    "title": "Title"
   },
   "from": "From",
   "fundraising-sticky-banner": {
@@ -214,18 +217,23 @@
   "navigate": "Navigate",
   "network": "Network",
   "new": "New!",
+  "newest": "Newest",
   "next": "Next",
   "next-ayah": "Next Ayah",
   "no": "No",
   "no-notifications": "No notifications yet",
   "none": "None",
   "not-now": "Not Now",
+  "notes": {
+    "title": "My Notes & Reflections"
+  },
   "notification": {
     "mark-all-as-read": "Mark all as read",
     "mark-as-read": "Mark as read"
   },
   "notifications": "Notifications",
   "off": "Off",
+  "oldest": "Oldest",
   "on": "On",
   "page": "Page",
   "pages": "Pages",
@@ -266,6 +274,7 @@
   "retry": "Retry",
   "revelation_order": "Revelation Order",
   "rub": "Rub el Hizb",
+  "save": "Save",
   "save-to-collection": "Save to Collection",
   "search-for": "Search for '{{searchQuery}}'",
   "search-results": "{{count}} search results",
@@ -305,6 +314,7 @@
   },
   "share": "Share",
   "shared": "Link has been copied to the clipboard!",
+  "show-more": "Show more",
   "sidebar": {
     "search-hizb": "Search Hizb",
     "search-juz": "Search Juz",
@@ -355,6 +365,8 @@
   "validation": {
     "invalid-email": "{{field}} must be a valid email address",
     "invalid-field": "Please input a valid {{field}} value",
+    "maximum-length": "{{field}} cannot exceed {{value}} characters",
+    "minimum-length": "{{field}} must be at least {{value}} characters",
     "required-field": "{{field}} is required"
   },
   "verse": "Verse",

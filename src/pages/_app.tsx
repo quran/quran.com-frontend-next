@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 
 import { DirectionProvider } from '@radix-ui/react-direction';
 import { TooltipProvider } from '@radix-ui/react-tooltip';
+import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { DefaultSeo } from 'next-seo';
@@ -14,6 +15,7 @@ import DeveloperUtility from '@/components/DeveloperUtility/DeveloperUtility';
 import FontPreLoader from '@/components/Fonts/FontPreLoader';
 import GlobalListeners from '@/components/GlobalListeners';
 import Navbar from '@/components/Navbar/Navbar';
+import OnboardingChecklist from '@/components/Onboarding/OnboardingChecklist';
 import SessionIncrementor from '@/components/SessionIncrementor';
 import ThirdPartyScripts from '@/components/ThirdPartyScripts/ThirdPartyScripts';
 import Footer from '@/dls/Footer/Footer';
@@ -36,6 +38,13 @@ import 'src/styles/fonts.scss';
 import 'src/styles/theme.scss';
 import 'src/styles/global.scss';
 import 'src/styles/variables.scss';
+
+const OnboardingProvider = dynamic(
+  () => import('@/components/Onboarding/OnboardingProvider').then((a) => a.OnboardingProvider),
+  {
+    ssr: false,
+  },
+);
 
 function MyApp({ Component, pageProps }): JSX.Element {
   const router = useRouter();
@@ -78,22 +87,26 @@ function MyApp({ Component, pageProps }): JSX.Element {
               <AudioPlayerMachineProvider>
                 <ReduxProvider locale={locale}>
                   <ThemeProvider>
-                    <UserAccountModal
-                      requiredFields={userData?.requiredFields}
-                      announcement={userData?.announcement}
-                      consents={userData?.consents}
-                    />
-                    <DefaultSeo
-                      {...createSEOConfig({ locale, description: t('default-description') })}
-                    />
-                    <GlobalListeners />
+                    <OnboardingProvider>
+                      <UserAccountModal
+                        requiredFields={userData?.requiredFields}
+                        announcement={userData?.announcement}
+                        consents={userData?.consents}
+                      />
+                      <DefaultSeo
+                        {...createSEOConfig({ locale, description: t('default-description') })}
+                      />
+                      <GlobalListeners />
 
-                    <Navbar />
+                      <Navbar />
 
-                    <DeveloperUtility />
-                    <Component {...pageProps} />
-                    <AudioPlayer />
-                    <Footer />
+                      <DeveloperUtility />
+                      <Component {...pageProps} />
+                      <AudioPlayer />
+                      <Footer />
+
+                      <OnboardingChecklist />
+                    </OnboardingProvider>
                   </ThemeProvider>
                   <SessionIncrementor />
                 </ReduxProvider>

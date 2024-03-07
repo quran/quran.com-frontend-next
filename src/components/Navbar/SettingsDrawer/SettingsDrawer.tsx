@@ -9,6 +9,7 @@ import SettingsBodySkeleton from './SettingsBodySkeleton';
 import styles from './SettingsDrawer.module.scss';
 
 import Drawer, { DrawerType } from '@/components/Navbar/Drawer';
+import { useOnboarding } from '@/components/Onboarding/OnboardingProvider';
 import Button, { ButtonVariant } from '@/dls/Button/Button';
 import BackIcon from '@/icons/west.svg';
 import { selectNavbar, setSettingsView, SettingsView } from '@/redux/slices/navbar';
@@ -35,11 +36,13 @@ const SettingsDrawer = () => {
   const { t } = useTranslation('common');
   const dispatch = useDispatch();
   const { isSettingsDrawerOpen, settingsView } = useSelector(selectNavbar);
+  const { isActive } = useOnboarding();
 
   const onGoBackClicked = () => {
     dispatch(setSettingsView(SettingsView.Body));
     logValueChange('settings_view', SettingsView.Body, settingsView);
   };
+
   let header;
   if (settingsView === SettingsView.Body) header = <div>{t('settings.title')}</div>;
   if (settingsView !== SettingsView.Body) {
@@ -56,7 +59,13 @@ const SettingsDrawer = () => {
   }
 
   return (
-    <Drawer type={DrawerType.Settings} header={header} closeOnNavigation={false}>
+    <Drawer
+      type={DrawerType.Settings}
+      header={header}
+      closeOnNavigation={false}
+      canCloseDrawer={!isActive}
+      bodyId="settings-drawer-body"
+    >
       {isSettingsDrawerOpen && settingsView === SettingsView.Body && <SettingsBody />}
       {isSettingsDrawerOpen && settingsView === SettingsView.Translation && (
         <TranslationSelectionBody />

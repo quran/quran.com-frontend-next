@@ -22,6 +22,7 @@ import commandBar from './slices/CommandBar/state';
 import defaultSettings from './slices/defaultSettings';
 import navbar from './slices/navbar';
 import notifications from './slices/notifications';
+import onboarding from './slices/onboarding';
 import persistGateHydration from './slices/persistGateHydration';
 import bookmarks from './slices/QuranReader/bookmarks';
 import contextMenu from './slices/QuranReader/contextMenu';
@@ -65,6 +66,7 @@ const persistConfig = {
     SliceName.BOOKMARKS,
     SliceName.USER_DATA_SYNC,
     SliceName.REVELATION_ORDER,
+    SliceName.ONBOARDING,
   ], // Reducers defined here will be have their values saved in local storage and persist across sessions. See: https://github.com/rt2zz/redux-persist#blacklist--whitelist
 };
 
@@ -93,6 +95,7 @@ export const rootReducer = combineReducers({
   persistGateHydration,
   revelationOrder,
   notifications,
+  onboarding,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

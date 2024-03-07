@@ -16,6 +16,13 @@
   "enroll": "Kayıt ol",
   "enroll-success": "Tebrikler, {{title}} listenize eklendi!",
   "enrolled": "Kayıtlı",
+  "feedback": {
+    "add-feedback": "Geri Bildirim Ekle",
+    "desc": "Tebrikler! ' {{courseName}} ' öğrenme planını tamamladınız. <br> </br> Lütfen öğrenme planını inceleyin ve içeriği geliştirmemize yardımcı olmak için geri bildirimlerinizi paylaşın.",
+    "feedback-placeholder": "Geri bildiriminizi yazın",
+    "feedback-success": "Geri bildiriminiz için teşekkür ederiz!",
+    "your-feedback": "Görüşleriniz"
+  },
   "learn-duration": "Süre",
   "learning-plan-material": "Öğrenme Planı Materyali",
   "learning-plan-meta-desc": "Bu Öğrenme Planı, Kuran'la etkileşim şeklinizi değiştirmenize yardımcı olacak, yolculuğunuza bugün başlayın!",
