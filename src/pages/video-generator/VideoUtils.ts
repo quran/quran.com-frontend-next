@@ -74,7 +74,7 @@ export function getStyles(dimensions) {
   return {
     justifyContent: "center",
     color: "#111",
-    minWidth: dimensions === "landscape" ? "70%" : "60%",
+    minWidth: dimensions === "landscape" ? "70%" : "80%",
     minHeight: dimensions === "landscape" ? "60%" : '25%',
     width: "fit-content",
     height: "fit-content",

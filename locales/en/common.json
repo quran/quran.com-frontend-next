@@ -361,6 +361,9 @@
   "verse-bookmark-removed": "Verse bookmark removed!",
   "verse-bookmarked": "Verse bookmarked!",
   "verses": "Verses",
+  "video": {
+    "verse-key": "Chapter and Verse Number e.g. 2:255"
+  },
   "view": "View",
   "voice": {
     "ask-permission": "Please enable microphone permission to start using Voice Search",

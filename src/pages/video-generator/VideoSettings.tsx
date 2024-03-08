@@ -7,10 +7,12 @@ import classNames from "classnames";
 import styles from "./video.module.scss";
 import QuranFontSection from "./QuranFontSectionSetting";
 import TranslationSetting from "./TranslationSectionSetting";
+import IconSearch from '@/icons/search.svg';
 import Switch from "@/dls/Switch/Switch";
 import { getAllBackgrounds } from "./VideoUtils";
 import BackgroundColors from "./BackgroundColors";
 import { useState } from "react";
+import Input from "@/dls/Forms/Input";
 
 const backgroundColors = getAllBackgrounds();
 
@@ -38,10 +40,12 @@ const VideoSettings = ({
     border,
     setBorder,
     dimensions,
-    setDimensions
+    setDimensions,
+    seekToBeginning
   }) => {
   const { t } = useTranslation("common");
   const [backgroundType, setBackgroundType] = useState('verse');
+  const [searchQuery, setSearchQuery] = useState('');
 
   return (
     <div
@@ -62,6 +66,16 @@ const VideoSettings = ({
               options={chaptersList || []}
               value={chapter}
               onChange={onChapterChange}
+            />
+          </Section.Row>
+          <Section.Row>
+            <Input 
+              prefix={<IconSearch />}
+              id="video-gen-verseKey"
+              value={searchQuery}
+              onChange={setSearchQuery}
+              placeholder={t('video.verse-key')}
+              fixedWidth={false}
             />
           </Section.Row>
         </Section>
@@ -90,7 +104,7 @@ const VideoSettings = ({
               className={styles.colorPicker}
               type="color"
               value={fontColor}
-              onChange={(e) => setFontColor(e.target.value)}
+              onChange={(e) => {seekToBeginning(); setFontColor(e.target.value)}}
             />
           </Section.Row>
         </Section>
@@ -112,12 +126,12 @@ const VideoSettings = ({
           {/* TODO: Add localization to labels */}
           <Section.Title>Verse</Section.Title>
           <Section.Row>
-            <Switch  items={[{name: 'Centre', value: 'centre'}, { name: 'Justified', value: 'justified'}]} selected={verseAlignment} onSelect={(val) => {setVerseAlignment(val)}} />
+            <Switch  items={[{name: 'Centre', value: 'centre'}, { name: 'Justified', value: 'justified'}]} selected={verseAlignment} onSelect={(val) => {seekToBeginning(); setVerseAlignment(val)}} />
           </Section.Row>
           <br />
           <Section.Title>Translation</Section.Title>
           <Section.Row>
-            <Switch items={[{name: 'Centre', value: 'centre'}, { name: 'Justified', value: 'justified'}]} selected={translationAlignment} onSelect={(val) => {setTranslationAlignment(val)}} />
+            <Switch items={[{name: 'Centre', value: 'centre'}, { name: 'Justified', value: 'justified'}]} selected={translationAlignment} onSelect={(val) => {seekToBeginning();  setTranslationAlignment(val)}} />
           </Section.Row>
         </Section>
       </div>
@@ -131,7 +145,7 @@ const VideoSettings = ({
             }} />
           </Section.Row>
           <Section.Row>
-            <BackgroundColors setOpacity={setOpacity} type={backgroundType} setSceneBackground={setSceneBackgroundColor} setVerseBackground={setVerseBackgroundColor} colors={backgroundColors} />
+            <BackgroundColors setOpacity={setOpacity} type={backgroundType} setSceneBackground={setSceneBackgroundColor} seekToBeginning={seekToBeginning} setVerseBackground={setVerseBackgroundColor} colors={backgroundColors} />
           </Section.Row>
           <br />
           {backgroundType === 'verse' ? (
@@ -142,6 +156,7 @@ const VideoSettings = ({
                   if (val === opacity) {
                     return;
                   }
+                  seekToBeginning(); 
                   setOpacity(val)
                   const verse = verseBackgroundColor;
                   const backgroundColors = getAllBackgrounds(val);
@@ -152,7 +167,7 @@ const VideoSettings = ({
               <br />
               <Section.Label>Border</Section.Label>
               <Section.Row>
-                <Switch  items={[{name: 'Yes', value: 'true'}, { name: 'No', value: 'false'}]} selected={border} onSelect={(val) => setBorder(val)} />
+                <Switch  items={[{name: 'Yes', value: 'true'}, { name: 'No', value: 'false'}]} selected={border} onSelect={(val) => {seekToBeginning(); setBorder(val)}} />
               </Section.Row>
             </>
           ) : null}
@@ -162,8 +177,7 @@ const VideoSettings = ({
         <Section>
           <Section.Title>Orientation</Section.Title>
           <Section.Row>
-            <Switch  items={[{name: 'Landscape', value: 'landscape'}, { name: 'Portrait', value: 'portrait'}]} selected={dimensions} onSelect={(val) => setDimensions(val)} />
-
+            <Switch  items={[{name: 'Landscape', value: 'landscape'}, { name: 'Portrait', value: 'portrait'}]} selected={dimensions} onSelect={(val) => { seekToBeginning(); setDimensions(val)}} />
           </Section.Row>
           <Section.Row>
             <div className={styles.orientationWrapper}>

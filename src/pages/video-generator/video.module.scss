@@ -11,7 +11,8 @@
 .playerWrapper {
   position: relative;
   padding: var(--spacing-large);
-  height: 720px
+  height: 50vh;
+  // min-height: 500px;
 }
 
 .versePreviewContainer {
@@ -35,6 +36,8 @@
 .settingsContainer {
   display: grid;
   margin: 0 auto;
+  padding-inline-start: var(--spacing-medium) !important;
+  padding-inline-end: var(--spacing-medium) !important;
   @include breakpoints.tablet {
     grid-template-columns: repeat(2, 1fr);
   }

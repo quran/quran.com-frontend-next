@@ -47,7 +47,7 @@ const VideoGenerator: NextPage<VideoGenerator> = ({
   const [sceneBackgroundColor, setSceneBackgroundColor] = useState(defaultBackground);
   const [verseBackgroundColor, setVerseBackgroundColor] = useState(defaultBackground);
   const [fontColor, setFontColor] = useState("#071a1c");
-  const [reciter, setReciter] = useState(1);
+  const [reciter, setReciter] = useState(7);
   const [chapter, setChapter] = useState(112);
   const [verseData, setverseData] = useState(verses?.verses);
   const [audioData, setAudioData] = useState(audio);
@@ -67,7 +67,7 @@ const VideoGenerator: NextPage<VideoGenerator> = ({
       return;
     }
     const fetchData = async () => {
-      const verses = await getChapterVerses(chapter, 'en', {...DEFAULT_API_PARAMS, translations: selectedTranslations, perPage: chaptersData[chapter].versesCount} );
+      const verses = await getChapterVerses(chapter, lang, {...DEFAULT_API_PARAMS, translations: selectedTranslations, perPage: chaptersData[chapter].versesCount} );
       const audio = await getChapterAudioData(reciter, chapter, true);
       return [verses, audio];
     };
@@ -88,17 +88,28 @@ const VideoGenerator: NextPage<VideoGenerator> = ({
     if (!current) {
       return;
     }
-    current.pause();
+    if (current.isPlaying) {
+      current.pause();
+    }
     current.seekTo(0);
   }, []);
 
   const recitersOptions = useMemo(() => {
-    return reciters.map((reciter) => ({
-      id: reciter.id,
-      label: reciter.name,
-      value: reciter.reciterId,
-      name: reciter.name,
-    }));
+    const DEFAULT_RECITATION_STYLE = 'Murattal';
+  
+    return reciters.map((reciter) => {
+      let label = reciter.translatedName.name;
+      const recitationStyle = reciter.style.name;
+      if (recitationStyle !== DEFAULT_RECITATION_STYLE) {
+        label = `${label} - ${recitationStyle}`
+      }
+      return {
+        id: reciter.id,
+        label: label,
+        value: reciter.id,
+        name: reciter.name,
+      }
+    });
   }, [t]);
 
   const VideoContentComponent = () => {
@@ -133,6 +144,7 @@ const VideoGenerator: NextPage<VideoGenerator> = ({
       };
     });
   }, [t]);
+
   return (
     <div className={styles.pageContainer}>
       <div className={classNames(styles.playerWrapper, layoutStyle.flowItem)}>
@@ -176,6 +188,7 @@ const VideoGenerator: NextPage<VideoGenerator> = ({
           setBorder={setBorder}
           dimensions={dimensions}
           setDimensions={setDimensions}
+          seekToBeginning={seekToBeginning}
         />
       </div>
     </div>
@@ -186,8 +199,8 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   try {
     const { reciters } = await getAvailableReciters(locale, []);
     const chaptersData = await getAllChaptersData(locale);
-    const verses = await getChapterVerses(112, 'en', DEFAULT_API_PARAMS);
-    const audio = await getChapterAudioData(1, 112, true);
+    const verses = await getChapterVerses(112, locale, DEFAULT_API_PARAMS);
+    const audio = await getChapterAudioData(7, 112, true);
     const defaultTimestamps = getNormalizedTimestamps(audio);
 
     return {

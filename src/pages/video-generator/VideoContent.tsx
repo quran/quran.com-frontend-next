@@ -2,6 +2,7 @@ import {
   AbsoluteFill,
   Audio,
   Sequence,
+  Video,
 } from "remotion";
 import VerseText from "@/components/Verse/VerseText";
 import { getVerseWords } from "@/utils/verse";
@@ -11,6 +12,14 @@ import QuranTextLogo from "@/icons/quran-text-logo.svg";
 import styles from "./video.module.scss";
 import { useSelector } from 'react-redux';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
+import { useCurrentFrame } from "remotion";
+
+const getProcessedVerseWords = (verse) => {
+  const currentFrame = useCurrentFrame();
+  // console.log(currentFrame, verse);
+  const basicWords = getVerseWords(verse);
+  return basicWords;
+}
 
 
 const VideoContent = ({
@@ -33,10 +42,11 @@ const VideoContent = ({
   } else {
     stls = { ...stls, border: '2px gray solid' }
   }
-  if (dimensions === 'portrait') {
-    stls = {...stls, border: 'none'};
-  }
+  // if (dimensions === 'portrait') {
+  //   stls = {...stls, border: 'none'};
+  // }
   
+  const videoSource = 'https://static.videezy.com/system/resources/previews/000/046/143/original/Peach_Flower_Tree_2.mp4';
 
   return (
     <AbsoluteFill
@@ -53,6 +63,7 @@ const VideoContent = ({
         // opacity: opacity
       }}
     >
+      <Video src={videoSource} />
       <Audio src={audio.audioUrl} />
       {verses &&
         verses.length > 0 &&
@@ -73,7 +84,7 @@ const VideoContent = ({
                 {/* <Ayah data={d} /> */}
                 <div style={{marginBottom: '1rem'}} className={verseAlignment === 'centre' ? styles.verseCentre : styles.verseJustified}>
                   <VerseText 
-                    words={getVerseWords(verse)} 
+                    words={getProcessedVerseWords(verse)} 
                     shouldShowH1ForSEO={false}
                   />
                 </div>
