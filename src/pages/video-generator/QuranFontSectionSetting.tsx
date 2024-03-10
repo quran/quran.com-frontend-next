@@ -1,12 +1,12 @@
 /* eslint-disable max-lines */
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 
 import { Action } from '@reduxjs/toolkit';
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
-import styles from './video.module.scss';
 
+import Section from '@/components/Navbar/SettingsDrawer/Section';
 import Counter from '@/dls/Counter/Counter';
 import Select from '@/dls/Forms/Select';
 import Switch from '@/dls/Switch/Switch';
@@ -14,20 +14,17 @@ import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
 import { getQuranReaderStylesInitialState } from '@/redux/defaultSettings/util';
 import { resetLoadedFontFaces } from '@/redux/slices/QuranReader/font-faces';
 import {
+  MAXIMUM_QURAN_FONT_STEP,
+  MINIMUM_FONT_STEP,
   decreaseQuranTextFontScale,
   increaseQuranTextFontScale,
-  MINIMUM_FONT_STEP,
   selectQuranReaderStyles,
-  setQuranFont,
   setMushafLines,
-  MAXIMUM_QURAN_FONT_STEP,
+  setQuranFont,
 } from '@/redux/slices/QuranReader/styles';
 import { logValueChange } from '@/utils/eventLogger';
-import PreferenceGroup from 'types/auth/PreferenceGroup';
 import { MushafLines, QuranFont } from 'types/QuranReader';
-import Section from '@/components/Navbar/SettingsDrawer/Section';
-import QuranFontSectionFooter from '@/components/Navbar/SettingsDrawer/QuranFontSectionFooter';
-import VersePreview from '@/components/Navbar/SettingsDrawer/VersePreview';
+import PreferenceGroup from 'types/auth/PreferenceGroup';
 
 const QuranFontSection = () => {
   const { t, lang } = useTranslation('common');
@@ -43,9 +40,6 @@ const QuranFontSection = () => {
     return {
       [QuranFont.IndoPak]: [
         { id: QuranFont.IndoPak, label: t(`fonts.${QuranFont.IndoPak}`), value: QuranFont.IndoPak },
-      ],
-      [QuranFont.Tajweed]: [
-        { id: QuranFont.Tajweed, label: t(`fonts.${QuranFont.Tajweed}`), value: QuranFont.Tajweed },
       ],
       [QuranFont.Uthmani]: [
         {
@@ -105,7 +99,7 @@ const QuranFontSection = () => {
 
   const types = useMemo(
     () =>
-      [QuranFont.Uthmani, QuranFont.IndoPak, QuranFont.Tajweed].map((font) => ({
+      [QuranFont.Uthmani, QuranFont.IndoPak].map((font) => ({
         name: t(`fonts.${font}`),
         value: font,
       })),

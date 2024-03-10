@@ -1,7 +1,7 @@
 /* eslint-disable react-func/max-lines-per-function */
 /* eslint-disable no-param-reassign */
 const path = require('path');
-
+const withTM = require("next-transpile-modules")(["remotion", "@remotion/cli", "@remotion/player"]);
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE_BUNDLE === 'true',
 });
@@ -166,6 +166,6 @@ const config = {
 };
 
 module.exports = withPlugins(
-  [withBundleAnalyzer, withPWA, withFonts, nextTranslate, withSentryConfig],
+  [withTM, withBundleAnalyzer, withPWA, withFonts, nextTranslate, withSentryConfig],
   config,
 );

@@ -8,11 +8,44 @@
   min-height: calc(8 * var(--spacing-mega));
 }
 
+.videoContainer {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%; 
+  overflow: hidden;
+}
+
+.videoContainer video {
+  /* Make video to at least 100% wide and tall */
+  min-width: 100%; 
+  min-height: 100%; 
+
+  /* Setting width & height to auto prevents the browser from stretching or squishing the video */
+  width: auto;
+  height: auto;
+
+  /* Center the video */
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  object-fit: cover;
+}
+
+.watermarkLight > svg > path {
+  fill: #e7e9ea;
+}
+
+.watermarkDark > svg > path {
+  fill: #272727;
+}
+
 .playerWrapper {
   position: relative;
   padding: var(--spacing-large);
-  height: 50vh;
-  // min-height: 500px;
+  aspect-ratio: 16 / 9;
 }
 
 .versePreviewContainer {
@@ -193,6 +226,13 @@
   margin: var(--spacing-large) 0;
 }
 
+.BackgroundVideosWrapper {
+  position: relative;
+  display: grid;
+  gap: 5px;
+  grid-template-columns: repeat(3, 1fr);
+}
+
 .colorBox {
   min-width: 1rem;
   min-height: 1rem;
@@ -200,6 +240,20 @@
   transition: all 100ms ease-in-out;
   cursor: pointer;
 }
+
+.img {
+  object-fit: cover;
+  cursor: pointer;
+  transition: all 200ms ease-in-out;
+}
+
+.img:hover {
+  transform: scale(1.08);
+  box-shadow: 10px 10px 48px -25px rgba(0,0,0,0.75);
+  -webkit-box-shadow: 10px 10px 48px -25px rgba(0,0,0,0.75);
+  -moz-box-shadow: 10px 10px 48px -25px rgba(0,0,0,0.75);
+}
+
 
 .colorBox:hover {
   transform: translateY(-2%);
@@ -228,4 +282,14 @@
   max-height: 200px;
   background: gray;
   aspect-ratio: 720 / 1280;
+}
+
+.verseRangeContainer {
+  display: flex;
+  justify-content: space-between;
+  gap: 1em;
+}
+
+.versesLabel {
+  margin-bottom: 1rem;
 }

@@ -21,13 +21,27 @@
     "target": "es5",
     "incremental": true,
     "paths": {
-      "@/icons/*": ["./public/icons/*"],
-      "@/public/*": ["./public/*"],
-      "@/dls/*": ["./src/components/dls/*"],
-      "@/data/*": ["./data/*"],
-      "@/types/*": ["./types/*"],
-      "@/tests/*": ["./tests/*"],
-      "@/*": ["./src/*"],
+      "@/icons/*": [
+        "./public/icons/*"
+      ],
+      "@/public/*": [
+        "./public/*"
+      ],
+      "@/dls/*": [
+        "./src/components/dls/*"
+      ],
+      "@/data/*": [
+        "./data/*"
+      ],
+      "@/types/*": [
+        "./types/*"
+      ],
+      "@/tests/*": [
+        "./tests/*"
+      ],
+      "@/*": [
+        "./src/*"
+      ]
     }
   },
   "exclude": [

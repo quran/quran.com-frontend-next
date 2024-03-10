@@ -9,10 +9,14 @@ import QuranFontSection from "./QuranFontSectionSetting";
 import TranslationSetting from "./TranslationSectionSetting";
 import IconSearch from '@/icons/search.svg';
 import Switch from "@/dls/Switch/Switch";
-import { getAllBackgrounds } from "./VideoUtils";
+import { getAllBackgrounds, validateVerseRange } from "./VideoUtils";
 import BackgroundColors from "./BackgroundColors";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import Input from "@/dls/Forms/Input";
+import BackgroundVideos from "./BackgroundVideos";
+import DataContext from "@/contexts/DataContext";
+import { getChapterData } from "@/utils/chapter";
+import Button, { ButtonVariant } from "@/dls/Button/Button";
 
 const backgroundColors = getAllBackgrounds();
 
@@ -23,7 +27,6 @@ const VideoSettings = ({
     recitersOptions,
     reciter,
     setReciter,
-    sceneBackgroundColor,
     setSceneBackgroundColor,
     verseBackgroundColor,
     setVerseBackgroundColor,
@@ -41,11 +44,29 @@ const VideoSettings = ({
     setBorder,
     dimensions,
     setDimensions,
-    seekToBeginning
+    setVideo,
+    seekToBeginning,
+    searchFetch,
+    setSearchFetch,
+    isFetching,
+    verseFrom,
+    setVerseFrom,
+    verseTo,
+    setVerseTo
   }) => {
   const { t } = useTranslation("common");
   const [backgroundType, setBackgroundType] = useState('verse');
-  const [searchQuery, setSearchQuery] = useState('');
+
+  const chaptersData = useContext(DataContext);
+
+  const onSubmitSearchQuery = () => {
+    const versesCount = getChapterData(chaptersData, chapter).versesCount;
+    const isValid = validateVerseRange(verseFrom, verseTo, versesCount);
+    if (!isValid) {
+      throw new Error('Invalid verse range');
+    }
+    setSearchFetch(!searchFetch)
+  }
 
   return (
     <div
@@ -68,15 +89,34 @@ const VideoSettings = ({
               onChange={onChapterChange}
             />
           </Section.Row>
+          <Section.Label>
+            <span className={styles.versesLabel}>{t('verses')}</span>
+          </Section.Label>
           <Section.Row>
+            <div className={styles.verseRangeContainer}>
             <Input 
-              prefix={<IconSearch />}
               id="video-gen-verseKey"
-              value={searchQuery}
-              onChange={setSearchQuery}
-              placeholder={t('video.verse-key')}
+              value={verseFrom}
+              onChange={(val) => setVerseFrom(val)}
+              placeholder={t('from')}
               fixedWidth={false}
             />
+            <Input 
+              id="video-gen-verseKey"
+              value={verseTo}
+              onChange={(val) => setVerseTo(val)}
+              placeholder={t('to')}
+              fixedWidth={false}
+            />
+            <Button
+              tooltip={t('search')}
+              variant={ButtonVariant.Ghost}
+              onClick={onSubmitSearchQuery}
+              isDisabled={isFetching}
+            >
+              <IconSearch />
+            </Button>
+            </div>
           </Section.Row>
         </Section>
       </div>
@@ -139,13 +179,10 @@ const VideoSettings = ({
         <Section>
           <Section.Title>Backrgound</Section.Title>
           <Section.Row>
-            <Switch  items={[{name: 'Verse', value: 'verse'}, { name: 'Background', value: 'scene'}]} selected={backgroundType} onSelect={(val) => {
-              setBackgroundType(val)
-
-            }} />
+            <Switch  items={[{name: 'Verse', value: 'verse'}, { name: 'Background', value: 'scene'}]} selected={backgroundType} onSelect={(val) => setBackgroundType(val)} />
           </Section.Row>
           <Section.Row>
-            <BackgroundColors setOpacity={setOpacity} type={backgroundType} setSceneBackground={setSceneBackgroundColor} seekToBeginning={seekToBeginning} setVerseBackground={setVerseBackgroundColor} colors={backgroundColors} />
+            <BackgroundColors opacity={opacity} type={backgroundType} setSceneBackground={setSceneBackgroundColor} seekToBeginning={seekToBeginning} setVerseBackground={setVerseBackgroundColor} colors={backgroundColors} />
           </Section.Row>
           <br />
           {backgroundType === 'verse' ? (
@@ -183,6 +220,14 @@ const VideoSettings = ({
             <div className={styles.orientationWrapper}>
               <div className={dimensions === 'landscape' ? styles.landscape : styles.portrait} />
             </div>
+          </Section.Row>
+        </Section>
+      </div>
+      <div>
+        <Section>
+          <Section.Title>Video Picker</Section.Title>
+          <Section.Row>
+            <BackgroundVideos setVideo={setVideo} seekToBeginning={seekToBeginning} />
           </Section.Row>
         </Section>
       </div>

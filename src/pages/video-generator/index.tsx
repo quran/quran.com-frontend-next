@@ -1,22 +1,22 @@
-import { Player, PlayerRef } from "@remotion/player";
-import { GetStaticProps, NextPage } from "next";
-import useTranslation from "next-translate/useTranslation";
-import layoutStyle from "../index.module.scss";
-import Error from "@/pages/_error";
-import styles from "./video.module.scss";
-import classNames from "classnames";
 import {
   getAvailableReciters,
   getChapterAudioData,
   getChapterVerses,
 } from "@/api";
+import Error from "@/pages/_error";
 import { getAllChaptersData } from "@/utils/chapter";
+import { Player, PlayerRef } from "@remotion/player";
+import classNames from "classnames";
+import { GetStaticProps, NextPage } from "next";
+import useTranslation from "next-translate/useTranslation";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { VersesResponse } from "types/ApiResponses";
 import ChaptersData from "types/ChaptersData";
+import layoutStyle from "../index.module.scss";
 import VideoContent from "./VideoContent";
 import VideoSettings from "./VideoSettings";
-import { DEFAULT_API_PARAMS, getAllBackgrounds, getNormalizedTimestamps, getStyles } from "./VideoUtils";
+import { DEFAULT_API_PARAMS, getAllBackgrounds, getNormalizedTimestamps, getStyles, getTrimmedAudio, getVideoById } from "./VideoUtils";
+import styles from "./video.module.scss";
 
 let skipFirstRender = true;
 interface VideoGenerator {
@@ -28,7 +28,9 @@ interface VideoGenerator {
   defaultTimestamps: any,
   chaptersData: ChaptersData;
 }
-const defaultBackground = getAllBackgrounds('1')[0]
+
+const defaultOpacity = '0.2'
+const defaultBackground = getAllBackgrounds(defaultOpacity)[0]
 
 const VideoGenerator: NextPage<VideoGenerator> = ({
   hasError,
@@ -43,10 +45,10 @@ const VideoGenerator: NextPage<VideoGenerator> = ({
     return <Error statusCode={500} />;
   }
 
-  const [opacity, setOpacity] = useState('1');
+  const [opacity, setOpacity] = useState(defaultOpacity);
   const [sceneBackgroundColor, setSceneBackgroundColor] = useState(defaultBackground);
   const [verseBackgroundColor, setVerseBackgroundColor] = useState(defaultBackground);
-  const [fontColor, setFontColor] = useState("#071a1c");
+  const [fontColor, setFontColor] = useState("#dddddd");
   const [reciter, setReciter] = useState(7);
   const [chapter, setChapter] = useState(112);
   const [verseData, setverseData] = useState(verses?.verses);
@@ -55,8 +57,13 @@ const VideoGenerator: NextPage<VideoGenerator> = ({
   const [selectedTranslations, setSelectedTranslations] = useState([131]);
   const [verseAlignment, setVerseAlignment] = useState('centre');
   const [translationAlignment, setTranslationAlignment] = useState('centre');
-  const [border, setBorder] = useState('true');
+  const [border, setBorder] = useState('false');
   const [dimensions, setDimensions] = useState('landscape');
+  const [video, setVideo] = useState(getVideoById(4));
+  const [searchFetch, setSearchFetch] = useState(false);
+  const [isFetching, setIsFetching] = useState(false);
+  const [verseFrom, setVerseFrom] = useState('');
+  const [verseTo, setVerseTo] = useState('');
 
   const playerRef = useRef<PlayerRef>(null);
 
@@ -66,20 +73,43 @@ const VideoGenerator: NextPage<VideoGenerator> = ({
       setTimestamps(getNormalizedTimestamps(audioData));
       return;
     }
+
+    let apiParams: any = {
+      ...DEFAULT_API_PARAMS, 
+      translations: selectedTranslations,
+      perPage: chaptersData[chapter].versesCount
+    }
+
+    if (verseFrom) apiParams = { ...apiParams, from: `${chapter}:${verseFrom}` };
+    if (verseTo) apiParams = { ...apiParams, to: `${chapter}:${verseTo}` };
+
     const fetchData = async () => {
-      const verses = await getChapterVerses(chapter, lang, {...DEFAULT_API_PARAMS, translations: selectedTranslations, perPage: chaptersData[chapter].versesCount} );
+      const verses = await getChapterVerses(
+        chapter, 
+        lang, 
+        apiParams
+      );
       const audio = await getChapterAudioData(reciter, chapter, true);
       return [verses, audio];
     };
-    fetchData().then(([verses, audio]) => {
-      seekToBeginning();
-      setverseData(verses?.verses);
-      setAudioData(audio);
-      setTimestamps(getNormalizedTimestamps(audio));
-    });
-  }, [reciter, chapter, selectedTranslations]);
+    setIsFetching(true);
+    fetchData()
+      .then(([verses, audio]) => {
+        seekToBeginning();
+        setverseData(verses?.verses);
+        const trimmedAudio = getTrimmedAudio(audio, verseFrom, verseTo);
+        setAudioData(trimmedAudio);
+        setTimestamps(getNormalizedTimestamps(trimmedAudio));
+      })
+      .catch(err => {
+        console.debug('something went wrong');
+      })
+      .finally(() => setIsFetching(false));
+  }, [reciter, selectedTranslations, searchFetch]);
 
   const onChapterChange = async (val) => {
+    setVerseFrom('');
+    setVerseTo('');
     setChapter(val);
   };
 
@@ -125,7 +155,7 @@ const VideoGenerator: NextPage<VideoGenerator> = ({
         verseAlignment={verseAlignment}
         translationAlignment={translationAlignment}
         border={border}
-        dimensions={dimensions}
+        video={video}
       />
     )
   }
@@ -162,7 +192,7 @@ const VideoGenerator: NextPage<VideoGenerator> = ({
         />
       </div>
       <div className={layoutStyle.flow}>
-        {/* This is just horrible. Rather store these settings in redux and persist than passing like this */}
+        {/* This is just bad. Rather store these settings in redux and persist than passing like this */}
         <VideoSettings
           chaptersList={chaptersList}
           chapter={chapter}
@@ -170,7 +200,6 @@ const VideoGenerator: NextPage<VideoGenerator> = ({
           recitersOptions={recitersOptions}
           reciter={reciter}
           setReciter={setReciter}
-          sceneBackgroundColor={sceneBackgroundColor}
           setSceneBackgroundColor={setSceneBackgroundColor}
           verseBackgroundColor={verseBackgroundColor}
           setVerseBackgroundColor={setVerseBackgroundColor}
@@ -189,6 +218,14 @@ const VideoGenerator: NextPage<VideoGenerator> = ({
           dimensions={dimensions}
           setDimensions={setDimensions}
           seekToBeginning={seekToBeginning}
+          setVideo={setVideo}
+          searchFetch={searchFetch}
+          setSearchFetch={setSearchFetch}
+          isFetching={isFetching}
+          verseFrom={verseFrom}
+          setVerseFrom={setVerseFrom}
+          verseTo={verseTo}
+          setVerseTo={setVerseTo}
         />
       </div>
     </div>

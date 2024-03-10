@@ -1,30 +1,28 @@
+import TranslationText from "@/components/QuranReader/TranslationView/TranslationText";
+import VerseText from "@/components/Verse/VerseText";
+import QuranTextLogo from "@/icons/quran-text-logo.svg";
+import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
+import Translation from "@/types/Translation";
+import { getVerseWords } from "@/utils/verse";
+import { useSelector } from 'react-redux';
 import {
   AbsoluteFill,
   Audio,
   Sequence,
   Video,
+  staticFile
 } from "remotion";
-import VerseText from "@/components/Verse/VerseText";
-import { getVerseWords } from "@/utils/verse";
-import Translation from "@/types/Translation";
-import TranslationText from "@/components/QuranReader/TranslationView/TranslationText";
-import QuranTextLogo from "@/icons/quran-text-logo.svg";
 import styles from "./video.module.scss";
-import { useSelector } from 'react-redux';
-import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
-import { useCurrentFrame } from "remotion";
 
 const getProcessedVerseWords = (verse) => {
-  const currentFrame = useCurrentFrame();
-  // console.log(currentFrame, verse);
   const basicWords = getVerseWords(verse);
   return basicWords;
 }
 
-
 const VideoContent = ({
     verses, 
     audio, 
+    video,
     timestamps, 
     sceneBackground, 
     verseBackground, 
@@ -32,8 +30,7 @@ const VideoContent = ({
     stls,
     verseAlignment,
     translationAlignment,
-    border,
-    dimensions
+    border
   }) => {
   const quranReaderStyles = useSelector(selectQuranReaderStyles);
 
@@ -42,36 +39,34 @@ const VideoContent = ({
   } else {
     stls = { ...stls, border: '2px gray solid' }
   }
-  // if (dimensions === 'portrait') {
-  //   stls = {...stls, border: 'none'};
-  // }
-  
-  const videoSource = 'https://static.videezy.com/system/resources/previews/000/046/143/original/Peach_Flower_Tree_2.mp4';
-
   return (
     <AbsoluteFill
       style={{
-        backgroundColor:
-          sceneBackground === ""
-            ? "rgb(229,227,255)"
-            : sceneBackground,
-        background:
-          sceneBackground === ""
-            ? "linear-gradient(0deg, rgba(229,227,255,1) 0%, rgba(230,246,235,1) 50%, rgba(215,249,255,1) 100%)"
-            : sceneBackground,
+        background: sceneBackground,
         justifyContent: "center",
-        // opacity: opacity
       }}
     >
-      <Video src={videoSource} />
-      <Audio src={audio.audioUrl} />
+      <div className={styles.videoContainer}>
+        <Video loop src={staticFile(video.videoSrc)} />
+      </div>
+      <Audio 
+        startFrom={
+          audio?.verseTimings[0]?.normalizedStart ? 
+          audio?.verseTimings[0]?.normalizedStart / 1000 * 30 : 
+          audio?.verseTimings[0]?.timestampFrom / 1000 * 30} 
+        endAt={
+          audio?.verseTimings[0]?.normalizedEnd ? 
+          audio.verseTimings[audio.verseTimings.length - 1].normalizedEnd / 1000 * 30 : 
+          audio.verseTimings[audio.verseTimings.length - 1].timestampTo / 1000 * 30} 
+        src={audio.audioUrl} 
+      />
       {verses &&
         verses.length > 0 &&
         verses.map((verse, i) => {
           return (
             <Sequence
               key={i}
-              from={timestamps[i].start}
+              from={i === 0 ? 0 : timestamps[i].start}
               durationInFrames={timestamps[i].durationInFrames}
             >
               <AbsoluteFill
@@ -108,10 +103,10 @@ const VideoContent = ({
         style={{
           height: "100%",
           width: "100%",
-          color: "rgb(0,0,0)",
         }}
       >
         <div
+          className={video.watermarkColor === 'dark' ? styles.watermarkDark : styles.watermarkLight}
           style={{
             position: "absolute",
             bottom: "6%",
