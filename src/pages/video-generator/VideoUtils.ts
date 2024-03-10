@@ -172,13 +172,12 @@ export function validateVerseRange(from = 1, to, versesCount) {
 }
 
 export function getTrimmedAudio(audio, from, to) {
-  if (!Boolean(from?.trim()) && !Boolean(to?.trim())) {
+  if (!Boolean(from?.trim?.()) && !Boolean(to?.trim?.())) {
     return audio;
   }
   
   from = parseInt(from);
-  to = to || audio.verseTimings.length; // user provided value or end of surah
-  to = parseInt(to);
+  to = parseInt((to || audio.verseTimings.length)); // user provided value or end of surah
   
   const isRangeValid = validateVerseRange(from, to, audio.verseTimings.length);
 
@@ -186,6 +185,9 @@ export function getTrimmedAudio(audio, from, to) {
     return audio;
   }
   
+  // when we modify full audio to get specific ranges, 'from' ayah
+  // e.g. 255 from full verses array becomes the 0 index in the new
+  // array. Similarly, to becomes how many more verses we want after.
   const actualFrom = from <= 1 ? 1 : from;
   const actualTo =  to - from;
 
@@ -199,7 +201,6 @@ export function getTrimmedAudio(audio, from, to) {
   }
   res.duration = res.verseTimings.reduce((acc, obj) => acc + obj.duration, 0);
   res.verseTimings = res.verseTimings.map(timing => {
-    console.log('hello')
     return {
       ...timing,
       normalizedStart: timing.timestampFrom,
