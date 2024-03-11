@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { useCallback, useMemo, useState } from 'react';
 
 import { Action } from '@reduxjs/toolkit';
@@ -10,6 +11,7 @@ import styles from './video.module.scss';
 import DataFetcher from '@/components/DataFetcher';
 import Section from '@/components/Navbar/SettingsDrawer/Section';
 import Counter from '@/dls/Counter/Counter';
+import Modal from '@/dls/Modal/Modal';
 import SelectionCard from '@/dls/SelectionCard/SelectionCard';
 import Skeleton from '@/dls/Skeleton/Skeleton';
 import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
@@ -133,7 +135,7 @@ const TranslationSection = ({ selectedTranslation, setSelectedTranslation }) => 
   };
 
   return (
-    <div className={styles.container}>
+    <div>
       <Section>
         <Section.Title isLoading={isLoading}>{t('translation')}</Section.Title>
         <Section.Row>
@@ -159,21 +161,29 @@ const TranslationSection = ({ selectedTranslation, setSelectedTranslation }) => 
         </Section.Row>
       </Section>
       {showTranlsationsList ? (
-        <>
-          <div className={styles.translationControlButtons}>
-            <button type="button" onClick={onSelectionCardClicked}>
-              {t('video.collapse')}
-            </button>
-            <button type="button" onClick={clearTranslations}>
-              {t('video.deselect')}
-            </button>
-          </div>
-          <TranslationSetting
-            selectedTranslation={selectedTranslation}
-            setSelectedTranslation={setSelectedTranslation}
-            // eslint-disable-next-line max-lines
-          />
-        </>
+        <div className={styles.translationModalWrapper}>
+          <Modal
+            isOpen
+            onClickOutside={onSelectionCardClicked}
+            onEscapeKeyDown={onSelectionCardClicked}
+          >
+            <Modal.Body>
+              <Modal.Header>
+                <Modal.Title>{t('translations')}</Modal.Title>
+                <div className={styles.translationListContainer}>
+                  <TranslationSetting
+                    selectedTranslation={selectedTranslation}
+                    setSelectedTranslation={setSelectedTranslation}
+                  />
+                </div>
+              </Modal.Header>
+            </Modal.Body>
+            <Modal.Footer>
+              <Modal.Action onClick={clearTranslations}>{t('video.deselect')}</Modal.Action>
+              <Modal.CloseAction onClick={onSelectionCardClicked}>{t('close')}</Modal.CloseAction>
+            </Modal.Footer>
+          </Modal>
+        </div>
       ) : null}
     </div>
   );

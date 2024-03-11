@@ -157,6 +157,8 @@
 
 .searchInputContainer {
   margin-block-end: var(--spacing-small);
+  margin-block-start: var(--spacing-xsmall);
+  margin-inline-end: var(--spacing-mega);
 }
 
 .label {
@@ -292,4 +294,22 @@
 
 .versesLabel {
   margin-bottom: 1rem;
+}
+
+.translationListContainer {
+  height: 50vh;
+  min-width: 100%;
+  overflow: auto;
+  position: relative;
+  margin-block-start: var(--spacing-medium);
+}
+
+.translationClearSearchButton {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+}
+
+.translationModalWrapper .body {
+  padding-block-end: 0px !important;
 }
