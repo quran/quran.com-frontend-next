@@ -6,14 +6,13 @@ import classNames from 'classnames';
 import { GetStaticProps, NextPage } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 
+import { VideoContent } from '../../remotion/Video/Main';
 import layoutStyle from '../index.module.scss';
 
 import { getAvailableReciters, getChapterAudioData, getChapterVerses } from '@/api';
 import styles from '@/components/VideoGenerator/video.module.scss';
-import VideoContent from '@/components/VideoGenerator/VideoContent';
 import VideoSettings from '@/components/VideoGenerator/VideoSettings';
 import {
-  DEFAULT_API_PARAMS,
   getAllBackgrounds,
   getNormalizedTimestamps,
   getStyles,
@@ -22,6 +21,16 @@ import {
 } from '@/components/VideoGenerator/VideoUtils';
 import Error from '@/pages/_error';
 import { getAllChaptersData } from '@/utils/chapter';
+import {
+  DEFAULT_API_PARAMS,
+  VIDEO_FPS,
+  DEFAULT_RECITER_ID,
+  DEFAULT_SURAH,
+  VIDEO_LANDSCAPE_HEIGHT,
+  VIDEO_LANDSCAPE_WIDTH,
+  VIDEO_PORTRAIT_HEIGHT,
+  VIDEO_PORTRAIT_WIDTH,
+} from '@/utils/videoGenerator/constants';
 import { VersesResponse } from 'types/ApiResponses';
 import ChaptersData from 'types/ChaptersData';
 
@@ -108,11 +117,11 @@ const VideoGenerator: NextPage<VideoGenerator> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [reciter, selectedTranslations, searchFetch]);
 
-  const onChapterChange = async (val) => {
+  const onChapterChange = useCallback((val) => {
     setVerseFrom('');
     setVerseTo('');
     setChapter(val);
-  };
+  }, []);
 
   const seekToBeginning = useCallback(() => {
     const { current } = playerRef;
@@ -144,24 +153,31 @@ const VideoGenerator: NextPage<VideoGenerator> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [t]);
 
-  // eslint-disable-next-line react/no-multi-comp
-  const VideoContentComponent = () => {
-    return (
-      <VideoContent
-        verses={verseData}
-        audio={audioData}
-        timestamps={timestamps}
-        sceneBackground={sceneBackgroundColor?.background}
-        verseBackground={verseBackgroundColor?.background}
-        fontColor={fontColor}
-        stls={getStyles(dimensions)}
-        verseAlignment={verseAlignment}
-        translationAlignment={translationAlignment}
-        border={border}
-        video={video}
-      />
-    );
-  };
+  const inputProps = useMemo(() => {
+    return {
+      verses: verseData,
+      audio: audioData,
+      timestamps,
+      sceneBackground: sceneBackgroundColor?.background,
+      verseBackground: verseBackgroundColor?.background,
+      fontColor,
+      stls: getStyles(dimensions),
+      verseAlignment,
+      translationAlignment,
+      border,
+      video,
+    };
+  }, [
+    timestamps,
+    sceneBackgroundColor,
+    verseBackgroundColor,
+    fontColor,
+    dimensions,
+    verseAlignment,
+    translationAlignment,
+    border,
+    video,
+  ]);
 
   const chaptersList = useMemo(() => {
     const flattenedChaptersList = Object.entries(chaptersData).map((r) => ({
@@ -188,11 +204,16 @@ const VideoGenerator: NextPage<VideoGenerator> = ({
       <div className={classNames(styles.playerWrapper, layoutStyle.flowItem)}>
         <Player
           style={{ width: '100%', height: '100%' }}
-          component={VideoContentComponent}
-          durationInFrames={Math.ceil(((audioData.duration + 500) / 1000) * 30)}
-          compositionWidth={dimensions === 'landscape' ? 1280 : 720}
-          compositionHeight={dimensions === 'landscape' ? 720 : 1280}
-          fps={30}
+          component={VideoContent}
+          inputProps={inputProps}
+          durationInFrames={Math.ceil(((audioData.duration + 500) / 1000) * VIDEO_FPS)}
+          compositionWidth={
+            dimensions === 'landscape' ? VIDEO_LANDSCAPE_WIDTH : VIDEO_PORTRAIT_WIDTH
+          }
+          compositionHeight={
+            dimensions === 'landscape' ? VIDEO_LANDSCAPE_HEIGHT : VIDEO_PORTRAIT_HEIGHT
+          }
+          fps={VIDEO_FPS}
           ref={playerRef}
           controls
         />
@@ -242,8 +263,8 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   try {
     const { reciters } = await getAvailableReciters(locale, []);
     const chaptersData = await getAllChaptersData(locale);
-    const verses = await getChapterVerses(112, locale, DEFAULT_API_PARAMS);
-    const audio = await getChapterAudioData(7, 112, true);
+    const verses = await getChapterVerses(DEFAULT_SURAH, locale, DEFAULT_API_PARAMS);
+    const audio = await getChapterAudioData(DEFAULT_RECITER_ID, DEFAULT_SURAH, true);
     const defaultTimestamps = getNormalizedTimestamps(audio);
 
     return {

@@ -8,40 +8,6 @@
   min-height: calc(8 * var(--spacing-mega));
 }
 
-.videoContainer {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  width: 100%;
-  height: 100%; 
-  overflow: hidden;
-}
-
-.videoContainer video {
-  /* Make video to at least 100% wide and tall */
-  min-width: 100%; 
-  min-height: 100%; 
-
-  /* Setting width & height to auto prevents the browser from stretching or squishing the video */
-  width: auto;
-  height: auto;
-
-  /* Center the video */
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%,-50%);
-  object-fit: cover;
-}
-
-.watermarkLight > svg > path {
-  fill: #e7e9ea;
-}
-
-.watermarkDark > svg > path {
-  fill: #272727;
-}
-
 .playerWrapper {
   position: relative;
   padding: var(--spacing-large);
@@ -198,25 +164,6 @@
 
 .translationControlButtons > button {
   margin: 0 1rem 1rem 0;
-}
-
-.verseCentre {
-  padding: 0 2rem;
-}
-
-.verseJustified {
-  width: 100%;
-  text-align: left;
-  padding: 0 2rem;
-}
-
-.verseTranslationCentre {
-  padding: 0.5rem 2rem;
-}
-
-.verseTranslationJustified {
-  width: 100%;
-  padding: 0.5rem 2rem;
 }
 
 .backgroundColorsWrapper {

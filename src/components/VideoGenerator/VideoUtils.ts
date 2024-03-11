@@ -1,5 +1,5 @@
 /* eslint-disable max-lines */
-export const SURAH = 112;
+import { DEFAULT_STYLES, VIDEOS } from '@/utils/videoGenerator/constants';
 
 export function getNormalizedIntervals(start, end) {
   const FRAMES = 30;
@@ -34,8 +34,7 @@ export function getNormalizedTimestamps(audio) {
 }
 
 export function getVideoById(id) {
-  const videos = getVideos();
-  const videoObj = videos[id];
+  const videoObj = VIDEOS[id];
   if (!videoObj) {
     return null;
   }
@@ -53,43 +52,7 @@ export function getVideosArray() {
     return result;
   };
 
-  return flattenObject(getVideos());
-}
-
-// eslint-disable-next-line react-func/max-lines-per-function
-export function getVideos() {
-  return {
-    1: {
-      thumbnailSrc: 'https://images.quran.com/videos/thumbnails/sea.png',
-      videoSrc: 'https://images.quran.com/videos/sea.mp4',
-      watermarkColor: 'light',
-    },
-    2: {
-      thumbnailSrc: 'https://images.quran.com/videos/thumbnails/abstract.png',
-      videoSrc: 'https://images.quran.com/videos/abstract.mp4',
-      watermarkColor: 'light',
-    },
-    3: {
-      thumbnailSrc: 'https://images.quran.com/videos/thumbnails/windmill.png',
-      videoSrc: 'https://images.quran.com/videos/windmill.mp4',
-      watermarkColor: 'light',
-    },
-    4: {
-      thumbnailSrc: 'https://images.quran.com/videos/thumbnails/stars.png',
-      videoSrc: 'https://images.quran.com/videos/stars.mp4',
-      watermarkColor: 'light',
-    },
-    5: {
-      thumbnailSrc: 'https://images.quran.com/videos/thumbnails/nature.png',
-      videoSrc: 'https://images.quran.com/videos/nature.mp4',
-      watermarkColor: 'light',
-    },
-    6: {
-      thumbnailSrc: 'https://images.quran.com/videos/thumbnails/snow.png',
-      videoSrc: 'https://images.quran.com/videos/snow.mp4',
-      watermarkColor: 'dark',
-    },
-  };
+  return flattenObject(VIDEOS);
 }
 
 export const getBackgroundWithOpacityById = (id, opacity) => {
@@ -138,23 +101,11 @@ export const getAllBackgrounds = (alpha = '0.8') => {
 
 export function getStyles(dimensions) {
   return {
-    justifyContent: 'center',
-    color: '#111',
+    ...DEFAULT_STYLES,
     minWidth: dimensions === 'landscape' ? '60%' : '80%',
     minHeight: dimensions === 'landscape' ? '50%' : '25%',
-    width: 'fit-content',
-    height: 'fit-content',
-    margin: 'auto',
-    border: '2px gray solid',
-    borderRadius: '20px',
-    alignItems: 'center',
   };
 }
-
-export const DEFAULT_API_PARAMS = {
-  wordFields: 'verse_key,verse_id,page_number,location,text_uthmani,code_v1,qpc_uthmani_hafs',
-  translations: [131],
-};
 
 export const stls = getStyles('landscape');
 

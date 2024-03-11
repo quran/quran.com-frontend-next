@@ -143,10 +143,7 @@ const VideoSettings = ({
               className={styles.colorPicker}
               type="color"
               value={fontColor}
-              onChange={(e) => {
-                seekToBeginning();
-                setFontColor(e.target.value);
-              }}
+              onChange={(e) => setFontColor(e.target.value)}
             />
           </Section.Row>
         </Section>
@@ -172,10 +169,7 @@ const VideoSettings = ({
                 { name: 'Justified', value: 'justified' },
               ]}
               selected={verseAlignment}
-              onSelect={(val) => {
-                seekToBeginning();
-                setVerseAlignment(val);
-              }}
+              onSelect={(val) => setVerseAlignment(val)}
             />
           </Section.Row>
           <br />
@@ -188,7 +182,6 @@ const VideoSettings = ({
               ]}
               selected={translationAlignment}
               onSelect={(val) => {
-                seekToBeginning();
                 setTranslationAlignment(val);
               }}
             />
@@ -213,7 +206,6 @@ const VideoSettings = ({
               opacity={opacity}
               type={backgroundType}
               setSceneBackground={setSceneBackgroundColor}
-              seekToBeginning={seekToBeginning}
               setVerseBackground={setVerseBackgroundColor}
               colors={backgroundColors}
             />
@@ -237,7 +229,6 @@ const VideoSettings = ({
                     if (val === opacity) {
                       return;
                     }
-                    seekToBeginning();
                     setOpacity(val);
                     const verse = verseBackgroundColor;
                     const bgColors = getAllBackgrounds(val);
@@ -255,10 +246,7 @@ const VideoSettings = ({
                     { name: 'No', value: 'false' },
                   ]}
                   selected={border}
-                  onSelect={(val) => {
-                    seekToBeginning();
-                    setBorder(val);
-                  }}
+                  onSelect={(val) => setBorder(val)}
                 />
               </Section.Row>
             </>
@@ -275,10 +263,7 @@ const VideoSettings = ({
                 { name: 'Portrait', value: 'portrait' },
               ]}
               selected={dimensions}
-              onSelect={(val) => {
-                seekToBeginning();
-                setDimensions(val);
-              }}
+              onSelect={(val) => setDimensions(val)}
             />
           </Section.Row>
           <Section.Row>

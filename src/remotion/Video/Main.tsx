@@ -18,7 +18,7 @@ const getProcessedVerseWords = (verse) => {
 
 let style = {};
 
-const VideoContent = ({
+export const VideoContent = ({
   verses,
   audio,
   video,
@@ -38,6 +38,7 @@ const VideoContent = ({
   } else {
     style = { ...stls, border: '2px gray solid' };
   }
+
   return (
     <AbsoluteFill
       style={{
@@ -131,5 +132,3 @@ const VideoContent = ({
     </AbsoluteFill>
   );
 };
-
-export default VideoContent;

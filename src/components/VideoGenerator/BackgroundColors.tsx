@@ -1,23 +1,14 @@
 import styles from './video.module.scss';
 import { getBackgroundWithOpacityById } from './VideoUtils';
 
-const BackgroundColors = ({
-  opacity,
-  colors,
-  type,
-  setVerseBackground,
-  setSceneBackground,
-  seekToBeginning,
-}) => {
+const BackgroundColors = ({ opacity, colors, type, setVerseBackground, setSceneBackground }) => {
   const onColorSelected = (selectionType: any, color: { id: any }) => {
     const backgroundColor = getBackgroundWithOpacityById(color.id, opacity);
     switch (selectionType) {
       case 'verse':
-        seekToBeginning();
         setVerseBackground(backgroundColor);
         break;
       case 'scene':
-        seekToBeginning();
         setSceneBackground(backgroundColor);
         break;
       default:
