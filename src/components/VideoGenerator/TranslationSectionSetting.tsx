@@ -61,6 +61,9 @@ const TranslationSection = ({ selectedTranslation, setSelectedTranslation }) => 
 
   const renderTranslations = useCallback(
     (data: TranslationsResponse) => {
+      if (!data) {
+        return null;
+      }
       const firstSelectedTranslation = data.translations.find(
         (translation) => translation.id === selectedTranslations[0],
       );
