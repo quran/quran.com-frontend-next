@@ -18,6 +18,7 @@ const getProcessedVerseWords = (verse) => {
 
 let style = {};
 
+// eslint-disable-next-line import/prefer-default-export
 export const VideoContent = ({
   verses,
   audio,

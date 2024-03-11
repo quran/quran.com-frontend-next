@@ -8,6 +8,7 @@ import {
   VIDEO_LANDSCAPE_WIDTH,
 } from '@/utils/videoGenerator/constants';
 
+// eslint-disable-next-line import/prefer-default-export
 export const RemotionRoot = () => {
   return (
     <>

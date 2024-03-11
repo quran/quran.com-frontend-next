@@ -167,6 +167,7 @@ const VideoGenerator: NextPage<VideoGenerator> = ({
       border,
       video,
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
     timestamps,
     sceneBackgroundColor,
