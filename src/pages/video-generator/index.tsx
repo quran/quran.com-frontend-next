@@ -8,9 +8,10 @@ import useTranslation from 'next-translate/useTranslation';
 
 import layoutStyle from '../index.module.scss';
 
-import styles from './video.module.scss';
-import VideoContent from './VideoContent';
-import VideoSettings from './VideoSettings';
+import { getAvailableReciters, getChapterAudioData, getChapterVerses } from '@/api';
+import styles from '@/components/VideoGenerator/video.module.scss';
+import VideoContent from '@/components/VideoGenerator/VideoContent';
+import VideoSettings from '@/components/VideoGenerator/VideoSettings';
 import {
   DEFAULT_API_PARAMS,
   getAllBackgrounds,
@@ -18,9 +19,7 @@ import {
   getStyles,
   getTrimmedAudio,
   getVideoById,
-} from './VideoUtils';
-
-import { getAvailableReciters, getChapterAudioData, getChapterVerses } from '@/api';
+} from '@/components/VideoGenerator/VideoUtils';
 import Error from '@/pages/_error';
 import { getAllChaptersData } from '@/utils/chapter';
 import { VersesResponse } from 'types/ApiResponses';

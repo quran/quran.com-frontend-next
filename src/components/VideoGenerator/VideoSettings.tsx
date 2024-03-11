@@ -4,8 +4,6 @@ import { useContext, useState } from 'react';
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 
-import layoutStyle from '../index.module.scss';
-
 import BackgroundColors from './BackgroundColors';
 import BackgroundVideos from './BackgroundVideos';
 import QuranFontSection from './QuranFontSectionSetting';
@@ -20,6 +18,7 @@ import Input from '@/dls/Forms/Input';
 import Select from '@/dls/Forms/Select';
 import Switch from '@/dls/Switch/Switch';
 import IconSearch from '@/icons/search.svg';
+import layoutStyle from '@/pages/index.module.scss';
 import { getChapterData } from '@/utils/chapter';
 
 const backgroundColors = getAllBackgrounds();
