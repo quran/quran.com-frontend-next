@@ -1,7 +1,8 @@
+/* eslint-disable max-lines */
 /* eslint-disable react-func/max-lines-per-function */
 /* eslint-disable no-param-reassign */
 const path = require('path');
-const withTM = require("next-transpile-modules")(["remotion", "@remotion/cli", "@remotion/player"]);
+
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE_BUNDLE === 'true',
 });
@@ -10,6 +11,7 @@ const withPlugins = require('next-compose-plugins');
 const withFonts = require('next-fonts');
 const withPWA = require('next-pwa');
 const nextTranslate = require('next-translate');
+const withTM = require('next-transpile-modules')(['remotion', '@remotion/cli', '@remotion/player']);
 
 const securityHeaders = require('./configs/SecurityHeaders.js');
 const runtimeCaching = require('./pwa-runtime-config.js');

@@ -362,7 +362,17 @@
   "verse-bookmarked": "Verse bookmarked!",
   "verses": "Verses",
   "video": {
-    "verse-key": "Chapter and Verse Number e.g. 2:255"
+    "background": "Background",
+    "border": "Border",
+    "collapse": "Collapse list",
+    "colors": "Colors",
+    "deselect": "Deselect all",
+    "font-color": "Font color",
+    "opacity": "Opacity",
+    "orientation": "Orientation",
+    "text-alignment": "Text Alignment",
+    "verse-key": "Chapter and Verse Number e.g. 2:255",
+    "video-picker": "Select background video"
   },
   "view": "View",
   "voice": {

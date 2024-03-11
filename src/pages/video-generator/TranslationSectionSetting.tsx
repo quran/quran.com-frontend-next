@@ -2,31 +2,31 @@ import { useCallback, useMemo, useState } from 'react';
 
 import { Action } from '@reduxjs/toolkit';
 import useTranslation from 'next-translate/useTranslation';
-import { shallowEqual, useDispatch, useSelector } from 'react-redux';
+import { shallowEqual, useSelector } from 'react-redux';
 
-import Section from "@/components/Navbar/SettingsDrawer/Section";
+import TranslationSetting from './TranslationSetting';
 import styles from './video.module.scss';
 
 import DataFetcher from '@/components/DataFetcher';
+import Section from '@/components/Navbar/SettingsDrawer/Section';
 import Counter from '@/dls/Counter/Counter';
 import SelectionCard from '@/dls/SelectionCard/SelectionCard';
 import Skeleton from '@/dls/Skeleton/Skeleton';
 import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
 import {
-    decreaseTranslationFontScale,
-    increaseTranslationFontScale,
-    MAXIMUM_TRANSLATIONS_FONT_STEP,
-    MINIMUM_FONT_STEP,
-    selectQuranReaderStyles,
+  decreaseTranslationFontScale,
+  increaseTranslationFontScale,
+  MAXIMUM_TRANSLATIONS_FONT_STEP,
+  MINIMUM_FONT_STEP,
+  selectQuranReaderStyles,
 } from '@/redux/slices/QuranReader/styles';
 import { makeTranslationsUrl } from '@/utils/apiPaths';
 import { logValueChange } from '@/utils/eventLogger';
 import { toLocalizedNumber } from '@/utils/locale';
 import { TranslationsResponse } from 'types/ApiResponses';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
-import TranslationSetting from './TranslationSetting';
 
-const TranslationSection = ({selectedTranslation, setSelectedTranslation}) => {
+const TranslationSection = ({ selectedTranslation, setSelectedTranslation }) => {
   const {
     actions: { onSettingsChange },
     isLoading,
@@ -108,7 +108,7 @@ const TranslationSection = ({selectedTranslation, setSelectedTranslation}) => {
 
   const clearTranslations = () => {
     setSelectedTranslation([]);
-  }
+  };
 
   const onFontScaleDecreaseClicked = () => {
     const newValue = translationFontScale - 1;
@@ -145,10 +145,6 @@ const TranslationSection = ({selectedTranslation, setSelectedTranslation}) => {
         </Section.Row>
         <Section.Row>
           <Section.Label>{t('fonts.font-size')}</Section.Label>
-
-          {/* disable `onIncrement` function and UI, when translationFontScale is MAXIMUM_FONT_SCALE
-            we do this by giving null to `onIncrement` prop
-            same applies to `onDecrement` */}
           <Counter
             count={translationFontScale}
             onIncrement={
@@ -163,20 +159,22 @@ const TranslationSection = ({selectedTranslation, setSelectedTranslation}) => {
         </Section.Row>
       </Section>
       {showTranlsationsList ? (
-        <> 
+        <>
           <div className={styles.translationControlButtons}>
-            <button onClick={onSelectionCardClicked}>Collapse list</button>
-            <button onClick={clearTranslations}>Deselect all</button>
+            <button type="button" onClick={onSelectionCardClicked}>
+              {t('video.collapse')}
+            </button>
+            <button type="button" onClick={clearTranslations}>
+              {t('video.deselect')}
+            </button>
           </div>
-          <TranslationSetting 
-            selectedTranslation={selectedTranslation} 
+          <TranslationSetting
+            selectedTranslation={selectedTranslation}
             setSelectedTranslation={setSelectedTranslation}
+            // eslint-disable-next-line max-lines
           />
         </>
-        ) 
-      : 
-        null
-      }
+      ) : null}
     </div>
   );
 };

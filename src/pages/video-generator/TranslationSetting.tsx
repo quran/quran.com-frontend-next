@@ -1,74 +1,34 @@
 /* eslint-disable max-lines */
 import { useCallback } from 'react';
 
-import { Action } from '@reduxjs/toolkit';
 import groupBy from 'lodash/groupBy';
 import omit from 'lodash/omit';
 import useTranslation from 'next-translate/useTranslation';
-import { useSelector } from 'react-redux';
+
 import styles from './video.module.scss';
 
 import DataFetcher from '@/components/DataFetcher';
 import Checkbox from '@/dls/Forms/Checkbox/Checkbox';
-import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
-import {
-    selectTranslations
-} from '@/redux/slices/QuranReader/translations';
 import { makeTranslationsUrl } from '@/utils/apiPaths';
 import { getLocaleName } from '@/utils/locale';
 import { TranslationsResponse } from 'types/ApiResponses';
-import PreferenceGroup from 'types/auth/PreferenceGroup';
 import AvailableTranslation from 'types/AvailableTranslation';
 
 const TranslationSelectionBody = ({ selectedTranslation, setSelectedTranslation }) => {
-  const {
-    actions: { onSettingsChange },
-  } = usePersistPreferenceGroup();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { t, lang } = useTranslation('common');
-  const translationsState = useSelector(selectTranslations);
-  const selectedTranslations  = selectedTranslation;
-
-  /**
-   * Persist settings in the DB if the user is logged in before dispatching
-   * Redux action, otherwise just dispatch it.
-   *
-   * @param {number[]} value
-   * @param {Action} action
-   */
-  const onTranslationsSettingsChange = useCallback(
-    (value: number[], action: Action, undoAction: Action) => {
-      onSettingsChange(
-        'selectedTranslations',
-        value,
-        action,
-        undoAction,
-        PreferenceGroup.TRANSLATIONS,
-      );
-    },
-    [onSettingsChange],
-  );
+  const selectedTranslations = selectedTranslation;
 
   const onTranslationsChange = useCallback(
     (selectedTranslationId: number) => {
       return (isChecked: boolean) => {
-        // when the checkbox is checked
-        // add the selectedTranslationId to redux
-        // if unchecked, remove it from redux
         const nextTranslations = isChecked
           ? [...selectedTranslations, selectedTranslationId]
           : selectedTranslations.filter((id) => id !== selectedTranslationId); // remove the id
-
-        // logItemSelectionChange('translation', selectedTranslationId.toString(), isChecked);
-        // logValueChange('selected_translations', selectedTranslations, nextTranslations);
-        // onTranslationsSettingsChange(
-        //   nextTranslations,
-        //   setSelectedTranslations({ translations: nextTranslations, locale: lang }),
-        //   setSelectedTranslations({ translations: selectedTranslations, locale: lang }),
-        // );
         setSelectedTranslation(nextTranslations);
       };
     },
-    [lang, onTranslationsSettingsChange, selectedTranslations, setSelectedTranslation],
+    [selectedTranslations, setSelectedTranslation],
   );
 
   const renderTranslationGroup = useCallback(

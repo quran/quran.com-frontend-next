@@ -1,36 +1,44 @@
+/* eslint-disable max-lines */
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+
+import { Player, PlayerRef } from '@remotion/player';
+import classNames from 'classnames';
+import { GetStaticProps, NextPage } from 'next';
+import useTranslation from 'next-translate/useTranslation';
+
+import layoutStyle from '../index.module.scss';
+
+import styles from './video.module.scss';
+import VideoContent from './VideoContent';
+import VideoSettings from './VideoSettings';
 import {
-  getAvailableReciters,
-  getChapterAudioData,
-  getChapterVerses,
-} from "@/api";
-import Error from "@/pages/_error";
-import { getAllChaptersData } from "@/utils/chapter";
-import { Player, PlayerRef } from "@remotion/player";
-import classNames from "classnames";
-import { GetStaticProps, NextPage } from "next";
-import useTranslation from "next-translate/useTranslation";
-import { useCallback, useEffect, useMemo, useRef, useState } from "react";
-import { VersesResponse } from "types/ApiResponses";
-import ChaptersData from "types/ChaptersData";
-import layoutStyle from "../index.module.scss";
-import VideoContent from "./VideoContent";
-import VideoSettings from "./VideoSettings";
-import { DEFAULT_API_PARAMS, getAllBackgrounds, getNormalizedTimestamps, getStyles, getTrimmedAudio, getVideoById } from "./VideoUtils";
-import styles from "./video.module.scss";
+  DEFAULT_API_PARAMS,
+  getAllBackgrounds,
+  getNormalizedTimestamps,
+  getStyles,
+  getTrimmedAudio,
+  getVideoById,
+} from './VideoUtils';
+
+import { getAvailableReciters, getChapterAudioData, getChapterVerses } from '@/api';
+import Error from '@/pages/_error';
+import { getAllChaptersData } from '@/utils/chapter';
+import { VersesResponse } from 'types/ApiResponses';
+import ChaptersData from 'types/ChaptersData';
 
 let skipFirstRender = true;
 interface VideoGenerator {
   juzVerses?: VersesResponse;
   hasError?: boolean;
-  reciters: any,
-  verses: any,
-  audio: any,
-  defaultTimestamps: any,
+  reciters: any;
+  verses: any;
+  audio: any;
+  defaultTimestamps: any;
   chaptersData: ChaptersData;
 }
 
-const defaultOpacity = '0.2'
-const defaultBackground = getAllBackgrounds(defaultOpacity)[0]
+const defaultOpacity = '0.2';
+const defaultBackground = getAllBackgrounds(defaultOpacity)[0];
 
 const VideoGenerator: NextPage<VideoGenerator> = ({
   hasError,
@@ -40,15 +48,12 @@ const VideoGenerator: NextPage<VideoGenerator> = ({
   audio,
   defaultTimestamps,
 }) => {
-  const { t, lang } = useTranslation("common");
-  if (hasError) {
-    return <Error statusCode={500} />;
-  }
+  const { t, lang } = useTranslation('common');
 
   const [opacity, setOpacity] = useState(defaultOpacity);
   const [sceneBackgroundColor, setSceneBackgroundColor] = useState(defaultBackground);
   const [verseBackgroundColor, setVerseBackgroundColor] = useState(defaultBackground);
-  const [fontColor, setFontColor] = useState("#dddddd");
+  const [fontColor, setFontColor] = useState('#dddddd');
   const [reciter, setReciter] = useState(7);
   const [chapter, setChapter] = useState(112);
   const [verseData, setverseData] = useState(verses?.verses);
@@ -75,36 +80,33 @@ const VideoGenerator: NextPage<VideoGenerator> = ({
     }
 
     let apiParams: any = {
-      ...DEFAULT_API_PARAMS, 
+      ...DEFAULT_API_PARAMS,
       translations: selectedTranslations,
-      perPage: chaptersData[chapter].versesCount
-    }
+      perPage: chaptersData[chapter].versesCount,
+    };
 
     if (verseFrom) apiParams = { ...apiParams, from: `${chapter}:${verseFrom}` };
     if (verseTo) apiParams = { ...apiParams, to: `${chapter}:${verseTo}` };
 
     const fetchData = async () => {
-      const verses = await getChapterVerses(
-        chapter, 
-        lang, 
-        apiParams
-      );
-      const audio = await getChapterAudioData(reciter, chapter, true);
-      return [verses, audio];
+      const versesRes = await getChapterVerses(chapter, lang, apiParams);
+      const audioRes = await getChapterAudioData(reciter, chapter, true);
+      return [versesRes, audioRes];
     };
     setIsFetching(true);
     fetchData()
-      .then(([verses, audio]) => {
+      .then(([versesRes, audioRes]) => {
         seekToBeginning();
-        setverseData(verses?.verses);
-        const trimmedAudio = getTrimmedAudio(audio, verseFrom, verseTo);
+        setverseData((versesRes as any)?.verses);
+        const trimmedAudio = getTrimmedAudio(audioRes, verseFrom, verseTo);
         setAudioData(trimmedAudio);
         setTimestamps(getNormalizedTimestamps(trimmedAudio));
       })
-      .catch(err => {
-        console.debug('something went wrong');
+      .catch(() => {
+        console.error('something went wrong');
       })
       .finally(() => setIsFetching(false));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [reciter, selectedTranslations, searchFetch]);
 
   const onChapterChange = async (val) => {
@@ -126,22 +128,24 @@ const VideoGenerator: NextPage<VideoGenerator> = ({
 
   const recitersOptions = useMemo(() => {
     const DEFAULT_RECITATION_STYLE = 'Murattal';
-  
-    return reciters.map((reciter) => {
-      let label = reciter.translatedName.name;
-      const recitationStyle = reciter.style.name;
+
+    return reciters.map((reciterObj) => {
+      let label = reciterObj.translatedName.name;
+      const recitationStyle = reciterObj.style.name;
       if (recitationStyle !== DEFAULT_RECITATION_STYLE) {
-        label = `${label} - ${recitationStyle}`
+        label = `${label} - ${recitationStyle}`;
       }
       return {
-        id: reciter.id,
-        label: label,
-        value: reciter.id,
-        name: reciter.name,
-      }
+        id: reciterObj.id,
+        label,
+        value: reciterObj.id,
+        name: reciterObj.name,
+      };
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [t]);
 
+  // eslint-disable-next-line react/no-multi-comp
   const VideoContentComponent = () => {
     return (
       <VideoContent
@@ -157,33 +161,36 @@ const VideoGenerator: NextPage<VideoGenerator> = ({
         border={border}
         video={video}
       />
-    )
-  }
+    );
+  };
 
   const chaptersList = useMemo(() => {
     const flattenedChaptersList = Object.entries(chaptersData).map((r) => ({
       id: r[0],
       ...r[1],
     }));
-    return flattenedChaptersList.map((chapter) => {
+    return flattenedChaptersList.map((chapterObj) => {
       return {
-        id: chapter.id,
-        label: chapter.transliteratedName,
-        value: chapter.id,
-        name: chapter.transliteratedName,
+        id: chapterObj.id,
+        label: chapterObj.transliteratedName,
+        value: chapterObj.id,
+        name: chapterObj.transliteratedName,
       };
     });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [t]);
+
+  if (hasError) {
+    return <Error statusCode={500} />;
+  }
 
   return (
     <div className={styles.pageContainer}>
       <div className={classNames(styles.playerWrapper, layoutStyle.flowItem)}>
         <Player
-          style={{ width: "100%", height: "100%" }}
+          style={{ width: '100%', height: '100%' }}
           component={VideoContentComponent}
-          durationInFrames={Math.ceil(
-            ((audioData.duration + 500) / 1000) * 30
-          )}
+          durationInFrames={Math.ceil(((audioData.duration + 500) / 1000) * 30)}
           compositionWidth={dimensions === 'landscape' ? 1280 : 720}
           compositionHeight={dimensions === 'landscape' ? 720 : 1280}
           fps={30}

@@ -5,7 +5,6 @@ import { Action } from '@reduxjs/toolkit';
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
-
 import Section from '@/components/Navbar/SettingsDrawer/Section';
 import Counter from '@/dls/Counter/Counter';
 import Select from '@/dls/Forms/Select';
@@ -23,8 +22,8 @@ import {
   setQuranFont,
 } from '@/redux/slices/QuranReader/styles';
 import { logValueChange } from '@/utils/eventLogger';
-import { MushafLines, QuranFont } from 'types/QuranReader';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
+import { MushafLines, QuranFont } from 'types/QuranReader';
 
 const QuranFontSection = () => {
   const { t, lang } = useTranslation('common');
