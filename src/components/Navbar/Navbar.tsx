@@ -12,6 +12,7 @@ import DonateButton from '@/components/Fundraising/DonateButton';
 import { useOnboarding } from '@/components/Onboarding/OnboardingProvider';
 import { selectNavbar } from '@/redux/slices/navbar';
 import DonateButtonClickSource from '@/types/DonateButtonClickSource';
+import DonateButtonType from '@/types/DonateButtonType';
 
 const Navbar = () => {
   const { isActive } = useOnboarding();
@@ -25,7 +26,9 @@ const Navbar = () => {
       <nav className={classNames(styles.container, { [styles.hiddenNav]: !showNavbar })}>
         <Banner
           text={t('fundraising-sticky-banner.title')}
-          ctaButton={<DonateButton source={DonateButtonClickSource.BANNER} />}
+          ctaButton={
+            <DonateButton type={DonateButtonType.MONTHLY} source={DonateButtonClickSource.BANNER} />
+          }
         />
         <NavbarBody />
       </nav>

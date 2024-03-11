@@ -20,6 +20,7 @@ import Banner from '@/components/Banner/Banner';
 import DonateButton from '@/components/Fundraising/DonateButton';
 import { selectIsReadingByRevelationOrder } from '@/redux/slices/revelationOrder';
 import DonateButtonClickSource from '@/types/DonateButtonClickSource';
+import DonateButtonType from '@/types/DonateButtonType';
 import { VersesResponse } from 'types/ApiResponses';
 import { QuranReaderDataType } from 'types/QuranReader';
 import Verse from 'types/Verse';
@@ -70,7 +71,12 @@ const EndOfScrollingControls: React.FC<Props> = ({
       <div className={styles.donationBannerContainer}>
         <Banner
           text={t('common:fundraising-sticky-banner.title')}
-          ctaButton={<DonateButton source={DonateButtonClickSource.QURAN_READER} />}
+          ctaButton={
+            <DonateButton
+              type={DonateButtonType.MONTHLY}
+              source={DonateButtonClickSource.QURAN_READER}
+            />
+          }
         />
       </div>
     </>
