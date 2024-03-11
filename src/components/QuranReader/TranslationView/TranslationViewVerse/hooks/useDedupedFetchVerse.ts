@@ -31,6 +31,10 @@ interface UseDedupedFetchVerseResult {
   verse: Verse | null;
   firstVerseInPage: Verse | null;
   bookmarksRangeUrl: string | null;
+  notesRange: {
+    from: string;
+    to: string;
+  } | null;
 }
 
 /**
@@ -123,6 +127,13 @@ const useDedupedFetchVerse = ({
     verse,
     firstVerseInPage: verses ? verses[0] : null,
     bookmarksRangeUrl,
+    notesRange:
+      verses && verses.length > 0
+        ? {
+            from: verses?.[0].verseKey,
+            to: verses?.[verses.length - 1].verseKey,
+          }
+        : null,
   };
 };
 

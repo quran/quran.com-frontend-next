@@ -1,0 +1,107 @@
+{
+  "checklist": {
+    "1": "Ana sayfa özellikleri",
+    "2": "Ayarlarınızı özelleştirin",
+    "3": "Ayah okuma deneyiminizi zenginleştirin",
+    "4": "Kişiselleştirilmiş özellikler"
+  },
+  "finish": "Sona ermek",
+  "onboarding-checklist": "İlk Katılım Kontrol Listesi",
+  "onboarding-title": "Kuran.com deneyiminizi en üst düzeye çıkarın! <br></br> Turunuza şimdi başlayın:",
+  "previous": "Öncesi",
+  "skip": "Atlamak",
+  "steps": {
+    "3-dot-menu": {
+      "description": "Ayetleri kopyalama, yer imlerine ekleme ve tekrarlama seçeneklerini keşfetmek için 3 noktalı menüyü tıklayın. Ayetleri tekrarlamak için çeşitli seçenekleri keşfedin",
+      "title": "3 nokta menüsü"
+    },
+    "ayah-reflection": {
+      "description": "Kur'an'la daha kişisel bir bağ geliştirmenize yardımcı olması için akademisyenlerin, ilim öğrencilerinin ve sıradan insanların düşüncelerini (tadabbur) okuyun",
+      "title": "Ayah seviyesindeki yansımaları okuyun"
+    },
+    "ayah-tafsir": {
+      "description": "Okurken anlayışınızı geliştirecek ayrıntılı bilgiler sunan Tefsir'i ayet düzeyinde keşfedin. (Tefsir, uygun görüldüğünde birden fazla ayete göre gruplandırılabilir)",
+      "title": "Ayet seviyesinde Tefsir oku"
+    },
+    "font-size": {
+      "description": "Rahat bir okuma deneyimi için Kur'an okumanızı ayarlaması kolay yazı tipi boyutlarıyla özelleştirin",
+      "title": "Yazı Boyutu"
+    },
+    "font-style": {
+      "description": "Seçenekler arasında Uthmani - Kral Fahad Kompleksi v1, Uthmani - Kral Fahad Kompleksi v2, Uthmani QPC Hafs, Indopak 15 hat, Indopak 16 hat bulunmaktadır.",
+      "title": "Tercih ettiğiniz okuma metnini seçin"
+    },
+    "inline-wbw": {
+      "description": "Kur'an'ı dinlerken her kelimenin çevirisini satırda (kelimenin altında) veya kelimenin üstünde bir baloncuk içinde görüntüleyin",
+      "title": "Kelime kelime çeviriyi satır içi olarak (kelimenin altında) görüntüleyin veya araç ipucunu görüntüleyin"
+    },
+    "juz": {
+      "description": "Kuran'ı Cüz'den görüntüle",
+      "title": "Kuran'ı Cüz'den görüntüle"
+    },
+    "listen": {
+      "description": "Okunuşu dinlemek için ses oynatıcıyı başlatın",
+      "title": "Sureyi veya Ayah'ı dinleyin"
+    },
+    "login": {
+      "description": "Oturum açın, ayarları cihazlar arasında kaydedin ve ek özelliklere erişin.",
+      "title": "Giriş yapmak"
+    },
+    "quran-radio": {
+      "description": "Kuran Radyosunu dinleyin - Kur'an'ı reklamsız yayınlayın",
+      "title": "Kuran Radyosu"
+    },
+    "reading-sessions": {
+      "description": "Kuran.com'da keşfettiğiniz ayetleri takip ederek, kişiselleştirilmiş okuma geçmişinize bir bakış atarak Kuran yolculuğunuzu kolayca gözden geçirin.",
+      "title": "Okuma geçmişini görüntüle"
+    },
+    "reading-view": {
+      "description": "Mushaf modunda Kur'an'ı görüntüleyin",
+      "title": "Okuma modu"
+    },
+    "search-bar": {
+      "description": "Arama çubuğumuzu kullanarak aradığınız ayet, sure, anahtar kelime, cüz ve konuları bulun",
+      "title": "Arama çubuğu"
+    },
+    "select-reciter": {
+      "description": "Dinlemekten en çok keyif aldığınız okuyucuyu seçerek dinleme deneyiminizi kişiselleştirin!",
+      "title": "Dinlemek için çeşitli okuyucular arasından seçim yapın"
+    },
+    "settings": {
+      "description": "Tercihlerinizi kontrol edin",
+      "title": "Ayarlar"
+    },
+    "streak": {
+      "description": "Okuma Çizgileri ve Planları özelliğimizle kişiselleştirilmiş okuma hedefleri belirleyin, ilerlemenizi takip edin ve tutarlı bir Kuran okuma alışkanlığı oluşturun.",
+      "title": "Okuma serilerini ve okuma planlarını takip edin"
+    },
+    "surah-info": {
+      "description": "Her Surenin başında uygun bir konumda bulunan her Sure hakkında bilgi edinin",
+      "title": "Suresi Hakkında Okuyun"
+    },
+    "theme": {
+      "description": "Rahat ve kişiselleştirilmiş bir Kuran okuma deneyimi için favori görünümünüzü (Açık, Sepya veya Karanlık mod) seçin.",
+      "title": "Kuran'ı Açık, Sepya veya Karanlık Modda Okuyun"
+    },
+    "translations": {
+      "description": "Birden çok dilde çeşitli çeviriler arasından seçim yapın. İpucu: Birden fazla seçenek belirleyerek çevirileri karşılaştırın",
+      "title": "Çeviriler"
+    },
+    "voice-search": {
+      "description": "Mikrofon simgesine dokunun ve aradığınız ayeti okuyun. Hızlı ipucu! Birinin nerede okuduğunu öğrenmek için (Örn. Teravih namazı) mikrofon simgesine dokunun. Bir veya iki ayet tespit edildikten sonra konumu bulmak için dur tuşuna basın",
+      "title": "Sesli Arama (Tarteel)"
+    },
+    "wbw-audio": {
+      "description": "Sadece kelimenin üzerine tıklayarak her kelimeyi ayrı ayrı dinlemek için bu seçeneği seçin!",
+      "title": "Kelimenin üzerine tıklayarak kelime kelime harf çevirisini dinleyin"
+    },
+    "wbw-translation": {
+      "description": "Kur'an'ı okurken veya dinlerken tek tek kelimelerin anlamlarını görüntüleyerek Kur'an'la ilgili kelime dağarcığınızı geliştirmenize yardımcı olun",
+      "title": "Kelime kelime çeviriyi okuyun"
+    },
+    "wbw-transliteration": {
+      "description": "Kur'an okuma yolculuğunuzda size yardımcı olacak her kelimenin harf çevirisini görüntüleyin",
+      "title": "Kelime kelime harf çevirisini okuyun"
+    }
+  }
+}

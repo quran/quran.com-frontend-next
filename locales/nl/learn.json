@@ -16,6 +16,13 @@
   "enroll": "Inschrijven",
   "enroll-success": "Gefeliciteerd, je hebt {{title}} aan je lijst toegevoegd!",
   "enrolled": "Ingeschreven",
+  "feedback": {
+    "add-feedback": "Feedback toevoegen",
+    "desc": "Gefeliciteerd! U heeft het leerplan ' {{courseName}} ' voltooid. <br> </br> Bekijk het leerplan en deel uw feedback om ons te helpen de inhoud te verbeteren.",
+    "feedback-placeholder": "Schrijf uw feedback",
+    "feedback-success": "Bedankt voor uw feedback!",
+    "your-feedback": "Uw feedback"
+  },
   "learn-duration": "Duur",
   "learning-plan-material": "Materiaal leerplan",
   "learning-plan-meta-desc": "Dit leerplan zal helpen de manier waarop u met de Koran omgaat, te transformeren. Begin vandaag nog aan uw reis!",

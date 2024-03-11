@@ -16,6 +16,13 @@
   "enroll": "Matricular",
   "enroll-success": "Parabéns, você adicionou {{title}} à sua lista!",
   "enrolled": "Inscrito",
+  "feedback": {
+    "add-feedback": "Adicionar comentários",
+    "desc": "Parabéns! Você concluiu o plano de aprendizagem ' {{courseName}} '. <br> </br> Revise o plano de aprendizagem e compartilhe seus comentários para nos ajudar a melhorar o conteúdo.",
+    "feedback-placeholder": "Escreva seu feedback",
+    "feedback-success": "Obrigado pelo seu feedback!",
+    "your-feedback": "Seu feedback"
+  },
   "learn-duration": "Duração",
   "learning-plan-material": "Material do Plano de Aprendizagem",
   "learning-plan-meta-desc": "Este Plano de Aprendizagem ajudará a transformar a maneira como você se envolve com o Alcorão. Comece sua jornada hoje!",

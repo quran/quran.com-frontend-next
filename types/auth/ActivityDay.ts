@@ -52,3 +52,5 @@ export type FilterActivityDaysParams = {
   cursor?: string;
   type: ActivityDayType;
 };
+
+export type CurrentQuranActivityDay = ActivityDay<QuranActivityDay> & { hasRead: boolean };

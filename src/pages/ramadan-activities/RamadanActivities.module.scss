@@ -1,0 +1,20 @@
+@use "src/styles/breakpoints";
+
+.container {
+    text-align: left !important;
+}
+
+.verseContainer {
+    text-align: justify;
+    margin: auto;
+    @include breakpoints.desktop {
+        width: 65%;
+    }
+    @include breakpoints.smallerThanDesktop {
+        width: 90%;
+    }
+    @include breakpoints.smallerThanTablet {
+        min-height: calc(9 * var(--spacing-mega));
+    }
+    min-height: calc(5 * var(--spacing-mega));
+}

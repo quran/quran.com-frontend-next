@@ -4,6 +4,7 @@ enum DonateButtonClickSource {
   DONATE_POPOVER = 'donate_popover',
   CTA_WELCOME_MESSAGE = 'cta_welcome_message',
   STICKY_BANNER = 'sticky_banner',
+  QURAN_READER = 'quran_reader',
 }
 
 export default DonateButtonClickSource;

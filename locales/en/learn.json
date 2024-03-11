@@ -16,6 +16,13 @@
   "enroll": "Enroll",
   "enroll-success": "Congratulations, You added {{title}} to your list!",
   "enrolled": "Enrolled",
+  "feedback": {
+    "add-feedback": "Add Feedback",
+    "desc": "Congratulations! You have completed the '{{courseName}}' learning plan. <br></br>  Please review the learning plan and share your feedback to help us improve the content.",
+    "feedback-placeholder": "Write your feedback",
+    "feedback-success": "Thank you for your feedback!",
+    "your-feedback": "Your Feedback"
+  },
   "learn-duration": "Duration",
   "learning-plan-material": "Learning Plan Material",
   "learning-plan-meta-desc": "This Learning Plan will help transform the way you engage with the Quran, begin your journey today!",

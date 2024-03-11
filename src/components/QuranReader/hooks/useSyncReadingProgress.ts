@@ -29,8 +29,8 @@ import { isLoggedIn } from '@/utils/auth/login';
 import mergeVerseKeys from '@/utils/mergeVerseKeys';
 import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
 
-const READING_DAY_SYNC_TIME_MS = 5000; // 5 seconds
-const READING_SESSION_DEBOUNCE_WAIT_TIME = 2000; // 2 seconds
+const READING_DAY_SYNC_TIME_MS = 10000; // 10 seconds
+const READING_SESSION_DEBOUNCE_WAIT_TIME = 5000; // 5 seconds
 
 interface UseSyncReadingProgressProps {
   isReadingPreference: boolean;

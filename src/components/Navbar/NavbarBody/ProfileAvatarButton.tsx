@@ -9,15 +9,20 @@ import Button, { ButtonShape, ButtonVariant } from '@/dls/Button/Button';
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import ClockIcon from '@/icons/clock.svg';
 import ArrowIcon from '@/icons/east.svg';
+import ReaderIcon from '@/icons/learning-plan.svg';
 import LogoutIcon from '@/icons/logout.svg';
+import NotesIcon from '@/icons/notes-filled.svg';
 import IconPerson from '@/icons/person.svg';
-import ReaderIcon from '@/icons/reader.svg';
 import TickIcon from '@/icons/tick.svg';
 import { logoutUser } from '@/utils/auth/api';
 import { isLoggedIn } from '@/utils/auth/login';
 import { removeLastSyncAt } from '@/utils/auth/userDataSync';
 import { logButtonClick } from '@/utils/eventLogger';
-import { getMyCoursesNavigationUrl, getReadingGoalProgressNavigationUrl } from '@/utils/navigation';
+import {
+  getNotesNavigationUrl,
+  getMyCoursesNavigationUrl,
+  getReadingGoalProgressNavigationUrl,
+} from '@/utils/navigation';
 
 const ProfileAvatarButton = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -50,6 +55,13 @@ const ProfileAvatarButton = () => {
   const onReadingHistoryClicked = () => {
     logButtonClick('profile_avatar_reading_history');
     router.push(getReadingGoalProgressNavigationUrl()).then(() => {
+      setIsOpen(false);
+    });
+  };
+
+  const onNotesClicked = () => {
+    logButtonClick('profile_avatar_notes');
+    router.push(getNotesNavigationUrl()).then(() => {
       setIsOpen(false);
     });
   };
@@ -89,6 +101,9 @@ const ProfileAvatarButton = () => {
         <PopoverMenu.Item onClick={onReadingHistoryClicked} icon={<ClockIcon />}>
           {t('reading-history')}
         </PopoverMenu.Item>
+        <PopoverMenu.Item onClick={onNotesClicked} icon={<NotesIcon />}>
+          {t('notes.title')}
+        </PopoverMenu.Item>
         <PopoverMenu.Item onClick={onMyCoursesClicked} icon={<ReaderIcon />}>
           {t('my-learning-plans')}
         </PopoverMenu.Item>
@@ -107,6 +122,7 @@ const ProfileAvatarButton = () => {
       href="/login"
       shape={ButtonShape.Circle}
       onClick={onTriggerClicked}
+      id="login-button"
     >
       <IconPerson />
     </Button>

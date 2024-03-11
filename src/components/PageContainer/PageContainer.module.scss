@@ -6,7 +6,7 @@
   @include utility.pageContainer();
   padding-block-start: var(--spacing-medium);
   margin-block-start: 0;
-  margin-block-end: 0;
+  margin-block-end: var(--spacing-mega);
   margin-inline-start: auto;
   margin-inline-end: auto;
 

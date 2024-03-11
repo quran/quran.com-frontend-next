@@ -31,6 +31,7 @@
   --font-weight-medium: 500;
   --font-weight-semibold: 600;
   --font-weight-bold: 700;
+  --font-weight-extra-bold: 800;
 
   --border-radius-sharp: 0;
   --border-radius-pill: 20rem;
@@ -52,6 +53,10 @@
   --z-index-dropdown: 600;
   --z-index-spinner: 700;
   --z-index-modal: 800;
+  --z-index-onboarding-overlay: 801;
+  --z-index-onboarding-content: 802;
+  --z-index-onboarding-step: 803;
+  --z-index-onboarding-spotlight: 804;
   --z-index-max: 999;
 
   --transition-fast: 0.16s;

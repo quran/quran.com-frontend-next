@@ -36,14 +36,23 @@ const CompleteSignupForm: React.FC<CompleteSignupFormProps> = ({ requiredFields 
   const emailFormField = requiredFields.find((field) => field.field === 'email');
   const isEmailRequired = !!emailFormField;
   if (isEmailRequired) {
-    return <EmailVerificationForm emailFormField={buildFormBuilderFormField(emailFormField, t)} />;
+    return (
+      <EmailVerificationForm
+        emailFormField={buildFormBuilderFormField(
+          { ...emailFormField, placeholder: t(`form.email`) },
+          t,
+        )}
+      />
+    );
   }
 
   return (
     <div className={styles.container}>
       <h2 className={styles.title}>{t('complete-sign-up')}</h2>
       <FormBuilder
-        formFields={requiredFields.map((field) => buildFormBuilderFormField(field, t))}
+        formFields={requiredFields.map((field) =>
+          buildFormBuilderFormField({ ...field, placeholder: t(`form.${field.field}`) }, t),
+        )}
         onSubmit={onSubmit}
         actionText={t('submit')}
       />

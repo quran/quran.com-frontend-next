@@ -5,8 +5,12 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from './ActionButtons.module.scss';
 import CompleteButton from './CompleteButton';
-import { mutateCachedCourse, mutateCachedLessons } from './mutations';
 
+import CourseFeedback, { FeedbackSource } from '@/components/Course/CourseFeedback';
+import {
+  mutateCachedCourseAfterCompletion,
+  mutateCachedLessonsAfterCompletion,
+} from '@/components/Course/utils/mutations';
 import Button, { ButtonSize, ButtonType } from '@/dls/Button/Button';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import useMutateMultipleKeys from '@/hooks/useMutateMultipleKeys';
@@ -34,15 +38,24 @@ const ActionButtons: React.FC<Props> = ({ lesson, courseSlug }) => {
   const mutateMultipleKeys = useMutateMultipleKeys();
   const [isLoading, setIsLoading] = useState(false);
   const toast = useToast();
+  const [shouldOpenFeedbackModal, setShouldOpenFeedbackModal] = useState(false);
 
   const markLessonAsCompleted = (lessonId: string, successCallback?: () => void) => {
     setIsLoading(true);
     updateActivityDay({ type: ActivityDayType.LESSON, lessonId })
       .then(() => {
-        mutateCachedLessons(mutateMultipleKeys, courseSlug, lessonId);
-        mutateCachedCourse(mutateWithoutRevalidation, courseSlug, lessonId);
+        mutateCachedLessonsAfterCompletion(mutateMultipleKeys, courseSlug, lessonId);
+        mutateCachedCourseAfterCompletion(mutateWithoutRevalidation, courseSlug, lessonId);
         if (successCallback) {
           successCallback();
+        }
+        // check if the last lesson of the course is completed, and ask user for feedback
+        const completedLessonsCount = course.lessons.filter(
+          (filterLesson) => filterLesson.isCompleted,
+        ).length;
+        const isLastCompletedLessonOfCourse = completedLessonsCount === course.lessons.length;
+        if (isLastCompletedLessonOfCourse) {
+          setShouldOpenFeedbackModal(true);
         }
       })
       .catch(() => {
@@ -88,6 +101,10 @@ const ActionButtons: React.FC<Props> = ({ lesson, courseSlug }) => {
     });
   };
 
+  const shouldShowAddFeedbackButton =
+    course?.userHasFeedback === false &&
+    (course?.isCompleted === true || shouldOpenFeedbackModal === true);
+
   return (
     <>
       <div className={styles.buttonsContainer}>
@@ -129,6 +146,13 @@ const ActionButtons: React.FC<Props> = ({ lesson, courseSlug }) => {
         >
           {t('add-reflection')}
         </Button>
+        {shouldShowAddFeedbackButton && (
+          <CourseFeedback
+            shouldOpenModal={shouldOpenFeedbackModal}
+            course={course}
+            source={FeedbackSource.LessonPage}
+          />
+        )}
       </div>
     </>
   );

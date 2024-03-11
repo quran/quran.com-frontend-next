@@ -134,6 +134,7 @@
   "donate": "Dhuroni",
   "donate_monthly": "Dhuroni çdo muaj",
   "donate_once": "Dhuroni një herë",
+  "edit": "Redakto",
   "email-verification": {
     "check-spam": "Nuk e morët emailin e verifikimit? Kontrolloni kutinë tuaj të postës së padëshiruar",
     "email-sent": "Sapo dërguam një email te <strong> {{email}} </strong>",
@@ -172,10 +173,12 @@
     "title": "Lexoni, studioni dhe mësoni Kuranin Fisnik."
   },
   "form": {
+    "body": "Trupi",
     "code": "Kodi i Verifikimit",
     "email": "Email",
     "firstName": "Emri",
-    "lastName": "Mbiemri"
+    "lastName": "Mbiemri",
+    "title": "Titulli"
   },
   "from": "Nga",
   "fundraising-sticky-banner": {
@@ -214,18 +217,23 @@
   "navigate": "Navigoni",
   "network": "Rrjeti",
   "new": "I ri!",
+  "newest": "Më të rejat",
   "next": "Tjetra",
   "next-ayah": "Ajeti tjetër",
   "no": "Jo",
   "no-notifications": "Nuk ka ende njoftime",
   "none": "Asnjëra",
   "not-now": "Jo tani",
+  "notes": {
+    "title": "Shënimet dhe Reflektimet e Mia"
+  },
   "notification": {
     "mark-all-as-read": "Shënoni të gjitha si të lexuara",
     "mark-as-read": "Shënoni si të lexuar"
   },
   "notifications": "Njoftimet",
   "off": "Joaktiv",
+  "oldest": "Më e vjetra",
   "on": "Aktiv",
   "page": "Faqe",
   "pages": "Faqet",
@@ -266,6 +274,7 @@
   "retry": "Provo sërish",
   "revelation_order": "Urdhri i Zbulesës",
   "rub": "Rub el Hizb",
+  "save": "Ruaj",
   "save-to-collection": "Ruaje në Koleksion",
   "search-for": "Kërko për \"{{searchQuery}}\"",
   "search-results": "{{count}} rezultatet e  kërkimit",
@@ -305,6 +314,7 @@
   },
   "share": "Shpërndaje",
   "shared": "Lidhja është kopjuar në kujtesë!",
+  "show-more": "Trego më shumë",
   "sidebar": {
     "search-hizb": "Kërko Hizb",
     "search-juz": "Kërko Xhuzin",
@@ -355,6 +365,8 @@
   "validation": {
     "invalid-email": "{{field}} duhet të jetë një adresë e vlefshme emaili",
     "invalid-field": "Fut një vlerë të vlefshme {{field}}",
+    "maximum-length": "{{field}} nuk mund të kalojë {{value}} karaktere",
+    "minimum-length": "{{field}} duhet të ketë të paktën {{value}} karaktere",
     "required-field": "Kërkohet {{field}}"
   },
   "verse": "Vargu",

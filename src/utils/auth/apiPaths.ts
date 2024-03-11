@@ -1,5 +1,10 @@
 import stringify from '../qs-stringify';
 
+import BookmarkByCollectionIdQueryParams from './types/BookmarkByCollectionIdQueryParams';
+import GetAllUserReflectionsQueryParams from './types/GetAllUserReflectionsQueryParams';
+import GetNoteByAttachedEntityParams from './types/GetNoteByAttachedEntityParams';
+import GetAllNotesQueryParams from './types/Note/GetAllNotesQueryParams';
+
 import { ActivityDayType, FilterActivityDaysParams } from '@/types/auth/ActivityDay';
 import { EstimateGoalRequest, GoalCategory } from '@/types/auth/Goal';
 import { StreakWithMetadataParams } from '@/types/auth/Streak';
@@ -52,6 +57,22 @@ export const makeCollectionsUrl = (queryParams: CollectionsQueryParams): string 
 
 export const makeAddCollectionUrl = () => makeUrl('collections');
 
+export const makeGetNotesByVerseUrl = (verseKey: string) => makeUrl(`notes/by-verse/${verseKey}`);
+
+export const makeGetNoteByIdUrl = (id: string) => makeUrl(`notes/${id}`);
+
+export const makeCountNotesWithinRangeUrl = (startVerseKey: string, endVerseKey: string) =>
+  makeUrl(`notes/count-within-range`, { from: startVerseKey, to: endVerseKey });
+
+export const makeNotesUrl = (params?: GetAllNotesQueryParams) => makeUrl('notes', params as any);
+
+export const makeGetNoteByAttachedEntityUrl = (queryParams: GetNoteByAttachedEntityParams) =>
+  makeUrl(`notes`, queryParams);
+
+export const makeDeleteOrUpdateNoteUrl = (id: string) => makeUrl(`notes/${id}`);
+
+export const makePublishNoteUrl = (id: string) => makeUrl(`notes/${id}/publish`);
+
 export const makeGetCoursesUrl = (params?: { myCourses: boolean }) => makeUrl('courses', params);
 
 export const makeGetCourseUrl = (courseSlugOrId: string) => makeUrl(`courses/${courseSlugOrId}`);
@@ -63,6 +84,9 @@ export const makeGetLessonUrl = (courseSlugOrId: string, lessonSlugOrId: string)
   `${makeGetLessonUrlPrefix(courseSlugOrId)}/${lessonSlugOrId}`;
 
 export const makeEnrollUserUrl = () => makeUrl('courses/enroll');
+export const makeGetUserCoursesCountUrl = () => makeUrl('courses/count');
+
+export const makeCourseFeedbackUrl = (courseId: string) => makeUrl(`courses/${courseId}/feedback`);
 
 export const makeUpdateCollectionUrl = (collectionId: string) =>
   makeUrl(`collections/${collectionId}`);
@@ -79,6 +103,9 @@ export const makeDeleteCollectionBookmarkByIdUrl = (collectionId: string, bookma
 export const makeDeleteCollectionBookmarkByKeyUrl = (collectionId: string) =>
   makeUrl(`collections/${collectionId}/bookmarks`);
 
+export const makeGetUserReflectionsUrl = (params?: GetAllUserReflectionsQueryParams) =>
+  makeUrl('posts', params as any);
+
 export const makePostReflectionViewsUrl = (postId: string) => makeUrl(`posts/${postId}/views`);
 
 export const makeBookmarkCollectionsUrl = (
@@ -89,11 +116,6 @@ export const makeBookmarkCollectionsUrl = (
 ): string =>
   makeUrl('bookmarks/collections', { mushafId, key, type, ...(verseNumber && { verseNumber }) });
 
-export type BookmarkByCollectionIdQueryParams = {
-  cursor?: string;
-  limit?: number;
-  sortBy?: string;
-};
 export const makeGetBookmarkByCollectionId = (
   collectionId: string,
   queryParams: BookmarkByCollectionIdQueryParams,

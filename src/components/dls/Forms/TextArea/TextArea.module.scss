@@ -1,0 +1,73 @@
+@use "src/styles/theme";
+
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  &.disabled,
+  &.disabled * {
+    background: var(--color-background-alternative-medium);
+    pointer-events: none;
+    cursor: not-allowed;
+  }
+  border: 1px solid var(--color-borders-hairline);
+  &.error {
+    border-color: var(--color-error-deep);
+  }
+  &.success {
+    border-color: var(--color-success-medium);
+  }
+  &.warning {
+    border-color: var(--color-warning-medium);
+  }
+  border-radius: var(--border-radius-rounded);
+  padding-inline: var(--spacing-small);
+}
+
+.main {
+  padding-inline: var(--spacing-xsmall);
+  padding-block: var(--spacing-xsmall);
+
+  & .input {
+    font-size: var(--font-size-large);
+    color: var(--color-text-default);
+    font-weight: var(--font-weight-semibold);
+  }
+}
+
+.label {
+  padding-block-start: var(--spacing-micro);
+  padding-block-end: var(--spacing-micro);
+  padding-inline-start: 0;
+  padding-inline-end: 0;
+}
+
+.input {
+  padding: 0;
+  margin-block-start: var(--spacing-micro);
+  margin-inline-end: var(--spacing-micro);
+  margin-block-end: var(--spacing-micro);
+  margin-inline-start: var(--spacing-micro);
+  border: 0;
+  height: 80%;
+  width: 100%;
+  font-size: var(--font-size-normal);
+  color: var(--color-text-default);
+  background: transparent;
+  &:focus {
+    outline: none;
+  }
+  &:disabled {
+    background: none;
+  }
+  &.error {
+    color: var(--color-error-deep);
+  }
+  &.success {
+    color: var(--color-success-medium);
+  }
+  &.warning {
+    color: var(--color-warning-medium);
+  }
+}

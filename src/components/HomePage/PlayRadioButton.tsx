@@ -4,14 +4,14 @@ import { useContext } from 'react';
 import { useSelector } from '@xstate/react';
 import useTranslation from 'next-translate/useTranslation';
 
-import Spinner from '../dls/Spinner/Spinner';
 import { getRandomCuratedStationId } from '../Radio/curatedStations';
 import { StationType } from '../Radio/types';
 
 import styles from './PlayRadioButton.module.scss';
 import RadioInformation from './RadioInformation';
 
-import Button, { ButtonVariant, ButtonType, ButtonSize } from '@/dls/Button/Button';
+import Button, { ButtonType, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
+import Spinner from '@/dls/Spinner/Spinner';
 import PauseIcon from '@/icons/pause.svg';
 import PlayIcon from '@/icons/play-arrow.svg';
 import { logButtonClick } from '@/utils/eventLogger';
@@ -62,11 +62,11 @@ const PlayRadioButton = () => {
     <div className={styles.container}>
       <Button
         href={getCoursesNavigationUrl()}
-        variant={ButtonVariant.Outlined}
-        className={styles.ctaButton}
-        size={ButtonSize.Small}
         type={ButtonType.Secondary}
+        variant={ButtonVariant.Outlined}
+        size={ButtonSize.Small}
         onClick={onCoursesClicked}
+        className={styles.ctaButton}
       >
         {t('common:learning-plans')}
       </Button>
@@ -75,6 +75,9 @@ const PlayRadioButton = () => {
           <Button
             prefix={isLoading ? <Spinner /> : <PauseIcon />}
             onClick={onPauseClicked}
+            id="radio-button"
+            type={ButtonType.Success}
+            size={ButtonSize.Small}
             className={styles.playPauseButton}
           >
             {t('pause-radio')}
@@ -82,9 +85,12 @@ const PlayRadioButton = () => {
         ) : (
           <Button
             prefix={<PlayIcon />}
-            className={styles.playPauseButton}
             onClick={onPlayClicked}
             shouldFlipOnRTL={false}
+            id="radio-button"
+            type={ButtonType.Success}
+            size={ButtonSize.Small}
+            className={styles.playPauseButton}
           >
             {t('play-radio')}
           </Button>

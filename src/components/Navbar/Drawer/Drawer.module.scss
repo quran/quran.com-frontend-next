@@ -12,9 +12,9 @@
   z-index: var(--z-index-header);
   transition: var(--transition-regular);
   transition-timing-function: ease-in;
-  overflow-y: auto;
+  overflow-y: auto !important;
   overflow-x: hidden;
-  overscroll-behavior-y: contain;
+  overscroll-behavior-y: contain !important;
   @include breakpoints.tablet {
     width: constants.$side-menu-desktop-width;
   }
@@ -46,13 +46,9 @@
 .searchContainer {
   display: flex;
   flex-direction: column;
-  min-height: calc(
-    100% - calc(var(--navbar-container-height) + calc(4 * var(--spacing-mega)))
-  );
+  min-height: calc(100% - calc(var(--navbar-container-height) + calc(4 * var(--spacing-mega))));
   @include breakpoints.tablet {
-    min-height: calc(
-      100% - calc(var(--navbar-container-height) + var(--spacing-small))
-    );
+    min-height: calc(100% - calc(var(--navbar-container-height) + var(--spacing-small)));
   }
   justify-content: space-between;
 }

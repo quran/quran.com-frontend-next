@@ -104,6 +104,7 @@ const ReadingPreferenceSwitcher: React.FC<Props> = ({
         [styles.surahHeaderContainer]: type === ReadingPreferenceSwitcherType.SurahHeader,
         [styles.contextMenuContainer]: type === ReadingPreferenceSwitcherType.ContextMenu,
       })}
+      id="reading-preference-switcher"
     >
       <Switch
         items={readingPreferencesOptions}
