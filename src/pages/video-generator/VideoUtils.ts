@@ -92,15 +92,6 @@ export function getVideos() {
   };
 }
 
-export function getVideoURL() {
-  const staticVideos = [
-    'https://static.videezy.com/system/resources/previews/000/046/939/original/waterfall_and_flowers.mp4',
-    'https://static.videezy.com/system/resources/previews/000/046/143/original/Peach_Flower_Tree_2.mp4',
-    'https://static.videezy.com/system/resources/previews/000/035/955/original/4k-2018.12.02-SUNSET-LIGHT-ADJUST.mp4',
-  ];
-  return staticVideos[Math.floor(Math.random() * staticVideos.length)];
-}
-
 export const getBackgroundWithOpacityById = (id, opacity) => {
   const colors = getAllBackgrounds(opacity);
   return colors.find((c) => c.id === id);
