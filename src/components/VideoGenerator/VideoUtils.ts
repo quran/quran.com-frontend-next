@@ -115,6 +115,7 @@ export function validateVerseRange(from = 1, to, versesCount) {
   return from <= verseTo && from <= versesCount && verseTo <= versesCount;
 }
 
+// eslint-disable-next-line react-func/max-lines-per-function
 export function getTrimmedAudio(audio, from, to) {
   if (!from?.trim?.() && !to?.trim?.()) {
     return audio;
@@ -136,14 +137,20 @@ export function getTrimmedAudio(audio, from, to) {
   const actualTo = verseTo - verseFrom;
 
   const removedAudio = audio.verseTimings.slice(0, actualFrom - 1);
-  const removedDuration = removedAudio.reduce((acc, obj) => acc + obj.duration, 0);
+  const removedDuration = removedAudio.reduce(
+    (acc, obj) => acc + (obj.duration >= 0 ? obj.duration : -1 * obj.duration),
+    0,
+  );
 
   const res = audio;
   res.verseTimings = res.verseTimings.slice(actualFrom - 1);
   if (to) {
     res.verseTimings = res.verseTimings.slice(0, actualTo + 1);
   }
-  res.duration = res.verseTimings.reduce((acc, obj) => acc + obj.duration, 0);
+  res.duration = res.verseTimings.reduce(
+    (acc, obj) => acc + (obj.duration >= 0 ? obj.duration : -1 * obj.duration),
+    0,
+  );
   res.verseTimings = res.verseTimings.map((timing) => {
     return {
       ...timing,

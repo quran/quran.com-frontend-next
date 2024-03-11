@@ -16,6 +16,7 @@ export const DEFAULT_STYLES = {
   justifyContent: 'center',
   color: '#111',
   width: 'fit-content',
+  maxWidth: '97%',
   height: 'fit-content',
   margin: 'auto',
   border: '2px gray solid',
