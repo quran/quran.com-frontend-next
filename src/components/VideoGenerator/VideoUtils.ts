@@ -60,33 +60,33 @@ export function getVideosArray() {
 export function getVideos() {
   return {
     1: {
-      thumbnailSrc: '/videos/thumbnails/sea.png',
-      videoSrc: '/videos/sea.mp4',
+      thumbnailSrc: 'https://images.quran.com/videos/thumbnails/sea.png',
+      videoSrc: 'https://images.quran.com/videos/sea.mp4',
       watermarkColor: 'light',
     },
     2: {
-      thumbnailSrc: '/videos/thumbnails/abstract.png',
-      videoSrc: '/videos/abstract.mp4',
+      thumbnailSrc: 'https://images.quran.com/videos/thumbnails/abstract.png',
+      videoSrc: 'https://images.quran.com/videos/abstract.mp4',
       watermarkColor: 'light',
     },
     3: {
-      thumbnailSrc: '/videos/thumbnails/windmill.png',
-      videoSrc: '/videos/windmill.mp4',
+      thumbnailSrc: 'https://images.quran.com/videos/thumbnails/windmill.png',
+      videoSrc: 'https://images.quran.com/videos/windmill.mp4',
       watermarkColor: 'light',
     },
     4: {
-      thumbnailSrc: '/videos/thumbnails/stars.png',
-      videoSrc: '/videos/stars.mp4',
+      thumbnailSrc: 'https://images.quran.com/videos/thumbnails/stars.png',
+      videoSrc: 'https://images.quran.com/videos/stars.mp4',
       watermarkColor: 'light',
     },
     5: {
-      thumbnailSrc: '/videos/thumbnails/nature.png',
-      videoSrc: '/videos/nature.mp4',
+      thumbnailSrc: 'https://images.quran.com/videos/thumbnails/nature.png',
+      videoSrc: 'https://images.quran.com/videos/nature.mp4',
       watermarkColor: 'light',
     },
     6: {
-      thumbnailSrc: '/videos/thumbnails/snow.png',
-      videoSrc: '/videos/snow.mp4',
+      thumbnailSrc: 'https://images.quran.com/videos/thumbnails/snow.png',
+      videoSrc: 'https://images.quran.com/videos/snow.mp4',
       watermarkColor: 'dark',
     },
   };

@@ -1,6 +1,6 @@
 /* eslint-disable no-unsafe-optional-chaining */
 import { useSelector } from 'react-redux';
-import { AbsoluteFill, Audio, Sequence, Video, staticFile } from 'remotion';
+import { AbsoluteFill, Audio, Sequence, Video } from 'remotion';
 
 import styles from './video.module.scss';
 
@@ -46,7 +46,7 @@ const VideoContent = ({
       }}
     >
       <div className={styles.videoContainer}>
-        <Video loop src={staticFile(video.videoSrc)} />
+        <Video loop src={video.videoSrc} />
       </div>
       <Audio
         startFrom={
