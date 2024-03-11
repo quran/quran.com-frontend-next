@@ -27,7 +27,11 @@ const Navbar = () => {
         <Banner
           text={t('fundraising-sticky-banner.title')}
           ctaButton={
-            <DonateButton type={DonateButtonType.MONTHLY} source={DonateButtonClickSource.BANNER} />
+            <DonateButton
+              isTextBasedOnType={false}
+              type={DonateButtonType.MONTHLY}
+              source={DonateButtonClickSource.BANNER}
+            />
           }
         />
         <NavbarBody />

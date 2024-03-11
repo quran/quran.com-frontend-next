@@ -74,6 +74,7 @@ const EndOfScrollingControls: React.FC<Props> = ({
           ctaButton={
             <DonateButton
               type={DonateButtonType.MONTHLY}
+              isTextBasedOnType={false}
               source={DonateButtonClickSource.QURAN_READER}
             />
           }
