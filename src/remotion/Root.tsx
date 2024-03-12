@@ -13,7 +13,8 @@ export const RemotionRoot = () => {
   return (
     <>
       <Composition
-        id="Hello"
+        id="VideoContent"
+        // @ts-ignore
         component={VideoContent}
         durationInFrames={150}
         fps={VIDEO_FPS}
