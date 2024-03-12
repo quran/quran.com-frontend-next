@@ -9,7 +9,7 @@
     "plugin:i18next/recommended",
     "plugin:storybook/recommended"
   ],
-  "plugins": ["prettier", "react", "react-func", "sonarjs", "unicorn", "jsdoc"],
+  "plugins": ["prettier", "react", "react-func", "sonarjs", "unicorn", "jsdoc", "@remotion"],
   "rules": {
     "i18next/no-literal-string": [
       "error",
@@ -130,7 +130,8 @@
         "singleQuote": true,
         "tabWidth": 2,
         "trailingComma": "all",
-        "useTabs": false
+        "useTabs": false,
+        "endOfLine": "auto"
       }
     ]
   },
@@ -198,6 +199,10 @@
       "rules": {
         "i18next/no-literal-string": 0
       }
+    },
+    {
+      "files": ["remotion/*.{ts,tsx}"],
+      "extends": ["plugin:@remotion/recommended"]
     }
   ],
   "settings": {

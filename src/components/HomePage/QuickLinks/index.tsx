@@ -35,6 +35,11 @@ const QUICK_LINKS = [
     logKey: 'surah-al-waqiah',
     key: 'waqiah',
   },
+  {
+    slug: 'video-generator',
+    logKey: 'video-generator',
+    key: 'video-generator',
+  },
 ];
 
 // TODO: this is temporary and needs to be updated.

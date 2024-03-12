@@ -16,7 +16,7 @@ const ContentSecurityPolicy = `
   frame-src 'self' 'unsafe-inline' 'unsafe-eval' https://js.stripe.com/v3 js.stripe.com  https://www.paypal.com www.paypal.com https://wchat.eu.freshchat.com https://www.google.com www.google.com;
   style-src 'self' 'unsafe-inline' 'unsafe-eval' *.givingloop.org givingloop.org fonts.googleapis.com fonts.googleapis.com wchat.eu.freshchat.com; 
   img-src * data:;
-  media-src 'self' *.quranicaudio.com *.qurancdn.com https://qurancdn.com;
+  media-src 'self' *.quranicaudio.com *.qurancdn.com https://qurancdn.com https://images.quran.com;
   connect-src *;
 `;
 
