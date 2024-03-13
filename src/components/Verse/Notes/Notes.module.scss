@@ -1,0 +1,9 @@
+@use "src/styles/breakpoints";
+
+.container {
+    display: flex;
+    align-items: center;
+    @include breakpoints.smallerThanTablet {
+        flex-direction: column;
+    }
+}
