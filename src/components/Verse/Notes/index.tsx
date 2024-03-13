@@ -50,7 +50,7 @@ const VerseNotes = ({ verseKey, isTranslationView, hasNotes }: VerseNotesProps) 
     <>
       <NoteModal isOpen={isModalOpen} onClose={onClose} verseKey={verseKey} />
       <Button
-        className={classNames(styles.iconContainer, styles.verseAction)}
+        className={classNames(styles.iconContainer, styles.verseAction, styles.fadedVerseAction)}
         onClick={onItemClicked}
         tooltip={t('notes.title')}
         type={ButtonType.Success}
