@@ -76,6 +76,7 @@ export const audioPlayerMachine =
         repeatActor: null,
         radioActor: null,
         verseDelay: 0,
+        volume: 1,
       },
       tsTypes: {} as import('./audioPlayerMachine.typegen').Typegen0,
       schema: {
@@ -734,6 +735,10 @@ export const audioPlayerMachine =
               actions: ['pauseAudio', 'exitRadio'],
               target: 'HIDDEN',
             },
+            UPDATE_VOLUME: {
+              actions: 'updateVolume',
+              description: 'User updates the volume',
+            },
           },
         },
       },
@@ -768,6 +773,7 @@ export const audioPlayerMachine =
         setInitialContext: assign({
           reciterId: (context, event) => event.reciterId,
           playbackRate: (context, event) => event.playbackRate,
+          volume: (context, event) => event.volume,
         }),
         updateRepeatAyah: pure((context, event) => {
           if (context.repeatActor) {
@@ -1040,6 +1046,10 @@ export const audioPlayerMachine =
           actions.push('seekTo');
 
           return actions;
+        }),
+        updateVolume: pure((context, { volume }) => {
+          context.audioPlayer.volume = volume;
+          return assign({ volume });
         }),
       },
       guards: {
