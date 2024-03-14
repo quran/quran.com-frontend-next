@@ -49,7 +49,8 @@ const ReduxProvider = ({ children, locale }) => {
         const reciterId =
           userPreferences[PreferenceGroup.AUDIO]?.reciter ||
           audioService.getSnapshot().context.reciterId;
-        audioService.send({ type: 'SET_INITIAL_CONTEXT', playbackRate, reciterId });
+        const { volume } = audioService.getSnapshot().context;
+        audioService.send({ type: 'SET_INITIAL_CONTEXT', playbackRate, reciterId, volume });
         // eslint-disable-next-line no-empty
       } catch (error) {}
     }
