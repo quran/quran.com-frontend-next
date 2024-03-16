@@ -60,7 +60,7 @@ const VerseNotes = ({ verseKey, isTranslationView, hasNotes }: VerseNotesProps) 
   };
 
   return (
-    <>
+    <div className={internalStyles.outerContainer}>
       <NoteModal isOpen={isModalOpen} onClose={onClose} verseKey={verseKey} />
       <Button
         className={classNames(styles.iconContainer, styles.verseAction, styles.fadedVerseAction)}
@@ -88,7 +88,7 @@ const VerseNotes = ({ verseKey, isTranslationView, hasNotes }: VerseNotesProps) 
           </Wrapper>
         )}
       </Button>
-    </>
+    </div>
   );
 };
 
