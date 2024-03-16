@@ -6,8 +6,10 @@
 }
 
 .outerContainer {
-    @include breakpoints.smallerThanTablet {
-        margin-inline: var(--spacing-micro);
+    &.hasNotesContainer {
+        @include breakpoints.smallerThanTablet {
+            margin-inline: var(--spacing-micro);
+        }
     }
     svg {
         width: 24px !important;

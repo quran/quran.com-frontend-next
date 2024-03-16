@@ -60,7 +60,11 @@ const VerseNotes = ({ verseKey, isTranslationView, hasNotes }: VerseNotesProps) 
   };
 
   return (
-    <div className={internalStyles.outerContainer}>
+    <div
+      className={classNames(internalStyles.outerContainer, {
+        [internalStyles.hasNotesContainer]: !hasNotes,
+      })}
+    >
       <NoteModal isOpen={isModalOpen} onClose={onClose} verseKey={verseKey} />
       <Button
         className={classNames(styles.iconContainer, styles.verseAction, styles.fadedVerseAction)}
