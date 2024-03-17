@@ -15,6 +15,7 @@ import { getCanonicalUrl, getNotificationSettingsNavigationUrl } from '@/utils/n
 const NotificationSettingsPage = () => {
   const { t, lang } = useTranslation('common');
   const navigationUrl = getNotificationSettingsNavigationUrl();
+  const isProduction = process.env.NEXT_PUBLIC_VERCEL_ENV === 'production';
 
   return (
     <>
@@ -28,9 +29,14 @@ const NotificationSettingsPage = () => {
       <div className={layoutStyles.pageContainer}>
         <div className={layoutStyles.flow}>
           <div className={layoutStyles.flowItem}>
-            <NotificationsProvider>
-              <NotificationSettingsTabs />
-            </NotificationsProvider>
+            {isProduction ? (
+              <NotificationsProvider>
+                <NotificationSettingsTabs />
+              </NotificationsProvider>
+            ) : (
+              // eslint-disable-next-line i18next/no-literal-string
+              <p>Notifications settings are not enabled on non-production env</p>
+            )}
           </div>
         </div>
       </div>
