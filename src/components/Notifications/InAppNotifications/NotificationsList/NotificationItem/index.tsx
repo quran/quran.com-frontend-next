@@ -6,14 +6,14 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from './NotificationItem.module.scss';
 
+import useDeleteNotification from '@/components/Notifications/hooks/useDeleteNotification';
+import useMarkNotificationAsRead from '@/components/Notifications/hooks/useMarkNotificationAsRead';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import Spinner from '@/dls/Spinner/Spinner';
 import CloseIcon from '@/icons/close.svg';
 import OverflowMenuIcon from '@/icons/menu_more_horiz.svg';
 import TickIcon from '@/icons/tick.svg';
-import useDeleteNotification from '@/notifications/useDeleteNotification';
-import useMarkNotificationAsRead from '@/notifications/useMarkNotificationAsRead';
 import { formatDateRelatively } from '@/utils/datetime';
 import { logButtonClick } from '@/utils/eventLogger';
 

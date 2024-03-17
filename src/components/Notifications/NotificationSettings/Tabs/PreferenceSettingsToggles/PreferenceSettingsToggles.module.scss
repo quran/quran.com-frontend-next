@@ -1,0 +1,11 @@
+.row {
+    display: flex;
+    align-items: center;
+    padding-block: var(--spacing-small);
+}
+
+.channelsContainer {
+    border: 1px solid var(--color-borders-hairline);
+    padding: var(--spacing-xsmall);
+    border-radius: var(--border-radius-rounded);
+}

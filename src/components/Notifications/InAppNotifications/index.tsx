@@ -6,9 +6,9 @@ import styles from './InAppNotifications.module.scss';
 import NotificationBell from './NotificationBell';
 import NotificationsList from './NotificationsList';
 
+import { useNotifications } from '@/components/Notifications/InAppNotifications/NotificationContext';
 import Popover from '@/dls/Popover';
 import { ContentSide } from '@/dls/Tooltip';
-import { useNotifications } from '@/notifications/NotificationContext';
 import { selectUnseenCount } from '@/redux/slices/notifications';
 import { logButtonClick } from '@/utils/eventLogger';
 

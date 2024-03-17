@@ -1,0 +1,20 @@
+{
+  "tabs": {
+    "global-settings": "Global Settings",
+    "categories-settings": "Categories Settings"
+  },
+  "all-notifications": "All Notifications",
+  "update-success": "Your notification settings have been updated successfully!",
+  "channels-notifications": "Channels Notifications",
+  "channels": {
+    "email": "Email",
+    "sms": "SMS",
+    "in_app": "In-App",
+    "chat": "Chat",
+    "push": "Push"
+  },
+  "tags": {
+    "streaks": "Streaks",
+    "qgj": "Quran Growth Journey"
+  }
+}
