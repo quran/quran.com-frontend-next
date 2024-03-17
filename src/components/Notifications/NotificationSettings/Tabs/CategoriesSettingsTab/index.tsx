@@ -1,7 +1,9 @@
 /* eslint-disable no-underscore-dangle */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 
 import { IUserPreferenceSettings } from '@novu/headless';
+import groupBy from 'lodash/groupBy';
+import useTranslation from 'next-translate/useTranslation';
 
 import parentStyles from '../Tabs.module.scss';
 
@@ -9,10 +11,13 @@ import CollapsibleWorkflowSettings from './CollapsibleWorkflowSettings';
 
 import useFetchUserPreferences from '@/components/Notifications/hooks/useFetchUserPreferences';
 import { HeadlessServiceStatus } from '@/components/Notifications/hooks/useHeadlessService';
+import FieldsetContainer from '@/components/Notifications/NotificationSettings/Tabs/FieldsetContainer';
+import Pill, { PillSize } from '@/dls/Pill';
 import Spinner, { SpinnerSize } from '@/dls/Spinner/Spinner';
 import Error from '@/pages/_error';
 
 const CategoriesSettingsTab = () => {
+  const { t } = useTranslation('notification-settings');
   const {
     mutate,
     isMutating: isFetchingUserPreferences,
@@ -21,10 +26,30 @@ const CategoriesSettingsTab = () => {
     status,
   } = useFetchUserPreferences();
   // we need a local state to handle UI updates when the user changes one of the settings since the toggles are controlled
-  const [preferences, setPreferences] = useState<IUserPreferenceSettings[]>(userPreferences);
+  const [preferences, setPreferences] = useState<IUserPreferenceSettings[]>(
+    userPreferences as IUserPreferenceSettings[],
+  );
+
+  /**
+   * Group the preferences by tags. We filter out:
+   *
+   * 1. critical workflows since they are cannot be skipped.
+   * 2. preferences that don't have tags since they cannot be categorized.
+   */
+  const groupByTags = useMemo(
+    () =>
+      groupBy(
+        preferences?.filter(
+          (preference) =>
+            preference.template.critical === false && !!preference.template.tags.length,
+        ),
+        (preference) => preference.template.tags,
+      ),
+    [preferences],
+  );
 
   useEffect(() => {
-    setPreferences(userPreferences);
+    setPreferences(userPreferences as IUserPreferenceSettings[]);
   }, [userPreferences]);
 
   useEffect(() => {
@@ -53,17 +78,20 @@ const CategoriesSettingsTab = () => {
     return null;
   }
 
-  return (
-    <>
-      {preferences
-        .filter((preference) => preference.template.critical === false)
-        .map((preference) => {
-          return (
-            <CollapsibleWorkflowSettings key={preference.template._id} preference={preference} />
-          );
-        })}
-    </>
-  );
+  return Object.keys(groupByTags).map((tag) => {
+    const tagPreferences = groupByTags[tag];
+    return (
+      <div key={tag}>
+        <FieldsetContainer title={<Pill size={PillSize.SMALL}>{t(`tags.${tag}`)}</Pill>}>
+          {tagPreferences.map((preference) => {
+            return (
+              <CollapsibleWorkflowSettings key={preference.template._id} preference={preference} />
+            );
+          })}
+        </FieldsetContainer>
+      </div>
+    );
+  });
 };
 
 export default CategoriesSettingsTab;

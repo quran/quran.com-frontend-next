@@ -9,6 +9,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from './PreferenceSettingsToggles.module.scss';
 
+import FieldsetContainer from '@/components/Notifications/NotificationSettings/Tabs/FieldsetContainer';
 import Spinner from '@/dls/Spinner/Spinner';
 import Toggle from '@/dls/Toggle/Toggle';
 
@@ -41,8 +42,7 @@ const PreferenceSettingsToggles: React.FC<Props> = ({
         </div>
       )}
 
-      <fieldset className={styles.channelsContainer}>
-        <legend>{t('channels-notifications')}</legend>
+      <FieldsetContainer title={t('channels-notifications')}>
         {Object.keys(preference.preference.channels).map((channelName) => {
           return (
             <div className={styles.row} key={channelName}>
@@ -56,7 +56,7 @@ const PreferenceSettingsToggles: React.FC<Props> = ({
             </div>
           );
         })}
-      </fieldset>
+      </FieldsetContainer>
     </>
   );
 };

@@ -8,7 +8,6 @@ import styles from './CollapsibleWorkflowSettings.module.scss';
 import useUpdateUserPreferences from '@/components/Notifications/hooks/useUpdateUserPreferences';
 import PreferenceSettingsToggles from '@/components/Notifications/NotificationSettings/Tabs/PreferenceSettingsToggles';
 import Collapsible, { CollapsibleDirection } from '@/dls/Collapsible/Collapsible';
-import Pill, { PillSize } from '@/dls/Pill';
 import ChevronDownIcon from '@/icons/chevron-down.svg';
 import { logEvent, logValueChange } from '@/utils/eventLogger';
 
@@ -63,13 +62,6 @@ const CollapsibleWorkflowSettings: React.FC<Props> = ({ preference }) => {
           <div>
             <p className={styles.workflowName}>{preferenceState.template.name}</p>
             <p className={styles.workflowChannels}>{workflowChannels}</p>
-            <div className={styles.tagsContainer}>
-              {preferenceState.template.tags.map((tag) => (
-                <div className={styles.tagContainer} key={tag}>
-                  <Pill size={PillSize.SMALL}>{t(`tags.${tag}`)}</Pill>
-                </div>
-              ))}
-            </div>
           </div>
         }
         prefix={<ChevronDownIcon />}
