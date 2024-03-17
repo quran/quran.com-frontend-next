@@ -12,7 +12,7 @@
   }
 
   &[data-state="checked"] {
-    background-color: var(--color-background-alternative-deep) !important;
+    background-color: var(--color-success-medium) !important;
   }
   &[data-disabled] {
     background: var(--color-background-alternative-medium) !important;
