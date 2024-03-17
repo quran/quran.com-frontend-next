@@ -3,6 +3,7 @@
     "global-settings": "Global Settings",
     "categories-settings": "Categories Settings"
   },
+  "notif-settings-not-enabled": "Notification settings are not enabled",
   "all-notifications": "All Notifications",
   "update-success": "Your notification settings have been updated successfully!",
   "channels-notifications": "Channels Notifications",
