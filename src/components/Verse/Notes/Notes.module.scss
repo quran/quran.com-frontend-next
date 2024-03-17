@@ -5,14 +5,19 @@
     align-items: center;
 }
 
-.outerContainer {
-    &.hasNotesContainer {
-        @include breakpoints.smallerThanTablet {
-            margin-inline: var(--spacing-micro);
-        }
+.newLabel {
+    background-color: unset !important;
+
+    @include breakpoints.smallerThanTablet {
+        inset-block-end: calc(-1.2 * var(--spacing-small)) !important;
+        inset-inline-end: var(--spacing-xxsmall) !important;
     }
-    svg {
-        width: 24px !important;
-        height: 24px !important;
+    @include breakpoints.tablet {
+        inset-block-start: var(--spacing-micro) !important;
+        inset-inline-end: calc(-1.2 * var(--spacing-large)) !important;
     }
+}
+
+.newLabelContainer {
+    display: flex !important;
 }

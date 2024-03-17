@@ -10,6 +10,7 @@ import internalStyles from './Notes.module.scss';
 import NoteModal from '@/components/Notes/NoteModal';
 import styles from '@/components/QuranReader/TranslationView/TranslationViewCell.module.scss';
 import Wrapper from '@/components/Wrapper/Wrapper';
+import Badge from '@/dls/Badge/Badge';
 import NewLabel from '@/dls/Badge/NewLabel';
 import Button, { ButtonShape, ButtonSize, ButtonType, ButtonVariant } from '@/dls/Button/Button';
 import EmptyNotesIcon from '@/icons/notes-empty.svg';
@@ -59,40 +60,43 @@ const VerseNotes = ({ verseKey, isTranslationView, hasNotes }: VerseNotesProps) 
     setIsModalOpen(false);
   };
 
+  // TODO: consents is used as a temporary solution until we have a proper way to check if the user has notes
+  const shouldShowNewLabel = !userData?.consents?.[ConsentType.HAS_NOTES];
+
   return (
-    <div
-      className={classNames(internalStyles.outerContainer, {
-        [internalStyles.hasNotesContainer]: !hasNotes,
-      })}
-    >
+    <>
       <NoteModal isOpen={isModalOpen} onClose={onClose} verseKey={verseKey} />
       <Button
         className={classNames(styles.iconContainer, styles.verseAction, styles.fadedVerseAction)}
         onClick={onItemClicked}
         tooltip={t('notes.title')}
-        type={ButtonType.Success}
+        type={ButtonType.Primary}
         shape={ButtonShape.Circle}
         variant={ButtonVariant.Ghost}
         size={ButtonSize.Small}
       >
-        {hasNotes ? (
-          <NotesIcon />
-        ) : (
-          <Wrapper
-            // TODO: consents is used as a temporary solution until we have a proper way to check if the user has notes
-            shouldWrap={!userData?.consents?.[ConsentType.HAS_NOTES]}
-            wrapper={(children) => (
-              <div className={internalStyles.container}>
-                {children}
-                <NewLabel />
-              </div>
-            )}
-          >
-            <EmptyNotesIcon />
-          </Wrapper>
-        )}
+        <span className={styles.icon}>
+          {hasNotes ? (
+            <NotesIcon />
+          ) : (
+            <Wrapper
+              shouldWrap={shouldShowNewLabel}
+              wrapper={(children) => (
+                <Badge
+                  className={internalStyles.newLabelContainer}
+                  contentClassName={internalStyles.newLabel}
+                  content={shouldShowNewLabel && <NewLabel />}
+                >
+                  {children}
+                </Badge>
+              )}
+            >
+              <EmptyNotesIcon />
+            </Wrapper>
+          )}
+        </span>
       </Button>
-    </div>
+    </>
   );
 };
 
