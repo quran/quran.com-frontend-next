@@ -78,20 +78,27 @@ const CategoriesSettingsTab = () => {
     return null;
   }
 
-  return Object.keys(groupByTags).map((tag) => {
-    const tagPreferences = groupByTags[tag];
-    return (
-      <div key={tag}>
-        <FieldsetContainer title={<Pill size={PillSize.SMALL}>{t(`tags.${tag}`)}</Pill>}>
-          {tagPreferences.map((preference) => {
-            return (
-              <CollapsibleWorkflowSettings key={preference.template._id} preference={preference} />
-            );
-          })}
-        </FieldsetContainer>
-      </div>
-    );
-  });
+  return (
+    <>
+      {Object.keys(groupByTags).map((tag) => {
+        const tagPreferences = groupByTags[tag];
+        return (
+          <div key={tag}>
+            <FieldsetContainer title={<Pill size={PillSize.SMALL}>{t(`tags.${tag}`)}</Pill>}>
+              {tagPreferences.map((preference) => {
+                return (
+                  <CollapsibleWorkflowSettings
+                    key={preference.template._id}
+                    preference={preference}
+                  />
+                );
+              })}
+            </FieldsetContainer>
+          </div>
+        );
+      })}
+    </>
+  );
 };
 
 export default CategoriesSettingsTab;
