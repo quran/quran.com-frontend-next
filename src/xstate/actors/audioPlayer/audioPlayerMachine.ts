@@ -1084,6 +1084,7 @@ export const audioPlayerMachine =
       services: {
         playAudio: (context) => {
           context.audioPlayer.playbackRate = context.playbackRate;
+          context.audioPlayer.volume = context.volume;
           return context.audioPlayer.play();
         },
         fetchReciter: (context) => executeFetchReciter(context),

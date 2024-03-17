@@ -22,16 +22,22 @@ const VOLUME_ICONS = {
   NO_SOUND: <NoSoundIcon />,
 };
 
+const getVolumeIconType = (volume: number): keyof typeof VOLUME_ICONS => {
+  if (volume < 1) return 'NO_SOUND';
+  if (volume < 50) return 'VOLUME_DOWN';
+  return 'VOLUME_UP';
+};
+
 const VolumeControl = () => {
   const direction = useDirection();
   const { t } = useTranslation('common');
 
-  const [isOpen, setIsOpen] = useState(false);
-  const [icon, setIcon] = useState<keyof typeof VOLUME_ICONS>('VOLUME_UP');
-  const timerId = useRef<NodeJS.Timeout>();
-
   const audioService = useContext(AudioPlayerMachineContext);
   const volume = useSelector(audioService, (state) => state.context.volume);
+
+  const [isOpen, setIsOpen] = useState(false);
+  const [icon, setIcon] = useState(getVolumeIconType(volume * 100));
+  const timerId = useRef<NodeJS.Timeout>();
 
   const handleVolumeChange = ([newVolume]: number[]) => {
     logEvent('audio_player_volume_change');
@@ -39,10 +45,7 @@ const VolumeControl = () => {
       type: 'UPDATE_VOLUME',
       volume: newVolume / 100,
     });
-
-    if (newVolume < 1) setIcon('NO_SOUND');
-    else if (newVolume < 50) setIcon('VOLUME_DOWN');
-    else setIcon('VOLUME_UP');
+    setIcon(getVolumeIconType(newVolume));
 
     // Auto close volume control popover after a value is selected
     if (timerId.current) clearTimeout(timerId.current);
