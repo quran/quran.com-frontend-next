@@ -29,14 +29,9 @@ const NotificationSettingsPage = () => {
       <div className={layoutStyles.pageContainer}>
         <div className={layoutStyles.flow}>
           <div className={layoutStyles.flowItem}>
-            {isProduction ? (
-              <NotificationsProvider>
-                <NotificationSettingsTabs />
-              </NotificationsProvider>
-            ) : (
-              // eslint-disable-next-line i18next/no-literal-string
-              <p>Notifications settings are not enabled on non-production env</p>
-            )}
+            <NotificationsProvider>
+              <NotificationSettingsTabs />
+            </NotificationsProvider>
           </div>
         </div>
       </div>

@@ -18,6 +18,7 @@ type Props = {
   preference: IUserPreferenceSettings | IUserGlobalPreferenceSettings;
   onToggle: (isChecked: boolean, channel?: ChannelTypeEnum) => void;
   hasGlobalPreference?: boolean;
+  mutatingChannel?: string;
 };
 
 const PreferenceSettingsToggles: React.FC<Props> = ({
@@ -25,6 +26,7 @@ const PreferenceSettingsToggles: React.FC<Props> = ({
   preference,
   onToggle,
   hasGlobalPreference = true,
+  mutatingChannel,
 }) => {
   const { t } = useTranslation('notification-settings');
   return (
@@ -53,6 +55,7 @@ const PreferenceSettingsToggles: React.FC<Props> = ({
                 onChange={(checked) => onToggle(checked, channelName as ChannelTypeEnum)}
                 checked={preference.preference.channels[channelName]}
               />
+              {isMutating && channelName === mutatingChannel && <Spinner />}
             </div>
           );
         })}

@@ -1,3 +1,4 @@
+/* eslint-disable no-underscore-dangle */
 import React, { useMemo, useState } from 'react';
 
 import { ChannelTypeEnum, IUserPreferenceSettings } from '@novu/headless';
@@ -17,12 +18,13 @@ type Props = {
 
 const CollapsibleWorkflowSettings: React.FC<Props> = ({ preference }) => {
   const { t } = useTranslation('notification-settings');
-  const { mutate: updateUserGlobalSettings, isMutating } = useUpdateUserPreferences(
+  const { mutate: UpdateUserPreferences, isMutating } = useUpdateUserPreferences(
     // eslint-disable-next-line no-underscore-dangle
     preference.template._id,
   );
   // we need a local state to handle UI updates when the user changes one of the settings since the toggles are controlled
   const [preferenceState, setPreferenceState] = useState<IUserPreferenceSettings>(preference);
+  const [mutatingChannel, setMutatingChannel] = useState<ChannelTypeEnum>();
 
   const onOpenChange = (isOpen: boolean) => {
     if (isOpen) {
@@ -33,10 +35,11 @@ const CollapsibleWorkflowSettings: React.FC<Props> = ({ preference }) => {
   };
 
   const onToggle = (isChecked: boolean, channel?: ChannelTypeEnum) => {
+    setMutatingChannel(channel);
     logValueChange('notif_workflow_settings', !isChecked, isChecked, {
       channel,
     });
-    updateUserGlobalSettings(isChecked, channel, () => {
+    UpdateUserPreferences(isChecked, channel, () => {
       setPreferenceState((prev) => {
         const newState = { ...prev };
         newState.preference.channels[channel] = isChecked;
@@ -76,6 +79,7 @@ const CollapsibleWorkflowSettings: React.FC<Props> = ({ preference }) => {
               onToggle={onToggle}
               isMutating={isMutating}
               preference={preferenceState}
+              mutatingChannel={mutatingChannel}
               hasGlobalPreference={false}
             />
           );
