@@ -22,7 +22,12 @@ import Button, { ButtonVariant } from '@/dls/Button/Button';
 import styles from '@/pages/contentPage.module.scss';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getLanguageAlternates } from '@/utils/locale';
-import { getCanonicalUrl, getRamadanActivitiesNavigationUrl } from '@/utils/navigation';
+import {
+  getCanonicalUrl,
+  getLoginNavigationUrl,
+  getRamadanActivitiesNavigationUrl,
+  getReadingGoalNavigationUrl,
+} from '@/utils/navigation';
 
 const PATH = getRamadanActivitiesNavigationUrl();
 const RamadanActivitiesPage: NextPage = (): JSX.Element => {
@@ -217,7 +222,7 @@ const RamadanActivitiesPage: NextPage = (): JSX.Element => {
             </h1>
             <div>
               Can you keep a 30 day Quran reading streak This Ramadan? Simply
-              <InlineLink text="Log-in" href="/login" />
+              <InlineLink text="Log-in" href={getLoginNavigationUrl()} />
               to Quran.com and begin reading to start your Streak! You can also create a custom goal
               that will help you stay on track:
             </div>
@@ -227,7 +232,7 @@ const RamadanActivitiesPage: NextPage = (): JSX.Element => {
                   onButtonClicked(Section.MONTH_STREAK);
                 }}
                 variant={ButtonVariant.Shadow}
-                href="/reading-goal"
+                href={getReadingGoalNavigationUrl()}
                 isNewTab
                 className={styles.button}
               >

@@ -11,7 +11,7 @@ import EmptyNotesIcon from '@/icons/notes-empty.svg';
 import NotesIcon from '@/icons/notes-filled.svg';
 import { isLoggedIn } from '@/utils/auth/login';
 import { logButtonClick } from '@/utils/eventLogger';
-import { getLoginNavigationUrl } from '@/utils/navigation';
+import { getChapterWithStartingVerseUrl, getLoginNavigationUrl } from '@/utils/navigation';
 
 export enum VerseNotesTrigger {
   IconButton = 'button',
@@ -36,7 +36,7 @@ const VerseNotes = ({ verseKey, isTranslationView, hasNotes }: VerseNotesProps) 
       isLoggedIn,
     });
     if (!isUserLoggedIn) {
-      router.push(getLoginNavigationUrl());
+      router.push(getLoginNavigationUrl(getChapterWithStartingVerseUrl(verseKey)));
     } else {
       setIsModalOpen(true);
     }

@@ -22,6 +22,7 @@ import {
   getNotesNavigationUrl,
   getMyCoursesNavigationUrl,
   getReadingGoalProgressNavigationUrl,
+  getLoginNavigationUrl,
 } from '@/utils/navigation';
 
 const ProfileAvatarButton = () => {
@@ -119,7 +120,7 @@ const ProfileAvatarButton = () => {
       tooltip={t('login')}
       ariaLabel={t('login')}
       variant={ButtonVariant.Ghost}
-      href="/login"
+      href={getLoginNavigationUrl()}
       shape={ButtonShape.Circle}
       onClick={onTriggerClicked}
       id="login-button"
