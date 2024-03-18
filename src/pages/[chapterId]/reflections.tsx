@@ -60,10 +60,10 @@ const SelectedAyahReflection: NextPage<AyahReflectionProp> = ({
   return (
     <>
       <NextSeoWrapper
-        title={`${t('common:reflect')} ${chapter.chapter.transliteratedName} - ${toLocalizedNumber(
+        title={`${chapter.chapter.transliteratedName} - ${toLocalizedNumber(
           Number(verseNumber),
           lang,
-        )}`}
+        )} ${t('common:reflections')} `}
         image={getChapterOgImageUrl({
           chapterId,
           verseNumber,
