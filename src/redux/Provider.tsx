@@ -43,14 +43,17 @@ const ReduxProvider = ({ children, locale }) => {
           setLocaleCookie(remoteLocale[PreferenceGroup.LANGUAGE]);
         }
         store.dispatch(syncUserPreferences(userPreferences, locale));
+        const audioPlayerContext = audioService.getSnapshot().context;
         const playbackRate =
-          userPreferences[PreferenceGroup.AUDIO]?.playbackRate ||
-          audioService.getSnapshot().context.playbackRate;
+          userPreferences[PreferenceGroup.AUDIO]?.playbackRate || audioPlayerContext.playbackRate;
         const reciterId =
-          userPreferences[PreferenceGroup.AUDIO]?.reciter ||
-          audioService.getSnapshot().context.reciterId;
-        const { volume } = audioService.getSnapshot().context;
-        audioService.send({ type: 'SET_INITIAL_CONTEXT', playbackRate, reciterId, volume });
+          userPreferences[PreferenceGroup.AUDIO]?.reciter || audioPlayerContext.reciterId;
+        audioService.send({
+          type: 'SET_INITIAL_CONTEXT',
+          playbackRate,
+          reciterId,
+          volume: audioPlayerContext.volume,
+        });
         // eslint-disable-next-line no-empty
       } catch (error) {}
     }

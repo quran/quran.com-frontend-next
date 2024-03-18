@@ -1,4 +1,4 @@
-import { useContext, useRef, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 import { useSelector } from '@xstate/react';
 import useTranslation from 'next-translate/useTranslation';
@@ -12,7 +12,7 @@ import useDirection from '@/hooks/useDirection';
 import NoSoundIcon from '@/icons/no-sound.svg';
 import VolumeDownIcon from '@/icons/volume-down.svg';
 import VolumeUpIcon from '@/icons/volume-up.svg';
-import { logEvent } from '@/utils/eventLogger';
+import { logValueChange } from '@/utils/eventLogger';
 import { AudioPlayerMachineContext } from '@/xstate/AudioPlayerMachineContext';
 
 const VOLUME_CONTROL_CLOSE_DELAY = 1500;
@@ -37,22 +37,24 @@ const VolumeControl = () => {
 
   const [isOpen, setIsOpen] = useState(false);
   const [icon, setIcon] = useState(getVolumeIconType(volume * 100));
-  const timerId = useRef<NodeJS.Timeout>();
 
   const handleVolumeChange = ([newVolume]: number[]) => {
-    logEvent('audio_player_volume_change');
+    logValueChange('audio_player_volume', volume, newVolume);
     audioService.send({
       type: 'UPDATE_VOLUME',
       volume: newVolume / 100,
     });
     setIcon(getVolumeIconType(newVolume));
+  };
 
-    // Auto close volume control popover after a value is selected
-    if (timerId.current) clearTimeout(timerId.current);
-    timerId.current = setTimeout(() => {
+  // Auto close volume control popover after a value is selected
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
       setIsOpen(false);
     }, VOLUME_CONTROL_CLOSE_DELAY);
-  };
+
+    return () => clearTimeout(timeoutId);
+  }, [volume]);
 
   return (
     <div dir={direction}>
@@ -60,7 +62,7 @@ const VolumeControl = () => {
         isPortalled
         isModal
         isOpen={isOpen}
-        contentClassName={styles.VolumeControl__content}
+        contentClassName={styles.content}
         onOpenChange={setIsOpen}
         trigger={
           <Button
