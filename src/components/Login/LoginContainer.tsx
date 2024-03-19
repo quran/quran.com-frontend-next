@@ -101,7 +101,7 @@ const LoginContainer = () => {
 
         {loginType === LoginType.Social && (
           <>
-            <SocialLogin />
+            <SocialLogin redirect={redirect} />
             {process.env.NEXT_PUBLIC_ENABLE_MAGIC_LINK_LOGIN === 'true' && (
               <Button
                 onClick={onMagicLinkClicked}
