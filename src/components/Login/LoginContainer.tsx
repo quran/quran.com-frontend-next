@@ -18,6 +18,7 @@ import CalendarIcon from '@/icons/calendar-1.svg';
 import GoalIcon from '@/icons/goal-1.svg';
 import HeartIcon from '@/icons/love.svg';
 import MobileIcon from '@/icons/mobile-1.svg';
+import NotesIcon from '@/icons/notes-empty.svg';
 import MoreIcon from '@/icons/sun-outline.svg';
 import { logButtonClick, logFormSubmission } from '@/utils/eventLogger';
 import AuthType from 'types/auth/AuthType';
@@ -90,6 +91,17 @@ const LoginContainer = () => {
           <EmailLogin back={onOtherOptionsClicked} onSubmit={onLoginWithEmailSubmit} />
         ) : (
           <>
+            <Feature
+              icon={<NotesIcon />}
+              text={
+                <Trans
+                  i18nKey="login:feature-6"
+                  components={{
+                    b: <b className={styles.bold} key={0} />,
+                  }}
+                />
+              }
+            />
             <Feature icon={<GoalIcon />} text={t('login:feature-1')} />
             <Feature icon={<CalendarIcon />} text={t('login:feature-2')} />
             <Feature icon={<HeartIcon />} text={t('login:feature-3')} />
