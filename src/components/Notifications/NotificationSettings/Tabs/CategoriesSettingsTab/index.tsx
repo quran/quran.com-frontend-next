@@ -16,6 +16,8 @@ import Pill, { PillSize } from '@/dls/Pill';
 import Spinner, { SpinnerSize } from '@/dls/Spinner/Spinner';
 import Error from '@/pages/_error';
 
+const MARKETING_TAG = 'marketing';
+
 const CategoriesSettingsTab = () => {
   const { t } = useTranslation('notification-settings');
   const {
@@ -35,13 +37,16 @@ const CategoriesSettingsTab = () => {
    *
    * 1. critical workflows since they are cannot be skipped.
    * 2. preferences that don't have tags since they cannot be categorized.
+   * 3. non-marketing emails
    */
   const groupByTags = useMemo(
     () =>
       groupBy(
         preferences?.filter(
           (preference) =>
-            preference.template.critical === false && !!preference.template.tags.length,
+            preference.template.critical === false &&
+            !!preference.template.tags.length &&
+            !preference.template.tags.includes(MARKETING_TAG),
         ),
         (preference) => preference.template.tags,
       ),
