@@ -1,0 +1,22 @@
+{
+  "all-notifications": "Toutes les notifications",
+  "channels-notifications": "Notifications des chaînes",
+  "channels": {
+    "chat": "Chat",
+    "email": "E-mail",
+    "in_app": "Dans l'application",
+    "push": "Pousser",
+    "sms": "SMS"
+  },
+  "notif-settings-not-enabled": "Les paramètres de notification ne sont pas activés",
+  "notif-update-success": "Vos paramètres de notification ont été mis à jour avec succès !",
+  "tabs": {
+    "categories-settings": "Paramètres des catégories",
+    "global-settings": "Paramètres globaux"
+  },
+  "tags": {
+    "learning-plans": "Plans d'apprentissage",
+    "qgj": "Parcours de croissance du Coran",
+    "streaks": "Traces"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "all-notifications": "Alle meldingen",
+  "channels-notifications": "Kanalenmeldingen",
+  "channels": {
+    "chat": "Chatten",
+    "email": "E-mail",
+    "in_app": "In-app",
+    "push": "Duw",
+    "sms": "sms"
+  },
+  "notif-settings-not-enabled": "Meldingsinstellingen zijn niet ingeschakeld",
+  "notif-update-success": "Uw meldingsinstellingen zijn succesvol bijgewerkt!",
+  "tabs": {
+    "categories-settings": "Categorieën Instellingen",
+    "global-settings": "Algemene instellingen"
+  },
+  "tags": {
+    "learning-plans": "Leerplannen",
+    "qgj": "Koran groeireis",
+    "streaks": "Strepen"
+  }
+}

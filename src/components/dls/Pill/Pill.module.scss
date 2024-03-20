@@ -8,8 +8,12 @@
   box-sizing: border-box;
   justify-content: center;
   color: var(--color-text-inverse);
-  font-weight: var(--font-weight-bold);
   border-radius: var(--border-radius-pill);
   padding-inline: var(--spacing-small);
+  font-weight: var(--font-weight-bold);
   text-transform: uppercase;
+
+  &.small {
+    font-size: var(--font-size-xsmall-dangerous);
+  }
 }

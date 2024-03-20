@@ -227,6 +227,7 @@
   "notes": {
     "title": "ملاحظاتي وتدبراتي"
   },
+  "notification-settings": "إعدادات الإشعار",
   "notification": {
     "mark-all-as-read": "ضع إشارة مقروء على الكل",
     "mark-as-read": "ضع إشارة مقروء"
@@ -269,6 +270,7 @@
   "reciter-summary": "قارئ كلمة بكلمة: <span> {{reciterName}} </span> . اضغط على كلمة للاستماع إلى تلاوتها.",
   "reciters": "القراء",
   "reflect": "تدبر",
+  "reflections": "خواطر",
   "remove": "إزالة",
   "rename": "إعادة تسمية",
   "retry": "أعد المحاولة",

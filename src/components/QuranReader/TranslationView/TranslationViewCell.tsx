@@ -92,7 +92,9 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
                 bookmarksRangeUrl={bookmarksRangeUrl}
               />
             </div>
-            <VerseNotes verseKey={verse.verseKey} isTranslationView hasNotes={hasNotes} />
+            <div className={styles.actionItem}>
+              <VerseNotes verseKey={verse.verseKey} isTranslationView hasNotes={hasNotes} />
+            </div>
             <div className={classNames(styles.actionItem, styles.priorityAction)}>
               <PlayVerseAudioButton
                 verseKey={verse.verseKey}

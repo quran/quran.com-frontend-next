@@ -227,6 +227,7 @@
   "notes": {
     "title": "Mijn aantekeningen en reflecties"
   },
+  "notification-settings": "Notificatie instellingen",
   "notification": {
     "mark-all-as-read": "Alles als gelezen markeren",
     "mark-as-read": "Markeer als gelezen"
@@ -269,6 +270,7 @@
   "reciter-summary": "Woord voor woord voordrager: <span> {{reciterName}} </span> . Klik op een woord om naar de recitatie te luisteren.",
   "reciters": "voordragers",
   "reflect": "Reflecteren",
+  "reflections": "Reflecties",
   "remove": "Verwijderen",
   "rename": "Hernoemen",
   "retry": "Opnieuw proberen",

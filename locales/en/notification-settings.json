@@ -1,0 +1,22 @@
+{
+  "all-notifications": "All Notifications",
+  "channels-notifications": "Channels Notifications",
+  "channels": {
+    "chat": "Chat",
+    "email": "Email",
+    "in_app": "In-App",
+    "push": "Push",
+    "sms": "SMS"
+  },
+  "notif-settings-not-enabled": "Notification settings are not enabled",
+  "notif-update-success": "Your notification settings have been updated successfully!",
+  "tabs": {
+    "categories-settings": "Categories Settings",
+    "global-settings": "Global Settings"
+  },
+  "tags": {
+    "learning-plans": "Learning Plans",
+    "qgj": "Quran Growth Journey",
+    "streaks": "Streaks"
+  }
+}

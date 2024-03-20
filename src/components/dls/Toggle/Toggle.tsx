@@ -1,24 +1,50 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-import classNames from 'classnames';
+import React from 'react';
+
+import * as RadixToggle from '@radix-ui/react-switch';
 
 import styles from './Toggle.module.scss';
 
-type ToggleProps = {
-  isChecked: boolean;
-  onClick: () => void;
-};
+interface Props {
+  id: string;
+  onChange?: (checked: boolean) => void;
+  checked?: boolean;
+  disabled?: boolean;
+  required?: boolean;
+  label?: string | JSX.Element;
+  name?: string;
+  defaultChecked?: boolean;
+}
 
-const Toggle = ({ isChecked, onClick }: ToggleProps) => {
+const Toggle: React.FC<Props> = ({
+  disabled = false,
+  required = false,
+  defaultChecked,
+  checked,
+  id,
+  label,
+  name,
+  onChange,
+}) => {
   return (
-    <div>
-      <div className={classNames(styles.toggle, { [styles.checked]: isChecked })} onClick={onClick}>
-        <div
-          className={classNames(styles.handle, {
-            [styles.handleOn]: isChecked,
-          })}
-        />
-      </div>
+    <div className={styles.container}>
+      {label && (
+        <label className={styles.label} htmlFor={id}>
+          {label}
+        </label>
+      )}
+
+      <RadixToggle.Root
+        id={id}
+        disabled={disabled}
+        name={name}
+        required={required}
+        className={styles.root}
+        {...(checked !== undefined && { checked })}
+        {...(defaultChecked !== undefined && { defaultChecked })}
+        {...(onChange !== undefined && { onCheckedChange: onChange })}
+      >
+        <RadixToggle.Thumb className={styles.thumb} />
+      </RadixToggle.Root>
     </div>
   );
 };

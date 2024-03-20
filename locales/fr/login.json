@@ -10,6 +10,7 @@
   "feature-3": "Créer des collections",
   "feature-4": "Synchronisez vos données sur tous les navigateurs",
   "feature-5": "Et plus!",
+  "feature-6": "<b> Nouveau ! </b> Notes et réflexions",
   "login-cta": "Connectez-vous ou inscrivez-vous maintenant :",
   "login-error": {
     "AuthenticationError": "Authentification échouée. Veuillez réessayer plus tard",
