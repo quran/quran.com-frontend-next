@@ -307,6 +307,8 @@ export const getReadingGoalProgressNavigationUrl = () => '/reading-goal/progress
 
 export const getNotesNavigationUrl = () => '/notes-and-reflections';
 
+export const getNotificationSettingsNavigationUrl = () => '/notification-settings';
+
 /**
  * Update the browser history with the new url.
  * without actually navigating into that url.

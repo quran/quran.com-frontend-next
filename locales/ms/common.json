@@ -227,6 +227,7 @@
   "notes": {
     "title": "Nota & Renungan Saya"
   },
+  "notification-settings": "Tetapan Pemberitahuan",
   "notification": {
     "mark-all-as-read": "Tandai semua sebagai dibaca",
     "mark-as-read": "tanda sebagai telah dibaca"
@@ -269,6 +270,7 @@
   "reciter-summary": "Kata demi perkataan qari: <span> {{reciterName}} </span> . Klik pada perkataan untuk mendengar bacaannya.",
   "reciters": "qari",
   "reflect": "Renungkan",
+  "reflections": "Renungan",
   "remove": "Keluarkan",
   "rename": "Namakan semula",
   "retry": "Cuba lagi (Retry)",

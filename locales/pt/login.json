@@ -10,6 +10,7 @@
   "feature-3": "Criar coleções",
   "feature-4": "Sincronize seus dados entre navegadores",
   "feature-5": "E mais!",
+  "feature-6": "<b> Novidade! </b> Notas e reflexões",
   "login-cta": "Faça login ou cadastre-se agora:",
   "login-error": {
     "AuthenticationError": "Falha na autenticação. Por favor, tente novamente mais tarde",

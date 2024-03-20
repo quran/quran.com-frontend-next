@@ -13,6 +13,7 @@ import ArrowIcon from '@/icons/east.svg';
 import ReaderIcon from '@/icons/learning-plan.svg';
 import LogoutIcon from '@/icons/logout.svg';
 import NotesIcon from '@/icons/notes-filled.svg';
+import NotificationBellIcon from '@/icons/notification-bell.svg';
 import IconPerson from '@/icons/person.svg';
 import TickIcon from '@/icons/tick.svg';
 import { logoutUser } from '@/utils/auth/api';
@@ -23,6 +24,8 @@ import {
   getNotesNavigationUrl,
   getMyCoursesNavigationUrl,
   getReadingGoalProgressNavigationUrl,
+  getNotificationSettingsNavigationUrl,
+  getProfileNavigationUrl,
   getLoginNavigationUrl,
 } from '@/utils/navigation';
 
@@ -49,7 +52,14 @@ const ProfileAvatarButton = () => {
 
   const onProfileClicked = () => {
     logButtonClick('profile_avatar_profile');
-    router.push('/profile').then(() => {
+    router.push(getProfileNavigationUrl()).then(() => {
+      setIsOpen(false);
+    });
+  };
+
+  const onNotificationSettingsClicked = () => {
+    logButtonClick('profile_avatar_notification_settings');
+    router.push(getNotificationSettingsNavigationUrl()).then(() => {
       setIsOpen(false);
     });
   };
@@ -99,6 +109,9 @@ const ProfileAvatarButton = () => {
       >
         <PopoverMenu.Item onClick={onProfileClicked} icon={<ArrowIcon />}>
           {t('profile')}
+        </PopoverMenu.Item>
+        <PopoverMenu.Item onClick={onNotificationSettingsClicked} icon={<NotificationBellIcon />}>
+          {t('notification-settings')}
         </PopoverMenu.Item>
         <PopoverMenu.Item onClick={onReadingHistoryClicked} icon={<ClockIcon />}>
           {t('reading-history')}

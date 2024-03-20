@@ -227,6 +227,7 @@
   "notes": {
     "title": "My Notes & Reflections"
   },
+  "notification-settings": "Notification Settings",
   "notification": {
     "mark-all-as-read": "Mark all as read",
     "mark-as-read": "Mark as read"

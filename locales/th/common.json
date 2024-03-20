@@ -227,6 +227,7 @@
   "notes": {
     "title": "บันทึกและภาพสะท้อนของฉัน"
   },
+  "notification-settings": "การตั้งค่าการแจ้งเตือน",
   "notification": {
     "mark-all-as-read": "ทำเครื่องหมายทั้งหมดว่าอ่านแล้ว",
     "mark-as-read": "ทำเครื่องหมายว่าอ่านแล้ว"
@@ -269,6 +270,7 @@
   "reciter-summary": "ชื่อผู้อ่านแบบคำต่อคำ: <span> {{reciterName}} </span> คลิกที่คำเพื่อฟังเสียงอ่าน",
   "reciters": "ผู้อ่าน",
   "reflect": "สะท้อน",
+  "reflections": "ภาพสะท้อน",
   "remove": "ลบ",
   "rename": "เปลี่ยนชื่อ",
   "retry": "ลองอีกครั้ง",

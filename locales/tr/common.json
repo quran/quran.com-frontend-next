@@ -227,6 +227,7 @@
   "notes": {
     "title": "Notlarım ve Düşüncelerim"
   },
+  "notification-settings": "Bildirim ayarları",
   "notification": {
     "mark-all-as-read": "Tümünü okundu olarak işaretle",
     "mark-as-read": "Okundu olarak işaretle"
@@ -269,6 +270,7 @@
   "reciter-summary": "Kelime kelime okuyucu: <span> {{reciterName}} </span> . Okunuşunu dinlemek için bir kelimeye tıklayın.",
   "reciters": "Okuyucular",
   "reflect": "Yansıt",
+  "reflections": "Yansımalar",
   "remove": "Kaldırmak",
   "rename": "Yeniden Adlandır",
   "retry": "Yeniden dene",

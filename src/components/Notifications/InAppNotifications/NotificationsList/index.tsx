@@ -9,11 +9,11 @@ import NotificationItem from './NotificationItem';
 import styles from './NotificationsList.module.scss';
 
 import Error from '@/components/Error';
+import useMarkAllAsRead from '@/components/Notifications/hooks/useMarkAllAsRead';
+import { useNotifications } from '@/components/Notifications/InAppNotifications/NotificationContext';
 import Button, { ButtonSize, ButtonType } from '@/dls/Button/Button';
 import Separator from '@/dls/Separator/Separator';
 import Spinner from '@/dls/Spinner/Spinner';
-import { useNotifications } from '@/notifications/NotificationContext';
-import useMarkAllAsRead from '@/notifications/useMarkAllAsRead';
 import {
   selectHasMoreNotifications,
   selectLastLoadedNotificationsPage,

@@ -227,6 +227,7 @@
   "notes": {
     "title": "我的笔记和思考"
   },
+  "notification-settings": "通知设置",
   "notification": {
     "mark-all-as-read": "标记为已读",
     "mark-as-read": "标记为已读"
@@ -269,6 +270,7 @@
   "reciter-summary": "逐字朗诵者： <span> {{reciterName}} </span> 。单击一个单词以收听其朗读。",
   "reciters": "朗诵者",
   "reflect": "参悟",
+  "reflections": "反思",
   "remove": "消除",
   "rename": "改名",
   "retry": "重试",

@@ -227,6 +227,7 @@
   "notes": {
     "title": "Catatan & Refleksi Saya"
   },
+  "notification-settings": "Pengaturan pemberitahuan",
   "notification": {
     "mark-all-as-read": "tandai semua telah dibaca",
     "mark-as-read": "tandai sebagai membaca"
@@ -269,6 +270,7 @@
   "reciter-summary": "Pembaca kata demi kata: <span> {{reciterName}} </span> . Klik pada sebuah kata untuk mendengarkan bacaannya.",
   "reciters": "Qari",
   "reflect": "Mencerminkan",
+  "reflections": "Refleksi",
   "remove": "Keluarkan",
   "rename": "Ganti nama",
   "retry": "Cuba lagi (Retry)",

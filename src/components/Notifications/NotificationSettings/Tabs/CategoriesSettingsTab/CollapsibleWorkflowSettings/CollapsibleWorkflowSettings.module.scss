@@ -1,0 +1,16 @@
+.container {
+    border: 1px solid var(--color-borders-hairline);
+    border-radius: var(--border-radius-rounded);
+    padding: var(--spacing-xxsmall);
+    margin-block: var(--spacing-xsmall);
+}
+
+.workflowName {
+    font-weight: var(--font-weight-bold);
+}
+
+.workflowChannels {
+    font-size: var(--font-size-xsmall);
+    color: var(--color-text-faded);
+    padding-inline-start: var(--spacing-xsmall);
+}
