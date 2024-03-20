@@ -38,11 +38,14 @@ export const makeVerificationCodeUrl = (): string => makeUrl('users/verification
 export const makeSendMagicLinkUrl = (redirect?: string): string =>
   makeUrl('auth/magiclogin', redirect ? { redirect } : undefined);
 
-export const makeGoogleLoginUrl = (): string => makeUrl('auth/google');
+export const makeGoogleLoginUrl = (redirect?: string): string =>
+  makeUrl('auth/google', redirect ? { redirect } : undefined);
 
-export const makeFacebookLoginUrl = (): string => makeUrl('auth/facebook');
+export const makeFacebookLoginUrl = (redirect?: string): string =>
+  makeUrl('auth/facebook', redirect ? { redirect } : undefined);
 
-export const makeAppleLoginUrl = (): string => makeUrl('auth/apple');
+export const makeAppleLoginUrl = (redirect?: string): string =>
+  makeUrl('auth/apple', redirect ? { redirect } : undefined);
 
 export const makeBookmarksUrl = (mushafId: number, limit?: number): string =>
   makeUrl('bookmarks', { mushafId, limit });

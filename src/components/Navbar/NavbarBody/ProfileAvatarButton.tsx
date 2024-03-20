@@ -5,6 +5,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from './ProfileAvatarButton.module.scss';
 
+import NewLabel from '@/dls/Badge/NewLabel';
 import Button, { ButtonShape, ButtonVariant } from '@/dls/Button/Button';
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import ClockIcon from '@/icons/clock.svg';
@@ -22,6 +23,7 @@ import {
   getNotesNavigationUrl,
   getMyCoursesNavigationUrl,
   getReadingGoalProgressNavigationUrl,
+  getLoginNavigationUrl,
 } from '@/utils/navigation';
 
 const ProfileAvatarButton = () => {
@@ -102,7 +104,7 @@ const ProfileAvatarButton = () => {
           {t('reading-history')}
         </PopoverMenu.Item>
         <PopoverMenu.Item onClick={onNotesClicked} icon={<NotesIcon />}>
-          {t('notes.title')}
+          {t('notes.title')} <NewLabel />
         </PopoverMenu.Item>
         <PopoverMenu.Item onClick={onMyCoursesClicked} icon={<ReaderIcon />}>
           {t('my-learning-plans')}
@@ -119,7 +121,7 @@ const ProfileAvatarButton = () => {
       tooltip={t('login')}
       ariaLabel={t('login')}
       variant={ButtonVariant.Ghost}
-      href="/login"
+      href={getLoginNavigationUrl()}
       shape={ButtonShape.Circle}
       onClick={onTriggerClicked}
       id="login-button"

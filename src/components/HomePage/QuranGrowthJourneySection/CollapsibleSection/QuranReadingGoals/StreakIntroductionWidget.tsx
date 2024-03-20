@@ -16,6 +16,8 @@ const StreakIntroductionWidget = () => {
     });
   };
 
+  const url = getReadingGoalNavigationUrl();
+
   return (
     <>
       <p>{t('qgj.quran-reading-goals.desc.logged-out')}</p>
@@ -23,7 +25,7 @@ const StreakIntroductionWidget = () => {
         <Button
           onClick={onCreateReadingGoalClicked}
           size={ButtonSize.Small}
-          href={isLoggedIn() ? getReadingGoalNavigationUrl() : getLoginNavigationUrl()}
+          href={isLoggedIn() ? url : getLoginNavigationUrl(url)}
         >
           {t('reading-goal:create-reading-goal')}
         </Button>
