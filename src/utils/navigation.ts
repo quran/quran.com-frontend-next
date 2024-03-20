@@ -300,7 +300,8 @@ export const getMyCoursesNavigationUrl = () => '/my-learning-plans';
 export const getCoursesNavigationUrl = () => '/learning-plans';
 export const getRamadanActivitiesNavigationUrl = () => '/ramadan-activities';
 
-export const getLoginNavigationUrl = () => '/login';
+export const getLoginNavigationUrl = (redirectTo?: string) =>
+  `/login${redirectTo ? `?r=${redirectTo}` : ''}`;
 
 export const getReadingGoalProgressNavigationUrl = () => '/reading-goal/progress';
 

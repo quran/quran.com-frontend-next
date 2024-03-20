@@ -5,7 +5,7 @@ import styles from './Feature.module.scss';
 import IconContainer from '@/dls/IconContainer/IconContainer';
 
 type Props = {
-  text: string;
+  text: string | React.ReactNode;
   icon: React.ReactNode;
 };
 

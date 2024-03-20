@@ -7,7 +7,8 @@ import { getLoginNavigationUrl } from '@/utils/navigation';
 const RedirectToLoginPage = () => {
   const router = useRouter();
   useEffect(() => {
-    router.replace(getLoginNavigationUrl());
+    const { asPath } = router;
+    router.replace(getLoginNavigationUrl(asPath));
   }, [router]);
 
   return <></>;

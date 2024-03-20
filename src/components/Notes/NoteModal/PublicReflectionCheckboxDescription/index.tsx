@@ -10,20 +10,35 @@ import Link, { LinkVariant } from '@/dls/Link/Link';
 import ChevronDownIcon from '@/icons/chevron-down.svg';
 import { logEvent } from '@/utils/eventLogger';
 
-const PublicReflectionCheckboxDescription = () => {
+export enum NoteType {
+  NEW = 'new',
+  EDIT = 'edit',
+}
+
+type Props = {
+  type?: NoteType;
+};
+
+const PublicReflectionDescription: React.FC<Props> = ({ type = NoteType.NEW }) => {
   const { t } = useTranslation('notes');
   const onOpenChange = (isOpen: boolean) => {
     if (isOpen) {
-      logEvent('new_note_reflection_intro_opened');
+      logEvent(`${type}_note_reflection_intro_opened`);
     } else {
-      logEvent('new_note_reflection_intro_closed');
+      logEvent(`${type}_note_reflection_intro_closed`);
     }
   };
+
+  const isEdit = type === NoteType.EDIT;
 
   return (
     <div className={styles.container}>
       <Collapsible
-        title={<div className={styles.title}>{t('checkbox-refl-intro.title')}</div>}
+        title={
+          <div className={styles.title}>
+            {isEdit ? t('checkbox-refl-intro.post-button') : t('checkbox-refl-intro.title')}
+          </div>
+        }
         prefix={<ChevronDownIcon />}
         direction={CollapsibleDirection.Right}
         shouldRotatePrefixOnToggle
@@ -48,7 +63,12 @@ const PublicReflectionCheckboxDescription = () => {
                 }}
                 i18nKey="notes:checkbox-refl-intro.qr-intro"
               />
-              <p className={styles.checkboxTitle}>{t('checkbox-refl-intro.checkbox.title')}</p>
+              <p className={styles.checkboxTitle}>
+                {!isEdit
+                  ? t('checkbox-refl-intro.checkbox.title')
+                  : t('checkbox-refl-intro.post-button')}
+              </p>
+
               <Trans
                 components={{
                   li: <li key={0} />,
@@ -71,4 +91,4 @@ const PublicReflectionCheckboxDescription = () => {
   );
 };
 
-export default PublicReflectionCheckboxDescription;
+export default PublicReflectionDescription;

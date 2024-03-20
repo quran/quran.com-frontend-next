@@ -7,6 +7,9 @@ import { useSWRConfig } from 'swr';
 import EditForm from './EditForm';
 import styles from './NoteListItem.module.scss';
 
+import PublicReflectionDescription, {
+  NoteType,
+} from '@/components/Notes/NoteModal/PublicReflectionCheckboxDescription';
 import Button, { ButtonSize, ButtonType, ButtonVariant } from '@/dls/Button/Button';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import useMutation from '@/hooks/useMutation';
@@ -217,8 +220,8 @@ const EditNoteListItem: React.FC<Props> = ({
             </Button>
           </div>
           <div className={styles.noteBody}>{note.body}</div>
-          <div className={styles.shareButtonContainer}>
-            {noteReflectionId ? (
+          {noteReflectionId ? (
+            <div className={styles.shareButtonContainer}>
               <Button
                 size={ButtonSize.Small}
                 href={getQuranReflectPostUrl(noteReflectionId)}
@@ -228,12 +231,17 @@ const EditNoteListItem: React.FC<Props> = ({
               >
                 {t('notes:view-on-qr')}
               </Button>
-            ) : (
-              <Button size={ButtonSize.Small} onClick={onPostOnQrClicked} {...buttonProps}>
-                {t('notes:post-on-qr')}
-              </Button>
-            )}
-          </div>
+            </div>
+          ) : (
+            <>
+              <div className={styles.shareButtonContainer}>
+                <Button size={ButtonSize.Small} onClick={onPostOnQrClicked} {...buttonProps}>
+                  {t('notes:post-on-qr')}
+                </Button>
+              </div>
+              <PublicReflectionDescription type={NoteType.EDIT} />
+            </>
+          )}
         </>
       )}
     </div>
