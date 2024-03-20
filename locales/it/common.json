@@ -227,6 +227,7 @@
   "notes": {
     "title": "I miei appunti e riflessioni"
   },
+  "notification-settings": "Impostazioni di notifica",
   "notification": {
     "mark-all-as-read": "Segna tutti come letti",
     "mark-as-read": "segna come letto"
@@ -269,6 +270,7 @@
   "reciter-summary": "Recitatore parola per parola: <span> {{reciterName}} </span> . Clicca su una parola per ascoltare la sua recitazione.",
   "reciters": "Recitatori",
   "reflect": "Riflettere",
+  "reflections": "Riflessi",
   "remove": "Rimuovere",
   "rename": "Rinominare",
   "retry": "Riprova",

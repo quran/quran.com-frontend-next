@@ -28,7 +28,7 @@ const useUpdateUserGlobalPreferences = () => {
       },
       onSuccess: () => {
         setError(null);
-        toast(t('notification-settings:update-success'), { status: ToastStatus.Success });
+        toast(t('notification-settings:notif-update-success'), { status: ToastStatus.Success });
         if (onSuccess) {
           onSuccess();
         }

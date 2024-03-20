@@ -227,6 +227,7 @@
   "notes": {
     "title": "Minhas notas e reflexões"
   },
+  "notification-settings": "Configurações de notificação",
   "notification": {
     "mark-all-as-read": "marcar tudo como lido",
     "mark-as-read": "marcar como Lido"
@@ -269,6 +270,7 @@
   "reciter-summary": "Recitador palavra por palavra: <span> {{reciterName}} </span> . Clique em uma palavra para ouvir sua recitação.",
   "reciters": "Recitadores",
   "reflect": "Refletir",
+  "reflections": "Reflexões",
   "remove": "Retirar",
   "rename": "Renomear",
   "retry": "Tentar novamente",

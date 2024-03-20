@@ -1,0 +1,22 @@
+{
+  "all-notifications": "Todas as notificações",
+  "channels-notifications": "Notificações de canais",
+  "channels": {
+    "chat": "Bater papo",
+    "email": "E-mail",
+    "in_app": "No aplicativo",
+    "push": "Empurrar",
+    "sms": "SMS"
+  },
+  "notif-settings-not-enabled": "As configurações de notificação não estão ativadas",
+  "notif-update-success": "Suas configurações de notificação foram atualizadas com sucesso!",
+  "tabs": {
+    "categories-settings": "Configurações de categorias",
+    "global-settings": "Configurações globais"
+  },
+  "tags": {
+    "learning-plans": "Planos de aprendizagem",
+    "qgj": "Jornada de Crescimento do Alcorão",
+    "streaks": "Ondas"
+  }
+}

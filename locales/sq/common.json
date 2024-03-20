@@ -227,6 +227,7 @@
   "notes": {
     "title": "Shënimet dhe Reflektimet e Mia"
   },
+  "notification-settings": "Cilësimet e njoftimit",
   "notification": {
     "mark-all-as-read": "Shënoni të gjitha si të lexuara",
     "mark-as-read": "Shënoni si të lexuar"
@@ -269,6 +270,7 @@
   "reciter-summary": "Recitues fjalë për fjalë: <span> {{reciterName}} </span> . Klikoni mbi një fjalë për të dëgjuar recitimin e saj.",
   "reciters": "Recituesit",
   "reflect": "Pasqyrim",
+  "reflections": "Reflektime",
   "remove": "Hiq",
   "rename": "Riemërto",
   "retry": "Provo sërish",
