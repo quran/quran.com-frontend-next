@@ -1,16 +1,10 @@
 {
     "delete-account": "Usuń konto",
-    "delete-account": "Delete Account",
     "delete-confirmation": {
         "action-text": "Rozumiem konsekwencje, usuń moje konto",
-        "action-text": "I understand the consequence, delete my account",
         "confirmation-text": "usuń moje konto",
-        "confirmation-text": "delete my account",
         "instruction-text": "Proszę napisz <strong>{{text}}<\/strong> aby potwierdzić",
-        "instruction-text": "Please type <strong>{{text}}<\/strong> to confirm",
         "subtitle": "Tej czynności nie można cofnąć. Twoje konto zostanie usunięte na zawsze, wraz z zapisanymi zakładkami, sesjami czytania i wszystkimi Twoimi danymi.",
-        "subtitle": "This action cannot be undone. This will permanently delete your account, saved bookmarks, reading sessions, and all your data.",
-        "title": "Czy jesteś tego absolutnie pewien?",
-        "title": "Are you absolutely sure?"
+        "title": "Czy jesteś tego absolutnie pewien?"
     }
 }

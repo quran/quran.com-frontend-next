@@ -1,40 +1,22 @@
 {
   "awaiting-confirmation": "Oczekiwanie na potwierdzenie",
-  "awaiting-confirmation": "Awaiting Confirmation",
   "continue-apple": "Kontynuuj z Apple",
-  "continue-apple": "Continue with Apple",
   "continue-email": "Kontynuuj z emailem",
-  "continue-email": "Continue with Email",
   "continue-facebook": "Kontynuuj z Facebook",
-  "continue-facebook": "Continue with Facebook",
   "continue-google": "Kontynuuj z Google",
-  "continue-google": "Continue with Google",
   "email-placeholder": "Adres email",
-  "email-placeholder": "Email Address",
   "feature-1": "Śledź swoje cele",
-  "feature-1": "Track your goals",
   "feature-2": "Utrzymuj serie czytania",
-  "feature-2": "Maintain reading streaks",
   "feature-3": "Stwórz kolekcje",
-  "feature-3": "Create collections",
   "feature-4": "Synchronizuj swoje dane w różnych przeglądarkach",
-  "feature-4": "Sync your data across browsers",
   "feature-5": "I więcej!",
-  "feature-5": "And more!",
   "login-cta": "Zaloguj się lub Zarejestruj teraz:",
-  "login-cta": "Log-in or Sign up now:",
   "login-error": {
     "AuthenticationError": "Uwierzytelnianie nie powiodło się. Spróbuj ponownie później",
-    "AuthenticationError": "Authentication failed. Please try again later",
-    "TokenExpiredError": "Wylogowaliśmy Cię, zaloguj się ponownie.",
-    "TokenExpiredError": "You have been logged out, please login again."
+    "TokenExpiredError": "Wylogowaliśmy Cię, zaloguj się ponownie."
   },
   "login-title": "Zaloguj się do Quran.com",
-  "login-title": "Login to Quran.com",
   "other-options": "Inne opcje logowania",
-  "other-options": "Other Login Options",
   "privacy-policy": "Ochrona Twojej prywatności jest naszym priorytetem – rejestrując się, wyrażasz zgodę na naszą <link>Politykę Prywatności</link>",
-  "privacy-policy": "Protecting your privacy is our priority – By signing up, you consent to our <link>Privacy Policy</link>",
-  "verify-code": "Sprawdź, czy podany kod zabezpieczający jest zgodny z następującym tekstem:",
-  "verify-code": "Verify that the provided security code matches the following text:"
+  "verify-code": "Sprawdź, czy podany kod zabezpieczający jest zgodny z następującym tekstem:"
 }

@@ -1,72 +1,48 @@
 {
     "communication": {
         "desc": "Możemy używać Twojego adresu email, do przesyłania Ci ważnych aktualizacji, biuletynów lub powiadomień związanych z naszymi usługami, treściami, itp. Będziesz miał możliwość zrezygnowania z otrzymywania emailów w dowolnym momencie.",
-        "desc": "We may use your email address to send you important updates, newsletters, or notifications related to our services, content, etc. You will have the ability to unsubscribe from these communications at any time.",
-        "title": "Komunikacja",
-        "title": "Communication"
+        "title": "Komunikacja"
     },
     "contact-us": {
         "desc": "Jeśli masz jakiekolwiek pytania, obawy lub prośby dotyczące niniejszej Polityki Prywatności lub przetwarzania Twoich danych osobowych, skontaktuj się z nami <0>tutaj<\/0>. Korzystając z naszej strony internetowej, potwierdzasz, że przeczytałeś(aś) i zrozumiałeś(aś) niniejszą Politykę Prywatności oraz wyrażasz zgodę na zbieranie, używanie i przetwarzanie Twoich danych osobowych zgodnie z opisem.",
-        "desc": "If you have any questions, concerns, or requests regarding this Privacy Policy or the handling of your personal information, please contact us <0>here<\/0>. By using our website, you acknowledge that you have read and understood this Privacy Policy and consent to the collection, use, and disclosure of your personal information as described.",
-        "title": "Skontaktuj się z nami",
-        "title": "Contact Us"
+        "title": "Skontaktuj się z nami"
     },
     "cookies": {
         "desc": "Quran.com wykorzystuje pliki cookie do ulepszenia Twoich doświadczeń podczas przeglądania witryny, dostarczenia spersonalizowanych treści oraz analizy ruchu na stronie internetowej. Korzystając z naszej strony internetowej, wyrażasz zgodę na korzystanie z plików cookie zgodnie z niniejszą Polityką Prywatności.<br\/><br\/><li>Rodzaje plików cookie, które wykorzystujemy:<\/li><subLi>Pliki cookie wymagane: Te pliki cookie są niezbędne do prawidłowego funkcjonowania naszej strony internetowej i umożliwiają podstawowe funkcje, takie jak nawigacja po stronie i dostęp do zabezpieczonych obszarów. Nie gromadzą one żadnych danych osobowych pozwalających na identyfikację użytkownika. Bez tych plików cookie niektóre części strony mogą nie działać prawidłowo.<\/subLi><subLi>Pliki cookie analityczne i wydajnościowe: Wykorzystujemy te pliki cookie do zbierania informacji o tym, w jaki sposób użytkownicy korzystają z naszej strony internetowej, w tym o liczbie użytkowników, odwiedzanych przez nich stronach i czasie spędzonym na każdej z nich. Te dane pomagają nam analizować i poprawiać wydajność oraz funkcjonalność naszej strony internetowej. Te Pliki cookie nie identyfikują Cię osobiście; wszystkie dane są agregowane i anonimowe.<\/subLi>",
-        "desc": "Quran.com employs cookies to enhance your browsing experience, provide personalized content, and analyze website traffic. By accessing and using our website, you consent to the use of cookies in accordance with this Privacy Policy.<br\/><br\/><li>Types of Cookies We Use:<\/li><subLi>Necessary Cookies: These cookies are essential for the proper functioning of our website and enable basic features, such as page navigation and access to secure areas. They do not collect any personally identifiable information. Without these cookies, some parts of the website may not function correctly.<\/subLi><subLi>Analytical and Performance Cookies: We utilize these cookies to gather information about how visitors use our website, including the number of visitors, the pages they visit, and the time spent on each page. This data helps us analyze and improve the performance and functionality of our website. These cookies do not identify you personally; all data is aggregated and anonymous.<\/subLi>",
-        "title": "Polityka Plików Cookie",
-        "title": "Use of Cookies"
+        "title": "Polityka Plików Cookie"
     },
     "data-analysis": {
         "desc": "Używamy Google Analytics do sprawdzania czy strona działa zgodnie z oczekiwaniami oraz aby wiedzieć, nad którymi funkcjami należy priorytetyzować pracę itp. Informacje te są anonimowe i nie są powiązywane z konkretnymi osobami.",
-        "desc": "We use Google Analytics for ensuring that the site continues to work as expected and for knowing which features to prioritize working on, etc. This information is anonymous and we don’t trace it back to any particular individual.",
-        "title": "Analiza Danych",
-        "title": "Data Analysis"
+        "title": "Analiza Danych"
     },
     "data-deletion": {
         "desc": "Aby zapewnić prywatność i kontrolę nad Twoimi danymi osobowymi, zapewniamy prosty proces usuwania konta. Gdy zdecydujesz się usunąć swoje konto, wszystkie powiązane dane osobowe zostaną automatycznie i trwale usunięte z naszych systemów. Możesz zainicjować proces usuwania konta, z poziomu swojej strony profilowej. Po zainicjowaniu procesu usuwania, Twoje dane osobowe zostaną bezpiecznie usunięte z naszych serwerów w rozsądnym czasie.",
-        "desc": "To ensure your privacy and control over your personal information, we provide a straightforward account deletion process. When you choose to delete your account, all associated personal data will be automatically and permanently removed from our systems. You can initiate the account deletion by accessing your profile page. Once the deletion is initiated, your personal data will be securely deleted from our servers within a reasonable timeframe.",
-        "title": "Usuwanie Danych",
-        "title": "Data Deletion"
+        "title": "Usuwanie Danych"
     },
     "data-protection": {
         "desc": "<boldSpan>Prawo do dostępu do danych:<\/boldSpan> Masz prawo żądać od Quran Foundation kopii Twoich danych osobowych. Możemy pobrać niewielką opłatę za tę usługę. <br\/><br\/><boldSpan>Prawo do sprostowania:<\/boldSpan> Masz prawo żądać, aby Quran Foundation poprawiło wszelkie informacje, które uważasz za nieprawidłowe. Masz również prawo żądać od Quran Foundation uzupełnienia informacji, które uważasz za niekompletne. <br\/><br\/><boldSpan>Prawo do usunięcia danych:<\/boldSpan> Masz prawo żądać, aby Quran Foundation usunęło Twoje dane osobowe, w określonych warunkach. <br\/><br\/><boldSpan>Prawo do ograniczenia przetwarzania danych:<\/boldSpan> Masz prawo żądać, aby Quran Foundation ograniczyło przetwarzanie Twoich danych osobowych, w określonych warunkach. <br\/><br\/><boldSpan>Prawo do sprzeciwu wobec przetwarzania danych<\/boldSpan>: Masz prawo sprzeciwić się przetwarzaniu Twoich danych osobowych przez Quran Foundation, w określonych warunkach. <br\/><br\/><boldSpan>Prawo do przekazania danych<\/boldSpan>: Masz prawo żądać, aby Quran Foundation przekazała dane, które zebraliśmy, innej organizacji lub bezpośrednio Tobie, w określonych warunkach.",
-        "desc": "<boldSpan>The right to access:<\/boldSpan> You have the right to request the Quran Foundation for copies of your personal data. We may charge you a small fee for this service. <br\/><br\/><boldSpan>The right to rectification<\/boldSpan>: You have the right to request that the Quran Foundation correct any information you believe is inaccurate. You also have the right to request the Quran Foundation to complete the information you believe is incomplete. <br\/><br\/><boldSpan>The right to erasure:<\/boldSpan> You have the right to request that the Quran Foundation erase your personal data, under certain conditions. <br\/><br\/><boldSpan>The right to restrict processing:<\/boldSpan> You have the right to request that the Quran Foundation restrict the processing of your personal data, under certain conditions.<br\/><br\/><boldSpan>The right to object to processing<\/boldSpan>: You have the right to object to the Quran Foundation’s  processing of your personal data, under certain conditions. <br\/><br\/><boldSpan>The right to data portability<\/boldSpan>: You have the right to request that the Quran Foundation transfer the data that we have collected to another organization, or directly to you, under certain conditions.",
-        "title": "Prawa Ochrony Danych",
-        "title": "Data Protection Rights"
+        "title": "Prawa Ochrony Danych"
     },
     "data-security": {
         "desc": "Podejmujemy odpowiednie środki w celu ochrony Twoich danych osobowych przed nieautoryzowanym dostępem, modyfikacją, ujawnieniem lub zniszczeniem. Stosujemy standardowe dla branż protokoły bezpieczeństwa oraz wykorzystujemy zabezpieczenia fizyczne, elektroniczne i zarządcze, aby zapewnić poufność i integralność Twoich danych.",
-        "desc": "We take appropriate measures to protect your personal information from unauthorized access, alteration, disclosure, or destruction. We use industry-standard security protocols and employ physical, electronic, and managerial safeguards to ensure the confidentiality and integrity of your data.",
-        "title": "Bezpieczeństwo Danych",
-        "title": "Data Security"
+        "title": "Bezpieczeństwo Danych"
     },
     "data-sharing": {
         "desc": "Nie sprzedajemy, nie handlujemy ani nie wynajmujemy Twoich danych osobowych osobom trzecim.",
-        "desc": "We do not sell, trade, or rent your personal information to third parties.",
-        "title": "Udostępnianie Danych",
-        "title": "Data Sharing"
+        "title": "Udostępnianie Danych"
     },
     "info-collection": {
         "desc": "Zbieramy niektóre dane osobowe od użytkowników, którzy decydują się założyć konto na stronie Quran.com. Informacje te mogą obejmować:<br\/><br\/><underline>Adres email<\/underline>: Zbieramy Twój adres email w celu umożliwienia procesu tworzenia konta oraz w celach komunikacyjnych związanych z Twoim kontem, w tym powiadomienia dotyczące odzyskiwania konta oraz bezpieczeństwa.",
-        "desc": "We collect certain personal information from users who choose to create an account on Quran.com. This information may include:<br\/><br\/><underline>Email Address<\/underline>: We collect your email address to facilitate the account creation process and for communication purposes related to your account, including account recovery and security notifications.",
-        "title": "Kolekcjonowanie Informacji",
-        "title": "Information Collection"
+        "title": "Kolekcjonowanie Informacji"
     },
     "log-data": {
         "desc": "Zbieramy informacje, które przesyła Twój przeglądarka za każdym razem, gdy odwiedzasz naszą Usługę („Log Data”). Dane gromadzone w „Log Data” mogą obejmować informacje takie jak adres protokołu internetowego („IP”) Twojego komputera, typ przeglądarki, wersję przeglądarki, strony naszej Usługi, które odwiedzasz, czas i datę Twojej wizyty, czas spędzony na tych stronach oraz inne statystyki.",
-        "desc": "We collect information that your browser sends whenever you visit our Service (“Log Data”). This Log Data may include information such as your computer’s Internet Protocol (“IP”) address, browser type, browser version, the pages of our Service that you visit, the time and date of your visit, the time spent on those pages and other statistics.",
-        "title": "Gromadzenie Danych",
-        "title": "Log Data"
+        "title": "Gromadzenie Danych"
     },
     "main-privacy-desc": "Quran.Foundation (w skład której wchodzi Quran.com) jest organizacją non-profit typu 501(c)(3), która dąży do umożliwienia każdemu człowiekowi korzystania z Koranu. Quran.Foundation szanuje i ceni prywatność wszystkich naszych użytkowników.",
-    "main-privacy-desc": "The Quran.Foundation (which includes Quran.com) is a 501(c)(3) non-profit organization that strives to empower every human being to benefit from the Quran. Quran.Foundation values and respects the privacy of all of our users.",
     "personal-info-use": {
         "desc": "Używamy zebranych danych osobowych w następujących celach:<br\/> <li><underline>Tworzenie i Zarządzanie Kontem<\/underline>: Twój adres email jest wykorzystywany do tworzenia i zarządzania Twoim kontem na naszej stronie internetowej. Umożliwia to logowanie, dostęp do ustawień oraz przechowywanie zakładek i historii czytania.<\/li><li><underline>Personalizacja</underline>: Możemy wykorzystywać historię Twojego czytania, aby dostarczać Ci spersonalizowane rekomendacje i sugestie oparte na Twoich preferencjach i zainteresowaniach.<\/li>",
-        "desc": "We use the personal information we collect for the following purposes:<br\/> <li><underline>Account Creation and Management<\/underline>: Your email address is used to create and manage your account on our website. It enables you to log in, access your settings, and store your bookmarks and reading history.<\/li><li><underline>Personalization<\/underline>: We may use your reading history to provide personalized recommendations and suggestions based on your preferences and interests.<\/li>",
-        "title": "Wykorzystywanie Danych Osobowych",
-        "title": "Use of Personal Information"
+        "title": "Wykorzystywanie Danych Osobowych"
     },
-    "privacy-header": "Polityka Prywatności",
-    "privacy-header": "Privacy Policy"
+    "privacy-header": "Polityka Prywatności"
 }

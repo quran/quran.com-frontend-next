@@ -1,54 +1,31 @@
 {
     "add": "Dodaj",
-    "add": "Add",
     "add-data-success": "Twoje dane czytania zostały pomyślnie dodane.",
-    "add-data-success": "Your reading data has been added successfully.",
     "delete-goal": {
         "action": "Usuń cel",
-        "action": "Delete Goal",
         "confirmation": {
             "action-text": "Rozumiem konsekwencje, usuń mój cel",
-            "action-text": "I understand the consequence, delete my goal",
             "confirmation-text": "usuń mój cel",
-            "confirmation-text": "delete my goal",
             "instruction-text": "Proszę napisz <strong>{{text}}<\/strong> aby potwierdzić",
-            "instruction-text": "Please type <strong>{{text}}<\/strong> to confirm",
             "subtitle": "Tej czynności nie można cofnąć. Spowoduje to trwałe usunięcie Twojego celu i przestaniemy śledzić Twoje postępy.",
-            "subtitle": "This action cannot be undone. This will permanently delete your goal, and we'll stop tracking your progress.",
-            "title": "Jesteś pewien?",
-            "title": "Are you sure?"
+            "title": "Jesteś pewien?"
         },
-        "success": "Twój cel czytania został pomyślnie usunięty.",
-        "success": "Your reading goal has been deleted successfully."
+        "success": "Twój cel czytania został pomyślnie usunięty."
     },
     "edit-goal": {
         "action": "Edytuj cel",
-        "action": "Edit Goal",
         "subtitle": "Ponownie obliczymy Twoje postępy w oparciu o nowy cel.",
-        "subtitle": "We will re-calculate your progress based on the new goal.",
         "success": "Twój cel czytania został pomyślnie zaktualizowany.",
-        "success": "Your reading goal has been updated successfully.",
-        "title": "Edytuj swój cel czytania",
-        "title": "Edit your reading goal"
+        "title": "Edytuj swój cel czytania"
     },
     "history": "Historia czytania",
-    "history": "Reading History",
     "history-for": "Historia czytania dla {{date}}",
-    "history-for": "Reading history for {{date}}",
     "manage-goal": "Zarządzaj swoim celem czytania",
-    "manage-goal": "Manage your reading goal",
     "manually-add": "Ręcznie dodaj odczyty",
-    "manually-add": "Manually add readings",
     "no-reading-history-for": "Brak historii czytania dla {{date}}",
-    "no-reading-history-for": "No reading history for {{date}}",
     "reading-progress-header": "Twoje postępy",
-    "reading-progress-header": "Your Progress",
     "reading-progress-streak": "Seria",
-    "reading-progress-streak": "Streak",
     "reading-time": "Czas czytania",
-    "reading-time": "Reading time",
     "seconds-read-tooltip": "To jest czas, który spędziłeś na czytaniu wprowadzonych Ajatów. Wypełniamy go automatycznie średnią prędkością czytania na Quran.com, ale możesz go zastąpić swoim rzeczywistym czasem czytania.",
-    "seconds-read-tooltip": "This is the time you have spent reading the Ayahs you entered. We auto-populate it with the average reading speed on Quran.com, but you can override it with your actual reading time.",
-    "you-read": "Czytasz:",
-    "you-read": "You read:"
+    "you-read": "Czytasz:"
 }

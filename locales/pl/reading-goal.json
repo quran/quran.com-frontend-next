@@ -1,216 +1,132 @@
 {
     "continue-reading": "Kontynuuj Czytanie",
-    "continue-reading": "Continue Reading",
     "continuous": {
         "description": "Twój cel będzie automatycznie obliczany",
-        "description": "Your goal will calculate your progress over a duration of days",
-        "title": "Wraz z upływem czasu",
-        "title": "Over a duration"
+        "title": "Wraz z upływem czasu"
     },
     "create-plan": "Stwórz plan",
-    "create-plan": "Create plan",
     "create-reading-goal": "Stwórz Cel",
-    "create-reading-goal": "Create Goal",
     "daily-progress": "Dzienne postępy",
-    "daily-progress": "Daily Progress",
     "daily": {
         "description": "Twój cel będzie codziennie resetowany",
-        "description": "Your goal will reset every day",
-        "title": "Dzienny cel",
-        "title": "Daily goal"
+        "title": "Dzienny cel"
     },
     "day-x": "Dzień {{day}}",
-    "day-x": "Day {{day}}",
     "days": "Dni",
-    "days": "Days",
     "duration": "Czas trwania (w dniach)",
-    "duration": "Duration (days)",
     "ending-chapter": "Kończenie Sury",
-    "ending-chapter": "Ending Surah",
     "ending-verse": "Kończenie Ajatu",
-    "ending-verse": "Ending Ayah",
     "examples-subtitle": "Oto lista popularnych celów. Możesz również stworzyć swój własny cel.",
-    "examples-subtitle": "Here is a list of common goals. You can also create your own goal.",
     "examples-title": "Wybierz jeden z gotowych celów lub stwórz własny",
-    "examples-title": "Pick a preset goal or create your own",
     "examples": {
         "custom": {
             "description": "Ustaw swój cel, który Ci odpowiada",
-            "description": "Set a custom goal that suits you",
-            "title": "Własny",
-            "title": "Custom"
+            "title": "Własny"
         },
         "khatm": {
             "description": "Klasyczny cel Katm. Czytaj 1 Dżuz dziennie",
-            "description": "A classic Khatm goal. Read 1 Juz a day",
-            "title": "Ukończ Koran w 30 dni",
-            "title": "Read the Quran in 30 days"
+            "title": "Ukończ Koran w 30 dni"
         },
         "time": {
             "description": "Prosty, przyjazny dla początkujących cel",
-            "description": "A simple beginner-friendly goal",
-            "title": "Czytaj 10 minut dziennie",
-            "title": "Read 10 minutes a day"
+            "title": "Czytaj 10 minut dziennie"
         },
         "year": {
             "description": "Ukończ Koran we własnym tempie przez następny rok",
-            "description": "Read the Quran at your own pace over the next year",
-            "title": "Ukończ Koran w rok",
-            "title": "Read the Quran in a year"
+            "title": "Ukończ Koran w rok"
         }
     },
     "frequency-tab": {
         "description": "Resetować Twój cel codziennie czy co określoną liczbę dni? Będziemy śledzić Twój postęp niezależnie od wybranej częstotliwości.",
-        "description": "Should your goal reset every day or every number of days? Don't worry, we will track your progress regardless of the frequency you choose.",
-        "title": "Wybierz częstotliwość resetowania celu",
-        "title": "Choose a frequency for your goal"
+        "title": "Wybierz częstotliwość resetowania celu"
     },
     "goal-done": {
         "description": "Dalsze czytanie będzie nadal rejestrowane",
-        "description": "Any additional reading will still be recorded",
-        "title": "Ukończyłeś dzisiejszy cel",
-        "title": "You completed today's goal"
+        "title": "Ukończyłeś dzisiejszy cel"
     },
     "goal-target": {
         "description": "Ile czasu, stron lub wersetów powinieneś przeczytać, aby ukończyć swój cel?",
-        "description": "How much time, pages, or verses should you read to complete your goal?",
-        "title": "Ustaw zakres dla swojego celu czytania",
-        "title": "Set a target for your goal"
+        "title": "Ustaw zakres dla swojego celu czytania"
     },
     "goal-type": {
         "description": "Wybierz czy Twój cel ma być oparty o czas, liczbę stron, czy niestandardowy zakres (np. 3 Dżuz Koranu)?",
-        "description": "Should your goal be based on time, pages, or a custom range (i.e., 3 Juzs of the Quran)?",
-        "title": "Wybierz kryterium dla swojego celu",
-        "title": "Choose a criteria for your goal"
+        "title": "Wybierz kryterium dla swojego celu"
     },
     "goal-types": {
         "pages": {
             "description": "Twój cel będzie oparty o liczbę stron",
-            "description": "Your goal will be based on pages",
-            "title": "Strony",
-            "title": "Pages"
+            "title": "Strony"
         },
         "range": {
             "description": "Twój cel będzie oparty o niestandardowy zakres wersetów (to może być Sura, Dżuz, lub nawet cały Koran)",
-            "description": "Your goal will be based on a custom range of verses (this can be a Surah, a Juz, or even the whole Quran)",
-            "title": "Własny zakres",
-            "title": "Custom range"
+            "title": "Własny zakres"
         },
         "time": {
             "description": "Twój cel będzie oparty o czas",
-            "description": "Your goal will be based on time",
-            "title": "Czas",
-            "title": "Time"
+            "title": "Czas"
         }
     },
     "plus-x-more-days": {
         "one": "+{{days}} dzień więcej",
-        "one": "+{{days}} more day",
-        "other": "+{{days}} dni więcej",
-        "other": "+{{days}} more days"
+        "other": "+{{days}} dni więcej"
     },
     "preview-schedule": {
         "description": "Tak będzie wyglądał Twój cel. Zawsze możesz go później zmienić.",
-        "description": "This is how your goal will look like. You can always change it later.",
-        "title": "Oto podgląd Twojego harmonogramu",
-        "title": "Here is a preview of your schedule"
+        "title": "Oto podgląd Twojego harmonogramu"
     },
     "progress": {
         "complete": "Dzisiejszy cel został ukończony 🎉",
-        "complete": "Today's goal is complete 🎉",
         "goal-complete": "Ukończyłeś swój cel w zupełności 🎉",
-        "goal-complete": "Your whole goal is complete 🎉",
         "pages-goal": "czytaj {{pages}} stron Koranu",
-        "pages-goal": "read {{pages}} pages of the Quran",
-        // TODO: confirm
         "range-goal": "czytaj od {{from}} do {{to}}",
-        "range-goal": "read {{from}} to {{to}}",
-        // TODO: confirm
-        "time-goal": "czytaj {{time}} Koranu",
-        "time-goal": "read {{time}} of the Quran"
+        "time-goal": "czytaj {{time}} Koranu"
     },
     "reading-goal": "Cel Czytania",
-    "reading-goal": "Reading Goal",
     "reading-goal-description": "Czy masz problemy z regularnym ukończaniem swoich celów czytania Koranu?<br\/><br\/>Droga Rozwoju z Koranem to dynamiczna funkcja opracowana, aby pomóc Ci pozostać konsekwentnym w swojej podróży z Koranem. Bez względu na to, czy zamierzasz czytać 10 minut dziennie, ukończyć jeden Dżuz w miesiącu czy skończyć cały Koran w ciągu roku, Quran.com pomoże Ci ustawić spersonalizowany cel i śledzić swoje codzienne serie czytania, dostosowując się w miarę postępów. Korzystanie z niej jest całkowicie darmowe i mamy nadzieję, że pomoże Ci zachować motywację do osiągnięcia swojego celu!",
-    "reading-goal-description": "Do you find it challenging to maintain consistency with your Quran reading goals?<br\/><br\/>Quran Growth Journey is a dynamic feature developed to help you remain consistent on your journey with the Quran. Whether you aim to read 10 minutes a day, complete a Juz in a month, or finish the entire Quran in a year, etc., Quran.com can now help you set a custom goal and keep track of your daily reading streaks, while adjusting as you make progress. It is completely free to use and we hope it will help you stay motivated to reach your goal!",
-    // TODO: check if it's correct on the page along with "x-days-streak"
     "reading-goal-label": "Osiągnąłeś(aś)",
-    "reading-goal-label": "You're on a",
     "reading-goal-title": "Przedstawiamy Drogę Rozwoju z Koranem",
-    "reading-goal-title": "Introducing Quran Growth Journey",
     "recommended": "Polecane",
-    "recommended": "Recommended",
     "remaining": "Pozostało na dziś",
-    "remaining": "Remaining for today",
     "remaining-days": {
         "one": "Pozostał {{days}} dzień",
-        "one": "{{days}} day remaining",
-        "other": "Pozostały(o) {{days}} dni",
-        "other": "{{days}} days remaining"
+        "other": "Pozostały(o) {{days}} dni"
     },
     "set-reading-goal-success": "Twój cel czytania został pomyślnie ustawiony.",
-    "set-reading-goal-success": "Your reading goal has been set successfully.",
     "start-journey": "Rozpocznij swoją podróż!",
-    "start-journey": "Start your journey!",
     "start-reading": "Zacznij Czytać",
-    "start-reading": "Start Reading",
     "starting-chapter": "Zaczynanie Sury",
-    "starting-chapter": "Starting Surah",
     "starting-verse": "Zaczynanie Ajatu",
-    "starting-verse": "Starting Ayah",
     "streak": "Seria",
-    "streak": "Streak",
     "streak-definition": "Seria to liczba kolejnych dni, w których nieprzerwanie czytałeś(aś) Koran.",
-    "streak-definition": "A streak is the number of consecutive days you have read the Quran.",
     "timeline-meaning": "Co oznacza Twoja oś czasu?",
-    "timeline-meaning": "What does your timeline mean?",
     "timeline-states": {
         "checked": "Ukończyłeś(aś) swój cel",
-        "checked": "You have completed your goal",
         "filled": "Trochę przeczytałeś(aś), ale nie wystarczająco, aby ukończyć swój cel",
-        "filled": "You have read something but not enough to complete your goal",
         "none": "Niczego nie przeczytałeś(aś) tego dnia",
-        "none": "You haven't read anything yet on that day",
-        "stroked": "Jeszcze nie przeczytałeś(aś) dzisiaj niczego",
-        "stroked": "You haven't read anything today"
+        "stroked": "Jeszcze nie przeczytałeś(aś) dzisiaj niczego"
     },
     "todays-goal": "Dzisiejszy Cel",
-    "todays-goal": "Today's Goal",
     "view-progress": "Zobacz Postęp",
-    "view-progress": "View Progress",
     "week-progress": "Postęp w tym tygodniu",
-    "week-progress": "This week's progress",
     "x-days": {
         "one": "{{days}} dzień",
-        "one": "{{days}} day",
-        "other": "{{days}} dni",
-        "other": "{{days}} days"
+        "other": "{{days}} dni"
     },
-    // TODO: check if it's correct on the page along with "reading-goal-label"
     "x-days-streak": "serię {{days}} dni",
-    "x-days-streak": "{{days}} day streak",
     "x-hours": {
         "one": "{{hours}} godzina",
-        "one": "{{hours}} hour",
-        "other": "{{hours}} godzin(y)",
-        "other": "{{hours}} hours"
+        "other": "{{hours}} godzin(y)"
     },
     "x-minutes": {
         "one": "{{minutes}} minuta",
-        "one": "{{minutes}} minute",
-        "other": "{{minutes}} minut(y)",
-        "other": "{{minutes}} minutes"
+        "other": "{{minutes}} minut(y)"
     },
     "x-pages": {
         "one": "{{pages}} strona",
-        "one": "{{pages}} page",
-        "other": "{{pages}} stron(y)",
-        "other": "{{pages}} pages"
+        "other": "{{pages}} stron(y)"
     },
     "x-seconds": {
         "one": "{{seconds}} sekunda",
-        "one": "{{seconds}} second",
-        "other": "{{seconds}} sekund(y)",
-        "other": "{{seconds}} seconds"
+        "other": "{{seconds}} sekund(y)"
     }
 }

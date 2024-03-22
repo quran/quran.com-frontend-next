@@ -1,18 +1,10 @@
 {
     "edgham": "Idghaam",
-    "edgham": "Idghaam",
-    "ekhfa": "Ikhfa and Ghunna",
     "ekhfa": "Ikhfa and Ghunna",
     "mad-2": "Maad 2 sekundy",
-    "mad-2": "Maad 2 seconds",
     "mad-2-4-6": "Dozwolony Maad 2, 4 lub 6 sekund",
-    "mad-2-4-6": "Permitted Maad 2 or 4 or 6 seconds",
     "mad-4-5": "Obowiązkowy Maad 4 lub 5 sekund",
-    "mad-4-5": "Necessary Maad 4 or 5 seconds",
     "mad-6": "Obowiązkowy Maad 6 sekund",
-    "mad-6": "Necessary Maad 6 seconds",
     "qalqala": "Kalkala",
-    "qalqala": "Qalqala",
-    "tajweed-header": "Reguły koloru Tadżwłidu",
-    "tajweed-header": "Tajweed color rules"
+    "tajweed-header": "Reguły koloru Tadżwłidu"
 }

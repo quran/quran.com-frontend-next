@@ -1,10 +1,6 @@
 {
     "go-back": "Wstecz",
-    "go-back": "Go Back",
     "if-persist": "Jeśli problem się powtarza, proszę",
-    "if-persist": "If the issue persists, please",
     "report-cta": "zgłoś go",
-    "report-cta": "report a bug",
-    "title": "Przepraszamy, coś poszło nie tak",
-    "title": "Sorry, something went wrong"
+    "title": "Przepraszamy, coś poszło nie tak"
 }

@@ -1,44 +1,24 @@
 {
     "all-saved-verses": "Wszystkie zapisane wersety",
-    "all-saved-verses": "All saved verses",
     "alphabetical": "A-Z",
-    "alphabetical": "A-Z",
-    // TODO: confirm
     "back-to-collection-list": "Powrót do listy kolekcji",
-    "back-to-collection-list": "Back to collection list",
     "collapse-all": "Zwiń wszystkie wersety",
-    "collapse-all": "Collapse all verses",
-    // TODO: confirm
     "collection-list-empty": "Lista kolekcji pusta. Nie stworzyłeś jeszcze żadnych kolekcji",
-    "collection-list-empty": "Collection list is empty. You haven't created any collection yet",
     "collections": "Kolekcje",
-    "collections": "Collections",
     "delete": "Usuń",
-    "delete": "Delete",
     "delete-bookmark": {
         "subtitle": "Czy jesteś pewien, że chcesz usunąć {{bookmarkName}} z kolekcji {{collectionName}}?",
-        "subtitle": "Are you sure you want to delete {{bookmarkName}} from {{collectionName}} collection?",
-        "title": "Usuń zakładkę",
-        "title": "Delete bookmark"
+        "title": "Usuń zakładkę"
     },
     "delete-collection": {
         "subtitle": "Czy jesteś pewien, że chcesz usunąć kolekcję {{collectionName}}?",
-        "subtitle": "Are you sure you want to delete {{collectionName}} collection?",
-        "title": "Usuń kolekcję",
-        "title": "Delete collection"
+        "title": "Usuń kolekcję"
     },
     "empty": "Kolekcja pusta",
-    "empty": "Collection is empty",
     "expand-all": "Rozwiń wszystkie wersety",
-    "expand-all": "Expand all verses",
     "go-to-ayah": "Idź do wersetu",
-    "go-to-ayah": "Go to ayah",
     "load-more": "Załaduj więcej",
-    "load-more": "Load More",
     "recently-added": "Ostatnio dodane",
-    "recently-added": "Recently added",
     "recently-updated": "Ostatnio zaktualizowane",
-    "recently-updated": "Recently updated",
-    "verse-key": "Rozdział i numer Wersetu",
-    "verse-key": "Chapter and Verse Number"
+    "verse-key": "Rozdział i numer Wersetu"
 }
