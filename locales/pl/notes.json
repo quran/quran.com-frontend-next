@@ -1,0 +1,96 @@
+{
+  "add-another-note": "Dodaj kolejną notatkę",
+  "add-another-note": "Add another note",
+  "body-placeholder": "Skorzystaj z tego miejsca, aby dodać ogólne notatki lub refleksje.",
+  "body-placeholder": "Use this space to save general notes, or to write a reflection.",
+  "checkbox-refl-intro": {
+    "checkbox": {
+      "desc": "<li>Publikacja oznacza, że Twoja refleksja zostanie udostępniona na QuranReflect pod Twoim imieniem, gdzie zostanie zweryfikowana przez zespół moderacyjny i będzie widoczna dla społeczności QuranReflect.</li><li>Po przeglądzie i zatwierdzeniu lub rozpromowaniu Twojego wpisu przez nasz zespół moderacyjny, możesz otrzymać polubienia, komentarze i powiadomienia o obserwowaniu. Po zalogowaniu się do QuranReflect, możesz zaktualizować ustawienia powiadomień, wedle swoich preferencji.</li><li>Możesz przeglądać swoje notatki i opublikowane refleksje w swoim profilu logowania w Quran.com w sekcji „Moje notatki i refleksje”, lub zalogować się do <link>QuranReflect</link> za pomocą swojego adresu email powiązanego z kontem w Quran.com.</li>",
+      "desc": "<li>Posting means that your reflection will be shared on QuranReflect under your name where it will be reviewed by the moderation team and visible to the QuranReflect community.</li><li>Once your post is reviewed and approved or promoted by our moderation team, you may get likes, comments and follow notifications. Upon signing into QuranReflect, you can update your notification settings to suit your preferences.</li><li>You may view your notes and posted reflections under your Quran.com login profile in the “My Notes and Reflections” section, or log into <link>QuranReflect</link> using your Quran.com sign-in email.</li>",
+      "title": "Co się stanie, jeśli zaznaczę to pole?",
+      "title": "What happens if I check this box?"
+    },
+    "qr-intro": "QuranReflect, wraz z Quran.com, jest częścią organizacji Quran.Foundation. Jest to platforma społecznościowa do dzielenia się osobistymi refleksjami na temat Koranu, zachęcająca użytkowników do wewnętrznego przyswojenia jego przesłań i dzielenia się spostrzeżeniami, które inspirują pozytywne zmiany. W odróżnieniu od Tafsiru, który jest naukową interpretacją, refleksje są osobistymi myślami i doświadczeniami związanymi z wersetami. Posty użytkowników w QuranReflect są weryfikowane i moderowane przez wykwalifikowany zespół, który będzie dbał o jakość treści, prawidłową etykietę interakcji z Koranem, oraz wspierał użytkowników, udzielając im informacji zwrotnej, kładąc nacisk na wartościową dyskusję, co przyczyni się do budowy duchowo wspierającej się społeczności skupionej wokół Koranu. Dowiedz się więcej: <link>Quranreflect.com/faq</link>",
+    "qr-intro": "QuranReflect, along with Quran.com, is a part of the Quran.Foundation family. It is a social platform for sharing personal reflections on the Quran, encouraging users to internalize its messages and share insights that inspire positive change. Unlike tafsir, which is a scholarly interpretation, reflections are personal thoughts and experiences related to the verses. User posts to QuranReflect are reviewed and moderated by a qualified team, who will help ensure quality of content, etiquettes when interacting with the Quran, and they will empower users by sharing feedback and highlighting valuable discourse thus fostering a spiritually uplifting, Quran-focused community. Learn more: <link>Quranreflect.com/faq</link>",
+    "title": "Czym jest QuranReflect i co się stanie, jeśli zaznaczę to pole?",
+    "title": "What is QuranReflect and what happens if I check this box?"
+  },
+  "click-to-see-more": "kliknij, aby zobaczyć więcej",
+  "click-to-see-more": "click to see more",
+  "delete-note": "Usuń notatkę",
+  "delete-note": "Delete note",
+  "delete-success": "Notatka została pomyślnie usunięta",
+  "delete-success": "Note has been deleted successfully",
+  "empty-notes": "Nie znaleziono notatek",
+  "empty-notes": "No notes found",
+  "empty-reflections": "Nie znaleziono refleksji",
+  "empty-reflections": "No reflections found",
+  "export-success": "Notatka została pomyślnie opublikowana na Twoim koncie w QuranReflect.",
+  "export-success": "Note has been published to your account on QuranReflect successfully",
+  "new-note-reflc-intro": {
+    "reflc-prompts": {
+      "deeper": {
+        "desc": "<li>Czy werset wspomina jakieś Imiona Allaha? W jaki sposób odnoszą się one do wersetu?</li><li>Które słowa lub sformułowania przyciągnęły Twoją uwagę?</li><li>Czy widzisz powiązanie pomiędzy kontekstem wersetu, a innymi wersetami, hadisami lub wydarzeniami?</li>",
+        "desc": "<li>Are there any names of Allah mentioned, and how do they relate to the verse?</li><li>Which words or linguistic aspects caught your attention?</li><li>Can you draw connections to the verse’s context, other Quranic verses, hadith, or events?</li>",
+        "title": "Głębsze spostrzeżenia:",
+        "title": "Deeper Insights:"
+      },
+      "personal": {
+        "desc": "<li>W jaki sposób poruszył lub zainspirował Cię ten werset?</li><li>Czy wspomina o jakichś rzeczach, nad którymi możesz popracować?</li><li>Czy zawiera jakąś obietnicę, ostrzeżenie lub zakaz, które możesz wprowadzić do swojego życia?</li><li>Czy masz osobistą historię związaną z tym wersetem?</li><li>Jakie zmiany chcesz wprowadzić na podstawie tego wersetu i jakie praktyczne kroki możesz podjąć, aby je wdrożyć?</li>",
+        "desc": "<li>In what ways has this verse moved or inspired you?</li><li>Are there qualities or actions mentioned that you can improve upon?</li><li>Is there a promise or a warning/prohibition that you can apply to your life?</li><li>Do you have a personal story related to this verse?</li><li>What changes do you want to make based on this verse, and how can you or someone else practically implement them?</li>",
+        "title": "Pytania do osobistej refleksji:",
+        "title": "Personal Reflection Questions:"
+      },
+      "title": "Podpowiedzi do refleksji",
+      "title": "Reflection Prompts"
+    },
+    "title": "Potrzebujesz pomocy w refleksji nad Koranem? Dowiedz się więcej",
+    "title": "Need help reflecting on the Quran? Learn more",
+    "what-is-reflc": {
+      "desc": "Refleksja lub zastanawianie się nad Koranem polega na uważnym czytaniu lub słuchaniu słów Allaha, angażowaniu się w ich znaczenia i pozwalaniu, by wpływały one na nas i zmieniały nas na lepsze. Jest to nazywane \"Tadabbur\". Tafsir, w przeciwieństwie do refleksji, to naukowa interpretacja Koranu, zapewniająca szczegółowe wyjaśnienia jego wersetów oparte o klasyczne źródła i analizę naukową. Podczas gdy Tafsir jest zarezerwowany dla uczonych, Allah nakazuje każdej osobie angażować się w Tadabbur (Koran <link1>38:29</link1>, <link2>47:24</link2>, <link3>4:82</link3>, oraz wiele innych).<br></br><br></br>Użytkownicy mogą zapisywać swoje notatki i osobiste refleksje prywatnie. Nasze refleksje mogą natomiast diametralnie wpływać na inne osoby, pomagając im w budowaniu ich więzi z Koranem i relacji z Allahem. Dlatego użytkownicy mają możliwość udostępniać swoje refleksje w QuranReflect jako część naszych wysiłków mających na celu wspieranie rozwoju ludzi w ich podróży. Aby dowiedzieć się więcej, odwiedź: <link4>QuranReflect.com/faq</link4> i <link5>Pięć sposobów refleksji nad Koranem</link5>",
+      "desc": "Reflecting or pondering upon the Quran involves reading or listening carefully to Allah’s words, engaging with its meanings, and allowing it to affect and change us for the better. This is referred to as \"Tadabbur\". Tafsir,  in contrast, is a scholarly interpretation of the Quran, providing detailed explanations of its verses based on classical sources and scholarly analysis. While Tafsir is reserved for the scholars, Allah SWT asks everyone to engage in Tadabbur (Quran <link1>38:29</link1>, <link2>47:24</link2>, <link3>4:82</link3>, and many more).<br></br><br></br>Users can save their notes and personal reflections privately. Oftentimes our reflections can deeply resonate with others, aiding their connection to the Quran, and their relationship with Allah SWT. That’s why users have the option to share their reflection to QuranReflect as part of our efforts to help people grow together in their journey. To learn more, visit: <link4>QuranReflect.com/faq</link4> and <link5>Five Lenses to Reflect on the Quran</link5>",
+      "title": "Czym jest Refleksja?",
+      "title": "What is a Reflection?"
+    }
+  },
+  "note": "Notatka",
+  "note": "Note",
+  "notes-and-reflcs": "Notatki i Refleksje",
+  "notes-and-reflcs": "Notes & Reflections",
+  "post-on-qr": "Opublikuj w QuranReflect",
+  "post-on-qr": "Post on QuranReflect",
+  "posted-reflections": "Opublikowane Refleksje",
+  "posted-reflections": "Posted Reflections",
+  "private-notes": "Notatki",
+  "private-notes": "Notes",
+  "qr-tooltip": "<span><link>QuranReflect</link> to platforma społecznościowa do dzielenia się refleksjami na temat Koranu. Zgromadźmy się wokół Koranu, połączmy się z tym, co się liczy.</span>",
+  "qr-tooltip": "<span><link>QuranReflect</link> is a social platform for sharing reflections on the Quran. Connect around the Quran, connect with what matters.</span>",
+  "reflections-intro": {
+    "line-1": "Aby przeglądać lub pisać komentarze, wchodzić w interakcje ze społecznością i móc wykonywać więcej czynności, odwiedź <link>QuranReflect.com</link>.",
+    "line-1": "To view and interact with comments, engage with the community, and do more, visit <link>QuranReflect.com</link>.",
+    "line-2": "Możesz zalogować się na swoje powiązane konto QuranReflect, logując się lub zakładając nowe konto za pomocą tego samego adresu email, który został użyty do logowania na Quran.com.",
+    "line-2": "You can log into your linked QuranReflect account by logging in or signing up with the same Quran.com email used in your sign-in.",
+    "line-3": "Treści nieodpowiednie do publikacji będą ukrywane lub usuwane. Użytkownicy zamieszczający nieodpowiednie treści zostaną zablokowani.",
+    "line-3": "Content that is not suitable for public viewing will be hidden or deleted. Users posting inappropriate content will be blocked.",
+    "title": "Dowiedz się więcej o opublikowanych Refleksjach",
+    "title": "Learn more about Posted Reflections"
+  },
+  "save-post-to-qr": "Zapisz i Opublikuj w QuranReflect",
+  "save-post-to-qr": "Save & Post to QuranReflect",
+  "save-privately": "Zapisz dla siebie",
+  "save-privately": "Save Privately",
+  "save-publish-failed": "Notatka została pomyślnie zapisana, ale nie udało się jej opublikować",
+  "save-publish-failed": "Note has been saved successfully but failed to publish",
+  "save-success": "Notatka została pomyślnie zapisana",
+  "save-success": "Note has been saved successfully",
+  "share-to-qr": "Udostępnij w QuranReflect.com",
+  "share-to-qr": "Share to QuranReflect.com",
+  "share-to-qr-desc": "Udostępnij jako <b>{{name}}</b>. Zobaczą to <b>użytkownicy QuranReflect</b>",
+  "share-to-qr-desc": "Share as <b>{{name}}</b>. Audience is <b>QuranReflect users</b>",
+  "update-publish-failed": "Notatka została pomyślnie zaktualizowana, ale nie udało się jej opublikować",
+  "update-publish-failed": "Note has been updated successfully but failed to publish",
+  "update-success": "Notatka została pomyślnie zaktualizowana",
+  "update-success": "Note has been updated successfully",
+  "view-on-qr": "Zobacz w QuranReflect",
+  "view-on-qr": "View on QuranReflect"
+}

@@ -1,0 +1,40 @@
+{
+    "change": "Zmień",
+    "change": "Change",
+    "curated-station": {
+        "juz-amma": {
+            "description": "Słuchaj końcowego Dżuz Koranu",
+            "description": "Listen to the final Juz of the Quran",
+            "title": "Dżuz Amma",
+            "title": "Juz Amma"
+        },
+        "popular-recitations": {
+            "description": "Dzienna doza wybranych recytacji",
+            "description": "Daily curated feed of recitations",
+            "title": "Popularne recytacje",
+            "title": "Popular Recitations"
+        },
+        "surah-al-kahf": {
+            "description": "Słuchaj Sury Alkahf w pętli",
+            "description": "Listen to Surah Alkahf on repeat",
+            "title": "Sura Al-Kahf",
+            "title": "Surah Al-Kahf"
+        },
+        "yaseen-alwaqiah-al-mulk": {
+            "description": "Recytacja Sur przez wybranych recytatorów",
+            "description": "The Surahs from a curation of reciters",
+            "title": "Jasiin, Al-Wakiah, Al-Mulk",
+            "title": "Yaseen, Al-Waqiah, Al-Mulk"
+        }
+    },
+    "curated-stations": "Wybrane Stacje",
+    "curated-stations": "Curated Stations",
+    "pause-radio": "Pauzuj Radio",
+    "pause-radio": "Pause Radio",
+    "play-radio": "Graj Radio",
+    "play-radio": "Play Radio",
+    "radio-desc": "Słuchaj non-stop pięknej recytacji Szlachetnego Koranu w wykonaniu różnych recytatorów.",
+    "radio-desc": "Listen to non-stop beautiful recitation of the Holy Quran by various reciters.",
+    "reciter-stations": "Stacje recytatorów",
+    "reciter-stations": "Reciter Stations"
+}

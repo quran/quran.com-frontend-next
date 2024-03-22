@@ -1,0 +1,22 @@
+{
+    "default-translations": "Domyślne tłumaczenia",
+    "default-translations": "Default Translations",
+    "filter": "filtruj",
+    "filter": "filter",
+    "language-filter-label": "Wyszukaj wszystkie tłumaczenia danego języka",
+    "language-filter-label": "Search all translations of a language",
+    "language-select": "Wybierz język",
+    "language-select": "Select a language",
+    "reset": "resetuj",
+    "reset": "reset",
+    "search": "Szukaj",
+    "search": "Search",
+    "search-desc": "Przeszukaj zbiór tekstów Szlachetnego Koranu i jego tłumaczeń, korzystając z potężnej i bardzo dokładnej wielojęzycznej wyszukiwarki.",
+    "search-desc": "Search the corpus of the Holy Quran and its translations using a powerful and highly accurate multi-lingual search engine.",
+    "search-title": "Szukaj '{{searchQuery}}'",
+    "search-title": "Search for '{{searchQuery}}'",
+    "searching-translations": "Szukanie tłumaczeń",
+    "searching-translations": "Searching translations",
+    "translation-select": "Wybierz tłumaczenie",
+    "translation-select": "Select a translation"
+}

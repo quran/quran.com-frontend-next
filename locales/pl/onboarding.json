@@ -1,0 +1,162 @@
+{
+  "checklist": {
+    "1": "Funkcje na stronie głównej",
+    "1": "Homepage features",
+    "2": "Dostosuj swoje ustawienia",
+    "2": "Customize your settings",
+    "3": "Wzbogać swoje wrażenia podczas czytania Ajatów",
+    "3": "Enrich your Ayah reading experience",
+    "4": "Spersonalizowane funkcje",
+    "4": "Personalized features"
+  },
+  "finish": "Zakończ",
+  "finish": "Finish",
+  "onboarding-checklist": "Samouczek",
+  "onboarding-checklist": "Onboarding Checklist",
+  "onboarding-title": "Zwiększ swoje wrażenia z Quran.com! <br></br> Rozpocznij swoją wycieczkę już teraz:",
+  "onboarding-title": "Maximize your Quran.com experience! <br></br> Start your tour now:",
+  "previous": "Wstecz",
+  "previous": "Previous",
+  "skip": "Pomiń",
+  "skip": "Skip",
+  "steps": {
+    "3-dot-menu": {
+      "description": "Kliknij menu z trzema kropkami, aby odkryć opcje kopiowania, dodawania do zakładek i powtarzania wersetów. Odkryj różne sposoby powtarzania wersetów.",
+      "description": "Click the 3 dot menu to discover options for copying, bookmarking, and repeating verses. Discover a variety of options to repeat verses",
+      "title": "Menu z 3 kropkami",
+      "title": "3 dot menu"
+    },
+    "ayah-reflection": {
+      "description": "Czytaj refleksje (Tadabbur) od uczonych, studentów wiedzy oraz zwykłych ludzi, aby pomóc Ci nawiązać osobistą więź z Koranem.",
+      "description": "Read reflections (tadabbur) from scholars, students of knowledge, and everyday people to help you develop a more personal connection with the Quran",
+      "title": "Czytaj refleksje z poziomu Ajatu",
+      "title": "Read reflections at the ayah level"
+    },
+    "ayah-tafsir": {
+      "description": "Eksploruj Tafsir z poziomu Ajatu, aby zobaczyć dogłębne spostrzeżenia, które pomogą Ci lepiej zrozumieć Koran podczas czytania. (Tafsir może czasem odnosić się do kilku wersetów jednocześnie)",
+      "description": "Explore the Tafsir at the ayah level, offering detailed insights to enhance your understanding as you read. (Tafsir may be grouped for multiple verses when appropriate)",
+      "title": "Czytaj Tafsir z poziomu Ajatu",
+      "title": "Read Tafsir at the Ayah level"
+    },
+    "font-size": {
+      "description": "Dostosuj rozmiar czcionki Koranu w łatwy sposób dla wygodnego czytania.",
+      "description": "Customize your Quran reading with easy-to-adjust font sizes for a comfortable reading experience",
+      "title": "Rozmiar czcionki",
+      "title": "Font Size"
+    },
+    "font-style": {
+      "description": "Masz do wyboru style: Usmański - King Fahad Complex wersja 1, Usmański - King Fahad Complex wersja 2, Usmański QPC Hafs, Indopak 15 linii, Indopak 16 linii",
+      "description": "Options include Uthmani - King Fahad Complex v1, Uthmani - King Fahad Complex v2, Uthmani QPC Hafs, Indopak 15 lines, Indopak 16 lines",
+      "title": "Wybierz preferowany styl pisma",
+      "title": "Choose your preferred reading script"
+    },
+    "inline-wbw": {
+      "description": "Przeglądaj tłumaczenie każdego słowa w linii (pod słowem) lub w dymku nad słowem podczas słuchania Koranu",
+      "description": "View the translation of every word in line (underneath the word) or in a bubble above the word while listening to the Quran",
+      "title": "Wyświetl tłumaczenie słowo po słowie w linii (pod słowem) lub wyświetl dymek z podpowiedzią",
+      "title": "Display word-by-word translation in-line (underneath the word) or display tooltip"
+    },
+    "juz": {
+      "description": "Przeglądaj Koran według Dżuz",
+      "description": "View Quran by Juz",
+      "title": "Przeglądaj Koran według Dżuz",
+      "title": "View Quran by Juz"
+    },
+    "listen": {
+      "description": "Uruchom odtwarzacz audio, aby posłuchać recytacji",
+      "description": "Start the audio player to listen to the recitation",
+      "title": "Słuchaj Sury albo Ajatu",
+      "title": "Listen to the Surah or Ayah"
+    },
+    "login": {
+      "description": "Zaloguj się, zapisz i synchronizuj ustawienia na wszystkich urządzeniach oraz uzyskaj dostęp do dodatkowych funkcji.",
+      "description": "Log in and save settings across devices and gain access to additional features.",
+      "title": "Zaloguj się",
+      "title": "Log in"
+    },
+    "quran-radio": {
+      "description": "Słuchaj QuranRadio - transmituj Koran bez reklam",
+      "description": "Listen to QuranRadio - stream Quran without ads",
+      "title": "Radio Koran",
+      "title": "Quran Radio"
+    },
+    "reading-sessions": {
+      "description": "W łatwy sposób śledź swoją podróż z Koranem, przeglądając spersonalizowaną historię czytania i wersety, które odkryłeś na Quran.com.",
+      "description": "Easily review your Quranic journey with a glance at your personalized reading history, keeping track of the verses you've explored on Quran.com.",
+      "title": "Zobacz historię czytania",
+      "title": "View reading history"
+    },
+    "reading-view": {
+      "description": "Przeglądaj Koran w trybie czytania Mushafu",
+      "description": "View Quran in reading mushaf mode",
+      "title": "Tryb czytania",
+      "title": "Reading mode"
+    },
+    "search-bar": {
+      "description": "Znajdź wersety, Sury, słowa kluczowe, Dżuz oraz tematy, których szukasz, korzystając z naszego paska wyszukiwania",
+      "description": "Find the verses, surahs, keywords, juz and topics you are looking for by utilizing our search bar",
+      "title": "Pasek Wyszukiwania",
+      "title": "Search Bar"
+    },
+    "select-reciter": {
+      "description": "Wybierając ulubionych recytatorów możesz dostosować swoje wrażenia słuchania!",
+      "description": "Personalize your listening experience by selecting a reciter you enjoy listening to most!",
+      "title": "Wybierz spośród różnych recytatorów, aby posłuchać",
+      "title": "Select from a variety of reciters to listen to"
+    },
+    "settings": {
+      "description": "Zarządzaj swoimi preferencjami",
+      "description": "Control your preferences",
+      "title": "Ustawienia",
+      "title": "Settings"
+    },
+    "streak": {
+      "description": "Ustaw swoje cele czytania, śledź swój postęp i rozwijaj stałe nawyki czytania Koranu dzięki naszej funkcji Serii Czytania i Planów.",
+      "description": "Set personalized reading goals, track your progress, and build a consistent Quranic reading habit with our Reading Streaks and Plans feature.",
+      "title": "Śledź swoje serie i plany czytania",
+      "title": "Keep track of reading streaks & reading plans"
+    },
+    "surah-info": {
+      "description": "Dowiedz się więcej o Surze którą czytasz - wygodnie umieszczone na początku każdej sury",
+      "description": "Get insights about each Surah - conveniently located at the beginning of every Surah",
+      "title": "Czytaj o Surze",
+      "title": "Read About the Surah"
+    },
+    "theme": {
+      "description": "Wybierz swój ulubiony motyw - tryb Jasny, Sepia lub Ciemny - dla wygodnego i spersonalizowanego doświadczenia czytania Koranu.",
+      "description": "Pick your favorite look—Light, Sepia, or Dark mode—for a comfortable and personalized Quran reading experience.",
+      "title": "Czytaj Koran w trybie Jasnym, Sepii lub Ciemnym",
+      "title": "Read Quran in Light, Sepia, or Dark Mode"
+    },
+    "translations": {
+      "description": "Wybierz spośród różnorodnych tłumaczeń w wielu językach. Wskazówka: Porównaj tłumaczenia, wybierając kilka opcji.",
+      "description": "Choose from a variety of translations in multiple languages. Tip: Compare translations by selecting multiple options",
+      "title": "Tłumaczenia",
+      "title": "Translations"
+    },
+    "voice-search": {
+      "description": "Kliknij ikonę mikrofonu i wyrecytuj werset, którego szukasz. Szybka wskazówka! Aby dowiedzieć się, w którym miejscu Koranu ktoś recytuje (np. podczas modlitwy Tarałih), kliknij ikonę mikrofonu. Po wykryciu jednego lub dwóch wersetów naciśnij przycisk stop, aby znaleźć ich lokalizację.",
+      "description": "Tap the mic icon and recite the verse you are searching for. Quick Tip! To discover where someone is reciting (Eg. Taraweeh prayers), tap the mic icon. After one or two verses are detected, press stop to find the location",
+      "title": "Wyszukiwanie głosowe (Tarteel)",
+      "title": "Voice Search (Tarteel)"
+    },
+    "wbw-audio": {
+      "description": "Wybierz tę opcję, aby posłuchać każdego słowa osobno, zwyczajnie klikając na to słowo!",
+      "description": "Select this option to listen to every word individually by simply clicking on the word!",
+      "title": "Słuchaj transliteracji słowo po słowie, klikając na wybrane słowo",
+      "title": "Listen to the word-by-word transliteration by clicking on word"
+    },
+    "wbw-translation": {
+      "description": "Zobacz znaczenie poszczególnych słów podczas czytania lub słuchania Koranu, aby wzbogacić swoje słownictwo Koraniczne",
+      "description": "View the meaning of individual words while you read or listen to the Quran to help you enhance your Quranic vocabulary",
+      "title": "Czytaj tłumaczenie słowo po słowie",
+      "title": "Read word-by-word translation"
+    },
+    "wbw-transliteration": {
+      "description": "Zobacz transliterację każdego słowa, dla pomocy w podróży czytania Koranu",
+      "description": "View the transliteration of every word to help you on your Quran reading journey",
+      "title": "Czytaj transliterację słowo po słowie",
+      "title": "Read word-by-word transliteration"
+    }
+  }
+}

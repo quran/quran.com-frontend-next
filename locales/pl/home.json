@@ -1,0 +1,66 @@
+{
+  "no-bookmarks": "Nie masz jeszcze żadnych zakładek",
+  "no-bookmarks": "You do not have any bookmarks yet",
+  "noble-quran": "Szlachetny Koran",
+  "noble-quran": "The Noble Quran",
+  "qgj": {
+    "desc": {
+      "logged-in-no-goal": "<bold>Serie Czytania</bold> — Podejmij wyzwanie, aby utrzymać serię 30 dni w ten Ramadan!",
+      "logged-in-no-goal": "<bold>Reading Streaks</bold> - Challenge yourself to keep a 30 day streak this Ramadan!",
+      "logged-out": "<bold>Serie Czytania</bold> — Podejmij wyzwanie, aby utrzymać serię 30 dni w ten Ramadan! Po prostu <link>zaloguj się</link>",
+      "logged-out": "<bold>Reading Streaks</bold> - Challenge yourself to keep a 30 day streak this Ramadan! Simply <link>log in</link>"
+    },
+    "learning-plans": {
+      "cta": {
+        "all-plans": "Wszystkie Plany",
+        "all-plans": "All Plans",
+        "my-plans": "Moje Plany",
+        "my-plans": "My Plans"
+      },
+      "desc": {
+        "logged-in": "Czy zdarzyło Ci się kiedyś rozpocząć program nauczania i w połowie odpuścić? Nasze plany nauczania podzielone są na wygodne do zarządzania fragmenty i będziemy śledzić Twoje postępy, aż dotrzesz do mety. Już dziś zapoznaj się z naszą aktualną ofertą kursów",
+        "logged-in": "Ever started a learning program and got off track halfway through? Learning plans are divided into manageable chunks and we track your progress until you reach the finish line. Explore our current offering of courses today",
+        "logged-in-no-plans": "Czy zdarzyło Ci się kiedyś rozpocząć program nauczania i w połowie odpuścić? Nasze plany nauczania podzielone są na wygodne do zarządzania fragmenty i będziemy śledzić Twoje postępy, aż dotrzesz do mety. Już dziś zapoznaj się z naszą aktualną ofertą kursów",
+        "logged-in-no-plans": "Ever started a learning program and got off track halfway through? Learning plans are divided into manageable chunks and we track your progress until you reach the finish line. Explore our current offering of courses today",
+        "logged-out": "Czy zdarzyło Ci się kiedyś rozpocząć program nauczania i w połowie odpuścić? Nasze plany nauczania podzielone są na wygodne do zarządzania fragmenty i będziemy śledzić Twoje postępy, aż dotrzesz do mety. Już dziś zapoznaj się z naszą aktualną ofertą kursów",
+        "logged-out": "Ever started a learning program and got off track halfway through? Learning plans are divided into manageable chunks and we track your progress until you reach the finish line. Explore our current offering of courses today"
+      },
+      "title": "Plany Nauczania",
+      "title": "Learning Plans"
+    },
+    "quran-reading-goals": {
+      "desc": {
+        "logged-out": "Chcesz czytać 10 minut dziennie, ukończyć Dżuz w miesiąc lub ukończyć cały Koran w rok? Po prostu stwórz swój osobisty cel i śledź swoje postępy",
+        "logged-out": "Do you want to read 10 minutes a day, complete a Juz in a month, or finish the entire Quran in a year? It’s easy to create a custom goal and track your progress"
+      },
+      "title": "Osobiste Cele Czytania Koranu",
+      "title": "Custom Quran Reading Goals"
+    },
+    "title": "Droga Rozwoju z Koranem",
+    "title": "Quran Growth Journey"
+  },
+  "ramadan-activities-cta": "Poznaj wartościowe <link>Aktywności Ramadanowe</link> z tego roku już dziś!",
+  "ramadan-activities-cta": "Explore this year's enriching <link>Ramadan activities</link> today!",
+  "read-juz": "Czytaj Dżuz",
+  "read-juz": "Read Juz",
+  "recently-read": "Ostatnio czytane",
+  "recently-read": "Recently Read",
+  "revelation-order-disclaimer": "Ten widok pokazuje Sury z Koranu w kolejności chronologicznej, zgodnie z datą ich objawienia Prorokowi Muhammadowi <hover>ﷺ</hover>. Chronologiczny porządek Sur jest przedmiotem różnicy opinii uczonych, a niektóre Sury zostały objawione w częściach i w różnym czasie. Kolejność chronologiczna przedstawiona tutaj jest oparta o pracę <link>Tanzil.net</link>. [Pamiętaj: kolejność Sur w Mushafie czyli od al-Fatiha do al-Nas, jest kwestią konsensusu uczonych.]",
+  "revelation-order-disclaimer": "This view shows the chronological order of Surahs in the Quran based on when they were revealed to the Prophet Muhammad <hover>ﷺ</hover>. The chronology is a subject of scholarly opinion and some Surahs were revealed in parts at different times. The ordering here is based on the work of <link>Tanzil.net</link>. [Note: the compiled Mushaf order from al-Fatiha to al-Nas is a matter of consensus.]",
+  "tab": {
+    "bookmarks": "Zakładki",
+    "bookmarks": "Bookmarks",
+    "popular": "Popularne",
+    "popular": "Popular"
+  },
+  "view-all-bookmarks": "Zobacz wszystkie zakładki",
+  "view-all-bookmarks": "View all bookmarks",
+  "voice": {
+    "trigger": "Szybki dostęp do czegokolwiek",
+    "trigger": "Quick access to anything"
+  },
+  "welcome": {
+    "title": "To jest miesiąc Koranu! Pomóż milionom użytkowników uzyskać dostęp do lekcji życia zawartych w Koranie.",
+    "title": "It's the Month of the Quran! Help millions of users get access to the guidance of the Quran."
+  }
+}
