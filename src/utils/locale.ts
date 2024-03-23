@@ -113,6 +113,10 @@ export const Languages = {
     locale: 'ku',
     dir: Direction.RTL,
   },
+  131: {
+    // Polish
+    locale: 'pl',
+  },
   133: {
     // Portuguese
     locale: 'pt',
