@@ -54,7 +54,7 @@
     "displaying": "Wyświetlanie",
     "exp-tip": "<span>Zmień treść wyświetlaną w sekcji</span><br></br> <boldSpan>Ustawienia</boldSpan> > <boldSpan>Słowo po słowie</boldSpan>",
     "exp-tip-no-select": "<span>Zaznacz opcję wyświetlania podpowiedzi i wybierz opcję <br></br> Tłumaczenie i/lub Transliteracja</span><br></br><span> w sekcji </span><boldSpan>Ustawienia</boldSpan> > <boldSpan>Słowo po słowie</boldSpan><span>, aby</span><br></br> <span>włączyć tę funkcję.</span>",
-    "experience": "Doświadcz",
+    "experience": "Wyświetlanie",
     "play": "Odtwórz Audio",
     "playback-normal": "Normalna",
     "playback-speed": "Prędkość Odtwarzania",
@@ -81,7 +81,7 @@
       "start-over": "Od Nowa",
       "start-playing": "Zacznij Odtwarzanie",
       "stop-repeating": "Przestań Powtarzać",
-      "times": "razy",
+      "times": "raz(y)",
       "verses-range": "Zakres Wersetów"
     },
     "repeat-moved": "Ustawienia powtarzania zostały przeniesione do odtwarzacza audio. Aby do nich przejść, kliknij ikonę <0></0>",
@@ -167,7 +167,7 @@
     "text_uthmani": "Usmańska"
   },
   "footer": {
-    "description": "Quran.com to Nieustająca Jałmużna. Mamy nadzieję, że ułatwimy każdemu czytanie, studiowanie i naukę Szlachetnego Koranu.  Szlachetny Koran ma wiele nazw, w tym Al-Kur-an Ul-Karim, Al-Kitab, Al-Furkan, Al-Małiza, Az-Zikr i An-Nur.",
+    "description": "Quran.com to Nieustająca Jałmużna. Mamy nadzieję, że ułatwimy każdemu czytanie, studiowanie i naukę Szlachetnego Koranu.  Szlachetny Koran ma wiele nazw, w tym Al-Kur-an Ul-Karim, Al-Kitab, Al-Furkan, Al-Mał-iza, Az-Zikr i An-Nur.",
     "hiring": "Zatrudniamy! Dołącz do zespołu QuranFoundation i dołóż swoją cegiełkę do budowy naszej misji. <link>Aplikuj teraz!</link>",
     "rights": "Wszelkie Prawa Zastrzeżone",
     "title": "Czytaj, studiuj i ucz się Szlachetnego Koranu."
@@ -180,7 +180,7 @@
     "lastName": "Nazwisko",
     "title": "Pan/Pani"
   },
-  "from": "Z",
+  "from": "Od",
   "fundraising-sticky-banner": {
     "cta": "Przekaż datek",
     "title": "Wesprzyj Quran.com w ten Ramadan"
@@ -215,7 +215,7 @@
   "more": "Więcej",
   "my-learning-plans": "Moje Plany Nauczania",
   "navigate": "Nawiguj",
-  "network": "Sieć",
+  "network": "Powiązane Aplikacje",
   "new": "Nowość!",
   "newest": "Najnowsze",
   "next": "Następne",
@@ -254,7 +254,7 @@
   "prev": "Poprzedni",
   "previous-ayah": "Poprzedni Ajat",
   "privacy": "Prywatność",
-  "product-updates": "Aktualizacje Produktu",
+  "product-updates": "Nowości",
   "profile": "Profil",
   "q-reflect": "QuranReflect",
   "quran-com": "Quran.com",
@@ -300,7 +300,7 @@
     "reset-notif": "Twoje ustawienia zostały przywrócone do domyślnych",
     "search-reciter": "Szukaj Recytatora",
     "search-tafsirs": "Szukaj Tafsirów",
-    "search-translations": "Sukaj Tłumaczeń",
+    "search-translations": "Szukaj Tłumaczeń",
     "selected-reciter": "Wybrany Recytator",
     "selected-tafsirs": "Wybrane Tafsiry",
     "selected-translations": "Wybrane Tłumaczenia",
