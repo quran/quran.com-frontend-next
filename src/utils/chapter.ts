@@ -34,7 +34,7 @@ export const getAllChaptersData = (
 ): Promise<Record<string, Chapter>> => {
   if (SUPPORTED_CHAPTER_LOCALES.includes(lang)) {
     return new Promise((res) => {
-      import(`@/data/chapters/${lang}.json`).then((data) => {
+      import(`@/data/chapters/en.json`).then((data) => {
         res(data.default);
       });
     });

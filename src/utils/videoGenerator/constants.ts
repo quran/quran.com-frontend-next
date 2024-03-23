@@ -7,6 +7,12 @@ export const VIDEO_PORTRAIT_WIDTH = 720;
 export const VIDEO_LANDSCAPE_WIDTH = 1280;
 export const VIDEO_FPS = 30;
 
+export const COMPOSITION_NAME = 'VideoContent';
+
+export const DEFAULT_PROPS = {
+  
+}
+
 export const DEFAULT_API_PARAMS = {
   wordFields: 'verse_key,verse_id,page_number,location,text_uthmani,code_v1,qpc_uthmani_hafs',
   translations: [DEFAULT_TRANSLATION],

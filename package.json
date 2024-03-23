@@ -79,6 +79,7 @@
     "next-translate": "^1.6.0",
     "next-transpile-modules": "9.0.0",
     "node-fetch": "2",
+    "querystring": "^0.2.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-hook-form": "^7.36.1",

@@ -80,7 +80,6 @@ export const VideoContent = ({
                   color: fontColor,
                 }}
               >
-                {/* <Ayah data={d} /> */}
                 <div
                   style={{ marginBottom: '1rem' }}
                   className={
