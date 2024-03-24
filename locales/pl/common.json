@@ -227,6 +227,7 @@
   "notes": {
     "title": "Moje Notatki i Refleksje"
   },
+  "notification-settings": "Ustawienia Powiadomień",
   "notification": {
     "mark-all-as-read": "Oznacz wszystko jako przeczytane",
     "mark-as-read": "Oznacz jako przeczytane"
@@ -269,6 +270,7 @@
   "reciter-summary": "Recytator pojedynczych słów: <span>{{reciterName}}</span>. Kliknij na słowo, aby posłuchać jego recytacji.",
   "reciters": "Recytatorzy",
   "reflect": "Rozmyślaj",
+  "reflections": "Refleksje",
   "remove": "Usuń",
   "rename": "Zmień nazwę",
   "retry": "Spróbuj ponownie",
