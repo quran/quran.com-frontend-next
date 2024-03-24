@@ -1,9 +1,9 @@
 /* eslint-disable max-lines */
 import { useContext, createContext, useMemo } from 'react';
 
-import useFetchNotifications from './useFetchNotifications';
-import { HeadlessServiceProvider } from './useHeadlessService';
-import useInitializeUnseenCount from './useInitializeUnseenCount';
+import useFetchNotifications from '@/components/Notifications/hooks/useFetchNotifications';
+import { HeadlessServiceProvider } from '@/components/Notifications/hooks/useHeadlessService';
+import useInitializeUnseenCount from '@/components/Notifications/hooks/useInitializeUnseenCount';
 
 type NotificationContextType = {
   fetchNotifications: ReturnType<typeof useFetchNotifications>;

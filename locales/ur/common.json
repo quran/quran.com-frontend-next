@@ -227,6 +227,7 @@
   "notes": {
     "title": "میرے نوٹس اور عکاسی۔"
   },
+  "notification-settings": "اطلاع کی ترتیبات",
   "notification": {
     "mark-all-as-read": "سب کو پڑھا ہوا شمار کریں",
     "mark-as-read": "پڑھا ہوا نشان زد کریں۔"
@@ -269,6 +270,7 @@
   "reciter-summary": "لفظ بہ لفظ تلاوت کرنے والا: <span> {{reciterName}} </span> ۔ کسی لفظ کی تلاوت سننے کے لیے اس پر کلک کریں۔",
   "reciters": "تلاوت کرنے والے",
   "reflect": "عکاسی کرنا",
+  "reflections": "مظاہر",
   "remove": "دور",
   "rename": "نام تبدیل کریں۔",
   "retry": "دوبارہ کوشش کریں۔",

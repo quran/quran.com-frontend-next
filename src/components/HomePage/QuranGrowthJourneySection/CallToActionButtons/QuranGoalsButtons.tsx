@@ -8,8 +8,9 @@ import GoalButtons from '@/components/HomePage/QuranGrowthJourneySection/Collaps
 import Button, { ButtonSize, ButtonType } from '@/dls/Button/Button';
 import useGetRecentlyReadVerseKeys from '@/hooks/auth/useGetRecentlyReadVerseKeys';
 import useGetStreakWithMetadata from '@/hooks/auth/useGetStreakWithMetadata';
+import { isLoggedIn } from '@/utils/auth/login';
 import { logButtonClick } from '@/utils/eventLogger';
-import { getReadingGoalNavigationUrl } from '@/utils/navigation';
+import { getLoginNavigationUrl, getReadingGoalNavigationUrl } from '@/utils/navigation';
 
 const QuranGoalsButtons = () => {
   const { t } = useTranslation('reading-goal');
@@ -32,13 +33,15 @@ const QuranGoalsButtons = () => {
     );
   }
 
+  const url = getReadingGoalNavigationUrl();
+
   return (
     <div className={styles.buttonsContainer}>
       <Button
         onClick={onCreateReadingGoalClick}
         size={ButtonSize.Small}
         type={ButtonType.Success}
-        href={getReadingGoalNavigationUrl()}
+        href={isLoggedIn() ? url : getLoginNavigationUrl(url)}
       >
         {t('create-reading-goal')}
       </Button>

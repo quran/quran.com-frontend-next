@@ -10,6 +10,7 @@
   "feature-3": "Create collections",
   "feature-4": "Sync your data across browsers",
   "feature-5": "And more!",
+  "feature-6": "<b>New!</b> Notes & Reflections",
   "login-cta": "Log-in or Sign up now:",
   "login-error": {
     "AuthenticationError": "Authentication failed. Please try again later",

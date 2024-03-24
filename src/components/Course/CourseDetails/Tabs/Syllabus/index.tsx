@@ -36,6 +36,7 @@ const Syllabus: React.FC<Props> = ({ course }) => {
       {lessons.map((lesson, index) => {
         const dayNumber = index + 1;
         const { title, isCompleted, id, slug } = lesson;
+        const url = getLessonNavigationUrl(courseSlug, slug);
 
         return (
           <p className={styles.container} key={index}>
@@ -47,11 +48,7 @@ const Syllabus: React.FC<Props> = ({ course }) => {
               {`: `}
               <Link
                 onClick={() => onDayClick(dayNumber, id)}
-                href={
-                  isUserLoggedIn
-                    ? getLessonNavigationUrl(courseSlug, slug)
-                    : getLoginNavigationUrl()
-                }
+                href={isUserLoggedIn ? url : getLoginNavigationUrl(url)}
                 variant={LinkVariant.Highlight}
               >
                 {title}

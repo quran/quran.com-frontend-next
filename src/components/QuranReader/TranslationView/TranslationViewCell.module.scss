@@ -96,7 +96,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  & > svg {
+  svg {
     width: calc(1.1 * var(--spacing-medium));
     height: calc(1.1 * var(--spacing-medium));
   }

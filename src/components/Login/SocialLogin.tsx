@@ -11,7 +11,11 @@ import { makeGoogleLoginUrl, makeFacebookLoginUrl, makeAppleLoginUrl } from '@/u
 import { logButtonClick } from '@/utils/eventLogger';
 import AuthType from 'types/auth/AuthType';
 
-const SocialLogin = () => {
+type Props = {
+  redirect?: string;
+};
+
+const SocialLogin: React.FC<Props> = ({ redirect }) => {
   const { t } = useTranslation('login');
   const logSocialLoginClick = (type: AuthType) => {
     // eslint-disable-next-line i18next/no-literal-string
@@ -23,7 +27,7 @@ const SocialLogin = () => {
         <Button
           prefix={<GoogleIcon />}
           className={classNames(styles.loginButton, styles.googleButton)}
-          href={makeGoogleLoginUrl()}
+          href={makeGoogleLoginUrl(redirect)}
           shouldFlipOnRTL={false}
           onClick={() => {
             logSocialLoginClick(AuthType.Google);
@@ -36,7 +40,7 @@ const SocialLogin = () => {
         <Button
           prefix={<FacebookIcon />}
           className={classNames(styles.loginButton, styles.facebookButton)}
-          href={makeFacebookLoginUrl()}
+          href={makeFacebookLoginUrl(redirect)}
           shouldFlipOnRTL={false}
           onClick={() => {
             logSocialLoginClick(AuthType.Facebook);
@@ -47,7 +51,7 @@ const SocialLogin = () => {
       )}
       {process.env.NEXT_PUBLIC_ENABLE_APPLE_LOGIN === 'true' && (
         <Button
-          href={makeAppleLoginUrl()}
+          href={makeAppleLoginUrl(redirect)}
           prefix={<AppleIcon />}
           className={styles.loginButton}
           shouldFlipOnRTL={false}

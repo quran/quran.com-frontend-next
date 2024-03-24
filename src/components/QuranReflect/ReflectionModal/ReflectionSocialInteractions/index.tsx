@@ -17,7 +17,7 @@ type Props = {
 };
 
 const ReflectionSocialInteractions: React.FC<Props> = ({ reflection }) => {
-  const { lang } = useTranslation();
+  const { lang, t } = useTranslation('notes');
 
   const onLikesCountClicked = (e) => {
     e.stopPropagation();
@@ -33,31 +33,48 @@ const ReflectionSocialInteractions: React.FC<Props> = ({ reflection }) => {
     });
   };
 
+  const onViewOnQrClicked = (e) => {
+    e.stopPropagation();
+    logButtonClick('posted_ref_view_on_qr', {
+      postId: reflection.id,
+    });
+  };
+
   return (
-    <div className={styles.socialInteractionContainer}>
+    <div className={styles.container}>
+      <div className={styles.socialInteractionContainer}>
+        <Button
+          className={styles.actionItemContainer}
+          variant={ButtonVariant.Compact}
+          href={getQuranReflectPostUrl(reflection.id)}
+          isNewTab
+          prefix={<LoveIcon />}
+          size={ButtonSize.Small}
+          onClick={onLikesCountClicked}
+          shouldFlipOnRTL={false}
+        >
+          {toLocalizedNumber(reflection.likes, lang)}
+        </Button>
+        <Button
+          className={styles.actionItemContainer}
+          variant={ButtonVariant.Compact}
+          prefix={<ChatIcon />}
+          href={getQuranReflectPostUrl(reflection.id, true)}
+          isNewTab
+          size={ButtonSize.Small}
+          onClick={onCommentsCountClicked}
+          shouldFlipOnRTL={false}
+        >
+          {toLocalizedNumber(reflection.commentsCount, lang)}
+        </Button>
+      </div>
       <Button
-        className={styles.actionItemContainer}
-        variant={ButtonVariant.Compact}
+        size={ButtonSize.Small}
         href={getQuranReflectPostUrl(reflection.id)}
         isNewTab
-        prefix={<LoveIcon />}
-        size={ButtonSize.Small}
-        onClick={onLikesCountClicked}
-        shouldFlipOnRTL={false}
+        onClick={onViewOnQrClicked}
       >
-        {toLocalizedNumber(reflection.likes, lang)}
-      </Button>
-      <Button
-        className={styles.actionItemContainer}
-        variant={ButtonVariant.Compact}
-        prefix={<ChatIcon />}
-        href={getQuranReflectPostUrl(reflection.id, true)}
-        isNewTab
-        size={ButtonSize.Small}
-        onClick={onCommentsCountClicked}
-        shouldFlipOnRTL={false}
-      >
-        {toLocalizedNumber(reflection.commentsCount, lang)}
+        {t('notes:view-on-qr')}
       </Button>
     </div>
   );

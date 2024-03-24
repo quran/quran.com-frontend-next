@@ -17,7 +17,11 @@ import { enrollUser } from '@/utils/auth/api';
 import { makeGetCourseUrl } from '@/utils/auth/apiPaths';
 import { isLoggedIn } from '@/utils/auth/login';
 import { logButtonClick } from '@/utils/eventLogger';
-import { getLessonNavigationUrl, getLoginNavigationUrl } from '@/utils/navigation';
+import {
+  getCourseNavigationUrl,
+  getLessonNavigationUrl,
+  getLoginNavigationUrl,
+} from '@/utils/navigation';
 
 type Props = {
   course: Course;
@@ -67,7 +71,7 @@ const StatusHeader: React.FC<Props> = ({ course, isCTA = false }) => {
         });
     } else {
       logButtonClick('guest_enroll_course', { courseId: id, isCTA });
-      router.replace(getLoginNavigationUrl());
+      router.replace(getLoginNavigationUrl(getCourseNavigationUrl(slug)));
     }
   };
 

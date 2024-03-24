@@ -227,6 +227,7 @@
   "notes": {
     "title": "Мои заметки и размышления"
   },
+  "notification-settings": "Настройки уведомлений",
   "notification": {
     "mark-all-as-read": "отметить все как прочитанное",
     "mark-as-read": "пометить, как прочитанное"
@@ -269,6 +270,7 @@
   "reciter-summary": "Пословный чтец: <span> {{reciterName}} </span> . Нажмите на слово, чтобы прослушать его чтение.",
   "reciters": "Чтецы",
   "reflect": "Отражать",
+  "reflections": "Размышления",
   "remove": "Удалять",
   "rename": "Переименовать",
   "retry": "Повторить",
