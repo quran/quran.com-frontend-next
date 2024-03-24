@@ -49,7 +49,7 @@ export const RemotionRoot = () => {
                     id={COMPOSITION_NAME}
                     // @ts-ignore
                     component={VideoContent}
-                    durationInFrames={150}
+                    durationInFrames={30 * 30}
                     fps={VIDEO_FPS}
                     width={VIDEO_LANDSCAPE_WIDTH}
                     height={VIDEO_LANDSCAPE_HEIGHT}

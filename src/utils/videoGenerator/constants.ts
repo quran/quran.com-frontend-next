@@ -1,3 +1,6 @@
+import defaultAudio from './defaultAudio.json';
+import defaultVerses from './defaultVerses.json';
+
 export const DEFAULT_SURAH = 112;
 export const DEFAULT_RECITER_ID = 7;
 export const DEFAULT_TRANSLATION = 131;
@@ -7,11 +10,32 @@ export const VIDEO_PORTRAIT_WIDTH = 720;
 export const VIDEO_LANDSCAPE_WIDTH = 1280;
 export const VIDEO_FPS = 30;
 
+export const OPACITY = '0.2';
+export const DEFAULT_BACKGROUND = {
+  id: 1,
+  background: `linear-gradient(0deg, rgba(229,227,255,${OPACITY}) 0%, rgba(230,246,235,${OPACITY}) 50%, rgba(215,249,255,${OPACITY}) 100%)`,
+};
+export const DEFAULT_FONT_COLOR = '#dddddd';
 export const COMPOSITION_NAME = 'VideoContent';
 
-export const DEFAULT_PROPS = {
-  
-}
+const DEFAULT_TIMESTAMPS = [
+  {
+    start: 0,
+    durationInFrames: 90,
+  },
+  {
+    start: 90,
+    durationInFrames: 76,
+  },
+  {
+    start: 166,
+    durationInFrames: 90,
+  },
+  {
+    start: 255,
+    durationInFrames: 146,
+  },
+];
 
 export const DEFAULT_API_PARAMS = {
   wordFields: 'verse_key,verse_id,page_number,location,text_uthmani,code_v1,qpc_uthmani_hafs',
@@ -61,4 +85,18 @@ export const VIDEOS = {
     videoSrc: 'https://images.quran.com/videos/snow.mp4',
     watermarkColor: 'dark',
   },
+};
+
+export const DEFAULT_PROPS = {
+  video: { ...VIDEOS['1'], id: 1 },
+  verses: defaultVerses,
+  audio: defaultAudio,
+  timestamps: DEFAULT_TIMESTAMPS,
+  sceneBackground: DEFAULT_BACKGROUND.background,
+  verseBackground: DEFAULT_BACKGROUND.background,
+  fontColor: DEFAULT_FONT_COLOR,
+  stls: DEFAULT_STYLES,
+  verseAlignment: 'centre',
+  translationAlignment: 'centre',
+  border: 'false',
 };

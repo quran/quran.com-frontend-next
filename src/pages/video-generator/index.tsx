@@ -13,7 +13,6 @@ import { getAvailableReciters, getChapterAudioData, getChapterVerses } from '@/a
 import styles from '@/components/VideoGenerator/video.module.scss';
 import VideoSettings from '@/components/VideoGenerator/VideoSettings';
 import {
-  getAllBackgrounds,
   getNormalizedTimestamps,
   getStyles,
   getTrimmedAudio,
@@ -30,6 +29,9 @@ import {
   VIDEO_LANDSCAPE_WIDTH,
   VIDEO_PORTRAIT_HEIGHT,
   VIDEO_PORTRAIT_WIDTH,
+  OPACITY,
+  DEFAULT_BACKGROUND,
+  DEFAULT_FONT_COLOR,
 } from '@/utils/videoGenerator/constants';
 import { VersesResponse } from 'types/ApiResponses';
 import ChaptersData from 'types/ChaptersData';
@@ -45,9 +47,6 @@ interface VideoGenerator {
   chaptersData: ChaptersData;
 }
 
-const defaultOpacity = '0.2';
-const defaultBackground = getAllBackgrounds(defaultOpacity)[0];
-
 const VideoGenerator: NextPage<VideoGenerator> = ({
   hasError,
   chaptersData,
@@ -58,10 +57,10 @@ const VideoGenerator: NextPage<VideoGenerator> = ({
 }) => {
   const { t, lang } = useTranslation('common');
 
-  const [opacity, setOpacity] = useState(defaultOpacity);
-  const [sceneBackgroundColor, setSceneBackgroundColor] = useState(defaultBackground);
-  const [verseBackgroundColor, setVerseBackgroundColor] = useState(defaultBackground);
-  const [fontColor, setFontColor] = useState('#dddddd');
+  const [opacity, setOpacity] = useState(OPACITY);
+  const [sceneBackgroundColor, setSceneBackgroundColor] = useState(DEFAULT_BACKGROUND);
+  const [verseBackgroundColor, setVerseBackgroundColor] = useState(DEFAULT_BACKGROUND);
+  const [fontColor, setFontColor] = useState(DEFAULT_FONT_COLOR);
   const [reciter, setReciter] = useState(7);
   const [chapter, setChapter] = useState(112);
   const [verseData, setverseData] = useState(verses?.verses);

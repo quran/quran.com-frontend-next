@@ -1,0 +1,593 @@
+[
+    {
+        "id": 6222,
+        "verseNumber": 1,
+        "verseKey": "112:1",
+        "hizbNumber": 60,
+        "rubElHizbNumber": 240,
+        "rukuNumber": 556,
+        "manzilNumber": 7,
+        "sajdahNumber": null,
+        "textUthmani": " قُلْ هُوَ ٱللَّهُ أَحَدٌ",
+        "chapterId": 112,
+        "textImlaeiSimple": "قل هو الله احد",
+        "pageNumber": 604,
+        "juzNumber": 30,
+        "words": [
+            {
+                "id": 6,
+                "position": 1,
+                "audioUrl": "wbw/112_001_001.mp3",
+                "verseKey": "112:1",
+                "verseId": 6222,
+                "location": "112:1:1",
+                "textUthmani": "قُلْ",
+                "codeV1": "ﭑ",
+                "qpcUthmaniHafs": "قُلۡ",
+                "charTypeName": "word",
+                "pageNumber": 604,
+                "lineNumber": 3,
+                "text": "قُلْ",
+                "translation": {
+                    "text": "Say",
+                    "languageName": "english",
+                    "languageId": 38
+                },
+                "transliteration": {
+                    "text": "qul",
+                    "languageName": "english",
+                    "languageId": 38
+                }
+            },
+            {
+                "id": 7,
+                "position": 2,
+                "audioUrl": "wbw/112_001_002.mp3",
+                "verseKey": "112:1",
+                "verseId": 6222,
+                "location": "112:1:2",
+                "textUthmani": "هُوَ",
+                "codeV1": "ﭒ",
+                "qpcUthmaniHafs": "هُوَ",
+                "charTypeName": "word",
+                "pageNumber": 604,
+                "lineNumber": 3,
+                "text": "هُوَ",
+                "translation": {
+                    "text": "He",
+                    "languageName": "english",
+                    "languageId": 38
+                },
+                "transliteration": {
+                    "text": "huwa",
+                    "languageName": "english",
+                    "languageId": 38
+                }
+            },
+            {
+                "id": 8,
+                "position": 3,
+                "audioUrl": "wbw/112_001_003.mp3",
+                "verseKey": "112:1",
+                "verseId": 6222,
+                "location": "112:1:3",
+                "textUthmani": "ٱللَّهُ",
+                "codeV1": "ﭓ",
+                "qpcUthmaniHafs": "ٱللَّهُ",
+                "charTypeName": "word",
+                "pageNumber": 604,
+                "lineNumber": 3,
+                "text": "ٱللَّهُ",
+                "translation": {
+                    "text": "(is) Allah",
+                    "languageName": "english",
+                    "languageId": 38
+                },
+                "transliteration": {
+                    "text": "l-lahu",
+                    "languageName": "english",
+                    "languageId": 38
+                }
+            },
+            {
+                "id": 9,
+                "position": 4,
+                "audioUrl": "wbw/112_001_004.mp3",
+                "verseKey": "112:1",
+                "verseId": 6222,
+                "location": "112:1:4",
+                "textUthmani": "أَحَدٌ",
+                "codeV1": "ﭔ",
+                "qpcUthmaniHafs": "أَحَدٌ",
+                "charTypeName": "word",
+                "pageNumber": 604,
+                "lineNumber": 3,
+                "text": "أَحَدٌ",
+                "translation": {
+                    "text": "the One",
+                    "languageName": "english",
+                    "languageId": 38
+                },
+                "transliteration": {
+                    "text": "aḥadun",
+                    "languageName": "english",
+                    "languageId": 38
+                }
+            },
+            {
+                "id": 10,
+                "position": 5,
+                "audioUrl": null,
+                "verseKey": "112:1",
+                "verseId": 6222,
+                "location": "112:1:5",
+                "textUthmani": "١",
+                "codeV1": "ﭕ",
+                "qpcUthmaniHafs": "١",
+                "charTypeName": "end",
+                "pageNumber": 604,
+                "lineNumber": 3,
+                "text": "١",
+                "translation": {
+                    "text": "(1)",
+                    "languageName": "english",
+                    "languageId": 38
+                },
+                "transliteration": {
+                    "text": null,
+                    "languageName": "english",
+                    "languageId": 38
+                }
+            }
+        ],
+        "timestamps": {
+            "timestampFrom": 0
+        },
+        "translations": [
+            {
+                "id": 910179,
+                "resourceId": 131,
+                "text": "Say, ˹O Prophet,˺ “He is Allah—One ˹and Indivisible˺;",
+                "resourceName": "Dr. Mustafa Khattab, The Clear Quran",
+                "languageId": 38
+            }
+        ]
+    },
+    {
+        "id": 6223,
+        "verseNumber": 2,
+        "verseKey": "112:2",
+        "hizbNumber": 60,
+        "rubElHizbNumber": 240,
+        "rukuNumber": 556,
+        "manzilNumber": 7,
+        "sajdahNumber": null,
+        "textUthmani": "ٱللَّهُ ٱلصَّمَدُ",
+        "chapterId": 112,
+        "textImlaeiSimple": "الله الصمد",
+        "pageNumber": 604,
+        "juzNumber": 30,
+        "words": [
+            {
+                "id": 916,
+                "position": 1,
+                "audioUrl": "wbw/112_002_001.mp3",
+                "verseKey": "112:2",
+                "verseId": 6223,
+                "location": "112:2:1",
+                "textUthmani": "ٱللَّهُ",
+                "codeV1": "ﭖ",
+                "qpcUthmaniHafs": "ٱللَّهُ",
+                "charTypeName": "word",
+                "pageNumber": 604,
+                "lineNumber": 3,
+                "text": "ٱللَّهُ",
+                "translation": {
+                    "text": "Allah",
+                    "languageName": "english",
+                    "languageId": 38
+                },
+                "transliteration": {
+                    "text": "al-lahu",
+                    "languageName": "english",
+                    "languageId": 38
+                }
+            },
+            {
+                "id": 917,
+                "position": 2,
+                "audioUrl": "wbw/112_002_002.mp3",
+                "verseKey": "112:2",
+                "verseId": 6223,
+                "location": "112:2:2",
+                "textUthmani": "ٱلصَّمَدُ",
+                "codeV1": "ﭗ",
+                "qpcUthmaniHafs": "ٱلصَّمَدُ",
+                "charTypeName": "word",
+                "pageNumber": 604,
+                "lineNumber": 3,
+                "text": "ٱلصَّمَدُ",
+                "translation": {
+                    "text": "the Eternal, the Absolute",
+                    "languageName": "english",
+                    "languageId": 38
+                },
+                "transliteration": {
+                    "text": "l-ṣamadu",
+                    "languageName": "english",
+                    "languageId": 38
+                }
+            },
+            {
+                "id": 918,
+                "position": 3,
+                "audioUrl": null,
+                "verseKey": "112:2",
+                "verseId": 6223,
+                "location": "112:2:3",
+                "textUthmani": "٢",
+                "codeV1": "ﭘ",
+                "qpcUthmaniHafs": "٢",
+                "charTypeName": "end",
+                "pageNumber": 604,
+                "lineNumber": 3,
+                "text": "٢",
+                "translation": {
+                    "text": "(2)",
+                    "languageName": "english",
+                    "languageId": 38
+                },
+                "transliteration": {
+                    "text": null,
+                    "languageName": "english",
+                    "languageId": 38
+                }
+            }
+        ],
+        "timestamps": {
+            "timestampFrom": 2980
+        },
+        "translations": [
+            {
+                "id": 910180,
+                "resourceId": 131,
+                "text": "Allah—the Sustainer ˹needed by all˺.",
+                "resourceName": "Dr. Mustafa Khattab, The Clear Quran",
+                "languageId": 38
+            }
+        ]
+    },
+    {
+        "id": 6224,
+        "verseNumber": 3,
+        "verseKey": "112:3",
+        "hizbNumber": 60,
+        "rubElHizbNumber": 240,
+        "rukuNumber": 556,
+        "manzilNumber": 7,
+        "sajdahNumber": null,
+        "textUthmani": "لَمْ يَلِدْ وَلَمْ يُولَدْ",
+        "chapterId": 112,
+        "textImlaeiSimple": "لم يلد ولم يولد",
+        "pageNumber": 604,
+        "juzNumber": 30,
+        "words": [
+            {
+                "id": 2746,
+                "position": 1,
+                "audioUrl": "wbw/112_003_001.mp3",
+                "verseKey": "112:3",
+                "verseId": 6224,
+                "location": "112:3:1",
+                "textUthmani": "لَمْ",
+                "codeV1": "ﭙ",
+                "qpcUthmaniHafs": "لَمۡ",
+                "charTypeName": "word",
+                "pageNumber": 604,
+                "lineNumber": 3,
+                "text": "لَمْ",
+                "translation": {
+                    "text": "Not",
+                    "languageName": "english",
+                    "languageId": 38
+                },
+                "transliteration": {
+                    "text": "lam",
+                    "languageName": "english",
+                    "languageId": 38
+                }
+            },
+            {
+                "id": 2747,
+                "position": 2,
+                "audioUrl": "wbw/112_003_002.mp3",
+                "verseKey": "112:3",
+                "verseId": 6224,
+                "location": "112:3:2",
+                "textUthmani": "يَلِدْ",
+                "codeV1": "ﭚ",
+                "qpcUthmaniHafs": "يَلِدۡ",
+                "charTypeName": "word",
+                "pageNumber": 604,
+                "lineNumber": 3,
+                "text": "يَلِدْ",
+                "translation": {
+                    "text": "He begets",
+                    "languageName": "english",
+                    "languageId": 38
+                },
+                "transliteration": {
+                    "text": "yalid",
+                    "languageName": "english",
+                    "languageId": 38
+                }
+            },
+            {
+                "id": 2748,
+                "position": 3,
+                "audioUrl": "wbw/112_003_003.mp3",
+                "verseKey": "112:3",
+                "verseId": 6224,
+                "location": "112:3:3",
+                "textUthmani": "وَلَمْ",
+                "codeV1": "ﭛ",
+                "qpcUthmaniHafs": "وَلَمۡ",
+                "charTypeName": "word",
+                "pageNumber": 604,
+                "lineNumber": 3,
+                "text": "وَلَمْ",
+                "translation": {
+                    "text": "and not",
+                    "languageName": "english",
+                    "languageId": 38
+                },
+                "transliteration": {
+                    "text": "walam",
+                    "languageName": "english",
+                    "languageId": 38
+                }
+            },
+            {
+                "id": 2749,
+                "position": 4,
+                "audioUrl": "wbw/112_003_004.mp3",
+                "verseKey": "112:3",
+                "verseId": 6224,
+                "location": "112:3:4",
+                "textUthmani": "يُولَدْ",
+                "codeV1": "ﭜ",
+                "qpcUthmaniHafs": "يُولَدۡ",
+                "charTypeName": "word",
+                "pageNumber": 604,
+                "lineNumber": 3,
+                "text": "يُولَدْ",
+                "translation": {
+                    "text": "He is begotten",
+                    "languageName": "english",
+                    "languageId": 38
+                },
+                "transliteration": {
+                    "text": "yūlad",
+                    "languageName": "english",
+                    "languageId": 38
+                }
+            },
+            {
+                "id": 2750,
+                "position": 5,
+                "audioUrl": null,
+                "verseKey": "112:3",
+                "verseId": 6224,
+                "location": "112:3:5",
+                "textUthmani": "٣",
+                "codeV1": "ﭝ",
+                "qpcUthmaniHafs": "٣",
+                "charTypeName": "end",
+                "pageNumber": 604,
+                "lineNumber": 3,
+                "text": "٣",
+                "translation": {
+                    "text": "(3)",
+                    "languageName": "english",
+                    "languageId": 38
+                },
+                "transliteration": {
+                    "text": null,
+                    "languageName": "english",
+                    "languageId": 38
+                }
+            }
+        ],
+        "timestamps": {
+            "timestampFrom": 5510
+        },
+        "translations": [
+            {
+                "id": 910181,
+                "resourceId": 131,
+                "text": "He has never had offspring, nor was He born.",
+                "resourceName": "Dr. Mustafa Khattab, The Clear Quran",
+                "languageId": 38
+            }
+        ]
+    },
+    {
+        "id": 6225,
+        "verseNumber": 4,
+        "verseKey": "112:4",
+        "hizbNumber": 60,
+        "rubElHizbNumber": 240,
+        "rukuNumber": 556,
+        "manzilNumber": 7,
+        "sajdahNumber": null,
+        "textUthmani": "وَلَمْ يَكُن لَّهُۥ كُفُوًا أَحَدٌۢ",
+        "chapterId": 112,
+        "textImlaeiSimple": "ولم يكن له كفوا احد",
+        "pageNumber": 604,
+        "juzNumber": 30,
+        "words": [
+            {
+                "id": 4136,
+                "position": 1,
+                "audioUrl": "wbw/112_004_001.mp3",
+                "verseKey": "112:4",
+                "verseId": 6225,
+                "location": "112:4:1",
+                "textUthmani": "وَلَمْ",
+                "codeV1": "ﭞ",
+                "qpcUthmaniHafs": "وَلَمۡ",
+                "charTypeName": "word",
+                "pageNumber": 604,
+                "lineNumber": 4,
+                "text": "وَلَمْ",
+                "translation": {
+                    "text": "And not",
+                    "languageName": "english",
+                    "languageId": 38
+                },
+                "transliteration": {
+                    "text": "walam",
+                    "languageName": "english",
+                    "languageId": 38
+                }
+            },
+            {
+                "id": 4137,
+                "position": 2,
+                "audioUrl": "wbw/112_004_002.mp3",
+                "verseKey": "112:4",
+                "verseId": 6225,
+                "location": "112:4:2",
+                "textUthmani": "يَكُن",
+                "codeV1": "ﭟ",
+                "qpcUthmaniHafs": "يَكُن",
+                "charTypeName": "word",
+                "pageNumber": 604,
+                "lineNumber": 4,
+                "text": "يَكُن",
+                "translation": {
+                    "text": "is",
+                    "languageName": "english",
+                    "languageId": 38
+                },
+                "transliteration": {
+                    "text": "yakun",
+                    "languageName": "english",
+                    "languageId": 38
+                }
+            },
+            {
+                "id": 4138,
+                "position": 3,
+                "audioUrl": "wbw/112_004_003.mp3",
+                "verseKey": "112:4",
+                "verseId": 6225,
+                "location": "112:4:3",
+                "textUthmani": "لَّهُۥ",
+                "codeV1": "ﭠ",
+                "qpcUthmaniHafs": "لَّهُۥ",
+                "charTypeName": "word",
+                "pageNumber": 604,
+                "lineNumber": 4,
+                "text": "لَّهُۥ",
+                "translation": {
+                    "text": "for Him",
+                    "languageName": "english",
+                    "languageId": 38
+                },
+                "transliteration": {
+                    "text": "lahu",
+                    "languageName": "english",
+                    "languageId": 38
+                }
+            },
+            {
+                "id": 4139,
+                "position": 4,
+                "audioUrl": "wbw/112_004_004.mp3",
+                "verseKey": "112:4",
+                "verseId": 6225,
+                "location": "112:4:4",
+                "textUthmani": "كُفُوًا",
+                "codeV1": "ﭡ",
+                "qpcUthmaniHafs": "كُفُوًا",
+                "charTypeName": "word",
+                "pageNumber": 604,
+                "lineNumber": 4,
+                "text": "كُفُوًا",
+                "translation": {
+                    "text": "equivalent",
+                    "languageName": "english",
+                    "languageId": 38
+                },
+                "transliteration": {
+                    "text": "kufuwan",
+                    "languageName": "english",
+                    "languageId": 38
+                }
+            },
+            {
+                "id": 4140,
+                "position": 5,
+                "audioUrl": "wbw/112_004_005.mp3",
+                "verseKey": "112:4",
+                "verseId": 6225,
+                "location": "112:4:5",
+                "textUthmani": "أَحَدٌۢ",
+                "codeV1": "ﭢ",
+                "qpcUthmaniHafs": "أَحَدُۢ",
+                "charTypeName": "word",
+                "pageNumber": 604,
+                "lineNumber": 4,
+                "text": "أَحَدٌۢ",
+                "translation": {
+                    "text": "any [one]",
+                    "languageName": "english",
+                    "languageId": 38
+                },
+                "transliteration": {
+                    "text": "aḥadun",
+                    "languageName": "english",
+                    "languageId": 38
+                }
+            },
+            {
+                "id": 4141,
+                "position": 6,
+                "audioUrl": null,
+                "verseKey": "112:4",
+                "verseId": 6225,
+                "location": "112:4:6",
+                "textUthmani": "٤",
+                "codeV1": "ﭣ",
+                "qpcUthmaniHafs": "٤",
+                "charTypeName": "end",
+                "pageNumber": 604,
+                "lineNumber": 4,
+                "text": "٤",
+                "translation": {
+                    "text": "(4)",
+                    "languageName": "english",
+                    "languageId": 38
+                },
+                "transliteration": {
+                    "text": null,
+                    "languageName": "english",
+                    "languageId": 38
+                }
+            }
+        ],
+        "timestamps": {
+            "timestampFrom": 8490
+        },
+        "translations": [
+            {
+                "id": 910182,
+                "resourceId": 131,
+                "text": "And there is none comparable to Him.”<sup foot_note=77645>1</sup>",
+                "resourceName": "Dr. Mustafa Khattab, The Clear Quran",
+                "languageId": 38
+            }
+        ]
+    }
+]

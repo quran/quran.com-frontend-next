@@ -6,7 +6,7 @@ import styles from './video.module.scss';
 
 import TranslationText from '@/components/QuranReader/TranslationView/TranslationText';
 import VerseText from '@/components/Verse/VerseText';
-import QuranTextLogo from '@/icons/quran-text-logo.svg';
+import { ReactComponent as PaintIcon } from '@/icons/quran-text-logo.svg';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import Translation from '@/types/Translation';
 import { getVerseWords } from '@/utils/verse';
@@ -126,7 +126,7 @@ export const VideoContent = ({
             right: '5%',
           }}
         >
-          <QuranTextLogo />
+          {/* <PaintIcon /> */}
         </div>
       </AbsoluteFill>
     </AbsoluteFill>
