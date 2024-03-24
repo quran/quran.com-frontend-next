@@ -5,23 +5,33 @@ import React from 'react';
 import { NextPage, GetStaticProps, GetStaticPaths } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 
-import { getChapterIdBySlug, getChapterVerses, getPagesLookup } from '@/api';
+import { getChapterIdBySlug, getChapterVerses, getPagesLookup, getRangeVerses } from '@/api';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import QuranReader from '@/components/QuranReader';
 import { getChapterOgImageUrl } from '@/lib/og';
 import { getQuranReaderStylesInitialState } from '@/redux/defaultSettings/util';
 import { getDefaultWordFields, getMushafId } from '@/utils/api';
 import { getAllChaptersData, getChapterData } from '@/utils/chapter';
-import { toLocalizedNumber, getLocaleName, getLanguageAlternates } from '@/utils/locale';
-import { getCanonicalUrl, getSurahNavigationUrl, getVerseNavigationUrl } from '@/utils/navigation';
+import {
+  toLocalizedNumber,
+  getLocaleName,
+  getLanguageAlternates,
+  toLocalizedVerseKey,
+} from '@/utils/locale';
+import {
+  getCanonicalUrl,
+  getRangesNavigationUrl,
+  getSurahNavigationUrl,
+  getVerseNavigationUrl,
+} from '@/utils/navigation';
 import { formatStringNumber } from '@/utils/number';
 import {
   REVALIDATION_PERIOD_ON_ERROR_SECONDS,
   ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
 } from '@/utils/staticPageGeneration';
-import { isValidChapterId, isValidVerseKey } from '@/utils/validator';
+import { isRangesStringValid, isValidChapterId, isValidVerseKey } from '@/utils/validator';
 import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
-import { generateVerseKeysBetweenTwoVerseKeys } from '@/utils/verseKeys';
+import { parseVerseRange, generateVerseKeysBetweenTwoVerseKeys } from '@/utils/verseKeys';
 import Error from 'src/pages/_error';
 import { ChapterResponse, VersesResponse, PagesLookUpResponse } from 'types/ApiResponses';
 import ChaptersData from 'types/ChaptersData';
@@ -31,7 +41,7 @@ type ChapterProps = {
   chapterResponse?: ChapterResponse;
   versesResponse?: VersesResponse;
   hasError?: boolean;
-  isChapter?: boolean;
+  quranReaderDataType: QuranReaderDataType;
   chaptersData: ChaptersData;
 };
 
@@ -42,13 +52,21 @@ const Chapter: NextPage<ChapterProps> = ({
   chapterResponse,
   versesResponse,
   hasError,
-  isChapter,
+  quranReaderDataType,
 }) => {
+  const isRange = quranReaderDataType === QuranReaderDataType.Ranges;
+  const isChapter = quranReaderDataType === QuranReaderDataType.Chapter;
   const { t, lang } = useTranslation('common');
   if (hasError) {
     return <Error statusCode={500} />;
   }
   const getTitle = () => {
+    if (isRange) {
+      return `${toLocalizedVerseKey(
+        versesResponse.pagesLookup.lookupRange.from,
+        lang,
+      )}-${toLocalizedVerseKey(versesResponse.pagesLookup.lookupRange.to, lang)}`;
+    }
     if (isChapter) {
       return `${toLocalizedNumber(1, lang)}-${toLocalizedNumber(
         chapterResponse.chapter.versesCount,
@@ -64,6 +82,12 @@ const Chapter: NextPage<ChapterProps> = ({
   };
 
   const getPath = () => {
+    if (isRange) {
+      return getRangesNavigationUrl(
+        versesResponse.pagesLookup.lookupRange.from,
+        versesResponse.pagesLookup.lookupRange.to,
+      );
+    }
     if (isChapter) {
       return getSurahNavigationUrl(chapterResponse.chapter.slug);
     }
@@ -76,6 +100,9 @@ const Chapter: NextPage<ChapterProps> = ({
   };
   const path = getPath();
   const getCanonicalUrlValue = () => {
+    if (isRange) {
+      return getCanonicalUrl(lang, path);
+    }
     if (isChapter) {
       return getCanonicalUrl(lang, path);
     }
@@ -87,36 +114,62 @@ const Chapter: NextPage<ChapterProps> = ({
     return getCanonicalUrl(lang, path);
   };
 
+  const getSEOTitle = () => {
+    if (isRange) {
+      return getTitle();
+    }
+    return `${t('surah')} ${chapterResponse.chapter.transliteratedName} - ${getTitle()}`;
+  };
+
+  const getOGImage = () => {
+    if (isRange) {
+      return getChapterOgImageUrl({
+        chapterId: versesResponse.verses[0]?.chapterId,
+        verseNumber: versesResponse.verses[0]?.verseNumber,
+        locale: lang,
+      });
+    }
+    return getChapterOgImageUrl({
+      chapterId: chapterResponse.chapter.id,
+      verseNumber: !isChapter ? versesResponse.verses[0]?.verseNumber : undefined,
+      locale: lang,
+    });
+  };
+
+  const getDescription = () => {
+    if (isRange) {
+      return t('chapter:ranges-meta-desc', {
+        rangeFrom: toLocalizedVerseKey(versesResponse.pagesLookup.lookupRange.from, lang),
+        rangeTo: toLocalizedVerseKey(versesResponse.pagesLookup.lookupRange.to, lang),
+      });
+    }
+    return !isChapter
+      ? versesResponse.verses[0].textImlaeiSimple
+      : t('chapter:meta-description', {
+          transliteratedName: chapterResponse.chapter.transliteratedName,
+          translatedName: chapterResponse.chapter.translatedName as string,
+          revelationPlace: t(`surah-info:${chapterResponse.chapter.revelationPlace}`),
+          chapterOrder: toLocalizedNumber(Number(chapterResponse.chapter.id), lang),
+          localeName: getLocaleName(lang),
+          versesCount: toLocalizedNumber(chapterResponse.chapter.versesCount, lang),
+        });
+  };
+
   return (
     <>
       <NextSeoWrapper
-        title={`${t('surah')} ${chapterResponse.chapter.transliteratedName} - ${getTitle()}`}
+        title={getSEOTitle()}
         canonical={getCanonicalUrlValue()}
-        image={getChapterOgImageUrl({
-          chapterId: chapterResponse.chapter.id,
-          verseNumber: !isChapter ? versesResponse.verses[0]?.verseNumber : undefined,
-          locale: lang,
-        })}
+        image={getOGImage()}
         imageWidth={1200}
         imageHeight={630}
-        description={
-          !isChapter
-            ? versesResponse.verses[0].textImlaeiSimple
-            : t('chapter:meta-description', {
-                transliteratedName: chapterResponse.chapter.transliteratedName,
-                translatedName: chapterResponse.chapter.translatedName as string,
-                revelationPlace: t(`surah-info:${chapterResponse.chapter.revelationPlace}`),
-                chapterOrder: toLocalizedNumber(Number(chapterResponse.chapter.id), lang),
-                localeName: getLocaleName(lang),
-                versesCount: toLocalizedNumber(chapterResponse.chapter.versesCount, lang),
-              })
-        }
+        description={getDescription()}
         languageAlternates={getLanguageAlternates(path)}
       />
       <QuranReader
         initialData={versesResponse}
-        id={chapterResponse.chapter.id}
-        quranReaderDataType={isChapter ? QuranReaderDataType.Chapter : QuranReaderDataType.Verse}
+        id={isRange ? null : chapterResponse.chapter.id}
+        quranReaderDataType={quranReaderDataType}
       />
     </>
   );
@@ -127,12 +180,16 @@ const AYAH_KURSI_SLUGS = ['ayatul-kursi', 'آیت الکرسی'];
 
 export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   let chapterIdOrVerseKeyOrSlug = String(params.chapterId);
-  let isChapter = isValidChapterId(chapterIdOrVerseKeyOrSlug);
+  let isValidChapter = isValidChapterId(chapterIdOrVerseKeyOrSlug);
   const chaptersData = await getAllChaptersData(locale);
+  const isValidRanges = isRangesStringValid(chaptersData, chapterIdOrVerseKeyOrSlug);
   // initialize the value as if it's chapter
   let chapterId = chapterIdOrVerseKeyOrSlug;
-  // if it's not a valid chapter id and it's not a valid verse key, will check if it's Ayat Al kursi or if it's a Surah slug
-  if (!isChapter && !isValidVerseKey(chaptersData, chapterIdOrVerseKeyOrSlug)) {
+  if (
+    !isValidRanges &&
+    !isValidChapter &&
+    !isValidVerseKey(chaptersData, chapterIdOrVerseKeyOrSlug)
+  ) {
     // if the value is a slug of Ayatul Kursi
     if (AYAH_KURSI_SLUGS.includes(chapterIdOrVerseKeyOrSlug.toLowerCase())) {
       chapterIdOrVerseKeyOrSlug = '2:255';
@@ -143,7 +200,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
         return { notFound: true };
       }
       chapterId = sluggedChapterId;
-      isChapter = true;
+      isValidChapter = true;
     }
   }
   const defaultMushafId = getMushafId(
@@ -158,8 +215,46 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   let numberOfVerses = 1;
   let pagesLookupResponse: PagesLookUpResponse | null = null;
   try {
+    // if it's a range of verses e.g. 2:255-2:256
+    if (isValidRanges) {
+      const [{ verseKey: fromVerseKey }, { verseKey: toVerseKey }] =
+        parseVerseRange(chapterIdOrVerseKeyOrSlug);
+      pagesLookupResponse = await getPagesLookup({
+        mushaf: defaultMushafId,
+        from: fromVerseKey,
+        to: toVerseKey,
+      });
+      numberOfVerses = generateVerseKeysBetweenTwoVerseKeys(
+        chaptersData,
+        pagesLookupResponse.lookupRange.from,
+        pagesLookupResponse.lookupRange.to,
+      ).length;
+      const firstPageOfRange = Object.keys(pagesLookupResponse.pages)[0];
+      const firstPageOfChapterLookup = pagesLookupResponse.pages[firstPageOfRange];
+      const versesResponse = await getRangeVerses(locale, {
+        ...apiParams,
+        ...{
+          perPage: 'all',
+          from: firstPageOfChapterLookup.from,
+          to: firstPageOfChapterLookup.to,
+        },
+      });
+      const metaData = { numberOfVerses };
+
+      versesResponse.metaData = metaData;
+      versesResponse.pagesLookup = pagesLookupResponse;
+
+      return {
+        props: {
+          chaptersData,
+          versesResponse,
+          quranReaderDataType: QuranReaderDataType.Ranges,
+        },
+        revalidate: ONE_WEEK_REVALIDATION_PERIOD_SECONDS, // chapters will be generated at runtime if not found in the cache, then cached for subsequent requests for 7 days.
+      };
+    }
     // if it's a verseKey
-    if (!isChapter) {
+    if (!isValidChapter) {
       const [extractedChapterId, verseNumber] =
         getVerseAndChapterNumbersFromKey(chapterIdOrVerseKeyOrSlug);
       chapterId = extractedChapterId;
@@ -172,6 +267,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
         to: chapterIdOrVerseKeyOrSlug,
       });
     } else {
+      // if it's a chapter
       pagesLookupResponse = await getPagesLookup({
         chapterNumber: Number(chapterId),
         mushaf: defaultMushafId,
@@ -204,7 +300,9 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
         chaptersData,
         chapterResponse: { chapter: { ...getChapterData(chaptersData, chapterId), id: chapterId } },
         versesResponse,
-        isChapter,
+        quranReaderDataType: isValidChapter
+          ? QuranReaderDataType.Chapter
+          : QuranReaderDataType.Verse,
       },
       revalidate: ONE_WEEK_REVALIDATION_PERIOD_SECONDS, // chapters will be generated at runtime if not found in the cache, then cached for subsequent requests for 7 days.
     };

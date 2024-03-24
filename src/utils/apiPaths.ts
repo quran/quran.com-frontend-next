@@ -57,6 +57,9 @@ export const makeVersesUrl = (
   params?: Record<string, unknown>,
 ) => makeUrl(`/verses/by_chapter/${id}`, getVersesParams(currentLocale, params));
 
+export const makeByRangeVersesUrl = (currentLocale: string, params?: Record<string, unknown>) =>
+  makeUrl(`/verses/by_range`, getVersesParams(currentLocale, params));
+
 export const makeVersesFilterUrl = (params?: Record<string, unknown>) =>
   makeUrl(`/verses/filter`, { ...params });
 
