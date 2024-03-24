@@ -16,7 +16,8 @@ export enum WordClickFunctionality {
 export enum QuranReaderDataType {
   Chapter = 'chapter',
   Verse = 'verse',
-  VerseRange = 'range',
+  ChapterVerseRanges = 'chapterVerseRanges',
+  Ranges = 'ranges',
   Tafsir = 'tafsir',
   SelectedTafsir = 'selectedTafsir',
   Hizb = 'hizb',

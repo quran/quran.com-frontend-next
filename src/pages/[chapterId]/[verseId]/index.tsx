@@ -71,7 +71,9 @@ const Verse: NextPage<VerseProps> = ({ chapterResponse, versesResponse, hasError
       <QuranReader
         initialData={versesResponse}
         id={chapterResponse.chapter.id}
-        quranReaderDataType={isVerse ? QuranReaderDataType.Verse : QuranReaderDataType.VerseRange}
+        quranReaderDataType={
+          isVerse ? QuranReaderDataType.Verse : QuranReaderDataType.ChapterVerseRanges
+        }
       />
     </>
   );

@@ -25,6 +25,7 @@ import {
   makeTafsirContentUrl,
   makePagesLookupUrl,
   makeNewSearchResultsUrl,
+  makeByRangeVersesUrl,
 } from '@/utils/apiPaths';
 import { SearchRequest, AdvancedCopyRequest, PagesLookUpRequest } from 'types/ApiRequests';
 import {
@@ -77,6 +78,11 @@ export const getChapterVerses = async (
   locale: string,
   params?: Record<string, unknown>,
 ): Promise<VersesResponse> => fetcher<VersesResponse>(makeVersesUrl(id, locale, params));
+
+export const getRangeVerses = async (
+  locale: string,
+  params?: Record<string, unknown>,
+): Promise<VersesResponse> => fetcher<VersesResponse>(makeByRangeVersesUrl(locale, params));
 
 /**
  * Get the current available translations with the name translated in the current language.
