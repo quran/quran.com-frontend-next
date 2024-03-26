@@ -83,6 +83,9 @@ export const readingTrackerSlice = createSlice({
       }
       return generateNewState(state, lastReadVerse, newRecentReadingSessions);
     },
+    resetReadingTracker: () => {
+      return initialState;
+    },
   },
 });
 
@@ -106,7 +109,7 @@ const generateNewState = (
   };
 };
 
-export const { setLastReadVerse } = readingTrackerSlice.actions;
+export const { setLastReadVerse, resetReadingTracker } = readingTrackerSlice.actions;
 
 export const selectLastReadVerseKey = (state: RootState) => state.readingTracker.lastReadVerse;
 export const selectRecentReadingSessions = (state: RootState) =>

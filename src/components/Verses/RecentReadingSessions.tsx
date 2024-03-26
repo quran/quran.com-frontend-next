@@ -7,6 +7,7 @@ import Link from '../dls/Link/Link';
 import styles from './RecentReadingSessions.module.scss';
 import RecentReadingSessionsSkeleton from './RecentReadingSessionsSkeleton';
 
+import DeleteReadingListButton from '@/components/HomePage/DeleteRecentlyReadListButton';
 import SurahPreview, { SurahPreviewDisplay } from '@/dls/SurahPreview/SurahPreview';
 import useGetRecentlyReadVerseKeys from '@/hooks/auth/useGetRecentlyReadVerseKeys';
 import { getChapterData } from '@/utils/chapter';
@@ -39,7 +40,10 @@ const RecentReadingSessions = () => {
 
   return (
     <div className={styles.sessionsContainer} id="reading-sessions">
-      <p className={styles.sessionsHeader}>{t('recently-read')}</p>
+      <div className={styles.sessionsHeaderContainer}>
+        <p className={styles.sessionsHeader}>{t('recently-read')}</p>
+        {recentlyReadVerseKeys.length > 0 && <DeleteReadingListButton />}
+      </div>
       <div className={styles.verseLinksContainer}>
         {recentlyReadVerseKeys.map((verseKey) => {
           const [chapterId, verseNumber] = getVerseAndChapterNumbersFromKey(verseKey);
