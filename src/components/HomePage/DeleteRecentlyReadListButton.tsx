@@ -17,7 +17,7 @@ import { ButtonType, ButtonVariant } from '@/dls/Button/Button';
 
 const DeleteReadingListButton = () => {
 
-    const { t, lang } = useTranslation('home');
+    const { t } = useTranslation('home');
     const dispatch = useDispatch()
 
     const handleReadingListDeletion = async () => {
