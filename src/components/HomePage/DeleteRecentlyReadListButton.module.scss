@@ -1,0 +1,14 @@
+.deleteButton {
+    span {
+      display: flex;
+      align-items: center;
+    }
+  }
+  .icon {
+    margin-inline-end: calc(0.5 * var(--spacing-medium));
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5rem;
+    height: 1.5rem;
+  }
