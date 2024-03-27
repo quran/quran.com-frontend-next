@@ -27,7 +27,6 @@ const RecentReadingSessions = () => {
   if (isLoading) {
     return (
       <div className={styles.sessionsContainer} id="reading-sessions">
-        <p className={styles.sessionsHeader}>{t('recently-read')}</p>
         <div className={styles.verseLinksContainer}>
           <RecentReadingSessionsSkeleton />
         </div>
@@ -35,11 +34,10 @@ const RecentReadingSessions = () => {
     );
   }
 
-  if (recentlyReadVerseKeys.length === 0) return null;
+  if (recentlyReadVerseKeys.length === 0) return t('home:no-recently-read');
 
   return (
     <div className={styles.sessionsContainer} id="reading-sessions">
-      <p className={styles.sessionsHeader}>{t('recently-read')}</p>
       <div className={styles.verseLinksContainer}>
         {recentlyReadVerseKeys.map((verseKey) => {
           const [chapterId, verseNumber] = getVerseAndChapterNumbersFromKey(verseKey);

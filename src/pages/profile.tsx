@@ -107,15 +107,6 @@ const ProfilePage: NextPage<Props> = () => {
               className={classNames(
                 layoutStyle.flowItem,
                 layoutStyle.fullWidth,
-                styles.recentReadingContainer,
-              )}
-            >
-              <RecentReadingSessions />
-            </div>
-            <div
-              className={classNames(
-                layoutStyle.flowItem,
-                layoutStyle.fullWidth,
                 styles.bookmarksAndCollectionsContainer,
               )}
             >
