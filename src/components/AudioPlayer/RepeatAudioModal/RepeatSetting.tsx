@@ -30,6 +30,7 @@ const RepeatSetting = ({
       <span className={styles.label}>{label}</span>{' '}
       <span className={styles.input}>
         <Counter
+          onCostumValue={onChange}
           onIncrement={
             value < maxValue
               ? // when value is reaching infinityThreshold. set the value to Infinity

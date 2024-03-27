@@ -2,8 +2,30 @@
   display: flex;
   align-items: center;
 }
+
 .count {
   padding-inline-start: var(--spacing-medium);
   padding-inline-end: var(--spacing-medium);
   font-size: var(--font-size-normal);
+  color: var(--themed-fg, var(--color-text-default));
+  background-color: var(--themed-bg, var(--color-background-default));
+
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  height: auto;
+  width: fit-content;
+  border: none;
+  width: 3rem;
+  text-align: center;
+
+  // to show to the user that he can input numbers here;
+  border: 1.5px solid var(--themed-fg, var(--color-text-default));
+  transition: border 88ms linear;
+  border-radius: 2px;
+}
+
+.count:focus {
+  border: 2.5px solid var(--themed-fg, var(--color-text-default));
+  border-radius: 4px;
 }
