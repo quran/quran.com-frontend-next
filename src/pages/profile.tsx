@@ -11,7 +11,6 @@ import withAuth from '@/components/Auth/withAuth';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import DeleteAccountButton from '@/components/Profile/DeleteAccountButton';
 import BookmarksAndCollectionsSection from '@/components/Verses/BookmarksAndCollectionsSection';
-import RecentReadingSessions from '@/components/Verses/RecentReadingSessions';
 import Button from '@/dls/Button/Button';
 import Skeleton from '@/dls/Skeleton/Skeleton';
 import useCurrentUser from '@/hooks/auth/useCurrentUser';

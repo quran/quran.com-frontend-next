@@ -34,7 +34,7 @@ const RecentReadingSessions = () => {
     );
   }
 
-  if (recentlyReadVerseKeys.length === 0) return t('home:no-recently-read');
+  if (recentlyReadVerseKeys.length === 0) return <>{t('home:no-recently-read')}</>;
 
   return (
     <div className={styles.sessionsContainer} id="reading-sessions">
