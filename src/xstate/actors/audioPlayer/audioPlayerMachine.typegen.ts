@@ -118,6 +118,7 @@ export interface Typegen0 {
       | "done.invoke.fetchCustomReciter"
       | "done.invoke.fetchReciter";
     updateTiming: "UPDATE_TIMING";
+    updateVolume: "UPDATE_VOLUME";
   };
   eventsCausingServices: {
     fetchCustomReciter: "PLAY_AYAH" | "PLAY_SURAH";

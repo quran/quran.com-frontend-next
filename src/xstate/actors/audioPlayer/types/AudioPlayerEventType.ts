@@ -42,7 +42,8 @@ type AudioPlayerEventType =
     }
   | { type: 'REPEAT_FINISHED' }
   | { type: 'SEEK_TO'; timestamp: number }
-  | { type: 'SET_INITIAL_CONTEXT'; reciterId: number; playbackRate: number }
-  | { type: 'SET_RECITERS_LIST'; recitersList: Reciter[] };
+  | { type: 'SET_INITIAL_CONTEXT'; reciterId: number; playbackRate: number; volume: number }
+  | { type: 'SET_RECITERS_LIST'; recitersList: Reciter[] }
+  | { type: 'UPDATE_VOLUME'; volume: number };
 
 export default AudioPlayerEventType;
