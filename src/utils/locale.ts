@@ -30,6 +30,7 @@ const LOCALE_NAME = {
   ta: 'தமிழ்', // tamil
   hi: 'हिन्दी',
   ku: 'Kurdî',
+  pl: 'Polski',
 };
 
 const LOCALE_NAME_TO_CODE = {
@@ -58,6 +59,7 @@ export const LANG_LOCALE_MAP = {
   ur: 'ur-PK',
   zh: 'zh-CN',
   ms: 'ms-MY',
+  pl: 'pl-PL',
 };
 
 export enum Direction {
@@ -110,6 +112,10 @@ export const Languages = {
     font: 'kurdish',
     locale: 'ku',
     dir: Direction.RTL,
+  },
+  131: {
+    // Polish
+    locale: 'pl',
   },
   133: {
     // Portuguese
