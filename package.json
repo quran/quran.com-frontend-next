@@ -10,6 +10,7 @@
     "dev": "next dev",
     "dev:https": "node server.js",
     "build": "next build",
+    "studio": "npx remotion studio src/remotion/index.ts",
     "postbuild": "yarn run generate-sitemap",
     "snapshots:update": "vitest run --update",
     "start": "next start",

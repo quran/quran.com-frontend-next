@@ -1,6 +1,6 @@
 import { DirectionProvider } from '@radix-ui/react-direction';
 import { TooltipProvider } from '@radix-ui/react-tooltip';
-import { Composition } from 'remotion';
+import { Composition, staticFile } from 'remotion';
 
 import { VideoContent } from './Video/Main';
 
@@ -49,10 +49,32 @@ export const RemotionRoot = () => {
                     id={COMPOSITION_NAME}
                     // @ts-ignore
                     component={VideoContent}
-                    durationInFrames={30 * 30}
+                    durationInFrames={Math.ceil(((DEFAULT_PROPS.audio.duration + 500) / 1000) * 30)}
                     fps={VIDEO_FPS}
                     width={VIDEO_LANDSCAPE_WIDTH}
                     height={VIDEO_LANDSCAPE_HEIGHT}
+                    calculateMetadata={({ props }) => {
+                      const font = new FontFace(
+                        `UthmanicHafs`,
+                        `url('${staticFile(
+                          '/fonts/quran/hafs/uthmanic_hafs/UthmanicHafs1Ver18.woff2',
+                        )}') format('woff2')`,
+                      );
+                      document.fonts.add(font);
+                      // const font2 = new FontFace(
+                      //   `UthmanicHafs`,
+                      //   `url('${staticFile(
+                      //     '/fonts/quran/hafs/nastaleeq/indopak/indopak-nastaleeq-waqf-lazim-v4.2.1.woff2',
+                      //   )}') format('woff2')`,
+                      // );
+                      // document.fonts.add(font2);
+                      return {
+                        ...props,
+                        durationInFrames: Math.ceil(
+                          ((DEFAULT_PROPS.audio.duration + 500) / 1000) * 30,
+                        ),
+                      };
+                    }}
                     defaultProps={DEFAULT_PROPS}
                   />
                 </OnboardingProvider>
