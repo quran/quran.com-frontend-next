@@ -15,7 +15,6 @@ import QuranGrowthJourneySection from '@/components/HomePage/QuranGrowthJourneyS
 import RamadanActivitiesSection from '@/components/HomePage/RamadanActivitiesSection';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import BookmarksAndCollectionsSection from '@/components/Verses/BookmarksAndCollectionsSection';
-import RecentReadingSessions from '@/components/Verses/RecentReadingSessions';
 import { getAllChaptersData } from '@/utils/chapter';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl } from '@/utils/navigation';
@@ -52,10 +51,7 @@ const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }): JSX.El
             <QuranGrowthJourneySection />
           </div>
           <div className={classNames(styles.flowItem, styles.fullWidth)}>
-            <RecentReadingSessions />
-          </div>
-          <div className={classNames(styles.flowItem, styles.fullWidth)}>
-            <BookmarksAndCollectionsSection />
+            <BookmarksAndCollectionsSection isHomepage />
           </div>
           <div className={styles.flowItem}>
             <ChapterAndJuzListWrapper chapters={chapters} />

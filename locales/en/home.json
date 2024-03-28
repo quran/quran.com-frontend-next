@@ -1,5 +1,6 @@
 {
   "no-bookmarks": "You do not have any bookmarks yet",
+  "no-recently-read": "You do not have any reading sessions yet",
   "noble-quran": "The Noble Quran",
   "qgj": {
     "desc": {
@@ -8,7 +9,7 @@
     },
     "learning-plans": {
       "cta": {
-        "all-plans": "All Plans",
+        "all-plans": "See All Plans",
         "my-plans": "My Plans"
       },
       "desc": {

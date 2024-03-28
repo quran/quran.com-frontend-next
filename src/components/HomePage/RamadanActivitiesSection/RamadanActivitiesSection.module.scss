@@ -5,6 +5,9 @@
     padding: var(--spacing-small);
     display: flex;
     align-items: center;
+    @include breakpoints.tablet {
+        border-radius: var(--border-radius-default);
+    }
 }
 
 .illustrationContainer {

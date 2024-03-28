@@ -21,7 +21,7 @@ const RecentReadingSessions = () => {
   const chaptersData = useContext(DataContext);
   const { recentlyReadVerseKeys, isLoading } = useGetRecentlyReadVerseKeys();
   const onRecentReadingSessionClicked = () => {
-    logButtonClick('homepage_recently_read_card');
+    logButtonClick('recently_read_card');
   };
 
   if (isLoading) {
