@@ -1,14 +1,11 @@
 {
   "no-bookmarks": "Nuk keni ende asnjë faqeshënues",
+  "no-recently-read": "Nuk keni ende asnjë seancë leximi",
   "noble-quran": "Kurani Fisnik",
   "qgj": {
-    "desc": {
-      "logged-in-no-goal": "<bold> Rrjedha leximi </bold> - Sfidoni veten që të mbani një seri prej 30 ditësh këtë Ramazan!",
-      "logged-out": "<bold> Rrjedha leximi </bold> - Sfidoni veten që të mbani një varg prej 30 ditësh këtë Ramazan! Thjesht <link> identifikohu </link>"
-    },
     "learning-plans": {
       "cta": {
-        "all-plans": "Të gjitha planet",
+        "all-plans": "Shihni të gjitha planet",
         "my-plans": "Planet e Mia"
       },
       "desc": {

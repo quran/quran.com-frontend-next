@@ -3,10 +3,6 @@
   "no-recently-read": "You do not have any reading sessions yet",
   "noble-quran": "The Noble Quran",
   "qgj": {
-    "desc": {
-      "logged-in-no-goal": "<bold>Reading Streaks</bold> - Challenge yourself to keep a 30 day streak this Ramadan!",
-      "logged-out": "<bold>Reading Streaks</bold> - Challenge yourself to keep a 30 day streak this Ramadan! Simply <link>log in</link>"
-    },
     "learning-plans": {
       "cta": {
         "all-plans": "See All Plans",

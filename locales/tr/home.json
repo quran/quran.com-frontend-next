@@ -1,14 +1,11 @@
 {
   "no-bookmarks": "Henüz yer işaretiniz yok",
+  "no-recently-read": "Henüz okuma oturumunuz yok",
   "noble-quran": "Kur'an-ı Kerim",
   "qgj": {
-    "desc": {
-      "logged-in-no-goal": "<bold> Okuma Serileri </bold> - Bu Ramazan'da 30 günlük bir seriyi sürdürmek için kendinize meydan okuyun!",
-      "logged-out": "<bold> Okuma Serileri </bold> - Bu Ramazan'da 30 günlük bir seriyi sürdürmek için kendinize meydan okuyun! Basitçe <link> giriş yapın </link>"
-    },
     "learning-plans": {
       "cta": {
-        "all-plans": "Tüm Planlar",
+        "all-plans": "Tüm Planları Gör",
         "my-plans": "Planlarım"
       },
       "desc": {
