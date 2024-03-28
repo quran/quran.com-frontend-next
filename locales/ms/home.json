@@ -1,14 +1,11 @@
 {
   "no-bookmarks": "Anda belum mempunyai sebarang penanda halaman",
+  "no-recently-read": "Anda belum mempunyai sebarang sesi membaca",
   "noble-quran": "Al-Quran yang mulia",
   "qgj": {
-    "desc": {
-      "logged-in-no-goal": "<bold> Coretan Membaca </bold> - Cabar diri anda untuk mengekalkan coretan 30 hari pada Ramadan ini!",
-      "logged-out": "<bold> Coretan Membaca </bold> - Cabar diri anda untuk mengekalkan coretan 30 hari pada Ramadan ini! Hanya <link> log masuk </link>"
-    },
     "learning-plans": {
       "cta": {
-        "all-plans": "Semua Rancangan",
+        "all-plans": "Lihat Semua Rancangan",
         "my-plans": "Rancangan Saya"
       },
       "desc": {

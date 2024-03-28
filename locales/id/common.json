@@ -82,7 +82,8 @@
       "start-playing": "Mulai mainkan",
       "stop-repeating": "Berhenti Mengulangi",
       "times": "waktu",
-      "verses-range": "Jangkauan ayat"
+      "verses-range": "Jangkauan ayat",
+      "volume-control": "Pengatur suara"
     },
     "repeat-moved": "Pengaturan pengulangan telah dipindahkan ke pemutar audio. Klik ikon <0> </0> untuk mengaksesnya",
     "select-reciter": "Pilih Qari",

@@ -82,7 +82,8 @@
       "start-playing": "Çalmaya başla",
       "stop-repeating": "Tekrarlamayı Durdur",
       "times": "Zamanlar",
-      "verses-range": "Ayet aralığı"
+      "verses-range": "Ayet aralığı",
+      "volume-control": "Ses kontrol"
     },
     "repeat-moved": "Tekrarlama ayarları müzik çalara taşındı. Erişmek için <0> </0> simgesine tıklayın",
     "select-reciter": "Okuyucu Seçin",

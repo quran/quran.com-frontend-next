@@ -82,7 +82,8 @@
       "start-playing": "Begin met spelen",
       "stop-repeating": "Stop met herhalen",
       "times": "keer",
-      "verses-range": "Bereik van verzen"
+      "verses-range": "Bereik van verzen",
+      "volume-control": "Volumeregeling"
     },
     "repeat-moved": "De herhaalinstellingen zijn verplaatst naar de audiospeler. Klik op het <0> </0> om ze te openen",
     "select-reciter": "Selecteer voordrager",

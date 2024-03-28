@@ -1,14 +1,11 @@
 {
   "no-bookmarks": "您还没有任何书签",
+  "no-recently-read": "您还没有任何读书会",
   "noble-quran": "尊贵的古兰经",
   "qgj": {
-    "desc": {
-      "logged-in-no-goal": "<bold>连续阅读</bold> - 挑战自己，在这个斋月保持 30 天的连续阅读！",
-      "logged-out": "<bold>连续阅读</bold> - 挑战自己，在这个斋月保持 30 天的连续阅读！只需<link>登录</link>"
-    },
     "learning-plans": {
       "cta": {
-        "all-plans": "所有计划",
+        "all-plans": "查看所有计划",
         "my-plans": "我的计划"
       },
       "desc": {
