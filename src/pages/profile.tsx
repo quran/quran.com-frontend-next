@@ -11,6 +11,7 @@ import withAuth from '@/components/Auth/withAuth';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import DeleteAccountButton from '@/components/Profile/DeleteAccountButton';
 import BookmarksAndCollectionsSection from '@/components/Verses/BookmarksAndCollectionsSection';
+import RecentReadingSessions from '@/components/Verses/RecentReadingSessions';
 import Button from '@/dls/Button/Button';
 import Skeleton from '@/dls/Skeleton/Skeleton';
 import useCurrentUser from '@/hooks/auth/useCurrentUser';
@@ -101,7 +102,15 @@ const ProfilePage: NextPage<Props> = () => {
                 {isLoading ? profileSkeletonInfoSkeleton : profileInfo}
               </div>
             </div>
-
+            <div
+              className={classNames(
+                layoutStyle.flowItem,
+                layoutStyle.fullWidth,
+                styles.recentReadingContainer,
+              )}
+            >
+              <RecentReadingSessions />
+            </div>
             <div
               className={classNames(
                 layoutStyle.flowItem,
@@ -109,7 +118,7 @@ const ProfilePage: NextPage<Props> = () => {
                 styles.bookmarksAndCollectionsContainer,
               )}
             >
-              <BookmarksAndCollectionsSection />
+              <BookmarksAndCollectionsSection isHomepage={false} />
             </div>
 
             <div

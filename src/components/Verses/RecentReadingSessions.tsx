@@ -21,12 +21,13 @@ const RecentReadingSessions = () => {
   const chaptersData = useContext(DataContext);
   const { recentlyReadVerseKeys, isLoading } = useGetRecentlyReadVerseKeys();
   const onRecentReadingSessionClicked = () => {
-    logButtonClick('homepage_recently_read_card');
+    logButtonClick('recently_read_card');
   };
 
   if (isLoading) {
     return (
       <div className={styles.sessionsContainer} id="reading-sessions">
+        <p className={styles.sessionsHeader}>{t('recently-read')}</p>
         <div className={styles.verseLinksContainer}>
           <RecentReadingSessionsSkeleton />
         </div>
@@ -34,10 +35,11 @@ const RecentReadingSessions = () => {
     );
   }
 
-  if (recentlyReadVerseKeys.length === 0) return <>{t('home:no-recently-read')}</>;
+  if (recentlyReadVerseKeys.length === 0) return null;
 
   return (
     <div className={styles.sessionsContainer} id="reading-sessions">
+      <p className={styles.sessionsHeader}>{t('recently-read')}</p>
       <div className={styles.verseLinksContainer}>
         {recentlyReadVerseKeys.map((verseKey) => {
           const [chapterId, verseNumber] = getVerseAndChapterNumbersFromKey(verseKey);

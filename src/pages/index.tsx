@@ -51,7 +51,7 @@ const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }): JSX.El
             <QuranGrowthJourneySection />
           </div>
           <div className={classNames(styles.flowItem, styles.fullWidth)}>
-            <BookmarksAndCollectionsSection />
+            <BookmarksAndCollectionsSection isHomepage />
           </div>
           <div className={styles.flowItem}>
             <ChapterAndJuzListWrapper chapters={chapters} />
