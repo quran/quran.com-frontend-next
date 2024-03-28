@@ -1,46 +1,73 @@
 import React from 'react';
 
+import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
-import Input from '@/dls/Forms/Input';
 
-type CompositionProps = {
-  id: string;
-  text: string;
+import styles from './video.module.scss';
+
+import Button from '@/dls/Button/Button';
+import Progress from '@/dls/Progress';
+import { useRendering } from '@/hooks/useRendering';
+import IconDownload from '@/icons/download.svg';
+import IconRender from '@/icons/slow_motion_video.svg';
+import layoutStyle from '@/pages/index.module.scss';
+import { COMPOSITION_NAME } from '@/utils/videoGenerator/constants';
+
+export type VideoCompositionProps = {
+  video: object;
+  verses: object;
+  audio: object;
+  timestamps: object;
+  sceneBackground: object;
+  verseBackground: object;
+  fontColor: any;
+  stls: object;
+  verseAlignment: string;
+  translationAlignment: string;
+  border: string;
 };
 
 const RenderControls: React.FC<{
-  text: string;
-  setText: React.Dispatch<React.SetStateAction<string>>;
-  inputProps: CompositionProps;
-}> = ({ text, setText, inputProps }) => {
-  const { t } = useTranslation();
-  // const { renderMedia, state, undo } = useRenderingd(COMP_NAME, inputProps);
+  inputProps: VideoCompositionProps;
+}> = ({ inputProps }) => {
+  const { t } = useTranslation('common');
+  const { renderMedia, state, undo } = useRendering(COMPOSITION_NAME, inputProps);
 
   return (
-    <div className={styles.renderControlsContainer}>
+    <div
+      className={classNames(
+        layoutStyle.flowItem,
+        layoutStyle.fullWidth,
+        styles.renderControlsContainer,
+      )}
+    >
       {state.status === 'init' || state.status === 'invoking' || state.status === 'error' ? (
         <>
-          <Input disabled={state.status === 'invoking'} onChange={setText} value={text} />
-          <br />
-          <AlignEnd>
-            <Button
-              disabled={state.status === 'invoking'}
-              loading={state.status === 'invoking'}
-              onClick={renderMedia}
-            >
-              {t('render-video')}
-            </Button>
-          </AlignEnd>
+          <Button
+            prefix={<IconRender />}
+            isDisabled={state.status === 'invoking'}
+            isLoading={state.status === 'invoking'}
+            onClick={renderMedia}
+          >
+            {t('video.render-video')}
+          </Button>
           {state.status === 'error' ? <div>{state.error.message}</div> : null}
         </>
       ) : null}
       {state.status === 'rendering' || state.status === 'done' ? (
         <>
-          <ProgressBar progress={state.status === 'rendering' ? state.progress : 1} />
-          <Spacing></Spacing>
-          <AlignEnd>
-            <DownloadButton undo={undo} state={state}></DownloadButton>
-          </AlignEnd>
+          <Progress value={state.status === 'rendering' ? state.progress : 1} />
+          <br />
+          <Button
+            prefix={<IconDownload />}
+            // @ts-ignore
+            isDisabled={state.status === 'invoking'}
+            // @ts-ignore
+            isLoading={state.status === 'invoking'}
+            onClick={renderMedia}
+          >
+            {t('video.download-video')}
+          </Button>
         </>
       ) : null}
     </div>

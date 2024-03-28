@@ -253,6 +253,7 @@ const VideoGenerator: NextPage<VideoGenerator> = ({
           setVerseFrom={setVerseFrom}
           verseTo={verseTo}
           setVerseTo={setVerseTo}
+          inputProps={inputProps}
         />
       </div>
     </div>

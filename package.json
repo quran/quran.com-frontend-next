@@ -56,8 +56,10 @@
     "@radix-ui/react-tooltip": "^1.0.7",
     "@radix-ui/react-visually-hidden": "^1.0.3",
     "@reduxjs/toolkit": "^1.8.5",
+    "@remotion/bundler": "4.0.122",
     "@remotion/cli": "4.0.122",
     "@remotion/eslint-plugin": "4.0.122",
+    "@remotion/lambda": "4.0.122",
     "@remotion/player": "4.0.122",
     "@sanity/client": "^5.2.1",
     "@sanity/image-url": "^1.0.2",
@@ -94,7 +96,8 @@
     "refresh-fetch": "^0.8.0",
     "remotion": "4.0.122",
     "swr": "^1.2.1",
-    "xstate": "^4.33.6"
+    "xstate": "^4.33.6",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@lokalise/node-api": "^8.0.1",

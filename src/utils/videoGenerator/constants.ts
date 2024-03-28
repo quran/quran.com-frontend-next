@@ -1,3 +1,5 @@
+import { z } from 'zod';
+
 import defaultAudio from './defaultAudio.json';
 import defaultVerses from './defaultVerses.json';
 
@@ -100,3 +102,23 @@ export const DEFAULT_PROPS = {
   translationAlignment: 'centre',
   border: 'false',
 };
+
+export const COMPOSITION_PROPS = z.object({
+  video: z.any(),
+  verses: z.any(),
+  audio: z.any(),
+  timestamps: z.any(),
+  sceneBackground: z.any(),
+  verseBackground: z.any(),
+  fontColor: z.any(),
+  stls: z.any(),
+  verseAlignment: z.string(),
+  translationAlignment: z.string(),
+  border: z.string(),
+});
+
+export const REGION = 'us-east-1';
+export const SITE_NAME = 'my-next-app';
+export const RAM = 2048;
+export const DISK = 2048;
+export const TIMEOUT = 240;

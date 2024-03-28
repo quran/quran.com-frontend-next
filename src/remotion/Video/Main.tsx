@@ -48,9 +48,10 @@ export const VideoContent = ({
       }}
     >
       <div className={styles.videoContainer}>
-        <Video loop src={video.videoSrc} />
+        <Video pauseWhenBuffering loop src={video.videoSrc} />
       </div>
       <Audio
+        pauseWhenBuffering
         startFrom={
           audio?.verseTimings[0]?.normalizedStart
             ? (audio?.verseTimings[0]?.normalizedStart / 1000) * 30
