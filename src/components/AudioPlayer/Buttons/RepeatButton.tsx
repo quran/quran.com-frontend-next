@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { SetStateAction, useContext, useState, Dispatch } from 'react';
 
 import { useSelector } from '@xstate/react';
 import useTranslation from 'next-translate/useTranslation';
@@ -16,7 +16,11 @@ import { logButtonClick } from '@/utils/eventLogger';
 import { selectIsLoading } from '@/xstate/actors/audioPlayer/selectors';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 
-const RepeatAudioButton = () => {
+interface RepeatAudioButton {
+  setOpenOverflowAudioPlayerActionsMenu: Dispatch<SetStateAction<boolean>>;
+}
+
+const RepeatAudioButton = ({ setOpenOverflowAudioPlayerActionsMenu }: RepeatAudioButton) => {
   const { t } = useTranslation('common');
   const audioService = useContext(AudioPlayerMachineContext);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -68,6 +72,7 @@ const RepeatAudioButton = () => {
           chapterId={currentSurah.toString()}
           isOpen={isModalOpen}
           onClose={() => setIsModalOpen(false)}
+          setOpenOverflowActionsMenu={setOpenOverflowAudioPlayerActionsMenu}
         />
       )}
     </>

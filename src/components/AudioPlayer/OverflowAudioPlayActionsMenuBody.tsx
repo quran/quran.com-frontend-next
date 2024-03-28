@@ -1,4 +1,4 @@
-import { useState, useMemo, useContext, useEffect } from 'react';
+import { useState, useMemo, useContext, useEffect, SetStateAction, Dispatch } from 'react';
 
 import { useSelector } from '@xstate/react';
 import useTranslation from 'next-translate/useTranslation';
@@ -38,7 +38,11 @@ enum AudioPlayerOverflowMenu {
   Experience = 'experience',
 }
 
-const OverflowAudioPlayActionsMenuBody = () => {
+interface OverflowAudioPlayActionsMenuBodyProps {
+  setOpen: Dispatch<SetStateAction<boolean>>;
+}
+
+const OverflowAudioPlayActionsMenuBody = ({ setOpen }: OverflowAudioPlayActionsMenuBodyProps) => {
   const [selectedMenu, setSelectedMenu] = useState<AudioPlayerOverflowMenu>(
     AudioPlayerOverflowMenu.Main,
   );
@@ -76,7 +80,7 @@ const OverflowAudioPlayActionsMenuBody = () => {
     () => ({
       [AudioPlayerOverflowMenu.Main]: [
         <DownloadAudioButton key={0} />,
-        <RepeatButton key={1} />,
+        <RepeatButton key={1} setOpenOverflowAudioPlayerActionsMenu={setOpen} />,
         <PopoverMenu.Divider key={2} />,
         <PopoverMenu.Item
           key={3}
