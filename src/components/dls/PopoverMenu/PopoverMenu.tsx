@@ -1,6 +1,6 @@
 /* eslint-disable react/no-multi-comp */
 
-import { useEffect, useState } from 'react';
+import { ReactNode, useEffect, useState, SetStateAction, Dispatch } from 'react';
 
 import * as PrimitiveDropdownMenu from '@radix-ui/react-dropdown-menu';
 import classNames from 'classnames';
@@ -24,6 +24,7 @@ type PopoverMenuProps = {
   isPortalled?: boolean;
   isModal?: boolean;
   onOpenChange?: (open: boolean) => void;
+  renderMenuBody?: (setOpen: Dispatch<SetStateAction<boolean>>) => ReactNode;
   expandDirection?: PopoverMenuExpandDirection;
   contentClassName?: string;
   shouldClose?: boolean;
@@ -37,6 +38,7 @@ const PopoverMenu = ({
   isModal = true,
   shouldClose = true,
   onOpenChange,
+  renderMenuBody,
   expandDirection: side = PopoverMenuExpandDirection.BOTTOM,
   contentClassName,
 }: PopoverMenuProps) => {
@@ -47,7 +49,7 @@ const PopoverMenu = ({
       className={classNames(styles.content, contentClassName)}
       side={side}
     >
-      {children}
+      {renderMenuBody ? renderMenuBody(setOpen) : children}
     </PrimitiveDropdownMenu.Content>
   );
 

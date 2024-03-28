@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { SetStateAction, useState, Dispatch } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
@@ -13,8 +13,13 @@ import { getChapterNumberFromKey } from '@/utils/verse';
 type VerseActionRepeatAudioProps = {
   verseKey: string;
   isTranslationView: boolean;
+  setOpenOverflowVerseActionsMenu: Dispatch<SetStateAction<boolean>>;
 };
-const VerseActionRepeatAudio = ({ verseKey, isTranslationView }: VerseActionRepeatAudioProps) => {
+const VerseActionRepeatAudio = ({
+  verseKey,
+  setOpenOverflowVerseActionsMenu,
+  isTranslationView
+}: VerseActionRepeatAudioProps) => {
   const { t } = useTranslation('common');
   const [isModalOpen, setIsModalOpen] = useState(false);
   const chapterId = getChapterNumberFromKey(verseKey);
@@ -36,6 +41,7 @@ const VerseActionRepeatAudio = ({ verseKey, isTranslationView }: VerseActionRepe
         chapterId={chapterId.toString()}
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
+        setOpenOverflowActionsMenu={setOpenOverflowVerseActionsMenu}
       />
       <PopoverMenu.Item icon={<RepeatIcon />} onClick={onItemClicked}>
         {t('audio.player.repeat-1-verse')}
