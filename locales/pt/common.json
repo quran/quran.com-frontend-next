@@ -82,7 +82,8 @@
       "start-playing": "Começa a jogar",
       "stop-repeating": "Pare de Repetir",
       "times": "vezes",
-      "verses-range": "Variedade de versos"
+      "verses-range": "Variedade de versos",
+      "volume-control": "Controle de volume"
     },
     "repeat-moved": "As configurações de repetição foram movidas para o reprodutor de áudio. Clique no <0> </0> para acessá-los",
     "select-reciter": "Selecione o recitador",

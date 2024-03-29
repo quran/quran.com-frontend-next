@@ -1,14 +1,11 @@
 {
   "no-bookmarks": "Vous n'avez pas encore de favoris",
+  "no-recently-read": "Vous n'avez pas encore de séances de lecture",
   "noble-quran": "Le Noble Coran",
   "qgj": {
-    "desc": {
-      "logged-in-no-goal": "<bold> Séries de lecture </bold> - Mettez-vous au défi de maintenir une séquence de 30 jours pendant ce Ramadan !",
-      "logged-out": "<bold> Séries de lecture </bold> - Mettez-vous au défi de maintenir une séquence de 30 jours pendant ce Ramadan ! <link> connectez-vous simplement </link>"
-    },
     "learning-plans": {
       "cta": {
-        "all-plans": "Tous les forfaits",
+        "all-plans": "Voir tous les forfaits",
         "my-plans": "Mes plans"
       },
       "desc": {

@@ -4,6 +4,7 @@ import { useSelector } from '@xstate/react';
 
 import CloseButton from './Buttons/CloseButton';
 import PlayPauseButton from './Buttons/PlayPauseButton';
+import VolumeControl from './Buttons/VolumeControl';
 import OverflowAudioPlayerActionsMenu from './OverflowAudioPlayerActionsMenu';
 import styles from './PlaybackControls.module.scss';
 import SeekButton, { SeekButtonType } from './SeekButton';
@@ -19,6 +20,9 @@ const PlaybackControls = () => {
     <div className={styles.container}>
       <div className={styles.actionItem}>
         <OverflowAudioPlayerActionsMenu />
+      </div>
+      <div className={styles.actionItem}>
+        <VolumeControl />
       </div>
       <div className={styles.actionItem}>
         <SeekButton type={SeekButtonType.PrevAyah} isLoading={isLoading} />

@@ -82,7 +82,8 @@
       "start-playing": "Commencer à jouer",
       "stop-repeating": "Arrêter de répéter",
       "times": "fois",
-      "verses-range": "Gamme de vers"
+      "verses-range": "Gamme de vers",
+      "volume-control": "Contrôle du volume"
     },
     "repeat-moved": "Les paramètres de répétition ont été déplacés vers le lecteur audio. Cliquez sur l' <0> </0> pour y accéder",
     "select-reciter": "Sélectionnez le récitant",

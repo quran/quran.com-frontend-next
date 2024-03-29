@@ -1,14 +1,11 @@
 {
   "no-bookmarks": "U heeft nog geen bladwijzers",
+  "no-recently-read": "Je hebt nog geen leessessies",
   "noble-quran": "De Edele Koran",
   "qgj": {
-    "desc": {
-      "logged-in-no-goal": "<bold> Leesreeksen </bold> - Daag jezelf uit om deze ramadan een reeks van 30 dagen aan te houden!",
-      "logged-out": "<bold> Leesreeksen </bold> - Daag jezelf uit om deze ramadan een reeks van 30 dagen aan te houden! Gewoon <link> inloggen </link>"
-    },
     "learning-plans": {
       "cta": {
-        "all-plans": "Alle plannen",
+        "all-plans": "Bekijk alle abonnementen",
         "my-plans": "Mijn plannen"
       },
       "desc": {

@@ -1,14 +1,11 @@
 {
   "no-bookmarks": "Você ainda não tem favoritos",
+  "no-recently-read": "Você ainda não tem nenhuma sessão de leitura",
   "noble-quran": "O Nobre Alcorão",
   "qgj": {
-    "desc": {
-      "logged-in-no-goal": "<bold> Sequências de leitura </bold> - Desafie-se a manter uma sequência de 30 dias neste Ramadã!",
-      "logged-out": "<bold> Sequências de leitura </bold> - Desafie-se a manter uma sequência de 30 dias neste Ramadã! Basta <link> fazer login </link>"
-    },
     "learning-plans": {
       "cta": {
-        "all-plans": "Todos os planos",
+        "all-plans": "Ver todos os planos",
         "my-plans": "Meus planos"
       },
       "desc": {
