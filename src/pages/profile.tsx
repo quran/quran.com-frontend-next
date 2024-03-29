@@ -102,7 +102,6 @@ const ProfilePage: NextPage<Props> = () => {
                 {isLoading ? profileSkeletonInfoSkeleton : profileInfo}
               </div>
             </div>
-
             <div
               className={classNames(
                 layoutStyle.flowItem,
@@ -119,7 +118,7 @@ const ProfilePage: NextPage<Props> = () => {
                 styles.bookmarksAndCollectionsContainer,
               )}
             >
-              <BookmarksAndCollectionsSection />
+              <BookmarksAndCollectionsSection isHomepage={false} />
             </div>
 
             <div

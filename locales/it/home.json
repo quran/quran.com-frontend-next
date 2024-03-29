@@ -1,14 +1,11 @@
 {
   "no-bookmarks": "Non hai ancora nessun segnalibro",
+  "no-recently-read": "Non hai ancora sessioni di lettura",
   "noble-quran": "Il Nobile Corano",
   "qgj": {
-    "desc": {
-      "logged-in-no-goal": "<bold> Serie di letture </bold> - Sfida te stesso a mantenere una serie di 30 giorni durante questo Ramadan!",
-      "logged-out": "<bold> Serie di letture </bold> - Sfida te stesso a mantenere una serie di 30 giorni durante questo Ramadan! Basta <link> accedere </link>"
-    },
     "learning-plans": {
       "cta": {
-        "all-plans": "Tutti i piani",
+        "all-plans": "Vedi tutti i piani",
         "my-plans": "I miei piani"
       },
       "desc": {
