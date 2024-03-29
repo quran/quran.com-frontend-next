@@ -19,7 +19,7 @@ export enum PopoverMenuExpandDirection {
 
 type PopoverMenuProps = {
   isOpen?: boolean;
-  children: React.ReactNode;
+  children?: React.ReactNode;
   trigger?: React.ReactNode;
   isPortalled?: boolean;
   isModal?: boolean;
