@@ -18,7 +18,7 @@ type VerseActionRepeatAudioProps = {
 const VerseActionRepeatAudio = ({
   verseKey,
   setOpenOverflowVerseActionsMenu,
-  isTranslationView
+  isTranslationView,
 }: VerseActionRepeatAudioProps) => {
   const { t } = useTranslation('common');
   const [isModalOpen, setIsModalOpen] = useState(false);

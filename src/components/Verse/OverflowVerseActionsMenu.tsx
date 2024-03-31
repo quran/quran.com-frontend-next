@@ -68,11 +68,12 @@ const OverflowVerseActionsMenu: React.FC<Props> = ({
             onActionTriggered={onActionTriggered}
             bookmarksRangeUrl={bookmarksRangeUrl}
             setOpenOverflowVerseActionsMenu={setOpen}
-          />)
-        }
+          />
+        )}
         onOpenChange={(open: boolean) => {
           logEvent(
-            `${isTranslationView ? 'translation_view' : 'reading_view'}_verse_actions_menu_${open ? 'open' : 'close'
+            `${isTranslationView ? 'translation_view' : 'reading_view'}_verse_actions_menu_${
+              open ? 'open' : 'close'
             }`,
           );
         }}

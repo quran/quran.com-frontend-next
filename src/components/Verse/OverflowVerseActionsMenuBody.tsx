@@ -28,7 +28,7 @@ interface Props {
   isTranslationView: boolean;
   onActionTriggered?: () => void;
   bookmarksRangeUrl: string;
-  setOpenOverflowVerseActionsMenu: Dispatch<SetStateAction<boolean>>
+  setOpenOverflowVerseActionsMenu: Dispatch<SetStateAction<boolean>>;
 }
 
 const RESET_ACTION_TEXT_TIMEOUT_MS = 3 * 1000;
@@ -149,7 +149,11 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
         />
       )}
 
-      <VerseActionRepeatAudio setOpenOverflowVerseActionsMenu={setOpenOverflowVerseActionsMenu} isTranslationView={isTranslationView} verseKey={verse.verseKey} />
+      <VerseActionRepeatAudio
+        setOpenOverflowVerseActionsMenu={setOpenOverflowVerseActionsMenu}
+        isTranslationView={isTranslationView}
+        verseKey={verse.verseKey}
+      />
     </div>
   );
 };

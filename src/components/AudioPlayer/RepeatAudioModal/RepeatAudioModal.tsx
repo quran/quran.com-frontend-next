@@ -116,7 +116,15 @@ const RepeatAudioModal = ({
 
   const onPlayClick = () => {
     logButtonClick('start_repeat_play');
-    onSettingsChangeWithoutDispatch('repeatSettings', verseRepetition, PreferenceGroup.AUDIO, () => { play(); setOpenOverflowActionsMenu(false) });
+    onSettingsChangeWithoutDispatch(
+      'repeatSettings',
+      verseRepetition,
+      PreferenceGroup.AUDIO,
+      () => {
+        play();
+        setOpenOverflowActionsMenu(false);
+      },
+    );
   };
 
   const onCancelClick = () => {

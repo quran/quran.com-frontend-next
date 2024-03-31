@@ -138,7 +138,7 @@ const OverflowAudioPlayActionsMenuBody = ({ setOpen }: OverflowAudioPlayActionsM
         <AudioExperienceMenu onBack={() => setSelectedMenu(AudioPlayerOverflowMenu.Main)} />
       ),
     }),
-    [t, playbackRate],
+    [t, playbackRate, setOpen],
   );
 
   return <>{menus[selectedMenu]}</>;
