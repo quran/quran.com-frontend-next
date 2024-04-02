@@ -16,7 +16,6 @@ import {
   DEFAULT_PROPS,
 } from '@/utils/videoGenerator/constants';
 import ThemeProvider from 'src/styles/ThemeProvider';
-import { AudioPlayerMachineProvider } from 'src/xstate/AudioPlayerMachineContext';
 
 /**
  * - Make sure API calls are being made in calculate metadata
@@ -41,7 +40,6 @@ export const RemotionRoot = () => {
     <DirectionProvider dir={getDir('en')}>
       <TooltipProvider>
         <ToastContainerProvider>
-          <AudioPlayerMachineProvider>
             <ReduxProvider locale="en">
               <ThemeProvider>
                 <OnboardingProvider>
@@ -80,7 +78,6 @@ export const RemotionRoot = () => {
                 </OnboardingProvider>
               </ThemeProvider>
             </ReduxProvider>
-          </AudioPlayerMachineProvider>
         </ToastContainerProvider>
       </TooltipProvider>
     </DirectionProvider>

@@ -1,7 +1,5 @@
 import type { RenderMediaOnLambdaOutput } from '@remotion/lambda/client';
 
-import { VideoCompositionProps } from '@/components/VideoGenerator/RenderControls';
-
 const makeRequest = async <Res>(endpoint: string, body: unknown): Promise<Res> => {
   const result = await fetch(endpoint, {
     method: 'post',
@@ -23,7 +21,7 @@ export const renderVideo = async ({
   inputProps,
 }: {
   id: string;
-  inputProps: VideoCompositionProps;
+  inputProps;
 }) => {
   const body = {
     id,
