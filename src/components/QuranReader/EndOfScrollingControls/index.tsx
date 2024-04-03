@@ -55,7 +55,8 @@ const EndOfScrollingControls: React.FC<Props> = ({
             <ChapterControls lastVerse={lastVerse} initialData={initialData} />
           )}
           {(quranReaderDataType === QuranReaderDataType.Verse ||
-            quranReaderDataType === QuranReaderDataType.VerseRange) && (
+            quranReaderDataType === QuranReaderDataType.ChapterVerseRanges ||
+            quranReaderDataType === QuranReaderDataType.Ranges) && (
             <VerseControls lastVerse={lastVerse} />
           )}
           {quranReaderDataType === QuranReaderDataType.Page && (
