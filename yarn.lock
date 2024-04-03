@@ -4717,6 +4717,11 @@
     "@typescript-eslint/types" "6.21.0"
     eslint-visitor-keys "^3.4.1"
 
+"@umalqura/core@^0.0.7":
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/@umalqura/core/-/core-0.0.7.tgz#aedecd67145002db4bab8725de721dd819e07de8"
+  integrity sha512-o8G1J2KRzM/Hal5Taln1QHzhfJsE4+8hQH087Pl6C0ZjPhmw7tjjuejjbgj++Lc2BP4kRDswTJ3J5TuGGybA2Q==
+
 "@ungap/structured-clone@^1.2.0":
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/@ungap/structured-clone/-/structured-clone-1.2.0.tgz#756641adb587851b5ccb3e095daf27ae581c8406"
