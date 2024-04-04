@@ -4,7 +4,6 @@ import { configureRefreshFetch } from 'refresh-fetch';
 import { getTimezone } from '../datetime';
 
 import BookmarkByCollectionIdQueryParams from './types/BookmarkByCollectionIdQueryParams';
-import GetAllUserReflectionsQueryParams from './types/GetAllUserReflectionsQueryParams';
 import GetAllNotesQueryParams from './types/Note/GetAllNotesQueryParams';
 
 import {
@@ -54,7 +53,6 @@ import {
   makeFilterActivityDaysUrl,
   makeStreakUrl,
   makeEstimateRangesReadingTimeUrl,
-  makePostReflectionViewsUrl,
   makeUserFeatureFlagsUrl,
   makeUserConsentsUrl,
   makeNotesUrl,
@@ -64,7 +62,6 @@ import {
   makeGetCoursesUrl,
   makeGetCourseUrl,
   makePublishNoteUrl,
-  makeGetUserReflectionsUrl,
   makeCourseFeedbackUrl,
   makeGetUserCoursesCountUrl,
 } from '@/utils/auth/apiPaths';
@@ -260,9 +257,6 @@ export const syncUserLocalData = async (
   payload: Record<SyncDataType, any>,
 ): Promise<SyncUserLocalDataResponse> => postRequest(makeSyncLocalDataUrl(), payload);
 
-export const postReflectionViews = async (postId: string): Promise<{ success: boolean }> =>
-  postRequest(makePostReflectionViewsUrl(postId), {});
-
 export const getUserPreferences = async (): Promise<UserPreferencesResponse> => {
   const userPreferences = (await privateFetcher(
     makeUserPreferencesUrl(),
@@ -370,10 +364,6 @@ export const addCollection = async (collectionName: string) => {
 
 export const getAllNotes = async (params: GetAllNotesQueryParams) => {
   return privateFetcher(makeNotesUrl(params));
-};
-
-export const getAllUserReflections = async (params: GetAllUserReflectionsQueryParams) => {
-  return privateFetcher(makeGetUserReflectionsUrl(params));
 };
 
 export const countNotesWithinRange = async (from: string, to: string) => {

@@ -1,0 +1,12 @@
+{
+  "week-title": "Week {{weekNumber}} of {{monthAndYear}}",
+  "quranic-calendar": "Global Quranic Calendar",
+  "hero": {
+    "line-1": "Welcome to our Global Quranic Calendar, a journey to unite hearts across the world through the Quran. Together, we'll read the same verses at the same time, transcending distances and differences.",
+    "line-2": "Join us in this shared spiritual experience, getting 'On the same page' - literally. Let's connect, reflect, and grow together, one week at a time."
+  },
+  "join-quranic-calendar": "Join the Divine Book Club on QuranReflect",
+  "joined-quranic-calendar": "You have joined the Divine Book Club",
+  "join-quranic-calendar-success": "You've joined the Divine Book Club successfully!",
+  "supplemental-resources": "Supplemental Resources"
+}

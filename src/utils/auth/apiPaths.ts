@@ -1,7 +1,6 @@
 import stringify from '../qs-stringify';
 
 import BookmarkByCollectionIdQueryParams from './types/BookmarkByCollectionIdQueryParams';
-import GetAllUserReflectionsQueryParams from './types/GetAllUserReflectionsQueryParams';
 import GetNoteByAttachedEntityParams from './types/GetNoteByAttachedEntityParams';
 import GetAllNotesQueryParams from './types/Note/GetAllNotesQueryParams';
 
@@ -12,7 +11,7 @@ import { Mushaf } from '@/types/QuranReader';
 import { getAuthApiPath } from '@/utils/url';
 import BookmarkType from 'types/BookmarkType';
 
-const makeUrl = (url: string, parameters?: Record<string, unknown>): string => {
+export const makeUrl = (url: string, parameters?: Record<string, unknown>): string => {
   if (!parameters) {
     return getAuthApiPath(url);
   }
@@ -105,9 +104,6 @@ export const makeDeleteCollectionBookmarkByIdUrl = (collectionId: string, bookma
 
 export const makeDeleteCollectionBookmarkByKeyUrl = (collectionId: string) =>
   makeUrl(`collections/${collectionId}/bookmarks`);
-
-export const makeGetUserReflectionsUrl = (params?: GetAllUserReflectionsQueryParams) =>
-  makeUrl('posts', params as any);
 
 export const makePostReflectionViewsUrl = (postId: string) => makeUrl(`posts/${postId}/views`);
 

@@ -59,6 +59,7 @@
     "@sanity/client": "^5.2.1",
     "@sanity/image-url": "^1.0.2",
     "@sentry/nextjs": "^7.77.0",
+    "@umalqura/core": "^0.0.7",
     "@xstate/react": "^3.0.1",
     "classnames": "^2.3.2",
     "clipboard-copy": "^4.0.1",
