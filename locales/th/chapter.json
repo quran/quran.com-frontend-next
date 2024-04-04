@@ -1,3 +1,4 @@
 {
-    "meta-description": "อ่านและฟังซูเราะห์ {{transliteratedName}}​ซูเราะห์ถูกประทานใน {{revelationPlace}} เป็นซูเราะห์อันดับที่ {{chapterOrder}} ในคัมภีร์กุรอาน ชื่อซูเราะห์ หมายถึง \"{{translatedName}}\" ใน {{localeName}} และประกอบด้วย {{versesCount}} อายะห์"
+  "meta-description": "อ่านและฟังซูเราะห์ {{transliteratedName}}​ซูเราะห์ถูกประทานใน {{revelationPlace}} เป็นซูเราะห์อันดับที่ {{chapterOrder}} ในคัมภีร์กุรอาน ชื่อซูเราะห์ หมายถึง \"{{translatedName}}\" ใน {{localeName}} และประกอบด้วย {{versesCount}} อายะห์",
+  "ranges-meta-desc": "อ่านและฟังตั้งแต่ Ayah {{rangeFrom}} ถึง Ayah {{rangeTo}}"
 }

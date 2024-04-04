@@ -1,3 +1,4 @@
 {
-    "meta-description": "{{transliteratedName}} بخوانید و گوش دهید. سوره نازل شد در {{revelationPlace}} ، دستور داد {{chapterOrder}} در قرآن است. عنوان سوره به معنای \"{{translatedName}}\" در {{localeName}} و از {{versesCount}} آیه تشکیل شده است."
+  "meta-description": "{{transliteratedName}} بخوانید و گوش دهید. سوره نازل شد در {{revelationPlace}} ، دستور داد {{chapterOrder}} در قرآن است. عنوان سوره به معنای \"{{translatedName}}\" در {{localeName}} و از {{versesCount}} آیه تشکیل شده است.",
+  "ranges-meta-desc": "از Ayah {{rangeFrom}} به Ayah {{rangeTo}} بخوانید و گوش دهید."
 }
