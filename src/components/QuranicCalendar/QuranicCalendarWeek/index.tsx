@@ -61,7 +61,7 @@ const QuranicCalendarWeek: React.FC<Props> = ({
     >
       <p>
         {t('week-title', {
-          weekNumber,
+          weekNumber: weekOrder,
           monthAndYear: localizedMonthAndYear,
         })}
       </p>

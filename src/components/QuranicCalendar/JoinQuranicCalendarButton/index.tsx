@@ -3,9 +3,11 @@ import React, { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
-import CompletedTick from '@/components/Course/CompletedTick';
-import Button, { ButtonShape, ButtonType } from '@/dls/Button/Button';
+import styles from './JoinQuranicCalendarButton.module.scss';
+
+import Button, { ButtonShape, ButtonSize, ButtonType } from '@/dls/Button/Button';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
+import NotificationBellIcon from '@/icons/notification-bell.svg';
 import { isLoggedIn } from '@/utils/auth/login';
 import { followUser, isUserFollowed } from '@/utils/auth/qf/api';
 import { logButtonClick } from '@/utils/eventLogger';
@@ -61,21 +63,20 @@ const JoinQuranicCalendarButton = () => {
     }
   };
   return (
-    <Button
-      isLoading={isLoading}
-      isDisabled={hasJoined || hasError}
-      onClick={onClick}
-      type={ButtonType.Success}
-      shape={ButtonShape.Pill}
-    >
-      {hasJoined ? (
-        <>
-          <CompletedTick /> {t('joined-quranic-calendar')}
-        </>
-      ) : (
-        t('join-quranic-calendar')
-      )}
-    </Button>
+    <div>
+      <div className={styles.cta}>{t('join-quranic-calendar')}</div>
+      <Button
+        isLoading={isLoading}
+        isDisabled={hasJoined || hasError}
+        onClick={onClick}
+        type={ButtonType.Success}
+        shape={ButtonShape.Pill}
+        size={ButtonSize.Small}
+        prefix={<NotificationBellIcon />}
+      >
+        {hasJoined ? t('common:subscribed') : t('common:subscribe')}
+      </Button>
+    </div>
   );
 };
 
