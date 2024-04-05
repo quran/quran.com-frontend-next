@@ -6,7 +6,7 @@ import useTranslation from 'next-translate/useTranslation';
 import styles from './QuranicCalendarMonth.module.scss';
 
 import QuranicCalendarMonthData from '@/components/QuranicCalendar/types/QuranicCalendarMonthData';
-import { toLocalizedDate } from '@/utils/locale';
+import { toLocalizedNumber } from '@/utils/locale';
 import QuranicCalendarWeek from 'src/components/QuranicCalendar/QuranicCalendarWeek';
 
 type Props = {
@@ -15,7 +15,7 @@ type Props = {
 };
 
 const QuranicCalendarMonth: React.FC<Props> = ({ monthWeeks, monthOrder }) => {
-  const { lang } = useTranslation('quranic-calendar');
+  const { t, lang } = useTranslation('quranic-calendar');
   const currentHijriDate = umalqura();
   const currentHijriWeekOfMonth = Math.ceil(currentHijriDate.hd / 7);
   const calendarMonth = umalqura(
@@ -25,12 +25,10 @@ const QuranicCalendarMonth: React.FC<Props> = ({ monthWeeks, monthOrder }) => {
   );
   const isCurrentMonthAndYear =
     calendarMonth.hm === currentHijriDate.hm && currentHijriDate.hy === calendarMonth.hy;
-  const localizedMonthAndYear = `${toLocalizedDate(calendarMonth.date, lang, {
-    calendar: 'islamic',
-    month: 'long',
-  })} ${toLocalizedDate(calendarMonth.date, lang, {
-    calendar: 'islamic',
-    year: 'numeric',
+  const localizedMonthAndYear = `${t(
+    `islamic-months.${monthWeeks[0].hijriMonth}`,
+  )} ${toLocalizedNumber(Number(monthWeeks[0].hijriYear), lang, false, {
+    useGrouping: false,
   })}`;
 
   return (
