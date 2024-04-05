@@ -38,7 +38,7 @@ const QuranicCalendarMonth: React.FC<Props> = ({ monthWeeks, monthOrder }) => {
       <div className={styles.monthHeader}>{localizedMonthAndYear}</div>
       {monthWeeks.map((week, index) => {
         const weekNumber = index + 1;
-        const { ranges } = week;
+        const { ranges, day, month, year } = week;
         return (
           <QuranicCalendarWeek
             key={ranges}
@@ -47,6 +47,13 @@ const QuranicCalendarMonth: React.FC<Props> = ({ monthWeeks, monthOrder }) => {
             monthOrder={monthOrder}
             localizedMonthAndYear={localizedMonthAndYear}
             ranges={ranges}
+            firstDayOfWeek={
+              {
+                day,
+                month,
+                year,
+              } as unknown as { day: number; month: number; year: number }
+            }
           />
         );
       })}

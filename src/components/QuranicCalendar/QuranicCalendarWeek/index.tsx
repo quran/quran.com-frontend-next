@@ -12,6 +12,7 @@ import Link, { LinkVariant } from '@/dls/Link/Link';
 import ChevronDownIcon from '@/icons/chevron-down.svg';
 import { getQuranicCalendarPostOfWeek } from '@/utils/auth/qf/api';
 import { makeQuranicCalendarPostOfWeekUrl } from '@/utils/auth/qf/apiPaths';
+import { dateToReadableFormat } from '@/utils/datetime';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getSurahNavigationUrl } from '@/utils/navigation';
 
@@ -21,6 +22,11 @@ type Props = {
   isCurrentWeek: boolean;
   localizedMonthAndYear: string;
   ranges: string;
+  firstDayOfWeek: {
+    day: number;
+    month: number;
+    year: number;
+  };
 };
 
 // Abdelhaleem
@@ -32,8 +38,11 @@ const QuranicCalendarWeek: React.FC<Props> = ({
   isCurrentWeek,
   monthOrder,
   ranges,
+  firstDayOfWeek,
 }) => {
-  const { t } = useTranslation('quranic-calendar');
+  const { t, lang } = useTranslation('quranic-calendar');
+  const { day, month, year } = firstDayOfWeek;
+  const firstDayOfWeekDate = new Date(year, month - 1, day);
 
   const onClick = () => {
     logButtonClick('quranic_calendar_week', {
@@ -60,10 +69,12 @@ const QuranicCalendarWeek: React.FC<Props> = ({
       })}
     >
       <p>
-        {t('week-title', {
+        {`${t('week-title', {
           weekNumber: weekOrder,
           monthAndYear: localizedMonthAndYear,
-        })}
+        })} - ${dateToReadableFormat(firstDayOfWeekDate, lang, {
+          timeZone: undefined,
+        })}`}
       </p>
       <Link
         isNewTab
