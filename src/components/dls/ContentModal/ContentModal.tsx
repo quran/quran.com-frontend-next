@@ -23,6 +23,7 @@ type ContentModalProps = {
   onEscapeKeyDown?: () => void;
   children: React.ReactNode;
   hasCloseButton?: boolean;
+  hasHeader?: boolean;
   header?: React.ReactNode;
   innerRef?: ForwardedRef<ContentModalHandles>;
   // using innerRef instead of using function forwardRef so we can dynamically load this component https://github.com/vercel/next.js/issues/4957#issuecomment-413841689
@@ -44,6 +45,7 @@ const ContentModal = ({
   contentClassName,
   size = ContentModalSize.MEDIUM,
   isFixedHeight,
+  hasHeader = true,
 }: ContentModalProps) => {
   const overlayRef = useRef<HTMLDivElement>();
   const { locale } = useRouter();
@@ -77,7 +79,9 @@ const ContentModal = ({
       e.preventDefault();
       return;
     }
-    onClose();
+    if (onClose) {
+      onClose();
+    }
   };
 
   return (
@@ -94,20 +98,23 @@ const ContentModal = ({
             onEscapeKeyDown={onEscapeKeyDown}
             onPointerDownOutside={onPointerDownOutside}
           >
-            <div className={styles.header}>
-              {hasCloseButton && (
-                <Dialog.Close className={styles.closeIcon}>
-                  <Button
-                    variant={ButtonVariant.Ghost}
-                    shape={ButtonShape.Circle}
-                    onClick={onClose}
-                  >
-                    <CloseIcon />
-                  </Button>
-                </Dialog.Close>
-              )}
-              {header}
-            </div>
+            {hasHeader && (
+              <div className={styles.header}>
+                {hasCloseButton && (
+                  <Dialog.Close className={styles.closeIcon}>
+                    <Button
+                      variant={ButtonVariant.Ghost}
+                      shape={ButtonShape.Circle}
+                      onClick={onClose}
+                    >
+                      <CloseIcon />
+                    </Button>
+                  </Dialog.Close>
+                )}
+                {header}
+              </div>
+            )}
+
             <div className={styles.content}>{children}</div>
           </Dialog.Content>
         </Dialog.Overlay>

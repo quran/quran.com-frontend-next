@@ -297,6 +297,9 @@ export const makeDonateUrl = (showDonationPopup = false) =>
   `https://donate.quran.foundation${showDonationPopup ? '?showDonationPopup' : ''}`;
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-export const makeDonatePageUrl = (isOnce = true) => makeDonateUrl();
-// TODO: revert this after ramadan
-// `https://give.quran.foundation/give/${isOnce ? 482507 : 474400}/#!/donation/checkout`;
+export const makeDonatePageUrl = (isOnce = true, shouldUseProviderUrl = false) => {
+  if (shouldUseProviderUrl) {
+    return `https://give.quran.foundation/give/${isOnce ? 482507 : 474400}/#!/donation/checkout`;
+  }
+  return makeDonateUrl();
+};
