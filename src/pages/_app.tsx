@@ -16,7 +16,6 @@ import DonatePopup from '@/components/DonatePopup/DonatePopup';
 import FontPreLoader from '@/components/Fonts/FontPreLoader';
 import GlobalListeners from '@/components/GlobalListeners';
 import Navbar from '@/components/Navbar/Navbar';
-import OnboardingChecklist from '@/components/Onboarding/OnboardingChecklist';
 import SessionIncrementor from '@/components/SessionIncrementor';
 import ThirdPartyScripts from '@/components/ThirdPartyScripts/ThirdPartyScripts';
 import Footer from '@/dls/Footer/Footer';
@@ -106,7 +105,6 @@ function MyApp({ Component, pageProps }): JSX.Element {
                       <AudioPlayer />
                       <Footer />
                       <DonatePopup />
-                      <OnboardingChecklist />
                     </OnboardingProvider>
                   </ThemeProvider>
                   <SessionIncrementor />
