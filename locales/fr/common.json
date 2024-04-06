@@ -333,6 +333,8 @@
   },
   "style": "Style",
   "submit": "Soumettre",
+  "subscribe": "S'abonner",
+  "subscribed": "Abonné",
   "surah": "Sourate",
   "tafsir": {
     "font-size": "Taille de la police Tafsir",
