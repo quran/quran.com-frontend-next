@@ -16,6 +16,7 @@ type Props = {
   type?: DonateButtonType;
   isOutlined?: boolean;
   isTextBasedOnType?: boolean;
+  shouldUseProviderUrl?: boolean;
 };
 
 const DonateButton: React.FC<Props> = ({
@@ -23,12 +24,13 @@ const DonateButton: React.FC<Props> = ({
   source,
   type,
   isOutlined = false,
+  shouldUseProviderUrl = false,
 }) => {
   const { t } = useTranslation('common');
 
   const onDonateClicked = () => {
     const isOnceDonation = !type || type === DonateButtonType.ONCE;
-    const href = makeDonatePageUrl(isOnceDonation);
+    const href = makeDonatePageUrl(isOnceDonation, shouldUseProviderUrl);
     logEvent('donate_button_clicked', {
       /**
        * Examples:
