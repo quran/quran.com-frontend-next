@@ -13,7 +13,7 @@ import { followUser, isUserFollowed } from '@/utils/auth/qf/api';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getLoginNavigationUrl, getQuranicCalendarNavigationUrl } from '@/utils/navigation';
 
-const QC_USERNAME = 'quraniccalendar';
+const QC_USERNAME = 'calendar';
 
 const JoinQuranicCalendarButton = () => {
   const { t } = useTranslation('quranic-calendar');
