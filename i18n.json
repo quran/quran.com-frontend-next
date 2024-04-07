@@ -65,6 +65,6 @@
     "/notes-and-reflections": ["notes"],
     "/ramadan-activities": ["ramadan-activities"],
     "/notification-settings": ["notification-settings"],
-    "/quranic-calendar": ["quranic-calendar"]
+    "/calendar": ["quranic-calendar"]
   }
 }
