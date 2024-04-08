@@ -318,7 +318,7 @@ export const getReadingGoalProgressNavigationUrl = () => '/reading-goal/progress
 export const getNotesNavigationUrl = () => '/notes-and-reflections';
 
 export const getNotificationSettingsNavigationUrl = () => '/notification-settings';
-export const getQuranicCalendarNavigationUrl = () => '/quranic-calendar';
+export const getQuranicCalendarNavigationUrl = () => '/calendar';
 
 /**
  * Update the browser history with the new url.
