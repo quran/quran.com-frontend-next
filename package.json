@@ -37,7 +37,7 @@
     "@milkdown/transformer": "^7.3.3",
     "@milkdown/utils": "^7.3.3",
     "@next/bundle-analyzer": "^12.3.1",
-    "@novu/headless": "^0.20.0",
+    "@novu/headless": "0.24.0",
     "@radix-ui/react-checkbox": "^1.0.0",
     "@radix-ui/react-collapsible": "^1.0.0",
     "@radix-ui/react-dialog": "^1.0.5",
