@@ -1,6 +1,5 @@
 import React from 'react';
 
-import useTranslation from 'next-translate/useTranslation';
 import { useSelector } from 'react-redux';
 
 import RevelationOrderNavigationNotice, {
@@ -32,7 +31,6 @@ const EndOfScrollingControls: React.FC<Props> = ({
   lastVerse,
   initialData,
 }) => {
-  const { t } = useTranslation('common');
   const isReadingByRevelationOrder = useSelector(selectIsReadingByRevelationOrder);
 
   return (
