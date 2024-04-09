@@ -90,6 +90,7 @@ const QuranicCalendarWeek: React.FC<Props> = ({
           title={<div className={styles.collapsibleTitle}>{t('supplemental-resources')}</div>}
           prefix={<ChevronDownIcon />}
           shouldRotatePrefixOnToggle
+          shouldOpen={isCurrentWeek}
         >
           {({ isOpen: isCollapsibleOpen }) => {
             if (!isCollapsibleOpen) return null;
