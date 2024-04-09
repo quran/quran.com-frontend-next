@@ -222,16 +222,16 @@ export const isRangesStringValid = (chaptersData: ChaptersData, rangesString: st
       return false;
     }
   } else {
-    // 2. if the fromRange chapter is bigger than the toRange chapter e.g. 2:1-1:1
-    if (fromRange.chapter > toRange.chapter) {
-      return false;
-    }
-    // 3. if start of range verse key is not valid
+    // 2. if start of range verse key is not valid
     if (!isValidVerseKey(chaptersData, fromRange.verseKey)) {
       return false;
     }
-    // 4. if end of range verse key is not valid
+    // 3. if end of range verse key is not valid
     if (!isValidVerseKey(chaptersData, toRange.verseKey)) {
+      return false;
+    }
+    // 4. if the fromRange chapter is bigger than the toRange chapter e.g. 2:1-1:1
+    if (Number(fromRange.chapter) > Number(toRange.chapter)) {
       return false;
     }
   }

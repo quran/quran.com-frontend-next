@@ -98,6 +98,9 @@ describe('isRangesStringValid', async () => {
     it('Cross-Surah valid range should pass', async () => {
       expect(isRangesStringValid(chaptersData, '1:1-2:7')).toEqual(true);
     });
+    it('Cross-Surahs valid range should pass', async () => {
+      expect(isRangesStringValid(chaptersData, '84:1-114:6')).toEqual(true);
+    });
     it('Cross-Surah out of range should fail', async () => {
       expect(isRangesStringValid(chaptersData, '1:8-2:5')).toEqual(false);
     });
