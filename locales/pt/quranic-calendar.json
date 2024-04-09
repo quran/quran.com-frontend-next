@@ -1,0 +1,25 @@
+{
+  "hero": {
+    "line-1": "O Calendário Global do Alcorão é um cronograma de leitura projetado para incentivar a leitura reflexiva de todo o Alcorão, desde o final de um Ramadã até o início do próximo. Incentivamos você a reservar um tempo para compreender e refletir sobre os versículos, para que possa obter uma conexão mais profunda e sincera.",
+    "line-2": "Você pode tornar este calendário sua programação de leitura pessoal ou convidar seus amigos, familiares, grupo halaqa, comunidade masjid ou organização para acompanhar. À medida que mais pessoas ao redor do mundo seguem o mesmo cronograma, todos nós podemos nos beneficiar compartilhando reflexões, discutindo e aprendendo sobre os mesmos versículos ao mesmo tempo. Participe a qualquer momento e, se perder uma semana, simplesmente continue lendo na semana seguinte sem pressão!"
+  },
+  "islamic-months": {
+    "1": "Muharram",
+    "2": "Safar",
+    "3": "Rabi' al-Awwal",
+    "4": "Rabi' al-Thani",
+    "5": "Jumada al-Awwal",
+    "6": "Jumada al-Thani",
+    "7": "Rajabe",
+    "8": "Sha'ban",
+    "9": "Ramadã",
+    "10": "Shawwal",
+    "11": "Dhu al-Qi'dah",
+    "12": "Dhu al-Hijjah"
+  },
+  "join-quranic-calendar": "Inscreva-se para receber atualizações e recursos via QuranReflect",
+  "join-quranic-calendar-success": "Você se juntou ao Divine Book Club com sucesso!",
+  "quranic-calendar": "O Calendário Global do Alcorão",
+  "supplemental-resources": "Recursos Suplementares",
+  "week-title": "Semana {{weekNumber}} de {{monthAndYear}}"
+}
