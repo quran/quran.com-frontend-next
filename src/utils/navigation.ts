@@ -51,6 +51,16 @@ export const getVerseNavigationUrl = (chapterIdOrSlug: string, verseNumber: stri
   `/${chapterIdOrSlug}/${verseNumber}`;
 
 /**
+ * Get the href link to a range.
+ *
+ * @param {string} startVerseKey
+ * @param {string} endVerseKey
+ * @returns {string}
+ */
+export const getRangesNavigationUrl = (startVerseKey: string, endVerseKey: string): string =>
+  `/${startVerseKey}-${endVerseKey}`;
+
+/**
  * Get the href link to a juz.
  *
  * @param {string | number} juzNumber
@@ -308,6 +318,7 @@ export const getReadingGoalProgressNavigationUrl = () => '/reading-goal/progress
 export const getNotesNavigationUrl = () => '/notes-and-reflections';
 
 export const getNotificationSettingsNavigationUrl = () => '/notification-settings';
+export const getQuranicCalendarNavigationUrl = () => '/calendar';
 
 /**
  * Update the browser history with the new url.

@@ -1,0 +1,25 @@
+{
+  "hero": {
+    "line-1": "Il Calendario Coranico Globale è un programma di lettura progettato per incoraggiare la lettura riflessiva dell'intero Corano dalla fine di un Ramadan all'inizio di quello successivo. Ti invitiamo a prenderti del tempo per comprendere e riflettere sui versetti in modo da poter ottenere una connessione più profonda e sentita.",
+    "line-2": "Puoi rendere questo calendario il tuo programma di lettura personale o invitare i tuoi amici, familiari, gruppi halaqa, comunità masjid o organizzazione a seguirli. Poiché sempre più persone in tutto il mondo seguono lo stesso programma, tutti possiamo trarre beneficio dal condividere riflessioni, discutere e apprendere gli stessi versetti allo stesso tempo. Iscriviti in qualsiasi momento e, se perdi una settimana, continua semplicemente a leggere per la settimana successiva senza pressioni!"
+  },
+  "islamic-months": {
+    "1": "Muharram",
+    "2": "Safar",
+    "3": "Rabi' al-Awwal",
+    "4": "Rabi' al-Thani",
+    "5": "Jumada al-Awwal",
+    "6": "Jumada al-Thani",
+    "7": "Rajab",
+    "8": "Sha'ban",
+    "9": "Ramadan",
+    "10": "Shawwal",
+    "11": "Dhu al-Qi'dah",
+    "12": "Dhu al-Hijjah"
+  },
+  "join-quranic-calendar": "Iscriviti per ricevere aggiornamenti e risorse tramite QuranReflect",
+  "join-quranic-calendar-success": "Ti sei iscritto con successo al Divine Book Club!",
+  "quranic-calendar": "Il calendario coranico globale",
+  "supplemental-resources": "Risorse supplementari",
+  "week-title": "Settimana {{weekNumber}} di {{monthAndYear}}"
+}

@@ -8,8 +8,8 @@ import Spinner, { SpinnerSize } from '@/dls/Spinner/Spinner';
 import Error from '@/pages/_error';
 import GetUserReflectionsResponse from '@/types/auth/GetUserReflectionsResponse';
 import { privateFetcher } from '@/utils/auth/api';
-import { makeGetUserReflectionsUrl } from '@/utils/auth/apiPaths';
 import { isLoggedIn } from '@/utils/auth/login';
+import { makeGetUserReflectionsUrl } from '@/utils/auth/qf/apiPaths';
 
 const PublicReflections = () => {
   /**

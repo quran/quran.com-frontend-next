@@ -1,6 +1,7 @@
 import React, { useMemo, useRef } from 'react';
 
 import classNames from 'classnames';
+import { useRouter } from 'next/router';
 import { shallowEqual, useSelector } from 'react-redux';
 
 import { QURAN_READER_OBSERVER_ID } from '../QuranReader/observer';
@@ -29,12 +30,15 @@ type VerseTextProps = {
   shouldShowH1ForSEO?: boolean;
 };
 
+const HIDE_ARABIC_QUERY_PARAM = 'hideArabic';
+
 const VerseText = ({
   words,
   isReadingMode = false,
   isHighlighted,
   shouldShowH1ForSEO = false,
 }: VerseTextProps) => {
+  const router = useRouter();
   const textRef = useRef(null);
   useIntersectionObserver(textRef, QURAN_READER_OBSERVER_ID);
   const { quranFont, quranTextFontScale, mushafLines } = useSelector(
@@ -54,6 +58,10 @@ const VerseText = ({
     () => isCenterAlignedPage(pageNumber, lineNumber, quranFont),
     [pageNumber, lineNumber, quranFont],
   );
+  // if it's translation mode and hideArabic query param is true, don't show the verse text
+  if (isReadingMode === false && router?.query?.[HIDE_ARABIC_QUERY_PARAM] === 'true') {
+    return null;
+  }
   const firstWordData = getFirstWordOfSurah(location);
   const isTajweedFont = quranFont === QuranFont.Tajweed;
   const isBigTextLayout =

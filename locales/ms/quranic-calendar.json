@@ -1,0 +1,25 @@
+{
+  "hero": {
+    "line-1": "Kalendar Al-Quran Global ialah jadual bacaan yang direka untuk menggalakkan pembacaan reflektif keseluruhan Al-Quran dari penghujung satu Ramadan hingga awal Ramadan seterusnya. Kami menggalakkan anda untuk meluangkan masa untuk memahami dan merenung ayat-ayat tersebut supaya anda boleh mendapatkan hubungan yang lebih mendalam dan lebih ikhlas.",
+    "line-2": "Anda boleh menjadikan kalendar ini sebagai jadual bacaan peribadi anda atau menjemput rakan, keluarga, kumpulan halaqa, komuniti masjid atau organisasi anda untuk mengikutinya. Memandangkan lebih ramai orang di seluruh dunia mengikuti jadual yang sama, kita semua boleh mendapat manfaat daripada berkongsi refleksi, mengadakan perbincangan dan mempelajari ayat yang sama pada masa yang sama. Sertai bila-bila masa, dan jika anda terlepas seminggu, teruskan bacaan anda untuk minggu berikutnya tanpa tekanan!"
+  },
+  "islamic-months": {
+    "1": "Muharram",
+    "2": "Safar",
+    "3": "Rabi' al-Awwal",
+    "4": "Rabi' al-Thani",
+    "5": "Jumada al-Awwal",
+    "6": "Jumada al-Thani",
+    "7": "Rajab",
+    "8": "Sya'ban",
+    "9": "Ramadhan",
+    "10": "Syawal",
+    "11": "Dhu al-Qi'dah",
+    "12": "Dzulhijjah"
+  },
+  "join-quranic-calendar": "Langgan untuk menerima kemas kini dan sumber melalui QuranReflect",
+  "join-quranic-calendar-success": "Anda telah berjaya menyertai Kelab Buku Ilahi!",
+  "quranic-calendar": "Kalendar Al-Quran Global",
+  "supplemental-resources": "Sumber Tambahan",
+  "week-title": "Minggu {{weekNumber}} daripada {{monthAndYear}}"
+}

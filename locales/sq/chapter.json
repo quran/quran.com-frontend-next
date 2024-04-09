@@ -1,3 +1,4 @@
 {
-    "meta-description": "Lexoni dhe dëgjoni suren {{transliteratedName}} . Surja u shpall në {{revelationPlace}} , e renditur {{chapterOrder}} në Kuran. Titulli i sures do të thotë \"{{translatedName}}\" në {{localeName}} dhe përbëhet nga {{versesCount}} vargje."
+  "meta-description": "Lexoni dhe dëgjoni suren {{transliteratedName}} . Surja u shpall në {{revelationPlace}} , e renditur {{chapterOrder}} në Kuran. Titulli i sures do të thotë \"{{translatedName}}\" në {{localeName}} dhe përbëhet nga {{versesCount}} vargje.",
+  "ranges-meta-desc": "Lexoni dhe dëgjoni nga Ajeti {{rangeFrom}} tek Ajeti {{rangeTo}} ."
 }

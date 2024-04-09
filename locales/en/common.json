@@ -333,6 +333,8 @@
   },
   "style": "Style",
   "submit": "Submit",
+  "subscribe": "Subscribe",
+  "subscribed": "Subscribed",
   "surah": "Surah",
   "tafsir": {
     "font-size": "Tafsir font size",

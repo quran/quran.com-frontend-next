@@ -1,4 +1,5 @@
 import { getChapterData } from './chapter';
+import { parseVerseRange } from './verseKeys';
 
 import ChaptersData from 'types/ChaptersData';
 
@@ -146,7 +147,7 @@ export const getToAndFromFromRange = (range: string): string[] => range.split('-
 /**
  * This is to check if the range passed is valid or not. It won't be valid if:
  *
- * 1. The format is not a range's format and this is know if after splitting the range string
+ * 1. The format is not a range's format and this is known if after splitting the range string
  *    by '-', we don't have 2 parts for the range representing the from verse and to verse.
  *    e.g. 'one'
  * 2. If after splitting them, either of the 2 parts are not a valid number e.g. 'one-two'
@@ -177,6 +178,10 @@ export const isValidVerseRange = (
   if (Number.isNaN(fromNumber) || Number.isNaN(toNumber)) {
     return false;
   }
+  // 0 is not a valid verse number
+  if (fromNumber === 0 || toNumber === 0) {
+    return false;
+  }
   // if the from verse number is bigger than the to verse number
   if (fromNumber > toNumber) {
     return false;
@@ -189,6 +194,46 @@ export const isValidVerseRange = (
   // if either the from verse number of to verse number exceeds the chapter's total number.
   if (fromNumber > chapterVersesCount || toNumber > chapterVersesCount) {
     return false;
+  }
+
+  return true;
+};
+
+/**
+ * Check if a string range is valid or not.
+ * A valid range looks like this: "1:1-1:2" or "1:1-2:3".
+ *
+ * @param {ChaptersData} chaptersData
+ * @param {string} rangesString
+ * @returns {boolean}
+ */
+export const isRangesStringValid = (chaptersData: ChaptersData, rangesString: string): boolean => {
+  const parsedVerseRange = parseVerseRange(rangesString);
+  // 1. if the range is not in the right format
+  if (!parsedVerseRange) {
+    return false;
+  }
+  const [fromRange, toRange] = parsedVerseRange;
+  // if both ranges are in the same chapter
+  if (fromRange.chapter === toRange.chapter) {
+    const verseRange = `${fromRange.verse}-${toRange.verse}`;
+    // 2. if range within same surah is not valid
+    if (!isValidVerseRange(chaptersData, fromRange.chapter, verseRange)) {
+      return false;
+    }
+  } else {
+    // 2. if start of range verse key is not valid
+    if (!isValidVerseKey(chaptersData, fromRange.verseKey)) {
+      return false;
+    }
+    // 3. if end of range verse key is not valid
+    if (!isValidVerseKey(chaptersData, toRange.verseKey)) {
+      return false;
+    }
+    // 4. if the fromRange chapter is bigger than the toRange chapter e.g. 2:1-1:1
+    if (Number(fromRange.chapter) > Number(toRange.chapter)) {
+      return false;
+    }
   }
 
   return true;
