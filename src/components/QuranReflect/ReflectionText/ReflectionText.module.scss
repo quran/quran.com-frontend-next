@@ -3,6 +3,7 @@
 }
 
 .body {
+    color: var(--color-text-default);
     margin-block-start: var(--spacing-mega);
     & p + p {
         margin-block-start: var(--spacing-medium);
