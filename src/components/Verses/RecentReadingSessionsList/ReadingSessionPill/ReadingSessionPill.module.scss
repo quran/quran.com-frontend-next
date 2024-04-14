@@ -1,18 +1,9 @@
-.bookmarkItem {
-    box-sizing: border-box;
-    display: flex;
-    align-items: center;
-    margin-inline-end: var(--spacing-small);
+.readingSessionItem {
+    margin-inline-end: var(--spacing-xsmall);
     white-space: nowrap;
-    background-color: var(--color-success-medium);
-    border-radius: var(--border-radius-pill);
-    padding-inline: var(--spacing-small);
-    padding-block: var(--spacing-xsmall);
 }
 
 .linkButtonContainer {
-    color: var(--shade-0);
-    text-decoration: none;
-    background-color: transparent;
     font-weight: var(--font-weight-semibold);
+    text-decoration: underline;
 }

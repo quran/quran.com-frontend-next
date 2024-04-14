@@ -5,7 +5,7 @@ import useTranslation from 'next-translate/useTranslation';
 import styles from './ReadingSessionPill.module.scss';
 
 import DataContext from '@/contexts/DataContext';
-import Link from '@/dls/Link/Link';
+import Button, { ButtonSize, ButtonType, ButtonVariant } from '@/dls/Button/Button';
 import { getChapterData } from '@/utils/chapter';
 import { logButtonClick } from '@/utils/eventLogger';
 import { toLocalizedVerseKey } from '@/utils/locale';
@@ -27,16 +27,22 @@ const ReadingSessionPill: React.FC<Props> = ({ verseKey }) => {
     logButtonClick('recent_sessions_list_item_link');
   };
 
-  const bookmarkText = `${chapterData.transliteratedName} ${toLocalizedVerseKey(verseKey, lang)}`;
+  const readingSessionText = `${chapterData.transliteratedName} ${toLocalizedVerseKey(
+    verseKey,
+    lang,
+  )}`;
   return (
-    <div className={styles.bookmarkItem}>
-      <Link
-        href={getChapterWithStartingVerseUrl(verseKey)}
+    <div className={styles.readingSessionItem}>
+      <Button
         onClick={onLinkClicked}
+        href={getChapterWithStartingVerseUrl(verseKey)}
+        type={ButtonType.Primary}
+        variant={ButtonVariant.Compact}
         className={styles.linkButtonContainer}
+        size={ButtonSize.Small}
       >
-        {bookmarkText}
-      </Link>
+        {readingSessionText}
+      </Button>
     </div>
   );
 };
