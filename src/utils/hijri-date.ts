@@ -15,7 +15,7 @@ type Month = {
  * The idea is to sum the number of weeks from the start of the Quranic
  * calendar to the current week. This is done by summing the number of weeks
  * in each month before the current month and then adding the current week
- * in the current mont.
+ * in the current month.
  *
  * @param {umalqura.UmAlQura} currentHijriDate
  * @returns {number}
@@ -28,11 +28,9 @@ export const getCurrentQuranicCalendarWeek = (currentHijriDate: umalqura.UmAlQur
     (month) => month === currentHijriMonthYear,
   );
   let currentQuranicCalendarWeek = 0;
-  for (let monthIndex = 0; monthIndex < monthWeeks.length; monthIndex += 1) {
-    // if we passed the current month, break
-    if (monthIndex > currentQuranicMonthIndex) {
-      break;
-    }
+
+  // Instead of looping through all months, we can stop at the current month
+  for (let monthIndex = 0; monthIndex <= currentQuranicMonthIndex; monthIndex += 1) {
     const currentMonthWeeks = monthWeeks[monthIndex];
     // if the month is before the current month, add the total number of weeks in the month
     if (monthIndex !== currentQuranicMonthIndex) {
