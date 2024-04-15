@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import umalqura from '@umalqura/core';
 import classNames from 'classnames';
 import { useRouter } from 'next/router';
+import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from './JoinQuranicCalendarButton.module.scss';
@@ -14,7 +15,7 @@ import { isLoggedIn } from '@/utils/auth/login';
 import { followUser, isUserFollowed } from '@/utils/auth/qf/api';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getCurrentQuranicCalendarWeek } from '@/utils/hijri-date';
-import { toLocalizedDate } from '@/utils/locale';
+import { toLocalizedDate, toLocalizedNumber } from '@/utils/locale';
 import { getLoginNavigationUrl, getQuranicCalendarNavigationUrl } from '@/utils/navigation';
 
 const QC_USERNAME = 'calendar';
@@ -77,18 +78,32 @@ const JoinQuranicCalendarButton: React.FC<Props> = ({ currentHijriDate }) => {
     <div>
       <div className={styles.text}>
         <div>
-          {t('today', {
-            day: currentHijriDate.hd,
-            month: t(`islamic-months.${currentHijriDate.hm}`),
-            year: currentHijriDate.hy,
-            gregorianDate: toLocalizedDate(currentHijriDate.date, lang, {
-              dateStyle: 'long',
-            }),
-          })}
+          <Trans
+            i18nKey="quranic-calendar:today"
+            components={{
+              br: <br key={0} />,
+              highlight: <span key={1} className={styles.highlight} />,
+            }}
+            values={{
+              day: toLocalizedNumber(currentHijriDate.hd, lang),
+              month: t(`islamic-months.${currentHijriDate.hm}`),
+              year: toLocalizedNumber(currentHijriDate.hy, lang),
+              gregorianDate: toLocalizedDate(currentHijriDate.date, lang, {
+                dateStyle: 'long',
+              }),
+            }}
+          />
         </div>
-        {t('join-qc', {
-          weekNumber: currentQuranicCalendarWeek,
-        })}
+        <Trans
+          i18nKey="quranic-calendar:join-qc"
+          components={{
+            br: <br key={0} />,
+            highlight: <span key={1} className={styles.highlight} />,
+          }}
+          values={{
+            weekNumber: toLocalizedNumber(currentQuranicCalendarWeek, lang),
+          }}
+        />
       </div>
       <div className={classNames(styles.cta, styles.text)}>
         {hasJoined ? '' : t('join-quranic-calendar')}

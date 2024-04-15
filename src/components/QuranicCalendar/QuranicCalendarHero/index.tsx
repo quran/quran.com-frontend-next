@@ -12,12 +12,7 @@ const QuranicCalendarHero = () => {
       <div className={styles.rowContainer}>
         <div className={styles.row}>
           <p className={styles.header}>{t('quranic-calendar')}</p>
-          <div className={styles.desc}>
-            {t('hero.line-1')}
-            <br />
-            <br />
-            {t('hero.line-2')}
-          </div>
+          <div className={styles.desc}>{t('hero.line-1')}</div>
         </div>
       </div>
     </div>

@@ -13,8 +13,8 @@ import Link, { LinkVariant } from '@/dls/Link/Link';
 import ChevronDownIcon from '@/icons/chevron-down.svg';
 import { getQuranicCalendarPostOfWeek } from '@/utils/auth/qf/api';
 import { makeQuranicCalendarPostOfWeekUrl } from '@/utils/auth/qf/apiPaths';
-import { dateToReadableFormat } from '@/utils/datetime';
 import { logButtonClick } from '@/utils/eventLogger';
+import { toLocalizedNumber, toLocalizedVerseKey } from '@/utils/locale';
 import {
   QuranicCalendarRangesNavigationSettings,
   getQuranicCalendarRangesNavigationUrl,
@@ -25,26 +25,18 @@ type Props = {
   weekNumber: number;
   monthOrder: number;
   isCurrentWeek: boolean;
-  localizedMonthAndYear: string;
+  localizedMonth: string;
   ranges: string;
-  firstDayOfWeek: {
-    day: number;
-    month: number;
-    year: number;
-  };
 };
 
 const QuranicCalendarWeek: React.FC<Props> = ({
   weekNumber,
-  localizedMonthAndYear,
+  localizedMonth,
   isCurrentWeek,
   monthOrder,
   ranges,
-  firstDayOfWeek,
 }) => {
   const { t, lang } = useTranslation('quranic-calendar');
-  const { day, month, year } = firstDayOfWeek;
-  const firstDayOfWeekDate = new Date(year, month - 1, day);
   const weekOrder = monthOrder + weekNumber;
 
   const onRangesClicked = (settings: QuranicCalendarRangesNavigationSettings) => {
@@ -78,12 +70,12 @@ const QuranicCalendarWeek: React.FC<Props> = ({
       })}
     >
       <p>
-        {`${t('week-title', {
-          weekNumber: weekOrder,
-          monthAndYear: localizedMonthAndYear,
-        })} - ${dateToReadableFormat(firstDayOfWeekDate, lang, {
-          timeZone: undefined,
-        })}`}
+        {t('week-title', {
+          weekNumber: toLocalizedNumber(weekOrder, lang),
+          month: localizedMonth,
+          rangeStart: toLocalizedVerseKey(ranges.split('-')[0], lang),
+          rangeEnd: toLocalizedVerseKey(ranges.split('-')[1], lang),
+        })}
       </p>
       <div>
         <Link

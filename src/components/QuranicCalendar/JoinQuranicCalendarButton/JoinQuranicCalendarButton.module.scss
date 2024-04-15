@@ -5,6 +5,10 @@
 }
 
 .cta {
-    padding-block-end: var(--spacing-small);
+    padding-block-start: var(--spacing-small);
     min-height: calc(1.5 * var(--spacing-large));
+}
+
+.highlight {
+    color: var(--color-text-faded);
 }
