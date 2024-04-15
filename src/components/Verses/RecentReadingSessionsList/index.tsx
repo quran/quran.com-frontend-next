@@ -31,12 +31,10 @@ const RecentReadingSessionsList = () => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.bookmarksContainer}>
-        <div className={styles.verseLinksContainer}>
-          {recentlyReadVerseKeys?.map((verseKey) => (
-            <ReadingSessionPill key={verseKey} verseKey={verseKey} />
-          ))}
-        </div>
+      <div className={styles.verseLinksContainer}>
+        {recentlyReadVerseKeys?.map((verseKey) => (
+          <ReadingSessionPill key={verseKey} verseKey={verseKey} />
+        ))}
       </div>
     </div>
   );
