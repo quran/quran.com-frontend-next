@@ -1,8 +1,7 @@
 /* eslint-disable react-func/max-lines-per-function */
-/* eslint-disable max-lines */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import React, { useContext, useMemo } from 'react';
+import React, { useContext } from 'react';
 
 import { useSelector as useXstateSelector } from '@xstate/react';
 import { useRouter } from 'next/router';
@@ -39,7 +38,7 @@ const QueryParamMessage: React.FC<Props> = ({
   reciterQueryParamDifferent,
   wordByWordLocaleQueryParamDifferent,
 }) => {
-  const { t, lang } = useTranslation('common');
+  const { lang } = useTranslation('common');
   const router = useRouter();
   const audioService = useContext(AudioPlayerMachineContext);
   const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
@@ -48,39 +47,6 @@ const QueryParamMessage: React.FC<Props> = ({
   const {
     actions: { onSettingsChange, onXstateSettingsChange },
   } = usePersistPreferenceGroup();
-
-  // eslint-disable-next-line react-func/max-lines-per-function
-  const text = useMemo(() => {
-    const params = [
-      { isDifferent: translationsQueryParamDifferent, text: t('translations') },
-      { isDifferent: reciterQueryParamDifferent, text: t('reciter') },
-      { isDifferent: wordByWordLocaleQueryParamDifferent, text: t('wbw-trans-lang') },
-    ];
-
-    const differentParams = params.filter((param) => param.isDifferent);
-    const numberOfDifferentParams = differentParams.length;
-
-    if (numberOfDifferentParams === 0) {
-      return '';
-    }
-
-    if (numberOfDifferentParams === 1) {
-      return differentParams[0].text;
-    }
-
-    if (numberOfDifferentParams === 2) {
-      return `${differentParams[0].text} ${t('and')} ${differentParams[1].text}`;
-    }
-
-    return `${differentParams[0].text}, ${differentParams[1].text} ${t('and')} ${
-      differentParams[2].text
-    }`;
-  }, [
-    reciterQueryParamDifferent,
-    t,
-    translationsQueryParamDifferent,
-    wordByWordLocaleQueryParamDifferent,
-  ]);
 
   /**
    * When the use clicks on use Redux, we will import the values from redux and
@@ -159,9 +125,8 @@ const QueryParamMessage: React.FC<Props> = ({
       <Trans
         i18nKey="quran-reader:query-param-message"
         components={[
-          <span key={0}>{text}</span>,
-          <span key={1} onClick={onResetToReduxStateClicked} className={styles.link} />,
-          <span key={2} onClick={onPersistQueryParamsClicked} className={styles.link} />,
+          <span key={0} onClick={onResetToReduxStateClicked} className={styles.link} />,
+          <span key={1} onClick={onPersistQueryParamsClicked} className={styles.link} />,
         ]}
       />
     </div>
