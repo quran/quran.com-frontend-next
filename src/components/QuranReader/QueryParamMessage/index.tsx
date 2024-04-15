@@ -33,24 +33,6 @@ interface Props {
   wordByWordLocaleQueryParamDifferent: boolean;
 }
 
-const getNumberOfDifferentParams = (
-  translationsQueryParamDifferent: boolean,
-  reciterQueryParamDifferent: boolean,
-  wordByWordLocaleQueryParamDifferent: boolean,
-): number => {
-  let numberOfDifferentParams = 0;
-  if (translationsQueryParamDifferent) {
-    numberOfDifferentParams += 1;
-  }
-  if (reciterQueryParamDifferent) {
-    numberOfDifferentParams += 1;
-  }
-  if (wordByWordLocaleQueryParamDifferent) {
-    numberOfDifferentParams += 1;
-  }
-  return numberOfDifferentParams;
-};
-
 const QueryParamMessage: React.FC<Props> = ({
   translationsQueryParamDifferent,
   reciterQueryParamDifferent,
@@ -68,48 +50,30 @@ const QueryParamMessage: React.FC<Props> = ({
 
   // eslint-disable-next-line react-func/max-lines-per-function
   const text = useMemo(() => {
-    const numberOfDifferentParams = getNumberOfDifferentParams(
-      translationsQueryParamDifferent,
-      reciterQueryParamDifferent,
-      wordByWordLocaleQueryParamDifferent,
-    );
-    // if we are not using any params
+    const params = [
+      { isDifferent: translationsQueryParamDifferent, text: t('translations') },
+      { isDifferent: reciterQueryParamDifferent, text: t('reciter') },
+      { isDifferent: wordByWordLocaleQueryParamDifferent, text: t('wbw-trans-lang') },
+    ];
+
+    const differentParams = params.filter((param) => param.isDifferent);
+    const numberOfDifferentParams = differentParams.length;
+
     if (numberOfDifferentParams === 0) {
       return '';
     }
-    let usedParamsText = '';
+
     if (numberOfDifferentParams === 1) {
-      if (translationsQueryParamDifferent) {
-        usedParamsText = t('translations');
-      } else if (reciterQueryParamDifferent) {
-        usedParamsText = t('reciter');
-      } else if (wordByWordLocaleQueryParamDifferent) {
-        usedParamsText = t('wbw-trans-lang');
-      }
-    } else if (numberOfDifferentParams === 2) {
-      let isFirst = true;
-      if (translationsQueryParamDifferent) {
-        usedParamsText = isFirst
-          ? `${t('translations')} ${t('and')}`
-          : `${usedParamsText} ${t('translations')}`;
-        isFirst = false;
-      }
-      if (reciterQueryParamDifferent) {
-        usedParamsText = isFirst
-          ? `${t('reciter')} ${t('and')}`
-          : `${usedParamsText} ${t('reciter')}`;
-        isFirst = false;
-      }
-      if (wordByWordLocaleQueryParamDifferent) {
-        usedParamsText = isFirst
-          ? `${t('wbw-trans-lang')} ${t('and')}`
-          : `${usedParamsText} ${t('wbw-trans-lang')}`;
-        isFirst = false;
-      }
-    } else if (numberOfDifferentParams === 3) {
-      usedParamsText = `${t('translations')}, ${t('reciter')} ${t('and')} ${t('wbw-trans-lang')}`;
+      return differentParams[0].text;
     }
-    return usedParamsText;
+
+    if (numberOfDifferentParams === 2) {
+      return `${differentParams[0].text} ${t('and')} ${differentParams[1].text}`;
+    }
+
+    return `${differentParams[0].text}, ${differentParams[1].text} ${t('and')} ${
+      differentParams[2].text
+    }`;
   }, [
     reciterQueryParamDifferent,
     t,
@@ -179,15 +143,6 @@ const QueryParamMessage: React.FC<Props> = ({
       );
     }
   };
-
-  const areUrlParamsUsed =
-    translationsQueryParamDifferent ||
-    reciterQueryParamDifferent ||
-    wordByWordLocaleQueryParamDifferent;
-
-  if (!areUrlParamsUsed) {
-    return <></>;
-  }
 
   return (
     <div className={styles.container}>

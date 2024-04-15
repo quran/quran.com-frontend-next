@@ -18,6 +18,7 @@ import {
   selectReadingViewHoveredVerseKey,
 } from '@/redux/slices/QuranReader/readingViewVerse';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
+import QueryParam from '@/types/QueryParam';
 import { getFontClassName } from '@/utils/fontFaceHelper';
 import { getFirstWordOfSurah } from '@/utils/verse';
 import { FALLBACK_FONT, QuranFont } from 'types/QuranReader';
@@ -29,8 +30,6 @@ type VerseTextProps = {
   isHighlighted?: boolean;
   shouldShowH1ForSEO?: boolean;
 };
-
-const HIDE_ARABIC_QUERY_PARAM = 'hideArabic';
 
 const VerseText = ({
   words,
@@ -59,7 +58,7 @@ const VerseText = ({
     [pageNumber, lineNumber, quranFont],
   );
   // if it's translation mode and hideArabic query param is true, don't show the verse text
-  if (isReadingMode === false && router?.query?.[HIDE_ARABIC_QUERY_PARAM] === 'true') {
+  if (isReadingMode === false && router?.query?.[QueryParam.HIDE_ARABIC] === 'true') {
     return null;
   }
   const firstWordData = getFirstWordOfSurah(location);

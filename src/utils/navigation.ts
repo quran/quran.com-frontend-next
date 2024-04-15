@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { stringify } from 'querystring';
 
 import REVELATION_ORDER from './revelationOrder';
@@ -5,6 +6,8 @@ import { searchIdToNavigationKey } from './search';
 import { getBasePath } from './url';
 import { getVerseAndChapterNumbersFromKey, getVerseNumberRangeFromKey } from './verse';
 
+import QueryParam from '@/types/QueryParam';
+import { QuranReaderFlow } from '@/types/QuranReader';
 import { SearchNavigationType } from 'types/SearchNavigationResult';
 
 /**
@@ -37,7 +40,7 @@ export const getSurahRangeNavigationUrlByVerseKey = (key: string): string => {
  */
 export const getChapterWithStartingVerseUrl = (verseKey: string): string => {
   const [chapterId, verseNumber] = getVerseAndChapterNumbersFromKey(verseKey);
-  return `/${chapterId}?startingVerse=${verseNumber}`;
+  return `/${chapterId}?${QueryParam.STARTING_VERSE}=${verseNumber}`;
 };
 
 /**
@@ -138,6 +141,30 @@ export const getVerseReflectionNavigationUrl = (verseKey: string): string =>
 export const getSurahNavigationUrl = (surahIdOrSlug: string | number): string =>
   `/${surahIdOrSlug}`;
 
+export enum QuranicCalendarRangesNavigationSettings {
+  EnglishOnly = 'englishOnly',
+  EnglishAndArabic = 'englishAndArabic',
+  DefaultSettings = 'defaultSettings',
+}
+
+export const getQuranicCalendarRangesNavigationUrl = (
+  ranges: string,
+  settings: QuranicCalendarRangesNavigationSettings,
+): string => {
+  const params = {
+    [QueryParam.FLOW]: QuranReaderFlow.QURANIC_CALENDER,
+  };
+
+  if (settings !== QuranicCalendarRangesNavigationSettings.DefaultSettings) {
+    params[QueryParam.Translations] = 85;
+    if (settings === QuranicCalendarRangesNavigationSettings.EnglishOnly) {
+      params[QueryParam.HIDE_ARABIC] = 'true';
+    }
+  }
+
+  return `${ranges}?${stringify(params)}`;
+};
+
 /**
  * Get the href link to the previous surah.
  *
@@ -231,7 +258,7 @@ export const resolveUrlBySearchNavigationType = (
  * @returns {string}
  */
 export const getSearchQueryNavigationUrl = (query?: string): string =>
-  `/search${query ? `?query=${query}` : ''}`;
+  `/search${query ? `?${QueryParam.QUERY}=${query}` : ''}`;
 
 /**
  * Get the href link to the info page of a Surah.
@@ -311,7 +338,7 @@ export const getCoursesNavigationUrl = () => '/learning-plans';
 export const getRamadanActivitiesNavigationUrl = () => '/ramadan-activities';
 
 export const getLoginNavigationUrl = (redirectTo?: string) =>
-  `/login${redirectTo ? `?r=${redirectTo}` : ''}`;
+  `/login${redirectTo ? `?${QueryParam.REDIRECT_TO}=${redirectTo}` : ''}`;
 
 export const getReadingGoalProgressNavigationUrl = () => '/reading-goal/progress';
 

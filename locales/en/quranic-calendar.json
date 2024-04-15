@@ -21,5 +21,13 @@
   "join-quranic-calendar-success": "You've joined the Divine Book Club successfully!",
   "quranic-calendar": "The Global Quranic Calendar",
   "supplemental-resources": "Supplemental Resources",
-  "week-title": "Week {{weekNumber}} of {{monthAndYear}}"
+  "week-title": "Week {{weekNumber}} of {{monthAndYear}}",
+  "interact-with-post": "Interact with this post on QuranReflect",
+  "reading-options": {
+    "en-only": "Read in English only",
+    "en-and-ar": "Read in English and Arabic",
+    "default-settings": "Read with my default settings"
+  },
+  "today": "Today's date is: {{month}} {{day}} {{year}}, {{gregorianDate}}",
+  "join-qc": "We are in Week {{weekNumber}} of the Quranic Calendar. Join us for this week's reading even if it's your first time!"
 }

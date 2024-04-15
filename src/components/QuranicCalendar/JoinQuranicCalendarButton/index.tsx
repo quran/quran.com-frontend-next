@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 
+import umalqura from '@umalqura/core';
+import classNames from 'classnames';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
@@ -11,12 +13,18 @@ import NotificationBellIcon from '@/icons/notification-bell.svg';
 import { isLoggedIn } from '@/utils/auth/login';
 import { followUser, isUserFollowed } from '@/utils/auth/qf/api';
 import { logButtonClick } from '@/utils/eventLogger';
+import { getCurrentQuranicCalendarWeek } from '@/utils/hijri-date';
+import { toLocalizedDate } from '@/utils/locale';
 import { getLoginNavigationUrl, getQuranicCalendarNavigationUrl } from '@/utils/navigation';
 
 const QC_USERNAME = 'calendar';
 
-const JoinQuranicCalendarButton = () => {
-  const { t } = useTranslation('quranic-calendar');
+type Props = {
+  currentHijriDate: umalqura.UmAlQura;
+};
+
+const JoinQuranicCalendarButton: React.FC<Props> = ({ currentHijriDate }) => {
+  const { t, lang } = useTranslation('quranic-calendar');
   const toast = useToast();
   const [isLoading, setIsLoading] = useState(false);
   const [hasJoined, setHasJoined] = useState(false);
@@ -62,9 +70,29 @@ const JoinQuranicCalendarButton = () => {
       router.replace(getLoginNavigationUrl(getQuranicCalendarNavigationUrl()));
     }
   };
+
+  const currentQuranicCalendarWeek = getCurrentQuranicCalendarWeek(currentHijriDate);
+
   return (
     <div>
-      <div className={styles.cta}>{t('join-quranic-calendar')}</div>
+      <div className={styles.text}>
+        <div>
+          {t('today', {
+            day: currentHijriDate.hd,
+            month: t(`islamic-months.${currentHijriDate.hm}`),
+            year: currentHijriDate.hy,
+            gregorianDate: toLocalizedDate(currentHijriDate.date, lang, {
+              dateStyle: 'long',
+            }),
+          })}
+        </div>
+        {t('join-qc', {
+          weekNumber: currentQuranicCalendarWeek,
+        })}
+      </div>
+      <div className={classNames(styles.cta, styles.text)}>
+        {hasJoined ? '' : t('join-quranic-calendar')}
+      </div>
       <Button
         isLoading={isLoading}
         isDisabled={hasJoined || hasError}

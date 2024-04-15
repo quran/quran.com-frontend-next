@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import React from 'react';
 
 import classNames from 'classnames';
@@ -14,7 +15,11 @@ import { getQuranicCalendarPostOfWeek } from '@/utils/auth/qf/api';
 import { makeQuranicCalendarPostOfWeekUrl } from '@/utils/auth/qf/apiPaths';
 import { dateToReadableFormat } from '@/utils/datetime';
 import { logButtonClick } from '@/utils/eventLogger';
-import { getSurahNavigationUrl } from '@/utils/navigation';
+import {
+  QuranicCalendarRangesNavigationSettings,
+  getQuranicCalendarRangesNavigationUrl,
+} from '@/utils/navigation';
+import { getQuranReflectPostUrl } from '@/utils/quranReflect/navigation';
 
 type Props = {
   weekNumber: number;
@@ -29,9 +34,6 @@ type Props = {
   };
 };
 
-// Abdelhaleem
-const TRANSLATION_ID = 85;
-
 const QuranicCalendarWeek: React.FC<Props> = ({
   weekNumber,
   localizedMonthAndYear,
@@ -43,15 +45,22 @@ const QuranicCalendarWeek: React.FC<Props> = ({
   const { t, lang } = useTranslation('quranic-calendar');
   const { day, month, year } = firstDayOfWeek;
   const firstDayOfWeekDate = new Date(year, month - 1, day);
+  const weekOrder = monthOrder + weekNumber;
 
-  const onClick = () => {
+  const onRangesClicked = (settings: QuranicCalendarRangesNavigationSettings) => {
     logButtonClick('quranic_calendar_week', {
       ranges,
+      weekOrder,
+      settings,
     });
   };
 
-  const URL = `${ranges}?translations=${TRANSLATION_ID}&hideArabic=true`;
-  const weekOrder = monthOrder + weekNumber;
+  const onInteractClicked = () => {
+    logButtonClick('quranic_calendar_interact', {
+      ranges,
+      weekOrder,
+    });
+  };
 
   const { data, isValidating, error } = useSWRImmutable(
     makeQuranicCalendarPostOfWeekUrl(weekOrder),
@@ -60,7 +69,7 @@ const QuranicCalendarWeek: React.FC<Props> = ({
       return response;
     },
   );
-  const postBody = !isValidating && !error && data?.post;
+  const hasPost = !isValidating && !error && !!data?.post?.body;
 
   return (
     <div
@@ -76,15 +85,51 @@ const QuranicCalendarWeek: React.FC<Props> = ({
           timeZone: undefined,
         })}`}
       </p>
-      <Link
-        isNewTab
-        onClick={onClick}
-        variant={LinkVariant.Blend}
-        href={getSurahNavigationUrl(URL)}
-      >
-        {ranges}
-      </Link>
-      {!!postBody && (
+      <div>
+        <Link
+          className={styles.link}
+          isNewTab
+          onClick={() => {
+            onRangesClicked(QuranicCalendarRangesNavigationSettings.EnglishAndArabic);
+          }}
+          variant={LinkVariant.Blend}
+          href={getQuranicCalendarRangesNavigationUrl(
+            ranges,
+            QuranicCalendarRangesNavigationSettings.EnglishAndArabic,
+          )}
+        >
+          {t('reading-options.en-and-ar')}
+        </Link>
+        <Link
+          isNewTab
+          className={styles.link}
+          onClick={() => {
+            onRangesClicked(QuranicCalendarRangesNavigationSettings.EnglishOnly);
+          }}
+          variant={LinkVariant.Blend}
+          href={getQuranicCalendarRangesNavigationUrl(
+            ranges,
+            QuranicCalendarRangesNavigationSettings.EnglishOnly,
+          )}
+        >
+          {t('reading-options.en-only')}
+        </Link>
+        <Link
+          isNewTab
+          className={styles.link}
+          onClick={() => {
+            onRangesClicked(QuranicCalendarRangesNavigationSettings.DefaultSettings);
+          }}
+          variant={LinkVariant.Blend}
+          href={getQuranicCalendarRangesNavigationUrl(
+            ranges,
+            QuranicCalendarRangesNavigationSettings.DefaultSettings,
+          )}
+        >
+          {t('reading-options.default-settings')}
+        </Link>
+      </div>
+      {!!hasPost && (
         <Collapsible
           direction={CollapsibleDirection.Right}
           title={<div className={styles.collapsibleTitle}>{t('supplemental-resources')}</div>}
@@ -95,9 +140,19 @@ const QuranicCalendarWeek: React.FC<Props> = ({
           {({ isOpen: isCollapsibleOpen }) => {
             if (!isCollapsibleOpen) return null;
             return (
-              <div className={styles.collapsibleBody}>
-                <ReflectionText reflectionText={postBody} />
-              </div>
+              <>
+                <div className={styles.collapsibleBody}>
+                  <ReflectionText reflectionText={data?.post?.body} />
+                </div>
+                <Link
+                  isNewTab
+                  onClick={onInteractClicked}
+                  variant={LinkVariant.Blend}
+                  href={getQuranReflectPostUrl(data.post.id)}
+                >
+                  {t('interact-with-post')}
+                </Link>
+              </>
             );
           }}
         </Collapsible>

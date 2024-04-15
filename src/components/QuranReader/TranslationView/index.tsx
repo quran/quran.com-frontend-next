@@ -101,13 +101,21 @@ const TranslationView = ({
     );
   };
 
+  const shouldShowQueryParamMessage =
+    translationsQueryParamDifferent ||
+    reciterQueryParamDifferent ||
+    wordByWordLocaleQueryParamDifferent;
+
   return (
     <>
-      <QueryParamMessage
-        translationsQueryParamDifferent={translationsQueryParamDifferent}
-        reciterQueryParamDifferent={reciterQueryParamDifferent}
-        wordByWordLocaleQueryParamDifferent={wordByWordLocaleQueryParamDifferent}
-      />
+      {shouldShowQueryParamMessage && (
+        <QueryParamMessage
+          translationsQueryParamDifferent={translationsQueryParamDifferent}
+          reciterQueryParamDifferent={reciterQueryParamDifferent}
+          wordByWordLocaleQueryParamDifferent={wordByWordLocaleQueryParamDifferent}
+        />
+      )}
+
       <div
         className={styles.wrapper}
         onCopy={(event) => onCopyQuranWords(event, verses, quranReaderStyles.quranFont)}

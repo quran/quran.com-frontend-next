@@ -55,7 +55,7 @@ const QuranicCalendarPage = () => {
       />
       <QuranicCalendarHero />
       <PageContainer>
-        <JoinQuranicCalendarButton />
+        <JoinQuranicCalendarButton currentHijriDate={currentHijriDate} />
         <div className={styles.container}>
           <Virtuoso
             data={MONTHS_WEEKS}
