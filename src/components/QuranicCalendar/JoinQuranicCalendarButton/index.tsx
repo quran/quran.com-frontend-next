@@ -90,7 +90,9 @@ const JoinQuranicCalendarButton: React.FC<Props> = ({ currentHijriDate }) => {
             values={{
               day: toLocalizedNumber(currentHijriDate.hd, lang),
               month: t(`islamic-months.${currentHijriDate.hm}`),
-              year: toLocalizedNumber(currentHijriDate.hy, lang),
+              year: toLocalizedNumber(currentHijriDate.hy, lang, false, {
+                useGrouping: false,
+              }),
               gregorianDate: toLocalizedDate(currentHijriDate.date, lang, {
                 dateStyle: 'long',
               }),
