@@ -78,29 +78,41 @@ const JoinQuranicCalendarButton: React.FC<Props> = ({ currentHijriDate }) => {
   );
 
   return (
-    <div>
-      <div className={styles.text}>
-        <div>
-          <Trans
-            i18nKey="quranic-calendar:today"
-            components={{
-              br: <br key={0} />,
-              highlight: <span key={1} className={styles.highlight} />,
-            }}
-            values={{
-              day: toLocalizedNumber(currentHijriDate.hd, lang),
-              month: t(`islamic-months.${currentHijriDate.hm}`),
-              year: toLocalizedNumber(currentHijriDate.hy, lang, false, {
-                useGrouping: false,
-              }),
-              gregorianDate: toLocalizedDate(currentHijriDate.date, lang, {
-                dateStyle: 'long',
-              }),
-            }}
-          />
-        </div>
+    <div className={styles.text}>
+      <div className={styles.bordered}>
         <Trans
-          i18nKey="quranic-calendar:join-qc"
+          i18nKey="quranic-calendar:today"
+          components={{
+            br: <br key={0} />,
+            highlight: <span key={1} className={styles.highlight} />,
+          }}
+          values={{
+            day: toLocalizedNumber(currentHijriDate.hd, lang),
+            month: t(`islamic-months.${currentHijriDate.hm}`),
+            year: toLocalizedNumber(currentHijriDate.hy, lang, false, {
+              useGrouping: false,
+            }),
+            gregorianDate: toLocalizedDate(currentHijriDate.date, lang, {
+              dateStyle: 'long',
+            }),
+          }}
+        />
+        <br />
+        <Trans
+          i18nKey="quranic-calendar:join-qc.line-1"
+          components={{
+            br: <br key={0} />,
+            highlight: <span key={1} className={styles.highlight} />,
+          }}
+          values={{
+            weekNumber: toLocalizedNumber(currentQuranicCalendarWeek, lang),
+          }}
+        />
+        <br />
+      </div>
+      <div className={styles.subTextContainer}>
+        <Trans
+          i18nKey="quranic-calendar:join-qc.line-2"
           components={{
             br: <br key={0} />,
             normal: <span key={1} className={styles.normal} />,
@@ -110,21 +122,22 @@ const JoinQuranicCalendarButton: React.FC<Props> = ({ currentHijriDate }) => {
             weekNumber: toLocalizedNumber(currentQuranicCalendarWeek, lang),
           }}
         />
+
+        <div className={classNames(styles.cta, styles.text)}>
+          {hasJoined ? '' : t('join-quranic-calendar')}
+        </div>
+        <Button
+          isLoading={isLoading}
+          isDisabled={hasJoined || hasError}
+          onClick={onClick}
+          type={ButtonType.Success}
+          shape={ButtonShape.Pill}
+          size={ButtonSize.Small}
+          prefix={<NotificationBellIcon />}
+        >
+          {hasJoined ? t('common:subscribed') : t('common:subscribe')}
+        </Button>
       </div>
-      <div className={classNames(styles.cta, styles.text)}>
-        {hasJoined ? '' : t('join-quranic-calendar')}
-      </div>
-      <Button
-        isLoading={isLoading}
-        isDisabled={hasJoined || hasError}
-        onClick={onClick}
-        type={ButtonType.Success}
-        shape={ButtonShape.Pill}
-        size={ButtonSize.Small}
-        prefix={<NotificationBellIcon />}
-      >
-        {hasJoined ? t('common:subscribed') : t('common:subscribe')}
-      </Button>
     </div>
   );
 };

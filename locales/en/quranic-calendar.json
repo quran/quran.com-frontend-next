@@ -28,5 +28,8 @@
     "default-settings": "Read with my default settings"
   },
   "today": "Today's date is: <highlight>{{month}} {{day}} {{year}}, {{gregorianDate}}</highlight>",
-  "join-qc": "We are in <highlight>Week {{weekNumber}}</highlight> of the Quranic Calendar. <br></br><normal>Join us for this week's reading even if it's your first time!</normal>"
+  "join-qc": {
+    "line-1": "We are in <highlight>Week {{weekNumber}}</highlight> of the Quranic Calendar.",
+    "line-2": "<normal>Join us for this week's reading even if it's your first time!</normal>"
+  }
 }
