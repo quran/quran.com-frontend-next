@@ -103,6 +103,7 @@ const JoinQuranicCalendarButton: React.FC<Props> = ({ currentHijriDate }) => {
           i18nKey="quranic-calendar:join-qc"
           components={{
             br: <br key={0} />,
+            normal: <span key={1} className={styles.normal} />,
             highlight: <span key={1} className={styles.highlight} />,
           }}
           values={{

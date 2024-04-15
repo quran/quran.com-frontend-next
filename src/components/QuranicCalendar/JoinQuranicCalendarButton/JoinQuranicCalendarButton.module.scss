@@ -7,8 +7,13 @@
 .cta {
     padding-block-start: var(--spacing-small);
     min-height: calc(1.5 * var(--spacing-large));
+    font-weight: var(--font-weight-medium);
 }
 
 .highlight {
     color: var(--color-text-faded);
+}
+
+.normal {
+    font-weight: var(--font-weight-medium);
 }
