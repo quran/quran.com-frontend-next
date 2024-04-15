@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 
 import umalqura from '@umalqura/core';
 import classNames from 'classnames';
@@ -72,7 +72,10 @@ const JoinQuranicCalendarButton: React.FC<Props> = ({ currentHijriDate }) => {
     }
   };
 
-  const currentQuranicCalendarWeek = getCurrentQuranicCalendarWeek(currentHijriDate);
+  const currentQuranicCalendarWeek = useMemo(
+    () => getCurrentQuranicCalendarWeek(currentHijriDate),
+    [currentHijriDate],
+  );
 
   return (
     <div>
