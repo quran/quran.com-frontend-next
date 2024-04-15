@@ -22,6 +22,7 @@ import {
   setSelectedTranslations,
 } from '@/redux/slices/QuranReader/translations';
 import PreferenceGroup from '@/types/auth/PreferenceGroup';
+import { QuranReaderFlow } from '@/types/QuranReader';
 import { areArraysEqual } from '@/utils/array';
 import { isValidTranslationsQueryParamValue } from '@/utils/queryParamValidator';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
@@ -96,6 +97,15 @@ const QueryParamMessage: React.FC<Props> = ({
     if (wordByWordLocaleQueryParamDifferent) {
       router.query[QueryParam.WBW_LOCALE] = selectedWordByWordLocale;
     }
+    // if is in Quranic Calendar flow, remove the flow query param
+    if (router.query[QueryParam.FLOW] === QuranReaderFlow.QURANIC_CALENDER) {
+      delete router.query[QueryParam.FLOW];
+      // if hide arabic is true, remove it so that the arabic text get shown again
+      if (router.query[QueryParam.HIDE_ARABIC] === 'true') {
+        delete router.query[QueryParam.HIDE_ARABIC];
+      }
+    }
+
     router.push(router, undefined, { shallow: true });
   };
 
