@@ -23,7 +23,7 @@ import { getQuranReflectPostUrl } from '@/utils/quranReflect/navigation';
 
 type Props = {
   weekNumber: number;
-  monthOrder: number;
+  currentQuranicCalendarWeek: number;
   isCurrentWeek: boolean;
   localizedMonth: string;
   ranges: string;
@@ -33,16 +33,14 @@ const QuranicCalendarWeek: React.FC<Props> = ({
   weekNumber,
   localizedMonth,
   isCurrentWeek,
-  monthOrder,
   ranges,
 }) => {
   const { t, lang } = useTranslation('quranic-calendar');
-  const weekOrder = monthOrder + weekNumber;
 
   const onRangesClicked = (settings: QuranicCalendarRangesNavigationSettings) => {
     logButtonClick('quranic_calendar_week', {
       ranges,
-      weekOrder,
+      weekNumber,
       settings,
     });
   };
@@ -50,14 +48,14 @@ const QuranicCalendarWeek: React.FC<Props> = ({
   const onInteractClicked = () => {
     logButtonClick('quranic_calendar_interact', {
       ranges,
-      weekOrder,
+      weekNumber,
     });
   };
 
   const { data, isValidating, error } = useSWRImmutable(
-    makeQuranicCalendarPostOfWeekUrl(weekOrder),
+    makeQuranicCalendarPostOfWeekUrl(weekNumber),
     async () => {
-      const response = await getQuranicCalendarPostOfWeek(weekOrder);
+      const response = await getQuranicCalendarPostOfWeek(weekNumber);
       return response;
     },
   );
@@ -71,7 +69,7 @@ const QuranicCalendarWeek: React.FC<Props> = ({
     >
       <p>
         {t('week-title', {
-          weekNumber: toLocalizedNumber(weekOrder, lang),
+          weekNumber: toLocalizedNumber(weekNumber, lang),
           month: localizedMonth,
           rangeStart: toLocalizedVerseKey(ranges.split('-')[0], lang),
           rangeEnd: toLocalizedVerseKey(ranges.split('-')[1], lang),

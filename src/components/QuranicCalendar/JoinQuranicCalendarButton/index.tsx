@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import umalqura from '@umalqura/core';
 import classNames from 'classnames';
@@ -14,7 +14,6 @@ import NotificationBellIcon from '@/icons/notification-bell.svg';
 import { isLoggedIn } from '@/utils/auth/login';
 import { followUser, isUserFollowed } from '@/utils/auth/qf/api';
 import { logButtonClick } from '@/utils/eventLogger';
-import { getCurrentQuranicCalendarWeek } from '@/utils/hijri-date';
 import { toLocalizedDate, toLocalizedNumber } from '@/utils/locale';
 import { getLoginNavigationUrl, getQuranicCalendarNavigationUrl } from '@/utils/navigation';
 
@@ -22,9 +21,13 @@ const QC_USERNAME = 'calendar';
 
 type Props = {
   currentHijriDate: umalqura.UmAlQura;
+  currentQuranicCalendarWeek: number;
 };
 
-const JoinQuranicCalendarButton: React.FC<Props> = ({ currentHijriDate }) => {
+const JoinQuranicCalendarButton: React.FC<Props> = ({
+  currentQuranicCalendarWeek,
+  currentHijriDate,
+}) => {
   const { t, lang } = useTranslation('quranic-calendar');
   const toast = useToast();
   const [isLoading, setIsLoading] = useState(false);
@@ -71,11 +74,6 @@ const JoinQuranicCalendarButton: React.FC<Props> = ({ currentHijriDate }) => {
       router.replace(getLoginNavigationUrl(getQuranicCalendarNavigationUrl()));
     }
   };
-
-  const currentQuranicCalendarWeek = useMemo(
-    () => getCurrentQuranicCalendarWeek(currentHijriDate),
-    [currentHijriDate],
-  );
 
   return (
     <div className={styles.text}>

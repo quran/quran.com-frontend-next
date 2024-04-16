@@ -1,6 +1,3 @@
-/* eslint-disable react/no-array-index-key */
-import React from 'react';
-
 import umalqura from '@umalqura/core';
 import useTranslation from 'next-translate/useTranslation';
 import { Virtuoso } from 'react-virtuoso';
@@ -12,6 +9,7 @@ import PageContainer from '@/components/PageContainer';
 import JoinQuranicCalendarButton from '@/components/QuranicCalendar/JoinQuranicCalendarButton';
 import QuranicCalendarHero from '@/components/QuranicCalendar/QuranicCalendarHero';
 import QuranicCalendarMonth from '@/components/QuranicCalendar/QuranicCalendarMonth';
+import { getCurrentQuranicCalendarWeek } from '@/utils/hijri-date';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl, getQuranicCalendarNavigationUrl } from '@/utils/navigation';
 import monthsMap from 'quranic-calendar.json';
@@ -45,6 +43,7 @@ const QuranicCalendarPage = () => {
     }
     return 0;
   };
+  const currentQuranicCalendarWeek = getCurrentQuranicCalendarWeek(currentHijriDate);
 
   return (
     <>
@@ -55,27 +54,23 @@ const QuranicCalendarPage = () => {
       />
       <QuranicCalendarHero />
       <PageContainer>
-        <JoinQuranicCalendarButton currentHijriDate={currentHijriDate} />
+        <JoinQuranicCalendarButton
+          currentQuranicCalendarWeek={currentQuranicCalendarWeek}
+          currentHijriDate={currentHijriDate}
+        />
         <div className={styles.container}>
           <Virtuoso
             data={MONTHS_WEEKS}
             initialItemCount={1}
             initialTopMostItemIndex={getInitialTopMostItemIndex()}
             totalCount={MONTHS_WEEKS.length}
-            itemContent={(index, monthWeeks) => {
-              let totalWeeksBeforeCurrentMonth = 0;
-              for (let i = 0; i < index; i += 1) {
-                const weeksOfMonth = MONTHS_WEEKS[i].length;
-                totalWeeksBeforeCurrentMonth += weeksOfMonth;
-              }
-              return (
-                <QuranicCalendarMonth
-                  key={index}
-                  monthOrder={totalWeeksBeforeCurrentMonth}
-                  monthWeeks={monthWeeks}
-                />
-              );
-            }}
+            itemContent={(index, monthWeeks) => (
+              <QuranicCalendarMonth
+                currentQuranicCalendarWeek={currentQuranicCalendarWeek}
+                key={index}
+                monthWeeks={monthWeeks}
+              />
+            )}
           />
         </div>
       </PageContainer>
