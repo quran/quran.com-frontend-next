@@ -1,3 +1,5 @@
+/* eslint-disable guard-for-in */
+/* eslint-disable no-restricted-syntax */
 /* eslint-disable react-func/max-lines-per-function */
 import umalqura from '@umalqura/core';
 import groupBy from 'lodash/groupBy';
@@ -21,26 +23,27 @@ type Month = {
  * @returns {number}
  */
 export const getCurrentQuranicCalendarWeek = (currentHijriDate: umalqura.UmAlQura): number => {
-  const currentHijriMonthYear = `${currentHijriDate.hy}-${currentHijriDate.hm}`;
-  const currentHijriWeekOfMonth = Math.ceil(currentHijriDate.hd / 7);
-  const monthWeeks = Object.values(monthsMap);
-  const currentQuranicMonthIndex = Object.keys(monthsMap).findIndex(
-    (month) => month === currentHijriMonthYear,
-  );
-  let currentQuranicCalendarWeek = 0;
+  // Today's date
+  const today = currentHijriDate.date;
 
-  // Instead of looping through all months, we can stop at the current month
-  for (let monthIndex = 0; monthIndex <= currentQuranicMonthIndex; monthIndex += 1) {
-    const currentMonthWeeks = monthWeeks[monthIndex];
-    // if the month is before the current month, add the total number of weeks in the month
-    if (monthIndex !== currentQuranicMonthIndex) {
-      currentQuranicCalendarWeek += currentMonthWeeks.length;
-    } else {
-      // if the month is the current month, add the current week in the month
-      currentQuranicCalendarWeek += currentHijriWeekOfMonth;
+  // Convert today's date to the start of the day
+  today.setHours(0, 0, 0, 0);
+
+  // Iterate through the weeks to find the current week
+  for (const key in monthsMap) {
+    const weeks = monthsMap[key];
+    for (const week of weeks) {
+      const startDate = new Date(week.year, week.month - 1, week.day);
+      const endDate = new Date(startDate);
+      endDate.setDate(startDate.getDate() + 7);
+
+      if (today >= startDate && today < endDate) {
+        return Number(week.weekNumber);
+      }
     }
   }
-  return currentQuranicCalendarWeek;
+
+  return 0;
 };
 
 // TODO: add unit tests
