@@ -1,8 +1,8 @@
 {
   "hero": {
-    "line-1": "Le Calendrier Coranique Global est un programme de lecture conçu pour encourager la lecture réflexive de l'intégralité du Coran de la fin d'un Ramadan au début du suivant. Nous vous encourageons à prendre le temps de comprendre et de réfléchir aux versets afin d’établir une connexion plus profonde et plus sincère.",
-    "line-2": "Vous pouvez faire de ce calendrier votre programme de lecture personnel ou inviter vos amis, votre famille, votre groupe halaqa, votre communauté masjid ou votre organisation à le suivre. À mesure que de plus en plus de personnes dans le monde suivent le même horaire, nous pouvons tous bénéficier du partage de réflexions, de discussions et de l’apprentissage des mêmes versets en même temps. Inscrivez-vous à tout moment, et si vous manquez une semaine, continuez simplement votre lecture pour la semaine suivante sans pression !"
+    "line-1": "Le Calendrier Coranique Global est un programme de lecture conçu pour encourager la lecture réflexive de l'intégralité du Coran de la fin d'un Ramadan au début du suivant. Nous vous encourageons à prendre le temps de comprendre et de réfléchir aux versets afin d’établir une connexion plus profonde et plus sincère."
   },
+  "interact-with-post": "Interagissez avec cet article sur QuranReflect",
   "islamic-months": {
     "1": "Mouharram",
     "2": "Safar",
@@ -17,9 +17,19 @@
     "11": "Dhu al-Qi'dah",
     "12": "Dhu al-Hijjah"
   },
+  "join-qc": {
+    "line-1": "Nous sommes dans <highlight> semaine {{weekNumber}} <\/highlight> du calendrier coranique.",
+    "line-2": "<normal> Rejoignez-nous pour la lecture de cette semaine même si c'est votre première fois ! <\/normal>"
+  },
   "join-quranic-calendar": "Abonnez-vous pour recevoir des mises à jour et des ressources via QuranReflect",
   "join-quranic-calendar-success": "Vous avez rejoint le Divine Book Club avec succès !",
   "quranic-calendar": "Le calendrier coranique mondial",
-  "supplemental-resources": "Ressources supplémentaires",
-  "week-title": "Semaine {{weekNumber}} de {{monthAndYear}}"
+  "reading-options": {
+    "default-settings": "Lire avec mes paramètres par défaut",
+    "en-and-ar": "Lire en anglais et en arabe",
+    "en-only": "Lire uniquement en anglais"
+  },
+  "supplemental-resources": "Ressources de soutien",
+  "today": "La date d'aujourd'hui est : <highlight> {{month}} {{day}} {{year}} , {{gregorianDate}} <\/highlight>",
+  "week-title": "Semaine {{weekNumber}} ( {{month}} ) couvrant les versets {{rangeStart}} à {{rangeEnd}}"
 }

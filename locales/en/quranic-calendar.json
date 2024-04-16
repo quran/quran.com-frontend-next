@@ -2,6 +2,7 @@
   "hero": {
     "line-1": "The Global Quranic Calendar is a reading schedule designed to encourage reflective reading of the entire Quran from the end of one Ramadan to the beginning of the next. We encourage you to take time to understand and reflect on the verses so you can gain a deeper, more heartfelt connection."
   },
+  "interact-with-post": "Interact with this post on QuranReflect",
   "islamic-months": {
     "1": "Muharram",
     "2": "Safar",
@@ -16,20 +17,19 @@
     "11": "Dhu al-Qi'dah",
     "12": "Dhu al-Hijjah"
   },
-  "join-quranic-calendar": "Subscribe to receive updates and resources via QuranReflect",
-  "join-quranic-calendar-success": "You've joined the Divine Book Club successfully!",
-  "quranic-calendar": "The Global Quranic Calendar",
-  "supplemental-resources": "Supporting Resources",
-  "week-title": "Week {{weekNumber}} ({{month}}) covering verses {{rangeStart}} to {{rangeEnd}}",
-  "interact-with-post": "Interact with this post on QuranReflect",
-  "reading-options": {
-    "en-only": "Read in English only",
-    "en-and-ar": "Read in English and Arabic",
-    "default-settings": "Read with my default settings"
-  },
-  "today": "Today's date is: <highlight>{{month}} {{day}} {{year}}, {{gregorianDate}}</highlight>",
   "join-qc": {
     "line-1": "We are in <highlight>Week {{weekNumber}}</highlight> of the Quranic Calendar.",
     "line-2": "<normal>Join us for this week's reading even if it's your first time!</normal>"
-  }
+  },
+  "join-quranic-calendar": "Subscribe to receive updates and resources via QuranReflect",
+  "join-quranic-calendar-success": "You've joined the Divine Book Club successfully!",
+  "quranic-calendar": "The Global Quranic Calendar",
+  "reading-options": {
+    "default-settings": "Read with my default settings",
+    "en-and-ar": "Read in English and Arabic",
+    "en-only": "Read in English only"
+  },
+  "supplemental-resources": "Supporting Resources",
+  "today": "Today's date is: <highlight>{{month}} {{day}} {{year}}, {{gregorianDate}}</highlight>",
+  "week-title": "Week {{weekNumber}} ({{month}}) covering verses {{rangeStart}} to {{rangeEnd}}"
 }

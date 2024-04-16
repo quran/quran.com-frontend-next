@@ -1,8 +1,8 @@
 {
   "hero": {
-    "line-1": "Kalendari Global Kuranor është një orar leximi i krijuar për të inkurajuar leximin reflektues të të gjithë Kuranit nga fundi i një Ramazani deri në fillimin e tjetrin. Ne ju inkurajojmë të gjeni kohë për të kuptuar dhe reflektuar mbi vargjet, në mënyrë që të fitoni një lidhje më të thellë dhe më të përzemërt.",
-    "line-2": "Ju mund ta bëni këtë kalendar orarin tuaj personal të leximit ose të ftoni miqtë, familjen, grupin halaka, komunitetin e xhamive ose organizatën tuaj për ta ndjekur. Ndërsa më shumë njerëz në mbarë botën ndjekin të njëjtin orar, ne të gjithë mund të përfitojmë nga ndarja e reflektimeve, diskutimet dhe mësimi për të njëjtat vargje në të njëjtën kohë. Bashkohuni në çdo kohë dhe nëse humbisni një javë, thjesht vazhdoni leximin për javën në vijim pa presion!"
+    "line-1": "Kalendari Global Kuranor është një orar leximi i krijuar për të inkurajuar leximin reflektues të të gjithë Kuranit nga fundi i një Ramazani deri në fillimin e tjetrin. Ne ju inkurajojmë të gjeni kohë për të kuptuar dhe reflektuar mbi vargjet, në mënyrë që të fitoni një lidhje më të thellë dhe më të përzemërt."
   },
+  "interact-with-post": "Ndërveproni me këtë postim në QuranReflect",
   "islamic-months": {
     "1": "Muharrem",
     "2": "Safar",
@@ -17,9 +17,19 @@
     "11": "Dhul-Kida",
     "12": "Dhul Hixhe"
   },
+  "join-qc": {
+    "line-1": "Jemi në <highlight> Javën {{weekNumber}} </highlight> të Kalendarit Kur'anor.",
+    "line-2": "<normal> Bashkohuni me ne për leximin e kësaj jave edhe nëse është hera juaj e parë! </normal>"
+  },
   "join-quranic-calendar": "Abonohu për të marrë përditësime dhe burime nëpërmjet QuranReflect",
   "join-quranic-calendar-success": "Ju jeni bashkuar me sukses në Klubin e Librit Hyjnor!",
   "quranic-calendar": "Kalendari Global Kur'anor",
-  "supplemental-resources": "Burimet Suplementare",
-  "week-title": "Java {{weekNumber}} e {{monthAndYear}}"
+  "reading-options": {
+    "default-settings": "Lexo me cilësimet e mia të paracaktuara",
+    "en-and-ar": "Lexoni në anglisht dhe arabisht",
+    "en-only": "Lexoni vetëm në anglisht"
+  },
+  "supplemental-resources": "Burimet Mbështetëse",
+  "today": "Data e sotme është: <highlight> {{month}} {{day}} {{year}} , {{gregorianDate}} </highlight>",
+  "week-title": "Java {{weekNumber}} ( {{month}} ) që mbulon vargjet {{rangeStart}} deri në {{rangeEnd}}"
 }
