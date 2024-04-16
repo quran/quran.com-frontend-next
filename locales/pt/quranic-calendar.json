@@ -1,8 +1,8 @@
 {
   "hero": {
-    "line-1": "O Calendário Global do Alcorão é um cronograma de leitura projetado para incentivar a leitura reflexiva de todo o Alcorão, desde o final de um Ramadã até o início do próximo. Incentivamos você a reservar um tempo para compreender e refletir sobre os versículos, para que possa obter uma conexão mais profunda e sincera.",
-    "line-2": "Você pode tornar este calendário sua programação de leitura pessoal ou convidar seus amigos, familiares, grupo halaqa, comunidade masjid ou organização para acompanhar. À medida que mais pessoas ao redor do mundo seguem o mesmo cronograma, todos nós podemos nos beneficiar compartilhando reflexões, discutindo e aprendendo sobre os mesmos versículos ao mesmo tempo. Participe a qualquer momento e, se perder uma semana, simplesmente continue lendo na semana seguinte sem pressão!"
+    "line-1": "O Calendário Global do Alcorão é um cronograma de leitura projetado para incentivar a leitura reflexiva de todo o Alcorão, desde o final de um Ramadã até o início do próximo. Incentivamos você a reservar um tempo para compreender e refletir sobre os versículos, para que possa obter uma conexão mais profunda e sincera."
   },
+  "interact-with-post": "Interaja com esta postagem no QuranReflect",
   "islamic-months": {
     "1": "Muharram",
     "2": "Safar",
@@ -17,9 +17,19 @@
     "11": "Dhu al-Qi'dah",
     "12": "Dhu al-Hijjah"
   },
+  "join-qc": {
+    "line-1": "Estamos na <highlight> Semana {{weekNumber}} </highlight> do Calendário Alcorânico.",
+    "line-2": "<normal> Junte-se a nós na leitura desta semana, mesmo que seja sua primeira vez! </normal>"
+  },
   "join-quranic-calendar": "Inscreva-se para receber atualizações e recursos via QuranReflect",
   "join-quranic-calendar-success": "Você se juntou ao Divine Book Club com sucesso!",
   "quranic-calendar": "O Calendário Global do Alcorão",
-  "supplemental-resources": "Recursos Suplementares",
-  "week-title": "Semana {{weekNumber}} de {{monthAndYear}}"
+  "reading-options": {
+    "default-settings": "Ler com minhas configurações padrão",
+    "en-and-ar": "Leia em inglês e árabe",
+    "en-only": "Leia apenas em inglês"
+  },
+  "supplemental-resources": "Recursos de apoio",
+  "today": "A data de hoje é: <highlight> {{month}} {{day}} {{year}} , {{gregorianDate}} </highlight>",
+  "week-title": "Semana {{weekNumber}} ( {{month}} ) abrangendo os versículos {{rangeStart}} a {{rangeEnd}}"
 }

@@ -1,8 +1,8 @@
 {
   "hero": {
-    "line-1": "The Global Quranic Calendar is a reading schedule designed to encourage reflective reading of the entire Quran from the end of one Ramadan to the beginning of the next. We encourage you to take time to understand and reflect on the verses so you can gain a deeper, more heartfelt connection.",
-    "line-2": "You can make this calendar your personal reading schedule or invite your friends, family, halaqa group, masjid community, or organization to follow along. As more people around the world follow the same schedule, we can all benefit from sharing reflections, having discussions, and learning about the same verses at the same time. Join any time, and if you miss a week, simply continue your reading for the following week without pressure!"
+    "line-1": "The Global Quranic Calendar is a reading schedule designed to encourage reflective reading of the entire Quran from the end of one Ramadan to the beginning of the next. We encourage you to take time to understand and reflect on the verses so you can gain a deeper, more heartfelt connection."
   },
+  "interact-with-post": "Interact with this post on QuranReflect",
   "islamic-months": {
     "1": "Muharram",
     "2": "Safar",
@@ -17,9 +17,19 @@
     "11": "Dhu al-Qi'dah",
     "12": "Dhu al-Hijjah"
   },
+  "join-qc": {
+    "line-1": "We are in <highlight>Week {{weekNumber}}</highlight> of the Quranic Calendar.",
+    "line-2": "<normal>Join us for this week's reading even if it's your first time!</normal>"
+  },
   "join-quranic-calendar": "Subscribe to receive updates and resources via QuranReflect",
   "join-quranic-calendar-success": "You've joined the Divine Book Club successfully!",
   "quranic-calendar": "The Global Quranic Calendar",
-  "supplemental-resources": "Supplemental Resources",
-  "week-title": "Week {{weekNumber}} of {{monthAndYear}}"
+  "reading-options": {
+    "default-settings": "Read with my default settings",
+    "en-and-ar": "Read in English and Arabic",
+    "en-only": "Read in English only"
+  },
+  "supplemental-resources": "Supporting Resources",
+  "today": "Today's date is: <highlight>{{month}} {{day}} {{year}}, {{gregorianDate}}</highlight>",
+  "week-title": "Week {{weekNumber}} ({{month}}) covering verses {{rangeStart}} to {{rangeEnd}}"
 }

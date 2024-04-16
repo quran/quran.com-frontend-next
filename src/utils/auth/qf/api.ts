@@ -6,6 +6,7 @@ import {
   makeQuranicCalendarPostOfWeekUrl,
 } from './apiPaths';
 
+import AyahReflection from '@/types/QuranReflect/AyahReflection';
 import { postRequest, privateFetcher } from '@/utils/auth/api';
 import GetAllUserReflectionsQueryParams from '@/utils/auth/types/GetAllUserReflectionsQueryParams';
 
@@ -27,6 +28,6 @@ export const getAllUserReflections = async (params: GetAllUserReflectionsQueryPa
 
 export const getQuranicCalendarPostOfWeek = async (
   weekNumber: number,
-): Promise<{ post: string }> => {
+): Promise<{ post: AyahReflection }> => {
   return privateFetcher(makeQuranicCalendarPostOfWeekUrl(weekNumber));
 };

@@ -66,4 +66,8 @@ export enum WordByWordDisplay {
   TOOLTIP = 'tooltip',
 }
 
+export enum QuranReaderFlow {
+  QURANIC_CALENDER = 'calendar',
+}
+
 export default { ReadingPreference, QuranFont };

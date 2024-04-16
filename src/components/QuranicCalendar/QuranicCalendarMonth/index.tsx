@@ -6,7 +6,6 @@ import useTranslation from 'next-translate/useTranslation';
 import styles from './QuranicCalendarMonth.module.scss';
 
 import QuranicCalendarMonthData from '@/components/QuranicCalendar/types/QuranicCalendarMonthData';
-import { toLocalizedNumber } from '@/utils/locale';
 import QuranicCalendarWeek from 'src/components/QuranicCalendar/QuranicCalendarWeek';
 
 type Props = {
@@ -15,7 +14,7 @@ type Props = {
 };
 
 const QuranicCalendarMonth: React.FC<Props> = ({ monthWeeks, monthOrder }) => {
-  const { t, lang } = useTranslation('quranic-calendar');
+  const { t } = useTranslation('quranic-calendar');
   const currentHijriDate = umalqura();
   const currentHijriWeekOfMonth = Math.ceil(currentHijriDate.hd / 7);
   const calendarMonth = umalqura(
@@ -25,33 +24,22 @@ const QuranicCalendarMonth: React.FC<Props> = ({ monthWeeks, monthOrder }) => {
   );
   const isCurrentMonthAndYear =
     calendarMonth.hm === currentHijriDate.hm && currentHijriDate.hy === calendarMonth.hy;
-  const localizedMonthAndYear = `${t(
-    `islamic-months.${monthWeeks[0].hijriMonth}`,
-  )} ${toLocalizedNumber(Number(monthWeeks[0].hijriYear), lang, false, {
-    useGrouping: false,
-  })}`;
+  const localizedMonth = `${t(`islamic-months.${monthWeeks[0].hijriMonth}`)}`;
 
   return (
     <div className={styles.container}>
-      <div className={styles.monthHeader}>{localizedMonthAndYear}</div>
+      <div className={styles.monthHeader}>{localizedMonth}</div>
       {monthWeeks.map((week, index) => {
         const weekNumber = index + 1;
-        const { ranges, day, month, year } = week;
+        const { ranges } = week;
         return (
           <QuranicCalendarWeek
             key={ranges}
             isCurrentWeek={isCurrentMonthAndYear && currentHijriWeekOfMonth === weekNumber}
             weekNumber={weekNumber}
             monthOrder={monthOrder}
-            localizedMonthAndYear={localizedMonthAndYear}
+            localizedMonth={localizedMonth}
             ranges={ranges}
-            firstDayOfWeek={
-              {
-                day,
-                month,
-                year,
-              } as unknown as { day: number; month: number; year: number }
-            }
           />
         );
       })}
