@@ -1,12 +1,10 @@
 /* eslint-disable import/no-extraneous-dependencies */
-import { TIMEOUT } from 'dns';
-
 import { speculateFunctionName, AwsRegion, getRenderProgress } from '@remotion/lambda/client';
 import { z } from 'zod';
 
 import { executeApi } from '../../../lambda/api-response';
 
-import { DISK, RAM, REGION } from '@/utils/videoGenerator/constants';
+import { DISK, RAM, REGION, TIMEOUT } from '@/utils/videoGenerator/constants';
 
 export const ProgressRequest = z.object({
   bucketName: z.string(),
@@ -28,6 +26,7 @@ const progress = executeApi(ProgressRequest, async (req, body) => {
     region: REGION as AwsRegion,
     renderId: body.id,
   });
+  console.log('talalrender', renderProgress);
 
   if (renderProgress.fatalErrorEncountered) {
     return {
@@ -43,6 +42,7 @@ const progress = executeApi(ProgressRequest, async (req, body) => {
       size: renderProgress.outputSizeInBytes as number,
     };
   }
+
 
   return {
     type: 'progress',

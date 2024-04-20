@@ -47,6 +47,18 @@ interface VideoGenerator {
   chaptersData: ChaptersData;
 }
 
+/**
+ * hmm, yes the public folder is always included in a webpack bundle.
+ * we don't have a way to filter out specific files, but you can specify
+ * a different public folder using the publicDir option for bundleSite().
+ *
+ * if you want to filter the public dir, you need to use bundle() with the
+ * right publicPath (/sites/your-s3-subfolder), filter out the files from
+ * the directoy that gets generated and then upload it to S3 manually. you
+ * may use deploySite() source code as a reference:
+ * https://github.com/remotion-dev/remotion/blob/main/packages/lambda/src/api/deploy-site.ts
+ */
+
 const VideoGenerator: NextPage<VideoGenerator> = ({
   hasError,
   chaptersData,
