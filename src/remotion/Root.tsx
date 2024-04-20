@@ -15,6 +15,7 @@ import {
   VIDEO_LANDSCAPE_WIDTH,
   DEFAULT_PROPS,
 } from '@/utils/videoGenerator/constants';
+import { AudioPlayerMachineProvider } from '@/xstate/AudioPlayerMachineContext';
 import ThemeProvider from 'src/styles/ThemeProvider';
 
 /**
@@ -40,6 +41,7 @@ export const RemotionRoot = () => {
     <DirectionProvider dir={getDir('en')}>
       <TooltipProvider>
         <ToastContainerProvider>
+          <AudioPlayerMachineProvider>
             <ReduxProvider locale="en">
               <ThemeProvider>
                 <OnboardingProvider>
@@ -78,6 +80,7 @@ export const RemotionRoot = () => {
                 </OnboardingProvider>
               </ThemeProvider>
             </ReduxProvider>
+          </AudioPlayerMachineProvider>
         </ToastContainerProvider>
       </TooltipProvider>
     </DirectionProvider>
