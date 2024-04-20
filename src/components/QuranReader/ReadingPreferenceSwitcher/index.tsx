@@ -65,6 +65,17 @@ const ReadingPreferenceSwitcher: React.FC<Props> = ({
       ),
       value: ReadingPreference.Reading,
     },
+    {
+      name: (
+        <LoadingSwitcher
+          readingPreference={readingPreference}
+          selectedReadingPreference={ReadingPreference.Quiz}
+          isLoading={isLoading}
+          isIconsOnly={isIconsOnly}
+        />
+      ),
+      value: ReadingPreference.Quiz,
+    }
   ];
 
   const onViewSwitched = (view: ReadingPreference) => {

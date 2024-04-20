@@ -6,6 +6,7 @@ export enum WordByWordType {
 export enum ReadingPreference {
   Translation = 'translation', // Displays verse by verse with translation
   Reading = 'reading', // Displays the Quran text only similar to a physical Quran page without any translations.
+  Quiz = 'quiz', // Quizzes the end users by prompting them to build the surah incrementally.
 }
 
 export enum WordClickFunctionality {

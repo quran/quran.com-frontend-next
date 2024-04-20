@@ -7,6 +7,7 @@ import styles from '@/components/QuranReader/ReadingPreferenceSwitcher/ReadingPr
 import Spinner from '@/dls/Spinner/Spinner';
 import BookIcon from '@/icons/book.svg';
 import ReaderIcon from '@/icons/reader.svg';
+import EditIcon from '@/icons/edit.svg';
 import { ReadingPreference } from 'types/QuranReader';
 
 type Props = {
@@ -19,6 +20,7 @@ type Props = {
 export const readingPreferenceIcons = {
   [ReadingPreference.Reading]: <ReaderIcon />,
   [ReadingPreference.Translation]: <BookIcon />,
+  [ReadingPreference.Quiz]: <EditIcon />,
 };
 
 const LoadingSwitcher: React.FC<Props> = ({

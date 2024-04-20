@@ -264,7 +264,8 @@
   "reading-history": "Lecture de l'histoire",
   "reading-preference": {
     "reading": "En train de lire",
-    "translation": "Traduction"
+    "translation": "Traduction",
+    "quiz": "Quiz"
   },
   "recitation": "Récitation",
   "reciter": "Récitant",
