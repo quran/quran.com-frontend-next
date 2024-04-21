@@ -67,7 +67,7 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
   // Which font to copy.
   const [shouldCopyFont, setShouldCopyFont] = useState<QuranFont>(QuranFont.Uthmani);
   // whether the selected verses' footnotes should be copied or not.
-  const [shouldCopyFootnotes, setShouldCopyFootnotes] = useState(false);
+  const [shouldCopyFootnotes, setShouldCopyFootnotes] = useState(true);
   // whether we should include the translator name or not.
   const [shouldIncludeTranslatorName, setShouldIncludeTranslatorName] = useState(true);
   // a map of the IDs of the translations the users had selected and whether it should be copied or not. Will not be copied by default.
@@ -157,7 +157,8 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
         })),
       );
       // set the first verse's key as the default range's start verse.
-      setRangeStartVerse(keys[0]);
+      const startFromVerseIndex = verse?.verseNumber || 0;
+      setRangeStartVerse(keys[startFromVerseIndex]);
       // set the last verse's key as the default range's end verse.
       setRangeEndVerse(keys[keys.length - 1]);
     }
@@ -316,14 +317,14 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
             onChange={onShouldIncludeTranslatorNameChange}
             items={[
               {
-                value: FALSE_STRING,
-                id: FALSE_STRING,
-                label: t('common:no'),
-              },
-              {
                 value: TRUE_STRING,
                 id: TRUE_STRING,
                 label: t('common:yes'),
+              },
+              {
+                value: FALSE_STRING,
+                id: FALSE_STRING,
+                label: t('common:no'),
               },
             ]}
           />
@@ -354,14 +355,14 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
         onChange={onShouldCopyFootnoteChange}
         items={[
           {
-            value: FALSE_STRING,
-            id: FALSE_STRING,
-            label: t('common:no'),
-          },
-          {
             value: TRUE_STRING,
             id: TRUE_STRING,
             label: t('common:yes'),
+          },
+          {
+            value: FALSE_STRING,
+            id: FALSE_STRING,
+            label: t('common:no'),
           },
         ]}
       />
