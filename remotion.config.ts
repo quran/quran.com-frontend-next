@@ -1,6 +1,10 @@
+import path from 'path';
+
 import { Config } from '@remotion/cli/config';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
+
+Config.setPublicDir(path.join(process.cwd(), 'public', 'publicMin'));
 
 Config.overrideWebpackConfig((config) => {
   return {

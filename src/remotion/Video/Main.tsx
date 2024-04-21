@@ -1,6 +1,6 @@
 /* eslint-disable no-unsafe-optional-chaining */
 import { useSelector } from 'react-redux';
-import { AbsoluteFill, Audio, Sequence, Video } from 'remotion';
+import { AbsoluteFill, Audio, Sequence, Video, staticFile } from 'remotion';
 
 import styles from './video.module.scss';
 
@@ -15,6 +15,9 @@ const getProcessedVerseWords = (verse) => {
   const basicWords = getVerseWords(verse);
   return basicWords;
 };
+
+const font = staticFile('/UthmanicHafs1Ver18.woff2');
+
 
 let style = {};
 
@@ -45,6 +48,7 @@ export const VideoContent = ({
       style={{
         background: sceneBackground,
         justifyContent: 'center',
+        fontFamily: 'UthmanicHafs',
       }}
     >
       <div className={styles.videoContainer}>
@@ -82,7 +86,7 @@ export const VideoContent = ({
                 }}
               >
                 <div
-                  style={{ marginBottom: '1rem' }}
+                  style={{ marginBottom: '1rem', fontFamily: 'UthmanicHafs' }}
                   className={
                     verseAlignment === 'centre' ? styles.verseCentre : styles.verseJustified
                   }

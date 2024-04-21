@@ -31,7 +31,7 @@ const RenderControls: React.FC<{
   inputProps: VideoCompositionProps;
 }> = ({ inputProps }) => {
   const { t } = useTranslation('common');
-  const { renderMedia, state, undo } = useRendering(COMPOSITION_NAME, inputProps);
+  const { renderMedia, state } = useRendering(COMPOSITION_NAME, inputProps);
 
   return (
     <div
@@ -56,15 +56,13 @@ const RenderControls: React.FC<{
       ) : null}
       {state.status === 'rendering' || state.status === 'done' ? (
         <>
-          <Progress value={state.status === 'rendering' ? state.progress : 1} />
+          <Progress value={state.status === 'rendering' ? state.progress * 100 : 100} />
           <br />
           <Button
             prefix={<IconDownload />}
-            // @ts-ignore
-            isDisabled={state.status === 'invoking'}
-            // @ts-ignore
-            isLoading={state.status === 'invoking'}
-            onClick={renderMedia}
+            isDisabled={state.status === 'rendering'}
+            isLoading={state.status === 'rendering'}
+            href={state.status === 'done' ? state.url : ''}
           >
             {t('video.download-video')}
           </Button>

@@ -53,13 +53,12 @@ export const RemotionRoot = () => {
                     fps={VIDEO_FPS}
                     width={VIDEO_LANDSCAPE_WIDTH}
                     height={VIDEO_LANDSCAPE_HEIGHT}
-                    calculateMetadata={({ props }) => {
+                    calculateMetadata={async ({ props }) => {
                       const font = new FontFace(
                         `UthmanicHafs`,
-                        `url('${staticFile(
-                          '/fonts/quran/hafs/uthmanic_hafs/UthmanicHafs1Ver18.woff2',
-                        )}') format('woff2')`,
+                        `url('${staticFile('/UthmanicHafs1Ver18.woff2')}') format('woff2')`,
                       );
+                      await font.load();
                       document.fonts.add(font);
                       // const font2 = new FontFace(
                       //   `UthmanicHafs`,
@@ -70,9 +69,7 @@ export const RemotionRoot = () => {
                       // document.fonts.add(font2);
                       return {
                         ...props,
-                        durationInFrames: Math.ceil(
-                          ((DEFAULT_PROPS.audio.duration + 500) / 1000) * 30,
-                        ),
+                        durationInFrames: Math.ceil(((props.audio.duration + 500) / 1000) * 30),
                       };
                     }}
                     defaultProps={DEFAULT_PROPS}

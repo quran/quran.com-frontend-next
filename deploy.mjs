@@ -52,7 +52,7 @@ const { siteName } = await deploySite({
   siteName: SITE_NAME,
   region: REGION,
   options: {
-    publicDir: '../../public/publicMin',
+    publicDir: path.join(process.cwd(), 'public', 'publicMin'),
     onBundleProgress: (progress) => {
       console.log(`Webpack bundling progress: ${progress}%`);
     },
