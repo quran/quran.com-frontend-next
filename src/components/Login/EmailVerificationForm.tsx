@@ -46,7 +46,7 @@ const EmailVerificationForm = ({ emailFormField }: EmailVerificationFormProps) =
   const verificationCodeFormField: FormBuilderFormField = {
     field: 'code',
     type: FormFieldType.Number,
-    label: t('form.code'),
+    placeholder: t('form.code'),
     rules: [
       {
         type: RuleType.Required,

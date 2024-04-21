@@ -3,14 +3,23 @@ import { configureRefreshFetch } from 'refresh-fetch';
 
 import { getTimezone } from '../datetime';
 
+import BookmarkByCollectionIdQueryParams from './types/BookmarkByCollectionIdQueryParams';
+import GetAllNotesQueryParams from './types/Note/GetAllNotesQueryParams';
+
 import {
   FilterActivityDaysParams,
-  ActivityDay,
-  UpdateActivityDayBody,
+  QuranActivityDay,
+  UpdateQuranActivityDayBody,
   ActivityDayType,
+  UpdateActivityDayBody,
+  ActivityDay,
+  UpdateLessonActivityDayBody,
+  UpdateActivityDayParams,
 } from '@/types/auth/ActivityDay';
 import ConsentType from '@/types/auth/ConsentType';
+import { Course } from '@/types/auth/Course';
 import { CreateGoalRequest, Goal, GoalCategory, UpdateGoalRequest } from '@/types/auth/Goal';
+import { Note } from '@/types/auth/Note';
 import { StreakWithMetadataParams, StreakWithUserMetadata } from '@/types/auth/Streak';
 import { Mushaf } from '@/types/QuranReader';
 import {
@@ -34,7 +43,6 @@ import {
   makeBookmarkCollectionsUrl,
   CollectionsQueryParams,
   makeUpdateCollectionUrl,
-  BookmarkByCollectionIdQueryParams,
   makeDeleteCollectionUrl,
   makeAddCollectionBookmarkUrl,
   makeDeleteCollectionBookmarkByIdUrl,
@@ -45,9 +53,17 @@ import {
   makeFilterActivityDaysUrl,
   makeStreakUrl,
   makeEstimateRangesReadingTimeUrl,
-  makePostReflectionViewsUrl,
   makeUserFeatureFlagsUrl,
   makeUserConsentsUrl,
+  makeNotesUrl,
+  makeDeleteOrUpdateNoteUrl,
+  makeCountNotesWithinRangeUrl,
+  makeEnrollUserUrl,
+  makeGetCoursesUrl,
+  makeGetCourseUrl,
+  makePublishNoteUrl,
+  makeCourseFeedbackUrl,
+  makeGetUserCoursesCountUrl,
 } from '@/utils/auth/apiPaths';
 import { fetcher } from 'src/api';
 import CompleteAnnouncementRequest from 'types/auth/CompleteAnnouncementRequest';
@@ -202,9 +218,12 @@ export const deleteReadingGoal = async (params: { category: GoalCategory }): Pro
 
 export const filterReadingDays = async (
   params: FilterActivityDaysParams,
-): Promise<{ data: ActivityDay[] }> => privateFetcher(makeFilterActivityDaysUrl(params));
+): Promise<{ data: ActivityDay<QuranActivityDay>[] }> =>
+  privateFetcher(makeFilterActivityDaysUrl(params));
 
-export const getActivityDay = async (type: ActivityDayType): Promise<{ data?: ActivityDay }> =>
+export const getActivityDay = async (
+  type: ActivityDayType,
+): Promise<{ data?: ActivityDay<QuranActivityDay> }> =>
   privateFetcher(makeActivityDaysUrl({ type }));
 
 export const addReadingSession = async (chapterNumber: number, verseNumber: number) =>
@@ -213,12 +232,16 @@ export const addReadingSession = async (chapterNumber: number, verseNumber: numb
     verseNumber,
   });
 
-export const updateActivityDay = async ({
-  mushafId,
-  type,
-  ...body
-}: UpdateActivityDayBody): Promise<ActivityDay> =>
-  postRequest(makeActivityDaysUrl({ mushafId, type }), body);
+export const updateActivityDay = async (
+  params: UpdateActivityDayParams,
+): Promise<ActivityDay<QuranActivityDay>> => {
+  if (params.type === ActivityDayType.QURAN) {
+    const { mushafId, type, ...body } = params as UpdateActivityDayBody<UpdateQuranActivityDayBody>;
+    return postRequest(makeActivityDaysUrl({ mushafId, type }), body);
+  }
+  const { type, ...body } = params as UpdateActivityDayBody<UpdateLessonActivityDayBody>;
+  return postRequest(makeActivityDaysUrl({ type }), body);
+};
 
 export const estimateRangesReadingTime = async (body: {
   ranges: string[];
@@ -233,9 +256,6 @@ export const getStreakWithUserMetadata = async (
 export const syncUserLocalData = async (
   payload: Record<SyncDataType, any>,
 ): Promise<SyncUserLocalDataResponse> => postRequest(makeSyncLocalDataUrl(), payload);
-
-export const postReflectionViews = async (postId: string): Promise<{ success: boolean }> =>
-  postRequest(makePostReflectionViewsUrl(postId), {});
 
 export const getUserPreferences = async (): Promise<UserPreferencesResponse> => {
   const userPreferences = (await privateFetcher(
@@ -311,9 +331,65 @@ export const getBookmarksByCollectionId = async (
   return privateFetcher(makeGetBookmarkByCollectionId(collectionId, queryParams));
 };
 
+export const enrollUser = async (courseId: string): Promise<{ success: boolean }> =>
+  postRequest(makeEnrollUserUrl(), {
+    courseId,
+  });
+
+export const postCourseFeedback = async ({
+  courseId,
+  rating,
+  body,
+}: {
+  courseId: string;
+  rating: number;
+  body?: string;
+}): Promise<{ success: boolean }> =>
+  postRequest(makeCourseFeedbackUrl(courseId), {
+    rating,
+    body,
+  });
+
+export const getCourses = async (): Promise<Course[]> => privateFetcher(makeGetCoursesUrl());
+
+export const getCourse = async (courseSlugOrId: string): Promise<Course> =>
+  privateFetcher(makeGetCourseUrl(courseSlugOrId));
+
+export const getUserCoursesCount = async (): Promise<{ count: number }> =>
+  privateFetcher(makeGetUserCoursesCountUrl());
+
 export const addCollection = async (collectionName: string) => {
   return postRequest(makeAddCollectionUrl(), { name: collectionName });
 };
+
+export const getAllNotes = async (params: GetAllNotesQueryParams) => {
+  return privateFetcher(makeNotesUrl(params));
+};
+
+export const countNotesWithinRange = async (from: string, to: string) => {
+  return privateFetcher(makeCountNotesWithinRangeUrl(from, to));
+};
+
+export const addNote = async (payload: Pick<Note, 'body' | 'ranges' | 'saveToQR'>) => {
+  return postRequest(makeNotesUrl(), payload);
+};
+
+export const publishNoteToQR = async (
+  noteId: string,
+  payload: {
+    body: string;
+    ranges?: string[];
+  },
+): Promise<{ success: boolean; postId: string }> =>
+  postRequest(makePublishNoteUrl(noteId), payload);
+
+export const updateNote = async (id: string, body: string, saveToQR: boolean) =>
+  patchRequest(makeDeleteOrUpdateNoteUrl(id), {
+    body,
+    saveToQR,
+  });
+
+export const deleteNote = async (id: string) => deleteRequest(makeDeleteOrUpdateNoteUrl(id));
 
 export const requestVerificationCode = async (emailToVerify) => {
   return postRequest(makeVerificationCodeUrl(), { email: emailToVerify });

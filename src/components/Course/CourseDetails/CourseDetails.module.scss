@@ -1,0 +1,49 @@
+@use "src/styles/breakpoints";
+
+.backText {
+    padding-inline-start: var(--spacing-micro);
+}
+
+.headerContainer {
+    padding-block-end: var(--spacing-small);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.title {
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-jumbo);
+    padding-inline-end: var(--spacing-small);
+}
+
+.author {
+    font-size: var(--font-size-small);
+}
+
+.imgContainer {
+    width: 100%;
+    @include breakpoints.smallerThanTablet {
+        height: calc(var(--spacing-mega) * 3);
+    }
+
+    @include breakpoints.tablet {
+        height: calc(var(--spacing-mega) * 5);
+    }
+
+    @include breakpoints.desktop {
+        height: calc(var(--spacing-mega) * 8);
+    }
+
+    position: relative;
+    margin: auto;
+    margin-block-end: var(--spacing-small);
+}
+
+.startLearningButton {
+    margin-block-start: var(--spacing-small);
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}

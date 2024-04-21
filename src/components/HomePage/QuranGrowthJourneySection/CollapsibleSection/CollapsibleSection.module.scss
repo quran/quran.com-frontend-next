@@ -1,0 +1,18 @@
+.container {
+    border: 1px var(--color-borders-hairline) solid;
+    border-radius: var(--border-radius-default);
+    padding-inline: var(--spacing-xsmall);
+    padding-block: var(--spacing-xxsmall);
+    margin-block: var(--spacing-xxsmall);
+}
+
+.body {
+    padding: var(--spacing-xxsmall);
+}
+
+.prefixSVG {
+    path {
+        stroke: var(--color-background-inverse);
+        stroke-width: 3px;
+    }
+}

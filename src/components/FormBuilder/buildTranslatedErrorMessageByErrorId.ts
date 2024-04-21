@@ -9,9 +9,10 @@ const buildTranslatedErrorMessageByErrorId = (
   errorId: ErrorMessageId,
   fieldName: string,
   t: Translate,
+  extraParams?: Record<string, unknown>,
 ) => {
   if (Object.values(ErrorMessageId).includes(errorId)) {
-    return t(`common:validation.${errorId}`, { field: capitalize(fieldName) });
+    return t(`common:validation.${errorId}`, { field: capitalize(fieldName), ...extraParams });
   }
   return t(`common:validation.${DEFAULT_ERROR_ID}`, { field: capitalize(fieldName) });
 };

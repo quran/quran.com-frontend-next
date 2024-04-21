@@ -1,0 +1,12 @@
+.socialInteractionContainer {
+    margin-block-start: var(--spacing-xxsmall);
+    & > a:last-child {
+        margin-inline-start: var(--spacing-small);
+    }
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}

@@ -17,6 +17,6 @@
 
 .container {
   padding-block-start: 0;
-  padding-block-end: 0;
+  padding-block-end: var(--spacing-micro);
   overflow-x: auto;
 }

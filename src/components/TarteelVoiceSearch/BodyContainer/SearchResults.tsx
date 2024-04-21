@@ -6,8 +6,10 @@ import { useSelector } from 'react-redux';
 
 import CommandsList from '@/components/CommandBar/CommandsList';
 import DataFetcher from '@/components/DataFetcher';
-import SearchResultItem, { Source } from '@/components/Search/SearchResults/SearchResultItem';
+import SearchResultItem from '@/components/Search/SearchResults/SearchResultItem';
 import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
+import SearchService from '@/types/Search/SearchService';
+import SearchQuerySource from '@/types/SearchQuerySource';
 import { makeVersesFilterUrl } from '@/utils/apiPaths';
 import { areArraysEqual } from '@/utils/array';
 import { toLocalizedVerseKey } from '@/utils/locale';
@@ -73,7 +75,12 @@ const SearchResults: React.FC<Props> = ({ searchResult, isCommandBar }) => {
       return (
         <>
           {data.verses.map((verse) => (
-            <SearchResultItem key={verse.verseKey} result={verse} source={Source.Tarteel} />
+            <SearchResultItem
+              key={verse.verseKey}
+              result={verse}
+              source={SearchQuerySource.Tarteel}
+              service={SearchService.Tarteel}
+            />
           ))}
         </>
       );

@@ -45,7 +45,7 @@ const RecentReadingSessionsSkeleton = () => {
                 <Skeleton isActive>
                   <div className={surahPreviewStyles.translatedSurahName}>
                     {isMinimalLayout && <>{t('common:surah')} </>}
-                    {surah.translatedName}
+                    {surah.translatedName as string}
                   </div>
                 </Skeleton>
                 {!isMinimalLayout && (

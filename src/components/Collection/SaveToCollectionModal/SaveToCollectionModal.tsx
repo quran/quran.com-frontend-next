@@ -111,7 +111,7 @@ const SaveToCollectionModal = ({
               formFields={[
                 {
                   field: 'name',
-                  label: t('quran-reader:new-collection-name'),
+                  placeholder: t('quran-reader:new-collection-name'),
                   rules: [{ type: RuleType.Required, value: true, errorMessage: 'Required' }],
                   type: FormFieldType.Text,
                 },

@@ -8,6 +8,7 @@ import LookupRange from './LookupRange';
 import LookupRecord from './LookupRecord';
 import MetaData from './MetaData';
 import Reciter from './Reciter';
+import SearchService from './Search/SearchService';
 import { SearchNavigationResult } from './SearchNavigationResult';
 import TafsirInfo from './TafsirInfo';
 import Verse from './Verse';
@@ -74,6 +75,7 @@ export interface AudioTimestampsResponse extends BaseResponse {
   };
 }
 export interface SearchResponse extends BaseResponse {
+  service?: SearchService;
   pagination: Pagination;
   result?: {
     navigation: SearchNavigationResult[];

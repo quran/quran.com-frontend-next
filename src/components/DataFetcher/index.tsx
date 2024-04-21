@@ -10,9 +10,12 @@ import { BaseResponse } from 'types/ApiResponses';
 interface Props {
   queryKey: string;
   render: (data: BaseResponse) => JSX.Element;
+  renderError?: (error: any) => JSX.Element | undefined;
   initialData?: BaseResponse;
   loading?: () => JSX.Element;
   fetcher?: (queryKey: string) => Promise<BaseResponse>;
+  showSpinnerOnRevalidate?: boolean;
+  onFetchSuccess?: (data: BaseResponse) => void;
 }
 
 /**
@@ -30,22 +33,30 @@ interface Props {
 const DataFetcher: React.FC<Props> = ({
   queryKey,
   render,
+  renderError,
   initialData,
   loading = () => <Spinner />,
   fetcher: dataFetcher = fetcher,
+  showSpinnerOnRevalidate = true,
+  onFetchSuccess,
 }: Props): JSX.Element => {
   const { data, error, isValidating, mutate } = useSWRImmutable(
     queryKey,
     () =>
       dataFetcher(queryKey)
-        .then((res) => Promise.resolve(res))
+        .then((res) => {
+          onFetchSuccess?.(res);
+          return Promise.resolve(res);
+        })
         .catch((err) => Promise.reject(err)),
     {
       fallbackData: initialData,
     },
   );
 
-  if (isValidating) {
+  // if showSpinnerOnRevalidate is true, we should show the spinner if we are revalidating the data.
+  // otherwise, we should only show the spinner on initial loads.
+  if (showSpinnerOnRevalidate ? isValidating : isValidating && !data) {
     return loading();
   }
 
@@ -58,6 +69,14 @@ const DataFetcher: React.FC<Props> = ({
    * or if we had an error when calling the API.
    */
   if (error) {
+    // if there is a custom error renderer, use it.
+    if (renderError) {
+      const errorComponent = renderError(error);
+      // if the custom error renderer returns false, it means that it doesn't want to render anything special.
+      if (typeof errorComponent !== 'undefined') {
+        return errorComponent;
+      }
+    }
     return <Error onRetryClicked={onRetryClicked} error={error} />;
   }
 

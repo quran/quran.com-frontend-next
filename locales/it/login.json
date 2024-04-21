@@ -1,15 +1,23 @@
 {
-    "awaiting-confirmation": "In attesa di conferma",
-    "continue-apple": "Continua con Apple",
-    "continue-email": "Continua con E-mail",
-    "continue-facebook": "Continua con Facebook",
-    "continue-google": "Continua con Google",
-    "email-placeholder": "Indirizzo e-mail",
-    "login-error": {
-        "AuthenticationError": "Autenticazione fallita. Per favore riprova più tardi",
-        "TokenExpiredError": "Sei stato disconnesso, effettua nuovamente il login."
-    },
-    "login-title": "Accedi a Corano.com",
-    "other-options": "Altre opzioni di accesso",
-    "verify-code": "Verifica che il codice di sicurezza fornito corrisponda al testo seguente:"
+  "awaiting-confirmation": "In attesa di conferma",
+  "continue-apple": "Continua con Apple",
+  "continue-email": "Continua con E-mail",
+  "continue-facebook": "Continua con Facebook",
+  "continue-google": "Continua con Google",
+  "email-placeholder": "Indirizzo e-mail",
+  "feature-1": "Tieni traccia dei tuoi obiettivi",
+  "feature-2": "Mantieni le strisce di lettura",
+  "feature-3": "Crea raccolte",
+  "feature-4": "Sincronizza i tuoi dati tra i browser",
+  "feature-5": "E altro ancora!",
+  "feature-6": "<b> Novità! </b> Note e riflessioni",
+  "login-cta": "Accedi o Iscriviti ora:",
+  "login-error": {
+    "AuthenticationError": "Autenticazione fallita. Per favore riprova più tardi",
+    "TokenExpiredError": "Sei stato disconnesso, effettua nuovamente il login."
+  },
+  "login-title": "Accedi a Corano.com",
+  "other-options": "Altre opzioni di accesso",
+  "privacy-policy": "Proteggere la tua privacy è la nostra priorità: iscrivendoti acconsenti alla nostra <link> Informativa sulla privacy </link>",
+  "verify-code": "Verifica che il codice di sicurezza fornito corrisponda al testo seguente:"
 }

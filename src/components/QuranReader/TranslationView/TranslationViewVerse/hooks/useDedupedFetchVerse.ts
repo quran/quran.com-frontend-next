@@ -1,7 +1,7 @@
 import { useEffect, useMemo } from 'react';
 
-import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
+import useTranslation from 'next-translate/useTranslation';
 import useSWRImmutable from 'swr/immutable';
 
 import { getTranslationViewRequestKey, verseFetcher } from '@/components/QuranReader/api';
@@ -31,6 +31,10 @@ interface UseDedupedFetchVerseResult {
   verse: Verse | null;
   firstVerseInPage: Verse | null;
   bookmarksRangeUrl: string | null;
+  notesRange: {
+    from: string;
+    to: string;
+  } | null;
 }
 
 /**
@@ -67,7 +71,10 @@ const useDedupedFetchVerse = ({
 
   const idxInPage = verseIdx % initialData.pagination.perPage;
 
-  const isUsingDefaultSettings = useIsUsingDefaultSettings({ translations: translationParams });
+  const isUsingDefaultSettings = useIsUsingDefaultSettings({
+    translationParams,
+    selectedTranslations,
+  });
   const shouldUseInitialData = pageNumber === 1 && isUsingDefaultSettings;
   const { data: verses } = useSWRImmutable(
     getTranslationViewRequestKey({
@@ -120,6 +127,13 @@ const useDedupedFetchVerse = ({
     verse,
     firstVerseInPage: verses ? verses[0] : null,
     bookmarksRangeUrl,
+    notesRange:
+      verses && verses.length > 0
+        ? {
+            from: verses?.[0].verseKey,
+            to: verses?.[verses.length - 1].verseKey,
+          }
+        : null,
   };
 };
 

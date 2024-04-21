@@ -2,8 +2,8 @@
 import { useContext } from 'react';
 
 import { unwrapResult } from '@reduxjs/toolkit';
-import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
+import useTranslation from 'next-translate/useTranslation';
 import { useDispatch } from 'react-redux';
 
 import styles from './ResetButton.module.scss';
@@ -28,43 +28,36 @@ const ResetButton = () => {
   const toast = useToast();
   const audioService = useContext(AudioPlayerMachineContext);
 
-  const onResetSettingsClicked = () => {
+  const onResetSettingsClicked = async () => {
     logButtonClick('reset_settings');
-    if (isLoggedIn()) {
-      dispatch(persistDefaultSettings(lang))
-        // @ts-ignore
-        .then(unwrapResult)
-        .then(() => {
-          dispatch(resetSettings(lang));
-          audioService.send({
-            type: 'SET_INITIAL_CONTEXT',
-            ...DEFAULT_XSTATE_INITIAL_STATE,
-          });
-        })
-        .catch(() => {
-          // TODO: show an error
-        });
-    } else {
+    const resetAndSetInitialState = () => {
       dispatch(resetSettings(lang));
       audioService.send({
         type: 'SET_INITIAL_CONTEXT',
         ...DEFAULT_XSTATE_INITIAL_STATE,
       });
+    };
+
+    if (isLoggedIn()) {
+      try {
+        await dispatch(persistDefaultSettings(lang)).then(unwrapResult);
+        resetAndSetInitialState();
+      } catch {
+        // TODO: show an error
+      }
+    } else {
+      resetAndSetInitialState();
     }
-    let usingQueryParam = false;
-    if (router.query[QueryParam.Translations]) {
-      usingQueryParam = true;
-      delete router.query[QueryParam.Translations];
-    }
-    if (router.query[QueryParam.Reciter]) {
-      usingQueryParam = true;
-      delete router.query[QueryParam.Reciter];
-    }
-    if (router.query[QueryParam.WBW_LOCALE]) {
-      usingQueryParam = true;
-      delete router.query[QueryParam.WBW_LOCALE];
-    }
-    if (usingQueryParam) {
+
+    const queryParams = [
+      QueryParam.Translations,
+      QueryParam.Reciter,
+      QueryParam.WBW_LOCALE,
+      QueryParam.FLOW,
+    ];
+    const shouldUpdateUrl = queryParams.some((param) => router.query[param]);
+    if (shouldUpdateUrl) {
+      queryParams.forEach((param) => delete router.query[param]);
       router.push(router, undefined, { shallow: true });
     }
     toast(t('settings.reset-notif'), { status: ToastStatus.Success });

@@ -1,0 +1,41 @@
+{
+  "about-author": "Over de auteur",
+  "add-reflection": "Reflectie toevoegen",
+  "all-learning-plans": "Alle leerplannen",
+  "author": "Auteur",
+  "back-to-learning-plan": "Terug naar Leerplan",
+  "back-to-learning-plans": "Terug naar Leerplannen",
+  "category": "Categorie",
+  "coming-soon": "Binnenkort beschikbaar...",
+  "completed": "Voltooid",
+  "continue-learning": "Ga door met leren",
+  "day": "Dag",
+  "description": "Beschrijving",
+  "duration-daily": "Elke korte les duurt minder dan {{dailyMins}} minuten om in totaal {{days}} lessen te voltooien",
+  "empty-learning-plans": "U bent nog niet ingeschreven voor <link> Leerplannen </link> .",
+  "enroll": "Inschrijven",
+  "enroll-success": "Gefeliciteerd, je hebt {{title}} aan je lijst toegevoegd!",
+  "enrolled": "Ingeschreven",
+  "feedback": {
+    "add-feedback": "Feedback toevoegen",
+    "desc": "Gefeliciteerd! U heeft het leerplan ' {{courseName}} ' voltooid. <br> </br> Bekijk het leerplan en deel uw feedback om ons te helpen de inhoud te verbeteren.",
+    "feedback-placeholder": "Schrijf uw feedback",
+    "feedback-success": "Bedankt voor uw feedback!",
+    "your-feedback": "Uw feedback"
+  },
+  "learn-duration": "Duur",
+  "learning-plan-material": "Materiaal leerplan",
+  "learning-plan-meta-desc": "Dit leerplan zal helpen de manier waarop u met de Koran omgaat, te transformeren. Begin vandaag nog aan uw reis!",
+  "learning-plans-desc": "Vergroot uw kennis met eenvoudig te volgen lessen die ervoor zorgen dat u groeit op uw reis met de Koran. <br></br> Start vandaag nog met een leerplan! Je voortgang wordt bijgehouden totdat je de finish bereikt.",
+  "learning-plans-meta-desc": "De leerplannen van Quran.com zullen de manier waarop u met de Koran omgaat, helpen transformeren. Ontdek onze verzameling samengestelde lessen en begin vandaag nog aan je reis!",
+  "mark-complete": "Markeer als voltooid",
+  "mark-complete-success": "De les is met succes als voltooid gemarkeerd!",
+  "next-lesson": "Volgende les",
+  "not-enrolled": "Je bent nog niet ingeschreven voor het <link> Leerplan </link> .",
+  "prev-lesson": "Vorige les",
+  "start-learning": "Begin met leren",
+  "tabs": {
+    "main": "Belangrijkste details",
+    "syllabus": "Syllabus"
+  }
+}

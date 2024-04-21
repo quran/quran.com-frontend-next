@@ -2,17 +2,24 @@ import React, { useCallback } from 'react';
 
 import { useDispatch } from 'react-redux';
 
+import { useOnboarding } from '@/components/Onboarding/OnboardingProvider';
 import useScrollDirection, { ScrollDirection } from '@/hooks/useScrollDirection';
 import { setIsVisible } from '@/redux/slices/navbar';
 import {
   setIsExpanded,
   setShowReadingPreferenceSwitcher,
 } from '@/redux/slices/QuranReader/contextMenu';
+import OnboardingGroup from '@/types/OnboardingGroup';
 
 const GlobalScrollListener = () => {
   const dispatch = useDispatch();
+  const { isActive, activeStepGroup } = useOnboarding();
   const onDirectionChange = useCallback(
     (direction: ScrollDirection, newYPosition: number) => {
+      // if we are in the Quran Reader, disable default scroll behavior to avoid having 2 preference switchers {@see: <ReadingPreferenceSwitcher}
+      if (isActive && activeStepGroup === OnboardingGroup.READING_EXPERIENCE) {
+        return;
+      }
       /**
        * We need to only accept when the new position is >= 0 because on mobile, if the user swipes up
        * and the scroll bar passes the uppermost part of the viewport, the new y position becomes below
@@ -32,7 +39,7 @@ const GlobalScrollListener = () => {
         dispatch({ type: setShowReadingPreferenceSwitcher.type, payload: false });
       }
     },
-    [dispatch],
+    [activeStepGroup, dispatch, isActive],
   );
   useScrollDirection(onDirectionChange);
   return <></>;

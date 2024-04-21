@@ -115,21 +115,19 @@ const BookmarkedVersesList = () => {
   return (
     <div className={styles.container}>
       {bookmarkedVersesKeys.length > 0 ? (
-        <div className={styles.bookmarksContainer}>
-          <div className={styles.verseLinksContainer}>
-            {bookmarkedVersesKeys?.map((verseKey) => (
-              <BookmarkPill key={verseKey} verseKey={verseKey} onDeleted={onBookmarkDeleted} />
-            ))}
-            {hasReachedBookmarksLimit && (
-              <Link
-                href="/collections/all"
-                className={styles.viewAllBookmarksContainer}
-                onClick={onViewAllBookmarksClicked}
-              >
-                {t('view-all-bookmarks')}
-              </Link>
-            )}
-          </div>
+        <div className={styles.verseLinksContainer}>
+          {bookmarkedVersesKeys?.map((verseKey) => (
+            <BookmarkPill key={verseKey} verseKey={verseKey} onDeleted={onBookmarkDeleted} />
+          ))}
+          {hasReachedBookmarksLimit && (
+            <Link
+              href="/collections/all"
+              className={styles.viewAllBookmarksContainer}
+              onClick={onViewAllBookmarksClicked}
+            >
+              {t('view-all-bookmarks')}
+            </Link>
+          )}
         </div>
       ) : (
         <div>{t('no-bookmarks')}</div>

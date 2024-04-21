@@ -1,0 +1,16 @@
+.container {
+    border: 1px var(--color-borders-hairline) solid;
+    border-radius: var(--border-radius-default);
+    padding: var(--spacing-xsmall);
+    margin-block: var(--spacing-xxsmall);
+    background-color: var(--color-success-faded);
+
+    ul {
+        list-style: initial !important;
+        padding-inline-start: var(--spacing-medium);
+    }
+}
+
+.title {
+    font-weight: var(--font-weight-bold);
+}

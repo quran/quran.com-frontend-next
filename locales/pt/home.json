@@ -1,18 +1,41 @@
 {
-    "no-bookmarks": "Você ainda não tem favoritos",
-    "noble-quran": "O Nobre Alcorão",
-    "read-juz": "Leia Juz",
-    "recently-read": "Lidos recentemente",
-    "revelation-order-disclaimer": "Esta exibição mostra a ordem cronológica das suratas no Alcorão com base em quando foram reveladas ao Profeta Muhammad <hover> ﷺ <\/hover> . A cronologia é um assunto de opinião acadêmica e algumas suratas foram reveladas em partes em diferentes épocas. A ordem aqui é baseada no trabalho de <link> Tanzil.net <\/link> . [Nota: a ordem de Mushaf compilada de al-Fatiha a al-Nas é uma questão de consenso.]",
-    "tab": {
-        "bookmarks": "Favoritos",
-        "popular": "Popular"
+  "no-bookmarks": "Você ainda não tem favoritos",
+  "no-recently-read": "Você ainda não tem nenhuma sessão de leitura",
+  "noble-quran": "O Nobre Alcorão",
+  "qgj": {
+    "learning-plans": {
+      "cta": {
+        "all-plans": "Ver todos os planos",
+        "my-plans": "Meus planos"
+      },
+      "desc": {
+        "logged-in": "Você já iniciou um programa de aprendizado e perdeu o rumo no meio do caminho? Os planos de aprendizagem são divididos em partes gerenciáveis e acompanhamos seu progresso até chegar à linha de chegada. Explore nossa oferta atual de cursos hoje",
+        "logged-in-no-plans": "Você já iniciou um programa de aprendizado e perdeu o rumo no meio do caminho? Os planos de aprendizagem são divididos em partes gerenciáveis e acompanhamos seu progresso até chegar à linha de chegada. Explore nossa oferta atual de cursos hoje",
+        "logged-out": "Você já iniciou um programa de aprendizado e perdeu o rumo no meio do caminho? Os planos de aprendizagem são divididos em partes gerenciáveis e acompanhamos seu progresso até chegar à linha de chegada. Explore nossa oferta atual de cursos hoje"
+      },
+      "title": "Planos de aprendizagem"
     },
-    "view-all-bookmarks": "Ver todos os favoritos",
-    "voice": {
-        "trigger": "Acesso rápido a qualquer coisa"
+    "quran-reading-goals": {
+      "desc": {
+        "logged-out": "Você quer ler 10 minutos por dia, completar um Juz em um mês ou terminar o Alcorão inteiro em um ano? É fácil criar uma meta personalizada e acompanhar seu progresso"
+      },
+      "title": "Metas personalizadas de leitura do Alcorão"
     },
-    "welcome": {
-        "title": "É o mês do Alcorão! Ajude milhões de usuários a obter acesso à orientação do Alcorão."
-    }
+    "title": "Jornada de Crescimento do Alcorão"
+  },
+  "ramadan-activities-cta": "<link> Novidade! Descubra o Calendário Global do Alcorão para orientar sua leitura após o Ramadã </link>",
+  "read-juz": "Leia Juz",
+  "recently-read": "Lidos recentemente",
+  "revelation-order-disclaimer": "Esta exibição mostra a ordem cronológica das suratas no Alcorão com base em quando foram reveladas ao Profeta Muhammad <hover> ﷺ </hover> . A cronologia é um assunto de opinião acadêmica e algumas suratas foram reveladas em partes em diferentes épocas. A ordem aqui é baseada no trabalho de <link> Tanzil.net </link> . [Nota: a ordem de Mushaf compilada de al-Fatiha a al-Nas é uma questão de consenso.]",
+  "tab": {
+    "bookmarks": "Favoritos",
+    "popular": "Popular"
+  },
+  "view-all-bookmarks": "Ver todos os favoritos",
+  "voice": {
+    "trigger": "Acesso rápido a qualquer coisa"
+  },
+  "welcome": {
+    "title": "É o mês do Alcorão! Ajude milhões de usuários a obter acesso à orientação do Alcorão."
+  }
 }

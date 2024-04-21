@@ -1,0 +1,41 @@
+{
+  "about-author": "Yazar hakkında",
+  "add-reflection": "Yansıma Ekle",
+  "all-learning-plans": "Tüm Öğrenme Planları",
+  "author": "Yazar",
+  "back-to-learning-plan": "Öğrenim Planına Geri Dön",
+  "back-to-learning-plans": "Öğrenim Planlarına Geri Dön",
+  "category": "Kategori",
+  "coming-soon": "Yakında gelecek...",
+  "completed": "Tamamlanmış",
+  "continue-learning": "Öğrenmeye Devam Et",
+  "day": "Gün",
+  "description": "Tanım",
+  "duration-daily": "Her kısa Dersin toplam {{days}} Dersi tamamlaması {{dailyMins}} dakikadan az sürer",
+  "empty-learning-plans": "Henüz herhangi bir <link> Öğrenim Planına </link> kayıtlı değilsiniz.",
+  "enroll": "Kayıt ol",
+  "enroll-success": "Tebrikler, {{title}} listenize eklendi!",
+  "enrolled": "Kayıtlı",
+  "feedback": {
+    "add-feedback": "Geri Bildirim Ekle",
+    "desc": "Tebrikler! ' {{courseName}} ' öğrenme planını tamamladınız. <br> </br> Lütfen öğrenme planını inceleyin ve içeriği geliştirmemize yardımcı olmak için geri bildirimlerinizi paylaşın.",
+    "feedback-placeholder": "Geri bildiriminizi yazın",
+    "feedback-success": "Geri bildiriminiz için teşekkür ederiz!",
+    "your-feedback": "Görüşleriniz"
+  },
+  "learn-duration": "Süre",
+  "learning-plan-material": "Öğrenme Planı Materyali",
+  "learning-plan-meta-desc": "Bu Öğrenme Planı, Kuran'la etkileşim şeklinizi değiştirmenize yardımcı olacak, yolculuğunuza bugün başlayın!",
+  "learning-plans-desc": "Kuran yolculuğunuzda büyümenizi sağlayacak takip edilmesi kolay derslerle bilginizi artırın. <br></br> Bugün bir Öğrenme Planı başlatın! Bitiş çizgisine ulaşana kadar ilerlemeniz takip edilir.",
+  "learning-plans-meta-desc": "Kuran.com'un Öğrenme Planları Kuran'la etkileşim şeklinizi dönüştürmenize yardımcı olacaktır. Özel olarak seçilmiş derslerden oluşan koleksiyonumuzu keşfedin ve yolculuğunuza bugün başlayın!",
+  "mark-complete": "Tamamlandı olarak işaretle",
+  "mark-complete-success": "Ders başarıyla tamamlandı olarak işaretlendi!",
+  "next-lesson": "Gelecek ders",
+  "not-enrolled": "Henüz <link> Öğrenim Planına </link> kaydolmadınız.",
+  "prev-lesson": "Önceki Ders",
+  "start-learning": "Öğrenmeye başla",
+  "tabs": {
+    "main": "Ana Detaylar",
+    "syllabus": "Müfredat"
+  }
+}

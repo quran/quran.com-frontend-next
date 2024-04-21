@@ -63,6 +63,8 @@ const CuratedStationList = () => {
               actionIcon={actionIcon}
               imgSrc={station.bannerImgSrc}
               size={CardSize.Large}
+              tooltip={t('common:audio.play')}
+              ariaLabel={t('common:audio.play')}
               title={t(`curated-station.${station.title}`)}
               imgAlt={t(`curated-station.${station.title}`)}
               description={t(`curated-station.${station.description}`)}

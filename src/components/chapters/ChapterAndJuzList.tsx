@@ -3,9 +3,9 @@
 import React, { useState, useMemo } from 'react';
 
 import classNames from 'classnames';
+import dynamic from 'next/dynamic';
 import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
-import dynamic from 'next/dynamic';
 
 import Link from '../dls/Link/Link';
 import SurahPreviewRow from '../dls/SurahPreview/SurahPreviewRow';
@@ -80,7 +80,7 @@ const ChapterAndJuzList: React.FC<ChapterAndJuzListProps> = ({
   const tabs = useMemo(
     () => [
       { title: t(`common:${View.Surah}`), value: View.Surah },
-      { title: t(`common:${View.Juz}`), value: View.Juz },
+      { title: t(`common:${View.Juz}`), value: View.Juz, id: 'juz-tab' },
       { title: t(`common:${View.RevelationOrder}`), value: View.RevelationOrder },
     ],
     [t],

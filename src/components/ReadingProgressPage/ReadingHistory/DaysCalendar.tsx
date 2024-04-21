@@ -3,13 +3,13 @@ import { useMemo } from 'react';
 import ReadingStats from './ReadingStats';
 
 import Calendar from '@/dls/Calendar';
-import { ActivityDay } from '@/types/auth/ActivityDay';
+import { QuranActivityDay, ActivityDay } from '@/types/auth/ActivityDay';
 import { logButtonClick } from '@/utils/eventLogger';
 
 interface DaysCalendarProps {
   month: { id: number; name: string; daysCount: number };
   year: number;
-  days: ActivityDay[];
+  days: ActivityDay<QuranActivityDay>[];
   selectedDate: string | null;
   setSelectedDate: (date: string | null) => void;
   isLoading?: boolean;
@@ -24,7 +24,7 @@ const DaysCalendar: React.FC<DaysCalendarProps> = ({
   isLoading,
 }) => {
   const dateToDayMap = useMemo(() => {
-    const map: Record<string, ActivityDay> = {};
+    const map: Record<string, ActivityDay<QuranActivityDay>> = {};
 
     days.forEach((day) => {
       if (!day.pagesRead && !day.secondsRead && !day.ranges.length) {

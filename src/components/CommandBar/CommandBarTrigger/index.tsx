@@ -18,6 +18,7 @@ const CommandBarTrigger: React.FC = () => {
     logButtonClick('command_bar_homepage_trigger');
     dispatch({ type: toggleIsOpen.type });
   }, [dispatch]);
+
   return (
     <div
       role="button"
@@ -34,7 +35,7 @@ const CommandBarTrigger: React.FC = () => {
       </div>
       <div className={styles.actionsContainer}>
         <KeyboardInput meta keyboardKey="K" />
-        <div className={styles.searchButtonWrapper}>
+        <div className={styles.searchButtonWrapper} id="voice-search-trigger">
           <TarteelVoiceSearchTrigger
             isCommandBar
             onClick={() => {

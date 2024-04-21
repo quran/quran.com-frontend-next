@@ -1,8 +1,8 @@
 import { useRef, useState } from 'react';
 
 import classNames from 'classnames';
-import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
+import useTranslation from 'next-translate/useTranslation';
 import { useSelector } from 'react-redux';
 
 import ContentModal from '@/components/dls/ContentModal/ContentModal';
@@ -67,9 +67,14 @@ const TafsirButton: React.FC<Props> = ({
         tooltip={t('quran-reader:tafsirs')}
         shouldFlipOnRTL={false}
         shape={ButtonShape.Circle}
-        className={classNames(styles.iconContainer, styles.verseAction, {
-          [styles.fadedVerseAction]: isTranslationView,
-        })}
+        className={classNames(
+          styles.iconContainer,
+          styles.verseAction,
+          {
+            [styles.fadedVerseAction]: isTranslationView,
+          },
+          'tafsir-verse-button', // for onboarding
+        )}
         ariaLabel={t('quran-reader:aria.read-tafsirs')}
       >
         <span className={styles.icon}>

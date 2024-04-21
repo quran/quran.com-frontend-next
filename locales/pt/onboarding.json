@@ -1,0 +1,107 @@
+{
+  "checklist": {
+    "1": "Recursos da página inicial",
+    "2": "Personalize suas configurações",
+    "3": "Enriqueça sua experiência de leitura de Ayah",
+    "4": "Recursos personalizados"
+  },
+  "finish": "Terminar",
+  "onboarding-checklist": "Lista de verificação de integração",
+  "onboarding-title": "Maximize sua experiência no Quran.com! <br></br> Comece seu passeio agora:",
+  "previous": "Anterior",
+  "skip": "Pular",
+  "steps": {
+    "3-dot-menu": {
+      "description": "Clique no menu de 3 pontos para descobrir opções para copiar, marcar e repetir versículos. Descubra uma variedade de opções para repetir versos",
+      "title": "menu de 3 pontos"
+    },
+    "ayah-reflection": {
+      "description": "Leia reflexões (tadabbur) de estudiosos, estudantes de conhecimento e pessoas comuns para ajudá-lo a desenvolver uma conexão mais pessoal com o Alcorão",
+      "title": "Leia as reflexões no nível do versículo"
+    },
+    "ayah-tafsir": {
+      "description": "Explore o Tafsir no nível do versículo, oferecendo insights detalhados para aprimorar sua compreensão enquanto você lê. (Tafsir pode ser agrupado em vários versos quando apropriado)",
+      "title": "Leia Tafsir no nível Ayah"
+    },
+    "font-size": {
+      "description": "Personalize sua leitura do Alcorão com tamanhos de fonte fáceis de ajustar para uma experiência de leitura confortável",
+      "title": "Tamanho da fonte"
+    },
+    "font-style": {
+      "description": "As opções incluem Uthmani - King Fahad Complex v1, Uthmani - King Fahad Complex v2, Uthmani QPC Hafs, Indopak 15 linhas, Indopak 16 linhas",
+      "title": "Escolha seu roteiro de leitura preferido"
+    },
+    "inline-wbw": {
+      "description": "Veja a tradução de cada palavra em linha (abaixo da palavra) ou em um balão acima da palavra enquanto ouve o Alcorão",
+      "title": "Exibir tradução palavra por palavra em linha (abaixo da palavra) ou exibir dica de ferramenta"
+    },
+    "juz": {
+      "description": "Ver Alcorão de Juz",
+      "title": "Ver Alcorão de Juz"
+    },
+    "listen": {
+      "description": "Inicie o reprodutor de áudio para ouvir a recitação",
+      "title": "Ouça a Surata ou Ayah"
+    },
+    "login": {
+      "description": "Faça login e salve as configurações em todos os dispositivos e obtenha acesso a recursos adicionais.",
+      "title": "Conecte-se"
+    },
+    "quran-radio": {
+      "description": "Ouça QuranRadio - transmita o Alcorão sem anúncios",
+      "title": "Rádio Alcorão"
+    },
+    "reading-sessions": {
+      "description": "Revise facilmente sua jornada no Alcorão com uma olhada em seu histórico de leitura personalizado, acompanhando os versículos que você explorou em Quran.com.",
+      "title": "Ver histórico de leitura"
+    },
+    "reading-view": {
+      "description": "Veja o Alcorão no modo de leitura mushaf",
+      "title": "Modo de leitura"
+    },
+    "search-bar": {
+      "description": "Encontre os versículos, suratas, palavras-chave, juz e tópicos que você procura utilizando nossa barra de pesquisa",
+      "title": "Barra de pesquisa"
+    },
+    "select-reciter": {
+      "description": "Personalize sua experiência auditiva selecionando um recitador que você mais gosta de ouvir!",
+      "title": "Selecione entre uma variedade de recitadores para ouvir"
+    },
+    "settings": {
+      "description": "Controle suas preferências",
+      "title": "Configurações"
+    },
+    "streak": {
+      "description": "Defina metas de leitura personalizadas, acompanhe seu progresso e crie um hábito consistente de leitura do Alcorão com nosso recurso Sequências e Planos de Leitura.",
+      "title": "Acompanhe sequências de leitura e planos de leitura"
+    },
+    "surah-info": {
+      "description": "Obtenha informações sobre cada Surata - convenientemente localizada no início de cada Surata",
+      "title": "Leia sobre a Surata"
+    },
+    "theme": {
+      "description": "Escolha seu visual favorito - modo Claro, Sépia ou Escuro - para uma experiência de leitura do Alcorão confortável e personalizada.",
+      "title": "Leia o Alcorão no modo claro, sépia ou escuro"
+    },
+    "translations": {
+      "description": "Escolha entre uma variedade de traduções em vários idiomas. Dica: compare traduções selecionando diversas opções",
+      "title": "Traduções"
+    },
+    "voice-search": {
+      "description": "Toque no ícone do microfone e recite o versículo que você está procurando. Dica rápida! Para descobrir onde alguém está recitando (por exemplo, orações de Taraweeh), toque no ícone do microfone. Depois que um ou dois versículos forem detectados, pressione parar para encontrar o local",
+      "title": "Pesquisa por voz (Tarteel)"
+    },
+    "wbw-audio": {
+      "description": "Selecione esta opção para ouvir cada palavra individualmente simplesmente clicando na palavra!",
+      "title": "Ouça a transliteração palavra por palavra clicando na palavra"
+    },
+    "wbw-translation": {
+      "description": "Veja o significado de palavras individuais enquanto lê ou ouve o Alcorão para ajudá-lo a aprimorar seu vocabulário do Alcorão",
+      "title": "Leia a tradução palavra por palavra"
+    },
+    "wbw-transliteration": {
+      "description": "Veja a transliteração de cada palavra para ajudá-lo em sua jornada de leitura do Alcorão",
+      "title": "Leia a transliteração palavra por palavra"
+    }
+  }
+}

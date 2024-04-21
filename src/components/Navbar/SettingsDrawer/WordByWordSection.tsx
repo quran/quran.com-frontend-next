@@ -3,9 +3,9 @@
 import React from 'react';
 
 import { Action } from '@reduxjs/toolkit';
+import { useRouter } from 'next/router';
 import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
-import { useRouter } from 'next/router';
 import { shallowEqual, useSelector } from 'react-redux';
 
 import Section from './Section';
@@ -176,27 +176,36 @@ const WordByWordSection = () => {
       <Section.Title isLoading={isLoading}>{t('wbw')}</Section.Title>
       <Section.Row>
         <div className={styles.checkboxContainer}>
-          <Checkbox
-            checked={wordByWordContentType.includes(WordByWordType.Translation)}
-            id="wbw-translation"
-            name="wbw-translation"
-            label={t('translation')}
-            onChange={(isChecked) => onContentTypeChange(true, isChecked)}
-          />
-          <Checkbox
-            checked={wordByWordContentType.includes(WordByWordType.Transliteration)}
-            id="wbw-transliteration"
-            name="wbw-transliteration"
-            label={t('transliteration')}
-            onChange={(isChecked) => onContentTypeChange(false, isChecked)}
-          />
-          <Checkbox
-            checked={wordClickFunctionality === WordClickFunctionality.PlayAudio}
-            id="wbw-recitation"
-            name="wbw-recitation"
-            label={t('recitation')}
-            onChange={onRecitationChange}
-          />
+          <div id="wbw-translation-section">
+            <Checkbox
+              checked={wordByWordContentType.includes(WordByWordType.Translation)}
+              id="wbw-translation"
+              name="wbw-translation"
+              label={t('translation')}
+              onChange={(isChecked) => onContentTypeChange(true, isChecked)}
+            />
+          </div>
+
+          <div id="wbw-transliteration-section">
+            <Checkbox
+              checked={wordByWordContentType.includes(WordByWordType.Transliteration)}
+              id="wbw-transliteration"
+              name="wbw-transliteration"
+              label={t('transliteration')}
+              onChange={(isChecked) => onContentTypeChange(false, isChecked)}
+            />
+          </div>
+
+          <div id="wbw-recitation-section">
+            <Checkbox
+              checked={wordClickFunctionality === WordClickFunctionality.PlayAudio}
+              id="wbw-recitation"
+              name="wbw-recitation"
+              label={t('recitation')}
+              onChange={onRecitationChange}
+            />
+          </div>
+
           <Section.Footer>
             <Trans
               components={{ span: <span className={styles.source} /> }}
@@ -228,29 +237,31 @@ const WordByWordSection = () => {
           values={{ source: 'quranwbw' }}
         />
       </Section.Footer>
-      <Section.Label>
-        <p className={styles.label}>{t('display')}</p>
-      </Section.Label>
-      <Section.Row>
-        <div className={styles.checkboxContainer}>
-          <Checkbox
-            checked={wordByWordDisplay.includes(WordByWordDisplay.INLINE)}
-            id="inline"
-            name="inline"
-            label={t('inline')}
-            disabled={shouldDisableWordByWordDisplay}
-            onChange={(isChecked) => onDisplaySettingChange(true, isChecked)}
-          />
-          <Checkbox
-            checked={wordByWordDisplay.includes(WordByWordDisplay.TOOLTIP)}
-            id="tooltip"
-            name="word-tooltip"
-            label={t('tooltip')}
-            disabled={shouldDisableWordByWordDisplay}
-            onChange={(isChecked) => onDisplaySettingChange(false, isChecked)}
-          />
-        </div>
-      </Section.Row>
+      <div id="wbw-display-section">
+        <Section.Label>
+          <p className={styles.label}>{t('display')}</p>
+        </Section.Label>
+        <Section.Row>
+          <div className={styles.checkboxContainer}>
+            <Checkbox
+              checked={wordByWordDisplay.includes(WordByWordDisplay.INLINE)}
+              id="inline"
+              name="inline"
+              label={t('inline')}
+              disabled={shouldDisableWordByWordDisplay}
+              onChange={(isChecked) => onDisplaySettingChange(true, isChecked)}
+            />
+            <Checkbox
+              checked={wordByWordDisplay.includes(WordByWordDisplay.TOOLTIP)}
+              id="tooltip"
+              name="word-tooltip"
+              label={t('tooltip')}
+              disabled={shouldDisableWordByWordDisplay}
+              onChange={(isChecked) => onDisplaySettingChange(false, isChecked)}
+            />
+          </div>
+        </Section.Row>
+      </div>
       <Section.Row>
         <Section.Label>{t('fonts.font-size')}</Section.Label>
         <Counter

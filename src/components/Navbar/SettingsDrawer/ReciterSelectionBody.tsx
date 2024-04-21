@@ -2,8 +2,8 @@ import { useContext, useState } from 'react';
 
 import { useSelector } from '@xstate/react';
 import Fuse from 'fuse.js';
-import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
+import useTranslation from 'next-translate/useTranslation';
 
 import styles from './ReciterSelectionBody.module.scss';
 
@@ -30,7 +30,10 @@ export const filterReciters = (reciters, searchQuery: string): Reciter[] => {
 
   const filteredReciter = fuse.search(searchQuery).map(({ item }) => item);
   if (!filteredReciter.length) {
-    logEmptySearchResults(searchQuery, SearchQuerySource.TranslationSettingsDrawer);
+    logEmptySearchResults({
+      query: searchQuery,
+      source: SearchQuerySource.TranslationSettingsDrawer,
+    });
   }
   return filteredReciter as Reciter[];
 };

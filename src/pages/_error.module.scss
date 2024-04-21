@@ -4,12 +4,15 @@
   align-items: center;
   justify-content: center;
   height: 100vh;
-  width: 100vw;
   padding-block-start: 0;
   padding-block-end: 0;
   padding-inline-start: var(--spacing-small);
   padding-inline-end: var(--spacing-small);
   box-sizing: border-box;
+}
+
+.withFullWidth {
+  width: 100vw;
 }
 
 .title {

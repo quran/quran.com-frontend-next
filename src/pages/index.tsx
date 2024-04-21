@@ -3,17 +3,17 @@ import React from 'react';
 
 import classNames from 'classnames';
 import { NextPage, GetStaticProps } from 'next';
-import useTranslation from 'next-translate/useTranslation';
 import Head from 'next/head';
+import useTranslation from 'next-translate/useTranslation';
 
 import styles from './index.module.scss';
 
 import ChapterAndJuzListWrapper from '@/components/chapters/ChapterAndJuzList';
 import HomePageHero from '@/components/HomePage/HomePageHero';
-import ReadingStreak from '@/components/HomePage/ReadingStreak';
+import QuranGrowthJourneySection from '@/components/HomePage/QuranGrowthJourneySection';
+import RamadanActivitiesSection from '@/components/HomePage/RamadanActivitiesSection';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import BookmarksAndCollectionsSection from '@/components/Verses/BookmarksAndCollectionsSection';
-import RecentReadingSessions from '@/components/Verses/RecentReadingSessions';
 import { getAllChaptersData } from '@/utils/chapter';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl } from '@/utils/navigation';
@@ -41,13 +41,13 @@ const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }): JSX.El
         <div className={styles.flow}>
           <HomePageHero />
           <div className={classNames(styles.flowItem, styles.fullWidth)}>
-            <ReadingStreak />
+            <RamadanActivitiesSection />
           </div>
           <div className={classNames(styles.flowItem, styles.fullWidth)}>
-            <RecentReadingSessions />
+            <QuranGrowthJourneySection />
           </div>
           <div className={classNames(styles.flowItem, styles.fullWidth)}>
-            <BookmarksAndCollectionsSection />
+            <BookmarksAndCollectionsSection isHomepage />
           </div>
           <div className={styles.flowItem}>
             <ChapterAndJuzListWrapper chapters={chapters} />

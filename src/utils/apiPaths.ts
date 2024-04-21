@@ -1,10 +1,14 @@
+import { decamelizeKeys } from 'humps';
+
 import { getDefaultWordFields, getMushafId, ITEMS_PER_PAGE, makeUrl } from './api';
+import stringify from './qs-stringify';
 
 import { DEFAULT_RECITER } from '@/redux/defaultSettings/defaultSettings';
 import {
   getReadingPreferencesInitialState,
   getTranslationsInitialState,
 } from '@/redux/defaultSettings/util';
+import { SearchRequestParams, SearchMode } from '@/types/Search/SearchRequestParams';
 import { AdvancedCopyRequest, PagesLookUpRequest, SearchRequest } from 'types/ApiRequests';
 import { MushafLines, QuranFont } from 'types/QuranReader';
 
@@ -52,6 +56,9 @@ export const makeVersesUrl = (
   currentLocale: string,
   params?: Record<string, unknown>,
 ) => makeUrl(`/verses/by_chapter/${id}`, getVersesParams(currentLocale, params));
+
+export const makeByRangeVersesUrl = (currentLocale: string, params?: Record<string, unknown>) =>
+  makeUrl(`/verses/by_range`, getVersesParams(currentLocale, params));
 
 export const makeVersesFilterUrl = (params?: Record<string, unknown>) =>
   makeUrl(`/verses/filter`, { ...params });
@@ -136,6 +143,15 @@ export const makeAdvancedCopyUrl = (params: AdvancedCopyRequest): string =>
  * @returns {string}
  */
 export const makeSearchResultsUrl = (params: SearchRequest): string => makeUrl('/search', params);
+
+export const makeNewSearchApiUrl = (params: Record<string, any>) => {
+  const baseUrl = process.env.NEXT_PUBLIC_SEARCH_BASE_URL;
+
+  return `${baseUrl}/v1/search?${stringify(decamelizeKeys(params))}`;
+};
+
+export const makeNewSearchResultsUrl = <T extends SearchMode>(params: SearchRequestParams<T>) =>
+  makeNewSearchApiUrl(params);
 
 /**
  * Compose the url for the navigation search API that is used to show results inside the command bar.
@@ -278,7 +294,12 @@ export const makePageVersesUrl = (
 export const makeFootnoteUrl = (footnoteId: string): string => makeUrl(`/foot_notes/${footnoteId}`);
 
 export const makeDonateUrl = (showDonationPopup = false) =>
-  `https://donate.quran.com${showDonationPopup ? '?showDonationPopup' : ''}`;
+  `https://donate.quran.foundation${showDonationPopup ? '?showDonationPopup' : ''}`;
 
-export const makeDonatePageUrl = (isOnce = true) =>
-  `https://give.quran.com/give/${isOnce ? 482507 : 474400}/#!/donation/checkout`;
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export const makeDonatePageUrl = (isOnce = true, shouldUseProviderUrl = false) => {
+  if (shouldUseProviderUrl) {
+    return `https://give.quran.foundation/give/${isOnce ? 482507 : 474400}/#!/donation/checkout`;
+  }
+  return makeDonateUrl();
+};

@@ -60,10 +60,10 @@ const SelectedAyahReflection: NextPage<AyahReflectionProp> = ({
   return (
     <>
       <NextSeoWrapper
-        title={`${t('common:reflect')} ${chapter.chapter.transliteratedName} - ${toLocalizedNumber(
+        title={`${chapter.chapter.transliteratedName} - ${toLocalizedNumber(
           Number(verseNumber),
           lang,
-        )}`}
+        )} ${t('common:reflections')} `}
         image={getChapterOgImageUrl({
           chapterId,
           verseNumber,
@@ -78,6 +78,7 @@ const SelectedAyahReflection: NextPage<AyahReflectionProp> = ({
           surahName: chapter.chapter.transliteratedName,
         })}
       />
+      {/* @ts-ignore */}
       <SWRConfig value={{ fallback }}>
         <div className={layoutStyle.pageContainer}>
           <div className={layoutStyle.flow}>

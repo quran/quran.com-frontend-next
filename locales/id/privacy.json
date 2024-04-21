@@ -19,6 +19,10 @@
         "desc": "Untuk memastikan privasi dan kendali Anda atas informasi pribadi Anda, kami menyediakan proses penghapusan akun secara langsung. Ketika Anda memilih untuk menghapus akun Anda, semua data pribadi terkait akan dihapus secara otomatis dan permanen dari sistem kami. Anda dapat memulai penghapusan akun dengan mengakses halaman profil Anda. Setelah penghapusan dimulai, data pribadi Anda akan dihapus dengan aman dari server kami dalam jangka waktu yang wajar.",
         "title": "Penghapusan Data"
     },
+    "data-protection": {
+        "desc": "<boldSpan> Hak untuk mengakses: <\/boldSpan> Anda berhak meminta salinan data pribadi Anda kepada Yayasan Quran. Kami mungkin membebankan sedikit biaya kepada Anda untuk layanan ini. <br\/> <br\/> <boldSpan> Hak atas perbaikan <\/boldSpan> : Anda berhak meminta Yayasan Quran mengoreksi informasi apa pun yang Anda yakini tidak akurat. Anda juga berhak meminta Yayasan Quran untuk melengkapi informasi yang Anda yakini tidak lengkap. <br\/> <br\/> <boldSpan> Hak untuk menghapus: <\/boldSpan> Anda berhak meminta Quran Foundation menghapus data pribadi Anda, dalam kondisi tertentu. <br\/> <br\/> <boldSpan> Hak untuk membatasi pemrosesan: <\/boldSpan> Anda berhak meminta agar Quran Foundation membatasi pemrosesan data pribadi Anda, dalam kondisi tertentu. <br\/> <br\/> <boldSpan> Hak untuk menolak pemrosesan <\/boldSpan> : Anda berhak menolak pemrosesan data pribadi Anda oleh Quran Foundation, dalam kondisi tertentu. <br\/> <br\/> <boldSpan> Hak atas portabilitas data <\/boldSpan> : Anda berhak meminta agar Quran Foundation mentransfer data yang telah kami kumpulkan ke organisasi lain, atau langsung kepada Anda, dalam kondisi tertentu .",
+        "title": "Hak Perlindungan Data"
+    },
     "data-security": {
         "desc": "Kami mengambil tindakan yang tepat untuk melindungi informasi pribadi Anda dari akses, perubahan, pengungkapan, atau penghancuran yang tidak sah. Kami menggunakan protokol keamanan standar industri dan menerapkan pengamanan fisik, elektronik, dan manajerial untuk memastikan kerahasiaan dan integritas data Anda.",
         "title": "Keamanan data"

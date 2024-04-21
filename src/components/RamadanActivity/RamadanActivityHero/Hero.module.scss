@@ -1,0 +1,43 @@
+@use "src/styles/breakpoints";
+
+.container {
+    position: relative;
+    margin-top: calc(1.5 * var(--spacing-mega));
+    @include breakpoints.tablet {
+        margin-top: var(--spacing-micro);
+    }
+    background-image: url("/images/ramadan-background.jpg");
+    color: white;
+}
+
+.rowContainer {
+    max-width: 80%;
+    padding-right: var(--spacing-mega);
+    padding-left: var(--spacing-mega);
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.header {
+    font-weight: var(--font-weight-bold);
+    margin-top: var(--spacing-large);
+    font-size: var(--font-size-jumbo);
+    width: 100%;
+    padding-bottom: var(--spacing-medium);
+}
+
+.desc {
+    margin-block-end: var(--spacing-medium);
+    font-size: var(--font-size-large);
+    font-weight: var(--font-weight-semibold);
+    width: 100%;
+
+    b {
+        font-weight: var(--font-weight-extra-bold);
+    }
+}

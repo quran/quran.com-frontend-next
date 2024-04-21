@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import useTranslation from 'next-translate/useTranslation';
+import classNames from 'classnames';
 import { useRouter } from 'next/router';
+import useTranslation from 'next-translate/useTranslation';
 
 import styles from './_error.module.scss';
 
@@ -10,9 +11,10 @@ import Link, { LinkVariant } from '@/dls/Link/Link';
 // reference: https://nextjs.org/docs/advanced-features/custom-error-page#more-advanced-error-page-customizing
 type ErrorProps = {
   statusCode?: number;
+  hasFullWidth?: boolean;
 };
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-const Error = ({ statusCode }: ErrorProps) => {
+const Error = ({ statusCode, hasFullWidth = true }: ErrorProps) => {
   const { t } = useTranslation('error');
   const router = useRouter();
 
@@ -25,7 +27,11 @@ const Error = ({ statusCode }: ErrorProps) => {
     router.push('/'); // go to home
   };
   return (
-    <div className={styles.container}>
+    <div
+      className={classNames(styles.container, {
+        [styles.withFullWidth]: hasFullWidth,
+      })}
+    >
       <h1 className={styles.title}>{t('title')}</h1>
       <div className={styles.goBack}>
         <Button onClick={onBackButtonClicked}>{t('go-back')}</Button>

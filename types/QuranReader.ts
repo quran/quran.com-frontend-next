@@ -16,7 +16,8 @@ export enum WordClickFunctionality {
 export enum QuranReaderDataType {
   Chapter = 'chapter',
   Verse = 'verse',
-  VerseRange = 'range',
+  ChapterVerseRanges = 'chapterVerseRanges',
+  Ranges = 'ranges',
   Tafsir = 'tafsir',
   SelectedTafsir = 'selectedTafsir',
   Hizb = 'hizb',
@@ -66,6 +67,10 @@ export const QuranFontMushaf: Record<QuranFont, Mushaf> = {
 export enum WordByWordDisplay {
   INLINE = 'inline',
   TOOLTIP = 'tooltip',
+}
+
+export enum QuranReaderFlow {
+  QURANIC_CALENDER = 'calendar',
 }
 
 export default { ReadingPreference, QuranFont };

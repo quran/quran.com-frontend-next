@@ -29,12 +29,12 @@ const ScrollableSelection = ({
 
   useEffect(() => {
     if (!filteredItems.length) {
-      logEmptySearchResults(
-        searchQuery,
-        isJuz
+      logEmptySearchResults({
+        query: searchQuery,
+        source: isJuz
           ? SearchQuerySource.SidebarNavigationJuzsList
           : SearchQuerySource.SidebarNavigationPagesList,
-      );
+      });
     } else {
       logTextSearchQuery(
         searchQuery,

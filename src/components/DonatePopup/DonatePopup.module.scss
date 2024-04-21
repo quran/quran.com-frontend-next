@@ -2,7 +2,6 @@
 
 .container {
   padding: var(--spacing-mega);
-  position: relative;
 }
 .title {
   font-weight: var(--font-weight-bold);
@@ -63,7 +62,5 @@
 }
 
 .modalSize {
-  @include breakpoints.tablet {
-    max-width: calc(50.5 * var(--spacing-medium));
-  }
+  padding: 0px !important;
 }

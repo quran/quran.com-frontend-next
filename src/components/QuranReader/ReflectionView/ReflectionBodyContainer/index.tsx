@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
 
-import useTranslation from 'next-translate/useTranslation';
 import dynamic from 'next/dynamic';
+import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useSelector } from 'react-redux';
 
 import DataFetcher from '@/components/DataFetcher';
@@ -9,8 +9,8 @@ import { REFLECTIONS_OBSERVER_ID } from '@/components/QuranReader/observer';
 import TafsirSkeleton from '@/components/QuranReader/TafsirView/TafsirSkeleton';
 import useGlobalIntersectionObserverWithDelay from '@/hooks/useGlobalIntersectionObserverWithDelay';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
-import { postReflectionViews } from '@/utils/auth/api';
 import { isLoggedIn } from '@/utils/auth/login';
+import { postReflectionViews } from '@/utils/auth/qf/api';
 import {
   makeAyahReflectionsUrl,
   postReflectionViews as postReflectionViewsToQuranReflect,

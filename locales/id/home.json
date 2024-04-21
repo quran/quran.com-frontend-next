@@ -1,18 +1,41 @@
 {
-    "no-bookmarks": "Anda belum memiliki penanda apa pun",
-    "noble-quran": "Al-Quran yang mulia",
-    "read-juz": "Baca Juz",
-    "recently-read": "Baru-baru ini dibaca",
-    "revelation-order-disclaimer": "Pandangan ini menunjukkan urutan kronologis surat-surat dalam Al-Qur'an berdasarkan saat diturunkan kepada Nabi Muhammad <hover> ﷺ <\/hover> . Kronologi adalah subjek pendapat ilmiah dan beberapa Surat diturunkan di beberapa bagian pada waktu yang berbeda. Urutan di sini didasarkan pada karya <link> Tanzil.net <\/link> . [Catatan: urutan Mushaf yang disusun dari al-Fatiha hingga al-Nas adalah soal kesepakatan.]",
-    "tab": {
-        "bookmarks": "Penanda",
-        "popular": "Populer"
+  "no-bookmarks": "Anda belum memiliki penanda apa pun",
+  "no-recently-read": "Anda belum memiliki sesi membaca apa pun",
+  "noble-quran": "Al-Quran yang mulia",
+  "qgj": {
+    "learning-plans": {
+      "cta": {
+        "all-plans": "Lihat Semua Paket",
+        "my-plans": "Rencanaku"
+      },
+      "desc": {
+        "logged-in": "Pernah memulai program pembelajaran dan keluar jalur di tengah jalan? Rencana pembelajaran dibagi menjadi beberapa bagian yang dapat dikelola dan kami melacak kemajuan Anda hingga Anda mencapai garis finis. Jelajahi penawaran kursus kami saat ini",
+        "logged-in-no-plans": "Pernah memulai program pembelajaran dan keluar jalur di tengah jalan? Rencana pembelajaran dibagi menjadi beberapa bagian yang dapat dikelola dan kami melacak kemajuan Anda hingga Anda mencapai garis finis. Jelajahi penawaran kursus kami saat ini",
+        "logged-out": "Pernah memulai program pembelajaran dan keluar jalur di tengah jalan? Rencana pembelajaran dibagi menjadi beberapa bagian yang dapat dikelola dan kami melacak kemajuan Anda hingga Anda mencapai garis finis. Jelajahi penawaran kursus kami saat ini"
+      },
+      "title": "Rencana Pembelajaran"
     },
-    "view-all-bookmarks": "Lihat semua bookmark",
-    "voice": {
-        "trigger": "Akses cepat ke semuanya"
+    "quran-reading-goals": {
+      "desc": {
+        "logged-out": "Apakah Anda ingin membaca 10 menit sehari, menyelesaikan satu Juz dalam sebulan, atau menyelesaikan seluruh Al-Quran dalam setahun? Sangat mudah untuk membuat sasaran khusus dan melacak kemajuan Anda"
+      },
+      "title": "Tujuan Membaca Quran Khusus"
     },
-    "welcome": {
-        "title": "Ini Bulan Al Quran! Bantu jutaan pengguna mendapatkan akses ke panduan Alquran."
-    }
+    "title": "Perjalanan Pertumbuhan Quran"
+  },
+  "ramadan-activities-cta": "<link> Baru! Temukan Kalender Al-Quran Global untuk memandu bacaan Anda setelah Ramadhan </link>",
+  "read-juz": "Baca Juz",
+  "recently-read": "Baru-baru ini dibaca",
+  "revelation-order-disclaimer": "Pandangan ini menunjukkan urutan kronologis surat-surat dalam Al-Qur'an berdasarkan saat diturunkan kepada Nabi Muhammad <hover> ﷺ </hover> . Kronologi adalah subjek pendapat ilmiah dan beberapa Surat diturunkan di beberapa bagian pada waktu yang berbeda. Urutan di sini didasarkan pada karya <link> Tanzil.net </link> . [Catatan: urutan Mushaf yang disusun dari al-Fatiha hingga al-Nas adalah soal kesepakatan.]",
+  "tab": {
+    "bookmarks": "Penanda",
+    "popular": "Populer"
+  },
+  "view-all-bookmarks": "Lihat semua bookmark",
+  "voice": {
+    "trigger": "Akses cepat ke semuanya"
+  },
+  "welcome": {
+    "title": "Ini Bulan Al Quran! Bantu jutaan pengguna mendapatkan akses ke panduan Alquran."
+  }
 }

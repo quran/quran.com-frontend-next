@@ -2,8 +2,8 @@
 import React from 'react';
 
 import classNames from 'classnames';
-import useTranslation from 'next-translate/useTranslation';
 import dynamic from 'next/dynamic';
+import useTranslation from 'next-translate/useTranslation';
 
 import cellStyles from '../QuranReader/TranslationView/TranslationViewCell.module.scss';
 
@@ -44,9 +44,14 @@ const OverflowVerseActionsMenu: React.FC<Props> = ({
             tooltip={t('more')}
             variant={ButtonVariant.Ghost}
             shape={ButtonShape.Circle}
-            className={classNames(cellStyles.iconContainer, cellStyles.verseAction, {
-              [cellStyles.fadedVerseAction]: isTranslationView,
-            })}
+            className={classNames(
+              cellStyles.iconContainer,
+              cellStyles.verseAction,
+              {
+                [cellStyles.fadedVerseAction]: isTranslationView,
+              },
+              'overflow-verse-actions-menu-trigger', // for onboarding
+            )}
             ariaLabel={t('more')}
           >
             <span className={cellStyles.icon}>

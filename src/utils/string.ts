@@ -4,15 +4,16 @@
  *
  * @param {string} rawString
  * @param {number} length
+ * @param {string} suffix
  * @returns {string}
  */
-export const truncateString = (rawString: string, length: number): string => {
+export const truncateString = (rawString: string, length: number, suffix = '...'): string => {
   const characters = rawString.split('', length);
   let shortenedText = '';
   for (let index = 0; index < characters.length; index += 1) {
     const character = characters[index];
     if (shortenedText.length === length - 1) {
-      shortenedText = `${shortenedText}${character}...`;
+      shortenedText = `${shortenedText}${character}${suffix}`;
       break;
     }
     shortenedText = `${shortenedText}${character}`;

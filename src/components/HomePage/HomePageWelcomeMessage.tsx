@@ -15,6 +15,7 @@ import { logButtonClick } from '@/utils/eventLogger';
 
 const HomePageWelcomeMessage = () => {
   const { t } = useTranslation('common');
+
   const { isVisible } = useSelector(selectWelcomeMessage, shallowEqual);
   const dispatch = useDispatch();
 
@@ -25,14 +26,7 @@ const HomePageWelcomeMessage = () => {
 
   if (!isVisible) return null;
 
-  return (
-    <HomePageMessage
-      title={t('fundraising.title')}
-      subtitle={t('fundraising.description')}
-      body={null}
-      onClose={onClose}
-    />
-  );
+  return <HomePageMessage subtitle={t('fundraising.description')} body={null} onClose={onClose} />;
 };
 
 export default HomePageWelcomeMessage;

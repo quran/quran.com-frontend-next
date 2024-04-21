@@ -1,0 +1,15 @@
+.container {
+    border: 1px var(--color-borders-hairline) solid;
+    border-radius: var(--border-radius-default);
+    padding: var(--spacing-xsmall);
+    margin-block: var(--spacing-xxsmall);
+}
+
+.body {
+    padding: var(--spacing-xxsmall);
+}
+
+.title {
+    font-size: var(--font-size-large);
+    font-weight: var(--font-weight-bold);
+}
