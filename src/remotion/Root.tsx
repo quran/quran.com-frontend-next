@@ -1,6 +1,6 @@
 import { DirectionProvider } from '@radix-ui/react-direction';
 import { TooltipProvider } from '@radix-ui/react-tooltip';
-import { Composition, staticFile } from 'remotion';
+import { Composition, continueRender, delayRender, staticFile } from 'remotion';
 
 import { VideoContent } from './Video/Main';
 
@@ -37,6 +37,19 @@ import ThemeProvider from 'src/styles/ThemeProvider';
 
 // eslint-disable-next-line import/prefer-default-export
 export const RemotionRoot = () => {
+  const waitForFont = delayRender();
+  const font = new FontFace(
+    `UthmanicHafs`,
+    `url('${staticFile('/UthmanicHafs1Ver18.woff2')}') format('woff2')`,
+  );
+
+  font
+    .load()
+    .then(() => {
+      document.fonts.add(font);
+      continueRender(waitForFont);
+    })
+    .catch((err) => console.log('Error loading font', err));
   return (
     <DirectionProvider dir={getDir('en')}>
       <TooltipProvider>
@@ -53,13 +66,7 @@ export const RemotionRoot = () => {
                     fps={VIDEO_FPS}
                     width={VIDEO_LANDSCAPE_WIDTH}
                     height={VIDEO_LANDSCAPE_HEIGHT}
-                    calculateMetadata={async ({ props }) => {
-                      const font = new FontFace(
-                        `UthmanicHafs`,
-                        `url('${staticFile('/UthmanicHafs1Ver18.woff2')}') format('woff2')`,
-                      );
-                      await font.load();
-                      document.fonts.add(font);
+                    calculateMetadata={({ props }) => {
                       // const font2 = new FontFace(
                       //   `UthmanicHafs`,
                       //   `url('${staticFile(
