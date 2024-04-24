@@ -16,7 +16,7 @@ const VerseShareModal = ({ isOpen, onClose, verse }: VerseShareModalProps) => {
 
   return (
     <Modal isOpen={isOpen} onClickOutside={onClose} onEscapeKeyDown={onClose} >
-      <div style={{ maxHeight: '80vh', overflowY: 'auto' }}></div>
+      <div style={{ maxHeight: '80vh', overflowY: 'auto' }}>
       <Modal.Body>
         <Modal.Header>
           <Modal.Title>{t('share-modal.title')}</Modal.Title>
@@ -26,7 +26,7 @@ const VerseShareModal = ({ isOpen, onClose, verse }: VerseShareModalProps) => {
       <Modal.Footer>
         <GeneratedImage verse={verse} />
       </Modal.Footer>
-      <div style={{ maxHeight: '8vh', overflowY: 'auto' }}></div>
+      </div>
     </Modal>
   );
 };
