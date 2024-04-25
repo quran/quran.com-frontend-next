@@ -157,8 +157,8 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
         })),
       );
       // set the first verse's key as the default range's start verse.
-      const startFromVerseIndex = verse?.verseNumber || 0;
-      setRangeStartVerse(keys[startFromVerseIndex]);
+      const startFromVerseNumber = verse?.verseNumber || 1;
+      setRangeStartVerse(keys[startFromVerseNumber - 1]);
       // set the last verse's key as the default range's end verse.
       setRangeEndVerse(keys[keys.length - 1]);
     }
