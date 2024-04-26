@@ -27,3 +27,8 @@ export const isSafari = () => {
     navigator.userAgent.indexOf('FxiOS') === -1
   );
 };
+
+export const isAppleWebKit = () => {
+  const { userAgent } = navigator;
+  return /AppleWebKit/.test(userAgent) && /Mobile/.test(userAgent);
+};

@@ -1,6 +1,6 @@
 import range from 'lodash/range';
 
-import { isSafari } from './device-detector';
+import { isAppleDevice, isAppleWebKit } from './device-detector';
 
 import { MushafLines, QuranFont } from 'types/QuranReader';
 import Verse from 'types/Verse';
@@ -56,7 +56,7 @@ const getFontPath = (quranFont: QuranFont, pageNumber: number, version: QCFFontV
   let path = version as string;
   // if it's TajweedV4, we need to add the ot-svg or colrv1 path base on the browser
   if (quranFont === QuranFont.TajweedV4) {
-    path = isSafari() ? `${path}/ot-svg` : `${path}/colrv1`;
+    path = isAppleDevice() && isAppleWebKit() ? `${path}/ot-svg` : `${path}/colrv1`;
   }
 
   const woff2 = `/fonts/quran/hafs/${path}/woff2/p${pageNumber}.woff2`;
