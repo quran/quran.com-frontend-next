@@ -82,7 +82,8 @@
       "start-playing": "Mulai mainkan",
       "stop-repeating": "Berhenti Mengulangi",
       "times": "waktu",
-      "verses-range": "Jangkauan ayat"
+      "verses-range": "Jangkauan ayat",
+      "volume-control": "Pengatur suara"
     },
     "repeat-moved": "Pengaturan pengulangan telah dipindahkan ke pemutar audio. Klik ikon <0> </0> untuk mengaksesnya",
     "select-reciter": "Pilih Qari",
@@ -186,7 +187,7 @@
     "title": "Dukung Quran.com Ramadhan ini"
   },
   "fundraising": {
-    "description": "Donasi bulanan membantu kami meningkatkan Quran.com dan mempertahankan operasi sehingga kami kurang fokus pada penggalangan dana dan lebih pada menciptakan dampak.",
+    "description": "Jangan lewatkan kesempatan untuk mendapatkan pahala berlipat ganda di malam-malam terakhir Ramadhan yang penuh berkah ini. Bahkan sumbangan bulanan yang kecil pun akan memberikan dampak!",
     "title": "Menjadi Donatur Bulanan"
   },
   "help": "Bantuan",
@@ -227,6 +228,7 @@
   "notes": {
     "title": "Catatan & Refleksi Saya"
   },
+  "notification-settings": "Pengaturan pemberitahuan",
   "notification": {
     "mark-all-as-read": "tandai semua telah dibaca",
     "mark-as-read": "tandai sebagai membaca"
@@ -243,13 +245,13 @@
   "popup": {
     "footnote": "Donasi bulanan memungkinkan kami untuk tidak terlalu fokus pada penggalangan dana",
     "text-1": "Kami berkomitmen untuk melayani dunia pengetahuan dan teknologi Al-Qur'an, selalu gratis.",
-    "text-2": "Quran.com adalah kesempatan sempurna untuk amal berkelanjutan (Sadaqah Jariyah). Harap pertimbangkan untuk berinvestasi di akhirat Anda sebagai donor bulanan (atau satu kali).",
+    "text-2": "Kesempatan sempurna untuk bersedekah terus menerus (Sadaqah Jariyah). Harap pertimbangkan untuk berinvestasi di Akhirat Anda sebagai donor bulanan (atau satu kali).",
     "title": "Sahabat Al-Qur'an yang terhormat,"
   },
   "powered-by": "Dipersembahkan oleh",
   "prepare-hearts": {
     "cta": "Belajarlah lagi",
-    "title": "Siap menyambut Ramadhan?"
+    "title": "Lanjutkan setelah Ramadhan!"
   },
   "prev": "Sebelumnya",
   "previous-ayah": "Ayat sebelumnya",
@@ -269,6 +271,7 @@
   "reciter-summary": "Pembaca kata demi kata: <span> {{reciterName}} </span> . Klik pada sebuah kata untuk mendengarkan bacaannya.",
   "reciters": "Qari",
   "reflect": "Mencerminkan",
+  "reflections": "Refleksi",
   "remove": "Keluarkan",
   "rename": "Ganti nama",
   "retry": "Cuba lagi (Retry)",
@@ -330,6 +333,8 @@
   },
   "style": "Gaya",
   "submit": "Kirim",
+  "subscribe": "Langganan",
+  "subscribed": "Berlangganan",
   "surah": "surah",
   "tafsir": {
     "font-size": "Ukuran font tafsir",

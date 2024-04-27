@@ -82,7 +82,8 @@
       "start-playing": "Çalmaya başla",
       "stop-repeating": "Tekrarlamayı Durdur",
       "times": "Zamanlar",
-      "verses-range": "Ayet aralığı"
+      "verses-range": "Ayet aralığı",
+      "volume-control": "Ses kontrol"
     },
     "repeat-moved": "Tekrarlama ayarları müzik çalara taşındı. Erişmek için <0> </0> simgesine tıklayın",
     "select-reciter": "Okuyucu Seçin",
@@ -186,7 +187,7 @@
     "title": "Bu Ramazan Kuran.com'u destekleyin"
   },
   "fundraising": {
-    "description": "Aylık bağışlar, Kuran.com'u iyileştirmemize ve operasyonları sürdürmemize yardımcı oluyor, böylece bağış toplamaya daha az ve etki yaratmaya daha fazla odaklanıyoruz.",
+    "description": "Ramazan'ın son mübarek gecelerinde kat kat ödüller kazanma fırsatını kaçırmayın. Küçük aylık bağışlar bile etki yaratıyor!",
     "title": "Aylık Bağışçımız Olun"
   },
   "help": "Yardım",
@@ -227,6 +228,7 @@
   "notes": {
     "title": "Notlarım ve Düşüncelerim"
   },
+  "notification-settings": "Bildirim ayarları",
   "notification": {
     "mark-all-as-read": "Tümünü okundu olarak işaretle",
     "mark-as-read": "Okundu olarak işaretle"
@@ -243,13 +245,13 @@
   "popup": {
     "footnote": "Aylık bağışlar, bağış toplamaya daha az odaklanmamızı sağlıyor",
     "text-1": "Her zaman ücretsiz olarak dünya Kuran bilgisine ve teknolojisine hizmet etmeye kararlıyız.",
-    "text-2": "Kuran.com sürekli sadaka (Sadaqah Jariyah) için mükemmel bir fırsattır. Lütfen Ahiretinize aylık (veya bir kerelik) bağışçı olarak yatırım yapmayı düşünün.",
+    "text-2": "Sürekli hayırseverlik (Sadaqah Jariyah) için mükemmel bir fırsat. Lütfen aylık (veya bir kerelik) bağışçı olarak ahiretinize yatırım yapmayı düşünün.",
     "title": "Sevgili Kuran Sahabi,"
   },
   "powered-by": "Tarafından desteklenmektedir",
   "prepare-hearts": {
     "cta": "Daha fazla bilgi edin",
-    "title": "Ramazan'a hazır mıyız?"
+    "title": "Ramazandan sonra devam!"
   },
   "prev": "Önceki",
   "previous-ayah": "Önceki Ayet",
@@ -269,6 +271,7 @@
   "reciter-summary": "Kelime kelime okuyucu: <span> {{reciterName}} </span> . Okunuşunu dinlemek için bir kelimeye tıklayın.",
   "reciters": "Okuyucular",
   "reflect": "Yansıt",
+  "reflections": "Yansımalar",
   "remove": "Kaldırmak",
   "rename": "Yeniden Adlandır",
   "retry": "Yeniden dene",
@@ -330,6 +333,8 @@
   },
   "style": "Stil",
   "submit": "Gönder",
+  "subscribe": "Abone",
+  "subscribed": "Abone olundu",
   "surah": "Sure",
   "tafsir": {
     "font-size": "tefsir yazı tipi boyutu",

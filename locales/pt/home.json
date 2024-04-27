@@ -1,14 +1,11 @@
 {
   "no-bookmarks": "Você ainda não tem favoritos",
+  "no-recently-read": "Você ainda não tem nenhuma sessão de leitura",
   "noble-quran": "O Nobre Alcorão",
   "qgj": {
-    "desc": {
-      "logged-in-no-goal": "<bold> Sequências de leitura </bold> - Desafie-se a manter uma sequência de 30 dias neste Ramadã!",
-      "logged-out": "<bold> Sequências de leitura </bold> - Desafie-se a manter uma sequência de 30 dias neste Ramadã! Basta <link> fazer login </link>"
-    },
     "learning-plans": {
       "cta": {
-        "all-plans": "Todos os planos",
+        "all-plans": "Ver todos os planos",
         "my-plans": "Meus planos"
       },
       "desc": {
@@ -26,7 +23,7 @@
     },
     "title": "Jornada de Crescimento do Alcorão"
   },
-  "ramadan-activities-cta": "Explore hoje mesmo as enriquecedoras <link> atividades do Ramadã </link> deste ano!",
+  "ramadan-activities-cta": "<link> Novidade! Descubra o Calendário Global do Alcorão para orientar sua leitura após o Ramadã </link>",
   "read-juz": "Leia Juz",
   "recently-read": "Lidos recentemente",
   "revelation-order-disclaimer": "Esta exibição mostra a ordem cronológica das suratas no Alcorão com base em quando foram reveladas ao Profeta Muhammad <hover> ﷺ </hover> . A cronologia é um assunto de opinião acadêmica e algumas suratas foram reveladas em partes em diferentes épocas. A ordem aqui é baseada no trabalho de <link> Tanzil.net </link> . [Nota: a ordem de Mushaf compilada de al-Fatiha a al-Nas é uma questão de consenso.]",

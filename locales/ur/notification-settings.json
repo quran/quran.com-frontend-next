@@ -1,0 +1,22 @@
+{
+  "all-notifications": "تمام اطلاعات",
+  "channels-notifications": "چینلز کی اطلاعات",
+  "channels": {
+    "chat": "گپ شپ",
+    "email": "ای میل",
+    "in_app": "ایپ میں",
+    "push": "دھکا",
+    "sms": "پیغام"
+  },
+  "notif-settings-not-enabled": "اطلاع کی ترتیبات فعال نہیں ہیں۔",
+  "notif-update-success": "آپ کی اطلاع کی ترتیبات کو کامیابی کے ساتھ اپ ڈیٹ کر دیا گیا ہے!",
+  "tabs": {
+    "categories-settings": "زمرہ جات کی ترتیبات",
+    "global-settings": "عالمی ترتیبات"
+  },
+  "tags": {
+    "learning-plans": "سیکھنے کے منصوبے",
+    "qgj": "قرآن کی ترقی کا سفر",
+    "streaks": "لکیریں"
+  }
+}

@@ -1,14 +1,11 @@
 {
   "no-bookmarks": "Henüz yer işaretiniz yok",
+  "no-recently-read": "Henüz okuma oturumunuz yok",
   "noble-quran": "Kur'an-ı Kerim",
   "qgj": {
-    "desc": {
-      "logged-in-no-goal": "<bold> Okuma Serileri </bold> - Bu Ramazan'da 30 günlük bir seriyi sürdürmek için kendinize meydan okuyun!",
-      "logged-out": "<bold> Okuma Serileri </bold> - Bu Ramazan'da 30 günlük bir seriyi sürdürmek için kendinize meydan okuyun! Basitçe <link> giriş yapın </link>"
-    },
     "learning-plans": {
       "cta": {
-        "all-plans": "Tüm Planlar",
+        "all-plans": "Tüm Planları Gör",
         "my-plans": "Planlarım"
       },
       "desc": {
@@ -26,7 +23,7 @@
     },
     "title": "Kuran Büyüme Yolculuğu"
   },
-  "ramadan-activities-cta": "Bu yılın zenginleştirici <link> Ramazan etkinliklerini </link> bugün keşfedin!",
+  "ramadan-activities-cta": "<link> Yeni! Ramazan sonrasında okumalarınıza rehberlik edecek Küresel Kuran Takvimini keşfedin </link>",
   "read-juz": "Cüz oku",
   "recently-read": "Son Okunanlar",
   "revelation-order-disclaimer": "Bu görüş, Kuran'daki surelerin Hz. Muhammed <hover> ﷺ </hover> >'e indirildikleri zamana göre kronolojik sırasını gösterir. Kronoloji ilmî bir görüş konusudur ve bazı sûreler farklı zamanlarda bölümler halinde nazil olmuştur. Buradaki sıralama <link> Tanzil.net </link> çalışmasına dayanmaktadır. [Not: Fâtiha'dan Nâs'a kadar derlenen Mushaf düzeni, icma meselesidir.]",

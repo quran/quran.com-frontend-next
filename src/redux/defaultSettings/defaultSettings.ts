@@ -86,6 +86,7 @@ const AUDIO_INITIAL_STATE: AudioState = {
 export const DEFAULT_XSTATE_INITIAL_STATE = {
   playbackRate: 1,
   reciterId: DEFAULT_RECITER.id,
+  volume: 1,
 };
 
 const NOTIFICATIONS_INITIAL_STATE: NotificationsState = {

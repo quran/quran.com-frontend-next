@@ -1,14 +1,11 @@
 {
   "no-bookmarks": "U heeft nog geen bladwijzers",
+  "no-recently-read": "Je hebt nog geen leessessies",
   "noble-quran": "De Edele Koran",
   "qgj": {
-    "desc": {
-      "logged-in-no-goal": "<bold> Leesreeksen </bold> - Daag jezelf uit om deze ramadan een reeks van 30 dagen aan te houden!",
-      "logged-out": "<bold> Leesreeksen </bold> - Daag jezelf uit om deze ramadan een reeks van 30 dagen aan te houden! Gewoon <link> inloggen </link>"
-    },
     "learning-plans": {
       "cta": {
-        "all-plans": "Alle plannen",
+        "all-plans": "Bekijk alle abonnementen",
         "my-plans": "Mijn plannen"
       },
       "desc": {
@@ -26,7 +23,7 @@
     },
     "title": "Koran groeireis"
   },
-  "ramadan-activities-cta": "Ontdek vandaag nog de verrijkende <link> Ramadan-activiteiten </link> van dit jaar!",
+  "ramadan-activities-cta": "<link> Nieuw! Ontdek de Mondiale Korankalender als leidraad bij het lezen na de Ramadan </link>",
   "read-juz": "Lees Juz",
   "recently-read": "Recent gelezen",
   "revelation-order-disclaimer": "Deze weergave toont de chronologische volgorde van soera's in de koran op basis van wanneer ze werden geopenbaard aan de profeet Mohammed <hover> ﷺ </hover> . De chronologie is een onderwerp van wetenschappelijke mening en sommige soera's zijn op verschillende tijdstippen in delen geopenbaard. De volgorde hier is gebaseerd op het werk van <link> Tanzil.net </link> . [Opmerking: de samengestelde Mushaf-volgorde van al-Fatiha tot al-Nas is een kwestie van consensus.]",

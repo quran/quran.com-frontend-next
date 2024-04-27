@@ -21,6 +21,7 @@ interface AudioPlayerContext {
   verseDelay: number;
   repeatActor: InterpreterFrom<ReturnType<typeof createRepeatMachine>>;
   radioActor: RadioActorRef;
+  volume: number;
   recitersList?: any;
 }
 

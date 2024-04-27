@@ -1,7 +1,6 @@
 @use "src/styles/breakpoints";
 
 .contentPage {
-  text-align: justify;
   margin: auto;
   @include breakpoints.desktop {
     width: 65%;

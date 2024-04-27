@@ -1,14 +1,11 @@
 {
   "no-bookmarks": "Vous n'avez pas encore de favoris",
+  "no-recently-read": "Vous n'avez pas encore de séances de lecture",
   "noble-quran": "Le Noble Coran",
   "qgj": {
-    "desc": {
-      "logged-in-no-goal": "<bold> Séries de lecture </bold> - Mettez-vous au défi de maintenir une séquence de 30 jours pendant ce Ramadan !",
-      "logged-out": "<bold> Séries de lecture </bold> - Mettez-vous au défi de maintenir une séquence de 30 jours pendant ce Ramadan ! <link> connectez-vous simplement </link>"
-    },
     "learning-plans": {
       "cta": {
-        "all-plans": "Tous les forfaits",
+        "all-plans": "Voir tous les forfaits",
         "my-plans": "Mes plans"
       },
       "desc": {
@@ -26,7 +23,7 @@
     },
     "title": "Parcours de croissance du Coran"
   },
-  "ramadan-activities-cta": "Découvrez dès aujourd'hui les <link> activités enrichissantes du Ramadan </link> de cette année !",
+  "ramadan-activities-cta": "<link> Nouveau ! Découvrez Le Calendrier Coranique Global pour guider votre lecture après le Ramadan </link>",
   "read-juz": "Lire Juz",
   "recently-read": "Lu récemment",
   "revelation-order-disclaimer": "Cette vue montre l'ordre chronologique des sourates dans le Coran en fonction du moment où elles ont été révélées au Prophète Muhammad <hover> ﷺ </hover> . La chronologie est un sujet d'opinion scientifique et certaines sourates ont été révélées en parties à des moments différents. La commande ici est basée sur le travail de <link> Tanzil.net </link> . [Remarque : l'ordre Mushaf compilé d'al-Fatiha à al-Nas est une question de consensus.]",

@@ -1,0 +1,22 @@
+{
+  "all-notifications": "การแจ้งเตือนทั้งหมด",
+  "channels-notifications": "การแจ้งเตือนช่อง",
+  "channels": {
+    "chat": "แชท",
+    "email": "อีเมล",
+    "in_app": "ในแอป",
+    "push": "ดัน",
+    "sms": "ข้อความ"
+  },
+  "notif-settings-not-enabled": "ไม่ได้เปิดใช้งานการตั้งค่าการแจ้งเตือน",
+  "notif-update-success": "การตั้งค่าการแจ้งเตือนของคุณได้รับการอัปเดตเรียบร้อยแล้ว!",
+  "tabs": {
+    "categories-settings": "การตั้งค่าหมวดหมู่",
+    "global-settings": "การตั้งค่าส่วนกลาง"
+  },
+  "tags": {
+    "learning-plans": "แผนการเรียนรู้",
+    "qgj": "การเดินทางการเติบโตของอัลกุรอาน",
+    "streaks": "มีลายทาง"
+  }
+}

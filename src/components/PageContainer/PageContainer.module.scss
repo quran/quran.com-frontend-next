@@ -10,6 +10,10 @@
   margin-inline-start: auto;
   margin-inline-end: auto;
 
+  @include breakpoints.smallerThanTablet {
+    margin-block-start: var(--spacing-mega);
+  }
+
   --flow-side-spacing: var(--spacing-small);
   padding-inline-start: var(--flow-side-spacing);
   padding-inline-end: var(--flow-side-spacing);

@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import { getQuranReflectTagUrl } from '@/utils/quranReflect/navigation';
+import { parseReflectionBody } from '@/utils/quranReflect/bodyParser';
 
 /**
  * A hook to parse the reflection body and replace the hashtags with links.
@@ -13,21 +13,7 @@ import { getQuranReflectTagUrl } from '@/utils/quranReflect/navigation';
  */
 const useReflectionBodyParser = (reflectionText: string, hashtagStyle: string): string => {
   const parsedBody = useMemo(
-    () =>
-      reflectionText
-        .split(' ')
-        .map((word) => {
-          if (word.trim().startsWith('#')) {
-            // eslint-disable-next-line i18next/no-literal-string
-            return `<a target="_blank" href="${getQuranReflectTagUrl(
-              word,
-            )}" class="${hashtagStyle}">${word}</a>`;
-          }
-
-          return word;
-        })
-        .join(' ')
-        .replace(/\r\n/g, '<br>'),
+    () => parseReflectionBody(reflectionText, hashtagStyle),
     [hashtagStyle, reflectionText],
   );
 

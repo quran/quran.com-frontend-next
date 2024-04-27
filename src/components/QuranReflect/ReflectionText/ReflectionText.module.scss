@@ -1,0 +1,26 @@
+.hashtag {
+    color: var(--color-success-medium);
+}
+
+.body {
+    color: var(--color-text-default);
+    margin-block-start: var(--spacing-mega);
+    & p + p {
+        margin-block-start: var(--spacing-medium);
+    }
+    & p:last-child {
+        &::before {
+            margin-block-start: var(--spacing-medium);
+            display: block;
+            content: "\A";
+        }
+        display: inline;
+    }
+
+    & p[lang="ar"],
+    & p[lang="fa"],
+    & p[lang="ur"] {
+        direction: rtl;
+        display: block;
+    }
+}

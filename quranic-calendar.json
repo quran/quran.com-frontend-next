@@ -1,0 +1,438 @@
+{
+  "1445-10": [
+    {
+      "weekNumber": "1",
+      "hijriYear": "1445",
+      "hijriMonth": "10",
+      "year": "2024",
+      "month": "4",
+      "day": "12",
+      "ranges": "1:1-2:74"
+    },
+    {
+      "weekNumber": "2",
+      "hijriYear": "1445",
+      "hijriMonth": "10",
+      "year": "2024",
+      "month": "4",
+      "day": "19",
+      "ranges": "2:75-2:157"
+    },
+    {
+      "weekNumber": "3",
+      "hijriYear": "1445",
+      "hijriMonth": "10",
+      "year": "2024",
+      "month": "4",
+      "day": "26",
+      "ranges": "2:158-2:230"
+    },
+    {
+      "weekNumber": "4",
+      "hijriYear": "1445",
+      "hijriMonth": "10",
+      "year": "2024",
+      "month": "5",
+      "day": "3",
+      "ranges": "2:231-2:286"
+    }
+  ],
+  "1445-11": [
+    {
+      "weekNumber": "5",
+      "hijriYear": "1445",
+      "hijriMonth": "11",
+      "year": "2024",
+      "month": "5",
+      "day": "10",
+      "ranges": "3:1-3:109"
+    },
+    {
+      "weekNumber": "6",
+      "hijriYear": "1445",
+      "hijriMonth": "11",
+      "year": "2024",
+      "month": "5",
+      "day": "17",
+      "ranges": "3:110-3:200"
+    },
+    {
+      "weekNumber": "7",
+      "hijriYear": "1445",
+      "hijriMonth": "11",
+      "year": "2024",
+      "month": "5",
+      "day": "24",
+      "ranges": "4:1-4:57"
+    },
+    {
+      "weekNumber": "8",
+      "hijriYear": "1445",
+      "hijriMonth": "11",
+      "year": "2024",
+      "month": "5",
+      "day": "31",
+      "ranges": "4:58-4:115"
+    }
+  ],
+  "1445-12": [
+    {
+      "weekNumber": "9",
+      "hijriYear": "1445",
+      "hijriMonth": "12",
+      "year": "2024",
+      "month": "6",
+      "day": "7",
+      "ranges": "4:116-4:176"
+    },
+    {
+      "weekNumber": "10",
+      "hijriYear": "1445",
+      "hijriMonth": "12",
+      "year": "2024",
+      "month": "6",
+      "day": "14",
+      "ranges": "5:1-5:50"
+    },
+    {
+      "weekNumber": "11",
+      "hijriYear": "1445",
+      "hijriMonth": "12",
+      "year": "2024",
+      "month": "6",
+      "day": "21",
+      "ranges": "5:51-5:120"
+    },
+    {
+      "weekNumber": "12",
+      "hijriYear": "1445",
+      "hijriMonth": "12",
+      "year": "2024",
+      "month": "6",
+      "day": "28",
+      "ranges": "6:1-6:94"
+    },
+    {
+      "weekNumber": "13",
+      "hijriYear": "1445",
+      "hijriMonth": "12",
+      "year": "2024",
+      "month": "7",
+      "day": "5",
+      "ranges": "6:95-6:165"
+    }
+  ],
+  "1446-1": [
+    {
+      "weekNumber": "14",
+      "hijriYear": "1446",
+      "hijriMonth": "1",
+      "year": "2024",
+      "month": "7",
+      "day": "12",
+      "ranges": "7:1-7:102"
+    },
+    {
+      "weekNumber": "15",
+      "hijriYear": "1446",
+      "hijriMonth": "1",
+      "year": "2024",
+      "month": "7",
+      "day": "19",
+      "ranges": "7:103-7:206"
+    },
+    {
+      "weekNumber": "16",
+      "hijriYear": "1446",
+      "hijriMonth": "1",
+      "year": "2024",
+      "month": "7",
+      "day": "26",
+      "ranges": "8:1-8:75"
+    },
+    {
+      "weekNumber": "17",
+      "hijriYear": "1446",
+      "hijriMonth": "1",
+      "year": "2024",
+      "month": "8",
+      "day": "2",
+      "ranges": "9:1-9:59"
+    }
+  ],
+  "1446-2": [
+    {
+      "weekNumber": "18",
+      "hijriYear": "1446",
+      "hijriMonth": "2",
+      "year": "2024",
+      "month": "8",
+      "day": "9",
+      "ranges": "9:60-9:129"
+    },
+    {
+      "weekNumber": "19",
+      "hijriYear": "1446",
+      "hijriMonth": "2",
+      "year": "2024",
+      "month": "8",
+      "day": "16",
+      "ranges": "10:1-10:109"
+    },
+    {
+      "weekNumber": "20",
+      "hijriYear": "1446",
+      "hijriMonth": "2",
+      "year": "2024",
+      "month": "8",
+      "day": "23",
+      "ranges": "11:1-11:123"
+    },
+    {
+      "weekNumber": "21",
+      "hijriYear": "1446",
+      "hijriMonth": "2",
+      "year": "2024",
+      "month": "8",
+      "day": "30",
+      "ranges": "12:1-12:111"
+    }
+  ],
+  "1446-3": [
+    {
+      "weekNumber": "22",
+      "hijriYear": "1446",
+      "hijriMonth": "3",
+      "year": "2024",
+      "month": "9",
+      "day": "6",
+      "ranges": "13:1-14:52"
+    },
+    {
+      "weekNumber": "23",
+      "hijriYear": "1446",
+      "hijriMonth": "3",
+      "year": "2024",
+      "month": "9",
+      "day": "13",
+      "ranges": "15:1-16:89"
+    },
+    {
+      "weekNumber": "24",
+      "hijriYear": "1446",
+      "hijriMonth": "3",
+      "year": "2024",
+      "month": "9",
+      "day": "20",
+      "ranges": "16:90-17:111"
+    },
+    {
+      "weekNumber": "25",
+      "hijriYear": "1446",
+      "hijriMonth": "3",
+      "year": "2024",
+      "month": "9",
+      "day": "27",
+      "ranges": "18:1-18:110"
+    }
+  ],
+  "1446-4": [
+    {
+      "weekNumber": "26",
+      "hijriYear": "1446",
+      "hijriMonth": "4",
+      "year": "2024",
+      "month": "10",
+      "day": "4",
+      "ranges": "19:1-20:135"
+    },
+    {
+      "weekNumber": "27",
+      "hijriYear": "1446",
+      "hijriMonth": "4",
+      "year": "2024",
+      "month": "10",
+      "day": "11",
+      "ranges": "21:1-21:112"
+    },
+    {
+      "weekNumber": "28",
+      "hijriYear": "1446",
+      "hijriMonth": "4",
+      "year": "2024",
+      "month": "10",
+      "day": "18",
+      "ranges": "22:1-23:118"
+    },
+    {
+      "weekNumber": "29",
+      "hijriYear": "1446",
+      "hijriMonth": "4",
+      "year": "2024",
+      "month": "10",
+      "day": "25",
+      "ranges": "24:1-24:64"
+    },
+    {
+      "weekNumber": "30",
+      "hijriYear": "1446",
+      "hijriMonth": "4",
+      "year": "2024",
+      "month": "11",
+      "day": "1",
+      "ranges": "25:1-26:227"
+    }
+  ],
+  "1446-5": [
+    {
+      "weekNumber": "31",
+      "hijriYear": "1446",
+      "hijriMonth": "5",
+      "year": "2024",
+      "month": "11",
+      "day": "8",
+      "ranges": "27:1-28:50"
+    },
+    {
+      "weekNumber": "32",
+      "hijriYear": "1446",
+      "hijriMonth": "5",
+      "year": "2024",
+      "month": "11",
+      "day": "15",
+      "ranges": "28:51-29:69"
+    },
+    {
+      "weekNumber": "33",
+      "hijriYear": "1446",
+      "hijriMonth": "5",
+      "year": "2024",
+      "month": "11",
+      "day": "22",
+      "ranges": "30:1-32:30"
+    },
+    {
+      "weekNumber": "34",
+      "hijriYear": "1446",
+      "hijriMonth": "5",
+      "year": "2024",
+      "month": "11",
+      "day": "29",
+      "ranges": "33:1-34:30"
+    }
+  ],
+  "1446-6": [
+    {
+      "weekNumber": "35",
+      "hijriYear": "1446",
+      "hijriMonth": "6",
+      "year": "2024",
+      "month": "12",
+      "day": "6",
+      "ranges": "34:31-36:83"
+    },
+    {
+      "weekNumber": "36",
+      "hijriYear": "1446",
+      "hijriMonth": "6",
+      "year": "2024",
+      "month": "12",
+      "day": "13",
+      "ranges": "37:1-38:88"
+    },
+    {
+      "weekNumber": "37",
+      "hijriYear": "1446",
+      "hijriMonth": "6",
+      "year": "2024",
+      "month": "12",
+      "day": "20",
+      "ranges": "39:1-40:85"
+    },
+    {
+      "weekNumber": "38",
+      "hijriYear": "1446",
+      "hijriMonth": "6",
+      "year": "2024",
+      "month": "12",
+      "day": "27",
+      "ranges": "41:1-42:53"
+    }
+  ],
+  "1446-7": [
+    {
+      "weekNumber": "39",
+      "hijriYear": "1446",
+      "hijriMonth": "7",
+      "year": "2025",
+      "month": "1",
+      "day": "3",
+      "ranges": "43:1-45:37"
+    },
+    {
+      "weekNumber": "40",
+      "hijriYear": "1446",
+      "hijriMonth": "7",
+      "year": "2025",
+      "month": "1",
+      "day": "10",
+      "ranges": "46:1-49:18"
+    },
+    {
+      "weekNumber": "41",
+      "hijriYear": "1446",
+      "hijriMonth": "7",
+      "year": "2025",
+      "month": "1",
+      "day": "17",
+      "ranges": "50:1-54:55"
+    },
+    {
+      "weekNumber": "42",
+      "hijriYear": "1446",
+      "hijriMonth": "7",
+      "year": "2025",
+      "month": "1",
+      "day": "24",
+      "ranges": "55:1-58:22"
+    }
+  ],
+  "1446-8": [
+    {
+      "weekNumber": "43",
+      "hijriYear": "1446",
+      "hijriMonth": "8",
+      "year": "2025",
+      "month": "1",
+      "day": "31",
+      "ranges": "59:1-66:12"
+    },
+    {
+      "weekNumber": "44",
+      "hijriYear": "1446",
+      "hijriMonth": "8",
+      "year": "2025",
+      "month": "2",
+      "day": "7",
+      "ranges": "67:1-74:56"
+    },
+    {
+      "weekNumber": "45",
+      "hijriYear": "1446",
+      "hijriMonth": "8",
+      "year": "2025",
+      "month": "2",
+      "day": "14",
+      "ranges": "75:1-83:36"
+    },
+    {
+      "weekNumber": "46",
+      "hijriYear": "1446",
+      "hijriMonth": "8",
+      "year": "2025",
+      "month": "2",
+      "day": "21",
+      "ranges": "84:1-114:6"
+    }
+  ]
+}

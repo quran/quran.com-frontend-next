@@ -6,7 +6,7 @@ import useTranslation from 'next-translate/useTranslation';
 import styles from './BookmarkPill.module.scss';
 
 import DataContext from '@/contexts/DataContext';
-import Link from '@/dls/Link/Link';
+import Button, { ButtonSize, ButtonType, ButtonVariant } from '@/dls/Button/Button';
 import CloseIcon from '@/icons/close.svg';
 import { getChapterData } from '@/utils/chapter';
 import { logButtonClick } from '@/utils/eventLogger';
@@ -34,13 +34,16 @@ const BookmarkPill: React.FC<Props> = ({ verseKey, onDeleted }) => {
 
   return (
     <div className={styles.bookmarkItem}>
-      <Link
-        href={getVerseNavigationUrlByVerseKey(verseKey)}
+      <Button
         onClick={onLinkClicked}
+        href={getVerseNavigationUrlByVerseKey(verseKey)}
+        type={ButtonType.Primary}
+        variant={ButtonVariant.Compact}
         className={styles.linkButtonContainer}
+        size={ButtonSize.Small}
       >
         {bookmarkText}
-      </Link>
+      </Button>
       <button
         onClick={() => onDeleted(verseKey)}
         type="button"

@@ -1,0 +1,28 @@
+.weekContainer {
+    border: 1px solid var(--color-borders-hairline);
+    margin: var(--spacing-xsmall);
+    padding: var(--spacing-xsmall);
+    border-radius: var(--border-radius-rounded);
+    background-color: var(--color-success-faded);
+}
+
+.currentWeek {
+    background-color: var(--color-success-medium);
+    color: var(--color-background-default);
+}
+
+.collapsibleTitle {
+    text-decoration: underline;
+    font-weight: var(--font-weight-semibold);
+    padding-block: var(--spacing-micro);
+}
+
+.collapsibleBody {
+    background: var(--color-background-default);
+    padding: var(--spacing-micro);
+    border-radius: var(--border-radius-default);
+}
+
+.link {
+    display: block;
+}

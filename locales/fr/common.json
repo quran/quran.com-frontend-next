@@ -82,7 +82,8 @@
       "start-playing": "Commencer à jouer",
       "stop-repeating": "Arrêter de répéter",
       "times": "fois",
-      "verses-range": "Gamme de vers"
+      "verses-range": "Gamme de vers",
+      "volume-control": "Contrôle du volume"
     },
     "repeat-moved": "Les paramètres de répétition ont été déplacés vers le lecteur audio. Cliquez sur l' <0> </0> pour y accéder",
     "select-reciter": "Sélectionnez le récitant",
@@ -186,7 +187,7 @@
     "title": "Soutenez Quran.com ce Ramadan"
   },
   "fundraising": {
-    "description": "Les dons mensuels nous aident à améliorer Quran.com et à maintenir les opérations afin que nous nous concentrions moins sur la collecte de fonds et plus sur la création d'impact.",
+    "description": "Ne manquez pas l'opportunité de gagner des récompenses multipliées ces dernières nuits bénies du Ramadan. Même les petits dons mensuels ont un impact !",
     "title": "Devenez un donateur mensuel"
   },
   "help": "Aider",
@@ -227,6 +228,7 @@
   "notes": {
     "title": "Mes notes et réflexions"
   },
+  "notification-settings": "Paramètres de notification",
   "notification": {
     "mark-all-as-read": "tout marquer comme lu",
     "mark-as-read": "Marquer comme lu"
@@ -243,13 +245,13 @@
   "popup": {
     "footnote": "Les dons mensuels nous permettent de moins nous concentrer sur la collecte de fonds",
     "text-1": "Nous nous engageons à servir le monde de la connaissance et de la technologie coraniques, toujours gratuitement.",
-    "text-2": "Quran.com est une opportunité parfaite pour la charité continue (Sadaqah Jariyah). Veuillez envisager d'investir dans votre au-delà en tant que donateur mensuel (ou ponctuel).",
+    "text-2": "L’occasion idéale pour une charité continue (Sadaqah Jariyah). Veuillez envisager d'investir dans votre au-delà en tant que donateur mensuel (ou ponctuel).",
     "title": "Cher Compagnon du Coran,"
   },
   "powered-by": "Alimenté par",
   "prepare-hearts": {
     "cta": "Apprendre encore plus",
-    "title": "Prêt pour le Ramadan ?"
+    "title": "Continuez après le Ramadan !"
   },
   "prev": "Précédent",
   "previous-ayah": "Ayah précédent",
@@ -269,6 +271,7 @@
   "reciter-summary": "Récitant mot à mot : <span> {{reciterName}} </span> . Cliquez sur un mot pour écouter sa récitation.",
   "reciters": "Récitants",
   "reflect": "Réfléchir",
+  "reflections": "Réflexions",
   "remove": "Supprimer",
   "rename": "Renommer",
   "retry": "Réessayez",
@@ -330,6 +333,8 @@
   },
   "style": "Style",
   "submit": "Soumettre",
+  "subscribe": "S'abonner",
+  "subscribed": "Abonné",
   "surah": "Sourate",
   "tafsir": {
     "font-size": "Taille de la police Tafsir",

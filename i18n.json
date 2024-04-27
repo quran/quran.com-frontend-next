@@ -63,6 +63,8 @@
     "/login": ["login"],
     "/about-the-quran": ["about-quran"],
     "/notes-and-reflections": ["notes"],
-    "/ramadan-activities": ["ramadan-activities"]
+    "/ramadan-activities": ["ramadan-activities"],
+    "/notification-settings": ["notification-settings"],
+    "/calendar": ["quranic-calendar"]
   }
 }

@@ -82,7 +82,8 @@
       "start-playing": "Inizia a giocare",
       "stop-repeating": "Smetti di ripetere",
       "times": "volte",
-      "verses-range": "Gamma di versi"
+      "verses-range": "Gamma di versi",
+      "volume-control": "Controllo del volume"
     },
     "repeat-moved": "Le impostazioni di ripetizione sono state spostate sul lettore audio. Fare clic sull'icona <0> </0> per accedervi",
     "select-reciter": "Seleziona Relatore",
@@ -186,7 +187,7 @@
     "title": "Sostieni Quran.com questo Ramadan"
   },
   "fundraising": {
-    "description": "Le donazioni mensili ci aiutano a migliorare Quran.com e sostenere le operazioni, quindi ci concentriamo meno sulla raccolta fondi e più sulla creazione di impatto.",
+    "description": "Non perdere l'opportunità di ottenere ricompense moltiplicate in queste ultime notti benedette del Ramadan. Anche le piccole donazioni mensili hanno un impatto!",
     "title": "Diventa un donatore mensile"
   },
   "help": "Aiuto",
@@ -227,6 +228,7 @@
   "notes": {
     "title": "I miei appunti e riflessioni"
   },
+  "notification-settings": "Impostazioni di notifica",
   "notification": {
     "mark-all-as-read": "Segna tutti come letti",
     "mark-as-read": "segna come letto"
@@ -243,13 +245,13 @@
   "popup": {
     "footnote": "Le donazioni mensili ci consentono di concentrarci meno sulla raccolta fondi",
     "text-1": "Ci impegniamo a servire il mondo della conoscenza e della tecnologia coraniche, sempre gratuitamente.",
-    "text-2": "Quran.com è un'opportunità perfetta per la carità continua (Sadaqah Jariyah). Si prega di considerare di investire nell'Aldilà come donatore mensile (o una tantum).",
+    "text-2": "L'occasione perfetta per la carità continua (Sadaqah Jariyah). Ti preghiamo di considerare di investire nel tuo Aldilà come donatore mensile (o una tantum).",
     "title": "Caro compagno del Corano,"
   },
   "powered-by": "Offerto da",
   "prepare-hearts": {
     "cta": "Saperne di più",
-    "title": "Pronti per il Ramadan?"
+    "title": "Continuate così dopo il Ramadan!"
   },
   "prev": "Precedente",
   "previous-ayah": "Precedente Sì",
@@ -269,6 +271,7 @@
   "reciter-summary": "Recitatore parola per parola: <span> {{reciterName}} </span> . Clicca su una parola per ascoltare la sua recitazione.",
   "reciters": "Recitatori",
   "reflect": "Riflettere",
+  "reflections": "Riflessi",
   "remove": "Rimuovere",
   "rename": "Rinominare",
   "retry": "Riprova",
@@ -330,6 +333,8 @@
   },
   "style": "Stile",
   "submit": "Invia",
+  "subscribe": "sottoscrivi",
+  "subscribed": "Sottoscritto",
   "surah": "sura",
   "tafsir": {
     "font-size": "Dimensione del carattere Tafsir",

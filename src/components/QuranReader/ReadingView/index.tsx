@@ -187,13 +187,18 @@ const ReadingView = ({
     return <Error />;
   }
 
+  const shouldShowQueryParamMessage =
+    reciterQueryParamDifferent || wordByWordLocaleQueryParamDifferent;
+
   return (
     <>
-      <QueryParamMessage
-        translationsQueryParamDifferent={false}
-        reciterQueryParamDifferent={reciterQueryParamDifferent}
-        wordByWordLocaleQueryParamDifferent={wordByWordLocaleQueryParamDifferent}
-      />
+      {shouldShowQueryParamMessage && (
+        <QueryParamMessage
+          translationsQueryParamDifferent={false}
+          reciterQueryParamDifferent={reciterQueryParamDifferent}
+          wordByWordLocaleQueryParamDifferent={wordByWordLocaleQueryParamDifferent}
+        />
+      )}
       <div
         onCopy={(event) => onCopyQuranWords(event, verses, quranFont)}
         className={classNames(

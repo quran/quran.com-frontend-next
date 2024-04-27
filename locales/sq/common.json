@@ -82,7 +82,8 @@
       "start-playing": "Filloni të luani",
       "stop-repeating": "Ndalo përsëritjen",
       "times": "herë",
-      "verses-range": "Gama e vargjeve"
+      "verses-range": "Gama e vargjeve",
+      "volume-control": "Kontrolli i volumit"
     },
     "repeat-moved": "Cilësimet e përsëritjes janë zhvendosur te luajtësi audio. Klikoni në <0> </0> për t'iu qasur atyre",
     "select-reciter": "Zgjidhni Recitues",
@@ -186,7 +187,7 @@
     "title": "Mbështetni Quran.com këtë Ramazan"
   },
   "fundraising": {
-    "description": "Donacionet mujore na ndihmojnë të përmirësojmë Quran.com dhe të mbajmë operacionet, kështu që ne fokusohemi më pak në mbledhjen e fondeve dhe më shumë në krijimin e ndikimit.",
+    "description": "Mos e humbisni mundësinë për të fituar shpërblime të shumëfishta këto netët e fundit të bekuara të Ramazanit. Edhe donacionet e vogla mujore kanë ndikim!",
     "title": "Bëhuni një donator mujor"
   },
   "help": "Ndihmë",
@@ -227,6 +228,7 @@
   "notes": {
     "title": "Shënimet dhe Reflektimet e Mia"
   },
+  "notification-settings": "Cilësimet e njoftimit",
   "notification": {
     "mark-all-as-read": "Shënoni të gjitha si të lexuara",
     "mark-as-read": "Shënoni si të lexuar"
@@ -243,13 +245,13 @@
   "popup": {
     "footnote": "Donacionet mujore na lejojnë të fokusohemi më pak në mbledhjen e fondeve",
     "text-1": "Ne jemi të përkushtuar t'i shërbejmë njohurive dhe teknologjisë botërore kuranore, gjithmonë falas.",
-    "text-2": "Quran.com është një mundësi e përkryer për bamirësi të vazhdueshme (Sadakah Jariyah). Ju lutemi, konsideroni të investoni në Ahiretin tuaj si donator mujor (ose një herë).",
+    "text-2": "Mundësia e përsosur për bamirësi të vazhdueshme (Sadakah Jariyah). Ju lutemi, konsideroni të investoni në Ahiretin tuaj si donator mujor (ose një herë).",
     "title": "I dashur shok i Kur'anit,"
   },
   "powered-by": "Mundësuar nga",
   "prepare-hearts": {
     "cta": "Mëso më shumë",
-    "title": "Gati për Ramazan?"
+    "title": "Vazhdoni pas Ramazanit!"
   },
   "prev": "E mëparshme",
   "previous-ayah": "Ajeti i mëparshëm",
@@ -269,6 +271,7 @@
   "reciter-summary": "Recitues fjalë për fjalë: <span> {{reciterName}} </span> . Klikoni mbi një fjalë për të dëgjuar recitimin e saj.",
   "reciters": "Recituesit",
   "reflect": "Pasqyrim",
+  "reflections": "Reflektime",
   "remove": "Hiq",
   "rename": "Riemërto",
   "retry": "Provo sërish",
@@ -330,6 +333,8 @@
   },
   "style": "Stili",
   "submit": "Paraqisni",
+  "subscribe": "Abonohu",
+  "subscribed": "Abonuar",
   "surah": "Surja",
   "tafsir": {
     "font-size": "Madhësia e shkronjave Tafsir",

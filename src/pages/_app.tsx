@@ -104,7 +104,6 @@ function MyApp({ Component, pageProps }): JSX.Element {
                       <Component {...pageProps} />
                       <AudioPlayer />
                       <Footer />
-
                       <OnboardingChecklist />
                     </OnboardingProvider>
                   </ThemeProvider>

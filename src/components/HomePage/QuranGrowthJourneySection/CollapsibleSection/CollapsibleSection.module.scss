@@ -1,7 +1,8 @@
 .container {
     border: 1px var(--color-borders-hairline) solid;
     border-radius: var(--border-radius-default);
-    padding: var(--spacing-xsmall);
+    padding-inline: var(--spacing-xsmall);
+    padding-block: var(--spacing-xxsmall);
     margin-block: var(--spacing-xxsmall);
 }
 

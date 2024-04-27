@@ -15,14 +15,22 @@ type Props = {
   source: DonateButtonClickSource;
   type?: DonateButtonType;
   isOutlined?: boolean;
+  isTextBasedOnType?: boolean;
+  shouldUseProviderUrl?: boolean;
 };
 
-const DonateButton: React.FC<Props> = ({ source, type, isOutlined = false }) => {
+const DonateButton: React.FC<Props> = ({
+  isTextBasedOnType = true,
+  source,
+  type,
+  isOutlined = false,
+  shouldUseProviderUrl = false,
+}) => {
   const { t } = useTranslation('common');
 
   const onDonateClicked = () => {
     const isOnceDonation = !type || type === DonateButtonType.ONCE;
-    const href = makeDonatePageUrl(isOnceDonation);
+    const href = makeDonatePageUrl(isOnceDonation, shouldUseProviderUrl);
     logEvent('donate_button_clicked', {
       /**
        * Examples:
@@ -36,7 +44,10 @@ const DonateButton: React.FC<Props> = ({ source, type, isOutlined = false }) => 
     navigateToExternalUrl(href);
   };
 
-  const buttonTextTranslationKey = type ? `donate_${type}` : 'donate';
+  let buttonTextTranslationKey = 'donate';
+  if (isTextBasedOnType === true && type) {
+    buttonTextTranslationKey = `donate_${type}`;
+  }
 
   return (
     <Button

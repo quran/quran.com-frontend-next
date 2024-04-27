@@ -1,0 +1,22 @@
+{
+  "all-notifications": "Të gjitha Njoftimet",
+  "channels-notifications": "Njoftimet e kanaleve",
+  "channels": {
+    "chat": "Bisedë",
+    "email": "Email",
+    "in_app": "Brenda aplikacionit",
+    "push": "Shtyni",
+    "sms": "SMS"
+  },
+  "notif-settings-not-enabled": "Cilësimet e njoftimit nuk janë aktivizuar",
+  "notif-update-success": "Cilësimet tuaja të njoftimit janë përditësuar me sukses!",
+  "tabs": {
+    "categories-settings": "Cilësimet e kategorive",
+    "global-settings": "Parametrat globale"
+  },
+  "tags": {
+    "learning-plans": "Planet mësimore",
+    "qgj": "Udhëtimi i rritjes së Kuranit",
+    "streaks": "Vijat"
+  }
+}

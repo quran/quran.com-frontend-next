@@ -9,7 +9,7 @@ $widget-wrapper-background-color: var(--color-success-faded);
     position: relative;
 
     @include breakpoints.tablet {
-        border-radius: var(--border-radius-rounded);
+        border-radius: var(--border-radius-default);
     }
 
     --day-circle-color: #{$widget-wrapper-background-color};

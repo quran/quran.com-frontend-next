@@ -1,0 +1,22 @@
+{
+  "all-notifications": "Все уведомления",
+  "channels-notifications": "Уведомления о каналах",
+  "channels": {
+    "chat": "Чат",
+    "email": "Электронная почта",
+    "in_app": "В приложении",
+    "push": "Толкать",
+    "sms": "SMS"
+  },
+  "notif-settings-not-enabled": "Настройки уведомлений не включены",
+  "notif-update-success": "Настройки уведомлений успешно обновлены!",
+  "tabs": {
+    "categories-settings": "Категории Настройки",
+    "global-settings": "Глобальные настройки"
+  },
+  "tags": {
+    "learning-plans": "Планы обучения",
+    "qgj": "Путь развития Корана",
+    "streaks": "Полосы"
+  }
+}

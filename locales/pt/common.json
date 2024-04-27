@@ -82,7 +82,8 @@
       "start-playing": "Começa a jogar",
       "stop-repeating": "Pare de Repetir",
       "times": "vezes",
-      "verses-range": "Variedade de versos"
+      "verses-range": "Variedade de versos",
+      "volume-control": "Controle de volume"
     },
     "repeat-moved": "As configurações de repetição foram movidas para o reprodutor de áudio. Clique no <0> </0> para acessá-los",
     "select-reciter": "Selecione o recitador",
@@ -186,7 +187,7 @@
     "title": "Apoie o Quran.com neste Ramadã"
   },
   "fundraising": {
-    "description": "As doações mensais nos ajudam a melhorar o Quran.com e sustentar as operações, de modo que nos concentramos menos na arrecadação de fundos e mais na criação de impacto.",
+    "description": "Não perca a oportunidade de ganhar recompensas multiplicadas nestas últimas noites abençoadas do Ramadã. Mesmo pequenas doações mensais causam impacto!",
     "title": "Seja um doador mensal"
   },
   "help": "Ajuda",
@@ -227,6 +228,7 @@
   "notes": {
     "title": "Minhas notas e reflexões"
   },
+  "notification-settings": "Configurações de notificação",
   "notification": {
     "mark-all-as-read": "marcar tudo como lido",
     "mark-as-read": "marcar como Lido"
@@ -243,13 +245,13 @@
   "popup": {
     "footnote": "As doações mensais permitem que nos concentremos menos na angariação de fundos",
     "text-1": "Estamos comprometidos em servir o conhecimento e a tecnologia do Alcorão, sempre de graça.",
-    "text-2": "Quran.com é uma oportunidade perfeita para caridade contínua (Sadaqah Jariyah). Por favor, considere investir no seu Além como um doador mensal (ou único).",
+    "text-2": "A oportunidade perfeita para caridade contínua (Sadaqah Jariyah). Por favor, considere investir no seu futuro como um doador mensal (ou único).",
     "title": "Caro Companheiro do Alcorão,"
   },
   "powered-by": "Distribuído por",
   "prepare-hearts": {
     "cta": "Saber mais",
-    "title": "Pronto para o Ramadã?"
+    "title": "Continue depois do Ramadã!"
   },
   "prev": "Anterior",
   "previous-ayah": "Anterior Ayah",
@@ -269,6 +271,7 @@
   "reciter-summary": "Recitador palavra por palavra: <span> {{reciterName}} </span> . Clique em uma palavra para ouvir sua recitação.",
   "reciters": "Recitadores",
   "reflect": "Refletir",
+  "reflections": "Reflexões",
   "remove": "Retirar",
   "rename": "Renomear",
   "retry": "Tentar novamente",
@@ -330,6 +333,8 @@
   },
   "style": "Estilo",
   "submit": "Enviar",
+  "subscribe": "Se inscrever",
+  "subscribed": "Subscrito",
   "surah": "Surah",
   "tafsir": {
     "font-size": "Tamanho da fonte Tafsir",

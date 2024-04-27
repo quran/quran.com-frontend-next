@@ -1,14 +1,11 @@
 {
   "no-bookmarks": "Non hai ancora nessun segnalibro",
+  "no-recently-read": "Non hai ancora sessioni di lettura",
   "noble-quran": "Il Nobile Corano",
   "qgj": {
-    "desc": {
-      "logged-in-no-goal": "<bold> Serie di letture </bold> - Sfida te stesso a mantenere una serie di 30 giorni durante questo Ramadan!",
-      "logged-out": "<bold> Serie di letture </bold> - Sfida te stesso a mantenere una serie di 30 giorni durante questo Ramadan! Basta <link> accedere </link>"
-    },
     "learning-plans": {
       "cta": {
-        "all-plans": "Tutti i piani",
+        "all-plans": "Vedi tutti i piani",
         "my-plans": "I miei piani"
       },
       "desc": {
@@ -26,7 +23,7 @@
     },
     "title": "Viaggio di crescita del Corano"
   },
-  "ramadan-activities-cta": "Esplora oggi stesso le arricchenti <link> attività del Ramadan </link> di quest'anno!",
+  "ramadan-activities-cta": "<link> Nuovo! Scopri il calendario coranico globale per guidare la tua lettura dopo il Ramadan </link>",
   "read-juz": "Leggi Juz",
   "recently-read": "Letto di recente",
   "revelation-order-disclaimer": "Questa visione mostra l'ordine cronologico delle sure nel Corano in base a quando furono rivelate al profeta Maometto <hover> ﷺ </hover> . La cronologia è oggetto di opinione accademica e alcune sure sono state rivelate in parti in tempi diversi. L'ordinamento qui si basa sul lavoro di <link> Tanzil.net </link> . [Nota: l'ordine Mushaf compilato da al-Fatiha ad al-Nas è una questione di consenso.]",

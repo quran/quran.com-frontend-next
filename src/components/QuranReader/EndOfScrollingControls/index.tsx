@@ -1,6 +1,5 @@
 import React from 'react';
 
-import useTranslation from 'next-translate/useTranslation';
 import { useSelector } from 'react-redux';
 
 import RevelationOrderNavigationNotice, {
@@ -16,11 +15,7 @@ import QuranReaderReadingStreak from './QuranReaderReadingStreak';
 import RubControls from './RubControls';
 import VerseControls from './VerseControls';
 
-import Banner from '@/components/Banner/Banner';
-import DonateButton from '@/components/Fundraising/DonateButton';
 import { selectIsReadingByRevelationOrder } from '@/redux/slices/revelationOrder';
-import DonateButtonClickSource from '@/types/DonateButtonClickSource';
-import DonateButtonType from '@/types/DonateButtonType';
 import { VersesResponse } from 'types/ApiResponses';
 import { QuranReaderDataType } from 'types/QuranReader';
 import Verse from 'types/Verse';
@@ -36,7 +31,6 @@ const EndOfScrollingControls: React.FC<Props> = ({
   lastVerse,
   initialData,
 }) => {
-  const { t } = useTranslation('common');
   const isReadingByRevelationOrder = useSelector(selectIsReadingByRevelationOrder);
 
   return (
@@ -55,7 +49,8 @@ const EndOfScrollingControls: React.FC<Props> = ({
             <ChapterControls lastVerse={lastVerse} initialData={initialData} />
           )}
           {(quranReaderDataType === QuranReaderDataType.Verse ||
-            quranReaderDataType === QuranReaderDataType.VerseRange) && (
+            quranReaderDataType === QuranReaderDataType.ChapterVerseRanges ||
+            quranReaderDataType === QuranReaderDataType.Ranges) && (
             <VerseControls lastVerse={lastVerse} />
           )}
           {quranReaderDataType === QuranReaderDataType.Page && (
@@ -67,17 +62,6 @@ const EndOfScrollingControls: React.FC<Props> = ({
             <HizbControls lastVerse={lastVerse} />
           )}
         </div>
-      </div>
-      <div className={styles.donationBannerContainer}>
-        <Banner
-          text={t('common:fundraising-sticky-banner.title')}
-          ctaButton={
-            <DonateButton
-              type={DonateButtonType.MONTHLY}
-              source={DonateButtonClickSource.QURAN_READER}
-            />
-          }
-        />
       </div>
     </>
   );

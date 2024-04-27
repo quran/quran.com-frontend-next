@@ -1,14 +1,11 @@
 {
   "no-bookmarks": "Nuk keni ende asnjë faqeshënues",
+  "no-recently-read": "Nuk keni ende asnjë seancë leximi",
   "noble-quran": "Kurani Fisnik",
   "qgj": {
-    "desc": {
-      "logged-in-no-goal": "<bold> Rrjedha leximi </bold> - Sfidoni veten që të mbani një seri prej 30 ditësh këtë Ramazan!",
-      "logged-out": "<bold> Rrjedha leximi </bold> - Sfidoni veten që të mbani një varg prej 30 ditësh këtë Ramazan! Thjesht <link> identifikohu </link>"
-    },
     "learning-plans": {
       "cta": {
-        "all-plans": "Të gjitha planet",
+        "all-plans": "Shihni të gjitha planet",
         "my-plans": "Planet e Mia"
       },
       "desc": {
@@ -26,7 +23,7 @@
     },
     "title": "Udhëtimi i rritjes së Kuranit"
   },
-  "ramadan-activities-cta": "Eksploroni aktivitetet pasuruese të <link> Ramazanit </link> sot!",
+  "ramadan-activities-cta": "<link> E re! Zbuloni Kalendarin Global Kuranor për të udhëhequr leximin tuaj pas Ramazanit </link>",
   "read-juz": "Lexoni Juz",
   "recently-read": "Lexuar së fundmi",
   "revelation-order-disclaimer": "Ky këndvështrim tregon rendin kronologjik të sureve në Kuran bazuar në kohën kur ato iu shpallën Profetit Muhamed <hover> ﷺ </hover> . Kronologjia është temë e mendimit të studiuesve dhe disa sure janë shpallur pjesë-pjesë në kohë të ndryshme. Renditja këtu bazohet në punën e <link> Tanzil.net </link> . [Shënim: urdhri i përpiluar i Mushaf nga el-Fatiha në el-Nas është një çështje konsensusi.]",

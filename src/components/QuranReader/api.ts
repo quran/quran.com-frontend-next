@@ -8,6 +8,7 @@ import {
   makePageVersesUrl,
   makeVersesUrl,
   makeRubVersesUrl,
+  makeByRangeVersesUrl,
 } from '@/utils/apiPaths';
 import { fetcher } from 'src/api';
 import { PagesLookUpRequest } from 'types/ApiRequests';
@@ -59,74 +60,60 @@ export const getTranslationViewRequestKey = ({
 }: TranslationViewRequestKeyInput): string => {
   // if the response has only 1 verse it means we should set the page to that verse this will be combined with perPage which will be set to only 1.
   const page = isVerseData ? initialData.verses[0].verseNumber : pageNumber;
+  const commonParams = {
+    page,
+    reciter,
+    wordTranslationLanguage: wordByWordLocale,
+    translations: selectedTranslations.join(','),
+    ...getDefaultWordFields(quranReaderStyles.quranFont),
+    ...getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines),
+  };
   if (quranReaderDataType === QuranReaderDataType.Juz) {
     return makeJuzVersesUrl(id, locale, {
-      wordTranslationLanguage: wordByWordLocale,
-      page,
-      reciter,
-      translations: selectedTranslations.join(','),
-      ...getDefaultWordFields(quranReaderStyles.quranFont),
-      ...getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines),
+      ...commonParams,
       perPage: initialData.pagination.perPage,
     });
   }
   if (quranReaderDataType === QuranReaderDataType.Hizb) {
     return makeHizbVersesUrl(id, locale, {
-      wordTranslationLanguage: wordByWordLocale,
-      page,
-      reciter,
-      translations: selectedTranslations.join(','),
-      ...getDefaultWordFields(quranReaderStyles.quranFont),
-      ...getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines),
+      ...commonParams,
       perPage: initialData.pagination.perPage,
     });
   }
   if (quranReaderDataType === QuranReaderDataType.Page) {
     return makePageVersesUrl(id, locale, {
-      wordTranslationLanguage: wordByWordLocale,
-      page,
-      reciter,
       perPage: 'all',
-      translations: selectedTranslations.join(','),
-      ...getDefaultWordFields(quranReaderStyles.quranFont),
-      ...getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines),
+      ...commonParams,
     });
   }
   if (quranReaderDataType === QuranReaderDataType.Rub) {
     return makeRubVersesUrl(id, locale, {
-      wordTranslationLanguage: wordByWordLocale,
-      reciter,
-      page,
       from: initialData.metaData.from,
       perPage: initialData.pagination.perPage,
       to: initialData.metaData.to,
-      translations: selectedTranslations.join(','),
-      ...getDefaultWordFields(quranReaderStyles.quranFont),
-      ...getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines),
+      ...commonParams,
     });
   }
-  if (quranReaderDataType === QuranReaderDataType.VerseRange) {
+  if (quranReaderDataType === QuranReaderDataType.ChapterVerseRanges) {
     return makeVersesUrl(id, locale, {
-      wordTranslationLanguage: wordByWordLocale,
-      reciter,
-      page,
       from: initialData.metaData.from,
       perPage: initialData.pagination.perPage,
       to: initialData.metaData.to,
-      translations: selectedTranslations.join(','),
-      ...getDefaultWordFields(quranReaderStyles.quranFont),
-      ...getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines),
+      ...commonParams,
+    });
+  }
+  if (quranReaderDataType === QuranReaderDataType.Ranges) {
+    return makeByRangeVersesUrl(locale, {
+      from: initialData.pagesLookup.lookupRange.from,
+      perPage: initialData.pagination.perPage,
+      to: initialData.pagesLookup.lookupRange.to,
+      ...commonParams,
     });
   }
 
   return makeVersesUrl(id, locale, {
-    wordTranslationLanguage: wordByWordLocale,
-    reciter,
-    page,
     perPage: isVerseData ? 1 : initialData.pagination.perPage, // the idea is that when it's a verse view, we want to fetch only 1 verse starting from the verse's number and we can do that by passing per_page option to the API.
-    translations: selectedTranslations.join(','),
-    ...getDefaultWordFields(quranReaderStyles.quranFont),
-    ...getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines),
+    ...commonParams,
   });
 };
 
@@ -183,10 +170,14 @@ export const getPagesLookupParams = (
       params.from = initialData.verses[0].verseKey;
       params.to = initialData.verses[0].verseKey;
       break;
-    case QuranReaderDataType.VerseRange:
+    case QuranReaderDataType.ChapterVerseRanges:
       params.chapterNumber = resourceIdNumber;
       params.from = initialData.metaData.from;
       params.to = initialData.metaData.to;
+      break;
+    case QuranReaderDataType.Ranges:
+      params.from = initialData.pagesLookup.lookupRange.from;
+      params.to = initialData.pagesLookup.lookupRange.to;
       break;
     default:
       break;

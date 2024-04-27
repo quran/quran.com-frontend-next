@@ -1,0 +1,35 @@
+{
+  "hero": {
+    "line-1": "Kalendari Global Kuranor është një orar leximi i krijuar për të inkurajuar leximin reflektues të të gjithë Kuranit nga fundi i një Ramazani deri në fillimin e tjetrin. Ne ju inkurajojmë të gjeni kohë për të kuptuar dhe reflektuar mbi vargjet, në mënyrë që të fitoni një lidhje më të thellë dhe më të përzemërt."
+  },
+  "interact-with-post": "Ndërveproni me këtë postim në QuranReflect",
+  "islamic-months": {
+    "1": "Muharrem",
+    "2": "Safar",
+    "3": "Rabi'ul Evvel",
+    "4": "Rabi' al-Thani",
+    "5": "Xhumada el-Evuel",
+    "6": "Xhumada al-Thani",
+    "7": "Rexheb",
+    "8": "Shaban",
+    "9": "Ramazani",
+    "10": "Shevali",
+    "11": "Dhul-Kida",
+    "12": "Dhul Hixhe"
+  },
+  "join-qc": {
+    "line-1": "Jemi në <highlight> Javën {{weekNumber}} </highlight> të Kalendarit Kur'anor.",
+    "line-2": "<normal> Bashkohuni me ne për leximin e kësaj jave edhe nëse është hera juaj e parë! </normal>"
+  },
+  "join-quranic-calendar": "Abonohu për të marrë përditësime dhe burime nëpërmjet QuranReflect",
+  "join-quranic-calendar-success": "Ju jeni bashkuar me sukses në Klubin e Librit Hyjnor!",
+  "quranic-calendar": "Kalendari Global Kur'anor",
+  "reading-options": {
+    "default-settings": "Lexo me cilësimet e mia të paracaktuara",
+    "en-and-ar": "Lexoni në anglisht dhe arabisht",
+    "en-only": "Lexoni vetëm në anglisht"
+  },
+  "supplemental-resources": "Burimet Mbështetëse",
+  "today": "Data e sotme është: <highlight> {{month}} {{day}} {{year}} , {{gregorianDate}} </highlight>",
+  "week-title": "Java {{weekNumber}} ( {{month}} ) që mbulon vargjet {{rangeStart}} deri në {{rangeEnd}}"
+}

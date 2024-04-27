@@ -57,6 +57,9 @@ export const makeVersesUrl = (
   params?: Record<string, unknown>,
 ) => makeUrl(`/verses/by_chapter/${id}`, getVersesParams(currentLocale, params));
 
+export const makeByRangeVersesUrl = (currentLocale: string, params?: Record<string, unknown>) =>
+  makeUrl(`/verses/by_range`, getVersesParams(currentLocale, params));
+
 export const makeVersesFilterUrl = (params?: Record<string, unknown>) =>
   makeUrl(`/verses/filter`, { ...params });
 
@@ -293,5 +296,10 @@ export const makeFootnoteUrl = (footnoteId: string): string => makeUrl(`/foot_no
 export const makeDonateUrl = (showDonationPopup = false) =>
   `https://donate.quran.foundation${showDonationPopup ? '?showDonationPopup' : ''}`;
 
-export const makeDonatePageUrl = (isOnce = true) =>
-  `https://give.quran.foundation/give/${isOnce ? 482507 : 474400}/#!/donation/checkout`;
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+export const makeDonatePageUrl = (isOnce = true, shouldUseProviderUrl = false) => {
+  if (shouldUseProviderUrl) {
+    return `https://give.quran.foundation/give/${isOnce ? 482507 : 474400}/#!/donation/checkout`;
+  }
+  return makeDonateUrl();
+};
