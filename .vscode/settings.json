@@ -9,7 +9,7 @@
         "source.fixAll.eslint": "explicit",
         "source.fixAll.stylelint": "explicit"
     },
-    "editor.formatOnSave": false,
+    "editor.formatOnSave": true,
     "typescript.format.enable": false,
     "javascript.format.enable": false,
     "cssVariables.lookupFiles": [
