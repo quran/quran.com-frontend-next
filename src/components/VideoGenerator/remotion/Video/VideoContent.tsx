@@ -1,16 +1,15 @@
+/* eslint-disable react/no-danger */
 /* eslint-disable no-unsafe-optional-chaining */
 import classNames from 'classnames';
-import { useSelector } from 'react-redux';
 import { AbsoluteFill, Audio, Sequence, Video } from 'remotion';
 
 import styles from './video.module.scss';
 
-import TranslationText from '@/components/QuranReader/TranslationView/TranslationText';
-import VerseText from '@/components/Verse/VerseText';
-import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
+import { getBackgroundWithOpacityById } from '@/components/VideoGenerator/VideoUtils';
 import Translation from '@/types/Translation';
+import getPlainTranslationText from '@/utils/plainTranslationText';
 import { getVerseWords } from '@/utils/verse';
-import { WatermarkColor } from '@/utils/videoGenerator/constants';
+import { Alignment, Orientation, WatermarkColor } from '@/utils/videoGenerator/constants';
 
 let style = {};
 
@@ -19,13 +18,16 @@ type Props = {
   audio: any;
   video: any;
   timestamps: any;
-  sceneBackground: string;
-  verseBackground: string;
+  backgroundColorId: number;
+  opacity: string;
   fontColor: string;
   stls: any;
   verseAlignment: string;
   translationAlignment: string;
-  border: string;
+  quranTextFontScale: number;
+  translationFontScale: number;
+  shouldHaveBorder: string;
+  orientation: Orientation;
 };
 
 const VideoContent: React.FC<Props> = ({
@@ -33,17 +35,17 @@ const VideoContent: React.FC<Props> = ({
   audio,
   video,
   timestamps,
-  sceneBackground,
-  verseBackground,
+  backgroundColorId,
+  opacity,
   fontColor,
   stls,
   verseAlignment,
   translationAlignment,
-  border,
+  shouldHaveBorder,
+  quranTextFontScale,
+  translationFontScale,
 }) => {
-  const quranReaderStyles = useSelector(selectQuranReaderStyles);
-
-  if (border === 'false') {
+  if (shouldHaveBorder === 'false') {
     style = { ...stls, border: 'none' };
   } else {
     style = { ...stls, border: '2px gray solid' };
@@ -52,7 +54,6 @@ const VideoContent: React.FC<Props> = ({
   return (
     <AbsoluteFill
       style={{
-        background: sceneBackground,
         justifyContent: 'center',
       }}
     >
@@ -86,16 +87,24 @@ const VideoContent: React.FC<Props> = ({
               <AbsoluteFill
                 style={{
                   ...style,
-                  background: verseBackground,
+                  background: getBackgroundWithOpacityById(backgroundColorId, opacity).background,
                   color: fontColor,
                 }}
               >
                 <div
+                  style={{
+                    fontFamily: 'UthmanicHafs',
+                    direction: 'rtl',
+                    marginBlock: '3px',
+                    fontSize: quranTextFontScale * 10.1,
+                  }}
                   className={
-                    verseAlignment === 'centre' ? styles.verseCentre : styles.verseJustified
+                    verseAlignment === Alignment.CENTRE ? styles.verseCentre : styles.verseJustified
                   }
                 >
-                  <VerseText words={getVerseWords(verse)} shouldShowH1ForSEO={false} />
+                  {getVerseWords(verse)
+                    .map((word) => word.qpcUthmaniHafs)
+                    .join(' ')}
                 </div>
 
                 {verse.translations?.map((translation: Translation) => (
@@ -107,13 +116,11 @@ const VideoContent: React.FC<Props> = ({
                         : styles.verseTranslationJustified
                     }
                   >
-                    <TranslationText
-                      translationFontScale={quranReaderStyles.translationFontScale}
-                      text={translation.text}
-                      languageId={translation.languageId}
-                      resourceName={
-                        verse.translations?.length > 1 ? translation.resourceName : null
-                      }
+                    <div
+                      style={{ fontSize: translationFontScale * 10.1 }}
+                      dangerouslySetInnerHTML={{
+                        __html: getPlainTranslationText(translation.text),
+                      }}
                     />
                   </div>
                 ))}
@@ -127,6 +134,7 @@ const VideoContent: React.FC<Props> = ({
             [styles.watermarkDark]: video.watermarkColor === WatermarkColor.DARK,
             [styles.watermarkLight]: video.watermarkColor === WatermarkColor.LIGHT,
           })}
+          // eslint-disable-next-line i18next/no-literal-string
         >
           Quran.com
         </div>

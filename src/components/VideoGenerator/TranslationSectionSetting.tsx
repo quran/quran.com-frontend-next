@@ -1,11 +1,9 @@
-/* eslint-disable max-lines */
 import { useCallback, useMemo, useState } from 'react';
 
-import { Action } from '@reduxjs/toolkit';
 import useTranslation from 'next-translate/useTranslation';
-import { shallowEqual, useSelector } from 'react-redux';
+import { shallowEqual, useSelector, useDispatch } from 'react-redux';
 
-import TranslationSetting from './TranslationSetting';
+import TranslationSettings from './TranslationSetting';
 import styles from './video.module.scss';
 
 import DataFetcher from '@/components/DataFetcher';
@@ -14,50 +12,45 @@ import Counter from '@/dls/Counter/Counter';
 import Modal from '@/dls/Modal/Modal';
 import SelectionCard from '@/dls/SelectionCard/SelectionCard';
 import Skeleton from '@/dls/Skeleton/Skeleton';
-import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
 import {
-  decreaseTranslationFontScale,
-  increaseTranslationFontScale,
   MAXIMUM_TRANSLATIONS_FONT_STEP,
   MINIMUM_FONT_STEP,
-  selectQuranReaderStyles,
 } from '@/redux/slices/QuranReader/styles';
+import {
+  selectTranslationFontScale,
+  selectTranslations,
+  updateSettings,
+} from '@/redux/slices/videoGenerator';
 import { makeTranslationsUrl } from '@/utils/apiPaths';
-import { logValueChange } from '@/utils/eventLogger';
 import { toLocalizedNumber } from '@/utils/locale';
 import { TranslationsResponse } from 'types/ApiResponses';
-import PreferenceGroup from 'types/auth/PreferenceGroup';
 
-const TranslationSection = ({ selectedTranslation, setSelectedTranslation }) => {
-  const {
-    actions: { onSettingsChange },
-    isLoading,
-  } = usePersistPreferenceGroup();
+const TranslationSettingsSection = () => {
+  const translations = useSelector(selectTranslations, shallowEqual);
+  const translationFontScale = useSelector(selectTranslationFontScale, shallowEqual);
   const { t, lang } = useTranslation('common');
-  const selectedTranslations = selectedTranslation;
-  const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
-  const { translationFontScale } = quranReaderStyles;
-  const [showTranlsationsList, setShowTranslationsList] = useState(false);
+  const [showTranslationsList, setShowTranslationsList] = useState(false);
+  const dispatch = useDispatch();
 
   const translationLoading = useCallback(
     () => (
       <div>
-        {selectedTranslations.map((id) => (
+        {translations.map((id) => (
           <Skeleton className={styles.skeleton} key={id} />
         ))}
       </div>
     ),
-    [selectedTranslations],
+    [translations],
   );
 
   const localizedSelectedTranslations = useMemo(
-    () => toLocalizedNumber(selectedTranslations.length - 1, lang),
-    [selectedTranslations, lang],
+    () => toLocalizedNumber(translations.length - 1, lang),
+    [translations, lang],
   );
 
   const onSelectionCardClicked = useCallback(() => {
-    setShowTranslationsList(!showTranlsationsList);
-  }, [setShowTranslationsList, showTranlsationsList]);
+    setShowTranslationsList(!showTranslationsList);
+  }, [setShowTranslationsList, showTranslationsList]);
 
   const renderTranslations = useCallback(
     (data: TranslationsResponse) => {
@@ -65,18 +58,18 @@ const TranslationSection = ({ selectedTranslation, setSelectedTranslation }) => 
         return null;
       }
       const firstSelectedTranslation = data.translations.find(
-        (translation) => translation.id === selectedTranslations[0],
+        (translation) => translation.id === translations[0],
       );
 
       let selectedValueString = t('settings.no-translation-selected');
-      if (selectedTranslations.length === 1) selectedValueString = firstSelectedTranslation?.name;
-      if (selectedTranslations.length === 2) {
+      if (translations.length === 1) selectedValueString = firstSelectedTranslation?.name;
+      if (translations.length === 2) {
         selectedValueString = t('settings.value-and-other', {
           value: firstSelectedTranslation?.name,
           othersCount: localizedSelectedTranslations,
         });
       }
-      if (selectedTranslations.length > 2) {
+      if (translations.length > 2) {
         selectedValueString = t('settings.value-and-others', {
           value: firstSelectedTranslation?.name,
           othersCount: localizedSelectedTranslations,
@@ -91,56 +84,27 @@ const TranslationSection = ({ selectedTranslation, setSelectedTranslation }) => 
         />
       );
     },
-    [localizedSelectedTranslations, onSelectionCardClicked, selectedTranslations, t],
+    [localizedSelectedTranslations, onSelectionCardClicked, translations, t],
   );
 
-  /**
-   * Persist settings in the DB if the user is logged in before dispatching
-   * Redux action, otherwise just dispatch it.
-   *
-   * @param {string} key
-   * @param {number} value
-   * @param {Action} action
-   */
-  const onTranslationSettingsChange = (
-    key: string,
-    value: number,
-    action: Action,
-    undoAction: Action,
-  ) => {
-    onSettingsChange(key, value, action, undoAction, PreferenceGroup.QURAN_READER_STYLES);
-  };
-
   const clearTranslations = () => {
-    setSelectedTranslation([]);
+    dispatch(updateSettings({ translations: [] }));
   };
 
   const onFontScaleDecreaseClicked = () => {
     const newValue = translationFontScale - 1;
-    logValueChange('translation_font_scale', translationFontScale, newValue);
-    onTranslationSettingsChange(
-      'translationFontScale',
-      newValue,
-      decreaseTranslationFontScale(),
-      increaseTranslationFontScale(),
-    );
+    dispatch(updateSettings({ translationFontScale: newValue }));
   };
 
   const onFontScaleIncreaseClicked = () => {
     const newValue = translationFontScale + 1;
-    logValueChange('translation_font_scale', translationFontScale, newValue);
-    onTranslationSettingsChange(
-      'translationFontScale',
-      newValue,
-      increaseTranslationFontScale(),
-      decreaseTranslationFontScale(),
-    );
+    dispatch(updateSettings({ translationFontScale: newValue }));
   };
 
   return (
     <div>
       <Section>
-        <Section.Title isLoading={isLoading}>{t('translation')}</Section.Title>
+        <Section.Title>{t('translation')}</Section.Title>
         <Section.Row>
           <DataFetcher
             loading={translationLoading}
@@ -163,7 +127,7 @@ const TranslationSection = ({ selectedTranslation, setSelectedTranslation }) => 
           />
         </Section.Row>
       </Section>
-      {showTranlsationsList ? (
+      {showTranslationsList ? (
         <div className={styles.translationModalWrapper}>
           <Modal
             isOpen
@@ -174,15 +138,14 @@ const TranslationSection = ({ selectedTranslation, setSelectedTranslation }) => 
               <Modal.Header>
                 <Modal.Title>{t('translations')}</Modal.Title>
                 <div className={styles.translationListContainer}>
-                  <TranslationSetting
-                    selectedTranslation={selectedTranslation}
-                    setSelectedTranslation={setSelectedTranslation}
-                  />
+                  <TranslationSettings selectedTranslations={translations} />
                 </div>
               </Modal.Header>
             </Modal.Body>
             <Modal.Footer>
-              <Modal.Action onClick={clearTranslations}>{t('video.deselect')}</Modal.Action>
+              <Modal.Action onClick={clearTranslations}>
+                {t('video-generator:deselect')}
+              </Modal.Action>
               <Modal.CloseAction onClick={onSelectionCardClicked}>{t('close')}</Modal.CloseAction>
             </Modal.Footer>
           </Modal>
@@ -191,4 +154,4 @@ const TranslationSection = ({ selectedTranslation, setSelectedTranslation }) => 
     </div>
   );
 };
-export default TranslationSection;
+export default TranslationSettingsSection;

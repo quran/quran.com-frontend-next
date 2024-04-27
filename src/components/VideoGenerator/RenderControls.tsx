@@ -18,8 +18,6 @@ export type VideoCompositionProps = {
   verses: object;
   audio: object;
   timestamps: object;
-  sceneBackground: object;
-  verseBackground: object;
   fontColor: any;
   stls: object;
   verseAlignment: string;
@@ -30,7 +28,7 @@ export type VideoCompositionProps = {
 const RenderControls: React.FC<{
   inputProps: VideoCompositionProps;
 }> = ({ inputProps }) => {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation('video-generator');
   const { renderMedia, state } = useRendering(COMPOSITION_NAME, inputProps);
 
   return (
@@ -49,7 +47,7 @@ const RenderControls: React.FC<{
             isLoading={state.status === 'invoking'}
             onClick={renderMedia}
           >
-            {t('video.render-video')}
+            {t('render-video')}
           </Button>
           {state.status === 'error' ? <div>{state.error.message}</div> : null}
         </>
@@ -64,7 +62,7 @@ const RenderControls: React.FC<{
             isLoading={state.status === 'rendering'}
             href={state.status === 'done' ? state.url : ''}
           >
-            {t('video.download-video')}
+            {t('download-video')}
           </Button>
         </>
       ) : null}

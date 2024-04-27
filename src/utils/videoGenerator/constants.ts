@@ -13,6 +13,10 @@ export const VIDEO_LANDSCAPE_HEIGHT = 720;
 export const VIDEO_PORTRAIT_WIDTH = 720;
 export const VIDEO_LANDSCAPE_WIDTH = 1280;
 export const VIDEO_FPS = 30;
+export const DEFAULT_BACKGROUND_COLOR_ID = 1;
+export const DEFAULT_QURAN_FONT_SCALE = 3;
+export const DEFAULT_TRANSLATION_FONT_SCALE = 3;
+export const DEFAULT_SHOULD_HAVE_BORDER = 'false';
 
 export const DEFAULT_OPACITY = '0.2';
 export const DEFAULT_BACKGROUND = {
@@ -73,7 +77,7 @@ export enum Orientation {
   PORTRAIT = 'portrait',
 }
 
-export const VIDEOS = {
+export const BACKGROUND_VIDEOS = {
   1: {
     thumbnailSrc: 'https://images.quran.com/videos/thumbnails/sea.png',
     videoSrc: 'https://images.quran.com/videos/sea.mp4',
@@ -107,17 +111,21 @@ export const VIDEOS = {
 };
 
 export const DEFAULT_PROPS = {
-  video: { ...VIDEOS['1'], id: 1 },
+  video: { ...BACKGROUND_VIDEOS['1'], id: 1 },
   verses: defaultVerses,
   audio: defaultAudio,
   timestamps: DEFAULT_TIMESTAMPS,
-  sceneBackground: DEFAULT_BACKGROUND.background,
-  verseBackground: DEFAULT_BACKGROUND.background,
   fontColor: DEFAULT_FONT_COLOR,
   stls: DEFAULT_STYLES,
-  verseAlignment: 'centre',
-  translationAlignment: 'centre',
-  border: 'false',
+  verseAlignment: Alignment.CENTRE,
+  translationAlignment: Alignment.CENTRE,
+  backgroundColorId: DEFAULT_BACKGROUND_COLOR_ID,
+  quranTextFontScale: DEFAULT_QURAN_FONT_SCALE,
+  translationFontScale: DEFAULT_TRANSLATION_FONT_SCALE,
+  shouldHaveBorder: DEFAULT_SHOULD_HAVE_BORDER,
+  opacity: DEFAULT_OPACITY,
+  translations: [DEFAULT_TRANSLATION],
+  orientation: Orientation.LANDSCAPE,
 };
 
 export const COMPOSITION_PROPS = z.object({
@@ -125,13 +133,17 @@ export const COMPOSITION_PROPS = z.object({
   verses: z.any(),
   audio: z.any(),
   timestamps: z.any(),
-  sceneBackground: z.any(),
-  verseBackground: z.any(),
   fontColor: z.any(),
   stls: z.any(),
   verseAlignment: z.string(),
   translationAlignment: z.string(),
-  border: z.string(),
+  backgroundColorId: z.number(),
+  quranTextFontScale: z.number(),
+  translationFontScale: z.number(),
+  shouldHaveBorder: z.string(),
+  opacity: z.string(),
+  translations: z.number().array(),
+  orientation: z.string(),
 });
 
 export const REGION = 'us-east-1';

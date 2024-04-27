@@ -5,6 +5,7 @@ import { Player, PlayerRef } from '@remotion/player';
 import classNames from 'classnames';
 import { GetStaticProps, NextPage } from 'next';
 import useTranslation from 'next-translate/useTranslation';
+import { useSelector } from 'react-redux';
 
 import { getAvailableReciters, getChapterAudioData, getChapterVerses } from '@/api';
 import VideoContent from '@/components/VideoGenerator/remotion/Video/VideoContent';
@@ -14,10 +15,12 @@ import {
   getNormalizedTimestamps,
   getStyles,
   getTrimmedAudio,
-  getVideoById,
+  getBackgroundVideoById,
+  orientationToDimensions,
 } from '@/components/VideoGenerator/VideoUtils';
 import Error from '@/pages/_error';
 import layoutStyles from '@/pages/index.module.scss';
+import { selectVideoGeneratorSettings } from '@/redux/slices/videoGenerator';
 import { getAllChaptersData } from '@/utils/chapter';
 import {
   DEFAULT_API_PARAMS,
@@ -28,17 +31,11 @@ import {
   VIDEO_LANDSCAPE_WIDTH,
   VIDEO_PORTRAIT_HEIGHT,
   VIDEO_PORTRAIT_WIDTH,
-  DEFAULT_OPACITY,
-  DEFAULT_BACKGROUND,
-  DEFAULT_FONT_COLOR,
-  Alignment,
-  DEFAULT_TRANSLATION,
   Orientation,
 } from '@/utils/videoGenerator/constants';
 import { VersesResponse } from 'types/ApiResponses';
 import ChaptersData from 'types/ChaptersData';
 
-let skipFirstRender = true;
 interface VideoGenerator {
   juzVerses?: VersesResponse;
   hasError?: boolean;
@@ -69,23 +66,26 @@ const VideoGenerator: NextPage<VideoGenerator> = ({
   audio,
   defaultTimestamps,
 }) => {
-  const { t, lang } = useTranslation('common');
+  const { lang } = useTranslation('common');
 
-  const [opacity, setOpacity] = useState(DEFAULT_OPACITY);
-  const [sceneBackgroundColor, setSceneBackgroundColor] = useState(DEFAULT_BACKGROUND);
-  const [verseBackgroundColor, setVerseBackgroundColor] = useState(DEFAULT_BACKGROUND);
-  const [fontColor, setFontColor] = useState(DEFAULT_FONT_COLOR);
-  const [reciter, setReciter] = useState(DEFAULT_RECITER_ID);
+  const {
+    shouldHaveBorder,
+    backgroundColorId,
+    opacity,
+    reciter,
+    quranTextFontScale,
+    translationFontScale,
+    translations,
+    fontColor,
+    verseAlignment,
+    translationAlignment,
+    orientation,
+  } = useSelector(selectVideoGeneratorSettings);
   const [chapter, setChapter] = useState(DEFAULT_SURAH);
   const [verseData, setVerseData] = useState(verses?.verses);
   const [audioData, setAudioData] = useState(audio);
   const [timestamps, setTimestamps] = useState(defaultTimestamps);
-  const [selectedTranslations, setSelectedTranslations] = useState([DEFAULT_TRANSLATION]);
-  const [verseAlignment, setVerseAlignment] = useState<Alignment>(Alignment.CENTRE);
-  const [translationAlignment, setTranslationAlignment] = useState<Alignment>(Alignment.CENTRE);
-  const [border, setBorder] = useState('false');
-  const [dimensions, setDimensions] = useState('landscape');
-  const [video, setVideo] = useState(getVideoById(4));
+  const [video, setVideo] = useState(getBackgroundVideoById(4));
   const [searchFetch, setSearchFetch] = useState(false);
   const [isFetching, setIsFetching] = useState(false);
   const [verseFrom, setVerseFrom] = useState('');
@@ -93,16 +93,21 @@ const VideoGenerator: NextPage<VideoGenerator> = ({
 
   const playerRef = useRef<PlayerRef>(null);
 
-  useEffect(() => {
-    if (skipFirstRender) {
-      skipFirstRender = false;
-      setTimestamps(getNormalizedTimestamps(audioData));
+  const seekToBeginning = useCallback(() => {
+    const { current } = playerRef;
+    if (!current) {
       return;
     }
+    if (current.isPlaying) {
+      current.pause();
+    }
+    current.seekTo(0);
+  }, []);
 
+  useEffect(() => {
     let apiParams: any = {
       ...DEFAULT_API_PARAMS,
-      translations: selectedTranslations,
+      translations,
       perPage: chaptersData[chapter].versesCount,
     };
 
@@ -124,11 +129,21 @@ const VideoGenerator: NextPage<VideoGenerator> = ({
         setTimestamps(getNormalizedTimestamps(trimmedAudio));
       })
       .catch(() => {
+        // TODO: need a message to show the user
         console.error('something went wrong');
       })
       .finally(() => setIsFetching(false));
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [reciter, selectedTranslations, searchFetch]);
+  }, [
+    reciter,
+    translations,
+    searchFetch,
+    chaptersData,
+    chapter,
+    verseFrom,
+    verseTo,
+    lang,
+    seekToBeginning,
+  ]);
 
   const onChapterChange = useCallback((val) => {
     setVerseFrom('');
@@ -136,61 +151,39 @@ const VideoGenerator: NextPage<VideoGenerator> = ({
     setChapter(val);
   }, []);
 
-  const seekToBeginning = useCallback(() => {
-    const { current } = playerRef;
-    if (!current) {
-      return;
-    }
-    if (current.isPlaying) {
-      current.pause();
-    }
-    current.seekTo(0);
-  }, []);
-
-  const recitersOptions = useMemo(() => {
-    const DEFAULT_RECITATION_STYLE = 'Murattal';
-
-    return reciters.map((reciterObj) => {
-      let label = reciterObj.translatedName.name;
-      const recitationStyle = reciterObj.style.name;
-      if (recitationStyle !== DEFAULT_RECITATION_STYLE) {
-        label = `${label} - ${recitationStyle}`;
-      }
-      return {
-        id: reciterObj.id,
-        label,
-        value: reciterObj.id,
-        name: reciterObj.name,
-      };
-    });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [t]);
-
   const inputProps = useMemo(() => {
     return {
       verses: verseData,
       audio: audioData,
       timestamps,
-      sceneBackground: sceneBackgroundColor?.background,
-      verseBackground: verseBackgroundColor?.background,
+      backgroundColorId,
+      opacity,
       fontColor,
-      stls: getStyles(dimensions),
+      stls: getStyles(orientation),
       verseAlignment,
       translationAlignment,
-      border,
+      shouldHaveBorder,
       video,
+      quranTextFontScale,
+      translationFontScale,
+      translations,
+      orientation,
     };
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [
+    verseData,
+    audioData,
     timestamps,
-    sceneBackgroundColor,
-    verseBackgroundColor,
+    backgroundColorId,
+    opacity,
     fontColor,
-    dimensions,
+    orientation,
     verseAlignment,
     translationAlignment,
-    border,
+    shouldHaveBorder,
     video,
+    quranTextFontScale,
+    translationFontScale,
+    translations,
   ]);
 
   const chaptersList = useMemo(() => {
@@ -206,12 +199,13 @@ const VideoGenerator: NextPage<VideoGenerator> = ({
         name: chapterObj.transliteratedName,
       };
     });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [t]);
+  }, [chaptersData]);
 
   if (hasError) {
     return <Error statusCode={500} />;
   }
+
+  const { width, height } = orientationToDimensions(orientation);
 
   return (
     <div className={styles.pageContainer}>
@@ -221,12 +215,8 @@ const VideoGenerator: NextPage<VideoGenerator> = ({
           component={VideoContent}
           inputProps={inputProps}
           durationInFrames={Math.ceil(((audioData.duration + 500) / 1000) * VIDEO_FPS)}
-          compositionWidth={
-            dimensions === Orientation.LANDSCAPE ? VIDEO_LANDSCAPE_WIDTH : VIDEO_PORTRAIT_WIDTH
-          }
-          compositionHeight={
-            dimensions === 'landscape' ? VIDEO_LANDSCAPE_HEIGHT : VIDEO_PORTRAIT_HEIGHT
-          }
+          compositionWidth={width}
+          compositionHeight={height}
           fps={VIDEO_FPS}
           ref={playerRef}
           controls
@@ -238,26 +228,7 @@ const VideoGenerator: NextPage<VideoGenerator> = ({
           chaptersList={chaptersList}
           chapter={chapter}
           onChapterChange={onChapterChange}
-          recitersOptions={recitersOptions}
-          reciter={reciter}
-          setReciter={setReciter}
-          setSceneBackgroundColor={setSceneBackgroundColor}
-          verseBackgroundColor={verseBackgroundColor}
-          setVerseBackgroundColor={setVerseBackgroundColor}
-          fontColor={fontColor}
-          setFontColor={setFontColor}
-          selectedTranslations={selectedTranslations}
-          setSelectedTranslations={setSelectedTranslations}
-          verseAlignment={verseAlignment}
-          setVerseAlignment={setVerseAlignment}
-          translationAlignment={translationAlignment}
-          setTranslationAlignment={setTranslationAlignment}
-          opacity={opacity}
-          setOpacity={setOpacity}
-          border={border}
-          setBorder={setBorder}
-          dimensions={dimensions}
-          setDimensions={setDimensions}
+          reciters={reciters}
           seekToBeginning={seekToBeginning}
           setVideo={setVideo}
           searchFetch={searchFetch}

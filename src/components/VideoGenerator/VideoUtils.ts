@@ -1,4 +1,12 @@
-import { DEFAULT_STYLES, VIDEOS } from '@/utils/videoGenerator/constants';
+import {
+  DEFAULT_STYLES,
+  BACKGROUND_VIDEOS,
+  Orientation,
+  VIDEO_LANDSCAPE_WIDTH,
+  VIDEO_LANDSCAPE_HEIGHT,
+  VIDEO_PORTRAIT_WIDTH,
+  VIDEO_PORTRAIT_HEIGHT,
+} from '@/utils/videoGenerator/constants';
 
 /* eslint-disable max-lines */
 
@@ -14,15 +22,12 @@ export const getNormalizedIntervals = (start, end) => {
   };
 };
 
-export const getBackgroundWithOpacity = (colorObj, newAlpha) => {
-  const rgbaRegex = /rgba\((\d{1,3}),(\d{1,3}),(\d{1,3}),([0-1](\.\d+)?)\)/g;
-  const colorString = colorObj.background;
-  const modifiedString = colorString.replace(rgbaRegex, (match, red, green, blue, alpha) => {
-    const modifiedAlpha = newAlpha !== undefined ? newAlpha : alpha;
-    return `rgba(${red},${green},${blue},${modifiedAlpha})`;
-  });
-
-  return { ...colorObj, background: modifiedString };
+export const orientationToDimensions = (orientation: Orientation) => {
+  const isLandscape = orientation === Orientation.LANDSCAPE;
+  return {
+    width: isLandscape ? VIDEO_LANDSCAPE_WIDTH : VIDEO_PORTRAIT_WIDTH,
+    height: isLandscape ? VIDEO_LANDSCAPE_HEIGHT : VIDEO_PORTRAIT_HEIGHT,
+  };
 };
 
 export const getNormalizedTimestamps = (audio) => {
@@ -34,8 +39,8 @@ export const getNormalizedTimestamps = (audio) => {
   return result;
 };
 
-export const getVideoById = (id) => {
-  const videoObj = VIDEOS[id];
+export const getBackgroundVideoById = (id) => {
+  const videoObj = BACKGROUND_VIDEOS[id];
   if (!videoObj) {
     return null;
   }
@@ -53,7 +58,7 @@ export const getVideosArray = () => {
     return result;
   };
 
-  return flattenObject(VIDEOS);
+  return flattenObject(BACKGROUND_VIDEOS);
 };
 
 export const getBackgroundWithOpacityById = (id, opacity) => {
@@ -61,52 +66,50 @@ export const getBackgroundWithOpacityById = (id, opacity) => {
   return colors.find((c) => c.id === id);
 };
 
-export const getAllBackgrounds = (alpha = '0.8') => {
+export const getAllBackgrounds = (opacity = '0.8') => {
   return [
     {
       id: 1,
-      background: `linear-gradient(0deg, rgba(229,227,255,${alpha}) 0%, rgba(230,246,235,${alpha}) 50%, rgba(215,249,255,${alpha}) 100%)`,
+      background: `linear-gradient(0deg, rgba(229,227,255,${opacity}) 0%, rgba(230,246,235,${opacity}) 50%, rgba(215,249,255,${opacity}) 100%)`,
     },
     {
       id: 2,
-      background: `linear-gradient(0deg, rgba(244,255,227,${alpha}) 0%, rgba(255,229,215,${alpha}) 100%)`,
+      background: `linear-gradient(0deg, rgba(244,255,227,${opacity}) 0%, rgba(255,229,215,${opacity}) 100%)`,
     },
     {
       id: 3,
-      background: `linear-gradient(330deg, rgba(202,166,255,${alpha}) 0%, rgba(152,255,148,${alpha}) 100%)`,
+      background: `linear-gradient(330deg, rgba(202,166,255,${opacity}) 0%, rgba(152,255,148,${opacity}) 100%)`,
     },
     {
       id: 4,
-      background: `linear-gradient(to bottom,rgba(219, 225, 111, ${alpha}), rgba(248, 119, 40, ${alpha}))`,
+      background: `linear-gradient(to bottom,rgba(219, 225, 111, ${opacity}), rgba(248, 119, 40, ${opacity}))`,
     },
     {
       id: 5,
-      background: `linear-gradient(to bottom,rgba(157, 106, 32, ${alpha}),rgba(68, 155, 169, ${alpha}))`,
+      background: `linear-gradient(to bottom,rgba(157, 106, 32, ${opacity}),rgba(68, 155, 169, ${opacity}))`,
     },
     {
       id: 6,
-      background: `linear-gradient(to bottom,rgba(144, 240, 134, ${alpha}),rgba(232, 60, 194, ${alpha}))`,
+      background: `linear-gradient(to bottom,rgba(144, 240, 134, ${opacity}),rgba(232, 60, 194, ${opacity}))`,
     },
     {
       id: 7,
-      background: `linear-gradient(to top,rgba(111, 62, 26, ${alpha}),rgba(6, 81, 104, ${alpha}))`,
+      background: `linear-gradient(to top,rgba(111, 62, 26, ${opacity}),rgba(6, 81, 104, ${opacity}))`,
     },
     {
       id: 8,
-      background: `linear-gradient(to top,rgba(103, 243, 206, ${alpha}),rgba(16, 125, 64, ${alpha}))`,
+      background: `linear-gradient(to top,rgba(103, 243, 206, ${opacity}),rgba(16, 125, 64, ${opacity}))`,
     },
   ];
 };
 
-export const getStyles = (dimensions) => {
+export const getStyles = (orientation: Orientation) => {
   return {
     ...DEFAULT_STYLES,
-    minWidth: dimensions === 'landscape' ? '60%' : '80%',
-    minHeight: dimensions === 'landscape' ? '50%' : '25%',
+    minWidth: orientation === Orientation.LANDSCAPE ? '60%' : '80%',
+    minHeight: orientation === Orientation.LANDSCAPE ? '50%' : '25%',
   };
 };
-
-export const stls = getStyles('landscape');
 
 export const validateVerseRange = (from = 1, to, versesCount) => {
   const verseTo = to || versesCount;

@@ -1,0 +1,15 @@
+{
+  "background": "Text Background",
+  "border": "Border",
+  "collapse": "Collapse list",
+  "colors": "Colors",
+  "deselect": "Deselect all",
+  "download-video": "Download",
+  "font-color": "Font color",
+  "opacity": "Opacity",
+  "orientation": "Orientation",
+  "render-video": "Render",
+  "text-alignment": "Text Alignment",
+  "verse-key": "Chapter and Verse Number e.g. 2:255",
+  "video-picker": "Background video"
+}

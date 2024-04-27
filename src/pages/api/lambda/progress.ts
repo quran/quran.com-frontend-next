@@ -26,7 +26,7 @@ const progress = executeApi(ProgressRequest, async (req, body) => {
     region: REGION as AwsRegion,
     renderId: body.id,
   });
-  console.log('talalrender', renderProgress);
+  console.log(renderProgress);
 
   if (renderProgress.fatalErrorEncountered) {
     return {

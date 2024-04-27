@@ -39,6 +39,7 @@ import revelationOrder from './slices/revelationOrder';
 import search from './slices/Search/search';
 import session from './slices/session';
 import theme from './slices/theme';
+import videoGenerator from './slices/videoGenerator';
 import voiceSearch from './slices/voiceSearch';
 import welcomeMessage from './slices/welcomeMessage';
 import SliceName from './types/SliceName';
@@ -67,6 +68,7 @@ const persistConfig = {
     SliceName.USER_DATA_SYNC,
     SliceName.REVELATION_ORDER,
     SliceName.ONBOARDING,
+    SliceName.VIDEO_GENERATOR,
   ], // Reducers defined here will be have their values saved in local storage and persist across sessions. See: https://github.com/rt2zz/redux-persist#blacklist--whitelist
 };
 
@@ -96,6 +98,7 @@ export const rootReducer = combineReducers({
   revelationOrder,
   notifications,
   onboarding,
+  videoGenerator,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

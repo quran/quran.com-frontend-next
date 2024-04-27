@@ -1,13 +1,8 @@
-import { DirectionProvider } from '@radix-ui/react-direction';
-import { TooltipProvider } from '@radix-ui/react-tooltip';
 import { Composition, continueRender, delayRender, staticFile } from 'remotion';
 
 import VideoContent from './Video/VideoContent';
 
-import { OnboardingProvider } from '@/components/Onboarding/OnboardingProvider';
-import ToastContainerProvider from '@/dls/Toast/ToastProvider';
-import ReduxProvider from '@/redux/Provider';
-import { getDir } from '@/utils/locale';
+import { orientationToDimensions } from '@/components/VideoGenerator/VideoUtils';
 import {
   COMPOSITION_NAME,
   VIDEO_FPS,
@@ -15,8 +10,6 @@ import {
   VIDEO_LANDSCAPE_WIDTH,
   DEFAULT_PROPS,
 } from '@/utils/videoGenerator/constants';
-import { AudioPlayerMachineProvider } from '@/xstate/AudioPlayerMachineContext';
-import ThemeProvider from 'src/styles/ThemeProvider';
 
 /**
  * - Make sure API calls are being made in calculate metadata
@@ -51,35 +44,22 @@ export const RemotionRoot = () => {
     })
     .catch((err) => console.log('Error loading font', err));
   return (
-    <DirectionProvider dir={getDir('en')}>
-      <TooltipProvider>
-        <ToastContainerProvider>
-          <AudioPlayerMachineProvider>
-            <ReduxProvider locale="en">
-              <ThemeProvider>
-                <OnboardingProvider>
-                  <Composition
-                    id={COMPOSITION_NAME}
-                    // @ts-ignore
-                    component={VideoContent}
-                    durationInFrames={Math.ceil(((DEFAULT_PROPS.audio.duration + 500) / 1000) * 30)}
-                    fps={VIDEO_FPS}
-                    width={VIDEO_LANDSCAPE_WIDTH}
-                    height={VIDEO_LANDSCAPE_HEIGHT}
-                    calculateMetadata={({ props }) => {
-                      return {
-                        ...props,
-                        durationInFrames: Math.ceil(((props.audio.duration + 500) / 1000) * 30),
-                      };
-                    }}
-                    defaultProps={DEFAULT_PROPS}
-                  />
-                </OnboardingProvider>
-              </ThemeProvider>
-            </ReduxProvider>
-          </AudioPlayerMachineProvider>
-        </ToastContainerProvider>
-      </TooltipProvider>
-    </DirectionProvider>
+    <Composition
+      id={COMPOSITION_NAME}
+      // @ts-ignore
+      component={VideoContent}
+      durationInFrames={Math.ceil((DEFAULT_PROPS.audio.duration / 1000) * 30)}
+      fps={VIDEO_FPS}
+      width={VIDEO_LANDSCAPE_WIDTH}
+      height={VIDEO_LANDSCAPE_HEIGHT}
+      calculateMetadata={({ props }) => {
+        return {
+          ...props,
+          ...orientationToDimensions(props.orientation),
+          durationInFrames: Math.ceil((props.audio.duration / 1000) * 30),
+        };
+      }}
+      defaultProps={DEFAULT_PROPS}
+    />
   );
 };

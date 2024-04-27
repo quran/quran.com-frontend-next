@@ -1,9 +1,9 @@
-/* eslint-disable max-lines */
 import { useCallback, useState, useRef } from 'react';
 
 import groupBy from 'lodash/groupBy';
 import omit from 'lodash/omit';
 import useTranslation from 'next-translate/useTranslation';
+import { useDispatch } from 'react-redux';
 
 import styles from './video.module.scss';
 
@@ -13,17 +13,22 @@ import Checkbox from '@/dls/Forms/Checkbox/Checkbox';
 import Input from '@/dls/Forms/Input';
 import IconCancel from '@/icons/cancel.svg';
 import IconSearch from '@/icons/search.svg';
+import { updateSettings } from '@/redux/slices/videoGenerator';
 import { makeTranslationsUrl } from '@/utils/apiPaths';
 import filterTranslations from '@/utils/filter-translations';
 import { getLocaleName } from '@/utils/locale';
 import { TranslationsResponse } from 'types/ApiResponses';
 import AvailableTranslation from 'types/AvailableTranslation';
 
-const TranslationSelectionBody = ({ selectedTranslation, setSelectedTranslation }) => {
+type Props = {
+  selectedTranslations: number[];
+};
+
+const TranslationSelectionBody: React.FC<Props> = ({ selectedTranslations }) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { t, lang } = useTranslation('common');
-  const selectedTranslations = selectedTranslation;
   const [searchQuery, setSearchQuery] = useState('');
+  const dispatch = useDispatch();
   const inputRef = useRef(null);
 
   const onTranslationsChange = useCallback(
@@ -32,10 +37,10 @@ const TranslationSelectionBody = ({ selectedTranslation, setSelectedTranslation 
         const nextTranslations = isChecked
           ? [...selectedTranslations, selectedTranslationId]
           : selectedTranslations.filter((id) => id !== selectedTranslationId); // remove the id
-        setSelectedTranslation(nextTranslations);
+        dispatch(updateSettings({ translations: nextTranslations }));
       };
     },
-    [selectedTranslations, setSelectedTranslation],
+    [dispatch, selectedTranslations],
   );
 
   const clearSearch = useCallback(() => {

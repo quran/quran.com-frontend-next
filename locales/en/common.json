@@ -378,21 +378,6 @@
   "verse-bookmark-removed": "Verse bookmark removed!",
   "verse-bookmarked": "Verse bookmarked!",
   "verses": "Verses",
-  "video": {
-    "background": "Background",
-    "border": "Border",
-    "collapse": "Collapse list",
-    "colors": "Colors",
-    "deselect": "Deselect all",
-    "download-video": "Download",
-    "font-color": "Font color",
-    "opacity": "Opacity",
-    "orientation": "Orientation",
-    "render-video": "Render",
-    "text-alignment": "Text Alignment",
-    "verse-key": "Chapter and Verse Number e.g. 2:255",
-    "video-picker": "Select background video"
-  },
   "view": "View",
   "voice": {
     "ask-permission": "Please enable microphone permission to start using Voice Search",
