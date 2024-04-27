@@ -4,6 +4,7 @@ import { fileURLToPath } from 'url';
 import { deployFunction, deploySite, getOrCreateBucket } from '@remotion/lambda';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import dotenv from 'dotenv';
+// eslint-disable-next-line import/no-extraneous-dependencies
 import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
 
 import { RAM, REGION, SITE_NAME, TIMEOUT } from './config.mjs';
@@ -14,7 +15,8 @@ const __dirname = dirname(__filename);
 console.log('dirname is', __dirname);
 
 console.log('Selected region:', REGION);
-dotenv.config();
+// TODO: this uploads entire .env file to lambda, which is not ideal
+dotenv.config({ path: '.env.local' });
 
 if (!process.env.AWS_ACCESS_KEY_ID && !process.env.REMOTION_AWS_ACCESS_KEY_ID) {
   console.log('The environment variable "REMOTION_AWS_ACCESS_KEY_ID" is not set.');
@@ -46,9 +48,16 @@ const { bucketName, alreadyExisted: bucketAlreadyExisted } = await getOrCreateBu
 console.log(bucketName, bucketAlreadyExisted ? '(already existed)' : '(created)');
 
 process.stdout.write('Deploying site... ');
-const { siteName } = await deploySite({
+const { siteName, serveUrl } = await deploySite({
   bucketName,
-  entryPoint: path.join(process.cwd(), 'src', 'remotion', 'index.ts'),
+  entryPoint: path.join(
+    process.cwd(),
+    'src',
+    'components',
+    'VideoGenerator',
+    'remotion',
+    'index.ts',
+  ),
   siteName: SITE_NAME,
   region: REGION,
   options: {
@@ -83,7 +92,7 @@ const { siteName } = await deploySite({
   },
 });
 
-console.log(siteName);
+console.log('Deployed:', serveUrl);
 
 console.log();
 console.log('You now have everything you need to render videos!');

@@ -43,7 +43,7 @@ const DEFAULT_LOCALE = 'en';
  * @returns {DefaultSettings}
  */
 const importLocaleFile = (locale: string): DefaultSettings =>
-  require(`src/redux/defaultSettings/locales/en`).default;
+  require(`src/redux/defaultSettings/locales/${locale}`).default;
 
 /**
  * Get specific settings by its key for a locale.

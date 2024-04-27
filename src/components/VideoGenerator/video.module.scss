@@ -8,6 +8,11 @@
   min-height: calc(8 * var(--spacing-mega));
 }
 
+.player {
+  width: 100% !important;
+  height: 100% !important;
+}
+
 .playerWrapper {
   position: relative;
   padding: var(--spacing-large);
@@ -161,7 +166,6 @@
   width: 100%;
 }
 
-
 .translationControlButtons > button {
   margin: 0 1rem 1rem 0;
 }
@@ -198,21 +202,20 @@
 
 .img:hover {
   transform: scale(1.08);
-  box-shadow: 10px 10px 48px -25px rgba(0,0,0,0.75);
-  -webkit-box-shadow: 10px 10px 48px -25px rgba(0,0,0,0.75);
-  -moz-box-shadow: 10px 10px 48px -25px rgba(0,0,0,0.75);
+  box-shadow: 10px 10px 48px -25px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 10px 10px 48px -25px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 10px 10px 48px -25px rgba(0, 0, 0, 0.75);
 }
-
 
 .colorBox:hover {
   transform: translateY(-2%);
-  box-shadow: 10px 10px 48px -25px rgba(0,0,0,0.75);
-  -webkit-box-shadow: 10px 10px 48px -25px rgba(0,0,0,0.75);
-  -moz-box-shadow: 10px 10px 48px -25px rgba(0,0,0,0.75);
+  box-shadow: 10px 10px 48px -25px rgba(0, 0, 0, 0.75);
+  -webkit-box-shadow: 10px 10px 48px -25px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 10px 10px 48px -25px rgba(0, 0, 0, 0.75);
 }
 
 .orientationWrapper {
-  padding: var(--spacing-medium) 0;  
+  padding: var(--spacing-medium) 0;
 }
 
 .landscape {

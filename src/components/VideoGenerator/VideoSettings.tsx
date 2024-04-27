@@ -21,10 +21,49 @@ import Switch from '@/dls/Switch/Switch';
 import IconSearch from '@/icons/search.svg';
 import layoutStyle from '@/pages/index.module.scss';
 import { getChapterData } from '@/utils/chapter';
+import { Orientation } from '@/utils/videoGenerator/constants';
 
 const backgroundColors = getAllBackgrounds();
 
-const VideoSettings = ({
+type Props = {
+  chaptersList: any[];
+  chapter: number;
+  onChapterChange: (val: any) => void;
+  recitersOptions: any[];
+  reciter: number;
+  setReciter: (val: any) => void;
+  setSceneBackgroundColor: (val: any) => void;
+  verseBackgroundColor: any;
+  setVerseBackgroundColor: (val: any) => void;
+  fontColor: string;
+  setFontColor: (val: string) => void;
+  selectedTranslations: any[];
+  setSelectedTranslations: (val: any) => void;
+  verseAlignment: string;
+  setVerseAlignment: (val: string) => void;
+  translationAlignment: string;
+  setTranslationAlignment: (val: string) => void;
+  opacity: string;
+  setOpacity: (val: string) => void;
+  border: string;
+  setBorder: (val: string) => void;
+  dimensions: string;
+  setDimensions: (val: string) => void;
+  setVideo: (val: any) => void;
+  seekToBeginning: () => void;
+  searchFetch: boolean;
+  setSearchFetch: (val: boolean) => void;
+  isFetching: boolean;
+  verseFrom: string;
+  setVerseFrom: (val: string) => void;
+  verseTo: string;
+  setVerseTo: (val: string) => void;
+  inputProps: any;
+};
+
+// TODO: localize labels
+
+const VideoSettings: React.FC<Props> = ({
   chaptersList,
   chapter,
   onChapterChange,
@@ -267,8 +306,8 @@ const VideoSettings = ({
             <Section.Row>
               <Switch
                 items={[
-                  { name: 'Landscape', value: 'landscape' },
-                  { name: 'Portrait', value: 'portrait' },
+                  { name: 'Landscape', value: Orientation.LANDSCAPE },
+                  { name: 'Portrait', value: Orientation.PORTRAIT },
                 ]}
                 selected={dimensions}
                 onSelect={(val) => setDimensions(val)}
@@ -276,7 +315,11 @@ const VideoSettings = ({
             </Section.Row>
             <Section.Row>
               <div className={styles.orientationWrapper}>
-                <div className={dimensions === 'landscape' ? styles.landscape : styles.portrait} />
+                <div
+                  className={
+                    dimensions === Orientation.LANDSCAPE ? styles.landscape : styles.portrait
+                  }
+                />
               </div>
             </Section.Row>
           </Section>

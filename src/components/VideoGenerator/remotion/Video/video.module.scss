@@ -43,10 +43,17 @@
   padding: 0.5rem 2rem;
 }
 
-.watermarkLight > svg > path {
-  fill: #e7e9ea;
+.watermarkLight {
+  color: var(--color-text-inverse);
 }
 
-.watermarkDark > svg > path {
-  fill: #272727;
+.watermarkDark {
+  fill: var(--color-text-default);
+}
+
+.watermark {
+  font-weight: var(--font-weight-extra-bold);
+  position: absolute;
+  inset-block-end: 6%;
+  inset-inline-end: 5%;
 }

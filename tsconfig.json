@@ -18,7 +18,7 @@
     "resolveJsonModule": true,
     "skipLibCheck": true,
     "strict": false,
-    "target": "es2017",
+    "target": "es5",
     "incremental": true,
     "paths": {
       "@/icons/*": ["./public/icons/*"],

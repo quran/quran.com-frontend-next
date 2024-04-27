@@ -1,5 +1,7 @@
 import { z } from 'zod';
 
+import { getDefaultWordFields } from '../api';
+
 import defaultAudio from './defaultAudio.json';
 import defaultVerses from './defaultVerses.json';
 
@@ -12,10 +14,10 @@ export const VIDEO_PORTRAIT_WIDTH = 720;
 export const VIDEO_LANDSCAPE_WIDTH = 1280;
 export const VIDEO_FPS = 30;
 
-export const OPACITY = '0.2';
+export const DEFAULT_OPACITY = '0.2';
 export const DEFAULT_BACKGROUND = {
   id: 1,
-  background: `linear-gradient(0deg, rgba(229,227,255,${OPACITY}) 0%, rgba(230,246,235,${OPACITY}) 50%, rgba(215,249,255,${OPACITY}) 100%)`,
+  background: `linear-gradient(0deg, rgba(229,227,255,${DEFAULT_OPACITY}) 0%, rgba(230,246,235,${DEFAULT_OPACITY}) 50%, rgba(215,249,255,${DEFAULT_OPACITY}) 100%)`,
 };
 export const DEFAULT_FONT_COLOR = '#dddddd';
 export const COMPOSITION_NAME = 'VideoContent';
@@ -40,7 +42,7 @@ const DEFAULT_TIMESTAMPS = [
 ];
 
 export const DEFAULT_API_PARAMS = {
-  wordFields: 'verse_key,verse_id,page_number,location,text_uthmani,code_v1,qpc_uthmani_hafs',
+  ...getDefaultWordFields(),
   translations: [DEFAULT_TRANSLATION],
 };
 
@@ -56,36 +58,51 @@ export const DEFAULT_STYLES = {
   alignItems: 'center',
 };
 
+export enum WatermarkColor {
+  LIGHT = 'light',
+  DARK = 'dark',
+}
+
+export enum Alignment {
+  CENTRE = 'centre',
+  JUSTIFIED = 'justified',
+}
+
+export enum Orientation {
+  LANDSCAPE = 'landscape',
+  PORTRAIT = 'portrait',
+}
+
 export const VIDEOS = {
   1: {
     thumbnailSrc: 'https://images.quran.com/videos/thumbnails/sea.png',
     videoSrc: 'https://images.quran.com/videos/sea.mp4',
-    watermarkColor: 'light',
+    watermarkColor: WatermarkColor.LIGHT,
   },
   2: {
     thumbnailSrc: 'https://images.quran.com/videos/thumbnails/abstract.png',
     videoSrc: 'https://images.quran.com/videos/abstract.mp4',
-    watermarkColor: 'light',
+    watermarkColor: WatermarkColor.LIGHT,
   },
   3: {
     thumbnailSrc: 'https://images.quran.com/videos/thumbnails/windmill.png',
     videoSrc: 'https://images.quran.com/videos/windmill.mp4',
-    watermarkColor: 'light',
+    watermarkColor: WatermarkColor.LIGHT,
   },
   4: {
     thumbnailSrc: 'https://images.quran.com/videos/thumbnails/stars.png',
     videoSrc: 'https://images.quran.com/videos/stars.mp4',
-    watermarkColor: 'light',
+    watermarkColor: WatermarkColor.LIGHT,
   },
   5: {
     thumbnailSrc: 'https://images.quran.com/videos/thumbnails/nature.png',
     videoSrc: 'https://images.quran.com/videos/nature.mp4',
-    watermarkColor: 'light',
+    watermarkColor: WatermarkColor.LIGHT,
   },
   6: {
     thumbnailSrc: 'https://images.quran.com/videos/thumbnails/snow.png',
     videoSrc: 'https://images.quran.com/videos/snow.mp4',
-    watermarkColor: 'dark',
+    watermarkColor: WatermarkColor.DARK,
   },
 };
 
@@ -117,8 +134,8 @@ export const COMPOSITION_PROPS = z.object({
   border: z.string(),
 });
 
-// export const REGION = 'us-east-1';
-export const REGION = 'eu-north-1';
+export const REGION = 'us-east-1';
+// export const REGION = 'eu-north-1';
 export const SITE_NAME = 'quran-app';
 export const RAM = 2048;
 export const DISK = 2048;

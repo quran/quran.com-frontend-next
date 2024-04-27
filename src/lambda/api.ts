@@ -16,13 +16,7 @@ const makeRequest = async <Res>(endpoint: string, body: unknown): Promise<Res> =
   return json.data;
 };
 
-export const renderVideo = async ({
-  id,
-  inputProps,
-}: {
-  id: string;
-  inputProps;
-}) => {
+export const renderVideo = async ({ id, inputProps }: { id: string; inputProps }) => {
   const body = {
     id,
     inputProps,

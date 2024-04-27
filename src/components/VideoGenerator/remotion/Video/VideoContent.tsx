@@ -1,28 +1,34 @@
 /* eslint-disable no-unsafe-optional-chaining */
+import classNames from 'classnames';
 import { useSelector } from 'react-redux';
-import { AbsoluteFill, Audio, Sequence, Video, staticFile } from 'remotion';
+import { AbsoluteFill, Audio, Sequence, Video } from 'remotion';
 
 import styles from './video.module.scss';
 
 import TranslationText from '@/components/QuranReader/TranslationView/TranslationText';
 import VerseText from '@/components/Verse/VerseText';
-// import { ReactComponent as PaintIcon } from '@/icons/quran-text-logo.svg';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import Translation from '@/types/Translation';
 import { getVerseWords } from '@/utils/verse';
-
-const getProcessedVerseWords = (verse) => {
-  const basicWords = getVerseWords(verse);
-  return basicWords;
-};
-
-const font = staticFile('/UthmanicHafs1Ver18.woff2');
-
+import { WatermarkColor } from '@/utils/videoGenerator/constants';
 
 let style = {};
 
-// eslint-disable-next-line import/prefer-default-export
-export const VideoContent = ({
+type Props = {
+  verses: any;
+  audio: any;
+  video: any;
+  timestamps: any;
+  sceneBackground: string;
+  verseBackground: string;
+  fontColor: string;
+  stls: any;
+  verseAlignment: string;
+  translationAlignment: string;
+  border: string;
+};
+
+const VideoContent: React.FC<Props> = ({
   verses,
   audio,
   video,
@@ -48,7 +54,6 @@ export const VideoContent = ({
       style={{
         background: sceneBackground,
         justifyContent: 'center',
-        fontFamily: 'UthmanicHafs',
       }}
     >
       <div className={styles.videoContainer}>
@@ -86,12 +91,11 @@ export const VideoContent = ({
                 }}
               >
                 <div
-                  style={{ marginBottom: '1rem', fontFamily: 'UthmanicHafs' }}
                   className={
                     verseAlignment === 'centre' ? styles.verseCentre : styles.verseJustified
                   }
                 >
-                  <VerseText words={getProcessedVerseWords(verse)} shouldShowH1ForSEO={false} />
+                  <VerseText words={getVerseWords(verse)} shouldShowH1ForSEO={false} />
                 </div>
 
                 {verse.translations?.map((translation: Translation) => (
@@ -117,23 +121,18 @@ export const VideoContent = ({
             </Sequence>
           );
         })}
-      <AbsoluteFill
-        style={{
-          height: '100%',
-          width: '100%',
-        }}
-      >
+      <AbsoluteFill>
         <div
-          className={video.watermarkColor === 'dark' ? styles.watermarkDark : styles.watermarkLight}
-          style={{
-            position: 'absolute',
-            bottom: '6%',
-            right: '5%',
-          }}
+          className={classNames(styles.watermark, {
+            [styles.watermarkDark]: video.watermarkColor === WatermarkColor.DARK,
+            [styles.watermarkLight]: video.watermarkColor === WatermarkColor.LIGHT,
+          })}
         >
-          {/* <PaintIcon /> */}
+          Quran.com
         </div>
       </AbsoluteFill>
     </AbsoluteFill>
   );
 };
+
+export default VideoContent;

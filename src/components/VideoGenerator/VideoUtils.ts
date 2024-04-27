@@ -1,7 +1,8 @@
-/* eslint-disable max-lines */
 import { DEFAULT_STYLES, VIDEOS } from '@/utils/videoGenerator/constants';
 
-export function getNormalizedIntervals(start, end) {
+/* eslint-disable max-lines */
+
+export const getNormalizedIntervals = (start, end) => {
   const FRAMES = 30;
   const normalizedStart = (start / 1000) * FRAMES;
   const normalizedEnd = (end / 1000) * FRAMES;
@@ -11,9 +12,9 @@ export function getNormalizedIntervals(start, end) {
     start: Math.ceil(normalizedStart),
     durationInFrames: Math.ceil(durationInFrames),
   };
-}
+};
 
-export function getBackgroundWithOpacity(colorObj, newAlpha) {
+export const getBackgroundWithOpacity = (colorObj, newAlpha) => {
   const rgbaRegex = /rgba\((\d{1,3}),(\d{1,3}),(\d{1,3}),([0-1](\.\d+)?)\)/g;
   const colorString = colorObj.background;
   const modifiedString = colorString.replace(rgbaRegex, (match, red, green, blue, alpha) => {
@@ -22,26 +23,26 @@ export function getBackgroundWithOpacity(colorObj, newAlpha) {
   });
 
   return { ...colorObj, background: modifiedString };
-}
+};
 
-export function getNormalizedTimestamps(audio) {
+export const getNormalizedTimestamps = (audio) => {
   const result = [];
   for (let i = 0; i < audio.verseTimings.length; i += 1) {
     const currentVerse = audio.verseTimings[i];
     result.push(getNormalizedIntervals(currentVerse.timestampFrom, currentVerse.timestampTo));
   }
   return result;
-}
+};
 
-export function getVideoById(id) {
+export const getVideoById = (id) => {
   const videoObj = VIDEOS[id];
   if (!videoObj) {
     return null;
   }
   return videoObj;
-}
+};
 
-export function getVideosArray() {
+export const getVideosArray = () => {
   const flattenObject = (obj) => {
     const result = [];
 
@@ -53,15 +54,13 @@ export function getVideosArray() {
   };
 
   return flattenObject(VIDEOS);
-}
+};
 
 export const getBackgroundWithOpacityById = (id, opacity) => {
   const colors = getAllBackgrounds(opacity);
   return colors.find((c) => c.id === id);
 };
 
-// TODO: perhaps create hashmap of colors if we're using id, instead of an array
-// eslint-disable-next-line react-func/max-lines-per-function
 export const getAllBackgrounds = (alpha = '0.8') => {
   return [
     {
@@ -99,24 +98,22 @@ export const getAllBackgrounds = (alpha = '0.8') => {
   ];
 };
 
-export function getStyles(dimensions) {
+export const getStyles = (dimensions) => {
   return {
     ...DEFAULT_STYLES,
     minWidth: dimensions === 'landscape' ? '60%' : '80%',
     minHeight: dimensions === 'landscape' ? '50%' : '25%',
   };
-}
+};
 
 export const stls = getStyles('landscape');
 
-// eslint-disable-next-line default-param-last
-export function validateVerseRange(from = 1, to, versesCount) {
+export const validateVerseRange = (from = 1, to, versesCount) => {
   const verseTo = to || versesCount;
   return from <= verseTo && from <= versesCount && verseTo <= versesCount;
-}
+};
 
-// eslint-disable-next-line react-func/max-lines-per-function
-export function getTrimmedAudio(audio, from, to) {
+export const getTrimmedAudio = (audio, from, to) => {
   if (!from?.trim?.() && !to?.trim?.()) {
     return audio;
   }
@@ -162,4 +159,4 @@ export function getTrimmedAudio(audio, from, to) {
   });
 
   return res;
-}
+};

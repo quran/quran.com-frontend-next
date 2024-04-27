@@ -2,7 +2,7 @@ import { DirectionProvider } from '@radix-ui/react-direction';
 import { TooltipProvider } from '@radix-ui/react-tooltip';
 import { Composition, continueRender, delayRender, staticFile } from 'remotion';
 
-import { VideoContent } from './Video/Main';
+import VideoContent from './Video/VideoContent';
 
 import { OnboardingProvider } from '@/components/Onboarding/OnboardingProvider';
 import ToastContainerProvider from '@/dls/Toast/ToastProvider';
@@ -67,13 +67,6 @@ export const RemotionRoot = () => {
                     width={VIDEO_LANDSCAPE_WIDTH}
                     height={VIDEO_LANDSCAPE_HEIGHT}
                     calculateMetadata={({ props }) => {
-                      // const font2 = new FontFace(
-                      //   `UthmanicHafs`,
-                      //   `url('${staticFile(
-                      //     '/fonts/quran/hafs/nastaleeq/indopak/indopak-nastaleeq-waqf-lazim-v4.2.1.woff2',
-                      //   )}') format('woff2')`,
-                      // );
-                      // document.fonts.add(font2);
                       return {
                         ...props,
                         durationInFrames: Math.ceil(((props.audio.duration + 500) / 1000) * 30),

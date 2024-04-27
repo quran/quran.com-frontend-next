@@ -43,7 +43,6 @@ const progress = executeApi(ProgressRequest, async (req, body) => {
     };
   }
 
-
   return {
     type: 'progress',
     progress: Math.max(0.03, renderProgress.overallProgress),

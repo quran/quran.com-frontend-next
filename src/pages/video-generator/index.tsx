@@ -6,10 +6,8 @@ import classNames from 'classnames';
 import { GetStaticProps, NextPage } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 
-import { VideoContent } from '../../remotion/Video/Main';
-import layoutStyle from '../index.module.scss';
-
 import { getAvailableReciters, getChapterAudioData, getChapterVerses } from '@/api';
+import VideoContent from '@/components/VideoGenerator/remotion/Video/VideoContent';
 import styles from '@/components/VideoGenerator/video.module.scss';
 import VideoSettings from '@/components/VideoGenerator/VideoSettings';
 import {
@@ -19,6 +17,7 @@ import {
   getVideoById,
 } from '@/components/VideoGenerator/VideoUtils';
 import Error from '@/pages/_error';
+import layoutStyles from '@/pages/index.module.scss';
 import { getAllChaptersData } from '@/utils/chapter';
 import {
   DEFAULT_API_PARAMS,
@@ -29,9 +28,12 @@ import {
   VIDEO_LANDSCAPE_WIDTH,
   VIDEO_PORTRAIT_HEIGHT,
   VIDEO_PORTRAIT_WIDTH,
-  OPACITY,
+  DEFAULT_OPACITY,
   DEFAULT_BACKGROUND,
   DEFAULT_FONT_COLOR,
+  Alignment,
+  DEFAULT_TRANSLATION,
+  Orientation,
 } from '@/utils/videoGenerator/constants';
 import { VersesResponse } from 'types/ApiResponses';
 import ChaptersData from 'types/ChaptersData';
@@ -69,18 +71,18 @@ const VideoGenerator: NextPage<VideoGenerator> = ({
 }) => {
   const { t, lang } = useTranslation('common');
 
-  const [opacity, setOpacity] = useState(OPACITY);
+  const [opacity, setOpacity] = useState(DEFAULT_OPACITY);
   const [sceneBackgroundColor, setSceneBackgroundColor] = useState(DEFAULT_BACKGROUND);
   const [verseBackgroundColor, setVerseBackgroundColor] = useState(DEFAULT_BACKGROUND);
   const [fontColor, setFontColor] = useState(DEFAULT_FONT_COLOR);
-  const [reciter, setReciter] = useState(7);
-  const [chapter, setChapter] = useState(112);
-  const [verseData, setverseData] = useState(verses?.verses);
+  const [reciter, setReciter] = useState(DEFAULT_RECITER_ID);
+  const [chapter, setChapter] = useState(DEFAULT_SURAH);
+  const [verseData, setVerseData] = useState(verses?.verses);
   const [audioData, setAudioData] = useState(audio);
   const [timestamps, setTimestamps] = useState(defaultTimestamps);
-  const [selectedTranslations, setSelectedTranslations] = useState([131]);
-  const [verseAlignment, setVerseAlignment] = useState('centre');
-  const [translationAlignment, setTranslationAlignment] = useState('centre');
+  const [selectedTranslations, setSelectedTranslations] = useState([DEFAULT_TRANSLATION]);
+  const [verseAlignment, setVerseAlignment] = useState<Alignment>(Alignment.CENTRE);
+  const [translationAlignment, setTranslationAlignment] = useState<Alignment>(Alignment.CENTRE);
   const [border, setBorder] = useState('false');
   const [dimensions, setDimensions] = useState('landscape');
   const [video, setVideo] = useState(getVideoById(4));
@@ -116,7 +118,7 @@ const VideoGenerator: NextPage<VideoGenerator> = ({
     fetchData()
       .then(([versesRes, audioRes]) => {
         seekToBeginning();
-        setverseData((versesRes as any)?.verses);
+        setVerseData((versesRes as any)?.verses);
         const trimmedAudio = getTrimmedAudio(audioRes, verseFrom, verseTo);
         setAudioData(trimmedAudio);
         setTimestamps(getNormalizedTimestamps(trimmedAudio));
@@ -213,14 +215,14 @@ const VideoGenerator: NextPage<VideoGenerator> = ({
 
   return (
     <div className={styles.pageContainer}>
-      <div className={classNames(styles.playerWrapper, layoutStyle.flowItem)}>
+      <div className={classNames(styles.playerWrapper, layoutStyles.flowItem)}>
         <Player
-          style={{ width: '100%', height: '100%' }}
+          className={styles.player}
           component={VideoContent}
           inputProps={inputProps}
           durationInFrames={Math.ceil(((audioData.duration + 500) / 1000) * VIDEO_FPS)}
           compositionWidth={
-            dimensions === 'landscape' ? VIDEO_LANDSCAPE_WIDTH : VIDEO_PORTRAIT_WIDTH
+            dimensions === Orientation.LANDSCAPE ? VIDEO_LANDSCAPE_WIDTH : VIDEO_PORTRAIT_WIDTH
           }
           compositionHeight={
             dimensions === 'landscape' ? VIDEO_LANDSCAPE_HEIGHT : VIDEO_PORTRAIT_HEIGHT
@@ -230,8 +232,8 @@ const VideoGenerator: NextPage<VideoGenerator> = ({
           controls
         />
       </div>
-      <div className={layoutStyle.flow}>
-        {/* This is just bad. Rather store these settings in redux and persist than passing like this */}
+      <div className={layoutStyles.flow}>
+        {/* TODO: This is just bad. Rather store these settings in redux and persist than passing like this */}
         <VideoSettings
           chaptersList={chaptersList}
           chapter={chapter}
@@ -277,12 +279,12 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
     const { reciters } = await getAvailableReciters(locale, []);
     const chaptersData = await getAllChaptersData(locale);
     const verses = await getChapterVerses(DEFAULT_SURAH, locale, DEFAULT_API_PARAMS);
-    const audio = await getChapterAudioData(DEFAULT_RECITER_ID, DEFAULT_SURAH, true);
-    const defaultTimestamps = getNormalizedTimestamps(audio);
+    const chapterAudioData = await getChapterAudioData(DEFAULT_RECITER_ID, DEFAULT_SURAH, true);
+    const defaultTimestamps = getNormalizedTimestamps(chapterAudioData);
 
     return {
       props: {
-        audio,
+        audio: chapterAudioData,
         verses,
         chaptersData,
         defaultTimestamps,
