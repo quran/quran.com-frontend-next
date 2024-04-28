@@ -92,8 +92,11 @@ const VideoContent: React.FC<Props> = ({
                     [styles.watermarkLight]: video.watermarkColor === WatermarkColor.LIGHT,
                   })}
                 >
-                  <ChapterIcon id={verse.chapterId.toString()} />
-                  <ChapterIcon id="surah" />
+                  <span className={styles.surahFont}>
+                    <ChapterIcon id={verse.chapterId.toString()} />
+                    <ChapterIcon id="surah" />
+                  </span>
+                  <span className={styles.surahNumber}>{` - ${verse.chapterId}`}</span>
                 </div>
               </AbsoluteFill>
               <AbsoluteFill
@@ -122,11 +125,11 @@ const VideoContent: React.FC<Props> = ({
                 {verse.translations?.map((translation: Translation) => (
                   <div
                     key={translation.id}
-                    className={
-                      translationAlignment === Alignment.CENTRE
-                        ? styles.verseTranslationCentre
-                        : styles.verseTranslationJustified
-                    }
+                    className={classNames(styles.translation, {
+                      [styles.verseTranslationCentre]: translationAlignment === Alignment.CENTRE,
+                      [styles.verseTranslationJustified]:
+                        translationAlignment === Alignment.JUSTIFIED,
+                    })}
                   >
                     <div
                       style={{ fontSize: translationFontScale * 10.1 }}

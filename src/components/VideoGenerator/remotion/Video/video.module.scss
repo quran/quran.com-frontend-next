@@ -21,6 +21,9 @@
   inset-block-start: 50%;
   inset-inline-start: 50%;
   transform: translate(-50%, -50%);
+  [dir="rtl"] & {
+    transform: translate(50%, -50%);
+  }
   object-fit: cover;
 }
 
@@ -43,6 +46,10 @@
   padding: 0.5rem 2rem;
 }
 
+.translation {
+  direction: ltr;
+}
+
 .watermarkLight {
   color: white;
 }
@@ -59,9 +66,21 @@
 }
 
 .chapterTitle {
-  font-weight: 500;
+  font-family: unset !important;
   text-align: center;
-  font-size: 50px;
-  font-family: "SurahNames";
+  font-size: 40px;
   margin-block-start: 10px;
+  // when switching languages, the font-family we don't want to be applied to the chapter title
+  & * {
+    font-family: unset !important;
+  }
+}
+
+.surahNumber {
+  font-size: 38px;
+}
+
+.surahFont {
+  font-weight: 500;
+  font-family: "SurahNames" !important;
 }

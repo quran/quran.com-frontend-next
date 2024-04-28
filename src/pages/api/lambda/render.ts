@@ -38,8 +38,14 @@ const render = executeApi(
       );
     }
 
+    const { verses, audio } = body.inputProps;
+    const { verseKey: startVerseKey } = verses[0];
+    const { verseKey: endVerseKey } = verses[verses.length - 1];
+    const { reciterId } = audio;
+
     const result = await renderMediaOnLambda({
-      codec: 'h264',
+      codec: 'h264', // {@see https://www.remotion.dev/docs/encoding/#choosing-a-codec}
+      crf: 1, // {@see https://www.remotion.dev/docs/encoding/#controlling-quality-using-the-crf-setting}
       functionName: speculateFunctionName({
         diskSizeInMb: DISK,
         memorySizeInMb: RAM,
@@ -52,7 +58,7 @@ const render = executeApi(
       framesPerLambda: 10,
       downloadBehavior: {
         type: 'download',
-        fileName: 'video.mp4',
+        fileName: `quran-${reciterId}-${startVerseKey}-${endVerseKey}.mp4`,
       },
     });
 
