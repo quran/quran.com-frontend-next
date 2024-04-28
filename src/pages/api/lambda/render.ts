@@ -1,5 +1,10 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { AwsRegion, renderMediaOnLambda, speculateFunctionName } from '@remotion/lambda/client';
+import {
+  AwsRegion,
+  renderMediaOnLambda,
+  speculateFunctionName,
+  renderStillOnLambda,
+} from '@remotion/lambda/client';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { z } from 'zod';
 
@@ -17,6 +22,7 @@ import {
 const RenderRequest = z.object({
   id: z.string(),
   inputProps: COMPOSITION_PROPS,
+  type: z.string(),
 });
 
 const render = executeApi(
@@ -38,14 +44,13 @@ const render = executeApi(
       );
     }
 
-    const { verses, audio } = body.inputProps;
+    const { inputProps, id, type } = body;
+    const { verses, audio } = inputProps;
     const { verseKey: startVerseKey } = verses[0];
     const { verseKey: endVerseKey } = verses[verses.length - 1];
     const { reciterId } = audio;
-
-    const result = await renderMediaOnLambda({
-      codec: 'h264', // {@see https://www.remotion.dev/docs/encoding/#choosing-a-codec}
-      crf: 1, // {@see https://www.remotion.dev/docs/encoding/#controlling-quality-using-the-crf-setting}
+    const fileName = `quran-${reciterId}-${startVerseKey}-${endVerseKey}`;
+    const commonProps = {
       functionName: speculateFunctionName({
         diskSizeInMb: DISK,
         memorySizeInMb: RAM,
@@ -53,12 +58,32 @@ const render = executeApi(
       }),
       region: REGION as AwsRegion,
       serveUrl: SITE_NAME,
-      composition: body.id,
-      inputProps: body.inputProps,
-      framesPerLambda: 10,
+      composition: id,
+      inputProps,
+    };
+
+    if (type === 'video') {
+      const result = await renderMediaOnLambda({
+        ...commonProps,
+        codec: 'h264', // {@see https://www.remotion.dev/docs/encoding/#choosing-a-codec}
+        crf: 1, // {@see https://www.remotion.dev/docs/encoding/#controlling-quality-using-the-crf-setting}
+        framesPerLambda: 10,
+        downloadBehavior: {
+          type: 'download',
+          fileName: `${fileName}.mp4`,
+        },
+      });
+
+      return result;
+    }
+    const result = await renderStillOnLambda({
+      ...commonProps,
+      imageFormat: 'jpeg',
+      jpegQuality: 100,
+      privacy: 'public',
       downloadBehavior: {
         type: 'download',
-        fileName: `quran-${reciterId}-${startVerseKey}-${endVerseKey}.mp4`,
+        fileName: `${fileName}-image.jpeg`,
       },
     });
 

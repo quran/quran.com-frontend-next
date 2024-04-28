@@ -1,9 +1,10 @@
+/* eslint-disable react-func/max-lines-per-function */
 /* eslint-disable no-await-in-loop */
 import { useCallback, useMemo, useState } from 'react';
 
 import { z } from 'zod';
 
-import { getProgress, renderVideo } from '../lambda/api';
+import { getProgress, renderVideoOrImage } from '../lambda/api';
 
 import { COMPOSITION_PROPS } from '@/utils/videoGenerator/constants';
 
@@ -13,6 +14,11 @@ export enum RenderStatus {
   RENDERING = 'rendering',
   ERROR = 'error',
   DONE = 'done',
+}
+
+export enum MediaType {
+  VIDEO = 'video',
+  IMAGE = 'image',
 }
 
 export type State =
@@ -53,65 +59,76 @@ export const useRendering = (id: string, inputProps: z.infer<typeof COMPOSITION_
   });
 
   // eslint-disable-next-line react-func/max-lines-per-function
-  const renderMedia = useCallback(async () => {
-    setState({
-      status: RenderStatus.INVOKING,
-    });
-    try {
-      const { renderId, bucketName } = await renderVideo({ id, inputProps });
-      setState({
-        status: RenderStatus.RENDERING,
-        progress: 0,
-        renderId,
-        bucketName,
-      });
-
+  const renderMedia = useCallback(
+    async (type: MediaType) => {
       let pending = true;
-
-      while (pending) {
-        const result = await getProgress({
-          id: renderId,
+      setState({
+        status: RenderStatus.INVOKING,
+      });
+      try {
+        const response = await renderVideoOrImage({ id, inputProps, type });
+        if (type === MediaType.IMAGE) {
+          setState({
+            size: response.sizeInBytes,
+            url: response.url,
+            status: RenderStatus.DONE,
+          });
+          pending = false;
+          return;
+        }
+        const { renderId, bucketName } = response;
+        setState({
+          status: RenderStatus.RENDERING,
+          progress: 0,
+          renderId,
           bucketName,
         });
-        // eslint-disable-next-line default-case
-        switch (result.type) {
-          case 'error': {
-            setState({
-              status: RenderStatus.ERROR,
-              renderId,
-              error: new Error(result.message),
-            });
-            pending = false;
-            break;
-          }
-          case 'done': {
-            setState({
-              size: result.size,
-              url: result.url,
-              status: RenderStatus.DONE,
-            });
-            pending = false;
-            break;
-          }
-          case 'progress': {
-            setState({
-              status: RenderStatus.RENDERING,
-              bucketName,
-              progress: result.progress,
-              renderId,
-            });
-            await wait(1000);
+        while (pending) {
+          const result = await getProgress({
+            id: renderId,
+            bucketName,
+          });
+          // eslint-disable-next-line default-case
+          switch (result.type) {
+            case 'error': {
+              setState({
+                status: RenderStatus.ERROR,
+                renderId,
+                error: new Error(result.message),
+              });
+              pending = false;
+              break;
+            }
+            case 'done': {
+              setState({
+                size: result.size,
+                url: result.url,
+                status: RenderStatus.DONE,
+              });
+              pending = false;
+              break;
+            }
+            case 'progress': {
+              setState({
+                status: RenderStatus.RENDERING,
+                bucketName,
+                progress: result.progress,
+                renderId,
+              });
+              await wait(1000);
+            }
           }
         }
+      } catch (err) {
+        setState({
+          status: RenderStatus.ERROR,
+          error: err as Error,
+          renderId: null,
+        });
       }
-    } catch (err) {
-      setState({
-        status: RenderStatus.ERROR,
-        error: err as Error,
-        renderId: null,
-      });
-    }
-  }, [id, inputProps]);
+    },
+    [id, inputProps],
+  );
 
   const undo = useCallback(() => {
     setState({ status: RenderStatus.INIT });

@@ -7,7 +7,7 @@ import styles from './video.module.scss';
 
 import Button from '@/dls/Button/Button';
 import Progress from '@/dls/Progress';
-import { RenderStatus, useRendering } from '@/hooks/useRendering';
+import { MediaType, RenderStatus, useRendering } from '@/hooks/useRendering';
 import IconDownload from '@/icons/download.svg';
 import IconRender from '@/icons/slow_motion_video.svg';
 import layoutStyle from '@/pages/index.module.scss';
@@ -53,7 +53,9 @@ const RenderControls: React.FC<{
             prefix={<IconRender />}
             isDisabled={state.status === RenderStatus.INVOKING}
             isLoading={state.status === RenderStatus.INVOKING}
-            onClick={renderMedia}
+            onClick={() => {
+              renderMedia(MediaType.VIDEO);
+            }}
           >
             {t('render-video')}
           </Button>

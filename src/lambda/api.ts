@@ -16,10 +16,19 @@ const makeRequest = async <Res>(endpoint: string, body: unknown): Promise<Res> =
   return json.data;
 };
 
-export const renderVideo = async ({ id, inputProps }: { id: string; inputProps }) => {
+export const renderVideoOrImage = async ({
+  id,
+  inputProps,
+  type,
+}: {
+  id: string;
+  inputProps;
+  type: string;
+}) => {
   const body = {
     id,
     inputProps,
+    type,
   };
 
   return makeRequest<RenderMediaOnLambdaOutput>('/api/lambda/render', body);

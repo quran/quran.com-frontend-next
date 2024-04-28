@@ -9,6 +9,7 @@
   "opacity": "Opacity",
   "orientation": "Orientation",
   "render-video": "Render",
+  "render-image": "Take a screenshot",
   "text-alignment": "Text Alignment",
   "verse-key": "Chapter and Verse Number e.g. 2:255",
   "video-picker": "Background video",
