@@ -32,8 +32,8 @@ type Props = {
   reciters: Reciter[];
   seekToBeginning: () => void;
   getCurrentFrame: () => void;
-  searchFetch: boolean;
-  setSearchFetch: (val: boolean) => void;
+  shouldSearchFetch: boolean;
+  setShouldSearchFetch: (val: boolean) => void;
   isFetching: boolean;
   verseFrom: string;
   setVerseFrom: (val: string) => void;
@@ -48,8 +48,8 @@ const VideoSettings: React.FC<Props> = ({
   onChapterChange,
   reciters,
   seekToBeginning,
-  searchFetch,
-  setSearchFetch,
+  shouldSearchFetch,
+  setShouldSearchFetch,
   isFetching,
   verseFrom,
   setVerseFrom,
@@ -62,12 +62,12 @@ const VideoSettings: React.FC<Props> = ({
   const chaptersData = useContext(DataContext);
 
   const onSubmitSearchQuery = () => {
-    const { versesCount } = getChapterData(chaptersData, chapter);
-    const isValid = validateVerseRange(verseFrom, verseTo, versesCount);
+    const { versesCount } = getChapterData(chaptersData, String(chapter));
+    const isValid = validateVerseRange(Number(verseFrom), Number(verseTo), versesCount);
     if (!isValid) {
       throw new Error('Invalid verse range');
     }
-    setSearchFetch(!searchFetch);
+    setShouldSearchFetch(!shouldSearchFetch);
   };
 
   return (
@@ -89,7 +89,7 @@ const VideoSettings: React.FC<Props> = ({
                 id="quranFontStyles"
                 name="quranFontStyles"
                 options={chaptersList || []}
-                value={chapter}
+                value={String(chapter)}
                 onChange={onChapterChange}
               />
             </Section.Row>

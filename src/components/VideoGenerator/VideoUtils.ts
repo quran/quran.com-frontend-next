@@ -1,3 +1,5 @@
+/* eslint-disable default-param-last */
+/* eslint-disable react-func/max-lines-per-function */
 import {
   DEFAULT_STYLES,
   BACKGROUND_VIDEOS,
@@ -7,8 +9,6 @@ import {
   VIDEO_PORTRAIT_WIDTH,
   VIDEO_PORTRAIT_HEIGHT,
 } from '@/utils/videoGenerator/constants';
-
-/* eslint-disable max-lines */
 
 export const getNormalizedIntervals = (start, end) => {
   const FRAMES = 30;

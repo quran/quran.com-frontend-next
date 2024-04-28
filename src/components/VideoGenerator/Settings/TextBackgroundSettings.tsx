@@ -3,8 +3,6 @@ import React from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux';
 
-import { getAllBackgrounds } from '../VideoUtils';
-
 import BackgroundColors from './BackgroundColors';
 
 import Section from '@/components/Navbar/SettingsDrawer/Section';

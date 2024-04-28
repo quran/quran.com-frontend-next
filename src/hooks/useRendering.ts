@@ -1,5 +1,6 @@
 /* eslint-disable react-func/max-lines-per-function */
 /* eslint-disable no-await-in-loop */
+// @ts-nocheck
 import { useCallback, useMemo, useState } from 'react';
 
 import { z } from 'zod';

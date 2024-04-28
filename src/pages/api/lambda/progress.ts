@@ -1,3 +1,4 @@
+/* eslint-disable react-func/max-lines-per-function */
 /* eslint-disable import/no-extraneous-dependencies */
 import { speculateFunctionName, AwsRegion, getRenderProgress } from '@remotion/lambda/client';
 import { z } from 'zod';

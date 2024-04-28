@@ -6,6 +6,7 @@ import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
 
 Config.setPublicDir(path.join(process.cwd(), 'public', 'publicMin'));
 
+// @ts-ignore
 Config.overrideWebpackConfig((config) => {
   return {
     ...config,

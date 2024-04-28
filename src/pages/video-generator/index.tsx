@@ -27,11 +27,6 @@ import {
   VIDEO_FPS,
   DEFAULT_RECITER_ID,
   DEFAULT_SURAH,
-  VIDEO_LANDSCAPE_HEIGHT,
-  VIDEO_LANDSCAPE_WIDTH,
-  VIDEO_PORTRAIT_HEIGHT,
-  VIDEO_PORTRAIT_WIDTH,
-  Orientation,
 } from '@/utils/videoGenerator/constants';
 import { VersesResponse } from 'types/ApiResponses';
 import ChaptersData from 'types/ChaptersData';
@@ -86,7 +81,7 @@ const VideoGenerator: NextPage<VideoGenerator> = ({
   const [verseData, setVerseData] = useState(verses?.verses);
   const [audioData, setAudioData] = useState(audio);
   const [timestamps, setTimestamps] = useState(defaultTimestamps);
-  const [searchFetch, setSearchFetch] = useState(false);
+  const [shouldSearchFetch, setShouldSearchFetch] = useState(false);
   const [isFetching, setIsFetching] = useState(false);
   const [verseFrom, setVerseFrom] = useState('');
   const [verseTo, setVerseTo] = useState('');
@@ -140,7 +135,7 @@ const VideoGenerator: NextPage<VideoGenerator> = ({
   }, [
     reciter,
     translations,
-    searchFetch,
+    shouldSearchFetch,
     chaptersData,
     chapter,
     verseFrom,
@@ -236,8 +231,8 @@ const VideoGenerator: NextPage<VideoGenerator> = ({
           reciters={reciters}
           seekToBeginning={seekToBeginning}
           getCurrentFrame={getCurrentFrame}
-          searchFetch={searchFetch}
-          setSearchFetch={setSearchFetch}
+          shouldSearchFetch={shouldSearchFetch}
+          setShouldSearchFetch={setShouldSearchFetch}
           isFetching={isFetching}
           verseFrom={verseFrom}
           setVerseFrom={setVerseFrom}

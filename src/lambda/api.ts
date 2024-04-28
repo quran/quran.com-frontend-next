@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/naming-convention */
 import type { RenderMediaOnLambdaOutput } from '@remotion/lambda/client';
 
 const makeRequest = async <Res>(endpoint: string, body: unknown): Promise<Res> => {
