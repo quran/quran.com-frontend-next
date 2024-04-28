@@ -29,7 +29,6 @@ type Props = {
   chapter: number;
   onChapterChange: (val: any) => void;
   reciters: Reciter[];
-  setVideo: (val: any) => void;
   seekToBeginning: () => void;
   searchFetch: boolean;
   setSearchFetch: (val: boolean) => void;
@@ -41,14 +40,11 @@ type Props = {
   inputProps: any;
 };
 
-// TODO: localize labels
-
 const VideoSettings: React.FC<Props> = ({
   chaptersList,
   chapter,
   onChapterChange,
   reciters,
-  setVideo,
   seekToBeginning,
   searchFetch,
   setSearchFetch,
@@ -132,7 +128,7 @@ const VideoSettings: React.FC<Props> = ({
           <Section>
             <Section.Title>{t('video-picker')}</Section.Title>
             <Section.Row>
-              <BackgroundVideos setVideo={setVideo} seekToBeginning={seekToBeginning} />
+              <BackgroundVideos seekToBeginning={seekToBeginning} />
             </Section.Row>
           </Section>
         </div>

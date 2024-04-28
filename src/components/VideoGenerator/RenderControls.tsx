@@ -7,7 +7,7 @@ import styles from './video.module.scss';
 
 import Button from '@/dls/Button/Button';
 import Progress from '@/dls/Progress';
-import { useRendering } from '@/hooks/useRendering';
+import { RenderStatus, useRendering } from '@/hooks/useRendering';
 import IconDownload from '@/icons/download.svg';
 import IconRender from '@/icons/slow_motion_video.svg';
 import layoutStyle from '@/pages/index.module.scss';
@@ -31,6 +31,14 @@ const RenderControls: React.FC<{
   const { t } = useTranslation('video-generator');
   const { renderMedia, state } = useRendering(COMPOSITION_NAME, inputProps);
 
+  const isInitOrInvokingOrError = [
+    RenderStatus.INIT,
+    RenderStatus.INVOKING,
+    RenderStatus.ERROR,
+  ].includes(state.status);
+
+  const isRenderingOrDone = [RenderStatus.RENDERING, RenderStatus.DONE].includes(state.status);
+
   return (
     <div
       className={classNames(
@@ -39,33 +47,33 @@ const RenderControls: React.FC<{
         styles.renderControlsContainer,
       )}
     >
-      {state.status === 'init' || state.status === 'invoking' || state.status === 'error' ? (
+      {isInitOrInvokingOrError && (
         <>
           <Button
             prefix={<IconRender />}
-            isDisabled={state.status === 'invoking'}
-            isLoading={state.status === 'invoking'}
+            isDisabled={state.status === RenderStatus.INVOKING}
+            isLoading={state.status === RenderStatus.INVOKING}
             onClick={renderMedia}
           >
             {t('render-video')}
           </Button>
-          {state.status === 'error' ? <div>{state.error.message}</div> : null}
+          {state.status === RenderStatus.ERROR && <div>{state.error.message}</div>}
         </>
-      ) : null}
-      {state.status === 'rendering' || state.status === 'done' ? (
+      )}
+      {isRenderingOrDone && (
         <>
-          <Progress value={state.status === 'rendering' ? state.progress * 100 : 100} />
+          <Progress value={state.status === RenderStatus.RENDERING ? state.progress * 100 : 100} />
           <br />
           <Button
             prefix={<IconDownload />}
-            isDisabled={state.status === 'rendering'}
-            isLoading={state.status === 'rendering'}
-            href={state.status === 'done' ? state.url : ''}
+            isDisabled={state.status === RenderStatus.RENDERING}
+            isLoading={state.status === RenderStatus.RENDERING}
+            href={state.status === RenderStatus.DONE ? state.url : ''}
           >
             {t('download-video')}
           </Button>
         </>
-      ) : null}
+      )}
     </div>
   );
 };

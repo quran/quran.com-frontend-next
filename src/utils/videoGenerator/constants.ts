@@ -17,6 +17,7 @@ export const DEFAULT_BACKGROUND_COLOR_ID = 1;
 export const DEFAULT_QURAN_FONT_SCALE = 3;
 export const DEFAULT_TRANSLATION_FONT_SCALE = 3;
 export const DEFAULT_SHOULD_HAVE_BORDER = 'false';
+export const DEFAULT_VIDEO_ID = 4;
 
 export const DEFAULT_OPACITY = '0.2';
 export const DEFAULT_BACKGROUND = {
@@ -56,6 +57,7 @@ export const DEFAULT_STYLES = {
   width: 'fit-content',
   maxWidth: '97%',
   height: 'fit-content',
+  maxHeight: '90%',
   margin: 'auto',
   border: '2px gray solid',
   borderRadius: '20px',
@@ -111,7 +113,7 @@ export const BACKGROUND_VIDEOS = {
 };
 
 export const DEFAULT_PROPS = {
-  video: { ...BACKGROUND_VIDEOS['1'], id: 1 },
+  video: { ...BACKGROUND_VIDEOS[DEFAULT_VIDEO_ID], id: DEFAULT_VIDEO_ID },
   verses: defaultVerses,
   audio: defaultAudio,
   timestamps: DEFAULT_TIMESTAMPS,
@@ -126,6 +128,7 @@ export const DEFAULT_PROPS = {
   opacity: DEFAULT_OPACITY,
   translations: [DEFAULT_TRANSLATION],
   orientation: Orientation.LANDSCAPE,
+  videoId: DEFAULT_VIDEO_ID,
 };
 
 export const COMPOSITION_PROPS = z.object({
@@ -144,6 +147,7 @@ export const COMPOSITION_PROPS = z.object({
   opacity: z.string(),
   translations: z.number().array(),
   orientation: z.string(),
+  videoId: z.number(),
 });
 
 export const REGION = 'us-east-1';

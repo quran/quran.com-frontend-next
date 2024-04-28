@@ -36,11 +36,19 @@ export const RemotionRoot = () => {
     `url('${staticFile('/UthmanicHafs1Ver18.woff2')}') format('woff2')`,
   );
 
+  const surahNamesFont = new FontFace(
+    `SurahNames`,
+    `url('${staticFile('/SurahNames.woff2')}') format('woff2')`,
+  );
+
   font
     .load()
     .then(() => {
       document.fonts.add(font);
-      continueRender(waitForFont);
+      surahNamesFont.load().then(() => {
+        document.fonts.add(surahNamesFont);
+        continueRender(waitForFont);
+      });
     })
     .catch((err) => console.log('Error loading font', err));
   return (

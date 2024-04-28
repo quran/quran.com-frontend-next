@@ -13,7 +13,7 @@ import {
 } from '@/redux/slices/videoGenerator';
 
 const QuranFontSection = () => {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation('video-generator');
   const dispatch = useDispatch();
   const quranTextFontScale = useSelector(selectQuranTextFontScale, shallowEqual);
   const fontColor = useSelector(selectFontColor, shallowEqual);

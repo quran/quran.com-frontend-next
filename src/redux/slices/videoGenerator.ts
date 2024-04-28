@@ -12,6 +12,7 @@ import {
   DEFAULT_SHOULD_HAVE_BORDER,
   DEFAULT_TRANSLATION,
   DEFAULT_TRANSLATION_FONT_SCALE,
+  DEFAULT_VIDEO_ID,
   Orientation,
 } from '@/utils/videoGenerator/constants';
 
@@ -27,6 +28,7 @@ export type VideoGeneratorSettings = {
   verseAlignment: Alignment;
   translationAlignment: Alignment;
   orientation: Orientation;
+  videoId: number;
 };
 
 const initialState: VideoGeneratorSettings = {
@@ -41,6 +43,7 @@ const initialState: VideoGeneratorSettings = {
   verseAlignment: Alignment.CENTRE,
   translationAlignment: Alignment.CENTRE,
   orientation: Orientation.LANDSCAPE,
+  videoId: DEFAULT_VIDEO_ID,
 };
 
 export const videoGeneratorSlice = createSlice({
@@ -76,5 +79,6 @@ export const selectVerseAlignment = (state: RootState) => state.videoGenerator.v
 export const selectTranslationAlignment = (state: RootState) =>
   state.videoGenerator.translationAlignment;
 export const selectOrientation = (state: RootState) => state.videoGenerator.orientation;
+export const selectVideoId = (state: RootState) => state.videoGenerator.videoId;
 
 export default videoGeneratorSlice.reducer;

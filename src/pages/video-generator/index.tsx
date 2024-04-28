@@ -80,12 +80,12 @@ const VideoGenerator: NextPage<VideoGenerator> = ({
     verseAlignment,
     translationAlignment,
     orientation,
+    videoId,
   } = useSelector(selectVideoGeneratorSettings);
   const [chapter, setChapter] = useState(DEFAULT_SURAH);
   const [verseData, setVerseData] = useState(verses?.verses);
   const [audioData, setAudioData] = useState(audio);
   const [timestamps, setTimestamps] = useState(defaultTimestamps);
-  const [video, setVideo] = useState(getBackgroundVideoById(4));
   const [searchFetch, setSearchFetch] = useState(false);
   const [isFetching, setIsFetching] = useState(false);
   const [verseFrom, setVerseFrom] = useState('');
@@ -163,11 +163,12 @@ const VideoGenerator: NextPage<VideoGenerator> = ({
       verseAlignment,
       translationAlignment,
       shouldHaveBorder,
-      video,
+      video: getBackgroundVideoById(videoId),
       quranTextFontScale,
       translationFontScale,
       translations,
       orientation,
+      videoId,
     };
   }, [
     verseData,
@@ -180,7 +181,7 @@ const VideoGenerator: NextPage<VideoGenerator> = ({
     verseAlignment,
     translationAlignment,
     shouldHaveBorder,
-    video,
+    videoId,
     quranTextFontScale,
     translationFontScale,
     translations,
@@ -230,7 +231,6 @@ const VideoGenerator: NextPage<VideoGenerator> = ({
           onChapterChange={onChapterChange}
           reciters={reciters}
           seekToBeginning={seekToBeginning}
-          setVideo={setVideo}
           searchFetch={searchFetch}
           setSearchFetch={setSearchFetch}
           isFetching={isFetching}

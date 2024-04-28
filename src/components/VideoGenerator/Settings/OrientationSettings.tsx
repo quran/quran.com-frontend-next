@@ -25,8 +25,8 @@ const OrientationSettings = () => {
       <Section.Row>
         <Switch
           items={[
-            { name: 'Landscape', value: Orientation.LANDSCAPE },
-            { name: 'Portrait', value: Orientation.PORTRAIT },
+            { name: t(Orientation.LANDSCAPE), value: Orientation.LANDSCAPE },
+            { name: t(Orientation.PORTRAIT), value: Orientation.PORTRAIT },
           ]}
           selected={orientation}
           onSelect={onOrientationChange}

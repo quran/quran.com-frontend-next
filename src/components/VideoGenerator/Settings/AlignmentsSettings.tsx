@@ -33,8 +33,8 @@ const AlignmentsSettings = () => {
       <Section.Row>
         <Switch
           items={[
-            { name: 'Centre', value: Alignment.CENTRE },
-            { name: 'Justified', value: Alignment.JUSTIFIED },
+            { name: t(Alignment.CENTRE), value: Alignment.CENTRE },
+            { name: t(Alignment.JUSTIFIED), value: Alignment.JUSTIFIED },
           ]}
           selected={verseAlignment}
           onSelect={onVerseAlignmentChange}
@@ -45,8 +45,8 @@ const AlignmentsSettings = () => {
       <Section.Row>
         <Switch
           items={[
-            { name: 'Centre', value: Alignment.CENTRE },
-            { name: 'Justified', value: Alignment.JUSTIFIED },
+            { name: t(Alignment.CENTRE), value: Alignment.CENTRE },
+            { name: t(Alignment.JUSTIFIED), value: Alignment.JUSTIFIED },
           ]}
           selected={translationAlignment}
           onSelect={onTranslationAlignmentChange}

@@ -5,6 +5,7 @@ import { AbsoluteFill, Audio, Sequence, Video } from 'remotion';
 
 import styles from './video.module.scss';
 
+import ChapterIcon from '@/components/chapters/ChapterIcon';
 import { getBackgroundWithOpacityById } from '@/components/VideoGenerator/VideoUtils';
 import Translation from '@/types/Translation';
 import getPlainTranslationText from '@/utils/plainTranslationText';
@@ -81,9 +82,20 @@ const VideoContent: React.FC<Props> = ({
             <Sequence
               // eslint-disable-next-line react/no-array-index-key
               key={i}
-              from={i === 0 ? 0 : timestamps[i].start}
-              durationInFrames={timestamps[i].durationInFrames}
+              from={i === 0 ? 0 : timestamps[i]?.start}
+              durationInFrames={timestamps[i]?.durationInFrames}
             >
+              <AbsoluteFill>
+                <div
+                  className={classNames(styles.chapterTitle, {
+                    [styles.watermarkDark]: video.watermarkColor === WatermarkColor.DARK,
+                    [styles.watermarkLight]: video.watermarkColor === WatermarkColor.LIGHT,
+                  })}
+                >
+                  <ChapterIcon id={verse.chapterId.toString()} />
+                  <ChapterIcon id="surah" />
+                </div>
+              </AbsoluteFill>
               <AbsoluteFill
                 style={{
                   ...style,
@@ -111,7 +123,7 @@ const VideoContent: React.FC<Props> = ({
                   <div
                     key={translation.id}
                     className={
-                      translationAlignment === 'centre'
+                      translationAlignment === Alignment.CENTRE
                         ? styles.verseTranslationCentre
                         : styles.verseTranslationJustified
                     }

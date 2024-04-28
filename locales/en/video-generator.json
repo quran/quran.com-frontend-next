@@ -11,5 +11,9 @@
   "render-video": "Render",
   "text-alignment": "Text Alignment",
   "verse-key": "Chapter and Verse Number e.g. 2:255",
-  "video-picker": "Background video"
+  "video-picker": "Background video",
+  "centre": "Centre",
+  "justified": "Justified",
+  "landscape": "Landscape",
+  "portrait": "Portrait"
 }

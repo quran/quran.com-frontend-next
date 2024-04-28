@@ -7,28 +7,36 @@ import { getProgress, renderVideo } from '../lambda/api';
 
 import { COMPOSITION_PROPS } from '@/utils/videoGenerator/constants';
 
+export enum RenderStatus {
+  INIT = 'init',
+  INVOKING = 'invoking',
+  RENDERING = 'rendering',
+  ERROR = 'error',
+  DONE = 'done',
+}
+
 export type State =
   | {
-      status: 'init';
+      status: RenderStatus.INIT;
     }
   | {
-      status: 'invoking';
+      status: RenderStatus.INVOKING;
     }
   | {
       renderId: string;
       bucketName: string;
       progress: number;
-      status: 'rendering';
+      status: RenderStatus.RENDERING;
     }
   | {
       renderId: string | null;
-      status: 'error';
+      status: RenderStatus.ERROR;
       error: Error;
     }
   | {
       url: string;
       size: number;
-      status: 'done';
+      status: RenderStatus.DONE;
     };
 
 const wait = async (milliSeconds: number) => {
@@ -41,18 +49,18 @@ const wait = async (milliSeconds: number) => {
 
 export const useRendering = (id: string, inputProps: z.infer<typeof COMPOSITION_PROPS>) => {
   const [state, setState] = useState<State>({
-    status: 'init',
+    status: RenderStatus.INIT,
   });
 
   // eslint-disable-next-line react-func/max-lines-per-function
   const renderMedia = useCallback(async () => {
     setState({
-      status: 'invoking',
+      status: RenderStatus.INVOKING,
     });
     try {
       const { renderId, bucketName } = await renderVideo({ id, inputProps });
       setState({
-        status: 'rendering',
+        status: RenderStatus.RENDERING,
         progress: 0,
         renderId,
         bucketName,
@@ -69,7 +77,7 @@ export const useRendering = (id: string, inputProps: z.infer<typeof COMPOSITION_
         switch (result.type) {
           case 'error': {
             setState({
-              status: 'error',
+              status: RenderStatus.ERROR,
               renderId,
               error: new Error(result.message),
             });
@@ -80,14 +88,14 @@ export const useRendering = (id: string, inputProps: z.infer<typeof COMPOSITION_
             setState({
               size: result.size,
               url: result.url,
-              status: 'done',
+              status: RenderStatus.DONE,
             });
             pending = false;
             break;
           }
           case 'progress': {
             setState({
-              status: 'rendering',
+              status: RenderStatus.RENDERING,
               bucketName,
               progress: result.progress,
               renderId,
@@ -98,7 +106,7 @@ export const useRendering = (id: string, inputProps: z.infer<typeof COMPOSITION_
       }
     } catch (err) {
       setState({
-        status: 'error',
+        status: RenderStatus.ERROR,
         error: err as Error,
         renderId: null,
       });
@@ -106,7 +114,7 @@ export const useRendering = (id: string, inputProps: z.infer<typeof COMPOSITION_
   }, [id, inputProps]);
 
   const undo = useCallback(() => {
-    setState({ status: 'init' });
+    setState({ status: RenderStatus.INIT });
   }, []);
 
   return useMemo(() => {
