@@ -148,6 +148,7 @@ export const COMPOSITION_PROPS = z.object({
   translations: z.number().array(),
   orientation: z.string(),
   videoId: z.number(),
+  frame: z.number().optional(),
 });
 
 export const REGION = 'us-east-1';

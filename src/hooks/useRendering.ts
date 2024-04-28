@@ -60,13 +60,17 @@ export const useRendering = (id: string, inputProps: z.infer<typeof COMPOSITION_
 
   // eslint-disable-next-line react-func/max-lines-per-function
   const renderMedia = useCallback(
-    async (type: MediaType) => {
+    async (type: MediaType, extraInputProps = {}) => {
       let pending = true;
       setState({
         status: RenderStatus.INVOKING,
       });
       try {
-        const response = await renderVideoOrImage({ id, inputProps, type });
+        const response = await renderVideoOrImage({
+          id,
+          inputProps: { ...inputProps, ...extraInputProps },
+          type,
+        });
         if (type === MediaType.IMAGE) {
           setState({
             size: response.sizeInBytes,

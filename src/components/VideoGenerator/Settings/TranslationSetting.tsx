@@ -5,7 +5,7 @@ import omit from 'lodash/omit';
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch } from 'react-redux';
 
-import styles from './video.module.scss';
+import styles from '../video.module.scss';
 
 import DataFetcher from '@/components/DataFetcher';
 import Button, { ButtonShape, ButtonVariant } from '@/dls/Button/Button';

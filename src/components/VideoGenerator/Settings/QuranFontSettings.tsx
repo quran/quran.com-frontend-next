@@ -1,7 +1,7 @@
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
-import styles from './video.module.scss';
+import styles from '../video.module.scss';
 
 import Section from '@/components/Navbar/SettingsDrawer/Section';
 import Counter from '@/dls/Counter/Counter';

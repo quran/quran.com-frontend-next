@@ -2,8 +2,8 @@ import classNames from 'classnames';
 import Image from 'next/image';
 import { useSelector, useDispatch } from 'react-redux';
 
-import styles from './video.module.scss';
-import { getVideosArray } from './VideoUtils';
+import styles from '../video.module.scss';
+import { getVideosArray } from '../VideoUtils';
 
 import { selectVideoId, updateSettings } from '@/redux/slices/videoGenerator';
 

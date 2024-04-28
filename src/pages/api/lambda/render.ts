@@ -80,6 +80,7 @@ const render = executeApi(
       ...commonProps,
       imageFormat: 'jpeg',
       jpegQuality: 100,
+      frame: inputProps?.frame ?? 0,
       privacy: 'public',
       downloadBehavior: {
         type: 'download',

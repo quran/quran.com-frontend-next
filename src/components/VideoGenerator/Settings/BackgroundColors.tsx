@@ -1,8 +1,8 @@
 import classNames from 'classnames';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux';
 
-import styles from './video.module.scss';
-import { getAllBackgrounds } from './VideoUtils';
+import styles from '../video.module.scss';
+import { getAllBackgrounds } from '../VideoUtils';
 
 import { selectBackgroundColorId, updateSettings } from '@/redux/slices/videoGenerator';
 

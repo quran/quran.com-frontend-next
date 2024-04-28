@@ -9,8 +9,8 @@ import { useSelector } from 'react-redux';
 
 import { getAvailableReciters, getChapterAudioData, getChapterVerses } from '@/api';
 import VideoContent from '@/components/VideoGenerator/remotion/Video/VideoContent';
+import VideoSettings from '@/components/VideoGenerator/Settings/VideoSettings';
 import styles from '@/components/VideoGenerator/video.module.scss';
-import VideoSettings from '@/components/VideoGenerator/VideoSettings';
 import {
   getNormalizedTimestamps,
   getStyles,
@@ -92,6 +92,10 @@ const VideoGenerator: NextPage<VideoGenerator> = ({
   const [verseTo, setVerseTo] = useState('');
 
   const playerRef = useRef<PlayerRef>(null);
+
+  const getCurrentFrame = useCallback(() => {
+    return playerRef?.current?.getCurrentFrame();
+  }, []);
 
   const seekToBeginning = useCallback(() => {
     const { current } = playerRef;
@@ -231,6 +235,7 @@ const VideoGenerator: NextPage<VideoGenerator> = ({
           onChapterChange={onChapterChange}
           reciters={reciters}
           seekToBeginning={seekToBeginning}
+          getCurrentFrame={getCurrentFrame}
           searchFetch={searchFetch}
           setSearchFetch={setSearchFetch}
           isFetching={isFetching}

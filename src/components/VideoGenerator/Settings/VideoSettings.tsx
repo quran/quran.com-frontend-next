@@ -3,16 +3,17 @@ import { useContext } from 'react';
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 
+import RenderControls from '../RenderControls';
+import styles from '../video.module.scss';
+import { validateVerseRange } from '../VideoUtils';
+
+import AlignmentsSettings from './AlignmentsSettings';
 import BackgroundVideos from './BackgroundVideos';
+import OrientationSettings from './OrientationSettings';
 import QuranFontSettings from './QuranFontSettings';
 import ReciterSettings from './ReciterSettings';
-import RenderControls from './RenderControls';
-import AlignmentsSettings from './Settings/AlignmentsSettings';
-import OrientationSettings from './Settings/OrientationSettings';
 import BackgroundSettings from './TextBackgroundSettings';
 import TranslationSettingsSection from './TranslationSectionSetting';
-import styles from './video.module.scss';
-import { validateVerseRange } from './VideoUtils';
 
 import Section from '@/components/Navbar/SettingsDrawer/Section';
 import DataContext from '@/contexts/DataContext';
@@ -30,6 +31,7 @@ type Props = {
   onChapterChange: (val: any) => void;
   reciters: Reciter[];
   seekToBeginning: () => void;
+  getCurrentFrame: () => void;
   searchFetch: boolean;
   setSearchFetch: (val: boolean) => void;
   isFetching: boolean;
@@ -54,6 +56,7 @@ const VideoSettings: React.FC<Props> = ({
   verseTo,
   setVerseTo,
   inputProps,
+  getCurrentFrame,
 }) => {
   const { t } = useTranslation('video-generator');
   const chaptersData = useContext(DataContext);
@@ -69,7 +72,7 @@ const VideoSettings: React.FC<Props> = ({
 
   return (
     <>
-      <RenderControls inputProps={inputProps} />
+      <RenderControls getCurrentFrame={getCurrentFrame} inputProps={inputProps} />
       <div
         className={classNames(
           layoutStyle.flowItem,

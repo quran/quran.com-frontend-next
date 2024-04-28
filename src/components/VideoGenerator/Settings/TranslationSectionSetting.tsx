@@ -3,8 +3,9 @@ import { useCallback, useMemo, useState } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux';
 
+import styles from '../video.module.scss';
+
 import TranslationSettings from './TranslationSetting';
-import styles from './video.module.scss';
 
 import DataFetcher from '@/components/DataFetcher';
 import Section from '@/components/Navbar/SettingsDrawer/Section';
