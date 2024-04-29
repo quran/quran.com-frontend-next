@@ -39,8 +39,8 @@ const progress = executeApi(ProgressRequest, async (req, body) => {
   if (renderProgress.done) {
     return {
       type: 'done',
-      url: renderProgress.outputFile as string,
-      size: renderProgress.outputSizeInBytes as number,
+      url: renderProgress.outputFile,
+      size: renderProgress.outputSizeInBytes,
     };
   }
 

@@ -2,7 +2,10 @@ import { Composition, continueRender, delayRender, staticFile } from 'remotion';
 
 import VideoContent from './Video/VideoContent';
 
-import { orientationToDimensions } from '@/components/VideoGenerator/VideoUtils';
+import {
+  getDurationInFrames,
+  orientationToDimensions,
+} from '@/components/VideoGenerator/VideoUtils';
 import {
   COMPOSITION_NAME,
   VIDEO_FPS,
@@ -52,7 +55,7 @@ export const RemotionRoot = () => {
       id={COMPOSITION_NAME}
       // @ts-ignore
       component={VideoContent}
-      durationInFrames={Math.ceil((DEFAULT_PROPS.audio.duration / 1000) * 30)}
+      durationInFrames={getDurationInFrames(DEFAULT_PROPS.audio.duration)}
       fps={VIDEO_FPS}
       width={VIDEO_LANDSCAPE_WIDTH}
       height={VIDEO_LANDSCAPE_HEIGHT}
@@ -60,7 +63,7 @@ export const RemotionRoot = () => {
         return {
           ...props,
           ...orientationToDimensions(props.orientation),
-          durationInFrames: Math.ceil((props.audio.duration / 1000) * 30),
+          durationInFrames: getDurationInFrames(props.audio.duration),
         };
       }}
       defaultProps={DEFAULT_PROPS}

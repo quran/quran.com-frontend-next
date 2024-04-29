@@ -154,3 +154,7 @@ export const getTrimmedAudio = (audio, from, to) => {
 
   return res;
 };
+
+export const getDurationInFrames = (duration: number) => {
+  return Math.ceil((duration / 1000) * 30);
+};

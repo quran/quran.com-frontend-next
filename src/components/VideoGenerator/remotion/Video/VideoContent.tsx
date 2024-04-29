@@ -9,7 +9,6 @@ import ChapterIcon from '@/components/chapters/ChapterIcon';
 import { getBackgroundWithOpacityById } from '@/components/VideoGenerator/VideoUtils';
 import Translation from '@/types/Translation';
 import getPlainTranslationText from '@/utils/plainTranslationText';
-import { getVerseWords } from '@/utils/verse';
 import { Alignment, Orientation, WatermarkColor } from '@/utils/videoGenerator/constants';
 
 type Props = {
@@ -114,9 +113,7 @@ const VideoContent: React.FC<Props> = ({
                     [styles.verseJustified]: verseAlignment === Alignment.JUSTIFIED,
                   })}
                 >
-                  {getVerseWords(verse)
-                    .map((word) => word.qpcUthmaniHafs)
-                    .join(' ')}
+                  {verse.words.map((word) => word.qpcUthmaniHafs).join(' ')}
                 </div>
 
                 {verse.translations?.map((translation: Translation) => (

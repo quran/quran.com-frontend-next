@@ -1,9 +1,9 @@
 import { z } from 'zod';
 
-import { getDefaultWordFields } from '../api';
-
 import defaultAudio from './defaultAudio.json';
 import defaultVerses from './defaultVerses.json';
+
+import { QuranFont } from '@/types/QuranReader';
 
 export const DEFAULT_SURAH = 112;
 export const DEFAULT_RECITER_ID = 7;
@@ -47,7 +47,7 @@ const DEFAULT_TIMESTAMPS = [
 ];
 
 export const DEFAULT_API_PARAMS = {
-  ...getDefaultWordFields(),
+  wordFields: QuranFont.QPCHafs,
   translations: [DEFAULT_TRANSLATION],
 };
 

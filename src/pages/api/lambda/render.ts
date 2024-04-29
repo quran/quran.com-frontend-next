@@ -4,6 +4,8 @@ import {
   renderMediaOnLambda,
   speculateFunctionName,
   renderStillOnLambda,
+  RenderMediaOnLambdaInput,
+  RenderStillOnLambdaInput,
 } from '@remotion/lambda/client';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import { z } from 'zod';
@@ -18,6 +20,30 @@ import {
   SITE_NAME,
   TIMEOUT,
 } from '@/utils/videoGenerator/constants';
+
+const simplifyQuranData = (data) => {
+  const newData = { ...data };
+
+  newData.video = {
+    videoSrc: data.video.videoSrc,
+    watermarkColor: data.video.watermarkColor,
+  };
+
+  // Update verses to only include chapterId and words
+  newData.verses = data.verses.map((verse) => ({
+    chapterId: verse.chapterId,
+    verseKey: verse.verseKey,
+    words: verse.words.map((word) => ({
+      qpcUthmaniHafs: word.qpcUthmaniHafs,
+    })),
+    translations: verse.translations.map((translation) => ({
+      id: translation.id,
+      text: translation.text,
+    })),
+  }));
+
+  return newData;
+};
 
 const RenderRequest = z.object({
   id: z.string(),
@@ -44,7 +70,8 @@ const render = executeApi(
       );
     }
 
-    const { inputProps, id, type } = body;
+    const inputProps = simplifyQuranData(body.inputProps);
+    const { id, type } = body;
     const { verses, audio } = inputProps;
     const { verseKey: startVerseKey } = verses[0];
     const { verseKey: endVerseKey } = verses[verses.length - 1];
@@ -60,7 +87,8 @@ const render = executeApi(
       serveUrl: SITE_NAME,
       composition: id,
       inputProps,
-    };
+      concurrencyPerLambda: 2, // {@see https://www.remotion.dev/docs/terminology/concurrency}
+    } as RenderMediaOnLambdaInput;
 
     if (type === 'video') {
       const result = await renderMediaOnLambda({
@@ -86,7 +114,7 @@ const render = executeApi(
         type: 'download',
         fileName: `${fileName}-image.jpeg`,
       },
-    });
+    } as RenderStillOnLambdaInput);
 
     return result;
   },
