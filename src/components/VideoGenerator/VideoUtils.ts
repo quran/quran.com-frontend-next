@@ -1,7 +1,6 @@
 /* eslint-disable default-param-last */
 /* eslint-disable react-func/max-lines-per-function */
 import {
-  DEFAULT_STYLES,
   BACKGROUND_VIDEOS,
   Orientation,
   VIDEO_LANDSCAPE_WIDTH,
@@ -101,14 +100,6 @@ export const getAllBackgrounds = (opacity = '0.8') => {
       background: `linear-gradient(to top,rgba(103, 243, 206, ${opacity}),rgba(16, 125, 64, ${opacity}))`,
     },
   ];
-};
-
-export const getStyles = (orientation: Orientation) => {
-  return {
-    ...DEFAULT_STYLES,
-    minWidth: orientation === Orientation.LANDSCAPE ? '60%' : '80%',
-    minHeight: orientation === Orientation.LANDSCAPE ? '50%' : '25%',
-  };
 };
 
 export const validateVerseRange = (from = 1, to, versesCount) => {

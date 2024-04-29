@@ -19,7 +19,6 @@ export type VideoCompositionProps = {
   audio: object;
   timestamps: object;
   fontColor: any;
-  stls: object;
   verseAlignment: string;
   translationAlignment: string;
   border: string;

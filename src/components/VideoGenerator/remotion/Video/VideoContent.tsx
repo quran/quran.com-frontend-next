@@ -12,8 +12,6 @@ import getPlainTranslationText from '@/utils/plainTranslationText';
 import { getVerseWords } from '@/utils/verse';
 import { Alignment, Orientation, WatermarkColor } from '@/utils/videoGenerator/constants';
 
-let style = {};
-
 type Props = {
   verses: any;
   audio: any;
@@ -22,7 +20,6 @@ type Props = {
   backgroundColorId: number;
   opacity: string;
   fontColor: string;
-  stls: any;
   verseAlignment: string;
   translationAlignment: string;
   quranTextFontScale: number;
@@ -39,19 +36,13 @@ const VideoContent: React.FC<Props> = ({
   backgroundColorId,
   opacity,
   fontColor,
-  stls,
   verseAlignment,
   translationAlignment,
   shouldHaveBorder,
   quranTextFontScale,
   translationFontScale,
+  orientation,
 }) => {
-  if (shouldHaveBorder === 'false') {
-    style = { ...stls, border: 'none' };
-  } else {
-    style = { ...stls, border: '2px gray solid' };
-  }
-
   return (
     <AbsoluteFill
       style={{
@@ -101,10 +92,15 @@ const VideoContent: React.FC<Props> = ({
               </AbsoluteFill>
               <AbsoluteFill
                 style={{
-                  ...style,
                   background: getBackgroundWithOpacityById(backgroundColorId, opacity).background,
                   color: fontColor,
                 }}
+                className={classNames(styles.verseContainer, {
+                  [styles.verseBorder]: shouldHaveBorder === 'true',
+                  [styles.verseNoBorder]: shouldHaveBorder === 'false',
+                  [styles.verseLandscape]: orientation === Orientation.LANDSCAPE,
+                  [styles.versePortrait]: orientation === Orientation.PORTRAIT,
+                })}
               >
                 <div
                   style={{
@@ -113,9 +109,10 @@ const VideoContent: React.FC<Props> = ({
                     marginBlock: '3px',
                     fontSize: quranTextFontScale * 10.1,
                   }}
-                  className={
-                    verseAlignment === Alignment.CENTRE ? styles.verseCentre : styles.verseJustified
-                  }
+                  className={classNames({
+                    [styles.verseCentre]: verseAlignment === Alignment.CENTRE,
+                    [styles.verseJustified]: verseAlignment === Alignment.JUSTIFIED,
+                  })}
                 >
                   {getVerseWords(verse)
                     .map((word) => word.qpcUthmaniHafs)

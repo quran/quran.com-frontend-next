@@ -13,7 +13,6 @@ import VideoSettings from '@/components/VideoGenerator/Settings/VideoSettings';
 import styles from '@/components/VideoGenerator/video.module.scss';
 import {
   getNormalizedTimestamps,
-  getStyles,
   getTrimmedAudio,
   getBackgroundVideoById,
   orientationToDimensions,
@@ -158,7 +157,6 @@ const VideoGenerator: NextPage<VideoGenerator> = ({
       backgroundColorId,
       opacity,
       fontColor,
-      stls: getStyles(orientation),
       verseAlignment,
       translationAlignment,
       shouldHaveBorder,

@@ -84,3 +84,34 @@
   font-weight: 500;
   font-family: "SurahNames" !important;
 }
+
+.verseContainer {
+  justify-content: center !important;
+  color: #111 !important;
+  width: fit-content !important;
+  max-width: 97% !important;
+  height: fit-content !important;
+  max-height: 85% !important;
+  margin: auto !important;
+  border: 2px gray solid !important;
+  border-radius: 20px !important;
+  align-items: center !important;
+}
+
+.verseBorder {
+  border: 2px gray solid !important;
+}
+
+.verseNoBorder {
+  border: none !important;
+}
+
+.verseLandscape {
+  min-width: 60% !important;
+  min-height: 50% !important;
+}
+
+.versePortrait {
+  min-width: 80% !important;
+  min-height: 25% !important;
+}

@@ -51,19 +51,6 @@ export const DEFAULT_API_PARAMS = {
   translations: [DEFAULT_TRANSLATION],
 };
 
-export const DEFAULT_STYLES = {
-  justifyContent: 'center',
-  color: '#111',
-  width: 'fit-content',
-  maxWidth: '97%',
-  height: 'fit-content',
-  maxHeight: '90%',
-  margin: 'auto',
-  border: '2px gray solid',
-  borderRadius: '20px',
-  alignItems: 'center',
-};
-
 export enum WatermarkColor {
   LIGHT = 'light',
   DARK = 'dark',
@@ -118,7 +105,6 @@ export const DEFAULT_PROPS = {
   audio: defaultAudio,
   timestamps: DEFAULT_TIMESTAMPS,
   fontColor: DEFAULT_FONT_COLOR,
-  stls: DEFAULT_STYLES,
   verseAlignment: Alignment.CENTRE,
   translationAlignment: Alignment.CENTRE,
   backgroundColorId: DEFAULT_BACKGROUND_COLOR_ID,
@@ -137,7 +123,6 @@ export const COMPOSITION_PROPS = z.object({
   audio: z.any(),
   timestamps: z.any(),
   fontColor: z.any(),
-  stls: z.any(),
   verseAlignment: z.string(),
   translationAlignment: z.string(),
   backgroundColorId: z.number(),
