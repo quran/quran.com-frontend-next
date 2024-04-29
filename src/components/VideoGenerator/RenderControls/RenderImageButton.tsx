@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
 import Button from '@/dls/Button/Button';
@@ -7,6 +8,8 @@ import { RenderStatus, useGenerateMediaFile } from '@/hooks/auth/useGenerateMedi
 import IconDownload from '@/icons/download.svg';
 import IconRender from '@/icons/slow_motion_video.svg';
 import { MediaType } from '@/types/Media/GenerateMediaFileRequest';
+import { isLoggedIn } from '@/utils/auth/login';
+import { getLoginNavigationUrl, getQuranMediaCreatorNavigationUrl } from '@/utils/navigation';
 
 type Props = {
   inputProps: any;
@@ -16,6 +19,7 @@ type Props = {
 const RenderImageButton: React.FC<Props> = ({ inputProps, getCurrentFrame }) => {
   const { t } = useTranslation('quran-media-creator');
   const { renderMedia, state } = useGenerateMediaFile(inputProps);
+  const router = useRouter();
 
   const isInitOrInvokingOrError = [
     RenderStatus.INIT,
@@ -35,7 +39,11 @@ const RenderImageButton: React.FC<Props> = ({ inputProps, getCurrentFrame }) => 
             isDisabled={state.status === RenderStatus.INVOKING}
             isLoading={state.status === RenderStatus.INVOKING}
             onClick={() => {
-              renderMedia(MediaType.IMAGE, { frame: getCurrentFrame() });
+              if (isLoggedIn()) {
+                renderMedia(MediaType.IMAGE, { frame: getCurrentFrame() });
+              } else {
+                router.replace(getLoginNavigationUrl(getQuranMediaCreatorNavigationUrl()));
+              }
             }}
           >
             {t('render-image')}
