@@ -3,9 +3,9 @@ import { useContext } from 'react';
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 
+import { validateVerseRange } from '../../../utils/videoGenerator/utils';
 import RenderControls from '../RenderControls';
 import styles from '../video.module.scss';
-import { validateVerseRange } from '../VideoUtils';
 
 import AlignmentsSettings from './AlignmentsSettings';
 import BackgroundVideos from './BackgroundVideos';

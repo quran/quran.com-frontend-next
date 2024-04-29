@@ -99,8 +99,7 @@
     "refresh-fetch": "^0.8.0",
     "remotion": "4.0.126",
     "swr": "1.2.1",
-    "xstate": "^4.33.6",
-    "zod": "^3.22.4"
+    "xstate": "^4.33.6"
   },
   "devDependencies": {
     "@lokalise/node-api": "^8.0.1",

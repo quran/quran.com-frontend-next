@@ -3,10 +3,10 @@ import React from 'react';
 import useTranslation from 'next-translate/useTranslation';
 
 import Button from '@/dls/Button/Button';
-import { MediaType, RenderStatus, useRendering } from '@/hooks/useRendering';
+import { RenderStatus, useGenerateMediaFile } from '@/hooks/auth/useGenerateMediaFile';
 import IconDownload from '@/icons/download.svg';
 import IconRender from '@/icons/slow_motion_video.svg';
-import { COMPOSITION_NAME } from '@/utils/videoGenerator/constants';
+import { MediaType } from '@/types/Media/GenerateMediaFileRequest';
 
 type Props = {
   inputProps: any;
@@ -15,7 +15,7 @@ type Props = {
 
 const RenderImageButton: React.FC<Props> = ({ inputProps, getCurrentFrame }) => {
   const { t } = useTranslation('video-generator');
-  const { renderMedia, state } = useRendering(COMPOSITION_NAME, inputProps);
+  const { renderMedia, state } = useGenerateMediaFile(inputProps);
 
   const isInitOrInvokingOrError = [
     RenderStatus.INIT,

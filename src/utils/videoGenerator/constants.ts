@@ -1,8 +1,7 @@
-import { z } from 'zod';
-
 import defaultAudio from './defaultAudio.json';
 import defaultVerses from './defaultVerses.json';
 
+import WatermarkColor from '@/types/Media/WatermarkColor';
 import { QuranFont } from '@/types/QuranReader';
 
 export const DEFAULT_SURAH = 112;
@@ -50,11 +49,6 @@ export const DEFAULT_API_PARAMS = {
   wordFields: QuranFont.QPCHafs,
   translations: [DEFAULT_TRANSLATION],
 };
-
-export enum WatermarkColor {
-  LIGHT = 'light',
-  DARK = 'dark',
-}
 
 export enum Alignment {
   CENTRE = 'centre',
@@ -116,25 +110,6 @@ export const DEFAULT_PROPS = {
   orientation: Orientation.LANDSCAPE,
   videoId: DEFAULT_VIDEO_ID,
 };
-
-export const COMPOSITION_PROPS = z.object({
-  video: z.any(),
-  verses: z.any(),
-  audio: z.any(),
-  timestamps: z.any(),
-  fontColor: z.any(),
-  verseAlignment: z.string(),
-  translationAlignment: z.string(),
-  backgroundColorId: z.number(),
-  quranTextFontScale: z.number(),
-  translationFontScale: z.number(),
-  shouldHaveBorder: z.string(),
-  opacity: z.string(),
-  translations: z.number().array(),
-  orientation: z.string(),
-  videoId: z.number(),
-  frame: z.number().optional(),
-});
 
 export const REGION = 'us-east-1';
 // export const REGION = 'eu-north-1';

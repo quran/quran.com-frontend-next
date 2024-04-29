@@ -6,10 +6,11 @@ import { AbsoluteFill, Audio, Sequence, Video } from 'remotion';
 import styles from './video.module.scss';
 
 import ChapterIcon from '@/components/chapters/ChapterIcon';
-import { getBackgroundWithOpacityById } from '@/components/VideoGenerator/VideoUtils';
+import WatermarkColor from '@/types/Media/WatermarkColor';
 import Translation from '@/types/Translation';
 import getPlainTranslationText from '@/utils/plainTranslationText';
-import { Alignment, Orientation, WatermarkColor } from '@/utils/videoGenerator/constants';
+import { Alignment, Orientation } from '@/utils/videoGenerator/constants';
+import { getBackgroundWithOpacityById } from '@/utils/videoGenerator/utils';
 
 type Props = {
   verses: any;

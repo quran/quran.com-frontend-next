@@ -1,5 +1,7 @@
+/* eslint-disable max-lines */
 /* eslint-disable default-param-last */
 /* eslint-disable react-func/max-lines-per-function */
+import GenerateMediaFileRequest, { MediaType } from '@/types/Media/GenerateMediaFileRequest';
 import {
   BACKGROUND_VIDEOS,
   Orientation,
@@ -157,4 +159,46 @@ export const getTrimmedAudio = (audio, from, to) => {
 
 export const getDurationInFrames = (duration: number) => {
   return Math.ceil((duration / 1000) * 30);
+};
+
+export const prepareGenerateMediaFileRequestData = (data: GenerateMediaFileRequest) => {
+  const newData = { ...data };
+
+  newData.video = {
+    videoSrc: data.video.videoSrc,
+    watermarkColor: data.video.watermarkColor,
+  };
+
+  if (data.type === MediaType.VIDEO) {
+    newData.audio = {
+      audioUrl: data.audio.audioUrl,
+      duration: data.audio.duration,
+      verseTimings: data.audio.verseTimings.map((timing) => ({
+        timestampFrom: timing.timestampFrom,
+        timestampTo: timing.timestampTo,
+        duration: timing.duration,
+        segments: timing.segments,
+        verseKey: timing.verseKey,
+      })),
+      reciterId: data.audio.reciterId,
+    };
+  } else {
+    delete newData.audio;
+    delete newData.timestamps;
+  }
+
+  // Update verses to only include chapterId and words
+  newData.verses = data.verses.map((verse) => ({
+    chapterId: verse.chapterId,
+    verseKey: verse.verseKey,
+    words: verse.words.map((word) => ({
+      qpcUthmaniHafs: word.qpcUthmaniHafs,
+    })),
+    translations: verse.translations.map((translation) => ({
+      id: translation.id,
+      text: translation.text,
+    })),
+  }));
+
+  return newData;
 };

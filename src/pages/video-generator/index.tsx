@@ -11,12 +11,6 @@ import { getAvailableReciters, getChapterAudioData, getChapterVerses } from '@/a
 import VideoContent from '@/components/VideoGenerator/remotion/Video/VideoContent';
 import VideoSettings from '@/components/VideoGenerator/Settings/VideoSettings';
 import styles from '@/components/VideoGenerator/video.module.scss';
-import {
-  getNormalizedTimestamps,
-  getTrimmedAudio,
-  getBackgroundVideoById,
-  orientationToDimensions,
-} from '@/components/VideoGenerator/VideoUtils';
 import Error from '@/pages/_error';
 import layoutStyles from '@/pages/index.module.scss';
 import { selectVideoGeneratorSettings } from '@/redux/slices/videoGenerator';
@@ -27,6 +21,12 @@ import {
   DEFAULT_RECITER_ID,
   DEFAULT_SURAH,
 } from '@/utils/videoGenerator/constants';
+import {
+  getNormalizedTimestamps,
+  getTrimmedAudio,
+  getBackgroundVideoById,
+  orientationToDimensions,
+} from '@/utils/videoGenerator/utils';
 import { VersesResponse } from 'types/ApiResponses';
 import ChaptersData from 'types/ChaptersData';
 

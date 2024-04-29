@@ -4,10 +4,10 @@ import useTranslation from 'next-translate/useTranslation';
 
 import Button from '@/dls/Button/Button';
 import Progress from '@/dls/Progress';
-import { MediaType, RenderStatus, useRendering } from '@/hooks/useRendering';
+import { RenderStatus, useGenerateMediaFile } from '@/hooks/auth/useGenerateMediaFile';
 import IconDownload from '@/icons/download.svg';
 import IconRender from '@/icons/slow_motion_video.svg';
-import { COMPOSITION_NAME } from '@/utils/videoGenerator/constants';
+import { MediaType } from '@/types/Media/GenerateMediaFileRequest';
 
 type Props = {
   inputProps: any;
@@ -15,7 +15,7 @@ type Props = {
 
 const RenderVideoButton: React.FC<Props> = ({ inputProps }) => {
   const { t } = useTranslation('video-generator');
-  const { renderMedia, state } = useRendering(COMPOSITION_NAME, inputProps);
+  const { renderMedia, state } = useGenerateMediaFile(inputProps);
 
   const isInitOrInvokingOrError = [
     RenderStatus.INIT,
@@ -45,7 +45,7 @@ const RenderVideoButton: React.FC<Props> = ({ inputProps }) => {
       )}
       {isRenderingOrDone && (
         <>
-          <Progress value={isRendering ? state.progress * 100 : 100} />
+          <Progress value={isRendering ? state.progress : 100} />
           <br />
           <Button
             prefix={<IconDownload />}

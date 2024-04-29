@@ -3,16 +3,13 @@ import { Composition, continueRender, delayRender, staticFile } from 'remotion';
 import VideoContent from './Video/VideoContent';
 
 import {
-  getDurationInFrames,
-  orientationToDimensions,
-} from '@/components/VideoGenerator/VideoUtils';
-import {
   COMPOSITION_NAME,
   VIDEO_FPS,
   VIDEO_LANDSCAPE_HEIGHT,
   VIDEO_LANDSCAPE_WIDTH,
   DEFAULT_PROPS,
 } from '@/utils/videoGenerator/constants';
+import { getDurationInFrames, orientationToDimensions } from '@/utils/videoGenerator/utils';
 
 /**
  * - Make sure API calls are being made in calculate metadata
