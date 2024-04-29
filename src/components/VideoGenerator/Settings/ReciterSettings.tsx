@@ -13,7 +13,7 @@ type Props = {
 };
 
 const ReciterSettings: React.FC<Props> = ({ reciters }) => {
-  const { t } = useTranslation('video-generator');
+  const { t } = useTranslation('quran-media-creator');
   const reciter = useSelector(selectReciter, shallowEqual);
   const dispatch = useDispatch();
 

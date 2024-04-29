@@ -14,7 +14,7 @@ type Props = {
 };
 
 const RenderImageButton: React.FC<Props> = ({ inputProps, getCurrentFrame }) => {
-  const { t } = useTranslation('video-generator');
+  const { t } = useTranslation('quran-media-creator');
   const { renderMedia, state } = useGenerateMediaFile(inputProps);
 
   const isInitOrInvokingOrError = [

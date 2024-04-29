@@ -58,7 +58,7 @@ const VideoSettings: React.FC<Props> = ({
   inputProps,
   getCurrentFrame,
 }) => {
-  const { t } = useTranslation('video-generator');
+  const { t } = useTranslation('quran-media-creator');
   const chaptersData = useContext(DataContext);
 
   const onSubmitSearchQuery = () => {

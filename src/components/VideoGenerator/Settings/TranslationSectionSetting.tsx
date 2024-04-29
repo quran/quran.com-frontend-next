@@ -145,7 +145,7 @@ const TranslationSettingsSection = () => {
             </Modal.Body>
             <Modal.Footer>
               <Modal.Action onClick={clearTranslations}>
-                {t('video-generator:deselect')}
+                {t('quran-media-creator:deselect')}
               </Modal.Action>
               <Modal.CloseAction onClick={onSelectionCardClicked}>{t('close')}</Modal.CloseAction>
             </Modal.Footer>

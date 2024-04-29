@@ -11,7 +11,7 @@ import { selectOrientation, updateSettings } from '@/redux/slices/videoGenerator
 import { Orientation } from '@/utils/videoGenerator/constants';
 
 const OrientationSettings = () => {
-  const { t } = useTranslation('video-generator');
+  const { t } = useTranslation('quran-media-creator');
   const orientation = useSelector(selectOrientation);
   const dispatch = useDispatch();
 

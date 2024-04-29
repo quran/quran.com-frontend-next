@@ -17,7 +17,7 @@ const TextBackgroundSettings = () => {
   const opacity = useSelector(selectOpacity, shallowEqual);
   const shouldHaveBorder = useSelector(selectShouldHaveBorder, shallowEqual);
   const dispatch = useDispatch();
-  const { t } = useTranslation('video-generator');
+  const { t } = useTranslation('quran-media-creator');
 
   return (
     <Section>
