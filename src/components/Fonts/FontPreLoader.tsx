@@ -26,6 +26,10 @@ const LOCALE_PRELOADED_FONTS = {
     { type: 'font/woff2', location: '/fonts/lang/urdu/MehrNastaliqWeb.woff2' },
     { ...SURAH_NAMES_FONT },
   ],
+  fa: [
+    { type: 'font/woff2', location: '/fonts/lang/persian/Vazirmatn-Regular.woff2' },
+    { ...SURAH_NAMES_FONT },
+  ],
 } as Record<string, { type: string; location: string }[]>;
 
 const INDOPAK = {

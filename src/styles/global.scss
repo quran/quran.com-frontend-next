@@ -16,7 +16,10 @@ body {
   }
 
   overscroll-behavior-y: none;
-  font-family: "ProximaVara", "Helvetica Neue", Helvetica, Arial;
+  font-family: "ProximaVara",
+  "Helvetica Neue",
+  Helvetica,
+  Arial;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
@@ -27,6 +30,12 @@ body {
   .ur,
   .urdu {
     font-family: "MehrNastaliq", "Mehr Nastaliq Web", "Helvetica Neue", Helvetica, Arial, serif;
+  }
+
+  :lang(fa),
+  :lang(persian),
+  .persian {
+    font-family: "Vazirmatn", "NotoNastaliq", "Noto Naskh Arabic", "Nafees Regular", Arial, sans-serif;
   }
 
   :lang(ar),
