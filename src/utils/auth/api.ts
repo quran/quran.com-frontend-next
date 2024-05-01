@@ -87,7 +87,7 @@ import CompleteSignupRequest from 'types/CompleteSignupRequest';
 
 type RequestData = Record<string, any>;
 
-const IGNORE_ERRORS = ['MediaVersesRangeLimitExceeded'];
+const IGNORE_ERRORS = ['MediaVersesRangeLimitExceeded', 'MediaFilesPerUserLimitExceeded'];
 
 const handleErrors = async (res) => {
   const body = await res.json();

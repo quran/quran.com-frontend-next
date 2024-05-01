@@ -150,7 +150,8 @@
     "general": "Something went wrong. Please try again.",
     "offline": "Looks like you lost your connection. Please check it and try again.",
     "pref-persist-fail": "Failed to sync your settings to the cloud.",
-    "MediaVersesRangeLimitExceeded": "You can only select up to 10 verses at a time. Please select a smaller range."
+    "MediaVersesRangeLimitExceeded": "You can only select up to 10 verses at a time. Please select a smaller range.",
+    "MediaFilesPerUserLimitExceeded": "You have reached the maximum limit of video files (10)."
   },
   "feedback": "Feedback",
   "fonts": {
