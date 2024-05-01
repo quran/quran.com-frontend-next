@@ -3,6 +3,8 @@
 // @ts-nocheck
 import { useCallback, useMemo, useState } from 'react';
 
+import useTranslation from 'next-translate/useTranslation';
+
 import GenerateMediaFileRequest, { MediaType } from '@/types/Media/GenerateMediaFileRequest';
 import { generateMediaFile, getMediaFileProgress } from '@/utils/auth/api';
 
@@ -46,6 +48,7 @@ const wait = async (milliSeconds: number) => {
 };
 
 export const useGenerateMediaFile = (inputProps: GenerateMediaFileRequest) => {
+  const { t } = useTranslation('common');
   const [state, setState] = useState<State>({
     status: RenderStatus.INIT,
   });
@@ -63,6 +66,14 @@ export const useGenerateMediaFile = (inputProps: GenerateMediaFileRequest) => {
           ...extraInputProps,
           type,
         });
+        if (response.success === false) {
+          setState({
+            status: RenderStatus.ERROR,
+            error: new Error(t(`error.${response.error.code}`)),
+            renderId: null,
+          });
+          return;
+        }
         const { data } = response;
         if (type === MediaType.IMAGE) {
           setState({

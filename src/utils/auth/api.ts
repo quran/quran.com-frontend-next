@@ -21,6 +21,7 @@ import ConsentType from '@/types/auth/ConsentType';
 import { Course } from '@/types/auth/Course';
 import { CreateGoalRequest, Goal, GoalCategory, UpdateGoalRequest } from '@/types/auth/Goal';
 import { Note } from '@/types/auth/Note';
+import { Response } from '@/types/auth/Response';
 import { StreakWithMetadataParams, StreakWithUserMetadata } from '@/types/auth/Streak';
 import GenerateMediaFileRequest from '@/types/Media/GenerateMediaFileRequest';
 import { Mushaf } from '@/types/QuranReader';
@@ -86,8 +87,15 @@ import CompleteSignupRequest from 'types/CompleteSignupRequest';
 
 type RequestData = Record<string, any>;
 
+const IGNORE_ERRORS = ['MediaVersesRangeLimitExceeded'];
+
 const handleErrors = async (res) => {
   const body = await res.json();
+  // sometimes FE needs to handle the error from the API instead of showing a general something went wrong message
+  const shouldIgnoreError = IGNORE_ERRORS.includes(body?.error?.code);
+  if (shouldIgnoreError) {
+    return body;
+  }
   throw new Error(body?.message);
 };
 
@@ -397,12 +405,12 @@ export const deleteNote = async (id: string) => deleteRequest(makeDeleteOrUpdate
 
 export const getMediaFileProgress = async (
   renderId: string,
-): Promise<{ data: { isDone: boolean; progress: number; url?: string } }> =>
+): Promise<Response<{ isDone: boolean; progress: number; url?: string }>> =>
   privateFetcher(makeGetMediaFileProgressUrl(renderId));
 
 export const generateMediaFile = async (
   payload: GenerateMediaFileRequest,
-): Promise<{ data: { renderId?: string; url?: string } }> => {
+): Promise<Response<{ renderId?: string; url?: string }>> => {
   return postRequest(makeGenerateMediaFileUrl(), prepareGenerateMediaFileRequestData(payload));
 };
 
@@ -438,8 +446,7 @@ export const withCredentialsFetcher = async <T>(
     });
     return data;
   } catch (error) {
-    await handleErrors(error);
-    return null;
+    return handleErrors(error);
   }
 };
 
