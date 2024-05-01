@@ -38,6 +38,7 @@ interface VideoGenerator {
   audio: any;
   defaultTimestamps: any;
   chaptersData: ChaptersData;
+  englishChaptersList: ChaptersData;
 }
 
 /**
@@ -55,6 +56,7 @@ interface VideoGenerator {
 const VideoGenerator: NextPage<VideoGenerator> = ({
   hasError,
   chaptersData,
+  englishChaptersList,
   reciters,
   verses,
   audio,
@@ -84,6 +86,10 @@ const VideoGenerator: NextPage<VideoGenerator> = ({
   const [isFetching, setIsFetching] = useState(false);
   const [verseFrom, setVerseFrom] = useState('');
   const [verseTo, setVerseTo] = useState('');
+
+  const chapterEnglishName = useMemo(() => {
+    return englishChaptersList[chapter]?.translatedName;
+  }, [chapter, englishChaptersList]);
 
   const playerRef = useRef<PlayerRef>(null);
 
@@ -166,8 +172,10 @@ const VideoGenerator: NextPage<VideoGenerator> = ({
       translations,
       orientation,
       videoId,
+      chapterEnglishName,
     };
   }, [
+    chapterEnglishName,
     verseData,
     audioData,
     timestamps,
@@ -247,6 +255,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   try {
     const { reciters } = await getAvailableReciters(locale, []);
     const chaptersData = await getAllChaptersData(locale);
+    const englishChaptersList = await getAllChaptersData();
     const verses = await getChapterVerses(DEFAULT_SURAH, locale, DEFAULT_API_PARAMS);
     const chapterAudioData = await getChapterAudioData(DEFAULT_RECITER_ID, DEFAULT_SURAH, true);
     const defaultTimestamps = getNormalizedTimestamps(chapterAudioData);
@@ -256,6 +265,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
         audio: chapterAudioData,
         verses,
         chaptersData,
+        englishChaptersList,
         defaultTimestamps,
         reciters: reciters || [],
       },

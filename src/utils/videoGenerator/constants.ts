@@ -109,6 +109,7 @@ export const DEFAULT_PROPS = {
   translations: [DEFAULT_TRANSLATION],
   orientation: Orientation.LANDSCAPE,
   videoId: DEFAULT_VIDEO_ID,
+  chapterEnglishName: 'The Sincerity',
 };
 
 export const REGION = 'us-east-1';

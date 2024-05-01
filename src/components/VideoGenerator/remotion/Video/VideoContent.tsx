@@ -26,6 +26,7 @@ type Props = {
   translationFontScale: number;
   shouldHaveBorder: string;
   orientation: Orientation;
+  chapterEnglishName: string;
 };
 
 const VideoContent: React.FC<Props> = ({
@@ -42,6 +43,7 @@ const VideoContent: React.FC<Props> = ({
   quranTextFontScale,
   translationFontScale,
   orientation,
+  chapterEnglishName,
 }) => {
   return (
     <AbsoluteFill
@@ -87,7 +89,9 @@ const VideoContent: React.FC<Props> = ({
                     <ChapterIcon id={verse.chapterId.toString()} />
                     <ChapterIcon id="surah" />
                   </span>
-                  <span className={styles.surahNumber}>{` - ${verse.chapterId}`}</span>
+                  <span
+                    className={styles.surahNumber}
+                  >{` - ${chapterEnglishName} (${verse.chapterId})`}</span>
                 </div>
               </AbsoluteFill>
               <AbsoluteFill
