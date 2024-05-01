@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
@@ -20,6 +20,7 @@ const RenderImageButton: React.FC<Props> = ({ inputProps, getCurrentFrame }) => 
   const { t } = useTranslation('quran-media-creator');
   const { renderMedia, state } = useGenerateMediaFile(inputProps);
   const router = useRouter();
+  const downloadButtonRef = React.useRef<HTMLParagraphElement>();
 
   const isInitOrInvokingOrError = [
     RenderStatus.INIT,
@@ -28,6 +29,13 @@ const RenderImageButton: React.FC<Props> = ({ inputProps, getCurrentFrame }) => 
   ].includes(state.status);
 
   const isRenderingOrDone = [RenderStatus.RENDERING, RenderStatus.DONE].includes(state.status);
+
+  // listen to state changes and download the file when it's done
+  useEffect(() => {
+    if (state?.status === RenderStatus.DONE) {
+      downloadButtonRef.current.click();
+    }
+  }, [state?.status]);
 
   const isRendering = state.status === RenderStatus.RENDERING;
   return (
@@ -59,7 +67,7 @@ const RenderImageButton: React.FC<Props> = ({ inputProps, getCurrentFrame }) => 
             isLoading={isRendering}
             href={state.status === RenderStatus.DONE ? state.url : ''}
           >
-            {t('download-video')}
+            <p ref={downloadButtonRef}>{t('download-video')}</p>
           </Button>
         </>
       )}
