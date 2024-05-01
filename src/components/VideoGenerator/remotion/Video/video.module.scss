@@ -29,21 +29,24 @@
 
 .verseCentre {
   padding: 0 2rem;
+  text-align: center;
 }
 
 .verseJustified {
   width: 100%;
-  text-align: start;
+  text-align: justify;
   padding: 0 2rem;
 }
 
 .verseTranslationCentre {
   padding: 0.5rem 2rem;
+  text-align: center;
 }
 
 .verseTranslationJustified {
   width: 100%;
   padding: 0.5rem 2rem;
+  text-align: justify;
 }
 
 .translation {
@@ -59,21 +62,28 @@
 }
 
 .watermark {
-  font-weight: 1000;
-  position: absolute;
-  inset-block-end: 3%;
-  inset-inline-end: 3%;
+  font-weight: 700;
+  text-align: center;
+  font-size: 30px;
+  margin-block-start: 20px;
 }
 
 .chapterTitle {
   font-family: unset !important;
   text-align: center;
   font-size: 40px;
-  margin-block-start: 10px;
+  margin-block-start: 50px;
   // when switching languages, the font-family we don't want to be applied to the chapter title
   & * {
     font-family: unset !important;
   }
+}
+
+.verseText {
+  line-height: 1.7;
+  font-family: UthmanicHafs !important;
+  direction: rtl !important;
+  margin-block: 3px;
 }
 
 .surahNumber {
@@ -91,7 +101,7 @@
   width: fit-content !important;
   max-width: 97% !important;
   height: fit-content !important;
-  max-height: 85% !important;
+  max-height: 73% !important;
   margin: auto !important;
   border: 2px gray solid !important;
   border-radius: 20px !important;

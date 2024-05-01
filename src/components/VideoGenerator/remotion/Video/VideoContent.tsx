@@ -104,12 +104,9 @@ const VideoContent: React.FC<Props> = ({
               >
                 <div
                   style={{
-                    fontFamily: 'UthmanicHafs',
-                    direction: 'rtl',
-                    marginBlock: '3px',
                     fontSize: quranTextFontScale * 10.1,
                   }}
-                  className={classNames({
+                  className={classNames(styles.verseText, {
                     [styles.verseCentre]: verseAlignment === Alignment.CENTRE,
                     [styles.verseJustified]: verseAlignment === Alignment.JUSTIFIED,
                   })}
