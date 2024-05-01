@@ -87,8 +87,8 @@ const VideoGenerator: NextPage<VideoGenerator> = ({
   const [verseFrom, setVerseFrom] = useState('');
   const [verseTo, setVerseTo] = useState('');
 
-  const chapterEnglishName = useMemo(() => {
-    return englishChaptersList[chapter]?.translatedName;
+  const chapterEnglishName = useMemo<string>(() => {
+    return englishChaptersList[chapter]?.translatedName as string;
   }, [chapter, englishChaptersList]);
 
   const playerRef = useRef<PlayerRef>(null);
