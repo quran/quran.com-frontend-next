@@ -117,7 +117,7 @@ export const useGenerateMediaFile = (inputProps: GenerateMediaFileRequest) => {
         });
       }
     },
-    [inputProps],
+    [inputProps, t],
   );
 
   const undo = useCallback(() => {
