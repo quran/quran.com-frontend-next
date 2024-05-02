@@ -1,6 +1,6 @@
 import { Composition, continueRender, delayRender, staticFile } from 'remotion';
 
-import VideoContent from './Video/VideoContent';
+import MediaMakerContent from './Content';
 
 import {
   COMPOSITION_NAME,
@@ -8,8 +8,8 @@ import {
   VIDEO_LANDSCAPE_HEIGHT,
   VIDEO_LANDSCAPE_WIDTH,
   DEFAULT_PROPS,
-} from '@/utils/videoGenerator/constants';
-import { getDurationInFrames, orientationToDimensions } from '@/utils/videoGenerator/utils';
+} from '@/utils/media/constants';
+import { getDurationInFrames, orientationToDimensions } from '@/utils/media/utils';
 
 /**
  * - Make sure API calls are being made in calculate metadata
@@ -51,7 +51,7 @@ export const RemotionRoot = () => {
     <Composition
       id={COMPOSITION_NAME}
       // @ts-ignore
-      component={VideoContent}
+      component={MediaMakerContent}
       durationInFrames={getDurationInFrames(DEFAULT_PROPS.audio.duration)}
       fps={VIDEO_FPS}
       width={VIDEO_LANDSCAPE_WIDTH}

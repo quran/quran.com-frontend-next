@@ -3,14 +3,14 @@
 import classNames from 'classnames';
 import { AbsoluteFill, Audio, Sequence, Video } from 'remotion';
 
-import styles from './video.module.scss';
+import styles from './MediaMakerContent.module.scss';
 
 import ChapterIcon from '@/components/chapters/ChapterIcon';
 import WatermarkColor from '@/types/Media/WatermarkColor';
 import Translation from '@/types/Translation';
+import { Alignment, Orientation } from '@/utils/media/constants';
+import { getBackgroundWithOpacityById } from '@/utils/media/utils';
 import getPlainTranslationText from '@/utils/plainTranslationText';
-import { Alignment, Orientation } from '@/utils/videoGenerator/constants';
-import { getBackgroundWithOpacityById } from '@/utils/videoGenerator/utils';
 
 type Props = {
   verses: any;
@@ -29,7 +29,7 @@ type Props = {
   chapterEnglishName: string;
 };
 
-const VideoContent: React.FC<Props> = ({
+const MediaMakerContent: React.FC<Props> = ({
   verses,
   audio,
   video,
@@ -154,4 +154,4 @@ const VideoContent: React.FC<Props> = ({
   );
 };
 
-export default VideoContent;
+export default MediaMakerContent;

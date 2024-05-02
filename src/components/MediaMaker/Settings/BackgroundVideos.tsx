@@ -2,10 +2,10 @@ import classNames from 'classnames';
 import Image from 'next/image';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { getVideosArray } from '../../../utils/videoGenerator/utils';
-import styles from '../video.module.scss';
+import styles from '../MediaMaker.module.scss';
 
-import { selectVideoId, updateSettings } from '@/redux/slices/videoGenerator';
+import { selectVideoId, updateSettings } from '@/redux/slices/mediaMaker';
+import { getVideosArray } from '@/utils/media/utils';
 
 const videos = getVideosArray();
 

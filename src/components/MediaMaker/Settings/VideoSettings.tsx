@@ -3,9 +3,8 @@ import { useContext } from 'react';
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 
-import { validateVerseRange } from '../../../utils/videoGenerator/utils';
+import styles from '../MediaMaker.module.scss';
 import RenderControls from '../RenderControls';
-import styles from '../video.module.scss';
 
 import AlignmentsSettings from './AlignmentsSettings';
 import BackgroundVideos from './BackgroundVideos';
@@ -24,6 +23,7 @@ import IconSearch from '@/icons/search.svg';
 import layoutStyle from '@/pages/index.module.scss';
 import Reciter from '@/types/Reciter';
 import { getChapterData } from '@/utils/chapter';
+import { validateVerseRange } from '@/utils/media/utils';
 
 type Props = {
   chaptersList: any[];

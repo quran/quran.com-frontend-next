@@ -1,10 +1,10 @@
 import classNames from 'classnames';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux';
 
-import { getAllBackgrounds } from '../../../utils/videoGenerator/utils';
-import styles from '../video.module.scss';
+import styles from '../MediaMaker.module.scss';
 
-import { selectBackgroundColorId, updateSettings } from '@/redux/slices/videoGenerator';
+import { selectBackgroundColorId, updateSettings } from '@/redux/slices/mediaMaker';
+import { getAllBackgrounds } from '@/utils/media/utils';
 
 const COLORS = getAllBackgrounds();
 

@@ -9,7 +9,7 @@ import {
   VIDEO_LANDSCAPE_HEIGHT,
   VIDEO_PORTRAIT_WIDTH,
   VIDEO_PORTRAIT_HEIGHT,
-} from '@/utils/videoGenerator/constants';
+} from '@/utils/media/constants';
 
 export const getNormalizedIntervals = (start, end) => {
   const FRAMES = 30;

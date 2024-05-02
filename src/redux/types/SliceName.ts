@@ -26,7 +26,7 @@ enum SliceName {
   REVELATION_ORDER = 'revelationOrder',
   NOTIFICATIONS = 'notifications',
   ONBOARDING = 'onboarding',
-  VIDEO_GENERATOR = 'videoGenerator',
+  MEDIA_MAKER = 'mediaMaker',
 }
 
 export default SliceName;

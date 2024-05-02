@@ -14,9 +14,9 @@ import {
   DEFAULT_TRANSLATION_FONT_SCALE,
   DEFAULT_VIDEO_ID,
   Orientation,
-} from '@/utils/videoGenerator/constants';
+} from '@/utils/media/constants';
 
-export type VideoGeneratorSettings = {
+export type MediaMakerSettings = {
   opacity: string;
   shouldHaveBorder: string;
   fontColor: string;
@@ -31,7 +31,7 @@ export type VideoGeneratorSettings = {
   videoId: number;
 };
 
-const initialState: VideoGeneratorSettings = {
+const initialState: MediaMakerSettings = {
   opacity: DEFAULT_OPACITY,
   shouldHaveBorder: DEFAULT_SHOULD_HAVE_BORDER,
   backgroundColorId: DEFAULT_BACKGROUND_COLOR_ID,
@@ -46,13 +46,13 @@ const initialState: VideoGeneratorSettings = {
   videoId: DEFAULT_VIDEO_ID,
 };
 
-export const videoGeneratorSlice = createSlice({
-  name: SliceName.VIDEO_GENERATOR,
+export const mediaGeneratorSlice = createSlice({
+  name: SliceName.MEDIA_MAKER,
   initialState,
   reducers: {
     updateSettings: (
-      state: VideoGeneratorSettings,
-      action: PayloadAction<Partial<VideoGeneratorSettings>>,
+      state: MediaMakerSettings,
+      action: PayloadAction<Partial<MediaMakerSettings>>,
     ) => {
       return {
         ...state,
@@ -62,23 +62,22 @@ export const videoGeneratorSlice = createSlice({
   },
 });
 
-export const { updateSettings } = videoGeneratorSlice.actions;
+export const { updateSettings } = mediaGeneratorSlice.actions;
 
-export const selectVideoGeneratorSettings = (state: RootState) => state.videoGenerator;
-export const selectOpacity = (state: RootState) => state.videoGenerator.opacity;
-export const selectShouldHaveBorder = (state: RootState) => state.videoGenerator.shouldHaveBorder;
-export const selectReciter = (state: RootState) => state.videoGenerator.reciter;
-export const selectQuranTextFontScale = (state: RootState) =>
-  state.videoGenerator.quranTextFontScale;
-export const selectFontColor = (state: RootState) => state.videoGenerator.fontColor;
+export const selectMediaMakerSettings = (state: RootState) => state.mediaMaker;
+export const selectOpacity = (state: RootState) => state.mediaMaker.opacity;
+export const selectShouldHaveBorder = (state: RootState) => state.mediaMaker.shouldHaveBorder;
+export const selectReciter = (state: RootState) => state.mediaMaker.reciter;
+export const selectQuranTextFontScale = (state: RootState) => state.mediaMaker.quranTextFontScale;
+export const selectFontColor = (state: RootState) => state.mediaMaker.fontColor;
 export const selectTranslationFontScale = (state: RootState) =>
-  state.videoGenerator.translationFontScale;
-export const selectBackgroundColorId = (state: RootState) => state.videoGenerator.backgroundColorId;
-export const selectTranslations = (state: RootState) => state.videoGenerator.translations;
-export const selectVerseAlignment = (state: RootState) => state.videoGenerator.verseAlignment;
+  state.mediaMaker.translationFontScale;
+export const selectBackgroundColorId = (state: RootState) => state.mediaMaker.backgroundColorId;
+export const selectTranslations = (state: RootState) => state.mediaMaker.translations;
+export const selectVerseAlignment = (state: RootState) => state.mediaMaker.verseAlignment;
 export const selectTranslationAlignment = (state: RootState) =>
-  state.videoGenerator.translationAlignment;
-export const selectOrientation = (state: RootState) => state.videoGenerator.orientation;
-export const selectVideoId = (state: RootState) => state.videoGenerator.videoId;
+  state.mediaMaker.translationAlignment;
+export const selectOrientation = (state: RootState) => state.mediaMaker.orientation;
+export const selectVideoId = (state: RootState) => state.mediaMaker.videoId;
 
-export default videoGeneratorSlice.reducer;
+export default mediaGeneratorSlice.reducer;

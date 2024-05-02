@@ -3,12 +3,12 @@ import React from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import { useSelector, useDispatch } from 'react-redux';
 
-import styles from '../video.module.scss';
+import styles from '../MediaMaker.module.scss';
 
 import Section from '@/components/Navbar/SettingsDrawer/Section';
 import Switch from '@/dls/Switch/Switch';
-import { selectOrientation, updateSettings } from '@/redux/slices/videoGenerator';
-import { Orientation } from '@/utils/videoGenerator/constants';
+import { selectOrientation, updateSettings } from '@/redux/slices/mediaMaker';
+import { Orientation } from '@/utils/media/constants';
 
 const OrientationSettings = () => {
   const { t } = useTranslation('quran-media-maker');

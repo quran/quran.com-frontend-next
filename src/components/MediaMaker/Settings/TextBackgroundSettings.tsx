@@ -7,11 +7,7 @@ import BackgroundColors from './BackgroundColors';
 
 import Section from '@/components/Navbar/SettingsDrawer/Section';
 import Switch from '@/dls/Switch/Switch';
-import {
-  selectOpacity,
-  selectShouldHaveBorder,
-  updateSettings,
-} from '@/redux/slices/videoGenerator';
+import { selectOpacity, selectShouldHaveBorder, updateSettings } from '@/redux/slices/mediaMaker';
 
 const TextBackgroundSettings = () => {
   const opacity = useSelector(selectOpacity, shallowEqual);

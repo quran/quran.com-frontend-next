@@ -48,16 +48,9 @@ const { bucketName, alreadyExisted: bucketAlreadyExisted } = await getOrCreateBu
 console.log(bucketName, bucketAlreadyExisted ? '(already existed)' : '(created)');
 
 process.stdout.write('Deploying site... ');
-const { siteName, serveUrl } = await deploySite({
+const { serveUrl } = await deploySite({
   bucketName,
-  entryPoint: path.join(
-    process.cwd(),
-    'src',
-    'components',
-    'VideoGenerator',
-    'remotion',
-    'index.ts',
-  ),
+  entryPoint: path.join(process.cwd(), 'src', 'components', 'MediaMaker', 'index.ts'),
   siteName: SITE_NAME,
   region: REGION,
   options: {

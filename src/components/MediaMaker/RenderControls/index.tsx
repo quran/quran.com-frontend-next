@@ -9,11 +9,11 @@ import RenderVideoButton from './RenderVideoButton';
 import layoutStyle from '@/pages/index.module.scss';
 
 type Props = {
-  inputProps: VideoCompositionProps;
+  inputProps: MediaFileCompositionProps;
   getCurrentFrame: () => void;
 };
 
-export type VideoCompositionProps = {
+export type MediaFileCompositionProps = {
   video: object;
   verses: object;
   audio: object;

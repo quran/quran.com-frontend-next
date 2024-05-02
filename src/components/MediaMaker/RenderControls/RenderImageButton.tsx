@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
 import Button from '@/dls/Button/Button';
-import Progress from '@/dls/Progress';
 import { RenderStatus, useGenerateMediaFile } from '@/hooks/auth/useGenerateMediaFile';
 import IconDownload from '@/icons/download.svg';
 import IconRender from '@/icons/slow_motion_video.svg';
@@ -14,12 +13,14 @@ import { getLoginNavigationUrl, getQuranMediaCreatorNavigationUrl } from '@/util
 
 type Props = {
   inputProps: any;
+  getCurrentFrame: () => void;
 };
 
-const RenderVideoButton: React.FC<Props> = ({ inputProps }) => {
+const RenderImageButton: React.FC<Props> = ({ inputProps, getCurrentFrame }) => {
   const { t } = useTranslation('quran-media-maker');
   const { renderMedia, state } = useGenerateMediaFile(inputProps);
   const router = useRouter();
+  const downloadButtonRef = React.useRef<HTMLParagraphElement>();
 
   const isInitOrInvokingOrError = [
     RenderStatus.INIT,
@@ -28,6 +29,13 @@ const RenderVideoButton: React.FC<Props> = ({ inputProps }) => {
   ].includes(state.status);
 
   const isRenderingOrDone = [RenderStatus.RENDERING, RenderStatus.DONE].includes(state.status);
+
+  // listen to state changes and download the file when it's done
+  useEffect(() => {
+    if (state?.status === RenderStatus.DONE) {
+      downloadButtonRef.current.click();
+    }
+  }, [state?.status]);
 
   const isRendering = state.status === RenderStatus.RENDERING;
   return (
@@ -40,28 +48,28 @@ const RenderVideoButton: React.FC<Props> = ({ inputProps }) => {
             isLoading={state.status === RenderStatus.INVOKING}
             onClick={() => {
               if (isLoggedIn()) {
-                renderMedia(MediaType.VIDEO);
+                renderMedia(MediaType.IMAGE, { frame: getCurrentFrame() });
               } else {
                 router.replace(getLoginNavigationUrl(getQuranMediaCreatorNavigationUrl()));
               }
             }}
           >
-            {t('render-video')}
+            {t('render-image')}
           </Button>
-          {state.status === RenderStatus.ERROR && <div>{state.error.message}</div>}
+          {state.status === RenderStatus.ERROR && (
+            <div>{state?.error?.message || t('common:error.general')}</div>
+          )}
         </>
       )}
       {isRenderingOrDone && (
         <>
-          <Progress value={isRendering ? state.progress : 100} />
-          <br />
           <Button
             prefix={<IconDownload />}
             isDisabled={isRendering}
             isLoading={isRendering}
             href={state.status === RenderStatus.DONE ? state.url : ''}
           >
-            {t('download-video')}
+            <p ref={downloadButtonRef}>{t('download-video')}</p>
           </Button>
         </>
       )}
@@ -69,4 +77,4 @@ const RenderVideoButton: React.FC<Props> = ({ inputProps }) => {
   );
 };
 
-export default RenderVideoButton;
+export default RenderImageButton;

@@ -9,8 +9,8 @@ import {
   selectTranslationAlignment,
   selectVerseAlignment,
   updateSettings,
-} from '@/redux/slices/videoGenerator';
-import { Alignment, Orientation } from '@/utils/videoGenerator/constants';
+} from '@/redux/slices/mediaMaker';
+import { Alignment, Orientation } from '@/utils/media/constants';
 
 const AlignmentsSettings = () => {
   const { t } = useTranslation('quran-media-maker');

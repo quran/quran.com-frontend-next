@@ -24,7 +24,7 @@ export const DEFAULT_BACKGROUND = {
   background: `linear-gradient(0deg, rgba(229,227,255,${DEFAULT_OPACITY}) 0%, rgba(230,246,235,${DEFAULT_OPACITY}) 50%, rgba(215,249,255,${DEFAULT_OPACITY}) 100%)`,
 };
 export const DEFAULT_FONT_COLOR = '#dddddd';
-export const COMPOSITION_NAME = 'VideoContent';
+export const COMPOSITION_NAME = 'MediaMakerContent';
 
 const DEFAULT_TIMESTAMPS = [
   {

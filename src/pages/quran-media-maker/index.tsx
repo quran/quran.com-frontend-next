@@ -8,29 +8,29 @@ import useTranslation from 'next-translate/useTranslation';
 import { useSelector } from 'react-redux';
 
 import { getAvailableReciters, getChapterAudioData, getChapterVerses } from '@/api';
-import VideoContent from '@/components/VideoGenerator/remotion/Video/VideoContent';
-import VideoSettings from '@/components/VideoGenerator/Settings/VideoSettings';
-import styles from '@/components/VideoGenerator/video.module.scss';
+import MediaMakerContent from '@/components/MediaMaker/Content';
+import styles from '@/components/MediaMaker/MediaMaker.module.scss';
+import VideoSettings from '@/components/MediaMaker/Settings/VideoSettings';
 import Error from '@/pages/_error';
 import layoutStyles from '@/pages/index.module.scss';
-import { selectVideoGeneratorSettings } from '@/redux/slices/videoGenerator';
+import { selectMediaMakerSettings } from '@/redux/slices/mediaMaker';
 import { getAllChaptersData } from '@/utils/chapter';
 import {
   DEFAULT_API_PARAMS,
   VIDEO_FPS,
   DEFAULT_RECITER_ID,
   DEFAULT_SURAH,
-} from '@/utils/videoGenerator/constants';
+} from '@/utils/media/constants';
 import {
   getNormalizedTimestamps,
   getTrimmedAudio,
   getBackgroundVideoById,
   orientationToDimensions,
-} from '@/utils/videoGenerator/utils';
+} from '@/utils/media/utils';
 import { VersesResponse } from 'types/ApiResponses';
 import ChaptersData from 'types/ChaptersData';
 
-interface VideoGenerator {
+interface MediaMaker {
   juzVerses?: VersesResponse;
   hasError?: boolean;
   reciters: any;
@@ -53,7 +53,7 @@ interface VideoGenerator {
  * https://github.com/remotion-dev/remotion/blob/main/packages/lambda/src/api/deploy-site.ts
  */
 
-const VideoGenerator: NextPage<VideoGenerator> = ({
+const MediaMaker: NextPage<MediaMaker> = ({
   hasError,
   chaptersData,
   englishChaptersList,
@@ -77,7 +77,7 @@ const VideoGenerator: NextPage<VideoGenerator> = ({
     translationAlignment,
     orientation,
     videoId,
-  } = useSelector(selectVideoGeneratorSettings);
+  } = useSelector(selectMediaMakerSettings);
   const [chapter, setChapter] = useState(DEFAULT_SURAH);
   const [verseData, setVerseData] = useState(verses?.verses);
   const [audioData, setAudioData] = useState(audio);
@@ -218,7 +218,7 @@ const VideoGenerator: NextPage<VideoGenerator> = ({
       <div className={classNames(styles.playerWrapper, layoutStyles.flowItem)}>
         <Player
           className={styles.player}
-          component={VideoContent}
+          component={MediaMakerContent}
           inputProps={inputProps}
           durationInFrames={Math.ceil(((audioData.duration + 500) / 1000) * VIDEO_FPS)}
           compositionWidth={width}
@@ -279,4 +279,4 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   }
 };
 
-export default VideoGenerator;
+export default MediaMaker;

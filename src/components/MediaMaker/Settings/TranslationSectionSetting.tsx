@@ -3,7 +3,7 @@ import { useCallback, useMemo, useState } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useSelector, useDispatch } from 'react-redux';
 
-import styles from '../video.module.scss';
+import styles from '../MediaMaker.module.scss';
 
 import TranslationSettings from './TranslationSetting';
 
@@ -14,14 +14,14 @@ import Modal from '@/dls/Modal/Modal';
 import SelectionCard from '@/dls/SelectionCard/SelectionCard';
 import Skeleton from '@/dls/Skeleton/Skeleton';
 import {
-  MAXIMUM_TRANSLATIONS_FONT_STEP,
-  MINIMUM_FONT_STEP,
-} from '@/redux/slices/QuranReader/styles';
-import {
   selectTranslationFontScale,
   selectTranslations,
   updateSettings,
-} from '@/redux/slices/videoGenerator';
+} from '@/redux/slices/mediaMaker';
+import {
+  MAXIMUM_TRANSLATIONS_FONT_STEP,
+  MINIMUM_FONT_STEP,
+} from '@/redux/slices/QuranReader/styles';
 import { makeTranslationsUrl } from '@/utils/apiPaths';
 import { toLocalizedNumber } from '@/utils/locale';
 import { TranslationsResponse } from 'types/ApiResponses';

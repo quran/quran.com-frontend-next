@@ -2,7 +2,7 @@
 import { configureRefreshFetch } from 'refresh-fetch';
 
 import { getTimezone } from '../datetime';
-import { prepareGenerateMediaFileRequestData } from '../videoGenerator/utils';
+import { prepareGenerateMediaFileRequestData } from '../media/utils';
 
 import BookmarkByCollectionIdQueryParams from './types/BookmarkByCollectionIdQueryParams';
 import GetAllNotesQueryParams from './types/Note/GetAllNotesQueryParams';

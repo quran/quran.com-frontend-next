@@ -1,16 +1,16 @@
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
-import styles from '../video.module.scss';
+import styles from '../MediaMaker.module.scss';
 
 import Section from '@/components/Navbar/SettingsDrawer/Section';
 import Counter from '@/dls/Counter/Counter';
-import { MAXIMUM_QURAN_FONT_STEP, MINIMUM_FONT_STEP } from '@/redux/slices/QuranReader/styles';
 import {
   selectFontColor,
   selectQuranTextFontScale,
   updateSettings,
-} from '@/redux/slices/videoGenerator';
+} from '@/redux/slices/mediaMaker';
+import { MAXIMUM_QURAN_FONT_STEP, MINIMUM_FONT_STEP } from '@/redux/slices/QuranReader/styles';
 
 const QuranFontSection = () => {
   const { t } = useTranslation('quran-media-maker');
