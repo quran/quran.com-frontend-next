@@ -66,6 +66,6 @@
     "/ramadan-activities": ["ramadan-activities"],
     "/notification-settings": ["notification-settings"],
     "/calendar": ["quranic-calendar"],
-    "/quran-media-creator": ["quran-media-creator"]
+    "/quran-media-maker": ["quran-media-maker"]
   }
 }

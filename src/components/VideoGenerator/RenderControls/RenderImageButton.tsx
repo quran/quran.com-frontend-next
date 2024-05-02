@@ -17,7 +17,7 @@ type Props = {
 };
 
 const RenderImageButton: React.FC<Props> = ({ inputProps, getCurrentFrame }) => {
-  const { t } = useTranslation('quran-media-creator');
+  const { t } = useTranslation('quran-media-maker');
   const { renderMedia, state } = useGenerateMediaFile(inputProps);
   const router = useRouter();
   const downloadButtonRef = React.useRef<HTMLParagraphElement>();

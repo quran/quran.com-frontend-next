@@ -13,7 +13,7 @@ import {
 import { Alignment, Orientation } from '@/utils/videoGenerator/constants';
 
 const AlignmentsSettings = () => {
-  const { t } = useTranslation('quran-media-creator');
+  const { t } = useTranslation('quran-media-maker');
   const translationAlignment = useSelector(selectTranslationAlignment);
   const verseAlignment = useSelector(selectVerseAlignment);
   const dispatch = useDispatch();

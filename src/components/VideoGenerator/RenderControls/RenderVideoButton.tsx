@@ -17,7 +17,7 @@ type Props = {
 };
 
 const RenderVideoButton: React.FC<Props> = ({ inputProps }) => {
-  const { t } = useTranslation('quran-media-creator');
+  const { t } = useTranslation('quran-media-maker');
   const { renderMedia, state } = useGenerateMediaFile(inputProps);
   const router = useRouter();
 
