@@ -7,26 +7,14 @@ import dotenv from 'dotenv';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
 
-import { RAM, REGION, SITE_NAME, TIMEOUT } from './config.mjs';
-
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
 console.log('dirname is', __dirname);
-
-console.log('Selected region:', REGION);
 // TODO: this uploads entire .env file to lambda, which is not ideal
 dotenv.config({ path: '.env.local' });
-
-if (!process.env.AWS_ACCESS_KEY_ID && !process.env.REMOTION_AWS_ACCESS_KEY_ID) {
-  console.log('The environment variable "REMOTION_AWS_ACCESS_KEY_ID" is not set.');
-  console.log('Lambda renders were not set up.');
-  console.log('Complete the Lambda setup: at https://www.remotion.dev/docs/lambda/setup');
-  process.exit(0);
-}
-if (!process.env.AWS_SECRET_ACCESS_KEY && !process.env.REMOTION_AWS_SECRET_ACCESS_KEY) {
-  console.log('The environment variable "REMOTION_REMOTION_AWS_SECRET_ACCESS_KEY" is not set.');
-  console.log('Lambda renders were not set up.');
+if (!process.env.REMOTION_AWS_ACCESS_KEY_ID || !process.env.REMOTION_AWS_SECRET_ACCESS_KEY) {
+  console.log('Env variables were not set up.');
   console.log('Complete the Lambda setup: at https://www.remotion.dev/docs/lambda/setup');
   process.exit(0);
 }
@@ -35,15 +23,16 @@ process.stdout.write('Deploying Lambda function... ');
 
 const { functionName, alreadyExisted: functionAlreadyExisted } = await deployFunction({
   createCloudWatchLogGroup: true,
-  memorySizeInMb: RAM,
-  region: REGION,
-  timeoutInSeconds: TIMEOUT,
+  memorySizeInMb: Number(process.env.REMOTION_AWS_LAMBDA_RAM),
+  region: process.env.REMOTION_AWS_REGION,
+  timeoutInSeconds: Number(process.env.REMOTION_AWS_LAMBDA_TIMEOUT),
+  diskSizeInMb: Number(process.env.REMOTION_AWS_LAMBDA_DISK),
 });
 console.log(functionName, functionAlreadyExisted ? '(already existed)' : '(created)');
 
 process.stdout.write('Ensuring bucket... ');
 const { bucketName, alreadyExisted: bucketAlreadyExisted } = await getOrCreateBucket({
-  region: REGION,
+  region: process.env.REMOTION_AWS_REGION,
 });
 console.log(bucketName, bucketAlreadyExisted ? '(already existed)' : '(created)');
 
@@ -51,8 +40,8 @@ process.stdout.write('Deploying site... ');
 const { serveUrl } = await deploySite({
   bucketName,
   entryPoint: path.join(process.cwd(), 'src', 'components', 'MediaMaker', 'index.ts'),
-  siteName: SITE_NAME,
-  region: REGION,
+  siteName: process.env.REMOTION_AWS_SITE_NAME,
+  region: process.env.REMOTION_AWS_REGION,
   options: {
     publicDir: path.join(process.cwd(), 'public', 'publicMin'),
     onBundleProgress: (progress) => {
