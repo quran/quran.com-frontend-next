@@ -22,6 +22,7 @@ interface Request {
   translations: number[];
   orientation: string;
   videoId: number;
+  chapterEnglishName: string;
 }
 
 interface Video {

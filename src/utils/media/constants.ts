@@ -60,6 +60,7 @@ export enum Orientation {
   PORTRAIT = 'portrait',
 }
 
+// NOTE: If you change the order of the videos, make sure to sync it in the backend too.
 export const BACKGROUND_VIDEOS = {
   1: {
     thumbnailSrc: 'https://images.quran.com/videos/thumbnails/sea.png',

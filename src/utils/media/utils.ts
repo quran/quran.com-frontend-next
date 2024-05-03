@@ -200,5 +200,8 @@ export const prepareGenerateMediaFileRequestData = (data: GenerateMediaFileReque
     })),
   }));
 
+  delete newData.chapterEnglishName;
+  delete newData.video;
+
   return newData;
 };
