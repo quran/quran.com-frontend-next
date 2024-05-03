@@ -10,7 +10,7 @@ import IconDownload from '@/icons/download.svg';
 import IconRender from '@/icons/slow_motion_video.svg';
 import { MediaType } from '@/types/Media/GenerateMediaFileRequest';
 import { isLoggedIn } from '@/utils/auth/login';
-import { getLoginNavigationUrl, getQuranMediaCreatorNavigationUrl } from '@/utils/navigation';
+import { getLoginNavigationUrl, getQuranMediaMakerNavigationUrl } from '@/utils/navigation';
 
 type Props = {
   inputProps: any;
@@ -42,7 +42,7 @@ const RenderVideoButton: React.FC<Props> = ({ inputProps }) => {
               if (isLoggedIn()) {
                 renderMedia(MediaType.VIDEO);
               } else {
-                router.replace(getLoginNavigationUrl(getQuranMediaCreatorNavigationUrl()));
+                router.replace(getLoginNavigationUrl(getQuranMediaMakerNavigationUrl()));
               }
             }}
           >

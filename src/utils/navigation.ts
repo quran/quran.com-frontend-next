@@ -346,7 +346,7 @@ export const getNotesNavigationUrl = () => '/notes-and-reflections';
 
 export const getNotificationSettingsNavigationUrl = () => '/notification-settings';
 export const getQuranicCalendarNavigationUrl = () => '/calendar';
-export const getQuranMediaCreatorNavigationUrl = () => '/quran-media-maker';
+export const getQuranMediaMakerNavigationUrl = () => '/quran-media-maker';
 
 /**
  * Update the browser history with the new url.

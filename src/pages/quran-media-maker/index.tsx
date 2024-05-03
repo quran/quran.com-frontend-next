@@ -11,10 +11,12 @@ import { getAvailableReciters, getChapterAudioData, getChapterVerses } from '@/a
 import MediaMakerContent from '@/components/MediaMaker/Content';
 import styles from '@/components/MediaMaker/MediaMaker.module.scss';
 import VideoSettings from '@/components/MediaMaker/Settings/VideoSettings';
+import NextSeoWrapper from '@/components/NextSeoWrapper';
 import Error from '@/pages/_error';
 import layoutStyles from '@/pages/index.module.scss';
 import { selectMediaMakerSettings } from '@/redux/slices/mediaMaker';
 import { getAllChaptersData } from '@/utils/chapter';
+import { getLanguageAlternates } from '@/utils/locale';
 import {
   DEFAULT_API_PARAMS,
   VIDEO_FPS,
@@ -27,6 +29,7 @@ import {
   getBackgroundVideoById,
   orientationToDimensions,
 } from '@/utils/media/utils';
+import { getCanonicalUrl, getQuranMediaMakerNavigationUrl } from '@/utils/navigation';
 import { VersesResponse } from 'types/ApiResponses';
 import ChaptersData from 'types/ChaptersData';
 
@@ -62,7 +65,7 @@ const MediaMaker: NextPage<MediaMaker> = ({
   audio,
   defaultTimestamps,
 }) => {
-  const { lang } = useTranslation('common');
+  const { t, lang } = useTranslation('common');
 
   const {
     shouldHaveBorder,
@@ -212,42 +215,50 @@ const MediaMaker: NextPage<MediaMaker> = ({
   }
 
   const { width, height } = orientationToDimensions(orientation);
+  const PATH = getQuranMediaMakerNavigationUrl();
 
   return (
-    <div className={styles.pageContainer}>
-      <div className={classNames(styles.playerWrapper, layoutStyles.flowItem)}>
-        <Player
-          className={styles.player}
-          component={MediaMakerContent}
-          inputProps={inputProps}
-          durationInFrames={Math.ceil(((audioData.duration + 500) / 1000) * VIDEO_FPS)}
-          compositionWidth={width}
-          compositionHeight={height}
-          fps={VIDEO_FPS}
-          ref={playerRef}
-          controls
-        />
+    <>
+      <NextSeoWrapper
+        title={t('quran-media-maker:maker-title')}
+        url={getCanonicalUrl(lang, PATH)}
+        languageAlternates={getLanguageAlternates(PATH)}
+      />
+      <div className={styles.pageContainer}>
+        <div className={classNames(styles.playerWrapper, layoutStyles.flowItem)}>
+          <Player
+            className={styles.player}
+            component={MediaMakerContent}
+            inputProps={inputProps}
+            durationInFrames={Math.ceil(((audioData.duration + 500) / 1000) * VIDEO_FPS)}
+            compositionWidth={width}
+            compositionHeight={height}
+            fps={VIDEO_FPS}
+            ref={playerRef}
+            controls
+          />
+        </div>
+        <div className={layoutStyles.flow}>
+          {/* TODO: This is just bad. Rather store these settings in redux and persist than passing like this */}
+          <VideoSettings
+            chaptersList={chaptersList}
+            chapter={chapter}
+            onChapterChange={onChapterChange}
+            reciters={reciters}
+            seekToBeginning={seekToBeginning}
+            getCurrentFrame={getCurrentFrame}
+            shouldSearchFetch={shouldSearchFetch}
+            setShouldSearchFetch={setShouldSearchFetch}
+            isFetching={isFetching}
+            verseFrom={verseFrom}
+            setVerseFrom={setVerseFrom}
+            verseTo={verseTo}
+            setVerseTo={setVerseTo}
+            inputProps={inputProps}
+          />
+        </div>
       </div>
-      <div className={layoutStyles.flow}>
-        {/* TODO: This is just bad. Rather store these settings in redux and persist than passing like this */}
-        <VideoSettings
-          chaptersList={chaptersList}
-          chapter={chapter}
-          onChapterChange={onChapterChange}
-          reciters={reciters}
-          seekToBeginning={seekToBeginning}
-          getCurrentFrame={getCurrentFrame}
-          shouldSearchFetch={shouldSearchFetch}
-          setShouldSearchFetch={setShouldSearchFetch}
-          isFetching={isFetching}
-          verseFrom={verseFrom}
-          setVerseFrom={setVerseFrom}
-          verseTo={verseTo}
-          setVerseTo={setVerseTo}
-          inputProps={inputProps}
-        />
-      </div>
-    </div>
+    </>
   );
 };
 

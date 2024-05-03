@@ -9,7 +9,7 @@ import IconDownload from '@/icons/download.svg';
 import IconRender from '@/icons/slow_motion_video.svg';
 import { MediaType } from '@/types/Media/GenerateMediaFileRequest';
 import { isLoggedIn } from '@/utils/auth/login';
-import { getLoginNavigationUrl, getQuranMediaCreatorNavigationUrl } from '@/utils/navigation';
+import { getLoginNavigationUrl, getQuranMediaMakerNavigationUrl } from '@/utils/navigation';
 
 type Props = {
   inputProps: any;
@@ -50,7 +50,7 @@ const RenderImageButton: React.FC<Props> = ({ inputProps, getCurrentFrame }) => 
               if (isLoggedIn()) {
                 renderMedia(MediaType.IMAGE, { frame: getCurrentFrame() });
               } else {
-                router.replace(getLoginNavigationUrl(getQuranMediaCreatorNavigationUrl()));
+                router.replace(getLoginNavigationUrl(getQuranMediaMakerNavigationUrl()));
               }
             }}
           >

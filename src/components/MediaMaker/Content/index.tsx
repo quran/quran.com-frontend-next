@@ -1,3 +1,4 @@
+/* eslint-disable i18next/no-literal-string */
 /* eslint-disable react/no-danger */
 /* eslint-disable no-unsafe-optional-chaining */
 import classNames from 'classnames';
@@ -145,9 +146,9 @@ const MediaMakerContent: React.FC<Props> = ({
             [styles.watermarkDark]: video.watermarkColor === WatermarkColor.DARK,
             [styles.watermarkLight]: video.watermarkColor === WatermarkColor.LIGHT,
           })}
-          // eslint-disable-next-line i18next/no-literal-string
         >
-          Quran.com
+          <p>I made this on</p>
+          <p className={styles.logo}>Quran.com</p>
         </div>
       </AbsoluteFill>
     </AbsoluteFill>
