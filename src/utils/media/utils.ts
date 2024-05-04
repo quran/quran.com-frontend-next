@@ -104,9 +104,10 @@ export const getAllBackgrounds = (opacity = '0.8') => {
   ];
 };
 
-export const validateVerseRange = (from = 1, to, versesCount) => {
-  const verseTo = to || versesCount;
-  return from <= verseTo && from <= versesCount && verseTo <= versesCount;
+export const validateVerseRange = (from: number, to: number, versesCount: number) => {
+  const verseFrom = getVerseFromVerseKey(from) || 1;
+  const verseTo = getVerseFromVerseKey(to) || versesCount;
+  return verseFrom <= verseTo && verseFrom <= versesCount && verseTo <= versesCount;
 };
 
 export const getTrimmedAudio = (audio, from, to) => {
@@ -202,6 +203,16 @@ export const prepareGenerateMediaFileRequestData = (data: GenerateMediaFileReque
 
   delete newData.chapterEnglishName;
   delete newData.video;
+  delete newData.verseKeys;
 
   return newData;
+};
+
+export const getVerseFromVerseKey = (verseKey: string, num = false) => {
+  if (!verseKey) {
+    return 1;
+  }
+
+  const res = verseKey.split(':')?.[1] || 1;
+  return num ? Number(res) : res;
 };

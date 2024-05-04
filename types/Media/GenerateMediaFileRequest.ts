@@ -9,6 +9,12 @@ interface Request {
   type: MediaType;
   video: Video;
   timestamps?: Timestamp[];
+  verseKeys?: {
+    id: string;
+    label: string;
+    name: string;
+    value: string;
+  };
   audio?: Audio;
   verses: Verse[];
   fontColor: string;

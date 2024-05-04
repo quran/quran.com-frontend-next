@@ -1,3 +1,5 @@
+import { toLocalizedVerseKey } from '../locale';
+
 import defaultAudio from './defaultAudio.json';
 import defaultVerses from './defaultVerses.json';
 
@@ -119,3 +121,13 @@ export const SITE_NAME = 'quran-app';
 export const RAM = 2048;
 export const DISK = 2048;
 export const TIMEOUT = 240;
+
+export const getDefaultVerseKeys = (lang = 'en') => {
+  const keys = defaultVerses.map((verse) => `${verse.chapterId}:${verse.verseNumber}`);
+  return keys.map((chapterVersesKey) => ({
+    id: chapterVersesKey,
+    name: chapterVersesKey,
+    value: chapterVersesKey,
+    label: toLocalizedVerseKey(chapterVersesKey, lang),
+  }));
+};

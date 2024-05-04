@@ -1,3 +1,4 @@
+/* eslint-disable react-func/max-lines-per-function */
 /* eslint-disable max-lines */
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
@@ -12,24 +13,28 @@ import MediaMakerContent from '@/components/MediaMaker/Content';
 import styles from '@/components/MediaMaker/MediaMaker.module.scss';
 import VideoSettings from '@/components/MediaMaker/Settings/VideoSettings';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
+import Spinner, { SpinnerSize } from '@/dls/Spinner/Spinner';
 import Error from '@/pages/_error';
 import layoutStyles from '@/pages/index.module.scss';
 import { selectMediaMakerSettings } from '@/redux/slices/mediaMaker';
 import { getAllChaptersData } from '@/utils/chapter';
-import { getLanguageAlternates } from '@/utils/locale';
+import { getLanguageAlternates, toLocalizedVerseKey } from '@/utils/locale';
 import {
   DEFAULT_API_PARAMS,
   VIDEO_FPS,
   DEFAULT_RECITER_ID,
   DEFAULT_SURAH,
+  getDefaultVerseKeys,
 } from '@/utils/media/constants';
 import {
   getNormalizedTimestamps,
   getTrimmedAudio,
   getBackgroundVideoById,
   orientationToDimensions,
+  getVerseFromVerseKey,
 } from '@/utils/media/utils';
 import { getCanonicalUrl, getQuranMediaMakerNavigationUrl } from '@/utils/navigation';
+import { generateChapterVersesKeys } from '@/utils/verse';
 import { VersesResponse } from 'types/ApiResponses';
 import ChaptersData from 'types/ChaptersData';
 
@@ -89,6 +94,7 @@ const MediaMaker: NextPage<MediaMaker> = ({
   const [isFetching, setIsFetching] = useState(false);
   const [verseFrom, setVerseFrom] = useState('');
   const [verseTo, setVerseTo] = useState('');
+  const [verseKeys, setVerseKeys] = useState(getDefaultVerseKeys());
 
   const chapterEnglishName = useMemo<string>(() => {
     return englishChaptersList[chapter]?.translatedName as string;
@@ -99,6 +105,21 @@ const MediaMaker: NextPage<MediaMaker> = ({
   const getCurrentFrame = useCallback(() => {
     return playerRef?.current?.getCurrentFrame();
   }, []);
+
+  const updateVerseKeys = useCallback(
+    (chapterId: number) => {
+      const keys = generateChapterVersesKeys(chaptersData, String(chapterId));
+      setVerseKeys(
+        keys.map((chapterVersesKey) => ({
+          id: chapterVersesKey,
+          name: chapterVersesKey,
+          value: chapterVersesKey,
+          label: toLocalizedVerseKey(chapterVersesKey, lang),
+        })),
+      );
+    },
+    [chaptersData, lang],
+  );
 
   const seekToBeginning = useCallback(() => {
     const { current } = playerRef;
@@ -118,8 +139,8 @@ const MediaMaker: NextPage<MediaMaker> = ({
       perPage: chaptersData[chapter].versesCount,
     };
 
-    if (verseFrom) apiParams = { ...apiParams, from: `${chapter}:${verseFrom}` };
-    if (verseTo) apiParams = { ...apiParams, to: `${chapter}:${verseTo}` };
+    if (verseFrom) apiParams = { ...apiParams, from: verseFrom };
+    if (verseTo) apiParams = { ...apiParams, to: verseTo };
 
     const fetchData = async () => {
       const versesRes = await getChapterVerses(chapter, lang, apiParams);
@@ -131,9 +152,14 @@ const MediaMaker: NextPage<MediaMaker> = ({
       .then(([versesRes, audioRes]) => {
         seekToBeginning();
         setVerseData((versesRes as any)?.verses);
-        const trimmedAudio = getTrimmedAudio(audioRes, verseFrom, verseTo);
+        const trimmedAudio = getTrimmedAudio(
+          audioRes,
+          getVerseFromVerseKey(verseFrom),
+          getVerseFromVerseKey(verseTo),
+        );
         setAudioData(trimmedAudio);
         setTimestamps(getNormalizedTimestamps(trimmedAudio));
+        updateVerseKeys(chapter);
       })
       .catch(() => {
         // TODO: need a message to show the user
@@ -150,6 +176,7 @@ const MediaMaker: NextPage<MediaMaker> = ({
     verseTo,
     lang,
     seekToBeginning,
+    updateVerseKeys,
   ]);
 
   const onChapterChange = useCallback((val) => {
@@ -175,17 +202,16 @@ const MediaMaker: NextPage<MediaMaker> = ({
       translations,
       orientation,
       videoId,
+      verseKeys,
       chapterEnglishName,
     };
   }, [
-    chapterEnglishName,
     verseData,
     audioData,
     timestamps,
     backgroundColorId,
     opacity,
     fontColor,
-    orientation,
     verseAlignment,
     translationAlignment,
     shouldHaveBorder,
@@ -193,6 +219,9 @@ const MediaMaker: NextPage<MediaMaker> = ({
     quranTextFontScale,
     translationFontScale,
     translations,
+    orientation,
+    verseKeys,
+    chapterEnglishName,
   ]);
 
   const chaptersList = useMemo(() => {
@@ -226,17 +255,23 @@ const MediaMaker: NextPage<MediaMaker> = ({
       />
       <div className={styles.pageContainer}>
         <div className={classNames(styles.playerWrapper, layoutStyles.flowItem)}>
-          <Player
-            className={styles.player}
-            component={MediaMakerContent}
-            inputProps={inputProps}
-            durationInFrames={Math.ceil(((audioData.duration + 500) / 1000) * VIDEO_FPS)}
-            compositionWidth={width}
-            compositionHeight={height}
-            fps={VIDEO_FPS}
-            ref={playerRef}
-            controls
-          />
+          {isFetching ? (
+            <div className={styles.loadingContainer}>
+              <Spinner size={SpinnerSize.Large} />
+            </div>
+          ) : (
+            <Player
+              className={styles.player}
+              component={MediaMakerContent}
+              inputProps={inputProps}
+              durationInFrames={Math.ceil(((audioData.duration + 500) / 1000) * VIDEO_FPS)}
+              compositionWidth={width}
+              compositionHeight={height}
+              fps={VIDEO_FPS}
+              ref={playerRef}
+              controls
+            />
+          )}
         </div>
         <div className={layoutStyles.flow}>
           {/* TODO: This is just bad. Rather store these settings in redux and persist than passing like this */}
@@ -255,6 +290,7 @@ const MediaMaker: NextPage<MediaMaker> = ({
             verseTo={verseTo}
             setVerseTo={setVerseTo}
             inputProps={inputProps}
+            verseKeys={verseKeys}
           />
         </div>
       </div>
