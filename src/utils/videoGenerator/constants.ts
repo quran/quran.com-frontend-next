@@ -1,3 +1,4 @@
+import { toLocalizedVerseKey } from '../locale';
 import defaultAudio from './defaultAudio.json';
 import defaultVerses from './defaultVerses.json';
 
@@ -25,6 +26,16 @@ export const DEFAULT_BACKGROUND = {
 };
 export const DEFAULT_FONT_COLOR = '#dddddd';
 export const COMPOSITION_NAME = 'VideoContent';
+
+export function getDefaultVerseKeys(lang = 'en') {
+  const keys = defaultVerses.map((verse) => `${verse.chapterId}:${verse.verseNumber}`);
+  return keys.map((chapterVersesKey) => ({
+    id: chapterVersesKey,
+    name: chapterVersesKey,
+    value: chapterVersesKey,
+    label: toLocalizedVerseKey(chapterVersesKey, lang),
+  }));
+}
 
 const DEFAULT_TIMESTAMPS = [
   {
@@ -109,6 +120,7 @@ export const DEFAULT_PROPS = {
   translations: [DEFAULT_TRANSLATION],
   orientation: Orientation.LANDSCAPE,
   videoId: DEFAULT_VIDEO_ID,
+  verseKeys: getDefaultVerseKeys(),
 };
 
 export const REGION = 'us-east-1';

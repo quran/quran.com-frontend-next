@@ -48,6 +48,15 @@ export const getBackgroundVideoById = (id) => {
   return videoObj;
 };
 
+export const getVerseFromVerseKey = (key, num = false) => {
+  if (!key) {
+    return 1;
+  }
+
+  const res = key.split(':')?.[1] || 1;
+  return num ? Number(res) : res;
+}
+
 export const getVideosArray = () => {
   const flattenObject = (obj) => {
     const result = [];
@@ -102,13 +111,14 @@ export const getAllBackgrounds = (opacity = '0.8') => {
       background: `linear-gradient(to top,rgba(103, 243, 206, ${opacity}),rgba(16, 125, 64, ${opacity}))`,
     },
   ];
-};
+}
 
-export const validateVerseRange = (from = 1, to, versesCount) => {
-  const verseTo = to || versesCount;
-  return from <= verseTo && from <= versesCount && verseTo <= versesCount;
+export const validateVerseRange = (from, to, versesCount) => {
+  const verseFrom = getVerseFromVerseKey(from) || 1;
+  const verseTo = getVerseFromVerseKey(to) || versesCount;
+  return verseFrom <= verseTo && verseFrom <= versesCount && verseTo <= versesCount;
 };
-
+  
 export const getTrimmedAudio = (audio, from, to) => {
   if (!from?.trim?.() && !to?.trim?.()) {
     return audio;

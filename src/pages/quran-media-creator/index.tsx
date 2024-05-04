@@ -11,21 +11,26 @@ import { getAvailableReciters, getChapterAudioData, getChapterVerses } from '@/a
 import VideoContent from '@/components/VideoGenerator/remotion/Video/VideoContent';
 import VideoSettings from '@/components/VideoGenerator/Settings/VideoSettings';
 import styles from '@/components/VideoGenerator/video.module.scss';
+import Spinner, { SpinnerSize } from '@/dls/Spinner/Spinner';
 import Error from '@/pages/_error';
 import layoutStyles from '@/pages/index.module.scss';
 import { selectVideoGeneratorSettings } from '@/redux/slices/videoGenerator';
 import { getAllChaptersData } from '@/utils/chapter';
+import { toLocalizedVerseKey } from '@/utils/locale';
+import { generateChapterVersesKeys } from '@/utils/verse';
 import {
   DEFAULT_API_PARAMS,
   VIDEO_FPS,
   DEFAULT_RECITER_ID,
   DEFAULT_SURAH,
+  getDefaultVerseKeys,
 } from '@/utils/videoGenerator/constants';
 import {
   getNormalizedTimestamps,
   getTrimmedAudio,
   getBackgroundVideoById,
   orientationToDimensions,
+  getVerseFromVerseKey,
 } from '@/utils/videoGenerator/utils';
 import { VersesResponse } from 'types/ApiResponses';
 import ChaptersData from 'types/ChaptersData';
@@ -84,6 +89,7 @@ const VideoGenerator: NextPage<VideoGenerator> = ({
   const [isFetching, setIsFetching] = useState(false);
   const [verseFrom, setVerseFrom] = useState('');
   const [verseTo, setVerseTo] = useState('');
+  const [verseKeys, setVerseKeys] = useState(getDefaultVerseKeys());
 
   const playerRef = useRef<PlayerRef>(null);
 
@@ -102,6 +108,7 @@ const VideoGenerator: NextPage<VideoGenerator> = ({
     current.seekTo(0);
   }, []);
 
+  // eslint-disable-next-line react-func/max-lines-per-function
   useEffect(() => {
     let apiParams: any = {
       ...DEFAULT_API_PARAMS,
@@ -109,8 +116,8 @@ const VideoGenerator: NextPage<VideoGenerator> = ({
       perPage: chaptersData[chapter].versesCount,
     };
 
-    if (verseFrom) apiParams = { ...apiParams, from: `${chapter}:${verseFrom}` };
-    if (verseTo) apiParams = { ...apiParams, to: `${chapter}:${verseTo}` };
+    if (verseFrom) apiParams = { ...apiParams, from: verseFrom };
+    if (verseTo) apiParams = { ...apiParams, to: verseTo };
 
     const fetchData = async () => {
       const versesRes = await getChapterVerses(chapter, lang, apiParams);
@@ -122,26 +129,34 @@ const VideoGenerator: NextPage<VideoGenerator> = ({
       .then(([versesRes, audioRes]) => {
         seekToBeginning();
         setVerseData((versesRes as any)?.verses);
-        const trimmedAudio = getTrimmedAudio(audioRes, verseFrom, verseTo);
+        const trimmedAudio = getTrimmedAudio(
+          audioRes,
+          getVerseFromVerseKey(verseFrom),
+          getVerseFromVerseKey(verseTo),
+        );
         setAudioData(trimmedAudio);
         setTimestamps(getNormalizedTimestamps(trimmedAudio));
+        updateVerseKeys(chapter);
       })
       .catch(() => {
         // TODO: need a message to show the user
         console.error('something went wrong');
       })
       .finally(() => setIsFetching(false));
-  }, [
-    reciter,
-    translations,
-    shouldSearchFetch,
-    chaptersData,
-    chapter,
-    verseFrom,
-    verseTo,
-    lang,
-    seekToBeginning,
-  ]);
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [reciter, translations, shouldSearchFetch, chapter, lang, seekToBeginning]);
+
+  const updateVerseKeys = useCallback((chapter) => {
+    const keys = generateChapterVersesKeys(chaptersData, String(chapter));
+    setVerseKeys(
+      keys.map((chapterVersesKey) => ({
+        id: chapterVersesKey,
+        name: chapterVersesKey,
+        value: chapterVersesKey,
+        label: toLocalizedVerseKey(chapterVersesKey, lang),
+      })),
+    );
+  }, []);
 
   const onChapterChange = useCallback((val) => {
     setVerseFrom('');
@@ -166,6 +181,7 @@ const VideoGenerator: NextPage<VideoGenerator> = ({
       translations,
       orientation,
       videoId,
+      verseKeys,
     };
   }, [
     verseData,
@@ -182,6 +198,7 @@ const VideoGenerator: NextPage<VideoGenerator> = ({
     quranTextFontScale,
     translationFontScale,
     translations,
+    verseKeys,
   ]);
 
   const chaptersList = useMemo(() => {
@@ -208,20 +225,25 @@ const VideoGenerator: NextPage<VideoGenerator> = ({
   return (
     <div className={styles.pageContainer}>
       <div className={classNames(styles.playerWrapper, layoutStyles.flowItem)}>
-        <Player
-          className={styles.player}
-          component={VideoContent}
-          inputProps={inputProps}
-          durationInFrames={Math.ceil(((audioData.duration + 500) / 1000) * VIDEO_FPS)}
-          compositionWidth={width}
-          compositionHeight={height}
-          fps={VIDEO_FPS}
-          ref={playerRef}
-          controls
-        />
+        {isFetching ? (
+          <div className={styles.loadingContainer}>
+            <Spinner size={SpinnerSize.Large} />
+          </div>
+        ) : (
+          <Player
+            className={styles.player}
+            component={VideoContent}
+            inputProps={inputProps}
+            durationInFrames={Math.ceil(((audioData.duration + 500) / 1000) * VIDEO_FPS)}
+            compositionWidth={width}
+            compositionHeight={height}
+            fps={VIDEO_FPS}
+            ref={playerRef}
+            controls
+          />
+        )}
       </div>
       <div className={layoutStyles.flow}>
-        {/* TODO: This is just bad. Rather store these settings in redux and persist than passing like this */}
         <VideoSettings
           chaptersList={chaptersList}
           chapter={chapter}
@@ -237,6 +259,7 @@ const VideoGenerator: NextPage<VideoGenerator> = ({
           verseTo={verseTo}
           setVerseTo={setVerseTo}
           inputProps={inputProps}
+          verseKeys={verseKeys}
         />
       </div>
     </div>
