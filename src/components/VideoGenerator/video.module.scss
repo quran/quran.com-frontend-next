@@ -13,6 +13,13 @@
   height: 100% !important;
 }
 
+.loadingContainer {
+  width: 100% !important;
+  height: 100% !important;
+  display: flex;
+  align-items: center;
+}
+
 .playerWrapper {
   position: relative;
   padding: var(--spacing-large);
@@ -58,6 +65,10 @@
 
 .verseContainer {
   margin: 3rem 0px;
+}
+
+.verseRangeSearchButton {
+  margin-block-start: calc(var(--spacing-mega) - 4px);
 }
 
 .verse {

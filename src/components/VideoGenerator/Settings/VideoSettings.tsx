@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useCallback, useContext } from 'react';
 
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
@@ -16,9 +16,10 @@ import BackgroundSettings from './TextBackgroundSettings';
 import TranslationSettingsSection from './TranslationSectionSetting';
 
 import Section from '@/components/Navbar/SettingsDrawer/Section';
+import { RangeSelectorType } from '@/components/Verse/AdvancedCopy/SelectorContainer';
+import VersesRangeSelector from '@/components/Verse/AdvancedCopy/VersesRangeSelector';
 import DataContext from '@/contexts/DataContext';
 import Button, { ButtonVariant } from '@/dls/Button/Button';
-import Input from '@/dls/Forms/Input';
 import Select from '@/dls/Forms/Select';
 import IconSearch from '@/icons/search.svg';
 import layoutStyle from '@/pages/index.module.scss';
@@ -40,6 +41,7 @@ type Props = {
   verseTo: string;
   setVerseTo: (val: string) => void;
   inputProps: any;
+  verseKeys: any[];
 };
 
 const VideoSettings: React.FC<Props> = ({
@@ -57,18 +59,30 @@ const VideoSettings: React.FC<Props> = ({
   setVerseTo,
   inputProps,
   getCurrentFrame,
+  verseKeys,
 }) => {
   const { t } = useTranslation('quran-media-creator');
   const chaptersData = useContext(DataContext);
 
   const onSubmitSearchQuery = () => {
     const { versesCount } = getChapterData(chaptersData, String(chapter));
-    const isValid = validateVerseRange(Number(verseFrom), Number(verseTo), versesCount);
+    const isValid = validateVerseRange(verseFrom, verseTo, versesCount);
     if (!isValid) {
       throw new Error('Invalid verse range');
     }
     setShouldSearchFetch(!shouldSearchFetch);
   };
+
+  const onVerseRangeChange = useCallback(
+    (selectedName: string, verseSelectorId: RangeSelectorType) => {
+      if (verseSelectorId === RangeSelectorType.START) {
+        setVerseFrom(selectedName);
+      } else {
+        setVerseTo(selectedName);
+      }
+    },
+    [setVerseFrom, setVerseTo],
+  );
 
   return (
     <>
@@ -93,34 +107,26 @@ const VideoSettings: React.FC<Props> = ({
                 onChange={onChapterChange}
               />
             </Section.Row>
-            <Section.Label>
-              <span className={styles.versesLabel}>{t('common:verses')}</span>
-            </Section.Label>
             <Section.Row>
-              <div className={styles.verseRangeContainer}>
-                <Input
-                  id="video-gen-verseKey"
-                  value={verseFrom}
-                  onChange={(val) => setVerseFrom(val)}
-                  placeholder={t('from')}
-                  fixedWidth={false}
+              <Section.Row>
+                <VersesRangeSelector
+                  dropdownItems={verseKeys}
+                  rangeStartVerse={verseFrom}
+                  rangeEndVerse={verseTo}
+                  onChange={onVerseRangeChange}
+                  isVisible
+                  boldLabels={false}
                 />
-                <Input
-                  id="video-gen-verseKey"
-                  value={verseTo}
-                  onChange={(val) => setVerseTo(val)}
-                  placeholder={t('to')}
-                  fixedWidth={false}
-                />
-                <Button
-                  tooltip={t('search')}
-                  variant={ButtonVariant.Ghost}
-                  onClick={onSubmitSearchQuery}
-                  isDisabled={isFetching}
-                >
-                  <IconSearch />
-                </Button>
-              </div>
+              </Section.Row>
+              <Button
+                tooltip={t('search')}
+                variant={ButtonVariant.Ghost}
+                onClick={onSubmitSearchQuery}
+                isDisabled={isFetching}
+                className={styles.verseRangeSearchButton}
+              >
+                <IconSearch />
+              </Button>
             </Section.Row>
           </Section>
           <ReciterSettings reciters={reciters} />

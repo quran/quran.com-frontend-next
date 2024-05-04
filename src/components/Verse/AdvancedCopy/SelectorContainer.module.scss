@@ -1,7 +1,11 @@
 .comboboxLabel {
   margin-block: var(--spacing-xsmall);
+}
+
+.comboboxLabelBold {
   font-weight: var(--font-weight-bold);
 }
+
 .selectedContainer {
   flex: 1;
   margin-block: var(--spacing-micro);
