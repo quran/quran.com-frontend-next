@@ -22,9 +22,13 @@ import AvailableTranslation from 'types/AvailableTranslation';
 
 type Props = {
   selectedTranslations: number[];
+  setSelectedTranslations: (selectedTranslations: number[]) => any;
 };
 
-const TranslationSelectionBody: React.FC<Props> = ({ selectedTranslations }) => {
+const TranslationSelectionBody: React.FC<Props> = ({
+  selectedTranslations,
+  setSelectedTranslations,
+}) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { t, lang } = useTranslation('common');
   const [searchQuery, setSearchQuery] = useState('');
@@ -37,10 +41,10 @@ const TranslationSelectionBody: React.FC<Props> = ({ selectedTranslations }) => 
         const nextTranslations = isChecked
           ? [...selectedTranslations, selectedTranslationId]
           : selectedTranslations.filter((id) => id !== selectedTranslationId); // remove the id
-        dispatch(updateSettings({ translations: nextTranslations }));
+        setSelectedTranslations(nextTranslations);
       };
     },
-    [dispatch, selectedTranslations],
+    [selectedTranslations, setSelectedTranslations],
   );
 
   const clearSearch = useCallback(() => {

@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { useCallback, useMemo, useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
@@ -28,6 +29,7 @@ import { TranslationsResponse } from 'types/ApiResponses';
 
 const TranslationSettingsSection = () => {
   const translations = useSelector(selectTranslations, shallowEqual);
+  const [selectedTranslations, setSelectedTranslations] = useState(translations);
   const translationFontScale = useSelector(selectTranslationFontScale, shallowEqual);
   const { t, lang } = useTranslation('common');
   const [showTranslationsList, setShowTranslationsList] = useState(false);
@@ -51,7 +53,12 @@ const TranslationSettingsSection = () => {
 
   const onSelectionCardClicked = useCallback(() => {
     setShowTranslationsList(!showTranslationsList);
-  }, [setShowTranslationsList, showTranslationsList]);
+    dispatch(updateSettings({ translations: selectedTranslations }));
+  }, [dispatch, selectedTranslations, showTranslationsList]);
+
+  const openTranslationSection = useCallback(() => {
+    setShowTranslationsList(true);
+  }, [setShowTranslationsList]);
 
   const renderTranslations = useCallback(
     (data: TranslationsResponse) => {
@@ -81,15 +88,15 @@ const TranslationSettingsSection = () => {
         <SelectionCard
           label={t('settings.selected-translations')}
           value={selectedValueString}
-          onClick={onSelectionCardClicked}
+          onClick={openTranslationSection}
         />
       );
     },
-    [localizedSelectedTranslations, onSelectionCardClicked, translations, t],
+    [t, translations, openTranslationSection, localizedSelectedTranslations],
   );
 
   const clearTranslations = () => {
-    dispatch(updateSettings({ translations: [] }));
+    setSelectedTranslations([]);
   };
 
   const onFontScaleDecreaseClicked = () => {
@@ -139,7 +146,10 @@ const TranslationSettingsSection = () => {
               <Modal.Header>
                 <Modal.Title>{t('translations')}</Modal.Title>
                 <div className={styles.translationListContainer}>
-                  <TranslationSettings selectedTranslations={translations} />
+                  <TranslationSettings
+                    selectedTranslations={selectedTranslations}
+                    setSelectedTranslations={setSelectedTranslations}
+                  />
                 </div>
               </Modal.Header>
             </Modal.Body>
