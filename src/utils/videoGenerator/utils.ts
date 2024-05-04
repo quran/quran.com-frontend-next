@@ -55,7 +55,7 @@ export const getVerseFromVerseKey = (key, num = false) => {
 
   const res = key.split(':')?.[1] || 1;
   return num ? Number(res) : res;
-}
+};
 
 export const getVideosArray = () => {
   const flattenObject = (obj) => {
@@ -111,14 +111,14 @@ export const getAllBackgrounds = (opacity = '0.8') => {
       background: `linear-gradient(to top,rgba(103, 243, 206, ${opacity}),rgba(16, 125, 64, ${opacity}))`,
     },
   ];
-}
+};
 
 export const validateVerseRange = (from, to, versesCount) => {
   const verseFrom = getVerseFromVerseKey(from) || 1;
   const verseTo = getVerseFromVerseKey(to) || versesCount;
   return verseFrom <= verseTo && verseFrom <= versesCount && verseTo <= versesCount;
 };
-  
+
 export const getTrimmedAudio = (audio, from, to) => {
   if (!from?.trim?.() && !to?.trim?.()) {
     return audio;

@@ -1,4 +1,5 @@
 import { toLocalizedVerseKey } from '../locale';
+
 import defaultAudio from './defaultAudio.json';
 import defaultVerses from './defaultVerses.json';
 

@@ -3,7 +3,6 @@ import { useCallback, useState, useRef } from 'react';
 import groupBy from 'lodash/groupBy';
 import omit from 'lodash/omit';
 import useTranslation from 'next-translate/useTranslation';
-import { useDispatch } from 'react-redux';
 
 import styles from '../video.module.scss';
 
@@ -13,7 +12,6 @@ import Checkbox from '@/dls/Forms/Checkbox/Checkbox';
 import Input from '@/dls/Forms/Input';
 import IconCancel from '@/icons/cancel.svg';
 import IconSearch from '@/icons/search.svg';
-import { updateSettings } from '@/redux/slices/videoGenerator';
 import { makeTranslationsUrl } from '@/utils/apiPaths';
 import filterTranslations from '@/utils/filter-translations';
 import { getLocaleName } from '@/utils/locale';
@@ -32,7 +30,6 @@ const TranslationSelectionBody: React.FC<Props> = ({
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { t, lang } = useTranslation('common');
   const [searchQuery, setSearchQuery] = useState('');
-  const dispatch = useDispatch();
   const inputRef = useRef(null);
 
   const onTranslationsChange = useCallback(
