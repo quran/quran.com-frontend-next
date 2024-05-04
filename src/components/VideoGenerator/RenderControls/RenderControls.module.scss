@@ -2,4 +2,6 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding-inline-start: var(--spacing-medium) !important;
+    padding-inline-end: var(--spacing-medium) !important;
 }
