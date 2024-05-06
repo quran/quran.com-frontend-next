@@ -50,7 +50,7 @@ const VideoContent: React.FC<Props> = ({
       }}
     >
       <div className={styles.videoContainer}>
-        <Video pauseWhenBuffering loop src={video.videoSrc} />
+        <Video muted loop src={video.videoSrc} />
       </div>
       <Audio
         pauseWhenBuffering
