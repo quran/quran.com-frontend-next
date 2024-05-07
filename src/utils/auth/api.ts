@@ -23,7 +23,7 @@ import { CreateGoalRequest, Goal, GoalCategory, UpdateGoalRequest } from '@/type
 import { Note } from '@/types/auth/Note';
 import { Response } from '@/types/auth/Response';
 import { StreakWithMetadataParams, StreakWithUserMetadata } from '@/types/auth/Streak';
-import GenerateMediaFileRequest from '@/types/Media/GenerateMediaFileRequest';
+import GenerateMediaFileRequest, { MediaType } from '@/types/Media/GenerateMediaFileRequest';
 import { Mushaf } from '@/types/QuranReader';
 import {
   makeBookmarksUrl,
@@ -69,6 +69,7 @@ import {
   makeGetUserCoursesCountUrl,
   makeGenerateMediaFileUrl,
   makeGetMediaFileProgressUrl,
+  makeGetMonthlyMediaFilesCountUrl,
 } from '@/utils/auth/apiPaths';
 import { fetcher } from 'src/api';
 import CompleteAnnouncementRequest from 'types/auth/CompleteAnnouncementRequest';
@@ -407,6 +408,11 @@ export const getMediaFileProgress = async (
   renderId: string,
 ): Promise<Response<{ isDone: boolean; progress: number; url?: string }>> =>
   privateFetcher(makeGetMediaFileProgressUrl(renderId));
+
+export const getMonthlyMediaFilesCount = async (
+  type: MediaType,
+): Promise<Response<{ count: number; limit: number }>> =>
+  privateFetcher(makeGetMonthlyMediaFilesCountUrl(type));
 
 export const generateMediaFile = async (
   payload: GenerateMediaFileRequest,

@@ -3,9 +3,11 @@ import React from 'react';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
+import MonthlyMediaFileCounter from './MonthlyMediaFileCounter';
+
 import Button from '@/dls/Button/Button';
 import Progress from '@/dls/Progress';
-import { RenderStatus, useGenerateMediaFile } from '@/hooks/auth/useGenerateMediaFile';
+import { RenderStatus, useGenerateMediaFile } from '@/hooks/auth/media/useGenerateMediaFile';
 import IconDownload from '@/icons/download.svg';
 import IconRender from '@/icons/slow_motion_video.svg';
 import { MediaType } from '@/types/Media/GenerateMediaFileRequest';
@@ -32,6 +34,7 @@ const RenderVideoButton: React.FC<Props> = ({ inputProps }) => {
   const isRendering = state.status === RenderStatus.RENDERING;
   return (
     <div>
+      <MonthlyMediaFileCounter type={MediaType.VIDEO} />
       {isInitOrInvokingOrError && (
         <>
           <Button

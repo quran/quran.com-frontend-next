@@ -7,6 +7,7 @@ import GetAllNotesQueryParams from './types/Note/GetAllNotesQueryParams';
 import { ActivityDayType, FilterActivityDaysParams } from '@/types/auth/ActivityDay';
 import { EstimateGoalRequest, GoalCategory } from '@/types/auth/Goal';
 import { StreakWithMetadataParams } from '@/types/auth/Streak';
+import { MediaType } from '@/types/Media/GenerateMediaFileRequest';
 import { Mushaf } from '@/types/QuranReader';
 import { getAuthApiPath } from '@/utils/url';
 import BookmarkType from 'types/BookmarkType';
@@ -185,3 +186,6 @@ export const makeGenerateMediaFileUrl = () => makeUrl('media/generate');
 
 export const makeGetMediaFileProgressUrl = (renderId: string) =>
   makeUrl(`media/progress/${renderId}`);
+
+export const makeGetMonthlyMediaFilesCountUrl = (type: MediaType) =>
+  makeUrl(`media/monthly-count`, { type });

@@ -47,6 +47,7 @@ const wait = async (milliSeconds: number) => {
   });
 };
 
+// TODO: use useSWR instead
 export const useGenerateMediaFile = (inputProps: GenerateMediaFileRequest) => {
   const { t } = useTranslation('common');
   const [state, setState] = useState<State>({

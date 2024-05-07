@@ -3,8 +3,10 @@ import React, { useEffect } from 'react';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
+import MonthlyMediaFileCounter from './MonthlyMediaFileCounter';
+
 import Button from '@/dls/Button/Button';
-import { RenderStatus, useGenerateMediaFile } from '@/hooks/auth/useGenerateMediaFile';
+import { RenderStatus, useGenerateMediaFile } from '@/hooks/auth/media/useGenerateMediaFile';
 import IconDownload from '@/icons/download.svg';
 import IconRender from '@/icons/slow_motion_video.svg';
 import { MediaType } from '@/types/Media/GenerateMediaFileRequest';
@@ -19,6 +21,7 @@ type Props = {
 const RenderImageButton: React.FC<Props> = ({ inputProps, getCurrentFrame }) => {
   const { t } = useTranslation('quran-media-maker');
   const { renderMedia, state } = useGenerateMediaFile(inputProps);
+
   const router = useRouter();
   const downloadButtonRef = React.useRef<HTMLParagraphElement>();
 
@@ -40,6 +43,7 @@ const RenderImageButton: React.FC<Props> = ({ inputProps, getCurrentFrame }) => 
   const isRendering = state.status === RenderStatus.RENDERING;
   return (
     <div>
+      <MonthlyMediaFileCounter type={MediaType.IMAGE} />
       {isInitOrInvokingOrError && (
         <>
           <Button
