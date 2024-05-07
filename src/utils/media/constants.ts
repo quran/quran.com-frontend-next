@@ -50,6 +50,7 @@ const DEFAULT_TIMESTAMPS = [
 export const DEFAULT_API_PARAMS = {
   wordFields: QuranFont.QPCHafs,
   translations: [DEFAULT_TRANSLATION],
+  reciter: DEFAULT_RECITER_ID,
 };
 
 export enum Alignment {

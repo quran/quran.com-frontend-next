@@ -18,7 +18,7 @@ import Error from '@/pages/_error';
 import layoutStyles from '@/pages/index.module.scss';
 import { selectMediaMakerSettings } from '@/redux/slices/mediaMaker';
 import { getAllChaptersData } from '@/utils/chapter';
-import { getLanguageAlternates, toLocalizedVerseKey } from '@/utils/locale';
+import { getLanguageAlternates, toLocalizedNumber, toLocalizedVerseKey } from '@/utils/locale';
 import {
   DEFAULT_API_PARAMS,
   VIDEO_FPS,
@@ -34,6 +34,10 @@ import {
   getVerseFromVerseKey,
 } from '@/utils/media/utils';
 import { getCanonicalUrl, getQuranMediaMakerNavigationUrl } from '@/utils/navigation';
+import {
+  ONE_MONTH_REVALIDATION_PERIOD_SECONDS,
+  REVALIDATION_PERIOD_ON_ERROR_SECONDS,
+} from '@/utils/staticPageGeneration';
 import { generateChapterVersesKeys } from '@/utils/verse';
 import { VersesResponse } from 'types/ApiResponses';
 import ChaptersData from 'types/ChaptersData';
@@ -229,15 +233,15 @@ const MediaMaker: NextPage<MediaMaker> = ({
       id: r[0],
       ...r[1],
     }));
-    return flattenedChaptersList.map((chapterObj) => {
+    return flattenedChaptersList.map((chapterObj, index) => {
       return {
         id: chapterObj.id,
-        label: chapterObj.transliteratedName,
+        label: `${chapterObj.transliteratedName} (${toLocalizedNumber(index + 1, lang)})`,
         value: chapterObj.id,
         name: chapterObj.transliteratedName,
       };
     });
-  }, [chaptersData]);
+  }, [chaptersData, lang]);
 
   if (hasError) {
     return <Error statusCode={500} />;
@@ -316,11 +320,13 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
         defaultTimestamps,
         reciters: reciters || [],
       },
+      revalidate: ONE_MONTH_REVALIDATION_PERIOD_SECONDS,
     };
   } catch (e) {
     return {
       props: {
         hasError: true,
+        revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS,
       },
     };
   }
