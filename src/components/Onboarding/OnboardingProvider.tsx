@@ -1,8 +1,9 @@
 /* eslint-disable max-lines */
 import React, { useMemo, useCallback, useState } from 'react';
 
+import dynamic from 'next/dynamic';
 import useTranslation from 'next-translate/useTranslation';
-import Joyride, { ACTIONS, Callback, EVENTS, STATUS, StoreHelpers } from 'react-joyride';
+import { ACTIONS, Callback, EVENTS, STATUS, StoreHelpers } from 'react-joyride';
 import { useSelector, useDispatch } from 'react-redux';
 
 // eslint-disable-next-line import/no-cycle
@@ -14,6 +15,7 @@ import { selectOnboardingActiveStep, setActiveStepIndex } from '@/redux/slices/o
 import OnboardingGroup from '@/types/OnboardingGroup';
 import { isLoggedIn } from '@/utils/auth/login';
 
+const Joyride = dynamic(() => import('react-joyride'), { ssr: false });
 interface OnboardingContextType {
   startTour: (group?: OnboardingGroup, startIndex?: number) => void;
   stopTour: () => void;
