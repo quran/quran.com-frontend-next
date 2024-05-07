@@ -42,6 +42,11 @@ $translation-line-height: 1.5;
   font-family: "divehi" !important; // important is needed to over-ride the language specific font-family
 }
 
+.persian {
+  font-family: "Vazirmatn", "NotoNastaliq", "Noto Naskh Arabic", "Nafees Regular",
+    Arial, sans-serif !important; // important is needed to over-ride the language specific font-family
+}
+
 .translationName {
   margin-block-start: calc(0.5 * var(--spacing-xxsmall));
   color: var(--color-text-faded);

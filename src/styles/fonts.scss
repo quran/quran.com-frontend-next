@@ -4,22 +4,17 @@
 @font-face {
   font-family: "IndoPak";
   src: local("AlQuran IndoPak by QuranWBW"),
-    url("/fonts/quran/hafs/nastaleeq/indopak/indopak-nastaleeq-waqf-lazim-v4.2.1.woff2")
-      format("woff2"),
-    url("/fonts/quran/hafs/nastaleeq/indopak/indopak-nastaleeq-waqf-lazim-v4.2.1.woff")
-      format("woff"),
-    url("/fonts/quran/hafs/nastaleeq/indopak/indopak-nastaleeq-waqf-lazim-v4.2.1.ttf")
-      format("truetype");
+    url("/fonts/quran/hafs/nastaleeq/indopak/indopak-nastaleeq-waqf-lazim-v4.2.1.woff2") format("woff2"),
+    url("/fonts/quran/hafs/nastaleeq/indopak/indopak-nastaleeq-waqf-lazim-v4.2.1.woff") format("woff"),
+    url("/fonts/quran/hafs/nastaleeq/indopak/indopak-nastaleeq-waqf-lazim-v4.2.1.ttf") format("truetype");
   font-display: swap;
 }
 
 @font-face {
   font-family: "UthmanicHafs";
   src: local("KFGQPC HAFS Uthmanic Script"),
-    url("/fonts/quran/hafs/uthmanic_hafs/UthmanicHafs1Ver18.woff2")
-      format("woff2"),
-    url("/fonts/quran/hafs/uthmanic_hafs/UthmanicHafs1Ver18.ttf")
-      format("truetype");
+    url("/fonts/quran/hafs/uthmanic_hafs/UthmanicHafs1Ver18.woff2") format("woff2"),
+    url("/fonts/quran/hafs/uthmanic_hafs/UthmanicHafs1Ver18.ttf") format("truetype");
   font-display: swap;
 }
 
@@ -63,6 +58,18 @@
   font-display: swap;
   // only apply this font to Urdu characters https://jrgraphix.net/r/Unicode/0600-06FF
   unicode-range: U+0600-06FF;
+}
+
+@font-face {
+  font-family: "Vazirmatn";
+  src: local("Vazirmatn"),
+    url("/fonts/lang/persian/Vazirmatn-Regular.woff2"),
+    url("/fonts/lang/persian/Vazirmatn-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+  // only apply this font to Persian characters https://character-table.netlify.app/persian
+  unicode-range: U+0020-2212
 }
 
 @font-face {

@@ -87,6 +87,7 @@ export const Languages = {
   43: {
     // Persian/Farsi
     dir: Direction.RTL,
+    font: 'persian',
     locale: 'fa',
   },
   49: {
