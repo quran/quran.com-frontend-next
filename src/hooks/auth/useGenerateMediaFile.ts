@@ -67,9 +67,10 @@ export const useGenerateMediaFile = (inputProps: GenerateMediaFileRequest) => {
           type,
         });
         if (response.success === false) {
+          const details = response?.error?.details || {};
           setState({
             status: RenderStatus.ERROR,
-            error: new Error(t(`error.${response.error.code}`)),
+            error: new Error(t(`error.${response.error.code}`, details)),
             renderId: null,
           });
           return;

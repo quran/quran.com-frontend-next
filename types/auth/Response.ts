@@ -5,11 +5,6 @@ export type Pagination = {
   hasPreviousPage?: boolean;
 };
 
-type ErrorDetail = {
-  code?: string;
-  message: string;
-};
-
 /**
  * inspired by http://docs.oasis-open.org/odata/odata-json-format/v4.0/errata02/os/odata-json-format-v4.0-errata02-os-complete.html#_Toc403940655
  * Notes:
@@ -19,7 +14,7 @@ type ErrorDetail = {
 type Error = {
   code: string;
   message: string;
-  details?: ErrorDetail[];
+  details?: Record<string, any>;
 };
 
 export type Response<Data = unknown> = {
