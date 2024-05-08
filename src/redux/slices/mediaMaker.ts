@@ -2,8 +2,9 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { RootState } from '@/redux/RootState';
 import SliceName from '@/redux/types/SliceName';
+import Alignment from '@/types/Media/Alignment';
+import Orientation from '@/types/Media/Orientation';
 import {
-  Alignment,
   DEFAULT_BACKGROUND_COLOR_ID,
   DEFAULT_FONT_COLOR,
   DEFAULT_OPACITY,
@@ -14,7 +15,6 @@ import {
   DEFAULT_TRANSLATION,
   DEFAULT_TRANSLATION_FONT_SCALE,
   DEFAULT_VIDEO_ID,
-  Orientation,
 } from '@/utils/media/constants';
 
 export type MediaMakerSettings = {

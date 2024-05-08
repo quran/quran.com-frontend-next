@@ -3,10 +3,10 @@
 /* eslint-disable react-func/max-lines-per-function */
 import AudioData from '@/types/AudioData';
 import GenerateMediaFileRequest, { MediaType } from '@/types/Media/GenerateMediaFileRequest';
+import Orientation from '@/types/Media/Orientation';
 import VerseTiming from '@/types/VerseTiming';
 import {
   BACKGROUND_VIDEOS,
-  Orientation,
   VIDEO_LANDSCAPE_WIDTH,
   VIDEO_LANDSCAPE_HEIGHT,
   VIDEO_PORTRAIT_WIDTH,

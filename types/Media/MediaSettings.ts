@@ -1,4 +1,5 @@
-import { Alignment, Orientation } from '@/utils/media/constants';
+import Alignment from '@/types/Media/Alignment';
+import Orientation from '@/types/Media/Orientation';
 
 type MediaSettings = {
   verseTo: string;

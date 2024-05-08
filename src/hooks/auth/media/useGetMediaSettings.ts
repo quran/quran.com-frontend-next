@@ -2,9 +2,10 @@ import { useContext } from 'react';
 
 import DataContext from '@/contexts/DataContext';
 import useGetQueryParamOrReduxValue from '@/hooks/useGetQueryParamOrReduxValue';
+import Alignment from '@/types/Media/Alignment';
 import MediaSettings from '@/types/Media/MediaSettings';
+import Orientation from '@/types/Media/Orientation';
 import QueryParam from '@/types/QueryParam';
-import { Alignment, Orientation } from '@/utils/media/constants';
 
 // TODO: corner case when from and to are not valid. Also when surah and ranges are not in the same surah
 // TODO: write test cases

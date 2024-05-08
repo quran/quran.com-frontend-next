@@ -1,4 +1,5 @@
-import { Alignment, Orientation } from './media/constants';
+import Alignment from '../../types/Media/Alignment';
+import Orientation from '../../types/Media/Orientation';
 
 export const isValidTranslationsQueryParamValue = (value: string): boolean => {
   // if it's empty string, we shouldn't consider it as a valid translation
@@ -68,4 +69,9 @@ export const isValidAlignmentQueryParamValue = (value: string): boolean => {
 
 export const isValidOrientationQueryParamValue = (value: string): boolean => {
   return Orientation[value] !== undefined;
+};
+
+export const isValidOpacityQueryParamValue = (value: string): boolean => {
+  const OPACITY_VALUES = ['0', '0.2', '0.4', '0.6', '0.8', '1'];
+  return OPACITY_VALUES.includes(value);
 };

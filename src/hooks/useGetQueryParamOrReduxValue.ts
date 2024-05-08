@@ -37,6 +37,7 @@ import {
   isValidBooleanQueryParamValue,
   isValidFontScaleQueryParamValue,
   isValidNumberQueryParamValue,
+  isValidOpacityQueryParamValue,
   isValidOrientationQueryParamValue,
   isValidReciterId,
   isValidTranslationsQueryParamValue,
@@ -133,8 +134,7 @@ const QUERY_PARAMS_DATA = {
     reduxSelector: selectOpacity,
     reduxEqualityFunction: shallowEqual,
     valueType: QueryParamValueType.String,
-    // TODO: here
-    validate: () => true,
+    validate: (val) => isValidOpacityQueryParamValue(val),
   },
   [QueryParam.FONT_COLOR]: {
     reduxSelector: selectFontColor,

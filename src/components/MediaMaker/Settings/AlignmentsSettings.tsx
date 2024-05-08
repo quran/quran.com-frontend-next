@@ -4,7 +4,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import Section from '@/components/Navbar/SettingsDrawer/Section';
 import Switch from '@/dls/Switch/Switch';
-import { Alignment } from '@/utils/media/constants';
+import Alignment from '@/types/Media/Alignment';
 
 type Props = {
   onSettingsUpdate: (settings: Record<string, any>) => void;

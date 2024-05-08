@@ -1,6 +1,8 @@
 import defaultAudio from './defaultAudio.json';
 import defaultVerses from './defaultVerses.json';
 
+import Alignment from '@/types/Media/Alignment';
+import Orientation from '@/types/Media/Orientation';
 import WatermarkColor from '@/types/Media/WatermarkColor';
 import { QuranFont } from '@/types/QuranReader';
 
@@ -34,16 +36,6 @@ export const DEFAULT_API_PARAMS = {
   reciter: DEFAULT_RECITER_ID,
   perPage: 1,
 };
-
-export enum Alignment {
-  CENTRE = 'centre',
-  JUSTIFIED = 'justified',
-}
-
-export enum Orientation {
-  LANDSCAPE = 'landscape',
-  PORTRAIT = 'portrait',
-}
 
 // NOTE: If you change the order of the videos, make sure to sync it in the backend too.
 export const BACKGROUND_VIDEOS = {

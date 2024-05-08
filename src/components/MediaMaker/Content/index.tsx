@@ -7,9 +7,10 @@ import { AbsoluteFill, Audio, Sequence, Video } from 'remotion';
 import styles from './MediaMakerContent.module.scss';
 
 import ChapterIcon from '@/components/chapters/ChapterIcon';
+import Alignment from '@/types/Media/Alignment';
+import Orientation from '@/types/Media/Orientation';
 import WatermarkColor from '@/types/Media/WatermarkColor';
 import Translation from '@/types/Translation';
-import { Alignment, Orientation } from '@/utils/media/constants';
 import { getBackgroundWithOpacityById } from '@/utils/media/utils';
 import getPlainTranslationText from '@/utils/plainTranslationText';
 
