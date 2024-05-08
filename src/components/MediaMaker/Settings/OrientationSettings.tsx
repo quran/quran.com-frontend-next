@@ -1,22 +1,20 @@
 import React from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
-import { useSelector } from 'react-redux';
 
 import styles from '../MediaMaker.module.scss';
 
 import Section from '@/components/Navbar/SettingsDrawer/Section';
 import Switch from '@/dls/Switch/Switch';
-import { selectOrientation } from '@/redux/slices/mediaMaker';
 import { Orientation } from '@/utils/media/constants';
 
 type Props = {
   onSettingsUpdate: (settings: Record<string, any>) => void;
+  orientation: Orientation;
 };
 
-const OrientationSettings: React.FC<Props> = ({ onSettingsUpdate }) => {
+const OrientationSettings: React.FC<Props> = ({ onSettingsUpdate, orientation }) => {
   const { t } = useTranslation('quran-media-maker');
-  const orientation = useSelector(selectOrientation);
 
   const onOrientationChange = (val: Orientation) => {
     onSettingsUpdate({ orientation: val });

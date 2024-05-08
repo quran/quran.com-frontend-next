@@ -24,39 +24,37 @@ import DataContext from '@/contexts/DataContext';
 import Select from '@/dls/Forms/Select';
 import layoutStyle from '@/pages/index.module.scss';
 import { updateSettings } from '@/redux/slices/mediaMaker';
+import MediaSettings from '@/types/Media/MediaSettings';
 import Reciter from '@/types/Reciter';
 import { toLocalizedVerseKey } from '@/utils/locale';
 import { generateChapterVersesKeys } from '@/utils/verse';
 
 type Props = {
   chaptersList: any[];
-  surah: number;
   onChapterChange: (val: any) => void;
   reciters: Reciter[];
   seekToBeginning: () => void;
   getCurrentFrame: () => void;
   isFetching: boolean;
-  verseFrom: string;
-  verseTo: string;
   inputProps: any;
+  mediaSettings: MediaSettings;
 };
 
 const VideoSettings: React.FC<Props> = ({
   chaptersList,
-  surah,
   onChapterChange,
   reciters,
   seekToBeginning,
   isFetching,
-  verseFrom,
-  verseTo,
   inputProps,
   getCurrentFrame,
+  mediaSettings,
 }) => {
   const { lang, t } = useTranslation('quran-media-maker');
   const chaptersData = useContext(DataContext);
   const [rangesError, setRangesError] = useState(null);
   const dispatch = useDispatch();
+  const { verseFrom, verseTo, surah } = mediaSettings;
 
   const onSettingsUpdate = useCallback(
     (settings: Record<string, any>) => {
@@ -140,26 +138,52 @@ const VideoSettings: React.FC<Props> = ({
             </Section.Row>
             {rangesError && <div className={styles.error}>{rangesError}</div>}
           </Section>
-          <ReciterSettings onSettingsUpdate={onSettingsUpdate} reciters={reciters} />
-          <QuranFontSettings onSettingsUpdate={onSettingsUpdate} />
-          <TranslationSettingsSection onSettingsUpdate={onSettingsUpdate} />
+          <ReciterSettings
+            reciter={mediaSettings.reciter}
+            onSettingsUpdate={onSettingsUpdate}
+            reciters={reciters}
+          />
+          <QuranFontSettings
+            quranTextFontScale={mediaSettings.quranTextFontScale}
+            fontColor={mediaSettings.fontColor}
+            onSettingsUpdate={onSettingsUpdate}
+          />
+          <TranslationSettingsSection
+            translations={mediaSettings.translations}
+            translationFontScale={mediaSettings.translationFontScale}
+            onSettingsUpdate={onSettingsUpdate}
+          />
         </div>
         <div>
           <Section>
             <Section.Title>{t('video-picker')}</Section.Title>
             <Section.Row>
-              <BackgroundVideos onSettingsUpdate={onSettingsUpdate} />
+              <BackgroundVideos
+                videoId={mediaSettings.videoId}
+                onSettingsUpdate={onSettingsUpdate}
+              />
             </Section.Row>
           </Section>
         </div>
         <div>
-          <OrientationSettings onSettingsUpdate={onSettingsUpdate} />
+          <OrientationSettings
+            orientation={mediaSettings.orientation}
+            onSettingsUpdate={onSettingsUpdate}
+          />
         </div>
         <div>
-          <AlignmentsSettings onSettingsUpdate={onSettingsUpdate} />
+          <AlignmentsSettings
+            verseAlignment={mediaSettings.verseAlignment}
+            translationAlignment={mediaSettings.translationAlignment}
+            onSettingsUpdate={onSettingsUpdate}
+          />
         </div>
         <div>
-          <BackgroundSettings onSettingsUpdate={onSettingsUpdate} />
+          <BackgroundSettings
+            shouldHaveBorder={mediaSettings.shouldHaveBorder}
+            opacity={mediaSettings.opacity}
+            onSettingsUpdate={onSettingsUpdate}
+          />
         </div>
       </div>
     </>

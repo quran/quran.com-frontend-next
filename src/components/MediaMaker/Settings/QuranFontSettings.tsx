@@ -1,21 +1,19 @@
 import useTranslation from 'next-translate/useTranslation';
-import { shallowEqual, useSelector } from 'react-redux';
 
 import styles from '../MediaMaker.module.scss';
 
 import Section from '@/components/Navbar/SettingsDrawer/Section';
 import Counter from '@/dls/Counter/Counter';
-import { selectFontColor, selectQuranTextFontScale } from '@/redux/slices/mediaMaker';
 import { MAXIMUM_QURAN_FONT_STEP, MINIMUM_FONT_STEP } from '@/redux/slices/QuranReader/styles';
 
 type Props = {
   onSettingsUpdate: (settings: Record<string, any>) => void;
+  fontColor: string;
+  quranTextFontScale: number;
 };
 
-const QuranFontSection: React.FC<Props> = ({ onSettingsUpdate }) => {
+const QuranFontSection: React.FC<Props> = ({ onSettingsUpdate, quranTextFontScale, fontColor }) => {
   const { t } = useTranslation('quran-media-maker');
-  const quranTextFontScale = useSelector(selectQuranTextFontScale, shallowEqual);
-  const fontColor = useSelector(selectFontColor, shallowEqual);
 
   const onFontScaleDecreaseClicked = () => {
     const value = quranTextFontScale - 1;

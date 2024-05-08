@@ -1,18 +1,47 @@
+/* eslint-disable max-lines */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
 import { useRouter } from 'next/router';
 import { useSelector, shallowEqual } from 'react-redux';
 
 import { RootState } from '@/redux/RootState';
+import {
+  selectBackgroundColorId,
+  selectFontColor,
+  selectOpacity,
+  selectOrientation,
+  selectQuranTextFontScale,
+  selectReciter,
+  selectShouldHaveBorder,
+  selectSurah,
+  selectTranslationAlignment,
+  selectTranslationFontScale,
+  selectTranslations,
+  selectVerseAlignment,
+  selectVerseFrom,
+  selectVerseTo,
+  selectVideoId,
+} from '@/redux/slices/mediaMaker';
 import { selectWordByWordLocale } from '@/redux/slices/QuranReader/readingPreferences';
 import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
+import ChaptersData from '@/types/ChaptersData';
 import { areArraysEqual } from '@/utils/array';
 import {
   equalityCheckerByType,
   getQueryParamValueByType,
   QueryParamValueType,
 } from '@/utils/query-params';
-import { isValidTranslationsQueryParamValue } from '@/utils/queryParamValidator';
+import {
+  isValidAlignmentQueryParamValue,
+  isValidBackgroundColorIdQueryParamValue,
+  isValidBooleanQueryParamValue,
+  isValidFontScaleQueryParamValue,
+  isValidNumberQueryParamValue,
+  isValidOrientationQueryParamValue,
+  isValidReciterId,
+  isValidTranslationsQueryParamValue,
+} from '@/utils/queryParamValidator';
+import { isValidVerseKey, isValidChapterId } from '@/utils/validator';
 import QueryParam from 'types/QueryParam';
 
 const QUERY_PARAMS_DATA = {
@@ -26,8 +55,100 @@ const QUERY_PARAMS_DATA = {
     reduxSelector: selectWordByWordLocale,
     reduxEqualityFunction: shallowEqual,
     valueType: QueryParamValueType.String,
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    validate: (val) => true,
+    validate: () => true,
+  },
+  [QueryParam.VERSE_TO]: {
+    reduxSelector: selectVerseTo,
+    reduxEqualityFunction: shallowEqual,
+    valueType: QueryParamValueType.String,
+    validate: (val, chaptersData) => isValidVerseKey(chaptersData, val),
+  },
+  [QueryParam.VERSE_FROM]: {
+    reduxSelector: selectVerseFrom,
+    reduxEqualityFunction: shallowEqual,
+    valueType: QueryParamValueType.String,
+    validate: (val, chaptersData) => isValidVerseKey(chaptersData, val),
+  },
+  [QueryParam.MEDIA_TRANSLATIONS]: {
+    reduxSelector: selectTranslations,
+    reduxEqualityFunction: areArraysEqual,
+    valueType: QueryParamValueType.ArrayOfNumbers,
+    validate: (val) => isValidTranslationsQueryParamValue(val),
+  },
+  [QueryParam.SHOULD_HAVE_BORDER]: {
+    reduxSelector: selectShouldHaveBorder,
+    reduxEqualityFunction: shallowEqual,
+    valueType: QueryParamValueType.String,
+    validate: (val) => isValidBooleanQueryParamValue(val),
+  },
+  [QueryParam.BACKGROUND_COLOR_ID]: {
+    reduxSelector: selectBackgroundColorId,
+    reduxEqualityFunction: shallowEqual,
+    valueType: QueryParamValueType.Number,
+    validate: (val) => isValidBackgroundColorIdQueryParamValue(val),
+  },
+  [QueryParam.MEDIA_RECITER]: {
+    reduxSelector: selectReciter,
+    reduxEqualityFunction: shallowEqual,
+    valueType: QueryParamValueType.Number,
+    validate: (val) => isValidReciterId(val),
+  },
+  [QueryParam.QURAN_TEXT_FONT_SCALE]: {
+    reduxSelector: selectQuranTextFontScale,
+    reduxEqualityFunction: shallowEqual,
+    valueType: QueryParamValueType.Number,
+    validate: (val) => isValidFontScaleQueryParamValue(val),
+  },
+  [QueryParam.TRANSLATION_FONT_SCALE]: {
+    reduxSelector: selectTranslationFontScale,
+    reduxEqualityFunction: shallowEqual,
+    valueType: QueryParamValueType.Number,
+    validate: (val) => isValidFontScaleQueryParamValue(val),
+  },
+  [QueryParam.VERSE_ALIGNMENT]: {
+    reduxSelector: selectVerseAlignment,
+    reduxEqualityFunction: shallowEqual,
+    valueType: QueryParamValueType.String,
+    validate: (val) => isValidAlignmentQueryParamValue(val),
+  },
+  [QueryParam.TRANSLATION_ALIGNMENT]: {
+    reduxSelector: selectTranslationAlignment,
+    reduxEqualityFunction: shallowEqual,
+    valueType: QueryParamValueType.String,
+    validate: (val) => isValidAlignmentQueryParamValue(val),
+  },
+  [QueryParam.ORIENTATION]: {
+    reduxSelector: selectOrientation,
+    reduxEqualityFunction: shallowEqual,
+    valueType: QueryParamValueType.String,
+    validate: (val) => isValidOrientationQueryParamValue(val),
+  },
+  [QueryParam.SURAH]: {
+    reduxSelector: selectSurah,
+    reduxEqualityFunction: shallowEqual,
+    valueType: QueryParamValueType.Number,
+    validate: (val) => isValidChapterId(val),
+  },
+  [QueryParam.OPACITY]: {
+    reduxSelector: selectOpacity,
+    reduxEqualityFunction: shallowEqual,
+    valueType: QueryParamValueType.String,
+    // TODO: here
+    validate: () => true,
+  },
+  [QueryParam.FONT_COLOR]: {
+    reduxSelector: selectFontColor,
+    reduxEqualityFunction: shallowEqual,
+    valueType: QueryParamValueType.String,
+    // TODO: here
+    validate: () => true,
+  },
+  [QueryParam.VIDEO_ID]: {
+    reduxSelector: selectVideoId,
+    reduxEqualityFunction: shallowEqual,
+    valueType: QueryParamValueType.Number,
+    // TODO: here
+    validate: (val) => isValidNumberQueryParamValue(val),
   },
 } as Record<
   QueryParam,
@@ -35,7 +156,7 @@ const QUERY_PARAMS_DATA = {
     reduxSelector: (state: RootState) => any;
     valueType: QueryParamValueType;
     reduxEqualityFunction?: (left: any, right: any) => boolean;
-    validate: (val: any) => boolean;
+    validate: (val?: any, chaptersData?: ChaptersData) => boolean;
   }
 >;
 
@@ -49,8 +170,10 @@ const QUERY_PARAMS_DATA = {
  */
 const useGetQueryParamOrReduxValue = (
   queryParam: QueryParam,
+  chaptersData?: ChaptersData,
 ): { value: any; isQueryParamDifferent: boolean } => {
   const { query, isReady } = useRouter();
+
   let useSelectorArguments = [QUERY_PARAMS_DATA[queryParam].reduxSelector];
   if (QUERY_PARAMS_DATA[queryParam].reduxEqualityFunction) {
     useSelectorArguments = [
@@ -72,7 +195,7 @@ const useGetQueryParamOrReduxValue = (
     const { validate, valueType } = QUERY_PARAMS_DATA[queryParam];
 
     const paramStringValue = String(query[queryParam]);
-    const isValidValue = validate(paramStringValue);
+    const isValidValue = validate(paramStringValue, chaptersData);
     if (!isValidValue) {
       return { isQueryParamDifferent: false, value: selectedValue };
     }

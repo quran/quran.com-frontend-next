@@ -86,5 +86,8 @@ export const selectTranslationAlignment = (state: RootState) =>
   state.mediaMaker.translationAlignment;
 export const selectOrientation = (state: RootState) => state.mediaMaker.orientation;
 export const selectVideoId = (state: RootState) => state.mediaMaker.videoId;
+export const selectSurah = (state: RootState) => state.mediaMaker.surah;
+export const selectVerseFrom = (state: RootState) => state.mediaMaker.verseFrom;
+export const selectVerseTo = (state: RootState) => state.mediaMaker.verseTo;
 
 export default mediaGeneratorSlice.reducer;

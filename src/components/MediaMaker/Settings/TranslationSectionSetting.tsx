@@ -1,7 +1,6 @@
 import { useCallback, useMemo, useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
-import { shallowEqual, useSelector } from 'react-redux';
 
 import styles from '../MediaMaker.module.scss';
 
@@ -13,7 +12,6 @@ import Counter from '@/dls/Counter/Counter';
 import Modal from '@/dls/Modal/Modal';
 import SelectionCard from '@/dls/SelectionCard/SelectionCard';
 import Skeleton from '@/dls/Skeleton/Skeleton';
-import { selectTranslationFontScale, selectTranslations } from '@/redux/slices/mediaMaker';
 import {
   MAXIMUM_TRANSLATIONS_FONT_STEP,
   MINIMUM_FONT_STEP,
@@ -24,11 +22,15 @@ import { TranslationsResponse } from 'types/ApiResponses';
 
 type Props = {
   onSettingsUpdate: (settings: Record<string, any>) => void;
+  translations: number[];
+  translationFontScale: number;
 };
 
-const TranslationSettingsSection: React.FC<Props> = ({ onSettingsUpdate }) => {
-  const translations = useSelector(selectTranslations, shallowEqual);
-  const translationFontScale = useSelector(selectTranslationFontScale, shallowEqual);
+const TranslationSettingsSection: React.FC<Props> = ({
+  onSettingsUpdate,
+  translations,
+  translationFontScale,
+}) => {
   const { t, lang } = useTranslation('common');
   const [showTranslationsList, setShowTranslationsList] = useState(false);
 

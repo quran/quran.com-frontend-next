@@ -32,15 +32,14 @@ export const orientationToDimensions = (orientation: Orientation) => {
   };
 };
 
-export const getNormalizedTimestamps = (audio, framesPerSecond: number) => {
-  const result = [];
-  for (let i = 0; i < audio.verseTimings.length; i += 1) {
-    const currentVerse = audio.verseTimings[i];
-    result.push(
-      getNormalizedIntervals(currentVerse.timestampFrom, currentVerse.timestampTo, framesPerSecond),
+export const getNormalizedTimestamps = (audio: AudioData, framesPerSecond: number) => {
+  return audio.verseTimings.map((currentVerse) => {
+    return getNormalizedIntervals(
+      currentVerse.timestampFrom,
+      currentVerse.timestampTo,
+      framesPerSecond,
     );
-  }
-  return result;
+  });
 };
 
 export const getBackgroundVideoById = (id) => {
@@ -168,7 +167,7 @@ export const getDurationInFrames = (duration: number, framesPerSecond: number) =
 };
 
 export const prepareGenerateMediaFileRequestData = (data: GenerateMediaFileRequest) => {
-  const newData = { ...data };
+  const newData = { ...data, shouldHaveBorder: Boolean(data.shouldHaveBorder) };
 
   newData.video = {
     videoSrc: data.video.videoSrc,

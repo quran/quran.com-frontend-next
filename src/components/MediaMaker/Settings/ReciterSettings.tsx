@@ -1,21 +1,19 @@
 import React, { useMemo } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
-import { shallowEqual, useSelector } from 'react-redux';
 
 import Section from '@/components/Navbar/SettingsDrawer/Section';
 import Select from '@/dls/Forms/Select';
-import { selectReciter } from '@/redux/slices/mediaMaker';
 import Reciter from '@/types/Reciter';
 
 type Props = {
   reciters: Reciter[];
   onSettingsUpdate: (settings: Record<string, any>) => void;
+  reciter: number;
 };
 
-const ReciterSettings: React.FC<Props> = ({ reciters, onSettingsUpdate }) => {
+const ReciterSettings: React.FC<Props> = ({ reciters, onSettingsUpdate, reciter }) => {
   const { t } = useTranslation('quran-media-maker');
-  const reciter = useSelector(selectReciter, shallowEqual);
 
   const recitersOptions = useMemo(() => {
     const DEFAULT_RECITATION_STYLE = 'Murattal';
@@ -48,7 +46,7 @@ const ReciterSettings: React.FC<Props> = ({ reciters, onSettingsUpdate }) => {
           id="quranFontStyles"
           name="quranFontStyles"
           options={recitersOptions || []}
-          value={reciter}
+          value={String(reciter)}
           onChange={onReciterChange}
         />
       </Section.Row>

@@ -6,7 +6,7 @@ import { Player, PlayerRef } from '@remotion/player';
 import classNames from 'classnames';
 import { GetStaticProps, NextPage } from 'next';
 import useTranslation from 'next-translate/useTranslation';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import useSWRImmutable from 'swr/immutable';
 
 import { getAvailableReciters, getChapterAudioData, getChapterVerses } from '@/api';
@@ -15,9 +15,10 @@ import styles from '@/components/MediaMaker/MediaMaker.module.scss';
 import VideoSettings from '@/components/MediaMaker/Settings/VideoSettings';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import Spinner, { SpinnerSize } from '@/dls/Spinner/Spinner';
+import useGetMediaSettings from '@/hooks/auth/media/useGetMediaSettings';
 import Error from '@/pages/_error';
 import layoutStyles from '@/pages/index.module.scss';
-import { selectMediaMakerSettings, updateSettings } from '@/redux/slices/mediaMaker';
+import { updateSettings } from '@/redux/slices/mediaMaker';
 import { makeChapterAudioDataUrl, makeVersesUrl } from '@/utils/apiPaths';
 import { areArraysEqual } from '@/utils/array';
 import { getAllChaptersData } from '@/utils/chapter';
@@ -64,24 +65,24 @@ const MediaMaker: NextPage<MediaMaker> = ({
 }) => {
   const { t, lang } = useTranslation('common');
   const dispatch = useDispatch();
-
+  const mediaSettings = useGetMediaSettings();
   const {
-    shouldHaveBorder,
-    backgroundColorId,
-    opacity,
-    reciter,
-    quranTextFontScale,
-    translationFontScale,
-    translations,
-    fontColor,
-    verseAlignment,
-    translationAlignment,
-    orientation,
-    videoId,
     surah,
     verseFrom,
     verseTo,
-  } = useSelector(selectMediaMakerSettings);
+    reciter,
+    translations,
+    backgroundColorId,
+    opacity,
+    fontColor,
+    verseAlignment,
+    translationAlignment,
+    shouldHaveBorder,
+    videoId,
+    quranTextFontScale,
+    translationFontScale,
+    orientation,
+  } = mediaSettings;
 
   const API_PARAMS = useMemo(() => {
     return {
@@ -259,15 +260,13 @@ const MediaMaker: NextPage<MediaMaker> = ({
         <div className={layoutStyles.flow}>
           <VideoSettings
             chaptersList={chaptersList}
-            surah={surah}
             onChapterChange={onChapterChange}
             reciters={reciters}
             seekToBeginning={seekToBeginning}
             getCurrentFrame={getCurrentFrame}
             isFetching={isFetching}
-            verseFrom={verseFrom}
-            verseTo={verseTo}
             inputProps={inputProps}
+            mediaSettings={mediaSettings}
           />
         </div>
       </div>

@@ -1,20 +1,18 @@
 import classNames from 'classnames';
 import Image from 'next/image';
-import { useSelector } from 'react-redux';
 
 import styles from '../MediaMaker.module.scss';
 
-import { selectVideoId } from '@/redux/slices/mediaMaker';
 import { getVideosArray } from '@/utils/media/utils';
 
 const videos = getVideosArray();
 
 type Props = {
   onSettingsUpdate: (settings: Record<string, any>) => void;
+  videoId: number;
 };
 
-const BackgroundVideos: React.FC<Props> = ({ onSettingsUpdate }) => {
-  const videoId = useSelector(selectVideoId);
+const BackgroundVideos: React.FC<Props> = ({ onSettingsUpdate, videoId }) => {
   const onVideoSelected = (newVideId: number) => {
     onSettingsUpdate({ videoId: newVideId });
   };

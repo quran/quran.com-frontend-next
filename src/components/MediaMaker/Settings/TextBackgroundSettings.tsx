@@ -1,21 +1,23 @@
 import React from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
-import { shallowEqual, useSelector } from 'react-redux';
 
 import BackgroundColors from './BackgroundColors';
 
 import Section from '@/components/Navbar/SettingsDrawer/Section';
 import Switch from '@/dls/Switch/Switch';
-import { selectOpacity, selectShouldHaveBorder } from '@/redux/slices/mediaMaker';
 
 type Props = {
   onSettingsUpdate: (settings: Record<string, any>) => void;
+  opacity: string;
+  shouldHaveBorder: string;
 };
 
-const TextBackgroundSettings: React.FC<Props> = ({ onSettingsUpdate }) => {
-  const opacity = useSelector(selectOpacity, shallowEqual);
-  const shouldHaveBorder = useSelector(selectShouldHaveBorder, shallowEqual);
+const TextBackgroundSettings: React.FC<Props> = ({
+  onSettingsUpdate,
+  opacity,
+  shouldHaveBorder,
+}) => {
   const { t } = useTranslation('quran-media-maker');
 
   return (

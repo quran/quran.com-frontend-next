@@ -17,12 +17,7 @@ export const DEFAULT_QURAN_FONT_SCALE = 3;
 export const DEFAULT_TRANSLATION_FONT_SCALE = 3;
 export const DEFAULT_SHOULD_HAVE_BORDER = 'false';
 export const DEFAULT_VIDEO_ID = 4;
-
 export const DEFAULT_OPACITY = '0.2';
-export const DEFAULT_BACKGROUND = {
-  id: 1,
-  background: `linear-gradient(0deg, rgba(229,227,255,${DEFAULT_OPACITY}) 0%, rgba(230,246,235,${DEFAULT_OPACITY}) 50%, rgba(215,249,255,${DEFAULT_OPACITY}) 100%)`,
-};
 export const DEFAULT_FONT_COLOR = '#dddddd';
 export const COMPOSITION_NAME = 'MediaMakerContent';
 
