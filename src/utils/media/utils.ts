@@ -178,13 +178,7 @@ export const prepareGenerateMediaFileRequestData = (data: GenerateMediaFileReque
     newData.audio = {
       audioUrl: data.audio.audioUrl,
       duration: data.audio.duration,
-      verseTimings: data.audio.verseTimings.map((timing) => ({
-        timestampFrom: timing.timestampFrom,
-        timestampTo: timing.timestampTo,
-        duration: timing.duration,
-        segments: timing.segments,
-        verseKey: timing.verseKey,
-      })),
+      verseTimings: data.audio.verseTimings,
       reciterId: data.audio.reciterId,
     };
   } else {

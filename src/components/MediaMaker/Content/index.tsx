@@ -47,6 +47,13 @@ const MediaMakerContent: React.FC<Props> = ({
   orientation,
   chapterEnglishName,
 }) => {
+  const startFrom = audio?.verseTimings[0]?.normalizedStart
+    ? (audio?.verseTimings[0]?.normalizedStart / 1000) * 30
+    : (audio?.verseTimings[0]?.timestampFrom / 1000) * 30;
+  const endAt = audio?.verseTimings[0]?.normalizedEnd
+    ? (audio?.verseTimings[audio?.verseTimings?.length - 1]?.normalizedEnd / 1000) * 30
+    : (audio?.verseTimings[audio?.verseTimings?.length - 1]?.timestampTo / 1000) * 30;
+  const shouldRenderAudio = !!startFrom && !!endAt;
   return (
     <AbsoluteFill
       style={{
@@ -56,20 +63,9 @@ const MediaMakerContent: React.FC<Props> = ({
       <div className={styles.videoContainer}>
         <Video muted loop src={video.videoSrc} />
       </div>
-      <Audio
-        pauseWhenBuffering
-        startFrom={
-          audio?.verseTimings[0]?.normalizedStart
-            ? (audio?.verseTimings[0]?.normalizedStart / 1000) * 30
-            : (audio?.verseTimings[0]?.timestampFrom / 1000) * 30
-        }
-        endAt={
-          audio?.verseTimings[0]?.normalizedEnd
-            ? (audio.verseTimings[audio.verseTimings.length - 1].normalizedEnd / 1000) * 30
-            : (audio.verseTimings[audio.verseTimings.length - 1].timestampTo / 1000) * 30
-        }
-        src={audio.audioUrl}
-      />
+      {shouldRenderAudio && (
+        <Audio pauseWhenBuffering startFrom={startFrom} endAt={endAt} src={audio.audioUrl} />
+      )}
       {verses &&
         verses.length > 0 &&
         verses.map((verse, i) => {
