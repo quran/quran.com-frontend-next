@@ -75,3 +75,9 @@ export const isValidOpacityQueryParamValue = (value: string): boolean => {
   const OPACITY_VALUES = ['0', '0.2', '0.4', '0.6', '0.8', '1'];
   return OPACITY_VALUES.includes(value);
 };
+
+export const isValidVideoIdQueryParamValue = (value: string): boolean => {
+  const isValidNumber = isValidNumberQueryParamValue(value);
+  // 1 and 8 are the ranges of all the valid color ids {@see BACKGROUND_VIDEOS}
+  return isValidNumber && Number(value) >= 1 && Number(value) <= 6;
+};

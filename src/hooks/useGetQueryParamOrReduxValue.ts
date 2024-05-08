@@ -36,11 +36,11 @@ import {
   isValidBackgroundColorIdQueryParamValue,
   isValidBooleanQueryParamValue,
   isValidFontScaleQueryParamValue,
-  isValidNumberQueryParamValue,
   isValidOpacityQueryParamValue,
   isValidOrientationQueryParamValue,
   isValidReciterId,
   isValidTranslationsQueryParamValue,
+  isValidVideoIdQueryParamValue,
 } from '@/utils/queryParamValidator';
 import { isValidVerseKey, isValidChapterId } from '@/utils/validator';
 import QueryParam from 'types/QueryParam';
@@ -147,8 +147,7 @@ const QUERY_PARAMS_DATA = {
     reduxSelector: selectVideoId,
     reduxEqualityFunction: shallowEqual,
     valueType: QueryParamValueType.Number,
-    // TODO: here
-    validate: (val) => isValidNumberQueryParamValue(val),
+    validate: (val) => isValidVideoIdQueryParamValue(val),
   },
 } as Record<
   QueryParam,
