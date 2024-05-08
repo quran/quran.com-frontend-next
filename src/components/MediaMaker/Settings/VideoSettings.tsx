@@ -30,30 +30,26 @@ import { generateChapterVersesKeys } from '@/utils/verse';
 
 type Props = {
   chaptersList: any[];
-  chapter: number;
+  surah: number;
   onChapterChange: (val: any) => void;
   reciters: Reciter[];
   seekToBeginning: () => void;
   getCurrentFrame: () => void;
   isFetching: boolean;
   verseFrom: string;
-  setVerseFrom: (val: string) => void;
   verseTo: string;
-  setVerseTo: (val: string) => void;
   inputProps: any;
 };
 
 const VideoSettings: React.FC<Props> = ({
   chaptersList,
-  chapter,
+  surah,
   onChapterChange,
   reciters,
   seekToBeginning,
   isFetching,
   verseFrom,
-  setVerseFrom,
   verseTo,
-  setVerseTo,
   inputProps,
   getCurrentFrame,
 }) => {
@@ -71,13 +67,13 @@ const VideoSettings: React.FC<Props> = ({
   );
 
   const verseKeys = useMemo(() => {
-    return generateChapterVersesKeys(chaptersData, String(chapter)).map((verseKey) => ({
+    return generateChapterVersesKeys(chaptersData, String(surah)).map((verseKey) => ({
       id: verseKey,
       name: verseKey,
       value: verseKey,
       label: toLocalizedVerseKey(verseKey, lang),
     }));
-  }, [chaptersData, lang, chapter]);
+  }, [chaptersData, lang, surah]);
 
   const onVerseRangeChange = useCallback(
     (newSelectedVerseKey: string, verseSelectorId: RangeSelectorType) => {
@@ -91,12 +87,12 @@ const VideoSettings: React.FC<Props> = ({
         return;
       }
       if (isVerseKeyStartOfRange) {
-        setVerseFrom(newSelectedVerseKey);
+        dispatch(updateSettings({ verseFrom: newSelectedVerseKey }));
       } else {
-        setVerseTo(newSelectedVerseKey);
+        dispatch(updateSettings({ verseTo: newSelectedVerseKey }));
       }
     },
-    [setVerseFrom, setVerseTo, t, verseFrom, verseTo],
+    [dispatch, t, verseFrom, verseTo],
   );
 
   return (
@@ -122,7 +118,7 @@ const VideoSettings: React.FC<Props> = ({
                 id="quranFontStyles"
                 name="quranFontStyles"
                 options={chaptersList || []}
-                value={String(chapter)}
+                value={String(surah)}
                 onChange={onChapterChange}
                 disabled={isFetching}
               />

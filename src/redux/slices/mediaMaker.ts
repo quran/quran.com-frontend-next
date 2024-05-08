@@ -10,6 +10,7 @@ import {
   DEFAULT_QURAN_FONT_SCALE,
   DEFAULT_RECITER_ID,
   DEFAULT_SHOULD_HAVE_BORDER,
+  DEFAULT_SURAH,
   DEFAULT_TRANSLATION,
   DEFAULT_TRANSLATION_FONT_SCALE,
   DEFAULT_VIDEO_ID,
@@ -29,6 +30,9 @@ export type MediaMakerSettings = {
   translationAlignment: Alignment;
   orientation: Orientation;
   videoId: number;
+  surah: number;
+  verseFrom: string;
+  verseTo: string;
 };
 
 const initialState: MediaMakerSettings = {
@@ -44,6 +48,9 @@ const initialState: MediaMakerSettings = {
   translationAlignment: Alignment.CENTRE,
   orientation: Orientation.LANDSCAPE,
   videoId: DEFAULT_VIDEO_ID,
+  surah: DEFAULT_SURAH,
+  verseFrom: `${DEFAULT_SURAH}:1`,
+  verseTo: `${DEFAULT_SURAH}:1`,
 };
 
 export const mediaGeneratorSlice = createSlice({

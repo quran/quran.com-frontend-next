@@ -1,12 +1,12 @@
 /* eslint-disable react-func/max-lines-per-function */
 /* eslint-disable max-lines */
-import { useCallback, useMemo, useRef, useState } from 'react';
+import { useCallback, useMemo, useRef } from 'react';
 
 import { Player, PlayerRef } from '@remotion/player';
 import classNames from 'classnames';
 import { GetStaticProps, NextPage } from 'next';
 import useTranslation from 'next-translate/useTranslation';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import useSWRImmutable from 'swr/immutable';
 
 import { getAvailableReciters, getChapterAudioData, getChapterVerses } from '@/api';
@@ -17,7 +17,7 @@ import NextSeoWrapper from '@/components/NextSeoWrapper';
 import Spinner, { SpinnerSize } from '@/dls/Spinner/Spinner';
 import Error from '@/pages/_error';
 import layoutStyles from '@/pages/index.module.scss';
-import { selectMediaMakerSettings } from '@/redux/slices/mediaMaker';
+import { selectMediaMakerSettings, updateSettings } from '@/redux/slices/mediaMaker';
 import { makeChapterAudioDataUrl, makeVersesUrl } from '@/utils/apiPaths';
 import { areArraysEqual } from '@/utils/array';
 import { getAllChaptersData } from '@/utils/chapter';
@@ -63,6 +63,7 @@ const MediaMaker: NextPage<MediaMaker> = ({
   audio,
 }) => {
   const { t, lang } = useTranslation('common');
+  const dispatch = useDispatch();
 
   const {
     shouldHaveBorder,
@@ -77,10 +78,10 @@ const MediaMaker: NextPage<MediaMaker> = ({
     translationAlignment,
     orientation,
     videoId,
+    surah,
+    verseFrom,
+    verseTo,
   } = useSelector(selectMediaMakerSettings);
-  const [chapter, setChapter] = useState<number>(DEFAULT_SURAH);
-  const [verseFrom, setVerseFrom] = useState<string>(verses.verses[0].verseKey);
-  const [verseTo, setVerseTo] = useState<string>(verses.verses[verses.verses.length - 1].verseKey);
 
   const API_PARAMS = useMemo(() => {
     return {
@@ -108,8 +109,8 @@ const MediaMaker: NextPage<MediaMaker> = ({
     // TODO: handle error
     // error: versesError,
   } = useSWRImmutable(
-    makeVersesUrl(chapter, lang, API_PARAMS),
-    () => getChapterVerses(chapter, lang, API_PARAMS),
+    makeVersesUrl(surah, lang, API_PARAMS),
+    () => getChapterVerses(surah, lang, API_PARAMS),
     {
       fallbackData: verses,
       revalidateOnMount: hasVersesAPIParamsChanged,
@@ -122,18 +123,18 @@ const MediaMaker: NextPage<MediaMaker> = ({
     // TODO: handle error
     // error: audioError,
   } = useSWRImmutable(
-    makeChapterAudioDataUrl(reciter, chapter, true),
-    () => getChapterAudioData(reciter, chapter, true),
+    makeChapterAudioDataUrl(reciter, surah, true),
+    () => getChapterAudioData(reciter, surah, true),
     {
       fallbackData: audio,
       // only revalidate when the reciter or chapter has changed
-      revalidateOnMount: Number(reciter) !== DEFAULT_RECITER_ID || chapter !== DEFAULT_SURAH,
+      revalidateOnMount: Number(reciter) !== DEFAULT_RECITER_ID || surah !== DEFAULT_SURAH,
     },
   );
   const isFetching = isVersesValidating || isAudioValidating;
   const chapterEnglishName = useMemo<string>(() => {
-    return englishChaptersList[chapter]?.translatedName as string;
-  }, [chapter, englishChaptersList]);
+    return englishChaptersList[surah]?.translatedName as string;
+  }, [surah, englishChaptersList]);
   const playerRef = useRef<PlayerRef>(null);
   const getCurrentFrame = useCallback(() => {
     return playerRef?.current?.getCurrentFrame();
@@ -166,11 +167,15 @@ const MediaMaker: NextPage<MediaMaker> = ({
     (newChapter: string) => {
       const keyOfFirstVerseOfNewChapter = `${newChapter}:1`;
       seekToBeginning();
-      setVerseFrom(keyOfFirstVerseOfNewChapter);
-      setVerseTo(keyOfFirstVerseOfNewChapter);
-      setChapter(Number(newChapter));
+      dispatch(
+        updateSettings({
+          surah: Number(newChapter),
+          verseFrom: keyOfFirstVerseOfNewChapter,
+          verseTo: keyOfFirstVerseOfNewChapter,
+        }),
+      );
     },
-    [seekToBeginning],
+    [dispatch, seekToBeginning],
   );
 
   const inputProps = useMemo(() => {
@@ -254,16 +259,14 @@ const MediaMaker: NextPage<MediaMaker> = ({
         <div className={layoutStyles.flow}>
           <VideoSettings
             chaptersList={chaptersList}
-            chapter={chapter}
+            surah={surah}
             onChapterChange={onChapterChange}
             reciters={reciters}
             seekToBeginning={seekToBeginning}
             getCurrentFrame={getCurrentFrame}
             isFetching={isFetching}
             verseFrom={verseFrom}
-            setVerseFrom={setVerseFrom}
             verseTo={verseTo}
-            setVerseTo={setVerseTo}
             inputProps={inputProps}
           />
         </div>
