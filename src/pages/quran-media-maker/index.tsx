@@ -1,12 +1,13 @@
 /* eslint-disable react-func/max-lines-per-function */
 /* eslint-disable max-lines */
-import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import { useCallback, useMemo, useRef, useState } from 'react';
 
 import { Player, PlayerRef } from '@remotion/player';
 import classNames from 'classnames';
 import { GetStaticProps, NextPage } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 import { useSelector } from 'react-redux';
+import useSWRImmutable from 'swr/immutable';
 
 import { getAvailableReciters, getChapterAudioData, getChapterVerses } from '@/api';
 import MediaMakerContent from '@/components/MediaMaker/Content';
@@ -17,28 +18,29 @@ import Spinner, { SpinnerSize } from '@/dls/Spinner/Spinner';
 import Error from '@/pages/_error';
 import layoutStyles from '@/pages/index.module.scss';
 import { selectMediaMakerSettings } from '@/redux/slices/mediaMaker';
+import { makeChapterAudioDataUrl, makeVersesUrl } from '@/utils/apiPaths';
+import { areArraysEqual } from '@/utils/array';
 import { getAllChaptersData } from '@/utils/chapter';
-import { getLanguageAlternates, toLocalizedNumber, toLocalizedVerseKey } from '@/utils/locale';
+import { getLanguageAlternates, toLocalizedNumber } from '@/utils/locale';
 import {
   DEFAULT_API_PARAMS,
   VIDEO_FPS,
   DEFAULT_RECITER_ID,
   DEFAULT_SURAH,
-  getDefaultVerseKeys,
 } from '@/utils/media/constants';
 import {
   getNormalizedTimestamps,
-  getTrimmedAudio,
+  getCurrentRangesAudioData,
   getBackgroundVideoById,
   orientationToDimensions,
-  getVerseFromVerseKey,
+  getDurationInFrames,
 } from '@/utils/media/utils';
 import { getCanonicalUrl, getQuranMediaMakerNavigationUrl } from '@/utils/navigation';
 import {
   ONE_MONTH_REVALIDATION_PERIOD_SECONDS,
   REVALIDATION_PERIOD_ON_ERROR_SECONDS,
 } from '@/utils/staticPageGeneration';
-import { generateChapterVersesKeys } from '@/utils/verse';
+import { getVerseNumberFromKey } from '@/utils/verse';
 import { VersesResponse } from 'types/ApiResponses';
 import ChaptersData from 'types/ChaptersData';
 
@@ -48,22 +50,9 @@ interface MediaMaker {
   reciters: any;
   verses: any;
   audio: any;
-  defaultTimestamps: any;
   chaptersData: ChaptersData;
   englishChaptersList: ChaptersData;
 }
-
-/**
- * hmm, yes the public folder is always included in a webpack bundle.
- * we don't have a way to filter out specific files, but you can specify
- * a different public folder using the publicDir option for bundleSite().
- *
- * if you want to filter the public dir, you need to use bundle() with the
- * right publicPath (/sites/your-s3-subfolder), filter out the files from
- * the directoy that gets generated and then upload it to S3 manually. you
- * may use deploySite() source code as a reference:
- * https://github.com/remotion-dev/remotion/blob/main/packages/lambda/src/api/deploy-site.ts
- */
 
 const MediaMaker: NextPage<MediaMaker> = ({
   hasError,
@@ -72,7 +61,6 @@ const MediaMaker: NextPage<MediaMaker> = ({
   reciters,
   verses,
   audio,
-  defaultTimestamps,
 }) => {
   const { t, lang } = useTranslation('common');
 
@@ -90,40 +78,66 @@ const MediaMaker: NextPage<MediaMaker> = ({
     orientation,
     videoId,
   } = useSelector(selectMediaMakerSettings);
-  const [chapter, setChapter] = useState(DEFAULT_SURAH);
-  const [verseData, setVerseData] = useState(verses?.verses);
-  const [audioData, setAudioData] = useState(audio);
-  const [timestamps, setTimestamps] = useState(defaultTimestamps);
-  const [shouldSearchFetch, setShouldSearchFetch] = useState(false);
-  const [isFetching, setIsFetching] = useState(false);
-  const [verseFrom, setVerseFrom] = useState('');
-  const [verseTo, setVerseTo] = useState('');
-  const [verseKeys, setVerseKeys] = useState(getDefaultVerseKeys());
+  const [chapter, setChapter] = useState<number>(DEFAULT_SURAH);
+  const [verseFrom, setVerseFrom] = useState(verses.verses[0].verseKey);
+  const [verseTo, setVerseTo] = useState(verses.verses[verses.verses.length - 1].verseKey);
 
+  const API_PARAMS = useMemo(() => {
+    return {
+      ...DEFAULT_API_PARAMS,
+      translations,
+      from: verseFrom,
+      to: verseTo,
+      // the number of verses of the range
+      perPage: getVerseNumberFromKey(verseTo) - getVerseNumberFromKey(verseFrom) + 1,
+    };
+  }, [translations, verseFrom, verseTo]);
+
+  const hasVersesAPIParamsChanged = useMemo(() => {
+    return (
+      !areArraysEqual(translations, DEFAULT_API_PARAMS.translations) ||
+      verseFrom !== `${DEFAULT_SURAH}:1` ||
+      verseTo !== `${DEFAULT_SURAH}:1` ||
+      Number(reciter) !== DEFAULT_RECITER_ID
+    );
+  }, [translations, verseFrom, verseTo, reciter]);
+
+  const {
+    data: verseData,
+    isValidating: isVersesValidating,
+    // TODO: handle error
+    // error: versesError,
+  } = useSWRImmutable(
+    makeVersesUrl(chapter, lang, API_PARAMS),
+    () => getChapterVerses(chapter, lang, API_PARAMS),
+    {
+      fallbackData: verses,
+      revalidateOnMount: hasVersesAPIParamsChanged,
+    },
+  );
+
+  const {
+    data: chapterAudioData,
+    isValidating: isAudioValidating,
+    // TODO: handle error
+    // error: audioError,
+  } = useSWRImmutable(
+    makeChapterAudioDataUrl(reciter, chapter, true),
+    () => getChapterAudioData(reciter, chapter, true),
+    {
+      fallbackData: audio,
+      // only revalidate when the reciter or chapter has changed
+      revalidateOnMount: Number(reciter) !== DEFAULT_RECITER_ID || chapter !== DEFAULT_SURAH,
+    },
+  );
+  const isFetching = isVersesValidating || isAudioValidating;
   const chapterEnglishName = useMemo<string>(() => {
     return englishChaptersList[chapter]?.translatedName as string;
   }, [chapter, englishChaptersList]);
-
   const playerRef = useRef<PlayerRef>(null);
-
   const getCurrentFrame = useCallback(() => {
     return playerRef?.current?.getCurrentFrame();
   }, []);
-
-  const updateVerseKeys = useCallback(
-    (chapterId: number) => {
-      const keys = generateChapterVersesKeys(chaptersData, String(chapterId));
-      setVerseKeys(
-        keys.map((chapterVersesKey) => ({
-          id: chapterVersesKey,
-          name: chapterVersesKey,
-          value: chapterVersesKey,
-          label: toLocalizedVerseKey(chapterVersesKey, lang),
-        })),
-      );
-    },
-    [chaptersData, lang],
-  );
 
   const seekToBeginning = useCallback(() => {
     const { current } = playerRef;
@@ -136,62 +150,33 @@ const MediaMaker: NextPage<MediaMaker> = ({
     current.seekTo(0);
   }, []);
 
-  useEffect(() => {
-    let apiParams: any = {
-      ...DEFAULT_API_PARAMS,
-      translations,
-      perPage: chaptersData[chapter].versesCount,
-    };
+  const audioData = useMemo(() => {
+    return getCurrentRangesAudioData(
+      chapterAudioData,
+      getVerseNumberFromKey(verseFrom),
+      getVerseNumberFromKey(verseTo),
+    );
+  }, [chapterAudioData, verseFrom, verseTo]);
 
-    if (verseFrom) apiParams = { ...apiParams, from: verseFrom };
-    if (verseTo) apiParams = { ...apiParams, to: verseTo };
+  const timestamps = useMemo(() => {
+    return getNormalizedTimestamps(audioData, VIDEO_FPS);
+  }, [audioData]);
 
-    const fetchData = async () => {
-      const versesRes = await getChapterVerses(chapter, lang, apiParams);
-      const audioRes = await getChapterAudioData(reciter, chapter, true);
-      return [versesRes, audioRes];
-    };
-    setIsFetching(true);
-    fetchData()
-      .then(([versesRes, audioRes]) => {
-        seekToBeginning();
-        setVerseData((versesRes as any)?.verses);
-        const trimmedAudio = getTrimmedAudio(
-          audioRes,
-          getVerseFromVerseKey(verseFrom),
-          getVerseFromVerseKey(verseTo),
-        );
-        setAudioData(trimmedAudio);
-        setTimestamps(getNormalizedTimestamps(trimmedAudio));
-        updateVerseKeys(chapter);
-      })
-      .catch(() => {
-        // TODO: need a message to show the user
-        console.error('something went wrong');
-      })
-      .finally(() => setIsFetching(false));
-  }, [
-    reciter,
-    translations,
-    shouldSearchFetch,
-    chaptersData,
-    chapter,
-    verseFrom,
-    verseTo,
-    lang,
-    seekToBeginning,
-    updateVerseKeys,
-  ]);
+  const onChapterChange = useCallback(
+    (newChapter: string) => {
+      const keyOfFirstVerseOfNewChapter = `${newChapter}:1`;
+      seekToBeginning();
+      setVerseFrom(keyOfFirstVerseOfNewChapter);
+      setVerseTo(keyOfFirstVerseOfNewChapter);
+      setChapter(Number(newChapter));
+    },
+    [seekToBeginning],
+  );
 
-  const onChapterChange = useCallback((val) => {
-    setVerseFrom('');
-    setVerseTo('');
-    setChapter(val);
-  }, []);
-
+  // TODO: double check every one here
   const inputProps = useMemo(() => {
     return {
-      verses: verseData,
+      verses: verseData.verses,
       audio: audioData,
       timestamps,
       backgroundColorId,
@@ -206,7 +191,6 @@ const MediaMaker: NextPage<MediaMaker> = ({
       translations,
       orientation,
       videoId,
-      verseKeys,
       chapterEnglishName,
     };
   }, [
@@ -224,23 +208,16 @@ const MediaMaker: NextPage<MediaMaker> = ({
     translationFontScale,
     translations,
     orientation,
-    verseKeys,
     chapterEnglishName,
   ]);
 
   const chaptersList = useMemo(() => {
-    const flattenedChaptersList = Object.entries(chaptersData).map((r) => ({
-      id: r[0],
-      ...r[1],
+    return Object.entries(chaptersData).map(([id, chapterObj], index) => ({
+      id,
+      label: `${chapterObj.transliteratedName} (${toLocalizedNumber(index + 1, lang)})`,
+      value: id,
+      name: chapterObj.transliteratedName,
     }));
-    return flattenedChaptersList.map((chapterObj, index) => {
-      return {
-        id: chapterObj.id,
-        label: `${chapterObj.transliteratedName} (${toLocalizedNumber(index + 1, lang)})`,
-        value: chapterObj.id,
-        name: chapterObj.transliteratedName,
-      };
-    });
   }, [chaptersData, lang]);
 
   if (hasError) {
@@ -268,7 +245,7 @@ const MediaMaker: NextPage<MediaMaker> = ({
               className={styles.player}
               component={MediaMakerContent}
               inputProps={inputProps}
-              durationInFrames={Math.ceil(((audioData.duration + 500) / 1000) * VIDEO_FPS)}
+              durationInFrames={getDurationInFrames(audioData.duration, VIDEO_FPS)}
               compositionWidth={width}
               compositionHeight={height}
               fps={VIDEO_FPS}
@@ -278,7 +255,6 @@ const MediaMaker: NextPage<MediaMaker> = ({
           )}
         </div>
         <div className={layoutStyles.flow}>
-          {/* TODO: This is just bad. Rather store these settings in redux and persist than passing like this */}
           <VideoSettings
             chaptersList={chaptersList}
             chapter={chapter}
@@ -286,15 +262,12 @@ const MediaMaker: NextPage<MediaMaker> = ({
             reciters={reciters}
             seekToBeginning={seekToBeginning}
             getCurrentFrame={getCurrentFrame}
-            shouldSearchFetch={shouldSearchFetch}
-            setShouldSearchFetch={setShouldSearchFetch}
             isFetching={isFetching}
             verseFrom={verseFrom}
             setVerseFrom={setVerseFrom}
             verseTo={verseTo}
             setVerseTo={setVerseTo}
             inputProps={inputProps}
-            verseKeys={verseKeys}
           />
         </div>
       </div>
@@ -309,7 +282,6 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
     const englishChaptersList = await getAllChaptersData();
     const verses = await getChapterVerses(DEFAULT_SURAH, locale, DEFAULT_API_PARAMS);
     const chapterAudioData = await getChapterAudioData(DEFAULT_RECITER_ID, DEFAULT_SURAH, true);
-    const defaultTimestamps = getNormalizedTimestamps(chapterAudioData);
 
     return {
       props: {
@@ -317,7 +289,6 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
         verses,
         chaptersData,
         englishChaptersList,
-        defaultTimestamps,
         reciters: reciters || [],
       },
       revalidate: ONE_MONTH_REVALIDATION_PERIOD_SECONDS,

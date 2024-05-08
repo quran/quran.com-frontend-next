@@ -36,6 +36,13 @@
   padding-inline-end: 0;
 }
 
+.loadingContainer {
+  display: flex;
+  justify-content: center;
+  height: 100%;
+  flex-direction: column;
+}
+
 // juz layout (masonry layout)
 .settingsContainer {
   display: grid;
@@ -276,4 +283,8 @@
   button {
     width: 10rem;
   }
+}
+
+.error {
+  color: var(--color-text-error);
 }

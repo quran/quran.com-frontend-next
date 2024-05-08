@@ -1,5 +1,3 @@
-import { toLocalizedVerseKey } from '../locale';
-
 import defaultAudio from './defaultAudio.json';
 import defaultVerses from './defaultVerses.json';
 
@@ -33,24 +31,13 @@ const DEFAULT_TIMESTAMPS = [
     start: 0,
     durationInFrames: 90,
   },
-  {
-    start: 90,
-    durationInFrames: 76,
-  },
-  {
-    start: 166,
-    durationInFrames: 90,
-  },
-  {
-    start: 255,
-    durationInFrames: 146,
-  },
 ];
 
 export const DEFAULT_API_PARAMS = {
   wordFields: QuranFont.QPCHafs,
   translations: [DEFAULT_TRANSLATION],
   reciter: DEFAULT_RECITER_ID,
+  perPage: 1,
 };
 
 export enum Alignment {
@@ -114,21 +101,4 @@ export const DEFAULT_PROPS = {
   orientation: Orientation.LANDSCAPE,
   videoId: DEFAULT_VIDEO_ID,
   chapterEnglishName: 'The Sincerity',
-};
-
-export const REGION = 'us-east-1';
-// export const REGION = 'eu-north-1';
-export const SITE_NAME = 'quran-app';
-export const RAM = 2048;
-export const DISK = 2048;
-export const TIMEOUT = 240;
-
-export const getDefaultVerseKeys = (lang = 'en') => {
-  const keys = defaultVerses.map((verse) => `${verse.chapterId}:${verse.verseNumber}`);
-  return keys.map((chapterVersesKey) => ({
-    id: chapterVersesKey,
-    name: chapterVersesKey,
-    value: chapterVersesKey,
-    label: toLocalizedVerseKey(chapterVersesKey, lang),
-  }));
 };

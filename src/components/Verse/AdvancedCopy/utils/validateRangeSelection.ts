@@ -1,3 +1,5 @@
+import { Translate } from 'next-translate';
+
 import { getVerseNumberFromKey } from '@/utils/verse';
 
 /**
@@ -14,21 +16,18 @@ import { getVerseNumberFromKey } from '@/utils/verse';
 const validateRangeSelection = (
   selectedRangeStartVerseKey: string,
   selectedRangeEndVerseKey: string,
+  t: Translate,
 ): string | null => {
   // if one of them is empty.
   if (!selectedRangeStartVerseKey || !selectedRangeEndVerseKey) {
-    return 'Range start and end must have a value.';
-  }
-  // if both keys are the same.
-  if (selectedRangeStartVerseKey === selectedRangeEndVerseKey) {
-    return 'Range start and end should be different.';
+    return t('common:error.ranges-no-value');
   }
   // if the selected from verse number is higher than the selected to verse number.
   if (
     getVerseNumberFromKey(selectedRangeStartVerseKey) >
     getVerseNumberFromKey(selectedRangeEndVerseKey)
   ) {
-    return 'The starting verse has to be before the ending verse.';
+    return t('common:error.ranges-wrong-order');
   }
   return null;
 };

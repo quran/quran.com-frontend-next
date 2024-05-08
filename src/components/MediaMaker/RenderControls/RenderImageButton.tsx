@@ -16,9 +16,10 @@ import { getLoginNavigationUrl, getQuranMediaMakerNavigationUrl } from '@/utils/
 type Props = {
   inputProps: any;
   getCurrentFrame: () => void;
+  isFetching: boolean;
 };
 
-const RenderImageButton: React.FC<Props> = ({ inputProps, getCurrentFrame }) => {
+const RenderImageButton: React.FC<Props> = ({ inputProps, getCurrentFrame, isFetching }) => {
   const { t } = useTranslation('quran-media-maker');
   const { renderMedia, state } = useGenerateMediaFile(inputProps);
 
@@ -48,8 +49,8 @@ const RenderImageButton: React.FC<Props> = ({ inputProps, getCurrentFrame }) => 
         <>
           <Button
             prefix={<IconRender />}
-            isDisabled={state.status === RenderStatus.INVOKING}
-            isLoading={state.status === RenderStatus.INVOKING}
+            isDisabled={isFetching || state.status === RenderStatus.INVOKING}
+            isLoading={isFetching || state.status === RenderStatus.INVOKING}
             onClick={() => {
               if (isLoggedIn()) {
                 renderMedia(MediaType.IMAGE, { frame: getCurrentFrame() });
@@ -69,8 +70,8 @@ const RenderImageButton: React.FC<Props> = ({ inputProps, getCurrentFrame }) => 
         <>
           <Button
             prefix={<IconDownload />}
-            isDisabled={isRendering}
-            isLoading={isRendering}
+            isDisabled={isFetching || isRendering}
+            isLoading={isFetching || isRendering}
             href={state.status === RenderStatus.DONE ? state.url : ''}
           >
             <p ref={downloadButtonRef}>{t('download-video')}</p>

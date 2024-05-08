@@ -1,7 +1,9 @@
 /* eslint-disable max-lines */
 /* eslint-disable default-param-last */
 /* eslint-disable react-func/max-lines-per-function */
+import AudioData from '@/types/AudioData';
 import GenerateMediaFileRequest, { MediaType } from '@/types/Media/GenerateMediaFileRequest';
+import VerseTiming from '@/types/VerseTiming';
 import {
   BACKGROUND_VIDEOS,
   Orientation,
@@ -11,10 +13,9 @@ import {
   VIDEO_PORTRAIT_HEIGHT,
 } from '@/utils/media/constants';
 
-export const getNormalizedIntervals = (start, end) => {
-  const FRAMES = 30;
-  const normalizedStart = (start / 1000) * FRAMES;
-  const normalizedEnd = (end / 1000) * FRAMES;
+export const getNormalizedIntervals = (start, end, framesPerSecond: number) => {
+  const normalizedStart = (start / 1000) * framesPerSecond;
+  const normalizedEnd = (end / 1000) * framesPerSecond;
   const durationInFrames = normalizedEnd - normalizedStart;
 
   return {
@@ -31,11 +32,13 @@ export const orientationToDimensions = (orientation: Orientation) => {
   };
 };
 
-export const getNormalizedTimestamps = (audio) => {
+export const getNormalizedTimestamps = (audio, framesPerSecond: number) => {
   const result = [];
   for (let i = 0; i < audio.verseTimings.length; i += 1) {
     const currentVerse = audio.verseTimings[i];
-    result.push(getNormalizedIntervals(currentVerse.timestampFrom, currentVerse.timestampTo));
+    result.push(
+      getNormalizedIntervals(currentVerse.timestampFrom, currentVerse.timestampTo, framesPerSecond),
+    );
   }
   return result;
 };
@@ -104,62 +107,64 @@ export const getAllBackgrounds = (opacity = '0.8') => {
   ];
 };
 
-export const validateVerseRange = (from: number, to: number, versesCount: number) => {
-  const verseFrom = getVerseFromVerseKey(from) || 1;
-  const verseTo = getVerseFromVerseKey(to) || versesCount;
-  return verseFrom <= verseTo && verseFrom <= versesCount && verseTo <= versesCount;
-};
-
-export const getTrimmedAudio = (audio, from, to) => {
-  if (!from?.trim?.() && !to?.trim?.()) {
-    return audio;
-  }
-
-  const verseFrom = parseInt(from, 10);
-  const verseTo = parseInt(to || audio.verseTimings.length, 10); // user provided value or end of surah
-
-  const isRangeValid = validateVerseRange(from, to, audio.verseTimings.length);
-
-  if (!isRangeValid) {
-    return audio;
-  }
-
-  // when we modify full audio to get specific ranges, 'from' ayah
-  // e.g. 255 from full verses array becomes the 0 index in the new
-  // array. Similarly, to becomes how many more verses we want after.
-  const actualFrom = verseFrom <= 1 ? 1 : verseFrom;
-  const actualTo = verseTo - verseFrom;
-
-  const removedAudio = audio.verseTimings.slice(0, actualFrom - 1);
-  const removedDuration = removedAudio.reduce(
-    (acc, obj) => acc + (obj.duration >= 0 ? obj.duration : -1 * obj.duration),
+/**
+ * Get the total duration of the verse timings by
+ * subtracting the end time from the start time.
+ * We could have used the duration field in the verse timing
+ * but BE data is not consistent and sometimes the duration is null.
+ *
+ * @param {VerseTiming[]} verseTimings
+ * @returns {number}
+ */
+const getVerseTimingsDuration = (verseTimings: VerseTiming[]): number => {
+  return verseTimings.reduce(
+    (acc, verseTiming) => acc + Math.abs(verseTiming.timestampTo - verseTiming.timestampFrom),
     0,
   );
-
-  const res = audio;
-  res.verseTimings = res.verseTimings.slice(actualFrom - 1);
-  if (to) {
-    res.verseTimings = res.verseTimings.slice(0, actualTo + 1);
-  }
-  res.duration = res.verseTimings.reduce(
-    (acc, obj) => acc + (obj.duration >= 0 ? obj.duration : -1 * obj.duration),
-    0,
-  );
-  res.verseTimings = res.verseTimings.map((timing) => {
-    return {
-      ...timing,
-      normalizedStart: timing.timestampFrom,
-      normalizedEnd: timing.timestampTo,
-      timestampFrom: timing.timestampFrom - removedDuration,
-      timestampTo: timing.timestampTo - removedDuration,
-    };
-  });
-
-  return res;
 };
 
-export const getDurationInFrames = (duration: number) => {
-  return Math.ceil((duration / 1000) * 30);
+/**
+ * Get the audio data for the current range of verses
+ * out of the whole chapter audio data.
+ *
+ * @param {AudioData} chapterAudioData
+ * @param {number} fromVerseNumber
+ * @param {number} toVerseNumber
+ * @returns {AudioData}
+ */
+export const getCurrentRangesAudioData = (
+  chapterAudioData: AudioData,
+  fromVerseNumber: number,
+  toVerseNumber: number,
+): AudioData => {
+  const fromVerseIndex = fromVerseNumber - 1;
+  const toVerseIndex = toVerseNumber - 1;
+  // Remove the audio data outside the range of from and to verse
+  const removedAudioBeforeStartVerse = chapterAudioData.verseTimings.slice(0, fromVerseIndex);
+  const removedAudioAfterEndVerse = chapterAudioData.verseTimings.slice(toVerseIndex + 1);
+  const removedDurationBeforeStartVerse = getVerseTimingsDuration(removedAudioBeforeStartVerse);
+  const removedDurationAfterStartVerse = getVerseTimingsDuration(removedAudioAfterEndVerse);
+  const rangesChapterData = {
+    ...chapterAudioData,
+    verseTimings: chapterAudioData.verseTimings
+      .slice(fromVerseIndex, toVerseIndex + 1)
+      .map((timing) => ({
+        ...timing,
+        normalizedStart: timing.timestampFrom,
+        normalizedEnd: timing.timestampTo,
+        timestampFrom: timing.timestampFrom - removedDurationBeforeStartVerse,
+        timestampTo: timing.timestampTo - removedDurationBeforeStartVerse,
+      })),
+  };
+  // new total duration of the audio is the duration of the audio minus the removed duration
+  rangesChapterData.duration =
+    chapterAudioData.duration - (removedDurationBeforeStartVerse + removedDurationAfterStartVerse);
+
+  return rangesChapterData;
+};
+
+export const getDurationInFrames = (duration: number, framesPerSecond: number) => {
+  return Math.ceil((duration / 1000) * framesPerSecond);
 };
 
 export const prepareGenerateMediaFileRequestData = (data: GenerateMediaFileRequest) => {
@@ -206,13 +211,4 @@ export const prepareGenerateMediaFileRequestData = (data: GenerateMediaFileReque
   delete newData.verseKeys;
 
   return newData;
-};
-
-export const getVerseFromVerseKey = (verseKey: string, num = false) => {
-  if (!verseKey) {
-    return 1;
-  }
-
-  const res = verseKey.split(':')?.[1] || 1;
-  return num ? Number(res) : res;
 };

@@ -151,7 +151,9 @@
     "offline": "Looks like you lost your connection. Please check it and try again.",
     "pref-persist-fail": "Failed to sync your settings to the cloud.",
     "MediaVersesRangeLimitExceeded": "You can only select up to {{limit}} verses at a time. Please select a smaller range.",
-    "MediaFilesPerUserLimitExceeded": "You have reached the maximum monthly limit of ({{limit}})."
+    "MediaFilesPerUserLimitExceeded": "You have reached the maximum monthly limit of ({{limit}}).",
+    "ranges-no-value": "Range start and end must have a value",
+    "ranges-wrong-order": "The starting verse has to be before the ending verse."
   },
   "feedback": "Feedback",
   "fonts": {

@@ -53,7 +53,7 @@ const MediaMakerContent: React.FC<Props> = ({
       }}
     >
       <div className={styles.videoContainer}>
-        <Video pauseWhenBuffering loop src={video.videoSrc} />
+        <Video muted loop src={video.videoSrc} />
       </div>
       <Audio
         pauseWhenBuffering
@@ -147,8 +147,8 @@ const MediaMakerContent: React.FC<Props> = ({
             [styles.watermarkLight]: video.watermarkColor === WatermarkColor.LIGHT,
           })}
         >
-          <p>I made this on</p>
-          <p className={styles.logo}>Quran.com</p>
+          <div>I made this on</div>
+          <div className={styles.logo}>Quran.com</div>
         </div>
       </AbsoluteFill>
     </AbsoluteFill>

@@ -11,6 +11,7 @@ import layoutStyle from '@/pages/index.module.scss';
 type Props = {
   inputProps: MediaFileCompositionProps;
   getCurrentFrame: () => void;
+  isFetching: boolean;
 };
 
 export type MediaFileCompositionProps = {
@@ -24,11 +25,15 @@ export type MediaFileCompositionProps = {
   border: string;
 };
 
-const RenderControls: React.FC<Props> = ({ inputProps, getCurrentFrame }) => {
+const RenderControls: React.FC<Props> = ({ inputProps, getCurrentFrame, isFetching }) => {
   return (
     <div className={classNames(layoutStyle.flowItem, layoutStyle.fullWidth, styles.container)}>
-      <RenderVideoButton inputProps={inputProps} />
-      <RenderImageButton inputProps={inputProps} getCurrentFrame={getCurrentFrame} />
+      <RenderVideoButton isFetching={isFetching} inputProps={inputProps} />
+      <RenderImageButton
+        isFetching={isFetching}
+        inputProps={inputProps}
+        getCurrentFrame={getCurrentFrame}
+      />
     </div>
   );
 };

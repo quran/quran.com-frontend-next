@@ -1,4 +1,5 @@
-import { useCallback, useContext } from 'react';
+/* eslint-disable max-lines */
+import { useCallback, useContext, useMemo, useState } from 'react';
 
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
@@ -16,15 +17,14 @@ import TranslationSettingsSection from './TranslationSectionSetting';
 
 import Section from '@/components/Navbar/SettingsDrawer/Section';
 import { RangeSelectorType } from '@/components/Verse/AdvancedCopy/SelectorContainer';
+import validateRangeSelection from '@/components/Verse/AdvancedCopy/utils/validateRangeSelection';
 import VersesRangeSelector from '@/components/Verse/AdvancedCopy/VersesRangeSelector';
 import DataContext from '@/contexts/DataContext';
-import Button, { ButtonVariant } from '@/dls/Button/Button';
 import Select from '@/dls/Forms/Select';
-import IconSearch from '@/icons/search.svg';
 import layoutStyle from '@/pages/index.module.scss';
 import Reciter from '@/types/Reciter';
-import { getChapterData } from '@/utils/chapter';
-import { validateVerseRange } from '@/utils/media/utils';
+import { toLocalizedVerseKey } from '@/utils/locale';
+import { generateChapterVersesKeys } from '@/utils/verse';
 
 type Props = {
   chaptersList: any[];
@@ -33,15 +33,12 @@ type Props = {
   reciters: Reciter[];
   seekToBeginning: () => void;
   getCurrentFrame: () => void;
-  shouldSearchFetch: boolean;
-  setShouldSearchFetch: (val: boolean) => void;
   isFetching: boolean;
   verseFrom: string;
   setVerseFrom: (val: string) => void;
   verseTo: string;
   setVerseTo: (val: string) => void;
   inputProps: any;
-  verseKeys: any[];
 };
 
 const VideoSettings: React.FC<Props> = ({
@@ -50,8 +47,6 @@ const VideoSettings: React.FC<Props> = ({
   onChapterChange,
   reciters,
   seekToBeginning,
-  shouldSearchFetch,
-  setShouldSearchFetch,
   isFetching,
   verseFrom,
   setVerseFrom,
@@ -59,34 +54,47 @@ const VideoSettings: React.FC<Props> = ({
   setVerseTo,
   inputProps,
   getCurrentFrame,
-  verseKeys,
 }) => {
-  const { t } = useTranslation('quran-media-maker');
+  const { lang, t } = useTranslation('quran-media-maker');
   const chaptersData = useContext(DataContext);
+  const [rangesError, setRangesError] = useState(null);
 
-  const onSubmitSearchQuery = () => {
-    const { versesCount } = getChapterData(chaptersData, String(chapter));
-    const isValid = validateVerseRange(verseFrom, verseTo, versesCount);
-    if (!isValid) {
-      throw new Error('Invalid verse range');
-    }
-    setShouldSearchFetch(!shouldSearchFetch);
-  };
+  const verseKeys = useMemo(() => {
+    return generateChapterVersesKeys(chaptersData, String(chapter)).map((verseKey) => ({
+      id: verseKey,
+      name: verseKey,
+      value: verseKey,
+      label: toLocalizedVerseKey(verseKey, lang),
+    }));
+  }, [chaptersData, lang, chapter]);
 
   const onVerseRangeChange = useCallback(
-    (selectedName: string, verseSelectorId: RangeSelectorType) => {
-      if (verseSelectorId === RangeSelectorType.START) {
-        setVerseFrom(selectedName);
+    (newSelectedVerseKey: string, verseSelectorId: RangeSelectorType) => {
+      setRangesError(null);
+      const isVerseKeyStartOfRange = verseSelectorId === RangeSelectorType.START;
+      const startVerseKey = isVerseKeyStartOfRange ? newSelectedVerseKey : verseFrom;
+      const endVerseKey = !isVerseKeyStartOfRange ? newSelectedVerseKey : verseTo;
+      const validationError = validateRangeSelection(startVerseKey, endVerseKey, t);
+      if (validationError) {
+        setRangesError(validationError);
+        return;
+      }
+      if (isVerseKeyStartOfRange) {
+        setVerseFrom(newSelectedVerseKey);
       } else {
-        setVerseTo(selectedName);
+        setVerseTo(newSelectedVerseKey);
       }
     },
-    [setVerseFrom, setVerseTo],
+    [setVerseFrom, setVerseTo, t, verseFrom, verseTo],
   );
 
   return (
     <>
-      <RenderControls getCurrentFrame={getCurrentFrame} inputProps={inputProps} />
+      <RenderControls
+        isFetching={isFetching}
+        getCurrentFrame={getCurrentFrame}
+        inputProps={inputProps}
+      />
       <div
         className={classNames(
           layoutStyle.flowItem,
@@ -105,6 +113,7 @@ const VideoSettings: React.FC<Props> = ({
                 options={chaptersList || []}
                 value={String(chapter)}
                 onChange={onChapterChange}
+                disabled={isFetching}
               />
             </Section.Row>
             <Section.Label>
@@ -118,18 +127,11 @@ const VideoSettings: React.FC<Props> = ({
                   rangeEndVerse={verseTo}
                   onChange={onVerseRangeChange}
                   isVisible
+                  isDisabled={isFetching}
                 />
               </Section.Row>
-              <Button
-                tooltip={t('search')}
-                variant={ButtonVariant.Ghost}
-                onClick={onSubmitSearchQuery}
-                isDisabled={isFetching}
-                className={styles.verseRangeSearchButton}
-              >
-                <IconSearch />
-              </Button>
             </Section.Row>
+            {rangesError && <div className={styles.error}>{rangesError}</div>}
           </Section>
           <ReciterSettings reciters={reciters} />
           <QuranFontSettings />
