@@ -1,18 +1,21 @@
 import React from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
-import { shallowEqual, useSelector, useDispatch } from 'react-redux';
+import { shallowEqual, useSelector } from 'react-redux';
 
 import BackgroundColors from './BackgroundColors';
 
 import Section from '@/components/Navbar/SettingsDrawer/Section';
 import Switch from '@/dls/Switch/Switch';
-import { selectOpacity, selectShouldHaveBorder, updateSettings } from '@/redux/slices/mediaMaker';
+import { selectOpacity, selectShouldHaveBorder } from '@/redux/slices/mediaMaker';
 
-const TextBackgroundSettings = () => {
+type Props = {
+  onSettingsUpdate: (settings: Record<string, any>) => void;
+};
+
+const TextBackgroundSettings: React.FC<Props> = ({ onSettingsUpdate }) => {
   const opacity = useSelector(selectOpacity, shallowEqual);
   const shouldHaveBorder = useSelector(selectShouldHaveBorder, shallowEqual);
-  const dispatch = useDispatch();
   const { t } = useTranslation('quran-media-maker');
 
   return (
@@ -39,7 +42,7 @@ const TextBackgroundSettings = () => {
               if (newOpacity === opacity) {
                 return;
               }
-              dispatch(updateSettings({ opacity: newOpacity }));
+              onSettingsUpdate({ opacity: newOpacity });
             }}
           />
         </Section.Row>
@@ -53,7 +56,7 @@ const TextBackgroundSettings = () => {
             ]}
             selected={shouldHaveBorder.toString()}
             onSelect={(val) => {
-              dispatch(updateSettings({ shouldHaveBorder: val }));
+              onSettingsUpdate({ shouldHaveBorder: val });
             }}
           />
         </Section.Row>

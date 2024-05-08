@@ -1,29 +1,28 @@
 import React from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import Section from '@/components/Navbar/SettingsDrawer/Section';
 import Switch from '@/dls/Switch/Switch';
-import {
-  selectTranslationAlignment,
-  selectVerseAlignment,
-  updateSettings,
-} from '@/redux/slices/mediaMaker';
+import { selectTranslationAlignment, selectVerseAlignment } from '@/redux/slices/mediaMaker';
 import { Alignment, Orientation } from '@/utils/media/constants';
 
-const AlignmentsSettings = () => {
+type Props = {
+  onSettingsUpdate: (settings: Record<string, any>) => void;
+};
+
+const AlignmentsSettings: React.FC<Props> = ({ onSettingsUpdate }) => {
   const { t } = useTranslation('quran-media-maker');
   const translationAlignment = useSelector(selectTranslationAlignment);
   const verseAlignment = useSelector(selectVerseAlignment);
-  const dispatch = useDispatch();
 
   const onTranslationAlignmentChange = (val: Orientation) => {
-    dispatch(updateSettings({ translationAlignment: val }));
+    onSettingsUpdate({ translationAlignment: val });
   };
 
   const onVerseAlignmentChange = (val: Orientation) => {
-    dispatch(updateSettings({ verseAlignment: val }));
+    onSettingsUpdate({ verseAlignment: val });
   };
 
   return (

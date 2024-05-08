@@ -1,21 +1,21 @@
 import React, { useMemo } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
-import { shallowEqual, useSelector, useDispatch } from 'react-redux';
+import { shallowEqual, useSelector } from 'react-redux';
 
 import Section from '@/components/Navbar/SettingsDrawer/Section';
 import Select from '@/dls/Forms/Select';
-import { selectReciter, updateSettings } from '@/redux/slices/mediaMaker';
+import { selectReciter } from '@/redux/slices/mediaMaker';
 import Reciter from '@/types/Reciter';
 
 type Props = {
   reciters: Reciter[];
+  onSettingsUpdate: (settings: Record<string, any>) => void;
 };
 
-const ReciterSettings: React.FC<Props> = ({ reciters }) => {
+const ReciterSettings: React.FC<Props> = ({ reciters, onSettingsUpdate }) => {
   const { t } = useTranslation('quran-media-maker');
   const reciter = useSelector(selectReciter, shallowEqual);
-  const dispatch = useDispatch();
 
   const recitersOptions = useMemo(() => {
     const DEFAULT_RECITATION_STYLE = 'Murattal';
@@ -35,6 +35,10 @@ const ReciterSettings: React.FC<Props> = ({ reciters }) => {
     });
   }, [reciters]);
 
+  const onReciterChange = (newReciter) => {
+    onSettingsUpdate({ reciter: newReciter });
+  };
+
   return (
     <Section>
       <Section.Title>{t('common:reciter')}</Section.Title>
@@ -45,9 +49,7 @@ const ReciterSettings: React.FC<Props> = ({ reciters }) => {
           name="quranFontStyles"
           options={recitersOptions || []}
           value={reciter}
-          onChange={(newReciter) => {
-            dispatch(updateSettings({ reciter: newReciter }));
-          }}
+          onChange={onReciterChange}
         />
       </Section.Row>
     </Section>

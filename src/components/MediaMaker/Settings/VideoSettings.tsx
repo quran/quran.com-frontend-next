@@ -3,6 +3,7 @@ import { useCallback, useContext, useMemo, useState } from 'react';
 
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
+import { useDispatch } from 'react-redux';
 
 import styles from '../MediaMaker.module.scss';
 import RenderControls from '../RenderControls';
@@ -22,6 +23,7 @@ import VersesRangeSelector from '@/components/Verse/AdvancedCopy/VersesRangeSele
 import DataContext from '@/contexts/DataContext';
 import Select from '@/dls/Forms/Select';
 import layoutStyle from '@/pages/index.module.scss';
+import { updateSettings } from '@/redux/slices/mediaMaker';
 import Reciter from '@/types/Reciter';
 import { toLocalizedVerseKey } from '@/utils/locale';
 import { generateChapterVersesKeys } from '@/utils/verse';
@@ -58,6 +60,15 @@ const VideoSettings: React.FC<Props> = ({
   const { lang, t } = useTranslation('quran-media-maker');
   const chaptersData = useContext(DataContext);
   const [rangesError, setRangesError] = useState(null);
+  const dispatch = useDispatch();
+
+  const onSettingsUpdate = useCallback(
+    (settings: Record<string, any>) => {
+      seekToBeginning();
+      dispatch(updateSettings(settings));
+    },
+    [dispatch, seekToBeginning],
+  );
 
   const verseKeys = useMemo(() => {
     return generateChapterVersesKeys(chaptersData, String(chapter)).map((verseKey) => ({
@@ -133,26 +144,26 @@ const VideoSettings: React.FC<Props> = ({
             </Section.Row>
             {rangesError && <div className={styles.error}>{rangesError}</div>}
           </Section>
-          <ReciterSettings reciters={reciters} />
-          <QuranFontSettings />
-          <TranslationSettingsSection />
+          <ReciterSettings onSettingsUpdate={onSettingsUpdate} reciters={reciters} />
+          <QuranFontSettings onSettingsUpdate={onSettingsUpdate} />
+          <TranslationSettingsSection onSettingsUpdate={onSettingsUpdate} />
         </div>
         <div>
           <Section>
             <Section.Title>{t('video-picker')}</Section.Title>
             <Section.Row>
-              <BackgroundVideos seekToBeginning={seekToBeginning} />
+              <BackgroundVideos onSettingsUpdate={onSettingsUpdate} />
             </Section.Row>
           </Section>
         </div>
         <div>
-          <OrientationSettings />
+          <OrientationSettings onSettingsUpdate={onSettingsUpdate} />
         </div>
         <div>
-          <AlignmentsSettings />
+          <AlignmentsSettings onSettingsUpdate={onSettingsUpdate} />
         </div>
         <div>
-          <BackgroundSettings />
+          <BackgroundSettings onSettingsUpdate={onSettingsUpdate} />
         </div>
       </div>
     </>

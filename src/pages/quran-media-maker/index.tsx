@@ -79,8 +79,8 @@ const MediaMaker: NextPage<MediaMaker> = ({
     videoId,
   } = useSelector(selectMediaMakerSettings);
   const [chapter, setChapter] = useState<number>(DEFAULT_SURAH);
-  const [verseFrom, setVerseFrom] = useState(verses.verses[0].verseKey);
-  const [verseTo, setVerseTo] = useState(verses.verses[verses.verses.length - 1].verseKey);
+  const [verseFrom, setVerseFrom] = useState<string>(verses.verses[0].verseKey);
+  const [verseTo, setVerseTo] = useState<string>(verses.verses[verses.verses.length - 1].verseKey);
 
   const API_PARAMS = useMemo(() => {
     return {
@@ -173,7 +173,6 @@ const MediaMaker: NextPage<MediaMaker> = ({
     [seekToBeginning],
   );
 
-  // TODO: double check every one here
   const inputProps = useMemo(() => {
     return {
       verses: verseData.verses,
@@ -188,13 +187,12 @@ const MediaMaker: NextPage<MediaMaker> = ({
       video: getBackgroundVideoById(videoId),
       quranTextFontScale,
       translationFontScale,
-      translations,
       orientation,
       videoId,
       chapterEnglishName,
     };
   }, [
-    verseData,
+    verseData.verses,
     audioData,
     timestamps,
     backgroundColorId,
@@ -206,7 +204,6 @@ const MediaMaker: NextPage<MediaMaker> = ({
     videoId,
     quranTextFontScale,
     translationFontScale,
-    translations,
     orientation,
     chapterEnglishName,
   ]);

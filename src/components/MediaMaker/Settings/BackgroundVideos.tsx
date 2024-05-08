@@ -1,20 +1,22 @@
 import classNames from 'classnames';
 import Image from 'next/image';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import styles from '../MediaMaker.module.scss';
 
-import { selectVideoId, updateSettings } from '@/redux/slices/mediaMaker';
+import { selectVideoId } from '@/redux/slices/mediaMaker';
 import { getVideosArray } from '@/utils/media/utils';
 
 const videos = getVideosArray();
 
-const BackgroundVideos = ({ seekToBeginning }) => {
+type Props = {
+  onSettingsUpdate: (settings: Record<string, any>) => void;
+};
+
+const BackgroundVideos: React.FC<Props> = ({ onSettingsUpdate }) => {
   const videoId = useSelector(selectVideoId);
-  const dispatch = useDispatch();
   const onVideoSelected = (newVideId: number) => {
-    seekToBeginning();
-    dispatch(updateSettings({ videoId: newVideId }));
+    onSettingsUpdate({ videoId: newVideId });
   };
 
   return (

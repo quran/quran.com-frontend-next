@@ -1,7 +1,7 @@
 import { useCallback, useMemo, useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
-import { shallowEqual, useSelector, useDispatch } from 'react-redux';
+import { shallowEqual, useSelector } from 'react-redux';
 
 import styles from '../MediaMaker.module.scss';
 
@@ -13,11 +13,7 @@ import Counter from '@/dls/Counter/Counter';
 import Modal from '@/dls/Modal/Modal';
 import SelectionCard from '@/dls/SelectionCard/SelectionCard';
 import Skeleton from '@/dls/Skeleton/Skeleton';
-import {
-  selectTranslationFontScale,
-  selectTranslations,
-  updateSettings,
-} from '@/redux/slices/mediaMaker';
+import { selectTranslationFontScale, selectTranslations } from '@/redux/slices/mediaMaker';
 import {
   MAXIMUM_TRANSLATIONS_FONT_STEP,
   MINIMUM_FONT_STEP,
@@ -26,12 +22,15 @@ import { makeTranslationsUrl } from '@/utils/apiPaths';
 import { toLocalizedNumber } from '@/utils/locale';
 import { TranslationsResponse } from 'types/ApiResponses';
 
-const TranslationSettingsSection = () => {
+type Props = {
+  onSettingsUpdate: (settings: Record<string, any>) => void;
+};
+
+const TranslationSettingsSection: React.FC<Props> = ({ onSettingsUpdate }) => {
   const translations = useSelector(selectTranslations, shallowEqual);
   const translationFontScale = useSelector(selectTranslationFontScale, shallowEqual);
   const { t, lang } = useTranslation('common');
   const [showTranslationsList, setShowTranslationsList] = useState(false);
-  const dispatch = useDispatch();
 
   const translationLoading = useCallback(
     () => (
@@ -89,17 +88,17 @@ const TranslationSettingsSection = () => {
   );
 
   const clearTranslations = () => {
-    dispatch(updateSettings({ translations: [] }));
+    onSettingsUpdate({ translations: [] });
   };
 
   const onFontScaleDecreaseClicked = () => {
     const newValue = translationFontScale - 1;
-    dispatch(updateSettings({ translationFontScale: newValue }));
+    onSettingsUpdate({ translationFontScale: newValue });
   };
 
   const onFontScaleIncreaseClicked = () => {
     const newValue = translationFontScale + 1;
-    dispatch(updateSettings({ translationFontScale: newValue }));
+    onSettingsUpdate({ translationFontScale: newValue });
   };
 
   return (
