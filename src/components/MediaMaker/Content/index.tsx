@@ -53,7 +53,7 @@ const MediaMakerContent: React.FC<Props> = ({
   const endAt = audio?.verseTimings[0]?.normalizedEnd
     ? (audio?.verseTimings[audio?.verseTimings?.length - 1]?.normalizedEnd / 1000) * 30
     : (audio?.verseTimings[audio?.verseTimings?.length - 1]?.timestampTo / 1000) * 30;
-  const shouldRenderAudio = !!startFrom && !!endAt;
+  const shouldRenderAudio = (!!startFrom || startFrom === 0) && !!endAt;
   return (
     <AbsoluteFill
       style={{
