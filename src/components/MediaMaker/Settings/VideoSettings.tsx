@@ -31,7 +31,6 @@ import { generateChapterVersesKeys } from '@/utils/verse';
 
 type Props = {
   chaptersList: any[];
-  onChapterChange: (val: any) => void;
   reciters: Reciter[];
   seekToBeginning: () => void;
   getCurrentFrame: () => void;
@@ -42,7 +41,6 @@ type Props = {
 
 const VideoSettings: React.FC<Props> = ({
   chaptersList,
-  onChapterChange,
   reciters,
   seekToBeginning,
   isFetching,
@@ -55,6 +53,15 @@ const VideoSettings: React.FC<Props> = ({
   const [rangesError, setRangesError] = useState(null);
   const dispatch = useDispatch();
   const { verseFrom, verseTo, surah } = mediaSettings;
+
+  const onChapterChange = (newChapter: string) => {
+    const keyOfFirstVerseOfNewChapter = `${newChapter}:1`;
+    onSettingsUpdate({
+      surah: Number(newChapter),
+      verseFrom: keyOfFirstVerseOfNewChapter,
+      verseTo: keyOfFirstVerseOfNewChapter,
+    });
+  };
 
   const onSettingsUpdate = useCallback(
     (settings: Record<string, any>) => {

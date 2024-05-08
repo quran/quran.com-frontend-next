@@ -6,7 +6,6 @@ import { Player, PlayerRef } from '@remotion/player';
 import classNames from 'classnames';
 import { GetStaticProps, NextPage } from 'next';
 import useTranslation from 'next-translate/useTranslation';
-import { useDispatch } from 'react-redux';
 import useSWRImmutable from 'swr/immutable';
 
 import { getAvailableReciters, getChapterAudioData, getChapterVerses } from '@/api';
@@ -18,7 +17,6 @@ import Spinner, { SpinnerSize } from '@/dls/Spinner/Spinner';
 import useGetMediaSettings from '@/hooks/auth/media/useGetMediaSettings';
 import Error from '@/pages/_error';
 import layoutStyles from '@/pages/index.module.scss';
-import { updateSettings } from '@/redux/slices/mediaMaker';
 import { makeChapterAudioDataUrl, makeVersesUrl } from '@/utils/apiPaths';
 import { areArraysEqual } from '@/utils/array';
 import { getAllChaptersData } from '@/utils/chapter';
@@ -64,7 +62,6 @@ const MediaMaker: NextPage<MediaMaker> = ({
   audio,
 }) => {
   const { t, lang } = useTranslation('common');
-  const dispatch = useDispatch();
   const mediaSettings = useGetMediaSettings();
   const {
     surah,
@@ -164,21 +161,6 @@ const MediaMaker: NextPage<MediaMaker> = ({
     return getNormalizedTimestamps(audioData, VIDEO_FPS);
   }, [audioData]);
 
-  const onChapterChange = useCallback(
-    (newChapter: string) => {
-      const keyOfFirstVerseOfNewChapter = `${newChapter}:1`;
-      seekToBeginning();
-      dispatch(
-        updateSettings({
-          surah: Number(newChapter),
-          verseFrom: keyOfFirstVerseOfNewChapter,
-          verseTo: keyOfFirstVerseOfNewChapter,
-        }),
-      );
-    },
-    [dispatch, seekToBeginning],
-  );
-
   const inputProps = useMemo(() => {
     return {
       verses: verseData.verses,
@@ -260,7 +242,6 @@ const MediaMaker: NextPage<MediaMaker> = ({
         <div className={layoutStyles.flow}>
           <VideoSettings
             chaptersList={chaptersList}
-            onChapterChange={onChapterChange}
             reciters={reciters}
             seekToBeginning={seekToBeginning}
             getCurrentFrame={getCurrentFrame}
