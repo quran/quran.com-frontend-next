@@ -2,11 +2,7 @@ import Alignment from '../../types/Media/Alignment';
 import Orientation from '../../types/Media/Orientation';
 
 export const isValidTranslationsQueryParamValue = (value: string): boolean => {
-  // if it's empty string, we shouldn't consider it as a valid translation
-  if (!value) {
-    return false;
-  }
-  const translationIds = value.split(',');
+  const translationIds = value === '' ? [] : value.split(',');
   let isValid = true;
   for (let index = 0; index < translationIds.length; index += 1) {
     // if the value is empty

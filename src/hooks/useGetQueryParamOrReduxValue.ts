@@ -189,7 +189,7 @@ const useGetQueryParamOrReduxValue = (
 
   // TODO: this bit is identical to the one in useGetQueryParamOrXstateValue.ts, keep it DRY
   // if the param exists in the url
-  if (isReady && query[queryParam]) {
+  if (isReady && query[queryParam] !== undefined) {
     const { validate, valueType } = QUERY_PARAMS_DATA[queryParam];
 
     const paramStringValue = String(query[queryParam]);

@@ -10,7 +10,9 @@ export enum QueryParamValueType {
 
 const paramValueParser = {
   [QueryParamValueType.ArrayOfNumbers]: (paramStringValue: string) =>
-    paramStringValue.split(',').map((stringValue) => Number(stringValue)),
+    paramStringValue === ''
+      ? []
+      : paramStringValue.split(',').map((stringValue) => Number(stringValue)),
   [QueryParamValueType.ArrayOfStrings]: (paramStringValue: string) =>
     paramStringValue.split(',').map((stringValue) => stringValue),
   [QueryParamValueType.Number]: (paramStringValue: string) => Number(paramStringValue),

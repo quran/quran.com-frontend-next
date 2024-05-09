@@ -18,7 +18,7 @@ import {
 
 describe('isValidTranslationsQueryParamValue', () => {
   it('Returns false when empty', () => {
-    expect(isValidTranslationsQueryParamValue('')).toBe(false);
+    expect(isValidTranslationsQueryParamValue('')).toBe(true);
   });
   it('Returns true when 1 valid translation id exists', () => {
     expect(isValidTranslationsQueryParamValue('124')).toBe(true);
