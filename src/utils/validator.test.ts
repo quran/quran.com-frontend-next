@@ -2,7 +2,12 @@
 import { it, expect, describe } from 'vitest';
 
 import { getAllChaptersData } from './chapter';
-import { isValidVerseKey, isValidVerseRange, isRangesStringValid } from './validator';
+import {
+  isValidVerseKey,
+  isValidVerseRange,
+  isRangesStringValid,
+  isValidChapterId,
+} from './validator';
 
 describe('isValidVerseKey', async () => {
   const chaptersData = await getAllChaptersData();
@@ -110,5 +115,23 @@ describe('isRangesStringValid', async () => {
     it('Cross-Surah start bigger than end should fail', async () => {
       expect(isRangesStringValid(chaptersData, '2:1-1:1')).toEqual(false);
     });
+  });
+});
+
+describe('isValidChapterId', () => {
+  it('should return true for valid chapterId', () => {
+    expect(isValidChapterId('1')).toEqual(true);
+  });
+
+  it('should return false for non-numeric chapterId', () => {
+    expect(isValidChapterId('test')).toEqual(false);
+  });
+
+  it('should return false for chapterId greater than 114', () => {
+    expect(isValidChapterId('115')).toEqual(false);
+  });
+
+  it('should return false for chapterId less than 1', () => {
+    expect(isValidChapterId('0')).toEqual(false);
   });
 });

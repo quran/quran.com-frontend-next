@@ -64,11 +64,11 @@ export const isValidFontScaleQueryParamValue = (value: string): boolean => {
 };
 
 export const isValidAlignmentQueryParamValue = (value: string): boolean => {
-  return Alignment[value] !== undefined;
+  return Object.values(Alignment).includes(value as Alignment);
 };
 
 export const isValidOrientationQueryParamValue = (value: string): boolean => {
-  return Orientation[value] !== undefined;
+  return Object.values(Orientation).includes(value as Orientation);
 };
 
 export const isValidOpacityQueryParamValue = (value: string): boolean => {

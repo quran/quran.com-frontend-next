@@ -140,7 +140,6 @@ const QUERY_PARAMS_DATA = {
     reduxSelector: selectFontColor,
     reduxEqualityFunction: shallowEqual,
     valueType: QueryParamValueType.String,
-    // TODO: here
     validate: () => true,
   },
   [QueryParam.VIDEO_ID]: {

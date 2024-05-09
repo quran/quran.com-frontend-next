@@ -8,7 +8,6 @@ import Orientation from '@/types/Media/Orientation';
 import QueryParam from '@/types/QueryParam';
 
 // TODO: corner case when from and to are not valid. Also when surah and ranges are not in the same surah
-// TODO: write test cases
 const useGetMediaSettings = (): MediaSettings => {
   const chaptersData = useContext(DataContext);
   const { value: verseTo }: { value: string } = useGetQueryParamOrReduxValue(
