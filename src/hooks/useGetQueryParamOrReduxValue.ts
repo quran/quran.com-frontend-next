@@ -1,6 +1,8 @@
 /* eslint-disable max-lines */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
+import { ParsedUrlQuery } from 'querystring';
+
 import { useRouter } from 'next/router';
 import { useSelector, shallowEqual } from 'react-redux';
 
@@ -62,12 +64,14 @@ const QUERY_PARAMS_DATA = {
     reduxSelector: selectVerseTo,
     reduxEqualityFunction: shallowEqual,
     valueType: QueryParamValueType.String,
+    // TODO: corner case when from and to are not valid. Also when surah and ranges are not in the same surah or some of them exist in the query param
     validate: (val, chaptersData) => isValidVerseKey(chaptersData, val),
   },
   [QueryParam.VERSE_FROM]: {
     reduxSelector: selectVerseFrom,
     reduxEqualityFunction: shallowEqual,
     valueType: QueryParamValueType.String,
+    // TODO: corner case when from and to are not valid. Also when surah and ranges are not in the same surah or some of them exist in the query param
     validate: (val, chaptersData) => isValidVerseKey(chaptersData, val),
   },
   [QueryParam.MEDIA_TRANSLATIONS]: {
@@ -128,6 +132,7 @@ const QUERY_PARAMS_DATA = {
     reduxSelector: selectSurah,
     reduxEqualityFunction: shallowEqual,
     valueType: QueryParamValueType.Number,
+    // TODO: corner case when from and to are not valid. Also when surah and ranges are not in the same surah or some of them exist in the query param
     validate: (val) => isValidChapterId(val),
   },
   [QueryParam.OPACITY]: {
@@ -154,7 +159,7 @@ const QUERY_PARAMS_DATA = {
     reduxSelector: (state: RootState) => any;
     valueType: QueryParamValueType;
     reduxEqualityFunction?: (left: any, right: any) => boolean;
-    validate: (val?: any, chaptersData?: ChaptersData) => boolean;
+    validate: (val?: any, chaptersData?: ChaptersData, query?: ParsedUrlQuery) => boolean;
   }
 >;
 
@@ -181,26 +186,22 @@ const useGetQueryParamOrReduxValue = (
     ];
   }
   // @ts-ignore
-  const selectedValue = useSelector(...useSelectorArguments);
-  const valueDetails = {
-    value: selectedValue,
-    isQueryParamDifferent: false,
-  };
-
+  const reduxValue = useSelector(...useSelectorArguments);
   // TODO: this bit is identical to the one in useGetQueryParamOrXstateValue.ts, keep it DRY
   // if the param exists in the url
   if (isReady && query[queryParam] !== undefined) {
     const { validate, valueType } = QUERY_PARAMS_DATA[queryParam];
 
     const paramStringValue = String(query[queryParam]);
-    const isValidValue = validate(paramStringValue, chaptersData);
+    const isValidValue = validate(paramStringValue, chaptersData, query);
+    // if the url param is not valid, return the redux value
     if (!isValidValue) {
-      return { isQueryParamDifferent: false, value: selectedValue };
+      return { isQueryParamDifferent: false, value: reduxValue };
     }
 
     const parsedQueryParamValue = getQueryParamValueByType(paramStringValue, valueType);
     const checkEquality = equalityCheckerByType[valueType];
-    const isQueryParamDifferent = !checkEquality(parsedQueryParamValue, selectedValue);
+    const isQueryParamDifferent = !checkEquality(parsedQueryParamValue, reduxValue);
 
     return {
       value: parsedQueryParamValue,
@@ -208,7 +209,10 @@ const useGetQueryParamOrReduxValue = (
     };
   }
 
-  return valueDetails;
+  return {
+    value: reduxValue,
+    isQueryParamDifferent: false,
+  };
 };
 
 export default useGetQueryParamOrReduxValue;
