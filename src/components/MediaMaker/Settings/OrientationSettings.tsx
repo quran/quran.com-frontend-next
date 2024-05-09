@@ -6,10 +6,11 @@ import styles from '../MediaMaker.module.scss';
 
 import Section from '@/components/Navbar/SettingsDrawer/Section';
 import Switch from '@/dls/Switch/Switch';
+import { ChangedSettings } from '@/types/Media/MediaSettings';
 import Orientation from '@/types/Media/Orientation';
 
 type Props = {
-  onSettingsUpdate: (settings: Record<string, any>) => void;
+  onSettingsUpdate: (settings: ChangedSettings) => void;
   orientation: Orientation;
 };
 

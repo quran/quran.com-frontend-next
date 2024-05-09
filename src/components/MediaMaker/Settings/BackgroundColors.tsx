@@ -1,18 +1,19 @@
 import classNames from 'classnames';
-import { shallowEqual, useSelector, useDispatch } from 'react-redux';
 
 import styles from '../MediaMaker.module.scss';
 
-import { selectBackgroundColorId, updateSettings } from '@/redux/slices/mediaMaker';
+import { ChangedSettings } from '@/types/Media/MediaSettings';
 import { getAllBackgrounds } from '@/utils/media/utils';
 
 const COLORS = getAllBackgrounds();
+type Props = {
+  backgroundColorId: number;
+  onSettingsUpdate: (settings: ChangedSettings) => void;
+};
 
-const BackgroundColors = () => {
-  const dispatch = useDispatch();
-  const selectedBackgroundColorId = useSelector(selectBackgroundColorId, shallowEqual);
+const BackgroundColors: React.FC<Props> = ({ onSettingsUpdate, backgroundColorId }) => {
   const onBackgroundColorSelected = (colorId: number) => {
-    dispatch(updateSettings({ backgroundColorId: colorId }));
+    onSettingsUpdate({ backgroundColorId: colorId });
   };
 
   return (
@@ -23,7 +24,7 @@ const BackgroundColors = () => {
           // eslint-disable-next-line jsx-a11y/no-noninteractive-tabindex
           tabIndex={0}
           className={classNames(styles.colorBox, {
-            [styles.selectedSetting]: selectedBackgroundColorId === color.id,
+            [styles.selectedSetting]: backgroundColorId === color.id,
           })}
           onClick={() => {
             onBackgroundColorSelected(color.id);

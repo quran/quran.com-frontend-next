@@ -4,11 +4,12 @@ import useTranslation from 'next-translate/useTranslation';
 
 import Section from '@/components/Navbar/SettingsDrawer/Section';
 import Select from '@/dls/Forms/Select';
+import { ChangedSettings } from '@/types/Media/MediaSettings';
 import Reciter from '@/types/Reciter';
 
 type Props = {
   reciters: Reciter[];
-  onSettingsUpdate: (settings: Record<string, any>) => void;
+  onSettingsUpdate: (settings: ChangedSettings) => void;
   reciter: number;
 };
 

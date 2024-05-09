@@ -19,4 +19,8 @@ type MediaSettings = {
   surah: number;
 };
 
+export type ChangedSettings = {
+  [K in keyof MediaSettings]?: MediaSettings[K];
+};
+
 export default MediaSettings;

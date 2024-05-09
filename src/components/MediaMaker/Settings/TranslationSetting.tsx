@@ -3,7 +3,6 @@ import { useCallback, useState, useRef } from 'react';
 import groupBy from 'lodash/groupBy';
 import omit from 'lodash/omit';
 import useTranslation from 'next-translate/useTranslation';
-import { useDispatch } from 'react-redux';
 
 import styles from '../MediaMaker.module.scss';
 
@@ -13,7 +12,7 @@ import Checkbox from '@/dls/Forms/Checkbox/Checkbox';
 import Input from '@/dls/Forms/Input';
 import IconCancel from '@/icons/cancel.svg';
 import IconSearch from '@/icons/search.svg';
-import { updateSettings } from '@/redux/slices/mediaMaker';
+import { ChangedSettings } from '@/types/Media/MediaSettings';
 import { makeTranslationsUrl } from '@/utils/apiPaths';
 import filterTranslations from '@/utils/filter-translations';
 import { getLocaleName } from '@/utils/locale';
@@ -22,13 +21,13 @@ import AvailableTranslation from 'types/AvailableTranslation';
 
 type Props = {
   selectedTranslations: number[];
+  onSettingsUpdate: (settings: ChangedSettings) => void;
 };
 
-const TranslationSelectionBody: React.FC<Props> = ({ selectedTranslations }) => {
+const TranslationSelectionBody: React.FC<Props> = ({ selectedTranslations, onSettingsUpdate }) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { t, lang } = useTranslation('common');
   const [searchQuery, setSearchQuery] = useState('');
-  const dispatch = useDispatch();
   const inputRef = useRef(null);
 
   const onTranslationsChange = useCallback(
@@ -37,10 +36,10 @@ const TranslationSelectionBody: React.FC<Props> = ({ selectedTranslations }) => 
         const nextTranslations = isChecked
           ? [...selectedTranslations, selectedTranslationId]
           : selectedTranslations.filter((id) => id !== selectedTranslationId); // remove the id
-        dispatch(updateSettings({ translations: nextTranslations }));
+        onSettingsUpdate({ translations: nextTranslations });
       };
     },
-    [dispatch, selectedTranslations],
+    [onSettingsUpdate, selectedTranslations],
   );
 
   const clearSearch = useCallback(() => {

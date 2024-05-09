@@ -5,9 +5,10 @@ import useTranslation from 'next-translate/useTranslation';
 import Section from '@/components/Navbar/SettingsDrawer/Section';
 import Switch from '@/dls/Switch/Switch';
 import Alignment from '@/types/Media/Alignment';
+import { ChangedSettings } from '@/types/Media/MediaSettings';
 
 type Props = {
-  onSettingsUpdate: (settings: Record<string, any>) => void;
+  onSettingsUpdate: (settings: ChangedSettings) => void;
   translationAlignment: Alignment;
   verseAlignment: Alignment;
 };

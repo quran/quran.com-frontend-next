@@ -2,6 +2,7 @@
 import { useCallback, useContext, useMemo, useState } from 'react';
 
 import classNames from 'classnames';
+import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch } from 'react-redux';
 
@@ -24,10 +25,11 @@ import DataContext from '@/contexts/DataContext';
 import Select from '@/dls/Forms/Select';
 import layoutStyle from '@/pages/index.module.scss';
 import { updateSettings } from '@/redux/slices/mediaMaker';
-import MediaSettings from '@/types/Media/MediaSettings';
+import MediaSettings, { ChangedSettings } from '@/types/Media/MediaSettings';
+import QueryParam from '@/types/QueryParam';
 import Reciter from '@/types/Reciter';
 import { toLocalizedVerseKey } from '@/utils/locale';
-import { generateChapterVersesKeys } from '@/utils/verse';
+import { generateChapterVersesKeys, getChapterNumberFromKey } from '@/utils/verse';
 
 type Props = {
   chaptersList: any[];
@@ -38,6 +40,24 @@ type Props = {
   inputProps: any;
   mediaSettings: MediaSettings;
 };
+
+const MEDIA_SETTINGS_TO_QUERY_PARAM = {
+  verseTo: QueryParam.VERSE_TO,
+  verseFrom: QueryParam.VERSE_FROM,
+  shouldHaveBorder: QueryParam.SHOULD_HAVE_BORDER,
+  backgroundColorId: QueryParam.BACKGROUND_COLOR_ID,
+  opacity: QueryParam.OPACITY,
+  reciter: QueryParam.MEDIA_RECITER,
+  quranTextFontScale: QueryParam.QURAN_TEXT_FONT_SCALE,
+  translationFontScale: QueryParam.TRANSLATION_FONT_SCALE,
+  translations: QueryParam.MEDIA_TRANSLATIONS,
+  fontColor: QueryParam.FONT_COLOR,
+  verseAlignment: QueryParam.VERSE_ALIGNMENT,
+  translationAlignment: QueryParam.TRANSLATION_ALIGNMENT,
+  orientation: QueryParam.ORIENTATION,
+  videoId: QueryParam.VIDEO_ID,
+  surah: QueryParam.SURAH,
+} as Record<keyof MediaSettings, QueryParam>;
 
 const VideoSettings: React.FC<Props> = ({
   chaptersList,
@@ -52,7 +72,26 @@ const VideoSettings: React.FC<Props> = ({
   const chaptersData = useContext(DataContext);
   const [rangesError, setRangesError] = useState(null);
   const dispatch = useDispatch();
+  const router = useRouter();
   const { verseFrom, verseTo, surah } = mediaSettings;
+
+  const onSettingsUpdate = useCallback(
+    (settings: ChangedSettings) => {
+      seekToBeginning();
+      dispatch(updateSettings(settings));
+      Object.keys(settings).forEach((settingKey) => {
+        const toBeUpdatedQueryParamName =
+          MEDIA_SETTINGS_TO_QUERY_PARAM[settingKey as keyof MediaSettings];
+        const toBeUpdatedQueryParamValue = settings[settingKey];
+        router.query[toBeUpdatedQueryParamName] =
+          toBeUpdatedQueryParamName === QueryParam.MEDIA_TRANSLATIONS
+            ? toBeUpdatedQueryParamValue.join(',')
+            : toBeUpdatedQueryParamValue;
+      });
+      router.push(router, undefined, { shallow: true });
+    },
+    [dispatch, router, seekToBeginning],
+  );
 
   const onChapterChange = (newChapter: string) => {
     const keyOfFirstVerseOfNewChapter = `${newChapter}:1`;
@@ -62,14 +101,6 @@ const VideoSettings: React.FC<Props> = ({
       verseTo: keyOfFirstVerseOfNewChapter,
     });
   };
-
-  const onSettingsUpdate = useCallback(
-    (settings: Record<string, any>) => {
-      seekToBeginning();
-      dispatch(updateSettings(settings));
-    },
-    [dispatch, seekToBeginning],
-  );
 
   const verseKeys = useMemo(() => {
     return generateChapterVersesKeys(chaptersData, String(surah)).map((verseKey) => ({
@@ -92,12 +123,20 @@ const VideoSettings: React.FC<Props> = ({
         return;
       }
       if (isVerseKeyStartOfRange) {
-        dispatch(updateSettings({ verseFrom: newSelectedVerseKey }));
+        onSettingsUpdate({
+          verseTo,
+          verseFrom: newSelectedVerseKey,
+          surah: getChapterNumberFromKey(newSelectedVerseKey),
+        });
       } else {
-        dispatch(updateSettings({ verseTo: newSelectedVerseKey }));
+        onSettingsUpdate({
+          verseFrom,
+          verseTo: newSelectedVerseKey,
+          surah: getChapterNumberFromKey(newSelectedVerseKey),
+        });
       }
     },
-    [dispatch, t, verseFrom, verseTo],
+    [onSettingsUpdate, t, verseFrom, verseTo],
   );
 
   return (
@@ -188,6 +227,7 @@ const VideoSettings: React.FC<Props> = ({
         <div>
           <BackgroundSettings
             shouldHaveBorder={mediaSettings.shouldHaveBorder}
+            backgroundColorId={mediaSettings.backgroundColorId}
             opacity={mediaSettings.opacity}
             onSettingsUpdate={onSettingsUpdate}
           />

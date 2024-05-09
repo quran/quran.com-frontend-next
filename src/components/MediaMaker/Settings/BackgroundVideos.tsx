@@ -3,12 +3,13 @@ import Image from 'next/image';
 
 import styles from '../MediaMaker.module.scss';
 
+import { ChangedSettings } from '@/types/Media/MediaSettings';
 import { getVideosArray } from '@/utils/media/utils';
 
 const videos = getVideosArray();
 
 type Props = {
-  onSettingsUpdate: (settings: Record<string, any>) => void;
+  onSettingsUpdate: (settings: ChangedSettings) => void;
   videoId: number;
 };
 

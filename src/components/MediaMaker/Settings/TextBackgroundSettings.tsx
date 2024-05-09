@@ -6,17 +6,20 @@ import BackgroundColors from './BackgroundColors';
 
 import Section from '@/components/Navbar/SettingsDrawer/Section';
 import Switch from '@/dls/Switch/Switch';
+import { ChangedSettings } from '@/types/Media/MediaSettings';
 
 type Props = {
-  onSettingsUpdate: (settings: Record<string, any>) => void;
+  onSettingsUpdate: (settings: ChangedSettings) => void;
   opacity: string;
   shouldHaveBorder: string;
+  backgroundColorId: number;
 };
 
 const TextBackgroundSettings: React.FC<Props> = ({
   onSettingsUpdate,
   opacity,
   shouldHaveBorder,
+  backgroundColorId,
 }) => {
   const { t } = useTranslation('quran-media-maker');
 
@@ -24,7 +27,10 @@ const TextBackgroundSettings: React.FC<Props> = ({
     <Section>
       <Section.Title>{t('background')}</Section.Title>
       <Section.Row>
-        <BackgroundColors />
+        <BackgroundColors
+          backgroundColorId={backgroundColorId}
+          onSettingsUpdate={onSettingsUpdate}
+        />
       </Section.Row>
       <br />
       <>

@@ -3,6 +3,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 import { RootState } from '@/redux/RootState';
 import SliceName from '@/redux/types/SliceName';
 import Alignment from '@/types/Media/Alignment';
+import MediaSettings from '@/types/Media/MediaSettings';
 import Orientation from '@/types/Media/Orientation';
 import {
   DEFAULT_BACKGROUND_COLOR_ID,
@@ -17,25 +18,7 @@ import {
   DEFAULT_VIDEO_ID,
 } from '@/utils/media/constants';
 
-export type MediaMakerSettings = {
-  opacity: string;
-  shouldHaveBorder: string;
-  fontColor: string;
-  backgroundColorId: number;
-  reciter: number;
-  quranTextFontScale: number;
-  translationFontScale: number;
-  translations: number[];
-  verseAlignment: Alignment;
-  translationAlignment: Alignment;
-  orientation: Orientation;
-  videoId: number;
-  surah: number;
-  verseFrom: string;
-  verseTo: string;
-};
-
-const initialState: MediaMakerSettings = {
+const initialState: MediaSettings = {
   opacity: DEFAULT_OPACITY,
   shouldHaveBorder: DEFAULT_SHOULD_HAVE_BORDER,
   backgroundColorId: DEFAULT_BACKGROUND_COLOR_ID,
@@ -57,10 +40,7 @@ export const mediaGeneratorSlice = createSlice({
   name: SliceName.MEDIA_MAKER,
   initialState,
   reducers: {
-    updateSettings: (
-      state: MediaMakerSettings,
-      action: PayloadAction<Partial<MediaMakerSettings>>,
-    ) => {
+    updateSettings: (state: MediaSettings, action: PayloadAction<Partial<MediaSettings>>) => {
       return {
         ...state,
         ...action.payload,

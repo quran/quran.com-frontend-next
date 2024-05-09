@@ -5,9 +5,10 @@ import styles from '../MediaMaker.module.scss';
 import Section from '@/components/Navbar/SettingsDrawer/Section';
 import Counter from '@/dls/Counter/Counter';
 import { MAXIMUM_QURAN_FONT_STEP, MINIMUM_FONT_STEP } from '@/redux/slices/QuranReader/styles';
+import { ChangedSettings } from '@/types/Media/MediaSettings';
 
 type Props = {
-  onSettingsUpdate: (settings: Record<string, any>) => void;
+  onSettingsUpdate: (settings: ChangedSettings) => void;
   fontColor: string;
   quranTextFontScale: number;
 };
