@@ -45,39 +45,41 @@ const RenderImageButton: React.FC<Props> = ({ inputProps, getCurrentFrame, isFet
   return (
     <div>
       <MonthlyMediaFileCounter type={MediaType.IMAGE} />
-      {isInitOrInvokingOrError && (
-        <>
-          <Button
-            prefix={<IconRender />}
-            isDisabled={isFetching || state.status === RenderStatus.INVOKING}
-            isLoading={isFetching || state.status === RenderStatus.INVOKING}
-            onClick={() => {
-              if (isLoggedIn()) {
-                renderMedia(MediaType.IMAGE, { frame: getCurrentFrame() });
-              } else {
-                router.replace(getLoginNavigationUrl(getQuranMediaMakerNavigationUrl()));
-              }
-            }}
-          >
-            {t('render-image')}
-          </Button>
-          {state.status === RenderStatus.ERROR && (
-            <div>{state?.error?.message || t('common:error.general')}</div>
-          )}
-        </>
-      )}
-      {isRenderingOrDone && (
-        <>
-          <Button
-            prefix={<IconDownload />}
-            isDisabled={isFetching || isRendering}
-            isLoading={isFetching || isRendering}
-            href={state.status === RenderStatus.DONE ? state.url : ''}
-          >
-            <p ref={downloadButtonRef}>{t('download-video')}</p>
-          </Button>
-        </>
-      )}
+      <div>
+        {isInitOrInvokingOrError && (
+          <>
+            <Button
+              prefix={<IconRender />}
+              isDisabled={isFetching || state.status === RenderStatus.INVOKING}
+              isLoading={isFetching || state.status === RenderStatus.INVOKING}
+              onClick={() => {
+                if (isLoggedIn()) {
+                  renderMedia(MediaType.IMAGE, { frame: getCurrentFrame() });
+                } else {
+                  router.replace(getLoginNavigationUrl(getQuranMediaMakerNavigationUrl()));
+                }
+              }}
+            >
+              {t('render-image')}
+            </Button>
+            {state.status === RenderStatus.ERROR && (
+              <div>{state?.error?.message || t('common:error.general')}</div>
+            )}
+          </>
+        )}
+        {isRenderingOrDone && (
+          <>
+            <Button
+              prefix={<IconDownload />}
+              isDisabled={isFetching || isRendering}
+              isLoading={isFetching || isRendering}
+              href={state.status === RenderStatus.DONE ? state.url : ''}
+            >
+              <p ref={downloadButtonRef}>{t('download-video')}</p>
+            </Button>
+          </>
+        )}
+      </div>
     </div>
   );
 };

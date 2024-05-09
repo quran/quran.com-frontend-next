@@ -17,5 +17,7 @@
   "centre": "Centre",
   "justified": "Justified",
   "landscape": "Landscape",
-  "portrait": "Portrait"
+  "portrait": "Portrait",
+  "video-limit": "{{count}} generated videos out of {{limit}} this month",
+  "image-limit": "{{count}} generated images out of {{limit}} this month"
 }
