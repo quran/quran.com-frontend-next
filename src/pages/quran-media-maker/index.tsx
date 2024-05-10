@@ -225,6 +225,7 @@ const MediaMaker: NextPage<MediaMaker> = ({
     <>
       <NextSeoWrapper
         title={t('quran-media-maker:maker-title')}
+        description={t('quran-media-maker:maker-meta-desc')}
         url={getCanonicalUrl(lang, PATH)}
         languageAlternates={getLanguageAlternates(PATH)}
       />
