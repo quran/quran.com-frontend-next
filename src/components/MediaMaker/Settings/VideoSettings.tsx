@@ -22,7 +22,7 @@ import { RangeSelectorType } from '@/components/Verse/AdvancedCopy/SelectorConta
 import validateRangeSelection from '@/components/Verse/AdvancedCopy/utils/validateRangeSelection';
 import VersesRangeSelector from '@/components/Verse/AdvancedCopy/VersesRangeSelector';
 import DataContext from '@/contexts/DataContext';
-import Select from '@/dls/Forms/Select';
+import Select, { SelectSize } from '@/dls/Forms/Select';
 import layoutStyle from '@/pages/index.module.scss';
 import { updateSettings } from '@/redux/slices/mediaMaker';
 import MediaSettings, { ChangedSettings } from '@/types/Media/MediaSettings';
@@ -173,17 +173,16 @@ const VideoSettings: React.FC<Props> = ({
             <Section.Row>
               <Section.Label>{t('common:sidebar.search-surah')}</Section.Label>
               <Select
-                id="quranFontStyles"
-                name="quranFontStyles"
+                id="surah"
+                name="surah"
                 options={chaptersList || []}
                 value={String(surah)}
                 onChange={onChapterChange}
                 disabled={isFetching}
+                size={SelectSize.Small}
+                className={styles.select}
               />
             </Section.Row>
-            <Section.Label>
-              <span className={styles.versesLabel}>{t('common:verses')}</span>
-            </Section.Label>
             <Section.Row>
               <Section.Row>
                 <VersesRangeSelector

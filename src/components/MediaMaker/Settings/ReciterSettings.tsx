@@ -2,8 +2,10 @@ import React, { useMemo } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
+import styles from '../MediaMaker.module.scss';
+
 import Section from '@/components/Navbar/SettingsDrawer/Section';
-import Select from '@/dls/Forms/Select';
+import Select, { SelectSize } from '@/dls/Forms/Select';
 import { MediaSettingsProps } from '@/types/Media/MediaSettings';
 import Reciter from '@/types/Reciter';
 
@@ -43,11 +45,13 @@ const ReciterSettings: React.FC<Props> = ({ reciters, onSettingsUpdate, reciter 
       <Section.Row>
         <Section.Label>{t('common:audio.select-reciter')}</Section.Label>
         <Select
-          id="quranFontStyles"
-          name="quranFontStyles"
+          id="reciter"
+          name="reciter"
           options={recitersOptions || []}
           value={String(reciter)}
           onChange={onReciterChange}
+          size={SelectSize.Small}
+          className={styles.select}
         />
       </Section.Row>
     </Section>
