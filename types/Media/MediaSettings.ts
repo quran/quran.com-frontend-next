@@ -23,4 +23,8 @@ export type ChangedSettings = {
   [K in keyof MediaSettings]?: MediaSettings[K];
 };
 
+export interface MediaSettingsProps {
+  onSettingsUpdate: (settings: ChangedSettings, key: keyof MediaSettings, value: any) => void;
+}
+
 export default MediaSettings;

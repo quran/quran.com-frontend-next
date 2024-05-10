@@ -6,14 +6,13 @@ import BackgroundColors from './BackgroundColors';
 
 import Section from '@/components/Navbar/SettingsDrawer/Section';
 import Switch from '@/dls/Switch/Switch';
-import { ChangedSettings } from '@/types/Media/MediaSettings';
+import { MediaSettingsProps } from '@/types/Media/MediaSettings';
 
-type Props = {
-  onSettingsUpdate: (settings: ChangedSettings) => void;
+interface Props extends MediaSettingsProps {
   opacity: string;
   shouldHaveBorder: string;
   backgroundColorId: number;
-};
+}
 
 const TextBackgroundSettings: React.FC<Props> = ({
   onSettingsUpdate,
@@ -22,6 +21,21 @@ const TextBackgroundSettings: React.FC<Props> = ({
   backgroundColorId,
 }) => {
   const { t } = useTranslation('quran-media-maker');
+
+  const onOpacitySelect = (newOpacity: string) => {
+    if (newOpacity === opacity) {
+      return;
+    }
+    onSettingsUpdate({ opacity: newOpacity }, 'opacity', newOpacity);
+  };
+
+  const onShouldHaveBorderSelect = (newShouldHaveBorder: string) => {
+    onSettingsUpdate(
+      { shouldHaveBorder: newShouldHaveBorder },
+      'shouldHaveBorder',
+      newShouldHaveBorder,
+    );
+  };
 
   return (
     <Section>
@@ -46,12 +60,7 @@ const TextBackgroundSettings: React.FC<Props> = ({
               { name: '100%', value: '1' },
             ]}
             selected={opacity}
-            onSelect={(newOpacity) => {
-              if (newOpacity === opacity) {
-                return;
-              }
-              onSettingsUpdate({ opacity: newOpacity });
-            }}
+            onSelect={onOpacitySelect}
           />
         </Section.Row>
         <br />
@@ -63,9 +72,7 @@ const TextBackgroundSettings: React.FC<Props> = ({
               { name: 'No', value: 'false' },
             ]}
             selected={shouldHaveBorder.toString()}
-            onSelect={(val) => {
-              onSettingsUpdate({ shouldHaveBorder: val });
-            }}
+            onSelect={onShouldHaveBorderSelect}
           />
         </Section.Row>
       </>

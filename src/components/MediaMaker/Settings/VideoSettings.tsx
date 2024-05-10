@@ -28,6 +28,7 @@ import { updateSettings } from '@/redux/slices/mediaMaker';
 import MediaSettings, { ChangedSettings } from '@/types/Media/MediaSettings';
 import QueryParam from '@/types/QueryParam';
 import Reciter from '@/types/Reciter';
+import { logValueChange } from '@/utils/eventLogger';
 import { toLocalizedVerseKey } from '@/utils/locale';
 import { generateChapterVersesKeys, getChapterNumberFromKey } from '@/utils/verse';
 
@@ -76,7 +77,8 @@ const VideoSettings: React.FC<Props> = ({
   const { verseFrom, verseTo, surah } = mediaSettings;
 
   const onSettingsUpdate = useCallback(
-    (settings: ChangedSettings) => {
+    (settings: ChangedSettings, key: keyof MediaSettings, value: any) => {
+      logValueChange(`media_settings_${key}`, mediaSettings[key], value);
       seekToBeginning();
       dispatch(updateSettings(settings));
       Object.keys(settings).forEach((settingKey) => {
@@ -90,16 +92,20 @@ const VideoSettings: React.FC<Props> = ({
       });
       router.push(router, undefined, { shallow: true });
     },
-    [dispatch, router, seekToBeginning],
+    [dispatch, mediaSettings, router, seekToBeginning],
   );
 
   const onChapterChange = (newChapter: string) => {
     const keyOfFirstVerseOfNewChapter = `${newChapter}:1`;
-    onSettingsUpdate({
-      surah: Number(newChapter),
-      verseFrom: keyOfFirstVerseOfNewChapter,
-      verseTo: keyOfFirstVerseOfNewChapter,
-    });
+    onSettingsUpdate(
+      {
+        surah: Number(newChapter),
+        verseFrom: keyOfFirstVerseOfNewChapter,
+        verseTo: keyOfFirstVerseOfNewChapter,
+      },
+      'surah',
+      newChapter,
+    );
   };
 
   const verseKeys = useMemo(() => {
@@ -123,17 +129,25 @@ const VideoSettings: React.FC<Props> = ({
         return;
       }
       if (isVerseKeyStartOfRange) {
-        onSettingsUpdate({
-          verseTo,
-          verseFrom: newSelectedVerseKey,
-          surah: getChapterNumberFromKey(newSelectedVerseKey),
-        });
+        onSettingsUpdate(
+          {
+            verseTo,
+            verseFrom: newSelectedVerseKey,
+            surah: getChapterNumberFromKey(newSelectedVerseKey),
+          },
+          'verseFrom',
+          newSelectedVerseKey,
+        );
       } else {
-        onSettingsUpdate({
-          verseFrom,
-          verseTo: newSelectedVerseKey,
-          surah: getChapterNumberFromKey(newSelectedVerseKey),
-        });
+        onSettingsUpdate(
+          {
+            verseFrom,
+            verseTo: newSelectedVerseKey,
+            surah: getChapterNumberFromKey(newSelectedVerseKey),
+          },
+          'verseTo',
+          newSelectedVerseKey,
+        );
       }
     },
     [onSettingsUpdate, t, verseFrom, verseTo],

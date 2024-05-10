@@ -5,29 +5,28 @@ import styles from '../MediaMaker.module.scss';
 import Section from '@/components/Navbar/SettingsDrawer/Section';
 import Counter from '@/dls/Counter/Counter';
 import { MAXIMUM_QURAN_FONT_STEP, MINIMUM_FONT_STEP } from '@/redux/slices/QuranReader/styles';
-import { ChangedSettings } from '@/types/Media/MediaSettings';
+import { MediaSettingsProps } from '@/types/Media/MediaSettings';
 
-type Props = {
-  onSettingsUpdate: (settings: ChangedSettings) => void;
+interface Props extends MediaSettingsProps {
   fontColor: string;
   quranTextFontScale: number;
-};
+}
 
 const QuranFontSection: React.FC<Props> = ({ onSettingsUpdate, quranTextFontScale, fontColor }) => {
   const { t } = useTranslation('quran-media-maker');
 
   const onFontScaleDecreaseClicked = () => {
     const value = quranTextFontScale - 1;
-    onSettingsUpdate({ quranTextFontScale: value });
+    onSettingsUpdate({ quranTextFontScale: value }, 'quranTextFontScale', value);
   };
 
   const onFontScaleIncreaseClicked = () => {
     const value = quranTextFontScale + 1;
-    onSettingsUpdate({ quranTextFontScale: value });
+    onSettingsUpdate({ quranTextFontScale: value }, 'quranTextFontScale', value);
   };
 
   const onFontColorChange = (color: string) => {
-    onSettingsUpdate({ fontColor: color });
+    onSettingsUpdate({ fontColor: color }, 'fontColor', color);
   };
 
   return (

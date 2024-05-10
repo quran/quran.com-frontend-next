@@ -13,6 +13,7 @@ import IconDownload from '@/icons/download.svg';
 import IconRender from '@/icons/slow_motion_video.svg';
 import { MediaType } from '@/types/Media/GenerateMediaFileRequest';
 import { isLoggedIn } from '@/utils/auth/login';
+import { logButtonClick } from '@/utils/eventLogger';
 import { mutateGeneratedMediaCounter } from '@/utils/media/utils';
 import { getLoginNavigationUrl, getQuranMediaMakerNavigationUrl } from '@/utils/navigation';
 
@@ -26,6 +27,19 @@ const RenderVideoButton: React.FC<Props> = ({ inputProps, isFetching }) => {
   const { renderMedia, state } = useGenerateMediaFile(inputProps);
   const { data, mutate } = useGetMediaFilesCount(MediaType.VIDEO);
   const router = useRouter();
+
+  const onRenderClicked = () => {
+    logButtonClick('render_video');
+    if (isLoggedIn()) {
+      renderMedia(MediaType.VIDEO);
+    } else {
+      router.replace(getLoginNavigationUrl(getQuranMediaMakerNavigationUrl()));
+    }
+  };
+
+  const onDownloadClicked = () => {
+    logButtonClick('download_video');
+  };
 
   // listen to state changes and mutate if the render request has resolved successfully
   useEffect(() => {
@@ -53,13 +67,7 @@ const RenderVideoButton: React.FC<Props> = ({ inputProps, isFetching }) => {
               prefix={<IconRender />}
               isDisabled={isFetching || state.status === RenderStatus.INVOKING}
               isLoading={isFetching || state.status === RenderStatus.INVOKING}
-              onClick={() => {
-                if (isLoggedIn()) {
-                  renderMedia(MediaType.VIDEO);
-                } else {
-                  router.replace(getLoginNavigationUrl(getQuranMediaMakerNavigationUrl()));
-                }
-              }}
+              onClick={onRenderClicked}
             >
               {t('render-video')}
             </Button>
@@ -77,6 +85,7 @@ const RenderVideoButton: React.FC<Props> = ({ inputProps, isFetching }) => {
               isDisabled={isFetching || isRendering}
               isLoading={isFetching || isRendering}
               href={state.status === RenderStatus.DONE ? state.url : ''}
+              onClick={onDownloadClicked}
             >
               {t('download-video')}
             </Button>

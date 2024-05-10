@@ -3,19 +3,18 @@ import Image from 'next/image';
 
 import styles from '../MediaMaker.module.scss';
 
-import { ChangedSettings } from '@/types/Media/MediaSettings';
+import { MediaSettingsProps } from '@/types/Media/MediaSettings';
 import { getVideosArray } from '@/utils/media/utils';
 
 const videos = getVideosArray();
 
-type Props = {
-  onSettingsUpdate: (settings: ChangedSettings) => void;
+interface Props extends MediaSettingsProps {
   videoId: number;
-};
+}
 
 const BackgroundVideos: React.FC<Props> = ({ onSettingsUpdate, videoId }) => {
   const onVideoSelected = (newVideId: number) => {
-    onSettingsUpdate({ videoId: newVideId });
+    onSettingsUpdate({ videoId: newVideId }, 'videoId', newVideId);
   };
 
   return (

@@ -2,18 +2,17 @@ import classNames from 'classnames';
 
 import styles from '../MediaMaker.module.scss';
 
-import { ChangedSettings } from '@/types/Media/MediaSettings';
+import { MediaSettingsProps } from '@/types/Media/MediaSettings';
 import { getAllBackgrounds } from '@/utils/media/utils';
 
 const COLORS = getAllBackgrounds();
-type Props = {
+interface Props extends MediaSettingsProps {
   backgroundColorId: number;
-  onSettingsUpdate: (settings: ChangedSettings) => void;
-};
+}
 
 const BackgroundColors: React.FC<Props> = ({ onSettingsUpdate, backgroundColorId }) => {
   const onBackgroundColorSelected = (colorId: number) => {
-    onSettingsUpdate({ backgroundColorId: colorId });
+    onSettingsUpdate({ backgroundColorId: colorId }, 'backgroundColorId', colorId);
   };
 
   return (

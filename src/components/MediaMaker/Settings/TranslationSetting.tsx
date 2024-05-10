@@ -12,17 +12,16 @@ import Checkbox from '@/dls/Forms/Checkbox/Checkbox';
 import Input from '@/dls/Forms/Input';
 import IconCancel from '@/icons/cancel.svg';
 import IconSearch from '@/icons/search.svg';
-import { ChangedSettings } from '@/types/Media/MediaSettings';
+import { MediaSettingsProps } from '@/types/Media/MediaSettings';
 import { makeTranslationsUrl } from '@/utils/apiPaths';
 import filterTranslations from '@/utils/filter-translations';
 import { getLocaleName } from '@/utils/locale';
 import { TranslationsResponse } from 'types/ApiResponses';
 import AvailableTranslation from 'types/AvailableTranslation';
 
-type Props = {
+interface Props extends MediaSettingsProps {
   selectedTranslations: number[];
-  onSettingsUpdate: (settings: ChangedSettings) => void;
-};
+}
 
 const TranslationSelectionBody: React.FC<Props> = ({ selectedTranslations, onSettingsUpdate }) => {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -36,7 +35,7 @@ const TranslationSelectionBody: React.FC<Props> = ({ selectedTranslations, onSet
         const nextTranslations = isChecked
           ? [...selectedTranslations, selectedTranslationId]
           : selectedTranslations.filter((id) => id !== selectedTranslationId); // remove the id
-        onSettingsUpdate({ translations: nextTranslations });
+        onSettingsUpdate({ translations: nextTranslations }, 'translations', nextTranslations);
       };
     },
     [onSettingsUpdate, selectedTranslations],

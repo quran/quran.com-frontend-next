@@ -12,6 +12,7 @@ import IconDownload from '@/icons/download.svg';
 import IconRender from '@/icons/slow_motion_video.svg';
 import { MediaType } from '@/types/Media/GenerateMediaFileRequest';
 import { isLoggedIn } from '@/utils/auth/login';
+import { logButtonClick } from '@/utils/eventLogger';
 import { mutateGeneratedMediaCounter } from '@/utils/media/utils';
 import { getLoginNavigationUrl, getQuranMediaMakerNavigationUrl } from '@/utils/navigation';
 
@@ -28,6 +29,19 @@ const RenderImageButton: React.FC<Props> = ({ inputProps, getCurrentFrame, isFet
 
   const router = useRouter();
   const downloadButtonRef = React.useRef<HTMLParagraphElement>();
+
+  const onRenderClicked = () => {
+    logButtonClick('render_image');
+    if (isLoggedIn()) {
+      renderMedia(MediaType.IMAGE, { frame: getCurrentFrame() });
+    } else {
+      router.replace(getLoginNavigationUrl(getQuranMediaMakerNavigationUrl()));
+    }
+  };
+
+  const onDownloadClicked = () => {
+    logButtonClick('download_image');
+  };
 
   const isInitOrInvokingOrError = [
     RenderStatus.INIT,
@@ -57,13 +71,7 @@ const RenderImageButton: React.FC<Props> = ({ inputProps, getCurrentFrame, isFet
               prefix={<IconRender />}
               isDisabled={isFetching || state.status === RenderStatus.INVOKING}
               isLoading={isFetching || state.status === RenderStatus.INVOKING}
-              onClick={() => {
-                if (isLoggedIn()) {
-                  renderMedia(MediaType.IMAGE, { frame: getCurrentFrame() });
-                } else {
-                  router.replace(getLoginNavigationUrl(getQuranMediaMakerNavigationUrl()));
-                }
-              }}
+              onClick={onRenderClicked}
             >
               {t('render-image')}
             </Button>
@@ -79,6 +87,7 @@ const RenderImageButton: React.FC<Props> = ({ inputProps, getCurrentFrame, isFet
               isDisabled={isFetching || isRendering}
               isLoading={isFetching || isRendering}
               href={state.status === RenderStatus.DONE ? state.url : ''}
+              onClick={onDownloadClicked}
             >
               <p ref={downloadButtonRef}>{t('download-video')}</p>
             </Button>

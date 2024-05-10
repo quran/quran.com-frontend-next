@@ -6,19 +6,18 @@ import styles from '../MediaMaker.module.scss';
 
 import Section from '@/components/Navbar/SettingsDrawer/Section';
 import Switch from '@/dls/Switch/Switch';
-import { ChangedSettings } from '@/types/Media/MediaSettings';
+import { MediaSettingsProps } from '@/types/Media/MediaSettings';
 import Orientation from '@/types/Media/Orientation';
 
-type Props = {
-  onSettingsUpdate: (settings: ChangedSettings) => void;
+interface Props extends MediaSettingsProps {
   orientation: Orientation;
-};
+}
 
 const OrientationSettings: React.FC<Props> = ({ onSettingsUpdate, orientation }) => {
   const { t } = useTranslation('quran-media-maker');
 
   const onOrientationChange = (val: Orientation) => {
-    onSettingsUpdate({ orientation: val });
+    onSettingsUpdate({ orientation: val }, 'orientation', val);
   };
 
   return (

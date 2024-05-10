@@ -5,13 +5,12 @@ import useTranslation from 'next-translate/useTranslation';
 import Section from '@/components/Navbar/SettingsDrawer/Section';
 import Switch from '@/dls/Switch/Switch';
 import Alignment from '@/types/Media/Alignment';
-import { ChangedSettings } from '@/types/Media/MediaSettings';
+import { MediaSettingsProps } from '@/types/Media/MediaSettings';
 
-type Props = {
-  onSettingsUpdate: (settings: ChangedSettings) => void;
+interface Props extends MediaSettingsProps {
   translationAlignment: Alignment;
   verseAlignment: Alignment;
-};
+}
 
 const AlignmentsSettings: React.FC<Props> = ({
   onSettingsUpdate,
@@ -21,11 +20,11 @@ const AlignmentsSettings: React.FC<Props> = ({
   const { t } = useTranslation('quran-media-maker');
 
   const onTranslationAlignmentChange = (val: Alignment) => {
-    onSettingsUpdate({ translationAlignment: val });
+    onSettingsUpdate({ translationAlignment: val }, 'translationAlignment', val);
   };
 
   const onVerseAlignmentChange = (val: Alignment) => {
-    onSettingsUpdate({ verseAlignment: val });
+    onSettingsUpdate({ verseAlignment: val }, 'verseAlignment', val);
   };
 
   return (

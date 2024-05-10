@@ -4,14 +4,13 @@ import useTranslation from 'next-translate/useTranslation';
 
 import Section from '@/components/Navbar/SettingsDrawer/Section';
 import Select from '@/dls/Forms/Select';
-import { ChangedSettings } from '@/types/Media/MediaSettings';
+import { MediaSettingsProps } from '@/types/Media/MediaSettings';
 import Reciter from '@/types/Reciter';
 
-type Props = {
+interface Props extends MediaSettingsProps {
   reciters: Reciter[];
-  onSettingsUpdate: (settings: ChangedSettings) => void;
   reciter: number;
-};
+}
 
 const ReciterSettings: React.FC<Props> = ({ reciters, onSettingsUpdate, reciter }) => {
   const { t } = useTranslation('quran-media-maker');
@@ -35,7 +34,7 @@ const ReciterSettings: React.FC<Props> = ({ reciters, onSettingsUpdate, reciter 
   }, [reciters]);
 
   const onReciterChange = (newReciter) => {
-    onSettingsUpdate({ reciter: newReciter });
+    onSettingsUpdate({ reciter: newReciter }, 'reciter', newReciter);
   };
 
   return (

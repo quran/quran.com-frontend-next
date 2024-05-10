@@ -16,16 +16,15 @@ import {
   MAXIMUM_TRANSLATIONS_FONT_STEP,
   MINIMUM_FONT_STEP,
 } from '@/redux/slices/QuranReader/styles';
-import { ChangedSettings } from '@/types/Media/MediaSettings';
+import { MediaSettingsProps } from '@/types/Media/MediaSettings';
 import { makeTranslationsUrl } from '@/utils/apiPaths';
 import { toLocalizedNumber } from '@/utils/locale';
 import { TranslationsResponse } from 'types/ApiResponses';
 
-type Props = {
-  onSettingsUpdate: (settings: ChangedSettings) => void;
+interface Props extends MediaSettingsProps {
   translations: number[];
   translationFontScale: number;
-};
+}
 
 const TranslationSettingsSection: React.FC<Props> = ({
   onSettingsUpdate,
@@ -91,17 +90,17 @@ const TranslationSettingsSection: React.FC<Props> = ({
   );
 
   const clearTranslations = () => {
-    onSettingsUpdate({ translations: [] });
+    onSettingsUpdate({ translations: [] }, 'translations', []);
   };
 
   const onFontScaleDecreaseClicked = () => {
     const newValue = translationFontScale - 1;
-    onSettingsUpdate({ translationFontScale: newValue });
+    onSettingsUpdate({ translationFontScale: newValue }, 'translationFontScale', newValue);
   };
 
   const onFontScaleIncreaseClicked = () => {
     const newValue = translationFontScale + 1;
-    onSettingsUpdate({ translationFontScale: newValue });
+    onSettingsUpdate({ translationFontScale: newValue }, 'translationFontScale', newValue);
   };
 
   return (
