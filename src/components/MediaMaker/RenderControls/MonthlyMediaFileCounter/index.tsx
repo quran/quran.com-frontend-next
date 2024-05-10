@@ -2,23 +2,23 @@ import React from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
-import useGetMediaFilesCount from '@/hooks/auth/media/useGetMediaFilesCount';
 import { MediaType } from '@/types/Media/GenerateMediaFileRequest';
 
 type Props = {
   type: MediaType;
+  data?: { count: number; limit: number };
 };
 
-const MonthlyMediaFileCounter: React.FC<Props> = ({ type }) => {
+const MonthlyMediaFileCounter: React.FC<Props> = ({ type, data }) => {
   const { t } = useTranslation('quran-media-maker');
-  const { data } = useGetMediaFilesCount(type);
-  if (data?.data) {
+
+  if (data) {
     if (type === MediaType.VIDEO) {
       return (
         <>
           {t('video-limit', {
-            count: data?.data?.count,
-            limit: data?.data?.limit,
+            count: data?.count,
+            limit: data?.limit,
           })}
         </>
       );
@@ -26,8 +26,8 @@ const MonthlyMediaFileCounter: React.FC<Props> = ({ type }) => {
     return (
       <>
         {t('image-limit', {
-          count: data?.data?.count,
-          limit: data?.data?.limit,
+          count: data?.count,
+          limit: data?.limit,
         })}
       </>
     );

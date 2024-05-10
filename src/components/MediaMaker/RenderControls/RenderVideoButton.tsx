@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
@@ -8,10 +8,12 @@ import MonthlyMediaFileCounter from './MonthlyMediaFileCounter';
 import Button from '@/dls/Button/Button';
 import Progress from '@/dls/Progress';
 import { RenderStatus, useGenerateMediaFile } from '@/hooks/auth/media/useGenerateMediaFile';
+import useGetMediaFilesCount from '@/hooks/auth/media/useGetMediaFilesCount';
 import IconDownload from '@/icons/download.svg';
 import IconRender from '@/icons/slow_motion_video.svg';
 import { MediaType } from '@/types/Media/GenerateMediaFileRequest';
 import { isLoggedIn } from '@/utils/auth/login';
+import { mutateGeneratedMediaCounter } from '@/utils/media/utils';
 import { getLoginNavigationUrl, getQuranMediaMakerNavigationUrl } from '@/utils/navigation';
 
 type Props = {
@@ -22,7 +24,15 @@ type Props = {
 const RenderVideoButton: React.FC<Props> = ({ inputProps, isFetching }) => {
   const { t } = useTranslation('quran-media-maker');
   const { renderMedia, state } = useGenerateMediaFile(inputProps);
+  const { data, mutate } = useGetMediaFilesCount(MediaType.VIDEO);
   const router = useRouter();
+
+  // listen to state changes and mutate if the render request has resolved successfully
+  useEffect(() => {
+    if (state?.status === RenderStatus.RENDERING) {
+      mutate(mutateGeneratedMediaCounter, { revalidate: false });
+    }
+  }, [mutate, state?.status]);
 
   const isInitOrInvokingOrError = [
     RenderStatus.INIT,
@@ -35,7 +45,7 @@ const RenderVideoButton: React.FC<Props> = ({ inputProps, isFetching }) => {
   const isRendering = state.status === RenderStatus.RENDERING;
   return (
     <div>
-      <MonthlyMediaFileCounter type={MediaType.VIDEO} />
+      <MonthlyMediaFileCounter data={data?.data} type={MediaType.VIDEO} />
       <div>
         {isInitOrInvokingOrError && (
           <>

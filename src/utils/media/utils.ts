@@ -205,3 +205,15 @@ export const prepareGenerateMediaFileRequestData = (data: GenerateMediaFileReque
 
   return newData;
 };
+
+export const mutateGeneratedMediaCounter = (currentData) => {
+  const currentCount = currentData?.data?.count || 0;
+  const newCount = currentCount + 1;
+  return {
+    ...currentData,
+    data: {
+      count: newCount,
+      limit: currentData?.data?.limit,
+    },
+  };
+};

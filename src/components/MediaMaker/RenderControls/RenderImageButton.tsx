@@ -7,10 +7,12 @@ import MonthlyMediaFileCounter from './MonthlyMediaFileCounter';
 
 import Button from '@/dls/Button/Button';
 import { RenderStatus, useGenerateMediaFile } from '@/hooks/auth/media/useGenerateMediaFile';
+import useGetMediaFilesCount from '@/hooks/auth/media/useGetMediaFilesCount';
 import IconDownload from '@/icons/download.svg';
 import IconRender from '@/icons/slow_motion_video.svg';
 import { MediaType } from '@/types/Media/GenerateMediaFileRequest';
 import { isLoggedIn } from '@/utils/auth/login';
+import { mutateGeneratedMediaCounter } from '@/utils/media/utils';
 import { getLoginNavigationUrl, getQuranMediaMakerNavigationUrl } from '@/utils/navigation';
 
 type Props = {
@@ -22,6 +24,7 @@ type Props = {
 const RenderImageButton: React.FC<Props> = ({ inputProps, getCurrentFrame, isFetching }) => {
   const { t } = useTranslation('quran-media-maker');
   const { renderMedia, state } = useGenerateMediaFile(inputProps);
+  const { data, mutate } = useGetMediaFilesCount(MediaType.IMAGE);
 
   const router = useRouter();
   const downloadButtonRef = React.useRef<HTMLParagraphElement>();
@@ -37,14 +40,16 @@ const RenderImageButton: React.FC<Props> = ({ inputProps, getCurrentFrame, isFet
   // listen to state changes and download the file when it's done
   useEffect(() => {
     if (state?.status === RenderStatus.DONE) {
+      mutate(mutateGeneratedMediaCounter, { revalidate: false });
+      // download the file by clicking the download button
       downloadButtonRef.current.click();
     }
-  }, [state?.status]);
+  }, [mutate, state?.status]);
 
   const isRendering = state.status === RenderStatus.RENDERING;
   return (
     <div>
-      <MonthlyMediaFileCounter type={MediaType.IMAGE} />
+      <MonthlyMediaFileCounter data={data?.data} type={MediaType.IMAGE} />
       <div>
         {isInitOrInvokingOrError && (
           <>
