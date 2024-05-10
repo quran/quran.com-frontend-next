@@ -2,9 +2,10 @@
 /* eslint-disable max-lines */
 import { useCallback, useMemo, useRef } from 'react';
 
-import { Player, PlayerRef } from '@remotion/player';
+import { PlayerRef } from '@remotion/player';
 import classNames from 'classnames';
 import { GetStaticProps, NextPage } from 'next';
+import dynamic from 'next/dynamic';
 import useTranslation from 'next-translate/useTranslation';
 import useSWRImmutable from 'swr/immutable';
 
@@ -42,6 +43,14 @@ import {
 import { getVerseNumberFromKey } from '@/utils/verse';
 import { VersesResponse } from 'types/ApiResponses';
 import ChaptersData from 'types/ChaptersData';
+
+const Player = dynamic(
+  () => import('@remotion/player').then((remotionPlayer) => remotionPlayer.Player),
+  {
+    ssr: false,
+    loading: () => <Spinner />,
+  },
+);
 
 interface MediaMaker {
   juzVerses?: VersesResponse;
