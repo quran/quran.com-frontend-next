@@ -24,7 +24,7 @@ type Props = {
 
 const RenderVideoButton: React.FC<Props> = ({ inputProps, isFetching }) => {
   const { t } = useTranslation('quran-media-maker');
-  const { renderMedia, state } = useGenerateMediaFile(inputProps);
+  const { renderMedia, state, undo } = useGenerateMediaFile(inputProps);
   const { data, mutate } = useGetMediaFilesCount(MediaType.VIDEO);
   const router = useRouter();
 
@@ -40,6 +40,11 @@ const RenderVideoButton: React.FC<Props> = ({ inputProps, isFetching }) => {
   const onDownloadClicked = () => {
     logButtonClick('download_video');
   };
+
+  // listen to settings changes and undo the changes if the input props have changed
+  useEffect(() => {
+    undo();
+  }, [inputProps, undo]);
 
   // listen to state changes and mutate if the render request has resolved successfully
   useEffect(() => {
