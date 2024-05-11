@@ -53,6 +53,7 @@ interface MediaMaker {
   englishChaptersList: ChaptersData;
 }
 
+// TODO: this needs to be broken into multiple components
 const MediaMaker: NextPage<MediaMaker> = ({
   hasError,
   chaptersData,
@@ -104,8 +105,7 @@ const MediaMaker: NextPage<MediaMaker> = ({
   const {
     data: verseData,
     isValidating: isVersesValidating,
-    // TODO: handle error
-    // error: versesError,
+    error: versesError,
   } = useSWRImmutable(
     makeVersesUrl(surah, lang, API_PARAMS),
     () => getChapterVerses(surah, lang, API_PARAMS),
@@ -118,8 +118,7 @@ const MediaMaker: NextPage<MediaMaker> = ({
   const {
     data: chapterAudioData,
     isValidating: isAudioValidating,
-    // TODO: handle error
-    // error: audioError,
+    error: audioError,
   } = useSWRImmutable(
     makeChapterAudioDataUrl(reciter, surah, true),
     () => getChapterAudioData(reciter, surah, true),

@@ -46,10 +46,16 @@ export const mediaGeneratorSlice = createSlice({
         ...action.payload,
       };
     },
+    resetToDefaults: (state: MediaSettings) => {
+      return {
+        ...state,
+        ...initialState,
+      };
+    },
   },
 });
 
-export const { updateSettings } = mediaGeneratorSlice.actions;
+export const { updateSettings, resetToDefaults } = mediaGeneratorSlice.actions;
 
 export const selectMediaMakerSettings = (state: RootState) => state.mediaMaker;
 export const selectOpacity = (state: RootState) => state.mediaMaker.opacity;

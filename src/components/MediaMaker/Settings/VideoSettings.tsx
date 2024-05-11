@@ -22,13 +22,15 @@ import { RangeSelectorType } from '@/components/Verse/AdvancedCopy/SelectorConta
 import validateRangeSelection from '@/components/Verse/AdvancedCopy/utils/validateRangeSelection';
 import VersesRangeSelector from '@/components/Verse/AdvancedCopy/VersesRangeSelector';
 import DataContext from '@/contexts/DataContext';
+import Button from '@/dls/Button/Button';
 import Select, { SelectSize } from '@/dls/Forms/Select';
+import useRemoveQueryParam from '@/hooks/useRemoveQueryParam';
 import layoutStyle from '@/pages/index.module.scss';
-import { updateSettings } from '@/redux/slices/mediaMaker';
+import { updateSettings, resetToDefaults } from '@/redux/slices/mediaMaker';
 import MediaSettings, { ChangedSettings } from '@/types/Media/MediaSettings';
 import QueryParam from '@/types/QueryParam';
 import Reciter from '@/types/Reciter';
-import { logValueChange } from '@/utils/eventLogger';
+import { logButtonClick, logValueChange } from '@/utils/eventLogger';
 import { toLocalizedVerseKey } from '@/utils/locale';
 import { generateChapterVersesKeys, getChapterNumberFromKey } from '@/utils/verse';
 
@@ -75,6 +77,14 @@ const VideoSettings: React.FC<Props> = ({
   const dispatch = useDispatch();
   const router = useRouter();
   const { verseFrom, verseTo, surah } = mediaSettings;
+  const removeQueryParam = useRemoveQueryParam();
+
+  const onResetSettingsClick = useCallback(() => {
+    logButtonClick('media_settings_reset');
+    seekToBeginning();
+    dispatch(resetToDefaults());
+    removeQueryParam(Object.values(QueryParam));
+  }, [dispatch, removeQueryParam, seekToBeginning]);
 
   const onSettingsUpdate = useCallback(
     (settings: ChangedSettings, key: keyof MediaSettings, value: any) => {
@@ -168,6 +178,7 @@ const VideoSettings: React.FC<Props> = ({
         )}
       >
         <div>
+          <Button onClick={onResetSettingsClick}>{t('common:settings.reset-cta')}</Button>
           <Section>
             <Section.Title>{t('common:surah')}</Section.Title>
             <Section.Row>
