@@ -1,6 +1,6 @@
 /* eslint-disable react-func/max-lines-per-function */
 /* eslint-disable max-lines */
-import { useCallback, useMemo, useRef } from 'react';
+import { useCallback, useEffect, useMemo, useRef } from 'react';
 
 import { PlayerRef, Player } from '@remotion/player';
 import classNames from 'classnames';
@@ -14,6 +14,7 @@ import styles from '@/components/MediaMaker/MediaMaker.module.scss';
 import VideoSettings from '@/components/MediaMaker/Settings/VideoSettings';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import Spinner, { SpinnerSize } from '@/dls/Spinner/Spinner';
+import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import useGetMediaSettings from '@/hooks/auth/media/useGetMediaSettings';
 import Error from '@/pages/_error';
 import layoutStyles from '@/pages/index.module.scss';
@@ -64,6 +65,7 @@ const MediaMaker: NextPage<MediaMaker> = ({
 }) => {
   const { t, lang } = useTranslation('common');
   const mediaSettings = useGetMediaSettings();
+  const toast = useToast();
   const {
     surah,
     verseFrom,
@@ -128,6 +130,16 @@ const MediaMaker: NextPage<MediaMaker> = ({
       revalidateOnMount: Number(reciter) !== DEFAULT_RECITER_ID || surah !== DEFAULT_SURAH,
     },
   );
+
+  // listen for errors and show a toast
+  useEffect(() => {
+    if (versesError || audioError) {
+      toast(t('common:error.general'), {
+        status: ToastStatus.Error,
+      });
+    }
+  }, [versesError, audioError, toast, t]);
+
   const isFetching = isVersesValidating || isAudioValidating;
   const chapterEnglishName = useMemo<string>(() => {
     return englishChaptersList[surah]?.translatedName as string;
