@@ -1,3 +1,5 @@
+import { toLocalizedVerseKey } from '../locale';
+
 import defaultAudio from './defaultAudio.json';
 import defaultVerses from './defaultVerses.json';
 
@@ -22,6 +24,16 @@ export const DEFAULT_VIDEO_ID = 4;
 export const DEFAULT_OPACITY = '0.2';
 export const DEFAULT_FONT_COLOR = '#dddddd';
 export const COMPOSITION_NAME = 'MediaMakerContent';
+
+export function getDefaultVerseKeys(lang = 'en') {
+  const keys = defaultVerses.map((verse) => `${verse.chapterId}:${verse.verseNumber}`);
+  return keys.map((chapterVersesKey) => ({
+    id: chapterVersesKey,
+    name: chapterVersesKey,
+    value: chapterVersesKey,
+    label: toLocalizedVerseKey(chapterVersesKey, lang),
+  }));
+}
 
 const DEFAULT_TIMESTAMPS = [
   {
