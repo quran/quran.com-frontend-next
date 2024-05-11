@@ -24,13 +24,8 @@ type Props = {
 
 const RenderImageButton: React.FC<Props> = ({ inputProps, getCurrentFrame, isFetching }) => {
   const { t } = useTranslation('quran-media-maker');
-  const { renderMedia, state, undo } = useGenerateMediaFile(inputProps);
+  const { renderMedia, state } = useGenerateMediaFile(inputProps);
   const { data, mutate } = useGetMediaFilesCount(MediaType.IMAGE);
-
-  // listen to settings changes and undo the changes if the input props have changed
-  useEffect(() => {
-    undo();
-  }, [inputProps, undo]);
 
   const router = useRouter();
   const downloadButtonRef = React.useRef<HTMLParagraphElement>();

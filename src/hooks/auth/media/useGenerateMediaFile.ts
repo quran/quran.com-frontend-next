@@ -1,7 +1,6 @@
 /* eslint-disable react-func/max-lines-per-function */
 /* eslint-disable no-await-in-loop */
-// @ts-nocheck
-import { useCallback, useMemo, useState } from 'react';
+import { useCallback, useMemo, useState, useEffect } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
@@ -35,7 +34,7 @@ export type State =
     }
   | {
       url: string;
-      size: number;
+      progress: number;
       status: RenderStatus.DONE;
     };
 
@@ -80,6 +79,7 @@ export const useGenerateMediaFile = (inputProps: GenerateMediaFileRequest) => {
         if (type === MediaType.IMAGE) {
           setState({
             url: data.url,
+            progress: 100,
             status: RenderStatus.DONE,
           });
           pending = false;
@@ -125,6 +125,11 @@ export const useGenerateMediaFile = (inputProps: GenerateMediaFileRequest) => {
   const undo = useCallback(() => {
     setState({ status: RenderStatus.INIT });
   }, []);
+
+  // listen to settings changes and undo the changes if the input props have changed
+  useEffect(() => {
+    undo();
+  }, [inputProps, undo]);
 
   return useMemo(() => {
     return {
