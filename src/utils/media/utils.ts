@@ -183,7 +183,6 @@ export const prepareGenerateMediaFileRequestData = (data: GenerateMediaFileReque
     };
   } else {
     delete newData.audio;
-    delete newData.timestamps;
   }
 
   // Update verses to only include chapterId and words
