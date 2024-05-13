@@ -2,8 +2,7 @@ import { useContext, useMemo } from 'react';
 
 import { useSelector } from 'react-redux';
 
-import useFetchPagesLookup from '../../hooks/useFetchPagesLookup';
-
+import useFetchPagesLookup from '@/components/QuranReader/hooks/useFetchPagesLookup';
 import DataContext from '@/contexts/DataContext';
 import { selectIsUsingDefaultFont } from '@/redux/slices/QuranReader/styles';
 import { generateVerseKeysBetweenTwoVerseKeys } from '@/utils/verseKeys';
