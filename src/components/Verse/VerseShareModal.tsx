@@ -3,6 +3,7 @@ import useTranslation from 'next-translate/useTranslation';
 import GeneratedImage from '@/components/Verse/GeneratedImage';
 import Modal from '@/dls/Modal/Modal';
 import Verse from '@/types/Verse';
+import styles from '@/redux/slices/QuranReader/styles';
 
 type VerseShareModalProps = {
   isOpen: boolean;
@@ -14,7 +15,8 @@ const VerseShareModal = ({ isOpen, onClose, verse }: VerseShareModalProps) => {
   const { t } = useTranslation('common');
 
   return (
-    <Modal isOpen={isOpen} onClickOutside={onClose} onEscapeKeyDown={onClose}>
+    <Modal isOpen={isOpen} onClickOutside={onClose} onEscapeKeyDown={onClose} >
+      <div style={{ maxHeight: '80vh', overflowY: 'auto' }}>
       <Modal.Body>
         <Modal.Header>
           <Modal.Title>{t('share-modal.title')}</Modal.Title>
@@ -24,6 +26,7 @@ const VerseShareModal = ({ isOpen, onClose, verse }: VerseShareModalProps) => {
       <Modal.Footer>
         <GeneratedImage verse={verse} />
       </Modal.Footer>
+      </div>
     </Modal>
   );
 };
