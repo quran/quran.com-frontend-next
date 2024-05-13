@@ -1,38 +1,28 @@
 import React, { useState, useEffect } from 'react';
 
 import clipboardCopy from 'clipboard-copy';
+import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import { useSelector, shallowEqual } from 'react-redux';
 
-import BookmarkAction from './BookmarkAction';
-import NotesAction from './Notes/NotesAction';
-import SaveToCollectionAction from './SaveToCollectionAction';
-import VerseActionAdvancedCopy from './VerseActionAdvancedCopy';
-import VerseActionRepeatAudio from './VerseActionRepeatAudio';
-
-import WordByWordVerseAction from '@/components/QuranReader/ReadingView/WordByWordVerseAction';
+import VerseActionAdvancedCopy from '@/components/Verse/VerseActionAdvancedCopy';
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
+import ChevronLeftIcon from '@/icons/chevron-left.svg';
 import CopyLinkIcon from '@/icons/copy-link.svg';
 import CopyIcon from '@/icons/copy.svg';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
-import { isLoggedIn } from '@/utils/auth/login';
+import QueryParam from '@/types/QueryParam';
+import Verse from '@/types/Verse';
 import { logButtonClick } from '@/utils/eventLogger';
+import { getQuranMediaMakerNavigationUrl } from '@/utils/navigation';
 import { getWindowOrigin } from '@/utils/url';
 import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
 import { getWordTextFieldNameByFont } from '@/utils/word';
-import Verse from 'types/Verse';
-
-interface Props {
-  verse: Verse;
-  isTranslationView: boolean;
-  onActionTriggered?: () => void;
-  bookmarksRangeUrl: string;
-}
 
 const RESET_ACTION_TEXT_TIMEOUT_MS = 3 * 1000;
 
-export const onShareClicked = (
+export const copyLink = (
   verseKey: string,
   isTranslationView: boolean,
   callback: () => void,
@@ -49,17 +39,29 @@ export const onShareClicked = (
   }
 };
 
-const OverflowVerseActionsMenuBody: React.FC<Props> = ({
+export enum VerseActionsOverflowMenu {
+  Main = 'main',
+  Share = 'share',
+}
+
+type Props = {
+  verse: Verse;
+  isTranslationView: boolean;
+  onActionTriggered?: () => void;
+  setSelectedMenu: (selectedMenu: VerseActionsOverflowMenu) => void;
+};
+
+const ShareVerseActionsMenu: React.FC<Props> = ({
   verse,
   isTranslationView,
   onActionTriggered,
-  bookmarksRangeUrl,
+  setSelectedMenu,
 }) => {
   const { t, lang } = useTranslation('common');
   const [isCopied, setIsCopied] = useState(false);
-  const [isShared, setIsShared] = useState(false);
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const toast = useToast();
+  const router = useRouter();
 
   useEffect(() => {
     let timeoutId: ReturnType<typeof setTimeout>;
@@ -77,17 +79,6 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
     };
   }, [isCopied, onActionTriggered]);
 
-  useEffect(() => {
-    let timeoutId: ReturnType<typeof setTimeout>;
-    // if the user has just clicked the share action, we should change the text back after 3 seconds.
-    if (isShared === true) {
-      timeoutId = setTimeout(() => setIsShared(false), RESET_ACTION_TEXT_TIMEOUT_MS);
-    }
-    return () => {
-      clearTimeout(timeoutId);
-    };
-  }, [isShared]);
-
   const onCopyClicked = () => {
     logButtonClick(
       // eslint-disable-next-line i18next/no-literal-string
@@ -101,8 +92,8 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
     });
   };
 
-  const onShareVerseClicked = () => {
-    onShareClicked(
+  const onCopyLinkClicked = () => {
+    copyLink(
       verse.verseKey,
       isTranslationView,
       () => toast(t('shared'), { status: ToastStatus.Success }),
@@ -113,14 +104,35 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
     }
   };
 
+  const onBackClicked = () => {
+    logButtonClick(`back_verse_actions_menu`);
+    setSelectedMenu(VerseActionsOverflowMenu.Main);
+  };
+
+  const onGenerateClicked = () => {
+    logButtonClick(`generate_media_verse_action`);
+    router.push(
+      getQuranMediaMakerNavigationUrl({
+        [QueryParam.SURAH]: verse.chapterId as string,
+        [QueryParam.VERSE_FROM]: verse.verseKey,
+        [QueryParam.VERSE_TO]: verse.verseKey,
+      }),
+    );
+  };
   return (
     <div>
-      {!isTranslationView && <NotesAction verse={verse} />}
+      <PopoverMenu.Item shouldFlipOnRTL icon={<ChevronLeftIcon />} onClick={onBackClicked}>
+        {t('common:share')}
+      </PopoverMenu.Item>
+      <PopoverMenu.Divider />
       <PopoverMenu.Item onClick={onCopyClicked} icon={<CopyIcon />}>
         {isCopied ? `${t('copied')}!` : `${t('quran-reader:copy-verse')}`}
       </PopoverMenu.Item>
-      <PopoverMenu.Item onClick={onShareVerseClicked} icon={<CopyLinkIcon />}>
+      <PopoverMenu.Item onClick={onCopyLinkClicked} icon={<CopyLinkIcon />}>
         {t('quran-reader:cpy-link')}
+      </PopoverMenu.Item>
+      <PopoverMenu.Item onClick={onGenerateClicked} icon={<CopyLinkIcon />}>
+        {t('quran-reader:generate-media')}
       </PopoverMenu.Item>
 
       <VerseActionAdvancedCopy
@@ -128,28 +140,8 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
         verse={verse}
         isTranslationView={isTranslationView}
       />
-      {!isTranslationView && (
-        <WordByWordVerseAction verse={verse} onActionTriggered={onActionTriggered} />
-      )}
-
-      <BookmarkAction
-        verse={verse}
-        isTranslationView={isTranslationView}
-        onActionTriggered={onActionTriggered}
-        bookmarksRangeUrl={bookmarksRangeUrl}
-      />
-
-      {isLoggedIn() && (
-        <SaveToCollectionAction
-          verse={verse}
-          bookmarksRangeUrl={bookmarksRangeUrl}
-          isTranslationView={isTranslationView}
-        />
-      )}
-
-      <VerseActionRepeatAudio isTranslationView={isTranslationView} verseKey={verse.verseKey} />
     </div>
   );
 };
 
-export default OverflowVerseActionsMenuBody;
+export default ShareVerseActionsMenu;

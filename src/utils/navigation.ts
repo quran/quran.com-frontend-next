@@ -1,5 +1,5 @@
 /* eslint-disable max-lines */
-import { stringify } from 'querystring';
+import { ParsedUrlQuery, stringify } from 'querystring';
 
 import REVELATION_ORDER from './revelationOrder';
 import { searchIdToNavigationKey } from './search';
@@ -346,7 +346,10 @@ export const getNotesNavigationUrl = () => '/notes-and-reflections';
 
 export const getNotificationSettingsNavigationUrl = () => '/notification-settings';
 export const getQuranicCalendarNavigationUrl = () => '/calendar';
-export const getQuranMediaMakerNavigationUrl = () => '/quran-media-maker';
+export const getQuranMediaMakerNavigationUrl = (params?: ParsedUrlQuery) => {
+  const baseUrl = '/quran-media-maker';
+  return params ? `${baseUrl}?${stringify(params)}` : baseUrl;
+};
 
 /**
  * Update the browser history with the new url.

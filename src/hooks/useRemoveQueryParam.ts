@@ -1,11 +1,12 @@
 import { useCallback } from 'react';
 
 import isArray from 'lodash/isArray';
-import router from 'next/router';
+import { useRouter } from 'next/router';
 
 import QueryParam from '@/types/QueryParam';
 
 const useRemoveQueryParam = () => {
+  const router = useRouter();
   const { pathname, query } = router;
 
   return useCallback(
@@ -19,7 +20,7 @@ const useRemoveQueryParam = () => {
       }
       router.replace({ pathname, query: params.toString() }, undefined, { shallow: true });
     },
-    [pathname, query],
+    [pathname, query, router],
   );
 };
 
