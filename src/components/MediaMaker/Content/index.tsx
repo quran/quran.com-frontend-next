@@ -11,11 +11,12 @@ import Alignment from '@/types/Media/Alignment';
 import Orientation from '@/types/Media/Orientation';
 import WatermarkColor from '@/types/Media/WatermarkColor';
 import Translation from '@/types/Translation';
+import Verse from '@/types/Verse';
 import { getBackgroundWithOpacityById } from '@/utils/media/utils';
 import getPlainTranslationText from '@/utils/plainTranslationText';
 
 type Props = {
-  verses: any;
+  verses: Verse[];
   audio: any;
   video: any;
   timestamps: any;
@@ -68,7 +69,7 @@ const MediaMakerContent: React.FC<Props> = ({
       )}
       {verses &&
         verses.length > 0 &&
-        verses.map((verse, i) => {
+        verses.map((verse: Verse, i) => {
           return (
             <Sequence
               // eslint-disable-next-line react/no-array-index-key

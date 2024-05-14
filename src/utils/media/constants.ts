@@ -7,6 +7,7 @@ import Alignment from '@/types/Media/Alignment';
 import Orientation from '@/types/Media/Orientation';
 import WatermarkColor from '@/types/Media/WatermarkColor';
 import { QuranFont } from '@/types/QuranReader';
+import Verse from '@/types/Verse';
 
 export const DEFAULT_SURAH = 112;
 export const DEFAULT_RECITER_ID = 7;
@@ -85,7 +86,7 @@ export const BACKGROUND_VIDEOS = {
 
 export const DEFAULT_PROPS = {
   video: { ...BACKGROUND_VIDEOS[DEFAULT_VIDEO_ID], id: DEFAULT_VIDEO_ID },
-  verses: defaultVerses,
+  verses: defaultVerses as unknown as Verse[],
   audio: defaultAudio,
   timestamps: DEFAULT_TIMESTAMPS,
   fontColor: DEFAULT_FONT_COLOR,
