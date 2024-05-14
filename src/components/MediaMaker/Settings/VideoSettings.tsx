@@ -12,9 +12,7 @@ import RenderControls from '../RenderControls';
 import AlignmentsSettings from './AlignmentsSettings';
 import BackgroundVideos from './BackgroundVideos';
 import OrientationSettings from './OrientationSettings';
-import QuranFontSettings from './QuranFontSettings';
 import ReciterSettings from './ReciterSettings';
-import BackgroundSettings from './TextBackgroundSettings';
 import TranslationSettingsSection from './TranslationSectionSetting';
 
 import Section from '@/components/Navbar/SettingsDrawer/Section';
@@ -166,12 +164,12 @@ const VideoSettings: React.FC<Props> = ({
   );
 
   const onFontScaleDecreaseClicked = () => {
-    const value = quranTextFontScale - 1;
+    const value = mediaSettings.quranTextFontScale - 1;
     onSettingsUpdate({ quranTextFontScale: value }, 'quranTextFontScale', value);
   };
 
   const onFontScaleIncreaseClicked = () => {
-    const value = quranTextFontScale + 1;
+    const value = mediaSettings.quranTextFontScale + 1;
     onSettingsUpdate({ quranTextFontScale: value }, 'quranTextFontScale', value);
   };
 
