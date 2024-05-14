@@ -23,10 +23,12 @@ import validateRangeSelection from '@/components/Verse/AdvancedCopy/utils/valida
 import VersesRangeSelector from '@/components/Verse/AdvancedCopy/VersesRangeSelector';
 import DataContext from '@/contexts/DataContext';
 import Button from '@/dls/Button/Button';
+import Counter from '@/dls/Counter/Counter';
 import Select, { SelectSize } from '@/dls/Forms/Select';
 import useRemoveQueryParam from '@/hooks/useRemoveQueryParam';
 import layoutStyle from '@/pages/index.module.scss';
 import { updateSettings, resetToDefaults } from '@/redux/slices/mediaMaker';
+import { MAXIMUM_QURAN_FONT_STEP, MINIMUM_FONT_STEP } from '@/redux/slices/QuranReader/styles';
 import MediaSettings, { ChangedSettings } from '@/types/Media/MediaSettings';
 import QueryParam from '@/types/QueryParam';
 import Reciter from '@/types/Reciter';
@@ -163,6 +165,20 @@ const VideoSettings: React.FC<Props> = ({
     [onSettingsUpdate, t, verseFrom, verseTo],
   );
 
+  const onFontScaleDecreaseClicked = () => {
+    const value = quranTextFontScale - 1;
+    onSettingsUpdate({ quranTextFontScale: value }, 'quranTextFontScale', value);
+  };
+
+  const onFontScaleIncreaseClicked = () => {
+    const value = quranTextFontScale + 1;
+    onSettingsUpdate({ quranTextFontScale: value }, 'quranTextFontScale', value);
+  };
+
+  const onFontColorChange = (color: string) => {
+    onSettingsUpdate({ fontColor: color }, 'fontColor', color);
+  };
+
   return (
     <>
       <RenderControls
@@ -213,11 +229,6 @@ const VideoSettings: React.FC<Props> = ({
             onSettingsUpdate={onSettingsUpdate}
             reciters={reciters}
           />
-          <QuranFontSettings
-            quranTextFontScale={mediaSettings.quranTextFontScale}
-            fontColor={mediaSettings.fontColor}
-            onSettingsUpdate={onSettingsUpdate}
-          />
           <TranslationSettingsSection
             translations={mediaSettings.translations}
             translationFontScale={mediaSettings.translationFontScale}
@@ -226,16 +237,36 @@ const VideoSettings: React.FC<Props> = ({
         </div>
         <div>
           <Section>
-            <Section.Title>{t('video-picker')}</Section.Title>
+            <Section.Title>{t('colors')}</Section.Title>
             <Section.Row>
-              <BackgroundVideos
-                videoId={mediaSettings.videoId}
-                onSettingsUpdate={onSettingsUpdate}
+              <Section.Label>{t('font-color')}</Section.Label>
+              <input
+                className={styles.colorPicker}
+                type="color"
+                value={mediaSettings.fontColor}
+                onChange={(e) => onFontColorChange(e.target.value)}
               />
             </Section.Row>
           </Section>
-        </div>
-        <div>
+          <Section>
+            <Section.Title>{t('common:fonts.quran-font')}</Section.Title>
+            <Section.Row>
+              <Section.Label>{t('common:fonts.font-size')}</Section.Label>
+              <Counter
+                count={mediaSettings.quranTextFontScale}
+                onDecrement={
+                  mediaSettings.quranTextFontScale === MINIMUM_FONT_STEP
+                    ? null
+                    : onFontScaleDecreaseClicked
+                }
+                onIncrement={
+                  mediaSettings.quranTextFontScale === MAXIMUM_QURAN_FONT_STEP
+                    ? null
+                    : onFontScaleIncreaseClicked
+                }
+              />
+            </Section.Row>
+          </Section>
           <OrientationSettings
             orientation={mediaSettings.orientation}
             onSettingsUpdate={onSettingsUpdate}
@@ -247,14 +278,15 @@ const VideoSettings: React.FC<Props> = ({
             translationAlignment={mediaSettings.translationAlignment}
             onSettingsUpdate={onSettingsUpdate}
           />
-        </div>
-        <div>
-          <BackgroundSettings
-            shouldHaveBorder={mediaSettings.shouldHaveBorder}
-            backgroundColorId={mediaSettings.backgroundColorId}
-            opacity={mediaSettings.opacity}
-            onSettingsUpdate={onSettingsUpdate}
-          />
+          <Section>
+            <Section.Title>{t('video-picker')}</Section.Title>
+            <Section.Row>
+              <BackgroundVideos
+                videoId={mediaSettings.videoId}
+                onSettingsUpdate={onSettingsUpdate}
+              />
+            </Section.Row>
+          </Section>
         </div>
       </div>
     </>
