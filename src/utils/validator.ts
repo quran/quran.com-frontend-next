@@ -1,6 +1,8 @@
 import { getChapterData } from './chapter';
+import { PAGES_MUSHAF_MAP } from './page';
 import { parseVerseRange } from './verseKeys';
 
+import { Mushaf } from '@/types/QuranReader';
 import ChaptersData from 'types/ChaptersData';
 
 /**
@@ -130,7 +132,11 @@ export const isValidHizbId = (hizbId: string): boolean => {
 export const isValidPageId = (pageId: string | number): boolean => {
   const pageIdNumber = Number(pageId);
   // if it's not a numeric string or it's numeric but out of the range of chapter 1->604
-  if (Number.isNaN(pageIdNumber) || pageIdNumber > 604 || pageIdNumber < 1) {
+  if (
+    Number.isNaN(pageIdNumber) ||
+    pageIdNumber > PAGES_MUSHAF_MAP[Mushaf.Indopak15Lines] ||
+    pageIdNumber < 1
+  ) {
     return false;
   }
   return true;
