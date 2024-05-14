@@ -1,22 +1,23 @@
-import React from 'react';
-
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
+import { shallowEqual, useSelector } from 'react-redux';
 
 import { getPagesLookup, getPageVerses } from '@/api';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import QuranReader from '@/components/QuranReader';
 import Error from '@/pages/_error';
 import { getQuranReaderStylesInitialState } from '@/redux/defaultSettings/util';
+import { selectQuranFont, selectQuranMushafLines } from '@/redux/slices/QuranReader/styles';
 import { getDefaultWordFields, getMushafId } from '@/utils/api';
 import { getAllChaptersData } from '@/utils/chapter';
 import { getLanguageAlternates, toLocalizedNumber } from '@/utils/locale';
 import { getCanonicalUrl, getPageNavigationUrl } from '@/utils/navigation';
+import { PAGES_MUSHAF_MAP } from '@/utils/page';
 import { getPageOrJuzMetaDescription } from '@/utils/seo';
 import {
-  REVALIDATION_PERIOD_ON_ERROR_SECONDS,
   ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
+  REVALIDATION_PERIOD_ON_ERROR_SECONDS,
 } from '@/utils/staticPageGeneration';
 import { isValidPageId } from '@/utils/validator';
 import { VersesResponse } from 'types/ApiResponses';
@@ -34,7 +35,12 @@ const QuranicPage: NextPage<Props> = ({ hasError, pageVerses }) => {
   const {
     query: { pageId },
   } = useRouter();
-  if (hasError) {
+
+  const quranFont = useSelector(selectQuranFont, shallowEqual);
+  const mushafLines = useSelector(selectQuranMushafLines, shallowEqual);
+  const mushafId = getMushafId(quranFont, mushafLines).mushaf;
+
+  if (hasError || pageId > PAGES_MUSHAF_MAP[Number(mushafId)]) {
     return <Error statusCode={500} />;
   }
 
@@ -58,17 +64,24 @@ const QuranicPage: NextPage<Props> = ({ hasError, pageVerses }) => {
 
 // eslint-disable-next-line react-func/max-lines-per-function
 export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
-  const pageId = String(params.pageId);
+  const defaultMushafId = getMushafId(
+    getQuranReaderStylesInitialState(locale).quranFont,
+    getQuranReaderStylesInitialState(locale).mushafLines,
+  ).mushaf;
+
+  const defaultMushafPagesCount = PAGES_MUSHAF_MAP[Number(defaultMushafId)];
+  const pageId =
+    Number(params.pageId) > defaultMushafPagesCount
+      ? String(defaultMushafPagesCount)
+      : String(params.pageId);
+
   // we need to validate the pageId first to save calling BE since we haven't set the valid paths inside getStaticPaths to avoid pre-rendering them at build time.
   if (!isValidPageId(pageId)) {
     return {
       notFound: true,
     };
   }
-  const defaultMushafId = getMushafId(
-    getQuranReaderStylesInitialState(locale).quranFont,
-    getQuranReaderStylesInitialState(locale).mushafLines,
-  ).mushaf;
+
   try {
     const pageVersesResponse = await getPageVerses(pageId, locale, {
       perPage: 'all',
