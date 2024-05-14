@@ -162,8 +162,8 @@ export const getCurrentRangesAudioData = (
   return rangesChapterData;
 };
 
-export const getDurationInFrames = (duration: number, framesPerSecond: number) => {
-  return Math.ceil((duration / 1000) * framesPerSecond);
+export const getDurationInFrames = (timestamps: { start: number; durationInFrames: number }[]) => {
+  return timestamps.reduce((acc, current) => acc + current.durationInFrames, 0);
 };
 
 export const prepareGenerateMediaFileRequestData = (data: GenerateMediaFileRequest) => {

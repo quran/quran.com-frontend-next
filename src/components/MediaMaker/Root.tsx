@@ -52,7 +52,7 @@ export const RemotionRoot = () => {
       id={COMPOSITION_NAME}
       // @ts-ignore
       component={MediaMakerContent}
-      durationInFrames={getDurationInFrames(DEFAULT_PROPS.audio.duration, VIDEO_FPS)}
+      durationInFrames={getDurationInFrames(DEFAULT_PROPS.timestamps)}
       fps={VIDEO_FPS}
       width={VIDEO_LANDSCAPE_WIDTH}
       height={VIDEO_LANDSCAPE_HEIGHT}
@@ -60,7 +60,7 @@ export const RemotionRoot = () => {
         return {
           ...props,
           ...orientationToDimensions(props.orientation),
-          durationInFrames: getDurationInFrames(props.audio.duration, VIDEO_FPS),
+          durationInFrames: getDurationInFrames(props.timestamps),
         };
       }}
       defaultProps={DEFAULT_PROPS}
