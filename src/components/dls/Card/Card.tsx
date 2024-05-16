@@ -1,12 +1,11 @@
 import { ReactNode } from 'react';
 
 import classNames from 'classnames';
-import useTranslation from 'next-translate/useTranslation';
 import Image from 'next/image';
 
-import Button, { ButtonVariant } from '../Button/Button';
-
 import styles from './Card.module.scss';
+
+import Button, { ButtonVariant } from '@/dls/Button/Button';
 
 export enum CardSize {
   Medium = 'medium',
@@ -19,10 +18,14 @@ type CardProps = {
   description?: React.ReactNode;
   onImgClick?: () => void;
   imgSrc?: string;
+  className?: string;
   imgAlt?: string;
   actionIcon?: ReactNode;
   shouldFlipIconOnRTL?: boolean;
   onActionIconClick?: () => void;
+  shouldShowFullTitle?: boolean;
+  ariaLabel?: string;
+  tooltip?: string;
 };
 
 const Card = ({
@@ -35,11 +38,14 @@ const Card = ({
   imgAlt,
   shouldFlipIconOnRTL = true,
   onActionIconClick,
+  className,
+  shouldShowFullTitle = false,
+  ariaLabel,
+  tooltip,
 }: CardProps) => {
-  const { t } = useTranslation('common');
   return (
     <div
-      className={classNames(styles.container, {
+      className={classNames(className, styles.container, {
         [styles.large]: size === CardSize.Large,
         [styles.medium]: size === CardSize.Medium,
       })}
@@ -61,10 +67,16 @@ const Card = ({
       </div>
       <div className={styles.bodyContainer}>
         <div className={styles.textsContainer}>
-          <div className={styles.title}>{title}</div>
+          <div
+            className={classNames({
+              [styles.title]: !shouldShowFullTitle,
+            })}
+          >
+            {title}
+          </div>
           <div className={styles.description}>{description}</div>
         </div>
-        {size === CardSize.Large && (
+        {size === CardSize.Large && actionIcon && (
           <Button
             onClick={() => {
               if (onActionIconClick) onActionIconClick();
@@ -72,8 +84,8 @@ const Card = ({
             className={styles.playIconContainer}
             variant={ButtonVariant.Ghost}
             shouldFlipOnRTL={shouldFlipIconOnRTL}
-            tooltip={t('audio.play')}
-            ariaLabel={t('audio.play')}
+            tooltip={tooltip}
+            ariaLabel={ariaLabel}
           >
             {actionIcon}
           </Button>

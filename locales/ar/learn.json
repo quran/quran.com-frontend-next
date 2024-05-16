@@ -1,0 +1,41 @@
+{
+  "about-author": "عن المؤلف",
+  "add-reflection": "إضافة تأمل",
+  "all-learning-plans": "جميع خطط التعلم",
+  "author": "المؤلف",
+  "back-to-learning-plan": "العودة إلى خطة التعلم",
+  "back-to-learning-plans": "العودة إلى خطط التعلم",
+  "category": "الفئة",
+  "coming-soon": "قريباً...",
+  "completed": "مكتمل",
+  "continue-learning": "مواصلة التعلم",
+  "day": "اليوم",
+  "description": "الوصف",
+  "duration-daily": "يستغرق كل درس قصير أقل من {{dailyMins}} دقيقة لإكمال {{days}} دروس إجمالية",
+  "empty-learning-plans": "أنت غير مسجل في أي <link> خطط للتعلم </link> حتى الآن.",
+  "enroll": "سجل",
+  "enroll-success": "تهانينا، لقد أضفت {{title}} إلى قائمتك!",
+  "enrolled": "المقيدين",
+  "feedback": {
+    "add-feedback": "إضافة تعليقات",
+    "desc": "تهانينا! لقد أكملت خطة التعلم ' {{courseName}} '. <br> </br> يرجى مراجعة خطة التعلم ومشاركة تعليقاتك لمساعدتنا في تحسين المحتوى.",
+    "feedback-placeholder": "اكتب ملاحظاتك",
+    "feedback-success": "شكرا لك على ملاحظاتك!",
+    "your-feedback": "تعليقاتك"
+  },
+  "learn-duration": "المدة",
+  "learning-plan-material": "مواد خطة التعلم",
+  "learning-plan-meta-desc": "ستساعدك خطة التعلم هذه على تغيير الطريقة التي تتعامل بها مع القرآن، ابدأ رحلتك اليوم!",
+  "learning-plans-desc": "عزز معرفتك بدروس سهلة المتابعة تساعدك على الارتقاء في رحلتك مع القرآن. <br></br> ابدأ خطة التعلم اليوم! يتم متابعة تقدمك حتى تصل إلى خط النهاية.",
+  "learning-plans-meta-desc": "ستساعدك خطط التعلم الخاصة بـ Quran.com على تغيير الطريقة التي تتعامل بها مع القرآن. استكشف مجموعتنا من الدروس المنسقة وابدأ رحلتك اليوم!",
+  "mark-complete": "وضع علامة كمكتمل",
+  "mark-complete-success": "تم وضع علامة على الدرس كمكتمل بنجاح!",
+  "next-lesson": "الدرس التالي",
+  "not-enrolled": "أنت غير مسجل في <link>خطة التعلم</link> حتى الآن.",
+  "prev-lesson": "الدرس السابق",
+  "start-learning": "ابدا بالتعلم",
+  "tabs": {
+    "main": "التفاصيل الرئيسة",
+    "syllabus": "المنهج"
+  }
+}

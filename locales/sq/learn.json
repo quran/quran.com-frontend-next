@@ -1,0 +1,41 @@
+{
+  "about-author": "Rreth Autorit",
+  "add-reflection": "Shto Reflektim",
+  "all-learning-plans": "Të gjitha planet mësimore",
+  "author": "Autori",
+  "back-to-learning-plan": "Kthehu te plani mësimor",
+  "back-to-learning-plans": "Kthehu te planet e mësimit",
+  "category": "Kategoria",
+  "coming-soon": "Vjen së shpejti...",
+  "completed": "E përfunduar",
+  "continue-learning": "Vazhdoni të mësoni",
+  "day": "Dita",
+  "description": "Përshkrim",
+  "duration-daily": "Çdo mësim i shkurtër merr më pak se {{dailyMins}} minuta për të përfunduar {{days}} mësime në total",
+  "empty-learning-plans": "Nuk jeni regjistruar ende në asnjë plan mësimor <link> </link> .",
+  "enroll": "Regjistrohu",
+  "enroll-success": "Urime, keni shtuar {{title}} në listën tuaj!",
+  "enrolled": "I regjistruar",
+  "feedback": {
+    "add-feedback": "Shto koment",
+    "desc": "urime! Ju keni përfunduar planin mësimor \" {{courseName}} \". <br> </br> Ju lutemi rishikoni planin mësimor dhe ndani komentet tuaja për të na ndihmuar të përmirësojmë përmbajtjen.",
+    "feedback-placeholder": "Shkruani komentet tuaja",
+    "feedback-success": "Faleminderit për komentin tuaj!",
+    "your-feedback": "Komentet tuaja"
+  },
+  "learn-duration": "Kohëzgjatja",
+  "learning-plan-material": "Materiali i planit mësimor",
+  "learning-plan-meta-desc": "Ky Plan Mësimi do të ndihmojë në transformimin e mënyrës se si angazhoheni me Kuranin, filloni udhëtimin tuaj sot!",
+  "learning-plans-desc": "Rritni njohuritë tuaja me mësime të thjeshta për t'u ndjekur që ju bëjnë të rriteni në udhëtimin tuaj me Kuranin. <br></br> Filloni një plan mësimor sot! Përparimi juaj gjurmohet derisa të arrini në vijën e finishit.",
+  "learning-plans-meta-desc": "Planet mësimore të Quran.com do të ndihmojnë në transformimin e mënyrës se si angazhoheni me Kuranin. Eksploroni koleksionin tonë të mësimeve të kuruara dhe filloni udhëtimin tuaj sot!",
+  "mark-complete": "Shëno si të përfunduar",
+  "mark-complete-success": "Mësimi është shënuar si i përfunduar me sukses!",
+  "next-lesson": "Mësimi tjetër",
+  "not-enrolled": "Nuk jeni regjistruar ende në <link> planin mësimor </link> .",
+  "prev-lesson": "Mësimi i mëparshëm",
+  "start-learning": "Filloni të mësoni",
+  "tabs": {
+    "main": "Detajet kryesore",
+    "syllabus": "Programi mësimor"
+  }
+}

@@ -20,6 +20,7 @@ type Props = {
   words: Word[];
   shouldShowWordByWordTranslation?: boolean;
   shouldShowWordByWordTransliteration?: boolean;
+  fontScale?: number;
 };
 
 /**
@@ -34,6 +35,7 @@ const PlainVerseText: React.FC<Props> = ({
   words,
   shouldShowWordByWordTranslation = false,
   shouldShowWordByWordTransliteration = false,
+  fontScale,
 }: Props): JSX.Element => {
   const { quranFont, quranTextFontScale, mushafLines } = useSelector(
     selectQuranReaderStyles,
@@ -44,7 +46,7 @@ const PlainVerseText: React.FC<Props> = ({
   return (
     <div
       className={classNames(styles.verseTextContainer, styles.tafsirOrTranslationMode, {
-        [styles[getFontClassName(quranFont, quranTextFontScale, mushafLines)]]:
+        [styles[getFontClassName(quranFont, fontScale || quranTextFontScale, mushafLines)]]:
           quranFont !== QuranFont.Tajweed,
       })}
     >

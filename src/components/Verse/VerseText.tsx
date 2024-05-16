@@ -1,6 +1,7 @@
 import React, { useMemo, useRef } from 'react';
 
 import classNames from 'classnames';
+import { useRouter } from 'next/router';
 import { shallowEqual, useSelector } from 'react-redux';
 
 import { QURAN_READER_OBSERVER_ID } from '../QuranReader/observer';
@@ -17,6 +18,7 @@ import {
   selectReadingViewHoveredVerseKey,
 } from '@/redux/slices/QuranReader/readingViewVerse';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
+import QueryParam from '@/types/QueryParam';
 import { getFontClassName } from '@/utils/fontFaceHelper';
 import { getFirstWordOfSurah } from '@/utils/verse';
 import { FALLBACK_FONT, QuranFont } from 'types/QuranReader';
@@ -35,6 +37,7 @@ const VerseText = ({
   isHighlighted,
   shouldShowH1ForSEO = false,
 }: VerseTextProps) => {
+  const router = useRouter();
   const textRef = useRef(null);
   useIntersectionObserver(textRef, QURAN_READER_OBSERVER_ID);
   const { quranFont, quranTextFontScale, mushafLines } = useSelector(
@@ -54,6 +57,10 @@ const VerseText = ({
     () => isCenterAlignedPage(pageNumber, lineNumber, quranFont),
     [pageNumber, lineNumber, quranFont],
   );
+  // if it's translation mode and hideArabic query param is true, don't show the verse text
+  if (isReadingMode === false && router?.query?.[QueryParam.HIDE_ARABIC] === 'true') {
+    return null;
+  }
   const firstWordData = getFirstWordOfSurah(location);
   const isTajweedFont = quranFont === QuranFont.Tajweed;
   const isBigTextLayout =

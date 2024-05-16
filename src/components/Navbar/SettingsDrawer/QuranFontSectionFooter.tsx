@@ -1,8 +1,8 @@
 import React from 'react';
 
+import Link from 'next/link';
 import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
-import Link from 'next/link';
 
 import Section from './Section';
 

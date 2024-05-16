@@ -1,3 +1,4 @@
 {
-    "meta-description": "{{transliteratedName}} Suresini okuyun ve dinleyin. Sure {{revelationPlace}} nazil olmuştur ve Kuran'da {{chapterOrder}} Sure başlığı {{localeName}} \"{{translatedName}}\" anlamına gelir ve {{versesCount}} ayetten oluşur."
+  "meta-description": "{{transliteratedName}} Suresini okuyun ve dinleyin. Sure {{revelationPlace}} nazil olmuştur ve Kuran'da {{chapterOrder}} Sure başlığı {{localeName}} \"{{translatedName}}\" anlamına gelir ve {{versesCount}} ayetten oluşur.",
+  "ranges-meta-desc": "Ayah {{rangeFrom}} ile Ayah {{rangeTo}} arasında okuyun ve dinleyin."
 }

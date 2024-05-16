@@ -1,0 +1,5 @@
+.container {
+    margin-block-start: var(--spacing-large);
+    // footer at the bottom
+    margin-block-end: calc(3 * var(--spacing-mega));
+}

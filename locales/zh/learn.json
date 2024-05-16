@@ -1,0 +1,41 @@
+{
+  "about-author": "关于作者",
+  "add-reflection": "添加倒影",
+  "all-learning-plans": "所有学习计划",
+  "author": "作者",
+  "back-to-learning-plan": "返回学习计划",
+  "back-to-learning-plans": "返回学习计划",
+  "category": "类别",
+  "coming-soon": "即将推出...",
+  "completed": "完全的",
+  "continue-learning": "继续学习",
+  "day": "天",
+  "description": "描述",
+  "duration-daily": "每节简短课程只需不到{{dailyMins}}分钟即可完成总共{{days}}节课程",
+  "empty-learning-plans": "您尚未注册任何<link>学习计划</link> 。",
+  "enroll": "注册",
+  "enroll-success": "恭喜，您已将{{title}}添加到您的列表中！",
+  "enrolled": "已注册",
+  "feedback": {
+    "add-feedback": "添加反馈",
+    "desc": "恭喜！您已完成“ {{courseName}} ”学习计划。 <br> </br>请查看学习计划并分享您的反馈，以帮助我们改进内容。",
+    "feedback-placeholder": "写下您的反馈",
+    "feedback-success": "感谢您的反馈意见！",
+    "your-feedback": "您的反馈"
+  },
+  "learn-duration": "期间",
+  "learning-plan-material": "学习计划材料",
+  "learning-plan-meta-desc": "该学习计划将帮助您改变学习《古兰经》的方式，今天就开始您的旅程吧！",
+  "learning-plans-desc": "通过简单易懂的课程来增长您的知识，让您在《古兰经》的旅程中不断成长。 <br></br>今天就开始制定学习计划！系统会跟踪您的进度，直到您到达终点线。",
+  "learning-plans-meta-desc": "Quran.com 的学习计划将帮助改变您学习《古兰经》的方式。探索我们精选的课程集合，立即开始您的旅程！",
+  "mark-complete": "标记为已完成",
+  "mark-complete-success": "课程已标记为成功完成！",
+  "next-lesson": "下一课",
+  "not-enrolled": "您尚未加入<link>学习计划</link> 。",
+  "prev-lesson": "上一课",
+  "start-learning": "开始学习",
+  "tabs": {
+    "main": "主要细节",
+    "syllabus": "教学大纲"
+  }
+}

@@ -1,0 +1,12 @@
+@use "src/styles/breakpoints";
+
+.headerContainer {
+    font-size: var(--font-size-large);
+    font-weight: var(--font-weight-bold);
+    margin-block-end: var(--spacing-small);
+}
+
+.desc {
+    font-weight: var(--font-weight-semibold);
+    text-align: center;
+}

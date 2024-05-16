@@ -1,8 +1,8 @@
 import { useRef, useState } from 'react';
 
 import classNames from 'classnames';
-import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
+import useTranslation from 'next-translate/useTranslation';
 
 import ContentModal from '@/components/dls/ContentModal/ContentModal';
 import ReflectionBodyContainer from '@/components/QuranReader/ReflectionView/ReflectionBodyContainer';
@@ -53,12 +53,17 @@ const QuranReflectButton = ({
         variant={ButtonVariant.Ghost}
         onClick={onButtonClicked}
         size={ButtonSize.Small}
-        tooltip={t('reflect')}
+        tooltip={t('reflections')}
         shouldFlipOnRTL={false}
         shape={ButtonShape.Circle}
-        className={classNames(styles.iconContainer, styles.verseAction, {
-          [styles.fadedVerseAction]: isTranslationView,
-        })}
+        className={classNames(
+          styles.iconContainer,
+          styles.verseAction,
+          {
+            [styles.fadedVerseAction]: isTranslationView,
+          },
+          'reflection-verse-button', // for onboarding
+        )}
         ariaLabel={t('quran-reader:aria.read-ayah-refls')}
       >
         <span className={styles.icon}>

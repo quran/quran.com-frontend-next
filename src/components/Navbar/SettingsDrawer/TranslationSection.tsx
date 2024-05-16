@@ -8,6 +8,7 @@ import Section from './Section';
 import styles from './TranslationSection.module.scss';
 
 import DataFetcher from '@/components/DataFetcher';
+import { useOnboarding } from '@/components/Onboarding/OnboardingProvider';
 import Counter from '@/dls/Counter/Counter';
 import SelectionCard from '@/dls/SelectionCard/SelectionCard';
 import Skeleton from '@/dls/Skeleton/Skeleton';
@@ -38,6 +39,7 @@ const TranslationSection = () => {
   const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const { translationFontScale } = quranReaderStyles;
+  const { isActive, nextStep } = useOnboarding();
 
   const translationLoading = useCallback(
     () => (
@@ -58,7 +60,10 @@ const TranslationSection = () => {
   const onSelectionCardClicked = useCallback(() => {
     dispatch(setSettingsView(SettingsView.Translation));
     logValueChange('settings_view', SettingsView.Translation, SettingsView.Body);
-  }, [dispatch]);
+    if (isActive) {
+      nextStep();
+    }
+  }, [dispatch, isActive, nextStep]);
 
   const renderTranslations = useCallback(
     (data: TranslationsResponse) => {
@@ -133,7 +138,7 @@ const TranslationSection = () => {
 
   return (
     <div className={styles.container}>
-      <Section>
+      <Section id="translation-section">
         <Section.Title isLoading={isLoading}>{t('translation')}</Section.Title>
         <Section.Row>
           <DataFetcher

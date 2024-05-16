@@ -1,0 +1,20 @@
+.loadingContainer {
+    display: flex;
+    justify-content: center;
+    margin-block-start: var(--spacing-mega);
+}
+
+.sorterContainer {
+    padding-block-start: var(--spacing-medium);
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+}
+
+.sorterInnerContainer {
+    display: flex;
+    align-items: center;
+    .text {
+        margin-inline-end: var(--spacing-xxsmall);
+    }
+}

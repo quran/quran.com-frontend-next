@@ -1,0 +1,35 @@
+{
+  "hero": {
+    "line-1": "Kalender Al-Quran Global adalah jadwal membaca yang dirancang untuk mendorong pembacaan reflektif seluruh Al-Quran dari akhir satu Ramadhan hingga awal Ramadhan berikutnya. Kami mendorong Anda untuk meluangkan waktu untuk memahami dan merenungkan ayat-ayat tersebut sehingga Anda dapat memperoleh hubungan yang lebih dalam dan menyentuh hati."
+  },
+  "interact-with-post": "Berinteraksi dengan postingan ini di QuranReflect",
+  "islamic-months": {
+    "1": "Muharram",
+    "2": "Safari",
+    "3": "Rabi' al-Awwal",
+    "4": "Rabi' al-Thani",
+    "5": "Jumada al-Awwal",
+    "6": "Jumada al-Thani",
+    "7": "Rajab",
+    "8": "Sya'ban",
+    "9": "Ramadan",
+    "10": "Syawal",
+    "11": "Dhu al-Qi'dah",
+    "12": "Dhu al-Hijjah"
+  },
+  "join-qc": {
+    "line-1": "Kita berada di <highlight> Minggu {{weekNumber}} <\/highlight> dalam Kalender Alquran.",
+    "line-2": "<normal> Bergabunglah dengan kami untuk membaca minggu ini meskipun ini pertama kalinya bagi Anda! <\/normal>"
+  },
+  "join-quranic-calendar": "Berlangganan untuk menerima pembaruan dan sumber daya melalui QuranReflect",
+  "join-quranic-calendar-success": "Anda telah berhasil bergabung dengan Klub Buku Ilahi!",
+  "quranic-calendar": "Kalender Alquran Global",
+  "reading-options": {
+    "default-settings": "Baca dengan pengaturan default saya",
+    "en-and-ar": "Baca dalam bahasa Inggris dan Arab",
+    "en-only": "Baca dalam bahasa Inggris saja"
+  },
+  "supplemental-resources": "Sumber Daya Pendukung",
+  "today": "Tanggal hari ini adalah: <highlight> {{month}} {{day}} {{year}} , {{gregorianDate}} <\/highlight>",
+  "week-title": "Minggu {{weekNumber}} ( {{month}} ) mencakup ayat {{rangeStart}} hingga {{rangeEnd}}"
+}

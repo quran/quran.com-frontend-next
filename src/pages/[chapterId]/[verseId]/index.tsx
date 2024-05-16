@@ -1,8 +1,8 @@
 /* eslint-disable max-lines */
 /* eslint-disable react-func/max-lines-per-function */
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
-import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
+import useTranslation from 'next-translate/useTranslation';
 
 import { getChapterIdBySlug, getChapterVerses, getPagesLookup } from '@/api';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
@@ -71,7 +71,9 @@ const Verse: NextPage<VerseProps> = ({ chapterResponse, versesResponse, hasError
       <QuranReader
         initialData={versesResponse}
         id={chapterResponse.chapter.id}
-        quranReaderDataType={isVerse ? QuranReaderDataType.Verse : QuranReaderDataType.VerseRange}
+        quranReaderDataType={
+          isVerse ? QuranReaderDataType.Verse : QuranReaderDataType.ChapterVerseRanges
+        }
       />
     </>
   );

@@ -20,7 +20,13 @@ type Props = {
   shouldOpen?: boolean;
   shouldRotatePrefixOnToggle?: boolean;
   onOpenChange?: (isOpen: boolean) => void;
+  direction?: CollapsibleDirection;
 };
+
+export enum CollapsibleDirection {
+  Left = 'left',
+  Right = 'right',
+}
 
 const Collapsible = ({
   isDefaultOpen = false,
@@ -31,6 +37,7 @@ const Collapsible = ({
   shouldRotatePrefixOnToggle,
   shouldOpen,
   onOpenChange,
+  direction = CollapsibleDirection.Left,
 }: Props) => {
   const [isOpen, setIsOpen] = useState(isDefaultOpen);
 
@@ -49,19 +56,34 @@ const Collapsible = ({
     <CollapsiblePrimitive.Root onOpenChange={onOpenChange} open={isOpen}>
       <CollapsiblePrimitive.Trigger asChild>
         <div className={styles.header} onClick={onHeaderClicked}>
-          <div className={styles.headerLeft}>
-            <div
-              className={classNames(styles.prefixContainer, {
-                [styles.prefixRotated]: shouldRotatePrefixOnToggle && isOpen,
-              })}
-            >
-              {prefix}
-            </div>
-            {title}
-          </div>
-          <div className={styles.suffixContainer} onClick={onSuffixClicked}>
-            {suffix}
-          </div>
+          {direction === CollapsibleDirection.Left ? (
+            <>
+              <div className={styles.headerLeft}>
+                <div
+                  className={classNames(styles.prefixContainer, {
+                    [styles.prefixRotated]: shouldRotatePrefixOnToggle && isOpen,
+                  })}
+                >
+                  {prefix}
+                </div>
+                {title}
+              </div>
+              <div className={styles.suffixContainer} onClick={onSuffixClicked}>
+                {suffix}
+              </div>
+            </>
+          ) : (
+            <>
+              <div className={styles.headerLeft}>{title}</div>
+              <div
+                className={classNames(styles.prefixContainer, {
+                  [styles.prefixRotated]: shouldRotatePrefixOnToggle && isOpen,
+                })}
+              >
+                {prefix}
+              </div>
+            </>
+          )}
         </div>
       </CollapsiblePrimitive.Trigger>
       <CollapsiblePrimitive.CollapsibleContent>

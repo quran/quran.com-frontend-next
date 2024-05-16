@@ -1,0 +1,41 @@
+{
+  "about-author": "About the author",
+  "add-reflection": "Add Reflection",
+  "all-learning-plans": "All Learning Plans",
+  "author": "Author",
+  "back-to-learning-plan": "Back to Learning Plan",
+  "back-to-learning-plans": "Back to Learning Plans",
+  "category": "Category",
+  "coming-soon": "Coming Soon...",
+  "completed": "Completed",
+  "continue-learning": "Continue Learning",
+  "day": "Day",
+  "description": "Description",
+  "duration-daily": "Each short Lesson takes less than {{dailyMins}} minutes to complete {{days}} Lessons total",
+  "empty-learning-plans": "You are not enrolled in any <link>Learning Plans</link> yet.",
+  "enroll": "Enroll",
+  "enroll-success": "Congratulations, You added {{title}} to your list!",
+  "enrolled": "Enrolled",
+  "feedback": {
+    "add-feedback": "Add Feedback",
+    "desc": "Congratulations! You have completed the '{{courseName}}' learning plan. <br></br>  Please review the learning plan and share your feedback to help us improve the content.",
+    "feedback-placeholder": "Write your feedback",
+    "feedback-success": "Thank you for your feedback!",
+    "your-feedback": "Your Feedback"
+  },
+  "learn-duration": "Duration",
+  "learning-plan-material": "Learning Plan Material",
+  "learning-plan-meta-desc": "This Learning Plan will help transform the way you engage with the Quran, begin your journey today!",
+  "learning-plans-desc": "Boost your knowledge with easy-to-follow lessons that keep you growing in your journey with the Quran. <br></br>Start a Learning Plan today! Your progress is tracked until you reach the finish line.",
+  "learning-plans-meta-desc": "Quran.com’s Learning Plans will help transform the way you engage with the Quran. Explore our collection of curated lessons and begin your journey today!",
+  "mark-complete": "Mark as completed",
+  "mark-complete-success": "Lesson has been marked as complete successfully!",
+  "next-lesson": "Next Lesson",
+  "not-enrolled": "You are not enrolled in the <link>Learning Plan</link> yet.",
+  "prev-lesson": "Previous Lesson",
+  "start-learning": "Start Learning",
+  "tabs": {
+    "main": "Main Details",
+    "syllabus": "Syllabus"
+  }
+}

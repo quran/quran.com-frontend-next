@@ -1,0 +1,41 @@
+{
+  "about-author": "A propos de l'auteur",
+  "add-reflection": "Ajouter une réflexion",
+  "all-learning-plans": "Tous les plans d'apprentissage",
+  "author": "Auteur",
+  "back-to-learning-plan": "Retour au plan d'apprentissage",
+  "back-to-learning-plans": "Retour aux plans d'apprentissage",
+  "category": "Catégorie",
+  "coming-soon": "À venir...",
+  "completed": "Complété",
+  "continue-learning": "Continuer l'apprentissage",
+  "day": "Jour",
+  "description": "Description",
+  "duration-daily": "Chaque courte leçon prend moins de {{dailyMins}} minutes pour compléter {{days}} leçons au total",
+  "empty-learning-plans": "Vous n'êtes pas encore inscrit à un <link> plan de formation </link> .",
+  "enroll": "Inscrire",
+  "enroll-success": "Félicitations, vous avez ajouté {{title}} à votre liste !",
+  "enrolled": "Inscrit",
+  "feedback": {
+    "add-feedback": "Ajouter des commentaires",
+    "desc": "Toutes nos félicitations! Vous avez terminé le plan d'apprentissage ' {{courseName}} '. <br> </br> Veuillez consulter le plan d'apprentissage et partager vos commentaires pour nous aider à améliorer le contenu.",
+    "feedback-placeholder": "Écrivez vos commentaires",
+    "feedback-success": "Merci pour votre avis!",
+    "your-feedback": "Vos réactions"
+  },
+  "learn-duration": "Durée",
+  "learning-plan-material": "Matériel du plan d’apprentissage",
+  "learning-plan-meta-desc": "Ce plan d'apprentissage vous aidera à transformer la façon dont vous vous engagez dans le Coran. Commencez votre voyage dès aujourd'hui !",
+  "learning-plans-desc": "Améliorez vos connaissances avec des leçons faciles à suivre qui vous permettront de progresser dans votre voyage avec le Coran. <br></br> Commencez un plan d'apprentissage dès aujourd'hui ! Votre progression est suivie jusqu'à ce que vous atteigniez la ligne d'arrivée.",
+  "learning-plans-meta-desc": "Les plans d'apprentissage de Quran.com vous aideront à transformer la façon dont vous vous engagez dans le Coran. Explorez notre collection de leçons organisées et commencez votre voyage dès aujourd'hui !",
+  "mark-complete": "Marquer comme terminé",
+  "mark-complete-success": "La leçon a été marquée comme terminée avec succès !",
+  "next-lesson": "Prochaine leçon",
+  "not-enrolled": "Vous n'êtes pas encore inscrit au <link> plan de formation </link> .",
+  "prev-lesson": "Leçon précédente",
+  "start-learning": "Commencer à apprendre",
+  "tabs": {
+    "main": "Principaux détails",
+    "syllabus": "Programme"
+  }
+}

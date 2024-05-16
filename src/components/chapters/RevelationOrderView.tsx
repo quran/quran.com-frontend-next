@@ -1,8 +1,9 @@
+/* eslint-disable jsx-a11y/control-has-associated-label */
 import { useMemo, useState } from 'react';
 
+import { useRouter } from 'next/router';
 import { Translate } from 'next-translate';
 import useTranslation from 'next-translate/useTranslation';
-import { useRouter } from 'next/router';
 
 import styles from './ChapterAndJuzList.module.scss';
 

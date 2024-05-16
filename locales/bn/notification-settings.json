@@ -1,0 +1,22 @@
+{
+  "all-notifications": "সমস্ত বিজ্ঞপ্তি",
+  "channels-notifications": "চ্যানেল বিজ্ঞপ্তি",
+  "channels": {
+    "chat": "চ্যাট",
+    "email": "ইমেইল",
+    "in_app": "ইন-অ্যাপ",
+    "push": "ধাক্কা",
+    "sms": "খুদেবার্তা"
+  },
+  "notif-settings-not-enabled": "বিজ্ঞপ্তি সেটিংস সক্ষম করা নেই৷",
+  "notif-update-success": "আপনার বিজ্ঞপ্তি সেটিংস সফলভাবে আপডেট করা হয়েছে!",
+  "tabs": {
+    "categories-settings": "বিভাগ সেটিংস",
+    "global-settings": "গ্লোবাল সেটিংস"
+  },
+  "tags": {
+    "learning-plans": "শেখার পরিকল্পনা",
+    "qgj": "কুরআন বৃদ্ধির যাত্রা",
+    "streaks": "স্ট্রিকস"
+  }
+}

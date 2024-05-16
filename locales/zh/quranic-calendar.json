@@ -1,0 +1,35 @@
+{
+  "hero": {
+    "line-1": "全球古兰经日历是一个阅读计划，旨在鼓励人们从斋月结束到下一个斋月开始对整本古兰经进行反思性阅读。我们鼓励您花时间理解和反思经文，这样您就可以获得更深刻、更真诚的联系。"
+  },
+  "interact-with-post": "在 QuranReflect 上与此帖子互动",
+  "islamic-months": {
+    "1": "穆哈兰姆",
+    "2": "萨法尔",
+    "3": "拉比·阿瓦尔",
+    "4": "拉比·阿勒萨尼",
+    "5": "朱玛达·艾尔·阿瓦尔",
+    "6": "朱玛达·阿勒萨尼",
+    "7": "拉贾卜",
+    "8": "沙班",
+    "9": "斋月",
+    "10": "绍瓦勒",
+    "11": "杜阿尔基达",
+    "12": "杜·艾·希哲"
+  },
+  "join-qc": {
+    "line-1": "我们正处于古兰经历的<highlight>周{{weekNumber}} </highlight> 。",
+    "line-2": "<normal>即使这是你的第一次，也请加入我们本周的阅读！ </normal>"
+  },
+  "join-quranic-calendar": "订阅通过 QuranReflect 接收更新和资源",
+  "join-quranic-calendar-success": "您已成功加入神书俱乐部！",
+  "quranic-calendar": "全球古兰经日历",
+  "reading-options": {
+    "default-settings": "使用我的默认设置阅读",
+    "en-and-ar": "以英语和阿拉伯语阅读",
+    "en-only": "仅提供英文版本"
+  },
+  "supplemental-resources": "支持资源",
+  "today": "今天的日期是： <highlight> {{month}} {{day}} {{year}} , {{gregorianDate}} </highlight>",
+  "week-title": "第{{weekNumber}}周 ( {{month}} )，涵盖从{{rangeStart}}到{{rangeEnd}}时间段"
+}

@@ -1,0 +1,20 @@
+.container {
+    border: 1px var(--color-borders-hairline) solid;
+    border-radius: var(--border-radius-default);
+    padding: var(--spacing-xsmall);
+    margin-block: var(--spacing-xxsmall);
+}
+
+.title {
+    font-weight: var(--font-weight-semibold);
+}
+
+.contentContainer {
+    margin-block-start: var(--spacing-small);
+}
+
+.checkboxTitle {
+    font-weight: var(--font-weight-semibold);
+    margin-block: var(--spacing-small);
+    text-decoration: underline;
+}

@@ -1,7 +1,6 @@
 @use "src/styles/breakpoints";
 
 .contentPage {
-  text-align: justify;
   margin: auto;
   @include breakpoints.desktop {
     width: 65%;
@@ -54,6 +53,9 @@
       font-size: var(--font-size-large);
     }
   }
+  b {
+    font-weight: var(--font-weight-bold);
+  }
 }
 
 .image {
@@ -99,4 +101,12 @@
 }
 .innerSection {
   padding-block: var(--spacing-medium);
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.subHeading {
+  font-weight: var(--font-weight-bold);
 }

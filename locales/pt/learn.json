@@ -1,0 +1,41 @@
+{
+  "about-author": "Sobre o autor",
+  "add-reflection": "Adicionar reflexão",
+  "all-learning-plans": "Todos os planos de aprendizagem",
+  "author": "Autor",
+  "back-to-learning-plan": "Voltar ao Plano de Aprendizagem",
+  "back-to-learning-plans": "Voltar aos Planos de Aprendizagem",
+  "category": "Categoria",
+  "coming-soon": "Em breve...",
+  "completed": "Concluído",
+  "continue-learning": "Continuar aprendendo",
+  "day": "Dia",
+  "description": "Descrição",
+  "duration-daily": "Cada aula curta leva menos de {{dailyMins}} minutos para ser concluída {{days}} aulas no total",
+  "empty-learning-plans": "Você ainda não está inscrito em nenhum <link> Plano de Aprendizagem </link> .",
+  "enroll": "Matricular",
+  "enroll-success": "Parabéns, você adicionou {{title}} à sua lista!",
+  "enrolled": "Inscrito",
+  "feedback": {
+    "add-feedback": "Adicionar comentários",
+    "desc": "Parabéns! Você concluiu o plano de aprendizagem ' {{courseName}} '. <br> </br> Revise o plano de aprendizagem e compartilhe seus comentários para nos ajudar a melhorar o conteúdo.",
+    "feedback-placeholder": "Escreva seu feedback",
+    "feedback-success": "Obrigado pelo seu feedback!",
+    "your-feedback": "Seu feedback"
+  },
+  "learn-duration": "Duração",
+  "learning-plan-material": "Material do Plano de Aprendizagem",
+  "learning-plan-meta-desc": "Este Plano de Aprendizagem ajudará a transformar a maneira como você se envolve com o Alcorão. Comece sua jornada hoje!",
+  "learning-plans-desc": "Aumente seu conhecimento com lições fáceis de seguir que o manterão crescendo em sua jornada com o Alcorão. <br></br> Inicie um Plano de Aprendizagem hoje mesmo! Seu progresso é monitorado até você chegar à linha de chegada.",
+  "learning-plans-meta-desc": "Os Planos de Aprendizagem do Quran.com ajudarão a transformar a maneira como você se envolve com o Alcorão. Explore nossa coleção de lições selecionadas e comece sua jornada hoje!",
+  "mark-complete": "Marcar como concluído",
+  "mark-complete-success": "A lição foi marcada como concluída com sucesso!",
+  "next-lesson": "Próxima lição",
+  "not-enrolled": "Você ainda não está inscrito no <link> Plano de aprendizagem </link> .",
+  "prev-lesson": "Lição Anterior",
+  "start-learning": "Comece a aprender",
+  "tabs": {
+    "main": "Detalhes principais",
+    "syllabus": "Programa de Estudos"
+  }
+}

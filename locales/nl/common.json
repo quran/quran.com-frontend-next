@@ -1,380 +1,404 @@
 {
-    "about": "Over ons",
-    "allow": "Toestaan",
-    "and": "en",
-    "announcements": {
-        "auth-onboarding": {
-            "data-sync": {
-                "action": "Volgende",
-                "description": "Of je nu Quran.com op je telefoon of je laptop gebruikt, je bladwijzers, laatst gelezen verzen en je voorkeuren zijn beschikbaar",
-                "title": "Uw gegevens worden <br><\/br> op verschillende apparaten gesynchroniseerd"
-            },
-            "feedback": {
-                "action": "Oké, snap het",
-                "description": "Bedankt voor het gebruik van Quran.com en we horen graag uw feedback op <link> feedback.quran.com <\/link>",
-                "title": "We willen je gedachten horen"
-            },
-            "quran-foundation-link": {
-                "action": "Volgende",
-                "description": "Gebruik uw Quran.com-login voor toegang tot QuranReflect.com - een bloeiende wereldwijde gemeenschap die zich bezighoudt met koranreflectie.",
-                "title": "Gebruik uw account in alle Quran.Foundation-apps!"
-            },
-            "quran-growth-journey": {
-                "action": "Volgende",
-                "description": "Behoud uw koranleesreeks en boek vooruitgang bij het behalen van uw doelen terwijl u nieuwe gewoonten opbouwt",
-                "title": "Begin uw korangroeireis!"
-            },
-            "welcome": {
-                "action": "Zie wat nieuw is",
-                "title": "Welkom bij Quran.com <br><\/br> Gebruikersaccount"
-            }
-        },
-        "collections-announcement": {
-            "slide-1": {
-                "description": "We zijn erg blij om aan te kondigen dat je nu bladwijzers kunt groeperen onder \"collecties\"! <br\/> <br\/> <li> Voeg zoveel collecties toe als je wilt <\/li> <li> Voeg een bladwijzer toe aan een of meer collecties <\/li> <li> En meer! <\/li>",
-                "title": "Bladwijzercollecties zijn hier!"
-            }
-        }
+  "about": "Over ons",
+  "allow": "Toestaan",
+  "and": "en",
+  "announcements": {
+    "auth-onboarding": {
+      "data-sync": {
+        "action": "Volgende",
+        "description": "Of je nu Quran.com op je telefoon of je laptop gebruikt, je bladwijzers, laatst gelezen verzen en je voorkeuren zijn beschikbaar",
+        "title": "Uw gegevens worden <br></br> op verschillende apparaten gesynchroniseerd"
+      },
+      "feedback": {
+        "action": "Oké, snap het",
+        "description": "Bedankt voor het gebruik van Quran.com en we horen graag uw feedback op <link> feedback.quran.com </link>",
+        "title": "We willen je gedachten horen"
+      },
+      "quran-foundation-link": {
+        "action": "Volgende",
+        "description": "Gebruik uw Quran.com-login voor toegang tot QuranReflect.com - een bloeiende wereldwijde gemeenschap die zich bezighoudt met koranreflectie.",
+        "title": "Gebruik uw account in alle Quran.Foundation-apps!"
+      },
+      "quran-growth-journey": {
+        "action": "Volgende",
+        "description": "Behoud uw koranleesreeks en boek vooruitgang bij het behalen van uw doelen terwijl u nieuwe gewoonten opbouwt",
+        "title": "Begin uw korangroeireis!"
+      },
+      "welcome": {
+        "action": "Zie wat nieuw is",
+        "title": "Welkom bij Quran.com <br></br> Gebruikersaccount"
+      }
     },
-    "aria": {
-        "change-settings": "Instellingen veranderen",
-        "drawer-close": "Sluit lade",
-        "msg-close": "Bericht sluiten",
-        "nav-drawer-open": "Navigatielade openen",
-        "play-surah": "Speel Surah {{surahName}}",
-        "select-lng": "Selecteer taal",
-        "sidebar-nav-close": "Navigatiezijbalk sluiten"
+    "collections-announcement": {
+      "slide-1": {
+        "description": "We zijn erg blij om aan te kondigen dat je nu bladwijzers kunt groeperen onder \"collecties\"! <br/> <br/> <li> Voeg zoveel collecties toe als je wilt </li> <li> Voeg een bladwijzer toe aan een of meer collecties </li> <li> En meer! </li>",
+        "title": "Bladwijzercollecties zijn hier!"
+      }
+    }
+  },
+  "aria": {
+    "change-settings": "Instellingen veranderen",
+    "drawer-close": "Sluit lade",
+    "msg-close": "Bericht sluiten",
+    "nav-drawer-open": "Navigatielade openen",
+    "play-surah": "Speel Surah {{surahName}}",
+    "select-lng": "Selecteer taal",
+    "sidebar-nav-close": "Navigatiezijbalk sluiten"
+  },
+  "audio": {
+    "auto-scroll": {
+      "off": "Uit",
+      "on": "Op",
+      "title": "Automatisch scrollen"
     },
-    "audio": {
-        "auto-scroll": {
-            "off": "Uit",
-            "on": "Op",
-            "title": "Automatisch scrollen"
-        },
-        "displaying": "Weergeven",
-        "exp-tip": "<span>Wijzig de weergegeven inhoud onder<\/span><br><\/br> <boldSpan>Instellingen<\/boldSpan> > <boldSpan>Woord voor woord<\/boldSpan>",
-        "exp-tip-no-select": "<span>Vink de tooltip-weergaveoptie aan en selecteer de <br><\/br> optie Vertaling en\/of transliteratie<\/span><br><\/br><span> onder <\/span><boldSpan>Instellingen<\/boldSpan> > <boldSpan>Woord voor woord<\/boldSpan><span>, om<\/span><br><\/br> <span>deze functie in te schakelen.<\/span>",
-        "experience": "Ervaring",
-        "play": "Audio afspelen",
-        "playback-normal": "normaal",
-        "playback-speed": "Afspeelsnelheid",
-        "playback-speed-unit": "x",
-        "player": {
-            "close-audio-player": "Sluit audiospeler",
-            "currently-playing": "Je speelt momenteel",
-            "delay-verse": "Vertraging tussen vers",
-            "download": "Downloaden",
-            "full-surah": "volledige soera",
-            "manage-repeat-settings": "Herhaalinstellingen beheren",
-            "mismatch": "Klik op \"Overnieuw beginnen\" als je in plaats daarvan {{currentReadingChapter}}",
-            "pause": "Pauze",
-            "pause-audio": "Audio pauzeren",
-            "play": "Toneelstuk",
-            "play-audio": "Audio afspelen",
-            "play-range": "Speelbereik",
-            "previous-ayah": "Vorige Aya",
-            "repeat-1-verse": "Herhaal vers",
-            "repeat-settings": "Instellingen herhalen",
-            "repeat-verse": "Herhaal elk vers",
-            "search-verse": "Zoek naar een vers",
-            "single-verse": "Enkel Vers",
-            "start-over": "Begin opnieuw",
-            "start-playing": "Begin met spelen",
-            "stop-repeating": "Stop met herhalen",
-            "times": "keer",
-            "verses-range": "Bereik van verzen"
-        },
-        "repeat-moved": "De herhaalinstellingen zijn verplaatst naar de audiospeler. Klik op het <0> <\/0> om ze te openen",
-        "select-reciter": "Selecteer voordrager",
-        "speed": "Snelheid",
-        "title": "Audio"
+    "displaying": "Weergeven",
+    "exp-tip": "<span>Wijzig de weergegeven inhoud onder</span><br></br> <boldSpan>Instellingen</boldSpan> > <boldSpan>Woord voor woord</boldSpan>",
+    "exp-tip-no-select": "<span>Vink de tooltip-weergaveoptie aan en selecteer de <br></br> optie Vertaling en/of transliteratie</span><br></br><span> onder </span><boldSpan>Instellingen</boldSpan> > <boldSpan>Woord voor woord</boldSpan><span>, om</span><br></br> <span>deze functie in te schakelen.</span>",
+    "experience": "Ervaring",
+    "play": "Audio afspelen",
+    "playback-normal": "normaal",
+    "playback-speed": "Afspeelsnelheid",
+    "playback-speed-unit": "x",
+    "player": {
+      "close-audio-player": "Sluit audiospeler",
+      "currently-playing": "Je speelt momenteel",
+      "delay-verse": "Vertraging tussen vers",
+      "download": "Downloaden",
+      "full-surah": "volledige soera",
+      "manage-repeat-settings": "Herhaalinstellingen beheren",
+      "mismatch": "Klik op \"Overnieuw beginnen\" als je in plaats daarvan {{currentReadingChapter}}",
+      "pause": "Pauze",
+      "pause-audio": "Audio pauzeren",
+      "play": "Toneelstuk",
+      "play-audio": "Audio afspelen",
+      "play-range": "Speelbereik",
+      "previous-ayah": "Vorige Aya",
+      "repeat-1-verse": "Herhaal vers",
+      "repeat-settings": "Instellingen herhalen",
+      "repeat-verse": "Herhaal elk vers",
+      "search-verse": "Zoek naar een vers",
+      "single-verse": "Enkel Vers",
+      "start-over": "Begin opnieuw",
+      "start-playing": "Begin met spelen",
+      "stop-repeating": "Stop met herhalen",
+      "times": "keer",
+      "verses-range": "Bereik van verzen",
+      "volume-control": "Volumeregeling"
     },
-    "ayah": "Aya",
-    "ayahs": "Ayahs",
-    "beta": "bèta",
-    "bookmark": "Bladwijzer",
-    "bookmarked": "Bladwijzer",
-    "both": "Beide",
-    "cancel": "Annuleren",
-    "click-here": "Klik hier",
-    "close": "Dichtbij",
-    "command-bar": {
-        "navigations": "Navigatie",
-        "no-nav-results": "Geen navigatieresultaten",
-        "placeholder": "Wat wil je lezen?",
-        "powered-by": "Gesproken zoekopdracht mogelijk gemaakt door Tarteel.ai",
-        "recent-navigations": "Recente navigatie",
-        "search-by-voice": "Zoek bij stem",
-        "try-navigating": "Probeer te navigeren naar"
-    },
-    "community": {
-        "cta": "Word lid van de community",
-        "header": "Word lid van de QDC-gemeenschap van moslimbouwers en technologen.",
-        "sub-header": "Meld u aan voor de Quran.com Discord om deel te nemen en samen te werken met de toonaangevende islamitische technologie voor gemeenschapsopbouw.",
-        "title": "Gemeenschap"
-    },
-    "complete-sign-up": "Voltooi je registratie",
-    "consents": {
-        "communication": {
-            "body": "🚀 Verbeter uw voortgang via <boldSpan> gepersonaliseerde <\/boldSpan> meldingen over uw doelvoortgang, het bijhouden van streaks en het verbeteren van uw gebruik van onze huidige functies. <br><\/br> <br><\/br> Kunnen we u op de hoogte houden via e-mail en andere kanalen? U heeft de controle. U kunt deze voorkeuren op elk gewenst moment aanpassen in uw accountinstellingen. <br><\/br> <br><\/br> Selecteer eenvoudig 'Toestaan' voor <boldSpan> inspirerende herinneringen <\/boldSpan> of 'Niet nu' om te weigeren.",
-            "header": "We helpen u graag <boldSpan> toegewijd en consistent <\/boldSpan> te blijven tijdens uw Korangroeireis! 📖🌟"
-        }
-    },
-    "continue": "Doorgaan met",
-    "copied": "gekopieerd",
-    "copied-to-clipboard": "Gekopieerd naar het klembord",
-    "copy": "Kopiëren",
-    "counter": {
-        "decrease": "Verminderen",
-        "increase": "Toename"
-    },
-    "default-description": "De Koran vertaald in vele talen in een eenvoudige en gemakkelijke interface",
-    "developers": "ontwikkelaars",
-    "display": "Weergave",
-    "donate": "Doneren",
-    "donate_monthly": "Doneer maandelijks",
-    "donate_once": "Doneer eenmalig",
-    "email-verification": {
-        "check-spam": "Heb je de verificatie-e-mail niet ontvangen? Check je spam-inbox",
-        "email-sent": "We hebben zojuist een e-mail gestuurd naar <strong> {{email}} <\/strong>",
-        "email-verification": "Email verificatie",
-        "resend-email": "Email opnieuw verzenden",
-        "resend-email-in": "Verzend de verificatie-e-mail opnieuw over {{remainingTime}} sec...",
-        "verify-code": "Code verifiëren"
-    },
-    "error": {
-        "bookmark-sync": "Bladwijzer loopt niet synchroon.",
-        "email-login-fail": "Inloggen met e-mail is mislukt. Probeer het opnieuw",
-        "general": "Er is iets fout gegaan. Probeer het opnieuw.",
-        "offline": "Het lijkt erop dat je je verbinding bent kwijtgeraakt. Controleer het en probeer het opnieuw.",
-        "pref-persist-fail": "Kan je instellingen niet synchroniseren met de cloud."
-    },
-    "feedback": "Feedback",
-    "fonts": {
-        "15_lines": "15 lijnen",
-        "16_lines": "16 lijnen",
-        "code_v1": "Koning Fahad Complex V1",
-        "code_v2": "Koning Fahad Complex V2",
-        "font-size": "Lettertypegrootte",
-        "lines": "lijnen",
-        "qcf-desc": "Koning Fahad Complex (V1 en V2) Fonts bieden een hogere kwaliteit, maar laden duurt langer.",
-        "qpc_uthmani_hafs": "QPC Uthmani Hafs",
-        "quran-font": "Koran lettertype",
-        "tajweed": "Tajweed",
-        "tajweed-desc": "Tajweed lettertype toont een Tajweed gekleurde Mushaf. Meer over de Tajweed kleurregels lees je <0> hier <\/0>",
-        "text_indopak": "IndoPak",
-        "text_uthmani": "Uthmani"
-    },
-    "footer": {
-        "description": "Quran.com is een Sadaqah Jariyah. We hopen het voor iedereen gemakkelijk te maken om de Edele Koran te lezen, te bestuderen en te leren. De Edele Koran heeft vele namen, waaronder Al-Quran Al-Kareem, Al-Ketab, Al-Furqan, Al-Maw'itha, Al-Thikr en Al-Noor.",
-        "rights": "Alle rechten voorbehouden",
-        "title": "Lees, bestudeer en leer de Edele Koran."
-    },
-    "form": {
-        "code": "Verificatie code",
-        "email": "E-mail",
-        "firstName": "Voornaam",
-        "lastName": "Achternaam"
-    },
-    "from": "Van",
-    "fundraising-sticky-banner": {
-        "cta": "Doneer",
-        "title": "Steun Quran.com deze Ramadan"
-    },
-    "fundraising": {
-        "description": "Maandelijkse donaties helpen ons Quran.com te verbeteren en activiteiten te ondersteunen, zodat we ons minder richten op fondsenwerving en meer op het creëren van impact.",
-        "title": "Word een maandelijkse donateur"
-    },
-    "help": "Helpen",
-    "hizb": "Hizb",
-    "home": "Huis",
-    "hours": "Uur",
-    "inline": "In lijn",
-    "input": {
-        "clear": "Duidelijk"
-    },
-    "juz": "Juz",
-    "language": "Taal",
-    "languages": "Talen",
-    "learn-more": "Leer meer",
-    "less": "Minder",
-    "loading": "Bezig met laden",
-    "login": "Log in",
-    "logout": "Uitloggen",
-    "meccan": "Mekkaans",
-    "medinan": "Medina",
-    "menu": "Menu",
-    "minutes": "Minuten",
-    "mobile-apps": "Mobiele apps",
-    "mode": "Modus",
-    "more": "Meer",
-    "navigate": "Navigeren",
-    "network": "Netwerk",
-    "new": "Nieuw!",
-    "next": "Volgende",
-    "next-ayah": "Volgende Aya",
-    "no": "Nee",
-    "no-notifications": "Nog geen meldingen",
-    "none": "Geen",
-    "not-now": "Niet nu",
-    "notification": {
-        "mark-all-as-read": "Alles als gelezen markeren",
-        "mark-as-read": "Markeer als gelezen"
-    },
-    "notifications": "Meldingen",
-    "off": "Uit",
-    "on": "Op",
-    "page": "Bladzijde",
-    "pages": "Pagina's",
-    "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} van {{totalNumberOfResults}} zoekresultaten",
-    "pbuh": "De zegeningen van Allah zij met hem",
-    "popular-links": "Populaire links",
-    "popup": {
-        "footnote": "Dankzij maandelijkse donaties kunnen we ons minder richten op fondsenwerving",
-        "text-1": "We zijn toegewijd om de wereld kennis en technologie van de Koran te dienen, altijd gratis.",
-        "text-2": "Quran.com is een perfecte gelegenheid voor voortdurende liefdadigheid (Sadaqah Jariyah). Overweeg om te investeren in uw Hiernamaals als maandelijkse (of eenmalige) donateur.",
-        "title": "Beste metgezel van de Koran,"
-    },
-    "powered-by": "Aangedreven door",
-    "prev": "Vorig",
-    "previous-ayah": "Vorige Aya",
-    "privacy": "Privacy",
-    "product-updates": "Productupdates",
-    "profile": "Profiel",
-    "q-reflect": "KoranReflect",
-    "quran-com": "koran.com",
-    "quran-radio": "Koran Radio",
-    "reading-history": "Geschiedenis lezen",
-    "reading-preference": {
-        "reading": "Lezing",
-        "translation": "Vertaling"
-    },
-    "recitation": "voordracht",
-    "reciter": "Voordrager",
-    "reciter-summary": "Woord voor woord voordrager: <span> {{reciterName}} <\/span> . Klik op een woord om naar de recitatie te luisteren.",
-    "reciters": "voordragers",
-    "reflect": "Reflecteren",
-    "remove": "Verwijderen",
-    "rename": "Hernoemen",
-    "retry": "Opnieuw proberen",
-    "revelation_order": "Openbaring orde",
-    "rub": "Rub el Hizb",
-    "save-to-collection": "Opslaan in collectie",
-    "search-for": "Zoeken naar '{{searchQuery}}'",
-    "search-results": "{{count}} zoekresultaten",
-    "search": {
-        "filters": "Filters",
-        "hint": "Probeer te zoeken naar",
-        "jump-to": "Spring naar",
-        "no-results": "geen resultaten gevonden",
-        "no-results-suggestion": "We konden geen overeenkomende zoekresultaten vinden voor \" {{searchQuery}} \". probeer een ander trefwoord te zoeken.",
-        "popular": "Populaire zoekopdrachten",
-        "recent": "Recente zoekopdrachten",
-        "results": "resultaten",
-        "show-all": "Toon alle resultaten",
-        "switch-mode": "Overschakelen naar Geavanceerd zoeken",
-        "title": "Zoeken"
-    },
-    "seconds": "Seconden",
-    "settings": {
-        "no-tafsir-selected": "Geen tafsir geselecteerd",
-        "no-translation-selected": "Geen vertaling geselecteerd",
-        "reading-experience": "Leeservaring",
-        "reset-cta": "Reset instellingen",
-        "reset-notif": "Je instellingen zijn teruggezet naar de standaardinstellingen",
-        "search-reciter": "Zoek voordrager",
-        "search-tafsirs": "Tafsir zoeken",
-        "search-translations": "Vertalingen zoeken",
-        "selected-reciter": "Geselecteerde voordrager",
-        "selected-tafsirs": "Geselecteerde Tafsirs",
-        "selected-translations": "Geselecteerde vertalingen",
-        "show-tooltip-when-playing-audio": "Knopinfo weergeven bij het afspelen van audio",
-        "title": "Instellingen",
-        "tooltip-playing-audio-helper": "Toon woordvertaling in tooltip tijdens het spelen van ayah",
-        "value-and-other": "{{value}} en {{othersCount}} andere",
-        "value-and-others": "{{value}} en {{othersCount}} anderen",
-        "wbw-helper": "Geef de vertaling of transliteratie direct onder het woord weer",
-        "word-tooltip-helper": "Geef de vertaling of transliteratie weer wanneer u met de muis over het woord zweeft of op het woord klikt"
-    },
-    "share": "Deel",
-    "shared": "Link is gekopieerd naar het klembord!",
-    "sidebar": {
-        "search-hizb": "Zoek Hizb",
-        "search-juz": "Zoek Juz",
-        "search-page": "Zoekpagina",
-        "search-surah": "zoek soera",
-        "try-navigating-with": "Tip: probeer te navigeren met"
-    },
-    "sitemap": "Sitemap",
-    "sort": {
-        "ascending": "Oplopend",
-        "by": "Sorteer op",
-        "descending": "Aflopend"
-    },
-    "style": "Stijl",
-    "submit": "Indienen",
-    "surah": "Surah",
-    "tafsir": {
-        "font-size": "Tafsir-lettergrootte",
-        "group-message": "Je leest een tafsir voor de groep verzen {{from}}tot {{to}}",
-        "no-text": "{{tafsirName}} is niet beschikbaar voor het huidige couplet.",
-        "surah": "Tafsir Surah",
-        "tafsir-desc": "Lees {{tafsirName}} voor Ayah {{verseNumber}} van Surah {{surahName}}",
-        "tafsirs-desc": "Lees verschillende Tafsirs van Ayah {{ayahNumber}} van Surah {{surahName}} door vertrouwde Tafsir-geleerden",
-        "title": "Tafsir"
-    },
-    "tarteel": {
-        "app": "Tarteel-app",
-        "name": "Tarteel.ai"
-    },
-    "theme": "Thema",
-    "themes": {
-        "auto": "Auto",
-        "dark": "Donker",
-        "light": "Licht",
-        "sepia": "Sepia",
-        "system": "Systeem",
-        "system-desc": "Het systeemthema past zich automatisch aan uw instellingen voor licht\/donkermodus aan"
-    },
-    "to": "Tot",
-    "tooltip": "Knopinfo",
-    "tooltip-trans-lang": "Taal voor knopinfo",
-    "trans-lang": "Vertaling Taal",
-    "translation": "Vertaling",
-    "translations": "Vertalingen",
-    "transliteration": "Transliteratie",
-    "type": "Type",
-    "undo": "ongedaan maken",
-    "validation": {
-        "invalid-email": "{{field}} moet een geldig e-mailadres zijn",
-        "invalid-field": "Voer een geldige {{field}} waarde in",
-        "required-field": "{{field}} is vereist"
-    },
-    "verse": "Vers",
-    "verse-bookmark-removed": "Vers bladwijzer verwijderd!",
-    "verse-bookmarked": "Vers bladwijzer!",
-    "verses": "verzen",
-    "view": "Weergave",
-    "voice": {
-        "ask-permission": "Schakel microfoontoestemming in om gesproken zoekopdrachten te gaan gebruiken",
-        "error": "Er is een fout opgetreden, probeer het later opnieuw. Of download de",
-        "no-permission": "Het lijkt erop dat u de microfoonrechten niet hebt ingeschakeld. Schakel de microfoonrechten in en probeer het opnieuw of download de",
-        "not-supported": "Het lijkt erop dat uw browser geen microfoon ondersteunt. Probeer een andere browser of download de",
-        "suggest": "Begin alsjeblieft met reciteren en je vers zal verschijnen.",
-        "suggest-subtitle": "Reciteer een vers in het Arabisch, en het vers zal verschijnen",
-        "suggest-title": "Reciteer nu",
-        "voice-search-powered-by": "Gesproken zoekopdracht Mogelijk gemaakt door"
-    },
-    "wbw": "Woord voor woord",
-    "wbw-lang-summary": "Woord voor woord vertalingsbron: <link> {{source}} <\/link> . Deze bron is onafhankelijk van de selectie van de versvertaling.",
-    "wbw-trans-lang": "Woord voor woord taal",
-    "wbw-translation": "Woord voor woord vertaling",
-    "wbw-transliteration": "Woord voor woord transliteratie",
-    "word-click": {
-        "no-audio": "Geen geluid",
-        "play-audio": "Audio afspelen",
-        "title": "Woordklik"
-    },
-    "word-tooltip": "Knopinfo voor woorden",
-    "yes": "Ja"
+    "repeat-moved": "De herhaalinstellingen zijn verplaatst naar de audiospeler. Klik op het <0> </0> om ze te openen",
+    "select-reciter": "Selecteer voordrager",
+    "speed": "Snelheid",
+    "title": "Audio"
+  },
+  "ayah": "Aya",
+  "ayahs": "Ayahs",
+  "beta": "bèta",
+  "bookmark": "Bladwijzer",
+  "bookmarked": "Bladwijzer",
+  "both": "Beide",
+  "cancel": "Annuleren",
+  "click-here": "Klik hier",
+  "close": "Dichtbij",
+  "command-bar": {
+    "navigations": "Navigatie",
+    "no-nav-results": "Geen navigatieresultaten",
+    "placeholder": "Wat wil je lezen?",
+    "powered-by": "Gesproken zoekopdracht mogelijk gemaakt door Tarteel.ai",
+    "recent-navigations": "Recente navigatie",
+    "search-by-voice": "Zoek bij stem",
+    "try-navigating": "Probeer te navigeren naar"
+  },
+  "community": {
+    "cta": "Word lid van de community",
+    "header": "Word lid van de QDC-gemeenschap van moslimbouwers en technologen.",
+    "sub-header": "Meld u aan voor de Quran.com Discord om deel te nemen en samen te werken met de toonaangevende islamitische technologie voor gemeenschapsopbouw.",
+    "title": "Gemeenschap"
+  },
+  "complete-sign-up": "Voltooi je registratie",
+  "consents": {
+    "communication": {
+      "body": "🚀 Verbeter uw voortgang via <boldSpan> gepersonaliseerde </boldSpan> meldingen over uw doelvoortgang, het bijhouden van streaks en het verbeteren van uw gebruik van onze huidige functies. <br></br> <br></br> Kunnen we u op de hoogte houden via e-mail en andere kanalen? U heeft de controle. U kunt deze voorkeuren op elk gewenst moment aanpassen in uw accountinstellingen. <br></br> <br></br> Selecteer eenvoudig 'Toestaan' voor <boldSpan> inspirerende herinneringen </boldSpan> of 'Niet nu' om te weigeren.",
+      "header": "We helpen u graag <boldSpan> toegewijd en consistent </boldSpan> te blijven tijdens uw Korangroeireis! 📖🌟"
+    }
+  },
+  "continue": "Doorgaan met",
+  "copied": "gekopieerd",
+  "copied-to-clipboard": "Gekopieerd naar het klembord",
+  "copy": "Kopiëren",
+  "counter": {
+    "decrease": "Verminderen",
+    "increase": "Toename"
+  },
+  "default-description": "De Koran vertaald in vele talen in een eenvoudige en gemakkelijke interface",
+  "developers": "ontwikkelaars",
+  "display": "Weergave",
+  "donate": "Doneren",
+  "donate_monthly": "Doneer maandelijks",
+  "donate_once": "Doneer eenmalig",
+  "edit": "Bewerking",
+  "email-verification": {
+    "check-spam": "Heb je de verificatie-e-mail niet ontvangen? Check je spam-inbox",
+    "email-sent": "We hebben zojuist een e-mail gestuurd naar <strong> {{email}} </strong>",
+    "email-verification": "Email verificatie",
+    "resend-email": "Email opnieuw verzenden",
+    "resend-email-in": "Verzend de verificatie-e-mail opnieuw over {{remainingTime}} sec...",
+    "verify-code": "Code verifiëren"
+  },
+  "error": {
+    "bookmark-sync": "Bladwijzer loopt niet synchroon.",
+    "email-login-fail": "Inloggen met e-mail is mislukt. Probeer het opnieuw",
+    "general": "Er is iets fout gegaan. Probeer het opnieuw.",
+    "offline": "Het lijkt erop dat je je verbinding bent kwijtgeraakt. Controleer het en probeer het opnieuw.",
+    "pref-persist-fail": "Kan je instellingen niet synchroniseren met de cloud."
+  },
+  "feedback": "Feedback",
+  "fonts": {
+    "15_lines": "15 lijnen",
+    "16_lines": "16 lijnen",
+    "code_v1": "Koning Fahad Complex V1",
+    "code_v2": "Koning Fahad Complex V2",
+    "font-size": "Lettertypegrootte",
+    "lines": "lijnen",
+    "qcf-desc": "Koning Fahad Complex (V1 en V2) Fonts bieden een hogere kwaliteit, maar laden duurt langer.",
+    "qpc_uthmani_hafs": "QPC Uthmani Hafs",
+    "quran-font": "Koran lettertype",
+    "tajweed": "Tajweed",
+    "tajweed-desc": "Tajweed lettertype toont een Tajweed gekleurde Mushaf. Meer over de Tajweed kleurregels lees je <0> hier </0>",
+    "text_indopak": "IndoPak",
+    "text_uthmani": "Uthmani"
+  },
+  "footer": {
+    "description": "Quran.com is een Sadaqah Jariyah. We hopen het voor iedereen gemakkelijk te maken om de Edele Koran te lezen, te bestuderen en te leren. De Edele Koran heeft vele namen, waaronder Al-Quran Al-Kareem, Al-Ketab, Al-Furqan, Al-Maw'itha, Al-Thikr en Al-Noor.",
+    "hiring": "Wij werven aan! Sluit je aan bij het team van QuranFoundation en draag bij aan onze missie. <link> Solliciteer nu! </link>",
+    "rights": "Alle rechten voorbehouden",
+    "title": "Lees, bestudeer en leer de Edele Koran."
+  },
+  "form": {
+    "body": "Lichaam",
+    "code": "Verificatie code",
+    "email": "E-mail",
+    "firstName": "Voornaam",
+    "lastName": "Achternaam",
+    "title": "Titel"
+  },
+  "from": "Van",
+  "fundraising-sticky-banner": {
+    "cta": "Doneer",
+    "title": "Steun Quran.com deze Ramadan"
+  },
+  "fundraising": {
+    "description": "Mis de kans niet om vermenigvuldigde beloningen te ontvangen tijdens de laatste gezegende nachten van de Ramadan. Zelfs kleine maandelijkse donaties maken impact!",
+    "title": "Word een maandelijkse donateur"
+  },
+  "help": "Helpen",
+  "hizb": "Hizb",
+  "home": "Huis",
+  "hours": "Uur",
+  "inline": "In lijn",
+  "input": {
+    "clear": "Duidelijk"
+  },
+  "juz": "Juz",
+  "language": "Taal",
+  "languages": "Talen",
+  "learn-more": "Leer meer",
+  "learning-plans": "Leerplannen",
+  "less": "Minder",
+  "loading": "Bezig met laden",
+  "login": "Log in",
+  "logout": "Uitloggen",
+  "meccan": "Mekkaans",
+  "medinan": "Medina",
+  "menu": "Menu",
+  "minutes": "Minuten",
+  "mobile-apps": "Mobiele apps",
+  "mode": "Modus",
+  "more": "Meer",
+  "my-learning-plans": "Mijn leerplannen",
+  "navigate": "Navigeren",
+  "network": "Netwerk",
+  "new": "Nieuw!",
+  "newest": "Nieuwste",
+  "next": "Volgende",
+  "next-ayah": "Volgende Aya",
+  "no": "Nee",
+  "no-notifications": "Nog geen meldingen",
+  "none": "Geen",
+  "not-now": "Niet nu",
+  "notes": {
+    "title": "Mijn aantekeningen en reflecties"
+  },
+  "notification-settings": "Notificatie instellingen",
+  "notification": {
+    "mark-all-as-read": "Alles als gelezen markeren",
+    "mark-as-read": "Markeer als gelezen"
+  },
+  "notifications": "Meldingen",
+  "off": "Uit",
+  "oldest": "Oudste",
+  "on": "Op",
+  "page": "Bladzijde",
+  "pages": "Pagina's",
+  "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} van {{totalNumberOfResults}} zoekresultaten",
+  "pbuh": "De zegeningen van Allah zij met hem",
+  "popular-links": "Populaire links",
+  "popup": {
+    "footnote": "Dankzij maandelijkse donaties kunnen we ons minder richten op fondsenwerving",
+    "text-1": "We zijn toegewijd om de wereld kennis en technologie van de Koran te dienen, altijd gratis.",
+    "text-2": "De perfecte gelegenheid voor voortdurende liefdadigheid (Sadaqah Jariyah). Overweeg alstublieft om als maandelijkse (of eenmalige) donateur in uw Hiernamaals te investeren.",
+    "title": "Beste metgezel van de Koran,"
+  },
+  "powered-by": "Aangedreven door",
+  "prepare-hearts": {
+    "cta": "Kom meer te weten",
+    "title": "Ga door na de Ramadan!"
+  },
+  "prev": "Vorig",
+  "previous-ayah": "Vorige Aya",
+  "privacy": "Privacy",
+  "product-updates": "Productupdates",
+  "profile": "Profiel",
+  "q-reflect": "KoranReflect",
+  "quran-com": "koran.com",
+  "quran-radio": "Koran Radio",
+  "reading-history": "Geschiedenis lezen",
+  "reading-preference": {
+    "reading": "Lezing",
+    "translation": "Vertaling"
+  },
+  "recitation": "voordracht",
+  "reciter": "Voordrager",
+  "reciter-summary": "Woord voor woord voordrager: <span> {{reciterName}} </span> . Klik op een woord om naar de recitatie te luisteren.",
+  "reciters": "voordragers",
+  "reflect": "Reflecteren",
+  "reflections": "Reflecties",
+  "remove": "Verwijderen",
+  "rename": "Hernoemen",
+  "retry": "Opnieuw proberen",
+  "revelation_order": "Openbaring orde",
+  "rub": "Rub el Hizb",
+  "save": "Redden",
+  "save-to-collection": "Opslaan in collectie",
+  "search-for": "Zoeken naar '{{searchQuery}}'",
+  "search-results": "{{count}} zoekresultaten",
+  "search": {
+    "filters": "Filters",
+    "hint": "Probeer te zoeken naar",
+    "jump-to": "Spring naar",
+    "no-results": "geen resultaten gevonden",
+    "no-results-suggestion": "We konden geen overeenkomende zoekresultaten vinden voor \" {{searchQuery}} \". probeer een ander trefwoord te zoeken.",
+    "popular": "Populaire zoekopdrachten",
+    "recent": "Recente zoekopdrachten",
+    "results": "resultaten",
+    "show-all": "Toon alle resultaten",
+    "switch-mode": "Overschakelen naar Geavanceerd zoeken",
+    "title": "Zoeken"
+  },
+  "seconds": "Seconden",
+  "settings": {
+    "no-tafsir-selected": "Geen tafsir geselecteerd",
+    "no-translation-selected": "Geen vertaling geselecteerd",
+    "reading-experience": "Leeservaring",
+    "reset-cta": "Reset instellingen",
+    "reset-notif": "Je instellingen zijn teruggezet naar de standaardinstellingen",
+    "search-reciter": "Zoek voordrager",
+    "search-tafsirs": "Tafsir zoeken",
+    "search-translations": "Vertalingen zoeken",
+    "selected-reciter": "Geselecteerde voordrager",
+    "selected-tafsirs": "Geselecteerde Tafsirs",
+    "selected-translations": "Geselecteerde vertalingen",
+    "show-tooltip-when-playing-audio": "Knopinfo weergeven bij het afspelen van audio",
+    "title": "Instellingen",
+    "tooltip-playing-audio-helper": "Toon woordvertaling in tooltip tijdens het spelen van ayah",
+    "value-and-other": "{{value}} en {{othersCount}} andere",
+    "value-and-others": "{{value}} en {{othersCount}} anderen",
+    "wbw-helper": "Geef de vertaling of transliteratie direct onder het woord weer",
+    "word-tooltip-helper": "Geef de vertaling of transliteratie weer wanneer u met de muis over het woord zweeft of op het woord klikt"
+  },
+  "share": "Deel",
+  "shared": "Link is gekopieerd naar het klembord!",
+  "show-more": "Laat meer zien",
+  "sidebar": {
+    "search-hizb": "Zoek Hizb",
+    "search-juz": "Zoek Juz",
+    "search-page": "Zoekpagina",
+    "search-surah": "zoek soera",
+    "try-navigating-with": "Tip: probeer te navigeren met"
+  },
+  "sitemap": "Sitemap",
+  "sort": {
+    "ascending": "Oplopend",
+    "by": "Sorteer op",
+    "descending": "Aflopend"
+  },
+  "style": "Stijl",
+  "submit": "Indienen",
+  "subscribe": "Abonneren",
+  "subscribed": "Geabonneerd",
+  "surah": "Surah",
+  "tafsir": {
+    "font-size": "Tafsir-lettergrootte",
+    "group-message": "Je leest een tafsir voor de groep verzen {{from}}tot {{to}}",
+    "no-text": "{{tafsirName}} is niet beschikbaar voor het huidige couplet.",
+    "surah": "Tafsir Surah",
+    "tafsir-desc": "Lees {{tafsirName}} voor Ayah {{verseNumber}} van Surah {{surahName}}",
+    "tafsirs-desc": "Lees verschillende Tafsirs van Ayah {{ayahNumber}} van Surah {{surahName}} door vertrouwde Tafsir-geleerden",
+    "title": "Tafsir"
+  },
+  "tarteel": {
+    "app": "Tarteel-app",
+    "name": "Tarteel.ai"
+  },
+  "theme": "Thema",
+  "themes": {
+    "auto": "Auto",
+    "dark": "Donker",
+    "light": "Licht",
+    "sepia": "Sepia",
+    "system": "Systeem",
+    "system-desc": "Het systeemthema past zich automatisch aan uw instellingen voor licht/donkermodus aan"
+  },
+  "to": "Tot",
+  "tooltip": "Knopinfo",
+  "tooltip-trans-lang": "Taal voor knopinfo",
+  "trans-lang": "Vertaling Taal",
+  "translation": "Vertaling",
+  "translations": "Vertalingen",
+  "transliteration": "Transliteratie",
+  "type": "Type",
+  "undo": "ongedaan maken",
+  "validation": {
+    "invalid-email": "{{field}} moet een geldig e-mailadres zijn",
+    "invalid-field": "Voer een geldige {{field}} waarde in",
+    "maximum-length": "{{field}} mag niet langer zijn dan {{value}} tekens",
+    "minimum-length": "{{field}} moet minimaal {{value}} tekens bevatten",
+    "required-field": "{{field}} is vereist"
+  },
+  "verse": "Vers",
+  "verse-bookmark-removed": "Vers bladwijzer verwijderd!",
+  "verse-bookmarked": "Vers bladwijzer!",
+  "verses": "verzen",
+  "view": "Weergave",
+  "voice": {
+    "ask-permission": "Schakel microfoontoestemming in om gesproken zoekopdrachten te gaan gebruiken",
+    "error": "Er is een fout opgetreden, probeer het later opnieuw. Of download de",
+    "no-permission": "Het lijkt erop dat u de microfoonrechten niet hebt ingeschakeld. Schakel de microfoonrechten in en probeer het opnieuw of download de",
+    "not-supported": "Het lijkt erop dat uw browser geen microfoon ondersteunt. Probeer een andere browser of download de",
+    "suggest": "Begin alsjeblieft met reciteren en je vers zal verschijnen.",
+    "suggest-subtitle": "Reciteer een vers in het Arabisch, en het vers zal verschijnen",
+    "suggest-title": "Reciteer nu",
+    "voice-search-powered-by": "Gesproken zoekopdracht Mogelijk gemaakt door"
+  },
+  "wbw": "Woord voor woord",
+  "wbw-lang-summary": "Woord voor woord vertalingsbron: <link> {{source}} </link> . Deze bron is onafhankelijk van de selectie van de versvertaling.",
+  "wbw-trans-lang": "Woord voor woord taal",
+  "wbw-translation": "Woord voor woord vertaling",
+  "wbw-transliteration": "Woord voor woord transliteratie",
+  "word-click": {
+    "no-audio": "Geen geluid",
+    "play-audio": "Audio afspelen",
+    "title": "Woordklik"
+  },
+  "word-tooltip": "Knopinfo voor woorden",
+  "yes": "Ja"
 }

@@ -1,6 +1,8 @@
 /* eslint-disable max-lines */
 import { camelizeKeys } from 'humps';
 
+import { SearchRequestParams, SearchMode } from '@/types/Search/SearchRequestParams';
+import NewSearchResponse from '@/types/Search/SearchResponse';
 import {
   makeAdvancedCopyUrl,
   makeTafsirsUrl,
@@ -22,6 +24,8 @@ import {
   makeReciterUrl,
   makeTafsirContentUrl,
   makePagesLookupUrl,
+  makeNewSearchResultsUrl,
+  makeByRangeVersesUrl,
 } from '@/utils/apiPaths';
 import { SearchRequest, AdvancedCopyRequest, PagesLookUpRequest } from 'types/ApiRequests';
 import {
@@ -43,6 +47,13 @@ import {
 } from 'types/ApiResponses';
 import AudioData from 'types/AudioData';
 import { MushafLines, QuranFont } from 'types/QuranReader';
+
+export const SEARCH_FETCH_OPTIONS = {
+  headers: {
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    'x-api-key': process.env.NEXT_PUBLIC_SEARCH_API_KEY,
+  },
+};
 
 export const OFFLINE_ERROR = 'OFFLINE';
 
@@ -67,6 +78,11 @@ export const getChapterVerses = async (
   locale: string,
   params?: Record<string, unknown>,
 ): Promise<VersesResponse> => fetcher<VersesResponse>(makeVersesUrl(id, locale, params));
+
+export const getRangeVerses = async (
+  locale: string,
+  params?: Record<string, unknown>,
+): Promise<VersesResponse> => fetcher<VersesResponse>(makeByRangeVersesUrl(locale, params));
 
 /**
  * Get the current available translations with the name translated in the current language.
@@ -182,6 +198,16 @@ export const getAdvancedCopyRawResult = async (
  */
 export const getSearchResults = async (params: SearchRequest): Promise<SearchResponse> =>
   fetcher(makeSearchResultsUrl(params));
+
+/**
+ * Get the search results of a query.
+ *
+ * @param {SearchRequestParams} params
+ * @returns  {Promise<NewSearchResponse>}
+ */
+export const getNewSearchResults = async <T extends SearchMode>(
+  params: SearchRequestParams<T>,
+): Promise<NewSearchResponse> => fetcher(makeNewSearchResultsUrl(params), SEARCH_FETCH_OPTIONS);
 
 /**
  * Get the list of tafsirs.

@@ -12,7 +12,11 @@ import DataContext from '@/contexts/DataContext';
 import useGlobalIntersectionObserver from '@/hooks/useGlobalIntersectionObserver';
 import { setLastReadVerse } from '@/redux/slices/QuranReader/readingTracker';
 import { selectQuranFont, selectQuranMushafLines } from '@/redux/slices/QuranReader/styles';
-import { ActivityDayType, UpdateActivityDayBody } from '@/types/auth/ActivityDay';
+import {
+  ActivityDayType,
+  UpdateActivityDayBody,
+  UpdateQuranActivityDayBody,
+} from '@/types/auth/ActivityDay';
 import { getFilterActivityDaysParamsOfCurrentMonth } from '@/utils/activity-day';
 import { getMushafId } from '@/utils/api';
 import { addReadingSession, updateActivityDay } from '@/utils/auth/api';
@@ -26,7 +30,7 @@ import mergeVerseKeys from '@/utils/mergeVerseKeys';
 import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
 
 const READING_DAY_SYNC_TIME_MS = 5000; // 5 seconds
-const READING_SESSION_DEBOUNCE_WAIT_TIME = 2000; // 2 seconds
+const READING_SESSION_DEBOUNCE_WAIT_TIME = 2000; // 5 seconds
 
 interface UseSyncReadingProgressProps {
   isReadingPreference: boolean;
@@ -71,7 +75,7 @@ const useSyncReadingProgress = ({ isReadingPreference }: UseSyncReadingProgressP
 
   // send the data to the backend and clear the SWR cache
   const updateReadingDayAndClearCache = useCallback(
-    (body: UpdateActivityDayBody) => {
+    (body: UpdateActivityDayBody<UpdateQuranActivityDayBody>) => {
       updateActivityDay(body).then(() => {
         // invalidate the current month's history cache to refetch the data if we navigated to it
         const currentMonthHistoryUrl = makeFilterActivityDaysUrl(
@@ -142,7 +146,7 @@ const useSyncReadingProgress = ({ isReadingPreference }: UseSyncReadingProgressP
         elapsedReadingTimeInSeconds.current = 0;
       }
 
-      const body: UpdateActivityDayBody = {
+      const body: UpdateActivityDayBody<UpdateQuranActivityDayBody> = {
         mushafId: mushaf,
         type: ActivityDayType.QURAN,
       };

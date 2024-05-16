@@ -1,0 +1,35 @@
+{
+  "hero": {
+    "line-1": "De Global Quranic Calendar is een leesschema dat is ontworpen om het reflectief lezen van de hele Koran aan te moedigen, vanaf het einde van de ene Ramadan tot het begin van de volgende. We moedigen je aan de tijd te nemen om de verzen te begrijpen en erover na te denken, zodat je een diepere, meer oprechte verbinding kunt krijgen."
+  },
+  "interact-with-post": "Interactie met dit bericht op QuranReflect",
+  "islamic-months": {
+    "1": "Muharram",
+    "2": "Safar",
+    "3": "Rabi' al-Awwal",
+    "4": "Rabi' al-Thani",
+    "5": "Jumada al-Awwal",
+    "6": "Jumada al-Thani",
+    "7": "Rajab",
+    "8": "Sha'baan",
+    "9": "Ramadan",
+    "10": "Shawwal",
+    "11": "Dhu al-Qi'dah",
+    "12": "Dhu al-Hijjah"
+  },
+  "join-qc": {
+    "line-1": "We bevinden ons in <highlight> Week {{weekNumber}} </highlight> van de Korankalender.",
+    "line-2": "<normal> Doe mee met de lezing van deze week, ook al is het je eerste keer! </normal>"
+  },
+  "join-quranic-calendar": "Abonneer u om updates en bronnen te ontvangen via QuranReflect",
+  "join-quranic-calendar-success": "Je bent met succes lid geworden van de Divine Book Club!",
+  "quranic-calendar": "De mondiale korankalender",
+  "reading-options": {
+    "default-settings": "Lezen met mijn standaardinstellingen",
+    "en-and-ar": "Lees in het Engels en Arabisch",
+    "en-only": "Alleen in het Engels lezen"
+  },
+  "supplemental-resources": "Ondersteunende bronnen",
+  "today": "De datum van vandaag is: <highlight> {{month}} {{day}} {{year}} , {{gregorianDate}} </highlight>",
+  "week-title": "Week {{weekNumber}} ( {{month}} ) met verzen {{rangeStart}} tot {{rangeEnd}}"
+}

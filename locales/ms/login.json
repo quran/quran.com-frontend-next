@@ -1,15 +1,23 @@
 {
-    "awaiting-confirmation": "Menunggu pengesahan",
-    "continue-apple": "Teruskan dengan Apple",
-    "continue-email": "Teruskan dengan E-mel",
-    "continue-facebook": "Teruskan dengan Facebook",
-    "continue-google": "Teruskan dengan Google",
-    "email-placeholder": "Alamat emel",
-    "login-error": {
-        "AuthenticationError": "Pengesahan gagal. Sila cuba sebentar lagi",
-        "TokenExpiredError": "Anda telah log keluar, sila log masuk semula."
-    },
-    "login-title": "Log masuk ke Quran.com",
-    "other-options": "Pilihan Log Masuk Lain",
-    "verify-code": "Sahkan bahawa kod keselamatan yang diberikan sepadan dengan teks berikut:"
+  "awaiting-confirmation": "Menunggu pengesahan",
+  "continue-apple": "Teruskan dengan Apple",
+  "continue-email": "Teruskan dengan E-mel",
+  "continue-facebook": "Teruskan dengan Facebook",
+  "continue-google": "Teruskan dengan Google",
+  "email-placeholder": "Alamat emel",
+  "feature-1": "Jejaki matlamat anda",
+  "feature-2": "Kekalkan coretan bacaan",
+  "feature-3": "Buat koleksi",
+  "feature-4": "Segerakkan data anda merentas penyemak imbas",
+  "feature-5": "Dan banyak lagi!",
+  "feature-6": "<b> Baharu! </b> Nota & Refleksi",
+  "login-cta": "Log masuk atau Daftar sekarang:",
+  "login-error": {
+    "AuthenticationError": "Pengesahan gagal. Sila cuba sebentar lagi",
+    "TokenExpiredError": "Anda telah log keluar, sila log masuk semula."
+  },
+  "login-title": "Log masuk ke Quran.com",
+  "other-options": "Pilihan Log Masuk Lain",
+  "privacy-policy": "Melindungi privasi anda adalah keutamaan kami – Dengan mendaftar, anda bersetuju dengan <link> Dasar Privasi </link> kami",
+  "verify-code": "Sahkan bahawa kod keselamatan yang diberikan sepadan dengan teks berikut:"
 }

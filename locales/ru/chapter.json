@@ -1,3 +1,4 @@
 {
-    "meta-description": "Прочтите и послушайте суру {{transliteratedName}} . Сура была ниспослана в {{revelationPlace}} , упорядочена в {{chapterOrder}} в Коране. Название суры означает \"{{translatedName}}\" в {{localeName}} и состоит из {{versesCount}} стихов."
+  "meta-description": "Прочтите и послушайте суру {{transliteratedName}} . Сура была ниспослана в {{revelationPlace}} , упорядочена в {{chapterOrder}} в Коране. Название суры означает \"{{translatedName}}\" в {{localeName}} и состоит из {{versesCount}} стихов.",
+  "ranges-meta-desc": "Читайте и слушайте от Ayah {{rangeFrom}} до Ayah {{rangeTo}} ."
 }

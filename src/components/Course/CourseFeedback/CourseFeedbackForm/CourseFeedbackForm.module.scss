@@ -1,0 +1,33 @@
+@use "src/styles/breakpoints";
+
+.bodyInput {
+    border: none !important;
+    border-radius: 0 !important;
+    padding-inline: 0 !important;
+    & > div {
+        border: none;
+        margin-block-start: var(--spacing-large);
+    }
+
+    textarea {
+        font-size: var(--font-size-large);
+        font-weight: var(--font-weight-medium);
+
+        @include breakpoints.smallerThanTablet {
+            min-height: 30vh;
+        }
+    }
+}
+
+.submitButton {
+    margin-block-start: var(--spacing-small);
+    display: flex;
+    align-items: center;
+    flex-direction: row-reverse;
+}
+
+.ratingContainer {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}

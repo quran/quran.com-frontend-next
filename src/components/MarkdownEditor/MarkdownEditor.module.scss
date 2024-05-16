@@ -1,0 +1,87 @@
+.editor {
+    p {
+        font-size: var(--font-size-large);
+    }
+    // min-height: calc(var(--spacing-mega) * 10);
+    em,
+    strong {
+        all: revert;
+    }
+
+    ul,
+    ol {
+        padding: 0 var(--spacing-medium);
+    }
+    ul {
+        list-style: initial !important;
+    }
+    ol {
+        list-style-type: decimal !important;
+    }
+
+    li {
+        padding-block: var(--spacing-micro);
+    }
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+        all: revert;
+    }
+
+    hr {
+        margin: var(--spacing-medium) 0;
+        border: none;
+        border-top: 2px solid var(--color-background-inverse);
+    }
+    blockquote {
+        background-color: var(--color-success-faint);
+        display: block;
+        padding: var(--spacing-mega);
+        margin-block: var(--spacing-large);
+        position: relative;
+        border-radius: var(--border-radius-rounded);
+
+        /*Font*/
+        line-height: var(--line-height-jumbo);
+        color: var(--color-text-default);
+
+        &::before {
+            content: "\201C"; /*Unicode for Left Double Quote*/
+
+            /*Font*/
+            font-family: Georgia, serif;
+            font-size: calc(1.6 * var(--font-size-jumbo));
+            font-weight: bold;
+            color: var(--color-text-default);
+
+            /*Positioning*/
+            position: absolute;
+            inset-inline-start: var(--spacing-medium);
+            inset-block-start: var(--spacing-medium);
+        }
+
+        &::after {
+            /*Reset to make sure*/
+            content: "";
+        }
+
+        p {
+            font-size: var(--font-size-xlarge);
+            font-weight: var(--font-weight-semibold);
+            line-height: var(--line-height-xlarge);
+            text-align: center;
+        }
+    }
+    img {
+        display: block;
+        margin: auto;
+        max-width: 100%;
+    }
+}
+.content {
+    flex: 1 1 auto;
+}

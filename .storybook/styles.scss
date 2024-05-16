@@ -1,3 +1,9 @@
 .previewWrapper {
     color: var(--color-text-default);
 }
+
+* {
+    font-family: "ProximaVara", "Helvetica Neue", Helvetica, Arial !important;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}

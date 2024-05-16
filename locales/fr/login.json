@@ -1,15 +1,23 @@
 {
-    "awaiting-confirmation": "En attente de confirmation",
-    "continue-apple": "Continuer avec Apple",
-    "continue-email": "Continuer avec l'e-mail",
-    "continue-facebook": "Continuer avec Facebook",
-    "continue-google": "Continuer avec Google",
-    "email-placeholder": "Adresse e-mail",
-    "login-error": {
-        "AuthenticationError": "Authentification échouée. Veuillez réessayer plus tard",
-        "TokenExpiredError": "Vous avez été déconnecté, veuillez vous reconnecter."
-    },
-    "login-title": "Connectez-vous à Quran.com",
-    "other-options": "Autres options de connexion",
-    "verify-code": "Vérifiez que le code de sécurité fourni correspond au texte suivant :"
+  "awaiting-confirmation": "En attente de confirmation",
+  "continue-apple": "Continuer avec Apple",
+  "continue-email": "Continuer avec l'e-mail",
+  "continue-facebook": "Continuer avec Facebook",
+  "continue-google": "Continuer avec Google",
+  "email-placeholder": "Adresse e-mail",
+  "feature-1": "Suivez vos objectifs",
+  "feature-2": "Maintenir les séquences de lecture",
+  "feature-3": "Créer des collections",
+  "feature-4": "Synchronisez vos données sur tous les navigateurs",
+  "feature-5": "Et plus!",
+  "feature-6": "<b> Nouveau ! </b> Notes et réflexions",
+  "login-cta": "Connectez-vous ou inscrivez-vous maintenant :",
+  "login-error": {
+    "AuthenticationError": "Authentification échouée. Veuillez réessayer plus tard",
+    "TokenExpiredError": "Vous avez été déconnecté, veuillez vous reconnecter."
+  },
+  "login-title": "Connectez-vous à Quran.com",
+  "other-options": "Autres options de connexion",
+  "privacy-policy": "La protection de votre vie privée est notre priorité – En vous inscrivant, vous acceptez notre <link> Politique de confidentialité </link>",
+  "verify-code": "Vérifiez que le code de sécurité fourni correspond au texte suivant :"
 }

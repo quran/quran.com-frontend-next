@@ -1,0 +1,107 @@
+{
+  "checklist": {
+    "1": "Homepage features",
+    "2": "Customize your settings",
+    "3": "Enrich your Ayah reading experience",
+    "4": "Personalized features"
+  },
+  "finish": "Finish",
+  "onboarding-checklist": "Onboarding Checklist",
+  "onboarding-title": "Maximize your Quran.com experience! <br></br> Start your tour now:",
+  "previous": "Previous",
+  "skip": "Skip",
+  "steps": {
+    "3-dot-menu": {
+      "description": "Click the 3 dot menu to discover options for copying, bookmarking, and repeating verses. Discover a variety of options to repeat verses",
+      "title": "3 dot menu"
+    },
+    "ayah-reflection": {
+      "description": "Read reflections (tadabbur) from scholars, students of knowledge, and everyday people to help you develop a more personal connection with the Quran",
+      "title": "Read reflections at the ayah level"
+    },
+    "ayah-tafsir": {
+      "description": "Explore the Tafsir at the ayah level, offering detailed insights to enhance your understanding as you read. (Tafsir may be grouped for multiple verses when appropriate)",
+      "title": "Read Tafsir at the Ayah level"
+    },
+    "font-size": {
+      "description": "Customize your Quran reading with easy-to-adjust font sizes for a comfortable reading experience",
+      "title": "Font Size"
+    },
+    "font-style": {
+      "description": "Options include Uthmani - King Fahad Complex v1, Uthmani - King Fahad Complex v2, Uthmani QPC Hafs, Indopak 15 lines, Indopak 16 lines",
+      "title": "Choose your preferred reading script"
+    },
+    "inline-wbw": {
+      "description": "View the translation of every word in line (underneath the word) or in a bubble above the word while listening to the Quran",
+      "title": "Display word-by-word translation in-line (underneath the word) or display tooltip"
+    },
+    "juz": {
+      "description": "View Quran by Juz",
+      "title": "View Quran by Juz"
+    },
+    "listen": {
+      "description": "Start the audio player to listen to the recitation",
+      "title": "Listen to the Surah or Ayah"
+    },
+    "login": {
+      "description": "Log in and save settings across devices and gain access to additional features.",
+      "title": "Log in"
+    },
+    "quran-radio": {
+      "description": "Listen to QuranRadio - stream Quran without ads",
+      "title": "Quran Radio"
+    },
+    "reading-sessions": {
+      "description": "Easily review your Quranic journey with a glance at your personalized reading history, keeping track of the verses you've explored on Quran.com.",
+      "title": "View reading history"
+    },
+    "reading-view": {
+      "description": "View Quran in reading mushaf mode",
+      "title": "Reading mode"
+    },
+    "search-bar": {
+      "description": "Find the verses, surahs, keywords, juz and topics you are looking for by utilizing our search bar",
+      "title": "Search Bar"
+    },
+    "select-reciter": {
+      "description": "Personalize your listening experience by selecting a reciter you enjoy listening to most!",
+      "title": "Select from a variety of reciters to listen to"
+    },
+    "settings": {
+      "description": "Control your preferences",
+      "title": "Settings"
+    },
+    "streak": {
+      "description": "Set personalized reading goals, track your progress, and build a consistent Quranic reading habit with our Reading Streaks and Plans feature.",
+      "title": "Keep track of reading streaks & reading plans"
+    },
+    "surah-info": {
+      "description": "Get insights about each Surah - conveniently located at the beginning of every Surah",
+      "title": "Read About the Surah"
+    },
+    "theme": {
+      "description": "Pick your favorite look—Light, Sepia, or Dark mode—for a comfortable and personalized Quran reading experience.",
+      "title": "Read Quran in Light, Sepia, or Dark Mode"
+    },
+    "translations": {
+      "description": "Choose from a variety of translations in multiple languages. Tip: Compare translations by selecting multiple options",
+      "title": "Translations"
+    },
+    "voice-search": {
+      "description": "Tap the mic icon and recite the verse you are searching for. Quick Tip! To discover where someone is reciting (Eg. Taraweeh prayers), tap the mic icon. After one or two verses are detected, press stop to find the location",
+      "title": "Voice Search (Tarteel)"
+    },
+    "wbw-audio": {
+      "description": "Select this option to listen to every word individually by simply clicking on the word!",
+      "title": "Listen to the word-by-word transliteration by clicking on word"
+    },
+    "wbw-translation": {
+      "description": "View the meaning of individual words while you read or listen to the Quran to help you enhance your Quranic vocabulary",
+      "title": "Read word-by-word translation"
+    },
+    "wbw-transliteration": {
+      "description": "View the transliteration of every word to help you on your Quran reading journey",
+      "title": "Read word-by-word transliteration"
+    }
+  }
+}

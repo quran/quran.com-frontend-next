@@ -9,6 +9,7 @@ import styles from './ReflectionItem.module.scss';
 import SocialInteraction from './SocialInteraction';
 
 import { REFLECTIONS_OBSERVER_ID } from '@/components/QuranReader/observer';
+import useReflectionBodyParser from '@/components/QuranReflect/hooks/useReflectionBodyParser';
 import VerseAndTranslation from '@/components/Verse/VerseAndTranslation';
 import DataContext from '@/contexts/DataContext';
 import useIntersectionObserver from '@/hooks/useObserveElement';
@@ -16,7 +17,6 @@ import { getChapterData } from '@/utils/chapter';
 import { logButtonClick } from '@/utils/eventLogger';
 import truncate from '@/utils/html-truncate';
 import { isRTLReflection } from '@/utils/quranReflect/locale';
-import { getQuranReflectTagUrl } from '@/utils/quranReflect/navigation';
 import { getVerseReferencesFromReflectionFilters } from '@/utils/quranReflect/string';
 import {
   MAX_REFLECTION_LENGTH,
@@ -91,24 +91,7 @@ const ReflectionItem: React.FC<Props> = ({
     );
   }, [estimatedReadingTime, reflectionTextLength]);
 
-  const formattedText = useMemo(
-    () =>
-      reflectionText
-        .split(' ')
-        .map((word) => {
-          if (word.trim().startsWith('#')) {
-            // eslint-disable-next-line i18next/no-literal-string
-            return `<a target="_blank" href="${getQuranReflectTagUrl(word)}" class="${
-              styles.hashtag
-            }">${word}</a>`;
-          }
-
-          return word;
-        })
-        .join(' ')
-        .replace(/\r\n/g, '<br>'),
-    [reflectionText],
-  );
+  const formattedText = useReflectionBodyParser(reflectionText, styles.hashtag);
 
   return (
     <div className={styles.container}>

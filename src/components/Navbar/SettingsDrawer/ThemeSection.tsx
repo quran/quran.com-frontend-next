@@ -55,7 +55,7 @@ const ThemeSection = () => {
   };
 
   return (
-    <Section>
+    <Section id="theme-section">
       <Section.Title isLoading={isLoading}>{t('theme')}</Section.Title>
       <Section.Row>
         <Switch

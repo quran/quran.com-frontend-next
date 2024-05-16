@@ -4,17 +4,17 @@ import { useContext } from 'react';
 import { useSelector } from '@xstate/react';
 import useTranslation from 'next-translate/useTranslation';
 
-import Spinner from '../dls/Spinner/Spinner';
 import { getRandomCuratedStationId } from '../Radio/curatedStations';
 import { StationType } from '../Radio/types';
 
 import styles from './PlayRadioButton.module.scss';
 import RadioInformation from './RadioInformation';
 
-import Button from '@/dls/Button/Button';
+import Button, { ButtonType, ButtonSize } from '@/dls/Button/Button';
+import Spinner from '@/dls/Spinner/Spinner';
 import PauseIcon from '@/icons/pause.svg';
 import PlayIcon from '@/icons/play-arrow.svg';
-import { logEvent } from '@/utils/eventLogger';
+import { logButtonClick } from '@/utils/eventLogger';
 import { selectIsLoading } from 'src/xstate/actors/audioPlayer/selectors';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 
@@ -36,7 +36,7 @@ const PlayRadioButton = () => {
     }
     const randomStationId = getRandomCuratedStationId();
 
-    logEvent('play_radio_clicked', {
+    logButtonClick('play_radio', {
       stationId: randomStationId,
       type: StationType.Curated,
     });
@@ -60,6 +60,9 @@ const PlayRadioButton = () => {
           <Button
             prefix={isLoading ? <Spinner /> : <PauseIcon />}
             onClick={onPauseClicked}
+            id="radio-button"
+            type={ButtonType.Success}
+            size={ButtonSize.Small}
             className={styles.playPauseButton}
           >
             {t('pause-radio')}
@@ -67,9 +70,12 @@ const PlayRadioButton = () => {
         ) : (
           <Button
             prefix={<PlayIcon />}
-            className={styles.playPauseButton}
             onClick={onPlayClicked}
             shouldFlipOnRTL={false}
+            id="radio-button"
+            type={ButtonType.Success}
+            size={ButtonSize.Small}
+            className={styles.playPauseButton}
           >
             {t('play-radio')}
           </Button>

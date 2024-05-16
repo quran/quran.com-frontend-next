@@ -6,7 +6,7 @@ import styles from './DonatePopup.module.scss';
 import DonateButton from '@/components/Fundraising/DonateButton';
 import LearnMoreButton from '@/components/Fundraising/DonateButton/LearnMoreButton';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
-import Modal from '@/dls/Modal/Modal';
+import Modal from '@/dls/ContentModal/ContentModal';
 import CloseIcon from '@/icons/close.svg';
 import MoonIllustrationSVG from '@/public/images/moon-illustration.svg';
 import { selectIsDonationPopupVisible, setIsDonationPopupVisible } from '@/redux/slices/session';
@@ -28,7 +28,7 @@ const DonatePopup = () => {
   if (!isPopupVisible) return null;
 
   return (
-    <Modal isOpen contentClassName={styles.modalSize}>
+    <Modal hasHeader={false} isOpen contentClassName={styles.modalSize}>
       <div className={styles.outerContainer}>
         <div className={styles.illustrationContainer}>
           <MoonIllustrationSVG />
@@ -52,11 +52,13 @@ const DonatePopup = () => {
             <DonateButton
               type={DonateButtonType.MONTHLY}
               source={DonateButtonClickSource.DONATE_POPOVER}
+              shouldUseProviderUrl
             />
             <DonateButton
               type={DonateButtonType.ONCE}
               isOutlined
               source={DonateButtonClickSource.DONATE_POPOVER}
+              shouldUseProviderUrl
             />
             <LearnMoreButton source={LearnMoreClickSource.DONATE_POPOVER} />
           </div>

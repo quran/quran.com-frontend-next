@@ -1,0 +1,24 @@
+.container {
+    min-height: 100vh;
+}
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.titleContainer {
+    padding-block-end: var(--spacing-xsmall);
+
+    h1 {
+        font-size: var(--font-size-xlarge);
+        font-weight: var(--font-weight-bold);
+    }
+}
+
+.loadingContainer {
+    display: flex;
+    justify-content: center;
+    margin-block-start: var(--spacing-mega);
+}

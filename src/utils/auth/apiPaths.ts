@@ -1,5 +1,9 @@
 import stringify from '../qs-stringify';
 
+import BookmarkByCollectionIdQueryParams from './types/BookmarkByCollectionIdQueryParams';
+import GetNoteByAttachedEntityParams from './types/GetNoteByAttachedEntityParams';
+import GetAllNotesQueryParams from './types/Note/GetAllNotesQueryParams';
+
 import { ActivityDayType, FilterActivityDaysParams } from '@/types/auth/ActivityDay';
 import { EstimateGoalRequest, GoalCategory } from '@/types/auth/Goal';
 import { StreakWithMetadataParams } from '@/types/auth/Streak';
@@ -7,7 +11,7 @@ import { Mushaf } from '@/types/QuranReader';
 import { getAuthApiPath } from '@/utils/url';
 import BookmarkType from 'types/BookmarkType';
 
-const makeUrl = (url: string, parameters?: Record<string, unknown>): string => {
+export const makeUrl = (url: string, parameters?: Record<string, unknown>): string => {
   if (!parameters) {
     return getAuthApiPath(url);
   }
@@ -30,13 +34,17 @@ export const makeSyncLocalDataUrl = (): string => makeUrl('users/syncLocalData')
 
 export const makeVerificationCodeUrl = (): string => makeUrl('users/verificationCode');
 
-export const makeSendMagicLinkUrl = (): string => makeUrl('auth/magiclogin');
+export const makeSendMagicLinkUrl = (redirect?: string): string =>
+  makeUrl('auth/magiclogin', redirect ? { redirect } : undefined);
 
-export const makeGoogleLoginUrl = (): string => makeUrl('auth/google');
+export const makeGoogleLoginUrl = (redirect?: string): string =>
+  makeUrl('auth/google', redirect ? { redirect } : undefined);
 
-export const makeFacebookLoginUrl = (): string => makeUrl('auth/facebook');
+export const makeFacebookLoginUrl = (redirect?: string): string =>
+  makeUrl('auth/facebook', redirect ? { redirect } : undefined);
 
-export const makeAppleLoginUrl = (): string => makeUrl('auth/apple');
+export const makeAppleLoginUrl = (redirect?: string): string =>
+  makeUrl('auth/apple', redirect ? { redirect } : undefined);
 
 export const makeBookmarksUrl = (mushafId: number, limit?: number): string =>
   makeUrl('bookmarks', { mushafId, limit });
@@ -50,6 +58,37 @@ export const makeCollectionsUrl = (queryParams: CollectionsQueryParams): string 
   makeUrl('collections', queryParams);
 
 export const makeAddCollectionUrl = () => makeUrl('collections');
+
+export const makeGetNotesByVerseUrl = (verseKey: string) => makeUrl(`notes/by-verse/${verseKey}`);
+
+export const makeGetNoteByIdUrl = (id: string) => makeUrl(`notes/${id}`);
+
+export const makeCountNotesWithinRangeUrl = (startVerseKey: string, endVerseKey: string) =>
+  makeUrl(`notes/count-within-range`, { from: startVerseKey, to: endVerseKey });
+
+export const makeNotesUrl = (params?: GetAllNotesQueryParams) => makeUrl('notes', params as any);
+
+export const makeGetNoteByAttachedEntityUrl = (queryParams: GetNoteByAttachedEntityParams) =>
+  makeUrl(`notes`, queryParams);
+
+export const makeDeleteOrUpdateNoteUrl = (id: string) => makeUrl(`notes/${id}`);
+
+export const makePublishNoteUrl = (id: string) => makeUrl(`notes/${id}/publish`);
+
+export const makeGetCoursesUrl = (params?: { myCourses: boolean }) => makeUrl('courses', params);
+
+export const makeGetCourseUrl = (courseSlugOrId: string) => makeUrl(`courses/${courseSlugOrId}`);
+
+export const makeGetLessonUrlPrefix = (courseSlugOrId: string) =>
+  makeUrl(`courses/${courseSlugOrId}/lessons`);
+
+export const makeGetLessonUrl = (courseSlugOrId: string, lessonSlugOrId: string) =>
+  `${makeGetLessonUrlPrefix(courseSlugOrId)}/${lessonSlugOrId}`;
+
+export const makeEnrollUserUrl = () => makeUrl('courses/enroll');
+export const makeGetUserCoursesCountUrl = () => makeUrl('courses/count');
+
+export const makeCourseFeedbackUrl = (courseId: string) => makeUrl(`courses/${courseId}/feedback`);
 
 export const makeUpdateCollectionUrl = (collectionId: string) =>
   makeUrl(`collections/${collectionId}`);
@@ -76,11 +115,6 @@ export const makeBookmarkCollectionsUrl = (
 ): string =>
   makeUrl('bookmarks/collections', { mushafId, key, type, ...(verseNumber && { verseNumber }) });
 
-export type BookmarkByCollectionIdQueryParams = {
-  cursor?: string;
-  limit?: number;
-  sortBy?: string;
-};
 export const makeGetBookmarkByCollectionId = (
   collectionId: string,
   queryParams: BookmarkByCollectionIdQueryParams,

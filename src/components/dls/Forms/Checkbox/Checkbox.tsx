@@ -16,7 +16,7 @@ interface Props {
   checked?: boolean | typeof INDETERMINATE;
   disabled?: boolean;
   required?: boolean;
-  label?: string;
+  label?: string | JSX.Element;
   name?: string;
   defaultChecked?: boolean;
 }
