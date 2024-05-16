@@ -175,12 +175,16 @@ const UpdateReadingGoalModal = ({ isDisabled, goal }: UpdateReadingGoalButtonPro
   };
 
   const getIsUpdateDisabled = () => {
-    return !validateReadingGoalData(chaptersData, {
-      type,
-      pages,
-      seconds,
-      range,
-    });
+    return !validateReadingGoalData(
+      chaptersData,
+      {
+        type,
+        pages,
+        seconds,
+        range,
+      },
+      mushaf,
+    );
   };
 
   return (
