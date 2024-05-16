@@ -21,7 +21,7 @@ import {
 import { isValidPageNumber } from '@/utils/validator';
 import { VersesResponse } from 'types/ApiResponses';
 import ChaptersData from 'types/ChaptersData';
-import { QuranReaderDataType } from 'types/QuranReader';
+import { Mushaf, QuranReaderDataType } from 'types/QuranReader';
 
 interface Props {
   pageVerses: VersesResponse;
@@ -66,9 +66,10 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     getQuranReaderStylesInitialState(locale).quranFont,
     getQuranReaderStylesInitialState(locale).mushafLines,
   ).mushaf;
+  const LONGEST_MUSHAF_ID = Mushaf.Indopak15Lines;
 
   // we need to validate the pageId first to save calling BE since we haven't set the valid paths inside getStaticPaths to avoid pre-rendering them at build time.
-  if (!isValidPageNumber(pageIdNumber, defaultMushafId)) {
+  if (!isValidPageNumber(pageIdNumber, LONGEST_MUSHAF_ID)) {
     return {
       notFound: true,
     };
