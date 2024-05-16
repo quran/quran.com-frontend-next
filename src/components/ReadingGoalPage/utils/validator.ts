@@ -1,5 +1,5 @@
 /* eslint-disable import/prefer-default-export */
-import { isValidPageIdBySelectedMushafId, isValidVerseKey } from '@/utils/validator';
+import { isValidPageNumber, isValidVerseKey } from '@/utils/validator';
 import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
 import { GoalType } from 'types/auth/Goal';
 import ChaptersData from 'types/ChaptersData';
@@ -30,10 +30,10 @@ interface ReadingGoalPayload {
 export const validateReadingGoalData = (
   chaptersData: ChaptersData,
   { type, pages, seconds, range }: ReadingGoalPayload,
-  mushafId: Mushaf = Mushaf.QCFV1,
+  mushafId: Mushaf,
 ): boolean => {
   // if the user selected a pages goal and didn't enter a valid amount of pages, disable the next button
-  if (type === GoalType.PAGES && !isValidPageIdBySelectedMushafId(pages, mushafId)) return false;
+  if (type === GoalType.PAGES && !isValidPageNumber(pages, mushafId)) return false;
 
   // if the user selected a time goal and didn't enter a valid amount of seconds, disable the next button
   // in theory, this should never happen because the input is a select, but just in case
