@@ -124,35 +124,12 @@ export const isValidHizbId = (hizbId: string): boolean => {
  * Validate a pageId which can be in-valid in 2 cases:
  *
  * 1. if it's a string that is not numeric e.g. "test".
- * 2. if it's a numeric string but lies outside the range 1->610.
- *
- * @param {string | number} pageId
- * @returns {boolean}
- */
-export const isValidPageId = (pageId: string | number): boolean => {
-  const pageIdNumber = Number(pageId);
-  const LONGEST_MUSHAF = Mushaf.Indopak15Lines;
-  const LONGEST_MUSHAF_COUNT = PAGES_MUSHAF_MAP[LONGEST_MUSHAF];
-  // if it's not a numeric string or it's numeric but out of the range of chapter 1->610
-  if (Number.isNaN(pageIdNumber) || pageIdNumber > LONGEST_MUSHAF_COUNT || pageIdNumber < 1) {
-    return false;
-  }
-  return true;
-};
-
-/**
- * Validate a pageId which can be in-valid in 2 cases:
- *
- * 1. if it's a string that is not numeric e.g. "test".
  * 2. if it's a numeric string but lies outside the range of the selected Mushaf.
  *
  * @param {string | number} pageId
  * @returns {boolean}
  */
-export const isValidPageIdBySelectedMushafId = (
-  pageId: string | number,
-  mushafId: Mushaf,
-): boolean => {
+export const isValidPageNumber = (pageId: string | number, mushafId: Mushaf): boolean => {
   const pageIdNumber = Number(pageId);
   const MUSHAF_COUNT = PAGES_MUSHAF_MAP[mushafId];
   // if it's not a numeric string or it's numeric but out of the range of the selected Mushaf
