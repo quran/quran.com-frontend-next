@@ -3,7 +3,7 @@
 import { useCallback, useContext, useMemo, useState } from 'react';
 
 import classNames from 'classnames';
-import throttle from 'lodash/throttle';
+import debounce from 'lodash/debounce';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch } from 'react-redux';
@@ -66,7 +66,7 @@ const MEDIA_SETTINGS_TO_QUERY_PARAM = {
   surah: QueryParam.SURAH,
 } as Record<keyof MediaSettings, QueryParam>;
 
-const THROTTLE_COLOR_PICKER_FOR_MS = 2000;
+const DEBOUNCE_COLOR_PICKER_FOR_MS = 1000;
 
 const VideoSettings: React.FC<Props> = ({
   chaptersList,
@@ -188,13 +188,13 @@ const VideoSettings: React.FC<Props> = ({
     onSettingsUpdate({ quranTextFontScale: value }, 'quranTextFontScale', value);
   };
 
-  const onFontColorChange = (color: string) => {
-    onSettingsUpdate({ fontColor: color }, 'fontColor', color);
+  const onFontChange = (event) => {
+    debouncedOnChange(event.target.value);
   };
 
-  const throttledOnChange = throttle((event) => {
-    onFontColorChange(event.target.value);
-  }, THROTTLE_COLOR_PICKER_FOR_MS);
+  const debouncedOnChange = debounce((color) => {
+    onSettingsUpdate({ fontColor: color }, 'fontColor', color);
+  }, DEBOUNCE_COLOR_PICKER_FOR_MS);
 
   return (
     <>
@@ -261,7 +261,7 @@ const VideoSettings: React.FC<Props> = ({
                 className={styles.colorPicker}
                 type="color"
                 value={mediaSettings.fontColor}
-                onChange={throttledOnChange}
+                onChange={onFontChange}
               />
             </Section.Row>
           </Section>
