@@ -87,8 +87,10 @@ const VideoSettings: React.FC<Props> = ({
   }, [dispatch, removeQueryParam, seekToBeginning]);
 
   const onSettingsUpdate = useCallback(
-    (settings: ChangedSettings, key: keyof MediaSettings, value: any) => {
-      logValueChange(`media_settings_${key}`, mediaSettings[key], value);
+    (settings: ChangedSettings, key?: keyof MediaSettings, value?: any) => {
+      if (key) {
+        logValueChange(`media_settings_${key}`, mediaSettings[key], value);
+      }
       seekToBeginning();
       dispatch(updateSettings(settings));
       Object.keys(settings).forEach((settingKey) => {
@@ -136,7 +138,7 @@ const VideoSettings: React.FC<Props> = ({
       const validationError = validateRangeSelection(startVerseKey, endVerseKey, t);
       if (validationError) {
         setRangesError(validationError);
-        return;
+        return false;
       }
       if (isVerseKeyStartOfRange) {
         onSettingsUpdate(
