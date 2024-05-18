@@ -3,6 +3,7 @@
 import { useCallback, useContext, useMemo, useState } from 'react';
 
 import classNames from 'classnames';
+import throttle from 'lodash/throttle';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch } from 'react-redux';
@@ -64,6 +65,8 @@ const MEDIA_SETTINGS_TO_QUERY_PARAM = {
   videoId: QueryParam.VIDEO_ID,
   surah: QueryParam.SURAH,
 } as Record<keyof MediaSettings, QueryParam>;
+
+const THROTTLE_COLOR_PICKER_FOR_MS = 2000;
 
 const VideoSettings: React.FC<Props> = ({
   chaptersList,
@@ -189,6 +192,10 @@ const VideoSettings: React.FC<Props> = ({
     onSettingsUpdate({ fontColor: color }, 'fontColor', color);
   };
 
+  const throttledOnChange = throttle((event) => {
+    onFontColorChange(event.target.value);
+  }, THROTTLE_COLOR_PICKER_FOR_MS);
+
   return (
     <>
       <RenderControls
@@ -254,7 +261,7 @@ const VideoSettings: React.FC<Props> = ({
                 className={styles.colorPicker}
                 type="color"
                 value={mediaSettings.fontColor}
-                onChange={(e) => onFontColorChange(e.target.value)}
+                onChange={throttledOnChange}
               />
             </Section.Row>
           </Section>
