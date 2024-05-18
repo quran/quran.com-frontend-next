@@ -2,10 +2,11 @@
 /* eslint-disable max-lines */
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
-import { PlayerRef, Player } from '@remotion/player';
+import { PlayerRef, Player, RenderPlayPauseButton, RenderPoster } from '@remotion/player';
 import classNames from 'classnames';
 import { GetStaticProps, NextPage } from 'next';
 import useTranslation from 'next-translate/useTranslation';
+import { AbsoluteFill } from 'remotion';
 import useSWRImmutable from 'swr/immutable';
 
 import { getAvailableReciters, getChapterAudioData, getChapterVerses } from '@/api';
@@ -92,6 +93,26 @@ const MediaMaker: NextPage<MediaMaker> = ({
     translationFontScale,
     orientation,
   } = mediaSettings;
+
+  const renderPlayPauseButton: RenderPlayPauseButton = useCallback(({ playing, isBuffering }) => {
+    if (playing && isBuffering) {
+      return <Spinner size={SpinnerSize.Large} />;
+    }
+
+    return null;
+  }, []);
+
+  const renderPoster: RenderPoster = useCallback(({ isBuffering }) => {
+    if (isBuffering) {
+      return (
+        <div className={styles.loadingContainer}>
+          <Spinner size={SpinnerSize.Large} />
+        </div>
+      );
+    }
+
+    return null;
+  }, []);
 
   const API_PARAMS = useMemo(() => {
     return {
@@ -272,6 +293,10 @@ const MediaMaker: NextPage<MediaMaker> = ({
               fps={VIDEO_FPS}
               ref={playerRef}
               controls
+              renderPoster={renderPoster}
+              showPosterWhenBuffering
+              bufferStateDelayInMilliseconds={200} // wait for 200ms before showing the spinner
+              renderPlayPauseButton={renderPlayPauseButton}
             />
           )}
         </div>

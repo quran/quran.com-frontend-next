@@ -62,7 +62,7 @@ const MediaMakerContent: React.FC<Props> = ({
       }}
     >
       <div className={styles.videoContainer}>
-        <Video muted loop src={video.videoSrc} />
+        <Video pauseWhenBuffering src={video.videoSrc} />
       </div>
       {shouldRenderAudio && (
         <Audio pauseWhenBuffering startFrom={startFrom} endAt={endAt} src={audio.audioUrl} />
