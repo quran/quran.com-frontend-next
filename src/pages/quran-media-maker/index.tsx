@@ -1,6 +1,6 @@
 /* eslint-disable react-func/max-lines-per-function */
 /* eslint-disable max-lines */
-import { useCallback, useEffect, useMemo, useRef } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import { PlayerRef, Player } from '@remotion/player';
 import classNames from 'classnames';
@@ -9,7 +9,6 @@ import useTranslation from 'next-translate/useTranslation';
 import useSWRImmutable from 'swr/immutable';
 
 import { getAvailableReciters, getChapterAudioData, getChapterVerses } from '@/api';
-import MediaMakerContent from '@/components/MediaMaker/Content';
 import styles from '@/components/MediaMaker/MediaMaker.module.scss';
 import VideoSettings from '@/components/MediaMaker/Settings/VideoSettings';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
@@ -18,6 +17,7 @@ import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import useGetMediaSettings from '@/hooks/auth/media/useGetMediaSettings';
 import Error from '@/pages/_error';
 import layoutStyles from '@/pages/index.module.scss';
+import AudioData from '@/types/AudioData';
 import { makeChapterAudioDataUrl, makeVersesUrl } from '@/utils/apiPaths';
 import { areArraysEqual } from '@/utils/array';
 import { getAllChaptersData } from '@/utils/chapter';
@@ -60,11 +60,20 @@ const MediaMaker: NextPage<MediaMaker> = ({
   chaptersData,
   englishChaptersList,
   reciters,
-  verses,
-  audio,
+  verses: defaultVerses,
+  audio: defaultAudio,
 }) => {
   const { t, lang } = useTranslation('common');
   const mediaSettings = useGetMediaSettings();
+  const [isReady, setIsReady] = useState(false);
+  const lazyComponent = useCallback(() => {
+    return import('@/components/MediaMaker/Content');
+  }, []);
+
+  useEffect(() => {
+    setIsReady(true);
+  }, []);
+
   const toast = useToast();
   const {
     surah,
@@ -95,7 +104,15 @@ const MediaMaker: NextPage<MediaMaker> = ({
     };
   }, [translations, verseFrom, verseTo]);
 
-  const hasVersesAPIParamsChanged = useMemo(() => {
+  const shouldRefetchVersesData = useMemo(() => {
+    /**
+     * Refetch data of the current verses If:
+     *
+     * 1. translations changed
+     * 2. Range start Ayah changed
+     * 3. Range end Ayah changed
+     * 4. Reciter changes
+     */
     return (
       !areArraysEqual(translations, DEFAULT_API_PARAMS.translations) ||
       verseFrom !== `${DEFAULT_SURAH}:1` ||
@@ -108,26 +125,29 @@ const MediaMaker: NextPage<MediaMaker> = ({
     data: verseData,
     isValidating: isVersesValidating,
     error: versesError,
-  } = useSWRImmutable(
+  } = useSWRImmutable<VersesResponse>(
     makeVersesUrl(surah, lang, API_PARAMS),
     () => getChapterVerses(surah, lang, API_PARAMS),
     {
-      fallbackData: verses,
-      revalidateOnMount: hasVersesAPIParamsChanged,
+      fallbackData: defaultVerses,
+      revalidateOnMount: shouldRefetchVersesData,
     },
   );
+  // Refetch audio data if the reciter or chapter has changed
+  const shouldRefetchAudioData =
+    Number(reciter) !== DEFAULT_RECITER_ID || Number(surah) !== DEFAULT_SURAH;
 
   const {
-    data: chapterAudioData,
+    data: currentSurahAudioData,
     isValidating: isAudioValidating,
     error: audioError,
-  } = useSWRImmutable(
+  } = useSWRImmutable<AudioData>(
     makeChapterAudioDataUrl(reciter, surah, true),
     () => getChapterAudioData(reciter, surah, true),
     {
-      fallbackData: audio,
+      fallbackData: defaultAudio,
       // only revalidate when the reciter or chapter has changed
-      revalidateOnMount: Number(reciter) !== DEFAULT_RECITER_ID || surah !== DEFAULT_SURAH,
+      revalidateOnMount: shouldRefetchAudioData,
     },
   );
 
@@ -162,11 +182,11 @@ const MediaMaker: NextPage<MediaMaker> = ({
 
   const audioData = useMemo(() => {
     return getCurrentRangesAudioData(
-      chapterAudioData,
+      currentSurahAudioData,
       getVerseNumberFromKey(verseFrom),
       getVerseNumberFromKey(verseTo),
     );
-  }, [chapterAudioData, verseFrom, verseTo]);
+  }, [currentSurahAudioData, verseFrom, verseTo]);
 
   const timestamps = useMemo(() => {
     return getNormalizedTimestamps(audioData, VIDEO_FPS);
@@ -223,6 +243,10 @@ const MediaMaker: NextPage<MediaMaker> = ({
   const { width, height } = orientationToDimensions(orientation);
   const PATH = getQuranMediaMakerNavigationUrl();
 
+  if (!isReady) {
+    return <></>;
+  }
+
   return (
     <>
       <NextSeoWrapper
@@ -240,8 +264,8 @@ const MediaMaker: NextPage<MediaMaker> = ({
           ) : (
             <Player
               className={styles.player}
-              component={MediaMakerContent}
               inputProps={inputProps}
+              lazyComponent={lazyComponent}
               durationInFrames={getDurationInFrames(timestamps)}
               compositionWidth={width}
               compositionHeight={height}
