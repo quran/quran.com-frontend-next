@@ -163,7 +163,8 @@ export const getCurrentRangesAudioData = (
 };
 
 export const getDurationInFrames = (timestamps: { start: number; durationInFrames: number }[]) => {
-  return timestamps.reduce((acc, current) => acc + current.durationInFrames, 0);
+  const durationInFrames = timestamps.reduce((acc, current) => acc + current.durationInFrames, 0);
+  return durationInFrames <= 0 ? 1 : durationInFrames;
 };
 
 export const prepareGenerateMediaFileRequestData = (data: GenerateMediaFileRequest) => {
