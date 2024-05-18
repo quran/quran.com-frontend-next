@@ -6,7 +6,6 @@ import { PlayerRef, Player, RenderPlayPauseButton, RenderPoster } from '@remotio
 import classNames from 'classnames';
 import { GetStaticProps, NextPage } from 'next';
 import useTranslation from 'next-translate/useTranslation';
-import { AbsoluteFill } from 'remotion';
 import useSWRImmutable from 'swr/immutable';
 
 import { getAvailableReciters, getChapterAudioData, getChapterVerses } from '@/api';
