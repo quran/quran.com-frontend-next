@@ -1,3 +1,4 @@
+/* eslint-disable react-func/max-lines-per-function */
 /* eslint-disable max-lines */
 import { useCallback, useContext, useMemo, useState } from 'react';
 
@@ -161,6 +162,7 @@ const VideoSettings: React.FC<Props> = ({
           newSelectedVerseKey,
         );
       }
+      return true;
     },
     [onSettingsUpdate, t, verseFrom, verseTo],
   );

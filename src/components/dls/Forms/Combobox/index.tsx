@@ -278,7 +278,7 @@ const Combobox: React.FC<Props> = ({
       }
       setIsOpened(false); // close the items container
     },
-    [preventUnselectingItems, invokeOnChangeCallback, isMultiSelect],
+    [preventUnselectingItems, isMultiSelect, invokeOnChangeCallback, getNewValue],
   );
 
   /**
@@ -343,7 +343,7 @@ const Combobox: React.FC<Props> = ({
         });
       }
     },
-    [invokeOnChangeCallback, items, preventUnselectingItems],
+    [getNewValue, invokeOnChangeCallback, items, preventUnselectingItems],
   );
 
   const shouldShowCaret =
