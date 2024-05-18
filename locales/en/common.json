@@ -153,7 +153,8 @@
     "MediaVersesRangeLimitExceeded": "You can only select up to {{limit}} verses at a time. Please select a smaller range.",
     "MediaFilesPerUserLimitExceeded": "You have reached the maximum monthly limit of ({{limit}}).",
     "ranges-no-value": "Range start and end must have a value",
-    "ranges-wrong-order": "The starting verse has to be before the ending verse."
+    "ranges-wrong-order": "The starting verse has to be before the ending verse.",
+    "ranges-too-many-verses": "You can only select up to {{maxNumberOfVerses}} verses at a time. Please select a smaller range."
   },
   "feedback": "Feedback",
   "fonts": {

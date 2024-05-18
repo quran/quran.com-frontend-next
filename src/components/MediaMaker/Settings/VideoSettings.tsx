@@ -45,6 +45,8 @@ type Props = {
   mediaSettings: MediaSettings;
 };
 
+const MAXIMUM_VERSES_PER_RENDER = 10;
+
 const MEDIA_SETTINGS_TO_QUERY_PARAM = {
   verseTo: QueryParam.VERSE_TO,
   verseFrom: QueryParam.VERSE_FROM,
@@ -136,7 +138,13 @@ const VideoSettings: React.FC<Props> = ({
       const isVerseKeyStartOfRange = verseSelectorId === RangeSelectorType.START;
       const startVerseKey = isVerseKeyStartOfRange ? newSelectedVerseKey : verseFrom;
       const endVerseKey = !isVerseKeyStartOfRange ? newSelectedVerseKey : verseTo;
-      const validationError = validateRangeSelection(startVerseKey, endVerseKey, t);
+      const validationError = validateRangeSelection(
+        startVerseKey,
+        endVerseKey,
+        t,
+        MAXIMUM_VERSES_PER_RENDER,
+        chaptersData,
+      );
       if (validationError) {
         setRangesError(validationError);
         return false;
@@ -164,7 +172,7 @@ const VideoSettings: React.FC<Props> = ({
       }
       return true;
     },
-    [onSettingsUpdate, t, verseFrom, verseTo],
+    [chaptersData, onSettingsUpdate, t, verseFrom, verseTo],
   );
 
   const onFontScaleDecreaseClicked = () => {

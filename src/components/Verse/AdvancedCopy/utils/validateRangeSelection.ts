@@ -1,6 +1,8 @@
 import { Translate } from 'next-translate';
 
+import ChaptersData from '@/types/ChaptersData';
 import { getVerseNumberFromKey } from '@/utils/verse';
+import { generateVerseKeysBetweenTwoVerseKeys } from '@/utils/verseKeys';
 
 /**
  * Validate the selected range start and end verse keys. The selection will be invalid in the following cases:
@@ -17,7 +19,10 @@ const validateRangeSelection = (
   selectedRangeStartVerseKey: string,
   selectedRangeEndVerseKey: string,
   t: Translate,
+  maxNumberOfVerses?: number,
+  chaptersData?: ChaptersData,
 ): string | null => {
+  console.log(maxNumberOfVerses);
   // if one of them is empty.
   if (!selectedRangeStartVerseKey || !selectedRangeEndVerseKey) {
     return t('common:error.ranges-no-value');
@@ -29,6 +34,18 @@ const validateRangeSelection = (
   ) {
     return t('common:error.ranges-wrong-order');
   }
+
+  if (maxNumberOfVerses) {
+    const numberOfVerses = generateVerseKeysBetweenTwoVerseKeys(
+      chaptersData,
+      selectedRangeStartVerseKey,
+      selectedRangeEndVerseKey,
+    ).length;
+    if (numberOfVerses > maxNumberOfVerses) {
+      return t('common:error.ranges-too-many-verses', { maxNumberOfVerses });
+    }
+  }
+
   return null;
 };
 
