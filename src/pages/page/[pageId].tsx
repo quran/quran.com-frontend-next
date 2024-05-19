@@ -18,10 +18,10 @@ import {
   ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
   REVALIDATION_PERIOD_ON_ERROR_SECONDS,
 } from '@/utils/staticPageGeneration';
-import { isValidPageId } from '@/utils/validator';
+import { isValidPageNumber } from '@/utils/validator';
 import { VersesResponse } from 'types/ApiResponses';
 import ChaptersData from 'types/ChaptersData';
-import { QuranReaderDataType } from 'types/QuranReader';
+import { Mushaf, QuranReaderDataType } from 'types/QuranReader';
 
 interface Props {
   pageVerses: VersesResponse;
@@ -62,22 +62,23 @@ const QuranicPage: NextPage<Props> = ({ hasError, pageVerses }) => {
 // eslint-disable-next-line react-func/max-lines-per-function
 export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   const pageIdNumber = Number(params.pageId);
+  const defaultMushafId = getMushafId(
+    getQuranReaderStylesInitialState(locale).quranFont,
+    getQuranReaderStylesInitialState(locale).mushafLines,
+  ).mushaf;
+  const LONGEST_MUSHAF_ID = Mushaf.Indopak15Lines;
+
   // we need to validate the pageId first to save calling BE since we haven't set the valid paths inside getStaticPaths to avoid pre-rendering them at build time.
-  if (!isValidPageId(pageIdNumber)) {
+  if (!isValidPageNumber(pageIdNumber, LONGEST_MUSHAF_ID)) {
     return {
       notFound: true,
     };
   }
 
-  const defaultMushafId = getMushafId(
-    getQuranReaderStylesInitialState(locale).quranFont,
-    getQuranReaderStylesInitialState(locale).mushafLines,
-  ).mushaf;
-
   // The defaultMushafId is 2 representing the Madinah Mushaf
   // PAGES_MUSHAF_MAP will return the mushaf total number of pages when passed a mushafId
   // Mushaf ID: 2 (Madinah) -> Pages Count: 604 pages
-  const defaultMushafPagesCount = PAGES_MUSHAF_MAP[Number(defaultMushafId)];
+  const defaultMushafPagesCount = PAGES_MUSHAF_MAP[defaultMushafId];
   // In case the requested page/[pageId] is greater than the SSR loaded default mushaf total pages count
   // we set the pageId to the last available page, otherwise we load the passed pageID
   const pageId =
