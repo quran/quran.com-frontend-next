@@ -243,12 +243,12 @@ const MediaMaker: NextPage<MediaMaker> = ({
 
   useEffect(() => {
     const { waitUntilDone: waitUntilVideoDone, free: freeVideo } = prefetch(videoPath, {
-      method: 'blob-url',
+      method: 'base64',
     });
     const { waitUntilDone: waitUntilAudioDone, free: freeAudio } = prefetch(
       inputProps.audio.audioUrl,
       {
-        method: 'blob-url',
+        method: 'base64',
       },
     );
     Promise.all([waitUntilVideoDone(), waitUntilAudioDone()])
