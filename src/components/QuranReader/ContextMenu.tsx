@@ -40,7 +40,12 @@ const ContextMenu = () => {
     useSelector(selectContextMenu, shallowEqual);
 
   const { isActive } = useOnboarding();
-  const { isVisible: isNavbarVisible } = useSelector(selectNavbar, shallowEqual);
+  const {
+    isVisible: isNavbarVisible,
+    isSettingsDrawerOpen,
+    isNavigationDrawerOpen,
+    isSearchDrawerOpen,
+  } = useSelector(selectNavbar, shallowEqual);
   const showNavbar = isNavbarVisible || isActive;
   const showReadingPreferenceSwitcher = isReadingPreferenceSwitcherVisible && !isActive;
 
@@ -71,6 +76,8 @@ const ContextMenu = () => {
         [styles.visibleContainer]: showNavbar,
         [styles.expandedContainer]: isExpanded,
         [styles.withVisibleSideBar]: isSideBarVisible,
+        [styles.noScrollbarWidth]:
+          isSettingsDrawerOpen || isNavigationDrawerOpen || isSearchDrawerOpen,
       })}
       // @ts-ignore
       // eslint-disable-next-line @typescript-eslint/naming-convention

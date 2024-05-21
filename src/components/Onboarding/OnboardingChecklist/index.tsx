@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import { useRouter } from 'next/router';
 import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 
 import OnboardingProgress from '../OnboardingProgress';
 import { onboardingChecklist } from '../steps';
@@ -16,6 +16,7 @@ import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
 import CheckIcon from '@/icons/check.svg';
 import IconClose from '@/icons/close.svg';
 import IconQuestionMark from '@/icons/question-mark-icon.svg';
+import { selectNavbar } from '@/redux/slices/navbar';
 import {
   dismissChecklist,
   selectOnboarding,
@@ -41,6 +42,11 @@ const OnboardingChecklist = () => {
   const { startTour, isActive } = useOnboarding();
   const { isChecklistVisible, checklistDismissals, completedGroups } =
     useSelector(selectOnboarding);
+
+  const { isSearchDrawerOpen, isNavigationDrawerOpen, isSettingsDrawerOpen } = useSelector(
+    selectNavbar,
+    shallowEqual,
+  );
 
   const readingPreferences = useSelector(selectReadingPreferences);
   const { readingPreference } = readingPreferences;
@@ -70,7 +76,10 @@ const OnboardingChecklist = () => {
       return (
         <Button
           shape={ButtonShape.Circle}
-          className={classNames(styles.checklistPosition)}
+          className={classNames(styles.checklistPosition, {
+            [styles.marginRight]:
+              isSearchDrawerOpen || isNavigationDrawerOpen || isSettingsDrawerOpen,
+          })}
           tooltip={t('onboarding:onboarding-checklist')}
           onClick={openChecklist}
           size={ButtonSize.Large}
@@ -112,7 +121,11 @@ const OnboardingChecklist = () => {
   };
 
   return (
-    <div className={classNames(styles.checklist, styles.checklistPosition)}>
+    <div
+      className={classNames(styles.checklist, styles.checklistPosition, {
+        [styles.marginRight]: isSearchDrawerOpen || isNavigationDrawerOpen || isSettingsDrawerOpen,
+      })}
+    >
       <div className={styles.checklistHeader}>
         <h4>
           <Trans
@@ -161,5 +174,5 @@ const OnboardingChecklist = () => {
     </div>
   );
 };
-
+// eslint-disable-next-line max-lines
 export default OnboardingChecklist;
