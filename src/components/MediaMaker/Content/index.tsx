@@ -81,25 +81,23 @@ const MediaMakerContent: React.FC<Props> = ({
     const { waitUntilDone: waitUntilAudioDone, free: freeAudio } = prefetch(audio.audioUrl, {
       method: 'blob-url',
     });
-    waitUntilVideoDone()
+    Promise.all([waitUntilVideoDone(), waitUntilAudioDone()])
       .then(() => {
-        waitUntilAudioDone()
-          .then(() => {
-            setIsReady(true);
-            continueRender(handle);
-          })
-          .catch((error) => {
-            console.log('audio', error);
-          });
+        setIsReady(true);
+        continueRender(handle);
       })
-      .catch((error) => {
-        console.log('video', error);
+      .catch(() => {
+        // TODO: use toast to show error
       });
     return () => {
       freeVideo();
       freeAudio();
     };
   }, [audio.audioUrl, handle, video.videoSrc, videoPath]);
+
+  if (!isReady) {
+    return null;
+  }
 
   return (
     <AbsoluteFill
