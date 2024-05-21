@@ -15,6 +15,7 @@ import AlignmentsSettings from './AlignmentsSettings';
 import BackgroundVideos from './BackgroundVideos';
 import OrientationSettings from './OrientationSettings';
 import ReciterSettings from './ReciterSettings';
+import BackgroundSettings from './TextBackgroundSettings';
 import TranslationSettingsSection from './TranslationSectionSetting';
 
 import Section from '@/components/Navbar/SettingsDrawer/Section';
@@ -253,6 +254,12 @@ const VideoSettings: React.FC<Props> = ({
           />
         </div>
         <div>
+          <BackgroundSettings
+            shouldHaveBorder={mediaSettings.shouldHaveBorder}
+            backgroundColorId={mediaSettings.backgroundColorId}
+            opacity={mediaSettings.opacity}
+            onSettingsUpdate={onSettingsUpdate}
+          />
           <Section>
             <Section.Title>{t('colors')}</Section.Title>
             <Section.Row>
