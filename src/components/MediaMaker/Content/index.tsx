@@ -1,20 +1,8 @@
-/* eslint-disable max-lines */
 /* eslint-disable i18next/no-literal-string */
 /* eslint-disable react/no-danger */
 /* eslint-disable no-unsafe-optional-chaining */
-import { useEffect, useState } from 'react';
-
 import classNames from 'classnames';
-import {
-  AbsoluteFill,
-  Audio,
-  Sequence,
-  Video,
-  continueRender,
-  delayRender,
-  prefetch,
-  staticFile,
-} from 'remotion';
+import { AbsoluteFill, Audio, Sequence, Video, staticFile } from 'remotion';
 
 import styles from './MediaMakerContent.module.scss';
 
@@ -62,8 +50,6 @@ const MediaMakerContent: React.FC<Props> = ({
   chapterEnglishName,
   isPlayer = false,
 }) => {
-  const [isReady, setIsReady] = useState(false);
-  const [handle] = useState(() => delayRender());
   const startFrom = audio?.verseTimings[0]?.normalizedStart
     ? (audio?.verseTimings[0]?.normalizedStart / 1000) * 30
     : (audio?.verseTimings[0]?.timestampFrom / 1000) * 30;
@@ -74,31 +60,6 @@ const MediaMakerContent: React.FC<Props> = ({
 
   const videoPath = staticFile(`${isPlayer ? '/publicMin' : ''}${video.videoSrc}`);
 
-  useEffect(() => {
-    const { waitUntilDone: waitUntilVideoDone, free: freeVideo } = prefetch(videoPath, {
-      method: 'blob-url',
-    });
-    const { waitUntilDone: waitUntilAudioDone, free: freeAudio } = prefetch(audio.audioUrl, {
-      method: 'blob-url',
-    });
-    Promise.all([waitUntilVideoDone(), waitUntilAudioDone()])
-      .then(() => {
-        setIsReady(true);
-        continueRender(handle);
-      })
-      .catch(() => {
-        // TODO: use toast to show error
-      });
-    return () => {
-      freeVideo();
-      freeAudio();
-    };
-  }, [audio.audioUrl, handle, video.videoSrc, videoPath]);
-
-  if (!isReady) {
-    return null;
-  }
-
   return (
     <AbsoluteFill
       style={{
@@ -106,9 +67,9 @@ const MediaMakerContent: React.FC<Props> = ({
       }}
     >
       <div className={styles.videoContainer}>
-        {isReady && <Video pauseWhenBuffering src={videoPath} />}
+        <Video pauseWhenBuffering src={videoPath} />
       </div>
-      {isReady && audioHasStartAndEndRanges && (
+      {audioHasStartAndEndRanges && (
         <Audio pauseWhenBuffering startFrom={startFrom} endAt={endAt} src={audio.audioUrl} />
       )}
       {verses &&

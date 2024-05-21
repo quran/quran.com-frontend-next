@@ -6,6 +6,7 @@ import { PlayerRef, Player, RenderPlayPauseButton } from '@remotion/player';
 import classNames from 'classnames';
 import { GetStaticProps, NextPage } from 'next';
 import useTranslation from 'next-translate/useTranslation';
+import { continueRender, delayRender, prefetch, staticFile } from 'remotion';
 import useSWRImmutable from 'swr/immutable';
 
 import { getAvailableReciters, getChapterAudioData, getChapterVerses } from '@/api';
@@ -66,6 +67,8 @@ const MediaMaker: NextPage<MediaMaker> = ({
   const { t, lang } = useTranslation('common');
   const mediaSettings = useGetMediaSettings();
   const [isReady, setIsReady] = useState(false);
+  const [handle] = useState(() => delayRender());
+  const [areMediaFilesReady, setAreMediaFilesReady] = useState(false);
   const lazyComponent = useCallback(() => {
     return import('@/components/MediaMaker/Content');
   }, []);
@@ -236,6 +239,33 @@ const MediaMaker: NextPage<MediaMaker> = ({
     chapterEnglishName,
   ]);
 
+  const videoPath = staticFile(`/publicMin${inputProps.video.videoSrc}`);
+
+  useEffect(() => {
+    const { waitUntilDone: waitUntilVideoDone, free: freeVideo } = prefetch(videoPath, {
+      method: 'blob-url',
+    });
+    const { waitUntilDone: waitUntilAudioDone, free: freeAudio } = prefetch(
+      inputProps.audio.audioUrl,
+      {
+        method: 'blob-url',
+      },
+    );
+    Promise.all([waitUntilVideoDone(), waitUntilAudioDone()])
+      .then(() => {
+        setIsReady(true);
+        continueRender(handle);
+        setAreMediaFilesReady(true);
+      })
+      .catch(() => {
+        // TODO: use toast to show error
+      });
+    return () => {
+      freeVideo();
+      freeAudio();
+    };
+  }, [handle, inputProps.audio.audioUrl, inputProps.video.videoSrc, videoPath]);
+
   const chaptersList = useMemo(() => {
     return Object.entries(chaptersData).map(([id, chapterObj], index) => ({
       id,
@@ -266,7 +296,7 @@ const MediaMaker: NextPage<MediaMaker> = ({
       />
       <div className={styles.pageContainer}>
         <div className={classNames(styles.playerWrapper, layoutStyles.flowItem)}>
-          {isFetching ? (
+          {isFetching || !areMediaFilesReady ? (
             <div className={styles.loadingContainer}>
               <Spinner size={SpinnerSize.Large} />
             </div>
