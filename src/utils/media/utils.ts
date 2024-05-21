@@ -170,11 +170,6 @@ export const getDurationInFrames = (timestamps: { start: number; durationInFrame
 export const prepareGenerateMediaFileRequestData = (data: GenerateMediaFileRequest) => {
   const newData = { ...data, shouldHaveBorder: Boolean(data.shouldHaveBorder) };
 
-  newData.video = {
-    videoSrc: data.video.videoSrc,
-    watermarkColor: data.video.watermarkColor,
-  };
-
   if (data.type === MediaType.VIDEO) {
     newData.audio = {
       audioUrl: data.audio.audioUrl,
@@ -202,6 +197,7 @@ export const prepareGenerateMediaFileRequestData = (data: GenerateMediaFileReque
   delete newData.chapterEnglishName;
   delete newData.video;
   delete newData.verseKeys;
+  delete newData.isPlayer;
 
   return newData;
 };

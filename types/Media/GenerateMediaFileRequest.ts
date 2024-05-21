@@ -29,6 +29,7 @@ interface Request {
   orientation: string;
   videoId: number;
   chapterEnglishName: string;
+  isPlayer?: boolean;
 }
 
 interface Video {
