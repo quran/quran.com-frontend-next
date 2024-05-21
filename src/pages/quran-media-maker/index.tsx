@@ -253,7 +253,6 @@ const MediaMaker: NextPage<MediaMaker> = ({
     );
     Promise.all([waitUntilVideoDone(), waitUntilAudioDone()])
       .then(() => {
-        setIsReady(true);
         continueRender(handle);
         setAreMediaFilesReady(true);
       })

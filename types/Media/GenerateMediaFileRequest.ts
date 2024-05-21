@@ -37,7 +37,7 @@ interface Video {
   watermarkColor: WatermarkColor;
 }
 
-interface Timestamp {
+export interface Timestamp {
   start: number;
   durationInFrames: number;
 }

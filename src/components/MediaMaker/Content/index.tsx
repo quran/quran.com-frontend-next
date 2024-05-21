@@ -8,6 +8,7 @@ import styles from './MediaMakerContent.module.scss';
 
 import ChapterIcon from '@/components/chapters/ChapterIcon';
 import Alignment from '@/types/Media/Alignment';
+import { Timestamp } from '@/types/Media/GenerateMediaFileRequest';
 import Orientation from '@/types/Media/Orientation';
 import WatermarkColor from '@/types/Media/WatermarkColor';
 import Translation from '@/types/Translation';
@@ -19,7 +20,7 @@ type Props = {
   verses: Verse[];
   audio: any;
   video: any;
-  timestamps: any;
+  timestamps: Timestamp[];
   backgroundColorId: number;
   opacity: string;
   fontColor: string;

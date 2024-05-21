@@ -2,7 +2,10 @@
 /* eslint-disable default-param-last */
 /* eslint-disable react-func/max-lines-per-function */
 import AudioData from '@/types/AudioData';
-import GenerateMediaFileRequest, { MediaType } from '@/types/Media/GenerateMediaFileRequest';
+import GenerateMediaFileRequest, {
+  MediaType,
+  Timestamp,
+} from '@/types/Media/GenerateMediaFileRequest';
 import Orientation from '@/types/Media/Orientation';
 import VerseTiming from '@/types/VerseTiming';
 import {
@@ -162,7 +165,7 @@ export const getCurrentRangesAudioData = (
   return rangesChapterData;
 };
 
-export const getDurationInFrames = (timestamps: { start: number; durationInFrames: number }[]) => {
+export const getDurationInFrames = (timestamps: Timestamp[]) => {
   const durationInFrames = timestamps.reduce((acc, current) => acc + current.durationInFrames, 0);
   return durationInFrames <= 0 ? 1 : durationInFrames;
 };
