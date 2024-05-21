@@ -1,11 +1,14 @@
 @use "src/styles/utility";
 
-@include utility.generate-font-scales(
-  "fallback_qpc_uthmani_hafs"
+@include utility.generate-font-scales("fallback_qpc_uthmani_hafs"
 ); // fallback font size
 
 .styledWord {
   line-height: var(--line-height);
+  // The word-spacing & white-space will allow firefox browser
+  // to show the full word without any word cuts 
+  word-spacing: 5px;
+  white-space: pre;
 }
 
 // this is needed to reduce CLS when we are displaying the fallback text by trying to make the font-sizes of the original text and the fallback text as close as possible so that once the original font loads, there will be as little visible CLS as possible.
