@@ -229,6 +229,7 @@ const MediaMaker: NextPage<MediaMaker> = ({
       orientation,
       videoId,
       chapterEnglishName,
+      isPlayer: true,
     };
   }, [
     verseData.verses,

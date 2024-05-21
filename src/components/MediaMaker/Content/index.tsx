@@ -1,8 +1,20 @@
+/* eslint-disable max-lines */
 /* eslint-disable i18next/no-literal-string */
 /* eslint-disable react/no-danger */
 /* eslint-disable no-unsafe-optional-chaining */
+import { useEffect, useState } from 'react';
+
 import classNames from 'classnames';
-import { AbsoluteFill, Audio, Sequence, Video } from 'remotion';
+import {
+  AbsoluteFill,
+  Audio,
+  Sequence,
+  Video,
+  continueRender,
+  delayRender,
+  prefetch,
+  staticFile,
+} from 'remotion';
 
 import styles from './MediaMakerContent.module.scss';
 
@@ -30,6 +42,7 @@ type Props = {
   shouldHaveBorder: string;
   orientation: Orientation;
   chapterEnglishName: string;
+  isPlayer?: boolean;
 };
 
 const MediaMakerContent: React.FC<Props> = ({
@@ -47,25 +60,56 @@ const MediaMakerContent: React.FC<Props> = ({
   translationFontScale,
   orientation,
   chapterEnglishName,
+  isPlayer = false,
 }) => {
+  const [isReady, setIsReady] = useState(false);
+  const [handle] = useState(() => delayRender());
   const startFrom = audio?.verseTimings[0]?.normalizedStart
     ? (audio?.verseTimings[0]?.normalizedStart / 1000) * 30
     : (audio?.verseTimings[0]?.timestampFrom / 1000) * 30;
   const endAt = audio?.verseTimings[0]?.normalizedEnd
     ? (audio?.verseTimings[audio?.verseTimings?.length - 1]?.normalizedEnd / 1000) * 30
     : (audio?.verseTimings[audio?.verseTimings?.length - 1]?.timestampTo / 1000) * 30;
-  const shouldRenderAudio = (!!startFrom || startFrom === 0) && !!endAt;
+  const audioHasStartAndEndRanges = (!!startFrom || startFrom === 0) && !!endAt;
+
+  const videoPath = staticFile(`${isPlayer ? '/publicMin' : ''}${video.videoSrc}`);
+
+  useEffect(() => {
+    const { waitUntilDone: waitUntilVideoDone, free: freeVideo } = prefetch(videoPath, {
+      method: 'blob-url',
+    });
+    const { waitUntilDone: waitUntilAudioDone, free: freeAudio } = prefetch(audio.audioUrl, {
+      method: 'blob-url',
+    });
+    waitUntilVideoDone()
+      .then(() => {
+        waitUntilAudioDone()
+          .then(() => {
+            setIsReady(true);
+            continueRender(handle);
+          })
+          .catch((error) => {
+            console.log('audio', error);
+          });
+      })
+      .catch((error) => {
+        console.log('video', error);
+      });
+    return () => {
+      freeVideo();
+      freeAudio();
+    };
+  }, [audio.audioUrl, handle, video.videoSrc, videoPath]);
+
   return (
     <AbsoluteFill
       style={{
         justifyContent: 'center',
       }}
     >
-      <div className={styles.videoContainer}>
-        <Video pauseWhenBuffering src={video.videoSrc} />
-      </div>
-      {shouldRenderAudio && (
-        <Audio pauseWhenBuffering startFrom={startFrom} endAt={endAt} src={audio.audioUrl} />
+      <div className={styles.videoContainer}>{isReady && <Video src={videoPath} />}</div>
+      {isReady && audioHasStartAndEndRanges && (
+        <Audio startFrom={startFrom} endAt={endAt} src={audio.audioUrl} />
       )}
       {verses &&
         verses.length > 0 &&

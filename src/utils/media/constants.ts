@@ -54,32 +54,32 @@ export const DEFAULT_API_PARAMS = {
 export const BACKGROUND_VIDEOS = {
   1: {
     thumbnailSrc: 'https://images.quran.com/videos/thumbnails/sea.png',
-    videoSrc: 'https://images.quran.com/videos/sea.mp4',
+    videoSrc: '/videos/videos_sea.mp4',
     watermarkColor: WatermarkColor.LIGHT,
   },
   2: {
     thumbnailSrc: 'https://images.quran.com/videos/thumbnails/abstract.png',
-    videoSrc: 'https://images.quran.com/videos/abstract.mp4',
+    videoSrc: '/videos/videos_abstract.mp4',
     watermarkColor: WatermarkColor.LIGHT,
   },
   3: {
     thumbnailSrc: 'https://images.quran.com/videos/thumbnails/windmill.png',
-    videoSrc: 'https://images.quran.com/videos/windmill.mp4',
+    videoSrc: '/videos/videos_windmill.mp4',
     watermarkColor: WatermarkColor.LIGHT,
   },
   4: {
     thumbnailSrc: 'https://images.quran.com/videos/thumbnails/stars.png',
-    videoSrc: 'https://images.quran.com/videos/stars.mp4',
+    videoSrc: '/videos/videos_stars.mp4',
     watermarkColor: WatermarkColor.LIGHT,
   },
   5: {
     thumbnailSrc: 'https://images.quran.com/videos/thumbnails/nature.png',
-    videoSrc: 'https://images.quran.com/videos/nature.mp4',
+    videoSrc: '/videos/videos_nature.mp4',
     watermarkColor: WatermarkColor.LIGHT,
   },
   6: {
     thumbnailSrc: 'https://images.quran.com/videos/thumbnails/snow.png',
-    videoSrc: 'https://images.quran.com/videos/snow.mp4',
+    videoSrc: '/videos/videos_snow.mp4',
     watermarkColor: WatermarkColor.DARK,
   },
 };
