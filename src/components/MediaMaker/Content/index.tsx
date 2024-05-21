@@ -107,9 +107,11 @@ const MediaMakerContent: React.FC<Props> = ({
         justifyContent: 'center',
       }}
     >
-      <div className={styles.videoContainer}>{isReady && <Video src={videoPath} />}</div>
+      <div className={styles.videoContainer}>
+        {isReady && <Video pauseWhenBuffering src={videoPath} />}
+      </div>
       {isReady && audioHasStartAndEndRanges && (
-        <Audio startFrom={startFrom} endAt={endAt} src={audio.audioUrl} />
+        <Audio pauseWhenBuffering startFrom={startFrom} endAt={endAt} src={audio.audioUrl} />
       )}
       {verses &&
         verses.length > 0 &&
