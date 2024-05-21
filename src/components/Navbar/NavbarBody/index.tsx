@@ -52,6 +52,8 @@ const NavbarBody: React.FC = () => {
     dispatch({ type: setIsSettingsDrawerOpen.type, payload: true });
   };
 
+  const isClient = typeof document !== 'undefined';
+
   return (
     <div className={styles.itemsContainer}>
       <div className={styles.centerVertically}>
@@ -86,7 +88,7 @@ const NavbarBody: React.FC = () => {
             >
               <IconSettings />
             </Button>
-            {createPortal(<SettingsDrawer />, document.body)}
+            {isClient && createPortal(<SettingsDrawer />, document.body)}
           </>
           <>
             <Button
@@ -99,7 +101,7 @@ const NavbarBody: React.FC = () => {
             >
               <IconSearch />
             </Button>
-            {createPortal(<SearchDrawer />, document.body)}
+            {isClient && createPortal(<SearchDrawer />, document.body)}
           </>
         </div>
       </div>
