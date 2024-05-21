@@ -1,8 +1,8 @@
 /*
   - default-src: a fallback for all other directives.
     - 'self': Refers to the origin from which the protected document is being served, including the same URL scheme and port number.
-  - script-src: specifies the valid sources of JS running either inside <script> elements or inline script event handlers (onclick). 
-    - 'unsafe-inline' allows the use of inline resources. 
+  - script-src: specifies the valid sources of JS running either inside <script> elements or inline script event handlers (onclick).
+    - 'unsafe-inline' allows the use of inline resources.
     - 'unsafe-eval' is needed otherwise custom JS variables by google analytics will yield to undefined.
   - img-src: specifies valid sources of images and favicons. We allow all sources. besides inline images using :data.
     - data: Allows data: URIs to be used as a content source. Currently we use data to embed some images inline e.g. the App Store images in the Side Menu Drawer.
@@ -14,9 +14,9 @@ const ContentSecurityPolicy = `
   script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://ssl.google-analytics.com https://vitals.vercel-insights.com  https://www.givingloop.org https://code.jquery.com https://www.google.com https://js.stripe.com https://ipinfo.io https://snap.licdn.com https://cdn.mouseflow.com https://www.paypal.com  https://wchat.eu.freshchat.com https://cdn.plaid.com https://cdnjs.cloudflare.com https://cdn.amplitude.com https://cdn.logrocket.io https://www.gstatic.com https://js.stripe.com;
   font-src 'self' 'unsafe-inline' 'unsafe-eval' givingloop.org fonts.gstatic.com https://www.givingloop.org;
   frame-src 'self' 'unsafe-inline' 'unsafe-eval' https://js.stripe.com/v3 js.stripe.com  https://www.paypal.com www.paypal.com https://wchat.eu.freshchat.com https://www.google.com www.google.com;
-  style-src 'self' 'unsafe-inline' 'unsafe-eval' *.givingloop.org givingloop.org fonts.googleapis.com fonts.googleapis.com wchat.eu.freshchat.com; 
+  style-src 'self' 'unsafe-inline' 'unsafe-eval' *.givingloop.org givingloop.org fonts.googleapis.com fonts.googleapis.com wchat.eu.freshchat.com;
   img-src * data:;
-  media-src 'self' *.quranicaudio.com *.qurancdn.com https://qurancdn.com https://images.quran.com;
+  media-src 'self' blob: *.quranicaudio.com *.qurancdn.com https://qurancdn.com https://images.quran.com;
   connect-src *;
 `;
 
