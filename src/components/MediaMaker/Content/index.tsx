@@ -2,7 +2,7 @@
 /* eslint-disable react/no-danger */
 /* eslint-disable no-unsafe-optional-chaining */
 import classNames from 'classnames';
-import { AbsoluteFill, Audio, Sequence, OffthreadVideo, staticFile } from 'remotion';
+import { AbsoluteFill, Audio, Sequence, Video, staticFile } from 'remotion';
 
 import styles from './MediaMakerContent.module.scss';
 
@@ -68,7 +68,7 @@ const MediaMakerContent: React.FC<Props> = ({
       }}
     >
       <div className={styles.videoContainer}>
-        <OffthreadVideo pauseWhenBuffering src={videoPath} />
+        <Video pauseWhenBuffering src={videoPath} />
       </div>
       {audioHasStartAndEndRanges && (
         <Audio pauseWhenBuffering startFrom={startFrom} endAt={endAt} src={audio.audioUrl} />

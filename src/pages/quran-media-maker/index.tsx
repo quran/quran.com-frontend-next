@@ -22,6 +22,7 @@ import AudioData from '@/types/AudioData';
 import { makeChapterAudioDataUrl, makeVersesUrl } from '@/utils/apiPaths';
 import { areArraysEqual } from '@/utils/array';
 import { getAllChaptersData } from '@/utils/chapter';
+import { isAppleWebKit } from '@/utils/device-detector';
 import { getLanguageAlternates, toLocalizedNumber } from '@/utils/locale';
 import {
   DEFAULT_API_PARAMS,
@@ -239,16 +240,19 @@ const MediaMaker: NextPage<MediaMaker> = ({
     chapterEnglishName,
   ]);
 
-  const videoPath = staticFile(`/publicMin${inputProps.video.videoSrc}`);
-
   useEffect(() => {
-    const { waitUntilDone: waitUntilVideoDone, free: freeVideo } = prefetch(videoPath, {
-      method: 'base64',
-    });
+    // {@see https://www.remotion.dev/docs/troubleshooting/player-flicker#option-6-prefetching-as-base64-to-avoid-network-request-and-local-http-server}
+    const method = isAppleWebKit() ? 'base64' : 'blob-url';
+    const { waitUntilDone: waitUntilVideoDone, free: freeVideo } = prefetch(
+      staticFile(`/publicMin${inputProps.video.videoSrc}`),
+      {
+        method,
+      },
+    );
     const { waitUntilDone: waitUntilAudioDone, free: freeAudio } = prefetch(
       inputProps.audio.audioUrl,
       {
-        method: 'base64',
+        method,
       },
     );
     Promise.all([waitUntilVideoDone(), waitUntilAudioDone()])
@@ -263,7 +267,7 @@ const MediaMaker: NextPage<MediaMaker> = ({
       freeVideo();
       freeAudio();
     };
-  }, [handle, inputProps.audio.audioUrl, inputProps.video.videoSrc, videoPath]);
+  }, [handle, inputProps.audio.audioUrl, inputProps.video.videoSrc]);
 
   const chaptersList = useMemo(() => {
     return Object.entries(chaptersData).map(([id, chapterObj], index) => ({
