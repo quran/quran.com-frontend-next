@@ -56,8 +56,7 @@ const GlyphWord = ({
   return (
     <span
       dangerouslySetInnerHTML={{
-        // The white space will allow firefox browser to show the full word without any word cuts
-        __html: ` ${getWordText(qpcUthmaniHafs, textCodeV1, textCodeV2, font, isFontLoaded)}`,
+        __html: getWordText(qpcUthmaniHafs, textCodeV1, textCodeV2, font, isFontLoaded),
       }}
       data-font-scale={quranTextFontScale}
       data-font={font}
