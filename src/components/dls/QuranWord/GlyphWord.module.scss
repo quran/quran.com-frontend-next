@@ -1,14 +1,28 @@
 @use "src/styles/utility";
+@use "src/styles/theme";
 
-@include utility.generate-font-scales(
-  "fallback_qpc_uthmani_hafs"
-); // fallback font size
+@include utility.generate-font-scales("fallback_qpc_uthmani_hafs"); // fallback font size
 
 .styledWord {
   line-height: var(--line-height);
 }
 
+.wordSpacing {
+  // This fixes cut words in Uthmani Mushaf V1 & V2 in Firefox
+
+  @-moz-document url-prefix() {
+    word-spacing: 4px;
+    margin-right: -5px;
+    white-space: pre;
+  }
+}
+
 // this is needed to reduce CLS when we are displaying the fallback text by trying to make the font-sizes of the original text and the fallback text as close as possible so that once the original font loads, there will be as little visible CLS as possible.
 .fallbackText {
   font-family: UthmanicHafs !important;
+}
+
+.tajweedTextHighlighted {
+  color: transparent;
+  text-shadow: 0px 0px var(--color-success-medium);
 }

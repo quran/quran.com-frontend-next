@@ -1,5 +1,4 @@
 /* eslint-disable react/no-danger */
-import React from 'react';
 
 import classNames from 'classnames';
 import { shallowEqual, useSelector } from 'react-redux';
@@ -51,22 +50,23 @@ const GlyphWord = ({
   font,
   isFontLoaded,
 }: UthmaniWordTextProps) => {
-  const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
-  const { quranTextFontScale, mushafLines } = quranReaderStyles;
+  const { quranTextFontScale, mushafLines } = useSelector(selectQuranReaderStyles, shallowEqual);
+  const innerHTML = {
+    __html: ` ${getWordText(qpcUthmaniHafs, textCodeV1, textCodeV2, font, isFontLoaded)}`,
+  };
+  const className = classNames(styles.styledWord, {
+    [styles.wordSpacing]: quranTextFontScale < 6,
+    [styles.fallbackText]: !isFontLoaded,
+    [styles[getFontClassName(FALLBACK_FONT, quranTextFontScale, mushafLines, true)]]: !isFontLoaded,
+  });
+
   return (
     <span
-      dangerouslySetInnerHTML={{
-        __html: getWordText(qpcUthmaniHafs, textCodeV1, textCodeV2, font, isFontLoaded),
-      }}
+      dangerouslySetInnerHTML={innerHTML}
       data-font-scale={quranTextFontScale}
       data-font={font}
-      className={classNames(styles.styledWord, {
-        [styles.fallbackText]: !isFontLoaded,
-        [styles[getFontClassName(FALLBACK_FONT, quranTextFontScale, mushafLines, true)]]:
-          !isFontLoaded,
-      })}
+      className={className}
       {...(isFontLoaded && {
-        // eslint-disable-next-line i18next/no-literal-string
         style: { fontFamily: `p${pageNumber}-${font.replace('code_', '')}` },
       })}
     />
