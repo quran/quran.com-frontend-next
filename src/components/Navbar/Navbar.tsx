@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 import classNames from 'classnames';
 import { useSelector, shallowEqual } from 'react-redux';
@@ -7,6 +7,7 @@ import styles from './Navbar.module.scss';
 import NavbarBody from './NavbarBody';
 
 import { useOnboarding } from '@/components/Onboarding/OnboardingProvider';
+import useScrollBarWidth from '@/hooks/useScrollBarWidth';
 import { selectNavbar } from '@/redux/slices/navbar';
 
 const Navbar = () => {
@@ -19,24 +20,7 @@ const Navbar = () => {
   } = useSelector(selectNavbar, shallowEqual);
   const showNavbar = isNavbarVisible || isActive;
 
-  useEffect(() => {
-    const getScrollbarWidth = () => {
-      return window.innerWidth - document.documentElement.clientWidth;
-    };
-
-    const setScrollbarWidth = () => {
-      const scrollbarWidth = getScrollbarWidth();
-      document.documentElement.style.setProperty('--scrollbar-width', `${scrollbarWidth}px`);
-    };
-
-    setScrollbarWidth(); // Set the scrollbar width initially
-
-    window.addEventListener('resize', setScrollbarWidth); // Update the scrollbar width when the window is resized
-
-    return () => {
-      window.removeEventListener('resize', setScrollbarWidth);
-    };
-  }, []);
+  useScrollBarWidth();
 
   return (
     <>
