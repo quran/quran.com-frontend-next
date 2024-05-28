@@ -4,13 +4,14 @@ import React, { useState } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import { useSWRConfig } from 'swr';
 
+import DeleteNoteModal from './DeleteNoteModal';
 import EditForm from './EditForm';
 import styles from './NoteListItem.module.scss';
 
 import PublicReflectionDescription, {
   NoteType,
 } from '@/components/Notes/NoteModal/PublicReflectionCheckboxDescription';
-import Button, { ButtonSize, ButtonType, ButtonVariant } from '@/dls/Button/Button';
+import Button, { ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import useMutation from '@/hooks/useMutation';
 import EditIcon from '@/icons/edit.svg';
@@ -155,9 +156,7 @@ const EditNoteListItem: React.FC<Props> = ({
     setIsInEditMode(true);
   };
 
-  const onDeleteClicked = (e) => {
-    e.stopPropagation();
-    logButtonClick('delete_note');
+  const onDeleteConfirm = () => {
     deleteNote(note.id);
   };
 
@@ -207,17 +206,11 @@ const EditNoteListItem: React.FC<Props> = ({
             >
               <EditIcon />
             </Button>
-            <Button
-              variant={ButtonVariant.Ghost}
-              onClick={onDeleteClicked}
-              tooltip={t('delete')}
-              size={ButtonSize.Small}
-              type={ButtonType.Warning}
-              {...buttonProps}
-              // eslint-disable-next-line i18next/no-literal-string
-            >
-              X
-            </Button>
+            <DeleteNoteModal
+              onConfirm={onDeleteConfirm}
+              note={note}
+              isDisabled={shouldDisableActions}
+            />
           </div>
           <div className={styles.noteBody}>{note.body}</div>
           {noteReflectionId ? (
