@@ -6,6 +6,7 @@ import { shallowEqual, useSelector } from 'react-redux';
 import styles from './GlyphWord.module.scss';
 
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
+import { isFirefox } from '@/utils/device-detector';
 import { getFontClassName } from '@/utils/fontFaceHelper';
 import { FALLBACK_FONT, QuranFont } from 'types/QuranReader';
 
@@ -51,21 +52,30 @@ const GlyphWord = ({
   isFontLoaded,
 }: UthmaniWordTextProps) => {
   const { quranTextFontScale, mushafLines } = useSelector(selectQuranReaderStyles, shallowEqual);
-  const innerHTML = {
-    __html: ` ${getWordText(qpcUthmaniHafs, textCodeV1, textCodeV2, font, isFontLoaded)}`,
-  };
-  const className = classNames(styles.styledWord, {
-    [styles.wordSpacing]: quranTextFontScale < 6,
-    [styles.fallbackText]: !isFontLoaded,
-    [styles[getFontClassName(FALLBACK_FONT, quranTextFontScale, mushafLines, true)]]: !isFontLoaded,
-  });
+
+  // The extra space before the glyph should only be added where the issue occurs,
+  // which is in firefox with the Madani V1 Mushaf and the font scale is less than 6
+  const addExtraSpace = isFirefox() && font === QuranFont.MadaniV1 && quranTextFontScale < 6;
 
   return (
     <span
-      dangerouslySetInnerHTML={innerHTML}
+      dangerouslySetInnerHTML={{
+        __html: `${addExtraSpace ? ` ` : ``}${getWordText(
+          qpcUthmaniHafs,
+          textCodeV1,
+          textCodeV2,
+          font,
+          isFontLoaded,
+        )}`,
+      }}
       data-font-scale={quranTextFontScale}
       data-font={font}
-      className={className}
+      className={classNames(styles.styledWord, {
+        [styles.wordSpacing]: addExtraSpace,
+        [styles.fallbackText]: !isFontLoaded,
+        [styles[getFontClassName(FALLBACK_FONT, quranTextFontScale, mushafLines, true)]]:
+          !isFontLoaded,
+      })}
       {...(isFontLoaded && {
         style: { fontFamily: `p${pageNumber}-${font.replace('code_', '')}` },
       })}
