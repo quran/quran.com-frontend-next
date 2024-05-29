@@ -234,7 +234,7 @@ export default {
     ...state,
     quranReaderStyles: {
       ...state.quranReaderStyles,
-      quranFont: QuranFont.TajweedV4,
+      quranFont: state.quranFont === QuranFont.Tajweed ? QuranFont.TajweedV4 : state.quranFont,
     },
   }),
 };
