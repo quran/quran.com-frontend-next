@@ -33,7 +33,7 @@ const listDir = (dir, fileList = []) => {
   return fileList;
 };
 
-const foundFiles = listDir('../public/fonts/quran/hafs/v4');
+const foundFiles = listDir('public/fonts/quran/hafs/v4');
 foundFiles.forEach((f) => {
   fs.renameSync(f.oldSrc, f.newSrc);
 });
