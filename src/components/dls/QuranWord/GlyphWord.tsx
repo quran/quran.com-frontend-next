@@ -43,10 +43,6 @@ const getWordText = (
   if (!isFontLoaded) {
     return qpcUthmaniHafs;
   }
-  // TODO: remove this when BE is ready
-  if (font === QuranFont.TajweedV4) {
-    return textCodeV2;
-  }
   return font === QuranFont.MadaniV1 ? textCodeV1 : textCodeV2;
 };
 

@@ -51,7 +51,7 @@ export enum Mushaf {
   Indopak15Lines = 6,
   Indopak16Lines = 7,
   Tajweeed = 11,
-  QCFTajweedV4 = 1, // TODO: revert this back and add ID 17 when BE is ready
+  QCFTajweedV4 = 19,
 }
 
 export const QuranFontMushaf: Record<QuranFont, Mushaf> = {
