@@ -1,12 +1,13 @@
 import { useEffect } from 'react';
 
-import { useSelector, shallowEqual, useDispatch } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import useSWR from 'swr';
 
 import styles from './VersePreview.module.scss';
 
 import PlainVerseText from '@/components/Verse/PlainVerseText';
 import Skeleton from '@/dls/Skeleton/Skeleton';
+import useThemeDetector from '@/hooks/useThemeDetector';
 import { addLoadedFontFace } from '@/redux/slices/QuranReader/font-faces';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import { getFontFaceNameForPage, getQCFFontFaceSource, isQCFFont } from '@/utils/fontFaceHelper';
@@ -17,6 +18,9 @@ import Word from 'types/Word';
 const SWR_SAMPLE_VERSE_KEY = 'sample-verse';
 const VersePreview = () => {
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
+
+  const { themeVariant } = useThemeDetector();
+
   const isTajweed = quranReaderStyles.quranFont === QuranFont.Tajweed;
   const { data: sampleVerse } = useSWR(SWR_SAMPLE_VERSE_KEY, () => getSampleVerse());
   const dispatch = useDispatch();
@@ -28,14 +32,18 @@ const VersePreview = () => {
       );
       const fontFace = new FontFace(
         fontFaceName,
-        getQCFFontFaceSource(quranReaderStyles.quranFont as QuranFont, sampleVerse.pageNumber),
+        getQCFFontFaceSource(
+          quranReaderStyles.quranFont as QuranFont,
+          sampleVerse.pageNumber,
+          themeVariant,
+        ),
       );
       document.fonts.add(fontFace);
       fontFace.load().then(() => {
         dispatch(addLoadedFontFace(fontFaceName));
       });
     }
-  }, [dispatch, quranReaderStyles.quranFont, sampleVerse]);
+  }, [dispatch, quranReaderStyles.quranFont, sampleVerse, themeVariant]);
 
   if (!sampleVerse) {
     return (

@@ -1,13 +1,15 @@
-import { useEffect, useCallback, useRef } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import { selectLoadedFontFaces, addLoadedFontFace } from '@/redux/slices/QuranReader/font-faces';
+import useThemeDetector from './useThemeDetector';
+
+import { addLoadedFontFace, selectLoadedFontFaces } from '@/redux/slices/QuranReader/font-faces';
 import { removeItemFromArray } from '@/utils/array';
 import {
   getFontFaceNameForPage,
-  getQCFFontFaceSource,
   getPagesByVerses,
+  getQCFFontFaceSource,
   isQCFFont,
 } from '@/utils/fontFaceHelper';
 import { QuranFont } from 'types/QuranReader';
@@ -30,6 +32,8 @@ const useQcfFont = (quranFont: QuranFont, verses: Verse[]) => {
   const dispatch = useDispatch();
   const isFontQCF = isQCFFont(quranFont);
   const loadedFonts = useSelector(selectLoadedFontFaces);
+  const { themeVariant } = useThemeDetector();
+
   const onFontLoaded = useCallback(
     (fontFace: string) => {
       dispatch(addLoadedFontFace(fontFace));
@@ -43,7 +47,10 @@ const useQcfFont = (quranFont: QuranFont, verses: Verse[]) => {
       // loop through unique page numbers of the current verses
       getPagesByVerses(verses).forEach((pageNumber) => {
         const fontFaceName = getFontFaceNameForPage(quranFont, pageNumber);
-        const fontFace = new FontFace(fontFaceName, getQCFFontFaceSource(quranFont, pageNumber));
+        const fontFace = new FontFace(
+          fontFaceName,
+          getQCFFontFaceSource(quranFont, pageNumber, themeVariant),
+        );
         // we only want to load fonts that were not loaded and also are not currently being loaded
         if (
           !currentlyFetchingFonts.current.includes(fontFaceName) &&
@@ -69,7 +76,15 @@ const useQcfFont = (quranFont: QuranFont, verses: Verse[]) => {
         }
       });
     }
-  }, [quranFont, verses, loadedFonts, isFontQCF, currentlyFetchingFonts, onFontLoaded]);
+  }, [
+    quranFont,
+    verses,
+    loadedFonts,
+    isFontQCF,
+    currentlyFetchingFonts,
+    onFontLoaded,
+    themeVariant,
+  ]);
 };
 
 export default useQcfFont;
