@@ -32,3 +32,12 @@ export const isAppleWebKit = () => {
   const { userAgent } = navigator;
   return /AppleWebKit/.test(userAgent) && /Mobile/.test(userAgent);
 };
+
+export const isFirefox = () => {
+  if (!isClient) {
+    return false;
+  }
+
+  const { userAgent } = navigator;
+  return userAgent.toLowerCase().includes('firefox');
+};

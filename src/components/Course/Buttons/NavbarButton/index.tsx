@@ -9,7 +9,7 @@ import Button, { ButtonSize, ButtonType } from '@/dls/Button/Button';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getCourseNavigationUrl } from '@/utils/navigation';
 
-const LEARNING_PLAN_SLUG = 'avoiding-the-post-ramadan-slump';
+const LEARNING_PLAN_SLUG = 'preparing-our-hearts-for-ramadan';
 
 const NavbarButton = () => {
   const { t } = useTranslation('common');
