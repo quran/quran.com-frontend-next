@@ -5,9 +5,9 @@ import { shallowEqual, useSelector } from 'react-redux';
 import { selectTheme } from '@/redux/slices/theme';
 import ThemeType from '@/redux/types/ThemeType';
 import ThemeTypeVariant from '@/redux/types/ThemeTypeVariant';
+import isClient from '@/utils/isClient';
 
 const useThemeDetector = () => {
-  const getCurrentTheme = () => window.matchMedia('(prefers-color-scheme: dark)').matches;
   const [isDarkTheme, setIsDarkTheme] = useState(getCurrentTheme());
   const settingsTheme = useSelector(selectTheme, shallowEqual);
 
@@ -31,6 +31,14 @@ const useThemeDetector = () => {
   }, []);
 
   return { isDarkTheme, settingsTheme, themeVariant };
+};
+
+const getCurrentTheme = () => {
+  if (!isClient) {
+    return false;
+  }
+
+  return window.matchMedia('(prefers-color-scheme: dark)').matches;
 };
 
 export default useThemeDetector;
