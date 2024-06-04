@@ -1,7 +1,8 @@
 import range from 'lodash/range';
 
-import { isAppleDevice, isAppleWebKit } from './device-detector';
+import { isFirefox } from './device-detector';
 
+import ThemeType from '@/redux/types/ThemeType';
 import ThemeTypeVariant from '@/redux/types/ThemeTypeVariant';
 import { MushafLines, QuranFont } from 'types/QuranReader';
 import Verse from 'types/Verse';
@@ -65,9 +66,10 @@ const getFontPath = (
 ) => {
   let path = version as string;
   // if it's TajweedV4, we need to add the ot-svg or colrv1 path base on the browser
-  // colrv1 should be used for all browsers desktop
+  // colrv1 should be used for all browsers desktop & mobile except Firefox dark mode
   if (quranFont === QuranFont.TajweedV4) {
-    path = isAppleDevice() && isAppleWebKit() ? `${path}/ot-svg/${theme}` : `${path}/colrv1`;
+    const isFirefoxDarkMode = isFirefox() && theme === ThemeType.Dark;
+    path = isFirefoxDarkMode ? `${path}/ot-svg/${theme}` : `${path}/colrv1`;
   }
 
   const woff2 = `/fonts/quran/hafs/${path}/woff2/p${pageNumber}.woff2`;

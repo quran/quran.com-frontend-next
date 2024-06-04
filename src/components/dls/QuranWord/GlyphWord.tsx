@@ -84,7 +84,6 @@ const GlyphWord = ({
           !isFontLoaded,
       })}
       {...(isFontLoaded && {
-        // eslint-disable-next-line i18next/no-literal-string
         style: { fontFamily: getFontFaceNameForPage(font, pageNumber) },
       })}
     />
