@@ -45,7 +45,7 @@ interface Props {
   onClearClicked?: () => void;
   onChange?: (value: string) => void;
   onKeyDown?: (event: KeyboardEvent<HTMLInputElement>) => void;
-  inputMode: HTMLAttributes<HTMLInputElement>['inputMode'];
+  inputMode?: HTMLAttributes<HTMLInputElement>['inputMode'];
   value?: string;
   label?: string | JSX.Element;
   type?: InputType;
