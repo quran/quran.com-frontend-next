@@ -69,6 +69,8 @@ const ReadingGoalInput: React.FC<ReadingGoalInputProps> = ({
           value={pages.toString()}
           fixedWidth={false}
           htmlType="number"
+          onKeyDown={(e) => e.key === '.' && e.preventDefault()}
+          inputMode="numeric"
           onChange={(p) => {
             const parsedPages = Number(p);
             onPagesChange(parsedPages);
