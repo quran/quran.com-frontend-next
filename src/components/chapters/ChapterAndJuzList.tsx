@@ -14,7 +14,7 @@ import CaretDownIcon from '@/icons/caret-down.svg';
 import { logButtonClick, logValueChange } from '@/utils/eventLogger';
 import Chapter from 'types/Chapter';
 
-enum View {
+export enum View {
   Surah = 'surah',
   Juz = 'juz',
   RevelationOrder = 'revelation_order',
@@ -123,7 +123,7 @@ const ChapterAndJuzList: React.FC<ChapterAndJuzListProps> = ({
           </div>
         )}
       </div>
-      {view === View.Surah && <SurahView chapters={sortedChapters} />}
+      {view === View.Surah && <SurahView sortedChapters={sortedChapters} />}
       {view === View.Juz && <JuzView isDescending={sortBy === Sort.DESC} />}
       {view === View.RevelationOrder && (
         <RevelationOrderView isDescending={sortBy === Sort.DESC} chapters={chapters} />

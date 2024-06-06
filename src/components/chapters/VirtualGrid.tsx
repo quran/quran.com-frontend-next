@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef, ReactNode } from 'react';
 
 import { useWindowVirtualizer } from '@tanstack/react-virtual';
 
@@ -6,10 +6,10 @@ import { View } from './ChapterAndJuzList';
 
 type VirtualGridProps = {
   view: View.Surah | View.RevelationOrder | View.Juz;
-  children: React.ReactNode;
+  renderRow: (gridNumCols: number, rowIndex: number) => ReactNode;
 };
 
-const VirtualGrid: React.FC<VirtualGridProps> = ({ view, children }: VirtualGridProps) => {
+const VirtualGrid: React.FC<VirtualGridProps> = ({ view, renderRow }: VirtualGridProps) => {
   const [gridNumCols, setGridNumCols] = useState(3);
   useEffect(() => {
     const updateGridNumCols = () => {
@@ -65,10 +65,12 @@ const VirtualGrid: React.FC<VirtualGridProps> = ({ view, children }: VirtualGrid
               transform: `translateY(${row.start - virtualizer.options.scrollMargin}px)`,
             }}
           >
-            {children}
+            {renderRow(gridNumCols, row.index)}
           </div>
         ))}
       </div>
     </div>
   );
 };
+
+export default VirtualGrid;

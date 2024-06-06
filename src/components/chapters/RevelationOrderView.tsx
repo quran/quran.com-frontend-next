@@ -5,7 +5,9 @@ import { useRouter } from 'next/router';
 import { Translate } from 'next-translate';
 import useTranslation from 'next-translate/useTranslation';
 
+import { View } from './ChapterAndJuzList';
 import styles from './ChapterAndJuzList.module.scss';
+import VirtualGrid from './VirtualGrid';
 
 import SurahPreviewRow from '@/dls/SurahPreview/SurahPreviewRow';
 import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
@@ -72,33 +74,41 @@ const RevelationOrderView = ({ isDescending, chapters }: RevelationOrderViewProp
             ),
     [isDescending, chapters],
   );
-
   return (
     <>
-      {sortedChaptersByRevelationOrder.map((chapter, revelationOrderIndex) => (
-        <div
-          role="button"
-          tabIndex={0}
-          className={styles.chapterContainer}
-          key={chapter.id}
-          onClick={() => onSurahClicked(chapter.id)}
-          onKeyPress={() => onSurahClicked(chapter.id)}
-        >
-          <SurahPreviewRow
-            chapterId={Number(chapter.id)}
-            description={getChapterDescription(chapter, t)}
-            surahName={`${chapter.transliteratedName}`}
-            surahNumber={
-              isDescending
-                ? QURAN_CHAPTERS_COUNT - Number(revelationOrderIndex)
-                : Number(revelationOrderIndex + 1)
-            } // Show the number based on the revelation order instead of the surah number.
-            translatedSurahName={getTranslatedSurahName(chapter, t, lang)}
-            isMinimalLayout={false}
-            isLoading={isLoading && clickedSurahId === chapter.id}
-          />
-        </div>
-      ))}
+      <VirtualGrid
+        view={View.RevelationOrder}
+        renderRow={(gridNumCols, rowIndex) => {
+          Array.from({ length: gridNumCols }).map((AHO, columnIndex) => {
+            const revelationOrderIndex = rowIndex * gridNumCols + columnIndex;
+            const chapter = sortedChaptersByRevelationOrder[revelationOrderIndex];
+            return (
+              <div
+                role="button"
+                tabIndex={0}
+                className={styles.chapterContainer}
+                key={chapter.id}
+                onClick={() => onSurahClicked(chapter.id)}
+                onKeyPress={() => onSurahClicked(chapter.id)}
+              >
+                <SurahPreviewRow
+                  chapterId={Number(chapter.id)}
+                  description={getChapterDescription(chapter, t)}
+                  surahName={`${chapter.transliteratedName}`}
+                  surahNumber={
+                    isDescending
+                      ? QURAN_CHAPTERS_COUNT - Number(revelationOrderIndex)
+                      : Number(revelationOrderIndex + 1)
+                  } // Show the number based on the revelation order instead of the surah number.
+                  translatedSurahName={getTranslatedSurahName(chapter, t, lang)}
+                  isMinimalLayout={false}
+                  isLoading={isLoading && clickedSurahId === chapter.id}
+                />
+              </div>
+            );
+          });
+        }}
+      />
     </>
   );
 };
