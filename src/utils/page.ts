@@ -13,7 +13,7 @@ export const PAGES_MUSHAF_MAP = {
   [Mushaf.UthmaniHafs]: 604,
   [Mushaf.Indopak16Lines]: 548,
   [Mushaf.Indopak15Lines]: 610,
-  [Mushaf.Tajweeed]: 604,
+  [Mushaf.Tajweed]: 604,
 };
 
 /**

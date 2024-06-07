@@ -31,8 +31,6 @@ const TranslationViewCellSkeleton: React.FC<Props> = ({ hasActionMenuItems = tru
     shallowEqual,
   );
 
-  const isTajweedFont = quranFont === QuranFont.Tajweed;
-
   return (
     <div className={classNames(cellStyles.cellContainer, skeletonStyles.cellContainer)}>
       <div className={cellStyles.actionContainer}>
@@ -52,14 +50,15 @@ const TranslationViewCellSkeleton: React.FC<Props> = ({ hasActionMenuItems = tru
         )}
       </div>
 
-      {/* We're not using VersePreview as Skeleton's children here 
+      {/* We're not using VersePreview as Skeleton's children here
       because it has layout shift problem when loading the font. Which is not ideal for skeleton */}
       <div className={cellStyles.contentContainer}>
         <Skeleton
-          className={classNames(skeletonStyles.verseContainer, cellStyles.arabicVerseContainer, {
-            [verseTextStyles[getFontClassName(quranFont, quranTextFontScale, mushafLines)]]:
-              !isTajweedFont,
-          })}
+          className={classNames(
+            skeletonStyles.verseContainer,
+            cellStyles.arabicVerseContainer,
+            verseTextStyles[getFontClassName(quranFont, quranTextFontScale, mushafLines)],
+          )}
         />
         <div
           className={classNames(

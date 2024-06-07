@@ -15,21 +15,11 @@ interface Props {
 
 const QuranFontSectionFooter: React.FC<Props> = ({ quranFont }) => {
   const { t } = useTranslation('common');
-  const isTajweed = quranFont === QuranFont.Tajweed;
   return (
-    <Section.Footer visible={isQCFFont(quranFont) || isTajweed}>
-      {isTajweed ? (
-        <Trans
-          i18nKey="common:fonts.tajweed-desc"
-          components={[<Link key={0} href="/tajweed-colors" prefetch={false} />]}
-        />
-      ) : (
-        <>
-          {quranFontToVersion(quranFont) === QCFFontVersion.V4
-            ? t('fonts.qcf-v4-desc')
-            : t('fonts.qcf-desc')}
-        </>
-      )}
+    <Section.Footer visible={isQCFFont(quranFont)}>
+      {quranFontToVersion(quranFont) === QCFFontVersion.V4
+        ? t('fonts.qcf-v4-desc')
+        : t('fonts.qcf-desc')}
     </Section.Footer>
   );
 };

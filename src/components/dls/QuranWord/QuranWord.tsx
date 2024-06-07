@@ -11,7 +11,6 @@ import getTooltipText from './getToolTipText';
 import GlyphWord from './GlyphWord';
 import playWordAudio from './playWordAudio';
 import styles from './QuranWord.module.scss';
-import TajweedWord from './TajweedWordImage';
 import TextWord from './TextWord';
 
 import ReadingViewWordPopover from '@/components/QuranReader/ReadingView/WordPopover';
@@ -96,8 +95,6 @@ const QuranWord = ({
         charType={word.charTypeName}
       />
     );
-  } else if (font === QuranFont.Tajweed) {
-    wordText = <TajweedWord path={word.text} alt={word.textUthmani} />;
   } else if (word.charTypeName !== CharType.Pause) {
     wordText = <TextWord font={font} text={word.text} charType={word.charTypeName} />;
   }
@@ -162,7 +159,6 @@ const QuranWord = ({
         [styles.secondaryHighlight]: shouldShowSecondaryHighlight,
         [styles.wbwContainer]: isWordByWordLayout,
         [styles.additionalWordGap]: readingPreference === ReadingPreference.Translation,
-        [styles.tajweedWord]: font === QuranFont.Tajweed,
       })}
     >
       <Wrapper
