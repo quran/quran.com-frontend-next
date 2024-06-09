@@ -87,6 +87,7 @@ const VirtualGrid: React.FC<VirtualGridProps> = ({ renderRow }: VirtualGridProps
             <div
               key={cell.key}
               style={{
+                display: 'flex',
                 position: 'absolute',
                 top: 0,
                 left,
@@ -95,7 +96,7 @@ const VirtualGrid: React.FC<VirtualGridProps> = ({ renderRow }: VirtualGridProps
                 transform: `translateY(${cell.start - virtualizer.options.scrollMargin}px)`,
               }}
             >
-              {renderRow(cell.index)}
+              {renderRow(cell.index, gridNumCols)}
             </div>
           );
         })}

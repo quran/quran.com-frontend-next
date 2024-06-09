@@ -31,10 +31,18 @@ const SurahView: React.FC<SurahViewProps> = ({ sortedChapters }: SurahViewProps)
   return (
     <VirtualGrid
       view={View.Surah}
-      renderRow={(cellIndex) => {
+      renderRow={(cellIndex, gridNumCols) => {
+        let addMarginRight = false;
+        if (gridNumCols === 3 || gridNumCols === 2) {
+          addMarginRight = (cellIndex + 1) % gridNumCols !== 0;
+        }
         const chapter = sortedChapters[cellIndex];
         return (
-          <div key={chapter.id} className={styles.chapterContainer}>
+          <div
+            key={chapter.id}
+            style={{ marginRight: addMarginRight ? '13px' : '0px' }}
+            className={styles.chapterContainer}
+          >
             <Link
               href={`/${chapter.id}`}
               shouldPrefetch={MOST_VISITED_CHAPTERS[Number(chapter.id)] === true}
