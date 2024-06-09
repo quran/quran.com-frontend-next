@@ -5,7 +5,6 @@ import { useRouter } from 'next/router';
 import { Translate } from 'next-translate';
 import useTranslation from 'next-translate/useTranslation';
 
-import { View } from './ChapterAndJuzList';
 import styles from './ChapterAndJuzList.module.scss';
 import VirtualGrid from './VirtualGrid';
 
@@ -13,7 +12,7 @@ import SurahPreviewRow from '@/dls/SurahPreview/SurahPreviewRow';
 import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
 import { setIsReadingByRevelationOrder } from '@/redux/slices/revelationOrder';
 import PreferenceGroup from '@/types/auth/PreferenceGroup';
-import Chapter from '@/types/Chapter';
+import Chapter, { View } from '@/types/Chapter';
 import { isLoggedIn } from '@/utils/auth/login';
 import { QURAN_CHAPTERS_COUNT } from '@/utils/chapter';
 import { logButtonClick } from '@/utils/eventLogger';
@@ -78,12 +77,13 @@ const RevelationOrderView = ({ isDescending, chapters }: RevelationOrderViewProp
     <>
       <VirtualGrid
         view={View.RevelationOrder}
-        renderRow={(gridNumCols, rowIndex) => {
-          Array.from({ length: gridNumCols }).map((AHO, columnIndex) => {
+        renderRow={(rowIndex, gridNumCols) => {
+          const result = Array.from({ length: gridNumCols }).map((AHO, columnIndex) => {
             const revelationOrderIndex = rowIndex * gridNumCols + columnIndex;
             const chapter = sortedChaptersByRevelationOrder[revelationOrderIndex];
             return (
               <div
+                style={{ flex: 1 }}
                 role="button"
                 tabIndex={0}
                 className={styles.chapterContainer}
@@ -107,6 +107,7 @@ const RevelationOrderView = ({ isDescending, chapters }: RevelationOrderViewProp
               </div>
             );
           });
+          return result;
         }}
       />
     </>

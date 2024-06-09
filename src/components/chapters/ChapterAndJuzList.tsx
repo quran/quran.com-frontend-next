@@ -9,16 +9,11 @@ import Tabs from '../dls/Tabs/Tabs';
 
 import styles from './ChapterAndJuzList.module.scss';
 import ChapterAndJuzListSkeleton from './ChapterAndJuzListSkeleton';
+import SurahView from './SurahView';
 
 import CaretDownIcon from '@/icons/caret-down.svg';
 import { logButtonClick, logValueChange } from '@/utils/eventLogger';
-import Chapter from 'types/Chapter';
-
-export enum View {
-  Surah = 'surah',
-  Juz = 'juz',
-  RevelationOrder = 'revelation_order',
-}
+import Chapter, { View } from 'types/Chapter';
 
 const JuzView = dynamic(() => import('./JuzView'), {
   ssr: false,

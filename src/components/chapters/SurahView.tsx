@@ -3,12 +3,11 @@ import useTranslation from 'next-translate/useTranslation';
 import Link from '../dls/Link/Link';
 import SurahPreviewRow from '../dls/SurahPreview/SurahPreviewRow';
 
-import { View } from './ChapterAndJuzList';
 import styles from './ChapterAndJuzList.module.scss';
 import VirtualGrid from './VirtualGrid';
 
+import Chapter, { View } from '@/types/Chapter';
 import { shouldUseMinimalLayout, toLocalizedNumber } from '@/utils/locale';
-import Chapter from 'types/Chapter';
 
 const MOST_VISITED_CHAPTERS = {
   1: true,
@@ -32,8 +31,8 @@ const SurahView: React.FC<SurahViewProps> = ({ sortedChapters }: SurahViewProps)
   return (
     <VirtualGrid
       view={View.Surah}
-      renderRow={(gridNumCols, rowIndex) => {
-        Array.from({ length: gridNumCols }).map((AHO, columnIndex) => {
+      renderRow={(rowIndex, gridNumCols) => {
+        const result = Array.from({ length: gridNumCols }).map((AHO, columnIndex) => {
           const cellIndex = rowIndex * gridNumCols + columnIndex;
           const chapter = sortedChapters[cellIndex];
           return (
@@ -56,6 +55,7 @@ const SurahView: React.FC<SurahViewProps> = ({ sortedChapters }: SurahViewProps)
             </div>
           );
         });
+        return result;
       }}
     />
   );
