@@ -39,16 +39,19 @@ const JuzView = ({ isDescending }: JuzViewProps) => {
   return (
     <VirtualGrid
       view={View.Juz}
-      renderRow={(rowIndex) => {
-        /* you have to use the grid columns to modify the margin */
-        const addMargin = (rowIndex + 1) % 3 !== 0;
+      renderRow={(rowIndex, gridNumCols) => {
+        /* the margin acts as the gap between the columns */
+        let addMarginRight = false;
+        if (gridNumCols === 3 || gridNumCols === 2) {
+          addMarginRight = (rowIndex + 1) % gridNumCols !== 0;
+        }
         const juzEntry = sortedJuzIds[rowIndex];
         const [juzId, chapterAndVerseMappings] = juzEntry;
         const chapterIds = Object.keys(chapterAndVerseMappings);
         return (
           <div
             key={juzId}
-            style={{ marginRight: addMargin ? 16 : 0 }}
+            style={{ marginRight: addMarginRight ? 16 : 0 }}
             className={styles.juzContainer}
           >
             <Link href={`/juz/${juzId}`} variant={LinkVariant.Primary} shouldPrefetch={false}>
