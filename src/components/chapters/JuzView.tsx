@@ -6,9 +6,7 @@ import Link, { LinkVariant } from '../dls/Link/Link';
 import SurahPreviewRow from '../dls/SurahPreview/SurahPreviewRow';
 
 import styles from './JuzView.module.scss';
-import VirtualGrid from './VirtualGrid';
 
-import { View } from '@/types/Chapter';
 import { getAllJuzMappings, getChapterData } from '@/utils/chapter';
 import { shouldUseMinimalLayout, toLocalizedNumber } from '@/utils/locale';
 import DataContext from 'src/contexts/DataContext';
@@ -37,23 +35,12 @@ const JuzView = ({ isDescending }: JuzViewProps) => {
     return <div className={styles.loadingContainer} />;
   }
   return (
-    <VirtualGrid
-      view={View.Juz}
-      renderRow={(rowIndex, gridNumCols) => {
-        /* the margin acts as the gap between the columns */
-        let addMarginRight = false;
-        if (gridNumCols === 3 || gridNumCols === 2) {
-          addMarginRight = (rowIndex + 1) % gridNumCols !== 0;
-        }
-        const juzEntry = sortedJuzIds[rowIndex];
+    <div className={styles.juzLayout}>
+      {sortedJuzIds.map((juzEntry) => {
         const [juzId, chapterAndVerseMappings] = juzEntry;
         const chapterIds = Object.keys(chapterAndVerseMappings);
         return (
-          <div
-            key={juzId}
-            style={{ marginRight: addMarginRight ? 16 : 0 }}
-            className={styles.juzContainer}
-          >
+          <div key={juzId} className={styles.juzContainer}>
             <Link href={`/juz/${juzId}`} variant={LinkVariant.Primary} shouldPrefetch={false}>
               <div className={styles.juzTitle}>
                 <span>
@@ -86,8 +73,8 @@ const JuzView = ({ isDescending }: JuzViewProps) => {
             })}
           </div>
         );
-      }}
-    />
+      })}
+    </div>
   );
 };
 

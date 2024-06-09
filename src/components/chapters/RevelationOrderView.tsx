@@ -77,37 +77,33 @@ const RevelationOrderView = ({ isDescending, chapters }: RevelationOrderViewProp
     <>
       <VirtualGrid
         view={View.RevelationOrder}
-        renderRow={(rowIndex, gridNumCols) => {
-          const result = Array.from({ length: gridNumCols }).map((AHO, columnIndex) => {
-            const revelationOrderIndex = rowIndex * gridNumCols + columnIndex;
-            const chapter = sortedChaptersByRevelationOrder[revelationOrderIndex];
-            return (
-              <div
-                style={{ flex: 1 }}
-                role="button"
-                tabIndex={0}
-                className={styles.chapterContainer}
-                key={chapter.id}
-                onClick={() => onSurahClicked(chapter.id)}
-                onKeyPress={() => onSurahClicked(chapter.id)}
-              >
-                <SurahPreviewRow
-                  chapterId={Number(chapter.id)}
-                  description={getChapterDescription(chapter, t)}
-                  surahName={`${chapter.transliteratedName}`}
-                  surahNumber={
-                    isDescending
-                      ? QURAN_CHAPTERS_COUNT - Number(revelationOrderIndex)
-                      : Number(revelationOrderIndex + 1)
-                  } // Show the number based on the revelation order instead of the surah number.
-                  translatedSurahName={getTranslatedSurahName(chapter, t, lang)}
-                  isMinimalLayout={false}
-                  isLoading={isLoading && clickedSurahId === chapter.id}
-                />
-              </div>
-            );
-          });
-          return result;
+        renderRow={(cellIndex) => {
+          const revelationOrderIndex = cellIndex;
+          const chapter = sortedChaptersByRevelationOrder[revelationOrderIndex];
+          return (
+            <div
+              role="button"
+              tabIndex={0}
+              className={styles.chapterContainer}
+              key={chapter.id}
+              onClick={() => onSurahClicked(chapter.id)}
+              onKeyPress={() => onSurahClicked(chapter.id)}
+            >
+              <SurahPreviewRow
+                chapterId={Number(chapter.id)}
+                description={getChapterDescription(chapter, t)}
+                surahName={`${chapter.transliteratedName}`}
+                surahNumber={
+                  isDescending
+                    ? QURAN_CHAPTERS_COUNT - Number(revelationOrderIndex)
+                    : Number(revelationOrderIndex + 1)
+                } // Show the number based on the revelation order instead of the surah number.
+                translatedSurahName={getTranslatedSurahName(chapter, t, lang)}
+                isMinimalLayout={false}
+                isLoading={isLoading && clickedSurahId === chapter.id}
+              />
+            </div>
+          );
         }}
       />
     </>

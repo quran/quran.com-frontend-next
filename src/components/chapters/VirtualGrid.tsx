@@ -9,7 +9,7 @@ type VirtualGridProps = {
   renderRow: (rowIndex: number, gridNumCols?: number) => ReactNode;
 };
 
-const VirtualGrid: React.FC<VirtualGridProps> = ({ view, renderRow }: VirtualGridProps) => {
+const VirtualGrid: React.FC<VirtualGridProps> = ({ renderRow }: VirtualGridProps) => {
   const [gridNumCols, setGridNumCols] = useState(3);
 
   useEffect(() => {
@@ -48,28 +48,15 @@ const VirtualGrid: React.FC<VirtualGridProps> = ({ view, renderRow }: VirtualGri
 
   const listRef = useRef<HTMLDivElement | null>(null);
 
-  let numOfRows = 38;
-  if (gridNumCols === 3) {
-    numOfRows = 38;
-  } else if (gridNumCols === 2) {
-    numOfRows = 57;
-  } else {
-    numOfRows = 114;
-  }
-
-  const numOfJuzs = 30;
-
-  const largestJuzHeight = 3300;
-
   const surahPreviewHeight = 74;
 
   const virtualizer = useWindowVirtualizer({
-    count: view === View.Juz ? numOfJuzs : numOfRows,
-    estimateSize: () => (view === View.Juz ? largestJuzHeight : surahPreviewHeight),
-    overscan: 5,
+    count: 114,
+    estimateSize: () => surahPreviewHeight,
+    overscan: 6,
     scrollMargin: listRef.current?.offsetTop ?? 0,
-    ...(view === View.Juz && { lanes: gridNumCols }),
-    ...(view !== View.Juz && { gap: 13 }),
+    gap: 13,
+    lanes: gridNumCols,
   });
 
   return (
@@ -81,40 +68,34 @@ const VirtualGrid: React.FC<VirtualGridProps> = ({ view, renderRow }: VirtualGri
           height: `${virtualizer.getTotalSize()}px`,
         }}
       >
-        {virtualizer.getVirtualItems().map((row) => {
+        {virtualizer.getVirtualItems().map((cell) => {
           let left = '0%';
           let width = '100%';
 
-          if (view === View.Juz) {
-            if (gridNumCols === 3) {
-              left = `${row.lane * 33.33}%`;
-              width = `33.33%`;
-            } else if (gridNumCols === 2) {
-              left = `${row.lane * 50}%`;
-              width = `50%`;
-            } else {
-              left = `${row.lane * 100}%`;
-              width = `100%`;
-            }
+          if (gridNumCols === 3) {
+            left = `${cell.lane * 33.33}%`;
+            width = `33.33%`;
+          } else if (gridNumCols === 2) {
+            left = `${cell.lane * 50}%`;
+            width = `50%`;
+          } else {
+            left = `${cell.lane * 100}%`;
+            width = `100%`;
           }
 
           return (
             <div
-              key={row.key}
-              data-index={row.index}
-              ref={virtualizer.measureElement}
+              key={cell.key}
               style={{
-                display: 'flex',
-                gap: '13px',
                 position: 'absolute',
                 top: 0,
                 left,
                 width,
-                ...(view !== View.Juz && { height: `${row.size}px` }),
-                transform: `translateY(${row.start - virtualizer.options.scrollMargin}px)`,
+                height: `${cell.size}px`,
+                transform: `translateY(${cell.start - virtualizer.options.scrollMargin}px)`,
               }}
             >
-              {renderRow(row.index, gridNumCols)}
+              {renderRow(cell.index)}
             </div>
           );
         })}
@@ -124,6 +105,3 @@ const VirtualGrid: React.FC<VirtualGridProps> = ({ view, renderRow }: VirtualGri
 };
 
 export default VirtualGrid;
-
-/* remove the styling and put in a file called virtualgridmodulescss and use the view to determine which class
-to apply to the element */

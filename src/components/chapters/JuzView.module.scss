@@ -1,5 +1,16 @@
 @use "src/styles/breakpoints";
 
+// juz layout (masonry layout)
+.juzLayout {
+  @include breakpoints.tablet {
+    column-count: 2;
+  }
+  @include breakpoints.desktop {
+    column-count: 3;
+  }
+  column-gap: 1em;
+}
+
 .juzContainer + .juzContainer {
   margin-block-start: var(--spacing-small);
   @include breakpoints.tablet {

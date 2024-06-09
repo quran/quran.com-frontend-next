@@ -31,31 +31,25 @@ const SurahView: React.FC<SurahViewProps> = ({ sortedChapters }: SurahViewProps)
   return (
     <VirtualGrid
       view={View.Surah}
-      renderRow={(rowIndex, gridNumCols) => {
-        const result = Array.from({ length: gridNumCols }).map((AHO, columnIndex) => {
-          const cellIndex = rowIndex * gridNumCols + columnIndex;
-          const chapter = sortedChapters[cellIndex];
-          return (
-            <div key={`i-${cellIndex}`} className={styles.chapterContainer} style={{ flex: 1 }}>
-              <Link
-                href={`/${chapter.id}`}
-                shouldPrefetch={MOST_VISITED_CHAPTERS[Number(chapter.id)] === true}
-              >
-                <SurahPreviewRow
-                  chapterId={Number(chapter.id)}
-                  description={`${toLocalizedNumber(chapter.versesCount, lang)} ${t(
-                    'common:ayahs',
-                  )}`}
-                  surahName={chapter.transliteratedName}
-                  surahNumber={Number(chapter.id)}
-                  translatedSurahName={chapter.translatedName as string}
-                  isMinimalLayout={shouldUseMinimalLayout(lang)}
-                />
-              </Link>
-            </div>
-          );
-        });
-        return result;
+      renderRow={(cellIndex) => {
+        const chapter = sortedChapters[cellIndex];
+        return (
+          <div key={chapter.id} className={styles.chapterContainer}>
+            <Link
+              href={`/${chapter.id}`}
+              shouldPrefetch={MOST_VISITED_CHAPTERS[Number(chapter.id)] === true}
+            >
+              <SurahPreviewRow
+                chapterId={Number(chapter.id)}
+                description={`${toLocalizedNumber(chapter.versesCount, lang)} ${t('common:ayahs')}`}
+                surahName={chapter.transliteratedName}
+                surahNumber={Number(chapter.id)}
+                translatedSurahName={chapter.translatedName as string}
+                isMinimalLayout={shouldUseMinimalLayout(lang)}
+              />
+            </Link>
+          </div>
+        );
       }}
     />
   );
