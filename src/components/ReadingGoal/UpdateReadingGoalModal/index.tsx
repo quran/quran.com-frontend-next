@@ -2,7 +2,6 @@
 import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
-import { useSelector, shallowEqual } from 'react-redux';
 import { useSWRConfig } from 'swr';
 
 import ReadingGoalInput from '../ReadingGoalInput';
@@ -17,15 +16,14 @@ import { RadioRootOrientation } from '@/dls/Forms/RadioGroup/Root';
 import Select, { SelectSize } from '@/dls/Forms/Select';
 import Modal from '@/dls/Modal/Modal';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
-import { selectQuranFont, selectQuranMushafLines } from '@/redux/slices/QuranReader/styles';
+import useGetMushaf from '@/hooks/useGetMushaf';
 import {
   Goal,
-  QuranGoalPeriod,
-  GoalType,
-  UpdateGoalRequest,
   GoalCategory,
+  GoalType,
+  QuranGoalPeriod,
+  UpdateGoalRequest,
 } from '@/types/auth/Goal';
-import { getMushafId } from '@/utils/api';
 import { updateReadingGoal } from '@/utils/auth/api';
 import { makeStreakUrl } from '@/utils/auth/apiPaths';
 import { logButtonClick, logFormSubmission, logValueChange } from '@/utils/eventLogger';
@@ -70,9 +68,7 @@ const UpdateReadingGoalModal = ({ isDisabled, goal }: UpdateReadingGoalButtonPro
   const chaptersData = useContext(DataContext);
   const [isModalVisible, setIsModalVisible] = useState(false);
 
-  const quranFont = useSelector(selectQuranFont, shallowEqual);
-  const mushafLines = useSelector(selectQuranMushafLines, shallowEqual);
-  const { mushaf } = getMushafId(quranFont, mushafLines);
+  const mushaf = useGetMushaf();
   const dayOptions = useMemo(() => generateDurationDaysOptions(t, lang), [t, lang]);
 
   const [isContinuous, setIsContinuous] = useState(!!goal.duration);
@@ -175,12 +171,16 @@ const UpdateReadingGoalModal = ({ isDisabled, goal }: UpdateReadingGoalButtonPro
   };
 
   const getIsUpdateDisabled = () => {
-    return !validateReadingGoalData(chaptersData, {
-      type,
-      pages,
-      seconds,
-      range,
-    });
+    return !validateReadingGoalData(
+      chaptersData,
+      {
+        type,
+        pages,
+        seconds,
+        range,
+      },
+      mushaf,
+    );
   };
 
   return (

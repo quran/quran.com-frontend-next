@@ -1,3 +1,5 @@
+/* eslint-disable react/no-unescaped-entities */
+/* eslint-disable i18next/no-literal-string */
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -45,6 +47,10 @@ const DonatePopup = () => {
           </Button>
           <h1 className={styles.title}>{t('popup.title')}</h1>
           <div className={styles.textsContainer}>
+            <p className={styles.text} dir="ltr">
+              "There are no days during which the righteous action is so pleasing to Allah than
+              these days" [Riyad as-Salihin 1249]
+            </p>
             <p className={styles.text}>{t('popup.text-1')}</p>
             <p className={styles.text}>{t('popup.text-2')}</p>
           </div>

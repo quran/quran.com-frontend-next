@@ -5,7 +5,7 @@ import { Mushaf, MushafLines, QuranFont, QuranFontMushaf } from 'types/QuranRead
 const DEFAULT_NUMBER_OF_PAGES = 604;
 
 // a map between the mushafId and the number of pages it has
-const PAGES_MUSHAF_MAP = {
+export const PAGES_MUSHAF_MAP = {
   [Mushaf.Indopak]: 604,
   [Mushaf.KFGQPCHAFS]: 604,
   [Mushaf.QCFV1]: 604,

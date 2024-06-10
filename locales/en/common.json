@@ -7,11 +7,11 @@
       "data-sync": {
         "action": "Next",
         "description": "Whether you’re using Quran.com on your phone or your laptop, your bookmarks, last read verses, and your preferences will be available",
-        "title": "Your data will be synced <br></br> across devices"
+        "title": "Your data will be synced <br><\/br> across devices"
       },
       "feedback": {
         "action": "Okay, got it",
-        "description": "Thank you for using Quran.com and we would be glad to hear your feedback on <link>feedback.quran.com</link>",
+        "description": "Thank you for using Quran.com and we would be glad to hear your feedback on <link>feedback.quran.com<\/link>",
         "title": "We wanna hear your thoughts"
       },
       "quran-foundation-link": {
@@ -26,12 +26,12 @@
       },
       "welcome": {
         "action": "See what's new",
-        "title": "Welcome to Quran.com <br></br> User Account"
+        "title": "Welcome to Quran.com <br><\/br> User Account"
       }
     },
     "collections-announcement": {
       "slide-1": {
-        "description": "We are very happy to announce that now you can group bookmarks under \"collections\"! <br/><br/> <li>Add as many collections as you want</li><li>Add a bookmark to one or more collections</li><li>And more!</li>",
+        "description": "We are very happy to announce that now you can group bookmarks under \"collections\"! <br\/><br\/> <li>Add as many collections as you want<\/li><li>Add a bookmark to one or more collections<\/li><li>And more!<\/li>",
         "title": "Bookmarks collections are here!"
       }
     }
@@ -52,8 +52,8 @@
       "title": "Auto Scroll"
     },
     "displaying": "Displaying",
-    "exp-tip": "<span>Change the content displayed under</span><br></br> <boldSpan>Settings</boldSpan> > <boldSpan>Word By Word</boldSpan>",
-    "exp-tip-no-select": "<span>Tick the tooltip display option and select the <br></br> Translation and/or Transliteration option</span><br></br><span> under </span><boldSpan>Settings</boldSpan> > <boldSpan>Word By Word</boldSpan><span>, to</span><br></br> <span>enable this feature.</span>",
+    "exp-tip": "<span>Change the content displayed under<\/span><br><\/br> <boldSpan>Settings<\/boldSpan> > <boldSpan>Word By Word<\/boldSpan>",
+    "exp-tip-no-select": "<span>Tick the tooltip display option and select the <br><\/br> Translation and\/or Transliteration option<\/span><br><\/br><span> under <\/span><boldSpan>Settings<\/boldSpan> > <boldSpan>Word By Word<\/boldSpan><span>, to<\/span><br><\/br> <span>enable this feature.<\/span>",
     "experience": "Experience",
     "play": "Play Audio",
     "playback-normal": "Normal",
@@ -85,7 +85,7 @@
       "verses-range": "Range of verses",
       "volume-control": "Volume control"
     },
-    "repeat-moved": "The repeat settings have moved to the audio player. Click on the <0></0> icon to access them",
+    "repeat-moved": "The repeat settings have moved to the audio player. Click on the <0><\/0> icon to access them",
     "select-reciter": "Select Reciter",
     "speed": "Speed",
     "title": "Audio"
@@ -117,8 +117,8 @@
   "complete-sign-up": "Complete your registration",
   "consents": {
     "communication": {
-      "body": "🚀 Supercharge your progress through <boldSpan>personalized</boldSpan> notifications about your goal progress, maintaining streaks, and enhancing your usage of our current features.<br></br><br></br> Can we keep you in the loop through email and other channels? You're in control – feel free to adjust these preferences anytime in your account settings.<br></br><br></br> Simply select 'Allow' for <boldSpan>inspiring reminders</boldSpan> or 'Not Now' to decline.",
-      "header": "We'd love to help you stay <boldSpan>committed and consistent</boldSpan> with your Quran Growth Journey! 📖🌟"
+      "body": "🚀 Supercharge your progress through <boldSpan>personalized<\/boldSpan> notifications about your goal progress, maintaining streaks, and enhancing your usage of our current features.<br><\/br><br><\/br> Can we keep you in the loop through email and other channels? You're in control – feel free to adjust these preferences anytime in your account settings.<br><\/br><br><\/br> Simply select 'Allow' for <boldSpan>inspiring reminders<\/boldSpan> or 'Not Now' to decline.",
+      "header": "We'd love to help you stay <boldSpan>committed and consistent<\/boldSpan> with your Quran Growth Journey! 📖🌟"
     }
   },
   "continue": "Continue",
@@ -130,6 +130,7 @@
     "increase": "Increase"
   },
   "default-description": "The Quran translated into many languages in a simple and easy interface",
+  "delete": "Delete",
   "developers": "Developers",
   "display": "Display",
   "donate": "Donate",
@@ -138,7 +139,7 @@
   "edit": "Edit",
   "email-verification": {
     "check-spam": "Didn't receive the verification email? Check your spam inbox",
-    "email-sent": "We just sent an email to <strong>{{email}}</strong>",
+    "email-sent": "We just sent an email to <strong>{{email}}<\/strong>",
     "email-verification": "Email verification",
     "resend-email": "Resend email",
     "resend-email-in": "Resend verification email in {{remainingTime}} sec...",
@@ -163,13 +164,13 @@
     "qpc_uthmani_hafs": "QPC Uthmani Hafs",
     "quran-font": "Quran Font",
     "tajweed": "Tajweed",
-    "tajweed-desc": "Tajweed font shows a Tajweed colored Mushaf. You can read more about the Tajweed color rules <0> here </0>",
+    "tajweed-desc": "Tajweed font shows a Tajweed colored Mushaf. You can read more about the Tajweed color rules <0> here <\/0>",
     "text_indopak": "IndoPak",
     "text_uthmani": "Uthmani"
   },
   "footer": {
     "description": "Quran.com is a Sadaqah Jariyah. We hope to make it easy for everyone to read, study, and learn The Noble Quran. The Noble Quran has many names including Al-Quran Al-Kareem, Al-Ketab, Al-Furqan, Al-Maw'itha, Al-Thikr, and Al-Noor.",
-    "hiring": "We're hiring! Join the QuranFoundation team and contribute to our mission. <link>Apply now!</link>",
+    "hiring": "We're hiring! Join the QuranFoundation team and contribute to our mission. <link>Apply now!<\/link>",
     "rights": "All Rights Reserved",
     "title": "Read, study, and learn The Noble Quran."
   },
@@ -184,7 +185,7 @@
   "from": "From",
   "fundraising-sticky-banner": {
     "cta": "Donate",
-    "title": "Support Quran.com this Ramadan"
+    "title": "Give during the best days!"
   },
   "fundraising": {
     "description": "Don't miss the opportunity to gain multiplied rewards these last blessed nights of Ramadan. Even small monthly donations make an impact!",
@@ -245,8 +246,8 @@
   "popup": {
     "footnote": "Monthly donations allow us to focus less on fundraising",
     "text-1": "We are committed to serving the world Quranic knowledge and technology, always for free.",
-    "text-2": "The perfect opportunity for continuous charity (Sadaqah Jariyah). Please consider investing in your Hereafter as a monthly (or one-time) donor.",
-    "title": "Dear Companion of the Quran,"
+    "text-2": "The perfect opportunity for continous charity (Sadaqa Jariyah). Invest in your Hereafter as a monthly (or one time) donor.",
+    "title": "Give During The Best Days!"
   },
   "powered-by": "Powered by",
   "prepare-hearts": {
@@ -268,7 +269,7 @@
   },
   "recitation": "Recitation",
   "reciter": "Reciter",
-  "reciter-summary": "Word by word reciter: <span>{{reciterName}}</span>. Click on a word to listen to its recitation.",
+  "reciter-summary": "Word by word reciter: <span>{{reciterName}}<\/span>. Click on a word to listen to its recitation.",
   "reciters": "Reciters",
   "reflect": "Reflect",
   "reflections": "Reflections",
@@ -356,7 +357,7 @@
     "light": "Light",
     "sepia": "Sepia",
     "system": "System",
-    "system-desc": "The system theme automatically adopts to your light/dark mode settings"
+    "system-desc": "The system theme automatically adopts to your light\/dark mode settings"
   },
   "to": "To",
   "tooltip": "Tooltip",
@@ -390,7 +391,7 @@
     "voice-search-powered-by": "Voice Search Powered by"
   },
   "wbw": "Word By Word",
-  "wbw-lang-summary": "Word by word translation source: <link>{{source}}</link>. This source is independent of the verse translation selection.",
+  "wbw-lang-summary": "Word by word translation source: <link>{{source}}<\/link>. This source is independent of the verse translation selection.",
   "wbw-trans-lang": "Word By Word Language",
   "wbw-translation": "Word By Word Translation",
   "wbw-transliteration": "Word By Word Transliteration",
