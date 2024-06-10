@@ -1,24 +1,23 @@
 {
-    "all-saved-verses": "All saved verses",
-    "alphabetical": "A-Z",
-    "back-to-collection-list": "Back to collection list",
-    "collapse-all": "Collapse all verses",
-    "collection-list-empty": "Collection list is empty. You haven't created any collection yet",
-    "collections": "Collections",
-    "delete": "Delete",
-    "delete-bookmark": {
-        "subtitle": "Are you sure you want to delete {{bookmarkName}} from {{collectionName}} collection?",
-        "title": "Delete bookmark"
-    },
-    "delete-collection": {
-        "subtitle": "Are you sure you want to delete {{collectionName}} collection?",
-        "title": "Delete collection"
-    },
-    "empty": "Collection is empty",
-    "expand-all": "Expand all verses",
-    "go-to-ayah": "Go to ayah",
-    "load-more": "Load More",
-    "recently-added": "Recently added",
-    "recently-updated": "Recently updated",
-    "verse-key": "Chapter and Verse Number"
+  "all-saved-verses": "All saved verses",
+  "alphabetical": "A-Z",
+  "back-to-collection-list": "Back to collection list",
+  "collapse-all": "Collapse all verses",
+  "collection-list-empty": "Collection list is empty. You haven't created any collection yet",
+  "collections": "Collections",
+  "delete-bookmark": {
+    "subtitle": "Are you sure you want to delete {{bookmarkName}} from {{collectionName}} collection?",
+    "title": "Delete bookmark"
+  },
+  "delete-collection": {
+    "subtitle": "Are you sure you want to delete {{collectionName}} collection?",
+    "title": "Delete collection"
+  },
+  "empty": "Collection is empty",
+  "expand-all": "Expand all verses",
+  "go-to-ayah": "Go to ayah",
+  "load-more": "Load More",
+  "recently-added": "Recently added",
+  "recently-updated": "Recently updated",
+  "verse-key": "Chapter and Verse Number"
 }
