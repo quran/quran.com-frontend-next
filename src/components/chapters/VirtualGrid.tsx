@@ -2,11 +2,8 @@ import { useRef, ReactNode, useState, useEffect } from 'react';
 
 import { useWindowVirtualizer } from '@tanstack/react-virtual';
 
-import { View } from '@/types/Chapter';
-
 type VirtualGridProps = {
-  view: View.Surah | View.RevelationOrder | View.Juz;
-  renderRow: (rowIndex: number, gridNumCols?: number) => ReactNode;
+  renderRow: (rowIndex: number, gridNumCols: number) => ReactNode;
 };
 
 const VirtualGrid: React.FC<VirtualGridProps> = ({ renderRow }: VirtualGridProps) => {
@@ -50,13 +47,14 @@ const VirtualGrid: React.FC<VirtualGridProps> = ({ renderRow }: VirtualGridProps
 
   const surahPreviewHeight = 74;
 
+  const numRows = 114 / gridNumCols;
+
   const virtualizer = useWindowVirtualizer({
-    count: 114,
+    count: numRows,
     estimateSize: () => surahPreviewHeight,
-    overscan: 6,
+    overscan: 5,
     scrollMargin: listRef.current?.offsetTop ?? 0,
     gap: 13,
-    lanes: gridNumCols,
   });
 
   return (
@@ -68,35 +66,22 @@ const VirtualGrid: React.FC<VirtualGridProps> = ({ renderRow }: VirtualGridProps
           height: `${virtualizer.getTotalSize()}px`,
         }}
       >
-        {virtualizer.getVirtualItems().map((cell) => {
-          let left = '0%';
-          let width = '100%';
-
-          if (gridNumCols === 3) {
-            left = `${cell.lane * 33.33}%`;
-            width = `33.33%`;
-          } else if (gridNumCols === 2) {
-            left = `${cell.lane * 50}%`;
-            width = `50%`;
-          } else {
-            left = `${cell.lane * 100}%`;
-            width = `100%`;
-          }
-
+        {virtualizer.getVirtualItems().map((row) => {
           return (
             <div
-              key={cell.key}
+              key={row.key}
               style={{
                 display: 'flex',
+                gap: '13px',
                 position: 'absolute',
                 top: 0,
-                left,
-                width,
-                height: `${cell.size}px`,
-                transform: `translateY(${cell.start - virtualizer.options.scrollMargin}px)`,
+                left: 0,
+                width: '100%',
+                height: `${row.size}px`,
+                transform: `translateY(${row.start - virtualizer.options.scrollMargin}px)`,
               }}
             >
-              {renderRow(cell.index, gridNumCols)}
+              {renderRow(row.index, gridNumCols)}
             </div>
           );
         })}

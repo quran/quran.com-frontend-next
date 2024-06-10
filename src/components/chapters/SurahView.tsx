@@ -6,7 +6,7 @@ import SurahPreviewRow from '../dls/SurahPreview/SurahPreviewRow';
 import styles from './ChapterAndJuzList.module.scss';
 import VirtualGrid from './VirtualGrid';
 
-import Chapter, { View } from '@/types/Chapter';
+import Chapter from '@/types/Chapter';
 import { shouldUseMinimalLayout, toLocalizedNumber } from '@/utils/locale';
 
 const MOST_VISITED_CHAPTERS = {
@@ -30,34 +30,31 @@ const SurahView: React.FC<SurahViewProps> = ({ sortedChapters }: SurahViewProps)
   const { t, lang } = useTranslation();
   return (
     <VirtualGrid
-      view={View.Surah}
-      renderRow={(cellIndex, gridNumCols) => {
-        let addMarginRight = false;
-        if (gridNumCols === 3 || gridNumCols === 2) {
-          addMarginRight = (cellIndex + 1) % gridNumCols !== 0;
-        }
-        const chapter = sortedChapters[cellIndex];
-        return (
-          <div
-            key={chapter.id}
-            style={{ marginRight: addMarginRight ? '13px' : '0px' }}
-            className={styles.chapterContainer}
-          >
-            <Link
-              href={`/${chapter.id}`}
-              shouldPrefetch={MOST_VISITED_CHAPTERS[Number(chapter.id)] === true}
-            >
-              <SurahPreviewRow
-                chapterId={Number(chapter.id)}
-                description={`${toLocalizedNumber(chapter.versesCount, lang)} ${t('common:ayahs')}`}
-                surahName={chapter.transliteratedName}
-                surahNumber={Number(chapter.id)}
-                translatedSurahName={chapter.translatedName as string}
-                isMinimalLayout={shouldUseMinimalLayout(lang)}
-              />
-            </Link>
-          </div>
-        );
+      renderRow={(rowIndex, gridNumCols) => {
+        const row = Array.from({ length: gridNumCols }).map((EMPTY, colIndex) => {
+          const cellIndex = rowIndex * gridNumCols + colIndex;
+          const chapter = sortedChapters[cellIndex];
+          return (
+            <div key={chapter.id} className={styles.chapterContainer}>
+              <Link
+                href={`/${chapter.id}`}
+                shouldPrefetch={MOST_VISITED_CHAPTERS[Number(chapter.id)] === true}
+              >
+                <SurahPreviewRow
+                  chapterId={Number(chapter.id)}
+                  description={`${toLocalizedNumber(chapter.versesCount, lang)} ${t(
+                    'common:ayahs',
+                  )}`}
+                  surahName={chapter.transliteratedName}
+                  surahNumber={Number(chapter.id)}
+                  translatedSurahName={chapter.translatedName as string}
+                  isMinimalLayout={shouldUseMinimalLayout(lang)}
+                />
+              </Link>
+            </div>
+          );
+        });
+        return row;
       }}
     />
   );

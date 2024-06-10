@@ -13,7 +13,13 @@ import SurahView from './SurahView';
 
 import CaretDownIcon from '@/icons/caret-down.svg';
 import { logButtonClick, logValueChange } from '@/utils/eventLogger';
-import Chapter, { View } from 'types/Chapter';
+import Chapter from 'types/Chapter';
+
+enum View {
+  Surah = 'surah',
+  Juz = 'juz',
+  RevelationOrder = 'revelation_order',
+}
 
 const JuzView = dynamic(() => import('./JuzView'), {
   ssr: false,

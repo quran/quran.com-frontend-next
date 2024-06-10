@@ -19,8 +19,3 @@ interface Chapter {
 }
 
 export default Chapter;
-export enum View {
-  Surah = 'surah',
-  Juz = 'juz',
-  RevelationOrder = 'revelation_order',
-}

@@ -1,7 +1,7 @@
 @use "src/styles/breakpoints";
 
 .chapterContainer {
-  width: 100%;
+  flex: 1;
   background-color: var(--color-background-default);
   border-radius: var(--border-radius-default);
 }

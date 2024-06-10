@@ -12,7 +12,7 @@ import SurahPreviewRow from '@/dls/SurahPreview/SurahPreviewRow';
 import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
 import { setIsReadingByRevelationOrder } from '@/redux/slices/revelationOrder';
 import PreferenceGroup from '@/types/auth/PreferenceGroup';
-import Chapter, { View } from '@/types/Chapter';
+import Chapter from '@/types/Chapter';
 import { isLoggedIn } from '@/utils/auth/login';
 import { QURAN_CHAPTERS_COUNT } from '@/utils/chapter';
 import { logButtonClick } from '@/utils/eventLogger';
@@ -76,34 +76,36 @@ const RevelationOrderView = ({ isDescending, chapters }: RevelationOrderViewProp
   return (
     <>
       <VirtualGrid
-        view={View.RevelationOrder}
-        renderRow={(cellIndex) => {
-          const revelationOrderIndex = cellIndex;
-          const chapter = sortedChaptersByRevelationOrder[revelationOrderIndex];
-          return (
-            <div
-              role="button"
-              tabIndex={0}
-              className={styles.chapterContainer}
-              key={chapter.id}
-              onClick={() => onSurahClicked(chapter.id)}
-              onKeyPress={() => onSurahClicked(chapter.id)}
-            >
-              <SurahPreviewRow
-                chapterId={Number(chapter.id)}
-                description={getChapterDescription(chapter, t)}
-                surahName={`${chapter.transliteratedName}`}
-                surahNumber={
-                  isDescending
-                    ? QURAN_CHAPTERS_COUNT - Number(revelationOrderIndex)
-                    : Number(revelationOrderIndex + 1)
-                } // Show the number based on the revelation order instead of the surah number.
-                translatedSurahName={getTranslatedSurahName(chapter, t, lang)}
-                isMinimalLayout={false}
-                isLoading={isLoading && clickedSurahId === chapter.id}
-              />
-            </div>
-          );
+        renderRow={(rowIndex, gridNumCols) => {
+          const row = Array.from({ length: gridNumCols }).map((EMPTY, colIndex) => {
+            const revelationOrderIndex = rowIndex * gridNumCols + colIndex;
+            const chapter = sortedChaptersByRevelationOrder[revelationOrderIndex];
+            return (
+              <div
+                role="button"
+                tabIndex={0}
+                className={styles.chapterContainer}
+                key={chapter.id}
+                onClick={() => onSurahClicked(chapter.id)}
+                onKeyPress={() => onSurahClicked(chapter.id)}
+              >
+                <SurahPreviewRow
+                  chapterId={Number(chapter.id)}
+                  description={getChapterDescription(chapter, t)}
+                  surahName={`${chapter.transliteratedName}`}
+                  surahNumber={
+                    isDescending
+                      ? QURAN_CHAPTERS_COUNT - Number(revelationOrderIndex)
+                      : Number(revelationOrderIndex + 1)
+                  } // Show the number based on the revelation order instead of the surah number.
+                  translatedSurahName={getTranslatedSurahName(chapter, t, lang)}
+                  isMinimalLayout={false}
+                  isLoading={isLoading && clickedSurahId === chapter.id}
+                />
+              </div>
+            );
+          });
+          return row;
         }}
       />
     </>
