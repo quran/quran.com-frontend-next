@@ -230,4 +230,15 @@ export default {
       wordByWordFontScale: initialState.quranReaderStyles.wordByWordFontScale,
     },
   }),
+  31: (state) => ({
+    ...state,
+    session: {
+      ...state.session,
+      isDonationPopupVisible: true,
+    },
+    welcomeMessage: {
+      ...state.welcomeMessage,
+      isVisible: true,
+    },
+  }),
 };

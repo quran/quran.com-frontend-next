@@ -26,7 +26,14 @@ const HomePageWelcomeMessage = () => {
 
   if (!isVisible) return null;
 
-  return <HomePageMessage subtitle={t('fundraising.description')} body={null} onClose={onClose} />;
+  return (
+    <HomePageMessage
+      title={t('fundraising.title')}
+      subtitle={t('fundraising.description')}
+      body={null}
+      onClose={onClose}
+    />
+  );
 };
 
 export default HomePageWelcomeMessage;
