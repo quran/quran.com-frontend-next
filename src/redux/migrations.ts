@@ -236,9 +236,5 @@ export default {
       ...state.session,
       isDonationPopupVisible: true,
     },
-    welcomeMessage: {
-      ...state.welcomeMessage,
-      isVisible: true,
-    },
   }),
 };
