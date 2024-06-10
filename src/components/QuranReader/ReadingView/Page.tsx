@@ -12,7 +12,7 @@ import useIsFontLoaded from '@/components/QuranReader/hooks/useIsFontLoaded';
 import { selectInlineDisplayWordByWordPreferences } from '@/redux/slices/QuranReader/readingPreferences';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
 import { getLineWidthClassName } from '@/utils/fontFaceHelper';
-import { FALLBACK_FONT, QuranFont } from 'types/QuranReader';
+import { FALLBACK_FONT } from 'types/QuranReader';
 import Verse from 'types/Verse';
 
 type PageProps = {
@@ -33,8 +33,7 @@ const Page = ({ verses, pageNumber, quranReaderStyles, pageIndex }: PageProps) =
     shallowEqual,
   );
   const isWordByWordLayout = showWordByWordTranslation || showWordByWordTransliteration;
-  const isBigTextLayout =
-    isWordByWordLayout || quranTextFontScale > 3 || quranFont === QuranFont.Tajweed;
+  const isBigTextLayout = isWordByWordLayout || quranTextFontScale > 3;
   const isFontLoaded = useIsFontLoaded(pageNumber, quranFont);
 
   return (

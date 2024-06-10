@@ -15,6 +15,19 @@ export const isAppleDevice = () => {
   return isOSX || isMacOs();
 };
 
+export const isSafari = () => {
+  if (!isClient) {
+    return false;
+  }
+  return (
+    navigator.vendor &&
+    navigator.vendor.indexOf('Apple') > -1 &&
+    navigator.userAgent &&
+    navigator.userAgent.indexOf('CriOS') === -1 &&
+    navigator.userAgent.indexOf('FxiOS') === -1
+  );
+};
+
 export const isAppleWebKit = () => {
   const { userAgent } = navigator;
   return /AppleWebKit/.test(userAgent) && /Mobile/.test(userAgent);

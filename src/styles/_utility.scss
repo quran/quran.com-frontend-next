@@ -104,6 +104,20 @@ $line-heights-map: (
       10: 22vh,
     ),
   ),
+  tajweed_v4: (
+    tablet: (
+      1: 6.1vh,
+      2: 6.1vh,
+      3: 6.1vh,
+      4: 6.1vh,
+      5: 6.1vh,
+      6: 9.28vh,
+      7: 12.46vh,
+      8: 15.64vh,
+      9: 18.82vh,
+      10: 22vh,
+    ),
+  ),
   code_v1: (
     tablet: (
       1: 6.1vh,
@@ -247,6 +261,32 @@ $scales-map: (
     ),
   ),
   code_v2: (
+    tablet: (
+      1: 2.9vh,
+      2: 3vh,
+      3: 3.2vh,
+      4: 3.5vh,
+      5: 3.7vh,
+      6: 5.16vh,
+      7: 6.62vh,
+      8: 8.08vh,
+      9: 9.54vh,
+      10: 11vh,
+    ),
+    mobile: (
+      1: 4vw,
+      2: 5vw,
+      3: 5.3vw,
+      4: 8.4vw,
+      5: 10vw,
+      6: 11vw,
+      7: 12vw,
+      8: 13vw,
+      9: 14vw,
+      10: 15vw,
+    ),
+  ),
+  tajweed_v4: (
     tablet: (
       1: 2.9vh,
       2: 3vh,
@@ -487,6 +527,32 @@ $skeleton-height-map: (
       10: 1rem,
     ),
   ),
+  tajweed_v4: (
+    desktop: (
+      1: 4.65vh,
+      2: 4.65vh,
+      3: 4.65vh,
+      4: 4.65vh,
+      5: 4.65vh,
+      6: 7.84vh,
+      7: 11.03vh,
+      8: 14.22vh,
+      9: 17.41vh,
+      10: 20.6vh,
+    ),
+    mobile: (
+      1: 4.17vw,
+      2: 6.54vw,
+      3: 7.1vw,
+      4: 8.4vw,
+      5: 10vw,
+      6: 1rem,
+      7: 1rem,
+      8: 1rem,
+      9: 1rem,
+      10: 1rem,
+    ),
+  ),
   code_v1: (
     desktop: (
       1: 4.62vh,
@@ -640,6 +706,20 @@ $line-width-map: (
     ),
   ),
   code_v2: (
+    tablet: (
+      1: 52vh,
+      2: 54vh,
+      3: 56vh,
+      4: 61vh,
+      5: 64.5vh,
+      6: 90.4vh,
+      7: 116.3vh,
+      8: 142.2vh,
+      9: 168.1vh,
+      10: 194vh,
+    ),
+  ),
+  tajweed_v4: (
     tablet: (
       1: 52vh,
       2: 54vh,
