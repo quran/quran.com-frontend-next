@@ -55,7 +55,7 @@ const useFetchPagesLookup = (
     pagesVersesRange: data.pages,
     lookupRange: data.lookupRange,
     hasError: !!error,
-    isLoading: isValidating,
+    isLoading: isValidating && !data,
   };
 };
 
