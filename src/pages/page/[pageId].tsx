@@ -3,12 +3,11 @@ import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useSelector } from 'react-redux';
 
-import useGetPageVersesResponse from './hooks/useGetPageVersesResponse';
-
 import { getPagesLookup, getPageVerses } from '@/api';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import QuranReader from '@/components/QuranReader';
 import useFetchPagesLookup from '@/components/QuranReader/hooks/useFetchPagesLookup';
+import useFetchPageVerses from '@/components/QuranReader/hooks/useFetchPageVerses';
 import Spinner from '@/dls/Spinner/Spinner';
 import useGetMushaf from '@/hooks/useGetMushaf';
 import Error from '@/pages/_error';
@@ -49,7 +48,7 @@ const QuranicPage: NextPage<Props> = ({ hasError, pageVerses: initialData }) => 
     data: pageVersesData,
     isLoading: isPageVersesLoading,
     error: pageVersesError,
-  } = useGetPageVersesResponse(String(pageId), initialData);
+  } = useFetchPageVerses(String(pageId), initialData);
 
   const isUsingDefaultFont = useSelector(selectIsUsingDefaultFont);
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);

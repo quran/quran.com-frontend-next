@@ -18,7 +18,7 @@ import { makePageVersesUrl } from '@/utils/apiPaths';
  * @returns {{ pageVersesResponse: VersesResponse; isLoading: boolean; error: any }}
  */
 
-const useGetPageVersesResponse = (pageId: string, initialData: VersesResponse) => {
+const useFetchPageVerses = (pageId: string, initialData: VersesResponse) => {
   const { lang: locale } = useTranslation();
   const quranFont = useSelector(selectQuranFont, shallowEqual);
   const isUsingDefaultFont = useSelector(selectIsUsingDefaultFont);
@@ -43,4 +43,4 @@ const useGetPageVersesResponse = (pageId: string, initialData: VersesResponse) =
   return { isLoading: isValidating, data, error };
 };
 
-export default useGetPageVersesResponse;
+export default useFetchPageVerses;
