@@ -7,9 +7,16 @@ import ThemeType from '@/redux/types/ThemeType';
 import ThemeTypeVariant from '@/redux/types/ThemeTypeVariant';
 import isClient from '@/utils/isClient';
 
+/**
+ * listenes to the media query dark mode and parsing the auto type to dark or light returning isDarkMode boolean
+ * and the settingsTheme with Auto type, and themeVariant without Auto type
+ *
+ * @returns {{isDarkTheme: boolean, settingsTheme: {type: ThemeType}, themeVariant: ThemeTypeVariant}}
+ */
+
 const useThemeDetector = () => {
   const [isDarkTheme, setIsDarkTheme] = useState(getCurrentTheme());
-  const settingsTheme = useSelector(selectTheme, shallowEqual);
+  const settingsTheme: { type: ThemeType } = useSelector(selectTheme, shallowEqual);
 
   const getThemeVariant = () => {
     if (settingsTheme.type === ThemeType.Auto) {
@@ -20,14 +27,18 @@ const useThemeDetector = () => {
 
   const themeVariant: ThemeTypeVariant = getThemeVariant();
 
-  const mqListener = (e) => {
+  const mediaQueryListener = (e) => {
     setIsDarkTheme(e.matches);
   };
 
   useEffect(() => {
-    const darkThemeMq = window.matchMedia('(prefers-color-scheme: dark)');
-    darkThemeMq.addEventListener('change', mqListener);
-    return () => darkThemeMq.removeEventListener('change', mqListener);
+    if (isClient) {
+      return null;
+    }
+
+    const darkThemeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    darkThemeMediaQuery.addEventListener('change', mediaQueryListener);
+    return () => darkThemeMediaQuery.removeEventListener('change', mediaQueryListener);
   }, []);
 
   return { isDarkTheme, settingsTheme, themeVariant };

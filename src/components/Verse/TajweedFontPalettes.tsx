@@ -14,6 +14,7 @@ const TajweedFontPalettes: React.FC<Props> = ({ quranFont, pageNumber }) => {
     return <></>;
   }
   const fontFamily = getFontFaceNameForPage(quranFont, pageNumber);
+  // The base palettes 0, 1, 2 are the embedded pallettes inside the font files for sepia, dark, and light modes.
   return (
     <style>
       {`
