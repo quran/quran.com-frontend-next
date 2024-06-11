@@ -7,6 +7,8 @@ import ThemeType from '@/redux/types/ThemeType';
 import ThemeTypeVariant from '@/redux/types/ThemeTypeVariant';
 import isClient from '@/utils/isClient';
 
+const getDarkThemePreferences = () => window.matchMedia('(prefers-color-scheme: dark)');
+
 /**
  * listenes to the media query dark mode and parsing the auto type to dark or light returning isDarkMode boolean
  * and the settingsTheme with Auto type, and themeVariant without Auto type
@@ -36,7 +38,7 @@ const useThemeDetector = () => {
       return null;
     }
 
-    const darkThemeMediaQuery = window.matchMedia('(prefers-color-scheme: dark)');
+    const darkThemeMediaQuery = getDarkThemePreferences();
     darkThemeMediaQuery.addEventListener('change', mediaQueryListener);
     return () => darkThemeMediaQuery.removeEventListener('change', mediaQueryListener);
   }, []);
@@ -49,7 +51,7 @@ const getCurrentTheme = () => {
     return false;
   }
 
-  return window.matchMedia('(prefers-color-scheme: dark)').matches;
+  return getDarkThemePreferences().matches;
 };
 
 export default useThemeDetector;
