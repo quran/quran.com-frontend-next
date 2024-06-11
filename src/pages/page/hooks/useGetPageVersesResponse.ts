@@ -1,50 +1,46 @@
-import { useEffect, useState } from 'react';
-
 import useTranslation from 'next-translate/useTranslation';
+import { shallowEqual, useSelector } from 'react-redux';
+import useSWRImmutable from 'swr/immutable';
 
 import { getPageVerses } from '@/api';
 import useGetMushaf from '@/hooks/useGetMushaf';
-import { getQuranReaderStylesInitialState } from '@/redux/defaultSettings/util';
+import { selectIsUsingDefaultFont, selectQuranFont } from '@/redux/slices/QuranReader/styles';
 import { VersesResponse } from '@/types/ApiResponses';
 import { getDefaultWordFields } from '@/utils/api';
+import { makePageVersesUrl } from '@/utils/apiPaths';
 
 /**
  * This hooks fetches the page's verses data by the pageId
  *
  * @param {string} pageId
+ * @param {VersesResponse} initialData
  *
  * @returns {{ pageVersesResponse: VersesResponse; isLoading: boolean; error: any }}
  */
 
-const useGetPageVersesResponse = (pageId: string) => {
-  const [data, setData] = useState<VersesResponse>();
-  const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState();
-  const mushafId = useGetMushaf();
+const useGetPageVersesResponse = (pageId: string, initialData: VersesResponse) => {
   const { lang: locale } = useTranslation();
+  const quranFont = useSelector(selectQuranFont, shallowEqual);
+  const isUsingDefaultFont = useSelector(selectIsUsingDefaultFont);
+  const mushafId = useGetMushaf();
 
-  useEffect(() => {
-    const getData = async () => {
-      try {
-        const pageVersesResponse = await getPageVerses(pageId, locale, {
-          perPage: 'all',
-          mushaf: mushafId,
-          filterPageWords: true,
-          ...getDefaultWordFields(getQuranReaderStylesInitialState(locale).quranFont),
-        });
+  const params = {
+    perPage: 'all',
+    mushaf: mushafId,
+    filterPageWords: true,
+    ...getDefaultWordFields(quranFont),
+  };
 
-        setData(pageVersesResponse);
-      } catch (e) {
-        setError(e);
-      } finally {
-        setIsLoading(false);
-      }
-    };
+  const { data, isValidating, error } = useSWRImmutable(
+    makePageVersesUrl(pageId, locale, params),
+    async () => getPageVerses(pageId, locale, params),
+    {
+      fallbackData: initialData,
+      revalidateOnMount: !isUsingDefaultFont,
+    },
+  );
 
-    getData();
-  }, [locale, mushafId, pageId]);
-
-  return { isLoading, pageVersesResponse: data, error };
+  return { isLoading: isValidating, data, error };
 };
 
 export default useGetPageVersesResponse;
