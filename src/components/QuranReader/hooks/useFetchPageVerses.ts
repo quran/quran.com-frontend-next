@@ -4,6 +4,7 @@ import useSWRImmutable from 'swr/immutable';
 
 import { getPageVerses } from '@/api';
 import useGetMushaf from '@/hooks/useGetMushaf';
+import getPageVersesParams from '@/pages/page/utils/getPageVersesParams';
 import { selectIsUsingDefaultFont, selectQuranFont } from '@/redux/slices/QuranReader/styles';
 import { VersesResponse } from '@/types/ApiResponses';
 import { getDefaultWordFields } from '@/utils/api';
@@ -23,13 +24,7 @@ const useFetchPageVerses = (pageId: string, initialData: VersesResponse) => {
   const quranFont = useSelector(selectQuranFont, shallowEqual);
   const isUsingDefaultFont = useSelector(selectIsUsingDefaultFont);
   const mushafId = useGetMushaf();
-
-  const params = {
-    perPage: 'all',
-    mushaf: mushafId,
-    filterPageWords: true,
-    ...getDefaultWordFields(quranFont),
-  };
+  const params = getPageVersesParams(mushafId, getDefaultWordFields(quranFont));
 
   const { data, isValidating, error } = useSWRImmutable(
     makePageVersesUrl(pageId, locale, params),

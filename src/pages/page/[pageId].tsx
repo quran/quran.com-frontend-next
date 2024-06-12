@@ -3,6 +3,9 @@ import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useSelector } from 'react-redux';
 
+import getPageVersesParams from './utils/getPageVersesParams';
+import getQuranReaderData from './utils/getQuranReaderData';
+
 import { getPagesLookup, getPageVerses } from '@/api';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import QuranReader from '@/components/QuranReader';
@@ -79,11 +82,7 @@ const QuranicPage: NextPage<Props> = ({ hasError, pageVerses: initialData }) => 
   }
 
   const path = getPageNavigationUrl(Number(pageId));
-  const data = {
-    ...pageVersesData,
-    pageVerses: { pagesLookup: pagesLookupData },
-    metaData: { numberOfVerses: pageVersesData.verses.length },
-  };
+  const data = getQuranReaderData(pagesLookupData, pageVersesData);
 
   return (
     <>
@@ -130,12 +129,14 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
       : String(params.pageId);
 
   try {
-    const pageVersesResponse = await getPageVerses(pageId, locale, {
-      perPage: 'all',
-      mushaf: defaultMushafId,
-      filterPageWords: true,
-      ...getDefaultWordFields(getQuranReaderStylesInitialState(locale).quranFont),
-    });
+    const pageVersesResponse = await getPageVerses(
+      pageId,
+      locale,
+      getPageVersesParams(
+        defaultMushafId,
+        getDefaultWordFields(getQuranReaderStylesInitialState(locale).quranFont),
+      ),
+    );
     const pagesLookupResponse = await getPagesLookup({
       pageNumber: Number(pageId),
       mushaf: defaultMushafId,
@@ -144,11 +145,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     return {
       props: {
         chaptersData,
-        pageVerses: {
-          ...pageVersesResponse,
-          pagesLookup: pagesLookupResponse,
-          metaData: { numberOfVerses: pageVersesResponse.verses.length },
-        },
+        pageVerses: getQuranReaderData(pagesLookupResponse.lookupRange, pageVersesResponse),
       },
       revalidate: ONE_WEEK_REVALIDATION_PERIOD_SECONDS, // verses will be generated at runtime if not found in the cache, then cached for subsequent requests for 7 days.
     };
