@@ -13,8 +13,6 @@ test('Selecting a non-default theme should persist the selected font', async ({
   context,
 }) => {
   const homepage = new Homepage(page, context);
-  // we cannot access the local storage in webkit straight away so we need to wait for 1 second
-  await page.waitForTimeout(1000);
   // 1. make sure code v1 and 16-line Mushaf are persisted by default
   let persistedQuranReaderStyles = (await homepage.getPersistedValue(
     'quranReaderStyles',
@@ -27,13 +25,13 @@ test('Selecting a non-default theme should persist the selected font', async ({
   await page.locator('text=IndoPak').click();
   // 4. Choose Indopak 15-line Mushaf
   await page.locator('select[name="lines"]').selectOption(MushafLines.FifteenLines);
-  // 5. make sure indopak and 15-line Mushaf are persisted
+  // 5. Make sure indopak and 15-line Mushaf are persisted
   persistedQuranReaderStyles = (await homepage.getPersistedValue(
     'quranReaderStyles',
   )) as QuranReaderStyles;
   expect(persistedQuranReaderStyles.quranFont).toBe(QuranFont.IndoPak);
   expect(persistedQuranReaderStyles.mushafLines).toBe(MushafLines.FifteenLines);
-  // 6. reload the page.
+  // 6. Reload the page.
   await page.reload();
   // 7. Open the settings drawer
   await homepage.openSettingsDrawer();
