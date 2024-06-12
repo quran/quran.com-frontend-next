@@ -27,6 +27,7 @@
     "lokalise": "node scripts/lokalise.js",
     "rename:v4-font-files": "node scripts/rename-v4-font-files.js",
     "arrange-files:by-extention": "node scripts/arrange-files-in-folders.js",
+    "remove-files:by-name": "node scripts/remove-files.js",
     "chapter-data:format": "node scripts/format-chapter-data-json.js"
   },
   "dependencies": {
