@@ -57,7 +57,7 @@ const QuranicPage: NextPage<Props> = ({ hasError, pageVerses: initialData }) => 
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
 
   const {
-    lookupRange: pagesLookupData,
+    data: pagesLookupData,
     isLoading: isPagesLookupLoading,
     hasError: pagesLookupError,
   } = useFetchPagesLookup(
@@ -145,7 +145,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     return {
       props: {
         chaptersData,
-        pageVerses: getQuranReaderData(pagesLookupResponse.lookupRange, pageVersesResponse),
+        pageVerses: getQuranReaderData(pagesLookupResponse, pageVersesResponse),
       },
       revalidate: ONE_WEEK_REVALIDATION_PERIOD_SECONDS, // verses will be generated at runtime if not found in the cache, then cached for subsequent requests for 7 days.
     };

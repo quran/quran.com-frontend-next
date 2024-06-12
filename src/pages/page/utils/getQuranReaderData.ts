@@ -1,7 +1,9 @@
-import { VersesResponse } from '@/types/ApiResponses';
-import LookupRange from '@/types/LookupRange';
+import { PagesLookUpResponse, VersesResponse } from '@/types/ApiResponses';
 
-const getQuranReaderData = (pagesLookupData: LookupRange, pageVersesData: VersesResponse) => {
+const getQuranReaderData = (
+  pagesLookupData: PagesLookUpResponse,
+  pageVersesData: VersesResponse,
+) => {
   return {
     ...pageVersesData,
     pageVerses: { pagesLookup: pagesLookupData },
