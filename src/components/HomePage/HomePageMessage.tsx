@@ -43,16 +43,9 @@ const HomePageMessage = ({ title, subtitle, body, onClose }: HomePageMessageProp
         <DonateButton
           type={DonateButtonType.MONTHLY}
           source={DonateButtonClickSource.CTA_WELCOME_MESSAGE}
-          shouldUseProviderUrl
         />
-        <DonateButton
-          type={DonateButtonType.ONCE}
-          isOutlined
-          source={DonateButtonClickSource.CTA_WELCOME_MESSAGE}
-          shouldUseProviderUrl
-        />
+        <LearnMoreButton source={LearnMoreClickSource.LEARN_MORE_WELCOME_MESSAGE} />
       </div>
-      <LearnMoreButton source={LearnMoreClickSource.LEARN_MORE_WELCOME_MESSAGE} />
     </div>
   );
 };
