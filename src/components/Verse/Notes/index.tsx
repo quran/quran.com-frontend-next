@@ -43,14 +43,16 @@ const VerseNotes = ({ verseKey, isTranslationView, hasNotes }: VerseNotesProps) 
     getUserProfile,
   );
 
-  const onItemClicked = () => {
+  const onItemClicked = async () => {
     const isUserLoggedIn = isLoggedIn();
     logButtonClick('verse_actions_menu_note', {
       isTranslationView,
       isLoggedIn,
     });
     if (!isUserLoggedIn) {
-      router.push(getLoginNavigationUrl(getChapterWithStartingVerseUrl(verseKey)));
+      const currentRoute = getChapterWithStartingVerseUrl(verseKey);
+      await router.push(currentRoute)
+      await router.push(getLoginNavigationUrl(currentRoute));
     } else {
       setIsModalOpen(true);
     }
