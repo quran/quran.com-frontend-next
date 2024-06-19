@@ -53,3 +53,9 @@ $verseLinkMinWidth: calc(6 * var(--spacing-mega));
     width: max-content;
   }
 }
+
+.sessionsHeaderContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}

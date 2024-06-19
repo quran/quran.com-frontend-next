@@ -331,6 +331,10 @@ export const getBookmarksByCollectionId = async (
   return privateFetcher(makeGetBookmarkByCollectionId(collectionId, queryParams));
 };
 
+export const deleteRecentlyReadList = async () => {
+  return deleteRequest(makeReadingSessionsUrl());
+}
+
 export const enrollUser = async (courseId: string): Promise<{ success: boolean }> =>
   postRequest(makeEnrollUserUrl(), {
     courseId,
