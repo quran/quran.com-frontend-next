@@ -21,6 +21,7 @@
   background: var(--color-background-elevated);
   box-shadow: var(--shadow-small);
   margin-top: var(--spacing-xxsmall);
+  z-index: var(--z-index-min);
 }
 
 .switcher {
@@ -37,6 +38,8 @@
   box-shadow: var(--shadow-small);
   margin-top: var(--spacing-micro);
   cursor: pointer;
+  user-select: none;
+  transition: var(--transition-fast);
 }
 
 .hide {
@@ -113,7 +116,17 @@
   transform: rotate(180deg);
 }
 
-.rotateAuto {
+.rotate {
   transition: var(--transition-fast);
   transform: rotate(0);
+}
+
+.colorsBarVisible {
+  transition: var(--transition-fast);
+  transform: translateY(0%);
+}
+
+.colorsBarInvisible {
+  transition: var(--transition-fast);
+  transform: translateY(-100%);
 }

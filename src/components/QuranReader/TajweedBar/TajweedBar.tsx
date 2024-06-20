@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
@@ -20,6 +20,8 @@ const TAJWEED_COLORS = [
 
 const TajweedColors = () => {
   const [showTajweedBar, setShowTajweedBar] = useState(true);
+  const [height, setHeight] = useState(0);
+  const ref = useRef(null);
 
   const { t } = useTranslation('quran-reader');
 
@@ -27,11 +29,17 @@ const TajweedColors = () => {
     setShowTajweedBar(!showTajweedBar);
   };
 
+  useEffect(() => {
+    setHeight(ref.current.clientHeight);
+  }, []);
+
   return (
     <div className={classNames(styles.container)}>
       <div
+        ref={ref}
         className={classNames(styles.tajweedContainer, {
-          [styles.hide]: !showTajweedBar,
+          [styles.colorsBarVisible]: showTajweedBar,
+          [styles.colorsBarInvisible]: !showTajweedBar,
         })}
       >
         <div className={styles.colorsContainer}>
@@ -50,12 +58,15 @@ const TajweedColors = () => {
         onKeyDown={toggle}
         role="button"
         tabIndex={0}
+        style={{
+          transform: `translateY(${showTajweedBar ? 0 : -height}px)`,
+        }}
       >
         <p>{t('tajweed-colors')}</p>
         <span
           className={classNames({
             [styles.rotate180]: showTajweedBar,
-            [styles.rotateAuto]: !showTajweedBar,
+            [styles.rotate]: !showTajweedBar,
           })}
         >
           <ChevronDownIcon />
