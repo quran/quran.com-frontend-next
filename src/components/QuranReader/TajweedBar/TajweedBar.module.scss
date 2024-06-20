@@ -53,6 +53,10 @@
   width: 90%;
   flex-wrap: wrap;
   column-gap: var(--spacing-mega);
+  @include breakpoints.smallerThanTablet {
+    width: 95%;
+    column-gap: var(--spacing-medium);
+  }
 }
 
 .colorContainer {
@@ -67,48 +71,41 @@
   border-radius: var(--border-radius-circle);
   display: inline-block;
   margin-inline-end: var(--spacing-medium);
+  @include breakpoints.smallerThanTablet {
+    margin-inline-end: var(--spacing-xsmall);
+  }
 }
 
 .edgham {
-  @include theme.light {
     background-color: #afafaf;
-  }
 }
 
 .mad-2 {
-  @include theme.light {
     background-color: #53bbfc;
-  }
 }
 
 .mad-6 {
-  @include theme.light {
     background-color: #afafaf;
-  }
 }
 
 .mad-2-4-6 {
-  @include theme.light {
     background-color: #2c93fc;
-  }
 }
 
 .mad-4-5 {
-  @include theme.light {
     background-color: #4572fb;
-  }
 }
 
 .ekhfa {
-  @include theme.light {
     background-color: #fc8e03;
-  }
 }
 
 .qalqala {
-  @include theme.light {
     background-color: #fc060a;
-  }
+}
+
+.tafkhim {
+    background-color: #3F48E6;
 }
 
 .rotate180 {

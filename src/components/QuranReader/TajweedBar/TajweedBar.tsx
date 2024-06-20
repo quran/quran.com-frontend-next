@@ -7,10 +7,19 @@ import styles from './TajweedBar.module.scss';
 
 import ChevronDownIcon from '@/icons/chevron-down.svg';
 
-const TAJWEED_COLORS = ['edgham', 'mad-2', 'mad-2-4-6', 'mad-4-5', 'mad-6', 'ekhfa', 'qalqala'];
+const TAJWEED_COLORS = [
+  'edgham',
+  'mad-2',
+  'mad-2-4-6',
+  'mad-4-5',
+  'mad-6',
+  'ekhfa',
+  'qalqala',
+  'tafkhim',
+];
 
 const TajweedColors = () => {
-  const [showTajweedBar, setShowTajweedBar] = useState(false);
+  const [showTajweedBar, setShowTajweedBar] = useState(true);
 
   const { t } = useTranslation('quran-reader');
 
