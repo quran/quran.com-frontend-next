@@ -31,7 +31,7 @@ const TajweedColors = () => {
 
   useEffect(() => {
     setHeight(ref.current.clientHeight);
-  }, []);
+  }, [ref.current.clientHeight]);
 
   return (
     <div className={classNames(styles.container)}>
