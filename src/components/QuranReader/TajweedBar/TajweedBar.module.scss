@@ -1,0 +1,122 @@
+@use "src/styles/breakpoints";
+@use "src/styles/theme";
+
+.container {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  width:100%;
+  color: var(--color-text-default);
+  text-align: center;
+}
+
+.tajweedContainer {
+  display: flex;
+  width:100%;
+  justify-content: center;
+  background: var(--color-background-default);
+  background: var(--color-background-elevated);
+  box-shadow: var(--shadow-small);
+  margin-top: var(--spacing-xxsmall);
+}
+
+.switcher {
+  display: flex;
+  align-self: center;
+  width: fit-content;
+  column-gap: var(--spacing-xsmall);
+  padding: var(--spacing-micro) var(--spacing-xsmall) var(--spacing-micro) var(--spacing-xsmall);
+  border-bottom-left-radius: var(--spacing-xsmall);
+  border-bottom-right-radius: var(--spacing-xsmall);
+  justify-content: center;
+  background: var(--color-background-default);
+  background: var(--color-background-elevated);
+  box-shadow: var(--shadow-small);
+  margin-top: var(--spacing-micro);
+  cursor: pointer;
+}
+
+.hide {
+  display: none;
+  height: 0;
+  visibility: hidden;
+}
+
+
+.colorsContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 90%;
+  flex-wrap: wrap;
+  column-gap: var(--spacing-mega);
+}
+
+.colorContainer {
+  display: flex;
+  align-items: center;
+  height: var(--line-height-jumbo);
+}
+
+.circle {
+  height: var(--spacing-large);
+  width: var(--spacing-large);
+  border-radius: var(--border-radius-circle);
+  display: inline-block;
+  margin-inline-end: var(--spacing-medium);
+}
+
+.edgham {
+  @include theme.light {
+    background-color: #afafaf;
+  }
+}
+
+.mad-2 {
+  @include theme.light {
+    background-color: #53bbfc;
+  }
+}
+
+.mad-6 {
+  @include theme.light {
+    background-color: #afafaf;
+  }
+}
+
+.mad-2-4-6 {
+  @include theme.light {
+    background-color: #2c93fc;
+  }
+}
+
+.mad-4-5 {
+  @include theme.light {
+    background-color: #4572fb;
+  }
+}
+
+.ekhfa {
+  @include theme.light {
+    background-color: #fc8e03;
+  }
+}
+
+.qalqala {
+  @include theme.light {
+    background-color: #fc060a;
+  }
+}
+
+.rotate180 {
+  transition: var(--transition-fast);
+  transform: rotate(180deg);
+}
+
+.rotateAuto {
+  transition: var(--transition-fast);
+  transform: rotate(0);
+}

@@ -1,5 +1,6 @@
 $readingPreferenceMaxWidth: calc(20 * var(--spacing-large));
 $contextMenuReadingPreferenceMaxWidth: calc(10 * var(--spacing-large));
+$readingPreferenceSwitcherContainerTopPadding: var(--spacing-large);
 .container {
   max-width: $readingPreferenceMaxWidth;
   margin-inline-start: auto;
@@ -11,6 +12,7 @@ $contextMenuReadingPreferenceMaxWidth: calc(10 * var(--spacing-large));
 }
 
 .surahHeaderContainer {
+  padding-top: $readingPreferenceSwitcherContainerTopPadding;
   margin-block-start: var(--spacing-small);
   margin-block-end: var(--spacing-xxsmall);
 }
