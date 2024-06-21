@@ -8,6 +8,7 @@
     "id",
     "it",
     "nl",
+    "pl",
     "pt",
     "ru",
     "sq",
@@ -15,8 +16,7 @@
     "tr",
     "ur",
     "zh",
-    "ms",
-    "pl"
+    "ms"
   ],
   "defaultLocale": "en",
   "pages": {

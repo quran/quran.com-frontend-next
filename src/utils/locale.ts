@@ -17,6 +17,7 @@ const LOCALE_NAME = {
   id: 'Indonesia',
   it: 'Italiano',
   nl: 'Dutch',
+  pl: 'Polski',
   pt: 'Português',
   ru: 'русский',
   sq: 'Shqip',
@@ -30,7 +31,6 @@ const LOCALE_NAME = {
   ta: 'தமிழ்', // tamil
   hi: 'हिन्दी',
   ku: 'Kurdî',
-  pl: 'Polski',
 };
 
 const LOCALE_NAME_TO_CODE = {
@@ -51,6 +51,7 @@ export const LANG_LOCALE_MAP = {
   id: 'id-ID',
   it: 'it-IT',
   nl: 'nl-NL',
+  pl: 'pl-PL',
   pt: 'pt-BR',
   ru: 'ru-RU',
   sq: 'sq-AL',
@@ -59,7 +60,6 @@ export const LANG_LOCALE_MAP = {
   ur: 'ur-PK',
   zh: 'zh-CN',
   ms: 'ms-MY',
-  pl: 'pl-PL',
 };
 
 export enum Direction {

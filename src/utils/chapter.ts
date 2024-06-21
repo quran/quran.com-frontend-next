@@ -17,11 +17,11 @@ const SUPPORTED_CHAPTER_LOCALES = [
   'id',
   'it',
   'nl',
+  'pl',
   'ru',
   'tr',
   'ur',
   'zh',
-  'pl',
 ];
 
 /**
