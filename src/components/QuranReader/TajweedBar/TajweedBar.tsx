@@ -6,6 +6,7 @@ import useTranslation from 'next-translate/useTranslation';
 import styles from './TajweedBar.module.scss';
 
 import ChevronDownIcon from '@/icons/chevron-down.svg';
+import isClient from '@/utils/isClient';
 
 const TAJWEED_COLORS = [
   'edgham',
@@ -30,8 +31,12 @@ const TajweedColors = () => {
   };
 
   useEffect(() => {
+    if (isClient) {
+      return null;
+    }
     setHeight(ref.current.clientHeight);
-  }, [ref.current.clientHeight]);
+    return () => {};
+  }, []);
 
   return (
     <div className={classNames(styles.container)}>
