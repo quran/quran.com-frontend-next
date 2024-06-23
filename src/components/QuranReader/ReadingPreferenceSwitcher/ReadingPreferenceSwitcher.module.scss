@@ -12,9 +12,12 @@ $readingPreferenceSwitcherContainerTopPadding: var(--spacing-large);
 }
 
 .surahHeaderContainer {
-  padding-top: $readingPreferenceSwitcherContainerTopPadding;
   margin-block-start: var(--spacing-small);
   margin-block-end: var(--spacing-xxsmall);
+}
+
+.tajweedMushaf {
+  padding-top: $readingPreferenceSwitcherContainerTopPadding;
 }
 
 .contextMenuContainer {

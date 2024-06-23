@@ -6,7 +6,7 @@ import useTranslation from 'next-translate/useTranslation';
 import styles from './TajweedBar.module.scss';
 
 import ChevronDownIcon from '@/icons/chevron-down.svg';
-import isClient from '@/utils/isClient';
+import { logEvent } from '@/utils/eventLogger';
 
 const TAJWEED_COLORS = [
   'edgham',
@@ -27,19 +27,27 @@ const TajweedColors = () => {
   const { t } = useTranslation('quran-reader');
 
   const toggle = () => {
-    setShowTajweedBar(!showTajweedBar);
+    setShowTajweedBar((prevShowTajweedBar) => !prevShowTajweedBar);
+    if (showTajweedBar) {
+      logEvent('tajweed_bar_opened');
+    } else {
+      logEvent('tajweed_bar_closed');
+    }
   };
 
   useEffect(() => {
-    if (isClient) {
-      return null;
+    if (ref.current) {
+      setHeight(ref.current.clientHeight);
     }
-    setHeight(ref.current.clientHeight);
-    return () => {};
-  }, []);
+  }, [ref.current?.clientHeight]);
 
   return (
-    <div className={classNames(styles.container)}>
+    <div
+      className={classNames(styles.container)}
+      style={{
+        transform: `translateY(${showTajweedBar ? 0 : -height}px)`,
+      }}
+    >
       <div
         ref={ref}
         className={classNames(styles.tajweedContainer, {
@@ -63,9 +71,6 @@ const TajweedColors = () => {
         onKeyDown={toggle}
         role="button"
         tabIndex={0}
-        style={{
-          transform: `translateY(${showTajweedBar ? 0 : -height}px)`,
-        }}
       >
         <p>{t('tajweed-colors')}</p>
         <span

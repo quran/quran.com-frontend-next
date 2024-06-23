@@ -8,20 +8,20 @@
   justify-content: center;
   align-items: center;
   position: fixed;
-  width:100%;
+  width: 100%;
   color: var(--color-text-default);
   text-align: center;
 }
 
 .tajweedContainer {
   display: flex;
-  width:100%;
+  width: 100%;
   justify-content: center;
   background: var(--color-background-default);
   background: var(--color-background-elevated);
   box-shadow: var(--shadow-small);
   margin-top: var(--spacing-xxsmall);
-  z-index: var(--z-index-min);
+  z-index: var(--z-index-default);
 }
 
 .switcher {
@@ -73,35 +73,35 @@
 }
 
 .edgham {
-    background-color: #afafaf;
+  background-color: #afafaf;
 }
 
 .mad-2 {
-    background-color: #53bbfc;
+  background-color: #53bbfc;
 }
 
 .mad-6 {
-    background-color: #afafaf;
+  background-color: #afafaf;
 }
 
 .mad-2-4-6 {
-    background-color: #2c93fc;
+  background-color: #2c93fc;
 }
 
 .mad-4-5 {
-    background-color: #4572fb;
+  background-color: #4572fb;
 }
 
 .ekhfa {
-    background-color: #fc8e03;
+  background-color: #fc8e03;
 }
 
 .qalqala {
-    background-color: #fc060a;
+  background-color: #fc060a;
 }
 
 .tafkhim {
-    background-color: #3F48E6;
+  background-color: #3f48e6;
 }
 
 .rotate180 {
