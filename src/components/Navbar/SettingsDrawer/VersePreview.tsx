@@ -11,11 +11,7 @@ import Skeleton from '@/dls/Skeleton/Skeleton';
 import useThemeDetector from '@/hooks/useThemeDetector';
 import { addLoadedFontFace } from '@/redux/slices/QuranReader/font-faces';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
-import {
-  getFontFaceNameForPage,
-  getQCFFontFaceSource,
-  isQCFFont,
-} from '@/utils/fontFaceHelper';
+import { getFontFaceNameForPage, getQCFFontFaceSource, isQCFFont } from '@/utils/fontFaceHelper';
 import getSampleVerse from '@/utils/sampleVerse';
 import { QuranFont } from 'types/QuranReader';
 import Word from 'types/Word';
@@ -26,23 +22,21 @@ const VersePreview = () => {
 
   const { themeVariant } = useThemeDetector();
 
-  const { data: sampleVerse } = useSWR(SWR_SAMPLE_VERSE_KEY, () =>
-    getSampleVerse()
-  );
+  const { data: sampleVerse } = useSWR(SWR_SAMPLE_VERSE_KEY, () => getSampleVerse());
   const dispatch = useDispatch();
   useEffect(() => {
     if (isQCFFont(quranReaderStyles.quranFont) && sampleVerse) {
       const fontFaceName = getFontFaceNameForPage(
         quranReaderStyles.quranFont as QuranFont,
-        sampleVerse.pageNumber
+        sampleVerse.pageNumber,
       );
       const fontFace = new FontFace(
         fontFaceName,
         getQCFFontFaceSource(
           quranReaderStyles.quranFont as QuranFont,
           sampleVerse.pageNumber,
-          themeVariant
-        )
+          themeVariant,
+        ),
       );
       document.fonts.add(fontFace);
       fontFace.load().then(() => {
