@@ -20,7 +20,6 @@
   background: var(--color-background-default);
   background: var(--color-background-elevated);
   box-shadow: var(--shadow-small);
-  margin-top: var(--spacing-xxsmall);
   z-index: var(--z-index-default);
 }
 
@@ -36,7 +35,6 @@
   background: var(--color-background-default);
   background: var(--color-background-elevated);
   box-shadow: var(--shadow-small);
-  margin-top: var(--spacing-micro);
   cursor: pointer;
   user-select: none;
   transition: var(--transition-fast);
