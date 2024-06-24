@@ -72,7 +72,8 @@ const SidebarNavigation = () => {
       className={classNames(styles.container, {
         [styles.visibleContainer]: isVisible === true,
         [styles.containerAuto]: isVisible === 'auto',
-        [styles.spaceOnTop]: isContextMenuExpanded,
+        [styles.spaceOnTopMenuExpanded]: isContextMenuExpanded,
+        [styles.spaceOnTopMenuCollapse]: !isContextMenuExpanded,
       })}
     >
       {!isReadingByRevelationOrder ? (

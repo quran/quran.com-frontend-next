@@ -1,6 +1,8 @@
 @use "src/styles/constants";
 @use "src/styles/breakpoints";
 
+$sections-container-height: 2.25rem;
+
 .container {
   background: var(--color-background-default);
   background: var(--color-background-elevated);
@@ -63,6 +65,7 @@
 }
 
 .sectionsContainer {
+  height: $sections-container-height;
   width: 100%;
   padding-block-start: var(--spacing-micro);
   padding-block-end: var(--spacing-micro);

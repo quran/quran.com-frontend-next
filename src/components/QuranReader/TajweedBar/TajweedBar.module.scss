@@ -11,6 +11,7 @@
   width: 100%;
   color: var(--color-text-default);
   text-align: center;
+  transition: var(--transition-fast);
 }
 
 .tajweedContainer {
@@ -20,7 +21,7 @@
   background: var(--color-background-default);
   background: var(--color-background-elevated);
   box-shadow: var(--shadow-small);
-  z-index: var(--z-index-default);
+  margin-top: var(--spacing-micro);
 }
 
 .switcher {
@@ -37,7 +38,6 @@
   box-shadow: var(--shadow-small);
   cursor: pointer;
   user-select: none;
-  transition: var(--transition-fast);
 }
 
 .colorsContainer {
@@ -103,12 +103,12 @@
 }
 
 .rotate180 {
-  transition: var(--transition-fast);
+  transition: var(--transition-regular);
   transform: rotate(180deg);
 }
 
 .rotate {
-  transition: var(--transition-fast);
+  transition: var(--transition-regular);
   transform: rotate(0);
 }
 

@@ -2,7 +2,11 @@
 @use "src/styles/breakpoints";
 @use "src/styles/theme";
 
+$sections-menu-height: 2.25rem;
+$progress-bar-height: var(--spacing-micro);
+
 @mixin sidebarVisible {
+  z-index: var(--z-index-sticky);
   transform: translateX(0%);
   [dir="rtl"] & {
     transform: translateX(0%); // need to duplicate for specificity
@@ -136,8 +140,14 @@
   }
 }
 
-.spaceOnTop {
-  padding-block-start: calc(3.5 * var(--spacing-mega));
+.spaceOnTopMenuExpanded {
+  transition: var(--transition-regular);
+  margin-block-start: calc($sections-menu-height + var(--navbar-container-height) + $progress-bar-height);
+}
+
+.spaceOnTopMenuCollapse {
+  transition: var(--transition-regular);
+  margin-block-start: calc($sections-menu-height + $progress-bar-height);
 }
 
 .chapterNumber {
