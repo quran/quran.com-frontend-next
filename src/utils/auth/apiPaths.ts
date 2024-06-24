@@ -180,3 +180,8 @@ export const makeUserBulkPreferencesUrl = (mushafId: Mushaf) =>
 export const makeLogoutUrl = () => makeUrl('auth/logout');
 
 export const makeRefreshTokenUrl = () => makeUrl('tokens/refreshToken');
+
+export const makeGenerateMediaFileUrl = () => makeUrl('media/generate');
+
+export const makeGetMediaFileProgressUrl = (renderId: string) =>
+  makeUrl(`media/progress/${renderId}`);

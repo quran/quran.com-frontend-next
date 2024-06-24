@@ -1,0 +1,290 @@
+@use "src/styles/breakpoints";
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  min-height: calc(8 * var(--spacing-mega));
+}
+
+.player {
+  width: 100% !important;
+  height: 100% !important;
+}
+
+.loadingContainer {
+  width: 100% !important;
+  height: 100% !important;
+  display: flex;
+  align-items: center;
+}
+
+.playerWrapper {
+  position: relative;
+  padding: var(--spacing-large);
+  aspect-ratio: 16 / 9;
+}
+
+.versePreviewContainer {
+  padding: var(--spacing-large);
+  background-color: var(--color-background-alternative-faded);
+}
+
+.pageContainer {
+  @include breakpoints.smallerThanTablet {
+    padding-block-start: var(--banner-height);
+  }
+  @include breakpoints.tablet {
+    padding-block-start: var(--spacing-small);
+  }
+  padding-block-end: var(--spacing-small);
+  padding-inline-start: 0;
+  padding-inline-end: 0;
+}
+
+// juz layout (masonry layout)
+.settingsContainer {
+  display: grid;
+  margin: 0 auto;
+  padding-inline-start: var(--spacing-medium) !important;
+  padding-inline-end: var(--spacing-medium) !important;
+  @include breakpoints.tablet {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @include breakpoints.desktop {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  gap: 0em 2em;
+}
+
+.headerContainer {
+  display: flex;
+  align-items: center;
+}
+
+.verseContainer {
+  margin: 3rem 0px;
+}
+
+.verseRangeSearchButton {
+  margin-block-start: calc(var(--spacing-mega) - 4px);
+}
+
+.verse {
+  display: flex;
+  flex-direction: row;
+  direction: rtl;
+}
+
+.number {
+  font-size: 12px;
+  text-align: right;
+  display: flex;
+  align-items: center;
+  border-radius: 50%;
+  padding: 0px 20px;
+  border: 1px solid black;
+}
+
+.text {
+  font-size: 3.5rem;
+  text-align: right;
+  margin-left: 10px;
+  padding: 0 2rem;
+}
+
+.translation {
+  padding: 5px;
+  margin: 3px 0px;
+  display: flex;
+  flex-direction: row;
+}
+
+.translationText {
+  font-size: 1.4rem;
+  text-align: right;
+  margin-left: 10px;
+  margin-left: auto;
+  margin-right: 0;
+  padding: 0 2rem;
+}
+
+.colorPicker {
+  width: 50%;
+}
+
+.titleContainer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+
+.language {
+  text-transform: capitalize;
+  margin-block-end: var(--spacing-xsmall);
+  font-size: var(--font-size-large);
+  font-weight: var(--font-weight-semibold);
+}
+
+.item {
+  margin-block-end: var(--spacing-xsmall);
+  display: flex;
+  align-items: center;
+}
+
+.group {
+  margin-block-end: var(--spacing-large);
+}
+
+.searchInputContainer {
+  margin-block-end: var(--spacing-small);
+  margin-block-start: var(--spacing-xsmall);
+  margin-inline-end: var(--spacing-mega);
+}
+
+.label {
+  display: flex;
+  flex-direction: column;
+}
+
+.author {
+  font-size: var(--font-size-xsmall);
+  color: var(--color-text-faded);
+}
+
+.input {
+  width: 95%;
+}
+
+.container {
+  min-height: calc(4 * var(--spacing-mega));
+}
+.changeReciterButtonContainer {
+  display: flex;
+  flex-direction: column;
+  margin-block-start: var(--spacing-xsmall);
+}
+
+.skeleton {
+  height: calc(2.2 * var(--spacing-mega));
+  width: 100%;
+}
+
+.translationControlButtons {
+  display: flex;
+  justify-content: start;
+  width: 100%;
+}
+
+.translationControlButtons > button {
+  margin: 0 1rem 1rem 0;
+}
+
+.backgroundColorsWrapper {
+  width: 100%;
+  height: 100%;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 5px;
+  margin: var(--spacing-large) 0;
+}
+
+.selectedSetting {
+  border: 3px solid rgb(4, 255, 0) !important;
+}
+
+.BackgroundVideosWrapper {
+  position: relative;
+  display: grid;
+  gap: 5px;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.colorBox {
+  min-width: 1rem;
+  min-height: 1rem;
+  aspect-ratio: 1;
+  transition: all 100ms ease-in-out;
+  cursor: pointer;
+
+  &:hover {
+    transform: translateY(-2%);
+    box-shadow: 10px 10px 48px -25px rgba(0, 0, 0, 0.75);
+    -webkit-box-shadow: 10px 10px 48px -25px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 10px 10px 48px -25px rgba(0, 0, 0, 0.75);
+  }
+}
+
+.img {
+  object-fit: cover;
+  cursor: pointer;
+  transition: all 200ms ease-in-out;
+
+  &:hover {
+    transform: scale(1.08);
+    box-shadow: 10px 10px 48px -25px rgba(0, 0, 0, 0.75);
+    -webkit-box-shadow: 10px 10px 48px -25px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 10px 10px 48px -25px rgba(0, 0, 0, 0.75);
+  }
+}
+
+.orientationWrapper {
+  padding: var(--spacing-medium) 0;
+}
+
+.landscape {
+  margin: auto;
+  padding: 1rem;
+  width: 80%;
+  border-radius: 5px;
+  background: gray;
+  aspect-ratio: 1280 / 720;
+}
+
+.portrait {
+  margin: 0 auto;
+  border-radius: 15px;
+  max-width: 60%;
+  max-height: 200px;
+  background: gray;
+  aspect-ratio: 720 / 1280;
+}
+
+.verseRangeContainer {
+  display: flex;
+  justify-content: space-between;
+  gap: 1em;
+}
+
+.versesLabel {
+  margin-bottom: 1rem;
+}
+
+.translationListContainer {
+  height: 50vh;
+  min-width: 100%;
+  overflow: auto;
+  position: relative;
+  margin-block-start: var(--spacing-medium);
+}
+
+.translationClearSearchButton {
+  position: absolute;
+  top: 10px;
+  right: 20px;
+}
+
+.translationModalWrapper .body {
+  padding-block-end: 0px !important;
+}
+
+.renderControlsContainer {
+  margin-block-start: 0 !important;
+  display: flex;
+  flex-direction: column;
+
+  button {
+    width: 10rem;
+  }
+}

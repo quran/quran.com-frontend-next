@@ -11,6 +11,7 @@ interface Props {
   rangeEndVerse: string;
   onChange: (selectedName: string, dropdownId: RangeSelectorType) => void;
   isVisible: boolean;
+  boldLabels: boolean;
 }
 
 const VersesRangeSelector: React.FC<Props> = ({
@@ -19,6 +20,7 @@ const VersesRangeSelector: React.FC<Props> = ({
   rangeEndVerse,
   onChange,
   isVisible,
+  boldLabels = true,
 }) => (
   <div
     className={classNames(styles.rangeSelectorContainer, {
@@ -30,12 +32,14 @@ const VersesRangeSelector: React.FC<Props> = ({
       type={RangeSelectorType.START}
       dropdownItems={dropdownItems}
       onChange={onChange}
+      boldLabels={boldLabels}
     />
     <SelectorContainer
       value={rangeEndVerse}
       type={RangeSelectorType.END}
       dropdownItems={dropdownItems}
       onChange={onChange}
+      boldLabels={boldLabels}
     />
   </div>
 );

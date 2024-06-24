@@ -23,6 +23,7 @@ interface SelectorProps {
   value: string;
   dropdownItems: RangeVerseItem[];
   onChange: (selectedName: string, dropdownId: string) => void;
+  boldLabels: boolean;
 }
 
 /*
@@ -35,7 +36,13 @@ Memoizing the selector will save re-renders to each selector and its items when:
 [NOTE] The more the verses of a chapter the more beneficial the memoization will be
         since we will have higher number items which will be re-rendering un-necessarily.
 */
-const SelectorContainer: React.FC<SelectorProps> = ({ type, value, dropdownItems, onChange }) => {
+const SelectorContainer: React.FC<SelectorProps> = ({
+  type,
+  value,
+  dropdownItems,
+  onChange,
+  boldLabels = true,
+}) => {
   const { t } = useTranslation('common');
   return (
     <div className={styles.selectedContainer}>
@@ -49,7 +56,7 @@ const SelectorContainer: React.FC<SelectorProps> = ({ type, value, dropdownItems
         initialInputValue={value}
         fixedWidth={false}
         label={
-          <span className={styles.comboboxLabel}>
+          <span className={`${styles.comboboxLabel} ${boldLabels && styles.comboboxLabelBold}`}>
             {`${type === RangeSelectorType.START ? t('from') : t('to')} ${t('verse')}:`}
           </span>
         }

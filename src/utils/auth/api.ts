@@ -2,6 +2,7 @@
 import { configureRefreshFetch } from 'refresh-fetch';
 
 import { getTimezone } from '../datetime';
+import { prepareGenerateMediaFileRequestData } from '../videoGenerator/utils';
 
 import BookmarkByCollectionIdQueryParams from './types/BookmarkByCollectionIdQueryParams';
 import GetAllNotesQueryParams from './types/Note/GetAllNotesQueryParams';
@@ -21,6 +22,7 @@ import { Course } from '@/types/auth/Course';
 import { CreateGoalRequest, Goal, GoalCategory, UpdateGoalRequest } from '@/types/auth/Goal';
 import { Note } from '@/types/auth/Note';
 import { StreakWithMetadataParams, StreakWithUserMetadata } from '@/types/auth/Streak';
+import GenerateMediaFileRequest from '@/types/Media/GenerateMediaFileRequest';
 import { Mushaf } from '@/types/QuranReader';
 import {
   makeBookmarksUrl,
@@ -64,6 +66,8 @@ import {
   makePublishNoteUrl,
   makeCourseFeedbackUrl,
   makeGetUserCoursesCountUrl,
+  makeGenerateMediaFileUrl,
+  makeGetMediaFileProgressUrl,
 } from '@/utils/auth/apiPaths';
 import { fetcher } from 'src/api';
 import CompleteAnnouncementRequest from 'types/auth/CompleteAnnouncementRequest';
@@ -390,6 +394,17 @@ export const updateNote = async (id: string, body: string, saveToQR: boolean) =>
   });
 
 export const deleteNote = async (id: string) => deleteRequest(makeDeleteOrUpdateNoteUrl(id));
+
+export const getMediaFileProgress = async (
+  renderId: string,
+): Promise<{ data: { isDone: boolean; progress: number; url?: string } }> =>
+  privateFetcher(makeGetMediaFileProgressUrl(renderId));
+
+export const generateMediaFile = async (
+  payload: GenerateMediaFileRequest,
+): Promise<{ data: { renderId?: string; url?: string } }> => {
+  return postRequest(makeGenerateMediaFileUrl(), prepareGenerateMediaFileRequestData(payload));
+};
 
 export const requestVerificationCode = async (emailToVerify) => {
   return postRequest(makeVerificationCodeUrl(), { email: emailToVerify });
