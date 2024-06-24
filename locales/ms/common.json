@@ -1,6 +1,6 @@
 {
   "about": "Tentang Kami",
-  "allow": "benarkan",
+  "allow": "Benarkan",
   "and": "dan",
   "announcements": {
     "auth-onboarding": {
@@ -160,7 +160,7 @@
     "code_v2": "Kompleks Raja Fahad V2",
     "font-size": "Saiz fon",
     "lines": "Barisan",
-    "qcf-desc": "Fon Kompleks Raja Fahad (V1 dan V2) memberikan kualiti yang lebih tinggi tetapi mengambil masa yang lebih lama untuk dimuatkan.",
+    "qcf-desc": "Fon Kompleks Raja Fahad (V1 dan V2) berkualiti tinggi tetapi mengambil masa yang lebih lama untuk dimuatkan.",
     "qpc_uthmani_hafs": "QPC Uthmani Hafs",
     "quran-font": "Fon Quran",
     "tajweed": "Tajwid",
@@ -188,7 +188,7 @@
     "title": "Berikan pada hari-hari terbaik!"
   },
   "fundraising": {
-    "description": "Jangan lepaskan peluang untuk meraih pahala berlipat kali ganda di malam-malam terakhir Ramadhan ini.  Sumbangan bulanan yang sedikit mampu beri kesan yang amat besar!",
+    "description": "Derma bulanan membantu kami menambah baik Quran.com dan mengekalkan operasi supaya kami kurang menumpukan pada pengumpulan dana dan lebih kepada mencipta impak.",
     "title": "Jadilah Penderma Bulanan"
   },
   "help": "Bantuan",
@@ -205,7 +205,7 @@
   "learn-more": "Ketahui lebih lanjut",
   "learning-plans": "Rancangan Pembelajaran",
   "less": "Kurang",
-  "loading": "Sedang proses",
+  "loading": "Sedang dimuat ",
   "login": "Log masuk",
   "logout": "Log keluar",
   "meccan": "Mekah",
@@ -242,12 +242,12 @@
   "pages": "Muka Surat",
   "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} daripada {{totalNumberOfResults}} hasil carian",
   "pbuh": "Selawat Allah ke atasnya",
-  "popular-links": "Pautan LINK yang popular",
+  "popular-links": "Pautan yang di gemari",
   "popup": {
     "footnote": "Derma bulanan anda membantu mengurangkan usaha pengutipan dana kami sejurusnya melebihkan tumpuan pada program yang manfaat",
     "text-1": "Kami komited untuk memberi khidmat percuma dalam pengluasan pengetahuan dan teknologi pembelajaran al-Quran ke seantaro dunia.",
-    "text-2": "Peluang sempurna untuk amal yang berterusan (Sadaqa Jariyah). Melabur di Akhirat anda sebagai penderma bulanan (atau sekali).",
-    "title": "Berikan Semasa Hari-Hari Terbaik!"
+    "text-2": "Peluang terbaik untuk amal yang berterusan (Sadaqa Jariyah). Melabur di Akhirat anda sebagai penderma bulanan (atau sekali).",
+    "title": "Derma Pada Hari-Hari Yang Terbaik Ini!"
   },
   "powered-by": "Dikuasai oleh",
   "prepare-hearts": {
@@ -260,7 +260,7 @@
   "product-updates": "Kemas kini produk",
   "profile": "Profil",
   "q-reflect": "QuranReflect",
-  "quran-com": "Quran",
+  "quran-com": "Quran.com",
   "quran-radio": "Radio Al-Quran",
   "reading-history": "Sejarah Pembacaan",
   "reading-preference": {
@@ -306,7 +306,7 @@
     "search-tafsirs": "Carian Tafsir",
     "search-translations": "Cari Terjemahan",
     "selected-reciter": "Qari yang dipilih",
-    "selected-tafsirs": "Tafsir yang dipilih",
+    "selected-tafsirs": "Tafsir yang telah dipilih",
     "selected-translations": "Terjemahan yang dipilih",
     "show-tooltip-when-playing-audio": "Paparkan tooltips semasa audio dimainkan",
     "title": "Tetapan",
@@ -360,7 +360,7 @@
     "system-desc": "Tema sistem secara automatik digunakan pada tetapan mod terang\/gelap anda"
   },
   "to": "Ke",
-  "tooltip": "Alat",
+  "tooltip": "Tooltip",
   "tooltip-trans-lang": "Tooltip Language",
   "trans-lang": "Bahasa Terjemahan",
   "translation": "Terjemahan",
@@ -385,14 +385,14 @@
     "error": "Kesilapan telah berlaku. Sila cuba sebentar lagi. Atau muat turun",
     "no-permission": "Nampaknya anda tidak memberi kebenaran kepada pemasangan mikrofon. Sila benarkan pemasangan mikrofon dan cuba lagi sekali atau muat turun",
     "not-supported": "Nampaknya web anda tidak menyokong mikrofon. Sila cuba web lain atau muat turun",
-    "suggest": "Mulakan bacaan anda, ayat daripada surah itu akan muncul dan dipaparkan",
+    "suggest": "Mulakan bacaan anda, ayat pilihan itu akan muncul",
     "suggest-subtitle": "Bacalah mana-mana ayat dalam bahasa Arab dan ayat itu akan muncul",
-    "suggest-title": "Bacalah sekarang",
+    "suggest-title": "Mula bacaan anda",
     "voice-search-powered-by": "Enjin carian suara dihasilkan oleh"
   },
-  "wbw": "Perkataan demi perkataan",
+  "wbw": "Per kata",
   "wbw-lang-summary": "Sumber terjemahan per kata: <link> {{source}} <\/link> . Sumber ini bebas daripada pilihan terjemahan ayat.",
-  "wbw-trans-lang": "Bahasa bagi Perkataan Demi Perkataan",
+  "wbw-trans-lang": "Bahasa per kata",
   "wbw-translation": "Terjemahan Per Kata",
   "wbw-transliteration": "Transliterasi Per Kata",
   "word-click": {
@@ -400,6 +400,6 @@
     "play-audio": "Mainkan Audio",
     "title": "Klik Perkataan"
   },
-  "word-tooltip": "Kata-kata nasihat",
+  "word-tooltip": "Word Tooltip",
   "yes": "Ya"
 }
