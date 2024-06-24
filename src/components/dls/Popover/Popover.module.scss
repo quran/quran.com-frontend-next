@@ -16,10 +16,10 @@
   padding-block-end: var(--spacing-xsmall);
   padding-inline-start: var(--spacing-xsmall);
   padding-inline-end: var(--spacing-xsmall);
-  background-color: var(--color-background-default);
+  background-color: var(--color-background-alternative-faint);
   box-shadow: var(--shadow-normal);
   & > span {
-    fill: var(--color-background-default);
+    fill: var(--color-background-alternative-faint);
   }
 }
 
