@@ -105,7 +105,8 @@ const ReadingPreferenceSwitcher: React.FC<Props> = ({
       className={classNames(styles.container, {
         [styles.surahHeaderContainer]: type === ReadingPreferenceSwitcherType.SurahHeader,
         [styles.contextMenuContainer]: type === ReadingPreferenceSwitcherType.ContextMenu,
-        [styles.tajweedMushaf]: mushaf === Mushaf.QCFTajweedV4,
+        [styles.tajweedMushaf]:
+          mushaf === Mushaf.QCFTajweedV4 && type === ReadingPreferenceSwitcherType.SurahHeader,
       })}
       id="reading-preference-switcher"
     >
