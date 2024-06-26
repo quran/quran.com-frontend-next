@@ -74,7 +74,7 @@ const TajweedColors = () => {
       >
         <p>{t('tajweed-colors')}</p>
         <span
-          className={classNames({
+          className={classNames(styles.chevronIconContainer, {
             [styles.rotate180]: showTajweedBar,
             [styles.rotate]: !showTajweedBar,
           })}
