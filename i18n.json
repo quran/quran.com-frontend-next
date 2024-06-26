@@ -51,7 +51,6 @@
     "/privacy": ["privacy"],
     "/rub/[rubId]": ["quran-reader", "reading-goal", "notes"],
     "/support": ["support"],
-    "/tajweed-colors": ["tajweed"],
     "/product-updates": ["product-updates"],
     "/product-updates/[id]": ["product-updates"],
     "/apps": ["apps"],

@@ -20,7 +20,7 @@ const TajweedFontPalettes: React.FC<Props> = ({ quranFont, pageNumber }) => {
       {`
 @font-palette-values --Sepia {
   font-family: '${fontFamily}';
-    base-palette: 0;
+    base-palette: 2;
 }
 
 @font-palette-values --Dark {
@@ -30,7 +30,7 @@ const TajweedFontPalettes: React.FC<Props> = ({ quranFont, pageNumber }) => {
 
 @font-palette-values --Light {
     font-family: '${fontFamily}';
-    base-palette: 2;
+    base-palette: 0;
 }
         `}
     </style>

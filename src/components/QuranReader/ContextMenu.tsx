@@ -10,9 +10,11 @@ import styles from './ContextMenu.module.scss';
 import ReadingPreferenceSwitcher, {
   ReadingPreferenceSwitcherType,
 } from './ReadingPreferenceSwitcher';
+import TajweedColors from './TajweedBar/TajweedBar';
 
 import { useOnboarding } from '@/components/Onboarding/OnboardingProvider';
 import { SwitchSize } from '@/dls/Switch/Switch';
+import useGetMushaf from '@/hooks/useGetMushaf';
 import ChevronDownIcon from '@/icons/chevron-down.svg';
 import { selectNavbar } from '@/redux/slices/navbar';
 import { selectContextMenu } from '@/redux/slices/QuranReader/contextMenu';
@@ -22,6 +24,7 @@ import {
   selectIsSidebarNavigationVisible,
   setIsVisible,
 } from '@/redux/slices/QuranReader/sidebarNavigation';
+import { Mushaf } from '@/types/QuranReader';
 import { getChapterData, getChapterReadingProgress } from '@/utils/chapter';
 import { logEvent } from '@/utils/eventLogger';
 import { getJuzNumberByHizb } from '@/utils/juz';
@@ -35,6 +38,7 @@ const ContextMenu = () => {
   const chaptersData = useContext(DataContext);
   const isSidebarNavigationVisible = useSelector(selectIsSidebarNavigationVisible);
   const { t, lang } = useTranslation('common');
+  const mushaf = useGetMushaf();
   const isSideBarVisible = useSelector(selectNotes, shallowEqual).isVisible;
   const { isExpanded, showReadingPreferenceSwitcher: isReadingPreferenceSwitcherVisible } =
     useSelector(selectContextMenu, shallowEqual);
@@ -141,6 +145,7 @@ const ContextMenu = () => {
           </div>
         </div>
       </div>
+      {mushaf === Mushaf.QCFTajweedV4 && <TajweedColors />}
     </div>
   );
 };

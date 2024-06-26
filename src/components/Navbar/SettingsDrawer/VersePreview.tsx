@@ -6,6 +6,7 @@ import useSWR from 'swr';
 import styles from './VersePreview.module.scss';
 
 import PlainVerseText from '@/components/Verse/PlainVerseText';
+import TajweedFontPalettes from '@/components/Verse/TajweedFontPalettes';
 import Skeleton from '@/dls/Skeleton/Skeleton';
 import useThemeDetector from '@/hooks/useThemeDetector';
 import { addLoadedFontFace } from '@/redux/slices/QuranReader/font-faces';
@@ -63,6 +64,10 @@ const VersePreview = () => {
 
   return (
     <div dir="rtl">
+      <TajweedFontPalettes
+        pageNumber={sampleVerse.pageNumber}
+        quranFont={quranReaderStyles.quranFont}
+      />
       <PlainVerseText words={sampleVerse.words as Word[]} />
     </div>
   );
