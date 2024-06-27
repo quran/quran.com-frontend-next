@@ -18,11 +18,16 @@ const usePreventBodyScrolling = (shouldDisableScrolling = false) => {
     }
     // Save the initial body style
     const originalOverflow = document.body.style.overflow;
-    // disable body scrolling bt setting overflow to hidden on the body
+    const originalWidth = document.body.style.width;
+
+    // leave space for the scrollbar to avoid causing a layout shift
+    document.body.style.width = 'calc(100% - var(--scrollbar-width))';
+    // disable body scrolling by setting overflow to hidden on the body
     document.body.style.overflow = 'hidden';
     return () => {
-      // revert it back
+      // revert them back
       document.body.style.overflow = originalOverflow;
+      document.body.style.width = originalWidth;
     };
   }, [shouldDisableScrolling]);
 };

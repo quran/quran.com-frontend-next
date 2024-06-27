@@ -164,7 +164,7 @@ const config = {
     ];
   },
 };
-
+/* eslint-disable max-lines */
 module.exports = withPlugins(
   [withBundleAnalyzer, withPWA, withFonts, nextTranslate, withSentryConfig],
   config,

@@ -1,6 +1,7 @@
 import { memo } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
+import { createPortal } from 'react-dom';
 import { useDispatch } from 'react-redux';
 
 import LanguageSelector from '../LanguageSelector';
@@ -51,6 +52,8 @@ const NavbarBody: React.FC = () => {
     dispatch({ type: setIsSettingsDrawerOpen.type, payload: true });
   };
 
+  const isClient = typeof document !== 'undefined';
+
   return (
     <div className={styles.itemsContainer}>
       <div className={styles.centerVertically}>
@@ -85,7 +88,7 @@ const NavbarBody: React.FC = () => {
             >
               <IconSettings />
             </Button>
-            <SettingsDrawer />
+            {isClient && createPortal(<SettingsDrawer />, document.body)}
           </>
           <>
             <Button
@@ -98,7 +101,7 @@ const NavbarBody: React.FC = () => {
             >
               <IconSearch />
             </Button>
-            <SearchDrawer />
+            {isClient && createPortal(<SearchDrawer />, document.body)}
           </>
         </div>
       </div>

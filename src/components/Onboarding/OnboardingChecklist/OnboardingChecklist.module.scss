@@ -1,5 +1,15 @@
 @use "src/styles/breakpoints";
 
+body[data-scroll-locked] {
+  .checklistPosition {
+    margin-right: var(--scrollbar-width);
+  }
+}
+
+.marginRight {
+  margin-right: var(--scrollbar-width);
+}
+
 .checklistPosition {
   position: fixed;
   inset-block-end: var(--spacing-medium);
