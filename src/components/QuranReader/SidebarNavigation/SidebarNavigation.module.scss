@@ -3,7 +3,7 @@
 @use "src/styles/theme";
 
 $sections-menu-height: 2.25rem;
-$progress-bar-height: var(--spacing-micro);
+$progress-bar-height: calc(var(--spacing-micro) * 2);
 $top-menu-height: calc($sections-menu-height + var(--navbar-container-height) + $progress-bar-height);
 $context-menu-height: calc($sections-menu-height + $progress-bar-height);
 
