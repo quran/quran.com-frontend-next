@@ -1,0 +1,44 @@
+{
+  "no-bookmarks": "Nie masz jeszcze żadnych zakładek",
+  "noble-quran": "Szlachetny Koran",
+  "qgj": {
+    "desc": {
+      "logged-in-no-goal": "<bold>Serie Czytania</bold> — Podejmij wyzwanie, aby utrzymać serię 30 dni w ten Ramadan!",
+      "logged-out": "<bold>Serie Czytania</bold> — Podejmij wyzwanie, aby utrzymać serię 30 dni w ten Ramadan! Po prostu <link>zaloguj się</link>"
+    },
+    "learning-plans": {
+      "cta": {
+        "all-plans": "Wszystkie Plany",
+        "my-plans": "Moje Plany"
+      },
+      "desc": {
+        "logged-in": "Czy zdarzyło Ci się kiedyś rozpocząć program nauczania i w połowie odpuścić? Nasze plany nauczania podzielone są na wygodne do zarządzania fragmenty i będziemy śledzić Twoje postępy, aż dotrzesz do mety. Już dziś zapoznaj się z naszą aktualną ofertą kursów",
+        "logged-in-no-plans": "Czy zdarzyło Ci się kiedyś rozpocząć program nauczania i w połowie odpuścić? Nasze plany nauczania podzielone są na wygodne do zarządzania fragmenty i będziemy śledzić Twoje postępy, aż dotrzesz do mety. Już dziś zapoznaj się z naszą aktualną ofertą kursów",
+        "logged-out": "Czy zdarzyło Ci się kiedyś rozpocząć program nauczania i w połowie odpuścić? Nasze plany nauczania podzielone są na wygodne do zarządzania fragmenty i będziemy śledzić Twoje postępy, aż dotrzesz do mety. Już dziś zapoznaj się z naszą aktualną ofertą kursów"
+      },
+      "title": "Plany Nauczania"
+    },
+    "quran-reading-goals": {
+      "desc": {
+        "logged-out": "Chcesz czytać 10 minut dziennie, ukończyć Dżuz w miesiąc lub ukończyć cały Koran w rok? Po prostu stwórz swój osobisty cel i śledź swoje postępy"
+      },
+      "title": "Osobiste Cele Czytania Koranu"
+    },
+    "title": "Droga Rozwoju z Koranem"
+  },
+  "ramadan-activities-cta": "Poznaj wartościowe <link>Aktywności Ramadanowe</link> z tego roku już dziś!",
+  "read-juz": "Czytaj Dżuz",
+  "recently-read": "Ostatnio czytane",
+  "revelation-order-disclaimer": "Ten widok pokazuje Sury z Koranu w kolejności chronologicznej, zgodnie z datą ich objawienia Prorokowi Muhammadowi <hover>ﷺ</hover>. Chronologiczny porządek Sur jest przedmiotem różnicy opinii uczonych, a niektóre Sury zostały objawione w częściach i w różnym czasie. Kolejność chronologiczna przedstawiona tutaj jest oparta o pracę <link>Tanzil.net</link> [Pamiętaj: kolejność Sur w Mushafie czyli od al-Fatiha do al-Nas, jest kwestią konsensusu uczonych].",
+  "tab": {
+    "bookmarks": "Zakładki",
+    "popular": "Popularne"
+  },
+  "view-all-bookmarks": "Zobacz wszystkie zakładki",
+  "voice": {
+    "trigger": "Szybki dostęp do czegokolwiek"
+  },
+  "welcome": {
+    "title": "To jest miesiąc Koranu! Pomóż milionom użytkowników uzyskać dostęp do lekcji życia zawartych w Koranie."
+  }
+}

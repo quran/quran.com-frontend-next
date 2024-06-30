@@ -1,0 +1,24 @@
+{
+    "all-saved-verses": "Wszystkie zapisane wersety",
+    "alphabetical": "A-Z",
+    "back-to-collection-list": "Powrót do listy kolekcji",
+    "collapse-all": "Zwiń wszystkie wersety",
+    "collection-list-empty": "Lista kolekcji pusta. Nie stworzyłeś jeszcze żadnych kolekcji",
+    "collections": "Kolekcje",
+    "delete": "Usuń",
+    "delete-bookmark": {
+        "subtitle": "Czy jesteś pewien, że chcesz usunąć {{bookmarkName}} z kolekcji {{collectionName}}?",
+        "title": "Usuń zakładkę"
+    },
+    "delete-collection": {
+        "subtitle": "Czy jesteś pewien, że chcesz usunąć kolekcję {{collectionName}}?",
+        "title": "Usuń kolekcję"
+    },
+    "empty": "Kolekcja pusta",
+    "expand-all": "Rozwiń wszystkie wersety",
+    "go-to-ayah": "Idź do wersetu",
+    "load-more": "Załaduj więcej",
+    "recently-added": "Ostatnio dodane",
+    "recently-updated": "Ostatnio zaktualizowane",
+    "verse-key": "Rozdział i numer Wersetu"
+}
