@@ -1,5 +1,5 @@
 /* eslint-disable react/no-multi-comp */
-import React from 'react';
+import React, { useState } from 'react';
 
 import classNames from 'classnames';
 import dynamic from 'next/dynamic';
@@ -35,6 +35,15 @@ const OverflowVerseActionsMenu: React.FC<Props> = ({
   bookmarksRangeUrl,
 }) => {
   const { t } = useTranslation('common');
+  const [isPopoverOpen, setIsPopoverOpen] = useState(false);
+
+  const closePopover = () => {
+    setIsPopoverOpen(false);
+    if (onActionTriggered) {
+      onActionTriggered();
+    }
+  };
+
   return (
     <div className={styles.container}>
       <PopoverMenu
@@ -60,8 +69,10 @@ const OverflowVerseActionsMenu: React.FC<Props> = ({
           </Button>
         }
         isModal
+        isOpen={isPopoverOpen}
         isPortalled
         onOpenChange={(open: boolean) => {
+          setIsPopoverOpen(open);
           logEvent(
             `${isTranslationView ? 'translation_view' : 'reading_view'}_verse_actions_menu_${
               open ? 'open' : 'close'
@@ -72,7 +83,7 @@ const OverflowVerseActionsMenu: React.FC<Props> = ({
         <OverflowVerseActionsMenuBody
           verse={verse}
           isTranslationView={isTranslationView}
-          onActionTriggered={onActionTriggered}
+          onActionTriggered={closePopover}
           bookmarksRangeUrl={bookmarksRangeUrl}
         />
       </PopoverMenu>
