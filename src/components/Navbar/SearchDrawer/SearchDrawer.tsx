@@ -1,5 +1,7 @@
+/* eslint-disable react-func/max-lines-per-function */
+/* eslint-disable max-lines */
 /* eslint-disable react/no-multi-comp */
-import React, { useEffect, useState, RefObject } from 'react';
+import React, { RefObject, useCallback, useEffect, useRef, useState } from 'react';
 
 import dynamic from 'next/dynamic';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
@@ -12,12 +14,18 @@ import useDebounce from '@/hooks/useDebounce';
 import useFocus from '@/hooks/useFocusElement';
 import { selectNavbar } from '@/redux/slices/navbar';
 import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
-import { addSearchHistoryRecord } from '@/redux/slices/Search/search';
 import { selectIsSearchDrawerVoiceFlowStarted } from '@/redux/slices/voiceSearch';
+import { SearchMode } from '@/types/Search/SearchRequestParams';
+import SearchService from '@/types/Search/SearchService';
 import SearchQuerySource from '@/types/SearchQuerySource';
 import { areArraysEqual } from '@/utils/array';
-import { logButtonClick, logEmptySearchResults, logTextSearchQuery } from '@/utils/eventLogger';
-import { getSearchResults } from 'src/api';
+import {
+  logButtonClick,
+  logEmptySearchResults,
+  logSearchResults,
+  logTextSearchQuery,
+} from '@/utils/eventLogger';
+import { getNewSearchResults, getSearchResults } from 'src/api';
 import { SearchResponse } from 'types/ApiResponses';
 
 const SearchBodyContainer = dynamic(() => import('@/components/Search/SearchBodyContainer'), {
@@ -32,11 +40,13 @@ const VoiceSearchBodyContainer = dynamic(
   },
 );
 
+const PAGE_SIZE = 10;
 const DEBOUNCING_PERIOD_MS = 1000;
 
 const SearchDrawer: React.FC = () => {
   const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
   const [focusInput, searchInputRef]: [() => void, RefObject<HTMLInputElement>] = useFocus();
+  const [currentPage, setCurrentPage] = useState<number>(1);
   const [searchQuery, setSearchQuery] = useState<string>('');
   const isOpen = useSelector(selectNavbar, shallowEqual).isSearchDrawerOpen;
   const dispatch = useDispatch();
@@ -53,32 +63,68 @@ const SearchDrawer: React.FC = () => {
     }
   }, [isOpen, focusInput]);
 
-  // This useEffect is triggered when the debouncedSearchQuery value changes
-  // eslint-disable-next-line react-func/max-lines-per-function
-  useEffect(() => {
-    // only when the search query has a value we call the API.
-    if (debouncedSearchQuery) {
-      dispatch({ type: addSearchHistoryRecord.type, payload: debouncedSearchQuery });
-      logTextSearchQuery(debouncedSearchQuery, SearchQuerySource.SearchDrawer);
+  /**
+   * Call BE to fetch the results using the passed filters.
+   *
+   * @param {string} query
+   * @param {number} page
+   * @param {string} language
+   */
+  const getResults = useCallback(
+    (query: string, page: number) => {
       setIsSearching(true);
+      logTextSearchQuery(query, SearchQuerySource.SearchPage);
       getSearchResults({
-        query: debouncedSearchQuery,
-        ...(selectedTranslations &&
-          !!selectedTranslations.length && {
-            filterTranslations: selectedTranslations.join(','),
-          }),
+        query,
+        size: PAGE_SIZE,
+        page,
+        ...(!!selectedTranslations?.length && {
+          filterTranslations: selectedTranslations.join(','),
+        }), // translations will be included only when there is a selected translation
       })
-        .then((response) => {
+        .then(async (response) => {
           if (response.status === 500) {
             setHasError(true);
           } else {
-            setSearchResult(response);
+            setSearchResult({ ...response, service: SearchService.QDC });
+            const noQdcResults =
+              response.pagination.totalRecords === 0 && !response.result.navigation.length;
             // if there is no navigations nor verses in the response
-            if (response.pagination.totalRecords === 0 && !response.result.navigation.length) {
+            if (noQdcResults) {
               logEmptySearchResults({
-                query: debouncedSearchQuery,
-                source: SearchQuerySource.SearchDrawer,
+                query,
+                source: SearchQuerySource.SearchPage,
+                service: SearchService.QDC,
               });
+              const kalimatResponse = await getNewSearchResults({
+                mode: SearchMode.Advanced,
+                query,
+                size: PAGE_SIZE,
+                page,
+                exactMatchesOnly: 0,
+                // translations will be included only when there is a selected translation
+                ...(!!selectedTranslations?.length && {
+                  filterTranslations: selectedTranslations.join(','),
+                  translationFields: 'resource_name',
+                }), // translations will be included only when there is a selected translation
+              });
+              setSearchResult({
+                ...kalimatResponse,
+                service: SearchService.KALIMAT,
+              });
+              if (kalimatResponse.pagination.totalRecords === 0) {
+                logEmptySearchResults({
+                  query,
+                  source: SearchQuerySource.SearchPage,
+                  service: SearchService.KALIMAT,
+                });
+              } else {
+                logSearchResults({
+                  query,
+                  source: SearchQuerySource.SearchPage,
+                  service: SearchService.KALIMAT,
+                });
+              }
             }
           }
         })
@@ -88,11 +134,34 @@ const SearchDrawer: React.FC = () => {
         .finally(() => {
           setIsSearching(false);
         });
-    } else {
-      // reset the result
-      setSearchResult(null);
+    },
+    [selectedTranslations],
+  );
+
+  // a ref to know whether this is the initial search request made when the user loads the page or not
+  const isInitialSearch = useRef(true);
+
+  // This useEffect is triggered when the debouncedSearchQuery value changes
+  useEffect(() => {
+    // only when the search query has a value we call the API.
+    if (debouncedSearchQuery) {
+      // we don't want to reset pagination when the user reloads the page with a ?page={number} in the url query
+      if (!isInitialSearch.current) {
+        setCurrentPage(1);
+      }
+
+      getResults(
+        debouncedSearchQuery,
+        // if it is the initial search request, use the page number in the url, otherwise, reset it
+        isInitialSearch.current ? currentPage : 1,
+      );
+
+      // if it was the initial request, update the ref
+      if (isInitialSearch.current) {
+        isInitialSearch.current = false;
+      }
     }
-  }, [debouncedSearchQuery, selectedTranslations, dispatch]);
+  }, [debouncedSearchQuery, selectedTranslations, dispatch, currentPage, getResults]);
 
   const resetQueryAndResults = () => {
     logButtonClick('search_drawer_clear_input');
