@@ -91,7 +91,7 @@ const OverflowAudioPlayerActionsMenu = () => {
         onOpenChange={onOpenChange}
         contentClassName={styles.overriddenPopoverMenuContentPositioning}
       >
-        <OverflowAudioPlayActionsMenuBody />
+        <OverflowAudioPlayActionsMenuBody setOpen={setOpen} />
       </PopoverMenu>
     </div>
   );
