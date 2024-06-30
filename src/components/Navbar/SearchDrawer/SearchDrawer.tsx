@@ -74,7 +74,7 @@ const SearchDrawer: React.FC = () => {
   const getResults = useCallback(
     (query: string, page: number) => {
       setIsSearching(true);
-      logTextSearchQuery(query, SearchQuerySource.SearchPage);
+      logTextSearchQuery(query, SearchQuerySource.SearchDrawer);
       getSearchResults({
         query,
         size: PAGE_SIZE,
@@ -94,7 +94,7 @@ const SearchDrawer: React.FC = () => {
             if (noQdcResults) {
               logEmptySearchResults({
                 query,
-                source: SearchQuerySource.SearchPage,
+                source: SearchQuerySource.SearchDrawer,
                 service: SearchService.QDC,
               });
               const kalimatResponse = await getNewSearchResults({
@@ -116,13 +116,13 @@ const SearchDrawer: React.FC = () => {
               if (kalimatResponse.pagination.totalRecords === 0) {
                 logEmptySearchResults({
                   query,
-                  source: SearchQuerySource.SearchPage,
+                  source: SearchQuerySource.SearchDrawer,
                   service: SearchService.KALIMAT,
                 });
               } else {
                 logSearchResults({
                   query,
-                  source: SearchQuerySource.SearchPage,
+                  source: SearchQuerySource.SearchDrawer,
                   service: SearchService.KALIMAT,
                 });
               }
