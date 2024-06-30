@@ -1,18 +1,19 @@
 /* eslint-disable react-func/max-lines-per-function */
 /* eslint-disable max-lines */
-import React, { useState, useEffect, useMemo, useCallback, useRef, RefObject } from 'react';
+import { RefObject, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import { GetStaticProps, NextPage } from 'next';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
+import { useDispatch } from 'react-redux';
 
 import styles from './search.module.scss';
 
 import {
   getAvailableLanguages,
   getAvailableTranslations,
-  getSearchResults,
   getNewSearchResults,
+  getSearchResults,
 } from '@/api';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import TranslationsFilter from '@/components/Search/Filters/TranslationsFilter';
@@ -25,6 +26,7 @@ import useDebounce from '@/hooks/useDebounce';
 import useFocus from '@/hooks/useFocusElement';
 import FilterIcon from '@/icons/filter.svg';
 import SearchIcon from '@/icons/search.svg';
+import { addSearchHistoryRecord } from '@/redux/slices/Search/search';
 import { SearchMode } from '@/types/Search/SearchRequestParams';
 import SearchService from '@/types/Search/SearchService';
 import SearchQuerySource from '@/types/SearchQuerySource';
@@ -72,6 +74,7 @@ const Search: NextPage<SearchProps> = ({ translations }): JSX.Element => {
   const [searchResult, setSearchResult] = useState<SearchResponse>(null);
   // Debounce search query to avoid having to call the API on every type. The API will be called once the user stops typing.
   const debouncedSearchQuery = useDebounce<string>(searchQuery, DEBOUNCING_PERIOD_MS);
+  const dispatch = useDispatch();
   // the query params that we want added to the url
   const queryParams = useMemo(
     () => ({
@@ -228,6 +231,9 @@ const Search: NextPage<SearchProps> = ({ translations }): JSX.Element => {
       if (!isInitialSearch.current) {
         setCurrentPage(1);
       }
+
+      dispatch({ type: addSearchHistoryRecord.type, payload: debouncedSearchQuery });
+      logTextSearchQuery(debouncedSearchQuery, SearchQuerySource.SearchPage);
 
       getResults(
         debouncedSearchQuery,

@@ -14,6 +14,7 @@ import useDebounce from '@/hooks/useDebounce';
 import useFocus from '@/hooks/useFocusElement';
 import { selectNavbar } from '@/redux/slices/navbar';
 import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
+import { addSearchHistoryRecord } from '@/redux/slices/Search/search';
 import { selectIsSearchDrawerVoiceFlowStarted } from '@/redux/slices/voiceSearch';
 import { SearchMode } from '@/types/Search/SearchRequestParams';
 import SearchService from '@/types/Search/SearchService';
@@ -149,6 +150,9 @@ const SearchDrawer: React.FC = () => {
       if (!isInitialSearch.current) {
         setCurrentPage(1);
       }
+
+      dispatch({ type: addSearchHistoryRecord.type, payload: debouncedSearchQuery });
+      logTextSearchQuery(debouncedSearchQuery, SearchQuerySource.SearchDrawer);
 
       getResults(
         debouncedSearchQuery,
