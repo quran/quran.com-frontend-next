@@ -52,8 +52,10 @@ const ThemeSection = () => {
   const onThemeSelected = async (value: ThemeType) => {
     logValueChange('theme', theme.type, value);
     onSettingsChange('type', value, setTheme(value), setTheme(theme.type), PreferenceGroup.THEME);
-    // reset the loaded Fonts when we switch the theme
-    dispatch(resetLoadedFontFaces());
+    if (value !== theme.type) {
+      // reset the loaded Fonts when we switch to a different theme
+      dispatch(resetLoadedFontFaces());
+    }
   };
 
   return (
