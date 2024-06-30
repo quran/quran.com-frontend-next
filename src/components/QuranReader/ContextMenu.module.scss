@@ -23,7 +23,6 @@ $sections-container-height: 2.25rem;
     transition: var(--transition-fast);
     transition-timing-function: linear;
     height: var(--spacing-micro);
-    margin-top: var(--spacing-micro);
     background: var(--color-success-deep);
     inset-block-end: calc(-1 * var(--spacing-micro));
   }

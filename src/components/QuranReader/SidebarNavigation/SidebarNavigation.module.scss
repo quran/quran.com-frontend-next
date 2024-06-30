@@ -3,7 +3,7 @@
 @use "src/styles/theme";
 
 $sections-menu-height: 2.25rem;
-$progress-bar-height: calc(var(--spacing-micro) * 2);
+$progress-bar-height: var(--spacing-micro);
 $top-menu-height: calc($sections-menu-height + var(--navbar-container-height) + $progress-bar-height);
 $context-menu-height: calc($sections-menu-height + $progress-bar-height);
 
@@ -48,6 +48,7 @@ $context-menu-height: calc($sections-menu-height + $progress-bar-height);
   display: flex;
   flex-direction: column;
   overflow-y: hidden;
+  margin-top: -1px;
 }
 
 .inVisibleContainer {

@@ -66,14 +66,17 @@ const SidebarNavigation = () => {
     },
   ];
 
+  const isSidebarAuto = isSidebarVisible === 'auto';
+  const showSidebar = isSidebarVisible === true;
+
   return (
     <div
       ref={sidebarRef}
       className={classNames(styles.container, {
-        [styles.visibleContainer]: isSidebarVisible === true && isNavbarVisible,
-        [styles.visibleContainerCollapsed]: isSidebarVisible === true && !isNavbarVisible,
-        [styles.containerAuto]: isSidebarVisible === 'auto' && isNavbarVisible,
-        [styles.containerAutoCollapsed]: isSidebarVisible === 'auto' && !isNavbarVisible,
+        [styles.visibleContainer]: showSidebar && isNavbarVisible,
+        [styles.visibleContainerCollapsed]: showSidebar && !isNavbarVisible,
+        [styles.containerAuto]: isSidebarAuto && isNavbarVisible,
+        [styles.containerAutoCollapsed]: isSidebarAuto && !isNavbarVisible,
         [styles.inVisibleContainer]: isNavbarVisible,
         [styles.inVisibleContainerCollapsed]: !isNavbarVisible,
         [styles.spaceOnTop]: isSidebarVisible && isNavbarVisible,
