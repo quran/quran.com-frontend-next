@@ -48,13 +48,7 @@ const TajweedColors = () => {
         transform: `translateY(${showTajweedBar ? 0 : -height}px)`,
       }}
     >
-      <div
-        ref={ref}
-        className={classNames(styles.tajweedContainer, {
-          [styles.colorsBarVisible]: showTajweedBar,
-          [styles.colorsBarInvisible]: !showTajweedBar,
-        })}
-      >
+      <div ref={ref} className={classNames(styles.tajweedContainer)}>
         <div className={styles.colorsContainer}>
           {TAJWEED_COLORS.map((color) => (
             <div className={styles.colorContainer} key={color}>

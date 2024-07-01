@@ -4,18 +4,26 @@
 
 $sections-menu-height: 2.25rem;
 $progress-bar-height: var(--spacing-micro);
+$top-menu-height: calc($sections-menu-height + var(--navbar-container-height) + $progress-bar-height);
+$context-menu-height: calc($sections-menu-height + $progress-bar-height);
+$container-margin-top: 1px;
 
 @mixin sidebarVisible {
   z-index: var(--z-index-sticky);
   transform: translateX(0%);
+}
+
+@mixin sidebarInvisibleExpanded {
+  transform: translateX(-100%) translateY(calc($top-menu-height));
   [dir="rtl"] & {
-    transform: translateX(0%); // need to duplicate for specificity
+    transform: translateX(100%) translateY(calc($top-menu-height));
   }
 }
-@mixin sidebarInvisible {
-  transform: translateX(-100%);
+
+@mixin sidebarInvisibleCollapsed {
+  transform: translateX(-100%) translateY(calc($context-menu-height));
   [dir="rtl"] & {
-    transform: translateX(100%);
+    transform: translateX(100%) translateY(calc($context-menu-height));
   }
 }
 
@@ -41,15 +49,46 @@ $progress-bar-height: var(--spacing-micro);
   display: flex;
   flex-direction: column;
   overflow-y: hidden;
-  @include sidebarInvisible();
+  margin-top: calc(-1 * $container-margin-top);
+}
+
+.inVisibleContainer {
+  @include sidebarInvisibleExpanded();
+}
+
+.inVisibleContainerCollapsed {
+  @include sidebarInvisibleCollapsed();
 }
 
 .visibleContainer {
   @include sidebarVisible();
+  [dir="rtl"] & {
+    transform: translateX(0%) translateY(calc($top-menu-height));
+  }
 }
+
+.visibleContainerCollapsed {
+  @include sidebarVisible();
+  [dir="rtl"] & {
+    transform: translateX(0%) translateY(calc($context-menu-height));
+  }
+}
+
 .containerAuto {
   @include breakpoints.tablet {
     @include sidebarVisible();
+    [dir="rtl"] & {
+      transform: translateX(0%) translateY(calc($top-menu-height));
+    }
+  }
+}
+
+.containerAutoCollapsed {
+  @include breakpoints.tablet {
+    @include sidebarVisible();
+    [dir="rtl"] & {
+      transform: translateX(0%) translateY(calc($context-menu-height));
+    }
   }
 }
 
@@ -140,14 +179,12 @@ $progress-bar-height: var(--spacing-micro);
   }
 }
 
-.spaceOnTopMenuExpanded {
-  transition: var(--transition-regular);
-  margin-block-start: calc($sections-menu-height + var(--navbar-container-height) + $progress-bar-height);
+.spaceOnTop {
+  transform: translateY($top-menu-height);
 }
 
-.spaceOnTopMenuCollapse {
-  transition: var(--transition-regular);
-  margin-block-start: calc($sections-menu-height + $progress-bar-height);
+.spaceOnTopCollapsed {
+  transform: translateY($context-menu-height);
 }
 
 .chapterNumber {
