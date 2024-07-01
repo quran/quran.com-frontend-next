@@ -9,7 +9,6 @@ import styles from './SearchBodyContainer.module.scss';
 
 import SearchResults from '@/components/Search/SearchResults';
 import Spinner, { SpinnerSize } from '@/dls/Spinner/Spinner';
-import { getSearchQueryNavigationUrl } from '@/utils/navigation';
 import { SearchResponse } from 'types/ApiResponses';
 
 interface Props {
@@ -38,7 +37,6 @@ const SearchBodyContainer: React.FC<Props> = ({
   onPageChange,
 }) => {
   const { t } = useTranslation('common');
-  const searchUrl = getSearchQueryNavigationUrl(searchQuery);
   const isEmptyResponse =
     searchResult &&
     searchResult.pagination.totalRecords === 0 &&
