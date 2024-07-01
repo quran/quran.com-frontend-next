@@ -63,11 +63,7 @@ const SearchBodyContainer: React.FC<Props> = ({
               {!hasError && searchResult && (
                 <>
                   {isEmptyResponse ? (
-                    <NoResults
-                      searchQuery={searchQuery}
-                      searchUrl={searchUrl}
-                      isSearchDrawer={isSearchDrawer}
-                    />
+                    <NoResults searchQuery={searchQuery} />
                   ) : (
                     <SearchResults
                       onSearchResultClicked={onSearchResultClicked}

@@ -7,9 +7,7 @@ import styles from './NoResults.module.scss';
 import IconSearch from '@/icons/search.svg';
 
 interface Props {
-  searchUrl?: string;
   searchQuery: string;
-  isSearchDrawer: boolean;
 }
 
 const NoResults: React.FC<Props> = ({ searchQuery }) => {
