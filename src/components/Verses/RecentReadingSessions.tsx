@@ -60,7 +60,6 @@ const RecentReadingSessions = () => {
                     Number(verseNumber),
                     lang,
                   )}`}
-                  verseCount={surah.versesCount}
                 />
               </Link>
             </div>

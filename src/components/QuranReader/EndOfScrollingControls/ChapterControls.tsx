@@ -12,10 +12,8 @@ import { isFirstSurah, isLastSurah } from '@/utils/chapter';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getNextSurahNavigationUrl, getPreviousSurahNavigationUrl } from '@/utils/navigation';
 import { VersesResponse } from 'types/ApiResponses';
-import Verse from 'types/Verse';
 
 interface Props {
-  lastVerse: Verse;
   initialData: VersesResponse;
 }
 

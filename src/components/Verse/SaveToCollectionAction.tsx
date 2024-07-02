@@ -216,7 +216,6 @@ const SaveToCollectionAction = ({ verse, bookmarksRangeUrl, isTranslationView })
           onCollectionToggled={onCollectionToggled}
           onNewCollectionCreated={onNewCollectionCreated}
           onClose={closeModal}
-          isAddingNewCollection
           collections={collections}
           verseKey={`${verse.chapterId}:${verse.verseNumber}`}
         />

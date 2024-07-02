@@ -32,7 +32,6 @@ const SearchQuerySuggestion: React.FC<Props> = ({
       <SearchItem
         title={searchQuery}
         prefix={<SearchIcon />}
-        url="/"
         onClick={() => onSearchKeywordClicked(searchQuery)}
         suffix={
           onRemoveSearchQueryClicked && (

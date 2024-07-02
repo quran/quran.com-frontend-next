@@ -26,7 +26,6 @@ const QuranicCalendarMonth: React.FC<Props> = ({ monthWeeks, currentQuranicCalen
             key={ranges}
             isCurrentWeek={currentQuranicCalendarWeek === Number(weekNumber)}
             weekNumber={Number(weekNumber)}
-            currentQuranicCalendarWeek={currentQuranicCalendarWeek}
             localizedMonth={localizedMonth}
             ranges={ranges}
           />
