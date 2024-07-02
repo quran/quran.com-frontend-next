@@ -164,11 +164,12 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "lint-staged --max-warnings=0"
     }
   },
   "lint-staged": {
     "*.{tsx,ts}": "yarn lint:fix",
-    "*.scss": "yarn lint:scss"
+    "*.scss": "yarn lint:scss",
+    "*": "prettier --write"
   }
 }

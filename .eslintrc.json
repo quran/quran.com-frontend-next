@@ -30,10 +30,7 @@
     "react/function-component-definition": 0,
     "react/jsx-no-useless-fragment": 0,
     "react/no-unstable-nested-components": 0,
-    "react/boolean-prop-naming": [
-      "error",
-      { "rule": "^(is|has|should)[A-Z]([A-Za-z0-9]?)+" }
-    ],
+    "react/boolean-prop-naming": ["error", { "rule": "^(is|has|should)[A-Z]([A-Za-z0-9]?)+" }],
     "react/destructuring-assignment": 2,
     "react/no-children-prop": 2,
     "react/no-deprecated": 2,
@@ -153,7 +150,7 @@
         ],
         "react/forbid-prop-types": 0,
         "react/jsx-no-undef": 0,
-        "react/no-unused-prop-types": 0,
+        "react/no-unused-prop-types": 2,
         "react/prop-types": 0,
         "react/react-in-jsx-scope": 0,
         "curly": "error",
