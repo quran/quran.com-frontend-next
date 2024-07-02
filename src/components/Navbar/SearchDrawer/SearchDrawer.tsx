@@ -1,9 +1,10 @@
 /* eslint-disable react-func/max-lines-per-function */
 /* eslint-disable max-lines */
 /* eslint-disable react/no-multi-comp */
-import React, { RefObject, useCallback, useEffect, useState } from 'react';
+import React, { RefObject, useEffect, useState } from 'react';
 
 import dynamic from 'next/dynamic';
+import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import SearchDrawerHeader from './Header';
@@ -17,7 +18,6 @@ import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translati
 import { selectIsSearchDrawerVoiceFlowStarted } from '@/redux/slices/voiceSearch';
 import SearchQuerySource from '@/types/SearchQuerySource';
 import { areArraysEqual } from '@/utils/array';
-import { getLocaleCookie } from '@/utils/cookies';
 import { logButtonClick } from '@/utils/eventLogger';
 import { addToSearchHistory, searchGetResults } from '@/utils/search';
 import { SearchResponse } from 'types/ApiResponses';
@@ -39,6 +39,7 @@ const PAGE_SIZE = 10;
 const DEBOUNCING_PERIOD_MS = 1000;
 
 const SearchDrawer: React.FC = () => {
+  const { lang } = useTranslation();
   const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
   const [focusInput, searchInputRef]: [() => void, RefObject<HTMLInputElement>] = useFocus();
   const [searchQuery, setSearchQuery] = useState<string>('');
@@ -57,37 +58,23 @@ const SearchDrawer: React.FC = () => {
     }
   }, [isOpen, focusInput]);
 
-  /**
-   * Call BE to fetch the results using the passed filters.
-   *
-   * @param {string} query
-   * @param {number} page
-   */
-  const getResults = useCallback(
-    (query: string, page: number) => {
-      searchGetResults(
-        SearchQuerySource.SearchDrawer,
-        query,
-        page,
-        PAGE_SIZE,
-        setIsSearching,
-        setHasError,
-        setSearchResult,
-        getLocaleCookie(),
-        selectedTranslations?.length && selectedTranslations.join(','),
-      );
-    },
-    [selectedTranslations],
-  );
-
   useEffect(() => {
     // only when the search query has a value we call the API.
     if (debouncedSearchQuery) {
       addToSearchHistory(dispatch, debouncedSearchQuery, SearchQuerySource.SearchDrawer);
-
-      getResults(debouncedSearchQuery, FIRST_PAGE_NUMBER);
+      searchGetResults(
+        SearchQuerySource.SearchDrawer,
+        debouncedSearchQuery,
+        FIRST_PAGE_NUMBER,
+        PAGE_SIZE,
+        setIsSearching,
+        setHasError,
+        setSearchResult,
+        lang,
+        selectedTranslations?.length && selectedTranslations.join(','),
+      );
     }
-  }, [debouncedSearchQuery, selectedTranslations, dispatch, getResults]);
+  }, [debouncedSearchQuery, selectedTranslations, dispatch, lang]);
 
   const resetQueryAndResults = () => {
     logButtonClick('search_drawer_clear_input');
