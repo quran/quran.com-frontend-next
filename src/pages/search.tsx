@@ -28,8 +28,11 @@ import { logButtonClick, logEvent, logTextSearchQuery, logValueChange } from '@/
 import filterTranslations from '@/utils/filter-translations';
 import { getLanguageAlternates, toLocalizedNumber } from '@/utils/locale';
 import { getCanonicalUrl } from '@/utils/navigation';
-import { getDefaultTranslationIdsByLang } from '@/utils/search';
-import searchGetResults from '@/utils/searchGetResults';
+import {
+  addToSearchHistory,
+  getDefaultTranslationIdsByLang,
+  searchGetResults,
+} from '@/utils/search';
 import { SearchResponse } from 'types/ApiResponses';
 import AvailableLanguage from 'types/AvailableLanguage';
 import AvailableTranslation from 'types/AvailableTranslation';
@@ -168,8 +171,7 @@ const Search: NextPage<SearchProps> = ({ translations }): JSX.Element => {
         setCurrentPage(1);
       }
 
-      dispatch({ type: addSearchHistoryRecord.type, payload: debouncedSearchQuery });
-      logTextSearchQuery(debouncedSearchQuery, SearchQuerySource.SearchPage);
+      addToSearchHistory(dispatch, debouncedSearchQuery, SearchQuerySource.SearchPage);
 
       getResults(
         debouncedSearchQuery,
