@@ -6,7 +6,6 @@ $sections-menu-height: 2.25rem;
 $progress-bar-height: var(--spacing-micro);
 $top-menu-height: calc($sections-menu-height + var(--navbar-container-height) + $progress-bar-height);
 $context-menu-height: calc($sections-menu-height + $progress-bar-height);
-$container-margin-top: 1px;
 
 @mixin sidebarVisible {
   z-index: var(--z-index-sticky);
@@ -49,7 +48,6 @@ $container-margin-top: 1px;
   display: flex;
   flex-direction: column;
   overflow-y: hidden;
-  margin-top: calc(-1 * $container-margin-top);
 }
 
 .inVisibleContainer {

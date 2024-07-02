@@ -2,6 +2,7 @@
 @use "src/styles/breakpoints";
 
 $sections-container-height: 2.25rem;
+$pixel: 1px;
 
 .container {
   background: var(--color-background-default);
@@ -13,7 +14,8 @@ $sections-container-height: 2.25rem;
   z-index: var(--z-index-sticky);
   transition: transform var(--transition-regular);
   width: 100%;
-  inset-block-start: -1px;
+  inset-block-start: calc($pixel * -1);
+  padding-bottom: $pixel;
   min-height: var(--spacing-medium);
   will-change: transform;
   &:after {

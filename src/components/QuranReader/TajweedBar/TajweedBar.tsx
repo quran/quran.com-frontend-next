@@ -5,10 +5,11 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from './TajweedBar.module.scss';
 
+import useThemeDetector from '@/hooks/useThemeDetector';
 import ChevronDownIcon from '@/icons/chevron-down.svg';
 import { logEvent } from '@/utils/eventLogger';
 
-const TAJWEED_COLORS = [
+const TAJWEED_RULES = [
   'edgham',
   'mad-2',
   'mad-2-4-6',
@@ -20,11 +21,13 @@ const TAJWEED_COLORS = [
 ];
 
 const TajweedColors = () => {
-  const [showTajweedBar, setShowTajweedBar] = useState(true);
-  const [height, setHeight] = useState(0);
+  const { t } = useTranslation('quran-reader');
   const ref = useRef(null);
 
-  const { t } = useTranslation('quran-reader');
+  const [showTajweedBar, setShowTajweedBar] = useState(true);
+  const [height, setHeight] = useState(0);
+
+  const { themeVariant } = useThemeDetector();
 
   const toggle = () => {
     setShowTajweedBar((prevShowTajweedBar) => !prevShowTajweedBar);
@@ -48,12 +51,17 @@ const TajweedColors = () => {
         transform: `translateY(${showTajweedBar ? 0 : -height}px)`,
       }}
     >
-      <div ref={ref} className={classNames(styles.tajweedContainer)}>
-        <div className={styles.colorsContainer}>
-          {TAJWEED_COLORS.map((color) => (
-            <div className={styles.colorContainer} key={color}>
-              <div className={classNames(styles.circle, styles[color])} />
-              <p>{t(color)}</p>
+      <div
+        ref={ref}
+        className={classNames(styles.tajweedContainer, {
+          [styles.shadow]: showTajweedBar,
+        })}
+      >
+        <div className={styles.rulesContainer}>
+          {TAJWEED_RULES.map((rule) => (
+            <div className={styles.ruleContainer} key={rule}>
+              <div className={classNames(styles.circle, styles[`${themeVariant}-${rule}`])} />
+              <p>{t(rule)}</p>
             </div>
           ))}
         </div>
