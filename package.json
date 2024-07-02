@@ -138,7 +138,7 @@
     "eslint-plugin-sonarjs": "^0.15.0",
     "eslint-plugin-storybook": "^0.6.15",
     "eslint-plugin-unicorn": "^43.0.2",
-    "husky": "^8.0.1",
+    "husky": "^9.0.11",
     "inquirer": "^8.0.0",
     "inquirer-file-tree-selection-prompt": "^1",
     "jsdom": "^20.0.0",
@@ -168,7 +168,7 @@
     }
   },
   "lint-staged": {
-    "*.{tsx,ts}": "yarn lint",
+    "*.{tsx,ts}": "yarn lint:fix",
     "*.scss": "yarn lint:scss",
     "*": "prettier --write"
   }
