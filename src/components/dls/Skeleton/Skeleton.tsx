@@ -7,7 +7,6 @@ type SkeletonProps = {
   isRounded?: boolean;
   isSquared?: boolean;
   isActive?: boolean;
-  style?: React.CSSProperties;
   className?: string;
 };
 

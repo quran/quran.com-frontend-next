@@ -23,7 +23,6 @@ import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext'
 
 interface PlayVerseAudioProps {
   verseKey: string;
-  timestamp: number;
   isTranslationView?: boolean;
   onActionTriggered?: () => void;
 }

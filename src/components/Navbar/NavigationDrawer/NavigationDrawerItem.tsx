@@ -14,7 +14,6 @@ type NavigationDrawerItemProps = {
   isExternalLink?: boolean;
   href?: string;
   isStale?: boolean;
-  shouldFlipOnRTL?: boolean;
   onClick?: () => void;
 };
 

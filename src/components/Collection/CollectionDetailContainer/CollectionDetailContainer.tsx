@@ -138,7 +138,6 @@ const CollectionDetailContainer = ({
                 bookmarks={bookmarks}
                 sortBy={sortBy}
                 onSortByChange={onSortByChange}
-                onUpdated={onUpdated}
                 onItemDeleted={onItemDeleted}
                 isOwner={isOwner}
               />

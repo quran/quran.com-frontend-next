@@ -32,7 +32,6 @@ type CollectionDetailProps = {
   bookmarks: Bookmark[];
   sortBy: string;
   onSortByChange: (sortBy: string) => void;
-  onUpdated: () => void;
   onItemDeleted: (bookmarkId: string) => void;
 };
 
