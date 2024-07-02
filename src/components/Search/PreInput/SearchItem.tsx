@@ -7,7 +7,6 @@ import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconCont
 type SearchItemProps = {
   prefix: React.ReactNode;
   title: string;
-  url: string;
   suffix?: React.ReactNode;
   onClick?: () => void;
 };

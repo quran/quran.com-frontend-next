@@ -1,4 +1,4 @@
-import React, { useEffect, memo, useContext, RefObject } from 'react';
+import { memo, RefObject, useContext, useEffect } from 'react';
 
 import { useSelector as useXstateSelector } from '@xstate/react';
 import classNames from 'classnames';
@@ -14,7 +14,6 @@ import VerseText from '@/components/Verse/VerseText';
 import useScroll, { SMOOTH_SCROLL_TO_CENTER } from '@/hooks/useScrollToElement';
 import { selectEnableAutoScrolling } from '@/redux/slices/AudioPlayer/state';
 import { selectInlineDisplayWordByWordPreferences } from '@/redux/slices/QuranReader/readingPreferences';
-import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
 import { getWordDataByLocation } from '@/utils/verse';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import Word from 'types/Word';
@@ -23,7 +22,6 @@ export type LineProps = {
   words: Word[];
   lineKey: string;
   isBigTextLayout: boolean;
-  quranReaderStyles: QuranReaderStyles;
   pageIndex: number;
   lineIndex: number;
 };
