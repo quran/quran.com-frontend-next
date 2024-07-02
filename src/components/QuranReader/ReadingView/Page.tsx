@@ -54,6 +54,7 @@ const Page = ({ verses, pageNumber, quranReaderStyles, pageIndex }: PageProps) =
           words={lines[key]}
           key={key}
           isBigTextLayout={isBigTextLayout}
+          quranReaderStyles={quranReaderStyles}
         />
       ))}
       <PageFooter page={pageNumber} />
