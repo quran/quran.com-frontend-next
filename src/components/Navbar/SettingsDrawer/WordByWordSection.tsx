@@ -1,6 +1,5 @@
 /* eslint-disable i18next/no-literal-string */
 /* eslint-disable max-lines */
-import { useEffect, useState } from 'react';
 
 import { Action } from '@reduxjs/toolkit';
 import { useRouter } from 'next/router';
@@ -11,7 +10,7 @@ import { shallowEqual, useSelector } from 'react-redux';
 import Section from './Section';
 import styles from './WordByWordSection.module.scss';
 
-import { getAvailableWordByWordTranslations } from '@/api';
+import DataFetcher from '@/components/DataFetcher';
 import Counter from '@/dls/Counter/Counter';
 import Checkbox from '@/dls/Forms/Checkbox/Checkbox';
 import Select, { SelectSize } from '@/dls/Forms/Select';
@@ -32,9 +31,10 @@ import {
   increaseWordByWordFontScale,
   selectWordByWordFontScale,
 } from '@/redux/slices/QuranReader/styles';
-import AvailableWordByWordTranslation from '@/types/AvailableWordByWordTranslation';
+import { WordByWordTranslationsResponse } from '@/types/ApiResponses';
 import QueryParam from '@/types/QueryParam';
 import { WordByWordDisplay, WordByWordType, WordClickFunctionality } from '@/types/QuranReader';
+import { makeWordByWordTranslationsUrl } from '@/utils/apiPaths';
 import { removeItemFromArray, uniqueArrayByObjectProperty } from '@/utils/array';
 import { logValueChange } from '@/utils/eventLogger';
 import { getLocaleName } from '@/utils/locale';
@@ -57,33 +57,6 @@ const WordByWordSection = () => {
   } = readingPreferences;
 
   const wordByWordFontScale = useSelector(selectWordByWordFontScale, shallowEqual);
-
-  const [hasError, setHasError] = useState(false);
-  const [translations, setTranslations] = useState<AvailableWordByWordTranslation[]>([]);
-
-  useEffect(() => {
-    getAvailableWordByWordTranslations(lang)
-      .then((res) => {
-        if (res.status === 500) {
-          setHasError(true);
-        } else {
-          const data = uniqueArrayByObjectProperty(res.wordByWordTranslations, 'isoCode');
-          setTranslations(data);
-        }
-      })
-      .catch(() => {
-        setHasError(true);
-      });
-  }, [lang]);
-
-  if (hasError) {
-    return null;
-  }
-
-  const WORD_BY_WORD_LOCALES_OPTIONS = translations.map(({ isoCode }) => ({
-    label: getLocaleName(isoCode),
-    value: isoCode,
-  }));
 
   /**
    * Persist settings in the DB if the user is logged in before dispatching
@@ -240,15 +213,31 @@ const WordByWordSection = () => {
       </Section.Row>
       <Separator className={styles.separator} />
       <Section.Row>
-        <Section.Label>{t('trans-lang')}</Section.Label>
-        <Select
-          size={SelectSize.Small}
-          id="wordByWord"
-          name="wordByWord"
-          options={WORD_BY_WORD_LOCALES_OPTIONS}
-          value={wordByWordLocale}
-          disabled={shouldDisableLanguageSelect}
-          onChange={onWordByWordLocaleChange}
+        <DataFetcher
+          queryKey={makeWordByWordTranslationsUrl(lang)}
+          render={(data: WordByWordTranslationsResponse) => {
+            const uniqueData = uniqueArrayByObjectProperty(data.wordByWordTranslations, 'isoCode');
+
+            const options = uniqueData.map(({ isoCode }) => ({
+              label: getLocaleName(isoCode),
+              value: isoCode,
+            }));
+
+            return (
+              <>
+                <Section.Label>{t('trans-lang')}</Section.Label>
+                <Select
+                  size={SelectSize.Small}
+                  id="wordByWord"
+                  name="wordByWord"
+                  options={options}
+                  value={wordByWordLocale}
+                  disabled={shouldDisableLanguageSelect}
+                  onChange={onWordByWordLocaleChange}
+                />
+              </>
+            );
+          }}
         />
       </Section.Row>
       <Section.Footer>

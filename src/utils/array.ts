@@ -72,14 +72,29 @@ export const mergeTwoArraysUniquely = <T>(array1: T[], array2: T[]): T[] => {
 };
 
 /**
- * Return a unique array of objects with no dublicates based on an object property
+ * Return a unique array of objects with no duplicates based on an object property
  *
  * @param {any[]} array
  * @param {string} property
- * @returns {T[]}
+ * @returns {any[]}
  */
 export const uniqueArrayByObjectProperty = (array: any[], property: string) => {
-  return array.filter(
-    (obj, index) => array.findIndex((item) => item[property] === obj[property]) === index,
-  );
+  const seenProperties = new Set();
+  const seenValues = new Set();
+
+  return array.filter((item) => {
+    if (item && typeof item === 'object' && Object.prototype.hasOwnProperty.call(item, property)) {
+      if (seenProperties.has(item[property])) {
+        return false;
+      }
+      seenProperties.add(item[property]);
+      return true;
+    }
+
+    if (seenValues.has(item)) {
+      return false;
+    }
+    seenValues.add(item);
+    return true;
+  });
 };
