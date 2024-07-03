@@ -4,7 +4,6 @@
 import React, { RefObject, useEffect, useState } from 'react';
 
 import dynamic from 'next/dynamic';
-import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import SearchDrawerHeader from './Header';
@@ -39,7 +38,6 @@ const PAGE_SIZE = 10;
 const DEBOUNCING_PERIOD_MS = 1000;
 
 const SearchDrawer: React.FC = () => {
-  const { lang } = useTranslation();
   const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
   const [focusInput, searchInputRef]: [() => void, RefObject<HTMLInputElement>] = useFocus();
   const [searchQuery, setSearchQuery] = useState<string>('');
@@ -70,11 +68,11 @@ const SearchDrawer: React.FC = () => {
         setIsSearching,
         setHasError,
         setSearchResult,
-        lang,
+        null,
         selectedTranslations?.length && selectedTranslations.join(','),
       );
     }
-  }, [debouncedSearchQuery, selectedTranslations, dispatch, lang]);
+  }, [debouncedSearchQuery, selectedTranslations, dispatch]);
 
   const resetQueryAndResults = () => {
     logButtonClick('search_drawer_clear_input');

@@ -190,14 +190,14 @@ export const searchGetResults = (
   setIsSearching: (arg: boolean) => void,
   setHasError: (arg: boolean) => void,
   setSearchResult: (data: SearchResponse) => void,
-  languages: string,
+  languages?: string,
   translations?: string,
 ) => {
   setIsSearching(true);
   logTextSearchQuery(query, source);
   getSearchResults({
     query,
-    filterLanguages: languages,
+    ...(languages && { filterLanguages: languages }), // languages will be included only when there is a selected language
     size: pageSize,
     page,
     ...(translations && { filterTranslations: translations }), // translations will be included only when there is a selected translation
