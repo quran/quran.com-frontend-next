@@ -7,11 +7,11 @@
       "data-sync": {
         "action": "Prochain",
         "description": "Que vous utilisiez Quran.com sur votre téléphone ou votre ordinateur portable, vos signets, les derniers versets lus et vos préférences seront disponibles",
-        "title": "Vos données seront synchronisées <br></br> sur tous les appareils"
+        "title": "Vos données seront synchronisées <br><\/br> sur tous les appareils"
       },
       "feedback": {
         "action": "OK, j'ai compris",
-        "description": "Merci d'utiliser Quran.com et nous serions heureux d'entendre vos commentaires sur <link> feedback.quran.com </link>",
+        "description": "Merci d'utiliser Quran.com et nous serions heureux d'entendre vos commentaires sur <link> feedback.quran.com <\/link>",
         "title": "Nous voulons entendre vos pensées"
       },
       "quran-foundation-link": {
@@ -26,12 +26,12 @@
       },
       "welcome": {
         "action": "Regardez ce qu'il y a de nouveau",
-        "title": "Bienvenue sur Quran.com <br></br> Compte utilisateur"
+        "title": "Bienvenue sur Quran.com <br><\/br> Compte utilisateur"
       }
     },
     "collections-announcement": {
       "slide-1": {
-        "description": "Nous sommes très heureux de vous annoncer que vous pouvez désormais regrouper les signets sous \"collections\" ! <br/> <br/> <li> Ajoutez autant de collections que vous le souhaitez </li> <li> Ajoutez un signet à une ou plusieurs collections </li> <li> Et plus encore ! </li>",
+        "description": "Nous sommes très heureux de vous annoncer que vous pouvez désormais regrouper les signets sous \"collections\" ! <br\/> <br\/> <li> Ajoutez autant de collections que vous le souhaitez <\/li> <li> Ajoutez un signet à une ou plusieurs collections <\/li> <li> Et plus encore ! <\/li>",
         "title": "Les collections de marque-pages sont là !"
       }
     }
@@ -52,8 +52,8 @@
       "title": "Défilement automatique"
     },
     "displaying": "Affichage",
-    "exp-tip": "<span>Modifier le contenu affiché sous</span><br></br> <boldSpan>Paramètres</boldSpan> > <boldSpan>Mot par mot</boldSpan>",
-    "exp-tip-no-select": "<span>Cochez l'option d'affichage de l'info-bulle et sélectionnez l'option <br></br> Traduction et/ou Translittération</span><br></br><span> sous </span><boldSpan>Paramètres</boldSpan> > <boldSpan>mot par mot</boldSpan><span>, pour</span><br></br> <span>activer cette fonctionnalité.</span>",
+    "exp-tip": "<span>Modifier le contenu affiché sous<\/span><br><\/br> <boldSpan>Paramètres<\/boldSpan> > <boldSpan>Mot par mot<\/boldSpan>",
+    "exp-tip-no-select": "<span>Cochez l'option d'affichage de l'info-bulle et sélectionnez l'option <br><\/br> Traduction et\/ou Translittération<\/span><br><\/br><span> sous <\/span><boldSpan>Paramètres<\/boldSpan> > <boldSpan>mot par mot<\/boldSpan><span>, pour<\/span><br><\/br> <span>activer cette fonctionnalité.<\/span>",
     "experience": "Expérience",
     "play": "Lire le son",
     "playback-normal": "Normal",
@@ -85,7 +85,7 @@
       "verses-range": "Gamme de vers",
       "volume-control": "Contrôle du volume"
     },
-    "repeat-moved": "Les paramètres de répétition ont été déplacés vers le lecteur audio. Cliquez sur l' <0> </0> pour y accéder",
+    "repeat-moved": "Les paramètres de répétition ont été déplacés vers le lecteur audio. Cliquez sur l' <0> <\/0> pour y accéder",
     "select-reciter": "Sélectionnez le récitant",
     "speed": "Vitesse",
     "title": "l'audio"
@@ -117,8 +117,8 @@
   "complete-sign-up": "Complétez votre inscription",
   "consents": {
     "communication": {
-      "body": "🚀 Boostez vos progrès grâce à des notifications <boldSpan> personnalisées </boldSpan> sur la progression de votre objectif, le maintien de séquences et l'amélioration de votre utilisation de nos fonctionnalités actuelles. <br></br> <br></br> Pouvons-nous vous tenir au courant par e-mail et par d'autres canaux ? Vous avez le contrôle – n'hésitez pas à ajuster ces préférences à tout moment dans les paramètres de votre compte. <br></br> <br></br> Sélectionnez simplement « Autoriser » pour <boldSpan> rappels inspirants </boldSpan> ou « Pas maintenant » pour refuser.",
-      "header": "Nous serions ravis de vous aider à rester <boldSpan> engagé et cohérent </boldSpan> dans votre parcours de croissance du Coran ! 📖🌟"
+      "body": "🚀 Boostez vos progrès grâce à des notifications <boldSpan> personnalisées <\/boldSpan> sur la progression de votre objectif, le maintien de séquences et l'amélioration de votre utilisation de nos fonctionnalités actuelles. <br><\/br> <br><\/br> Pouvons-nous vous tenir au courant par e-mail et par d'autres canaux ? Vous avez le contrôle – n'hésitez pas à ajuster ces préférences à tout moment dans les paramètres de votre compte. <br><\/br> <br><\/br> Sélectionnez simplement « Autoriser » pour <boldSpan> rappels inspirants <\/boldSpan> ou « Pas maintenant » pour refuser.",
+      "header": "Nous serions ravis de vous aider à rester <boldSpan> engagé et cohérent <\/boldSpan> dans votre parcours de croissance du Coran ! 📖🌟"
     }
   },
   "continue": "Continuer",
@@ -130,6 +130,7 @@
     "increase": "Augmenter"
   },
   "default-description": "Le Coran traduit dans de nombreuses langues dans une interface simple et facile",
+  "delete": "Supprimer",
   "developers": "Développeurs",
   "display": "Afficher",
   "donate": "Donner",
@@ -138,7 +139,7 @@
   "edit": "Modifier",
   "email-verification": {
     "check-spam": "Vous n'avez pas reçu l'e-mail de vérification ? Vérifiez votre boîte de réception de spam",
-    "email-sent": "Nous venons d'envoyer un e-mail à <strong> {{email}} </strong>",
+    "email-sent": "Nous venons d'envoyer un e-mail à <strong> {{email}} <\/strong>",
     "email-verification": "Vérification de l'E-mail",
     "resend-email": "Ré-envoyer l'email",
     "resend-email-in": "Renvoyer l'e-mail de vérification dans {{remainingTime}} s...",
@@ -163,7 +164,7 @@
     "qpc_uthmani_hafs": "QPC Uthmani Hafs",
     "quran-font": "Police du Coran",
     "tajweed": "Tajweed",
-    "tajweed-desc": "La police Tajweed montre un Mushaf de couleur Tajweed. Vous pouvez en savoir plus sur les règles de couleur Tajweed <0> ici </0>",
+    "tajweed-desc": "La police Tajweed montre un Mushaf de couleur Tajweed. Vous pouvez en savoir plus sur les règles de couleur Tajweed <0> ici <\/0>",
     "text_indopak": "IndoPak",
     "text_uthmani": "Uthmani"
   },
@@ -184,10 +185,10 @@
   "from": "De",
   "fundraising-sticky-banner": {
     "cta": "Donner",
-    "title": "Soutenez Quran.com ce Ramadan"
+    "title": "Donnez pendant les meilleurs jours !"
   },
   "fundraising": {
-    "description": "Ne manquez pas l'opportunité de gagner des récompenses multipliées ces dernières nuits bénies du Ramadan. Même les petits dons mensuels ont un impact !",
+    "description": "Les dons mensuels nous aident à améliorer Quran.com et à maintenir nos opérations afin que nous nous concentrions moins sur la collecte de fonds et davantage sur la création d'un impact.",
     "title": "Devenez un donateur mensuel"
   },
   "help": "Aider",
@@ -245,8 +246,8 @@
   "popup": {
     "footnote": "Les dons mensuels nous permettent de moins nous concentrer sur la collecte de fonds",
     "text-1": "Nous nous engageons à servir le monde de la connaissance et de la technologie coraniques, toujours gratuitement.",
-    "text-2": "L’occasion idéale pour une charité continue (Sadaqah Jariyah). Veuillez envisager d'investir dans votre au-delà en tant que donateur mensuel (ou ponctuel).",
-    "title": "Cher Compagnon du Coran,"
+    "text-2": "L’occasion idéale pour une charité continue (Sadaqa Jariyah). Investissez dans votre au-delà en tant que donateur mensuel (ou ponctuel).",
+    "title": "Donnez pendant les meilleurs jours !"
   },
   "powered-by": "Alimenté par",
   "prepare-hearts": {
@@ -268,7 +269,7 @@
   },
   "recitation": "Récitation",
   "reciter": "Récitant",
-  "reciter-summary": "Récitant mot à mot : <span> {{reciterName}} </span> . Cliquez sur un mot pour écouter sa récitation.",
+  "reciter-summary": "Récitant mot à mot : <span> {{reciterName}} <\/span> . Cliquez sur un mot pour écouter sa récitation.",
   "reciters": "Récitants",
   "reflect": "Réfléchir",
   "reflections": "Réflexions",
@@ -356,7 +357,7 @@
     "light": "Léger",
     "sepia": "Sépia",
     "system": "Système",
-    "system-desc": "Le thème du système s'adapte automatiquement à vos paramètres de mode clair/sombre"
+    "system-desc": "Le thème du système s'adapte automatiquement à vos paramètres de mode clair\/sombre"
   },
   "to": "À",
   "tooltip": "Info-bulle",
@@ -390,7 +391,7 @@
     "voice-search-powered-by": "Recherche vocale optimisée par"
   },
   "wbw": "Mot par mot",
-  "wbw-lang-summary": "Source de la traduction mot à mot : <link> {{source}} </link> . Cette source est indépendante de la sélection de traduction verset.",
+  "wbw-lang-summary": "Source de la traduction mot à mot : <link> {{source}} <\/link> . Cette source est indépendante de la sélection de traduction verset.",
   "wbw-trans-lang": "Langage mot à mot",
   "wbw-translation": "Traduction mot à mot",
   "wbw-transliteration": "Translittération mot à mot",
