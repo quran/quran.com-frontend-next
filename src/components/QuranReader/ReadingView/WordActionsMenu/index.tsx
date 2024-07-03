@@ -32,7 +32,6 @@ const ReadingViewWordActionsMenu: React.FC<Props> = ({ word, onActionTriggered }
       {word?.verse?.timestamps && (
         <PlayVerseAudioButton
           verseKey={word.verseKey}
-          timestamp={word.verse.timestamps.timestampFrom}
           isTranslationView={false}
           onActionTriggered={onActionTriggered}
         />

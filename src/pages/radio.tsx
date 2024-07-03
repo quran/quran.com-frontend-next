@@ -12,12 +12,10 @@ import ReciterStationList from '@/components/Radio/ReciterStationList';
 import { getAllChaptersData } from '@/utils/chapter';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl } from '@/utils/navigation';
-import ChaptersData from 'types/ChaptersData';
 import Reciter from 'types/Reciter';
 
 type RadioPageProps = {
   reciters: Reciter[];
-  chaptersData: ChaptersData;
 };
 
 const NAVIGATION_URL = '/radio';

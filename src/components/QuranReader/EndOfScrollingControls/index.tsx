@@ -46,7 +46,7 @@ const EndOfScrollingControls: React.FC<Props> = ({
       <div className={styles.container}>
         <div className={styles.buttonsContainer}>
           {quranReaderDataType === QuranReaderDataType.Chapter && (
-            <ChapterControls lastVerse={lastVerse} initialData={initialData} />
+            <ChapterControls initialData={initialData} />
           )}
           {(quranReaderDataType === QuranReaderDataType.Verse ||
             quranReaderDataType === QuranReaderDataType.ChapterVerseRanges ||

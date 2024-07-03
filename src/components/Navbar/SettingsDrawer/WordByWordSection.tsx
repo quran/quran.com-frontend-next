@@ -38,7 +38,7 @@ import { logValueChange } from '@/utils/eventLogger';
 import { getLocaleName } from '@/utils/locale';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 
-export const WBW_LOCALES = ['en', 'ur', 'id', 'bn', 'tr', 'fa', 'ru', 'hi', 'de', 'ta', 'inh'];
+export const WBW_LOCALES = ['en', 'ur', 'id', 'bn', 'tr', 'fa', 'hi', 'ta', 'inh'];
 export const WORD_BY_WORD_LOCALES_OPTIONS = WBW_LOCALES.map((locale) => ({
   label: getLocaleName(locale),
   value: locale,

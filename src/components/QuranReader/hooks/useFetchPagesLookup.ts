@@ -28,6 +28,7 @@ const useFetchPagesLookup = (
   quranReaderStyles: QuranReaderStyles,
   isUsingDefaultFont: boolean,
 ): {
+  data: PagesLookUpResponse;
   pagesCount: number;
   hasError: boolean;
   pagesVersesRange: Record<number, LookupRecord>;
@@ -51,11 +52,12 @@ const useFetchPagesLookup = (
   );
 
   return {
+    data,
     pagesCount: data.totalPage,
     pagesVersesRange: data.pages,
     lookupRange: data.lookupRange,
     hasError: !!error,
-    isLoading: isValidating,
+    isLoading: isValidating && !data,
   };
 };
 

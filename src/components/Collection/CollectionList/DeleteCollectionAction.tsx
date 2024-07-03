@@ -16,7 +16,7 @@ const DeleteCollectionAction = ({ collectionId, onDone, collectionName }) => {
       collectionId,
     });
     const isConfirmed = await confirm({
-      confirmText: t('collection:delete'),
+      confirmText: t('common:delete'),
       cancelText: t('common:cancel'),
       title: t('collection:delete-collection.title'),
       subtitle: t('collection:delete-collection.subtitle', { collectionName }),
@@ -42,7 +42,7 @@ const DeleteCollectionAction = ({ collectionId, onDone, collectionName }) => {
     }
   };
 
-  return <PopoverMenu.Item onClick={onMenuItemClicked}>{t('collection:delete')}</PopoverMenu.Item>;
+  return <PopoverMenu.Item onClick={onMenuItemClicked}>{t('common:delete')}</PopoverMenu.Item>;
 };
 
 export default DeleteCollectionAction;

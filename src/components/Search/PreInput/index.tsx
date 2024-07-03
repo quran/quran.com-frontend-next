@@ -50,7 +50,6 @@ const PreInput: React.FC<Props> = ({ onSearchKeywordClicked, isSearchDrawer }) =
                 <SearchItem
                   prefix={<TrendUpIcon />}
                   title={chapterData.transliteratedName}
-                  url={url}
                   key={url}
                   onClick={() => {
                     logButtonClick(

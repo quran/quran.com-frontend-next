@@ -1140,6 +1140,7 @@ export const audioPlayerMachine =
                 handler as MediaSessionActionHandler,
               );
             } catch (error) {
+              // eslint-disable-next-line no-console
               console.log(`The media session action "${action}" is not supported yet.`);
             }
           }
