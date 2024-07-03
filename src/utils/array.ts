@@ -70,3 +70,16 @@ export const removeItemFromArray = <T>(itemToRemove: T, array: T[]): T[] =>
 export const mergeTwoArraysUniquely = <T>(array1: T[], array2: T[]): T[] => {
   return Array.from(new Set(array1.concat(array2)));
 };
+
+/**
+ * Return a unique array of objects with no dublicates based on an object property
+ *
+ * @param {any[]} array
+ * @param {string} property
+ * @returns {T[]}
+ */
+export const uniqueArrayByObjectProperty = (array: any[], property: string) => {
+  return array.filter(
+    (obj, index) => array.findIndex((item) => item[property] === obj[property]) === index,
+  );
+};

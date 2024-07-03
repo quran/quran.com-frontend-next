@@ -1,6 +1,6 @@
 /* eslint-disable i18next/no-literal-string */
 /* eslint-disable max-lines */
-import React from 'react';
+import { useEffect, useState } from 'react';
 
 import { Action } from '@reduxjs/toolkit';
 import { useRouter } from 'next/router';
@@ -11,6 +11,7 @@ import { shallowEqual, useSelector } from 'react-redux';
 import Section from './Section';
 import styles from './WordByWordSection.module.scss';
 
+import { getAvailableWordByWordTranslations } from '@/api';
 import Counter from '@/dls/Counter/Counter';
 import Checkbox from '@/dls/Forms/Checkbox/Checkbox';
 import Select, { SelectSize } from '@/dls/Forms/Select';
@@ -18,10 +19,10 @@ import Link, { LinkVariant } from '@/dls/Link/Link';
 import Separator from '@/dls/Separator/Separator';
 import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
 import {
-  setSelectedWordByWordLocale,
   selectReadingPreferences,
-  setWordByWordDisplay,
+  setSelectedWordByWordLocale,
   setWordByWordContentType,
+  setWordByWordDisplay,
   setWordClickFunctionality,
 } from '@/redux/slices/QuranReader/readingPreferences';
 import {
@@ -31,18 +32,13 @@ import {
   increaseWordByWordFontScale,
   selectWordByWordFontScale,
 } from '@/redux/slices/QuranReader/styles';
+import AvailableWordByWordTranslation from '@/types/AvailableWordByWordTranslation';
 import QueryParam from '@/types/QueryParam';
 import { WordByWordDisplay, WordByWordType, WordClickFunctionality } from '@/types/QuranReader';
-import { removeItemFromArray } from '@/utils/array';
+import { removeItemFromArray, uniqueArrayByObjectProperty } from '@/utils/array';
 import { logValueChange } from '@/utils/eventLogger';
 import { getLocaleName } from '@/utils/locale';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
-
-export const WBW_LOCALES = ['en', 'ur', 'id', 'bn', 'tr', 'fa', 'hi', 'ta', 'inh'];
-export const WORD_BY_WORD_LOCALES_OPTIONS = WBW_LOCALES.map((locale) => ({
-  label: getLocaleName(locale),
-  value: locale,
-}));
 
 const WordByWordSection = () => {
   const { t, lang } = useTranslation('common');
@@ -61,6 +57,33 @@ const WordByWordSection = () => {
   } = readingPreferences;
 
   const wordByWordFontScale = useSelector(selectWordByWordFontScale, shallowEqual);
+
+  const [hasError, setHasError] = useState(false);
+  const [translations, setTranslations] = useState<AvailableWordByWordTranslation[]>([]);
+
+  useEffect(() => {
+    getAvailableWordByWordTranslations(lang)
+      .then((res) => {
+        if (res.status === 500) {
+          setHasError(true);
+        } else {
+          const data = uniqueArrayByObjectProperty(res.wordByWordTranslations, 'isoCode');
+          setTranslations(data);
+        }
+      })
+      .catch(() => {
+        setHasError(true);
+      });
+  }, [lang]);
+
+  if (hasError) {
+    return null;
+  }
+
+  const WORD_BY_WORD_LOCALES_OPTIONS = translations.map(({ isoCode }) => ({
+    label: getLocaleName(isoCode),
+    value: isoCode,
+  }));
 
   /**
    * Persist settings in the DB if the user is logged in before dispatching
