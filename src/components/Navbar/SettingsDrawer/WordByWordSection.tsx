@@ -2,6 +2,7 @@
 /* eslint-disable max-lines */
 
 import { Action } from '@reduxjs/toolkit';
+import uniqBy from 'lodash/uniqBy';
 import { useRouter } from 'next/router';
 import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
@@ -35,7 +36,7 @@ import { WordByWordTranslationsResponse } from '@/types/ApiResponses';
 import QueryParam from '@/types/QueryParam';
 import { WordByWordDisplay, WordByWordType, WordClickFunctionality } from '@/types/QuranReader';
 import { makeWordByWordTranslationsUrl } from '@/utils/apiPaths';
-import { removeItemFromArray, uniqueArrayByObjectProperty } from '@/utils/array';
+import { removeItemFromArray } from '@/utils/array';
 import { logValueChange } from '@/utils/eventLogger';
 import { getLocaleName } from '@/utils/locale';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
@@ -216,7 +217,7 @@ const WordByWordSection = () => {
         <DataFetcher
           queryKey={makeWordByWordTranslationsUrl(lang)}
           render={(data: WordByWordTranslationsResponse) => {
-            const uniqueData = uniqueArrayByObjectProperty(data.wordByWordTranslations, 'isoCode');
+            const uniqueData = uniqBy(data.wordByWordTranslations, 'isoCode');
 
             const options = uniqueData.map(({ isoCode }) => ({
               label: getLocaleName(isoCode),
