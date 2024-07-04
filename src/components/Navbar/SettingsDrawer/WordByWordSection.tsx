@@ -12,7 +12,6 @@ import Section from './Section';
 import styles from './WordByWordSection.module.scss';
 
 import DataFetcher from '@/components/DataFetcher';
-import Error from '@/components/Error';
 import Counter from '@/dls/Counter/Counter';
 import Checkbox from '@/dls/Forms/Checkbox/Checkbox';
 import Select, { SelectSize } from '@/dls/Forms/Select';
