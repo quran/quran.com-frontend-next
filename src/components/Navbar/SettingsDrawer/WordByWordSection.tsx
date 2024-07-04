@@ -12,6 +12,7 @@ import Section from './Section';
 import styles from './WordByWordSection.module.scss';
 
 import DataFetcher from '@/components/DataFetcher';
+import Error from '@/components/Error';
 import Counter from '@/dls/Counter/Counter';
 import Checkbox from '@/dls/Forms/Checkbox/Checkbox';
 import Select, { SelectSize } from '@/dls/Forms/Select';
@@ -214,6 +215,7 @@ const WordByWordSection = () => {
       </Section.Row>
       <Separator className={styles.separator} />
       <Section.Row>
+        <Section.Label>{t('trans-lang')}</Section.Label>
         <DataFetcher
           queryKey={makeWordByWordTranslationsUrl(lang)}
           render={(data: WordByWordTranslationsResponse) => {
@@ -225,18 +227,15 @@ const WordByWordSection = () => {
             }));
 
             return (
-              <>
-                <Section.Label>{t('trans-lang')}</Section.Label>
-                <Select
-                  size={SelectSize.Small}
-                  id="wordByWord"
-                  name="wordByWord"
-                  options={options}
-                  value={wordByWordLocale}
-                  disabled={shouldDisableLanguageSelect}
-                  onChange={onWordByWordLocaleChange}
-                />
-              </>
+              <Select
+                size={SelectSize.Small}
+                id="wordByWord"
+                name="wordByWord"
+                options={options}
+                value={wordByWordLocale}
+                disabled={shouldDisableLanguageSelect}
+                onChange={onWordByWordLocaleChange}
+              />
             );
           }}
         />
