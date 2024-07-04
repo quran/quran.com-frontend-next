@@ -70,31 +70,3 @@ export const removeItemFromArray = <T>(itemToRemove: T, array: T[]): T[] =>
 export const mergeTwoArraysUniquely = <T>(array1: T[], array2: T[]): T[] => {
   return Array.from(new Set(array1.concat(array2)));
 };
-
-/**
- * Return a unique array of objects with no duplicates based on an object property
- *
- * @param {any[]} array
- * @param {string} property
- * @returns {any[]}
- */
-export const uniqueArrayByObjectProperty = (array: any[], property: string) => {
-  const seenProperties = new Set();
-  const seenValues = new Set();
-
-  return array.filter((item) => {
-    if (item && typeof item === 'object' && Object.prototype.hasOwnProperty.call(item, property)) {
-      if (seenProperties.has(item[property])) {
-        return false;
-      }
-      seenProperties.add(item[property]);
-      return true;
-    }
-
-    if (seenValues.has(item)) {
-      return false;
-    }
-    seenValues.add(item);
-    return true;
-  });
-};
