@@ -45,6 +45,7 @@ import {
   ReciterResponse,
   TafsirContentResponse,
   PagesLookUpResponse,
+  WordByWordTranslationsResponse,
 } from 'types/ApiResponses';
 import AudioData from 'types/AudioData';
 import { MushafLines, QuranFont } from 'types/QuranReader';
@@ -100,11 +101,11 @@ export const getAvailableTranslations = async (language: string): Promise<Transl
  *
  * @param {string} language we use this to get translated names of authors in specific the current language.
  *
- * @returns {Promise<TranslationsResponse>}
+ * @returns {Promise<WordByWordTranslationsResponse>}
  */
 export const getAvailableWordByWordTranslations = async (
   language: string,
-): Promise<TranslationsResponse> => fetcher(makeWordByWordTranslationsUrl(language));
+): Promise<WordByWordTranslationsResponse> => fetcher(makeWordByWordTranslationsUrl(language));
 
 /**
  * Get the current available languages with the name translated in the current language.
