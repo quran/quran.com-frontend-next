@@ -1,24 +1,23 @@
 {
-    "all-saved-verses": "همه آیات ذخیره شده",
-    "alphabetical": "AZ",
-    "back-to-collection-list": "بازگشت به لیست مجموعه",
-    "collapse-all": "همه آیات را جمع کنید",
-    "collection-list-empty": "لیست مجموعه خالی است. شما هنوز هیچ مجموعه ای ایجاد نکرده اید",
-    "collections": "مجموعه ها",
-    "delete": "حذف",
-    "delete-bookmark": {
-        "subtitle": "آیا مطمئنید که می‌خواهید {{bookmarkName}} از {{collectionName}} حذف کنید؟",
-        "title": "حذف نشانک"
-    },
-    "delete-collection": {
-        "subtitle": "آیا مطمئن هستید که می خواهید {{collectionName}} حذف کنید؟",
-        "title": "حذف مجموعه"
-    },
-    "empty": "مجموعه خالی است",
-    "expand-all": "همه آیات را بسط دهید",
-    "go-to-ayah": "برو به آیه",
-    "load-more": "بارگذاری بیشتر",
-    "recently-added": "به تازگی اضافه شده",
-    "recently-updated": "به تازگی به روز شده است",
-    "verse-key": "شماره فصل و آیه"
+  "all-saved-verses": "همه آیات ذخیره شده",
+  "alphabetical": "AZ",
+  "back-to-collection-list": "بازگشت به لیست مجموعه",
+  "collapse-all": "همه آیات را جمع کنید",
+  "collection-list-empty": "لیست مجموعه خالی است. شما هنوز هیچ مجموعه ای ایجاد نکرده اید",
+  "collections": "مجموعه ها",
+  "delete-bookmark": {
+    "subtitle": "آیا مطمئنید که می‌خواهید {{bookmarkName}} از {{collectionName}} حذف کنید؟",
+    "title": "حذف نشانک"
+  },
+  "delete-collection": {
+    "subtitle": "آیا مطمئن هستید که می خواهید {{collectionName}} حذف کنید؟",
+    "title": "حذف مجموعه"
+  },
+  "empty": "مجموعه خالی است",
+  "expand-all": "همه آیات را بسط دهید",
+  "go-to-ayah": "برو به آیه",
+  "load-more": "بارگذاری بیشتر",
+  "recently-added": "به تازگی اضافه شده",
+  "recently-updated": "به تازگی به روز شده است",
+  "verse-key": "شماره فصل و آیه"
 }
