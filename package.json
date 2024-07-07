@@ -27,7 +27,10 @@
     "test:watch": "vitest watch",
     "analyze": "cross-env ANALYZE_BUNDLE=true yarn build",
     "lokalise": "node scripts/lokalise.js",
-    "chapter-data:format": "node scripts/format-chapter-data-json.js"
+    "chapter-data:format": "node scripts/format-chapter-data-json.js",
+    "postinstall": "husky",
+    "prepack": "pinst --disable",
+    "postpack": "pinst --enable"
   },
   "dependencies": {
     "@babel/eslint-parser": "^7.19.1",
@@ -148,12 +151,13 @@
     "eslint-plugin-sonarjs": "^0.15.0",
     "eslint-plugin-storybook": "^0.6.15",
     "eslint-plugin-unicorn": "^43.0.2",
-    "husky": "^8.0.1",
+    "husky": "^9.0.11",
     "inquirer": "^8.0.0",
     "inquirer-file-tree-selection-prompt": "^1",
     "jsdom": "^20.0.0",
     "lint-staged": "^13.0.3",
     "next-sitemap": "^3.1.22",
+    "pinst": "^3.0.0",
     "postcss": "8",
     "postcss-scss": "^4.0.5",
     "prettier": "^2.7.1",
@@ -179,6 +183,7 @@
   },
   "lint-staged": {
     "*.{tsx,ts}": "yarn lint:fix",
-    "*.scss": "yarn lint:scss"
+    "*.scss": "yarn lint:scss",
+    "*": "prettier --write"
   }
 }

@@ -23,6 +23,7 @@ export type LineProps = {
   words: Word[];
   lineKey: string;
   isBigTextLayout: boolean;
+  // eslint-disable-next-line react/no-unused-prop-types
   quranReaderStyles: QuranReaderStyles;
   pageIndex: number;
   lineIndex: number;

@@ -10,7 +10,6 @@ type SurahProps = {
   surahNumber: number;
   surahName: string;
   translatedSurahName: string;
-  verseCount: number;
   chapterId: number;
   display?: SurahPreviewDisplay;
   description?: string;

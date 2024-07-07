@@ -25,7 +25,6 @@ interface Props {
   data: AyahReflectionsResponse;
   scrollToTop: () => void;
   setSelectedVerseNumber: (verseNumber: string) => void;
-  translationFontScale: number;
 }
 
 const ReflectionBody: React.FC<Props> = ({

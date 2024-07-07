@@ -2,13 +2,11 @@ import { useCallback, useState } from 'react';
 
 import dynamic from 'next/dynamic';
 import useTranslation from 'next-translate/useTranslation';
-import { shallowEqual, useSelector } from 'react-redux';
 
 import DataFetcher from '@/components/DataFetcher';
 import { REFLECTIONS_OBSERVER_ID } from '@/components/QuranReader/observer';
 import TafsirSkeleton from '@/components/QuranReader/TafsirView/TafsirSkeleton';
 import useGlobalIntersectionObserverWithDelay from '@/hooks/useGlobalIntersectionObserverWithDelay';
-import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import { isLoggedIn } from '@/utils/auth/login';
 import { postReflectionViews } from '@/utils/auth/qf/api';
 import {
@@ -40,7 +38,6 @@ const ReflectionBodyContainer = ({
 }: ReflectionBodyProps) => {
   const [selectedChapterId, setSelectedChapterId] = useState(initialChapterId);
   const [selectedVerseNumber, setSelectedVerseNumber] = useState(initialVerseNumber);
-  const { translationFontScale } = useSelector(selectQuranReaderStyles, shallowEqual);
   const { lang } = useTranslation();
 
   /**
@@ -75,10 +72,9 @@ const ReflectionBodyContainer = ({
         selectedVerseNumber={selectedVerseNumber}
         setSelectedVerseNumber={setSelectedVerseNumber}
         scrollToTop={scrollToTop}
-        translationFontScale={translationFontScale}
       />
     ),
-    [scrollToTop, selectedChapterId, selectedVerseNumber, translationFontScale],
+    [scrollToTop, selectedChapterId, selectedVerseNumber],
   );
 
   const body = (
