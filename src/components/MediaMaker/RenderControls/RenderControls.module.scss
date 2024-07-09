@@ -10,6 +10,14 @@
   flex-direction: row;
   justify-content: center;
   column-gap: var(--spacing-large);
+  flex-wrap: wrap;
+  row-gap: var(--spacing-small);
+}
+
+.copyButton {
+  color: var(--color-primary-medium);
+  background-color: var(--color-secondary-faded);
+  width: calc(var(--spacing-medium) * 10);
 }
 
 .lineBackground {
@@ -20,7 +28,7 @@
 
   &:before {
     border-top: 1px solid var(--color-secondary-faded);
-    content: "";
+    content: '';
     margin: 0 auto; /* this centers the line to the full width specified */
     position: absolute; /* positioning must be absolute here, and relative positioning must be applied to the parent */
     top: 50%;

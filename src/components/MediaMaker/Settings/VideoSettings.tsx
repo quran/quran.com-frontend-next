@@ -7,16 +7,16 @@ import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch } from 'react-redux';
 
+import AudioIcon from '../icons/AudioIcon';
+import ColorIcon from '../icons/ColorIcon';
+import ImageIcon from '../icons/ImageIcon';
+import TextIcon from '../icons/TextIcon';
 import styles from '../MediaMaker.module.scss';
 import RenderControls from '../RenderControls';
 
 import AudioTab from './AudioTab';
 import BackgroundTab from './BackgroundTab';
 import ColorsTab from './ColorsTab';
-import AudioIcon from './icons/AudioIcon';
-import ColorIcon from './icons/ColorIcon';
-import ImageIcon from './icons/ImageIcon';
-import TextIcon from './icons/TextIcon';
 import TextTab from './TextTab';
 
 import Button, { ButtonShape, ButtonVariant } from '@/dls/Button/Button';

@@ -1,4 +1,4 @@
-@use "src/styles/breakpoints";
+@use 'src/styles/breakpoints';
 .container {
   display: flex;
   flex-direction: column;
@@ -85,6 +85,9 @@
   width: 75%;
   margin: 0 auto;
   margin-bottom: var(--spacing-large);
+  @include breakpoints.smallerThanTablet {
+    width: 90%;
+  }
 }
 
 .switch {

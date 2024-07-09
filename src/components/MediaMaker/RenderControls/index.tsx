@@ -1,15 +1,19 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import classNames from 'classnames';
+import clipboardCopy from 'clipboard-copy';
 import useTranslation from 'next-translate/useTranslation';
+
+import CopyIcon from '../icons/CopyIcon';
 
 import styles from './RenderControls.module.scss';
 import RenderImageButton from './RenderImageButton';
 import RenderVideoButton from './RenderVideoButton';
 
 import Button, { ButtonType } from '@/dls/Button/Button';
-import IconCopy from '@/icons/copy.svg';
 import layoutStyle from '@/pages/index.module.scss';
+import { logButtonClick } from '@/utils/eventLogger';
+import { getCurrentPath } from '@/utils/url';
 
 type Props = {
   inputProps: MediaFileCompositionProps;
@@ -28,8 +32,32 @@ export type MediaFileCompositionProps = {
   border: string;
 };
 
+const COPY_TIMEOUT_MS = 3000;
+
 const RenderControls: React.FC<Props> = ({ inputProps, getCurrentFrame, isFetching }) => {
   const { t } = useTranslation('quran-media-maker');
+  const [isCopied, setIsCopied] = useState(false);
+
+  useEffect(() => {
+    let timeoutId: ReturnType<typeof setTimeout>;
+    // if the user has just copied the text, we should change the text back to Copy after 3 seconds.
+    if (isCopied === true) {
+      timeoutId = setTimeout(() => setIsCopied(false), COPY_TIMEOUT_MS);
+    }
+    return () => {
+      clearTimeout(timeoutId);
+    };
+  }, [isCopied]);
+
+  const onCopyLinkClicked = () => {
+    logButtonClick('video-generation-copy-link');
+    const path = getCurrentPath();
+    if (origin) {
+      clipboardCopy(path).then(() => {
+        setIsCopied(true);
+      });
+    }
+  };
 
   return (
     <div className={classNames(layoutStyle.flowItem, layoutStyle.fullWidth, styles.container)}>
@@ -46,8 +74,13 @@ const RenderControls: React.FC<Props> = ({ inputProps, getCurrentFrame, isFetchi
           inputProps={inputProps}
           getCurrentFrame={getCurrentFrame}
         />
-        <Button prefix={<IconCopy />} type={ButtonType.Secondary}>
-          {t('copy-link')}
+        <Button
+          className={styles.copyButton}
+          prefix={<CopyIcon stroke="black" />}
+          type={ButtonType.Secondary}
+          onClick={onCopyLinkClicked}
+        >
+          {isCopied ? t('copied') : t('copy-link')}
         </Button>
       </div>
     </div>
