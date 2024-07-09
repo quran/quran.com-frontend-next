@@ -37,7 +37,7 @@
     "react/no-multi-comp": 2,
     "react/jsx-fragments": 2,
     "react/jsx-handler-names": 2,
-    "react/jsx-sort-default-props": 2,
+    "react/sort-default-props": 2,
     "react/jsx-key": 1,
     "react-func/max-lines-per-function": [
       "error",
@@ -119,7 +119,7 @@
       {
         "arrowParens": "always",
         "bracketSpacing": true,
-        "jsxBracketSameLine": false,
+        "bracketSameLine": false,
         "printWidth": 100,
         "proseWrap": "always",
         "requirePragma": false,
@@ -127,8 +127,7 @@
         "singleQuote": true,
         "tabWidth": 2,
         "trailingComma": "all",
-        "useTabs": false,
-        "endOfLine": "auto"
+        "useTabs": false
       }
     ]
   },
