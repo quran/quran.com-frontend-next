@@ -1,7 +1,48 @@
 .container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-inline-start: var(--spacing-medium) !important;
-    padding-inline-end: var(--spacing-medium) !important;
+  display: flex;
+  flex-direction: column;
+  padding-inline-start: var(--spacing-medium) !important;
+  padding-inline-end: var(--spacing-medium) !important;
+}
+
+.controlsContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  column-gap: var(--spacing-large);
+}
+
+.lineBackground {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  margin-bottom: var(--spacing-medium);
+
+  &:before {
+    border-top: 1px solid var(--color-secondary-faded);
+    content: "";
+    margin: 0 auto; /* this centers the line to the full width specified */
+    position: absolute; /* positioning must be absolute here, and relative positioning must be applied to the parent */
+    top: 50%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    z-index: -1;
+  }
+
+  span {
+    /* to hide the lines from behind the text, you have to set the background color the same as the container */
+    background: #fff;
+    padding: 0 15px;
+  }
+}
+
+.text {
+  margin-top: var(--spacing-xsmall);
+  text-align: center;
+  font-size: var(--font-size-xsmall);
+  :nth-child(2) {
+    font-weight: var(--font-weight-bold);
+  }
 }

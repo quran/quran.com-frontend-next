@@ -10,7 +10,6 @@ import Progress from '@/dls/Progress';
 import { RenderStatus, useGenerateMediaFile } from '@/hooks/auth/media/useGenerateMediaFile';
 import useGetMediaFilesCount from '@/hooks/auth/media/useGetMediaFilesCount';
 import IconDownload from '@/icons/download.svg';
-import IconRender from '@/icons/slow_motion_video.svg';
 import { MediaType } from '@/types/Media/GenerateMediaFileRequest';
 import { isLoggedIn } from '@/utils/auth/login';
 import { logButtonClick } from '@/utils/eventLogger';
@@ -59,17 +58,15 @@ const RenderVideoButton: React.FC<Props> = ({ inputProps, isFetching }) => {
   const isRendering = state.status === RenderStatus.RENDERING;
   return (
     <div>
-      <MonthlyMediaFileCounter data={data?.data} type={MediaType.VIDEO} />
       <div>
         {isInitOrInvokingOrError && (
           <>
             <Button
-              prefix={<IconRender />}
               isDisabled={isFetching || state.status === RenderStatus.INVOKING}
               isLoading={isFetching || state.status === RenderStatus.INVOKING}
               onClick={onRenderClicked}
             >
-              {t('render-video')}
+              {t('download-video')}
             </Button>
             {state.status === RenderStatus.ERROR && (
               <div>{state?.error?.message || t('common:error.general')}</div>
@@ -92,6 +89,7 @@ const RenderVideoButton: React.FC<Props> = ({ inputProps, isFetching }) => {
           </>
         )}
       </div>
+      <MonthlyMediaFileCounter data={data?.data} />
     </div>
   );
 };

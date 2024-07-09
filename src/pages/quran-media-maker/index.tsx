@@ -304,19 +304,25 @@ const MediaMaker: NextPage<MediaMaker> = ({
               <Spinner size={SpinnerSize.Large} />
             </div>
           ) : (
-            <Player
-              className={styles.player}
-              inputProps={inputProps}
-              lazyComponent={lazyComponent}
-              durationInFrames={getDurationInFrames(timestamps)}
-              compositionWidth={width}
-              compositionHeight={height}
-              fps={VIDEO_FPS}
-              ref={playerRef}
-              controls
-              bufferStateDelayInMilliseconds={200} // wait for 200ms before showing the spinner
-              renderPlayPauseButton={renderPlayPauseButton}
-            />
+            <>
+              <div className={styles.titleContainer}>
+                <h1>{t('quran-media-maker:title')}</h1>
+              </div>
+
+              <Player
+                className={styles.player}
+                inputProps={inputProps}
+                lazyComponent={lazyComponent}
+                durationInFrames={getDurationInFrames(timestamps)}
+                compositionWidth={width}
+                compositionHeight={height}
+                fps={VIDEO_FPS}
+                ref={playerRef}
+                controls
+                bufferStateDelayInMilliseconds={200} // wait for 200ms before showing the spinner
+                renderPlayPauseButton={renderPlayPauseButton}
+              />
+            </>
           )}
         </div>
         <div className={layoutStyles.flow}>

@@ -1,9 +1,8 @@
 /* eslint-disable react-func/max-lines-per-function */
 /* eslint-disable max-lines */
-import { useCallback, useContext, useMemo, useState } from 'react';
+import { useCallback, useMemo, useState } from 'react';
 
 import classNames from 'classnames';
-import debounce from 'lodash/debounce';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch } from 'react-redux';
@@ -11,31 +10,24 @@ import { useDispatch } from 'react-redux';
 import styles from '../MediaMaker.module.scss';
 import RenderControls from '../RenderControls';
 
-import AlignmentsSettings from './AlignmentsSettings';
-import BackgroundVideos from './BackgroundVideos';
-import OrientationSettings from './OrientationSettings';
-import ReciterSettings from './ReciterSettings';
-import BackgroundSettings from './TextBackgroundSettings';
-import TranslationSettingsSection from './TranslationSectionSetting';
+import AudioTab from './AudioTab';
+import BackgroundTab from './BackgroundTab';
+import ColorsTab from './ColorsTab';
+import AudioIcon from './icons/AudioIcon';
+import ColorIcon from './icons/ColorIcon';
+import ImageIcon from './icons/ImageIcon';
+import TextIcon from './icons/TextIcon';
+import TextTab from './TextTab';
 
-import Section from '@/components/Navbar/SettingsDrawer/Section';
-import { RangeSelectorType } from '@/components/Verse/AdvancedCopy/SelectorContainer';
-import validateRangeSelection from '@/components/Verse/AdvancedCopy/utils/validateRangeSelection';
-import VersesRangeSelector from '@/components/Verse/AdvancedCopy/VersesRangeSelector';
-import DataContext from '@/contexts/DataContext';
-import Button from '@/dls/Button/Button';
-import Counter from '@/dls/Counter/Counter';
-import Select, { SelectSize } from '@/dls/Forms/Select';
+import Button, { ButtonShape, ButtonVariant } from '@/dls/Button/Button';
+import Switch, { SwitchSize } from '@/dls/Switch/Switch';
 import useRemoveQueryParam from '@/hooks/useRemoveQueryParam';
 import layoutStyle from '@/pages/index.module.scss';
-import { updateSettings, resetToDefaults } from '@/redux/slices/mediaMaker';
-import { MAXIMUM_QURAN_FONT_STEP, MINIMUM_FONT_STEP } from '@/redux/slices/QuranReader/styles';
+import { resetToDefaults, updateSettings } from '@/redux/slices/mediaMaker';
 import MediaSettings, { ChangedSettings } from '@/types/Media/MediaSettings';
 import QueryParam from '@/types/QueryParam';
 import Reciter from '@/types/Reciter';
-import { logButtonClick, logValueChange } from '@/utils/eventLogger';
-import { toLocalizedVerseKey } from '@/utils/locale';
-import { generateChapterVersesKeys, getChapterNumberFromKey } from '@/utils/verse';
+import { logButtonClick, logEvent, logValueChange } from '@/utils/eventLogger';
 
 type Props = {
   chaptersList: any[];
@@ -46,8 +38,6 @@ type Props = {
   inputProps: any;
   mediaSettings: MediaSettings;
 };
-
-const MAXIMUM_VERSES_PER_RENDER = 10;
 
 const MEDIA_SETTINGS_TO_QUERY_PARAM = {
   verseTo: QueryParam.VERSE_TO,
@@ -67,7 +57,12 @@ const MEDIA_SETTINGS_TO_QUERY_PARAM = {
   surah: QueryParam.SURAH,
 } as Record<keyof MediaSettings, QueryParam>;
 
-const DEBOUNCE_COLOR_PICKER_FOR_MS = 1000;
+enum Tab {
+  AUDIO = 'audio',
+  BACKGROUND = 'background',
+  TEXT = 'text',
+  COLORS = 'colors',
+}
 
 const VideoSettings: React.FC<Props> = ({
   chaptersList,
@@ -78,12 +73,10 @@ const VideoSettings: React.FC<Props> = ({
   getCurrentFrame,
   mediaSettings,
 }) => {
-  const { lang, t } = useTranslation('quran-media-maker');
-  const chaptersData = useContext(DataContext);
-  const [rangesError, setRangesError] = useState(null);
+  const { t } = useTranslation('quran-media-maker');
+  const [selectedTab, setSelectedTab] = useState<Tab>(Tab.AUDIO);
   const dispatch = useDispatch();
   const router = useRouter();
-  const { verseFrom, verseTo, surah } = mediaSettings;
   const removeQueryParam = useRemoveQueryParam();
 
   const onResetSettingsClick = useCallback(() => {
@@ -114,205 +107,92 @@ const VideoSettings: React.FC<Props> = ({
     [dispatch, mediaSettings, router, seekToBeginning],
   );
 
-  const onChapterChange = (newChapter: string) => {
-    const keyOfFirstVerseOfNewChapter = `${newChapter}:1`;
-    onSettingsUpdate(
-      {
-        surah: Number(newChapter),
-        verseFrom: keyOfFirstVerseOfNewChapter,
-        verseTo: keyOfFirstVerseOfNewChapter,
-      },
-      'surah',
-      newChapter,
-    );
+  const onTabChange = (value: Tab) => {
+    logEvent('video_generation_tab_change', { tab: value });
+    setSelectedTab(value);
   };
 
-  const verseKeys = useMemo(() => {
-    return generateChapterVersesKeys(chaptersData, String(surah)).map((verseKey) => ({
-      id: verseKey,
-      name: verseKey,
-      value: verseKey,
-      label: toLocalizedVerseKey(verseKey, lang),
-    }));
-  }, [chaptersData, lang, surah]);
-
-  const onVerseRangeChange = useCallback(
-    (newSelectedVerseKey: string, verseSelectorId: RangeSelectorType) => {
-      setRangesError(null);
-      const isVerseKeyStartOfRange = verseSelectorId === RangeSelectorType.START;
-      const startVerseKey = isVerseKeyStartOfRange ? newSelectedVerseKey : verseFrom;
-      const endVerseKey = !isVerseKeyStartOfRange ? newSelectedVerseKey : verseTo;
-      const validationError = validateRangeSelection(
-        startVerseKey,
-        endVerseKey,
-        t,
-        MAXIMUM_VERSES_PER_RENDER,
-        chaptersData,
-      );
-      if (validationError) {
-        setRangesError(validationError);
-        return false;
-      }
-      if (isVerseKeyStartOfRange) {
-        onSettingsUpdate(
-          {
-            verseTo,
-            verseFrom: newSelectedVerseKey,
-            surah: getChapterNumberFromKey(newSelectedVerseKey),
-          },
-          'verseFrom',
-          newSelectedVerseKey,
-        );
-      } else {
-        onSettingsUpdate(
-          {
-            verseFrom,
-            verseTo: newSelectedVerseKey,
-            surah: getChapterNumberFromKey(newSelectedVerseKey),
-          },
-          'verseTo',
-          newSelectedVerseKey,
-        );
-      }
-      return true;
+  const fillColor = useCallback(
+    (tab) => {
+      return selectedTab === tab ? '#2ca4ab' : '#1C1B1F';
     },
-    [chaptersData, onSettingsUpdate, t, verseFrom, verseTo],
+    [selectedTab],
   );
 
-  const onFontScaleDecreaseClicked = () => {
-    const value = mediaSettings.quranTextFontScale - 1;
-    onSettingsUpdate({ quranTextFontScale: value }, 'quranTextFontScale', value);
-  };
+  const tabs = useMemo(
+    () => [
+      {
+        name: <AudioIcon fill={fillColor(Tab.AUDIO)} />,
+        value: Tab.AUDIO,
+      },
+      {
+        name: <ImageIcon fill={fillColor(Tab.BACKGROUND)} />,
+        value: Tab.BACKGROUND,
+      },
+      {
+        name: <TextIcon fill={fillColor(Tab.TEXT)} />,
+        value: Tab.TEXT,
+      },
+      {
+        name: <ColorIcon fill={fillColor(Tab.COLORS)} />,
+        value: Tab.COLORS,
+      },
+    ],
+    [fillColor],
+  );
 
-  const onFontScaleIncreaseClicked = () => {
-    const value = mediaSettings.quranTextFontScale + 1;
-    onSettingsUpdate({ quranTextFontScale: value }, 'quranTextFontScale', value);
-  };
-
-  const onFontChange = (event) => {
-    debouncedOnChange(event.target.value);
-  };
-
-  const debouncedOnChange = debounce((color) => {
-    onSettingsUpdate({ fontColor: color }, 'fontColor', color);
-  }, DEBOUNCE_COLOR_PICKER_FOR_MS);
+  const tabComponents = useMemo(
+    () => ({
+      [Tab.AUDIO]: (
+        <AudioTab
+          mediaSettings={mediaSettings}
+          onSettingsUpdate={onSettingsUpdate}
+          chaptersList={chaptersList}
+          isFetching={isFetching}
+          reciters={reciters}
+        />
+      ),
+      [Tab.BACKGROUND]: (
+        <BackgroundTab mediaSettings={mediaSettings} onSettingsUpdate={onSettingsUpdate} />
+      ),
+      [Tab.TEXT]: <TextTab mediaSettings={mediaSettings} onSettingsUpdate={onSettingsUpdate} />,
+      [Tab.COLORS]: <ColorsTab mediaSettings={mediaSettings} onSettingsUpdate={onSettingsUpdate} />,
+    }),
+    [chaptersList, isFetching, mediaSettings, onSettingsUpdate, reciters],
+  );
 
   return (
     <>
+      <div
+        className={classNames(layoutStyle.flowItem, layoutStyle.fullWidth, styles.mainContainer)}
+      >
+        <div className={styles.settingsContainer}>
+          <div className={styles.switchContainer}>
+            <div className={styles.switch}>
+              <Switch
+                size={SwitchSize.Small}
+                selected={selectedTab}
+                items={tabs}
+                onSelect={onTabChange}
+              />
+            </div>
+            <Button
+              shape={ButtonShape.Pill}
+              variant={ButtonVariant.Ghost}
+              onClick={onResetSettingsClick}
+            >
+              {t('common:settings.reset')}
+            </Button>
+          </div>
+          <div className={styles.settings}>{tabComponents[selectedTab]}</div>
+        </div>
+      </div>
+
       <RenderControls
         isFetching={isFetching}
         getCurrentFrame={getCurrentFrame}
         inputProps={inputProps}
       />
-      <div
-        className={classNames(
-          layoutStyle.flowItem,
-          layoutStyle.fullWidth,
-          styles.settingsContainer,
-        )}
-      >
-        <div>
-          <Button onClick={onResetSettingsClick}>{t('common:settings.reset-cta')}</Button>
-          <Section>
-            <Section.Title>{t('common:surah')}</Section.Title>
-            <Section.Row>
-              <Section.Label>{t('common:sidebar.search-surah')}</Section.Label>
-              <Select
-                id="surah"
-                name="surah"
-                options={chaptersList || []}
-                value={String(surah)}
-                onChange={onChapterChange}
-                disabled={isFetching}
-                size={SelectSize.Small}
-                className={styles.select}
-              />
-            </Section.Row>
-            <Section.Row>
-              <Section.Row>
-                <VersesRangeSelector
-                  dropdownItems={verseKeys}
-                  rangeStartVerse={verseFrom}
-                  rangeEndVerse={verseTo}
-                  onChange={onVerseRangeChange}
-                  isVisible
-                  isDisabled={isFetching}
-                />
-              </Section.Row>
-            </Section.Row>
-            {rangesError && <div className={styles.error}>{rangesError}</div>}
-          </Section>
-          <ReciterSettings
-            reciter={mediaSettings.reciter}
-            onSettingsUpdate={onSettingsUpdate}
-            reciters={reciters}
-          />
-          <TranslationSettingsSection
-            translations={mediaSettings.translations}
-            translationFontScale={mediaSettings.translationFontScale}
-            onSettingsUpdate={onSettingsUpdate}
-          />
-        </div>
-        <div>
-          <BackgroundSettings
-            shouldHaveBorder={mediaSettings.shouldHaveBorder}
-            backgroundColorId={mediaSettings.backgroundColorId}
-            opacity={mediaSettings.opacity}
-            onSettingsUpdate={onSettingsUpdate}
-          />
-          <Section>
-            <Section.Title>{t('colors')}</Section.Title>
-            <Section.Row>
-              <Section.Label>{t('font-color')}</Section.Label>
-              <input
-                className={styles.colorPicker}
-                type="color"
-                value={mediaSettings.fontColor}
-                onChange={onFontChange}
-              />
-            </Section.Row>
-          </Section>
-          <Section>
-            <Section.Title>{t('common:fonts.quran-font')}</Section.Title>
-            <Section.Row>
-              <Section.Label>{t('common:fonts.font-size')}</Section.Label>
-              <Counter
-                count={mediaSettings.quranTextFontScale}
-                onDecrement={
-                  mediaSettings.quranTextFontScale === MINIMUM_FONT_STEP
-                    ? null
-                    : onFontScaleDecreaseClicked
-                }
-                onIncrement={
-                  mediaSettings.quranTextFontScale === MAXIMUM_QURAN_FONT_STEP
-                    ? null
-                    : onFontScaleIncreaseClicked
-                }
-              />
-            </Section.Row>
-          </Section>
-          <OrientationSettings
-            orientation={mediaSettings.orientation}
-            onSettingsUpdate={onSettingsUpdate}
-          />
-        </div>
-        <div>
-          <AlignmentsSettings
-            verseAlignment={mediaSettings.verseAlignment}
-            translationAlignment={mediaSettings.translationAlignment}
-            onSettingsUpdate={onSettingsUpdate}
-          />
-          <Section>
-            <Section.Title>{t('video-picker')}</Section.Title>
-            <Section.Row>
-              <BackgroundVideos
-                videoId={mediaSettings.videoId}
-                onSettingsUpdate={onSettingsUpdate}
-              />
-            </Section.Row>
-          </Section>
-        </div>
-      </div>
     </>
   );
 };

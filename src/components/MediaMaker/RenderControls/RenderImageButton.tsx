@@ -9,7 +9,6 @@ import Button from '@/dls/Button/Button';
 import { RenderStatus, useGenerateMediaFile } from '@/hooks/auth/media/useGenerateMediaFile';
 import useGetMediaFilesCount from '@/hooks/auth/media/useGetMediaFilesCount';
 import IconDownload from '@/icons/download.svg';
-import IconRender from '@/icons/slow_motion_video.svg';
 import { MediaType } from '@/types/Media/GenerateMediaFileRequest';
 import { isLoggedIn } from '@/utils/auth/login';
 import { logButtonClick } from '@/utils/eventLogger';
@@ -63,17 +62,15 @@ const RenderImageButton: React.FC<Props> = ({ inputProps, getCurrentFrame, isFet
   const isRendering = state.status === RenderStatus.RENDERING;
   return (
     <div>
-      <MonthlyMediaFileCounter data={data?.data} type={MediaType.IMAGE} />
       <div>
         {isInitOrInvokingOrError && (
           <>
             <Button
-              prefix={<IconRender />}
               isDisabled={isFetching || state.status === RenderStatus.INVOKING}
               isLoading={isFetching || state.status === RenderStatus.INVOKING}
               onClick={onRenderClicked}
             >
-              {t('render-image')}
+              {t('download-image')}
             </Button>
             {state.status === RenderStatus.ERROR && (
               <div>{state?.error?.message || t('common:error.general')}</div>
@@ -89,11 +86,12 @@ const RenderImageButton: React.FC<Props> = ({ inputProps, getCurrentFrame, isFet
               href={state.status === RenderStatus.DONE ? state.url : ''}
               onClick={onDownloadClicked}
             >
-              <p ref={downloadButtonRef}>{t('download-video')}</p>
+              <p ref={downloadButtonRef}>{t('download-image')}</p>
             </Button>
           </>
         )}
       </div>
+      <MonthlyMediaFileCounter data={data?.data} />
     </div>
   );
 };

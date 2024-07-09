@@ -8,14 +8,9 @@ import TranslationSettings from './TranslationSetting';
 
 import DataFetcher from '@/components/DataFetcher';
 import Section from '@/components/Navbar/SettingsDrawer/Section';
-import Counter from '@/dls/Counter/Counter';
 import Modal from '@/dls/Modal/Modal';
 import SelectionCard from '@/dls/SelectionCard/SelectionCard';
 import Skeleton from '@/dls/Skeleton/Skeleton';
-import {
-  MAXIMUM_TRANSLATIONS_FONT_STEP,
-  MINIMUM_FONT_STEP,
-} from '@/redux/slices/QuranReader/styles';
 import { MediaSettingsProps } from '@/types/Media/MediaSettings';
 import { makeTranslationsUrl } from '@/utils/apiPaths';
 import { toLocalizedNumber } from '@/utils/locale';
@@ -23,14 +18,9 @@ import { TranslationsResponse } from 'types/ApiResponses';
 
 interface Props extends MediaSettingsProps {
   translations: number[];
-  translationFontScale: number;
 }
 
-const TranslationSettingsSection: React.FC<Props> = ({
-  onSettingsUpdate,
-  translations,
-  translationFontScale,
-}) => {
+const TranslationSettingsSection: React.FC<Props> = ({ onSettingsUpdate, translations }) => {
   const { t, lang } = useTranslation('common');
   const [showTranslationsList, setShowTranslationsList] = useState(false);
 
@@ -93,16 +83,6 @@ const TranslationSettingsSection: React.FC<Props> = ({
     onSettingsUpdate({ translations: [] }, 'translations', []);
   };
 
-  const onFontScaleDecreaseClicked = () => {
-    const newValue = translationFontScale - 1;
-    onSettingsUpdate({ translationFontScale: newValue }, 'translationFontScale', newValue);
-  };
-
-  const onFontScaleIncreaseClicked = () => {
-    const newValue = translationFontScale + 1;
-    onSettingsUpdate({ translationFontScale: newValue }, 'translationFontScale', newValue);
-  };
-
   return (
     <div>
       <Section>
@@ -112,20 +92,6 @@ const TranslationSettingsSection: React.FC<Props> = ({
             loading={translationLoading}
             queryKey={makeTranslationsUrl(lang)}
             render={renderTranslations}
-          />
-        </Section.Row>
-        <Section.Row>
-          <Section.Label>{t('fonts.font-size')}</Section.Label>
-          <Counter
-            count={translationFontScale}
-            onIncrement={
-              MAXIMUM_TRANSLATIONS_FONT_STEP === translationFontScale
-                ? null
-                : onFontScaleIncreaseClicked
-            }
-            onDecrement={
-              MINIMUM_FONT_STEP === translationFontScale ? null : onFontScaleDecreaseClicked
-            }
           />
         </Section.Row>
       </Section>
