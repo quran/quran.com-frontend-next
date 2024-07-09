@@ -30,6 +30,7 @@ const LOCALE_NAME = {
   ta: 'தமிழ்', // tamil
   hi: 'हिन्दी',
   ku: 'Kurdî',
+  uz: "o'zbek",
 };
 
 const LOCALE_NAME_TO_CODE = {

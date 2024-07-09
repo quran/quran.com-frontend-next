@@ -220,8 +220,8 @@ const WordByWordSection = () => {
           render={(data: WordByWordTranslationsResponse) => {
             const uniqueData = uniqBy(data.wordByWordTranslations, 'isoCode');
 
-            const options = uniqueData.map(({ isoCode }) => ({
-              label: getLocaleName(isoCode),
+            const options = uniqueData.map(({ isoCode, languageName }) => ({
+              label: getLocaleName(isoCode) || languageName,
               value: isoCode,
             }));
 
