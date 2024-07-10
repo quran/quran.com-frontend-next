@@ -20,6 +20,7 @@ app.prepare().then(() => {
     },
   ).listen(3000, (err) => {
     if (err) throw err;
+    // eslint-disable-next-line no-console
     console.log('> Server started on https://localhost:3000');
   });
 });

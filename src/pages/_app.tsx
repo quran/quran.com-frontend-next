@@ -2,7 +2,6 @@ import React, { useEffect } from 'react';
 
 import { DirectionProvider } from '@radix-ui/react-direction';
 import { TooltipProvider } from '@radix-ui/react-tooltip';
-import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { DefaultSeo } from 'next-seo';
@@ -16,6 +15,7 @@ import FontPreLoader from '@/components/Fonts/FontPreLoader';
 import GlobalListeners from '@/components/GlobalListeners';
 import Navbar from '@/components/Navbar/Navbar';
 import OnboardingChecklist from '@/components/Onboarding/OnboardingChecklist';
+import { OnboardingProvider } from '@/components/Onboarding/OnboardingProvider';
 import SessionIncrementor from '@/components/SessionIncrementor';
 import ThirdPartyScripts from '@/components/ThirdPartyScripts/ThirdPartyScripts';
 import Footer from '@/dls/Footer/Footer';
@@ -38,13 +38,6 @@ import 'src/styles/fonts.scss';
 import 'src/styles/theme.scss';
 import 'src/styles/global.scss';
 import 'src/styles/variables.scss';
-
-const OnboardingProvider = dynamic(
-  () => import('@/components/Onboarding/OnboardingProvider').then((a) => a.OnboardingProvider),
-  {
-    ssr: false,
-  },
-);
 
 function MyApp({ Component, pageProps }): JSX.Element {
   const router = useRouter();

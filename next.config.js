@@ -167,6 +167,7 @@ const config = {
   },
 };
 
+// eslint-disable-next-line max-lines
 module.exports = withPlugins(
   [withTM, withBundleAnalyzer, withPWA, withFonts, nextTranslate, withSentryConfig],
   config,

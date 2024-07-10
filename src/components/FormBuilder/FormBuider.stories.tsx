@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable max-lines */
 /* eslint-disable react/no-multi-comp */
 /* eslint-disable no-alert */

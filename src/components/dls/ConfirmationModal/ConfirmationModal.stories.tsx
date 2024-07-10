@@ -1,3 +1,4 @@
+/* eslint-disable no-alert */
 import Button from '../Button/Button';
 
 import ConfirmationModal from './ConfirmationModal';

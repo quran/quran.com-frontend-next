@@ -1,6 +1,7 @@
 import AudioData from './AudioData';
 import AvailableLanguage from './AvailableLanguage';
 import AvailableTranslation from './AvailableTranslation';
+import AvailableWordByWordTranslation from './AvailableWordByWordTranslation';
 import Chapter from './Chapter';
 import ChapterInfo from './ChapterInfo';
 import Footnote from './Footnote';
@@ -50,6 +51,10 @@ export interface ChapterResponse extends BaseResponse {
 
 export interface TranslationsResponse extends BaseResponse {
   translations?: AvailableTranslation[];
+}
+
+export interface WordByWordTranslationsResponse extends BaseResponse {
+  wordByWordTranslations?: AvailableWordByWordTranslation[];
 }
 
 export interface LanguagesResponse extends BaseResponse {
