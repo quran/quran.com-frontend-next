@@ -84,9 +84,9 @@ const TranslationSettingsSection: React.FC<Props> = ({ onSettingsUpdate, transla
   };
 
   return (
-    <div>
-      <Section>
-        <Section.Title>{t('translation')}</Section.Title>
+    <>
+      <div className={styles.section}>
+        <h1 className={styles.sectionTitle}>{t('translations')}</h1>
         <Section.Row>
           <DataFetcher
             loading={translationLoading}
@@ -94,7 +94,7 @@ const TranslationSettingsSection: React.FC<Props> = ({ onSettingsUpdate, transla
             render={renderTranslations}
           />
         </Section.Row>
-      </Section>
+      </div>
       {showTranslationsList ? (
         <div className={styles.translationModalWrapper}>
           <Modal
@@ -122,7 +122,7 @@ const TranslationSettingsSection: React.FC<Props> = ({ onSettingsUpdate, transla
           </Modal>
         </div>
       ) : null}
-    </div>
+    </>
   );
 };
 export default TranslationSettingsSection;

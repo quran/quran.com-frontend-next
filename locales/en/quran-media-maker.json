@@ -24,7 +24,9 @@
   "justified": "Justified",
   "landscape": "Landscape",
   "portrait": "Portrait",
+  "max-ayahs": "Max 10 Ayahs",
   "monthly-balance": "Monthly balance: ",
   "count": "{{count}}",
-  "limit": " / {{limit}}"
+  "limit": " / {{limit}}",
+  "to": "to"
 }

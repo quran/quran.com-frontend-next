@@ -64,6 +64,9 @@ enum Tab {
   COLORS = 'colors',
 }
 
+const ICON_COLOR_SUCCESS = '#2ca4ab';
+const ICON_COLOR_PRIMARY = '#1C1B1F';
+
 const VideoSettings: React.FC<Props> = ({
   chaptersList,
   reciters,
@@ -114,7 +117,7 @@ const VideoSettings: React.FC<Props> = ({
 
   const fillColor = useCallback(
     (tab) => {
-      return selectedTab === tab ? '#2ca4ab' : '#1C1B1F';
+      return selectedTab === tab ? ICON_COLOR_SUCCESS : ICON_COLOR_PRIMARY;
     },
     [selectedTab],
   );

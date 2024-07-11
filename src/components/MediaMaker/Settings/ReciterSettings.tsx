@@ -40,21 +40,20 @@ const ReciterSettings: React.FC<Props> = ({ reciters, onSettingsUpdate, reciter 
   };
 
   return (
-    <Section>
-      <Section.Title>{t('common:reciter')}</Section.Title>
+    <div className={styles.section}>
+      <div className={styles.sectionTitle}>{t('common:reciter')}</div>
       <Section.Row>
-        <Section.Label>{t('common:audio.select-reciter')}</Section.Label>
         <Select
           id="reciter"
           name="reciter"
           options={recitersOptions || []}
           value={String(reciter)}
           onChange={onReciterChange}
-          size={SelectSize.Small}
+          size={SelectSize.Medium}
           className={styles.select}
         />
       </Section.Row>
-    </Section>
+    </div>
   );
 };
 

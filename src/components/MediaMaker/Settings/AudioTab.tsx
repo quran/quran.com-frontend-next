@@ -7,17 +7,20 @@ import styles from '../MediaMaker.module.scss';
 
 import ReciterSettings from './ReciterSettings';
 import TranslationSettingsSection from './TranslationSectionSetting';
+import VersesRangeSelector from './VersesRangeSelector';
 
-import Section from '@/components/Navbar/SettingsDrawer/Section';
 import { RangeSelectorType } from '@/components/Verse/AdvancedCopy/SelectorContainer';
 import validateRangeSelection from '@/components/Verse/AdvancedCopy/utils/validateRangeSelection';
-import VersesRangeSelector from '@/components/Verse/AdvancedCopy/VersesRangeSelector';
 import DataContext from '@/contexts/DataContext';
 import Select, { SelectSize } from '@/dls/Forms/Select';
 import MediaSettings, { ChangedSettings } from '@/types/Media/MediaSettings';
 import Reciter from '@/types/Reciter';
 import { toLocalizedVerseKey } from '@/utils/locale';
-import { generateChapterVersesKeys, getChapterNumberFromKey } from '@/utils/verse';
+import {
+  generateChapterVersesKeys,
+  getChapterNumberFromKey,
+  getVerseNumberFromKey,
+} from '@/utils/verse';
 
 const MAXIMUM_VERSES_PER_RENDER = 10;
 
@@ -60,7 +63,7 @@ const AudioTab: FC<AudioTabProps> = ({
       id: verseKey,
       name: verseKey,
       value: verseKey,
-      label: toLocalizedVerseKey(verseKey, lang),
+      label: toLocalizedVerseKey(String(getVerseNumberFromKey(verseKey)), lang),
     }));
   }, [chaptersData, lang, surah]);
 
@@ -69,6 +72,7 @@ const AudioTab: FC<AudioTabProps> = ({
     const isVerseKeyStartOfRange = verseSelectorId === RangeSelectorType.START;
     const startVerseKey = isVerseKeyStartOfRange ? newSelectedVerseKey : verseFrom;
     const endVerseKey = !isVerseKeyStartOfRange ? newSelectedVerseKey : verseTo;
+
     const validationError = validateRangeSelection(
       startVerseKey,
       endVerseKey,
@@ -105,11 +109,14 @@ const AudioTab: FC<AudioTabProps> = ({
   };
 
   return (
-    <div>
-      <Section>
-        <Section.Title>{t('common:surah')}</Section.Title>
-        <Section.Row>
-          <Section.Label>{t('common:sidebar.search-surah')}</Section.Label>
+    <div className={styles.audioTabContainer}>
+      <div className={styles.section}>
+        <div className={styles.sectionTitle}>
+          {t('common:ayahs')}
+          <div className={styles.label}>{t('max-ayahs')}</div>
+        </div>
+
+        <div className={styles.ayahsSettingsContainer}>
           <Select
             id="surah"
             name="surah"
@@ -117,29 +124,28 @@ const AudioTab: FC<AudioTabProps> = ({
             value={String(surah)}
             onChange={onChapterChange}
             disabled={isFetching}
-            size={SelectSize.Small}
-            className={styles.select}
+            size={SelectSize.Medium}
+            className={(styles.select, styles.surahSelect)}
           />
-        </Section.Row>
-        <Section.Row>
-          <Section.Row>
-            <VersesRangeSelector
-              dropdownItems={verseKeys}
-              rangeStartVerse={verseFrom}
-              rangeEndVerse={verseTo}
-              onChange={onVerseRangeChange}
-              isVisible
-              isDisabled={isFetching}
-            />
-          </Section.Row>
-        </Section.Row>
+
+          <VersesRangeSelector
+            dropdownItems={verseKeys}
+            rangeStartVerse={verseFrom}
+            rangeEndVerse={verseTo}
+            onChange={onVerseRangeChange}
+            isVisible
+            isDisabled={isFetching}
+          />
+        </div>
         {rangesError && <div className={styles.error}>{rangesError}</div>}
-      </Section>
+      </div>
+
       <ReciterSettings
         reciter={mediaSettings.reciter}
         onSettingsUpdate={onSettingsUpdate}
         reciters={reciters}
       />
+
       <TranslationSettingsSection
         translations={mediaSettings.translations}
         onSettingsUpdate={onSettingsUpdate}

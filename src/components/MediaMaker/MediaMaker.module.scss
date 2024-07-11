@@ -1,4 +1,4 @@
-@use 'src/styles/breakpoints';
+@use "src/styles/breakpoints";
 .container {
   display: flex;
   flex-direction: column;
@@ -96,7 +96,7 @@
 }
 
 .settings {
-  width: 80%;
+  width: 85%;
   align-self: center;
 }
 
@@ -309,6 +309,62 @@
   color: var(--color-text-error);
 }
 
+.audioTabContainer {
+  display: flex;
+  column-gap: calc(var(--spacing-medium) * 3.5);
+  @include breakpoints.smallerThanDesktop {
+    flex-direction: column;
+  }
+}
+
+.ayahsSettingsContainer {
+  display: flex;
+  flex-direction: column;
+  row-gap: var(--spacing-xsmall);
+}
+
 .select select {
   width: 100%;
+}
+
+.surahSelect {
+  flex-grow: 1;
+  select {
+    width: 100%;
+  }
+}
+
+.section {
+  flex: 1;
+  margin-block: var(--spacing-large);
+}
+
+.sectionTitle {
+  font-size: var(--font-size-large);
+  font-weight: var(--font-weight-semibold);
+  padding-block-end: var(--spacing-xsmall);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+
+  @include breakpoints.smallerThanTablet {
+    font-size: var(--font-size-small);
+  }
+}
+
+.label {
+  color: var(--color-text-default);
+  opacity: var(--opacity-75);
+  font-size: var(--font-size-xsmall);
+  @include breakpoints.desktop {
+    padding-top: var(--spacing-micro);
+  }
+
+  [dir="ltr"] & {
+    padding-left: var(--spacing-xxsmall);
+  }
+
+  [dir="rtl"] & {
+    padding-right: var(--spacing-xxsmall);
+  }
 }
