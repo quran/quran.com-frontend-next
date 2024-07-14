@@ -33,12 +33,14 @@ $pixel: 1px;
 .switcher {
   display: flex;
   align-self: center;
+  align-items: center;
   width: fit-content;
-  column-gap: var(--spacing-xsmall);
+  font-size: var(--font-size-small);
   padding: var(--spacing-micro) var(--spacing-xsmall) var(--spacing-micro) var(--spacing-xsmall);
   border-bottom-left-radius: var(--spacing-xsmall);
   border-bottom-right-radius: var(--spacing-xsmall);
   justify-content: center;
+  align-items: center;
   background: var(--color-background-default);
   background: var(--color-background-elevated);
   box-shadow: var(--shadow-small);
@@ -79,6 +81,7 @@ $pixel: 1px;
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
+  margin-inline-start: var(--spacing-xxsmall);
 }
 
 .rotate180 {

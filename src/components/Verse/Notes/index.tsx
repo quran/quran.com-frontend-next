@@ -3,7 +3,6 @@ import { useState } from 'react';
 import classNames from 'classnames';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
-import useSWRImmutable from 'swr/immutable';
 
 import internalStyles from './Notes.module.scss';
 
@@ -15,9 +14,6 @@ import NewLabel from '@/dls/Badge/NewLabel';
 import Button, { ButtonShape, ButtonSize, ButtonType, ButtonVariant } from '@/dls/Button/Button';
 import EmptyNotesIcon from '@/icons/notes-empty.svg';
 import NotesIcon from '@/icons/notes-filled.svg';
-import ConsentType from '@/types/auth/ConsentType';
-import { getUserProfile } from '@/utils/auth/api';
-import { makeUserProfileUrl } from '@/utils/auth/apiPaths';
 import { isLoggedIn } from '@/utils/auth/login';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getChapterWithStartingVerseUrl, getLoginNavigationUrl } from '@/utils/navigation';
@@ -38,11 +34,6 @@ const VerseNotes = ({ verseKey, isTranslationView, hasNotes }: VerseNotesProps) 
   const { t } = useTranslation('common');
   const router = useRouter();
 
-  const { data: userData } = useSWRImmutable(
-    isLoggedIn() ? makeUserProfileUrl() : null,
-    getUserProfile,
-  );
-
   const onItemClicked = () => {
     const isUserLoggedIn = isLoggedIn();
     logButtonClick('verse_actions_menu_note', {
@@ -60,8 +51,7 @@ const VerseNotes = ({ verseKey, isTranslationView, hasNotes }: VerseNotesProps) 
     setIsModalOpen(false);
   };
 
-  // TODO: consents is used as a temporary solution until we have a proper way to check if the user has notes
-  const shouldShowNewLabel = !userData?.consents?.[ConsentType.HAS_NOTES];
+  const shouldShowNewLabel = false;
 
   return (
     <>

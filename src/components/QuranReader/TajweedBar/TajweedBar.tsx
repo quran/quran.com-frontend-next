@@ -5,6 +5,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from './TajweedBar.module.scss';
 
+import NewLabel from '@/dls/Badge/NewLabel';
 import useThemeDetector from '@/hooks/useThemeDetector';
 import ChevronDownIcon from '@/icons/chevron-down.svg';
 import { logEvent } from '@/utils/eventLogger';
@@ -24,7 +25,7 @@ const TajweedColors = () => {
   const { t } = useTranslation('quran-reader');
   const ref = useRef(null);
 
-  const [showTajweedBar, setShowTajweedBar] = useState(true);
+  const [showTajweedBar, setShowTajweedBar] = useState(false);
   const [height, setHeight] = useState(0);
 
   const { themeVariant } = useThemeDetector();
@@ -75,6 +76,7 @@ const TajweedColors = () => {
         tabIndex={0}
       >
         <p>{t('tajweed-colors')}</p>
+        <NewLabel />
         <span
           className={classNames(styles.chevronIconContainer, {
             [styles.rotate180]: showTajweedBar,
