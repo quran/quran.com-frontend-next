@@ -236,7 +236,10 @@
   position: relative;
   display: grid;
   gap: 5px;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(6, 1fr);
+  @include breakpoints.smallerThanTablet {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 .colorBox {
@@ -309,7 +312,7 @@
   color: var(--color-text-error);
 }
 
-.audioTabContainer {
+.tabContainer {
   display: flex;
   column-gap: calc(var(--spacing-medium) * 3.5);
   @include breakpoints.smallerThanDesktop {

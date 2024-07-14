@@ -109,7 +109,7 @@ const AudioTab: FC<AudioTabProps> = ({
   };
 
   return (
-    <div className={styles.audioTabContainer}>
+    <div className={styles.tabContainer}>
       <div className={styles.section}>
         <div className={styles.sectionTitle}>
           {t('common:ayahs')}

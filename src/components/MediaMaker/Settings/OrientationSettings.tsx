@@ -2,7 +2,8 @@ import React from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
-import Section from '@/components/Navbar/SettingsDrawer/Section';
+import styles from '../MediaMaker.module.scss';
+
 import Switch from '@/dls/Switch/Switch';
 import { MediaSettingsProps } from '@/types/Media/MediaSettings';
 import Orientation from '@/types/Media/Orientation';
@@ -19,8 +20,8 @@ const OrientationSettings: React.FC<Props> = ({ onSettingsUpdate, orientation })
   };
 
   return (
-    <Section>
-      <Section.Title>{t('orientation')}</Section.Title>
+    <div className={styles.section}>
+      <div className={styles.sectionTitle}>{t('orientation')}</div>
       <Switch
         items={[
           { name: t(Orientation.LANDSCAPE), value: Orientation.LANDSCAPE },
@@ -29,7 +30,7 @@ const OrientationSettings: React.FC<Props> = ({ onSettingsUpdate, orientation })
         selected={orientation}
         onSelect={onOrientationChange}
       />
-    </Section>
+    </div>
   );
 };
 
