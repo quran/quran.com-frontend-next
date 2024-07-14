@@ -63,7 +63,7 @@ $pixel: 1px;
 .ruleContainer {
   display: flex;
   align-items: center;
-  height: var(--line-height-jumbo);
+  height: var(--spacing-mega);
 }
 
 .circle {
@@ -71,10 +71,7 @@ $pixel: 1px;
   width: var(--spacing-large);
   border-radius: var(--border-radius-circle);
   display: inline-block;
-  margin-inline-end: var(--spacing-medium);
-  @include breakpoints.smallerThanTablet {
-    margin-inline-end: var(--spacing-xsmall);
-  }
+  margin-inline-end: var(--spacing-xxsmall);
 }
 
 .chevronIconContainer {
