@@ -10,6 +10,7 @@ import {
   DEFAULT_FONT_COLOR,
   DEFAULT_OPACITY,
   DEFAULT_QURAN_FONT_SCALE,
+  DEFAULT_QURAN_FONT_STYLE,
   DEFAULT_RECITER_ID,
   DEFAULT_SHOULD_HAVE_BORDER,
   DEFAULT_SURAH,
@@ -25,6 +26,7 @@ const initialState: MediaSettings = {
   reciter: DEFAULT_RECITER_ID,
   quranTextFontScale: DEFAULT_QURAN_FONT_SCALE,
   translationFontScale: DEFAULT_TRANSLATION_FONT_SCALE,
+  quranTextFontStyle: DEFAULT_QURAN_FONT_STYLE,
   translations: [DEFAULT_TRANSLATION],
   fontColor: DEFAULT_FONT_COLOR,
   verseAlignment: Alignment.CENTRE,
@@ -65,6 +67,7 @@ export const selectQuranTextFontScale = (state: RootState) => state.mediaMaker.q
 export const selectFontColor = (state: RootState) => state.mediaMaker.fontColor;
 export const selectTranslationFontScale = (state: RootState) =>
   state.mediaMaker.translationFontScale;
+export const selectQuranTextFontStyle = (state: RootState) => state.mediaMaker.quranTextFontStyle;
 export const selectBackgroundColorId = (state: RootState) => state.mediaMaker.backgroundColorId;
 export const selectTranslations = (state: RootState) => state.mediaMaker.translations;
 export const selectVerseAlignment = (state: RootState) => state.mediaMaker.verseAlignment;

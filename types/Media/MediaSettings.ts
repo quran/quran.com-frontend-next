@@ -1,3 +1,5 @@
+import { QuranFont } from '../QuranReader';
+
 import Alignment from '@/types/Media/Alignment';
 import Orientation from '@/types/Media/Orientation';
 
@@ -10,6 +12,7 @@ type MediaSettings = {
   reciter: number;
   quranTextFontScale: number;
   translationFontScale: number;
+  quranTextFontStyle: QuranFont;
   translations: number[];
   fontColor: string;
   verseAlignment: Alignment;

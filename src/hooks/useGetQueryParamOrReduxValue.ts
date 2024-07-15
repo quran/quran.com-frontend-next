@@ -4,7 +4,7 @@
 import { ParsedUrlQuery } from 'querystring';
 
 import { useRouter } from 'next/router';
-import { useSelector, shallowEqual } from 'react-redux';
+import { shallowEqual, useSelector } from 'react-redux';
 
 import { RootState } from '@/redux/RootState';
 import {
@@ -13,6 +13,7 @@ import {
   selectOpacity,
   selectOrientation,
   selectQuranTextFontScale,
+  selectQuranTextFontStyle,
   selectReciter,
   selectShouldHaveBorder,
   selectSurah,
@@ -38,6 +39,7 @@ import {
   isValidBackgroundColorIdQueryParamValue,
   isValidBooleanQueryParamValue,
   isValidFontScaleQueryParamValue,
+  isValidFontStyleQueryParamValue,
   isValidOpacityQueryParamValue,
   isValidOrientationQueryParamValue,
   isValidReciterId,
@@ -109,6 +111,12 @@ const QUERY_PARAMS_DATA = {
     reduxEqualityFunction: shallowEqual,
     valueType: QueryParamValueType.Number,
     validate: (val) => isValidFontScaleQueryParamValue(val),
+  },
+  [QueryParam.QURAN_TEXT_FONT_STYLE]: {
+    reduxSelector: selectQuranTextFontStyle,
+    reduxEqualityFunction: shallowEqual,
+    valueType: QueryParamValueType.String,
+    validate: (val) => isValidFontStyleQueryParamValue(val),
   },
   [QueryParam.VERSE_ALIGNMENT]: {
     reduxSelector: selectVerseAlignment,

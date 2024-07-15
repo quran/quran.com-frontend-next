@@ -312,15 +312,7 @@
   color: var(--color-text-error);
 }
 
-.tabContainer {
-  display: flex;
-  column-gap: calc(var(--spacing-medium) * 3.5);
-  @include breakpoints.smallerThanDesktop {
-    flex-direction: column;
-  }
-}
-
-.ayahsSettingsContainer {
+.selectContainer {
   display: flex;
   flex-direction: column;
   row-gap: var(--spacing-xsmall);
@@ -337,9 +329,22 @@
   }
 }
 
+.tabContainer {
+  display: flex;
+  align-items: space-between;
+  column-gap: calc(var(--spacing-medium) * 3.5);
+  @include breakpoints.smallerThanTablet {
+    flex-direction: column;
+    align-items: center;
+  }
+}
+
 .section {
   flex: 1;
   margin-block: var(--spacing-large);
+  @include breakpoints.smallerThanTablet {
+    width: 90%;
+  }
 }
 
 .sectionTitle {
@@ -350,7 +355,7 @@
   flex-direction: row;
   align-items: center;
 
-  @include breakpoints.smallerThanTablet {
+  @include breakpoints.smallerThanDesktop {
     font-size: var(--font-size-small);
   }
 }
@@ -359,15 +364,16 @@
   color: var(--color-text-default);
   opacity: var(--opacity-75);
   font-size: var(--font-size-xsmall);
+  padding-inline-start: var(--spacing-xxsmall);
   @include breakpoints.desktop {
     padding-top: var(--spacing-micro);
   }
+}
 
-  [dir="ltr"] & {
-    padding-left: var(--spacing-xxsmall);
-  }
-
-  [dir="rtl"] & {
-    padding-right: var(--spacing-xxsmall);
+.counterContainer {
+  @include breakpoints.smallerThanTablet {
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 }

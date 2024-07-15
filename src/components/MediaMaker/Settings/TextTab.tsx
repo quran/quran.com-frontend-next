@@ -1,16 +1,18 @@
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
-import Section from '@/components/Navbar/SettingsDrawer/Section';
+import styles from '../MediaMaker.module.scss';
+
 import Counter from '@/dls/Counter/Counter';
+import Select from '@/dls/Forms/Select';
 import {
   MAXIMUM_QURAN_FONT_STEP,
   MAXIMUM_TRANSLATIONS_FONT_STEP,
   MINIMUM_FONT_STEP,
 } from '@/redux/slices/QuranReader/styles';
 import MediaSettings, { ChangedSettings } from '@/types/Media/MediaSettings';
-// TODO: QURAN FONT STYLE
+import { QuranFont } from '@/types/QuranReader';
 
 type TextTabProps = {
   mediaSettings: MediaSettings;
@@ -19,7 +21,18 @@ type TextTabProps = {
 
 const TextTab: FC<TextTabProps> = ({ mediaSettings, onSettingsUpdate }) => {
   const { t } = useTranslation('quran-media-maker');
-  const { quranTextFontScale, translationFontScale } = mediaSettings;
+  const { quranTextFontScale, translationFontScale, quranTextFontStyle } = mediaSettings;
+
+  const types = useMemo(
+    () =>
+      [QuranFont.QPCHafs, QuranFont.IndoPak].map((font) => ({
+        id: t(`common:fonts.${font}`),
+        label: t(`common:fonts.${font}`),
+        name: t(`common:fonts.${font}`),
+        value: font,
+      })),
+    [t],
+  );
 
   const onFontScaleIncreaseClicked = () => {
     const value = quranTextFontScale + 1;
@@ -41,42 +54,62 @@ const TextTab: FC<TextTabProps> = ({ mediaSettings, onSettingsUpdate }) => {
     onSettingsUpdate({ translationFontScale: newValue }, 'translationFontScale', newValue);
   };
 
+  const onQuranFontStyleChange = (newValue) => {
+    onSettingsUpdate({ quranTextFontStyle: newValue }, 'quranTextFontStyle', newValue);
+  };
+
   return (
-    <Section>
-      <Section.Title>{t('common:fonts.quran-font')}</Section.Title>
-      <Section.Row>
-        <Section.Label>{t('common:fonts.quran-font-size')}</Section.Label>
-        <Counter
-          count={mediaSettings.quranTextFontScale}
-          onDecrement={
-            mediaSettings.quranTextFontScale === MINIMUM_FONT_STEP
-              ? null
-              : onFontScaleDecreaseClicked
-          }
-          onIncrement={
-            mediaSettings.quranTextFontScale === MAXIMUM_QURAN_FONT_STEP
-              ? null
-              : onFontScaleIncreaseClicked
-          }
-        />
-      </Section.Row>
-      <Section.Row>
-        <Section.Label>{t('common:fonts.translation-font-size')}</Section.Label>
-        <Counter
-          count={translationFontScale}
-          onIncrement={
-            MAXIMUM_TRANSLATIONS_FONT_STEP === translationFontScale
-              ? null
-              : onTranslationFontScaleIncreaseClicked
-          }
-          onDecrement={
-            MINIMUM_FONT_STEP === translationFontScale
-              ? null
-              : onTranslationFontScaleDecreaseClicked
-          }
-        />
-      </Section.Row>
-    </Section>
+    <div className={styles.tabContainer}>
+      <div className={styles.section}>
+        <div className={styles.sectionTitle}>{t('style')}</div>
+        <div className={styles.selectContainer}>
+          <Select
+            id="quranTextFontStyle"
+            name="quranTextFontStyle"
+            options={types}
+            value={quranTextFontStyle}
+            onChange={onQuranFontStyleChange}
+          />
+        </div>
+      </div>
+
+      <div className={styles.section}>
+        <div className={styles.sectionTitle}>{t('common:fonts.quran-font-size')}</div>
+        <div className={styles.counterContainer}>
+          <Counter
+            count={mediaSettings.quranTextFontScale}
+            onDecrement={
+              mediaSettings.quranTextFontScale === MINIMUM_FONT_STEP
+                ? null
+                : onFontScaleDecreaseClicked
+            }
+            onIncrement={
+              mediaSettings.quranTextFontScale === MAXIMUM_QURAN_FONT_STEP
+                ? null
+                : onFontScaleIncreaseClicked
+            }
+          />
+        </div>
+      </div>
+      <div className={styles.section}>
+        <div className={styles.sectionTitle}>{t('common:fonts.translation-font-size')}</div>
+        <div className={styles.counterContainer}>
+          <Counter
+            count={translationFontScale}
+            onIncrement={
+              MAXIMUM_TRANSLATIONS_FONT_STEP === translationFontScale
+                ? null
+                : onTranslationFontScaleIncreaseClicked
+            }
+            onDecrement={
+              MINIMUM_FONT_STEP === translationFontScale
+                ? null
+                : onTranslationFontScaleDecreaseClicked
+            }
+          />
+        </div>
+      </div>
+    </div>
   );
 };
 

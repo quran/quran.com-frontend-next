@@ -1,6 +1,8 @@
 import Alignment from '../../types/Media/Alignment';
 import Orientation from '../../types/Media/Orientation';
 
+import { QuranFont } from '@/types/QuranReader';
+
 export const isValidTranslationsQueryParamValue = (value: string): boolean => {
   const translationIds = value === '' ? [] : value.split(',');
   let isValid = true;
@@ -41,6 +43,10 @@ export const isValidReciterId = (value: string): boolean => {
 
 export const isValidBooleanQueryParamValue = (value: string): boolean => {
   return value === 'true' || value === 'false';
+};
+
+export const isValidFontStyleQueryParamValue = (value: QuranFont): boolean => {
+  return Object.values(QuranFont).includes(value);
 };
 
 export const isValidNumberQueryParamValue = (value: string): boolean => {

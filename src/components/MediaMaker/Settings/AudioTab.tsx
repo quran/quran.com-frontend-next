@@ -116,7 +116,7 @@ const AudioTab: FC<AudioTabProps> = ({
           <div className={styles.label}>{t('max-ayahs')}</div>
         </div>
 
-        <div className={styles.ayahsSettingsContainer}>
+        <div className={styles.selectContainer}>
           <Select
             id="surah"
             name="surah"

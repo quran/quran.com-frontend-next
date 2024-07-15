@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 /* eslint-disable i18next/no-literal-string */
 /* eslint-disable react/no-danger */
 /* eslint-disable no-unsafe-optional-chaining */
@@ -11,6 +12,7 @@ import Alignment from '@/types/Media/Alignment';
 import { Timestamp } from '@/types/Media/GenerateMediaFileRequest';
 import Orientation from '@/types/Media/Orientation';
 import WatermarkColor from '@/types/Media/WatermarkColor';
+import { QuranFont } from '@/types/QuranReader';
 import Translation from '@/types/Translation';
 import Verse from '@/types/Verse';
 import { getBackgroundWithOpacityById } from '@/utils/media/utils';
@@ -27,6 +29,7 @@ type Props = {
   verseAlignment: string;
   translationAlignment: string;
   quranTextFontScale: number;
+  quranTextFontStyle: QuranFont;
   translationFontScale: number;
   shouldHaveBorder: string;
   orientation: Orientation;
@@ -46,6 +49,7 @@ const MediaMakerContent: React.FC<Props> = ({
   translationAlignment,
   shouldHaveBorder,
   quranTextFontScale,
+  quranTextFontStyle,
   translationFontScale,
   orientation,
   chapterEnglishName,
@@ -118,9 +122,16 @@ const MediaMakerContent: React.FC<Props> = ({
                   className={classNames(styles.verseText, {
                     [styles.verseCentre]: verseAlignment === Alignment.CENTRE,
                     [styles.verseJustified]: verseAlignment === Alignment.JUSTIFIED,
+                    [styles.indopakFont]: quranTextFontStyle === QuranFont.IndoPak,
                   })}
                 >
-                  {verse.words.map((word) => word.qpcUthmaniHafs).join(' ')}
+                  {verse.words
+                    .map((word) =>
+                      quranTextFontStyle === QuranFont.QPCHafs
+                        ? word.qpcUthmaniHafs
+                        : word.textIndopak,
+                    )
+                    .join(' ')}
                 </div>
 
                 {verse.translations?.map((translation: Translation) => (

@@ -6,6 +6,7 @@ import Alignment from '@/types/Media/Alignment';
 import MediaSettings from '@/types/Media/MediaSettings';
 import Orientation from '@/types/Media/Orientation';
 import QueryParam from '@/types/QueryParam';
+import { QuranFont } from '@/types/QuranReader';
 
 const useGetMediaSettings = (): MediaSettings => {
   const chaptersData = useContext(DataContext);
@@ -29,6 +30,10 @@ const useGetMediaSettings = (): MediaSettings => {
   );
   const { value: quranTextFontScale }: { value: number } = useGetQueryParamOrReduxValue(
     QueryParam.QURAN_TEXT_FONT_SCALE,
+  );
+
+  const { value: quranTextFontStyle }: { value: QuranFont } = useGetQueryParamOrReduxValue(
+    QueryParam.QURAN_TEXT_FONT_STYLE,
   );
   const { value: translationFontScale }: { value: number } = useGetQueryParamOrReduxValue(
     QueryParam.TRANSLATION_FONT_SCALE,
@@ -59,6 +64,7 @@ const useGetMediaSettings = (): MediaSettings => {
     opacity,
     reciter,
     quranTextFontScale,
+    quranTextFontStyle,
     translationFontScale,
     translations,
     fontColor,

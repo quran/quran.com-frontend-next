@@ -28,5 +28,6 @@
   "monthly-balance": "Monthly balance: ",
   "count": "{{count}}",
   "limit": " / {{limit}}",
-  "to": "to"
+  "to": "to",
+  "style": "Quran font style"
 }

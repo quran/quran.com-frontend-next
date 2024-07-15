@@ -93,6 +93,7 @@ const MediaMaker: NextPage<MediaMaker> = ({
     shouldHaveBorder,
     videoId,
     quranTextFontScale,
+    quranTextFontStyle,
     translationFontScale,
     orientation,
   } = mediaSettings;
@@ -217,6 +218,7 @@ const MediaMaker: NextPage<MediaMaker> = ({
       shouldHaveBorder,
       video: getBackgroundVideoById(videoId),
       quranTextFontScale,
+      quranTextFontStyle,
       translationFontScale,
       orientation,
       videoId,
@@ -235,6 +237,7 @@ const MediaMaker: NextPage<MediaMaker> = ({
     shouldHaveBorder,
     videoId,
     quranTextFontScale,
+    quranTextFontStyle,
     translationFontScale,
     orientation,
     chapterEnglishName,

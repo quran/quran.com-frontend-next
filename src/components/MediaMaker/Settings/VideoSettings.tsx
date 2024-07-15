@@ -47,6 +47,7 @@ const MEDIA_SETTINGS_TO_QUERY_PARAM = {
   opacity: QueryParam.OPACITY,
   reciter: QueryParam.MEDIA_RECITER,
   quranTextFontScale: QueryParam.QURAN_TEXT_FONT_SCALE,
+  quranTextFontStyle: QueryParam.QURAN_TEXT_FONT_STYLE,
   translationFontScale: QueryParam.TRANSLATION_FONT_SCALE,
   translations: QueryParam.MEDIA_TRANSLATIONS,
   fontColor: QueryParam.FONT_COLOR,

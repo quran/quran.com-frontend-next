@@ -20,6 +20,7 @@ export const VIDEO_FPS = 30;
 export const DEFAULT_BACKGROUND_COLOR_ID = 1;
 export const DEFAULT_QURAN_FONT_SCALE = 3;
 export const DEFAULT_TRANSLATION_FONT_SCALE = 3;
+export const DEFAULT_QURAN_FONT_STYLE = QuranFont.QPCHafs;
 export const DEFAULT_SHOULD_HAVE_BORDER = 'false';
 export const DEFAULT_VIDEO_ID = 4;
 export const DEFAULT_OPACITY = '0.2';
@@ -44,7 +45,7 @@ const DEFAULT_TIMESTAMPS = [
 ];
 
 export const DEFAULT_API_PARAMS = {
-  wordFields: QuranFont.QPCHafs,
+  wordFields: `${QuranFont.QPCHafs},${QuranFont.IndoPak}`,
   translations: [DEFAULT_TRANSLATION],
   reciter: DEFAULT_RECITER_ID,
   perPage: 1,
@@ -94,6 +95,7 @@ export const DEFAULT_PROPS = {
   translationAlignment: Alignment.CENTRE,
   backgroundColorId: DEFAULT_BACKGROUND_COLOR_ID,
   quranTextFontScale: DEFAULT_QURAN_FONT_SCALE,
+  quranTextFontStyle: DEFAULT_QURAN_FONT_STYLE,
   translationFontScale: DEFAULT_TRANSLATION_FONT_SCALE,
   shouldHaveBorder: DEFAULT_SHOULD_HAVE_BORDER,
   opacity: DEFAULT_OPACITY,
