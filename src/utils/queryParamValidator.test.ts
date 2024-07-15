@@ -1,7 +1,9 @@
+/* eslint-disable max-lines */
 import { describe, it, expect } from 'vitest';
 
 import Alignment from '../../types/Media/Alignment';
 import Orientation from '../../types/Media/Orientation';
+import { QuranFont } from '../../types/QuranReader';
 
 import {
   isValidTranslationsQueryParamValue,
@@ -14,6 +16,7 @@ import {
   isValidOrientationQueryParamValue,
   isValidOpacityQueryParamValue,
   isValidVideoIdQueryParamValue,
+  isValidFontStyleQueryParamValue,
 } from './queryParamValidator';
 
 describe('isValidTranslationsQueryParamValue', () => {
@@ -145,5 +148,29 @@ describe('isValidVideoIdQueryParamValue', () => {
   });
   it('Returns false for invalid video id', () => {
     expect(isValidVideoIdQueryParamValue(null)).toBe(false);
+  });
+});
+
+describe('isValidFontStyleQueryParamValue', () => {
+  it('should return true for valid QuranFont values', () => {
+    expect(isValidFontStyleQueryParamValue(QuranFont.MadaniV1)).toBe(true);
+    expect(isValidFontStyleQueryParamValue(QuranFont.MadaniV2)).toBe(true);
+    expect(isValidFontStyleQueryParamValue(QuranFont.Uthmani)).toBe(true);
+    expect(isValidFontStyleQueryParamValue(QuranFont.IndoPak)).toBe(true);
+    expect(isValidFontStyleQueryParamValue(QuranFont.QPCHafs)).toBe(true);
+    expect(isValidFontStyleQueryParamValue(QuranFont.Tajweed)).toBe(true);
+  });
+
+  it('should return false for invalid QuranFont values', () => {
+    expect(isValidFontStyleQueryParamValue('invalid_value' as QuranFont)).toBe(false);
+    expect(isValidFontStyleQueryParamValue('' as QuranFont)).toBe(false);
+    expect(isValidFontStyleQueryParamValue('text_madani' as QuranFont)).toBe(false);
+  });
+
+  it('should return false for non-string values', () => {
+    expect(isValidFontStyleQueryParamValue(123 as unknown as QuranFont)).toBe(false);
+    expect(isValidFontStyleQueryParamValue(null as unknown as QuranFont)).toBe(false);
+    expect(isValidFontStyleQueryParamValue(undefined as unknown as QuranFont)).toBe(false);
+    expect(isValidFontStyleQueryParamValue({} as unknown as QuranFont)).toBe(false);
   });
 });

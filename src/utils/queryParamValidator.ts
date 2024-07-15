@@ -1,7 +1,6 @@
 import Alignment from '../../types/Media/Alignment';
 import Orientation from '../../types/Media/Orientation';
-
-import { QuranFont } from '@/types/QuranReader';
+import QuranFont from '../../types/Media/QuranFont';
 
 export const isValidTranslationsQueryParamValue = (value: string): boolean => {
   const translationIds = value === '' ? [] : value.split(',');
