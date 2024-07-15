@@ -4,13 +4,8 @@ import classNames from 'classnames';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
-import internalStyles from './Notes.module.scss';
-
 import NoteModal from '@/components/Notes/NoteModal';
 import styles from '@/components/QuranReader/TranslationView/TranslationViewCell.module.scss';
-import Wrapper from '@/components/Wrapper/Wrapper';
-import Badge from '@/dls/Badge/Badge';
-import NewLabel from '@/dls/Badge/NewLabel';
 import Button, { ButtonShape, ButtonSize, ButtonType, ButtonVariant } from '@/dls/Button/Button';
 import EmptyNotesIcon from '@/icons/notes-empty.svg';
 import NotesIcon from '@/icons/notes-filled.svg';
@@ -51,8 +46,6 @@ const VerseNotes = ({ verseKey, isTranslationView, hasNotes }: VerseNotesProps) 
     setIsModalOpen(false);
   };
 
-  const shouldShowNewLabel = false;
-
   return (
     <>
       <NoteModal isOpen={isModalOpen} onClose={onClose} verseKey={verseKey} />
@@ -65,26 +58,7 @@ const VerseNotes = ({ verseKey, isTranslationView, hasNotes }: VerseNotesProps) 
         variant={ButtonVariant.Ghost}
         size={ButtonSize.Small}
       >
-        <span className={styles.icon}>
-          {hasNotes ? (
-            <NotesIcon />
-          ) : (
-            <Wrapper
-              shouldWrap={shouldShowNewLabel}
-              wrapper={(children) => (
-                <Badge
-                  className={internalStyles.newLabelContainer}
-                  contentClassName={internalStyles.newLabel}
-                  content={shouldShowNewLabel && <NewLabel />}
-                >
-                  {children}
-                </Badge>
-              )}
-            >
-              <EmptyNotesIcon />
-            </Wrapper>
-          )}
-        </span>
+        <span className={styles.icon}>{hasNotes ? <NotesIcon /> : <EmptyNotesIcon />}</span>
       </Button>
     </>
   );
