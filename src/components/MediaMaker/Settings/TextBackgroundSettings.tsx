@@ -1,82 +1,70 @@
 import React from 'react';
 
+import { debounce } from 'lodash';
 import useTranslation from 'next-translate/useTranslation';
 
-import BackgroundColors from './BackgroundColors';
+import styles from '../MediaMaker.module.scss';
 
-import Section from '@/components/Navbar/SettingsDrawer/Section';
-import Switch from '@/dls/Switch/Switch';
+import Counter from '@/dls/Counter/Counter';
 import { MediaSettingsProps } from '@/types/Media/MediaSettings';
+import { MAXIMUM_OPACITY, MINIMUM_OPACITY, OPACITY_VALUES } from '@/utils/media/constants';
+
+const DEBOUNCE_MS = 1000;
 
 interface Props extends MediaSettingsProps {
-  opacity: string;
-  shouldHaveBorder: string;
-  backgroundColorId: number;
+  opacity: number;
+  backgroundColor: string;
 }
 
 const TextBackgroundSettings: React.FC<Props> = ({
   onSettingsUpdate,
   opacity,
-  shouldHaveBorder,
-  backgroundColorId,
+  backgroundColor,
 }) => {
   const { t } = useTranslation('quran-media-maker');
 
-  const onOpacitySelect = (newOpacity: string) => {
-    if (newOpacity === opacity) {
-      return;
-    }
-    onSettingsUpdate({ opacity: newOpacity }, 'opacity', newOpacity);
+  const debouncedOnChange = debounce((color) => {
+    onSettingsUpdate({ backgroundColor: color }, 'backgroundColor', color);
+  }, DEBOUNCE_MS);
+
+  const onColorChange = (event) => {
+    debouncedOnChange(event.target.value);
   };
 
-  const onShouldHaveBorderSelect = (newShouldHaveBorder: string) => {
-    onSettingsUpdate(
-      { shouldHaveBorder: newShouldHaveBorder },
-      'shouldHaveBorder',
-      newShouldHaveBorder,
-    );
+  const onOpacityDecreaseClicked = () => {
+    const currentIndex = OPACITY_VALUES.findIndex((value) => value === opacity);
+    const value = OPACITY_VALUES[currentIndex - 1];
+    onSettingsUpdate({ opacity: value }, 'opacity', value);
+  };
+
+  const onOpacityIncreaseClicked = () => {
+    const currentIndex = OPACITY_VALUES.findIndex((value) => value === opacity);
+    const value = OPACITY_VALUES[currentIndex + 1];
+    onSettingsUpdate({ opacity: value }, 'opacity', value);
   };
 
   return (
-    <Section>
-      <Section.Title>{t('background')}</Section.Title>
-      <Section.Row>
-        <BackgroundColors
-          backgroundColorId={backgroundColorId}
-          onSettingsUpdate={onSettingsUpdate}
-        />
-      </Section.Row>
-      <br />
-      <>
-        <Section.Label>{t('opacity')}</Section.Label>
-        <Section.Row>
-          <Switch
-            items={[
-              { name: '0%', value: '0' },
-              { name: '20%', value: '0.2' },
-              { name: '40%', value: '0.4' },
-              { name: '60%', value: '0.6' },
-              { name: '80%', value: '0.8' },
-              { name: '100%', value: '1' },
-            ]}
-            selected={opacity}
-            onSelect={onOpacitySelect}
+    <>
+      <div className={styles.section}>
+        <div className={styles.sectionTitle}>{t('background-opacity')}</div>
+        <div className={styles.colorPickerContainer}>
+          <input
+            className={styles.colorPicker}
+            type="color"
+            value={backgroundColor}
+            onChange={onColorChange}
           />
-        </Section.Row>
-        <br />
-        <Section.Label>{t('border')}</Section.Label>
-        <Section.Row>
-          <Switch
-            items={[
-              { name: 'Yes', value: 'true' },
-              { name: 'No', value: 'false' },
-            ]}
-            selected={shouldHaveBorder.toString()}
-            onSelect={onShouldHaveBorderSelect}
+        </div>
+
+        <div className={(styles.counterContainer, styles.opacityCounter)}>
+          <Counter
+            count={opacity}
+            onDecrement={opacity === MINIMUM_OPACITY ? null : onOpacityDecreaseClicked}
+            onIncrement={opacity === MAXIMUM_OPACITY ? null : onOpacityIncreaseClicked}
           />
-        </Section.Row>
-      </>
-    </Section>
+        </div>
+      </div>
+    </>
   );
 };
 export default TextBackgroundSettings;

@@ -10,7 +10,6 @@ import {
   isValidReciterId,
   isValidBooleanQueryParamValue,
   isValidNumberQueryParamValue,
-  isValidBackgroundColorIdQueryParamValue,
   isValidFontScaleQueryParamValue,
   isValidAlignmentQueryParamValue,
   isValidOrientationQueryParamValue,
@@ -82,15 +81,6 @@ describe('isValidNumberQueryParamValue', () => {
   });
 });
 
-describe('isValidBackgroundColorIdQueryParamValue', () => {
-  it('Returns true for valid background color id', () => {
-    expect(isValidBackgroundColorIdQueryParamValue('1')).toBe(true);
-  });
-  it('Returns false for invalid background color id', () => {
-    expect(isValidBackgroundColorIdQueryParamValue('9')).toBe(false);
-  });
-});
-
 describe('isValidFontScaleQueryParamValue', () => {
   it('Returns true for valid font scale', () => {
     expect(isValidFontScaleQueryParamValue('5')).toBe(true);
@@ -126,13 +116,13 @@ describe('isValidOrientationQueryParamValue', () => {
 
 describe('isValidOpacityQueryParamValue', () => {
   it('Returns true for valid opacity', () => {
-    expect(isValidOpacityQueryParamValue('0.6')).toBe(true);
+    expect(isValidOpacityQueryParamValue(0.6)).toBe(true);
   });
   it('Returns false for invalid opacity', () => {
-    expect(isValidOpacityQueryParamValue('0.5')).toBe(false);
+    expect(isValidOpacityQueryParamValue(0.5)).toBe(false);
   });
   it('Returns false for invalid opacity', () => {
-    expect(isValidOpacityQueryParamValue('test')).toBe(false);
+    expect(isValidOpacityQueryParamValue(null)).toBe(false);
   });
 });
 

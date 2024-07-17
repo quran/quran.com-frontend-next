@@ -17,15 +17,21 @@ export const VIDEO_LANDSCAPE_HEIGHT = 720;
 export const VIDEO_PORTRAIT_WIDTH = 720;
 export const VIDEO_LANDSCAPE_WIDTH = 1280;
 export const VIDEO_FPS = 30;
-export const DEFAULT_BACKGROUND_COLOR_ID = 1;
 export const DEFAULT_QURAN_FONT_SCALE = 3;
 export const DEFAULT_TRANSLATION_FONT_SCALE = 3;
 export const DEFAULT_QURAN_FONT_STYLE = QuranFont.QPCHafs;
-export const DEFAULT_SHOULD_HAVE_BORDER = 'false';
 export const DEFAULT_VIDEO_ID = 4;
-export const DEFAULT_OPACITY = '0.2';
+export const DEFAULT_OPACITY = 0.2;
 export const DEFAULT_FONT_COLOR = '#dddddd';
 export const COMPOSITION_NAME = 'MediaMakerContent';
+export const DEFAULT_BORDER_COLOR = '#000';
+export const DEFAULT_BORDER_SIZE = 1;
+export const DEFAULT_BACKGROUND_COLOR = '#fff';
+export const MINIMUM_OPACITY = 0;
+export const MAXIMUM_OPACITY = 1;
+export const OPACITY_VALUES = [0, 0.2, 0.4, 0.6, 0.8, 1];
+export const MINIMUM_BORDER = 0;
+export const MAXIMUM_BORDER = 5;
 
 export function getDefaultVerseKeys(lang = 'en') {
   const keys = defaultVerses.map((verse) => `${verse.chapterId}:${verse.verseNumber}`);
@@ -93,14 +99,15 @@ export const DEFAULT_PROPS = {
   fontColor: DEFAULT_FONT_COLOR,
   verseAlignment: Alignment.CENTRE,
   translationAlignment: Alignment.CENTRE,
-  backgroundColorId: DEFAULT_BACKGROUND_COLOR_ID,
   quranTextFontScale: DEFAULT_QURAN_FONT_SCALE,
   quranTextFontStyle: DEFAULT_QURAN_FONT_STYLE,
   translationFontScale: DEFAULT_TRANSLATION_FONT_SCALE,
-  shouldHaveBorder: DEFAULT_SHOULD_HAVE_BORDER,
   opacity: DEFAULT_OPACITY,
   translations: [DEFAULT_TRANSLATION],
   orientation: Orientation.LANDSCAPE,
   videoId: DEFAULT_VIDEO_ID,
   chapterEnglishName: 'The Sincerity',
+  borderColor: DEFAULT_BORDER_COLOR,
+  borderSize: DEFAULT_BORDER_SIZE,
+  backgroundColor: DEFAULT_BACKGROUND_COLOR,
 };

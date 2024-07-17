@@ -18,13 +18,7 @@ const useGetMediaSettings = (): MediaSettings => {
     QueryParam.VERSE_FROM,
     chaptersData,
   );
-  const { value: shouldHaveBorder }: { value: string } = useGetQueryParamOrReduxValue(
-    QueryParam.SHOULD_HAVE_BORDER,
-  );
-  const { value: backgroundColorId }: { value: number } = useGetQueryParamOrReduxValue(
-    QueryParam.BACKGROUND_COLOR_ID,
-  );
-  const { value: opacity }: { value: string } = useGetQueryParamOrReduxValue(QueryParam.OPACITY);
+  const { value: opacity }: { value: number } = useGetQueryParamOrReduxValue(QueryParam.OPACITY);
   const { value: reciter }: { value: number } = useGetQueryParamOrReduxValue(
     QueryParam.MEDIA_RECITER,
   );
@@ -40,6 +34,15 @@ const useGetMediaSettings = (): MediaSettings => {
   );
   const { value: translations }: { value: number[] } = useGetQueryParamOrReduxValue(
     QueryParam.MEDIA_TRANSLATIONS,
+  );
+  const { value: backgroundColor }: { value: string } = useGetQueryParamOrReduxValue(
+    QueryParam.BACKGROUND_COLOR,
+  );
+  const { value: borderColor }: { value: string } = useGetQueryParamOrReduxValue(
+    QueryParam.BORDER_COLOR,
+  );
+  const { value: borderSize }: { value: number } = useGetQueryParamOrReduxValue(
+    QueryParam.BORDER_SIZE,
   );
   const { value: fontColor }: { value: string } = useGetQueryParamOrReduxValue(
     QueryParam.FONT_COLOR,
@@ -59,8 +62,9 @@ const useGetMediaSettings = (): MediaSettings => {
   return {
     verseTo,
     verseFrom,
-    shouldHaveBorder,
-    backgroundColorId,
+    backgroundColor,
+    borderColor,
+    borderSize,
     opacity,
     reciter,
     quranTextFontScale,

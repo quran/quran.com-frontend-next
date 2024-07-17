@@ -6,9 +6,10 @@ import Orientation from '@/types/Media/Orientation';
 type MediaSettings = {
   verseTo: string;
   verseFrom: string;
-  shouldHaveBorder: string;
-  backgroundColorId: number;
-  opacity: string;
+  borderSize: number;
+  borderColor: string;
+  backgroundColor: string;
+  opacity: number;
   reciter: number;
   quranTextFontScale: number;
   translationFontScale: number;

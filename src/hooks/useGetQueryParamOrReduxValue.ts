@@ -8,14 +8,15 @@ import { shallowEqual, useSelector } from 'react-redux';
 
 import { RootState } from '@/redux/RootState';
 import {
-  selectBackgroundColorId,
+  selectBackgroundColor,
+  selectBorderColor,
+  selectBorderSize,
   selectFontColor,
   selectOpacity,
   selectOrientation,
   selectQuranTextFontScale,
   selectQuranTextFontStyle,
   selectReciter,
-  selectShouldHaveBorder,
   selectSurah,
   selectTranslationAlignment,
   selectTranslationFontScale,
@@ -36,8 +37,7 @@ import {
 } from '@/utils/query-params';
 import {
   isValidAlignmentQueryParamValue,
-  isValidBackgroundColorIdQueryParamValue,
-  isValidBooleanQueryParamValue,
+  isValidBorderSizeQueryParamValue,
   isValidFontScaleQueryParamValue,
   isValidFontStyleQueryParamValue,
   isValidOpacityQueryParamValue,
@@ -46,7 +46,7 @@ import {
   isValidTranslationsQueryParamValue,
   isValidVideoIdQueryParamValue,
 } from '@/utils/queryParamValidator';
-import { isValidVerseKey, isValidChapterId } from '@/utils/validator';
+import { isValidChapterId, isValidVerseKey } from '@/utils/validator';
 import QueryParam from 'types/QueryParam';
 
 const QUERY_PARAMS_DATA = {
@@ -81,18 +81,6 @@ const QUERY_PARAMS_DATA = {
     reduxEqualityFunction: areArraysEqual,
     valueType: QueryParamValueType.ArrayOfNumbers,
     validate: (val) => isValidTranslationsQueryParamValue(val),
-  },
-  [QueryParam.SHOULD_HAVE_BORDER]: {
-    reduxSelector: selectShouldHaveBorder,
-    reduxEqualityFunction: shallowEqual,
-    valueType: QueryParamValueType.String,
-    validate: (val) => isValidBooleanQueryParamValue(val),
-  },
-  [QueryParam.BACKGROUND_COLOR_ID]: {
-    reduxSelector: selectBackgroundColorId,
-    reduxEqualityFunction: shallowEqual,
-    valueType: QueryParamValueType.Number,
-    validate: (val) => isValidBackgroundColorIdQueryParamValue(val),
   },
   [QueryParam.MEDIA_RECITER]: {
     reduxSelector: selectReciter,
@@ -146,7 +134,7 @@ const QUERY_PARAMS_DATA = {
   [QueryParam.OPACITY]: {
     reduxSelector: selectOpacity,
     reduxEqualityFunction: shallowEqual,
-    valueType: QueryParamValueType.String,
+    valueType: QueryParamValueType.Number,
     validate: (val) => isValidOpacityQueryParamValue(val),
   },
   [QueryParam.FONT_COLOR]: {
@@ -154,6 +142,24 @@ const QUERY_PARAMS_DATA = {
     reduxEqualityFunction: shallowEqual,
     valueType: QueryParamValueType.String,
     validate: () => true,
+  },
+  [QueryParam.BACKGROUND_COLOR]: {
+    reduxSelector: selectBackgroundColor,
+    reduxEqualityFunction: shallowEqual,
+    valueType: QueryParamValueType.String,
+    validate: () => true,
+  },
+  [QueryParam.BORDER_COLOR]: {
+    reduxSelector: selectBorderColor,
+    reduxEqualityFunction: shallowEqual,
+    valueType: QueryParamValueType.String,
+    validate: () => true,
+  },
+  [QueryParam.BORDER_SIZE]: {
+    reduxSelector: selectBorderSize,
+    reduxEqualityFunction: shallowEqual,
+    valueType: QueryParamValueType.Number,
+    validate: (val) => isValidBorderSizeQueryParamValue(val),
   },
   [QueryParam.VIDEO_ID]: {
     reduxSelector: selectVideoId,

@@ -117,11 +117,7 @@
 }
 
 .verseBorder {
-  border: 2px gray solid !important;
-}
-
-.verseNoBorder {
-  border: none !important;
+  border: var(--border-size) var(--border-color) solid !important;
 }
 
 .verseLandscape {

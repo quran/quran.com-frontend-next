@@ -5,12 +5,12 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from '../MediaMaker.module.scss';
 
+import BorderSettings from './BorderSettings';
 import BackgroundSettings from './TextBackgroundSettings';
 
-import Section from '@/components/Navbar/SettingsDrawer/Section';
 import MediaSettings, { ChangedSettings } from '@/types/Media/MediaSettings';
 
-const DEBOUNCE_COLOR_PICKER_FOR_MS = 1000;
+const DEBOUNCE_MS = 1000;
 
 type ColorsTabProps = {
   mediaSettings: MediaSettings;
@@ -19,34 +19,40 @@ type ColorsTabProps = {
 
 const ColorsTab: FC<ColorsTabProps> = ({ mediaSettings, onSettingsUpdate }) => {
   const { t } = useTranslation('quran-media-maker');
-
+  const { fontColor, backgroundColor, opacity, borderColor, borderSize } = mediaSettings;
   const onFontChange = (event) => {
     debouncedOnChange(event.target.value);
   };
 
   const debouncedOnChange = debounce((color) => {
     onSettingsUpdate({ fontColor: color }, 'fontColor', color);
-  }, DEBOUNCE_COLOR_PICKER_FOR_MS);
+  }, DEBOUNCE_MS);
 
   return (
-    <div>
-      <BackgroundSettings
-        shouldHaveBorder={mediaSettings.shouldHaveBorder}
-        backgroundColorId={mediaSettings.backgroundColorId}
-        opacity={mediaSettings.opacity}
-        onSettingsUpdate={onSettingsUpdate}
-      />
-      <Section>
-        <Section.Title>{t('text-color')}</Section.Title>
-        <Section.Row>
+    <div className={styles.tabContainer}>
+      <div className={styles.section}>
+        <div className={styles.sectionTitle}>{t('text-color')}</div>
+        <div className={styles.colorPickerContainer}>
           <input
             className={styles.colorPicker}
             type="color"
-            value={mediaSettings.fontColor}
+            value={fontColor}
             onChange={onFontChange}
           />
-        </Section.Row>
-      </Section>
+        </div>
+      </div>
+
+      <BackgroundSettings
+        backgroundColor={backgroundColor}
+        opacity={opacity}
+        onSettingsUpdate={onSettingsUpdate}
+      />
+
+      <BorderSettings
+        borderColor={borderColor}
+        borderSize={borderSize}
+        onSettingsUpdate={onSettingsUpdate}
+      />
     </div>
   );
 };

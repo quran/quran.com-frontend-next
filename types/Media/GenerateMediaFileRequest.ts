@@ -20,10 +20,8 @@ interface Request {
   fontColor: string;
   verseAlignment: string;
   translationAlignment: string;
-  backgroundColorId: number;
   quranTextFontScale: number;
   translationFontScale: number;
-  shouldHaveBorder: string;
   opacity: string;
   translations: number[];
   orientation: string;

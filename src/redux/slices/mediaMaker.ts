@@ -6,13 +6,14 @@ import Alignment from '@/types/Media/Alignment';
 import MediaSettings from '@/types/Media/MediaSettings';
 import Orientation from '@/types/Media/Orientation';
 import {
-  DEFAULT_BACKGROUND_COLOR_ID,
+  DEFAULT_BACKGROUND_COLOR,
+  DEFAULT_BORDER_COLOR,
+  DEFAULT_BORDER_SIZE,
   DEFAULT_FONT_COLOR,
   DEFAULT_OPACITY,
   DEFAULT_QURAN_FONT_SCALE,
   DEFAULT_QURAN_FONT_STYLE,
   DEFAULT_RECITER_ID,
-  DEFAULT_SHOULD_HAVE_BORDER,
   DEFAULT_SURAH,
   DEFAULT_TRANSLATION,
   DEFAULT_TRANSLATION_FONT_SCALE,
@@ -21,8 +22,9 @@ import {
 
 const initialState: MediaSettings = {
   opacity: DEFAULT_OPACITY,
-  shouldHaveBorder: DEFAULT_SHOULD_HAVE_BORDER,
-  backgroundColorId: DEFAULT_BACKGROUND_COLOR_ID,
+  borderColor: DEFAULT_BORDER_COLOR,
+  borderSize: DEFAULT_BORDER_SIZE,
+  backgroundColor: DEFAULT_BACKGROUND_COLOR,
   reciter: DEFAULT_RECITER_ID,
   quranTextFontScale: DEFAULT_QURAN_FONT_SCALE,
   translationFontScale: DEFAULT_TRANSLATION_FONT_SCALE,
@@ -61,14 +63,12 @@ export const { updateSettings, resetToDefaults } = mediaGeneratorSlice.actions;
 
 export const selectMediaMakerSettings = (state: RootState) => state.mediaMaker;
 export const selectOpacity = (state: RootState) => state.mediaMaker.opacity;
-export const selectShouldHaveBorder = (state: RootState) => state.mediaMaker.shouldHaveBorder;
 export const selectReciter = (state: RootState) => state.mediaMaker.reciter;
 export const selectQuranTextFontScale = (state: RootState) => state.mediaMaker.quranTextFontScale;
 export const selectFontColor = (state: RootState) => state.mediaMaker.fontColor;
 export const selectTranslationFontScale = (state: RootState) =>
   state.mediaMaker.translationFontScale;
 export const selectQuranTextFontStyle = (state: RootState) => state.mediaMaker.quranTextFontStyle;
-export const selectBackgroundColorId = (state: RootState) => state.mediaMaker.backgroundColorId;
 export const selectTranslations = (state: RootState) => state.mediaMaker.translations;
 export const selectVerseAlignment = (state: RootState) => state.mediaMaker.verseAlignment;
 export const selectTranslationAlignment = (state: RootState) =>
@@ -78,5 +78,8 @@ export const selectVideoId = (state: RootState) => state.mediaMaker.videoId;
 export const selectSurah = (state: RootState) => state.mediaMaker.surah;
 export const selectVerseFrom = (state: RootState) => state.mediaMaker.verseFrom;
 export const selectVerseTo = (state: RootState) => state.mediaMaker.verseTo;
+export const selectBorderColor = (state: RootState) => state.mediaMaker.borderColor;
+export const selectBorderSize = (state: RootState) => state.mediaMaker.borderSize;
+export const selectBackgroundColor = (state: RootState) => state.mediaMaker.backgroundColor;
 
 export default mediaGeneratorSlice.reducer;

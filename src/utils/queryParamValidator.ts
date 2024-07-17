@@ -52,12 +52,6 @@ export const isValidNumberQueryParamValue = (value: string): boolean => {
   return !Number.isNaN(Number(value));
 };
 
-export const isValidBackgroundColorIdQueryParamValue = (value: string): boolean => {
-  const isValidNumber = isValidNumberQueryParamValue(value);
-  // 1 and 8 are the ranges of all the valid color ids {@see getAllBackgrounds}
-  return isValidNumber && Number(value) >= 1 && Number(value) <= 8;
-};
-
 export const isValidFontScaleQueryParamValue = (value: string): boolean => {
   const isValidNumber = isValidNumberQueryParamValue(value);
   // 1 and 10 are the ranges of all the valid scales
@@ -72,8 +66,8 @@ export const isValidOrientationQueryParamValue = (value: string): boolean => {
   return Object.values(Orientation).includes(value as Orientation);
 };
 
-export const isValidOpacityQueryParamValue = (value: string): boolean => {
-  const OPACITY_VALUES = ['0', '0.2', '0.4', '0.6', '0.8', '1'];
+export const isValidOpacityQueryParamValue = (value: number): boolean => {
+  const OPACITY_VALUES = [0, 0.2, 0.4, 0.6, 0.8, 1];
   return OPACITY_VALUES.includes(value);
 };
 
@@ -81,4 +75,10 @@ export const isValidVideoIdQueryParamValue = (value: string): boolean => {
   const isValidNumber = isValidNumberQueryParamValue(value);
   // 1 and 8 are the ranges of all the valid color ids {@see BACKGROUND_VIDEOS}
   return isValidNumber && Number(value) >= 1 && Number(value) <= 6;
+};
+
+export const isValidBorderSizeQueryParamValue = (value: string): boolean => {
+  const isValidNumber = isValidNumberQueryParamValue(value);
+  // 1 and 5 are the ranges of all the valid scales
+  return isValidNumber && Number(value) >= 1 && Number(value) <= 5;
 };

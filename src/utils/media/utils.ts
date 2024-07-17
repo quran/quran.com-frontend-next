@@ -67,48 +67,6 @@ export const getVideosArray = () => {
   return flattenObject(BACKGROUND_VIDEOS);
 };
 
-export const getBackgroundWithOpacityById = (id, opacity) => {
-  const colors = getAllBackgrounds(opacity);
-  return colors.find((c) => c.id === id);
-};
-
-export const getAllBackgrounds = (opacity = '0.8') => {
-  return [
-    {
-      id: 1,
-      background: `linear-gradient(0deg, rgba(229,227,255,${opacity}) 0%, rgba(230,246,235,${opacity}) 50%, rgba(215,249,255,${opacity}) 100%)`,
-    },
-    {
-      id: 2,
-      background: `linear-gradient(0deg, rgba(244,255,227,${opacity}) 0%, rgba(255,229,215,${opacity}) 100%)`,
-    },
-    {
-      id: 3,
-      background: `linear-gradient(330deg, rgba(202,166,255,${opacity}) 0%, rgba(152,255,148,${opacity}) 100%)`,
-    },
-    {
-      id: 4,
-      background: `linear-gradient(to bottom,rgba(219, 225, 111, ${opacity}), rgba(248, 119, 40, ${opacity}))`,
-    },
-    {
-      id: 5,
-      background: `linear-gradient(to bottom,rgba(157, 106, 32, ${opacity}),rgba(68, 155, 169, ${opacity}))`,
-    },
-    {
-      id: 6,
-      background: `linear-gradient(to bottom,rgba(144, 240, 134, ${opacity}),rgba(232, 60, 194, ${opacity}))`,
-    },
-    {
-      id: 7,
-      background: `linear-gradient(to top,rgba(111, 62, 26, ${opacity}),rgba(6, 81, 104, ${opacity}))`,
-    },
-    {
-      id: 8,
-      background: `linear-gradient(to top,rgba(103, 243, 206, ${opacity}),rgba(16, 125, 64, ${opacity}))`,
-    },
-  ];
-};
-
 /**
  * Get the total duration of the verse timings by
  * subtracting the end time from the start time.
@@ -171,7 +129,7 @@ export const getDurationInFrames = (timestamps: Timestamp[]) => {
 };
 
 export const prepareGenerateMediaFileRequestData = (data: GenerateMediaFileRequest) => {
-  const newData = { ...data, shouldHaveBorder: Boolean(data.shouldHaveBorder) };
+  const newData = { ...data };
 
   if (data.type === MediaType.VIDEO) {
     newData.audio = {

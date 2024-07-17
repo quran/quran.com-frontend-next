@@ -15,7 +15,7 @@ import WatermarkColor from '@/types/Media/WatermarkColor';
 import { QuranFont } from '@/types/QuranReader';
 import Translation from '@/types/Translation';
 import Verse from '@/types/Verse';
-import { getBackgroundWithOpacityById } from '@/utils/media/utils';
+import { convertHexToRGBA } from '@/utils/media/helpers';
 import getPlainTranslationText from '@/utils/plainTranslationText';
 
 type Props = {
@@ -23,15 +23,16 @@ type Props = {
   audio: any;
   video: any;
   timestamps: Timestamp[];
-  backgroundColorId: number;
-  opacity: string;
+  backgroundColor: string;
+  opacity: number;
+  borderColor: string;
+  borderSize: number;
   fontColor: string;
   verseAlignment: string;
   translationAlignment: string;
   quranTextFontScale: number;
   quranTextFontStyle: QuranFont;
   translationFontScale: number;
-  shouldHaveBorder: string;
   orientation: Orientation;
   chapterEnglishName: string;
   isPlayer?: boolean;
@@ -42,12 +43,13 @@ const MediaMakerContent: React.FC<Props> = ({
   audio,
   video,
   timestamps,
-  backgroundColorId,
+  backgroundColor,
   opacity,
+  borderColor,
+  borderSize,
   fontColor,
   verseAlignment,
   translationAlignment,
-  shouldHaveBorder,
   quranTextFontScale,
   quranTextFontStyle,
   translationFontScale,
@@ -64,7 +66,6 @@ const MediaMakerContent: React.FC<Props> = ({
   const audioHasStartAndEndRanges = (!!startFrom || startFrom === 0) && !!endAt;
 
   const videoPath = staticFile(`${isPlayer ? '/publicMin' : ''}${video.videoSrc}`);
-
   return (
     <AbsoluteFill
       style={{
@@ -105,12 +106,15 @@ const MediaMakerContent: React.FC<Props> = ({
               </AbsoluteFill>
               <AbsoluteFill
                 style={{
-                  background: getBackgroundWithOpacityById(backgroundColorId, opacity).background,
+                  backgroundColor: convertHexToRGBA(backgroundColor, Number(opacity)),
                   color: fontColor,
+                  // @ts-ignore
+                  // eslint-disable-next-line @typescript-eslint/naming-convention
+                  '--border-size': `${borderSize}px`,
+                  // eslint-disable-next-line @typescript-eslint/naming-convention
+                  '--border-color': borderColor,
                 }}
-                className={classNames(styles.verseContainer, {
-                  [styles.verseBorder]: shouldHaveBorder === 'true',
-                  [styles.verseNoBorder]: shouldHaveBorder === 'false',
+                className={classNames(styles.verseContainer, styles.verseBorder, {
                   [styles.verseLandscape]: orientation === Orientation.LANDSCAPE,
                   [styles.versePortrait]: orientation === Orientation.PORTRAIT,
                 })}
