@@ -33,7 +33,7 @@ const initialState: MediaSettings = {
   fontColor: DEFAULT_FONT_COLOR,
   verseAlignment: Alignment.CENTRE,
   translationAlignment: Alignment.CENTRE,
-  orientation: Orientation.LANDSCAPE,
+  orientation: Orientation.PORTRAIT,
   videoId: DEFAULT_VIDEO_ID,
   surah: DEFAULT_SURAH,
   verseFrom: `${DEFAULT_SURAH}:1`,
