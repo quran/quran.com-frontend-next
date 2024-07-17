@@ -50,7 +50,7 @@ $colorPickerBorderRadius: calc(var(--spacing-medium) * 3);
 
 .titleContainer {
   border-bottom: solid;
-  border-color: black;
+  border-color: var(--color-secondary-medium);
   border-width: 1px;
   width: 70%;
   margin: 0 auto;

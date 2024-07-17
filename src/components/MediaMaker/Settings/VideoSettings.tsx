@@ -22,8 +22,10 @@ import TextTab from './TextTab';
 import Button, { ButtonShape, ButtonVariant } from '@/dls/Button/Button';
 import Switch, { SwitchSize } from '@/dls/Switch/Switch';
 import useRemoveQueryParam from '@/hooks/useRemoveQueryParam';
+import useThemeDetector from '@/hooks/useThemeDetector';
 import layoutStyle from '@/pages/index.module.scss';
 import { resetToDefaults, updateSettings } from '@/redux/slices/mediaMaker';
+import ThemeType from '@/redux/types/ThemeType';
 import MediaSettings, { ChangedSettings } from '@/types/Media/MediaSettings';
 import QueryParam from '@/types/QueryParam';
 import Reciter from '@/types/Reciter';
@@ -67,6 +69,7 @@ enum Tab {
 
 const ICON_COLOR_SUCCESS = '#2ca4ab';
 const ICON_COLOR_PRIMARY = '#1C1B1F';
+const ICON_COLOR_SECONDARY = '#ffffff';
 
 const VideoSettings: React.FC<Props> = ({
   chaptersList,
@@ -82,6 +85,8 @@ const VideoSettings: React.FC<Props> = ({
   const dispatch = useDispatch();
   const router = useRouter();
   const removeQueryParam = useRemoveQueryParam();
+  const { themeVariant } = useThemeDetector();
+  const isDarkTheme = themeVariant === ThemeType.Dark;
 
   const onResetSettingsClick = useCallback(() => {
     logButtonClick('media_settings_reset');
@@ -118,9 +123,12 @@ const VideoSettings: React.FC<Props> = ({
 
   const fillColor = useCallback(
     (tab) => {
+      if (isDarkTheme) {
+        return selectedTab === tab ? ICON_COLOR_SUCCESS : ICON_COLOR_SECONDARY;
+      }
       return selectedTab === tab ? ICON_COLOR_SUCCESS : ICON_COLOR_PRIMARY;
     },
-    [selectedTab],
+    [isDarkTheme, selectedTab],
   );
 
   const tabs = useMemo(
