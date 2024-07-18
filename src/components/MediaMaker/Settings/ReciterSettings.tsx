@@ -4,7 +4,6 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from '../MediaMaker.module.scss';
 
-import Section from '@/components/Navbar/SettingsDrawer/Section';
 import Select, { SelectSize } from '@/dls/Forms/Select';
 import { MediaSettingsProps } from '@/types/Media/MediaSettings';
 import Reciter from '@/types/Reciter';
@@ -42,7 +41,7 @@ const ReciterSettings: React.FC<Props> = ({ reciters, onSettingsUpdate, reciter 
   return (
     <div className={styles.section}>
       <div className={styles.sectionTitle}>{t('common:reciter')}</div>
-      <Section.Row>
+      <div className={styles.selectContainer}>
         <Select
           id="reciter"
           name="reciter"
@@ -52,7 +51,7 @@ const ReciterSettings: React.FC<Props> = ({ reciters, onSettingsUpdate, reciter 
           size={SelectSize.Medium}
           className={styles.select}
         />
-      </Section.Row>
+      </div>
     </div>
   );
 };

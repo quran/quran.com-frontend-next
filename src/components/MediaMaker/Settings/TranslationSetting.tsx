@@ -19,6 +19,7 @@ import { getLocaleName } from '@/utils/locale';
 import { TranslationsResponse } from 'types/ApiResponses';
 import AvailableTranslation from 'types/AvailableTranslation';
 
+const TRANSLATIONS_LIMIT = 3;
 interface Props extends MediaSettingsProps {
   selectedTranslations: number[];
 }
@@ -61,6 +62,10 @@ const TranslationSelectionBody: React.FC<Props> = ({ selectedTranslations, onSet
                 checked={selectedTranslations.includes(translation.id)}
                 label={translation.translatedName.name}
                 onChange={onTranslationsChange(translation.id)}
+                disabled={
+                  !selectedTranslations.includes(translation.id) &&
+                  selectedTranslations.length === TRANSLATIONS_LIMIT
+                }
               />
             </div>
           ))}
