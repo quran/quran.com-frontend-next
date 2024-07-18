@@ -4,7 +4,6 @@ import { useCallback, useMemo, useState } from 'react';
 
 import classNames from 'classnames';
 import { useRouter } from 'next/router';
-import useTranslation from 'next-translate/useTranslation';
 import { useDispatch } from 'react-redux';
 
 import AudioIcon from '../icons/AudioIcon';
@@ -17,9 +16,9 @@ import RenderControls from '../RenderControls';
 import AudioTab from './AudioTab';
 import BackgroundTab from './BackgroundTab';
 import ColorsTab from './ColorsTab';
+import ResetModal from './ResetModal';
 import TextTab from './TextTab';
 
-import Button, { ButtonShape, ButtonVariant } from '@/dls/Button/Button';
 import Switch, { SwitchSize } from '@/dls/Switch/Switch';
 import useRemoveQueryParam from '@/hooks/useRemoveQueryParam';
 import useThemeDetector from '@/hooks/useThemeDetector';
@@ -80,7 +79,6 @@ const VideoSettings: React.FC<Props> = ({
   getCurrentFrame,
   mediaSettings,
 }) => {
-  const { t } = useTranslation('quran-media-maker');
   const [selectedTab, setSelectedTab] = useState<Tab>(Tab.AUDIO);
   const dispatch = useDispatch();
   const router = useRouter();
@@ -188,13 +186,7 @@ const VideoSettings: React.FC<Props> = ({
                 onSelect={onTabChange}
               />
             </div>
-            <Button
-              shape={ButtonShape.Pill}
-              variant={ButtonVariant.Ghost}
-              onClick={onResetSettingsClick}
-            >
-              {t('common:settings.reset')}
-            </Button>
+            <ResetModal onConfirm={onResetSettingsClick} />
           </div>
           <div className={styles.settings}>{tabComponents[selectedTab]}</div>
         </div>

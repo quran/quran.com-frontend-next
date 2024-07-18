@@ -26,5 +26,6 @@
   "count": "{{count}}",
   "limit": " / {{limit}}",
   "to": "to",
-  "style": "Quran font style"
+  "style": "Quran font style",
+  "reset-defaults": "Reset to default settings?"
 }
