@@ -1,13 +1,13 @@
-import { Composition, continueRender, delayRender, staticFile } from 'remotion';
+import { lazy } from 'react';
 
-import MediaMakerContent from './Content';
+import { Composition, continueRender, delayRender, staticFile } from 'remotion';
 
 import {
   COMPOSITION_NAME,
+  DEFAULT_PROPS,
   VIDEO_FPS,
   VIDEO_LANDSCAPE_HEIGHT,
   VIDEO_LANDSCAPE_WIDTH,
-  DEFAULT_PROPS,
 } from '@/utils/media/constants';
 import { getDurationInFrames, orientationToDimensions } from '@/utils/media/utils';
 
@@ -52,6 +52,9 @@ export const RemotionRoot = () => {
       continueRender(waitForFont);
     })
     .catch((err) => console.log('Error loading font', err));
+
+  const MediaMakerContent = lazy(() => import('./Content'));
+
   return (
     <Composition
       id={COMPOSITION_NAME}
