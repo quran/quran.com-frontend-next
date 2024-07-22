@@ -6,10 +6,6 @@ import classNames from 'classnames';
 import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
 
-import AudioIcon from '../icons/AudioIcon';
-import ColorIcon from '../icons/ColorIcon';
-import ImageIcon from '../icons/ImageIcon';
-import TextIcon from '../icons/TextIcon';
 import styles from '../MediaMaker.module.scss';
 import RenderControls from '../RenderControls';
 
@@ -21,10 +17,16 @@ import TextTab from './TextTab';
 
 import Switch, { SwitchSize } from '@/dls/Switch/Switch';
 import useRemoveQueryParam from '@/hooks/useRemoveQueryParam';
-import useThemeDetector from '@/hooks/useThemeDetector';
+import ColorIconSuccess from '@/icons/colors-success.svg';
+import ColorIcon from '@/icons/colors.svg';
+import AudioIconSuccess from '@/icons/headphones-success.svg';
+import AudioIcon from '@/icons/headphones.svg';
+import ImageIconSuccess from '@/icons/photo-success.svg';
+import ImageIcon from '@/icons/photo.svg';
+import TextIconSuccess from '@/icons/text-success.svg';
+import TextIcon from '@/icons/text.svg';
 import layoutStyle from '@/pages/index.module.scss';
 import { resetToDefaults, updateSettings } from '@/redux/slices/mediaMaker';
-import ThemeType from '@/redux/types/ThemeType';
 import MediaSettings, { ChangedSettings } from '@/types/Media/MediaSettings';
 import QueryParam from '@/types/QueryParam';
 import Reciter from '@/types/Reciter';
@@ -66,10 +68,6 @@ enum Tab {
   COLORS = 'colors',
 }
 
-const ICON_COLOR_SUCCESS = '#2ca4ab';
-const ICON_COLOR_PRIMARY = '#1C1B1F';
-const ICON_COLOR_SECONDARY = '#ffffff';
-
 const VideoSettings: React.FC<Props> = ({
   chaptersList,
   reciters,
@@ -83,8 +81,6 @@ const VideoSettings: React.FC<Props> = ({
   const dispatch = useDispatch();
   const router = useRouter();
   const removeQueryParam = useRemoveQueryParam();
-  const { themeVariant } = useThemeDetector();
-  const isDarkTheme = themeVariant === ThemeType.Dark;
 
   const onResetSettingsClick = useCallback(() => {
     logButtonClick('media_settings_reset');
@@ -119,36 +115,26 @@ const VideoSettings: React.FC<Props> = ({
     setSelectedTab(value);
   };
 
-  const fillColor = useCallback(
-    (tab) => {
-      if (isDarkTheme) {
-        return selectedTab === tab ? ICON_COLOR_SUCCESS : ICON_COLOR_SECONDARY;
-      }
-      return selectedTab === tab ? ICON_COLOR_SUCCESS : ICON_COLOR_PRIMARY;
-    },
-    [isDarkTheme, selectedTab],
-  );
-
   const tabs = useMemo(
     () => [
       {
-        name: <AudioIcon fill={fillColor(Tab.AUDIO)} />,
+        name: selectedTab === Tab.AUDIO ? <AudioIconSuccess /> : <AudioIcon />,
         value: Tab.AUDIO,
       },
       {
-        name: <ImageIcon fill={fillColor(Tab.BACKGROUND)} />,
+        name: selectedTab === Tab.BACKGROUND ? <ImageIconSuccess /> : <ImageIcon />,
         value: Tab.BACKGROUND,
       },
       {
-        name: <TextIcon fill={fillColor(Tab.TEXT)} />,
+        name: selectedTab === Tab.TEXT ? <TextIconSuccess /> : <TextIcon />,
         value: Tab.TEXT,
       },
       {
-        name: <ColorIcon fill={fillColor(Tab.COLORS)} />,
+        name: selectedTab === Tab.COLORS ? <ColorIconSuccess /> : <ColorIcon />,
         value: Tab.COLORS,
       },
     ],
-    [fillColor],
+    [selectedTab],
   );
 
   const tabComponents = useMemo(

@@ -1,6 +1,5 @@
-/* eslint-disable max-lines */
-/* eslint-disable default-param-last */
-/* eslint-disable react-func/max-lines-per-function */
+import { getNormalizedIntervals } from './helpers';
+
 import AudioData from '@/types/AudioData';
 import GenerateMediaFileRequest, {
   MediaType,
@@ -10,22 +9,11 @@ import Orientation from '@/types/Media/Orientation';
 import VerseTiming from '@/types/VerseTiming';
 import {
   BACKGROUND_VIDEOS,
-  VIDEO_LANDSCAPE_WIDTH,
   VIDEO_LANDSCAPE_HEIGHT,
-  VIDEO_PORTRAIT_WIDTH,
+  VIDEO_LANDSCAPE_WIDTH,
   VIDEO_PORTRAIT_HEIGHT,
+  VIDEO_PORTRAIT_WIDTH,
 } from '@/utils/media/constants';
-
-export const getNormalizedIntervals = (start, end, framesPerSecond: number) => {
-  const normalizedStart = (start / 1000) * framesPerSecond;
-  const normalizedEnd = (end / 1000) * framesPerSecond;
-  const durationInFrames = normalizedEnd - normalizedStart;
-
-  return {
-    start: Math.ceil(normalizedStart),
-    durationInFrames: Math.ceil(durationInFrames),
-  };
-};
 
 export const orientationToDimensions = (orientation: Orientation) => {
   const isLandscape = orientation === Orientation.LANDSCAPE;

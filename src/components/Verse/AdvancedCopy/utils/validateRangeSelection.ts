@@ -22,7 +22,6 @@ const validateRangeSelection = (
   maxNumberOfVerses?: number,
   chaptersData?: ChaptersData,
 ): string | null => {
-  console.log(maxNumberOfVerses);
   // if one of them is empty.
   if (!selectedRangeStartVerseKey || !selectedRangeEndVerseKey) {
     return t('common:error.ranges-no-value');

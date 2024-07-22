@@ -26,7 +26,7 @@ export const generateChapterVersesKeys = (
   hideChapterId?: boolean,
 ): string[] => {
   const chapterNumberString = formatStringNumber(chapterId);
-  return range(data[chapterNumberString].versesCount).map((verseId) =>
+  return range(data[chapterNumberString]?.versesCount).map((verseId) =>
     hideChapterId ? `${verseId + 1}` : `${chapterNumberString}:${verseId + 1}`,
   );
 };

@@ -1,4 +1,4 @@
-const convertHexToRGBA = (hexCode, opacity = 1) => {
+export const convertHexToRGBA = (hexCode = '', opacity = 1) => {
   let hex = hexCode.replace('#', '');
   let opacityRGBA = opacity;
   if (hex.length === 3) {
@@ -17,5 +17,13 @@ const convertHexToRGBA = (hexCode, opacity = 1) => {
   return `rgba(${r},${g},${b},${opacityRGBA})`;
 };
 
-// eslint-disable-next-line import/prefer-default-export
-export { convertHexToRGBA };
+export const getNormalizedIntervals = (start, end, framesPerSecond: number) => {
+  const normalizedStart = (start / 1000) * framesPerSecond;
+  const normalizedEnd = (end / 1000) * framesPerSecond;
+  const durationInFrames = normalizedEnd - normalizedStart;
+
+  return {
+    start: Math.ceil(normalizedStart),
+    durationInFrames: Math.ceil(durationInFrames),
+  };
+};

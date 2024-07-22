@@ -1,4 +1,4 @@
-import { useCallback, useState, useRef } from 'react';
+import { memo, useCallback, useRef, useState } from 'react';
 
 import groupBy from 'lodash/groupBy';
 import omit from 'lodash/omit';
@@ -20,12 +20,12 @@ import { TranslationsResponse } from 'types/ApiResponses';
 import AvailableTranslation from 'types/AvailableTranslation';
 
 const TRANSLATIONS_LIMIT = 3;
+
 interface Props extends MediaSettingsProps {
   selectedTranslations: number[];
 }
 
 const TranslationSelectionBody: React.FC<Props> = ({ selectedTranslations, onSettingsUpdate }) => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const { t, lang } = useTranslation('common');
   const [searchQuery, setSearchQuery] = useState('');
   const inputRef = useRef(null);
@@ -118,12 +118,8 @@ const TranslationSelectionBody: React.FC<Props> = ({ selectedTranslations, onSet
             <div>
               {renderTranslationGroup(selectedTranslationLanguage, selectedTranslationGroup)}
               {Object.entries(translationByLanguagesWithoutSelectedLanguage)
-                .sort((a, b) => {
-                  return a[0].localeCompare(b[0]);
-                })
-                .map(([language, translations]) => {
-                  return renderTranslationGroup(language, translations);
-                })}
+                .sort((a, b) => a[0].localeCompare(b[0]))
+                .map(([language, translations]) => renderTranslationGroup(language, translations))}
             </div>
           );
         }}
@@ -132,4 +128,4 @@ const TranslationSelectionBody: React.FC<Props> = ({ selectedTranslations, onSet
   );
 };
 
-export default TranslationSelectionBody;
+export default memo(TranslationSelectionBody);

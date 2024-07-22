@@ -4,16 +4,13 @@ import classNames from 'classnames';
 import clipboardCopy from 'clipboard-copy';
 import useTranslation from 'next-translate/useTranslation';
 
-import CopyIcon from '../icons/CopyIcon';
-
 import styles from './RenderControls.module.scss';
 import RenderImageButton from './RenderImageButton';
 import RenderVideoButton from './RenderVideoButton';
 
 import Button, { ButtonType } from '@/dls/Button/Button';
-import useThemeDetector from '@/hooks/useThemeDetector';
+import CopyIcon from '@/icons/copy.svg';
 import layoutStyle from '@/pages/index.module.scss';
-import ThemeType from '@/redux/types/ThemeType';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getCurrentPath } from '@/utils/url';
 
@@ -38,8 +35,6 @@ const COPY_TIMEOUT_MS = 3000;
 
 const RenderControls: React.FC<Props> = ({ inputProps, getCurrentFrame, isFetching }) => {
   const { t } = useTranslation('quran-media-maker');
-  const { themeVariant } = useThemeDetector();
-  const isDarkTheme = themeVariant === ThemeType.Dark;
   const [isCopied, setIsCopied] = useState(false);
 
   useEffect(() => {
@@ -80,7 +75,7 @@ const RenderControls: React.FC<Props> = ({ inputProps, getCurrentFrame, isFetchi
         />
         <Button
           className={styles.copyButton}
-          prefix={<CopyIcon stroke={isDarkTheme ? 'white' : 'black'} />}
+          prefix={<CopyIcon />}
           type={ButtonType.Secondary}
           onClick={onCopyLinkClicked}
         >
