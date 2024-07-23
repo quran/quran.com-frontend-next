@@ -1,14 +1,14 @@
 {
-    "credits": {
-        "desc": "Projek ini tidak mungkin terjadi tanpa adanya banyak sumber perpustakaan terbuka dan rujukan projek sedia-ada yang lain yang telah kami gunakan:",
-        "lokalize": "<0> Lokalize <\/0> : Sistem terjemahan berbantuan komputer yang berfokus pada produktivitas dan jaminan kualitas serta menyediakan alur kerja pelokalan yang mulus.",
-        "quran-align": "<0> Collin Fair <\/0> : Alat untuk menghasilkan segmentasi kata yang tepat dari rekaman bacaan Al-Qur'an.",
-        "quran-complex": "<0> QuranComplex <\/0> : Kompleks Percetakan Al-Qur'an King Fahd adalah pemimpin dalam melayani Al-Qur'an dan Ilmunya, menerjemahkan maknanya, dan menjaga Teks Al-Qur'an dari distorsi, melalui penggunaan yang optimal dengan teknologi canggih di bidang percetakan, rakaman audio, penerbitan elektronik dan aplikasi digital.",
-        "quran-enc": "<0> QuranEnc <\/0> : Sebuah portal yang menampilkan terjemahan gratis dan terpercaya dari makna dan tafsir Al-Qur'an yang mulia dalam banyak bahasa dunia.",
-        "tanzil": "<0> Tanzil <\/0> : Sebuah proyek Al-Qur'an internasional yang bertujuan untuk menyediakan teks Al-Qur'an yang sangat terverifikasi.",
-        "title": "Kredit (Penghargaan)",
-        "vercel": "<0> Vercel <\/0> : ialah platform penggunaan dan kerjasama untuk para Front-End Developer yang mengutamakan pembangunan Front-End Development , memberi mereka alatan yang komprehensif untuk membina tapak web dan aplikasi berprestasi tinggi.",
-        "zekr": "<0> Zekr <\/0> : Pentas terbuka untuk mempelajari, menyemak dan menyelidik serta mengulangkaji al-Quran"
-    },
-    "main-description": "Quran.com didirikan pada tahun 1995. Website ini bertujuan untuk memberikan kemudahan bagi siapa saja untuk membaca, mempelajari, dan memahami Al-Quran. Projek ini adalah sumber terbuka (open source project) dan dibangunkan secara kolaborasi antara anggota tim Inti dan <0> tim Tarteel <\/0> ."
+  "credits": {
+    "desc": "Projek ini tidak mungkin terjadi tanpa adanya banyak sumber perpustakaan terbuka dan rujukan projek yang lain yang telah kami gunakan:",
+    "lokalize": "<0> Lokalize </0> : Sistem terjemahan berbantuan komputer yang berfokus pada produktivitas dan jaminan kualitas serta menyediakan alur kerja pelokalan yang mulus.",
+    "quran-align": "<0> Collin Fair </0> : Alat untuk menghasilkan segmentasi kata yang tepat dari rekaman bacaan Al-Qur'an.",
+    "quran-complex": "<0> QuranComplex </0> : Kompleks Percetakan Al-Qur'an King Fahd adalah panutan dalam menyajikan Al-Qur'an dan Ilmu-ilmunya, menerjemahkan maknanya, dan menjaga Teks Al-Qur'an dari distorsi, melalui penggunaan teknologi canggih di bidang percetakan, rakaman audio, penerbitan elektronik dan aplikasi digital secara optimal.",
+    "quran-enc": "<0> QuranEnc </0> : Sebuah portal yang menampilkan terjemahan gratis dan terpercaya dari makna dan tafsir Al-Qur'an yang mulia dalam banyak bahasa dunia.",
+    "tanzil": "<0> Tanzil </0> : Sebuah proyek Al-Qur'an internasional yang bertujuan untuk menyediakan teks Al-Qur'an yang akurat dengan verifikasi yang sangat ketat.",
+    "title": "Penghargaan",
+    "vercel": "<0> Vercel </0> : ialah platform penggunaan dan kerjasama untuk para Front-End Developer yang mengutamakan pembangunan Front-End Development , memberi mereka alat yang komprehensif untuk membina website dan aplikasi yang andal.",
+    "zekr": "<0> Zekr </0> : Platform belajar Qur'an yang terbuka untuk menelusuri dan mengulangkaji al-Qur'an"
+  },
+  "main-description": "Quran.com didirikan pada tahun 1995. Website ini bertujuan untuk memberikan kemudahan bagi siapa saja untuk membaca, mempelajari, dan memahami Al-Qur'an. Projek ini adalah sumber terbuka (open source project) dan merupakan kolaborasi antara anggota tim Inti dan <0> tim Tarteel </0> ."
 }

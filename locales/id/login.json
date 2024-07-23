@@ -5,10 +5,10 @@
   "continue-facebook": "Lanjutkan dengan Facebook",
   "continue-google": "Lanjutkan dengan Google",
   "email-placeholder": "Alamat email",
-  "feature-1": "Lacak tujuan Anda",
-  "feature-2": "Pertahankan coretan bacaan",
+  "feature-1": "Lacak sasaran Anda",
+  "feature-2": "Pertahankan pencapaian bacaan",
   "feature-3": "Buat koleksi",
-  "feature-4": "Sinkronkan data Anda di seluruh browser",
+  "feature-4": "Sinkronkan data Anda di semua browser",
   "feature-5": "Dan banyak lagi!",
   "feature-6": "<b> Baru! </b> Catatan & Refleksi",
   "login-cta": "Masuk atau Daftar sekarang:",
@@ -16,8 +16,8 @@
     "AuthenticationError": "Otentikasi gagal. Silakan coba lagi nanti",
     "TokenExpiredError": "Anda telah logout, silakan login kembali."
   },
-  "login-title": "Masuk ke Quran.com",
-  "other-options": "Opsi Masuk Lainnya",
+  "login-title": "Login ke Quran.com",
+  "other-options": "Pilihan Login yang Lain",
   "privacy-policy": "Melindungi privasi Anda adalah prioritas kami – Dengan mendaftar, Anda menyetujui <link> Kebijakan Privasi </link> kami",
   "verify-code": "Verifikasi bahwa kode keamanan yang diberikan cocok dengan teks berikut:"
 }
