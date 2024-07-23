@@ -1,22 +1,22 @@
 {
-  "all-notifications": "Semua Pemberitahuan",
-  "channels-notifications": "Pemberitahuan Saluran",
+  "all-notifications": "Semua Notifikasi",
+  "channels-notifications": "Saluran Notifikasi",
   "channels": {
-    "chat": "Mengobrol",
+    "chat": "Obrolan",
     "email": "Surel",
     "in_app": "Dalam Aplikasi",
-    "push": "Dorongan",
+    "push": "Push",
     "sms": "SMS"
   },
   "notif-settings-not-enabled": "Pengaturan notifikasi tidak diaktifkan",
   "notif-update-success": "Pengaturan notifikasi Anda telah berhasil diperbarui!",
   "tabs": {
     "categories-settings": "Pengaturan Kategori",
-    "global-settings": "Pengaturan global"
+    "global-settings": "Pengaturan Global"
   },
   "tags": {
     "learning-plans": "Rencana Pembelajaran",
-    "qgj": "Perjalanan Pertumbuhan Quran",
-    "streaks": "coretan"
+    "qgj": "Perjalanan Perkembangan Qur'an",
+    "streaks": "Pencapaian"
   }
 }

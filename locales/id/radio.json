@@ -1,26 +1,26 @@
 {
-    "change": "Ubah",
-    "curated-station": {
-        "juz-amma": {
-            "description": "Dengarkan Juz terakhir Al-Quran",
-            "title": "Juz Amma"
-        },
-        "popular-recitations": {
-            "description": "Susun-atur bacaan harian",
-            "title": "Bacaan popular"
-        },
-        "surah-al-kahf": {
-            "description": "Dengar surah Al-Kahf secara berulang-ulang",
-            "title": "Surah Al Kahfi"
-        },
-        "yaseen-alwaqiah-al-mulk": {
-            "description": "Bacaan surah-surah dari jemaah jemaah qari",
-            "title": "Yasin, Al-Waqiah, Al-Mulk"
-        }
+  "change": "Ubah",
+  "curated-station": {
+    "juz-amma": {
+      "description": "Dengarkan Juz terakhir Al-Quran",
+      "title": "Juz Amma"
     },
-    "curated-stations": "Stasiun terpilih",
-    "pause-radio": "Hentikan Radio",
-    "play-radio": "Putar Radio",
-    "radio-desc": "Dengarkan pembacaan Al-Qur'an yang indah tanpa henti oleh berbagai qari.",
-    "reciter-stations": "Stasiun Qari"
+    "popular-recitations": {
+      "description": "Deretan bacaan harian yang terpilih",
+      "title": "Bacaan popular"
+    },
+    "surah-al-kahf": {
+      "description": "Dengar Surah Al-Kahf secara berulang-ulang",
+      "title": "Surah Al Kahfi"
+    },
+    "yaseen-alwaqiah-al-mulk": {
+      "description": "Bacaan Surah-Surah dari qari-qari pilihan",
+      "title": "Yasin, Al-Waqiah, Al-Mulk"
+    }
+  },
+  "curated-stations": "Saluran terpilih",
+  "pause-radio": "Hentikan Radio",
+  "play-radio": "Putar Radio",
+  "radio-desc": "Dengarkan bacaan indah Al-Qur'an oleh berbagai qari tanpa berhenti.",
+  "reciter-stations": "Saluran Qari"
 }

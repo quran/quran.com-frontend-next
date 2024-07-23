@@ -4,7 +4,7 @@
   "channels": {
     "chat": "Sembang",
     "email": "E-mel",
-    "in_app": "Dalam Apl",
+    "in_app": "Dalam App",
     "push": "Tolak",
     "sms": "SMS"
   },
@@ -16,7 +16,7 @@
   },
   "tags": {
     "learning-plans": "Rancangan Pembelajaran",
-    "qgj": "Kembara Pertumbuhan Al-Quran",
+    "qgj": "Kembara Al-Quran",
     "streaks": "coretan"
   }
 }
