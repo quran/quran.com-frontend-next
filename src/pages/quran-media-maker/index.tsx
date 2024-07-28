@@ -1,11 +1,12 @@
-/* eslint-disable react-func/max-lines-per-function */
 /* eslint-disable max-lines */
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
-import { PlayerRef, Player, RenderPlayPauseButton } from '@remotion/player';
+import { Player, PlayerRef, RenderPlayPauseButton } from '@remotion/player';
 import classNames from 'classnames';
 import { GetStaticProps, NextPage } from 'next';
+import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
+import { useDispatch } from 'react-redux';
 import { continueRender, delayRender, prefetch, staticFile } from 'remotion';
 import useSWRImmutable from 'swr/immutable';
 
@@ -16,26 +17,31 @@ import NextSeoWrapper from '@/components/NextSeoWrapper';
 import Spinner, { SpinnerSize } from '@/dls/Spinner/Spinner';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import useGetMediaSettings from '@/hooks/auth/media/useGetMediaSettings';
+import useAddQueryParamsToUrl from '@/hooks/useAddQueryParamsToUrl';
 import Error from '@/pages/_error';
 import layoutStyles from '@/pages/index.module.scss';
+import { updateSettings } from '@/redux/slices/mediaMaker';
 import AudioData from '@/types/AudioData';
+import MediaSettings, { ChangedSettings } from '@/types/Media/MediaSettings';
+import QueryParam from '@/types/QueryParam';
 import { makeChapterAudioDataUrl, makeVersesUrl } from '@/utils/apiPaths';
 import { areArraysEqual } from '@/utils/array';
 import { getAllChaptersData } from '@/utils/chapter';
 import { isAppleWebKit } from '@/utils/device-detector';
+import { logValueChange } from '@/utils/eventLogger';
 import { getLanguageAlternates, toLocalizedNumber } from '@/utils/locale';
 import {
   DEFAULT_API_PARAMS,
-  VIDEO_FPS,
   DEFAULT_RECITER_ID,
   DEFAULT_SURAH,
+  VIDEO_FPS,
 } from '@/utils/media/constants';
 import {
-  getNormalizedTimestamps,
-  getCurrentRangesAudioData,
   getBackgroundVideoById,
-  orientationToDimensions,
+  getCurrentRangesAudioData,
   getDurationInFrames,
+  getNormalizedTimestamps,
+  orientationToDimensions,
 } from '@/utils/media/utils';
 import { getCanonicalUrl, getQuranMediaMakerNavigationUrl } from '@/utils/navigation';
 import {
@@ -45,6 +51,24 @@ import {
 import { getVerseNumberFromKey } from '@/utils/verse';
 import { VersesResponse } from 'types/ApiResponses';
 import ChaptersData from 'types/ChaptersData';
+
+const MEDIA_SETTINGS_TO_QUERY_PARAM = {
+  verseTo: QueryParam.VERSE_TO,
+  verseFrom: QueryParam.VERSE_FROM,
+  backgroundColor: QueryParam.BACKGROUND_COLOR,
+  opacity: QueryParam.OPACITY,
+  borderColor: QueryParam.BORDER_COLOR,
+  borderSize: QueryParam.BORDER_SIZE,
+  reciter: QueryParam.MEDIA_RECITER,
+  quranTextFontScale: QueryParam.QURAN_TEXT_FONT_SCALE,
+  quranTextFontStyle: QueryParam.QURAN_TEXT_FONT_STYLE,
+  translationFontScale: QueryParam.TRANSLATION_FONT_SCALE,
+  translations: QueryParam.MEDIA_TRANSLATIONS,
+  fontColor: QueryParam.FONT_COLOR,
+  orientation: QueryParam.ORIENTATION,
+  videoId: QueryParam.VIDEO_ID,
+  surah: QueryParam.SURAH,
+} as Record<keyof MediaSettings, QueryParam>;
 
 interface MediaMaker {
   juzVerses?: VersesResponse;
@@ -98,6 +122,61 @@ const MediaMaker: NextPage<MediaMaker> = ({
     translationFontScale,
     orientation,
   } = mediaSettings;
+
+  const dispatch = useDispatch();
+  const router = useRouter();
+
+  const queryParams = {
+    [QueryParam.SURAH]: String(surah),
+    [QueryParam.VERSE_FROM]: String(getVerseNumberFromKey(verseFrom)),
+    [QueryParam.VERSE_TO]: String(getVerseNumberFromKey(verseTo)),
+    [QueryParam.RECITER]: String(reciter),
+    [QueryParam.TRANSLATIONS]: String(translations),
+    [QueryParam.BACKGROUND_COLOR]: backgroundColor,
+    [QueryParam.OPACITY]: String(opacity),
+    [QueryParam.BORDER_COLOR]: borderColor,
+    [QueryParam.BORDER_SIZE]: String(borderSize),
+    [QueryParam.FONT_COLOR]: fontColor,
+    [QueryParam.VIDEO_ID]: String(videoId),
+    [QueryParam.QURAN_TEXT_FONT_SCALE]: String(quranTextFontScale),
+    [QueryParam.QURAN_TEXT_FONT_STYLE]: String(quranTextFontStyle),
+    [QueryParam.TRANSLATION_FONT_SCALE]: String(translationFontScale),
+    [QueryParam.ORIENTATION]: orientation,
+  };
+
+  useAddQueryParamsToUrl(getQuranMediaMakerNavigationUrl(queryParams), {});
+
+  const seekToBeginning = useCallback(() => {
+    const { current } = playerRef;
+    if (!current) {
+      return;
+    }
+    if (current.isPlaying) {
+      current.pause();
+    }
+    current.seekTo(0);
+  }, []);
+
+  const onSettingsUpdate = useCallback(
+    (settings: ChangedSettings, key?: keyof MediaSettings, value?: any) => {
+      if (key) {
+        logValueChange(`media_settings_${key}`, mediaSettings[key], value);
+      }
+      seekToBeginning();
+      dispatch(updateSettings(settings));
+      Object.keys(settings).forEach((settingKey) => {
+        const toBeUpdatedQueryParamName =
+          MEDIA_SETTINGS_TO_QUERY_PARAM[settingKey as keyof MediaSettings];
+        const toBeUpdatedQueryParamValue = settings[settingKey];
+        router.query[toBeUpdatedQueryParamName] =
+          toBeUpdatedQueryParamName === QueryParam.MEDIA_TRANSLATIONS
+            ? toBeUpdatedQueryParamValue.join(',')
+            : toBeUpdatedQueryParamValue;
+      });
+      router.push({ pathname: router.pathname, query: router.query }, undefined, { shallow: true });
+    },
+    [dispatch, mediaSettings, router, seekToBeginning],
+  );
 
   const renderPlayPauseButton: RenderPlayPauseButton = useCallback(({ playing, isBuffering }) => {
     if (playing && isBuffering) {
@@ -181,17 +260,6 @@ const MediaMaker: NextPage<MediaMaker> = ({
   const playerRef = useRef<PlayerRef>(null);
   const getCurrentFrame = useCallback(() => {
     return playerRef?.current?.getCurrentFrame();
-  }, []);
-
-  const seekToBeginning = useCallback(() => {
-    const { current } = playerRef;
-    if (!current) {
-      return;
-    }
-    if (current.isPlaying) {
-      current.pause();
-    }
-    current.seekTo(0);
   }, []);
 
   const audioData = useMemo(() => {
@@ -340,6 +408,7 @@ const MediaMaker: NextPage<MediaMaker> = ({
             isFetching={isFetching}
             inputProps={inputProps}
             mediaSettings={mediaSettings}
+            onSettingsUpdate={onSettingsUpdate}
           />
         </div>
       </div>

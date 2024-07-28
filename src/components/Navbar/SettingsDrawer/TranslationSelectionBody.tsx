@@ -75,7 +75,7 @@ const TranslationSelectionBody = () => {
 
         // if unchecked also remove from query param
         if (!isChecked) {
-          removeQueryParam(QueryParam.Translations);
+          removeQueryParam(QueryParam.TRANSLATIONS);
         }
 
         logItemSelectionChange('translation', selectedTranslationId.toString(), isChecked);
@@ -86,7 +86,7 @@ const TranslationSelectionBody = () => {
           setSelectedTranslations({ translations: selectedTranslations, locale: lang }),
         );
         if (nextTranslations.length) {
-          router.query[QueryParam.Translations] = nextTranslations.join(',');
+          router.query[QueryParam.TRANSLATIONS] = nextTranslations.join(',');
           router.push(router, undefined, { shallow: true });
         }
       };

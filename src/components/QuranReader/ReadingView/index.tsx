@@ -73,7 +73,7 @@ const ReadingView = ({
     value: reciterId,
     isQueryParamDifferent: reciterQueryParamDifferent,
   }: { value: number; isQueryParamDifferent: boolean } = useGetQueryParamOrXstateValue(
-    QueryParam.Reciter,
+    QueryParam.RECITER,
   );
   const {
     value: wordByWordLocale,

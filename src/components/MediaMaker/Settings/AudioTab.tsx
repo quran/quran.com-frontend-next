@@ -44,7 +44,6 @@ const AudioTab: FC<AudioTabProps> = ({
   const [rangesError, setRangesError] = useState(null);
 
   const { verseFrom, verseTo, surah } = mediaSettings;
-
   const onChapterChange = (newChapter: string) => {
     const keyOfFirstVerseOfNewChapter = `${newChapter}:1`;
     onSettingsUpdate(
@@ -125,7 +124,7 @@ const AudioTab: FC<AudioTabProps> = ({
             onChange={onChapterChange}
             disabled={isFetching}
             size={SelectSize.Medium}
-            className={(styles.select, styles.surahSelect)}
+            className={styles.select}
           />
 
           <VersesRangeSelector

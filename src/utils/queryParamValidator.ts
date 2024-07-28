@@ -17,6 +17,10 @@ export const isValidTranslationsQueryParamValue = (value: string): boolean => {
       isValid = false;
       break;
     }
+    if (translationIds.length > 3) {
+      isValid = false;
+      break;
+    }
   }
   return isValid;
 };

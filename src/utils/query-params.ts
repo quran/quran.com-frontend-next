@@ -36,3 +36,12 @@ export const getQueryParamValueByType = (
   const parsedValue = parse(paramStringValue);
   return parsedValue;
 };
+
+export const getIsQueryParamDifferent = (
+  parsedQueryParamValue: string,
+  valueType: QueryParamValueType,
+  reduxValue: any,
+) => {
+  const checkEquality = equalityCheckerByType[valueType];
+  return !checkEquality(parsedQueryParamValue, reduxValue);
+};

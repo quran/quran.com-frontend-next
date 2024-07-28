@@ -1,5 +1,7 @@
+/* eslint-disable max-lines */
 import { getChapterData } from './chapter';
 import { PAGES_MUSHAF_MAP } from './page';
+import { getChapterNumberFromKey, getVerseNumberFromKey } from './verse';
 import { parseVerseRange } from './verseKeys';
 
 import ChaptersData from 'types/ChaptersData';
@@ -266,6 +268,58 @@ export const isValidVerseKey = (chaptersData: ChaptersData, verseKey: string): b
     return false;
   }
 
+  return true;
+};
+
+/**
+ * Check if a start verse key is valid. An invalid verse key can be:
+ *
+ * 1. if the starting verse is bigger than the ending verse
+ * 2. if the verse number bigger than the surah's verses count
+ * 3. if the verse from or verse to not matching the surah
+ *
+ * @param {string} startVerseKey
+ * @param {string} endVerseKey
+ * @param {number} versesCount
+ * @param {number} chapterID
+ * @returns {boolean}
+ */
+
+export const isValidVerseFrom = (startVerseKey, endVerseKey, versesCount, chapterID) => {
+  if (getVerseNumberFromKey(startVerseKey) > getVerseNumberFromKey(endVerseKey)) {
+    return false;
+  }
+  if (getVerseNumberFromKey(startVerseKey) > versesCount) {
+    return false;
+  }
+  if (getChapterNumberFromKey(startVerseKey) !== Number(chapterID)) {
+    return false;
+  }
+  return true;
+};
+
+/**
+ * Check if a end verse key is valid. An invalid verse key can be:
+ * 1. if the ending verse number bigger than the surah's verses count
+ * 2. if the ending verse number smaller than the starting verse
+ * 3. if the verse from or verse to not matching the surah
+ *
+ * @param {string} startVerseKey
+ * @param {string} endVerseKey
+ * @param {number} versesCount
+ * @param {number} chapterID
+ * @returns {boolean}
+ */
+export const isValidVerseTo = (startVerseKey, endVerseKey, versesCount, chapterID) => {
+  if (getVerseNumberFromKey(endVerseKey) > versesCount) {
+    return false;
+  }
+  if (getVerseNumberFromKey(endVerseKey) < startVerseKey) {
+    return false;
+  }
+  if (getChapterNumberFromKey(endVerseKey) !== Number(chapterID)) {
+    return false;
+  }
   return true;
 };
 

@@ -41,7 +41,7 @@ const PlayChapterAudioButton: React.FC<Props> = ({ chapterId }) => {
     value: reciterId,
     isQueryParamDifferent: reciterQueryParamDifferent,
   }: { value: number; isQueryParamDifferent: boolean } = useGetQueryParamOrXstateValue(
-    QueryParam.Reciter,
+    QueryParam.RECITER,
   );
 
   const play = () => {

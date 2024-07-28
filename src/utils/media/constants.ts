@@ -9,7 +9,7 @@ import WatermarkColor from '@/types/Media/WatermarkColor';
 import { QuranFont } from '@/types/QuranReader';
 import Verse from '@/types/Verse';
 
-export const DEFAULT_SURAH = 112;
+export const DEFAULT_SURAH = 1;
 export const DEFAULT_RECITER_ID = 7;
 export const DEFAULT_TRANSLATION = 131;
 export const VIDEO_PORTRAIT_HEIGHT = 1280;

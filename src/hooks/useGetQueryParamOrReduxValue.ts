@@ -30,8 +30,9 @@ import { selectWordByWordLocale } from '@/redux/slices/QuranReader/readingPrefer
 import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
 import ChaptersData from '@/types/ChaptersData';
 import { areArraysEqual } from '@/utils/array';
+import { getVerseValue } from '@/utils/media/utils';
 import {
-  equalityCheckerByType,
+  getIsQueryParamDifferent,
   getQueryParamValueByType,
   QueryParamValueType,
 } from '@/utils/query-params';
@@ -49,8 +50,8 @@ import {
 import { isValidChapterId, isValidVerseKey } from '@/utils/validator';
 import QueryParam from 'types/QueryParam';
 
-const QUERY_PARAMS_DATA = {
-  [QueryParam.Translations]: {
+export const QUERY_PARAMS_DATA = {
+  [QueryParam.TRANSLATIONS]: {
     reduxSelector: selectSelectedTranslations,
     reduxEqualityFunction: areArraysEqual,
     valueType: QueryParamValueType.ArrayOfNumbers,
@@ -66,14 +67,12 @@ const QUERY_PARAMS_DATA = {
     reduxSelector: selectVerseTo,
     reduxEqualityFunction: shallowEqual,
     valueType: QueryParamValueType.String,
-    // TODO: corner case when from and to are not valid. Also when surah and ranges are not in the same surah or some of them exist in the query param
     validate: (val, chaptersData) => isValidVerseKey(chaptersData, val),
   },
   [QueryParam.VERSE_FROM]: {
     reduxSelector: selectVerseFrom,
     reduxEqualityFunction: shallowEqual,
     valueType: QueryParamValueType.String,
-    // TODO: corner case when from and to are not valid. Also when surah and ranges are not in the same surah or some of them exist in the query param
     validate: (val, chaptersData) => isValidVerseKey(chaptersData, val),
   },
   [QueryParam.MEDIA_TRANSLATIONS]: {
@@ -128,7 +127,6 @@ const QUERY_PARAMS_DATA = {
     reduxSelector: selectSurah,
     reduxEqualityFunction: shallowEqual,
     valueType: QueryParamValueType.Number,
-    // TODO: corner case when from and to are not valid. Also when surah and ranges are not in the same surah or some of them exist in the query param
     validate: (val) => isValidChapterId(val),
   },
   [QueryParam.OPACITY]: {
@@ -201,21 +199,29 @@ const useGetQueryParamOrReduxValue = (
   }
   // @ts-ignore
   const reduxValue = useSelector(...useSelectorArguments);
-  // TODO: this bit is identical to the one in useGetQueryParamOrXstateValue.ts, keep it DRY
+  const surahReduxValue = useSelector(
+    QUERY_PARAMS_DATA[QueryParam.SURAH].reduxSelector,
+    QUERY_PARAMS_DATA[QueryParam.SURAH].reduxEqualityFunction,
+  );
   // if the param exists in the url
   if (isReady && query[queryParam] !== undefined) {
-    const { validate, valueType } = QUERY_PARAMS_DATA[queryParam];
-
+    const { valueType, validate } = QUERY_PARAMS_DATA[queryParam];
     const paramStringValue = String(query[queryParam]);
     const isValidValue = validate(paramStringValue, chaptersData, query);
+    const parsedQueryParamValue = getQueryParamValueByType(paramStringValue, valueType);
+    const isQueryParamDifferent = getIsQueryParamDifferent(paramStringValue, valueType, reduxValue);
+
+    if (queryParam === QueryParam.VERSE_TO || queryParam === QueryParam.VERSE_FROM) {
+      return {
+        value: getVerseValue(query, queryParam, chaptersData, QUERY_PARAMS_DATA, surahReduxValue),
+        isQueryParamDifferent,
+      };
+    }
+
     // if the url param is not valid, return the redux value
     if (!isValidValue) {
       return { isQueryParamDifferent: false, value: reduxValue };
     }
-
-    const parsedQueryParamValue = getQueryParamValueByType(paramStringValue, valueType);
-    const checkEquality = equalityCheckerByType[valueType];
-    const isQueryParamDifferent = !checkEquality(parsedQueryParamValue, reduxValue);
 
     return {
       value: parsedQueryParamValue,

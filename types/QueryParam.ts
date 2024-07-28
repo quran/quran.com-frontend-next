@@ -1,6 +1,6 @@
 enum QueryParam {
-  Translations = 'translations',
-  Reciter = 'reciter',
+  TRANSLATIONS = 'translations',
+  RECITER = 'reciter',
   WBW_LOCALE = 'wbw_locale',
   HIDE_ARABIC = 'hideArabic',
   FLOW = 'flow',

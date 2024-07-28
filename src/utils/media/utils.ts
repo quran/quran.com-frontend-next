@@ -1,3 +1,9 @@
+/* eslint-disable max-lines */
+/* eslint-disable react-func/max-lines-per-function */
+import { getChapterData } from '../chapter';
+import { isValidVerseFrom, isValidVerseTo } from '../validator';
+import { getVerseNumberFromKey } from '../verse';
+
 import { getNormalizedIntervals } from './helpers';
 
 import AudioData from '@/types/AudioData';
@@ -6,6 +12,7 @@ import GenerateMediaFileRequest, {
   Timestamp,
 } from '@/types/Media/GenerateMediaFileRequest';
 import Orientation from '@/types/Media/Orientation';
+import QueryParam from '@/types/QueryParam';
 import VerseTiming from '@/types/VerseTiming';
 import {
   BACKGROUND_VIDEOS,
@@ -161,4 +168,42 @@ export const mutateGeneratedMediaCounter = (currentData) => {
       limit: currentData?.data?.limit,
     },
   };
+};
+
+export const getVerseValue = (
+  query,
+  queryParam,
+  chaptersData,
+  QUERY_PARAMS_DATA,
+  surahReduxValue,
+) => {
+  const queryParamProps = QUERY_PARAMS_DATA[queryParam];
+  const surahParamProps = QUERY_PARAMS_DATA[QueryParam.SURAH];
+  const verseFromStringValue = String(query[QueryParam.VERSE_FROM]);
+  const verseToStringValue = String(query[QueryParam.VERSE_TO]);
+  const surahStringValue = String(query[QueryParam.SURAH]);
+
+  const chapterID = surahParamProps.validate(surahStringValue) ? surahStringValue : surahReduxValue;
+  const isVerseFrom = queryParam === QueryParam.VERSE_FROM;
+  const keyOfFirstVerse = `${chapterID}:1`;
+  const verseFromKey = getVerseNumberFromKey(verseFromStringValue)
+    ? verseFromStringValue
+    : `${chapterID}:${verseFromStringValue}`;
+
+  const verseToKey = getVerseNumberFromKey(verseToStringValue)
+    ? verseToStringValue
+    : `${chapterID}:${verseToStringValue}`;
+
+  const versesCount = getChapterData(chaptersData, chapterID)?.versesCount;
+  const isValidValue = queryParamProps.validate(
+    isVerseFrom ? verseFromKey : verseToKey,
+    chaptersData,
+    query,
+  );
+
+  const verseKey = isVerseFrom ? verseFromKey : verseToKey;
+  const isValidVerseToKey = isValidVerseTo(verseFromKey, verseToKey, versesCount, chapterID);
+  const isValidVerseFromKey = isValidVerseFrom(verseFromKey, verseToKey, versesCount, chapterID);
+
+  return isValidValue && isValidVerseFromKey && isValidVerseToKey ? verseKey : keyOfFirstVerse;
 };

@@ -317,13 +317,6 @@ $colorPickerBorderRadius: calc(var(--spacing-medium) * 3);
   width: 100%;
 }
 
-.surahSelect {
-  flex-grow: 1;
-  select {
-    width: 100%;
-  }
-}
-
 .tabContainer {
   display: flex;
   align-items: space-between;

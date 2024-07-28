@@ -20,7 +20,7 @@ type ColorsTabProps = {
 const ColorsTab: FC<ColorsTabProps> = ({ mediaSettings, onSettingsUpdate }) => {
   const { t } = useTranslation('quran-media-maker');
   const { fontColor, backgroundColor, opacity, borderColor, borderSize } = mediaSettings;
-  const onFontChange = (event) => {
+  const onTextColorChange = (event) => {
     debouncedOnChange(event.target.value);
   };
 
@@ -37,7 +37,7 @@ const ColorsTab: FC<ColorsTabProps> = ({ mediaSettings, onSettingsUpdate }) => {
             className={styles.colorPicker}
             type="color"
             value={fontColor}
-            onChange={onFontChange}
+            onChange={onTextColorChange}
           />
         </div>
       </div>

@@ -156,7 +156,7 @@ export const getQuranicCalendarRangesNavigationUrl = (
   };
 
   if (settings !== QuranicCalendarRangesNavigationSettings.DefaultSettings) {
-    params[QueryParam.Translations] = 85;
+    params[QueryParam.TRANSLATIONS] = 85;
     if (settings === QuranicCalendarRangesNavigationSettings.EnglishOnly) {
       params[QueryParam.HIDE_ARABIC] = 'true';
     }
