@@ -33,9 +33,9 @@ const TajweedColors = () => {
   const toggle = () => {
     setShowTajweedBar((prevShowTajweedBar) => !prevShowTajweedBar);
     if (showTajweedBar) {
-      logEvent('tajweed_bar_opened');
-    } else {
       logEvent('tajweed_bar_closed');
+    } else {
+      logEvent('tajweed_bar_opened');
     }
   };
 
