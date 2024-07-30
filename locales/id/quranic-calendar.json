@@ -30,6 +30,6 @@
     "en-only": "Baca dalam bahasa Inggris saja"
   },
   "supplemental-resources": "Sumber Daya Pendukung",
-  "today": "Tanggal hari ini adalah: <highlight> {{month}} {{day}} {{year}} , {{gregorianDate}} </highlight>",
+  "today": "Tanggal hari ini adalah: <highlight>{{day}} {{month}}  {{year}} , {{gregorianDate}} </highlight>",
   "week-title": "Pekan ke- {{weekNumber}} ( {{month}} ) mencakup ayat {{rangeStart}} sampai {{rangeEnd}}"
 }

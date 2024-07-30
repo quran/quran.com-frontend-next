@@ -32,7 +32,7 @@
       "title": "روزانہ 10 منٹ پڑھیں"
     },
     "year": {
-      "description": "اگلے سال اپنی رفتار سے قرآن پڑھیں",
+      "description": "اگلے سال کے دوران اپنی رفتار سے قرآن پڑھیں",
       "title": "ایک سال میں قرآن پڑھیں"
     }
   },
@@ -77,9 +77,9 @@
   "progress": {
     "complete": "آج کا ہدف مکمل ہو گیا 🎉",
     "goal-complete": "آپ کا پورا ہدف مکمل ہے 🎉",
-    "pages-goal": "قرآن کے {{pages}} صفحات پڑھیں",
+    "pages-goal": "قرآن کا/ کے {{pages}} صفحہ/صفحات پڑھیں",
     "range-goal": "{{from}} سے {{to}} تک پڑھیں",
-    "time-goal": "قرآن کا {{time}} پڑھیں"
+    "time-goal": "{{time}} قرآن پڑھیں"
   },
   "reading-goal": "پڑھائ کا ہدف",
   "reading-goal-label": "آپ ایک پر ہیں۔",
@@ -95,7 +95,7 @@
   "starting-chapter": "ابتدائی سورہ",
   "starting-verse": "ابتدائی آیت",
   "streak": "اسٹریک",
-  "streak-definition": "ایک سلسلہ ان دنوں کی تعداد ہے جو آپ نے لگاتار قرآن پڑھا ہے۔",
+  "streak-definition": "اسٹریک ان دنوں کی تعداد ہے جو آپ نے لگاتار قرآن پڑھا ہے۔",
   "timeline-meaning": "آپ کی ٹائم لائن کا کیا مطلب ہے؟",
   "timeline-states": {
     "checked": "آپ نے اپنا ہدف پورا کر لیا ہے۔",
@@ -110,7 +110,7 @@
     "one": "{{days}} دن",
     "other": "{{days}} دن"
   },
-  "x-days-streak": "{{days}} دن کا سلسلہ",
+  "x-days-streak": "{{days}} دن کی اسٹریک",
   "x-hours": {
     "one": "{{hours}} گھنٹہ",
     "other": "{{hours}} گھنٹے"

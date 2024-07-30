@@ -33,7 +33,7 @@
     },
     "inline-wbw": {
       "description": "Lihat terjemahan setiap kata di baris yang sama (di bawah kata) atau dalam gelembung di atas kata sambil mendengarkan Al-Qur'an",
-      "title": "Tampilkan terjemahan kata demi kata di baris yang sama (di bawah kata) atau tampilkan tooltip"
+      "title": "Tampilkan terjemahan kata per kata di baris yang sama (di bawah kata) atau tampilkan tooltip"
     },
     "juz": {
       "description": "Lihat Quran per Juz",
@@ -93,15 +93,15 @@
     },
     "wbw-audio": {
       "description": "Pilih opsi ini untuk mendengarkan setiap kata satu per satu hanya dengan mengklik kata tersebut!",
-      "title": "Dengarkan transliterasi kata demi kata dengan mengklik kata"
+      "title": "Dengarkan transliterasi kata per kata dengan mengklik kata"
     },
     "wbw-translation": {
       "description": "Lihat arti setiap kata saat Anda membaca atau mendengarkan Al-Qur'an untuk membantu meningkatkan kosakata Al-Qur'an Anda",
-      "title": "Baca terjemahan kata demi kata"
+      "title": "Baca terjemahan kata per kata"
     },
     "wbw-transliteration": {
       "description": "Lihat transliterasi per kata untuk membantu pembacaan Al-Qur'an",
-      "title": "Membaca transliterasi kata demi kata"
+      "title": "Membaca transliterasi kata per kata"
     }
   }
 }

@@ -2,7 +2,7 @@
   "continue-reading": "Lanjut membaca",
   "continuous": {
     "description": "Sasaran Anda akan menghitung kemajuan Anda dalam rentang hari",
-    "title": "Selama durasi"
+    "title": "Dalam Rentang Waktu"
   },
   "create-plan": "Buat rencana",
   "create-reading-goal": "Buat Sasaran",
@@ -20,8 +20,8 @@
   "examples-title": "Pilih sasaran yang telah disiapkan atau buat sasaran Anda sendiri",
   "examples": {
     "custom": {
-      "description": "Tetapkan sasaran tertentu yang cocok untuk Anda",
-      "title": "Tertentu"
+      "description": "Tetapkan sasaran sendiri yang pas untuk Anda",
+      "title": "Buat Sasaran Sendiri"
     },
     "khatm": {
       "description": "Sasaran Khatam klasik. Baca 1 Juz sehari",
@@ -49,7 +49,7 @@
     "title": "Tetapkan target untuk sasaran Anda"
   },
   "goal-type": {
-    "description": "Apakah sasaran Anda didasarkan pada waktu, halaman, atau rentang tertentu (yaitu 3 Juz)?",
+    "description": "Apakah sasaran Anda didasarkan pada waktu, halaman, atau rentang tertentu (misalnya 3 Juz)?",
     "title": "Pilih kriteria untuk sasaran Anda"
   },
   "goal-types": {
@@ -62,7 +62,7 @@
       "title": "Rentang tertentu"
     },
     "time": {
-      "description": "Tujuan Anda akan berdasarkan waktu",
+      "description": "Sasaran Anda akan berdasarkan waktu",
       "title": "Waktu"
     }
   },
