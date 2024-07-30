@@ -1,5 +1,5 @@
 {
-  "about": "Tentang kami",
+  "about": "Tentang Kami",
   "allow": "Ijinkan",
   "and": "dan",
   "announcements": {
@@ -52,8 +52,8 @@
       "title": "Gulir Otomatis"
     },
     "displaying": "Menampilkan",
-    "exp-tip": "<span>Ubah konten yang ditampilkan di bawah</span><br></br> <boldSpan>Pengaturan</boldSpan> > <boldSpan>Kata Demi Kata</boldSpan>",
-    "exp-tip-no-select": "<span>Centang opsi tampilan tooltip dan pilih opsi <br></br> Terjemahan dan/atau Transliterasi</span><br></br><span> di bawah </span><boldSpan>Pengaturan</boldSpan> > <boldSpan>Kata Demi Kata</boldSpan><span>, untuk</span><br></br> <span>mengaktifkan fitur ini.</span>",
+    "exp-tip": "<span>Ubah konten yang ditampilkan di bawah</span><br></br> <boldSpan>Pengaturan</boldSpan> > <boldSpan>Kata per Kata</boldSpan>",
+    "exp-tip-no-select": "<span>Centang opsi tampilan tooltip dan pilih opsi <br></br> Terjemahan dan/atau Transliterasi</span><br></br><span> di bawah </span><boldSpan>Pengaturan</boldSpan> > <boldSpan>Kata per Kata</boldSpan><span>, untuk</span><br></br> <span>mengaktifkan fitur ini.</span>",
     "experience": "Pengalaman",
     "play": "Putar Audio",
     "playback-normal": "Normal",
@@ -98,7 +98,7 @@
   "both": "Keduanya",
   "cancel": "Batal",
   "click-here": "Klik disini",
-  "close": "Menutup",
+  "close": "Tutup",
   "command-bar": {
     "navigations": "Navigasi",
     "no-nav-results": "Tidak ada hasil navigasi",
@@ -117,7 +117,7 @@
   "complete-sign-up": "Lengkapi pendaftaran Anda",
   "consents": {
     "communication": {
-      "body": "🚀 Tingkatkan kemajuan Anda dengan menerima notifikasi <boldSpan>personal</boldSpan> tentang kemajuan tujuan Anda, memertahankan pencapaian, dan meningkatkan penggunaan fitur kami saat ini. <br></br> <br></br> Bisakah kami terus mengabari Anda melalui email dan saluran lainnya? Kendali di tangan Anda – silakan sesuaikan preferensi ini kapan saja di pengaturan akun Anda. <br></br> <br></br> Cukup pilih 'Ijinkan' untuk <boldSpan>pengingat yang menginspirasi</boldSpan> atau 'Jangan Sekarang' untuk menolaknya.",
+      "body": "🚀 Tingkatkan kemajuan Anda dengan menerima notifikasi <boldSpan>personal</boldSpan> tentang kemajuan pencapaian tujuan Anda, memertahankan pencapaian, dan meningkatkan penggunaan fitur kami saat ini. <br></br> <br></br> Bisakah kami terus mengabari Anda melalui email dan saluran lainnya? Kendali di tangan Anda – silakan sesuaikan preferensi ini kapan saja di pengaturan akun Anda. <br></br> <br></br> Cukup pilih 'Ijinkan' untuk <boldSpan>pengingat yang menginspirasi</boldSpan> atau 'Jangan Sekarang' untuk menolaknya.",
       "header": "Kami ingin membantu Anda tetap <boldSpan>berkomitmen dan konsisten</boldSpan> dalam Perjalanan Kemajuan berQur'an Anda! 📖🌟"
     }
   },
@@ -169,7 +169,7 @@
     "text_uthmani": "Usmani"
   },
   "footer": {
-    "description": "Quran.com adalah Sadaqah Jariyah. Kami berharap setiap orang dapat membaca, mempelajari, dan memahami Al-Quran dengan labih mudah. Al-Qur'an Mulia mempunyai banyak nama di antaranya Al-Qur'an Al-Karim, Al-Kitab, Al-Furqan, Al-Maw'itha, Al-Zikir, dan Al-Nur.",
+    "description": "Quran.com adalah Sadaqah Jariyah. Kami berharap setiap orang dapat membaca, mempelajari, dan memahami Al-Quran dengan lebih mudah. Al-Qur'an Mulia mempunyai banyak nama di antaranya Al-Qur'an Al-Karim, Al-Kitab, Al-Furqan, Al-Maw'itha, Al-Zikir, dan Al-Nur.",
     "hiring": "Kami sedang merekrut! Bergabunglah dengan tim QuranFoundation dan berkontribusi pada misi kami. <link> Daftar sekarang! </link>",
     "rights": "Hak Cipta Terlindungi",
     "title": "Baca, pelajari, dan pahami Al-Qur'an Mulia."
@@ -188,14 +188,14 @@
     "title": "Menyumbang di hari-hari terbaik!"
   },
   "fundraising": {
-    "description": "Donasi bulanan membantu kami meningkatkan Quran.com dan mempertahankan operasional sehingga kami tidak terlalu fokus pada penggalangan dana dan lebih fokus pada menciptakan dampak.",
+    "description": "Donasi bulanan membantu kami meningkatkan Quran.com dan melanggengkan operasional sehingga kami tidak terlalu fokus pada penggalangan dana tetapi lebih pada penciptaan dampak.",
     "title": "Menjadi Donatur Bulanan"
   },
   "help": "Bantuan",
   "hizb": "Hizb",
   "home": "Halaman Utama",
   "hours": "Jam",
-  "inline": "Di barisan",
+  "inline": "Di bawah ayat",
   "input": {
     "clear": "Bersihkan"
   },
@@ -246,7 +246,7 @@
   "popup": {
     "footnote": "Donasi bulanan memungkinkan kami untuk tidak terlalu fokus pada penggalangan dana",
     "text-1": "Kami berkomitmen untuk melayani dunia pengetahuan dan teknologi Qur'ani, selalu gratis.",
-    "text-2": "Kesempatan sempurna untuk Sedekah Jariyah. Investasi untuk Akhirat Anda dengan menjadi donor bulanan (atau satu kali).",
+    "text-2": "Kesempatan sempurna untuk Sedekah Jariyah. Investasi untuk Akhirat Anda dengan menjadi donor bulanan (atau donor satu kali).",
     "title": "Menyumbang di Hari-hari Terbaik!"
   },
   "powered-by": "Dipersembahkan oleh",
@@ -256,8 +256,8 @@
   },
   "prev": "Sebelumnya",
   "previous-ayah": "Ayat sebelumnya",
-  "privacy": "Pribadi",
-  "product-updates": "Pengkinian produk",
+  "privacy": "Kerahasiaan",
+  "product-updates": "Pengkinian Produk",
   "profile": "Profil",
   "q-reflect": "QuranReflect",
   "quran-com": "Quran.com",
@@ -269,7 +269,7 @@
   },
   "recitation": "Pembacaan",
   "reciter": "Qari",
-  "reciter-summary": "Pembaca kata demi kata: <span> {{reciterName}} </span> . Klik pada sebuah kata untuk mendengarkan bacaannya.",
+  "reciter-summary": "Pembaca kata per kata: <span> {{reciterName}} </span> . Klik pada sebuah kata untuk mendengarkan bacaannya.",
   "reciters": "Qari",
   "reflect": "Mencerminkan",
   "reflections": "Refleksi",
@@ -355,12 +355,12 @@
     "auto": "Otomatis",
     "dark": "Gelap",
     "light": "Terang",
-    "sepia": "sepia",
+    "sepia": "Sepia",
     "system": "Sistem",
     "system-desc": "Tema sistem secara otomatis mengadopsi pengaturan mode terang/gelap Anda"
   },
   "to": "Ke",
-  "tooltip": "Keterangan alat",
+  "tooltip": "Dalam gelembung tooltip",
   "tooltip-trans-lang": "Bahasa Tooltip",
   "trans-lang": "Bahasa Terjemahan",
   "translation": "Terjemahan",
@@ -390,8 +390,8 @@
     "suggest-title": "Baca sekarang",
     "voice-search-powered-by": "Pencarian Suara dipersembahkan oleh"
   },
-  "wbw": "Kata dari kata",
-  "wbw-lang-summary": "Sumber terjemahan kata demi kata: <link> {{source}} </link> . Sumber ini tidak tergantung pada pemilihan terjemahan ayat.",
+  "wbw": "Kata per kata",
+  "wbw-lang-summary": "Sumber terjemahan kata per kata: <link> {{source}} </link> . Sumber ini tidak tergantung pada pemilihan terjemahan ayat.",
   "wbw-trans-lang": "Bahasa kata per kata",
   "wbw-translation": "Terjemahan per kata",
   "wbw-transliteration": "Transliterasi per kata",

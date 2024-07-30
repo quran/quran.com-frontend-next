@@ -25,9 +25,9 @@
   "join-quranic-calendar-success": "آپ نے ڈیوائن بک کلب میں کامیابی سے شامل ہو گۓ ہیں!",
   "quranic-calendar": "عالمی قرآنی کیلنڈر",
   "reading-options": {
-    "default-settings": "میری ڈیفالٹ سیٹنگز کے ساتھ پڑهائ",
-    "en-and-ar": "انگریزی اور عربی میں پڑهائ",
-    "en-only": "صرف انگریزی میں پڑهائ"
+    "default-settings": "اپنی  ڈیفالٹ سیٹنگز کے ساتھ پڑھیں",
+    "en-and-ar": "انگریزی اور عربی میں پڑھیں",
+    "en-only": "صرف انگریزی میں پڑھیں"
   },
   "supplemental-resources": "معاون وسائل",
   "today": "آج کی تاریخ ہے: <highlight> {{month}} {{day}} {{year}} , {{gregorianDate}} </highlight>",
