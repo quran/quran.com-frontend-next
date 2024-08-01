@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useMemo } from 'react';
 
 import DataContext from '@/contexts/DataContext';
 import useGetQueryParamOrReduxValue from '@/hooks/useGetQueryParamOrReduxValue';
@@ -59,25 +59,45 @@ const useGetMediaSettings = (): MediaSettings => {
   const { value: videoId }: { value: number } = useGetQueryParamOrReduxValue(QueryParam.VIDEO_ID);
   const { value: surah }: { value: number } = useGetQueryParamOrReduxValue(QueryParam.SURAH);
 
-  return {
-    verseTo,
-    verseFrom,
+  return useMemo(() => {
+    return {
+      verseTo,
+      verseFrom,
+      backgroundColor,
+      borderColor,
+      borderSize,
+      opacity,
+      reciter,
+      quranTextFontScale,
+      quranTextFontStyle,
+      translationFontScale,
+      translations,
+      fontColor,
+      verseAlignment,
+      translationAlignment,
+      orientation,
+      videoId,
+      surah,
+    };
+  }, [
     backgroundColor,
     borderColor,
     borderSize,
+    fontColor,
     opacity,
-    reciter,
+    orientation,
     quranTextFontScale,
     quranTextFontStyle,
+    reciter,
+    surah,
+    translationAlignment,
     translationFontScale,
     translations,
-    fontColor,
     verseAlignment,
-    translationAlignment,
-    orientation,
+    verseFrom,
+    verseTo,
     videoId,
-    surah,
-  };
+  ]);
 };
 
 export default useGetMediaSettings;

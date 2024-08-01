@@ -69,6 +69,7 @@ const TextTab: FC<TextTabProps> = ({ mediaSettings, onSettingsUpdate }) => {
             options={types}
             value={quranTextFontStyle}
             onChange={onQuranFontStyleChange}
+            className={styles.select}
           />
         </div>
       </div>

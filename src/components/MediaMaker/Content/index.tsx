@@ -2,6 +2,8 @@
 /* eslint-disable i18next/no-literal-string */
 /* eslint-disable react/no-danger */
 /* eslint-disable no-unsafe-optional-chaining */
+import { useMemo, useRef } from 'react';
+
 import classNames from 'classnames';
 import { AbsoluteFill, Audio, Sequence, Video, staticFile } from 'remotion';
 
@@ -57,12 +59,19 @@ const MediaMakerContent: React.FC<Props> = ({
   chapterEnglishName,
   isPlayer = false,
 }) => {
-  const startFrom = audio?.verseTimings[0]?.normalizedStart
-    ? (audio?.verseTimings[0]?.normalizedStart / 1000) * 30
-    : (audio?.verseTimings[0]?.timestampFrom / 1000) * 30;
-  const endAt = audio?.verseTimings[0]?.normalizedEnd
-    ? (audio?.verseTimings[audio?.verseTimings?.length - 1]?.normalizedEnd / 1000) * 30
-    : (audio?.verseTimings[audio?.verseTimings?.length - 1]?.timestampTo / 1000) * 30;
+  const videoRef = useRef(null);
+  const startFrom = useMemo(() => {
+    return audio?.verseTimings[0]?.normalizedStart
+      ? (audio?.verseTimings[0]?.normalizedStart / 1000) * 30
+      : (audio?.verseTimings[0]?.timestampFrom / 1000) * 30;
+  }, [audio?.verseTimings]);
+
+  const endAt = useMemo(() => {
+    return audio?.verseTimings[0]?.normalizedEnd
+      ? (audio?.verseTimings[audio?.verseTimings?.length - 1]?.normalizedEnd / 1000) * 30
+      : (audio?.verseTimings[audio?.verseTimings?.length - 1]?.timestampTo / 1000) * 30;
+  }, [audio?.verseTimings]);
+
   const audioHasStartAndEndRanges = (!!startFrom || startFrom === 0) && !!endAt;
 
   const videoPath = staticFile(`${isPlayer ? '/publicMin' : ''}${video.videoSrc}`);
@@ -73,7 +82,7 @@ const MediaMakerContent: React.FC<Props> = ({
       }}
     >
       <div className={styles.videoContainer}>
-        <Video pauseWhenBuffering src={videoPath} />
+        <Video ref={videoRef} src={videoPath} />
       </div>
       {audioHasStartAndEndRanges && (
         <Audio pauseWhenBuffering startFrom={startFrom} endAt={endAt} src={audio.audioUrl} />

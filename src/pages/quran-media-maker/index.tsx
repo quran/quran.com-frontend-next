@@ -1,13 +1,22 @@
+/* eslint-disable react-func/max-lines-per-function */
 /* eslint-disable max-lines */
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
-import { Player, PlayerRef, RenderPlayPauseButton } from '@remotion/player';
+import { Player, PlayerRef, RenderPoster } from '@remotion/player';
 import classNames from 'classnames';
 import { GetStaticProps, NextPage } from 'next';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch } from 'react-redux';
-import { continueRender, delayRender, prefetch, staticFile } from 'remotion';
+import {
+  AbsoluteFill,
+  cancelRender,
+  continueRender,
+  delayRender,
+  prefetch,
+  staticFile,
+} from 'remotion';
 import useSWRImmutable from 'swr/immutable';
 
 import { getAvailableReciters, getChapterAudioData, getChapterVerses } from '@/api';
@@ -92,8 +101,15 @@ const MediaMaker: NextPage<MediaMaker> = ({
   const { t, lang } = useTranslation('common');
   const mediaSettings = useGetMediaSettings();
   const [isReady, setIsReady] = useState(false);
-  const [handle] = useState(() => delayRender());
-  const [areMediaFilesReady, setAreMediaFilesReady] = useState(false);
+  const [videoFileReady, setVideoFileReady] = useState(false);
+  const [audioFileReady, setAudioFileReady] = useState(false);
+  const [isUpdating, setIsUpdating] = useState(false);
+  const [handleVideo] = useState(() => delayRender());
+  const [handleAudio] = useState(() => delayRender());
+  const areMediaFilesReady = videoFileReady && audioFileReady;
+
+  const playerRef = useRef<PlayerRef>(null);
+
   const lazyComponent = useCallback(() => {
     return import('@/components/MediaMaker/Content');
   }, []);
@@ -147,7 +163,7 @@ const MediaMaker: NextPage<MediaMaker> = ({
   useAddQueryParamsToUrl(getQuranMediaMakerNavigationUrl(queryParams), {});
 
   const seekToBeginning = useCallback(() => {
-    const { current } = playerRef;
+    const current = playerRef?.current;
     if (!current) {
       return;
     }
@@ -162,6 +178,7 @@ const MediaMaker: NextPage<MediaMaker> = ({
       if (key) {
         logValueChange(`media_settings_${key}`, mediaSettings[key], value);
       }
+      setIsUpdating(true);
       seekToBeginning();
       dispatch(updateSettings(settings));
       Object.keys(settings).forEach((settingKey) => {
@@ -178,13 +195,9 @@ const MediaMaker: NextPage<MediaMaker> = ({
     [dispatch, mediaSettings, router, seekToBeginning],
   );
 
-  const renderPlayPauseButton: RenderPlayPauseButton = useCallback(({ playing, isBuffering }) => {
-    if (playing && isBuffering) {
-      return <Spinner size={SpinnerSize.Large} />;
-    }
-
-    return null;
-  }, []);
+  useEffect(() => {
+    setIsUpdating(false);
+  }, [mediaSettings]);
 
   const API_PARAMS = useMemo(() => {
     return {
@@ -257,7 +270,7 @@ const MediaMaker: NextPage<MediaMaker> = ({
   const chapterEnglishName = useMemo<string>(() => {
     return englishChaptersList[surah]?.translatedName as string;
   }, [surah, englishChaptersList]);
-  const playerRef = useRef<PlayerRef>(null);
+
   const getCurrentFrame = useCallback(() => {
     return playerRef?.current?.getCurrentFrame();
   }, []);
@@ -315,33 +328,69 @@ const MediaMaker: NextPage<MediaMaker> = ({
   ]);
 
   useEffect(() => {
+    setVideoFileReady(false);
     // {@see https://www.remotion.dev/docs/troubleshooting/player-flicker#option-6-prefetching-as-base64-to-avoid-network-request-and-local-http-server}
     const method = isAppleWebKit() ? 'base64' : 'blob-url';
-    const { waitUntilDone: waitUntilVideoDone, free: freeVideo } = prefetch(
+    const { waitUntilDone: waitUntilVideoDone } = prefetch(
       staticFile(`/publicMin${inputProps.video.videoSrc}`),
-      {
-        method,
-      },
+      { method },
     );
-    const { waitUntilDone: waitUntilAudioDone, free: freeAudio } = prefetch(
-      inputProps.audio.audioUrl,
-      {
-        method,
-      },
-    );
-    Promise.all([waitUntilVideoDone(), waitUntilAudioDone()])
+
+    waitUntilVideoDone()
       .then(() => {
-        continueRender(handle);
-        setAreMediaFilesReady(true);
+        setVideoFileReady(true);
+        continueRender(handleVideo);
       })
-      .catch(() => {
-        // TODO: use toast to show error
+      .catch((e) => {
+        toast(`${e}`);
+        cancelRender(e);
       });
-    return () => {
-      freeVideo();
-      freeAudio();
-    };
-  }, [handle, inputProps.audio.audioUrl, inputProps.video.videoSrc]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [inputProps.video.videoSrc]);
+
+  useEffect(() => {
+    setAudioFileReady(false);
+    // {@see https://www.remotion.dev/docs/troubleshooting/player-flicker#option-6-prefetching-as-base64-to-avoid-network-request-and-local-http-server}
+    const method = isAppleWebKit() ? 'base64' : 'blob-url';
+    const { waitUntilDone: waitUntilAudioDone } = prefetch(inputProps.audio.audioUrl, {
+      method,
+    });
+
+    waitUntilAudioDone()
+      .then(() => {
+        setAudioFileReady(true);
+        continueRender(handleAudio);
+      })
+      .catch((e) => {
+        toast(`${e}`);
+        cancelRender(e);
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [inputProps.audio.audioUrl]);
+
+  const renderPoster: RenderPoster = useCallback(() => {
+    const video = getBackgroundVideoById(videoId);
+
+    if (isUpdating || isFetching || !areMediaFilesReady) {
+      return (
+        <div className={styles.loadingContainer}>
+          <Spinner size={SpinnerSize.Large} />
+        </div>
+      );
+    }
+
+    return (
+      <AbsoluteFill>
+        <Image
+          key={videoId}
+          className={classNames(styles.img)}
+          src={video.thumbnailSrc}
+          layout="fill"
+          style={{ zIndex: -1 }}
+        />
+      </AbsoluteFill>
+    );
+  }, [areMediaFilesReady, isFetching, isUpdating, videoId]);
 
   const chaptersList = useMemo(() => {
     return Object.entries(chaptersData).map(([id, chapterObj], index) => ({
@@ -373,31 +422,30 @@ const MediaMaker: NextPage<MediaMaker> = ({
       />
       <div className={styles.pageContainer}>
         <div className={classNames(styles.playerWrapper, layoutStyles.flowItem)}>
-          {isFetching || !areMediaFilesReady ? (
-            <div className={styles.loadingContainer}>
-              <Spinner size={SpinnerSize.Large} />
+          <>
+            <div className={styles.titleContainer}>
+              <h1>{t('quran-media-maker:title')}</h1>
             </div>
-          ) : (
-            <>
-              <div className={styles.titleContainer}>
-                <h1>{t('quran-media-maker:title')}</h1>
-              </div>
 
-              <Player
-                className={styles.player}
-                inputProps={inputProps}
-                lazyComponent={lazyComponent}
-                durationInFrames={getDurationInFrames(timestamps)}
-                compositionWidth={width}
-                compositionHeight={height}
-                fps={VIDEO_FPS}
-                ref={playerRef}
-                controls
-                bufferStateDelayInMilliseconds={200} // wait for 200ms before showing the spinner
-                renderPlayPauseButton={renderPlayPauseButton}
-              />
-            </>
-          )}
+            <Player
+              className={styles.player}
+              inputProps={inputProps}
+              lazyComponent={lazyComponent}
+              durationInFrames={getDurationInFrames(timestamps)}
+              compositionWidth={width}
+              compositionHeight={height}
+              fps={VIDEO_FPS}
+              ref={playerRef}
+              controls={!isUpdating && !isFetching && areMediaFilesReady}
+              bufferStateDelayInMilliseconds={200} // wait for 200ms second before showing the spinner
+              renderPoster={renderPoster}
+              posterFillMode="player-size"
+              showPosterWhenUnplayed
+              showPosterWhenPaused
+              showPosterWhenBuffering
+              showPosterWhenEnded
+            />
+          </>
         </div>
         <div className={layoutStyles.flow}>
           <VideoSettings

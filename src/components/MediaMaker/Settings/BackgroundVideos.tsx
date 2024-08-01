@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import classNames from 'classnames';
 import Image from 'next/image';
 
@@ -13,7 +15,10 @@ interface Props extends MediaSettingsProps {
 }
 
 const BackgroundVideos: React.FC<Props> = ({ onSettingsUpdate, videoId }) => {
+  const [selectedVideoId, setSelectedVideoId] = useState(videoId);
+
   const onVideoSelected = (newVideId: number) => {
+    setSelectedVideoId(newVideId);
     onSettingsUpdate({ videoId: newVideId }, 'videoId', newVideId);
   };
 
@@ -23,7 +28,7 @@ const BackgroundVideos: React.FC<Props> = ({ onSettingsUpdate, videoId }) => {
         <Image
           key={video.id}
           className={classNames(styles.img, {
-            [styles.selectedSetting]: video.id === videoId,
+            [styles.selectedSetting]: video.id === selectedVideoId,
           })}
           onClick={() => {
             onVideoSelected(video.id);
