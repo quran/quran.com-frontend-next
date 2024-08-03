@@ -1,0 +1,31 @@
+{
+    "add": "Dodaj",
+    "add-data-success": "Twoje dane czytania zostały pomyślnie dodane.",
+    "delete-goal": {
+        "action": "Usuń cel",
+        "confirmation": {
+            "action-text": "Rozumiem konsekwencje, usuń mój cel",
+            "confirmation-text": "usuń mój cel",
+            "instruction-text": "Proszę napisz <strong>{{text}}<\/strong> aby potwierdzić",
+            "subtitle": "Tej czynności nie można cofnąć. Spowoduje to trwałe usunięcie Twojego celu i przestaniemy śledzić Twoje postępy.",
+            "title": "Jesteś pewien?"
+        },
+        "success": "Twój cel czytania został pomyślnie usunięty."
+    },
+    "edit-goal": {
+        "action": "Edytuj cel",
+        "subtitle": "Ponownie obliczymy Twoje postępy w oparciu o nowy cel.",
+        "success": "Twój cel czytania został pomyślnie zaktualizowany.",
+        "title": "Edytuj swój cel czytania"
+    },
+    "history": "Historia czytania",
+    "history-for": "Historia czytania dla {{date}}",
+    "manage-goal": "Zarządzaj swoim celem czytania",
+    "manually-add": "Ręcznie dodaj odczyty",
+    "no-reading-history-for": "Brak historii czytania dla {{date}}",
+    "reading-progress-header": "Twoje postępy",
+    "reading-progress-streak": "Seria",
+    "reading-time": "Czas czytania",
+    "seconds-read-tooltip": "To jest czas, który spędziłeś na czytaniu wprowadzonych Ajatów. Wypełniamy go automatycznie średnią prędkością czytania na Quran.com, ale możesz go zastąpić swoim rzeczywistym czasem czytania.",
+    "you-read": "Czytasz:"
+}
