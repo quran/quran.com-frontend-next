@@ -9,6 +9,7 @@ import cellStyles from '../QuranReader/TranslationView/TranslationViewCell.modul
 
 import styles from './OverflowVerseActionsMenuBody.module.scss';
 
+import NewLabel from '@/dls/Badge/NewLabel';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import Spinner from '@/dls/Spinner/Spinner';
@@ -36,7 +37,7 @@ const OverflowVerseActionsMenu: React.FC<Props> = ({
 }) => {
   const { t } = useTranslation('common');
   return (
-    <div className={styles.container}>
+    <div className={(styles.container, styles.containerWithNewLabel)}>
       <PopoverMenu
         trigger={
           <Button
@@ -76,6 +77,7 @@ const OverflowVerseActionsMenu: React.FC<Props> = ({
           bookmarksRangeUrl={bookmarksRangeUrl}
         />
       </PopoverMenu>
+      <NewLabel />
     </div>
   );
 };

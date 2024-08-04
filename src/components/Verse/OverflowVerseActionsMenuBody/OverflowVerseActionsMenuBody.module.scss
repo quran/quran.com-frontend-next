@@ -8,3 +8,9 @@
         transform: scaleX(-1);
     }
 }
+
+.newLabelContainer {
+    display: flex;
+    column-gap: var(--spacing-xxsmall);
+    align-items: center;
+}

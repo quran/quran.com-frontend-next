@@ -11,6 +11,7 @@ import styles from './OverflowVerseActionsMenuBody.module.scss';
 import ShareVerseActionsMenu, { VerseActionsOverflowMenu } from './ShareVerseActionsMenu';
 
 import WordByWordVerseAction from '@/components/QuranReader/ReadingView/WordByWordVerseAction';
+import NewLabel from '@/dls/Badge/NewLabel';
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import ChevronRightIcon from '@/icons/chevron-right.svg';
 import ShareIcon from '@/icons/share.svg';
@@ -62,7 +63,10 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
       <PopoverMenu.Item icon={<ShareIcon />} onClick={onShareItemClicked}>
         <div className={styles.menuWithNestedItems}>
           {t('share')}
-          <ChevronRightIcon />
+          <div className={styles.newLabelContainer}>
+            <NewLabel />
+            <ChevronRightIcon />
+          </div>
         </div>
       </PopoverMenu.Item>
       <VerseActionRepeatAudio isTranslationView={isTranslationView} verseKey={verse.verseKey} />

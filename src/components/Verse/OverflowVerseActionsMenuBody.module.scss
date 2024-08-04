@@ -7,3 +7,9 @@
     z-index: var(--z-index-default);
   }
 }
+
+.containerWithNewLabel {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
