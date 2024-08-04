@@ -23,7 +23,6 @@ import { getQuranReflectPostUrl } from '@/utils/quranReflect/navigation';
 
 type Props = {
   weekNumber: number;
-  currentQuranicCalendarWeek: number;
   isCurrentWeek: boolean;
   localizedMonth: string;
   ranges: string;

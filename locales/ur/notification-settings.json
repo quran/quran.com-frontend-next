@@ -1,22 +1,22 @@
 {
-  "all-notifications": "تمام اطلاعات",
-  "channels-notifications": "چینلز کی اطلاعات",
+  "all-notifications": "تمام نوٹیفکیشنز",
+  "channels-notifications": "چینلز نوٹیفکیشنز",
   "channels": {
-    "chat": "گپ شپ",
+    "chat": "چیٹ",
     "email": "ای میل",
-    "in_app": "ایپ میں",
-    "push": "دھکا",
-    "sms": "پیغام"
+    "in_app": "ایپ کے اندر",
+    "push": "پش",
+    "sms": "ایس ایم ایس"
   },
-  "notif-settings-not-enabled": "اطلاع کی ترتیبات فعال نہیں ہیں۔",
-  "notif-update-success": "آپ کی اطلاع کی ترتیبات کو کامیابی کے ساتھ اپ ڈیٹ کر دیا گیا ہے!",
+  "notif-settings-not-enabled": "نوٹیفکیشن سیٹنگز فعال نہیں ہیں",
+  "notif-update-success": "آپ کی نوٹیفکیشن سیٹنگز کو کامیابی کے ساتھ اپ ڈیٹ کر دیا گیا ہے!",
   "tabs": {
-    "categories-settings": "زمرہ جات کی ترتیبات",
-    "global-settings": "عالمی ترتیبات"
+    "categories-settings": "اقسام کی سیٹنگز",
+    "global-settings": "عمومی سیٹنگز"
   },
   "tags": {
-    "learning-plans": "سیکھنے کے منصوبے",
-    "qgj": "قرآن کی ترقی کا سفر",
-    "streaks": "لکیریں"
+    "learning-plans": "سیکھنے کے پلانز",
+    "qgj": "قرانی ارتقاء کا سفر",
+    "streaks": "اسٹریکز"
   }
 }
