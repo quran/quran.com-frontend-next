@@ -1,6 +1,6 @@
 enum QueryParam {
   TRANSLATIONS = 'translations',
-  RECITER = 'reciter',
+  RECITER = 'mediaReciter',
   WBW_LOCALE = 'wbw_locale',
   HIDE_ARABIC = 'hideArabic',
   FLOW = 'flow',
@@ -10,7 +10,6 @@ enum QueryParam {
   VERSE_TO = 'verseTo',
   VERSE_FROM = 'verseFrom',
   OPACITY = 'opacity',
-  MEDIA_RECITER = 'mediaReciter',
   QURAN_TEXT_FONT_SCALE = 'quranTextFontScale',
   QURAN_TEXT_FONT_STYLE = 'quranTextFontStyle',
   TRANSLATION_FONT_SCALE = 'translationFontScale',

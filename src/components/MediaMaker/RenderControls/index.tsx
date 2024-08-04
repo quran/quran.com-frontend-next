@@ -49,7 +49,7 @@ const RenderControls: React.FC<Props> = ({ inputProps, getCurrentFrame, isFetchi
   }, [isCopied]);
 
   const onCopyLinkClicked = () => {
-    logButtonClick('video-generation-copy-link');
+    logButtonClick('video_generation_copy_link');
     const path = getCurrentPath();
     if (origin) {
       clipboardCopy(path).then(() => {

@@ -70,9 +70,13 @@ export const isValidOrientationQueryParamValue = (value: string): boolean => {
   return Object.values(Orientation).includes(value as Orientation);
 };
 
-export const isValidOpacityQueryParamValue = (value: number): boolean => {
+export const isValidOpacityQueryParamValue = (value: number | string): boolean => {
+  if (!value) {
+    return false;
+  }
+
   const OPACITY_VALUES = [0, 0.2, 0.4, 0.6, 0.8, 1];
-  return OPACITY_VALUES.includes(value);
+  return OPACITY_VALUES.includes(Number(value));
 };
 
 export const isValidVideoIdQueryParamValue = (value: string): boolean => {

@@ -11,23 +11,6 @@ import {
 } from '@/utils/media/constants';
 import { getDurationInFrames, orientationToDimensions } from '@/utils/media/utils';
 
-/**
- * - Make sure API calls are being made in calculate metadata
- * - Install zod(?) and input props and default props are of same type
- */
-
-/**
- * To make things work (e.g. run npx remotion studio), I had to:
- *   - hardcode locale to 'en' in util.ts and chapter.ts
- *   - install scss loaders to make things work - https://www.remotion.dev/docs/webpack#enable-sassscss-support
- *   - install querystring module?
- *   -
- *   -
- *   -
- *   -
- *   -
- */
-
 // eslint-disable-next-line import/prefer-default-export
 export const RemotionRoot = () => {
   const waitForFont = delayRender();

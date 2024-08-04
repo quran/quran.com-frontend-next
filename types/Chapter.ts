@@ -13,7 +13,7 @@ interface Chapter {
   transliteratedName: string;
   nameArabic: string;
   translatedName: TranslatedName | string;
-  defaultSlug: Slug;
+  defaultSlug: Slug | string;
   slug?: string;
   slugs?: Slug[];
 }

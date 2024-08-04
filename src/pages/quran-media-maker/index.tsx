@@ -1,4 +1,3 @@
-/* eslint-disable react-func/max-lines-per-function */
 /* eslint-disable max-lines */
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
@@ -6,9 +5,7 @@ import { Player, PlayerRef, RenderPoster } from '@remotion/player';
 import classNames from 'classnames';
 import { GetStaticProps, NextPage } from 'next';
 import Image from 'next/image';
-import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
-import { useDispatch } from 'react-redux';
 import {
   AbsoluteFill,
   cancelRender,
@@ -29,15 +26,12 @@ import useGetMediaSettings from '@/hooks/auth/media/useGetMediaSettings';
 import useAddQueryParamsToUrl from '@/hooks/useAddQueryParamsToUrl';
 import Error from '@/pages/_error';
 import layoutStyles from '@/pages/index.module.scss';
-import { updateSettings } from '@/redux/slices/mediaMaker';
 import AudioData from '@/types/AudioData';
-import MediaSettings, { ChangedSettings } from '@/types/Media/MediaSettings';
 import QueryParam from '@/types/QueryParam';
 import { makeChapterAudioDataUrl, makeVersesUrl } from '@/utils/apiPaths';
 import { areArraysEqual } from '@/utils/array';
 import { getAllChaptersData } from '@/utils/chapter';
 import { isAppleWebKit } from '@/utils/device-detector';
-import { logValueChange } from '@/utils/eventLogger';
 import { getLanguageAlternates, toLocalizedNumber } from '@/utils/locale';
 import {
   DEFAULT_API_PARAMS,
@@ -60,24 +54,6 @@ import {
 import { getVerseNumberFromKey } from '@/utils/verse';
 import { VersesResponse } from 'types/ApiResponses';
 import ChaptersData from 'types/ChaptersData';
-
-const MEDIA_SETTINGS_TO_QUERY_PARAM = {
-  verseTo: QueryParam.VERSE_TO,
-  verseFrom: QueryParam.VERSE_FROM,
-  backgroundColor: QueryParam.BACKGROUND_COLOR,
-  opacity: QueryParam.OPACITY,
-  borderColor: QueryParam.BORDER_COLOR,
-  borderSize: QueryParam.BORDER_SIZE,
-  reciter: QueryParam.MEDIA_RECITER,
-  quranTextFontScale: QueryParam.QURAN_TEXT_FONT_SCALE,
-  quranTextFontStyle: QueryParam.QURAN_TEXT_FONT_STYLE,
-  translationFontScale: QueryParam.TRANSLATION_FONT_SCALE,
-  translations: QueryParam.MEDIA_TRANSLATIONS,
-  fontColor: QueryParam.FONT_COLOR,
-  orientation: QueryParam.ORIENTATION,
-  videoId: QueryParam.VIDEO_ID,
-  surah: QueryParam.SURAH,
-} as Record<keyof MediaSettings, QueryParam>;
 
 interface MediaMaker {
   juzVerses?: VersesResponse;
@@ -139,9 +115,6 @@ const MediaMaker: NextPage<MediaMaker> = ({
     orientation,
   } = mediaSettings;
 
-  const dispatch = useDispatch();
-  const router = useRouter();
-
   const queryParams = {
     [QueryParam.SURAH]: String(surah),
     [QueryParam.VERSE_FROM]: String(getVerseNumberFromKey(verseFrom)),
@@ -172,28 +145,6 @@ const MediaMaker: NextPage<MediaMaker> = ({
     }
     current.seekTo(0);
   }, []);
-
-  const onSettingsUpdate = useCallback(
-    (settings: ChangedSettings, key?: keyof MediaSettings, value?: any) => {
-      if (key) {
-        logValueChange(`media_settings_${key}`, mediaSettings[key], value);
-      }
-      setIsUpdating(true);
-      seekToBeginning();
-      dispatch(updateSettings(settings));
-      Object.keys(settings).forEach((settingKey) => {
-        const toBeUpdatedQueryParamName =
-          MEDIA_SETTINGS_TO_QUERY_PARAM[settingKey as keyof MediaSettings];
-        const toBeUpdatedQueryParamValue = settings[settingKey];
-        router.query[toBeUpdatedQueryParamName] =
-          toBeUpdatedQueryParamName === QueryParam.MEDIA_TRANSLATIONS
-            ? toBeUpdatedQueryParamValue.join(',')
-            : toBeUpdatedQueryParamValue;
-      });
-      router.push({ pathname: router.pathname, query: router.query }, undefined, { shallow: true });
-    },
-    [dispatch, mediaSettings, router, seekToBeginning],
-  );
 
   useEffect(() => {
     setIsUpdating(false);
@@ -456,7 +407,7 @@ const MediaMaker: NextPage<MediaMaker> = ({
             isFetching={isFetching}
             inputProps={inputProps}
             mediaSettings={mediaSettings}
-            onSettingsUpdate={onSettingsUpdate}
+            setIsUpdating={setIsUpdating}
           />
         </div>
       </div>

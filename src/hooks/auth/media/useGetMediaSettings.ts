@@ -19,13 +19,10 @@ const useGetMediaSettings = (): MediaSettings => {
     chaptersData,
   );
   const { value: opacity }: { value: number } = useGetQueryParamOrReduxValue(QueryParam.OPACITY);
-  const { value: reciter }: { value: number } = useGetQueryParamOrReduxValue(
-    QueryParam.MEDIA_RECITER,
-  );
+  const { value: reciter }: { value: number } = useGetQueryParamOrReduxValue(QueryParam.RECITER);
   const { value: quranTextFontScale }: { value: number } = useGetQueryParamOrReduxValue(
     QueryParam.QURAN_TEXT_FONT_SCALE,
   );
-
   const { value: quranTextFontStyle }: { value: QuranFont } = useGetQueryParamOrReduxValue(
     QueryParam.QURAN_TEXT_FONT_STYLE,
   );

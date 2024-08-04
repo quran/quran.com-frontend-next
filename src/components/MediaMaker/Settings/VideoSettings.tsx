@@ -1,8 +1,8 @@
-/* eslint-disable react-func/max-lines-per-function */
 /* eslint-disable max-lines */
 import { useCallback, useMemo, useState } from 'react';
 
 import classNames from 'classnames';
+import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
 
 import styles from '../MediaMaker.module.scss';
@@ -25,17 +25,17 @@ import ImageIcon from '@/icons/photo.svg';
 import TextIconSuccess from '@/icons/text-success.svg';
 import TextIcon from '@/icons/text.svg';
 import layoutStyle from '@/pages/index.module.scss';
-import { resetToDefaults } from '@/redux/slices/mediaMaker';
+import { resetToDefaults, updateSettings } from '@/redux/slices/mediaMaker';
 import MediaSettings, { ChangedSettings } from '@/types/Media/MediaSettings';
 import QueryParam from '@/types/QueryParam';
 import Reciter from '@/types/Reciter';
-import { logButtonClick, logEvent } from '@/utils/eventLogger';
+import { logButtonClick, logEvent, logValueChange } from '@/utils/eventLogger';
 
 type Props = {
   chaptersList: any[];
   reciters: Reciter[];
   seekToBeginning: () => void;
-  onSettingsUpdate: (settings: ChangedSettings, key?: keyof MediaSettings, value?: any) => void;
+  setIsUpdating: (arg: boolean) => void;
   getCurrentFrame: () => void;
   isFetching: boolean;
   inputProps: any;
@@ -49,11 +49,29 @@ enum Tab {
   COLORS = 'colors',
 }
 
+const MEDIA_SETTINGS_TO_QUERY_PARAM = {
+  verseTo: QueryParam.VERSE_TO,
+  verseFrom: QueryParam.VERSE_FROM,
+  backgroundColor: QueryParam.BACKGROUND_COLOR,
+  opacity: QueryParam.OPACITY,
+  borderColor: QueryParam.BORDER_COLOR,
+  borderSize: QueryParam.BORDER_SIZE,
+  reciter: QueryParam.RECITER,
+  quranTextFontScale: QueryParam.QURAN_TEXT_FONT_SCALE,
+  quranTextFontStyle: QueryParam.QURAN_TEXT_FONT_STYLE,
+  translationFontScale: QueryParam.TRANSLATION_FONT_SCALE,
+  translations: QueryParam.MEDIA_TRANSLATIONS,
+  fontColor: QueryParam.FONT_COLOR,
+  orientation: QueryParam.ORIENTATION,
+  videoId: QueryParam.VIDEO_ID,
+  surah: QueryParam.SURAH,
+} as Record<keyof MediaSettings, QueryParam>;
+
 const VideoSettings: React.FC<Props> = ({
   chaptersList,
   reciters,
   seekToBeginning,
-  onSettingsUpdate,
+  setIsUpdating,
   isFetching,
   inputProps,
   getCurrentFrame,
@@ -61,7 +79,30 @@ const VideoSettings: React.FC<Props> = ({
 }) => {
   const [selectedTab, setSelectedTab] = useState<Tab>(Tab.AUDIO);
   const dispatch = useDispatch();
+  const router = useRouter();
   const removeQueryParam = useRemoveQueryParam();
+
+  const onSettingsUpdate = useCallback(
+    (settings: ChangedSettings, key?: keyof MediaSettings, value?: any) => {
+      if (key) {
+        logValueChange(`media_settings_${key}`, mediaSettings[key], value);
+      }
+      setIsUpdating(true);
+      seekToBeginning();
+      dispatch(updateSettings(settings));
+      Object.keys(settings).forEach((settingKey) => {
+        const toBeUpdatedQueryParamName =
+          MEDIA_SETTINGS_TO_QUERY_PARAM[settingKey as keyof MediaSettings];
+        const toBeUpdatedQueryParamValue = settings[settingKey];
+        router.query[toBeUpdatedQueryParamName] =
+          toBeUpdatedQueryParamName === QueryParam.MEDIA_TRANSLATIONS
+            ? toBeUpdatedQueryParamValue.join(',')
+            : toBeUpdatedQueryParamValue;
+      });
+      router.push({ pathname: router.pathname, query: router.query }, undefined, { shallow: true });
+    },
+    [dispatch, mediaSettings, router, seekToBeginning, setIsUpdating],
+  );
 
   const onResetSettingsClick = useCallback(() => {
     logButtonClick('media_settings_reset');

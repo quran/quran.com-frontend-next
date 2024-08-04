@@ -1,12 +1,9 @@
 /* eslint-disable max-lines */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 
-import { ParsedUrlQuery } from 'querystring';
-
 import { useRouter } from 'next/router';
 import { shallowEqual, useSelector } from 'react-redux';
 
-import { RootState } from '@/redux/RootState';
 import {
   selectBackgroundColor,
   selectBorderColor,
@@ -30,7 +27,7 @@ import { selectWordByWordLocale } from '@/redux/slices/QuranReader/readingPrefer
 import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
 import ChaptersData from '@/types/ChaptersData';
 import { areArraysEqual } from '@/utils/array';
-import { getVerseValue } from '@/utils/media/utils';
+import { getVerseValue, QueryParamsData } from '@/utils/media/utils';
 import {
   getIsQueryParamDifferent,
   getQueryParamValueByType,
@@ -68,12 +65,18 @@ export const QUERY_PARAMS_DATA = {
     reduxEqualityFunction: shallowEqual,
     valueType: QueryParamValueType.String,
     validate: (val, chaptersData) => isValidVerseKey(chaptersData, val),
+    customHandler: (query, queryParam, chaptersData, surahReduxValue) => {
+      return getVerseValue(query, queryParam, chaptersData, QUERY_PARAMS_DATA, surahReduxValue);
+    },
   },
   [QueryParam.VERSE_FROM]: {
     reduxSelector: selectVerseFrom,
     reduxEqualityFunction: shallowEqual,
     valueType: QueryParamValueType.String,
     validate: (val, chaptersData) => isValidVerseKey(chaptersData, val),
+    customHandler: (query, queryParam, chaptersData, surahReduxValue) => {
+      return getVerseValue(query, queryParam, chaptersData, QUERY_PARAMS_DATA, surahReduxValue);
+    },
   },
   [QueryParam.MEDIA_TRANSLATIONS]: {
     reduxSelector: selectTranslations,
@@ -81,7 +84,7 @@ export const QUERY_PARAMS_DATA = {
     valueType: QueryParamValueType.ArrayOfNumbers,
     validate: (val) => isValidTranslationsQueryParamValue(val),
   },
-  [QueryParam.MEDIA_RECITER]: {
+  [QueryParam.RECITER]: {
     reduxSelector: selectReciter,
     reduxEqualityFunction: shallowEqual,
     valueType: QueryParamValueType.Number,
@@ -165,15 +168,7 @@ export const QUERY_PARAMS_DATA = {
     valueType: QueryParamValueType.Number,
     validate: (val) => isValidVideoIdQueryParamValue(val),
   },
-} as Record<
-  QueryParam,
-  {
-    reduxSelector: (state: RootState) => any;
-    valueType: QueryParamValueType;
-    reduxEqualityFunction?: (left: any, right: any) => boolean;
-    validate: (val?: any, chaptersData?: ChaptersData, query?: ParsedUrlQuery) => boolean;
-  }
->;
+} as QueryParamsData;
 
 /**
  * A hook that searches the query params of the url for specific values,
@@ -205,15 +200,15 @@ const useGetQueryParamOrReduxValue = (
   );
   // if the param exists in the url
   if (isReady && query[queryParam] !== undefined) {
-    const { valueType, validate } = QUERY_PARAMS_DATA[queryParam];
+    const { valueType, validate, customHandler } = QUERY_PARAMS_DATA[queryParam];
     const paramStringValue = String(query[queryParam]);
     const isValidValue = validate(paramStringValue, chaptersData, query);
     const parsedQueryParamValue = getQueryParamValueByType(paramStringValue, valueType);
     const isQueryParamDifferent = getIsQueryParamDifferent(paramStringValue, valueType, reduxValue);
 
-    if (queryParam === QueryParam.VERSE_TO || queryParam === QueryParam.VERSE_FROM) {
+    if (customHandler) {
       return {
-        value: getVerseValue(query, queryParam, chaptersData, QUERY_PARAMS_DATA, surahReduxValue),
+        value: customHandler(query, queryParam, chaptersData, surahReduxValue),
         isQueryParamDifferent,
       };
     }
