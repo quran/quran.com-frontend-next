@@ -11,6 +11,7 @@ import VerseActionAdvancedCopy from './VerseActionAdvancedCopy';
 import VerseActionRepeatAudio from './VerseActionRepeatAudio';
 
 import WordByWordVerseAction from '@/components/QuranReader/ReadingView/WordByWordVerseAction';
+import VerseShare from '@/components/Verse/VerseShare';
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import CopyLinkIcon from '@/icons/copy-link.svg';
@@ -148,6 +149,7 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
       )}
 
       <VerseActionRepeatAudio isTranslationView={isTranslationView} verseKey={verse.verseKey} />
+      <VerseShare verse={verse} isTranslationView={isTranslationView} />
     </div>
   );
 };

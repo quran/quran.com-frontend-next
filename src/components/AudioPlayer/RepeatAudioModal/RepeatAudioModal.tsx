@@ -1,5 +1,5 @@
 /* eslint-disable max-lines */
-import { useMemo, useState, useEffect, useContext } from 'react';
+import { useContext, useEffect, useMemo, useState } from 'react';
 
 import { useSelector } from '@xstate/react';
 import useTranslation from 'next-translate/useTranslation';
