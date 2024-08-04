@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, Dispatch, SetStateAction } from 'react';
 
 import clipboardCopy from 'clipboard-copy';
 import useTranslation from 'next-translate/useTranslation';
@@ -28,6 +28,7 @@ interface Props {
   isTranslationView: boolean;
   onActionTriggered?: () => void;
   bookmarksRangeUrl: string;
+  setOpenOverflowVerseActionsMenu: Dispatch<SetStateAction<boolean>>;
 }
 
 const RESET_ACTION_TEXT_TIMEOUT_MS = 3 * 1000;
@@ -54,6 +55,7 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
   isTranslationView,
   onActionTriggered,
   bookmarksRangeUrl,
+  setOpenOverflowVerseActionsMenu,
 }) => {
   const { t, lang } = useTranslation('common');
   const [isCopied, setIsCopied] = useState(false);
@@ -147,7 +149,11 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
         />
       )}
 
-      <VerseActionRepeatAudio isTranslationView={isTranslationView} verseKey={verse.verseKey} />
+      <VerseActionRepeatAudio
+        setOpenOverflowVerseActionsMenu={setOpenOverflowVerseActionsMenu}
+        isTranslationView={isTranslationView}
+        verseKey={verse.verseKey}
+      />
     </div>
   );
 };

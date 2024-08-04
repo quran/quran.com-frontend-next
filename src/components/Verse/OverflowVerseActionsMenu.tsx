@@ -61,6 +61,15 @@ const OverflowVerseActionsMenu: React.FC<Props> = ({
         }
         isModal
         isPortalled
+        renderMenuBody={(setOpen) => (
+          <OverflowVerseActionsMenuBody
+            verse={verse}
+            isTranslationView={isTranslationView}
+            onActionTriggered={onActionTriggered}
+            bookmarksRangeUrl={bookmarksRangeUrl}
+            setOpenOverflowVerseActionsMenu={setOpen}
+          />
+        )}
         onOpenChange={(open: boolean) => {
           logEvent(
             `${isTranslationView ? 'translation_view' : 'reading_view'}_verse_actions_menu_${
@@ -68,14 +77,7 @@ const OverflowVerseActionsMenu: React.FC<Props> = ({
             }`,
           );
         }}
-      >
-        <OverflowVerseActionsMenuBody
-          verse={verse}
-          isTranslationView={isTranslationView}
-          onActionTriggered={onActionTriggered}
-          bookmarksRangeUrl={bookmarksRangeUrl}
-        />
-      </PopoverMenu>
+      />
     </div>
   );
 };

@@ -1,5 +1,5 @@
 /* eslint-disable max-lines */
-import { useMemo, useState, useEffect, useContext } from 'react';
+import { useMemo, useState, useEffect, useContext, SetStateAction, Dispatch } from 'react';
 
 import { useSelector } from '@xstate/react';
 import useTranslation from 'next-translate/useTranslation';
@@ -31,6 +31,7 @@ type RepeatAudioModalProps = {
   onClose: () => void;
   defaultRepetitionMode: RepetitionMode;
   selectedVerseKey?: string;
+  setOpenOverflowActionsMenu: Dispatch<SetStateAction<boolean>>;
 };
 
 const RepeatAudioModal = ({
@@ -39,6 +40,7 @@ const RepeatAudioModal = ({
   onClose,
   defaultRepetitionMode,
   selectedVerseKey,
+  setOpenOverflowActionsMenu,
 }: RepeatAudioModalProps) => {
   const { t, lang } = useTranslation('common');
 
@@ -114,7 +116,15 @@ const RepeatAudioModal = ({
 
   const onPlayClick = () => {
     logButtonClick('start_repeat_play');
-    onSettingsChangeWithoutDispatch('repeatSettings', verseRepetition, PreferenceGroup.AUDIO, play);
+    onSettingsChangeWithoutDispatch(
+      'repeatSettings',
+      verseRepetition,
+      PreferenceGroup.AUDIO,
+      () => {
+        play();
+        setOpenOverflowActionsMenu(false);
+      },
+    );
   };
 
   const onCancelClick = () => {
