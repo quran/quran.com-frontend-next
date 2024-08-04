@@ -98,12 +98,7 @@ const MediaMakerContent: React.FC<Props> = ({
               durationInFrames={timestamps[i]?.durationInFrames}
             >
               <AbsoluteFill>
-                <div
-                  className={classNames(styles.chapterTitle, {
-                    [styles.watermarkDark]: video.watermarkColor === WatermarkColor.DARK,
-                    [styles.watermarkLight]: video.watermarkColor === WatermarkColor.LIGHT,
-                  })}
-                >
+                <div className={classNames(styles.chapterTitle)}>
                   <span className={styles.surahFont}>
                     <ChapterIcon id={verse.chapterId.toString()} />
                     <ChapterIcon id="surah" />
@@ -169,14 +164,11 @@ const MediaMakerContent: React.FC<Props> = ({
           );
         })}
       <AbsoluteFill>
-        <div
-          className={classNames(styles.watermark, {
-            [styles.watermarkDark]: video.watermarkColor === WatermarkColor.DARK,
-            [styles.watermarkLight]: video.watermarkColor === WatermarkColor.LIGHT,
-          })}
-        >
-          <div>I made this on</div>
-          <div className={styles.logo}>Quran.com</div>
+        <div className={classNames(styles.watermark)}>
+          <div>
+            I made this on
+            <span className={styles.logo}> Quran.com</span>
+          </div>
         </div>
       </AbsoluteFill>
     </AbsoluteFill>
