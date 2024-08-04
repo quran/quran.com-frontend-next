@@ -13,7 +13,6 @@ import ChapterIcon from '@/components/chapters/ChapterIcon';
 import Alignment from '@/types/Media/Alignment';
 import { Timestamp } from '@/types/Media/GenerateMediaFileRequest';
 import Orientation from '@/types/Media/Orientation';
-import WatermarkColor from '@/types/Media/WatermarkColor';
 import { QuranFont } from '@/types/QuranReader';
 import Translation from '@/types/Translation';
 import Verse from '@/types/Verse';
