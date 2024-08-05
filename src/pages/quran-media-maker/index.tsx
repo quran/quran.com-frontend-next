@@ -31,7 +31,7 @@ import QueryParam from '@/types/QueryParam';
 import { makeChapterAudioDataUrl, makeVersesUrl } from '@/utils/apiPaths';
 import { areArraysEqual } from '@/utils/array';
 import { getAllChaptersData } from '@/utils/chapter';
-import { isAppleWebKit } from '@/utils/device-detector';
+import { isAppleWebKit, isSafari } from '@/utils/device-detector';
 import { getLanguageAlternates, toLocalizedNumber } from '@/utils/locale';
 import {
   DEFAULT_API_PARAMS,
@@ -219,7 +219,7 @@ const MediaMaker: NextPage<MediaMaker> = ({
 
   const isFetching = isVersesValidating || isAudioValidating;
   const chapterEnglishName = useMemo<string>(() => {
-    return englishChaptersList[surah]?.translatedName as string;
+    return englishChaptersList?.[surah]?.translatedName as string;
   }, [surah, englishChaptersList]);
 
   const getCurrentFrame = useCallback(() => {
@@ -379,7 +379,10 @@ const MediaMaker: NextPage<MediaMaker> = ({
             </div>
 
             <Player
-              className={styles.player}
+              className={classNames(styles.player, {
+                [styles.playerHeightSafari]: isSafari(),
+                [styles.playerHeight]: !isSafari(),
+              })}
               inputProps={inputProps}
               lazyComponent={lazyComponent}
               durationInFrames={getDurationInFrames(timestamps)}

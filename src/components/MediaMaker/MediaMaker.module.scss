@@ -13,8 +13,15 @@ $colorPickerBorderRadius: calc(var(--spacing-medium) * 3);
 
 .player {
   width: 100% !important;
-  height: 100% !important;
   margin-top: var(--spacing-large);
+}
+
+.playerHeight {
+  height: 100% !important;
+}
+
+.playerHeightSafari {
+  height: calc(100% - 40px) !important;
 }
 
 .loadingContainer {

@@ -17,7 +17,6 @@ import {
   selectSurah,
   selectTranslationAlignment,
   selectTranslationFontScale,
-  selectTranslations,
   selectVerseAlignment,
   selectVerseFrom,
   selectVerseTo,
