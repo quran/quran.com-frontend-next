@@ -30,7 +30,7 @@ const useGetMediaSettings = (): MediaSettings => {
     QueryParam.TRANSLATION_FONT_SCALE,
   );
   const { value: translations }: { value: number[] } = useGetQueryParamOrReduxValue(
-    QueryParam.MEDIA_TRANSLATIONS,
+    QueryParam.TRANSLATIONS,
   );
   const { value: backgroundColor }: { value: string } = useGetQueryParamOrReduxValue(
     QueryParam.BACKGROUND_COLOR,

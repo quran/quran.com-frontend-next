@@ -78,12 +78,6 @@ export const QUERY_PARAMS_DATA = {
       return getVerseValue(query, queryParam, chaptersData, QUERY_PARAMS_DATA, surahReduxValue);
     },
   },
-  [QueryParam.MEDIA_TRANSLATIONS]: {
-    reduxSelector: selectTranslations,
-    reduxEqualityFunction: areArraysEqual,
-    valueType: QueryParamValueType.ArrayOfNumbers,
-    validate: (val) => isValidTranslationsQueryParamValue(val),
-  },
   [QueryParam.RECITER]: {
     reduxSelector: selectReciter,
     reduxEqualityFunction: shallowEqual,
