@@ -1,6 +1,8 @@
-import { lazy } from 'react';
+import { useState } from 'react';
 
-import { Composition, continueRender, delayRender, staticFile } from 'remotion';
+import { cancelRender, Composition, continueRender, delayRender, staticFile } from 'remotion';
+
+import MediaMakerContent from './Content';
 
 import {
   COMPOSITION_NAME,
@@ -13,7 +15,7 @@ import { getDurationInFrames, orientationToDimensions } from '@/utils/media/util
 
 // eslint-disable-next-line import/prefer-default-export
 export const RemotionRoot = () => {
-  const waitForFont = delayRender();
+  const [handle] = useState(() => delayRender());
   const uthmanicHafsFont = new FontFace(
     `UthmanicHafs`,
     `url('${staticFile('/UthmanicHafs1Ver18.woff2')}') format('woff2')`,
@@ -32,16 +34,16 @@ export const RemotionRoot = () => {
       document.fonts.add(uthmanicHafsFont);
       document.fonts.add(surahNamesFont);
       document.fonts.add(indopakFont);
-      continueRender(waitForFont);
+      continueRender(handle);
     })
-    .catch((err) => console.log('Error loading font', err));
-
-  const MediaMakerContent = lazy(() => import('./Content'));
+    .catch((err) => {
+      console.log('Error loading font', err);
+      cancelRender(err);
+    });
 
   return (
     <Composition
       id={COMPOSITION_NAME}
-      // @ts-ignore
       component={MediaMakerContent}
       durationInFrames={getDurationInFrames(DEFAULT_PROPS.timestamps)}
       fps={VIDEO_FPS}

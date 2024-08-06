@@ -1,153 +1,99 @@
 [
   {
-    "id": 6222,
+    "id": 1,
     "verseNumber": 1,
-    "verseKey": "112:1",
-    "hizbNumber": 60,
-    "rubElHizbNumber": 240,
-    "rukuNumber": 556,
-    "manzilNumber": 7,
+    "verseKey": "1:1",
+    "hizbNumber": 1,
+    "rubElHizbNumber": 1,
+    "rukuNumber": 1,
+    "manzilNumber": 1,
     "sajdahNumber": null,
-    "textUthmani": " قُلْ هُوَ ٱللَّهُ أَحَدٌ",
-    "chapterId": 112,
-    "textImlaeiSimple": "قل هو الله احد",
-    "pageNumber": 604,
-    "juzNumber": 30,
+    "textUthmani": "بِسْمِ ٱللَّهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ",
+    "chapterId": 1,
+    "textImlaeiSimple": "بسم الله الرحمن الرحيم",
+    "pageNumber": 1,
+    "juzNumber": 1,
     "words": [
       {
-        "id": 6,
+        "id": 1,
         "position": 1,
-        "audioUrl": "wbw/112_001_001.mp3",
-        "verseKey": "112:1",
-        "verseId": 6222,
-        "location": "112:1:1",
-        "textUthmani": "قُلْ",
-        "codeV1": "ﭑ",
-        "qpcUthmaniHafs": "قُلۡ",
+        "audioUrl": "wbw/001_001_001.mp3",
+        "qpcUthmaniHafs": "بِسۡمِ",
+        "textIndopak": "بِسۡمِ",
         "charTypeName": "word",
-        "pageNumber": 604,
-        "lineNumber": 3,
-        "text": "قُلْ",
-        "translation": {
-          "text": "Say",
-          "languageName": "english",
-          "languageId": 38
-        },
-        "transliteration": {
-          "text": "qul",
-          "languageName": "english",
-          "languageId": 38
-        }
+        "pageNumber": 1,
+        "lineNumber": 9,
+        "text": "بِسْمِ",
+        "translation": { "text": "In (the) name", "languageName": "english", "languageId": 38 },
+        "transliteration": { "text": "bis'mi", "languageName": "english", "languageId": 38 }
       },
       {
-        "id": 7,
+        "id": 2,
         "position": 2,
-        "audioUrl": "wbw/112_001_002.mp3",
-        "verseKey": "112:1",
-        "verseId": 6222,
-        "location": "112:1:2",
-        "textUthmani": "هُوَ",
-        "codeV1": "ﭒ",
-        "qpcUthmaniHafs": "هُوَ",
+        "audioUrl": "wbw/001_001_002.mp3",
+        "qpcUthmaniHafs": "ٱللَّهِ",
+        "textIndopak": "اللهِ",
         "charTypeName": "word",
-        "pageNumber": 604,
-        "lineNumber": 3,
-        "text": "هُوَ",
-        "translation": {
-          "text": "He",
-          "languageName": "english",
-          "languageId": 38
-        },
-        "transliteration": {
-          "text": "huwa",
-          "languageName": "english",
-          "languageId": 38
-        }
+        "pageNumber": 1,
+        "lineNumber": 9,
+        "text": "ٱللَّهِ",
+        "translation": { "text": "(of) Allah", "languageName": "english", "languageId": 38 },
+        "transliteration": { "text": "l-lahi", "languageName": "english", "languageId": 38 }
       },
       {
-        "id": 8,
+        "id": 3,
         "position": 3,
-        "audioUrl": "wbw/112_001_003.mp3",
-        "verseKey": "112:1",
-        "verseId": 6222,
-        "location": "112:1:3",
-        "textUthmani": "ٱللَّهُ",
-        "codeV1": "ﭓ",
-        "qpcUthmaniHafs": "ٱللَّهُ",
+        "audioUrl": "wbw/001_001_003.mp3",
+        "qpcUthmaniHafs": "ٱلرَّحۡمَٰنِ",
+        "textIndopak": "الرَّحۡمٰنِ",
         "charTypeName": "word",
-        "pageNumber": 604,
-        "lineNumber": 3,
-        "text": "ٱللَّهُ",
+        "pageNumber": 1,
+        "lineNumber": 9,
+        "text": "ٱلرَّحْمَـٰنِ",
         "translation": {
-          "text": "(is) Allah",
+          "text": "the Most Gracious",
           "languageName": "english",
           "languageId": 38
         },
-        "transliteration": {
-          "text": "l-lahu",
-          "languageName": "english",
-          "languageId": 38
-        }
+        "transliteration": { "text": "l-raḥmāni", "languageName": "english", "languageId": 38 }
       },
       {
-        "id": 9,
+        "id": 4,
         "position": 4,
-        "audioUrl": "wbw/112_001_004.mp3",
-        "verseKey": "112:1",
-        "verseId": 6222,
-        "location": "112:1:4",
-        "textUthmani": "أَحَدٌ",
-        "codeV1": "ﭔ",
-        "qpcUthmaniHafs": "أَحَدٌ",
+        "audioUrl": "wbw/001_001_004.mp3",
+        "qpcUthmaniHafs": "ٱلرَّحِيمِ",
+        "textIndopak": "الرَّحِيۡمِ",
         "charTypeName": "word",
-        "pageNumber": 604,
-        "lineNumber": 3,
-        "text": "أَحَدٌ",
+        "pageNumber": 1,
+        "lineNumber": 9,
+        "text": "ٱلرَّحِيمِ",
         "translation": {
-          "text": "the One",
+          "text": "the Most Merciful",
           "languageName": "english",
           "languageId": 38
         },
-        "transliteration": {
-          "text": "aḥadun",
-          "languageName": "english",
-          "languageId": 38
-        }
+        "transliteration": { "text": "l-raḥīmi", "languageName": "english", "languageId": 38 }
       },
       {
-        "id": 10,
+        "id": 5,
         "position": 5,
         "audioUrl": null,
-        "verseKey": "112:1",
-        "verseId": 6222,
-        "location": "112:1:5",
-        "textUthmani": "١",
-        "codeV1": "ﭕ",
         "qpcUthmaniHafs": "١",
+        "textIndopak": "١",
         "charTypeName": "end",
-        "pageNumber": 604,
-        "lineNumber": 3,
+        "pageNumber": 1,
+        "lineNumber": 9,
         "text": "١",
-        "translation": {
-          "text": "(1)",
-          "languageName": "english",
-          "languageId": 38
-        },
-        "transliteration": {
-          "text": null,
-          "languageName": "english",
-          "languageId": 38
-        }
+        "translation": { "text": "(1)", "languageName": "english", "languageId": 38 },
+        "transliteration": { "text": null, "languageName": "english", "languageId": 38 }
       }
     ],
-    "timestamps": {
-      "timestampFrom": 0
-    },
+    "timestamps": { "timestampFrom": 0 },
     "translations": [
       {
-        "id": 910179,
+        "id": 903958,
         "resourceId": 131,
-        "text": "Say, ˹O Prophet,˺ “He is Allah—One ˹and Indivisible˺;",
+        "text": "In the Name of Allah—the Most Compassionate, Most Merciful.",
         "resourceName": "Dr. Mustafa Khattab, The Clear Quran",
         "languageId": 38
       }
