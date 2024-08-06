@@ -9,6 +9,7 @@ import cellStyles from '../QuranReader/TranslationView/TranslationViewCell.modul
 
 import styles from './OverflowVerseActionsMenuBody.module.scss';
 
+import Badge from '@/dls/Badge/Badge';
 import NewLabel from '@/dls/Badge/NewLabel';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
@@ -55,9 +56,19 @@ const OverflowVerseActionsMenu: React.FC<Props> = ({
             )}
             ariaLabel={t('more')}
           >
-            <span className={cellStyles.icon}>
+            {isTranslationView ? (
+              <span className={styles.icon}>
+                <Badge
+                  className={styles.newLabelContainer}
+                  contentClassName={styles.newLabel}
+                  content={<NewLabel />}
+                >
+                  <OverflowMenuIcon />
+                </Badge>
+              </span>
+            ) : (
               <OverflowMenuIcon />
-            </span>
+            )}
           </Button>
         }
         isModal
@@ -77,7 +88,8 @@ const OverflowVerseActionsMenu: React.FC<Props> = ({
           bookmarksRangeUrl={bookmarksRangeUrl}
         />
       </PopoverMenu>
-      <NewLabel />
+
+      {!isTranslationView && <NewLabel />}
     </div>
   );
 };
