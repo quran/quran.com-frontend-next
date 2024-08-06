@@ -195,8 +195,6 @@ const useGetQueryParamOrReduxValue = (
   if (isReady && query[queryParam] !== undefined) {
     const { valueType, validate, customHandler } = QUERY_PARAMS_DATA[queryParam];
     const paramStringValue = String(query[queryParam]);
-    const isValidValue = validate(paramStringValue, chaptersData, query);
-    const parsedQueryParamValue = getQueryParamValueByType(paramStringValue, valueType);
     const isQueryParamDifferent = getIsQueryParamDifferent(paramStringValue, valueType, reduxValue);
 
     if (customHandler) {
@@ -205,6 +203,9 @@ const useGetQueryParamOrReduxValue = (
         isQueryParamDifferent,
       };
     }
+
+    const isValidValue = validate(paramStringValue, chaptersData, query);
+    const parsedQueryParamValue = getQueryParamValueByType(paramStringValue, valueType);
 
     // if the url param is not valid, return the redux value
     if (!isValidValue) {

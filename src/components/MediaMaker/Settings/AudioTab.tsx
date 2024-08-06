@@ -22,8 +22,6 @@ import {
   getVerseNumberFromKey,
 } from '@/utils/verse';
 
-const MAXIMUM_VERSES_PER_RENDER = 10;
-
 type AudioTabProps = {
   chaptersList: any[];
   reciters: Reciter[];
@@ -71,32 +69,31 @@ const AudioTab: FC<AudioTabProps> = ({
     const isVerseKeyStartOfRange = verseSelectorId === RangeSelectorType.START;
     const startVerseKey = isVerseKeyStartOfRange ? newSelectedVerseKey : verseFrom;
     const endVerseKey = !isVerseKeyStartOfRange ? newSelectedVerseKey : verseTo;
-
-    const validationError = validateRangeSelection(
-      startVerseKey,
-      endVerseKey,
-      t,
-      MAXIMUM_VERSES_PER_RENDER,
-      chaptersData,
-    );
+    const validationError = validateRangeSelection(startVerseKey, endVerseKey, t);
     if (validationError) {
       setRangesError(validationError);
       return false;
     }
     if (isVerseKeyStartOfRange) {
+      const isMaxAyahs =
+        getVerseNumberFromKey(verseTo) - getVerseNumberFromKey(newSelectedVerseKey) >= 10;
+
       onSettingsUpdate(
         {
-          verseTo,
           verseFrom: newSelectedVerseKey,
+          verseTo: isMaxAyahs ? newSelectedVerseKey : verseTo,
           surah: getChapterNumberFromKey(newSelectedVerseKey),
         },
         'verseFrom',
         newSelectedVerseKey,
       );
     } else {
+      const isMaxAyahs =
+        getVerseNumberFromKey(newSelectedVerseKey) - getVerseNumberFromKey(verseFrom) >= 10;
+
       onSettingsUpdate(
         {
-          verseFrom,
+          verseFrom: isMaxAyahs ? newSelectedVerseKey : verseFrom,
           verseTo: newSelectedVerseKey,
           surah: getChapterNumberFromKey(newSelectedVerseKey),
         },
