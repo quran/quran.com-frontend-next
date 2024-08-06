@@ -31,6 +31,12 @@ $colorPickerBorderRadius: calc(var(--spacing-medium) * 3);
   align-items: center;
 }
 
+.spinner {
+  background-color: #ffffff;
+  border-radius: var(--spacing-xxsmall);
+  padding: var(--spacing-micro);
+}
+
 .playerWrapper {
   position: relative;
   padding: var(--spacing-large);

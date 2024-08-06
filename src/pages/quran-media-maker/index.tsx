@@ -325,7 +325,7 @@ const MediaMaker: NextPage<MediaMaker> = ({
     if (isUpdating || isFetching || !areMediaFilesReady) {
       return (
         <div className={styles.loadingContainer}>
-          <Spinner size={SpinnerSize.Large} />
+          <Spinner className={styles.spinner} size={SpinnerSize.Large} />
         </div>
       );
     }
