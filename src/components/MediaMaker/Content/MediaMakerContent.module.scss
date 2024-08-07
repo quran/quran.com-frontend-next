@@ -54,32 +54,25 @@ $white: #ffffff;
 .translation {
   direction: ltr;
 }
-
 .watermark {
-  font-weight: 700;
   text-align: center;
-  margin-top: var(--spacing-large);
-  opacity: 0.7;
   color: $white;
+  font-size: 14px;
 }
 
 .logo {
+  font-weight: 500;
   font-size: 20px;
 }
 
+.space {
+  display: inline-block;
+  width: 5px;
+}
+
 .chapterTitle {
-  opacity: 0.7;
-  font-family: unset !important;
   text-align: center;
-  font-size: 40px;
-  padding-top: calc(var(--spacing-large) * 2.5);
-  height: calc(var(--spacing-large) * 12);
-  background-image: linear-gradient(rgba(0, 0, 0), rgba(0, 0, 0, 0));
   color: $white;
-  // when switching languages, the font-family we don't want to be applied to the chapter title
-  & * {
-    font-family: unset !important;
-  }
 }
 
 .verseText {
@@ -93,14 +86,21 @@ $white: #ffffff;
   font-family: Indopak !important;
 }
 
-.surahNumber {
-  font-size: 35px;
+.surahEnglish {
+  font-size: 24px;
+  font-weight: 400;
   color: $white;
+  // when switching languages, the font-family we don't want to be applied to the chapter title
+  font-family: unset !important;
+  & * {
+    font-family: unset !important;
+  }
 }
 
-.surahFont {
-  font-weight: 500;
-  font-family: "SurahNames" !important;
+.surahArabic {
+  font-family: NotoNaskhArabic !important;
+  font-weight: 400;
+  font-size: 30px;
   color: $white;
 }
 

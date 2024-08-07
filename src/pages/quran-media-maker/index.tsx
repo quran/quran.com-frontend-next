@@ -65,7 +65,6 @@ interface MediaMaker {
   englishChaptersList: ChaptersData;
 }
 
-// TODO: this needs to be broken into multiple components
 const MediaMaker: NextPage<MediaMaker> = ({
   hasError,
   chaptersData,

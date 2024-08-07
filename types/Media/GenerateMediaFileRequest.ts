@@ -28,6 +28,12 @@ interface Request {
   videoId: number;
   chapterEnglishName: string;
   isPlayer?: boolean;
+  backgroundColor: string;
+  borderColor: string;
+  borderSize: number;
+  chaptersDataArabic: any;
+  frame: number;
+  quranTextFontStyle: string;
 }
 
 interface Video {

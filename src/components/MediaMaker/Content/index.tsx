@@ -9,13 +9,15 @@ import { AbsoluteFill, Audio, Sequence, Video, staticFile } from 'remotion';
 
 import styles from './MediaMakerContent.module.scss';
 
-import ChapterIcon from '@/components/chapters/ChapterIcon';
+import useGetChaptersData from '@/hooks/useGetChaptersData';
 import Alignment from '@/types/Media/Alignment';
 import { Timestamp } from '@/types/Media/GenerateMediaFileRequest';
 import Orientation from '@/types/Media/Orientation';
 import { QuranFont } from '@/types/QuranReader';
 import Translation from '@/types/Translation';
 import Verse from '@/types/Verse';
+import { getChapterData } from '@/utils/chapter';
+import defaultChaptersData from '@/utils/media/defaultChaptersData.json';
 import { convertHexToRGBA } from '@/utils/media/helpers';
 import getPlainTranslationText from '@/utils/plainTranslationText';
 
@@ -39,6 +41,7 @@ type Props = {
   isPlayer?: boolean;
 };
 
+const WORD_SURAH = 'سُورَة';
 const MediaMakerContent: React.FC<Props> = ({
   verses,
   audio,
@@ -59,6 +62,7 @@ const MediaMakerContent: React.FC<Props> = ({
   isPlayer = false,
 }) => {
   const videoRef = useRef(null);
+  const chaptersDataArabic = useGetChaptersData('ar');
   const startFrom = useMemo(() => {
     return audio?.verseTimings[0]?.normalizedStart
       ? (audio?.verseTimings[0]?.normalizedStart / 1000) * 30
@@ -89,6 +93,11 @@ const MediaMakerContent: React.FC<Props> = ({
       {verses &&
         verses.length > 0 &&
         verses.map((verse: Verse, i) => {
+          const chapter = getChapterData(
+            chaptersDataArabic || (JSON.parse(JSON.stringify(defaultChaptersData)) as any),
+            String(verse.chapterId),
+          );
+
           return (
             <Sequence
               // eslint-disable-next-line react/no-array-index-key
@@ -96,14 +105,27 @@ const MediaMakerContent: React.FC<Props> = ({
               from={i === 0 ? 0 : timestamps[i]?.start}
               durationInFrames={timestamps[i]?.durationInFrames}
             >
-              <AbsoluteFill>
+              <AbsoluteFill
+                style={{
+                  height: 250,
+                  paddingTop: 40,
+                  backgroundImage: 'linear-gradient(rgba(0, 0, 0.7), rgba(0, 0, 0, 0))',
+                }}
+              >
                 <div className={classNames(styles.chapterTitle)}>
-                  <span className={styles.surahFont}>
-                    <ChapterIcon id={verse.chapterId.toString()} />
-                    <ChapterIcon id="surah" />
-                  </span>
+                  <div className={classNames(styles.watermark)}>
+                    <span>
+                      I made this on
+                      <span className={styles.space} />
+                      <span className={styles.logo}>Quran.com</span>
+                    </span>
+                  </div>
+
                   <span
-                    className={styles.surahNumber}
+                    className={styles.surahArabic}
+                  >{`${WORD_SURAH} ${chapter?.translatedName}`}</span>
+                  <span
+                    className={styles.surahEnglish}
                   >{` - ${chapterEnglishName} (${verse.chapterId})`}</span>
                 </div>
               </AbsoluteFill>
@@ -162,14 +184,6 @@ const MediaMakerContent: React.FC<Props> = ({
             </Sequence>
           );
         })}
-      <AbsoluteFill>
-        <div className={classNames(styles.watermark)}>
-          <div>
-            I made this on
-            <span className={styles.logo}> Quran.com</span>
-          </div>
-        </div>
-      </AbsoluteFill>
     </AbsoluteFill>
   );
 };

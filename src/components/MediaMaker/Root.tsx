@@ -20,24 +20,23 @@ export const RemotionRoot = () => {
     `UthmanicHafs`,
     `url('${staticFile('/UthmanicHafs1Ver18.woff2')}') format('woff2')`,
   );
-  const surahNamesFont = new FontFace(
-    `SurahNames`,
-    `url('${staticFile('/SurahNames.woff2')}') format('woff2')`,
+  const notoNaskhArabicFont = new FontFace(
+    `NotoNaskhArabic`,
+    `url('${staticFile('/NotoNaskhArabic-Regular.woff2')}') format('woff2')`,
   );
   const indopakFont = new FontFace(
     `Indopak`,
     `url('${staticFile('/indopak-nastaleeq-waqf-lazim-v4.2.1.woff2')}') format('woff2')`,
   );
 
-  Promise.all([uthmanicHafsFont.load(), surahNamesFont.load(), indopakFont.load()])
+  Promise.all([uthmanicHafsFont.load(), notoNaskhArabicFont.load(), indopakFont.load()])
     .then(() => {
       document.fonts.add(uthmanicHafsFont);
-      document.fonts.add(surahNamesFont);
+      document.fonts.add(notoNaskhArabicFont);
       document.fonts.add(indopakFont);
       continueRender(handle);
     })
     .catch((err) => {
-      console.log('Error loading font', err);
       cancelRender(err);
     });
 

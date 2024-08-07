@@ -1,6 +1,7 @@
 import { toLocalizedVerseKey } from '../locale';
 
 import defaultAudio from './defaultAudio.json';
+import defaultChaptersData from './defaultChaptersData.json';
 import defaultVerses from './defaultVerses.json';
 
 import Alignment from '@/types/Media/Alignment';
@@ -17,7 +18,7 @@ export const VIDEO_LANDSCAPE_HEIGHT = 720;
 export const VIDEO_PORTRAIT_WIDTH = 720;
 export const VIDEO_LANDSCAPE_WIDTH = 1280;
 export const VIDEO_FPS = 30;
-export const DEFAULT_QURAN_FONT_SCALE = 3;
+export const DEFAULT_QURAN_FONT_SCALE = 4;
 export const DEFAULT_TRANSLATION_FONT_SCALE = 3;
 export const DEFAULT_QURAN_FONT_STYLE = QuranFont.QPCHafs;
 export const DEFAULT_VIDEO_ID = 4;
@@ -46,7 +47,7 @@ export function getDefaultVerseKeys(lang = 'en') {
 const DEFAULT_TIMESTAMPS = [
   {
     start: 0,
-    durationInFrames: 90,
+    durationInFrames: 183,
   },
 ];
 
@@ -94,6 +95,7 @@ export const BACKGROUND_VIDEOS = {
 export const DEFAULT_PROPS = {
   video: { ...BACKGROUND_VIDEOS[DEFAULT_VIDEO_ID], id: DEFAULT_VIDEO_ID },
   verses: defaultVerses as unknown as Verse[],
+  chaptersDataArabic: defaultChaptersData,
   audio: defaultAudio,
   timestamps: DEFAULT_TIMESTAMPS,
   fontColor: DEFAULT_FONT_COLOR,
