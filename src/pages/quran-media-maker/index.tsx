@@ -258,9 +258,11 @@ const MediaMaker: NextPage<MediaMaker> = ({
       videoId,
       chapterEnglishName,
       isPlayer: true,
+      translations,
     };
   }, [
     verseData.verses,
+    translations,
     audioData,
     timestamps,
     backgroundColor,
