@@ -5,15 +5,19 @@ export enum QueryParamValueType {
   Number = 'Number',
   ArrayOfNumbers = 'ArrayOfNumbers',
   ArrayOfStrings = 'ArrayOfStrings',
+  Boolean = 'Boolean',
 }
 
 const paramValueParser = {
   [QueryParamValueType.ArrayOfNumbers]: (paramStringValue: string) =>
-    paramStringValue.split(',').map((stringValue) => Number(stringValue)),
+    paramStringValue === ''
+      ? []
+      : paramStringValue.split(',').map((stringValue) => Number(stringValue)),
   [QueryParamValueType.ArrayOfStrings]: (paramStringValue: string) =>
     paramStringValue.split(',').map((stringValue) => stringValue),
   [QueryParamValueType.Number]: (paramStringValue: string) => Number(paramStringValue),
   [QueryParamValueType.String]: (paramStringValue: string) => paramStringValue,
+  [QueryParamValueType.Boolean]: (paramStringValue: string) => Boolean(paramStringValue),
 };
 
 export const equalityCheckerByType = {
@@ -21,6 +25,7 @@ export const equalityCheckerByType = {
   [QueryParamValueType.ArrayOfStrings]: areArraysEqual,
   [QueryParamValueType.String]: (a, b) => a === b,
   [QueryParamValueType.Number]: (a, b) => a === b,
+  [QueryParamValueType.Boolean]: (a, b) => a === b,
 };
 
 export const getQueryParamValueByType = (
@@ -30,4 +35,13 @@ export const getQueryParamValueByType = (
   const parse = paramValueParser[valueType];
   const parsedValue = parse(paramStringValue);
   return parsedValue;
+};
+
+export const getIsQueryParamDifferent = (
+  parsedQueryParamValue: string,
+  valueType: QueryParamValueType,
+  reduxValue: any,
+) => {
+  const checkEquality = equalityCheckerByType[valueType];
+  return !checkEquality(parsedQueryParamValue, reduxValue);
 };

@@ -1,8 +1,9 @@
+/* eslint-disable max-lines */
 /* eslint-disable react-func/max-lines-per-function */
 import { it, expect, describe } from 'vitest';
 
 import { getAllChaptersData } from './chapter';
-import { getDistanceBetweenVerses, sortWordLocation } from './verse';
+import { generateChapterVersesKeys, getDistanceBetweenVerses, sortWordLocation } from './verse';
 
 describe('sort verse word position', () => {
   it('should sort based on chapter', async () => {
@@ -162,5 +163,39 @@ describe('get the distance between 2 verses', () => {
     const result = getDistanceBetweenVerses(chaptersData, firstVerseKey, secondVerseKey);
 
     expect(result).toEqual(expected);
+  });
+});
+
+describe('generateChapterVersesKeys', () => {
+  it('should generate keys with chapterId', async () => {
+    const chapterId = '001';
+    const chaptersData = await getAllChaptersData();
+    const expectedKeys = ['1:1', '1:2', '1:3', '1:4', '1:5', '1:6', '1:7'];
+    const result = generateChapterVersesKeys(chaptersData, chapterId, false);
+    expect(result).toEqual(expectedKeys);
+  });
+
+  it('should generate keys without chapterId when hideChapterId is true', async () => {
+    const chapterId = '001';
+    const expectedKeys = ['1', '2', '3', '4', '5', '6', '7'];
+    const chaptersData = await getAllChaptersData();
+    const result = generateChapterVersesKeys(chaptersData, chapterId, true);
+    expect(result).toEqual(expectedKeys);
+  });
+
+  it('should handle chapterId with different lengths', async () => {
+    const chapterId = '112';
+    const expectedKeys = ['112:1', '112:2', '112:3', '112:4'];
+    const chaptersData = await getAllChaptersData();
+    const result = generateChapterVersesKeys(chaptersData, chapterId, false);
+    expect(result).toEqual(expectedKeys);
+  });
+
+  it('should return an empty array if the chapterId is not found in data', async () => {
+    const chapterId = '200';
+    const expectedKeys = [];
+    const chaptersData = await getAllChaptersData();
+    const result = generateChapterVersesKeys(chaptersData, chapterId, false);
+    expect(result).toEqual(expectedKeys);
   });
 });

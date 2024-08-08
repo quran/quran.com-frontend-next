@@ -187,7 +187,7 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
     setIsLoadingData(true);
     // if a range is selected, we need to validate it first
     if (showRangeOfVerses) {
-      const validationError = validateRangeSelection(rangeStartVerse, rangeEndVerse);
+      const validationError = validateRangeSelection(rangeStartVerse, rangeEndVerse, t);
       // if the validation fails
       if (validationError) {
         setCustomMessage(validationError);

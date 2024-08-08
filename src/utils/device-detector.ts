@@ -28,3 +28,14 @@ export const isFirefox = () => {
   const { userAgent } = navigator;
   return userAgent.toLowerCase().includes('firefox');
 };
+
+export const isSafari = () => {
+  if (!isClient) {
+    return false;
+  }
+
+  const { userAgent } = navigator;
+  const safari = userAgent.toLowerCase().includes('safari');
+  const chrome = userAgent.toLowerCase().includes('chrome');
+  return safari && !chrome;
+};

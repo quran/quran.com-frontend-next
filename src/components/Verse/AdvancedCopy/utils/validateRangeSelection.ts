@@ -1,4 +1,8 @@
+import { Translate } from 'next-translate';
+
+import ChaptersData from '@/types/ChaptersData';
 import { getVerseNumberFromKey } from '@/utils/verse';
+import { generateVerseKeysBetweenTwoVerseKeys } from '@/utils/verseKeys';
 
 /**
  * Validate the selected range start and end verse keys. The selection will be invalid in the following cases:
@@ -14,22 +18,33 @@ import { getVerseNumberFromKey } from '@/utils/verse';
 const validateRangeSelection = (
   selectedRangeStartVerseKey: string,
   selectedRangeEndVerseKey: string,
+  t: Translate,
+  maxNumberOfVerses?: number,
+  chaptersData?: ChaptersData,
 ): string | null => {
   // if one of them is empty.
   if (!selectedRangeStartVerseKey || !selectedRangeEndVerseKey) {
-    return 'Range start and end must have a value.';
-  }
-  // if both keys are the same.
-  if (selectedRangeStartVerseKey === selectedRangeEndVerseKey) {
-    return 'Range start and end should be different.';
+    return t('common:error.ranges-no-value');
   }
   // if the selected from verse number is higher than the selected to verse number.
   if (
     getVerseNumberFromKey(selectedRangeStartVerseKey) >
     getVerseNumberFromKey(selectedRangeEndVerseKey)
   ) {
-    return 'The starting verse has to be before the ending verse.';
+    return t('common:error.ranges-wrong-order');
   }
+
+  if (maxNumberOfVerses) {
+    const numberOfVerses = generateVerseKeysBetweenTwoVerseKeys(
+      chaptersData,
+      selectedRangeStartVerseKey,
+      selectedRangeEndVerseKey,
+    ).length;
+    if (numberOfVerses > maxNumberOfVerses) {
+      return t('common:error.ranges-too-many-verses', { maxNumberOfVerses });
+    }
+  }
+
   return null;
 };
 

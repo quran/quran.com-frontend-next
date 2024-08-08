@@ -55,10 +55,10 @@ const QueryParamMessage: React.FC<Props> = ({
    */
   const onResetToReduxStateClicked = () => {
     if (translationsQueryParamDifferent) {
-      router.query[QueryParam.Translations] = selectedTranslations.join(',');
+      router.query[QueryParam.TRANSLATIONS] = selectedTranslations.join(',');
     }
     if (reciterQueryParamDifferent) {
-      router.query[QueryParam.Reciter] = String(selectedReciterId);
+      router.query[QueryParam.RECITER] = String(selectedReciterId);
     }
     if (wordByWordLocaleQueryParamDifferent) {
       router.query[QueryParam.WBW_LOCALE] = selectedWordByWordLocale;
@@ -82,9 +82,9 @@ const QueryParamMessage: React.FC<Props> = ({
   const onPersistQueryParamsClicked = () => {
     if (
       translationsQueryParamDifferent &&
-      isValidTranslationsQueryParamValue(router.query[QueryParam.Translations] as string)
+      isValidTranslationsQueryParamValue(router.query[QueryParam.TRANSLATIONS] as string)
     ) {
-      const nextTranslations = (router.query[QueryParam.Translations] as string)
+      const nextTranslations = (router.query[QueryParam.TRANSLATIONS] as string)
         .split(',')
         .map((stringValue) => Number(stringValue));
 
@@ -109,7 +109,7 @@ const QueryParamMessage: React.FC<Props> = ({
     }
 
     if (reciterQueryParamDifferent) {
-      const nextReciterId = Number(router.query[QueryParam.Reciter]);
+      const nextReciterId = Number(router.query[QueryParam.RECITER]);
       onXstateSettingsChange(
         'reciter',
         nextReciterId,

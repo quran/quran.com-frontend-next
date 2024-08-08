@@ -1,0 +1,18 @@
+@use "src/styles/breakpoints";
+
+.rangeSelectorContainer {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.selectorsContainerInvisible {
+  display: none;
+}
+
+.to {
+  display: flex;
+  align-items: center;
+  font-size: var(--font-size-large);
+  padding-right: var(--spacing-medium);
+  padding-left: var(--spacing-medium);
+}

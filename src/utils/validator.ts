@@ -1,9 +1,13 @@
+/* eslint-disable max-lines */
 import { getChapterData } from './chapter';
 import { PAGES_MUSHAF_MAP } from './page';
+import { getChapterNumberFromKey, getVerseNumberFromKey } from './verse';
 import { parseVerseRange } from './verseKeys';
 
 import ChaptersData from 'types/ChaptersData';
 import { Mushaf } from 'types/QuranReader';
+
+const MAX_AYAHS_LIMIT = 10;
 
 /**
  * Validate a chapterId which can be in-valid in 2 cases:
@@ -266,6 +270,73 @@ export const isValidVerseKey = (chaptersData: ChaptersData, verseKey: string): b
     return false;
   }
 
+  return true;
+};
+
+/**
+ * Check if a start verse key is valid. An invalid verse key can be:
+ *
+ * 1. if the starting verse is bigger than the ending verse
+ * 2. if the verse number bigger than the surah's verses count
+ * 3. if the verse from or verse to not matching the surah
+ * 4. if the verse from and verse to has bigger than 10 ayahs difference
+ *
+ * @param {string} startVerseKey
+ * @param {string} endVerseKey
+ * @param {number} versesCount
+ * @param {number} chapterID
+ * @returns {boolean}
+ */
+// TODO: add unit tests
+export const isValidVerseFrom = (startVerseKey, endVerseKey, versesCount, chapterID) => {
+  const startVerseNumber = getVerseNumberFromKey(startVerseKey);
+  const endVerseNumber = getVerseNumberFromKey(endVerseKey);
+
+  if (startVerseNumber > endVerseNumber) {
+    return false;
+  }
+  if (startVerseNumber > versesCount) {
+    return false;
+  }
+  if (getChapterNumberFromKey(startVerseKey) !== Number(chapterID)) {
+    return false;
+  }
+  if (endVerseNumber - startVerseNumber >= MAX_AYAHS_LIMIT) {
+    return false;
+  }
+  return true;
+};
+
+/**
+ * Check if a end verse key is valid. An invalid verse key can be:
+ * 1. if the ending verse number bigger than the surah's verses count
+ * 2. if the ending verse number smaller than the starting verse
+ * 3. if the verse from or verse to not matching the surah
+ * 4. if the verse from and verse to has bigger than 10 ayahs difference
+ *
+ * @param {string} startVerseKey
+ * @param {string} endVerseKey
+ * @param {number} versesCount
+ * @param {number} chapterID
+ * @returns {boolean}
+ */
+// TODO: add unit tests
+export const isValidVerseTo = (startVerseKey, endVerseKey, versesCount, chapterID) => {
+  const startVerseNumber = getVerseNumberFromKey(startVerseKey);
+  const endVerseNumber = getVerseNumberFromKey(endVerseKey);
+
+  if (endVerseNumber > versesCount) {
+    return false;
+  }
+  if (endVerseNumber < startVerseNumber) {
+    return false;
+  }
+  if (getChapterNumberFromKey(endVerseKey) !== Number(chapterID)) {
+    return false;
+  }
+  if (endVerseNumber - startVerseNumber >= MAX_AYAHS_LIMIT) {
+    return false;
+  }
   return true;
 };
 

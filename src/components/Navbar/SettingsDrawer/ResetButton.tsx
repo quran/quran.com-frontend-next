@@ -50,8 +50,8 @@ const ResetButton = () => {
     }
 
     const queryParams = [
-      QueryParam.Translations,
-      QueryParam.Reciter,
+      QueryParam.TRANSLATIONS,
+      QueryParam.RECITER,
       QueryParam.WBW_LOCALE,
       QueryParam.FLOW,
     ];

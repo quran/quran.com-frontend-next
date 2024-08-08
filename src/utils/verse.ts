@@ -17,13 +17,17 @@ const COLON_SPLITTER = ':';
  *
  * @param {ChaptersData} data
  * @param {string} chapterId
+ * @param {boolean} hideChapterId
  * @returns {string[]}
  */
-export const generateChapterVersesKeys = (data: ChaptersData, chapterId: string): string[] => {
+export const generateChapterVersesKeys = (
+  data: ChaptersData,
+  chapterId: string,
+  hideChapterId?: boolean,
+): string[] => {
   const chapterNumberString = formatStringNumber(chapterId);
-
-  return range(data[chapterNumberString].versesCount).map(
-    (verseId) => `${chapterNumberString}:${verseId + 1}`,
+  return range(data[chapterNumberString]?.versesCount).map((verseId) =>
+    hideChapterId ? `${verseId + 1}` : `${chapterNumberString}:${verseId + 1}`,
   );
 };
 
