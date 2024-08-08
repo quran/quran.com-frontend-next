@@ -107,26 +107,25 @@ const MediaMakerContent: React.FC<Props> = ({
             >
               <AbsoluteFill
                 style={{
-                  height: 250,
+                  height: '250px',
                   paddingTop: 40,
-                  backgroundImage: 'linear-gradient(rgba(0, 0, 0.7), rgba(0, 0, 0, 0))',
+                  backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0))',
                 }}
               >
                 <div className={classNames(styles.chapterTitle)}>
-                  <div className={classNames(styles.watermark)}>
-                    <span>
-                      I made this on
-                      <span className={styles.space} />
-                      <span className={styles.logo}>Quran.com</span>
-                    </span>
+                  <div>
+                    <span className={classNames(styles.watermark)}>I made this on</span>
+                    <span className={classNames(styles.space)} />
+                    <span className={classNames(styles.logo)}>Quran.com</span>
                   </div>
-
-                  <span
-                    className={styles.surahArabic}
-                  >{`${WORD_SURAH} ${chapter?.translatedName}`}</span>
-                  <span
-                    className={styles.surahEnglish}
-                  >{` - ${chapterEnglishName} (${verse.chapterId})`}</span>
+                  <div>
+                    <span
+                      className={classNames(styles.surahArabic)}
+                    >{`${WORD_SURAH} ${chapter?.translatedName}`}</span>
+                    <span
+                      className={classNames(styles.surahEnglish)}
+                    >{` - ${chapterEnglishName} (Ch. ${verse.chapterId})`}</span>
+                  </div>
                 </div>
               </AbsoluteFill>
               <AbsoluteFill
@@ -152,6 +151,7 @@ const MediaMakerContent: React.FC<Props> = ({
                     [styles.verseCentre]: verseAlignment === Alignment.CENTRE,
                     [styles.verseJustified]: verseAlignment === Alignment.JUSTIFIED,
                     [styles.indopakFont]: quranTextFontStyle === QuranFont.IndoPak,
+                    [styles.uthmaniFont]: quranTextFontStyle === QuranFont.QPCHafs,
                   })}
                 >
                   {verse.words

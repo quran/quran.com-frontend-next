@@ -53,16 +53,19 @@ $white: #ffffff;
 
 .translation {
   direction: ltr;
+  font-family: "ProximaVara" !important;
 }
 .watermark {
   text-align: center;
   color: $white;
   font-size: 14px;
+  font-family: "ProximaVara" !important;
 }
 
 .logo {
-  font-weight: 500;
+  font-weight: 700;
   font-size: 20px;
+  font-family: "UthmanicHafs" !important;
 }
 
 .space {
@@ -77,28 +80,27 @@ $white: #ffffff;
 
 .verseText {
   line-height: 1.7;
-  font-family: UthmanicHafs !important;
   direction: rtl !important;
   margin-block: 3px;
 }
 
 .indopakFont {
-  font-family: Indopak !important;
+  font-family: "Indopak" !important;
+}
+
+.uthmaniFont {
+  font-family: "UthmanicHafs" !important;
 }
 
 .surahEnglish {
   font-size: 24px;
   font-weight: 400;
   color: $white;
-  // when switching languages, the font-family we don't want to be applied to the chapter title
-  font-family: unset !important;
-  & * {
-    font-family: unset !important;
-  }
+  font-family: "ProximaVara" !important;
 }
 
 .surahArabic {
-  font-family: NotoNaskhArabic !important;
+  font-family: "NotoNastaliq" !important;
   font-weight: 400;
   font-size: 30px;
   color: $white;

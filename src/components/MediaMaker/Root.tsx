@@ -1,9 +1,8 @@
-import { useState } from 'react';
-
-import { cancelRender, Composition, continueRender, delayRender, staticFile } from 'remotion';
+import { Composition, continueRender, delayRender, staticFile } from 'remotion';
 
 import MediaMakerContent from './Content';
 
+import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import {
   COMPOSITION_NAME,
   DEFAULT_PROPS,
@@ -15,29 +14,41 @@ import { getDurationInFrames, orientationToDimensions } from '@/utils/media/util
 
 // eslint-disable-next-line import/prefer-default-export
 export const RemotionRoot = () => {
-  const [handle] = useState(() => delayRender());
+  const waitForFont = delayRender();
+  const toast = useToast();
+
   const uthmanicHafsFont = new FontFace(
     `UthmanicHafs`,
     `url('${staticFile('/UthmanicHafs1Ver18.woff2')}') format('woff2')`,
   );
-  const notoNaskhArabicFont = new FontFace(
-    `NotoNaskhArabic`,
+  const notoNastaliqFont = new FontFace(
+    `NotoNastaliq`,
     `url('${staticFile('/NotoNaskhArabic-Regular.woff2')}') format('woff2')`,
   );
   const indopakFont = new FontFace(
     `Indopak`,
     `url('${staticFile('/indopak-nastaleeq-waqf-lazim-v4.2.1.woff2')}') format('woff2')`,
   );
+  const proximaVaraFont = new FontFace(
+    `ProximaVara`,
+    `url('${staticFile('/ProximaVara.woff2')}') format('woff2')`,
+  );
 
-  Promise.all([uthmanicHafsFont.load(), notoNaskhArabicFont.load(), indopakFont.load()])
+  Promise.all([
+    uthmanicHafsFont.load(),
+    notoNastaliqFont.load(),
+    indopakFont.load(),
+    proximaVaraFont.load(),
+  ])
     .then(() => {
       document.fonts.add(uthmanicHafsFont);
-      document.fonts.add(notoNaskhArabicFont);
+      document.fonts.add(notoNastaliqFont);
       document.fonts.add(indopakFont);
-      continueRender(handle);
+      document.fonts.add(proximaVaraFont);
+      continueRender(waitForFont);
     })
     .catch((err) => {
-      cancelRender(err);
+      toast(err, { status: ToastStatus.Error });
     });
 
   return (

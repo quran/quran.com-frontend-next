@@ -423,7 +423,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   try {
     const { reciters } = await getAvailableReciters(locale, []);
     const chaptersData = await getAllChaptersData(locale);
-    const englishChaptersList = await getAllChaptersData();
+    const englishChaptersList = await getAllChaptersData('en');
     const verses = await getChapterVerses(DEFAULT_SURAH, locale, DEFAULT_API_PARAMS);
     const chapterAudioData = await getChapterAudioData(DEFAULT_RECITER_ID, DEFAULT_SURAH, true);
 
