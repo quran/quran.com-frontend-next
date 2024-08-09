@@ -1,7 +1,7 @@
 /* eslint-disable max-lines */
 import { getChapterData } from './chapter';
 import { PAGES_MUSHAF_MAP } from './page';
-import { getChapterNumberFromKey, getVerseNumberFromKey } from './verse';
+import { getVerseAndChapterNumbersFromKey } from './verse';
 import { parseVerseRange } from './verseKeys';
 
 import ChaptersData from 'types/ChaptersData';
@@ -284,13 +284,26 @@ export const isValidVerseKey = (chaptersData: ChaptersData, verseKey: string): b
  * @param {string} startVerseKey
  * @param {string} endVerseKey
  * @param {number} versesCount
- * @param {number} chapterID
+ * @param {string} chapterID
  * @returns {boolean}
  */
-// TODO: add unit tests
-export const isValidVerseFrom = (startVerseKey, endVerseKey, versesCount, chapterID) => {
-  const startVerseNumber = getVerseNumberFromKey(startVerseKey);
-  const endVerseNumber = getVerseNumberFromKey(endVerseKey);
+export const isValidVerseFrom = (
+  startVerseKey: string,
+  endVerseKey: string,
+  versesCount: number,
+  chapterID: string,
+): boolean => {
+  const [startSurah, startVerse] = getVerseAndChapterNumbersFromKey(startVerseKey);
+  const [endSurah, endVerse] = getVerseAndChapterNumbersFromKey(endVerseKey);
+
+  const startVerseNumber = Number(startVerse);
+  const endVerseNumber = Number(endVerse);
+  const startSurahNumber = Number(startSurah);
+  const endSurahNumber = Number(endSurah);
+
+  if (startSurahNumber !== endSurahNumber) {
+    return false;
+  }
 
   if (startVerseNumber > endVerseNumber) {
     return false;
@@ -298,7 +311,7 @@ export const isValidVerseFrom = (startVerseKey, endVerseKey, versesCount, chapte
   if (startVerseNumber > versesCount) {
     return false;
   }
-  if (getChapterNumberFromKey(startVerseKey) !== Number(chapterID)) {
+  if (startSurahNumber !== Number(chapterID)) {
     return false;
   }
   if (endVerseNumber - startVerseNumber >= MAX_AYAHS_LIMIT) {
@@ -317,13 +330,26 @@ export const isValidVerseFrom = (startVerseKey, endVerseKey, versesCount, chapte
  * @param {string} startVerseKey
  * @param {string} endVerseKey
  * @param {number} versesCount
- * @param {number} chapterID
+ * @param {string} chapterID
  * @returns {boolean}
  */
-// TODO: add unit tests
-export const isValidVerseTo = (startVerseKey, endVerseKey, versesCount, chapterID) => {
-  const startVerseNumber = getVerseNumberFromKey(startVerseKey);
-  const endVerseNumber = getVerseNumberFromKey(endVerseKey);
+export const isValidVerseTo = (
+  startVerseKey: string,
+  endVerseKey: string,
+  versesCount: number,
+  chapterID: string,
+): boolean => {
+  const [startSurah, startVerse] = getVerseAndChapterNumbersFromKey(startVerseKey);
+  const [endSurah, endVerse] = getVerseAndChapterNumbersFromKey(endVerseKey);
+
+  const startVerseNumber = Number(startVerse);
+  const endVerseNumber = Number(endVerse);
+  const startSurahNumber = Number(startSurah);
+  const endSurahNumber = Number(endSurah);
+
+  if (startSurahNumber !== endSurahNumber) {
+    return false;
+  }
 
   if (endVerseNumber > versesCount) {
     return false;
@@ -331,7 +357,7 @@ export const isValidVerseTo = (startVerseKey, endVerseKey, versesCount, chapterI
   if (endVerseNumber < startVerseNumber) {
     return false;
   }
-  if (getChapterNumberFromKey(endVerseKey) !== Number(chapterID)) {
+  if (endSurahNumber !== Number(chapterID)) {
     return false;
   }
   if (endVerseNumber - startVerseNumber >= MAX_AYAHS_LIMIT) {

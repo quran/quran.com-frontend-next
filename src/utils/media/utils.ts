@@ -209,7 +209,7 @@ export const getVerseValue = (
   chaptersData: ChaptersData,
   QUERY_PARAMS_DATA: QueryParamsData,
   surahReduxValue: string,
-) => {
+): string => {
   const queryParamProps = QUERY_PARAMS_DATA[queryParam];
   const surahParamProps = QUERY_PARAMS_DATA[QueryParam.SURAH];
   const verseFromStringValue = String(query[QueryParam.VERSE_FROM]);
