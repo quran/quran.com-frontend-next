@@ -179,11 +179,15 @@ export const mutateGeneratedMediaCounter = (currentData) => {
 export type QueryParamsData = Record<
   QueryParam,
   {
-    reduxSelector: (state: RootState) => any;
-    valueType: QueryParamValueType;
-    reduxEqualityFunction?: (left: any, right: any) => boolean;
-    validate: (val?: any, chaptersData?: ChaptersData, query?: ParsedUrlQuery) => boolean;
-    customHandler?: (
+    reduxValueSelector: (state: RootState) => any;
+    queryParamValueType: QueryParamValueType;
+    reduxValueEqualityFunction?: (left: any, right: any) => boolean;
+    isValidQueryParam: (
+      queryParamValue?: any,
+      chaptersData?: ChaptersData,
+      query?: ParsedUrlQuery,
+    ) => boolean;
+    paramValueGetter?: (
       query: ParsedUrlQuery,
       queryParam: any,
       chaptersData: ChaptersData,
@@ -194,7 +198,7 @@ export type QueryParamsData = Record<
 
 /**
  * This function will validate the verse from, and verse to
- * and return the a valid value or a default value of not valid
+ * and return a valid value or the default value if not valid
  *
  * @param {ParsedUrlQuery} query
  * @param {QueryParam} queryParam
@@ -203,34 +207,35 @@ export type QueryParamsData = Record<
  * @param {string} surahReduxValue
  * @returns {string}
  */
-
 export const getVerseValue = (
   query: ParsedUrlQuery,
-  queryParam: QueryParam,
+  queryParam: QueryParam.VERSE_FROM | QueryParam.VERSE_TO,
   chaptersData: ChaptersData,
   QUERY_PARAMS_DATA: QueryParamsData,
   surahReduxValue: string,
 ): string => {
-  const queryParamProps = QUERY_PARAMS_DATA[queryParam];
-  const surahParamProps = QUERY_PARAMS_DATA[QueryParam.SURAH];
-  const verseFromStringValue = String(query[QueryParam.VERSE_FROM]);
-  const verseToStringValue = String(query[QueryParam.VERSE_TO]);
-  const surahStringValue = String(query[QueryParam.SURAH]);
+  const verseToOrFromQueryParamConfigs = QUERY_PARAMS_DATA[queryParam];
+  const surahQueryParamConfigs = QUERY_PARAMS_DATA[QueryParam.SURAH];
+  const verseFromQueryParamValue = String(query[QueryParam.VERSE_FROM]);
+  const verseToQueryParamValue = String(query[QueryParam.VERSE_TO]);
+  const surahQueryParamValue = String(query[QueryParam.SURAH]);
 
-  const surahID = surahParamProps.validate(surahStringValue) ? surahStringValue : surahReduxValue;
+  const surahID = surahQueryParamConfigs.isValidQueryParam(surahQueryParamValue)
+    ? surahQueryParamValue
+    : surahReduxValue;
   const isVerseFrom = queryParam === QueryParam.VERSE_FROM;
   const keyOfFirstVerse = `${surahID}:1`;
 
-  const verseFromKey = getVerseNumberFromKey(verseFromStringValue)
-    ? verseFromStringValue
-    : `${surahID}:${verseFromStringValue}`;
+  const verseFromKey = getVerseNumberFromKey(verseFromQueryParamValue)
+    ? verseFromQueryParamValue
+    : `${surahID}:${verseFromQueryParamValue}`;
 
-  const verseToKey = getVerseNumberFromKey(verseToStringValue)
-    ? verseToStringValue
-    : `${surahID}:${verseToStringValue}`;
+  const verseToKey = getVerseNumberFromKey(verseToQueryParamValue)
+    ? verseToQueryParamValue
+    : `${surahID}:${verseToQueryParamValue}`;
 
   const versesCount = getChapterData(chaptersData, surahID)?.versesCount;
-  const isValidValue = queryParamProps.validate(
+  const isValidValue = verseToOrFromQueryParamConfigs.isValidQueryParam(
     isVerseFrom ? verseFromKey : verseToKey,
     chaptersData,
     query,

@@ -21,19 +21,19 @@ const surahReduxValue = '2';
 // Mocked QUERY_PARAMS_DATA
 const MOCKED_QUERY_PARAMS_DATA = {
   [QueryParam.VERSE_FROM]: {
-    reduxSelector: vi.fn(),
-    valueType: 'string',
-    validate: vi.fn(),
+    reduxValueSelector: vi.fn(),
+    queryParamValueType: 'string',
+    isValidQueryParam: vi.fn(),
   },
   [QueryParam.VERSE_TO]: {
-    reduxSelector: vi.fn(),
-    valueType: 'string',
-    validate: vi.fn(),
+    reduxValueSelector: vi.fn(),
+    queryParamValueType: 'string',
+    isValidQueryParam: vi.fn(),
   },
   [QueryParam.SURAH]: {
-    reduxSelector: vi.fn(),
-    valueType: 'string',
-    validate: vi.fn(),
+    reduxValueSelector: vi.fn(),
+    queryParamValueType: 'string',
+    isValidQueryParam: vi.fn(),
   },
 };
 
@@ -54,7 +54,7 @@ describe('getVerseValue', async () => {
   const queryParamsData = getQueryParamsData();
 
   it('should return valid verseFromKey when queryParam is VERSE_FROM', () => {
-    queryParamsData[QueryParam.VERSE_FROM].validate = vi.fn(() => true);
+    queryParamsData[QueryParam.VERSE_FROM].isValidQueryParam = vi.fn(() => true);
 
     const result = getVerseValue(
       query,
@@ -65,7 +65,7 @@ describe('getVerseValue', async () => {
     );
 
     expect(result).toBe('2:5');
-    expect(queryParamsData[QueryParam.VERSE_FROM].validate).toHaveBeenCalledWith(
+    expect(queryParamsData[QueryParam.VERSE_FROM].isValidQueryParam).toHaveBeenCalledWith(
       '2:5',
       chaptersData,
       query,
@@ -73,7 +73,7 @@ describe('getVerseValue', async () => {
   });
 
   it('should return valid verseToKey when queryParam is VERSE_TO', () => {
-    queryParamsData[QueryParam.VERSE_TO].validate = vi.fn(() => true);
+    queryParamsData[QueryParam.VERSE_TO].isValidQueryParam = vi.fn(() => true);
 
     const result = getVerseValue(
       query,
@@ -84,14 +84,14 @@ describe('getVerseValue', async () => {
     );
 
     expect(result).toBe('2:10');
-    expect(queryParamsData[QueryParam.VERSE_TO].validate).toHaveBeenCalledWith(
+    expect(queryParamsData[QueryParam.VERSE_TO].isValidQueryParam).toHaveBeenCalledWith(
       '2:10',
       chaptersData,
       query,
     );
   });
   it('should return keyOfFirstVerse if verseFromKey is invalid', () => {
-    queryParamsData[QueryParam.VERSE_FROM].validate = vi.fn(() => false);
+    queryParamsData[QueryParam.VERSE_FROM].isValidQueryParam = vi.fn(() => false);
 
     const result = getVerseValue(
       query,
@@ -105,7 +105,7 @@ describe('getVerseValue', async () => {
   });
 
   it('should return keyOfFirstVerse if verseToKey is invalid', () => {
-    queryParamsData[QueryParam.VERSE_TO].validate = vi.fn(() => false);
+    queryParamsData[QueryParam.VERSE_TO].isValidQueryParam = vi.fn(() => false);
 
     const result = getVerseValue(
       query,
@@ -118,7 +118,7 @@ describe('getVerseValue', async () => {
   });
 
   it('should use surahReduxValue if surahStringValue is invalid', () => {
-    queryParamsData[QueryParam.SURAH].validate = vi.fn(() => false);
+    queryParamsData[QueryParam.SURAH].isValidQueryParam = vi.fn(() => false);
 
     const result = getVerseValue(
       query,

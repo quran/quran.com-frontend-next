@@ -28,7 +28,7 @@ import ChaptersData from '@/types/ChaptersData';
 import { areArraysEqual } from '@/utils/array';
 import { getVerseValue, QueryParamsData } from '@/utils/media/utils';
 import {
-  getIsQueryParamDifferent,
+  isQueryParamDifferentThanReduxValue,
   getQueryParamValueByType,
   QueryParamValueType,
 } from '@/utils/query-params';
@@ -48,118 +48,118 @@ import QueryParam from 'types/QueryParam';
 
 export const QUERY_PARAMS_DATA = {
   [QueryParam.TRANSLATIONS]: {
-    reduxSelector: selectSelectedTranslations,
-    reduxEqualityFunction: areArraysEqual,
-    valueType: QueryParamValueType.ArrayOfNumbers,
-    validate: (val) => isValidTranslationsQueryParamValue(val),
+    reduxValueSelector: selectSelectedTranslations,
+    reduxValueEqualityFunction: areArraysEqual,
+    queryParamValueType: QueryParamValueType.ArrayOfNumbers,
+    isValidQueryParam: (val) => isValidTranslationsQueryParamValue(val),
   },
   [QueryParam.WBW_LOCALE]: {
-    reduxSelector: selectWordByWordLocale,
-    reduxEqualityFunction: shallowEqual,
-    valueType: QueryParamValueType.String,
-    validate: () => true,
+    reduxValueSelector: selectWordByWordLocale,
+    reduxValueEqualityFunction: shallowEqual,
+    queryParamValueType: QueryParamValueType.String,
+    isValidQueryParam: () => true,
   },
   [QueryParam.VERSE_TO]: {
-    reduxSelector: selectVerseTo,
-    reduxEqualityFunction: shallowEqual,
-    valueType: QueryParamValueType.String,
-    validate: (val, chaptersData) => isValidVerseKey(chaptersData, val),
-    customHandler: (query, queryParam, chaptersData, surahReduxValue) => {
+    reduxValueSelector: selectVerseTo,
+    reduxValueEqualityFunction: shallowEqual,
+    queryParamValueType: QueryParamValueType.String,
+    isValidQueryParam: (val, chaptersData) => isValidVerseKey(chaptersData, val),
+    paramValueGetter: (query, queryParam, chaptersData, surahReduxValue) => {
       return getVerseValue(query, queryParam, chaptersData, QUERY_PARAMS_DATA, surahReduxValue);
     },
   },
   [QueryParam.VERSE_FROM]: {
-    reduxSelector: selectVerseFrom,
-    reduxEqualityFunction: shallowEqual,
-    valueType: QueryParamValueType.String,
-    validate: (val, chaptersData) => isValidVerseKey(chaptersData, val),
-    customHandler: (query, queryParam, chaptersData, surahReduxValue) => {
+    reduxValueSelector: selectVerseFrom,
+    reduxValueEqualityFunction: shallowEqual,
+    queryParamValueType: QueryParamValueType.String,
+    isValidQueryParam: (val, chaptersData) => isValidVerseKey(chaptersData, val),
+    paramValueGetter: (query, queryParam, chaptersData, surahReduxValue) => {
       return getVerseValue(query, queryParam, chaptersData, QUERY_PARAMS_DATA, surahReduxValue);
     },
   },
   [QueryParam.RECITER]: {
-    reduxSelector: selectReciter,
-    reduxEqualityFunction: shallowEqual,
-    valueType: QueryParamValueType.Number,
-    validate: (val) => isValidReciterId(val),
+    reduxValueSelector: selectReciter,
+    reduxValueEqualityFunction: shallowEqual,
+    queryParamValueType: QueryParamValueType.Number,
+    isValidQueryParam: (val) => isValidReciterId(val),
   },
   [QueryParam.QURAN_TEXT_FONT_SCALE]: {
-    reduxSelector: selectQuranTextFontScale,
-    reduxEqualityFunction: shallowEqual,
-    valueType: QueryParamValueType.Number,
-    validate: (val) => isValidFontScaleQueryParamValue(val),
+    reduxValueSelector: selectQuranTextFontScale,
+    reduxValueEqualityFunction: shallowEqual,
+    queryParamValueType: QueryParamValueType.Number,
+    isValidQueryParam: (val) => isValidFontScaleQueryParamValue(val),
   },
   [QueryParam.TRANSLATION_FONT_SCALE]: {
-    reduxSelector: selectTranslationFontScale,
-    reduxEqualityFunction: shallowEqual,
-    valueType: QueryParamValueType.Number,
-    validate: (val) => isValidFontScaleQueryParamValue(val),
+    reduxValueSelector: selectTranslationFontScale,
+    reduxValueEqualityFunction: shallowEqual,
+    queryParamValueType: QueryParamValueType.Number,
+    isValidQueryParam: (val) => isValidFontScaleQueryParamValue(val),
   },
   [QueryParam.QURAN_TEXT_FONT_STYLE]: {
-    reduxSelector: selectQuranTextFontStyle,
-    reduxEqualityFunction: shallowEqual,
-    valueType: QueryParamValueType.String,
-    validate: (val) => isValidFontStyleQueryParamValue(val),
+    reduxValueSelector: selectQuranTextFontStyle,
+    reduxValueEqualityFunction: shallowEqual,
+    queryParamValueType: QueryParamValueType.String,
+    isValidQueryParam: (val) => isValidFontStyleQueryParamValue(val),
   },
   [QueryParam.VERSE_ALIGNMENT]: {
-    reduxSelector: selectVerseAlignment,
-    reduxEqualityFunction: shallowEqual,
-    valueType: QueryParamValueType.String,
-    validate: (val) => isValidAlignmentQueryParamValue(val),
+    reduxValueSelector: selectVerseAlignment,
+    reduxValueEqualityFunction: shallowEqual,
+    queryParamValueType: QueryParamValueType.String,
+    isValidQueryParam: (val) => isValidAlignmentQueryParamValue(val),
   },
   [QueryParam.TRANSLATION_ALIGNMENT]: {
-    reduxSelector: selectTranslationAlignment,
-    reduxEqualityFunction: shallowEqual,
-    valueType: QueryParamValueType.String,
-    validate: (val) => isValidAlignmentQueryParamValue(val),
+    reduxValueSelector: selectTranslationAlignment,
+    reduxValueEqualityFunction: shallowEqual,
+    queryParamValueType: QueryParamValueType.String,
+    isValidQueryParam: (val) => isValidAlignmentQueryParamValue(val),
   },
   [QueryParam.ORIENTATION]: {
-    reduxSelector: selectOrientation,
-    reduxEqualityFunction: shallowEqual,
-    valueType: QueryParamValueType.String,
-    validate: (val) => isValidOrientationQueryParamValue(val),
+    reduxValueSelector: selectOrientation,
+    reduxValueEqualityFunction: shallowEqual,
+    queryParamValueType: QueryParamValueType.String,
+    isValidQueryParam: (val) => isValidOrientationQueryParamValue(val),
   },
   [QueryParam.SURAH]: {
-    reduxSelector: selectSurah,
-    reduxEqualityFunction: shallowEqual,
-    valueType: QueryParamValueType.Number,
-    validate: (val) => isValidChapterId(val),
+    reduxValueSelector: selectSurah,
+    reduxValueEqualityFunction: shallowEqual,
+    queryParamValueType: QueryParamValueType.Number,
+    isValidQueryParam: (val) => isValidChapterId(val),
   },
   [QueryParam.OPACITY]: {
-    reduxSelector: selectOpacity,
-    reduxEqualityFunction: shallowEqual,
-    valueType: QueryParamValueType.Number,
-    validate: (val) => isValidOpacityQueryParamValue(val),
+    reduxValueSelector: selectOpacity,
+    reduxValueEqualityFunction: shallowEqual,
+    queryParamValueType: QueryParamValueType.Number,
+    isValidQueryParam: (val) => isValidOpacityQueryParamValue(val),
   },
   [QueryParam.FONT_COLOR]: {
-    reduxSelector: selectFontColor,
-    reduxEqualityFunction: shallowEqual,
-    valueType: QueryParamValueType.String,
-    validate: () => true,
+    reduxValueSelector: selectFontColor,
+    reduxValueEqualityFunction: shallowEqual,
+    queryParamValueType: QueryParamValueType.String,
+    isValidQueryParam: () => true,
   },
   [QueryParam.BACKGROUND_COLOR]: {
-    reduxSelector: selectBackgroundColor,
-    reduxEqualityFunction: shallowEqual,
-    valueType: QueryParamValueType.String,
-    validate: () => true,
+    reduxValueSelector: selectBackgroundColor,
+    reduxValueEqualityFunction: shallowEqual,
+    queryParamValueType: QueryParamValueType.String,
+    isValidQueryParam: () => true,
   },
   [QueryParam.BORDER_COLOR]: {
-    reduxSelector: selectBorderColor,
-    reduxEqualityFunction: shallowEqual,
-    valueType: QueryParamValueType.String,
-    validate: () => true,
+    reduxValueSelector: selectBorderColor,
+    reduxValueEqualityFunction: shallowEqual,
+    queryParamValueType: QueryParamValueType.String,
+    isValidQueryParam: () => true,
   },
   [QueryParam.BORDER_SIZE]: {
-    reduxSelector: selectBorderSize,
-    reduxEqualityFunction: shallowEqual,
-    valueType: QueryParamValueType.Number,
-    validate: (val) => isValidBorderSizeQueryParamValue(val),
+    reduxValueSelector: selectBorderSize,
+    reduxValueEqualityFunction: shallowEqual,
+    queryParamValueType: QueryParamValueType.Number,
+    isValidQueryParam: (val) => isValidBorderSizeQueryParamValue(val),
   },
   [QueryParam.VIDEO_ID]: {
-    reduxSelector: selectVideoId,
-    reduxEqualityFunction: shallowEqual,
-    valueType: QueryParamValueType.Number,
-    validate: (val) => isValidVideoIdQueryParamValue(val),
+    reduxValueSelector: selectVideoId,
+    reduxValueEqualityFunction: shallowEqual,
+    queryParamValueType: QueryParamValueType.Number,
+    isValidQueryParam: (val) => isValidVideoIdQueryParamValue(val),
   },
 } as QueryParamsData;
 
@@ -181,39 +181,50 @@ const useGetQueryParamOrReduxValue = (
 ): { value: any; isQueryParamDifferent: boolean } => {
   const { query, isReady } = useRouter();
 
-  let useSelectorArguments = [QUERY_PARAMS_DATA[queryParam].reduxSelector];
-  if (QUERY_PARAMS_DATA[queryParam].reduxEqualityFunction) {
-    useSelectorArguments = [
-      QUERY_PARAMS_DATA[queryParam].reduxSelector,
+  // either pass the redux selector or the redux selector and the equality function as well
+  let reduxValueSelectorWithOrWithoutEqualityFunction = [
+    QUERY_PARAMS_DATA[queryParam].reduxValueSelector,
+  ];
+  if (QUERY_PARAMS_DATA[queryParam].reduxValueEqualityFunction) {
+    reduxValueSelectorWithOrWithoutEqualityFunction = [
+      QUERY_PARAMS_DATA[queryParam].reduxValueSelector,
       // @ts-ignore
-      QUERY_PARAMS_DATA[queryParam].reduxEqualityFunction,
+      QUERY_PARAMS_DATA[queryParam].reduxValueEqualityFunction,
     ];
   }
   // @ts-ignore
-  const reduxValue = useSelector(...useSelectorArguments);
+  const paramReduxValue = useSelector(...reduxValueSelectorWithOrWithoutEqualityFunction);
   const surahReduxValue = useSelector(
-    QUERY_PARAMS_DATA[QueryParam.SURAH].reduxSelector,
-    QUERY_PARAMS_DATA[QueryParam.SURAH].reduxEqualityFunction,
+    QUERY_PARAMS_DATA[QueryParam.SURAH].reduxValueSelector,
+    QUERY_PARAMS_DATA[QueryParam.SURAH].reduxValueEqualityFunction,
   );
   // if the param exists in the url
   if (isReady && query[queryParam] !== undefined) {
-    const { valueType, validate, customHandler } = QUERY_PARAMS_DATA[queryParam];
-    const paramStringValue = String(query[queryParam]);
-    const isQueryParamDifferent = getIsQueryParamDifferent(paramStringValue, valueType, reduxValue);
+    const { queryParamValueType, isValidQueryParam, paramValueGetter } =
+      QUERY_PARAMS_DATA[queryParam];
+    const queryParamStringValue = String(query[queryParam]);
+    const isQueryParamDifferent = isQueryParamDifferentThanReduxValue(
+      queryParamStringValue,
+      queryParamValueType,
+      paramReduxValue,
+    );
 
-    if (customHandler) {
+    if (paramValueGetter) {
       return {
-        value: customHandler(query, queryParam, chaptersData, surahReduxValue),
+        value: paramValueGetter(query, queryParam, chaptersData, surahReduxValue),
         isQueryParamDifferent,
       };
     }
 
-    const isValidValue = validate(paramStringValue, chaptersData, query);
-    const parsedQueryParamValue = getQueryParamValueByType(paramStringValue, valueType);
+    const isValidValue = isValidQueryParam(queryParamStringValue, chaptersData, query);
+    const parsedQueryParamValue = getQueryParamValueByType(
+      queryParamStringValue,
+      queryParamValueType,
+    );
 
     // if the url param is not valid, return the redux value
     if (!isValidValue) {
-      return { isQueryParamDifferent: false, value: reduxValue };
+      return { isQueryParamDifferent: false, value: paramReduxValue };
     }
 
     return {
@@ -223,7 +234,7 @@ const useGetQueryParamOrReduxValue = (
   }
 
   return {
-    value: reduxValue,
+    value: paramReduxValue,
     isQueryParamDifferent: false,
   };
 };

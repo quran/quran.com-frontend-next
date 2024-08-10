@@ -78,6 +78,11 @@ export const selectVideoId = (state: RootState) => state.mediaMaker.videoId;
 export const selectSurah = (state: RootState) => state.mediaMaker.surah;
 export const selectVerseFrom = (state: RootState) => state.mediaMaker.verseFrom;
 export const selectVerseTo = (state: RootState) => state.mediaMaker.verseTo;
+export const selectSurahAndVersesFromAndTo = (state: RootState) => ({
+  verseFrom: state.mediaMaker.verseFrom,
+  verseTo: state.mediaMaker.verseTo,
+  surah: state.mediaMaker.surah,
+});
 export const selectBorderColor = (state: RootState) => state.mediaMaker.borderColor;
 export const selectBorderSize = (state: RootState) => state.mediaMaker.borderSize;
 export const selectBackgroundColor = (state: RootState) => state.mediaMaker.backgroundColor;
