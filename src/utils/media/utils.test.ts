@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 /* eslint-disable react-func/max-lines-per-function */
 import { describe, it, expect, vi, Mock } from 'vitest';
 
@@ -9,13 +10,13 @@ import { getVerseValue } from './utils';
 import { getQueryParamsData } from '@/hooks/useGetQueryParamOrReduxValue';
 import QueryParam from '@/types/QueryParam';
 
-const mockQuery = {
+const query = {
   [QueryParam.VERSE_FROM]: '2:5',
   [QueryParam.VERSE_TO]: '2:10',
   [QueryParam.SURAH]: '2',
 };
 
-const mockSurahReduxValue = '2';
+const surahReduxValue = '2';
 
 // Mocked QUERY_PARAMS_DATA
 const MOCKED_QUERY_PARAMS_DATA = {
@@ -49,25 +50,25 @@ vi.mock('@/hooks/useGetQueryParamOrReduxValue', () => ({
 }));
 
 describe('getVerseValue', async () => {
-  const mockChaptersData = await getAllChaptersData();
+  const chaptersData = await getAllChaptersData();
   const queryParamsData = getQueryParamsData();
 
   it('should return valid verseFromKey when queryParam is VERSE_FROM', () => {
     queryParamsData[QueryParam.VERSE_FROM].validate = vi.fn(() => true);
 
     const result = getVerseValue(
-      mockQuery,
+      query,
       QueryParam.VERSE_FROM,
-      mockChaptersData,
+      chaptersData,
       queryParamsData,
-      mockSurahReduxValue,
+      surahReduxValue,
     );
 
     expect(result).toBe('2:5');
     expect(queryParamsData[QueryParam.VERSE_FROM].validate).toHaveBeenCalledWith(
       '2:5',
-      mockChaptersData,
-      mockQuery,
+      chaptersData,
+      query,
     );
   });
 
@@ -75,29 +76,29 @@ describe('getVerseValue', async () => {
     queryParamsData[QueryParam.VERSE_TO].validate = vi.fn(() => true);
 
     const result = getVerseValue(
-      mockQuery,
+      query,
       QueryParam.VERSE_TO,
-      mockChaptersData,
+      chaptersData,
       queryParamsData,
-      mockSurahReduxValue,
+      surahReduxValue,
     );
 
     expect(result).toBe('2:10');
     expect(queryParamsData[QueryParam.VERSE_TO].validate).toHaveBeenCalledWith(
       '2:10',
-      mockChaptersData,
-      mockQuery,
+      chaptersData,
+      query,
     );
   });
   it('should return keyOfFirstVerse if verseFromKey is invalid', () => {
     queryParamsData[QueryParam.VERSE_FROM].validate = vi.fn(() => false);
 
     const result = getVerseValue(
-      mockQuery,
+      query,
       QueryParam.VERSE_FROM,
-      mockChaptersData,
+      chaptersData,
       queryParamsData,
-      mockSurahReduxValue,
+      surahReduxValue,
     );
 
     expect(result).toBe('2:1');
@@ -107,11 +108,11 @@ describe('getVerseValue', async () => {
     queryParamsData[QueryParam.VERSE_TO].validate = vi.fn(() => false);
 
     const result = getVerseValue(
-      mockQuery,
+      query,
       QueryParam.VERSE_TO,
-      mockChaptersData,
+      chaptersData,
       queryParamsData,
-      mockSurahReduxValue,
+      surahReduxValue,
     );
     expect(result).toBe('2:1');
   });
@@ -120,11 +121,11 @@ describe('getVerseValue', async () => {
     queryParamsData[QueryParam.SURAH].validate = vi.fn(() => false);
 
     const result = getVerseValue(
-      mockQuery,
+      query,
       QueryParam.VERSE_FROM,
-      mockChaptersData,
+      chaptersData,
       queryParamsData,
-      mockSurahReduxValue,
+      surahReduxValue,
     );
 
     expect(result).toBe('2:1');
@@ -134,11 +135,11 @@ describe('getVerseValue', async () => {
     (isValidVerseFrom as Mock).mockImplementation(() => false);
 
     const result = getVerseValue(
-      mockQuery,
+      query,
       QueryParam.VERSE_FROM,
-      mockChaptersData,
+      chaptersData,
       queryParamsData,
-      mockSurahReduxValue,
+      surahReduxValue,
     );
 
     expect(result).toBe('2:1');
@@ -148,13 +149,60 @@ describe('getVerseValue', async () => {
     (isValidVerseTo as Mock).mockImplementation(() => false);
 
     const result = getVerseValue(
-      mockQuery,
+      query,
       QueryParam.VERSE_TO,
-      mockChaptersData,
+      chaptersData,
       queryParamsData,
-      mockSurahReduxValue,
+      surahReduxValue,
     );
 
+    expect(result).toBe('2:1');
+  });
+
+  it('should return the correct verse key when all validations pass', async () => {
+    const result = getVerseValue(
+      query,
+      QueryParam.VERSE_FROM,
+      chaptersData,
+      queryParamsData,
+      surahReduxValue,
+    );
+    expect(result).toBe('2:1');
+  });
+
+  it('should return the first verse key when verseFrom is invalid', async () => {
+    const invalidQuery = { ...query, [QueryParam.VERSE_FROM]: 'invalid' };
+    const result = getVerseValue(
+      invalidQuery,
+      QueryParam.VERSE_FROM,
+      chaptersData,
+      queryParamsData,
+      surahReduxValue,
+    );
+    expect(result).toBe('2:1');
+  });
+
+  it('should return the first verse key when verseTo is invalid', async () => {
+    const invalidQuery = { ...query, [QueryParam.VERSE_TO]: 'invalid' };
+    const result = getVerseValue(
+      invalidQuery,
+      QueryParam.VERSE_TO,
+      chaptersData,
+      queryParamsData,
+      surahReduxValue,
+    );
+    expect(result).toBe('2:1');
+  });
+
+  it('should return the first verse key when surah is invalid', async () => {
+    const invalidQuery = { ...query, [QueryParam.SURAH]: 'invalid' };
+    const result = getVerseValue(
+      invalidQuery,
+      QueryParam.VERSE_FROM,
+      chaptersData,
+      queryParamsData,
+      surahReduxValue,
+    );
     expect(result).toBe('2:1');
   });
 });
