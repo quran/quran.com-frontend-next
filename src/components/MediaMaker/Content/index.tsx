@@ -112,18 +112,18 @@ const MediaMakerContent: React.FC<Props> = ({
                   backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0))',
                 }}
               >
-                <div className={classNames(styles.chapterTitle)}>
+                <div className={styles.chapterTitle}>
                   <div>
-                    <span className={classNames(styles.watermark)}>I made this on</span>
-                    <span className={classNames(styles.space)} />
-                    <span className={classNames(styles.logo)}>Quran.com</span>
+                    <span className={styles.watermark}>I made this on</span>
+                    <span className={styles.space} />
+                    <span className={styles.logo}>Quran.com</span>
                   </div>
                   <div>
                     <span
-                      className={classNames(styles.surahArabic)}
+                      className={styles.surahArabic}
                     >{`${WORD_SURAH} ${chapter?.translatedName}`}</span>
                     <span
-                      className={classNames(styles.surahEnglish)}
+                      className={styles.surahEnglish}
                     >{` - ${chapterEnglishName} (Ch. ${verse.chapterId})`}</span>
                   </div>
                 </div>

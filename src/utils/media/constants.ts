@@ -108,7 +108,7 @@ export const DEFAULT_PROPS = {
   translations: [DEFAULT_TRANSLATION],
   orientation: Orientation.LANDSCAPE,
   videoId: DEFAULT_VIDEO_ID,
-  chapterEnglishName: 'The Sincerity',
+  chapterEnglishName: 'The Opener',
   borderColor: DEFAULT_BORDER_COLOR,
   borderSize: DEFAULT_BORDER_SIZE,
   backgroundColor: DEFAULT_BACKGROUND_COLOR,
