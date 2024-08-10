@@ -70,6 +70,7 @@ interface Verse {
 
 interface Word {
   qpcUthmaniHafs: string;
+  textIndopak: string;
 }
 
 interface Translation {

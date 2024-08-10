@@ -148,6 +148,7 @@ export const prepareGenerateMediaFileRequestData = (data: GenerateMediaFileReque
     verseKey: verse.verseKey,
     words: verse.words.map((word) => ({
       qpcUthmaniHafs: word.qpcUthmaniHafs,
+      textIndopak: word.textIndopak,
     })),
     translations: verse.translations?.map((translation) => ({
       id: translation.id,
