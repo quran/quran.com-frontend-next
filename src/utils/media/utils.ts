@@ -187,7 +187,7 @@ export type QueryParamsData = Record<
       chaptersData?: ChaptersData,
       query?: ParsedUrlQuery,
     ) => boolean;
-    paramValueGetter?: (
+    customParamValueGetter?: (
       query: ParsedUrlQuery,
       queryParam: any,
       chaptersData: ChaptersData,

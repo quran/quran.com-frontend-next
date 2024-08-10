@@ -64,7 +64,7 @@ export const QUERY_PARAMS_DATA = {
     reduxValueEqualityFunction: shallowEqual,
     queryParamValueType: QueryParamValueType.String,
     isValidQueryParam: (val, chaptersData) => isValidVerseKey(chaptersData, val),
-    paramValueGetter: (query, queryParam, chaptersData, surahReduxValue) => {
+    customParamValueGetter: (query, queryParam, chaptersData, surahReduxValue) => {
       return getVerseValue(query, queryParam, chaptersData, QUERY_PARAMS_DATA, surahReduxValue);
     },
   },
@@ -73,7 +73,7 @@ export const QUERY_PARAMS_DATA = {
     reduxValueEqualityFunction: shallowEqual,
     queryParamValueType: QueryParamValueType.String,
     isValidQueryParam: (val, chaptersData) => isValidVerseKey(chaptersData, val),
-    paramValueGetter: (query, queryParam, chaptersData, surahReduxValue) => {
+    customParamValueGetter: (query, queryParam, chaptersData, surahReduxValue) => {
       return getVerseValue(query, queryParam, chaptersData, QUERY_PARAMS_DATA, surahReduxValue);
     },
   },
@@ -200,7 +200,7 @@ const useGetQueryParamOrReduxValue = (
   );
   // if the param exists in the url
   if (isReady && query[queryParam] !== undefined) {
-    const { queryParamValueType, isValidQueryParam, paramValueGetter } =
+    const { queryParamValueType, isValidQueryParam, customParamValueGetter } =
       QUERY_PARAMS_DATA[queryParam];
     const queryParamStringValue = String(query[queryParam]);
     const isQueryParamDifferent = isQueryParamDifferentThanReduxValue(
@@ -209,9 +209,9 @@ const useGetQueryParamOrReduxValue = (
       paramReduxValue,
     );
 
-    if (paramValueGetter) {
+    if (customParamValueGetter) {
       return {
-        value: paramValueGetter(query, queryParam, chaptersData, surahReduxValue),
+        value: customParamValueGetter(query, queryParam, chaptersData, surahReduxValue),
         isQueryParamDifferent,
       };
     }
