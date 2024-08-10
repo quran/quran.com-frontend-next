@@ -163,6 +163,10 @@ export const QUERY_PARAMS_DATA = {
   },
 } as QueryParamsData;
 
+export const getQueryParamsData = () => {
+  return QUERY_PARAMS_DATA;
+};
+
 /**
  * A hook that searches the query params of the url for specific values,
  * parses them if found and if not, falls back to the Redux value and detects
