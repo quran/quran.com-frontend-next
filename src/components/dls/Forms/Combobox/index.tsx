@@ -83,6 +83,18 @@ const Combobox: React.FC<Props> = ({
   const [focusInput, inputRef]: [() => void, RefObject<HTMLInputElement>] = useFocus();
   const comboBoxRef = useRef(null);
 
+  const getNewValue = useCallback(
+    (isNewValueValid: boolean, previousValue, newValue) => {
+      if (!isNewValueValid) {
+        // reset the filter in-case the prev data is outside the filtered items
+        setInputValue(initialInputValue || '');
+        return previousValue;
+      }
+      return newValue;
+    },
+    [initialInputValue],
+  );
+
   // instead of running items.find in the closeCombobox function, we can create a map to memoize the result
   const valueToLabelMap = useMemo(() => {
     const map: Record<string, string> = {};
@@ -174,8 +186,18 @@ const Combobox: React.FC<Props> = ({
   const invokeOnChangeCallback = useCallback(
     (newValue) => {
       if (onChange) {
-        onChange(isMultiSelect ? Object.keys(newValue) : (newValue as string), id);
+        const isNewValueValid = onChange(
+          isMultiSelect ? Object.keys(newValue) : (newValue as string),
+          id,
+        );
+        // if the parent component doesn't return a boolean value, we should allow the value to go through since it means no validation is needed.
+        if (typeof isNewValueValid !== 'boolean') {
+          return true;
+        }
+        return !!isNewValueValid;
       }
+      // if no on change callback, then no need to validate the value and we should allow it to go through.
+      return true;
     },
     [id, isMultiSelect, onChange],
   );
@@ -192,12 +214,12 @@ const Combobox: React.FC<Props> = ({
   useHotkeys(
     'Backspace',
     () => {
-      setSelectedValue((prevSelectedValue: MultiSelectValue) => {
-        const newSelectedValues = { ...prevSelectedValue };
+      setSelectedValue((prevSelectedValues: MultiSelectValue) => {
+        const newSelectedValues = { ...prevSelectedValues };
         const lastTag = Object.keys(newSelectedValues).pop();
         delete newSelectedValues[lastTag];
-        invokeOnChangeCallback(newSelectedValues);
-        return newSelectedValues;
+        const isNewValueValid = invokeOnChangeCallback(newSelectedValues);
+        return getNewValue(isNewValueValid, prevSelectedValues, newSelectedValues);
       });
     },
     {
@@ -241,22 +263,22 @@ const Combobox: React.FC<Props> = ({
             } else {
               newSelectedValues[selectedItemName] = true;
             }
-            invokeOnChangeCallback(newSelectedValues);
-            return newSelectedValues;
+            const isNewValueValid = invokeOnChangeCallback(newSelectedValues);
+            return getNewValue(isNewValueValid, prevSelectedValues, newSelectedValues);
           });
         }
         setInputValue(''); // reset the input value even if it's selecting.
       } else if (shouldProcessChange) {
         setInputValue(isUnSelect ? '' : itemLabel);
-        setSelectedValue(() => {
+        setSelectedValue((prevSelectedValue) => {
           const newSelectedValue = isUnSelect ? '' : selectedItemName;
-          invokeOnChangeCallback(newSelectedValue);
-          return newSelectedValue;
+          const isNewValueValid = invokeOnChangeCallback(newSelectedValue);
+          return getNewValue(isNewValueValid, prevSelectedValue, newSelectedValue);
         });
       }
       setIsOpened(false); // close the items container
     },
-    [preventUnselectingItems, invokeOnChangeCallback, isMultiSelect],
+    [preventUnselectingItems, isMultiSelect, invokeOnChangeCallback, getNewValue],
   );
 
   /**
@@ -285,17 +307,17 @@ const Combobox: React.FC<Props> = ({
 
       1. it's multiSelect.
       2. has minimum required items set.
-      This is done to avoid clearing all items while the minimum amount of items 
-      that should be selected is set. 
+      This is done to avoid clearing all items while the minimum amount of items
+      that should be selected is set.
     */
     if (!(hasMinimumRequiredItems && isMultiSelect)) {
       setInputValue('');
       // if it's allowed to un-select items.
       if (!preventUnselectingItems) {
-        setSelectedValue(() => {
+        setSelectedValue((prevSelectedValue) => {
           const defaultSelectedValue = getDefaultValue(isMultiSelect);
-          invokeOnChangeCallback(defaultSelectedValue);
-          return defaultSelectedValue;
+          const isNewValueValid = invokeOnChangeCallback(defaultSelectedValue);
+          return getNewValue(isNewValueValid, prevSelectedValue, defaultSelectedValue);
         });
       }
     }
@@ -316,12 +338,12 @@ const Combobox: React.FC<Props> = ({
         setSelectedValue((prevSelectedValues: MultiSelectValue) => {
           const newSelectedValues = { ...prevSelectedValues };
           delete newSelectedValues[toBeRemovedTag.name];
-          invokeOnChangeCallback(newSelectedValues);
-          return newSelectedValues;
+          const isNewValueValid = invokeOnChangeCallback(newSelectedValues);
+          return getNewValue(isNewValueValid, prevSelectedValues, newSelectedValues);
         });
       }
     },
-    [invokeOnChangeCallback, items, preventUnselectingItems],
+    [getNewValue, invokeOnChangeCallback, items, preventUnselectingItems],
   );
 
   const shouldShowCaret =

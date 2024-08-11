@@ -14,7 +14,7 @@ import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext'
 import QueryParam from 'types/QueryParam';
 
 const QUERY_PARAMS_DATA = {
-  [QueryParam.Reciter]: {
+  [QueryParam.RECITER]: {
     selector: (state: any) => state.context.reciterId,
     valueType: QueryParamValueType.Number,
     validate: isValidReciterId,

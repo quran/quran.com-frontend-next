@@ -24,7 +24,7 @@ interface Props {
 
 const TranslationViewCellSkeleton: React.FC<Props> = ({ hasActionMenuItems = true }) => {
   const { value: selectedTranslations }: { value: number[] } = useGetQueryParamOrReduxValue(
-    QueryParam.Translations,
+    QueryParam.TRANSLATIONS,
   );
   const { quranFont, quranTextFontScale, translationFontScale, mushafLines } = useSelector(
     selectQuranReaderStyles,

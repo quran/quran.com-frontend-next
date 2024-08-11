@@ -1,0 +1,17 @@
+.selectedContainer {
+  display: flex;
+  flex: 1;
+  margin-block: var(--spacing-micro);
+}
+
+.selectedContainer + .selectedContainer {
+  margin-inline-start: var(--spacing-xsmall);
+}
+
+.select {
+  flex-grow: 1;
+  width: calc(var(--spacing-mega) * 2);
+  select {
+    width: 100%;
+  }
+}

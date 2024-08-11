@@ -1,3 +1,4 @@
+@use "src/styles/breakpoints";
 .container {
   line-height: var(--spacing-small);
   > span {
@@ -6,4 +7,28 @@
   [data-radix-popper-content-wrapper] {
     z-index: var(--z-index-default);
   }
+}
+
+.containerWithNewLabel {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
+.newLabel {
+  background-color: unset !important;
+  align-self: center;
+
+  @include breakpoints.smallerThanTablet {
+    inset-block-end: calc(-1.2 * var(--spacing-small)) !important;
+    inset-inline-end: var(--spacing-xxsmall) !important;
+  }
+  @include breakpoints.tablet {
+    inset-block-start: var(--spacing-micro) !important;
+    inset-inline-end: calc(-1.2 * var(--spacing-large)) !important;
+  }
+}
+
+.newLabelContainer {
+  display: flex !important;
 }

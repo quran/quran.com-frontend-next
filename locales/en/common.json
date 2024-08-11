@@ -150,7 +150,12 @@
     "email-login-fail": "Failed to login with email. Please try again",
     "general": "Something went wrong. Please try again.",
     "offline": "Looks like you lost your connection. Please check it and try again.",
-    "pref-persist-fail": "Failed to sync your settings to the cloud."
+    "pref-persist-fail": "Failed to sync your settings to the cloud.",
+    "MediaVersesRangeLimitExceeded": "You can only select up to {{limit}} verses at a time. Please select a smaller range.",
+    "MediaFilesPerUserLimitExceeded": "You have reached the maximum monthly limit of ({{limit}}).",
+    "ranges-no-value": "Range start and end must have a value",
+    "ranges-wrong-order": "The starting verse has to be before the ending verse.",
+    "ranges-too-many-verses": "*Max {{maxNumberOfVerses}} Ayahs"
   },
   "feedback": "Feedback",
   "fonts": {
@@ -159,6 +164,8 @@
     "code_v1": "King Fahad Complex V1",
     "code_v2": "King Fahad Complex V2",
     "font-size": "Font size",
+    "quran-font-size": "Quran font size",
+    "translation-font-size": "Translation font size",
     "lines": "Lines",
     "qcf-desc": "King Fahad Complex (V1 and V2) Fonts provide higher quality but take longer to load.",
     "qpc_uthmani_hafs": "QPC Uthmani Hafs",
@@ -300,6 +307,7 @@
     "no-tafsir-selected": "No tafsir selected",
     "no-translation-selected": "No translation selected",
     "reading-experience": "Reading Experience",
+    "reset": "Reset",
     "reset-cta": "Reset Settings",
     "reset-notif": "Your settings have been reset to the default ones",
     "search-reciter": "Search Reciter",
@@ -323,7 +331,7 @@
     "search-hizb": "Search Hizb",
     "search-juz": "Search Juz",
     "search-page": "Search Page",
-    "search-surah": "Search surah",
+    "search-surah": "Search Surah",
     "try-navigating-with": "Tip: try navigating with"
   },
   "sitemap": "Sitemap",
