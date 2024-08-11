@@ -32,7 +32,7 @@ $colorPickerBorderRadius: calc(var(--spacing-medium) * 3);
 }
 
 .spinner {
-  background-color: #ffffff;
+  background-color: var(--color-background-default);
   border-radius: var(--spacing-xxsmall);
   padding: var(--spacing-micro);
 }
