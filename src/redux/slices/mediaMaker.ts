@@ -76,8 +76,6 @@ export const selectTranslationAlignment = (state: RootState) =>
 export const selectOrientation = (state: RootState) => state.mediaMaker.orientation;
 export const selectVideoId = (state: RootState) => state.mediaMaker.videoId;
 export const selectSurah = (state: RootState) => state.mediaMaker.surah;
-export const selectVerseFrom = (state: RootState) => state.mediaMaker.verseFrom;
-export const selectVerseTo = (state: RootState) => state.mediaMaker.verseTo;
 export const selectSurahAndVersesFromAndTo = (state: RootState) => ({
   verseFrom: state.mediaMaker.verseFrom,
   verseTo: state.mediaMaker.verseTo,

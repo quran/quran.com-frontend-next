@@ -116,8 +116,8 @@ const MediaMaker: NextPage<MediaMaker> = ({
 
   const queryParams = {
     [QueryParam.SURAH]: String(surah),
-    [QueryParam.VERSE_FROM]: String(getVerseNumberFromKey(verseFrom)),
-    [QueryParam.VERSE_TO]: String(getVerseNumberFromKey(verseTo)),
+    [QueryParam.VERSE_FROM]: String(verseFrom),
+    [QueryParam.VERSE_TO]: String(verseTo),
     [QueryParam.RECITER]: String(reciter),
     [QueryParam.TRANSLATIONS]: String(translations),
     [QueryParam.BACKGROUND_COLOR]: backgroundColor,

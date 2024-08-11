@@ -15,18 +15,21 @@ import {
   selectQuranTextFontStyle,
   selectReciter,
   selectSurah,
+  selectSurahAndVersesFromAndTo,
   selectTranslationAlignment,
   selectTranslationFontScale,
   selectVerseAlignment,
-  selectVerseFrom,
-  selectVerseTo,
   selectVideoId,
 } from '@/redux/slices/mediaMaker';
 import { selectWordByWordLocale } from '@/redux/slices/QuranReader/readingPreferences';
 import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
 import ChaptersData from '@/types/ChaptersData';
 import { areArraysEqual } from '@/utils/array';
-import { getVerseValue, QueryParamsData } from '@/utils/media/utils';
+import {
+  getFirstAyahOfQueryParamOrReduxSurah,
+  isValidVerseToOrFrom,
+  QueryParamsData,
+} from '@/utils/media/utils';
 import {
   isQueryParamDifferentThanReduxValue,
   getQueryParamValueByType,
@@ -43,7 +46,7 @@ import {
   isValidTranslationsQueryParamValue,
   isValidVideoIdQueryParamValue,
 } from '@/utils/queryParamValidator';
-import { isValidChapterId, isValidVerseKey } from '@/utils/validator';
+import { isValidChapterId } from '@/utils/validator';
 import QueryParam from 'types/QueryParam';
 
 export const QUERY_PARAMS_DATA = {
@@ -60,21 +63,42 @@ export const QUERY_PARAMS_DATA = {
     isValidQueryParam: () => true,
   },
   [QueryParam.VERSE_TO]: {
-    reduxValueSelector: selectVerseTo,
+    reduxValueSelector: selectSurahAndVersesFromAndTo,
     reduxValueEqualityFunction: shallowEqual,
+    reduxObjectKey: QueryParam.VERSE_TO,
     queryParamValueType: QueryParamValueType.String,
-    isValidQueryParam: (val, chaptersData) => isValidVerseKey(chaptersData, val),
-    customParamValueGetter: (query, queryParam, chaptersData, surahReduxValue) => {
-      return getVerseValue(query, queryParam, chaptersData, QUERY_PARAMS_DATA, surahReduxValue);
+    isValidQueryParam: (
+      verseToQueryParamValue: string,
+      chaptersData: ChaptersData,
+      query,
+      surahAndVersesReduxValues,
+    ) => isValidVerseToOrFrom(QueryParam.VERSE_TO, chaptersData, surahAndVersesReduxValues, query),
+    customReduxValueGetterWhenParamIsInvalid: (surahAndVersesReduxValues: any, query) => {
+      return getFirstAyahOfQueryParamOrReduxSurah(
+        QUERY_PARAMS_DATA[QueryParam.SURAH],
+        surahAndVersesReduxValues,
+        query,
+      );
     },
   },
   [QueryParam.VERSE_FROM]: {
-    reduxValueSelector: selectVerseFrom,
+    reduxValueSelector: selectSurahAndVersesFromAndTo,
     reduxValueEqualityFunction: shallowEqual,
     queryParamValueType: QueryParamValueType.String,
-    isValidQueryParam: (val, chaptersData) => isValidVerseKey(chaptersData, val),
-    customParamValueGetter: (query, queryParam, chaptersData, surahReduxValue) => {
-      return getVerseValue(query, queryParam, chaptersData, QUERY_PARAMS_DATA, surahReduxValue);
+    reduxObjectKey: QueryParam.VERSE_FROM,
+    isValidQueryParam: (
+      verseFromQueryParamValue: string,
+      chaptersData: ChaptersData,
+      query,
+      surahAndVersesReduxValues,
+    ) =>
+      isValidVerseToOrFrom(QueryParam.VERSE_FROM, chaptersData, surahAndVersesReduxValues, query),
+    customReduxValueGetterWhenParamIsInvalid: (surahAndVersesReduxValues: any, query) => {
+      return getFirstAyahOfQueryParamOrReduxSurah(
+        QUERY_PARAMS_DATA[QueryParam.SURAH],
+        surahAndVersesReduxValues,
+        query,
+      );
     },
   },
   [QueryParam.RECITER]: {
@@ -192,31 +216,34 @@ const useGetQueryParamOrReduxValue = (
       QUERY_PARAMS_DATA[queryParam].reduxValueEqualityFunction,
     ];
   }
-  // @ts-ignore
-  const paramReduxValue = useSelector(...reduxValueSelectorWithOrWithoutEqualityFunction);
-  const surahReduxValue = useSelector(
-    QUERY_PARAMS_DATA[QueryParam.SURAH].reduxValueSelector,
-    QUERY_PARAMS_DATA[QueryParam.SURAH].reduxValueEqualityFunction,
+  const reduxSelectorValueOrValues = useSelector(
+    // @ts-ignore
+    ...reduxValueSelectorWithOrWithoutEqualityFunction,
   );
+  const {
+    queryParamValueType,
+    isValidQueryParam,
+    reduxObjectKey,
+    customReduxValueGetterWhenParamIsInvalid,
+  } = QUERY_PARAMS_DATA[queryParam];
+  const reduxParamValue = reduxObjectKey
+    ? reduxSelectorValueOrValues[reduxObjectKey]
+    : reduxSelectorValueOrValues;
   // if the param exists in the url
   if (isReady && query[queryParam] !== undefined) {
-    const { queryParamValueType, isValidQueryParam, customParamValueGetter } =
-      QUERY_PARAMS_DATA[queryParam];
     const queryParamStringValue = String(query[queryParam]);
     const isQueryParamDifferent = isQueryParamDifferentThanReduxValue(
       queryParamStringValue,
       queryParamValueType,
-      paramReduxValue,
+      reduxParamValue,
     );
 
-    if (customParamValueGetter) {
-      return {
-        value: customParamValueGetter(query, queryParam, chaptersData, surahReduxValue),
-        isQueryParamDifferent,
-      };
-    }
-
-    const isValidValue = isValidQueryParam(queryParamStringValue, chaptersData, query);
+    const isValidValue = isValidQueryParam(
+      queryParamStringValue,
+      chaptersData,
+      query,
+      reduxSelectorValueOrValues,
+    );
     const parsedQueryParamValue = getQueryParamValueByType(
       queryParamStringValue,
       queryParamValueType,
@@ -224,7 +251,13 @@ const useGetQueryParamOrReduxValue = (
 
     // if the url param is not valid, return the redux value
     if (!isValidValue) {
-      return { isQueryParamDifferent: false, value: paramReduxValue };
+      if (customReduxValueGetterWhenParamIsInvalid) {
+        return {
+          isQueryParamDifferent: false,
+          value: customReduxValueGetterWhenParamIsInvalid(reduxSelectorValueOrValues, query),
+        };
+      }
+      return { isQueryParamDifferent: false, value: reduxParamValue };
     }
 
     return {
@@ -234,7 +267,7 @@ const useGetQueryParamOrReduxValue = (
   }
 
   return {
-    value: paramReduxValue,
+    value: reduxParamValue,
     isQueryParamDifferent: false,
   };
 };
