@@ -58,6 +58,7 @@ const TextBackgroundSettings: React.FC<Props> = ({
 
         <div className={(styles.counterContainer, styles.opacityCounter)}>
           <Counter
+            isPercent
             count={opacity}
             onDecrement={opacity === MINIMUM_OPACITY ? null : onOpacityDecreaseClicked}
             onIncrement={opacity === MAXIMUM_OPACITY ? null : onOpacityIncreaseClicked}
