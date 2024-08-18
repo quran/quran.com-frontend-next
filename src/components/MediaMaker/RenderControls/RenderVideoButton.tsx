@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
@@ -11,6 +11,7 @@ import { RenderStatus, useGenerateMediaFile } from '@/hooks/auth/media/useGenera
 import useGetMediaFilesCount from '@/hooks/auth/media/useGetMediaFilesCount';
 import IconDownload from '@/icons/download.svg';
 import { MediaType } from '@/types/Media/GenerateMediaFileRequest';
+import MediaRenderError from '@/types/Media/MediaRenderError';
 import { isLoggedIn } from '@/utils/auth/login';
 import { logButtonClick } from '@/utils/eventLogger';
 import { mutateGeneratedMediaCounter } from '@/utils/media/utils';
@@ -27,6 +28,7 @@ const RenderVideoButton: React.FC<Props> = ({ inputProps, isFetching }) => {
   const { data, mutate } = useGetMediaFilesCount(MediaType.VIDEO);
   const downloadButtonRef = React.useRef<HTMLParagraphElement>();
   const router = useRouter();
+  const [isLimitExceeded, setIsLimitExceeded] = useState(false);
 
   const onRenderClicked = () => {
     logButtonClick('render_video');
@@ -51,7 +53,14 @@ const RenderVideoButton: React.FC<Props> = ({ inputProps, isFetching }) => {
       // download the file by clicking the download button
       downloadButtonRef.current.click();
     }
-  }, [mutate, state?.status]);
+
+    if (
+      state?.status === RenderStatus.ERROR &&
+      state?.errorDetails?.code === MediaRenderError.MediaFilesPerUserLimitExceeded
+    ) {
+      setIsLimitExceeded(true);
+    }
+  }, [mutate, state]);
 
   const isInitOrInvokingOrError = [
     RenderStatus.INIT,
@@ -74,8 +83,12 @@ const RenderVideoButton: React.FC<Props> = ({ inputProps, isFetching }) => {
             >
               {t('download-video')}
             </Button>
-            {state.status === RenderStatus.ERROR && (
-              <div>{state?.error?.message || t('common:error.general')}</div>
+            {state.status === RenderStatus.ERROR && !isLimitExceeded && (
+              <div>
+                {state?.errorDetails?.code === MediaRenderError.MediaVersesRangeLimitExceeded
+                  ? state?.error?.message
+                  : t('common:error.general')}
+              </div>
             )}
           </>
         )}
@@ -95,7 +108,7 @@ const RenderVideoButton: React.FC<Props> = ({ inputProps, isFetching }) => {
           </>
         )}
       </div>
-      <MonthlyMediaFileCounter data={data?.data} />
+      <MonthlyMediaFileCounter isLimitExceeded={isLimitExceeded} data={data?.data} />
     </div>
   );
 };
