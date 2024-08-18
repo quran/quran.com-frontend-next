@@ -281,3 +281,15 @@ export const isValidVerseToOrFrom = (
   }
   return isValidValue && isValidVerseTo(verseFromKey, verseToKey, versesCount, surahID);
 };
+
+/**
+ * This function will make sure the string passed is a valid hex color
+ *
+ * @param {string} color
+ * @returns {boolean}
+ */
+export const isValidHexColor = (color: string) => {
+  // Regular expression to match a valid hex color
+  const hexPattern = /^#([A-Fa-f0-9]{3}|[A-Fa-f0-9]{6})$/;
+  return hexPattern.test(color);
+};
