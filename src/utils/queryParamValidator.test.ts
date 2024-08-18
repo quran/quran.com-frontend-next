@@ -18,6 +18,29 @@ import {
   isValidFontStyleQueryParamValue,
 } from './queryParamValidator';
 
+import Reciter from '@/types/Reciter';
+
+const reciters = [
+  {
+    id: 7,
+    reciterId: 6,
+    name: 'Mishari Rashid al-`Afasy',
+    translatedName: {
+      name: 'Mishari Rashid al-`Afasy',
+      languageName: 'english',
+    },
+    style: {
+      name: 'Murattal',
+      languageName: 'english',
+      description: 'Murattal is Quranic recitation at a slower pace, used for study and practice.',
+    },
+    qirat: {
+      name: 'Hafs',
+      languageName: 'english',
+    },
+  },
+] as Reciter[];
+
 describe('isValidTranslationsQueryParamValue', () => {
   it('Returns false when empty', () => {
     expect(isValidTranslationsQueryParamValue('')).toBe(true);
@@ -47,13 +70,13 @@ describe('isValidTranslationsQueryParamValue', () => {
 
 describe('isValidReciterId', () => {
   it('Returns false when empty', () => {
-    expect(isValidReciterId('')).toBe(false);
+    expect(isValidReciterId('', reciters)).toBe(false);
   });
   it('Returns true when a valid reciter id exists', () => {
-    expect(isValidReciterId('124')).toBe(true);
+    expect(isValidReciterId('7', reciters)).toBe(true);
   });
   it('Returns false when 1 invalid reciter id exists', () => {
-    expect(isValidReciterId('sdfsdfdf')).toBe(false);
+    expect(isValidReciterId('sdfsdfdf', reciters)).toBe(false);
   });
 });
 

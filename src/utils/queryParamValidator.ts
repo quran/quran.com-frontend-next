@@ -35,7 +35,7 @@ export const isValidTranslationsQueryParamValue = (value: string): boolean => {
  * @returns {boolean}
  */
 export const isValidReciterId = (value: string, reciters: Reciter[]): boolean => {
-  const isValidReciter = reciters.some((reciter) => reciter.id === Number(value));
+  const isValidReciter = reciters?.some((reciter) => reciter.id === Number(value));
   // if it's empty string, we shouldn't consider it as a valid reciter id
   if (!value) {
     return false;
