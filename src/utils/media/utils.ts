@@ -18,6 +18,7 @@ import GenerateMediaFileRequest, {
 } from '@/types/Media/GenerateMediaFileRequest';
 import Orientation from '@/types/Media/Orientation';
 import QueryParam from '@/types/QueryParam';
+import Reciter from '@/types/Reciter';
 import VerseTiming from '@/types/VerseTiming';
 import {
   BACKGROUND_VIDEOS,
@@ -187,11 +188,12 @@ export type QueryParamsData = Record<
       chaptersData?: ChaptersData,
       query?: ParsedUrlQuery,
       reduxSelectorValueOrValues?: any,
+      reciters?: Reciter[],
     ) => boolean;
     reduxObjectKey?: string; // if the value coming from redux is an object and not a single key
     customReduxValueGetterWhenParamIsInvalid?: <T>(
-      reduxSelectorValueOrValues: T,
-      reduxParamValue: any,
+      reduxSelectorValueOrValues?: T,
+      reduxParamValue?: any,
     ) => any; // will be used if we don't want to use the default redux value but rather provide a custom value instead
   }
 >;

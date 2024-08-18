@@ -28,6 +28,7 @@ import Error from '@/pages/_error';
 import layoutStyles from '@/pages/index.module.scss';
 import AudioData from '@/types/AudioData';
 import QueryParam from '@/types/QueryParam';
+import Reciter from '@/types/Reciter';
 import { makeChapterAudioDataUrl, makeVersesUrl } from '@/utils/apiPaths';
 import { areArraysEqual } from '@/utils/array';
 import { getAllChaptersData } from '@/utils/chapter';
@@ -58,7 +59,7 @@ import ChaptersData from 'types/ChaptersData';
 interface MediaMaker {
   juzVerses?: VersesResponse;
   hasError?: boolean;
-  reciters: any;
+  reciters: Reciter[];
   verses: any;
   audio: any;
   chaptersData: ChaptersData;
@@ -74,7 +75,7 @@ const MediaMaker: NextPage<MediaMaker> = ({
   audio: defaultAudio,
 }) => {
   const { t, lang } = useTranslation('common');
-  const mediaSettings = useGetMediaSettings();
+  const mediaSettings = useGetMediaSettings(reciters);
   const [isReady, setIsReady] = useState(false);
   const [videoFileReady, setVideoFileReady] = useState(false);
   const [audioFileReady, setAudioFileReady] = useState(false);

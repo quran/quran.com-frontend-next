@@ -2,6 +2,8 @@ import Alignment from '../../types/Media/Alignment';
 import Orientation from '../../types/Media/Orientation';
 import QuranFont from '../../types/Media/QuranFont';
 
+import Reciter from '@/types/Reciter';
+
 export const isValidTranslationsQueryParamValue = (value: string): boolean => {
   const translationIds = value === '' ? [] : value.split(',');
   let isValid = true;
@@ -32,13 +34,17 @@ export const isValidTranslationsQueryParamValue = (value: string): boolean => {
  * @param {string} value
  * @returns {boolean}
  */
-export const isValidReciterId = (value: string): boolean => {
+export const isValidReciterId = (value: string, reciters: Reciter[]): boolean => {
+  const isValidReciter = reciters.some((reciter) => reciter.id === Number(value));
   // if it's empty string, we shouldn't consider it as a valid reciter id
   if (!value) {
     return false;
   }
   const reciterId = Number(value);
   if (reciterId === 0 || Number.isNaN(reciterId)) {
+    return false;
+  }
+  if (!isValidReciter) {
     return false;
   }
   return true;

@@ -24,7 +24,9 @@ import {
 import { selectWordByWordLocale } from '@/redux/slices/QuranReader/readingPreferences';
 import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
 import ChaptersData from '@/types/ChaptersData';
+import Reciter from '@/types/Reciter';
 import { areArraysEqual } from '@/utils/array';
+import { DEFAULT_RECITER_ID } from '@/utils/media/constants';
 import {
   getFirstAyahOfQueryParamOrReduxSurah,
   isValidVerseToOrFrom,
@@ -105,7 +107,11 @@ export const QUERY_PARAMS_DATA = {
     reduxValueSelector: selectReciter,
     reduxValueEqualityFunction: shallowEqual,
     queryParamValueType: QueryParamValueType.Number,
-    isValidQueryParam: (val) => isValidReciterId(val),
+    isValidQueryParam: (val, chaptersData, query, surahAndVersesReduxValues, reciters) =>
+      isValidReciterId(val, reciters),
+    customReduxValueGetterWhenParamIsInvalid: () => {
+      return DEFAULT_RECITER_ID;
+    },
   },
   [QueryParam.QURAN_TEXT_FONT_SCALE]: {
     reduxValueSelector: selectQuranTextFontScale,
@@ -202,6 +208,7 @@ export const getQueryParamsData = () => {
 const useGetQueryParamOrReduxValue = (
   queryParam: QueryParam,
   chaptersData?: ChaptersData,
+  reciters?: Reciter[],
 ): { value: any; isQueryParamDifferent: boolean } => {
   const { query, isReady } = useRouter();
 
@@ -243,6 +250,7 @@ const useGetQueryParamOrReduxValue = (
       chaptersData,
       query,
       reduxSelectorValueOrValues,
+      reciters,
     );
     const parsedQueryParamValue = getQueryParamValueByType(
       queryParamStringValue,
