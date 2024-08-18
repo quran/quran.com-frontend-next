@@ -117,7 +117,7 @@ const ProfileAvatarButton = () => {
           {t('reading-history')}
         </PopoverMenu.Item>
         <PopoverMenu.Item onClick={onNotesClicked} icon={<NotesIcon />}>
-          {t('notes.title')} <NewLabel />
+          {t('notes.title')}
         </PopoverMenu.Item>
         <PopoverMenu.Item onClick={onMyCoursesClicked} icon={<ReaderIcon />}>
           {t('my-learning-plans')}
