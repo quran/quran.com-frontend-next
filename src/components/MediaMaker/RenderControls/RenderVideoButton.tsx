@@ -25,6 +25,7 @@ const RenderVideoButton: React.FC<Props> = ({ inputProps, isFetching }) => {
   const { t } = useTranslation('quran-media-maker');
   const { renderMedia, state } = useGenerateMediaFile(inputProps);
   const { data, mutate } = useGetMediaFilesCount(MediaType.VIDEO);
+  const downloadButtonRef = React.useRef<HTMLParagraphElement>();
   const router = useRouter();
 
   const onRenderClicked = () => {
@@ -44,6 +45,11 @@ const RenderVideoButton: React.FC<Props> = ({ inputProps, isFetching }) => {
   useEffect(() => {
     if (state?.status === RenderStatus.RENDERING) {
       mutate(mutateGeneratedMediaCounter, { revalidate: false });
+    }
+    // listen to state changes and download the file when it's done
+    if (state?.status === RenderStatus.DONE) {
+      // download the file by clicking the download button
+      downloadButtonRef.current.click();
     }
   }, [mutate, state?.status]);
 
@@ -84,7 +90,7 @@ const RenderVideoButton: React.FC<Props> = ({ inputProps, isFetching }) => {
               href={state.status === RenderStatus.DONE ? state.url : ''}
               onClick={onDownloadClicked}
             >
-              {t('download-video')}
+              <p ref={downloadButtonRef}>{t('download-video')}</p>
             </Button>
           </>
         )}
