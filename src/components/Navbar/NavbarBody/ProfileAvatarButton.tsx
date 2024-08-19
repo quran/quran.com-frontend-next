@@ -5,7 +5,6 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from './ProfileAvatarButton.module.scss';
 
-import NewLabel from '@/dls/Badge/NewLabel';
 import Button, { ButtonShape, ButtonVariant } from '@/dls/Button/Button';
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import ClockIcon from '@/icons/clock.svg';
@@ -21,12 +20,12 @@ import { isLoggedIn } from '@/utils/auth/login';
 import { removeLastSyncAt } from '@/utils/auth/userDataSync';
 import { logButtonClick } from '@/utils/eventLogger';
 import {
-  getNotesNavigationUrl,
+  getLoginNavigationUrl,
   getMyCoursesNavigationUrl,
-  getReadingGoalProgressNavigationUrl,
+  getNotesNavigationUrl,
   getNotificationSettingsNavigationUrl,
   getProfileNavigationUrl,
-  getLoginNavigationUrl,
+  getReadingGoalProgressNavigationUrl,
 } from '@/utils/navigation';
 
 const ProfileAvatarButton = () => {
