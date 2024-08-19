@@ -26,7 +26,12 @@ import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translati
 import ChaptersData from '@/types/ChaptersData';
 import Reciter from '@/types/Reciter';
 import { areArraysEqual } from '@/utils/array';
-import { DEFAULT_BACKGROUND_COLOR, DEFAULT_RECITER_ID } from '@/utils/media/constants';
+import {
+  DEFAULT_BACKGROUND_COLOR,
+  DEFAULT_BORDER_COLOR,
+  DEFAULT_FONT_COLOR,
+  DEFAULT_RECITER_ID,
+} from '@/utils/media/constants';
 import {
   getFirstAyahOfQueryParamOrReduxSurah,
   isValidHexColor,
@@ -166,7 +171,10 @@ export const QUERY_PARAMS_DATA = {
     reduxValueSelector: selectFontColor,
     reduxValueEqualityFunction: shallowEqual,
     queryParamValueType: QueryParamValueType.String,
-    isValidQueryParam: () => true,
+    isValidQueryParam: (val) => isValidHexColor(val),
+    customReduxValueGetterWhenParamIsInvalid: () => {
+      return DEFAULT_FONT_COLOR;
+    },
   },
   [QueryParam.BACKGROUND_COLOR]: {
     reduxValueSelector: selectBackgroundColor,
@@ -181,7 +189,10 @@ export const QUERY_PARAMS_DATA = {
     reduxValueSelector: selectBorderColor,
     reduxValueEqualityFunction: shallowEqual,
     queryParamValueType: QueryParamValueType.String,
-    isValidQueryParam: () => true,
+    isValidQueryParam: (val) => isValidHexColor(val),
+    customReduxValueGetterWhenParamIsInvalid: () => {
+      return DEFAULT_BORDER_COLOR;
+    },
   },
   [QueryParam.BORDER_SIZE]: {
     reduxValueSelector: selectBorderSize,
