@@ -41,7 +41,6 @@ const useGetMediaSettings = (
   const { value: translations }: { value: number[] } = useGetQueryParamOrReduxValue(
     QueryParam.TRANSLATIONS,
     null,
-    null,
     translationsData,
   );
   const { value: backgroundColor }: { value: string } = useGetQueryParamOrReduxValue(

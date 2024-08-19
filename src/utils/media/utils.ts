@@ -11,7 +11,6 @@ import { getNormalizedIntervals } from './helpers';
 
 import { RootState } from '@/redux/RootState';
 import AudioData from '@/types/AudioData';
-import AvailableTranslation from '@/types/AvailableTranslation';
 import ChaptersData from '@/types/ChaptersData';
 import GenerateMediaFileRequest, {
   MediaType,
@@ -19,7 +18,6 @@ import GenerateMediaFileRequest, {
 } from '@/types/Media/GenerateMediaFileRequest';
 import Orientation from '@/types/Media/Orientation';
 import QueryParam from '@/types/QueryParam';
-import Reciter from '@/types/Reciter';
 import VerseTiming from '@/types/VerseTiming';
 import {
   BACKGROUND_VIDEOS,
@@ -189,8 +187,7 @@ export type QueryParamsData = Record<
       chaptersData?: ChaptersData,
       query?: ParsedUrlQuery,
       reduxSelectorValueOrValues?: any,
-      reciters?: Reciter[],
-      translationsData?: AvailableTranslation[],
+      extraData?: any,
     ) => boolean;
     reduxObjectKey?: string; // if the value coming from redux is an object and not a single key
     customReduxValueGetterWhenParamIsInvalid?: <T>(

@@ -35,8 +35,11 @@ export const isValidTranslationsQueryParamValueWithExistingKey = (
   const translationIds = value === '' ? [] : value.split(',');
   const translationsDataIds = translationsData?.map((translation) => translation.id);
   const allIdsExist = translationIds.every((id) => translationsDataIds.includes(Number(id)));
+  if (!allIdsExist) {
+    return false;
+  }
   const isValidValue = isValidTranslationsQueryParamValue(value);
-  if (!allIdsExist || !isValidValue) {
+  if (!isValidValue) {
     return false;
   }
 
