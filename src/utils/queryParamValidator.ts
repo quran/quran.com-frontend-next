@@ -2,6 +2,7 @@ import Alignment from '../../types/Media/Alignment';
 import Orientation from '../../types/Media/Orientation';
 import QuranFont from '../../types/Media/QuranFont';
 
+import AvailableTranslation from '@/types/AvailableTranslation';
 import Reciter from '@/types/Reciter';
 
 export const isValidTranslationsQueryParamValue = (value: string): boolean => {
@@ -25,6 +26,21 @@ export const isValidTranslationsQueryParamValue = (value: string): boolean => {
     }
   }
   return isValid;
+};
+
+export const isValidTranslationsQueryParamValueWithExistingKey = (
+  value: string,
+  translationsData?: AvailableTranslation[],
+): boolean => {
+  const translationIds = value === '' ? [] : value.split(',');
+  const translationsDataIds = translationsData?.map((translation) => translation.id);
+  const allIdsExist = translationIds.every((id) => translationsDataIds.includes(Number(id)));
+  const isValidValue = isValidTranslationsQueryParamValue(value);
+  if (!allIdsExist || !isValidValue) {
+    return false;
+  }
+
+  return true;
 };
 
 /**

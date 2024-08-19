@@ -16,7 +16,12 @@ import {
 } from 'remotion';
 import useSWRImmutable from 'swr/immutable';
 
-import { getAvailableReciters, getChapterAudioData, getChapterVerses } from '@/api';
+import {
+  getAvailableReciters,
+  getAvailableTranslations,
+  getChapterAudioData,
+  getChapterVerses,
+} from '@/api';
 import styles from '@/components/MediaMaker/MediaMaker.module.scss';
 import VideoSettings from '@/components/MediaMaker/Settings/VideoSettings';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
@@ -29,6 +34,7 @@ import layoutStyles from '@/pages/index.module.scss';
 import AudioData from '@/types/AudioData';
 import QueryParam from '@/types/QueryParam';
 import Reciter from '@/types/Reciter';
+import Translation from '@/types/Translation';
 import { makeChapterAudioDataUrl, makeVersesUrl } from '@/utils/apiPaths';
 import { areArraysEqual } from '@/utils/array';
 import { getAllChaptersData } from '@/utils/chapter';
@@ -60,6 +66,7 @@ interface MediaMaker {
   juzVerses?: VersesResponse;
   hasError?: boolean;
   reciters: Reciter[];
+  translationsData: Translation[];
   verses: any;
   audio: any;
   chaptersData: ChaptersData;
@@ -73,9 +80,10 @@ const MediaMaker: NextPage<MediaMaker> = ({
   reciters,
   verses: defaultVerses,
   audio: defaultAudio,
+  translationsData,
 }) => {
   const { t, lang } = useTranslation('common');
-  const mediaSettings = useGetMediaSettings(reciters);
+  const mediaSettings = useGetMediaSettings(reciters, translationsData);
   const [isReady, setIsReady] = useState(false);
   const [videoFileReady, setVideoFileReady] = useState(false);
   const [audioFileReady, setAudioFileReady] = useState(false);
@@ -423,6 +431,7 @@ const MediaMaker: NextPage<MediaMaker> = ({
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   try {
     const { reciters } = await getAvailableReciters(locale, []);
+    const { translations } = await getAvailableTranslations(locale);
     const chaptersData = await getAllChaptersData(locale);
     const englishChaptersList = await getAllChaptersData('en');
     const verses = await getChapterVerses(DEFAULT_SURAH, locale, DEFAULT_API_PARAMS);
@@ -435,6 +444,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
         chaptersData,
         englishChaptersList,
         reciters: reciters || [],
+        translationsData: translations || [],
       },
       revalidate: ONE_MONTH_REVALIDATION_PERIOD_SECONDS,
     };

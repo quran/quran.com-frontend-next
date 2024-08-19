@@ -6,7 +6,7 @@ import Orientation from '../../types/Media/Orientation';
 import { QuranFont } from '../../types/QuranReader';
 
 import {
-  isValidTranslationsQueryParamValue,
+  isValidTranslationsQueryParamValueWithExistingKey,
   isValidReciterId,
   isValidBooleanQueryParamValue,
   isValidNumberQueryParamValue,
@@ -18,6 +18,7 @@ import {
   isValidFontStyleQueryParamValue,
 } from './queryParamValidator';
 
+import AvailableTranslation from '@/types/AvailableTranslation';
 import Reciter from '@/types/Reciter';
 
 const reciters = [
@@ -41,30 +42,46 @@ const reciters = [
   },
 ] as Reciter[];
 
-describe('isValidTranslationsQueryParamValue', () => {
+const translations = [
+  {
+    id: 131,
+    name: 'Dr. Mustafa Khattab, The Clear Quran',
+    authorName: 'Dr. Mustafa Khattab',
+    slug: 'clearquran-with-tafsir',
+    languageName: 'english',
+    translatedName: {
+      name: 'Dr. Mustafa Khattab',
+      languageName: 'english',
+    },
+  },
+] as AvailableTranslation[];
+
+describe('isValidTranslationsQueryParamValueWithExistingKey', () => {
   it('Returns false when empty', () => {
-    expect(isValidTranslationsQueryParamValue('')).toBe(true);
+    expect(isValidTranslationsQueryParamValueWithExistingKey('', translations)).toBe(true);
   });
   it('Returns true when 1 valid translation id exists', () => {
-    expect(isValidTranslationsQueryParamValue('124')).toBe(true);
+    expect(isValidTranslationsQueryParamValueWithExistingKey('124', translations)).toBe(true);
   });
   it('Returns false when 1 invalid translation id exists', () => {
-    expect(isValidTranslationsQueryParamValue('sdfsdfdf')).toBe(false);
+    expect(isValidTranslationsQueryParamValueWithExistingKey('sdfsdfdf', translations)).toBe(false);
   });
   it('Returns false when 1 invalid translation id and 1 empty id exist', () => {
-    expect(isValidTranslationsQueryParamValue('sdfsdf,')).toBe(false);
+    expect(isValidTranslationsQueryParamValueWithExistingKey('sdfsdf,', translations)).toBe(false);
   });
   it('Returns false when 1 valid id and 1 empty id exist', () => {
-    expect(isValidTranslationsQueryParamValue('123,')).toBe(false);
+    expect(isValidTranslationsQueryParamValueWithExistingKey('123,', translations)).toBe(false);
   });
   it('Returns false when 2 valid ids and 1 empty id exist', () => {
-    expect(isValidTranslationsQueryParamValue('151,54,')).toBe(false);
+    expect(isValidTranslationsQueryParamValueWithExistingKey('151,54,', translations)).toBe(false);
   });
   it('Returns true when 2 valid translation id exist', () => {
-    expect(isValidTranslationsQueryParamValue('123,444')).toBe(true);
+    expect(isValidTranslationsQueryParamValueWithExistingKey('123,444', translations)).toBe(true);
   });
   it('Returns false when one of many ids is not valid', () => {
-    expect(isValidTranslationsQueryParamValue('123,sdfsdf,1234')).toBe(false);
+    expect(isValidTranslationsQueryParamValueWithExistingKey('123,sdfsdf,1234', translations)).toBe(
+      false,
+    );
   });
 });
 

@@ -2,6 +2,7 @@ import { useContext, useMemo } from 'react';
 
 import DataContext from '@/contexts/DataContext';
 import useGetQueryParamOrReduxValue from '@/hooks/useGetQueryParamOrReduxValue';
+import AvailableTranslation from '@/types/AvailableTranslation';
 import Alignment from '@/types/Media/Alignment';
 import MediaSettings from '@/types/Media/MediaSettings';
 import Orientation from '@/types/Media/Orientation';
@@ -9,7 +10,10 @@ import QueryParam from '@/types/QueryParam';
 import { QuranFont } from '@/types/QuranReader';
 import Reciter from '@/types/Reciter';
 
-const useGetMediaSettings = (reciters: Reciter[]): MediaSettings => {
+const useGetMediaSettings = (
+  reciters: Reciter[],
+  translationsData: AvailableTranslation[],
+): MediaSettings => {
   const chaptersData = useContext(DataContext);
   const { value: verseTo }: { value: string } = useGetQueryParamOrReduxValue(
     QueryParam.VERSE_TO,
@@ -36,6 +40,9 @@ const useGetMediaSettings = (reciters: Reciter[]): MediaSettings => {
   );
   const { value: translations }: { value: number[] } = useGetQueryParamOrReduxValue(
     QueryParam.TRANSLATIONS,
+    null,
+    null,
+    translationsData,
   );
   const { value: backgroundColor }: { value: string } = useGetQueryParamOrReduxValue(
     QueryParam.BACKGROUND_COLOR,

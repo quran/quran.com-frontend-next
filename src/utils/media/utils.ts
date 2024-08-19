@@ -11,6 +11,7 @@ import { getNormalizedIntervals } from './helpers';
 
 import { RootState } from '@/redux/RootState';
 import AudioData from '@/types/AudioData';
+import AvailableTranslation from '@/types/AvailableTranslation';
 import ChaptersData from '@/types/ChaptersData';
 import GenerateMediaFileRequest, {
   MediaType,
@@ -189,6 +190,7 @@ export type QueryParamsData = Record<
       query?: ParsedUrlQuery,
       reduxSelectorValueOrValues?: any,
       reciters?: Reciter[],
+      translationsData?: AvailableTranslation[],
     ) => boolean;
     reduxObjectKey?: string; // if the value coming from redux is an object and not a single key
     customReduxValueGetterWhenParamIsInvalid?: <T>(

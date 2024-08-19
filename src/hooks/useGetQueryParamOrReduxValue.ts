@@ -4,6 +4,7 @@
 import { useRouter } from 'next/router';
 import { shallowEqual, useSelector } from 'react-redux';
 
+import { DEFAULT_TRANSLATIONS } from '@/redux/defaultSettings/defaultSettings';
 import {
   selectBackgroundColor,
   selectBorderColor,
@@ -23,6 +24,7 @@ import {
 } from '@/redux/slices/mediaMaker';
 import { selectWordByWordLocale } from '@/redux/slices/QuranReader/readingPreferences';
 import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
+import AvailableTranslation from '@/types/AvailableTranslation';
 import ChaptersData from '@/types/ChaptersData';
 import Reciter from '@/types/Reciter';
 import { areArraysEqual } from '@/utils/array';
@@ -51,7 +53,7 @@ import {
   isValidOpacityQueryParamValue,
   isValidOrientationQueryParamValue,
   isValidReciterId,
-  isValidTranslationsQueryParamValue,
+  isValidTranslationsQueryParamValueWithExistingKey,
   isValidVideoIdQueryParamValue,
 } from '@/utils/queryParamValidator';
 import { isValidChapterId } from '@/utils/validator';
@@ -62,7 +64,17 @@ export const QUERY_PARAMS_DATA = {
     reduxValueSelector: selectSelectedTranslations,
     reduxValueEqualityFunction: areArraysEqual,
     queryParamValueType: QueryParamValueType.ArrayOfNumbers,
-    isValidQueryParam: (val) => isValidTranslationsQueryParamValue(val),
+    isValidQueryParam: (
+      val,
+      chaptersData,
+      query,
+      surahAndVersesReduxValues,
+      reciters,
+      translations,
+    ) => isValidTranslationsQueryParamValueWithExistingKey(val, translations),
+    customReduxValueGetterWhenParamIsInvalid: () => {
+      return DEFAULT_TRANSLATIONS;
+    },
   },
   [QueryParam.WBW_LOCALE]: {
     reduxValueSelector: selectWordByWordLocale,
@@ -224,6 +236,7 @@ const useGetQueryParamOrReduxValue = (
   queryParam: QueryParam,
   chaptersData?: ChaptersData,
   reciters?: Reciter[],
+  translations?: AvailableTranslation[],
 ): { value: any; isQueryParamDifferent: boolean } => {
   const { query, isReady } = useRouter();
 
@@ -266,6 +279,7 @@ const useGetQueryParamOrReduxValue = (
       query,
       reduxSelectorValueOrValues,
       reciters,
+      translations,
     );
     const parsedQueryParamValue = getQueryParamValueByType(
       queryParamStringValue,
