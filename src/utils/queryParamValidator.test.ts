@@ -23,7 +23,7 @@ import Reciter from '@/types/Reciter';
 const reciters = [
   {
     id: 7,
-    reciterId: 6,
+    reciterId: 1,
     name: 'Mishari Rashid al-`Afasy',
     translatedName: {
       name: 'Mishari Rashid al-`Afasy',
