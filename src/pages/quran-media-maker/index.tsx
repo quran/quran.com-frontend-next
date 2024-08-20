@@ -33,8 +33,10 @@ import Error from '@/pages/_error';
 import layoutStyles from '@/pages/index.module.scss';
 import AudioData from '@/types/AudioData';
 import QueryParam from '@/types/QueryParam';
+import { MushafLines, QuranFont } from '@/types/QuranReader';
 import Reciter from '@/types/Reciter';
 import Translation from '@/types/Translation';
+import { getMushafId } from '@/utils/api';
 import { makeChapterAudioDataUrl, makeVersesUrl } from '@/utils/apiPaths';
 import { areArraysEqual } from '@/utils/array';
 import { getAllChaptersData } from '@/utils/chapter';
@@ -42,6 +44,7 @@ import { isAppleWebKit, isSafari } from '@/utils/device-detector';
 import { getLanguageAlternates, toLocalizedNumber } from '@/utils/locale';
 import {
   DEFAULT_API_PARAMS,
+  DEFAULT_QURAN_FONT_STYLE,
   DEFAULT_RECITER_ID,
   DEFAULT_SURAH,
   VIDEO_FPS,
@@ -166,8 +169,12 @@ const MediaMaker: NextPage<MediaMaker> = ({
       to: verseTo,
       // the number of verses of the range
       perPage: getVerseNumberFromKey(verseTo) - getVerseNumberFromKey(verseFrom) + 1,
+      mushaf: getMushafId(
+        quranTextFontStyle,
+        quranTextFontStyle === QuranFont.IndoPak ? MushafLines.SixteenLines : null,
+      ).mushaf,
     };
-  }, [translations, verseFrom, verseTo]);
+  }, [quranTextFontStyle, translations, verseFrom, verseTo]);
 
   const shouldRefetchVersesData = useMemo(() => {
     /**
@@ -177,14 +184,16 @@ const MediaMaker: NextPage<MediaMaker> = ({
      * 2. Range start Ayah changed
      * 3. Range end Ayah changed
      * 4. Reciter changes
+     * 4. Font changes
      */
     return (
       !areArraysEqual(translations, DEFAULT_API_PARAMS.translations) ||
       verseFrom !== `${DEFAULT_SURAH}:1` ||
       verseTo !== `${DEFAULT_SURAH}:1` ||
-      Number(reciter) !== DEFAULT_RECITER_ID
+      Number(reciter) !== DEFAULT_RECITER_ID ||
+      quranTextFontStyle !== DEFAULT_QURAN_FONT_STYLE
     );
-  }, [translations, verseFrom, verseTo, reciter]);
+  }, [translations, verseFrom, verseTo, reciter, quranTextFontStyle]);
 
   const {
     data: verseData,

@@ -154,13 +154,7 @@ const MediaMakerContent: React.FC<Props> = ({
                     [styles.uthmaniFont]: quranTextFontStyle === QuranFont.QPCHafs,
                   })}
                 >
-                  {verse.words
-                    .map((word) =>
-                      quranTextFontStyle === QuranFont.QPCHafs
-                        ? word.qpcUthmaniHafs
-                        : word.textIndopak,
-                    )
-                    .join(' ')}
+                  {verse.words.map((word) => word.text).join(' ')}
                 </div>
 
                 {verse.translations?.map((translation: Translation) => (
