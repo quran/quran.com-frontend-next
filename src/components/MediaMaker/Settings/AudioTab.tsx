@@ -17,6 +17,7 @@ import Separator from '@/dls/Separator/Separator';
 import MediaSettings, { ChangedSettings } from '@/types/Media/MediaSettings';
 import Reciter from '@/types/Reciter';
 import { toLocalizedVerseKey } from '@/utils/locale';
+import { MAX_AYAHS_LIMIT } from '@/utils/validator';
 import { generateChapterVersesKeys, getVerseNumberFromKey } from '@/utils/verse';
 
 type AudioTabProps = {
@@ -80,7 +81,7 @@ const AudioTab: FC<AudioTabProps> = ({
       return false;
     }
     if (isVerseKeyStartOfRange) {
-      const isMaxAyahs = Number(verseTo) - Number(newSelectedVerseNumber) >= 10;
+      const isMaxAyahs = Number(verseTo) - Number(newSelectedVerseNumber) >= MAX_AYAHS_LIMIT;
 
       onSettingsUpdate(
         {
@@ -92,7 +93,7 @@ const AudioTab: FC<AudioTabProps> = ({
         newSelectedVerseNumber,
       );
     } else {
-      const isMaxAyahs = Number(newSelectedVerseNumber) - Number(verseFrom) >= 10;
+      const isMaxAyahs = Number(newSelectedVerseNumber) - Number(verseFrom) >= MAX_AYAHS_LIMIT;
 
       onSettingsUpdate(
         {
