@@ -7,6 +7,7 @@ import styles from '../MediaMaker.module.scss';
 import BackgroundVideos from './BackgroundVideos';
 import OrientationSettings from './OrientationSettings';
 
+import Separator from '@/dls/Separator/Separator';
 import MediaSettings, { ChangedSettings } from '@/types/Media/MediaSettings';
 
 type BackgroundTabProps = {
@@ -22,7 +23,9 @@ const BackgroundTab: FC<BackgroundTabProps> = ({ mediaSettings, onSettingsUpdate
         <div className={styles.sectionTitle}>{t('video-picker')}</div>
         <BackgroundVideos videoId={mediaSettings.videoId} onSettingsUpdate={onSettingsUpdate} />
       </div>
-
+      <div className={styles.separatorContainer}>
+        <Separator isVertical />
+      </div>
       <OrientationSettings
         orientation={mediaSettings.orientation}
         onSettingsUpdate={onSettingsUpdate}

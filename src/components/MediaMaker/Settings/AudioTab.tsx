@@ -13,6 +13,7 @@ import { RangeSelectorType } from '@/components/Verse/AdvancedCopy/SelectorConta
 import validateRangeSelection from '@/components/Verse/AdvancedCopy/utils/validateRangeSelection';
 import DataContext from '@/contexts/DataContext';
 import Select, { SelectSize } from '@/dls/Forms/Select';
+import Separator from '@/dls/Separator/Separator';
 import MediaSettings, { ChangedSettings } from '@/types/Media/MediaSettings';
 import Reciter from '@/types/Reciter';
 import { toLocalizedVerseKey } from '@/utils/locale';
@@ -136,12 +137,17 @@ const AudioTab: FC<AudioTabProps> = ({
         {rangesError && <div className={styles.error}>{rangesError}</div>}
       </div>
 
+      <div className={styles.separatorContainer}>
+        <Separator isVertical />
+      </div>
       <ReciterSettings
         reciter={mediaSettings.reciter}
         onSettingsUpdate={onSettingsUpdate}
         reciters={reciters}
       />
-
+      <div className={styles.separatorContainer}>
+        <Separator isVertical />
+      </div>
       <TranslationSettingsSection
         translations={mediaSettings.translations}
         onSettingsUpdate={onSettingsUpdate}
