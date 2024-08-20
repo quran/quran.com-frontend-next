@@ -7,6 +7,11 @@ import Reciter from '@/types/Reciter';
 
 export const isValidTranslationsQueryParamValue = (value: string): boolean => {
   const translationIds = value === '' ? [] : value.split(',');
+
+  if (translationIds.length === 0) {
+    return false;
+  }
+
   let isValid = true;
   for (let index = 0; index < translationIds.length; index += 1) {
     // if the value is empty
@@ -35,11 +40,13 @@ export const isValidTranslationsQueryParamValueWithExistingKey = (
   const translationIds = value === '' ? [] : value.split(',');
   const translationsDataIds = translationsData?.map((translation) => translation.id);
   const allIdsExist = translationIds.every((id) => translationsDataIds.includes(Number(id)));
-  if (!allIdsExist) {
+  const isValidValue = isValidTranslationsQueryParamValue(value);
+
+  if (!isValidValue) {
     return false;
   }
-  const isValidValue = isValidTranslationsQueryParamValue(value);
-  if (!isValidValue) {
+
+  if (!allIdsExist) {
     return false;
   }
 

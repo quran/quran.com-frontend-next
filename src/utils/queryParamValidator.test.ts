@@ -1,3 +1,4 @@
+/* eslint-disable react-func/max-lines-per-function */
 /* eslint-disable max-lines */
 import { describe, it, expect } from 'vitest';
 
@@ -58,25 +59,27 @@ const translations = [
 
 describe('isValidTranslationsQueryParamValueWithExistingKey', () => {
   it('Returns false when empty', () => {
-    expect(isValidTranslationsQueryParamValueWithExistingKey('', translations)).toBe(true);
+    expect(isValidTranslationsQueryParamValueWithExistingKey('', translations)).toBe(false);
   });
   it('Returns true when 1 valid translation id exists', () => {
-    expect(isValidTranslationsQueryParamValueWithExistingKey('124', translations)).toBe(true);
+    expect(isValidTranslationsQueryParamValueWithExistingKey('131', translations)).toBe(true);
   });
   it('Returns false when 1 invalid translation id exists', () => {
-    expect(isValidTranslationsQueryParamValueWithExistingKey('sdfsdfdf', translations)).toBe(false);
+    expect(isValidTranslationsQueryParamValueWithExistingKey('99', translations)).toBe(false);
   });
   it('Returns false when 1 invalid translation id and 1 empty id exist', () => {
     expect(isValidTranslationsQueryParamValueWithExistingKey('sdfsdf,', translations)).toBe(false);
   });
   it('Returns false when 1 valid id and 1 empty id exist', () => {
-    expect(isValidTranslationsQueryParamValueWithExistingKey('123,', translations)).toBe(false);
+    expect(isValidTranslationsQueryParamValueWithExistingKey('131,', translations)).toBe(false);
   });
-  it('Returns false when 2 valid ids and 1 empty id exist', () => {
-    expect(isValidTranslationsQueryParamValueWithExistingKey('151,54,', translations)).toBe(false);
+  it('Returns false when a valid id and an empty id exist', () => {
+    expect(isValidTranslationsQueryParamValueWithExistingKey('131,', translations)).toBe(false);
   });
-  it('Returns true when 2 valid translation id exist', () => {
-    expect(isValidTranslationsQueryParamValueWithExistingKey('123,444', translations)).toBe(true);
+  it('Returns false when an invalid translation id exist', () => {
+    expect(isValidTranslationsQueryParamValueWithExistingKey('123,131,85', translations)).toBe(
+      false,
+    );
   });
   it('Returns false when one of many ids is not valid', () => {
     expect(isValidTranslationsQueryParamValueWithExistingKey('123,sdfsdf,1234', translations)).toBe(
