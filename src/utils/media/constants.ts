@@ -32,7 +32,7 @@ export const MINIMUM_OPACITY = 0;
 export const MAXIMUM_OPACITY = 1;
 export const OPACITY_VALUES = [0, 0.2, 0.4, 0.6, 0.8, 1];
 export const MINIMUM_BORDER = 0;
-export const MAXIMUM_BORDER = 5;
+export const MAXIMUM_BORDER = 10;
 
 export function getDefaultVerseKeys(lang = 'en') {
   const keys = defaultVerses.map((verse) => `${verse.chapterId}:${verse.verseNumber}`);
