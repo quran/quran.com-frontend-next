@@ -31,13 +31,10 @@ import {
   DEFAULT_BORDER_COLOR,
   DEFAULT_FONT_COLOR,
   DEFAULT_RECITER_ID,
+  DEFAULT_SURAH,
+  DEFAULT_VERSE,
 } from '@/utils/media/constants';
-import {
-  getFirstAyahOfQueryParamOrReduxSurah,
-  isValidHexColor,
-  isValidVerseToOrFrom,
-  QueryParamsData,
-} from '@/utils/media/utils';
+import { isValidHexColor, isValidVerseToOrFrom, QueryParamsData } from '@/utils/media/utils';
 import {
   getQueryParamValueByType,
   isQueryParamDifferentThanReduxValue,
@@ -64,9 +61,7 @@ export const QUERY_PARAMS_DATA = {
     queryParamValueType: QueryParamValueType.ArrayOfNumbers,
     isValidQueryParam: (val, chaptersData, query, surahAndVersesReduxValues, extraData) =>
       isValidTranslationsQueryParamValueWithExistingKey(val, extraData),
-    customReduxValueGetterWhenParamIsInvalid: () => {
-      return DEFAULT_TRANSLATIONS;
-    },
+    customValueGetterWhenParamIsInvalid: () => DEFAULT_TRANSLATIONS,
   },
   [QueryParam.WBW_LOCALE]: {
     reduxValueSelector: selectWordByWordLocale,
@@ -79,39 +74,19 @@ export const QUERY_PARAMS_DATA = {
     reduxValueEqualityFunction: shallowEqual,
     reduxObjectKey: QueryParam.VERSE_TO,
     queryParamValueType: QueryParamValueType.String,
-    isValidQueryParam: (
-      verseToQueryParamValue: string,
-      chaptersData: ChaptersData,
-      query,
-      surahAndVersesReduxValues,
-    ) => isValidVerseToOrFrom(QueryParam.VERSE_TO, chaptersData, surahAndVersesReduxValues, query),
-    customReduxValueGetterWhenParamIsInvalid: (surahAndVersesReduxValues: any, query) => {
-      return getFirstAyahOfQueryParamOrReduxSurah(
-        QUERY_PARAMS_DATA[QueryParam.SURAH],
-        surahAndVersesReduxValues,
-        query,
-      );
-    },
+    isValidQueryParam: (verseToQueryParamValue: string, chaptersData: ChaptersData, query) =>
+      isValidVerseToOrFrom(QueryParam.VERSE_TO, chaptersData, query),
+    customValueGetterWhenParamIsInvalid: (surahAndVersesReduxValues: any, query) =>
+      query[QueryParam.VERSE_FROM],
   },
   [QueryParam.VERSE_FROM]: {
     reduxValueSelector: selectSurahAndVersesFromAndTo,
     reduxValueEqualityFunction: shallowEqual,
     queryParamValueType: QueryParamValueType.String,
     reduxObjectKey: QueryParam.VERSE_FROM,
-    isValidQueryParam: (
-      verseFromQueryParamValue: string,
-      chaptersData: ChaptersData,
-      query,
-      surahAndVersesReduxValues,
-    ) =>
-      isValidVerseToOrFrom(QueryParam.VERSE_FROM, chaptersData, surahAndVersesReduxValues, query),
-    customReduxValueGetterWhenParamIsInvalid: (surahAndVersesReduxValues: any, query) => {
-      return getFirstAyahOfQueryParamOrReduxSurah(
-        QUERY_PARAMS_DATA[QueryParam.SURAH],
-        surahAndVersesReduxValues,
-        query,
-      );
-    },
+    isValidQueryParam: (verseFromQueryParamValue: string, chaptersData: ChaptersData, query) =>
+      isValidVerseToOrFrom(QueryParam.VERSE_FROM, chaptersData, query),
+    customValueGetterWhenParamIsInvalid: () => DEFAULT_VERSE,
   },
   [QueryParam.RECITER]: {
     reduxValueSelector: selectReciter,
@@ -119,9 +94,7 @@ export const QUERY_PARAMS_DATA = {
     queryParamValueType: QueryParamValueType.Number,
     isValidQueryParam: (val, chaptersData, query, surahAndVersesReduxValues, extraData) =>
       isValidReciterId(val, extraData),
-    customReduxValueGetterWhenParamIsInvalid: () => {
-      return DEFAULT_RECITER_ID;
-    },
+    customValueGetterWhenParamIsInvalid: () => DEFAULT_RECITER_ID,
   },
   [QueryParam.QURAN_TEXT_FONT_SCALE]: {
     reduxValueSelector: selectQuranTextFontScale,
@@ -164,6 +137,7 @@ export const QUERY_PARAMS_DATA = {
     reduxValueEqualityFunction: shallowEqual,
     queryParamValueType: QueryParamValueType.Number,
     isValidQueryParam: (val) => isValidChapterId(val),
+    customValueGetterWhenParamIsInvalid: () => DEFAULT_SURAH,
   },
   [QueryParam.OPACITY]: {
     reduxValueSelector: selectOpacity,
@@ -176,27 +150,21 @@ export const QUERY_PARAMS_DATA = {
     reduxValueEqualityFunction: shallowEqual,
     queryParamValueType: QueryParamValueType.String,
     isValidQueryParam: (val) => isValidHexColor(val),
-    customReduxValueGetterWhenParamIsInvalid: () => {
-      return DEFAULT_FONT_COLOR;
-    },
+    customValueGetterWhenParamIsInvalid: () => DEFAULT_FONT_COLOR,
   },
   [QueryParam.BACKGROUND_COLOR]: {
     reduxValueSelector: selectBackgroundColor,
     reduxValueEqualityFunction: shallowEqual,
     queryParamValueType: QueryParamValueType.String,
     isValidQueryParam: (val) => isValidHexColor(val),
-    customReduxValueGetterWhenParamIsInvalid: () => {
-      return DEFAULT_BACKGROUND_COLOR;
-    },
+    customValueGetterWhenParamIsInvalid: () => DEFAULT_BACKGROUND_COLOR,
   },
   [QueryParam.BORDER_COLOR]: {
     reduxValueSelector: selectBorderColor,
     reduxValueEqualityFunction: shallowEqual,
     queryParamValueType: QueryParamValueType.String,
     isValidQueryParam: (val) => isValidHexColor(val),
-    customReduxValueGetterWhenParamIsInvalid: () => {
-      return DEFAULT_BORDER_COLOR;
-    },
+    customValueGetterWhenParamIsInvalid: () => DEFAULT_BORDER_COLOR,
   },
   [QueryParam.BORDER_SIZE]: {
     reduxValueSelector: selectBorderSize,
@@ -250,7 +218,7 @@ const useGetQueryParamOrReduxValue = (
     queryParamValueType,
     isValidQueryParam,
     reduxObjectKey,
-    customReduxValueGetterWhenParamIsInvalid,
+    customValueGetterWhenParamIsInvalid,
   } = QUERY_PARAMS_DATA[queryParam];
   const reduxParamValue = reduxObjectKey
     ? reduxSelectorValueOrValues[reduxObjectKey]
@@ -278,10 +246,10 @@ const useGetQueryParamOrReduxValue = (
 
     // if the url param is not valid, return the redux value
     if (!isValidValue) {
-      if (customReduxValueGetterWhenParamIsInvalid) {
+      if (customValueGetterWhenParamIsInvalid) {
         return {
           isQueryParamDifferent: false,
-          value: customReduxValueGetterWhenParamIsInvalid(reduxSelectorValueOrValues, query),
+          value: customValueGetterWhenParamIsInvalid(reduxSelectorValueOrValues, query),
         };
       }
       return { isQueryParamDifferent: false, value: reduxParamValue };

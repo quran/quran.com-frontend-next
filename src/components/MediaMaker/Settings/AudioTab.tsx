@@ -17,11 +17,8 @@ import Separator from '@/dls/Separator/Separator';
 import MediaSettings, { ChangedSettings } from '@/types/Media/MediaSettings';
 import Reciter from '@/types/Reciter';
 import { toLocalizedVerseKey } from '@/utils/locale';
-import {
-  generateChapterVersesKeys,
-  getChapterNumberFromKey,
-  getVerseNumberFromKey,
-} from '@/utils/verse';
+import { MAX_AYAHS_LIMIT } from '@/utils/validator';
+import { generateChapterVersesKeys, getVerseNumberFromKey } from '@/utils/verse';
 
 type AudioTabProps = {
   chaptersList: any[];
@@ -44,62 +41,68 @@ const AudioTab: FC<AudioTabProps> = ({
 
   const { verseFrom, verseTo, surah } = mediaSettings;
   const onChapterChange = (newChapter: string) => {
-    const keyOfFirstVerseOfNewChapter = `${newChapter}:1`;
+    const numberOfFirstVerseOfNewChapter = '1';
     onSettingsUpdate(
       {
         surah: Number(newChapter),
-        verseFrom: keyOfFirstVerseOfNewChapter,
-        verseTo: keyOfFirstVerseOfNewChapter,
+        verseFrom: numberOfFirstVerseOfNewChapter,
+        verseTo: numberOfFirstVerseOfNewChapter,
       },
       'surah',
       newChapter,
     );
   };
 
-  const verseKeys = useMemo(() => {
-    return generateChapterVersesKeys(chaptersData, String(surah)).map((verseKey) => ({
-      id: verseKey,
-      name: verseKey,
-      value: verseKey,
-      label: toLocalizedVerseKey(String(getVerseNumberFromKey(verseKey)), lang),
-    }));
+  const verseNumbers = useMemo(() => {
+    return generateChapterVersesKeys(chaptersData, String(surah)).map((verseKey) => {
+      const verseNumber = String(getVerseNumberFromKey(verseKey));
+      return {
+        id: verseNumber,
+        name: verseNumber,
+        value: verseNumber,
+        label: toLocalizedVerseKey(verseNumber, lang),
+      };
+    });
   }, [chaptersData, lang, surah]);
 
-  const onVerseRangeChange = (newSelectedVerseKey: string, verseSelectorId: RangeSelectorType) => {
+  const onVerseRangeChange = (
+    newSelectedVerseNumber: string,
+    verseSelectorId: RangeSelectorType,
+  ) => {
     setRangesError(null);
     const isVerseKeyStartOfRange = verseSelectorId === RangeSelectorType.START;
-    const startVerseKey = isVerseKeyStartOfRange ? newSelectedVerseKey : verseFrom;
-    const endVerseKey = !isVerseKeyStartOfRange ? newSelectedVerseKey : verseTo;
+    const startVerseNumber = isVerseKeyStartOfRange ? newSelectedVerseNumber : verseFrom;
+    const endVerseNumber = !isVerseKeyStartOfRange ? newSelectedVerseNumber : verseTo;
+    const startVerseKey = `${surah}:${startVerseNumber}`;
+    const endVerseKey = `${surah}:${endVerseNumber}`;
     const validationError = validateRangeSelection(startVerseKey, endVerseKey, t);
     if (validationError) {
       setRangesError(validationError);
       return false;
     }
     if (isVerseKeyStartOfRange) {
-      const isMaxAyahs =
-        getVerseNumberFromKey(verseTo) - getVerseNumberFromKey(newSelectedVerseKey) >= 10;
+      const isMaxAyahs = Number(verseTo) - Number(newSelectedVerseNumber) >= MAX_AYAHS_LIMIT;
 
       onSettingsUpdate(
         {
-          verseFrom: newSelectedVerseKey,
-          verseTo: isMaxAyahs ? newSelectedVerseKey : verseTo,
-          surah: getChapterNumberFromKey(newSelectedVerseKey),
+          verseFrom: newSelectedVerseNumber,
+          verseTo: isMaxAyahs ? newSelectedVerseNumber : verseTo,
+          surah,
         },
         'verseFrom',
-        newSelectedVerseKey,
+        newSelectedVerseNumber,
       );
     } else {
-      const isMaxAyahs =
-        getVerseNumberFromKey(newSelectedVerseKey) - getVerseNumberFromKey(verseFrom) >= 10;
+      const isMaxAyahs = Number(newSelectedVerseNumber) - Number(verseFrom) >= MAX_AYAHS_LIMIT;
 
       onSettingsUpdate(
         {
-          verseFrom: isMaxAyahs ? newSelectedVerseKey : verseFrom,
-          verseTo: newSelectedVerseKey,
-          surah: getChapterNumberFromKey(newSelectedVerseKey),
+          verseFrom: isMaxAyahs ? newSelectedVerseNumber : verseFrom,
+          verseTo: newSelectedVerseNumber,
+          surah,
         },
         'verseTo',
-        newSelectedVerseKey,
+        newSelectedVerseNumber,
       );
     }
     return true;
@@ -126,7 +129,7 @@ const AudioTab: FC<AudioTabProps> = ({
           />
 
           <VersesRangeSelector
-            dropdownItems={verseKeys}
+            dropdownItems={verseNumbers}
             rangeStartVerse={verseFrom}
             rangeEndVerse={verseTo}
             onChange={onVerseRangeChange}

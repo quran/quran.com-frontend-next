@@ -4,8 +4,7 @@ import { ParsedUrlQuery } from 'querystring';
 
 import { getChapterData } from '../chapter';
 import { QueryParamValueType } from '../query-params';
-import { isValidChapterId, isValidVerseFrom, isValidVerseKey, isValidVerseTo } from '../validator';
-import { getVerseNumberFromKey } from '../verse';
+import { isValidVerseFrom, isValidVerseKey, isValidVerseTo } from '../validator';
 
 import { getNormalizedIntervals } from './helpers';
 
@@ -189,88 +188,34 @@ export type QueryParamsData = Record<
       extraData?: any,
     ) => boolean;
     reduxObjectKey?: string; // if the value coming from redux is an object and not a single key
-    customReduxValueGetterWhenParamIsInvalid?: <T>(
+    customValueGetterWhenParamIsInvalid?: <T>(
       reduxSelectorValueOrValues?: T,
       reduxParamValue?: any,
     ) => any; // will be used if we don't want to use the default redux value but rather provide a custom value instead
   }
 >;
 
-type SurahAndVerses = {
-  surah: number;
-  verseFrom: string;
-  verseTo: string;
-};
-
 /**
- * Retrieves the first ayah of a surah based on the provided query parameters or Redux values.
- * If the surah query parameter is valid, it will be used. Otherwise, the surah value from Redux will be used.
- *
- * @param {any} surahQueryParamConfigs - The configuration object for surah query parameters.
- * @param {SurahAndVerses} surahAndVersesReduxValues - The Redux values for surah and verses.
- * @param {ParsedUrlQuery} query - The parsed URL query parameters.
- * @returns {string} The identifier of the first ayah in the surah.
- */
-export const getFirstAyahOfQueryParamOrReduxSurah = (
-  surahQueryParamConfigs: any,
-  surahAndVersesReduxValues: SurahAndVerses,
-  query: ParsedUrlQuery,
-): string => {
-  const { surah: surahReduxValue } = surahAndVersesReduxValues;
-  const surahQueryParamValue = String(query[QueryParam.SURAH]);
-  const surahID = surahQueryParamConfigs.isValidQueryParam(surahQueryParamValue)
-    ? surahQueryParamValue
-    : surahReduxValue;
-
-  return `${surahID}:1`;
-};
-
-/**
- * Retrieves the first ayah of a surah based on the provided query parameters or Redux values
- * if the query parameter is not valid.
- *
- * @param {string} verseFromQueryParamValue
- * @param {string} surahID
- * @returns {string}
- */
-export const getVerseToOrFromFromKey = (
-  verseFromQueryParamValue: string,
-  surahID: string,
-): string => {
-  return getVerseNumberFromKey(verseFromQueryParamValue)
-    ? verseFromQueryParamValue
-    : `${surahID}:${verseFromQueryParamValue}`;
-};
-
-/**
- * Since the verse key is in the format of surah:verseNumber
- * and verse from and to are linked, we check if the verse from
- * is less than the verse to and the verse to is less than the total
- * number of verses in the chapter.
+ * This function will make sure the verse from and verse to are valid
+ * and within the bounds of the chapter data
  *
  * @param {QueryParam} queryParam
  * @param {ChaptersData} chaptersData
- * @param {SurahAndVerses} surahAndVersesReduxValues
  * @param {ParsedUrlQuery} query
  * @returns {boolean}
  */
 export const isValidVerseToOrFrom = (
   queryParam: QueryParam.VERSE_TO | QueryParam.VERSE_FROM,
   chaptersData: ChaptersData,
-  surahAndVersesReduxValues: SurahAndVerses,
   query: ParsedUrlQuery,
 ): boolean => {
   const isVerseFrom = queryParam === QueryParam.VERSE_FROM;
-  const { surah: surahReduxValue } = surahAndVersesReduxValues;
   const verseFromQueryParamValue = String(query[QueryParam.VERSE_FROM]);
   const verseToQueryParamValue = String(query[QueryParam.VERSE_TO]);
-  const surahQueryParamValue = String(query[QueryParam.SURAH]);
-  const surahID = isValidChapterId(surahQueryParamValue)
-    ? surahQueryParamValue
-    : String(surahReduxValue);
+  const surahID = String(query[QueryParam.SURAH]);
 
-  const verseFromKey = getVerseToOrFromFromKey(verseFromQueryParamValue, surahID);
-  const verseToKey = getVerseToOrFromFromKey(verseToQueryParamValue, surahID);
+  const verseFromKey = `${surahID}:${verseFromQueryParamValue}`;
+  const verseToKey = `${surahID}:${verseToQueryParamValue}`;
   const isValidValue = isValidVerseKey(chaptersData, isVerseFrom ? verseFromKey : verseToKey);
   const versesCount = getChapterData(chaptersData, surahID)?.versesCount;
 

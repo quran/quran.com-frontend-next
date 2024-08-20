@@ -61,7 +61,6 @@ import {
   ONE_MONTH_REVALIDATION_PERIOD_SECONDS,
   REVALIDATION_PERIOD_ON_ERROR_SECONDS,
 } from '@/utils/staticPageGeneration';
-import { getVerseNumberFromKey } from '@/utils/verse';
 import { VersesResponse } from 'types/ApiResponses';
 import ChaptersData from 'types/ChaptersData';
 
@@ -168,7 +167,7 @@ const MediaMaker: NextPage<MediaMaker> = ({
       from: verseFrom,
       to: verseTo,
       // the number of verses of the range
-      perPage: getVerseNumberFromKey(verseTo) - getVerseNumberFromKey(verseFrom) + 1,
+      perPage: Number(verseTo) - Number(verseFrom) + 1,
       mushaf: getMushafId(
         quranTextFontStyle,
         quranTextFontStyle === QuranFont.IndoPak ? MushafLines.SixteenLines : null,
@@ -188,8 +187,8 @@ const MediaMaker: NextPage<MediaMaker> = ({
      */
     return (
       !areArraysEqual(translations, DEFAULT_API_PARAMS.translations) ||
-      verseFrom !== `${DEFAULT_SURAH}:1` ||
-      verseTo !== `${DEFAULT_SURAH}:1` ||
+      verseFrom !== '1' ||
+      verseTo !== '1' ||
       Number(reciter) !== DEFAULT_RECITER_ID ||
       quranTextFontStyle !== DEFAULT_QURAN_FONT_STYLE
     );
@@ -244,11 +243,7 @@ const MediaMaker: NextPage<MediaMaker> = ({
   }, []);
 
   const audioData = useMemo(() => {
-    return getCurrentRangesAudioData(
-      currentSurahAudioData,
-      getVerseNumberFromKey(verseFrom),
-      getVerseNumberFromKey(verseTo),
-    );
+    return getCurrentRangesAudioData(currentSurahAudioData, Number(verseFrom), Number(verseTo));
   }, [currentSurahAudioData, verseFrom, verseTo]);
 
   const timestamps = useMemo(() => {
