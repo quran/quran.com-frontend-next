@@ -4,6 +4,7 @@
 import { useRouter } from 'next/router';
 import { shallowEqual, useSelector } from 'react-redux';
 
+import { DEFAULT_TRANSLATIONS } from '@/redux/defaultSettings/defaultSettings';
 import {
   selectBackgroundColor,
   selectBorderColor,
@@ -26,13 +27,20 @@ import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translati
 import ChaptersData from '@/types/ChaptersData';
 import { areArraysEqual } from '@/utils/array';
 import {
+  DEFAULT_BACKGROUND_COLOR,
+  DEFAULT_BORDER_COLOR,
+  DEFAULT_FONT_COLOR,
+  DEFAULT_RECITER_ID,
+} from '@/utils/media/constants';
+import {
   getFirstAyahOfQueryParamOrReduxSurah,
+  isValidHexColor,
   isValidVerseToOrFrom,
   QueryParamsData,
 } from '@/utils/media/utils';
 import {
-  isQueryParamDifferentThanReduxValue,
   getQueryParamValueByType,
+  isQueryParamDifferentThanReduxValue,
   QueryParamValueType,
 } from '@/utils/query-params';
 import {
@@ -43,7 +51,7 @@ import {
   isValidOpacityQueryParamValue,
   isValidOrientationQueryParamValue,
   isValidReciterId,
-  isValidTranslationsQueryParamValue,
+  isValidTranslationsQueryParamValueWithExistingKey,
   isValidVideoIdQueryParamValue,
 } from '@/utils/queryParamValidator';
 import { isValidChapterId } from '@/utils/validator';
@@ -54,7 +62,11 @@ export const QUERY_PARAMS_DATA = {
     reduxValueSelector: selectSelectedTranslations,
     reduxValueEqualityFunction: areArraysEqual,
     queryParamValueType: QueryParamValueType.ArrayOfNumbers,
-    isValidQueryParam: (val) => isValidTranslationsQueryParamValue(val),
+    isValidQueryParam: (val, chaptersData, query, surahAndVersesReduxValues, extraData) =>
+      isValidTranslationsQueryParamValueWithExistingKey(val, extraData),
+    customReduxValueGetterWhenParamIsInvalid: () => {
+      return DEFAULT_TRANSLATIONS;
+    },
   },
   [QueryParam.WBW_LOCALE]: {
     reduxValueSelector: selectWordByWordLocale,
@@ -105,7 +117,11 @@ export const QUERY_PARAMS_DATA = {
     reduxValueSelector: selectReciter,
     reduxValueEqualityFunction: shallowEqual,
     queryParamValueType: QueryParamValueType.Number,
-    isValidQueryParam: (val) => isValidReciterId(val),
+    isValidQueryParam: (val, chaptersData, query, surahAndVersesReduxValues, extraData) =>
+      isValidReciterId(val, extraData),
+    customReduxValueGetterWhenParamIsInvalid: () => {
+      return DEFAULT_RECITER_ID;
+    },
   },
   [QueryParam.QURAN_TEXT_FONT_SCALE]: {
     reduxValueSelector: selectQuranTextFontScale,
@@ -159,19 +175,28 @@ export const QUERY_PARAMS_DATA = {
     reduxValueSelector: selectFontColor,
     reduxValueEqualityFunction: shallowEqual,
     queryParamValueType: QueryParamValueType.String,
-    isValidQueryParam: () => true,
+    isValidQueryParam: (val) => isValidHexColor(val),
+    customReduxValueGetterWhenParamIsInvalid: () => {
+      return DEFAULT_FONT_COLOR;
+    },
   },
   [QueryParam.BACKGROUND_COLOR]: {
     reduxValueSelector: selectBackgroundColor,
     reduxValueEqualityFunction: shallowEqual,
     queryParamValueType: QueryParamValueType.String,
-    isValidQueryParam: () => true,
+    isValidQueryParam: (val) => isValidHexColor(val),
+    customReduxValueGetterWhenParamIsInvalid: () => {
+      return DEFAULT_BACKGROUND_COLOR;
+    },
   },
   [QueryParam.BORDER_COLOR]: {
     reduxValueSelector: selectBorderColor,
     reduxValueEqualityFunction: shallowEqual,
     queryParamValueType: QueryParamValueType.String,
-    isValidQueryParam: () => true,
+    isValidQueryParam: (val) => isValidHexColor(val),
+    customReduxValueGetterWhenParamIsInvalid: () => {
+      return DEFAULT_BORDER_COLOR;
+    },
   },
   [QueryParam.BORDER_SIZE]: {
     reduxValueSelector: selectBorderSize,
@@ -202,6 +227,7 @@ export const getQueryParamsData = () => {
 const useGetQueryParamOrReduxValue = (
   queryParam: QueryParam,
   chaptersData?: ChaptersData,
+  extraData?: any,
 ): { value: any; isQueryParamDifferent: boolean } => {
   const { query, isReady } = useRouter();
 
@@ -243,6 +269,7 @@ const useGetQueryParamOrReduxValue = (
       chaptersData,
       query,
       reduxSelectorValueOrValues,
+      extraData,
     );
     const parsedQueryParamValue = getQueryParamValueByType(
       queryParamStringValue,

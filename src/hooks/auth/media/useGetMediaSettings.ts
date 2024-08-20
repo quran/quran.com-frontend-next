@@ -2,13 +2,18 @@ import { useContext, useMemo } from 'react';
 
 import DataContext from '@/contexts/DataContext';
 import useGetQueryParamOrReduxValue from '@/hooks/useGetQueryParamOrReduxValue';
+import AvailableTranslation from '@/types/AvailableTranslation';
 import Alignment from '@/types/Media/Alignment';
 import MediaSettings from '@/types/Media/MediaSettings';
 import Orientation from '@/types/Media/Orientation';
 import QueryParam from '@/types/QueryParam';
 import { QuranFont } from '@/types/QuranReader';
+import Reciter from '@/types/Reciter';
 
-const useGetMediaSettings = (): MediaSettings => {
+const useGetMediaSettings = (
+  reciters: Reciter[],
+  translationsData: AvailableTranslation[],
+): MediaSettings => {
   const chaptersData = useContext(DataContext);
   const { value: verseTo }: { value: string } = useGetQueryParamOrReduxValue(
     QueryParam.VERSE_TO,
@@ -19,7 +24,11 @@ const useGetMediaSettings = (): MediaSettings => {
     chaptersData,
   );
   const { value: opacity }: { value: number } = useGetQueryParamOrReduxValue(QueryParam.OPACITY);
-  const { value: reciter }: { value: number } = useGetQueryParamOrReduxValue(QueryParam.RECITER);
+  const { value: reciter }: { value: number } = useGetQueryParamOrReduxValue(
+    QueryParam.RECITER,
+    null,
+    reciters,
+  );
   const { value: quranTextFontScale }: { value: number } = useGetQueryParamOrReduxValue(
     QueryParam.QURAN_TEXT_FONT_SCALE,
   );
@@ -31,6 +40,8 @@ const useGetMediaSettings = (): MediaSettings => {
   );
   const { value: translations }: { value: number[] } = useGetQueryParamOrReduxValue(
     QueryParam.TRANSLATIONS,
+    null,
+    translationsData,
   );
   const { value: backgroundColor }: { value: string } = useGetQueryParamOrReduxValue(
     QueryParam.BACKGROUND_COLOR,

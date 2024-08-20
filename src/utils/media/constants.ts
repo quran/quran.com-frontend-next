@@ -1,3 +1,4 @@
+import { getMushafId } from '../api';
 import { toLocalizedVerseKey } from '../locale';
 
 import defaultAudio from './defaultAudio.json';
@@ -32,7 +33,7 @@ export const MINIMUM_OPACITY = 0;
 export const MAXIMUM_OPACITY = 1;
 export const OPACITY_VALUES = [0, 0.2, 0.4, 0.6, 0.8, 1];
 export const MINIMUM_BORDER = 0;
-export const MAXIMUM_BORDER = 5;
+export const MAXIMUM_BORDER = 10;
 
 export function getDefaultVerseKeys(lang = 'en') {
   const keys = defaultVerses.map((verse) => `${verse.chapterId}:${verse.verseNumber}`);
@@ -52,10 +53,11 @@ const DEFAULT_TIMESTAMPS = [
 ];
 
 export const DEFAULT_API_PARAMS = {
-  wordFields: `${QuranFont.QPCHafs},${QuranFont.IndoPak}`,
+  wordFields: `${DEFAULT_QURAN_FONT_STYLE},${QuranFont.IndoPak}`,
   translations: [DEFAULT_TRANSLATION],
   reciter: DEFAULT_RECITER_ID,
   perPage: 1,
+  mushaf: getMushafId(DEFAULT_QURAN_FONT_STYLE).mushaf,
 };
 
 // NOTE: If you change the order of the videos, make sure to sync it in the backend too.

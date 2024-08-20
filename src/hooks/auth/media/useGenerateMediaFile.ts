@@ -31,6 +31,7 @@ export type State =
       renderId: string | null;
       status: RenderStatus.ERROR;
       error: Error;
+      errorDetails?: any;
     }
   | {
       url: string;
@@ -71,6 +72,7 @@ export const useGenerateMediaFile = (inputProps: GenerateMediaFileRequest) => {
           setState({
             status: RenderStatus.ERROR,
             error: new Error(t(`error.${response.error.code}`, details)),
+            errorDetails: response.error,
             renderId: null,
           });
           return;

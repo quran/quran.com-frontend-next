@@ -32,12 +32,12 @@ export interface DefaultSettings {
 // Tafsir Ibn Kathir in English
 export const DEFAULT_TAFSIRS = ['en-tafisr-ibn-kathir'];
 
-export const DEFAULT_RECITER: Reciter = {
+export const DEFAULT_RECITER = {
   id: 7,
   name: 'Mishari Rashid al-`Afasy',
   recitationStyle: 'Warsh',
   relativePath: 'mishaari_raashid_al_3afaasee',
-};
+} as Reciter;
 
 const TAFSIRS_INITIAL_STATE: TafsirsSettings = {
   selectedTafsirs: DEFAULT_TAFSIRS,

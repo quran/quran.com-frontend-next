@@ -187,11 +187,12 @@ export type QueryParamsData = Record<
       chaptersData?: ChaptersData,
       query?: ParsedUrlQuery,
       reduxSelectorValueOrValues?: any,
+      extraData?: any,
     ) => boolean;
     reduxObjectKey?: string; // if the value coming from redux is an object and not a single key
     customReduxValueGetterWhenParamIsInvalid?: <T>(
-      reduxSelectorValueOrValues: T,
-      reduxParamValue: any,
+      reduxSelectorValueOrValues?: T,
+      reduxParamValue?: any,
     ) => any; // will be used if we don't want to use the default redux value but rather provide a custom value instead
   }
 >;
@@ -278,4 +279,16 @@ export const isValidVerseToOrFrom = (
     return isValidValue && isValidVerseFrom(verseFromKey, verseToKey, versesCount, surahID);
   }
   return isValidValue && isValidVerseTo(verseFromKey, verseToKey, versesCount, surahID);
+};
+
+/**
+ * This function will make sure the string passed is a valid hex color
+ *
+ * @param {string} color
+ * @returns {boolean}
+ */
+export const isValidHexColor = (color: string) => {
+  // Regular expression to match a valid hex color
+  const hexPattern = /^#([A-Fa-f0-9]{3}|[A-Fa-f0-9]{6})$/;
+  return hexPattern.test(color);
 };

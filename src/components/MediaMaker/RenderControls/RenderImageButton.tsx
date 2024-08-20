@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
@@ -10,6 +10,7 @@ import { RenderStatus, useGenerateMediaFile } from '@/hooks/auth/media/useGenera
 import useGetMediaFilesCount from '@/hooks/auth/media/useGetMediaFilesCount';
 import IconDownload from '@/icons/download.svg';
 import { MediaType } from '@/types/Media/GenerateMediaFileRequest';
+import MediaRenderError from '@/types/Media/MediaRenderError';
 import { isLoggedIn } from '@/utils/auth/login';
 import { logButtonClick } from '@/utils/eventLogger';
 import { mutateGeneratedMediaCounter } from '@/utils/media/utils';
@@ -21,10 +22,12 @@ type Props = {
   isFetching: boolean;
 };
 
+// TODO: create a common component with RenderVideoButton since most of the component contains the same code.
 const RenderImageButton: React.FC<Props> = ({ inputProps, getCurrentFrame, isFetching }) => {
   const { t } = useTranslation('quran-media-maker');
   const { renderMedia, state } = useGenerateMediaFile(inputProps);
   const { data, mutate } = useGetMediaFilesCount(MediaType.IMAGE);
+  const [isLimitExceeded, setIsLimitExceeded] = useState(false);
 
   const router = useRouter();
   const downloadButtonRef = React.useRef<HTMLParagraphElement>();
@@ -57,7 +60,14 @@ const RenderImageButton: React.FC<Props> = ({ inputProps, getCurrentFrame, isFet
       // download the file by clicking the download button
       downloadButtonRef.current.click();
     }
-  }, [mutate, state?.status]);
+
+    if (
+      state?.status === RenderStatus.ERROR &&
+      state?.errorDetails?.code === MediaRenderError.MediaFilesPerUserLimitExceeded
+    ) {
+      setIsLimitExceeded(true);
+    }
+  }, [mutate, state]);
 
   const isRendering = state.status === RenderStatus.RENDERING;
   return (
@@ -72,8 +82,12 @@ const RenderImageButton: React.FC<Props> = ({ inputProps, getCurrentFrame, isFet
             >
               {t('download-image')}
             </Button>
-            {state.status === RenderStatus.ERROR && (
-              <div>{state?.error?.message || t('common:error.general')}</div>
+            {state.status === RenderStatus.ERROR && !isLimitExceeded && (
+              <div>
+                {state?.errorDetails?.code === MediaRenderError.MediaVersesRangeLimitExceeded
+                  ? state?.error?.message
+                  : t('common:error.general')}
+              </div>
             )}
           </>
         )}
@@ -91,7 +105,7 @@ const RenderImageButton: React.FC<Props> = ({ inputProps, getCurrentFrame, isFet
           </>
         )}
       </div>
-      <MonthlyMediaFileCounter data={data?.data} />
+      <MonthlyMediaFileCounter isLimitExceeded={isLimitExceeded} data={data?.data} />
     </div>
   );
 };

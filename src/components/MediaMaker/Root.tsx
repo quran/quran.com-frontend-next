@@ -33,18 +33,24 @@ export const RemotionRoot = () => {
     `ProximaVara`,
     `url('${staticFile('/ProximaVara.woff2')}') format('woff2')`,
   );
+  const playfairDisplay = new FontFace(
+    'PlayfairDisplay',
+    `url('${staticFile('/PlayfairDisplay-Black.ttf')}') format('truetype')`,
+  );
 
   Promise.all([
     uthmanicHafsFont.load(),
     notoNastaliqFont.load(),
     indopakFont.load(),
     proximaVaraFont.load(),
+    playfairDisplay.load(),
   ])
     .then(() => {
       document.fonts.add(uthmanicHafsFont);
       document.fonts.add(notoNastaliqFont);
       document.fonts.add(indopakFont);
       document.fonts.add(proximaVaraFont);
+      document.fonts.add(playfairDisplay);
       continueRender(waitForFont);
     })
     .catch((err) => {

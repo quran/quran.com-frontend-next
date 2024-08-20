@@ -8,6 +8,7 @@ import styles from '../MediaMaker.module.scss';
 import BorderSettings from './BorderSettings';
 import BackgroundSettings from './TextBackgroundSettings';
 
+import Separator from '@/dls/Separator/Separator';
 import MediaSettings, { ChangedSettings } from '@/types/Media/MediaSettings';
 
 const DEBOUNCE_MS = 1000;
@@ -41,13 +42,17 @@ const ColorsTab: FC<ColorsTabProps> = ({ mediaSettings, onSettingsUpdate }) => {
           />
         </div>
       </div>
-
+      <div className={styles.separatorContainer}>
+        <Separator isVertical />
+      </div>
       <BackgroundSettings
         backgroundColor={backgroundColor}
         opacity={opacity}
         onSettingsUpdate={onSettingsUpdate}
       />
-
+      <div className={styles.separatorContainer}>
+        <Separator isVertical />
+      </div>
       <BorderSettings
         borderColor={borderColor}
         borderSize={borderSize}

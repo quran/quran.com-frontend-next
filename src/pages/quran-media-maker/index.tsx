@@ -16,7 +16,12 @@ import {
 } from 'remotion';
 import useSWRImmutable from 'swr/immutable';
 
-import { getAvailableReciters, getChapterAudioData, getChapterVerses } from '@/api';
+import {
+  getAvailableReciters,
+  getAvailableTranslations,
+  getChapterAudioData,
+  getChapterVerses,
+} from '@/api';
 import styles from '@/components/MediaMaker/MediaMaker.module.scss';
 import VideoSettings from '@/components/MediaMaker/Settings/VideoSettings';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
@@ -28,6 +33,10 @@ import Error from '@/pages/_error';
 import layoutStyles from '@/pages/index.module.scss';
 import AudioData from '@/types/AudioData';
 import QueryParam from '@/types/QueryParam';
+import { MushafLines, QuranFont } from '@/types/QuranReader';
+import Reciter from '@/types/Reciter';
+import Translation from '@/types/Translation';
+import { getMushafId } from '@/utils/api';
 import { makeChapterAudioDataUrl, makeVersesUrl } from '@/utils/apiPaths';
 import { areArraysEqual } from '@/utils/array';
 import { getAllChaptersData } from '@/utils/chapter';
@@ -35,6 +44,7 @@ import { isAppleWebKit, isSafari } from '@/utils/device-detector';
 import { getLanguageAlternates, toLocalizedNumber } from '@/utils/locale';
 import {
   DEFAULT_API_PARAMS,
+  DEFAULT_QURAN_FONT_STYLE,
   DEFAULT_RECITER_ID,
   DEFAULT_SURAH,
   VIDEO_FPS,
@@ -58,7 +68,8 @@ import ChaptersData from 'types/ChaptersData';
 interface MediaMaker {
   juzVerses?: VersesResponse;
   hasError?: boolean;
-  reciters: any;
+  reciters: Reciter[];
+  translationsData: Translation[];
   verses: any;
   audio: any;
   chaptersData: ChaptersData;
@@ -72,9 +83,10 @@ const MediaMaker: NextPage<MediaMaker> = ({
   reciters,
   verses: defaultVerses,
   audio: defaultAudio,
+  translationsData,
 }) => {
   const { t, lang } = useTranslation('common');
-  const mediaSettings = useGetMediaSettings();
+  const mediaSettings = useGetMediaSettings(reciters, translationsData);
   const [isReady, setIsReady] = useState(false);
   const [videoFileReady, setVideoFileReady] = useState(false);
   const [audioFileReady, setAudioFileReady] = useState(false);
@@ -157,8 +169,12 @@ const MediaMaker: NextPage<MediaMaker> = ({
       to: verseTo,
       // the number of verses of the range
       perPage: getVerseNumberFromKey(verseTo) - getVerseNumberFromKey(verseFrom) + 1,
+      mushaf: getMushafId(
+        quranTextFontStyle,
+        quranTextFontStyle === QuranFont.IndoPak ? MushafLines.SixteenLines : null,
+      ).mushaf,
     };
-  }, [translations, verseFrom, verseTo]);
+  }, [quranTextFontStyle, translations, verseFrom, verseTo]);
 
   const shouldRefetchVersesData = useMemo(() => {
     /**
@@ -168,14 +184,16 @@ const MediaMaker: NextPage<MediaMaker> = ({
      * 2. Range start Ayah changed
      * 3. Range end Ayah changed
      * 4. Reciter changes
+     * 4. Font changes
      */
     return (
       !areArraysEqual(translations, DEFAULT_API_PARAMS.translations) ||
       verseFrom !== `${DEFAULT_SURAH}:1` ||
       verseTo !== `${DEFAULT_SURAH}:1` ||
-      Number(reciter) !== DEFAULT_RECITER_ID
+      Number(reciter) !== DEFAULT_RECITER_ID ||
+      quranTextFontStyle !== DEFAULT_QURAN_FONT_STYLE
     );
-  }, [translations, verseFrom, verseTo, reciter]);
+  }, [translations, verseFrom, verseTo, reciter, quranTextFontStyle]);
 
   const {
     data: verseData,
@@ -389,6 +407,8 @@ const MediaMaker: NextPage<MediaMaker> = ({
               durationInFrames={getDurationInFrames(timestamps)}
               compositionWidth={width}
               compositionHeight={height}
+              allowFullscreen
+              doubleClickToFullscreen
               fps={VIDEO_FPS}
               ref={playerRef}
               controls={!isUpdating && !isFetching && areMediaFilesReady}
@@ -422,6 +442,7 @@ const MediaMaker: NextPage<MediaMaker> = ({
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   try {
     const { reciters } = await getAvailableReciters(locale, []);
+    const { translations } = await getAvailableTranslations(locale);
     const chaptersData = await getAllChaptersData(locale);
     const englishChaptersList = await getAllChaptersData('en');
     const verses = await getChapterVerses(DEFAULT_SURAH, locale, DEFAULT_API_PARAMS);
@@ -434,6 +455,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
         chaptersData,
         englishChaptersList,
         reciters: reciters || [],
+        translationsData: translations || [],
       },
       revalidate: ONE_MONTH_REVALIDATION_PERIOD_SECONDS,
     };
