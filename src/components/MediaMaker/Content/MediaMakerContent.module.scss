@@ -60,12 +60,13 @@ $white: #ffffff;
   color: $white;
   font-size: 14px;
   font-family: "ProximaVara" !important;
+  font-weight: var(--font-weight-bold);
 }
 
 .logo {
   font-weight: 700;
   font-size: 20px;
-  font-family: "UthmanicHafs" !important;
+  font-family: "PlayfairDisplay" !important;
 }
 
 .space {

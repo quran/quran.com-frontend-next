@@ -402,6 +402,8 @@ const MediaMaker: NextPage<MediaMaker> = ({
               durationInFrames={getDurationInFrames(timestamps)}
               compositionWidth={width}
               compositionHeight={height}
+              allowFullscreen
+              doubleClickToFullscreen
               fps={VIDEO_FPS}
               ref={playerRef}
               controls={!isUpdating && !isFetching && areMediaFilesReady}
