@@ -45,11 +45,9 @@ const RenderVideoButton: React.FC<Props> = ({ inputProps, isFetching }) => {
 
   // listen to state changes and mutate if the render request has resolved successfully
   useEffect(() => {
-    if (state?.status === RenderStatus.RENDERING) {
-      mutate(mutateGeneratedMediaCounter, { revalidate: false });
-    }
     // listen to state changes and download the file when it's done
     if (state?.status === RenderStatus.DONE) {
+      mutate(mutateGeneratedMediaCounter, { revalidate: false });
       // download the file by clicking the download button
       downloadButtonRef.current.click();
     }
