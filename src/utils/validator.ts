@@ -7,7 +7,7 @@ import { parseVerseRange } from './verseKeys';
 import ChaptersData from 'types/ChaptersData';
 import { Mushaf } from 'types/QuranReader';
 
-const MAX_AYAHS_LIMIT = 10;
+export const MAX_AYAHS_LIMIT = 10;
 
 /**
  * Validate a chapterId which can be in-valid in 2 cases:
