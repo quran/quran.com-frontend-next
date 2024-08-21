@@ -47,6 +47,7 @@ import {
   DEFAULT_QURAN_FONT_STYLE,
   DEFAULT_RECITER_ID,
   DEFAULT_SURAH,
+  DEFAULT_VERSE,
   VIDEO_FPS,
 } from '@/utils/media/constants';
 import {
@@ -164,8 +165,8 @@ const MediaMaker: NextPage<MediaMaker> = ({
     return {
       ...DEFAULT_API_PARAMS,
       translations,
-      from: verseFrom,
-      to: verseTo,
+      from: `${surah}:${verseFrom}`,
+      to: `${surah}:${verseTo}`,
       // the number of verses of the range
       perPage: Number(verseTo) - Number(verseFrom) + 1,
       mushaf: getMushafId(
@@ -173,7 +174,7 @@ const MediaMaker: NextPage<MediaMaker> = ({
         quranTextFontStyle === QuranFont.IndoPak ? MushafLines.SixteenLines : null,
       ).mushaf,
     };
-  }, [quranTextFontStyle, translations, verseFrom, verseTo]);
+  }, [quranTextFontStyle, surah, translations, verseFrom, verseTo]);
 
   const shouldRefetchVersesData = useMemo(() => {
     /**
@@ -187,8 +188,8 @@ const MediaMaker: NextPage<MediaMaker> = ({
      */
     return (
       !areArraysEqual(translations, DEFAULT_API_PARAMS.translations) ||
-      verseFrom !== '1' ||
-      verseTo !== '1' ||
+      verseFrom !== `${DEFAULT_SURAH}:${DEFAULT_VERSE}` ||
+      verseTo !== `${DEFAULT_SURAH}:${DEFAULT_VERSE}` ||
       Number(reciter) !== DEFAULT_RECITER_ID ||
       quranTextFontStyle !== DEFAULT_QURAN_FONT_STYLE
     );
