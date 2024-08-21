@@ -60,7 +60,7 @@ const RenderVideoButton: React.FC<Props> = ({ inputProps, isFetching }) => {
     ) {
       setIsLimitExceeded(true);
     }
-  }, [mutate, state]);
+  }, [mutate, state?.status, state?.errorDetails?.code]);
 
   const isInitOrInvokingOrError = [
     RenderStatus.INIT,

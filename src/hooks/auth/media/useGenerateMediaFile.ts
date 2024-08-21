@@ -18,14 +18,17 @@ export enum RenderStatus {
 export type State =
   | {
       status: RenderStatus.INIT;
+      errorDetails?: any;
     }
   | {
       status: RenderStatus.INVOKING;
+      errorDetails?: any;
     }
   | {
       renderId: string;
       progress: number;
       status: RenderStatus.RENDERING;
+      errorDetails?: any;
     }
   | {
       renderId: string | null;
@@ -37,6 +40,7 @@ export type State =
       url: string;
       progress: number;
       status: RenderStatus.DONE;
+      errorDetails?: any;
     };
 
 const wait = async (milliSeconds: number) => {

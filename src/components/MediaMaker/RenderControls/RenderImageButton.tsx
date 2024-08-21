@@ -67,7 +67,7 @@ const RenderImageButton: React.FC<Props> = ({ inputProps, getCurrentFrame, isFet
     ) {
       setIsLimitExceeded(true);
     }
-  }, [mutate, state]);
+  }, [mutate, state?.status, state?.errorDetails?.code]);
 
   const isRendering = state.status === RenderStatus.RENDERING;
   return (
