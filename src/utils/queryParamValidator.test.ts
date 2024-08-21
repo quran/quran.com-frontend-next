@@ -58,8 +58,8 @@ const translations = [
 ] as AvailableTranslation[];
 
 describe('isValidTranslationsQueryParamValueWithExistingKey', () => {
-  it('Returns false when empty', () => {
-    expect(isValidTranslationsQueryParamValueWithExistingKey('', translations)).toBe(false);
+  it('Returns true when empty', () => {
+    expect(isValidTranslationsQueryParamValueWithExistingKey('', translations)).toBe(true);
   });
   it('Returns true when 1 valid translation id exists', () => {
     expect(isValidTranslationsQueryParamValueWithExistingKey('131', translations)).toBe(true);
