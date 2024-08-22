@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { MouseEventHandler, useEffect, useRef, useState } from 'react';
 
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
@@ -18,24 +18,32 @@ import { getLoginNavigationUrl, getQuranMediaMakerNavigationUrl } from '@/utils/
 
 type Props = {
   inputProps: any;
-  getCurrentFrame: () => void;
+  getCurrentFrame: () => number;
   isFetching: boolean;
 };
 
 // TODO: create a common component with RenderVideoButton since most of the component contains the same code.
 const RenderImageButton: React.FC<Props> = ({ inputProps, getCurrentFrame, isFetching }) => {
   const { t } = useTranslation('quran-media-maker');
-  const { renderMedia, state } = useGenerateMediaFile(inputProps);
+  const { renderMedia, state, undo } = useGenerateMediaFile(inputProps);
   const { data, mutate } = useGetMediaFilesCount(MediaType.IMAGE);
   const [isLimitExceeded, setIsLimitExceeded] = useState(false);
+  const previousFrame = useRef<number>();
+  const [imageUrl, setImageUrl] = useState('');
 
   const router = useRouter();
   const downloadButtonRef = React.useRef<HTMLParagraphElement>();
 
+  const triggerRenderImage = () => {
+    const frame = getCurrentFrame();
+    renderMedia(MediaType.IMAGE, { frame });
+    previousFrame.current = frame;
+  };
+
   const onRenderClicked = () => {
     logButtonClick('render_image');
     if (isLoggedIn()) {
-      renderMedia(MediaType.IMAGE, { frame: getCurrentFrame() });
+      triggerRenderImage();
     } else {
       router.replace(getLoginNavigationUrl(getQuranMediaMakerNavigationUrl()));
     }
@@ -43,6 +51,11 @@ const RenderImageButton: React.FC<Props> = ({ inputProps, getCurrentFrame, isFet
 
   const onDownloadClicked = () => {
     logButtonClick('download_image');
+    if (previousFrame.current !== getCurrentFrame()) {
+      undo();
+      setImageUrl('');
+      triggerRenderImage();
+    }
   };
 
   const isInitOrInvokingOrError = [
@@ -56,9 +69,8 @@ const RenderImageButton: React.FC<Props> = ({ inputProps, getCurrentFrame, isFet
   // listen to state changes and download the file when it's done
   useEffect(() => {
     if (state?.status === RenderStatus.DONE) {
+      setImageUrl(state.url);
       mutate(mutateGeneratedMediaCounter, { revalidate: false });
-      // download the file by clicking the download button
-      downloadButtonRef.current.click();
     }
 
     if (
@@ -67,17 +79,25 @@ const RenderImageButton: React.FC<Props> = ({ inputProps, getCurrentFrame, isFet
     ) {
       setIsLimitExceeded(true);
     }
-  }, [mutate, state?.status, state?.errorDetails?.code]);
+  }, [mutate, state?.status, state?.errorDetails?.code, state?.url]);
+
+  useEffect(() => {
+    if (imageUrl) {
+      // download the file by clicking the download button
+      downloadButtonRef.current.click();
+    }
+  }, [imageUrl]);
 
   const isRendering = state.status === RenderStatus.RENDERING;
+  const isInvoking = state.status === RenderStatus.INVOKING;
   return (
     <div>
       <div>
         {isInitOrInvokingOrError && (
           <>
             <Button
-              isDisabled={isFetching || state.status === RenderStatus.INVOKING}
-              isLoading={isFetching || state.status === RenderStatus.INVOKING}
+              isDisabled={isFetching || isInvoking}
+              isLoading={isFetching || isInvoking}
               onClick={onRenderClicked}
             >
               {t('download-image')}
@@ -97,7 +117,7 @@ const RenderImageButton: React.FC<Props> = ({ inputProps, getCurrentFrame, isFet
               prefix={<IconDownload />}
               isDisabled={isFetching || isRendering}
               isLoading={isFetching || isRendering}
-              href={state.status === RenderStatus.DONE ? state.url : ''}
+              href={imageUrl}
               onClick={onDownloadClicked}
             >
               <p ref={downloadButtonRef}>{t('download-image')}</p>
