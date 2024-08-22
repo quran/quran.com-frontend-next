@@ -31,7 +31,6 @@ const RenderImageButton: React.FC<Props> = ({ inputProps, getCurrentFrame, isFet
   const previousFrame = useRef<number>();
   const router = useRouter();
   const downloadButtonRef = React.useRef<HTMLParagraphElement>();
-  const previousFrameRef = useRef<number>();
 
   const triggerRenderImage = () => {
     const frame = getCurrentFrame();
@@ -56,7 +55,7 @@ const RenderImageButton: React.FC<Props> = ({ inputProps, getCurrentFrame, isFet
     } else if (isRenderingOrDone) {
       logButtonClick('download_image');
       // if it's not the first time the user is clicking the button
-      if (previousFrameRef.current !== getCurrentFrame()) {
+      if (previousFrame.current !== getCurrentFrame()) {
         e.preventDefault();
         undo();
         triggerRenderImage();
@@ -68,7 +67,7 @@ const RenderImageButton: React.FC<Props> = ({ inputProps, getCurrentFrame, isFet
   useEffect(() => {
     if (state?.status === RenderStatus.DONE) {
       downloadButtonRef.current.click();
-      previousFrameRef.current = getCurrentFrame();
+      previousFrame.current = getCurrentFrame();
       mutate(mutateGeneratedMediaCounter, { revalidate: false });
     }
 
