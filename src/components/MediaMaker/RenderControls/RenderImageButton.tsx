@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
@@ -27,7 +27,6 @@ const RenderImageButton: React.FC<Props> = ({ inputProps, getCurrentFrame, isFet
   const { t } = useTranslation('quran-media-maker');
   const { renderMedia, state, undo } = useGenerateMediaFile(inputProps);
   const { data, mutate } = useGetMediaFilesCount(MediaType.IMAGE);
-  const [isLimitExceeded, setIsLimitExceeded] = useState(false);
   const previousFrame = useRef<number>();
   const router = useRouter();
   const downloadButtonRef = React.useRef<HTMLParagraphElement>();
@@ -40,11 +39,12 @@ const RenderImageButton: React.FC<Props> = ({ inputProps, getCurrentFrame, isFet
 
   const isRendering = state.status === RenderStatus.RENDERING;
   const isInvoking = state.status === RenderStatus.INVOKING;
-
+  const isDone = state.status === RenderStatus.DONE;
   const isInitOrInvokingOrError =
     isInvoking || [RenderStatus.INIT, RenderStatus.ERROR].includes(state.status);
-  const isRenderingOrDone = isRendering || state.status === RenderStatus.DONE;
-  const onRenderOrDownloadClicked = (e) => {
+  const isRenderingOrDone = isRendering || isDone;
+
+  const onRenderOrDownloadClicked = (e: React.MouseEvent<HTMLParagraphElement>) => {
     if (isInitOrInvokingOrError) {
       logButtonClick('render_image');
       if (isLoggedIn()) {
@@ -63,6 +63,8 @@ const RenderImageButton: React.FC<Props> = ({ inputProps, getCurrentFrame, isFet
     }
   };
 
+  const isError = state?.status === RenderStatus.ERROR;
+
   // listen to state changes and download the file when it's done
   useEffect(() => {
     if (state?.status === RenderStatus.DONE) {
@@ -70,14 +72,7 @@ const RenderImageButton: React.FC<Props> = ({ inputProps, getCurrentFrame, isFet
       previousFrame.current = getCurrentFrame();
       mutate(mutateGeneratedMediaCounter, { revalidate: false });
     }
-
-    if (
-      state?.status === RenderStatus.ERROR &&
-      state?.errorDetails?.code === MediaRenderError.MediaFilesPerUserLimitExceeded
-    ) {
-      setIsLimitExceeded(true);
-    }
-  }, [mutate, state?.status, state?.errorDetails?.code, getCurrentFrame]);
+  }, [mutate, state?.status, state?.errorDetails?.code, getCurrentFrame, isError]);
 
   return (
     <div>
@@ -87,19 +82,25 @@ const RenderImageButton: React.FC<Props> = ({ inputProps, getCurrentFrame, isFet
           isDisabled={isFetching || isInvoking || isRendering}
           isLoading={isFetching || isInvoking}
           onClick={onRenderOrDownloadClicked}
-          {...(state.url && { href: state.url })}
+          {...(isDone && state.url && { href: state.url })}
         >
           <p ref={downloadButtonRef}>{t('download-image')}</p>
         </Button>
-        {state.status === RenderStatus.ERROR && !isLimitExceeded && (
-          <div>
-            {state?.errorDetails?.code === MediaRenderError.MediaVersesRangeLimitExceeded
-              ? state?.error?.message
-              : t('common:error.general')}
-          </div>
-        )}
+        {isError &&
+          state?.errorDetails?.code !== MediaRenderError.MediaFilesPerUserLimitExceeded && (
+            <div>
+              {state?.errorDetails?.code === MediaRenderError.MediaVersesRangeLimitExceeded
+                ? state?.error?.message
+                : t('common:error.general')}
+            </div>
+          )}
       </div>
-      <MonthlyMediaFileCounter isLimitExceeded={isLimitExceeded} data={data?.data} />
+      <MonthlyMediaFileCounter
+        isLimitExceeded={
+          isError && state?.errorDetails?.code === MediaRenderError.MediaFilesPerUserLimitExceeded
+        }
+        data={data?.data}
+      />
     </div>
   );
 };

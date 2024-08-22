@@ -16,7 +16,7 @@ import { getCurrentPath } from '@/utils/url';
 
 type Props = {
   inputProps: MediaFileCompositionProps;
-  getCurrentFrame: () => void;
+  getCurrentFrame: () => number;
   isFetching: boolean;
 };
 

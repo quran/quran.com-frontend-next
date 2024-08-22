@@ -36,7 +36,7 @@ type Props = {
   reciters: Reciter[];
   seekToBeginning: () => void;
   setIsUpdating: (arg: boolean) => void;
-  getCurrentFrame: () => void;
+  getCurrentFrame: () => number;
   isFetching: boolean;
   inputProps: any;
   mediaSettings: MediaSettings;
