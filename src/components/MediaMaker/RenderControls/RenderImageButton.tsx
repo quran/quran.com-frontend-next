@@ -1,4 +1,4 @@
-import React, { MouseEventHandler, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
@@ -29,10 +29,9 @@ const RenderImageButton: React.FC<Props> = ({ inputProps, getCurrentFrame, isFet
   const { data, mutate } = useGetMediaFilesCount(MediaType.IMAGE);
   const [isLimitExceeded, setIsLimitExceeded] = useState(false);
   const previousFrame = useRef<number>();
-  const [imageUrl, setImageUrl] = useState('');
-
   const router = useRouter();
   const downloadButtonRef = React.useRef<HTMLParagraphElement>();
+  const previousFrameRef = useRef<number>();
 
   const triggerRenderImage = () => {
     const frame = getCurrentFrame();
@@ -40,36 +39,36 @@ const RenderImageButton: React.FC<Props> = ({ inputProps, getCurrentFrame, isFet
     previousFrame.current = frame;
   };
 
-  const onRenderClicked = () => {
-    logButtonClick('render_image');
-    if (isLoggedIn()) {
-      triggerRenderImage();
-    } else {
-      router.replace(getLoginNavigationUrl(getQuranMediaMakerNavigationUrl()));
+  const isRendering = state.status === RenderStatus.RENDERING;
+  const isInvoking = state.status === RenderStatus.INVOKING;
+
+  const isInitOrInvokingOrError =
+    isInvoking || [RenderStatus.INIT, RenderStatus.ERROR].includes(state.status);
+  const isRenderingOrDone = isRendering || state.status === RenderStatus.DONE;
+  const onRenderOrDownloadClicked = (e) => {
+    if (isInitOrInvokingOrError) {
+      logButtonClick('render_image');
+      if (isLoggedIn()) {
+        triggerRenderImage();
+      } else {
+        router.replace(getLoginNavigationUrl(getQuranMediaMakerNavigationUrl()));
+      }
+    } else if (isRenderingOrDone) {
+      logButtonClick('download_image');
+      // if it's not the first time the user is clicking the button
+      if (previousFrameRef.current !== getCurrentFrame()) {
+        e.preventDefault();
+        undo();
+        triggerRenderImage();
+      }
     }
   };
-
-  const onDownloadClicked = () => {
-    logButtonClick('download_image');
-    if (previousFrame.current !== getCurrentFrame()) {
-      undo();
-      setImageUrl('');
-      triggerRenderImage();
-    }
-  };
-
-  const isInitOrInvokingOrError = [
-    RenderStatus.INIT,
-    RenderStatus.INVOKING,
-    RenderStatus.ERROR,
-  ].includes(state.status);
-
-  const isRenderingOrDone = [RenderStatus.RENDERING, RenderStatus.DONE].includes(state.status);
 
   // listen to state changes and download the file when it's done
   useEffect(() => {
     if (state?.status === RenderStatus.DONE) {
-      setImageUrl(state.url);
+      downloadButtonRef.current.click();
+      previousFrameRef.current = getCurrentFrame();
       mutate(mutateGeneratedMediaCounter, { revalidate: false });
     }
 
@@ -79,50 +78,26 @@ const RenderImageButton: React.FC<Props> = ({ inputProps, getCurrentFrame, isFet
     ) {
       setIsLimitExceeded(true);
     }
-  }, [mutate, state?.status, state?.errorDetails?.code, state?.url]);
+  }, [mutate, state?.status, state?.errorDetails?.code, getCurrentFrame]);
 
-  useEffect(() => {
-    if (imageUrl) {
-      // download the file by clicking the download button
-      downloadButtonRef.current.click();
-    }
-  }, [imageUrl]);
-
-  const isRendering = state.status === RenderStatus.RENDERING;
-  const isInvoking = state.status === RenderStatus.INVOKING;
   return (
     <div>
       <div>
-        {isInitOrInvokingOrError && (
-          <>
-            <Button
-              isDisabled={isFetching || isInvoking}
-              isLoading={isFetching || isInvoking}
-              onClick={onRenderClicked}
-            >
-              {t('download-image')}
-            </Button>
-            {state.status === RenderStatus.ERROR && !isLimitExceeded && (
-              <div>
-                {state?.errorDetails?.code === MediaRenderError.MediaVersesRangeLimitExceeded
-                  ? state?.error?.message
-                  : t('common:error.general')}
-              </div>
-            )}
-          </>
-        )}
-        {isRenderingOrDone && (
-          <>
-            <Button
-              prefix={<IconDownload />}
-              isDisabled={isFetching || isRendering}
-              isLoading={isFetching || isRendering}
-              href={imageUrl}
-              onClick={onDownloadClicked}
-            >
-              <p ref={downloadButtonRef}>{t('download-image')}</p>
-            </Button>
-          </>
+        <Button
+          prefix={<IconDownload />}
+          isDisabled={isFetching || isInvoking || isRendering}
+          isLoading={isFetching || isInvoking}
+          onClick={onRenderOrDownloadClicked}
+          {...(state.url && { href: state.url })}
+        >
+          <p ref={downloadButtonRef}>{t('download-image')}</p>
+        </Button>
+        {state.status === RenderStatus.ERROR && !isLimitExceeded && (
+          <div>
+            {state?.errorDetails?.code === MediaRenderError.MediaVersesRangeLimitExceeded
+              ? state?.error?.message
+              : t('common:error.general')}
+          </div>
         )}
       </div>
       <MonthlyMediaFileCounter isLimitExceeded={isLimitExceeded} data={data?.data} />
