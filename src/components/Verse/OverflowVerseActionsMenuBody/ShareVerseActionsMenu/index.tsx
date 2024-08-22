@@ -116,8 +116,8 @@ const ShareVerseActionsMenu: React.FC<Props> = ({
     router.push(
       getQuranMediaMakerNavigationUrl({
         [QueryParam.SURAH]: verse.chapterId as string,
-        [QueryParam.VERSE_FROM]: verse.verseKey,
-        [QueryParam.VERSE_TO]: verse.verseKey,
+        [QueryParam.VERSE_FROM]: String(verse.verseNumber),
+        [QueryParam.VERSE_TO]: String(verse.verseNumber),
       }),
     );
   };
