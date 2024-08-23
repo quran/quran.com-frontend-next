@@ -11,10 +11,7 @@ import { getNormalizedIntervals } from './helpers';
 import { RootState } from '@/redux/RootState';
 import AudioData from '@/types/AudioData';
 import ChaptersData from '@/types/ChaptersData';
-import GenerateMediaFileRequest, {
-  MediaType,
-  Timestamp,
-} from '@/types/Media/GenerateMediaFileRequest';
+import GenerateMediaFileRequest, { Timestamp } from '@/types/Media/GenerateMediaFileRequest';
 import Orientation from '@/types/Media/Orientation';
 import QueryParam from '@/types/QueryParam';
 import VerseTiming from '@/types/VerseTiming';
@@ -135,15 +132,10 @@ export const getDurationInFrames = (timestamps: Timestamp[]) => {
  */
 export const prepareGenerateMediaFileRequestData = (data: GenerateMediaFileRequest): object => {
   const newData = { ...data };
-
-  if (data.type === MediaType.VIDEO) {
-    // @ts-ignore
-    newData.audio = {
-      reciterId: data.audio.reciterId,
-    };
-  } else {
-    delete newData.audio;
-  }
+  // @ts-ignore
+  newData.audio = {
+    reciterId: data.audio.reciterId,
+  };
 
   const { verseKey: startVerseKey, chapterId } = newData.verses[0];
   const { verseKey: endVerseKey } = newData.verses[newData.verses.length - 1];

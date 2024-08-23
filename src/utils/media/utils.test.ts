@@ -885,6 +885,9 @@ describe('prepareGenerateMediaFileRequestData', () => {
       chapterId: rawData.verses[0].chapterId,
       startVerseKey: rawData.verses[0].verseKey,
       endVerseKey: rawData.verses[rawData.verses.length - 1].verseKey,
+      audio: {
+        reciterId: rawData.audio.reciterId,
+      },
     });
   });
 });
