@@ -127,39 +127,35 @@ export const getDurationInFrames = (timestamps: Timestamp[]) => {
   return durationInFrames <= 0 ? 1 : durationInFrames;
 };
 
-export const prepareGenerateMediaFileRequestData = (data: GenerateMediaFileRequest) => {
+/**
+ * Prepares the data for generating a media file request.
+ *
+ * @param {GenerateMediaFileRequest} data - The GenerateMediaFileRequest data.
+ * @returns {object} The prepared data for generating a media file request.
+ */
+export const prepareGenerateMediaFileRequestData = (data: GenerateMediaFileRequest): object => {
   const newData = { ...data };
 
   if (data.type === MediaType.VIDEO) {
+    // @ts-ignore
     newData.audio = {
-      audioUrl: data.audio.audioUrl,
-      duration: data.audio.duration,
-      verseTimings: data.audio.verseTimings,
       reciterId: data.audio.reciterId,
     };
   } else {
     delete newData.audio;
   }
 
-  // Update verses to only include chapterId and words
-  newData.verses = data.verses.map((verse) => ({
-    chapterId: verse.chapterId,
-    verseKey: verse.verseKey,
-    words: verse.words.map((word) => ({
-      text: word.text,
-    })),
-    translations: verse.translations?.map((translation) => ({
-      id: translation.id,
-      text: translation.text,
-    })),
-  }));
+  const { verseKey: startVerseKey, chapterId } = newData.verses[0];
+  const { verseKey: endVerseKey } = newData.verses[newData.verses.length - 1];
 
   delete newData.chapterEnglishName;
   delete newData.video;
   delete newData.verseKeys;
   delete newData.isPlayer;
+  delete newData.verses;
+  delete newData.timestamps;
 
-  return newData;
+  return { ...newData, chapterId, startVerseKey, endVerseKey };
 };
 
 export const mutateGeneratedMediaCounter = (currentData) => {
