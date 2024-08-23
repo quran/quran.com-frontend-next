@@ -19,11 +19,17 @@ import { getLoginNavigationUrl, getQuranMediaMakerNavigationUrl } from '@/utils/
 type Props = {
   inputProps: any;
   getCurrentFrame: () => number;
+  getIsPlayerPlaying: () => boolean;
   isFetching: boolean;
 };
 
 // TODO: create a common component with RenderVideoButton since most of the component contains the same code.
-const RenderImageButton: React.FC<Props> = ({ inputProps, getCurrentFrame, isFetching }) => {
+const RenderImageButton: React.FC<Props> = ({
+  inputProps,
+  getCurrentFrame,
+  getIsPlayerPlaying,
+  isFetching,
+}) => {
   const { t } = useTranslation('quran-media-maker');
   const { renderMedia, state, undo } = useGenerateMediaFile(inputProps);
   const { data, mutate } = useGetMediaFilesCount(MediaType.IMAGE);
@@ -40,9 +46,13 @@ const RenderImageButton: React.FC<Props> = ({ inputProps, getCurrentFrame, isFet
   const isRendering = state.status === RenderStatus.RENDERING;
   const isInvoking = state.status === RenderStatus.INVOKING;
   const isDone = state.status === RenderStatus.DONE;
-  const isInitOrInvokingOrError =
-    isInvoking || [RenderStatus.INIT, RenderStatus.ERROR].includes(state.status);
-  const isRenderingOrDone = isRendering || isDone;
+
+  const isInitOrInvokingOrError = [
+    RenderStatus.INVOKING,
+    RenderStatus.INIT,
+    RenderStatus.ERROR,
+  ].includes(state.status);
+  const isRenderingOrDone = [RenderStatus.RENDERING, RenderStatus.DONE].includes(state.status);
 
   const onRenderOrDownloadClicked = (e: React.MouseEvent<HTMLParagraphElement>) => {
     if (isInitOrInvokingOrError) {
@@ -54,8 +64,11 @@ const RenderImageButton: React.FC<Props> = ({ inputProps, getCurrentFrame, isFet
       }
     } else if (isRenderingOrDone) {
       logButtonClick('download_image');
-      // if it's not the first time the user is clicking the button
-      if (previousFrame.current !== getCurrentFrame()) {
+      const isFrameDifferent = previousFrame.current !== getCurrentFrame();
+      const isPlaying = getIsPlayerPlaying();
+      if (isPlaying && isFrameDifferent) {
+        undo();
+      } else if (!isPlaying && isFrameDifferent) {
         e.preventDefault();
         undo();
         triggerRenderImage();
@@ -72,7 +85,7 @@ const RenderImageButton: React.FC<Props> = ({ inputProps, getCurrentFrame, isFet
       previousFrame.current = getCurrentFrame();
       mutate(mutateGeneratedMediaCounter, { revalidate: false });
     }
-  }, [mutate, state?.status, state?.errorDetails?.code, getCurrentFrame, isError]);
+  }, [getCurrentFrame, mutate, state?.status]);
 
   return (
     <div>

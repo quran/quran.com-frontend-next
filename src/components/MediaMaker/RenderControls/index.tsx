@@ -17,6 +17,7 @@ import { getCurrentPath } from '@/utils/url';
 type Props = {
   inputProps: MediaFileCompositionProps;
   getCurrentFrame: () => number;
+  getIsPlayerPlaying: () => boolean;
   isFetching: boolean;
 };
 
@@ -33,7 +34,12 @@ export type MediaFileCompositionProps = {
 
 const COPY_TIMEOUT_MS = 3000;
 
-const RenderControls: React.FC<Props> = ({ inputProps, getCurrentFrame, isFetching }) => {
+const RenderControls: React.FC<Props> = ({
+  inputProps,
+  getCurrentFrame,
+  getIsPlayerPlaying,
+  isFetching,
+}) => {
   const { t } = useTranslation('quran-media-maker');
   const [isCopied, setIsCopied] = useState(false);
 
@@ -72,6 +78,7 @@ const RenderControls: React.FC<Props> = ({ inputProps, getCurrentFrame, isFetchi
           isFetching={isFetching}
           inputProps={inputProps}
           getCurrentFrame={getCurrentFrame}
+          getIsPlayerPlaying={getIsPlayerPlaying}
         />
         <Button
           className={styles.copyButton}

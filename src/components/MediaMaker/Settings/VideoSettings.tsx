@@ -37,6 +37,7 @@ type Props = {
   seekToBeginning: () => void;
   setIsUpdating: (arg: boolean) => void;
   getCurrentFrame: () => number;
+  getIsPlayerPlaying: () => boolean;
   isFetching: boolean;
   inputProps: any;
   mediaSettings: MediaSettings;
@@ -75,6 +76,7 @@ const VideoSettings: React.FC<Props> = ({
   isFetching,
   inputProps,
   getCurrentFrame,
+  getIsPlayerPlaying,
   mediaSettings,
 }) => {
   const [selectedTab, setSelectedTab] = useState<Tab>(Tab.AUDIO);
@@ -182,6 +184,7 @@ const VideoSettings: React.FC<Props> = ({
       <RenderControls
         isFetching={isFetching}
         getCurrentFrame={getCurrentFrame}
+        getIsPlayerPlaying={getIsPlayerPlaying}
         inputProps={inputProps}
       />
     </>

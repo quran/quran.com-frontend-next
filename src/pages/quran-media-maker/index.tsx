@@ -243,6 +243,10 @@ const MediaMaker: NextPage<MediaMaker> = ({
     return playerRef?.current?.getCurrentFrame();
   }, []);
 
+  const getIsPlayerPlaying = useCallback(() => {
+    return playerRef?.current?.isPlaying();
+  }, []);
+
   const audioData = useMemo(() => {
     return getCurrentRangesAudioData(currentSurahAudioData, Number(verseFrom), Number(verseTo));
   }, [currentSurahAudioData, verseFrom, verseTo]);
@@ -424,6 +428,7 @@ const MediaMaker: NextPage<MediaMaker> = ({
             reciters={reciters}
             seekToBeginning={seekToBeginning}
             getCurrentFrame={getCurrentFrame}
+            getIsPlayerPlaying={getIsPlayerPlaying}
             isFetching={isFetching}
             inputProps={inputProps}
             mediaSettings={mediaSettings}
