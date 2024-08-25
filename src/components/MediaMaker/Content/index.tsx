@@ -2,7 +2,7 @@
 /* eslint-disable i18next/no-literal-string */
 /* eslint-disable react/no-danger */
 /* eslint-disable no-unsafe-optional-chaining */
-import { useMemo, useRef } from 'react';
+import { useMemo } from 'react';
 
 import classNames from 'classnames';
 import { AbsoluteFill, Audio, Sequence, Video, staticFile } from 'remotion';
@@ -61,7 +61,6 @@ const MediaMakerContent: React.FC<Props> = ({
   chapterEnglishName,
   isPlayer = false,
 }) => {
-  const videoRef = useRef(null);
   const chaptersDataArabic = useGetChaptersData('ar');
   const startFrom = useMemo(() => {
     return audio?.verseTimings[0]?.normalizedStart
@@ -85,7 +84,7 @@ const MediaMakerContent: React.FC<Props> = ({
       }}
     >
       <div className={styles.videoContainer}>
-        <Video ref={videoRef} src={videoPath} />
+        <Video loop src={videoPath} />
       </div>
       {audioHasStartAndEndRanges && (
         <Audio pauseWhenBuffering startFrom={startFrom} endAt={endAt} src={audio.audioUrl} />
