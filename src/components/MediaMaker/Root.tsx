@@ -14,7 +14,7 @@ import { getDurationInFrames, orientationToDimensions } from '@/utils/media/util
 
 // eslint-disable-next-line import/prefer-default-export
 export const RemotionRoot = () => {
-  const waitForFont = delayRender();
+  const waitForFont = delayRender('Downloading fonts...');
   const toast = useToast();
 
   const uthmanicHafsFont = new FontFace(

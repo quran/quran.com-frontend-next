@@ -91,8 +91,8 @@ const MediaMaker: NextPage<MediaMaker> = ({
   const [videoFileReady, setVideoFileReady] = useState(false);
   const [audioFileReady, setAudioFileReady] = useState(false);
   const [isUpdating, setIsUpdating] = useState(false);
-  const [handleVideo] = useState(() => delayRender());
-  const [handleAudio] = useState(() => delayRender());
+  const [handleVideo] = useState(() => delayRender('Downloading video file...'));
+  const [handleAudio] = useState(() => delayRender('Downloading audio file...'));
   const areMediaFilesReady = videoFileReady && audioFileReady;
 
   const playerRef = useRef<PlayerRef>(null);
