@@ -3,10 +3,17 @@ import { EventEmitter } from 'events';
 import { createProxyMiddleware, fixRequestBody } from 'http-proxy-middleware';
 import { NextApiRequest, NextApiResponse } from 'next';
 
+import generateSignature from '@/utils/auth/signature';
 // Define error messages in a constant object
 const ERROR_MESSAGES = {
   PROXY_ERROR: 'Proxy error',
   PROXY_HANDLER_ERROR: 'Proxy handler error',
+};
+
+const INTERNAL_CLIENT_HEADERS = {
+  AUTH_SIGNATURE: 'x-auth-signature',
+  TIMESTAMP: 'x-timestamp',
+  INTERNAL_CLIENT: 'x-internal-client',
 };
 
 // Increase the max listeners to avoid memory leak
@@ -25,6 +32,13 @@ const apiProxy = createProxyMiddleware<NextApiRequest, NextApiResponse>({
       if (req.headers.cookie) {
         proxyReq.setHeader('Cookie', req.headers.cookie);
       }
+
+      // Generate and attach signature headers
+      const { signature, timestamp } = generateSignature(req);
+
+      proxyReq.setHeader(INTERNAL_CLIENT_HEADERS.AUTH_SIGNATURE, signature);
+      proxyReq.setHeader(INTERNAL_CLIENT_HEADERS.TIMESTAMP, timestamp);
+      proxyReq.setHeader(INTERNAL_CLIENT_HEADERS.INTERNAL_CLIENT, process.env.INTERNAL_CLIENT_ID);
 
       // Fix the request body if bodyParser is involved
       fixRequestBody(proxyReq, req);
