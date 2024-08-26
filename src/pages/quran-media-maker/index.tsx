@@ -297,12 +297,14 @@ const MediaMaker: NextPage<MediaMaker> = ({
     chapterEnglishName,
   ]);
 
+  const method = isSafari() ? 'base64' : 'blob-url';
+
   useEffect(() => {
     setVideoFileReady(false);
     // {@see https://www.remotion.dev/docs/troubleshooting/player-flicker#option-6-prefetching-as-base64-to-avoid-network-request-and-local-http-server}
     const { waitUntilDone: waitUntilVideoDone } = prefetch(
       staticFile(`/publicMin${inputProps.video.videoSrc}`),
-      { method: isSafari() ? 'base64' : 'blob-url' },
+      { method },
     );
 
     waitUntilVideoDone()
@@ -311,17 +313,18 @@ const MediaMaker: NextPage<MediaMaker> = ({
         continueRender(handleVideo);
       })
       .catch((e) => {
-        toast(`${e}`);
+        toast(t('common:error.general'), {
+          status: ToastStatus.Error,
+        });
         cancelRender(e);
       });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [inputProps.video.videoSrc]);
+  }, [inputProps.video.videoSrc, method, handleVideo, toast, t]);
 
   useEffect(() => {
     setAudioFileReady(false);
     // {@see https://www.remotion.dev/docs/troubleshooting/player-flicker#option-6-prefetching-as-base64-to-avoid-network-request-and-local-http-server}
     const { waitUntilDone: waitUntilAudioDone } = prefetch(inputProps.audio.audioUrl, {
-      method: isSafari() ? 'base64' : 'blob-url',
+      method,
     });
 
     waitUntilAudioDone()
@@ -330,11 +333,12 @@ const MediaMaker: NextPage<MediaMaker> = ({
         continueRender(handleAudio);
       })
       .catch((e) => {
-        toast(`${e}`);
+        toast(t('common:error.general'), {
+          status: ToastStatus.Error,
+        });
         cancelRender(e);
       });
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [inputProps.audio.audioUrl]);
+  }, [inputProps.audio.audioUrl, method, handleAudio, toast, t]);
 
   const renderPoster: RenderPoster = useCallback(() => {
     const video = getBackgroundVideoById(videoId);

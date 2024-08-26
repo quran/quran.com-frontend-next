@@ -1,5 +1,5 @@
 /* eslint-disable react/no-multi-comp */
-import { useContext } from 'react';
+import { useCallback, useContext } from 'react';
 
 import classNames from 'classnames';
 import {
@@ -86,8 +86,11 @@ export const ToastContainer = () => {
 export const useToast = () => {
   const setShouldRenderToast = useContext(ToastContext);
 
-  return (content: React.ReactNode, options: Options = {}) => {
-    setShouldRenderToast(true);
-    toast(content, options);
-  };
+  return useCallback(
+    (content: React.ReactNode, options: Options = {}) => {
+      setShouldRenderToast(true);
+      toast(content, options);
+    },
+    [setShouldRenderToast],
+  );
 };
