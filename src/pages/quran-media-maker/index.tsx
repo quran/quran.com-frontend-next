@@ -40,7 +40,7 @@ import { getMushafId } from '@/utils/api';
 import { makeChapterAudioDataUrl, makeVersesUrl } from '@/utils/apiPaths';
 import { areArraysEqual } from '@/utils/array';
 import { getAllChaptersData } from '@/utils/chapter';
-import { isAppleWebKit, isSafari } from '@/utils/device-detector';
+import { isSafari } from '@/utils/device-detector';
 import { getLanguageAlternates, toLocalizedNumber } from '@/utils/locale';
 import {
   DEFAULT_API_PARAMS,
@@ -300,10 +300,9 @@ const MediaMaker: NextPage<MediaMaker> = ({
   useEffect(() => {
     setVideoFileReady(false);
     // {@see https://www.remotion.dev/docs/troubleshooting/player-flicker#option-6-prefetching-as-base64-to-avoid-network-request-and-local-http-server}
-    const method = isAppleWebKit() ? 'base64' : 'blob-url';
     const { waitUntilDone: waitUntilVideoDone } = prefetch(
       staticFile(`/publicMin${inputProps.video.videoSrc}`),
-      { method },
+      { method: isSafari() ? 'base64' : 'blob-url' },
     );
 
     waitUntilVideoDone()
@@ -321,9 +320,8 @@ const MediaMaker: NextPage<MediaMaker> = ({
   useEffect(() => {
     setAudioFileReady(false);
     // {@see https://www.remotion.dev/docs/troubleshooting/player-flicker#option-6-prefetching-as-base64-to-avoid-network-request-and-local-http-server}
-    const method = isAppleWebKit() ? 'base64' : 'blob-url';
     const { waitUntilDone: waitUntilAudioDone } = prefetch(inputProps.audio.audioUrl, {
-      method,
+      method: isSafari() ? 'base64' : 'blob-url',
     });
 
     waitUntilAudioDone()

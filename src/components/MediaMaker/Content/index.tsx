@@ -74,7 +74,7 @@ const MediaMakerContent: React.FC<Props> = ({
       : (audio?.verseTimings[audio?.verseTimings?.length - 1]?.timestampTo / 1000) * 30;
   }, [audio?.verseTimings]);
 
-  const audioHasStartAndEndRanges = (!!startFrom || startFrom === 0) && !!endAt;
+  const audioHasStartAndEndRanges = typeof startFrom === 'number' && typeof endAt === 'number';
 
   const videoPath = staticFile(`${isPlayer ? '/publicMin' : ''}${video.videoSrc}`);
   return (
