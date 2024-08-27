@@ -116,7 +116,7 @@
     "@storybook/addon-styling-webpack": "^1.0.0",
     "@storybook/nextjs": "^8.2.9",
     "@storybook/react": "^8.2.9",
-    "@svgr/webpack": "^6.3.1",
+    "@svgr/webpack": "^8.1.0",
     "@testing-library/react": "^13.4.0",
     "@types/cookie": "^0.5.1",
     "@types/js-cookie": "^3.0.2",
