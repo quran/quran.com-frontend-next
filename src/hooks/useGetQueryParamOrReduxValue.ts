@@ -50,6 +50,7 @@ import {
   isValidOpacityQueryParamValue,
   isValidOrientationQueryParamValue,
   isValidReciterId,
+  isValidTranslationsQueryParamValue,
   isValidTranslationsQueryParamValueWithExistingKey,
   isValidVideoIdQueryParamValue,
 } from '@/utils/queryParamValidator';
@@ -61,9 +62,7 @@ export const QUERY_PARAMS_DATA = {
     reduxValueSelector: selectSelectedTranslations,
     reduxValueEqualityFunction: areArraysEqual,
     queryParamValueType: QueryParamValueType.ArrayOfNumbers,
-    isValidQueryParam: (val, chaptersData, query, surahAndVersesReduxValues, extraData) =>
-      isValidTranslationsQueryParamValueWithExistingKey(val, extraData),
-    customValueGetterWhenParamIsInvalid: () => DEFAULT_TRANSLATIONS,
+    isValidQueryParam: (val) => isValidTranslationsQueryParamValue(val),
   },
   [QueryParam.MEDIA_TRANSLATIONS]: {
     reduxValueSelector: selectTranslations,
