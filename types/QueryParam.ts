@@ -1,5 +1,6 @@
 enum QueryParam {
-  TRANSLATIONS = 'mediaTranslations',
+  TRANSLATIONS = 'translations',
+  MEDIA_TRANSLATIONS = 'mediaTranslations',
   RECITER = 'mediaReciter',
   WBW_LOCALE = 'wbw_locale',
   HIDE_ARABIC = 'hideArabic',

@@ -55,7 +55,7 @@ import { isValidChapterId } from '@/utils/validator';
 import QueryParam from 'types/QueryParam';
 
 export const QUERY_PARAMS_DATA = {
-  [QueryParam.TRANSLATIONS]: {
+  [QueryParam.MEDIA_TRANSLATIONS]: {
     reduxValueSelector: selectTranslations,
     reduxValueEqualityFunction: areArraysEqual,
     queryParamValueType: QueryParamValueType.ArrayOfNumbers,

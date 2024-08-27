@@ -131,7 +131,7 @@ const MediaMaker: NextPage<MediaMaker> = ({
     [QueryParam.VERSE_FROM]: String(verseFrom),
     [QueryParam.VERSE_TO]: String(verseTo),
     [QueryParam.RECITER]: String(reciter),
-    [QueryParam.TRANSLATIONS]: String(translations),
+    [QueryParam.MEDIA_TRANSLATIONS]: String(translations),
     [QueryParam.BACKGROUND_COLOR]: backgroundColor,
     [QueryParam.OPACITY]: String(opacity),
     [QueryParam.BORDER_COLOR]: borderColor,

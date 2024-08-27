@@ -39,7 +39,7 @@ const useGetMediaSettings = (
     QueryParam.TRANSLATION_FONT_SCALE,
   );
   const { value: translations }: { value: number[] } = useGetQueryParamOrReduxValue(
-    QueryParam.TRANSLATIONS,
+    QueryParam.MEDIA_TRANSLATIONS,
     null,
     translationsData,
   );

@@ -61,7 +61,7 @@ const MEDIA_SETTINGS_TO_QUERY_PARAM = {
   quranTextFontScale: QueryParam.QURAN_TEXT_FONT_SCALE,
   quranTextFontStyle: QueryParam.QURAN_TEXT_FONT_STYLE,
   translationFontScale: QueryParam.TRANSLATION_FONT_SCALE,
-  translations: QueryParam.TRANSLATIONS,
+  translations: QueryParam.MEDIA_TRANSLATIONS,
   fontColor: QueryParam.FONT_COLOR,
   orientation: QueryParam.ORIENTATION,
   videoId: QueryParam.VIDEO_ID,
@@ -97,7 +97,7 @@ const VideoSettings: React.FC<Props> = ({
           MEDIA_SETTINGS_TO_QUERY_PARAM[settingKey as keyof MediaSettings];
         const toBeUpdatedQueryParamValue = settings[settingKey];
         router.query[toBeUpdatedQueryParamName] =
-          toBeUpdatedQueryParamName === QueryParam.TRANSLATIONS
+          toBeUpdatedQueryParamName === QueryParam.MEDIA_TRANSLATIONS
             ? toBeUpdatedQueryParamValue.join(',')
             : toBeUpdatedQueryParamValue;
       });
