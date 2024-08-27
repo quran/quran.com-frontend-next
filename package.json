@@ -107,7 +107,7 @@
   "devDependencies": {
     "@lokalise/node-api": "^8.0.1",
     "@next/eslint-plugin-next": "^12.3.1",
-    "@playwright/test": "^1.26.0",
+    "@playwright/test": "^1.46.1",
     "@storybook/addon-a11y": "^8.2.9",
     "@storybook/addon-actions": "^8.2.9",
     "@storybook/addon-essentials": "^8.2.9",
