@@ -4,6 +4,7 @@
 import { useRouter } from 'next/router';
 import { shallowEqual, useSelector } from 'react-redux';
 
+import { DEFAULT_TRANSLATIONS } from '@/redux/defaultSettings/defaultSettings';
 import {
   selectBackgroundColor,
   selectBorderColor,
@@ -23,6 +24,7 @@ import {
   selectVideoId,
 } from '@/redux/slices/mediaMaker';
 import { selectWordByWordLocale } from '@/redux/slices/QuranReader/readingPreferences';
+import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
 import ChaptersData from '@/types/ChaptersData';
 import { areArraysEqual } from '@/utils/array';
 import {
@@ -55,6 +57,14 @@ import { isValidChapterId } from '@/utils/validator';
 import QueryParam from 'types/QueryParam';
 
 export const QUERY_PARAMS_DATA = {
+  [QueryParam.TRANSLATIONS]: {
+    reduxValueSelector: selectSelectedTranslations,
+    reduxValueEqualityFunction: areArraysEqual,
+    queryParamValueType: QueryParamValueType.ArrayOfNumbers,
+    isValidQueryParam: (val, chaptersData, query, surahAndVersesReduxValues, extraData) =>
+      isValidTranslationsQueryParamValueWithExistingKey(val, extraData),
+    customValueGetterWhenParamIsInvalid: () => DEFAULT_TRANSLATIONS,
+  },
   [QueryParam.MEDIA_TRANSLATIONS]: {
     reduxValueSelector: selectTranslations,
     reduxValueEqualityFunction: areArraysEqual,
