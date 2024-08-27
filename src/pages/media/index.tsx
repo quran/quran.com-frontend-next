@@ -355,6 +355,7 @@ const MediaMaker: NextPage<MediaMaker> = ({
       <AbsoluteFill>
         <Image
           key={videoId}
+          alt={videoId.toString()}
           className={classNames(styles.img)}
           src={video.thumbnailSrc}
           layout="fill"

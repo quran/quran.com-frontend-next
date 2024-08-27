@@ -37,7 +37,7 @@ const filterTafsirs = (tafsirs, searchQuery: string): TafsirInfo[] => {
 const TafsirsSelectionBody = () => {
   const { t } = useTranslation('common');
   const dispatch = useDispatch();
-  const selectedTafsirs = useSelector(selectSelectedTafsirs, areArraysEqual);
+  const selectedTafsirs = useSelector(selectSelectedTafsirs, areArraysEqual) as string[];
   const { lang } = useTranslation();
   const [searchQuery, setSearchQuery] = useState('');
 

@@ -55,7 +55,7 @@ const TO_COPY_FONTS = [
 const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
   const { lang, t } = useTranslation('quran-reader');
   const chaptersData = useContext(DataContext);
-  const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
+  const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual) as number[];
   // whether we should show the range of verses or not. This will be based on user selection.
   const [showRangeOfVerses, setShowRangeOfVerses] = useState(false);
   // the items that will be passed to the range start and end dropdown selectors. The value will be populated only once the user chooses the verses range option.
