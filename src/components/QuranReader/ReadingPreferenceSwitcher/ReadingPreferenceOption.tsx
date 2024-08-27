@@ -7,7 +7,7 @@ import styles from '@/components/QuranReader/ReadingPreferenceSwitcher/ReadingPr
 import Spinner from '@/dls/Spinner/Spinner';
 import BookIcon from '@/icons/book.svg';
 import ReaderIcon from '@/icons/reader.svg';
-import { ReadingPreference } from 'types/QuranReader';
+import { ReadingPreference } from '@/types/QuranReader';
 
 type Props = {
   readingPreference: ReadingPreference;

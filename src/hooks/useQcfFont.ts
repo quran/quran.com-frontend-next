@@ -3,6 +3,7 @@ import { useEffect, useCallback, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { selectLoadedFontFaces, addLoadedFontFace } from '@/redux/slices/QuranReader/font-faces';
+import { QuranFont } from '@/types/QuranReader';
 import { removeItemFromArray } from '@/utils/array';
 import {
   getFontFaceNameForPage,
@@ -10,7 +11,6 @@ import {
   getPagesByVerses,
   isQCFFont,
 } from '@/utils/fontFaceHelper';
-import { QuranFont } from 'types/QuranReader';
 import Verse from 'types/Verse';
 
 /**

@@ -4,8 +4,8 @@ import { migrateRecentReadingSessions } from './migration-scripts/migrating-rece
 import { initialSidebarIsVisible } from './slices/QuranReader/sidebarNavigation';
 import { initialState as welcomeMessageInitialState } from './slices/welcomeMessage';
 
+import { MushafLines } from '@/types/QuranReader';
 import { consolidateWordByWordState, getDefaultWordByWordDisplay } from '@/utils/wordByWord';
-import { MushafLines } from 'types/QuranReader';
 
 export default {
   3: (state) => ({

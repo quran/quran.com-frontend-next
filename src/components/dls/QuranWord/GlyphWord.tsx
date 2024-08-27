@@ -6,9 +6,9 @@ import { shallowEqual, useSelector } from 'react-redux';
 import styles from './GlyphWord.module.scss';
 
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
+import { FALLBACK_FONT, QuranFont } from '@/types/QuranReader';
 import { isFirefox } from '@/utils/device-detector';
 import { getFontClassName } from '@/utils/fontFaceHelper';
-import { FALLBACK_FONT, QuranFont } from 'types/QuranReader';
 
 type UthmaniWordTextProps = {
   qpcUthmaniHafs: string;

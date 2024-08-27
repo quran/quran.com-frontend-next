@@ -7,7 +7,7 @@ import {
   selectReadingPreference,
   setReadingPreference,
 } from '@/redux/slices/QuranReader/readingPreferences';
-import { ReadingPreference } from 'types/QuranReader';
+import { ReadingPreference } from '@/types/QuranReader';
 
 const ReadingPreferenceAdjustment = () => {
   const dispatch = useDispatch();

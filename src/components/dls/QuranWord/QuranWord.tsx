@@ -24,6 +24,7 @@ import {
   selectTooltipContentType,
   selectInlineDisplayWordByWordPreferences,
 } from '@/redux/slices/QuranReader/readingPreferences';
+import { ReadingPreference, QuranFont, WordClickFunctionality } from '@/types/QuranReader';
 import { areArraysEqual } from '@/utils/array';
 import { milliSecondsToSeconds } from '@/utils/datetime';
 import { logButtonClick } from '@/utils/eventLogger';
@@ -31,7 +32,6 @@ import { isQCFFont } from '@/utils/fontFaceHelper';
 import { getChapterNumberFromKey, makeWordLocation } from '@/utils/verse';
 import { getWordTimeSegment } from 'src/xstate/actors/audioPlayer/audioPlayerMachineHelper';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
-import { ReadingPreference, QuranFont, WordClickFunctionality } from 'types/QuranReader';
 import Word, { CharType } from 'types/Word';
 
 export const DATA_ATTRIBUTE_WORD_LOCATION = 'data-word-location';

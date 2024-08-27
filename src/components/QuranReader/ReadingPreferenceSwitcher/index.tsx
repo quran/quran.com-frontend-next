@@ -12,9 +12,9 @@ import {
   setReadingPreference,
 } from '@/redux/slices/QuranReader/readingPreferences';
 import { selectLastReadVerseKey } from '@/redux/slices/QuranReader/readingTracker';
+import { ReadingPreference } from '@/types/QuranReader';
 import { logValueChange } from '@/utils/eventLogger';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
-import { ReadingPreference } from 'types/QuranReader';
 
 export enum ReadingPreferenceSwitcherType {
   SurahHeader = 'surah_header',

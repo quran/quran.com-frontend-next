@@ -6,8 +6,8 @@ import useTranslation from 'next-translate/useTranslation';
 
 import Section from './Section';
 
+import { QuranFont } from '@/types/QuranReader';
 import { isQCFFont } from '@/utils/fontFaceHelper';
-import { QuranFont } from 'types/QuranReader';
 
 interface Props {
   quranFont: QuranFont;

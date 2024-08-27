@@ -2,7 +2,7 @@ import { ReactNode } from 'react';
 
 import styles from './QuranWord.module.scss';
 
-import { WordByWordType } from 'types/QuranReader';
+import { WordByWordType } from '@/types/QuranReader';
 import Word from 'types/Word';
 
 /**

@@ -19,9 +19,9 @@ import {
 } from '@/redux/slices/QuranReader/readingViewVerse';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import QueryParam from '@/types/QueryParam';
+import { FALLBACK_FONT, QuranFont } from '@/types/QuranReader';
 import { getFontClassName } from '@/utils/fontFaceHelper';
 import { getFirstWordOfSurah } from '@/utils/verse';
-import { FALLBACK_FONT, QuranFont } from 'types/QuranReader';
 import Word from 'types/Word';
 
 type VerseTextProps = {

@@ -20,6 +20,7 @@ import {
   selectQuranReaderStyles,
 } from '@/redux/slices/QuranReader/styles';
 import { VersesResponse } from '@/types/ApiResponses';
+import { Mushaf, QuranReaderDataType } from '@/types/QuranReader';
 import { getDefaultWordFields, getMushafId } from '@/utils/api';
 import { getAllChaptersData } from '@/utils/chapter';
 import { getLanguageAlternates, toLocalizedNumber } from '@/utils/locale';
@@ -32,7 +33,6 @@ import {
 } from '@/utils/staticPageGeneration';
 import { isValidPageNumber } from '@/utils/validator';
 import ChaptersData from 'types/ChaptersData';
-import { Mushaf, QuranReaderDataType } from 'types/QuranReader';
 
 interface Props {
   pageVerses: VersesResponse;
