@@ -3,9 +3,6 @@ import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useSelector } from 'react-redux';
 
-import getPageVersesParams from './utils/getPageVersesParams';
-import getQuranReaderData from './utils/getQuranReaderData';
-
 import { getPagesLookup, getPageVerses } from '@/api';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import QuranReader from '@/components/QuranReader';
@@ -26,6 +23,8 @@ import { getAllChaptersData } from '@/utils/chapter';
 import { getLanguageAlternates, toLocalizedNumber } from '@/utils/locale';
 import { getCanonicalUrl, getPageNavigationUrl } from '@/utils/navigation';
 import { PAGES_MUSHAF_MAP } from '@/utils/page';
+import getPageVersesParams from '@/utils/pages/getPageVersesParams';
+import getQuranReaderData from '@/utils/pages/getQuranReaderData';
 import { getPageOrJuzMetaDescription } from '@/utils/seo';
 import {
   ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
