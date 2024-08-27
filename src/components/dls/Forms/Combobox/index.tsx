@@ -117,7 +117,7 @@ const Combobox: React.FC<Props> = ({
   }, [isMultiSelect, selectedValue, valueToLabelMap]);
 
   useOutsideClickDetector(comboBoxRef, closeCombobox, isOpened);
-  useHotkeys('Escape', closeCombobox, { enabled: isOpened, enableOnTags: ['INPUT'] });
+  useHotkeys('Escape', closeCombobox, { enabled: isOpened, enableOnFormTags: ['INPUT'] });
 
   // if there are any changes in the items, we should update the filteredItems.
   // this is necessary when the parent items are have initial empty value and
@@ -225,7 +225,7 @@ const Combobox: React.FC<Props> = ({
     {
       enabled:
         isOpened && isMultiSelect && !inputValue && !!tags.length && !preventUnselectingItems,
-      enableOnTags: ['INPUT'],
+      enableOnFormTags: ['INPUT'],
     },
     [invokeOnChangeCallback],
   );
