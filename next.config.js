@@ -9,7 +9,7 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 const { withSentryConfig } = require('@sentry/nextjs');
 const withFonts = require('next-fonts');
 const withPWA = require('next-pwa');
-const nextTranslate = require('next-translate');
+const nextTranslate = require('next-translate-plugin');
 
 const securityHeaders = require('./configs/SecurityHeaders.js');
 const runtimeCaching = require('./pwa-runtime-config.js');
