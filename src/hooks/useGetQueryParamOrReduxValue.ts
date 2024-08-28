@@ -4,7 +4,6 @@
 import { useRouter } from 'next/router';
 import { shallowEqual, useSelector } from 'react-redux';
 
-import { DEFAULT_TRANSLATIONS } from '@/redux/defaultSettings/defaultSettings';
 import {
   selectBackgroundColor,
   selectBorderColor,

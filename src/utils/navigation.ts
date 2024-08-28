@@ -347,7 +347,7 @@ export const getNotesNavigationUrl = () => '/notes-and-reflections';
 export const getNotificationSettingsNavigationUrl = () => '/notification-settings';
 export const getQuranicCalendarNavigationUrl = () => '/calendar';
 export const getQuranMediaMakerNavigationUrl = (params?: ParsedUrlQuery) => {
-  const baseUrl = '/quran-media-maker';
+  const baseUrl = '/media';
   return params ? `${baseUrl}?${stringify(params)}` : baseUrl;
 };
 

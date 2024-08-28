@@ -30,7 +30,7 @@ const RenderImageButton: React.FC<Props> = ({
   getIsPlayerPlaying,
   isFetching,
 }) => {
-  const { t } = useTranslation('quran-media-maker');
+  const { t } = useTranslation('media');
   const { renderMedia, state, undo } = useGenerateMediaFile(inputProps);
   const { data, mutate } = useGetMediaFilesCount(MediaType.IMAGE);
   const previousFrame = useRef<number>();

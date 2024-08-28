@@ -11,7 +11,7 @@ type DeleteNoteButtonProps = {
 };
 
 const ResetModal = ({ isDisabled, onConfirm }: DeleteNoteButtonProps) => {
-  const { t } = useTranslation('quran-media-maker');
+  const { t } = useTranslation('media');
   const confirm = useConfirm();
 
   const onResetSettingsClick = async () => {

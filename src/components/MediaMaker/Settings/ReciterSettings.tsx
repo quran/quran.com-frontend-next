@@ -14,7 +14,7 @@ interface Props extends MediaSettingsProps {
 }
 
 const ReciterSettings: React.FC<Props> = ({ reciters, onSettingsUpdate, reciter }) => {
-  const { t } = useTranslation('quran-media-maker');
+  const { t } = useTranslation('media');
 
   const recitersOptions = useMemo(() => {
     const DEFAULT_RECITATION_STYLE = 'Murattal';

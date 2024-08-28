@@ -21,7 +21,7 @@ const TextBackgroundSettings: React.FC<Props> = ({
   opacity,
   backgroundColor,
 }) => {
-  const { t } = useTranslation('quran-media-maker');
+  const { t } = useTranslation('media');
 
   const debouncedOnChange = debounce((color) => {
     onSettingsUpdate({ backgroundColor: color }, 'backgroundColor', color);

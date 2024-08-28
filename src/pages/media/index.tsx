@@ -387,8 +387,8 @@ const MediaMaker: NextPage<MediaMaker> = ({
   return (
     <>
       <NextSeoWrapper
-        title={t('quran-media-maker:maker-title')}
-        description={t('quran-media-maker:maker-meta-desc')}
+        title={t('media:maker-title')}
+        description={t('media:maker-meta-desc')}
         url={getCanonicalUrl(lang, PATH)}
         languageAlternates={getLanguageAlternates(PATH)}
       />
@@ -396,7 +396,7 @@ const MediaMaker: NextPage<MediaMaker> = ({
         <div className={classNames(styles.playerWrapper, layoutStyles.flowItem)}>
           <>
             <div className={styles.titleContainer}>
-              <h1>{t('quran-media-maker:title')}</h1>
+              <h1>{t('media:title')}</h1>
             </div>
 
             <Player

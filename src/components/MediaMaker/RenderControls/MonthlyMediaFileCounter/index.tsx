@@ -11,7 +11,7 @@ type Props = {
 };
 
 const MonthlyMediaFileCounter: React.FC<Props> = ({ data, isLimitExceeded }) => {
-  const { t } = useTranslation('quran-media-maker');
+  const { t } = useTranslation('media');
 
   if (data) {
     return (

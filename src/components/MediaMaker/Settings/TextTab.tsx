@@ -21,7 +21,7 @@ type TextTabProps = {
 };
 
 const TextTab: FC<TextTabProps> = ({ mediaSettings, onSettingsUpdate }) => {
-  const { t } = useTranslation('quran-media-maker');
+  const { t } = useTranslation('media');
   const { quranTextFontScale, translationFontScale, quranTextFontStyle } = mediaSettings;
 
   const types = useMemo(

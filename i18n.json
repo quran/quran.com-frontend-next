@@ -27,13 +27,7 @@
     "/learning-plans/[slug]": ["learn"],
     "/learning-plans/[slug]/lessons/[lessonSlugOrId]": ["learn"],
     "/reading-goal/progress": ["reading-goal", "reading-progress"],
-    "/[chapterId]": [
-      "quran-reader",
-      "reading-goal",
-      "notes",
-      "chapter",
-      "surah-info"
-    ],
+    "/[chapterId]": ["quran-reader", "reading-goal", "notes", "chapter", "surah-info"],
     "/[chapterId]/reflections": ["quran-reader", "reading-goal", "notes"],
     "/[chapterId]/[verseId]": ["quran-reader", "reading-goal", "notes"],
     "/[chapterId]/[verseId]/tafsirs": ["quran-reader", "reading-goal", "notes"],
@@ -66,6 +60,6 @@
     "/ramadan-activities": ["ramadan-activities"],
     "/notification-settings": ["notification-settings"],
     "/calendar": ["quranic-calendar"],
-    "/quran-media-maker": ["quran-media-maker"]
+    "/media": ["media"]
   }
 }

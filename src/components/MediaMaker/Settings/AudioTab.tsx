@@ -35,7 +35,7 @@ const AudioTab: FC<AudioTabProps> = ({
   mediaSettings,
   onSettingsUpdate,
 }) => {
-  const { lang, t } = useTranslation('quran-media-maker');
+  const { lang, t } = useTranslation('media');
   const chaptersData = useContext(DataContext);
   const [rangesError, setRangesError] = useState(null);
 

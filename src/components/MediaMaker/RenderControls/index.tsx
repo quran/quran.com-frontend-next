@@ -40,7 +40,7 @@ const RenderControls: React.FC<Props> = ({
   getIsPlayerPlaying,
   isFetching,
 }) => {
-  const { t } = useTranslation('quran-media-maker');
+  const { t } = useTranslation('media');
   const [isCopied, setIsCopied] = useState(false);
 
   useEffect(() => {

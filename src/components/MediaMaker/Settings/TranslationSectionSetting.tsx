@@ -114,9 +114,7 @@ const TranslationSettingsSection: React.FC<Props> = ({ onSettingsUpdate, transla
               </Modal.Header>
             </Modal.Body>
             <Modal.Footer>
-              <Modal.Action onClick={clearTranslations}>
-                {t('quran-media-maker:deselect')}
-              </Modal.Action>
+              <Modal.Action onClick={clearTranslations}>{t('media:deselect')}</Modal.Action>
               <Modal.CloseAction onClick={onSelectionCardClicked}>{t('close')}</Modal.CloseAction>
             </Modal.Footer>
           </Modal>

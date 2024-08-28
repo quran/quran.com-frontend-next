@@ -16,7 +16,7 @@ type BackgroundTabProps = {
 };
 
 const BackgroundTab: FC<BackgroundTabProps> = ({ mediaSettings, onSettingsUpdate }) => {
-  const { t } = useTranslation('quran-media-maker');
+  const { t } = useTranslation('media');
   return (
     <div className={styles.tabContainer}>
       <div className={styles.section}>

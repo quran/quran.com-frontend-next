@@ -19,7 +19,7 @@ type ColorsTabProps = {
 };
 
 const ColorsTab: FC<ColorsTabProps> = ({ mediaSettings, onSettingsUpdate }) => {
-  const { t } = useTranslation('quran-media-maker');
+  const { t } = useTranslation('media');
   const { fontColor, backgroundColor, opacity, borderColor, borderSize } = mediaSettings;
   const onTextColorChange = (event) => {
     debouncedOnChange(event.target.value);

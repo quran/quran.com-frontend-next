@@ -23,7 +23,7 @@ type Props = {
 };
 
 const RenderVideoButton: React.FC<Props> = ({ inputProps, isFetching }) => {
-  const { t } = useTranslation('quran-media-maker');
+  const { t } = useTranslation('media');
   const { renderMedia, state } = useGenerateMediaFile(inputProps);
   const { data, mutate } = useGetMediaFilesCount(MediaType.VIDEO);
   const downloadButtonRef = React.useRef<HTMLParagraphElement>();
