@@ -6,14 +6,7 @@ import classNames from 'classnames';
 import { GetStaticProps, NextPage } from 'next';
 import Image from 'next/image';
 import useTranslation from 'next-translate/useTranslation';
-import {
-  AbsoluteFill,
-  cancelRender,
-  continueRender,
-  delayRender,
-  prefetch,
-  staticFile,
-} from 'remotion';
+import { AbsoluteFill, cancelRender, prefetch, staticFile } from 'remotion';
 import useSWRImmutable from 'swr/immutable';
 
 import {
@@ -91,8 +84,7 @@ const MediaMaker: NextPage<MediaMaker> = ({
   const [videoFileReady, setVideoFileReady] = useState(false);
   const [audioFileReady, setAudioFileReady] = useState(false);
   const [isUpdating, setIsUpdating] = useState(false);
-  const [handleVideo] = useState(() => delayRender('Downloading video file...'));
-  const [handleAudio] = useState(() => delayRender('Downloading audio file...'));
+  const TOAST_GENERAL_ERROR = t('common:error.general');
   const areMediaFilesReady = videoFileReady && audioFileReady;
 
   const playerRef = useRef<PlayerRef>(null);
@@ -155,6 +147,23 @@ const MediaMaker: NextPage<MediaMaker> = ({
       current.pause();
     }
     current.seekTo(0);
+  }, []);
+
+  useEffect(() => {
+    const current = playerRef?.current;
+    if (!current) {
+      return;
+    }
+
+    const onClick = (e) => {
+      current.toggle(e);
+    };
+
+    current.getContainerNode().addEventListener('click', onClick);
+    // eslint-disable-next-line consistent-return
+    return () => {
+      current.getContainerNode().removeEventListener('click', onClick);
+    };
   }, []);
 
   useEffect(() => {
@@ -228,11 +237,11 @@ const MediaMaker: NextPage<MediaMaker> = ({
   // listen for errors and show a toast
   useEffect(() => {
     if (versesError || audioError) {
-      toast(t('common:error.general'), {
+      toast(TOAST_GENERAL_ERROR, {
         status: ToastStatus.Error,
       });
     }
-  }, [versesError, audioError, toast, t]);
+  }, [versesError, audioError, toast, TOAST_GENERAL_ERROR]);
 
   const isFetching = isVersesValidating || isAudioValidating;
   const chapterEnglishName = useMemo<string>(() => {
@@ -297,48 +306,54 @@ const MediaMaker: NextPage<MediaMaker> = ({
     chapterEnglishName,
   ]);
 
-  const method = isSafari() ? 'base64' : 'blob-url';
-
   useEffect(() => {
     setVideoFileReady(false);
     // {@see https://www.remotion.dev/docs/troubleshooting/player-flicker#option-6-prefetching-as-base64-to-avoid-network-request-and-local-http-server}
     const { waitUntilDone: waitUntilVideoDone } = prefetch(
       staticFile(`/publicMin${inputProps.video.videoSrc}`),
-      { method },
+      { method: 'blob-url' },
     );
 
     waitUntilVideoDone()
       .then(() => {
         setVideoFileReady(true);
-        continueRender(handleVideo);
       })
       .catch((e) => {
-        toast(t('common:error.general'), {
+        toast(TOAST_GENERAL_ERROR, {
           status: ToastStatus.Error,
         });
         cancelRender(e);
       });
-  }, [inputProps.video.videoSrc, method, handleVideo, toast, t]);
+  }, [inputProps.video.videoSrc, toast, TOAST_GENERAL_ERROR]);
 
   useEffect(() => {
-    setAudioFileReady(false);
-    // {@see https://www.remotion.dev/docs/troubleshooting/player-flicker#option-6-prefetching-as-base64-to-avoid-network-request-and-local-http-server}
-    const { waitUntilDone: waitUntilAudioDone } = prefetch(inputProps.audio.audioUrl, {
-      method,
-    });
-
-    waitUntilAudioDone()
-      .then(() => {
-        setAudioFileReady(true);
-        continueRender(handleAudio);
-      })
-      .catch((e) => {
-        toast(t('common:error.general'), {
-          status: ToastStatus.Error,
-        });
-        cancelRender(e);
+    if (inputProps.audio.audioUrl !== defaultAudio.audioUrl || !shouldRefetchAudioData) {
+      setAudioFileReady(false);
+      // {@see https://www.remotion.dev/docs/troubleshooting/player-flicker#option-6-prefetching-as-base64-to-avoid-network-request-and-local-http-server}
+      const { waitUntilDone: waitUntilAudioDone } = prefetch(inputProps.audio.audioUrl, {
+        method: 'blob-url',
+        contentType: 'audio/mp3',
       });
-  }, [inputProps.audio.audioUrl, method, handleAudio, toast, t]);
+
+      waitUntilAudioDone()
+        .then(() => {
+          setAudioFileReady(true);
+        })
+        .catch((e) => {
+          toast(TOAST_GENERAL_ERROR, {
+            status: ToastStatus.Error,
+          });
+          cancelRender(e);
+        });
+    }
+  }, [
+    inputProps.audio.audioUrl,
+    toast,
+    TOAST_GENERAL_ERROR,
+    defaultAudio.audioUrl,
+    audioData.audioUrl,
+    shouldRefetchAudioData,
+  ]);
 
   const renderPoster: RenderPoster = useCallback(() => {
     const video = getBackgroundVideoById(videoId);
