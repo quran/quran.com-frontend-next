@@ -3373,10 +3373,10 @@
     nanoid "^5.0.0"
     tslib "^2.5.0"
 
-"@next/bundle-analyzer@^14.2.6":
-  version "14.2.6"
-  resolved "https://registry.yarnpkg.com/@next/bundle-analyzer/-/bundle-analyzer-14.2.6.tgz#cd5098f73f52fbb01a0631264980840bbf3a7c74"
-  integrity sha512-6x5EdGfJu9Yl5ER6PYv1a3KXPBxU4OCu92oaqP9kxkhEyqHrJcSLYDax2xa7ehv92Ypw43zIHDvASX2F8qYNew==
+"@next/bundle-analyzer@^14.2.7":
+  version "14.2.7"
+  resolved "https://registry.yarnpkg.com/@next/bundle-analyzer/-/bundle-analyzer-14.2.7.tgz#c7b9595bf57d31dc4c50b91d9afdc21380d7eae6"
+  integrity sha512-Zz55BLjoNKiUjr8PJIMTXFQnbUEpk8qkXP5nmEcXvOorbruQOIdmkRa3sahlJZPWTjsZNpxwImhZf2yFMVMWeg==
   dependencies:
     webpack-bundle-analyzer "4.10.1"
 
