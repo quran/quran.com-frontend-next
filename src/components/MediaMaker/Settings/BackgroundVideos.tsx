@@ -35,8 +35,8 @@ const BackgroundVideos: React.FC<Props> = ({ onSettingsUpdate, videoId }) => {
             onVideoSelected(video.id);
           }}
           src={video.thumbnailSrc}
-          width="300"
-          height="300"
+          width="100"
+          height="100"
         />
       ))}
     </div>
