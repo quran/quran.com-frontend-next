@@ -23,7 +23,6 @@ type Props = {
   isFetching: boolean;
 };
 
-// TODO: create a common component with RenderVideoButton since most of the component contains the same code.
 const RenderImageButton: React.FC<Props> = ({
   inputProps,
   getCurrentFrame,
@@ -46,13 +45,13 @@ const RenderImageButton: React.FC<Props> = ({
   const isRendering = state.status === RenderStatus.RENDERING;
   const isInvoking = state.status === RenderStatus.INVOKING;
   const isDone = state.status === RenderStatus.DONE;
-
   const isInitOrInvokingOrError = [
     RenderStatus.INVOKING,
     RenderStatus.INIT,
     RenderStatus.ERROR,
   ].includes(state.status);
   const isRenderingOrDone = [RenderStatus.RENDERING, RenderStatus.DONE].includes(state.status);
+  const isError = state?.status === RenderStatus.ERROR;
 
   const onRenderOrDownloadClicked = (e: React.MouseEvent<HTMLParagraphElement>) => {
     if (isInitOrInvokingOrError) {
@@ -76,13 +75,10 @@ const RenderImageButton: React.FC<Props> = ({
     }
   };
 
-  const isError = state?.status === RenderStatus.ERROR;
-
   // listen to state changes and download the file when it's done
   useEffect(() => {
     if (state?.status === RenderStatus.DONE) {
       downloadButtonRef.current.click();
-      previousFrame.current = getCurrentFrame();
       mutate(mutateGeneratedMediaCounter, { revalidate: false });
     }
   }, [getCurrentFrame, mutate, state?.status]);
