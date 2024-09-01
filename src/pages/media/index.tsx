@@ -83,7 +83,6 @@ const MediaMaker: NextPage<MediaMaker> = ({
   const [isReady, setIsReady] = useState(false);
   const [videoFileReady, setVideoFileReady] = useState(false);
   const [audioFileReady, setAudioFileReady] = useState(false);
-  const [isUpdating, setIsUpdating] = useState(false);
   const TOAST_GENERAL_ERROR = t('common:error.general');
   const areMediaFilesReady = videoFileReady && audioFileReady;
 
@@ -138,17 +137,6 @@ const MediaMaker: NextPage<MediaMaker> = ({
 
   useAddQueryParamsToUrl(getQuranMediaMakerNavigationUrl(queryParams), {});
 
-  const seekToBeginning = useCallback(() => {
-    const current = playerRef?.current;
-    if (!current) {
-      return;
-    }
-    if (current.isPlaying) {
-      current.pause();
-    }
-    current.seekTo(0);
-  }, []);
-
   useEffect(() => {
     const current = playerRef?.current;
     if (!current) {
@@ -159,16 +147,12 @@ const MediaMaker: NextPage<MediaMaker> = ({
       current.toggle(e);
     };
 
-    current.getContainerNode().addEventListener('click', onClick);
+    current?.getContainerNode().addEventListener('click', onClick);
     // eslint-disable-next-line consistent-return
     return () => {
-      current.getContainerNode().removeEventListener('click', onClick);
+      current?.getContainerNode().removeEventListener('click', onClick);
     };
   }, []);
-
-  useEffect(() => {
-    setIsUpdating(false);
-  }, [mediaSettings]);
 
   const API_PARAMS = useMemo(() => {
     return {
@@ -248,14 +232,6 @@ const MediaMaker: NextPage<MediaMaker> = ({
     return englishChaptersList?.[surah]?.translatedName as string;
   }, [surah, englishChaptersList]);
 
-  const getCurrentFrame = useCallback(() => {
-    return playerRef?.current?.getCurrentFrame();
-  }, []);
-
-  const getIsPlayerPlaying = useCallback(() => {
-    return playerRef?.current?.isPlaying();
-  }, []);
-
   const audioData = useMemo(() => {
     return getCurrentRangesAudioData(currentSurahAudioData, Number(verseFrom), Number(verseTo));
   }, [currentSurahAudioData, verseFrom, verseTo]);
@@ -332,7 +308,6 @@ const MediaMaker: NextPage<MediaMaker> = ({
       // {@see https://www.remotion.dev/docs/troubleshooting/player-flicker#option-6-prefetching-as-base64-to-avoid-network-request-and-local-http-server}
       const { waitUntilDone: waitUntilAudioDone } = prefetch(inputProps.audio.audioUrl, {
         method: 'blob-url',
-        contentType: 'audio/mp3',
       });
 
       waitUntilAudioDone()
@@ -358,7 +333,7 @@ const MediaMaker: NextPage<MediaMaker> = ({
   const renderPoster: RenderPoster = useCallback(() => {
     const video = getBackgroundVideoById(videoId);
 
-    if (isUpdating || isFetching || !areMediaFilesReady) {
+    if (isFetching || !areMediaFilesReady) {
       return (
         <div className={styles.loadingContainer}>
           <Spinner className={styles.spinner} size={SpinnerSize.Large} />
@@ -377,7 +352,7 @@ const MediaMaker: NextPage<MediaMaker> = ({
         />
       </AbsoluteFill>
     );
-  }, [areMediaFilesReady, isFetching, isUpdating, videoId]);
+  }, [areMediaFilesReady, isFetching, videoId]);
 
   const chaptersList = useMemo(() => {
     return Object.entries(chaptersData).map(([id, chapterObj], index) => ({
@@ -428,7 +403,7 @@ const MediaMaker: NextPage<MediaMaker> = ({
               doubleClickToFullscreen
               fps={VIDEO_FPS}
               ref={playerRef}
-              controls={!isUpdating && !isFetching && areMediaFilesReady}
+              controls={!isFetching && areMediaFilesReady}
               bufferStateDelayInMilliseconds={200} // wait for 200ms second before showing the spinner
               renderPoster={renderPoster}
               posterFillMode="player-size"
@@ -443,13 +418,10 @@ const MediaMaker: NextPage<MediaMaker> = ({
           <VideoSettings
             chaptersList={chaptersList}
             reciters={reciters}
-            seekToBeginning={seekToBeginning}
-            getCurrentFrame={getCurrentFrame}
-            getIsPlayerPlaying={getIsPlayerPlaying}
+            playerRef={playerRef}
             isFetching={isFetching}
             inputProps={inputProps}
             mediaSettings={mediaSettings}
-            setIsUpdating={setIsUpdating}
           />
         </div>
       </div>
