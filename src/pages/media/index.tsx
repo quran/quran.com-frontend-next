@@ -15,6 +15,7 @@ import {
   getChapterAudioData,
   getChapterVerses,
 } from '@/api';
+import PlayerContent from '@/components/MediaMaker/Content';
 import styles from '@/components/MediaMaker/MediaMaker.module.scss';
 import VideoSettings from '@/components/MediaMaker/Settings/VideoSettings';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
@@ -87,10 +88,6 @@ const MediaMaker: NextPage<MediaMaker> = ({
   const areMediaFilesReady = videoFileReady && audioFileReady;
 
   const playerRef = useRef<PlayerRef>(null);
-
-  const lazyComponent = useCallback(() => {
-    return import('@/components/MediaMaker/Content');
-  }, []);
 
   useEffect(() => {
     setIsReady(true);
@@ -395,7 +392,7 @@ const MediaMaker: NextPage<MediaMaker> = ({
                 [styles.playerHeight]: !isSafari(),
               })}
               inputProps={inputProps}
-              lazyComponent={lazyComponent}
+              component={PlayerContent}
               durationInFrames={getDurationInFrames(timestamps)}
               compositionWidth={width}
               compositionHeight={height}
