@@ -42,6 +42,8 @@ type Props = {
 };
 
 const WORD_SURAH = 'سُورَة';
+const DEFAULT_START_FROM = 0;
+const DEFAULT_DURATION_IN_FRAMES = 183;
 const MediaMakerContent: React.FC<Props> = ({
   verses,
   audio,
@@ -62,17 +64,25 @@ const MediaMakerContent: React.FC<Props> = ({
   isPlayer = false,
 }) => {
   const chaptersDataArabic = useGetChaptersData('ar');
-  const startFrom = useMemo(() => {
-    return audio?.verseTimings[0]?.normalizedStart
-      ? (audio?.verseTimings[0]?.normalizedStart / 1000) * 30
-      : (audio?.verseTimings[0]?.timestampFrom / 1000) * 30;
-  }, [audio?.verseTimings]);
+  const firstVerseTiming = audio?.verseTimings[0];
 
-  const endAt = useMemo(() => {
-    return audio?.verseTimings[0]?.normalizedEnd
-      ? (audio?.verseTimings[audio?.verseTimings?.length - 1]?.normalizedEnd / 1000) * 30
-      : (audio?.verseTimings[audio?.verseTimings?.length - 1]?.timestampTo / 1000) * 30;
-  }, [audio?.verseTimings]);
+  const startFrom =
+    useMemo(() => {
+      const normalizedStart = firstVerseTiming?.normalizedStart;
+
+      return normalizedStart
+        ? (normalizedStart / 1000) * 30
+        : (firstVerseTiming?.timestampFrom / 1000) * 30;
+    }, [firstVerseTiming?.normalizedStart, firstVerseTiming?.timestampFrom]) || DEFAULT_START_FROM;
+
+  const endAt =
+    useMemo(() => {
+      const verseTiming = audio?.verseTimings[audio?.verseTimings?.length - 1];
+
+      return firstVerseTiming?.normalizedEnd
+        ? (verseTiming?.normalizedEnd / 1000) * 30
+        : (verseTiming?.timestampTo / 1000) * 30;
+    }, [audio?.verseTimings, firstVerseTiming?.normalizedEnd]) || DEFAULT_DURATION_IN_FRAMES;
 
   const audioHasStartAndEndRanges = typeof startFrom === 'number' && typeof endAt === 'number';
 
