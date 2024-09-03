@@ -137,23 +137,6 @@ const MediaMaker: NextPage<MediaMaker> = ({
 
   useAddQueryParamsToUrl(getQuranMediaMakerNavigationUrl(queryParams), {});
 
-  useEffect(() => {
-    const current = playerRef?.current;
-    if (!current) {
-      return;
-    }
-
-    const onClick = (e) => {
-      current.toggle(e);
-    };
-
-    current?.getContainerNode().addEventListener('click', onClick);
-    // eslint-disable-next-line consistent-return
-    return () => {
-      current?.getContainerNode().removeEventListener('click', onClick);
-    };
-  }, []);
-
   const API_PARAMS = useMemo(() => {
     return {
       ...DEFAULT_API_PARAMS,
