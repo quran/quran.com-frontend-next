@@ -33,7 +33,7 @@ import Translation from '@/types/Translation';
 import { getMushafId } from '@/utils/api';
 import { makeChapterAudioDataUrl, makeVersesUrl } from '@/utils/apiPaths';
 import { areArraysEqual } from '@/utils/array';
-import { getAllChaptersData } from '@/utils/chapter';
+import { getAllChaptersData, getChapterData } from '@/utils/chapter';
 import { isSafari } from '@/utils/device-detector';
 import { getLanguageAlternates, toLocalizedNumber } from '@/utils/locale';
 import {
@@ -56,6 +56,7 @@ import {
   ONE_MONTH_REVALIDATION_PERIOD_SECONDS,
   REVALIDATION_PERIOD_ON_ERROR_SECONDS,
 } from '@/utils/staticPageGeneration';
+import { isValidVerseFrom, isValidVerseKey, isValidVerseTo } from '@/utils/validator';
 import { VersesResponse } from 'types/ApiResponses';
 import ChaptersData from 'types/ChaptersData';
 
@@ -231,9 +232,31 @@ const MediaMaker: NextPage<MediaMaker> = ({
     return englishChaptersList?.[surah]?.translatedName as string;
   }, [surah, englishChaptersList]);
 
+  // Since we get the {{verseFrom}} and {{verseTo}} from the mediaSettings they will be available immediately,
+  // however this is not the case for {{currentSurahAudioData}}, so we validate the verses against the surah from {{currentSurahAudioData}}
+  // and return defaultAudio if it is not valid and return the surahAudio if they are valid.
   const audioData = useMemo(() => {
+    const chapterId = String(currentSurahAudioData.chapterId);
+    const startVerseKey = `${chapterId}:${verseFrom}`;
+    const endVerseKey = `${chapterId}:${verseTo}`;
+    const isValidAudioVerseFromKey = isValidVerseKey(chaptersData, startVerseKey);
+    const isValidAudioVerseToKey = isValidVerseKey(chaptersData, endVerseKey);
+
+    if (!isValidAudioVerseFromKey || !isValidAudioVerseToKey) {
+      return defaultAudio;
+    }
+
+    const chapterData = getChapterData(chaptersData, chapterId);
+    const isValidAudioVerses =
+      isValidVerseFrom(startVerseKey, endVerseKey, chapterData.versesCount, chapterId) &&
+      isValidVerseTo(startVerseKey, endVerseKey, chapterData.versesCount, chapterId);
+
+    if (!isValidAudioVerses) {
+      return defaultAudio;
+    }
+
     return getCurrentRangesAudioData(currentSurahAudioData, Number(verseFrom), Number(verseTo));
-  }, [currentSurahAudioData, verseFrom, verseTo]);
+  }, [chaptersData, currentSurahAudioData, defaultAudio, verseFrom, verseTo]);
 
   const timestamps = useMemo(() => {
     return getNormalizedTimestamps(audioData, VIDEO_FPS);
