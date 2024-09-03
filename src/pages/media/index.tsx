@@ -71,8 +71,6 @@ interface MediaMaker {
   englishChaptersList: ChaptersData;
 }
 
-const DEFAULT_DURATION_IN_FRAMES = 183;
-
 const MediaMaker: NextPage<MediaMaker> = ({
   hasError,
   chaptersData,
@@ -379,11 +377,6 @@ const MediaMaker: NextPage<MediaMaker> = ({
     return <></>;
   }
 
-  const durationInFrames =
-    getDurationInFrames(timestamps) <= 1
-      ? DEFAULT_DURATION_IN_FRAMES
-      : getDurationInFrames(timestamps);
-
   return (
     <>
       <NextSeoWrapper
@@ -406,7 +399,7 @@ const MediaMaker: NextPage<MediaMaker> = ({
               })}
               inputProps={inputProps}
               component={PlayerContent}
-              durationInFrames={durationInFrames}
+              durationInFrames={getDurationInFrames(timestamps)}
               compositionWidth={width}
               compositionHeight={height}
               allowFullscreen
