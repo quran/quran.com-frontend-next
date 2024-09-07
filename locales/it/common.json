@@ -146,11 +146,15 @@
     "verify-code": "Verificare il codice"
   },
   "error": {
+    "MediaVersesRangeLimitExceeded": "Puoi selezionare solo fino a {{limit}} versi alla volta. Seleziona un intervallo più piccolo.",
     "bookmark-sync": "Il segnalibro non è sincronizzato.",
     "email-login-fail": "Impossibile accedere con l'e-mail. Per favore riprova",
     "general": "Qualcosa è andato storto. Per favore riprova.",
     "offline": "Sembra che tu abbia perso la connessione. Si prega di controllare e riprovare.",
-    "pref-persist-fail": "Impossibile sincronizzare le impostazioni sul cloud."
+    "pref-persist-fail": "Impossibile sincronizzare le impostazioni sul cloud.",
+    "ranges-no-value": "L'inizio e la fine dell'intervallo devono avere un valore",
+    "ranges-too-many-verses": "*Max {{maxNumberOfVerses}} versetti",
+    "ranges-wrong-order": "Il verso iniziale deve precedere quello finale."
   },
   "feedback": "Feedback",
   "fonts": {
@@ -163,10 +167,12 @@
     "qcf-desc": "I font Complesso King Fahad (V1 e V2) offrono una qualità superiore ma richiedono un caricamento più lungo.",
     "qpc_uthmani_hafs": "QPC Uthmani Hafs",
     "quran-font": "Carattere del Corano",
+    "quran-font-size": "Dimensione del carattere del Corano",
     "tajweed": "Tajweed",
     "tajweed-desc": "Il carattere Tajweed mostra un Mushaf colorato di Tajweed. Puoi leggere di più sulle regole dei colori Tajweed <0> qui <\/0>",
     "text_indopak": "IndoPak",
-    "text_uthmani": "Uthmani"
+    "text_uthmani": "Uthmani",
+    "translation-font-size": "Dimensione del carattere della traduzione"
   },
   "footer": {
     "description": "Quran.com è un Sadaqah Jariyah. Speriamo di rendere facile per tutti la lettura, lo studio e l'apprendimento del Nobile Corano. Il Nobile Corano ha molti nomi tra cui Al-Quran Al-Kareem, Al-Ketab, Al-Furqan, Al-Maw'itha, Al-Thikr e Al-Noor.",
@@ -300,6 +306,7 @@
     "no-tafsir-selected": "Nessun tafsir selezionato",
     "no-translation-selected": "Nessuna traduzione selezionata",
     "reading-experience": "Esperienza di lettura",
+    "reset": "Reset",
     "reset-cta": "Ripristina le impostazioni",
     "reset-notif": "Le tue impostazioni sono state ripristinate a quelle predefinite",
     "search-reciter": "Cerca Relatore",
@@ -323,7 +330,7 @@
     "search-hizb": "Cerca Hizb",
     "search-juz": "Cerca Juz",
     "search-page": "Pagina di ricerca",
-    "search-surah": "Cerca sura",
+    "search-surah": "Cerca Sura",
     "try-navigating-with": "Suggerimento: prova a navigare con"
   },
   "sitemap": "Mappa del sito",
