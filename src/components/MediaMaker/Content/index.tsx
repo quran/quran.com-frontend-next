@@ -90,7 +90,7 @@ const MediaMakerContent: React.FC<Props> = ({
       }}
     >
       <div className={styles.videoContainer}>
-        <Video loop src={videoPath} />
+        <Video loop pauseWhenBuffering src={videoPath} />
       </div>
       {audioHasStartAndEndRanges && (
         <Audio
