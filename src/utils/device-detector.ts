@@ -16,6 +16,10 @@ export const isAppleDevice = () => {
 };
 
 export const isAppleWebKit = () => {
+  if (!isClient) {
+    return false;
+  }
+
   const { userAgent } = navigator;
   return /AppleWebKit/.test(userAgent) && /Mobile/.test(userAgent);
 };
