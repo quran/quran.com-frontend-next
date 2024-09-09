@@ -6,14 +6,7 @@ import classNames from 'classnames';
 import { GetStaticProps, NextPage } from 'next';
 import Image from 'next/image';
 import useTranslation from 'next-translate/useTranslation';
-import {
-  AbsoluteFill,
-  cancelRender,
-  continueRender,
-  delayRender,
-  prefetch,
-  staticFile,
-} from 'remotion';
+import { AbsoluteFill, cancelRender, prefetch, staticFile } from 'remotion';
 import useSWRImmutable from 'swr/immutable';
 
 import {
@@ -92,9 +85,6 @@ const MediaMaker: NextPage<MediaMaker> = ({
   const [isReady, setIsReady] = useState(false);
   const [videoFileReady, setVideoFileReady] = useState(false);
   const [audioFileReady, setAudioFileReady] = useState(false);
-  const [handleAudio] = useState(() => delayRender());
-  const [handleVideo] = useState(() => delayRender());
-
   const TOAST_GENERAL_ERROR = t('common:error.general');
   const areMediaFilesReady = videoFileReady && audioFileReady;
 
@@ -305,13 +295,15 @@ const MediaMaker: NextPage<MediaMaker> = ({
 
     waitUntilVideoDone()
       .then(() => {
-        continueRender(handleVideo);
         setVideoFileReady(true);
       })
       .catch((e) => {
+        toast(TOAST_GENERAL_ERROR, {
+          status: ToastStatus.Error,
+        });
         cancelRender(e);
       });
-  }, [inputProps.video.videoSrc, toast, TOAST_GENERAL_ERROR, handleVideo]);
+  }, [inputProps.video.videoSrc, toast, TOAST_GENERAL_ERROR]);
 
   useEffect(() => {
     if (inputProps.audio.audioUrl !== defaultAudio.audioUrl || !shouldRefetchAudioData) {
@@ -323,10 +315,12 @@ const MediaMaker: NextPage<MediaMaker> = ({
 
       waitUntilAudioDone()
         .then(() => {
-          continueRender(handleAudio);
           setAudioFileReady(true);
         })
         .catch((e) => {
+          toast(TOAST_GENERAL_ERROR, {
+            status: ToastStatus.Error,
+          });
           cancelRender(e);
         });
     }
@@ -337,7 +331,6 @@ const MediaMaker: NextPage<MediaMaker> = ({
     defaultAudio.audioUrl,
     audioData.audioUrl,
     shouldRefetchAudioData,
-    handleAudio,
   ]);
 
   const renderPoster: RenderPoster = useCallback(() => {
