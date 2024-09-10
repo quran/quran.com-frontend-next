@@ -112,7 +112,6 @@ $white: #ffffff;
   width: fit-content !important;
   max-width: 97% !important;
   height: fit-content !important;
-  max-height: 73% !important;
   margin: auto !important;
   border: 2px gray solid !important;
   border-radius: 20px !important;
@@ -126,9 +125,11 @@ $white: #ffffff;
 .verseLandscape {
   min-width: 60% !important;
   min-height: 50% !important;
+  max-height: 71% !important;
 }
 
 .versePortrait {
   min-width: 80% !important;
   min-height: 25% !important;
+  max-height: 75% !important;
 }

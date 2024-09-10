@@ -83,6 +83,7 @@ const MediaMakerContent: React.FC<Props> = ({
   const audioHasStartAndEndRanges = typeof startFrom === 'number' && typeof endAt === 'number';
 
   const videoPath = staticFile(`${isPlayer ? '/publicMin' : ''}${video.videoSrc}`);
+  const isPortrait = orientation === Orientation.PORTRAIT;
   return (
     <AbsoluteFill
       style={{
@@ -119,7 +120,7 @@ const MediaMakerContent: React.FC<Props> = ({
               <AbsoluteFill
                 style={{
                   height: '250px',
-                  paddingTop: 40,
+                  paddingTop: isPortrait ? 90 : 40,
                   backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0))',
                 }}
               >
@@ -150,8 +151,8 @@ const MediaMakerContent: React.FC<Props> = ({
                   '--border-color': borderColor,
                 }}
                 className={classNames(styles.verseContainer, styles.verseBorder, {
-                  [styles.verseLandscape]: orientation === Orientation.LANDSCAPE,
-                  [styles.versePortrait]: orientation === Orientation.PORTRAIT,
+                  [styles.verseLandscape]: !isPortrait,
+                  [styles.versePortrait]: isPortrait,
                 })}
               >
                 <div
