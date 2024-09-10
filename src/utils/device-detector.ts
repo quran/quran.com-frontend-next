@@ -15,22 +15,11 @@ export const isAppleDevice = () => {
   return isOSX || isMacOs();
 };
 
-export const isAppleWebKit = () => {
-  if (!isClient) {
-    return false;
-  }
-
-  const { userAgent } = navigator;
-  return /AppleWebKit/.test(userAgent) && /Mobile/.test(userAgent);
-};
-
 export const isFirefox = () => {
   if (!isClient) {
     return false;
   }
-
-  const { userAgent } = navigator;
-  return userAgent.toLowerCase().includes('firefox');
+  return navigator.userAgent.toLowerCase().includes('firefox');
 };
 
 export const isSafari = () => {
@@ -42,4 +31,11 @@ export const isSafari = () => {
   const safari = userAgent.toLowerCase().includes('safari');
   const chrome = userAgent.toLowerCase().includes('chrome');
   return safari && !chrome;
+};
+
+export const isChromeIOS = () => {
+  if (!isClient) {
+    return false;
+  }
+  return navigator.userAgent.match('CriOS');
 };
