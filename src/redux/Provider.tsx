@@ -59,10 +59,27 @@ const ReduxProvider = ({ children, locale }) => {
     }
   };
 
+  /**
+   * We want to delay rendering the children until the persisted state is retrieved
+   * to prevent UI flickering. This is only necessary on the client side.
+   * For more info:
+   * {@see https://github.com/rt2zz/redux-persist?tab=readme-ov-file#react-integration}
+   *
+   * @param {boolean} bootstrapped When bootstrapped is true, persistence is complete and it is safe to render the full app.
+   * @returns {React.ReactNode}
+   */
+  const renderChildren = (bootstrapped: boolean): React.ReactNode => {
+    // If the app is not bootstrapped, we don't want to render the children
+    if (isClient && !bootstrapped) {
+      return null;
+    }
+    return children;
+  };
+
   return (
     <Provider store={store}>
       <PersistGate persistor={persistor} onBeforeLift={onBeforeLift}>
-        {() => <>{children}</>}
+        {renderChildren}
       </PersistGate>
     </Provider>
   );
