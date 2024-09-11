@@ -114,7 +114,11 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
 
         <div className={classNames(styles.contentContainer)}>
           <div className={styles.arabicVerseContainer}>
-            <VerseText words={getVerseWords(verse)} shouldShowH1ForSEO={verseIndex === 0} />
+            <VerseText
+              words={getVerseWords(verse)}
+              shouldShowH1ForSEO={verseIndex === 0}
+              startingVerse={Number(startingVerse)}
+            />
           </div>
           <div className={styles.verseTranslationsContainer}>
             {verse.translations?.map((translation: Translation) => (
