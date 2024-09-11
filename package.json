@@ -26,6 +26,7 @@
     "analyze": "cross-env ANALYZE_BUNDLE=true yarn build",
     "lokalise": "node scripts/lokalise.js",
     "rename:v4-font-files": "node scripts/rename-v4-font-files.js",
+    "remove:v4-font-files": "node scripts/remove-v4-font-files.js",
     "arrange-files:by-extention": "node scripts/arrange-files-in-folders.js",
     "remove-files:by-name": "node scripts/remove-files.js",
     "chapter-data:format": "node scripts/format-chapter-data-json.js"
