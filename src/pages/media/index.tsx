@@ -34,7 +34,7 @@ import { getMushafId } from '@/utils/api';
 import { makeChapterAudioDataUrl, makeVersesUrl } from '@/utils/apiPaths';
 import { areArraysEqual } from '@/utils/array';
 import { getAllChaptersData, getChapterData } from '@/utils/chapter';
-import { isAppleWebKit, isSafari } from '@/utils/device-detector';
+import { isChromeIOS, isSafari } from '@/utils/device-detector';
 import { getLanguageAlternates, toLocalizedNumber } from '@/utils/locale';
 import {
   DEFAULT_API_PARAMS,
@@ -285,8 +285,7 @@ const MediaMaker: NextPage<MediaMaker> = ({
     chapterEnglishName,
   ]);
 
-  const method = isAppleWebKit() ? 'base64' : 'blob-url';
-
+  const method = isChromeIOS() ? 'base64' : 'blob-url';
   useEffect(() => {
     setVideoFileReady(false);
     // {@see https://www.remotion.dev/docs/troubleshooting/player-flicker#option-6-prefetching-as-base64-to-avoid-network-request-and-local-http-server}
