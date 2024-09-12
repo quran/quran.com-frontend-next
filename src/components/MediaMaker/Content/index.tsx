@@ -84,6 +84,7 @@ const MediaMakerContent: React.FC<Props> = ({
 
   const videoPath = staticFile(`${isPlayer ? '/publicMin' : ''}${video.videoSrc}`);
   const isPortrait = orientation === Orientation.PORTRAIT;
+  const isSameVerse = verses.length === 1;
   return (
     <AbsoluteFill
       style={{
@@ -134,9 +135,13 @@ const MediaMakerContent: React.FC<Props> = ({
                     <span
                       className={styles.surahArabic}
                     >{`${WORD_SURAH} ${chapter?.translatedName}`}</span>
-                    <span
-                      className={styles.surahEnglish}
-                    >{` - ${chapterEnglishName} (Ch. ${verse.chapterId})`}</span>
+                    <span className={styles.surahEnglish}>
+                      {` - ${chapterEnglishName} (${verse.chapterId}:${
+                        isSameVerse
+                          ? verse.verseNumber
+                          : `${verses[0].verseNumber}-${verses[verses.length - 1].verseNumber}`
+                      })`}
+                    </span>
                   </div>
                 </div>
               </AbsoluteFill>
