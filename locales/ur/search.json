@@ -1,12 +1,12 @@
 {
-    "default-translations": "پہلے سے طے شدہ تراجم",
-    "filter": "فلٹر",
-    "language-filter-label": "کسی زبان کے تمام ترجمے تلاش کریں۔",
-    "language-select": "ایک زبان منتخب کریں۔",
-    "reset": "دوبارہ ترتیب دیں",
-    "search": "تلاش کریں۔",
-    "search-desc": "ایک طاقتور اور انتہائی درست کثیر لسانی سرچ انجن کا استعمال کرتے ہوئے قرآن پاک اور اس کے تراجم کے کارپس کو تلاش کریں۔",
-    "search-title": "' {{searchQuery}} تلاش کریں",
-    "searching-translations": "ترجمے تلاش کر رہے ہیں۔",
-    "translation-select": "ترجمہ منتخب کریں۔"
+  "default-translations": "ڈیفالٹ ترجمے",
+  "filter": "فلٹر",
+  "language-filter-label": "زبان کے تمام ترجمے سرچ کریں۔",
+  "language-select": "زبان منتخب کریں۔",
+  "reset": "ری سیٹ",
+  "search": "سرچ کریں۔",
+  "search-desc": "ایک طاقتور اور انتہائی درست کثیر لسانی سرچ انجن کا استعمال کرتے ہوئے قرآن پاک اور اس کے تراجم کے کارپس کو سرچ کریں۔",
+  "search-title": "' {{searchQuery}} سرچ کریں",
+  "searching-translations": "ترجمے سرچ کر رہے ہیں۔",
+  "translation-select": "ترجمہ منتخب کریں۔"
 }

@@ -9,7 +9,7 @@
     "plugin:i18next/recommended",
     "plugin:storybook/recommended"
   ],
-  "plugins": ["prettier", "react", "react-func", "sonarjs", "unicorn", "jsdoc"],
+  "plugins": ["prettier", "react", "react-func", "sonarjs", "unicorn", "jsdoc", "@remotion"],
   "rules": {
     "i18next/no-literal-string": [
       "error",
@@ -24,23 +24,20 @@
     "no-use-before-define": "off", // since we are using airbnb, it turns this on, we need to disabled it @see https://stackoverflow.com/a/64024916/1931451
     "@typescript-eslint/no-use-before-define": "off",
     "no-shadow": "off", // we need to disable this @see https://stackoverflow.com/a/63961972/1931451
-    "@typescript-eslint/no-shadow": ["error"],
+    "@typescript-eslint/no-shadow": 2,
     "react/jsx-filename-extension": 0,
     "react/jsx-props-no-spreading": 0,
     "react/function-component-definition": 0,
     "react/jsx-no-useless-fragment": 0,
     "react/no-unstable-nested-components": 0,
-    "react/boolean-prop-naming": [
-      "error",
-      { "rule": "^(is|has|should)[A-Z]([A-Za-z0-9]?)+" }
-    ],
+    "react/boolean-prop-naming": ["error", { "rule": "^(is|has|should)[A-Z]([A-Za-z0-9]?)+" }],
     "react/destructuring-assignment": 2,
     "react/no-children-prop": 2,
     "react/no-deprecated": 2,
     "react/no-multi-comp": 2,
     "react/jsx-fragments": 2,
     "react/jsx-handler-names": 2,
-    "react/jsx-sort-default-props": 2,
+    "react/sort-default-props": 2,
     "react/jsx-key": 1,
     "react-func/max-lines-per-function": [
       "error",
@@ -122,7 +119,7 @@
       {
         "arrowParens": "always",
         "bracketSpacing": true,
-        "jsxBracketSameLine": false,
+        "bracketSameLine": false,
         "printWidth": 100,
         "proseWrap": "always",
         "requirePragma": false,
@@ -153,7 +150,7 @@
         ],
         "react/forbid-prop-types": 0,
         "react/jsx-no-undef": 0,
-        "react/no-unused-prop-types": 0,
+        "react/no-unused-prop-types": 2,
         "react/prop-types": 0,
         "react/react-in-jsx-scope": 0,
         "curly": "error",
@@ -198,6 +195,10 @@
       "rules": {
         "i18next/no-literal-string": 0
       }
+    },
+    {
+      "files": ["remotion/*.{ts,tsx}"],
+      "extends": ["plugin:@remotion/recommended"]
     }
   ],
   "settings": {

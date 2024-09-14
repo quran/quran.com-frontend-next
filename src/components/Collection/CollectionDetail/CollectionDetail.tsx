@@ -32,7 +32,6 @@ type CollectionDetailProps = {
   bookmarks: Bookmark[];
   sortBy: string;
   onSortByChange: (sortBy: string) => void;
-  onUpdated: () => void;
   onItemDeleted: (bookmarkId: string) => void;
 };
 
@@ -69,7 +68,7 @@ const CollectionDetail = ({
     const bookmarkName = getBookmarkName(bookmark);
 
     const isConfirmed = await confirm({
-      confirmText: t('collection:delete'),
+      confirmText: t('common:delete'),
       cancelText: t('common:cancel'),
       title: t('collection:delete-bookmark.title'),
       subtitle: t('collection:delete-bookmark.subtitle', {
@@ -201,7 +200,7 @@ const CollectionDetail = ({
                     >
                       {isOwner && (
                         <PopoverMenu.Item onClick={handleDeleteMenuClicked(bookmark)}>
-                          {t('collection:delete')}
+                          {t('common:delete')}
                         </PopoverMenu.Item>
                       )}
                       <PopoverMenu.Item

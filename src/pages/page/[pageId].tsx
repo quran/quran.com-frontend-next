@@ -1,13 +1,25 @@
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
+import { shallowEqual, useSelector } from 'react-redux';
+
+import getPageVersesParams from './utils/getPageVersesParams';
+import getQuranReaderData from './utils/getQuranReaderData';
 
 import { getPagesLookup, getPageVerses } from '@/api';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import QuranReader from '@/components/QuranReader';
+import useFetchPagesLookup from '@/components/QuranReader/hooks/useFetchPagesLookup';
+import useFetchPageVerses from '@/components/QuranReader/hooks/useFetchPageVerses';
+import Spinner from '@/dls/Spinner/Spinner';
 import useGetMushaf from '@/hooks/useGetMushaf';
 import Error from '@/pages/_error';
 import { getQuranReaderStylesInitialState } from '@/redux/defaultSettings/util';
+import {
+  selectIsUsingDefaultFont,
+  selectQuranReaderStyles,
+} from '@/redux/slices/QuranReader/styles';
+import { VersesResponse } from '@/types/ApiResponses';
 import { getDefaultWordFields, getMushafId } from '@/utils/api';
 import { getAllChaptersData } from '@/utils/chapter';
 import { getLanguageAlternates, toLocalizedNumber } from '@/utils/locale';
@@ -19,7 +31,6 @@ import {
   REVALIDATION_PERIOD_ON_ERROR_SECONDS,
 } from '@/utils/staticPageGeneration';
 import { isValidPageNumber } from '@/utils/validator';
-import { VersesResponse } from 'types/ApiResponses';
 import ChaptersData from 'types/ChaptersData';
 import { Mushaf, QuranReaderDataType } from 'types/QuranReader';
 
@@ -29,29 +40,60 @@ interface Props {
   chaptersData: ChaptersData;
 }
 
-const QuranicPage: NextPage<Props> = ({ hasError, pageVerses }) => {
+const QuranicPage: NextPage<Props> = ({ hasError, pageVerses: initialData }) => {
   const { t, lang } = useTranslation('common');
   const {
     query: { pageId },
   } = useRouter();
 
   const mushafId = useGetMushaf();
+  const {
+    data: pageVersesData,
+    isLoading: isPageVersesLoading,
+    error: pageVersesError,
+  } = useFetchPageVerses(String(pageId), initialData);
 
-  if (hasError || pageId > PAGES_MUSHAF_MAP[Number(mushafId)]) {
+  const isUsingDefaultFont = useSelector(selectIsUsingDefaultFont);
+  const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
+
+  const {
+    data: pagesLookupData,
+    isLoading: isPagesLookupLoading,
+    hasError: pagesLookupError,
+  } = useFetchPagesLookup(
+    String(pageId),
+    QuranReaderDataType.Page,
+    initialData,
+    quranReaderStyles,
+    isUsingDefaultFont,
+  );
+
+  if (
+    hasError ||
+    pageId > PAGES_MUSHAF_MAP[Number(mushafId)] ||
+    pagesLookupError ||
+    pageVersesError
+  ) {
     return <Error statusCode={500} />;
   }
 
+  if (isPageVersesLoading || isPagesLookupLoading) {
+    return <Spinner />;
+  }
+
   const path = getPageNavigationUrl(Number(pageId));
+  const data = getQuranReaderData(pagesLookupData, pageVersesData);
+
   return (
     <>
       <NextSeoWrapper
         title={`${t('page')} ${toLocalizedNumber(Number(pageId), lang)}`}
-        description={getPageOrJuzMetaDescription(pageVerses)}
+        description={getPageOrJuzMetaDescription(data)}
         canonical={getCanonicalUrl(lang, path)}
         languageAlternates={getLanguageAlternates(path)}
       />
       <QuranReader
-        initialData={pageVerses}
+        initialData={data}
         id={String(pageId)}
         quranReaderDataType={QuranReaderDataType.Page}
       />
@@ -87,12 +129,14 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
       : String(params.pageId);
 
   try {
-    const pageVersesResponse = await getPageVerses(pageId, locale, {
-      perPage: 'all',
-      mushaf: defaultMushafId,
-      filterPageWords: true,
-      ...getDefaultWordFields(getQuranReaderStylesInitialState(locale).quranFont),
-    });
+    const pageVersesResponse = await getPageVerses(
+      pageId,
+      locale,
+      getPageVersesParams(
+        defaultMushafId,
+        getDefaultWordFields(getQuranReaderStylesInitialState(locale).quranFont),
+      ),
+    );
     const pagesLookupResponse = await getPagesLookup({
       pageNumber: Number(pageId),
       mushaf: defaultMushafId,
@@ -101,11 +145,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     return {
       props: {
         chaptersData,
-        pageVerses: {
-          ...pageVersesResponse,
-          pagesLookup: pagesLookupResponse,
-          metaData: { numberOfVerses: pageVersesResponse.verses.length },
-        },
+        pageVerses: getQuranReaderData(pagesLookupResponse, pageVersesResponse),
       },
       revalidate: ONE_WEEK_REVALIDATION_PERIOD_SECONDS, // verses will be generated at runtime if not found in the cache, then cached for subsequent requests for 7 days.
     };

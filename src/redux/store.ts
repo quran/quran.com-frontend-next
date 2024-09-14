@@ -20,6 +20,7 @@ import banner from './slices/banner';
 import commandBarPersistConfig from './slices/CommandBar/persistConfig';
 import commandBar from './slices/CommandBar/state';
 import defaultSettings from './slices/defaultSettings';
+import mediaMaker from './slices/mediaMaker';
 import navbar from './slices/navbar';
 import notifications from './slices/notifications';
 import onboarding from './slices/onboarding';
@@ -67,6 +68,7 @@ const persistConfig = {
     SliceName.USER_DATA_SYNC,
     SliceName.REVELATION_ORDER,
     SliceName.ONBOARDING,
+    SliceName.MEDIA_MAKER,
   ], // Reducers defined here will be have their values saved in local storage and persist across sessions. See: https://github.com/rt2zz/redux-persist#blacklist--whitelist
 };
 
@@ -96,6 +98,7 @@ export const rootReducer = combineReducers({
   revelationOrder,
   notifications,
   onboarding,
+  mediaMaker,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

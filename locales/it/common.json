@@ -7,11 +7,11 @@
       "data-sync": {
         "action": "Prossimo",
         "description": "Sia che tu stia utilizzando Quran.com sul tuo telefono o sul tuo laptop, i tuoi segnalibri, gli ultimi versetti letti e le tue preferenze saranno disponibili",
-        "title": "I tuoi dati verranno sincronizzati <br></br> su tutti i dispositivi"
+        "title": "I tuoi dati verranno sincronizzati <br><\/br> su tutti i dispositivi"
       },
       "feedback": {
         "action": "Ok, capito",
-        "description": "Grazie per aver utilizzato Quran.com e saremo lieti di ricevere il tuo feedback su <link> feedback.quran.com </link>",
+        "description": "Grazie per aver utilizzato Quran.com e saremo lieti di ricevere il tuo feedback su <link> feedback.quran.com <\/link>",
         "title": "Vogliamo ascoltare i tuoi pensieri"
       },
       "quran-foundation-link": {
@@ -26,12 +26,12 @@
       },
       "welcome": {
         "action": "Guarda cosa c'è di nuovo",
-        "title": "Benvenuto su Quran.com <br></br> Account utente"
+        "title": "Benvenuto su Quran.com <br><\/br> Account utente"
       }
     },
     "collections-announcement": {
       "slide-1": {
-        "description": "Siamo molto felici di annunciare che ora puoi raggruppare i segnalibri in \"raccolte\"! <br/> <br/> <li> Aggiungi tutte le raccolte che desideri </li> <li> Aggiungi un segnalibro a una o più raccolte </li> <li> E altro ancora! </li>",
+        "description": "Siamo molto felici di annunciare che ora puoi raggruppare i segnalibri in \"raccolte\"! <br\/> <br\/> <li> Aggiungi tutte le raccolte che desideri <\/li> <li> Aggiungi un segnalibro a una o più raccolte <\/li> <li> E altro ancora! <\/li>",
         "title": "Le raccolte di segnalibri sono qui!"
       }
     }
@@ -52,8 +52,8 @@
       "title": "Scorrimento automatico"
     },
     "displaying": "Visualizzazione",
-    "exp-tip": "<span>Modifica il contenuto visualizzato in</span><br></br> <boldSpan>Impostazioni</boldSpan> > <boldSpan>Parola per parola</boldSpan>",
-    "exp-tip-no-select": "<span>Seleziona l'opzione di visualizzazione del suggerimento e seleziona l'opzione <br></br> Traduzione e/o traslitterazione</span><br></br><span> in </span><boldSpan>Impostazioni</boldSpan> > <boldSpan>Parola per parola</boldSpan><span>, per</span><br></br> <span>abilitare questa funzione.</span>",
+    "exp-tip": "<span>Modifica il contenuto visualizzato in<\/span><br><\/br> <boldSpan>Impostazioni<\/boldSpan> > <boldSpan>Parola per parola<\/boldSpan>",
+    "exp-tip-no-select": "<span>Seleziona l'opzione di visualizzazione del suggerimento e seleziona l'opzione <br><\/br> Traduzione e\/o traslitterazione<\/span><br><\/br><span> in <\/span><boldSpan>Impostazioni<\/boldSpan> > <boldSpan>Parola per parola<\/boldSpan><span>, per<\/span><br><\/br> <span>abilitare questa funzione.<\/span>",
     "experience": "Esperienza",
     "play": "Riproduci audio",
     "playback-normal": "Normale",
@@ -85,7 +85,7 @@
       "verses-range": "Gamma di versi",
       "volume-control": "Controllo del volume"
     },
-    "repeat-moved": "Le impostazioni di ripetizione sono state spostate sul lettore audio. Fare clic sull'icona <0> </0> per accedervi",
+    "repeat-moved": "Le impostazioni di ripetizione sono state spostate sul lettore audio. Fare clic sull'icona <0> <\/0> per accedervi",
     "select-reciter": "Seleziona Relatore",
     "speed": "Velocità",
     "title": "Audio"
@@ -117,8 +117,8 @@
   "complete-sign-up": "Completa la tua registrazione",
   "consents": {
     "communication": {
-      "body": "🚀 Potenzia i tuoi progressi tramite notifiche <boldSpan> personalizzate </boldSpan> sui progressi del tuo obiettivo, sul mantenimento dei successi e sul miglioramento dell'utilizzo delle nostre funzionalità attuali. <br></br> <br></br> Possiamo tenerti aggiornato tramite e-mail e altri canali? Hai il controllo: sentiti libero di modificare queste preferenze in qualsiasi momento nelle impostazioni del tuo account. <br></br> <br></br> Seleziona semplicemente \"Consenti\" per <boldSpan> promemoria stimolanti </boldSpan> o \"Non ora\" per rifiutarli.",
-      "header": "Ci piacerebbe aiutarti a rimanere <boldSpan> impegnato e coerente </boldSpan> nel tuo percorso di crescita nel Corano! 📖🌟"
+      "body": "🚀 Potenzia i tuoi progressi tramite notifiche <boldSpan> personalizzate <\/boldSpan> sui progressi del tuo obiettivo, sul mantenimento dei successi e sul miglioramento dell'utilizzo delle nostre funzionalità attuali. <br><\/br> <br><\/br> Possiamo tenerti aggiornato tramite e-mail e altri canali? Hai il controllo: sentiti libero di modificare queste preferenze in qualsiasi momento nelle impostazioni del tuo account. <br><\/br> <br><\/br> Seleziona semplicemente \"Consenti\" per <boldSpan> promemoria stimolanti <\/boldSpan> o \"Non ora\" per rifiutarli.",
+      "header": "Ci piacerebbe aiutarti a rimanere <boldSpan> impegnato e coerente <\/boldSpan> nel tuo percorso di crescita nel Corano! 📖🌟"
     }
   },
   "continue": "Continua",
@@ -130,6 +130,7 @@
     "increase": "Aumento"
   },
   "default-description": "Il Corano tradotto in molte lingue con un'interfaccia semplice e facile",
+  "delete": "Eliminare",
   "developers": "Sviluppatori",
   "display": "Schermo",
   "donate": "Donare",
@@ -138,18 +139,22 @@
   "edit": "Modificare",
   "email-verification": {
     "check-spam": "Non hai ricevuto l'email di verifica? Controlla la tua casella di posta indesiderata",
-    "email-sent": "Abbiamo appena inviato un'email a <strong> {{email}} </strong>",
+    "email-sent": "Abbiamo appena inviato un'email a <strong> {{email}} <\/strong>",
     "email-verification": "Verifica email",
     "resend-email": "Rinvia l'e-mail",
     "resend-email-in": "Invia nuovamente l'email di verifica tra {{remainingTime}} sec...",
     "verify-code": "Verificare il codice"
   },
   "error": {
+    "MediaVersesRangeLimitExceeded": "Puoi selezionare solo fino a {{limit}} versi alla volta. Seleziona un intervallo più piccolo.",
     "bookmark-sync": "Il segnalibro non è sincronizzato.",
     "email-login-fail": "Impossibile accedere con l'e-mail. Per favore riprova",
     "general": "Qualcosa è andato storto. Per favore riprova.",
     "offline": "Sembra che tu abbia perso la connessione. Si prega di controllare e riprovare.",
-    "pref-persist-fail": "Impossibile sincronizzare le impostazioni sul cloud."
+    "pref-persist-fail": "Impossibile sincronizzare le impostazioni sul cloud.",
+    "ranges-no-value": "L'inizio e la fine dell'intervallo devono avere un valore",
+    "ranges-too-many-verses": "*Max {{maxNumberOfVerses}} versetti",
+    "ranges-wrong-order": "Il verso iniziale deve precedere quello finale."
   },
   "feedback": "Feedback",
   "fonts": {
@@ -162,14 +167,16 @@
     "qcf-desc": "I font Complesso King Fahad (V1 e V2) offrono una qualità superiore ma richiedono un caricamento più lungo.",
     "qpc_uthmani_hafs": "QPC Uthmani Hafs",
     "quran-font": "Carattere del Corano",
+    "quran-font-size": "Dimensione del carattere del Corano",
     "tajweed": "Tajweed",
-    "tajweed-desc": "Il carattere Tajweed mostra un Mushaf colorato di Tajweed. Puoi leggere di più sulle regole dei colori Tajweed <0> qui </0>",
+    "tajweed-desc": "Il carattere Tajweed mostra un Mushaf colorato di Tajweed. Puoi leggere di più sulle regole dei colori Tajweed <0> qui <\/0>",
     "text_indopak": "IndoPak",
-    "text_uthmani": "Uthmani"
+    "text_uthmani": "Uthmani",
+    "translation-font-size": "Dimensione del carattere della traduzione"
   },
   "footer": {
     "description": "Quran.com è un Sadaqah Jariyah. Speriamo di rendere facile per tutti la lettura, lo studio e l'apprendimento del Nobile Corano. Il Nobile Corano ha molti nomi tra cui Al-Quran Al-Kareem, Al-Ketab, Al-Furqan, Al-Maw'itha, Al-Thikr e Al-Noor.",
-    "hiring": "Stiamo assumendo! Unisciti al team della QuranFoundation e contribuisci alla nostra missione. <link> Candidati ora! </link>",
+    "hiring": "Stiamo assumendo! Unisciti al team della QuranFoundation e contribuisci alla nostra missione. <link> Candidati ora! <\/link>",
     "rights": "Tutti i diritti riservati",
     "title": "Leggi, studia e impara Il Nobile Corano."
   },
@@ -184,10 +191,10 @@
   "from": "A partire dal",
   "fundraising-sticky-banner": {
     "cta": "Donare",
-    "title": "Sostieni Quran.com questo Ramadan"
+    "title": "Regala nei giorni migliori!"
   },
   "fundraising": {
-    "description": "Non perdere l'opportunità di ottenere ricompense moltiplicate in queste ultime notti benedette del Ramadan. Anche le piccole donazioni mensili hanno un impatto!",
+    "description": "Le donazioni mensili ci aiutano a migliorare Quran.com e a sostenere le operazioni, quindi ci concentriamo meno sulla raccolta fondi e più sulla creazione di impatto.",
     "title": "Diventa un donatore mensile"
   },
   "help": "Aiuto",
@@ -245,8 +252,8 @@
   "popup": {
     "footnote": "Le donazioni mensili ci consentono di concentrarci meno sulla raccolta fondi",
     "text-1": "Ci impegniamo a servire il mondo della conoscenza e della tecnologia coraniche, sempre gratuitamente.",
-    "text-2": "L'occasione perfetta per la carità continua (Sadaqah Jariyah). Ti preghiamo di considerare di investire nel tuo Aldilà come donatore mensile (o una tantum).",
-    "title": "Caro compagno del Corano,"
+    "text-2": "L'occasione perfetta per una carità continua (Sadaqa Jariyah). Investi nel tuo Aldilà come donatore mensile (o una tantum).",
+    "title": "Regala nei giorni migliori!"
   },
   "powered-by": "Offerto da",
   "prepare-hearts": {
@@ -268,7 +275,7 @@
   },
   "recitation": "Recitazione",
   "reciter": "Recitatore",
-  "reciter-summary": "Recitatore parola per parola: <span> {{reciterName}} </span> . Clicca su una parola per ascoltare la sua recitazione.",
+  "reciter-summary": "Recitatore parola per parola: <span> {{reciterName}} <\/span> . Clicca su una parola per ascoltare la sua recitazione.",
   "reciters": "Recitatori",
   "reflect": "Riflettere",
   "reflections": "Riflessi",
@@ -299,6 +306,7 @@
     "no-tafsir-selected": "Nessun tafsir selezionato",
     "no-translation-selected": "Nessuna traduzione selezionata",
     "reading-experience": "Esperienza di lettura",
+    "reset": "Reset",
     "reset-cta": "Ripristina le impostazioni",
     "reset-notif": "Le tue impostazioni sono state ripristinate a quelle predefinite",
     "search-reciter": "Cerca Relatore",
@@ -322,7 +330,7 @@
     "search-hizb": "Cerca Hizb",
     "search-juz": "Cerca Juz",
     "search-page": "Pagina di ricerca",
-    "search-surah": "Cerca sura",
+    "search-surah": "Cerca Sura",
     "try-navigating-with": "Suggerimento: prova a navigare con"
   },
   "sitemap": "Mappa del sito",
@@ -356,7 +364,7 @@
     "light": "Leggero",
     "sepia": "Seppia",
     "system": "Sistema",
-    "system-desc": "Il tema del sistema si adatta automaticamente alle impostazioni della modalità chiaro/scuro"
+    "system-desc": "Il tema del sistema si adatta automaticamente alle impostazioni della modalità chiaro\/scuro"
   },
   "to": "Per",
   "tooltip": "Descrizione comando",
@@ -390,7 +398,7 @@
     "voice-search-powered-by": "Ricerca vocale Powered by"
   },
   "wbw": "Parola per parola",
-  "wbw-lang-summary": "Fonte della traduzione parola per parola: <link> {{source}} </link> . Questa fonte è indipendente dalla selezione della traduzione in versi.",
+  "wbw-lang-summary": "Fonte della traduzione parola per parola: <link> {{source}} <\/link> . Questa fonte è indipendente dalla selezione della traduzione in versi.",
   "wbw-trans-lang": "Parola per parola lingua",
   "wbw-translation": "Traduzione parola per parola",
   "wbw-transliteration": "Traslitterazione parola per parola",

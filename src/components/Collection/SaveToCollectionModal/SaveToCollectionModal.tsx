@@ -26,7 +26,6 @@ type SaveToCollectionModalProps = {
   collections: Collection[];
   onCollectionToggled: (collection: Collection, newValue: boolean) => void;
   onNewCollectionCreated: (name: string) => Promise<void>;
-  isAddingNewCollection?: boolean;
   onClose?: () => void;
   verseKey: string;
 };

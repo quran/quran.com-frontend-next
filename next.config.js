@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 /* eslint-disable react-func/max-lines-per-function */
 /* eslint-disable no-param-reassign */
 const path = require('path');
@@ -10,6 +11,7 @@ const withPlugins = require('next-compose-plugins');
 const withFonts = require('next-fonts');
 const withPWA = require('next-pwa');
 const nextTranslate = require('next-translate');
+const withTM = require('next-transpile-modules')(['remotion', '@remotion/cli', '@remotion/player']);
 
 const securityHeaders = require('./configs/SecurityHeaders.js');
 const runtimeCaching = require('./pwa-runtime-config.js');
@@ -165,7 +167,8 @@ const config = {
   },
 };
 
+// eslint-disable-next-line max-lines
 module.exports = withPlugins(
-  [withBundleAnalyzer, withPWA, withFonts, nextTranslate, withSentryConfig],
+  [withTM, withBundleAnalyzer, withPWA, withFonts, nextTranslate, withSentryConfig],
   config,
 );

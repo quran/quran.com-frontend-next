@@ -1,6 +1,6 @@
 {
   "about-author": "عن المؤلف",
-  "add-reflection": "إضافة تأمل",
+  "add-reflection": "إضافة تدبر",
   "all-learning-plans": "جميع خطط التعلم",
   "author": "المؤلف",
   "back-to-learning-plan": "العودة إلى خطة التعلم",
@@ -18,9 +18,9 @@
   "enrolled": "المقيدين",
   "feedback": {
     "add-feedback": "إضافة تعليقات",
-    "desc": "تهانينا! لقد أكملت خطة التعلم ' {{courseName}} '. <br> </br> يرجى مراجعة خطة التعلم ومشاركة تعليقاتك لمساعدتنا في تحسين المحتوى.",
-    "feedback-placeholder": "اكتب ملاحظاتك",
-    "feedback-success": "شكرا لك على ملاحظاتك!",
+    "desc": "تهانينا! لقد أكملت خطة التعلم ' {{courseName}} '. <br></br> يرجى مراجعة خطة التعلم ومشاركة تعليقاتك لمساعدتنا في تحسين المحتوى.",
+    "feedback-placeholder": "اكتب تعليقاتك",
+    "feedback-success": "شكرا لك على تعليقاتك!",
     "your-feedback": "تعليقاتك"
   },
   "learn-duration": "المدة",

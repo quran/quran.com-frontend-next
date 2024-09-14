@@ -73,6 +73,15 @@ export const makeTranslationsUrl = (language: string): string =>
   makeUrl('/resources/translations', { language });
 
 /**
+ * Compose the url for the wbw translations API.
+ *
+ * @param {string} language
+ * @returns {string}
+ */
+export const makeWordByWordTranslationsUrl = (language: string): string =>
+  makeUrl('/resources/word_by_word_translations', { language });
+
+/**
  * Compose the url for the languages API.
  *
  * @param {string} language

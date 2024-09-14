@@ -23,7 +23,6 @@ import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext'
 
 interface PlayVerseAudioProps {
   verseKey: string;
-  timestamp: number;
   isTranslationView?: boolean;
   onActionTriggered?: () => void;
 }
@@ -38,7 +37,7 @@ const PlayVerseAudioButton: React.FC<PlayVerseAudioProps> = ({
     value: reciterId,
     isQueryParamDifferent: reciterQueryParamDifferent,
   }: { value: number; isQueryParamDifferent: boolean } = useGetQueryParamOrXstateValue(
-    QueryParam.Reciter,
+    QueryParam.RECITER,
   );
   const isVisible = useSelector(audioService, (state) => state.matches('VISIBLE'));
   const { isActive, activeStepGroup, nextStep } = useOnboarding();

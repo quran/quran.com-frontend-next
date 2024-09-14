@@ -1,4 +1,4 @@
-import React, { RefObject, useEffect, memo, useContext } from 'react';
+import React, { RefObject, memo, useContext, useEffect } from 'react';
 
 import { useSelector as useSelectorXstate } from '@xstate/react';
 import classNames from 'classnames';
@@ -96,10 +96,7 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
               <VerseNotes verseKey={verse.verseKey} isTranslationView hasNotes={hasNotes} />
             </div>
             <div className={classNames(styles.actionItem, styles.priorityAction)}>
-              <PlayVerseAudioButton
-                verseKey={verse.verseKey}
-                timestamp={verse.timestamps.timestampFrom}
-              />
+              <PlayVerseAudioButton verseKey={verse.verseKey} />
             </div>
             <div className={classNames(styles.actionItem)}>
               <TafsirButton verseKey={verse.verseKey} />

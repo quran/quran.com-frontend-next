@@ -1,0 +1,61 @@
+$pixel: 1px;
+
+.container {
+  display: flex;
+  flex-direction: column;
+  padding-inline-start: var(--spacing-medium) !important;
+  padding-inline-end: var(--spacing-medium) !important;
+}
+
+.controlsContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  column-gap: var(--spacing-large);
+  flex-wrap: wrap;
+  row-gap: var(--spacing-small);
+}
+
+.copyButton {
+  color: var(--color-primary-medium);
+  background-color: var(--color-secondary-faded);
+  width: calc(var(--spacing-medium) * 10);
+}
+
+.lineBackground {
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  margin-bottom: var(--spacing-medium);
+
+  &:before {
+    border-top: $pixel solid var(--color-secondary-medium);
+    content: "";
+    margin: 0 auto;
+    position: absolute;
+    top: 50%;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    z-index: -1;
+  }
+
+  span {
+    background: var(--color-background-default);
+    padding: 0 var(--spacing-medium);
+  }
+}
+
+.text {
+  margin-top: var(--spacing-xsmall);
+  text-align: center;
+  font-size: var(--font-size-xsmall);
+  :nth-child(2) {
+    font-weight: var(--font-weight-bold);
+  }
+}
+
+.error {
+  color: var(--color-error-medium);
+}

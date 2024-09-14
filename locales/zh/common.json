@@ -7,11 +7,11 @@
       "data-sync": {
         "action": "下一个",
         "description": "无论您是在手机还是笔记本电脑上使用 Quran.com，您的书签、最后阅读的经文和您的偏好都将可用",
-        "title": "您的数据将在设备间同步<br></br>"
+        "title": "您的数据将在设备间同步<br><\/br>"
       },
       "feedback": {
         "action": "好，知道了",
-        "description": "感谢您使用 Quran.com，我们很高兴听到您对<link> feedback.quran.com </link> 的反馈",
+        "description": "感谢您使用 Quran.com，我们很高兴听到您对<link> feedback.quran.com <\/link> 的反馈",
         "title": "我们想听听你的想法"
       },
       "quran-foundation-link": {
@@ -26,12 +26,12 @@
       },
       "welcome": {
         "action": "看看有什么新鲜事",
-        "title": "欢迎来到 Quran.com <br></br>用户帐户"
+        "title": "欢迎来到 Quran.com <br><\/br>用户帐户"
       }
     },
     "collections-announcement": {
       "slide-1": {
-        "description": "我们很高兴地宣布，现在您可以在“收藏”下对书签进行分组！ <br/> <br/> <li> > 添加任意数量的收藏夹 </li </li> <li <li>为一个或多个收藏夹添加书签</li> <li>还有更多！ </li>",
+        "description": "我们很高兴地宣布，现在您可以在“收藏”下对书签进行分组！ <br\/> <br\/> <li> > 添加任意数量的收藏夹 <\/li <\/li> <li <li>为一个或多个收藏夹添加书签<\/li> <li>还有更多！ <\/li>",
         "title": "书签收藏在这里！"
       }
     }
@@ -52,8 +52,8 @@
       "title": "播放声音时自动滚屏"
     },
     "displaying": "展示中",
-    "exp-tip": "<span>更改下显示的内容</span><br></br> <boldSpan>设置</boldSpan> > <boldSpan>逐字显示</boldSpan>",
-    "exp-tip-no-select": "<span>勾选工具提示显示选项并选择 <br></br> 翻译和/或音译选项</span><br></br><span> 下 </span><boldSpan>设置</boldSpan> > <boldSpan>逐字逐句</boldSpan><span>，以</span><br></br> <span>启用此功能.</span>",
+    "exp-tip": "<span>更改下显示的内容<\/span><br><\/br> <boldSpan>设置<\/boldSpan> > <boldSpan>逐字显示<\/boldSpan>",
+    "exp-tip-no-select": "<span>勾选工具提示显示选项并选择 <br><\/br> 翻译和\/或音译选项<\/span><br><\/br><span> 下 <\/span><boldSpan>设置<\/boldSpan> > <boldSpan>逐字逐句<\/boldSpan><span>，以<\/span><br><\/br> <span>启用此功能.<\/span>",
     "experience": "经验",
     "play": "播放音频",
     "playback-normal": "普通",
@@ -85,7 +85,7 @@
       "verses-range": "播放多节",
       "volume-control": "音量控制"
     },
-    "repeat-moved": "重复播放设置已移至音频播放器。单击<0> </0>图标以访问它们",
+    "repeat-moved": "重复播放设置已移至音频播放器。单击<0> <\/0>图标以访问它们",
     "select-reciter": "选择诵读家",
     "speed": "速度",
     "title": "音频"
@@ -117,8 +117,8 @@
   "complete-sign-up": "完成您的注册",
   "consents": {
     "communication": {
-      "body": "🚀 通过<boldSpan>个性化</boldSpan>有关您的目标进度、保持连续记录并增强您对我们当前功能的使用的通知来加快您的进度。 <br></br> <br></br>我们可以通过电子邮件和其他渠道让您了解最新情况吗？您一切尽在掌控 - 您可以随时在帐户设置中调整这些偏好设置。 <br></br> <br></br>只需选择“允许” <boldSpan>鼓舞人心的提醒</boldSpan>或“现在不”即可拒绝。",
-      "header": "我们很乐意帮助您在《古兰经》成长之旅中保持<boldSpan>承诺和一致性</boldSpan> ！ 📖🌟"
+      "body": "🚀 通过<boldSpan>个性化<\/boldSpan>有关您的目标进度、保持连续记录并增强您对我们当前功能的使用的通知来加快您的进度。 <br><\/br> <br><\/br>我们可以通过电子邮件和其他渠道让您了解最新情况吗？您一切尽在掌控 - 您可以随时在帐户设置中调整这些偏好设置。 <br><\/br> <br><\/br>只需选择“允许” <boldSpan>鼓舞人心的提醒<\/boldSpan>或“现在不”即可拒绝。",
+      "header": "我们很乐意帮助您在《古兰经》成长之旅中保持<boldSpan>承诺和一致性<\/boldSpan> ！ 📖🌟"
     }
   },
   "continue": "继续",
@@ -130,6 +130,7 @@
     "increase": "增加"
   },
   "default-description": "古兰经翻译成多种语言，界面简单易用",
+  "delete": "删除",
   "developers": "开发者",
   "display": "展示",
   "donate": "捐",
@@ -138,18 +139,22 @@
   "edit": "编辑",
   "email-verification": {
     "check-spam": "没有收到验证邮件？检查您的垃圾邮件收件箱",
-    "email-sent": "我们刚刚向<strong> {{email}} </strong>发送了一封电子邮件",
+    "email-sent": "我们刚刚向<strong> {{email}} <\/strong>发送了一封电子邮件",
     "email-verification": "电子邮件验证",
     "resend-email": "重发电子邮件",
     "resend-email-in": "在{{remainingTime}}秒内重新发送验证电子邮件...",
     "verify-code": "验证码"
   },
   "error": {
+    "MediaVersesRangeLimitExceeded": "您一次最多只能选择{{limit}}节经文。请选择较小的范围。",
     "bookmark-sync": "书签不同步。",
     "email-login-fail": "使用电子邮件登录失败。请再试一次",
     "general": "出了些问题。请再试一次。",
     "offline": "看起来你失去了连接。请检查并重试。",
-    "pref-persist-fail": "无法将您的设置同步到云端。"
+    "pref-persist-fail": "无法将您的设置同步到云端。",
+    "ranges-no-value": "范围开始和结束必须具有值",
+    "ranges-too-many-verses": "*最多{{maxNumberOfVerses}}个章节",
+    "ranges-wrong-order": "起始诗句必须位于结束诗句之前。"
   },
   "feedback": "反馈问题",
   "fonts": {
@@ -162,14 +167,16 @@
     "qcf-desc": "King Fahad Complex (V1 和 V2) 字体提供更高的质量，但加载时间更长。",
     "qpc_uthmani_hafs": "QPC Uthmani Hafs",
     "quran-font": "经文字体",
+    "quran-font-size": "古兰经字体大小",
     "tajweed": "泰之卫德",
-    "tajweed-desc": "泰之卫德字体显示带有泰之卫德颜色的 Mushaf。 <0>此处是泰之卫德颜色规则</0>",
+    "tajweed-desc": "泰之卫德字体显示带有泰之卫德颜色的 Mushaf。 <0>此处是泰之卫德颜色规则<\/0>",
     "text_indopak": "波斯体",
-    "text_uthmani": "纳斯赫体"
+    "text_uthmani": "纳斯赫体",
+    "translation-font-size": "翻译字体大小"
   },
   "footer": {
     "description": "Quran.com是一项持久的施舍。我们希望每个人都能轻松地阅读和学习尊贵的《古兰经》。尊贵的古兰经有很多名字，包括 Al-Quran Al-Kareem、Al-Ketab、Al-Furqan、Al-Maw'itha、Al-Thikr 和 Al-Noor。",
-    "hiring": "我们正在招聘！加入古兰经基金会团队并为我们的使命做出贡献。 <link>立即申请！ </link>",
+    "hiring": "我们正在招聘！加入古兰经基金会团队并为我们的使命做出贡献。 <link>立即申请！ <\/link>",
     "rights": "版权所有",
     "title": "阅读、学习和学习《古兰经》。"
   },
@@ -184,10 +191,10 @@
   "from": "从",
   "fundraising-sticky-banner": {
     "cta": "捐",
-    "title": "在这个斋月支持 Quran.com"
+    "title": "在最好的日子里赠送！"
   },
   "fundraising": {
-    "description": "不要错过斋月最后几个夜晚获得双倍奖励的机会。即使每月捐款不多，也能产生影响！",
+    "description": "每月的捐款帮助我们改善 Quran.com 并维持运营，因此我们不再专注于筹款，而是更多地关注创造影响力。",
     "title": "成为每月捐助者"
   },
   "help": "帮助",
@@ -245,8 +252,8 @@
   "popup": {
     "footnote": "每月捐款让我们可以减少对筹款的关注",
     "text-1": "我们致力于为世界提供古兰经知识和技术，始终免费。",
-    "text-2": "这是持续慈善 (Sadaqah Jariyah) 的绝佳机会。请考虑作为每月 (或一次性) 捐赠者投资您的来世。",
-    "title": "亲爱的古兰经伴侣，"
+    "text-2": "这是持续慈善 (Sadaqa Jariyah) 的绝佳机会。作为每月 (或一次性) 捐赠者，投资您的来世。",
+    "title": "在最好的日子里赠送！"
   },
   "powered-by": "Powered by",
   "prepare-hearts": {
@@ -268,7 +275,7 @@
   },
   "recitation": "朗诵",
   "reciter": "诵读家",
-  "reciter-summary": "逐字朗诵者： <span> {{reciterName}} </span> 。单击一个单词以收听其朗读。",
+  "reciter-summary": "逐字朗诵者： <span> {{reciterName}} <\/span> 。单击一个单词以收听其朗读。",
   "reciters": "朗诵者",
   "reflect": "参悟",
   "reflections": "反思",
@@ -299,6 +306,7 @@
     "no-tafsir-selected": "尚未选择经注",
     "no-translation-selected": "尚未选择译文",
     "reading-experience": "阅读体验",
+    "reset": "重置",
     "reset-cta": "恢复默认值",
     "reset-notif": "您的设置已重置为默认设置",
     "search-reciter": "搜索诵读家",
@@ -356,7 +364,7 @@
     "light": "明",
     "sepia": "棕褐色",
     "system": "系统",
-    "system-desc": "系统主题自动采用您的明/暗模式设置"
+    "system-desc": "系统主题自动采用您的明\/暗模式设置"
   },
   "to": "到",
   "tooltip": "工具提示",
@@ -390,7 +398,7 @@
     "voice-search-powered-by": "语音搜索 技术支持单位"
   },
   "wbw": "在单词下方显示其译文",
-  "wbw-lang-summary": "逐字翻译来源： <link> {{source}} </link> 。此来源独立于诗歌翻译选择。",
+  "wbw-lang-summary": "逐字翻译来源： <link> {{source}} <\/link> 。此来源独立于诗歌翻译选择。",
   "wbw-trans-lang": "翻译成：",
   "wbw-translation": "逐字意译",
   "wbw-transliteration": "逐字音译",

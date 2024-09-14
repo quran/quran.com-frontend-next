@@ -1,7 +1,7 @@
 {
   "no-bookmarks": "Anda belum mempunyai sebarang penanda halaman",
-  "no-recently-read": "Anda belum mempunyai sebarang sesi membaca",
-  "noble-quran": "Al-Quran yang mulia",
+  "no-recently-read": "Anda belum mempunyai sebarang bacaan",
+  "noble-quran": "Al-Quran  Karim",
   "qgj": {
     "learning-plans": {
       "cta": {
@@ -10,8 +10,8 @@
       },
       "desc": {
         "logged-in": "Pernah memulakan program pembelajaran dan terkeluar dari landasan separuh jalan? Pelan pembelajaran dibahagikan kepada bahagian yang boleh diurus dan kami menjejaki kemajuan anda sehingga anda sampai ke garisan penamat. Terokai tawaran kursus semasa kami hari ini",
-        "logged-in-no-plans": "Pernah memulakan program pembelajaran dan terkeluar dari landasan separuh jalan? Pelan pembelajaran dibahagikan kepada bahagian yang boleh diurus dan kami menjejaki kemajuan anda sehingga anda sampai ke garisan penamat. Terokai tawaran kursus semasa kami hari ini",
-        "logged-out": "Pernah memulakan program pembelajaran dan terkeluar dari landasan separuh jalan? Pelan pembelajaran dibahagikan kepada bahagian yang boleh diurus dan kami menjejaki kemajuan anda sehingga anda sampai ke garisan penamat. Terokai tawaran kursus semasa kami hari ini"
+        "logged-in-no-plans": "Pernah anda memulakan program pembelajaran dan terkeluar dari landasan separuh jalan? Pelan pembelajaran dibahagikan kepada bahagian yang boleh diurus dan kami menjejaki kemajuan anda sehingga anda sampai ke garisan penamat. Terokai tawaran kursus semasa kami hari ini",
+        "logged-out": "Pernahkah anda memulakan program pembelajaran dan hilanh hala-tuju?\\nPelan pembelajaran hyang kami syorkan dibahagikan kepada bahagian yang mudah diurus dan kami menjejaki kemajuan anda sehingga anda sampai ke garisan penamat. Terokai tawaran kursus-kursus kami yang tersedia hari ini!"
       },
       "title": "Rancangan Pembelajaran"
     },
@@ -19,14 +19,14 @@
       "desc": {
         "logged-out": "Adakah anda ingin membaca 10 minit sehari, menghabiskan satu Juz dalam sebulan, atau khatam seluruh Al-Quran dalam setahun? Mudah untuk membuat matlamat tersuai dan menjejak kemajuan anda"
       },
-      "title": "Matlamat Membaca Al-Quran Tersuai"
+      "title": "Matlamat Tersendiri dalam Pembacaan al Quran Anda"
     },
     "title": "Kembara Pertumbuhan Al-Quran"
   },
   "ramadan-activities-cta": "<link> Baharu! Temui Kalendar Al-Quran Global untuk membimbing pembacaan anda selepas Ramadan </link>",
   "read-juz": "Baca Juz",
   "recently-read": "Bacaan Terkini",
-  "revelation-order-disclaimer": "Pandangan ini menunjukkan susunan kronologi Surah dalam al-Quran berdasarkan apabila ia diturunkan kepada Nabi Muhammad <hover> ﷺ </hover> . Kronologi adalah subjek pendapat ulama dan beberapa Surah diturunkan dalam bahagian pada masa yang berbeza. Pesanan di sini adalah berdasarkan hasil kerja <link> Tanzil.net </link> . [Nota: susunan Mushaf yang disusun daripada al-Fatiha kepada al-Nas adalah perkara yang disepakati.]",
+  "revelation-order-disclaimer": "Pandangan ini menunjukkan susunan kronologi Surah dalam al-Quran berdasarkan waktu penurunan kepada Nabi Muhammad <hover> ﷺ </hover> . Kronologi adalah subjek pendapat ulama dan beberapa Surah diturunkan dalam bahagian pada masa yang berbeza. Pesanan di sini adalah berdasarkan hasil kerja <link> Tanzil.net </link> . [Nota: susunan Mushaf yang disusun daripada al-Fatiha kepada al-Nas adalah perkara yang disepakati.]",
   "tab": {
     "bookmarks": "Penanda buku",
     "popular": "Popular"

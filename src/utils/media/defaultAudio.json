@@ -1,0 +1,23 @@
+{
+  "id": 911,
+  "chapterId": 1,
+  "fileSize": 839808,
+  "format": "mp3",
+  "audioUrl": "https://download.quranicaudio.com/qdc/mishari_al_afasy/murattal/1.mp3",
+  "duration": 46000,
+  "verseTimings": [
+    {
+      "verseKey": "1:1",
+      "timestampFrom": 0,
+      "timestampTo": 6090,
+      "duration": 6090,
+      "segments": [
+        [1, 0, 580],
+        [2, 580, 1409],
+        [3, 1409, 2502],
+        [4, 2502, 5840]
+      ]
+    }
+  ],
+  "reciterId": 7
+}

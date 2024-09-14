@@ -50,13 +50,13 @@ const TranslationView = ({
     value: reciterId,
     isQueryParamDifferent: reciterQueryParamDifferent,
   }: { value: number; isQueryParamDifferent: boolean } = useGetQueryParamOrXstateValue(
-    QueryParam.Reciter,
+    QueryParam.RECITER,
   );
   const {
     value: selectedTranslations,
     isQueryParamDifferent: translationsQueryParamDifferent,
   }: { value: number[]; isQueryParamDifferent: boolean } = useGetQueryParamOrReduxValue(
-    QueryParam.Translations,
+    QueryParam.TRANSLATIONS,
   );
   const {
     value: wordByWordLocale,

@@ -1,5 +1,23 @@
 import isClient from './isClient';
 
+export const isSafari = () => {
+  if (!isClient) {
+    return false;
+  }
+
+  const { userAgent } = navigator;
+  const safari = userAgent.toLowerCase().includes('safari');
+  const chrome = userAgent.toLowerCase().includes('chrome');
+  return safari && !chrome;
+};
+
+export const isChromeIOS = () => {
+  if (!isClient) {
+    return false;
+  }
+  return navigator.userAgent.match('CriOS');
+};
+
 export const isMacOs = () => {
   if (!isClient) {
     return false;
@@ -13,19 +31,6 @@ export const isAppleDevice = () => {
   }
   const isOSX = /(Mac|iPhone|iPod|iPad)/i.test(navigator.platform);
   return isOSX || isMacOs();
-};
-
-export const isSafari = () => {
-  if (!isClient) {
-    return false;
-  }
-  return (
-    navigator.vendor &&
-    navigator.vendor.indexOf('Apple') > -1 &&
-    navigator.userAgent &&
-    navigator.userAgent.indexOf('CriOS') === -1 &&
-    navigator.userAgent.indexOf('FxiOS') === -1
-  );
 };
 
 export const isAppleWebKit = () => {

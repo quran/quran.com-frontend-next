@@ -238,5 +238,9 @@ export default {
         quranFont: QuranFont.TajweedV4,
       }),
     },
+    session: {
+      ...state.session,
+      isDonationPopupVisible: true,
+    },
   }),
 };

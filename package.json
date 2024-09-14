@@ -10,6 +10,8 @@
     "dev": "next dev",
     "dev:https": "node server.js",
     "build": "next build",
+    "media-maker:studio": "npx remotion studio src/components/MediaMaker/index.ts",
+    "media-maker:deploy": "node scripts/media/deploy.mjs",
     "postbuild": "yarn run generate-sitemap",
     "snapshots:update": "vitest run --update",
     "start": "next start",
@@ -24,12 +26,15 @@
     "test:coverage": "vitest run --coverage",
     "test:watch": "vitest watch",
     "analyze": "cross-env ANALYZE_BUNDLE=true yarn build",
-    "lokalise": "node scripts/lokalise.js",
     "rename:v4-font-files": "node scripts/rename-v4-font-files.js",
     "remove:v4-font-files": "node scripts/remove-v4-font-files.js",
     "arrange-files:by-extention": "node scripts/arrange-files-in-folders.js",
     "remove-files:by-name": "node scripts/remove-files.js",
-    "chapter-data:format": "node scripts/format-chapter-data-json.js"
+    "lokalise": "node scripts/lokalise.mjs",
+    "chapter-data:format": "node scripts/format-chapter-data-json.js",
+    "postinstall": "husky",
+    "prepack": "pinst --disable",
+    "postpack": "pinst --enable"
   },
   "dependencies": {
     "@babel/eslint-parser": "^7.19.1",
@@ -60,6 +65,11 @@
     "@radix-ui/react-tooltip": "^1.0.7",
     "@radix-ui/react-visually-hidden": "^1.0.3",
     "@reduxjs/toolkit": "^1.8.5",
+    "@remotion/bundler": "4.0.126",
+    "@remotion/cli": "4.0.126",
+    "@remotion/eslint-plugin": "4.0.126",
+    "@remotion/lambda": "4.0.126",
+    "@remotion/player": "4.0.126",
     "@sanity/client": "^5.2.1",
     "@sanity/image-url": "^1.0.2",
     "@sentry/nextjs": "^7.77.0",
@@ -80,7 +90,9 @@
     "next-pwa": "^5.6.0",
     "next-seo": "^5.5.0",
     "next-translate": "^1.6.0",
+    "next-transpile-modules": "9.0.0",
     "node-fetch": "2",
+    "querystring": "^0.2.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-hook-form": "^7.36.1",
@@ -92,11 +104,12 @@
     "redux": "^4.2.0",
     "redux-persist": "^6.0.0",
     "refresh-fetch": "^0.8.0",
+    "remotion": "4.0.126",
     "swr": "1.2.1",
     "xstate": "^4.33.6"
   },
   "devDependencies": {
-    "@lokalise/node-api": "^8.0.1",
+    "@lokalise/node-api": "^12.7.0",
     "@next/eslint-plugin-next": "^12.3.1",
     "@playwright/test": "^1.26.0",
     "@storybook/addon-a11y": "^7.6.4",
@@ -142,12 +155,13 @@
     "eslint-plugin-sonarjs": "^0.15.0",
     "eslint-plugin-storybook": "^0.6.15",
     "eslint-plugin-unicorn": "^43.0.2",
-    "husky": "^8.0.1",
+    "husky": "^9.0.11",
     "inquirer": "^8.0.0",
     "inquirer-file-tree-selection-prompt": "^1",
     "jsdom": "^20.0.0",
     "lint-staged": "^13.0.3",
     "next-sitemap": "^3.1.22",
+    "pinst": "^3.0.0",
     "postcss": "8",
     "postcss-scss": "^4.0.5",
     "prettier": "^2.7.1",
@@ -161,7 +175,7 @@
     "stylelint-prettier": "^2.0.0",
     "stylelint-scss": "^4.3.0",
     "stylelint-use-logical": "^2.0.0",
-    "superagent": "^8.0.0",
+    "superagent": "^10.1.0",
     "typescript": "^4.8.3",
     "vite": "^3.2.5",
     "vitest": "^0.23.4"
@@ -173,6 +187,7 @@
   },
   "lint-staged": {
     "*.{tsx,ts}": "yarn lint:fix",
-    "*.scss": "yarn lint:scss"
+    "*.scss": "yarn lint:scss",
+    "*": "prettier --write"
   }
 }

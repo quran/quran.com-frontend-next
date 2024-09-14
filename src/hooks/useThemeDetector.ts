@@ -34,7 +34,7 @@ const useThemeDetector = () => {
   };
 
   useEffect(() => {
-    if (isClient) {
+    if (!isClient) {
       return null;
     }
 

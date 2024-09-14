@@ -1,0 +1,151 @@
+$white: #ffffff;
+
+.videoContainer {
+  position: absolute;
+  inset-block-start: 0;
+  inset-block-end: 0;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.videoContainer video {
+  /* Make video to at least 100% wide and tall */
+  min-width: 100%;
+  min-height: 100%;
+
+  /* Setting width & height to auto prevents the browser from stretching or squishing the video */
+  width: auto;
+  height: auto;
+
+  /* Center the video */
+  position: absolute;
+  inset-block-start: 50%;
+  inset-inline-start: 50%;
+  transform: translate(-50%, -50%);
+  [dir="rtl"] & {
+    transform: translate(50%, -50%);
+  }
+  object-fit: cover;
+}
+
+.verseCentre {
+  padding: 0 2rem;
+  text-align: center;
+}
+
+.verseJustified {
+  width: 100%;
+  text-align: justify;
+  padding: 0 2rem;
+}
+
+.verseTranslationCentre {
+  padding: 0.5rem 2rem;
+  text-align: center;
+}
+
+.verseTranslationJustified {
+  width: 100%;
+  padding: 0.5rem 2rem;
+  text-align: justify;
+}
+
+.translation {
+  direction: ltr;
+  font-family: "ProximaVara" !important;
+}
+.watermark {
+  text-align: center;
+  color: $white;
+  font-size: 19px;
+  font-family: "ProximaVara" !important;
+  font-weight: var(--font-weight-bold);
+}
+
+.watermarkPortrait {
+  font-size: 19px;
+}
+
+.watermarkLandscape {
+  font-size: 17px;
+}
+
+.logo {
+  font-weight: 700;
+  font-size: 29px;
+  font-family: "PlayfairDisplay" !important;
+}
+
+.logoPortrait {
+  font-size: 29px;
+}
+
+.logoLandscape {
+  font-size: 25px;
+}
+
+.space {
+  display: inline-block;
+  width: 5px;
+}
+
+.chapterTitle {
+  text-align: center;
+  color: $white;
+}
+
+.verseText {
+  line-height: 1.7;
+  direction: rtl !important;
+  margin-block: 3px;
+}
+
+.indopakFont {
+  font-family: "Indopak" !important;
+}
+
+.uthmaniFont {
+  font-family: "UthmanicHafs" !important;
+}
+
+.surahEnglish {
+  font-size: 24px;
+  font-weight: 400;
+  color: $white;
+  font-family: "ProximaVara" !important;
+}
+
+.surahArabic {
+  font-family: "NotoNastaliq" !important;
+  font-weight: 400;
+  font-size: 30px;
+  color: $white;
+}
+
+.verseContainer {
+  justify-content: center !important;
+  width: fit-content !important;
+  max-width: 97% !important;
+  height: fit-content !important;
+  margin: auto !important;
+  border: 2px gray solid !important;
+  border-radius: 20px !important;
+  align-items: center !important;
+}
+
+.verseBorder {
+  border: var(--border-size) var(--border-color) solid !important;
+}
+
+.verseLandscape {
+  min-width: 60% !important;
+  min-height: 50% !important;
+  max-height: 70% !important;
+}
+
+.versePortrait {
+  min-width: 80% !important;
+  min-height: 25% !important;
+  max-height: 74.5% !important;
+}

@@ -72,7 +72,7 @@ const VoiceSearchBodyContainer: React.FC<Props> = ({ isCommandBar = false }) => 
           [styles.noResultContainer]: isCommandBar,
         })}
       >
-        <NoResults searchQuery={partialTranscript} isSearchDrawer={false} />
+        <NoResults searchQuery={partialTranscript} />
       </div>
     );
   }

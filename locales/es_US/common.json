@@ -1,0 +1,405 @@
+{
+  "about": "",
+  "allow": "",
+  "and": "",
+  "announcements": {
+    "auth-onboarding": {
+      "data-sync": {
+        "action": "",
+        "description": "",
+        "title": ""
+      },
+      "feedback": {
+        "action": "",
+        "description": "",
+        "title": ""
+      },
+      "quran-foundation-link": {
+        "action": "",
+        "description": "",
+        "title": ""
+      },
+      "quran-growth-journey": {
+        "action": "",
+        "description": "",
+        "title": ""
+      },
+      "welcome": {
+        "action": "",
+        "title": ""
+      }
+    },
+    "collections-announcement": {
+      "slide-1": {
+        "description": "",
+        "title": ""
+      }
+    }
+  },
+  "aria": {
+    "change-settings": "",
+    "drawer-close": "",
+    "msg-close": "",
+    "nav-drawer-open": "",
+    "play-surah": "",
+    "select-lng": "",
+    "sidebar-nav-close": ""
+  },
+  "audio": {
+    "auto-scroll": {
+      "off": "",
+      "on": "",
+      "title": ""
+    },
+    "displaying": "",
+    "exp-tip": "",
+    "exp-tip-no-select": "",
+    "experience": "",
+    "play": "",
+    "playback-normal": "",
+    "playback-speed": "",
+    "playback-speed-unit": "",
+    "player": {
+      "close-audio-player": "",
+      "currently-playing": "",
+      "delay-verse": "",
+      "download": "",
+      "full-surah": "",
+      "manage-repeat-settings": "",
+      "mismatch": "",
+      "pause": "",
+      "pause-audio": "",
+      "play": "",
+      "play-audio": "",
+      "play-range": "",
+      "previous-ayah": "",
+      "repeat-1-verse": "",
+      "repeat-settings": "",
+      "repeat-verse": "",
+      "search-verse": "",
+      "single-verse": "",
+      "start-over": "",
+      "start-playing": "",
+      "stop-repeating": "",
+      "times": "",
+      "verses-range": "",
+      "volume-control": ""
+    },
+    "repeat-moved": "",
+    "select-reciter": "",
+    "speed": "",
+    "title": ""
+  },
+  "ayah": "",
+  "ayahs": "",
+  "beta": "",
+  "bookmark": "",
+  "bookmarked": "",
+  "both": "",
+  "cancel": "",
+  "click-here": "",
+  "close": "",
+  "command-bar": {
+    "navigations": "",
+    "no-nav-results": "",
+    "placeholder": "",
+    "powered-by": "",
+    "recent-navigations": "",
+    "search-by-voice": "",
+    "try-navigating": ""
+  },
+  "community": {
+    "cta": "",
+    "header": "",
+    "sub-header": "",
+    "title": ""
+  },
+  "complete-sign-up": "",
+  "consents": {
+    "communication": {
+      "body": "",
+      "header": ""
+    }
+  },
+  "continue": "",
+  "copied": "",
+  "copied-to-clipboard": "",
+  "copy": "",
+  "counter": {
+    "decrease": "",
+    "increase": ""
+  },
+  "default-description": "",
+  "delete": "Borrar",
+  "developers": "",
+  "display": "",
+  "donate": "",
+  "donate_monthly": "",
+  "donate_once": "",
+  "edit": "",
+  "email-verification": {
+    "check-spam": "",
+    "email-sent": "",
+    "email-verification": "",
+    "resend-email": "",
+    "resend-email-in": "",
+    "verify-code": ""
+  },
+  "error": {
+    "bookmark-sync": "",
+    "email-login-fail": "",
+    "general": "",
+    "offline": "",
+    "pref-persist-fail": ""
+  },
+  "feedback": "",
+  "fonts": {
+    "15_lines": "",
+    "16_lines": "",
+    "code_v1": "",
+    "code_v2": "",
+    "font-size": "",
+    "lines": "",
+    "qcf-desc": "",
+    "qpc_uthmani_hafs": "",
+    "quran-font": "",
+    "tajweed": "",
+    "tajweed-desc": "",
+    "text_indopak": "",
+    "text_uthmani": ""
+  },
+  "footer": {
+    "description": "",
+    "hiring": "",
+    "rights": "",
+    "title": ""
+  },
+  "form": {
+    "body": "",
+    "code": "",
+    "email": "",
+    "firstName": "",
+    "lastName": "",
+    "title": ""
+  },
+  "from": "",
+  "fundraising-sticky-banner": {
+    "cta": "",
+    "title": "¡Regala durante los mejores días!"
+  },
+  "fundraising": {
+    "description": "Las donaciones mensuales nos ayudan a mejorar Quran.com y sostener las operaciones para que nos centremos menos en la recaudación de fondos y más en crear impacto.",
+    "title": ""
+  },
+  "help": "",
+  "hizb": "",
+  "home": "",
+  "hours": "",
+  "inline": "",
+  "input": {
+    "clear": ""
+  },
+  "juz": "",
+  "language": "",
+  "languages": "",
+  "learn-more": "",
+  "learning-plans": "",
+  "less": "",
+  "loading": "",
+  "login": "",
+  "logout": "",
+  "meccan": "",
+  "medinan": "",
+  "menu": "",
+  "minutes": "",
+  "mobile-apps": "",
+  "mode": "",
+  "more": "",
+  "my-learning-plans": "",
+  "navigate": "",
+  "network": "",
+  "new": "",
+  "newest": "",
+  "next": "",
+  "next-ayah": "",
+  "no": "",
+  "no-notifications": "",
+  "none": "",
+  "not-now": "",
+  "notes": {
+    "title": ""
+  },
+  "notification-settings": "",
+  "notification": {
+    "mark-all-as-read": "",
+    "mark-as-read": ""
+  },
+  "notifications": "",
+  "off": "",
+  "oldest": "",
+  "on": "",
+  "page": "",
+  "pages": "",
+  "pagination-summary": "",
+  "pbuh": "",
+  "popular-links": "",
+  "popup": {
+    "footnote": "",
+    "text-1": "",
+    "text-2": "La oportunidad perfecta para la caridad continua (Sadaqa Jariyah). Invierta en su Más Allá como donante mensual (o único).",
+    "title": "¡Regala durante los mejores días!"
+  },
+  "powered-by": "",
+  "prepare-hearts": {
+    "cta": "",
+    "title": ""
+  },
+  "prev": "",
+  "previous-ayah": "",
+  "privacy": "",
+  "product-updates": "",
+  "profile": "",
+  "q-reflect": "",
+  "quran-com": "",
+  "quran-radio": "",
+  "reading-history": "",
+  "reading-preference": {
+    "reading": "",
+    "translation": ""
+  },
+  "recitation": "",
+  "reciter": "",
+  "reciter-summary": "",
+  "reciters": "",
+  "reflect": "",
+  "reflections": "",
+  "remove": "",
+  "rename": "",
+  "retry": "",
+  "revelation_order": "",
+  "rub": "",
+  "save": "",
+  "save-to-collection": "",
+  "search-for": "",
+  "search-results": "",
+  "search": {
+    "filters": "",
+    "hint": "",
+    "jump-to": "",
+    "no-results": "",
+    "no-results-suggestion": "",
+    "popular": "",
+    "recent": "",
+    "results": "",
+    "show-all": "",
+    "switch-mode": "",
+    "title": ""
+  },
+  "seconds": "",
+  "settings": {
+    "no-tafsir-selected": "",
+    "no-translation-selected": "",
+    "reading-experience": "",
+    "reset-cta": "",
+    "reset-notif": "",
+    "search-reciter": "",
+    "search-tafsirs": "",
+    "search-translations": "",
+    "selected-reciter": "",
+    "selected-tafsirs": "",
+    "selected-translations": "",
+    "show-tooltip-when-playing-audio": "",
+    "title": "",
+    "tooltip-playing-audio-helper": "",
+    "value-and-other": "",
+    "value-and-others": "",
+    "wbw-helper": "",
+    "word-tooltip-helper": ""
+  },
+  "share": "",
+  "shared": "",
+  "show-more": "",
+  "sidebar": {
+    "search-hizb": "",
+    "search-juz": "",
+    "search-page": "",
+    "search-surah": "",
+    "try-navigating-with": ""
+  },
+  "sitemap": "",
+  "sort": {
+    "ascending": "",
+    "by": "",
+    "descending": ""
+  },
+  "style": "",
+  "submit": "",
+  "subscribe": "",
+  "subscribed": "",
+  "surah": "",
+  "tafsir": {
+    "font-size": "",
+    "group-message": "",
+    "no-text": "",
+    "surah": "",
+    "tafsir-desc": "",
+    "tafsirs-desc": "",
+    "title": ""
+  },
+  "tarteel": {
+    "app": "",
+    "name": ""
+  },
+  "theme": "",
+  "themes": {
+    "auto": "",
+    "dark": "",
+    "light": "",
+    "sepia": "",
+    "system": "",
+    "system-desc": ""
+  },
+  "to": "",
+  "tooltip": "",
+  "tooltip-trans-lang": "",
+  "trans-lang": "",
+  "translation": "",
+  "translations": "",
+  "transliteration": "",
+  "type": "",
+  "undo": "",
+  "validation": {
+    "invalid-email": "",
+    "invalid-field": "",
+    "maximum-length": "",
+    "minimum-length": "",
+    "required-field": ""
+  },
+  "verse": "",
+  "verse-bookmark-removed": "",
+  "verse-bookmarked": "",
+  "verses": "",
+  "view": "",
+  "voice": {
+    "ask-permission": "",
+    "error": "",
+    "no-permission": "",
+    "not-supported": "",
+    "suggest": "",
+    "suggest-subtitle": "",
+    "suggest-title": "",
+    "voice-search-powered-by": ""
+  },
+  "wbw": "",
+  "wbw-lang-summary": "",
+  "wbw-trans-lang": "",
+  "wbw-translation": "",
+  "wbw-transliteration": "",
+  "word-click": {
+    "no-audio": "",
+    "play-audio": "",
+    "title": ""
+  },
+  "word-tooltip": "",
+  "yes": ""
+}

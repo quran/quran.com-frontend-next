@@ -2,6 +2,7 @@
 import { configureRefreshFetch } from 'refresh-fetch';
 
 import { getTimezone } from '../datetime';
+import { prepareGenerateMediaFileRequestData } from '../media/utils';
 
 import BookmarkByCollectionIdQueryParams from './types/BookmarkByCollectionIdQueryParams';
 import GetAllNotesQueryParams from './types/Note/GetAllNotesQueryParams';
@@ -20,7 +21,10 @@ import ConsentType from '@/types/auth/ConsentType';
 import { Course } from '@/types/auth/Course';
 import { CreateGoalRequest, Goal, GoalCategory, UpdateGoalRequest } from '@/types/auth/Goal';
 import { Note } from '@/types/auth/Note';
+import { Response } from '@/types/auth/Response';
 import { StreakWithMetadataParams, StreakWithUserMetadata } from '@/types/auth/Streak';
+import GenerateMediaFileRequest, { MediaType } from '@/types/Media/GenerateMediaFileRequest';
+import MediaRenderError from '@/types/Media/MediaRenderError';
 import { Mushaf } from '@/types/QuranReader';
 import {
   makeBookmarksUrl,
@@ -64,6 +68,9 @@ import {
   makePublishNoteUrl,
   makeCourseFeedbackUrl,
   makeGetUserCoursesCountUrl,
+  makeGenerateMediaFileUrl,
+  makeGetMediaFileProgressUrl,
+  makeGetMonthlyMediaFilesCountUrl,
 } from '@/utils/auth/apiPaths';
 import { fetcher } from 'src/api';
 import CompleteAnnouncementRequest from 'types/auth/CompleteAnnouncementRequest';
@@ -82,8 +89,18 @@ import CompleteSignupRequest from 'types/CompleteSignupRequest';
 
 type RequestData = Record<string, any>;
 
+const IGNORE_ERRORS = [
+  MediaRenderError.MediaVersesRangeLimitExceeded,
+  MediaRenderError.MediaFilesPerUserLimitExceeded,
+];
+
 const handleErrors = async (res) => {
   const body = await res.json();
+  // sometimes FE needs to handle the error from the API instead of showing a general something went wrong message
+  const shouldIgnoreError = IGNORE_ERRORS.includes(body?.error?.code);
+  if (shouldIgnoreError) {
+    return body;
+  }
   throw new Error(body?.message);
 };
 
@@ -391,6 +408,22 @@ export const updateNote = async (id: string, body: string, saveToQR: boolean) =>
 
 export const deleteNote = async (id: string) => deleteRequest(makeDeleteOrUpdateNoteUrl(id));
 
+export const getMediaFileProgress = async (
+  renderId: string,
+): Promise<Response<{ isDone: boolean; progress: number; url?: string }>> =>
+  privateFetcher(makeGetMediaFileProgressUrl(renderId));
+
+export const getMonthlyMediaFilesCount = async (
+  type: MediaType,
+): Promise<Response<{ count: number; limit: number }>> =>
+  privateFetcher(makeGetMonthlyMediaFilesCountUrl(type));
+
+export const generateMediaFile = async (
+  payload: GenerateMediaFileRequest,
+): Promise<Response<{ renderId?: string; url?: string }>> => {
+  return postRequest(makeGenerateMediaFileUrl(), prepareGenerateMediaFileRequestData(payload));
+};
+
 export const requestVerificationCode = async (emailToVerify) => {
   return postRequest(makeVerificationCodeUrl(), { email: emailToVerify });
 };
@@ -423,8 +456,7 @@ export const withCredentialsFetcher = async <T>(
     });
     return data;
   } catch (error) {
-    await handleErrors(error);
-    return null;
+    return handleErrors(error);
   }
 };
 
