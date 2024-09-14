@@ -84,7 +84,6 @@ const MediaMakerContent: React.FC<Props> = ({
 
   const videoPath = staticFile(`${isPlayer ? '/publicMin' : ''}${video.videoSrc}`);
   const isPortrait = orientation === Orientation.PORTRAIT;
-  const isSameVerse = verses.length === 1;
   return (
     <AbsoluteFill
       style={{
@@ -127,20 +126,30 @@ const MediaMakerContent: React.FC<Props> = ({
               >
                 <div className={styles.chapterTitle}>
                   <div>
-                    <span className={styles.watermark}>I made this on</span>
+                    <span
+                      className={classNames(styles.watermark, {
+                        [styles.watermarkPortrait]: isPortrait,
+                        [styles.watermarkLandscape]: !isPortrait,
+                      })}
+                    >
+                      I made this on
+                    </span>
                     <span className={styles.space} />
-                    <span className={styles.logo}>Quran.com</span>
+                    <span
+                      className={classNames(styles.logo, {
+                        [styles.logoPortrait]: isPortrait,
+                        [styles.logoLandscape]: !isPortrait,
+                      })}
+                    >
+                      Quran.com
+                    </span>
                   </div>
                   <div>
                     <span
                       className={styles.surahArabic}
                     >{`${WORD_SURAH} ${chapter?.translatedName}`}</span>
                     <span className={styles.surahEnglish}>
-                      {` - ${chapterEnglishName} (${verse.chapterId}:${
-                        isSameVerse
-                          ? verse.verseNumber
-                          : `${verses[0].verseNumber}-${verses[verses.length - 1].verseNumber}`
-                      })`}
+                      {` - ${chapterEnglishName} (Ch. ${verse.chapterId})`}
                     </span>
                   </div>
                 </div>
@@ -186,7 +195,9 @@ const MediaMakerContent: React.FC<Props> = ({
                     <div
                       style={{ fontSize: translationFontScale * 10.1 }}
                       dangerouslySetInnerHTML={{
-                        __html: getPlainTranslationText(translation.text),
+                        __html: getPlainTranslationText(
+                          `${translation.text} (${verse.chapterId}:${verse.verseNumber})`,
+                        ),
                       }}
                     />
                   </div>
