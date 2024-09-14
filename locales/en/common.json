@@ -146,15 +146,15 @@
     "verify-code": "Verify Code"
   },
   "error": {
+    "MediaVersesRangeLimitExceeded": "You can only select up to {{limit}} verses at a time. Please select a smaller range.",
     "bookmark-sync": "Bookmark is out of sync.",
     "email-login-fail": "Failed to login with email. Please try again",
     "general": "Something went wrong. Please try again.",
     "offline": "Looks like you lost your connection. Please check it and try again.",
     "pref-persist-fail": "Failed to sync your settings to the cloud.",
-    "MediaVersesRangeLimitExceeded": "You can only select up to {{limit}} verses at a time. Please select a smaller range.",
     "ranges-no-value": "Range start and end must have a value",
-    "ranges-wrong-order": "The starting verse has to be before the ending verse.",
-    "ranges-too-many-verses": "*Max {{maxNumberOfVerses}} Ayahs"
+    "ranges-too-many-verses": "*Max {{maxNumberOfVerses}} Ayahs",
+    "ranges-wrong-order": "The starting verse has to be before the ending verse."
   },
   "feedback": "Feedback",
   "fonts": {
@@ -163,16 +163,16 @@
     "code_v1": "King Fahad Complex V1",
     "code_v2": "King Fahad Complex V2",
     "font-size": "Font size",
-    "quran-font-size": "Quran font size",
-    "translation-font-size": "Translation font size",
     "lines": "Lines",
     "qcf-desc": "King Fahad Complex (V1 and V2) Fonts provide higher quality but take longer to load.",
     "qpc_uthmani_hafs": "QPC Uthmani Hafs",
     "quran-font": "Quran Font",
+    "quran-font-size": "Quran font size",
     "tajweed": "Tajweed",
     "tajweed-desc": "Tajweed font shows a Tajweed colored Mushaf. You can read more about the Tajweed color rules <0> here <\/0>",
     "text_indopak": "IndoPak",
-    "text_uthmani": "Uthmani"
+    "text_uthmani": "Uthmani",
+    "translation-font-size": "Translation font size"
   },
   "footer": {
     "description": "Quran.com is a Sadaqah Jariyah. We hope to make it easy for everyone to read, study, and learn The Noble Quran. The Noble Quran has many names including Al-Quran Al-Kareem, Al-Ketab, Al-Furqan, Al-Maw'itha, Al-Thikr, and Al-Noor.",
