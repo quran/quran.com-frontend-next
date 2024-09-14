@@ -1,6 +1,7 @@
 /* eslint-disable max-lines */
 import { camelizeKeys } from 'humps';
 
+import { MushafLines, QuranFont } from '@/types/QuranReader';
 import { SearchRequestParams, SearchMode } from '@/types/Search/SearchRequestParams';
 import NewSearchResponse from '@/types/Search/SearchResponse';
 import {
@@ -48,7 +49,6 @@ import {
   WordByWordTranslationsResponse,
 } from 'types/ApiResponses';
 import AudioData from 'types/AudioData';
-import { MushafLines, QuranFont } from 'types/QuranReader';
 
 export const SEARCH_FETCH_OPTIONS = {
   headers: {

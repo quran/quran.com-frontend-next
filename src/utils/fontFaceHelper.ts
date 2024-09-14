@@ -1,6 +1,6 @@
 import range from 'lodash/range';
 
-import { MushafLines, QuranFont } from 'types/QuranReader';
+import { MushafLines, QuranFont } from '@/types/QuranReader';
 import Verse from 'types/Verse';
 
 const QCFFontCodes = [QuranFont.MadaniV1, QuranFont.MadaniV2];

@@ -3,8 +3,8 @@ import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
 import { selectLoadedFontFaces } from '@/redux/slices/QuranReader/font-faces';
+import { QuranFont } from '@/types/QuranReader';
 import { isQCFFont } from '@/utils/fontFaceHelper';
-import { QuranFont } from 'types/QuranReader';
 
 /**
  * A hook that detects whether a font of a specific page

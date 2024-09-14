@@ -6,8 +6,8 @@ import useTranslation from 'next-translate/useTranslation';
 
 import Section from './Section';
 
+import { QuranFont } from '@/types/QuranReader';
 import { isQCFFont } from '@/utils/fontFaceHelper';
-import { QuranFont } from 'types/QuranReader';
 
 interface Props {
   quranFont: QuranFont;
@@ -21,7 +21,7 @@ const QuranFontSectionFooter: React.FC<Props> = ({ quranFont }) => {
       {isTajweed ? (
         <Trans
           i18nKey="common:fonts.tajweed-desc"
-          components={[<Link key={0} href="/tajweed-colors" prefetch={false} />]}
+          components={[<Link key={0} href="/tajweed-colors" prefetch={false} legacyBehavior />]}
         />
       ) : (
         t('fonts.qcf-desc')

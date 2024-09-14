@@ -6,8 +6,8 @@ import { getQuranReaderStylesInitialState } from '@/redux/defaultSettings/util';
 import { RootState } from '@/redux/RootState';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
 import SliceName from '@/redux/types/SliceName';
+import { MushafLines, QuranFont } from '@/types/QuranReader';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
-import { MushafLines, QuranFont } from 'types/QuranReader';
 
 export const MAXIMUM_QURAN_FONT_STEP = 10;
 export const MAXIMUM_TRANSLATIONS_FONT_STEP = 10;

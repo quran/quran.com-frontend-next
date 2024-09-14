@@ -4,9 +4,9 @@ import { Provider } from 'react-redux';
 import QuranWord from './QuranWord';
 
 import getStore from '@/redux/store';
+import { QuranFont } from '@/types/QuranReader';
 import { AudioPlayerMachineProvider } from '@/xstate/AudioPlayerMachineContext';
 import { mockWord } from 'tests/mocks/words';
-import { QuranFont } from 'types/QuranReader';
 // @ts-ignore
 import Word from 'types/Word';
 

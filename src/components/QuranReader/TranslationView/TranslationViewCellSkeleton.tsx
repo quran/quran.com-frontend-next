@@ -10,9 +10,9 @@ import Button, { ButtonSize } from '@/dls/Button/Button';
 import Skeleton from '@/dls/Skeleton/Skeleton';
 import useGetQueryParamOrReduxValue from '@/hooks/useGetQueryParamOrReduxValue';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
+import { QuranFont } from '@/types/QuranReader';
 import { getFontClassName } from '@/utils/fontFaceHelper';
 import QueryParam from 'types/QueryParam';
-import { QuranFont } from 'types/QuranReader';
 
 const TRANSLATION_TEXT_SAMPLE =
   'He has revealed to you ˹O Prophet˺ the Book in truth, confirming what came before it, as He revealed the Torah and the Gospel';
@@ -52,7 +52,7 @@ const TranslationViewCellSkeleton: React.FC<Props> = ({ hasActionMenuItems = tru
         )}
       </div>
 
-      {/* We're not using VersePreview as Skeleton's children here 
+      {/* We're not using VersePreview as Skeleton's children here
       because it has layout shift problem when loading the font. Which is not ideal for skeleton */}
       <div className={cellStyles.contentContainer}>
         <Skeleton

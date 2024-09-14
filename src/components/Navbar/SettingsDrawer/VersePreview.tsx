@@ -9,9 +9,9 @@ import PlainVerseText from '@/components/Verse/PlainVerseText';
 import Skeleton from '@/dls/Skeleton/Skeleton';
 import { addLoadedFontFace } from '@/redux/slices/QuranReader/font-faces';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
+import { QuranFont } from '@/types/QuranReader';
 import { getFontFaceNameForPage, getV1OrV2FontFaceSource, isQCFFont } from '@/utils/fontFaceHelper';
 import getSampleVerse from '@/utils/sampleVerse';
-import { QuranFont } from 'types/QuranReader';
 import Word from 'types/Word';
 
 const SWR_SAMPLE_VERSE_KEY = 'sample-verse';

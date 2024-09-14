@@ -9,6 +9,7 @@ import NextSeoWrapper from '@/components/NextSeoWrapper';
 import QuranReader from '@/components/QuranReader';
 import Error from '@/pages/_error';
 import { getQuranReaderStylesInitialState } from '@/redux/defaultSettings/util';
+import { QuranReaderDataType } from '@/types/QuranReader';
 import { getDefaultWordFields, getMushafId } from '@/utils/api';
 import { getAllChaptersData } from '@/utils/chapter';
 import { getLanguageAlternates, toLocalizedNumber } from '@/utils/locale';
@@ -23,7 +24,6 @@ import { isValidRubId } from '@/utils/validator';
 import { generateVerseKeysBetweenTwoVerseKeys } from '@/utils/verseKeys';
 import { VersesResponse } from 'types/ApiResponses';
 import ChaptersData from 'types/ChaptersData';
-import { QuranReaderDataType } from 'types/QuranReader';
 
 interface RubPageProps {
   rubVerses?: VersesResponse;

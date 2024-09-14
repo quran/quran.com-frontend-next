@@ -1,11 +1,16 @@
+import { createRequire } from 'module';
 import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
 
 import { deployFunction, deploySite, getOrCreateBucket } from '@remotion/lambda';
 // eslint-disable-next-line import/no-extraneous-dependencies
 import dotenv from 'dotenv';
-// eslint-disable-next-line import/no-extraneous-dependencies
-import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
+import requireNPM from 'require-npm';
+
+import getRemotionWebpackConfig from '../../src/utils/media/webpackConfig.mjs';
+
+const require = createRequire(import.meta.url);
+requireNPM.decorate(require);
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
@@ -48,28 +53,13 @@ const { serveUrl } = await deploySite({
       console.log(`Webpack bundling progress: ${progress}%`);
     },
     // eslint-disable-next-line react-func/max-lines-per-function
-    webpackOverride: (webpackConfig) => {
-      return {
-        ...webpackConfig,
-        resolve: {
-          ...webpackConfig.resolve,
-          plugins: [...(webpackConfig.resolve?.plugins ?? []), new TsconfigPathsPlugin()],
-        },
-        module: {
-          ...webpackConfig.module,
-          rules: [
-            ...(webpackConfig.module?.rules ? webpackConfig.module.rules : []),
-            {
-              test: /.s[ac]ss$/i,
-              use: [
-                { loader: 'style-loader' },
-                { loader: 'css-loader' },
-                { loader: 'sass-loader', options: { sourceMap: true } },
-              ],
-            },
-          ],
-        },
-      };
+    webpackOverride: (config) => {
+      return getRemotionWebpackConfig(config, {
+        stream: require.resolve('stream-browserify'),
+        zlib: require.resolve('browserify-zlib'),
+        fs: require.resolve('browserify-fs'),
+        path: require.resolve('path-browserify'),
+      });
     },
   },
 });

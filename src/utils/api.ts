@@ -2,7 +2,7 @@ import { decamelizeKeys } from 'humps';
 
 import stringify from './qs-stringify';
 
-import { Mushaf, MushafLines, QuranFont, QuranFontMushaf } from 'types/QuranReader';
+import { Mushaf, MushafLines, QuranFont, QuranFontMushaf } from '@/types/QuranReader';
 
 export const ITEMS_PER_PAGE = 10;
 

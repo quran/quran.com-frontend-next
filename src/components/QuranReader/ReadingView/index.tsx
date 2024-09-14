@@ -28,12 +28,12 @@ import useQcfFont from '@/hooks/useQcfFont';
 import { selectedLastReadPage } from '@/redux/slices/QuranReader/readingTracker';
 import { selectIsUsingDefaultFont } from '@/redux/slices/QuranReader/styles';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
+import { QuranReaderDataType } from '@/types/QuranReader';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getLineWidthClassName } from '@/utils/fontFaceHelper';
 import Error from 'src/pages/_error';
 import { VersesResponse } from 'types/ApiResponses';
 import QueryParam from 'types/QueryParam';
-import { QuranReaderDataType } from 'types/QuranReader';
 import Verse from 'types/Verse';
 
 const EndOfScrollingControls = dynamic(

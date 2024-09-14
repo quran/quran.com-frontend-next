@@ -108,6 +108,7 @@ const getStore = (locale: string) =>
     reducer: persistedReducer,
     // @ts-ignore
     middleware: (getDefaultMiddleware) =>
+      // @ts-ignore
       getDefaultMiddleware({
         serializableCheck: {
           // Used for Redux-persist, see:https://redux-toolkit.js.org/usage/usage-guide#use-with-redux-persist

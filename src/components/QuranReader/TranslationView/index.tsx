@@ -18,9 +18,9 @@ import useGetQueryParamOrReduxValue from '@/hooks/useGetQueryParamOrReduxValue';
 import useGetQueryParamOrXstateValue from '@/hooks/useGetQueryParamOrXstateValue';
 import useQcfFont from '@/hooks/useQcfFont';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
+import { QuranReaderDataType } from '@/types/QuranReader';
 import { VersesResponse } from 'types/ApiResponses';
 import QueryParam from 'types/QueryParam';
-import { QuranReaderDataType } from 'types/QuranReader';
 import Verse from 'types/Verse';
 
 type TranslationViewProps = {

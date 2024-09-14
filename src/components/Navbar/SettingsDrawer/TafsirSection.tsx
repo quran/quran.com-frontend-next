@@ -30,7 +30,7 @@ const TafsirSection = () => {
   const dispatch = useDispatch();
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const { tafsirFontScale } = quranReaderStyles;
-  const selectedTafsirs = useSelector(selectSelectedTafsirs, areArraysEqual);
+  const selectedTafsirs = useSelector(selectSelectedTafsirs, areArraysEqual) as string[];
 
   const tafsirLoading = useCallback(
     () => (

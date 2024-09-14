@@ -57,10 +57,15 @@ const CommandBar: React.FC = () => {
     },
     [dispatch],
   );
-  useHotkeys('cmd+k, ctrl+k, cmd+p, ctrl+p', toggleShowCommandBar, { enableOnTags: ['INPUT'] }, [
+  useHotkeys(
+    'meta+k, ctrl+k, meta+p, ctrl+p',
+    toggleShowCommandBar,
+    { enableOnFormTags: ['INPUT'] },
+    [dispatch],
+  );
+  useHotkeys('Escape', closeCommandBar, { enabled: isOpen, enableOnFormTags: ['INPUT'] }, [
     dispatch,
   ]);
-  useHotkeys('Escape', closeCommandBar, { enabled: isOpen, enableOnTags: ['INPUT'] }, [dispatch]);
 
   return (
     <CommandBarBase isOpen={isOpen} onClickOutside={() => closeCommandBar()}>

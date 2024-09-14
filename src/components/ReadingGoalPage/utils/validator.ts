@@ -1,9 +1,9 @@
 /* eslint-disable import/prefer-default-export */
+import { GoalType } from '@/types/auth/Goal';
+import ChaptersData from '@/types/ChaptersData';
+import { Mushaf } from '@/types/QuranReader';
 import { isValidPageNumber, isValidVerseKey } from '@/utils/validator';
 import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
-import { GoalType } from 'types/auth/Goal';
-import ChaptersData from 'types/ChaptersData';
-import { Mushaf } from 'types/QuranReader';
 
 const SECONDS_LIMIT = 4 * 60 * 60; // 4 hours
 const MIN_SECONDS = 60; // 1 minute

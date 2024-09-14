@@ -16,7 +16,7 @@ import {
   decreaseTranslationFontScale,
   increaseTranslationFontScale,
 } from '@/redux/slices/QuranReader/styles';
-import { QuranFont } from 'types/QuranReader';
+import { QuranFont } from '@/types/QuranReader';
 
 /**
  * Adjusts the font type and styles

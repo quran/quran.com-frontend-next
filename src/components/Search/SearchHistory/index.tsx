@@ -18,7 +18,7 @@ interface Props {
 
 const SearchHistory: React.FC<Props> = ({ onSearchKeywordClicked, isSearchDrawer }) => {
   const { t } = useTranslation('common');
-  const searchHistory = useSelector(selectSearchHistory, areArraysEqual);
+  const searchHistory = useSelector(selectSearchHistory, areArraysEqual) as string[];
   const dispatch = useDispatch();
 
   const onRemoveSearchQueryClicked = useCallback(

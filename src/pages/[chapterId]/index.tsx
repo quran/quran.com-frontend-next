@@ -10,6 +10,7 @@ import NextSeoWrapper from '@/components/NextSeoWrapper';
 import QuranReader from '@/components/QuranReader';
 import { getChapterOgImageUrl } from '@/lib/og';
 import { getQuranReaderStylesInitialState } from '@/redux/defaultSettings/util';
+import { QuranReaderDataType } from '@/types/QuranReader';
 import { getDefaultWordFields, getMushafId } from '@/utils/api';
 import { getAllChaptersData, getChapterData } from '@/utils/chapter';
 import {
@@ -35,7 +36,6 @@ import { parseVerseRange, generateVerseKeysBetweenTwoVerseKeys } from '@/utils/v
 import Error from 'src/pages/_error';
 import { ChapterResponse, VersesResponse, PagesLookUpResponse } from 'types/ApiResponses';
 import ChaptersData from 'types/ChaptersData';
-import { QuranReaderDataType } from 'types/QuranReader';
 
 type ChapterProps = {
   chapterResponse?: ChapterResponse;

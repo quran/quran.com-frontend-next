@@ -1,9 +1,9 @@
 import clipboardCopy from 'clipboard-copy';
 
 import { DATA_ATTRIBUTE_WORD_LOCATION } from '@/dls/QuranWord/QuranWord';
+import { QuranFont } from '@/types/QuranReader';
 import { getWordDataByLocation } from '@/utils/verse';
 import { getWordTextFieldNameByFont } from '@/utils/word';
-import { QuranFont } from 'types/QuranReader';
 import Verse from 'types/Verse';
 
 /**

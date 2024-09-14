@@ -1,6 +1,6 @@
 import DEFAULT_SETTINGS, { DefaultSettings } from '../defaultSettings';
 
-import { QuranFont } from 'types/QuranReader';
+import { QuranFont } from '@/types/QuranReader';
 
 const DEFAULT_TRANSLATION = 33; // Indonesian Islamic affairs ministry
 

@@ -250,7 +250,7 @@ $colorPickerBorderRadius: calc(var(--spacing-medium) * 3);
 
 .translationControlButtons {
   display: flex;
-  justify-content: start;
+  justify-content: flex-start;
   width: 100%;
 }
 

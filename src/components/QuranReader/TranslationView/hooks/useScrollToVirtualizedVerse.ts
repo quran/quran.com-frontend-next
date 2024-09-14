@@ -6,11 +6,11 @@ import { VirtuosoHandle } from 'react-virtuoso';
 import { useVerseTrackerContext } from '../../contexts/VerseTrackerContext';
 
 import DataContext from '@/contexts/DataContext';
+import { QuranReaderDataType } from '@/types/QuranReader';
 import Verse from '@/types/Verse';
 import { getPageNumberFromIndexAndPerPage } from '@/utils/number';
 import { isValidVerseId } from '@/utils/validator';
 import { makeVerseKey } from '@/utils/verse';
-import { QuranReaderDataType } from 'types/QuranReader';
 import ScrollAlign from 'types/ScrollAlign';
 
 /**

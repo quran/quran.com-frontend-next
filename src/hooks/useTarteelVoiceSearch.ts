@@ -3,9 +3,6 @@
 /* eslint-disable react-func/max-lines-per-function */
 import { useState, useCallback, useRef } from 'react';
 
-// @ts-ignore
-import { AudioWorklet } from 'audio-worklet';
-
 import useBrowserLayoutEffect from '@/hooks/useBrowserLayoutEffect';
 import SearchService from '@/types/Search/SearchService';
 import SearchQuerySource from '@/types/SearchQuerySource';
@@ -121,13 +118,13 @@ const useTarteelVoiceSearch = () => {
       }
 
       releaseMicrophone();
-      if (analyser) {
-        analyser.current.disconnect();
+      if (analyser.current) {
+        analyser?.current?.disconnect();
       }
-      if (micWorkletNode) {
+      if (micWorkletNode.current) {
         micWorkletNode.current.disconnect();
       }
-      if (micSourceNode) {
+      if (micSourceNode.current) {
         micSourceNode.current.disconnect();
       }
       if (audioContext.current.state === 'running') {
@@ -176,9 +173,7 @@ const useTarteelVoiceSearch = () => {
 
   const addMicInputProcessorToAudioContext = useCallback(async () => {
     try {
-      await audioContext.current.audioWorklet.addModule(
-        new AudioWorklet(new URL('src/audioInput/MicInputProcessor.ts', import.meta.url)),
-      );
+      await audioContext.current.audioWorklet.addModule('/worklets/MicInputProcessor.js');
       logEvent('tarteel_websocket_initialize');
       setIsLoading(true);
 

@@ -116,7 +116,7 @@ const CollectionList = () => {
         <div className={styles.collectionListContainer}>
           <div>
             <div className={styles.itemContainer}>
-              <Link href="/collections/all">
+              <Link href="/collections/all" legacyBehavior>
                 <div>
                   <div className={styles.itemTitle}>{t('collection:all-saved-verses')}</div>
                   <div className={styles.itemInfo}>
@@ -138,7 +138,7 @@ const CollectionList = () => {
             return (
               <div key={collection.id}>
                 <div className={styles.itemContainer}>
-                  <Link href={`/collections/${collection.url}`}>
+                  <Link href={`/collections/${collection.url}`} legacyBehavior>
                     <div>
                       <div className={styles.itemTitle}>{collection.name}</div>
                       <div className={styles.itemInfo}>

@@ -3,7 +3,7 @@ import {
   WordByWordType,
   WordClickFunctionality,
   WordByWordDisplay,
-} from 'types/QuranReader';
+} from '@/types/QuranReader';
 
 type ReadingPreferences = {
   readingPreference: ReadingPreference;

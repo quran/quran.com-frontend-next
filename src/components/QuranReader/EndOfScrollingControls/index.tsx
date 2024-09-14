@@ -16,8 +16,8 @@ import RubControls from './RubControls';
 import VerseControls from './VerseControls';
 
 import { selectIsReadingByRevelationOrder } from '@/redux/slices/revelationOrder';
+import { QuranReaderDataType } from '@/types/QuranReader';
 import { VersesResponse } from 'types/ApiResponses';
-import { QuranReaderDataType } from 'types/QuranReader';
 import Verse from 'types/Verse';
 
 interface Props {

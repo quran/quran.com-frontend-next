@@ -1,6 +1,6 @@
 import { toLocalizedNumber } from './locale';
 
-import { Mushaf, MushafLines, QuranFont, QuranFontMushaf } from 'types/QuranReader';
+import { Mushaf, MushafLines, QuranFont, QuranFontMushaf } from '@/types/QuranReader';
 
 const DEFAULT_NUMBER_OF_PAGES = 604;
 

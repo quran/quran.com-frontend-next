@@ -1,32 +1,16 @@
 import path from 'path';
 
 import { Config } from '@remotion/cli/config';
-// eslint-disable-next-line import/no-extraneous-dependencies
-import TsconfigPathsPlugin from 'tsconfig-paths-webpack-plugin';
+
+import getRemotionWebpackConfig from './src/utils/media/webpackConfig.mjs';
 
 Config.setPublicDir(path.join(process.cwd(), 'public', 'publicMin'));
 
-// @ts-ignore
-Config.overrideWebpackConfig((config) => {
-  return {
-    ...config,
-    module: {
-      ...config.module,
-      rules: [
-        ...(config.module?.rules ? config.module.rules : []),
-        {
-          test: /.s[ac]ss$/i,
-          use: [
-            { loader: 'style-loader' },
-            { loader: 'css-loader' },
-            { loader: 'sass-loader', options: { sourceMap: true } },
-          ],
-        },
-      ],
-    },
-    resolve: {
-      ...config.resolve,
-      plugins: [...(config.resolve?.plugins ?? []), new TsconfigPathsPlugin()],
-    },
-  };
-});
+Config.overrideWebpackConfig((config) =>
+  getRemotionWebpackConfig(config, {
+    stream: require.resolve('stream-browserify'),
+    zlib: require.resolve('browserify-zlib'),
+    fs: require.resolve('browserify-fs'),
+    path: require.resolve('path-browserify'),
+  }),
+);

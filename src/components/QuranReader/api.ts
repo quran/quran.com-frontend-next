@@ -1,6 +1,7 @@
 /* eslint-disable max-lines */
 /* eslint-disable react-func/max-lines-per-function */
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
+import { QuranReaderDataType } from '@/types/QuranReader';
 import { getDefaultWordFields, getMushafId } from '@/utils/api';
 import {
   makeHizbVersesUrl,
@@ -14,7 +15,6 @@ import { fetcher } from 'src/api';
 import { PagesLookUpRequest } from 'types/ApiRequests';
 import { VersesResponse } from 'types/ApiResponses';
 import LookupRecord from 'types/LookupRecord';
-import { QuranReaderDataType } from 'types/QuranReader';
 import Verse from 'types/Verse';
 
 interface TranslationViewRequestKeyInput {

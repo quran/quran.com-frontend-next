@@ -41,7 +41,7 @@ const QueryParamMessage: React.FC<Props> = ({
   const { lang } = useTranslation('common');
   const router = useRouter();
   const audioService = useContext(AudioPlayerMachineContext);
-  const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
+  const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual) as number[];
   const selectedReciterId = useXstateSelector(audioService, (state) => state.context.reciterId);
   const selectedWordByWordLocale = useSelector(selectWordByWordLocale, shallowEqual);
   const {

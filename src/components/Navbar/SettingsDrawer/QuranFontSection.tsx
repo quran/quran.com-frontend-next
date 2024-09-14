@@ -25,9 +25,9 @@ import {
   setMushafLines,
   MAXIMUM_QURAN_FONT_STEP,
 } from '@/redux/slices/QuranReader/styles';
+import { MushafLines, QuranFont } from '@/types/QuranReader';
 import { logValueChange } from '@/utils/eventLogger';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
-import { MushafLines, QuranFont } from 'types/QuranReader';
 
 const QuranFontSection = () => {
   const { t, lang } = useTranslation('common');

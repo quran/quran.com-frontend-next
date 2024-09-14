@@ -1,5 +1,5 @@
 // eslint-disable-next-line import/no-extraneous-dependencies
-import { Middleware } from 'redux';
+import { AnyAction, Middleware, MiddlewareAPI, Dispatch } from 'redux';
 
 import { RootState } from '../RootState';
 import { setIsUsingDefaultSettings } from '../slices/defaultSettings';
@@ -42,15 +42,18 @@ const DefaultSettingsMiddleware: Middleware<
   // eslint-disable-next-line @typescript-eslint/ban-types
   {}, // Most middleware do not modify the dispatch return value
   RootState
-> = (storeAPI) => (next) => (action) => {
-  const { type } = action;
-  // the moment any of the actions that change the settings has changed, it means we are no longer using the default settings
-  if (OBSERVED_ACTIONS.includes(type)) {
-    storeAPI.dispatch({ type: setIsUsingDefaultSettings.type, payload: false });
-  } else if (type === RESET_SETTINGS_EVENT) {
-    storeAPI.dispatch({ type: setIsUsingDefaultSettings.type, payload: true });
-  }
-  return next(action);
-};
+> =
+  (storeAPI: MiddlewareAPI<Dispatch<AnyAction>>) =>
+  (next: Dispatch<AnyAction>) =>
+  (action: AnyAction) => {
+    const { type } = action;
+    // the moment any of the actions that change the settings has changed, it means we are no longer using the default settings
+    if (OBSERVED_ACTIONS.includes(type)) {
+      storeAPI.dispatch({ type: setIsUsingDefaultSettings.type, payload: false });
+    } else if (type === RESET_SETTINGS_EVENT) {
+      storeAPI.dispatch({ type: setIsUsingDefaultSettings.type, payload: true });
+    }
+    return next(action);
+  };
 
 export default DefaultSettingsMiddleware;
