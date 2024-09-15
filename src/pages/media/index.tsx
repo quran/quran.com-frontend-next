@@ -376,23 +376,27 @@ const MediaMaker: NextPage<MediaMaker> = ({
   const { width, height } = orientationToDimensions(orientation);
   const PATH = getQuranMediaMakerNavigationUrl();
 
+  const SEOComponent = (
+    <NextSeoWrapper
+      title={t('media:maker-title')}
+      description={t('media:maker-meta-desc')}
+      url={getCanonicalUrl(lang, PATH)}
+      languageAlternates={getLanguageAlternates(PATH)}
+      image={getMediaGeneratorOgImageUrl({
+        locale: lang,
+      })}
+      imageWidth={1200}
+      imageHeight={630}
+    />
+  );
+
   if (!isReady) {
-    return <></>;
+    return <>{SEOComponent}</>;
   }
 
   return (
     <>
-      <NextSeoWrapper
-        title={t('media:maker-title')}
-        description={t('media:maker-meta-desc')}
-        url={getCanonicalUrl(lang, PATH)}
-        languageAlternates={getLanguageAlternates(PATH)}
-        image={getMediaGeneratorOgImageUrl({
-          locale: lang,
-        })}
-        imageWidth={1200}
-        imageHeight={630}
-      />
+      {SEOComponent}
       <div className={styles.pageContainer}>
         <div className={classNames(styles.playerWrapper, layoutStyles.flowItem)}>
           <>
