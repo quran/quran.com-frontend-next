@@ -15,12 +15,12 @@ import { getCanonicalUrl } from '@/utils/navigation';
 
 const PATH = '/terms-and-conditions';
 const TermsAndConditionsPage: NextPage = (): JSX.Element => {
-  const { t, lang } = useTranslation('terms-and-conditions');
+  const { t, lang } = useTranslation('common');
 
   return (
     <>
       <NextSeoWrapper
-        title={t('terms-header')}
+        title={t('terms-and-conditions')}
         url={getCanonicalUrl(lang, PATH)}
         languageAlternates={getLanguageAlternates(PATH)}
       />

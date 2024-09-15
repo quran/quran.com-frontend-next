@@ -60,7 +60,6 @@
     "/ramadan-activities": ["ramadan-activities"],
     "/notification-settings": ["notification-settings"],
     "/calendar": ["quranic-calendar"],
-    "/media": ["media"],
-    "/terms-and-conditions": ["terms-and-conditions"]
+    "/media": ["media"]
   }
 }

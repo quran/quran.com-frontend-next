@@ -7,11 +7,11 @@
       "data-sync": {
         "action": "Tjetra",
         "description": "Pavarësisht nëse jeni duke përdorur Quran.com në telefonin ose laptopin tuaj, faqeshënuesit, vargjet e fundit të lexuara dhe preferencat tuaja do të jenë të disponueshme",
-        "title": "Të dhënat tuaja do të sinkronizohen <br><\/br> nëpër pajisje"
+        "title": "Të dhënat tuaja do të sinkronizohen <br></br> nëpër pajisje"
       },
       "feedback": {
         "action": "Mirë, e kuptova",
-        "description": "Faleminderit që përdorni Quran.com dhe do të ishim të lumtur të dëgjonim komentet tuaja në <link> feedback.quran.com <\/link>",
+        "description": "Faleminderit që përdorni Quran.com dhe do të ishim të lumtur të dëgjonim komentet tuaja në <link> feedback.quran.com </link>",
         "title": "Ne duam të dëgjojmë mendimet tuaja"
       },
       "quran-foundation-link": {
@@ -26,12 +26,12 @@
       },
       "welcome": {
         "action": "Shihni çfarë ka të re",
-        "title": "Mirë se vini në llogarinë e përdoruesit <br><\/br> të Quran.com"
+        "title": "Mirë se vini në llogarinë e përdoruesit <br></br> të Quran.com"
       }
     },
     "collections-announcement": {
       "slide-1": {
-        "description": "Jemi shumë të lumtur të njoftojmë se tani ju mund të gruponi faqerojtësit nën \"koleksione\"! <br\/> <br\/> <li> Shtoni sa më shumë koleksione që dëshironi <\/li> <li> Shtoni një faqeshënues në një ose më shumë koleksione <\/li> <li> Dhe më shumë! <\/li>",
+        "description": "Jemi shumë të lumtur të njoftojmë se tani ju mund të gruponi faqerojtësit nën \"koleksione\"! <br/> <br/> <li> Shtoni sa më shumë koleksione që dëshironi </li> <li> Shtoni një faqeshënues në një ose më shumë koleksione </li> <li> Dhe më shumë! </li>",
         "title": "Koleksionet e faqeshënuesve janë këtu!"
       }
     }
@@ -52,8 +52,8 @@
       "title": "Lëvizja automatike"
     },
     "displaying": "Duke u shfaqur",
-    "exp-tip": "<span>Ndrysho përmbajtjen e shfaqur nën<\/span><br><\/br> <boldSpan>Cilësimet<\/boldSpan> > <boldSpan>Fjalë për fjalë<\/boldSpan>",
-    "exp-tip-no-select": "<span>Shënoni opsionin e shfaqjes së këshillës së veglave dhe zgjidhni opsionin <br><\/br> Përkthimi dhe\/ose Transliterimi<\/span><br><\/br><span> nën <\/span><boldSpan>Cilësimet<\/boldSpan> > <boldSpan>Fjalë për fjalë<\/boldSpan><span>, për të<\/span><br><\/br> <span>aktivizuar këtë veçori.<\/span>",
+    "exp-tip": "<span>Ndrysho përmbajtjen e shfaqur nën</span><br></br> <boldSpan>Cilësimet</boldSpan> > <boldSpan>Fjalë për fjalë</boldSpan>",
+    "exp-tip-no-select": "<span>Shënoni opsionin e shfaqjes së këshillës së veglave dhe zgjidhni opsionin <br></br> Përkthimi dhe/ose Transliterimi</span><br></br><span> nën </span><boldSpan>Cilësimet</boldSpan> > <boldSpan>Fjalë për fjalë</boldSpan><span>, për të</span><br></br> <span>aktivizuar këtë veçori.</span>",
     "experience": "Përvoja",
     "play": "Luaj Audio",
     "playback-normal": "Normale",
@@ -85,7 +85,7 @@
       "verses-range": "Gama e vargjeve",
       "volume-control": "Kontrolli i volumit"
     },
-    "repeat-moved": "Cilësimet e përsëritjes janë zhvendosur te luajtësi audio. Klikoni në <0> <\/0> për t'iu qasur atyre",
+    "repeat-moved": "Cilësimet e përsëritjes janë zhvendosur te luajtësi audio. Klikoni në <0> </0> për t'iu qasur atyre",
     "select-reciter": "Zgjidhni Recitues",
     "speed": "Shpejtësia",
     "title": "Audio"
@@ -117,8 +117,8 @@
   "complete-sign-up": "Plotësoni regjistrimin tuaj",
   "consents": {
     "communication": {
-      "body": "🚀 Mbushni progresin tuaj nëpërmjet njoftimeve të personalizuara <boldSpan> <\/boldSpan> në lidhje me përparimin e qëllimit tuaj, ruajtjen e vijave dhe përmirësimin e përdorimit të veçorive tona aktuale. <br><\/br> <br><\/br> A mund t'ju mbajmë të informuar përmes emailit dhe kanaleve të tjera? Ju keni kontrollin - mos ngurroni t'i rregulloni këto preferenca në çdo kohë në cilësimet e llogarisë tuaj. <br><\/br> <br><\/br> Thjesht zgjidhni \"Lejo\" për rikujtuesit frymëzues <boldSpan> <\/boldSpan> ose \"Jo tani\" për t'i refuzuar.",
-      "header": "Do të donim t'ju ndihmonim të qëndroni <boldSpan> të përkushtuar dhe të qëndrueshëm <\/boldSpan> me Udhëtimin tuaj të Rritjes në Kuran! 📖🌟"
+      "body": "🚀 Mbushni progresin tuaj nëpërmjet njoftimeve të personalizuara <boldSpan> </boldSpan> në lidhje me përparimin e qëllimit tuaj, ruajtjen e vijave dhe përmirësimin e përdorimit të veçorive tona aktuale. <br></br> <br></br> A mund t'ju mbajmë të informuar përmes emailit dhe kanaleve të tjera? Ju keni kontrollin - mos ngurroni t'i rregulloni këto preferenca në çdo kohë në cilësimet e llogarisë tuaj. <br></br> <br></br> Thjesht zgjidhni \"Lejo\" për rikujtuesit frymëzues <boldSpan> </boldSpan> ose \"Jo tani\" për t'i refuzuar.",
+      "header": "Do të donim t'ju ndihmonim të qëndroni <boldSpan> të përkushtuar dhe të qëndrueshëm </boldSpan> me Udhëtimin tuaj të Rritjes në Kuran! 📖🌟"
     }
   },
   "continue": "Vazhdoni",
@@ -139,7 +139,7 @@
   "edit": "Redakto",
   "email-verification": {
     "check-spam": "Nuk e morët emailin e verifikimit? Kontrolloni kutinë tuaj të postës së padëshiruar",
-    "email-sent": "Sapo dërguam një email te <strong> {{email}} <\/strong>",
+    "email-sent": "Sapo dërguam një email te <strong> {{email}} </strong>",
     "email-verification": "Verifikimi me email",
     "resend-email": "Ridërgo email",
     "resend-email-in": "Ridërgo email-in e verifikimit për {{remainingTime}} sek...",
@@ -169,14 +169,14 @@
     "quran-font": "Fonti i Kuranit",
     "quran-font-size": "Madhësia e shkronjave të Kuranit",
     "tajweed": "Texhvidi",
-    "tajweed-desc": "Fonti Tajweed tregon një Mushaf me ngjyrë Tajweed. Mund të lexoni më shumë rreth rregullave të ngjyrave të Tajweed <0>këtu<\/0>",
+    "tajweed-desc": "Fonti Tajweed tregon një Mushaf me ngjyrë Tajweed. Mund të lexoni më shumë rreth rregullave të ngjyrave të Tajweed <0>këtu</0>",
     "text_indopak": "IndoPak",
     "text_uthmani": "Osmani",
     "translation-font-size": "Madhësia e shkronjave të përkthimit"
   },
   "footer": {
     "description": "Quran.com është një Jariyah Sadakah. Shpresojmë t'ua bëjmë të lehtë të gjithëve leximin, studimin dhe mësimin e Kuranit Fisnik. Kurani Fisnik ka shumë emra duke përfshirë Al-Kuran Al-Kareem, Al-Ketab, Al-Furkan, Al-Maw'itha, Al-Thikr dhe Al-Noor.",
-    "hiring": "Ne po punësojmë! Bashkohuni me ekipin e QuranFoundation dhe kontribuoni në misionin tonë. <link> Apliko tani! <\/link>",
+    "hiring": "Ne po punësojmë! Bashkohuni me ekipin e QuranFoundation dhe kontribuoni në misionin tonë. <link> Apliko tani! </link>",
     "rights": "Të gjitha të drejtat e rezervuara",
     "title": "Lexoni, studioni dhe mësoni Kuranin Fisnik."
   },
@@ -275,7 +275,7 @@
   },
   "recitation": "Recitim",
   "reciter": "Recitues",
-  "reciter-summary": "Recitues fjalë për fjalë: <span> {{reciterName}} <\/span> . Klikoni mbi një fjalë për të dëgjuar recitimin e saj.",
+  "reciter-summary": "Recitues fjalë për fjalë: <span> {{reciterName}} </span> . Klikoni mbi një fjalë për të dëgjuar recitimin e saj.",
   "reciters": "Recituesit",
   "reflect": "Pasqyrim",
   "reflections": "Reflektime",
@@ -357,6 +357,7 @@
     "app": "Aplikacioni Tarteel",
     "name": "Tarteel.ai"
   },
+  "terms-and-conditions": "Termat dhe Kushtet",
   "theme": "Tema",
   "themes": {
     "auto": "Auto",
@@ -364,7 +365,7 @@
     "light": "Dritë",
     "sepia": "Sepia",
     "system": "Sistemi",
-    "system-desc": "Tema e sistemit përshtatet automatikisht me cilësimet tuaja të modalitetit dritë\/errësirë"
+    "system-desc": "Tema e sistemit përshtatet automatikisht me cilësimet tuaja të modalitetit dritë/errësirë"
   },
   "to": "tek",
   "tooltip": "Mesazh sugjerues",
@@ -398,7 +399,7 @@
     "voice-search-powered-by": "Kërkimi me zë Mundësuar nga"
   },
   "wbw": "Fjalë Për Fjalë",
-  "wbw-lang-summary": "Burimi i përkthimit fjalë për fjalë: <link> {{source}} <\/link> . Ky burim është i pavarur nga përzgjedhja e përkthimit të vargjeve.",
+  "wbw-lang-summary": "Burimi i përkthimit fjalë për fjalë: <link> {{source}} </link> . Ky burim është i pavarur nga përzgjedhja e përkthimit të vargjeve.",
   "wbw-trans-lang": "Fjalë për fjalë Gjuha",
   "wbw-translation": "Përkthimi fjalë pas fjale",
   "wbw-transliteration": "Përkthimi fjalë për fjalë",
