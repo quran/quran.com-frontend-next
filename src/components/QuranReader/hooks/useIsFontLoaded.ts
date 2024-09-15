@@ -3,7 +3,7 @@ import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
 import { selectLoadedFontFaces } from '@/redux/slices/QuranReader/font-faces';
-import { isQCFFont } from '@/utils/fontFaceHelper';
+import { getFontFaceNameForPage, isQCFFont } from '@/utils/fontFaceHelper';
 import { QuranFont } from 'types/QuranReader';
 
 /**
@@ -20,7 +20,7 @@ const useIsFontLoaded = (pageNumber: number, quranFont: QuranFont): boolean => {
     if (!isQCFFont(quranFont)) {
       return true;
     }
-    return loadedFonts.includes(`p${pageNumber}-${quranFont.replace('code_', '')}`);
+    return loadedFonts.includes(getFontFaceNameForPage(quranFont, pageNumber));
   }, [loadedFonts, pageNumber, quranFont]);
   return isFontLoaded;
 };

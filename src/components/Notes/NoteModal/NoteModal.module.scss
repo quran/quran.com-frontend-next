@@ -13,13 +13,14 @@
     align-items: center;
 
     padding-block: var(--spacing-large);
+
     @include breakpoints.smallerThanTablet {
         padding-block: var(--spacing-medium);
     }
 }
 
 .titleInput {
-    & > div {
+    &>div {
         border: none;
     }
 
@@ -34,7 +35,8 @@
     border: none !important;
     border-radius: 0 !important;
     padding-inline: 0 !important;
-    & > div {
+
+    &>div {
         border: none;
         margin-block-start: var(--spacing-large);
     }
@@ -84,5 +86,5 @@
 .submitContainer {
     display: flex;
     flex-direction: column;
-    align-items: end;
+    align-items: flex-end;
 }
