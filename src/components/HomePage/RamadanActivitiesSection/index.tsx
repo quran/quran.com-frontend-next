@@ -20,12 +20,14 @@ const RamadanActivitiesSection = () => {
           components={{
             link: (
               <Link
+                key={0}
                 onClick={onLinkClicked}
                 href={getQuranicCalendarNavigationUrl()}
                 variant={LinkVariant.Blend}
                 isNewTab
               />
             ),
+            b: <b className={styles.bold} key={1} />,
           }}
           i18nKey="home:ramadan-activities-cta"
           values={{ source: 'quranwbw' }}
