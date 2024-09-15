@@ -121,10 +121,6 @@ export function createSEOConfig({
         content: 'General', // lets the younger web-surfers know the content is appropriate
       },
       {
-        name: 'theme-color',
-        content: '#fff', // placeholder
-      },
-      {
         name: 'viewport',
         content: 'width=device-width, initial-scale=1, shrink-to-fit=no',
       },
