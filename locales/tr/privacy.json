@@ -1,48 +1,48 @@
 {
-    "communication": {
-        "desc": "E-posta adresinizi size hizmetlerimiz, içeriğimiz vb. ile ilgili önemli güncellemeler, haber bültenleri veya bildirimler göndermek için kullanabiliriz. İstediğiniz zaman bu iletişim aboneliğinden çıkma olanağına sahip olacaksınız.",
-        "title": "İletişim"
-    },
-    "contact-us": {
-        "desc": "Bu Gizlilik Politikası veya kişisel bilgilerinizin işlenmesi ile ilgili herhangi bir sorunuz, endişeniz veya talebiniz varsa, lütfen bizimle <0> buradan < \/ \/0 > iletişime geçin. Web sitemizi kullanarak, bu Gizlilik Politikasını okuyup anladığınızı ve kişisel bilgilerinizin açıklandığı şekilde toplanmasına, kullanılmasına ve ifşa edilmesine izin verdiğinizi kabul etmektesiniz.",
-        "title": "Bize Ulaşın"
-    },
-    "cookies": {
-        "desc": "Kuran.com, tarama deneyiminizi geliştirmek, kişiselleştirilmiş içerik sağlamak ve web sitesi trafiğini analiz etmek için tanımlama bilgileri kullanır. Web sitemize erişerek ve kullanarak, bu Gizlilik Politikasına uygun olarak çerezlerin kullanılmasına izin vermiş olursunuz. <br\/> <br\/> <li> Kullandığımız Çerez Türleri: <\/li> <subLi> Gerekli Çerezler: Bu çerezler, web sitemizin düzgün çalışması için gereklidir ve sayfada gezinme ve sayfalara erişim gibi temel özellikleri etkinleştirir. güvenli alanlar. Herhangi bir kişisel olarak tanımlanabilir bilgi toplamazlar. Bu tanımlama bilgileri olmadan web sitesinin bazı bölümleri düzgün çalışmayabilir. <\/subLi> <subLi> Analitik ve Performans Çerezleri: Bu çerezleri, ziyaretçi sayısı, ziyaret ettikleri sayfalar ve her sayfada geçirilen süre dahil olmak üzere, ziyaretçilerin web sitemizi nasıl kullandıkları hakkında bilgi toplamak için kullanırız. Bu veriler, web sitemizin performansını ve işlevselliğini analiz etmemize ve iyileştirmemize yardımcı olur. Bu tanımlama bilgileri sizi kişisel olarak tanımlamaz; tüm veriler toplanır ve anonimdir. <\/subLi>",
-        "title": "Çerezlerin Kullanımı"
-    },
-    "data-analysis": {
-        "desc": "Google Analytics'i sitenin beklendiği gibi çalışmaya devam etmesini sağlamak ve hangi özellikler üzerinde çalışmaya öncelik verileceğini bilmek vb. için kullanıyoruz. Bu bilgiler anonimdir ve belirli bir bireye kadar izini sürmeyiz.",
-        "title": "Veri analizi"
-    },
-    "data-deletion": {
-        "desc": "Gizliliğinizi sağlamak ve kişisel bilgileriniz üzerinde kontrol sahibi olmak için basit bir hesap silme işlemi sağlıyoruz. Hesabınızı silmeyi seçtiğinizde, ilişkili tüm kişisel veriler otomatik olarak ve kalıcı olarak sistemlerimizden kaldırılacaktır. Profil sayfanıza erişerek hesap silme işlemini başlatabilirsiniz. Silme işlemi başlatıldıktan sonra, kişisel verileriniz makul bir süre içinde sunucularımızdan güvenli bir şekilde silinecektir.",
-        "title": "Veri Silme"
-    },
-    "data-protection": {
-        "desc": "<boldSpan> Erişim hakkı: <\/boldSpan> Kişisel verilerinizin kopyalarını Kuran Vakfı'ndan talep etme hakkına sahipsiniz. Bu hizmet için sizden küçük bir ücret talep edebiliriz. <br\/> <br\/> <boldSpan> Düzeltme hakkı <\/boldSpan> : Yanlış olduğuna inandığınız bilgilerin Kuran Vakfı'ndan düzeltilmesini talep etme hakkına sahipsiniz. Eksik olduğuna inandığınız bilgilerin Kuran Vakfı'ndan tamamlanmasını talep etme hakkınız da bulunmaktadır. <br\/> <br\/> <boldSpan> Silme hakkı: <\/boldSpan> Belirli koşullar altında, Kuran Vakfı'ndan kişisel verilerinizin silinmesini talep etme hakkına sahipsiniz. <br\/> <br\/> <boldSpan> İşlemeyi kısıtlama hakkı: <\/boldSpan> Belirli koşullar altında, Kuran Vakfı'ndan kişisel verilerinizin işlenmesini kısıtlamasını talep etme hakkına sahipsiniz. <br\/> <br\/> <boldSpan> İşleme itiraz hakkı <\/boldSpan> : Belirli koşullar altında, Kuran Vakfı'nın kişisel verilerinizi işlemesine itiraz etme hakkına sahipsiniz. <br\/> <br\/> <boldSpan> Veri taşınabilirliği hakkı <\/boldSpan> : Kuran Vakfı'nın topladığımız verileri belirli koşullar altında başka bir kuruluşa veya doğrudan size aktarmasını talep etme hakkına sahipsiniz. .",
-        "title": "Veri Koruma Hakları"
-    },
-    "data-security": {
-        "desc": "Kişisel bilgilerinizi yetkisiz erişime, değişikliğe, ifşaya veya imhaya karşı korumak için uygun önlemleri alıyoruz. Verilerinizin gizliliğini ve bütünlüğünü sağlamak için endüstri standardı güvenlik protokolleri kullanıyoruz ve fiziksel, elektronik ve yönetimsel korumalar uyguluyoruz.",
-        "title": "Veri güvenliği"
-    },
-    "data-sharing": {
-        "desc": "Kişisel bilgilerinizi üçüncü şahıslara satmayız, takas etmeyiz veya kiralamayız.",
-        "title": "Bilgi paylaşımı"
-    },
-    "info-collection": {
-        "desc": "Kuran.com'da bir hesap oluşturmayı seçen kullanıcılardan belirli kişisel bilgileri topluyoruz. Bu bilgiler şunları içerebilir: <br\/> <br\/> <underline> E-posta Adresi <\/underline> : Hesap oluşturma sürecini kolaylaştırmak ve hesap kurtarma ve güvenlik bildirimleri dahil olmak üzere hesabınızla ilgili iletişim amaçları için e-posta adresinizi topluyoruz.",
-        "title": "Bilgi koleksiyonu"
-    },
-    "log-data": {
-        "desc": "Hizmetimizi her ziyaret ettiğinizde tarayıcınızın gönderdiği bilgileri (“Günlük Verileri”) topluyoruz. Bu Günlük Verileri, bilgisayarınızın İnternet Protokolü (“IP”) adresi, tarayıcı türü, tarayıcı sürümü, Hizmetimizin ziyaret ettiğiniz sayfaları, ziyaretinizin saati ve tarihi, bu sayfalarda geçirilen süre ve diğer bilgiler gibi bilgileri içerebilir. İstatistik.",
-        "title": "Günlük Verileri"
-    },
-    "main-privacy-desc": "Kuran.Vakfı (Kuran.com'u içerir), her insanı Kuran'dan yararlanmaya teşvik etmeye çalışan, 501(c)(3) kar amacı gütmeyen bir kuruluştur. Kuran Vakfı, tüm kullanıcılarımızın gizliliğine değer verir ve saygı duyar.",
-    "personal-info-use": {
-        "desc": "Topladığımız kişisel bilgileri aşağıdaki amaçlar için kullanırız: <br\/> <li> <underline> Hesap Oluşturma ve Yönetim <\/underline> : E-posta adresiniz, web sitemizde hesabınızı oluşturmak ve yönetmek için kullanılır. Oturum açmanıza, ayarlarınıza erişmenize ve yer imlerinizi ve okuma geçmişinizi saklamanıza olanak tanır. <\/li> <li> <underline> Kişiselleştirme <\/underline> : Tercihlerinize ve ilgi alanlarınıza göre kişiselleştirilmiş öneriler ve öneriler sağlamak için okuma geçmişinizi kullanabiliriz. <\/li>",
-        "title": "Kişisel Bilgilerin Kullanımı"
-    },
-    "privacy-header": "Gizlilik Politikası"
+  "communication": {
+    "desc": "E-posta adresinizi size hizmetlerimiz, içeriğimiz vb. ile ilgili önemli güncellemeler, haber bültenleri veya bildirimler göndermek için kullanabiliriz. İstediğiniz zaman bu iletişim aboneliğinden çıkma olanağına sahip olacaksınız.",
+    "title": "İletişim"
+  },
+  "contact-us": {
+    "desc": "Bu Gizlilik Politikası veya kişisel bilgilerinizin işlenmesi ile ilgili herhangi bir sorunuz, endişeniz veya talebiniz varsa, lütfen bizimle <0> buradan < / /0 > iletişime geçin. Web sitemizi kullanarak, bu Gizlilik Politikasını okuyup anladığınızı ve kişisel bilgilerinizin açıklandığı şekilde toplanmasına, kullanılmasına ve ifşa edilmesine izin verdiğinizi kabul etmektesiniz.",
+    "title": "Bize Ulaşın"
+  },
+  "cookies": {
+    "desc": "Kuran.com, tarama deneyiminizi geliştirmek, kişiselleştirilmiş içerik sağlamak ve web sitesi trafiğini analiz etmek için tanımlama bilgileri kullanır. Web sitemize erişerek ve kullanarak, bu Gizlilik Politikasına uygun olarak çerezlerin kullanılmasına izin vermiş olursunuz. <br/> <br/> <li> Kullandığımız Çerez Türleri: </li> <subLi> Gerekli Çerezler: Bu çerezler, web sitemizin düzgün çalışması için gereklidir ve sayfada gezinme ve sayfalara erişim gibi temel özellikleri etkinleştirir. güvenli alanlar. Herhangi bir kişisel olarak tanımlanabilir bilgi toplamazlar. Bu tanımlama bilgileri olmadan web sitesinin bazı bölümleri düzgün çalışmayabilir. </subLi> <subLi> Analitik ve Performans Çerezleri: Bu çerezleri, ziyaretçi sayısı, ziyaret ettikleri sayfalar ve her sayfada geçirilen süre dahil olmak üzere, ziyaretçilerin web sitemizi nasıl kullandıkları hakkında bilgi toplamak için kullanırız. Bu veriler, web sitemizin performansını ve işlevselliğini analiz etmemize ve iyileştirmemize yardımcı olur. Bu tanımlama bilgileri sizi kişisel olarak tanımlamaz; tüm veriler toplanır ve anonimdir. </subLi>",
+    "title": "Çerezlerin Kullanımı"
+  },
+  "data-analysis": {
+    "desc": "Google Analytics'i sitenin beklendiği gibi çalışmaya devam etmesini sağlamak ve hangi özellikler üzerinde çalışmaya öncelik verileceğini bilmek vb. için kullanıyoruz. Bu bilgiler anonimdir ve belirli bir bireye kadar izini sürmeyiz.",
+    "title": "Veri analizi"
+  },
+  "data-deletion": {
+    "desc": "Gizliliğinizi sağlamak ve kişisel bilgileriniz üzerinde kontrol sahibi olmak için basit bir hesap silme işlemi sağlıyoruz. Hesabınızı silmeyi seçtiğinizde, ilişkili tüm kişisel veriler otomatik olarak ve kalıcı olarak sistemlerimizden kaldırılacaktır. Profil sayfanıza erişerek hesap silme işlemini başlatabilirsiniz. Silme işlemi başlatıldıktan sonra, kişisel verileriniz makul bir süre içinde sunucularımızdan güvenli bir şekilde silinecektir.",
+    "title": "Veri Silme"
+  },
+  "data-protection": {
+    "desc": "<boldSpan> Erişim hakkı: </boldSpan> Kişisel verilerinizin kopyalarını Kuran Vakfı'ndan talep etme hakkına sahipsiniz. Bu hizmet için sizden küçük bir ücret talep edebiliriz. <br/> <br/> <boldSpan> Düzeltme hakkı </boldSpan> : Yanlış olduğuna inandığınız bilgilerin Kuran Vakfı'ndan düzeltilmesini talep etme hakkına sahipsiniz. Eksik olduğuna inandığınız bilgilerin Kuran Vakfı'ndan tamamlanmasını talep etme hakkınız da bulunmaktadır. <br/> <br/> <boldSpan> Silme hakkı: </boldSpan> Belirli koşullar altında, Kuran Vakfı'ndan kişisel verilerinizin silinmesini talep etme hakkına sahipsiniz. <br/> <br/> <boldSpan> İşlemeyi kısıtlama hakkı: </boldSpan> Belirli koşullar altında, Kuran Vakfı'ndan kişisel verilerinizin işlenmesini kısıtlamasını talep etme hakkına sahipsiniz. <br/> <br/> <boldSpan> İşleme itiraz hakkı </boldSpan> : Belirli koşullar altında, Kuran Vakfı'nın kişisel verilerinizi işlemesine itiraz etme hakkına sahipsiniz. <br/> <br/> <boldSpan> Veri taşınabilirliği hakkı </boldSpan> : Kuran Vakfı'nın topladığımız verileri belirli koşullar altında başka bir kuruluşa veya doğrudan size aktarmasını talep etme hakkına sahipsiniz. .",
+    "title": "Veri Koruma Hakları"
+  },
+  "data-security": {
+    "desc": "Kişisel bilgilerinizi yetkisiz erişime, değişikliğe, ifşaya veya imhaya karşı korumak için uygun önlemleri alıyoruz. Verilerinizin gizliliğini ve bütünlüğünü sağlamak için endüstri standardı güvenlik protokolleri kullanıyoruz ve fiziksel, elektronik ve yönetimsel korumalar uyguluyoruz.",
+    "title": "Veri güvenliği"
+  },
+  "data-sharing": {
+    "desc": "Kişisel bilgilerinizi üçüncü şahıslara satmayız, takas etmeyiz veya kiralamayız.",
+    "title": "Bilgi paylaşımı"
+  },
+  "info-collection": {
+    "desc": "Kuran.com'da bir hesap oluşturmayı seçen kullanıcılardan belirli kişisel bilgileri topluyoruz. Bu bilgiler şunları içerebilir: <br/> <br/> <underline> E-posta Adresi </underline> : Hesap oluşturma sürecini kolaylaştırmak ve hesap kurtarma ve güvenlik bildirimleri dahil olmak üzere hesabınızla ilgili iletişim amaçları için e-posta adresinizi topluyoruz.",
+    "title": "Bilgi koleksiyonu"
+  },
+  "log-data": {
+    "desc": "Hizmetimizi her ziyaret ettiğinizde tarayıcınızın gönderdiği bilgileri (“Günlük Verileri”) topluyoruz. Bu Günlük Verileri, bilgisayarınızın İnternet Protokolü (“IP”) adresi, tarayıcı türü, tarayıcı sürümü, Hizmetimizin ziyaret ettiğiniz sayfaları, ziyaretinizin saati ve tarihi, bu sayfalarda geçirilen süre ve diğer bilgiler gibi bilgileri içerebilir. İstatistik.",
+    "title": "Günlük Verileri"
+  },
+  "main-privacy-desc": "Quran Foundation, Inc. (Currain.com'u da içerir) her insanın Kuran'dan faydalanmasını sağlamayı amaçlayan 501(c)(3) kar amacı gütmeyen bir kuruluştur. Quran Foundation, Inc. tüm kullanıcılarımızın gizliliğine değer verir ve saygı duyar.",
+  "personal-info-use": {
+    "desc": "Topladığımız kişisel bilgileri aşağıdaki amaçlar için kullanırız: <br/> <li> <underline> Hesap Oluşturma ve Yönetim </underline> : E-posta adresiniz, web sitemizde hesabınızı oluşturmak ve yönetmek için kullanılır. Oturum açmanıza, ayarlarınıza erişmenize ve yer imlerinizi ve okuma geçmişinizi saklamanıza olanak tanır. </li> <li> <underline> Kişiselleştirme </underline> : Tercihlerinize ve ilgi alanlarınıza göre kişiselleştirilmiş öneriler ve öneriler sağlamak için okuma geçmişinizi kullanabiliriz. </li>",
+    "title": "Kişisel Bilgilerin Kullanımı"
+  },
+  "privacy-header": "Gizlilik Politikası"
 }
