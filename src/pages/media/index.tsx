@@ -23,6 +23,7 @@ import Spinner, { SpinnerSize } from '@/dls/Spinner/Spinner';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import useGetMediaSettings from '@/hooks/auth/media/useGetMediaSettings';
 import useAddQueryParamsToUrl from '@/hooks/useAddQueryParamsToUrl';
+import { getMediaGeneratorOgImageUrl } from '@/lib/og';
 import Error from '@/pages/_error';
 import layoutStyles from '@/pages/index.module.scss';
 import AudioData from '@/types/AudioData';
@@ -386,6 +387,9 @@ const MediaMaker: NextPage<MediaMaker> = ({
         description={t('media:maker-meta-desc')}
         url={getCanonicalUrl(lang, PATH)}
         languageAlternates={getLanguageAlternates(PATH)}
+        image={getMediaGeneratorOgImageUrl({
+          locale: lang,
+        })}
       />
       <div className={styles.pageContainer}>
         <div className={classNames(styles.playerWrapper, layoutStyles.flowItem)}>
