@@ -390,6 +390,8 @@ const MediaMaker: NextPage<MediaMaker> = ({
         image={getMediaGeneratorOgImageUrl({
           locale: lang,
         })}
+        imageWidth={1200}
+        imageHeight={630}
       />
       <div className={styles.pageContainer}>
         <div className={classNames(styles.playerWrapper, layoutStyles.flowItem)}>
