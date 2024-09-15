@@ -512,16 +512,16 @@ const TermsAndConditionsPage: NextPage = (): JSX.Element => {
             of satisfaction without any prior notice. Honesty and integrity are important to us at
             all times.
           </p>
-          <h2>12. WARRANTY DISCLAIMER.</h2>
+          <h2>11. WARRANTY DISCLAIMER.</h2>
           <p>
-            12.1 Any use of the Mobile Application, the Service, reliance upon any of the Content,
+            11.1 Any use of the Mobile Application, the Service, reliance upon any of the Content,
             and any use of the Internet generally shall be at your sole risk. Quran.com disclaims
             any and all responsibility or liability for the accuracy, content, completeness,
             legality, licensure of Third Party Content Providers, reliability, or operability or
             availability of information or the Content accessible by use of the Service.
           </p>
           <p>
-            12.2 THE SERVICE (INCLUDING CONTENT AND INFORMATION POSTED AND ACCESSIBLE AS PART
+            11.2 THE SERVICE (INCLUDING CONTENT AND INFORMATION POSTED AND ACCESSIBLE AS PART
             THEREOF) IS PROVIDED "AS IS" AND "AS AVAILABLE" WITHOUT WARRANTY OF ANY KIND, EITHER
             EXPRESS OR IMPLIED OR STATUTORY, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES
             OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, OR NON-INFRINGEMENT. Quran.com
@@ -533,7 +533,7 @@ const TermsAndConditionsPage: NextPage = (): JSX.Element => {
             COMPONENTS, OR WILL BE UNINTERRUPTED.
           </p>
           <p>
-            12.3 Quran.com DISCLAIMS, TO THE FULLEST EXTENT PERMITTED UNDER LAW, ANY AND ALL
+            11.3 Quran.com DISCLAIMS, TO THE FULLEST EXTENT PERMITTED UNDER LAW, ANY AND ALL
             WARRANTIES, REPRESENTATIONS AND ENDORSEMENTS, EXPRESS OR IMPLIED, INCLUDING ANY
             WARRANTIES FOR ANY INFORMATION, GOODS, OR SERVICES, OBTAINED THROUGH, ADVERTISED OR
             RECEIVED THROUGH ANY LINKS PROVIDED BY OR THROUGH THE SERVICE; OR REGARDING THE
@@ -541,11 +541,11 @@ const TermsAndConditionsPage: NextPage = (): JSX.Element => {
             OUR WEBSITES, THE SERVICE AND ANY CONTENT.
           </p>
           <p>
-            12.4 NO ADVICE OR INFORMATION PROVIDED BY Quran.com, ITS AFFILIATES, OR THEIR RESPECTIVE
+            11.4 NO ADVICE OR INFORMATION PROVIDED BY Quran.com, ITS AFFILIATES, OR THEIR RESPECTIVE
             EMPLOYEES AND AGENTS SHALL CREATE ANY WARRANTY.
           </p>
           <p>
-            12.5 NONE OF Quran.com, ITS AFFILIATES, OR ANY ASSOCIATED MOBILE DEVICE PLATFORM AND
+            11.5 NONE OF Quran.com, ITS AFFILIATES, OR ANY ASSOCIATED MOBILE DEVICE PLATFORM AND
             SERVICE PROVIDERS, MAKE ANY REPRESENTATIONS, WARRANTIES OR GUARANTEES REGARDING (1) THE
             OPERATION OR PERFORMANCE OF THE MOBILE APPLICATION, SERVICE, OR ANY THIRD PARTY PROVIDER
             CONTENT OR SERVICES OR OTHER SITES; (2) THE NATURE, CONTENT OR ACCURACY (EITHER WHEN
@@ -559,7 +559,7 @@ const TermsAndConditionsPage: NextPage = (): JSX.Element => {
             INTERNET GENERALLY.
           </p>
           <p>
-            12.6 SOME STATES OR OTHER JURISDICTIONS DO NOT ALLOW THE EXCLUSION OF IMPLIED
+            11.6 SOME STATES OR OTHER JURISDICTIONS DO NOT ALLOW THE EXCLUSION OF IMPLIED
             WARRANTIES, SO THE ABOVE EXCLUSIONS MAY NOT APPLY TO YOU. YOU MAY ALSO HAVE OTHER RIGHTS
             THAT VARY FROM STATE TO STATE AND JURISDICTION TO JURISDICTION AND THAT MAY NOT BE
             LIMITED BY THESE TERM, PROVIDED HOWEVER YOU AGREE AND ACKNOWLEDGE THAT TO THE EXTENT
@@ -567,7 +567,7 @@ const TermsAndConditionsPage: NextPage = (): JSX.Element => {
             IMPLIED WARRANTIES.
           </p>
           <p>
-            12.7 NEITHER Quran.com, NOR ANY OF ITS ASSOCIATED MOBILE DEVICE PLATFORM AND SERVICE
+            11.7 NEITHER Quran.com, NOR ANY OF ITS ASSOCIATED MOBILE DEVICE PLATFORM AND SERVICE
             PROVIDERS, WARRANTS THAT THE MOBILE APPLICATION WILL BE COMPATIBLE OR INTEROPERABLE WITH
             YOUR MOBILE DEVICE OR ANY OTHER PIECE OF HARDWARE, SOFTWARE, EQUIPMENT OR DEVICE
             INSTALLED ON OR USED IN CONNECTION WITH YOUR MOBILE DEVICE. FURTHERMORE, YOU ACKNOWLEDGE
@@ -580,9 +580,9 @@ const TermsAndConditionsPage: NextPage = (): JSX.Element => {
             SUFFERED RESULTING FROM OR ARISING IN CONNECTION WITH COMPATIBILITY OR INTEROPERABILITY
             PROBLEMS.
           </p>
-          <h2>13. LIMITATION OF LIABILITY.</h2>
+          <h2>12. LIMITATION OF LIABILITY.</h2>
           <p>
-            13.1 IN NO EVENT SHALL Quran.com OR ANY OF ITS ASSOCIATED MOBILE DEVICE PLATFORM AND
+            12.1 IN NO EVENT SHALL Quran.com OR ANY OF ITS ASSOCIATED MOBILE DEVICE PLATFORM AND
             SERVICE PROVIDERS BE LIABLE TO YOUR FOR YOUR USE, MISUSE OR RELIANCE ON THE MOBILE
             APPLICATION, OUR WEBSITES AND THE SERVICE FOR ANY DAMAGES WHATSOEVER, INCLUDING DIRECT,
             SPECIAL, PUNITIVE, INDIRECT, CONSEQUENTIAL OR INCIDENTAL DAMAGES OR DAMAGES FOR LOSS OF
@@ -602,7 +602,7 @@ const TermsAndConditionsPage: NextPage = (): JSX.Element => {
             RESPONSIBILITY AND RISK FOR THE USE OF THE SERVICE GENERALLY.
           </p>
           <p>
-            13.2 THE FOREGOING LIMITATIONS SHALL APPLY NOTWITHSTANDING ANY FAILURE OF THE ESSENTIAL
+            12.2 THE FOREGOING LIMITATIONS SHALL APPLY NOTWITHSTANDING ANY FAILURE OF THE ESSENTIAL
             PURPOSE OF ANY LIMITED REMEDY, OR IF IT IS OTHERWISE DEEMED UNENFORCEABLE, AND TO THE
             FULLEST EXTENT PERMITTED UNDER APPLICABLE LAW. THESE LIMITATIONS AND EXCLUSIONS APPLY
             WITHOUT REGARD TO WHETHER THE DAMAGES ARISE FROM (1) BREACH OF CONTRACT, (2) BREACH OF
@@ -610,18 +610,18 @@ const TermsAndConditionsPage: NextPage = (): JSX.Element => {
             EXCLUSIONS AND LIMITATIONS ARE NOT PROHIBITED BY APPLICABLE LAW.
           </p>
           <p>
-            13.3 SOME STATES DO NOT ALLOW THE EXCLUSION OR LIMITATION OF LIABILITY OF CONSEQUENTIAL
+            12.3 SOME STATES DO NOT ALLOW THE EXCLUSION OR LIMITATION OF LIABILITY OF CONSEQUENTIAL
             OR INCIDENTAL DAMAGES, SO THE ABOVE EXCLUSIONS MAY NOT APPLY TO ALL USERS; IN SUCH
             STATES LIABILITY IS LIMITED TO THE FULLEST EXTENT PERMITTED BY LAW.
           </p>
           <p>
-            13.4 WITHOUT LIMITING THE GENERALITY OF THE FOREGOING, Quran.com'S AGGREGATE LIABILITY
+            12.4 WITHOUT LIMITING THE GENERALITY OF THE FOREGOING, Quran.com'S AGGREGATE LIABILITY
             TO YOU (WHETHER UNDER CONTRACT, TORT, STATUTE OR OTHERWISE) SHALL NOT EXCEED THE AMOUNT
             OF FIFTY DOLLARS ($50.00).
           </p>
-          <h2>14. INDEMNIFICATION.</h2>
+          <h2>13. INDEMNIFICATION.</h2>
           <p>
-            14.1 You agree to indemnify and hold Quran.com and, as applicable, our parent,
+            13.1 You agree to indemnify and hold Quran.com and, as applicable, our parent,
             subsidiaries, affiliates, partners, officers, directors, agents and employees,
             licensors, suppliers and Third Party Content Providers harmless from any claim or
             demand, including any and all losses, liabilities, claims, demands, damages, costs or
@@ -640,16 +640,16 @@ const TermsAndConditionsPage: NextPage = (): JSX.Element => {
             Content and Services.
           </p>
           <p>
-            14.2 The foregoing indemnity obligations will survive any termination of this Agreement.
+            13.2 The foregoing indemnity obligations will survive any termination of this Agreement.
           </p>
           <p>
-            14.3 Quran.com reserves the right, at its own expense, to assume the exclusive defense
+            13.3 Quran.com reserves the right, at its own expense, to assume the exclusive defense
             and control of any matter subject to indemnification by you, which will not excuse your
             indemnity obligations under this Section. You agree not to settle any matter subject to
             the forgoing indemnification obligations without the express consent and approval of
             Quran.com.
           </p>
-          <h2>15. DIGITAL MILLENNIUM COPYRIGHT COMPLAINTS.</h2>
+          <h2>14. DIGITAL MILLENNIUM COPYRIGHT COMPLAINTS.</h2>
           <p>
             Quran.com respects the copyright rights of others, and we ask user of Service, our
             advertisers and other third parties to do the same. In appropriate circumstances and at
@@ -678,12 +678,12 @@ const TermsAndConditionsPage: NextPage = (): JSX.Element => {
           </p>
           <p>
             ANY NOTICE THAT DOES NOT COMPLY WITH THE REQUIREMENTS OF TITLE 17, UNITED STATES CODE,
-            SECTION 512(C)(3) WILL NOT RECEIVE A RESPONSE. NOTHING IN THIS SECTION 15.1 IS INTENDED
+            SECTION 512(C)(3) WILL NOT RECEIVE A RESPONSE. NOTHING IN THIS SECTION 14.1 IS INTENDED
             TO EXPAND OR SUPPLEMENT THE LEGAL RIGHTS, PROCEDURES AND REMEDIES AUTHORIZED AND GRANTED
             UNDER DMCA AND WE DO NOT REPRESENT ANY RELATED UNDERTAKING BY Quran.com NOT OTHERWISE
             EXPRESSLY REQUIRED BY APPLICABLE LAW.
           </p>
-          <h2>16. TERMINATION.</h2>
+          <h2>15. TERMINATION.</h2>
           <p>
             Quran.com may, in its sole and absolute discretion, at any time and for any or no
             reason, suspend or terminate your use of the Service, including without limitation this
@@ -695,24 +695,24 @@ const TermsAndConditionsPage: NextPage = (): JSX.Element => {
             Quran.com reserves the right to terminate or disable all or any portion of the Service,
             our websites or of the Mobile Application (via update of the Mobile Application).
           </p>
-          <h2>17. REMEDIES AVAILABLE TO US.</h2>
+          <h2>16. REMEDIES AVAILABLE TO US.</h2>
           <p>
             Quran.com reserves the right to seek any and all remedies available at law or in equity
             in connection with your violation of this Agreement.
           </p>
-          <h2>18. ASSIGNMENT.</h2>
+          <h2>17. ASSIGNMENT.</h2>
           <p>
             You may not assign this Agreement or otherwise transfer your use of the Service to any
             other party, in whole or in part; any attempt to do so shall be void.
           </p>
-          <h2>19. SEVERANCE.</h2>
+          <h2>18. SEVERANCE.</h2>
           <p>
             If for any reason a court of competent jurisdiction finds any provision of this
             Agreement to be invalid or unenforceable, the provision will be superseded by a valid,
             enforceable provision that most closely matches the intent of the original provision,
             and the remainder of the Agreement will continue in effect and remain fully enforceable.
           </p>
-          <h2>20. LIMITED TIME TO BRING CLAIM.</h2>
+          <h2>19. LIMITED TIME TO BRING CLAIM.</h2>
           <p>
             You acknowledge and agree that it is the intent of both you and Quran.com to limit the
             period of time a claim may be filed, even if the period is shorter than that fixed by
@@ -720,15 +720,15 @@ const TermsAndConditionsPage: NextPage = (): JSX.Element => {
             or related to the Service must commence within one (1) year after the cause of action
             accrues, otherwise such cause of action is permanently barred.
           </p>
-          <h2>21. MISCELLANEOUS.</h2>
+          <h2>20. MISCELLANEOUS.</h2>
           <p>
-            21.1 You are responsible for compliance with applicable laws, regulations and ordinances
+            20.1 You are responsible for compliance with applicable laws, regulations and ordinances
             related to your use of the Service. Your compliance with applicable laws is not limited
             to jurisdictions within the United States (including US Federal law) but also the laws,
             regulations and ordinances of any jurisdiction from which you access the Service.
           </p>
           <p>
-            21.2 This Agreement will be governed by and construed in accordance with the laws of the
+            20.2 This Agreement will be governed by and construed in accordance with the laws of the
             State of California, without giving effect to its conflict of laws, provisions or your
             actual state or country of residence, and you agree to submit to personal jurisdiction
             in San Francisco County, California. You agree to exclude, in its entirety, the
@@ -736,14 +736,14 @@ const TermsAndConditionsPage: NextPage = (): JSX.Element => {
             International Sale of Goods.
           </p>
           <p>
-            21.3 Except as expressly stated herein, this Agreement constitutes the entire agreement
+            20.3 Except as expressly stated herein, this Agreement constitutes the entire agreement
             between you and Quran.com with respect to your use of the Service, and it supersedes and
             replaces all prior or contemporaneous communications, proposals, understandings or
             agreement, whether electronic, oral or written, between you and Quran.com with respect
             to your use of the Service and/or the subject matter of Agreement.
           </p>
           <p>
-            21.4 Except as provided in this Section 21.4, nothing contained in this Agreement is
+            20.4 Except as provided in this Section 20.4, nothing contained in this Agreement is
             intended or shall be construed to confer upon any person (other than the parties hereto)
             any rights, benefits or remedies of any kind or character, or to create any obligations
             or liabilities of a party to any such person. Notwithstanding the foregoing, you
@@ -754,17 +754,17 @@ const TermsAndConditionsPage: NextPage = (): JSX.Element => {
             in its capacity as a third party beneficiary to this Agreement.
           </p>
           <p>
-            21.5 Any waiver of any provision of this Agreement will be effective only if in writing
+            20.5 Any waiver of any provision of this Agreement will be effective only if in writing
             and signed by you and Quran.com. Our failure to enforce our rights and remedies
             available to us with respect to your breach of this Agreement shall not constitute a
             waiver of such breach nor of any prior, concurrent, or subsequent breach of the same or
             any other provision of this Agreement.
           </p>
           <p>
-            21.6 To be removed from future Quran.com marketing e-mail campaigns, please e-mail
+            20.6 To be removed from future Quran.com marketing e-mail campaigns, please e-mail
             info@quran.foundation
           </p>
-          <h2>22. USAGE RULES, ADDITIONAL OBLIGATIONS/RIGHTS RELATED TO YOUR MOBILE DEVICE. </h2>
+          <h2>21. USAGE RULES, ADDITIONAL OBLIGATIONS/RIGHTS RELATED TO YOUR MOBILE DEVICE. </h2>
           <p>
             Without limitation, your use of the Service through your Mobile Application via your
             Mobile Device is subject to the Usage Rules established by the third party provider of
@@ -776,7 +776,7 @@ const TermsAndConditionsPage: NextPage = (): JSX.Element => {
             that any User Generated Content is any way sponsored or endorsed by any third party
             provider.
           </p>
-          <h2>23. THIRD PARTY SOFTWARE NOTICES.</h2>
+          <h2>22. THIRD PARTY SOFTWARE NOTICES.</h2>
           <p>
             Portions of the Mobile Application are provided with notices and open source licenses
             from such communities and third parties that govern the use of those portions, and any
@@ -785,7 +785,7 @@ const TermsAndConditionsPage: NextPage = (): JSX.Element => {
             limitation of liability provisions in this Agreement will apply to all elements of the
             Service.
           </p>
-          <h2>24. CHANGES OR MODIFICATIONS</h2>
+          <h2>23. CHANGES OR MODIFICATIONS</h2>
           <p>
             Quran.com reserves the right to add, delete, change or modify parts of this Agreement at
             our sole discretion and at any time without notice or liability to you. If we do this,
