@@ -59,7 +59,6 @@ const OnboardingChecklist = () => {
     logButtonClick('onboarding_checklist_open');
     dispatch(setIsChecklistVisible(true));
   };
-  return null;
 
   // If the onboarding is active, don't show the checklist
   if (isActive) {
