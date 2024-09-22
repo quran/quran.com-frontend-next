@@ -117,8 +117,8 @@
   "complete-sign-up": "",
   "consents": {
     "communication": {
-      "body": "🚀 Potencie su progreso a través de notificaciones <boldSpan> personalizadas </boldSpan> sobre el progreso de sus objetivos, el mantenimiento de las rachas y la mejora del uso de nuestras funciones actuales. <br> </br> <br> </br> ¿Podemos mantenerlo informado a través del correo electrónico y otros canales? Usted tiene el control: puede ajustar estas preferencias en cualquier momento en la configuración de su cuenta. <br> </br> <br> </br> Simplemente seleccione \"Permitir\" para recibir <boldSpan> recordatorios inspiradores </boldSpan> o \"Ahora no\" para rechazarlos.",
-      "header": "¡Nos encantaría ayudarte a mantenerte <boldSpan> comprometido y constante </boldSpan> en tu viaje de crecimiento del Corán! 📖🌟"
+      "body": "🚀 Potencie su progreso a través de notificaciones <boldSpan> personalizadas <\/boldSpan> sobre el progreso de sus objetivos, el mantenimiento de las rachas y la mejora del uso de nuestras funciones actuales. <br> <\/br> <br> <\/br> ¿Podemos mantenerlo informado a través del correo electrónico y otros canales? Usted tiene el control: puede ajustar estas preferencias en cualquier momento en la configuración de su cuenta. <br> <\/br> <br> <\/br> Simplemente seleccione \"Permitir\" para recibir <boldSpan> recordatorios inspiradores <\/boldSpan> o \"Ahora no\" para rechazarlos.",
+      "header": "¡Nos encantaría ayudarte a mantenerte <boldSpan> comprometido y constante <\/boldSpan> en tu viaje de crecimiento del Corán! 📖🌟"
     }
   },
   "continue": "",
@@ -165,11 +165,13 @@
     "font-size": "",
     "lines": "",
     "qcf-desc": "",
+    "qcf-v4-desc": "",
     "qpc_uthmani_hafs": "",
     "quran-font": "",
     "quran-font-size": "",
     "tajweed": "",
     "tajweed-desc": "",
+    "tajweed_v4": "",
     "text_indopak": "",
     "text_uthmani": "",
     "translation-font-size": ""
@@ -302,6 +304,7 @@
     "title": "Buscar"
   },
   "seconds": "Artículos de segunda clase",
+  "see-new": "",
   "settings": {
     "no-tafsir-selected": "",
     "no-translation-selected": "",

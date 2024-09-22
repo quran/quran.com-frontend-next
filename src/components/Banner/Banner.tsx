@@ -9,9 +9,10 @@ import { selectIsBannerVisible } from '@/redux/slices/banner';
 type BannerProps = {
   text: string;
   ctaButton?: React.ReactNode;
+  shouldShowPrefixIcon?: boolean;
 };
 
-const Banner = ({ text, ctaButton }: BannerProps) => {
+const Banner = ({ text, ctaButton, shouldShowPrefixIcon = true }: BannerProps) => {
   const isBannerVisible = useSelector(selectIsBannerVisible);
 
   return (
@@ -21,9 +22,11 @@ const Banner = ({ text, ctaButton }: BannerProps) => {
       })}
     >
       <div className={styles.description}>
-        <div className={styles.illustrationContainer}>
-          <MoonIllustrationSVG />
-        </div>
+        {shouldShowPrefixIcon && (
+          <div className={styles.illustrationContainer}>
+            <MoonIllustrationSVG />
+          </div>
+        )}
         <div className={styles.text}>{text}</div>
       </div>
       {ctaButton && <div className={styles.ctaContainer}>{ctaButton}</div>}

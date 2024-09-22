@@ -2,12 +2,14 @@ import { useEffect, useRef, useState } from 'react';
 
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
+import { shallowEqual, useSelector } from 'react-redux';
 
 import styles from './TajweedBar.module.scss';
 
 import NewLabel from '@/dls/Badge/NewLabel';
 import useThemeDetector from '@/hooks/useThemeDetector';
 import ChevronDownIcon from '@/icons/chevron-down.svg';
+import { selectContextMenu } from '@/redux/slices/QuranReader/contextMenu';
 import { logEvent } from '@/utils/eventLogger';
 
 const TAJWEED_RULES = [
@@ -27,6 +29,7 @@ const TajweedColors = () => {
 
   const [showTajweedBar, setShowTajweedBar] = useState(false);
   const [height, setHeight] = useState(0);
+  const { isExpanded } = useSelector(selectContextMenu, shallowEqual);
 
   const { themeVariant } = useThemeDetector();
 
@@ -47,7 +50,9 @@ const TajweedColors = () => {
 
   return (
     <div
-      className={classNames(styles.container)}
+      className={classNames(styles.container, {
+        [styles.visibleContainer]: !isExpanded,
+      })}
       style={{
         transform: `translateY(${showTajweedBar ? 0 : -height}px)`,
       }}

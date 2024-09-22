@@ -14,8 +14,17 @@ $pixel: 1px;
   color: var(--color-text-default);
   text-align: center;
   transition: var(--transition-regular);
-  margin-top: calc(var(--spacing-micro));
+  margin-top: var(--spacing-micro);
+  @include breakpoints.smallerThanTablet {
+    margin-top: var(--spacing-xsmall);
+  }
   z-index: var(--z-index-min);
+}
+
+.visibleContainer {
+  @include breakpoints.smallerThanTablet {
+    margin-top: var(--spacing-micro);
+  }
 }
 
 .tajweedContainer {
