@@ -156,6 +156,7 @@
     "ranges-too-many-verses": "*সর্বোচ্চ {{maxNumberOfVerses}} আয়াত",
     "ranges-wrong-order": "শুরুর শ্লোকটি শেষের আয়াতের আগে হতে হবে।"
   },
+  "exciting-updates": "উত্তেজনাপূর্ণ আপডেট",
   "feedback": "প্রতিক্রিয়া",
   "fonts": {
     "15_lines": "15 লাইন",

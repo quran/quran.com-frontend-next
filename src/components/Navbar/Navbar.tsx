@@ -25,7 +25,7 @@ const Navbar = () => {
       <nav className={classNames(styles.container, { [styles.hiddenNav]: !showNavbar })}>
         <Banner
           shouldShowPrefixIcon={false}
-          text="🎉 Exciting Updates!"
+          text={`🎉 ${t('exciting-updates')}!`}
           ctaButton={
             <Button href={getProductUpdatesUrl()} size={ButtonSize.Small} type={ButtonType.Success}>
               {t('see-new')}

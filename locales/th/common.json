@@ -156,6 +156,7 @@
     "ranges-too-many-verses": "*สูงสุด {{maxNumberOfVerses}} อายาห์",
     "ranges-wrong-order": "บทเริ่มต้นต้องอยู่ก่อนบทจบ"
   },
+  "exciting-updates": "การอัปเดตที่น่าตื่นเต้น",
   "feedback": "แนะนำติชม",
   "fonts": {
     "15_lines": "15 บรรทัด",

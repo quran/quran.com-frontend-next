@@ -156,6 +156,7 @@
     "ranges-too-many-verses": "*Max {{maxNumberOfVerses}} versetti",
     "ranges-wrong-order": "Il verso iniziale deve precedere quello finale."
   },
+  "exciting-updates": "Aggiornamenti entusiasmanti",
   "feedback": "Feedback",
   "fonts": {
     "15_lines": "15 linee",

@@ -156,6 +156,7 @@
     "ranges-too-many-verses": "*الحد الأقصى لعدد الآيات {{maxNumberOfVerses}} آية",
     "ranges-wrong-order": "الآية الافتتاحية يجب أن تكون قبل الآية الختامية."
   },
+  "exciting-updates": "تحديثات رائعة",
   "feedback": "التعليقات",
   "fonts": {
     "15_lines": "15 سطرًا",

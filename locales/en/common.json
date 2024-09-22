@@ -156,6 +156,7 @@
     "ranges-too-many-verses": "*Max {{maxNumberOfVerses}} Ayahs",
     "ranges-wrong-order": "The starting verse has to be before the ending verse."
   },
+  "exciting-updates": "Exciting Updates",
   "feedback": "Feedback",
   "fonts": {
     "15_lines": "15 Lines",

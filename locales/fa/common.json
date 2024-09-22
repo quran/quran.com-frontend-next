@@ -156,6 +156,7 @@
     "ranges-too-many-verses": "*حداکثر {{maxNumberOfVerses}} آیات",
     "ranges-wrong-order": "آیه شروع باید قبل از آیه پایانی باشد."
   },
+  "exciting-updates": "به روز رسانی های هیجان انگیز",
   "feedback": "بازخورد",
   "fonts": {
     "15_lines": "15 خط",

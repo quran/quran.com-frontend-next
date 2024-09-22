@@ -156,6 +156,7 @@
     "ranges-too-many-verses": "*Max {{maxNumberOfVerses}} Ayahs",
     "ranges-wrong-order": "Het beginvers moet vóór het eindvers staan."
   },
+  "exciting-updates": "Spannende updates",
   "feedback": "Feedback",
   "fonts": {
     "15_lines": "15 lijnen",

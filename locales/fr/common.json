@@ -156,6 +156,7 @@
     "ranges-too-many-verses": "*Max {{maxNumberOfVerses}} versets",
     "ranges-wrong-order": "Le verset de départ doit être avant le verset de fin."
   },
+  "exciting-updates": "Des mises à jour passionnantes",
   "feedback": "Avis",
   "fonts": {
     "15_lines": "15 lignes",

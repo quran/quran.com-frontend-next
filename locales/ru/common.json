@@ -156,6 +156,7 @@
     "ranges-too-many-verses": "*Макс {{maxNumberOfVerses}} аятов",
     "ranges-wrong-order": "Начальный стих должен предшествовать заключительному."
   },
+  "exciting-updates": "Захватывающие обновления",
   "feedback": "Обратная связь",
   "fonts": {
     "15_lines": "15 линий",

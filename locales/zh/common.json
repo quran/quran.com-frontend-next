@@ -156,6 +156,7 @@
     "ranges-too-many-verses": "*最多{{maxNumberOfVerses}}个章节",
     "ranges-wrong-order": "起始诗句必须位于结束诗句之前。"
   },
+  "exciting-updates": "令人兴奋的更新",
   "feedback": "反馈问题",
   "fonts": {
     "15_lines": "15行",
