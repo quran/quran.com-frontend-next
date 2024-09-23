@@ -24,7 +24,7 @@ import {
 import SearchQuerySource from '@/types/SearchQuerySource';
 import { makeTranslationsUrl } from '@/utils/apiPaths';
 import { logValueChange, logItemSelectionChange, logEmptySearchResults } from '@/utils/eventLogger';
-import filterTranslations from '@/utils/filter-translations';
+import filterTranslations, { getTranslations } from '@/utils/filter-translations';
 import { getLocaleName } from '@/utils/locale';
 import { TranslationsResponse } from 'types/ApiResponses';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
@@ -147,7 +147,10 @@ const TranslationSelectionBody = () => {
             });
           }
 
-          const translationByLanguages = groupBy(filteredTranslations, 'languageName');
+          const translationByLanguages = groupBy(
+            getTranslations(filteredTranslations),
+            'languageName',
+          );
           const selectedTranslationLanguage = getLocaleName(lang).toLowerCase();
           const selectedTranslationGroup = translationByLanguages[selectedTranslationLanguage];
           const translationByLanguagesWithoutSelectedLanguage = omit(translationByLanguages, [
