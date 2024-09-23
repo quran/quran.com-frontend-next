@@ -1,26 +1,26 @@
 {
-    "change": "Changer",
-    "curated-station": {
-        "juz-amma": {
-            "description": "Écoutez le Juz final du Coran",
-            "title": "Juz Amma"
-        },
-        "popular-recitations": {
-            "description": "Flux quotidien de récitations organisées",
-            "title": "Récitations populaires"
-        },
-        "surah-al-kahf": {
-            "description": "Écoutez la sourate Alkahf en boucle",
-            "title": "Sourate Al-Kahf"
-        },
-        "yaseen-alwaqiah-al-mulk": {
-            "description": "Les sourates d'une curation de récitants",
-            "title": "Yaseen, Al-Waqiah, Al-Mulk"
-        }
+  "change": "Changer",
+  "curated-station": {
+    "juz-amma": {
+      "description": "Écouter le Juz final du Coran",
+      "title": "Juz Amma"
     },
-    "curated-stations": "Stations sélectionnées",
-    "pause-radio": "Mettre la radio en pause",
-    "play-radio": "Écouter la radio",
-    "radio-desc": "Écoutez la belle récitation non-stop du Saint Coran par divers récitants.",
-    "reciter-stations": "Stations de récitation"
+    "popular-recitations": {
+      "description": "Sélection quotidienne de récitations",
+      "title": "Récitations populaires"
+    },
+    "surah-al-kahf": {
+      "description": "Écouter la sourate Al-Kahf en boucle",
+      "title": "Sourate Al-Kahf"
+    },
+    "yaseen-alwaqiah-al-mulk": {
+      "description": "Les Sourates issues d'une sélection de récitateurs",
+      "title": "Yaseen, Al-Waqiah, Al-Mulk"
+    }
+  },
+  "curated-stations": "Stations sélectionnées",
+  "pause-radio": "Mettre la radio en pause",
+  "play-radio": "Écouter la radio",
+  "radio-desc": "Écouter la belle récitation non-stop du Saint Coran par divers récitateurs.",
+  "reciter-stations": "Stations de récitateurs"
 }
