@@ -169,7 +169,7 @@ interface LanguageData {
  * @returns {boolean}
  */
 export const shouldUseMinimalLayout = (lang: string): boolean => {
-  return lang === 'ar';
+  return lang === 'ar' || lang === 'ur';
 };
 
 /**
