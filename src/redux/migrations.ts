@@ -243,4 +243,13 @@ export default {
       isDonationPopupVisible: true,
     },
   }),
+  32: (state) => ({
+    ...state,
+    quranReaderStyles: {
+      ...state.quranReaderStyles,
+      ...(state.quranReaderStyles.quranFont === QuranFont.Tajweed && {
+        quranFont: QuranFont.TajweedV4,
+      }),
+    },
+  }),
 };
