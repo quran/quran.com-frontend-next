@@ -4,47 +4,33 @@ import { shallowEqual, useSelector } from 'react-redux';
 
 import { selectTheme } from '@/redux/slices/theme';
 
-const getThemeColorMetaTags = (theme) => {
+const getThemeColorMetaTags = (theme: any) => {
+  const themeColor1 = document.createElement('meta');
+  const themeColor2 = document.createElement('meta');
   switch (theme) {
-    case 'auto': {
-      const themeColorTag1 = document.createElement('meta');
-      const themeColorTag2 = document.createElement('meta');
-      themeColorTag1.name = 'theme-color';
-      themeColorTag1.media = '(prefers-color-scheme: dark)';
-      themeColorTag1.content = '#1f2125';
-      themeColorTag2.name = 'theme-color';
-      themeColorTag2.media = '(prefers-color-scheme: light)';
-      themeColorTag2.content = '#fff';
-      return [themeColorTag1, themeColorTag2];
-    }
     case 'light': {
-      const themeColorTag = document.createElement('meta');
-      themeColorTag.name = 'theme-color';
-      themeColorTag.content = '#fff';
-      return [themeColorTag];
+      themeColor1.name = 'theme-color';
+      themeColor1.content = '#fff';
+      return [themeColor1];
     }
     case 'dark': {
-      const themeColorTag = document.createElement('meta');
-      themeColorTag.name = 'theme-color';
-      themeColorTag.content = '#1f2125';
-      return [themeColorTag];
+      themeColor1.name = 'theme-color';
+      themeColor1.content = '#1f2125';
+      return [themeColor1];
     }
     case 'sepia': {
-      const themeColorTag = document.createElement('meta');
-      themeColorTag.name = 'theme-color';
-      themeColorTag.content = '#f8ebd5';
-      return [themeColorTag];
+      themeColor1.name = 'theme-color';
+      themeColor1.content = '#f8ebd5';
+      return [themeColor1];
     }
     default: {
-      const themeColorTag1 = document.createElement('meta');
-      const themeColorTag2 = document.createElement('meta');
-      themeColorTag1.name = 'theme-color';
-      themeColorTag1.media = '(prefers-color-scheme: dark)';
-      themeColorTag1.content = '#1f2125';
-      themeColorTag2.name = 'theme-color';
-      themeColorTag2.media = '(prefers-color-scheme: light)';
-      themeColorTag2.content = '#fff';
-      return [themeColorTag1, themeColorTag2];
+      themeColor1.name = 'theme-color';
+      themeColor1.media = '(prefers-color-scheme: dark)';
+      themeColor1.content = '#1f2125';
+      themeColor2.name = 'theme-color';
+      themeColor2.media = '(prefers-color-scheme: light)';
+      themeColor2.content = '#fff';
+      return [themeColor1, themeColor2];
     }
   }
 };
