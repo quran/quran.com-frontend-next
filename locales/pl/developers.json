@@ -1,0 +1,20 @@
+{
+    "footer": "- Zespół Quran.com",
+    "header": "Pomoc w rozwoju aplikacji",
+    "issues-cta": "Jeśli masz jakieś pytania lub chcesz z nami skontaktować, po prostu stwórz nową kwestię. Skontaktujemy się z Tobą tak szybko, jak to możliwe, insha'Allah.",
+    "issues-guide": "Zwykle używamy <0>projektów Github<\/0> jako źródła informacji o tym, nad czym dalej pracować, co nadchodzi i o istniejących błędach, które należy rozwiązać. Na przykład <1>ten adres URL<\/1> zawiera listę błędów, rzeczy, z którymi potrzebujemy pomocy i nadchodzących funkcji.",
+    "main-desc": "Dziękujemy za zainteresowanie pomocą w rozwoju Quran.com i powiązanych projektów. Jesteśmy podekscytowani możliwością współpracy z Tobą!",
+    "projects": {
+        "all": "Mamy wiele projektów, wszystkie hostowane na Githubie. Znajdziesz je <0>tutaj<\/0>, a poniżej ich opisy:",
+        "q-android": "<0>Koran Android<\/0> - napisany w językach Kotlin i Java.",
+        "q-api": "<0>Quran.com API<\/0> - napisane w Ruby on Rails.",
+        "q-api-docs": "<0>Quran.com API Docs<\/0> - Nasz portal z dokumentacją API.",
+        "q-audio": "<0>Koraniczne Audio<\/0> i <1>aplikacje mobilne Koranicznego Audio<\/1>",
+        "q-audio-segments": "<0>Koran Audio Segmenty<\/0>",
+        "q-ios": "<0>Koran iOS<\/0> - napisany w Swift.",
+        "q-next": "<0>Quran.com Frontend<\/0> - napisany w Next.js.",
+        "q-v2": "<0>Quran.com<\/0> - napisany w Ruby on Rails."
+    },
+    "sub-main-desc": "Jesteśmy zespołem programistów, designerów, menadżerów produktu i myślicieli współpracujących z zespołem <0>Tarteel<\/0>, chcącym zapewnić najlepsze wrażenia przy czytaniu Koranu online. Alhamdulilah, mieliśmy możliwość pracowania dla kilku wspaniałych firm na całym świecie i cieszymy się, że przynajmniej tyle możemy zrobić, aby pomóc naszej Ummie w nauce religii. Praca nad Quran.com jest bardzo satysfakcjonująca i niech Allah wynagrodzi nas wszystkich (i nagrodzi Ciebie) za nasze wysiłki.",
+    "thanks": "Czekamy na Twój wkład!"
+}
