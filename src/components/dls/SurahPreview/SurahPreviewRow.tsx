@@ -49,9 +49,7 @@ const SurahPreviewRow = ({
           />
         </div>
         <div className={styles.right}>
-          {description && (
-            <div className={classNames(styles.description, styles.largeText)}>{description}</div>
-          )}
+					{description && (<div className={classNames(styles.surahInfoText, styles.description, styles.largeText)}>{description}</div>)}
         </div>
       </div>
     );
@@ -64,7 +62,7 @@ const SurahPreviewRow = ({
         </div>
         <div className={styles.surahNameContainer}>
           <div className={styles.surahName}>{surahName}</div>
-          <div className={styles.translatedSurahName}>{translatedSurahName}</div>
+          <div className={classNames(styles.surahInfoText, styles.translatedSurahName)}>{translatedSurahName}</div>
         </div>
       </div>
       {isLoading && <Spinner />}
@@ -72,7 +70,7 @@ const SurahPreviewRow = ({
         <div>
           <ChapterIconContainer chapterId={chapterId.toString()} hasSurahPrefix={false} />
         </div>
-        {description && <div className={styles.description}>{description}</div>}
+        {description && <div className={classNames(styles.surahInfoText, styles.description)}>{description}</div>}
       </div>
     </div>
   );
