@@ -19,7 +19,6 @@ const JuzView = ({ isDescending }: JuzViewProps) => {
   const { t, lang } = useTranslation();
   const [juzMappings, setJuzMappings] = useState([]);
   const chaptersData = useContext(DataContext);
-
   useEffect(() => {
     getAllJuzMappings()
       .then((data) => Object.entries(data))
@@ -35,9 +34,8 @@ const JuzView = ({ isDescending }: JuzViewProps) => {
   if (juzMappings.length === 0) {
     return <div className={styles.loadingContainer} />;
   }
-
   return (
-    <>
+    <div className={styles.juzLayout}>
       {sortedJuzIds.map((juzEntry) => {
         const [juzId, chapterAndVerseMappings] = juzEntry;
         const chapterIds = Object.keys(chapterAndVerseMappings);
@@ -76,7 +74,7 @@ const JuzView = ({ isDescending }: JuzViewProps) => {
           </div>
         );
       })}
-    </>
+    </div>
   );
 };
 
