@@ -51,7 +51,7 @@ We trust that you will not copy this idea/project, this is at the end for the sa
 - Clone this repo
 - Run `yarn` on the repo to install `node_modules`
 - Run `yarn dev` to start the app. If you wish to run on a different port, run `yarn dev -p 8000`
-- Open `localhost:3000` in your browser
+- Open `localhost:8000` in your browser
 
 The app runs on Next.js and will automatically hot reload when you make changes.
 
