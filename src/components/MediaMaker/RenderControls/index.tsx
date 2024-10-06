@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
+import React, { MutableRefObject, useEffect, useState } from 'react';
 
+import { PlayerRef } from '@remotion/player';
 import classNames from 'classnames';
 import clipboardCopy from 'clipboard-copy';
 import useTranslation from 'next-translate/useTranslation';
@@ -16,8 +17,8 @@ import { getCurrentPath } from '@/utils/url';
 
 type Props = {
   inputProps: MediaFileCompositionProps;
-  getCurrentFrame: () => void;
   isFetching: boolean;
+  playerRef: MutableRefObject<PlayerRef>;
 };
 
 export type MediaFileCompositionProps = {
@@ -33,8 +34,8 @@ export type MediaFileCompositionProps = {
 
 const COPY_TIMEOUT_MS = 3000;
 
-const RenderControls: React.FC<Props> = ({ inputProps, getCurrentFrame, isFetching }) => {
-  const { t } = useTranslation('quran-media-maker');
+const RenderControls: React.FC<Props> = ({ inputProps, isFetching, playerRef }) => {
+  const { t } = useTranslation('media');
   const [isCopied, setIsCopied] = useState(false);
 
   useEffect(() => {
@@ -68,11 +69,7 @@ const RenderControls: React.FC<Props> = ({ inputProps, getCurrentFrame, isFetchi
 
       <div className={styles.controlsContainer}>
         <RenderVideoButton isFetching={isFetching} inputProps={inputProps} />
-        <RenderImageButton
-          isFetching={isFetching}
-          inputProps={inputProps}
-          getCurrentFrame={getCurrentFrame}
-        />
+        <RenderImageButton isFetching={isFetching} inputProps={inputProps} playerRef={playerRef} />
         <Button
           className={styles.copyButton}
           prefix={<CopyIcon />}

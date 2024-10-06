@@ -1,48 +1,48 @@
 {
-    "communication": {
-        "desc": "Ne mund të përdorim adresën tuaj të emailit për t'ju dërguar përditësime të rëndësishme, gazeta ose njoftime në lidhje me shërbimet tona, përmbajtjen, etj. Ju do të keni mundësinë të çregjistroheni nga këto komunikime në çdo kohë.",
-        "title": "Komunikimi"
-    },
-    "contact-us": {
-        "desc": "Nëse keni ndonjë pyetje, shqetësim ose kërkesë në lidhje me këtë Politikë të Privatësisë ose trajtimin e informacionit tuaj personal, ju lutemi na kontaktoni <0> këtu <\/0> . Duke përdorur faqen tonë të internetit, ju pranoni se keni lexuar dhe kuptuar këtë Politikë të Privatësisë dhe jepni pëlqimin për mbledhjen, përdorimin dhe zbulimin e informacionit tuaj personal siç përshkruhet.",
-        "title": "Na kontaktoni"
-    },
-    "cookies": {
-        "desc": "Quran.com përdor cookie për të përmirësuar përvojën tuaj të shfletimit, për të ofruar përmbajtje të personalizuar dhe për të analizuar trafikun e faqes në internet. Duke hyrë dhe duke përdorur faqen tonë të internetit, ju pranoni përdorimin e cookies në përputhje me këtë Politikë të Privatësisë. <br\/> <br\/> <li> Llojet e Cookies që Ne përdorim: <\/li> <subLi> Cookies të nevojshme: Këto cookie janë thelbësore për funksionimin e duhur të faqes sonë të internetit dhe mundësojnë veçoritë bazë, të tilla si navigimi i faqeve dhe aksesi në zona të sigurta. Ata nuk mbledhin asnjë informacion personalisht të identifikueshëm. Pa këto cookie, disa pjesë të faqes së internetit mund të mos funksionojnë siç duhet. <\/subLi> <subLi> Cookies analitike dhe të performancës: Ne i përdorim këto cookie për të mbledhur informacion rreth mënyrës se si vizitorët përdorin faqen tonë të internetit, duke përfshirë numrin e vizitorëve, faqet që ata vizitojnë dhe kohën e kaluar në secilën faqe. Këto të dhëna na ndihmojnë të analizojmë dhe përmirësojmë performancën dhe funksionalitetin e faqes sonë të internetit. Këto cookie nuk ju identifikojnë personalisht; të gjitha të dhënat janë të grumbulluara dhe anonime. <\/subLi>",
-        "title": "Përdorimi i Cookies"
-    },
-    "data-analysis": {
-        "desc": "Ne përdorim Google Analytics për t'u siguruar që sajti të vazhdojë të funksionojë siç pritej dhe për të ditur se cilat veçori duhet t'i jepet përparësi punës, etj. Ky informacion është anonim dhe ne nuk e gjurmojmë atë në ndonjë individ të veçantë.",
-        "title": "Analiza e të dhënave"
-    },
-    "data-deletion": {
-        "desc": "Për të siguruar privatësinë dhe kontrollin mbi informacionin tuaj personal, ne ofrojmë një proces të drejtpërdrejtë të fshirjes së llogarisë. Kur zgjidhni të fshini llogarinë tuaj, të gjitha të dhënat personale të lidhura do të hiqen automatikisht dhe përgjithmonë nga sistemet tona. Ju mund të filloni fshirjen e llogarisë duke hyrë në faqen e profilit tuaj. Pasi të fillojë fshirja, të dhënat tuaja personale do të fshihen në mënyrë të sigurt nga serverët tanë brenda një afati të arsyeshëm kohor.",
-        "title": "Fshirja e të dhënave"
-    },
-    "data-protection": {
-        "desc": "<boldSpan> E drejta e aksesit: <\/boldSpan> Ju keni të drejtë të kërkoni nga Fondacioni Kur'an kopje të të dhënave tuaja personale. Ne mund t'ju paguajmë një tarifë të vogël për këtë shërbim. <br\/> <br\/> <boldSpan> E drejta e korrigjimit <\/boldSpan> : Ju keni të drejtë të kërkoni që Fondacioni i Kuranit të korrigjojë çdo informacion që mendoni se është i pasaktë. Ju gjithashtu keni të drejtë të kërkoni nga Fondacioni Kur'an që të plotësojë informacionin që ju besoni se është i paplotë. <br\/> <br\/> <boldSpan> E drejta e fshirjes: <\/boldSpan> Ju keni të drejtë të kërkoni që Fondacioni i Kuranit të fshijë të dhënat tuaja personale, në kushte të caktuara. <br\/> <br\/> <boldSpan> E drejta për të kufizuar përpunimin: <\/boldSpan> Ju keni të drejtë të kërkoni që Fondacioni Kur'an të kufizojë përpunimin e të dhënave tuaja personale, në kushte të caktuara. <br\/> <br\/> <boldSpan> E drejta për të kundërshtuar përpunimin <\/boldSpan> : Ju keni të drejtë të kundërshtoni përpunimin e të dhënave tuaja personale nga Fondacioni Kuran, në kushte të caktuara. <br\/> <br\/> <boldSpan> E drejta e transportueshmërisë së të dhënave <\/boldSpan> : Ju keni të drejtë të kërkoni që Fondacioni Kur'an t'i transferojë të dhënat që kemi mbledhur në një organizatë tjetër, ose drejtpërdrejt te ju, në kushte të caktuara .",
-        "title": "Të drejtat e mbrojtjes së të dhënave"
-    },
-    "data-security": {
-        "desc": "Ne marrim masat e duhura për të mbrojtur informacionin tuaj personal nga aksesi, ndryshimi, zbulimi ose shkatërrimi i paautorizuar. Ne përdorim protokolle sigurie standarde të industrisë dhe përdorim masa mbrojtëse fizike, elektronike dhe menaxheriale për të siguruar konfidencialitetin dhe integritetin e të dhënave tuaja.",
-        "title": "Siguria e të dhënave"
-    },
-    "data-sharing": {
-        "desc": "Ne nuk shesim, tregtojmë ose japim me qira të dhënat tuaja personale palëve të treta.",
-        "title": "Ndarja e të dhënave"
-    },
-    "info-collection": {
-        "desc": "Ne mbledhim informacione të caktuara personale nga përdoruesit që zgjedhin të krijojnë një llogari në Quran.com. Ky informacion mund të përfshijë: <br\/> <br\/> <underline> Adresa e emailit <\/underline> : Ne mbledhim adresën tuaj të emailit për të lehtësuar procesin e krijimit të llogarisë dhe për qëllime komunikimi në lidhje me llogarinë tuaj, duke përfshirë rikuperimin e llogarisë dhe njoftimet e sigurisë.",
-        "title": "Mbledhja e informacionit"
-    },
-    "log-data": {
-        "desc": "Ne mbledhim informacionin që shfletuesi juaj dërgon sa herë që vizitoni Shërbimin tonë (\"Të dhënat e regjistrit\"). Këto të dhëna të regjistrit mund të përfshijnë informacione të tilla si adresa e Protokollit të Internetit të kompjuterit tuaj (“IP”), lloji i shfletuesit, versioni i shfletuesit, faqet e Shërbimit tonë që vizitoni, kohën dhe datën e vizitës suaj, kohën e kaluar në ato faqe dhe të tjera statistikat.",
-        "title": "Të dhënat e regjistrit"
-    },
-    "main-privacy-desc": "The Quran.Foundation (i cili përfshin Quran.com) është një organizatë jofitimprurëse 501(c)(3) që përpiqet të fuqizojë çdo qenie njerëzore për të përfituar nga Kurani. Quran.Foundation vlerëson dhe respekton privatësinë e të gjithë përdoruesve tanë.",
-    "personal-info-use": {
-        "desc": "Ne përdorim informacionin personal që mbledhim për qëllimet e mëposhtme: <br\/> <li> <underline> Krijimi dhe menaxhimi i llogarisë <\/underline> : Adresa juaj e emailit përdoret për të krijuar dhe menaxhuar llogarinë tuaj në faqen tonë të internetit. Kjo ju mundëson të identifikoheni, të përdorni cilësimet tuaja dhe të ruani faqeshënuesit dhe historinë tuaj të leximit. <\/li> <li> <underline> Personalizimi <\/underline> : Ne mund të përdorim historikun tuaj të leximit për të ofruar rekomandime dhe sugjerime të personalizuara bazuar në preferencat dhe interesat tuaja. <\/li>",
-        "title": "Përdorimi i Informacionit Personal"
-    },
-    "privacy-header": "Politika e privatësisë"
+  "communication": {
+    "desc": "Ne mund të përdorim adresën tuaj të emailit për t'ju dërguar përditësime të rëndësishme, gazeta ose njoftime në lidhje me shërbimet tona, përmbajtjen, etj. Ju do të keni mundësinë të çregjistroheni nga këto komunikime në çdo kohë.",
+    "title": "Komunikimi"
+  },
+  "contact-us": {
+    "desc": "Nëse keni ndonjë pyetje, shqetësim ose kërkesë në lidhje me këtë Politikë të Privatësisë ose trajtimin e informacionit tuaj personal, ju lutemi na kontaktoni <0> këtu </0> . Duke përdorur faqen tonë të internetit, ju pranoni se keni lexuar dhe kuptuar këtë Politikë të Privatësisë dhe jepni pëlqimin për mbledhjen, përdorimin dhe zbulimin e informacionit tuaj personal siç përshkruhet.",
+    "title": "Na kontaktoni"
+  },
+  "cookies": {
+    "desc": "Quran.com përdor cookie për të përmirësuar përvojën tuaj të shfletimit, për të ofruar përmbajtje të personalizuar dhe për të analizuar trafikun e faqes në internet. Duke hyrë dhe duke përdorur faqen tonë të internetit, ju pranoni përdorimin e cookies në përputhje me këtë Politikë të Privatësisë. <br/> <br/> <li> Llojet e Cookies që Ne përdorim: </li> <subLi> Cookies të nevojshme: Këto cookie janë thelbësore për funksionimin e duhur të faqes sonë të internetit dhe mundësojnë veçoritë bazë, të tilla si navigimi i faqeve dhe aksesi në zona të sigurta. Ata nuk mbledhin asnjë informacion personalisht të identifikueshëm. Pa këto cookie, disa pjesë të faqes së internetit mund të mos funksionojnë siç duhet. </subLi> <subLi> Cookies analitike dhe të performancës: Ne i përdorim këto cookie për të mbledhur informacion rreth mënyrës se si vizitorët përdorin faqen tonë të internetit, duke përfshirë numrin e vizitorëve, faqet që ata vizitojnë dhe kohën e kaluar në secilën faqe. Këto të dhëna na ndihmojnë të analizojmë dhe përmirësojmë performancën dhe funksionalitetin e faqes sonë të internetit. Këto cookie nuk ju identifikojnë personalisht; të gjitha të dhënat janë të grumbulluara dhe anonime. </subLi>",
+    "title": "Përdorimi i Cookies"
+  },
+  "data-analysis": {
+    "desc": "Ne përdorim Google Analytics për t'u siguruar që sajti të vazhdojë të funksionojë siç pritej dhe për të ditur se cilat veçori duhet t'i jepet përparësi punës, etj. Ky informacion është anonim dhe ne nuk e gjurmojmë atë në ndonjë individ të veçantë.",
+    "title": "Analiza e të dhënave"
+  },
+  "data-deletion": {
+    "desc": "Për të siguruar privatësinë dhe kontrollin mbi informacionin tuaj personal, ne ofrojmë një proces të drejtpërdrejtë të fshirjes së llogarisë. Kur zgjidhni të fshini llogarinë tuaj, të gjitha të dhënat personale të lidhura do të hiqen automatikisht dhe përgjithmonë nga sistemet tona. Ju mund të filloni fshirjen e llogarisë duke hyrë në faqen e profilit tuaj. Pasi të fillojë fshirja, të dhënat tuaja personale do të fshihen në mënyrë të sigurt nga serverët tanë brenda një afati të arsyeshëm kohor.",
+    "title": "Fshirja e të dhënave"
+  },
+  "data-protection": {
+    "desc": "<boldSpan> E drejta e aksesit: </boldSpan> Ju keni të drejtë të kërkoni nga Fondacioni Kur'an kopje të të dhënave tuaja personale. Ne mund t'ju paguajmë një tarifë të vogël për këtë shërbim. <br/> <br/> <boldSpan> E drejta e korrigjimit </boldSpan> : Ju keni të drejtë të kërkoni që Fondacioni i Kuranit të korrigjojë çdo informacion që mendoni se është i pasaktë. Ju gjithashtu keni të drejtë të kërkoni nga Fondacioni Kur'an që të plotësojë informacionin që ju besoni se është i paplotë. <br/> <br/> <boldSpan> E drejta e fshirjes: </boldSpan> Ju keni të drejtë të kërkoni që Fondacioni i Kuranit të fshijë të dhënat tuaja personale, në kushte të caktuara. <br/> <br/> <boldSpan> E drejta për të kufizuar përpunimin: </boldSpan> Ju keni të drejtë të kërkoni që Fondacioni Kur'an të kufizojë përpunimin e të dhënave tuaja personale, në kushte të caktuara. <br/> <br/> <boldSpan> E drejta për të kundërshtuar përpunimin </boldSpan> : Ju keni të drejtë të kundërshtoni përpunimin e të dhënave tuaja personale nga Fondacioni Kuran, në kushte të caktuara. <br/> <br/> <boldSpan> E drejta e transportueshmërisë së të dhënave </boldSpan> : Ju keni të drejtë të kërkoni që Fondacioni Kur'an t'i transferojë të dhënat që kemi mbledhur në një organizatë tjetër, ose drejtpërdrejt te ju, në kushte të caktuara .",
+    "title": "Të drejtat e mbrojtjes së të dhënave"
+  },
+  "data-security": {
+    "desc": "Ne marrim masat e duhura për të mbrojtur informacionin tuaj personal nga aksesi, ndryshimi, zbulimi ose shkatërrimi i paautorizuar. Ne përdorim protokolle sigurie standarde të industrisë dhe përdorim masa mbrojtëse fizike, elektronike dhe menaxheriale për të siguruar konfidencialitetin dhe integritetin e të dhënave tuaja.",
+    "title": "Siguria e të dhënave"
+  },
+  "data-sharing": {
+    "desc": "Ne nuk shesim, tregtojmë ose japim me qira të dhënat tuaja personale palëve të treta.",
+    "title": "Ndarja e të dhënave"
+  },
+  "info-collection": {
+    "desc": "Ne mbledhim informacione të caktuara personale nga përdoruesit që zgjedhin të krijojnë një llogari në Quran.com. Ky informacion mund të përfshijë: <br/> <br/> <underline> Adresa e emailit </underline> : Ne mbledhim adresën tuaj të emailit për të lehtësuar procesin e krijimit të llogarisë dhe për qëllime komunikimi në lidhje me llogarinë tuaj, duke përfshirë rikuperimin e llogarisë dhe njoftimet e sigurisë.",
+    "title": "Mbledhja e informacionit"
+  },
+  "log-data": {
+    "desc": "Ne mbledhim informacionin që shfletuesi juaj dërgon sa herë që vizitoni Shërbimin tonë (\"Të dhënat e regjistrit\"). Këto të dhëna të regjistrit mund të përfshijnë informacione të tilla si adresa e Protokollit të Internetit të kompjuterit tuaj (“IP”), lloji i shfletuesit, versioni i shfletuesit, faqet e Shërbimit tonë që vizitoni, kohën dhe datën e vizitës suaj, kohën e kaluar në ato faqe dhe të tjera statistikat.",
+    "title": "Të dhënat e regjistrit"
+  },
+  "main-privacy-desc": "Quran Foundation, Inc. (i cili përfshin Quran.com) është një organizatë jofitimprurëse 501(c)(3) që përpiqet të fuqizojë çdo qenie njerëzore për të përfituar nga Kurani. Fondacioni Quran, Inc. vlerëson dhe respekton privatësinë e të gjithë përdoruesve tanë.",
+  "personal-info-use": {
+    "desc": "Ne përdorim informacionin personal që mbledhim për qëllimet e mëposhtme: <br/> <li> <underline> Krijimi dhe menaxhimi i llogarisë </underline> : Adresa juaj e emailit përdoret për të krijuar dhe menaxhuar llogarinë tuaj në faqen tonë të internetit. Kjo ju mundëson të identifikoheni, të përdorni cilësimet tuaja dhe të ruani faqeshënuesit dhe historinë tuaj të leximit. </li> <li> <underline> Personalizimi </underline> : Ne mund të përdorim historikun tuaj të leximit për të ofruar rekomandime dhe sugjerime të personalizuara bazuar në preferencat dhe interesat tuaja. </li>",
+    "title": "Përdorimi i Informacionit Personal"
+  },
+  "privacy-header": "Politika e privatësisë"
 }

@@ -1,6 +1,6 @@
 {
-  "about": "",
-  "allow": "",
+  "about": "Sobre nosotros",
+  "allow": "Permitir",
   "and": "",
   "announcements": {
     "auth-onboarding": {
@@ -47,26 +47,26 @@
   },
   "audio": {
     "auto-scroll": {
-      "off": "",
+      "off": "Apagado",
       "on": "",
-      "title": ""
+      "title": "Desplazamiento automático"
     },
     "displaying": "",
     "exp-tip": "",
     "exp-tip-no-select": "",
     "experience": "",
-    "play": "",
+    "play": "Reproducir audio",
     "playback-normal": "",
     "playback-speed": "",
     "playback-speed-unit": "",
     "player": {
       "close-audio-player": "",
-      "currently-playing": "",
+      "currently-playing": "Actualmente estas jugando",
       "delay-verse": "",
       "download": "",
       "full-surah": "",
       "manage-repeat-settings": "",
-      "mismatch": "",
+      "mismatch": "Haga clic en \"Comenzar de nuevo\" si desea reproducir {{currentReadingChapter}} en su lugar.",
       "pause": "",
       "pause-audio": "",
       "play": "",
@@ -83,7 +83,7 @@
       "stop-repeating": "",
       "times": "",
       "verses-range": "",
-      "volume-control": ""
+      "volume-control": "Control de volumen."
     },
     "repeat-moved": "",
     "select-reciter": "",
@@ -92,7 +92,7 @@
   },
   "ayah": "",
   "ayahs": "",
-  "beta": "",
+  "beta": "Beta",
   "bookmark": "",
   "bookmarked": "",
   "both": "",
@@ -100,13 +100,13 @@
   "click-here": "",
   "close": "",
   "command-bar": {
-    "navigations": "",
+    "navigations": "Navegaciones",
     "no-nav-results": "",
     "placeholder": "",
     "powered-by": "",
     "recent-navigations": "",
     "search-by-voice": "",
-    "try-navigating": ""
+    "try-navigating": "Intente navegar a"
   },
   "community": {
     "cta": "",
@@ -117,8 +117,8 @@
   "complete-sign-up": "",
   "consents": {
     "communication": {
-      "body": "",
-      "header": ""
+      "body": "🚀 Potencie su progreso a través de notificaciones <boldSpan> personalizadas <\/boldSpan> sobre el progreso de sus objetivos, el mantenimiento de las rachas y la mejora del uso de nuestras funciones actuales. <br> <\/br> <br> <\/br> ¿Podemos mantenerlo informado a través del correo electrónico y otros canales? Usted tiene el control: puede ajustar estas preferencias en cualquier momento en la configuración de su cuenta. <br> <\/br> <br> <\/br> Simplemente seleccione \"Permitir\" para recibir <boldSpan> recordatorios inspiradores <\/boldSpan> o \"Ahora no\" para rechazarlos.",
+      "header": "¡Nos encantaría ayudarte a mantenerte <boldSpan> comprometido y constante <\/boldSpan> en tu viaje de crecimiento del Corán! 📖🌟"
     }
   },
   "continue": "",
@@ -146,27 +146,36 @@
     "verify-code": ""
   },
   "error": {
+    "MediaVersesRangeLimitExceeded": "",
     "bookmark-sync": "",
     "email-login-fail": "",
-    "general": "",
-    "offline": "",
-    "pref-persist-fail": ""
+    "general": "Algo salió mal. Inténtalo de nuevo.",
+    "offline": "Parece que perdiste la conexión. Verifícala y vuelve a intentarlo.",
+    "pref-persist-fail": "",
+    "ranges-no-value": "",
+    "ranges-too-many-verses": "",
+    "ranges-wrong-order": ""
   },
+  "exciting-updates": "",
   "feedback": "",
   "fonts": {
     "15_lines": "",
-    "16_lines": "",
+    "16_lines": "16 líneas",
     "code_v1": "",
     "code_v2": "",
     "font-size": "",
     "lines": "",
     "qcf-desc": "",
+    "qcf-v4-desc": "",
     "qpc_uthmani_hafs": "",
     "quran-font": "",
+    "quran-font-size": "",
     "tajweed": "",
     "tajweed-desc": "",
+    "tajweed_v4": "",
     "text_indopak": "",
-    "text_uthmani": ""
+    "text_uthmani": "",
+    "translation-font-size": ""
   },
   "footer": {
     "description": "",
@@ -185,7 +194,7 @@
   "from": "",
   "fundraising-sticky-banner": {
     "cta": "",
-    "title": "¡Regala durante los mejores días!"
+    "title": "¡Done durante los mejores días!"
   },
   "fundraising": {
     "description": "Las donaciones mensuales nos ayudan a mejorar Quran.com y sostener las operaciones para que nos centremos menos en la recaudación de fondos y más en crear impacto.",
@@ -194,10 +203,10 @@
   "help": "",
   "hizb": "",
   "home": "",
-  "hours": "",
+  "hours": "Horas",
   "inline": "",
   "input": {
-    "clear": ""
+    "clear": "Claro"
   },
   "juz": "",
   "language": "",
@@ -211,11 +220,11 @@
   "meccan": "",
   "medinan": "",
   "menu": "",
-  "minutes": "",
+  "minutes": "Minutos",
   "mobile-apps": "",
   "mode": "",
   "more": "",
-  "my-learning-plans": "",
+  "my-learning-plans": "Mis planes de aprendizaje",
   "navigate": "",
   "network": "",
   "new": "",
@@ -223,18 +232,18 @@
   "next": "",
   "next-ayah": "",
   "no": "",
-  "no-notifications": "",
+  "no-notifications": "No hay notificaciones todavía",
   "none": "",
-  "not-now": "",
+  "not-now": "Ahora no",
   "notes": {
     "title": ""
   },
-  "notification-settings": "",
+  "notification-settings": "Configuración de notificaciones.",
   "notification": {
-    "mark-all-as-read": "",
-    "mark-as-read": ""
+    "mark-all-as-read": "Marcar todo como leído",
+    "mark-as-read": "Marcar como leído"
   },
-  "notifications": "",
+  "notifications": "Notificaciones",
   "off": "",
   "oldest": "",
   "on": "",
@@ -246,13 +255,13 @@
   "popup": {
     "footnote": "",
     "text-1": "",
-    "text-2": "La oportunidad perfecta para la caridad continua (Sadaqa Jariyah). Invierta en su Más Allá como donante mensual (o único).",
-    "title": "¡Regala durante los mejores días!"
+    "text-2": "La oportunidad perfecta para la caridad continua (Sadaqa Jariyah). Invierta en su Más Allá como donante mensual (o solo una vez).",
+    "title": "¡Dona durante los mejores días!"
   },
   "powered-by": "",
   "prepare-hearts": {
     "cta": "",
-    "title": ""
+    "title": "¡Seguimos adelante después del Ramadán!"
   },
   "prev": "",
   "previous-ayah": "",
@@ -264,7 +273,7 @@
   "quran-radio": "",
   "reading-history": "",
   "reading-preference": {
-    "reading": "",
+    "reading": "Lectura",
     "translation": ""
   },
   "recitation": "",
@@ -272,7 +281,7 @@
   "reciter-summary": "",
   "reciters": "",
   "reflect": "",
-  "reflections": "",
+  "reflections": "Reflexiones.",
   "remove": "",
   "rename": "",
   "retry": "",
@@ -283,23 +292,25 @@
   "search-for": "",
   "search-results": "",
   "search": {
-    "filters": "",
-    "hint": "",
-    "jump-to": "",
-    "no-results": "",
-    "no-results-suggestion": "",
-    "popular": "",
-    "recent": "",
-    "results": "",
-    "show-all": "",
-    "switch-mode": "",
-    "title": ""
+    "filters": "Filtros",
+    "hint": "Intente buscar",
+    "jump-to": "Saltar a",
+    "no-results": "No se encontraron resultados",
+    "no-results-suggestion": "No pudimos encontrar ningún resultado de búsqueda coincidente con \" {{searchQuery}} \". Intente buscar una palabra clave diferente.",
+    "popular": "Búsquedas populares",
+    "recent": "Búsquedas recientes",
+    "results": "resultados",
+    "show-all": "Mostrar todos los resultados",
+    "switch-mode": "Cambiar a Búsqueda avanzada",
+    "title": "Buscar"
   },
-  "seconds": "",
+  "seconds": "Artículos de segunda clase",
+  "see-new": "",
   "settings": {
     "no-tafsir-selected": "",
     "no-translation-selected": "",
     "reading-experience": "",
+    "reset": "",
     "reset-cta": "",
     "reset-notif": "",
     "search-reciter": "",
@@ -328,14 +339,14 @@
   },
   "sitemap": "",
   "sort": {
-    "ascending": "",
+    "ascending": "Ascendente",
     "by": "",
-    "descending": ""
+    "descending": "Descendiendo"
   },
   "style": "",
   "submit": "",
-  "subscribe": "",
-  "subscribed": "",
+  "subscribe": "Suscribirse.",
+  "subscribed": "Suscrito.",
   "surah": "",
   "tafsir": {
     "font-size": "",
@@ -347,9 +358,10 @@
     "title": ""
   },
   "tarteel": {
-    "app": "",
-    "name": ""
+    "app": "Aplicación Tarteel",
+    "name": "Tarteel.ai"
   },
+  "terms-and-conditions": "",
   "theme": "",
   "themes": {
     "auto": "",
@@ -381,10 +393,10 @@
   "verses": "",
   "view": "",
   "voice": {
-    "ask-permission": "",
-    "error": "",
-    "no-permission": "",
-    "not-supported": "",
+    "ask-permission": "Habilite el permiso del micrófono para comenzar a utilizar la búsqueda por voz",
+    "error": "Se ha producido un error, inténtelo de nuevo más tarde. O descargue el ",
+    "no-permission": "Parece que no tienes los permisos del micrófono habilitados. Habilita los permisos del micrófono e inténtalo de nuevo o descarga el ",
+    "not-supported": "Parece que su navegador no admite el micrófono. Pruebe con otro navegador o descargue el ",
     "suggest": "",
     "suggest-subtitle": "",
     "suggest-title": "",

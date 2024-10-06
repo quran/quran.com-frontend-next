@@ -23,7 +23,7 @@ const VersesRangeSelector: React.FC<Props> = ({
   isVisible,
   isDisabled = false,
 }) => {
-  const { t } = useTranslation('quran-media-maker');
+  const { t } = useTranslation('media');
 
   return (
     <div

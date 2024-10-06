@@ -43,6 +43,11 @@ const NavigationDrawerBody = () => {
       {/* <NavigationDrawerItem title="Contribute" icon={<IconDonate />} href="/contribute" /> */}
       <NavigationDrawerItem title={t('privacy')} icon={<IconLock />} href="/privacy" />
       <NavigationDrawerItem
+        title={t('terms-and-conditions')}
+        icon={<IconProductUpdates />}
+        href="/terms-and-conditions"
+      />
+      <NavigationDrawerItem
         title={t('product-updates')}
         icon={<IconProductUpdates />}
         href="/product-updates"

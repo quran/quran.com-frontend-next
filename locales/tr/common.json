@@ -146,12 +146,17 @@
     "verify-code": "Doğrulama kodu"
   },
   "error": {
+    "MediaVersesRangeLimitExceeded": "Bir seferde en fazla {{limit}} ayet seçebilirsiniz. Lütfen daha küçük bir aralık seçin.",
     "bookmark-sync": "Yer imi senkronize değil.",
     "email-login-fail": "E-posta ile oturum açılamadı. Lütfen tekrar deneyin",
     "general": "Bir şeyler ters gitti. Lütfen tekrar deneyin.",
     "offline": "Görünüşe göre bağlantınız kesildi. Lütfen bağlantınızı kontrol edip yeniden deneyiniz.",
-    "pref-persist-fail": "Ayarlarınız bulutla eşitlenemedi."
+    "pref-persist-fail": "Ayarlarınız bulutla eşitlenemedi.",
+    "ranges-no-value": "Aralık başlangıcı ve bitişi bir değere sahip olmalıdır",
+    "ranges-too-many-verses": "*Maksimum {{maxNumberOfVerses}} Ayet",
+    "ranges-wrong-order": "Başlangıç mısrası bitiş mısrasından önce olmalıdır."
   },
+  "exciting-updates": "Heyecan Verici Güncellemeler",
   "feedback": "Geri Bildirim",
   "fonts": {
     "15_lines": "15 satır",
@@ -161,12 +166,16 @@
     "font-size": "Yazı Boyutu",
     "lines": "Çizgiler",
     "qcf-desc": "Kral Fehd Kompleksi (V1 ve V2) Yazı Tipleri daha yüksek kalite sağlar ancak yüklenmesi daha uzun sürer.",
+    "qcf-v4-desc": "Tecvid yazı tipleri, her ikisinden de izin alınarak Easy Quran - Dar Al Marifa Tajweed Mushaf ve King Fahad Glorious Quran Printing Complex (KFGQPC) - Osmanic Hafs V4 Yazı Tipleri kullanılarak oluşturulmuştur.",
     "qpc_uthmani_hafs": "QPC Uthmani Hafs",
     "quran-font": "Kuran Yazı Tipi",
+    "quran-font-size": "Kuran yazı boyutu",
     "tajweed": "Tecvid",
     "tajweed-desc": "Tecvid yazı tipi, Tecvid renkli bir Mushaf gösterir. Tacvid renk kuralları hakkında daha fazla bilgiyi <0>buradan<\/0> okuyabilirsiniz",
+    "tajweed_v4": "Kral Fahad Kompleksi V4",
     "text_indopak": "Hint Paketi",
-    "text_uthmani": "Osmanca"
+    "text_uthmani": "Osmanca",
+    "translation-font-size": "Çeviri yazı tipi boyutu"
   },
   "footer": {
     "description": "Kuran.com bir sadaka-i cariyedir. Herkesin Kur'an-ı Kerim'i okumasını, incelemesini ve öğrenmesini kolaylaştırmayı umuyoruz. Kur'an-ı Kerim'in Al-Quran Al-Kareem, Al-Ketab, Al-Furqan, Al-Maw'itha, Al-Thikr ve Al-Noor gibi birçok ismi vardır.",
@@ -296,10 +305,12 @@
     "title": "Ara"
   },
   "seconds": "Saniye",
+  "see-new": "Yenilikleri görün",
   "settings": {
     "no-tafsir-selected": "Tefsir seçilmedi",
     "no-translation-selected": "Çeviri seçilmedi",
     "reading-experience": "Okuma Deneyimi",
+    "reset": "Sıfırla",
     "reset-cta": "Ayarları Sıfırla",
     "reset-notif": "Ayarlarınız varsayılanlara sıfırlandı",
     "search-reciter": "Okuyucu Ara",
@@ -350,6 +361,7 @@
     "app": "Tarteel uygulaması",
     "name": "Tarteel.ai"
   },
+  "terms-and-conditions": "Şartlar ve koşullar",
   "theme": "Tema",
   "themes": {
     "auto": "Oto",

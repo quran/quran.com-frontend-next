@@ -7,11 +7,11 @@
       "data-sync": {
         "action": "Seterusnya",
         "description": "Sama ada anda menggunakan Quran.com pada telefon atau komputer riba anda, penanda halaman anda, ayat terakhir dibaca dan pilihan anda akan tersedia",
-        "title": "Data anda akan diselenggarakan <br></br> merentas peranti"
+        "title": "Data anda akan diselenggarakan <br><\/br> merentas peranti"
       },
       "feedback": {
         "action": "Okay, faham",
-        "description": "Terima kasih kerana menggunakan Quran.com dan sila beri maklum balas anda  <link> feedback.quran.com </link>",
+        "description": "Terima kasih kerana menggunakan Quran.com dan sila beri maklum balas anda  <link> feedback.quran.com <\/link>",
         "title": "Kami mengalukan pendapat anda"
       },
       "quran-foundation-link": {
@@ -26,12 +26,12 @@
       },
       "welcome": {
         "action": "Lihat apa yang baharu",
-        "title": "Selamat datang ke Akaun Pengguna Quran.com <br></br>"
+        "title": "Selamat datang ke Akaun Pengguna Quran.com <br><\/br>"
       }
     },
     "collections-announcement": {
       "slide-1": {
-        "description": "Kami sangat gembira untuk mengumumkan bahawa kini anda boleh mengumpulkan penanda halaman di bawah \"koleksi\"! <br/> <br/> <li> Tambahkan seberapa banyak koleksi yang anda mahu </li> <li> Tambahkan penanda halaman pada satu atau lebih koleksi </li> <li> Dan banyak lagi! </li>",
+        "description": "Kami sangat gembira untuk mengumumkan bahawa kini anda boleh mengumpulkan penanda halaman di bawah \"koleksi\"! <br\/> <br\/> <li> Tambahkan seberapa banyak koleksi yang anda mahu <\/li> <li> Tambahkan penanda halaman pada satu atau lebih koleksi <\/li> <li> Dan banyak lagi! <\/li>",
         "title": "Koleksi penanda halaman ada di sini!"
       }
     }
@@ -52,8 +52,8 @@
       "title": "Gelongsor secara Atomatik"
     },
     "displaying": "Memaparkan",
-    "exp-tip": "<span>Tukar kandungan yang dipaparkan di bawah</span><br></br> <boldSpan>Tetapan</boldSpan> > <boldSpan>Perkataan Demi Perkataan</boldSpan>",
-    "exp-tip-no-select": "<span>Tandakan pilihan paparan petua alat dan pilih pilihan <br></br> Terjemahan dan/atau Transliterasi</span><br></br><span> di bawah </span><boldSpan>Tetapan</boldSpan> > <boldSpan>Perkataan Demi Perkataan</boldSpan><span>, untuk</span><br></br> <span>mendayakan ciri ini.</span>",
+    "exp-tip": "<span>Tukar kandungan yang dipaparkan di bawah<\/span><br><\/br> <boldSpan>Tetapan<\/boldSpan> > <boldSpan>Perkataan Demi Perkataan<\/boldSpan>",
+    "exp-tip-no-select": "<span>Tandakan pilihan paparan petua alat dan pilih pilihan <br><\/br> Terjemahan dan\/atau Transliterasi<\/span><br><\/br><span> di bawah <\/span><boldSpan>Tetapan<\/boldSpan> > <boldSpan>Perkataan Demi Perkataan<\/boldSpan><span>, untuk<\/span><br><\/br> <span>mendayakan ciri ini.<\/span>",
     "experience": "Pengalaman",
     "play": "Mainkan Audio",
     "playback-normal": "Normal",
@@ -85,7 +85,7 @@
       "verses-range": "Jangka rangka ayat",
       "volume-control": "Kawalan bunyi"
     },
-    "repeat-moved": "Ketetapan ulangan telah pindah ke pemain audio. Klik pada <0> </0> untuk akses",
+    "repeat-moved": "Ketetapan ulangan telah pindah ke pemain audio. Klik pada <0> <\/0> untuk akses",
     "select-reciter": "Pilih Qari (Pembaca)",
     "speed": "Kelajuan",
     "title": "Audio"
@@ -117,8 +117,8 @@
   "complete-sign-up": "Lengkapkan pendaftaran anda",
   "consents": {
     "communication": {
-      "body": "🚀 Tingkatkan kemajuan anda melalui pemberitahuan <boldSpan> diperibadikan </boldSpan> tentang kemajuan matlamat anda, mengekalkan coretan dan meningkatkan penggunaan ciri semasa kami oleh anda. <br></br> <br></br> Mahukah jika kami  memantau anda melalui e-mel dan saluran lain? Anda boleh mengawal dan melaraskan pilihan ini pada bila-bila masa dalam akaun anda. <br></br> <br></br> Hanya pilih 'Benarkan' untuk <boldSpan> peringatan yang memberi inspirasi </boldSpan> atau 'Bukan Sekarang' untuk menolak.",
-      "header": "Kami ingin membantu anda kekal <boldSpan> komited dan konsisten </boldSpan> dalam Pengembaraan Al-Quran anda! 📖🌟"
+      "body": "🚀 Tingkatkan kemajuan anda melalui pemberitahuan <boldSpan> diperibadikan <\/boldSpan> tentang kemajuan matlamat anda, mengekalkan coretan dan meningkatkan penggunaan ciri semasa kami oleh anda. <br><\/br> <br><\/br> Mahukah jika kami  memantau anda melalui e-mel dan saluran lain? Anda boleh mengawal dan melaraskan pilihan ini pada bila-bila masa dalam akaun anda. <br><\/br> <br><\/br> Hanya pilih 'Benarkan' untuk <boldSpan> peringatan yang memberi inspirasi <\/boldSpan> atau 'Bukan Sekarang' untuk menolak.",
+      "header": "Kami ingin membantu anda kekal <boldSpan> komited dan konsisten <\/boldSpan> dalam Pengembaraan Al-Quran anda! 📖🌟"
     }
   },
   "continue": "Teruskan",
@@ -139,19 +139,24 @@
   "edit": "Sunting",
   "email-verification": {
     "check-spam": "Tidak menerima e-mel pengesahan? Semak peti masuk spam anda",
-    "email-sent": "Kami baru sahaja menghantar e-mel kepada <strong> {{email}} </strong>",
+    "email-sent": "Kami baru sahaja menghantar e-mel kepada <strong> {{email}} <\/strong>",
     "email-verification": "Pengesahan email",
     "resend-email": "Hantar semula e-mel",
     "resend-email-in": "Hantar semula e-mel pengesahan dalam {{remainingTime}} saat...",
     "verify-code": "Sahkan kod"
   },
   "error": {
+    "MediaVersesRangeLimitExceeded": "Anda hanya boleh memilih sehingga {{limit}} ayat pada satu masa. Sila pilih julat yang lebih kecil.",
     "bookmark-sync": "Penanda halaman tidak segerak.",
     "email-login-fail": "Gagal log masuk dengan e-mel. Sila cuba lagi",
     "general": "Kesilapan telah berlaku. Sila cuba lagi.",
     "offline": "Nampaknya anda kehilangan talian. Sila semak dan cuba lagi.",
-    "pref-persist-fail": "Gagal menyelenggarakan tetapan anda ke Cloud."
+    "pref-persist-fail": "Gagal menyelenggarakan tetapan anda ke Cloud.",
+    "ranges-no-value": "Julat permulaan dan akhir mesti mempunyai nilai",
+    "ranges-too-many-verses": "*Max {{maxNumberOfVerses}} Ayah",
+    "ranges-wrong-order": "Ayat permulaan hendaklah sebelum ayat akhir."
   },
+  "exciting-updates": "Kemas Kini Menarik",
   "feedback": "Maklum balas",
   "fonts": {
     "15_lines": "15 Baris",
@@ -161,16 +166,20 @@
     "font-size": "Saiz fon",
     "lines": "Barisan",
     "qcf-desc": "Fon Kompleks Raja Fahad (V1 dan V2) berkualiti tinggi tetapi mengambil masa yang lebih lama untuk dimuatkan.",
+    "qcf-v4-desc": "Fon Tajwid dicipta menggunakan Easy Quran - Dar Al Marifa Tajwid Mushaf dan King Fahad Glorious Quran Printing Complex (KFGQPC) - Uthmanic Hafs V4 Fonts selepas mendapat kebenaran daripada kedua-duanya.",
     "qpc_uthmani_hafs": "QPC Uthmani Hafs",
     "quran-font": "Fon Quran",
+    "quran-font-size": "saiz huruf al-Quran",
     "tajweed": "Tajwid",
-    "tajweed-desc": "Fon tulisan Tajwid menunjukkan Mushaf berwarna Tajwid. Anda boleh membaca lebih lanjut tentang aturan warna Tajwid <0> di sini </0>",
+    "tajweed-desc": "Fon tulisan Tajwid menunjukkan Mushaf berwarna Tajwid. Anda boleh membaca lebih lanjut tentang aturan warna Tajwid <0> di sini <\/0>",
+    "tajweed_v4": "Kompleks Raja Fahad V4",
     "text_indopak": "IndoPak",
-    "text_uthmani": "Uthmani"
+    "text_uthmani": "Uthmani",
+    "translation-font-size": "Saiz fon terjemahan"
   },
   "footer": {
     "description": "Quran.com adalah Sadaqah Jariyah. Kami berharap agar kami dapat memudahkan semua orang dapat membaca, mempelajari dan memahami erti Al-Quran. Al-Quran yang mulia mempunyai banyak nama antaranya Al-Quran Al-Kareem, Al-Kitab, Al-Furqan, Al-Maw'itha, Al-Zikir, dan Al-Nur.",
-    "hiring": "Kami ada jawatan kosong untuk di penuhi! Sertai pasukan QuranFoundation dan menyumbang kepada misi kami. <link> Mohon sekarang! </link>",
+    "hiring": "Kami ada jawatan kosong untuk di penuhi! Sertai pasukan QuranFoundation dan menyumbang kepada misi kami. <link> Mohon sekarang! <\/link>",
     "rights": "Hak cipta terpelihara",
     "title": "Baca, kaji dan pelajari Al-Quran."
   },
@@ -269,7 +278,7 @@
   },
   "recitation": "Tilawah",
   "reciter": "Qari",
-  "reciter-summary": "Pilihan qari untuk pembacaan per kata: <span> {{reciterName}} </span> . Klik pada perkataan untuk mendengar bacaannya.",
+  "reciter-summary": "Pilihan qari untuk pembacaan per kata: <span> {{reciterName}} <\/span> . Klik pada perkataan untuk mendengar bacaannya.",
   "reciters": "Qari",
   "reflect": "Renungkan",
   "reflections": "Renungan",
@@ -296,10 +305,12 @@
     "title": "Cari"
   },
   "seconds": "Saat",
+  "see-new": "Lihat apa yang baharu",
   "settings": {
     "no-tafsir-selected": "Tiada tafsir yang dipilih",
     "no-translation-selected": "Tiada terjemahan yang dipilih",
     "reading-experience": "Pengalaman Membaca",
+    "reset": "Tetapkan semula",
     "reset-cta": "Tetapkan pada asal",
     "reset-notif": "Ketetapan (settings) anda telah 'reset' kepada yang asal",
     "search-reciter": "Cari Qari (Pembaca)",
@@ -323,7 +334,7 @@
     "search-hizb": "Cari Hizb",
     "search-juz": "Cari Juzuk",
     "search-page": "Halaman Carian",
-    "search-surah": "Cari surah",
+    "search-surah": "Cari Surah",
     "try-navigating-with": "Nasihat: cuba navigasi dengan"
   },
   "sitemap": "Peta laman",
@@ -350,6 +361,7 @@
     "app": "Aplikasi Tarteel",
     "name": "Tarteel.ai"
   },
+  "terms-and-conditions": "Terma dan Syarat",
   "theme": "Tema",
   "themes": {
     "auto": "Automatik",
@@ -357,7 +369,7 @@
     "light": "Terang",
     "sepia": "Sepia",
     "system": "Sistem",
-    "system-desc": "Tema sistem secara automatik digunakan pada tetapan mod terang/gelap anda"
+    "system-desc": "Tema sistem secara automatik digunakan pada tetapan mod terang\/gelap anda"
   },
   "to": "Ke",
   "tooltip": "Tooltip",
@@ -391,7 +403,7 @@
     "voice-search-powered-by": "Enjin carian suara dihasilkan oleh"
   },
   "wbw": "Per kata",
-  "wbw-lang-summary": "Sumber terjemahan per kata: <link> {{source}} </link> . Sumber ini bebas daripada pilihan terjemahan ayat.",
+  "wbw-lang-summary": "Sumber terjemahan per kata: <link> {{source}} <\/link> . Sumber ini bebas daripada pilihan terjemahan ayat.",
   "wbw-trans-lang": "Bahasa per kata",
   "wbw-translation": "Terjemahan Per Kata",
   "wbw-transliteration": "Transliterasi Per Kata",

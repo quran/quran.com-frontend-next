@@ -36,8 +36,8 @@ const initialState: MediaSettings = {
   orientation: Orientation.PORTRAIT,
   videoId: DEFAULT_VIDEO_ID,
   surah: DEFAULT_SURAH,
-  verseFrom: `${DEFAULT_SURAH}:1`,
-  verseTo: `${DEFAULT_SURAH}:1`,
+  verseFrom: '1',
+  verseTo: '1',
 };
 
 export const mediaGeneratorSlice = createSlice({

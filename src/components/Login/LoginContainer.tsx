@@ -130,6 +130,7 @@ const LoginContainer = () => {
           <Trans
             components={{
               link: <Link href="/privacy" variant={LinkVariant.Blend} isNewTab />,
+              link1: <Link href="/terms-and-conditions" variant={LinkVariant.Blend} isNewTab />,
             }}
             i18nKey="login:privacy-policy"
           />

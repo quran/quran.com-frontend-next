@@ -6,6 +6,7 @@ import styles from '../MediaMaker.module.scss';
 
 import Counter from '@/dls/Counter/Counter';
 import Select from '@/dls/Forms/Select';
+import Separator from '@/dls/Separator/Separator';
 import {
   MAXIMUM_QURAN_FONT_STEP,
   MAXIMUM_TRANSLATIONS_FONT_STEP,
@@ -20,7 +21,7 @@ type TextTabProps = {
 };
 
 const TextTab: FC<TextTabProps> = ({ mediaSettings, onSettingsUpdate }) => {
-  const { t } = useTranslation('quran-media-maker');
+  const { t } = useTranslation('media');
   const { quranTextFontScale, translationFontScale, quranTextFontStyle } = mediaSettings;
 
   const types = useMemo(
@@ -73,6 +74,9 @@ const TextTab: FC<TextTabProps> = ({ mediaSettings, onSettingsUpdate }) => {
           />
         </div>
       </div>
+      <div className={styles.separatorContainer}>
+        <Separator isVertical />
+      </div>
 
       <div className={styles.section}>
         <div className={styles.sectionTitle}>{t('common:fonts.quran-font-size')}</div>
@@ -91,6 +95,9 @@ const TextTab: FC<TextTabProps> = ({ mediaSettings, onSettingsUpdate }) => {
             }
           />
         </div>
+      </div>
+      <div className={styles.separatorContainer}>
+        <Separator isVertical />
       </div>
       <div className={styles.section}>
         <div className={styles.sectionTitle}>{t('common:fonts.translation-font-size')}</div>

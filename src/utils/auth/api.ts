@@ -24,6 +24,7 @@ import { Note } from '@/types/auth/Note';
 import { Response } from '@/types/auth/Response';
 import { StreakWithMetadataParams, StreakWithUserMetadata } from '@/types/auth/Streak';
 import GenerateMediaFileRequest, { MediaType } from '@/types/Media/GenerateMediaFileRequest';
+import MediaRenderError from '@/types/Media/MediaRenderError';
 import { Mushaf } from '@/types/QuranReader';
 import {
   makeBookmarksUrl,
@@ -88,7 +89,10 @@ import CompleteSignupRequest from 'types/CompleteSignupRequest';
 
 type RequestData = Record<string, any>;
 
-const IGNORE_ERRORS = ['MediaVersesRangeLimitExceeded', 'MediaFilesPerUserLimitExceeded'];
+const IGNORE_ERRORS = [
+  MediaRenderError.MediaVersesRangeLimitExceeded,
+  MediaRenderError.MediaFilesPerUserLimitExceeded,
+];
 
 const handleErrors = async (res) => {
   const body = await res.json();

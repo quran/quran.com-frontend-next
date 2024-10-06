@@ -146,12 +146,17 @@
     "verify-code": "验证码"
   },
   "error": {
+    "MediaVersesRangeLimitExceeded": "您一次最多只能选择{{limit}}节经文。请选择较小的范围。",
     "bookmark-sync": "书签不同步。",
     "email-login-fail": "使用电子邮件登录失败。请再试一次",
     "general": "出了些问题。请再试一次。",
     "offline": "看起来你失去了连接。请检查并重试。",
-    "pref-persist-fail": "无法将您的设置同步到云端。"
+    "pref-persist-fail": "无法将您的设置同步到云端。",
+    "ranges-no-value": "范围开始和结束必须具有值",
+    "ranges-too-many-verses": "*最多{{maxNumberOfVerses}}个章节",
+    "ranges-wrong-order": "起始诗句必须位于结束诗句之前。"
   },
+  "exciting-updates": "令人兴奋的更新",
   "feedback": "反馈问题",
   "fonts": {
     "15_lines": "15行",
@@ -161,12 +166,16 @@
     "font-size": "字体大小",
     "lines": "线",
     "qcf-desc": "King Fahad Complex (V1 和 V2) 字体提供更高的质量，但加载时间更长。",
+    "qcf-v4-desc": "Tajweed 字体是在获得双方许可后，使用 Easy Quran - Dar Al Marifa Tajweed Mushaf 和 King Fahad Glorious Quran Printing Complex (KFGQPC) - Uthmanic Hafs V4 Fonts 创建的。",
     "qpc_uthmani_hafs": "QPC Uthmani Hafs",
     "quran-font": "经文字体",
+    "quran-font-size": "古兰经字体大小",
     "tajweed": "泰之卫德",
     "tajweed-desc": "泰之卫德字体显示带有泰之卫德颜色的 Mushaf。 <0>此处是泰之卫德颜色规则<\/0>",
+    "tajweed_v4": "法赫德国王综合体 V4",
     "text_indopak": "波斯体",
-    "text_uthmani": "纳斯赫体"
+    "text_uthmani": "纳斯赫体",
+    "translation-font-size": "翻译字体大小"
   },
   "footer": {
     "description": "Quran.com是一项持久的施舍。我们希望每个人都能轻松地阅读和学习尊贵的《古兰经》。尊贵的古兰经有很多名字，包括 Al-Quran Al-Kareem、Al-Ketab、Al-Furqan、Al-Maw'itha、Al-Thikr 和 Al-Noor。",
@@ -296,10 +305,12 @@
     "title": "搜索"
   },
   "seconds": "秒数",
+  "see-new": "查看最新动态",
   "settings": {
     "no-tafsir-selected": "尚未选择经注",
     "no-translation-selected": "尚未选择译文",
     "reading-experience": "阅读体验",
+    "reset": "重置",
     "reset-cta": "恢复默认值",
     "reset-notif": "您的设置已重置为默认设置",
     "search-reciter": "搜索诵读家",
@@ -350,6 +361,7 @@
     "app": "Tarteel 应用程序",
     "name": "Tarteel.ai"
   },
+  "terms-and-conditions": "条款和条件",
   "theme": "主题",
   "themes": {
     "auto": "自动",

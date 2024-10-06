@@ -1,6 +1,9 @@
 @use "src/styles/constants";
 @use "src/styles/breakpoints";
 
+$sections-container-height: 2.25rem;
+$pixel: 1px;
+
 .container {
   background: var(--color-background-default);
   background: var(--color-background-elevated);
@@ -11,7 +14,8 @@
   z-index: var(--z-index-sticky);
   transition: transform var(--transition-regular);
   width: 100%;
-  inset-block-start: -1px;
+  inset-block-start: calc($pixel * -1);
+  padding-bottom: $pixel;
   min-height: var(--spacing-medium);
   will-change: transform;
   &:after {
@@ -22,7 +26,6 @@
     transition-timing-function: linear;
     height: var(--spacing-micro);
     background: var(--color-success-deep);
-    position: absolute;
     inset-block-end: calc(-1 * var(--spacing-micro));
   }
 }
@@ -63,6 +66,7 @@
 }
 
 .sectionsContainer {
+  height: $sections-container-height;
   width: 100%;
   padding-block-start: var(--spacing-micro);
   padding-block-end: var(--spacing-micro);
@@ -70,6 +74,10 @@
   align-items: center;
   box-sizing: border-box;
   padding-inline: calc(1.3 * var(--spacing-large));
+  z-index: var(--z-index-default);
+  position: relative;
+  background: var(--color-background-default);
+  background: var(--color-background-elevated);
   @include breakpoints.tablet {
     padding-inline: calc(1.2 * var(--spacing-mega));
   }

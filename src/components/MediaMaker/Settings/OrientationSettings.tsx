@@ -13,7 +13,7 @@ interface Props extends MediaSettingsProps {
 }
 
 const OrientationSettings: React.FC<Props> = ({ onSettingsUpdate, orientation }) => {
-  const { t } = useTranslation('quran-media-maker');
+  const { t } = useTranslation('media');
 
   const onOrientationChange = (val: Orientation) => {
     onSettingsUpdate({ orientation: val }, 'orientation', val);

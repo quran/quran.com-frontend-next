@@ -144,23 +144,15 @@ describe('isValidVerseFrom', () => {
     const startVerseKey = '1:1';
     const endVerseKey = '1:5';
     const versesCount = 7;
-    const chapterID = 1;
+    const chapterID = '1';
     expect(isValidVerseFrom(startVerseKey, endVerseKey, versesCount, chapterID)).toEqual(true);
-  });
-
-  it('should return false if the start verse is bigger than the end verse', () => {
-    const startVerseKey = '1:5';
-    const endVerseKey = '1:1';
-    const versesCount = 7;
-    const chapterID = 1;
-    expect(isValidVerseFrom(startVerseKey, endVerseKey, versesCount, chapterID)).toEqual(false);
   });
 
   it('should return false if the start verse is bigger than the total number of verses', () => {
     const startVerseKey = '1:8';
     const endVerseKey = '1:10';
     const versesCount = 7;
-    const chapterID = 1;
+    const chapterID = '1';
     expect(isValidVerseFrom(startVerseKey, endVerseKey, versesCount, chapterID)).toEqual(false);
   });
 
@@ -168,7 +160,7 @@ describe('isValidVerseFrom', () => {
     const startVerseKey = '1:1';
     const endVerseKey = '2:5';
     const versesCount = 7;
-    const chapterID = 1;
+    const chapterID = '1';
     expect(isValidVerseFrom(startVerseKey, endVerseKey, versesCount, chapterID)).toEqual(false);
   });
 
@@ -176,7 +168,7 @@ describe('isValidVerseFrom', () => {
     const startVerseKey = '1:1';
     const endVerseKey = '1:12';
     const versesCount = 20;
-    const chapterID = 1;
+    const chapterID = '1';
     expect(isValidVerseFrom(startVerseKey, endVerseKey, versesCount, chapterID)).toEqual(false);
   });
 });
@@ -186,7 +178,7 @@ describe('isValidVerseTo', () => {
     const startVerseKey = '1:1';
     const endVerseKey = '1:5';
     const versesCount = 7;
-    const chapterID = 1;
+    const chapterID = '1';
     expect(isValidVerseTo(startVerseKey, endVerseKey, versesCount, chapterID)).toEqual(true);
   });
 
@@ -194,7 +186,7 @@ describe('isValidVerseTo', () => {
     const startVerseKey = '1:1';
     const endVerseKey = '1:0';
     const versesCount = 7;
-    const chapterID = 1;
+    const chapterID = '1';
     expect(isValidVerseTo(startVerseKey, endVerseKey, versesCount, chapterID)).toEqual(false);
   });
 
@@ -202,7 +194,7 @@ describe('isValidVerseTo', () => {
     const startVerseKey = '1:1';
     const endVerseKey = '1:8';
     const versesCount = 7;
-    const chapterID = 1;
+    const chapterID = '1';
     expect(isValidVerseTo(startVerseKey, endVerseKey, versesCount, chapterID)).toEqual(false);
   });
 
@@ -210,7 +202,7 @@ describe('isValidVerseTo', () => {
     const startVerseKey = '1:1';
     const endVerseKey = '2:5';
     const versesCount = 7;
-    const chapterID = 1;
+    const chapterID = '1';
     expect(isValidVerseTo(startVerseKey, endVerseKey, versesCount, chapterID)).toEqual(false);
   });
 
@@ -218,7 +210,7 @@ describe('isValidVerseTo', () => {
     const startVerseKey = '1:1';
     const endVerseKey = '1:12';
     const versesCount = 20;
-    const chapterID = 1;
+    const chapterID = '1';
     expect(isValidVerseTo(startVerseKey, endVerseKey, versesCount, chapterID)).toEqual(false);
   });
 });

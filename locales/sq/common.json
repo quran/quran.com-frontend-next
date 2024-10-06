@@ -146,12 +146,17 @@
     "verify-code": "Verifiko kodin"
   },
   "error": {
+    "MediaVersesRangeLimitExceeded": "Mund të zgjidhni vetëm deri në {{limit}} vargje në të njëjtën kohë. Ju lutemi zgjidhni një gamë më të vogël.",
     "bookmark-sync": "Faqeshënuesi është jashtë sinkronizimit.",
     "email-login-fail": "Identifikimi me email dështoi. Ju lutemi provoni përsëri",
     "general": "Dicka shkoi keq. Ju lutemi provoni përsëri.",
     "offline": "Duket sikur e humbe lidhjen. Ju lutemi kontrolloni dhe provoni përsëri.",
-    "pref-persist-fail": "Sinkronizimi i cilësimeve tuaja me renë kompjuterike dështoi."
+    "pref-persist-fail": "Sinkronizimi i cilësimeve tuaja me renë kompjuterike dështoi.",
+    "ranges-no-value": "Fillimi dhe mbarimi i diapazonit duhet të kenë një vlerë",
+    "ranges-too-many-verses": "*Max {{maxNumberOfVerses}} Ajete",
+    "ranges-wrong-order": "Vargu fillestar duhet të jetë para vargut përfundimtar."
   },
+  "exciting-updates": "Përditësime emocionuese",
   "feedback": "Feedback",
   "fonts": {
     "15_lines": "15 rreshta",
@@ -161,12 +166,16 @@
     "font-size": "Përmasa e gërmave",
     "lines": "Linjat",
     "qcf-desc": "Fontet Kompleksi King Fahad (V1 dhe V2) ofrojnë cilësi më të lartë, por kërkojnë më shumë kohë për t'u ngarkuar.",
+    "qcf-v4-desc": "Shkronjat Tajweed u krijuan duke përdorur fontet Easy Quran - Dar Al Marifa Tajweed Mushaf dhe King Fahad Glorious Quran Printing Complex (KFGQPC) - Uthmanic Hafs V4 Fonts pas marrjes së lejes nga të dy.",
     "qpc_uthmani_hafs": "QPC Uthmani Hafs",
     "quran-font": "Fonti i Kuranit",
+    "quran-font-size": "Madhësia e shkronjave të Kuranit",
     "tajweed": "Texhvidi",
     "tajweed-desc": "Fonti Tajweed tregon një Mushaf me ngjyrë Tajweed. Mund të lexoni më shumë rreth rregullave të ngjyrave të Tajweed <0>këtu<\/0>",
+    "tajweed_v4": "Kompleksi King Fahad V4",
     "text_indopak": "IndoPak",
-    "text_uthmani": "Osmani"
+    "text_uthmani": "Osmani",
+    "translation-font-size": "Madhësia e shkronjave të përkthimit"
   },
   "footer": {
     "description": "Quran.com është një Jariyah Sadakah. Shpresojmë t'ua bëjmë të lehtë të gjithëve leximin, studimin dhe mësimin e Kuranit Fisnik. Kurani Fisnik ka shumë emra duke përfshirë Al-Kuran Al-Kareem, Al-Ketab, Al-Furkan, Al-Maw'itha, Al-Thikr dhe Al-Noor.",
@@ -296,10 +305,12 @@
     "title": "Kërko"
   },
   "seconds": "Sekonda",
+  "see-new": "Shihni çfarë ka të re",
   "settings": {
     "no-tafsir-selected": "Nuk është zgjedhur asnjë tefsir",
     "no-translation-selected": "Nuk u zgjodh asnjë përkthim",
     "reading-experience": "Përvoja e të lexuarit",
+    "reset": "Rivendos",
     "reset-cta": "Rivendos cilësimet e paracaktuara",
     "reset-notif": "Cilësimet tuaja janë rivendosur në ato të paracaktuara",
     "search-reciter": "Kërko Recitues",
@@ -350,6 +361,7 @@
     "app": "Aplikacioni Tarteel",
     "name": "Tarteel.ai"
   },
+  "terms-and-conditions": "Termat dhe Kushtet",
   "theme": "Tema",
   "themes": {
     "auto": "Auto",
