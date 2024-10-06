@@ -106,6 +106,17 @@ const fetchToken = async (
   });
 };
 
+/**
+ * Sets cookies from the proxy response to the server-side response.
+ *
+ * This function extracts the 'set-cookie' header from the proxy response,
+ * splits it into individual cookies, and sets them in the server-side response
+ * headers. This is necessary to ensure that cookies set by the proxy are
+ * correctly forwarded to the client.
+ *
+ * @param {Response} response - The response object from the proxy request.
+ * @param {GetServerSidePropsContext} context - The context object containing request and response information.
+ */
 const setProxyCookies = (response: Response, context: GetServerSidePropsContext): void => {
   const proxyCookies = response.headers.get('set-cookie');
   if (proxyCookies) {
