@@ -14,6 +14,9 @@ const ERROR_MESSAGES = {
 // which can occur in a proxy setup like this where multiple requests are handled concurrently.
 EventEmitter.defaultMaxListeners = Number(process.env.PROXY_DEFAULT_MAX_LISTENERS) || 100;
 
+// This file sets up a proxy middleware for API requests. It is needed to forward requests from the frontend
+// to the backend server, allowing for features like cookie handling and request body fixing, which are essential
+// for maintaining session state and ensuring correct request formatting while in a cross domain env.
 const apiProxy = createProxyMiddleware<NextApiRequest, NextApiResponse>({
   target: process.env.NEXT_PUBLIC_AUTH_BASE_URL,
   changeOrigin: true,
