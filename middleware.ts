@@ -5,7 +5,7 @@ export const config = {
   matcher: '/',
 };
 
-export const middleware = async (req: NextRequest) => {
+const middleware = async (req: NextRequest) => {
   const { nextUrl: url, geo } = req;
   const country = geo.country || 'US';
 
@@ -13,3 +13,5 @@ export const middleware = async (req: NextRequest) => {
 
   return NextResponse.rewrite(url);
 };
+
+export default middleware;
