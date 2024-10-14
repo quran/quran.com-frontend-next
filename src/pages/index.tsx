@@ -1,9 +1,10 @@
 /* eslint-disable react/no-multi-comp */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import classNames from 'classnames';
 import { NextPage, GetStaticProps } from 'next';
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from './index.module.scss';
@@ -14,6 +15,7 @@ import QuranGrowthJourneySection from '@/components/HomePage/QuranGrowthJourneyS
 import RamadanActivitiesSection from '@/components/HomePage/RamadanActivitiesSection';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import BookmarksAndCollectionsSection from '@/components/Verses/BookmarksAndCollectionsSection';
+import useGetUserLanguage from '@/hooks/useGetUserLanguage';
 import { getAllChaptersData } from '@/utils/chapter';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl } from '@/utils/navigation';
@@ -27,6 +29,18 @@ type IndexProps = {
 
 const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }): JSX.Element => {
   const { t, lang } = useTranslation('home');
+  const router = useRouter();
+  const [userCountry, setUserCountry] = useState<any>('');
+
+  const { userLanguage } = useGetUserLanguage();
+
+  useEffect(() => {
+    if (router.isReady) {
+      const { country } = router.query;
+      setUserCountry(country || 'US');
+    }
+  }, [router.isReady, router.query]);
+
   return (
     <>
       <Head>
@@ -39,6 +53,8 @@ const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }): JSX.El
       />
       <div className={styles.pageContainer}>
         <div className={styles.flow}>
+          <p>{userLanguage}</p>
+          <p>{userCountry}</p>
           <HomePageHero />
           <div className={classNames(styles.flowItem, styles.fullWidth)}>
             <RamadanActivitiesSection />
