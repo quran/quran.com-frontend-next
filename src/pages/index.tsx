@@ -26,11 +26,12 @@ type IndexProps = {
   country?: string;
 };
 
-export const getServerSideProps: GetServerSideProps = async ({ locale }) => {
+export const getServerSideProps: GetServerSideProps = async ({ locale, query }) => {
   const allChaptersData = await getAllChaptersData(locale);
 
   return {
     props: {
+      country: query.country,
       chaptersData: allChaptersData,
       chaptersResponse: {
         chapters: Object.keys(allChaptersData).map((chapterId) => {
