@@ -1,6 +1,9 @@
+/* eslint-disable react/no-danger */
 import React, { useContext } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
+
+import KalimatNavigationSearchResultItem from '../SearchResults/KalimatNavigationSearchResultItem';
 
 import DataContext from '@/contexts/DataContext';
 import Button from '@/dls/Button/Button';
@@ -33,7 +36,7 @@ const NavigationItem: React.FC<Props> = ({
   );
 
   const result = isKalimatService
-    ? getSearchNavigationResult(chaptersData, navigation, t, lang)
+    ? getSearchNavigationResult(chaptersData, navigation, t, lang, true)
     : navigation;
   const getKalimatResultSuffix = () => {
     if (navigation.resultType === SearchNavigationType.SURAH) {
@@ -56,6 +59,17 @@ const NavigationItem: React.FC<Props> = ({
       source: isSearchDrawer ? SearchQuerySource.SearchDrawer : SearchQuerySource.SearchPage,
     });
   };
+
+  if (isKalimatService && result.resultType === SearchNavigationType.AYAH) {
+    return (
+      <KalimatNavigationSearchResultItem
+        key={result.key}
+        name={result.name}
+        resultKey={result.key}
+        source={isSearchDrawer ? SearchQuerySource.SearchDrawer : SearchQuerySource.SearchPage}
+      />
+    );
+  }
 
   return (
     <Button onClick={onNavigationItemClicked} href={url} suffix={suffix}>

@@ -56,6 +56,7 @@ const SearchResults: React.FC<Props> = ({ searchResult, isCommandBar }) => {
               verse.textUthmani,
               80,
             )}`,
+            isVoiceSearch: true,
             group: t('command-bar.navigations'),
           };
         });

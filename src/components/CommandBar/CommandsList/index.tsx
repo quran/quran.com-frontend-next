@@ -26,8 +26,10 @@ import { SearchNavigationResult } from 'types/SearchNavigationResult';
 
 export interface Command extends SearchNavigationResult {
   group: string;
+  name: string;
   index?: number;
   isClearable?: boolean;
+  isVoiceSearch?: boolean;
 }
 
 interface Props {
@@ -133,7 +135,6 @@ const CommandsList: React.FC<Props> = ({ commandGroups: { groups, numberOfComman
   return (
     <ul role="listbox">
       <div
-        className={styles.highlight}
         style={{
           transform: highlightOffset ? `translateY(${highlightOffset}px)` : `translateY(100%)`,
         }}
@@ -147,24 +148,29 @@ const CommandsList: React.FC<Props> = ({ commandGroups: { groups, numberOfComman
               </div>
               <ul role="group" aria-labelledby={commandGroup}>
                 {groups[commandGroup].map((command) => {
-                  const { name, resultType } = command;
-                  const isSelected = selectedCommandIndex === command.index;
+                  const { name, resultType, key, index, isVoiceSearch } = command;
+                  const isSelected = selectedCommandIndex === index;
                   return (
                     <li
                       ref={isSelected ? selectedItemRef : null}
                       role="option"
                       aria-selected={isSelected}
-                      key={command.index}
+                      key={index}
                       className={classNames(styles.command, { [styles.selected]: isSelected })}
                       onClick={() => navigateToLink(command)}
-                      onMouseOver={() => setSelectedCommandIndex(command.index)}
+                      onMouseOver={() => setSelectedCommandIndex(index)}
                     >
-                      <CommandPrefix name={name} type={resultType} />
+                      <CommandPrefix
+                        navigationKey={key}
+                        isVoiceSearch={isVoiceSearch}
+                        name={name}
+                        type={resultType}
+                      />
                       <div className={styles.keyboardInputContainer}>
                         <CommandControl
                           isClearable={command.isClearable}
                           isSelected={isSelected}
-                          commandKey={command.key}
+                          commandKey={key}
                           onRemoveCommandClicked={onRemoveCommandClicked}
                         />
                       </div>

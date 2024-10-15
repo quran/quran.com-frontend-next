@@ -115,6 +115,7 @@ export const getSearchNavigationResult = (
   result: SearchNavigationResult,
   t: Translate,
   locale: string,
+  shouldUseOriginalAyahName = false,
 ): SearchNavigationResult & { name: string } => {
   const { key, resultType } = result;
 
@@ -150,6 +151,13 @@ export const getSearchNavigationResult = (
   }
 
   if (resultType === SearchNavigationType.AYAH) {
+    if (shouldUseOriginalAyahName) {
+      return {
+        name: `${result.name} - (${key})`,
+        key,
+        resultType: SearchNavigationType.AYAH,
+      };
+    }
     const [surahNumber, ayahNumber] = getVerseAndChapterNumbersFromKey(key as string);
     return {
       name: `${t('common:surah')} ${
