@@ -1,3 +1,4 @@
+/* eslint-disable i18next/no-literal-string */
 /* eslint-disable react/no-multi-comp */
 
 import classNames from 'classnames';
