@@ -4,8 +4,10 @@ const useGetUserLanguage = () => {
   const [userLanguage, setUserLanguage] = useState('');
 
   useEffect(() => {
-    const language = navigator.language || navigator.userLanguage;
-    setUserLanguage(language);
+    if (navigator.language || navigator.userLanguage) {
+      const language = navigator.language || navigator.userLanguage;
+      setUserLanguage(language);
+    }
   }, []);
 
   return { userLanguage };

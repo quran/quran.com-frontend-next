@@ -1,10 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-// run only on homepage
-export const config = {
-  matcher: '/',
-};
-
 const middleware = async (req: NextRequest) => {
   const { nextUrl: url, geo } = req;
   const country = geo.country || 'US';
