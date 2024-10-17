@@ -14,6 +14,7 @@ export const PAGES_MUSHAF_MAP = {
   [Mushaf.Indopak16Lines]: 548,
   [Mushaf.Indopak15Lines]: 610,
   [Mushaf.Tajweed]: 604,
+  [Mushaf.QCFTajweedV4]: 604,
 };
 
 /**
