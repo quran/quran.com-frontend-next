@@ -1,4 +1,4 @@
 {
-  "meta-description": "Lisez et écoutez la sourate {{transliteratedName}} qui a été révélée dans {{revelationPlace}} , ordonnée {{chapterOrder}} dans le Coran. Le titre de la sourate signifie \"{{translatedName}}\" dans {{localeName}} et se compose de {{versesCount}} versets.",
-  "ranges-meta-desc": "Lisez et écoutez d'Ayah {{rangeFrom}} à Ayah {{rangeTo}} ."
+  "meta-description": "Lisez et écoutez la sourate {{transliteratedName}} qui a été révélée à {{revelationPlace}}, ordonnée {{chapterOrder}} dans le Coran. Le titre de la sourate signifie \"{{translatedName}}\" dans {{localeName}} et se compose de {{versesCount}} versets.",
+  "ranges-meta-desc": "Lire et écouter à partir de l'Ayah {{rangeFrom}} à {{rangeTo}}."
 }
