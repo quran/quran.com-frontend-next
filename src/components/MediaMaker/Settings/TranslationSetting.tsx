@@ -14,7 +14,7 @@ import IconCancel from '@/icons/cancel.svg';
 import IconSearch from '@/icons/search.svg';
 import { MediaSettingsProps } from '@/types/Media/MediaSettings';
 import { makeTranslationsUrl } from '@/utils/apiPaths';
-import filterTranslations from '@/utils/filter-translations';
+import filterTranslations, { getTranslations } from '@/utils/filter-translations';
 import { getLocaleName } from '@/utils/locale';
 import { TranslationsResponse } from 'types/ApiResponses';
 import AvailableTranslation from 'types/AvailableTranslation';
@@ -107,7 +107,10 @@ const TranslationSelectionBody: React.FC<Props> = ({ selectedTranslations, onSet
             ? filterTranslations(data.translations, searchQuery)
             : data.translations;
 
-          const translationByLanguages = groupBy(filteredTranslations, 'languageName');
+          const translationByLanguages = groupBy(
+            getTranslations(filteredTranslations),
+            'languageName',
+          );
           const selectedTranslationLanguage = getLocaleName(lang).toLowerCase();
           const selectedTranslationGroup = translationByLanguages[selectedTranslationLanguage];
           const translationByLanguagesWithoutSelectedLanguage = omit(translationByLanguages, [
