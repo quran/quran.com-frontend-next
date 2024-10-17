@@ -1,9 +1,9 @@
 /* eslint-disable react/no-multi-comp */
-import React from 'react';
+import React, { useContext, useEffect } from 'react';
 
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
-import { shallowEqual, useSelector } from 'react-redux';
+import { shallowEqual, useSelector, useDispatch } from 'react-redux';
 
 import ContextMenu from './ContextMenu';
 import { VerseTrackerContextProvider } from './contexts/VerseTrackerContext';
@@ -14,8 +14,10 @@ import QuranReaderView from './QuranReaderView';
 import SidebarNavigation from './SidebarNavigation/SidebarNavigation';
 
 import FontPreLoader from '@/components/Fonts/FontPreLoader';
+import DataContext from '@/contexts/DataContext';
 import { selectNotes } from '@/redux/slices/QuranReader/notes';
 import { selectReadingPreference } from '@/redux/slices/QuranReader/readingPreferences';
+import { setLastReadVerse } from '@/redux/slices/QuranReader/readingTracker';
 import { selectIsSidebarNavigationVisible } from '@/redux/slices/QuranReader/sidebarNavigation';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import { VersesResponse } from 'types/ApiResponses';
@@ -33,11 +35,30 @@ const QuranReader = ({
   quranReaderDataType = QuranReaderDataType.Chapter,
 }: QuranReaderProps) => {
   const { lang } = useTranslation();
+  const dispatch = useDispatch();
+  const chaptersData = useContext(DataContext);
   const isSideBarVisible = useSelector(selectNotes, shallowEqual).isVisible;
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const isSidebarNavigationVisible = useSelector(selectIsSidebarNavigationVisible);
   const readingPreference = useSelector(selectReadingPreference) as ReadingPreference;
   const isReadingPreference = readingPreference === ReadingPreference.Reading;
+
+  useEffect(() => {
+    if (initialData.verses.length) {
+      const { verseKey, chapterId, hizbNumber, pageNumber } = initialData.verses[0];
+      dispatch(
+        setLastReadVerse({
+          chaptersData,
+          lastReadVerse: {
+            verseKey,
+            chapterId: chapterId.toString(),
+            hizb: hizbNumber.toString(),
+            page: pageNumber.toString(),
+          },
+        }),
+      );
+    }
+  }, [dispatch, chaptersData, initialData.verses]);
 
   return (
     <>
