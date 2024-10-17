@@ -182,6 +182,8 @@ export const makeLogoutUrl = () => makeUrl('auth/logout');
 
 export const makeRefreshTokenUrl = () => makeUrl('tokens/refreshToken');
 
+export const makeRedirectTokenUrl = (token: string) => makeUrl('tokens/redirectToken', { token });
+
 export const makeGenerateMediaFileUrl = () => makeUrl('media/generate');
 
 export const makeGetMediaFileProgressUrl = (renderId: string) =>
