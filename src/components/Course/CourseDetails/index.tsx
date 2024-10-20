@@ -10,7 +10,7 @@ import ContentContainer from '@/components/Course/ContentContainer';
 import StatusHeader from '@/components/Course/CourseDetails/StatusHeader';
 import MainDetails from '@/components/Course/CourseDetails/Tabs/MainDetails';
 import DetailSection from '@/components/Course/CourseDetails/Tabs/MainDetails/DetailSection';
-import AuthorDetail from '@/components/Course/CourseDetails/Tabs/MainDetails/DetailSection/AuthorDetail';
+import AuthorsDetails from '@/components/Course/CourseDetails/Tabs/MainDetails/DetailSection/AuthorsDetails';
 import Syllabus from '@/components/Course/CourseDetails/Tabs/Syllabus';
 import TabSwitcherItem from '@/components/Course/CourseDetails/TabSwitcherItem';
 import Button, { ButtonVariant } from '@/dls/Button/Button';
@@ -99,7 +99,7 @@ const CourseDetails: React.FC<Props> = ({ course }) => {
           )}
           <DetailSection
             title={t('about-author')}
-            description={<AuthorDetail author={course.author} />}
+            description={<AuthorsDetails authors={course.authors} />}
           />
           {course.isUserEnrolled && (
             <div className={styles.startLearningButton}>

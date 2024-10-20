@@ -25,7 +25,7 @@ export type Course = {
   id: string;
   title: string;
   slug: string;
-  author: CourseAuthor;
+  authors: { author: CourseAuthor }[];
   language: string; // language code
   description: string;
   metaDescription?: string;
