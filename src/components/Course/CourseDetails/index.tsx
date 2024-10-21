@@ -4,13 +4,14 @@ import Image from 'next/image';
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from './CourseDetails.module.scss';
+import EditorsDetails from './Tabs/MainDetails/DetailSection/EditorsDetails';
 
 import StartOrContinueLearning from '@/components/Course/Buttons/StartOrContinueLearning';
 import ContentContainer from '@/components/Course/ContentContainer';
 import StatusHeader from '@/components/Course/CourseDetails/StatusHeader';
 import MainDetails from '@/components/Course/CourseDetails/Tabs/MainDetails';
 import DetailSection from '@/components/Course/CourseDetails/Tabs/MainDetails/DetailSection';
-import AuthorDetail from '@/components/Course/CourseDetails/Tabs/MainDetails/DetailSection/AuthorDetail';
+import AuthorsDetails from '@/components/Course/CourseDetails/Tabs/MainDetails/DetailSection/AuthorsDetails';
 import Syllabus from '@/components/Course/CourseDetails/Tabs/Syllabus';
 import TabSwitcherItem from '@/components/Course/CourseDetails/TabSwitcherItem';
 import Button, { ButtonVariant } from '@/dls/Button/Button';
@@ -99,8 +100,14 @@ const CourseDetails: React.FC<Props> = ({ course }) => {
           )}
           <DetailSection
             title={t('about-author')}
-            description={<AuthorDetail author={course.author} />}
+            description={<AuthorsDetails authors={course.authors} />}
           />
+          {course?.editors?.length > 0 && (
+            <DetailSection
+              title={t('editors')}
+              description={<EditorsDetails editors={course.editors} />}
+            />
+          )}
           {course.isUserEnrolled && (
             <div className={styles.startLearningButton}>
               <StartOrContinueLearning course={course} isHeaderButton={false} />
