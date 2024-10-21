@@ -40,6 +40,7 @@
     "@babel/eslint-parser": "^7.19.1",
     "@milkdown/core": "^7.3.3",
     "@milkdown/ctx": "^7.3.3",
+    "@milkdown/kit": "^7.3.3",
     "@milkdown/preset-commonmark": "^7.3.3",
     "@milkdown/prose": "^7.3.3",
     "@milkdown/react": "^7.3.3",
@@ -104,6 +105,7 @@
     "redux": "^4.2.0",
     "redux-persist": "^6.0.0",
     "refresh-fetch": "^0.8.0",
+    "remark-directive": "^3.0.0",
     "remotion": "4.0.126",
     "swr": "1.2.1",
     "xstate": "^4.33.6"
