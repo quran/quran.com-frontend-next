@@ -4,6 +4,7 @@ import Image from 'next/image';
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from './CourseDetails.module.scss';
+import EditorsDetails from './Tabs/MainDetails/DetailSection/EditorsDetails';
 
 import StartOrContinueLearning from '@/components/Course/Buttons/StartOrContinueLearning';
 import ContentContainer from '@/components/Course/ContentContainer';
@@ -101,6 +102,12 @@ const CourseDetails: React.FC<Props> = ({ course }) => {
             title={t('about-author')}
             description={<AuthorsDetails authors={course.authors} />}
           />
+          {course?.editors?.length > 0 && (
+            <DetailSection
+              title={t('editors')}
+              description={<EditorsDetails editors={course.editors} />}
+            />
+          )}
           {course.isUserEnrolled && (
             <div className={styles.startLearningButton}>
               <StartOrContinueLearning course={course} isHeaderButton={false} />
