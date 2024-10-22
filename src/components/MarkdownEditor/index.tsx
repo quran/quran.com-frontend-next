@@ -15,6 +15,7 @@ type Props = {
 };
 
 const MarkdownEditor: React.FC<Props> = ({ isEditable = true, defaultValue }) => {
+  // @ts-ignore
   const { get } = useEditor((root) => {
     return Editor.make()
       .config((ctx) => {
@@ -35,6 +36,7 @@ const MarkdownEditor: React.FC<Props> = ({ isEditable = true, defaultValue }) =>
 
   useEffect(() => {
     if (defaultValue) {
+      // @ts-ignore
       get()?.action(replaceAll(defaultValue));
     }
   }, [defaultValue, get]);
