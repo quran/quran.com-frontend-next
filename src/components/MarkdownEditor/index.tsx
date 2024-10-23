@@ -15,31 +15,26 @@ type Props = {
 };
 
 const MarkdownEditor: React.FC<Props> = ({ isEditable = true, defaultValue }) => {
-  // @ts-ignore
   const { get } = useEditor((root) => {
-    return (
-      Editor.make()
-        .config((ctx) => {
-          ctx.set(rootCtx, root);
-          if (defaultValue) {
-            ctx.set(defaultValueCtx, defaultValue);
-          }
-          // Add attributes to the editor container
-          ctx.update(editorViewOptionsCtx, (prev) => ({
-            ...prev,
-            editable: () => isEditable,
-            attributes: { class: styles.editor, spellcheck: 'false' },
-          }));
-        })
-        .use(commonmark)
-        // @ts-ignore
-        .use(iframePlugin)
-    );
+    return Editor.make()
+      .config((ctx) => {
+        ctx.set(rootCtx, root);
+        if (defaultValue) {
+          ctx.set(defaultValueCtx, defaultValue);
+        }
+        // Add attributes to the editor container
+        ctx.update(editorViewOptionsCtx, (prev) => ({
+          ...prev,
+          editable: () => isEditable,
+          attributes: { class: styles.editor, spellcheck: 'false' },
+        }));
+      })
+      .use(commonmark)
+      .use(iframePlugin);
   }, []);
 
   useEffect(() => {
     if (defaultValue) {
-      // @ts-ignore
       get()?.action(replaceAll(defaultValue));
     }
   }, [defaultValue, get]);
