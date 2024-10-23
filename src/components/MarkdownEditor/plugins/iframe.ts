@@ -107,5 +107,7 @@ const iframeInputRule = $inputRule(
  */
 const remarkDirective = $remark('remarkDirective', () => directive);
 
+const plugins = [...remarkDirective, iframeNode, iframeInputRule];
+
 // Export the plugins
-export default [...remarkDirective, iframeNode, iframeInputRule];
+export default plugins;
