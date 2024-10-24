@@ -1,6 +1,6 @@
 {
   "hero": {
-    "line-1": "Le Calendrier Coranique Global est un programme de lecture conçu pour encourager la lecture réflexive de l'intégralité du Coran de la fin d'un Ramadan au début du suivant. Nous vous encourageons à prendre le temps de comprendre et de réfléchir aux versets afin d’établir une connexion plus profonde et plus sincère."
+    "line-1": "Le Calendrier Coranique Global est un programme encourageant la lecture engagée de l'intégralité du Coran, à partir de la fin d'un Ramadan, jusqu'au début du suivant. Nous vous encourageons à prendre le temps de comprendre, et de réfléchir aux versets afin d’avoir une connexion plus profonde et plus sincère."
   },
   "interact-with-post": "Interagissez avec cet article sur QuranReflect",
   "islamic-months": {
@@ -18,18 +18,18 @@
     "12": "Dhu al-Hijjah"
   },
   "join-qc": {
-    "line-1": "Nous sommes dans <highlight> semaine {{weekNumber}} <\/highlight> du calendrier coranique.",
-    "line-2": "<normal> Rejoignez-nous pour la lecture de cette semaine même si c'est votre première fois ! <\/normal>"
+    "line-1": "Nous sommes la <highlight> semaine {{weekNumber}} </highlight> du Calendrier Coranique.",
+    "line-2": "<normal> Rejoignez-nous pour la lecture de cette semaine même si c'est votre première fois ! </normal>"
   },
   "join-quranic-calendar": "Abonnez-vous pour recevoir des mises à jour et des ressources via QuranReflect",
-  "join-quranic-calendar-success": "Vous avez rejoint le Divine Book Club avec succès !",
-  "quranic-calendar": "Le calendrier coranique mondial",
+  "join-quranic-calendar-success": "Vous avez rejoint le club Divine Book avec succès !",
+  "quranic-calendar": "Le Calendrier Coranique Global",
   "reading-options": {
     "default-settings": "Lire avec mes paramètres par défaut",
     "en-and-ar": "Lire en anglais et en arabe",
     "en-only": "Lire uniquement en anglais"
   },
   "supplemental-resources": "Ressources de soutien",
-  "today": "La date d'aujourd'hui est : <highlight> {{month}} {{day}} {{year}} , {{gregorianDate}} <\/highlight>",
+  "today": "La date d'aujourd'hui est : <highlight> {{day}} {{month}} {{year}} , {{gregorianDate}} </highlight>",
   "week-title": "Semaine {{weekNumber}} ( {{month}} ) couvrant les versets {{rangeStart}} à {{rangeEnd}}"
 }
