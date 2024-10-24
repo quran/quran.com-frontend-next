@@ -1,9 +1,11 @@
 import React, { useEffect } from 'react';
 
-import { defaultValueCtx, Editor, rootCtx, editorViewOptionsCtx } from '@milkdown/core';
-import { commonmark } from '@milkdown/preset-commonmark';
+import { defaultValueCtx, Editor, rootCtx, editorViewOptionsCtx } from '@milkdown/kit/core';
+import { commonmark } from '@milkdown/kit/preset/commonmark';
+import { replaceAll } from '@milkdown/kit/utils';
 import { Milkdown, useEditor } from '@milkdown/react';
-import { replaceAll } from '@milkdown/utils';
+
+import iframePlugin from './plugins/iframe';
 
 import styles from '@/components/MarkdownEditor/MarkdownEditor.module.scss';
 
@@ -27,7 +29,8 @@ const MarkdownEditor: React.FC<Props> = ({ isEditable = true, defaultValue }) =>
           attributes: { class: styles.editor, spellcheck: 'false' },
         }));
       })
-      .use(commonmark);
+      .use(commonmark)
+      .use(iframePlugin);
   }, []);
 
   useEffect(() => {
