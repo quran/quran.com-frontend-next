@@ -89,6 +89,7 @@ const MediaMakerContent: React.FC<Props> = ({
       style={{
         justifyContent: 'center',
       }}
+      translate="no"
     >
       <div className={styles.videoContainer}>
         <Video loop src={videoPath} />
