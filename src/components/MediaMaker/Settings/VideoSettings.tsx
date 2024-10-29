@@ -1,6 +1,7 @@
 /* eslint-disable max-lines */
-import { useCallback, useMemo, useState } from 'react';
+import { MutableRefObject, useCallback, useMemo, useState } from 'react';
 
+import { PlayerRef } from '@remotion/player';
 import classNames from 'classnames';
 import { useRouter } from 'next/router';
 import { useDispatch } from 'react-redux';
@@ -34,9 +35,7 @@ import { logButtonClick, logEvent, logValueChange } from '@/utils/eventLogger';
 type Props = {
   chaptersList: any[];
   reciters: Reciter[];
-  seekToBeginning: () => void;
-  setIsUpdating: (arg: boolean) => void;
-  getCurrentFrame: () => void;
+  playerRef: MutableRefObject<PlayerRef>;
   isFetching: boolean;
   inputProps: any;
   mediaSettings: MediaSettings;
@@ -60,7 +59,7 @@ const MEDIA_SETTINGS_TO_QUERY_PARAM = {
   quranTextFontScale: QueryParam.QURAN_TEXT_FONT_SCALE,
   quranTextFontStyle: QueryParam.QURAN_TEXT_FONT_STYLE,
   translationFontScale: QueryParam.TRANSLATION_FONT_SCALE,
-  translations: QueryParam.TRANSLATIONS,
+  translations: QueryParam.MEDIA_TRANSLATIONS,
   fontColor: QueryParam.FONT_COLOR,
   orientation: QueryParam.ORIENTATION,
   videoId: QueryParam.VIDEO_ID,
@@ -70,24 +69,32 @@ const MEDIA_SETTINGS_TO_QUERY_PARAM = {
 const VideoSettings: React.FC<Props> = ({
   chaptersList,
   reciters,
-  seekToBeginning,
-  setIsUpdating,
   isFetching,
   inputProps,
-  getCurrentFrame,
   mediaSettings,
+  playerRef,
 }) => {
   const [selectedTab, setSelectedTab] = useState<Tab>(Tab.AUDIO);
   const dispatch = useDispatch();
   const router = useRouter();
   const removeQueryParam = useRemoveQueryParam();
 
+  const seekToBeginning = useCallback(() => {
+    const current = playerRef?.current;
+    if (!current) {
+      return;
+    }
+    if (current.isPlaying) {
+      current.pause();
+    }
+    current.seekTo(0);
+  }, [playerRef]);
+
   const onSettingsUpdate = useCallback(
     (settings: ChangedSettings, key?: keyof MediaSettings, value?: any) => {
       if (key) {
         logValueChange(`media_settings_${key}`, mediaSettings[key], value);
       }
-      setIsUpdating(true);
       seekToBeginning();
       dispatch(updateSettings(settings));
       Object.keys(settings).forEach((settingKey) => {
@@ -95,13 +102,13 @@ const VideoSettings: React.FC<Props> = ({
           MEDIA_SETTINGS_TO_QUERY_PARAM[settingKey as keyof MediaSettings];
         const toBeUpdatedQueryParamValue = settings[settingKey];
         router.query[toBeUpdatedQueryParamName] =
-          toBeUpdatedQueryParamName === QueryParam.TRANSLATIONS
+          toBeUpdatedQueryParamName === QueryParam.MEDIA_TRANSLATIONS
             ? toBeUpdatedQueryParamValue.join(',')
             : toBeUpdatedQueryParamValue;
       });
       router.push({ pathname: router.pathname, query: router.query }, undefined, { shallow: true });
     },
-    [dispatch, mediaSettings, router, seekToBeginning, setIsUpdating],
+    [dispatch, mediaSettings, router, seekToBeginning],
   );
 
   const onResetSettingsClick = useCallback(() => {
@@ -179,11 +186,7 @@ const VideoSettings: React.FC<Props> = ({
         </div>
       </div>
 
-      <RenderControls
-        isFetching={isFetching}
-        getCurrentFrame={getCurrentFrame}
-        inputProps={inputProps}
-      />
+      <RenderControls isFetching={isFetching} inputProps={inputProps} playerRef={playerRef} />
     </>
   );
 };

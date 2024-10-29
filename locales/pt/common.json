@@ -146,12 +146,17 @@
     "verify-code": "Código de verificação"
   },
   "error": {
+    "MediaVersesRangeLimitExceeded": "Você pode selecionar até {{limit}} versos por vez. Selecione um intervalo menor.",
     "bookmark-sync": "O marcador está fora de sincronia.",
     "email-login-fail": "Falha ao fazer login com e-mail. Por favor, tente novamente",
     "general": "Algo deu errado. Por favor, tente novamente.",
     "offline": "Parece que você perdeu sua conexão. Por favor verifique e tente novamente.",
-    "pref-persist-fail": "Falha ao sincronizar suas configurações com a nuvem."
+    "pref-persist-fail": "Falha ao sincronizar suas configurações com a nuvem.",
+    "ranges-no-value": "O início e o fim do intervalo devem ter um valor",
+    "ranges-too-many-verses": "*Máx {{maxNumberOfVerses}} Ayahs",
+    "ranges-wrong-order": "O verso inicial deve estar antes do verso final."
   },
+  "exciting-updates": "Atualizações emocionantes",
   "feedback": "Comentários",
   "fonts": {
     "15_lines": "15 linhas",
@@ -161,12 +166,16 @@
     "font-size": "Tamanho da fonte",
     "lines": "Linhas",
     "qcf-desc": "As fontes Complexo King Fahad (V1 and V2) fornecem qualidade superior, mas demoram mais para carregar.",
+    "qcf-v4-desc": "As fontes Tajweed foram criadas usando Easy Quran - Dar Al Marifa Tajweed Mushaf e King Fahad Glorious Quran Printing Complex (KFGQPC) - Uthmanic Hafs V4 Fonts após receber permissão de ambos.",
     "qpc_uthmani_hafs": "QPC Uthmani Hafs",
     "quran-font": "Fonte do Alcorão",
+    "quran-font-size": "Tamanho da fonte do Alcorão",
     "tajweed": "Tajweed",
     "tajweed-desc": "A fonte Tajweed mostra um Mushaf colorido Tajweed. Você pode ler mais sobre as regras de cores do Tajweed <0> aqui <\/0>",
+    "tajweed_v4": "Complexo Rei Fahad V4",
     "text_indopak": "IndoPak",
-    "text_uthmani": "Uthmani"
+    "text_uthmani": "Uthmani",
+    "translation-font-size": "Tamanho da fonte da tradução"
   },
   "footer": {
     "description": "Quran.com é um Sadaqah Jariyah. Esperamos tornar mais fácil para todos ler, estudar e aprender o Nobre Alcorão. O Nobre Alcorão tem muitos nomes, incluindo Al-Quran Al-Kareem, Al-Ketab, Al-Furqan, Al-Maw'itha, Al-Thikr e Al-Noor.",
@@ -296,10 +305,12 @@
     "title": "Procurar"
   },
   "seconds": "Segundos",
+  "see-new": "Veja o que há de novo",
   "settings": {
     "no-tafsir-selected": "Nenhum tafsir selecionado",
     "no-translation-selected": "Nenhuma tradução selecionada",
     "reading-experience": "Experiência de Leitura",
+    "reset": "Reiniciar",
     "reset-cta": "Redefinir as configurações",
     "reset-notif": "Suas configurações foram redefinidas para os padrões",
     "search-reciter": "Recitador de pesquisa",
@@ -350,6 +361,7 @@
     "app": "App Tarteel",
     "name": "Tarteel.ai"
   },
+  "terms-and-conditions": "Termos e Condições",
   "theme": "Tema",
   "themes": {
     "auto": "Auto",

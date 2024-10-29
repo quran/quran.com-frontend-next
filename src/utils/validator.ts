@@ -7,7 +7,7 @@ import { parseVerseRange } from './verseKeys';
 import ChaptersData from 'types/ChaptersData';
 import { Mushaf } from 'types/QuranReader';
 
-const MAX_AYAHS_LIMIT = 10;
+export const MAX_AYAHS_LIMIT = 10;
 
 /**
  * Validate a chapterId which can be in-valid in 2 cases:
@@ -276,10 +276,9 @@ export const isValidVerseKey = (chaptersData: ChaptersData, verseKey: string): b
 /**
  * Check if a start verse key is valid. An invalid verse key can be:
  *
- * 1. if the starting verse is bigger than the ending verse
- * 2. if the verse number bigger than the surah's verses count
- * 3. if the verse from or verse to not matching the surah
- * 4. if the verse from and verse to has bigger than 10 ayahs difference
+ * 1. if the verse number bigger than the surah's verses count
+ * 2. if the verse from or verse to not matching the surah
+ * 3. if the verse from and verse to has bigger than 10 ayahs difference
  *
  * @param {string} startVerseKey
  * @param {string} endVerseKey
@@ -305,9 +304,6 @@ export const isValidVerseFrom = (
     return false;
   }
 
-  if (startVerseNumber > endVerseNumber) {
-    return false;
-  }
   if (startVerseNumber > versesCount) {
     return false;
   }

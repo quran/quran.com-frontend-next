@@ -6,18 +6,18 @@
   "continue-google": "Continuer avec Google",
   "email-placeholder": "Adresse e-mail",
   "feature-1": "Suivez vos objectifs",
-  "feature-2": "Maintenir les séquences de lecture",
+  "feature-2": "Maintenir des séries de lecture",
   "feature-3": "Créer des collections",
   "feature-4": "Synchronisez vos données sur tous les navigateurs",
-  "feature-5": "Et plus!",
+  "feature-5": "Et plus encore !",
   "feature-6": "<b> Nouveau ! </b> Notes et réflexions",
-  "login-cta": "Connectez-vous ou inscrivez-vous maintenant :",
+  "login-cta": "Se connecter ou s'inscrire maintenant:",
   "login-error": {
     "AuthenticationError": "Authentification échouée. Veuillez réessayer plus tard",
-    "TokenExpiredError": "Vous avez été déconnecté, veuillez vous reconnecter."
+    "TokenExpiredError": "Vous avez été déconnecté(e), veuillez vous reconnecter."
   },
-  "login-title": "Connectez-vous à Quran.com",
+  "login-title": "Se connecter à Quran.com",
   "other-options": "Autres options de connexion",
-  "privacy-policy": "La protection de votre vie privée est notre priorité – En vous inscrivant, vous acceptez notre <link> Politique de confidentialité </link>",
+  "privacy-policy": "La protection de votre vie privée est notre priorité. En vous inscrivant, vous acceptez notre <link> Politique de confidentialité </link> et <link1> Conditions générales </link1> .",
   "verify-code": "Vérifiez que le code de sécurité fourni correspond au texte suivant :"
 }

@@ -2,8 +2,12 @@ import Alignment from '../../types/Media/Alignment';
 import Orientation from '../../types/Media/Orientation';
 import QuranFont from '../../types/Media/QuranFont';
 
+import AvailableTranslation from '@/types/AvailableTranslation';
+import Reciter from '@/types/Reciter';
+
 export const isValidTranslationsQueryParamValue = (value: string): boolean => {
   const translationIds = value === '' ? [] : value.split(',');
+
   let isValid = true;
   for (let index = 0; index < translationIds.length; index += 1) {
     // if the value is empty
@@ -25,6 +29,26 @@ export const isValidTranslationsQueryParamValue = (value: string): boolean => {
   return isValid;
 };
 
+export const isValidTranslationsQueryParamValueWithExistingKey = (
+  value: string,
+  translationsData?: AvailableTranslation[],
+): boolean => {
+  const translationIds = value === '' ? [] : value.split(',');
+  const translationsDataIds = translationsData?.map((translation) => translation.id);
+  const allIdsExist = translationIds.every((id) => translationsDataIds.includes(Number(id)));
+  const isValidValue = isValidTranslationsQueryParamValue(value);
+
+  if (!isValidValue) {
+    return false;
+  }
+
+  if (!allIdsExist) {
+    return false;
+  }
+
+  return true;
+};
+
 /**
  * Check whether the value of the query param is a valid
  * reciter Id.
@@ -32,13 +56,17 @@ export const isValidTranslationsQueryParamValue = (value: string): boolean => {
  * @param {string} value
  * @returns {boolean}
  */
-export const isValidReciterId = (value: string): boolean => {
+export const isValidReciterId = (value: string, reciters: Reciter[]): boolean => {
+  const isValidReciter = reciters?.some((reciter) => reciter.id === Number(value));
   // if it's empty string, we shouldn't consider it as a valid reciter id
   if (!value) {
     return false;
   }
   const reciterId = Number(value);
   if (reciterId === 0 || Number.isNaN(reciterId)) {
+    return false;
+  }
+  if (!isValidReciter) {
     return false;
   }
   return true;

@@ -69,8 +69,7 @@ interface Verse {
 }
 
 interface Word {
-  qpcUthmaniHafs: string;
-  textIndopak: string;
+  text: string;
 }
 
 interface Translation {

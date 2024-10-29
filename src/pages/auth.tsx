@@ -30,6 +30,17 @@ const Auth: React.FC<AuthProps> = ({ error }) => {
   return null;
 };
 
+/**
+ * Handles the redirection process based on the provided token.
+ * It fetches the token from the server, sets the necessary cookies,
+ * and redirects the user to the specified URL.
+ *
+ * @param {GetServerSidePropsContext} context - The context object containing request and response information.
+ * @param {string} token - The token used for authentication and redirection.
+ * @param {string} redirectUrl - The URL to redirect the user to after successful token handling.
+ * @returns {Promise<GetServerSidePropsResult<any>>} - A promise that resolves to the server-side props result,
+ * which includes either a redirection or an error message.
+ */
 const handleTokenRedirection = async (
   context: GetServerSidePropsContext,
   token: string,
@@ -63,10 +74,24 @@ const handleTokenRedirection = async (
   }
 };
 
+/**
+ * Constructs the base URL from the request headers in the given context.
+ *
+ * @param {GetServerSidePropsContext} context - The context object containing request and response information.
+ * @returns {string} - The constructed base URL using the protocol and host from the request headers.
+ */
 const getBaseUrl = (context: GetServerSidePropsContext): string => {
-  return `${context.req.headers['x-forwarded-proto'] || 'http'}://${context.req.headers.host}`;
+  return `${context.req.headers['x-forwarded-proto'] || 'https'}://${context.req.headers.host}`;
 };
 
+/**
+ * Fetches a token from the server using the provided base URL and token.
+ *
+ * @param {string} baseUrl - The base URL to use for the request.
+ * @param {string} token - The token to be included in the request URL.
+ * @param {GetServerSidePropsContext} context - The context object containing request and response information.
+ * @returns {Promise<Response>} - A promise that resolves to the response from the fetch request.
+ */
 const fetchToken = async (
   baseUrl: string,
   token: string,
@@ -81,6 +106,17 @@ const fetchToken = async (
   });
 };
 
+/**
+ * Sets cookies from the proxy response to the server-side response.
+ *
+ * This function extracts the 'set-cookie' header from the proxy response,
+ * splits it into individual cookies, and sets them in the server-side response
+ * headers. This is necessary to ensure that cookies set by the proxy are
+ * correctly forwarded to the client.
+ *
+ * @param {Response} response - The response object from the proxy request.
+ * @param {GetServerSidePropsContext} context - The context object containing request and response information.
+ */
 const setProxyCookies = (response: Response, context: GetServerSidePropsContext): void => {
   const proxyCookies = response.headers.get('set-cookie');
   if (proxyCookies) {

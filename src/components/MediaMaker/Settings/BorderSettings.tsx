@@ -17,7 +17,7 @@ interface Props extends MediaSettingsProps {
 }
 
 const BorderSettings: React.FC<Props> = ({ onSettingsUpdate, borderSize, borderColor }) => {
-  const { t } = useTranslation('quran-media-maker');
+  const { t } = useTranslation('media');
 
   const debouncedOnChange = debounce((color) => {
     onSettingsUpdate({ borderColor: color }, 'borderColor', color);

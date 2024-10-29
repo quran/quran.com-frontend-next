@@ -4,18 +4,14 @@ import { ParsedUrlQuery } from 'querystring';
 
 import { getChapterData } from '../chapter';
 import { QueryParamValueType } from '../query-params';
-import { isValidChapterId, isValidVerseFrom, isValidVerseKey, isValidVerseTo } from '../validator';
-import { getVerseNumberFromKey } from '../verse';
+import { isValidVerseFrom, isValidVerseKey, isValidVerseTo } from '../validator';
 
 import { getNormalizedIntervals } from './helpers';
 
 import { RootState } from '@/redux/RootState';
 import AudioData from '@/types/AudioData';
 import ChaptersData from '@/types/ChaptersData';
-import GenerateMediaFileRequest, {
-  MediaType,
-  Timestamp,
-} from '@/types/Media/GenerateMediaFileRequest';
+import GenerateMediaFileRequest, { Timestamp } from '@/types/Media/GenerateMediaFileRequest';
 import Orientation from '@/types/Media/Orientation';
 import QueryParam from '@/types/QueryParam';
 import VerseTiming from '@/types/VerseTiming';
@@ -128,40 +124,30 @@ export const getDurationInFrames = (timestamps: Timestamp[]) => {
   return durationInFrames <= 0 ? 1 : durationInFrames;
 };
 
-export const prepareGenerateMediaFileRequestData = (data: GenerateMediaFileRequest) => {
+/**
+ * Prepares the data for generating a media file request.
+ *
+ * @param {GenerateMediaFileRequest} data - The GenerateMediaFileRequest data.
+ * @returns {object} The prepared data for generating a media file request.
+ */
+export const prepareGenerateMediaFileRequestData = (data: GenerateMediaFileRequest): object => {
   const newData = { ...data };
+  // @ts-ignore
+  newData.audio = {
+    reciterId: data.audio.reciterId,
+  };
 
-  if (data.type === MediaType.VIDEO) {
-    newData.audio = {
-      audioUrl: data.audio.audioUrl,
-      duration: data.audio.duration,
-      verseTimings: data.audio.verseTimings,
-      reciterId: data.audio.reciterId,
-    };
-  } else {
-    delete newData.audio;
-  }
-
-  // Update verses to only include chapterId and words
-  newData.verses = data.verses.map((verse) => ({
-    chapterId: verse.chapterId,
-    verseKey: verse.verseKey,
-    words: verse.words.map((word) => ({
-      qpcUthmaniHafs: word.qpcUthmaniHafs,
-      textIndopak: word.textIndopak,
-    })),
-    translations: verse.translations?.map((translation) => ({
-      id: translation.id,
-      text: translation.text,
-    })),
-  }));
+  const { verseKey: startVerseKey, chapterId } = newData.verses[0];
+  const { verseKey: endVerseKey } = newData.verses[newData.verses.length - 1];
 
   delete newData.chapterEnglishName;
   delete newData.video;
   delete newData.verseKeys;
   delete newData.isPlayer;
+  delete newData.verses;
+  delete newData.timestamps;
 
-  return newData;
+  return { ...newData, chapterId, startVerseKey, endVerseKey };
 };
 
 export const mutateGeneratedMediaCounter = (currentData) => {
@@ -187,90 +173,37 @@ export type QueryParamsData = Record<
       chaptersData?: ChaptersData,
       query?: ParsedUrlQuery,
       reduxSelectorValueOrValues?: any,
+      extraData?: any,
     ) => boolean;
     reduxObjectKey?: string; // if the value coming from redux is an object and not a single key
-    customReduxValueGetterWhenParamIsInvalid?: <T>(
-      reduxSelectorValueOrValues: T,
-      reduxParamValue: any,
+    customValueGetterWhenParamIsInvalid?: <T>(
+      reduxSelectorValueOrValues?: T,
+      reduxParamValue?: any,
     ) => any; // will be used if we don't want to use the default redux value but rather provide a custom value instead
   }
 >;
 
-type SurahAndVerses = {
-  surah: number;
-  verseFrom: string;
-  verseTo: string;
-};
-
 /**
- * Retrieves the first ayah of a surah based on the provided query parameters or Redux values.
- * If the surah query parameter is valid, it will be used. Otherwise, the surah value from Redux will be used.
- *
- * @param {any} surahQueryParamConfigs - The configuration object for surah query parameters.
- * @param {SurahAndVerses} surahAndVersesReduxValues - The Redux values for surah and verses.
- * @param {ParsedUrlQuery} query - The parsed URL query parameters.
- * @returns {string} The identifier of the first ayah in the surah.
- */
-export const getFirstAyahOfQueryParamOrReduxSurah = (
-  surahQueryParamConfigs: any,
-  surahAndVersesReduxValues: SurahAndVerses,
-  query: ParsedUrlQuery,
-): string => {
-  const { surah: surahReduxValue } = surahAndVersesReduxValues;
-  const surahQueryParamValue = String(query[QueryParam.SURAH]);
-  const surahID = surahQueryParamConfigs.isValidQueryParam(surahQueryParamValue)
-    ? surahQueryParamValue
-    : surahReduxValue;
-
-  return `${surahID}:1`;
-};
-
-/**
- * Retrieves the first ayah of a surah based on the provided query parameters or Redux values
- * if the query parameter is not valid.
- *
- * @param {string} verseFromQueryParamValue
- * @param {string} surahID
- * @returns {string}
- */
-export const getVerseToOrFromFromKey = (
-  verseFromQueryParamValue: string,
-  surahID: string,
-): string => {
-  return getVerseNumberFromKey(verseFromQueryParamValue)
-    ? verseFromQueryParamValue
-    : `${surahID}:${verseFromQueryParamValue}`;
-};
-
-/**
- * Since the verse key is in the format of surah:verseNumber
- * and verse from and to are linked, we check if the verse from
- * is less than the verse to and the verse to is less than the total
- * number of verses in the chapter.
+ * This function will make sure the verse from and verse to are valid
+ * and within the bounds of the chapter data
  *
  * @param {QueryParam} queryParam
  * @param {ChaptersData} chaptersData
- * @param {SurahAndVerses} surahAndVersesReduxValues
  * @param {ParsedUrlQuery} query
  * @returns {boolean}
  */
 export const isValidVerseToOrFrom = (
   queryParam: QueryParam.VERSE_TO | QueryParam.VERSE_FROM,
   chaptersData: ChaptersData,
-  surahAndVersesReduxValues: SurahAndVerses,
   query: ParsedUrlQuery,
 ): boolean => {
   const isVerseFrom = queryParam === QueryParam.VERSE_FROM;
-  const { surah: surahReduxValue } = surahAndVersesReduxValues;
   const verseFromQueryParamValue = String(query[QueryParam.VERSE_FROM]);
   const verseToQueryParamValue = String(query[QueryParam.VERSE_TO]);
-  const surahQueryParamValue = String(query[QueryParam.SURAH]);
-  const surahID = isValidChapterId(surahQueryParamValue)
-    ? surahQueryParamValue
-    : String(surahReduxValue);
+  const surahID = String(query[QueryParam.SURAH]);
 
-  const verseFromKey = getVerseToOrFromFromKey(verseFromQueryParamValue, surahID);
-  const verseToKey = getVerseToOrFromFromKey(verseToQueryParamValue, surahID);
+  const verseFromKey = `${surahID}:${verseFromQueryParamValue}`;
+  const verseToKey = `${surahID}:${verseToQueryParamValue}`;
   const isValidValue = isValidVerseKey(chaptersData, isVerseFrom ? verseFromKey : verseToKey);
   const versesCount = getChapterData(chaptersData, surahID)?.versesCount;
 
@@ -278,4 +211,16 @@ export const isValidVerseToOrFrom = (
     return isValidValue && isValidVerseFrom(verseFromKey, verseToKey, versesCount, surahID);
   }
   return isValidValue && isValidVerseTo(verseFromKey, verseToKey, versesCount, surahID);
+};
+
+/**
+ * This function will make sure the string passed is a valid hex color
+ *
+ * @param {string} color
+ * @returns {boolean}
+ */
+export const isValidHexColor = (color: string) => {
+  // Regular expression to match a valid hex color
+  const hexPattern = /^#([A-Fa-f0-9]{3}|[A-Fa-f0-9]{6})$/;
+  return hexPattern.test(color);
 };

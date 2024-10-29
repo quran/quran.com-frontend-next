@@ -146,12 +146,17 @@
     "verify-code": "Code verifiëren"
   },
   "error": {
+    "MediaVersesRangeLimitExceeded": "U kunt maximaal {{limit}} verzen tegelijk selecteren. Selecteer een kleiner bereik.",
     "bookmark-sync": "Bladwijzer loopt niet synchroon.",
     "email-login-fail": "Inloggen met e-mail is mislukt. Probeer het opnieuw",
     "general": "Er is iets fout gegaan. Probeer het opnieuw.",
     "offline": "Het lijkt erop dat je je verbinding bent kwijtgeraakt. Controleer het en probeer het opnieuw.",
-    "pref-persist-fail": "Kan je instellingen niet synchroniseren met de cloud."
+    "pref-persist-fail": "Kan je instellingen niet synchroniseren met de cloud.",
+    "ranges-no-value": "Het begin en einde van het bereik moeten een waarde hebben",
+    "ranges-too-many-verses": "*Max {{maxNumberOfVerses}} Ayahs",
+    "ranges-wrong-order": "Het beginvers moet vóór het eindvers staan."
   },
+  "exciting-updates": "Spannende updates",
   "feedback": "Feedback",
   "fonts": {
     "15_lines": "15 lijnen",
@@ -161,12 +166,16 @@
     "font-size": "Lettertypegrootte",
     "lines": "lijnen",
     "qcf-desc": "Koning Fahad Complex (V1 en V2) Fonts bieden een hogere kwaliteit, maar laden duurt langer.",
+    "qcf-v4-desc": "Tajweed-lettertypen zijn gemaakt met behulp van Easy Quran - Dar Al Marifa Tajweed Mushaf en King Fahad Glorious Quran Printing Complex (KFGQPC) - Uthmanic Hafs V4-lettertypen, nadat we van beide partijen toestemming hadden gekregen.",
     "qpc_uthmani_hafs": "QPC Uthmani Hafs",
     "quran-font": "Koran lettertype",
+    "quran-font-size": "Koran lettergrootte",
     "tajweed": "Tajweed",
     "tajweed-desc": "Tajweed lettertype toont een Tajweed gekleurde Mushaf. Meer over de Tajweed kleurregels lees je <0> hier <\/0>",
+    "tajweed_v4": "Koning Fahad Complex V4",
     "text_indopak": "IndoPak",
-    "text_uthmani": "Uthmani"
+    "text_uthmani": "Uthmani",
+    "translation-font-size": "Vertaling lettergrootte"
   },
   "footer": {
     "description": "Quran.com is een Sadaqah Jariyah. We hopen het voor iedereen gemakkelijk te maken om de Edele Koran te lezen, te bestuderen en te leren. De Edele Koran heeft vele namen, waaronder Al-Quran Al-Kareem, Al-Ketab, Al-Furqan, Al-Maw'itha, Al-Thikr en Al-Noor.",
@@ -296,10 +305,12 @@
     "title": "Zoeken"
   },
   "seconds": "Seconden",
+  "see-new": "Bekijk wat er nieuw is",
   "settings": {
     "no-tafsir-selected": "Geen tafsir geselecteerd",
     "no-translation-selected": "Geen vertaling geselecteerd",
     "reading-experience": "Leeservaring",
+    "reset": "Opnieuw instellen",
     "reset-cta": "Reset instellingen",
     "reset-notif": "Je instellingen zijn teruggezet naar de standaardinstellingen",
     "search-reciter": "Zoek voordrager",
@@ -350,6 +361,7 @@
     "app": "Tarteel-app",
     "name": "Tarteel.ai"
   },
+  "terms-and-conditions": "Algemene voorwaarden",
   "theme": "Thema",
   "themes": {
     "auto": "Auto",

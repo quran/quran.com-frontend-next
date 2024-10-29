@@ -16,14 +16,19 @@ const INTERNAL_CLIENT_HEADERS = {
   INTERNAL_CLIENT: 'x-internal-client',
 };
 
-// Increase the max listeners to avoid memory leak
-EventEmitter.defaultMaxListeners = 20;
+// This line increases the default maximum number of event listeners for the EventEmitter to a better number like 20.
+// It is necessary to prevent memory leak warnings when multiple listeners are added,
+// which can occur in a proxy setup like this where multiple requests are handled concurrently.
+EventEmitter.defaultMaxListeners = Number(process.env.PROXY_DEFAULT_MAX_LISTENERS) || 100;
 
+// This file sets up a proxy middleware for API requests. It is needed to forward requests from the frontend
+// to the backend server, allowing for features like cookie handling and request body fixing, which are essential
+// for maintaining session state and ensuring correct request formatting while in a cross domain env.
 const apiProxy = createProxyMiddleware<NextApiRequest, NextApiResponse>({
   target: process.env.NEXT_PUBLIC_AUTH_BASE_URL,
   changeOrigin: true,
   pathRewrite: { '^/api/proxy': '' }, // eslint-disable-line @typescript-eslint/naming-convention
-  secure: false, // Disable SSL verification to avoid UNABLE_TO_VERIFY_LEAF_SIGNATURE error
+  secure: process.env.NEXT_PUBLIC_VERCEL_ENV === 'production', // Disable SSL verification to avoid UNABLE_TO_VERIFY_LEAF_SIGNATURE error for dev
   logger: console,
 
   on: {

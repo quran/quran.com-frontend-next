@@ -2,6 +2,13 @@
 $white: #fff;
 $colorPickerBorderRadius: calc(var(--spacing-medium) * 3);
 
+.separatorContainer {
+  margin-block: var(--spacing-large);
+  @include breakpoints.smallerThanTablet {
+    display: none;
+  }
+}
+
 .container {
   display: flex;
   flex-direction: column;
@@ -112,7 +119,7 @@ $colorPickerBorderRadius: calc(var(--spacing-medium) * 3);
 }
 
 .settings {
-  width: 85%;
+  width: 90%;
   align-self: center;
 }
 

@@ -12,6 +12,7 @@ import ShareVerseActionsMenu, { VerseActionsOverflowMenu } from './ShareVerseAct
 
 import WordByWordVerseAction from '@/components/QuranReader/ReadingView/WordByWordVerseAction';
 import NewLabel from '@/dls/Badge/NewLabel';
+import IconContainer, { IconSize } from '@/dls/IconContainer/IconContainer';
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import ChevronRightIcon from '@/icons/chevron-right.svg';
 import ShareIcon from '@/icons/share.svg';
@@ -65,7 +66,12 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
           {t('share')}
           <div className={styles.newLabelContainer}>
             <NewLabel />
-            <ChevronRightIcon />
+            <IconContainer
+              shouldForceSetColors={false}
+              icon={<ChevronRightIcon />}
+              shouldFlipOnRTL
+              size={IconSize.Small}
+            />
           </div>
         </div>
       </PopoverMenu.Item>

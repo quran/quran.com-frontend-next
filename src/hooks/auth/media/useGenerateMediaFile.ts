@@ -18,24 +18,29 @@ export enum RenderStatus {
 export type State =
   | {
       status: RenderStatus.INIT;
+      errorDetails?: any;
     }
   | {
       status: RenderStatus.INVOKING;
+      errorDetails?: any;
     }
   | {
       renderId: string;
       progress: number;
       status: RenderStatus.RENDERING;
+      errorDetails?: any;
     }
   | {
       renderId: string | null;
       status: RenderStatus.ERROR;
       error: Error;
+      errorDetails?: any;
     }
   | {
       url: string;
       progress: number;
       status: RenderStatus.DONE;
+      errorDetails?: any;
     };
 
 const wait = async (milliSeconds: number) => {
@@ -71,6 +76,7 @@ export const useGenerateMediaFile = (inputProps: GenerateMediaFileRequest) => {
           setState({
             status: RenderStatus.ERROR,
             error: new Error(t(`error.${response.error.code}`, details)),
+            errorDetails: response.error,
             renderId: null,
           });
           return;

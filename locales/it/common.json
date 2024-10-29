@@ -146,12 +146,17 @@
     "verify-code": "Verificare il codice"
   },
   "error": {
+    "MediaVersesRangeLimitExceeded": "Puoi selezionare solo fino a {{limit}} versi alla volta. Seleziona un intervallo più piccolo.",
     "bookmark-sync": "Il segnalibro non è sincronizzato.",
     "email-login-fail": "Impossibile accedere con l'e-mail. Per favore riprova",
     "general": "Qualcosa è andato storto. Per favore riprova.",
     "offline": "Sembra che tu abbia perso la connessione. Si prega di controllare e riprovare.",
-    "pref-persist-fail": "Impossibile sincronizzare le impostazioni sul cloud."
+    "pref-persist-fail": "Impossibile sincronizzare le impostazioni sul cloud.",
+    "ranges-no-value": "L'inizio e la fine dell'intervallo devono avere un valore",
+    "ranges-too-many-verses": "*Max {{maxNumberOfVerses}} versetti",
+    "ranges-wrong-order": "Il verso iniziale deve precedere quello finale."
   },
+  "exciting-updates": "Aggiornamenti entusiasmanti",
   "feedback": "Feedback",
   "fonts": {
     "15_lines": "15 linee",
@@ -161,12 +166,16 @@
     "font-size": "Dimensione del font",
     "lines": "Linee",
     "qcf-desc": "I font Complesso King Fahad (V1 e V2) offrono una qualità superiore ma richiedono un caricamento più lungo.",
+    "qcf-v4-desc": "I font Tajweed sono stati creati utilizzando Easy Quran - Dar Al Marifa Tajweed Mushaf e King Fahad Glorious Quran Printing Complex (KFGQPC) - Uthmanic Hafs V4 Fonts dopo aver ricevuto l'autorizzazione da entrambi.",
     "qpc_uthmani_hafs": "QPC Uthmani Hafs",
     "quran-font": "Carattere del Corano",
+    "quran-font-size": "Dimensione del carattere del Corano",
     "tajweed": "Tajweed",
     "tajweed-desc": "Il carattere Tajweed mostra un Mushaf colorato di Tajweed. Puoi leggere di più sulle regole dei colori Tajweed <0> qui <\/0>",
+    "tajweed_v4": "Complesso di Re Fahad V4",
     "text_indopak": "IndoPak",
-    "text_uthmani": "Uthmani"
+    "text_uthmani": "Uthmani",
+    "translation-font-size": "Dimensione del carattere della traduzione"
   },
   "footer": {
     "description": "Quran.com è un Sadaqah Jariyah. Speriamo di rendere facile per tutti la lettura, lo studio e l'apprendimento del Nobile Corano. Il Nobile Corano ha molti nomi tra cui Al-Quran Al-Kareem, Al-Ketab, Al-Furqan, Al-Maw'itha, Al-Thikr e Al-Noor.",
@@ -296,10 +305,12 @@
     "title": "Ricerca"
   },
   "seconds": "Secondi",
+  "see-new": "Guarda le novità",
   "settings": {
     "no-tafsir-selected": "Nessun tafsir selezionato",
     "no-translation-selected": "Nessuna traduzione selezionata",
     "reading-experience": "Esperienza di lettura",
+    "reset": "Reset",
     "reset-cta": "Ripristina le impostazioni",
     "reset-notif": "Le tue impostazioni sono state ripristinate a quelle predefinite",
     "search-reciter": "Cerca Relatore",
@@ -323,7 +334,7 @@
     "search-hizb": "Cerca Hizb",
     "search-juz": "Cerca Juz",
     "search-page": "Pagina di ricerca",
-    "search-surah": "Cerca sura",
+    "search-surah": "Cerca Sura",
     "try-navigating-with": "Suggerimento: prova a navigare con"
   },
   "sitemap": "Mappa del sito",
@@ -350,6 +361,7 @@
     "app": "App Tarteel",
     "name": "Tarteel.ai"
   },
+  "terms-and-conditions": "Termini e Condizioni",
   "theme": "Tema",
   "themes": {
     "auto": "Auto",
