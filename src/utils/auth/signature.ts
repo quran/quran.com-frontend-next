@@ -45,6 +45,7 @@ const generateSignature = (req: NextApiRequest): { signature: string; timestamp:
       params = req.body;
     }
   } catch (err) {
+    // eslint-disable-next-line no-console
     console.error('Error parsing request body:', err);
   }
 

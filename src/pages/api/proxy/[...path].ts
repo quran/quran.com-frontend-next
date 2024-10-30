@@ -2,6 +2,7 @@ import { EventEmitter } from 'events';
 
 import { createProxyMiddleware, fixRequestBody } from 'http-proxy-middleware';
 import { NextApiRequest, NextApiResponse } from 'next';
+
 import generateSignature from '@/utils/auth/signature';
 
 // Define error messages in a constant object
@@ -10,13 +11,11 @@ const ERROR_MESSAGES = {
   PROXY_HANDLER_ERROR: 'Proxy handler error',
 };
 
-
 const INTERNAL_CLIENT_HEADERS = {
   AUTH_SIGNATURE: 'x-auth-signature',
   TIMESTAMP: 'x-timestamp',
   INTERNAL_CLIENT: 'x-internal-client',
 };
-
 
 // This line increases the default maximum number of event listeners for the EventEmitter to a better number like 20.
 // It is necessary to prevent memory leak warnings when multiple listeners are added,
