@@ -1,6 +1,7 @@
 import { decamelizeKeys } from 'humps';
 
 import stringify from './qs-stringify';
+import { getBasePath } from './url';
 
 import { Mushaf, MushafLines, QuranFont, QuranFontMushaf } from 'types/QuranReader';
 
@@ -23,8 +24,10 @@ export const API_HOST =
  * @returns {string}
  */
 export const makeUrl = (path: string, parameters?: Record<string, unknown>): string => {
+  const BASE_PATH = getBasePath();
+  const API_PROXY = `${BASE_PATH}/api/proxy/content`;
   if (!parameters) {
-    return `${API_HOST}${API_ROOT_PATH}${path}`;
+    return `${API_PROXY}${API_ROOT_PATH}${path}`;
   }
 
   const decamelizedParams = decamelizeKeys(parameters);
@@ -32,7 +35,7 @@ export const makeUrl = (path: string, parameters?: Record<string, unknown>): str
   // The following section parses the query params for convenience
   // E.g. parses {a: 1, b: 2} to "?a=1&b=2"
   const queryParameters = `?${stringify(decamelizedParams)}`;
-  return `${API_HOST}${API_ROOT_PATH}${path}${queryParameters}`;
+  return `${API_PROXY}${API_ROOT_PATH}${path}${queryParameters}`;
 };
 
 /**

@@ -26,7 +26,7 @@ EventEmitter.defaultMaxListeners = Number(process.env.PROXY_DEFAULT_MAX_LISTENER
 // to the backend server, allowing for features like cookie handling and request body fixing, which are essential
 // for maintaining session state and ensuring correct request formatting while in a cross domain env.
 const apiProxy = createProxyMiddleware<NextApiRequest, NextApiResponse>({
-  target: process.env.NEXT_PUBLIC_AUTH_BASE_URL,
+  target: process.env.NEXT_PUBLIC_API_GATEWAY_URL,
   changeOrigin: true,
   pathRewrite: { '^/api/proxy': '' }, // eslint-disable-line @typescript-eslint/naming-convention
   secure: process.env.NEXT_PUBLIC_VERCEL_ENV === 'production', // Disable SSL verification to avoid UNABLE_TO_VERIFY_LEAF_SIGNATURE error for dev
