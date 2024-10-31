@@ -384,30 +384,39 @@ const Search: NextPage<SearchProps> = ({ translations }): JSX.Element => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  const [availableLanguagesResponse, availableTranslationsResponse] = await Promise.all([
-    getAvailableLanguages(locale),
-    getAvailableTranslations(locale),
-  ]);
+  try {
+    const [availableLanguagesResponse, availableTranslationsResponse] = await Promise.all([
+      getAvailableLanguages(locale, true),
+      getAvailableTranslations(locale, true),
+    ]);
 
-  let translations = [];
-  let languages = [];
-  if (availableLanguagesResponse.status !== 500) {
-    const { languages: responseLanguages } = availableLanguagesResponse;
-    languages = responseLanguages;
-  }
-  if (availableTranslationsResponse.status !== 500) {
-    const { translations: responseTranslations } = availableTranslationsResponse;
-    translations = responseTranslations;
-  }
-  const chaptersData = await getAllChaptersData(locale);
+    let translations = [];
+    let languages = [];
+    if (availableLanguagesResponse.status !== 500) {
+      const { languages: responseLanguages } = availableLanguagesResponse;
+      languages = responseLanguages;
+    }
+    if (availableTranslationsResponse.status !== 500) {
+      const { translations: responseTranslations } = availableTranslationsResponse;
+      translations = responseTranslations;
+    }
+    const chaptersData = await getAllChaptersData(locale);
 
-  return {
-    props: {
-      chaptersData,
-      languages,
-      translations,
-    },
-  };
+    return {
+      props: {
+        chaptersData,
+        languages,
+        translations,
+      },
+    };
+  } catch (e) {
+    console.log(e);
+    return {
+      props: {
+        hasError: true,
+      },
+    };
+  }
 };
 
 export default Search;

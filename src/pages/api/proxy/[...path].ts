@@ -3,6 +3,9 @@ import { EventEmitter } from 'events';
 import { createProxyMiddleware, fixRequestBody } from 'http-proxy-middleware';
 import { NextApiRequest, NextApiResponse } from 'next';
 
+import { X_AUTH_SIGNATURE, X_INTERNAL_CLIENT, X_TIMESTAMP } from '@/api';
+import generateSignature from '@/utils/auth/signature';
+
 // Define error messages in a constant object
 const ERROR_MESSAGES = {
   PROXY_ERROR: 'Proxy error',
@@ -18,7 +21,7 @@ EventEmitter.defaultMaxListeners = Number(process.env.PROXY_DEFAULT_MAX_LISTENER
 // to the backend server, allowing for features like cookie handling and request body fixing, which are essential
 // for maintaining session state and ensuring correct request formatting while in a cross domain env.
 const apiProxy = createProxyMiddleware<NextApiRequest, NextApiResponse>({
-  target: process.env.NEXT_PUBLIC_AUTH_BASE_URL,
+  target: process.env.API_GATEWAY_URL,
   changeOrigin: true,
   pathRewrite: { '^/api/proxy': '' }, // eslint-disable-line @typescript-eslint/naming-convention
   secure: process.env.NEXT_PUBLIC_VERCEL_ENV === 'production', // Disable SSL verification to avoid UNABLE_TO_VERIFY_LEAF_SIGNATURE error for dev
@@ -30,6 +33,14 @@ const apiProxy = createProxyMiddleware<NextApiRequest, NextApiResponse>({
       if (req.headers.cookie) {
         proxyReq.setHeader('Cookie', req.headers.cookie);
       }
+
+      // Generate and attach signature headers
+      const requestUrl = `${process.env.API_GATEWAY_URL}${req.url}`;
+      const { signature, timestamp } = generateSignature(req, requestUrl);
+
+      proxyReq.setHeader(X_AUTH_SIGNATURE, signature);
+      proxyReq.setHeader(X_TIMESTAMP, timestamp);
+      proxyReq.setHeader(X_INTERNAL_CLIENT, process.env.INTERNAL_CLIENT_ID);
 
       // Fix the request body if bodyParser is involved
       fixRequestBody(proxyReq, req);
