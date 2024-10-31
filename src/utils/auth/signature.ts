@@ -35,8 +35,10 @@ const recursiveSortedObjectToString = (params: any): string => {
  * @returns {{ signature: string; timestamp: string }} - The generated signature and timestamp.
  */
 // Start of Selection
-const generateSignature = (req: NextApiRequest): { signature: string; timestamp: string } => {
-  const url = `${process.env.NEXT_PUBLIC_API_GATEWAY_URL}${req.url}`;
+const generateSignature = (
+  req: NextApiRequest,
+  url: string,
+): { signature: string; timestamp: string } => {
   const currentTimestamp = new Date().getTime().toString();
   let params = {};
 

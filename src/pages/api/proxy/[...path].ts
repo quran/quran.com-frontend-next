@@ -3,18 +3,13 @@ import { EventEmitter } from 'events';
 import { createProxyMiddleware, fixRequestBody } from 'http-proxy-middleware';
 import { NextApiRequest, NextApiResponse } from 'next';
 
+import { X_AUTH_SIGNATURE, X_INTERNAL_CLIENT, X_TIMESTAMP } from '@/api';
 import generateSignature from '@/utils/auth/signature';
 
 // Define error messages in a constant object
 const ERROR_MESSAGES = {
   PROXY_ERROR: 'Proxy error',
   PROXY_HANDLER_ERROR: 'Proxy handler error',
-};
-
-const INTERNAL_CLIENT_HEADERS = {
-  AUTH_SIGNATURE: 'x-auth-signature',
-  TIMESTAMP: 'x-timestamp',
-  INTERNAL_CLIENT: 'x-internal-client',
 };
 
 // This line increases the default maximum number of event listeners for the EventEmitter to a better number like 20.
@@ -40,11 +35,12 @@ const apiProxy = createProxyMiddleware<NextApiRequest, NextApiResponse>({
       }
 
       // Generate and attach signature headers
-      const { signature, timestamp } = generateSignature(req);
+      const requestUrl = `${process.env.NEXT_PUBLIC_API_GATEWAY_URL}${req.url}`;
+      const { signature, timestamp } = generateSignature(req, requestUrl);
 
-      proxyReq.setHeader(INTERNAL_CLIENT_HEADERS.AUTH_SIGNATURE, signature);
-      proxyReq.setHeader(INTERNAL_CLIENT_HEADERS.TIMESTAMP, timestamp);
-      proxyReq.setHeader(INTERNAL_CLIENT_HEADERS.INTERNAL_CLIENT, process.env.INTERNAL_CLIENT_ID);
+      proxyReq.setHeader(X_AUTH_SIGNATURE, signature);
+      proxyReq.setHeader(X_TIMESTAMP, timestamp);
+      proxyReq.setHeader(X_INTERNAL_CLIENT, process.env.INTERNAL_CLIENT_ID);
 
       // Fix the request body if bodyParser is involved
       fixRequestBody(proxyReq, req);
