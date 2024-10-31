@@ -1,6 +1,7 @@
 import { decamelizeKeys } from 'humps';
 
 import stringify from './qs-stringify';
+import { getBasePath } from './url';
 
 import { Mushaf, MushafLines, QuranFont, QuranFontMushaf } from 'types/QuranReader';
 
@@ -15,16 +16,26 @@ const API_ROOT_PATH = '/api/qdc';
 export const API_HOST =
   process.env.NEXT_PUBLIC_VERCEL_ENV === 'production' ? PRODUCTION_API_HOST : STAGING_API_HOST;
 
+const { API_GATEWAY_URL } = process.env;
+
 /**
  * Generates a url to make an api call to our backend
  *
  * @param {string} path the path for the call
  * @param {Record<string, unknown>} parameters optional query params, {a: 1, b: 2} is parsed to "?a=1&b=2"
+ * @param {boolean} [isStaticBuild=false] - Flag indicating if the URL is for a static build.
  * @returns {string}
  */
-export const makeUrl = (path: string, parameters?: Record<string, unknown>): string => {
+export const makeUrl = (
+  path: string,
+  parameters?: Record<string, unknown>,
+  isStaticBuild: boolean = false,
+): string => {
+  const BASE_PATH = getBasePath();
+  const API_PROXY = `${BASE_PATH}/api/proxy/content`;
+  const API_URL = isStaticBuild ? `${API_GATEWAY_URL}/content` : API_PROXY;
   if (!parameters) {
-    return `${API_HOST}${API_ROOT_PATH}${path}`;
+    return `${API_URL}${API_ROOT_PATH}${path}`;
   }
 
   const decamelizedParams = decamelizeKeys(parameters);
@@ -32,7 +43,7 @@ export const makeUrl = (path: string, parameters?: Record<string, unknown>): str
   // The following section parses the query params for convenience
   // E.g. parses {a: 1, b: 2} to "?a=1&b=2"
   const queryParameters = `?${stringify(decamelizedParams)}`;
-  return `${API_HOST}${API_ROOT_PATH}${path}${queryParameters}`;
+  return `${API_URL}${API_ROOT_PATH}${path}${queryParameters}`;
 };
 
 /**

@@ -53,4 +53,4 @@ export const getBasePath = (): string =>
  * @param {string} path
  * @returns  {string}
  */
-export const getAuthApiPath = (path: string): string => `/api/proxy/${path}`;
+export const getAuthApiPath = (path: string): string => `/api/proxy/auth/${path}`;
