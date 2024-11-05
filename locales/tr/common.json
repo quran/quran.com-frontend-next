@@ -7,11 +7,11 @@
       "data-sync": {
         "action": "Sonraki",
         "description": "Kuran.com'u telefonunuzda veya dizüstü bilgisayarınızda kullanıyor olsanız da, yer imleriniz, son okunan ayetler ve tercihleriniz mevcut olacak.",
-        "title": "Verileriniz cihazlar arasında <br><\/br> senkronize edilecek"
+        "title": "Verileriniz cihazlar arasında <br></br> senkronize edilecek"
       },
       "feedback": {
         "action": "Tamam, anladım.",
-        "description": "Kuran.com'u kullandığınız için teşekkür ederiz ve <link> feedback.quran.com <\/link> ile ilgili görüşlerinizi duymaktan memnuniyet duyarız.",
+        "description": "Kuran.com'u kullandığınız için teşekkür ederiz ve <link> feedback.quran.com </link> ile ilgili görüşlerinizi duymaktan memnuniyet duyarız.",
         "title": "Düşüncelerinizi duymak istiyoruz"
       },
       "quran-foundation-link": {
@@ -26,12 +26,12 @@
       },
       "welcome": {
         "action": "Yeniliklere bakın",
-        "title": "Kuran.com'a Hoş Geldiniz <br><\/br> Kullanıcı Hesabı"
+        "title": "Kuran.com'a Hoş Geldiniz <br></br> Kullanıcı Hesabı"
       }
     },
     "collections-announcement": {
       "slide-1": {
-        "description": "Artık yer imlerini \"koleksiyonlar\" altında gruplayabileceğinizi duyurmaktan çok mutluyuz! <br\/> <br\/> <li> İstediğiniz kadar koleksiyon ekleyin <\/li> <li> Bir veya daha fazla koleksiyona yer imi ekleyin <\/li> <li> Ve daha fazlası! <\/li>",
+        "description": "Artık yer imlerini \"koleksiyonlar\" altında gruplayabileceğinizi duyurmaktan çok mutluyuz! <br/> <br/> <li> İstediğiniz kadar koleksiyon ekleyin </li> <li> Bir veya daha fazla koleksiyona yer imi ekleyin </li> <li> Ve daha fazlası! </li>",
         "title": "Yer imi koleksiyonları burada!"
       }
     }
@@ -52,8 +52,8 @@
       "title": "Otomatik kaydırma"
     },
     "displaying": "gösteriliyor",
-    "exp-tip": "<span>altında görüntülenen içeriği değiştirin<\/span><br><\/br> <boldSpan>Kelime Kelime<\/boldSpan> > <boldSpan>Ayarlar<\/boldSpan>",
-    "exp-tip-no-select": "<span>Araç ipucu görüntüleme seçeneğini işaretleyin ve <br><\/br>Ayarlar<\/span><br><\/br><span> Çeviri ve\/veya Harf Çevirisi <\/span><boldSpan>seçin<\/boldSpan> > <boldSpan>Kelime kelime<\/boldSpan><span>, bu özelliği<\/span><br><\/br> <span>etkinleştirmek için.<\/span>",
+    "exp-tip": "<span>altında görüntülenen içeriği değiştirin</span><br></br> <boldSpan>Kelime Kelime</boldSpan> > <boldSpan>Ayarlar</boldSpan>",
+    "exp-tip-no-select": "<span>Araç ipucu görüntüleme seçeneğini işaretleyin ve <br></br>Ayarlar</span><br></br><span> Çeviri ve/veya Harf Çevirisi </span><boldSpan>seçin</boldSpan> > <boldSpan>Kelime kelime</boldSpan><span>, bu özelliği</span><br></br> <span>etkinleştirmek için.</span>",
     "experience": "Deneyim",
     "play": "Okut",
     "playback-normal": "Normal",
@@ -85,7 +85,7 @@
       "verses-range": "Ayet aralığı",
       "volume-control": "Ses kontrol"
     },
-    "repeat-moved": "Tekrarlama ayarları müzik çalara taşındı. Erişmek için <0> <\/0> simgesine tıklayın",
+    "repeat-moved": "Tekrarlama ayarları müzik çalara taşındı. Erişmek için <0> </0> simgesine tıklayın",
     "select-reciter": "Okuyucu Seçin",
     "speed": "Hız",
     "title": "Ses"
@@ -117,8 +117,8 @@
   "complete-sign-up": "Kaydınızı tamamlayın",
   "consents": {
     "communication": {
-      "body": "🚀 Hedef ilerlemeniz, serilerinizi sürdürmeniz ve mevcut özelliklerimizi daha iyi kullanmanızı sağlayan <boldSpan> kişiselleştirilmiş <\/boldSpan> bildirimleri aracılığıyla ilerlemenizi güçlendirin. <br><\/br> <br><\/br> Sizi e-posta ve diğer kanallar aracılığıyla gelişmelerden haberdar edebilir miyiz? Kontrol sizde; bu tercihleri istediğiniz zaman hesap ayarlarınızdan değiştirmekten çekinmeyin. <br><\/br> <br><\/br> <boldSpan> ilham veren hatırlatıcılar <\/boldSpan> için 'İzin Ver'i veya reddetmek için 'Şimdi Değil'i seçmeniz yeterli.",
-      "header": "Kuran Büyüme Yolculuğunuzda <boldSpan> kararlı ve tutarlı <\/boldSpan> kalmanıza yardımcı olmayı çok isteriz! 📖🌟"
+      "body": "🚀 Hedef ilerlemeniz, serilerinizi sürdürmeniz ve mevcut özelliklerimizi daha iyi kullanmanızı sağlayan <boldSpan> kişiselleştirilmiş </boldSpan> bildirimleri aracılığıyla ilerlemenizi güçlendirin. <br></br> <br></br> Sizi e-posta ve diğer kanallar aracılığıyla gelişmelerden haberdar edebilir miyiz? Kontrol sizde; bu tercihleri istediğiniz zaman hesap ayarlarınızdan değiştirmekten çekinmeyin. <br></br> <br></br> <boldSpan> ilham veren hatırlatıcılar </boldSpan> için 'İzin Ver'i veya reddetmek için 'Şimdi Değil'i seçmeniz yeterli.",
+      "header": "Kuran Büyüme Yolculuğunuzda <boldSpan> kararlı ve tutarlı </boldSpan> kalmanıza yardımcı olmayı çok isteriz! 📖🌟"
     }
   },
   "continue": "Devam et",
@@ -139,7 +139,7 @@
   "edit": "Düzenlemek",
   "email-verification": {
     "check-spam": "Doğrulama e-postasını almadınız mı? Spam gelen kutunuzu kontrol edin",
-    "email-sent": "Az önce <strong> {{email}} <\/strong> adresine bir e-posta gönderdik.",
+    "email-sent": "Az önce <strong> {{email}} </strong> adresine bir e-posta gönderdik.",
     "email-verification": "Eposta Doğrulama",
     "resend-email": "Emaili yeniden gönder",
     "resend-email-in": "Doğrulama e-postasını {{remainingTime}} saniye içinde yeniden gönderin...",
@@ -171,7 +171,7 @@
     "quran-font": "Kuran Yazı Tipi",
     "quran-font-size": "Kuran yazı boyutu",
     "tajweed": "Tecvid",
-    "tajweed-desc": "Tecvid yazı tipi, Tecvid renkli bir Mushaf gösterir. Tacvid renk kuralları hakkında daha fazla bilgiyi <0>buradan<\/0> okuyabilirsiniz",
+    "tajweed-desc": "Tecvid yazı tipi, Tecvid renkli bir Mushaf gösterir. Tacvid renk kuralları hakkında daha fazla bilgiyi <0>buradan</0> okuyabilirsiniz",
     "tajweed_v4": "Kral Fahad Kompleksi V4",
     "text_indopak": "Hint Paketi",
     "text_uthmani": "Osmanca",
@@ -179,7 +179,7 @@
   },
   "footer": {
     "description": "Kuran.com bir sadaka-i cariyedir. Herkesin Kur'an-ı Kerim'i okumasını, incelemesini ve öğrenmesini kolaylaştırmayı umuyoruz. Kur'an-ı Kerim'in Al-Quran Al-Kareem, Al-Ketab, Al-Furqan, Al-Maw'itha, Al-Thikr ve Al-Noor gibi birçok ismi vardır.",
-    "hiring": "İşe alıyoruz! Kuran Vakfı ekibine katılın ve misyonumuza katkıda bulunun. <link> Şimdi başvurun! <\/link>",
+    "hiring": "İşe alıyoruz! Kuran Vakfı ekibine katılın ve misyonumuza katkıda bulunun. <link> Şimdi başvurun! </link>",
     "rights": "Her hakkı saklıdır",
     "title": "Kur'an-ı Kerim'i okuyun, inceleyin ve öğrenin."
   },
@@ -249,7 +249,7 @@
   "on": "Açık",
   "page": "Sayfa",
   "pages": "Sayfalar",
-  "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} \/ {{totalNumberOfResults}} arama sonucu",
+  "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} / {{totalNumberOfResults}} arama sonucu",
   "pbuh": "Allah'ın selamı onun üzerine olsun",
   "popular-links": "Popüler Bağlantılar",
   "popup": {
@@ -278,7 +278,7 @@
   },
   "recitation": "okuma",
   "reciter": "Okuyucu",
-  "reciter-summary": "Kelime kelime okuyucu: <span> {{reciterName}} <\/span> . Okunuşunu dinlemek için bir kelimeye tıklayın.",
+  "reciter-summary": "Kelime kelime okuyucu: <span> {{reciterName}} </span> . Okunuşunu dinlemek için bir kelimeye tıklayın.",
   "reciters": "Okuyucular",
   "reflect": "Yansıt",
   "reflections": "Yansımalar",
@@ -369,7 +369,7 @@
     "light": "Aydınlık",
     "sepia": "Sepya",
     "system": "Sistem",
-    "system-desc": "Sistem teması, aydınlık\/karanlık modu ayarlarınıza otomatik olarak uyarlar"
+    "system-desc": "Sistem teması, aydınlık/karanlık modu ayarlarınıza otomatik olarak uyarlar"
   },
   "to": "NS",
   "tooltip": "Araç ipucu",
@@ -379,6 +379,7 @@
   "translations": "Çeviriler",
   "transliteration": "Okunuş",
   "type": "Tip",
+  "unavailable": "Şu anda mevcut değil",
   "undo": "Geri alma",
   "validation": {
     "invalid-email": "{{field}} geçerli bir e-posta adresi olmalıdır",
@@ -403,7 +404,7 @@
     "voice-search-powered-by": "Sesli Aramayı Destekleyen"
   },
   "wbw": "Kelime kelime",
-  "wbw-lang-summary": "Kelime kelime çeviri kaynağı: <link> {{source}} <\/link> . Bu kaynak ayet çeviri seçiminden bağımsızdır.",
+  "wbw-lang-summary": "Kelime kelime çeviri kaynağı: <link> {{source}} </link> . Bu kaynak ayet çeviri seçiminden bağımsızdır.",
   "wbw-trans-lang": "Kelime Dilinden Kelime",
   "wbw-translation": "Kelime Kelime Okunuş",
   "wbw-transliteration": "Kelime Kelime Meal",

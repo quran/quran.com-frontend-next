@@ -7,11 +7,11 @@
       "data-sync": {
         "action": "Lanjut",
         "description": "Baik Anda menggunakan Quran.com di ponsel ataupun laptop, Penanda Anda, ayat yang terakhir dibaca, dan preferensi Anda akan tersedia",
-        "title": "Data Anda akan disinkronkan <br><\/br> di seluruh perangkat"
+        "title": "Data Anda akan disinkronkan <br></br> di seluruh perangkat"
       },
       "feedback": {
         "action": "OK saya mengerti",
-        "description": "Terima kasih telah menggunakan Quran.com dan silakan beri tanggapan Anda di <link> feedback.quran.com <\/link>",
+        "description": "Terima kasih telah menggunakan Quran.com dan silakan beri tanggapan Anda di <link> feedback.quran.com </link>",
         "title": "Kami ingin tahu pendapat Anda"
       },
       "quran-foundation-link": {
@@ -26,12 +26,12 @@
       },
       "welcome": {
         "action": "Lihat apa yang baru",
-        "title": "Selamat datang di Quran.com <br><\/br> Akun Pengguna"
+        "title": "Selamat datang di Quran.com <br></br> Akun Pengguna"
       }
     },
     "collections-announcement": {
       "slide-1": {
-        "description": "Kami sangat senang mengumumkan bahwa sekarang Anda dapat mengelompokkan Penanda di bawah \"koleksi\"! <br\/> <br\/> <li> Tambahkan koleksi sebanyak yang Anda inginkan <\/li> <li> Tambahkan Penanda ke satu atau beberapa koleksi <\/li> <li> Dan banyak lagi! <\/li>",
+        "description": "Kami sangat senang mengumumkan bahwa sekarang Anda dapat mengelompokkan Penanda di bawah \"koleksi\"! <br/> <br/> <li> Tambahkan koleksi sebanyak yang Anda inginkan </li> <li> Tambahkan Penanda ke satu atau beberapa koleksi </li> <li> Dan banyak lagi! </li>",
         "title": "Koleksi Penanda ada di sini!"
       }
     }
@@ -52,8 +52,8 @@
       "title": "Gulir Otomatis"
     },
     "displaying": "Menampilkan",
-    "exp-tip": "<span>Ubah konten yang ditampilkan di bawah<\/span><br><\/br> <boldSpan>Pengaturan<\/boldSpan> > <boldSpan>Kata per Kata<\/boldSpan>",
-    "exp-tip-no-select": "<span>Centang opsi tampilan tooltip dan pilih opsi <br><\/br> Terjemahan dan\/atau Transliterasi<\/span><br><\/br><span> di bawah <\/span><boldSpan>Pengaturan<\/boldSpan> > <boldSpan>Kata per Kata<\/boldSpan><span>, untuk<\/span><br><\/br> <span>mengaktifkan fitur ini.<\/span>",
+    "exp-tip": "<span>Ubah konten yang ditampilkan di bawah</span><br></br> <boldSpan>Pengaturan</boldSpan> > <boldSpan>Kata per Kata</boldSpan>",
+    "exp-tip-no-select": "<span>Centang opsi tampilan tooltip dan pilih opsi <br></br> Terjemahan dan/atau Transliterasi</span><br></br><span> di bawah </span><boldSpan>Pengaturan</boldSpan> > <boldSpan>Kata per Kata</boldSpan><span>, untuk</span><br></br> <span>mengaktifkan fitur ini.</span>",
     "experience": "Pengalaman",
     "play": "Putar Audio",
     "playback-normal": "Normal",
@@ -85,7 +85,7 @@
       "verses-range": "Jangkauan ayat",
       "volume-control": "Pengatur suara"
     },
-    "repeat-moved": "Pengaturan pengulangan telah dipindahkan ke pemutar audio. Klik ikon <0> <\/0> untuk mengaksesnya",
+    "repeat-moved": "Pengaturan pengulangan telah dipindahkan ke pemutar audio. Klik ikon <0> </0> untuk mengaksesnya",
     "select-reciter": "Pilih Qari",
     "speed": "Kecepatan",
     "title": "audio"
@@ -117,8 +117,8 @@
   "complete-sign-up": "Lengkapi pendaftaran Anda",
   "consents": {
     "communication": {
-      "body": "🚀 Tingkatkan kemajuan Anda dengan menerima notifikasi <boldSpan>personal<\/boldSpan> tentang kemajuan pencapaian tujuan Anda, memertahankan pencapaian, dan meningkatkan penggunaan fitur kami saat ini. <br><\/br> <br><\/br> Bisakah kami terus mengabari Anda melalui email dan saluran lainnya? Kendali di tangan Anda – silakan sesuaikan preferensi ini kapan saja di pengaturan akun Anda. <br><\/br> <br><\/br> Cukup pilih 'Ijinkan' untuk <boldSpan>pengingat yang menginspirasi<\/boldSpan> atau 'Jangan Sekarang' untuk menolaknya.",
-      "header": "Kami ingin membantu Anda tetap <boldSpan>berkomitmen dan konsisten<\/boldSpan> dalam Perjalanan Kemajuan berQur'an Anda! 📖🌟"
+      "body": "🚀 Tingkatkan kemajuan Anda dengan menerima notifikasi <boldSpan>personal</boldSpan> tentang kemajuan pencapaian tujuan Anda, memertahankan pencapaian, dan meningkatkan penggunaan fitur kami saat ini. <br></br> <br></br> Bisakah kami terus mengabari Anda melalui email dan saluran lainnya? Kendali di tangan Anda – silakan sesuaikan preferensi ini kapan saja di pengaturan akun Anda. <br></br> <br></br> Cukup pilih 'Ijinkan' untuk <boldSpan>pengingat yang menginspirasi</boldSpan> atau 'Jangan Sekarang' untuk menolaknya.",
+      "header": "Kami ingin membantu Anda tetap <boldSpan>berkomitmen dan konsisten</boldSpan> dalam Perjalanan Kemajuan berQur'an Anda! 📖🌟"
     }
   },
   "continue": "Melanjutkan",
@@ -139,7 +139,7 @@
   "edit": "Sunting",
   "email-verification": {
     "check-spam": "Tidak menerima email verifikasi? Periksa kotak masuk spam Anda",
-    "email-sent": "Kami baru saja mengirim email ke <strong> {{email}} <\/strong>",
+    "email-sent": "Kami baru saja mengirim email ke <strong> {{email}} </strong>",
     "email-verification": "Verifikasi email",
     "resend-email": "Kirim ulang email",
     "resend-email-in": "Kirim ulang email verifikasi dalam {{remainingTime}} detik...",
@@ -171,7 +171,7 @@
     "quran-font": "Huruf Qur'an",
     "quran-font-size": "Ukuran huruf Al-Quran",
     "tajweed": "Tajwid",
-    "tajweed-desc": "Font tulisan Tajwid menunjukkan Mushaf berwarna Tajwid. Anda dapat membaca lebih lanjut tentang aturan warna Tajwid <0> sini <\/0>",
+    "tajweed-desc": "Font tulisan Tajwid menunjukkan Mushaf berwarna Tajwid. Anda dapat membaca lebih lanjut tentang aturan warna Tajwid <0> sini </0>",
     "tajweed_v4": "Kompleks Raja Fahad V4",
     "text_indopak": "IndoPak",
     "text_uthmani": "Usmani",
@@ -179,7 +179,7 @@
   },
   "footer": {
     "description": "Quran.com adalah Sadaqah Jariyah. Kami berharap setiap orang dapat membaca, mempelajari, dan memahami Al-Quran dengan lebih mudah. Al-Qur'an Mulia mempunyai banyak nama di antaranya Al-Qur'an Al-Karim, Al-Kitab, Al-Furqan, Al-Maw'itha, Al-Zikir, dan Al-Nur.",
-    "hiring": "Kami sedang merekrut! Bergabunglah dengan tim QuranFoundation dan berkontribusi pada misi kami. <link> Daftar sekarang! <\/link>",
+    "hiring": "Kami sedang merekrut! Bergabunglah dengan tim QuranFoundation dan berkontribusi pada misi kami. <link> Daftar sekarang! </link>",
     "rights": "Hak Cipta Terlindungi",
     "title": "Baca, pelajari, dan pahami Al-Qur'an Mulia."
   },
@@ -278,7 +278,7 @@
   },
   "recitation": "Pembacaan",
   "reciter": "Qari",
-  "reciter-summary": "Pembaca kata per kata: <span> {{reciterName}} <\/span> . Klik pada sebuah kata untuk mendengarkan bacaannya.",
+  "reciter-summary": "Pembaca kata per kata: <span> {{reciterName}} </span> . Klik pada sebuah kata untuk mendengarkan bacaannya.",
   "reciters": "Qari",
   "reflect": "Mencerminkan",
   "reflections": "Refleksi",
@@ -369,7 +369,7 @@
     "light": "Terang",
     "sepia": "Sepia",
     "system": "Sistem",
-    "system-desc": "Tema sistem secara otomatis mengadopsi pengaturan mode terang\/gelap Anda"
+    "system-desc": "Tema sistem secara otomatis mengadopsi pengaturan mode terang/gelap Anda"
   },
   "to": "Ke",
   "tooltip": "Dalam gelembung tooltip",
@@ -379,6 +379,7 @@
   "translations": "Terjemahan",
   "transliteration": "Transliterasi",
   "type": "Jenis",
+  "unavailable": "Saat ini tidak tersedia",
   "undo": "Batalkan",
   "validation": {
     "invalid-email": "{{field}} harus berupa alamat email yang valid",
@@ -403,7 +404,7 @@
     "voice-search-powered-by": "Pencarian Suara dipersembahkan oleh"
   },
   "wbw": "Kata per kata",
-  "wbw-lang-summary": "Sumber terjemahan kata per kata: <link> {{source}} <\/link> . Sumber ini tidak tergantung pada pemilihan terjemahan ayat.",
+  "wbw-lang-summary": "Sumber terjemahan kata per kata: <link> {{source}} </link> . Sumber ini tidak tergantung pada pemilihan terjemahan ayat.",
   "wbw-trans-lang": "Bahasa kata per kata",
   "wbw-translation": "Terjemahan per kata",
   "wbw-transliteration": "Transliterasi per kata",

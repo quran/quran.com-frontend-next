@@ -279,7 +279,6 @@
   "recitation": "Recitation",
   "reciter": "Reciter",
   "reciter-summary": "Word by word reciter: <span>{{reciterName}}</span>. Click on a word to listen to its recitation.",
-  "unavailable": "Currently unavailable",
   "reciters": "Reciters",
   "reflect": "Reflect",
   "reflections": "Reflections",
@@ -380,6 +379,7 @@
   "translations": "Translations",
   "transliteration": "Transliteration",
   "type": "Type",
+  "unavailable": "Currently unavailable",
   "undo": "Undo",
   "validation": {
     "invalid-email": "{{field}} must be a valid email address",

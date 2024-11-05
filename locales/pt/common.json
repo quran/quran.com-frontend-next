@@ -7,11 +7,11 @@
       "data-sync": {
         "action": "Próximo",
         "description": "Se você estiver usando o Quran.com em seu telefone ou laptop, seus favoritos, os últimos versículos lidos e suas preferências estarão disponíveis",
-        "title": "Seus dados serão sincronizados <br><\/br> entre dispositivos"
+        "title": "Seus dados serão sincronizados <br></br> entre dispositivos"
       },
       "feedback": {
         "action": "Ok, entendi",
-        "description": "Obrigado por usar o Quran.com e ficaríamos felizes em ouvir seus comentários sobre <link> feedback.quran.com <\/link>",
+        "description": "Obrigado por usar o Quran.com e ficaríamos felizes em ouvir seus comentários sobre <link> feedback.quran.com </link>",
         "title": "Queremos ouvir seus pensamentos"
       },
       "quran-foundation-link": {
@@ -26,12 +26,12 @@
       },
       "welcome": {
         "action": "Veja o que é novo",
-        "title": "Bem-vindo ao Quran.com <br><\/br> Conta de usuário"
+        "title": "Bem-vindo ao Quran.com <br></br> Conta de usuário"
       }
     },
     "collections-announcement": {
       "slide-1": {
-        "description": "Estamos muito felizes em anunciar que agora você pode agrupar favoritos em \"coleções\"! <br\/> <br\/> <li> Adicione quantas coleções quiser <\/li> <li> Adicione um marcador a uma ou mais coleções <\/li> <li> E muito mais! <\/li>",
+        "description": "Estamos muito felizes em anunciar que agora você pode agrupar favoritos em \"coleções\"! <br/> <br/> <li> Adicione quantas coleções quiser </li> <li> Adicione um marcador a uma ou mais coleções </li> <li> E muito mais! </li>",
         "title": "As coleções de marcadores estão aqui!"
       }
     }
@@ -52,8 +52,8 @@
       "title": "Auto rolagem"
     },
     "displaying": "Exibindo",
-    "exp-tip": "<span>Alterar o conteúdo exibido em<\/span><br><\/br> <boldSpan>Configurações<\/boldSpan> > <boldSpan>Palavra por palavra<\/boldSpan>",
-    "exp-tip-no-select": "<span>Marque a opção de exibição de dica de ferramenta e selecione a opção <br><\/br> Tradução e\/ou transliteração<\/span><br><\/br><span> em <\/span><boldSpan>Configurações<\/boldSpan> > <boldSpan>Palavra por palavra<\/boldSpan><span>, para<\/span><br><\/br> <span>habilitar este recurso.<\/span>",
+    "exp-tip": "<span>Alterar o conteúdo exibido em</span><br></br> <boldSpan>Configurações</boldSpan> > <boldSpan>Palavra por palavra</boldSpan>",
+    "exp-tip-no-select": "<span>Marque a opção de exibição de dica de ferramenta e selecione a opção <br></br> Tradução e/ou transliteração</span><br></br><span> em </span><boldSpan>Configurações</boldSpan> > <boldSpan>Palavra por palavra</boldSpan><span>, para</span><br></br> <span>habilitar este recurso.</span>",
     "experience": "Experiência",
     "play": "Tocar áudio",
     "playback-normal": "Normal",
@@ -85,7 +85,7 @@
       "verses-range": "Variedade de versos",
       "volume-control": "Controle de volume"
     },
-    "repeat-moved": "As configurações de repetição foram movidas para o reprodutor de áudio. Clique no <0> <\/0> para acessá-los",
+    "repeat-moved": "As configurações de repetição foram movidas para o reprodutor de áudio. Clique no <0> </0> para acessá-los",
     "select-reciter": "Selecione o recitador",
     "speed": "Velocidade",
     "title": "Áudio"
@@ -117,8 +117,8 @@
   "complete-sign-up": "Complete seu cadastro",
   "consents": {
     "communication": {
-      "body": "🚀 Acelere seu progresso com notificações <boldSpan> personalizadas <\/boldSpan> sobre o progresso de sua meta, mantendo sequências e melhorando o uso de nossos recursos atuais. <br><\/br> <br><\/br> Podemos mantê-lo informado por e-mail e outros canais? Você está no controle – sinta-se à vontade para ajustar essas preferências a qualquer momento nas configurações da sua conta. <br><\/br> <br><\/br> Basta selecionar 'Permitir' para <boldSpan> lembretes inspiradores <\/boldSpan> ou 'Agora não' para recusar.",
-      "header": "Adoraríamos ajudá-lo a permanecer <boldSpan> comprometido e consistente <\/boldSpan> em sua jornada de crescimento do Alcorão! 📖🌟"
+      "body": "🚀 Acelere seu progresso com notificações <boldSpan> personalizadas </boldSpan> sobre o progresso de sua meta, mantendo sequências e melhorando o uso de nossos recursos atuais. <br></br> <br></br> Podemos mantê-lo informado por e-mail e outros canais? Você está no controle – sinta-se à vontade para ajustar essas preferências a qualquer momento nas configurações da sua conta. <br></br> <br></br> Basta selecionar 'Permitir' para <boldSpan> lembretes inspiradores </boldSpan> ou 'Agora não' para recusar.",
+      "header": "Adoraríamos ajudá-lo a permanecer <boldSpan> comprometido e consistente </boldSpan> em sua jornada de crescimento do Alcorão! 📖🌟"
     }
   },
   "continue": "Prosseguir",
@@ -139,7 +139,7 @@
   "edit": "Editar",
   "email-verification": {
     "check-spam": "Não recebeu o e-mail de verificação? Verifique sua caixa de spam",
-    "email-sent": "Acabamos de enviar um e-mail para <strong> {{email}} <\/strong>",
+    "email-sent": "Acabamos de enviar um e-mail para <strong> {{email}} </strong>",
     "email-verification": "Verificação de e-mail",
     "resend-email": "Reenviar email",
     "resend-email-in": "Reenvie o e-mail de verificação em {{remainingTime}} segundos...",
@@ -171,7 +171,7 @@
     "quran-font": "Fonte do Alcorão",
     "quran-font-size": "Tamanho da fonte do Alcorão",
     "tajweed": "Tajweed",
-    "tajweed-desc": "A fonte Tajweed mostra um Mushaf colorido Tajweed. Você pode ler mais sobre as regras de cores do Tajweed <0> aqui <\/0>",
+    "tajweed-desc": "A fonte Tajweed mostra um Mushaf colorido Tajweed. Você pode ler mais sobre as regras de cores do Tajweed <0> aqui </0>",
     "tajweed_v4": "Complexo Rei Fahad V4",
     "text_indopak": "IndoPak",
     "text_uthmani": "Uthmani",
@@ -179,7 +179,7 @@
   },
   "footer": {
     "description": "Quran.com é um Sadaqah Jariyah. Esperamos tornar mais fácil para todos ler, estudar e aprender o Nobre Alcorão. O Nobre Alcorão tem muitos nomes, incluindo Al-Quran Al-Kareem, Al-Ketab, Al-Furqan, Al-Maw'itha, Al-Thikr e Al-Noor.",
-    "hiring": "Estamos contratando! Junte-se à equipe da QuranFoundation e contribua para a nossa missão. <link> Inscreva-se agora! <\/link>",
+    "hiring": "Estamos contratando! Junte-se à equipe da QuranFoundation e contribua para a nossa missão. <link> Inscreva-se agora! </link>",
     "rights": "Todos os direitos reservados",
     "title": "Leia, estude e aprenda O Nobre Alcorão."
   },
@@ -278,7 +278,7 @@
   },
   "recitation": "Recitação",
   "reciter": "Recitador",
-  "reciter-summary": "Recitador palavra por palavra: <span> {{reciterName}} <\/span> . Clique em uma palavra para ouvir sua recitação.",
+  "reciter-summary": "Recitador palavra por palavra: <span> {{reciterName}} </span> . Clique em uma palavra para ouvir sua recitação.",
   "reciters": "Recitadores",
   "reflect": "Refletir",
   "reflections": "Reflexões",
@@ -369,7 +369,7 @@
     "light": "Luz",
     "sepia": "Sépia",
     "system": "Sistema",
-    "system-desc": "O tema do sistema adota automaticamente as configurações do modo claro \/ escuro"
+    "system-desc": "O tema do sistema adota automaticamente as configurações do modo claro / escuro"
   },
   "to": "Para",
   "tooltip": "Dica de ferramenta",
@@ -379,6 +379,7 @@
   "translations": "Traduções",
   "transliteration": "Transliteração",
   "type": "Modelo",
+  "unavailable": "Atualmente indisponível",
   "undo": "Desfazer",
   "validation": {
     "invalid-email": "{{field}} deve ser um endereço de e-mail válido",
@@ -403,7 +404,7 @@
     "voice-search-powered-by": "Pesquisa por voz com tecnologia de"
   },
   "wbw": "Palavra por palavra",
-  "wbw-lang-summary": "Fonte da tradução palavra por palavra: <link> {{source}} <\/link> . Esta fonte é independente da seleção da tradução do verso.",
+  "wbw-lang-summary": "Fonte da tradução palavra por palavra: <link> {{source}} </link> . Esta fonte é independente da seleção da tradução do verso.",
   "wbw-trans-lang": "Linguagem palavra por palavra",
   "wbw-translation": "Tradução palavra por palavra",
   "wbw-transliteration": "Transliteração palavra por palavra",
