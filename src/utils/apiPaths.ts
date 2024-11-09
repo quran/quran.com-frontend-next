@@ -55,8 +55,7 @@ export const makeVersesUrl = (
   id: string | number,
   currentLocale: string,
   params?: Record<string, unknown>,
-  isStaticBuild: boolean = false,
-) => makeUrl(`/verses/by_chapter/${id}`, getVersesParams(currentLocale, params), isStaticBuild);
+) => makeUrl(`/verses/by_chapter/${id}`, getVersesParams(currentLocale, params));
 
 export const makeByRangeVersesUrl = (currentLocale: string, params?: Record<string, unknown>) =>
   makeUrl(`/verses/by_range`, getVersesParams(currentLocale, params));
@@ -68,11 +67,10 @@ export const makeVersesFilterUrl = (params?: Record<string, unknown>) =>
  * Compose the url for the translations API.
  *
  * @param {string} language
- * @param {boolean} isStaticBuild flag indicating if the request is for a static build.
  * @returns {string}
  */
-export const makeTranslationsUrl = (language: string, isStaticBuild: boolean = false): string =>
-  makeUrl('/resources/translations', { language }, isStaticBuild);
+export const makeTranslationsUrl = (language: string): string =>
+  makeUrl('/resources/translations', { language });
 
 /**
  * Compose the url for the wbw translations API.
@@ -87,11 +85,10 @@ export const makeWordByWordTranslationsUrl = (language: string): string =>
  * Compose the url for the languages API.
  *
  * @param {string} language
- * @param {boolean} isStaticBuild flag indicating if the request is for a static build.
  * @returns {string}
  */
-export const makeLanguagesUrl = (language: string, isStaticBuild: boolean = false): string =>
-  makeUrl('/resources/languages', { language }, isStaticBuild);
+export const makeLanguagesUrl = (language: string): string =>
+  makeUrl('/resources/languages', { language });
 
 /**
  * Compose the url for reciters API.
@@ -99,11 +96,8 @@ export const makeLanguagesUrl = (language: string, isStaticBuild: boolean = fals
  * @param {string} locale the user's language code.
  * @returns {string}
  */
-export const makeAvailableRecitersUrl = (
-  locale: string,
-  fields?: string[],
-  isStaticBuild: boolean = false,
-): string => makeUrl('/audio/reciters', { locale, fields }, isStaticBuild);
+export const makeAvailableRecitersUrl = (locale: string, fields?: string[]): string =>
+  makeUrl('/audio/reciters', { locale, fields });
 
 export const makeReciterUrl = (reciterId: string, locale: string): string =>
   makeUrl(`/audio/reciters/${reciterId}`, {
@@ -124,9 +118,7 @@ export const makeChapterAudioDataUrl = (
   reciterId: number,
   chapter: number,
   segments: boolean,
-  isStaticBuild: boolean = false,
-): string =>
-  makeUrl(`/audio/reciters/${reciterId}/audio_files`, { chapter, segments }, isStaticBuild);
+): string => makeUrl(`/audio/reciters/${reciterId}/audio_files`, { chapter, segments });
 
 export const makeAudioTimestampsUrl = (reciterId: number, verseKey: string) =>
   makeUrl(`/audio/reciters/${reciterId}/timestamp?verse_key=${verseKey}`);

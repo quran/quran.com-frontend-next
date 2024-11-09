@@ -386,8 +386,8 @@ const Search: NextPage<SearchProps> = ({ translations }): JSX.Element => {
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   try {
     const [availableLanguagesResponse, availableTranslationsResponse] = await Promise.all([
-      getAvailableLanguages(locale, true),
-      getAvailableTranslations(locale, true),
+      getAvailableLanguages(locale),
+      getAvailableTranslations(locale),
     ]);
 
     let translations = [];

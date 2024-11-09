@@ -175,8 +175,8 @@ const MediaMaker: NextPage<MediaMaker> = ({
     isValidating: isVersesValidating,
     error: versesError,
   } = useSWRImmutable<VersesResponse>(
-    makeVersesUrl(surah, lang, API_PARAMS, true),
-    () => getChapterVerses(surah, lang, API_PARAMS, true),
+    makeVersesUrl(surah, lang, API_PARAMS),
+    () => getChapterVerses(surah, lang, API_PARAMS),
     {
       fallbackData: defaultVerses,
       revalidateOnMount: shouldRefetchVersesData,
@@ -191,8 +191,8 @@ const MediaMaker: NextPage<MediaMaker> = ({
     isValidating: isAudioValidating,
     error: audioError,
   } = useSWRImmutable<AudioData>(
-    makeChapterAudioDataUrl(reciter, surah, true, true),
-    () => getChapterAudioData(reciter, surah, true, true),
+    makeChapterAudioDataUrl(reciter, surah, true),
+    () => getChapterAudioData(reciter, surah, true),
     {
       fallbackData: defaultAudio,
       // only revalidate when the reciter or chapter has changed
@@ -445,8 +445,8 @@ const MediaMaker: NextPage<MediaMaker> = ({
 };
 
 const fetchRecitersAndTranslations = async (locale) => {
-  const { reciters } = await getAvailableReciters(locale, [], true);
-  const { translations } = await getAvailableTranslations(locale, true);
+  const { reciters } = await getAvailableReciters(locale, []);
+  const { translations } = await getAvailableTranslations(locale);
   return { reciters, translations };
 };
 
@@ -457,8 +457,8 @@ const fetchChapterData = async (locale) => {
 };
 
 const fetchVersesAndAudio = async (locale) => {
-  const verses = await getChapterVerses(DEFAULT_SURAH, locale, DEFAULT_API_PARAMS, true);
-  const chapterAudioData = await getChapterAudioData(DEFAULT_RECITER_ID, DEFAULT_SURAH, true, true);
+  const verses = await getChapterVerses(DEFAULT_SURAH, locale, DEFAULT_API_PARAMS);
+  const chapterAudioData = await getChapterAudioData(DEFAULT_RECITER_ID, DEFAULT_SURAH, true);
   return { verses, chapterAudioData };
 };
 
