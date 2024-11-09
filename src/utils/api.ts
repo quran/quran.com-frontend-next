@@ -17,20 +17,16 @@ export const API_HOST =
   process.env.NEXT_PUBLIC_VERCEL_ENV === 'production' ? PRODUCTION_API_HOST : STAGING_API_HOST;
 
 const { API_GATEWAY_URL } = process.env;
+const isStaticBuild = process.env.IS_BUILD_TIME === 'true';
 
 /**
  * Generates a url to make an api call to our backend
  *
  * @param {string} path the path for the call
  * @param {Record<string, unknown>} parameters optional query params, {a: 1, b: 2} is parsed to "?a=1&b=2"
- * @param {boolean} [isStaticBuild=false] - Flag indicating if the URL is for a static build.
  * @returns {string}
  */
-export const makeUrl = (
-  path: string,
-  parameters?: Record<string, unknown>,
-  isStaticBuild: boolean = false,
-): string => {
+export const makeUrl = (path: string, parameters?: Record<string, unknown>): string => {
   const BASE_PATH = getBasePath();
   const API_PROXY = `${BASE_PATH}/api/proxy/content`;
   const API_URL = isStaticBuild ? `${API_GATEWAY_URL}/content` : API_PROXY;
