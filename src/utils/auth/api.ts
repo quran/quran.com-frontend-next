@@ -2,7 +2,6 @@
 import { NextApiRequest } from 'next';
 import { configureRefreshFetch } from 'refresh-fetch';
 
-import { isStaticBuild } from '../api';
 import { getTimezone } from '../datetime';
 import { prepareGenerateMediaFileRequestData } from '../media/utils';
 
@@ -76,6 +75,7 @@ import {
   makeGetMediaFileProgressUrl,
   makeGetMonthlyMediaFilesCountUrl,
 } from '@/utils/auth/apiPaths';
+import { isStaticBuild } from '@/utils/build';
 import CompleteAnnouncementRequest from 'types/auth/CompleteAnnouncementRequest';
 import { GetBookmarkCollectionsIdResponse } from 'types/auth/GetBookmarksByCollectionId';
 import PreferenceGroup from 'types/auth/PreferenceGroup';

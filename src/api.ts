@@ -2,8 +2,6 @@
 import { camelizeKeys } from 'humps';
 import { NextApiRequest } from 'next';
 
-import { isStaticBuild } from './utils/api';
-
 import { SearchRequestParams, SearchMode } from '@/types/Search/SearchRequestParams';
 import NewSearchResponse from '@/types/Search/SearchResponse';
 import {
@@ -32,6 +30,7 @@ import {
   makeWordByWordTranslationsUrl,
 } from '@/utils/apiPaths';
 import generateSignature from '@/utils/auth/signature';
+import { isStaticBuild } from '@/utils/build';
 import { SearchRequest, AdvancedCopyRequest, PagesLookUpRequest } from 'types/ApiRequests';
 import {
   TranslationsResponse,

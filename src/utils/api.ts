@@ -1,10 +1,10 @@
 import { decamelizeKeys } from 'humps';
 
 import stringify from './qs-stringify';
-// eslint-disable-next-line import/no-cycle
 import { getBasePath } from './url';
 
-import { Mushaf, MushafLines, QuranFont, QuranFontMushaf } from 'types/QuranReader';
+import type { Mushaf, MushafLines, QuranFont, QuranFontMushaf } from '@/types/quran';
+import { isStaticBuild } from '@/utils/build';
 
 export const ITEMS_PER_PAGE = 10;
 
@@ -18,7 +18,6 @@ export const API_HOST =
   process.env.NEXT_PUBLIC_VERCEL_ENV === 'production' ? PRODUCTION_API_HOST : STAGING_API_HOST;
 
 const { API_GATEWAY_URL } = process.env;
-export const isStaticBuild = process.env.IS_BUILD_TIME === 'true';
 
 /**
  * Generates a url to make an api call to our backend

@@ -1,5 +1,4 @@
-// eslint-disable-next-line import/no-cycle
-import { isStaticBuild } from './api';
+import { isStaticBuild } from '@/utils/build';
 
 const getLocalePostfix = (locale: string) => (locale !== 'en' ? `/${locale}` : '');
 
