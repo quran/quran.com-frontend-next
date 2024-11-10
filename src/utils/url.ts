@@ -1,3 +1,5 @@
+import { isStaticBuild } from '@/utils/build';
+
 const getLocalePostfix = (locale: string) => (locale !== 'en' ? `/${locale}` : '');
 
 export const getCurrentPath = () => {
@@ -43,7 +45,7 @@ export const navigateToExternalUrl = (url: string) => {
  * @returns {string}
  */
 export const getBasePath = (): string =>
-  `${process.env.NEXT_PUBLIC_VERCEL_ENV === 'development' ? 'http' : 'https'}://${
+  `${process.env.NEXT_PUBLIC_VERCEL_ENV === 'development' ? 'https' : 'https'}://${
     process.env.NEXT_PUBLIC_VERCEL_URL
   }`;
 
@@ -54,6 +56,9 @@ export const getBasePath = (): string =>
  * @returns  {string}
  */
 export const getAuthApiPath = (path: string): string => {
-  const BASE_PATH = getBasePath();
-  return `${BASE_PATH}/api/proxy/auth/${path}`;
+  const PROXY_PATH = '/api/proxy/auth/';
+  const BASE_PATH = isStaticBuild
+    ? `${process.env.API_GATEWAY_URL}/auth/`
+    : `${getBasePath()}${PROXY_PATH}`;
+  return `${BASE_PATH}${path}`;
 };
