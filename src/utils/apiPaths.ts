@@ -1,5 +1,6 @@
 import { decamelizeKeys } from 'humps';
 
+// eslint-disable-next-line import/no-cycle
 import { getDefaultWordFields, getMushafId, ITEMS_PER_PAGE, makeUrl } from './api';
 import stringify from './qs-stringify';
 

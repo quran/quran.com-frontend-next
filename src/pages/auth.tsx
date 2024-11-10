@@ -12,6 +12,8 @@ interface AuthProps {
   error?: string;
 }
 
+const LOGIN_URL = '/login';
+
 const Auth: React.FC<AuthProps> = ({ error }) => {
   const router = useRouter();
   const toast = useToast();
@@ -37,14 +39,14 @@ const Auth: React.FC<AuthProps> = ({ error }) => {
  *
  * @param {GetServerSidePropsContext} context - The context object containing request and response information.
  * @param {string} token - The token used for authentication and redirection.
- * @param {string} redirectUrl - The URL to redirect the user to after successful token handling.
+ * @param {string} destination - The URL to redirect the user to after successful token handling.
  * @returns {Promise<GetServerSidePropsResult<any>>} - A promise that resolves to the server-side props result,
  * which includes either a redirection or an error message.
  */
 const handleTokenRedirection = async (
   context: GetServerSidePropsContext,
   token: string,
-  redirectUrl: string,
+  destination: string,
 ): Promise<GetServerSidePropsResult<any>> => {
   try {
     const baseUrl = getBaseUrl(context);
@@ -59,7 +61,7 @@ const handleTokenRedirection = async (
     return {
       props: {},
       redirect: {
-        destination: redirectUrl,
+        destination,
         permanent: false,
       },
     };
@@ -128,15 +130,16 @@ const setProxyCookies = (response: Response, context: GetServerSidePropsContext)
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const { r, token } = context.query;
   const redirectUrl = (r || '/') as string;
+  const destination = redirectUrl === LOGIN_URL ? '/' : redirectUrl;
 
   if (token) {
-    return handleTokenRedirection(context, token as string, redirectUrl);
+    return handleTokenRedirection(context, token as string, destination);
   }
 
   return {
     props: {},
     redirect: {
-      destination: redirectUrl,
+      destination,
       permanent: false,
     },
   };
