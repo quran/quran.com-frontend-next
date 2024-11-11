@@ -18,7 +18,6 @@ export const API_HOST =
   process.env.NEXT_PUBLIC_VERCEL_ENV === 'production' ? PRODUCTION_API_HOST : STAGING_API_HOST;
 
 const { API_GATEWAY_URL } = process.env;
-const isStaticBuild = process.env.IS_BUILD_TIME === 'true';
 
 /**
  * Generates a url to make an api call to our backend

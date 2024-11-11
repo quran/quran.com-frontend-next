@@ -66,7 +66,6 @@ export const X_AUTH_SIGNATURE = 'x-auth-signature';
 export const X_TIMESTAMP = 'x-timestamp';
 export const X_INTERNAL_CLIENT = 'x-internal-client';
 
-const isStaticBuild = process.env.IS_BUILD_TIME === 'true';
 export const fetcher = async function fetcher<T>(
   input: RequestInfo,
   init: RequestInit = {},
