@@ -49,8 +49,7 @@ const handleTokenRedirection = async (
   destination: string,
 ): Promise<GetServerSidePropsResult<any>> => {
   try {
-    const baseUrl = getBaseUrl(context);
-    const response = await fetchToken(baseUrl, token, context);
+    const response = await fetchToken(token, context);
 
     if (!response.ok) {
       throw new Error('Network response was not ok');
@@ -77,29 +76,14 @@ const handleTokenRedirection = async (
 };
 
 /**
- * Constructs the base URL from the request headers in the given context.
- *
- * @param {GetServerSidePropsContext} context - The context object containing request and response information.
- * @returns {string} - The constructed base URL using the protocol and host from the request headers.
- */
-const getBaseUrl = (context: GetServerSidePropsContext): string => {
-  return `${context.req.headers['x-forwarded-proto'] || 'https'}://${context.req.headers.host}`;
-};
-
-/**
  * Fetches a token from the server using the provided base URL and token.
  *
- * @param {string} baseUrl - The base URL to use for the request.
  * @param {string} token - The token to be included in the request URL.
  * @param {GetServerSidePropsContext} context - The context object containing request and response information.
  * @returns {Promise<Response>} - A promise that resolves to the response from the fetch request.
  */
-const fetchToken = async (
-  baseUrl: string,
-  token: string,
-  context: GetServerSidePropsContext,
-): Promise<Response> => {
-  return fetch(`${baseUrl}${makeRedirectTokenUrl(token)}`, {
+const fetchToken = async (token: string, context: GetServerSidePropsContext): Promise<Response> => {
+  return fetch(makeRedirectTokenUrl(token), {
     method: 'GET',
     headers: {
       cookie: context.req.headers.cookie || '',
