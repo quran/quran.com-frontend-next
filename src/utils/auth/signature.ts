@@ -43,7 +43,8 @@ const generateSignature = (
   let params = {};
 
   try {
-    if (req.method === 'POST' || req.method === 'PUT') {
+    const methodsWithBody = ['POST', 'PUT', 'PATCH'];
+    if (methodsWithBody.includes(req.method)) {
       params = req.body;
     }
   } catch (err) {
