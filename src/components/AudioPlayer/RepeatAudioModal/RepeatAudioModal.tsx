@@ -21,6 +21,7 @@ import {
   getChapterFirstAndLastVerseKey,
   getChapterNumberFromKey,
   getVerseNumberFromKey,
+  makeVerseKey,
 } from '@/utils/verse';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
@@ -90,14 +91,18 @@ const RepeatAudioModal = ({
     delayMultiplier: repeatSettings?.delayMultiplier ?? 1,
   });
 
-  // reset verseRepetition's `to` and `from`, when chapter changed
+  // Set the default verse repetition range based on the previously selected verses
   useEffect(() => {
     setVerseRepetition((prevVerseRepetition) => ({
       ...prevVerseRepetition,
-      from: selectedVerseKey || firstVerseKeyInThisChapter,
-      to: selectedVerseKey || lastVerseKeyInThisChapter,
+      from: repeatSettings?.fromVerseNumber
+        ? makeVerseKey(chapterId, repeatSettings?.fromVerseNumber)
+        : firstVerseKeyInThisChapter,
+      to: repeatSettings?.toVerseNumber
+        ? makeVerseKey(chapterId, repeatSettings?.toVerseNumber)
+        : lastVerseKeyInThisChapter,
     }));
-  }, [chapterId, firstVerseKeyInThisChapter, lastVerseKeyInThisChapter, selectedVerseKey]);
+  }, [chapterId, firstVerseKeyInThisChapter, lastVerseKeyInThisChapter, repeatSettings]);
 
   const play = () => {
     audioService.send({
