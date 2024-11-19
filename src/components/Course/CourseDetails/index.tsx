@@ -104,7 +104,7 @@ const CourseDetails: React.FC<Props> = ({ course }) => {
           />
           {course?.editors?.length > 0 && (
             <DetailSection
-              title={t('editors')}
+              title={t('contributors')}
               description={<EditorsDetails editors={course.editors} />}
             />
           )}
