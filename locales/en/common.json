@@ -379,6 +379,7 @@
   "translations": "Translations",
   "transliteration": "Transliteration",
   "type": "Type",
+  "unavailable": "Currently unavailable",
   "undo": "Undo",
   "validation": {
     "invalid-email": "{{field}} must be a valid email address",
