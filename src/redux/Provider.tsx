@@ -1,4 +1,3 @@
-/* eslint-disable react-func/max-lines-per-function */
 import { useContext, useMemo } from 'react';
 
 import setLanguage from 'next-translate/setLanguage';
@@ -9,7 +8,6 @@ import { PersistGate } from 'redux-persist/integration/react';
 import getStore from './store';
 
 import syncUserPreferences from '@/redux/actions/sync-user-preferences';
-import { WordClickFunctionality } from '@/types/QuranReader';
 import { getUserPreferences } from '@/utils/auth/api';
 import { isLoggedIn } from '@/utils/auth/login';
 import { setLocaleCookie } from '@/utils/cookies';
@@ -38,22 +36,11 @@ const ReduxProvider = ({ children, locale }) => {
   const onBeforeLift = async () => {
     if (isClient && isLoggedIn()) {
       try {
-        const remotePreferences = await getUserPreferences();
-        const userPreferences = { ...remotePreferences };
+        const userPreferences = await getUserPreferences();
         const remoteLocale = userPreferences[PreferenceGroup.LANGUAGE];
         if (remoteLocale) {
           await setLanguage(remoteLocale[PreferenceGroup.LANGUAGE]);
           setLocaleCookie(remoteLocale[PreferenceGroup.LANGUAGE]);
-        }
-        // TODO: this is a temporary fix to prevent playing wbw if the user has their preference set to play audio
-        if (
-          userPreferences[PreferenceGroup.READING]?.wordClickFunctionality ===
-          WordClickFunctionality.PlayAudio
-        ) {
-          userPreferences[PreferenceGroup.READING] = {
-            ...userPreferences[PreferenceGroup.READING],
-            wordClickFunctionality: WordClickFunctionality.NoAudio,
-          };
         }
         store.dispatch(syncUserPreferences(userPreferences, locale));
         const audioPlayerContext = audioService.getSnapshot().context;

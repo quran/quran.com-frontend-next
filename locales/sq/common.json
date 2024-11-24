@@ -200,6 +200,7 @@
     "description": "Donacionet mujore na ndihmojnë të përmirësojmë Quran.com dhe të mbajmë operacionet, kështu që ne fokusohemi më pak në mbledhjen e fondeve dhe më shumë në krijimin e ndikimit.",
     "title": "Bëhuni një donator mujor"
   },
+  "hear-it-pronounced": "Klikoni çdo fjalë, dëgjojeni të shqiptuar!",
   "help": "Ndihmë",
   "hizb": "Hizb",
   "home": "Shtëpi",
@@ -278,7 +279,7 @@
   },
   "recitation": "Recitim",
   "reciter": "Recitues",
-  "reciter-summary": "Recitues fjalë për fjalë: <span> {{reciterName}} </span> . Klikoni mbi një fjalë për të dëgjuar recitimin e saj.",
+  "reciter-summary": "(Me lejen e mirë të Qendrës Tafsir)",
   "reciters": "Recituesit",
   "reflect": "Pasqyrim",
   "reflections": "Reflektime",
