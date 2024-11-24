@@ -7,8 +7,8 @@ import styles from './GlyphWord.module.scss';
 
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import { FALLBACK_FONT, QuranFont } from '@/types/QuranReader';
-import { isFirefox } from '@/utils/device-detector';
 import { CharType } from '@/types/Word';
+import { isFirefox } from '@/utils/device-detector';
 import { getFontClassName, getFontFaceNameForPage } from '@/utils/fontFaceHelper';
 
 type UthmaniWordTextProps = {

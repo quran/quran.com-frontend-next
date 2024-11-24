@@ -2,10 +2,10 @@ import { useCallback, useEffect, useRef } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
-import { selectLoadedFontFaces, addLoadedFontFace } from '@/redux/slices/QuranReader/font-faces';
-import { QuranFont } from '@/types/QuranReader';
 import useThemeDetector from './useThemeDetector';
 
+import { selectLoadedFontFaces, addLoadedFontFace } from '@/redux/slices/QuranReader/font-faces';
+import { QuranFont } from '@/types/QuranReader';
 import { removeItemFromArray } from '@/utils/array';
 import {
   getFontFaceNameForPage,

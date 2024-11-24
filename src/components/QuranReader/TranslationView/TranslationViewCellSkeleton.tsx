@@ -10,7 +10,6 @@ import Button, { ButtonSize } from '@/dls/Button/Button';
 import Skeleton from '@/dls/Skeleton/Skeleton';
 import useGetQueryParamOrReduxValue from '@/hooks/useGetQueryParamOrReduxValue';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
-import { QuranFont } from '@/types/QuranReader';
 import { getFontClassName } from '@/utils/fontFaceHelper';
 import QueryParam from 'types/QueryParam';
 
