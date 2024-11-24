@@ -200,6 +200,7 @@
     "description": "每月的捐款帮助我们改善 Quran.com 并维持运营，因此我们不再专注于筹款，而是更多地关注创造影响力。",
     "title": "成为每月捐助者"
   },
+  "hear-it-pronounced": "单击任意单词，即可听到其发音！",
   "help": "帮助",
   "hizb": "希兹布",
   "home": "首页",
@@ -278,7 +279,7 @@
   },
   "recitation": "朗诵",
   "reciter": "诵读家",
-  "reciter-summary": "逐字朗诵者： <span> {{reciterName}} </span> 。单击一个单词以收听其朗读。",
+  "reciter-summary": "（经 Tafsir Center 友情许可）",
   "reciters": "朗诵者",
   "reflect": "参悟",
   "reflections": "反思",
