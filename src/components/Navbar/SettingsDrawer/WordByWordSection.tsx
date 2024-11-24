@@ -198,18 +198,11 @@ const WordByWordSection = () => {
               checked={wordClickFunctionality === WordClickFunctionality.PlayAudio}
               id="wbw-recitation"
               name="wbw-recitation"
-              label={t('recitation')}
+              label={`${t('recitation')} (${t('unavailable')})`}
               onChange={onRecitationChange}
+              disabled
             />
           </div>
-
-          <Section.Footer>
-            <Trans
-              components={{ span: <span className={styles.source} /> }}
-              i18nKey="common:reciter-summary"
-              values={{ reciterName: 'Shaikh Wisam Sharieff' }}
-            />
-          </Section.Footer>
         </div>
       </Section.Row>
       <Separator className={styles.separator} />

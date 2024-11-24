@@ -1,17 +1,17 @@
 {
   "no-bookmarks": "Vous n'avez pas encore de favoris",
-  "no-recently-read": "Vous n'avez pas encore de séances de lecture",
+  "no-recently-read": "Vous n'avez pas encore de séance de lecture",
   "noble-quran": "Le Noble Coran",
   "qgj": {
     "learning-plans": {
       "cta": {
-        "all-plans": "Voir tous les forfaits",
+        "all-plans": "Voir tous les plans",
         "my-plans": "Mes plans"
       },
       "desc": {
-        "logged-in": "Avez-vous déjà commencé un programme d’apprentissage et avez-vous déraillé à mi-parcours ? Les plans d'apprentissage sont divisés en morceaux gérables et nous suivons vos progrès jusqu'à ce que vous atteigniez la ligne d'arrivée. Découvrez notre offre actuelle de cours dès aujourd'hui",
-        "logged-in-no-plans": "Avez-vous déjà commencé un programme d’apprentissage et avez-vous déraillé à mi-parcours ? Les plans d'apprentissage sont divisés en morceaux gérables et nous suivons vos progrès jusqu'à ce que vous atteigniez la ligne d'arrivée. Découvrez notre offre actuelle de cours dès aujourd'hui",
-        "logged-out": "Avez-vous déjà commencé un programme d’apprentissage et avez-vous déraillé à mi-parcours ? Les plans d'apprentissage sont divisés en morceaux gérables et nous suivons vos progrès jusqu'à ce que vous atteigniez la ligne d'arrivée. Découvrez notre offre actuelle de cours dès aujourd'hui"
+        "logged-in": "Ça vous est déjà arrivé de commencer un programme d’apprentissage et d'abandonner en cours de route ? Les plans d'apprentissage sont divisés en morceaux supportables et nous suivons vos progrès jusqu'à ce que vous atteigniez la ligne d'arrivée. Découvrez notre offre actuelle de cours dès aujourd'hui",
+        "logged-in-no-plans": "Ça vous est déjà arrivé de commencer un programme d’apprentissage et d'abandonner en cours de route ? Les plans d'apprentissage sont divisés en morceaux supportables et nous suivons vos progrès jusqu'à ce que vous atteigniez la ligne d'arrivée. Découvrez notre offre actuelle de cours dès aujourd'hui",
+        "logged-out": "Ça vous est déjà arrivé de commencer un programme d’apprentissage et d'abandonner en cours de route ? Les plans d'apprentissage sont divisés en morceaux supportables et nous suivons vos progrès jusqu'à ce que vous atteigniez la ligne d'arrivée. Découvrez notre offre actuelle de cours dès aujourd'hui"
       },
       "title": "Plans d'apprentissage"
     },
@@ -19,16 +19,16 @@
       "desc": {
         "logged-out": "Voulez-vous lire 10 minutes par jour, terminer un Juz en un mois ou terminer le Coran en entier en un an ? Il est facile de créer un objectif personnalisé et de suivre vos progrès"
       },
-      "title": "Objectifs de lecture du Coran personnalisés"
+      "title": "Objectifs personnalisés pour la lecture du Coran"
     },
-    "title": "Parcours de croissance du Coran"
+    "title": "Voyage de Développement Spirituel avec le Coran"
   },
-  "ramadan-activities-cta": "<link> Nouveau ! Découvrez Le Calendrier Coranique Global pour guider votre lecture après le Ramadan </link>",
+  "ramadan-activities-cta": "<link> Suivez le <b> Calendrier coranique mondial <\/b> pour des lectures hebdomadaires, des podcasts inspirants et un appel à la réflexion ! <\/link>",
   "read-juz": "Lire Juz",
   "recently-read": "Lu récemment",
-  "revelation-order-disclaimer": "Cette vue montre l'ordre chronologique des sourates dans le Coran en fonction du moment où elles ont été révélées au Prophète Muhammad <hover> ﷺ </hover> . La chronologie est un sujet d'opinion scientifique et certaines sourates ont été révélées en parties à des moments différents. La commande ici est basée sur le travail de <link> Tanzil.net </link> . [Remarque : l'ordre Mushaf compilé d'al-Fatiha à al-Nas est une question de consensus.]",
+  "revelation-order-disclaimer": "Cette vue montre l'ordre chronologique des Sourates dans le Coran en fonction du moment où elles ont été révélées au Prophète Muhammad <hover>ﷺ<\/hover> . La chronologie est un sujet d'opinion scientifique et certaines Sourates ont été révélées en parties à des moments différents. L'ordre est basé sur le travail de <link>Tanzil.net<\/link>. [Remarque : l'ordre du Mushaf (entre les Sourates Al-Fatiha et Al-Nas) est une question de consensus.]",
   "tab": {
-    "bookmarks": "Signets",
+    "bookmarks": "Favoris",
     "popular": "Populaire"
   },
   "view-all-bookmarks": "Afficher tous les marque-pages",

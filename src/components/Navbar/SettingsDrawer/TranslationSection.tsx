@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { useCallback, useMemo } from 'react';
 
 import { Action } from '@reduxjs/toolkit';
@@ -67,19 +68,23 @@ const TranslationSection = () => {
 
   const renderTranslations = useCallback(
     (data: TranslationsResponse) => {
+      const availableTranslations = selectedTranslations.filter((selectedId) =>
+        data.translations.some((translation) => translation.id === selectedId),
+      );
+
       const firstSelectedTranslation = data.translations.find(
-        (translation) => translation.id === selectedTranslations[0],
+        (translation) => translation.id === availableTranslations[0],
       );
 
       let selectedValueString = t('settings.no-translation-selected');
-      if (selectedTranslations.length === 1) selectedValueString = firstSelectedTranslation?.name;
-      if (selectedTranslations.length === 2) {
+      if (availableTranslations.length === 1) selectedValueString = firstSelectedTranslation?.name;
+      if (availableTranslations.length === 2) {
         selectedValueString = t('settings.value-and-other', {
           value: firstSelectedTranslation?.name,
           othersCount: localizedSelectedTranslations,
         });
       }
-      if (selectedTranslations.length > 2) {
+      if (availableTranslations.length > 2) {
         selectedValueString = t('settings.value-and-others', {
           value: firstSelectedTranslation?.name,
           othersCount: localizedSelectedTranslations,

@@ -7,6 +7,12 @@ $list-max-width: 80rem;
   padding-block-end: var(--spacing-small);
   padding-inline-start: 0;
   padding-inline-end: 0;
+  @include breakpoints.smallerThanTablet {
+    padding-block-start: var(--banner-height);
+  }
+  @include breakpoints.tablet {
+    padding-block-start: var(--spacing-small);
+  }
 }
 
 .loadingContainer {

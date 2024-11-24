@@ -9,7 +9,6 @@ import PlainVerseTextWord from './PlainVerseTextWord';
 
 import useIsFontLoaded from '@/components/QuranReader/hooks/useIsFontLoaded';
 import GlyphWord from '@/dls/QuranWord/GlyphWord';
-import TajweedWord from '@/dls/QuranWord/TajweedWordImage';
 import TextWord from '@/dls/QuranWord/TextWord';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import { QuranFont } from '@/types/QuranReader';
@@ -45,10 +44,11 @@ const PlainVerseText: React.FC<Props> = ({
   const isFontLoaded = useIsFontLoaded(words[0].pageNumber, quranFont);
   return (
     <div
-      className={classNames(styles.verseTextContainer, styles.tafsirOrTranslationMode, {
-        [styles[getFontClassName(quranFont, fontScale || quranTextFontScale, mushafLines)]]:
-          quranFont !== QuranFont.Tajweed,
-      })}
+      className={classNames(
+        styles.verseTextContainer,
+        styles.tafsirOrTranslationMode,
+        styles[getFontClassName(quranFont, fontScale || quranTextFontScale, mushafLines)],
+      )}
     >
       <div className={classNames(styles.verseText, styles.verseTextWrap)} translate="no">
         {words?.map((word) => {
@@ -68,18 +68,6 @@ const PlainVerseText: React.FC<Props> = ({
                   textCodeV2={word.codeV2}
                   isFontLoaded={isFontLoaded}
                 />
-              </PlainVerseTextWord>
-            );
-          }
-          if (quranFont === QuranFont.Tajweed) {
-            return (
-              <PlainVerseTextWord
-                key={word.location}
-                word={word}
-                shouldShowWordByWordTranslation={shouldShowWordByWordTranslation}
-                shouldShowWordByWordTransliteration={shouldShowWordByWordTransliteration}
-              >
-                <TajweedWord key={word.location} path={word.text} alt={word.textUthmani} />
               </PlainVerseTextWord>
             );
           }

@@ -146,12 +146,17 @@
     "verify-code": "کوڈ کی تصدیق کریں"
   },
   "error": {
+    "MediaVersesRangeLimitExceeded": "آپ ایک وقت میں صرف {{limit}} آیات منتخب کر سکتے ہیں۔ براہ کرم ایک چھوٹی رینج منتخب کریں۔",
     "bookmark-sync": "بک مارک مطابقت پذیر نہیں ہے۔",
     "email-login-fail": "ای میل کے ساتھ لاگ ان ناکام ہو گیا۔ براہ کرم دوبارہ کوشش کریں",
     "general": "کچھ غلط ہو گیا. دوبارہ کوشش کریں.",
     "offline": "ایسا لگتا ہے کہ آپ کا کنکشن ٹوٹ گیا ہے۔ براہ کرم اسے چیک کریں اور دوبارہ کوشش کریں۔",
-    "pref-persist-fail": "آپ کی ترتیبات کو کلاؤڈ کے ساتھ مطابقت پذیر کرنے میں ناکامی ہوئی۔۔"
+    "pref-persist-fail": "آپ کی ترتیبات کو کلاؤڈ کے ساتھ مطابقت پذیر کرنے میں ناکامی ہوئی۔۔",
+    "ranges-no-value": "رینج کے آغاز اور اختتام کی قدر ہونی چاہیے۔",
+    "ranges-too-many-verses": "*زیادہ سے زیادہ {{maxNumberOfVerses}} آیات",
+    "ranges-wrong-order": "ابتدائی آیت ختم ہونے والی آیت سے پہلے ہونی چاہیے۔"
   },
+  "exciting-updates": "دلچسپ اپڈیٹس",
   "feedback": "رائے",
   "fonts": {
     "15_lines": "15 ستری",
@@ -161,12 +166,16 @@
     "font-size": "فونٹ سائز",
     "lines": "سطریں",
     "qcf-desc": "کنگ فہد کمپلیکس (V1 اور V2) کے فونٹس اعلیٰ معیار فراہم کے ہیں لیکن لوڈ ہونے میں زیادہ وقت لیتے ہیں۔",
+    "qcf-v4-desc": "Tajweed فونٹس Easy Quran - Dar Al-Marifa Tajweed Mushaf اور King Fahad Glorious Quran Printing Complex (KFGQPC) - Uthmanic Hafs V4 فونٹس دونوں سے اجازت لینے کے بعد بنائے گئے تھے۔",
     "qpc_uthmani_hafs": "QPC عثمانی حفص",
     "quran-font": "قرآن کا فونٹ",
+    "quran-font-size": "قرآن کا فونٹ سائز",
     "tajweed": "تجوید",
     "tajweed-desc": "تجوید فونٹ ایک تجوید رنگ والا مصحف دکھاتا ہے۔ آپ تجوید کے رنگ کے قواعد کے بارے میں مزید پڑھ سکتے ہیں <0>یہاں</0>۔",
+    "tajweed_v4": "کنگ فہد کمپلیکس V4",
     "text_indopak": "انڈو پاک",
-    "text_uthmani": "عثمانی"
+    "text_uthmani": "عثمانی",
+    "translation-font-size": "ترجمہ فونٹ سائز"
   },
   "footer": {
     "description": "Quran.com ایک صدقہ جاریہ ہے۔ ہم امید کرتے ہیں کہ سب کے لیے قرآن پاک پڑھنا، مطالعہ کرنا، اور سیکھنا آسان ہو جائے۔ قرآن پاک کے بہت سے نام ہیں جن میں القرآن الكريم، الکتاب، الفرقان، الموعظة، الذکر، اور النور شامل ہیں۔",
@@ -296,10 +305,12 @@
     "title": "سرچ"
   },
   "seconds": "سیکنڈز",
+  "see-new": "دیکھیں نیا کیا ہے۔",
   "settings": {
     "no-tafsir-selected": "کوئی تفسیر منتخب نہیں کی گی۔۔",
     "no-translation-selected": "کوئی ترجمہ منتخب نہیں کیا گیا۔",
     "reading-experience": "پڑھنے کا تجربہ",
+    "reset": "دوبارہ ترتیب دیں۔",
     "reset-cta": "سیٹنگز ری سیٹ کریں",
     "reset-notif": "آپ کی سیٹنگز کو ڈیفالٹ پر ری سیٹ کر دیا گیا ہے۔",
     "search-reciter": "قاری سرچ کریں۔",
@@ -350,6 +361,7 @@
     "app": "ترتیل ایپ",
     "name": "tarteel.ai"
   },
+  "terms-and-conditions": "شرائط و ضوابط",
   "theme": "تھیم",
   "themes": {
     "auto": "آٹو",
@@ -367,6 +379,7 @@
   "translations": "ترجمے",
   "transliteration": "رومن اردو",
   "type": "قسم",
+  "unavailable": "فی الحال دستیاب نہیں ہے۔",
   "undo": "واپس لیں",
   "validation": {
     "invalid-email": "{{field}} درست ای میل ہونا ضروری ہے۔",

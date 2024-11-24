@@ -1,0 +1,200 @@
+@use "src/styles/breakpoints";
+@use "src/styles/theme";
+
+$pixel: 1px;
+
+.container {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  width: 100%;
+  color: var(--color-text-default);
+  text-align: center;
+  transition: var(--transition-regular);
+  margin-top: var(--spacing-micro);
+  @include breakpoints.smallerThanTablet {
+    margin-top: var(--spacing-xsmall);
+  }
+  z-index: var(--z-index-min);
+}
+
+.visibleContainer {
+  @include breakpoints.smallerThanTablet {
+    margin-top: var(--spacing-micro);
+  }
+}
+
+.tajweedContainer {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  background: var(--color-background-default);
+  background: var(--color-background-elevated);
+}
+
+.shadow {
+  box-shadow: var(--shadow-small);
+}
+
+.switcher {
+  display: flex;
+  align-self: center;
+  align-items: center;
+  width: fit-content;
+  font-size: var(--font-size-small);
+  padding: var(--spacing-micro) var(--spacing-xsmall) var(--spacing-micro) var(--spacing-xsmall);
+  border-bottom-left-radius: var(--spacing-xsmall);
+  border-bottom-right-radius: var(--spacing-xsmall);
+  justify-content: center;
+  align-items: center;
+  background: var(--color-background-default);
+  background: var(--color-background-elevated);
+  box-shadow: var(--shadow-small);
+  cursor: pointer;
+  user-select: none;
+  margin-top: calc($pixel * -1);
+}
+
+.rulesContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 90%;
+  flex-wrap: wrap;
+  column-gap: var(--spacing-mega);
+  @include breakpoints.smallerThanTablet {
+    width: 95%;
+    column-gap: var(--spacing-medium);
+  }
+}
+
+.ruleContainer {
+  display: flex;
+  align-items: center;
+  height: var(--spacing-mega);
+}
+
+.circle {
+  height: var(--spacing-large);
+  width: var(--spacing-large);
+  border-radius: var(--border-radius-circle);
+  display: inline-block;
+  margin-inline-end: var(--spacing-xxsmall);
+}
+
+.chevronIconContainer {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  margin-inline-start: var(--spacing-xxsmall);
+}
+
+.rotate180 {
+  transition: var(--transition-regular);
+  transform: rotate(180deg);
+}
+
+.rotate {
+  transition: var(--transition-regular);
+  transform: rotate(0);
+}
+
+.light-edgham {
+  background-color: #a5a5a5;
+}
+
+.light-mad-2 {
+  background-color: #ce9e00;
+}
+
+.light-mad-6 {
+  background-color: #b50000;
+}
+
+.light-mad-2-4-6 {
+  background-color: #ff7b00;
+}
+
+.light-mad-4-5 {
+  background-color: #f40000;
+}
+
+.light-ekhfa {
+  background-color: #09b000;
+}
+
+.light-qalqala {
+  background-color: #2fadff;
+}
+
+.light-tafkhim {
+  background-color: #3f48e6;
+}
+
+.dark-edgham {
+  background-color: #999999;
+}
+
+.dark-mad-2 {
+  background-color: #ffc1e0;
+}
+
+.dark-mad-6 {
+  background-color: #e30000;
+}
+
+.dark-mad-2-4-6 {
+  background-color: #ff8e3b;
+}
+
+.dark-mad-4-5 {
+  background-color: #ff5e8e;
+}
+
+.dark-ekhfa {
+  background-color: #26b55d;
+}
+
+.dark-qalqala {
+  background-color: #00deff;
+}
+
+.dark-tafkhim {
+  background-color: #3c84d5;
+}
+
+.sepia-edgham {
+  background-color: #ababab;
+}
+
+.sepia-mad-2 {
+  background-color: #c09725;
+}
+
+.sepia-mad-6 {
+  background-color: #b7001c;
+}
+
+.sepia-mad-2-4-6 {
+  background-color: #e67b00;
+}
+
+.sepia-mad-4-5 {
+  background-color: #ff0000;
+}
+
+.sepia-ekhfa {
+  background-color: #09b000;
+}
+
+.sepia-qalqala {
+  background-color: #00b4e0;
+}
+
+.sepia-tafkhim {
+  background-color: #134fe1;
+}

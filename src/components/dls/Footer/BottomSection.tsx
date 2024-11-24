@@ -33,6 +33,9 @@ const BottomSection = () => {
           <Link href="/privacy" shouldPrefetch={false}>
             {t('privacy')}
           </Link>
+          <Link href="/terms-and-conditions" shouldPrefetch={false}>
+            {t('terms-and-conditions')}
+          </Link>
         </div>
         <div className={styles.copyright}>
           © {localizedCurrentYear}{' '}

@@ -1,48 +1,48 @@
 {
-    "communication": {
-        "desc": "Nous pouvons utiliser votre adresse e-mail pour vous envoyer des mises à jour importantes, des newsletters ou des notifications liées à nos services, contenus, etc. Vous aurez la possibilité de vous désinscrire de ces communications à tout moment.",
-        "title": "Communication"
-    },
-    "contact-us": {
-        "desc": "Si vous avez des questions, des préoccupations ou des demandes concernant cette politique de confidentialité ou le traitement de vos informations personnelles, veuillez nous contacter <0> ici <\/0> . En utilisant notre site Web, vous reconnaissez avoir lu et compris cette politique de confidentialité et consentez à la collecte, à l'utilisation et à la divulgation de vos informations personnelles comme décrit.",
-        "title": "Contactez-nous"
-    },
-    "cookies": {
-        "desc": "Quran.com utilise des cookies pour améliorer votre expérience de navigation, fournir un contenu personnalisé et analyser le trafic du site Web. En accédant et en utilisant notre site Web, vous consentez à l'utilisation de cookies conformément à la présente politique de confidentialité. <br\/> <br\/> <li> Types de cookies que nous utilisons : <\/li> <subLi> Cookies nécessaires : ces cookies sont essentiels au bon fonctionnement de notre site Web et permettent des fonctionnalités de base, telles que la navigation sur les pages et l'accès aux zones sécurisées. Ils ne collectent aucune information personnellement identifiable. Sans ces cookies, certaines parties du site Web peuvent ne pas fonctionner correctement. <\/subLi> <subLi> Cookies d'analyse et de performance : nous utilisons ces cookies pour recueillir des informations sur la façon dont les visiteurs utilisent notre site Web, y compris le nombre de visiteurs, les pages qu'ils visitent et le temps passé sur chaque page. Ces données nous aident à analyser et à améliorer les performances et les fonctionnalités de notre site Web. Ces cookies ne vous identifient pas personnellement ; toutes les données sont agrégées et anonymes. <\/subLi>",
-        "title": "Utilisation des cookies"
-    },
-    "data-analysis": {
-        "desc": "Nous utilisons Google Analytics pour nous assurer que le site continue de fonctionner comme prévu et pour savoir sur quelles fonctionnalités travailler en priorité, etc. Ces informations sont anonymes et nous ne les racontons à aucun individu en particulier.",
-        "title": "L'analyse des données"
-    },
-    "data-deletion": {
-        "desc": "Pour garantir votre confidentialité et le contrôle de vos informations personnelles, nous fournissons un processus de suppression de compte simple. Lorsque vous choisissez de supprimer votre compte, toutes les données personnelles associées seront automatiquement et définitivement supprimées de nos systèmes. Vous pouvez initier la suppression du compte en accédant à votre page de profil. Une fois la suppression initiée, vos données personnelles seront supprimées en toute sécurité de nos serveurs dans un délai raisonnable.",
-        "title": "Suppression de données"
-    },
-    "data-protection": {
-        "desc": "<boldSpan> Le droit d'accès : <\/boldSpan> Vous avez le droit de demander à la Fondation Coran des copies de vos données personnelles. Nous pouvons vous facturer une somme modique pour ce service. <br\/> <br\/> <boldSpan> Le droit de rectification <\/boldSpan> : Vous avez le droit de demander à la Fondation Coran de corriger toute information que vous jugez inexacte. Vous avez également le droit de demander à la Fondation Coran de compléter les informations que vous jugez incomplètes. <br\/> <br\/> <boldSpan> Le droit à l'effacement : <\/boldSpan> Vous avez le droit de demander à la Fondation Coran d'effacer vos données personnelles, sous certaines conditions. <br\/> <br\/> <boldSpan> Le droit de limiter le traitement : <\/boldSpan> Vous avez le droit de demander à la Fondation Coran de restreindre le traitement de vos données personnelles, sous certaines conditions. <br\/> <br\/> <boldSpan> Le droit d'opposition au traitement <\/boldSpan> : Vous avez le droit de vous opposer au traitement de vos données personnelles par la Fondation Coran, sous certaines conditions. <br\/> <br\/> <boldSpan> Le droit à la portabilité des données <\/boldSpan> : Vous avez le droit de demander à la Fondation Coran de transférer les données que nous avons collectées à une autre organisation, ou directement à vous, sous certaines conditions. .",
-        "title": "Droits de protection des données"
-    },
-    "data-security": {
-        "desc": "Nous prenons les mesures appropriées pour protéger vos informations personnelles contre tout accès, modification, divulgation ou destruction non autorisés. Nous utilisons des protocoles de sécurité standard de l'industrie et employons des protections physiques, électroniques et de gestion pour assurer la confidentialité et l'intégrité de vos données.",
-        "title": "Sécurité des données"
-    },
-    "data-sharing": {
-        "desc": "Nous ne vendons, n'échangeons ni ne louons vos informations personnelles à des tiers.",
-        "title": "Partage de données"
-    },
-    "info-collection": {
-        "desc": "Nous collectons certaines informations personnelles des utilisateurs qui choisissent de créer un compte sur Quran.com. Ces informations peuvent inclure : <br\/> <br\/> <underline> Adresse e-mail <\/underline> : Nous collectons votre adresse e-mail pour faciliter le processus de création de compte et à des fins de communication liées à votre compte, y compris la récupération de compte et les notifications de sécurité.",
-        "title": "Collecte d'informations"
-    },
-    "log-data": {
-        "desc": "Nous recueillons les informations que votre navigateur envoie chaque fois que vous visitez notre Service (« Données de journal »). Ces données de journal peuvent inclure des informations telles que l'adresse de protocole Internet (\"IP\") de votre ordinateur, le type de navigateur, la version du navigateur, les pages de notre service que vous visitez, l'heure et la date de votre visite, le temps passé sur ces pages et d'autres statistiques.",
-        "title": "Données de journal"
-    },
-    "main-privacy-desc": "La Quran.Foundation (qui comprend Quran.com) est une organisation à but non lucratif 501(c)(3) qui s'efforce de permettre à chaque être humain de bénéficier du Coran. Quran.Foundation valorise et respecte la vie privée de tous nos utilisateurs.",
-    "personal-info-use": {
-        "desc": "Nous utilisons les informations personnelles que nous collectons aux fins suivantes : <br\/> <li> <underline> Création et gestion de compte <\/underline> : Votre adresse e-mail est utilisée pour créer et gérer votre compte sur notre site Web. Il vous permet de vous connecter, d'accéder à vos paramètres et de stocker vos signets et votre historique de lecture. <\/li> <li> <underline> Personnalisation <\/underline> : nous pouvons utiliser votre historique de lecture pour fournir des recommandations et des suggestions personnalisées en fonction de vos préférences et intérêts. <\/li>",
-        "title": "Utilisation des informations personnelles"
-    },
-    "privacy-header": "politique de confidentialité"
+  "communication": {
+    "desc": "Nous pouvons utiliser votre adresse e-mail pour vous envoyer des mises à jour importantes, des newsletters ou des notifications liées à nos services, contenus, etc. Vous pourrez vous désinscrire de ces communications à tout moment.",
+    "title": "Communication"
+  },
+  "contact-us": {
+    "desc": "Si vous avez des questions, des préoccupations ou des demandes concernant cette politique de confidentialité ou le traitement de vos informations personnelles, veuillez nous contacter <0>ici</0> . En utilisant notre site Web, vous reconnaissez avoir lu et compris cette politique de confidentialité et consentez à la collecte, à l'utilisation et à la divulgation de vos informations personnelles comme décrit.",
+    "title": "Contactez-nous"
+  },
+  "cookies": {
+    "desc": "Quran.com utilise des cookies pour améliorer votre expérience de navigation, fournir un contenu personnalisé et analyser le trafic du site Web. En accédant et en utilisant notre site Web, vous consentez à l'utilisation de cookies conformément à la présente politique de confidentialité. <br/> <br/> <li> Types de cookies que nous utilisons : </li> <subLi> Cookies nécessaires : ces cookies sont essentiels au bon fonctionnement de notre site Web et permettent des fonctionnalités de base, telles que la navigation sur les pages et l'accès aux zones sécurisées. Ils ne collectent aucune information personnellement identifiable. Sans ces cookies, certaines parties du site Web peuvent ne pas fonctionner correctement. </subLi> <subLi> Cookies d'analyse et de performance : nous utilisons ces cookies pour recueillir des informations sur la façon dont les visiteurs utilisent notre site Web, y compris le nombre de visiteurs, les pages qu'ils visitent et le temps passé sur chaque page. Ces données nous aident à analyser et à améliorer les performances et les fonctionnalités de notre site Web. Ces cookies ne vous identifient pas personnellement ; toutes les données sont agrégées et anonymes. </subLi>",
+    "title": "Utilisation des cookies"
+  },
+  "data-analysis": {
+    "desc": "Nous utilisons Google Analytics pour nous assurer que le site continue de fonctionner comme prévu et pour savoir sur quelles fonctionnalités travailler en priorité, etc. Ces informations sont anonymes et nous ne les divulguons à aucun individu en particulier.",
+    "title": "Traitement des données"
+  },
+  "data-deletion": {
+    "desc": "Pour garantir la confidentialité et le contrôle de vos informations personnelles, nous fournissons un processus de suppression de compte simple. Lorsque vous choisissez de supprimer votre compte, toutes les données personnelles associées seront automatiquement et définitivement supprimées de nos systèmes. Vous pouvez initier la suppression du compte en accédant à votre page de profil. Une fois la suppression initiée, vos données personnelles seront supprimées en toute sécurité de nos serveurs dans un délai raisonnable.",
+    "title": "Suppression des données"
+  },
+  "data-protection": {
+    "desc": "<boldSpan> Le droit d'accès : </boldSpan> Vous avez le droit de demander à la Quran Fundation des copies de vos données personnelles. Nous pouvons vous facturer une petite somme pour ce service. <br/> <br/> <boldSpan> Le droit de rectification </boldSpan> : Vous avez le droit de demander à la Quran Fundation la correction de toute information que vous jugez inexacte. Vous avez également le droit de demander à la Quran Fundation de compléter les informations que vous jugez incomplètes. <br/> <br/> <boldSpan> Le droit à l'effacement : </boldSpan> Vous avez le droit de demander à la Quran Fundation l'effacement de vos données personnelles sous certaines conditions. <br/> <br/> <boldSpan> Le droit de limiter le traitement : </boldSpan> Vous avez le droit de demander à la Quran Fundation de restreindre le traitement de vos données personnelles sous certaines conditions. <br/> <br/> <boldSpan> Le droit d'opposition au traitement </boldSpan> : Vous avez le droit de vous opposer au traitement de vos données personnelles par la Quran Fundation sous certaines conditions. <br/> <br/> <boldSpan> Le droit à la portabilité des données </boldSpan> : Vous avez le droit de demander à la Quran Fundation de transférer les données que nous avons collectées à une autre organisation, ou directement à vous, sous certaines conditions.",
+    "title": "Droits de protection des données"
+  },
+  "data-security": {
+    "desc": "Nous prenons les mesures appropriées pour protéger vos informations personnelles contre tout accès, modification, divulgation ou destruction non autorisés. Nous utilisons des protocoles de sécurité standard de l'industrie et employons des protections physiques, électroniques et de gestion pour assurer la confidentialité et l'intégrité de vos données.",
+    "title": "Protection des données"
+  },
+  "data-sharing": {
+    "desc": "Nous ne vendons, n'échangeons ni ne louons vos informations personnelles à des tiers.",
+    "title": "Partage des données"
+  },
+  "info-collection": {
+    "desc": "Nous collectons certaines informations personnelles des utilisateurs qui choisissent de créer un compte sur Quran.com. Ces informations peuvent inclure : <br/> <br/> <underline> Adresse e-mail </underline> : Nous collectons votre adresse e-mail pour faciliter le processus de création de compte, ainsi qu'à des fins de communication liées à votre compte, comme la récupération de compte et les notifications de sécurité.",
+    "title": "Collecte d'informations"
+  },
+  "log-data": {
+    "desc": "Nous recueillons les informations que votre navigateur envoie chaque fois que vous visitez notre Service (« Données de journalisation »). Ces données de journal peuvent inclure des informations telles que l'adresse de l'adresse IP de votre ordinateur, le type de navigateur, la version du navigateur, les pages de notre service que vous visitez, l'heure et la date de votre visite, le temps passé sur ces pages et d'autres statistiques.",
+    "title": "Données de journalisation"
+  },
+  "main-privacy-desc": "Quran Foundation, Inc. (qui comprend Quran.com) est une organisation à but non lucratif 501(c)(3) qui s'efforce de permettre à chaque être humain de bénéficier du Coran. Quran Foundation, Inc. valorise et respecte la vie privée de tous ses utilisateurs.",
+  "personal-info-use": {
+    "desc": "Nous collectons les informations personnelles pour les fins suivantes :  <li> <underline> Création et gestion de compte </underline> : Votre adresse e-mail est utilisée pour créer et gérer votre compte sur notre site Web. Il vous permet de vous connecter, d'accéder à vos paramètres et de stocker vos favoris et votre historique de lecture. </li> <li> <underline> Personnalisation </underline> : nous pouvons utiliser votre historique de lecture pour fournir des recommandations et des suggestions personnalisées en fonction de vos préférences et intérêts. </li><br/>",
+    "title": "Utilisation des informations personnelles"
+  },
+  "privacy-header": "Politique de confidentialité"
 }

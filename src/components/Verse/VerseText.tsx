@@ -7,6 +7,7 @@ import { shallowEqual, useSelector } from 'react-redux';
 import { QURAN_READER_OBSERVER_ID } from '../QuranReader/observer';
 
 import isCenterAlignedPage from './pageUtils';
+import TajweedFontPalettes from './TajweedFontPalettes';
 import styles from './VerseText.module.scss';
 
 import useIsFontLoaded from '@/components/QuranReader/hooks/useIsFontLoaded';
@@ -19,9 +20,9 @@ import {
 } from '@/redux/slices/QuranReader/readingViewVerse';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import QueryParam from '@/types/QueryParam';
-import { FALLBACK_FONT, QuranFont } from '@/types/QuranReader';
 import { getFontClassName } from '@/utils/fontFaceHelper';
 import { getFirstWordOfSurah } from '@/utils/verse';
+import { FALLBACK_FONT } from 'types/QuranReader';
 import Word from 'types/Word';
 
 type VerseTextProps = {
@@ -62,11 +63,9 @@ const VerseText = ({
     return null;
   }
   const firstWordData = getFirstWordOfSurah(location);
-  const isTajweedFont = quranFont === QuranFont.Tajweed;
   const isBigTextLayout =
-    (isReadingMode &&
-      (quranTextFontScale > 3 || showWordByWordTranslation || showWordByWordTransliteration)) ||
-    isTajweedFont;
+    isReadingMode &&
+    (quranTextFontScale > 3 || showWordByWordTranslation || showWordByWordTransliteration);
 
   const { chapterId } = firstWordData;
 
@@ -76,16 +75,16 @@ const VerseText = ({
     : getFontClassName(FALLBACK_FONT, quranTextFontScale, mushafLines, true);
   return (
     <>
+      <TajweedFontPalettes pageNumber={pageNumber} quranFont={quranFont} />
       <VerseTextContainer
         ref={textRef}
         data-verse-key={verseKey}
         data-page={pageNumber}
         data-chapter-id={chapterId}
         data-hizb={hizbNumber}
-        className={classNames(styles.verseTextContainer, {
+        className={classNames(styles.verseTextContainer, styles[fontClassName], {
           [styles.largeQuranTextLayoutContainer]: isBigTextLayout,
           [styles.highlighted]: isHighlighted,
-          [styles[fontClassName]]: !isTajweedFont,
           [styles.tafsirOrTranslationMode]: !isReadingMode,
         })}
       >

@@ -70,7 +70,7 @@ const READING_PREFERENCES_INITIAL_STATE: ReadingPreferences = {
   isUsingDefaultWordByWordLocale: true,
   wordByWordContentType: [WordByWordType.Translation],
   wordByWordDisplay: [WordByWordDisplay.TOOLTIP],
-  wordClickFunctionality: WordClickFunctionality.PlayAudio,
+  wordClickFunctionality: WordClickFunctionality.NoAudio,
 };
 
 const THEME_INITIAL_STATE: Theme = {

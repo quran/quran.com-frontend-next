@@ -6,14 +6,7 @@ import classNames from 'classnames';
 import { GetStaticProps, NextPage } from 'next';
 import Image from 'next/image';
 import useTranslation from 'next-translate/useTranslation';
-import {
-  AbsoluteFill,
-  cancelRender,
-  continueRender,
-  delayRender,
-  prefetch,
-  staticFile,
-} from 'remotion';
+import { AbsoluteFill, cancelRender, prefetch, staticFile } from 'remotion';
 import useSWRImmutable from 'swr/immutable';
 
 import {
@@ -22,6 +15,7 @@ import {
   getChapterAudioData,
   getChapterVerses,
 } from '@/api';
+import PlayerContent from '@/components/MediaMaker/Content';
 import styles from '@/components/MediaMaker/MediaMaker.module.scss';
 import VideoSettings from '@/components/MediaMaker/Settings/VideoSettings';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
@@ -29,6 +23,7 @@ import Spinner, { SpinnerSize } from '@/dls/Spinner/Spinner';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import useGetMediaSettings from '@/hooks/auth/media/useGetMediaSettings';
 import useAddQueryParamsToUrl from '@/hooks/useAddQueryParamsToUrl';
+import { getMediaGeneratorOgImageUrl } from '@/lib/og';
 import Error from '@/pages/_error';
 import layoutStyles from '@/pages/index.module.scss';
 import AudioData from '@/types/AudioData';
@@ -39,8 +34,8 @@ import Translation from '@/types/Translation';
 import { getMushafId } from '@/utils/api';
 import { makeChapterAudioDataUrl, makeVersesUrl } from '@/utils/apiPaths';
 import { areArraysEqual } from '@/utils/array';
-import { getAllChaptersData } from '@/utils/chapter';
-import { isSafari } from '@/utils/device-detector';
+import { getAllChaptersData, getChapterData } from '@/utils/chapter';
+import { isChromeIOS, isSafari } from '@/utils/device-detector';
 import { getLanguageAlternates, toLocalizedNumber } from '@/utils/locale';
 import {
   DEFAULT_API_PARAMS,
@@ -62,6 +57,7 @@ import {
   ONE_MONTH_REVALIDATION_PERIOD_SECONDS,
   REVALIDATION_PERIOD_ON_ERROR_SECONDS,
 } from '@/utils/staticPageGeneration';
+import { isValidVerseFrom, isValidVerseKey, isValidVerseTo } from '@/utils/validator';
 import { VersesResponse } from 'types/ApiResponses';
 import ChaptersData from 'types/ChaptersData';
 
@@ -90,16 +86,10 @@ const MediaMaker: NextPage<MediaMaker> = ({
   const [isReady, setIsReady] = useState(false);
   const [videoFileReady, setVideoFileReady] = useState(false);
   const [audioFileReady, setAudioFileReady] = useState(false);
-  const [isUpdating, setIsUpdating] = useState(false);
-  const [handleVideo] = useState(() => delayRender('Downloading video file...'));
-  const [handleAudio] = useState(() => delayRender('Downloading audio file...'));
+  const TOAST_GENERAL_ERROR = t('common:error.general');
   const areMediaFilesReady = videoFileReady && audioFileReady;
 
   const playerRef = useRef<PlayerRef>(null);
-
-  const lazyComponent = useCallback(() => {
-    return import('@/components/MediaMaker/Content');
-  }, []);
 
   useEffect(() => {
     setIsReady(true);
@@ -145,21 +135,6 @@ const MediaMaker: NextPage<MediaMaker> = ({
   };
 
   useAddQueryParamsToUrl(getQuranMediaMakerNavigationUrl(queryParams), {});
-
-  const seekToBeginning = useCallback(() => {
-    const current = playerRef?.current;
-    if (!current) {
-      return;
-    }
-    if (current.isPlaying) {
-      current.pause();
-    }
-    current.seekTo(0);
-  }, []);
-
-  useEffect(() => {
-    setIsUpdating(false);
-  }, [mediaSettings]);
 
   const API_PARAMS = useMemo(() => {
     return {
@@ -228,28 +203,42 @@ const MediaMaker: NextPage<MediaMaker> = ({
   // listen for errors and show a toast
   useEffect(() => {
     if (versesError || audioError) {
-      toast(t('common:error.general'), {
+      toast(TOAST_GENERAL_ERROR, {
         status: ToastStatus.Error,
       });
     }
-  }, [versesError, audioError, toast, t]);
+  }, [versesError, audioError, toast, TOAST_GENERAL_ERROR]);
 
   const isFetching = isVersesValidating || isAudioValidating;
   const chapterEnglishName = useMemo<string>(() => {
     return englishChaptersList?.[surah]?.translatedName as string;
   }, [surah, englishChaptersList]);
 
-  const getCurrentFrame = useCallback(() => {
-    return playerRef?.current?.getCurrentFrame();
-  }, []);
-
-  const getIsPlayerPlaying = useCallback(() => {
-    return playerRef?.current?.isPlaying();
-  }, []);
-
+  // Since we get the {{verseFrom}} and {{verseTo}} from the mediaSettings they will be available immediately,
+  // however this is not the case for {{currentSurahAudioData}}, so we validate the verses against the surah from {{currentSurahAudioData}}
+  // and return defaultAudio if it is not valid and return the surahAudio if they are valid.
   const audioData = useMemo(() => {
+    const chapterId = String(currentSurahAudioData.chapterId);
+    const startVerseKey = `${chapterId}:${verseFrom}`;
+    const endVerseKey = `${chapterId}:${verseTo}`;
+    const isValidAudioVerseFromKey = isValidVerseKey(chaptersData, startVerseKey);
+    const isValidAudioVerseToKey = isValidVerseKey(chaptersData, endVerseKey);
+
+    if (!isValidAudioVerseFromKey || !isValidAudioVerseToKey) {
+      return defaultAudio;
+    }
+
+    const chapterData = getChapterData(chaptersData, chapterId);
+    const isValidAudioVerses =
+      isValidVerseFrom(startVerseKey, endVerseKey, chapterData.versesCount, chapterId) &&
+      isValidVerseTo(startVerseKey, endVerseKey, chapterData.versesCount, chapterId);
+
+    if (!isValidAudioVerses) {
+      return defaultAudio;
+    }
+
     return getCurrentRangesAudioData(currentSurahAudioData, Number(verseFrom), Number(verseTo));
-  }, [currentSurahAudioData, verseFrom, verseTo]);
+  }, [chaptersData, currentSurahAudioData, defaultAudio, verseFrom, verseTo]);
 
   const timestamps = useMemo(() => {
     return getNormalizedTimestamps(audioData, VIDEO_FPS);
@@ -297,8 +286,7 @@ const MediaMaker: NextPage<MediaMaker> = ({
     chapterEnglishName,
   ]);
 
-  const method = isSafari() ? 'base64' : 'blob-url';
-
+  const method = isChromeIOS() ? 'base64' : 'blob-url';
   useEffect(() => {
     setVideoFileReady(false);
     // {@see https://www.remotion.dev/docs/troubleshooting/player-flicker#option-6-prefetching-as-base64-to-avoid-network-request-and-local-http-server}
@@ -310,40 +298,48 @@ const MediaMaker: NextPage<MediaMaker> = ({
     waitUntilVideoDone()
       .then(() => {
         setVideoFileReady(true);
-        continueRender(handleVideo);
       })
       .catch((e) => {
-        toast(t('common:error.general'), {
+        toast(TOAST_GENERAL_ERROR, {
           status: ToastStatus.Error,
         });
         cancelRender(e);
       });
-  }, [inputProps.video.videoSrc, method, handleVideo, toast, t]);
+  }, [inputProps.video.videoSrc, toast, TOAST_GENERAL_ERROR, method]);
 
   useEffect(() => {
-    setAudioFileReady(false);
-    // {@see https://www.remotion.dev/docs/troubleshooting/player-flicker#option-6-prefetching-as-base64-to-avoid-network-request-and-local-http-server}
-    const { waitUntilDone: waitUntilAudioDone } = prefetch(inputProps.audio.audioUrl, {
-      method,
-    });
-
-    waitUntilAudioDone()
-      .then(() => {
-        setAudioFileReady(true);
-        continueRender(handleAudio);
-      })
-      .catch((e) => {
-        toast(t('common:error.general'), {
-          status: ToastStatus.Error,
-        });
-        cancelRender(e);
+    if (inputProps.audio.audioUrl !== defaultAudio.audioUrl || !shouldRefetchAudioData) {
+      setAudioFileReady(false);
+      // {@see https://www.remotion.dev/docs/troubleshooting/player-flicker#option-6-prefetching-as-base64-to-avoid-network-request-and-local-http-server}
+      const { waitUntilDone: waitUntilAudioDone } = prefetch(inputProps.audio.audioUrl, {
+        method,
       });
-  }, [inputProps.audio.audioUrl, method, handleAudio, toast, t]);
+
+      waitUntilAudioDone()
+        .then(() => {
+          setAudioFileReady(true);
+        })
+        .catch((e) => {
+          toast(TOAST_GENERAL_ERROR, {
+            status: ToastStatus.Error,
+          });
+          cancelRender(e);
+        });
+    }
+  }, [
+    inputProps.audio.audioUrl,
+    toast,
+    TOAST_GENERAL_ERROR,
+    defaultAudio.audioUrl,
+    audioData.audioUrl,
+    shouldRefetchAudioData,
+    method,
+  ]);
 
   const renderPoster: RenderPoster = useCallback(() => {
     const video = getBackgroundVideoById(videoId);
 
-    if (isUpdating || isFetching || !areMediaFilesReady) {
+    if (isFetching || !areMediaFilesReady) {
       return (
         <div className={styles.loadingContainer}>
           <Spinner className={styles.spinner} size={SpinnerSize.Large} />
@@ -363,7 +359,7 @@ const MediaMaker: NextPage<MediaMaker> = ({
         />
       </AbsoluteFill>
     );
-  }, [areMediaFilesReady, isFetching, isUpdating, videoId]);
+  }, [areMediaFilesReady, isFetching, videoId]);
 
   const chaptersList = useMemo(() => {
     return Object.entries(chaptersData).map(([id, chapterObj], index) => ({
@@ -381,18 +377,27 @@ const MediaMaker: NextPage<MediaMaker> = ({
   const { width, height } = orientationToDimensions(orientation);
   const PATH = getQuranMediaMakerNavigationUrl();
 
+  const SEOComponent = (
+    <NextSeoWrapper
+      title={t('media:maker-title')}
+      description={t('media:maker-meta-desc')}
+      url={getCanonicalUrl(lang, PATH)}
+      languageAlternates={getLanguageAlternates(PATH)}
+      image={getMediaGeneratorOgImageUrl({
+        locale: lang,
+      })}
+      imageWidth={1200}
+      imageHeight={630}
+    />
+  );
+
   if (!isReady) {
-    return <></>;
+    return <>{SEOComponent}</>;
   }
 
   return (
     <>
-      <NextSeoWrapper
-        title={t('media:maker-title')}
-        description={t('media:maker-meta-desc')}
-        url={getCanonicalUrl(lang, PATH)}
-        languageAlternates={getLanguageAlternates(PATH)}
-      />
+      {SEOComponent}
       <div className={styles.pageContainer}>
         <div className={classNames(styles.playerWrapper, layoutStyles.flowItem)}>
           <>
@@ -406,7 +411,7 @@ const MediaMaker: NextPage<MediaMaker> = ({
                 [styles.playerHeight]: !isSafari(),
               })}
               inputProps={inputProps}
-              lazyComponent={lazyComponent}
+              component={PlayerContent}
               durationInFrames={getDurationInFrames(timestamps)}
               compositionWidth={width}
               compositionHeight={height}
@@ -414,7 +419,7 @@ const MediaMaker: NextPage<MediaMaker> = ({
               doubleClickToFullscreen
               fps={VIDEO_FPS}
               ref={playerRef}
-              controls={!isUpdating && !isFetching && areMediaFilesReady}
+              controls={!isFetching && areMediaFilesReady}
               bufferStateDelayInMilliseconds={200} // wait for 200ms second before showing the spinner
               renderPoster={renderPoster}
               posterFillMode="player-size"
@@ -429,13 +434,10 @@ const MediaMaker: NextPage<MediaMaker> = ({
           <VideoSettings
             chaptersList={chaptersList}
             reciters={reciters}
-            seekToBeginning={seekToBeginning}
-            getCurrentFrame={getCurrentFrame}
-            getIsPlayerPlaying={getIsPlayerPlaying}
+            playerRef={playerRef}
             isFetching={isFetching}
             inputProps={inputProps}
             mediaSettings={mediaSettings}
-            setIsUpdating={setIsUpdating}
           />
         </div>
       </div>
@@ -443,14 +445,29 @@ const MediaMaker: NextPage<MediaMaker> = ({
   );
 };
 
+const fetchRecitersAndTranslations = async (locale) => {
+  const { reciters } = await getAvailableReciters(locale, []);
+  const { translations } = await getAvailableTranslations(locale);
+  return { reciters, translations };
+};
+
+const fetchChapterData = async (locale) => {
+  const chaptersData = await getAllChaptersData(locale);
+  const englishChaptersList = await getAllChaptersData('en');
+  return { chaptersData, englishChaptersList };
+};
+
+const fetchVersesAndAudio = async (locale) => {
+  const verses = await getChapterVerses(DEFAULT_SURAH, locale, DEFAULT_API_PARAMS);
+  const chapterAudioData = await getChapterAudioData(DEFAULT_RECITER_ID, DEFAULT_SURAH, true);
+  return { verses, chapterAudioData };
+};
+
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   try {
-    const { reciters } = await getAvailableReciters(locale, []);
-    const { translations } = await getAvailableTranslations(locale);
-    const chaptersData = await getAllChaptersData(locale);
-    const englishChaptersList = await getAllChaptersData('en');
-    const verses = await getChapterVerses(DEFAULT_SURAH, locale, DEFAULT_API_PARAMS);
-    const chapterAudioData = await getChapterAudioData(DEFAULT_RECITER_ID, DEFAULT_SURAH, true);
+    const { reciters, translations } = await fetchRecitersAndTranslations(locale);
+    const { chaptersData, englishChaptersList } = await fetchChapterData(locale);
+    const { verses, chapterAudioData } = await fetchVersesAndAudio(locale);
 
     return {
       props: {

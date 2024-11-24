@@ -1,12 +1,15 @@
 /* eslint-disable max-lines */
+import { NextApiRequest } from 'next';
 import { configureRefreshFetch } from 'refresh-fetch';
 
 import { getTimezone } from '../datetime';
 import { prepareGenerateMediaFileRequestData } from '../media/utils';
 
+import generateSignature from './signature';
 import BookmarkByCollectionIdQueryParams from './types/BookmarkByCollectionIdQueryParams';
 import GetAllNotesQueryParams from './types/Note/GetAllNotesQueryParams';
 
+import { fetcher, X_AUTH_SIGNATURE, X_INTERNAL_CLIENT, X_TIMESTAMP } from '@/api';
 import {
   FilterActivityDaysParams,
   QuranActivityDay,
@@ -72,7 +75,7 @@ import {
   makeGetMediaFileProgressUrl,
   makeGetMonthlyMediaFilesCountUrl,
 } from '@/utils/auth/apiPaths';
-import { fetcher } from 'src/api';
+import { isStaticBuild } from '@/utils/build';
 import CompleteAnnouncementRequest from 'types/auth/CompleteAnnouncementRequest';
 import { GetBookmarkCollectionsIdResponse } from 'types/auth/GetBookmarksByCollectionId';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
@@ -88,7 +91,6 @@ import { Collection } from 'types/Collection';
 import CompleteSignupRequest from 'types/CompleteSignupRequest';
 
 type RequestData = Record<string, any>;
-
 const IGNORE_ERRORS = [
   MediaRenderError.MediaVersesRangeLimitExceeded,
   MediaRenderError.MediaFilesPerUserLimitExceeded,
@@ -445,6 +447,23 @@ export const withCredentialsFetcher = async <T>(
   init?: RequestInit,
 ): Promise<T> => {
   try {
+    let additionalHeaders = {};
+    if (isStaticBuild) {
+      const req: NextApiRequest = {
+        url: typeof input === 'string' ? input : input.url,
+        method: init.method || 'GET',
+        body: init.body,
+        headers: init.headers,
+        query: {},
+      } as NextApiRequest;
+
+      const { signature, timestamp } = generateSignature(req, req.url);
+      additionalHeaders = {
+        [X_AUTH_SIGNATURE]: signature,
+        [X_TIMESTAMP]: timestamp,
+        [X_INTERNAL_CLIENT]: process.env.INTERNAL_CLIENT_ID,
+      };
+    }
     const data = await fetcher<T>(input, {
       ...init,
       credentials: 'include',
@@ -452,6 +471,7 @@ export const withCredentialsFetcher = async <T>(
         ...init?.headers,
         // eslint-disable-next-line @typescript-eslint/naming-convention
         'x-timezone': getTimezone(),
+        ...additionalHeaders,
       },
     });
     return data;

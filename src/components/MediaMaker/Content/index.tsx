@@ -62,32 +62,46 @@ const MediaMakerContent: React.FC<Props> = ({
   isPlayer = false,
 }) => {
   const chaptersDataArabic = useGetChaptersData('ar');
+  const firstVerseTiming = audio?.verseTimings[0];
+
   const startFrom = useMemo(() => {
-    return audio?.verseTimings[0]?.normalizedStart
-      ? (audio?.verseTimings[0]?.normalizedStart / 1000) * 30
-      : (audio?.verseTimings[0]?.timestampFrom / 1000) * 30;
-  }, [audio?.verseTimings]);
+    const normalizedStart = firstVerseTiming?.normalizedStart;
+
+    return normalizedStart
+      ? (normalizedStart / 1000) * 30
+      : (firstVerseTiming?.timestampFrom / 1000) * 30;
+  }, [firstVerseTiming?.normalizedStart, firstVerseTiming?.timestampFrom]);
 
   const endAt = useMemo(() => {
-    return audio?.verseTimings[0]?.normalizedEnd
-      ? (audio?.verseTimings[audio?.verseTimings?.length - 1]?.normalizedEnd / 1000) * 30
-      : (audio?.verseTimings[audio?.verseTimings?.length - 1]?.timestampTo / 1000) * 30;
-  }, [audio?.verseTimings]);
+    const verseTiming = audio?.verseTimings[audio?.verseTimings?.length - 1];
+
+    return firstVerseTiming?.normalizedEnd
+      ? (verseTiming?.normalizedEnd / 1000) * 30
+      : (verseTiming?.timestampTo / 1000) * 30;
+  }, [audio?.verseTimings, firstVerseTiming?.normalizedEnd]);
 
   const audioHasStartAndEndRanges = typeof startFrom === 'number' && typeof endAt === 'number';
 
   const videoPath = staticFile(`${isPlayer ? '/publicMin' : ''}${video.videoSrc}`);
+  const isPortrait = orientation === Orientation.PORTRAIT;
   return (
     <AbsoluteFill
       style={{
         justifyContent: 'center',
       }}
+      translate="no"
     >
       <div className={styles.videoContainer}>
         <Video loop src={videoPath} />
       </div>
       {audioHasStartAndEndRanges && (
-        <Audio pauseWhenBuffering startFrom={startFrom} endAt={endAt} src={audio.audioUrl} />
+        <Audio
+          pauseWhenBuffering
+          startFrom={startFrom}
+          endAt={endAt}
+          src={audio.audioUrl}
+          acceptableTimeShiftInSeconds={1}
+        />
       )}
       {verses &&
         verses.length > 0 &&
@@ -107,23 +121,37 @@ const MediaMakerContent: React.FC<Props> = ({
               <AbsoluteFill
                 style={{
                   height: '250px',
-                  paddingTop: 40,
+                  paddingTop: isPortrait ? 90 : 40,
                   backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0))',
                 }}
               >
                 <div className={styles.chapterTitle}>
                   <div>
-                    <span className={styles.watermark}>I made this on</span>
+                    <span
+                      className={classNames(styles.watermark, {
+                        [styles.watermarkPortrait]: isPortrait,
+                        [styles.watermarkLandscape]: !isPortrait,
+                      })}
+                    >
+                      I made this on
+                    </span>
                     <span className={styles.space} />
-                    <span className={styles.logo}>Quran.com</span>
+                    <span
+                      className={classNames(styles.logo, {
+                        [styles.logoPortrait]: isPortrait,
+                        [styles.logoLandscape]: !isPortrait,
+                      })}
+                    >
+                      Quran.com
+                    </span>
                   </div>
                   <div>
                     <span
                       className={styles.surahArabic}
                     >{`${WORD_SURAH} ${chapter?.translatedName}`}</span>
-                    <span
-                      className={styles.surahEnglish}
-                    >{` - ${chapterEnglishName} (Ch. ${verse.chapterId})`}</span>
+                    <span className={styles.surahEnglish}>
+                      {` - ${chapterEnglishName} (Ch. ${verse.chapterId})`}
+                    </span>
                   </div>
                 </div>
               </AbsoluteFill>
@@ -138,8 +166,8 @@ const MediaMakerContent: React.FC<Props> = ({
                   '--border-color': borderColor,
                 }}
                 className={classNames(styles.verseContainer, styles.verseBorder, {
-                  [styles.verseLandscape]: orientation === Orientation.LANDSCAPE,
-                  [styles.versePortrait]: orientation === Orientation.PORTRAIT,
+                  [styles.verseLandscape]: !isPortrait,
+                  [styles.versePortrait]: isPortrait,
                 })}
               >
                 <div
@@ -168,7 +196,9 @@ const MediaMakerContent: React.FC<Props> = ({
                     <div
                       style={{ fontSize: translationFontScale * 10.1 }}
                       dangerouslySetInnerHTML={{
-                        __html: getPlainTranslationText(translation.text),
+                        __html: getPlainTranslationText(
+                          `${translation.text} (${verse.chapterId}:${verse.verseNumber})`,
+                        ),
                       }}
                     />
                   </div>

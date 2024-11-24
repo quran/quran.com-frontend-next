@@ -146,12 +146,17 @@
     "verify-code": "Sahkan kod"
   },
   "error": {
+    "MediaVersesRangeLimitExceeded": "Anda hanya boleh memilih sehingga {{limit}} ayat pada satu masa. Sila pilih julat yang lebih kecil.",
     "bookmark-sync": "Penanda halaman tidak segerak.",
     "email-login-fail": "Gagal log masuk dengan e-mel. Sila cuba lagi",
     "general": "Kesilapan telah berlaku. Sila cuba lagi.",
     "offline": "Nampaknya anda kehilangan talian. Sila semak dan cuba lagi.",
-    "pref-persist-fail": "Gagal menyelenggarakan tetapan anda ke Cloud."
+    "pref-persist-fail": "Gagal menyelenggarakan tetapan anda ke Cloud.",
+    "ranges-no-value": "Julat permulaan dan akhir mesti mempunyai nilai",
+    "ranges-too-many-verses": "*Max {{maxNumberOfVerses}} Ayah",
+    "ranges-wrong-order": "Ayat permulaan hendaklah sebelum ayat akhir."
   },
+  "exciting-updates": "Kemas Kini Menarik",
   "feedback": "Maklum balas",
   "fonts": {
     "15_lines": "15 Baris",
@@ -161,12 +166,16 @@
     "font-size": "Saiz fon",
     "lines": "Barisan",
     "qcf-desc": "Fon Kompleks Raja Fahad (V1 dan V2) berkualiti tinggi tetapi mengambil masa yang lebih lama untuk dimuatkan.",
+    "qcf-v4-desc": "Fon Tajwid dicipta menggunakan Easy Quran - Dar Al Marifa Tajwid Mushaf dan King Fahad Glorious Quran Printing Complex (KFGQPC) - Uthmanic Hafs V4 Fonts selepas mendapat kebenaran daripada kedua-duanya.",
     "qpc_uthmani_hafs": "QPC Uthmani Hafs",
     "quran-font": "Fon Quran",
+    "quran-font-size": "saiz huruf al-Quran",
     "tajweed": "Tajwid",
     "tajweed-desc": "Fon tulisan Tajwid menunjukkan Mushaf berwarna Tajwid. Anda boleh membaca lebih lanjut tentang aturan warna Tajwid <0> di sini </0>",
+    "tajweed_v4": "Kompleks Raja Fahad V4",
     "text_indopak": "IndoPak",
-    "text_uthmani": "Uthmani"
+    "text_uthmani": "Uthmani",
+    "translation-font-size": "Saiz fon terjemahan"
   },
   "footer": {
     "description": "Quran.com adalah Sadaqah Jariyah. Kami berharap agar kami dapat memudahkan semua orang dapat membaca, mempelajari dan memahami erti Al-Quran. Al-Quran yang mulia mempunyai banyak nama antaranya Al-Quran Al-Kareem, Al-Kitab, Al-Furqan, Al-Maw'itha, Al-Zikir, dan Al-Nur.",
@@ -296,10 +305,12 @@
     "title": "Cari"
   },
   "seconds": "Saat",
+  "see-new": "Lihat apa yang baharu",
   "settings": {
     "no-tafsir-selected": "Tiada tafsir yang dipilih",
     "no-translation-selected": "Tiada terjemahan yang dipilih",
     "reading-experience": "Pengalaman Membaca",
+    "reset": "Tetapkan semula",
     "reset-cta": "Tetapkan pada asal",
     "reset-notif": "Ketetapan (settings) anda telah 'reset' kepada yang asal",
     "search-reciter": "Cari Qari (Pembaca)",
@@ -323,7 +334,7 @@
     "search-hizb": "Cari Hizb",
     "search-juz": "Cari Juzuk",
     "search-page": "Halaman Carian",
-    "search-surah": "Cari surah",
+    "search-surah": "Cari Surah",
     "try-navigating-with": "Nasihat: cuba navigasi dengan"
   },
   "sitemap": "Peta laman",
@@ -350,6 +361,7 @@
     "app": "Aplikasi Tarteel",
     "name": "Tarteel.ai"
   },
+  "terms-and-conditions": "Terma dan Syarat",
   "theme": "Tema",
   "themes": {
     "auto": "Automatik",
@@ -367,6 +379,7 @@
   "translations": "Terjemahan",
   "transliteration": "Transliterasi",
   "type": "Jenis",
+  "unavailable": "Tidak tersedia pada masa ini",
   "undo": "Buat asal",
   "validation": {
     "invalid-email": "{{field}} mestilah alamat e-mel yang sah",
