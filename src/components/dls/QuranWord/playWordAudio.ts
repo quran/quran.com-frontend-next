@@ -1,9 +1,11 @@
-import { QURANCDN_AUDIO_BASE_URL } from '@/utils/audio';
+import { getWordByWordAudioUrl } from '@/utils/audio';
 import { logEvent } from '@/utils/eventLogger';
 import Word from 'types/Word';
 
 const playWordAudio = (word: Word) => {
-  playWordByWordAudio(`${QURANCDN_AUDIO_BASE_URL}${word.audioUrl}`);
+  const [chapterId, verseId, wordId] = word.location.split(':');
+  const audioUrl = getWordByWordAudioUrl(Number(chapterId), Number(verseId), Number(wordId));
+  playWordByWordAudio(audioUrl);
 };
 
 export default playWordAudio;

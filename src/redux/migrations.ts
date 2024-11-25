@@ -5,7 +5,7 @@ import { initialSidebarIsVisible } from './slices/QuranReader/sidebarNavigation'
 import { initialState as welcomeMessageInitialState } from './slices/welcomeMessage';
 
 import { consolidateWordByWordState, getDefaultWordByWordDisplay } from '@/utils/wordByWord';
-import { MushafLines, QuranFont } from 'types/QuranReader';
+import { MushafLines, QuranFont, WordClickFunctionality } from 'types/QuranReader';
 
 export default {
   3: (state) => ({
@@ -250,6 +250,13 @@ export default {
       ...(state.quranReaderStyles.quranFont === QuranFont.Tajweed && {
         quranFont: QuranFont.TajweedV4,
       }),
+    },
+  }),
+  33: (state) => ({
+    ...state,
+    readingPreferences: {
+      ...state.readingPreferences,
+      wordClickFunctionality: WordClickFunctionality.NoAudio,
     },
   }),
 };

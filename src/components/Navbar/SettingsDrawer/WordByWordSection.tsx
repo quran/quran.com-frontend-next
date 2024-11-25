@@ -207,7 +207,6 @@ const WordByWordSection = () => {
             <Trans
               components={{ span: <span className={styles.source} /> }}
               i18nKey="common:reciter-summary"
-              values={{ reciterName: 'Shaikh Wisam Sharieff' }}
             />
           </Section.Footer>
         </div>
