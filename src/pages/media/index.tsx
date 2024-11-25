@@ -444,14 +444,29 @@ const MediaMaker: NextPage<MediaMaker> = ({
   );
 };
 
+const fetchRecitersAndTranslations = async (locale) => {
+  const { reciters } = await getAvailableReciters(locale, []);
+  const { translations } = await getAvailableTranslations(locale);
+  return { reciters, translations };
+};
+
+const fetchChapterData = async (locale) => {
+  const chaptersData = await getAllChaptersData(locale);
+  const englishChaptersList = await getAllChaptersData('en');
+  return { chaptersData, englishChaptersList };
+};
+
+const fetchVersesAndAudio = async (locale) => {
+  const verses = await getChapterVerses(DEFAULT_SURAH, locale, DEFAULT_API_PARAMS);
+  const chapterAudioData = await getChapterAudioData(DEFAULT_RECITER_ID, DEFAULT_SURAH, true);
+  return { verses, chapterAudioData };
+};
+
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
   try {
-    const { reciters } = await getAvailableReciters(locale, []);
-    const { translations } = await getAvailableTranslations(locale);
-    const chaptersData = await getAllChaptersData(locale);
-    const englishChaptersList = await getAllChaptersData('en');
-    const verses = await getChapterVerses(DEFAULT_SURAH, locale, DEFAULT_API_PARAMS);
-    const chapterAudioData = await getChapterAudioData(DEFAULT_RECITER_ID, DEFAULT_SURAH, true);
+    const { reciters, translations } = await fetchRecitersAndTranslations(locale);
+    const { chaptersData, englishChaptersList } = await fetchChapterData(locale);
+    const { verses, chapterAudioData } = await fetchVersesAndAudio(locale);
 
     return {
       props: {

@@ -49,19 +49,23 @@ const TranslationSettingsSection: React.FC<Props> = ({ onSettingsUpdate, transla
       if (!data) {
         return null;
       }
+      const availableTranslations = translations.filter((selectedId) =>
+        data.translations.some((translation) => translation.id === selectedId),
+      );
+
       const firstSelectedTranslation = data.translations.find(
-        (translation) => translation.id === translations[0],
+        (translation) => translation.id === availableTranslations[0],
       );
 
       let selectedValueString = t('settings.no-translation-selected');
-      if (translations.length === 1) selectedValueString = firstSelectedTranslation?.name;
-      if (translations.length === 2) {
+      if (availableTranslations.length === 1) selectedValueString = firstSelectedTranslation?.name;
+      if (availableTranslations.length === 2) {
         selectedValueString = t('settings.value-and-other', {
           value: firstSelectedTranslation?.name,
           othersCount: localizedSelectedTranslations,
         });
       }
-      if (translations.length > 2) {
+      if (availableTranslations.length > 2) {
         selectedValueString = t('settings.value-and-others', {
           value: firstSelectedTranslation?.name,
           othersCount: localizedSelectedTranslations,
