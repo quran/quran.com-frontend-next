@@ -3,8 +3,8 @@ import { decamelizeKeys } from 'humps';
 import stringify from './qs-stringify';
 import { getBasePath } from './url';
 
+import { Mushaf, MushafLines, QuranFont, QuranFontMushaf } from '@/types/QuranReader';
 import { isStaticBuild } from '@/utils/build';
-import { Mushaf, MushafLines, QuranFont, QuranFontMushaf } from 'types/QuranReader';
 
 export const ITEMS_PER_PAGE = 10;
 
