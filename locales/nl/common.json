@@ -200,6 +200,7 @@
     "description": "Maandelijkse donaties helpen ons Quran.com te verbeteren en de activiteiten te ondersteunen, zodat we ons minder concentreren op fondsenwerving en meer op het creëren van impact.",
     "title": "Word een maandelijkse donateur"
   },
+  "hear-it-pronounced": "Klik op een woord en hoor de uitspraak ervan!",
   "help": "Helpen",
   "hizb": "Hizb",
   "home": "Huis",
@@ -278,7 +279,7 @@
   },
   "recitation": "voordracht",
   "reciter": "Voordrager",
-  "reciter-summary": "Woord voor woord voordrager: <span> {{reciterName}} </span> . Klik op een woord om naar de recitatie te luisteren.",
+  "reciter-summary": "(Met vriendelijke toestemming van Tafsir Center)",
   "reciters": "voordragers",
   "reflect": "Reflecteren",
   "reflections": "Reflecties",

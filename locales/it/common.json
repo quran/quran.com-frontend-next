@@ -200,6 +200,7 @@
     "description": "Le donazioni mensili ci aiutano a migliorare Quran.com e a sostenere le operazioni, quindi ci concentriamo meno sulla raccolta fondi e più sulla creazione di impatto.",
     "title": "Diventa un donatore mensile"
   },
+  "hear-it-pronounced": "Clicca su una parola qualsiasi e ascolta la pronuncia!",
   "help": "Aiuto",
   "hizb": "Hizb",
   "home": "Casa",
@@ -278,7 +279,7 @@
   },
   "recitation": "Recitazione",
   "reciter": "Recitatore",
-  "reciter-summary": "Recitatore parola per parola: <span> {{reciterName}} </span> . Clicca su una parola per ascoltare la sua recitazione.",
+  "reciter-summary": "(Con la gentile autorizzazione del Tafsir Center)",
   "reciters": "Recitatori",
   "reflect": "Riflettere",
   "reflections": "Riflessi",

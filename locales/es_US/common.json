@@ -15,14 +15,14 @@
         "title": ""
       },
       "quran-foundation-link": {
-        "action": "",
-        "description": "",
-        "title": ""
+        "action": "Siguiente",
+        "description": "Utiliza tu nombre de usuario en Quran.com para acceder a QuranReflect.com, una próspera comunidad global dedicada a la reflexión coránica.",
+        "title": "¡Utiliza tu cuenta en todas las aplicaciones de Quran.Foundation!"
       },
       "quran-growth-journey": {
-        "action": "",
-        "description": "",
-        "title": ""
+        "action": "Siguiente",
+        "description": "Mantén tu racha de lectura del Corán y avanza hacia tus metas mientras desarrollas nuevos hábitos.",
+        "title": "¡Comienza tu viaje de crecimiento en el Corán!"
       },
       "welcome": {
         "action": "",
@@ -200,6 +200,7 @@
     "description": "Las donaciones mensuales nos ayudan a mejorar Quran.com y sostener las operaciones para que nos centremos menos en la recaudación de fondos y más en crear impacto.",
     "title": ""
   },
+  "hear-it-pronounced": "",
   "help": "Ayuda",
   "hizb": "Hizb",
   "home": "Inicio",
@@ -212,7 +213,7 @@
   "language": "",
   "languages": "",
   "learn-more": "",
-  "learning-plans": "",
+  "learning-plans": "Planes de aprendizaje",
   "less": "",
   "loading": "",
   "login": "",
@@ -227,7 +228,7 @@
   "my-learning-plans": "Mis planes de aprendizaje",
   "navigate": "",
   "network": "Comunidad",
-  "new": "",
+  "new": "¡Nuevo!",
   "newest": "Más recientes",
   "next": "Siguiente",
   "next-ayah": "",
@@ -260,7 +261,7 @@
   },
   "powered-by": "",
   "prepare-hearts": {
-    "cta": "",
+    "cta": "Más información",
     "title": "¡Seguimos adelante después del Ramadán!"
   },
   "prev": "Anterior",
@@ -379,7 +380,7 @@
   "translations": "Traducciones",
   "transliteration": "Transliteración",
   "type": "Tipo",
-  "unavailable": "",
+  "unavailable": "No está disponible en este momento.",
   "undo": "",
   "validation": {
     "invalid-email": "",

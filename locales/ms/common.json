@@ -200,6 +200,7 @@
     "description": "Derma bulanan membantu kami menambah baik Quran.com dan mengekalkan operasi supaya kami kurang menumpukan pada pengumpulan dana dan lebih kepada mencipta impak.",
     "title": "Jadilah Penderma Bulanan"
   },
+  "hear-it-pronounced": "Klik mana-mana perkataan, dengar ia disebut!",
   "help": "Bantuan",
   "hizb": "Hizb",
   "home": "Halaman Utama",
@@ -278,7 +279,7 @@
   },
   "recitation": "Tilawah",
   "reciter": "Qari",
-  "reciter-summary": "Pilihan qari untuk pembacaan per kata: <span> {{reciterName}} </span> . Klik pada perkataan untuk mendengar bacaannya.",
+  "reciter-summary": "(Dengan izin Pusat Tafsir)",
   "reciters": "Qari",
   "reflect": "Renungkan",
   "reflections": "Renungan",

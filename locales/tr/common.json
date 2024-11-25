@@ -200,6 +200,7 @@
     "description": "Aylık bağışlar, Kuran.com'u geliştirmemize ve operasyonlarımızı sürdürmemize yardımcı oluyor; böylece bağış toplamaya daha az, etki yaratmaya daha çok odaklanıyoruz.",
     "title": "Aylık Bağışçımız Olun"
   },
+  "hear-it-pronounced": "Herhangi bir kelimeye tıklayın, telaffuzunu dinleyin!",
   "help": "Yardım",
   "hizb": "Hizb",
   "home": "Anasayfa",
@@ -278,7 +279,7 @@
   },
   "recitation": "okuma",
   "reciter": "Okuyucu",
-  "reciter-summary": "Kelime kelime okuyucu: <span> {{reciterName}} </span> . Okunuşunu dinlemek için bir kelimeye tıklayın.",
+  "reciter-summary": "(Tefsir Merkezi'nin izniyle)",
   "reciters": "Okuyucular",
   "reflect": "Yansıt",
   "reflections": "Yansımalar",
