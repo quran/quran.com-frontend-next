@@ -17,7 +17,7 @@ import VoiceSearchBodyContainer from '@/components/TarteelVoiceSearch/BodyContai
 import TarteelVoiceSearchTrigger from '@/components/TarteelVoiceSearch/Trigger';
 import useDebounce from '@/hooks/useDebounce';
 import IconSearch from '@/icons/search.svg';
-import { selectRecentNavigations } from '@/redux/slices/CommandBar/state';
+import { selectInitialSearchQuery, selectRecentNavigations } from '@/redux/slices/CommandBar/state';
 import { selectIsCommandBarVoiceFlowStarted } from '@/redux/slices/voiceSearch';
 import SearchQuerySource from '@/types/SearchQuerySource';
 import { makeNewSearchResultsUrl } from '@/utils/apiPaths';
@@ -66,7 +66,8 @@ const CommandBarBody: React.FC = () => {
   const { t } = useTranslation('common');
   const recentNavigations = useSelector(selectRecentNavigations, areArraysEqual);
   const isVoiceSearchFlowStarted = useSelector(selectIsCommandBarVoiceFlowStarted, shallowEqual);
-  const [searchQuery, setSearchQuery] = useState<string>(null);
+  const initialSearchQuery = useSelector(selectInitialSearchQuery, shallowEqual);
+  const [searchQuery, setSearchQuery] = useState<string>(initialSearchQuery || null);
   // Debounce search query to avoid having to call the API on every type. The API will be called once the user stops typing.
   const debouncedSearchQuery = useDebounce<string>(searchQuery, DEBOUNCING_PERIOD_MS);
 
@@ -186,6 +187,7 @@ const CommandBarBody: React.FC = () => {
               inputMode="text"
               // eslint-disable-next-line jsx-a11y/no-autofocus
               autoFocus
+              value={searchQuery}
             />
           </div>
         )}
