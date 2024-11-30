@@ -16,12 +16,11 @@ import useFocus from '@/hooks/useFocusElement';
 import { selectNavbar } from '@/redux/slices/navbar';
 import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
 import { selectIsSearchDrawerVoiceFlowStarted } from '@/redux/slices/voiceSearch';
-import { SearchMode } from '@/types/Search/SearchRequestParams';
 import SearchService from '@/types/Search/SearchService';
 import SearchQuerySource from '@/types/SearchQuerySource';
 import { areArraysEqual } from '@/utils/array';
 import { logButtonClick, logTextSearchQuery } from '@/utils/eventLogger';
-import { addToSearchHistory } from '@/utils/search';
+import { addToSearchHistory, getQuickSearchQuery } from '@/utils/search';
 import { SearchResponse } from 'types/ApiResponses';
 
 const SearchBodyContainer = dynamic(() => import('@/components/Search/SearchBodyContainer'), {
@@ -63,12 +62,7 @@ const SearchDrawer: React.FC = () => {
       addToSearchHistory(dispatch, debouncedSearchQuery, SearchQuerySource.SearchDrawer);
       setIsSearching(true);
       logTextSearchQuery(debouncedSearchQuery, SearchQuerySource.SearchDrawer);
-      getNewSearchResults({
-        mode: SearchMode.Quick,
-        query: debouncedSearchQuery,
-        getText: 1,
-        highlight: 1,
-      })
+      getNewSearchResults(getQuickSearchQuery(debouncedSearchQuery))
         .then((response) => {
           setSearchResult({
             ...response,

@@ -21,6 +21,7 @@ import useDebounce from '@/hooks/useDebounce';
 import useFocus from '@/hooks/useFocusElement';
 import FilterIcon from '@/icons/filter.svg';
 import SearchIcon from '@/icons/search.svg';
+import { setIsOpen } from '@/redux/slices/CommandBar/state';
 import SearchQuerySource from '@/types/SearchQuerySource';
 import { getAllChaptersData } from '@/utils/chapter';
 import { logButtonClick, logEvent, logValueChange } from '@/utils/eventLogger';
@@ -121,11 +122,10 @@ const Search: NextPage<SearchProps> = ({ translations }): JSX.Element => {
   /**
    * Handle when the search query is changed.
    *
-   * @param {string} newSearchQuery
    * @returns {void}
    */
-  const onSearchQueryChange = (newSearchQuery: string): void => {
-    setSearchQuery(newSearchQuery || '');
+  const onSearchQueryChange = (): void => {
+    dispatch({ type: setIsOpen.type, payload: true });
   };
 
   const onClearClicked = () => {
@@ -410,7 +410,6 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
       },
     };
   } catch (e) {
-    console.log(e);
     return {
       props: {
         hasError: true,

@@ -13,7 +13,7 @@ import { addSearchHistoryRecord } from '@/redux/slices/Search/search';
 import { SearchResponse } from '@/types/ApiResponses';
 import AvailableTranslation from '@/types/AvailableTranslation';
 import ChaptersData from '@/types/ChaptersData';
-import { SearchMode } from '@/types/Search/SearchRequestParams';
+import { SearchMode, SearchRequestParams } from '@/types/Search/SearchRequestParams';
 import SearchService from '@/types/Search/SearchService';
 import SearchQuerySource from '@/types/SearchQuerySource';
 import { getChapterData } from '@/utils/chapter';
@@ -282,4 +282,19 @@ export const addToSearchHistory = (
 ) => {
   dispatch({ type: addSearchHistoryRecord.type, payload: debouncedSearchQuery });
   logTextSearchQuery(debouncedSearchQuery, source);
+};
+
+/**
+ * Get the quick search query.
+ *
+ * @param {string} query
+ * @returns {SearchRequestParams<SearchMode.Quick>}
+ */
+export const getQuickSearchQuery = (query: string): SearchRequestParams<SearchMode.Quick> => {
+  return {
+    mode: SearchMode.Quick,
+    query,
+    getText: 1,
+    highlight: 1,
+  };
 };

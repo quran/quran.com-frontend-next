@@ -19,11 +19,11 @@ import useDebounce from '@/hooks/useDebounce';
 import IconSearch from '@/icons/search.svg';
 import { selectRecentNavigations } from '@/redux/slices/CommandBar/state';
 import { selectIsCommandBarVoiceFlowStarted } from '@/redux/slices/voiceSearch';
-import { SearchMode } from '@/types/Search/SearchRequestParams';
 import SearchQuerySource from '@/types/SearchQuerySource';
 import { makeNewSearchResultsUrl } from '@/utils/apiPaths';
 import { areArraysEqual } from '@/utils/array';
 import { logButtonClick, logTextSearchQuery } from '@/utils/eventLogger';
+import { getQuickSearchQuery } from '@/utils/search';
 import { SearchResponse } from 'types/ApiResponses';
 import { SearchNavigationType } from 'types/SearchNavigationResult';
 
@@ -115,12 +115,7 @@ const CommandBarBody: React.FC = () => {
   );
 
   const quickSearchFetcher = useCallback(() => {
-    return getNewSearchResults({
-      mode: SearchMode.Quick,
-      query: searchQuery,
-      getText: 1,
-      highlight: 1,
-    });
+    return getNewSearchResults(getQuickSearchQuery(searchQuery));
   }, [searchQuery]);
 
   /**
@@ -210,14 +205,7 @@ const CommandBarBody: React.FC = () => {
         ) : (
           <DataFetcher
             queryKey={
-              searchQuery
-                ? makeNewSearchResultsUrl({
-                    mode: SearchMode.Quick,
-                    query: searchQuery,
-                    getText: 1,
-                    highlight: 1,
-                  })
-                : null
+              searchQuery ? makeNewSearchResultsUrl(getQuickSearchQuery(searchQuery)) : null
             }
             render={dataFetcherRender}
             fetcher={quickSearchFetcher}
