@@ -25,7 +25,7 @@ import { areArraysEqual } from '@/utils/array';
 import { logButtonClick, logTextSearchQuery } from '@/utils/eventLogger';
 import { getQuickSearchQuery } from '@/utils/search';
 import { SearchResponse } from 'types/ApiResponses';
-import { SearchNavigationType } from 'types/SearchNavigationResult';
+import { SearchNavigationType } from 'types/Search/SearchNavigationResult';
 
 const NAVIGATE_TO = [
   {

@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 
 import CommandsList from '@/components/CommandBar/CommandsList';
 import DataFetcher from '@/components/DataFetcher';
-import SearchResultItem from '@/components/Search/SearchResults/SearchResultItem';
+import TarteelSearchResultItem from '@/components/TarteelVoiceSearch/TarteelSearchResultItem';
 import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
 import SearchService from '@/types/Search/SearchService';
 import SearchQuerySource from '@/types/SearchQuerySource';
@@ -15,7 +15,7 @@ import { areArraysEqual } from '@/utils/array';
 import { toLocalizedVerseKey } from '@/utils/locale';
 import { truncateString } from '@/utils/string';
 import { VersesResponse } from 'types/ApiResponses';
-import { SearchNavigationType } from 'types/SearchNavigationResult';
+import { SearchNavigationType } from 'types/Search/SearchNavigationResult';
 import SearchResult from 'types/Tarteel/SearchResult';
 
 interface Props {
@@ -76,7 +76,7 @@ const SearchResults: React.FC<Props> = ({ searchResult, isCommandBar }) => {
       return (
         <>
           {data.verses.map((verse) => (
-            <SearchResultItem
+            <TarteelSearchResultItem
               key={verse.verseKey}
               result={verse}
               source={SearchQuerySource.Tarteel}

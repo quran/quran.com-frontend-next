@@ -22,7 +22,7 @@ import {
 } from '@/redux/slices/CommandBar/state';
 import { logButtonClick } from '@/utils/eventLogger';
 import { resolveUrlBySearchNavigationType } from '@/utils/navigation';
-import { SearchNavigationResult } from 'types/SearchNavigationResult';
+import { SearchNavigationResult } from 'types/Search/SearchNavigationResult';
 
 export interface Command extends SearchNavigationResult {
   group: string;

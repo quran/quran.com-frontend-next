@@ -8,8 +8,8 @@ import styles from './SearchResultItem.module.scss';
 
 import DataContext from '@/contexts/DataContext';
 import Link from '@/dls/Link/Link';
+import { SearchNavigationType } from '@/types/Search/SearchNavigationResult';
 import SearchService from '@/types/Search/SearchService';
-import { SearchNavigationType } from '@/types/SearchNavigationResult';
 import SearchQuerySource from '@/types/SearchQuerySource';
 import { getChapterData } from '@/utils/chapter';
 import { logButtonClick } from '@/utils/eventLogger';
