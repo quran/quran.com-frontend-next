@@ -22,6 +22,7 @@ interface Props {
   currentPage?: number;
   pageSize?: number;
   onPageChange?: (page: number) => void;
+  shouldSuggestFullSearchWhenNoResults?: boolean;
 }
 
 const SearchBodyContainer: React.FC<Props> = ({
@@ -35,6 +36,7 @@ const SearchBodyContainer: React.FC<Props> = ({
   currentPage,
   pageSize,
   onPageChange,
+  shouldSuggestFullSearchWhenNoResults = false,
 }) => {
   const { t } = useTranslation('common');
   const isEmptyResponse =
@@ -61,7 +63,10 @@ const SearchBodyContainer: React.FC<Props> = ({
               {!hasError && searchResult && (
                 <>
                   {isEmptyResponse ? (
-                    <NoResults searchQuery={searchQuery} />
+                    <NoResults
+                      searchQuery={searchQuery}
+                      shouldSuggestFullSearchWhenNoResults={shouldSuggestFullSearchWhenNoResults}
+                    />
                   ) : (
                     <SearchResults
                       onSearchResultClicked={onSearchResultClicked}

@@ -13,7 +13,7 @@ import { logButtonClick } from '@/utils/eventLogger';
 import { toLocalizedNumber, toLocalizedVerseKey } from '@/utils/locale';
 import { resolveUrlBySearchNavigationType } from '@/utils/navigation';
 import { getSearchNavigationResult } from '@/utils/search';
-import { SearchNavigationResult, SearchNavigationType } from 'types/SearchNavigationResult';
+import { SearchNavigationResult, SearchNavigationType } from 'types/Search/SearchNavigationResult';
 
 interface Props {
   navigation: SearchNavigationResult;
@@ -24,7 +24,7 @@ interface Props {
 const NavigationItem: React.FC<Props> = ({
   navigation,
   isSearchDrawer,
-  service = SearchService.QDC,
+  service = SearchService.KALIMAT,
 }) => {
   const { t, lang } = useTranslation('common');
   const chaptersData = useContext(DataContext);

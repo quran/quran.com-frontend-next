@@ -6,7 +6,7 @@ const commandBarPersistConfig = {
   key: SliceName.COMMAND_BAR,
   storage,
   version: 1,
-  blacklist: ['isOpen'],
+  blacklist: ['isOpen', 'initialSearchQuery'],
 };
 
 export default commandBarPersistConfig;

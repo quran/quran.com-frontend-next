@@ -8,7 +8,7 @@ import styles from './CommandPrefix.module.scss';
 import DataContext from '@/contexts/DataContext';
 import NavigateIcon from '@/icons/east.svg';
 import { getSearchNavigationResult } from '@/utils/search';
-import { SearchNavigationType } from 'types/SearchNavigationResult';
+import { SearchNavigationType } from 'types/Search/SearchNavigationResult';
 
 interface Props {
   name: string;
