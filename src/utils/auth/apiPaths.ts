@@ -9,14 +9,14 @@ import { EstimateGoalRequest, GoalCategory } from '@/types/auth/Goal';
 import { StreakWithMetadataParams } from '@/types/auth/Streak';
 import { MediaType } from '@/types/Media/GenerateMediaFileRequest';
 import { Mushaf } from '@/types/QuranReader';
-import { getAuthApiPath } from '@/utils/url';
+import { getProxiedServiceUrl } from '@/utils/url';
 import BookmarkType from 'types/BookmarkType';
 
 export const makeUrl = (url: string, parameters?: Record<string, unknown>): string => {
   if (!parameters) {
-    return getAuthApiPath(url);
+    return getProxiedServiceUrl('auth/', url);
   }
-  return getAuthApiPath(`${url}${`?${stringify(parameters)}`}`);
+  return getProxiedServiceUrl('auth/', `${url}${`?${stringify(parameters)}`}`);
 };
 
 export const makeUserProfileUrl = (): string => makeUrl('users/profile');

@@ -51,13 +51,6 @@ import {
 import AudioData from 'types/AudioData';
 import { MushafLines, QuranFont } from 'types/QuranReader';
 
-export const SEARCH_FETCH_OPTIONS = {
-  headers: {
-    // eslint-disable-next-line @typescript-eslint/naming-convention
-    'x-api-key': process.env.NEXT_PUBLIC_SEARCH_API_KEY,
-  },
-};
-
 export const OFFLINE_ERROR = 'OFFLINE';
 
 export const X_AUTH_SIGNATURE = 'x-auth-signature';
@@ -250,7 +243,7 @@ export const getAdvancedCopyRawResult = async (
  */
 export const getNewSearchResults = async <T extends SearchMode>(
   params: SearchRequestParams<T>,
-): Promise<NewSearchResponse> => fetcher(makeNewSearchResultsUrl(params), SEARCH_FETCH_OPTIONS);
+): Promise<NewSearchResponse> => fetcher(makeNewSearchResultsUrl(params));
 
 /**
  * Get the list of tafsirs.
