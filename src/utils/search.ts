@@ -8,7 +8,7 @@ import { AnyAction } from 'redux';
 
 import { logEmptySearchResults, logSearchResults, logTextSearchQuery } from './eventLogger';
 
-import { getNewSearchResults, getSearchResults } from '@/api';
+import { getNewSearchResults } from '@/api';
 import { addSearchHistoryRecord } from '@/redux/slices/Search/search';
 import { SearchResponse } from '@/types/ApiResponses';
 import AvailableTranslation from '@/types/AvailableTranslation';
@@ -19,7 +19,7 @@ import SearchQuerySource from '@/types/SearchQuerySource';
 import { getChapterData } from '@/utils/chapter';
 import { toLocalizedNumber } from '@/utils/locale';
 import { getVerseAndChapterNumbersFromKey, getVerseNumberRangeFromKey } from '@/utils/verse';
-import { SearchNavigationResult, SearchNavigationType } from 'types/SearchNavigationResult';
+import { SearchNavigationResult, SearchNavigationType } from 'types/Search/SearchNavigationResult';
 
 export const LOCALE_TO_TRANSLATION_LANGUAGE = {
   en: 'english',
@@ -177,8 +177,7 @@ export const getSearchNavigationResult = (
 };
 
 /**
- * Call BE to fetch the search results using the passed filters
- * and if there are no results call Kalimat API.
+ * Call Kalimat API to fetch the search results using the passed filters.
  *
  * @param {SearchQuerySource} source
  * @param {string} query
@@ -188,7 +187,6 @@ export const getSearchNavigationResult = (
  * @param {(arg: boolean) => void} setHasError
  * @param {(data: SearchResponse) => void} setSearchResult
  * @param {string} languages
- * @param {string} translations
  */
 export const searchGetResults = (
   source: SearchQuerySource,
@@ -199,65 +197,37 @@ export const searchGetResults = (
   setHasError: (arg: boolean) => void,
   setSearchResult: (data: SearchResponse) => void,
   languages?: string,
-  translations?: string,
 ) => {
   setIsSearching(true);
   logTextSearchQuery(query, source);
-  getSearchResults({
+  getNewSearchResults({
+    mode: SearchMode.Advanced,
     query,
-    ...(languages && { filterLanguages: languages }), // languages will be included only when there is a selected language
     size: pageSize,
+    filterLanguages: languages,
     page,
-    ...(translations && { filterTranslations: translations }), // translations will be included only when there is a selected translation
+    exactMatchesOnly: 0,
+    getText: 1,
+    highlight: 1,
   })
-    .then(async (response) => {
-      if (response.status === 500) {
-        setHasError(true);
+    .then(async (kalimatResponse) => {
+      setSearchResult({
+        ...kalimatResponse,
+        service: SearchService.KALIMAT,
+      });
+
+      if (kalimatResponse.pagination.totalRecords === 0) {
+        logEmptySearchResults({
+          query,
+          source,
+          service: SearchService.KALIMAT,
+        });
       } else {
-        setSearchResult({ ...response, service: SearchService.QDC });
-        const noQdcResults =
-          response.pagination.totalRecords === 0 && !response.result.navigation.length;
-        // if there is no navigations nor verses in the response
-        if (noQdcResults) {
-          logEmptySearchResults({
-            query,
-            source,
-            service: SearchService.QDC,
-          });
-
-          const kalimatResponse = await getNewSearchResults({
-            mode: SearchMode.Advanced,
-            query,
-            size: pageSize,
-            filterLanguages: languages,
-            page,
-            exactMatchesOnly: 0,
-            // translations will be included only when there is a selected translation
-            ...(translations && {
-              filterTranslations: translations,
-              translationFields: 'resource_name',
-            }),
-          });
-
-          setSearchResult({
-            ...kalimatResponse,
-            service: SearchService.KALIMAT,
-          });
-
-          if (kalimatResponse.pagination.totalRecords === 0) {
-            logEmptySearchResults({
-              query,
-              source,
-              service: SearchService.KALIMAT,
-            });
-          } else {
-            logSearchResults({
-              query,
-              source,
-              service: SearchService.KALIMAT,
-            });
-          }
-        }
+        logSearchResults({
+          query,
+          source,
+          service: SearchService.KALIMAT,
+        });
       }
     })
     .catch(() => {

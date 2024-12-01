@@ -57,7 +57,7 @@ const SearchResults: React.FC<Props> = ({
         <>
           {searchResult.result.verses.map((result) => (
             <SearchResultItem
-              key={result.verseKey}
+              key={result.key}
               result={result}
               source={
                 isSearchDrawer ? SearchQuerySource.SearchDrawer : SearchQuerySource.SearchPage

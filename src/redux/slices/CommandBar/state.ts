@@ -2,7 +2,7 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { RootState } from '@/redux/RootState';
 import SliceName from '@/redux/types/SliceName';
-import { SearchNavigationResult } from 'types/SearchNavigationResult';
+import { SearchNavigationResult } from 'types/Search/SearchNavigationResult';
 
 export type CommandBar = {
   isOpen: boolean;
