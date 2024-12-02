@@ -32,7 +32,6 @@ $itemHeight: calc(1.5 * var(--spacing-mega));
   padding-inline-end: var(--spacing-xsmall);
   cursor: pointer;
   color: var(--color-text-faded);
-  // white-space: nowrap;
   position: relative;
   z-index: var(--z-index-default);
   &.selected {
