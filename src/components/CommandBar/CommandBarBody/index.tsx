@@ -10,45 +10,47 @@ import CommandsList, { Command } from '../CommandsList';
 
 import styles from './CommandBarBody.module.scss';
 
+import { getNewSearchResults } from '@/api';
 import DataFetcher from '@/components/DataFetcher';
 import TarteelAttribution from '@/components/TarteelAttribution/TarteelAttribution';
 import VoiceSearchBodyContainer from '@/components/TarteelVoiceSearch/BodyContainer';
 import TarteelVoiceSearchTrigger from '@/components/TarteelVoiceSearch/Trigger';
 import useDebounce from '@/hooks/useDebounce';
 import IconSearch from '@/icons/search.svg';
-import { selectRecentNavigations } from '@/redux/slices/CommandBar/state';
+import { selectInitialSearchQuery, selectRecentNavigations } from '@/redux/slices/CommandBar/state';
 import { selectIsCommandBarVoiceFlowStarted } from '@/redux/slices/voiceSearch';
 import SearchQuerySource from '@/types/SearchQuerySource';
-import { makeSearchResultsUrl } from '@/utils/apiPaths';
+import { makeNewSearchResultsUrl } from '@/utils/apiPaths';
 import { areArraysEqual } from '@/utils/array';
 import { logButtonClick, logTextSearchQuery } from '@/utils/eventLogger';
+import { getQuickSearchQuery } from '@/utils/search';
 import { SearchResponse } from 'types/ApiResponses';
-import { SearchNavigationType } from 'types/SearchNavigationResult';
+import { SearchNavigationType } from 'types/Search/SearchNavigationResult';
 
 const NAVIGATE_TO = [
   {
     name: 'Juz 1',
-    key: 1,
+    key: '1',
     resultType: SearchNavigationType.JUZ,
   },
   {
     name: 'Hizb 1',
-    key: 1,
+    key: '1',
     resultType: SearchNavigationType.HIZB,
   },
   {
     name: 'Rub el Hizb 1',
-    key: 1,
+    key: '1',
     resultType: SearchNavigationType.RUB_EL_HIZB,
   },
   {
     name: 'Page 1',
-    key: 1,
+    key: '1',
     resultType: SearchNavigationType.PAGE,
   },
   {
     name: 'Surah Yasin',
-    key: 36,
+    key: '36',
     resultType: SearchNavigationType.SURAH,
   },
   {
@@ -64,7 +66,8 @@ const CommandBarBody: React.FC = () => {
   const { t } = useTranslation('common');
   const recentNavigations = useSelector(selectRecentNavigations, areArraysEqual);
   const isVoiceSearchFlowStarted = useSelector(selectIsCommandBarVoiceFlowStarted, shallowEqual);
-  const [searchQuery, setSearchQuery] = useState<string>(null);
+  const initialSearchQuery = useSelector(selectInitialSearchQuery, shallowEqual);
+  const [searchQuery, setSearchQuery] = useState<string>(initialSearchQuery || null);
   // Debounce search query to avoid having to call the API on every type. The API will be called once the user stops typing.
   const debouncedSearchQuery = useDebounce<string>(searchQuery, DEBOUNCING_PERIOD_MS);
 
@@ -111,6 +114,10 @@ const CommandBarBody: React.FC = () => {
         ),
     [recentNavigations, t],
   );
+
+  const quickSearchFetcher = useCallback(() => {
+    return getNewSearchResults(getQuickSearchQuery(searchQuery));
+  }, [searchQuery]);
 
   /**
    * This function will be used by DataFetcher and will run only when there is no API error
@@ -180,6 +187,7 @@ const CommandBarBody: React.FC = () => {
               inputMode="text"
               // eslint-disable-next-line jsx-a11y/no-autofocus
               autoFocus
+              value={searchQuery}
             />
           </div>
         )}
@@ -198,8 +206,11 @@ const CommandBarBody: React.FC = () => {
           <VoiceSearchBodyContainer isCommandBar />
         ) : (
           <DataFetcher
-            queryKey={searchQuery ? makeSearchResultsUrl({ query: searchQuery }) : null}
+            queryKey={
+              searchQuery ? makeNewSearchResultsUrl(getQuickSearchQuery(searchQuery)) : null
+            }
             render={dataFetcherRender}
+            fetcher={quickSearchFetcher}
           />
         )}
       </div>

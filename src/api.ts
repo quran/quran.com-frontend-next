@@ -11,7 +11,6 @@ import {
   makeAudioTimestampsUrl,
   makeChapterAudioDataUrl,
   makeAvailableRecitersUrl,
-  makeSearchResultsUrl,
   makeTranslationsInfoUrl,
   makeTranslationsUrl,
   makeVersesUrl,
@@ -31,10 +30,9 @@ import {
 } from '@/utils/apiPaths';
 import generateSignature from '@/utils/auth/signature';
 import { isStaticBuild } from '@/utils/build';
-import { SearchRequest, AdvancedCopyRequest, PagesLookUpRequest } from 'types/ApiRequests';
+import { AdvancedCopyRequest, PagesLookUpRequest } from 'types/ApiRequests';
 import {
   TranslationsResponse,
-  SearchResponse,
   AdvancedCopyRawResultResponse,
   LanguagesResponse,
   RecitersResponse,
@@ -243,15 +241,6 @@ export const getTranslationsInfo = async (
 export const getAdvancedCopyRawResult = async (
   params: AdvancedCopyRequest,
 ): Promise<AdvancedCopyRawResultResponse> => fetcher(makeAdvancedCopyUrl(params));
-
-/**
- * Get the search results of a query.
- *
- * @param {SearchRequest} params
- * @returns  {Promise<SearchResponse>}
- */
-export const getSearchResults = async (params: SearchRequest): Promise<SearchResponse> =>
-  fetcher(makeSearchResultsUrl(params));
 
 /**
  * Get the search results of a query.

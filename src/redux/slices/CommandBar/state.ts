@@ -2,16 +2,17 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { RootState } from '@/redux/RootState';
 import SliceName from '@/redux/types/SliceName';
-import { SearchNavigationResult } from 'types/SearchNavigationResult';
+import { SearchNavigationResult } from 'types/Search/SearchNavigationResult';
 
 export type CommandBar = {
   isOpen: boolean;
   recentNavigations: SearchNavigationResult[];
+  initialSearchQuery: string;
 };
 
 const MAXIMUM_RECENT_NAVIGATIONS = 5;
 
-const initialState: CommandBar = { isOpen: false, recentNavigations: [] };
+const initialState: CommandBar = { isOpen: false, recentNavigations: [], initialSearchQuery: '' };
 
 export const commandBarSlice = createSlice({
   name: SliceName.COMMAND_BAR,
@@ -24,6 +25,7 @@ export const commandBarSlice = createSlice({
     toggleIsOpen: (state: CommandBar) => ({
       ...state,
       isOpen: !state.isOpen,
+      initialSearchQuery: '', // we reset the initial search query when the command bar is toggled
     }),
     addRecentNavigation: (state: CommandBar, action: PayloadAction<SearchNavigationResult>) => {
       let newRecentNavigations = [...state.recentNavigations];
@@ -53,13 +55,22 @@ export const commandBarSlice = createSlice({
         recentNavigations: newRecentNavigations,
       };
     },
+    setInitialSearchQuery: (state: CommandBar, action: PayloadAction<string>) => ({
+      ...state,
+      initialSearchQuery: action.payload,
+    }),
   },
 });
 
-export const { setIsOpen, toggleIsOpen, addRecentNavigation, removeRecentNavigation } =
-  commandBarSlice.actions;
+export const {
+  setIsOpen,
+  toggleIsOpen,
+  addRecentNavigation,
+  removeRecentNavigation,
+  setInitialSearchQuery,
+} = commandBarSlice.actions;
 
 export const selectCommandBarIsOpen = (state: RootState) => state.commandBar.isOpen;
 export const selectRecentNavigations = (state: RootState) => state.commandBar.recentNavigations;
-
+export const selectInitialSearchQuery = (state: RootState) => state.commandBar.initialSearchQuery;
 export default commandBarSlice.reducer;
