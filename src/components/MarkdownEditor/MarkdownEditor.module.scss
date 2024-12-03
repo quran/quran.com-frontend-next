@@ -84,6 +84,7 @@
     iframe {
         display: block; // Makes iframe a block element, ensuring it's on a new line
         margin: var(--spacing-medium) auto; // Centers the iframe and adds vertical spacing
+        max-width: 100%;
     }
 }
 .content {
