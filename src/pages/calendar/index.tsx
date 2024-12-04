@@ -9,10 +9,10 @@ import PageContainer from '@/components/PageContainer';
 import JoinQuranicCalendarButton from '@/components/QuranicCalendar/JoinQuranicCalendarButton';
 import QuranicCalendarHero from '@/components/QuranicCalendar/QuranicCalendarHero';
 import QuranicCalendarMonth from '@/components/QuranicCalendar/QuranicCalendarMonth';
+import monthsMap from '@/data/quranic-calendar.json';
 import { getCurrentQuranicCalendarWeek } from '@/utils/hijri-date';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl, getQuranicCalendarNavigationUrl } from '@/utils/navigation';
-import monthsMap from 'quranic-calendar.json';
 
 const MONTHS_WEEKS = Object.values(monthsMap);
 const PATH = getQuranicCalendarNavigationUrl();

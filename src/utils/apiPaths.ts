@@ -9,9 +9,9 @@ import {
   getReadingPreferencesInitialState,
   getTranslationsInitialState,
 } from '@/redux/defaultSettings/util';
+import { MushafLines, QuranFont } from '@/types/QuranReader';
 import { SearchRequestParams, SearchMode } from '@/types/Search/SearchRequestParams';
 import { AdvancedCopyRequest, PagesLookUpRequest, SearchRequest } from 'types/ApiRequests';
-import { MushafLines, QuranFont } from 'types/QuranReader';
 
 export const DEFAULT_VERSES_PARAMS = {
   words: true,

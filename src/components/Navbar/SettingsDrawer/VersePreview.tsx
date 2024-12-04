@@ -13,9 +13,9 @@ import { addLoadedFontFace } from '@/redux/slices/QuranReader/font-faces';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import { selectTheme } from '@/redux/slices/theme';
 import ThemeType from '@/redux/types/ThemeType';
+import { QuranFont } from '@/types/QuranReader';
 import { getFontFaceNameForPage, getQCFFontFaceSource, isQCFFont } from '@/utils/fontFaceHelper';
 import getSampleVerse from '@/utils/sampleVerse';
-import { QuranFont } from 'types/QuranReader';
 import Word from 'types/Word';
 
 const SWR_SAMPLE_VERSE_KEY = 'sample-verse';

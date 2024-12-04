@@ -18,12 +18,12 @@ import useDebounce from '@/hooks/useDebounce';
 import IconSearch from '@/icons/search.svg';
 import { selectRecentNavigations } from '@/redux/slices/CommandBar/state';
 import { selectIsCommandBarVoiceFlowStarted } from '@/redux/slices/voiceSearch';
+import { SearchNavigationResult, SearchNavigationType } from '@/types/SearchNavigationResult';
 import SearchQuerySource from '@/types/SearchQuerySource';
 import { makeSearchResultsUrl } from '@/utils/apiPaths';
 import { areArraysEqual } from '@/utils/array';
 import { logButtonClick, logTextSearchQuery } from '@/utils/eventLogger';
 import { SearchResponse } from 'types/ApiResponses';
-import { SearchNavigationType } from 'types/SearchNavigationResult';
 
 const NAVIGATE_TO = [
   {
@@ -62,7 +62,10 @@ const DEBOUNCING_PERIOD_MS = 1500;
 
 const CommandBarBody: React.FC = () => {
   const { t } = useTranslation('common');
-  const recentNavigations = useSelector(selectRecentNavigations, areArraysEqual);
+  const recentNavigations = useSelector(
+    selectRecentNavigations,
+    areArraysEqual,
+  ) as SearchNavigationResult[];
   const isVoiceSearchFlowStarted = useSelector(selectIsCommandBarVoiceFlowStarted, shallowEqual);
   const [searchQuery, setSearchQuery] = useState<string>(null);
   // Debounce search query to avoid having to call the API on every type. The API will be called once the user stops typing.

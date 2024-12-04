@@ -17,24 +17,22 @@ const ChapterBlock: React.FC<Props> = ({ chapter }: Props) => {
   const { t } = useTranslation('common');
   return (
     <div key={chapter.id} className={styles.item}>
-      <Link as={`/${chapter.id}`} href="/[chapterId]" passHref>
-        <a className={styles.link}>
-          <div className={styles.container}>
-            <div className={classNames(styles.leftContainer, styles.sectionContainer)}>
-              <p className={styles.number}>{chapter.id}</p>
-              <div className={styles.detailsContainer}>
-                <div className={styles.nameArabic}>{chapter.transliteratedName}</div>
-                <div className={styles.nameTranslated}>{chapter.translatedName as string}</div>
-              </div>
-            </div>
-            <div className={classNames(styles.detailsContainer, styles.sectionContainer)}>
-              <ChapterIconContainer chapterId={String(chapter.id)} />
-              <p className={styles.numberOfVerses}>
-                {chapter.versesCount} {t('ayahs')}
-              </p>
+      <Link as={`/${chapter.id}`} href="/[chapterId]" passHref className={styles.link}>
+        <div className={styles.container}>
+          <div className={classNames(styles.leftContainer, styles.sectionContainer)}>
+            <p className={styles.number}>{chapter.id}</p>
+            <div className={styles.detailsContainer}>
+              <div className={styles.nameArabic}>{chapter.transliteratedName}</div>
+              <div className={styles.nameTranslated}>{chapter.translatedName as string}</div>
             </div>
           </div>
-        </a>
+          <div className={classNames(styles.detailsContainer, styles.sectionContainer)}>
+            <ChapterIconContainer chapterId={String(chapter.id)} />
+            <p className={styles.numberOfVerses}>
+              {chapter.versesCount} {t('ayahs')}
+            </p>
+          </div>
+        </div>
       </Link>
     </div>
   );

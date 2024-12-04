@@ -4,8 +4,8 @@ import { PAGES_MUSHAF_MAP } from './page';
 import { getVerseAndChapterNumbersFromKey } from './verse';
 import { parseVerseRange } from './verseKeys';
 
+import { Mushaf } from '@/types/QuranReader';
 import ChaptersData from 'types/ChaptersData';
-import { Mushaf } from 'types/QuranReader';
 
 export const MAX_AYAHS_LIMIT = 10;
 

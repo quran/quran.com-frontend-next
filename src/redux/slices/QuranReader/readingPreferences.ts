@@ -6,13 +6,13 @@ import { getReadingPreferencesInitialState } from '@/redux/defaultSettings/util'
 import { RootState } from '@/redux/RootState';
 import ReadingPreferences from '@/redux/types/ReadingPreferences';
 import SliceName from '@/redux/types/SliceName';
-import PreferenceGroup from 'types/auth/PreferenceGroup';
 import {
   ReadingPreference,
   WordByWordDisplay,
   WordByWordType,
   WordClickFunctionality,
-} from 'types/QuranReader';
+} from '@/types/QuranReader';
+import PreferenceGroup from 'types/auth/PreferenceGroup';
 
 export const readingPreferencesSlice = createSlice({
   name: SliceName.READING_PREFERENCES,

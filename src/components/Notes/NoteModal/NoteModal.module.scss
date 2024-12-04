@@ -20,7 +20,7 @@
 }
 
 .titleInput {
-    &>div {
+    & > div {
         border: none;
     }
 
@@ -36,7 +36,7 @@
     border-radius: 0 !important;
     padding-inline: 0 !important;
 
-    &>div {
+    & > div {
         border: none;
         margin-block-start: var(--spacing-large);
     }

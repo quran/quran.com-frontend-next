@@ -4,11 +4,11 @@ import useSWRImmutable from 'swr/immutable';
 
 import { getPageVerses } from '@/api';
 import useGetMushaf from '@/hooks/useGetMushaf';
-import getPageVersesParams from '@/pages/page/utils/getPageVersesParams';
 import { selectIsUsingDefaultFont, selectQuranFont } from '@/redux/slices/QuranReader/styles';
 import { VersesResponse } from '@/types/ApiResponses';
 import { getDefaultWordFields } from '@/utils/api';
 import { makePageVersesUrl } from '@/utils/apiPaths';
+import getPageVersesParams from '@/utils/pages/getPageVersesParams';
 
 /**
  * This hooks fetches the page's verses data by the pageId
