@@ -15,7 +15,7 @@ import {
   MushafLines,
   QuranFont,
   WordByWordDisplay,
-} from 'types/QuranReader';
+} from '@/types/QuranReader';
 import Reciter from 'types/Reciter';
 
 export interface DefaultSettings {

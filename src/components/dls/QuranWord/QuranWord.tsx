@@ -23,6 +23,12 @@ import {
   selectTooltipContentType,
   selectInlineDisplayWordByWordPreferences,
 } from '@/redux/slices/QuranReader/readingPreferences';
+import {
+  ReadingPreference,
+  QuranFont,
+  WordClickFunctionality,
+  WordByWordType,
+} from '@/types/QuranReader';
 import { areArraysEqual } from '@/utils/array';
 import { milliSecondsToSeconds } from '@/utils/datetime';
 import { logButtonClick } from '@/utils/eventLogger';
@@ -30,7 +36,6 @@ import { isQCFFont } from '@/utils/fontFaceHelper';
 import { getChapterNumberFromKey, makeWordLocation } from '@/utils/verse';
 import { getWordTimeSegment } from 'src/xstate/actors/audioPlayer/audioPlayerMachineHelper';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
-import { ReadingPreference, QuranFont, WordClickFunctionality } from 'types/QuranReader';
 import Word, { CharType } from 'types/Word';
 
 export const DATA_ATTRIBUTE_WORD_LOCATION = 'data-word-location';
@@ -65,7 +70,7 @@ const QuranWord = ({
     shallowEqual,
   );
   const readingPreference = useSelector(selectReadingPreference);
-  const showTooltipFor = useSelector(selectTooltipContentType, areArraysEqual);
+  const showTooltipFor = useSelector(selectTooltipContentType, areArraysEqual) as WordByWordType[];
 
   // creating wordLocation instead of using `word.location` because
   // the value of `word.location` is `1:3:5-7`, but we want `1:3:5`

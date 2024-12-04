@@ -5,7 +5,7 @@ import umalqura from '@umalqura/core';
 import groupBy from 'lodash/groupBy';
 
 import QuranicCalendarMonthData from '@/components/QuranicCalendar/types/QuranicCalendarMonthData';
-import monthsMap from 'quranic-calendar.json';
+import monthsMap from '@/data/quranic-calendar.json';
 
 type Month = {
   year: number;

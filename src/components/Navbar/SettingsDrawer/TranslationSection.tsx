@@ -37,7 +37,7 @@ const TranslationSection = () => {
   } = usePersistPreferenceGroup();
   const { t, lang } = useTranslation('common');
   const dispatch = useDispatch();
-  const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
+  const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual) as number[];
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const { translationFontScale } = quranReaderStyles;
   const { isActive, nextStep } = useOnboarding();

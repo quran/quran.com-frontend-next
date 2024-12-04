@@ -1,4 +1,4 @@
-import { QuranFont } from 'types/QuranReader';
+import { QuranFont } from '@/types/QuranReader';
 
 // Pages where we want to have center align text to resemble the Madani Mushaf
 const CENTER_ALIGNED_PAGES = [1, 2];

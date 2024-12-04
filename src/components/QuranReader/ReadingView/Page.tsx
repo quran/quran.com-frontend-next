@@ -11,8 +11,8 @@ import PageFooter from './PageFooter';
 import useIsFontLoaded from '@/components/QuranReader/hooks/useIsFontLoaded';
 import { selectInlineDisplayWordByWordPreferences } from '@/redux/slices/QuranReader/readingPreferences';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
+import { FALLBACK_FONT } from '@/types/QuranReader';
 import { getLineWidthClassName } from '@/utils/fontFaceHelper';
-import { FALLBACK_FONT } from 'types/QuranReader';
 import Verse from 'types/Verse';
 
 type PageProps = {
