@@ -139,8 +139,7 @@ const QuranWord = ({
     }
   }, [audioService, isRecitationEnabled, word]);
 
-  const shouldHandleWordClicking =
-    readingPreference === ReadingPreference.Translation && word.charTypeName !== CharType.End;
+  const shouldHandleWordClicking = word.charTypeName !== CharType.End;
 
   return (
     <div
