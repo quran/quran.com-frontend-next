@@ -108,10 +108,13 @@ const QuranWord = ({
 
     1. When the current character is of type Word.
     2. When it's allowed to have word by word (won't be allowed for search results as of now).
-    3. When the tooltip settings are set to either translation or transliteration or both.
+    3. When in translation view: the tooltip settings are set to either translation or transliteration or both.
+       When in reading view: always show tooltip.
   */
   const showTooltip =
-    word.charTypeName === CharType.Word && isWordByWordAllowed && !!showTooltipFor.length;
+    word.charTypeName === CharType.Word &&
+    isWordByWordAllowed &&
+    (readingPreference === ReadingPreference.Translation ? !!showTooltipFor.length : true);
   const translationViewTooltipContent = useMemo(
     () => (isWordByWordAllowed ? getTooltipText(showTooltipFor, word) : null),
     [isWordByWordAllowed, showTooltipFor, word],
