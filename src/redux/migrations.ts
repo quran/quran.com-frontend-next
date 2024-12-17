@@ -259,4 +259,11 @@ export default {
       wordClickFunctionality: WordClickFunctionality.NoAudio,
     },
   }),
+  34: (state) => ({
+    ...state,
+    readingPreferences: {
+      ...state.readingPreferences,
+      wordClickFunctionality: WordClickFunctionality.PlayAudio,
+    },
+  }),
 };
