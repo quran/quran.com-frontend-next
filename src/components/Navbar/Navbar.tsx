@@ -21,7 +21,7 @@ const Navbar = () => {
     <>
       <div className={styles.emptySpacePlaceholder} />
       <nav className={classNames(styles.container, { [styles.hiddenNav]: !showNavbar })}>
-        <Banner shouldShowPrefixIcon={false} text={`🔊 ${t('hear-it-pronounced')}!`} />
+        <Banner shouldShowPrefixIcon={false} text={`${t('hear-it-pronounced')} 🔊`} />
         <NavbarBody />
       </nav>
     </>
