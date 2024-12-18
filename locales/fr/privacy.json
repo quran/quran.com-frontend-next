@@ -32,7 +32,7 @@
     "title": "Partage des données"
   },
   "info-collection": {
-    "desc": "Nous collectons certaines informations personnelles des utilisateurs qui choisissent de créer un compte sur Quran.com. Ces informations peuvent inclure : <br/> <br/> <underline> Adresse e-mail </underline> : Nous collectons votre adresse e-mail pour faciliter le processus de création de compte, ainsi qu'à des fins de communication liées à votre compte, comme la récupération de compte et les notifications de sécurité.",
+    "desc": "Nous collectons certaines informations personnelles des utilisateurs qui choisissent de créer un compte sur Quran.com. Ces informations peuvent inclure : <br/><br/><underline>Adresse e-mail</underline> : Nous collectons votre adresse e-mail pour faciliter le processus de création de compte, ainsi qu'à des fins de communication liées à votre compte, comme la récupération de compte et les notifications de sécurité.",
     "title": "Collecte d'informations"
   },
   "log-data": {
@@ -41,7 +41,7 @@
   },
   "main-privacy-desc": "Quran Foundation, Inc. (qui comprend Quran.com) est une organisation à but non lucratif 501(c)(3) qui s'efforce de permettre à chaque être humain de bénéficier du Coran. Quran Foundation, Inc. valorise et respecte la vie privée de tous ses utilisateurs.",
   "personal-info-use": {
-    "desc": "Nous collectons les informations personnelles pour les fins suivantes :  <li> <underline> Création et gestion de compte </underline> : Votre adresse e-mail est utilisée pour créer et gérer votre compte sur notre site Web. Il vous permet de vous connecter, d'accéder à vos paramètres et de stocker vos favoris et votre historique de lecture. </li> <li> <underline> Personnalisation </underline> : nous pouvons utiliser votre historique de lecture pour fournir des recommandations et des suggestions personnalisées en fonction de vos préférences et intérêts. </li><br/>",
+    "desc": "Nous collectons les informations personnelles pour les fins suivantes : <li><underline>Création et gestion de compte</underline> : Votre adresse e-mail est utilisée pour créer et gérer votre compte sur notre site Web. Il vous permet de vous connecter, d'accéder à vos paramètres et de stocker vos favoris et votre historique de lecture.</li><li><underline>Personnalisation</underline>: nous pouvons utiliser votre historique de lecture pour fournir des recommandations et des suggestions personnalisées en fonction de vos préférences et intérêts.</li><br/>",
     "title": "Utilisation des informations personnelles"
   },
   "privacy-header": "Politique de confidentialité"
