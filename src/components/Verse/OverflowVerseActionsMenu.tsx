@@ -9,8 +9,6 @@ import cellStyles from '../QuranReader/TranslationView/TranslationViewCell.modul
 
 import styles from './OverflowVerseActionsMenuBody.module.scss';
 
-import Badge, { BadgePosition } from '@/dls/Badge/Badge';
-import NewLabel from '@/dls/Badge/NewLabel';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import Spinner from '@/dls/Spinner/Spinner';
@@ -38,7 +36,7 @@ const OverflowVerseActionsMenu: React.FC<Props> = ({
 }) => {
   const { t } = useTranslation('common');
   return (
-    <div className={(styles.container, styles.containerWithNewLabel)}>
+    <div className={styles.container}>
       <PopoverMenu
         trigger={
           <Button
@@ -57,14 +55,7 @@ const OverflowVerseActionsMenu: React.FC<Props> = ({
             ariaLabel={t('more')}
           >
             <span className={styles.icon}>
-              <Badge
-                className={styles.newLabelContainer}
-                contentClassName={styles.newLabel}
-                content={<NewLabel />}
-                position={isTranslationView ? BadgePosition.BOTTOM_RIGHT : BadgePosition.TOP_LEFT}
-              >
-                <OverflowMenuIcon />
-              </Badge>
+              <OverflowMenuIcon />
             </span>
           </Button>
         }
