@@ -5,7 +5,7 @@
     "title": "Sur une durée"
   },
   "create-plan": "Créer un plan",
-  "create-reading-goal": "Créer un objectif",
+  "create-reading-goal": "Définir un objectif",
   "daily-progress": "Progression quotidienne",
   "daily": {
     "description": "Votre objectif sera réinitialisé chaque jour",
@@ -14,9 +14,9 @@
   "day-x": "Jour {{day}}",
   "days": "Jours",
   "duration": "Durée (jours)",
-  "ending-chapter": "Fin de la sourate",
-  "ending-verse": "Terminer l'Ayah",
-  "examples-subtitle": "Voici une liste d'objectifs communs. Vous pouvez également créer votre propre objectif.",
+  "ending-chapter": "Sourate finale",
+  "ending-verse": "Ayah finale",
+  "examples-subtitle": "Voici une liste d'objectifs communs. Vous pouvez également définir votre propre objectif.",
   "examples-title": "Choisissez un objectif prédéfini ou créez votre propre objectif",
   "examples": {
     "custom": {
@@ -41,11 +41,11 @@
     "title": "Choisissez une fréquence pour votre objectif"
   },
   "goal-done": {
-    "description": "Toute lecture supplémentaire sera toujours enregistrée",
-    "title": "Vous avez atteint l'objectif d'aujourd'hui"
+    "description": "Toute lecture supplémentaire sera enregistrée",
+    "title": "Vous avez atteint l'objectif du jour"
   },
   "goal-target": {
-    "description": "Combien de temps, de pages ou de versets devez-vous lire pour atteindre votre objectif ?",
+    "description": "Combien de temps, de pages ou d'Ayahs devez-vous lire pour atteindre votre objectif ?",
     "title": "Fixez-vous une but pour votre objectif"
   },
   "goal-type": {
@@ -58,7 +58,7 @@
       "title": "Pages"
     },
     "range": {
-      "description": "Votre objectif sera basé sur une plage personnalisée de versets (omme une sourate, un Juz, voire tout le Coran)",
+      "description": "Votre objectif sera basé sur une plage personnalisée d'Ayahs (ex. une Sourate, un Juz, voire tout le Coran)",
       "title": "Plage personnalisée"
     },
     "time": {
@@ -75,7 +75,7 @@
     "title": "Voici un aperçu de votre emploi du temps"
   },
   "progress": {
-    "complete": "L'objectif d'aujourd'hui est atteint 🎉",
+    "complete": "L'objectif du jour est atteint 🎉",
     "goal-complete": "Votre objectif est entièrement atteint 🎉",
     "pages-goal": "lire {{pages}} page(s) du Coran",
     "range-goal": "lire {{from}} à {{to}}",
@@ -91,9 +91,9 @@
   },
   "set-reading-goal-success": "Votre objectif de lecture a été défini avec succès.",
   "start-journey": "Commencez votre voyage !",
-  "start-reading": "Commencer à lire",
-  "starting-chapter": "Sourate de départ",
-  "starting-verse": "Commencer l'Ayah",
+  "start-reading": "Commencer la lecture",
+  "starting-chapter": "Sourate initiale",
+  "starting-verse": "Ayah initiale",
   "streak": "Série",
   "streak-definition": "Une série est le nombre de jours consécutifs pendant lesquels vous avez lu le Coran.",
   "timeline-meaning": "Que signifie votre chronologie ?",
@@ -103,7 +103,7 @@
     "none": "Vous n'avez encore rien lu ce jour-là",
     "stroked": "Vous n'avez rien lu aujourd'hui"
   },
-  "todays-goal": "L'objectif d'aujourd'hui",
+  "todays-goal": "Objectif du jour",
   "view-progress": "Voir la progression",
   "week-progress": "Progression de la semaine",
   "x-days": {

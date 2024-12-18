@@ -1,8 +1,8 @@
 {
-  "all-saved-verses": "Tous les versets enregistrés",
+  "all-saved-verses": "Toutes les Ayahs enregistrées",
   "alphabetical": "A-Z",
   "back-to-collection-list": "Retour à la liste des collections",
-  "collapse-all": "Replier tous les versets",
+  "collapse-all": "Replier toutes les Ayahs",
   "collection-list-empty": "La liste des collections est vide. Vous n'avez pas encore créé de collection",
   "collections": "Collections",
   "delete-bookmark": {
@@ -14,10 +14,10 @@
     "title": "Supprimer la collection"
   },
   "empty": "La collection est vide",
-  "expand-all": "Déplier tous les versets",
-  "go-to-ayah": "Allez à l'ayah",
+  "expand-all": "Déplier toutes les Ayahs",
+  "go-to-ayah": "Allez à l'Ayah",
   "load-more": "Charger plus",
   "recently-added": "Récemment ajouté",
   "recently-updated": "Récemment mis à jour",
-  "verse-key": "Numéro de chapitre et de verset"
+  "verse-key": "Numéro de chapitre et d'Ayah"
 }

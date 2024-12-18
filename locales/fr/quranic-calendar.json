@@ -1,6 +1,6 @@
 {
   "hero": {
-    "line-1": "Le Calendrier Coranique Global est un programme encourageant la lecture engagée de l'intégralité du Coran, à partir de la fin d'un Ramadan, jusqu'au début du suivant. Nous vous encourageons à prendre le temps de comprendre, et de réfléchir aux versets afin d’avoir une connexion plus profonde et plus sincère."
+    "line-1": "Le Calendrier Coranique Global est un programme encourageant la lecture engagée de l'intégralité du Coran, à partir de la fin d'un Ramadan, jusqu'au début du suivant. Nous vous encourageons à prendre le temps de comprendre, et de réfléchir aux Ayahs afin d’avoir une connexion plus profonde et plus sincère."
   },
   "interact-with-post": "Interagissez avec cet article sur QuranReflect",
   "islamic-months": {
@@ -31,5 +31,5 @@
   },
   "supplemental-resources": "Ressources de soutien",
   "today": "La date d'aujourd'hui est : <highlight> {{day}} {{month}} {{year}} , {{gregorianDate}} </highlight>",
-  "week-title": "Semaine {{weekNumber}} ( {{month}} ) couvrant les versets {{rangeStart}} à {{rangeEnd}}"
+  "week-title": "Semaine {{weekNumber}} ({{month}}) couvrant les Ayahs {{rangeStart}} à {{rangeEnd}}"
 }

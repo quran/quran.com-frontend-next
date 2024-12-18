@@ -12,7 +12,7 @@
   "skip": "Ignorer",
   "steps": {
     "3-dot-menu": {
-      "description": "Cliquez sur le menu à 3 points pour découvrir les options de copie, de marque page et de répétition de versets. Découvrez une variété d'options pour répéter des versets",
+      "description": "Cliquez sur le menu à 3 points pour découvrir les options de copie, de marque page et de répétition d'Ayahs. Découvrez une variété d'options pour répéter des Ayahs",
       "title": "Menu à 3 points"
     },
     "ayah-reflection": {
@@ -20,7 +20,7 @@
       "title": "Lire les réflexions au niveau de l'Ayah"
     },
     "ayah-tafsir": {
-      "description": "Explorez le Tafsir au niveau de l'Ayah afin d'obtenir des informations détaillées améliorant votre compréhension au cours de votre lecture. (Le Tafsir peut être regroupé pour plusieurs versets, le cas échéant)",
+      "description": "Explorez le Tafsir au niveau de l'Ayah afin d'obtenir des informations détaillées améliorant votre compréhension au cours de votre lecture. (Le Tafsir peut être regroupé pour plusieurs Ayahs, le cas échéant)",
       "title": "Lire le Tafsir au niveau de l'Ayah"
     },
     "font-size": {
@@ -52,7 +52,7 @@
       "title": "Radio du Coran"
     },
     "reading-sessions": {
-      "description": "Révisez facilement votre voyage Coranique en parcourant votre historique de lecture personnalisé, en gardant une trace des versets que vous avez explorés sur Quran.com.",
+      "description": "Révisez facilement votre voyage Coranique en parcourant votre historique de lecture personnalisé, en gardant une trace des Ayahs que vous avez explorés sur Quran.com.",
       "title": "Afficher l'historique de lecture"
     },
     "reading-view": {
@@ -60,7 +60,7 @@
       "title": "Mode lecture"
     },
     "search-bar": {
-      "description": "Trouvez les versets, sourates, mots-clés, juz et sujets via la barre de recherche",
+      "description": "Trouvez les Ayahs, Sourates, mots-clés, Juz et sujets via la barre de recherche",
       "title": "Barre de recherche"
     },
     "select-reciter": {
@@ -76,8 +76,8 @@
       "title": "Garder une trace des séquences de lecture et des plans de lecture"
     },
     "surah-info": {
-      "description": "Obtenez des informations sur chaque sourate - convenablement situé au début de chaque Sourate",
-      "title": "Lire à propos de la sourate"
+      "description": "Obtenez des informations sur chaque Sourate - convenablement situé au début de chaque Sourate",
+      "title": "Lire à propos de la Sourate"
     },
     "theme": {
       "description": "Choisissez votre style préféré (mode clair, sépia ou sombre) pour une expérience de lecture du Coran confortable et personnalisée.",
@@ -88,7 +88,7 @@
       "title": "Traductions"
     },
     "voice-search": {
-      "description": "Appuyez sur l'icône du micro et récitez le verset que vous recherchez. Petit conseil ! Pour découvrir où quelqu'un récite (ex. les prières Taraweeh), appuyez sur l'icône du micro. Après qu'un ou deux versets soient détectés, appuyez sur stop pour trouver l'emplacement",
+      "description": "Appuyez sur l'icône du micro et récitez l'Ayah que vous recherchez. Petit conseil ! Pour découvrir où quelqu'un récite (ex. les prières Taraweeh), appuyez sur l'icône du micro. Après qu'une ou deux Ayahs soient détectés, appuyez sur stop pour trouver l'emplacement",
       "title": "Recherche vocale (Tarteel)"
     },
     "wbw-audio": {

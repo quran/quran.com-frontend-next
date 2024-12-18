@@ -4,7 +4,7 @@
   "delete-goal": {
     "action": "Supprimer l'objectif",
     "confirmation": {
-      "action-text": "Je comprends la conséquence, supprimez mon objectif",
+      "action-text": "Oui je suis sûr(e) et je comprends la conséquence. Supprimez mon objectif",
       "confirmation-text": "supprimer mon objectif",
       "instruction-text": "Veuillez saisir <strong> {{text}} </strong> pour confirmer",
       "subtitle": "Cette action ne peut pas être annulée. Cela supprimera définitivement votre objectif et nous cesserons de suivre votre progression.",
