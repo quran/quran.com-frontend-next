@@ -6,7 +6,6 @@ import useTranslation from 'next-translate/useTranslation';
 import { useSelector, shallowEqual } from 'react-redux';
 
 import VerseActionAdvancedCopy from '@/components/Verse/VerseActionAdvancedCopy';
-import NewLabel from '@/dls/Badge/NewLabel';
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import ChevronLeftIcon from '@/icons/chevron-left.svg';
@@ -135,7 +134,6 @@ const ShareVerseActionsMenu: React.FC<Props> = ({
       </PopoverMenu.Item>
       <PopoverMenu.Item onClick={onGenerateClicked} icon={<VideoIcon />}>
         {t('quran-reader:generate-media')}
-        <NewLabel />
       </PopoverMenu.Item>
 
       <VerseActionAdvancedCopy
