@@ -1,23 +1,23 @@
 {
-  "all-saved-verses": "Tous les versets enregistrés",
-  "alphabetical": "AZ",
+  "all-saved-verses": "Toutes les Ayahs enregistrées",
+  "alphabetical": "A-Z",
   "back-to-collection-list": "Retour à la liste des collections",
-  "collapse-all": "Réduire tous les versets",
-  "collection-list-empty": "La liste de collecte est vide. Vous n'avez pas encore créé de collection",
+  "collapse-all": "Replier toutes les Ayahs",
+  "collection-list-empty": "La liste des collections est vide. Vous n'avez pas encore créé de collection",
   "collections": "Collections",
   "delete-bookmark": {
-    "subtitle": "Voulez-vous vraiment supprimer {{bookmarkName}} de {{collectionName}} ?",
-    "title": "Supprimer le signet"
+    "subtitle": "Voulez-vous vraiment supprimer {{bookmarkName}} de la collection {{collectionName}} ?",
+    "title": "Supprimer le favori"
   },
   "delete-collection": {
-    "subtitle": "Voulez-vous vraiment supprimer la {{collectionName}} ?",
+    "subtitle": "Voulez-vous vraiment supprimer la collection {{collectionName}} ?",
     "title": "Supprimer la collection"
   },
   "empty": "La collection est vide",
-  "expand-all": "Développer tous les versets",
-  "go-to-ayah": "Allez à ayah",
+  "expand-all": "Déplier toutes les Ayahs",
+  "go-to-ayah": "Allez à l'Ayah",
   "load-more": "Charger plus",
   "recently-added": "Récemment ajouté",
   "recently-updated": "Récemment mis à jour",
-  "verse-key": "Numéro de chapitre et de verset"
+  "verse-key": "Numéro de chapitre et d'Ayah"
 }
