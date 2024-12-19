@@ -6,12 +6,12 @@
   "continue-google": "Continuer avec Google",
   "email-placeholder": "Adresse e-mail",
   "feature-1": "Suivez vos objectifs",
-  "feature-2": "Maintenir des séries de lecture",
-  "feature-3": "Créer des collections",
+  "feature-2": "Maintenez des séries de lecture",
+  "feature-3": "Créez des collections",
   "feature-4": "Synchronisez vos données sur tous les navigateurs",
   "feature-5": "Et plus encore !",
   "feature-6": "<b> Nouveau ! </b> Notes et réflexions",
-  "login-cta": "Se connecter ou s'inscrire maintenant:",
+  "login-cta": "Connectez-vous ou Inscrivez-vous maintenant:",
   "login-error": {
     "AuthenticationError": "Authentification échouée. Veuillez réessayer plus tard",
     "TokenExpiredError": "Vous avez été déconnecté(e), veuillez vous reconnecter."

@@ -8,9 +8,9 @@ import useDedupedFetchVerse from './hooks/useDedupedFetchVerse';
 import TranslationPageVerse from './TranslationPageVerse';
 
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
+import { QuranReaderDataType } from '@/types/QuranReader';
 import { getMushafId } from '@/utils/api';
 import { VersesResponse } from 'types/ApiResponses';
-import { QuranReaderDataType } from 'types/QuranReader';
 import Verse from 'types/Verse';
 
 interface Props {

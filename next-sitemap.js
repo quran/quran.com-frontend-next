@@ -5,6 +5,7 @@
 /* eslint-disable react-func/max-lines-per-function */
 /* eslint-disable global-require */
 /* eslint-disable import/no-dynamic-require */
+const CryptoJS = require('crypto-js');
 const range = require('lodash/range');
 const fetch = require('node-fetch');
 
@@ -19,24 +20,62 @@ const shouldGenerateAdditionalPaths =
 const BASE_PATH =
   `${isDevelopment ? 'http' : 'https'}://${process.env.NEXT_PUBLIC_VERCEL_URL}` ||
   'https://quran.com';
-const BASE_AUTH_PATH = process.env.NEXT_PUBLIC_AUTH_BASE_URL;
+
+const { API_GATEWAY_URL } = process.env;
+const API_CONTENT_URL = `${API_GATEWAY_URL}/content`;
+const API_AUTH_URL = `${API_GATEWAY_URL}/auth`;
+const QDC_PREFIX = '/api/qdc';
 
 const chapters = range(1, 115);
 
+const generateSignature = (url) => {
+  const currentTimestamp = new Date().getTime().toString();
+
+  const rawString = `${url}.${currentTimestamp}`;
+  const signature = CryptoJS.HmacSHA512(rawString, process.env.SIGNATURE_TOKEN);
+  const encodedSignature = CryptoJS.enc.Base64.stringify(signature);
+
+  return { signature: encodedSignature, timestamp: currentTimestamp };
+};
+
 const getAvailableCourses = async () => {
-  const res = await fetch(`${BASE_AUTH_PATH}/courses`);
+  const coursesURL = `${API_AUTH_URL}/courses`;
+  const { signature, timestamp } = generateSignature(coursesURL);
+  const res = await fetch(coursesURL, {
+    headers: {
+      'x-auth-signature': signature,
+      'x-timestamp': timestamp,
+      'x-internal-client': process.env.INTERNAL_CLIENT_ID,
+    },
+  });
   const data = await res.json();
   return data;
 };
 
 const getAvailableTafsirs = async () => {
-  const res = await fetch(`https://api.qurancdn.com/api/qdc/resources/tafsirs`);
+  const tafsirsURL = `${API_CONTENT_URL}${QDC_PREFIX}/resources/tafsirs`;
+  const { signature, timestamp } = generateSignature(tafsirsURL);
+  const res = await fetch(tafsirsURL, {
+    headers: {
+      'x-auth-signature': signature,
+      'x-timestamp': timestamp,
+      'x-internal-client': process.env.INTERNAL_CLIENT_ID,
+    },
+  });
   const data = await res.json();
   return data;
 };
 
 const getAvailableReciters = async () => {
-  const res = await fetch(`https://api.qurancdn.com/api/qdc/audio/reciters`);
+  const recitersURL = `${API_CONTENT_URL}${QDC_PREFIX}/audio/reciters`;
+  const { signature, timestamp } = generateSignature(recitersURL);
+  const res = await fetch(recitersURL, {
+    headers: {
+      'x-auth-signature': signature,
+      'x-timestamp': timestamp,
+      'x-internal-client': process.env.INTERNAL_CLIENT_ID,
+    },
+  });
   const data = await res.json();
   return data;
 };

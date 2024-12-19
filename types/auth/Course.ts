@@ -21,11 +21,17 @@ export type CourseAuthor = {
   biography: string;
 };
 
+export type CourseEditor = {
+  id: string;
+  name: string;
+};
+
 export type Course = {
   id: string;
   title: string;
   slug: string;
-  author: CourseAuthor;
+  authors: { author: CourseAuthor }[];
+  editors: { editor: CourseEditor }[];
   language: string; // language code
   description: string;
   metaDescription?: string;

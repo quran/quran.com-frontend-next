@@ -1,5 +1,6 @@
 import { decamelizeKeys } from 'humps';
 
+// eslint-disable-next-line import/no-cycle
 import { getDefaultWordFields, getMushafId, ITEMS_PER_PAGE, makeUrl } from './api';
 import stringify from './qs-stringify';
 
@@ -8,9 +9,9 @@ import {
   getReadingPreferencesInitialState,
   getTranslationsInitialState,
 } from '@/redux/defaultSettings/util';
+import { MushafLines, QuranFont } from '@/types/QuranReader';
 import { SearchRequestParams, SearchMode } from '@/types/Search/SearchRequestParams';
 import { AdvancedCopyRequest, PagesLookUpRequest, SearchRequest } from 'types/ApiRequests';
-import { MushafLines, QuranFont } from 'types/QuranReader';
 
 export const DEFAULT_VERSES_PARAMS = {
   words: true,
