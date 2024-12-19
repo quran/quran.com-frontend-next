@@ -14,7 +14,8 @@
   "login-cta": "Log-in or Sign up now:",
   "login-error": {
     "AuthenticationError": "Authentication failed. Please try again later",
-    "TokenExpiredError": "You have been logged out, please login again."
+    "TokenExpiredError": "You have been logged out, please login again.",
+    "BannedUserError": "Sorry, Your account is banned. Contact Quran.Foundation."
   },
   "login-title": "Login to Quran.com",
   "other-options": "Other Login Options",

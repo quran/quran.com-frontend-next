@@ -34,10 +34,11 @@ const LoginPage: NextPage<Props> = () => {
   useEffect(() => {
     if (query.error) {
       const errorMessage = getErrorMessage(query.error);
-      toast(errorMessage, {
-        status: ToastStatus.Error,
+      replace(getLoginNavigationUrl(), null, { shallow: true }).then(() => {
+        toast(errorMessage, {
+          status: ToastStatus.Error,
+        });
       });
-      replace(getLoginNavigationUrl(), null, { shallow: true });
     }
   }, [query.error, toast, replace, t, getErrorMessage]);
 
