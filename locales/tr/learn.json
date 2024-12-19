@@ -9,6 +9,7 @@
   "coming-soon": "Yakında gelecek...",
   "completed": "Tamamlanmış",
   "continue-learning": "Öğrenmeye Devam Et",
+  "contributors": "Katkıda bulunanlar",
   "day": "Gün",
   "description": "Tanım",
   "duration-daily": "Her kısa Dersin toplam {{days}} Dersi tamamlaması {{dailyMins}} dakikadan az sürer",
@@ -18,7 +19,7 @@
   "enrolled": "Kayıtlı",
   "feedback": {
     "add-feedback": "Geri Bildirim Ekle",
-    "desc": "Tebrikler! ' {{courseName}} ' öğrenme planını tamamladınız. <br> </br> Lütfen öğrenme planını inceleyin ve içeriği geliştirmemize yardımcı olmak için geri bildirimlerinizi paylaşın.",
+    "desc": "Tebrikler! ' {{courseName}} ' öğrenme planını tamamladınız. <br></br> Lütfen öğrenme planını inceleyin ve içeriği geliştirmemize yardımcı olmak için geri bildirimlerinizi paylaşın.",
     "feedback-placeholder": "Geri bildiriminizi yazın",
     "feedback-success": "Geri bildiriminiz için teşekkür ederiz!",
     "your-feedback": "Görüşleriniz"

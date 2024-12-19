@@ -1,0 +1,42 @@
+{
+  "about-author": "Kuhusu mwandishi",
+  "add-reflection": "Ongeza Tafakari",
+  "all-learning-plans": "Mipango Yote ya Kujifunza",
+  "author": "Mwandishi",
+  "back-to-learning-plan": "Rudi kwenye Mpango wa Mafunzo",
+  "back-to-learning-plans": "Rudi kwenye Mipango ya Kujifunza",
+  "category": "",
+  "coming-soon": "Inakuja Hivi Karibuni...",
+  "completed": "Imekamilika",
+  "continue-learning": "Endelea Kujifunza",
+  "contributors": "Wachangiaji",
+  "day": "Siku",
+  "description": "Maelezo",
+  "duration-daily": "Kila Somo fupi huchukua chini ya dakika {{dailyMins}} kukamilisha {{days}} ya Masomo",
+  "empty-learning-plans": "Bado hujajiandikisha katika <link> Mipango yoyote ya Mafunzo </link>.",
+  "enroll": "Jiandikishe",
+  "enroll-success": "Hongera, Umeongeza {{title}} kwenye orodha yako!",
+  "enrolled": "Umejiandikisha",
+  "feedback": {
+    "add-feedback": "Ongeza Maoni",
+    "desc": "Hongera! Umekamilisha mpango wa kujifunza wa ' {{courseName}} '. <br> </br> Tafadhali kagua mpango wa kujifunza na ushiriki maoni yako ili kutusaidia kuboresha maudhui.",
+    "feedback-placeholder": "Andika maoni yako",
+    "feedback-success": "Asante kwa maoni yako!",
+    "your-feedback": "Maoni Yako"
+  },
+  "learn-duration": "Muda",
+  "learning-plan-material": "Nyenzo ya Mpango wa Kujifunza",
+  "learning-plan-meta-desc": "Mpango huu wa Mafunzo utasaidia kubadilisha uhusiano wako na Qur'ani, anza safari yako leo!",
+  "learning-plans-desc": "Ongeza maarifa yako kwa masomo rahisi ambayo yatakukuza katika safari yako ya Qur'ani. <br> </br> Anzisha Mpango wa Kujifunza leo! Maendeleo yako yanafuatiliwa hadi ufike mwisho.",
+  "learning-plans-meta-desc": "Mipango ya Kujifunza ya Quran.com itasaidia kubadilisha uhusiano wako na Qur'ani. Gundua mkusanyiko wetu wa masomo yaliyoratibiwa na uanze safari yako leo!",
+  "mark-complete": "Weka alama kuwa umekamilika",
+  "mark-complete-success": "Somo limekamilika kwa mafanikio!",
+  "next-lesson": "Somo Lijalo",
+  "not-enrolled": "Bado hujajiandikisha katika <link> Mpango wa Mafunzo </link>.",
+  "prev-lesson": "Somo Lililotangulia",
+  "start-learning": "Anza Kujifunza",
+  "tabs": {
+    "main": "Maelezo kuu",
+    "syllabus": "Muhtasari wa masomo"
+  }
+}

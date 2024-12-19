@@ -9,6 +9,7 @@
   "coming-soon": "Binnenkort beschikbaar...",
   "completed": "Voltooid",
   "continue-learning": "Ga door met leren",
+  "contributors": "Medewerkers",
   "day": "Dag",
   "description": "Beschrijving",
   "duration-daily": "Elke korte les duurt minder dan {{dailyMins}} minuten om in totaal {{days}} lessen te voltooien",
@@ -18,7 +19,7 @@
   "enrolled": "Ingeschreven",
   "feedback": {
     "add-feedback": "Feedback toevoegen",
-    "desc": "Gefeliciteerd! U heeft het leerplan ' {{courseName}} ' voltooid. <br> </br> Bekijk het leerplan en deel uw feedback om ons te helpen de inhoud te verbeteren.",
+    "desc": "Gefeliciteerd! U heeft het leerplan ' {{courseName}} ' voltooid. <br></br> Bekijk het leerplan en deel uw feedback om ons te helpen de inhoud te verbeteren.",
     "feedback-placeholder": "Schrijf uw feedback",
     "feedback-success": "Bedankt voor uw feedback!",
     "your-feedback": "Uw feedback"
