@@ -1,0 +1,22 @@
+{
+  "all-notifications": "Todas las notificaciones.",
+  "channels-notifications": "Canales de notificaciones.",
+  "channels": {
+    "chat": "Chat.",
+    "email": "Correo electrónico.",
+    "in_app": "En la aplicación.",
+    "push": "Notificaciones emergentes",
+    "sms": "Mensaje de texto."
+  },
+  "notif-settings-not-enabled": "La configuración de notificaciones no está habilitada.",
+  "notif-update-success": "¡Tu configuración de notificaciones se ha actualizado correctamente!.",
+  "tabs": {
+    "categories-settings": "Configuración de categorías.",
+    "global-settings": "Configuración global."
+  },
+  "tags": {
+    "learning-plans": "Planes de aprendizaje.",
+    "qgj": "Camino de crecimiento con el Corán.",
+    "streaks": "Rachas."
+  }
+}

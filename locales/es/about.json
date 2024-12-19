@@ -1,0 +1,14 @@
+{
+  "credits": {
+    "desc": "Este proyecto no habría sido posible sin las numerosas bibliotecas y proyectos de código abierto que hemos utilizado:",
+    "lokalize": "<0>Lokalize</0>: un sistema de traducción asistido por computadora que se centra en la productividad y la garantía de calidad y proporciona un flujo de trabajo de localización perfecto.",
+    "quran-align": "<0>Collin Fair</0>: Una herramienta para producir una segmentación con precisión de palabras de la recitación coránica grabada.",
+    "quran-complex": "<0>QuranComplex</0>: King Fahd Glorious Qur'an Printing Complex es líder en el servicio al Glorioso Corán y sus Ciencias, traduciendo sus Significados y salvaguardando el Texto Coránico de la distorsión, a través del uso óptimo de tecnologías avanzadas en el campo de la impresión, grabaciones de audio, publicaciones electrónicas y aplicaciones digitales.",
+    "quran-enc": "<0>QuranEnc</0>: Un portal que ofrece traducciones gratuitas y confiables de los significados y exégesis del noble Corán en muchos idiomas del mundo.",
+    "tanzil": "<0>Tanzil</0>: un proyecto coránico internacional cuyo objetivo es proporcionar un texto coránico preciso y altamente verificado.",
+    "title": "Créditos",
+    "vercel": "<0>Vercel</0>: es una plataforma de implementación y colaboración para desarrolladores de interfaz de usuario que pone al desarrollador en primer lugar, brindándole herramientas integrales para crear sitios web y aplicaciones de alto rendimiento.",
+    "zekr": "<0>Zekr</0>: una herramienta de estudio del Corán en plataforma abierta para navegar e investigar sobre el Corán."
+  },
+  "main-description": "Quran.com se fundó en 1995. El sitio web tiene como objetivo facilitar la lectura, el estudio y el aprendizaje del Corán a cualquier persona. El proyecto es de código abierto y se ha creado como una colaboración entre los miembros del equipo central y el equipo de Tarteel."
+}
