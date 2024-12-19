@@ -7,11 +7,11 @@
       "data-sync": {
         "action": "Volgende",
         "description": "Of je nu Quran.com op je telefoon of je laptop gebruikt, je bladwijzers, laatst gelezen verzen en je voorkeuren zijn beschikbaar",
-        "title": "Uw gegevens worden <br><\/br> op verschillende apparaten gesynchroniseerd"
+        "title": "Uw gegevens worden <br></br> op verschillende apparaten gesynchroniseerd"
       },
       "feedback": {
         "action": "Oké, snap het",
-        "description": "Bedankt voor het gebruik van Quran.com en we horen graag uw feedback op <link> feedback.quran.com <\/link>",
+        "description": "Bedankt voor het gebruik van Quran.com en we horen graag uw feedback op <link> feedback.quran.com </link>",
         "title": "We willen je gedachten horen"
       },
       "quran-foundation-link": {
@@ -26,12 +26,12 @@
       },
       "welcome": {
         "action": "Zie wat nieuw is",
-        "title": "Welkom bij Quran.com <br><\/br> Gebruikersaccount"
+        "title": "Welkom bij Quran.com <br></br> Gebruikersaccount"
       }
     },
     "collections-announcement": {
       "slide-1": {
-        "description": "We zijn erg blij om aan te kondigen dat je nu bladwijzers kunt groeperen onder \"collecties\"! <br\/> <br\/> <li> Voeg zoveel collecties toe als je wilt <\/li> <li> Voeg een bladwijzer toe aan een of meer collecties <\/li> <li> En meer! <\/li>",
+        "description": "We zijn erg blij om aan te kondigen dat je nu bladwijzers kunt groeperen onder \"collecties\"! <br/> <br/> <li> Voeg zoveel collecties toe als je wilt </li> <li> Voeg een bladwijzer toe aan een of meer collecties </li> <li> En meer! </li>",
         "title": "Bladwijzercollecties zijn hier!"
       }
     }
@@ -52,8 +52,8 @@
       "title": "Automatisch scrollen"
     },
     "displaying": "Weergeven",
-    "exp-tip": "<span>Wijzig de weergegeven inhoud onder<\/span><br><\/br> <boldSpan>Instellingen<\/boldSpan> > <boldSpan>Woord voor woord<\/boldSpan>",
-    "exp-tip-no-select": "<span>Vink de tooltip-weergaveoptie aan en selecteer de <br><\/br> optie Vertaling en\/of transliteratie<\/span><br><\/br><span> onder <\/span><boldSpan>Instellingen<\/boldSpan> > <boldSpan>Woord voor woord<\/boldSpan><span>, om<\/span><br><\/br> <span>deze functie in te schakelen.<\/span>",
+    "exp-tip": "<span>Wijzig de weergegeven inhoud onder</span><br></br> <boldSpan>Instellingen</boldSpan> > <boldSpan>Woord voor woord</boldSpan>",
+    "exp-tip-no-select": "<span>Vink de tooltip-weergaveoptie aan en selecteer de <br></br> optie Vertaling en/of transliteratie</span><br></br><span> onder </span><boldSpan>Instellingen</boldSpan> > <boldSpan>Woord voor woord</boldSpan><span>, om</span><br></br> <span>deze functie in te schakelen.</span>",
     "experience": "Ervaring",
     "play": "Audio afspelen",
     "playback-normal": "normaal",
@@ -85,7 +85,7 @@
       "verses-range": "Bereik van verzen",
       "volume-control": "Volumeregeling"
     },
-    "repeat-moved": "De herhaalinstellingen zijn verplaatst naar de audiospeler. Klik op het <0> <\/0> om ze te openen",
+    "repeat-moved": "De herhaalinstellingen zijn verplaatst naar de audiospeler. Klik op het <0> </0> om ze te openen",
     "select-reciter": "Selecteer voordrager",
     "speed": "Snelheid",
     "title": "Audio"
@@ -117,8 +117,8 @@
   "complete-sign-up": "Voltooi je registratie",
   "consents": {
     "communication": {
-      "body": "🚀 Verbeter uw voortgang via <boldSpan> gepersonaliseerde <\/boldSpan> meldingen over uw doelvoortgang, het bijhouden van streaks en het verbeteren van uw gebruik van onze huidige functies. <br><\/br> <br><\/br> Kunnen we u op de hoogte houden via e-mail en andere kanalen? U heeft de controle. U kunt deze voorkeuren op elk gewenst moment aanpassen in uw accountinstellingen. <br><\/br> <br><\/br> Selecteer eenvoudig 'Toestaan' voor <boldSpan> inspirerende herinneringen <\/boldSpan> of 'Niet nu' om te weigeren.",
-      "header": "We helpen u graag <boldSpan> toegewijd en consistent <\/boldSpan> te blijven tijdens uw Korangroeireis! 📖🌟"
+      "body": "🚀 Verbeter uw voortgang via <boldSpan> gepersonaliseerde </boldSpan> meldingen over uw doelvoortgang, het bijhouden van streaks en het verbeteren van uw gebruik van onze huidige functies. <br></br> <br></br> Kunnen we u op de hoogte houden via e-mail en andere kanalen? U heeft de controle. U kunt deze voorkeuren op elk gewenst moment aanpassen in uw accountinstellingen. <br></br> <br></br> Selecteer eenvoudig 'Toestaan' voor <boldSpan> inspirerende herinneringen </boldSpan> of 'Niet nu' om te weigeren.",
+      "header": "We helpen u graag <boldSpan> toegewijd en consistent </boldSpan> te blijven tijdens uw Korangroeireis! 📖🌟"
     }
   },
   "continue": "Doorgaan met",
@@ -139,7 +139,7 @@
   "edit": "Bewerking",
   "email-verification": {
     "check-spam": "Heb je de verificatie-e-mail niet ontvangen? Check je spam-inbox",
-    "email-sent": "We hebben zojuist een e-mail gestuurd naar <strong> {{email}} <\/strong>",
+    "email-sent": "We hebben zojuist een e-mail gestuurd naar <strong> {{email}} </strong>",
     "email-verification": "Email verificatie",
     "resend-email": "Email opnieuw verzenden",
     "resend-email-in": "Verzend de verificatie-e-mail opnieuw over {{remainingTime}} sec...",
@@ -171,7 +171,7 @@
     "quran-font": "Koran lettertype",
     "quran-font-size": "Koran lettergrootte",
     "tajweed": "Tajweed",
-    "tajweed-desc": "Tajweed lettertype toont een Tajweed gekleurde Mushaf. Meer over de Tajweed kleurregels lees je <0> hier <\/0>",
+    "tajweed-desc": "Tajweed lettertype toont een Tajweed gekleurde Mushaf. Meer over de Tajweed kleurregels lees je <0> hier </0>",
     "tajweed_v4": "Koning Fahad Complex V4",
     "text_indopak": "IndoPak",
     "text_uthmani": "Uthmani",
@@ -179,7 +179,7 @@
   },
   "footer": {
     "description": "Quran.com is een Sadaqah Jariyah. We hopen het voor iedereen gemakkelijk te maken om de Edele Koran te lezen, te bestuderen en te leren. De Edele Koran heeft vele namen, waaronder Al-Quran Al-Kareem, Al-Ketab, Al-Furqan, Al-Maw'itha, Al-Thikr en Al-Noor.",
-    "hiring": "Wij werven aan! Sluit je aan bij het team van QuranFoundation en draag bij aan onze missie. <link> Solliciteer nu! <\/link>",
+    "hiring": "Wij werven aan! Sluit je aan bij het team van QuranFoundation en draag bij aan onze missie. <link> Solliciteer nu! </link>",
     "rights": "Alle rechten voorbehouden",
     "title": "Lees, bestudeer en leer de Edele Koran."
   },
@@ -370,7 +370,7 @@
     "light": "Licht",
     "sepia": "Sepia",
     "system": "Systeem",
-    "system-desc": "Het systeemthema past zich automatisch aan uw instellingen voor licht\/donkermodus aan"
+    "system-desc": "Het systeemthema past zich automatisch aan uw instellingen voor licht/donkermodus aan"
   },
   "to": "Tot",
   "tooltip": "Knopinfo",
@@ -405,7 +405,7 @@
     "voice-search-powered-by": "Gesproken zoekopdracht Mogelijk gemaakt door"
   },
   "wbw": "Woord voor woord",
-  "wbw-lang-summary": "Woord voor woord vertalingsbron: <link> {{source}} <\/link> . Deze bron is onafhankelijk van de selectie van de versvertaling.",
+  "wbw-lang-summary": "Woord voor woord vertalingsbron: <link> {{source}} </link> . Deze bron is onafhankelijk van de selectie van de versvertaling.",
   "wbw-trans-lang": "Woord voor woord taal",
   "wbw-translation": "Woord voor woord vertaling",
   "wbw-transliteration": "Woord voor woord transliteratie",

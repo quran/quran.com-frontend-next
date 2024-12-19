@@ -5,6 +5,7 @@
 /* eslint-disable react-func/max-lines-per-function */
 /* eslint-disable global-require */
 /* eslint-disable import/no-dynamic-require */
+const CryptoJS = require('crypto-js');
 const range = require('lodash/range');
 const fetch = require('node-fetch');
 const CryptoJS = require('crypto-js');
