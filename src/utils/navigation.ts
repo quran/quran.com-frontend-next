@@ -8,7 +8,7 @@ import { getVerseAndChapterNumbersFromKey, getVerseNumberRangeFromKey } from './
 
 import QueryParam from '@/types/QueryParam';
 import { QuranReaderFlow } from '@/types/QuranReader';
-import { SearchNavigationType } from 'types/SearchNavigationResult';
+import { SearchNavigationType } from 'types/Search/SearchNavigationResult';
 
 /**
  * Get the href link to a verse.

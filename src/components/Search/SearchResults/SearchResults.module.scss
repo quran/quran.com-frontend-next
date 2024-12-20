@@ -21,4 +21,8 @@
 }
 .navigationItemContainer {
   margin-inline-end: var(--spacing-small);
+  em {
+    font-weight: var(--font-weight-semibold);
+    text-decoration: underline;
+  }
 }

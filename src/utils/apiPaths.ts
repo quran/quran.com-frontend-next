@@ -11,7 +11,7 @@ import {
 } from '@/redux/defaultSettings/util';
 import { MushafLines, QuranFont } from '@/types/QuranReader';
 import { SearchRequestParams, SearchMode } from '@/types/Search/SearchRequestParams';
-import { AdvancedCopyRequest, PagesLookUpRequest, SearchRequest } from 'types/ApiRequests';
+import { AdvancedCopyRequest, PagesLookUpRequest } from 'types/ApiRequests';
 
 export const DEFAULT_VERSES_PARAMS = {
   words: true,
@@ -145,14 +145,6 @@ export const makeTranslationsInfoUrl = (locale: string, translations: number[]):
  */
 export const makeAdvancedCopyUrl = (params: AdvancedCopyRequest): string =>
   makeUrl('/verses/advanced_copy', params as Record<string, unknown>);
-
-/**
- * Compose the url for search API.
- *
- * @param {SearchRequest} params the request params.
- * @returns {string}
- */
-export const makeSearchResultsUrl = (params: SearchRequest): string => makeUrl('/search', params);
 
 export const makeNewSearchApiUrl = (params: Record<string, any>) => {
   const baseUrl = process.env.NEXT_PUBLIC_SEARCH_BASE_URL;

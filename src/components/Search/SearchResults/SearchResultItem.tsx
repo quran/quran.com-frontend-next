@@ -1,42 +1,42 @@
-/* eslint-disable react/no-danger */
-
-import React, { useMemo } from 'react';
+import React from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
+import KalimatNavigationSearchResultItem from './KalimatNavigationSearchResultItem';
 import styles from './SearchResultItem.module.scss';
 
-import Link from '@/dls/Link/Link';
-import QuranWord from '@/dls/QuranWord/QuranWord';
-import useGetChaptersData from '@/hooks/useGetChaptersData';
+import Button from '@/dls/Button/Button';
+import { SearchNavigationType } from '@/types/Search/SearchNavigationResult';
 import SearchService from '@/types/Search/SearchService';
+import SearchVerseItem from '@/types/Search/SearchVerseItem';
 import SearchQuerySource from '@/types/SearchQuerySource';
-import { getChapterData } from '@/utils/chapter';
 import { logButtonClick } from '@/utils/eventLogger';
-import { toLocalizedVerseKey } from '@/utils/locale';
-import { getChapterWithStartingVerseUrl } from '@/utils/navigation';
-import { getChapterNumberFromKey } from '@/utils/verse';
-import Verse from 'types/Verse';
+import { toLocalizedNumber, toLocalizedVerseKey } from '@/utils/locale';
+import { resolveUrlBySearchNavigationType } from '@/utils/navigation';
 
 interface Props {
-  result: Verse;
+  result: SearchVerseItem;
   source: SearchQuerySource;
   service?: SearchService;
 }
 
-const SearchResultItem: React.FC<Props> = ({ result, source, service = SearchService.QDC }) => {
+const SearchResultItem: React.FC<Props> = ({ result, source, service = SearchService.KALIMAT }) => {
   const { lang } = useTranslation('quran-reader');
-  const localizedVerseKey = useMemo(
-    () => toLocalizedVerseKey(result.verseKey, lang),
-    [lang, result.verseKey],
-  );
+  const url = resolveUrlBySearchNavigationType(result.resultType, result.key, true);
 
-  const chaptersData = useGetChaptersData(lang);
+  const getKalimatResultSuffix = () => {
+    if (result.resultType === SearchNavigationType.SURAH) {
+      return `(${toLocalizedNumber(Number(result.key), lang)})`;
+    }
 
-  if (!chaptersData) return null;
+    if (result.resultType === SearchNavigationType.AYAH) {
+      return `(${toLocalizedVerseKey(result.key as string, lang)})`;
+    }
 
-  const chapterNumber = getChapterNumberFromKey(result.verseKey);
-  const chapterData = getChapterData(chaptersData, chapterNumber.toString());
+    return undefined;
+  };
+
+  const suffix = getKalimatResultSuffix();
 
   const onResultItemClicked = () => {
     logButtonClick(`search_result_item`, {
@@ -48,35 +48,20 @@ const SearchResultItem: React.FC<Props> = ({ result, source, service = SearchSer
   return (
     <div className={styles.container}>
       <div className={styles.itemContainer}>
-        <Link
-          className={styles.verseKey}
-          href={getChapterWithStartingVerseUrl(result.verseKey)}
-          onClick={onResultItemClicked}
-        >
-          {chapterData.transliteratedName} {localizedVerseKey}
-        </Link>
-        <div className={styles.quranTextContainer}>
-          <div className={styles.quranTextResult} translate="no">
-            {result.words.map((word, index) => {
-              return (
-                <QuranWord
-                  isHighlighted={!!word.highlight}
-                  key={`${result.verseKey}:${index + 1}`}
-                  word={word}
-                  isWordByWordAllowed={false}
-                  isAudioHighlightingAllowed={false}
-                />
-              );
-            })}
-          </div>
+        <div className={styles.quranTextResult} translate="no">
+          {result.resultType === SearchNavigationType.AYAH ? (
+            <KalimatNavigationSearchResultItem
+              key={result.key}
+              name={result.name}
+              resultKey={result.key}
+              source={source}
+            />
+          ) : (
+            <Button onClick={onResultItemClicked} href={url} suffix={suffix}>
+              {result.name}
+            </Button>
+          )}
         </div>
-        {result.translations?.map((translation) => (
-          <div key={translation.resourceId} className={styles.translationContainer}>
-            <div dangerouslySetInnerHTML={{ __html: translation.text }} />
-            {/* eslint-disable-next-line i18next/no-literal-string */}
-            <p className={styles.translationName}> - {translation.resourceName}</p>
-          </div>
-        ))}
       </div>
     </div>
   );
