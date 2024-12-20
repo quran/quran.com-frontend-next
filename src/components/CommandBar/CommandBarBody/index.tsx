@@ -19,7 +19,10 @@ import useDebounce from '@/hooks/useDebounce';
 import IconSearch from '@/icons/search.svg';
 import { selectInitialSearchQuery, selectRecentNavigations } from '@/redux/slices/CommandBar/state';
 import { selectIsCommandBarVoiceFlowStarted } from '@/redux/slices/voiceSearch';
-import { SearchNavigationResult, SearchNavigationType } from '@/types/SearchNavigationResult';
+import {
+  SearchNavigationResult,
+  SearchNavigationType,
+} from '@/types/Search/SearchNavigationResult';
 import SearchQuerySource from '@/types/SearchQuerySource';
 import { makeNewSearchResultsUrl } from '@/utils/apiPaths';
 import { areArraysEqual } from '@/utils/array';
