@@ -119,13 +119,13 @@ const Drawer: React.FC<Props> = ({
     },
     [dispatch, type, canCloseDrawer],
   );
-  // enableOnTags is added for when Search Drawer's input field is focused or when Settings Drawer's select input is focused
+  // enableOnFormTags is added for when Search Drawer's input field is focused or when Settings Drawer's select input is focused
   useHotkeys(
     'Escape',
     () => {
       closeDrawer(ActionSource.EscKey);
     },
-    { enabled: isOpen, enableOnTags: ['INPUT', 'SELECT'] },
+    { enabled: isOpen, enableOnFormTags: ['INPUT', 'SELECT'] },
   );
 
   useEffect(() => {

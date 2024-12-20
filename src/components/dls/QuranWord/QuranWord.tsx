@@ -23,6 +23,12 @@ import {
   selectTooltipContentType,
   selectInlineDisplayWordByWordPreferences,
 } from '@/redux/slices/QuranReader/readingPreferences';
+import {
+  ReadingPreference,
+  QuranFont,
+  WordClickFunctionality,
+  WordByWordType,
+} from '@/types/QuranReader';
 import { areArraysEqual } from '@/utils/array';
 import { milliSecondsToSeconds } from '@/utils/datetime';
 import { logButtonClick } from '@/utils/eventLogger';
@@ -30,7 +36,6 @@ import { isQCFFont } from '@/utils/fontFaceHelper';
 import { getChapterNumberFromKey, makeWordLocation } from '@/utils/verse';
 import { getWordTimeSegment } from 'src/xstate/actors/audioPlayer/audioPlayerMachineHelper';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
-import { ReadingPreference, QuranFont, WordClickFunctionality } from 'types/QuranReader';
 import Word, { CharType } from 'types/Word';
 
 export const DATA_ATTRIBUTE_WORD_LOCATION = 'data-word-location';
@@ -65,7 +70,7 @@ const QuranWord = ({
     shallowEqual,
   );
   const readingPreference = useSelector(selectReadingPreference);
-  const showTooltipFor = useSelector(selectTooltipContentType, areArraysEqual);
+  const showTooltipFor = useSelector(selectTooltipContentType, areArraysEqual) as WordByWordType[];
 
   // creating wordLocation instead of using `word.location` because
   // the value of `word.location` is `1:3:5-7`, but we want `1:3:5`
@@ -103,10 +108,13 @@ const QuranWord = ({
 
     1. When the current character is of type Word.
     2. When it's allowed to have word by word (won't be allowed for search results as of now).
-    3. When the tooltip settings are set to either translation or transliteration or both.
+    3. When in translation view: the tooltip settings are set to either translation or transliteration or both.
+       When in reading view: always show tooltip.
   */
   const showTooltip =
-    word.charTypeName === CharType.Word && isWordByWordAllowed && !!showTooltipFor.length;
+    word.charTypeName === CharType.Word &&
+    isWordByWordAllowed &&
+    (readingPreference === ReadingPreference.Translation ? !!showTooltipFor.length : true);
   const translationViewTooltipContent = useMemo(
     () => (isWordByWordAllowed ? getTooltipText(showTooltipFor, word) : null),
     [isWordByWordAllowed, showTooltipFor, word],
@@ -134,8 +142,7 @@ const QuranWord = ({
     }
   }, [audioService, isRecitationEnabled, word]);
 
-  const shouldHandleWordClicking =
-    readingPreference === ReadingPreference.Translation && word.charTypeName !== CharType.End;
+  const shouldHandleWordClicking = word.charTypeName !== CharType.End;
 
   return (
     <div

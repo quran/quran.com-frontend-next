@@ -4,7 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import useThemeDetector from './useThemeDetector';
 
-import { addLoadedFontFace, selectLoadedFontFaces } from '@/redux/slices/QuranReader/font-faces';
+import { selectLoadedFontFaces, addLoadedFontFace } from '@/redux/slices/QuranReader/font-faces';
+import { QuranFont } from '@/types/QuranReader';
 import { removeItemFromArray } from '@/utils/array';
 import {
   getFontFaceNameForPage,
@@ -12,7 +13,6 @@ import {
   getQCFFontFaceSource,
   isQCFFont,
 } from '@/utils/fontFaceHelper';
-import { QuranFont } from 'types/QuranReader';
 import Verse from 'types/Verse';
 
 /**

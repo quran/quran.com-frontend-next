@@ -89,7 +89,7 @@ const CommandsList: React.FC<Props> = ({ commandGroups: { groups, numberOfComman
     onUpKeyClicked,
     {
       enabled: numberOfCommands && selectedCommandIndex !== 0,
-      enableOnTags: ['INPUT'],
+      enableOnFormTags: ['INPUT'],
     },
     [scrollToSelectedCommand],
   );
@@ -98,7 +98,7 @@ const CommandsList: React.FC<Props> = ({ commandGroups: { groups, numberOfComman
     onDownKeyClicked,
     {
       enabled: numberOfCommands && selectedCommandIndex !== numberOfCommands - 1,
-      enableOnTags: ['INPUT'],
+      enableOnFormTags: ['INPUT'],
     },
     [scrollToSelectedCommand],
   );
@@ -116,7 +116,7 @@ const CommandsList: React.FC<Props> = ({ commandGroups: { groups, numberOfComman
       });
       navigateToLink(navigateTo);
     },
-    { enabled: selectedCommandIndex !== null, enableOnTags: ['INPUT'] },
+    { enabled: selectedCommandIndex !== null, enableOnFormTags: ['INPUT'] },
     [selectedCommandIndex, groups, navigateToLink],
   );
   const onRemoveCommandClicked = (

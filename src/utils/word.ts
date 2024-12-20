@@ -1,5 +1,5 @@
 /* eslint-disable import/prefer-default-export */
-import { QuranFont } from 'types/QuranReader';
+import { QuranFont } from '@/types/QuranReader';
 import Verse from 'types/Verse';
 import { CharType } from 'types/Word';
 

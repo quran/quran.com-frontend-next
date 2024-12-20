@@ -19,13 +19,13 @@ import useDebounce from '@/hooks/useDebounce';
 import IconSearch from '@/icons/search.svg';
 import { selectInitialSearchQuery, selectRecentNavigations } from '@/redux/slices/CommandBar/state';
 import { selectIsCommandBarVoiceFlowStarted } from '@/redux/slices/voiceSearch';
+import { SearchNavigationResult, SearchNavigationType } from '@/types/SearchNavigationResult';
 import SearchQuerySource from '@/types/SearchQuerySource';
 import { makeNewSearchResultsUrl } from '@/utils/apiPaths';
 import { areArraysEqual } from '@/utils/array';
 import { logButtonClick, logTextSearchQuery } from '@/utils/eventLogger';
 import { getQuickSearchQuery } from '@/utils/search';
 import { SearchResponse } from 'types/ApiResponses';
-import { SearchNavigationType } from 'types/Search/SearchNavigationResult';
 
 const NAVIGATE_TO = [
   {
@@ -64,7 +64,10 @@ const DEBOUNCING_PERIOD_MS = 1500;
 
 const CommandBarBody: React.FC = () => {
   const { t } = useTranslation('common');
-  const recentNavigations = useSelector(selectRecentNavigations, areArraysEqual);
+  const recentNavigations = useSelector(
+    selectRecentNavigations,
+    areArraysEqual,
+  ) as SearchNavigationResult[];
   const isVoiceSearchFlowStarted = useSelector(selectIsCommandBarVoiceFlowStarted, shallowEqual);
   const initialSearchQuery = useSelector(selectInitialSearchQuery, shallowEqual);
   const [searchQuery, setSearchQuery] = useState<string>(initialSearchQuery || null);

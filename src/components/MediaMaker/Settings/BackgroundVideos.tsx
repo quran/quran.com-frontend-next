@@ -26,6 +26,7 @@ const BackgroundVideos: React.FC<Props> = ({ onSettingsUpdate, videoId }) => {
     <div className={styles.BackgroundVideosWrapper}>
       {videos.map((video) => (
         <Image
+          alt={video.id}
           key={video.id}
           className={classNames(styles.img, {
             [styles.selectedSetting]: video.id === selectedVideoId,
@@ -34,8 +35,8 @@ const BackgroundVideos: React.FC<Props> = ({ onSettingsUpdate, videoId }) => {
             onVideoSelected(video.id);
           }}
           src={video.thumbnailSrc}
-          width="300px"
-          height="300px"
+          width="100"
+          height="100"
         />
       ))}
     </div>

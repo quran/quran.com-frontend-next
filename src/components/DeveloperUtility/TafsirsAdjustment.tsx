@@ -67,7 +67,7 @@ const TafsirsAdjustment = () => {
           multiple
           className={styles.select}
           onChange={onSelectedTafsirsChange}
-          defaultValue={selectedTafsirs}
+          defaultValue={selectedTafsirs as string[]}
         >
           {tafsirs.map((tafsir) => (
             <option key={tafsir.id} value={tafsir.id}>

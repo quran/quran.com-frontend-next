@@ -8,8 +8,8 @@ import ReadingPreferenceSwitcher from './ReadingPreferenceSwitcher';
 import TranslationView from './TranslationView';
 
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
+import { QuranReaderDataType } from '@/types/QuranReader';
 import { VersesResponse } from 'types/ApiResponses';
-import { QuranReaderDataType } from 'types/QuranReader';
 
 const ReadingView = dynamic(() => import('./ReadingView'));
 

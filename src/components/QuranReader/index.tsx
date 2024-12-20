@@ -18,8 +18,8 @@ import { selectNotes } from '@/redux/slices/QuranReader/notes';
 import { selectReadingPreference } from '@/redux/slices/QuranReader/readingPreferences';
 import { selectIsSidebarNavigationVisible } from '@/redux/slices/QuranReader/sidebarNavigation';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
+import { QuranReaderDataType, ReadingPreference } from '@/types/QuranReader';
 import { VersesResponse } from 'types/ApiResponses';
-import { QuranReaderDataType, ReadingPreference } from 'types/QuranReader';
 
 type QuranReaderProps = {
   initialData: VersesResponse;
