@@ -11,7 +11,6 @@ import styles from './OverflowVerseActionsMenuBody.module.scss';
 import ShareVerseActionsMenu, { VerseActionsOverflowMenu } from './ShareVerseActionsMenu';
 
 import WordByWordVerseAction from '@/components/QuranReader/ReadingView/WordByWordVerseAction';
-import NewLabel from '@/dls/Badge/NewLabel';
 import IconContainer, { IconSize } from '@/dls/IconContainer/IconContainer';
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import ChevronRightIcon from '@/icons/chevron-right.svg';
@@ -65,7 +64,6 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
         <div className={styles.menuWithNestedItems}>
           {t('share')}
           <div className={styles.newLabelContainer}>
-            <NewLabel />
             <IconContainer
               shouldForceSetColors={false}
               icon={<ChevronRightIcon />}

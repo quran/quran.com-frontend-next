@@ -9,6 +9,7 @@
   "coming-soon": "Em breve...",
   "completed": "Concluído",
   "continue-learning": "Continuar aprendendo",
+  "contributors": "Contribuidores",
   "day": "Dia",
   "description": "Descrição",
   "duration-daily": "Cada aula curta leva menos de {{dailyMins}} minutos para ser concluída {{days}} aulas no total",
@@ -18,7 +19,7 @@
   "enrolled": "Inscrito",
   "feedback": {
     "add-feedback": "Adicionar comentários",
-    "desc": "Parabéns! Você concluiu o plano de aprendizagem ' {{courseName}} '. <br> </br> Revise o plano de aprendizagem e compartilhe seus comentários para nos ajudar a melhorar o conteúdo.",
+    "desc": "Parabéns! Você concluiu o plano de aprendizagem ' {{courseName}} '. <br></br> Revise o plano de aprendizagem e compartilhe seus comentários para nos ajudar a melhorar o conteúdo.",
     "feedback-placeholder": "Escreva seu feedback",
     "feedback-success": "Obrigado pelo seu feedback!",
     "your-feedback": "Seu feedback"

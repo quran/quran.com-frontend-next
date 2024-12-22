@@ -9,6 +9,7 @@
   "coming-soon": "Vjen së shpejti...",
   "completed": "E përfunduar",
   "continue-learning": "Vazhdoni të mësoni",
+  "contributors": "Kontribuesit",
   "day": "Dita",
   "description": "Përshkrim",
   "duration-daily": "Çdo mësim i shkurtër merr më pak se {{dailyMins}} minuta për të përfunduar {{days}} mësime në total",
@@ -18,7 +19,7 @@
   "enrolled": "I regjistruar",
   "feedback": {
     "add-feedback": "Shto koment",
-    "desc": "urime! Ju keni përfunduar planin mësimor \" {{courseName}} \". <br> </br> Ju lutemi rishikoni planin mësimor dhe ndani komentet tuaja për të na ndihmuar të përmirësojmë përmbajtjen.",
+    "desc": "urime! Ju keni përfunduar planin mësimor \" {{courseName}} \". <br></br> Ju lutemi rishikoni planin mësimor dhe ndani komentet tuaja për të na ndihmuar të përmirësojmë përmbajtjen.",
     "feedback-placeholder": "Shkruani komentet tuaja",
     "feedback-success": "Faleminderit për komentin tuaj!",
     "your-feedback": "Komentet tuaja"
