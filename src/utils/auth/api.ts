@@ -6,6 +6,7 @@ import { configureRefreshFetch } from 'refresh-fetch';
 import { getTimezone } from '../datetime';
 import { prepareGenerateMediaFileRequestData } from '../media/utils';
 
+import { BANNED_USER_ERROR_ID } from './constants';
 import generateSignature from './signature';
 import BookmarkByCollectionIdQueryParams from './types/BookmarkByCollectionIdQueryParams';
 import GetAllNotesQueryParams from './types/Note/GetAllNotesQueryParams';
@@ -27,7 +28,6 @@ import { CreateGoalRequest, Goal, GoalCategory, UpdateGoalRequest } from '@/type
 import { Note } from '@/types/auth/Note';
 import { Response } from '@/types/auth/Response';
 import { StreakWithMetadataParams, StreakWithUserMetadata } from '@/types/auth/Streak';
-import AuthError from '@/types/AuthError';
 import GenerateMediaFileRequest, { MediaType } from '@/types/Media/GenerateMediaFileRequest';
 import MediaRenderError from '@/types/Media/MediaRenderError';
 import { Mushaf } from '@/types/QuranReader';
@@ -101,6 +101,7 @@ const IGNORE_ERRORS = [
 const handleErrors = async (res) => {
   const body = await res.json();
   const error = body?.error || body?.details?.error;
+  const errorName = body?.name || body?.details?.name;
 
   // sometimes FE needs to handle the error from the API instead of showing a general something went wrong message
   const shouldIgnoreError = IGNORE_ERRORS.includes(error?.code);
@@ -109,9 +110,9 @@ const handleErrors = async (res) => {
   }
   // const toast = useToast();
 
-  if (error?.code === AuthError.BannedUserError) {
+  if (errorName === BANNED_USER_ERROR_ID) {
     await logoutUser();
-    return Router.push(`/login?error=${AuthError.BannedUserError}`);
+    return Router.push(`/login?error=${errorName}`);
   }
 
   throw new Error(body?.message);
