@@ -28,7 +28,6 @@ import { CreateGoalRequest, Goal, GoalCategory, UpdateGoalRequest } from '@/type
 import { Note } from '@/types/auth/Note';
 import { Response } from '@/types/auth/Response';
 import { StreakWithMetadataParams, StreakWithUserMetadata } from '@/types/auth/Streak';
-import AuthError from '@/types/AuthError';
 import GenerateMediaFileRequest, { MediaType } from '@/types/Media/GenerateMediaFileRequest';
 import MediaRenderError from '@/types/Media/MediaRenderError';
 import { Mushaf } from '@/types/QuranReader';
