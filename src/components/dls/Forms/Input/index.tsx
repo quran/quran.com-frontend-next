@@ -14,6 +14,7 @@ import classNames from 'classnames';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '../../Button/Button';
 
 import styles from './Input.module.scss';
+import InputSuffix from './Suffix';
 
 import ClearIcon from '@/icons/close.svg';
 
@@ -56,6 +57,8 @@ interface Props {
   htmlType?: React.HTMLInputTypeAttribute;
   isRequired?: boolean;
   inputRef?: RefObject<HTMLInputElement>;
+  prefixSuffixContainerClassName?: string;
+  shouldUseDefaultStyles?: boolean;
 }
 
 const Input: React.FC<Props> = ({
@@ -78,9 +81,11 @@ const Input: React.FC<Props> = ({
   value = '',
   shouldFlipOnRTL = true,
   containerClassName,
+  prefixSuffixContainerClassName,
   htmlType,
   isRequired,
   inputRef,
+  shouldUseDefaultStyles = true,
 }) => {
   const [inputValue, setInputValue] = useState(value);
   // listen to any change in value in-case the value gets populated after and API call.
@@ -95,6 +100,19 @@ const Input: React.FC<Props> = ({
       onChange(newValue);
     }
   };
+
+  // eslint-disable-next-line react/no-multi-comp
+  const Suffix = () => (
+    <>
+      {suffix && (
+        <InputSuffix
+          suffix={suffix}
+          suffixContainerClassName={styles.prefixSuffixContainer}
+          shouldUseDefaultStyles={shouldUseDefaultStyles}
+        />
+      )}
+    </>
+  );
 
   return (
     <>
@@ -113,7 +131,15 @@ const Input: React.FC<Props> = ({
         })}
       >
         {prefix && (
-          <div className={classNames(styles.prefix, styles.prefixSuffixContainer)}>{prefix}</div>
+          <div
+            className={classNames(
+              styles.prefix,
+              styles.prefixSuffixContainer,
+              prefixSuffixContainerClassName,
+            )}
+          >
+            {prefix}
+          </div>
         )}
         <input
           className={classNames(styles.input, {
@@ -137,7 +163,7 @@ const Input: React.FC<Props> = ({
         />
         {clearable ? (
           <>
-            {inputValue && (
+            {inputValue ? (
               <div className={styles.clearContainer}>
                 <Button
                   shape={ButtonShape.Circle}
@@ -148,16 +174,12 @@ const Input: React.FC<Props> = ({
                   <ClearIcon />
                 </Button>
               </div>
+            ) : (
+              <Suffix />
             )}
           </>
         ) : (
-          <>
-            {suffix && (
-              <div className={classNames(styles.suffix, styles.prefixSuffixContainer)}>
-                {suffix}
-              </div>
-            )}
-          </>
+          <Suffix />
         )}
       </div>
     </>

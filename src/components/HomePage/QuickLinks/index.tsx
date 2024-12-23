@@ -5,6 +5,7 @@ import useTranslation from 'next-translate/useTranslation';
 import QuickLink from './QuickLink';
 import styles from './QuickLinks.module.scss';
 
+import ThemeType from '@/redux/types/ThemeType';
 import { isLoggedIn } from '@/utils/auth/login';
 
 const isProduction = process.env.NEXT_PUBLIC_VERCEL_ENV === 'production';
@@ -50,7 +51,7 @@ const QuickLinks: React.FC = () => {
   const { t } = useTranslation('quick-links');
 
   return (
-    <div className={styles.quickLinksContainer}>
+    <div className={styles.quickLinksContainer} data-theme={ThemeType.Light}>
       {QUICK_LINKS.map((quickLink) => (
         <QuickLink
           key={quickLink.slug}

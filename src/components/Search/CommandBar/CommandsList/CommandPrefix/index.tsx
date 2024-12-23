@@ -5,8 +5,9 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from './CommandPrefix.module.scss';
 
+import SearchResultItemIcon from '@/components/Search/SearchResults/SearchResultItemIcon';
 import DataContext from '@/contexts/DataContext';
-import NavigateIcon from '@/icons/east.svg';
+import { Direction } from '@/utils/locale';
 import { getSearchNavigationResult } from '@/utils/search';
 import { SearchNavigationType } from 'types/Search/SearchNavigationResult';
 
@@ -20,9 +21,7 @@ interface Props {
 const CommandPrefix: React.FC<Props> = ({ name, type, isVoiceSearch, navigationKey }) => {
   const { t, lang } = useTranslation('common');
   const chapterData = useContext(DataContext);
-  const getName = () => {
-    if (isVoiceSearch) return name;
-
+  const getContent = () => {
     if (type === SearchNavigationType.SEARCH_PAGE) {
       return t('search-for', {
         searchQuery: name,
@@ -34,7 +33,6 @@ const CommandPrefix: React.FC<Props> = ({ name, type, isVoiceSearch, navigationK
       { resultType: type, key: navigationKey, name },
       t,
       lang,
-      true,
     );
     return navigation?.name;
   };
@@ -42,14 +40,18 @@ const CommandPrefix: React.FC<Props> = ({ name, type, isVoiceSearch, navigationK
   return (
     <div className={styles.container}>
       <span className={styles.commandPrefix}>
-        <NavigateIcon />
+        <SearchResultItemIcon type={type} />
       </span>
-      <p
-        dangerouslySetInnerHTML={{
-          __html: getName(),
-        }}
-        className={styles.name}
-      />
+      {isVoiceSearch ? (
+        <div dir={Direction.RTL}>{name}</div>
+      ) : (
+        <p
+          className={styles.name}
+          dangerouslySetInnerHTML={{
+            __html: getContent(),
+          }}
+        />
+      )}
     </div>
   );
 };

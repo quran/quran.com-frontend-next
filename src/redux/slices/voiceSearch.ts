@@ -26,10 +26,6 @@ export const voiceSearchSlice = createSlice({
       ...state,
       isSearchDrawerVoiceFlowStarted: false,
     }),
-    stopCommandBarVoiceFlow: (state) => ({
-      ...state,
-      isCommandBardVoiceFlowStarted: false,
-    }),
     toggleIsCommandBarVoiceFlowStarted: (state) => ({
       ...state,
       isCommandBardVoiceFlowStarted: !state.isCommandBardVoiceFlowStarted,
@@ -45,6 +41,5 @@ export const {
   toggleIsSearchDrawerVoiceFlowStarted,
   toggleIsCommandBarVoiceFlowStarted,
   stopSearchDrawerVoiceFlow,
-  stopCommandBarVoiceFlow,
 } = voiceSearchSlice.actions;
 export default voiceSearchSlice.reducer;

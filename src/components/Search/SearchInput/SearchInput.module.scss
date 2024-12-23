@@ -1,0 +1,49 @@
+@use "src/styles/breakpoints";
+
+.headerOuterContainer {
+    background: var(--color-background-elevated);
+    position: relative;
+    border-radius: var(--border-radius-pill);
+    box-shadow: var(--shadow-strong);
+    width: 100%;
+    margin: 0 auto;
+    z-index: 1;
+    max-width: calc(25 * var(--spacing-mega));
+}
+
+.prefixSuffixContainer {
+    color: var(--color-text-default) !important;
+}
+
+.expanded {
+    z-index: 100;
+    border-radius: var(--border-radius-circle-small);
+    border-radius: var(--border-radius-circle-small) var(--border-radius-circle-small) 0 0;
+}
+
+.inputContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.input {
+    border: none !important;
+    width: 100%;
+
+    input::placeholder {
+        color: var(--color-text-default);
+        opacity: 1;
+    }
+}
+
+.dropdownContainer {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 100;
+    border-radius: 0 0 var(--border-radius-circle-small) var(--border-radius-circle-small);
+    box-shadow: var(--shadow-strong);
+}

@@ -11,7 +11,6 @@ interface AdvancedSearchRequestParams {
 
 interface QuickSearchRequestParams {
   indexes?: string;
-  highlight?: SearchBoolean;
 }
 
 export type SearchRequestParams<Mode extends SearchMode> = {
@@ -24,4 +23,5 @@ export type SearchRequestParams<Mode extends SearchMode> = {
   fields?: string;
   translationFields?: string;
   words?: boolean;
+  highlight?: SearchBoolean;
 } & (Mode extends SearchMode.Advanced ? AdvancedSearchRequestParams : QuickSearchRequestParams);

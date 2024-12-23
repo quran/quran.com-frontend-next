@@ -17,6 +17,9 @@
 .name {
   em {
     font-weight: var(--font-weight-bold);
-    text-decoration: underline;
+    color: var(--color-highlight-dark);
+  }
+  sup {
+    display: none;
   }
 }

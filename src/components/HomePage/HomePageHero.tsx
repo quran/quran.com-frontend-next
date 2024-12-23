@@ -1,24 +1,26 @@
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
+import useTranslation from 'next-translate/useTranslation';
 
 import styles from './HomePageHero.module.scss';
 import QuickLinks from './QuickLinks';
 
-import CommandBarTrigger from '@/components/CommandBar/CommandBarTrigger';
+import SearchInput from '@/components/Search/SearchInput';
 
 const PlayRadioButton = dynamic(() => import('./PlayRadioButton'));
 
 const HomePageHero = () => {
+  const { t } = useTranslation('common');
   return (
     <div className={styles.outerContainer}>
       <Head>
         <link rel="preload" as="image" href="/images/background.jpg" />
       </Head>
       <div className={styles.backgroundImage} />
-      <div data-theme="light">
+      <div>
         <PlayRadioButton />
         <div className={styles.innerContainer}>
-          <CommandBarTrigger />
+          <SearchInput placeholder={t('command-bar.placeholder')} />
           <div className={styles.quickLinksContainer}>
             <QuickLinks />
           </div>

@@ -145,6 +145,7 @@ const SearchDrawer: React.FC = () => {
                 isSearching={isSearching}
                 hasError={hasError}
                 shouldSuggestFullSearchWhenNoResults
+                source={SearchQuerySource.SearchDrawer}
               />
             )}
           </>
