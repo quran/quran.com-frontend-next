@@ -1,0 +1,22 @@
+{
+  "all-notifications": "Wszystkie Powiadomienia",
+  "channels-notifications": "Powiadomienia Kanałów",
+  "channels": {
+    "chat": "Czat",
+    "email": "Email",
+    "in_app": "W Aplikacji",
+    "push": "Push",
+    "sms": "SMS"
+  },
+  "notif-settings-not-enabled": "Ustawienia powiadomień są wyłączone",
+  "notif-update-success": "Twoje ustawienia powiadomień zostały pomyślnie zaktualizowane!",
+  "tabs": {
+    "categories-settings": "Ustawienia Kategorii",
+    "global-settings": "Ustawienia Globalne"
+  },
+  "tags": {
+    "learning-plans": "Plany Nauczania",
+    "qgj": "Droga Rozwoju z Koranem",
+    "streaks": "Serie"
+  }
+}

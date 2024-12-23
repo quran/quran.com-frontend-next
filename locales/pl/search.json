@@ -1,0 +1,12 @@
+{
+    "default-translations": "Domyślne tłumaczenia",
+    "filter": "filtruj",
+    "language-filter-label": "Wyszukaj wszystkie tłumaczenia danego języka",
+    "language-select": "Wybierz język",
+    "reset": "resetuj",
+    "search": "Szukaj",
+    "search-desc": "Przeszukaj zbiór tekstów Szlachetnego Koranu i jego tłumaczeń, korzystając z potężnej i bardzo dokładnej wielojęzycznej wyszukiwarki.",
+    "search-title": "Szukaj '{{searchQuery}}'",
+    "searching-translations": "Szukanie tłumaczeń",
+    "translation-select": "Wybierz tłumaczenie"
+}
