@@ -8,15 +8,17 @@ import styles from './SearchHistory.module.scss';
 import Header from '@/components/Search/PreInput/Header';
 import SearchQuerySuggestion from '@/components/Search/PreInput/SearchQuerySuggestion';
 import { removeSearchHistoryRecord, selectSearchHistory } from '@/redux/slices/Search/search';
+import { SearchNavigationType } from '@/types/Search/SearchNavigationResult';
+import SearchQuerySource from '@/types/SearchQuerySource';
 import { areArraysEqual } from '@/utils/array';
 import { logButtonClick } from '@/utils/eventLogger';
 
 interface Props {
   onSearchKeywordClicked: (searchQuery: string) => void;
-  isSearchDrawer: boolean;
+  source: SearchQuerySource;
 }
 
-const SearchHistory: React.FC<Props> = ({ onSearchKeywordClicked, isSearchDrawer }) => {
+const SearchHistory: React.FC<Props> = ({ onSearchKeywordClicked, source }) => {
   const { t } = useTranslation('common');
   const searchHistory = useSelector(selectSearchHistory, areArraysEqual) as string[];
   const dispatch = useDispatch();
@@ -24,10 +26,10 @@ const SearchHistory: React.FC<Props> = ({ onSearchKeywordClicked, isSearchDrawer
   const onRemoveSearchQueryClicked = useCallback(
     (searchQuery: string) => {
       // eslint-disable-next-line i18next/no-literal-string
-      logButtonClick(`search_${isSearchDrawer ? 'drawer' : 'page'}_remove_query`);
+      logButtonClick(`${source}_remove_query`);
       dispatch({ type: removeSearchHistoryRecord.type, payload: searchQuery });
     },
-    [dispatch, isSearchDrawer],
+    [dispatch, source],
   );
 
   // if there are no recent search queries.
@@ -39,10 +41,11 @@ const SearchHistory: React.FC<Props> = ({ onSearchKeywordClicked, isSearchDrawer
       <Header text={t('search.recent')} />
       {searchHistory.map((recentSearchQuery) => (
         <SearchQuerySuggestion
+          type={SearchNavigationType.HISTORY}
           searchQuery={recentSearchQuery}
           key={`${recentSearchQuery}`}
           onSearchKeywordClicked={(searchQuery: string) => {
-            logButtonClick(`search_${isSearchDrawer ? 'drawer' : 'page'}_history_item`);
+            logButtonClick(`${source}_history_item`);
             onSearchKeywordClicked(searchQuery);
           }}
           onRemoveSearchQueryClicked={onRemoveSearchQueryClicked}

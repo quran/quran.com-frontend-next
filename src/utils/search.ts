@@ -6,18 +6,15 @@ import groupBy from 'lodash/groupBy';
 import { Translate } from 'next-translate';
 import { AnyAction } from 'redux';
 
-import { logEmptySearchResults, logSearchResults, logTextSearchQuery } from './eventLogger';
+import { logTextSearchQuery } from './eventLogger';
 
-import { getNewSearchResults } from '@/api';
 import { addSearchHistoryRecord } from '@/redux/slices/Search/search';
-import { SearchResponse } from '@/types/ApiResponses';
 import AvailableTranslation from '@/types/AvailableTranslation';
 import ChaptersData from '@/types/ChaptersData';
 import { SearchMode, SearchRequestParams } from '@/types/Search/SearchRequestParams';
-import SearchService from '@/types/Search/SearchService';
 import SearchQuerySource from '@/types/SearchQuerySource';
 import { getChapterData } from '@/utils/chapter';
-import { toLocalizedNumber } from '@/utils/locale';
+import { toLocalizedNumber, toLocalizedVerseKey } from '@/utils/locale';
 import { getVerseAndChapterNumbersFromKey, getVerseNumberRangeFromKey } from '@/utils/verse';
 import { SearchNavigationResult, SearchNavigationType } from 'types/Search/SearchNavigationResult';
 
@@ -115,14 +112,15 @@ export const getSearchNavigationResult = (
   result: SearchNavigationResult,
   t: Translate,
   locale: string,
-  shouldUseOriginalAyahName = false,
 ): SearchNavigationResult & { name: string } => {
   const { key, resultType } = result;
+  const resultSuffix = getResultSuffix(resultType, key as string, locale, chaptersData);
+  let returnedResult = null;
 
   if (resultType === SearchNavigationType.JUZ) {
     const juzNumber = idToJuzNumber(key as string);
 
-    return {
+    returnedResult = {
       name: `${t('common:juz')} ${toLocalizedNumber(Number(juzNumber), locale)}`,
       key: juzNumber,
       resultType: SearchNavigationType.JUZ,
@@ -132,16 +130,32 @@ export const getSearchNavigationResult = (
   if (resultType === SearchNavigationType.PAGE) {
     const pageNumber = idToPageNumber(key as string);
 
-    return {
+    returnedResult = {
       name: `${t('common:page')} ${toLocalizedNumber(Number(pageNumber), locale)}`,
       key: pageNumber,
       resultType: SearchNavigationType.PAGE,
     };
   }
 
+  if (resultType === SearchNavigationType.RUB_EL_HIZB) {
+    returnedResult = {
+      name: `${t('common:rub')} ${toLocalizedNumber(Number(key), locale)}`,
+      key,
+      resultType: SearchNavigationType.RUB_EL_HIZB,
+    };
+  }
+
+  if (resultType === SearchNavigationType.HIZB) {
+    returnedResult = {
+      name: `${t('common:hizb')} ${toLocalizedNumber(Number(key), locale)}`,
+      key,
+      resultType: SearchNavigationType.HIZB,
+    };
+  }
+
   if (resultType === SearchNavigationType.RANGE) {
     const { surah, from, to } = getVerseNumberRangeFromKey(key as string);
-    return {
+    returnedResult = {
       name: `${t('common:surah')} ${
         getChapterData(chaptersData, `${surah}`).transliteratedName
       } ${t('common:ayah')} ${toLocalizedNumber(from, locale)} - ${toLocalizedNumber(to, locale)}`,
@@ -151,91 +165,24 @@ export const getSearchNavigationResult = (
   }
 
   if (resultType === SearchNavigationType.AYAH) {
-    if (shouldUseOriginalAyahName) {
-      return {
-        name: `${result.name} - (${key})`,
-        key,
-        resultType: SearchNavigationType.AYAH,
-      };
-    }
-    const [surahNumber, ayahNumber] = getVerseAndChapterNumbersFromKey(key as string);
-    return {
-      name: `${t('common:surah')} ${
-        getChapterData(chaptersData, `${surahNumber}`).transliteratedName
-      }, ${t('common:ayah')} ${toLocalizedNumber(Number(ayahNumber), locale)}`,
+    returnedResult = {
+      name: result.name,
       key,
       resultType: SearchNavigationType.AYAH,
     };
   }
 
-  // when it's a chapter
-  return {
-    name: `${t('common:surah')} ${getChapterData(chaptersData, key as string).transliteratedName}`,
-    key,
-    resultType: SearchNavigationType.SURAH,
-  };
-};
+  if (resultType === SearchNavigationType.SURAH) {
+    returnedResult = {
+      name: `${t('common:surah')} ${
+        getChapterData(chaptersData, key as string).transliteratedName
+      }`,
+      key,
+      resultType: SearchNavigationType.SURAH,
+    };
+  }
 
-/**
- * Call Kalimat API to fetch the search results using the passed filters.
- *
- * @param {SearchQuerySource} source
- * @param {string} query
- * @param {number} page
- * @param {number} pageSize
- * @param {(arg: boolean) => void} setIsSearching
- * @param {(arg: boolean) => void} setHasError
- * @param {(data: SearchResponse) => void} setSearchResult
- * @param {string} languages
- */
-export const searchGetResults = (
-  source: SearchQuerySource,
-  query: string,
-  page: number,
-  pageSize: number,
-  setIsSearching: (arg: boolean) => void,
-  setHasError: (arg: boolean) => void,
-  setSearchResult: (data: SearchResponse) => void,
-  languages?: string,
-) => {
-  setIsSearching(true);
-  logTextSearchQuery(query, source);
-  getNewSearchResults({
-    mode: SearchMode.Advanced,
-    query,
-    size: pageSize,
-    filterLanguages: languages,
-    page,
-    exactMatchesOnly: 0,
-    getText: 1,
-    highlight: 1,
-  })
-    .then(async (kalimatResponse) => {
-      setSearchResult({
-        ...kalimatResponse,
-        service: SearchService.KALIMAT,
-      });
-
-      if (kalimatResponse.pagination.totalRecords === 0) {
-        logEmptySearchResults({
-          query,
-          source,
-          service: SearchService.KALIMAT,
-        });
-      } else {
-        logSearchResults({
-          query,
-          source,
-          service: SearchService.KALIMAT,
-        });
-      }
-    })
-    .catch(() => {
-      setHasError(true);
-    })
-    .finally(() => {
-      setIsSearching(false);
-    });
+  return { ...returnedResult, name: `${returnedResult.name} ${resultSuffix}` };
 };
 
 /**
@@ -267,4 +214,66 @@ export const getQuickSearchQuery = (query: string): SearchRequestParams<SearchMo
     getText: 1,
     highlight: 1,
   };
+};
+
+/**
+ * Get the advanced search query.
+ *
+ * @param {string} query
+ * @param {number} page
+ * @param {number} pageSize
+ * @returns {SearchRequestParams<SearchMode.Advanced>}
+ */
+export const getAdvancedSearchQuery = (
+  query: string,
+  page: number,
+  pageSize: number,
+): SearchRequestParams<SearchMode.Advanced> => {
+  return {
+    mode: SearchMode.Advanced,
+    query,
+    size: pageSize,
+    page,
+    exactMatchesOnly: 0,
+    getText: 1,
+    highlight: 1,
+  };
+};
+
+export const getResultType = (result: SearchNavigationResult) => {
+  const { resultType, isArabic, isTransliteration } = result;
+  if (resultType === SearchNavigationType.AYAH) {
+    if (isArabic) {
+      return SearchNavigationType.AYAH;
+    }
+    if (isTransliteration) {
+      return SearchNavigationType.TRANSLITERATION;
+    }
+    return SearchNavigationType.TRANSLATION;
+  }
+  return resultType;
+};
+
+export const getResultSuffix = (
+  type: SearchNavigationType,
+  resultKey: string,
+  lang: string,
+  chaptersData: ChaptersData,
+) => {
+  const [surahNumber] = getVerseAndChapterNumbersFromKey(resultKey as string);
+  if (type === SearchNavigationType.SURAH) {
+    return `- ${toLocalizedNumber(Number(surahNumber), lang)}`;
+  }
+
+  if (
+    type === SearchNavigationType.AYAH ||
+    type === SearchNavigationType.TRANSLITERATION ||
+    type === SearchNavigationType.TRANSLATION
+  ) {
+    return `(${
+      getChapterData(chaptersData, `${surahNumber}`).transliteratedName
+    } ${toLocalizedVerseKey(resultKey as string, lang)})`;
+  }
+
+  return '';
 };

@@ -14,15 +14,17 @@ import CommandControl from './CommandControl';
 import styles from './CommandList.module.scss';
 import CommandPrefix from './CommandPrefix';
 
+import SearchResultsHeader from '@/components/Search/SearchResults/SearchResultsHeader';
 import useScroll, { SMOOTH_SCROLL_TO_CENTER } from '@/hooks/useScrollToElement';
 import {
   addRecentNavigation,
   removeRecentNavigation,
-  setIsOpen,
+  setIsExpanded,
 } from '@/redux/slices/CommandBar/state';
+import SearchQuerySource from '@/types/SearchQuerySource';
 import { logButtonClick } from '@/utils/eventLogger';
 import { resolveUrlBySearchNavigationType } from '@/utils/navigation';
-import { SearchNavigationResult } from 'types/Search/SearchNavigationResult';
+import { SearchNavigationResult, SearchNavigationType } from 'types/Search/SearchNavigationResult';
 
 export interface Command extends SearchNavigationResult {
   group: string;
@@ -34,9 +36,15 @@ export interface Command extends SearchNavigationResult {
 
 interface Props {
   commandGroups: { groups: Record<string, Command[]>; numberOfCommands: number };
+  searchQuery?: string;
 }
 
-const CommandsList: React.FC<Props> = ({ commandGroups: { groups, numberOfCommands } }) => {
+export const RESULTS_GROUP = 'results';
+
+const CommandsList: React.FC<Props> = ({
+  commandGroups: { groups, numberOfCommands },
+  searchQuery,
+}) => {
   const { t } = useTranslation('common');
   const [scrollToSelectedCommand, selectedItemRef]: [() => void, RefObject<HTMLLIElement>] =
     useScroll(SMOOTH_SCROLL_TO_CENTER);
@@ -79,7 +87,7 @@ const CommandsList: React.FC<Props> = ({ commandGroups: { groups, numberOfComman
       const { name, resultType, key } = command;
       router.push(resolveUrlBySearchNavigationType(resultType, key)).then(() => {
         dispatch({ type: addRecentNavigation.type, payload: { name, resultType, key } });
-        dispatch({ type: setIsOpen.type, payload: false });
+        dispatch({ type: setIsExpanded.type, payload: false });
       });
     },
     [dispatch, router],
@@ -129,6 +137,15 @@ const CommandsList: React.FC<Props> = ({ commandGroups: { groups, numberOfComman
     dispatch({ type: removeRecentNavigation.type, payload: navigationItemKey });
   };
 
+  const onSearchResultsHeaderClicked = () => {
+    navigateToLink({
+      name: searchQuery,
+      resultType: SearchNavigationType.SEARCH_PAGE,
+      key: searchQuery,
+      group: RESULTS_GROUP,
+    });
+  };
+
   if (numberOfCommands === 0) {
     return <p className={styles.noResult}>{t('command-bar.no-nav-results')}</p>;
   }
@@ -143,9 +160,17 @@ const CommandsList: React.FC<Props> = ({ commandGroups: { groups, numberOfComman
         {Object.keys(groups).map((commandGroup) => {
           return (
             <div key={commandGroup}>
-              <div className={styles.groupHeader} id={commandGroup}>
-                {commandGroup}
-              </div>
+              {commandGroup === RESULTS_GROUP ? (
+                <SearchResultsHeader
+                  searchQuery={searchQuery}
+                  source={SearchQuerySource.CommandBar}
+                  onSearchResultClicked={onSearchResultsHeaderClicked}
+                />
+              ) : (
+                <div className={styles.groupHeader} id={commandGroup}>
+                  {commandGroup}
+                </div>
+              )}
               <ul role="group" aria-labelledby={commandGroup}>
                 {groups[commandGroup].map((command) => {
                   const { name, resultType, key, index, isVoiceSearch } = command;

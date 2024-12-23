@@ -1,0 +1,27 @@
+.showAll {
+    font-weight: var(--font-weight-bold);
+}
+
+.commandPrefix {
+    margin-inline-start: var(--spacing-xxsmall);
+    display: flex;
+    align-items: center;
+    > svg {
+        width: var(--spacing-large);
+        height: var(--spacing-large);
+    }
+}
+
+.moreResultsContainer {
+    color: var(--color-text-default);
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+}
+
+.resultsSummaryContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    color: var(--color-text-faded);
+}

@@ -43,6 +43,10 @@ export const navbarSlice = createSlice({
       ...state,
       isSearchDrawerOpen: action.payload,
     }),
+    toggleSearchDrawerIsOpen: (state: Navbar) => ({
+      ...state,
+      isSearchDrawerOpen: !state.isSearchDrawerOpen,
+    }),
     setIsSettingsDrawerOpen: (state: Navbar, action: PayloadAction<boolean>) => ({
       ...state,
       isSettingsDrawerOpen: action.payload,
@@ -60,8 +64,10 @@ export const {
   setIsSearchDrawerOpen,
   setIsSettingsDrawerOpen,
   setSettingsView,
+  toggleSearchDrawerIsOpen,
 } = navbarSlice.actions;
 
 export const selectNavbar = (state: RootState) => state.navbar;
+export const selectIsSearchDrawerOpen = (state: RootState) => state.navbar.isSearchDrawerOpen;
 
 export default navbarSlice.reducer;
