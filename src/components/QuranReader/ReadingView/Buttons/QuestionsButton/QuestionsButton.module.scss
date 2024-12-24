@@ -1,0 +1,6 @@
+@use "src/components/QuestionAndAnswer/Pill/shared.module.scss" as shared;
+
+.container {
+    color: var(--text-color) !important;
+    @extend %explore_answers;
+}
