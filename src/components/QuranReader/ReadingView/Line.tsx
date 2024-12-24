@@ -9,6 +9,7 @@ import { verseFontChanged } from '../utils/memoization';
 import styles from './Line.module.scss';
 
 import ChapterHeader from '@/components/chapters/ChapterHeader';
+import { useOnboarding } from '@/components/Onboarding/OnboardingProvider';
 import VerseText from '@/components/Verse/VerseText';
 import useScroll, { SMOOTH_SCROLL_TO_CENTER } from '@/hooks/useScrollToElement';
 import { selectEnableAutoScrolling } from '@/redux/slices/AudioPlayer/state';
@@ -22,6 +23,7 @@ export type LineProps = {
   words: Word[];
   lineKey: string;
   isBigTextLayout: boolean;
+  // eslint-disable-next-line react/no-unused-prop-types
   quranReaderStyles: QuranReaderStyles;
   pageIndex: number;
   lineIndex: number;
@@ -38,7 +40,9 @@ const Line = ({ lineKey, words, isBigTextLayout, pageIndex, lineIndex }: LinePro
   const [scrollToSelectedItem, selectedItemRef]: [() => void, RefObject<HTMLDivElement>] =
     useScroll(SMOOTH_SCROLL_TO_CENTER);
 
-  const enableAutoScrolling = useSelector(selectEnableAutoScrolling, shallowEqual);
+  const { isActive } = useOnboarding();
+  // disable auto scrolling when the user is onboarding
+  const enableAutoScrolling = useSelector(selectEnableAutoScrolling, shallowEqual) && !isActive;
   const { showWordByWordTranslation, showWordByWordTransliteration } = useSelector(
     selectInlineDisplayWordByWordPreferences,
     shallowEqual,

@@ -18,6 +18,7 @@ import Select from '@/dls/Forms/Select';
 import HelperTooltip from '@/dls/HelperTooltip/HelperTooltip';
 import Link, { LinkVariant } from '@/dls/Link/Link';
 import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
+import { QuranFont } from '@/types/QuranReader';
 import { makeTranslationsUrl } from '@/utils/apiPaths';
 import { areArraysEqual } from '@/utils/array';
 import { throwIfError } from '@/utils/error';
@@ -31,7 +32,6 @@ import { toLocalizedVerseKey } from '@/utils/locale';
 import { generateChapterVersesKeys } from '@/utils/verse';
 import { getAvailableTranslations } from 'src/api';
 import DataContext from 'src/contexts/DataContext';
-import { QuranFont } from 'types/QuranReader';
 import Verse from 'types/Verse';
 
 interface Props {
@@ -55,7 +55,7 @@ const TO_COPY_FONTS = [
 const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
   const { lang, t } = useTranslation('quran-reader');
   const chaptersData = useContext(DataContext);
-  const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
+  const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual) as number[];
   // whether we should show the range of verses or not. This will be based on user selection.
   const [showRangeOfVerses, setShowRangeOfVerses] = useState(false);
   // the items that will be passed to the range start and end dropdown selectors. The value will be populated only once the user chooses the verses range option.
@@ -67,7 +67,7 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
   // Which font to copy.
   const [shouldCopyFont, setShouldCopyFont] = useState<QuranFont>(QuranFont.Uthmani);
   // whether the selected verses' footnotes should be copied or not.
-  const [shouldCopyFootnotes, setShouldCopyFootnotes] = useState(false);
+  const [shouldCopyFootnotes, setShouldCopyFootnotes] = useState(true);
   // whether we should include the translator name or not.
   const [shouldIncludeTranslatorName, setShouldIncludeTranslatorName] = useState(true);
   // a map of the IDs of the translations the users had selected and whether it should be copied or not. Will not be copied by default.
@@ -157,7 +157,8 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
         })),
       );
       // set the first verse's key as the default range's start verse.
-      setRangeStartVerse(keys[0]);
+      const startFromVerseNumber = verse?.verseNumber || 1;
+      setRangeStartVerse(keys[startFromVerseNumber - 1]);
       // set the last verse's key as the default range's end verse.
       setRangeEndVerse(keys[keys.length - 1]);
     }
@@ -186,7 +187,7 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
     setIsLoadingData(true);
     // if a range is selected, we need to validate it first
     if (showRangeOfVerses) {
-      const validationError = validateRangeSelection(rangeStartVerse, rangeEndVerse);
+      const validationError = validateRangeSelection(rangeStartVerse, rangeEndVerse, t);
       // if the validation fails
       if (validationError) {
         setCustomMessage(validationError);
@@ -316,14 +317,14 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
             onChange={onShouldIncludeTranslatorNameChange}
             items={[
               {
-                value: FALSE_STRING,
-                id: FALSE_STRING,
-                label: t('common:no'),
-              },
-              {
                 value: TRUE_STRING,
                 id: TRUE_STRING,
                 label: t('common:yes'),
+              },
+              {
+                value: FALSE_STRING,
+                id: FALSE_STRING,
+                label: t('common:no'),
               },
             ]}
           />
@@ -354,14 +355,14 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
         onChange={onShouldCopyFootnoteChange}
         items={[
           {
-            value: FALSE_STRING,
-            id: FALSE_STRING,
-            label: t('common:no'),
-          },
-          {
             value: TRUE_STRING,
             id: TRUE_STRING,
             label: t('common:yes'),
+          },
+          {
+            value: FALSE_STRING,
+            id: FALSE_STRING,
+            label: t('common:no'),
           },
         ]}
       />

@@ -1,6 +1,7 @@
 import AudioData from './AudioData';
 import AvailableLanguage from './AvailableLanguage';
 import AvailableTranslation from './AvailableTranslation';
+import AvailableWordByWordTranslation from './AvailableWordByWordTranslation';
 import Chapter from './Chapter';
 import ChapterInfo from './ChapterInfo';
 import Footnote from './Footnote';
@@ -8,6 +9,7 @@ import LookupRange from './LookupRange';
 import LookupRecord from './LookupRecord';
 import MetaData from './MetaData';
 import Reciter from './Reciter';
+import SearchService from './Search/SearchService';
 import { SearchNavigationResult } from './SearchNavigationResult';
 import TafsirInfo from './TafsirInfo';
 import Verse from './Verse';
@@ -51,6 +53,10 @@ export interface TranslationsResponse extends BaseResponse {
   translations?: AvailableTranslation[];
 }
 
+export interface WordByWordTranslationsResponse extends BaseResponse {
+  wordByWordTranslations?: AvailableWordByWordTranslation[];
+}
+
 export interface LanguagesResponse extends BaseResponse {
   languages?: AvailableLanguage[];
 }
@@ -74,6 +80,7 @@ export interface AudioTimestampsResponse extends BaseResponse {
   };
 }
 export interface SearchResponse extends BaseResponse {
+  service?: SearchService;
   pagination: Pagination;
   result?: {
     navigation: SearchNavigationResult[];

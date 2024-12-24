@@ -1,8 +1,10 @@
 import { decamelizeKeys } from 'humps';
 
 import stringify from './qs-stringify';
+import { getBasePath } from './url';
 
-import { Mushaf, MushafLines, QuranFont, QuranFontMushaf } from 'types/QuranReader';
+import { Mushaf, MushafLines, QuranFont, QuranFontMushaf } from '@/types/QuranReader';
+import { isStaticBuild } from '@/utils/build';
 
 export const ITEMS_PER_PAGE = 10;
 
@@ -15,6 +17,8 @@ const API_ROOT_PATH = '/api/qdc';
 export const API_HOST =
   process.env.NEXT_PUBLIC_VERCEL_ENV === 'production' ? PRODUCTION_API_HOST : STAGING_API_HOST;
 
+const { API_GATEWAY_URL } = process.env;
+
 /**
  * Generates a url to make an api call to our backend
  *
@@ -23,8 +27,11 @@ export const API_HOST =
  * @returns {string}
  */
 export const makeUrl = (path: string, parameters?: Record<string, unknown>): string => {
+  const BASE_PATH = getBasePath();
+  const API_PROXY = `${BASE_PATH}/api/proxy/content`;
+  const API_URL = isStaticBuild ? `${API_GATEWAY_URL}/content` : API_PROXY;
   if (!parameters) {
-    return `${API_HOST}${API_ROOT_PATH}${path}`;
+    return `${API_URL}${API_ROOT_PATH}${path}`;
   }
 
   const decamelizedParams = decamelizeKeys(parameters);
@@ -32,13 +39,13 @@ export const makeUrl = (path: string, parameters?: Record<string, unknown>): str
   // The following section parses the query params for convenience
   // E.g. parses {a: 1, b: 2} to "?a=1&b=2"
   const queryParameters = `?${stringify(decamelizedParams)}`;
-  return `${API_HOST}${API_ROOT_PATH}${path}${queryParameters}`;
+  return `${API_URL}${API_ROOT_PATH}${path}${queryParameters}`;
 };
 
 /**
  * Get the default word fields that should exist in the response.
  * qpc_uthmani_hafs is added so that we can use it as a fallback
- * text for QCF font V1 and V2.
+ * text for QCF font V1, V2 and V4.
  *
  * @param {QuranFont} quranFont the selected quran font since.
  * @returns {{ wordFields: string}}
@@ -47,9 +54,9 @@ export const makeUrl = (path: string, parameters?: Record<string, unknown>): str
 export const getDefaultWordFields = (
   quranFont: QuranFont = QuranFont.QPCHafs,
 ): { wordFields: string } => ({
-  wordFields: `verse_key,verse_id,page_number,location,text_uthmani,${quranFont}${
-    quranFont === QuranFont.QPCHafs ? '' : `,${QuranFont.QPCHafs}`
-  }`,
+  wordFields: `verse_key,verse_id,page_number,location,text_uthmani,${
+    quranFont === QuranFont.TajweedV4 ? QuranFont.MadaniV2 : quranFont
+  }${quranFont === QuranFont.QPCHafs ? '' : `,${QuranFont.QPCHafs}`}`,
 });
 
 /**

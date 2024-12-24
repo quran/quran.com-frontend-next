@@ -1,0 +1,62 @@
+{
+  "add-another-note": "Başka bir not ekle",
+  "body-placeholder": "Genel notları kaydetmek veya bir yansıma yazmak için bu alanı kullanın.",
+  "checkbox-refl-intro": {
+    "checkbox": {
+      "desc": "<li> Göndermek, yansımanızın, moderasyon ekibi tarafından inceleneceği ve KuranReflect topluluğu tarafından görüleceği, adınızla KuranReflect'te paylaşılacağı anlamına gelir. <\/li> <li> Gönderiniz moderasyon ekibimiz tarafından incelenip onaylandıktan veya tanıtıldıktan sonra beğeni, yorum ve takip bildirimleri alabilirsiniz. KuranReflect'te oturum açtıktan sonra bildirim ayarlarınızı tercihlerinize uyacak şekilde güncelleyebilirsiniz. <\/li> <li> Notlarınızı ve yayınladığınız yansımaları, Kuran.com giriş profilinizin “Notlarım ve Düşüncelerim” bölümünde görüntüleyebilir veya Kuran.com imzanızı kullanarak <link> KuranReflect <\/link> te oturum açabilirsiniz. e-postada. <\/li>",
+      "title": "Bu kutuyu işaretlersem ne olur?"
+    },
+    "post-button": "KuranReflect'te paylaşım yaptığımda ne olur?",
+    "qr-intro": "KuranReflect, Kuran.com ile birlikte Kuran.Vakıf ailesinin bir parçasıdır. Kuran hakkındaki kişisel düşüncelerin paylaşıldığı, kullanıcıların Kur'an'ın mesajlarını içselleştirmesine ve olumlu değişime ilham veren içgörüleri paylaşmaya teşvik ettiği sosyal bir platformdur. İlmî bir yorum olan tefsirden farklı olarak yansımalar, ayetlerle ilgili kişisel düşünce ve tecrübelerdir. KuranReflect'teki kullanıcı gönderileri, içeriğin kalitesinin ve Kuran'la etkileşimde görgü kurallarının sağlanmasına yardımcı olacak nitelikli bir ekip tarafından incelenir ve denetlenir ve geri bildirimleri paylaşarak ve değerli söylemi vurgulayarak kullanıcıları güçlendirerek manevi açıdan canlandırıcı, Kuran odaklı bir topluluk teşvik eder. . Daha fazla bilgi edinin: <link> Kuranreflect.com\/faq <\/link>",
+    "title": "Kur'an-ı Kerim nedir ve bu kutuyu işaretlersem ne olur?"
+  },
+  "click-to-see-more": "Daha fazlasını görmek için tıklayın",
+  "delete-note": "Notu sil",
+  "delete-note-modal": {
+    "subtitle": "Notu silmek istediğinizden emin misiniz?",
+    "title": "Notu sil"
+  },
+  "delete-success": "Not başarıyla silindi",
+  "empty-notes": "Hiçbir not bulunamadı",
+  "empty-reflections": "Hiçbir yansıma bulunamadı",
+  "export-success": "Not, KuranReflect'teki hesabınıza başarıyla yayınlandı",
+  "new-note-reflc-intro": {
+    "reflc-prompts": {
+      "deeper": {
+        "desc": "<li> Allah'ın adı geçen herhangi bir isim var mı ve bunların ayetle bağlantısı nedir? <\/li> <li> Hangi kelimeler veya dilsel özellikler dikkatinizi çekti? <\/li> <li> Ayetin bağlamıyla, diğer Kur'an ayetleriyle, hadislerle veya olaylarla bağlantılar kurabilir misiniz? <\/li>",
+        "title": "Daha Derin Bilgiler:"
+      },
+      "personal": {
+        "desc": "<li> Bu ayet sizi ne şekilde etkiledi veya ilham verdi? <\/li> <li> Geliştirebileceğiniz nitelikler veya eylemler var mı? <\/li> <li> Hayatınıza uygulayabileceğiniz bir söz veya uyarı\/yasak var mı? <\/li> <li> Bu ayetle ilgili kişisel bir hikayeniz var mı? <\/li> <li> Bu ayete dayanarak ne gibi değişiklikler yapmak istiyorsunuz ve bunları siz veya bir başkası pratikte nasıl uygulayabilirsiniz? <\/li>",
+        "title": "Kişisel Düşünme Soruları:"
+      },
+      "title": "Yansıma İstemleri"
+    },
+    "title": "Kuran'ı derinlemesine düşünmek için yardıma mı ihtiyacınız var? Daha fazla bilgi edin",
+    "what-is-reflc": {
+      "desc": "Kuran üzerinde düşünmek veya üzerinde düşünmek, Allah'ın sözlerini dikkatle okumayı veya dinlemeyi, anlamlarıyla ilgilenmeyi ve onun bizi daha iyiye doğru etkilemesine ve değiştirmesine izin vermeyi gerektirir. Buna \"Tadabbur\" denir. Tefsir, aksine, Kur'an'ın bilimsel bir yorumudur ve ayetlerinin klasik kaynaklara ve bilimsel analizlere dayalı olarak ayrıntılı açıklamalarını sağlar. Tefsir alimlere ayrılmışken, Allah ﷻ herkesin tedebburla meşgul olmasını ister (Kuran <link1> 38:29 <\/link1> , <link2> 47:24 <\/link2> , <link3> 4:82 <\/link3> , ve daha fazlası). <br><\/br> <br><\/br> Kullanıcılar notlarını ve kişisel düşüncelerini özel olarak kaydedebilirler. Çoğu zaman düşüncelerimiz başkalarında derin bir yankı uyandırabilir, onların Kur'an'la bağlantılarına ve Allah ﷻ ile ilişkilerine yardımcı olabilir. Bu nedenle kullanıcılar, insanların yolculuklarında birlikte büyümelerine yardımcı olma çabalarımızın bir parçası olarak, KuranReflect'e olan yansımalarını paylaşma seçeneğine sahiptir. Daha fazla bilgi edinmek için şu adresleri ziyaret edin: <link4> KuranReflect.com\/faq <\/link4> ve <link5> Kuran'ı Yansıtacak Beş Mercek <\/link5>",
+      "title": "Yansıma Nedir?"
+    }
+  },
+  "note": "Not",
+  "notes-and-reflcs": "Notlar ve Düşünceler",
+  "post-on-qr": "KuranReflect'te yayınlayın",
+  "posted-reflections": "Yayınlanan Düşünceler",
+  "private-notes": "Notlar",
+  "qr-tooltip": "<span> <link> KuranReflect <\/link> Kuran hakkındaki düşüncelerin paylaşıldığı sosyal bir platformdur. Kuran etrafında bağlantı kurun, önemli olanla bağlantı kurun. <\/span>",
+  "reflections-intro": {
+    "line-1": "Yorumları görüntülemek ve onlarla etkileşimde bulunmak, toplulukla etkileşimde bulunmak ve daha fazlasını yapmak için <link> KuranReflect.com <\/link> adresini ziyaret edin.",
+    "line-2": "Oturum açarken kullandığınız Kuran.com e-posta adresiyle oturum açarak veya kaydolarak bağlantılı KuranReflect hesabınızda oturum açabilirsiniz.",
+    "line-3": "Herkese açık olarak görüntülemeye uygun olmayan içerikler gizlenecek veya silinecektir. Uygunsuz içerik paylaşan kullanıcılar engellenecektir.",
+    "title": "Yayınlanan Yansımalar hakkında daha fazla bilgi edinin"
+  },
+  "save-post-to-qr": "Kaydet ve KuranReflect'e Gönder",
+  "save-privately": "Özel Olarak Kaydet",
+  "save-publish-failed": "Not başarıyla kaydedildi ancak yayınlanamadı",
+  "save-success": "Not başarıyla kaydedildi",
+  "share-to-qr": "KuranReflect.com'da paylaşın",
+  "share-to-qr-desc": "<b> {{name}} <\/b> olarak paylaşın. Hedef kitle: <b> KuranReflect kullanıcıları <\/b>",
+  "update-publish-failed": "Not başarıyla güncellendi ancak yayınlanamadı",
+  "update-success": "Not başarıyla güncellendi",
+  "view-on-qr": "KuranReflect'te görüntüle"
+}

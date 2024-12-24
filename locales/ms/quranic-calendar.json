@@ -1,0 +1,35 @@
+{
+  "hero": {
+    "line-1": "Kalendar Global Al-Quran ialah jadual bacaan untuk menggalakkan pembacaan reflektif keseluruhan Al-Quran dari penghujung satu Ramadan hingga awal Ramadan seterusnya. Luangkan masa untuk memahami dan merenung ayat-ayat al Quran untuk berinteraksi dengan lebih mendalam dan lebih bermakna."
+  },
+  "interact-with-post": "Berinteraksi dengan refleksi ini di QuranReflect",
+  "islamic-months": {
+    "1": "Muharram",
+    "2": "Safar",
+    "3": "Rabi'ul Awwal",
+    "4": "Rabi' al-Thani",
+    "5": "Jamadul Awwal",
+    "6": "Jamadul Akhir",
+    "7": "Rajab",
+    "8": "Sya'ban",
+    "9": "Ramadhan",
+    "10": "Syawal",
+    "11": "Dhu al-Qi'dah",
+    "12": "Dzulhijjah"
+  },
+  "join-qc": {
+    "line-1": "Kami berada dalam <highlight> Minggu {{weekNumber}} </highlight> Kalendar Al-Quran.",
+    "line-2": "<normal>Sertai kami dalam refleksi minggu ini!</normal>"
+  },
+  "join-quranic-calendar": "Langgan untuk menerima kemas kini dan sumber melalui QuranReflect",
+  "join-quranic-calendar-success": "Anda telah berjaya menyertai \"Divine Book Club\"!",
+  "quranic-calendar": "Kalendar Global Al Quran",
+  "reading-options": {
+    "default-settings": "Baca dengan tetapan asal",
+    "en-and-ar": "Baca dalam bahasa Inggeris dan Arab",
+    "en-only": "Baca dalam bahasa Inggeris sahaja"
+  },
+  "supplemental-resources": "Sumber Sokongan",
+  "today": "Tarikh hari ini : <highlight> {{month}} {{day}} {{year}} , {{gregorianDate}} </highlight>",
+  "week-title": "Minggu {{weekNumber}} ( {{month}} ) meliputi ayat-ayat {{rangeStart}} hingga {{rangeEnd}}"
+}

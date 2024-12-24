@@ -26,7 +26,10 @@ const filterTafsirs = (tafsirs, searchQuery: string): TafsirInfo[] => {
 
   const filteredTafsirs = fuse.search(searchQuery).map(({ item }) => item);
   if (!filteredTafsirs.length) {
-    logEmptySearchResults(searchQuery, SearchQuerySource.TafsirSettingsDrawer);
+    logEmptySearchResults({
+      query: searchQuery,
+      source: SearchQuerySource.TafsirSettingsDrawer,
+    });
   }
   return filteredTafsirs as TafsirInfo[];
 };
@@ -34,7 +37,7 @@ const filterTafsirs = (tafsirs, searchQuery: string): TafsirInfo[] => {
 const TafsirsSelectionBody = () => {
   const { t } = useTranslation('common');
   const dispatch = useDispatch();
-  const selectedTafsirs = useSelector(selectSelectedTafsirs, areArraysEqual);
+  const selectedTafsirs = useSelector(selectSelectedTafsirs, areArraysEqual) as string[];
   const { lang } = useTranslation();
   const [searchQuery, setSearchQuery] = useState('');
 

@@ -1,0 +1,62 @@
+{
+  "add-another-note": "Voeg nog een notitie toe",
+  "body-placeholder": "Gebruik deze ruimte om algemene aantekeningen op te slaan, of om een reflectie te schrijven.",
+  "checkbox-refl-intro": {
+    "checkbox": {
+      "desc": "<li> Plaatsen betekent dat uw reflectie onder uw naam op QuranReflect wordt gedeeld, waar deze door het moderatieteam zal worden beoordeeld en zichtbaar zal zijn voor de QuranReflect-gemeenschap. <\/li> <li> Zodra uw bericht is beoordeeld en goedgekeurd of gepromoot door ons moderatieteam, kunt u likes, reacties en volgmeldingen ontvangen. Wanneer u zich aanmeldt bij QuranReflect, kunt u uw meldingsinstellingen aanpassen aan uw voorkeuren. <\/li> <li> U kunt uw aantekeningen en geposte reflecties bekijken onder uw Quran.com-aanmeldingsprofiel in de sectie \"Mijn notities en reflecties\", of inloggen op <link> QuranReflect <\/link> met uw Quran.com-sign- per e-mail. <\/li>",
+      "title": "Wat gebeurt er als ik dit vakje aanvink?"
+    },
+    "post-button": "Wat gebeurt er als ik een bericht plaats op QuranReflect?",
+    "qr-intro": "QuranReflect maakt samen met Quran.com deel uit van de Quran.Foundation-familie. Het is een sociaal platform voor het delen van persoonlijke reflecties over de Koran, waarbij gebruikers worden aangemoedigd de boodschappen ervan te internaliseren en inzichten te delen die tot positieve verandering inspireren. In tegenstelling tot tafsir, wat een wetenschappelijke interpretatie is, zijn reflecties persoonlijke gedachten en ervaringen die verband houden met de verzen. Gebruikersposts op QuranReflect worden beoordeeld en gemodereerd door een gekwalificeerd team, dat zal helpen de kwaliteit van de inhoud en de etiquette te garanderen bij interactie met de Koran, en zij zullen gebruikers empoweren door feedback te delen en waardevol discours te benadrukken, waardoor een spiritueel verheffende, op de Koran gerichte gemeenschap wordt bevorderd. . Meer informatie: <link> Quranreflect.com\/faq <\/link>",
+    "title": "Wat is QuranReflect en wat gebeurt er als ik dit vakje aanvink?"
+  },
+  "click-to-see-more": "klik om meer te zien",
+  "delete-note": "Notitie verwijderen",
+  "delete-note-modal": {
+    "subtitle": "Weet u zeker dat u de notitie wilt verwijderen?",
+    "title": "Notitie verwijderen"
+  },
+  "delete-success": "Notitie is succesvol verwijderd",
+  "empty-notes": "Geen notities gevonden",
+  "empty-reflections": "Geen reflecties gevonden",
+  "export-success": "De notitie is met succes naar uw account op QuranReflect gepubliceerd",
+  "new-note-reflc-intro": {
+    "reflc-prompts": {
+      "deeper": {
+        "desc": "<li> Worden er namen van Allah genoemd, en hoe verhouden deze zich tot het vers? <\/li> <li> Welke woorden of taalkundige aspecten hebben uw aandacht getrokken? <\/li> <li> Kun je verbanden leggen met de context van het vers, andere koranverzen, hadith of gebeurtenissen? <\/li>",
+        "title": "Diepere inzichten:"
+      },
+      "personal": {
+        "desc": "<li> Op welke manieren heeft dit vers je geraakt of geïnspireerd? <\/li> <li> Worden er kwaliteiten of acties genoemd die u kunt verbeteren? <\/li> <li> Is er een belofte of een waarschuwing\/verbod dat u op uw leven kunt toepassen? <\/li> <li> Heeft u een persoonlijk verhaal gerelateerd aan dit vers? <\/li> <li> Welke veranderingen wil je aanbrengen op basis van dit vers, en hoe kun jij of iemand anders deze praktisch implementeren? <\/li>",
+        "title": "Persoonlijke reflectievragen:"
+      },
+      "title": "Reflectie-aanwijzingen"
+    },
+    "title": "Hulp nodig bij het nadenken over de Koran? Kom meer te weten",
+    "what-is-reflc": {
+      "desc": "Het reflecteren of overpeinzen van de Koran impliceert het zorgvuldig lezen of luisteren naar de woorden van Allah, het omgaan met de betekenissen ervan, en het toestaan dat het ons ten goede beïnvloedt en verandert. Dit wordt \"Tadabbur\" genoemd. Tafsir is daarentegen een wetenschappelijke interpretatie van de Koran, die gedetailleerde uitleg geeft van de verzen ervan, gebaseerd op klassieke bronnen en wetenschappelijke analyse. Terwijl Tafsir gereserveerd is voor de geleerden, vraagt Allah ﷻ iedereen om deel te nemen aan Tadabbur (Koran <link1> 38:29 <\/link1> , <link2> 47:24 <\/link2> , <link3> 4:82 <\/link3> , en nog veel meer). <br><\/br> <br><\/br> Gebruikers kunnen hun aantekeningen en persoonlijke reflecties privé opslaan. Vaak kunnen onze reflecties diep resoneren met anderen, waardoor hun verbinding met de Koran en hun relatie met Allah ﷻ wordt bevorderd. Daarom hebben gebruikers de mogelijkheid om hun reflectie te delen met QuranReflect als onderdeel van onze inspanningen om mensen te helpen samen te groeien op hun reis. Ga voor meer informatie naar: <link4> QuranReflect.com\/faq <\/link4> en <link5> Vijf lenzen om na te denken over de Koran <\/link5>",
+      "title": "Wat is een reflectie?"
+    }
+  },
+  "note": "Opmerking",
+  "notes-and-reflcs": "Opmerkingen en reflecties",
+  "post-on-qr": "Plaats een bericht op QuranReflect",
+  "posted-reflections": "Geplaatste reflecties",
+  "private-notes": "Opmerkingen",
+  "qr-tooltip": "<span> <link> QuranReflect <\/link> is een sociaal platform voor het delen van reflecties over de Koran. Verbind je rond de Koran, verbind je met wat er toe doet. <\/span>",
+  "reflections-intro": {
+    "line-1": "Ga naar <link> QuranReflect.com <\/link> om reacties te bekijken en ermee te communiceren, om met de community in contact te komen en meer te doen.",
+    "line-2": "U kunt inloggen op uw gekoppelde QuranReflect-account door in te loggen of u aan te melden met hetzelfde Quran.com-e-mailadres dat u hebt gebruikt bij het inloggen.",
+    "line-3": "Inhoud die niet geschikt is voor openbare weergave, wordt verborgen of verwijderd. Gebruikers die ongepaste inhoud plaatsen, worden geblokkeerd.",
+    "title": "Meer informatie over geposte reflecties"
+  },
+  "save-post-to-qr": "Opslaan en posten in QuranReflect",
+  "save-privately": "Privé opslaan",
+  "save-publish-failed": "De notitie is succesvol opgeslagen, maar kan niet worden gepubliceerd",
+  "save-success": "Notitie is succesvol opgeslagen",
+  "share-to-qr": "Deel het op QuranReflect.com",
+  "share-to-qr-desc": "Deel als <b> {{name}} <\/b> . Het publiek bestaat uit <b> QuranReflect-gebruikers <\/b>",
+  "update-publish-failed": "De notitie is succesvol bijgewerkt, maar kan niet worden gepubliceerd",
+  "update-success": "Opmerking is succesvol bijgewerkt",
+  "view-on-qr": "Bekijk op QuranReflect"
+}

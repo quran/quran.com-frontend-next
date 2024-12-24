@@ -1,0 +1,23 @@
+@use "src/styles/breakpoints";
+
+.container {
+    display: flex;
+    align-items: center;
+}
+
+.newLabel {
+    background-color: unset !important;
+
+    @include breakpoints.smallerThanTablet {
+        inset-block-end: calc(-1.2 * var(--spacing-small)) !important;
+        inset-inline-end: var(--spacing-xxsmall) !important;
+    }
+    @include breakpoints.tablet {
+        inset-block-start: var(--spacing-micro) !important;
+        inset-inline-end: calc(-1.2 * var(--spacing-large)) !important;
+    }
+}
+
+.newLabelContainer {
+    display: flex !important;
+}

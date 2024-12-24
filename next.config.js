@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 /* eslint-disable react-func/max-lines-per-function */
 /* eslint-disable no-param-reassign */
 const path = require('path');
@@ -6,34 +7,43 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE_BUNDLE === 'true',
 });
 const { withSentryConfig } = require('@sentry/nextjs');
-const withPlugins = require('next-compose-plugins');
 const withFonts = require('next-fonts');
 const withPWA = require('next-pwa');
-const nextTranslate = require('next-translate');
+const nextTranslate = require('next-translate-plugin');
 
 const securityHeaders = require('./configs/SecurityHeaders.js');
 const runtimeCaching = require('./pwa-runtime-config.js');
 
 const isDev = process.env.NEXT_PUBLIC_VERCEL_ENV === 'development';
 const isProduction = process.env.NEXT_PUBLIC_VERCEL_ENV === 'production';
-const config = {
-  productionBrowserSourceMaps: true, // {@see https://nextjs.org/docs/advanced-features/source-maps}
+const withPWAConfig = withPWA({
+  dest: 'public',
+  disable: !isProduction,
+  mode: isProduction ? 'production' : 'development',
+  publicExcludes: [
+    '!fonts/**/!(sura_names|ProximaVara)*', // exclude pre-caching all fonts that are not sura_names or ProximaVara
+    '!icons/**', // exclude all icons
+    '!images/**/!(background|homepage)*', // don't pre-cache except background.jpg and homepage.png
+  ],
+  runtimeCaching,
+});
+
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  reactStrictMode: true,
+  productionBrowserSourceMaps: true,
+  swcMinify: true,
   images: {
     formats: ['image/avif', 'image/webp'],
-    domains: ['cdn.qurancdn.com', 'static.qurancdn.com', 'vercel.com', 'now.sh', 'quran.com'],
-  },
-  pwa: {
-    disable: !isProduction,
-    dest: 'public',
-    mode: isProduction ? 'production' : 'development',
-    runtimeCaching,
-    publicExcludes: [
-      '!fonts/**/!(sura_names|ProximaVara)*', // exclude pre-caching all fonts that are not sura_names or ProximaVara
-      '!icons/**', // exclude all icons
-      '!images/**/!(background|homepage)*', // don't pre-cache except background.jpg and homepage.png
+    domains: [
+      'cdn.qurancdn.com',
+      'static.qurancdn.com',
+      'vercel.com',
+      'now.sh',
+      'quran.com',
+      'images.quran.com',
     ],
   },
-  // this is needed to support importing audioWorklet nodes. {@see https://github.com/webpack/webpack/issues/11543#issuecomment-826897590}
   webpack: (webpackConfig) => {
     webpackConfig.resolve = {
       ...webpackConfig.resolve,
@@ -79,18 +89,7 @@ const config = {
 
     return webpackConfig;
   },
-  SentryWebpackPluginOptions: {
-    // Additional config options for the Sentry Webpack plugin. Keep in mind that
-    // the following options are set automatically, and overriding them is not
-    // recommended:
-    //   release, url, org, project, authToken, configFile, stripPrefix,
-    //   urlPrefix, include, ignore
-
-    silent: true, // Suppresses all logs
-    // For all available options, see:
-    // https://github.com/getsentry/sentry-webpack-plugin#options.
-  },
-  async headers() {
+  headers: async () => {
     return isDev
       ? []
       : [
@@ -127,38 +126,50 @@ const config = {
           },
         ];
   },
-  async redirects() {
-    return [
-      {
-        source: '/:surah/:from(\\d{1,})\\::to(\\d{1,})', // 1/2:3 => 1/2-3
-        destination: '/:surah/:from-:to',
-        permanent: true,
-      },
-      {
-        source: '/:surah\\::from(\\d{1,})\\::to(\\d{1,})', // 1:2:3 => 1/2-3
-        destination: '/:surah/:from-:to',
-        permanent: true,
-      },
-      {
-        source: '/:surah(\\d{1,})-:from\\::to', // 1-2:3 => 1/2-3
-        destination: '/:surah/:from-:to',
-        permanent: true,
-      },
-      {
-        source: '/:surah(\\d{1,})-:from(\\d{1,})-:to(\\d{1,})', // 1-2-3 => 1/2-3
-        destination: '/:surah/:from-:to',
-        permanent: true,
-      },
-      {
-        source: '/:surah(\\d{1,})\\::from(\\d{1,})-:to(\\d{1,})', // 1:2-3 => 1/2-3
-        destination: '/:surah/:from-:to',
-        permanent: true,
-      },
-    ];
+  redirects: async () => [
+    {
+      source: '/:surah/:from(\\d{1,})\\::to(\\d{1,})', // 1/2:3 => 1/2-3
+      destination: '/:surah/:from-:to',
+      permanent: true,
+    },
+    {
+      source: '/:surah\\::from(\\d{1,})\\::to(\\d{1,})', // 1:2:3 => 1/2-3
+      destination: '/:surah/:from-:to',
+      permanent: true,
+    },
+    {
+      source: '/:surah(\\d{1,})-:from\\::to', // 1-2:3 => 1/2-3
+      destination: '/:surah/:from-:to',
+      permanent: true,
+    },
+    {
+      source: '/:surah(\\d{1,})-:from(\\d{1,})-:to(\\d{1,})', // 1-2-3 => 1/2-3
+      destination: '/:surah/:from-:to',
+      permanent: true,
+    },
+    {
+      source: '/:surah(\\d{1,})\\::from(\\d{1,})-:to(\\d{1,})', // 1:2-3 => 1/2-3
+      destination: '/:surah/:from-:to',
+      permanent: true,
+    },
+  ],
+  compiler: {
+    removeConsole: !isDev,
   },
 };
 
-module.exports = withPlugins(
-  [withBundleAnalyzer, withPWA, withFonts, nextTranslate, withSentryConfig],
-  config,
+// Apply plugins
+const configWithPlugins = withBundleAnalyzer(withFonts(nextTranslate(withPWAConfig(nextConfig))));
+
+// Apply Sentry configuration
+module.exports = withSentryConfig(
+  configWithPlugins,
+  {
+    silent: true,
+  },
+  {
+    hideSourceMaps: !isDev,
+    // Additional config options for the Sentry Webpack plugin
+    // ... (any additional Sentry options)
+  },
 );

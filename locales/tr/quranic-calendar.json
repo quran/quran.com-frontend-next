@@ -1,0 +1,35 @@
+{
+  "hero": {
+    "line-1": "Küresel Kur'an Takvimi, bir Ramazan ayının sonundan bir sonraki Ramazan ayının başına kadar Kur'an'ın tamamının derinlemesine okunmasını teşvik etmek için tasarlanmış bir okuma programıdır. Daha derin, daha samimi bir bağ kurabilmeniz için ayetleri anlamaya ve üzerinde düşünmeye zaman ayırmanızı öneririz."
+  },
+  "interact-with-post": "Bu yazıyla KuranReflect'te etkileşim kurun",
+  "islamic-months": {
+    "1": "Muharrem",
+    "2": "Sefer",
+    "3": "Rabi'ul-Evvel",
+    "4": "Rabi' al-Thani",
+    "5": "Cemada el-Evvel",
+    "6": "Cemada el Sani",
+    "7": "Recep",
+    "8": "Şaban",
+    "9": "Ramazan",
+    "10": "Şevval",
+    "11": "Zilkade",
+    "12": "Zilhicce"
+  },
+  "join-qc": {
+    "line-1": "Kuran Takviminin <highlight> {{weekNumber}} </highlight> Haftasındayız.",
+    "line-2": "<normal> İlk kez olsanız bile bu haftaki okumamız için bize katılın! </normal>"
+  },
+  "join-quranic-calendar": "KuranReflect aracılığıyla güncellemeler ve kaynaklar almak için abone olun",
+  "join-quranic-calendar-success": "İlahi Kitap Kulübüne başarıyla katıldınız!",
+  "quranic-calendar": "Küresel Kuran Takvimi",
+  "reading-options": {
+    "default-settings": "Varsayılan ayarlarımla oku",
+    "en-and-ar": "İngilizce ve Arapça okuyun",
+    "en-only": "Yalnızca İngilizce okuyun"
+  },
+  "supplemental-resources": "Destekleyici Kaynaklar",
+  "today": "Bugünün tarihi: <highlight> {{month}} {{day}} {{year}} , {{gregorianDate}} </highlight>",
+  "week-title": "Hafta {{weekNumber}} ( {{month}} ) {{rangeStart}} ile {{rangeEnd}} ayetleri kapsar"
+}

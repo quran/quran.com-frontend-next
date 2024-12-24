@@ -1,3 +1,4 @@
 {
-    "meta-description": "Baca dan dengar Surah {{transliteratedName}} . Surah ini diturunkan di {{revelationPlace}} , susunan yang ke {{chapterOrder}} dalam Al-Quran. Surah ini bermaksud \"{{translatedName}}\" dalam {{localeName}} dan terdiri daripada {{versesCount}} ayat."
+  "meta-description": "Baca dan dengar Surah {{transliteratedName}} . Surah ini diturunkan di {{revelationPlace}} , susunan yang ke {{chapterOrder}} dalam Al-Quran. Surah ini bermaksud \"{{translatedName}}\" dalam {{localeName}} dan terdiri daripada {{versesCount}} ayat.",
+  "ranges-meta-desc": "Baca dan dengar daripada Ayah {{rangeFrom}} hingga Ayah {{rangeTo}} ."
 }

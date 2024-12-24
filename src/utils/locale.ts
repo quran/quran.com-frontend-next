@@ -30,6 +30,7 @@ const LOCALE_NAME = {
   ta: 'தமிழ்', // tamil
   hi: 'हिन्दी',
   ku: 'Kurdî',
+  uz: "o'zbek",
 };
 
 const LOCALE_NAME_TO_CODE = {
@@ -168,7 +169,7 @@ interface LanguageData {
  * @returns {boolean}
  */
 export const shouldUseMinimalLayout = (lang: string): boolean => {
-  return lang === 'ar';
+  return lang === 'ar' || lang === 'ur';
 };
 
 /**

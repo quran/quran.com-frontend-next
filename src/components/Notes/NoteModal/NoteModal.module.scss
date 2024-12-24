@@ -1,0 +1,90 @@
+@use "src/styles/breakpoints";
+
+.buttonContainer {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding-block: var(--spacing-small);
+}
+
+.headerContainer {
+    display: flex;
+    gap: var(--spacing-small);
+    align-items: center;
+
+    padding-block: var(--spacing-large);
+
+    @include breakpoints.smallerThanTablet {
+        padding-block: var(--spacing-medium);
+    }
+}
+
+.titleInput {
+    & > div {
+        border: none;
+    }
+
+    input {
+        height: 100%;
+        font-size: var(--font-size-jumbo);
+        font-weight: var(--font-weight-bold);
+    }
+}
+
+.bodyInput {
+    border: none !important;
+    border-radius: 0 !important;
+    padding-inline: 0 !important;
+
+    & > div {
+        border: none;
+        margin-block-start: var(--spacing-large);
+    }
+
+    textarea {
+        font-size: var(--font-size-large);
+        font-weight: var(--font-weight-medium);
+
+        @include breakpoints.smallerThanTablet {
+            min-height: 50vh;
+        }
+    }
+
+    legend {
+        color: var(--color-text-inverse);
+        font-weight: var(--font-weight-semibold);
+        background-color: var(--color-success-medium);
+        border-radius: var(--border-radius-rounded);
+        padding-inline: var(--spacing-xsmall);
+    }
+}
+
+.actionContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.editFormButtons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.saveButton {
+    margin-inline-end: var(--spacing-small);
+}
+
+.buttonsContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-block-start: var(--spacing-small);
+}
+
+.submitContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}

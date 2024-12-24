@@ -1,0 +1,22 @@
+{
+  "all-notifications": "همه اعلان ها",
+  "channels-notifications": "اعلان کانال ها",
+  "channels": {
+    "chat": "چت کنید",
+    "email": "پست الکترونیک",
+    "in_app": "درون برنامه",
+    "push": "فشار دادن",
+    "sms": "پیامک"
+  },
+  "notif-settings-not-enabled": "تنظیمات اعلان فعال نیست",
+  "notif-update-success": "تنظیمات اعلان شما با موفقیت به روز شد!",
+  "tabs": {
+    "categories-settings": "تنظیمات دسته ها",
+    "global-settings": "تنظیمات جهانی"
+  },
+  "tags": {
+    "learning-plans": "برنامه های یادگیری",
+    "qgj": "سیر رشد قرآن",
+    "streaks": "رگ. نوار"
+  }
+}

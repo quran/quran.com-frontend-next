@@ -35,7 +35,7 @@ const EmailLogin = ({ back, onSubmit }: EmailLoginProps) => {
           {
             field: fieldName,
             type: FormFieldType.Text,
-            label: t('form.email'),
+            placeholder: t('form.email'),
             rules: [
               {
                 type: RuleType.Required,
@@ -80,8 +80,8 @@ const EmailLogin = ({ back, onSubmit }: EmailLoginProps) => {
   );
 };
 
-export const sendMagicLink = async (email) => {
-  const response = await fetch(makeSendMagicLinkUrl(), {
+export const sendMagicLink = async (email: string, redirect?: string) => {
+  const response = await fetch(makeSendMagicLinkUrl(redirect), {
     method: 'post',
     headers: {
       // eslint-disable-next-line @typescript-eslint/naming-convention

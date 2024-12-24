@@ -1,18 +1,41 @@
 {
-    "no-bookmarks": "Anda belum mempunyai sebarang penanda halaman",
-    "noble-quran": "Al-Quran yang mulia",
-    "read-juz": "Baca Juz",
-    "recently-read": "Bacaan Terkini",
-    "revelation-order-disclaimer": "Pandangan ini menunjukkan susunan kronologi Surah dalam al-Quran berdasarkan apabila ia diturunkan kepada Nabi Muhammad <hover> ﷺ <\/hover> . Kronologi adalah subjek pendapat ulama dan beberapa Surah diturunkan dalam bahagian pada masa yang berbeza. Pesanan di sini adalah berdasarkan hasil kerja <link> Tanzil.net <\/link> . [Nota: susunan Mushaf yang disusun daripada al-Fatiha kepada al-Nas adalah perkara yang disepakati.]",
-    "tab": {
-        "bookmarks": "Penanda buku",
-        "popular": "Popular"
+  "no-bookmarks": "Anda belum mempunyai sebarang penanda halaman",
+  "no-recently-read": "Anda belum mempunyai sebarang bacaan",
+  "noble-quran": "Al-Quran  Karim",
+  "qgj": {
+    "learning-plans": {
+      "cta": {
+        "all-plans": "Lihat Semua Rancangan",
+        "my-plans": "Rancangan Saya"
+      },
+      "desc": {
+        "logged-in": "Pernah memulakan program pembelajaran dan terkeluar dari landasan separuh jalan? Pelan pembelajaran dibahagikan kepada bahagian yang boleh diurus dan kami menjejaki kemajuan anda sehingga anda sampai ke garisan penamat. Terokai tawaran kursus semasa kami hari ini",
+        "logged-in-no-plans": "Pernah anda memulakan program pembelajaran dan terkeluar dari landasan separuh jalan? Pelan pembelajaran dibahagikan kepada bahagian yang boleh diurus dan kami menjejaki kemajuan anda sehingga anda sampai ke garisan penamat. Terokai tawaran kursus semasa kami hari ini",
+        "logged-out": "Pernahkah anda memulakan program pembelajaran dan hilanh hala-tuju?\\nPelan pembelajaran hyang kami syorkan dibahagikan kepada bahagian yang mudah diurus dan kami menjejaki kemajuan anda sehingga anda sampai ke garisan penamat. Terokai tawaran kursus-kursus kami yang tersedia hari ini!"
+      },
+      "title": "Rancangan Pembelajaran"
     },
-    "view-all-bookmarks": "Lihat semua penanda halaman",
-    "voice": {
-        "trigger": "Akses pantas kepada apa sahaja"
+    "quran-reading-goals": {
+      "desc": {
+        "logged-out": "Adakah anda ingin membaca 10 minit sehari, menghabiskan satu Juz dalam sebulan, atau khatam seluruh Al-Quran dalam setahun? Mudah untuk membuat matlamat tersuai dan menjejak kemajuan anda"
+      },
+      "title": "Matlamat Tersendiri dalam Pembacaan al Quran Anda"
     },
-    "welcome": {
-        "title": "Ia adalah Bulan Al-Quran! Bantu berjuta-juta pengguna mendapat akses kepada bimbingan al-Quran."
-    }
+    "title": "Kembara Pertumbuhan Al-Quran"
+  },
+  "ramadan-activities-cta": "<link> Ikuti <b> Kalendar Al-Quran Global <\/b> untuk bacaan mingguan, podcast yang memberi inspirasi dan panggilan untuk merenung! <\/link>",
+  "read-juz": "Baca Juz",
+  "recently-read": "Bacaan Terkini",
+  "revelation-order-disclaimer": "Pandangan ini menunjukkan susunan kronologi Surah dalam al-Quran berdasarkan waktu penurunan kepada Nabi Muhammad <hover> ﷺ <\/hover> . Kronologi adalah subjek pendapat ulama dan beberapa Surah diturunkan dalam bahagian pada masa yang berbeza. Pesanan di sini adalah berdasarkan hasil kerja <link> Tanzil.net <\/link> . [Nota: susunan Mushaf yang disusun daripada al-Fatiha kepada al-Nas adalah perkara yang disepakati.]",
+  "tab": {
+    "bookmarks": "Penanda buku",
+    "popular": "Popular"
+  },
+  "view-all-bookmarks": "Lihat semua penanda halaman",
+  "voice": {
+    "trigger": "Akses pantas kepada apa sahaja"
+  },
+  "welcome": {
+    "title": "Ia adalah Bulan Al-Quran! Bantu berjuta-juta pengguna mendapat akses kepada bimbingan al-Quran."
+  }
 }

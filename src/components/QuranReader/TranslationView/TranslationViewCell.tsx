@@ -1,4 +1,4 @@
-import React, { RefObject, useEffect, memo, useContext } from 'react';
+import React, { RefObject, memo, useContext, useEffect } from 'react';
 
 import { useSelector as useSelectorXstate } from '@xstate/react';
 import classNames from 'classnames';
@@ -15,8 +15,10 @@ import BookmarkIcon from './BookmarkIcon';
 import TranslationText from './TranslationText';
 import styles from './TranslationViewCell.module.scss';
 
+import { useOnboarding } from '@/components/Onboarding/OnboardingProvider';
 import QuranReflectButton from '@/components/QuranReader/QuranReflectButton';
 import TafsirButton from '@/components/QuranReader/TafsirButton';
+import VerseNotes from '@/components/Verse/Notes';
 import OverflowVerseActionsMenu from '@/components/Verse/OverflowVerseActionsMenu';
 import PlayVerseAudioButton from '@/components/Verse/PlayVerseAudioButton';
 import VerseLink from '@/components/Verse/VerseLink';
@@ -37,6 +39,7 @@ type TranslationViewCellProps = {
   verseIndex: number;
   pageBookmarks: BookmarksMap | undefined;
   bookmarksRangeUrl: string;
+  hasNotes?: boolean;
 };
 
 const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
@@ -45,6 +48,7 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
   verseIndex,
   pageBookmarks,
   bookmarksRangeUrl,
+  hasNotes,
 }) => {
   const router = useRouter();
   const { startingVerse } = router.query;
@@ -55,7 +59,10 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
     const { ayahNumber, surah } = state.context;
     return makeVerseKey(surah, ayahNumber) === verse.verseKey;
   });
-  const enableAutoScrolling = useSelector(selectEnableAutoScrolling);
+
+  const { isActive } = useOnboarding();
+  // disable auto scrolling when the user is onboarding
+  const enableAutoScrolling = useSelector(selectEnableAutoScrolling) && !isActive;
 
   const [scrollToSelectedItem, selectedItemRef]: [() => void, RefObject<HTMLDivElement>] =
     useScroll(SMOOTH_SCROLL_TO_TOP);
@@ -85,11 +92,11 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
                 bookmarksRangeUrl={bookmarksRangeUrl}
               />
             </div>
+            <div className={styles.actionItem}>
+              <VerseNotes verseKey={verse.verseKey} isTranslationView hasNotes={hasNotes} />
+            </div>
             <div className={classNames(styles.actionItem, styles.priorityAction)}>
-              <PlayVerseAudioButton
-                verseKey={verse.verseKey}
-                timestamp={verse.timestamps.timestampFrom}
-              />
+              <PlayVerseAudioButton verseKey={verse.verseKey} />
             </div>
             <div className={classNames(styles.actionItem)}>
               <TafsirButton verseKey={verse.verseKey} />
@@ -150,6 +157,7 @@ const areVersesEqual = (
   nextProps: TranslationViewCellProps,
 ): boolean =>
   prevProps.verse.id === nextProps.verse.id &&
+  prevProps.hasNotes === nextProps.hasNotes &&
   !verseFontChanged(
     prevProps.quranReaderStyles,
     nextProps.quranReaderStyles,

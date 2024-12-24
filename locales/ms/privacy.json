@@ -1,44 +1,48 @@
 {
-    "communication": {
-        "desc": "Kami mungkin menggunakan alamat e-mel anda untuk menghantar kemas kini penting, surat berita atau pemberitahuan yang berkaitan dengan perkhidmatan kami, kandungan, dll. Anda akan mempunyai keupayaan untuk berhenti melanggan komunikasi ini pada bila-bila masa.",
-        "title": "Komunikasi"
-    },
-    "contact-us": {
-        "desc": "Jika anda mempunyai sebarang soalan, kebimbangan atau permintaan mengenai Dasar Privasi ini atau pengendalian maklumat peribadi anda, sila hubungi kami <0> di sini <\/0> . Dengan menggunakan laman web kami, anda mengakui bahawa anda telah membaca dan memahami Dasar Privasi ini dan bersetuju dengan pengumpulan, penggunaan dan pendedahan maklumat peribadi anda seperti yang diterangkan.",
-        "title": "Hubungi Kami"
-    },
-    "cookies": {
-        "desc": "Quran.com menggunakan kuki untuk meningkatkan pengalaman menyemak imbas anda, menyediakan kandungan yang diperibadikan dan menganalisis trafik tapak web. Dengan mengakses dan menggunakan laman web kami, anda membenarkan penggunaan kuki menurut Dasar Privasi ini. <br\/> <br\/> <li> Jenis Kuki yang Kami Gunakan: <\/li> <subLi> Kuki yang Diperlukan: Kuki ini penting untuk berfungsi dengan betul tapak web kami dan membolehkan ciri asas, seperti navigasi halaman dan akses kepada kawasan selamat. Mereka tidak mengumpul sebarang maklumat yang boleh dikenal pasti secara peribadi. Tanpa kuki ini, beberapa bahagian tapak web mungkin tidak berfungsi dengan betul. <\/subLi> <subLi> Kuki Analitik dan Prestasi: Kami menggunakan kuki ini untuk mengumpulkan maklumat tentang cara pelawat menggunakan tapak web kami, termasuk bilangan pelawat, halaman yang mereka lawati dan masa yang dihabiskan pada setiap halaman. Data ini membantu kami menganalisis dan meningkatkan prestasi dan kefungsian tapak web kami. Kuki ini tidak mengenal pasti anda secara peribadi; semua data diagregatkan dan tanpa nama. <\/subLi>",
-        "title": "Penggunaan Kuki"
-    },
-    "data-analysis": {
-        "desc": "Kami menggunakan Analitis Google untuk memastikan tapak tersebut terus berfungsi seperti yang diharapkan dan untuk mengetahui ciri yang perlu diutamakan, dsb. Maklumat ini adalah tanpa nama dan kami tidak mengesannya kembali kepada mana-mana individu tertentu.",
-        "title": "Analisis data"
-    },
-    "data-deletion": {
-        "desc": "Untuk memastikan privasi dan kawalan anda ke atas maklumat peribadi anda, kami menyediakan proses pemadaman akaun yang mudah. Apabila anda memilih untuk memadamkan akaun anda, semua data peribadi yang berkaitan akan dialih keluar secara automatik dan kekal daripada sistem kami. Anda boleh memulakan pemadaman akaun dengan mengakses halaman profil anda. Sebaik sahaja pemadaman dimulakan, data peribadi anda akan dipadamkan dengan selamat daripada pelayan kami dalam jangka masa yang munasabah.",
-        "title": "Pemadaman Data"
-    },
-    "data-security": {
-        "desc": "Kami mengambil langkah yang sesuai untuk melindungi maklumat peribadi anda daripada akses, pengubahan, pendedahan atau pemusnahan yang tidak dibenarkan. Kami menggunakan protokol keselamatan standard industri dan menggunakan perlindungan fizikal, elektronik dan pengurusan untuk memastikan kerahsiaan dan integriti data anda.",
-        "title": "Keselamatan Data"
-    },
-    "data-sharing": {
-        "desc": "Kami tidak menjual, berdagang atau menyewakan maklumat peribadi anda kepada pihak ketiga.",
-        "title": "Perkongsian Data"
-    },
-    "info-collection": {
-        "desc": "Kami mengumpul maklumat peribadi tertentu daripada pengguna yang memilih untuk membuat akaun di Quran.com. Maklumat ini mungkin termasuk: <br\/> <br\/> <underline> Alamat E-mel <\/underline> : Kami mengumpul alamat e-mel anda untuk memudahkan proses penciptaan akaun dan untuk tujuan komunikasi yang berkaitan dengan akaun anda, termasuk pemulihan akaun dan pemberitahuan keselamatan.",
-        "title": "Pengumpulan Maklumat"
-    },
-    "log-data": {
-        "desc": "Kami mengumpul maklumat yang dihantar oleh penyemak imbas anda apabila anda melawat Perkhidmatan kami (\"Data Log\"). Data Log ini mungkin termasuk maklumat seperti alamat Internet Protocol (“IP”) komputer anda, jenis penyemak imbas, versi penyemak imbas, halaman Perkhidmatan kami yang anda lawati, masa dan tarikh lawatan anda, masa yang dihabiskan pada halaman tersebut dan lain-lain perangkaan.",
-        "title": "Data Log"
-    },
-    "main-privacy-desc": "The Quran.Foundation (yang merangkumi Quran.com) ialah sebuah organisasi bukan untung 501(c)(3) yang berusaha untuk memperkasakan setiap manusia untuk mendapat manfaat daripada al-Quran. Quran.Foundation menghargai dan menghormati privasi semua pengguna kami.",
-    "personal-info-use": {
-        "desc": "Kami menggunakan maklumat peribadi yang kami kumpulkan untuk tujuan berikut: <br\/> <li> <underline> Penciptaan dan Pengurusan Akaun <\/underline> : Alamat e-mel anda digunakan untuk mencipta dan mengurus akaun anda di tapak web kami. Ia membolehkan anda log masuk, mengakses tetapan anda dan menyimpan penanda halaman dan sejarah bacaan anda. <\/li> <li> <underline> Pemperibadian < <\/underline> : Kami mungkin menggunakan sejarah bacaan anda untuk memberikan pengesyoran dan cadangan yang diperibadikan berdasarkan pilihan dan minat anda. <\/li>",
-        "title": "Penggunaan Maklumat Peribadi"
-    },
-    "privacy-header": "Dasar Privasi"
+  "communication": {
+    "desc": "Kami mungkin menggunakan alamat e-mel anda untuk menghantar kemas kini penting, surat berita atau pemberitahuan yang berkaitan dengan perkhidmatan kami, kandungan, dll. Anda akan mempunyai keupayaan untuk berhenti melanggan komunikasi ini pada bila-bila masa.",
+    "title": "Komunikasi"
+  },
+  "contact-us": {
+    "desc": "Jika anda ada sebarang soalan, kebimbangan atau permintaan mengenai Dasar Privasi ini atau pengendalian maklumat peribadi anda, sila hubungi kami <0> di sini </0> . Dengan menggunakan laman web kami, anda mengakui bahawa anda telah membaca dan memahami Dasar Privasi ini dan bersetuju dengan pengumpulan, penggunaan dan pendedahan maklumat peribadi anda seperti yang diterangkan.",
+    "title": "Hubungi Kami"
+  },
+  "cookies": {
+    "desc": "Quran.com menggunakan kuki untuk meningkatkan pengalaman menyemak imbas anda, menyediakan kandungan yang diperibadikan dan menganalisis trafik tapak web. Dengan mengakses dan menggunakan laman web kami, anda membenarkan penggunaan kuki menurut Dasar Privasi ini. <br/> <br/> <li> Jenis Kuki yang Kami Gunakan: </li> <subLi> Kuki yang Diperlukan: Kuki ini penting untuk berfungsi dengan betul tapak web kami dan membolehkan ciri asas, seperti navigasi halaman dan akses kepada kawasan selamat. Mereka tidak mengumpul sebarang maklumat yang boleh dikenal pasti secara peribadi. Tanpa kuki ini, beberapa bahagian tapak web mungkin tidak berfungsi dengan betul. </subLi> <subLi> Kuki Analitik dan Prestasi: Kami menggunakan kuki ini untuk mengumpulkan maklumat tentang cara pelawat menggunakan tapak web kami, termasuk bilangan pelawat, halaman yang mereka lawati dan masa yang dihabiskan pada setiap halaman. Data ini membantu kami menganalisis dan meningkatkan prestasi dan kefungsian tapak web kami. Kuki ini tidak mengenal pasti anda secara peribadi; semua data diagregatkan dan tanpa nama. </subLi>",
+    "title": "Penggunaan Kuki"
+  },
+  "data-analysis": {
+    "desc": "Kami menggunakan Analitis Google untuk memastikan tapak tersebut terus berfungsi seperti yang diharapkan dan untuk mengetahui ciri yang perlu diutamakan, dsb. Maklumat ini adalah tanpa nama dan kami tidak mengesannya kembali kepada mana-mana individu tertentu.",
+    "title": "Analisis data"
+  },
+  "data-deletion": {
+    "desc": "Untuk memastikan privasi dan kawalan anda ke atas maklumat peribadi anda, kami menyediakan proses pemadaman akaun yang mudah. Apabila anda memilih untuk memadamkan akaun anda, semua data peribadi yang berkaitan akan dialih keluar secara automatik dan kekal daripada sistem kami. Anda boleh memulakan pemadaman akaun dengan mengakses halaman profil anda. Sebaik sahaja pemadaman dimulakan, data peribadi anda akan dipadamkan dengan selamat daripada pelayan kami dalam jangka masa yang munasabah.",
+    "title": "Pemadaman Data"
+  },
+  "data-protection": {
+    "desc": "<boldSpan> Hak untuk mengakses: </boldSpan> Anda mempunyai hak untuk meminta Quran Foundation untuk salinan data peribadi anda. Kami mungkin mengenakan sedikit bayaran kepada anda untuk perkhidmatan ini. <br/> <br/> <boldSpan> Hak untuk pembetulan </boldSpan> : Anda mempunyai hak untuk meminta Quran Foundation membetulkan mana-mana maklumat yang anda percaya adalah tidak tepat. Anda juga berhak meminta Quran Foundation melengkapkan maklumat yang anda percaya tidak lengkap. <br/> <br/> <boldSpan> Hak untuk memadam: </boldSpan> Anda mempunyai hak untuk meminta Yayasan Quran memadamkan data peribadi anda, di bawah syarat tertentu. <br/> <br/> <boldSpan> Hak untuk menyekat pemprosesan: </boldSpan> Anda mempunyai hak untuk meminta Quran Foundation menyekat pemprosesan data peribadi anda, di bawah syarat tertentu. <br/> <br/> <boldSpan> Hak untuk membantah pemprosesan </boldSpan> : Anda mempunyai hak untuk membantah pemprosesan data peribadi anda oleh Quran Foundation di bawah syarat-syarat tertentu. <br/> <br/> <boldSpan> Hak untuk mudah alih data </boldSpan> : Anda mempunyai hak untuk meminta Quran Foundation memindahkan data yang telah kami kumpulkan kepada organisasi lain, atau terus kepada anda, di bawah syarat tertentu .",
+    "title": "Hak Perlindungan Data"
+  },
+  "data-security": {
+    "desc": "Kami mengambil langkah yang sesuai untuk melindungi maklumat peribadi anda daripada akses, pengubahan, pendedahan atau pemusnahan yang tidak dibenarkan. Kami menggunakan protokol keselamatan standard industri dan menggunakan perlindungan fizikal, elektronik dan pengurusan untuk memastikan kerahsiaan dan integriti data anda.",
+    "title": "Keselamatan Data"
+  },
+  "data-sharing": {
+    "desc": "Kami tidak menjual, berdagang atau menyewakan maklumat peribadi anda kepada pihak ketiga.",
+    "title": "Perkongsian Data"
+  },
+  "info-collection": {
+    "desc": "Kami mengumpul maklumat peribadi tertentu daripada pengguna yang memilih untuk membuat akaun di Quran.com. Maklumat ini mungkin termasuk: <br/> <br/> <underline> Alamat E-mel </underline> : Kami mengumpul alamat e-mel anda untuk memudahkan proses penciptaan akaun dan untuk tujuan komunikasi yang berkaitan dengan akaun anda, termasuk pemulihan akaun dan pemberitahuan keselamatan.",
+    "title": "Pengumpulan Maklumat"
+  },
+  "log-data": {
+    "desc": "Kami mengumpul maklumat yang dihantar oleh penyemak imbas anda apabila anda melawat Perkhidmatan kami (\"Data Log\"). Data Log ini mungkin termasuk maklumat seperti alamat Internet Protocol (“IP”) komputer anda, jenis penyemak imbas, versi penyemak imbas, halaman Perkhidmatan kami yang anda lawati, masa dan tarikh lawatan anda, masa yang dihabiskan pada halaman tersebut dan lain-lain perangkaan.",
+    "title": "Data Log"
+  },
+  "main-privacy-desc": "Yayasan Quran, Inc. (yang termasuk Quran.com) ialah organisasi bukan untung 501(c)(3) yang berusaha untuk memperkasakan setiap manusia untuk mendapat manfaat daripada al-Quran. Yayasan Quran, Inc. menghargai dan menghormati privasi semua pengguna kami.",
+  "personal-info-use": {
+    "desc": "Kami menggunakan maklumat peribadi yang kami kumpulkan untuk tujuan berikut: <br/> <li> <underline> Penciptaan dan Pengurusan Akaun </underline> : Alamat e-mel anda digunakan untuk mencipta dan mengurus akaun anda di tapak web kami. Ia membolehkan anda log masuk, mengakses tetapan anda dan menyimpan penanda halaman dan sejarah bacaan anda. </li> <li> <underline> Pemperibadian < </underline> : Kami mungkin menggunakan sejarah bacaan anda untuk memberikan pengesyoran dan cadangan yang diperibadikan berdasarkan pilihan dan minat anda. </li>",
+    "title": "Penggunaan Maklumat Peribadi"
+  },
+  "privacy-header": "Dasar Privasi"
 }

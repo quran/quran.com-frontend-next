@@ -1,0 +1,22 @@
+{
+  "all-notifications": "Semua Pemberitahuan",
+  "channels-notifications": "Pemberitahuan Saluran",
+  "channels": {
+    "chat": "Sembang",
+    "email": "E-mel",
+    "in_app": "Dalam App",
+    "push": "Tolak",
+    "sms": "SMS"
+  },
+  "notif-settings-not-enabled": "Tetapan pemberitahuan tidak didayakan",
+  "notif-update-success": "Tetapan pemberitahuan anda telah berjaya dikemas kini!",
+  "tabs": {
+    "categories-settings": "Tetapan Kategori",
+    "global-settings": "Tetapan global"
+  },
+  "tags": {
+    "learning-plans": "Rancangan Pembelajaran",
+    "qgj": "Kembara Al-Quran",
+    "streaks": "coretan"
+  }
+}

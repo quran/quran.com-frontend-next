@@ -1,6 +1,13 @@
+/* eslint-disable max-lines */
 import { getChapterData } from './chapter';
+import { PAGES_MUSHAF_MAP } from './page';
+import { getVerseAndChapterNumbersFromKey } from './verse';
+import { parseVerseRange } from './verseKeys';
 
+import { Mushaf } from '@/types/QuranReader';
 import ChaptersData from 'types/ChaptersData';
+
+export const MAX_AYAHS_LIMIT = 10;
 
 /**
  * Validate a chapterId which can be in-valid in 2 cases:
@@ -121,15 +128,16 @@ export const isValidHizbId = (hizbId: string): boolean => {
  * Validate a pageId which can be in-valid in 2 cases:
  *
  * 1. if it's a string that is not numeric e.g. "test".
- * 2. if it's a numeric string but lies outside the range 1->604.
+ * 2. if it's a numeric string but lies outside the range of the selected Mushaf.
  *
  * @param {string | number} pageId
  * @returns {boolean}
  */
-export const isValidPageId = (pageId: string | number): boolean => {
+export const isValidPageNumber = (pageId: string | number, mushafId: Mushaf): boolean => {
   const pageIdNumber = Number(pageId);
-  // if it's not a numeric string or it's numeric but out of the range of chapter 1->604
-  if (Number.isNaN(pageIdNumber) || pageIdNumber > 604 || pageIdNumber < 1) {
+  const MUSHAF_COUNT = PAGES_MUSHAF_MAP[mushafId];
+  // if it's not a numeric string or it's numeric but out of the range of the selected Mushaf
+  if (Number.isNaN(pageIdNumber) || pageIdNumber > MUSHAF_COUNT || pageIdNumber < 1) {
     return false;
   }
   return true;
@@ -146,7 +154,7 @@ export const getToAndFromFromRange = (range: string): string[] => range.split('-
 /**
  * This is to check if the range passed is valid or not. It won't be valid if:
  *
- * 1. The format is not a range's format and this is know if after splitting the range string
+ * 1. The format is not a range's format and this is known if after splitting the range string
  *    by '-', we don't have 2 parts for the range representing the from verse and to verse.
  *    e.g. 'one'
  * 2. If after splitting them, either of the 2 parts are not a valid number e.g. 'one-two'
@@ -177,6 +185,10 @@ export const isValidVerseRange = (
   if (Number.isNaN(fromNumber) || Number.isNaN(toNumber)) {
     return false;
   }
+  // 0 is not a valid verse number
+  if (fromNumber === 0 || toNumber === 0) {
+    return false;
+  }
   // if the from verse number is bigger than the to verse number
   if (fromNumber > toNumber) {
     return false;
@@ -189,6 +201,46 @@ export const isValidVerseRange = (
   // if either the from verse number of to verse number exceeds the chapter's total number.
   if (fromNumber > chapterVersesCount || toNumber > chapterVersesCount) {
     return false;
+  }
+
+  return true;
+};
+
+/**
+ * Check if a string range is valid or not.
+ * A valid range looks like this: "1:1-1:2" or "1:1-2:3".
+ *
+ * @param {ChaptersData} chaptersData
+ * @param {string} rangesString
+ * @returns {boolean}
+ */
+export const isRangesStringValid = (chaptersData: ChaptersData, rangesString: string): boolean => {
+  const parsedVerseRange = parseVerseRange(rangesString);
+  // 1. if the range is not in the right format
+  if (!parsedVerseRange) {
+    return false;
+  }
+  const [fromRange, toRange] = parsedVerseRange;
+  // if both ranges are in the same chapter
+  if (fromRange.chapter === toRange.chapter) {
+    const verseRange = `${fromRange.verse}-${toRange.verse}`;
+    // 2. if range within same surah is not valid
+    if (!isValidVerseRange(chaptersData, fromRange.chapter, verseRange)) {
+      return false;
+    }
+  } else {
+    // 2. if start of range verse key is not valid
+    if (!isValidVerseKey(chaptersData, fromRange.verseKey)) {
+      return false;
+    }
+    // 3. if end of range verse key is not valid
+    if (!isValidVerseKey(chaptersData, toRange.verseKey)) {
+      return false;
+    }
+    // 4. if the fromRange chapter is bigger than the toRange chapter e.g. 2:1-1:1
+    if (Number(fromRange.chapter) > Number(toRange.chapter)) {
+      return false;
+    }
   }
 
   return true;
@@ -218,6 +270,95 @@ export const isValidVerseKey = (chaptersData: ChaptersData, verseKey: string): b
     return false;
   }
 
+  return true;
+};
+
+/**
+ * Check if a start verse key is valid. An invalid verse key can be:
+ *
+ * 1. if the verse number bigger than the surah's verses count
+ * 2. if the verse from or verse to not matching the surah
+ * 3. if the verse from and verse to has bigger than 10 ayahs difference
+ *
+ * @param {string} startVerseKey
+ * @param {string} endVerseKey
+ * @param {number} versesCount
+ * @param {string} chapterID
+ * @returns {boolean}
+ */
+export const isValidVerseFrom = (
+  startVerseKey: string,
+  endVerseKey: string,
+  versesCount: number,
+  chapterID: string,
+): boolean => {
+  const [startSurah, startVerse] = getVerseAndChapterNumbersFromKey(startVerseKey);
+  const [endSurah, endVerse] = getVerseAndChapterNumbersFromKey(endVerseKey);
+
+  const startVerseNumber = Number(startVerse);
+  const endVerseNumber = Number(endVerse);
+  const startSurahNumber = Number(startSurah);
+  const endSurahNumber = Number(endSurah);
+
+  if (startSurahNumber !== endSurahNumber) {
+    return false;
+  }
+
+  if (startVerseNumber > versesCount) {
+    return false;
+  }
+  if (startSurahNumber !== Number(chapterID)) {
+    return false;
+  }
+  if (endVerseNumber - startVerseNumber >= MAX_AYAHS_LIMIT) {
+    return false;
+  }
+  return true;
+};
+
+/**
+ * Check if a end verse key is valid. An invalid verse key can be:
+ * 1. if the ending verse number bigger than the surah's verses count
+ * 2. if the ending verse number smaller than the starting verse
+ * 3. if the verse from or verse to not matching the surah
+ * 4. if the verse from and verse to has bigger than 10 ayahs difference
+ *
+ * @param {string} startVerseKey
+ * @param {string} endVerseKey
+ * @param {number} versesCount
+ * @param {string} chapterID
+ * @returns {boolean}
+ */
+export const isValidVerseTo = (
+  startVerseKey: string,
+  endVerseKey: string,
+  versesCount: number,
+  chapterID: string,
+): boolean => {
+  const [startSurah, startVerse] = getVerseAndChapterNumbersFromKey(startVerseKey);
+  const [endSurah, endVerse] = getVerseAndChapterNumbersFromKey(endVerseKey);
+
+  const startVerseNumber = Number(startVerse);
+  const endVerseNumber = Number(endVerse);
+  const startSurahNumber = Number(startSurah);
+  const endSurahNumber = Number(endSurah);
+
+  if (startSurahNumber !== endSurahNumber) {
+    return false;
+  }
+
+  if (endVerseNumber > versesCount) {
+    return false;
+  }
+  if (endVerseNumber < startVerseNumber) {
+    return false;
+  }
+  if (endSurahNumber !== Number(chapterID)) {
+    return false;
+  }
+  if (endVerseNumber - startVerseNumber >= MAX_AYAHS_LIMIT) {
+    return false;
+  }
   return true;
 };
 

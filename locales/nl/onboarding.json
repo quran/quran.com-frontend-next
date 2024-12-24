@@ -1,0 +1,107 @@
+{
+  "checklist": {
+    "1": "Functies van de startpagina",
+    "2": "Pas uw instellingen aan",
+    "3": "Verrijk uw Ayah-leeservaring",
+    "4": "Gepersonaliseerde functies"
+  },
+  "finish": "Finish",
+  "onboarding-checklist": "Controlelijst voor onboarding",
+  "onboarding-title": "Maximaliseer uw Quran.com-ervaring! <br></br> Begin nu met uw rondleiding:",
+  "previous": "Vorig",
+  "skip": "Overslaan",
+  "steps": {
+    "3-dot-menu": {
+      "description": "Klik op het menu met drie stippen om opties voor kopiëren, bladwijzers en herhalen van verzen te ontdekken. Ontdek een verscheidenheid aan opties om verzen te herhalen",
+      "title": "3-puntsmenu"
+    },
+    "ayah-reflection": {
+      "description": "Lees reflecties (tadabbur) van geleerden, studenten van kennis en gewone mensen om u te helpen een meer persoonlijke verbinding met de Koran te ontwikkelen",
+      "title": "Lees reflecties op ayah-niveau"
+    },
+    "ayah-tafsir": {
+      "description": "Verken de Tafsir op ayah-niveau en bied gedetailleerde inzichten om je begrip tijdens het lezen te vergroten. (Tafsir kan indien nodig voor meerdere verzen worden gegroepeerd)",
+      "title": "Lees Tafsir op Ayah-niveau"
+    },
+    "font-size": {
+      "description": "Pas uw Koranlezen aan met eenvoudig aan te passen lettergroottes voor een comfortabele leeservaring",
+      "title": "Lettertypegrootte"
+    },
+    "font-style": {
+      "description": "Opties zijn onder meer Uthmani - King Fahad Complex v1, Uthmani - King Fahad Complex v2, Uthmani QPC Hafs, Indopak 15 lijnen, Indopak 16 lijnen",
+      "title": "Kies het leesscript van uw voorkeur"
+    },
+    "inline-wbw": {
+      "description": "Bekijk de vertaling van elk woord in de rij (onder het woord) of in een ballon boven het woord terwijl je naar de Koran luistert",
+      "title": "Geef woord-voor-woord-vertaling in-line weer (onder het woord) of geef tooltip weer"
+    },
+    "juz": {
+      "description": "Bekijk Koran door Juz",
+      "title": "Bekijk Koran door Juz"
+    },
+    "listen": {
+      "description": "Start de audiospeler om naar de recitatie te luisteren",
+      "title": "Luister naar de soera of aya"
+    },
+    "login": {
+      "description": "Log in en sla instellingen op verschillende apparaten op en krijg toegang tot extra functies.",
+      "title": "Log in"
+    },
+    "quran-radio": {
+      "description": "Luister naar QuranRadio - stream Koran zonder advertenties",
+      "title": "Koran-radio"
+    },
+    "reading-sessions": {
+      "description": "Bekijk eenvoudig uw reis door de Koran met een blik op uw persoonlijke leesgeschiedenis, waarbij u de verzen bijhoudt die u op Quran.com heeft verkend.",
+      "title": "Leesgeschiedenis bekijken"
+    },
+    "reading-view": {
+      "description": "Bekijk de Koran in de mushaf-modus",
+      "title": "Leesmodus"
+    },
+    "search-bar": {
+      "description": "Vind de verzen, soera's, trefwoorden, juz en onderwerpen waarnaar u op zoek bent door onze zoekbalk te gebruiken",
+      "title": "Zoekbalk"
+    },
+    "select-reciter": {
+      "description": "Personaliseer uw luisterervaring door de voordrager te selecteren waar u het liefst naar luistert!",
+      "title": "Kies uit een verscheidenheid aan voordragers om naar te luisteren"
+    },
+    "settings": {
+      "description": "Beheer uw voorkeuren",
+      "title": "Instellingen"
+    },
+    "streak": {
+      "description": "Stel gepersonaliseerde leesdoelen in, houd uw voortgang bij en ontwikkel een consistente leesgewoonte uit de koran met onze functie Leesreeksen en -plannen.",
+      "title": "Houd leesreeksen en leesplannen bij"
+    },
+    "surah-info": {
+      "description": "Krijg inzicht in elke Surah - handig gelegen aan het begin van elke Surah",
+      "title": "Lees over de soera"
+    },
+    "theme": {
+      "description": "Kies uw favoriete look (licht-, sepia- of donkere modus) voor een comfortabele en gepersonaliseerde Koran-leeservaring.",
+      "title": "Lees de Koran in de lichte, sepia- of donkere modus"
+    },
+    "translations": {
+      "description": "Kies uit verschillende vertalingen in meerdere talen. Tip: Vergelijk vertalingen door meerdere opties te selecteren",
+      "title": "Vertalingen"
+    },
+    "voice-search": {
+      "description": "Tik op het microfoonpictogram en reciteer het vers waarnaar je zoekt. Snelle tip! Om te ontdekken waar iemand reciteert (bijvoorbeeld Taraweeh-gebeden), tikt u op het microfoonpictogram. Nadat een of twee verzen zijn gedetecteerd, drukt u op stop om de locatie te vinden",
+      "title": "Gesproken zoekopdracht (Tarteel)"
+    },
+    "wbw-audio": {
+      "description": "Selecteer deze optie om elk woord afzonderlijk te beluisteren door simpelweg op het woord te klikken!",
+      "title": "Luister naar de woord-voor-woord transliteratie door op het woord te klikken"
+    },
+    "wbw-translation": {
+      "description": "Bekijk de betekenis van individuele woorden terwijl u de Koran leest of beluistert, zodat u uw Koranvocabulaire kunt vergroten",
+      "title": "Lees woord-voor-woord vertaling"
+    },
+    "wbw-transliteration": {
+      "description": "Bekijk de transliteratie van elk woord om u te helpen tijdens uw Koranleesreis",
+      "title": "Lees de transliteratie woord voor woord"
+    }
+  }
+}

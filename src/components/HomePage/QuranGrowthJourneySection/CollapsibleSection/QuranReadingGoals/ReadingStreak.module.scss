@@ -1,0 +1,104 @@
+@use "src/styles/theme";
+@use "src/styles/breakpoints";
+
+.container {
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  width: 100%;
+  gap: var(--spacing-mega);
+
+  @include breakpoints.desktop {
+    gap: 0;
+    align-items: center;
+    flex-direction: row;
+  }
+}
+
+.streakSubtitle {
+  font-size: var(--font-size-small);
+  text-transform: uppercase;
+  color: var(--color-text-default);
+}
+
+.weekProgressLabel {
+  font-weight: var(--font-weight-medium);
+}
+
+.week {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-block-start: var(--spacing-medium);
+
+  &.fixedWidth {
+    @include breakpoints.tablet {
+      min-width: calc(var(--spacing-large) * 24) !important;
+    }
+  }
+}
+
+.day {
+  color: var(--color-success-medium);
+  font-size: var(--font-size-small);
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-large);
+}
+
+.fullName {
+  display: none;
+
+  @include breakpoints.tablet {
+    display: block;
+  }
+}
+
+.shortName {
+  display: none;
+
+  @include breakpoints.smallerThanTablet {
+    font-size: var(--font-size-normal);
+    font-weight: var(--font-weight-medium);
+    display: block;
+  }
+}
+
+.circleContainer {
+  flex: 1;
+  width: 100%;
+  position: relative;
+}
+
+.dayDivider {
+  width: 100%;
+  height: 2px;
+  background-color: var(--color-success-medium);
+}
+
+.goalContainer {
+  margin-block-start: var(--spacing-mega);
+}
+
+.actionsContainer {
+  margin-block-start: var(--spacing-large);
+  display: flex;
+  align-items: center;
+
+  & > :first-child {
+    margin-inline-end: var(--spacing-xxsmall);
+  }
+}
+
+.illustrationContainer {
+  width: calc(5 * var(--spacing-mega));
+  height: calc(5 * var(--spacing-mega));
+  position: absolute;
+  inset-block-end: calc(-1 * var(--spacing-medium));
+  inset-inline-end: 0;
+  opacity: var(--opacity-10);
+  color: var(--color-success-deep);
+  pointer-events: none;
+}

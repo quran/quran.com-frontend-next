@@ -1,0 +1,22 @@
+{
+  "all-notifications": "Semua Notifikasi",
+  "channels-notifications": "Saluran Notifikasi",
+  "channels": {
+    "chat": "Obrolan",
+    "email": "Surel",
+    "in_app": "Dalam Aplikasi",
+    "push": "Push",
+    "sms": "SMS"
+  },
+  "notif-settings-not-enabled": "Pengaturan notifikasi tidak diaktifkan",
+  "notif-update-success": "Pengaturan notifikasi Anda telah berhasil diperbarui!",
+  "tabs": {
+    "categories-settings": "Pengaturan Kategori",
+    "global-settings": "Pengaturan Global"
+  },
+  "tags": {
+    "learning-plans": "Rencana Pembelajaran",
+    "qgj": "Perjalanan Perkembangan Qur'an",
+    "streaks": "Pencapaian"
+  }
+}

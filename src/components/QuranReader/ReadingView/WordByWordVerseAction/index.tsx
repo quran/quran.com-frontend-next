@@ -1,7 +1,7 @@
 import { useRef, useState } from 'react';
 
-import useTranslation from 'next-translate/useTranslation';
 import dynamic from 'next/dynamic';
+import useTranslation from 'next-translate/useTranslation';
 
 import WordByWordHeading from './WordByWordHeading';
 import styles from './WordByWordVerseAction.module.scss';

@@ -11,13 +11,13 @@ import styles from './EndOfScrollingControls.module.scss';
 import HizbControls from './HizbControls';
 import JuzControls from './JuzControls';
 import PageControls from './PageControls';
+import QuranReaderReadingStreak from './QuranReaderReadingStreak';
 import RubControls from './RubControls';
 import VerseControls from './VerseControls';
 
-import ReadingStreak, { ReadingStreakLayout } from '@/components/HomePage/ReadingStreak';
 import { selectIsReadingByRevelationOrder } from '@/redux/slices/revelationOrder';
+import { QuranReaderDataType } from '@/types/QuranReader';
 import { VersesResponse } from 'types/ApiResponses';
-import { QuranReaderDataType } from 'types/QuranReader';
 import Verse from 'types/Verse';
 
 interface Props {
@@ -36,7 +36,7 @@ const EndOfScrollingControls: React.FC<Props> = ({
   return (
     <>
       <div className={styles.progressWidgetContainer}>
-        <ReadingStreak layout={ReadingStreakLayout.QuranReader} />
+        <QuranReaderReadingStreak />
       </div>
       {isReadingByRevelationOrder && quranReaderDataType === QuranReaderDataType.Chapter && (
         <RevelationOrderNavigationNotice
@@ -46,10 +46,11 @@ const EndOfScrollingControls: React.FC<Props> = ({
       <div className={styles.container}>
         <div className={styles.buttonsContainer}>
           {quranReaderDataType === QuranReaderDataType.Chapter && (
-            <ChapterControls lastVerse={lastVerse} initialData={initialData} />
+            <ChapterControls initialData={initialData} />
           )}
           {(quranReaderDataType === QuranReaderDataType.Verse ||
-            quranReaderDataType === QuranReaderDataType.VerseRange) && (
+            quranReaderDataType === QuranReaderDataType.ChapterVerseRanges ||
+            quranReaderDataType === QuranReaderDataType.Ranges) && (
             <VerseControls lastVerse={lastVerse} />
           )}
           {quranReaderDataType === QuranReaderDataType.Page && (

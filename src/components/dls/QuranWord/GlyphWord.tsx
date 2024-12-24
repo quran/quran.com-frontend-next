@@ -1,5 +1,4 @@
 /* eslint-disable react/no-danger */
-import React from 'react';
 
 import classNames from 'classnames';
 import { shallowEqual, useSelector } from 'react-redux';
@@ -7,8 +6,10 @@ import { shallowEqual, useSelector } from 'react-redux';
 import styles from './GlyphWord.module.scss';
 
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
-import { getFontClassName } from '@/utils/fontFaceHelper';
-import { FALLBACK_FONT, QuranFont } from 'types/QuranReader';
+import { FALLBACK_FONT, QuranFont } from '@/types/QuranReader';
+import { CharType } from '@/types/Word';
+import { isFirefox } from '@/utils/device-detector';
+import { getFontClassName, getFontFaceNameForPage } from '@/utils/fontFaceHelper';
 
 type UthmaniWordTextProps = {
   qpcUthmaniHafs: string;
@@ -17,6 +18,8 @@ type UthmaniWordTextProps = {
   pageNumber: number;
   font: QuranFont;
   isFontLoaded: boolean;
+  isHighlighted?: boolean;
+  charType?: CharType;
 };
 
 /**
@@ -50,24 +53,38 @@ const GlyphWord = ({
   pageNumber,
   font,
   isFontLoaded,
+  isHighlighted,
+  charType,
 }: UthmaniWordTextProps) => {
-  const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
-  const { quranTextFontScale, mushafLines } = quranReaderStyles;
+  const { quranTextFontScale, mushafLines } = useSelector(selectQuranReaderStyles, shallowEqual);
+
+  // The extra space before the glyph should only be added where the issue occurs,
+  // which is in firefox with the Madani V1 Mushaf and the font scale is less than 6
+  const addExtraSpace = isFirefox() && font === QuranFont.MadaniV1 && quranTextFontScale < 6;
+
   return (
     <span
       dangerouslySetInnerHTML={{
-        __html: getWordText(qpcUthmaniHafs, textCodeV1, textCodeV2, font, isFontLoaded),
+        __html: `${addExtraSpace ? ` ` : ``}${getWordText(
+          qpcUthmaniHafs,
+          textCodeV1,
+          textCodeV2,
+          font,
+          isFontLoaded,
+        )}`,
       }}
       data-font-scale={quranTextFontScale}
       data-font={font}
       className={classNames(styles.styledWord, {
+        [styles.tajweedTextHighlighted]:
+          font === QuranFont.TajweedV4 && charType !== CharType.End && isHighlighted,
+        [styles.wordSpacing]: addExtraSpace,
         [styles.fallbackText]: !isFontLoaded,
         [styles[getFontClassName(FALLBACK_FONT, quranTextFontScale, mushafLines, true)]]:
           !isFontLoaded,
       })}
       {...(isFontLoaded && {
-        // eslint-disable-next-line i18next/no-literal-string
-        style: { fontFamily: `p${pageNumber}-${font.replace('code_', '')}` },
+        style: { fontFamily: getFontFaceNameForPage(font, pageNumber) },
       })}
     />
   );

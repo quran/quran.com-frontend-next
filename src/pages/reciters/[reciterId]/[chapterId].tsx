@@ -5,8 +5,8 @@ import { useSelector } from '@xstate/react';
 import classNames from 'classnames';
 import clipboardCopy from 'clipboard-copy';
 import { GetStaticPaths, GetStaticProps } from 'next';
-import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
+import useTranslation from 'next-translate/useTranslation';
 
 import layoutStyle from '../../index.module.scss';
 
@@ -24,7 +24,7 @@ import PauseIcon from '@/icons/pause.svg';
 import PlayIcon from '@/icons/play-arrow.svg';
 import ReaderIcon from '@/icons/reader.svg';
 import { makeCDNUrl } from '@/utils/cdn';
-import { getChapterData, getAllChaptersData } from '@/utils/chapter';
+import { getAllChaptersData, getChapterData } from '@/utils/chapter';
 import { logButtonClick } from '@/utils/eventLogger';
 import {
   getCanonicalUrl,
@@ -36,13 +36,11 @@ import { isValidChapterId } from '@/utils/validator';
 import { selectCurrentAudioReciterId } from '@/xstate/actors/audioPlayer/selectors';
 import { AudioPlayerMachineContext } from '@/xstate/AudioPlayerMachineContext';
 import Chapter from 'types/Chapter';
-import ChaptersData from 'types/ChaptersData';
 import Reciter from 'types/Reciter';
 
 type ShareRecitationPageProps = {
   selectedReciter: Reciter;
   selectedChapter: Chapter;
-  chaptersData: ChaptersData;
 };
 
 const RecitationPage = ({ selectedReciter, selectedChapter }: ShareRecitationPageProps) => {

@@ -1,11 +1,11 @@
 import { toLocalizedNumber } from './locale';
 
-import { Mushaf, MushafLines, QuranFont, QuranFontMushaf } from 'types/QuranReader';
+import { Mushaf, MushafLines, QuranFont, QuranFontMushaf } from '@/types/QuranReader';
 
 const DEFAULT_NUMBER_OF_PAGES = 604;
 
 // a map between the mushafId and the number of pages it has
-const PAGES_MUSHAF_MAP = {
+export const PAGES_MUSHAF_MAP = {
   [Mushaf.Indopak]: 604,
   [Mushaf.KFGQPCHAFS]: 604,
   [Mushaf.QCFV1]: 604,
@@ -13,6 +13,8 @@ const PAGES_MUSHAF_MAP = {
   [Mushaf.UthmaniHafs]: 604,
   [Mushaf.Indopak16Lines]: 548,
   [Mushaf.Indopak15Lines]: 610,
+  [Mushaf.Tajweed]: 604,
+  [Mushaf.QCFTajweedV4]: 604,
 };
 
 /**

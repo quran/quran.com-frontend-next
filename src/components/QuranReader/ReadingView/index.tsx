@@ -4,8 +4,8 @@
 import React, { useCallback, useMemo, useRef, useState } from 'react';
 
 import classNames from 'classnames';
-import useTranslation from 'next-translate/useTranslation';
 import dynamic from 'next/dynamic';
+import useTranslation from 'next-translate/useTranslation';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { shallowEqual, useSelector } from 'react-redux';
 import { Virtuoso, VirtuosoHandle } from 'react-virtuoso';
@@ -28,12 +28,12 @@ import useQcfFont from '@/hooks/useQcfFont';
 import { selectedLastReadPage } from '@/redux/slices/QuranReader/readingTracker';
 import { selectIsUsingDefaultFont } from '@/redux/slices/QuranReader/styles';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
+import { QuranReaderDataType } from '@/types/QuranReader';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getLineWidthClassName } from '@/utils/fontFaceHelper';
 import Error from 'src/pages/_error';
 import { VersesResponse } from 'types/ApiResponses';
 import QueryParam from 'types/QueryParam';
-import { QuranReaderDataType } from 'types/QuranReader';
 import Verse from 'types/Verse';
 
 const EndOfScrollingControls = dynamic(
@@ -73,7 +73,7 @@ const ReadingView = ({
     value: reciterId,
     isQueryParamDifferent: reciterQueryParamDifferent,
   }: { value: number; isQueryParamDifferent: boolean } = useGetQueryParamOrXstateValue(
-    QueryParam.Reciter,
+    QueryParam.RECITER,
   );
   const {
     value: wordByWordLocale,
@@ -187,13 +187,18 @@ const ReadingView = ({
     return <Error />;
   }
 
+  const shouldShowQueryParamMessage =
+    reciterQueryParamDifferent || wordByWordLocaleQueryParamDifferent;
+
   return (
     <>
-      <QueryParamMessage
-        translationsQueryParamDifferent={false}
-        reciterQueryParamDifferent={reciterQueryParamDifferent}
-        wordByWordLocaleQueryParamDifferent={wordByWordLocaleQueryParamDifferent}
-      />
+      {shouldShowQueryParamMessage && (
+        <QueryParamMessage
+          translationsQueryParamDifferent={false}
+          reciterQueryParamDifferent={reciterQueryParamDifferent}
+          wordByWordLocaleQueryParamDifferent={wordByWordLocaleQueryParamDifferent}
+        />
+      )}
       <div
         onCopy={(event) => onCopyQuranWords(event, verses, quranFont)}
         className={classNames(

@@ -1,17 +1,30 @@
 @use "src/styles/constants";
 @use "src/styles/breakpoints";
 @use "src/styles/theme";
+@use "sass:math";
+
+$sections-menu-height: 2.25rem;
+$progress-bar-height: var(--spacing-micro);
+$top-menu-height: calc($sections-menu-height + var(--navbar-container-height) + $progress-bar-height);
+$context-menu-height: calc($sections-menu-height + $progress-bar-height);
+$isNavbarVisible : var(--isNavbarVisible);
 
 @mixin sidebarVisible {
+  z-index: var(--z-index-sticky);
   transform: translateX(0%);
+}
+
+@mixin sidebarInvisibleExpanded {
+  transform: translateX(-100%) translateY(calc($top-menu-height));
   [dir="rtl"] & {
-    transform: translateX(0%); // need to duplicate for specificity
+    transform: translateX(100%) translateY(calc($top-menu-height));
   }
 }
-@mixin sidebarInvisible {
-  transform: translateX(-100%);
+
+@mixin sidebarInvisibleCollapsed {
+  transform: translateX(-100%) translateY(calc($context-menu-height));
   [dir="rtl"] & {
-    transform: translateX(100%);
+    transform: translateX(100%) translateY(calc($context-menu-height));
   }
 }
 
@@ -28,24 +41,54 @@
   padding-block-start: calc(1.5 * var(--spacing-mega));
   background-color: var(--color-background-elevated);
   overflow-x: hidden;
-  z-index: var(--z-index-default);
+  z-index: var(--z-index-sticky);
   box-sizing: border-box;
   border-inline-end: 1px solid var(--color-borders-hairline);
   width: var(--sidebar-size);
   padding-inline: var(--spacing-large);
-  transition: transform var(--transition-regular);
+  transition: transform var(--transition-regular), height var(--transition-regular);
   display: flex;
   flex-direction: column;
   overflow-y: hidden;
-  @include sidebarInvisible();
+}
+
+.inVisibleContainer {
+  @include sidebarInvisibleExpanded();
+}
+
+.inVisibleContainerCollapsed {
+  @include sidebarInvisibleCollapsed();
 }
 
 .visibleContainer {
   @include sidebarVisible();
+  [dir="rtl"] & {
+    transform: translateX(0%) translateY(calc($top-menu-height));
+  }
 }
+
+.visibleContainerCollapsed {
+  @include sidebarVisible();
+  [dir="rtl"] & {
+    transform: translateX(0%) translateY(calc($context-menu-height));
+  }
+}
+
 .containerAuto {
   @include breakpoints.tablet {
     @include sidebarVisible();
+    [dir="rtl"] & {
+      transform: translateX(0%) translateY(calc($top-menu-height));
+    }
+  }
+}
+
+.containerAutoCollapsed {
+  @include breakpoints.tablet {
+    @include sidebarVisible();
+    [dir="rtl"] & {
+      transform: translateX(0%) translateY(calc($context-menu-height));
+    }
   }
 }
 
@@ -137,7 +180,15 @@
 }
 
 .spaceOnTop {
-  padding-block-start: calc(3.5 * var(--spacing-mega));
+  transform: translateY($top-menu-height);
+  height: calc(100vh - $top-menu-height);
+
+}
+
+.spaceOnTopCollapsed {
+  transform: translateY($context-menu-height);
+  height: calc(100vh - $context-menu-height);
+
 }
 
 .chapterNumber {

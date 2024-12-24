@@ -1,4 +1,13 @@
-import React, { ReactNode, useState, useEffect, ChangeEvent, RefObject } from 'react';
+/* eslint-disable max-lines */
+import React, {
+  ReactNode,
+  useState,
+  useEffect,
+  ChangeEvent,
+  RefObject,
+  KeyboardEvent,
+  HTMLAttributes,
+} from 'react';
 
 import classNames from 'classnames';
 
@@ -36,8 +45,10 @@ interface Props {
   suffix?: ReactNode;
   onClearClicked?: () => void;
   onChange?: (value: string) => void;
+  onKeyDown?: (event: KeyboardEvent<HTMLInputElement>) => void;
+  inputMode?: HTMLAttributes<HTMLInputElement>['inputMode'];
   value?: string;
-  label?: string;
+  label?: string | JSX.Element;
   type?: InputType;
   shouldFlipOnRTL?: boolean;
   variant?: InputVariant;
@@ -62,6 +73,8 @@ const Input: React.FC<Props> = ({
   suffix,
   onClearClicked,
   onChange,
+  onKeyDown,
+  inputMode,
   value = '',
   shouldFlipOnRTL = true,
   containerClassName,
@@ -117,6 +130,8 @@ const Input: React.FC<Props> = ({
           disabled={disabled}
           onChange={onValueChange}
           value={inputValue}
+          onKeyDown={onKeyDown}
+          inputMode={inputMode}
           {...(placeholder && { placeholder })}
           {...(name && { name })}
         />

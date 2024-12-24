@@ -1,0 +1,93 @@
+@use "src/styles/breakpoints";
+
+.checklistPosition {
+  position: fixed;
+  inset-block-end: var(--spacing-medium);
+  inset-inline-end: var(--spacing-medium);
+  box-sizing: border-box;
+  z-index: var(--z-index-overlay);
+}
+
+.checklist {
+  background: var(--color-background-alternative-medium);
+  border: 1px solid var(--color-borders-hairline);
+  box-shadow: var(--shadow-small);
+  border-radius: var(--border-radius-rounded);
+  padding: var(--spacing-large) var(--spacing-large);
+  max-width: 100%;
+  width: calc(var(--spacing-mega) * 12);
+
+  @include breakpoints.smallerThanMobileL {
+    width: 100%;
+    inset-inline: 0;
+    inset-block-end: 0;
+    border-inline: none;
+    border-block-end: none;
+  }
+
+  h4 {
+    font-size: var(--font-size-large);
+    font-weight: var(--font-weight-bold);
+  }
+}
+
+.helpIcon {
+  width: var(--spacing-mega) !important;
+  height: var(--spacing-mega) !important;
+}
+
+.checklistHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.checkContainer {
+  position: relative;
+}
+
+.checklist ul {
+  margin-top: var(--spacing-large);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-small);
+
+  li > button {
+    width: 100%;
+    border: none;
+    display: flex;
+    align-items: center;
+    gap: calc(var(--spacing-medium) / 2);
+    background: var(--color-background-elevated);
+    border-radius: var(--border-radius-default);
+    padding: var(--spacing-small);
+    color: var(--color-text-default);
+    text-align: start;
+
+    &.completed {
+      background: var(--color-success-faint);
+    }
+  }
+}
+
+.checkCircle {
+  width: var(--spacing-medium);
+  height: var(--spacing-medium);
+  border-radius: var(--border-radius-circle);
+  border: 2px solid var(--color-success-medium);
+  background-color: var(--day-circle-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+
+  & svg {
+    width: 90%;
+    height: 90%;
+    color: white;
+  }
+}
+
+.filled {
+  background-color: var(--color-success-medium) !important;
+}

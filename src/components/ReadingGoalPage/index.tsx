@@ -1,11 +1,10 @@
 /* eslint-disable react-func/max-lines-per-function */
 /* eslint-disable max-lines */
-import { useState, useContext, useCallback } from 'react';
+import { useCallback, useContext, useState } from 'react';
 
 import classNames from 'classnames';
-import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
-import { shallowEqual, useSelector } from 'react-redux';
+import useTranslation from 'next-translate/useTranslation';
 import { useSWRConfig } from 'swr';
 
 import useReadingGoalReducer, { ReadingGoalTabProps } from './hooks/useReadingGoalReducer';
@@ -18,12 +17,11 @@ import Button, { ButtonSize, ButtonType } from '@/dls/Button/Button';
 import Progress from '@/dls/Progress';
 import Spinner, { SpinnerSize } from '@/dls/Spinner/Spinner';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
+import useGetMushaf from '@/hooks/useGetMushaf';
 import ChevronLeftIcon from '@/icons/chevron-left.svg';
 import ChevronRightIcon from '@/icons/chevron-right.svg';
 import layoutStyle from '@/pages/index.module.scss';
-import { selectQuranFont, selectQuranMushafLines } from '@/redux/slices/QuranReader/styles';
-import { CreateGoalRequest, QuranGoalPeriod, GoalType, GoalCategory } from '@/types/auth/Goal';
-import { getMushafId } from '@/utils/api';
+import { CreateGoalRequest, GoalCategory, GoalType, QuranGoalPeriod } from '@/types/auth/Goal';
 import { addReadingGoal } from '@/utils/auth/api';
 import { makeStreakUrl } from '@/utils/auth/apiPaths';
 import { logFormSubmission } from '@/utils/eventLogger';
@@ -32,10 +30,7 @@ const ReadingGoalOnboarding: React.FC = () => {
   const { t } = useTranslation('reading-goal');
   const router = useRouter();
   const chaptersData = useContext(DataContext);
-
-  const quranFont = useSelector(selectQuranFont, shallowEqual);
-  const mushafLines = useSelector(selectQuranMushafLines, shallowEqual);
-  const { mushaf } = getMushafId(quranFont, mushafLines);
+  const mushaf = useGetMushaf();
 
   const [loading, setLoading] = useState(false);
   const [tabIdx, setTabIdx] = useState(0);
@@ -124,12 +119,16 @@ const ReadingGoalOnboarding: React.FC = () => {
     if (Tab.key === TabKey.ExamplesTab && !state.exampleKey) return true;
 
     if (Tab.key === TabKey.AmountTab) {
-      return !validateReadingGoalData(chaptersData, {
-        type: state.type,
-        pages: state.pages,
-        seconds: state.seconds,
-        range: { startVerse: state.rangeStartVerse, endVerse: state.rangeEndVerse },
-      });
+      return !validateReadingGoalData(
+        chaptersData,
+        {
+          type: state.type,
+          pages: state.pages,
+          seconds: state.seconds,
+          range: { startVerse: state.rangeStartVerse, endVerse: state.rangeEndVerse },
+        },
+        mushaf,
+      );
     }
 
     return false;

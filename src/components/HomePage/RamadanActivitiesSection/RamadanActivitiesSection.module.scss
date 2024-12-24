@@ -1,0 +1,30 @@
+@use "src/styles/breakpoints";
+
+.container {
+    background-color: var(--color-success-faded);
+    padding: var(--spacing-small);
+    display: flex;
+    align-items: center;
+    @include breakpoints.tablet {
+        border-radius: var(--border-radius-default);
+    }
+}
+
+.illustrationContainer {
+    display: flex;
+    @include breakpoints.tablet {
+        display: inline-flex;
+    }
+    height: var(--spacing-mega);
+    width: var(--spacing-mega);
+    margin-inline-end: var(--spacing-xxsmall);
+}
+
+.cta {
+    font-size: var(--font-size-large);
+    font-weight: var(--font-weight-semibold);
+}
+
+.bold {
+    font-weight: bold;
+}

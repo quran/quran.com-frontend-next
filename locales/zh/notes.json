@@ -1,0 +1,62 @@
+{
+  "add-another-note": "添加另一个注释",
+  "body-placeholder": "使用此空间保存一般笔记或写反思。",
+  "checkbox-refl-intro": {
+    "checkbox": {
+      "desc": "<li>发帖意味着您的反思将以您的名义在 QuranReflect 上分享，并由审核团队审核并对 QuranReflect 社区可见。 <\/li> <li>一旦您的帖子被我们的审核团队审核、批准或推广，您可能会收到点赞、评论和关注通知。登录 QuranReflect 后，您可以更新通知设置以满足您的偏好。 <\/li> <li>您可以在“我的笔记和反思”部分中的 Quran.com 登录个人资料下查看您的笔记和发布的反思，或使用您的 Quran.com 登录名登录<link> QuranReflect <\/link>在电子邮件中。 <\/li>",
+      "title": "如果我选中此框会发生什么？"
+    },
+    "post-button": "当我在 QuranReflect 上发帖时会发生什么？",
+    "qr-intro": "QuranReflect 和 Quran.com 都是 Quran.Foundation 家族的一部分。它是一个社交平台，用于分享个人对《古兰经》的看法，鼓励用户内化其信息并分享激发积极变革的见解。与学术解释不同，反思是与诗句相关的个人想法和经历。 QuranReflect 上的用户帖子由合格的团队进行审核和审核，他们将帮助确保内容质量和与《古兰经》互动时的礼仪，他们将通过分享反馈和突出有价值的话语来增强用户的能力，从而培育一个精神振奋、以《古兰经》为中心的社区。了解更多： <link> Quranreflect.com\/faq <\/link>",
+    "title": "什么是 QuranReflect？如果我选中此框会发生什么？"
+  },
+  "click-to-see-more": "点击查看更多",
+  "delete-note": "删除注释",
+  "delete-note-modal": {
+    "subtitle": "您确定要删除该注释吗？",
+    "title": "删除注释"
+  },
+  "delete-success": "注释已成功删除",
+  "empty-notes": "没有找到注释",
+  "empty-reflections": "未发现反射",
+  "export-success": "注释已成功发布到您在 QuranReflect 上的帐户",
+  "new-note-reflc-intro": {
+    "reflc-prompts": {
+      "deeper": {
+        "desc": "<li>是否提到了安拉的名字，它们与这节经文有何关系？ <\/li> <li>哪些词语或语言方面引起了您的注意？ <\/li> <li>你能将这节经文的上下文、其他古兰经经文、圣训或事件联系起来吗？ <\/li>",
+        "title": "更深入的见解："
+      },
+      "personal": {
+        "desc": "<li>这节经文在哪些方面感动或启发了您？ <\/li> <li>是否有提到您可以改进的品质或行为？ <\/li> <li>有什么承诺或警告\/禁止可以应用到你的生活中吗？ <\/li> <li>您有与这节经文相关的个人故事吗？ <\/li> <li>你想根据这节经文做出哪些改变，你或其他人如何实际实施它们？ <\/li>",
+        "title": "个人反思问题："
+      },
+      "title": "反思提示"
+    },
+    "title": "需要帮助反思《古兰经》吗？了解更多",
+    "what-is-reflc": {
+      "desc": "反思或思考《古兰经》包括仔细阅读或聆听安拉的话语，理解其含义，并让它影响和改变我们，让我们变得更好。这被称为“Tadabbur”。相比之下，《塔夫西尔》是对《古兰经》的学术解释，根据经典资料和学术分析对其经文进行详细解释。虽然 Tafsir 是为学者保留的，但真主 SWT 要求每个人都参与 Tadabbur（《古兰经》 <link1> 38:29 <\/link1> , <link2> 47:24 <\/link2> , <link3> 4:82 <\/link3> ， 还有很多）。 <br><\/br> <br><\/br>用户可以私下保存他们的笔记和个人感想。通常，我们的反思可以与他人产生深刻的共鸣，有助于他们与《古兰经》的联系，以及他们与安拉 SWT 的关系。这就是为什么用户可以选择将他们的想法分享到 QuranReflect，作为我们帮助人们在旅程中共同成长的努力的一部分。要了解更多信息，请访问： <link4> QuranReflect.com\/faq <\/link4>和<link5>反思《古兰经》的五个视角<\/link5>",
+      "title": "什么是反射？"
+    }
+  },
+  "note": "笔记",
+  "notes-and-reflcs": "笔记与思考",
+  "post-on-qr": "发表在《古兰经反思》上",
+  "posted-reflections": "发表感言",
+  "private-notes": "笔记",
+  "qr-tooltip": "<span> <link> QuranReflect <\/link>是一个分享对《古兰经》反思的社交平台。围绕《古兰经》进行联系，与重要的事情联系起来。 <\/span>",
+  "reflections-intro": {
+    "line-1": "要查看评论并与之互动、与社区互动以及执行更多操作，请访问<link> QuranReflect.com <\/link> 。",
+    "line-2": "您可以通过登录或注册时使用的同一 Quran.com 电子邮件地址来登录链接的 QuranReflect 帐户。",
+    "line-3": "不适合公众观看的内容将被隐藏或删除。发布不当内容的用户将被阻止。",
+    "title": "了解有关发布的思考的更多信息"
+  },
+  "save-post-to-qr": "保存并发布到 QuranReflect",
+  "save-privately": "私下保存",
+  "save-publish-failed": "备注已保存成功但发布失败",
+  "save-success": "注释已成功保存",
+  "share-to-qr": "分享到 QuranReflect.com",
+  "share-to-qr-desc": "分享为<b> {{name}} <\/b> 。受众是<b> QuranReflect 用户<\/b>",
+  "update-publish-failed": "备注已更新成功但发布失败",
+  "update-success": "备注已更新成功",
+  "view-on-qr": "查看《古兰经反思》"
+}

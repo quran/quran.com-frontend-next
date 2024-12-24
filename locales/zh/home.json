@@ -1,18 +1,41 @@
 {
-    "no-bookmarks": "您还没有任何书签",
-    "noble-quran": "尊贵的古兰经",
-    "read-juz": "读朱兹",
-    "recently-read": "最近阅读",
-    "revelation-order-disclaimer": "此视图显示古兰经中古兰经的时间顺序，基于它们被启示给先知穆罕默德<hover> ﷺ <\/hover>的时间。年表是一个学术观点的主题，一些 Surahs 在不同的时间部分被揭示。此处的排序基于<link> Tanzil.net <\/link>的工作。 [注意：从 al-Fatiha 到 al-Nas 的编译 Mushaf 命令是一个共识问题。]",
-    "tab": {
-        "bookmarks": "书签",
-        "popular": "受欢迎的"
+  "no-bookmarks": "您还没有任何书签",
+  "no-recently-read": "您还没有任何读书会",
+  "noble-quran": "尊贵的古兰经",
+  "qgj": {
+    "learning-plans": {
+      "cta": {
+        "all-plans": "查看所有计划",
+        "my-plans": "我的计划"
+      },
+      "desc": {
+        "logged-in": "您是否曾开始一项学习计划却中途偏离正轨？学习计划分为可管理的部分，我们会跟踪您的进度，直到您到达终点线。今天探索我们当前提供的课程",
+        "logged-in-no-plans": "您是否曾开始一项学习计划却中途偏离正轨？学习计划分为可管理的部分，我们会跟踪您的进度，直到您到达终点线。今天探索我们当前提供的课程",
+        "logged-out": "您是否曾开始一项学习计划却中途偏离正轨？学习计划分为可管理的部分，我们会跟踪您的进度，直到您到达终点线。今天探索我们当前提供的课程"
+      },
+      "title": "学习计划"
     },
-    "view-all-bookmarks": "查看所有书签",
-    "voice": {
-        "trigger": "快速访问任何东西"
+    "quran-reading-goals": {
+      "desc": {
+        "logged-out": "您想每天读 10 分钟，一个月读完一本 Juz，还是一年内读完整本《古兰经》？轻松创建自定义目标并跟踪您的进度"
+      },
+      "title": "定制古兰经阅读目标"
     },
-    "welcome": {
-        "title": "这是古兰经月！帮助数百万用户获得《古兰经》的指导。"
-    }
+    "title": "古兰经成长之旅"
+  },
+  "ramadan-activities-cta": "<link>关注<b>全球古兰经日历<\/b>获取每周阅读、启发性播客和反思呼吁！ <\/link>",
+  "read-juz": "读朱兹",
+  "recently-read": "最近阅读",
+  "revelation-order-disclaimer": "此视图显示古兰经中古兰经的时间顺序，基于它们被启示给先知穆罕默德<hover> ﷺ <\/hover>的时间。年表是一个学术观点的主题，一些 Surahs 在不同的时间部分被揭示。此处的排序基于<link> Tanzil.net <\/link>的工作。 [注意：从 al-Fatiha 到 al-Nas 的编译 Mushaf 命令是一个共识问题。]",
+  "tab": {
+    "bookmarks": "书签",
+    "popular": "受欢迎的"
+  },
+  "view-all-bookmarks": "查看所有书签",
+  "voice": {
+    "trigger": "快速访问任何东西"
+  },
+  "welcome": {
+    "title": "这是古兰经月！帮助数百万用户获得《古兰经》的指导。"
+  }
 }

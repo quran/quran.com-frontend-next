@@ -1,0 +1,23 @@
+{
+  "awaiting-confirmation": "",
+  "continue-apple": "",
+  "continue-email": "",
+  "continue-facebook": "",
+  "continue-google": "",
+  "email-placeholder": "",
+  "feature-1": "",
+  "feature-2": "",
+  "feature-3": "",
+  "feature-4": "",
+  "feature-5": "¡Y más!",
+  "feature-6": "<b> Nuevo! </b> Notas y reflexiones.",
+  "login-cta": "",
+  "login-error": {
+    "AuthenticationError": "",
+    "TokenExpiredError": ""
+  },
+  "login-title": "",
+  "other-options": "",
+  "privacy-policy": "",
+  "verify-code": ""
+}

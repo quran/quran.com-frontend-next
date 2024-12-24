@@ -1,26 +1,26 @@
 {
-    "change": "تبدیلی",
-    "curated-station": {
-        "juz-amma": {
-            "description": "قرآن مجید کا آخری سپارہ سنیں۔",
-            "title": "آخری سپارہ"
-        },
-        "popular-recitations": {
-            "description": "تلاوت کی روزانہ کیوریٹ شدہ فیڈ",
-            "title": "مقبول قرات"
-        },
-        "surah-al-kahf": {
-            "description": "سورہ الکہف کو بار بار سنیں۔",
-            "title": "سورہ کہف"
-        },
-        "yaseen-alwaqiah-al-mulk": {
-            "description": "تلاوت کرنے والوں کی ترتیب سے سورتیں۔",
-            "title": "یٰسین، الواقیہ، الملک"
-        }
+  "change": "تبدیل کریں۔",
+  "curated-station": {
+    "juz-amma": {
+      "description": "قرآن مجید کا آخری سپارہ سنیں۔",
+      "title": "آخری پارہ"
     },
-    "curated-stations": "کیوریٹڈ اسٹیشنز",
-    "pause-radio": "وقفہ لیں",
-    "play-radio": "ریڈیو چلائیں۔",
-    "radio-desc": "مختلف قاریوں کے ذریعہ قرآن پاک کی نان اسٹاپ خوبصورت تلاوت سنیں۔",
-    "reciter-stations": "تلاوت کرنے والے اسٹیشنز"
+    "popular-recitations": {
+      "description": "روزانہ کی منتخب کردہ تلاوتیں",
+      "title": "مقبول تلاوتیں"
+    },
+    "surah-al-kahf": {
+      "description": "سورہ الکہف کو بار بار سنیں۔",
+      "title": "سورہ کہف"
+    },
+    "yaseen-alwaqiah-al-mulk": {
+      "description": "منتخب کردہ قاریوں کی تلاوت کردہ سورتیں۔",
+      "title": "یٰسین، الواقعہ، الملک"
+    }
+  },
+  "curated-stations": "منتخب شدہ اسٹیشنز",
+  "pause-radio": "وقفہ لیں",
+  "play-radio": "ریڈیو چلائیں۔",
+  "radio-desc": "مختلف قاریوں کے ذریعہ قرآن پاک کی نان اسٹاپ خوبصورت تلاوت سنیں۔",
+  "reciter-stations": "قاریوں کے اسٹیشنز"
 }

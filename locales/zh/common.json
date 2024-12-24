@@ -1,366 +1,419 @@
 {
-    "about": "关于我们",
-    "and": "和",
-    "announcements": {
-        "auth-onboarding": {
-            "data-sync": {
-                "action": "下一个",
-                "description": "无论您是在手机还是笔记本电脑上使用 Quran.com，您的书签、最后阅读的经文和您的偏好都将可用",
-                "title": "您的数据将在设备间同步<br> <\/br>"
-            },
-            "feedback": {
-                "action": "好，知道了",
-                "description": "感谢您使用 Quran.com，我们很高兴听到您对<link> feedback.quran.com <\/link> 的反馈",
-                "title": "我们想听听你的想法"
-            },
-            "quran-foundation-link": {
-                "action": "下一个",
-                "description": "使用您的 Quran.com 登录名访问 QuranReflect.com — 一个致力于反思古兰经的蓬勃发展的全球社区。",
-                "title": "在 Quran.Foundation 应用程序中使用您的帐户！"
-            },
-            "quran-growth-journey": {
-                "action": "下一个",
-                "description": "保持你的《古兰经》阅读连续性并在实现你的目标方面取得进展，同时养成新的习惯",
-                "title": "开始你的《古兰经》成长之旅！"
-            },
-            "welcome": {
-                "action": "看看有什么新鲜事",
-                "title": "欢迎来到 Quran.com <br> <\/br>用户帐户"
-            }
-        },
-        "collections-announcement": {
-            "slide-1": {
-                "description": "我们很高兴地宣布，现在您可以在“收藏”下对书签进行分组！ <br\/> <br\/> <li> > 添加任意数量的收藏夹 <\/li <\/li> <li <li>为一个或多个收藏夹添加书签<\/li> <li>还有更多！ <\/li>",
-                "title": "书签收藏在这里！"
-            }
-        }
+  "about": "关于我们",
+  "allow": "允许",
+  "and": "和",
+  "announcements": {
+    "auth-onboarding": {
+      "data-sync": {
+        "action": "下一个",
+        "description": "无论您是在手机还是笔记本电脑上使用 Quran.com，您的书签、最后阅读的经文和您的偏好都将可用",
+        "title": "您的数据将在设备间同步<br></br>"
+      },
+      "feedback": {
+        "action": "好，知道了",
+        "description": "感谢您使用 Quran.com，我们很高兴听到您对<link> feedback.quran.com </link> 的反馈",
+        "title": "我们想听听你的想法"
+      },
+      "quran-foundation-link": {
+        "action": "下一个",
+        "description": "使用您的 Quran.com 登录名访问 QuranReflect.com — 一个致力于反思古兰经的蓬勃发展的全球社区。",
+        "title": "在 Quran.Foundation 应用程序中使用您的帐户！"
+      },
+      "quran-growth-journey": {
+        "action": "下一个",
+        "description": "保持你的《古兰经》阅读连续性并在实现你的目标方面取得进展，同时养成新的习惯",
+        "title": "开始你的《古兰经》成长之旅！"
+      },
+      "welcome": {
+        "action": "看看有什么新鲜事",
+        "title": "欢迎来到 Quran.com <br></br>用户帐户"
+      }
     },
-    "aria": {
-        "change-settings": "更改设置",
-        "drawer-close": "关闭抽屉",
-        "msg-close": "关闭消息",
-        "nav-drawer-open": "打开导航抽屉",
-        "play-surah": "播放古兰经{{surahName}}",
-        "select-lng": "选择语言",
-        "sidebar-nav-close": "关闭导航侧边栏"
+    "collections-announcement": {
+      "slide-1": {
+        "description": "我们很高兴地宣布，现在您可以在“收藏”下对书签进行分组！ <br/> <br/> <li> > 添加任意数量的收藏夹 </li </li> <li <li>为一个或多个收藏夹添加书签</li> <li>还有更多！ </li>",
+        "title": "书签收藏在这里！"
+      }
+    }
+  },
+  "aria": {
+    "change-settings": "更改设置",
+    "drawer-close": "关闭抽屉",
+    "msg-close": "关闭消息",
+    "nav-drawer-open": "打开导航抽屉",
+    "play-surah": "播放古兰经{{surahName}}",
+    "select-lng": "选择语言",
+    "sidebar-nav-close": "关闭导航侧边栏"
+  },
+  "audio": {
+    "auto-scroll": {
+      "off": "离开",
+      "on": "在",
+      "title": "播放声音时自动滚屏"
     },
-    "audio": {
-        "auto-scroll": {
-            "off": "离开",
-            "on": "在",
-            "title": "播放声音时自动滚屏"
-        },
-        "displaying": "展示中",
-        "exp-tip": "<span>更改下显示的内容<\/span><br><\/br> <boldSpan>设置<\/boldSpan> > <boldSpan>逐字显示<\/boldSpan>",
-        "exp-tip-no-select": "<span>勾选工具提示显示选项并选择 <br><\/br> 翻译和\/或音译选项<\/span><br><\/br><span> 下 <\/span><boldSpan>设置<\/boldSpan> > <boldSpan>逐字逐句<\/boldSpan><span>，以<\/span><br><\/br> <span>启用此功能.<\/span>",
-        "experience": "经验",
-        "play": "播放音频",
-        "playback-normal": "普通",
-        "playback-speed": "播放速度",
-        "playback-speed-unit": "X",
-        "player": {
-            "close-audio-player": "关闭音频播放器",
-            "currently-playing": "您正在播放",
-            "delay-verse": "每节之间停顿",
-            "download": "下载",
-            "full-surah": "播放整章",
-            "manage-repeat-settings": "管理重复设置",
-            "mismatch": "{{currentReadingChapter}}单击“重新开始”",
-            "pause": "暂停",
-            "pause-audio": "暂停音频",
-            "play": "播放",
-            "play-audio": "播放音频",
-            "play-range": "整体重复次数",
-            "previous-ayah": "上一节",
-            "repeat-1-verse": "重复播放",
-            "repeat-settings": "重复播放设置",
-            "repeat-verse": "每一节重复次数",
-            "search-verse": "搜索章节",
-            "single-verse": "播放单节",
-            "start-over": "重新播放",
-            "start-playing": "开始播放",
-            "stop-repeating": "停止重复播放",
-            "times": "次",
-            "verses-range": "播放多节"
-        },
-        "repeat-moved": "重复播放设置已移至音频播放器。单击<0> <\/0>图标以访问它们",
-        "select-reciter": "选择诵读家",
-        "speed": "速度",
-        "title": "音频"
+    "displaying": "展示中",
+    "exp-tip": "<span>更改下显示的内容</span><br></br> <boldSpan>设置</boldSpan> > <boldSpan>逐字显示</boldSpan>",
+    "exp-tip-no-select": "<span>勾选工具提示显示选项并选择 <br></br> 翻译和/或音译选项</span><br></br><span> 下 </span><boldSpan>设置</boldSpan> > <boldSpan>逐字逐句</boldSpan><span>，以</span><br></br> <span>启用此功能.</span>",
+    "experience": "经验",
+    "play": "播放音频",
+    "playback-normal": "普通",
+    "playback-speed": "播放速度",
+    "playback-speed-unit": "X",
+    "player": {
+      "close-audio-player": "关闭音频播放器",
+      "currently-playing": "您正在播放",
+      "delay-verse": "每节之间停顿",
+      "download": "下载",
+      "full-surah": "播放整章",
+      "manage-repeat-settings": "管理重复设置",
+      "mismatch": "{{currentReadingChapter}}单击“重新开始”",
+      "pause": "暂停",
+      "pause-audio": "暂停音频",
+      "play": "播放",
+      "play-audio": "播放音频",
+      "play-range": "整体重复次数",
+      "previous-ayah": "上一节",
+      "repeat-1-verse": "重复播放",
+      "repeat-settings": "重复播放设置",
+      "repeat-verse": "每一节重复次数",
+      "search-verse": "搜索章节",
+      "single-verse": "播放单节",
+      "start-over": "重新播放",
+      "start-playing": "开始播放",
+      "stop-repeating": "停止重复播放",
+      "times": "次",
+      "verses-range": "播放多节",
+      "volume-control": "音量控制"
     },
-    "ayah": "节",
-    "ayahs": "节",
-    "beta": "测试版",
-    "bookmark": "书签",
-    "bookmarked": "书签",
-    "both": "全选",
-    "cancel": "取消",
-    "click-here": "点击这里",
-    "close": "关闭",
-    "command-bar": {
-        "navigations": "导航",
-        "no-nav-results": "没有导航结果",
-        "placeholder": "你想读什么？",
-        "powered-by": "由 Tarteel.ai 提供支持的语音搜索",
-        "recent-navigations": "最近的导航",
-        "search-by-voice": "语音搜索",
-        "try-navigating": "尝试导航到"
-    },
-    "community": {
-        "cta": "加入社区",
-        "header": "加入由穆斯林建设者和技术人员组成的 QDC 社区。",
-        "sub-header": "注册 Quran.com Discord，参与并与领先的社区建设伊斯兰技术合作。",
-        "title": "社区"
-    },
-    "complete-sign-up": "完成您的注册",
-    "continue": "继续",
-    "copied": "已复制",
-    "copied-to-clipboard": "复制到剪贴板",
-    "copy": "复制",
-    "counter": {
-        "decrease": "减少",
-        "increase": "增加"
-    },
-    "default-description": "古兰经翻译成多种语言，界面简单易用",
-    "developers": "开发者",
-    "display": "展示",
-    "donate": "捐",
-    "donate_monthly": "每月捐款",
-    "donate_once": "捐赠一次",
-    "email-verification": {
-        "check-spam": "没有收到验证邮件？检查您的垃圾邮件收件箱",
-        "email-sent": "我们刚刚向<strong> {{email}} <\/strong>发送了一封电子邮件",
-        "email-verification": "电子邮件验证",
-        "resend-email": "重发电子邮件",
-        "resend-email-in": "在{{remainingTime}}秒内重新发送验证电子邮件...",
-        "verify-code": "验证码"
-    },
-    "error": {
-        "bookmark-sync": "书签不同步。",
-        "email-login-fail": "使用电子邮件登录失败。请再试一次",
-        "general": "出了些问题。请再试一次。",
-        "offline": "看起来你失去了连接。请检查并重试。",
-        "pref-persist-fail": "无法将您的设置同步到云端。"
-    },
-    "feedback": "反馈问题",
-    "fonts": {
-        "15_lines": "15行",
-        "16_lines": "16 行",
-        "code_v1": "King Fahad Complex V1",
-        "code_v2": "King Fahad Complex V2",
-        "font-size": "字体大小",
-        "lines": "线",
-        "qcf-desc": "King Fahad Complex (V1 和 V2) 字体提供更高的质量，但加载时间更长。",
-        "qpc_uthmani_hafs": "QPC Uthmani Hafs",
-        "quran-font": "经文字体",
-        "tajweed": "泰之卫德",
-        "tajweed-desc": "泰之卫德字体显示带有泰之卫德颜色的 Mushaf。 <0>此处是泰之卫德颜色规则<\/0>",
-        "text_indopak": "波斯体",
-        "text_uthmani": "纳斯赫体"
-    },
-    "footer": {
-        "description": "Quran.com是一项持久的施舍。我们希望每个人都能轻松地阅读和学习尊贵的《古兰经》。尊贵的古兰经有很多名字，包括 Al-Quran Al-Kareem、Al-Ketab、Al-Furqan、Al-Maw'itha、Al-Thikr 和 Al-Noor。",
-        "rights": "版权所有",
-        "title": "阅读、学习和学习《古兰经》。"
-    },
-    "form": {
-        "code": "验证码",
-        "email": "电子邮件",
-        "firstName": "名",
-        "lastName": "姓"
-    },
-    "from": "从",
-    "fundraising-sticky-banner": {
-        "cta": "捐",
-        "title": "在这个斋月支持 Quran.com"
-    },
-    "fundraising": {
-        "description": "每月的捐款帮助我们改进 Quran.com 并维持运营，因此我们减少对筹款的关注，而更多地关注创造影响。",
-        "title": "成为每月捐助者"
-    },
-    "help": "帮助",
-    "hizb": "希兹布",
-    "home": "首页",
-    "hours": "小时",
-    "inline": "排队",
-    "input": {
-        "clear": "清除"
-    },
-    "juz": "卷",
-    "language": "语",
-    "languages": "语言",
-    "learn-more": "学到更多",
-    "less": "较少的",
-    "loading": "加载中",
-    "login": "登录",
-    "logout": "登出",
-    "meccan": "麦加",
-    "medinan": "麦地那",
-    "menu": "菜单",
-    "minutes": "分钟",
-    "mobile-apps": "手机App",
-    "mode": "模式",
-    "more": "更多的",
-    "navigate": "导航",
-    "network": "友情链接",
-    "new": "新的！",
-    "next": "下一个",
-    "next-ayah": "下一节文",
-    "no": "不",
-    "none": "无",
-    "off": "离开",
-    "on": "在",
-    "page": "页",
-    "pages": "页面",
-    "pagination-summary": "{{currentResultNumber}} - {{totalNumberOfResults}}搜索结果，共{{endOfResultNumber}}",
-    "pbuh": "真主的祝福降临在他身上",
-    "popular-links": "热门链接",
-    "popup": {
-        "footnote": "每月捐款让我们可以减少对筹款的关注",
-        "text-1": "我们致力于为世界提供古兰经知识和技术，始终免费。",
-        "text-2": "Quran.com 是持续慈善（Sadaqah Jariyah）的绝佳机会。请考虑以每月（或一次性）捐助者的身份投资您的来世。",
-        "title": "亲爱的古兰经伴侣，"
-    },
-    "powered-by": "Powered by",
-    "prev": "以前的",
-    "previous-ayah": "上一节文",
-    "privacy": "隐私",
-    "product-updates": "产品更新",
-    "profile": "轮廓",
-    "q-reflect": "古兰经反射",
-    "quran-com": "Quran.com",
-    "quran-radio": "在线听古兰经",
-    "reading-history": "阅读历史",
-    "reading-preference": {
-        "reading": "诵读",
-        "translation": "翻译"
-    },
-    "recitation": "朗诵",
-    "reciter": "诵读家",
-    "reciter-summary": "逐字朗诵者： <span> {{reciterName}} <\/span> 。单击一个单词以收听其朗读。",
-    "reciters": "朗诵者",
-    "reflect": "参悟",
-    "remove": "消除",
-    "rename": "改名",
-    "retry": "重试",
-    "revelation_order": "天启令",
-    "rub": "鲁布埃尔希兹",
-    "save-to-collection": "保存到收藏",
-    "search-for": "搜索 '{{searchQuery}}'",
-    "search-results": "{{count}}搜索结果",
-    "search": {
-        "filters": "过滤器",
-        "hint": "尝试搜索",
-        "jump-to": "跳到",
-        "no-results": "未找到结果",
-        "no-results-suggestion": "{{searchQuery}} ”的任何匹配搜索结果。尝试搜索不同的关键字。",
-        "popular": "热门搜索",
-        "recent": "最近的搜索",
-        "results": "结果",
-        "show-all": "显示所有结果",
-        "switch-mode": "切换到高级搜索",
-        "title": "搜索"
-    },
-    "seconds": "秒数",
-    "settings": {
-        "no-tafsir-selected": "尚未选择经注",
-        "no-translation-selected": "尚未选择译文",
-        "reading-experience": "阅读体验",
-        "reset-cta": "恢复默认值",
-        "reset-notif": "您的设置已重置为默认设置",
-        "search-reciter": "搜索诵读家",
-        "search-tafsirs": "搜索经注",
-        "search-translations": "搜索翻译",
-        "selected-reciter": "诵读家",
-        "selected-tafsirs": "选择经注",
-        "selected-translations": "选择译文",
-        "show-tooltip-when-playing-audio": "播放声音时显示提示信息",
-        "title": "设置",
-        "tooltip-playing-audio-helper": "播放节文时显示单词翻译",
-        "value-and-other": "{{value}}和{{othersCount}}其他",
-        "value-and-others": "{{value}}和其他{{othersCount}}种译本",
-        "wbw-helper": "直接在单词下方显示对应的意译或音译",
-        "word-tooltip-helper": "鼠标悬停或单击单词时显示其意译或音译"
-    },
-    "share": "分享",
-    "shared": "链接已复制到剪贴板！",
-    "sidebar": {
-        "search-hizb": "搜索 Hizb",
-        "search-juz": "按卷搜索",
-        "search-page": "按页搜索",
-        "search-surah": "按章搜索",
-        "try-navigating-with": "提示：尝试导航"
-    },
-    "sitemap": "网站地图",
-    "sort": {
-        "ascending": "正序",
-        "by": "排序方式",
-        "descending": "倒序"
-    },
-    "style": "风格",
-    "submit": "提交",
-    "surah": "章",
-    "tafsir": {
-        "font-size": "Tafsir 字体大小",
-        "group-message": "{{from}}至{{to}}节的经注",
-        "no-text": "{{tafsirName}}不适用于当前经文。",
-        "surah": "Tafsir Surah",
-        "tafsir-desc": "阅读{{tafsirName}}以了解 Surah {{surahName} {{verseNumber}}的{{surahName}}",
-        "tafsirs-desc": "阅读由值得信赖的 Tafsir 学者撰写的各种 Ayah {{ayahNumber}} of Surah {{surahName}}的 Tafsirs",
-        "title": "经注"
-    },
-    "tarteel": {
-        "app": "Tarteel 应用程序",
-        "name": "Tarteel.ai"
-    },
-    "theme": "主题",
-    "themes": {
-        "auto": "自动",
-        "dark": "暗",
-        "light": "明",
-        "sepia": "棕褐色",
-        "system": "系统",
-        "system-desc": "系统主题自动采用您的明\/暗模式设置"
-    },
-    "to": "到",
-    "tooltip": "工具提示",
-    "tooltip-trans-lang": "翻译成：",
-    "trans-lang": "翻译语言",
-    "translation": "意译",
-    "translations": "翻译",
-    "transliteration": "音译",
-    "type": "类型",
-    "undo": "撤消",
-    "validation": {
-        "invalid-email": "{{field}}必须是有效的电子邮件地址",
-        "invalid-field": "请输入有效的{{field}}值",
-        "required-field": "{{field}}是必需的"
-    },
-    "verse": "节",
-    "verse-bookmark-removed": "已删除节文书签！",
-    "verse-bookmarked": "已添加节文书签！",
-    "verses": "节",
-    "view": "看法",
-    "voice": {
-        "ask-permission": "请启用麦克风权限以开始使用语音搜索",
-        "error": "发生错误，请稍后重试。或下载",
-        "no-permission": "您似乎没有启用麦克风权限。请启用麦克风权限并重试或下载",
-        "not-supported": "您的浏览器似乎不支持麦克风。请尝试不同的浏览器或下载",
-        "suggest": "请开始诵读，经文就会显示",
-        "suggest-subtitle": "用阿拉伯语背诵任何一节经文，这节经文就会出现",
-        "suggest-title": "现在背诵",
-        "voice-search-powered-by": "语音搜索 技术支持单位"
-    },
-    "wbw": "在单词下方显示其译文",
-    "wbw-lang-summary": "逐字翻译来源： <link> {{source}} <\/link> 。此来源独立于诗歌翻译选择。",
-    "wbw-trans-lang": "翻译成：",
-    "wbw-translation": "逐字意译",
-    "wbw-transliteration": "逐字音译",
-    "word-click": {
-        "no-audio": "无音频",
-        "play-audio": "播放音频",
-        "title": "鼠标点击单词时发音"
-    },
-    "word-tooltip": "鼠标悬停在单词上时弹出其译文",
-    "yes": "是的"
+    "repeat-moved": "重复播放设置已移至音频播放器。单击<0> </0>图标以访问它们",
+    "select-reciter": "选择诵读家",
+    "speed": "速度",
+    "title": "音频"
+  },
+  "ayah": "节",
+  "ayahs": "节",
+  "beta": "测试版",
+  "bookmark": "书签",
+  "bookmarked": "书签",
+  "both": "全选",
+  "cancel": "取消",
+  "click-here": "点击这里",
+  "close": "关闭",
+  "command-bar": {
+    "navigations": "导航",
+    "no-nav-results": "没有导航结果",
+    "placeholder": "你想读什么？",
+    "powered-by": "由 Tarteel.ai 提供支持的语音搜索",
+    "recent-navigations": "最近的导航",
+    "search-by-voice": "语音搜索",
+    "try-navigating": "尝试导航到"
+  },
+  "community": {
+    "cta": "加入社区",
+    "header": "加入由穆斯林建设者和技术人员组成的 QDC 社区。",
+    "sub-header": "注册 Quran.com Discord，参与并与领先的社区建设伊斯兰技术合作。",
+    "title": "社区"
+  },
+  "complete-sign-up": "完成您的注册",
+  "consents": {
+    "communication": {
+      "body": "🚀 通过<boldSpan>个性化</boldSpan>有关您的目标进度、保持连续记录并增强您对我们当前功能的使用的通知来加快您的进度。 <br></br> <br></br>我们可以通过电子邮件和其他渠道让您了解最新情况吗？您一切尽在掌控 - 您可以随时在帐户设置中调整这些偏好设置。 <br></br> <br></br>只需选择“允许” <boldSpan>鼓舞人心的提醒</boldSpan>或“现在不”即可拒绝。",
+      "header": "我们很乐意帮助您在《古兰经》成长之旅中保持<boldSpan>承诺和一致性</boldSpan> ！ 📖🌟"
+    }
+  },
+  "continue": "继续",
+  "copied": "已复制",
+  "copied-to-clipboard": "复制到剪贴板",
+  "copy": "复制",
+  "counter": {
+    "decrease": "减少",
+    "increase": "增加"
+  },
+  "default-description": "古兰经翻译成多种语言，界面简单易用",
+  "delete": "删除",
+  "developers": "开发者",
+  "display": "展示",
+  "donate": "捐",
+  "donate_monthly": "每月捐款",
+  "donate_once": "捐赠一次",
+  "edit": "编辑",
+  "email-verification": {
+    "check-spam": "没有收到验证邮件？检查您的垃圾邮件收件箱",
+    "email-sent": "我们刚刚向<strong> {{email}} </strong>发送了一封电子邮件",
+    "email-verification": "电子邮件验证",
+    "resend-email": "重发电子邮件",
+    "resend-email-in": "在{{remainingTime}}秒内重新发送验证电子邮件...",
+    "verify-code": "验证码"
+  },
+  "error": {
+    "MediaVersesRangeLimitExceeded": "您一次最多只能选择{{limit}}节经文。请选择较小的范围。",
+    "bookmark-sync": "书签不同步。",
+    "email-login-fail": "使用电子邮件登录失败。请再试一次",
+    "general": "出了些问题。请再试一次。",
+    "offline": "看起来你失去了连接。请检查并重试。",
+    "pref-persist-fail": "无法将您的设置同步到云端。",
+    "ranges-no-value": "范围开始和结束必须具有值",
+    "ranges-too-many-verses": "*最多{{maxNumberOfVerses}}个章节",
+    "ranges-wrong-order": "起始诗句必须位于结束诗句之前。"
+  },
+  "exciting-updates": "令人兴奋的更新",
+  "feedback": "反馈问题",
+  "fonts": {
+    "15_lines": "15行",
+    "16_lines": "16 行",
+    "code_v1": "King Fahad Complex V1",
+    "code_v2": "King Fahad Complex V2",
+    "font-size": "字体大小",
+    "lines": "线",
+    "qcf-desc": "King Fahad Complex (V1 和 V2) 字体提供更高的质量，但加载时间更长。",
+    "qcf-v4-desc": "Tajweed 字体是在获得双方许可后，使用 Easy Quran - Dar Al Marifa Tajweed Mushaf 和 King Fahad Glorious Quran Printing Complex (KFGQPC) - Uthmanic Hafs V4 Fonts 创建的。",
+    "qpc_uthmani_hafs": "QPC Uthmani Hafs",
+    "quran-font": "经文字体",
+    "quran-font-size": "古兰经字体大小",
+    "tajweed": "泰之卫德",
+    "tajweed-desc": "泰之卫德字体显示带有泰之卫德颜色的 Mushaf。 <0>此处是泰之卫德颜色规则</0>",
+    "tajweed_v4": "法赫德国王综合体 V4",
+    "text_indopak": "波斯体",
+    "text_uthmani": "纳斯赫体",
+    "translation-font-size": "翻译字体大小"
+  },
+  "footer": {
+    "description": "Quran.com是一项持久的施舍。我们希望每个人都能轻松地阅读和学习尊贵的《古兰经》。尊贵的古兰经有很多名字，包括 Al-Quran Al-Kareem、Al-Ketab、Al-Furqan、Al-Maw'itha、Al-Thikr 和 Al-Noor。",
+    "hiring": "我们正在招聘！加入古兰经基金会团队并为我们的使命做出贡献。 <link>立即申请！ </link>",
+    "rights": "版权所有",
+    "title": "阅读、学习和学习《古兰经》。"
+  },
+  "form": {
+    "body": "身体",
+    "code": "验证码",
+    "email": "电子邮件",
+    "firstName": "名",
+    "lastName": "姓",
+    "title": "标题"
+  },
+  "from": "从",
+  "fundraising-sticky-banner": {
+    "cta": "捐",
+    "title": "在最好的日子里赠送！"
+  },
+  "fundraising": {
+    "description": "每月的捐款帮助我们改善 Quran.com 并维持运营，因此我们不再专注于筹款，而是更多地关注创造影响力。",
+    "title": "成为每月捐助者"
+  },
+  "hear-it-pronounced": "点击《古兰经》单词，听发音",
+  "help": "帮助",
+  "hizb": "希兹布",
+  "home": "首页",
+  "hours": "小时",
+  "inline": "排队",
+  "input": {
+    "clear": "清除"
+  },
+  "juz": "卷",
+  "language": "语",
+  "languages": "语言",
+  "learn-more": "学到更多",
+  "learning-plans": "学习计划",
+  "less": "较少的",
+  "loading": "加载中",
+  "login": "登录",
+  "logout": "登出",
+  "meccan": "麦加",
+  "medinan": "麦地那",
+  "menu": "菜单",
+  "minutes": "分钟",
+  "mobile-apps": "手机App",
+  "mode": "模式",
+  "more": "更多的",
+  "my-learning-plans": "我的学习计划",
+  "navigate": "导航",
+  "network": "友情链接",
+  "new": "新的！",
+  "newest": "最新",
+  "next": "下一个",
+  "next-ayah": "下一节文",
+  "no": "不",
+  "no-notifications": "还没有通知",
+  "none": "无",
+  "not-now": "现在不要",
+  "notes": {
+    "title": "我的笔记和思考"
+  },
+  "notification-settings": "通知设置",
+  "notification": {
+    "mark-all-as-read": "标记为已读",
+    "mark-as-read": "标记为已读"
+  },
+  "notifications": "通知",
+  "off": "离开",
+  "oldest": "最老的",
+  "on": "在",
+  "page": "页",
+  "pages": "页面",
+  "pagination-summary": "{{currentResultNumber}} - {{totalNumberOfResults}}搜索结果，共{{endOfResultNumber}}",
+  "pbuh": "真主的祝福降临在他身上",
+  "popular-links": "热门链接",
+  "popup": {
+    "footnote": "每月捐款让我们可以减少对筹款的关注",
+    "text-1": "我们致力于为世界提供古兰经知识和技术，始终免费。",
+    "text-2": "这是持续慈善 (Sadaqa Jariyah) 的绝佳机会。作为每月 (或一次性) 捐赠者，投资您的来世。",
+    "title": "在最好的日子里赠送！"
+  },
+  "powered-by": "Powered by",
+  "prepare-hearts": {
+    "cta": "了解更多",
+    "title": "斋月之后继续努力！"
+  },
+  "prev": "以前的",
+  "previous-ayah": "上一节文",
+  "privacy": "隐私",
+  "product-updates": "产品更新",
+  "profile": "轮廓",
+  "q-reflect": "古兰经反射",
+  "quran-com": "Quran.com",
+  "quran-radio": "在线听古兰经",
+  "reading-history": "阅读历史",
+  "reading-preference": {
+    "reading": "诵读",
+    "translation": "翻译"
+  },
+  "recitation": "朗诵",
+  "reciter": "诵读家",
+  "reciter-summary": "（经 Tafsir Center 友情许可）",
+  "reciters": "朗诵者",
+  "reflect": "参悟",
+  "reflections": "反思",
+  "remove": "消除",
+  "rename": "改名",
+  "retry": "重试",
+  "revelation_order": "天启令",
+  "rub": "鲁布埃尔希兹",
+  "save": "节省",
+  "save-to-collection": "保存到收藏",
+  "search-for": "搜索 '{{searchQuery}}'",
+  "search-results": "{{count}}搜索结果",
+  "search": {
+    "filters": "过滤器",
+    "hint": "尝试搜索",
+    "jump-to": "跳到",
+    "no-results": "未找到结果",
+    "no-results-suggestion": "{{searchQuery}} ”的任何匹配搜索结果。尝试搜索不同的关键字。",
+    "popular": "热门搜索",
+    "recent": "最近的搜索",
+    "results": "结果",
+    "show-all": "显示所有结果",
+    "switch-mode": "切换到高级搜索",
+    "title": "搜索"
+  },
+  "seconds": "秒数",
+  "see-new": "查看最新动态",
+  "settings": {
+    "no-tafsir-selected": "尚未选择经注",
+    "no-translation-selected": "尚未选择译文",
+    "reading-experience": "阅读体验",
+    "reset": "重置",
+    "reset-cta": "恢复默认值",
+    "reset-notif": "您的设置已重置为默认设置",
+    "search-reciter": "搜索诵读家",
+    "search-tafsirs": "搜索经注",
+    "search-translations": "搜索翻译",
+    "selected-reciter": "诵读家",
+    "selected-tafsirs": "选择经注",
+    "selected-translations": "选择译文",
+    "show-tooltip-when-playing-audio": "播放声音时显示提示信息",
+    "title": "设置",
+    "tooltip-playing-audio-helper": "播放节文时显示单词翻译",
+    "value-and-other": "{{value}}和{{othersCount}}其他",
+    "value-and-others": "{{value}}和其他{{othersCount}}种译本",
+    "wbw-helper": "直接在单词下方显示对应的意译或音译",
+    "word-tooltip-helper": "鼠标悬停或单击单词时显示其意译或音译"
+  },
+  "share": "分享",
+  "shared": "链接已复制到剪贴板！",
+  "show-more": "展示更多",
+  "sidebar": {
+    "search-hizb": "搜索 Hizb",
+    "search-juz": "按卷搜索",
+    "search-page": "按页搜索",
+    "search-surah": "按章搜索",
+    "try-navigating-with": "提示：尝试导航"
+  },
+  "sitemap": "网站地图",
+  "sort": {
+    "ascending": "正序",
+    "by": "排序方式",
+    "descending": "倒序"
+  },
+  "style": "风格",
+  "submit": "提交",
+  "subscribe": "订阅",
+  "subscribed": "已订阅",
+  "surah": "章",
+  "tafsir": {
+    "font-size": "Tafsir 字体大小",
+    "group-message": "{{from}}至{{to}}节的经注",
+    "no-text": "{{tafsirName}}不适用于当前经文。",
+    "surah": "Tafsir Surah",
+    "tafsir-desc": "阅读{{tafsirName}}以了解 Surah {{surahName} {{verseNumber}}的{{surahName}}",
+    "tafsirs-desc": "阅读由值得信赖的 Tafsir 学者撰写的各种 Ayah {{ayahNumber}} of Surah {{surahName}}的 Tafsirs",
+    "title": "经注"
+  },
+  "tarteel": {
+    "app": "Tarteel 应用程序",
+    "name": "Tarteel.ai"
+  },
+  "terms-and-conditions": "条款和条件",
+  "theme": "主题",
+  "themes": {
+    "auto": "自动",
+    "dark": "暗",
+    "light": "明",
+    "sepia": "棕褐色",
+    "system": "系统",
+    "system-desc": "系统主题自动采用您的明/暗模式设置"
+  },
+  "to": "到",
+  "tooltip": "工具提示",
+  "tooltip-trans-lang": "翻译成：",
+  "trans-lang": "翻译语言",
+  "translation": "意译",
+  "translations": "翻译",
+  "transliteration": "音译",
+  "type": "类型",
+  "unavailable": "当前不可用",
+  "undo": "撤消",
+  "validation": {
+    "invalid-email": "{{field}}必须是有效的电子邮件地址",
+    "invalid-field": "请输入有效的{{field}}值",
+    "maximum-length": "{{field}}不能超过{{value}}个字符",
+    "minimum-length": "{{field}}必须至少包含{{value}}个字符",
+    "required-field": "{{field}}是必需的"
+  },
+  "verse": "节",
+  "verse-bookmark-removed": "已删除节文书签！",
+  "verse-bookmarked": "已添加节文书签！",
+  "verses": "节",
+  "view": "看法",
+  "voice": {
+    "ask-permission": "请启用麦克风权限以开始使用语音搜索",
+    "error": "发生错误，请稍后重试。或下载",
+    "no-permission": "您似乎没有启用麦克风权限。请启用麦克风权限并重试或下载",
+    "not-supported": "您的浏览器似乎不支持麦克风。请尝试不同的浏览器或下载",
+    "suggest": "请开始诵读，经文就会显示",
+    "suggest-subtitle": "用阿拉伯语背诵任何一节经文，这节经文就会出现",
+    "suggest-title": "现在背诵",
+    "voice-search-powered-by": "语音搜索 技术支持单位"
+  },
+  "wbw": "在单词下方显示其译文",
+  "wbw-lang-summary": "逐字翻译来源： <link> {{source}} </link> 。此来源独立于诗歌翻译选择。",
+  "wbw-trans-lang": "翻译成：",
+  "wbw-translation": "逐字意译",
+  "wbw-transliteration": "逐字音译",
+  "word-click": {
+    "no-audio": "无音频",
+    "play-audio": "播放音频",
+    "title": "鼠标点击单词时发音"
+  },
+  "word-tooltip": "鼠标悬停在单词上时弹出其译文",
+  "yes": "是的"
 }

@@ -1,10 +1,11 @@
+/* eslint-disable max-lines */
 import { useCallback, useState } from 'react';
 
 import { Action } from '@reduxjs/toolkit';
 import groupBy from 'lodash/groupBy';
 import omit from 'lodash/omit';
-import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
+import useTranslation from 'next-translate/useTranslation';
 import { useSelector } from 'react-redux';
 
 import DrawerSearchIcon from '../SearchDrawer/Buttons/DrawerSearchIcon';
@@ -23,7 +24,7 @@ import {
 import SearchQuerySource from '@/types/SearchQuerySource';
 import { makeTranslationsUrl } from '@/utils/apiPaths';
 import { logValueChange, logItemSelectionChange, logEmptySearchResults } from '@/utils/eventLogger';
-import filterTranslations from '@/utils/filter-translations';
+import filterTranslations, { getTranslations } from '@/utils/filter-translations';
 import { getLocaleName } from '@/utils/locale';
 import { TranslationsResponse } from 'types/ApiResponses';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
@@ -74,7 +75,7 @@ const TranslationSelectionBody = () => {
 
         // if unchecked also remove from query param
         if (!isChecked) {
-          removeQueryParam(QueryParam.Translations);
+          removeQueryParam(QueryParam.TRANSLATIONS);
         }
 
         logItemSelectionChange('translation', selectedTranslationId.toString(), isChecked);
@@ -85,7 +86,7 @@ const TranslationSelectionBody = () => {
           setSelectedTranslations({ translations: selectedTranslations, locale: lang }),
         );
         if (nextTranslations.length) {
-          router.query[QueryParam.Translations] = nextTranslations.join(',');
+          router.query[QueryParam.TRANSLATIONS] = nextTranslations.join(',');
           router.push(router, undefined, { shallow: true });
         }
       };
@@ -94,27 +95,23 @@ const TranslationSelectionBody = () => {
   );
 
   const renderTranslationGroup = useCallback(
-    (language, translations) => {
+    (language: string, translations: AvailableTranslation[]) => {
       if (!translations) {
         return <></>;
       }
       return (
         <div className={styles.group} key={language}>
           <div className={styles.language}>{language}</div>
-          {translations
-            .sort((a: AvailableTranslation, b: AvailableTranslation) =>
-              a.authorName.localeCompare(b.authorName),
-            )
-            .map((translation: AvailableTranslation) => (
-              <div key={translation.id} className={styles.item}>
-                <Checkbox
-                  id={translation.id.toString()}
-                  checked={selectedTranslations.includes(translation.id)}
-                  label={translation.translatedName.name}
-                  onChange={onTranslationsChange(translation.id)}
-                />
-              </div>
-            ))}
+          {translations.map((translation: AvailableTranslation) => (
+            <div key={translation.id} className={styles.item}>
+              <Checkbox
+                id={translation.id.toString()}
+                checked={selectedTranslations.includes(translation.id)}
+                label={translation.translatedName.name}
+                onChange={onTranslationsChange(translation.id)}
+              />
+            </div>
+          ))}
         </div>
       );
     },
@@ -146,10 +143,16 @@ const TranslationSelectionBody = () => {
             : data.translations;
 
           if (!filteredTranslations.length) {
-            logEmptySearchResults(searchQuery, SearchQuerySource.TranslationSettingsDrawer);
+            logEmptySearchResults({
+              query: searchQuery,
+              source: SearchQuerySource.TranslationSettingsDrawer,
+            });
           }
 
-          const translationByLanguages = groupBy(filteredTranslations, 'languageName');
+          const translationByLanguages = groupBy(
+            getTranslations(filteredTranslations),
+            'languageName',
+          );
           const selectedTranslationLanguage = getLocaleName(lang).toLowerCase();
           const selectedTranslationGroup = translationByLanguages[selectedTranslationLanguage];
           const translationByLanguagesWithoutSelectedLanguage = omit(translationByLanguages, [

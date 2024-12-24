@@ -1,16 +1,17 @@
 /* eslint-disable i18next/no-literal-string */
 /* eslint-disable max-lines */
-import React from 'react';
 
 import { Action } from '@reduxjs/toolkit';
+import uniqBy from 'lodash/uniqBy';
+import { useRouter } from 'next/router';
 import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
-import { useRouter } from 'next/router';
 import { shallowEqual, useSelector } from 'react-redux';
 
 import Section from './Section';
 import styles from './WordByWordSection.module.scss';
 
+import DataFetcher from '@/components/DataFetcher';
 import Counter from '@/dls/Counter/Counter';
 import Checkbox from '@/dls/Forms/Checkbox/Checkbox';
 import Select, { SelectSize } from '@/dls/Forms/Select';
@@ -18,10 +19,10 @@ import Link, { LinkVariant } from '@/dls/Link/Link';
 import Separator from '@/dls/Separator/Separator';
 import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
 import {
-  setSelectedWordByWordLocale,
   selectReadingPreferences,
-  setWordByWordDisplay,
+  setSelectedWordByWordLocale,
   setWordByWordContentType,
+  setWordByWordDisplay,
   setWordClickFunctionality,
 } from '@/redux/slices/QuranReader/readingPreferences';
 import {
@@ -31,18 +32,14 @@ import {
   increaseWordByWordFontScale,
   selectWordByWordFontScale,
 } from '@/redux/slices/QuranReader/styles';
+import { WordByWordTranslationsResponse } from '@/types/ApiResponses';
 import QueryParam from '@/types/QueryParam';
 import { WordByWordDisplay, WordByWordType, WordClickFunctionality } from '@/types/QuranReader';
+import { makeWordByWordTranslationsUrl } from '@/utils/apiPaths';
 import { removeItemFromArray } from '@/utils/array';
 import { logValueChange } from '@/utils/eventLogger';
 import { getLocaleName } from '@/utils/locale';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
-
-export const WBW_LOCALES = ['en', 'ur', 'id', 'bn', 'tr', 'fa', 'ru', 'hi', 'de', 'ta', 'inh'];
-export const WORD_BY_WORD_LOCALES_OPTIONS = WBW_LOCALES.map((locale) => ({
-  label: getLocaleName(locale),
-  value: locale,
-}));
 
 const WordByWordSection = () => {
   const { t, lang } = useTranslation('common');
@@ -176,32 +173,40 @@ const WordByWordSection = () => {
       <Section.Title isLoading={isLoading}>{t('wbw')}</Section.Title>
       <Section.Row>
         <div className={styles.checkboxContainer}>
-          <Checkbox
-            checked={wordByWordContentType.includes(WordByWordType.Translation)}
-            id="wbw-translation"
-            name="wbw-translation"
-            label={t('translation')}
-            onChange={(isChecked) => onContentTypeChange(true, isChecked)}
-          />
-          <Checkbox
-            checked={wordByWordContentType.includes(WordByWordType.Transliteration)}
-            id="wbw-transliteration"
-            name="wbw-transliteration"
-            label={t('transliteration')}
-            onChange={(isChecked) => onContentTypeChange(false, isChecked)}
-          />
-          <Checkbox
-            checked={wordClickFunctionality === WordClickFunctionality.PlayAudio}
-            id="wbw-recitation"
-            name="wbw-recitation"
-            label={t('recitation')}
-            onChange={onRecitationChange}
-          />
+          <div id="wbw-translation-section">
+            <Checkbox
+              checked={wordByWordContentType.includes(WordByWordType.Translation)}
+              id="wbw-translation"
+              name="wbw-translation"
+              label={t('translation')}
+              onChange={(isChecked) => onContentTypeChange(true, isChecked)}
+            />
+          </div>
+
+          <div id="wbw-transliteration-section">
+            <Checkbox
+              checked={wordByWordContentType.includes(WordByWordType.Transliteration)}
+              id="wbw-transliteration"
+              name="wbw-transliteration"
+              label={t('transliteration')}
+              onChange={(isChecked) => onContentTypeChange(false, isChecked)}
+            />
+          </div>
+
+          <div id="wbw-recitation-section">
+            <Checkbox
+              checked={wordClickFunctionality === WordClickFunctionality.PlayAudio}
+              id="wbw-recitation"
+              name="wbw-recitation"
+              label={t('recitation')}
+              onChange={onRecitationChange}
+            />
+          </div>
+
           <Section.Footer>
             <Trans
               components={{ span: <span className={styles.source} /> }}
               i18nKey="common:reciter-summary"
-              values={{ reciterName: 'Shaikh Wisam Sharieff' }}
             />
           </Section.Footer>
         </div>
@@ -209,14 +214,28 @@ const WordByWordSection = () => {
       <Separator className={styles.separator} />
       <Section.Row>
         <Section.Label>{t('trans-lang')}</Section.Label>
-        <Select
-          size={SelectSize.Small}
-          id="wordByWord"
-          name="wordByWord"
-          options={WORD_BY_WORD_LOCALES_OPTIONS}
-          value={wordByWordLocale}
-          disabled={shouldDisableLanguageSelect}
-          onChange={onWordByWordLocaleChange}
+        <DataFetcher
+          queryKey={makeWordByWordTranslationsUrl(lang)}
+          render={(data: WordByWordTranslationsResponse) => {
+            const uniqueData = uniqBy(data.wordByWordTranslations, 'isoCode');
+
+            const options = uniqueData.map(({ isoCode, languageName }) => ({
+              label: getLocaleName(isoCode) || languageName,
+              value: isoCode,
+            }));
+
+            return (
+              <Select
+                size={SelectSize.Small}
+                id="wordByWord"
+                name="wordByWord"
+                options={options}
+                value={wordByWordLocale}
+                disabled={shouldDisableLanguageSelect}
+                onChange={onWordByWordLocaleChange}
+              />
+            );
+          }}
         />
       </Section.Row>
       <Section.Footer>
@@ -228,29 +247,31 @@ const WordByWordSection = () => {
           values={{ source: 'quranwbw' }}
         />
       </Section.Footer>
-      <Section.Label>
-        <p className={styles.label}>{t('display')}</p>
-      </Section.Label>
-      <Section.Row>
-        <div className={styles.checkboxContainer}>
-          <Checkbox
-            checked={wordByWordDisplay.includes(WordByWordDisplay.INLINE)}
-            id="inline"
-            name="inline"
-            label={t('inline')}
-            disabled={shouldDisableWordByWordDisplay}
-            onChange={(isChecked) => onDisplaySettingChange(true, isChecked)}
-          />
-          <Checkbox
-            checked={wordByWordDisplay.includes(WordByWordDisplay.TOOLTIP)}
-            id="tooltip"
-            name="word-tooltip"
-            label={t('tooltip')}
-            disabled={shouldDisableWordByWordDisplay}
-            onChange={(isChecked) => onDisplaySettingChange(false, isChecked)}
-          />
-        </div>
-      </Section.Row>
+      <div id="wbw-display-section">
+        <Section.Label>
+          <p className={styles.label}>{t('display')}</p>
+        </Section.Label>
+        <Section.Row>
+          <div className={styles.checkboxContainer}>
+            <Checkbox
+              checked={wordByWordDisplay.includes(WordByWordDisplay.INLINE)}
+              id="inline"
+              name="inline"
+              label={t('inline')}
+              disabled={shouldDisableWordByWordDisplay}
+              onChange={(isChecked) => onDisplaySettingChange(true, isChecked)}
+            />
+            <Checkbox
+              checked={wordByWordDisplay.includes(WordByWordDisplay.TOOLTIP)}
+              id="tooltip"
+              name="word-tooltip"
+              label={t('tooltip')}
+              disabled={shouldDisableWordByWordDisplay}
+              onChange={(isChecked) => onDisplaySettingChange(false, isChecked)}
+            />
+          </div>
+        </Section.Row>
+      </div>
       <Section.Row>
         <Section.Label>{t('fonts.font-size')}</Section.Label>
         <Counter

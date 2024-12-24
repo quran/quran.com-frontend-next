@@ -12,7 +12,6 @@ import useGetQueryParamOrReduxValue from '@/hooks/useGetQueryParamOrReduxValue';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import { getFontClassName } from '@/utils/fontFaceHelper';
 import QueryParam from 'types/QueryParam';
-import { QuranFont } from 'types/QuranReader';
 
 const TRANSLATION_TEXT_SAMPLE =
   'He has revealed to you ˹O Prophet˺ the Book in truth, confirming what came before it, as He revealed the Torah and the Gospel';
@@ -24,14 +23,12 @@ interface Props {
 
 const TranslationViewCellSkeleton: React.FC<Props> = ({ hasActionMenuItems = true }) => {
   const { value: selectedTranslations }: { value: number[] } = useGetQueryParamOrReduxValue(
-    QueryParam.Translations,
+    QueryParam.TRANSLATIONS,
   );
   const { quranFont, quranTextFontScale, translationFontScale, mushafLines } = useSelector(
     selectQuranReaderStyles,
     shallowEqual,
   );
-
-  const isTajweedFont = quranFont === QuranFont.Tajweed;
 
   return (
     <div className={classNames(cellStyles.cellContainer, skeletonStyles.cellContainer)}>
@@ -52,14 +49,15 @@ const TranslationViewCellSkeleton: React.FC<Props> = ({ hasActionMenuItems = tru
         )}
       </div>
 
-      {/* We're not using VersePreview as Skeleton's children here 
+      {/* We're not using VersePreview as Skeleton's children here
       because it has layout shift problem when loading the font. Which is not ideal for skeleton */}
       <div className={cellStyles.contentContainer}>
         <Skeleton
-          className={classNames(skeletonStyles.verseContainer, cellStyles.arabicVerseContainer, {
-            [verseTextStyles[getFontClassName(quranFont, quranTextFontScale, mushafLines)]]:
-              !isTajweedFont,
-          })}
+          className={classNames(
+            skeletonStyles.verseContainer,
+            cellStyles.arabicVerseContainer,
+            verseTextStyles[getFontClassName(quranFont, quranTextFontScale, mushafLines)],
+          )}
         />
         <div
           className={classNames(

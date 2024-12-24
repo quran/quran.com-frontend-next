@@ -1,0 +1,62 @@
+{
+  "add-another-note": "Tambah nota lain",
+  "body-placeholder": "Gunakan ruang ini untuk menyimpan nota am atau untuk menulis refleksi.",
+  "checkbox-refl-intro": {
+    "checkbox": {
+      "desc": "<li> Perkongsian(Posting) refleksi anda akan di siarkan di QuranReflect di bawah nama anda di mana ia akan disemak oleh pasukan \"moderator\" dan boleh dilihat oleh komuniti QuranReflect. <\/li> <li> Setelah refleksi anda disemak dan diluluskan oleh pasukan \"moderator\" anda mungkin menerima reaksi \"SUKA\", jawab balas, atau ulasan. Anda akan menerima \"Notifikasi\".  Setelah melog-masuk ke QuranReflect, anda boleh mengemas kini tetapan pemberitahuan anda untuk disesuaikan dengan pilihan anda. <\/li> <li> Anda boleh melihat nota anda dan berkongsi  refleksi di bawah profil log masuk Quran.com dalam bahagian \"Nota dan Renungan Saya\", atau log masuk ke <link> QuranReflect <\/link> menggunakan tanda Quran.com melalui e-mel. <\/li>",
+      "title": "Apa yang berlaku jika saya menanda kotak ini?"
+    },
+    "post-button": "Apa yang berlaku apabila saya berkongsi renungan di QuranReflect?",
+    "qr-intro": "QuranReflect dan Quran.com, adalah dalam naungan Quran.Foundation. Ia adalah platform sosial untuk berkongsi refleksi tentang Al-Quran, menggalakkan pengguna untuk menghayati mesejnya dan berkongsi pandangan yang memberi inspirasi kepada perubahan positif dalam berinteraksi dengan al Quran. Berbeza dengan tafsir yang merupakan tafsiran ilmiah, muhasabah adalah pemikiran dan pengalaman peribadi yang berkaitan dengan ayat-ayat tersebut. Perkongsian; renungan pengguna ke QuranReflect disemak dan dikendalikan oleh pasukan yang berkelayakan, yang akan membantu memastikan kualiti kandungan, etika semasa berinteraksi dengan Al-Quran, dan mereka akan memperkasakan pengguna dengan berkongsi maklum balas dan menyerlahkan wacana berharga sekali gus memupuk semangat rohani, komuniti berfokuskan Al-Quran . Ketahui lebih lanjut: <link> Quranreflect.com\/faq <\/link>",
+    "title": "Apakah itu QuranReflect dan apa yang berlaku jika saya menanda kotak ini?"
+  },
+  "click-to-see-more": "klik untuk melihat lebih lanjut",
+  "delete-note": "Padam nota",
+  "delete-note-modal": {
+    "subtitle": "Adakah anda pasti mahu memadamkan nota?",
+    "title": "Padam nota"
+  },
+  "delete-success": "Nota telah dipadamkan",
+  "empty-notes": "Tiada nota ditemui",
+  "empty-reflections": "Tiada catatan ditemui",
+  "export-success": "Catatan telah diterbitkan ke akaun anda di QuranReflect ",
+  "new-note-reflc-intro": {
+    "reflc-prompts": {
+      "deeper": {
+        "desc": "<li> Adakah terdapat nama-nama Allah yang disebut, dan bagaimana kaitannya dengan ayat tersebut? <\/li> <li> Perkataan atau aspek linguistik manakah yang menarik perhatian anda? <\/li> <li> Bolehkah anda membuat kaitan dengan konteks ayat, ayat al-Quran, hadis, atau peristiwa lain? <\/li>",
+        "title": "Reflesi yang Lebih Dalam:"
+      },
+      "personal": {
+        "desc": "<li> Bagaimana ayat ini telah menyentuh atau memberi inspirasi kepada anda? <\/li> <li> Adakah sebarang kualiti atau tindakan yang dinyatakan yang boleh anda perbaiki? <\/li> <li> Adakah terdapat janji atau amaran\/larangan yang boleh anda gunakan dalam hidup anda? <\/li> <li> Adakah anda mempunyai kisah peribadi yang berkaitan dengan ayat ini? <\/li> <li> Apakah perubahan yang anda ingin lakukan berdasarkan ayat ini, dan bagaimanakah anda atau orang lain boleh melaksanakannya secara praktikal? <\/li>",
+        "title": "Soalan Untuk Tingkatkan Penghayatan"
+      },
+      "title": "Gesaan Refleksi"
+    },
+    "title": "Perlukan bantuan untuk merenung Al-Quran? Ketahui lebih lanjut",
+    "what-is-reflc": {
+      "desc": "Merenung  Al-Qur'an melibatkan pembacaan atau pendengaran dengan teliti, memahami dan mendalami maknanya, hingga dapat mempengaruhi peningkatan dalam diri. Ini disebut sebagai \"Tadabbur\". Tafsir, sebaliknya, adalah penafsiran ilmiah terhadap Al-Qur'an, yang memberikan penjelasan rinci tentang ayat-ayatnya berdasarkan sumber-sumber klasik dan analisis ilmiah. Meskipun Tafsir diperuntukkan bagi para ulama, Allah ﷻ meminta setiap orang untuk melakukan Tadabbur (Quran <link1> 38:29 <\/link1> , <link2> 47:24 <\/link2> , <link3> 4:82 <\/link3> , dan masih banyak lagi). <br><\/br> <br><\/br> Pengguna dapat menyimpan catatan dan refleksi pribadi mereka secara pribadi. Seringkali refleksi kita dapat menyentuh  pembaca dan sekaligus dapat membantu hubungan mereka dengan Al-Quran, dan hubungan mereka dengan Allah ﷻ. \\nDengan tujuan ini, kami berusaha untuk menyediakan ruang selamat untuk orang ramai berkongsi pengalaman peribadi supaya dapat menginspirasikan interaksi dan pengembaraan al Quran yang lebih bermakna untuk semua pembaca. Untuk mempelajari lebih lanjut, kunjungi: <link4> QuranReflect.com\/faq <\/link4> dan <link5> Lima Lensa untuk Merenungkan Al-Quran \\n<\/link5>",
+      "title": "Apakah Refleksi?"
+    }
+  },
+  "note": "Catatan",
+  "notes-and-reflcs": "Nota & Renungan",
+  "post-on-qr": "Kongsikan di QuranReflect",
+  "posted-reflections": "Refleksi yang telah disiarkan",
+  "private-notes": "Nota",
+  "qr-tooltip": "<span> <link> QuranReflect <\/link> ialah platform sosial untuk berkongsi refleksi tentang Al-Quran. Berinteraksi dengan Al-Quran, dan berhubung dengan perkara yang penting. <\/span>",
+  "reflections-intro": {
+    "line-1": "Untuk melihat dan berinteraksi dengan ulasan, melibatkan diri dengan komuniti dan melakukan lebih banyak lagi, lawati <link> QuranReflect.com <\/link> .",
+    "line-2": "Anda boleh log masuk ke akaun QuranReflect anda yang dipautkan dengan log masuk atau mendaftar dengan e-mel Quran.com yang sama yang digunakan dalam log masuk anda.",
+    "line-3": "Kandungan yang tidak sesuai untuk dilihat umum akan disembunyikan atau dipadamkan. Pengguna yang menyiarkan kandungan yang tidak sesuai akan disekat.",
+    "title": "Ketahui lebih lanjut tentang Refleksi yang Disiarkan"
+  },
+  "save-post-to-qr": "Simpan & Kongsi ke QuranReflect",
+  "save-privately": "Simpan Secara Persendirian",
+  "save-publish-failed": "Nota telah berjaya disimpan tetapi gagal untuk diterbitkan",
+  "save-success": "Nota telah berjaya disimpan",
+  "share-to-qr": "Kongsi ke QuranReflect.com",
+  "share-to-qr-desc": "Kongsi sebagai <b> {{name}} <\/b> . Penonton ialah <b> pengguna QuranReflect <\/b>",
+  "update-publish-failed": "Nota telah berjaya dikemas kini tetapi gagal untuk diterbitkan",
+  "update-success": "Nota telah berjaya dikemas kini",
+  "view-on-qr": "Lihat di QuranReflect"
+}

@@ -1,0 +1,107 @@
+{
+  "checklist": {
+    "1": "主页特色",
+    "2": "自定义您的设置",
+    "3": "丰富您的 Ayah 阅读体验",
+    "4": "个性化功能"
+  },
+  "finish": "结束",
+  "onboarding-checklist": "入职清单",
+  "onboarding-title": "最大化您的 Quran.com 体验！ <br></br>立即开始您的游览：",
+  "previous": "以前的",
+  "skip": "跳过",
+  "steps": {
+    "3-dot-menu": {
+      "description": "单击三点菜单可找到用于复制、添加书签和重复经文的选项。发现重复经文的各种选项",
+      "title": "3 点菜单"
+    },
+    "ayah-reflection": {
+      "description": "阅读学者、知识学生和普通人的反思 (tadabbur)，以帮助您与《古兰经》建立更个人化的联系",
+      "title": "阅读 ayah 层面的反思"
+    },
+    "ayah-tafsir": {
+      "description": "在阿亚级别探索 Tafsir，提供详细的见解，以增强您在阅读时的理解。 （塔夫西尔可以在适当的时候分为多节经文）",
+      "title": "阅读 Ayah 级别的 Tafsir"
+    },
+    "font-size": {
+      "description": "使用易于调整的字体大小自定义您的《古兰经》阅读，以获得舒适的阅读体验",
+      "title": "字体大小"
+    },
+    "font-style": {
+      "description": "选项包括 Uthmani - King Fahad Complex v1、Uthmani - King Fahad Complex v2、Uthmani QPC Hafs、Indopak 15 线、Indopak 16 线",
+      "title": "选择您喜欢的阅读脚本"
+    },
+    "inline-wbw": {
+      "description": "聆听《古兰经》时，查看行中（单词下方）或单词上方气泡中每个单词的翻译",
+      "title": "内嵌显示逐字翻译（在单词下方）或显示工具提示"
+    },
+    "juz": {
+      "description": "查看 Juz 的《古兰经》",
+      "title": "查看 Juz 的《古兰经》"
+    },
+    "listen": {
+      "description": "启动音频播放器听朗诵",
+      "title": "聆听古兰经或阿亚"
+    },
+    "login": {
+      "description": "跨设备登录并保存设置并访问其他功能。",
+      "title": "登录"
+    },
+    "quran-radio": {
+      "description": "收听 QuranRadio - 播放无广告的《古兰经》",
+      "title": "古兰经电台"
+    },
+    "reading-sessions": {
+      "description": "浏览您的个性化阅读历史记录，轻松回顾您的《古兰经》之旅，跟踪您在 Quran.com 上探索过的经文。",
+      "title": "查看阅读历史"
+    },
+    "reading-view": {
+      "description": "以阅读穆沙夫模式查看《古兰经》",
+      "title": "阅读模式"
+    },
+    "search-bar": {
+      "description": "使用我们的搜索栏查找您正在寻找的经文、古兰经、关键词、章节和主题",
+      "title": "搜索栏"
+    },
+    "select-reciter": {
+      "description": "选择您最喜欢听的朗诵者来个性化您的聆听体验！",
+      "title": "从各种朗诵者中选择来聆听"
+    },
+    "settings": {
+      "description": "控制您的偏好",
+      "title": "设置"
+    },
+    "streak": {
+      "description": "通过我们的阅读连续阅读和计划功能，设置个性化的阅读目标、跟踪您的进度并建立一致的《古兰经》阅读习惯。",
+      "title": "跟踪阅读次数和阅读计划"
+    },
+    "surah-info": {
+      "description": "了解每个 Surah 的见解 - 位于每个 Surah 的开头，位置便利",
+      "title": "阅读《古兰经》"
+    },
+    "theme": {
+      "description": "选择您最喜欢的外观 - 浅色、棕褐色或深色模式 - 以获得舒适且个性化的《古兰经》阅读体验。",
+      "title": "在浅色、棕褐色或深色模式下阅读《古兰经》"
+    },
+    "translations": {
+      "description": "从多种语言的各种翻译中进行选择。提示：通过选择多个选项来比较翻译",
+      "title": "翻译"
+    },
+    "voice-search": {
+      "description": "点击麦克风图标并背诵您正在搜索的经文。小建议！要发现有人在哪里背诵（例如 Taraweeh 祈祷），请点击麦克风图标。检测到一两节经文后，按停止键查找位置",
+      "title": "语音搜索（Tarteel）"
+    },
+    "wbw-audio": {
+      "description": "选择此选项，只需单击单词即可单独收听每个单词！",
+      "title": "点击单词即可收听逐字音译"
+    },
+    "wbw-translation": {
+      "description": "在阅读或聆听《古兰经》时查看各个单词的含义，以帮助您增强《古兰经》词汇量",
+      "title": "逐字阅读翻译"
+    },
+    "wbw-transliteration": {
+      "description": "查看每个单词的音译，为您的《古兰经》阅读之旅提供帮助",
+      "title": "逐字读音译"
+    }
+  }
+}

@@ -10,6 +10,7 @@ import styles from './Page.module.scss';
 import Link, { LinkVariant } from '@/dls/Link/Link';
 import BackIcon from '@/icons/west.svg';
 import { getImageUrl } from '@/lib/sanity';
+import { getProductUpdatesUrl } from '@/utils/navigation';
 
 interface Props {
   page: any;
@@ -46,7 +47,11 @@ const Page: React.FC<Props> = ({ page, isIndividualPage = false }) => {
           </>
         ) : (
           <>
-            <Link href={`/product-updates/${page.slug.current}`} shouldPrefetch={false}>
+            <Link
+              variant={LinkVariant.Blend}
+              href={getProductUpdatesUrl(page.slug.current)}
+              shouldPrefetch={false}
+            >
               {pageTitle}
             </Link>
             {page.summary}

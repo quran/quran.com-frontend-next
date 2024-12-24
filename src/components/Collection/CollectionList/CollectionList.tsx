@@ -1,8 +1,8 @@
 /* eslint-disable max-lines */
 import { useState } from 'react';
 
-import useTranslation from 'next-translate/useTranslation';
 import Link from 'next/link';
+import useTranslation from 'next-translate/useTranslation';
 import useSWR from 'swr';
 
 import CollectionSorter from '../CollectionSorter/CollectionSorter';
@@ -116,7 +116,7 @@ const CollectionList = () => {
         <div className={styles.collectionListContainer}>
           <div>
             <div className={styles.itemContainer}>
-              <Link href="/collections/all">
+              <Link href="/collections/all" legacyBehavior>
                 <div>
                   <div className={styles.itemTitle}>{t('collection:all-saved-verses')}</div>
                   <div className={styles.itemInfo}>
@@ -138,7 +138,7 @@ const CollectionList = () => {
             return (
               <div key={collection.id}>
                 <div className={styles.itemContainer}>
-                  <Link href={`/collections/${collection.url}`}>
+                  <Link href={`/collections/${collection.url}`} legacyBehavior>
                     <div>
                       <div className={styles.itemTitle}>{collection.name}</div>
                       <div className={styles.itemInfo}>

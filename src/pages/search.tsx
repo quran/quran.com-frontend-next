@@ -1,14 +1,15 @@
+/* eslint-disable react-func/max-lines-per-function */
 /* eslint-disable max-lines */
-import React, { useState, useEffect, useMemo, useCallback, useRef, RefObject } from 'react';
+import { RefObject, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import { GetStaticProps, NextPage } from 'next';
-import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
-import { useSelector } from 'react-redux';
+import useTranslation from 'next-translate/useTranslation';
+import { useDispatch } from 'react-redux';
 
 import styles from './search.module.scss';
 
-import { getAvailableLanguages, getAvailableTranslations, getSearchResults } from '@/api';
+import { getAvailableLanguages, getAvailableTranslations } from '@/api';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import TranslationsFilter from '@/components/Search/Filters/TranslationsFilter';
 import SearchBodyContainer from '@/components/Search/SearchBodyContainer';
@@ -20,21 +21,17 @@ import useDebounce from '@/hooks/useDebounce';
 import useFocus from '@/hooks/useFocusElement';
 import FilterIcon from '@/icons/filter.svg';
 import SearchIcon from '@/icons/search.svg';
-import { getTranslationsInitialState } from '@/redux/defaultSettings/util';
-import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
 import SearchQuerySource from '@/types/SearchQuerySource';
-import { areArraysEqual } from '@/utils/array';
 import { getAllChaptersData } from '@/utils/chapter';
-import {
-  logButtonClick,
-  logEmptySearchResults,
-  logEvent,
-  logTextSearchQuery,
-  logValueChange,
-} from '@/utils/eventLogger';
+import { logButtonClick, logEvent, logValueChange } from '@/utils/eventLogger';
 import filterTranslations from '@/utils/filter-translations';
 import { getLanguageAlternates, toLocalizedNumber } from '@/utils/locale';
 import { getCanonicalUrl } from '@/utils/navigation';
+import {
+  addToSearchHistory,
+  getDefaultTranslationIdsByLang,
+  searchGetResults,
+} from '@/utils/search';
 import { SearchResponse } from 'types/ApiResponses';
 import AvailableLanguage from 'types/AvailableLanguage';
 import AvailableTranslation from 'types/AvailableTranslation';
@@ -52,14 +49,13 @@ type SearchProps = {
 const Search: NextPage<SearchProps> = ({ translations }): JSX.Element => {
   const { t, lang } = useTranslation('common');
   const router = useRouter();
-  const userTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [focusInput, searchInputRef]: [() => void, RefObject<HTMLInputElement>] = useFocus();
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [selectedLanguages, setSelectedLanguages] = useState<string>('');
-  const [selectedTranslations, setSelectedTranslations] = useState<string>(() =>
-    userTranslations.join(','),
-  );
+  const [selectedTranslations, setSelectedTranslations] = useState<string>(() => {
+    return getDefaultTranslationIdsByLang(translations, lang) as string;
+  });
   const [translationSearchQuery, setTranslationSearchQuery] = useState('');
   const [isContentModalOpen, setIsContentModalOpen] = useState<boolean>(false);
   const [isSearching, setIsSearching] = useState(false);
@@ -67,6 +63,7 @@ const Search: NextPage<SearchProps> = ({ translations }): JSX.Element => {
   const [searchResult, setSearchResult] = useState<SearchResponse>(null);
   // Debounce search query to avoid having to call the API on every type. The API will be called once the user stops typing.
   const debouncedSearchQuery = useDebounce<string>(searchQuery, DEBOUNCING_PERIOD_MS);
+  const dispatch = useDispatch();
   // the query params that we want added to the url
   const queryParams = useMemo(
     () => ({
@@ -89,6 +86,11 @@ const Search: NextPage<SearchProps> = ({ translations }): JSX.Element => {
       focusInput();
     }
   }, [focusInput, router, isContentModalOpen]);
+
+  // handle when language changes
+  useEffect(() => {
+    setSelectedTranslations(getDefaultTranslationIdsByLang(translations, lang) as string);
+  }, [lang, translations]);
 
   useEffect(() => {
     if (router.query.q || router.query.query) {
@@ -141,32 +143,17 @@ const Search: NextPage<SearchProps> = ({ translations }): JSX.Element => {
    */
   const getResults = useCallback(
     (query: string, page: number, translation: string, language: string) => {
-      setIsSearching(true);
-      logTextSearchQuery(query, SearchQuerySource.SearchPage);
-      getSearchResults({
+      searchGetResults(
+        SearchQuerySource.SearchPage,
         query,
-        filterLanguages: language,
-        size: PAGE_SIZE,
         page,
-        ...(translation && { filterTranslations: translation }), // translations will be included only when there is a selected translation
-      })
-        .then((response) => {
-          if (response.status === 500) {
-            setHasError(true);
-          } else {
-            setSearchResult(response);
-            // if there is no navigations nor verses in the response
-            if (response.pagination.totalRecords === 0 && !response.result.navigation.length) {
-              logEmptySearchResults(query, SearchQuerySource.SearchPage);
-            }
-          }
-        })
-        .catch(() => {
-          setHasError(true);
-        })
-        .finally(() => {
-          setIsSearching(false);
-        });
+        PAGE_SIZE,
+        setIsSearching,
+        setHasError,
+        setSearchResult,
+        language,
+        translation,
+      );
     },
     [],
   );
@@ -182,6 +169,8 @@ const Search: NextPage<SearchProps> = ({ translations }): JSX.Element => {
       if (!isInitialSearch.current) {
         setCurrentPage(1);
       }
+
+      addToSearchHistory(dispatch, debouncedSearchQuery, SearchQuerySource.SearchPage);
 
       getResults(
         debouncedSearchQuery,
@@ -238,7 +227,9 @@ const Search: NextPage<SearchProps> = ({ translations }): JSX.Element => {
 
     if (!firstSelectedTranslation) return t('search:all-translations');
 
-    if (selectedTranslationsArray.length === 1) selectedValueString = firstSelectedTranslation.name;
+    if (selectedTranslationsArray.length === 1) {
+      selectedValueString = firstSelectedTranslation.name;
+    }
     if (selectedTranslationsArray.length === 2) {
       selectedValueString = t('settings.value-and-other', {
         value: firstSelectedTranslation?.name,
@@ -261,8 +252,12 @@ const Search: NextPage<SearchProps> = ({ translations }): JSX.Element => {
 
   const onResetButtonClicked = () => {
     logButtonClick('search_page_reset_button');
-    const defaultTranslations = getTranslationsInitialState(lang).selectedTranslations;
-    onTranslationChange(defaultTranslations.map((translation) => translation.toString()));
+    const defaultLangTranslationIds = getDefaultTranslationIdsByLang(
+      translations,
+      lang,
+      false,
+    ) as string[];
+    onTranslationChange(defaultLangTranslationIds);
   };
 
   const onTranslationSearchQueryChange = (newTranslationSearchQuery: string) => {
@@ -327,7 +322,7 @@ const Search: NextPage<SearchProps> = ({ translations }): JSX.Element => {
                       onClearClicked={onTranslationSearchClearClicked}
                       clearable
                       value={translationSearchQuery}
-                      placeholder={t('search.title')}
+                      placeholder={t('settings.search-translations')}
                       fixedWidth={false}
                       variant={InputVariant.Main}
                     />
@@ -360,7 +355,11 @@ const Search: NextPage<SearchProps> = ({ translations }): JSX.Element => {
               >
                 {t('search:filter')}
               </Button>
-              <div>{formattedSelectedTranslations}</div>
+              <div>
+                {/* eslint-disable-next-line i18next/no-literal-string */}
+                <span className={styles.searching}>{t('search:searching-translations')}: </span>
+                {formattedSelectedTranslations}
+              </div>
             </div>
           </div>
         </div>
@@ -385,30 +384,39 @@ const Search: NextPage<SearchProps> = ({ translations }): JSX.Element => {
 };
 
 export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  const [availableLanguagesResponse, availableTranslationsResponse] = await Promise.all([
-    getAvailableLanguages(locale),
-    getAvailableTranslations(locale),
-  ]);
+  try {
+    const [availableLanguagesResponse, availableTranslationsResponse] = await Promise.all([
+      getAvailableLanguages(locale),
+      getAvailableTranslations(locale),
+    ]);
 
-  let translations = [];
-  let languages = [];
-  if (availableLanguagesResponse.status !== 500) {
-    const { languages: responseLanguages } = availableLanguagesResponse;
-    languages = responseLanguages;
-  }
-  if (availableTranslationsResponse.status !== 500) {
-    const { translations: responseTranslations } = availableTranslationsResponse;
-    translations = responseTranslations;
-  }
-  const chaptersData = await getAllChaptersData(locale);
+    let translations = [];
+    let languages = [];
+    if (availableLanguagesResponse.status !== 500) {
+      const { languages: responseLanguages } = availableLanguagesResponse;
+      languages = responseLanguages;
+    }
+    if (availableTranslationsResponse.status !== 500) {
+      const { translations: responseTranslations } = availableTranslationsResponse;
+      translations = responseTranslations;
+    }
+    const chaptersData = await getAllChaptersData(locale);
 
-  return {
-    props: {
-      chaptersData,
-      languages,
-      translations,
-    },
-  };
+    return {
+      props: {
+        chaptersData,
+        languages,
+        translations,
+      },
+    };
+  } catch (e) {
+    console.log(e);
+    return {
+      props: {
+        hasError: true,
+      },
+    };
+  }
 };
 
 export default Search;

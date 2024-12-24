@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import React, { useRef, useEffect, useCallback, ReactNode } from 'react';
 
 import classNames from 'classnames';
@@ -41,6 +42,8 @@ interface Props {
   hideCloseButton?: boolean;
   children: ReactNode;
   closeOnNavigation?: boolean;
+  canCloseDrawer?: boolean;
+  bodyId?: string;
 }
 
 /**
@@ -76,6 +79,13 @@ const logDrawerCloseEvent = (type: string, actionSource: string) => {
   logEvent(`drawer_${type}_close_${actionSource}`);
 };
 
+enum ActionSource {
+  Click = 'click',
+  EscKey = 'esc_key',
+  OutsideClick = 'outside_click',
+  Navigation = 'navigation',
+}
+
 const Drawer: React.FC<Props> = ({
   type,
   side = DrawerSide.Right,
@@ -83,32 +93,39 @@ const Drawer: React.FC<Props> = ({
   children,
   hideCloseButton = false,
   closeOnNavigation = true,
+  canCloseDrawer = true,
+  bodyId,
 }) => {
   const { isVisible: isNavbarVisible } = useSelector(selectNavbar, shallowEqual);
   const drawerRef = useRef(null);
   const dispatch = useDispatch();
   const navbar = useSelector(selectNavbar, shallowEqual);
   const isOpen = getIsOpen(type, navbar);
+  // when the drawer is open and the onboarding is not active.
   usePreventBodyScrolling(isOpen);
   const router = useRouter();
 
   const closeDrawer = useCallback(
-    (actionSource = 'click') => {
+    (actionSource: ActionSource = ActionSource.Click) => {
+      if (!canCloseDrawer) {
+        return;
+      }
+
       dispatch({ type: getActionCreator(type), payload: false });
       if (type === DrawerType.Search) {
         dispatch({ type: stopSearchDrawerVoiceFlow.type });
       }
       logDrawerCloseEvent(type, actionSource);
     },
-    [dispatch, type],
+    [dispatch, type, canCloseDrawer],
   );
-  // enableOnTags is added for when Search Drawer's input field is focused or when Settings Drawer's select input is focused
+  // enableOnFormTags is added for when Search Drawer's input field is focused or when Settings Drawer's select input is focused
   useHotkeys(
     'Escape',
     () => {
-      closeDrawer('esc_key');
+      closeDrawer(ActionSource.EscKey);
     },
-    { enabled: isOpen, enableOnTags: ['INPUT', 'SELECT'] },
+    { enabled: isOpen, enableOnFormTags: ['INPUT', 'SELECT'] },
   );
 
   useEffect(() => {
@@ -120,7 +137,7 @@ const Drawer: React.FC<Props> = ({
     // Hide navbar after successful navigation
     router.events.on('routeChangeComplete', () => {
       if (isOpen && closeOnNavigation) {
-        closeDrawer('navigation');
+        closeDrawer(ActionSource.Navigation);
       }
     });
   }, [closeDrawer, dispatch, router.events, isNavbarVisible, isOpen, closeOnNavigation]);
@@ -128,7 +145,7 @@ const Drawer: React.FC<Props> = ({
   useOutsideClickDetector(
     drawerRef,
     () => {
-      closeDrawer('outside_click');
+      closeDrawer(ActionSource.OutsideClick);
     },
     isOpen,
   );
@@ -142,6 +159,7 @@ const Drawer: React.FC<Props> = ({
         [styles.right]: side === DrawerSide.Right,
       })}
       ref={drawerRef}
+      id={type === DrawerType.Settings ? 'settings-drawer-container' : undefined}
     >
       <div
         className={classNames(styles.header, {
@@ -165,6 +183,7 @@ const Drawer: React.FC<Props> = ({
           [styles.bodyWithBottomPadding]: !isSearchDrawer,
           [styles.searchContainer]: isSearchDrawer,
         })}
+        id={bodyId}
       >
         {children}
         {isSearchDrawer && <SearchDrawerFooter />}

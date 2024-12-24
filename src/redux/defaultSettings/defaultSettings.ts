@@ -1,3 +1,5 @@
+import NotificationsState from '../types/NotificationsState';
+
 import AudioState from '@/redux/types/AudioState';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
 import ReadingPreferences from '@/redux/types/ReadingPreferences';
@@ -13,7 +15,7 @@ import {
   MushafLines,
   QuranFont,
   WordByWordDisplay,
-} from 'types/QuranReader';
+} from '@/types/QuranReader';
 import Reciter from 'types/Reciter';
 
 export interface DefaultSettings {
@@ -24,17 +26,18 @@ export interface DefaultSettings {
   [SliceName.TAFSIRS]: TafsirsSettings;
   [SliceName.AUDIO_PLAYER_STATE]: AudioState;
   [SliceName.DEFAULT_SETTINGS]: { isUsingDefaultSettings: boolean };
+  [SliceName.NOTIFICATIONS]: NotificationsState;
 }
 
 // Tafsir Ibn Kathir in English
 export const DEFAULT_TAFSIRS = ['en-tafisr-ibn-kathir'];
 
-export const DEFAULT_RECITER: Reciter = {
+export const DEFAULT_RECITER = {
   id: 7,
   name: 'Mishari Rashid al-`Afasy',
   recitationStyle: 'Warsh',
   relativePath: 'mishaari_raashid_al_3afaasee',
-};
+} as Reciter;
 
 const TAFSIRS_INITIAL_STATE: TafsirsSettings = {
   selectedTafsirs: DEFAULT_TAFSIRS,
@@ -83,6 +86,15 @@ const AUDIO_INITIAL_STATE: AudioState = {
 export const DEFAULT_XSTATE_INITIAL_STATE = {
   playbackRate: 1,
   reciterId: DEFAULT_RECITER.id,
+  volume: 1,
+};
+
+const NOTIFICATIONS_INITIAL_STATE: NotificationsState = {
+  notifications: [],
+  paginatedNotifications: {},
+  isFetchingNotifications: false,
+  isLoadingNotifications: false,
+  unseenCount: 0,
 };
 
 export default {
@@ -92,4 +104,5 @@ export default {
   [SliceName.TRANSLATIONS]: TRANSLATIONS_INITIAL_STATE,
   [SliceName.TAFSIRS]: TAFSIRS_INITIAL_STATE,
   [SliceName.AUDIO_PLAYER_STATE]: AUDIO_INITIAL_STATE,
+  [SliceName.NOTIFICATIONS]: NOTIFICATIONS_INITIAL_STATE,
 } as DefaultSettings;

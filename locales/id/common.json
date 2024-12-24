@@ -1,366 +1,419 @@
 {
-    "about": "Tentang kami",
-    "and": "dan",
-    "announcements": {
-        "auth-onboarding": {
-            "data-sync": {
-                "action": "Lanjut",
-                "description": "Baik Anda menggunakan Quran.com di ponsel atau laptop Anda, bookmark Anda, ayat yang terakhir dibaca, dan preferensi Anda akan tersedia",
-                "title": "Data Anda akan disinkronkan <br> <\/br> di seluruh perangkat"
-            },
-            "feedback": {
-                "action": "OK saya mengerti",
-                "description": "Terima kasih telah menggunakan Quran.com dan kami akan senang mendengar tanggapan Anda di <link> feedback.quran.com <\/link>",
-                "title": "Kami ingin mendengar pendapat Anda"
-            },
-            "quran-foundation-link": {
-                "action": "Berikutnya",
-                "description": "Gunakan login Quran.com Anda untuk akses ke QuranReflect.com — sebuah komunitas global yang berkembang yang terlibat dalam refleksi Alquran.",
-                "title": "Gunakan akun Anda di seluruh aplikasi Quran.Foundation!"
-            },
-            "quran-growth-journey": {
-                "action": "Berikutnya",
-                "description": "Pertahankan bacaan Quran Anda dan tingkatkan tujuan Anda sambil membangun kebiasaan baru",
-                "title": "Mulailah Perjalanan Pertumbuhan Quran Anda!"
-            },
-            "welcome": {
-                "action": "Lihat apa yang baru",
-                "title": "Selamat datang di Quran.com <br> <\/br> Akun Pengguna"
-            }
-        },
-        "collections-announcement": {
-            "slide-1": {
-                "description": "Kami sangat senang mengumumkan bahwa sekarang Anda dapat mengelompokkan bookmark di bawah \"koleksi\"! <br\/> <br\/> <li> Tambahkan koleksi sebanyak yang Anda inginkan <\/li> <li> Tambahkan bookmark ke satu atau beberapa koleksi <\/li> <li> Dan banyak lagi! <\/li>",
-                "title": "Koleksi bookmark ada di sini!"
-            }
-        }
+  "about": "Tentang Kami",
+  "allow": "Ijinkan",
+  "and": "dan",
+  "announcements": {
+    "auth-onboarding": {
+      "data-sync": {
+        "action": "Lanjut",
+        "description": "Baik Anda menggunakan Quran.com di ponsel ataupun laptop, Penanda Anda, ayat yang terakhir dibaca, dan preferensi Anda akan tersedia",
+        "title": "Data Anda akan disinkronkan <br></br> di seluruh perangkat"
+      },
+      "feedback": {
+        "action": "OK saya mengerti",
+        "description": "Terima kasih telah menggunakan Quran.com dan silakan beri tanggapan Anda di <link> feedback.quran.com </link>",
+        "title": "Kami ingin tahu pendapat Anda"
+      },
+      "quran-foundation-link": {
+        "action": "Berikutnya",
+        "description": "Gunakan login Quran.com Anda untuk akses ke QuranReflect.com — sebuah komunitas refleksi Al-Qur'an global yang bertumbuh pesat.",
+        "title": "Gunakan akun Anda di seluruh aplikasi Quran.Foundation!"
+      },
+      "quran-growth-journey": {
+        "action": "Berikutnya",
+        "description": "Pertahankan bacaan Qur'an dan tingkatkan sasaran Anda sambil membangun kebiasaan baru",
+        "title": "Awali Pengalaman berQur'an Anda!"
+      },
+      "welcome": {
+        "action": "Lihat apa yang baru",
+        "title": "Selamat datang di Quran.com <br></br> Akun Pengguna"
+      }
     },
-    "aria": {
-        "change-settings": "Ubah pengaturan",
-        "drawer-close": "Tutup Laci",
-        "msg-close": "Tutup Pesan",
-        "nav-drawer-open": "Buka Laci Navigasi",
-        "play-surah": "Putar Surah {{surahName}}",
-        "select-lng": "Pilih bahasa",
-        "sidebar-nav-close": "Tutup Bilah Sisi Navigasi"
+    "collections-announcement": {
+      "slide-1": {
+        "description": "Kami sangat senang mengumumkan bahwa sekarang Anda dapat mengelompokkan Penanda di bawah \"koleksi\"! <br/> <br/> <li> Tambahkan koleksi sebanyak yang Anda inginkan </li> <li> Tambahkan Penanda ke satu atau beberapa koleksi </li> <li> Dan banyak lagi! </li>",
+        "title": "Koleksi Penanda ada di sini!"
+      }
+    }
+  },
+  "aria": {
+    "change-settings": "Ubah pengaturan",
+    "drawer-close": "Tutup Laci",
+    "msg-close": "Tutup Pesan",
+    "nav-drawer-open": "Buka Laci Navigasi",
+    "play-surah": "Putar Surah {{SurahName}}",
+    "select-lng": "Pilih Bahasa",
+    "sidebar-nav-close": "Tutup Sidebar Navigasi"
+  },
+  "audio": {
+    "auto-scroll": {
+      "off": "Mati",
+      "on": "hidup",
+      "title": "Gulir Otomatis"
     },
-    "audio": {
-        "auto-scroll": {
-            "off": "Mati",
-            "on": "hidup",
-            "title": "Gulir Otomatis"
-        },
-        "displaying": "Menampilkan",
-        "exp-tip": "<span>Ubah konten yang ditampilkan di bawah<\/span><br><\/br> <boldSpan>Pengaturan<\/boldSpan> > <boldSpan>Kata Demi Kata<\/boldSpan>",
-        "exp-tip-no-select": "<span>Centang opsi tampilan tooltip dan pilih opsi <br><\/br> Terjemahan dan\/atau Transliterasi<\/span><br><\/br><span> di bawah <\/span><boldSpan>Pengaturan<\/boldSpan> > <boldSpan>Kata Demi Kata<\/boldSpan><span>, untuk<\/span><br><\/br> <span>mengaktifkan fitur ini.<\/span>",
-        "experience": "Pengalaman",
-        "play": "Putar Audio",
-        "playback-normal": "Normal",
-        "playback-speed": "Kecepatan Pemutaran",
-        "playback-speed-unit": "x",
-        "player": {
-            "close-audio-player": "Tutup Pemutar Audio",
-            "currently-playing": "Anda saat ini sedang memainkan",
-            "delay-verse": "Keterlambatan antar ayat",
-            "download": "Unduh",
-            "full-surah": "Surah Lengkap",
-            "manage-repeat-settings": "Kelola pengaturan pengulangan",
-            "mismatch": "Klik \"Mulai Dari Awal\" jika Anda ingin memainkan {{currentReadingChapter}} sebagai gantinya",
-            "pause": "Berhenti sebentar",
-            "pause-audio": "Jeda Audio",
-            "play": "Mainkan",
-            "play-audio": "Putar Audio",
-            "play-range": "Jankau memainkan",
-            "previous-ayah": "Ayat sebelumnya",
-            "repeat-1-verse": "Ulangi Ayat",
-            "repeat-settings": "Ulangi Pengaturan",
-            "repeat-verse": "Ulangi setiap ayat",
-            "search-verse": "Cari sebuah ayat",
-            "single-verse": "Ayat tunggal",
-            "start-over": "Mulai Dari Awal",
-            "start-playing": "Mulai mainkan",
-            "stop-repeating": "Berhenti Mengulangi",
-            "times": "waktu",
-            "verses-range": "Jangkauan ayat"
-        },
-        "repeat-moved": "Pengaturan pengulangan telah dipindahkan ke pemutar audio. Klik ikon <0> <\/0> untuk mengaksesnya",
-        "select-reciter": "Pilih Qari",
-        "speed": "Kecepatan",
-        "title": "audio"
+    "displaying": "Menampilkan",
+    "exp-tip": "<span>Ubah konten yang ditampilkan di bawah</span><br></br> <boldSpan>Pengaturan</boldSpan> > <boldSpan>Kata per Kata</boldSpan>",
+    "exp-tip-no-select": "<span>Centang opsi tampilan tooltip dan pilih opsi <br></br> Terjemahan dan/atau Transliterasi</span><br></br><span> di bawah </span><boldSpan>Pengaturan</boldSpan> > <boldSpan>Kata per Kata</boldSpan><span>, untuk</span><br></br> <span>mengaktifkan fitur ini.</span>",
+    "experience": "Pengalaman",
+    "play": "Putar Audio",
+    "playback-normal": "Normal",
+    "playback-speed": "Kecepatan Pemutaran",
+    "playback-speed-unit": "x",
+    "player": {
+      "close-audio-player": "Tutup Pemutar Audio",
+      "currently-playing": "Anda saat ini sedang memainkan",
+      "delay-verse": "Keterlambatan antar ayat",
+      "download": "Unduh",
+      "full-surah": "Surah Lengkap",
+      "manage-repeat-settings": "Kelola pengaturan pengulangan",
+      "mismatch": "Klik \"Mulai Dari Awal\" jika Anda ingin memainkan {{currentReadingChapter}} sebagai gantinya",
+      "pause": "Berhenti sebentar",
+      "pause-audio": "Jeda Audio",
+      "play": "Mainkan",
+      "play-audio": "Putar Audio",
+      "play-range": "Jankau memainkan",
+      "previous-ayah": "Ayat sebelumnya",
+      "repeat-1-verse": "Ulangi Ayat",
+      "repeat-settings": "Ulangi Pengaturan",
+      "repeat-verse": "Ulangi setiap ayat",
+      "search-verse": "Cari sebuah ayat",
+      "single-verse": "Ayat tunggal",
+      "start-over": "Mulai Dari Awal",
+      "start-playing": "Mulai mainkan",
+      "stop-repeating": "Berhenti Mengulangi",
+      "times": "waktu",
+      "verses-range": "Jangkauan ayat",
+      "volume-control": "Pengatur suara"
     },
-    "ayah": "Ayat",
-    "ayahs": "Ayat",
-    "beta": "Beta (Ujian)",
-    "bookmark": "Penanda",
-    "bookmarked": "Ditandai",
-    "both": "Keduanya",
-    "cancel": "Batal",
-    "click-here": "Klik disini",
-    "close": "Menutup",
-    "command-bar": {
-        "navigations": "Navigasi",
-        "no-nav-results": "Tidak ada hasil navigasi",
-        "placeholder": "Apa yang ingin Anda baca?",
-        "powered-by": "Pencarian suara didukung oleh Tarteel.ai",
-        "recent-navigations": "Navigasi terbaru",
-        "search-by-voice": "Cari dengan suara",
-        "try-navigating": "Coba navigasikan ke"
-    },
-    "community": {
-        "cta": "Bergabunglah dengan Komunitas",
-        "header": "Bergabunglah dengan Komunitas QDC pembangun dan teknologi Muslim.",
-        "sub-header": "Daftar ke Quran.com Discord untuk berpartisipasi dan berkolaborasi dengan komunitas terkemuka yang membangun teknologi Islami.",
-        "title": "Komunitas"
-    },
-    "complete-sign-up": "Lengkapi pendaftaran Anda",
-    "continue": "Melanjutkan",
-    "copied": "disalin",
-    "copied-to-clipboard": "Disalin ke papan klip",
-    "copy": "Salinan",
-    "counter": {
-        "decrease": "Mengurangi",
-        "increase": "Meningkatkan"
-    },
-    "default-description": "Al-Quran diterjemahkan ke dalam banyak bahasa dengan antarmuka yang sederhana dan mudah",
-    "developers": "Pengembang (Developers)",
-    "display": "Menampilkan",
-    "donate": "Menyumbangkan",
-    "donate_monthly": "Donasi setiap bulan",
-    "donate_once": "Donasi sekali",
-    "email-verification": {
-        "check-spam": "Tidak menerima email verifikasi? Periksa kotak masuk spam Anda",
-        "email-sent": "Kami baru saja mengirim email ke <strong> {{email}} <\/strong>",
-        "email-verification": "Verifikasi email",
-        "resend-email": "Kirim ulang email",
-        "resend-email-in": "Kirim ulang email verifikasi dalam {{remainingTime}} detik...",
-        "verify-code": "Kode verifikasi"
-    },
-    "error": {
-        "bookmark-sync": "Bookmark tidak sinkron.",
-        "email-login-fail": "Gagal masuk dengan email. Silakan coba lagi",
-        "general": "Ada yang salah. Silakan coba lagi.",
-        "offline": "Sepertinya Anda kehilangan koneksi. Silakan periksa dan coba lagi.",
-        "pref-persist-fail": "Gagal menyinkronkan setelan Anda ke cloud."
-    },
-    "feedback": "Beri Masukan",
-    "fonts": {
-        "15_lines": "15 Baris",
-        "16_lines": "16 Baris",
-        "code_v1": "Kompleks Raja Fahad V1",
-        "code_v2": "Kompleks Raja Fahad V2",
-        "font-size": "Ukuran huruf",
-        "lines": "Garis",
-        "qcf-desc": "Font Kompleks Raja Fahad (V1 dan V2) memberikan kualitas yang lebih tinggi tetapi membutuhkan waktu lebih lama untuk dimuat.",
-        "qpc_uthmani_hafs": "QPC Utsmani Hafs",
-        "quran-font": "Huruf Quran",
-        "tajweed": "Tajwid",
-        "tajweed-desc": "Font tulisan Tajwid menunjukkan Mushaf berwarna Tajwid. Anda dapat membaca lebih lanjut tentang aturan warna Tajwid <0> sini <\/0>",
-        "text_indopak": "IndoPak",
-        "text_uthmani": "Usmani"
-    },
-    "footer": {
-        "description": "Quran.com adalah Sadaqah Jariyah. Kami berharap agar kami dapat memudahkan semua orang dapat membaca, mempelajari dan memahami erti Al-Quran. Al-Quran yang mulia mempunyai banyak nama antaranya Al-Quran Al-Kareem, Al-Kitab, Al-Furqan, Al-Maw'itha, Al-Zikir, dan Al-Nur.",
-        "rights": "Seluruh hak cipta",
-        "title": "Baca, pelajari, dan pelajari The Noble Quran."
-    },
-    "form": {
-        "code": "Kode verifikasi",
-        "email": "Surel",
-        "firstName": "Nama depan",
-        "lastName": "Nama keluarga"
-    },
-    "from": "Dari",
-    "fundraising-sticky-banner": {
-        "cta": "Menyumbangkan",
-        "title": "Dukung Quran.com Ramadhan ini"
-    },
-    "fundraising": {
-        "description": "Donasi bulanan membantu kami meningkatkan Quran.com dan mempertahankan operasi sehingga kami kurang fokus pada penggalangan dana dan lebih pada menciptakan dampak.",
-        "title": "Menjadi Donatur Bulanan"
-    },
-    "help": "Bantuan",
-    "hizb": "Hizb",
-    "home": "Halaman Utama",
-    "hours": "Jam",
-    "inline": "Di barisan",
-    "input": {
-        "clear": "bersihkan"
-    },
-    "juz": "Juz",
-    "language": "Bahasa",
-    "languages": "Bahasa",
-    "learn-more": "Belajarlah lagi",
-    "less": "Kurang",
-    "loading": "Memuat",
-    "login": "Gabung",
-    "logout": "Keluar",
-    "meccan": "Mekah",
-    "medinan": "Madinah",
-    "menu": "Menu",
-    "minutes": "Menit",
-    "mobile-apps": "Aplikasi",
-    "mode": "Mode",
-    "more": "Lagi",
-    "navigate": "Navigasi",
-    "network": "Jaringan",
-    "new": "Baru!",
-    "next": "Lanjut",
-    "next-ayah": "Ayat Berikutnya",
-    "no": "Tidak",
-    "none": "Tidak ada",
-    "off": "Mati",
-    "on": "Hidup",
-    "page": "Halaman",
-    "pages": "halaman-halaman",
-    "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} dari {{totalNumberOfResults}} hasil pencarian",
-    "pbuh": "Berkah Allah atasnya",
-    "popular-links": "Link populer",
-    "popup": {
-        "footnote": "Donasi bulanan memungkinkan kami untuk tidak terlalu fokus pada penggalangan dana",
-        "text-1": "Kami berkomitmen untuk melayani dunia pengetahuan dan teknologi Al-Qur'an, selalu gratis.",
-        "text-2": "Quran.com adalah kesempatan sempurna untuk amal berkelanjutan (Sadaqah Jariyah). Harap pertimbangkan untuk berinvestasi di akhirat Anda sebagai donor bulanan (atau satu kali).",
-        "title": "Sahabat Al-Qur'an yang terhormat,"
-    },
-    "powered-by": "Dipersembahkan oleh",
-    "prev": "Sebelumnya",
-    "previous-ayah": "Ayat sebelumnya",
-    "privacy": "Pribadi",
-    "product-updates": "Pembaruan produk",
-    "profile": "Profil",
-    "q-reflect": "QuranReflect",
-    "quran-com": "Quran",
-    "quran-radio": "Radio Al-Quran",
-    "reading-history": "Membaca sejarah",
-    "reading-preference": {
-        "reading": "Membaca",
-        "translation": "Terjemahan"
-    },
-    "recitation": "Pembacaan",
-    "reciter": "Qari",
-    "reciter-summary": "Pembaca kata demi kata: <span> {{reciterName}} <\/span> . Klik pada sebuah kata untuk mendengarkan bacaannya.",
-    "reciters": "Qari",
-    "reflect": "Mencerminkan",
-    "remove": "Keluarkan",
-    "rename": "Ganti nama",
-    "retry": "Cuba lagi (Retry)",
-    "revelation_order": "Urutan Wahyu",
-    "rub": "Rub el Hizb",
-    "save-to-collection": "Simpan ke Koleksi",
-    "search-for": "Telusuri '{{searchQuery}}'",
-    "search-results": "{{count}} hasil penelusuran",
-    "search": {
-        "filters": "Filter",
-        "hint": "Coba cari",
-        "jump-to": "Langsung Ke",
-        "no-results": "Tidak ada hasil yang ditemukan",
-        "no-results-suggestion": "Kami tidak dapat menemukan hasil pencarian yang cocok untuk \" {{searchQuery}} \". coba menggunakan kata kunci yang berbeda.",
-        "popular": "Pencarian Populer",
-        "recent": "Pencarian terkini",
-        "results": "hasil",
-        "show-all": "Tampilkan semua hasil",
-        "switch-mode": "Beralih ke Pencarian Lanjutan",
-        "title": "Mencari"
-    },
-    "seconds": "Detik",
-    "settings": {
-        "no-tafsir-selected": "Tidak ada tafsir yang dipilih",
-        "no-translation-selected": "Tidak ada terjemahan yang dipilih",
-        "reading-experience": "Pengalaman Membaca",
-        "reset-cta": "Atur Semula Pengaturan",
-        "reset-notif": "Pengaturan telah diatur ke semula",
-        "search-reciter": "Cari Qari",
-        "search-tafsirs": "Carian Tafsir",
-        "search-translations": "Cari Terjemahan",
-        "selected-reciter": "Pembaca yang dipilih",
-        "selected-tafsirs": "Tafsir yang dipilih",
-        "selected-translations": "Terjemahan yang dipilih",
-        "show-tooltip-when-playing-audio": "Tampilkan tooltip saat memutar audio",
-        "title": "Pengaturan",
-        "tooltip-playing-audio-helper": "Tampilkan terjemahan per kata di tooltip saat memutar ayat",
-        "value-and-other": "{{value}} , dan {{othersCount}} lainnya",
-        "value-and-others": "{{value}} , dan {{othersCount}} lainnya",
-        "wbw-helper": "Tampilkan terjemahan atau transliterasi langsung di bawah kata",
-        "word-tooltip-helper": "Tampilkan terjemahan atau transliterasi saat mengarahkan 'cursor mouse' atau mengklik perkataan"
-    },
-    "share": "Membagikan",
-    "shared": "Tautan telah disalin ke papan klip!",
-    "sidebar": {
-        "search-hizb": "Cari Hizbut Tahrir",
-        "search-juz": "Cari Juz",
-        "search-page": "Cari Halaman",
-        "search-surah": "Cari Surat",
-        "try-navigating-with": "Tips: coba navigasi dengan"
-    },
-    "sitemap": "Peta laman",
-    "sort": {
-        "ascending": "menaik",
-        "by": "Sortir dengan",
-        "descending": "Menurun"
-    },
-    "style": "Gaya",
-    "submit": "Kirim",
-    "surah": "surah",
-    "tafsir": {
-        "font-size": "Ukuran font tafsir",
-        "group-message": "Anda sedang membaca tafsir untuk sekelompok ayat dari {{from}} hingga {{to}}",
-        "no-text": "{{tafsirName}} tidak tersedia untuk ayat saat ini.",
-        "surah": "Surah Tafsir",
-        "tafsir-desc": "Baca {{tafsirName}} untuk Ayat {{verseNumber}} Surah {{surahName}}",
-        "tafsirs-desc": "Baca berbagai Tafsir Ayat {{ayahNumber}} Surah {{surahName}} oleh ulama Tafsir terpercaya",
-        "title": "tafsir"
-    },
-    "tarteel": {
-        "app": "Aplikasi Tarteel",
-        "name": "Tarteel.ai"
-    },
-    "theme": "Tema",
-    "themes": {
-        "auto": "Otomatis",
-        "dark": "Gelap",
-        "light": "Terang",
-        "sepia": "sepia",
-        "system": "Sistem",
-        "system-desc": "Tema sistem secara otomatis mengadopsi pengaturan mode terang\/gelap Anda"
-    },
-    "to": "Ke",
-    "tooltip": "Keterangan alat",
-    "tooltip-trans-lang": "Tooltip Language",
-    "trans-lang": "Bahasa Terjemahan",
-    "translation": "Terjemahan",
-    "translations": "Terjemahan",
-    "transliteration": "Transliterasi",
-    "type": "Jenis",
-    "undo": "Membuka",
-    "validation": {
-        "invalid-email": "{{field}} harus berupa alamat email yang valid",
-        "invalid-field": "Harap masukkan nilai {{field}} yang valid",
-        "required-field": "{{field}} wajib diisi"
-    },
-    "verse": "Ayat",
-    "verse-bookmark-removed": "Penanda ayat telah dihapus!",
-    "verse-bookmarked": "Ayat telah ditandai",
-    "verses": "Ayat",
-    "view": "Melihat",
-    "voice": {
-        "ask-permission": "Mohon izin mikrofon untuk mulai menggunakan Pencarian Suara",
-        "error": "Terjadi kesalahan, coba lagi nanti. Atau unduh",
-        "no-permission": "Sepertinya Anda tidak mengaktifkan izin menggunakan mikrofon. Harap aktifkan izin mikrofon dan coba lagi atau unduh",
-        "not-supported": "Sepertinya browser Anda tidak mendukung mikrofon. Silakan coba browser lain atau unduh",
-        "suggest": "Mulai membaca ayat, dan ayat akan mulai muncul",
-        "suggest-subtitle": "Bacalah apa apa sahaja ayat dalam bahasa Arab dan ayat itu akan muncul",
-        "suggest-title": "Baca sekarang",
-        "voice-search-powered-by": "Pencarian suara dipersembahkan oleh"
-    },
-    "wbw": "Kata dari kata",
-    "wbw-lang-summary": "Sumber terjemahan kata demi kata: <link> {{source}} <\/link> . Sumber ini tidak tergantung pada pemilihan terjemahan ayat.",
-    "wbw-trans-lang": "Bahasa kata per kata",
-    "wbw-translation": "Terjemahan per kata",
-    "wbw-transliteration": "Transliterasi per kata",
-    "word-click": {
-        "no-audio": "Tidak ada suara",
-        "play-audio": "Putar Audio",
-        "title": "Klik Kata"
-    },
-    "word-tooltip": "Word tooltip",
-    "yes": "Ya"
+    "repeat-moved": "Pengaturan pengulangan telah dipindahkan ke pemutar audio. Klik ikon <0> </0> untuk mengaksesnya",
+    "select-reciter": "Pilih Qari",
+    "speed": "Kecepatan",
+    "title": "audio"
+  },
+  "ayah": "Ayat",
+  "ayahs": "Ayat",
+  "beta": "Beta",
+  "bookmark": "Penanda",
+  "bookmarked": "Ditandai",
+  "both": "Keduanya",
+  "cancel": "Batal",
+  "click-here": "Klik disini",
+  "close": "Tutup",
+  "command-bar": {
+    "navigations": "Navigasi",
+    "no-nav-results": "Tidak ada hasil navigasi",
+    "placeholder": "Apa yang ingin Anda baca?",
+    "powered-by": "Pencarian suara didukung oleh Tarteel.ai",
+    "recent-navigations": "Navigasi terbaru",
+    "search-by-voice": "Cari dengan suara",
+    "try-navigating": "Coba navigasikan ke"
+  },
+  "community": {
+    "cta": "Bergabunglah dengan Komunitas",
+    "header": "Bergabunglah dengan Komunitas QDC pembangun dan teknologi Muslim.",
+    "sub-header": "Daftar ke Quran.com Discord untuk berpartisipasi dan berkolaborasi dengan komunitas terkemuka yang membangun teknologi Islami.",
+    "title": "Komunitas"
+  },
+  "complete-sign-up": "Lengkapi pendaftaran Anda",
+  "consents": {
+    "communication": {
+      "body": "🚀 Tingkatkan kemajuan Anda dengan menerima notifikasi <boldSpan>personal</boldSpan> tentang kemajuan pencapaian tujuan Anda, memertahankan pencapaian, dan meningkatkan penggunaan fitur kami saat ini. <br></br> <br></br> Bisakah kami terus mengabari Anda melalui email dan saluran lainnya? Kendali di tangan Anda – silakan sesuaikan preferensi ini kapan saja di pengaturan akun Anda. <br></br> <br></br> Cukup pilih 'Ijinkan' untuk <boldSpan>pengingat yang menginspirasi</boldSpan> atau 'Jangan Sekarang' untuk menolaknya.",
+      "header": "Kami ingin membantu Anda tetap <boldSpan>berkomitmen dan konsisten</boldSpan> dalam Perjalanan Kemajuan berQur'an Anda! 📖🌟"
+    }
+  },
+  "continue": "Melanjutkan",
+  "copied": "disalin",
+  "copied-to-clipboard": "Disalin ke papan klip",
+  "copy": "Salinan",
+  "counter": {
+    "decrease": "Mengurangi",
+    "increase": "Meningkatkan"
+  },
+  "default-description": "Al-Qur'an diterjemahkan ke dalam banyak bahasa dengan antarmuka yang sederhana dan mudah",
+  "delete": "Hapus",
+  "developers": "Pengembang",
+  "display": "Tampilan",
+  "donate": "Menyumbang",
+  "donate_monthly": "Donasi setiap bulan",
+  "donate_once": "Donasi satu kali",
+  "edit": "Sunting",
+  "email-verification": {
+    "check-spam": "Tidak menerima email verifikasi? Periksa kotak masuk spam Anda",
+    "email-sent": "Kami baru saja mengirim email ke <strong> {{email}} </strong>",
+    "email-verification": "Verifikasi email",
+    "resend-email": "Kirim ulang email",
+    "resend-email-in": "Kirim ulang email verifikasi dalam {{remainingTime}} detik...",
+    "verify-code": "Kode verifikasi"
+  },
+  "error": {
+    "MediaVersesRangeLimitExceeded": "Anda hanya dapat memilih hingga {{limit}} ayat dalam satu waktu. Harap pilih rentang yang lebih kecil.",
+    "bookmark-sync": "Penanda tidak sinkron.",
+    "email-login-fail": "Gagal masuk dengan email. Silakan coba lagi",
+    "general": "Ada yang salah. Silakan coba lagi.",
+    "offline": "Sepertinya Anda kehilangan koneksi. Silakan periksa dan coba lagi.",
+    "pref-persist-fail": "Gagal menyinkronkan setelan Anda ke cloud.",
+    "ranges-no-value": "Rentang awal dan akhir harus memiliki nilai",
+    "ranges-too-many-verses": "*Jumlah ayat maksimum {{maxNumberOfVerses}} ayat",
+    "ranges-wrong-order": "Bait pembuka harus sebelum bait penutup."
+  },
+  "exciting-updates": "Pembaruan Menarik",
+  "feedback": "Beri Masukan",
+  "fonts": {
+    "15_lines": "15 Baris",
+    "16_lines": "16 Baris",
+    "code_v1": "Kompleks Raja Fahad V1",
+    "code_v2": "Kompleks Raja Fahad V2",
+    "font-size": "Ukuran huruf",
+    "lines": "Garis",
+    "qcf-desc": "Font Kompleks Raja Fahad (V1 dan V2) memberikan kualitas lebih tinggi tetapi perlu waktu lebih lama untuk memuat.",
+    "qcf-v4-desc": "Font Tajweed dibuat menggunakan Easy Quran - Dar Al Marifa Tajweed Mushaf dan King Fahad Glorious Quran Printing Complex (KFGQPC) - Uthmanic Hafs V4 Fonts setelah mendapat izin dari keduanya.",
+    "qpc_uthmani_hafs": "QPC Utsmani Hafs",
+    "quran-font": "Huruf Qur'an",
+    "quran-font-size": "Ukuran huruf Al-Quran",
+    "tajweed": "Tajwid",
+    "tajweed-desc": "Font tulisan Tajwid menunjukkan Mushaf berwarna Tajwid. Anda dapat membaca lebih lanjut tentang aturan warna Tajwid <0> sini </0>",
+    "tajweed_v4": "Kompleks Raja Fahad V4",
+    "text_indopak": "IndoPak",
+    "text_uthmani": "Usmani",
+    "translation-font-size": "Ukuran font terjemahan"
+  },
+  "footer": {
+    "description": "Quran.com adalah Sadaqah Jariyah. Kami berharap setiap orang dapat membaca, mempelajari, dan memahami Al-Quran dengan lebih mudah. Al-Qur'an Mulia mempunyai banyak nama di antaranya Al-Qur'an Al-Karim, Al-Kitab, Al-Furqan, Al-Maw'itha, Al-Zikir, dan Al-Nur.",
+    "hiring": "Kami sedang merekrut! Bergabunglah dengan tim QuranFoundation dan berkontribusi pada misi kami. <link> Daftar sekarang! </link>",
+    "rights": "Hak Cipta Terlindungi",
+    "title": "Baca, pelajari, dan pahami Al-Qur'an Mulia."
+  },
+  "form": {
+    "body": "Tubuh",
+    "code": "Kode verifikasi",
+    "email": "Email",
+    "firstName": "Nama depan",
+    "lastName": "Nama keluarga",
+    "title": "Judul"
+  },
+  "from": "Dari",
+  "fundraising-sticky-banner": {
+    "cta": "Menyumbang",
+    "title": "Menyumbang di hari-hari terbaik!"
+  },
+  "fundraising": {
+    "description": "Donasi bulanan membantu kami meningkatkan Quran.com dan melanggengkan operasional sehingga kami tidak terlalu fokus pada penggalangan dana tetapi lebih pada penciptaan dampak.",
+    "title": "Menjadi Donatur Bulanan"
+  },
+  "hear-it-pronounced": "Klik kata-kata Al-Quran, dengarkan pengucapannya",
+  "help": "Bantuan",
+  "hizb": "Hizb",
+  "home": "Halaman Utama",
+  "hours": "Jam",
+  "inline": "Di bawah ayat",
+  "input": {
+    "clear": "Bersihkan"
+  },
+  "juz": "Juz",
+  "language": "Bahasa",
+  "languages": "Bahasa",
+  "learn-more": "Pelajari lebih lanjut",
+  "learning-plans": "Rencana Pembelajaran",
+  "less": "Kurang",
+  "loading": "Memuat",
+  "login": "Login",
+  "logout": "Logout",
+  "meccan": "Mekah",
+  "medinan": "Madinah",
+  "menu": "Menu",
+  "minutes": "Menit",
+  "mobile-apps": "Aplikasi",
+  "mode": "Mode",
+  "more": "Lagi",
+  "my-learning-plans": "Rencana Pembelajaran Saya",
+  "navigate": "Navigasi",
+  "network": "Jaringan",
+  "new": "Baru!",
+  "newest": "Paling Baru",
+  "next": "Lanjut",
+  "next-ayah": "Ayat Berikutnya",
+  "no": "Tidak",
+  "no-notifications": "Belum ada notifikasi",
+  "none": "Tidak ada",
+  "not-now": "Nanti Saja",
+  "notes": {
+    "title": "Catatan & Refleksi Saya"
+  },
+  "notification-settings": "Pengaturan Notifikasi",
+  "notification": {
+    "mark-all-as-read": "Tandai semua telah dibaca",
+    "mark-as-read": "Tandai telah dibaca"
+  },
+  "notifications": "Notifikasi",
+  "off": "Mati",
+  "oldest": "Paling Lama",
+  "on": "Hidup",
+  "page": "Halaman",
+  "pages": "halaman-halaman",
+  "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} dari {{totalNumberOfResults}} hasil pencarian",
+  "pbuh": "Berkah Allah atasnya",
+  "popular-links": "Link populer",
+  "popup": {
+    "footnote": "Donasi bulanan memungkinkan kami untuk tidak terlalu fokus pada penggalangan dana",
+    "text-1": "Kami berkomitmen untuk melayani dunia pengetahuan dan teknologi Qur'ani, selalu gratis.",
+    "text-2": "Kesempatan sempurna untuk Sedekah Jariyah. Investasi untuk Akhirat Anda dengan menjadi donor bulanan (atau donor satu kali).",
+    "title": "Menyumbang di Hari-hari Terbaik!"
+  },
+  "powered-by": "Dipersembahkan oleh",
+  "prepare-hearts": {
+    "cta": "Pelajari lebih jauh",
+    "title": "Lanjutkan setelah Ramadhan!"
+  },
+  "prev": "Sebelumnya",
+  "previous-ayah": "Ayat sebelumnya",
+  "privacy": "Kerahasiaan",
+  "product-updates": "Pengkinian Produk",
+  "profile": "Profil",
+  "q-reflect": "QuranReflect",
+  "quran-com": "Quran.com",
+  "quran-radio": "Radio Qur'an",
+  "reading-history": "Riwayat membaca",
+  "reading-preference": {
+    "reading": "Membaca",
+    "translation": "Terjemahan"
+  },
+  "recitation": "Pembacaan",
+  "reciter": "Qari",
+  "reciter-summary": "(Dengan izin dari Pusat Tafsir)",
+  "reciters": "Qari",
+  "reflect": "Mencerminkan",
+  "reflections": "Refleksi",
+  "remove": "Keluarkan",
+  "rename": "Ganti nama",
+  "retry": "Coba Lagi",
+  "revelation_order": "Urutan Wahyu",
+  "rub": "Rub el Hizb",
+  "save": "Simpan",
+  "save-to-collection": "Simpan ke Koleksi",
+  "search-for": "Cari '{{searchQuery}}'",
+  "search-results": "{{count}} hasil penelusuran",
+  "search": {
+    "filters": "Filter",
+    "hint": "Coba cari",
+    "jump-to": "Langsung Ke",
+    "no-results": "Tidak ada hasil yang ditemukan",
+    "no-results-suggestion": "Kami tidak dapat menemukan hasil pencarian yang cocok untuk \" {{searchQuery}} \". coba menggunakan kata kunci yang berbeda.",
+    "popular": "Pencarian Populer",
+    "recent": "Pencarian terkini",
+    "results": "hasil",
+    "show-all": "Tampilkan semua hasil",
+    "switch-mode": "Beralih ke Pencarian Lanjutan",
+    "title": "Mencari"
+  },
+  "seconds": "Detik",
+  "see-new": "Lihat apa yang baru",
+  "settings": {
+    "no-tafsir-selected": "Tidak ada tafsir yang dipilih",
+    "no-translation-selected": "Tidak ada terjemahan yang dipilih",
+    "reading-experience": "Pengalaman Membaca",
+    "reset": "Mengatur ulang",
+    "reset-cta": "Atur Semula Pengaturan",
+    "reset-notif": "Pengaturan Anda kembali ke pengaturan bawaan",
+    "search-reciter": "Cari Qari",
+    "search-tafsirs": "Pencarian Tafsir",
+    "search-translations": "Cari Terjemahan",
+    "selected-reciter": "Qari yang dipilih",
+    "selected-tafsirs": "Tafsir yang dipilih",
+    "selected-translations": "Terjemahan yang dipilih",
+    "show-tooltip-when-playing-audio": "Tampilkan tooltip saat memutar audio",
+    "title": "Pengaturan",
+    "tooltip-playing-audio-helper": "Tampilkan terjemahan per kata di tooltip saat memutar ayat",
+    "value-and-other": "{{value}} , dan {{othersCount}} lainnya",
+    "value-and-others": "{{value}} , dan {{othersCount}} lainnya",
+    "wbw-helper": "Tampilkan terjemahan atau transliterasi langsung di bawah kata",
+    "word-tooltip-helper": "Tampilkan terjemahan atau transliterasi saat mengarahkan kursor atau mengklik perkataan"
+  },
+  "share": "Membagikan",
+  "shared": "Tautan telah disalin ke papan klip!",
+  "show-more": "Menampilkan lebih banyak",
+  "sidebar": {
+    "search-hizb": "Cari Hizb",
+    "search-juz": "Cari Juz",
+    "search-page": "Cari Halaman",
+    "search-surah": "Cari Surah",
+    "try-navigating-with": "Tips: coba navigasi dengan"
+  },
+  "sitemap": "Peta situs",
+  "sort": {
+    "ascending": "menaik",
+    "by": "Sortir dengan",
+    "descending": "Menurun"
+  },
+  "style": "Gaya",
+  "submit": "Kirim",
+  "subscribe": "Mendaftar",
+  "subscribed": "Terdaftar",
+  "surah": "Surah",
+  "tafsir": {
+    "font-size": "Ukuran font tafsir",
+    "group-message": "Anda sedang membaca tafsir untuk kelompok ayat dari {{from}} hingga {{to}}",
+    "no-text": "{{tafsirName}} tidak tersedia untuk ayat saat ini.",
+    "surah": "Surah Tafsir",
+    "tafsir-desc": "Baca {{tafsirName}} untuk Ayat {{verseNumber}} Surah {{SurahName}}",
+    "tafsirs-desc": "Baca berbagai Tafsir Ayat {{ayahNumber}} Surah {{SurahName}} oleh ulama Tafsir terpercaya",
+    "title": "tafsir"
+  },
+  "tarteel": {
+    "app": "Aplikasi Tarteel",
+    "name": "Tarteel.ai"
+  },
+  "terms-and-conditions": "syarat dan Ketentuan",
+  "theme": "Tema",
+  "themes": {
+    "auto": "Otomatis",
+    "dark": "Gelap",
+    "light": "Terang",
+    "sepia": "Sepia",
+    "system": "Sistem",
+    "system-desc": "Tema sistem secara otomatis mengadopsi pengaturan mode terang/gelap Anda"
+  },
+  "to": "Ke",
+  "tooltip": "Dalam gelembung tooltip",
+  "tooltip-trans-lang": "Bahasa Tooltip",
+  "trans-lang": "Bahasa Terjemahan",
+  "translation": "Terjemahan",
+  "translations": "Terjemahan",
+  "transliteration": "Transliterasi",
+  "type": "Jenis",
+  "unavailable": "Saat ini tidak tersedia",
+  "undo": "Batalkan",
+  "validation": {
+    "invalid-email": "{{field}} harus berupa alamat email yang valid",
+    "invalid-field": "Harap masukkan nilai {{field}} yang valid",
+    "maximum-length": "{{field}} tidak boleh melebihi {{value}} karakter",
+    "minimum-length": "{{field}} minimal harus berisi {{value}} karakter",
+    "required-field": "{{field}} wajib diisi"
+  },
+  "verse": "Ayat",
+  "verse-bookmark-removed": "Penanda ayat telah dihapus!",
+  "verse-bookmarked": "Ayat telah ditandai",
+  "verses": "Ayat",
+  "view": "Melihat",
+  "voice": {
+    "ask-permission": "Mohon izin mikrofon untuk mulai menggunakan Pencarian Suara",
+    "error": "Terjadi kesalahan, coba lagi nanti. Atau unduh",
+    "no-permission": "Sepertinya Anda tidak mengaktifkan izin menggunakan mikrofon. Harap aktifkan izin mikrofon dan coba lagi atau unduh",
+    "not-supported": "Sepertinya browser Anda tidak mendukung mikrofon. Silakan coba browser lain atau unduh",
+    "suggest": "Baca ayatnya, maka ayat akan mulai muncul",
+    "suggest-subtitle": "Baca ayat apa saja dalam bahasa Arab, dan ayat itu akan muncul",
+    "suggest-title": "Baca sekarang",
+    "voice-search-powered-by": "Pencarian Suara dipersembahkan oleh"
+  },
+  "wbw": "Kata per kata",
+  "wbw-lang-summary": "Sumber terjemahan kata per kata: <link> {{source}} </link> . Sumber ini tidak tergantung pada pemilihan terjemahan ayat.",
+  "wbw-trans-lang": "Bahasa kata per kata",
+  "wbw-translation": "Terjemahan per kata",
+  "wbw-transliteration": "Transliterasi per kata",
+  "word-click": {
+    "no-audio": "Tidak ada suara",
+    "play-audio": "Putar Audio",
+    "title": "Klik Kata"
+  },
+  "word-tooltip": "Tooltip Kata",
+  "yes": "Ya"
 }

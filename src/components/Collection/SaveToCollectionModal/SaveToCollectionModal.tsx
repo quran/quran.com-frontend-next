@@ -26,7 +26,6 @@ type SaveToCollectionModalProps = {
   collections: Collection[];
   onCollectionToggled: (collection: Collection, newValue: boolean) => void;
   onNewCollectionCreated: (name: string) => Promise<void>;
-  isAddingNewCollection?: boolean;
   onClose?: () => void;
   verseKey: string;
 };
@@ -111,7 +110,7 @@ const SaveToCollectionModal = ({
               formFields={[
                 {
                   field: 'name',
-                  label: t('quran-reader:new-collection-name'),
+                  placeholder: t('quran-reader:new-collection-name'),
                   rules: [{ type: RuleType.Required, value: true, errorMessage: 'Required' }],
                   type: FormFieldType.Text,
                 },

@@ -15,7 +15,12 @@
   border-radius: var(--border-radius-circle);
   font-size: var(--font-size-xsmall);
 }
-.positionBottomRight {
+.bottomRight {
   inset-block-end: var(--spacing-xxsmall);
   inset-inline-end: var(--spacing-xxsmall);
+}
+
+.topLeft {
+  inset-inline-start: var(--spacing-xxsmall);
+  inset-block-end: var(--spacing-mega);
 }

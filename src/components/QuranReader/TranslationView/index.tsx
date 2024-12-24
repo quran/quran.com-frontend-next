@@ -1,6 +1,6 @@
 /* eslint-disable max-lines */
 /* eslint-disable react/no-multi-comp */
-import React, { useMemo, useRef, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 
 import dynamic from 'next/dynamic';
 import { Virtuoso, VirtuosoHandle } from 'react-virtuoso';
@@ -8,6 +8,7 @@ import { Virtuoso, VirtuosoHandle } from 'react-virtuoso';
 import onCopyQuranWords from '../onCopyQuranWords';
 import QueryParamMessage from '../QueryParamMessage';
 
+import useGetVersesCount from './hooks/useGetVersesCount';
 import useScrollToVirtualizedVerse from './hooks/useScrollToVirtualizedVerse';
 import styles from './TranslationView.module.scss';
 import TranslationViewVerse from './TranslationViewVerse';
@@ -17,9 +18,9 @@ import useGetQueryParamOrReduxValue from '@/hooks/useGetQueryParamOrReduxValue';
 import useGetQueryParamOrXstateValue from '@/hooks/useGetQueryParamOrXstateValue';
 import useQcfFont from '@/hooks/useQcfFont';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
+import { QuranReaderDataType } from '@/types/QuranReader';
 import { VersesResponse } from 'types/ApiResponses';
 import QueryParam from 'types/QueryParam';
-import { QuranReaderDataType } from 'types/QuranReader';
 import Verse from 'types/Verse';
 
 type TranslationViewProps = {
@@ -49,13 +50,13 @@ const TranslationView = ({
     value: reciterId,
     isQueryParamDifferent: reciterQueryParamDifferent,
   }: { value: number; isQueryParamDifferent: boolean } = useGetQueryParamOrXstateValue(
-    QueryParam.Reciter,
+    QueryParam.RECITER,
   );
   const {
     value: selectedTranslations,
     isQueryParamDifferent: translationsQueryParamDifferent,
   }: { value: number[]; isQueryParamDifferent: boolean } = useGetQueryParamOrReduxValue(
-    QueryParam.Translations,
+    QueryParam.TRANSLATIONS,
   );
   const {
     value: wordByWordLocale,
@@ -63,6 +64,14 @@ const TranslationView = ({
   }: { value: string; isQueryParamDifferent: boolean } = useGetQueryParamOrReduxValue(
     QueryParam.WBW_LOCALE,
   );
+
+  const versesCount = useGetVersesCount({
+    resourceId,
+    quranReaderDataType,
+    initialData,
+    quranReaderStyles,
+  });
+
   const virtuosoRef = useRef<VirtuosoHandle>(null);
   useScrollToVirtualizedVerse(
     quranReaderDataType,
@@ -75,7 +84,7 @@ const TranslationView = ({
   useQcfFont(quranReaderStyles.quranFont, verses);
 
   const itemContentRenderer = (verseIdx: number) => {
-    if (verseIdx === initialData.metaData.numberOfVerses) {
+    if (verseIdx === versesCount) {
       return (
         <EndOfScrollingControls
           quranReaderDataType={quranReaderDataType}
@@ -88,7 +97,7 @@ const TranslationView = ({
     return (
       <TranslationViewVerse
         verseIdx={verseIdx}
-        totalVerses={initialData.metaData.numberOfVerses}
+        totalVerses={versesCount}
         quranReaderDataType={quranReaderDataType}
         quranReaderStyles={quranReaderStyles}
         setApiPageToVersesMap={setApiPageToVersesMap}
@@ -101,13 +110,21 @@ const TranslationView = ({
     );
   };
 
+  const shouldShowQueryParamMessage =
+    translationsQueryParamDifferent ||
+    reciterQueryParamDifferent ||
+    wordByWordLocaleQueryParamDifferent;
+
   return (
     <>
-      <QueryParamMessage
-        translationsQueryParamDifferent={translationsQueryParamDifferent}
-        reciterQueryParamDifferent={reciterQueryParamDifferent}
-        wordByWordLocaleQueryParamDifferent={wordByWordLocaleQueryParamDifferent}
-      />
+      {shouldShowQueryParamMessage && (
+        <QueryParamMessage
+          translationsQueryParamDifferent={translationsQueryParamDifferent}
+          reciterQueryParamDifferent={reciterQueryParamDifferent}
+          wordByWordLocaleQueryParamDifferent={wordByWordLocaleQueryParamDifferent}
+        />
+      )}
+
       <div
         className={styles.wrapper}
         onCopy={(event) => onCopyQuranWords(event, verses, quranReaderStyles.quranFont)}
@@ -115,7 +132,7 @@ const TranslationView = ({
         <Virtuoso
           ref={virtuosoRef}
           useWindowScroll
-          totalCount={initialData.metaData.numberOfVerses + 1}
+          totalCount={versesCount + 1}
           increaseViewportBy={INCREASE_VIEWPORT_BY_PIXELS}
           initialItemCount={1} // needed for SSR.
           itemContent={itemContentRenderer}

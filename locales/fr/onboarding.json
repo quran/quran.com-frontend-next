@@ -1,0 +1,107 @@
+{
+  "checklist": {
+    "1": "Fonctionnalités de la page d'accueil",
+    "2": "Personnalisez vos paramètres",
+    "3": "Enrichissez votre expérience de lecture d'Ayah",
+    "4": "Fonctionnalités personnalisées"
+  },
+  "finish": "Terminer",
+  "onboarding-checklist": "Liste de contrôle d'intégration",
+  "onboarding-title": "Maximisez votre expérience avec Quran.com ! <br></br> Commencez votre visite maintenant :",
+  "previous": "Précédent",
+  "skip": "Ignorer",
+  "steps": {
+    "3-dot-menu": {
+      "description": "Cliquez sur le menu à 3 points pour découvrir les options de copie, de marque page et de répétition d'Ayahs. Découvrez une variété d'options pour répéter des Ayahs",
+      "title": "Menu à 3 points"
+    },
+    "ayah-reflection": {
+      "description": "Lisez les réflexions (tadabbur) de savants, d'étudiants en sciences et de gens ordinaires pour vous aider à développer une connexion plus personnelle avec le Coran.",
+      "title": "Lire les réflexions au niveau de l'Ayah"
+    },
+    "ayah-tafsir": {
+      "description": "Explorez le Tafsir au niveau de l'Ayah afin d'obtenir des informations détaillées améliorant votre compréhension au cours de votre lecture. (Le Tafsir peut être regroupé pour plusieurs Ayahs, le cas échéant)",
+      "title": "Lire le Tafsir au niveau de l'Ayah"
+    },
+    "font-size": {
+      "description": "Personnalisez votre lecture du Coran avec des tailles de police faciles à ajuster pour une expérience de lecture confortable",
+      "title": "Taille de police"
+    },
+    "font-style": {
+      "description": "Les options incluent Uthmani - King Fahad Complex v1, Uthmani - King Fahad Complex v2, Uthmani QPC Hafs, Indopak 15 lignes, Indopak 16 lignes",
+      "title": "Choisissez votre script de lecture préféré"
+    },
+    "inline-wbw": {
+      "description": "Visualiser la traduction de chaque mot en ligne (sous le mot) ou dans une bulle au-dessus du mot tout en écoutant le Coran",
+      "title": "Afficher la traduction mot à mot en ligne (sous le mot) ou afficher une info-bulle"
+    },
+    "juz": {
+      "description": "Voir le Coran par Juz",
+      "title": "Voir le Coran par Juz"
+    },
+    "listen": {
+      "description": "Démarrez le lecteur audio pour écouter la récitation",
+      "title": "Écoutez la Sourate ou l'Ayah"
+    },
+    "login": {
+      "description": "Se connecter pour enregistrer les paramètres sur tous les appareils et accéder à des fonctionnalités supplémentaires.",
+      "title": "Se connecter"
+    },
+    "quran-radio": {
+      "description": "Écoutez RadioCoran - diffusez le Coran sans publicité",
+      "title": "Radio du Coran"
+    },
+    "reading-sessions": {
+      "description": "Révisez facilement votre voyage Coranique en parcourant votre historique de lecture personnalisé, en gardant une trace des Ayahs que vous avez explorés sur Quran.com.",
+      "title": "Afficher l'historique de lecture"
+    },
+    "reading-view": {
+      "description": "Afficher le Coran en mode lecture mushaf",
+      "title": "Mode lecture"
+    },
+    "search-bar": {
+      "description": "Trouvez les Ayahs, Sourates, mots-clés, Juz et sujets via la barre de recherche",
+      "title": "Barre de recherche"
+    },
+    "select-reciter": {
+      "description": "Personnalisez votre expérience d'écoute en sélectionnant un récitateur que vous aimez écouter !",
+      "title": "Choisissez parmi une variété de récitateurs à écouter"
+    },
+    "settings": {
+      "description": "Contrôlez vos préférences",
+      "title": "Paramètres"
+    },
+    "streak": {
+      "description": "Fixez des objectifs de lecture personnalisés, suivez vos progrès et développez une habitude de lecture Coranique cohérente grâce à notre fonctionnalité Séries et Plans de lecture.",
+      "title": "Garder une trace des séquences de lecture et des plans de lecture"
+    },
+    "surah-info": {
+      "description": "Obtenez des informations sur chaque Sourate - convenablement situé au début de chaque Sourate",
+      "title": "Lire à propos de la Sourate"
+    },
+    "theme": {
+      "description": "Choisissez votre style préféré (mode clair, sépia ou sombre) pour une expérience de lecture du Coran confortable et personnalisée.",
+      "title": "Lisez le Coran en mode clair, sépia ou sombre"
+    },
+    "translations": {
+      "description": "Choisissez parmi une variété de traductions dans plusieurs langues. Astuce : Comparez les traductions en sélectionnant plusieurs options",
+      "title": "Traductions"
+    },
+    "voice-search": {
+      "description": "Appuyez sur l'icône du micro et récitez l'Ayah que vous recherchez. Petit conseil ! Pour découvrir où quelqu'un récite (ex. les prières Taraweeh), appuyez sur l'icône du micro. Après qu'une ou deux Ayahs soient détectés, appuyez sur stop pour trouver l'emplacement",
+      "title": "Recherche vocale (Tarteel)"
+    },
+    "wbw-audio": {
+      "description": "Sélectionnez cette option pour écouter chaque mot individuellement en cliquant simplement sur le mot !",
+      "title": "Écouter la translittération mot à mot en cliquant sur le mot"
+    },
+    "wbw-translation": {
+      "description": "Affichez la signification de mots individuels pendant que vous lisez ou écoutez le Coran pour améliorer votre vocabulaire Coranique.",
+      "title": "Lire la traduction mot à mot"
+    },
+    "wbw-transliteration": {
+      "description": "Consultez la translittération de chaque mot pour vous aider dans votre voyage de lecture du Coran",
+      "title": "Lire la translittération mot à mot"
+    }
+  }
+}

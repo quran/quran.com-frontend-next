@@ -1,6 +1,10 @@
 /* eslint-disable max-lines */
 import { camelizeKeys } from 'humps';
+import { NextApiRequest } from 'next';
 
+import { MushafLines, QuranFont } from '@/types/QuranReader';
+import { SearchRequestParams, SearchMode } from '@/types/Search/SearchRequestParams';
+import NewSearchResponse from '@/types/Search/SearchResponse';
 import {
   makeAdvancedCopyUrl,
   makeTafsirsUrl,
@@ -22,7 +26,12 @@ import {
   makeReciterUrl,
   makeTafsirContentUrl,
   makePagesLookupUrl,
+  makeNewSearchResultsUrl,
+  makeByRangeVersesUrl,
+  makeWordByWordTranslationsUrl,
 } from '@/utils/apiPaths';
+import generateSignature from '@/utils/auth/signature';
+import { isStaticBuild } from '@/utils/build';
 import { SearchRequest, AdvancedCopyRequest, PagesLookUpRequest } from 'types/ApiRequests';
 import {
   TranslationsResponse,
@@ -40,21 +49,53 @@ import {
   ReciterResponse,
   TafsirContentResponse,
   PagesLookUpResponse,
+  WordByWordTranslationsResponse,
 } from 'types/ApiResponses';
 import AudioData from 'types/AudioData';
-import { MushafLines, QuranFont } from 'types/QuranReader';
+
+export const SEARCH_FETCH_OPTIONS = {
+  headers: {
+    // eslint-disable-next-line @typescript-eslint/naming-convention
+    'x-api-key': process.env.NEXT_PUBLIC_SEARCH_API_KEY,
+  },
+};
 
 export const OFFLINE_ERROR = 'OFFLINE';
 
+export const X_AUTH_SIGNATURE = 'x-auth-signature';
+export const X_TIMESTAMP = 'x-timestamp';
+export const X_INTERNAL_CLIENT = 'x-internal-client';
+
 export const fetcher = async function fetcher<T>(
   input: RequestInfo,
-  init?: RequestInit,
+  init: RequestInit = {},
 ): Promise<T> {
   // if the user is not online when making the API call
   if (typeof window !== 'undefined' && !window.navigator.onLine) {
     throw new Error(OFFLINE_ERROR);
   }
-  const res = await fetch(input, init);
+
+  let reqInit = init;
+  if (isStaticBuild) {
+    const req: NextApiRequest = {
+      url: typeof input === 'string' ? input : input.url,
+      method: init.method || 'GET',
+      body: init.body,
+      headers: init.headers,
+      query: {},
+    } as NextApiRequest;
+
+    const { signature, timestamp } = generateSignature(req, req.url);
+    const headers = {
+      ...init.headers,
+      [X_AUTH_SIGNATURE]: signature,
+      [X_TIMESTAMP]: timestamp,
+      [X_INTERNAL_CLIENT]: process.env.INTERNAL_CLIENT_ID,
+    };
+    reqInit = { ...init, headers };
+  }
+
+  const res = await fetch(input, reqInit);
   if (!res.ok || res.status === 500 || res.status === 404) {
     throw res;
   }
@@ -62,11 +103,25 @@ export const fetcher = async function fetcher<T>(
   return camelizeKeys(json);
 };
 
+/**
+ * Get the verses of a specific chapter.
+ *
+ * @param {string | number} id the ID of the chapter.
+ * @param {string} locale the locale.
+ * @param {Record<string, unknown>} params optional parameters.
+ *
+ * @returns {Promise<VersesResponse>}
+ */
 export const getChapterVerses = async (
   id: string | number,
   locale: string,
   params?: Record<string, unknown>,
-): Promise<VersesResponse> => fetcher<VersesResponse>(makeVersesUrl(id, locale, params));
+): Promise<VersesResponse> => fetcher<VersesResponse>(makeVersesUrl(id, locale, params), {});
+
+export const getRangeVerses = async (
+  locale: string,
+  params?: Record<string, unknown>,
+): Promise<VersesResponse> => fetcher<VersesResponse>(makeByRangeVersesUrl(locale, params));
 
 /**
  * Get the current available translations with the name translated in the current language.
@@ -76,7 +131,18 @@ export const getChapterVerses = async (
  * @returns {Promise<TranslationsResponse>}
  */
 export const getAvailableTranslations = async (language: string): Promise<TranslationsResponse> =>
-  fetcher(makeTranslationsUrl(language));
+  fetcher(makeTranslationsUrl(language), {});
+
+/**
+ * Get the current available wbw translations with the name translated in the current language.
+ *
+ * @param {string} language we use this to get translated names of authors in specific the current language.
+ *
+ * @returns {Promise<WordByWordTranslationsResponse>}
+ */
+export const getAvailableWordByWordTranslations = async (
+  language: string,
+): Promise<WordByWordTranslationsResponse> => fetcher(makeWordByWordTranslationsUrl(language));
 
 /**
  * Get the current available languages with the name translated in the current language.
@@ -86,19 +152,20 @@ export const getAvailableTranslations = async (language: string): Promise<Transl
  * @returns {Promise<LanguagesResponse>}
  */
 export const getAvailableLanguages = async (language: string): Promise<LanguagesResponse> =>
-  fetcher(makeLanguagesUrl(language));
+  fetcher(makeLanguagesUrl(language), {});
 
 /**
  * Get list of available reciters.
  *
  * @param {string} locale  the locale.
+ * @param {string[]} fields optional fields to include.
  *
  * @returns {Promise<RecitersResponse>}
  */
 export const getAvailableReciters = async (
   locale: string,
   fields?: string[],
-): Promise<RecitersResponse> => fetcher(makeAvailableRecitersUrl(locale, fields));
+): Promise<RecitersResponse> => fetcher(makeAvailableRecitersUrl(locale, fields), {});
 
 export const getReciterData = async (reciterId: string, locale: string): Promise<ReciterResponse> =>
   fetcher(makeReciterUrl(reciterId, locale));
@@ -110,8 +177,10 @@ export const getReciterData = async (reciterId: string, locale: string): Promise
  *
  * @param {number} reciterId
  * @param {number} chapter the id of the chapter
+ * @param {boolean} segments flag to include segments.
+ *
+ * @returns {Promise<AudioData>}
  */
-
 export const getChapterAudioData = async (
   reciterId: number,
   chapter: number,
@@ -119,6 +188,7 @@ export const getChapterAudioData = async (
 ): Promise<AudioData> => {
   const res = await fetcher<AudioDataResponse>(
     makeChapterAudioDataUrl(reciterId, chapter, segments),
+    {},
   );
 
   if (res.error) {
@@ -182,6 +252,16 @@ export const getAdvancedCopyRawResult = async (
  */
 export const getSearchResults = async (params: SearchRequest): Promise<SearchResponse> =>
   fetcher(makeSearchResultsUrl(params));
+
+/**
+ * Get the search results of a query.
+ *
+ * @param {SearchRequestParams} params
+ * @returns  {Promise<NewSearchResponse>}
+ */
+export const getNewSearchResults = async <T extends SearchMode>(
+  params: SearchRequestParams<T>,
+): Promise<NewSearchResponse> => fetcher(makeNewSearchResultsUrl(params), SEARCH_FETCH_OPTIONS);
 
 /**
  * Get the list of tafsirs.

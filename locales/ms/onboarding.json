@@ -1,0 +1,107 @@
+{
+  "checklist": {
+    "1": "Ciri halaman utama",
+    "2": "Sesuaikan tetapan anda",
+    "3": "Perkaya pengalaman membaca Ayah anda",
+    "4": "Ciri yang diperibadikan"
+  },
+  "finish": "Selesai",
+  "onboarding-checklist": "Senarai Semak Onboarding",
+  "onboarding-title": "Maksimakan pengalaman Quran.com anda! <br></br> Mulakan lawatan anda sekarang:",
+  "previous": "Sebelumnya",
+  "skip": "Langkau",
+  "steps": {
+    "3-dot-menu": {
+      "description": "Klik menu 3 titik untuk menemui pilihan untuk menyalin, menanda halaman dan mengulang ayat. Guns pelbagai pilihan untuk mengulang ayat",
+      "title": "menu 3 titik"
+    },
+    "ayah-reflection": {
+      "description": "Baca renungan (tadabbur) daripada ulama, penuntut ilmu dan rakyat marhaen untuk mendalami interaksi anda dengan Al-Quran",
+      "title": "Baca refleksi di peringkat ayah"
+    },
+    "ayah-tafsir": {
+      "description": "Terokai tafsir setiap ayah untuk meningkatkan pemahaman. (Tafsir boleh dikumpulkan untuk beberapa ayat untuk rujukan yang lebih mudah).",
+      "title": "Baca Tafsir peringkat Ayah"
+    },
+    "font-size": {
+      "description": "Pilih saiz fon yang sesuai untuk pengalaman membaca yang selesa",
+      "title": "Saiz huruf"
+    },
+    "font-style": {
+      "description": "Pilihan tersedia termasuk Uthmani - Kompleks Raja Fahad v1, Uthmani - Kompleks Raja Fahad v2, Uthmani QPC Hafs, Indopak 15 baris, Indopak 16 baris",
+      "title": "Pilih skrip bacaan pilihan anda"
+    },
+    "inline-wbw": {
+      "description": "Lihat terjemahan setiap perkataan dalam baris (di bawah perkataan) atau dalam gelembung di atas perkataan sambil mendengar Al-Quran",
+      "title": "Paparkan terjemahan pernkata dalam baris (di bawah perkataan) atau paparan \"tool tip\""
+    },
+    "juz": {
+      "description": "Lihat Quran melalui bahagian Juz",
+      "title": "Lihat Quran melalui bahagian Juz"
+    },
+    "listen": {
+      "description": "Mulakan pemain audio untuk mendengar bacaan",
+      "title": "Dengar Surah atau Ayah"
+    },
+    "login": {
+      "description": "Log masuk dan simpan semua tetapan merentas dan dapatkan akses kepada ciri tambahan.",
+      "title": "Log masuk"
+    },
+    "quran-radio": {
+      "description": "Dengar QuranRadio - strim Quran tanpa iklan",
+      "title": "Radio Al-Quran"
+    },
+    "reading-sessions": {
+      "description": "Semak perjalanan al-Quran anda dengan mudah melaui tatapan sejarah bacaan anda dan jejaki ayat-ayat yang telah anda lalui di Quran.com.",
+      "title": "Lihat sejarah bacaan"
+    },
+    "reading-view": {
+      "description": "Lihat Al-Quran dalam mod membaca mushaf",
+      "title": "Mod membaca"
+    },
+    "search-bar": {
+      "description": "Cari ayat, surah, kata kunci, juz dan topik yang anda cari dengan menggunakan bar carian kami. (Search Bar)",
+      "title": "Bar Carian"
+    },
+    "select-reciter": {
+      "description": "Pilih qari kegemaran anda!",
+      "title": "Pilih daripada seleksi qari untuk didengari"
+    },
+    "settings": {
+      "description": "Kawal pilihan anda",
+      "title": "tetapan"
+    },
+    "streak": {
+      "description": "Tetapkan matlamat peribadi anda dalam bacaan al Quran dan ikuti kemajuan anda untuk membina tabiat membaca Al-Quran dengan konsisten melalui ciri \"Perancangan dan Sasaran Bacaan\"\\nkami.",
+      "title": "Jejaki perancangan dan sasaran bacaan"
+    },
+    "surah-info": {
+      "description": "Dapatkan ringkasan setiap Surah di permulaan setiap Surah",
+      "title": "Baca Tentang Surah"
+    },
+    "theme": {
+      "description": "Pilih suasana pembacaan anda—mod Cerah, Sepia atau Gelap—untuk pengalaman membaca al-Quran yang selesa dan tersendiri.",
+      "title": "Baca Al-Quran dalam Mod Cerah, Sepia atau Gelap"
+    },
+    "translations": {
+      "description": "Pilih daripada pelbagai terjemahan dalam pelbagai bahasa. Tip: Bandingkan terjemahan dengan memilih berbilang pilihan",
+      "title": "Terjemahan"
+    },
+    "voice-search": {
+      "description": "Sentuh ikon mikrofon dan bacakan ayat yang anda cari. Laluan Cepat! : Untuk mengetahui ayat yang sedang dibaca (Cth. Solat Tarawih), sentuh ikon mikrofon. Selepas satu atau dua ayat dikesan, tekan berhenti untuk mencari lokasi ayat-ayat yang di baca",
+      "title": "Carian Suara (Tarteel)"
+    },
+    "wbw-audio": {
+      "description": "Guna pilihan ini untuk mendengar setiap perkataan secara individu dengan hanya satu sentuhan pada perkataan yang tertentu!",
+      "title": "Dengar transliterasi per kata dengan mengklik pada perkataan tersebut"
+    },
+    "wbw-translation": {
+      "description": "Lihat maksud perkataan semasa anda membaca atau mendengar Al-Quran untuk membantu anda meningkatkan perbendaharaan kata al-Quran anda",
+      "title": "Baca terjemahan per kata"
+    },
+    "wbw-transliteration": {
+      "description": "Lihat transliterasi per kata untuk membantu pembacaan al Quran",
+      "title": "Baca transliterasi per kata"
+    }
+  }
+}

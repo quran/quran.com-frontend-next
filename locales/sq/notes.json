@@ -1,0 +1,62 @@
+{
+  "add-another-note": "Shto një shënim tjetër",
+  "body-placeholder": "Përdoreni këtë hapësirë për të ruajtur shënime të përgjithshme ose për të shkruar një reflektim.",
+  "checkbox-refl-intro": {
+    "checkbox": {
+      "desc": "<li> Postimi do të thotë që reflektimi juaj do të ndahet në QuranReflect nën emrin tuaj ku do të shqyrtohet nga ekipi i moderatorit dhe do të jetë i dukshëm për komunitetin QuranReflect. <\/li> <li> Pasi postimi juaj të shqyrtohet dhe miratohet ose promovohet nga ekipi ynë i moderimit, ju mund të merrni pëlqime, komente dhe të ndiqni njoftimet. Me t'u identifikuar në QuranReflect, mund të përditësoni cilësimet tuaja të njoftimit për t'iu përshtatur preferencave tuaja. <\/li> <li> Ju mund t'i shikoni shënimet tuaja dhe reflektimet e postuara nën profilin tuaj të hyrjes në Quran.com në seksionin \"Shënimet dhe Reflektimet e Mia\" ose të hyni në <link> QuranReflect <\/link> duke përdorur shenjën tuaj të Quran.com- në email. <\/li>",
+      "title": "Çfarë ndodh nëse e kontrolloj këtë kuti?"
+    },
+    "post-button": "Çfarë ndodh kur postoj në QuranReflect?",
+    "qr-intro": "QuranReflex, së bashku me Quran.com, është një pjesë e familjes Quran.Foundation. Është një platformë sociale për ndarjen e reflektimeve personale mbi Kuranin, duke inkurajuar përdoruesit të përvetësojnë mesazhet e tij dhe të ndajnë njohuri që frymëzojnë ndryshime pozitive. Ndryshe nga tefsiri, i cili është një interpretim dijetar, reflektimet janë mendime dhe përvoja personale që lidhen me ajetet. Postimet e përdoruesve në QuranReflect shqyrtohen dhe moderohen nga një ekip i kualifikuar, i cili do të ndihmojë në sigurimin e cilësisë së përmbajtjes, etiketave kur ndërveprojnë me Kuranin, dhe ato do të fuqizojnë përdoruesit duke ndarë komente dhe duke nxjerrë në pah diskursin e vlefshëm duke nxitur kështu një komunitet shpirtëror të fokusuar në Kuran. . Mësoni më shumë: <link> Quranreflect.com\/faq <\/link>",
+    "title": "Çfarë është QuranReflect dhe çfarë ndodh nëse e kontrolloj këtë kuti?"
+  },
+  "click-to-see-more": "kliko për të parë më shumë",
+  "delete-note": "Fshi shënimin",
+  "delete-note-modal": {
+    "subtitle": "Jeni i sigurt që dëshironi të fshini shënimin?",
+    "title": "Fshi shënimin"
+  },
+  "delete-success": "Shënimi është fshirë me sukses",
+  "empty-notes": "Nuk u gjet asnjë shënim",
+  "empty-reflections": "Nuk u gjetën reflektime",
+  "export-success": "Shënimi është publikuar me sukses në llogarinë tuaj në QuranReflect",
+  "new-note-reflc-intro": {
+    "reflc-prompts": {
+      "deeper": {
+        "desc": "<li> A përmenden ndonjë emër të Allahut dhe si lidhen ata me ajetin? <\/li> <li> Cilat fjalë ose aspekte gjuhësore të tërhoqën vëmendjen? <\/li> <li> A mund të krijoni lidhje me kontekstin e ajetit, vargje të tjera kuranore, hadithe ose ngjarje? <\/li>",
+        "title": "Vështrime më të thella:"
+      },
+      "personal": {
+        "desc": "<li> Në çfarë mënyrash ju ka prekur apo frymëzuar ky varg? <\/li> <li> A ka cilësi apo veprime të përmendura që mund t'i përmirësoni? <\/li> <li> A ka një premtim ose një paralajmërim\/ndalim që mund ta zbatoni në jetën tuaj? <\/li> <li> A keni ndonjë histori personale në lidhje me këtë varg? <\/li> <li> Çfarë ndryshimesh dëshironi të bëni bazuar në këtë varg dhe si mund t'i zbatoni ato praktikisht ju ose dikush tjetër? <\/li>",
+        "title": "Pyetje për reflektim personal:"
+      },
+      "title": "Kërkesat e reflektimit"
+    },
+    "title": "Keni nevojë për ndihmë për të reflektuar mbi Kuranin? Mëso më shumë",
+    "what-is-reflc": {
+      "desc": "Reflektimi ose meditimi mbi Kuranin përfshin leximin ose dëgjimin me kujdes të fjalëve të Allahut, përfshirjen në kuptimet e tij dhe lejimin e tij të ndikojë dhe të ndryshojë për të mirën ne. Kjo quhet \"Tadabbur\". Tefsir, në të kundërt, është një interpretim shkencor i Kuranit, duke ofruar shpjegime të hollësishme të vargjeve të tij bazuar në burime klasike dhe analiza shkencore. Ndërsa Tefsir është i rezervuar për dijetarët, Allahu ﷻ kërkon nga të gjithë që të angazhohen në Tadabbur (Kur'an <link1> 38:29 <\/link1> , <link2> 47:24 <\/link2> , <link3> 4:82 <\/link3> , dhe shumë të tjera). <br><\/br> <br><\/br> Përdoruesit mund t'i ruajnë privatisht shënimet dhe reflektimet e tyre personale. Shpesh reflektimet tona mund të rezonojnë thellë me të tjerët, duke ndihmuar lidhjen e tyre me Kuranin dhe marrëdhënien e tyre me Allahun ﷻ. Kjo është arsyeja pse përdoruesit kanë mundësinë të ndajnë reflektimin e tyre me QuranReflect si pjesë e përpjekjeve tona për t'i ndihmuar njerëzit të rriten së bashku në udhëtimin e tyre. Për të mësuar më shumë, vizitoni: <link4> QuranReflec.com\/faq <\/link4> dhe <link5> Pesë lente për të reflektuar mbi Kuranin <\/link5>",
+      "title": "Çfarë është një Reflektim?"
+    }
+  },
+  "note": "shënim",
+  "notes-and-reflcs": "Shënime & Reflektime",
+  "post-on-qr": "Postoni në Kuran Reflect",
+  "posted-reflections": "Reflektime të postuara",
+  "private-notes": "Shënime",
+  "qr-tooltip": "<span> <link> QuranReflect <\/link> është një platformë sociale për ndarjen e reflektimeve mbi Kuranin. Lidhu rreth Kuranit, lidhu me atë që ka rëndësi. <\/span>",
+  "reflections-intro": {
+    "line-1": "Për të parë dhe ndërvepruar me komentet, për t'u angazhuar me komunitetin dhe për të bërë më shumë, vizitoni <link> QuranReflec.com <\/link> .",
+    "line-2": "Ju mund të identifikoheni në llogarinë tuaj të lidhur në QuranReflec duke u identifikuar ose duke u regjistruar me të njëjtin email të Quran.com të përdorur në hyrjen tuaj.",
+    "line-3": "Përmbajtja që nuk është e përshtatshme për shikim publik do të fshihet ose fshihet. Përdoruesit që postojnë përmbajtje të papërshtatshme do të bllokohen.",
+    "title": "Mësoni më shumë rreth Reflektimeve të Postuara"
+  },
+  "save-post-to-qr": "Ruani dhe postoni në QuranReflect",
+  "save-privately": "Ruaj privatisht",
+  "save-publish-failed": "Shënimi u ruajt me sukses, por nuk u publikua",
+  "save-success": "Shënimi është ruajtur me sukses",
+  "share-to-qr": "Shpërndaje në QuranReflec.com",
+  "share-to-qr-desc": "Ndaje si <b> {{name}} <\/b> . Audienca është përdorues i <b> QuranReflect <\/b>",
+  "update-publish-failed": "Shënimi është përditësuar me sukses, por nuk u publikua",
+  "update-success": "Shënimi është përditësuar me sukses",
+  "view-on-qr": "Shiko në Kuran Reflect"
+}

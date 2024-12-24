@@ -1,5 +1,4 @@
 import Slug from './Slug';
-import TranslatedName from './TranslatedName';
 
 interface Chapter {
   id?: number | string;
@@ -12,8 +11,8 @@ interface Chapter {
   nameComplex: string;
   transliteratedName: string;
   nameArabic: string;
-  translatedName: TranslatedName | string;
-  defaultSlug: Slug;
+  translatedName: string;
+  defaultSlug: Slug | string;
   slug?: string;
   slugs?: Slug[];
 }

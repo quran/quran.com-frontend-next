@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import { memo } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch } from 'react-redux';
@@ -50,6 +50,7 @@ const NavbarBody: React.FC = () => {
     logDrawerOpenEvent('settings');
     dispatch({ type: setIsSettingsDrawerOpen.type, payload: true });
   };
+
   return (
     <div className={styles.itemsContainer}>
       <div className={styles.centerVertically}>
@@ -80,6 +81,7 @@ const NavbarBody: React.FC = () => {
               variant={ButtonVariant.Ghost}
               onClick={openSettingsDrawer}
               ariaLabel={t('aria.change-settings')}
+              id="settings-button"
             >
               <IconSettings />
             </Button>

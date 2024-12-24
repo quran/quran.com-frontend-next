@@ -7,6 +7,7 @@ import styles from './ReadingPreferenceSwitcher.module.scss';
 
 import Switch, { SwitchSize } from '@/dls/Switch/Switch';
 import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
+import useGetMushaf from '@/hooks/useGetMushaf';
 import {
   selectReadingPreferences,
   setReadingPreference,
@@ -14,7 +15,7 @@ import {
 import { selectLastReadVerseKey } from '@/redux/slices/QuranReader/readingTracker';
 import { logValueChange } from '@/utils/eventLogger';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
-import { ReadingPreference } from 'types/QuranReader';
+import { Mushaf, ReadingPreference } from 'types/QuranReader';
 
 export enum ReadingPreferenceSwitcherType {
   SurahHeader = 'surah_header',
@@ -41,6 +42,7 @@ const ReadingPreferenceSwitcher: React.FC<Props> = ({
     isLoading,
   } = usePersistPreferenceGroup();
   const router = useRouter();
+  const mushaf = useGetMushaf();
 
   const readingPreferencesOptions = [
     {
@@ -103,7 +105,10 @@ const ReadingPreferenceSwitcher: React.FC<Props> = ({
       className={classNames(styles.container, {
         [styles.surahHeaderContainer]: type === ReadingPreferenceSwitcherType.SurahHeader,
         [styles.contextMenuContainer]: type === ReadingPreferenceSwitcherType.ContextMenu,
+        [styles.tajweedMushaf]:
+          mushaf === Mushaf.QCFTajweedV4 && type === ReadingPreferenceSwitcherType.SurahHeader,
       })}
+      id="reading-preference-switcher"
     >
       <Switch
         items={readingPreferencesOptions}

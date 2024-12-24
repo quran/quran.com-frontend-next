@@ -38,7 +38,7 @@ const RenameCollectionModal = ({
             formFields={[
               {
                 field: 'name',
-                label: t('new-collection-name'),
+                placeholder: t('quran-reader:new-collection-name'),
                 defaultValue,
                 rules: [{ type: RuleType.Required, value: true, errorMessage: 'Required' }],
                 type: FormFieldType.Text,

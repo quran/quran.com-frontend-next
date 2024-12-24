@@ -1,8 +1,6 @@
-import React from 'react';
-
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
-import { shallowEqual, useSelector } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import Section from './Section';
 import styles from './ThemeSection.module.scss';
@@ -13,6 +11,7 @@ import AutoIcon from '@/icons/auto.svg';
 import MoonIcon from '@/icons/moon-outline.svg';
 import SunIcon from '@/icons/sun-outline.svg';
 import SunsetIcon from '@/icons/sunset.svg';
+import { resetLoadedFontFaces } from '@/redux/slices/QuranReader/font-faces';
 import { selectTheme, setTheme } from '@/redux/slices/theme';
 import ThemeType from '@/redux/types/ThemeType';
 import { logValueChange } from '@/utils/eventLogger';
@@ -30,6 +29,7 @@ const ThemeSection = () => {
     actions: { onSettingsChange },
     isLoading,
   } = usePersistPreferenceGroup();
+  const dispatch = useDispatch();
   const { t } = useTranslation('common');
   const theme = useSelector(selectTheme, shallowEqual);
   const themes = Object.values(ThemeType).map((themeValue) => ({
@@ -52,10 +52,14 @@ const ThemeSection = () => {
   const onThemeSelected = async (value: ThemeType) => {
     logValueChange('theme', theme.type, value);
     onSettingsChange('type', value, setTheme(value), setTheme(theme.type), PreferenceGroup.THEME);
+    if (value !== theme.type) {
+      // reset the loaded Fonts when we switch to a different theme
+      dispatch(resetLoadedFontFaces());
+    }
   };
 
   return (
-    <Section>
+    <Section id="theme-section">
       <Section.Title isLoading={isLoading}>{t('theme')}</Section.Title>
       <Section.Row>
         <Switch

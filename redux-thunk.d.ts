@@ -2,6 +2,7 @@
 import 'redux';
 
 declare module 'redux' {
+  // eslint-disable-next-line jsdoc/require-returns
   /**
    * Overload for bindActionCreators redux function, returns expects responses
    * from thunk actions

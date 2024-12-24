@@ -1,0 +1,74 @@
+@use "src/styles/breakpoints";
+
+.viewContainer {
+    @include breakpoints.desktop {
+        display: flex;
+        align-items: start;
+    }
+}
+.modalHeading {
+    font-size: var(--font-size-large);
+  font-weight: var(--font-weight-bold);
+  margin-block-end: var(--spacing-small);
+}
+
+.container {
+  min-block-size: 70vh;
+  @include breakpoints.desktop {
+    width: 50%;
+  }
+}
+
+.backText {
+    padding-inline-start: var(--spacing-micro);
+}
+.headerContainer {
+    padding-block-end: var(--spacing-small);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.title {
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-jumbo);
+    padding-inline-end: var(--spacing-small);
+}
+
+.tickIcon {
+    span {
+        align-items: center;
+    }
+    &:hover {
+        svg {
+            path {
+                color: var(--color-background-inverse);
+                stroke: var(--color-background-inverse);
+            }
+        }
+    }
+    svg {
+        path {
+            color: var(--color-background-default);
+            stroke: var(--color-background-default);
+            stroke-width: 1;
+        }
+    }
+}
+
+.contentContainer {
+    min-height: calc(var(--spacing-mega) * 10);
+}
+
+.headerButtonsContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.courseMaterialButton {
+    @include breakpoints.desktop {
+        display: none;
+    }
+}

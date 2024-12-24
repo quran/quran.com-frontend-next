@@ -1,0 +1,22 @@
+{
+  "all-notifications": "Tüm Bildirimler",
+  "channels-notifications": "Kanal Bildirimleri",
+  "channels": {
+    "chat": "Sohbet",
+    "email": "E-posta",
+    "in_app": "Uygulama İçi",
+    "push": "İtmek",
+    "sms": "SMS"
+  },
+  "notif-settings-not-enabled": "Bildirim ayarları etkin değil",
+  "notif-update-success": "Bildirim ayarlarınız başarıyla güncellendi!",
+  "tabs": {
+    "categories-settings": "Kategori Ayarları",
+    "global-settings": "Genel Ayarlar"
+  },
+  "tags": {
+    "learning-plans": "Öğrenme Planları",
+    "qgj": "Kuran Büyüme Yolculuğu",
+    "streaks": "Çizgiler"
+  }
+}

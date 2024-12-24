@@ -1,6 +1,6 @@
 import DEFAULT_SETTINGS, { DefaultSettings } from '../defaultSettings';
 
-import { QuranFont } from 'types/QuranReader';
+import { QuranFont } from '@/types/QuranReader';
 
 const DEFAULT_TRANSLATION = 161; // Taisirul Quran
 const DEFAULT_TAFSIR = 'bn-tafsir-ahsanul-bayaan'; // Tafsir Ahsanul Bayaan

@@ -1,0 +1,22 @@
+{
+  "all-notifications": "所有通知",
+  "channels-notifications": "频道通知",
+  "channels": {
+    "chat": "聊天",
+    "email": "电子邮件",
+    "in_app": "应用内",
+    "push": "推",
+    "sms": "短信"
+  },
+  "notif-settings-not-enabled": "通知设置未启用",
+  "notif-update-success": "您的通知设置已成功更新！",
+  "tabs": {
+    "categories-settings": "类别设置",
+    "global-settings": "全局设置"
+  },
+  "tags": {
+    "learning-plans": "学习计划",
+    "qgj": "古兰经成长之旅",
+    "streaks": "条纹"
+  }
+}

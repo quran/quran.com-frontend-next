@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable max-lines */
 /* eslint-disable react/no-multi-comp */
 /* eslint-disable no-alert */
@@ -22,7 +23,7 @@ export const FormExample = () => {
       formFields={[
         {
           field: 'name',
-          label: 'Name',
+          placeholder: 'Name',
           type: FormFieldType.Text,
         },
       ]}
@@ -40,9 +41,27 @@ export const WithRequiredField = () => {
       formFields={[
         {
           field: 'name',
-          label: 'Name',
+          placeholder: 'Name',
           type: FormFieldType.Text,
           rules: [{ type: RuleType.Required, value: true, errorMessage: 'name is required' }],
+        },
+      ]}
+      actionText="Submit"
+      onSubmit={(data) => {
+        console.log(data);
+      }}
+    />
+  );
+};
+
+export const WithStarRating = () => {
+  return (
+    <FormBuilder
+      formFields={[
+        {
+          defaultValue: '5',
+          field: 'rating',
+          type: FormFieldType.StarRating,
         },
       ]}
       actionText="Submit"
@@ -60,7 +79,7 @@ export const WithEmailValidation = () => {
         {
           field: 'email',
           type: FormFieldType.Text,
-          label: 'Email',
+          placeholder: 'Email',
           rules: [
             { type: RuleType.Required, value: true, errorMessage: 'email is required' },
             {
@@ -85,7 +104,7 @@ export const WithFailedOnSubmit = () => {
       formFields={[
         {
           field: 'code',
-          label: 'Verification Code',
+          placeholder: 'Verification Code',
           type: FormFieldType.Text,
           rules: [{ type: RuleType.Required, value: true, errorMessage: 'code is required' }],
         },

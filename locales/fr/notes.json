@@ -1,0 +1,62 @@
+{
+  "add-another-note": "Ajouter une autre note",
+  "body-placeholder": "Utilisez cet espace pour enregistrer des notes générales ou pour rédiger une réflexion.",
+  "checkbox-refl-intro": {
+    "checkbox": {
+      "desc": "<li> La publication signifie que votre réflexion sera partagée sur QuranReflect sous votre nom où elle sera examinée par l'équipe de modération et visible par la communauté QuranReflect. </li> <li> Une fois votre message examiné et approuvé ou promu par notre équipe de modération, vous pourrez recevoir des likes, des commentaires et suivre des notifications. Une fois connecté à QuranReflect, vous pourrez mettre à jour vos paramètres de notification en fonction de vos préférences. </li> <li> Vous pouvez consulter vos notes et réflexions publiées sous votre profil Quran.com dans la section « Mes notes et réflexions », ou vous connecter à <link> QuranReflect </link> en utilisant votre identifiant Quran.com par e-mail. </li>",
+      "title": "Que se passe-t-il si je coche cette case ?"
+    },
+    "post-button": "Que se passe-t-il lorsque je publie sur QuranReflect ?",
+    "qr-intro": "QuranReflect, avec Quran.com, fait partie de la famille Quran.Foundation. Il s'agit d'une plateforme sociale permettant de partager des réflexions personnelles sur le Coran, encourageant les utilisateurs à intérioriser ses messages et à partager des idées qui inspirent un changement positif. Contrairement au tafsir, qui est une interprétation savante, les réflexions sont des pensées et des expériences personnelles liées aux Ayahs. Les messages des utilisateurs sur QuranReflect sont examinés et modérés par une équipe qualifiée, qui contribuera à garantir la qualité du contenu et les étiquettes lors de l'interaction avec le Coran, et responsabilisera les utilisateurs en partageant des avis et en mettant en évidence des discours précieux, favorisant ainsi une communauté spirituellement édifiante et centrée sur le Coran. Pour en savoir plus : <link> Quranreflect.com/faq </link>",
+    "title": "Qu'est-ce que QuranReflect et que se passe-t-il si je coche cette case ?"
+  },
+  "click-to-see-more": "cliquez pour en voir plus",
+  "delete-note": "Supprimer la note",
+  "delete-note-modal": {
+    "subtitle": "Êtes-vous sûr de vouloir supprimer la note ?",
+    "title": "Supprimer la note"
+  },
+  "delete-success": "La note a été supprimée avec succès",
+  "empty-notes": "Aucune note trouvée",
+  "empty-reflections": "Aucune réflexions trouvée",
+  "export-success": "La note a été publiée dans votre compte sur QuranReflect",
+  "new-note-reflc-intro": {
+    "reflc-prompts": {
+      "deeper": {
+        "desc": "<li> Des noms d'Allah sont-ils mentionnés et quel est leur lien avec l'Ayah ? </li> <li> Quels mots ou aspects linguistiques ont retenu votre attention ? </li> <li> Pouvez-vous établir des liens avec le contexte de l'Ayah, d'autres Ayahs Coraniques, des hadiths ou des évènements ? </li>",
+        "title": "Informations approfondies :"
+      },
+      "personal": {
+        "desc": "<li> De quelle manière cette Ayah vous a-t-elle ému ou inspiré ? </li> <li> Y a-t-il des qualités ou des actions mentionnées que vous pouvez améliorer ? </li> <li> Y a-t-il une promesse ou un avertissement/une interdiction que vous pouvez appliquer à votre vie ? </li> <li> Avez-vous une histoire personnelle liée à cette Ayah ? </li> <li> Quels changements souhaitez-vous apporter sur la base de cette Ayah, et comment vous, ou quelqu'un d'autre, pouvez les mettre en œuvre de manière pratique ? </li>",
+        "title": "Questions de réflexion personnelle :"
+      },
+      "title": "Réflexions"
+    },
+    "title": "Besoin d’aide pour réfléchir sur le Coran ? En apprendre davantage",
+    "what-is-reflc": {
+      "desc": "Réfléchir ou méditer sur le Coran implique de lire ou d'écouter attentivement les paroles d'Allah, de s'engager dans leurs significations et de leur permettre de nous affecter et de nous changer pour le mieux. C'est ce qu'on appelle \"Tadabbur\". Le Tafsir, en revanche, est une interprétation savante du Coran, fournissant des explications détaillées de ses Ayahs basées sur des sources classiques et des analyses savantes. Alors que le Tafsir est réservé aux savants, Allah ﷻ demande à chacun de s'engager dans le Tadabbur (Coran <link1> 38:29 </link1> , <link2> 47:24 </link2> , <link3> 4:82 </link3> , et beaucoup plus). <br></br> <br></br> Les utilisateurs peuvent enregistrer leurs notes et réflexions personnelles en privé. Souvent, nos réflexions peuvent profondément résonner chez les autres, contribuant ainsi à leur connexion avec le Coran et à leur relation avec Allah ﷻ. C'est pourquoi les utilisateurs ont la possibilité de partager leur réflexion sur QuranReflect dans le cadre de nos efforts visant à aider les gens à grandir ensemble dans leur voyage. Pour en savoir plus, visitez : <link4> QuranReflect.com/faq </link4> et <link5> Cinq façon de réfléchir sur le Coran </link5>",
+      "title": "Qu'est-ce qu'une réflexion ?"
+    }
+  },
+  "note": "Note",
+  "notes-and-reflcs": "Notes et réflexions",
+  "post-on-qr": "Publier sur QuranReflect",
+  "posted-reflections": "Réflexions publiées",
+  "private-notes": "Notes",
+  "qr-tooltip": "<span> <link>QuranReflect</link> est une plateforme sociale de partage de réflexions sur le Coran. Connectez-vous autour du Coran, connectez-vous avec ce qui compte. </span>",
+  "reflections-intro": {
+    "line-1": "Pour afficher et interagir avec les commentaires, s'engager avec la communauté et bien plus encore, visitez <link> QuranReflect.com </link> .",
+    "line-2": "Vous pouvez vous connecter à votre compte QuranReflect en vous connectant ou en vous inscrivant avec la même adresse e-mail utilisée pour se connecter à Quran.com.",
+    "line-3": "Le contenu qui ne convient pas au public sera masqué ou supprimé. Les utilisateurs publiant du contenu inapproprié seront bloqués.",
+    "title": "En savoir plus sur les réflexions publiées"
+  },
+  "save-post-to-qr": "Enregistrer et publier sur QuranReflect",
+  "save-privately": "Enregistrer en privé",
+  "save-publish-failed": "La note a été enregistrée avec succès, mais n'a pas pu être publiée",
+  "save-success": "La note a été enregistrée avec succès",
+  "share-to-qr": "Partager sur QuranReflect.com",
+  "share-to-qr-desc": "Partager en tant que <b> {{name}} </b> . Le public est constitué des <b> utilisateurs de QuranReflect </b>",
+  "update-publish-failed": "La note a été mise à jour avec succès mais n'a pas pu être publiée",
+  "update-success": "La note a été mise à jour avec succès",
+  "view-on-qr": "Voir sur QuranReflect"
+}

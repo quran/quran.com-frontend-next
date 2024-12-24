@@ -1,0 +1,34 @@
+@use "src/styles/theme";
+
+.count {
+    position: absolute;
+    border-radius: 50%;
+    background-color: var(--color-error-deep);
+
+    @include theme.light {
+        color: var(--color-text-inverse);
+    }
+
+    @include theme.dark {
+        color: var(--color-text-default);
+    }
+
+    @include theme.sepia {
+        color: var(--color-text-inverse);
+    }
+
+    z-index: var(--z-index-default);
+    margin-inline-start: var(--spacing-xsmall);
+    margin-block-start: calc(var(--spacing-xxsmall) * -1);
+    width: var(--spacing-medium);
+    height: var(--spacing-medium);
+    display: flex;
+    align-items: center;
+}
+
+.countText {
+    width: 100%;
+    text-align: center;
+    font-size: var(--font-size-xsmall);
+    font-weight: var(--font-weight-bold);
+}

@@ -1,0 +1,22 @@
+{
+  "all-notifications": "Tutte le notifiche",
+  "channels-notifications": "Notifiche sui canali",
+  "channels": {
+    "chat": "Chiacchierata",
+    "email": "E-mail",
+    "in_app": "Nell'app",
+    "push": "Spingere",
+    "sms": "sms"
+  },
+  "notif-settings-not-enabled": "Le impostazioni di notifica non sono abilitate",
+  "notif-update-success": "Le tue impostazioni di notifica sono state aggiornate con successo!",
+  "tabs": {
+    "categories-settings": "Impostazioni delle categorie",
+    "global-settings": "Impostazioni globali"
+  },
+  "tags": {
+    "learning-plans": "Piani di apprendimento",
+    "qgj": "Viaggio di crescita del Corano",
+    "streaks": "Strisce"
+  }
+}

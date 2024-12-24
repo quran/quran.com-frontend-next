@@ -1,0 +1,419 @@
+{
+  "about": "Sobre nosotros",
+  "allow": "Permitir",
+  "and": "",
+  "announcements": {
+    "auth-onboarding": {
+      "data-sync": {
+        "action": "",
+        "description": "",
+        "title": ""
+      },
+      "feedback": {
+        "action": "",
+        "description": "",
+        "title": ""
+      },
+      "quran-foundation-link": {
+        "action": "Siguiente",
+        "description": "Utiliza tu nombre de usuario en Quran.com para acceder a QuranReflect.com, una próspera comunidad global dedicada a la reflexión coránica.",
+        "title": "¡Utiliza tu cuenta en todas las aplicaciones de Quran.Foundation!"
+      },
+      "quran-growth-journey": {
+        "action": "Siguiente",
+        "description": "Mantén tu racha de lectura del Corán y avanza hacia tus metas mientras desarrollas nuevos hábitos.",
+        "title": "¡Comienza tu viaje de crecimiento en el Corán!"
+      },
+      "welcome": {
+        "action": "",
+        "title": ""
+      }
+    },
+    "collections-announcement": {
+      "slide-1": {
+        "description": "",
+        "title": ""
+      }
+    }
+  },
+  "aria": {
+    "change-settings": "",
+    "drawer-close": "",
+    "msg-close": "",
+    "nav-drawer-open": "",
+    "play-surah": "",
+    "select-lng": "",
+    "sidebar-nav-close": ""
+  },
+  "audio": {
+    "auto-scroll": {
+      "off": "Apagado",
+      "on": "",
+      "title": "Desplazamiento automático"
+    },
+    "displaying": "",
+    "exp-tip": "",
+    "exp-tip-no-select": "",
+    "experience": "",
+    "play": "Reproducir audio",
+    "playback-normal": "",
+    "playback-speed": "",
+    "playback-speed-unit": "",
+    "player": {
+      "close-audio-player": "",
+      "currently-playing": "Actualmente se está reproduciendo",
+      "delay-verse": "",
+      "download": "",
+      "full-surah": "",
+      "manage-repeat-settings": "",
+      "mismatch": "Haz clic en \"Comenzar de nuevo\" si en su lugar deseas reproducir {{currentReadingChapter}}.",
+      "pause": "",
+      "pause-audio": "",
+      "play": "",
+      "play-audio": "",
+      "play-range": "",
+      "previous-ayah": "",
+      "repeat-1-verse": "",
+      "repeat-settings": "",
+      "repeat-verse": "",
+      "search-verse": "",
+      "single-verse": "",
+      "start-over": "",
+      "start-playing": "",
+      "stop-repeating": "",
+      "times": "",
+      "verses-range": "",
+      "volume-control": "Control del volumen."
+    },
+    "repeat-moved": "",
+    "select-reciter": "",
+    "speed": "",
+    "title": ""
+  },
+  "ayah": "",
+  "ayahs": "",
+  "beta": "Beta",
+  "bookmark": "",
+  "bookmarked": "",
+  "both": "Ambas",
+  "cancel": "Cancelar",
+  "click-here": "Haz clic aquí",
+  "close": "Cerrar",
+  "command-bar": {
+    "navigations": "Navegaciones",
+    "no-nav-results": "Sin resultados de navegación",
+    "placeholder": "",
+    "powered-by": "",
+    "recent-navigations": "",
+    "search-by-voice": "",
+    "try-navigating": "Intenta navegar a"
+  },
+  "community": {
+    "cta": "Únete a la comunidad",
+    "header": "Únete a la comunidad QDC de constructores y tecnólogos musulmanes.",
+    "sub-header": "Regístrate en el Discord de Quran.com para particilar y colaborar en la comunidad líder en la construcción de tecnología islámica.",
+    "title": "Comunidad"
+  },
+  "complete-sign-up": "",
+  "consents": {
+    "communication": {
+      "body": "🚀 Potencia tu progreso a través de notificaciones <boldSpan> personalizadas </boldSpan> sobre el progreso de tus objetivos, el mantenimiento de las rachas y la mejora del uso de nuestras funciones actuales. <br> </br> <br> </br> ¿Podemos mantenerte informado a través del correo electrónico y otros canales? Tú tienes el control: puedes ajustar estas preferencias en cualquier momento en la configuración de tu cuenta. <br> </br> <br> </br> Simplemente selecciona \"Permitir\" para recibir <boldSpan> recordatorios inspiradores </boldSpan> o \"Ahora no\" para rechazarlos.",
+      "header": "¡Nos encantaría ayudar a mantenerte <boldSpan> comprometido y constante </boldSpan> en tu viaje de crecimiento del Corán! 📖🌟"
+    }
+  },
+  "continue": "",
+  "copied": "",
+  "copied-to-clipboard": "",
+  "copy": "",
+  "counter": {
+    "decrease": "",
+    "increase": ""
+  },
+  "default-description": "",
+  "delete": "Borrar",
+  "developers": "Desarrolladores",
+  "display": "",
+  "donate": "",
+  "donate_monthly": "",
+  "donate_once": "",
+  "edit": "Editar",
+  "email-verification": {
+    "check-spam": "",
+    "email-sent": "",
+    "email-verification": "",
+    "resend-email": "",
+    "resend-email-in": "",
+    "verify-code": ""
+  },
+  "error": {
+    "MediaVersesRangeLimitExceeded": "Solo puedes seleccionar hasta {{limit}} aleyas a la vez. Selecciona una secuencia más pequeña.",
+    "bookmark-sync": "",
+    "email-login-fail": "",
+    "general": "Algo salió mal. Inténtalo de nuevo.",
+    "offline": "Parece que perdiste la conexión. Verifícala y vuelve a intentarlo.",
+    "pref-persist-fail": "",
+    "ranges-no-value": "La secuencia de inicio y final deben tener un valor",
+    "ranges-too-many-verses": "\\n*Máximo {{maxNumberOfVerses}} aleyas",
+    "ranges-wrong-order": "El verso de inicio debe estar antes del verso final"
+  },
+  "exciting-updates": "Actualizaciones emocionantes",
+  "feedback": "Retroalimentación",
+  "fonts": {
+    "15_lines": "15 líneas",
+    "16_lines": "16 líneas",
+    "code_v1": "King Fahad Complex V1",
+    "code_v2": "King Fahad Complex V2",
+    "font-size": "Tamaño de fuente",
+    "lines": "Líneas",
+    "qcf-desc": "Las fuentes King Fahad Complex (V1 y V2) generan una mejor calidad pero toman más en cargar.",
+    "qcf-v4-desc": "Las fuentes Tajweed se creó con Easy Quran - Dar Al Marifa Tajweed Mushaf y King Fahad Glorious Quran Printing Complex (KFGQPC) - Uthmanic Hafs V4 Fonts después de recibir el permiso de ambos.",
+    "qpc_uthmani_hafs": "QPC Uthmani Hafs",
+    "quran-font": "Fuente del Corán",
+    "quran-font-size": "Tamaño de fuente del Corán",
+    "tajweed": "",
+    "tajweed-desc": "",
+    "tajweed_v4": "King Fahad Complex V4",
+    "text_indopak": "IndoPak",
+    "text_uthmani": "Uthmani",
+    "translation-font-size": "Tamaño de fuente de la traducción"
+  },
+  "footer": {
+    "description": "",
+    "hiring": "",
+    "rights": "",
+    "title": ""
+  },
+  "form": {
+    "body": "Cuerpo",
+    "code": "",
+    "email": "",
+    "firstName": "",
+    "lastName": "",
+    "title": "Título"
+  },
+  "from": "",
+  "fundraising-sticky-banner": {
+    "cta": "",
+    "title": "¡Dona durante los mejores días!"
+  },
+  "fundraising": {
+    "description": "Las donaciones mensuales nos ayudan a mejorar Quran.com y sostener las operaciones para que nos centremos menos en la recaudación de fondos y más en crear impacto.",
+    "title": ""
+  },
+  "hear-it-pronounced": "",
+  "help": "Ayuda",
+  "hizb": "Hizb",
+  "home": "Inicio",
+  "hours": "Horas",
+  "inline": "",
+  "input": {
+    "clear": "Borrar"
+  },
+  "juz": "Juz",
+  "language": "",
+  "languages": "",
+  "learn-more": "",
+  "learning-plans": "Planes de aprendizaje",
+  "less": "",
+  "loading": "",
+  "login": "",
+  "logout": "",
+  "meccan": "",
+  "medinan": "",
+  "menu": "Menú",
+  "minutes": "Minutos",
+  "mobile-apps": "Aplicaciones Móviles",
+  "mode": "Modo",
+  "more": "",
+  "my-learning-plans": "Mis planes de aprendizaje",
+  "navigate": "",
+  "network": "Comunidad",
+  "new": "¡Nuevo!",
+  "newest": "Más recientes",
+  "next": "Siguiente",
+  "next-ayah": "",
+  "no": "",
+  "no-notifications": "No hay notificaciones todavía.",
+  "none": "Ninguna",
+  "not-now": "Ahora no.",
+  "notes": {
+    "title": "Mis notas y reflexiones"
+  },
+  "notification-settings": "Configuración de notificaciones.",
+  "notification": {
+    "mark-all-as-read": "Marcar todo como leído.",
+    "mark-as-read": "Marcar como leído"
+  },
+  "notifications": "Notificaciones",
+  "off": "",
+  "oldest": "Más antiguas",
+  "on": "",
+  "page": "",
+  "pages": "",
+  "pagination-summary": "{{currentResultNumber}}{{endOfResultNumber}} de {{totalNumberOfResults}} resultados de búsqueda",
+  "pbuh": "",
+  "popular-links": "",
+  "popup": {
+    "footnote": "",
+    "text-1": "",
+    "text-2": "La oportunidad perfecta para la caridad continua (Sadaqa Jariyah). Invierte en tu Más Allá como donante mensual (o solo una vez).",
+    "title": "¡Dona durante los mejores días!"
+  },
+  "powered-by": "",
+  "prepare-hearts": {
+    "cta": "Más información",
+    "title": "¡Seguimos adelante después del Ramadán!"
+  },
+  "prev": "Anterior",
+  "previous-ayah": "",
+  "privacy": "Privacidad",
+  "product-updates": "",
+  "profile": "",
+  "q-reflect": "",
+  "quran-com": "Quran.com",
+  "quran-radio": "",
+  "reading-history": "",
+  "reading-preference": {
+    "reading": "Lectura",
+    "translation": ""
+  },
+  "recitation": "",
+  "reciter": "Recitador",
+  "reciter-summary": "",
+  "reciters": "",
+  "reflect": "",
+  "reflections": "Reflexiones.",
+  "remove": "Eliminar",
+  "rename": "",
+  "retry": "Reintentar",
+  "revelation_order": "",
+  "rub": "",
+  "save": "Guardar",
+  "save-to-collection": "",
+  "search-for": "",
+  "search-results": "",
+  "search": {
+    "filters": "Filtros",
+    "hint": "Intenta buscar",
+    "jump-to": "Saltar a",
+    "no-results": "No se encontraron resultados",
+    "no-results-suggestion": "No pudimos encontrar ningún resultado de búsqueda coincidente con \" {{searchQuery}} \". Intenta buscar una palabra clave diferente.",
+    "popular": "Búsquedas populares",
+    "recent": "Búsquedas recientes",
+    "results": "Resultados",
+    "show-all": "Mostrar todos los resultados",
+    "switch-mode": "Cambiar a búsqueda avanzada",
+    "title": "Buscar"
+  },
+  "seconds": "Segundos",
+  "see-new": "Mira que hay de nuevo.",
+  "settings": {
+    "no-tafsir-selected": "",
+    "no-translation-selected": "",
+    "reading-experience": "Experiencia de lectura",
+    "reset": "Reiniciar",
+    "reset-cta": "Reiniciar configuración",
+    "reset-notif": "",
+    "search-reciter": "",
+    "search-tafsirs": "",
+    "search-translations": "",
+    "selected-reciter": "",
+    "selected-tafsirs": "",
+    "selected-translations": "",
+    "show-tooltip-when-playing-audio": "",
+    "title": "Configuración",
+    "tooltip-playing-audio-helper": "",
+    "value-and-other": "",
+    "value-and-others": "",
+    "wbw-helper": "",
+    "word-tooltip-helper": ""
+  },
+  "share": "",
+  "shared": "",
+  "show-more": "Mostrar más",
+  "sidebar": {
+    "search-hizb": "",
+    "search-juz": "",
+    "search-page": "",
+    "search-surah": "",
+    "try-navigating-with": ""
+  },
+  "sitemap": "Mapa del sitio web",
+  "sort": {
+    "ascending": "Ascendente",
+    "by": "",
+    "descending": "Descendiente"
+  },
+  "style": "Estilo",
+  "submit": "",
+  "subscribe": "Suscribirse.",
+  "subscribed": "Suscrito.",
+  "surah": "Sura",
+  "tafsir": {
+    "font-size": "Tamaño de fueste del tafsir",
+    "group-message": "",
+    "no-text": "",
+    "surah": "Tafsir de la sura",
+    "tafsir-desc": "",
+    "tafsirs-desc": "",
+    "title": "Tafsir"
+  },
+  "tarteel": {
+    "app": "Aplicación Tarteel",
+    "name": "Tarteel.ai"
+  },
+  "terms-and-conditions": "Términos y condiciones",
+  "theme": "Modo",
+  "themes": {
+    "auto": "",
+    "dark": "Oscuro",
+    "light": "Claro",
+    "sepia": "Sepia",
+    "system": "Sistema",
+    "system-desc": "Automáticamente el sistema se adapta a la configuración clara u oscura."
+  },
+  "to": "",
+  "tooltip": "Herramientas emergentes",
+  "tooltip-trans-lang": "",
+  "trans-lang": "",
+  "translation": "Traducción",
+  "translations": "Traducciones",
+  "transliteration": "Transliteración",
+  "type": "Tipo",
+  "unavailable": "No está disponible en este momento.",
+  "undo": "",
+  "validation": {
+    "invalid-email": "",
+    "invalid-field": "",
+    "maximum-length": "{{field}} no puede exceder {{value}} caracteres",
+    "minimum-length": "{{field}} debe tener al menos {{value}} caracteres",
+    "required-field": ""
+  },
+  "verse": "",
+  "verse-bookmark-removed": "",
+  "verse-bookmarked": "",
+  "verses": "",
+  "view": "Ver",
+  "voice": {
+    "ask-permission": "Habilita el permiso del micrófono para comenzar a utilizar la búsqueda por voz.",
+    "error": "Se ha producido un error, inténtalo de nuevo más tarde. O descarga Tarteel App.",
+    "no-permission": "Parece que no tienes los permisos del micrófono habilitados. Habilita los permisos del micrófono e inténtalo de nuevo o descarga Tarteel App.",
+    "not-supported": "Parece que tu navegador no admite el micrófono. Prueba con otro navegador o descarga Tarteel App.",
+    "suggest": "",
+    "suggest-subtitle": "",
+    "suggest-title": "",
+    "voice-search-powered-by": ""
+  },
+  "wbw": "Palabra por palabra",
+  "wbw-lang-summary": "",
+  "wbw-trans-lang": "",
+  "wbw-translation": "",
+  "wbw-transliteration": "",
+  "word-click": {
+    "no-audio": "",
+    "play-audio": "",
+    "title": ""
+  },
+  "word-tooltip": "",
+  "yes": "Sí"
+}

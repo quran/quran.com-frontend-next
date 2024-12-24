@@ -1,0 +1,22 @@
+{
+  "all-notifications": "جميع الإشعارات",
+  "channels-notifications": "إشعارات القنوات",
+  "channels": {
+    "chat": "دردشة",
+    "email": "بريد إلكتروني",
+    "in_app": "داخل التطبيق",
+    "push": "الدفع",
+    "sms": "رسائل نصية قصيرة"
+  },
+  "notif-settings-not-enabled": "لم يتم تمكين إعدادات الإشعارات",
+  "notif-update-success": "تم تحديث إعدادات الإشعارات الخاصة بك بنجاح!",
+  "tabs": {
+    "categories-settings": "إعدادات الفئات",
+    "global-settings": "الإعدادات العامة"
+  },
+  "tags": {
+    "learning-plans": "خطط التعلم",
+    "qgj": "رحلة نمو القرآن",
+    "streaks": "الاستمرارية"
+  }
+}

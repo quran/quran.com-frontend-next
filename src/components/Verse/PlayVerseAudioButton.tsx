@@ -1,15 +1,18 @@
-import React, { useContext } from 'react';
+import React, { useCallback, useContext, useEffect } from 'react';
 
-import { useSelector as useXstateSelector } from '@xstate/react';
+import { useSelector, useSelector as useXstateSelector } from '@xstate/react';
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 
-import Spinner from '../dls/Spinner/Spinner';
 import styles from '../QuranReader/TranslationView/TranslationViewCell.module.scss';
 
+import Spinner from '@/components/dls/Spinner/Spinner';
+import OnboardingEvent from '@/components/Onboarding/OnboardingChecklist/hooks/OnboardingEvent';
+import { useOnboarding } from '@/components/Onboarding/OnboardingProvider';
 import Button, { ButtonShape, ButtonSize, ButtonType, ButtonVariant } from '@/dls/Button/Button';
 import useGetQueryParamOrXstateValue from '@/hooks/useGetQueryParamOrXstateValue';
 import PlayIcon from '@/icons/play-outline.svg';
+import OnboardingGroup from '@/types/OnboardingGroup';
 import QueryParam from '@/types/QueryParam';
 import { getChapterData } from '@/utils/chapter';
 import { logButtonClick } from '@/utils/eventLogger';
@@ -20,7 +23,6 @@ import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext'
 
 interface PlayVerseAudioProps {
   verseKey: string;
-  timestamp: number;
   isTranslationView?: boolean;
   onActionTriggered?: () => void;
 }
@@ -35,8 +37,10 @@ const PlayVerseAudioButton: React.FC<PlayVerseAudioProps> = ({
     value: reciterId,
     isQueryParamDifferent: reciterQueryParamDifferent,
   }: { value: number; isQueryParamDifferent: boolean } = useGetQueryParamOrXstateValue(
-    QueryParam.Reciter,
+    QueryParam.RECITER,
   );
+  const isVisible = useSelector(audioService, (state) => state.matches('VISIBLE'));
+  const { isActive, activeStepGroup, nextStep } = useOnboarding();
 
   const isVerseLoading = useXstateSelector(audioService, (state) =>
     selectIsVerseLoading(state, verseKey),
@@ -46,7 +50,7 @@ const PlayVerseAudioButton: React.FC<PlayVerseAudioProps> = ({
   const chaptersData = useContext(DataContext);
   const chapterData = getChapterData(chaptersData, chapterId.toString());
 
-  const onPlayClicked = () => {
+  const onPlayClicked = useCallback(() => {
     // eslint-disable-next-line i18next/no-literal-string
     logButtonClick(`${isTranslationView ? 'translation_view' : 'reading_view'}_play_verse`);
 
@@ -60,7 +64,37 @@ const PlayVerseAudioButton: React.FC<PlayVerseAudioProps> = ({
     if (onActionTriggered) {
       onActionTriggered();
     }
-  };
+
+    // if the user clicks on the play button while the onboarding is active, we should automatically go to the next step
+    if (isActive && activeStepGroup === OnboardingGroup.READING_EXPERIENCE && isVisible) {
+      // audio player menu item step
+      nextStep();
+    }
+  }, [
+    activeStepGroup,
+    audioService,
+    chapterId,
+    isActive,
+    isTranslationView,
+    isVisible,
+    nextStep,
+    onActionTriggered,
+    reciterId,
+    reciterQueryParamDifferent,
+    verseNumber,
+  ]);
+
+  useEffect(() => {
+    const handlePlayAudioStep = () => {
+      onPlayClicked();
+    };
+
+    window.addEventListener(OnboardingEvent.STEP_AFTER_PLAY_AUDIO_CLICK, handlePlayAudioStep);
+
+    return () => {
+      window.removeEventListener(OnboardingEvent.STEP_AFTER_PLAY_AUDIO_CLICK, handlePlayAudioStep);
+    };
+  }, [nextStep, onPlayClicked]);
 
   if (isVerseLoading) {
     return (
@@ -70,6 +104,7 @@ const PlayVerseAudioButton: React.FC<PlayVerseAudioProps> = ({
         type={ButtonType.Success}
         shape={ButtonShape.Circle}
         variant={ButtonVariant.Ghost}
+        className="play-audio-button" // this class is for onboarding
       >
         <Spinner />
       </Button>
@@ -84,6 +119,7 @@ const PlayVerseAudioButton: React.FC<PlayVerseAudioProps> = ({
       onClick={onPlayClicked}
       shouldFlipOnRTL={false}
       shape={ButtonShape.Circle}
+      id="play-verse-button" // this ID is for onboarding
       className={classNames(styles.iconContainer, styles.verseAction, {
         [styles.fadedVerseAction]: isTranslationView,
       })}

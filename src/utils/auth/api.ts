@@ -1,16 +1,33 @@
 /* eslint-disable max-lines */
+import { NextApiRequest } from 'next';
 import { configureRefreshFetch } from 'refresh-fetch';
 
 import { getTimezone } from '../datetime';
+import { prepareGenerateMediaFileRequestData } from '../media/utils';
 
+import generateSignature from './signature';
+import BookmarkByCollectionIdQueryParams from './types/BookmarkByCollectionIdQueryParams';
+import GetAllNotesQueryParams from './types/Note/GetAllNotesQueryParams';
+
+import { fetcher, X_AUTH_SIGNATURE, X_INTERNAL_CLIENT, X_TIMESTAMP } from '@/api';
 import {
   FilterActivityDaysParams,
-  ActivityDay,
-  UpdateActivityDayBody,
+  QuranActivityDay,
+  UpdateQuranActivityDayBody,
   ActivityDayType,
+  UpdateActivityDayBody,
+  ActivityDay,
+  UpdateLessonActivityDayBody,
+  UpdateActivityDayParams,
 } from '@/types/auth/ActivityDay';
+import ConsentType from '@/types/auth/ConsentType';
+import { Course } from '@/types/auth/Course';
 import { CreateGoalRequest, Goal, GoalCategory, UpdateGoalRequest } from '@/types/auth/Goal';
+import { Note } from '@/types/auth/Note';
+import { Response } from '@/types/auth/Response';
 import { StreakWithMetadataParams, StreakWithUserMetadata } from '@/types/auth/Streak';
+import GenerateMediaFileRequest, { MediaType } from '@/types/Media/GenerateMediaFileRequest';
+import MediaRenderError from '@/types/Media/MediaRenderError';
 import { Mushaf } from '@/types/QuranReader';
 import {
   makeBookmarksUrl,
@@ -33,7 +50,6 @@ import {
   makeBookmarkCollectionsUrl,
   CollectionsQueryParams,
   makeUpdateCollectionUrl,
-  BookmarkByCollectionIdQueryParams,
   makeDeleteCollectionUrl,
   makeAddCollectionBookmarkUrl,
   makeDeleteCollectionBookmarkByIdUrl,
@@ -44,9 +60,22 @@ import {
   makeFilterActivityDaysUrl,
   makeStreakUrl,
   makeEstimateRangesReadingTimeUrl,
-  makePostReflectionViewsUrl,
+  makeUserFeatureFlagsUrl,
+  makeUserConsentsUrl,
+  makeNotesUrl,
+  makeDeleteOrUpdateNoteUrl,
+  makeCountNotesWithinRangeUrl,
+  makeEnrollUserUrl,
+  makeGetCoursesUrl,
+  makeGetCourseUrl,
+  makePublishNoteUrl,
+  makeCourseFeedbackUrl,
+  makeGetUserCoursesCountUrl,
+  makeGenerateMediaFileUrl,
+  makeGetMediaFileProgressUrl,
+  makeGetMonthlyMediaFilesCountUrl,
 } from '@/utils/auth/apiPaths';
-import { fetcher } from 'src/api';
+import { isStaticBuild } from '@/utils/build';
 import CompleteAnnouncementRequest from 'types/auth/CompleteAnnouncementRequest';
 import { GetBookmarkCollectionsIdResponse } from 'types/auth/GetBookmarksByCollectionId';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
@@ -62,9 +91,18 @@ import { Collection } from 'types/Collection';
 import CompleteSignupRequest from 'types/CompleteSignupRequest';
 
 type RequestData = Record<string, any>;
+const IGNORE_ERRORS = [
+  MediaRenderError.MediaVersesRangeLimitExceeded,
+  MediaRenderError.MediaFilesPerUserLimitExceeded,
+];
 
 const handleErrors = async (res) => {
   const body = await res.json();
+  // sometimes FE needs to handle the error from the API instead of showing a general something went wrong message
+  const shouldIgnoreError = IGNORE_ERRORS.includes(body?.error?.code);
+  if (shouldIgnoreError) {
+    return body;
+  }
   throw new Error(body?.message);
 };
 
@@ -120,6 +158,9 @@ const patchRequest = <T>(url: string, requestData?: RequestData): Promise<T> =>
 export const getUserProfile = async (): Promise<UserProfile> =>
   privateFetcher(makeUserProfileUrl());
 
+export const getUserFeatureFlags = async (): Promise<Record<string, boolean>> =>
+  privateFetcher(makeUserFeatureFlagsUrl());
+
 export const refreshToken = async (): Promise<RefreshToken> =>
   privateFetcher(makeRefreshTokenUrl());
 
@@ -128,6 +169,13 @@ export const completeSignup = async (data: CompleteSignupRequest): Promise<UserP
 
 export const completeAnnouncement = async (data: CompleteAnnouncementRequest): Promise<any> => {
   return postRequest(makeCompleteAnnouncementUrl(), data);
+};
+
+export const updateUserConsent = async (data: {
+  consentType: ConsentType;
+  consented: boolean;
+}): Promise<any> => {
+  return postRequest(makeUserConsentsUrl(), data);
 };
 
 export const deleteAccount = async (): Promise<void> => deleteRequest(makeDeleteAccountUrl());
@@ -189,9 +237,12 @@ export const deleteReadingGoal = async (params: { category: GoalCategory }): Pro
 
 export const filterReadingDays = async (
   params: FilterActivityDaysParams,
-): Promise<{ data: ActivityDay[] }> => privateFetcher(makeFilterActivityDaysUrl(params));
+): Promise<{ data: ActivityDay<QuranActivityDay>[] }> =>
+  privateFetcher(makeFilterActivityDaysUrl(params));
 
-export const getActivityDay = async (type: ActivityDayType): Promise<{ data?: ActivityDay }> =>
+export const getActivityDay = async (
+  type: ActivityDayType,
+): Promise<{ data?: ActivityDay<QuranActivityDay> }> =>
   privateFetcher(makeActivityDaysUrl({ type }));
 
 export const addReadingSession = async (chapterNumber: number, verseNumber: number) =>
@@ -200,12 +251,16 @@ export const addReadingSession = async (chapterNumber: number, verseNumber: numb
     verseNumber,
   });
 
-export const updateActivityDay = async ({
-  mushafId,
-  type,
-  ...body
-}: UpdateActivityDayBody): Promise<ActivityDay> =>
-  postRequest(makeActivityDaysUrl({ mushafId, type }), body);
+export const updateActivityDay = async (
+  params: UpdateActivityDayParams,
+): Promise<ActivityDay<QuranActivityDay>> => {
+  if (params.type === ActivityDayType.QURAN) {
+    const { mushafId, type, ...body } = params as UpdateActivityDayBody<UpdateQuranActivityDayBody>;
+    return postRequest(makeActivityDaysUrl({ mushafId, type }), body);
+  }
+  const { type, ...body } = params as UpdateActivityDayBody<UpdateLessonActivityDayBody>;
+  return postRequest(makeActivityDaysUrl({ type }), body);
+};
 
 export const estimateRangesReadingTime = async (body: {
   ranges: string[];
@@ -220,9 +275,6 @@ export const getStreakWithUserMetadata = async (
 export const syncUserLocalData = async (
   payload: Record<SyncDataType, any>,
 ): Promise<SyncUserLocalDataResponse> => postRequest(makeSyncLocalDataUrl(), payload);
-
-export const postReflectionViews = async (postId: string): Promise<{ success: boolean }> =>
-  postRequest(makePostReflectionViewsUrl(postId), {});
 
 export const getUserPreferences = async (): Promise<UserPreferencesResponse> => {
   const userPreferences = (await privateFetcher(
@@ -298,8 +350,80 @@ export const getBookmarksByCollectionId = async (
   return privateFetcher(makeGetBookmarkByCollectionId(collectionId, queryParams));
 };
 
+export const enrollUser = async (courseId: string): Promise<{ success: boolean }> =>
+  postRequest(makeEnrollUserUrl(), {
+    courseId,
+  });
+
+export const postCourseFeedback = async ({
+  courseId,
+  rating,
+  body,
+}: {
+  courseId: string;
+  rating: number;
+  body?: string;
+}): Promise<{ success: boolean }> =>
+  postRequest(makeCourseFeedbackUrl(courseId), {
+    rating,
+    body,
+  });
+
+export const getCourses = async (): Promise<Course[]> => privateFetcher(makeGetCoursesUrl());
+
+export const getCourse = async (courseSlugOrId: string): Promise<Course> =>
+  privateFetcher(makeGetCourseUrl(courseSlugOrId));
+
+export const getUserCoursesCount = async (): Promise<{ count: number }> =>
+  privateFetcher(makeGetUserCoursesCountUrl());
+
 export const addCollection = async (collectionName: string) => {
   return postRequest(makeAddCollectionUrl(), { name: collectionName });
+};
+
+export const getAllNotes = async (params: GetAllNotesQueryParams) => {
+  return privateFetcher(makeNotesUrl(params));
+};
+
+export const countNotesWithinRange = async (from: string, to: string) => {
+  return privateFetcher(makeCountNotesWithinRangeUrl(from, to));
+};
+
+export const addNote = async (payload: Pick<Note, 'body' | 'ranges' | 'saveToQR'>) => {
+  return postRequest(makeNotesUrl(), payload);
+};
+
+export const publishNoteToQR = async (
+  noteId: string,
+  payload: {
+    body: string;
+    ranges?: string[];
+  },
+): Promise<{ success: boolean; postId: string }> =>
+  postRequest(makePublishNoteUrl(noteId), payload);
+
+export const updateNote = async (id: string, body: string, saveToQR: boolean) =>
+  patchRequest(makeDeleteOrUpdateNoteUrl(id), {
+    body,
+    saveToQR,
+  });
+
+export const deleteNote = async (id: string) => deleteRequest(makeDeleteOrUpdateNoteUrl(id));
+
+export const getMediaFileProgress = async (
+  renderId: string,
+): Promise<Response<{ isDone: boolean; progress: number; url?: string }>> =>
+  privateFetcher(makeGetMediaFileProgressUrl(renderId));
+
+export const getMonthlyMediaFilesCount = async (
+  type: MediaType,
+): Promise<Response<{ count: number; limit: number }>> =>
+  privateFetcher(makeGetMonthlyMediaFilesCountUrl(type));
+
+export const generateMediaFile = async (
+  payload: GenerateMediaFileRequest,
+): Promise<Response<{ renderId?: string; url?: string }>> => {
+  return postRequest(makeGenerateMediaFileUrl(), prepareGenerateMediaFileRequestData(payload));
 };
 
 export const requestVerificationCode = async (emailToVerify) => {
@@ -323,6 +447,23 @@ export const withCredentialsFetcher = async <T>(
   init?: RequestInit,
 ): Promise<T> => {
   try {
+    let additionalHeaders = {};
+    if (isStaticBuild) {
+      const req: NextApiRequest = {
+        url: typeof input === 'string' ? input : input.url,
+        method: init.method || 'GET',
+        body: init.body,
+        headers: init.headers,
+        query: {},
+      } as NextApiRequest;
+
+      const { signature, timestamp } = generateSignature(req, req.url);
+      additionalHeaders = {
+        [X_AUTH_SIGNATURE]: signature,
+        [X_TIMESTAMP]: timestamp,
+        [X_INTERNAL_CLIENT]: process.env.INTERNAL_CLIENT_ID,
+      };
+    }
     const data = await fetcher<T>(input, {
       ...init,
       credentials: 'include',
@@ -330,12 +471,12 @@ export const withCredentialsFetcher = async <T>(
         ...init?.headers,
         // eslint-disable-next-line @typescript-eslint/naming-convention
         'x-timezone': getTimezone(),
+        ...additionalHeaders,
       },
     });
     return data;
   } catch (error) {
-    await handleErrors(error);
-    return null;
+    return handleErrors(error);
   }
 };
 

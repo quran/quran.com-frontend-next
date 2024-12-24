@@ -1,3 +1,18 @@
+@use "src/styles/breakpoints";
+
+.contentPage {
+  margin: auto;
+  @include breakpoints.desktop {
+    width: 65%;
+  }
+  @include breakpoints.smallerThanDesktop {
+    width: 90%;
+  }
+  * {
+    line-height: calc(1.3 * var(--line-height-xlarge));
+  }
+}
+
 .contentPage {
   h1,
   & .heading {
@@ -23,6 +38,24 @@
       opacity: var(--opacity-50);
     }
   }
+  ol {
+    list-style: lower-latin;
+  }
+  li {
+    margin-inline-start: var(--spacing-mega);
+  }
+  ul li {
+    list-style: disc;
+  }
+  i {
+    font-style: italic;
+    &.italicLarge {
+      font-size: var(--font-size-large);
+    }
+  }
+  b {
+    font-weight: var(--font-weight-bold);
+  }
 }
 
 .image {
@@ -47,4 +80,33 @@
 .subListItem {
   list-style-type: circle;
   margin-inline-start: var(--spacing-large);
+}
+
+.ctaContainer {
+  padding-block: var(--spacing-large);
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+
+  a {
+    text-decoration: none;
+  }
+}
+
+.section {
+  padding-block-start: var(--spacing-mega);
+}
+.subSection {
+  padding-block-start: var(--spacing-medium);
+}
+.innerSection {
+  padding-block: var(--spacing-medium);
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.subHeading {
+  font-weight: var(--font-weight-bold);
 }

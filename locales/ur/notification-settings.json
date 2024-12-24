@@ -1,0 +1,22 @@
+{
+  "all-notifications": "تمام نوٹیفکیشنز",
+  "channels-notifications": "چینلز نوٹیفکیشنز",
+  "channels": {
+    "chat": "چیٹ",
+    "email": "ای میل",
+    "in_app": "ایپ کے اندر",
+    "push": "پش",
+    "sms": "ایس ایم ایس"
+  },
+  "notif-settings-not-enabled": "نوٹیفکیشن سیٹنگز فعال نہیں ہیں",
+  "notif-update-success": "آپ کی نوٹیفکیشن سیٹنگز کو کامیابی کے ساتھ اپ ڈیٹ کر دیا گیا ہے!",
+  "tabs": {
+    "categories-settings": "اقسام کی سیٹنگز",
+    "global-settings": "عمومی سیٹنگز"
+  },
+  "tags": {
+    "learning-plans": "سیکھنے کے پلانز",
+    "qgj": "قرانی ارتقاء کا سفر",
+    "streaks": "اسٹریکز"
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "all-notifications": "Toutes les notifications",
+  "channels-notifications": "Notifications des chaînes",
+  "channels": {
+    "chat": "Discussion",
+    "email": "E-mail",
+    "in_app": "Intégré à l'application",
+    "push": "Pousser",
+    "sms": "SMS"
+  },
+  "notif-settings-not-enabled": "Les notifications ne sont pas activées",
+  "notif-update-success": "Vos paramètres de notification ont été mis à jour avec succès !",
+  "tabs": {
+    "categories-settings": "Paramètres des catégories",
+    "global-settings": "Paramètres globaux"
+  },
+  "tags": {
+    "learning-plans": "Plans d'apprentissage",
+    "qgj": "Voyage de Développement Spirituel avec le Coran",
+    "streaks": "Séries"
+  }
+}

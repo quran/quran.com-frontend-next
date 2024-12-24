@@ -1,4 +1,5 @@
 @use "src/styles/theme";
+@use "src/styles/breakpoints";
 
 .outerContainer {
   min-height: 80vh;
@@ -6,6 +7,7 @@
   justify-content: center;
   align-items: center;
   padding-block-end: calc(5 * var(--spacing-mega));
+  padding-block-start: var(--spacing-mega);
   padding-inline: var(--spacing-large);
   flex-direction: column;
 }
@@ -13,14 +15,23 @@
 .innerContainer {
   display: flex;
   flex-direction: column;
-  width: calc(10 * var(--spacing-mega));
+  @include breakpoints.desktop {
+    width: calc(10 * var(--spacing-mega));
+  }
+}
+
+.cta {
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-large);
+  padding-block: var(--spacing-large);
+  text-align: center;
 }
 
 .title {
   font-size: var(--font-size-jumbo);
   font-weight: var(--font-weight-bold);
-  text-align: center;
   margin-block-end: var(--spacing-large);
+  text-align: center;
 }
 
 .loginButton {
@@ -86,4 +97,14 @@
 
 .resendButton {
   margin-block-start: var(--spacing-small);
+}
+
+.privacyText {
+  margin-block-start: var(--spacing-medium);
+  font-size: var(--font-size-xsmall);
+  color: var(--color-text-faded);
+}
+
+.bold {
+  font-weight: var(--font-weight-bold);
 }

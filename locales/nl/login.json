@@ -1,15 +1,23 @@
 {
-    "awaiting-confirmation": "Wachtend op bevestiging",
-    "continue-apple": "Doorgaan met Apple",
-    "continue-email": "Doorgaan met e-mail",
-    "continue-facebook": "Ga verder met Facebook",
-    "continue-google": "Ga verder met Google",
-    "email-placeholder": "E-mailadres",
-    "login-error": {
-        "AuthenticationError": "Verificatie mislukt. Probeer het later opnieuw",
-        "TokenExpiredError": "U bent uitgelogd, gelieve opnieuw in te loggen."
-    },
-    "login-title": "Log in op Quran.com",
-    "other-options": "Andere aanmeldingsopties",
-    "verify-code": "Controleer of de verstrekte beveiligingscode overeenkomt met de volgende tekst:"
+  "awaiting-confirmation": "Wachtend op bevestiging",
+  "continue-apple": "Doorgaan met Apple",
+  "continue-email": "Doorgaan met e-mail",
+  "continue-facebook": "Ga verder met Facebook",
+  "continue-google": "Ga verder met Google",
+  "email-placeholder": "E-mailadres",
+  "feature-1": "Volg uw doelen",
+  "feature-2": "Houd leesstrepen aan",
+  "feature-3": "Verzamelingen maken",
+  "feature-4": "Synchroniseer uw gegevens tussen browsers",
+  "feature-5": "En meer!",
+  "feature-6": "<b> Nieuw! </b> Opmerkingen en reflecties",
+  "login-cta": "Inloggen of nu aanmelden:",
+  "login-error": {
+    "AuthenticationError": "Verificatie mislukt. Probeer het later opnieuw",
+    "TokenExpiredError": "U bent uitgelogd, gelieve opnieuw in te loggen."
+  },
+  "login-title": "Log in op Quran.com",
+  "other-options": "Andere aanmeldingsopties",
+  "privacy-policy": "Het beschermen van uw privacy is onze prioriteit – Door u aan te melden, stemt u in met ons <link> Privacybeleid </link> en <link1> Algemene voorwaarden </link1> .",
+  "verify-code": "Controleer of de verstrekte beveiligingscode overeenkomt met de volgende tekst:"
 }

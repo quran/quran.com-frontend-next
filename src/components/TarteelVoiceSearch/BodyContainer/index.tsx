@@ -1,4 +1,4 @@
-import React from 'react';
+import { useEffect } from 'react';
 
 import classNames from 'classnames';
 
@@ -16,8 +16,32 @@ interface Props {
 }
 
 const VoiceSearchBodyContainer: React.FC<Props> = ({ isCommandBar = false }) => {
-  const { isLoading, partialTranscript, searchResult, error, volume, isWaitingForPermission } =
-    useTarteelVoiceSearch();
+  const {
+    isLoading,
+    partialTranscript,
+    searchResult,
+    error,
+    volume,
+    isWaitingForPermission,
+    startRecording,
+    stopRecording,
+  } = useTarteelVoiceSearch();
+
+  useEffect(() => {
+    startRecording();
+
+    return () => {
+      stopRecording();
+    };
+
+    // we only want to start the recording once when the component mounts
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  const stopVoiceSearch = () => {
+    // pass `false` so that we don't stop the recording and get the search results
+    stopRecording(false);
+  };
 
   if (isLoading) {
     return <Spinner size={SpinnerSize.Large} />;
@@ -40,7 +64,7 @@ const VoiceSearchBodyContainer: React.FC<Props> = ({ isCommandBar = false }) => 
   }
 
   // if we received the result but no matches
-  if (searchResult && !searchResult.matches.length) {
+  if (searchResult && !searchResult.matches?.length) {
     return (
       <div
         className={classNames({
@@ -48,7 +72,7 @@ const VoiceSearchBodyContainer: React.FC<Props> = ({ isCommandBar = false }) => 
           [styles.noResultContainer]: isCommandBar,
         })}
       >
-        <NoResults searchQuery={partialTranscript} isSearchDrawer={false} />
+        <NoResults searchQuery={partialTranscript} />
       </div>
     );
   }
@@ -68,6 +92,7 @@ const VoiceSearchBodyContainer: React.FC<Props> = ({ isCommandBar = false }) => 
             verticalLayout={!isCommandBar}
             partialTranscript={partialTranscript}
             volume={volume}
+            stopRecording={stopVoiceSearch}
           />
         </div>
       )}

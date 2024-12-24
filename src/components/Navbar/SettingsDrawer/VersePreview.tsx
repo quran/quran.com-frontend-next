@@ -1,40 +1,51 @@
 import { useEffect } from 'react';
 
-import { useSelector, shallowEqual, useDispatch } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import useSWR from 'swr';
 
 import styles from './VersePreview.module.scss';
 
 import PlainVerseText from '@/components/Verse/PlainVerseText';
+import TajweedFontPalettes from '@/components/Verse/TajweedFontPalettes';
 import Skeleton from '@/dls/Skeleton/Skeleton';
+import useThemeDetector from '@/hooks/useThemeDetector';
 import { addLoadedFontFace } from '@/redux/slices/QuranReader/font-faces';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
-import { getFontFaceNameForPage, getV1OrV2FontFaceSource, isQCFFont } from '@/utils/fontFaceHelper';
+import { selectTheme } from '@/redux/slices/theme';
+import ThemeType from '@/redux/types/ThemeType';
+import { QuranFont } from '@/types/QuranReader';
+import { getFontFaceNameForPage, getQCFFontFaceSource, isQCFFont } from '@/utils/fontFaceHelper';
 import getSampleVerse from '@/utils/sampleVerse';
-import { QuranFont } from 'types/QuranReader';
 import Word from 'types/Word';
 
 const SWR_SAMPLE_VERSE_KEY = 'sample-verse';
 const VersePreview = () => {
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
-  const isTajweed = quranReaderStyles.quranFont === QuranFont.Tajweed;
+  const settingsTheme: { type: ThemeType } = useSelector(selectTheme, shallowEqual);
+  const { themeVariant } = useThemeDetector();
   const { data: sampleVerse } = useSWR(SWR_SAMPLE_VERSE_KEY, () => getSampleVerse());
   const dispatch = useDispatch();
+
   useEffect(() => {
     if (isQCFFont(quranReaderStyles.quranFont) && sampleVerse) {
-      const isV1 = quranReaderStyles.quranFont === QuranFont.MadaniV1;
-      // eslint-disable-next-line i18next/no-literal-string
-      const fontFaceName = getFontFaceNameForPage(isV1, sampleVerse.pageNumber);
+      const fontFaceName = getFontFaceNameForPage(
+        quranReaderStyles.quranFont as QuranFont,
+        sampleVerse.pageNumber,
+      );
       const fontFace = new FontFace(
         fontFaceName,
-        getV1OrV2FontFaceSource(isV1, sampleVerse.pageNumber),
+        getQCFFontFaceSource(
+          quranReaderStyles.quranFont as QuranFont,
+          sampleVerse.pageNumber,
+          themeVariant,
+        ),
       );
       document.fonts.add(fontFace);
       fontFace.load().then(() => {
         dispatch(addLoadedFontFace(fontFaceName));
       });
     }
-  }, [dispatch, quranReaderStyles.quranFont, sampleVerse]);
+  }, [dispatch, quranReaderStyles.quranFont, sampleVerse, settingsTheme, themeVariant]);
 
   if (!sampleVerse) {
     return (
@@ -53,20 +64,13 @@ const VersePreview = () => {
     );
   }
 
-  // BE return the path to the png image of each word, instead of returning the text. So we're mocking the same behavior here
-  let verse;
-  if (isTajweed) {
-    verse = {
-      ...sampleVerse,
-      words: sampleVerse.words.map((word) => ({ ...word, text: word.textImage })),
-    };
-  } else {
-    verse = sampleVerse;
-  }
-
   return (
     <div dir="rtl">
-      <PlainVerseText words={verse.words as Word[]} />
+      <TajweedFontPalettes
+        pageNumber={sampleVerse.pageNumber}
+        quranFont={quranReaderStyles.quranFont}
+      />
+      <PlainVerseText words={sampleVerse.words as Word[]} />
     </div>
   );
 };

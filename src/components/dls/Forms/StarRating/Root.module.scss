@@ -1,0 +1,13 @@
+.container {
+  margin-block-start: var(--spacing-micro);
+  margin-inline-end: var(--spacing-micro);
+  margin-block-end: var(--spacing-micro);
+  margin-inline-start: var(--spacing-micro);
+}
+
+.container[data-orientation="horizontal"] {
+  align-items: center;
+  justify-content: space-between;
+  display: flex;
+  flex-wrap: wrap;
+}

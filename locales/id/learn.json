@@ -1,0 +1,42 @@
+{
+  "about-author": "Tentang Penulis",
+  "add-reflection": "Tambahkan Refleksi",
+  "all-learning-plans": "Semua Rencana Pembelajaran",
+  "author": "Pengarang",
+  "back-to-learning-plan": "Kembali ke Rencana Pembelajaran",
+  "back-to-learning-plans": "Kembali ke Rencana Pembelajaran",
+  "category": "Kategori",
+  "coming-soon": "Segera hadir...",
+  "completed": "Selesai",
+  "continue-learning": "Lanjutkan Belajar",
+  "contributors": "Kontributor",
+  "day": "Hari",
+  "description": "Keterangan",
+  "duration-daily": "Setiap Pelajaran singkat membutuhkan waktu kurang dari {{dailyMins}} menit untuk menyelesaikan semua {{days}} Pelajaran",
+  "empty-learning-plans": "Anda belum terdaftar dalam <link> Rencana Pembelajaran </link> apa pun.",
+  "enroll": "Mendaftar",
+  "enroll-success": "Selamat, Anda menambahkan {{title}} ke daftar Anda!",
+  "enrolled": "Terdaftar",
+  "feedback": {
+    "add-feedback": "Tambahkan Masukan",
+    "desc": "Selamat! Anda telah menyelesaikan rencana pembelajaran ' {{courseName}} '. <br></br> Silakan menilai rencana pembelajaran tersebut dan sampaikan masukan Anda untuk membantu kami meningkatkan konten.",
+    "feedback-placeholder": "Tulis masukan Anda",
+    "feedback-success": "Terima kasih atas masukan Anda!",
+    "your-feedback": "Masukan Anda"
+  },
+  "learn-duration": "Durasi",
+  "learning-plan-material": "Materi Rencana Pembelajaran",
+  "learning-plan-meta-desc": "Rencana Pembelajaran ini akan membantu mengubah cara Anda berinteraksi dengan Al-Qur'an, mulailah perjalanan Anda hari ini!",
+  "learning-plans-desc": "Tingkatkan pengetahuan Anda dengan pelajaran yang mudah diikuti yang membuat Anda terus berkembang dalam perjalanan Anda dengan Al-Qur'an. <br></br> Mulai Rencana Pembelajaran hari ini! Kemajuan Anda dilacak hingga Anda mencapai garis finis.",
+  "learning-plans-meta-desc": "Rencana Pembelajaran Quran.com akan membantu mengubah cara Anda berinteraksi dengan Al-Quran. Jelajahi koleksi pelajaran pilihan kami dan mulailah perjalanan Anda hari ini!",
+  "mark-complete": "Tandai sebagai selesai",
+  "mark-complete-success": "Pelajaran berhasil ditandai sebagai selesai!",
+  "next-lesson": "Pelajaran Berikutnya",
+  "not-enrolled": "Anda belum terdaftar dalam <link> Rencana Pembelajaran </link> .",
+  "prev-lesson": "Pelajaran Sebelumnya",
+  "start-learning": "Mulai Belajar",
+  "tabs": {
+    "main": "Detail Utama",
+    "syllabus": "Silabus"
+  }
+}

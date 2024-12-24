@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { useCallback, useMemo } from 'react';
 
 import { Action } from '@reduxjs/toolkit';
@@ -8,6 +9,7 @@ import Section from './Section';
 import styles from './TranslationSection.module.scss';
 
 import DataFetcher from '@/components/DataFetcher';
+import { useOnboarding } from '@/components/Onboarding/OnboardingProvider';
 import Counter from '@/dls/Counter/Counter';
 import SelectionCard from '@/dls/SelectionCard/SelectionCard';
 import Skeleton from '@/dls/Skeleton/Skeleton';
@@ -35,9 +37,10 @@ const TranslationSection = () => {
   } = usePersistPreferenceGroup();
   const { t, lang } = useTranslation('common');
   const dispatch = useDispatch();
-  const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
+  const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual) as number[];
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const { translationFontScale } = quranReaderStyles;
+  const { isActive, nextStep } = useOnboarding();
 
   const translationLoading = useCallback(
     () => (
@@ -58,23 +61,30 @@ const TranslationSection = () => {
   const onSelectionCardClicked = useCallback(() => {
     dispatch(setSettingsView(SettingsView.Translation));
     logValueChange('settings_view', SettingsView.Translation, SettingsView.Body);
-  }, [dispatch]);
+    if (isActive) {
+      nextStep();
+    }
+  }, [dispatch, isActive, nextStep]);
 
   const renderTranslations = useCallback(
     (data: TranslationsResponse) => {
+      const availableTranslations = selectedTranslations.filter((selectedId) =>
+        data.translations.some((translation) => translation.id === selectedId),
+      );
+
       const firstSelectedTranslation = data.translations.find(
-        (translation) => translation.id === selectedTranslations[0],
+        (translation) => translation.id === availableTranslations[0],
       );
 
       let selectedValueString = t('settings.no-translation-selected');
-      if (selectedTranslations.length === 1) selectedValueString = firstSelectedTranslation?.name;
-      if (selectedTranslations.length === 2) {
+      if (availableTranslations.length === 1) selectedValueString = firstSelectedTranslation?.name;
+      if (availableTranslations.length === 2) {
         selectedValueString = t('settings.value-and-other', {
           value: firstSelectedTranslation?.name,
           othersCount: localizedSelectedTranslations,
         });
       }
-      if (selectedTranslations.length > 2) {
+      if (availableTranslations.length > 2) {
         selectedValueString = t('settings.value-and-others', {
           value: firstSelectedTranslation?.name,
           othersCount: localizedSelectedTranslations,
@@ -133,7 +143,7 @@ const TranslationSection = () => {
 
   return (
     <div className={styles.container}>
-      <Section>
+      <Section id="translation-section">
         <Section.Title isLoading={isLoading}>{t('translation')}</Section.Title>
         <Section.Row>
           <DataFetcher

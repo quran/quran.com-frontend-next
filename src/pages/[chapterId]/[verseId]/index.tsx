@@ -1,8 +1,8 @@
 /* eslint-disable max-lines */
 /* eslint-disable react-func/max-lines-per-function */
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
-import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
+import useTranslation from 'next-translate/useTranslation';
 
 import { getChapterIdBySlug, getChapterVerses, getPagesLookup } from '@/api';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
@@ -10,6 +10,7 @@ import QuranReader from '@/components/QuranReader';
 import { getChapterOgImageUrl } from '@/lib/og';
 import Error from '@/pages/_error';
 import { getQuranReaderStylesInitialState } from '@/redux/defaultSettings/util';
+import { QuranReaderDataType } from '@/types/QuranReader';
 import { getDefaultWordFields, getMushafId } from '@/utils/api';
 import { getAllChaptersData, getChapterData } from '@/utils/chapter';
 import { getLanguageAlternates, toLocalizedNumber, toLocalizedVersesRange } from '@/utils/locale';
@@ -29,7 +30,6 @@ import { generateVerseKeysBetweenTwoVerseKeys } from '@/utils/verseKeys';
 import { ChapterResponse, VersesResponse } from 'types/ApiResponses';
 import ChaptersData from 'types/ChaptersData';
 import MetaData from 'types/MetaData';
-import { QuranReaderDataType } from 'types/QuranReader';
 
 type VerseProps = {
   chapterResponse?: ChapterResponse;
@@ -71,7 +71,9 @@ const Verse: NextPage<VerseProps> = ({ chapterResponse, versesResponse, hasError
       <QuranReader
         initialData={versesResponse}
         id={chapterResponse.chapter.id}
-        quranReaderDataType={isVerse ? QuranReaderDataType.Verse : QuranReaderDataType.VerseRange}
+        quranReaderDataType={
+          isVerse ? QuranReaderDataType.Verse : QuranReaderDataType.ChapterVerseRanges
+        }
       />
     </>
   );

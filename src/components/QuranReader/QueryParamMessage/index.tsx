@@ -1,13 +1,12 @@
 /* eslint-disable react-func/max-lines-per-function */
-/* eslint-disable max-lines */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable jsx-a11y/no-static-element-interactions */
-import React, { useContext, useMemo } from 'react';
+import React, { useContext } from 'react';
 
 import { useSelector as useXstateSelector } from '@xstate/react';
+import { useRouter } from 'next/router';
 import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
-import { useRouter } from 'next/router';
 import { shallowEqual, useSelector } from 'react-redux';
 
 import styles from './QueryParamMessage.module.scss';
@@ -22,6 +21,7 @@ import {
   setSelectedTranslations,
 } from '@/redux/slices/QuranReader/translations';
 import PreferenceGroup from '@/types/auth/PreferenceGroup';
+import { QuranReaderFlow } from '@/types/QuranReader';
 import { areArraysEqual } from '@/utils/array';
 import { isValidTranslationsQueryParamValue } from '@/utils/queryParamValidator';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
@@ -33,89 +33,20 @@ interface Props {
   wordByWordLocaleQueryParamDifferent: boolean;
 }
 
-const getNumberOfDifferentParams = (
-  translationsQueryParamDifferent: boolean,
-  reciterQueryParamDifferent: boolean,
-  wordByWordLocaleQueryParamDifferent: boolean,
-): number => {
-  let numberOfDifferentParams = 0;
-  if (translationsQueryParamDifferent) {
-    numberOfDifferentParams += 1;
-  }
-  if (reciterQueryParamDifferent) {
-    numberOfDifferentParams += 1;
-  }
-  if (wordByWordLocaleQueryParamDifferent) {
-    numberOfDifferentParams += 1;
-  }
-  return numberOfDifferentParams;
-};
-
 const QueryParamMessage: React.FC<Props> = ({
   translationsQueryParamDifferent,
   reciterQueryParamDifferent,
   wordByWordLocaleQueryParamDifferent,
 }) => {
-  const { t, lang } = useTranslation('common');
+  const { lang } = useTranslation('common');
   const router = useRouter();
   const audioService = useContext(AudioPlayerMachineContext);
-  const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
+  const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual) as number[];
   const selectedReciterId = useXstateSelector(audioService, (state) => state.context.reciterId);
   const selectedWordByWordLocale = useSelector(selectWordByWordLocale, shallowEqual);
   const {
     actions: { onSettingsChange, onXstateSettingsChange },
   } = usePersistPreferenceGroup();
-
-  // eslint-disable-next-line react-func/max-lines-per-function
-  const text = useMemo(() => {
-    const numberOfDifferentParams = getNumberOfDifferentParams(
-      translationsQueryParamDifferent,
-      reciterQueryParamDifferent,
-      wordByWordLocaleQueryParamDifferent,
-    );
-    // if we are not using any params
-    if (numberOfDifferentParams === 0) {
-      return '';
-    }
-    let usedParamsText = '';
-    if (numberOfDifferentParams === 1) {
-      if (translationsQueryParamDifferent) {
-        usedParamsText = t('translations');
-      } else if (reciterQueryParamDifferent) {
-        usedParamsText = t('reciter');
-      } else if (wordByWordLocaleQueryParamDifferent) {
-        usedParamsText = t('wbw-trans-lang');
-      }
-    } else if (numberOfDifferentParams === 2) {
-      let isFirst = true;
-      if (translationsQueryParamDifferent) {
-        usedParamsText = isFirst
-          ? `${t('translations')} ${t('and')}`
-          : `${usedParamsText} ${t('translations')}`;
-        isFirst = false;
-      }
-      if (reciterQueryParamDifferent) {
-        usedParamsText = isFirst
-          ? `${t('reciter')} ${t('and')}`
-          : `${usedParamsText} ${t('reciter')}`;
-        isFirst = false;
-      }
-      if (wordByWordLocaleQueryParamDifferent) {
-        usedParamsText = isFirst
-          ? `${t('wbw-trans-lang')} ${t('and')}`
-          : `${usedParamsText} ${t('wbw-trans-lang')}`;
-        isFirst = false;
-      }
-    } else if (numberOfDifferentParams === 3) {
-      usedParamsText = `${t('translations')}, ${t('reciter')} ${t('and')} ${t('wbw-trans-lang')}`;
-    }
-    return usedParamsText;
-  }, [
-    reciterQueryParamDifferent,
-    t,
-    translationsQueryParamDifferent,
-    wordByWordLocaleQueryParamDifferent,
-  ]);
 
   /**
    * When the use clicks on use Redux, we will import the values from redux and
@@ -124,14 +55,23 @@ const QueryParamMessage: React.FC<Props> = ({
    */
   const onResetToReduxStateClicked = () => {
     if (translationsQueryParamDifferent) {
-      router.query[QueryParam.Translations] = selectedTranslations.join(',');
+      router.query[QueryParam.TRANSLATIONS] = selectedTranslations.join(',');
     }
     if (reciterQueryParamDifferent) {
-      router.query[QueryParam.Reciter] = String(selectedReciterId);
+      router.query[QueryParam.RECITER] = String(selectedReciterId);
     }
     if (wordByWordLocaleQueryParamDifferent) {
       router.query[QueryParam.WBW_LOCALE] = selectedWordByWordLocale;
     }
+    // if is in Quranic Calendar flow, remove the flow query param
+    if (router.query[QueryParam.FLOW] === QuranReaderFlow.QURANIC_CALENDER) {
+      delete router.query[QueryParam.FLOW];
+      // if hide arabic is true, remove it so that the arabic text get shown again
+      if (router.query[QueryParam.HIDE_ARABIC] === 'true') {
+        delete router.query[QueryParam.HIDE_ARABIC];
+      }
+    }
+
     router.push(router, undefined, { shallow: true });
   };
 
@@ -142,9 +82,9 @@ const QueryParamMessage: React.FC<Props> = ({
   const onPersistQueryParamsClicked = () => {
     if (
       translationsQueryParamDifferent &&
-      isValidTranslationsQueryParamValue(router.query[QueryParam.Translations] as string)
+      isValidTranslationsQueryParamValue(router.query[QueryParam.TRANSLATIONS] as string)
     ) {
-      const nextTranslations = (router.query[QueryParam.Translations] as string)
+      const nextTranslations = (router.query[QueryParam.TRANSLATIONS] as string)
         .split(',')
         .map((stringValue) => Number(stringValue));
 
@@ -169,7 +109,7 @@ const QueryParamMessage: React.FC<Props> = ({
     }
 
     if (reciterQueryParamDifferent) {
-      const nextReciterId = Number(router.query[QueryParam.Reciter]);
+      const nextReciterId = Number(router.query[QueryParam.RECITER]);
       onXstateSettingsChange(
         'reciter',
         nextReciterId,
@@ -180,23 +120,13 @@ const QueryParamMessage: React.FC<Props> = ({
     }
   };
 
-  const areUrlParamsUsed =
-    translationsQueryParamDifferent ||
-    reciterQueryParamDifferent ||
-    wordByWordLocaleQueryParamDifferent;
-
-  if (!areUrlParamsUsed) {
-    return <></>;
-  }
-
   return (
     <div className={styles.container}>
       <Trans
         i18nKey="quran-reader:query-param-message"
         components={[
-          <span key={0}>{text}</span>,
-          <span key={1} onClick={onResetToReduxStateClicked} className={styles.link} />,
-          <span key={2} onClick={onPersistQueryParamsClicked} className={styles.link} />,
+          <span key={0} onClick={onResetToReduxStateClicked} className={styles.link} />,
+          <span key={1} onClick={onPersistQueryParamsClicked} className={styles.link} />,
         ]}
       />
     </div>

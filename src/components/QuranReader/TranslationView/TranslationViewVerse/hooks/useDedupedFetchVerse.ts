@@ -1,7 +1,7 @@
 import { useEffect, useMemo } from 'react';
 
-import useTranslation from 'next-translate/useTranslation';
 import { useRouter } from 'next/router';
+import useTranslation from 'next-translate/useTranslation';
 import useSWRImmutable from 'swr/immutable';
 
 import { getTranslationViewRequestKey, verseFetcher } from '@/components/QuranReader/api';
@@ -31,6 +31,10 @@ interface UseDedupedFetchVerseResult {
   verse: Verse | null;
   firstVerseInPage: Verse | null;
   bookmarksRangeUrl: string | null;
+  notesRange: {
+    from: string;
+    to: string;
+  } | null;
 }
 
 /**
@@ -67,7 +71,10 @@ const useDedupedFetchVerse = ({
 
   const idxInPage = verseIdx % initialData.pagination.perPage;
 
-  const isUsingDefaultSettings = useIsUsingDefaultSettings({ translations: translationParams });
+  const isUsingDefaultSettings = useIsUsingDefaultSettings({
+    translationParams,
+    selectedTranslations,
+  });
   const shouldUseInitialData = pageNumber === 1 && isUsingDefaultSettings;
   const { data: verses } = useSWRImmutable(
     getTranslationViewRequestKey({
@@ -108,10 +115,25 @@ const useDedupedFetchVerse = ({
         )
       : null;
 
+  const verse = verses ? verses[idxInPage] : null;
+
+  // This part handles an edge case where the user has no selected translations but the `initialData` sent from server-side rendering has a default translation.
+  // So, we need to remove the translations from the verse if the user has no selected translations.
+  if (verse && selectedTranslations.length === 0) {
+    verse.translations = [];
+  }
+
   return {
-    verse: verses ? verses[idxInPage] : null,
+    verse,
     firstVerseInPage: verses ? verses[0] : null,
     bookmarksRangeUrl,
+    notesRange:
+      verses && verses.length > 0
+        ? {
+            from: verses?.[0].verseKey,
+            to: verses?.[verses.length - 1].verseKey,
+          }
+        : null,
   };
 };
 

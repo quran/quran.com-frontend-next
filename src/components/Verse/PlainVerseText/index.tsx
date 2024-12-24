@@ -3,23 +3,23 @@ import React from 'react';
 import classNames from 'classnames';
 import { shallowEqual, useSelector } from 'react-redux';
 
+import TajweedFontPalettes from '../TajweedFontPalettes';
 import styles from '../VerseText.module.scss';
 
 import PlainVerseTextWord from './PlainVerseTextWord';
 
 import useIsFontLoaded from '@/components/QuranReader/hooks/useIsFontLoaded';
 import GlyphWord from '@/dls/QuranWord/GlyphWord';
-import TajweedWord from '@/dls/QuranWord/TajweedWordImage';
 import TextWord from '@/dls/QuranWord/TextWord';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import { getFontClassName, isQCFFont } from '@/utils/fontFaceHelper';
-import { QuranFont } from 'types/QuranReader';
 import Word from 'types/Word';
 
 type Props = {
   words: Word[];
   shouldShowWordByWordTranslation?: boolean;
   shouldShowWordByWordTransliteration?: boolean;
+  fontScale?: number;
 };
 
 /**
@@ -34,23 +34,46 @@ const PlainVerseText: React.FC<Props> = ({
   words,
   shouldShowWordByWordTranslation = false,
   shouldShowWordByWordTransliteration = false,
+  fontScale,
 }: Props): JSX.Element => {
   const { quranFont, quranTextFontScale, mushafLines } = useSelector(
     selectQuranReaderStyles,
     shallowEqual,
   );
   const isQcfFont = isQCFFont(quranFont);
-  const isFontLoaded = useIsFontLoaded(words[0].pageNumber, quranFont);
+  const { pageNumber } = words[0];
+  const isFontLoaded = useIsFontLoaded(pageNumber, quranFont);
   return (
-    <div
-      className={classNames(styles.verseTextContainer, styles.tafsirOrTranslationMode, {
-        [styles[getFontClassName(quranFont, quranTextFontScale, mushafLines)]]:
-          quranFont !== QuranFont.Tajweed,
-      })}
-    >
-      <div className={classNames(styles.verseText, styles.verseTextWrap)} translate="no">
-        {words?.map((word) => {
-          if (isQcfFont) {
+    <>
+      <TajweedFontPalettes pageNumber={pageNumber} quranFont={quranFont} />
+      <div
+        className={classNames(
+          styles.verseTextContainer,
+          styles.tafsirOrTranslationMode,
+          styles[getFontClassName(quranFont, fontScale || quranTextFontScale, mushafLines)],
+        )}
+      >
+        <div className={classNames(styles.verseText, styles.verseTextWrap)} translate="no">
+          {words?.map((word) => {
+            if (isQcfFont) {
+              return (
+                <PlainVerseTextWord
+                  key={word.location}
+                  word={word}
+                  shouldShowWordByWordTranslation={shouldShowWordByWordTranslation}
+                  shouldShowWordByWordTransliteration={shouldShowWordByWordTransliteration}
+                >
+                  <GlyphWord
+                    font={quranFont}
+                    qpcUthmaniHafs={word.qpcUthmaniHafs}
+                    pageNumber={word.pageNumber}
+                    textCodeV1={word.codeV1}
+                    textCodeV2={word.codeV2}
+                    isFontLoaded={isFontLoaded}
+                  />
+                </PlainVerseTextWord>
+              );
+            }
             return (
               <PlainVerseTextWord
                 key={word.location}
@@ -58,42 +81,13 @@ const PlainVerseText: React.FC<Props> = ({
                 shouldShowWordByWordTranslation={shouldShowWordByWordTranslation}
                 shouldShowWordByWordTransliteration={shouldShowWordByWordTransliteration}
               >
-                <GlyphWord
-                  font={quranFont}
-                  qpcUthmaniHafs={word.qpcUthmaniHafs}
-                  pageNumber={word.pageNumber}
-                  textCodeV1={word.codeV1}
-                  textCodeV2={word.codeV2}
-                  isFontLoaded={isFontLoaded}
-                />
+                <TextWord font={quranFont} text={word.text} charType={word.charTypeName} />
               </PlainVerseTextWord>
             );
-          }
-          if (quranFont === QuranFont.Tajweed) {
-            return (
-              <PlainVerseTextWord
-                key={word.location}
-                word={word}
-                shouldShowWordByWordTranslation={shouldShowWordByWordTranslation}
-                shouldShowWordByWordTransliteration={shouldShowWordByWordTransliteration}
-              >
-                <TajweedWord key={word.location} path={word.text} alt={word.textUthmani} />
-              </PlainVerseTextWord>
-            );
-          }
-          return (
-            <PlainVerseTextWord
-              key={word.location}
-              word={word}
-              shouldShowWordByWordTranslation={shouldShowWordByWordTranslation}
-              shouldShowWordByWordTransliteration={shouldShowWordByWordTransliteration}
-            >
-              <TextWord font={quranFont} text={word.text} charType={word.charTypeName} />
-            </PlainVerseTextWord>
-          );
-        })}
+          })}
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 

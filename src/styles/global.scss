@@ -26,25 +26,21 @@ body {
   :lang(urdu),
   .ur,
   .urdu {
-    font-family: "MehrNastaliq", "Mehr Nastaliq Web", "Helvetica Neue",
-      Helvetica, Arial, serif;
+    font-family: "MehrNastaliq", "Mehr Nastaliq Web", "Helvetica Neue", Helvetica, Arial, serif;
   }
 
   :lang(ar),
   :lang(arabic) .ar {
-    font-family: "Noto Nastaliq Arabic", "NotoNastaliq", "ProximaVara",
-      "Helvetica Neue", Helvetica, Arial;
+    font-family: "Noto Nastaliq Arabic", "NotoNastaliq", "ProximaVara", "Helvetica Neue", Helvetica, Arial;
   }
 
   :lang(bn),
   :lang(bengali) {
-    font-family: "NotoSerifBengali", "ProximaVara", "Helvetica Neue", Helvetica,
-      Arial;
+    font-family: "NotoSerifBengali", "ProximaVara", "Helvetica Neue", Helvetica, Arial;
   }
 
   :lang(ku) {
-    font-family: "DroidArabicNaskh", "Noto Nastaliq Arabic", "NotoNastaliq",
-      "ProximaVara", Helvetica, Arial;
+    font-family: "DroidArabicNaskh", "Noto Nastaliq Arabic", "NotoNastaliq", "ProximaVara", Helvetica, Arial;
   }
 }
 
@@ -64,4 +60,20 @@ a {
 select option {
   background-color: var(--color-background-default);
   color: var(--color-text-default);
+}
+
+.__floater__arrow {
+  svg polygon {
+    fill: var(--color-background-inverse) !important;
+  }
+}
+
+.__remotion-player {
+  /* Center the video */
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  margin: 0 auto;
 }
