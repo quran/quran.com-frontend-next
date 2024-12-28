@@ -46,4 +46,8 @@
     z-index: 100;
     border-radius: 0 0 var(--border-radius-circle-small) var(--border-radius-circle-small);
     box-shadow: var(--shadow-strong);
+    ::-webkit-scrollbar {
+        width: 7px;
+        height: 7px;
+    }
 }

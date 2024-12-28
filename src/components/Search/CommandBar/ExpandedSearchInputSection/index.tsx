@@ -11,6 +11,7 @@ import styles from './ExpandedSearchInputSection.module.scss';
 
 import { getNewSearchResults } from '@/api';
 import DataFetcher from '@/components/DataFetcher';
+import TarteelAttribution from '@/components/TarteelAttribution/TarteelAttribution';
 import VoiceSearchBodyContainer from '@/components/TarteelVoiceSearch/BodyContainer';
 import { selectRecentNavigations } from '@/redux/slices/CommandBar/state';
 import { selectIsCommandBarVoiceFlowStarted } from '@/redux/slices/voiceSearch';
@@ -160,6 +161,7 @@ const ExpandedSearchInputSection: React.FC<Props> = ({ searchQuery }) => {
           />
         )}
       </div>
+      {isVoiceSearchFlowStarted && <TarteelAttribution isCommandBar />}
     </div>
   );
 };

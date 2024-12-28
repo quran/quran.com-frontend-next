@@ -35,7 +35,7 @@ const SearchResultsHeader: React.FC<Props> = ({ searchQuery, onSearchResultClick
   };
   return (
     <div className={styles.resultsSummaryContainer}>
-      <p>{t('common:search-results-no-count')}</p>
+      <p className={styles.resultsSummary}>{t('common:search-results-no-count')}</p>
       <div
         role="button"
         onClick={onNavigationLinkClicked}

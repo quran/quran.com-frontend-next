@@ -13,10 +13,17 @@
 }
 
 .moreResultsContainer {
-    color: var(--color-text-default);
     display: flex;
     cursor: pointer;
     align-items: center;
+    font-size: var(--font-size-small);
+    svg {
+        width: var(--spacing-medium) !important;
+        height: var(--spacing-medium) !important;
+        path {
+            fill: var(--color-text-faded) !important;
+        }
+    }
 }
 
 .resultsSummaryContainer {
@@ -24,4 +31,9 @@
     align-items: center;
     justify-content: space-between;
     color: var(--color-text-faded);
+    padding-block-end: var(--spacing-small);
+}
+
+.resultsSummary {
+    font-size: var(--font-size-small);
 }

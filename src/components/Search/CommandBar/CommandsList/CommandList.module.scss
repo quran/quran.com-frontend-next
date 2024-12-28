@@ -1,6 +1,6 @@
 @use "src/styles/breakpoints";
 
-$itemHeight: calc(1.4 * var(--spacing-mega));
+$itemHeight: calc(1.2 * var(--spacing-mega));
 .noResult {
   text-align: center;
   font-size: var(--font-size-large);
@@ -24,17 +24,15 @@ $itemHeight: calc(1.4 * var(--spacing-mega));
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-height: $itemHeight;
   font-size: var(--font-size-normal);
-  padding-block-start: 0;
-  padding-block-end: 0;
+  padding-block-start: var(--spacing-xxsmall);
+  padding-block-end: var(--spacing-xxsmall);
   padding-inline-start: var(--spacing-xsmall);
   padding-inline-end: var(--spacing-xsmall);
   cursor: pointer;
   position: relative;
   z-index: var(--z-index-default);
   &.selected {
-    color: var(--color-text-default);
     background: var(--color-background-alternative-medium);
     border-radius: var(--border-radius-rounded);
   }
@@ -42,7 +40,7 @@ $itemHeight: calc(1.4 * var(--spacing-mega));
 
 .highlight {
   transition: transform var(--transition-fast);
-  min-height: $itemHeight;
+  // min-height: $itemHeight;
   width: 100%;
   position: absolute;
   border-radius: var(--border-radius-rounded);

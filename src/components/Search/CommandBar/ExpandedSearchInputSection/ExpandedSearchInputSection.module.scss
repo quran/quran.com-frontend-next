@@ -1,5 +1,5 @@
 @use "src/styles/breakpoints";
-$height: calc(9 * var(--spacing-mega));
+$height: calc(16 * var(--spacing-mega));
 
 .container {
   padding: 0 var(--spacing-large);

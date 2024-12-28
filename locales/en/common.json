@@ -398,9 +398,9 @@
   "view": "View",
   "voice": {
     "ask-permission": "Please enable microphone permission to start using Voice Search",
-    "error": "An error has occurred, please try again later. Or download the ",
-    "no-permission": "It looks like you do not have the microphone permissions enabled. Please enable the microphone permissions and try again or download the ",
-    "not-supported": "It looks like your browser does not support microphone. Please try a different browser or download the ",
+    "error": "An error has occurred, please try again later.",
+    "no-permission": "It looks like you do not have the microphone permissions enabled. Please enable the microphone permissions and try again.",
+    "not-supported": "It looks like your browser does not support microphone. Please try a different browser.",
     "suggest": "Please begin reciting and your verse will appear.",
     "suggest-subtitle": "Recite any verse in Arabic, and the verse will appear",
     "suggest-title": "Recite now",

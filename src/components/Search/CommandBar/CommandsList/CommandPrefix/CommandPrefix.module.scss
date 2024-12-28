@@ -1,17 +1,17 @@
 .commandPrefix {
   margin-inline-end: var(--spacing-small);
+  margin-block-start: var(--spacing-micro);
   display: flex;
   align-items: center;
   > svg {
-    width: var(--spacing-large);
-    height: var(--spacing-large);
+    width: var(--spacing-medium);
+    height: var(--spacing-medium);
   }
 }
 
 .container {
   display: flex;
-  align-items: center;
-  max-width: 90%;
+  align-items: flex-start;
 }
 
 .name {
