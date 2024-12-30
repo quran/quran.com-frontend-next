@@ -1,6 +1,7 @@
 /* eslint-disable max-lines */
 import React, { useCallback } from 'react';
 
+import classNames from 'classnames';
 import groupBy from 'lodash/groupBy';
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useSelector } from 'react-redux';
@@ -148,7 +149,7 @@ const ExpandedSearchInputSection: React.FC<Props> = ({ searchQuery }) => {
 
   return (
     <div className={styles.container}>
-      <div className={styles.bodyContainer}>
+      <div className={classNames(styles.bodyContainer, { [styles.height]: !!searchQuery })}>
         {isVoiceSearchFlowStarted ? (
           <VoiceSearchBodyContainer isCommandBar />
         ) : (

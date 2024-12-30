@@ -65,6 +65,10 @@ $height: calc(16 * var(--spacing-mega));
   padding-inline-end: var(--spacing-xxsmall);
   overflow-y: auto;
   position: relative;
-  height: $height;
   box-sizing: border-box;
+  max-height: $height;
+}
+
+.height {
+  height: $height;
 }
