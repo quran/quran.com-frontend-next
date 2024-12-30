@@ -1,0 +1,48 @@
+{
+  "communication": {
+    "desc": "Podremos utilizar su dirección de correo electrónico para enviarte actualizaciones importantes, boletines informativos o notificaciones relacionadas con nuestros servicios, contenidos, etc. Tendrás la posibilidad de darte de baja de estas comunicaciones en cualquier momento.",
+    "title": "Comunicación"
+  },
+  "contact-us": {
+    "desc": "Si tienes alguna pregunta, inquietud o solicitud con respecto a esta Política de privacidad o al manejo de tu información personal, comunícate con nosotros <0>aquí</0>. Al utilizar nuestro sitio web, reconoces que has leído y comprendido esta Política de privacidad y aceptas la recopilación, el uso y la divulgación de tu información personal según lo descrito.",
+    "title": "Contáctanos"
+  },
+  "cookies": {
+    "desc": "Quran.com utiliza cookies para mejorar tu experiencia de navegación, proporcionar contenido personalizado y analizar el tráfico del sitio web. Al acceder y utilizar nuestro sitio web, aceptas el uso de cookies de acuerdo con esta Política de privacidad. <br/> <br/> <li> Tipos de cookies que utilizamos: </li> <subLi> Cookies necesarias: estas cookies son esenciales para el correcto funcionamiento de nuestro sitio web y permiten funciones básicas, como la navegación de páginas y el acceso a áreas seguras. No recopilan ninguna información de identificación personal. Sin estas cookies, es posible que algunas partes del sitio web no funcionen correctamente. </subLi> <subLi> Cookies analíticas y de rendimiento: utilizamos estas cookies para recopilar información sobre cómo los visitantes utilizan nuestro sitio web, incluido el número de visitantes, las páginas que visitan y el tiempo que pasan en cada página. Estos datos nos ayudan a analizar y mejorar el rendimiento y la funcionalidad de nuestro sitio web. Estas cookies no te identifican personalmente; todos los datos son agregados y anónimos. </subLi>",
+    "title": "Uso de Cookies"
+  },
+  "data-analysis": {
+    "desc": "Utilizamos Google Analytics para garantizar que el sitio siga funcionando como se espera y para saber qué funciones priorizar, etc. Esta información es anónima y no la relacionamos con ningún individuo en particular.",
+    "title": "Análisis de datos"
+  },
+  "data-deletion": {
+    "desc": "Para garantizar tu privacidad y el control de tu información personal, ofrecemos un proceso de eliminación de cuenta sencillo. Cuando elijas eliminar tu cuenta, todos los datos personales asociados se eliminarán de forma automática y permanente de nuestros sistemas. Puedes iniciar la eliminación de la cuenta accediendo a tu página de perfil. Una vez iniciada la eliminación, tus datos personales se eliminarán de forma segura de nuestros servidores en un plazo de tiempo razonable.",
+    "title": "Eliminación de datos"
+  },
+  "data-protection": {
+    "desc": "<boldSpan> El derecho de acceso: </boldSpan> Tienes derecho a solicitar a la Quran Foundation copias de tus datos personales. Podemos cobrarte una pequeña tarifa por este servicio. <br/> <br/> <boldSpan> El derecho de rectificación: </boldSpan> Tienes derecho a solicitar que la Quran Foundation corrija cualquier información que considere inexacta. También tienes derecho a solicitar a la Quran Foundation que complete la información que consideres incompleta. <br/> <br/> <boldSpan> El derecho de borrado: </boldSpan> Tiene derecho a solicitar que la Quran Foundation borre tus datos personales, bajo ciertas condiciones. <br/> <br/> <boldSpan> El derecho a restringir el procesamiento: </boldSpan> Tiene derecho a solicitar que la Quran Foundation restrinja el procesamiento de tus datos personales, bajo ciertas condiciones. <br/> <br/> <boldSpan> El derecho a oponerse al procesamiento </boldSpan> : Tienes derecho a oponerte al procesamiento de tus datos personales por parte de la Quran Foundation, bajo ciertas condiciones. <br/> <br/> <boldSpan> El derecho a la portabilidad de datos </boldSpan> : Tienes derecho a solicitar que la Quran Foundation transfiera los datos que hemos recopilado a otra organización, o directamente a usted, bajo ciertas condiciones.",
+    "title": "Derechos de protección de datos"
+  },
+  "data-security": {
+    "desc": "Tomamos las medidas adecuadas para proteger tu información personal contra accesos, alteraciones, divulgaciones o destrucción no autorizados. Utilizamos protocolos de seguridad estándar de la industria y empleamos medidas de seguridad físicas, electrónicas y administrativas para garantizar la confidencialidad e integridad de tus datos.",
+    "title": "Seguridad de datos"
+  },
+  "data-sharing": {
+    "desc": "No vendemos, intercambiamos ni alquilamos tu información personal a terceros.",
+    "title": "Intercambio de datos"
+  },
+  "info-collection": {
+    "desc": "Recopilamos cierta información personal de los usuarios que eligen crear una cuenta en Quran.com. Esta información puede incluir: <br/> <br/> <underline> Dirección de correo electrónico </underline> : Recopilamos tu dirección de correo electrónico para facilitar el proceso de creación de la cuenta y para fines de comunicación relacionados con tu cuenta, incluida la recuperación de la cuenta y las notificaciones de seguridad.",
+    "title": "Recopilación de información"
+  },
+  "log-data": {
+    "desc": "Recopilamos información que tu navegador envía cada vez que visitas nuestro Servicio (“Datos de registro”). Estos Datos de registro pueden incluir información como la dirección de Protocolo de Internet (“IP”) de tu computadora, el tipo de navegador, la versión del navegador, las páginas de nuestro Servicio que visitas, la hora y la fecha de tu visita, el tiempo que pasas en esas páginas y otras estadísticas.",
+    "title": "Datos de registro"
+  },
+  "main-privacy-desc": "Quran Foundation, Inc. (que incluye Quran.com) es una organización sin fines de lucro 501(c)(3) que se esfuerza por empoderar a todos los seres humanos para que se beneficien del Corán. Quran Foundation, Inc. valora y respeta la privacidad de todos nuestros usuarios.",
+  "personal-info-use": {
+    "desc": "Utilizamos la información personal que recopilamos para los siguientes fines: <br/> <li> <underline> Creación y gestión de cuentas </underline> : Tu dirección de correo electrónico se utiliza para crear y gestionar tu cuenta en nuestro sitio web. Te permite iniciar sesión, acceder a tu configuración y almacenar tus marcadores e historial de lectura. </li> <li> <underline> Personalización </underline> : Podemos utilizar tu historial de lectura para proporcionar recomendaciones y sugerencias personalizadas en función de tus preferencias e intereses. </li>",
+    "title": "Uso de información personal"
+  },
+  "privacy-header": "Política de privacidad"
+}
