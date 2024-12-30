@@ -1,4 +1,5 @@
 @use "src/styles/utility";
+
 .container {
   display: flex;
   justify-content: space-between;
@@ -9,21 +10,21 @@
   padding-inline-start: var(--spacing-large);
   padding-inline-end: var(--spacing-large);
   border-radius: var(--border-radius-default);
+  transition: var(--transition-regular) var(--transition-timing-regular);
+  transition-property: background-color, border-color;
   cursor: pointer;
 
   @media (hover: hover) {
     &:hover {
-      border: 1px solid var(--color-success-medium);
       background-color: var(--color-background-alternative-faded);
+      border-color: var(--color-success-medium);
 
       .surahNumber {
         background-color: var(--color-success-medium);
         color: var(--color-text-inverse);
       }
-      .translatedSurahName {
-        color: var(--color-success-medium);
-      }
-      .description {
+
+      .surahInfoText {
         color: var(--color-success-medium);
       }
     }
@@ -35,24 +36,34 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: calc(2.5 * var(--spacing-medium));
-  height: calc(2.5 * var(--spacing-medium));
+  width: calc(2.4 * var(--spacing-medium));
+  aspect-ratio: 1;
   border-radius: var(--border-radius-default);
-  transform: rotate(45deg);
   margin-inline-end: var(--spacing-large);
+  transform: rotate(45deg);
+  transition: var(--transition-regular) var(--transition-timing-regular);
+  transition-property: background-color, color;
+
   & > span {
     transform: rotate(-45deg);
     font-weight: var(--font-weight-bold);
   }
 }
+
 .surahNameContainer {
   display: flex;
   flex-direction: column;
 }
-.translatedSurahName {
+
+.surahInfoText {
   font-size: var(--font-size-xsmall);
   font-weight: var(--font-weight-bold);
   color: var(--color-text-faded);
+  transition: color var(--transition-regular) var(--transition-timing-regular);
+}
+
+.description {
+  text-align: end;
 }
 
 .surahName {
@@ -63,19 +74,13 @@
   display: flex;
   align-items: center;
 }
+
 .right {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-end;
 }
 
-.description {
-  text-align: end;
-  font-size: var(--font-size-xsmall);
-  font-weight: var(--font-weight-bold);
-
-  color: var(--color-text-faded);
-}
 
 .largeText {
   font-size: var(--font-size-large);
