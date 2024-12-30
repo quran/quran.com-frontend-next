@@ -24,6 +24,7 @@ import {
 import SearchQuerySource from '@/types/SearchQuerySource';
 import { logButtonClick } from '@/utils/eventLogger';
 import { resolveUrlBySearchNavigationType } from '@/utils/navigation';
+import { getResultType } from '@/utils/search';
 import { SearchNavigationResult, SearchNavigationType } from 'types/Search/SearchNavigationResult';
 
 export interface Command extends SearchNavigationResult {
@@ -173,7 +174,7 @@ const CommandsList: React.FC<Props> = ({
               )}
               <ul role="group" aria-labelledby={commandGroup}>
                 {groups[commandGroup].map((command) => {
-                  const { name, resultType, key, index, isVoiceSearch } = command;
+                  const { name, key, index, isVoiceSearch } = command;
                   const isSelected = selectedCommandIndex === index;
                   return (
                     <li
@@ -189,7 +190,7 @@ const CommandsList: React.FC<Props> = ({
                         navigationKey={key}
                         isVoiceSearch={isVoiceSearch}
                         name={name}
-                        type={resultType}
+                        type={getResultType(command)}
                       />
                       <div className={styles.keyboardInputContainer}>
                         <CommandControl

@@ -46,6 +46,7 @@ interface Props {
   suffix?: ReactNode;
   onClearClicked?: () => void;
   onChange?: (value: string) => void;
+  onClick?: () => void;
   onKeyDown?: (event: KeyboardEvent<HTMLInputElement>) => void;
   inputMode?: HTMLAttributes<HTMLInputElement>['inputMode'];
   value?: string;
@@ -77,6 +78,7 @@ const Input: React.FC<Props> = ({
   onClearClicked,
   onChange,
   onKeyDown,
+  onClick,
   inputMode,
   value = '',
   shouldFlipOnRTL = true,
@@ -98,6 +100,12 @@ const Input: React.FC<Props> = ({
     setInputValue(newValue);
     if (onChange) {
       onChange(newValue);
+    }
+  };
+
+  const handleClick = () => {
+    if (onClick) {
+      onClick();
     }
   };
 
@@ -123,7 +131,6 @@ const Input: React.FC<Props> = ({
           [styles.mediumContainer]: size === InputSize.Medium,
           [styles.largeContainer]: size === InputSize.Large,
           [styles.fixedWidth]: fixedWidth,
-          [styles.disabled]: disabled,
           [styles.error]: type === InputType.Error,
           [styles.success]: type === InputType.Success,
           [styles.warning]: type === InputType.Warning,
@@ -142,11 +149,13 @@ const Input: React.FC<Props> = ({
           </div>
         )}
         <input
+          onClick={handleClick}
           className={classNames(styles.input, {
             [styles.error]: type === InputType.Error,
             [styles.success]: type === InputType.Success,
             [styles.warning]: type === InputType.Warning,
             [styles.rtlInput]: shouldFlipOnRTL,
+            [styles.disabled]: disabled,
           })}
           type={htmlType}
           required={isRequired}

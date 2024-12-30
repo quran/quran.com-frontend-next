@@ -2,7 +2,7 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 import classNames from 'classnames';
 import { useHotkeys } from 'react-hotkeys-hook';
-import { useDispatch, useSelector } from 'react-redux';
+import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import styles from './SearchInput.module.scss';
 
@@ -13,14 +13,21 @@ import KeyboardInput from '@/dls/KeyboardInput';
 import useOutsideClickDetector from '@/hooks/useOutsideClickDetector';
 import SearchIcon from '@/icons/search.svg';
 import { selectIsExpanded, setIsExpanded } from '@/redux/slices/CommandBar/state';
+import { selectIsCommandBarVoiceFlowStarted } from '@/redux/slices/voiceSearch';
 import { logButtonClick } from '@/utils/eventLogger';
 
 type Props = {
   placeholder?: string;
   initialSearchQuery?: string;
+  shouldExpandOnClick?: boolean;
 };
 
-const SearchInput: React.FC<Props> = ({ placeholder, initialSearchQuery }) => {
+const SearchInput: React.FC<Props> = ({
+  placeholder,
+  initialSearchQuery,
+  shouldExpandOnClick = false,
+}) => {
+  const isVoiceSearchFlowStarted = useSelector(selectIsCommandBarVoiceFlowStarted, shallowEqual);
   const [searchQuery, setSearchQuery] = useState<string>(initialSearchQuery || '');
   const isExpanded = useSelector(selectIsExpanded);
   const dispatch = useDispatch();
@@ -61,6 +68,12 @@ const SearchInput: React.FC<Props> = ({ placeholder, initialSearchQuery }) => {
     );
   };
 
+  const onInputClick = () => {
+    if (shouldExpandOnClick) {
+      dispatch({ type: setIsExpanded.type, payload: true });
+    }
+  };
+
   return (
     <div
       ref={containerRef}
@@ -68,7 +81,9 @@ const SearchInput: React.FC<Props> = ({ placeholder, initialSearchQuery }) => {
     >
       <div className={styles.inputContainer}>
         <Input
+          onClick={onInputClick}
           id="searchQuery"
+          disabled={isVoiceSearchFlowStarted}
           onChange={onSearchQueryChange}
           value={searchQuery}
           placeholder={placeholder}

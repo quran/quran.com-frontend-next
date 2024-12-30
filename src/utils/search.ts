@@ -164,11 +164,15 @@ export const getSearchNavigationResult = (
     };
   }
 
-  if (resultType === SearchNavigationType.AYAH) {
+  if (
+    resultType === SearchNavigationType.AYAH ||
+    resultType === SearchNavigationType.TRANSLITERATION ||
+    resultType === SearchNavigationType.TRANSLATION
+  ) {
     returnedResult = {
       name: result.name,
       key,
-      resultType: SearchNavigationType.AYAH,
+      resultType,
     };
   }
 
