@@ -145,6 +145,7 @@
     "resend-email-in": "Verzend de verificatie-e-mail opnieuw over {{remainingTime}} sec...",
     "verify-code": "Code verifiëren"
   },
+  "end-year-donate": "Sluit 2024 af met Sadaqah ❤️",
   "error": {
     "MediaVersesRangeLimitExceeded": "U kunt maximaal {{limit}} verzen tegelijk selecteren. Selecteer een kleiner bereik.",
     "bookmark-sync": "Bladwijzer loopt niet synchroon.",
@@ -254,6 +255,7 @@
   "pbuh": "De zegeningen van Allah zij met hem",
   "popular-links": "Populaire links",
   "popup": {
+    "companion-title": "Beste metgezel van de Koran,",
     "footnote": "Dankzij maandelijkse donaties kunnen we ons minder richten op fondsenwerving",
     "text-1": "We zijn toegewijd om de wereld kennis en technologie van de Koran te dienen, altijd gratis.",
     "text-2": "De perfecte gelegenheid voor voortdurende liefdadigheid (Sadaqa Jariyah). Investeer in uw Hiernamaals als maandelijkse (of eenmalige) donateur.",

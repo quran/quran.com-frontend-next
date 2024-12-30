@@ -11,10 +11,10 @@ import useSWRImmutable from 'swr/immutable';
 import AudioPlayer from '@/components/AudioPlayer/AudioPlayer';
 import UserAccountModal from '@/components/Auth/UserAccountModal';
 import DeveloperUtility from '@/components/DeveloperUtility/DeveloperUtility';
+import DonatePopup from '@/components/DonatePopup/DonatePopup';
 import FontPreLoader from '@/components/Fonts/FontPreLoader';
 import GlobalListeners from '@/components/GlobalListeners';
 import Navbar from '@/components/Navbar/Navbar';
-import OnboardingChecklist from '@/components/Onboarding/OnboardingChecklist';
 import { OnboardingProvider } from '@/components/Onboarding/OnboardingProvider';
 import SessionIncrementor from '@/components/SessionIncrementor';
 import ThirdPartyScripts from '@/components/ThirdPartyScripts/ThirdPartyScripts';
@@ -97,7 +97,7 @@ function MyApp({ Component, pageProps }): JSX.Element {
                       <Component {...pageProps} />
                       <AudioPlayer />
                       <Footer />
-                      <OnboardingChecklist />
+                      <DonatePopup />
                     </OnboardingProvider>
                   </ThemeProvider>
                   <SessionIncrementor />

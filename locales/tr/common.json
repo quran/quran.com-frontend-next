@@ -145,6 +145,7 @@
     "resend-email-in": "Doğrulama e-postasını {{remainingTime}} saniye içinde yeniden gönderin...",
     "verify-code": "Doğrulama kodu"
   },
+  "end-year-donate": "2024'ü sadaka ile bitirin ❤️",
   "error": {
     "MediaVersesRangeLimitExceeded": "Bir seferde en fazla {{limit}} ayet seçebilirsiniz. Lütfen daha küçük bir aralık seçin.",
     "bookmark-sync": "Yer imi senkronize değil.",
@@ -254,6 +255,7 @@
   "pbuh": "Allah'ın selamı onun üzerine olsun",
   "popular-links": "Popüler Bağlantılar",
   "popup": {
+    "companion-title": "Sevgili Kur'an Arkadaşı,",
     "footnote": "Aylık bağışlar, bağış toplamaya daha az odaklanmamızı sağlıyor",
     "text-1": "Her zaman ücretsiz olarak dünya Kuran bilgisine ve teknolojisine hizmet etmeye kararlıyız.",
     "text-2": "Sürekli hayırseverlik (Sadaqa Jariyah) için mükemmel bir fırsat. Aylık (veya bir defalık) bağışçı olarak ahiretinize yatırım yapın.",

@@ -1,10 +1,14 @@
 import classNames from 'classnames';
 import { useSelector } from 'react-redux';
 
+import DonateButton from '../Fundraising/DonateButton';
+
 import styles from './Banner.module.scss';
 
 import MoonIllustrationSVG from '@/public/images/moon-illustration.svg';
 import { selectIsBannerVisible } from '@/redux/slices/banner';
+import DonateButtonClickSource from '@/types/DonateButtonClickSource';
+import DonateButtonType from '@/types/DonateButtonType';
 
 type BannerProps = {
   text: string;
@@ -30,6 +34,11 @@ const Banner = ({ text, ctaButton, shouldShowPrefixIcon = true }: BannerProps) =
         <div className={styles.text}>{text}</div>
       </div>
       {ctaButton && <div className={styles.ctaContainer}>{ctaButton}</div>}
+      <DonateButton
+        type={DonateButtonType.MONTHLY}
+        source={DonateButtonClickSource.STICKY_BANNER}
+        isTextBasedOnType={false}
+      />
     </div>
   );
 };

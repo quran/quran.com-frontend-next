@@ -145,6 +145,7 @@
     "resend-email-in": "Resend verification email in {{remainingTime}} sec...",
     "verify-code": "Verify Code"
   },
+  "end-year-donate": "End 2024 with Sadaqah ❤️",
   "error": {
     "MediaVersesRangeLimitExceeded": "You can only select up to {{limit}} verses at a time. Please select a smaller range.",
     "bookmark-sync": "Bookmark is out of sync.",
@@ -254,6 +255,7 @@
   "pbuh": "Blessings of Allah be upon him",
   "popular-links": "Popular Links",
   "popup": {
+    "companion-title": "Dear Companion of the Quran,",
     "footnote": "Monthly donations allow us to focus less on fundraising",
     "text-1": "We are committed to serving the world Quranic knowledge and technology, always for free.",
     "text-2": "The perfect opportunity for continous charity (Sadaqa Jariyah). Invest in your Hereafter as a monthly (or one time) donor.",

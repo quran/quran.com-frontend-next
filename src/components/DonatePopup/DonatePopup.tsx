@@ -4,7 +4,6 @@ import { useDispatch, useSelector } from 'react-redux';
 import styles from './DonatePopup.module.scss';
 
 import DonateButton from '@/components/Fundraising/DonateButton';
-import LearnMoreButton from '@/components/Fundraising/DonateButton/LearnMoreButton';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import Modal from '@/dls/ContentModal/ContentModal';
 import CloseIcon from '@/icons/close.svg';
@@ -12,7 +11,6 @@ import MoonIllustrationSVG from '@/public/images/moon-illustration.svg';
 import { selectIsDonationPopupVisible, setIsDonationPopupVisible } from '@/redux/slices/session';
 import DonateButtonClickSource from '@/types/DonateButtonClickSource';
 import DonateButtonType from '@/types/DonateButtonType';
-import LearnMoreClickSource from '@/types/LearnMoreClickSource';
 import { logButtonClick } from '@/utils/eventLogger';
 
 const DonatePopup = () => {
@@ -43,7 +41,7 @@ const DonatePopup = () => {
           >
             <CloseIcon />
           </Button>
-          <h1 className={styles.title}>{t('popup.title')}</h1>
+          <h1 className={styles.title}>{t('popup.companion-title')}</h1>
           <div className={styles.textsContainer}>
             <p className={styles.text}>{t('popup.text-1')}</p>
             <p className={styles.text}>{t('popup.text-2')}</p>
@@ -60,7 +58,6 @@ const DonatePopup = () => {
               source={DonateButtonClickSource.DONATE_POPOVER}
               shouldUseProviderUrl
             />
-            <LearnMoreButton source={LearnMoreClickSource.DONATE_POPOVER} />
           </div>
           <div className={styles.text}>{t('popup.footnote')}.</div>
         </div>
