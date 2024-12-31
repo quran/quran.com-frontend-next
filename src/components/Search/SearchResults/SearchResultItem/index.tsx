@@ -15,7 +15,7 @@ import SearchService from '@/types/Search/SearchService';
 import SearchQuerySource from '@/types/SearchQuerySource';
 import { logButtonClick } from '@/utils/eventLogger';
 import { resolveUrlBySearchNavigationType } from '@/utils/navigation';
-import { getResultSuffix, getResultType } from '@/utils/search';
+import { getResultType, getSearchNavigationResult } from '@/utils/search';
 
 interface Props {
   source: SearchQuerySource;
@@ -24,10 +24,9 @@ interface Props {
 }
 
 const SearchResultItem: React.FC<Props> = ({ source, service, result }) => {
-  const { name, key: resultKey, isArabic } = result;
-  const type = getResultType(result);
-  const { lang } = useTranslation();
+  const { t, lang } = useTranslation();
   const chaptersData = useContext(DataContext);
+  const type = getResultType(result);
   const onResultItemClicked = () => {
     logButtonClick(`search_result_item`, {
       service,
@@ -35,7 +34,12 @@ const SearchResultItem: React.FC<Props> = ({ source, service, result }) => {
     });
   };
 
-  const suffix = getResultSuffix(type, resultKey as string, lang, chaptersData);
+  const {
+    name,
+    key: resultKey,
+    isArabic,
+  } = getSearchNavigationResult(chaptersData, result, t, lang);
+
   const url = resolveUrlBySearchNavigationType(type, resultKey, true);
   return (
     <div className={styles.container} translate="no">
@@ -48,7 +52,7 @@ const SearchResultItem: React.FC<Props> = ({ source, service, result }) => {
             [styles.arabic]: isArabic,
           })}
           dangerouslySetInnerHTML={{
-            __html: `${name} ${suffix}`,
+            __html: `${name}`,
           }}
         />
       </Link>

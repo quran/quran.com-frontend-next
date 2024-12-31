@@ -1,5 +1,5 @@
 /* eslint-disable max-lines */
-import React, { useCallback } from 'react';
+import React, { useCallback, useContext } from 'react';
 
 import classNames from 'classnames';
 import groupBy from 'lodash/groupBy';
@@ -14,6 +14,7 @@ import { getNewSearchResults } from '@/api';
 import DataFetcher from '@/components/DataFetcher';
 import TarteelAttribution from '@/components/TarteelAttribution/TarteelAttribution';
 import VoiceSearchBodyContainer from '@/components/TarteelVoiceSearch/BodyContainer';
+import DataContext from '@/contexts/DataContext';
 import { selectRecentNavigations } from '@/redux/slices/CommandBar/state';
 import { selectIsCommandBarVoiceFlowStarted } from '@/redux/slices/voiceSearch';
 import {
@@ -22,7 +23,7 @@ import {
 } from '@/types/Search/SearchNavigationResult';
 import { makeNewSearchResultsUrl } from '@/utils/apiPaths';
 import { areArraysEqual } from '@/utils/array';
-import { getQuickSearchQuery } from '@/utils/search';
+import { getQuickSearchQuery, getSearchNavigationResult } from '@/utils/search';
 import { SearchResponse } from 'types/ApiResponses';
 
 const NAVIGATE_TO = [
@@ -53,11 +54,12 @@ interface Props {
 }
 
 const ExpandedSearchInputSection: React.FC<Props> = ({ searchQuery }) => {
-  const { t } = useTranslation('common');
+  const { t, lang } = useTranslation('common');
   const recentNavigations = useSelector(
     selectRecentNavigations,
     areArraysEqual,
   ) as SearchNavigationResult[];
+  const chaptersData = useContext(DataContext);
   const isVoiceSearchFlowStarted = useSelector(selectIsCommandBarVoiceFlowStarted, shallowEqual);
 
   /**
@@ -114,7 +116,7 @@ const ExpandedSearchInputSection: React.FC<Props> = ({ searchQuery }) => {
       } else if (data.result.navigation.length) {
         toBeGroupedCommands = [
           ...data.result.navigation.map((navigationItem) => ({
-            ...navigationItem,
+            ...getSearchNavigationResult(chaptersData, navigationItem, t, lang),
             group: RESULTS_GROUP,
           })),
         ];
@@ -144,7 +146,7 @@ const ExpandedSearchInputSection: React.FC<Props> = ({ searchQuery }) => {
         />
       );
     },
-    [getPreInputCommands, recentNavigations.length, searchQuery, t],
+    [chaptersData, getPreInputCommands, lang, recentNavigations.length, searchQuery, t],
   );
 
   return (

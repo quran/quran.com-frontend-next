@@ -187,7 +187,6 @@ const CommandsList: React.FC<Props> = ({
                       onMouseOver={() => setSelectedCommandIndex(index)}
                     >
                       <CommandPrefix
-                        navigationKey={key}
                         isVoiceSearch={isVoiceSearch}
                         name={name}
                         type={getResultType(command)}

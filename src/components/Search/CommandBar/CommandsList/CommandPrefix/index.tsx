@@ -1,26 +1,22 @@
 /* eslint-disable react/no-danger */
-import React, { useContext } from 'react';
+import React from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from './CommandPrefix.module.scss';
 
 import SearchResultItemIcon from '@/components/Search/SearchResults/SearchResultItemIcon';
-import DataContext from '@/contexts/DataContext';
 import { Direction } from '@/utils/locale';
-import { getSearchNavigationResult } from '@/utils/search';
 import { SearchNavigationType } from 'types/Search/SearchNavigationResult';
 
 interface Props {
   name: string;
   type: SearchNavigationType;
   isVoiceSearch: boolean;
-  navigationKey: string | number;
 }
 
-const CommandPrefix: React.FC<Props> = ({ name, type, isVoiceSearch, navigationKey }) => {
-  const { t, lang } = useTranslation('common');
-  const chapterData = useContext(DataContext);
+const CommandPrefix: React.FC<Props> = ({ name, type, isVoiceSearch }) => {
+  const { t } = useTranslation('common');
   const getContent = () => {
     if (type === SearchNavigationType.SEARCH_PAGE) {
       return t('search-for', {
@@ -28,13 +24,7 @@ const CommandPrefix: React.FC<Props> = ({ name, type, isVoiceSearch, navigationK
       });
     }
 
-    const navigation = getSearchNavigationResult(
-      chapterData,
-      { resultType: type, key: navigationKey, name },
-      t,
-      lang,
-    );
-    return navigation?.name;
+    return name;
   };
 
   return (

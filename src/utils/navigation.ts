@@ -226,7 +226,11 @@ export const resolveUrlBySearchNavigationType = (
   isKalimatSearch = false,
 ): string => {
   const stringKey = isKalimatSearch ? searchIdToNavigationKey(type, String(key)) : String(key);
-  if (type === SearchNavigationType.AYAH) {
+  if (
+    type === SearchNavigationType.AYAH ||
+    type === SearchNavigationType.TRANSLITERATION ||
+    type === SearchNavigationType.TRANSLATION
+  ) {
     return getChapterWithStartingVerseUrl(stringKey);
   }
   if (type === SearchNavigationType.JUZ) {
