@@ -47,12 +47,6 @@ const SearchResults: React.FC<Props> = ({
               {t('search-results', {
                 count: toLocalizedNumber(searchResult.pagination.totalRecords, lang),
               })}
-              <Pagination
-                currentPage={currentPage}
-                totalCount={searchResult.pagination.totalRecords}
-                onPageChange={onPageChange}
-                pageSize={pageSize}
-              />
             </>
           )}
         </>
@@ -67,6 +61,14 @@ const SearchResults: React.FC<Props> = ({
           />
         ))}
       </>
+      {!isSearchDrawer && !!searchQuery && (
+        <Pagination
+          currentPage={currentPage}
+          totalCount={searchResult.pagination.totalRecords}
+          onPageChange={onPageChange}
+          pageSize={pageSize}
+        />
+      )}
     </div>
   );
 };
