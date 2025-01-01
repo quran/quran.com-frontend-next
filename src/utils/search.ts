@@ -112,18 +112,24 @@ export const getSearchNavigationResult = (
   result: SearchNavigationResult,
   t: Translate,
   locale: string,
-): SearchNavigationResult & { name: string } => {
-  const { key, resultType } = result;
+): SearchNavigationResult => {
+  const { key, isArabic, isTransliteration } = result;
+  const resultType = getResultType(result);
   const resultSuffix = getResultSuffix(resultType, key as string, locale, chaptersData);
-  let returnedResult = null;
+  let returnedResult = {
+    isTransliteration,
+    isArabic,
+    resultType,
+    key,
+  } as SearchNavigationResult;
 
   if (resultType === SearchNavigationType.JUZ) {
     const juzNumber = idToJuzNumber(key as string);
 
     returnedResult = {
+      ...returnedResult,
       name: `${t('common:juz')} ${toLocalizedNumber(Number(juzNumber), locale)}`,
       key: juzNumber,
-      resultType: SearchNavigationType.JUZ,
     };
   }
 
@@ -131,36 +137,33 @@ export const getSearchNavigationResult = (
     const pageNumber = idToPageNumber(key as string);
 
     returnedResult = {
+      ...returnedResult,
       name: `${t('common:page')} ${toLocalizedNumber(Number(pageNumber), locale)}`,
       key: pageNumber,
-      resultType: SearchNavigationType.PAGE,
     };
   }
 
   if (resultType === SearchNavigationType.RUB_EL_HIZB) {
     returnedResult = {
+      ...returnedResult,
       name: `${t('common:rub')} ${toLocalizedNumber(Number(key), locale)}`,
-      key,
-      resultType: SearchNavigationType.RUB_EL_HIZB,
     };
   }
 
   if (resultType === SearchNavigationType.HIZB) {
     returnedResult = {
+      ...returnedResult,
       name: `${t('common:hizb')} ${toLocalizedNumber(Number(key), locale)}`,
-      key,
-      resultType: SearchNavigationType.HIZB,
     };
   }
 
   if (resultType === SearchNavigationType.RANGE) {
     const { surah, from, to } = getVerseNumberRangeFromKey(key as string);
     returnedResult = {
+      ...returnedResult,
       name: `${t('common:surah')} ${
         getChapterData(chaptersData, `${surah}`).transliteratedName
       } ${t('common:ayah')} ${toLocalizedNumber(from, locale)} - ${toLocalizedNumber(to, locale)}`,
-      key,
-      resultType: SearchNavigationType.RANGE,
     };
   }
 
@@ -170,19 +173,17 @@ export const getSearchNavigationResult = (
     resultType === SearchNavigationType.TRANSLATION
   ) {
     returnedResult = {
+      ...returnedResult,
       name: result.name,
-      key,
-      resultType,
     };
   }
 
   if (resultType === SearchNavigationType.SURAH) {
     returnedResult = {
+      ...returnedResult,
       name: `${t('common:surah')} ${
         getChapterData(chaptersData, key as string).transliteratedName
       }`,
-      key,
-      resultType: SearchNavigationType.SURAH,
     };
   }
 
