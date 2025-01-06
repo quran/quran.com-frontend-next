@@ -180,7 +180,7 @@ export const shouldUseMinimalLayout = (lang: string): boolean => {
  * @param {string} locale
  * @returns {boolean}
  */
-export const isRTLLocale = (locale: string): boolean => RTL_LOCALES.includes(locale);
+export const isRTLLocale = (locale: string): boolean => RTL_LOCALES.includes(locale as Language);
 
 /**
  * Gir the dir of the element based on the locale.

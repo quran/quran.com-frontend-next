@@ -11,7 +11,7 @@ interface QuestionModalProps {
   isOpen: boolean;
   onClose: () => void;
   verseKey?: string;
-  onModalClick: (e: React.MouseEvent) => void;
+  onModalClick?: (e: React.MouseEvent) => void;
 }
 
 const QuestionsModal: React.FC<QuestionModalProps> = ({
