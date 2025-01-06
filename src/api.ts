@@ -30,8 +30,7 @@ import {
   makeByRangeVersesUrl,
   makeWordByWordTranslationsUrl,
 } from '@/utils/apiPaths';
-import generateSignature from '@/utils/auth/signature';
-import { isStaticBuild } from '@/utils/build';
+import { getAdditionalHeaders } from '@/utils/headers';
 import { SearchRequest, AdvancedCopyRequest, PagesLookUpRequest } from 'types/ApiRequests';
 import {
   TranslationsResponse,
@@ -62,10 +61,6 @@ export const SEARCH_FETCH_OPTIONS = {
 
 export const OFFLINE_ERROR = 'OFFLINE';
 
-export const X_AUTH_SIGNATURE = 'x-auth-signature';
-export const X_TIMESTAMP = 'x-timestamp';
-export const X_INTERNAL_CLIENT = 'x-internal-client';
-
 export const fetcher = async function fetcher<T>(
   input: RequestInfo,
   init: RequestInit = {},
@@ -74,26 +69,23 @@ export const fetcher = async function fetcher<T>(
   if (typeof window !== 'undefined' && !window.navigator.onLine) {
     throw new Error(OFFLINE_ERROR);
   }
+  const req: NextApiRequest = {
+    url: typeof input === 'string' ? input : input.url,
+    method: init.method || 'GET',
+    body: init.body,
+    headers: init.headers,
+    query: {},
+  } as NextApiRequest;
 
-  let reqInit = init;
-  if (isStaticBuild) {
-    const req: NextApiRequest = {
-      url: typeof input === 'string' ? input : input.url,
-      method: init.method || 'GET',
-      body: init.body,
-      headers: init.headers,
-      query: {},
-    } as NextApiRequest;
+  const additionalHeaders = getAdditionalHeaders(req);
 
-    const { signature, timestamp } = generateSignature(req, req.url);
-    const headers = {
+  const reqInit = {
+    ...init,
+    headers: {
       ...init.headers,
-      [X_AUTH_SIGNATURE]: signature,
-      [X_TIMESTAMP]: timestamp,
-      [X_INTERNAL_CLIENT]: process.env.INTERNAL_CLIENT_ID,
-    };
-    reqInit = { ...init, headers };
-  }
+      ...additionalHeaders,
+    },
+  };
 
   const res = await fetch(input, reqInit);
   if (!res.ok || res.status === 500 || res.status === 404) {
