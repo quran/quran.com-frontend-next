@@ -31,7 +31,7 @@ const isOriginAllowed = (origin: string | undefined): boolean => {
   if (!origin) return false;
   const url = new URL(origin);
   const { hostname } = url;
-  return ALLOWED_DOMAINS.some((domain) => hostname.endsWith(domain));
+  return ALLOWED_DOMAINS.includes(hostname);
 };
 
 const handleProxyReq = (proxyReq, req, res) => {
