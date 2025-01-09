@@ -13,19 +13,26 @@ import KeyboardInput from '@/dls/KeyboardInput';
 import useOutsideClickDetector from '@/hooks/useOutsideClickDetector';
 import SearchIcon from '@/icons/search.svg';
 import { selectIsExpanded, setIsExpanded } from '@/redux/slices/CommandBar/state';
-import { selectIsCommandBarVoiceFlowStarted } from '@/redux/slices/voiceSearch';
+import { setIsSearchDrawerOpen, setDisableSearchDrawerTransition } from '@/redux/slices/navbar';
+import {
+  selectIsCommandBarVoiceFlowStarted,
+  startSearchDrawerVoiceFlow,
+} from '@/redux/slices/voiceSearch';
 import { logButtonClick } from '@/utils/eventLogger';
+import { isMobile } from '@/utils/responsive';
 
 type Props = {
   placeholder?: string;
   initialSearchQuery?: string;
   shouldExpandOnClick?: boolean;
+  shouldOpenDrawerOnMobile?: boolean;
 };
 
 const SearchInput: React.FC<Props> = ({
   placeholder,
   initialSearchQuery,
   shouldExpandOnClick = false,
+  shouldOpenDrawerOnMobile = false,
 }) => {
   const isVoiceSearchFlowStarted = useSelector(selectIsCommandBarVoiceFlowStarted, shallowEqual);
   const [searchQuery, setSearchQuery] = useState<string>(initialSearchQuery || '');
@@ -60,16 +67,26 @@ const SearchInput: React.FC<Props> = ({
     setSearchQuery('');
   };
 
+  const shouldSearchBeInSearchDrawer = shouldOpenDrawerOnMobile && isMobile();
   const onTarteelTriggerClicked = (startFlow: boolean) => {
-    dispatch({ type: setIsExpanded.type, payload: true });
     logButtonClick(
       // eslint-disable-next-line i18next/no-literal-string
       `search_input_voice_search_${startFlow ? 'start' : 'stop'}_flow`,
     );
+    if (shouldSearchBeInSearchDrawer) {
+      dispatch({ type: setDisableSearchDrawerTransition.type, payload: true });
+      dispatch({ type: setIsSearchDrawerOpen.type, payload: true });
+      dispatch({ type: startSearchDrawerVoiceFlow.type, payload: false });
+    } else {
+      dispatch({ type: setIsExpanded.type, payload: true });
+    }
   };
 
   const onInputClick = () => {
-    if (shouldExpandOnClick) {
+    if (shouldSearchBeInSearchDrawer) {
+      dispatch({ type: setDisableSearchDrawerTransition.type, payload: true });
+      dispatch({ type: setIsSearchDrawerOpen.type, payload: true });
+    } else if (shouldExpandOnClick) {
       dispatch({ type: setIsExpanded.type, payload: true });
     }
   };

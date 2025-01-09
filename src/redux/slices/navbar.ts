@@ -17,6 +17,7 @@ export type Navbar = {
   isSearchDrawerOpen: boolean;
   isSettingsDrawerOpen: boolean;
   settingsView: SettingsView;
+  disableSearchDrawerTransition: boolean;
 };
 
 const initialState: Navbar = {
@@ -25,6 +26,7 @@ const initialState: Navbar = {
   isSearchDrawerOpen: false,
   isSettingsDrawerOpen: false,
   settingsView: SettingsView.Body,
+  disableSearchDrawerTransition: false,
 };
 
 export const navbarSlice = createSlice({
@@ -55,6 +57,10 @@ export const navbarSlice = createSlice({
       ...state,
       settingsView: action.payload,
     }),
+    setDisableSearchDrawerTransition: (state: Navbar, action: PayloadAction<boolean>) => ({
+      ...state,
+      disableSearchDrawerTransition: action.payload,
+    }),
   },
 });
 
@@ -65,6 +71,7 @@ export const {
   setIsSettingsDrawerOpen,
   setSettingsView,
   toggleSearchDrawerIsOpen,
+  setDisableSearchDrawerTransition,
 } = navbarSlice.actions;
 
 export const selectNavbar = (state: RootState) => state.navbar;

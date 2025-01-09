@@ -20,7 +20,11 @@ const HomePageHero = () => {
       <div>
         <PlayRadioButton />
         <div className={styles.innerContainer}>
-          <SearchInput placeholder={t('command-bar.placeholder')} shouldExpandOnClick />
+          <SearchInput
+            placeholder={t('command-bar.placeholder')}
+            shouldExpandOnClick
+            shouldOpenDrawerOnMobile
+          />
           <div className={styles.quickLinksContainer}>
             <QuickLinks />
           </div>

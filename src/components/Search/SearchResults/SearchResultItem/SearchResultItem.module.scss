@@ -5,7 +5,7 @@
 
 .container {
     padding-block: var(--spacing-xsmall);
-    padding-inline: var(--spacing-small);
+    padding-inline: var(--spacing-xsmall);
     &:hover {
         background-color: var(--color-background-alternative-faded);
         border-radius: var(--border-radius-default);
