@@ -18,6 +18,7 @@ const SUPPORTED_CHAPTER_LOCALES = [
   'ms',
   'it',
   'nl',
+  'pl',
   'ru',
   'tr',
   'ur',

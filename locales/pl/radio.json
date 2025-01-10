@@ -1,0 +1,26 @@
+{
+    "change": "Zmień",
+    "curated-station": {
+        "juz-amma": {
+            "description": "Słuchaj końcowego Dżuz Koranu",
+            "title": "Dżuz Amma"
+        },
+        "popular-recitations": {
+            "description": "Dzienna doza wybranych recytacji",
+            "title": "Popularne recytacje"
+        },
+        "surah-al-kahf": {
+            "description": "Słuchaj Sury Alkahf w pętli",
+            "title": "Sura Al-Kahf"
+        },
+        "yaseen-alwaqiah-al-mulk": {
+            "description": "Recytacja Sur przez wybranych recytatorów",
+            "title": "Ja Sin, Al-Łaki-a, Al-Mulk"
+        }
+    },
+    "curated-stations": "Wybrane Stacje",
+    "pause-radio": "Pauzuj Radio",
+    "play-radio": "Graj Radio",
+    "radio-desc": "Słuchaj non-stop pięknej recytacji Szlachetnego Koranu w wykonaniu różnych recytatorów.",
+    "reciter-stations": "Stacje recytatorów"
+}

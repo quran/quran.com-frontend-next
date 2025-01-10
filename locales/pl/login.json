@@ -1,0 +1,23 @@
+{
+  "awaiting-confirmation": "Oczekiwanie na potwierdzenie",
+  "continue-apple": "Kontynuuj z Apple",
+  "continue-email": "Kontynuuj z emailem",
+  "continue-facebook": "Kontynuuj z Facebook",
+  "continue-google": "Kontynuuj z Google",
+  "email-placeholder": "Adres email",
+  "feature-1": "Śledź swoje cele",
+  "feature-2": "Utrzymuj serie czytania",
+  "feature-3": "Stwórz kolekcje",
+  "feature-4": "Synchronizuj swoje dane w różnych przeglądarkach",
+  "feature-5": "I więcej!",
+  "feature-6": "<b>Nowość!</b> Notatki i Refleksje",
+  "login-cta": "Zaloguj się lub Zarejestruj teraz:",
+  "login-error": {
+    "AuthenticationError": "Uwierzytelnianie nie powiodło się. Spróbuj ponownie później",
+    "TokenExpiredError": "Wylogowaliśmy Cię, zaloguj się ponownie."
+  },
+  "login-title": "Zaloguj się do Quran.com",
+  "other-options": "Inne opcje logowania",
+  "privacy-policy": "Ochrona Twojej prywatności jest naszym priorytetem – rejestrując się, wyrażasz zgodę na naszą <link>Politykę Prywatności</link>",
+  "verify-code": "Sprawdź, czy podany kod zabezpieczający jest zgodny z następującym tekstem:"
+}

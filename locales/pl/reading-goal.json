@@ -1,0 +1,132 @@
+{
+    "continue-reading": "Kontynuuj Czytanie",
+    "continuous": {
+        "description": "Twój cel będzie automatycznie obliczany",
+        "title": "Wraz z upływem czasu"
+    },
+    "create-plan": "Stwórz plan",
+    "create-reading-goal": "Stwórz Cel",
+    "daily-progress": "Dzienne postępy",
+    "daily": {
+        "description": "Twój cel będzie codziennie resetowany",
+        "title": "Dzienny cel"
+    },
+    "day-x": "Dzień {{day}}",
+    "days": "Dni",
+    "duration": "Czas trwania (w dniach)",
+    "ending-chapter": "Kończenie Sury",
+    "ending-verse": "Kończenie Ajatu",
+    "examples-subtitle": "Oto lista popularnych celów. Możesz również stworzyć swój własny cel.",
+    "examples-title": "Wybierz jeden z gotowych celów lub stwórz własny",
+    "examples": {
+        "custom": {
+            "description": "Ustaw swój cel, który Ci odpowiada",
+            "title": "Własny"
+        },
+        "khatm": {
+            "description": "Klasyczny cel Katm. Czytaj 1 Dżuz dziennie",
+            "title": "Ukończ Koran w 30 dni"
+        },
+        "time": {
+            "description": "Prosty, przyjazny dla początkujących cel",
+            "title": "Czytaj 10 minut dziennie"
+        },
+        "year": {
+            "description": "Ukończ Koran we własnym tempie przez następny rok",
+            "title": "Ukończ Koran w rok"
+        }
+    },
+    "frequency-tab": {
+        "description": "Resetować Twój cel codziennie czy co określoną liczbę dni? Będziemy śledzić Twój postęp niezależnie od wybranej częstotliwości.",
+        "title": "Wybierz częstotliwość resetowania celu"
+    },
+    "goal-done": {
+        "description": "Dalsze czytanie będzie nadal rejestrowane",
+        "title": "Ukończyłeś dzisiejszy cel"
+    },
+    "goal-target": {
+        "description": "Ile czasu, stron lub wersetów powinieneś przeczytać, aby ukończyć swój cel?",
+        "title": "Ustaw zakres dla swojego celu czytania"
+    },
+    "goal-type": {
+        "description": "Wybierz czy Twój cel ma być oparty o czas, liczbę stron, czy niestandardowy zakres (np. 3 Dżuz Koranu)?",
+        "title": "Wybierz kryterium dla swojego celu"
+    },
+    "goal-types": {
+        "pages": {
+            "description": "Twój cel będzie oparty o liczbę stron",
+            "title": "Strony"
+        },
+        "range": {
+            "description": "Twój cel będzie oparty o niestandardowy zakres wersetów (to może być Sura, Dżuz, lub nawet cały Koran)",
+            "title": "Własny zakres"
+        },
+        "time": {
+            "description": "Twój cel będzie oparty o czas",
+            "title": "Czas"
+        }
+    },
+    "plus-x-more-days": {
+        "one": "+{{days}} dzień więcej",
+        "other": "+{{days}} dni więcej"
+    },
+    "preview-schedule": {
+        "description": "Tak będzie wyglądał Twój cel. Zawsze możesz go później zmienić.",
+        "title": "Oto podgląd Twojego harmonogramu"
+    },
+    "progress": {
+        "complete": "Dzisiejszy cel został ukończony 🎉",
+        "goal-complete": "Ukończyłeś swój cel w zupełności 🎉",
+        "pages-goal": "czytaj {{pages}} stron Koranu",
+        "range-goal": "czytaj od {{from}} do {{to}}",
+        "time-goal": "czytaj {{time}} Koranu"
+    },
+    "reading-goal": "Cel Czytania",
+    "reading-goal-description": "Czy masz problemy z regularnym ukończaniem swoich celów czytania Koranu?<br\/><br\/>Droga Rozwoju z Koranem to dynamiczna funkcja opracowana, aby pomóc Ci pozostać konsekwentnym w swojej podróży z Koranem. Bez względu na to, czy zamierzasz czytać 10 minut dziennie, ukończyć jeden Dżuz w miesiącu czy skończyć cały Koran w ciągu roku, Quran.com pomoże Ci ustawić spersonalizowany cel i śledzić swoje codzienne serie czytania, dostosowując się w miarę postępów. Korzystanie z niej jest całkowicie darmowe i mamy nadzieję, że pomoże Ci zachować motywację do osiągnięcia swojego celu!",
+    "reading-goal-label": "Osiągnąłeś(aś)",
+    "reading-goal-title": "Przedstawiamy Drogę Rozwoju z Koranem",
+    "recommended": "Polecane",
+    "remaining": "Pozostało na dziś",
+    "remaining-days": {
+        "one": "Pozostał {{days}} dzień",
+        "other": "Pozostały(o) {{days}} dni"
+    },
+    "set-reading-goal-success": "Twój cel czytania został pomyślnie ustawiony.",
+    "start-journey": "Rozpocznij swoją podróż!",
+    "start-reading": "Zacznij Czytać",
+    "starting-chapter": "Zaczynanie Sury",
+    "starting-verse": "Zaczynanie Ajatu",
+    "streak": "Seria",
+    "streak-definition": "Seria to liczba kolejnych dni, w których nieprzerwanie czytałeś(aś) Koran.",
+    "timeline-meaning": "Co oznacza Twoja oś czasu?",
+    "timeline-states": {
+        "checked": "Ukończyłeś(aś) swój cel",
+        "filled": "Trochę przeczytałeś(aś), ale nie wystarczająco, aby ukończyć swój cel",
+        "none": "Niczego nie przeczytałeś(aś) tego dnia",
+        "stroked": "Jeszcze nie przeczytałeś(aś) dzisiaj niczego"
+    },
+    "todays-goal": "Dzisiejszy Cel",
+    "view-progress": "Zobacz Postęp",
+    "week-progress": "Postęp w tym tygodniu",
+    "x-days": {
+        "one": "{{days}} dzień",
+        "other": "{{days}} dni"
+    },
+    "x-days-streak": "serię {{days}} dni",
+    "x-hours": {
+        "one": "{{hours}} godzina",
+        "other": "{{hours}} godzin(y)"
+    },
+    "x-minutes": {
+        "one": "{{minutes}} minuta",
+        "other": "{{minutes}} minut(y)"
+    },
+    "x-pages": {
+        "one": "{{pages}} strona",
+        "other": "{{pages}} stron(y)"
+    },
+    "x-seconds": {
+        "one": "{{seconds}} sekunda",
+        "other": "{{seconds}} sekund(y)"
+    }
+}

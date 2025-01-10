@@ -1,0 +1,10 @@
+{
+    "delete-account": "Usuń konto",
+    "delete-confirmation": {
+        "action-text": "Rozumiem konsekwencje, usuń moje konto",
+        "confirmation-text": "usuń moje konto",
+        "instruction-text": "Proszę napisz <strong>{{text}}<\/strong> aby potwierdzić",
+        "subtitle": "Tej czynności nie można cofnąć. Twoje konto zostanie usunięte na zawsze, wraz z zapisanymi zakładkami, sesjami czytania i wszystkimi Twoimi danymi.",
+        "title": "Czy jesteś tego absolutnie pewien?"
+    }
+}

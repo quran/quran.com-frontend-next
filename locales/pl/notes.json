@@ -1,0 +1,58 @@
+{
+  "add-another-note": "Dodaj kolejną notatkę",
+  "body-placeholder": "Skorzystaj z tego miejsca, aby dodać ogólne notatki lub refleksje.",
+  "checkbox-refl-intro": {
+    "checkbox": {
+      "desc": "<li>Publikacja oznacza, że Twoja refleksja zostanie udostępniona na QuranReflect pod Twoim imieniem, gdzie zostanie zweryfikowana przez zespół moderacyjny i będzie widoczna dla społeczności QuranReflect.</li><li>Po przeglądzie i zatwierdzeniu lub rozpromowaniu Twojego wpisu przez nasz zespół moderacyjny, możesz otrzymać polubienia, komentarze i powiadomienia o obserwowaniu. Po zalogowaniu się do QuranReflect, możesz zaktualizować ustawienia powiadomień, wedle swoich preferencji.</li><li>Możesz przeglądać swoje notatki i opublikowane refleksje w swoim profilu logowania w Quran.com w sekcji „Moje notatki i refleksje”, lub zalogować się do <link>QuranReflect</link> za pomocą swojego adresu email powiązanego z kontem w Quran.com.</li>",
+      "title": "Co się stanie, jeśli zaznaczę to pole?"
+    },
+    "post-button": "Co się dzieje, gdy tworzę posty w QuranReflect?",
+    "qr-intro": "QuranReflect, wraz z Quran.com, jest częścią organizacji Quran.Foundation. Jest to platforma społecznościowa do dzielenia się osobistymi refleksjami na temat Koranu, zachęcająca użytkowników do wewnętrznego przyswojenia jego przesłań i dzielenia się spostrzeżeniami, które inspirują pozytywne zmiany. W odróżnieniu od Tafsiru, który jest naukową interpretacją, refleksje są osobistymi myślami i doświadczeniami związanymi z wersetami. Posty użytkowników w QuranReflect są weryfikowane i moderowane przez wykwalifikowany zespół, który będzie dbał o jakość treści, prawidłową etykietę interakcji z Koranem, oraz wspierał użytkowników, udzielając im informacji zwrotnej, kładąc nacisk na wartościową dyskusję, co przyczyni się do budowy duchowo wspierającej się społeczności skupionej wokół Koranu. Dowiedz się więcej: <link>Quranreflect.com/faq</link>",
+    "title": "Czym jest QuranReflect i co się stanie, jeśli zaznaczę to pole?"
+  },
+  "click-to-see-more": "kliknij, aby zobaczyć więcej",
+  "delete-note": "Usuń notatkę",
+  "delete-success": "Notatka została pomyślnie usunięta",
+  "empty-notes": "Nie znaleziono notatek",
+  "empty-reflections": "Nie znaleziono refleksji",
+  "export-success": "Notatka została pomyślnie opublikowana na Twoim koncie w QuranReflect.",
+  "new-note-reflc-intro": {
+    "reflc-prompts": {
+      "deeper": {
+        "desc": "<li>Czy werset wspomina jakieś Imiona Allaha? W jaki sposób odnoszą się one do wersetu?</li><li>Które słowa lub sformułowania przyciągnęły Twoją uwagę?</li><li>Czy widzisz powiązanie pomiędzy kontekstem wersetu, a innymi wersetami, hadisami lub wydarzeniami?</li>",
+        "title": "Głębsze spostrzeżenia:"
+      },
+      "personal": {
+        "desc": "<li>W jaki sposób poruszył lub zainspirował Cię ten werset?</li><li>Czy wspomina o jakichś rzeczach, nad którymi możesz popracować?</li><li>Czy zawiera jakąś obietnicę, ostrzeżenie lub zakaz, które możesz wprowadzić do swojego życia?</li><li>Czy masz osobistą historię związaną z tym wersetem?</li><li>Jakie zmiany chcesz wprowadzić na podstawie tego wersetu i jakie praktyczne kroki możesz podjąć, aby je wdrożyć?</li>",
+        "title": "Pytania do osobistej refleksji:"
+      },
+      "title": "Podpowiedzi do refleksji"
+    },
+    "title": "Potrzebujesz pomocy w refleksji nad Koranem? Dowiedz się więcej",
+    "what-is-reflc": {
+      "desc": "Refleksja lub zastanawianie się nad Koranem polega na uważnym czytaniu lub słuchaniu słów Allaha, angażowaniu się w ich znaczenia i pozwalaniu, by wpływały one na nas i zmieniały nas na lepsze. Jest to nazywane \"Tadabbur\". Tafsir, w przeciwieństwie do refleksji, to naukowa interpretacja Koranu, zapewniająca szczegółowe wyjaśnienia jego wersetów oparte o klasyczne źródła i analizę naukową. Podczas gdy Tafsir jest zarezerwowany dla uczonych, Allah ﷻ nakazuje każdej osobie angażować się w Tadabbur (Koran <link1>38:29</link1>, <link2>47:24</link2>, <link3>4:82</link3>, oraz wiele innych).<br></br><br></br>Użytkownicy mogą zapisywać swoje notatki i osobiste refleksje prywatnie. Nasze refleksje mogą natomiast diametralnie wpływać na inne osoby, pomagając im w budowaniu ich więzi z Koranem i relacji z Allahem ﷻ. Dlatego użytkownicy mają możliwość udostępniać swoje refleksje w QuranReflect jako część naszych wysiłków mających na celu wspieranie rozwoju ludzi w ich podróży. Aby dowiedzieć się więcej, odwiedź: <link4>QuranReflect.com/faq</link4> i <link5>Pięć sposobów refleksji nad Koranem</link5>",
+      "title": "Czym jest Refleksja?"
+    }
+  },
+  "note": "Notatka",
+  "notes-and-reflcs": "Notatki i Refleksje",
+  "post-on-qr": "Opublikuj w QuranReflect",
+  "posted-reflections": "Opublikowane Refleksje",
+  "private-notes": "Notatki",
+  "qr-tooltip": "<span><link>QuranReflect</link> to platforma społecznościowa do dzielenia się refleksjami na temat Koranu. Zgromadźmy się wokół Koranu, połączmy się z tym, co się liczy.</span>",
+  "reflections-intro": {
+    "line-1": "Aby przeglądać lub pisać komentarze, wchodzić w interakcje ze społecznością i móc wykonywać więcej czynności, odwiedź <link>QuranReflect.com</link>.",
+    "line-2": "Możesz zalogować się na swoje powiązane konto QuranReflect, logując się lub zakładając nowe konto za pomocą tego samego adresu email, który został użyty do logowania na Quran.com.",
+    "line-3": "Treści nieodpowiednie do publikacji będą ukrywane lub usuwane. Użytkownicy zamieszczający nieodpowiednie treści zostaną zablokowani.",
+    "title": "Dowiedz się więcej o opublikowanych Refleksjach"
+  },
+  "save-post-to-qr": "Zapisz i Opublikuj w QuranReflect",
+  "save-privately": "Zapisz dla siebie",
+  "save-publish-failed": "Notatka została pomyślnie zapisana, ale nie udało się jej opublikować",
+  "save-success": "Notatka została pomyślnie zapisana",
+  "share-to-qr": "Udostępnij w QuranReflect.com",
+  "share-to-qr-desc": "Udostępnij jako <b>{{name}}</b>. Zobaczą to <b>użytkownicy QuranReflect</b>",
+  "update-publish-failed": "Notatka została pomyślnie zaktualizowana, ale nie udało się jej opublikować",
+  "update-success": "Notatka została pomyślnie zaktualizowana",
+  "view-on-qr": "Zobacz w QuranReflect"
+}

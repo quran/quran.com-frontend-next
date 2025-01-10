@@ -17,6 +17,7 @@ const LOCALE_NAME = {
   id: 'Indonesia',
   it: 'Italiano',
   nl: 'Dutch',
+  pl: 'Polski',
   pt: 'Português',
   ru: 'русский',
   sq: 'Shqip',
@@ -51,6 +52,7 @@ export const LANG_LOCALE_MAP = {
   id: 'id-ID',
   it: 'it-IT',
   nl: 'nl-NL',
+  pl: 'pl-PL',
   pt: 'pt-BR',
   ru: 'ru-RU',
   sq: 'sq-AL',
@@ -111,6 +113,10 @@ export const Languages = {
     font: 'kurdish',
     locale: 'ku',
     dir: Direction.RTL,
+  },
+  131: {
+    // Polish
+    locale: 'pl',
   },
   133: {
     // Portuguese

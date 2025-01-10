@@ -1,0 +1,107 @@
+{
+  "checklist": {
+    "1": "Funkcje na stronie głównej",
+    "2": "Dostosuj swoje ustawienia",
+    "3": "Wzbogać swoje wrażenia podczas czytania Ajatów",
+    "4": "Spersonalizowane funkcje"
+  },
+  "finish": "Zakończ",
+  "onboarding-checklist": "Samouczek",
+  "onboarding-title": "Zwiększ swoje wrażenia z Quran.com! <br></br> Rozpocznij swoją wycieczkę już teraz:",
+  "previous": "Wstecz",
+  "skip": "Pomiń",
+  "steps": {
+    "3-dot-menu": {
+      "description": "Kliknij menu z trzema kropkami, aby odkryć opcje kopiowania, dodawania do zakładek i powtarzania wersetów. Odkryj różne sposoby powtarzania wersetów.",
+      "title": "Menu z 3 kropkami"
+    },
+    "ayah-reflection": {
+      "description": "Czytaj refleksje (Tadabbur) od uczonych, studentów wiedzy oraz zwykłych ludzi, aby pomóc Ci nawiązać osobistą więź z Koranem.",
+      "title": "Czytaj refleksje z poziomu Ajatu"
+    },
+    "ayah-tafsir": {
+      "description": "Eksploruj Tafsir z poziomu Ajatu, aby zobaczyć dogłębne spostrzeżenia, które pomogą Ci lepiej zrozumieć Koran podczas czytania. (Tafsir może czasem odnosić się do kilku wersetów jednocześnie)",
+      "title": "Czytaj Tafsir z poziomu Ajatu"
+    },
+    "font-size": {
+      "description": "Dostosuj rozmiar czcionki Koranu w łatwy sposób dla wygodnego czytania.",
+      "title": "Rozmiar czcionki"
+    },
+    "font-style": {
+      "description": "Masz do wyboru style: Usmański - King Fahad Complex wersja 1, Usmański - King Fahad Complex wersja 2, Usmański QPC Hafs, Indopak 15 linii, Indopak 16 linii",
+      "title": "Wybierz preferowany styl pisma"
+    },
+    "inline-wbw": {
+      "description": "Przeglądaj tłumaczenie każdego słowa w linii (pod słowem) lub w dymku nad słowem podczas słuchania Koranu",
+      "title": "Wyświetl tłumaczenie słowo po słowie w linii (pod słowem) lub wyświetl dymek z podpowiedzią"
+    },
+    "juz": {
+      "description": "Przeglądaj Koran według Dżuz",
+      "title": "Przeglądaj Koran według Dżuz"
+    },
+    "listen": {
+      "description": "Uruchom odtwarzacz audio, aby posłuchać recytacji",
+      "title": "Słuchaj Sury albo Ajatu"
+    },
+    "login": {
+      "description": "Zaloguj się, zapisz i synchronizuj ustawienia na wszystkich urządzeniach oraz uzyskaj dostęp do dodatkowych funkcji.",
+      "title": "Zaloguj się"
+    },
+    "quran-radio": {
+      "description": "Słuchaj QuranRadio - transmituj Koran bez reklam",
+      "title": "Radio Koran"
+    },
+    "reading-sessions": {
+      "description": "W łatwy sposób śledź swoją podróż z Koranem, przeglądając spersonalizowaną historię czytania i wersety, które odkryłeś na Quran.com.",
+      "title": "Zobacz historię czytania"
+    },
+    "reading-view": {
+      "description": "Przeglądaj Koran w trybie czytania Mushafu",
+      "title": "Tryb czytania"
+    },
+    "search-bar": {
+      "description": "Znajdź wersety, Sury, słowa kluczowe, Dżuz oraz tematy, których szukasz, korzystając z naszego paska wyszukiwania",
+      "title": "Pasek Wyszukiwania"
+    },
+    "select-reciter": {
+      "description": "Wybierając ulubionych recytatorów możesz dostosować swoje wrażenia słuchania!",
+      "title": "Wybierz spośród różnych recytatorów, aby posłuchać"
+    },
+    "settings": {
+      "description": "Zarządzaj swoimi preferencjami",
+      "title": "Ustawienia"
+    },
+    "streak": {
+      "description": "Ustaw swoje cele czytania, śledź swój postęp i rozwijaj stałe nawyki czytania Koranu dzięki naszej funkcji Serii Czytania i Planów.",
+      "title": "Śledź swoje serie i plany czytania"
+    },
+    "surah-info": {
+      "description": "Dowiedz się więcej o Surze którą czytasz - wygodnie umieszczone na początku każdej sury",
+      "title": "Czytaj o Surze"
+    },
+    "theme": {
+      "description": "Wybierz swój ulubiony motyw - tryb Jasny, Sepia lub Ciemny - dla wygodnego i spersonalizowanego doświadczenia czytania Koranu.",
+      "title": "Czytaj Koran w trybie Jasnym, Sepii lub Ciemnym"
+    },
+    "translations": {
+      "description": "Wybierz spośród różnorodnych tłumaczeń w wielu językach. Wskazówka: Porównaj tłumaczenia, wybierając kilka opcji.",
+      "title": "Tłumaczenia"
+    },
+    "voice-search": {
+      "description": "Kliknij ikonę mikrofonu i wyrecytuj werset, którego szukasz. Szybka wskazówka! Aby dowiedzieć się, w którym miejscu Koranu ktoś recytuje (np. podczas modlitwy Tarałih), kliknij ikonę mikrofonu. Po wykryciu jednego lub dwóch wersetów naciśnij przycisk stop, aby znaleźć ich lokalizację.",
+      "title": "Wyszukiwanie głosowe (Tarteel)"
+    },
+    "wbw-audio": {
+      "description": "Wybierz tę opcję, aby posłuchać każdego słowa osobno, zwyczajnie klikając na to słowo!",
+      "title": "Słuchaj transliteracji słowo po słowie, klikając na wybrane słowo"
+    },
+    "wbw-translation": {
+      "description": "Zobacz znaczenie poszczególnych słów podczas czytania lub słuchania Koranu, aby wzbogacić swoje słownictwo Koraniczne",
+      "title": "Czytaj tłumaczenie słowo po słowie"
+    },
+    "wbw-transliteration": {
+      "description": "Zobacz transliterację każdego słowa, dla pomocy w podróży czytania Koranu",
+      "title": "Czytaj transliterację słowo po słowie"
+    }
+  }
+}
