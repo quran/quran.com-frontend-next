@@ -28,3 +28,5 @@ export const NOTIFICATION_SUBSCRIBER_COOKIE_NAME = addEnvSuffixToAuthCookie('not
 export const DEFAULT_PHOTO_URL = `https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y`;
 
 export const AUTH_ONBOARDING_ANNOUNCEMENT_TYPE = 'auth-onboarding';
+
+export const BANNED_USER_ERROR_ID = 'external.banned';

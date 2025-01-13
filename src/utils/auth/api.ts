@@ -1,10 +1,12 @@
 /* eslint-disable max-lines */
 import { NextApiRequest } from 'next';
+import Router from 'next/router';
 import { configureRefreshFetch } from 'refresh-fetch';
 
 import { getTimezone } from '../datetime';
 import { prepareGenerateMediaFileRequestData } from '../media/utils';
 
+import { BANNED_USER_ERROR_ID } from './constants';
 import generateSignature from './signature';
 import BookmarkByCollectionIdQueryParams from './types/BookmarkByCollectionIdQueryParams';
 import GetAllNotesQueryParams from './types/Note/GetAllNotesQueryParams';
@@ -98,11 +100,21 @@ const IGNORE_ERRORS = [
 
 const handleErrors = async (res) => {
   const body = await res.json();
+  const error = body?.error || body?.details?.error;
+  const errorName = body?.name || body?.details?.name;
+
   // sometimes FE needs to handle the error from the API instead of showing a general something went wrong message
-  const shouldIgnoreError = IGNORE_ERRORS.includes(body?.error?.code);
+  const shouldIgnoreError = IGNORE_ERRORS.includes(error?.code);
   if (shouldIgnoreError) {
     return body;
   }
+  // const toast = useToast();
+
+  if (errorName === BANNED_USER_ERROR_ID) {
+    await logoutUser();
+    return Router.push(`/login?error=${errorName}`);
+  }
+
   throw new Error(body?.message);
 };
 
