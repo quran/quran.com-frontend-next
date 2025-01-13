@@ -1,0 +1,31 @@
+{
+  "add": "Agregar",
+  "add-data-success": "Tus datos de lectura se han añadido correctamente.",
+  "delete-goal": {
+    "action": "Eliminar objetivo",
+    "confirmation": {
+      "action-text": "Entiendo la consecuencia, eliminar mi objetivo.",
+      "confirmation-text": "eliminar mi objetivo",
+      "instruction-text": "Por favor, escribe <strong> {{text}} </strong> para confirmar",
+      "subtitle": "Esta acción no se puede deshacer. Eliminará tu objetivo de forma permanente y dejaremos de hacer un seguimiento de tu progreso.",
+      "title": "¿Está seguro?"
+    },
+    "success": "Tu objetivo de lectura ha sido eliminado exitosamente."
+  },
+  "edit-goal": {
+    "action": "Editar objetivo",
+    "subtitle": "Volveremos a calcular tu progreso en función del nuevo objetivo.",
+    "success": "Su objetivo de lectura se ha actualizado correctamente.",
+    "title": "Edita tu objetivo de lectura"
+  },
+  "history": "Historial de lectura",
+  "history-for": "Historial de lectura de {{date}}",
+  "manage-goal": "Gestiona tu objetivo de lectura",
+  "manually-add": "Agregar lecturas manualmente",
+  "no-reading-history-for": "No hay historial de lectura para {{date}}",
+  "reading-progress-header": "Tu progreso",
+  "reading-progress-streak": "Racha",
+  "reading-time": "Tiempo de lectura",
+  "seconds-read-tooltip": "Este es el tiempo que has dedicado a leer las aleyas que has introducido. Lo rellenamos automáticamente con la velocidad de lectura media en Quran.com, pero puedes anularlo con tu tiempo de lectura real.",
+  "you-read": "Leíste:"
+}

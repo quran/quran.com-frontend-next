@@ -1,0 +1,23 @@
+{
+  "awaiting-confirmation": "Esperando confirmación",
+  "continue-apple": "Continuar con Apple",
+  "continue-email": "Continuar con correo electrónico",
+  "continue-facebook": "Continuar con Facebook",
+  "continue-google": "Continuar con Google",
+  "email-placeholder": "Dirección de correo electrónico",
+  "feature-1": "Seguimiento de sus objetivos",
+  "feature-2": "Mantener rachas de lectura",
+  "feature-3": "Crear colecciones",
+  "feature-4": "Sincroniza tus datos en todos los navegadores",
+  "feature-5": "¡Y más!",
+  "feature-6": "<b> ¡Nuevo! </b> Notas y reflexiones.",
+  "login-cta": "Inicia sesión o regístrate ahora:",
+  "login-error": {
+    "AuthenticationError": "Error de autenticación. Inténtalo de nuevo más tarde.",
+    "TokenExpiredError": "Se ha cerrado la sesión, vuelve a iniciar sesión."
+  },
+  "login-title": "Iniciar sesión en Quran.com",
+  "other-options": "Otras opciones de inicio de sesión",
+  "privacy-policy": "Proteger tu privacidad es nuestra prioridad: al registrarte, aceptas nuestra <link> Política de privacidad </link> y <link1> Términos y condiciones </link1>.",
+  "verify-code": "Verifique que el código de seguridad proporcionado coincida con el siguiente texto:"
+}

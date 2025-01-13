@@ -1,0 +1,12 @@
+{
+  "default-translations": "Traducciones predeterminadas",
+  "filter": "filtrar",
+  "language-filter-label": "Buscar todas las traducciones de un idioma",
+  "language-select": "Selecciona un idioma",
+  "reset": "reiniciar",
+  "search": "Buscar",
+  "search-desc": "Busca en el recopilatorio del Sagrado Corán y sus traducciones utilizando un motor de búsqueda multilingüe potente y altamente preciso.",
+  "search-title": "Buscar ' {{searchQuery}} '",
+  "searching-translations": "Buscando traducciones",
+  "translation-select": "Seleccionar una traducción"
+}
