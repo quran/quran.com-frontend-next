@@ -150,6 +150,10 @@ export const Languages = {
     // Chinese
     locale: Language.ZH,
   },
+  40: {
+    // Spanish
+    locale: Language.ES,
+  },
 };
 
 interface LinkLanguageAlternate {
