@@ -1,0 +1,4 @@
+{
+  "meta-description": "Lee y escucha la Sura {{transliteratedName}}. La Sura fue revelada en {{revelationPlace}}, ordenada {{chapterOrder}} en el Corán. El título de la Sura significa \" {{translatedName}} \" en {{localeName}} y consta de {{versesCount}} versículos.",
+  "ranges-meta-desc": "Lee y escucha desde la aleya {{rangeFrom}} hasta la aleya {{rangeTo}}."
+}

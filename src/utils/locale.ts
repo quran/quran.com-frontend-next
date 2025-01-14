@@ -33,6 +33,7 @@ const LOCALE_NAME = {
   [Language.HI]: 'हिन्दी',
   [Language.KU]: 'Kurdî',
   [Language.UZ]: "o'zbek",
+  [Language.ES]: 'Español',
 };
 
 const LOCALE_NAME_TO_CODE = {
@@ -61,6 +62,7 @@ export const LANG_LOCALE_MAP = {
   [Language.UR]: 'ur-PK',
   [Language.ZH]: 'zh-CN',
   [Language.MS]: 'ms-MY',
+  [Language.ES]: 'es-ES',
 };
 
 export enum Direction {
@@ -147,6 +149,10 @@ export const Languages = {
   185: {
     // Chinese
     locale: Language.ZH,
+  },
+  40: {
+    // Spanish
+    locale: 'es',
   },
 };
 
