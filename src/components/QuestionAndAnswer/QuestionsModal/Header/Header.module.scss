@@ -6,8 +6,8 @@
     gap: var(--spacing-xsmall);
     color: var(--color-text-faded);
     svg {
-        width: 24px;
-        height: 24px;
+        width: calc(12 * var(--spacing-micro-px));
+        height: calc(12 * var(--spacing-micro-px));
     }
     @extend %explore_answers;
 }

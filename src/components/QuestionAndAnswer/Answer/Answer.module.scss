@@ -2,6 +2,11 @@
     padding-block: var(--spacing-large);
 }
 
+.headerLeftClassName {
+    flex-direction: row-reverse;
+    align-items: center;
+}
+
 .rangesHeader {
     font-size: var(--font-size-small);
     color: var(--color-text-faded);
@@ -9,10 +14,4 @@
     font-weight: var(--font-weight-semibold);
     flex-direction: column;
     align-items: flex-end;
-
-    // this is the ranges indicator that we want to reverse to show the chevron on the right
-    div:first-child {
-        flex-direction: row-reverse;
-        align-items: center;
-    }
 }

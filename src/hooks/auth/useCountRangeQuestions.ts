@@ -10,9 +10,13 @@ type Range = {
   to: string;
 };
 
-const useCountRangeQuestions = (
-  questionsRange: Range,
-): { data: Record<string, number>; isLoading: boolean; error: Error | null } => {
+type CountRangeQuestionsResponse = {
+  data: Record<string, number>;
+  isLoading: boolean;
+  error: Error | null;
+};
+
+const useCountRangeQuestions = (questionsRange: Range): CountRangeQuestionsResponse => {
   const { lang } = useTranslation();
   const { data, isValidating, error } = useSWRImmutable<Record<string, number>>(
     questionsRange

@@ -31,6 +31,7 @@ const Answer = ({ question }: AnswerProps) => {
         shouldRotatePrefixOnToggle
         onOpenChange={onRangesCollapseOpenChange}
         headerClassName={styles.rangesHeader}
+        headerLeftClassName={styles.headerLeftClassName}
       >
         {({ isOpen: isOpenRenderProp }) => {
           if (!isOpenRenderProp) return null;
