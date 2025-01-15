@@ -64,6 +64,7 @@ export const OFFLINE_ERROR = 'OFFLINE';
 export const fetcher = async function fetcher<T>(
   input: RequestInfo,
   init: RequestInit = {},
+  fullResponse: boolean = false,
 ): Promise<T> {
   // if the user is not online when making the API call
   if (typeof window !== 'undefined' && !window.navigator.onLine) {
@@ -88,6 +89,7 @@ export const fetcher = async function fetcher<T>(
   };
 
   const res = await fetch(input, reqInit);
+  if (fullResponse) return res as unknown as T;
   if (!res.ok || res.status === 500 || res.status === 404) {
     throw res;
   }
