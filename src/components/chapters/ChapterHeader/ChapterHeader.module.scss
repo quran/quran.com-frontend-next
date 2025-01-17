@@ -1,11 +1,11 @@
 @use "src/styles/breakpoints";
 .container {
+  width: var(--line-width, auto);
+  margin-inline: auto;
   display: flex;
   justify-content: space-between;
   margin-block-start: var(--spacing-xxsmall);
   margin-block-end: var(--spacing-xxsmall);
-  margin-inline-start: 0;
-  margin-inline-end: 0;
   padding-block-start: var(--spacing-xxsmall);
   padding-block-end: var(--spacing-xxsmall);
   padding-inline-start: 0;
