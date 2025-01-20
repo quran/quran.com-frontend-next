@@ -7,58 +7,62 @@ import i18nConfig from '../../i18n.json';
 
 import { getBasePath } from './url';
 
-const RTL_LOCALES = ['ar', 'fa', 'ur'];
+import Language from '@/types/Language';
+
+const RTL_LOCALES = [Language.AR, Language.FA, Language.UR];
 const LOCALE_NAME = {
-  en: 'English',
-  ar: 'العربية',
-  bn: 'বাংলা',
-  fa: 'فارسی',
-  fr: 'Français',
-  id: 'Indonesia',
-  it: 'Italiano',
-  nl: 'Dutch',
-  pt: 'Português',
-  ru: 'русский',
-  sq: 'Shqip',
-  th: 'ภาษาไทย',
-  tr: 'Türkçe',
-  ur: 'اردو',
-  zh: '简体中文',
-  ms: 'Melayu',
-  de: 'Deutsch',
-  inh: 'ʁəlʁɑj mot',
-  ta: 'தமிழ்', // tamil
-  hi: 'हिन्दी',
-  ku: 'Kurdî',
-  uz: "o'zbek",
+  [Language.EN]: 'English',
+  [Language.AR]: 'العربية',
+  [Language.BN]: 'বাংলা',
+  [Language.FA]: 'فارسی',
+  [Language.FR]: 'Français',
+  [Language.ID]: 'Indonesia',
+  [Language.IT]: 'Italiano',
+  [Language.NL]: 'Dutch',
+  [Language.PT]: 'Português',
+  [Language.RU]: 'русский',
+  [Language.SQ]: 'Shqip',
+  [Language.TH]: 'ภาษาไทย',
+  [Language.TR]: 'Türkçe',
+  [Language.UR]: 'اردو',
+  [Language.ZH]: '简体中文',
+  [Language.MS]: 'Melayu',
+  [Language.DE]: 'Deutsch',
+  [Language.INH]: 'ʁəlʁɑj mot',
+  [Language.TA]: 'தமிழ்', // tamil
+  [Language.HI]: 'हिन्दी',
+  [Language.KU]: 'Kurdî',
+  [Language.UZ]: "o'zbek",
+  [Language.ES]: 'Español',
 };
 
 const LOCALE_NAME_TO_CODE = {
-  bengali: 'bn',
-  english: 'en',
-  arabic: 'ar',
-  russian: 'ru',
-  urdu: 'ur',
-  Kurdish: 'ku',
+  bengali: Language.BN,
+  english: Language.EN,
+  arabic: Language.AR,
+  russian: Language.RU,
+  urdu: Language.UR,
+  Kurdish: Language.KU,
 };
 
 export const LANG_LOCALE_MAP = {
-  en: 'en-US',
-  ar: 'ar-EG',
-  bn: 'bn-BD',
-  fa: 'fa-IR',
-  fr: 'fr-FR',
-  id: 'id-ID',
-  it: 'it-IT',
-  nl: 'nl-NL',
-  pt: 'pt-BR',
-  ru: 'ru-RU',
-  sq: 'sq-AL',
-  th: 'th-TH',
-  tr: 'tr-TR',
-  ur: 'ur-PK',
-  zh: 'zh-CN',
-  ms: 'ms-MY',
+  [Language.EN]: 'en-US',
+  [Language.AR]: 'ar-EG',
+  [Language.BN]: 'bn-BD',
+  [Language.FA]: 'fa-IR',
+  [Language.FR]: 'fr-FR',
+  [Language.ID]: 'id-ID',
+  [Language.IT]: 'it-IT',
+  [Language.NL]: 'nl-NL',
+  [Language.PT]: 'pt-BR',
+  [Language.RU]: 'ru-RU',
+  [Language.SQ]: 'sq-AL',
+  [Language.TH]: 'th-TH',
+  [Language.TR]: 'tr-TR',
+  [Language.UR]: 'ur-PK',
+  [Language.ZH]: 'zh-CN',
+  [Language.MS]: 'ms-MY',
+  [Language.ES]: 'es-ES',
 };
 
 export enum Direction {
@@ -70,81 +74,81 @@ export const Languages = {
   9: {
     // Arabic,
     dir: Direction.RTL,
-    locale: 'ar',
+    locale: Language.AR,
   },
   20: {
     // Bengali
-    locale: 'bn',
+    locale: Language.BN,
   },
   34: {
     font: 'divehi',
-    locale: 'dv',
+    locale: Language.DV,
     dir: Direction.RTL,
   },
   38: {
     // English
-    locale: 'en',
+    locale: Language.EN,
   },
   43: {
     // Persian/Farsi
     dir: Direction.RTL,
-    locale: 'fa',
+    locale: Language.FA,
   },
   49: {
     // French
-    locale: 'fr',
+    locale: Language.FR,
   },
   59: {
     // Hebrew
     dir: Direction.RTL,
-    locale: 'he',
+    locale: Language.HE,
   },
   67: {
     // Indonesian
-    locale: 'id',
+    locale: Language.ID,
   },
   74: {
     // Italian
-    locale: 'it',
+    locale: Language.IT,
   },
   89: {
     font: 'kurdish',
-    locale: 'ku',
+    locale: Language.KU,
     dir: Direction.RTL,
   },
   133: {
     // Portuguese
-    locale: 'pt',
+    locale: Language.PT,
   },
   118: {
     // Dutch
-    locale: 'nl',
+    locale: Language.NL,
   },
   138: {
     // Russian
-    locle: 'ru',
+    locale: Language.RU,
   },
   151: {
     // Albanian
-    locale: 'sq',
+    locale: Language.SQ,
   },
   161: {
     // Thai
-    locale: 'th',
+    locale: Language.TH,
   },
   172: {
     // Uyghur/Uighur
     dir: Direction.RTL,
-    locale: 'ug',
+    locale: Language.UY,
   },
   174: {
     font: 'urdu',
     dir: Direction.RTL,
-    locale: 'ur',
+    locale: Language.UR,
   },
   185: {
     // Chinese
-    locale: 'zh',
+    locale: Language.ZH,
   },
 };
 
@@ -169,7 +173,7 @@ interface LanguageData {
  * @returns {boolean}
  */
 export const shouldUseMinimalLayout = (lang: string): boolean => {
-  return lang === 'ar' || lang === 'ur';
+  return lang === Language.AR || lang === Language.UR;
 };
 
 /**
@@ -178,7 +182,7 @@ export const shouldUseMinimalLayout = (lang: string): boolean => {
  * @param {string} locale
  * @returns {boolean}
  */
-export const isRTLLocale = (locale: string): boolean => RTL_LOCALES.includes(locale);
+export const isRTLLocale = (locale: string): boolean => RTL_LOCALES.includes(locale as Language);
 
 /**
  * Gir the dir of the element based on the locale.
@@ -201,7 +205,7 @@ export const getLanguageDataById = (languageId: number): LanguageData => {
   return {
     font: lang?.font,
     direction: lang?.dir || Direction.LTR,
-    code: lang?.locale || 'en',
+    code: lang?.locale || Language.EN,
   };
 };
 
@@ -234,7 +238,7 @@ export const getLanguageFontById = (languageId: number): string => {
  * @param {string} locale
  * @returns {number} language id
  */
-export const findLanguageIdByLocale = (locale: string): number => {
+export const findLanguageIdByLocale = (locale: Language): number => {
   return Number(findKey(Languages, { locale }));
 };
 

@@ -1,0 +1,26 @@
+@use "src/components/QuestionAndAnswer/Pill/shared.module.scss" as shared;
+
+.header {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.pillContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--spacing-large);
+    text-transform: capitalize;
+    padding-block-start: var(--spacing-xsmall);
+}
+
+.theme {
+    color: var(--color-text-faded);
+}
+
+.summary {
+    font-size: var(--font-size-large);
+    font-weight: var(--font-weight-bold);
+}
