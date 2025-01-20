@@ -11,6 +11,7 @@ import transStyles from './TranslationText.module.scss';
 import Button, { ButtonSize, ButtonShape, ButtonVariant } from '@/dls/Button/Button';
 import Spinner from '@/dls/Spinner/Spinner';
 import CloseIcon from '@/icons/close.svg';
+import Language from '@/types/Language';
 import { getLanguageDataById, findLanguageIdByLocale } from '@/utils/locale';
 import Footnote from 'types/Footnote';
 
@@ -31,7 +32,7 @@ const FootnoteText: React.FC<FootnoteTextProps> = ({
 }) => {
   const { t, lang } = useTranslation('quran-reader');
 
-  const languageId = footnote?.languageId || findLanguageIdByLocale(lang);
+  const languageId = footnote?.languageId || findLanguageIdByLocale(lang as Language);
   const landData = getLanguageDataById(languageId);
 
   return (

@@ -28,8 +28,10 @@ import { CreateGoalRequest, Goal, GoalCategory, UpdateGoalRequest } from '@/type
 import { Note } from '@/types/auth/Note';
 import { Response } from '@/types/auth/Response';
 import { StreakWithMetadataParams, StreakWithUserMetadata } from '@/types/auth/Streak';
+import Language from '@/types/Language';
 import GenerateMediaFileRequest, { MediaType } from '@/types/Media/GenerateMediaFileRequest';
 import MediaRenderError from '@/types/Media/MediaRenderError';
+import QuestionResponse from '@/types/QuestionsAndAnswers/QuestionResponse';
 import { Mushaf } from '@/types/QuranReader';
 import {
   makeBookmarksUrl,
@@ -76,6 +78,9 @@ import {
   makeGenerateMediaFileUrl,
   makeGetMediaFileProgressUrl,
   makeGetMonthlyMediaFilesCountUrl,
+  makeCountQuestionsWithinRangeUrl,
+  makeGetQuestionsByVerseKeyUrl,
+  makeGetQuestionByIdUrl,
 } from '@/utils/auth/apiPaths';
 import { isStaticBuild } from '@/utils/build';
 import CompleteAnnouncementRequest from 'types/auth/CompleteAnnouncementRequest';
@@ -393,12 +398,33 @@ export const addCollection = async (collectionName: string) => {
   return postRequest(makeAddCollectionUrl(), { name: collectionName });
 };
 
+export const countQuestionsWithinRange = async (
+  from: string,
+  to: string,
+  language: Language,
+): Promise<Record<string, number>> => {
+  return privateFetcher(makeCountQuestionsWithinRangeUrl(from, to, language));
+};
+
 export const getAllNotes = async (params: GetAllNotesQueryParams) => {
   return privateFetcher(makeNotesUrl(params));
 };
 
 export const countNotesWithinRange = async (from: string, to: string) => {
   return privateFetcher(makeCountNotesWithinRangeUrl(from, to));
+};
+
+export const getAyahQuestions = async (ayahKey: string, language: Language) => {
+  return privateFetcher(
+    makeGetQuestionsByVerseKeyUrl({
+      verseKey: ayahKey,
+      language,
+    }),
+  );
+};
+
+export const getQuestionById = async (questionId: string): Promise<QuestionResponse> => {
+  return privateFetcher(makeGetQuestionByIdUrl(questionId));
 };
 
 export const addNote = async (payload: Pick<Note, 'body' | 'ranges' | 'saveToQR'>) => {

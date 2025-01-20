@@ -12,12 +12,13 @@ export enum PillSize {
 type Props = {
   children: React.ReactNode;
   size?: PillSize;
+  containerClassName?: string;
 };
 
-const Pill: React.FC<Props> = ({ children, size = PillSize.MEDIUM }) => {
+const Pill: React.FC<Props> = ({ children, size = PillSize.MEDIUM, containerClassName }) => {
   return (
     <div
-      className={classNames(styles.container, {
+      className={classNames(containerClassName, styles.container, {
         [styles.medium]: size === PillSize.MEDIUM,
         [styles.small]: size === PillSize.SMALL,
       })}

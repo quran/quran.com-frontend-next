@@ -1,0 +1,41 @@
+@use "src/styles/theme";
+@use "src/components/QuestionAndAnswer/Pill/shared.module.scss" as shared;
+
+.container {
+    padding-inline: var(--spacing-xsmall-px) !important;
+    padding-block: var(--spacing-xxsmall-px) !important;
+    gap: var(--spacing-xxsmall-px) !important;
+    border-radius: var(--spacing-medium2-px) !important;
+
+    color: var(--text-color) !important;
+    background-color: var(--background-color) !important;
+    text-transform: capitalize !important;
+
+    > svg {
+        width: 16px;
+        height: 16px;
+        padding-inline-end: var(--spacing-xxsmall);
+    }
+}
+
+.clarification {
+    @extend %clarification;
+}
+
+.explore_answers {
+    @extend %explore_answers;
+}
+
+.community {
+    --background-color: var(--shade-1);
+    --text-color: var(--color-text-faded);
+}
+
+.tafsir {
+    --background-color: var(--color-success-faded);
+    --text-color: #2ca4ab;
+}
+
+.button {
+    cursor: pointer;
+}
