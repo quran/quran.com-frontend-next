@@ -133,6 +133,17 @@ export const getVerseReflectionNavigationUrl = (verseKey: string): string =>
   `/${verseKey}/reflections`;
 
 /**
+ * Get the href link to questions of Ayah.
+ *
+ * @param {string} verseKey
+ * @returns {string}
+ */
+export const getVerseQuestionsNavigationUrl = (verseKey: string): string =>
+  `/${verseKey}/questions`;
+
+export const getQuestionNavigationUrl = (questionId: string): string => `/questions/${questionId}`;
+
+/**
  * Get the href link to a surah.
  *
  * @param {string | number} surahIdOrSlug

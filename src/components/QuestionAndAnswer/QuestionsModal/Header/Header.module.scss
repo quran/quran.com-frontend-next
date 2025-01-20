@@ -1,0 +1,21 @@
+@use "src/components/QuestionAndAnswer/Pill/shared.module.scss" as shared;
+
+.headerContainer {
+    display: flex;
+    align-items: flex-start;
+    gap: var(--spacing-xsmall);
+    color: var(--color-text-faded);
+    svg {
+        width: calc(12 * var(--spacing-micro-px));
+        height: calc(12 * var(--spacing-micro-px));
+    }
+    @extend %explore_answers;
+}
+
+.verseKey {
+    font-size: var(--font-size-xsmall);
+}
+
+.icon {
+    margin-inline: 0 !important;
+}
