@@ -18,6 +18,7 @@ export type SearchRequestParams<Mode extends SearchMode> = {
   query: string;
   size?: number;
   page?: number;
+  perPage?: number;
   getText?: SearchBoolean;
   filterLanguages?: string;
   fields?: string;

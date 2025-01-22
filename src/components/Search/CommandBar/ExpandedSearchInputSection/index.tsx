@@ -90,7 +90,7 @@ const ExpandedSearchInputSection: React.FC<Props> = ({ searchQuery }) => {
   );
 
   const quickSearchFetcher = useCallback(() => {
-    return getNewSearchResults(getQuickSearchQuery(searchQuery));
+    return getNewSearchResults(getQuickSearchQuery(searchQuery, 10));
   }, [searchQuery]);
 
   /**
@@ -157,7 +157,7 @@ const ExpandedSearchInputSection: React.FC<Props> = ({ searchQuery }) => {
         ) : (
           <DataFetcher
             queryKey={
-              searchQuery ? makeNewSearchResultsUrl(getQuickSearchQuery(searchQuery)) : null
+              searchQuery ? makeNewSearchResultsUrl(getQuickSearchQuery(searchQuery, 10)) : null
             }
             render={dataFetcherRender}
             fetcher={quickSearchFetcher}

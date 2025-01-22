@@ -62,7 +62,7 @@ const SearchDrawer: React.FC = () => {
       addToSearchHistory(dispatch, debouncedSearchQuery, SearchQuerySource.SearchDrawer);
       setIsSearching(true);
       logTextSearchQuery(debouncedSearchQuery, SearchQuerySource.SearchDrawer);
-      getNewSearchResults(getQuickSearchQuery(debouncedSearchQuery))
+      getNewSearchResults(getQuickSearchQuery(debouncedSearchQuery, 10))
         .then((response) => {
           setSearchResult({
             ...response,

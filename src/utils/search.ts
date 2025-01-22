@@ -210,14 +210,19 @@ export const addToSearchHistory = (
  * Get the quick search query.
  *
  * @param {string} query
+ * @param {number} perPage
  * @returns {SearchRequestParams<SearchMode.Quick>}
  */
-export const getQuickSearchQuery = (query: string): SearchRequestParams<SearchMode.Quick> => {
+export const getQuickSearchQuery = (
+  query: string,
+  perPage = 10,
+): SearchRequestParams<SearchMode.Quick> => {
   return {
     mode: SearchMode.Quick,
     query,
     getText: 1,
     highlight: 1,
+    perPage,
   };
 };
 
