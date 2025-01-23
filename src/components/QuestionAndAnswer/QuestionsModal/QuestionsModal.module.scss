@@ -15,10 +15,10 @@
 
 .closeIcon {
     @include breakpoints.tablet {
-        display: block;
-        position: relative;
-        margin: 0;
-        padding: 0;
+        display: block !important;
+        position: relative !important;
+        margin: 0 !important;
+        padding: 0 !important;
     }
 }
 

@@ -69,6 +69,12 @@ $translateYDistance: 200px;
   transition: opacity var(--transition-fast) ease;
 }
 
+.fullScreen {
+  @include breakpoints.smallerThanTablet {
+    padding-block-start: 0 !important;
+  }
+}
+
 .contentWrapper {
   background: var(--color-background-default);
   box-sizing: border-box;
@@ -119,12 +125,14 @@ $translateYDistance: 200px;
 }
 
 .contentWrapper[data-state="open"] {
-  animation: contentIn var(--transition-regular) ease,
+  animation:
+    contentIn var(--transition-regular) ease,
     fadeIn var(--transition-regular) ease;
 }
 
 .contentWrapper[data-state="closed"] {
-  animation: contentOut var(--transition-regular) ease,
+  animation:
+    contentOut var(--transition-regular) ease,
     fadeOut var(--transition-regular) ease;
 }
 
