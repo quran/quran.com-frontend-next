@@ -52,7 +52,7 @@ const ContentModal = ({
   isFixedHeight,
   hasHeader = true,
   onClick,
-  shouldBeFullScreen: fullScreen = false,
+  shouldBeFullScreen = false,
 }: ContentModalProps) => {
   const overlayRef = useRef<HTMLDivElement>();
   const { locale } = useRouter();
@@ -95,7 +95,7 @@ const ContentModal = ({
     <Dialog.Root open={isOpen}>
       <Dialog.Portal>
         <Dialog.Overlay
-          className={classNames(styles.overlay, { [styles.fullScreen]: fullScreen })}
+          className={classNames(styles.overlay, { [styles.fullScreen]: shouldBeFullScreen })}
           ref={overlayRef}
         >
           <Dialog.Content
