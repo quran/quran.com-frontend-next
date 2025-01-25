@@ -29,9 +29,9 @@ export const RemotionRoot = () => {
     `Indopak`,
     `url('${staticFile('/indopak-nastaleeq-waqf-lazim-v4.2.1.woff2')}') format('woff2')`,
   );
-  const proximaVaraFont = new FontFace(
-    `ProximaVara`,
-    `url('${staticFile('/ProximaVara.woff2')}') format('woff2')`,
+  const openSansFont = new FontFace(
+    `OpenSans`,
+    `url('${staticFile('/OpenSans.ttf')}') format('woff2')`,
   );
   const playfairDisplay = new FontFace(
     'PlayfairDisplay',
@@ -42,14 +42,14 @@ export const RemotionRoot = () => {
     uthmanicHafsFont.load(),
     notoNastaliqFont.load(),
     indopakFont.load(),
-    proximaVaraFont.load(),
+    openSansFont.load(),
     playfairDisplay.load(),
   ])
     .then(() => {
       document.fonts.add(uthmanicHafsFont);
       document.fonts.add(notoNastaliqFont);
       document.fonts.add(indopakFont);
-      document.fonts.add(proximaVaraFont);
+      document.fonts.add(openSansFont);
       document.fonts.add(playfairDisplay);
       continueRender(waitForFont);
     })

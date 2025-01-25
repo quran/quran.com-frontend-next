@@ -21,7 +21,7 @@ const withPWAConfig = withPWA({
   disable: !isProduction,
   mode: isProduction ? 'production' : 'development',
   publicExcludes: [
-    '!fonts/**/!(sura_names|ProximaVara)*', // exclude pre-caching all fonts that are not sura_names or ProximaVara
+    '!fonts/**/!(sura_names|OpenSans)*', // exclude pre-caching all fonts that are not sura_names or OpenSans
     '!icons/**', // exclude all icons
     '!images/**/!(background|homepage)*', // don't pre-cache except background.jpg and homepage.png
   ],
