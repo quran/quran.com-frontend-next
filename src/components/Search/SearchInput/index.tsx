@@ -17,6 +17,7 @@ import { setIsSearchDrawerOpen, setDisableSearchDrawerTransition } from '@/redux
 import {
   selectIsCommandBarVoiceFlowStarted,
   startSearchDrawerVoiceFlow,
+  stopCommandBarVoiceFlow,
 } from '@/redux/slices/voiceSearch';
 import { logButtonClick } from '@/utils/eventLogger';
 import { isMobile } from '@/utils/responsive';
@@ -41,6 +42,7 @@ const SearchInput: React.FC<Props> = ({
   const containerRef = useRef<HTMLDivElement>(null);
   const collapseContainer = useCallback(() => {
     dispatch({ type: setIsExpanded.type, payload: false });
+    dispatch({ type: stopCommandBarVoiceFlow.type, payload: false });
   }, [dispatch]);
   useOutsideClickDetector(containerRef, collapseContainer, isExpanded);
   useHotkeys('Escape', collapseContainer, { enabled: isExpanded, enableOnFormTags: ['INPUT'] });
