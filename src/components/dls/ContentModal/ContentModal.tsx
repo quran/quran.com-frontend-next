@@ -32,6 +32,7 @@ type ContentModalProps = {
   headerClassName?: string;
   size?: ContentModalSize;
   isFixedHeight?: boolean;
+  shouldBeFullScreen?: boolean;
 };
 
 const SCROLLBAR_WIDTH = 15;
@@ -51,6 +52,7 @@ const ContentModal = ({
   isFixedHeight,
   hasHeader = true,
   onClick,
+  shouldBeFullScreen = false,
 }: ContentModalProps) => {
   const overlayRef = useRef<HTMLDivElement>();
   const { locale } = useRouter();
@@ -92,7 +94,10 @@ const ContentModal = ({
   return (
     <Dialog.Root open={isOpen}>
       <Dialog.Portal>
-        <Dialog.Overlay className={styles.overlay} ref={overlayRef}>
+        <Dialog.Overlay
+          className={classNames(styles.overlay, { [styles.fullScreen]: shouldBeFullScreen })}
+          ref={overlayRef}
+        >
           <Dialog.Content
             {...(onClick && { onClick })}
             className={classNames(styles.contentWrapper, {
