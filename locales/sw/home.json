@@ -1,0 +1,41 @@
+{
+  "no-bookmarks": "Huna alamisho zozote bado",
+  "no-recently-read": "Bado huna vipindi vyovyote vya kusoma",
+  "noble-quran": "Qur'ani Tukufu",
+  "qgj": {
+    "learning-plans": {
+      "cta": {
+        "all-plans": "Tazama Mipango Yote",
+        "my-plans": "Mipango Yangu"
+      },
+      "desc": {
+        "logged-in": "Je, umewahi kuanzisha programu ya kujifunza na kisha kupoteza mwelekeo katikati? Mipango yetu ya masomo imegawanywa katika sehemu unazoweza kusoma kwa urahisi na tunafuatilia maendeleo yako hadi ufikie mwisho. Gundua toleo letu la sasa la kozi uitakayo leo hii",
+        "logged-in-no-plans": "Je, umewahi kuanzisha programu ya kujifunza na kisha kupoteza mwelekeo katikati? Mipango yetu ya masomo imegawanywa katika sehemu unazoweza kusoma kwa urahisi na tunafuatilia maendeleo yako hadi ufikie mwisho. Gundua toleo letu la sasa la kozi uitakayo leo hii",
+        "logged-out": "Je, umewahi kuanzisha programu ya kujifunza na kisha ukashindwa kumaliza? Mipango yetu ya masomo imegawanywa katika sehemu zinazoweza kudhibitiwa kwa urahisi na tunafuatilia maendeleo yako hadi ufikie mwisho. Gundua toleo letu la sasa la kozi"
+      },
+      "title": "Mipango ya Kujifunza"
+    },
+    "quran-reading-goals": {
+      "desc": {
+        "logged-out": "Je, unataka kusoma dakika 10 kwa siku, kukamilisha Juz katika mwezi mmoja, au kumaliza Qur'ani nzima kwa mwaka mmoja? Ni rahisi kuunda lengo maalum na kufuatilia maendeleo yako"
+      },
+      "title": "Malengo Maalum ya Kusoma Qur'ani"
+    },
+    "title": "Kuza safari yako na Qur'ani"
+  },
+  "ramadan-activities-cta": "<link> Fuata <b> Global Quranic Calendar </b> kwa usomaji wa kila wiki, podikasti za kusisimua, na wito wa kutafakari! </link>",
+  "read-juz": "Soma Juz",
+  "recently-read": "Iliyosomwa Hivi Karibuni",
+  "revelation-order-disclaimer": "Mtazamo huu unaonyesha utaratibu wa mpangilio wa Surah katika Quran kulingana na wakati zilipoteremshwa kwa Mtume Muhammad <hover> ﷺ </hover>. Utaratibu huu ni mtazamo katika maoni ya wanazuoni na baadhi ya Sura ziliteremshwa kisehemu kwa nyakati tofauti. Utaratibu uliotumika hapa kunatokana na kazi ya <link> Tanzil.net </link>. [Kumbuka: utaratibu wa Mushaf uliyokusanywa kutoka al-Fatiha hadi al-Nas ni suala la makubaliano kati ya wanazuoni.]",
+  "tab": {
+    "bookmarks": "Alamisho",
+    "popular": "Maarufu"
+  },
+  "view-all-bookmarks": "Tazama alamisho zote",
+  "voice": {
+    "trigger": "Ufikiaji wa haraka wa chochote"
+  },
+  "welcome": {
+    "title": "Ni Mwezi wa Qur'ani! Saidia mamilioni ya watumiaji kupata mwongozo wa Qur'ani."
+  }
+}

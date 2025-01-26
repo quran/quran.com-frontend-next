@@ -23,6 +23,7 @@ const SUPPORTED_CHAPTER_LOCALES = [
   'ur',
   'zh',
   'es',
+  'sw',
 ];
 
 /**

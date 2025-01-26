@@ -1,0 +1,35 @@
+{
+  "hero": {
+    "line-1": "The Global Quranic Calendar ni ratiba ya usomaji iliyoundwa ili kuhimiza usomaji kwa hali kutafakari Qur'ani nzima, kutoka mwisho wa Ramadhani moja hadi mwanzo wa Ramadhani inayofuata. Tunakuhimiza uchukue muda kuelewa na kutafakari aya ili uweze kupata mawasiliano wa kina, na wa dhati zaidi na Qur'ani."
+  },
+  "interact-with-post": "Wasiliana na chapisho hili kwenye QuranReflect",
+  "islamic-months": {
+    "1": "Muharram",
+    "2": "Safar",
+    "3": "Rabi' al-Awwal",
+    "4": "Rabi' al-Thani",
+    "5": "Jumada al-Awwal",
+    "6": "Jumada al-Thani",
+    "7": "Rajab",
+    "8": "Sha'ban",
+    "9": "Ramadhani",
+    "10": "Shawwal",
+    "11": "Dhu al-Qi'dah",
+    "12": "Dhu al-Hijjah"
+  },
+  "join-qc": {
+    "line-1": "Tuko katika <highlight> Wiki {{weekNumber}} </highlight> ya Quranic Calendar.",
+    "line-2": "<normal> Jiunge nasi kwa usomaji wa wiki hii hata ikiwa ni mara yako ya kwanza! </normal>"
+  },
+  "join-quranic-calendar": "Jisajili ili upate sasisho na nyenzo mbalimbali kupitia QuranReflect",
+  "join-quranic-calendar-success": "Umefanikiwa kujiunga na Divine Book Club!",
+  "quranic-calendar": "The Global Quranic Calendar",
+  "reading-options": {
+    "default-settings": "Soma na mipangilio yangu chaguomsingi",
+    "en-and-ar": "Soma kwa Kiingereza na Kiarabu",
+    "en-only": "Soma kwa Kiingereza pekee"
+  },
+  "supplemental-resources": "Maelezo ya ziada",
+  "today": "Tarehe ya leo ni: <highlight> {{month}} {{day}} {{year}}, {{gregorianDate}} </highlight>",
+  "week-title": "Wiki {{weekNumber}} ( {{month}} ) inayojumuisha aya {{rangeStart}} hadi {{rangeEnd}}"
+}

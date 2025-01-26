@@ -1,0 +1,12 @@
+{
+  "default-translations": "Tarjuma Chaguomsingi",
+  "filter": "Chuja",
+  "language-filter-label": "Tafuta tarjuma zote za lugha",
+  "language-select": "Chagua lugha",
+  "reset": "weka upya",
+  "search": "Tafuta",
+  "search-desc": "Tafuta ndani ya mkusanyo wa Qur'ani Tukufu na tarjuma zake kwa kutumia injini ya utafutaji yenye nguvu na usahihi wa juu kupitia lugha mbalimbali.",
+  "search-title": "Tafuta ' {{searchQuery}} '",
+  "searching-translations": "Inatafuta tarjuma",
+  "translation-select": "Chagua tarjuma"
+}

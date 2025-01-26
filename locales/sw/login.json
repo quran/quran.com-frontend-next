@@ -1,0 +1,23 @@
+{
+  "awaiting-confirmation": "Inasubiri Uthibitisho",
+  "continue-apple": "Endelea na Apple",
+  "continue-email": "Endelea na Barua pepe",
+  "continue-facebook": "Endelea na Facebook",
+  "continue-google": "Endelea na Google",
+  "email-placeholder": "Anwani ya Barua Pepe",
+  "feature-1": "Fuatilia malengo yako",
+  "feature-2": "Dumisha streaks za kusoma",
+  "feature-3": "Unda mikusanyiko",
+  "feature-4": "Sawazisha data yako kwenye vivinjari",
+  "feature-5": "Na mengine zaidi!",
+  "feature-6": "<b> Mpya! </b> Maelezo na Tafakari",
+  "login-cta": "Ingia au Jisajili sasa:",
+  "login-error": {
+    "AuthenticationError": "Uthibitishaji umeshindikana. Tafadhali jaribu tena baadaye",
+    "TokenExpiredError": "Umetoka nje, tafadhali ingia tena."
+  },
+  "login-title": "Ingia kwenye Quran.com",
+  "other-options": "Chaguzi Nyingine za Kuingia",
+  "privacy-policy": "Kulinda faragha yako ndio kipaumbele chetu - Kwa kujiandikisha, umekubali <link> Sera yetu ya Faragha </link> na <link1> Sheria na Masharti </link1>.",
+  "verify-code": "Thibitisha kuwa nambari ya kuthibitisha iliyotolewa inalingana na maandishi yafuatayo:"
+}

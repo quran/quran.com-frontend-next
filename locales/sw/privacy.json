@@ -1,0 +1,48 @@
+{
+  "communication": {
+    "desc": "Tunaweza kutumia anwani yako ya barua pepe kukutumia masasisho muhimu, majarida, au arifa zinazohusiana na huduma zetu, maudhui, n.k. Utakuwa na uwezo wa kujiondoa kutoka kwa mawasiliano haya wakati wowote.",
+    "title": "Mawasiliano"
+  },
+  "contact-us": {
+    "desc": "Ikiwa una maswali yoyote, matatizo, au maombi kuhusu Sera hii ya Faragha au utunzaji wa maelezo yako ya kibinafsi, tafadhali wasiliana nasi <0>hapa</0>. Kwa kutumia tovuti yetu, unakubali kwamba umesoma na kuelewa Sera hii ya Faragha na kukubali kukusanya, kutumia na kufichua maelezo yako ya kibinafsi kama ilivyoelezwa.",
+    "title": "Wasiliana Nasi"
+  },
+  "cookies": {
+    "desc": "Quran.com hutumia vidakuzi ili kuboresha matumizi yako ya kuvinjari, kutoa maudhui yaliyobinafsishwa, na kuchanganua trafiki ya tovuti. Kwa kuingia na kutumia tovuti yetu, unakubali matumizi ya vidakuzi kwa mujibu wa Sera hii ya Faragha. <br/> <br/> <li> Aina za Vidakuzi Tunazotumia: </li> <subLi> Vidakuzi Muhimu: Vidakuzi hivi ni muhimu kwa utendakazi ifaavyo wa tovuti yetu na kuwezesha vipengele vya msingi, kama vile usogezaji kwenye ukurasa na kufikia maeneo salama. Hazikusanyi taarifa zozote zinazoweza kumtambulisha mtu binafsi. Bila vidakuzi hivi, baadhi ya sehemu za tovuti huenda zisifanye kazi ipasavyo. </subLi> <subLi> Vidakuzi vya Uchambuzi na Utendaji: Tunatumia vidakuzi hivi kukusanya taarifa kuhusu jinsi wageni wanavyotumia tovuti yetu, ikijumuisha idadi ya wageni, kurasa wanazotembelea, na muda unaotumika kwenye kila ukurasa. Data hii hutusaidia kuchanganua na kuboresha utendaji na utendakazi wa tovuti yetu. Vidakuzi hivi havikutambulishi wewe binafsi; data yote imejumlishwa na haitambulishwi na mtu binafsi. </subLi>",
+    "title": "Matumizi ya Vidakuzi"
+  },
+  "data-analysis": {
+    "desc": "Tunatumia Google Analytics ili kuhakikisha kuwa tovuti inaendelea kufanya kazi inavyotarajiwa na pia kujua ni vipengele vipi vya kazi tutatanguliza, n.k. Maelezo haya hayatambuliki na mtu binafsi na hatuyafuatilii kwa mtu yeyote mahususi.",
+    "title": "Uchambuzi wa Data"
+  },
+  "data-deletion": {
+    "desc": "Ili kuhakikisha faragha yako na udhibiti wa maelezo yako ya kibinafsi, tunatoa mchakato wa moja kwa moja wa kufuta akaunti. Unapochagua kufuta akaunti yako, data yote ya kibinafsi inayohusishwa itaondolewa kiotomatiki na kabisa kutoka kwa mifumo yetu. Unaweza kuanzisha ufutaji wa akaunti kwa kufikia ukurasa wako wa wasifu. Ufutaji unapoanzishwa, data yako ya kibinafsi itafutwa kwa usalama kutoka kwa seva zetu ndani ya muda unaofaa.",
+    "title": "Ufutaji wa Data"
+  },
+  "data-protection": {
+    "desc": "<boldSpan> Haki ya kufikia: </boldSpan> Una haki ya kuomba Quran Foundation nakala za data yako ya kibinafsi. Tunaweza kukutoza ada kidogo kwa huduma hii. <br/> <br/> <boldSpan> Haki ya kusahihishwa </boldSpan> : Una haki ya kuomba Quran Foundation kusahihisha taarifa zozote unazoamini si sahihi. Pia una haki ya kuomba Quran Foundation kukamilisha maelezo ambayo unaamini kuwa hayajakamilika. <br/> <br/> <boldSpan> Haki ya kufuta: </boldSpan> Una haki ya kuomba Quran Foundation kufuta data yako ya kibinafsi, chini ya masharti fulani. <br/> <br/> <boldSpan> Haki ya kuzuia uchakataji: </boldSpan> Una haki ya kuomba Quran Foundation kuzuia uchakataji wa data yako ya kibinafsi, chini ya masharti fulani. <br/> <br/> <boldSpan> Haki ya kupinga kuchakatwa </boldSpan> : Una haki ya kupinga uchakataji wa data yako ya kibinafsi wa Quran Foundation chini ya masharti fulani. <br/> <br/> <boldSpan> Haki ya usafirishaji wa data </boldSpan> : Una haki ya kuomba Quran Foundation kuhamisha data yako ambayo tumekusanya kwenda kwa shirika lingine, au kwako moja kwa moja, chini ya masharti fulani.",
+    "title": "Haki za Ulinzi wa Data"
+  },
+  "data-security": {
+    "desc": "Tunachukua hatua zinazofaa ili kulinda taarifa zako za kibinafsi dhidi ya utumiaji usioidhinishwa, madiliko, ufichuzi au uharibifu. Tunatumia itifaki za usalama za kiwango cha sekta na kuajiri ulinzi wa asili, wa kielektroniki na wa usimamizi ili kuhakikisha usiri na uadilifu wa data yako.",
+    "title": "Usalama wa Data"
+  },
+  "data-sharing": {
+    "desc": "Hatuuzi, kufanya biashara, au kukodisha taarifa zako za kibinafsi kwa wahusika wengine.",
+    "title": "Kushiriki Data"
+  },
+  "info-collection": {
+    "desc": "Tunakusanya taarifa fulani za kibinafsi kutoka kwa watumiaji wanaochagua kufungua akaunti kwenye Quran.com. Maelezo haya yanaweza kujumuisha: <br/> <br/> <underline> Anwani ya Barua Pepe </underline> : Tunakusanya anwani yako ya barua pepe ili kuwezesha mchakato wa kuunda akaunti na kwa madhumuni ya mawasiliano yanayohusiana na akaunti yako, ikiwa ni pamoja na uokoaji wa akaunti na arifa za usalama.",
+    "title": "Ukusanyaji wa Habari"
+  },
+  "log-data": {
+    "desc": "Tunakusanya maelezo ambayo kivinjari chako hutuma kila unapotembelea Huduma yetu (“Log Data”). Log Data hii inaweza kujumuisha maelezo kama vile anwani ya Itifaki ya Mtandao ya kompyuta (“IP”) ya kompyuta yako, aina ya kivinjari, toleo la kivinjari, kurasa zetu unazotembelea, saa na tarehe ya ziara yako, muda uliotumika kwenye kurasa hizo na takwimu nyinginezo.",
+    "title": "Log Data"
+  },
+  "main-privacy-desc": "Quran Foundation, Inc. (inayojumuisha Quran.com) ni shirika lisilo la faida la 501(c)(3) ambalo linajitahidi kumwezesha kila mwanadamu kufaidika na Qur'ani. Quran Foundation, Inc. inathamini na kuheshimu faragha ya watumiaji wetu wote.",
+  "personal-info-use": {
+    "desc": "Tunatumia maelezo ya kibinafsi tunayokusanya kwa madhumuni yafuatayo: <br/> <li> <underline> Uundaji na Usimamizi wa Akaunti </underline> : Barua pepe yako inatumiwa kuunda na kudhibiti akaunti yako kwenye tovuti yetu. Inakuwezesha kuingia, kufikia mipangilio yako, na kuhifadhi alamisho zako na historia ya kusoma. </li> <li> <underline> Ubinafsishaji </underline> : Tunaweza kutumia historia yako ya kusoma ili kutoa mapendekezo na maoni ya kibinafsi kulingana na mapendeleo na maslahi yako. </li>",
+    "title": "Matumizi ya Taarifa za Kibinafsi"
+  },
+  "privacy-header": "Sera ya Faragha"
+}
