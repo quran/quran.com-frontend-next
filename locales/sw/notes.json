@@ -1,0 +1,62 @@
+{
+  "add-another-note": "Ongeza maelezo mengine",
+  "body-placeholder": "Tumia nafasi hii kuhifadhi maelezo ya jumla, au kuandika tafakari.",
+  "checkbox-refl-intro": {
+    "checkbox": {
+      "desc": "<li> Kuchapisha kunamaanisha kuwa tafakari yako itashirikishwa kwenye QuranReflect chini ya jina lako ambapo itakaguliwa na timu ya wasimamizi na kuonekana kwa jumuiya ya QuranReflect. </li> <li> Baada ya chapisho lako kukaguliwa na kuidhinishwa au kupandishwa cheo na timu yetu ya usimamizi, utaweza kupata likes, comments na kuweza kutazama arifa. Baada ya kuingia katika QuranReflect, unaweza kusasisha mipangilio yako ya arifa ili kukidhi mapendeleo yako. </li> <li> Unaweza kutazama maelezo yako na tafakari zilizochapishwa ndani ya wasifu wako wa kuingia kwenye Quran.com katika sehemu ya “Maelezo na Tafakari Zangu”, au ingia kwenye <link> QuranReflect </link> ukitumia barua pepe yako ya Quran.com. </li>",
+      "title": "Nini kitatokea nikichagua kisanduku hiki?"
+    },
+    "post-button": "Itakuaje nitakapochapisha kwenye QuranReflect?",
+    "qr-intro": "QuranReflect, pamoja na Quran.com, ni mojawapo katika familia ya Quran.Foundation. Ni jukwaa la kijamii la kushiriki tafakari za kibinafsi juu ya Qura'ni, likiwahimiza watumiaji kutafakari ujumbe wa Qur'ani pamoja na kushiriki maarifa ambayo huchochea mabadiliko chanya. Tofauti na tafsir, ambayo ni tafsiri ya kielimu, tafakari ni mawazo ya kibinafsi na uzoefu unaohusiana na aya. Machapisho ya mtumiaji kwenye QuranReflect yanakaguliwa na kusimamiwa na timu iliyohitimu, ambayo inasaidia kuhakikisha ubora wa maudhui, adabu wakati wa kuingiliana na Qur'ani, na inawawezesha watumiaji kwa kushiriki maoni na kuangazia hotuba muhimu na hivyo kukuza jamii inayoinua kiroho, na inayozingatia Qur'ani. Pata maelezo zaidi: <link> Quranreflect.com/faq </link>",
+    "title": "QuranReflect ni nini na nini kitatokea nikichagua kisanduku hiki?"
+  },
+  "click-to-see-more": "bonyeza kuona zaidi",
+  "delete-note": "Futa maelezo",
+  "delete-note-modal": {
+    "subtitle": "Je, una uhakika unataka kufuta maelezo?",
+    "title": "Futa Maelezo"
+  },
+  "delete-success": "Maelezo yamefutwa kwa mafanikio",
+  "empty-notes": "Hakuna maelezo yaliyopatikana",
+  "empty-reflections": "Hakuna tafakari zilizopatikana",
+  "export-success": "Maelezo yamechapishwa kwa akaunti yako ya QuranReflect kwa mafanikio",
+  "new-note-reflc-intro": {
+    "reflc-prompts": {
+      "deeper": {
+        "desc": "<li> Je, kuna majina ya Mwenyezi Mungu yaliyotajwa, na yanahusiana vipi na Aya? </li> <li> Ni vipengele vipi vya lugha au maneno gani yaliyokuvutia? </li> <li> Je, unaweza kuunganisha muktadha wa aya, na aya nyingine za Qur'ani, hadith, au matukio mengine? </li>",
+        "title": "Ufahamu wa kina:"
+      },
+      "personal": {
+        "desc": "<li> Je, aya hii imekuvutia au kukutia moyo kwa njia gani? </li> <li> Je, kuna sifa au vitendo vilivyotajwa ambavyo unaweza kujiboresha navyo? </li> <li> Je, kuna ahadi au onyo/katazo ambalo unaweza kutekeleza katika maisha yako? </li> <li> Je, una hadithi ya kibinafsi inayohusiana na aya hii? </li> <li> Ni mabadiliko gani unayotaka kufanya kulingana na aya hii, na unawezaje wewe au mtu mwingine kuyatekeleza? </li>",
+        "title": "Maswali ya Tafakari ya Kibinafsi:"
+      },
+      "title": "Vishawishi vya Tafakari"
+    },
+    "title": "Je, unahitaji usaidizi wa kutafakari Qur'ani? Jifunze zaidi",
+    "what-is-reflc": {
+      "desc": "Kuitafakari au kuwaza juu ya Qur'ani kunahusisha kusoma au kusikiliza kwa makini maneno ya Mwenyezi Mungu, kujihusisha na maana zake, na kuiruhusu ituathiri na kutubadilisha kuwa bora. Hii inajulikana kama \"Tadabbur\". Ilihali Tafsir, ni ufafanuaji wa kielimu wa Qur'ani, unaotoa maelezo ya kina ya aya kulingana na vyanzo vya awali na uchambuzi wa kielimu wa sasa. Huku Tafsir ikiwa imehifadhiwa kwa wanachuoni, Mwenyezi Mungu ﷻ anahimiza kila mtu ajishughulishe na Tadabbur (Quran <link1> 38:29 </link1>, <link2> 47:24 </link2>, <link3> 4:82 </link3>, na mengine mengi). <br> </br> <br> </br> Watumiaji wanaweza kuhifadhi madokezo na tafakari zao za kibinafsi kwa faragha. Mara nyingi tafakari zetu zinaweza kuwagusa wengine kwa kina, kusaidia uhusiano wao na Qur'ani, na uhusiano wao na Allah ﷻ. Ndiyo maana watumiaji wana chaguo la kushiriki tafakari yao kwa QuranReflect kama sehemu ya juhudi zetu za kuwasaidia watu kukua pamoja katika safari yao. Ili kupata maelezo zaidi, tembelea: <link4> QuranReflect.com/faq </link4> na <link5> Lenzi Tano za Kutafakari Quran </link5>",
+      "title": "Tafakari ni nini?"
+    }
+  },
+  "note": "Maelezo",
+  "notes-and-reflcs": "Maelezo na Tafakari",
+  "post-on-qr": "Chapisha kwenye QuranReflect",
+  "posted-reflections": "Tafakari Zilizochapishwa",
+  "private-notes": "Maelezo",
+  "qr-tooltip": "<span> <link> QuranReflect </link> ni jukwaa la kijamii la kushiriki tafakari kuhusu Qur'ani. wasiliana na Qur'ani, wasiliana na jambo la muhimu. </span>",
+  "reflections-intro": {
+    "line-1": "Ili kutazama na kuwasiliana na mawazo ya jamii, jihusishe na jumuiya, unaweza pia kufanya mengi zaidi, tembelea <link> QuranReflect.com </link>.",
+    "line-2": "Unaweza kuingia katika akaunti yako ya QuranReflect kwa kuingia au kujisajili kwa kutumia barua pepe ile ile ya Quran.com unayotumia wakati unapoingia.",
+    "line-3": "Maudhui ambayo hayafai kutazamwa na umma yatafichwa au kufutwa. Watumiaji wanaochapisha maudhui yasiyofaa watazuiwa.",
+    "title": "Pata maelezo zaidi kuhusu Tafakari Zilizochapishwa"
+  },
+  "save-post-to-qr": "Hifadhi na Uchapishe kwenye Quranreflect",
+  "save-privately": "Hifadhi kisiri",
+  "save-publish-failed": "Maelezo yamehifadhiwa kwa mafanikio lakini hayajachapishwa",
+  "save-success": "Maelezo yamehifadhiwa",
+  "share-to-qr": "Shiriki kwenye QuranReflect.com",
+  "share-to-qr-desc": "Shiriki kama <b> {{name}} </b>. Hadhira ni <b> watumiaji wa QuranReflect </b>",
+  "update-publish-failed": "Maelezo yamesasishwa kwa mafanikio lakini hayajachapishwa",
+  "update-success": "Maelezo yamesasishwa",
+  "view-on-qr": "Tazama kwenye QuranReflect"
+}

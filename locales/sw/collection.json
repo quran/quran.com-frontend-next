@@ -1,0 +1,23 @@
+{
+  "all-saved-verses": "Aya zote zilizohifadhiwa",
+  "alphabetical": "A-Z",
+  "back-to-collection-list": "Rudi kwenye orodha ya mkusanyiko",
+  "collapse-all": "Kunja aya zote",
+  "collection-list-empty": "Orodha ya mkusanyiko ni tupu. Bado hujaunda mkusanyiko wowote",
+  "collections": "Mikusanyiko",
+  "delete-bookmark": {
+    "subtitle": "Je, una uhakika unataka kufuta {{bookmarkName}} kutoka kwenye mkusanyiko wa {{collectionName}}?",
+    "title": "Futa alamisho"
+  },
+  "delete-collection": {
+    "subtitle": "Je, una uhakika unataka kufuta mkusanyiko {{collectionName}}?",
+    "title": "Futa mkusanyiko"
+  },
+  "empty": "Mkusanyiko ni tupu",
+  "expand-all": "Panua aya zote",
+  "go-to-ayah": "Nenda kwa aya",
+  "load-more": "Pakia Zaidi",
+  "recently-added": "Iliyoongezwa hivi karibuni",
+  "recently-updated": "Imesasishwa hivi karibuni",
+  "verse-key": "Sura na Nambari ya Aya"
+}

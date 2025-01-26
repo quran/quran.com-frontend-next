@@ -25,6 +25,7 @@ enum Language {
   UZ = 'uz',
   DE = 'de',
   ES = 'es',
+  SW = 'sw',
 }
 
 export default Language;
