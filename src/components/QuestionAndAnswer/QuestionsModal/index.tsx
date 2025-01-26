@@ -35,6 +35,7 @@ const QuestionsModal: React.FC<QuestionModalProps> = ({
       contentClassName={styles.contentModal}
       closeIconClassName={styles.closeIcon}
       headerClassName={styles.header}
+      shouldBeFullScreen
     >
       {isOpen && <ModalContent verseKey={verseKey} />}
     </ContentModal>
