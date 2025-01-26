@@ -50,11 +50,7 @@ const QuestionsList: React.FC<Props> = ({
       {questions?.map((question) => (
         <Collapsible
           title={
-            <QuestionHeader
-              summary={question.summary}
-              theme={question.theme}
-              type={question.type}
-            />
+            <QuestionHeader body={question.body} theme={question.theme} type={question.type} />
           }
           key={question.id}
           prefix={<ChevronDownIcon />}

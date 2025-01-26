@@ -35,14 +35,14 @@ const QuestionPage: NextPage<QuestionPageProps> = ({ hasError, questionId, quest
   if (hasError) {
     return <Error statusCode={500} />;
   }
-  const { summary, type, theme: themes } = questionData as Question;
+  const { type, theme: themes, body } = questionData as Question;
 
   const navigationUrl = getQuestionNavigationUrl(questionId);
 
   return (
     <>
       <NextSeoWrapper
-        title={summary}
+        title={body}
         // TODO: this is waiting finalization
         // image={getChapterOgImageUrl({
         //   chapterId,
@@ -58,7 +58,7 @@ const QuestionPage: NextPage<QuestionPageProps> = ({ hasError, questionId, quest
       />
       <PageContainer>
         <div className={classNames(contentPageStyles.contentPage, styles.contentPage)}>
-          <QuestionHeader isPage summary={summary} theme={themes} type={type} />
+          <QuestionHeader isPage body={body} theme={themes} type={type} />
           <Answer question={questionData} />
         </div>
       </PageContainer>
