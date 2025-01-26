@@ -2,7 +2,7 @@ import React from 'react';
 
 import QuestionsList from '@/components/QuestionAndAnswer/QuestionsList';
 import styles from '@/components/QuranReader/ReflectionView/ReflectionBodyContainer/ReflectionBody/ReflectionBody.module.scss';
-import VerseAndTranslation from '@/components/Verse/VerseAndTranslation';
+import GroupedVerseAndTranslation from '@/components/Verse/GroupedVerseAndTranslation';
 import Separator from '@/dls/Separator/Separator';
 import { Question } from '@/types/QuestionsAndAnswers/Question';
 
@@ -25,7 +25,7 @@ const QuestionsBody: React.FC<Props> = ({
 }) => {
   return (
     <div className={styles.container}>
-      <VerseAndTranslation
+      <GroupedVerseAndTranslation
         from={Number(selectedVerseNumber)}
         to={Number(selectedVerseNumber)}
         chapter={Number(selectedChapterId)}
