@@ -2,7 +2,7 @@ import styles from './Answer.module.scss';
 import AnswerBody from './AnswerBody';
 import RangesIndicator from './RangesIndicator';
 
-import VerseAndTranslation from '@/components/Verse/VerseAndTranslation';
+import GroupedVerseAndTranslation from '@/components/Verse/GroupedVerseAndTranslation';
 import Collapsible from '@/dls/Collapsible/Collapsible';
 import ChevronDownIcon from '@/icons/chevron-down.svg';
 import { Question } from '@/types/QuestionsAndAnswers/Question';
@@ -37,7 +37,7 @@ const Answer = ({ question }: AnswerProps) => {
           if (!isOpenRenderProp) return null;
 
           return (
-            <VerseAndTranslation
+            <GroupedVerseAndTranslation
               chapter={rangeStartData.chapter}
               from={rangeStartData.verse}
               to={rangeEndData.verse}
