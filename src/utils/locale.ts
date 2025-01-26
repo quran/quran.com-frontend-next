@@ -34,6 +34,7 @@ const LOCALE_NAME = {
   [Language.KU]: 'Kurdî',
   [Language.UZ]: "o'zbek",
   [Language.ES]: 'Español',
+  [Language.SW]: 'Kiswahili',
 };
 
 const LOCALE_NAME_TO_CODE = {
@@ -43,6 +44,7 @@ const LOCALE_NAME_TO_CODE = {
   russian: Language.RU,
   urdu: Language.UR,
   Kurdish: Language.KU,
+  swahili: Language.SW,
 };
 
 export const LANG_LOCALE_MAP = {
@@ -63,6 +65,7 @@ export const LANG_LOCALE_MAP = {
   [Language.ZH]: 'zh-CN',
   [Language.MS]: 'ms-MY',
   [Language.ES]: 'es-ES',
+  [Language.SW]: 'sw-TZ',
 };
 
 export enum Direction {
@@ -153,6 +156,10 @@ export const Languages = {
   40: {
     // Spanish
     locale: Language.ES,
+  },
+  157: {
+    // Swahili
+    locale: Language.SW,
   },
 };
 
