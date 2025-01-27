@@ -8,6 +8,7 @@ import TranslationViewCell from '../TranslationViewCell';
 
 import ChapterHeader from '@/components/chapters/ChapterHeader';
 import useCountRangeNotes from '@/hooks/auth/useCountRangeNotes';
+import useCountRangeQuestions from '@/hooks/auth/useCountRangeQuestions';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
 import { VersesResponse } from '@/types/ApiResponses';
 import Translation from '@/types/Translation';
@@ -58,6 +59,7 @@ const TranslationPageVerse: React.FC<TranslationPageVerse> = ({
   });
 
   const { data: notesCount } = useCountRangeNotes(notesRange);
+  const { data: questionsCount } = useCountRangeQuestions(notesRange);
 
   const getTranslationNameString = (translations?: Translation[]) => {
     let translationName = t('settings.no-translation-selected');
@@ -102,6 +104,9 @@ const TranslationPageVerse: React.FC<TranslationPageVerse> = ({
     };
   }, [isLastVerseInView, verse, verseKeysQueue]);
 
+  const hasQuestions = questionsCount && questionsCount[verse.verseKey] > 0;
+  const hasNotes = notesCount && notesCount[verse.verseKey] > 0;
+
   return (
     <div
       ref={isLastVerseInView ? containerRef : undefined}
@@ -126,7 +131,8 @@ const TranslationPageVerse: React.FC<TranslationPageVerse> = ({
         quranReaderStyles={quranReaderStyles}
         pageBookmarks={pageBookmarks}
         bookmarksRangeUrl={bookmarksRangeUrl}
-        hasNotes={notesCount && notesCount[verse.verseKey] > 0}
+        hasNotes={hasNotes}
+        hasQuestions={hasQuestions}
       />
     </div>
   );

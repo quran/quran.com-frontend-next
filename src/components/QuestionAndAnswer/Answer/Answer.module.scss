@@ -1,0 +1,17 @@
+.container {
+    padding-block: var(--spacing-large);
+}
+
+.headerLeftClassName {
+    flex-direction: row-reverse;
+    align-items: center;
+}
+
+.rangesHeader {
+    font-size: var(--font-size-small);
+    color: var(--color-text-faded);
+    padding-block-end: var(--spacing-small);
+    font-weight: var(--font-weight-semibold);
+    flex-direction: column;
+    align-items: flex-end;
+}

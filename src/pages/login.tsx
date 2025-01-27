@@ -8,6 +8,7 @@ import LoginContainer from '@/components/Login/LoginContainer';
 import PageContainer from '@/components/PageContainer';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import ChaptersData from '@/types/ChaptersData';
+import { BANNED_USER_ERROR_ID } from '@/utils/auth/constants';
 import { getAllChaptersData } from '@/utils/chapter';
 import { getLoginNavigationUrl } from '@/utils/navigation';
 import AuthError from 'types/AuthError';
@@ -26,6 +27,9 @@ const LoginPage: NextPage<Props> = () => {
       if (errorId in AuthError) {
         return t(`login-error.${errorId}`);
       }
+      if (errorId === BANNED_USER_ERROR_ID) {
+        return t(`login-error.${AuthError.BannedUserError}`);
+      }
       return t(`login-error.${AuthError.AuthenticationError}`);
     },
     [t],
@@ -34,10 +38,11 @@ const LoginPage: NextPage<Props> = () => {
   useEffect(() => {
     if (query.error) {
       const errorMessage = getErrorMessage(query.error);
-      toast(errorMessage, {
-        status: ToastStatus.Error,
+      replace(getLoginNavigationUrl(), null, { shallow: true }).then(() => {
+        toast(errorMessage, {
+          status: ToastStatus.Error,
+        });
       });
-      replace(getLoginNavigationUrl(), null, { shallow: true });
     }
   }, [query.error, toast, replace, t, getErrorMessage]);
 

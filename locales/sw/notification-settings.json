@@ -1,0 +1,22 @@
+{
+  "all-notifications": "Arifa Zote",
+  "channels-notifications": "Arifa za Vituo",
+  "channels": {
+    "chat": "Zungumza",
+    "email": "Barua pepe",
+    "in_app": "In-App",
+    "push": "Sukuma",
+    "sms": "SMS"
+  },
+  "notif-settings-not-enabled": "Mipangilio ya arifa haijawezeshwa",
+  "notif-update-success": "Mipangilio yako ya arifa imesasishwa!",
+  "tabs": {
+    "categories-settings": "Mipangilio ya Kategoria",
+    "global-settings": "Mipangilio ya jumla"
+  },
+  "tags": {
+    "learning-plans": "Mipango ya Kujifunza",
+    "qgj": "Kuza safari yako na Qur'ani",
+    "streaks": "Streaks"
+  }
+}

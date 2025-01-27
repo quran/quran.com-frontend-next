@@ -1,10 +1,12 @@
 /* eslint-disable max-lines */
 import { NextApiRequest } from 'next';
+import Router from 'next/router';
 import { configureRefreshFetch } from 'refresh-fetch';
 
 import { getTimezone } from '../datetime';
 import { prepareGenerateMediaFileRequestData } from '../media/utils';
 
+import { BANNED_USER_ERROR_ID } from './constants';
 import generateSignature from './signature';
 import BookmarkByCollectionIdQueryParams from './types/BookmarkByCollectionIdQueryParams';
 import GetAllNotesQueryParams from './types/Note/GetAllNotesQueryParams';
@@ -26,8 +28,10 @@ import { CreateGoalRequest, Goal, GoalCategory, UpdateGoalRequest } from '@/type
 import { Note } from '@/types/auth/Note';
 import { Response } from '@/types/auth/Response';
 import { StreakWithMetadataParams, StreakWithUserMetadata } from '@/types/auth/Streak';
+import Language from '@/types/Language';
 import GenerateMediaFileRequest, { MediaType } from '@/types/Media/GenerateMediaFileRequest';
 import MediaRenderError from '@/types/Media/MediaRenderError';
+import QuestionResponse from '@/types/QuestionsAndAnswers/QuestionResponse';
 import { Mushaf } from '@/types/QuranReader';
 import {
   makeBookmarksUrl,
@@ -74,6 +78,9 @@ import {
   makeGenerateMediaFileUrl,
   makeGetMediaFileProgressUrl,
   makeGetMonthlyMediaFilesCountUrl,
+  makeCountQuestionsWithinRangeUrl,
+  makeGetQuestionsByVerseKeyUrl,
+  makeGetQuestionByIdUrl,
 } from '@/utils/auth/apiPaths';
 import { isStaticBuild } from '@/utils/build';
 import CompleteAnnouncementRequest from 'types/auth/CompleteAnnouncementRequest';
@@ -98,11 +105,21 @@ const IGNORE_ERRORS = [
 
 const handleErrors = async (res) => {
   const body = await res.json();
+  const error = body?.error || body?.details?.error;
+  const errorName = body?.name || body?.details?.name;
+
   // sometimes FE needs to handle the error from the API instead of showing a general something went wrong message
-  const shouldIgnoreError = IGNORE_ERRORS.includes(body?.error?.code);
+  const shouldIgnoreError = IGNORE_ERRORS.includes(error?.code);
   if (shouldIgnoreError) {
     return body;
   }
+  // const toast = useToast();
+
+  if (errorName === BANNED_USER_ERROR_ID) {
+    await logoutUser();
+    return Router.push(`/login?error=${errorName}`);
+  }
+
   throw new Error(body?.message);
 };
 
@@ -381,12 +398,33 @@ export const addCollection = async (collectionName: string) => {
   return postRequest(makeAddCollectionUrl(), { name: collectionName });
 };
 
+export const countQuestionsWithinRange = async (
+  from: string,
+  to: string,
+  language: Language,
+): Promise<Record<string, number>> => {
+  return privateFetcher(makeCountQuestionsWithinRangeUrl(from, to, language));
+};
+
 export const getAllNotes = async (params: GetAllNotesQueryParams) => {
   return privateFetcher(makeNotesUrl(params));
 };
 
 export const countNotesWithinRange = async (from: string, to: string) => {
   return privateFetcher(makeCountNotesWithinRangeUrl(from, to));
+};
+
+export const getAyahQuestions = async (ayahKey: string, language: Language) => {
+  return privateFetcher(
+    makeGetQuestionsByVerseKeyUrl({
+      verseKey: ayahKey,
+      language,
+    }),
+  );
+};
+
+export const getQuestionById = async (questionId: string): Promise<QuestionResponse> => {
+  return privateFetcher(makeGetQuestionByIdUrl(questionId));
 };
 
 export const addNote = async (payload: Pick<Note, 'body' | 'ranges' | 'saveToQR'>) => {

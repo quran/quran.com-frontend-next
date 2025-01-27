@@ -1,0 +1,31 @@
+.answerBody {
+    background-color: var(--color-background-alternative-faded);
+    border-radius: var(--border-radius-rounded);
+    padding: var(--spacing-medium2-px);
+    font-size: var(--font-size-small);
+}
+
+.header {
+    font-size: var(--font-size-small);
+    color: var(--color-text-faded);
+    padding-block-end: var(--spacing-small);
+    font-weight: var(--font-weight-bold);
+}
+
+.text {
+    padding-block-end: var(--spacing-small);
+}
+
+.shareButton {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    width: 100%;
+}
+
+.shareButtonText {
+    color: var(--color-text-faded);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xxsmall);
+}

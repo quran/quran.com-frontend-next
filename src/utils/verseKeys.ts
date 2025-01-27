@@ -49,7 +49,7 @@ export const generateVerseKeysBetweenTwoVerseKeys = (
   return verseKeys;
 };
 
-type VerseRangeInfo<T> = [
+export type VerseRangeInfo<T> = [
   // from
   {
     chapter: T;

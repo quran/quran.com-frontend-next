@@ -1,0 +1,23 @@
+{
+  "all-saved-verses": "Todos los versos guardados",
+  "alphabetical": "A-Z",
+  "back-to-collection-list": "Volver al listado de colecciones",
+  "collapse-all": "Contraer todos los versos",
+  "collection-list-empty": "La lista de colecciones está vacía. Aún no has creado ninguna colección.",
+  "collections": "Colecciones",
+  "delete-bookmark": {
+    "subtitle": "¿Estás seguro de que deseas eliminar {{bookmarkName}} de la colección {{collectionName}}?",
+    "title": "Eliminar marcador"
+  },
+  "delete-collection": {
+    "subtitle": "¿Estás seguro de que deseas eliminar la colección {{collectionName}}?",
+    "title": "Eliminar colección"
+  },
+  "empty": "La colección está vacía",
+  "expand-all": "Expandir todos los versículos",
+  "go-to-ayah": "Ir a la aleya",
+  "load-more": "Cargar más",
+  "recently-added": "Añadido recientemente",
+  "recently-updated": "Actualizado recientemente",
+  "verse-key": "Número de capítulo y versículo"
+}

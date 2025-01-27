@@ -21,6 +21,7 @@ import TafsirButton from '@/components/QuranReader/TafsirButton';
 import VerseNotes from '@/components/Verse/Notes';
 import OverflowVerseActionsMenu from '@/components/Verse/OverflowVerseActionsMenu';
 import PlayVerseAudioButton from '@/components/Verse/PlayVerseAudioButton';
+import VerseQuestions from '@/components/Verse/Questions';
 import VerseLink from '@/components/Verse/VerseLink';
 import VerseText from '@/components/Verse/VerseText';
 import Separator from '@/dls/Separator/Separator';
@@ -40,6 +41,7 @@ type TranslationViewCellProps = {
   pageBookmarks: BookmarksMap | undefined;
   bookmarksRangeUrl: string;
   hasNotes?: boolean;
+  hasQuestions?: boolean;
 };
 
 const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
@@ -49,6 +51,7 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
   pageBookmarks,
   bookmarksRangeUrl,
   hasNotes,
+  hasQuestions,
 }) => {
   const router = useRouter();
   const { startingVerse } = router.query;
@@ -128,6 +131,7 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
               </div>
             ))}
           </div>
+          <VerseQuestions verseKey={verse.verseKey} isTranslationView hasQuestions={hasQuestions} />
         </div>
       </div>
       <Separator />
@@ -167,6 +171,7 @@ const areVersesEqual = (
   !verseTranslationChanged(prevProps.verse, nextProps.verse) &&
   !verseTranslationFontChanged(prevProps.quranReaderStyles, nextProps.quranReaderStyles) &&
   JSON.stringify(prevProps.pageBookmarks) === JSON.stringify(nextProps.pageBookmarks) &&
-  prevProps.bookmarksRangeUrl === nextProps.bookmarksRangeUrl;
-
+  prevProps.bookmarksRangeUrl === nextProps.bookmarksRangeUrl &&
+  prevProps.hasNotes === nextProps.hasNotes &&
+  prevProps.hasQuestions === nextProps.hasQuestions;
 export default memo(TranslationViewCell, areVersesEqual);
