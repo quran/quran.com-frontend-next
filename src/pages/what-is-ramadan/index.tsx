@@ -16,15 +16,15 @@ import { getCanonicalUrl, getWhatIsRamadanNavigationUrl } from '@/utils/navigati
 
 const PATH = getWhatIsRamadanNavigationUrl();
 const WhatIsRamadanPage: NextPage = (): JSX.Element => {
-  const { t, lang } = useTranslation('ramadan-activities');
+  const { lang } = useTranslation('ramadan-activities');
 
   return (
     <>
       <NextSeoWrapper
-        title="Ramadan: A Journey of Reflection, Renewal, and Revelation."
+        title="What is Ramadan? Discover Its Spiritual Significance and Connection to the Quran"
         url={getCanonicalUrl(lang, PATH)}
         languageAlternates={getLanguageAlternates(PATH)}
-        description={t('ramadan-activities-desc')}
+        description="Discover the spiritual significance of Ramadan and its profound connection to the Quran—a transformative journey of revelation, reflection, and renewal."
         image={getWhatIsRamadanOgImageUrl({
           locale: lang,
         })}
