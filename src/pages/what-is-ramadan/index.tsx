@@ -44,7 +44,7 @@ const WhatIsRamadanPage: NextPage = (): JSX.Element => {
           </div>
           <div className={styles.subSection}>
             <h2>A Prescription for Mindfulness</h2>
-            <div>
+            <div className={pageStyles.mainVerse}>
               <div>
                 <i>
                   "You who believe, fasting is prescribed for you, as it was prescribed for those
