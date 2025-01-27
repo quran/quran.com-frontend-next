@@ -11,6 +11,10 @@ import useTranslation from 'next-translate/useTranslation';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import PageContainer from '@/components/PageContainer';
 import InlineLink from '@/components/RamadanActivity/InlineLink';
+import ReadMoreCollapsible, {
+  Section,
+  TitleType,
+} from '@/components/RamadanActivity/ReadMoreCollapsible';
 import Button, { ButtonVariant } from '@/dls/Button/Button';
 import { getPreparingForRamadanOgImageUrl } from '@/lib/og';
 import styles from '@/pages/contentPage.module.scss';
@@ -171,27 +175,29 @@ const PreparingForRamadanPage: NextPage = (): JSX.Element => {
               understanding of the Quran and faith. Wallahi, there is an activity mentioned here and
               I will perform it.”
             </div>
-            <div>⭐⭐⭐⭐⭐ “Mashallah, this is excellent content.”</div>
-            <div>⭐⭐⭐⭐⭐ “Course was very inspiring and intuitive.”</div>
-            <div>
-              ⭐⭐⭐⭐⭐ “I kinda joined late but it surely did increase my knowledge and made me
-              reflect upon my actions. It is a great step and I wish more people to join it so that
-              they can also take benefit from it and try to improve their quality of life.”
-            </div>
-            <div>
-              ⭐⭐⭐⭐⭐ “It was extremely useful. It reminds us to act to act upon the manual given
-              to us by He Who is Exalted, High, and Mighty: Allah. Please do develop such plans for
-              other months like Rajab. Thanks!”
-            </div>
-            <div>
-              ⭐⭐⭐⭐⭐ “Not a single word in all the lessons didn't speak the truth. It was so
-              helpful, alhamdulilah. Quran.com is a wonderful website, and every person, muslim and
-              non-muslim, should use it. And, Inshallah, they will. Thank you for the help you
-              provided me.”
-            </div>
-            <div>
-              ⭐⭐⭐⭐⭐ “Important and vital read to prepare the heart for Ramadan and beyond.”
-            </div>
+            <ReadMoreCollapsible section={Section.MORE_REVIEWS} titleType={TitleType.MORE_REVIEWS}>
+              <div>⭐⭐⭐⭐⭐ “Mashallah, this is excellent content.”</div>
+              <div>⭐⭐⭐⭐⭐ “Course was very inspiring and intuitive.”</div>
+              <div>
+                ⭐⭐⭐⭐⭐ “I kinda joined late but it surely did increase my knowledge and made me
+                reflect upon my actions. It is a great step and I wish more people to join it so
+                that they can also take benefit from it and try to improve their quality of life.”
+              </div>
+              <div>
+                ⭐⭐⭐⭐⭐ “It was extremely useful. It reminds us to act to act upon the manual
+                given to us by He Who is Exalted, High, and Mighty: Allah. Please do develop such
+                plans for other months like Rajab. Thanks!”
+              </div>
+              <div>
+                ⭐⭐⭐⭐⭐ “Not a single word in all the lessons didn't speak the truth. It was so
+                helpful, alhamdulilah. Quran.com is a wonderful website, and every person, muslim
+                and non-muslim, should use it. And, Inshallah, they will. Thank you for the help you
+                provided me.”
+              </div>
+              <div>
+                ⭐⭐⭐⭐⭐ “Important and vital read to prepare the heart for Ramadan and beyond.”
+              </div>
+            </ReadMoreCollapsible>
             <div>Start this learning plan now:</div>
             <div className={styles.ctaContainer}>
               <Button
