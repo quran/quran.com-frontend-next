@@ -5,6 +5,7 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import classNames from 'classnames';
 import { NextPage } from 'next';
+import Image from 'next/image';
 import useTranslation from 'next-translate/useTranslation';
 
 import NextSeoWrapper from '@/components/NextSeoWrapper';
@@ -14,6 +15,7 @@ import Button, { ButtonVariant } from '@/dls/Button/Button';
 import { getPreparingForRamadanOgImageUrl } from '@/lib/og';
 import styles from '@/pages/contentPage.module.scss';
 import pageStyles from '@/pages/ramadan-activities/RamadanActivities.module.scss';
+import AyahLevelSettings from '@/public/images/ayah-level-settings.jpeg';
 import { makeDonatePageUrl, makeDonateUrl } from '@/utils/apiPaths';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getLanguageAlternates } from '@/utils/locale';
@@ -257,8 +259,11 @@ const PreparingForRamadanPage: NextPage = (): JSX.Element => {
               Discover additional features on Quran.com to make your Ramadan journey more enriching.
               You can take personalized notes at the ayah level to capture your reflections and
               thoughts, read tafsir (commentary) to deepen your understanding of the Quran, and
-              explore reflections shared by others for inspiration. Check at the ayah-level for
-              these additional features.
+              explore reflections shared by others for inspiration.
+            </div>
+            <div className={pageStyles.ayahLevelSettings}>
+              <Image src={AyahLevelSettings} height={38} width={120} alt="Ayah Level Settings" />
+              <div>Check at the ayah-level for these additional features.</div>
             </div>
             <div>
               With more features like bookmarking, audio recitations, and a powerful search tool, we
