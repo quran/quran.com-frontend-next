@@ -5,438 +5,308 @@
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import classNames from 'classnames';
 import { NextPage } from 'next';
+import Image from 'next/image';
 import useTranslation from 'next-translate/useTranslation';
-
-import pageStyles from './RamadanActivities.module.scss';
 
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import PageContainer from '@/components/PageContainer';
-import EmbeddableVerseCell from '@/components/QuranReader/TranslationView/EmbeddableVerseCell';
 import InlineLink from '@/components/RamadanActivity/InlineLink';
-import RamadanActivityHero from '@/components/RamadanActivity/RamadanActivityHero';
 import ReadMoreCollapsible, {
   Section,
   TitleType,
 } from '@/components/RamadanActivity/ReadMoreCollapsible';
 import Button, { ButtonVariant } from '@/dls/Button/Button';
+import { getPreparingForRamadanOgImageUrl } from '@/lib/og';
 import styles from '@/pages/contentPage.module.scss';
+import pageStyles from '@/pages/ramadan-activities/RamadanActivities.module.scss';
+import AyahLevelSettings from '@/public/images/ayah-level-settings.jpeg';
+import { makeDonatePageUrl, makeDonateUrl } from '@/utils/apiPaths';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getLanguageAlternates } from '@/utils/locale';
 import {
   getCanonicalUrl,
-  getLoginNavigationUrl,
+  getCourseNavigationUrl,
+  getCoursesNavigationUrl,
   getRamadanActivitiesNavigationUrl,
   getReadingGoalNavigationUrl,
 } from '@/utils/navigation';
 
 const PATH = getRamadanActivitiesNavigationUrl();
-const RamadanActivitiesPage: NextPage = (): JSX.Element => {
-  const { t, lang } = useTranslation('ramadan-activities');
+const PreparingForRamadanPage: NextPage = (): JSX.Element => {
+  const { lang } = useTranslation();
 
-  const onButtonClicked = (section: Section) => {
-    logButtonClick(`${section}_ramadan_activities_cta`);
+  const onButtonClicked = (section: string) => {
+    logButtonClick(`${section}_preparing_for_ramadan_cta`);
   };
 
   return (
     <>
       <NextSeoWrapper
-        title={t('ramadan-activities')}
+        title="Ramadan Tools, Programs, and Features: Deepen Your Connection with the Quran"
         url={getCanonicalUrl(lang, PATH)}
         languageAlternates={getLanguageAlternates(PATH)}
-        description={t('ramadan-activities-desc')}
+        description="Discover free tools, programs, and features to make the most of Ramadan. Set goals, prepare your heart, and deepen your connection with the Quran."
+        image={getPreparingForRamadanOgImageUrl({
+          locale: lang,
+        })}
       />
-      <RamadanActivityHero />
       <PageContainer>
-        <div className={pageStyles.verseContainer}>
-          <EmbeddableVerseCell chapterId={2} verseNumber={183} fontScale={3} />
-        </div>
         <div className={classNames(pageStyles.container, styles.contentPage)} dir="ltr">
-          <div className={styles.subSection} id="mindful">
-            <h1>Mindful Fasting📿</h1>
-            <div className={styles.subHeading}>
-              A QuranReflect interactive Program with Shaykh Hammad Fahim.
-            </div>
-            <div>
-              “Mindful Fasting” will explore how fasting purifies the soul, disciplines the mind,
-              and awakens the heart, offering a transformative experience that deepens our
-              relationship with Allah. This program is a gateway to a profound journey of faith and
-              reflection.
-            </div>
-            <ReadMoreCollapsible section={Section.MINDFUL_FASTING}>
-              <div>
-                When you
-                <InlineLink text="Sign up" href="https://quranreflect.com/users/sign_in" />
-                for QuranReflect.com you will automatically follow Shaykh Fahim and receive updates.
-                Search #MindfulFasting throughout the month on
-                <InlineLink text="QuranReflect.com" href="https://quranreflect.com" />
-                to read reflections from the community. (If you already have a Quran.com account -
-                signing in to QuranReflect with the same email will link the two accounts.)
-              </div>
-            </ReadMoreCollapsible>
-            <div className={styles.ctaContainer}>
-              <Button
-                onClick={() => {
-                  onButtonClicked(Section.MINDFUL_FASTING);
-                }}
-                variant={ButtonVariant.Shadow}
-                href="https://quranreflect.com"
-                isNewTab
-                className={styles.button}
-              >
-                Join QuranReflect Community
-              </Button>
-            </div>
-          </div>
-          <div className={styles.subSection} id="ayah-lookup">
-            <h1>Ayah Lookup Challenge 🔎</h1>
-            <div className={styles.subHeading}>with Dr Mohannad Hakeem</div>
-            <div>
-              Are you seeking to enhance your connection with the Quran while being challenged to
-              delve deeper and search for answers? If so, consider exploring a fresh approach that
-              can help you deepen your relationship with the Quran.
-            </div>
-            <ReadMoreCollapsible section={Section.AYAH_LOOKUP_CHALLENGE}>
-              <>
-                <div>
-                  Join Dr. Mohannad Hakeem's Ayah Lookup Challenge where he will share a question
-                  that can be answered with an ayah in the Quran. Sharpen your reading and
-                  researching skills as you search for the answer within the suggested range of
-                  verses.
-                </div>
-                <br />
-                <div>
-                  Check back at the end of the day when Dr. Mohannad posts the answer to see if you
-                  got it right. To join this exciting challenge, follow
-                  <InlineLink text="Dr. Mohannad Hakeem" href="https://quranreflect.com/mohannad" />
-                  on QuranReflect.com and take part in this enriching experience! You may also
-                  search
-                  <InlineLink
-                    text="#AyahLookUp"
-                    href="https://quranreflect.com/?authors=%40mohannad&tags=%23AyahLookup&tab=newest"
-                  />{' '}
-                  on QuranReflect.
-                </div>
-              </>
-            </ReadMoreCollapsible>
-            <div className={styles.ctaContainer}>
-              <Button
-                onClick={() => {
-                  onButtonClicked(Section.AYAH_LOOKUP_CHALLENGE);
-                }}
-                variant={ButtonVariant.Shadow}
-                href="https://quranreflect.com/?authors=%40mohannad&tags=%23AyahLookup&tab=newest"
-                isNewTab
-                className={styles.button}
-              >
-                Follow AyahLookupChallenge
-              </Button>
-            </div>
-          </div>
-          <div className={styles.subSection} id="mas-quiz">
-            <h1>MAS Ramadan Quiz Trivia (live) 🎙️</h1>
-            <div>
-              A daily 10-minute live trivia quiz featuring 10 quick questions from the Quran.
-              Participants will also be assigned one Quran verse a week to reflect upon. See below
-              for details on prizes!
-            </div>
-            <ReadMoreCollapsible section={Section.MAS_QUIZ}>
-              <div>
-                To help achieve a closer connection with the Quran, MAS will host a nationwide
-                10-minute live, interactive quiz daily where contestants get to test and show their
-                knowledge of the Quran.
-                <br />
-                MAS will offer winners residing in the U.S. monetary prizes with the option to
-                donate them to a charity (Insha’Allah, prizes can be extended to a global audience
-                in coming years.)
-              </div>
-            </ReadMoreCollapsible>
-            <div className={styles.ctaContainer}>
-              <Button
-                onClick={() => {
-                  onButtonClicked(Section.MAS_QUIZ);
-                }}
-                variant={ButtonVariant.Shadow}
-                href="https://quranreflect.com/masrqt"
-                isNewTab
-                className={styles.button}
-              >
-                Follow MAS RQT
-              </Button>
-            </div>
-          </div>
           <div className={styles.subSection}>
-            <h1>Learning Plans on Quran.com 📖</h1>
+            <h1>Preparing for Ramadan: Deepen Your Connection with the Quran</h1>
             <div>
-              <b>Boost your knowledge with easy-to-follow lessons</b> that keep you growing in your
-              journey with the Quran. Your progress is tracked until you reach the finish line.
-              Start a Learning Plan today!
+              Ramadan is a time of immense blessings and reflection, a month where hearts are
+              softened and connections with the Quran are deepened. It’s the perfect opportunity to
+              embrace meaningful growth and embark on a transformative journey. With thoughtfully
+              designed tools and programs, we aim to inspire engagement with the Quran that lasts
+              well beyond this blessed month.
             </div>
-            <ReadMoreCollapsible section={Section.LEARNING_PLANS}>
-              <ul>
-                <li>
-                  <InlineLink
-                    text="How to Explore the Quran: One Ayah at a Time"
-                    href="/learning-plans/how-to-explore-the-quran"
-                  />
-                  by Dr. Sohaib Saeed
-                </li>
-                <li>
-                  <InlineLink
-                    text="Five Lenses for Reflecting on the Quran"
-                    href="/learning-plans/five-lenses-to-reflect-on-the-quran"
-                  />
-                  by Dr. Sohaib Saeed
-                </li>
-                <li>
-                  <InlineLink
-                    text="Preparing Our Hearts for Ramadan"
-                    href="/learning-plans/preparing-our-hearts-for-ramadan"
-                  />
-                  by Shaykh Hammad Fahim
-                </li>
-                <li>
-                  More programs coming soon, insha’Allah. Keep an eye out on our
-                  <InlineLink text="Learning Plans" href="/learning-plans" />
-                  page.
-                </li>
-              </ul>
-            </ReadMoreCollapsible>
-            <div className={styles.ctaContainer}>
-              <Button
-                onClick={() => {
-                  onButtonClicked(Section.LEARNING_PLANS);
-                }}
-                variant={ButtonVariant.Shadow}
-                href="/learning-plans"
-                isNewTab
-                className={styles.button}
-              >
-                View Learning Plans
-              </Button>
-            </div>
+            <ul>
+              <li>
+                <InlineLink
+                  text="Goal Setting for Your Ramadan Journey"
+                  href="#goal-setting"
+                  isNewTab={false}
+                />
+              </li>
+              <li>
+                <InlineLink
+                  text="Preparing Our Hearts for Ramadan"
+                  href="#preparing-our-hearts"
+                  isNewTab={false}
+                />
+              </li>
+              <li>
+                <InlineLink
+                  text="Mindful Fasting: A Ramadan Learning Plan"
+                  href="#mindful-fasting"
+                  isNewTab={false}
+                />
+              </li>
+              <li>
+                <InlineLink
+                  text="Share the Month of the Quran! Visit 'What Is Ramadan?'"
+                  href="#share-the-month-of-the-quran"
+                  isNewTab={false}
+                />
+              </li>
+              <li>
+                <InlineLink
+                  text="Explore Additional Beneficial Features!"
+                  href="#explore-additional-beneficial-features"
+                  isNewTab={false}
+                />
+              </li>
+            </ul>
+            <hr />
           </div>
-          <div className={styles.subSection}>
-            <h1>
-              Keep a 30 day Quran reading streak and create a custom goal with Quran Growth Journey!
-              🏅
-            </h1>
+          <div className={styles.subSection} id="goal-setting">
+            <h1>Goal Setting for Your Ramadan Journey</h1>
             <div>
-              Can you keep a 30 day Quran reading streak This Ramadan? Simply
-              <InlineLink text="Log-in" href={getLoginNavigationUrl()} />
-              to Quran.com and begin reading to start your Streak! You can also create a custom goal
-              that will help you stay on track:
+              Set custom Quranic goals tailored to your Ramadan journey. Decide how much Quran you
+              want to read over a specific time period and track your progress with ease. Stay
+              motivated with streak tracking and make steady progress toward your goals!
             </div>
             <div className={styles.ctaContainer}>
               <Button
                 onClick={() => {
-                  onButtonClicked(Section.MONTH_STREAK);
+                  onButtonClicked('goal_setting');
                 }}
                 variant={ButtonVariant.Shadow}
                 href={getReadingGoalNavigationUrl()}
                 isNewTab
                 className={styles.button}
               >
-                Create Goal
+                Set Your Goal
               </Button>
             </div>
           </div>
-          <div className={styles.subSection}>
-            <h1>Invite people to learn about the Quran this Ramadan 💌</h1>
+          <hr />
+          <div className={styles.subSection} id="preparing-our-hearts">
+            <h1>Our Featured Ramadan Programs</h1>
+            <h2>Preparing Our Hearts for Ramadan</h2>
             <div>
-              Help someone who has never read the Quran learn more and begin their Quran journey!
-              Share our <InlineLink text="About The Quran" href="/about-the-quran" /> page designed
-              to help newcomers ease into their Quran reading experience. View sample invitation:
+              Embark on a journey to mentally and spiritually prepare for Ramadan with our enhanced
+              Learning Plan, Preparing Our Hearts for Ramadan. This revised program is based on last
+              year’s highly-rated course, enriched with additional insights and reflections to help
+              you approach Ramadan with a rejuvenated focus.
             </div>
-            <ReadMoreCollapsible section={Section.INVITE_PEOPLE}>
-              <>
-                <div>
-                  “Ramadan is not just a month of fasting for Muslims; it's also about the Quran's
-                  revelation, a time of deep reflection & connection. 📖 Curious about its messages?
-                  Visit <InlineLink text="Quran.com/about-the-Quran" href="/about-the-quran" /> to
-                  find answers to key questions and tips on how to explore it.”
-                </div>
-                <br />
-                <div>
-                  You can also share an invitation to view responses to a reflection activity based
-                  on the the viral hashtag
-                  <InlineLink
-                    text="#QuranBookClub"
-                    href="https://quranreflect.com/?tags=%23QuranBookClub"
-                  />
-                  .
-                </div>
-                <br />
-                <div>
-                  QuranReflect asks: "If you could introduce someone to the Quran with just one
-                  ayah, which would it be, and why?"
-                </div>
-                <br />
-                <div>
-                  View responses, write your own, and invite people to read the Quran for the first
-                  time.
-                </div>
-              </>
+            <div>What You’ll Gain:</div>
+            <ul>
+              <li>Self-development tips.</li>
+              <li>Quranic reflections to inspire mindfulness and intention-setting.</li>
+              <li>Actionable tips to create a fulfilling Ramadan routine.</li>
+            </ul>
+            <div>Start this learning plan now:</div>
+            <div className={styles.ctaContainer}>
+              <Button
+                onClick={() => {
+                  onButtonClicked('preparing_our_hearts');
+                }}
+                variant={ButtonVariant.Shadow}
+                href={getCourseNavigationUrl('preparing-our-hearts-for-ramadan')}
+                isNewTab
+                className={styles.button}
+              >
+                Enroll Now
+              </Button>
+            </div>
+            <div>Reviews from readers who completed this Learning Plan last Ramadan:</div>
+            <div>
+              ⭐⭐⭐⭐⭐ Mashallah,this learning plan not just helpful but it is extremely a helpful
+              source for me to prepare myself for upcoming ramadhan. All the 9 day topics teach me
+              lots of thing and made me reflect on my state of imaan.I hope i will gain more
+              knowledge in the month of ramadhan. Ameen insyaallah. Thank you Quran.com!!
+            </div>
+            <div>
+              ⭐⭐⭐⭐⭐ “The plan was very transformative. I pray Allah SW will bless me with the
+              ability to implement most, if not all of the recommendations in order to adequately
+              prepare for Ramadan, spiritually, intellectually, and morally grow during this period,
+              and continue to improve in these areas even after Ramadan In Shaa Allah.”
+            </div>
+            <div>
+              ⭐⭐⭐⭐⭐ “This made me to read Qur'an with meaning and reflect upon it. And the
+              author talked about increasing iman, giving up the sins and also he talked about how
+              to be in the month of ramadhan and how to prepare for it from the month of shaban.”
+            </div>
+            <div>⭐⭐⭐⭐⭐ “I LOVED this is was very insightful and i learnt a lot”</div>
+            <div>
+              ⭐⭐⭐⭐⭐ “SubhanAllah, I have learned many topics and truly built a greater
+              understanding of the Quran and faith. Wallahi, there is an activity mentioned here and
+              I will perform it.”
+            </div>
+            <ReadMoreCollapsible section={Section.MORE_REVIEWS} titleType={TitleType.MORE_REVIEWS}>
+              <div>⭐⭐⭐⭐⭐ “Mashallah, this is excellent content.”</div>
+              <div>⭐⭐⭐⭐⭐ “Course was very inspiring and intuitive.”</div>
+              <div>
+                ⭐⭐⭐⭐⭐ “I kinda joined late but it surely did increase my knowledge and made me
+                reflect upon my actions. It is a great step and I wish more people to join it so
+                that they can also take benefit from it and try to improve their quality of life.”
+              </div>
+              <div>
+                ⭐⭐⭐⭐⭐ “It was extremely useful. It reminds us to act to act upon the manual
+                given to us by He Who is Exalted, High, and Mighty: Allah. Please do develop such
+                plans for other months like Rajab. Thanks!”
+              </div>
+              <div>
+                ⭐⭐⭐⭐⭐ “Not a single word in all the lessons didn't speak the truth. It was so
+                helpful, alhamdulilah. Quran.com is a wonderful website, and every person, muslim
+                and non-muslim, should use it. And, Inshallah, they will. Thank you for the help you
+                provided me.”
+              </div>
+              <div>
+                ⭐⭐⭐⭐⭐ “Important and vital read to prepare the heart for Ramadan and beyond.”
+              </div>
             </ReadMoreCollapsible>
+            <div>Start this learning plan now:</div>
             <div className={styles.ctaContainer}>
               <Button
                 onClick={() => {
-                  onButtonClicked(Section.INVITE_PEOPLE);
+                  onButtonClicked('preparing_our_hearts_bottom');
                 }}
                 variant={ButtonVariant.Shadow}
-                href="/about-the-quran"
+                href={getCourseNavigationUrl('preparing-our-hearts-for-ramadan')}
                 isNewTab
                 className={styles.button}
               >
-                About The Quran
+                Enroll Now
               </Button>
             </div>
           </div>
-          <div className={styles.subSection}>
-            <h1>Reflecting In Crisis ❤️‍🩹</h1>
+          <hr />
+          <div className={styles.subSection} id="mindful-fasting">
+            <h1>Mindful Fasting: A Ramadan Learning Plan</h1>
             <div>
-              Join the QuranReflect community for an on-going reflection theme dedicated to
-              reflecting upon the Quran during these difficult times of crisis. Read and interact
-              with over 60 Personal reflections shared by our community members and share your own.
-              <InlineLink
-                text="#ReflectingInCrisis"
-                href="https://quranreflect.com/?tags=%23ReflectingInCrisis&tab=most_popular"
-              />
-            </div>
-            <div className={styles.ctaContainer}>
-              <Button
-                onClick={() => {
-                  onButtonClicked(Section.CRISIS);
-                }}
-                variant={ButtonVariant.Shadow}
-                href="https://quranreflect.com/?tags=%23ReflectingInCrisis&tab=most_popular"
-                isNewTab
-                className={styles.button}
-              >
-                Go to #ReflectingInCrisis
-              </Button>
-            </div>
-          </div>
-          <div className={styles.subSection} id="ramadan-reading">
-            <h1>Inspiring Ramadan Reading 🌞</h1>
-            <div>
-              Explore a collection of inspirational Ramadan reflections from the QuranReflect
-              Community curated to help you connect more deeply with the Quran.
+              Discover the beauty of fasting beyond abstention with Mindful Fasting, a unique
+              Learning Plan designed to help you:
             </div>
             <ul>
-              <li>
-                <InlineLink
-                  text="Purifying Our  Speech This Ramadan: A Time to Train our Tongues"
-                  href="https://quranreflect.com/posts/17754"
-                />
-              </li>
-              <li>
-                <InlineLink
-                  text="When everything looks broken"
-                  href="https://quranreflect.com/posts/13479"
-                />
-              </li>
+              <li>Reflect on the deeper purpose of fasting.</li>
+              <li>Gain Quranic insights into patience, gratitude, and self-control.</li>
+              <li>Deepen your connection with Allah through intentional practices.</li>
             </ul>
-            <ReadMoreCollapsible
-              section={Section.INSPIRING_READING}
-              titleType={TitleType.SHOW_MORE}
-            >
-              <ul>
-                <li>
-                  <InlineLink
-                    text="Taqwa Through Trials: The Gratitude Gained from Ramadan Fasting"
-                    href="https://quranreflect.com/posts/7666"
-                  />
-                </li>
-                <li>
-                  <InlineLink
-                    text="A Lesson on Mortality from a Missed Cup of Coffee"
-                    href="https://quranreflect.com/posts/6797"
-                  />
-                </li>
-                <li>
-                  <InlineLink
-                    text="Reflections on Faith and Fellowship in a Microbus Journey"
-                    href="https://quranreflect.com/posts/3249"
-                  />
-                </li>
-                <li>
-                  <InlineLink
-                    text="A Limited Number of Days"
-                    href="https://quranreflect.com/posts/17824"
-                  />
-                </li>
-                <li>
-                  <InlineLink
-                    text="Countless Mercies: Reflecting on the Infinite Blessings of Allah"
-                    href="https://quranreflect.com/posts/17852"
-                  />
-                </li>
-                <li>
-                  <InlineLink
-                    text="Nurturing a God-Conscious Character Amid Imperfection"
-                    href="https://quranreflect.com/posts/13453"
-                  />
-                </li>
-                <li>
-                  <InlineLink
-                    text="My Lord Prescribed This Fast For Me"
-                    href="https://quranreflect.com/posts/17399"
-                  />
-                </li>
-                <li>
-                  <InlineLink
-                    text="You See More In the Dark"
-                    href="https://quranreflect.com/posts/281"
-                  />
-                </li>
-                <li>
-                  <InlineLink
-                    text="Overcoming Self-Hatred: A Journey Towards Healing and Faith in Ramadan"
-                    href="https://quranreflect.com/posts/13513"
-                  />
-                </li>
-                <li>
-                  <InlineLink
-                    text="On Taqwa: Understanding the Meaning Beyond Simple Translations"
-                    href="https://quranreflect.com/posts/10511"
-                  />
-                </li>
-                <li>
-                  <InlineLink
-                    text="“Draw Near!” Coming Closer to The Creator"
-                    href="https://quranreflect.com/posts/8876"
-                  />
-                </li>
-                <li>
-                  <InlineLink
-                    text="Are We Waiting to Return to Sin, or Do We Want To Permanently Break Free?"
-                    href="https://quranreflect.com/posts/17987"
-                  />
-                </li>
-                <li>
-                  <InlineLink
-                    text="Mind Over Matter: Developing Self-Restraint in Ramadan"
-                    href="https://quranreflect.com/posts/6785"
-                  />
-                </li>
-                <li>
-                  <InlineLink
-                    text="A Profound Lesson Learned While Delivering Food"
-                    href="https://quranreflect.com/posts/8694"
-                  />
-                </li>
-                <li>
-                  <InlineLink
-                    text="Allahu Akbar: Embracing the Takbir and Thankfulness as Ramadan Ends"
-                    href="https://quranreflect.com/posts/3443"
-                  />
-                </li>
-              </ul>
-            </ReadMoreCollapsible>
+            <div>
+              Launching: 1st day of Ramadan on{' '}
+              <InlineLink
+                text="Learning Plans - Quran.com"
+                href={getCoursesNavigationUrl()}
+                isNewTab={false}
+              />
+              , insha’Allah.
+            </div>
+          </div>
+          <hr />
+          <div className={styles.subSection} id="share-the-month-of-the-quran">
+            <h1>Share the Month of the Quran! Visit 'What Is Ramadan?'</h1>
+            <div>
+              For those unfamiliar with Ramadan, we’ve created a page to explore the question “What
+              is Ramadan?” in a simple and inspiring way. This page highlights the significance of
+              Ramadan and its profound connection to the Quran. Share it with your friends and loved
+              ones to invite them to experience the beauty and blessings of this sacred month.
+            </div>
+            <div className={styles.ctaContainer}>
+              <Button
+                onClick={() => {
+                  onButtonClicked('what_is_ramadan');
+                }}
+                variant={ButtonVariant.Shadow}
+                href="/what-is-ramadan"
+                isNewTab
+                className={styles.button}
+              >
+                What Is Ramadan?
+              </Button>
+            </div>
+          </div>
+          <hr />
+          <div className={styles.subSection} id="explore-additional-beneficial-features">
+            <h1>Explore Additional Beneficial Features!</h1>
+            <div>
+              Discover additional features on Quran.com to make your Ramadan journey more enriching.
+              You can take personalized notes at the ayah level to capture your reflections and
+              thoughts, read tafsir (commentary) to deepen your understanding of the Quran, and
+              explore reflections shared by others for inspiration.
+            </div>
+            <div className={pageStyles.ayahLevelSettings}>
+              <Image src={AyahLevelSettings} height={38} width={120} alt="Ayah Level Settings" />
+              <div>Check at the ayah-level for these additional features.</div>
+            </div>
+            <div>
+              With more features like bookmarking, audio recitations, and a powerful search tool, we
+              hope Quran.com can help you deeply connect with the Quran in Ramadan and beyond,
+              insha’Allah!
+            </div>
           </div>
           <div className={styles.subSection}>
-            We hope these activities enrich your Ramadan, deepening your connection with the Quran.
-            Share this list of activities with anyone who may benefit.
+            <h1>May You Build a Deep and Profound Connection with the Quran This Ramadan</h1>
+            <div>
+              May Allah make this Ramadan a time of profound growth, deep reflection, and meaningful
+              connection with the Quran. Start preparing today and join us on this transformative
+              journey.
+            </div>
+          </div>
+          <div className={styles.subSection}>
+            <h1>Support Quran.Foundation ❤️</h1>
+            <div>
+              We remain committed to our mission to empower every human being to benefit from the
+              Quran. The modern technology and human talent needed to accomplish our mission
+              requires resources. Monthly donations help us retain top talent and sustain operations
+              so we focus less on fundraising and more on creating impact. To learn more and donate,
+              visit: <InlineLink text="donate.quran.foundation" href={makeDonateUrl()} />
+            </div>
+            <div className={styles.ctaContainer}>
+              <Button
+                onClick={() => {
+                  onButtonClicked('become_a_monthly_donor');
+                }}
+                variant={ButtonVariant.Shadow}
+                href={makeDonatePageUrl(false, true)}
+                isNewTab
+                className={styles.button}
+              >
+                Become a Monthly Donor
+              </Button>
+            </div>
           </div>
         </div>
       </PageContainer>
@@ -444,4 +314,4 @@ const RamadanActivitiesPage: NextPage = (): JSX.Element => {
   );
 };
 
-export default RamadanActivitiesPage;
+export default PreparingForRamadanPage;
