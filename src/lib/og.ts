@@ -32,3 +32,6 @@ export const getChapterOgImageUrl = ({
   if (!verseNumber) return url;
   return `${url}&verse=${verseNumber}`;
 };
+
+export const getWhatIsRamadanOgImageUrl = ({ locale }: BaseOgOptions) =>
+  `${BASE_OG_URL}/api/og/what-is-ramadan?lang=${locale}`;

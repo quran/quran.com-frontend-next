@@ -19,6 +19,11 @@
     min-height: calc(5 * var(--spacing-mega));
 }
 
+.mainVerse {
+    @include breakpoints.tablet {
+        max-width: 50%;
+    }
+}
 .ayahLevelSettings {
     display: flex;
     align-items: center;
