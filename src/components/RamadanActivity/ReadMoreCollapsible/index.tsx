@@ -1,7 +1,5 @@
 import React from 'react';
 
-import useTranslation from 'next-translate/useTranslation';
-
 import styles from './ReadMoreCollapsible.module.scss';
 
 import Collapsible, { CollapsibleDirection } from '@/components/dls/Collapsible/Collapsible';
@@ -17,11 +15,13 @@ export enum Section {
   INVITE_PEOPLE = 'invite_people',
   CRISIS = 'crises',
   INSPIRING_READING = 'inspiring_reading',
+  MORE_REVIEWS = 'more_reviews',
 }
 
 export enum TitleType {
   SHOW_MORE = 'show_more',
   LEARN_MORE = 'learn_more',
+  MORE_REVIEWS = 'more_reviews',
 }
 
 type Props = {
@@ -35,8 +35,6 @@ const ReadMoreCollapsible: React.FC<Props> = ({
   section,
   titleType = TitleType.LEARN_MORE,
 }) => {
-  const { t } = useTranslation('common');
-
   const onCollapseOpenChange = (isCollapseOpen: boolean) => {
     if (isCollapseOpen) {
       logEvent('ramadan_activities_collapse_opened', { section });
@@ -51,11 +49,12 @@ const ReadMoreCollapsible: React.FC<Props> = ({
         onOpenChange={(isCollapseOpen) => onCollapseOpenChange(isCollapseOpen)}
         title={
           <span className={styles.title}>
-            {t(titleType === TitleType.LEARN_MORE ? 'learn-more' : 'show-more')}
+            {titleType === TitleType.MORE_REVIEWS ? 'More Reviews' : 'Learn More'}
           </span>
         }
         prefix={<ChevronDownIcon />}
         shouldRotatePrefixOnToggle
+        headerClassName={styles.collapsibleHeader}
       >
         {({ isOpen: isOpenRenderProp }) => {
           if (!isOpenRenderProp) return null;
