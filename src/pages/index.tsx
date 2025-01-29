@@ -1,8 +1,8 @@
+/* eslint-disable i18next/no-literal-string */
 /* eslint-disable react/no-multi-comp */
-import React from 'react';
 
 import classNames from 'classnames';
-import { NextPage, GetStaticProps } from 'next';
+import { GetServerSideProps, NextPage } from 'next';
 import Head from 'next/head';
 import useTranslation from 'next-translate/useTranslation';
 
@@ -23,10 +23,29 @@ import ChaptersData from 'types/ChaptersData';
 type IndexProps = {
   chaptersResponse: ChaptersResponse;
   chaptersData: ChaptersData;
+  country?: string;
 };
 
-const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }): JSX.Element => {
+export const getServerSideProps: GetServerSideProps = async ({ locale, query }) => {
+  const allChaptersData = await getAllChaptersData(locale);
+
+  return {
+    props: {
+      country: query.country,
+      chaptersData: allChaptersData,
+      chaptersResponse: {
+        chapters: Object.keys(allChaptersData).map((chapterId) => {
+          const chapterData = allChaptersData[chapterId];
+          return { ...chapterData, id: Number(chapterId) };
+        }),
+      },
+    },
+  };
+};
+
+const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters }, country }): JSX.Element => {
   const { t, lang } = useTranslation('home');
+
   return (
     <>
       <Head>
@@ -39,6 +58,8 @@ const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }): JSX.El
       />
       <div className={styles.pageContainer}>
         <div className={styles.flow}>
+          {country ? <p>{country}</p> : <p>No country detected</p>}
+
           <HomePageHero />
           <div className={classNames(styles.flowItem, styles.fullWidth)}>
             <RamadanActivitiesSection />
@@ -56,22 +77,6 @@ const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }): JSX.El
       </div>
     </>
   );
-};
-
-export const getStaticProps: GetStaticProps = async ({ locale }) => {
-  const allChaptersData = await getAllChaptersData(locale);
-
-  return {
-    props: {
-      chaptersData: allChaptersData,
-      chaptersResponse: {
-        chapters: Object.keys(allChaptersData).map((chapterId) => {
-          const chapterData = allChaptersData[chapterId];
-          return { ...chapterData, id: Number(chapterId) };
-        }),
-      },
-    },
-  };
 };
 
 export default Index;
