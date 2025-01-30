@@ -19,3 +19,8 @@
     fill: var(--color-text-default);
   }
 }
+
+.attribution {
+  display: flex;
+  flex-direction: row-reverse;
+}

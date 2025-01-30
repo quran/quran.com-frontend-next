@@ -14,6 +14,7 @@ import Button, { ButtonType, ButtonSize } from '@/dls/Button/Button';
 import Spinner from '@/dls/Spinner/Spinner';
 import PauseIcon from '@/icons/pause.svg';
 import PlayIcon from '@/icons/play-arrow.svg';
+import ThemeType from '@/redux/types/ThemeType';
 import { logButtonClick } from '@/utils/eventLogger';
 import { selectIsLoading } from 'src/xstate/actors/audioPlayer/selectors';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
@@ -54,7 +55,7 @@ const PlayRadioButton = () => {
 
   const { radioActor } = audioService.getSnapshot().context;
   return (
-    <div className={styles.container}>
+    <div className={styles.container} data-theme={ThemeType.Light}>
       <div className={styles.playRadioSection}>
         {isAudioPlaying && isRadioMode ? (
           <Button

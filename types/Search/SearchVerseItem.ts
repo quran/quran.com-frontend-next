@@ -1,11 +1,4 @@
-import Verse from '../Verse';
-import Word from '../Word';
+import { SearchNavigationResult } from './SearchNavigationResult';
 
-type SearchVerseItem = Verse & {
-  words: Word[];
-} & {
-  kalimatData: {
-    matches?: string;
-  };
-};
+type SearchVerseItem = SearchNavigationResult;
 export default SearchVerseItem;

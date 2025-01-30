@@ -8,7 +8,7 @@ import { getVerseAndChapterNumbersFromKey, getVerseNumberRangeFromKey } from './
 
 import QueryParam from '@/types/QueryParam';
 import { QuranReaderFlow } from '@/types/QuranReader';
-import { SearchNavigationType } from 'types/SearchNavigationResult';
+import { SearchNavigationType } from 'types/Search/SearchNavigationResult';
 
 /**
  * Get the href link to a verse.
@@ -237,7 +237,11 @@ export const resolveUrlBySearchNavigationType = (
   isKalimatSearch = false,
 ): string => {
   const stringKey = isKalimatSearch ? searchIdToNavigationKey(type, String(key)) : String(key);
-  if (type === SearchNavigationType.AYAH) {
+  if (
+    type === SearchNavigationType.AYAH ||
+    type === SearchNavigationType.TRANSLITERATION ||
+    type === SearchNavigationType.TRANSLATION
+  ) {
     return getChapterWithStartingVerseUrl(stringKey);
   }
   if (type === SearchNavigationType.JUZ) {

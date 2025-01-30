@@ -22,17 +22,21 @@ export const voiceSearchSlice = createSlice({
       ...state,
       isSearchDrawerVoiceFlowStarted: !state.isSearchDrawerVoiceFlowStarted,
     }),
+    startSearchDrawerVoiceFlow: (state) => ({
+      ...state,
+      isSearchDrawerVoiceFlowStarted: true,
+    }),
     stopSearchDrawerVoiceFlow: (state) => ({
       ...state,
       isSearchDrawerVoiceFlowStarted: false,
     }),
-    stopCommandBarVoiceFlow: (state) => ({
-      ...state,
-      isCommandBardVoiceFlowStarted: false,
-    }),
     toggleIsCommandBarVoiceFlowStarted: (state) => ({
       ...state,
       isCommandBardVoiceFlowStarted: !state.isCommandBardVoiceFlowStarted,
+    }),
+    stopCommandBarVoiceFlow: (state) => ({
+      ...state,
+      isCommandBardVoiceFlowStarted: false,
     }),
   },
 });
@@ -44,6 +48,7 @@ export const selectIsCommandBarVoiceFlowStarted = (state: RootState) =>
 export const {
   toggleIsSearchDrawerVoiceFlowStarted,
   toggleIsCommandBarVoiceFlowStarted,
+  startSearchDrawerVoiceFlow,
   stopSearchDrawerVoiceFlow,
   stopCommandBarVoiceFlow,
 } = voiceSearchSlice.actions;
