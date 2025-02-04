@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import stringify from '../qs-stringify';
 
 import BookmarkByCollectionIdQueryParams from './types/BookmarkByCollectionIdQueryParams';
@@ -7,6 +8,7 @@ import GetAllNotesQueryParams from './types/Note/GetAllNotesQueryParams';
 import { ActivityDayType, FilterActivityDaysParams } from '@/types/auth/ActivityDay';
 import { EstimateGoalRequest, GoalCategory } from '@/types/auth/Goal';
 import { StreakWithMetadataParams } from '@/types/auth/Streak';
+import Language from '@/types/Language';
 import { MediaType } from '@/types/Media/GenerateMediaFileRequest';
 import { Mushaf } from '@/types/QuranReader';
 import { getAuthApiPath } from '@/utils/url';
@@ -59,6 +61,57 @@ export const makeCollectionsUrl = (queryParams: CollectionsQueryParams): string 
   makeUrl('collections', queryParams);
 
 export const makeAddCollectionUrl = () => makeUrl('collections');
+
+export const makeGetQuestionByIdUrl = (id: string) => makeUrl(`questions/${id}`);
+
+/**
+ * As per the specs, either Arabic for Arabic or English for all non-Arabic languages.
+ *
+ * @param {Language} language - The language to get questions in
+ * @returns {Language} - The language to get questions in
+ */
+const getQuestionsLanguage = (language: Language) => {
+  return language === Language.AR ? language : Language.EN;
+};
+
+export const makeGetQuestionsByVerseKeyUrl = ({
+  verseKey,
+  page = 1,
+  pageSize = 10,
+  language = Language.EN,
+}: {
+  verseKey: string;
+  page?: number;
+  pageSize?: number;
+  language?: Language;
+}) =>
+  makeUrl(`questions/by-verse/${verseKey}`, {
+    pageSize,
+    page,
+    language: getQuestionsLanguage(language),
+  });
+
+export const makeGetQuestionsWithinRangeUrl = (
+  startVerseKey: string,
+  endVerseKey: string,
+  language: Language = Language.EN,
+) =>
+  makeUrl(`questions/by-range`, {
+    from: startVerseKey,
+    to: endVerseKey,
+    language: getQuestionsLanguage(language),
+  });
+
+export const makeCountQuestionsWithinRangeUrl = (
+  startVerseKey: string,
+  endVerseKey: string,
+  language: Language = Language.EN,
+) =>
+  makeUrl(`questions/count-within-range`, {
+    from: startVerseKey,
+    to: endVerseKey,
+    language: getQuestionsLanguage(language),
+  });
 
 export const makeGetNotesByVerseUrl = (verseKey: string) => makeUrl(`notes/by-verse/${verseKey}`);
 

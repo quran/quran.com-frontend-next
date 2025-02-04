@@ -47,6 +47,17 @@
   "prev-page": "上一页",
   "prev-rub": "以前的 Rub el Hizb",
   "prev-surah": "上一章",
+  "q-and-a": {
+    "answer": "回答",
+    "clarification": "澄清",
+    "community": "社区",
+    "explore_answers": "探索答案",
+    "explore_answers_tooltip": "“探索答案”是一份精心挑选的列表，其中包含与特定经文有关的深思熟虑的问题和重要注释，可增强您对《古兰经》的理解和联系。",
+    "questions": "问题",
+    "references": "参考",
+    "summary": "概括",
+    "tafsir": "塔夫西尔"
+  },
   "qalqala": "卡尔卡拉",
   "query-param-message": "您正在查看预先选择的阅读设置。 <0>关闭</0>以查看当前设置或<1>保存</1>以更新您的设置",
   "ramadan-of-reflection": "加入 QuranReflect “反思的斋月”",

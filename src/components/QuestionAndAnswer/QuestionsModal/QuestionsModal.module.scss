@@ -1,0 +1,31 @@
+@use "src/styles/breakpoints";
+
+.content {
+    padding-block-start: var(--spacing-large);
+}
+
+.contentModal {
+    @include breakpoints.tablet {
+        padding-inline-start: var(--spacing-xlarge-px);
+        padding-inline-end: var(--spacing-xlarge-px);
+        padding-block-start: var(--spacing-xlarge-px);
+        padding-block-end: var(--spacing-xlarge-px);
+    }
+}
+
+.closeIcon {
+    @include breakpoints.tablet {
+        display: block !important;
+        position: relative !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+}
+
+.header {
+    @include breakpoints.tablet {
+        display: flex;
+        flex-direction: row-reverse;
+        justify-content: space-between;
+    }
+}

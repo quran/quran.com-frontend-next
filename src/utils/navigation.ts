@@ -133,6 +133,17 @@ export const getVerseReflectionNavigationUrl = (verseKey: string): string =>
   `/${verseKey}/reflections`;
 
 /**
+ * Get the href link to questions of Ayah.
+ *
+ * @param {string} verseKey
+ * @returns {string}
+ */
+export const getVerseQuestionsNavigationUrl = (verseKey: string): string =>
+  `/${verseKey}/questions`;
+
+export const getQuestionNavigationUrl = (questionId: string): string => `/questions/${questionId}`;
+
+/**
  * Get the href link to a surah.
  *
  * @param {string | number} surahIdOrSlug
@@ -335,8 +346,8 @@ export const getCollectionNavigationUrl = (collectionId: string) => {
 export const getReadingGoalNavigationUrl = () => '/reading-goal';
 export const getMyCoursesNavigationUrl = () => '/my-learning-plans';
 export const getCoursesNavigationUrl = () => '/learning-plans';
-export const getRamadanActivitiesNavigationUrl = () => '/ramadan-activities';
-
+export const getRamadanNavigationUrl = () => '/ramadan';
+export const getWhatIsRamadanNavigationUrl = () => '/what-is-ramadan';
 export const getLoginNavigationUrl = (redirectTo?: string) =>
   `/login${redirectTo ? `?${QueryParam.REDIRECT_TO}=${redirectTo}` : ''}`;
 

@@ -1,0 +1,21 @@
+@use "src/styles/theme";
+
+%clarification {
+    font-weight: var(--font-weight-semibold) !important;
+    @include theme.light {
+        --background-color: #fff8e4;
+        --text-color: #7c6e21;
+    }
+    @include theme.dark {
+        --background-color: #fff8e4;
+        --text-color: #7c6e21;
+    }
+    @include theme.sepia {
+        --background-color: #f1d5b7;
+        --text-color: #7c6e21;
+    }
+}
+
+%explore_answers {
+    @extend %clarification;
+}
