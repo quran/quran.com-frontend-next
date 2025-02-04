@@ -11,7 +11,7 @@ const SURAH_NAMES_FONT = {
 
 const LOCALE_PRELOADED_FONTS = {
   [DEFAULT_LOCALE]: [
-    { type: 'font/woff2', location: '/fonts/lang/OpenSans/OpenSans.ttf' },
+    { type: 'font/woff2', location: '/fonts/lang/Figtree/Figtree.ttf' },
     { ...SURAH_NAMES_FONT },
   ],
   ar: [
