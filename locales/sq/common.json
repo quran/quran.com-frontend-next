@@ -145,6 +145,7 @@
     "resend-email-in": "Ridërgo email-in e verifikimit për {{remainingTime}} sek...",
     "verify-code": "Verifiko kodin"
   },
+  "end-year-donate": "Përfundoni 2024 me Sadaka ❤️",
   "error": {
     "MediaVersesRangeLimitExceeded": "Mund të zgjidhni vetëm deri në {{limit}} vargje në të njëjtën kohë. Ju lutemi zgjidhni një gamë më të vogël.",
     "bookmark-sync": "Faqeshënuesi është jashtë sinkronizimit.",
@@ -200,6 +201,7 @@
     "description": "Donacionet mujore na ndihmojnë të përmirësojmë Quran.com dhe të mbajmë operacionet, kështu që ne fokusohemi më pak në mbledhjen e fondeve dhe më shumë në krijimin e ndikimit.",
     "title": "Bëhuni një donator mujor"
   },
+  "get-started": "Filloni",
   "hear-it-pronounced": "Klikoni fjalët kuranore, dëgjoni shqiptimin",
   "help": "Ndihmë",
   "hizb": "Hizb",
@@ -254,6 +256,7 @@
   "pbuh": "Bekimet e Allahut qofshin mbi të",
   "popular-links": "Kërkimet e preferuara",
   "popup": {
+    "companion-title": "I dashur shok i Kur'anit,",
     "footnote": "Donacionet mujore na lejojnë të fokusohemi më pak në mbledhjen e fondeve",
     "text-1": "Ne jemi të përkushtuar t'i shërbejmë njohurive dhe teknologjisë botërore kuranore, gjithmonë falas.",
     "text-2": "Mundësia e përsosur për bamirësi të vazhdueshme (Sadaka Jariyah). Investoni në Ahiretin tuaj si donator mujor (ose një herë).",
@@ -277,6 +280,7 @@
     "reading": "Leximi",
     "translation": "Përkthimi"
   },
+  "ready-for-ramadan": "Gati për Ramazan?",
   "recitation": "Recitim",
   "reciter": "Recitues",
   "reciter-summary": "(Me lejen e mirë të Qendrës Tafsir)",

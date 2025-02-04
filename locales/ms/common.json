@@ -145,6 +145,7 @@
     "resend-email-in": "Hantar semula e-mel pengesahan dalam {{remainingTime}} saat...",
     "verify-code": "Sahkan kod"
   },
+  "end-year-donate": "Akhiri 2024 dengan Sedekah ❤️",
   "error": {
     "MediaVersesRangeLimitExceeded": "Anda hanya boleh memilih sehingga {{limit}} ayat pada satu masa. Sila pilih julat yang lebih kecil.",
     "bookmark-sync": "Penanda halaman tidak segerak.",
@@ -200,6 +201,7 @@
     "description": "Derma bulanan membantu kami menambah baik Quran.com dan mengekalkan operasi supaya kami kurang menumpukan pada pengumpulan dana dan lebih kepada mencipta impak.",
     "title": "Jadilah Penderma Bulanan"
   },
+  "get-started": "Mulakan",
   "hear-it-pronounced": "Klik perkataan Quran, dengar lafaz",
   "help": "Bantuan",
   "hizb": "Hizb",
@@ -254,6 +256,7 @@
   "pbuh": "Selawat Allah ke atasnya",
   "popular-links": "Pautan yang di gemari",
   "popup": {
+    "companion-title": "Sahabat Al-Quran yang dihormati,",
     "footnote": "Derma bulanan anda membantu mengurangkan usaha pengutipan dana kami sejurusnya melebihkan tumpuan pada program yang manfaat",
     "text-1": "Kami komited untuk memberi khidmat percuma dalam pengluasan pengetahuan dan teknologi pembelajaran al-Quran ke seantaro dunia.",
     "text-2": "Peluang terbaik untuk amal yang berterusan (Sadaqa Jariyah). Melabur untuk Akhirat anda sebagai penderma bulanan (atau sekali).",
@@ -277,6 +280,7 @@
     "reading": "Membaca",
     "translation": "Terjemahan"
   },
+  "ready-for-ramadan": "Bersedia untuk Ramadan?",
   "recitation": "Tilawah",
   "reciter": "Qari",
   "reciter-summary": "(Dengan izin Pusat Tafsir)",

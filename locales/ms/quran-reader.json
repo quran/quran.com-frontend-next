@@ -47,6 +47,17 @@
   "prev-page": "Halaman sebelumnya",
   "prev-rub": "Rub el Hizb sebelumnya",
   "prev-surah": "Surah sebelumnya",
+  "q-and-a": {
+    "answer": "Jawab",
+    "clarification": "Penjelasan",
+    "community": "Komuniti",
+    "explore_answers": "Terokai Jawapan",
+    "explore_answers_tooltip": "'Teroka Jawapan' ialah senarai susun atur soalan yang bernas dan nota penting yang berkaitan dengan ayat-ayat tertentu yang akan meningkatkan pemahaman dan hubungan anda dengan Al-Quran.",
+    "questions": "Soalan",
+    "references": "Rujukan",
+    "summary": "Ringkasan",
+    "tafsir": "Tafsir"
+  },
   "qalqala": "Qalqala",
   "query-param-message": "Anda sedang melihat tetapan bacaan yang diprapilih. <0> Ketepikan </0> untuk melihat dalam tetapan semasa anda atau <1> Simpan </1> untuk mengemas kini tetapan anda",
   "ramadan-of-reflection": "Sertai  \"Ramadan Refleksi\" di QuranReflect.",

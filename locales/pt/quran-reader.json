@@ -47,6 +47,17 @@
   "prev-page": "Página anterior",
   "prev-rub": "Anterior Rub el Hizb",
   "prev-surah": "Surah anterior",
+  "q-and-a": {
+    "answer": "Responder",
+    "clarification": "Esclarecimento",
+    "community": "Comunidade",
+    "explore_answers": "Explorar Respostas",
+    "explore_answers_tooltip": "'Explore Answers' é uma lista selecionada de perguntas ponderadas e notas essenciais relacionadas a versículos específicos que irão melhorar sua compreensão e conexão com o Alcorão.",
+    "questions": "Questões",
+    "references": "Referências",
+    "summary": "Resumo",
+    "tafsir": "Tafsir"
+  },
   "qalqala": "Qalqala",
   "query-param-message": "Você está visualizando configurações de leitura pré-selecionadas. <0> Ignorar </0> para visualizar suas configurações atuais ou <1> Salvar </1> para atualizar sua configuração",
   "ramadan-of-reflection": "Junte-se ao QuranReflect \"Ramadan of Reflection\"",
