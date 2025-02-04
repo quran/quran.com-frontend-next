@@ -145,6 +145,7 @@
     "resend-email-in": "Kirim ulang email verifikasi dalam {{remainingTime}} detik...",
     "verify-code": "Kode verifikasi"
   },
+  "end-year-donate": "Akhiri tahun 2024 dengan Sedekah ❤️",
   "error": {
     "MediaVersesRangeLimitExceeded": "Anda hanya dapat memilih hingga {{limit}} ayat dalam satu waktu. Harap pilih rentang yang lebih kecil.",
     "bookmark-sync": "Penanda tidak sinkron.",
@@ -200,6 +201,7 @@
     "description": "Donasi bulanan membantu kami meningkatkan Quran.com dan melanggengkan operasional sehingga kami tidak terlalu fokus pada penggalangan dana tetapi lebih pada penciptaan dampak.",
     "title": "Menjadi Donatur Bulanan"
   },
+  "get-started": "Memulai",
   "hear-it-pronounced": "Klik kata-kata Al-Quran, dengarkan pengucapannya",
   "help": "Bantuan",
   "hizb": "Hizb",
@@ -254,6 +256,7 @@
   "pbuh": "Berkah Allah atasnya",
   "popular-links": "Link populer",
   "popup": {
+    "companion-title": "Wahai Sahabat Al-Quran yang terkasih,",
     "footnote": "Donasi bulanan memungkinkan kami untuk tidak terlalu fokus pada penggalangan dana",
     "text-1": "Kami berkomitmen untuk melayani dunia pengetahuan dan teknologi Qur'ani, selalu gratis.",
     "text-2": "Kesempatan sempurna untuk Sedekah Jariyah. Investasi untuk Akhirat Anda dengan menjadi donor bulanan (atau donor satu kali).",
@@ -277,6 +280,7 @@
     "reading": "Membaca",
     "translation": "Terjemahan"
   },
+  "ready-for-ramadan": "Siap untuk Ramadan?",
   "recitation": "Pembacaan",
   "reciter": "Qari",
   "reciter-summary": "(Dengan izin dari Pusat Tafsir)",

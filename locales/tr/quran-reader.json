@@ -47,6 +47,17 @@
   "prev-page": "Önceki sayfa",
   "prev-rub": "Önceki Rub el Hizb",
   "prev-surah": "Önceki Sure",
+  "q-and-a": {
+    "answer": "Cevap",
+    "clarification": "Açıklama",
+    "community": "Toplum",
+    "explore_answers": "Cevapları Keşfedin",
+    "explore_answers_tooltip": "'Cevapları Keşfet', Kuran'ı anlamanızı ve Kuran'la bağlantınızı artıracak belirli ayetlerle ilgili düşünceli sorular ve temel notlardan oluşan özenle hazırlanmış bir listedir.",
+    "questions": "Sorular",
+    "references": "Referanslar",
+    "summary": "Özet",
+    "tafsir": "Tefsir"
+  },
   "qalqala": "Kalkala",
   "query-param-message": "Önceden seçilmiş okuma ayarlarını görüntülüyorsunuz. Geçerli ayarlarınızda görüntülemek için <0> Reddet </0> veya ayarlarınızı güncellemek için <1> Kaydet </1>",
   "ramadan-of-reflection": "KuranReflect'e Katılın \"Yansıma Ramazanı\"",

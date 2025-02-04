@@ -47,6 +47,17 @@
   "prev-page": "Halaman sebelumnya",
   "prev-rub": "Rub el Hizb sebelumnya",
   "prev-surah": "Surah sebelumnya",
+  "q-and-a": {
+    "answer": "Menjawab",
+    "clarification": "Klarifikasi",
+    "community": "Masyarakat",
+    "explore_answers": "Jelajahi Jawaban",
+    "explore_answers_tooltip": "'Jelajahi Jawaban' adalah daftar pilihan pertanyaan bijaksana dan catatan penting terkait ayat-ayat tertentu yang akan meningkatkan pemahaman dan hubungan Anda dengan Al-Quran.",
+    "questions": "Pertanyaan",
+    "references": "Referensi",
+    "summary": "Ringkasan",
+    "tafsir": "Tafsir"
+  },
   "qalqala": "Qalqala",
   "query-param-message": "Anda melihat pengaturan membaca yang telah dipilih sebelumnya. <0> Tutup </0> untuk melihat dalam pengaturan Anda saat ini atau <1> Simpan </1> untuk memperbarui pengaturan Anda",
   "ramadan-of-reflection": "Bergabunglah dengan QuranReflect \"Ramadan of Reflection\"",
