@@ -18,7 +18,7 @@ import ReadMoreCollapsible, {
 import Button, { ButtonVariant } from '@/dls/Button/Button';
 import { getPreparingForRamadanOgImageUrl } from '@/lib/og';
 import styles from '@/pages/contentPage.module.scss';
-import pageStyles from '@/pages/ramadan-activities/RamadanActivities.module.scss';
+import pageStyles from '@/pages/ramadan/RamadanActivities.module.scss';
 import AyahLevelSettings from '@/public/images/ayah-level-settings.jpeg';
 import { makeDonatePageUrl } from '@/utils/apiPaths';
 import { logButtonClick } from '@/utils/eventLogger';
@@ -27,11 +27,11 @@ import {
   getCanonicalUrl,
   getCourseNavigationUrl,
   getCoursesNavigationUrl,
-  getRamadanActivitiesNavigationUrl,
+  getRamadanNavigationUrl,
   getReadingGoalNavigationUrl,
 } from '@/utils/navigation';
 
-const PATH = getRamadanActivitiesNavigationUrl();
+const PATH = getRamadanNavigationUrl();
 const PreparingForRamadanPage: NextPage = (): JSX.Element => {
   const { lang } = useTranslation();
 
