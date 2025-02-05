@@ -11,7 +11,7 @@ import Banner from '@/components/Banner/Banner';
 import { useOnboarding } from '@/components/Onboarding/OnboardingProvider';
 import Button, { ButtonSize, ButtonType } from '@/dls/Button/Button';
 import { selectNavbar } from '@/redux/slices/navbar';
-import { getWhatIsRamadanNavigationUrl } from '@/utils/navigation';
+import { getRamadanNavigationUrl } from '@/utils/navigation';
 
 const Navbar = () => {
   const { isActive } = useOnboarding();
@@ -28,7 +28,7 @@ const Navbar = () => {
           text={`✨ ${t('ready-for-ramadan')}`}
           ctaButton={
             <Button
-              href={getWhatIsRamadanNavigationUrl()}
+              href={getRamadanNavigationUrl()}
               size={ButtonSize.Small}
               type={ButtonType.Success}
             >
