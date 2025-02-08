@@ -145,6 +145,7 @@
     "resend-email-in": "在{{remainingTime}}秒内重新发送验证电子邮件...",
     "verify-code": "验证码"
   },
+  "end-year-donate": "用 Sadaqah ❤️ 结束 2024 年",
   "error": {
     "MediaVersesRangeLimitExceeded": "您一次最多只能选择{{limit}}节经文。请选择较小的范围。",
     "bookmark-sync": "书签不同步。",
@@ -200,6 +201,7 @@
     "description": "每月的捐款帮助我们改善 Quran.com 并维持运营，因此我们不再专注于筹款，而是更多地关注创造影响力。",
     "title": "成为每月捐助者"
   },
+  "get-started": "立即开始",
   "hear-it-pronounced": "点击《古兰经》单词，听发音",
   "help": "帮助",
   "hizb": "希兹布",
@@ -254,6 +256,7 @@
   "pbuh": "真主的祝福降临在他身上",
   "popular-links": "热门链接",
   "popup": {
+    "companion-title": "亲爱的《古兰经》同伴，",
     "footnote": "每月捐款让我们可以减少对筹款的关注",
     "text-1": "我们致力于为世界提供古兰经知识和技术，始终免费。",
     "text-2": "这是持续慈善 (Sadaqa Jariyah) 的绝佳机会。作为每月 (或一次性) 捐赠者，投资您的来世。",
@@ -277,6 +280,7 @@
     "reading": "诵读",
     "translation": "翻译"
   },
+  "ready-for-ramadan": "准备好迎接斋月了吗？",
   "recitation": "朗诵",
   "reciter": "诵读家",
   "reciter-summary": "（经 Tafsir Center 友情许可）",

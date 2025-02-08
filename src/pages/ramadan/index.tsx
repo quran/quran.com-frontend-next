@@ -18,21 +18,20 @@ import ReadMoreCollapsible, {
 import Button, { ButtonVariant } from '@/dls/Button/Button';
 import { getPreparingForRamadanOgImageUrl } from '@/lib/og';
 import styles from '@/pages/contentPage.module.scss';
-import pageStyles from '@/pages/ramadan-activities/RamadanActivities.module.scss';
+import pageStyles from '@/pages/ramadan/RamadanActivities.module.scss';
 import AyahLevelSettings from '@/public/images/ayah-level-settings.jpeg';
-import { makeDonatePageUrl, makeDonateUrl } from '@/utils/apiPaths';
+import { makeDonatePageUrl } from '@/utils/apiPaths';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getLanguageAlternates } from '@/utils/locale';
 import {
   getCanonicalUrl,
   getCourseNavigationUrl,
   getCoursesNavigationUrl,
-  getRamadanActivitiesNavigationUrl,
+  getRamadanNavigationUrl,
   getReadingGoalNavigationUrl,
-  getWhatIsRamadanNavigationUrl,
 } from '@/utils/navigation';
 
-const PATH = getRamadanActivitiesNavigationUrl();
+const PATH = getRamadanNavigationUrl();
 const PreparingForRamadanPage: NextPage = (): JSX.Element => {
   const { lang } = useTranslation();
 
@@ -251,7 +250,7 @@ const PreparingForRamadanPage: NextPage = (): JSX.Element => {
                   onButtonClicked('what_is_ramadan');
                 }}
                 variant={ButtonVariant.Shadow}
-                href={getWhatIsRamadanNavigationUrl()}
+                href="/what-is-ramadan"
                 isNewTab
                 className={styles.button}
               >
@@ -292,8 +291,7 @@ const PreparingForRamadanPage: NextPage = (): JSX.Element => {
               We remain committed to our mission to empower every human being to benefit from the
               Quran. The modern technology and human talent needed to accomplish our mission
               requires resources. Monthly donations help us retain top talent and sustain operations
-              so we focus less on fundraising and more on creating impact. To learn more and donate,
-              visit: <InlineLink text="donate.quran.foundation" href={makeDonateUrl()} />
+              so we focus less on fundraising and more on creating impact.
             </div>
             <div className={styles.ctaContainer}>
               <Button

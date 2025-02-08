@@ -9,7 +9,9 @@ import NavbarBody from './NavbarBody';
 
 import Banner from '@/components/Banner/Banner';
 import { useOnboarding } from '@/components/Onboarding/OnboardingProvider';
+import Button, { ButtonSize, ButtonType } from '@/dls/Button/Button';
 import { selectNavbar } from '@/redux/slices/navbar';
+import { getWhatIsRamadanNavigationUrl } from '@/utils/navigation';
 
 const Navbar = () => {
   const { isActive } = useOnboarding();
@@ -21,7 +23,20 @@ const Navbar = () => {
     <>
       <div className={styles.emptySpacePlaceholder} />
       <nav className={classNames(styles.container, { [styles.hiddenNav]: !showNavbar })}>
-        <Banner shouldShowPrefixIcon={false} text={`${t('hear-it-pronounced')} 🔊`} />
+        <Banner
+          shouldShowPrefixIcon={false}
+          text={`✨ ${t('ready-for-ramadan')}`}
+          ctaButton={
+            <Button
+              href={getWhatIsRamadanNavigationUrl()}
+              size={ButtonSize.Small}
+              type={ButtonType.Success}
+            >
+              {`${t('get-started')}!`}
+            </Button>
+          }
+        />
+
         <NavbarBody />
       </nav>
     </>

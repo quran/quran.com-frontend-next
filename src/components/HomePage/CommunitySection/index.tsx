@@ -11,7 +11,7 @@ import QRLogoIcon from '@/icons/qr-logo.svg';
 import TicketIcon from '@/icons/ticket.svg';
 import ArrowIcon from '@/public/icons/arrow.svg';
 import { logButtonClick } from '@/utils/eventLogger';
-import { getRamadanActivitiesNavigationUrl } from '@/utils/navigation';
+import { getRamadanNavigationUrl } from '@/utils/navigation';
 import { getQRNavigationUrl } from '@/utils/quranReflect/navigation';
 
 const CommunitySection = () => {
@@ -33,7 +33,7 @@ const CommunitySection = () => {
       <div className={styles.cardsContainer}>
         <Card
           className={styles.card}
-          link={getRamadanActivitiesNavigationUrl()}
+          link={getRamadanNavigationUrl()}
           isNewTab
           linkClassName={styles.link}
           onClick={onRamadanCardClicked}

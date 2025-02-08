@@ -47,6 +47,17 @@
   "prev-page": "Pagina precedente",
   "prev-rub": "Precedente Rub el Hizb",
   "prev-surah": "Sura precedente",
+  "q-and-a": {
+    "answer": "Risposta",
+    "clarification": "Chiarimento",
+    "community": "Comunità",
+    "explore_answers": "Esplora le risposte",
+    "explore_answers_tooltip": "\"Esplora le risposte\" è un elenco selezionato di domande approfondite e note essenziali relative a versetti specifici che miglioreranno la tua comprensione e la tua connessione con il Corano.",
+    "questions": "Domande",
+    "references": "Riferimenti",
+    "summary": "Riepilogo",
+    "tafsir": "Il Tafsir"
+  },
   "qalqala": "Qalqala",
   "query-param-message": "Stai visualizzando le impostazioni di lettura preselezionate. <0> Ignora </0> per visualizzare le impostazioni correnti o <1> Salva </1> per aggiornare le impostazioni",
   "ramadan-of-reflection": "Unisciti a QuranReflect \"Ramadan of Reflection\"",
