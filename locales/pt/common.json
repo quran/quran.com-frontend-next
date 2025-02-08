@@ -145,6 +145,7 @@
     "resend-email-in": "Reenvie o e-mail de verificação em {{remainingTime}} segundos...",
     "verify-code": "Código de verificação"
   },
+  "end-year-donate": "Termine 2024 com Sadaqah ❤️",
   "error": {
     "MediaVersesRangeLimitExceeded": "Você pode selecionar até {{limit}} versos por vez. Selecione um intervalo menor.",
     "bookmark-sync": "O marcador está fora de sincronia.",
@@ -200,6 +201,7 @@
     "description": "As doações mensais nos ajudam a melhorar o Quran.com e a sustentar as operações, por isso nos concentramos menos na arrecadação de fundos e mais na criação de impacto.",
     "title": "Seja um doador mensal"
   },
+  "get-started": "Começar",
   "hear-it-pronounced": "Clique em palavras do Alcorão, ouça a pronúncia",
   "help": "Ajuda",
   "hizb": "Hizb",
@@ -254,6 +256,7 @@
   "pbuh": "Bênçãos de Allah estejam com ele",
   "popular-links": "Links populares",
   "popup": {
+    "companion-title": "Caro companheiro do Alcorão,",
     "footnote": "As doações mensais permitem que nos concentremos menos na angariação de fundos",
     "text-1": "Estamos comprometidos em servir o conhecimento e a tecnologia do Alcorão, sempre de graça.",
     "text-2": "A oportunidade perfeita para caridade contínua (Sadaqa Jariyah). Invista no seu futuro como doador mensal (ou único).",
@@ -277,6 +280,7 @@
     "reading": "Lendo",
     "translation": "Tradução"
   },
+  "ready-for-ramadan": "Pronto para o Ramadã?",
   "recitation": "Recitação",
   "reciter": "Recitador",
   "reciter-summary": "(Com a gentil permissão do Tafsir Center)",

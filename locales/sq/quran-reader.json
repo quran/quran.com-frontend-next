@@ -47,6 +47,17 @@
   "prev-page": "Faqja e mëparshme",
   "prev-rub": "E mëparshme Rub el Hizb",
   "prev-surah": "Surja e mëparshme",
+  "q-and-a": {
+    "answer": "Përgjigju",
+    "clarification": "Sqarim",
+    "community": "Komuniteti",
+    "explore_answers": "Eksploroni përgjigjet",
+    "explore_answers_tooltip": "'Eksploro përgjigjet' është një listë e kuruar me pyetje të zhytura në mendime dhe shënime thelbësore në lidhje me vargje specifike që do të përmirësojnë të kuptuarit dhe lidhjen tuaj me Kuranin.",
+    "questions": "Pyetje",
+    "references": "Referencat",
+    "summary": "Përmbledhje",
+    "tafsir": "Tefsir"
+  },
   "qalqala": "Qalqala",
   "query-param-message": "Po shikoni cilësimet e parazgjedhura të leximit. <0> Hiqe </0> për të parë në cilësimet aktuale ose <1> Ruaj </1> për të përditësuar cilësimet",
   "ramadan-of-reflection": "Bashkohu me Kuran Reflect \"Ramazani i Reflektimit\"",
