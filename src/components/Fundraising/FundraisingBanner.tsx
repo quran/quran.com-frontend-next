@@ -20,6 +20,7 @@ const FundraisingBanner = () => {
         <DonateButton
           type={DonateButtonType.MONTHLY}
           source={DonateButtonClickSource.SIDEBAR_BANNER}
+          shouldUseProviderUrl
         />
         <LearnMoreButton source={LearnMoreClickSource.SIDEBAR_BANNER} />
       </div>
