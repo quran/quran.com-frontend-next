@@ -23,7 +23,7 @@ import {
 } from '@/redux/slices/CommandBar/state';
 import SearchQuerySource from '@/types/SearchQuerySource';
 import { logButtonClick } from '@/utils/eventLogger';
-import { resolveUrlBySearchNavigationType } from '@/utils/navigation';
+import { getSearchQueryNavigationUrl, resolveUrlBySearchNavigationType } from '@/utils/navigation';
 import { getResultType } from '@/utils/search';
 import { SearchNavigationResult, SearchNavigationType } from 'types/Search/SearchNavigationResult';
 
@@ -114,19 +114,17 @@ const CommandsList: React.FC<Props> = ({
   useHotkeys(
     'enter',
     () => {
-      let navigateTo = null;
-      Object.keys(groups).forEach((commandGroup) => {
-        const selectedCommand = groups[commandGroup].find(
-          (command) => command.index === selectedCommandIndex,
-        );
-        if (selectedCommand) {
-          navigateTo = selectedCommand;
-        }
+      router.push(getSearchQueryNavigationUrl(searchQuery)).then(() => {
+        navigateToLink({
+          name: searchQuery,
+          resultType: SearchNavigationType.SEARCH_PAGE,
+          key: searchQuery,
+          group: RESULTS_GROUP,
+        });
       });
-      navigateToLink(navigateTo);
     },
-    { enabled: selectedCommandIndex !== null, enableOnFormTags: ['INPUT'] },
-    [selectedCommandIndex, groups, navigateToLink],
+    { enabled: !!searchQuery, enableOnFormTags: ['INPUT'] },
+    [searchQuery, navigateToLink, router],
   );
   const onRemoveCommandClicked = (
     event: MouseEvent<Element>,
