@@ -103,6 +103,7 @@
     "react-hotkeys-hook": "^4.5.0",
     "react-joyride": "^2.7.2",
     "react-redux": "^9.1.2",
+    "react-share": "^5.2.0",
     "react-toastify": "^9.0.8",
     "react-virtuoso": "^2.19.0",
     "redux": "^5.0.1",
