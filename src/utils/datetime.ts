@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { Translate } from 'next-translate';
 
 import { getLangFullLocale, LANG_LOCALE_MAP, toLocalizedNumber } from './locale';
@@ -62,6 +63,52 @@ export const secondsToReadableFormat = (s: number, t: Translate, locale: string)
         count: seconds,
         seconds: toLocalizedNumber(convertNumberToDecimal(seconds), locale),
       }),
+    );
+  }
+
+  return results.join(', ');
+};
+
+/**
+ * Convert seconds to the format of `x hours, y minutes, z seconds` without any additional text.
+ * Or any combination of the three.
+ *
+ * @param {number} s seconds
+ * @param {string} locale locale
+ * @returns {string}
+ */
+export const secondsToShortReadableFormat = (s: number, locale: string): string => {
+  const results: string[] = [];
+
+  let seconds = s;
+  let minutes = Math.floor(seconds / 60);
+  const hours = Math.floor(minutes / 60);
+
+  if (hours > 0) {
+    results.push(
+      `${toLocalizedNumber(convertNumberToDecimal(hours), locale)} ${
+        hours === 1 ? 'hour' : 'hours'
+      }`,
+    );
+    minutes %= 60;
+    seconds %= 60;
+  }
+
+  if (minutes > 0) {
+    results.push(
+      `${toLocalizedNumber(convertNumberToDecimal(minutes), locale)} ${
+        minutes === 1 ? 'minute' : 'minutes'
+      }`,
+    );
+    seconds %= 60;
+  }
+
+  // if there are seconds left, or if the duration is 0 (in this case, `results.length` = 0), add seconds
+  if (seconds > 0 || results.length === 0) {
+    results.push(
+      `${toLocalizedNumber(convertNumberToDecimal(seconds), locale)} ${
+        seconds === 1 ? 'second' : 'seconds'
+      }`,
     );
   }
 

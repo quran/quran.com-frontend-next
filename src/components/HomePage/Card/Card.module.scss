@@ -1,0 +1,10 @@
+.card {
+    box-shadow: 0px 4px 25px rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
+    border-radius: var(--border-radius-rounded);
+    padding: var(--spacing-medium);
+}
+
+.cardWithLink {
+    cursor: pointer;
+}

@@ -7,7 +7,6 @@ import useTranslation from 'next-translate/useTranslation';
 import layoutStyle from './index.module.scss';
 import styles from './profile.module.scss';
 
-import withAuth from '@/components/Auth/withAuth';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import DeleteAccountButton from '@/components/Profile/DeleteAccountButton';
 import BookmarksAndCollectionsSection from '@/components/Verses/BookmarksAndCollectionsSection';
@@ -39,7 +38,7 @@ const emailSample = 'mohammadali@quran.com';
 const ProfilePage: NextPage<Props> = () => {
   const { t, lang } = useTranslation();
   const router = useRouter();
-  const { user, isLoading, error } = useCurrentUser();
+  const { user, isLoading, error, isUserLoggedIn } = useCurrentUser();
 
   const onLogoutClicked = async () => {
     if (!isLoggedIn()) {
@@ -70,10 +69,37 @@ const ProfilePage: NextPage<Props> = () => {
     </div>
   );
 
+  const accountActions = (
+    <div
+      className={classNames(layoutStyle.flowItem, layoutStyle.fullWidth, styles.actionsContainer)}
+    >
+      <div className={styles.action}>
+        <DeleteAccountButton isDisabled={isLoading} />
+      </div>
+      <div className={styles.action}>
+        <Button isDisabled={isLoading} onClick={onLogoutClicked}>
+          {t('common:logout')}
+        </Button>
+      </div>
+    </div>
+  );
+
   const profileInfo = (
-    <div className={styles.profileInfoContainer}>
-      <h2 className={styles.name}>{`${firstName} ${lastName}`}</h2>
-      <div className={styles.email}>{email}</div>
+    <div className={classNames(layoutStyle.flowItem)}>
+      <div className={styles.profileContainer}>
+        <div className={styles.profilePicture}>
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img className={styles.profilePicture} alt="avatar" src={photoUrl || DEFAULT_PHOTO_URL} />
+        </div>
+        {isLoading ? (
+          profileSkeletonInfoSkeleton
+        ) : (
+          <div className={styles.profileInfoContainer}>
+            <h2 className={styles.name}>{`${firstName} ${lastName}`}</h2>
+            <div className={styles.email}>{email}</div>
+          </div>
+        )}
+      </div>
     </div>
   );
 
@@ -89,19 +115,7 @@ const ProfilePage: NextPage<Props> = () => {
       <div className={layoutStyle.pageContainer}>
         <div className={layoutStyle.flow}>
           <div className={styles.container}>
-            <div className={classNames(layoutStyle.flowItem)}>
-              <div className={styles.profileContainer}>
-                <div className={styles.profilePicture}>
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    className={styles.profilePicture}
-                    alt="avatar"
-                    src={photoUrl || DEFAULT_PHOTO_URL}
-                  />
-                </div>
-                {isLoading ? profileSkeletonInfoSkeleton : profileInfo}
-              </div>
-            </div>
+            {isUserLoggedIn && profileInfo}
             <div
               className={classNames(
                 layoutStyle.flowItem,
@@ -120,23 +134,7 @@ const ProfilePage: NextPage<Props> = () => {
             >
               <BookmarksAndCollectionsSection isHomepage={false} />
             </div>
-
-            <div
-              className={classNames(
-                layoutStyle.flowItem,
-                layoutStyle.fullWidth,
-                styles.actionsContainer,
-              )}
-            >
-              <div className={styles.action}>
-                <DeleteAccountButton isDisabled={isLoading} />
-              </div>
-              <div className={styles.action}>
-                <Button isDisabled={isLoading} onClick={onLogoutClicked}>
-                  {t('common:logout')}
-                </Button>
-              </div>
-            </div>
+            {isUserLoggedIn && accountActions}
           </div>
         </div>
       </div>
@@ -154,4 +152,4 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   };
 };
 
-export default withAuth(ProfilePage);
+export default ProfilePage;

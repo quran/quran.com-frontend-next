@@ -5,27 +5,15 @@
   position: relative;
 }
 
-$fallbackColor: #22a5ad;
-
 .backgroundImage {
   position: absolute;
   z-index: -1;
   inset: 0;
-  background-color: $fallbackColor;
-  background-image: url("/images/background.jpg");
+  background: var(--color-search-background), var(--color-background-elevated);
+  background-image: url("/images/background.png");
   background-size: cover;
-
-  @include theme.dark {
-    filter: saturate(0.1) brightness(0.3) contrast(1.1);
-  }
-
-  @include theme.light {
-    filter: none;
-  }
-
-  @include theme.sepia {
-    filter: sepia(1);
-  }
+  background-position: center 50%;
+  opacity: 0.2;
 }
 
 .innerContainer {
@@ -36,29 +24,15 @@ $fallbackColor: #22a5ad;
   padding-inline: var(--spacing-small);
 
   @include breakpoints.tablet {
-    max-width: calc(25 * var(--spacing-mega));
+    max-width: calc(18 * var(--spacing-mega));
   }
 
   margin-inline: auto;
+  padding-block: var(--spacing-xlarge-px);
 }
 
-.imageContainer {
-  height: calc(5 * var(--spacing-mega));
-  width: 100%;
-  max-width: calc(8 * var(--spacing-mega));
-  margin-block-end: var(--spacing-medium);
-  margin-block-start: var(--spacing-mega);
-
-  @include breakpoints.tablet {
-    margin-block-end: var(--spacing-mega);
-    margin-block-start: var(--spacing-xxsmall);
-  }
-
-  & > svg {
-    fill: var(--color-text-inverse);
-  }
-}
-
-.quickLinksContainer {
-  margin-block-start: var(--spacing-xxsmall);
+.buttonsContainer {
+  display: flex;
+  gap: var(--spacing-small);
+  margin-block-start: var(--spacing-medium);
 }

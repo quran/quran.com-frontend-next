@@ -37,6 +37,7 @@ export enum ButtonVariant {
   Ghost = 'ghost',
   Compact = 'compact',
   Outlined = 'outlined',
+  Simplified = 'simplified',
 }
 
 export type ButtonProps = {
@@ -115,7 +116,7 @@ const Button: React.FC<ButtonProps> = ({
     [styles.ghost]: variant === ButtonVariant.Ghost,
     [styles.compact]: variant === ButtonVariant.Compact,
     [styles.outlined]: variant === ButtonVariant.Outlined,
-
+    [styles.simplified]: variant === ButtonVariant.Simplified,
     [styles.disabled]: disabled || isLoading,
     [styles.noSidePadding]: !hasSidePadding,
   });

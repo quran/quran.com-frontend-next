@@ -29,6 +29,7 @@ import {
   getCoursesNavigationUrl,
   getRamadanActivitiesNavigationUrl,
   getReadingGoalNavigationUrl,
+  getWhatIsRamadanNavigationUrl,
 } from '@/utils/navigation';
 
 const PATH = getRamadanActivitiesNavigationUrl();
@@ -250,7 +251,7 @@ const PreparingForRamadanPage: NextPage = (): JSX.Element => {
                   onButtonClicked('what_is_ramadan');
                 }}
                 variant={ButtonVariant.Shadow}
-                href="/what-is-ramadan"
+                href={getWhatIsRamadanNavigationUrl()}
                 isNewTab
                 className={styles.button}
               >

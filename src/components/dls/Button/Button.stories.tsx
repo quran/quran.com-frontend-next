@@ -107,3 +107,8 @@ export const IconCircle = TemplateIcon.bind({});
 IconCircle.args = {
   shape: ButtonShape.Circle,
 };
+
+export const Simplified = Template.bind({});
+Simplified.args = {
+  variant: ButtonVariant.Simplified,
+};

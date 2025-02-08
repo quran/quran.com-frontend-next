@@ -4,7 +4,7 @@
     background: var(--color-background-elevated);
     position: relative;
     border-radius: var(--border-radius-pill);
-    box-shadow: var(--shadow-strong);
+    box-shadow: var(--shadow-small);
     width: 100%;
     margin: 0 auto;
     z-index: 1;
@@ -57,7 +57,7 @@
     width: 100%;
     z-index: 100;
     border-radius: 0 0 var(--border-radius-circle-small) var(--border-radius-circle-small);
-    box-shadow: var(--shadow-strong);
+    box-shadow: var(--shadow-small);
     ::-webkit-scrollbar {
         width: 7px;
         height: 7px;

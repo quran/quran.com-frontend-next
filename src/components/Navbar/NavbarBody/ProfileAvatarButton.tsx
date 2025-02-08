@@ -5,7 +5,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from './ProfileAvatarButton.module.scss';
 
-import Button, { ButtonShape, ButtonVariant } from '@/dls/Button/Button';
+import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import ClockIcon from '@/icons/clock.svg';
 import ArrowIcon from '@/icons/east.svg';
@@ -14,7 +14,6 @@ import LogoutIcon from '@/icons/logout.svg';
 import NotesIcon from '@/icons/notes-filled.svg';
 import NotificationBellIcon from '@/icons/notification-bell.svg';
 import IconPerson from '@/icons/person.svg';
-import TickIcon from '@/icons/tick.svg';
 import { logoutUser } from '@/utils/auth/api';
 import { isLoggedIn } from '@/utils/auth/login';
 import { removeLastSyncAt } from '@/utils/auth/userDataSync';
@@ -96,10 +95,8 @@ const ProfileAvatarButton = () => {
             href={null}
             shape={ButtonShape.Circle}
             onClick={onTriggerClicked}
-            className={styles.loggedIn}
             shouldFlipOnRTL={false}
           >
-            <TickIcon />
             <IconPerson />
           </Button>
         }
@@ -130,15 +127,16 @@ const ProfileAvatarButton = () => {
 
   return (
     <Button
-      tooltip={t('login')}
-      ariaLabel={t('login')}
-      variant={ButtonVariant.Ghost}
+      tooltip={t('sign-in')}
+      ariaLabel={t('sign-in')}
+      variant={ButtonVariant.Simplified}
+      size={ButtonSize.Small}
       href={getLoginNavigationUrl()}
-      shape={ButtonShape.Circle}
       onClick={onTriggerClicked}
       id="login-button"
+      className={styles.loginButton}
     >
-      <IconPerson />
+      {t('sign-in')}
     </Button>
   );
 };
