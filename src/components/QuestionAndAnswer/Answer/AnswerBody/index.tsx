@@ -113,7 +113,7 @@ const AnswerBody: React.FC<Props> = ({ question }) => {
                 onClick={onTwitterShareButtonClicked}
               >
                 <div className={styles.socialIcon}>
-                  <XIcon size={43} round bgStyle={BG_STYLE} />
+                  <XIcon size={40} round bgStyle={BG_STYLE} />
                 </div>
               </TwitterShareButton>
               <span>X</span>
@@ -137,7 +137,7 @@ const AnswerBody: React.FC<Props> = ({ question }) => {
                 onClick={onWhatsappShareButtonClicked}
               >
                 <div className={styles.socialIcon}>
-                  <WhatsappIcon size={43} round bgStyle={BG_STYLE} />
+                  <WhatsappIcon size={40} round bgStyle={BG_STYLE} />
                 </div>
               </WhatsappShareButton>
               <span>Whatsapp</span>
