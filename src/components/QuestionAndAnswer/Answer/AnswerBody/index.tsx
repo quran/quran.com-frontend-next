@@ -5,9 +5,8 @@ import clipboardCopy from 'clipboard-copy';
 import useTranslation from 'next-translate/useTranslation';
 import {
   FacebookShareButton,
-  FacebookIcon,
   TwitterShareButton,
-  TwitterIcon,
+  XIcon,
   WhatsappShareButton,
   WhatsappIcon,
 } from 'react-share';
@@ -16,6 +15,7 @@ import styles from './AnswerBody.module.scss';
 
 import Button, { ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import CopyLinkIcon from '@/icons/copy-link-new.svg';
+import FacebookIcon from '@/icons/fb.svg';
 import ShareIcon from '@/icons/share.svg';
 import { Question } from '@/types/QuestionsAndAnswers/Question';
 import { logButtonClick } from '@/utils/eventLogger';
@@ -113,7 +113,7 @@ const AnswerBody: React.FC<Props> = ({ question }) => {
                 onClick={onTwitterShareButtonClicked}
               >
                 <div className={styles.socialIcon}>
-                  <TwitterIcon size={43} round bgStyle={BG_STYLE} />
+                  <XIcon size={43} round bgStyle={BG_STYLE} />
                 </div>
               </TwitterShareButton>
               <span>X</span>
@@ -124,8 +124,8 @@ const AnswerBody: React.FC<Props> = ({ question }) => {
                 title={title}
                 onClick={onFacebookShareButtonClicked}
               >
-                <div className={styles.socialIcon}>
-                  <FacebookIcon size={43} round bgStyle={BG_STYLE} />
+                <div className={styles.utilityIconWrapper}>
+                  <FacebookIcon />
                 </div>
               </FacebookShareButton>
               <span>Facebook</span>
