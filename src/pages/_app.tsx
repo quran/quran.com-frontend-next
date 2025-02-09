@@ -14,7 +14,6 @@ import DeveloperUtility from '@/components/DeveloperUtility/DeveloperUtility';
 import FontPreLoader from '@/components/Fonts/FontPreLoader';
 import GlobalListeners from '@/components/GlobalListeners';
 import Navbar from '@/components/Navbar/Navbar';
-import OnboardingChecklist from '@/components/Onboarding/OnboardingChecklist';
 import { OnboardingProvider } from '@/components/Onboarding/OnboardingProvider';
 import SessionIncrementor from '@/components/SessionIncrementor';
 import ThirdPartyScripts from '@/components/ThirdPartyScripts/ThirdPartyScripts';
@@ -97,7 +96,6 @@ function MyApp({ Component, pageProps }): JSX.Element {
                       <Component {...pageProps} />
                       <AudioPlayer />
                       <Footer />
-                      <OnboardingChecklist />
                     </OnboardingProvider>
                   </ThemeProvider>
                   <SessionIncrementor />

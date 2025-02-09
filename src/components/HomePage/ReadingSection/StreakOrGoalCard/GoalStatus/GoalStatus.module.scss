@@ -1,0 +1,31 @@
+@use "src/styles/breakpoints";
+
+.header {
+    font-size: var(--font-size-small);
+    font-weight: var(--font-weight-bold);
+    @include breakpoints.tablet {
+        font-size: var(--font-size-xlarge);
+    }
+    color: var(--color-text-black);
+}
+
+.subSection {
+    color: var(--color-text-black);
+}
+
+.remainingValue {
+    font-weight: var(--font-weight-normal);
+    color: var(--color-text-gray);
+    font-size: var(--font-size-xsmall);
+    @include breakpoints.tablet {
+        font-size: var(--font-size-normal);
+    }
+}
+
+.remaining {
+    font-weight: var(--font-weight-bold);
+    font-size: var(--font-size-xsmall);
+    @include breakpoints.tablet {
+        font-size: var(--font-size-normal);
+    }
+}

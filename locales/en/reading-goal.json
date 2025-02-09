@@ -6,6 +6,7 @@
     },
     "create-plan": "Create plan",
     "create-reading-goal": "Create Goal",
+    "set-a-new-goal": "Set a new Goal",
     "daily-progress": "Daily Progress",
     "daily": {
         "description": "Your goal will reset every day",
@@ -81,15 +82,18 @@
         "range-goal": "read {{from}} to {{to}}",
         "time-goal": "read {{time}} of the Quran"
     },
+    "goal-completed": "Goal Completed! 🎉 ",
+    "daily-progress-completed": "Completed! 🎉",
     "reading-goal": "Reading Goal",
     "reading-goal-description": "Do you find it challenging to maintain consistency with your Quran reading goals?<br\/><br\/>Quran Growth Journey is a dynamic feature developed to help you remain consistent on your journey with the Quran. Whether you aim to read 10 minutes a day, complete a Juz in a month, or finish the entire Quran in a year, etc., Quran.com can now help you set a custom goal and keep track of your daily reading streaks, while adjusting as you make progress. It is completely free to use and we hope it will help you stay motivated to reach your goal!",
     "reading-goal-label": "You're on a",
     "reading-goal-title": "Introducing Quran Growth Journey",
     "recommended": "Recommended",
+    "remaining-base": "Remaining",
     "remaining": "Remaining for today",
     "remaining-days": {
-        "one": "{{days}} day remaining",
-        "other": "{{days}} days remaining"
+        "one": "<p>{{days}}</p> <span>day remaining</span>",
+        "other": "<p>{{days}}</p> <span>days remaining</span>"
     },
     "set-reading-goal-success": "Your reading goal has been set successfully.",
     "start-journey": "Start your journey!",
@@ -112,7 +116,7 @@
         "one": "{{days}} day",
         "other": "{{days}} days"
     },
-    "x-days-streak": "{{days}} day streak",
+    "x-days-streak": "<p>{{days}}</p> <span>day streak</span>",
     "x-hours": {
         "one": "{{hours}} hour",
         "other": "{{hours}} hours"

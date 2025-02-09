@@ -10,13 +10,17 @@ import VerseListItem from './VerseListItem';
 import useChapterIdsByUrlPath from '@/hooks/useChapterId';
 import { selectLastReadVerseKey } from '@/redux/slices/QuranReader/readingTracker';
 import SearchQuerySource from '@/types/SearchQuerySource';
-import { logEmptySearchResults, logTextSearchQuery } from '@/utils/eventLogger';
+import { logButtonClick, logEmptySearchResults, logTextSearchQuery } from '@/utils/eventLogger';
 import { toLocalizedNumber } from '@/utils/locale';
 import { getChapterWithStartingVerseUrl } from '@/utils/navigation';
 import { generateChapterVersesKeys, getVerseNumberFromKey } from '@/utils/verse';
 import DataContext from 'src/contexts/DataContext';
 
-const VerseList = () => {
+type Props = {
+  onAfterNavigationItemRouted?: () => void;
+};
+
+const VerseList: React.FC<Props> = ({ onAfterNavigationItemRouted }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const { t, lang } = useTranslation('common');
   const lastReadVerseKey = useSelector(selectLastReadVerseKey);
@@ -63,15 +67,39 @@ const VerseList = () => {
     }
   }, [searchQuery, filteredVerseKeys]);
 
+  const navigateAndHandleAfterNavigation = (href: string) => {
+    router
+      .push(href, undefined, {
+        shallow: true, // preserve the shallow routing option
+      })
+      .then(() => {
+        if (onAfterNavigationItemRouted) {
+          onAfterNavigationItemRouted();
+        }
+      });
+  };
+
   // Handle when user press `Enter` in input box
   const handleVerseInputSubmit = (e) => {
     e.preventDefault();
     const firstFilteredVerseKey = filteredVerseKeys[0];
     if (firstFilteredVerseKey) {
-      router.push(getChapterWithStartingVerseUrl(firstFilteredVerseKey), undefined, {
-        shallow: true, // https://nextjs.org/docs/routing/shallow-routing
-      });
+      const href = getChapterWithStartingVerseUrl(firstFilteredVerseKey);
+      navigateAndHandleAfterNavigation(href);
     }
+  };
+
+  const handleVerseClick = (e: React.MouseEvent, verseKey: string) => {
+    e.preventDefault();
+    const href = getChapterWithStartingVerseUrl(verseKey);
+    navigateAndHandleAfterNavigation(href);
+    logButtonClick(`navigation_list_verse`, {
+      verseKey,
+    });
+  };
+
+  const onSearchQueryChange = (e) => {
+    setSearchQuery(e.target.value);
   };
 
   return (
@@ -79,16 +107,20 @@ const VerseList = () => {
       <form onSubmit={handleVerseInputSubmit}>
         <input
           value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
+          onChange={onSearchQueryChange}
           className={styles.searchInput}
-          placeholder={t('verse')}
+          placeholder={t('sidebar.search-verse')}
         />
       </form>
       <div className={styles.listContainer}>
         <div className={styles.list}>
-          {filteredVerseKeys.map((verseKey) => {
-            return <VerseListItem verseKey={verseKey} key={verseKey} />;
-          })}
+          {filteredVerseKeys.map((verseKey) => (
+            <VerseListItem
+              verseKey={verseKey}
+              key={verseKey}
+              onVerseClick={(e) => handleVerseClick(e, verseKey)}
+            />
+          ))}
         </div>
       </div>
     </div>

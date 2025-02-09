@@ -9,7 +9,11 @@ import { selectLastReadVerseKey } from '@/redux/slices/QuranReader/readingTracke
 import { getJuzIds, getJuzNumberByHizb } from '@/utils/juz';
 import { getJuzNavigationUrl } from '@/utils/navigation';
 
-const JuzSelection = () => {
+type Props = {
+  onAfterNavigationItemRouted?: () => void;
+};
+
+const JuzSelection: React.FC<Props> = ({ onAfterNavigationItemRouted }) => {
   const { t, lang } = useTranslation('common');
   const juzIds = getJuzIds(lang);
   const lastReadVerseKey = useSelector(selectLastReadVerseKey);
@@ -25,6 +29,7 @@ const JuzSelection = () => {
       searchPlaceholder={t('sidebar.search-juz')}
       renderItem={(juz) => `${t('juz')} ${juz.label}`}
       selectedItem={selectedJuz}
+      onAfterNavigationItemRouted={onAfterNavigationItemRouted}
     />
   );
 };

@@ -1,31 +1,24 @@
-@use "src/styles/breakpoints";
-@use "src/styles/theme";
-
-$link-shadow: 0px 3px 11px 1px rgb(0 0 0 / 3%);
-
-.header {
-  margin-block-end: var(--spacing-xsmall);
-  padding-inline-start: var(--flow-side-spacing, var(--spacing-small));
+.quickLink {
+  background-color: var(--color-topics-grey);
+  padding: var(--spacing-small);
+  min-width: max-content;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }
 
-.quickLinksContainer {
-  width: 100%;
+.container {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  overflow-x: auto;
-  margin-inline: auto;
-  &::-webkit-scrollbar {
-    -webkit-appearance: none;
-    height: 0;
-  }
+  width: 100%;
+  gap: var(--spacing-xsmall);
+  padding-block: var(--spacing-small);
 }
 
-.link {
-  margin-inline: var(--spacing-xxsmall);
-  margin-block-end: var(--spacing-xxsmall);
-  &:hover {
-    box-shadow: var(--shadow-large);
-    color: var(--color-text-inverse);
-  }
+.quickLinkText {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--spacing-small);
+  font-size: var(--font-size-xsmall);
 }

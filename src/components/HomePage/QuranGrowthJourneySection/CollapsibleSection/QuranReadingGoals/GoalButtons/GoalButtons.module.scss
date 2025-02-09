@@ -1,9 +1,0 @@
-.actionsContainer {
-    padding-block-start: var(--spacing-xxsmall);
-    display: flex;
-    align-items: center;
-
-    & > :first-child {
-        margin-inline-end: var(--spacing-xxsmall);
-    }
-}
