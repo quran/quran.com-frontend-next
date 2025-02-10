@@ -12,6 +12,7 @@ import { postReflectionViews } from '@/utils/auth/qf/api';
 import {
   makeAyahReflectionsUrl,
   postReflectionViews as postReflectionViewsToQuranReflect,
+  REFLECTION_POST_TYPE_ID,
 } from '@/utils/quranReflect/apiPaths';
 import AyahReflectionsResponse from 'types/QuranReflect/AyahReflectionsResponse';
 
@@ -84,6 +85,8 @@ const ReflectionBodyContainer = ({
         surahId: selectedChapterId,
         ayahNumber: selectedVerseNumber,
         locale: lang,
+        reviewed: true,
+        postTypeIds: [REFLECTION_POST_TYPE_ID],
       })}
       render={renderBody}
     />

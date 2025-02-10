@@ -25,7 +25,11 @@ import {
   getVerseReflectionNavigationUrl,
   scrollWindowToTop,
 } from '@/utils/navigation';
-import { getAyahReflections, makeAyahReflectionsUrl } from '@/utils/quranReflect/apiPaths';
+import {
+  getAyahReflections,
+  makeAyahReflectionsUrl,
+  REFLECTION_POST_TYPE_ID,
+} from '@/utils/quranReflect/apiPaths';
 import {
   REVALIDATION_PERIOD_ON_ERROR_SECONDS,
   ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
@@ -119,6 +123,8 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
       surahId: chapterNumber,
       ayahNumber: verseNumber,
       locale,
+      reviewed: true,
+      postTypeIds: [REFLECTION_POST_TYPE_ID],
     });
 
     const mushafId = getMushafId(quranFont, mushafLines).mushaf;
