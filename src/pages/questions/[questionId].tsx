@@ -43,7 +43,7 @@ const QuestionPage: NextPage<QuestionPageProps> = ({ hasError, questionId, quest
   return (
     <>
       <NextSeoWrapper
-        title={body}
+        title={t('quran-reader:q-and-a.explore_answers')}
         image={getExploreAnswersOgImageUrl({
           locale: lang,
         })}
