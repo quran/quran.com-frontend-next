@@ -54,11 +54,7 @@ const VoiceSearchBodyContainer: React.FC<Props> = ({ isCommandBar = false }) => 
           [styles.container]: !isCommandBar,
         })}
       >
-        <Error
-          isCommandBar={isCommandBar}
-          error={error}
-          isWaitingForPermission={isWaitingForPermission}
-        />
+        <Error error={error} isWaitingForPermission={isWaitingForPermission} />
       </div>
     );
   }

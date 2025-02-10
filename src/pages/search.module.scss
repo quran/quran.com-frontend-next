@@ -7,36 +7,17 @@ $tablet-max-width: 50rem;
 
   // TODO: remove this when we remove banner
   @include breakpoints.smallerThanTablet {
-    padding-block-start: calc(var(--spacing-medium) + var(--banner-height));
+    padding-block-start: calc(var(--spacing-micro) + var(--banner-height));
   }
 
   margin-block-end: calc(2 * var(--spacing-mega));
 }
 
-.paginationContainer {
-  min-height: calc(2 * var(--spacing-mega));
-}
-
 .searchInputContainer {
-  border: 1px solid var(--color-borders-hairline);
-  border-radius: var(--border-radius-pill);
-  padding-block-start: var(--spacing-xxsmall);
-  padding-block-end: var(--spacing-xxsmall);
   padding-inline-start: var(--spacing-xsmall);
   padding-inline-end: var(--spacing-xsmall);
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  height: var(--spacing-large);
-  margin-block-start: var(--spacing-medium);
-  margin-block-end: var(--spacing-medium);
   margin-inline-start: auto;
   margin-inline-end: auto;
-}
-
-.rtlFlexDirection {
-  flex-direction: row-reverse;
 }
 
 .searchInput {
@@ -62,63 +43,9 @@ $tablet-max-width: 50rem;
 }
 
 .searchBodyContainer {
-  box-sizing: border-box;
-  padding-inline: var(--spacing-small);
-  max-width: 50rem;
-}
-
-.filtersContainer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  @include breakpoints.tablet {
-    margin-inline: var(--spacing-large);
-  }
-  margin-block: var(--spacing-xsmall);
-}
-
-.headerInnerContainer {
-  padding-inline: calc(1.5 * var(--spacing-medium));
-  @include breakpoints.tablet {
-    padding-inline: calc(2 * var(--spacing-mega));
-  }
-  max-width: $tablet-max-width;
-  margin-inline: auto;
-}
-
-.headerOuterContainer {
-  border-block-end: 1px solid var(--color-borders-hairline);
-  margin-block-end: var(--spacing-medium);
-}
-
-.filterButton {
-  margin-inline-end: var(--spacing-medium);
+  padding-block-start: var(--spacing-small);
 }
 
 .searching {
   font-weight: var(--font-weight-bold);
-}
-
-.languagePopover,
-.translationPopover {
-  display: inline-block;
-}
-
-.translationFilterContainer {
-  min-width: calc(10 * var(--spacing-mega));
-}
-.filterButton,
-.resetButton {
-  text-transform: uppercase;
-}
-
-.modalContainer {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.translationSearchContainer {
-  flex: 1;
-  margin-inline-end: var(--spacing-small);
 }

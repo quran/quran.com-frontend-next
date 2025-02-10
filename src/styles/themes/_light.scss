@@ -49,6 +49,7 @@
   --color-borders-hairline: rgb(235, 238, 240);
 
   --color-highlight: #79ffe1;
+  --color-highlight-dark: #22a5ad;
 
   --shadow-small: 0px 2px 4px rgba(0, 0, 0, 0.1);
   --shadow-normal: 0px 4px 8px rgba(0, 0, 0, 0.12);
@@ -57,6 +58,7 @@
   --shadow-jumbo: 0 30px 60px rgba(0, 0, 0, 0.12);
   --shadow-hover: 0 30px 60px rgba(0, 0, 0, 0.12);
   --shadow-sticky: 0 12px 10px -10px rgba(0, 0, 0, 0.12);
+  --shadow-strong: 0px 4px 4px 0px rgba(0, 0, 0, 0.5);
   font-palette: --Light;
 
   // scrollbar styles

@@ -14,27 +14,38 @@ import CommandControl from './CommandControl';
 import styles from './CommandList.module.scss';
 import CommandPrefix from './CommandPrefix';
 
+import SearchResultsHeader from '@/components/Search/SearchResults/SearchResultsHeader';
 import useScroll, { SMOOTH_SCROLL_TO_CENTER } from '@/hooks/useScrollToElement';
 import {
   addRecentNavigation,
   removeRecentNavigation,
-  setIsOpen,
+  setIsExpanded,
 } from '@/redux/slices/CommandBar/state';
+import SearchQuerySource from '@/types/SearchQuerySource';
 import { logButtonClick } from '@/utils/eventLogger';
-import { resolveUrlBySearchNavigationType } from '@/utils/navigation';
-import { SearchNavigationResult } from 'types/SearchNavigationResult';
+import { getSearchQueryNavigationUrl, resolveUrlBySearchNavigationType } from '@/utils/navigation';
+import { getResultType } from '@/utils/search';
+import { SearchNavigationResult, SearchNavigationType } from 'types/Search/SearchNavigationResult';
 
 export interface Command extends SearchNavigationResult {
   group: string;
+  name: string;
   index?: number;
   isClearable?: boolean;
+  isVoiceSearch?: boolean;
 }
 
 interface Props {
   commandGroups: { groups: Record<string, Command[]>; numberOfCommands: number };
+  searchQuery?: string;
 }
 
-const CommandsList: React.FC<Props> = ({ commandGroups: { groups, numberOfCommands } }) => {
+export const RESULTS_GROUP = 'results';
+
+const CommandsList: React.FC<Props> = ({
+  commandGroups: { groups, numberOfCommands },
+  searchQuery,
+}) => {
   const { t } = useTranslation('common');
   const [scrollToSelectedCommand, selectedItemRef]: [() => void, RefObject<HTMLLIElement>] =
     useScroll(SMOOTH_SCROLL_TO_CENTER);
@@ -77,7 +88,7 @@ const CommandsList: React.FC<Props> = ({ commandGroups: { groups, numberOfComman
       const { name, resultType, key } = command;
       router.push(resolveUrlBySearchNavigationType(resultType, key)).then(() => {
         dispatch({ type: addRecentNavigation.type, payload: { name, resultType, key } });
-        dispatch({ type: setIsOpen.type, payload: false });
+        dispatch({ type: setIsExpanded.type, payload: false });
       });
     },
     [dispatch, router],
@@ -103,19 +114,17 @@ const CommandsList: React.FC<Props> = ({ commandGroups: { groups, numberOfComman
   useHotkeys(
     'enter',
     () => {
-      let navigateTo = null;
-      Object.keys(groups).forEach((commandGroup) => {
-        const selectedCommand = groups[commandGroup].find(
-          (command) => command.index === selectedCommandIndex,
-        );
-        if (selectedCommand) {
-          navigateTo = selectedCommand;
-        }
+      router.push(getSearchQueryNavigationUrl(searchQuery)).then(() => {
+        navigateToLink({
+          name: searchQuery,
+          resultType: SearchNavigationType.SEARCH_PAGE,
+          key: searchQuery,
+          group: RESULTS_GROUP,
+        });
       });
-      navigateToLink(navigateTo);
     },
-    { enabled: selectedCommandIndex !== null, enableOnFormTags: ['INPUT'] },
-    [selectedCommandIndex, groups, navigateToLink],
+    { enabled: !!searchQuery, enableOnFormTags: ['INPUT'] },
+    [searchQuery, navigateToLink, router],
   );
   const onRemoveCommandClicked = (
     event: MouseEvent<Element>,
@@ -127,13 +136,21 @@ const CommandsList: React.FC<Props> = ({ commandGroups: { groups, numberOfComman
     dispatch({ type: removeRecentNavigation.type, payload: navigationItemKey });
   };
 
+  const onSearchResultsHeaderClicked = () => {
+    navigateToLink({
+      name: searchQuery,
+      resultType: SearchNavigationType.SEARCH_PAGE,
+      key: searchQuery,
+      group: RESULTS_GROUP,
+    });
+  };
+
   if (numberOfCommands === 0) {
     return <p className={styles.noResult}>{t('command-bar.no-nav-results')}</p>;
   }
   return (
     <ul role="listbox">
       <div
-        className={styles.highlight}
         style={{
           transform: highlightOffset ? `translateY(${highlightOffset}px)` : `translateY(100%)`,
         }}
@@ -142,29 +159,41 @@ const CommandsList: React.FC<Props> = ({ commandGroups: { groups, numberOfComman
         {Object.keys(groups).map((commandGroup) => {
           return (
             <div key={commandGroup}>
-              <div className={styles.groupHeader} id={commandGroup}>
-                {commandGroup}
-              </div>
+              {commandGroup === RESULTS_GROUP ? (
+                <SearchResultsHeader
+                  searchQuery={searchQuery}
+                  source={SearchQuerySource.CommandBar}
+                  onSearchResultClicked={onSearchResultsHeaderClicked}
+                />
+              ) : (
+                <div className={styles.groupHeader} id={commandGroup}>
+                  {commandGroup}
+                </div>
+              )}
               <ul role="group" aria-labelledby={commandGroup}>
                 {groups[commandGroup].map((command) => {
-                  const { name, resultType } = command;
-                  const isSelected = selectedCommandIndex === command.index;
+                  const { name, key, index, isVoiceSearch } = command;
+                  const isSelected = selectedCommandIndex === index;
                   return (
                     <li
                       ref={isSelected ? selectedItemRef : null}
                       role="option"
                       aria-selected={isSelected}
-                      key={command.index}
+                      key={index}
                       className={classNames(styles.command, { [styles.selected]: isSelected })}
                       onClick={() => navigateToLink(command)}
-                      onMouseOver={() => setSelectedCommandIndex(command.index)}
+                      onMouseOver={() => setSelectedCommandIndex(index)}
                     >
-                      <CommandPrefix name={name} type={resultType} />
+                      <CommandPrefix
+                        isVoiceSearch={isVoiceSearch}
+                        name={name}
+                        type={getResultType(command)}
+                      />
                       <div className={styles.keyboardInputContainer}>
                         <CommandControl
                           isClearable={command.isClearable}
                           isSelected={isSelected}
-                          commandKey={command.key}
+                          commandKey={key}
                           onRemoveCommandClicked={onRemoveCommandClicked}
                         />
                       </div>
