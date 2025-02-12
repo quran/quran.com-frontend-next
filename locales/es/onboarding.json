@@ -87,10 +87,6 @@
       "description": "Elige entre una variedad de traducciones en varios idiomas. Consejo: selecciona varias opciones para comparar las traducciones.",
       "title": "Traducciones."
     },
-    "voice-search": {
-      "description": "Toca el icono del micrófono y recita el verso que buscas. ¡Consejo rápido! Descubre que parte se está recitando al tocar el icono del micrófono (como en la oración de Taraweeh). Después de detectar uno o dos versos, presiona \"parar\" para encontrar la ubicación.",
-      "title": "Búsqueda por voz (Tarteel)"
-    },
     "wbw-audio": {
       "description": "¡Selecciona esta opción para escuchar cada palabra individualmente simplemente haciendo clic en la palabra!",
       "title": "Haz clic en la palabra para escuchar la transliteración palabra por palabra."

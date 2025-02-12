@@ -103,7 +103,6 @@
     "navigations": "Navigasyonlar",
     "no-nav-results": "Navigasyon sonucu yok",
     "placeholder": "Ne okumak istersiniz?",
-    "powered-by": "Tarteel.ai tarafından desteklenen sesli arama",
     "recent-navigations": "Son gezinmeler",
     "search-by-voice": "Sesle ara",
     "try-navigating": "Gezinmeyi deneyin"
@@ -361,10 +360,6 @@
     "tafsir-desc": "{{tafsirName}} {{verseNumber}} Suresi {{surahName}} için {{tafsirName}} okuyun",
     "tafsirs-desc": "{{ayahNumber}} {{surahName}} tefsirlerini güvenilir tefsir alimleri tarafından okuyun",
     "title": "Tefsir"
-  },
-  "tarteel": {
-    "app": "Tarteel uygulaması",
-    "name": "Tarteel.ai"
   },
   "terms-and-conditions": "Şartlar ve koşullar",
   "theme": "Tema",

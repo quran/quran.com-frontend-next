@@ -40,7 +40,6 @@ import revelationOrder from './slices/revelationOrder';
 import search from './slices/Search/search';
 import session from './slices/session';
 import theme from './slices/theme';
-import voiceSearch from './slices/voiceSearch';
 import welcomeMessage from './slices/welcomeMessage';
 import SliceName from './types/SliceName';
 
@@ -87,7 +86,6 @@ export const rootReducer = combineReducers({
   readingTracker,
   commandBar: persistReducer(commandBarPersistConfig, commandBar),
   welcomeMessage,
-  voiceSearch,
   defaultSettings,
   fontFaces,
   sidebarNavigation,

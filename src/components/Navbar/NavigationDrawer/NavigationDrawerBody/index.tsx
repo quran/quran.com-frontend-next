@@ -19,9 +19,7 @@ import QuranReflect from '@/icons/QR.svg';
 import IconQuestionMark from '@/icons/question-mark.svg';
 import IconRadio2 from '@/icons/radio-2.svg';
 import IconRadio from '@/icons/radio.svg';
-import Tarteel from '@/icons/tarteel.svg';
 // import MobileApps from '../MobileApps';
-import { logTarteelLinkClick } from '@/utils/eventLogger';
 
 // import IconDonate from '@/icons/donate.svg';
 // import IconUpdates from '@/icons/updates.svg';
@@ -106,15 +104,6 @@ const NavigationDrawerBody = () => {
         icon={<QuranReflect />}
         href="https://quranreflect.com/"
         isExternalLink
-      />
-      <NavigationDrawerItem
-        onClick={() => {
-          logTarteelLinkClick('navigation_menu_network');
-        }}
-        isExternalLink
-        title={t('tarteel.name')}
-        icon={<Tarteel />}
-        href="https://download.tarteel.ai/"
       />
     </div>
   );

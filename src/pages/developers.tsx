@@ -28,12 +28,7 @@ const DevelopersPage = () => {
           <CommunitySection />
           <p>{t('main-desc')}</p>
           <p>
-            <Trans
-              i18nKey="developers:sub-main-desc"
-              components={[
-                <a key={0} href="https://tarteel.ai" target="_blank" rel="noreferrer" />,
-              ]}
-            />
+            <Trans i18nKey="developers:sub-main-desc" />
           </p>
           <p>
             <Trans

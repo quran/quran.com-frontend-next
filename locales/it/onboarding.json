@@ -87,10 +87,6 @@
       "description": "Scegli tra una varietà di traduzioni in più lingue. Suggerimento: confronta le traduzioni selezionando più opzioni",
       "title": "Traduzioni"
     },
-    "voice-search": {
-      "description": "Tocca l'icona del microfono e recita il versetto che stai cercando. Consiglio rapido! Per scoprire dove qualcuno sta recitando (ad esempio le preghiere di Taraweeh), tocca l'icona del microfono. Dopo aver rilevato uno o due versetti, premere stop per trovare la posizione",
-      "title": "Ricerca vocale (Tarteel)"
-    },
     "wbw-audio": {
       "description": "Seleziona questa opzione per ascoltare ogni parola individualmente semplicemente cliccando sulla parola!",
       "title": "Ascolta la traslitterazione parola per parola cliccando sulla parola"

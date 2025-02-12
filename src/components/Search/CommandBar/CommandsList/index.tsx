@@ -32,7 +32,6 @@ export interface Command extends SearchNavigationResult {
   name: string;
   index?: number;
   isClearable?: boolean;
-  isVoiceSearch?: boolean;
 }
 
 interface Props {
@@ -172,7 +171,7 @@ const CommandsList: React.FC<Props> = ({
               )}
               <ul role="group" aria-labelledby={commandGroup}>
                 {groups[commandGroup].map((command) => {
-                  const { name, key, index, isVoiceSearch } = command;
+                  const { name, key, index } = command;
                   const isSelected = selectedCommandIndex === index;
                   return (
                     <li
@@ -184,11 +183,7 @@ const CommandsList: React.FC<Props> = ({
                       onClick={() => navigateToLink(command)}
                       onMouseOver={() => setSelectedCommandIndex(index)}
                     >
-                      <CommandPrefix
-                        isVoiceSearch={isVoiceSearch}
-                        name={name}
-                        type={getResultType(command)}
-                      />
+                      <CommandPrefix name={name} type={getResultType(command)} />
                       <div className={styles.keyboardInputContainer}>
                         <CommandControl
                           isClearable={command.isClearable}
