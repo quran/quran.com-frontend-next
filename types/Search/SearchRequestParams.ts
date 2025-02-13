@@ -11,7 +11,6 @@ interface AdvancedSearchRequestParams {
 
 interface QuickSearchRequestParams {
   indexes?: string;
-  disableHighlighting?: SearchBoolean;
 }
 
 export type SearchRequestParams<Mode extends SearchMode> = {
@@ -19,10 +18,11 @@ export type SearchRequestParams<Mode extends SearchMode> = {
   query: string;
   size?: number;
   page?: number;
+  perPage?: number;
   getText?: SearchBoolean;
-  filterTranslations?: string;
-  filterLanguages?: string;
+  translationIds?: string;
   fields?: string;
   translationFields?: string;
   words?: boolean;
+  highlight?: SearchBoolean;
 } & (Mode extends SearchMode.Advanced ? AdvancedSearchRequestParams : QuickSearchRequestParams);

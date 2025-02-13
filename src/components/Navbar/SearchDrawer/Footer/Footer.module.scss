@@ -1,8 +1,5 @@
 .container {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  font-size: var(--font-size-xsmall-dangerous);
+  padding-block-end: var(--spacing-mega);
 }
 
 .betaContainer {

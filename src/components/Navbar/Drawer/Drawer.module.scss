@@ -30,6 +30,9 @@
       inset-inline-end: calc(-1 * constants.$side-menu-desktop-width);
     }
   }
+  &.noTransition {
+    transition: none;
+  }
 }
 
 .containerOpen {

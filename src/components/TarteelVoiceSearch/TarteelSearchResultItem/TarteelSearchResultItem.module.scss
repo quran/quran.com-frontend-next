@@ -10,6 +10,7 @@
   margin-inline-end: 0;
   em {
     font-weight: var(--font-weight-semibold);
+    text-decoration: underline;
   }
 }
 
@@ -24,12 +25,6 @@
   border-radius: var(--border-radius-default);
   margin-inline-start: auto;
   margin-inline-end: auto;
-}
-
-.quranTextContainer {
-}
-
-.verseLink {
 }
 
 .quranTextResult {

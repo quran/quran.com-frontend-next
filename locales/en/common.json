@@ -255,6 +255,7 @@
   "pagination-summary": "{{currentResultNumber}}-{{endOfResultNumber}} of {{totalNumberOfResults}} search results",
   "pbuh": "Blessings of Allah be upon him",
   "popular-links": "Popular Links",
+  "search-results-no-count": "Search Results",
   "popup": {
     "companion-title": "Dear Companion of the Quran,",
     "footnote": "Monthly donations allow us to focus less on fundraising",
@@ -307,7 +308,8 @@
     "results": "results",
     "show-all": "Show all results",
     "switch-mode": "Switch to Advanced Search",
-    "title": "Search"
+    "title": "Search",
+    "more-results": "More results"
   },
   "seconds": "Seconds",
   "see-new": "See What's New",
@@ -400,9 +402,9 @@
   "view": "View",
   "voice": {
     "ask-permission": "Please enable microphone permission to start using Voice Search",
-    "error": "An error has occurred, please try again later. Or download the ",
-    "no-permission": "It looks like you do not have the microphone permissions enabled. Please enable the microphone permissions and try again or download the ",
-    "not-supported": "It looks like your browser does not support microphone. Please try a different browser or download the ",
+    "error": "An error has occurred, please try again later.",
+    "no-permission": "It looks like you do not have the microphone permissions enabled. Please enable the microphone permissions and try again.",
+    "not-supported": "It looks like your browser does not support microphone. Please try a different browser.",
     "suggest": "Please begin reciting and your verse will appear.",
     "suggest-subtitle": "Recite any verse in Arabic, and the verse will appear",
     "suggest-title": "Recite now",
