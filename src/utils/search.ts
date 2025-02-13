@@ -211,11 +211,13 @@ export const addToSearchHistory = (
  *
  * @param {string} query
  * @param {number} perPage
+ * @param {string[]} selectedTranslationIds
  * @returns {SearchRequestParams<SearchMode.Quick>}
  */
 export const getQuickSearchQuery = (
   query: string,
   perPage = 10,
+  selectedTranslationIds: string[] = [],
 ): SearchRequestParams<SearchMode.Quick> => {
   return {
     mode: SearchMode.Quick,
@@ -223,6 +225,7 @@ export const getQuickSearchQuery = (
     getText: 1,
     highlight: 1,
     perPage,
+    translationIds: selectedTranslationIds.join(','),
   };
 };
 
@@ -232,12 +235,14 @@ export const getQuickSearchQuery = (
  * @param {string} query
  * @param {number} page
  * @param {number} pageSize
+ * @param {string[]} selectedTranslationIds
  * @returns {SearchRequestParams<SearchMode.Advanced>}
  */
 export const getAdvancedSearchQuery = (
   query: string,
   page: number,
   pageSize: number,
+  selectedTranslationIds: string[] = [],
 ): SearchRequestParams<SearchMode.Advanced> => {
   return {
     mode: SearchMode.Advanced,
@@ -247,6 +252,7 @@ export const getAdvancedSearchQuery = (
     exactMatchesOnly: 0,
     getText: 1,
     highlight: 1,
+    translationIds: selectedTranslationIds.join(','),
   };
 };
 
