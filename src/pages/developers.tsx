@@ -28,9 +28,6 @@ const DevelopersPage = () => {
           <CommunitySection />
           <p>{t('main-desc')}</p>
           <p>
-            <Trans i18nKey="developers:sub-main-desc" />
-          </p>
-          <p>
             <Trans
               i18nKey="developers:projects.all"
               components={[
