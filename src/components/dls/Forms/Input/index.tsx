@@ -7,6 +7,7 @@ import React, {
   RefObject,
   KeyboardEvent,
   HTMLAttributes,
+  InputHTMLAttributes,
 } from 'react';
 
 import classNames from 'classnames';
@@ -49,6 +50,7 @@ interface Props {
   onClick?: () => void;
   onKeyDown?: (event: KeyboardEvent<HTMLInputElement>) => void;
   inputMode?: HTMLAttributes<HTMLInputElement>['inputMode'];
+  enterKeyHint?: InputHTMLAttributes<HTMLInputElement>['enterKeyHint'];
   value?: string;
   label?: string | JSX.Element;
   type?: InputType;
@@ -80,6 +82,7 @@ const Input: React.FC<Props> = ({
   onKeyDown,
   onClick,
   inputMode,
+  enterKeyHint,
   value = '',
   shouldFlipOnRTL = true,
   containerClassName,
@@ -167,6 +170,7 @@ const Input: React.FC<Props> = ({
           value={inputValue}
           onKeyDown={onKeyDown}
           inputMode={inputMode}
+          enterKeyHint={enterKeyHint}
           {...(placeholder && { placeholder })}
           {...(name && { name })}
         />
