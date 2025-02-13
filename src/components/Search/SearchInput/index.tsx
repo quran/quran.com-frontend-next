@@ -111,6 +111,8 @@ const SearchInput: React.FC<Props> = ({
           prefix={<SearchIcon />}
           prefixSuffixContainerClassName={styles.prefixSuffixContainer}
           containerClassName={styles.input}
+          htmlType="search"
+          enterKeyHint="search"
           suffix={
             <>
               <KeyboardInput meta keyboardKey="K" />
