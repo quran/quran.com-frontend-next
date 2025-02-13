@@ -26,11 +26,11 @@ export type CircularProgressbarDefaultProps = {
   backgroundPadding: number;
   circleRatio: number;
   classes: {
-    root: string;
+    root?: string;
     trail: string;
     path: string;
     text: string;
-    background: string;
+    background?: string;
   };
   className: string;
   counterClockwise: boolean;

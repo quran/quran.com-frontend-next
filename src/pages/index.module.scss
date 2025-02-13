@@ -63,3 +63,19 @@ $list-max-width: 80rem;
     }
   }
 }
+
+.homepageCard {
+  padding-block: var(--spacing-small-px);
+  @include breakpoints.smallerThanTablet {
+    padding-inline: var(--spacing-small-px);
+    margin-inline: var(--spacing-small-px);
+  }
+}
+
+.mobileOnly {
+  @include utility.mobileOnly;
+}
+
+.bodyContainer {
+  background: var(--color-background-elevated);
+}
