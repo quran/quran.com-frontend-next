@@ -13,6 +13,7 @@ import CommunitySection from '@/components/HomePage/CommunitySection';
 import ExploreTopicsSection from '@/components/HomePage/ExploreTopicsSection';
 import HomePageHero from '@/components/HomePage/HomePageHero';
 import LearningPlansSection from '@/components/HomePage/LearningPlansSection';
+import MobileHomepageSections from '@/components/HomePage/MobileHomepageSections';
 import QuranGrowthJourneySection from '@/components/HomePage/QuranGrowthJourneySection';
 import ReadingSection from '@/components/HomePage/ReadingSection';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
@@ -20,6 +21,7 @@ import { isLoggedIn } from '@/utils/auth/login';
 import { getAllChaptersData } from '@/utils/chapter';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl } from '@/utils/navigation';
+import { isMobile } from '@/utils/responsive';
 import { ChaptersResponse } from 'types/ApiResponses';
 import ChaptersData from 'types/ChaptersData';
 
@@ -48,29 +50,50 @@ const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }): JSX.El
             <div className={classNames(styles.flowItem, styles.fullWidth, styles.homepageCard)}>
               <ReadingSection />
             </div>
-            {isUserLoggedIn ? (
-              <>
-                <div className={classNames(styles.flowItem, styles.fullWidth, styles.homepageCard)}>
-                  <LearningPlansSection />
-                </div>
-                <div className={classNames(styles.flowItem, styles.fullWidth, styles.homepageCard)}>
-                  <ExploreTopicsSection />
-                </div>
-              </>
+            {isMobile() ? (
+              <MobileHomepageSections isUserLoggedIn={isUserLoggedIn} />
             ) : (
               <>
-                <div className={classNames(styles.flowItem, styles.fullWidth, styles.homepageCard)}>
-                  <ExploreTopicsSection />
-                </div>
-                <div className={classNames(styles.flowItem, styles.fullWidth, styles.homepageCard)}>
-                  <LearningPlansSection />
-                </div>
+                {isUserLoggedIn ? (
+                  <>
+                    <div
+                      className={classNames(styles.flowItem, styles.fullWidth, styles.homepageCard)}
+                    >
+                      <LearningPlansSection />
+                    </div>
+                    <div
+                      className={classNames(styles.flowItem, styles.fullWidth, styles.homepageCard)}
+                    >
+                      <ExploreTopicsSection />
+                    </div>
+                    <div
+                      className={classNames(styles.flowItem, styles.fullWidth, styles.homepageCard)}
+                    >
+                      <CommunitySection />
+                    </div>
+                  </>
+                ) : (
+                  <>
+                    <div
+                      className={classNames(styles.flowItem, styles.fullWidth, styles.homepageCard)}
+                    >
+                      <ExploreTopicsSection />
+                    </div>
+                    <div
+                      className={classNames(styles.flowItem, styles.fullWidth, styles.homepageCard)}
+                    >
+                      <LearningPlansSection />
+                    </div>
+                    <div
+                      className={classNames(styles.flowItem, styles.fullWidth, styles.homepageCard)}
+                    >
+                      <CommunitySection />
+                    </div>
+                  </>
+                )}
               </>
             )}
 
-            <div className={classNames(styles.flowItem, styles.fullWidth, styles.homepageCard)}>
-              <CommunitySection />
-            </div>
             <div
               className={classNames(
                 styles.flowItem,

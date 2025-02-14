@@ -18,7 +18,14 @@
     justify-content: space-between;
     @include breakpoints.smallerThanTablet {
         align-items: center;
-        width: 75%;
+        width: 100%;
+    }
+}
+
+.chapterCard {
+    @include breakpoints.smallerThanTablet {
+        padding: calc(var(--spacing-small-px) + var(--spacing-micro-px)) var(--spacing-small-px)
+            calc(var(--spacing-small-px) + var(--spacing-micro-px)) var(--spacing-medium-px);
     }
 }
 

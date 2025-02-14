@@ -43,6 +43,9 @@
 
 .cardDescription {
     color: var(--color-text-faded-new);
+    @include breakpoints.smallerThanTablet {
+        font-size: var(--font-size-small);
+    }
 }
 
 .qrIcons {
@@ -71,4 +74,10 @@
     }
     display: flex;
     flex-direction: column;
+}
+
+.title {
+    @include breakpoints.smallerThanTablet {
+        font-size: var(--font-size-normal);
+    }
 }

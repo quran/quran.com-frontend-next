@@ -55,9 +55,6 @@
 }
 
 .cardOuterContainer {
-    @include breakpoints.smallerThanTablet {
-        justify-content: center;
-    }
     justify-content: space-between;
     display: flex;
     flex-direction: row;
@@ -69,6 +66,9 @@
 
 .streakCard {
     background-color: var(--color-streaks-light);
+    @include breakpoints.smallerThanTablet {
+        padding: var(--spacing-small-px) var(--spacing-small-px) var(--spacing-small-px) var(--spacing-medium-px);
+    }
 }
 
 .readingSectionContainer {

@@ -41,7 +41,7 @@ const ChapterCard: React.FC<Props> = ({
   };
 
   return (
-    <Card>
+    <Card className={styles.chapterCard}>
       <div className={styles.surahContainer}>
         <div className={styles.surahName}>{surahNumberString.padStart(3, '0')}</div>
         <div className={styles.surahInfo}>
