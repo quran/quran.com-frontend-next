@@ -133,6 +133,14 @@ export const getVerseReflectionNavigationUrl = (verseKey: string): string =>
   `/${verseKey}/reflections`;
 
 /**
+ * Get the href link to lessons of Ayah.
+ *
+ * @param {string} verseKey
+ * @returns {string}
+ */
+export const getVerseLessonNavigationUrl = (verseKey: string): string => `/${verseKey}/lessons`;
+
+/**
  * Get the href link to questions of Ayah.
  *
  * @param {string} verseKey

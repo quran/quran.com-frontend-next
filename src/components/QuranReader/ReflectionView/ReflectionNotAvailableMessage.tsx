@@ -2,13 +2,21 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from './ReflectionDisclaimerMessage.module.scss';
 
-const ReflectionNotAvailableMessage = () => {
+import ContentType from 'types/QuranReflect/ContentType';
+
+interface Props {
+  contentType?: ContentType;
+}
+
+const ReflectionNotAvailableMessage = ({ contentType = ContentType.REFLECTIONS }: Props) => {
   const { t } = useTranslation();
-  return (
-    <div className={styles.reflectionDisclaimerMessage}>
-      {t('quran-reader:reflection-not-available')}
-    </div>
-  );
+
+  const message =
+    contentType === ContentType.REFLECTIONS
+      ? t('quran-reader:reflection-not-available')
+      : t('quran-reader:lessons-not-available');
+
+  return <div className={styles.reflectionDisclaimerMessage}>{message}</div>;
 };
 
 export default ReflectionNotAvailableMessage;
