@@ -8,6 +8,7 @@ import NextSeoWrapper from '@/components/NextSeoWrapper';
 import PageContainer from '@/components/PageContainer';
 import Answer from '@/components/QuestionAndAnswer/Answer';
 import QuestionHeader from '@/components/QuestionAndAnswer/QuestionHeader';
+import { getExploreAnswersOgImageUrl } from '@/lib/og';
 import Error from '@/pages/_error';
 import contentPageStyles from '@/pages/contentPage.module.scss';
 import styles from '@/pages/questions/questions.module.scss';
@@ -43,18 +44,14 @@ const QuestionPage: NextPage<QuestionPageProps> = ({ hasError, questionId, quest
     <>
       <NextSeoWrapper
         title={body}
-        // TODO: this is waiting finalization
-        // image={getChapterOgImageUrl({
-        //   chapterId,
-        //   verseNumber,
-        //   locale: lang,
-        // })}
+        image={getExploreAnswersOgImageUrl({
+          locale: lang,
+        })}
         imageWidth={1200}
         imageHeight={630}
         canonical={getCanonicalUrl(lang, navigationUrl)}
         languageAlternates={getLanguageAlternates(navigationUrl)}
-        // TODO: this is waiting finalization
-        description={t('reflections-desc')}
+        description={t('questions-meta-desc')}
       />
       <PageContainer>
         <div className={classNames(contentPageStyles.contentPage, styles.contentPage)}>
