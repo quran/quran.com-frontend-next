@@ -78,4 +78,8 @@ $list-max-width: 80rem;
 
 .bodyContainer {
   background: var(--color-background-elevated);
+  @include breakpoints.smallerThanTablet {
+    border-start-start-radius: var(--border-radius-rounded);
+    border-start-end-radius: var(--border-radius-rounded);
+  }
 }

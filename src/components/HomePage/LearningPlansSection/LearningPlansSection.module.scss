@@ -1,5 +1,7 @@
 @use "src/styles/breakpoints";
 
+$mobile-size: calc(var(--spacing-small-px) + var(--spacing-micro-px));
+
 .header {
     display: flex;
     flex-direction: row;
@@ -81,9 +83,21 @@
     align-items: center;
 }
 
+.startLearningLinkIcon {
+    @include breakpoints.smallerThanTablet {
+        svg {
+            width: $mobile-size;
+            height: $mobile-size;
+        }
+    }
+}
+
 .learningPlanTitle {
     font-weight: var(--font-weight-semibold);
     font-size: var(--font-size-large);
+    @include breakpoints.smallerThanTablet {
+        font-size: $mobile-size;
+    }
 }
 
 .learningPlanStatus {
@@ -93,6 +107,9 @@
     justify-content: flex-end;
     gap: var(--spacing-xsmall);
     margin-top: auto;
+    @include breakpoints.smallerThanTablet {
+        font-size: $mobile-size;
+    }
 }
 
 .enrolledPlanStatus {

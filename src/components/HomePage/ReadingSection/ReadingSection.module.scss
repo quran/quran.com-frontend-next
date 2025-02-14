@@ -55,6 +55,9 @@
 }
 
 .cardOuterContainer {
+    @include breakpoints.smallerThanTablet {
+        justify-content: center;
+    }
     justify-content: space-between;
     display: flex;
     flex-direction: row;
@@ -89,5 +92,11 @@
         box-shadow: none;
         border-radius: 0;
         padding: var(--spacing-xxsmall);
+    }
+}
+
+.arrowIcon {
+    @include breakpoints.smallerThanTablet {
+        display: none;
     }
 }

@@ -25,14 +25,25 @@
 
   @include breakpoints.tablet {
     max-width: calc(18 * var(--spacing-mega));
+    padding-block: var(--spacing-xlarge-px);
   }
 
   margin-inline: auto;
-  padding-block: var(--spacing-xlarge-px);
+
+  padding-block: var(--spacing-small-px);
+}
+
+.logoContainer {
+  @include breakpoints.smallerThanTablet {
+    display: none;
+  }
 }
 
 .buttonsContainer {
   display: flex;
   gap: var(--spacing-small);
   margin-block-start: var(--spacing-medium);
+  @include breakpoints.smallerThanTablet {
+    margin-block-start: var(--spacing-xsmall-px);
+  }
 }

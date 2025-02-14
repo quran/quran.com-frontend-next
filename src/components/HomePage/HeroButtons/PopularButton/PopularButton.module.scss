@@ -1,5 +1,4 @@
 @use "src/styles/breakpoints";
-$height: calc(16 * var(--spacing-mega));
 
 @keyframes slideUpFade {
     from {
@@ -22,12 +21,18 @@ $height: calc(16 * var(--spacing-mega));
 .dropdownContainer {
     width: 710px;
     margin-inline-start: -180px;
-    margin-top: -50px;
+    margin-top: -42%;
     border-radius: var(--border-radius-rounded);
     box-shadow: var(--shadow-medium);
     background: var(--color-background-elevated);
     z-index: var(--z-index-default);
     animation: slideUpFade 0.1s ease-out forwards;
+
+    @include breakpoints.smallerThanTablet {
+        width: 350px;
+        margin-inline-start: -150px;
+        margin-top: -40px;
+    }
 
     hr {
         background: var(--color-borders-hairline);

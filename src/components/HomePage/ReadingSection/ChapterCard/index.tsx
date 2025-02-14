@@ -75,6 +75,7 @@ const ChapterCard: React.FC<Props> = ({
               size={ButtonSize.Small}
               href={getChapterWithStartingVerseUrl(`${surahNumber}:${verseNumber}`)}
               onClick={onBeginClicked}
+              className={styles.beginButton}
             >
               {t('begin')}
             </Button>

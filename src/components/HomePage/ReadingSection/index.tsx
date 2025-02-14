@@ -120,7 +120,12 @@ const ReadingSection: React.FC<Props> = () => {
             />
           </div>
         </div>
-        <IconContainer size={IconSize.Xsmall} icon={<ArrowIcon />} shouldForceSetColors={false} />
+        <IconContainer
+          className={styles.arrowIcon}
+          size={IconSize.Xsmall}
+          icon={<ArrowIcon />}
+          shouldForceSetColors={false}
+        />
       </div>
     </Card>
   );

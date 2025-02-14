@@ -133,6 +133,7 @@ const LearningPlansSection = () => {
                                   size={IconSize.Xsmall}
                                   icon={<ArrowIcon />}
                                   shouldForceSetColors={false}
+                                  className={styles.startLearningLinkIcon}
                                 />
                               </div>
                             </Link>

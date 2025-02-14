@@ -5,7 +5,7 @@
     font-family: "surahnames" !important;
     font-size: calc(2 * var(--font-size-jumbo));
     @include breakpoints.smallerThanTablet {
-        font-size: calc(1.5 * var(--font-size-jumbo));
+        font-size: calc(1.2 * var(--font-size-jumbo));
         padding-inline-end: var(--spacing-medium-px);
     }
 }
@@ -17,7 +17,8 @@
     align-items: center;
     justify-content: space-between;
     @include breakpoints.smallerThanTablet {
-        align-items: flex-start;
+        align-items: center;
+        width: 75%;
     }
 }
 
@@ -27,6 +28,7 @@
     height: 100%;
     justify-content: space-between;
     @include breakpoints.smallerThanTablet {
+        justify-content: start;
         align-items: center;
         flex-direction: row;
     }
@@ -36,6 +38,7 @@
     color: var(--color-text-faded-new);
     @include breakpoints.smallerThanTablet {
         display: block;
+        font-size: calc(2 * var(--spacing-xsmall-px));
     }
 }
 
@@ -45,8 +48,20 @@
     align-items: center;
     gap: var(--spacing-micro);
     color: var(--color-text-faded-new);
+    @include breakpoints.smallerThanTablet {
+        font-size: var(--spacing-medium-px);
+    }
 }
 
 .transliteratedName {
     font-weight: var(--font-weight-semibold);
+    @include breakpoints.smallerThanTablet {
+        font-size: calc(2 * var(--spacing-xsmall-px));
+    }
+}
+
+.beginButton {
+    @include breakpoints.smallerThanTablet {
+        border-radius: var(--border-radius-rounded);
+    }
 }

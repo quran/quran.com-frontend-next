@@ -18,7 +18,7 @@ const HomePageHero = () => {
       <div className={styles.backgroundImage} />
       <div>
         <div className={styles.innerContainer}>
-          <div>
+          <div className={styles.logoContainer}>
             <Logo />
           </div>
           <SearchInput

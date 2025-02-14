@@ -27,6 +27,9 @@
     flex-wrap: wrap;
     width: 100%;
     gap: var(--spacing-small);
+    @include breakpoints.smallerThanTablet {
+        gap: var(--spacing-xxsmall);
+    }
 }
 
 .highlighted {
