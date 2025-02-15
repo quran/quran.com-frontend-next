@@ -130,6 +130,21 @@ const ReadingSection: React.FC<Props> = () => {
     </Card>
   );
 
+  if (isGuestWithReadingSessions) {
+    return (
+      <>
+        {header}
+        <div className={styles.cardsContainer}>
+          <div className={styles.cardContainer}>{continueReadingCard}</div>
+          <div className={styles.cardContainer}>
+            {goalsOrStreakCard}
+            {newCard}
+          </div>
+        </div>
+      </>
+    );
+  }
+
   if (isFirstTimeGuest || !isUserWithReadingSessions) {
     return (
       <>
@@ -160,21 +175,6 @@ const ReadingSection: React.FC<Props> = () => {
         </>
       );
     }
-    return (
-      <>
-        {header}
-        <div className={styles.cardsContainer}>
-          <div className={styles.cardContainer}>{continueReadingCard}</div>
-          <div className={styles.cardContainer}>
-            {goalsOrStreakCard}
-            {newCard}
-          </div>
-        </div>
-      </>
-    );
-  }
-
-  if (isGuestWithReadingSessions) {
     return (
       <>
         {header}
