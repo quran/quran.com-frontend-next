@@ -8,7 +8,7 @@
   "begin": "Begin",
   "popular": "Popular",
   "first-time-reading": "New to the Quran? <link>Start here</link>",
-  "know-someone": "Know someone who’s new? <link>Share the Quran!</link>",
+  "know-someone": "Know someone who’s new? <modalLink>Share the Quran!</modalLink>",
   "achieve-quran-goals": "Achieve Your Quran Goals",
   "stay-consistent": "Track Streaks, Create Custom Goals, Stay Consistent",
   "start-read": "Start Reading",
@@ -58,5 +58,9 @@
   },
   "welcome": {
     "title": "It's the Month of the Quran! Help millions of users get access to the guidance of the Quran."
+  },
+  "share-quran": {
+    "title": "Share the Quran!",
+    "description": "Help spread the Quran to new learners"
   }
 }
