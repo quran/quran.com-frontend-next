@@ -3,9 +3,12 @@ import { useCallback, useState } from 'react';
 import dynamic from 'next/dynamic';
 import useTranslation from 'next-translate/useTranslation';
 
+import styles from './ReflectionBodyContainer.module.scss';
+
 import DataFetcher from '@/components/DataFetcher';
 import { REFLECTIONS_OBSERVER_ID } from '@/components/QuranReader/observer';
 import TafsirSkeleton from '@/components/QuranReader/TafsirView/TafsirSkeleton';
+import NewLabel from '@/dls/Badge/NewLabel';
 import Tabs from '@/dls/Tabs/Tabs';
 import useGlobalIntersectionObserverWithDelay from '@/hooks/useGlobalIntersectionObserverWithDelay';
 import { isLoggedIn } from '@/utils/auth/login';
@@ -55,7 +58,15 @@ const ReflectionBodyContainer = ({
 
   const tabs = [
     { title: t('common:reflections'), value: ContentType.REFLECTIONS },
-    { title: t('common:lessons'), value: ContentType.LESSONS },
+    {
+      title: (
+        <div className={styles.titleContainer}>
+          {t('common:lessons')}
+          <NewLabel />
+        </div>
+      ),
+      value: ContentType.LESSONS,
+    },
   ];
 
   const handleTabChange = (value: ContentType) => {
@@ -109,6 +120,7 @@ const ReflectionBodyContainer = ({
 
   const body = (
     <>
+      {/* @ts-ignore */}
       <Tabs tabs={tabs} selected={selectedContentType} onSelect={handleTabChange} />
       <DataFetcher
         loading={TafsirSkeleton}

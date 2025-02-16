@@ -113,7 +113,7 @@ const ReflectionBody: React.FC<Props> = ({
       {filteredPosts?.length === 0 ? (
         <ReflectionNotAvailableMessage contentType={selectedContentType} />
       ) : (
-        <ReflectionDisclaimerMessage />
+        <ReflectionDisclaimerMessage contentType={selectedContentType} />
       )}
       {filteredPosts?.map((reflection) => (
         <ReflectionItem
