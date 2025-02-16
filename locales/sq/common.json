@@ -363,7 +363,7 @@
     "title": "Tefsir"
   },
   "tarteel": {
-    "app": "Aplikacioni Tarteel",
+    "app": " Aplikacioni Tarteel",
     "name": "Tarteel.ai"
   },
   "terms-and-conditions": "Termat dhe Kushtet",
@@ -400,7 +400,7 @@
   "view": "Pamje",
   "voice": {
     "ask-permission": "Ju lutemi aktivizoni lejen e mikrofonit për të filluar përdorimin e Kërkimit me zë",
-    "error": "Një gabim ka ndodhur.Ju lutemi, provojeni përsëri më vonë. Ose shkarkoni",
+    "error": "Një gabim ka ndodhur. Ju lutemi, provojeni përsëri më vonë. Ose shkarkoni ",
     "no-permission": "Me sa duket nuk i ke të aktivizuara lejet e mikrofonit. Aktivizo lejet e mikrofonit dhe provo sërish ose shkarko",
     "not-supported": "Duket sikur shfletuesi juaj nuk e mbështet mikrofonin. Ju lutemi provoni një shfletues tjetër ose shkarkoni",
     "suggest": "Ju lutemi filloni të recitoni dhe vargu juaj do të shfaqet.",
