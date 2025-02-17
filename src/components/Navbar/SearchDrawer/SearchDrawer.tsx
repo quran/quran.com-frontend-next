@@ -8,6 +8,7 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import SearchDrawerHeader from './Header';
 
+import { getNewSearchResults } from '@/api';
 import Drawer, { DrawerType } from '@/components/Navbar/Drawer';
 import Spinner from '@/dls/Spinner/Spinner';
 import useDebounce from '@/hooks/useDebounce';
@@ -15,10 +16,11 @@ import useFocus from '@/hooks/useFocusElement';
 import { selectNavbar } from '@/redux/slices/navbar';
 import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
 import { selectIsSearchDrawerVoiceFlowStarted } from '@/redux/slices/voiceSearch';
+import SearchService from '@/types/Search/SearchService';
 import SearchQuerySource from '@/types/SearchQuerySource';
 import { areArraysEqual } from '@/utils/array';
-import { logButtonClick } from '@/utils/eventLogger';
-import { addToSearchHistory, searchGetResults } from '@/utils/search';
+import { logButtonClick, logTextSearchQuery } from '@/utils/eventLogger';
+import { addToSearchHistory, getQuickSearchQuery } from '@/utils/search';
 import { SearchResponse } from 'types/ApiResponses';
 
 const SearchBodyContainer = dynamic(() => import('@/components/Search/SearchBodyContainer'), {
@@ -33,12 +35,10 @@ const VoiceSearchBodyContainer = dynamic(
   },
 );
 
-const FIRST_PAGE_NUMBER = 1;
-const PAGE_SIZE = 10;
 const DEBOUNCING_PERIOD_MS = 1000;
 
 const SearchDrawer: React.FC = () => {
-  const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
+  const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual) as string[];
   const [focusInput, searchInputRef]: [() => void, RefObject<HTMLInputElement>] = useFocus();
   const [searchQuery, setSearchQuery] = useState<string>('');
   const isOpen = useSelector(selectNavbar, shallowEqual).isSearchDrawerOpen;
@@ -60,17 +60,21 @@ const SearchDrawer: React.FC = () => {
     // only when the search query has a value we call the API.
     if (debouncedSearchQuery) {
       addToSearchHistory(dispatch, debouncedSearchQuery, SearchQuerySource.SearchDrawer);
-      searchGetResults(
-        SearchQuerySource.SearchDrawer,
-        debouncedSearchQuery,
-        FIRST_PAGE_NUMBER,
-        PAGE_SIZE,
-        setIsSearching,
-        setHasError,
-        setSearchResult,
-        null,
-        selectedTranslations?.length && selectedTranslations.join(','),
-      );
+      setIsSearching(true);
+      logTextSearchQuery(debouncedSearchQuery, SearchQuerySource.SearchDrawer);
+      getNewSearchResults(getQuickSearchQuery(debouncedSearchQuery, 10, selectedTranslations))
+        .then((response) => {
+          setSearchResult({
+            ...response,
+            service: SearchService.KALIMAT,
+          });
+        })
+        .catch(() => {
+          setHasError(true);
+        })
+        .finally(() => {
+          setIsSearching(false);
+        });
     }
   }, [debouncedSearchQuery, selectedTranslations, dispatch]);
 
@@ -140,6 +144,8 @@ const SearchDrawer: React.FC = () => {
                 searchResult={searchResult}
                 isSearching={isSearching}
                 hasError={hasError}
+                shouldSuggestFullSearchWhenNoResults
+                source={SearchQuerySource.SearchDrawer}
               />
             )}
           </>

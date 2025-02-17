@@ -1,0 +1,38 @@
+.showAll {
+    font-weight: var(--font-weight-bold);
+}
+
+.commandPrefix {
+    margin-inline-start: var(--spacing-xxsmall);
+    display: flex;
+    align-items: center;
+    > svg {
+        width: var(--spacing-large);
+        height: var(--spacing-large);
+    }
+}
+
+.moreResultsContainer {
+    display: flex;
+    cursor: pointer;
+    align-items: center;
+    font-size: var(--font-size-small);
+    svg {
+        width: var(--spacing-medium) !important;
+        height: var(--spacing-medium) !important;
+        path {
+            fill: var(--color-text-faded) !important;
+        }
+    }
+}
+
+.resultsSummaryContainer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-block-end: var(--spacing-small);
+}
+
+.resultsSummary {
+    font-size: var(--font-size-small);
+}

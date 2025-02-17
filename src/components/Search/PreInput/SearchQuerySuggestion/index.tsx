@@ -1,23 +1,26 @@
 import React, { MouseEvent, KeyboardEvent } from 'react';
 
+import SearchResultItemIcon from '../../SearchResults/SearchResultItemIcon';
 import SearchItem from '../SearchItem';
 
 import styles from './SearchQuerySuggestion.module.scss';
 
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import CloseIcon from '@/icons/close.svg';
-import SearchIcon from '@/icons/search.svg';
+import { SearchNavigationType } from '@/types/Search/SearchNavigationResult';
 
 interface Props {
   searchQuery: string;
   onSearchKeywordClicked: (searchQuery: string) => void;
   onRemoveSearchQueryClicked?: (searchQuery: string) => void;
+  type: SearchNavigationType;
 }
 
 const SearchQuerySuggestion: React.FC<Props> = ({
   searchQuery,
   onSearchKeywordClicked,
   onRemoveSearchQueryClicked,
+  type,
 }) => {
   const onRemoveClicked = (
     event: MouseEvent<HTMLElement> | KeyboardEvent<HTMLElement>,
@@ -31,7 +34,7 @@ const SearchQuerySuggestion: React.FC<Props> = ({
     <div className={styles.searchSuggestion}>
       <SearchItem
         title={searchQuery}
-        prefix={<SearchIcon />}
+        prefix={<SearchResultItemIcon type={type} />}
         onClick={() => onSearchKeywordClicked(searchQuery)}
         suffix={
           onRemoveSearchQueryClicked && (

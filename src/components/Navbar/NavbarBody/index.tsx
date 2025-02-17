@@ -20,6 +20,7 @@ import {
   setIsSearchDrawerOpen,
   setIsNavigationDrawerOpen,
   setIsSettingsDrawerOpen,
+  setDisableSearchDrawerTransition,
 } from '@/redux/slices/navbar';
 import { logEvent } from '@/utils/eventLogger';
 
@@ -44,6 +45,8 @@ const NavbarBody: React.FC = () => {
   const openSearchDrawer = () => {
     logDrawerOpenEvent('search');
     dispatch({ type: setIsSearchDrawerOpen.type, payload: true });
+    // reset the disable transition state
+    dispatch({ type: setDisableSearchDrawerTransition.type, payload: false });
   };
 
   const openSettingsDrawer = () => {

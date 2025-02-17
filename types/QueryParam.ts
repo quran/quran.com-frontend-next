@@ -7,6 +7,7 @@ enum QueryParam {
   FLOW = 'flow',
   STARTING_VERSE = 'startingVerse',
   QUERY = 'query',
+  QUERY_OLD = 'q',
   REDIRECT_TO = 'r',
   VERSE_TO = 'verseTo',
   VERSE_FROM = 'verseFrom',
@@ -23,6 +24,7 @@ enum QueryParam {
   ORIENTATION = 'orientation',
   VIDEO_ID = 'videoId',
   SURAH = 'surah',
+  PAGE = 'page',
 }
 
 export default QueryParam;
