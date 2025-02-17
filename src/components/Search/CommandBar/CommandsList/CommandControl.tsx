@@ -2,7 +2,6 @@ import React, { MouseEvent } from 'react';
 
 import Button, { ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import CloseIcon from '@/icons/close.svg';
-// import KeyboardInput from '@/dls/KeyboardInput';
 
 interface Props {
   isClearable: boolean;
@@ -29,7 +28,6 @@ const CommandControl: React.FC<Props> = ({
     );
   }
   if (isSelected) {
-    // return <KeyboardInput keyboardKey="Enter" />;
     return null;
   }
   return null;

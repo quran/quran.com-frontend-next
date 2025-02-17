@@ -1,21 +1,21 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useContext } from 'react';
 
 import groupBy from 'lodash/groupBy';
 import useTranslation from 'next-translate/useTranslation';
 import { useSelector } from 'react-redux';
 
-import CommandsList from '@/components/CommandBar/CommandsList';
 import DataFetcher from '@/components/DataFetcher';
-import SearchResultItem from '@/components/Search/SearchResults/SearchResultItem';
+import CommandsList from '@/components/Search/CommandBar/CommandsList';
+import TarteelSearchResultItem from '@/components/TarteelVoiceSearch/TarteelSearchResultItem';
+import DataContext from '@/contexts/DataContext';
 import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
 import SearchService from '@/types/Search/SearchService';
 import SearchQuerySource from '@/types/SearchQuerySource';
 import { makeVersesFilterUrl } from '@/utils/apiPaths';
 import { areArraysEqual } from '@/utils/array';
-import { toLocalizedVerseKey } from '@/utils/locale';
-import { truncateString } from '@/utils/string';
+import { getResultSuffix } from '@/utils/search';
 import { VersesResponse } from 'types/ApiResponses';
-import { SearchNavigationType } from 'types/SearchNavigationResult';
+import { SearchNavigationType } from 'types/Search/SearchNavigationResult';
 import SearchResult from 'types/Tarteel/SearchResult';
 
 interface Props {
@@ -26,6 +26,7 @@ interface Props {
 const SearchResults: React.FC<Props> = ({ searchResult, isCommandBar }) => {
   const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
   const { t, lang } = useTranslation('common');
+  const chaptersData = useContext(DataContext);
 
   const params = {
     // only get the first 10 results
@@ -52,10 +53,13 @@ const SearchResults: React.FC<Props> = ({ searchResult, isCommandBar }) => {
           return {
             key: verse.verseKey,
             resultType: SearchNavigationType.AYAH,
-            name: `[${toLocalizedVerseKey(verse.verseKey, lang)}] ${truncateString(
-              verse.textUthmani,
-              80,
+            name: `${verse.textUthmani} ${getResultSuffix(
+              SearchNavigationType.AYAH,
+              verse.verseKey,
+              lang,
+              chaptersData,
             )}`,
+            isVoiceSearch: true,
             group: t('command-bar.navigations'),
           };
         });
@@ -75,7 +79,7 @@ const SearchResults: React.FC<Props> = ({ searchResult, isCommandBar }) => {
       return (
         <>
           {data.verses.map((verse) => (
-            <SearchResultItem
+            <TarteelSearchResultItem
               key={verse.verseKey}
               result={verse}
               source={SearchQuerySource.Tarteel}
@@ -85,7 +89,7 @@ const SearchResults: React.FC<Props> = ({ searchResult, isCommandBar }) => {
         </>
       );
     },
-    [isCommandBar, lang, t],
+    [chaptersData, isCommandBar, lang, t],
   );
 
   return <DataFetcher queryKey={makeVersesFilterUrl(params)} render={responseRender} />;

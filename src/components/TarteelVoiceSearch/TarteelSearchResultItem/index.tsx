@@ -1,10 +1,9 @@
 /* eslint-disable react/no-danger */
-
 import React, { useMemo } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
-import styles from './SearchResultItem.module.scss';
+import styles from './TarteelSearchResultItem.module.scss';
 
 import Link from '@/dls/Link/Link';
 import QuranWord from '@/dls/QuranWord/QuranWord';
@@ -24,7 +23,11 @@ interface Props {
   service?: SearchService;
 }
 
-const SearchResultItem: React.FC<Props> = ({ result, source, service = SearchService.QDC }) => {
+const TarteelSearchResultItem: React.FC<Props> = ({
+  result,
+  source,
+  service = SearchService.Tarteel,
+}) => {
   const { lang } = useTranslation('quran-reader');
   const localizedVerseKey = useMemo(
     () => toLocalizedVerseKey(result.verseKey, lang),
@@ -81,4 +84,4 @@ const SearchResultItem: React.FC<Props> = ({ result, source, service = SearchSer
     </div>
   );
 };
-export default SearchResultItem;
+export default TarteelSearchResultItem;

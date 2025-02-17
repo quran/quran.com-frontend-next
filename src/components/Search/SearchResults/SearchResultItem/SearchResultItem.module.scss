@@ -1,0 +1,32 @@
+.iconContainer {
+    padding-block-start: var(--spacing-micro);
+    padding-inline-end: var(--spacing-small);
+}
+
+.container {
+    padding-block: var(--spacing-xsmall);
+    padding-inline: var(--spacing-xsmall);
+    &:hover {
+        background-color: var(--color-background-alternative-faded);
+        border-radius: var(--border-radius-default);
+    }
+}
+
+.linkContainer {
+    display: flex;
+    flex-direction: row;
+}
+
+.arabic {
+    direction: rtl;
+}
+
+.resultText {
+    em {
+        font-weight: var(--font-weight-bold);
+        color: var(--color-highlight-dark);
+    }
+    sup {
+        display: none;
+    }
+}

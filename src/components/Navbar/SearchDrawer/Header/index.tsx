@@ -50,7 +50,8 @@ const Header: React.FC<Props> = ({
             <form onSubmit={onKeyboardReturnPressed}>
               <input
                 className={styles.searchInput}
-                type="text"
+                type="search"
+                enterKeyHint="search"
                 ref={inputRef}
                 dir="auto"
                 placeholder={t('search.title')}

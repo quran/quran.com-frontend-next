@@ -2,29 +2,21 @@ import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import { RootState } from '@/redux/RootState';
 import SliceName from '@/redux/types/SliceName';
-import { SearchNavigationResult } from 'types/SearchNavigationResult';
+import { SearchNavigationResult } from 'types/Search/SearchNavigationResult';
 
 export type CommandBar = {
-  isOpen: boolean;
   recentNavigations: SearchNavigationResult[];
+  isExpanded: boolean;
 };
 
 const MAXIMUM_RECENT_NAVIGATIONS = 5;
 
-const initialState: CommandBar = { isOpen: false, recentNavigations: [] };
+const initialState: CommandBar = { recentNavigations: [], isExpanded: false };
 
 export const commandBarSlice = createSlice({
   name: SliceName.COMMAND_BAR,
   initialState,
   reducers: {
-    setIsOpen: (state: CommandBar, action: PayloadAction<boolean>) => ({
-      ...state,
-      isOpen: action.payload,
-    }),
-    toggleIsOpen: (state: CommandBar) => ({
-      ...state,
-      isOpen: !state.isOpen,
-    }),
     addRecentNavigation: (state: CommandBar, action: PayloadAction<SearchNavigationResult>) => {
       let newRecentNavigations = [...state.recentNavigations];
       const newRecentNavigation = action.payload;
@@ -53,13 +45,24 @@ export const commandBarSlice = createSlice({
         recentNavigations: newRecentNavigations,
       };
     },
+    toggleIsExpanded: (state: CommandBar) => {
+      return {
+        ...state,
+        isExpanded: !state.isExpanded,
+      };
+    },
+    setIsExpanded: (state: CommandBar, action: PayloadAction<boolean>) => {
+      return {
+        ...state,
+        isExpanded: action.payload,
+      };
+    },
   },
 });
 
-export const { setIsOpen, toggleIsOpen, addRecentNavigation, removeRecentNavigation } =
+export const { addRecentNavigation, removeRecentNavigation, toggleIsExpanded, setIsExpanded } =
   commandBarSlice.actions;
 
-export const selectCommandBarIsOpen = (state: RootState) => state.commandBar.isOpen;
 export const selectRecentNavigations = (state: RootState) => state.commandBar.recentNavigations;
-
+export const selectIsExpanded = (state: RootState) => state.commandBar.isExpanded;
 export default commandBarSlice.reducer;

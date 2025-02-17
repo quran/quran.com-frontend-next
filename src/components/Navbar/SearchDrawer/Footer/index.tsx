@@ -1,18 +1,26 @@
 import React from 'react';
 
+import { useSelector, shallowEqual } from 'react-redux';
+
 import styles from './Footer.module.scss';
 
 import TarteelAttribution from '@/components/TarteelAttribution/TarteelAttribution';
 import Separator from '@/dls/Separator/Separator';
+import { selectIsSearchDrawerVoiceFlowStarted } from '@/redux/slices/voiceSearch';
 
 const Footer: React.FC = () => {
+  const isVoiceSearchFlowStarted = useSelector(selectIsSearchDrawerVoiceFlowStarted, shallowEqual);
   return (
-    <div>
-      <Separator />
-      <div className={styles.container}>
-        <TarteelAttribution />
-      </div>
-    </div>
+    <>
+      {isVoiceSearchFlowStarted ? (
+        <div className={styles.container}>
+          <Separator />
+          <TarteelAttribution />
+        </div>
+      ) : (
+        <div className={styles.container} />
+      )}
+    </>
   );
 };
 

@@ -9,12 +9,12 @@ import styles from './SearchBodyContainer.module.scss';
 
 import SearchResults from '@/components/Search/SearchResults';
 import Spinner, { SpinnerSize } from '@/dls/Spinner/Spinner';
+import SearchQuerySource from '@/types/SearchQuerySource';
 import { SearchResponse } from 'types/ApiResponses';
 
 interface Props {
   searchQuery: string;
   isSearching: boolean;
-  isSearchDrawer?: boolean;
   hasError: boolean;
   searchResult: SearchResponse;
   onSearchKeywordClicked: (keyword: string) => void;
@@ -22,6 +22,8 @@ interface Props {
   currentPage?: number;
   pageSize?: number;
   onPageChange?: (page: number) => void;
+  shouldSuggestFullSearchWhenNoResults?: boolean;
+  source: SearchQuerySource;
 }
 
 const SearchBodyContainer: React.FC<Props> = ({
@@ -31,10 +33,11 @@ const SearchBodyContainer: React.FC<Props> = ({
   searchResult,
   onSearchKeywordClicked,
   onSearchResultClicked,
-  isSearchDrawer = true,
   currentPage,
   pageSize,
   onPageChange,
+  shouldSuggestFullSearchWhenNoResults = false,
+  source,
 }) => {
   const { t } = useTranslation('common');
   const isEmptyResponse =
@@ -50,7 +53,7 @@ const SearchBodyContainer: React.FC<Props> = ({
       })}
     >
       {!searchQuery ? (
-        <PreInput onSearchKeywordClicked={onSearchKeywordClicked} isSearchDrawer={isSearchDrawer} />
+        <PreInput onSearchKeywordClicked={onSearchKeywordClicked} source={source} />
       ) : (
         <>
           {isSearching ? (
@@ -61,13 +64,16 @@ const SearchBodyContainer: React.FC<Props> = ({
               {!hasError && searchResult && (
                 <>
                   {isEmptyResponse ? (
-                    <NoResults searchQuery={searchQuery} />
+                    <NoResults
+                      searchQuery={searchQuery}
+                      shouldSuggestFullSearchWhenNoResults={shouldSuggestFullSearchWhenNoResults}
+                    />
                   ) : (
                     <SearchResults
                       onSearchResultClicked={onSearchResultClicked}
                       searchResult={searchResult}
                       searchQuery={searchQuery}
-                      isSearchDrawer={isSearchDrawer}
+                      source={source}
                       currentPage={currentPage}
                       onPageChange={onPageChange}
                       pageSize={pageSize}

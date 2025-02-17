@@ -1,6 +1,6 @@
-import { BaseResponse } from '../ApiResponses';
-import { SearchNavigationResult } from '../SearchNavigationResult';
+import { BaseResponse, Pagination } from '../ApiResponses';
 
+import { SearchNavigationResult } from './SearchNavigationResult';
 import SearchVerseItem from './SearchVerseItem';
 
 interface SearchResponse extends BaseResponse {
@@ -8,13 +8,7 @@ interface SearchResponse extends BaseResponse {
     navigation: SearchNavigationResult[];
     verses: SearchVerseItem[];
   };
-  pagination: {
-    perPage: number;
-    currentPage: number;
-    nextPage: number | null;
-    totalRecords: number;
-    totalPages: number;
-  };
+  pagination: Pagination;
 }
 
 export default SearchResponse;
