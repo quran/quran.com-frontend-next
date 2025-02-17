@@ -28,3 +28,5 @@ export const getQuranReflectPostUrl = (postId: number | string, viewComments = f
 
 export const getQuranReflectTagUrl = (tag: string) =>
   `${API_HOST}/?tags=${encodeURIComponent(tag)}`;
+
+export const getQRNavigationUrl = () => `${API_HOST}`;

@@ -1,12 +1,14 @@
 import styles from './SidebarNavigation.module.scss';
 import SurahList from './SurahList';
-import VerseList from './VerseList';
 
-const SurahSelection: React.FC = () => {
+type Props = {
+  onAfterNavigationItemRouted?: () => void;
+};
+
+const SurahSelection: React.FC<Props> = ({ onAfterNavigationItemRouted }) => {
   return (
     <div className={styles.surahBodyContainer}>
-      <SurahList />
-      <VerseList />
+      <SurahList onAfterNavigationItemRouted={onAfterNavigationItemRouted} />
     </div>
   );
 };

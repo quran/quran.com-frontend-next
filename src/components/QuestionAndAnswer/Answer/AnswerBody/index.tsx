@@ -1,19 +1,34 @@
-import React from 'react';
+/* eslint-disable i18next/no-literal-string */
+import React, { useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from './AnswerBody.module.scss';
 
 import Button, { ButtonSize, ButtonVariant } from '@/dls/Button/Button';
+import ShareButtons from '@/dls/ShareButtons';
 import ShareIcon from '@/icons/share.svg';
 import { Question } from '@/types/QuestionsAndAnswers/Question';
+import { logButtonClick } from '@/utils/eventLogger';
+import { getQuestionNavigationUrl } from '@/utils/navigation';
+import { getBasePath } from '@/utils/url';
 
 type Props = {
   question: Question;
 };
 
 const AnswerBody: React.FC<Props> = ({ question }) => {
+  const [shouldShowShareOptions, setShouldShowShareOptions] = useState(false);
   const { t } = useTranslation('quran-reader');
+
+  const onShareButtonClick = () => {
+    logButtonClick('q_and_a_answer_share_button');
+    setShouldShowShareOptions(true);
+  };
+
+  const shareURL = `${getBasePath()}${getQuestionNavigationUrl(question.id)}`;
+  const title = t('q-and-a.explore_answers');
+
   return (
     <>
       <div className={styles.answerBody}>
@@ -35,12 +50,19 @@ const AnswerBody: React.FC<Props> = ({ question }) => {
         )}
       </div>
       <div className={styles.shareButton}>
-        <Button variant={ButtonVariant.Compact} size={ButtonSize.Small}>
+        <Button
+          variant={ButtonVariant.Compact}
+          size={ButtonSize.Small}
+          onClick={onShareButtonClick}
+        >
           <div className={styles.shareButtonText}>
             <ShareIcon /> {t('common:share')}
           </div>
         </Button>
       </div>
+      {shouldShowShareOptions && (
+        <ShareButtons url={shareURL} title={title} analyticsContext="q_and_a_answer" />
+      )}
     </>
   );
 };

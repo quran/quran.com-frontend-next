@@ -8,7 +8,11 @@ import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import { getPageNavigationUrl } from '@/utils/navigation';
 import { getPageIdsByMushaf } from '@/utils/page';
 
-const PageSelection = () => {
+type Props = {
+  onAfterNavigationItemRouted?: () => void;
+};
+
+const PageSelection: React.FC<Props> = ({ onAfterNavigationItemRouted }) => {
   const { t, lang } = useTranslation('common');
   const { quranFont, mushafLines } = useSelector(selectQuranReaderStyles);
   const pageIds = getPageIdsByMushaf(lang, quranFont, mushafLines);
@@ -22,6 +26,7 @@ const PageSelection = () => {
       renderItem={(page) => `${t('page')} ${page.label}`}
       isJuz={false}
       selectedItem={Number(lastReadPage)}
+      onAfterNavigationItemRouted={onAfterNavigationItemRouted}
     />
   );
 };

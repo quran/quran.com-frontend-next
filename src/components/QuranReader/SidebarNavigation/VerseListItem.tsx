@@ -13,10 +13,12 @@ import { toLocalizedNumber } from '@/utils/locale';
 import { getChapterWithStartingVerseUrl } from '@/utils/navigation';
 import { getVerseNumberFromKey } from '@/utils/verse';
 
-type VerseListItemProps = {
+interface VerseListItemProps {
   verseKey: string;
-};
-const VerseListItem = React.memo(({ verseKey }: VerseListItemProps) => {
+  onVerseClick?: (e: React.MouseEvent) => void;
+}
+
+const VerseListItem: React.FC<VerseListItemProps> = ({ verseKey, onVerseClick }) => {
   const { lang } = useTranslation();
   const isVerseKeySelected = useSelector(selectIsVerseKeySelected(verseKey));
 
@@ -35,6 +37,7 @@ const VerseListItem = React.memo(({ verseKey }: VerseListItemProps) => {
       key={verseKey}
       isShallow
       shouldPrefetch={false}
+      onClick={onVerseClick}
     >
       <div
         ref={verseRef}
@@ -46,6 +49,6 @@ const VerseListItem = React.memo(({ verseKey }: VerseListItemProps) => {
       </div>
     </Link>
   );
-});
+};
 
 export default VerseListItem;

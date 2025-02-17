@@ -8,14 +8,18 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from '../contentPage.module.scss';
 
+import pageStyles from './about-the-quran.module.scss';
+
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import PageContainer from '@/components/PageContainer';
+import PlainVerseText from '@/components/Verse/PlainVerseText';
 import Button, { ButtonVariant } from '@/dls/Button/Button';
-import Link from '@/dls/Link/Link';
+import Link, { LinkVariant } from '@/dls/Link/Link';
 import { getAboutTheQuranImageUrl } from '@/lib/og';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl } from '@/utils/navigation';
+import verse3829 from 'src/data/verses/verse3829';
 
 const PATH = '/about-quran';
 const AboutQuranPage: NextPage = (): JSX.Element => {
@@ -80,18 +84,22 @@ const AboutQuranPage: NextPage = (): JSX.Element => {
               until the Day of Judgment, and it will remain preserved from loss and distortion which
               affected previous scriptures in various ways.
             </div>
-            <div>
-              "˹This is˺ a blessed Book which We have revealed to you ˹O Prophet˺ so that they may
-              contemplate its verses, and people of reason may be mindful."{' '}
-              <Link href="/38:29" isNewTab>
-                38:29
-              </Link>
+            <div className={pageStyles.verseContainer}>
+              <PlainVerseText fontScale={1} words={verse3829.words} />
+              <div className={pageStyles.verseTranslation}>
+                "˹This is˺ a blessed Book which We have revealed to you ˹O Prophet˺ so that they may
+                contemplate its verses, and people of reason may be mindful."{' '}
+                <Link variant={LinkVariant.Highlight} href="/38:29" isNewTab>
+                  Sad 38:29
+                </Link>
+              </div>
+              <p className={pageStyles.translationName}>- Dr. Mustafa Khattab, The Clear Quran</p>
             </div>
             <div>
               We welcome you to Quran.com and invite you to read and listen to the Quran with an
               open heart, to deeply contemplate its verses, sincerely seek the knowledge contained
               within it, and to learn more using the resources on our site. We hope you will find
-              Quran.com beneficial and pray that the message of the Quran will enrich your life’s
+              Quran.com beneficial and pray that the message of the Quran will enrich your life's
               journey.
             </div>
           </div>
@@ -129,7 +137,7 @@ const AboutQuranPage: NextPage = (): JSX.Element => {
                 transmitted both orally and in writing from the time of the Prophet Muhammad ﷺ, who
                 announced at the age of forty (around 610 CE) that he was receiving revelation of
                 these words from an angel sent by the One God. The content of this message together
-                with the Prophet’s impeccable character, integrity and credibility created a
+                with the Prophet's impeccable character, integrity and credibility created a
                 believing community, at first in Arabia, which carried the Quran to all parts of the
                 world.
               </li>
@@ -202,7 +210,7 @@ const AboutQuranPage: NextPage = (): JSX.Element => {
               The Surah consists of seven verses, and it is recited several times a day during the
               formal five daily prayers. The Surah begins with the phrase
               "Bismillahir-Rahmanir-Rahim," which means "In the name of God, the Most Merciful, the
-              Most Compassionate." This phrase is used to seek God’s blessings before beginning any
+              Most Compassionate." This phrase is used to seek God's blessings before beginning any
               task.
             </div>
             <div>
