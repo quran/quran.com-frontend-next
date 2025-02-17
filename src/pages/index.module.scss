@@ -10,9 +10,6 @@ $list-max-width: 80rem;
   @include breakpoints.smallerThanTablet {
     padding-block-start: var(--banner-height);
   }
-  @include breakpoints.tablet {
-    padding-block-start: var(--spacing-small);
-  }
 }
 
 .loadingContainer {
@@ -70,6 +67,8 @@ $list-max-width: 80rem;
     padding-inline: var(--spacing-small-px);
     margin-inline: var(--spacing-small-px);
   }
+  padding-block-end: var(--spacing-medium2-px);
+  border-bottom: 1px solid var(--color-separators);
 }
 
 .mobileOnly {
