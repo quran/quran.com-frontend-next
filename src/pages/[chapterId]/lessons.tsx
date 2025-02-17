@@ -22,13 +22,13 @@ import { getChapterData, getAllChaptersData } from '@/utils/chapter';
 import { getLanguageAlternates, toLocalizedNumber } from '@/utils/locale';
 import {
   getCanonicalUrl,
-  getVerseReflectionNavigationUrl,
+  getVerseLessonNavigationUrl,
   scrollWindowToTop,
 } from '@/utils/navigation';
 import {
   getAyahReflections,
   makeAyahReflectionsUrl,
-  REFLECTION_POST_TYPE_ID,
+  LESSON_POST_TYPE_ID,
 } from '@/utils/quranReflect/apiPaths';
 import {
   REVALIDATION_PERIOD_ON_ERROR_SECONDS,
@@ -38,8 +38,9 @@ import { isValidVerseKey } from '@/utils/validator';
 import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
 import { ChapterResponse } from 'types/ApiResponses';
 import ChaptersData from 'types/ChaptersData';
+import ContentType from 'types/QuranReflect/ContentType';
 
-type AyahReflectionProp = {
+type AyahLessonProp = {
   chapter?: ChapterResponse;
   hasError?: boolean;
   verseNumber?: string;
@@ -48,7 +49,7 @@ type AyahReflectionProp = {
   fallback?: any;
 };
 
-const SelectedAyahReflection: NextPage<AyahReflectionProp> = ({
+const SelectedAyahLesson: NextPage<AyahLessonProp> = ({
   hasError,
   chapter,
   verseNumber,
@@ -60,14 +61,14 @@ const SelectedAyahReflection: NextPage<AyahReflectionProp> = ({
     return <Error statusCode={500} />;
   }
 
-  const navigationUrl = getVerseReflectionNavigationUrl(`${chapterId}:${verseNumber}`);
+  const navigationUrl = getVerseLessonNavigationUrl(`${chapterId}:${verseNumber}`);
   return (
     <>
       <NextSeoWrapper
         title={`${chapter.chapter.transliteratedName} - ${toLocalizedNumber(
           Number(verseNumber),
           lang,
-        )} ${t('common:reflections')} `}
+        )} ${t('common:lessons')}`}
         image={getChapterOgImageUrl({
           chapterId,
           verseNumber,
@@ -77,7 +78,7 @@ const SelectedAyahReflection: NextPage<AyahReflectionProp> = ({
         imageHeight={630}
         canonical={getCanonicalUrl(lang, navigationUrl)}
         languageAlternates={getLanguageAlternates(navigationUrl)}
-        description={t('reflections-desc', {
+        description={t('lessons-desc', {
           ayahNumber: verseNumber,
           surahName: chapter.chapter.transliteratedName,
         })}
@@ -91,6 +92,7 @@ const SelectedAyahReflection: NextPage<AyahReflectionProp> = ({
                 scrollToTop={scrollWindowToTop}
                 initialChapterId={chapterId}
                 initialVerseNumber={verseNumber.toString()}
+                initialContentType={ContentType.LESSONS}
                 render={({ body, surahAndAyahSelection }) => {
                   return (
                     <div>
@@ -119,12 +121,12 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   const { quranFont, mushafLines } = getQuranReaderStylesInitialState(locale);
   const translations = getTranslationsInitialState(locale).selectedTranslations;
   try {
-    const verseReflectionUrl = makeAyahReflectionsUrl({
+    const verseLessonsUrl = makeAyahReflectionsUrl({
       surahId: chapterNumber,
       ayahNumber: verseNumber,
       locale,
       reviewed: true,
-      postTypeIds: [REFLECTION_POST_TYPE_ID],
+      postTypeIds: [LESSON_POST_TYPE_ID],
     });
 
     const mushafId = getMushafId(quranFont, mushafLines).mushaf;
@@ -139,13 +141,13 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
 
     const versesUrl = makeVersesUrl(chapterNumber, locale, apiParams);
 
-    const [verseReflectionsData, versesData] = await Promise.all([
-      getAyahReflections(verseReflectionUrl),
+    const [verseLessonsData, versesData] = await Promise.all([
+      getAyahReflections(verseLessonsUrl),
       fetcher(versesUrl),
     ]);
 
     const fallback = {
-      [verseReflectionUrl]: verseReflectionsData,
+      [verseLessonsUrl]: verseLessonsData,
       [versesUrl]: versesData,
     };
 
@@ -157,19 +159,19 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
         verseNumber,
         fallback,
       },
-      revalidate: ONE_WEEK_REVALIDATION_PERIOD_SECONDS, // verses will be generated at runtime if not found in the cache, then cached for subsequent requests for 7 days.
+      revalidate: ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
     };
   } catch (error) {
     return {
       props: { hasError: true },
-      revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS, // 35 seconds will be enough time before we re-try generating the page again.
+      revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS,
     };
   }
 };
 
 export const getStaticPaths: GetStaticPaths = async () => ({
-  paths: [], // no pre-rendered chapters at build time.
-  fallback: 'blocking', // will server-render pages on-demand if the path doesn't exist.
+  paths: [],
+  fallback: 'blocking',
 });
 
-export default SelectedAyahReflection;
+export default SelectedAyahLesson;

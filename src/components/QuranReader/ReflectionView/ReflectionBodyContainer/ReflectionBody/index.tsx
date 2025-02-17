@@ -12,12 +12,17 @@ import VerseAndTranslation from '@/components/Verse/VerseAndTranslation';
 import Button from '@/dls/Button/Button';
 import Separator from '@/dls/Separator/Separator';
 import { logButtonClick } from '@/utils/eventLogger';
-import { fakeNavigate, getVerseReflectionNavigationUrl } from '@/utils/navigation';
+import {
+  fakeNavigate,
+  getVerseLessonNavigationUrl,
+  getVerseReflectionNavigationUrl,
+} from '@/utils/navigation';
 import { localeToReflectionLanguages } from '@/utils/quranReflect/locale';
 import { getQuranReflectVerseUrl } from '@/utils/quranReflect/navigation';
 import { isFirstVerseOfSurah, isLastVerseOfSurah, makeVerseKey } from '@/utils/verse';
 import DataContext from 'src/contexts/DataContext';
 import AyahReflectionsResponse from 'types/QuranReflect/AyahReflectionsResponse';
+import ContentType from 'types/QuranReflect/ContentType';
 
 interface Props {
   selectedChapterId: string;
@@ -25,6 +30,7 @@ interface Props {
   data: AyahReflectionsResponse;
   scrollToTop: () => void;
   setSelectedVerseNumber: (verseNumber: string) => void;
+  selectedContentType: ContentType;
 }
 
 const ReflectionBody: React.FC<Props> = ({
@@ -33,6 +39,7 @@ const ReflectionBody: React.FC<Props> = ({
   data,
   scrollToTop,
   setSelectedVerseNumber,
+  selectedContentType,
 }) => {
   const { t, lang } = useTranslation('quran-reader');
   const chaptersData = useContext(DataContext);
@@ -47,27 +54,42 @@ const ReflectionBody: React.FC<Props> = ({
     logButtonClick('reflection_next_verse');
     scrollToTop();
     const newVerseNumber = String(Number(selectedVerseNumber) + 1);
-    fakeNavigate(
-      getVerseReflectionNavigationUrl(
-        makeVerseKey(Number(selectedChapterId), Number(newVerseNumber)),
-      ),
-      lang,
-    );
+    const verseKey = makeVerseKey(Number(selectedChapterId), Number(newVerseNumber));
+    const navigationUrl =
+      selectedContentType === ContentType.REFLECTIONS
+        ? getVerseReflectionNavigationUrl(verseKey)
+        : getVerseLessonNavigationUrl(verseKey);
+    fakeNavigate(navigationUrl, lang);
     setSelectedVerseNumber(newVerseNumber);
-  }, [lang, scrollToTop, selectedChapterId, selectedVerseNumber, setSelectedVerseNumber]);
+  }, [
+    lang,
+    scrollToTop,
+    selectedChapterId,
+    selectedVerseNumber,
+    setSelectedVerseNumber,
+    selectedContentType,
+  ]);
 
   const loadPrevVerse = useCallback(() => {
     const newVerseNumber = String(Number(selectedVerseNumber) - 1);
     logButtonClick('reflection_prev_verse');
     scrollToTop();
     setSelectedVerseNumber(newVerseNumber);
-    fakeNavigate(
-      getVerseReflectionNavigationUrl(
-        makeVerseKey(Number(selectedChapterId), Number(newVerseNumber)),
-      ),
-      lang,
-    );
-  }, [lang, scrollToTop, selectedChapterId, selectedVerseNumber, setSelectedVerseNumber]);
+    const verseKey = makeVerseKey(Number(selectedChapterId), Number(newVerseNumber));
+    const navigationUrl =
+      selectedContentType === ContentType.REFLECTIONS
+        ? getVerseReflectionNavigationUrl(verseKey)
+        : getVerseLessonNavigationUrl(verseKey);
+    fakeNavigate(navigationUrl, lang);
+  }, [
+    lang,
+    scrollToTop,
+    selectedChapterId,
+    selectedVerseNumber,
+    setSelectedVerseNumber,
+    selectedContentType,
+  ]);
+
   const filteredPosts = useMemo(() => {
     return data?.posts?.filter((reflection) =>
       localeToReflectionLanguages(lang).includes(reflection.language),
@@ -89,9 +111,9 @@ const ReflectionBody: React.FC<Props> = ({
         <Separator />
       </div>
       {filteredPosts?.length === 0 ? (
-        <ReflectionNotAvailableMessage />
+        <ReflectionNotAvailableMessage contentType={selectedContentType} />
       ) : (
-        <ReflectionDisclaimerMessage />
+        <ReflectionDisclaimerMessage contentType={selectedContentType} />
       )}
       {filteredPosts?.map((reflection) => (
         <ReflectionItem
