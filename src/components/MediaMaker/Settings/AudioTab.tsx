@@ -71,15 +71,7 @@ const AudioTab: FC<AudioTabProps> = ({
   ) => {
     setRangesError(null);
     const isVerseKeyStartOfRange = verseSelectorId === RangeSelectorType.START;
-    const startVerseNumber = isVerseKeyStartOfRange ? newSelectedVerseNumber : verseFrom;
-    const endVerseNumber = !isVerseKeyStartOfRange ? newSelectedVerseNumber : verseTo;
-    const startVerseKey = `${surah}:${startVerseNumber}`;
-    const endVerseKey = `${surah}:${endVerseNumber}`;
-    const validationError = validateRangeSelection(startVerseKey, endVerseKey, t);
-    if (validationError) {
-      setRangesError(validationError);
-      return false;
-    }
+
     if (isVerseKeyStartOfRange) {
       const isMaxAyahs = Number(verseTo) - Number(newSelectedVerseNumber) >= MAX_AYAHS_LIMIT;
 
@@ -94,6 +86,17 @@ const AudioTab: FC<AudioTabProps> = ({
       );
     } else {
       const isMaxAyahs = Number(newSelectedVerseNumber) - Number(verseFrom) >= MAX_AYAHS_LIMIT;
+
+      const startVerseNumber = isVerseKeyStartOfRange ? newSelectedVerseNumber : verseFrom;
+      const endVerseNumber = !isVerseKeyStartOfRange ? newSelectedVerseNumber : verseTo;
+      const startVerseKey = `${surah}:${startVerseNumber}`;
+      const endVerseKey = `${surah}:${endVerseNumber}`;
+      const validationError = validateRangeSelection(startVerseKey, endVerseKey, t);
+
+      if (validationError) {
+        setRangesError(validationError);
+        return false;
+      }
 
       onSettingsUpdate(
         {
