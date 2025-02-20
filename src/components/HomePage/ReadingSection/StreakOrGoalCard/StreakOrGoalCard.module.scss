@@ -1,3 +1,5 @@
+@use "src/styles/breakpoints";
+
 .streakCard {
     width: 100%;
     display: flex;
@@ -9,12 +11,21 @@
     font-size: var(--font-size-jumbo);
     font-weight: var(--font-weight-bold);
     color: var(--color-text-black);
+    @include breakpoints.tablet {
+        font-size: var(--font-size-xjumbo-px);
+    }
 }
 
 .streakCardLeft {
     display: flex;
     align-items: center;
     gap: var(--spacing-micro);
+    & > svg:first-child {
+        @include breakpoints.tablet {
+            width: 60px;
+            height: 60px;
+        }
+    }
 }
 
 .customGoalButton {
@@ -28,6 +39,9 @@
     }
     &:hover {
         background-color: var(--color-streaks-dark);
+    }
+    @include breakpoints.tablet {
+        font-size: var(--font-size-normal-px);
     }
 }
 
@@ -48,6 +62,9 @@
     font-size: var(--font-size-normal);
     color: var(--color-text-gray);
     font-weight: var(--font-weight-semibold);
+    @include breakpoints.tablet {
+        font-size: var(--font-size-large-px);
+    }
 }
 
 .circularProgressbarPath {

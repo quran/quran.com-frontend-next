@@ -10,10 +10,10 @@ $mobile-size: calc(var(--spacing-small-px) + var(--spacing-micro-px));
     padding-block-end: var(--spacing-medium);
 
     h1 {
-        font-size: var(--font-size-xlarge);
+        font-size: var(--font-size-xlarge-px);
         font-weight: var(--font-weight-bold);
         @include breakpoints.tablet {
-            font-size: var(--font-size-jumbo);
+            font-size: var(--font-size-jumbo-px);
         }
     }
 }
@@ -81,6 +81,9 @@ $mobile-size: calc(var(--spacing-small-px) + var(--spacing-micro-px));
     gap: var(--spacing-micro);
     color: var(--color-text-faded-new);
     align-items: center;
+    @include breakpoints.tablet {
+        font-size: var(--font-size-medium-px);
+    }
 }
 
 .startLearningLinkIcon {
@@ -97,6 +100,9 @@ $mobile-size: calc(var(--spacing-small-px) + var(--spacing-micro-px));
     font-size: var(--font-size-large);
     @include breakpoints.smallerThanTablet {
         font-size: $mobile-size;
+    }
+    @include breakpoints.tablet {
+        font-size: var(--font-size-large-px);
     }
 }
 
@@ -121,6 +127,9 @@ $mobile-size: calc(var(--spacing-small-px) + var(--spacing-micro-px));
     padding-inline: var(--spacing-xsmall);
     border-radius: var(--border-radius-rounded);
     color: var(--color-text-black);
+    @include breakpoints.tablet {
+        font-size: var(--font-size-xsmall-px);
+    }
 }
 
 .completedPill {
@@ -128,6 +137,9 @@ $mobile-size: calc(var(--spacing-small-px) + var(--spacing-micro-px));
     padding-inline: var(--spacing-xsmall);
     border-radius: var(--border-radius-rounded);
     color: var(--color-text-default-new);
+    @include breakpoints.tablet {
+        font-size: var(--font-size-xsmall-px);
+    }
 }
 
 .thumbnailSkeleton {
@@ -158,4 +170,7 @@ $mobile-size: calc(var(--spacing-small-px) + var(--spacing-micro-px));
 
 .seeMore {
     color: var(--color-text-faded-new);
+    @include breakpoints.tablet {
+        font-size: var(--font-size-normal-px);
+    }
 }

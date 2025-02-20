@@ -1,3 +1,5 @@
+@use "src/styles/breakpoints";
+
 .button {
     color: var(--color-text-faded-new);
     background: var(--color-background-elevated);
@@ -7,12 +9,25 @@
     }
     border: none;
     padding: var(--spacing-medium2-px);
+    box-shadow: var(--shadow-small);
 }
 
 .buttonContent {
     display: flex;
     align-items: center;
     gap: var(--spacing-xsmall);
+}
+
+.popularText {
+    @include breakpoints.tablet {
+        font-size: var(--font-size-normal-px);
+    }
+}
+
+.navigateQuranText {
+    @include breakpoints.tablet {
+        font-size: var(--font-size-normal-px);
+    }
 }
 
 .buttonContainer {

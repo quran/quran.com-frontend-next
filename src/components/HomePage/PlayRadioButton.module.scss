@@ -13,6 +13,9 @@ $button-hover-color: rgba(
 
 .listenToRadio {
   color: var(--color-text-default-new);
+  @include breakpoints.tablet {
+    font-size: var(--font-size-normal-px);
+  }
 }
 
 .container {

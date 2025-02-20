@@ -15,7 +15,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100px;
+    width: 125px;
 }
 
 .dropdownContainer {
@@ -69,8 +69,14 @@
     align-items: center;
     gap: var(--spacing-xsmall);
     color: var(--color-text-faded-new);
+    @include breakpoints.tablet {
+        font-size: var(--font-size-normal-px);
+    }
 }
 
 .chaptersAndVerses {
     font-weight: var(--font-weight-bold);
+    @include breakpoints.tablet {
+        font-size: var(--font-size-normal-px);
+    }
 }

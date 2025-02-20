@@ -20,6 +20,9 @@
         align-items: center;
         width: 100%;
     }
+    @include breakpoints.tablet {
+        font-size: var(--font-size-large-px);
+    }
 }
 
 .chapterCard {
@@ -58,6 +61,9 @@
     @include breakpoints.smallerThanTablet {
         font-size: var(--spacing-medium-px);
     }
+    @include breakpoints.tablet {
+        font-size: var(--font-size-normal-px);
+    }
 }
 
 .transliteratedName {
@@ -70,5 +76,8 @@
 .beginButton {
     @include breakpoints.smallerThanTablet {
         border-radius: var(--border-radius-rounded);
+    }
+    @include breakpoints.tablet {
+        font-size: var(--font-size-normal-px);
     }
 }

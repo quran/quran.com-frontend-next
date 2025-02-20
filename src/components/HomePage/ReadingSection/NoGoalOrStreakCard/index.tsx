@@ -21,7 +21,7 @@ const NoGoalOrStreakCard = () => {
         </div>
         <IconContainer size={IconSize.Xsmall} icon={<ArrowIcon />} shouldForceSetColors={false} />
       </div>
-      <p>{t('stay-consistent')}</p>
+      <p className={styles.stayConsistentText}>{t('stay-consistent')}</p>
     </Card>
   );
 };

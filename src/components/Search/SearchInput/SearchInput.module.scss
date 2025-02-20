@@ -34,6 +34,9 @@
     input::placeholder {
         color: var(--color-text-faded-new);
         opacity: 1;
+        @include breakpoints.tablet {
+            font-size: var(--font-size-normal-px);
+        }
     }
 
     input {

@@ -4,10 +4,10 @@
     padding-block-end: var(--spacing-medium);
 
     h1 {
-        font-size: var(--font-size-xlarge);
+        font-size: var(--font-size-xlarge-px);
         font-weight: var(--font-weight-bold);
         @include breakpoints.tablet {
-            font-size: var(--font-size-jumbo);
+            font-size: var(--font-size-jumbo-px);
         }
     }
 }
@@ -46,6 +46,9 @@
     @include breakpoints.smallerThanTablet {
         font-size: var(--font-size-small);
     }
+    @include breakpoints.tablet {
+        font-size: var(--font-size-normal-px);
+    }
 }
 
 .qrIcons {
@@ -79,5 +82,8 @@
 .title {
     @include breakpoints.smallerThanTablet {
         font-size: var(--font-size-normal);
+    }
+    @include breakpoints.tablet {
+        font-size: var(--font-size-large-px);
     }
 }

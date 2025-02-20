@@ -5,6 +5,9 @@
     flex-direction: row;
     align-items: center;
     gap: var(--spacing-micro);
+    @include breakpoints.tablet {
+        font-size: var(--font-size-large-px);
+    }
 }
 
 .cardOuterContainer {

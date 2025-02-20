@@ -54,7 +54,7 @@ const ReadingSection: React.FC<Props> = () => {
           href={getProfileNavigationUrl()}
           onClick={onMyQuranClicked}
         >
-          {t('my-quran')}
+          <p className={styles.myQuranText}>{t('my-quran')}</p>
         </Link>
       </div>
     </div>

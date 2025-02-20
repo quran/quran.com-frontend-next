@@ -26,7 +26,7 @@ const NavigationButton = () => {
     >
       <div className={heroButtonStyles.buttonContent}>
         <IconContainer size={IconSize.Xsmall} icon={<TheListIcon />} shouldForceSetColors={false} />
-        <p>{t('navigate-quran')}</p>
+        <p className={heroButtonStyles.navigateQuranText}>{t('navigate-quran')}</p>
       </div>
     </Button>
   );
