@@ -135,13 +135,13 @@ const DevelopersPage = () => {
               components={[
                 <a
                   key={0}
-                  href="https://github.com/quran/quran.com-frontend-next/pulls"
+                  href="https://github.com/quran/quran.com-frontend-next/issues"
                   target="_blank"
                   rel="noreferrer"
                 />,
                 <a
                   key={1}
-                  href="https://github.com/quran/quran.com-frontend-next/pulls"
+                  href="https://github.com/quran/quran.com-frontend-next/issues"
                   target="_blank"
                   rel="noreferrer"
                 />,
