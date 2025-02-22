@@ -2,6 +2,9 @@
 
 .header {
     padding-block-end: var(--spacing-medium);
+    @include breakpoints.tablet {
+        padding-block-end: var(--spacing-large-px);
+    }
 
     h1 {
         font-size: var(--font-size-xlarge-px);

@@ -8,6 +8,7 @@
 }
 
 .streak {
+    padding-inline-end: var(--spacing-small-px);
     font-size: var(--font-size-jumbo);
     font-weight: var(--font-weight-bold);
     color: var(--color-text-black);
@@ -21,6 +22,9 @@
     align-items: center;
     gap: var(--spacing-micro);
     & > svg:first-child {
+        padding-inline-start: var(--spacing-medium-px);
+        padding-inline-end: var(--spacing-medium2-px);
+
         @include breakpoints.tablet {
             width: 60px;
             height: 60px;
@@ -43,6 +47,10 @@
     @include breakpoints.tablet {
         font-size: var(--font-size-normal-px);
     }
+}
+
+.container {
+    padding-inline-end: var(--spacing-medium-px);
 }
 
 .circularProgressbar {

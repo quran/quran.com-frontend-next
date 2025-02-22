@@ -6,6 +6,10 @@
     align-items: center;
     justify-content: space-between;
     padding-block-end: var(--spacing-medium);
+    @include breakpoints.tablet {
+        padding-block-end: var(--spacing-large-px);
+        padding-block-start: var(--spacing-xlarge-px);
+    }
 
     h1 {
         font-size: var(--font-size-xlarge-px);
@@ -50,8 +54,18 @@
 }
 
 .stayConsistentText {
+    padding-block-start: var(--spacing-small-px);
     @include breakpoints.tablet {
         font-size: var(--font-size-normal-px);
+    }
+}
+
+.iconContainer {
+    display: flex;
+    padding-inline-end: var(--spacing-small-px);
+    svg {
+        width: var(--spacing-large-px);
+        height: var(--spacing-large-px);
     }
 }
 
@@ -80,6 +94,8 @@
 }
 
 .streakCard {
+    box-shadow: none !important;
+    padding-inline: var(--spacing-medium-px);
     background-color: var(--color-streaks-light);
     @include breakpoints.smallerThanTablet {
         padding: var(--spacing-small-px) var(--spacing-small-px) var(--spacing-small-px) var(--spacing-medium-px);

@@ -8,6 +8,9 @@ $mobile-size: calc(var(--spacing-small-px) + var(--spacing-micro-px));
     align-items: center;
     justify-content: space-between;
     padding-block-end: var(--spacing-medium);
+    @include breakpoints.tablet {
+        padding-block-end: var(--spacing-large-px);
+    }
 
     h1 {
         font-size: var(--font-size-xlarge-px);
@@ -30,7 +33,10 @@ $mobile-size: calc(var(--spacing-small-px) + var(--spacing-micro-px));
     flex-direction: row;
     gap: var(--spacing-medium);
     overflow-x: auto;
-    padding: var(--spacing-xsmall);
+    padding-inline: var(--spacing-xsmall);
+    margin-inline: calc(-1 * var(--spacing-xsmall));
+    padding-block: var(--spacing-medium);
+    margin-block: calc(-1 * var(--spacing-medium));
 
     scrollbar-width: none;
     &::-webkit-scrollbar {

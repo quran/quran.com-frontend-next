@@ -49,7 +49,9 @@ const NewCard: React.FC<Props> = ({ isGuestWithReadingSessions, isUserWithReadin
       >
         <div className={styles.cardOuterContainer}>
           <div className={styles.cardWithIcon}>
-            <SunIcon />
+            <div className={styles.iconContainer}>
+              <SunIcon />
+            </div>
             <div className={styles.link}>
               <Trans
                 i18nKey={

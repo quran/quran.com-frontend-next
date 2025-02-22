@@ -10,6 +10,15 @@
     }
 }
 
+.iconContainer {
+    display: flex;
+    padding-inline-end: var(--spacing-small-px);
+    svg {
+        width: var(--spacing-large-px);
+        height: var(--spacing-large-px);
+    }
+}
+
 .cardOuterContainer {
     justify-content: space-between;
     display: flex;

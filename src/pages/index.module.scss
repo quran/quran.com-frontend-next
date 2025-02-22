@@ -61,13 +61,18 @@ $list-max-width: 80rem;
   }
 }
 
+.homepageCard:not(:first-child) {
+  @include breakpoints.tablet {
+    padding-block-start: var(--spacing-large-px);
+  }
+}
+
 .homepageCard {
-  padding-block: var(--spacing-small-px);
   @include breakpoints.smallerThanTablet {
     padding-inline: var(--spacing-small-px);
     margin-inline: var(--spacing-small-px);
   }
-  padding-block-end: var(--spacing-medium2-px);
+  padding-block-end: var(--spacing-large-px);
   border-bottom: 1px solid var(--color-separators);
 }
 
