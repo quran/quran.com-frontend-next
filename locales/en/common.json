@@ -191,7 +191,11 @@
     "email": "Email",
     "firstName": "First Name",
     "lastName": "Last Name",
-    "title": "Title"
+    "title": "Title",
+    "username": "Username",
+    "password": "Password",
+    "confirm-password": "Confirm Password",
+    "verification-code": "Verification Code"
   },
   "from": "From",
   "fundraising-sticky-banner": {

@@ -1,140 +1,115 @@
-import { useState } from 'react';
+import { FC, useState } from 'react';
 
 import { useRouter } from 'next/router';
-import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
 
-import EmailSent from './EmailSent';
-import Feature from './Feature';
-import styles from './login.module.scss';
-import ResendEmailSection from './ResendEmailSection';
+import AuthTabs, { AuthTab } from './AuthTabs';
+import SocialButtons from './SocialButtons';
+import VerificationCodeForm from './VerificationCode/VerificationCodeForm';
 
-import { SubmissionResult } from '@/components/FormBuilder/FormBuilder';
-import EmailLogin, { EmailLoginData, sendMagicLink } from '@/components/Login/EmailLogin';
-import SocialLogin from '@/components/Login/SocialLogin';
-import Button, { ButtonType, ButtonVariant } from '@/dls/Button/Button';
-import Link, { LinkVariant } from '@/dls/Link/Link';
-import CalendarIcon from '@/icons/calendar-1.svg';
-import GoalIcon from '@/icons/goal-1.svg';
-import HeartIcon from '@/icons/love.svg';
-import MobileIcon from '@/icons/mobile-1.svg';
-import NotesIcon from '@/icons/notes-empty.svg';
-import MoreIcon from '@/icons/sun-outline.svg';
-import { logButtonClick, logFormSubmission } from '@/utils/eventLogger';
-import AuthType from 'types/auth/AuthType';
+import Button from '@/dls/Button/Button';
+import ArrowLeftIcon from '@/icons/west.svg';
+import authStyles from '@/styles/auth/auth.module.scss';
+import { signUp } from '@/utils/auth/authRequests';
+import SignUpRequest from 'types/auth/SignUpRequest';
 
-enum LoginType {
-  Social = 'social',
-  Email = 'email',
+enum LoginView {
+  SOCIAL = 'social',
+  EMAIL = 'email',
+  VERIFICATION = 'verification',
 }
 
-const LoginContainer = () => {
-  const [loginType, setLoginType] = useState(LoginType.Social);
-  const { t } = useTranslation();
-  const { query } = useRouter();
-  const redirect = query.r ? decodeURIComponent(query.r.toString()) : undefined;
+interface Props {
+  redirect?: string;
+}
 
-  const [magicLinkVerificationCode, setMagicLinkVerificationCode] = useState('');
-  const [email, setEmail] = useState('');
+const LoginContainer: FC<Props> = ({ redirect }) => {
+  const { t } = useTranslation('login');
+  const [loginView, setLoginView] = useState<LoginView>(LoginView.SOCIAL);
+  const [activeTab, setActiveTab] = useState(AuthTab.SignIn);
+  const [signUpData, setSignUpData] = useState<SignUpRequest | null>(null);
+  const router = useRouter();
 
-  const onEmailLoginSubmit = ({ email: emailInput }): SubmissionResult<EmailLoginData> => {
-    setEmail(emailInput);
-    return sendMagicLink(emailInput, redirect)
-      .then(setMagicLinkVerificationCode)
-      .catch(() => {
-        return {
-          errors: {
-            email: t('common:error.email-login-fail'),
-          },
-        };
-      });
+  const onBack = () => {
+    if (loginView === LoginView.VERIFICATION) {
+      setLoginView(LoginView.EMAIL);
+    } else if (loginView === LoginView.EMAIL) {
+      setLoginView(LoginView.SOCIAL);
+    } else {
+      router.back();
+    }
   };
 
-  const onMagicLinkClicked = () => {
-    setLoginType(LoginType.Email);
-    // eslint-disable-next-line i18next/no-literal-string
-    logButtonClick(`${AuthType.Email}_login`);
+  const onEmailLoginClick = () => {
+    setLoginView(LoginView.EMAIL);
   };
 
-  const onOtherOptionsClicked = () => {
-    setLoginType(LoginType.Social);
-    logButtonClick('other_auth_options');
+  const onSignUpSuccess = (data: SignUpRequest) => {
+    setSignUpData(data);
+    setLoginView(LoginView.VERIFICATION);
   };
 
-  const onResendEmailButtonClicked = () => {
-    onEmailLoginSubmit({ email });
-    logButtonClick('resend_email');
+  const handleResendCode = async () => {
+    if (!signUpData) return;
+
+    try {
+      const { data: response } = await signUp(signUpData);
+
+      if (!response.success) {
+        throw new Error('Failed to resend verification code');
+      }
+    } catch (error) {
+      throw new Error('Failed to resend verification code');
+    }
   };
 
-  const onLoginWithEmailSubmit = (data) => {
-    logFormSubmission('email_login');
-    return onEmailLoginSubmit(data);
-  };
+  const renderContent = () => {
+    if (loginView === LoginView.VERIFICATION) {
+      return (
+        <div className={authStyles.pageContainer}>
+          <VerificationCodeForm
+            email={signUpData?.email || ''}
+            signUpData={signUpData}
+            onBack={onBack}
+            onResendCode={handleResendCode}
+          />
+        </div>
+      );
+    }
 
-  if (magicLinkVerificationCode) {
     return (
-      <div className={styles.outerContainer}>
-        <EmailSent email={email} verificationCode={magicLinkVerificationCode} />
-        <ResendEmailSection
-          onResendButtonClicked={onResendEmailButtonClicked}
-          key={magicLinkVerificationCode}
-        />
-      </div>
-    );
-  }
-
-  return (
-    <div className={styles.outerContainer}>
-      <div className={styles.innerContainer}>
-        <div className={styles.title}>{t('login:login-title')}</div>
-        {loginType === LoginType.Email ? (
-          <EmailLogin back={onOtherOptionsClicked} onSubmit={onLoginWithEmailSubmit} />
+      <>
+        <h1 className={authStyles.title}>{t('sign-in-or-sign-up')}</h1>
+        {loginView === LoginView.SOCIAL ? (
+          <SocialButtons redirect={redirect} onEmailLoginClick={onEmailLoginClick} />
         ) : (
           <>
-            <Feature
-              icon={<NotesIcon />}
-              text={
-                <Trans
-                  i18nKey="login:feature-6"
-                  components={{
-                    b: <b className={styles.bold} key={0} />,
-                  }}
-                />
-              }
+            <AuthTabs
+              activeTab={activeTab}
+              onTabChange={setActiveTab}
+              redirect={redirect}
+              onSignUpSuccess={onSignUpSuccess}
             />
-            <Feature icon={<GoalIcon />} text={t('login:feature-1')} />
-            <Feature icon={<CalendarIcon />} text={t('login:feature-2')} />
-            <Feature icon={<HeartIcon />} text={t('login:feature-3')} />
-            <Feature icon={<MobileIcon />} text={t('login:feature-4')} />
-            <Feature icon={<MoreIcon />} text={t('login:feature-5')} />
-            <p className={styles.cta}>{t('login:login-cta')}</p>
+            <Button onClick={onBack} className={authStyles.backButton}>
+              <ArrowLeftIcon />
+              {t('back')}
+            </Button>
           </>
         )}
+      </>
+    );
+  };
 
-        {loginType === LoginType.Social && (
-          <>
-            <SocialLogin redirect={redirect} />
-            {process.env.NEXT_PUBLIC_ENABLE_MAGIC_LINK_LOGIN === 'true' && (
-              <Button
-                onClick={onMagicLinkClicked}
-                className={styles.loginButton}
-                variant={ButtonVariant.Outlined}
-                type={ButtonType.Success}
-              >
-                {t('login:continue-email')}
-              </Button>
-            )}
-          </>
-        )}
-        <span className={styles.privacyText}>
-          <Trans
-            components={{
-              link: <Link href="/privacy" variant={LinkVariant.Blend} isNewTab />,
-              link1: <Link href="/terms-and-conditions" variant={LinkVariant.Blend} isNewTab />,
-            }}
-            i18nKey="login:privacy-policy"
-          />
-        </span>
+  return (
+    <div className={authStyles.outerContainer}>
+      <div
+        className={
+          loginView === LoginView.VERIFICATION
+            ? authStyles.fullContainer
+            : authStyles.innerContainer
+        }
+      >
+        {renderContent()}
       </div>
     </div>
   );
