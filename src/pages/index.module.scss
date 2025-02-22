@@ -70,7 +70,7 @@ $list-max-width: 80rem;
 .homepageCard {
   @include breakpoints.smallerThanTablet {
     padding-inline: var(--spacing-small-px);
-    margin-inline: var(--spacing-small-px);
+    margin-inline: var(--spacing-medium2-px);
   }
   padding-block-end: var(--spacing-large-px);
   border-bottom: 1px solid var(--color-separators);

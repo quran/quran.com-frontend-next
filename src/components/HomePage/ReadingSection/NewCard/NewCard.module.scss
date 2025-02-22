@@ -8,6 +8,10 @@
     @include breakpoints.tablet {
         font-size: var(--font-size-large-px);
     }
+
+    @include breakpoints.smallerThanTablet {
+        margin: auto;
+    }
 }
 
 .iconContainer {
@@ -16,6 +20,14 @@
     svg {
         width: var(--spacing-large-px);
         height: var(--spacing-large-px);
+    }
+
+    @include breakpoints.smallerThanTablet {
+        padding-inline-end: var(--spacing-xxsmall-px);
+        svg {
+            width: var(--spacing-medium-px);
+            height: var(--spacing-medium-px);
+        }
     }
 }
 
@@ -41,9 +53,10 @@
 
 .firstTimeReadingCard {
     @include breakpoints.smallerThanTablet {
-        box-shadow: none;
+        box-shadow: none !important;
         border-radius: 0;
         padding: var(--spacing-xxsmall);
+        padding-block: var(--spacing-small-px);
     }
 }
 

@@ -23,6 +23,7 @@
   height: 100%;
   align-items: center;
   padding-inline: var(--spacing-small);
+  padding-block: var(--spacing-medium2-px);
 
   @include breakpoints.tablet {
     max-width: calc(18 * var(--spacing-mega));
@@ -30,8 +31,6 @@
   }
 
   margin-inline: auto;
-
-  padding-block: var(--spacing-small-px);
 }
 
 .logoContainer {
@@ -48,6 +47,6 @@
   margin-block-start: var(--spacing-medium);
   @include breakpoints.smallerThanTablet {
     gap: var(--spacing-medium-px);
-    margin-block-start: var(--spacing-xsmall-px);
+    margin-block-start: var(--spacing-small-px);
   }
 }

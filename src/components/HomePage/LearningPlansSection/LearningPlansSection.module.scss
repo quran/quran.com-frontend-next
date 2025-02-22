@@ -33,10 +33,10 @@ $mobile-size: calc(var(--spacing-small-px) + var(--spacing-micro-px));
     flex-direction: row;
     gap: var(--spacing-medium);
     overflow-x: auto;
-    padding-inline: var(--spacing-xsmall);
-    margin-inline: calc(-1 * var(--spacing-xsmall));
-    padding-block: var(--spacing-medium);
-    margin-block: calc(-1 * var(--spacing-medium));
+    padding-inline: var(--spacing-large);
+    margin-inline: calc(-1 * var(--spacing-large));
+    padding-block: var(--spacing-large);
+    margin-block: calc(-1 * var(--spacing-large));
 
     scrollbar-width: none;
     &::-webkit-scrollbar {

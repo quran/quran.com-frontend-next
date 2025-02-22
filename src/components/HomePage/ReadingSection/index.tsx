@@ -48,7 +48,9 @@ const ReadingSection: React.FC<Props> = () => {
     <div className={styles.header}>
       <h1>{headerText}</h1>
       <div className={styles.cardWithIcon}>
-        <BookmarkRemoveIcon />
+        <div className={styles.myQuranContainer}>
+          <BookmarkRemoveIcon />
+        </div>
         <Link
           variant={LinkVariant.Blend}
           href={getProfileNavigationUrl()}

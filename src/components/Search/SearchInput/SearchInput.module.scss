@@ -37,6 +37,9 @@
     border: none !important;
     width: 100%;
     height: 100%;
+    @include breakpoints.smallerThanTablet {
+        height: 44px !important;
+    }
 
     input::placeholder {
         color: var(--color-text-faded-new);
