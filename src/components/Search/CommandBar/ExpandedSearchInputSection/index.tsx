@@ -14,6 +14,7 @@ import { getNewSearchResults } from '@/api';
 import DataFetcher from '@/components/DataFetcher';
 import DataContext from '@/contexts/DataContext';
 import { selectRecentNavigations } from '@/redux/slices/CommandBar/state';
+import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
 import {
   SearchNavigationResult,
   SearchNavigationType,
