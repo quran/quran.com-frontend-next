@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 import classNames from 'classnames';
+import { useRouter } from 'next/router';
 import { useHotkeys } from 'react-hotkeys-hook';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
@@ -20,6 +21,7 @@ import {
   stopCommandBarVoiceFlow,
 } from '@/redux/slices/voiceSearch';
 import { logButtonClick } from '@/utils/eventLogger';
+import { getSearchQueryNavigationUrl } from '@/utils/navigation';
 import { isMobile } from '@/utils/responsive';
 
 type Props = {
@@ -35,6 +37,7 @@ const SearchInput: React.FC<Props> = ({
   shouldExpandOnClick = false,
   shouldOpenDrawerOnMobile = false,
 }) => {
+  const router = useRouter();
   const isVoiceSearchFlowStarted = useSelector(selectIsCommandBarVoiceFlowStarted, shallowEqual);
   const [searchQuery, setSearchQuery] = useState<string>(initialSearchQuery || '');
   const isExpanded = useSelector(selectIsExpanded);
@@ -93,36 +96,45 @@ const SearchInput: React.FC<Props> = ({
     }
   };
 
+  const onSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery) {
+      router.push(getSearchQueryNavigationUrl(searchQuery));
+    }
+  };
+
   return (
     <div
       ref={containerRef}
       className={classNames(styles.headerOuterContainer, { [styles.expanded]: isExpanded })}
     >
       <div className={styles.inputContainer}>
-        <Input
-          onClick={onInputClick}
-          id="searchQuery"
-          disabled={isVoiceSearchFlowStarted}
-          onChange={onSearchQueryChange}
-          value={searchQuery}
-          placeholder={placeholder}
-          onClearClicked={onClearClicked}
-          clearable
-          prefix={<SearchIcon />}
-          prefixSuffixContainerClassName={styles.prefixSuffixContainer}
-          containerClassName={styles.input}
-          htmlType="search"
-          enterKeyHint="search"
-          suffix={
-            <>
-              <KeyboardInput meta keyboardKey="K" />
-              <TarteelVoiceSearchTrigger isCommandBar onClick={onTarteelTriggerClicked} />
-            </>
-          }
-          shouldUseDefaultStyles={false}
-          fixedWidth={false}
-          size={InputSize.Large}
-        />
+        <form onSubmit={onSubmit} className={styles.form}>
+          <Input
+            onClick={onInputClick}
+            id="searchQuery"
+            disabled={isVoiceSearchFlowStarted}
+            onChange={onSearchQueryChange}
+            value={searchQuery}
+            placeholder={placeholder}
+            onClearClicked={onClearClicked}
+            clearable
+            prefix={<SearchIcon />}
+            prefixSuffixContainerClassName={styles.prefixSuffixContainer}
+            containerClassName={styles.input}
+            htmlType="search"
+            enterKeyHint="search"
+            suffix={
+              <>
+                <KeyboardInput meta keyboardKey="K" />
+                <TarteelVoiceSearchTrigger isCommandBar onClick={onTarteelTriggerClicked} />
+              </>
+            }
+            shouldUseDefaultStyles={false}
+            fixedWidth={false}
+            size={InputSize.Large}
+          />
+        </form>
       </div>
       {isExpanded && (
         <div className={styles.dropdownContainer}>
