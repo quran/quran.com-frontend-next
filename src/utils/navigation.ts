@@ -365,6 +365,8 @@ export const getLoginNavigationUrl = (redirectTo?: string) =>
 
 export const getReadingGoalProgressNavigationUrl = () => '/reading-goal/progress';
 
+export const getFirstTimeReadingGuideNavigationUrl = () => '/first-time-reading-guide';
+
 export const getNotesNavigationUrl = () => '/notes-and-reflections';
 
 export const getNotificationSettingsNavigationUrl = () => '/notification-settings';

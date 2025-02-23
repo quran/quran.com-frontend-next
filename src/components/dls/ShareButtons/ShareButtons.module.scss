@@ -1,0 +1,39 @@
+.shareOptionsButtons {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-medium);
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 100%;
+}
+
+.shareOptionButton {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--spacing-xsmall);
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 0;
+
+    span {
+        font-size: var(--font-size-small);
+        color: var(--color-text-default);
+    }
+}
+
+.socialIcon {
+    width: var(--spacing-xlarge-px);
+    height: var(--spacing-xlarge-px);
+}
+
+.utilityIconWrapper {
+    width: var(--spacing-xlarge-px);
+    height: var(--spacing-xlarge-px);
+    background-color: var(--color-background-alternative);
+    border-radius: var(--border-radius-circle);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

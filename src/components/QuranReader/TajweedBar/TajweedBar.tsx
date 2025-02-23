@@ -6,7 +6,6 @@ import { shallowEqual, useSelector } from 'react-redux';
 
 import styles from './TajweedBar.module.scss';
 
-import NewLabel from '@/dls/Badge/NewLabel';
 import useThemeDetector from '@/hooks/useThemeDetector';
 import ChevronDownIcon from '@/icons/chevron-down.svg';
 import { selectContextMenu } from '@/redux/slices/QuranReader/contextMenu';
@@ -81,7 +80,6 @@ const TajweedColors = () => {
         tabIndex={0}
       >
         <p>{t('tajweed-colors')}</p>
-        <NewLabel />
         <span
           className={classNames(styles.chevronIconContainer, {
             [styles.rotate180]: showTajweedBar,

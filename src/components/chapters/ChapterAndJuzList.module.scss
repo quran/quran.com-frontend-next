@@ -46,6 +46,10 @@
   padding-block-end: var(--spacing-medium);
 }
 
+.tabItem {
+  background-color: unset;
+}
+
 // sorter
 .sorter {
   display: flex;
