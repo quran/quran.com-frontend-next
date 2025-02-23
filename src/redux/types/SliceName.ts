@@ -10,7 +10,6 @@ enum SliceName {
   NAVBAR = 'navbar',
   SESSION = 'session',
   BOOKMARKS = 'bookmarks',
-  VOICE_SEARCH = 'voiceSearch',
   WELCOME_MESSAGE = 'welcomeMessage',
   COMMAND_BAR = 'commandBar',
   CONTEXT_MENU = 'contextMenu',

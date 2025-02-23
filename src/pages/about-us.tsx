@@ -9,7 +9,6 @@ import styles from './contentPage.module.scss';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import PageContainer from '@/components/PageContainer';
 import Link from '@/dls/Link/Link';
-import { logTarteelLinkClick } from '@/utils/eventLogger';
 import { getBlurDataUrl } from '@/utils/image';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl } from '@/utils/navigation';
@@ -17,10 +16,6 @@ import { getCanonicalUrl } from '@/utils/navigation';
 const path = '/about-us';
 const AboutUsPage = () => {
   const { t, lang } = useTranslation('about');
-
-  const onTarteelLinkClicked = () => {
-    logTarteelLinkClick('about_us_page');
-  };
 
   return (
     <>
@@ -33,12 +28,7 @@ const AboutUsPage = () => {
         <div className={styles.contentPage}>
           <h1>{t('common:about')}</h1>
           <p>
-            <Trans
-              i18nKey="about:main-description"
-              components={[
-                <Link key={0} href="https://tarteel.ai" isNewTab onClick={onTarteelLinkClicked} />,
-              ]}
-            />
+            <Trans i18nKey="about:main-description" />
           </p>
           <p className={styles.heading}>{t('credits.title')}</p>
           <p>{t('credits.desc')}</p>

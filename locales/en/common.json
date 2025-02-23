@@ -103,7 +103,6 @@
     "navigations": "Navigations",
     "no-nav-results": "No navigation results",
     "placeholder": "Search the Quran...",
-    "powered-by": "Voice search powered by Tarteel.ai",
     "recent-navigations": "Recent navigations",
     "search-by-voice": "Search by voice",
     "try-navigating": "Try navigating to"
@@ -368,10 +367,6 @@
     "tafsir-desc": "Read {{tafsirName}} for Ayah {{verseNumber}} of Surah {{surahName}}",
     "tafsirs-desc": "Read various Tafsirs of Ayah {{ayahNumber}} of Surah {{surahName}} by trusted Tafsir scholars",
     "title": "Tafsir"
-  },
-  "tarteel": {
-    "app": "Tarteel app",
-    "name": "Tarteel.ai"
   },
   "terms-and-conditions": "Terms and Conditions",
   "theme": "Theme",

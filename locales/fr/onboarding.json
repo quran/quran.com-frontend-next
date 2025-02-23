@@ -87,10 +87,6 @@
       "description": "Choisissez parmi une variété de traductions dans plusieurs langues. Astuce : Comparez les traductions en sélectionnant plusieurs options",
       "title": "Traductions"
     },
-    "voice-search": {
-      "description": "Appuyez sur l'icône du micro et récitez l'Ayah que vous recherchez. Petit conseil ! Pour découvrir où quelqu'un récite (ex. les prières Taraweeh), appuyez sur l'icône du micro. Après qu'une ou deux Ayahs soient détectés, appuyez sur stop pour trouver l'emplacement",
-      "title": "Recherche vocale (Tarteel)"
-    },
     "wbw-audio": {
       "description": "Sélectionnez cette option pour écouter chaque mot individuellement en cliquant simplement sur le mot !",
       "title": "Écouter la translittération mot à mot en cliquant sur le mot"

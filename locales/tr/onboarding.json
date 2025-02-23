@@ -87,10 +87,6 @@
       "description": "Birden çok dilde çeşitli çeviriler arasından seçim yapın. İpucu: Birden fazla seçenek belirleyerek çevirileri karşılaştırın",
       "title": "Çeviriler"
     },
-    "voice-search": {
-      "description": "Mikrofon simgesine dokunun ve aradığınız ayeti okuyun. Hızlı ipucu! Birinin nerede okuduğunu öğrenmek için (Örn. Teravih namazı) mikrofon simgesine dokunun. Bir veya iki ayet tespit edildikten sonra konumu bulmak için dur tuşuna basın",
-      "title": "Sesli Arama (Tarteel)"
-    },
     "wbw-audio": {
       "description": "Sadece kelimenin üzerine tıklayarak her kelimeyi ayrı ayrı dinlemek için bu seçeneği seçin!",
       "title": "Kelimenin üzerine tıklayarak kelime kelime harf çevirisini dinleyin"
