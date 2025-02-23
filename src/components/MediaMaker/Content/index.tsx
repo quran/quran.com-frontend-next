@@ -121,7 +121,7 @@ const MediaMakerContent: React.FC<Props> = ({
               <AbsoluteFill
                 style={{
                   height: '250px',
-                  paddingTop: isPortrait ? 90 : 40,
+                  paddingTop: isPortrait ? 180 : 40,
                   backgroundImage: 'linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0))',
                 }}
               >
