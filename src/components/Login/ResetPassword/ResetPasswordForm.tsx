@@ -13,6 +13,7 @@ import { useToast, ToastStatus } from '@/dls/Toast/Toast';
 import authStyles from '@/styles/auth/auth.module.scss';
 import QueryParam from '@/types/QueryParam';
 import { resetPassword } from '@/utils/auth/authRequests';
+import { logButtonClick, logFormSubmission } from '@/utils/eventLogger';
 import { getLoginNavigationUrl } from '@/utils/navigation';
 
 const ResetPasswordForm: React.FC = () => {
@@ -25,6 +26,7 @@ const ResetPasswordForm: React.FC = () => {
   const formFields: FormBuilderFormField[] = getPasswordFields(t);
 
   const handleSubmit = async (values: { password: string; confirmPassword: string }) => {
+    logFormSubmission('reset_password');
     try {
       if (values.password !== values.confirmPassword) {
         return getFormErrors(t, ErrorType.MISMATCH);
@@ -51,6 +53,7 @@ const ResetPasswordForm: React.FC = () => {
   };
 
   const handleBack = () => {
+    logButtonClick('reset_password_back');
     router.push(getLoginNavigationUrl());
   };
 

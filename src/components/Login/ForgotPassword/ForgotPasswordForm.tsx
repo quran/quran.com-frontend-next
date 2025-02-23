@@ -12,6 +12,7 @@ import { FormBuilderFormField } from '@/components/FormBuilder/FormBuilderTypes'
 import { useToast, ToastStatus } from '@/dls/Toast/Toast';
 import authStyles from '@/styles/auth/auth.module.scss';
 import { requestPasswordReset } from '@/utils/auth/authRequests';
+import { logButtonClick, logFormSubmission } from '@/utils/eventLogger';
 import { getLoginNavigationUrl } from '@/utils/navigation';
 
 const ForgotPasswordForm: React.FC = () => {
@@ -23,6 +24,7 @@ const ForgotPasswordForm: React.FC = () => {
   const formFields: FormBuilderFormField[] = [getEmailField(t)];
 
   const handleSubmit = async (values: { email: string }) => {
+    logFormSubmission('forgot_password');
     try {
       setIsSubmitting(true);
       const { data: response, errors } = await requestPasswordReset(values.email);
@@ -42,6 +44,7 @@ const ForgotPasswordForm: React.FC = () => {
   };
 
   const handleBack = () => {
+    logButtonClick('forgot_password_back');
     router.push(getLoginNavigationUrl());
   };
 

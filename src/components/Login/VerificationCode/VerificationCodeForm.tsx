@@ -15,6 +15,7 @@ import Button, { ButtonShape, ButtonType } from '@/dls/Button/Button';
 import { useToast } from '@/dls/Toast/Toast';
 import SignUpRequest from '@/types/auth/SignUpRequest';
 import { signUp } from '@/utils/auth/authRequests';
+import { logButtonClick, logFormSubmission } from '@/utils/eventLogger';
 
 interface Props {
   email: string;
@@ -42,6 +43,7 @@ const VerificationCodeForm: FC<Props> = ({ email, onBack, onResendCode, signUpDa
   }, [resendTimer]);
 
   const handleSubmit = async (code: string) => {
+    logFormSubmission('verification_code_submit');
     setError('');
     if (!signUpData) {
       setError(t('errors.verification-code-invalid'));
@@ -75,6 +77,7 @@ const VerificationCodeForm: FC<Props> = ({ email, onBack, onResendCode, signUpDa
   };
 
   const handleResendCode = async () => {
+    logButtonClick('verification_code_resend');
     if (resendTimer > 0) return;
 
     try {

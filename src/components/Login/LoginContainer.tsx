@@ -11,6 +11,7 @@ import Button from '@/dls/Button/Button';
 import ArrowLeftIcon from '@/icons/west.svg';
 import authStyles from '@/styles/auth/auth.module.scss';
 import { signUp } from '@/utils/auth/authRequests';
+import { logButtonClick, logEvent } from '@/utils/eventLogger';
 import SignUpRequest from 'types/auth/SignUpRequest';
 
 enum LoginView {
@@ -31,6 +32,7 @@ const LoginContainer: FC<Props> = ({ redirect }) => {
   const router = useRouter();
 
   const onBack = () => {
+    logButtonClick('login_back');
     if (loginView === LoginView.VERIFICATION) {
       setLoginView(LoginView.EMAIL);
     } else if (loginView === LoginView.EMAIL) {
@@ -38,6 +40,11 @@ const LoginContainer: FC<Props> = ({ redirect }) => {
     } else {
       router.back();
     }
+  };
+
+  const onTabChange = (tab: AuthTab) => {
+    logEvent('login_tab_change', { tab });
+    setActiveTab(tab);
   };
 
   const onEmailLoginClick = () => {
@@ -86,7 +93,7 @@ const LoginContainer: FC<Props> = ({ redirect }) => {
           <>
             <AuthTabs
               activeTab={activeTab}
-              onTabChange={setActiveTab}
+              onTabChange={onTabChange}
               redirect={redirect}
               onSignUpSuccess={onSignUpSuccess}
             />
