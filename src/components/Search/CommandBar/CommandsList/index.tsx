@@ -14,14 +14,12 @@ import CommandControl from './CommandControl';
 import styles from './CommandList.module.scss';
 import CommandPrefix from './CommandPrefix';
 
-import SearchResultsHeader from '@/components/Search/SearchResults/SearchResultsHeader';
 import useScroll, { SMOOTH_SCROLL_TO_CENTER } from '@/hooks/useScrollToElement';
 import {
   addRecentNavigation,
   removeRecentNavigation,
   setIsExpanded,
 } from '@/redux/slices/CommandBar/state';
-import SearchQuerySource from '@/types/SearchQuerySource';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getSearchQueryNavigationUrl, resolveUrlBySearchNavigationType } from '@/utils/navigation';
 import { getResultType } from '@/utils/search';
@@ -136,15 +134,6 @@ const CommandsList: React.FC<Props> = ({
     dispatch({ type: removeRecentNavigation.type, payload: navigationItemKey });
   };
 
-  const onSearchResultsHeaderClicked = () => {
-    navigateToLink({
-      name: searchQuery,
-      resultType: SearchNavigationType.SEARCH_PAGE,
-      key: searchQuery,
-      group: RESULTS_GROUP,
-    });
-  };
-
   if (numberOfCommands === 0) {
     return <p className={styles.noResult}>{t('command-bar.no-nav-results')}</p>;
   }
@@ -159,13 +148,7 @@ const CommandsList: React.FC<Props> = ({
         {Object.keys(groups).map((commandGroup) => {
           return (
             <div key={commandGroup}>
-              {commandGroup === RESULTS_GROUP ? (
-                <SearchResultsHeader
-                  searchQuery={searchQuery}
-                  source={SearchQuerySource.CommandBar}
-                  onSearchResultClicked={onSearchResultsHeaderClicked}
-                />
-              ) : (
+              {commandGroup !== RESULTS_GROUP && (
                 <div className={styles.groupHeader} id={commandGroup}>
                   {commandGroup}
                 </div>

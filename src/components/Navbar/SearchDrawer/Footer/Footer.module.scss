@@ -1,5 +1,10 @@
+@use "src/styles/breakpoints";
+
 .container {
-  padding-block-end: var(--spacing-mega);
+  @include breakpoints.tablet {
+    padding-block-end: var(--spacing-mega);
+  }
+  padding-block-end: calc(4 * var(--spacing-mega));
 }
 
 .betaContainer {
