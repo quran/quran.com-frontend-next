@@ -12,6 +12,7 @@ import RenderVideoButton from './RenderVideoButton';
 import Button, { ButtonType } from '@/dls/Button/Button';
 import CopyIcon from '@/icons/copy.svg';
 import layoutStyle from '@/pages/index.module.scss';
+import { shortenUrl } from '@/utils/auth/api';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getCurrentPath } from '@/utils/url';
 
@@ -49,11 +50,14 @@ const RenderControls: React.FC<Props> = ({ inputProps, isFetching, playerRef }) 
     };
   }, [isCopied]);
 
-  const onCopyLinkClicked = () => {
+  const onCopyLinkClicked = async () => {
     logButtonClick('video_generation_copy_link');
     const path = getCurrentPath();
-    if (origin) {
-      clipboardCopy(path).then(() => {
+    const response = await shortenUrl(`${path}&previewMode=true`);
+
+    const url = response?.id ? `${window.location.origin}/media/${response.id}` : path;
+    if (url) {
+      clipboardCopy(url).then(() => {
         setIsCopied(true);
       });
     }
