@@ -103,7 +103,6 @@
     "navigations": "Uchunguzi",
     "no-nav-results": "Hakuna matokeo",
     "placeholder": "Unataka kusoma nini?",
-    "powered-by": "Utafutaji wa sauti unaendeshwa na Tarteel.ai",
     "recent-navigations": "Uchunguzi wa hivi majuzi",
     "search-by-voice": "Tafuta kutumia sauti",
     "try-navigating": "Nenda hadi"
@@ -359,10 +358,6 @@
     "tafsir-desc": "Soma {{tafsirName}} ya Aya {{verseNumber}} ya Sura {{surahName}}",
     "tafsirs-desc": "Soma Tafsir mbalimbali za Aya {{ayahNumber}} ya Sura {{surahName}} kutoka kwa wanazuoni wa Tafsir wanaoaminika.",
     "title": "Tafsir"
-  },
-  "tarteel": {
-    "app": "Programu ya Tarteel",
-    "name": "Tarteel.ai"
   },
   "terms-and-conditions": "Sheria na Masharti",
   "theme": "Mandhari",

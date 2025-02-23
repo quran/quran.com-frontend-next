@@ -146,12 +146,6 @@ export const logTextSearchQuery = (searchQuery: string, source: SearchQuerySourc
   }
 };
 
-export const logTarteelLinkClick = (type: string) => {
-  logEvent('tarteel_link_click', {
-    type: `${type}_attribution`,
-  });
-};
-
 /**
  * Log when an item selection status change.
  *

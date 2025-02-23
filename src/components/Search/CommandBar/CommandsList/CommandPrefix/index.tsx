@@ -6,16 +6,14 @@ import useTranslation from 'next-translate/useTranslation';
 import styles from './CommandPrefix.module.scss';
 
 import SearchResultItemIcon from '@/components/Search/SearchResults/SearchResultItemIcon';
-import { Direction } from '@/utils/locale';
 import { SearchNavigationType } from 'types/Search/SearchNavigationResult';
 
 interface Props {
   name: string;
   type: SearchNavigationType;
-  isVoiceSearch: boolean;
 }
 
-const CommandPrefix: React.FC<Props> = ({ name, type, isVoiceSearch }) => {
+const CommandPrefix: React.FC<Props> = ({ name, type }) => {
   const { t } = useTranslation('common');
   const getContent = () => {
     if (type === SearchNavigationType.SEARCH_PAGE) {
@@ -32,16 +30,12 @@ const CommandPrefix: React.FC<Props> = ({ name, type, isVoiceSearch }) => {
       <span className={styles.commandPrefix}>
         <SearchResultItemIcon type={type} />
       </span>
-      {isVoiceSearch ? (
-        <div dir={Direction.RTL}>{name}</div>
-      ) : (
-        <p
-          className={styles.name}
-          dangerouslySetInnerHTML={{
-            __html: getContent(),
-          }}
-        />
-      )}
+      <p
+        className={styles.name}
+        dangerouslySetInnerHTML={{
+          __html: getContent(),
+        }}
+      />
     </div>
   );
 };

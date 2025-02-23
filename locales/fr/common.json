@@ -103,7 +103,6 @@
     "navigations": "Navigations",
     "no-nav-results": "Aucun résultat de navigation",
     "placeholder": "Que veux-tu lire ?",
-    "powered-by": "Recherche vocale optimisée par Tarteel.ai",
     "recent-navigations": "Navigations récentes",
     "search-by-voice": "Recherche vocale",
     "try-navigating": "Essayez de naviguer vers"
@@ -361,10 +360,6 @@
     "tafsir-desc": "Lire {{tafsirName}} pour l'Ayah {{verseNumber}} de la Sourate {{surahName}}",
     "tafsirs-desc": "Lisez divers Tafsirs de l'Ayah {{ayahNumber}} de la Sourate {{surahName}} par des savants du Tafsir de confiance",
     "title": "Tafsir"
-  },
-  "tarteel": {
-    "app": "Application Tarteel",
-    "name": "Tarteel.ai"
   },
   "terms-and-conditions": "Termes et conditions",
   "theme": "Thème",

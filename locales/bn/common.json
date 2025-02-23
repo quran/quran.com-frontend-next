@@ -103,7 +103,6 @@
     "navigations": "নেভিগেশন",
     "no-nav-results": "কোন নেভিগেশন ফলাফল",
     "placeholder": "কি আপনি পড়তে চান?",
-    "powered-by": "Tarteel.ai দ্বারা চালিত ভয়েস অনুসন্ধান",
     "recent-navigations": "সাম্প্রতিক নেভিগেশন",
     "search-by-voice": "ভয়েস দ্বারা অনুসন্ধান করুন",
     "try-navigating": "নেভিগেট করার চেষ্টা করুন"
@@ -361,10 +360,6 @@
     "tafsir-desc": "সূরা {{surahName}} {{verseNumber}} এর {{verseNumber} {{tafsirName}} আয়াতের জন্য {{tafsirName}} পড়ুন",
     "tafsirs-desc": "বিশ্বস্ত তাফসির আলেমদের দ্বারা {{surahName}} সূরার {{surahName}} {{ayahNumber}} আয়াতের বিভিন্ন তাফসির পড়ুন",
     "title": "তাফসির"
-  },
-  "tarteel": {
-    "app": "Tarteel অ্যাপ",
-    "name": "তারতেল.আ"
   },
   "terms-and-conditions": "শর্তাবলী",
   "theme": "থিম",

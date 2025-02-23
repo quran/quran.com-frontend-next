@@ -4,7 +4,7 @@ import React, { useCallback, useContext } from 'react';
 import classNames from 'classnames';
 import groupBy from 'lodash/groupBy';
 import useTranslation from 'next-translate/useTranslation';
-import { shallowEqual, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import CommandsList, { Command, RESULTS_GROUP } from '../CommandsList';
 
@@ -12,12 +12,8 @@ import styles from './ExpandedSearchInputSection.module.scss';
 
 import { getNewSearchResults } from '@/api';
 import DataFetcher from '@/components/DataFetcher';
-import TarteelAttribution from '@/components/TarteelAttribution/TarteelAttribution';
-import VoiceSearchBodyContainer from '@/components/TarteelVoiceSearch/BodyContainer';
 import DataContext from '@/contexts/DataContext';
 import { selectRecentNavigations } from '@/redux/slices/CommandBar/state';
-import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
-import { selectIsCommandBarVoiceFlowStarted } from '@/redux/slices/voiceSearch';
 import {
   SearchNavigationResult,
   SearchNavigationType,
@@ -62,7 +58,6 @@ const ExpandedSearchInputSection: React.FC<Props> = ({ searchQuery }) => {
     areArraysEqual,
   ) as SearchNavigationResult[];
   const chaptersData = useContext(DataContext);
-  const isVoiceSearchFlowStarted = useSelector(selectIsCommandBarVoiceFlowStarted, shallowEqual);
 
   /**
    * Generate an array of commands that will show in the pre-input view.
@@ -154,23 +149,14 @@ const ExpandedSearchInputSection: React.FC<Props> = ({ searchQuery }) => {
   return (
     <div className={styles.container}>
       <div className={classNames(styles.bodyContainer, { [styles.height]: !!searchQuery })}>
-        {isVoiceSearchFlowStarted ? (
-          <VoiceSearchBodyContainer isCommandBar />
-        ) : (
-          <DataFetcher
-            queryKey={
-              searchQuery
-                ? makeNewSearchResultsUrl(
-                    getQuickSearchQuery(searchQuery, 10, selectedTranslations),
-                  )
-                : null
-            }
-            render={dataFetcherRender}
-            fetcher={quickSearchFetcher}
-          />
-        )}
+        <DataFetcher
+          queryKey={
+            searchQuery ? makeNewSearchResultsUrl(getQuickSearchQuery(searchQuery, 10)) : null
+          }
+          render={dataFetcherRender}
+          fetcher={quickSearchFetcher}
+        />
       </div>
-      {isVoiceSearchFlowStarted && <TarteelAttribution isCommandBar />}
     </div>
   );
 };

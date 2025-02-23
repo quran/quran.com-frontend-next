@@ -1,5 +1,4 @@
 enum SearchType {
-  Voice = 'voice',
   Text = 'text',
 }
 

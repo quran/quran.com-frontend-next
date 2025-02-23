@@ -6,7 +6,6 @@ import styles from './Footer.module.scss';
 import Link, { LinkVariant } from '@/dls/Link/Link';
 import useGetChaptersData from '@/hooks/useGetChaptersData';
 import { makeDonateUrl } from '@/utils/apiPaths';
-import { logTarteelLinkClick } from '@/utils/eventLogger';
 
 const Links = () => {
   const { t, lang } = useTranslation('common');
@@ -41,14 +40,6 @@ const Links = () => {
         { text: 'Previous.Quran.com', url: 'https://previous.quran.com', isExternal: true },
         { text: 'Corpus.Quran.com', url: 'https://corpus.quran.com', isExternal: true },
         { text: 'QuranReflect.com', url: 'https://quranreflect.com', isExternal: true },
-        {
-          text: 'Tarteel.ai',
-          url: 'https://www.tarteel.ai/',
-          isExternal: true,
-          onClick: () => {
-            logTarteelLinkClick('footer_network_attribution');
-          },
-        },
       ],
     },
     {

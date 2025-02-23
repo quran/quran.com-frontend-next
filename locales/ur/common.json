@@ -103,7 +103,6 @@
     "navigations": "نیویگیشن",
     "no-nav-results": "کوئی نیویگیشن نتائج نہیں ہیں۔",
     "placeholder": "آپ کیا پڑھنا چاہتے ہیں؟",
-    "powered-by": "وائس سرچ Tarteel.ai کے ذریعے چلتی ہے",
     "recent-navigations": "حالیہ نیویگیشنز",
     "search-by-voice": "آواز کے ذریعے سرچ کریں۔",
     "try-navigating": "تک نیویگیٹ کرنے کی کوشش کریں۔"
@@ -361,10 +360,6 @@
     "tafsir-desc": "سورہ {{surahName} {{tafsirName}} کی آیت {{verseNumber}} کے لیے {{surahName}}",
     "tafsirs-desc": "سورہ {{surahName}} سورہ {{ayahNumber}} کی مختلف تفسیریں معتبر علماء کے ذریعہ پڑھیں",
     "title": "تفسیر"
-  },
-  "tarteel": {
-    "app": "ترتیل ایپ",
-    "name": "tarteel.ai"
   },
   "terms-and-conditions": "شرائط و ضوابط",
   "theme": "تھیم",
