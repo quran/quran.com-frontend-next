@@ -1,6 +1,7 @@
 import React, { RefObject } from 'react';
 
 import classNames from 'classnames';
+import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
 import DrawerSearchIcon from '../Buttons/DrawerSearchIcon';
@@ -10,6 +11,7 @@ import styles from './Header.module.scss';
 import TarteelVoiceSearchTrigger from '@/components/TarteelVoiceSearch/Trigger';
 import Separator from '@/dls/Separator/Separator';
 import { logButtonClick } from '@/utils/eventLogger';
+import { getSearchQueryNavigationUrl } from '@/utils/navigation';
 
 interface Props {
   isVoiceFlowStarted: boolean;
@@ -29,10 +31,14 @@ const Header: React.FC<Props> = ({
   searchQuery,
 }) => {
   const { t } = useTranslation('common');
+  const router = useRouter();
 
-  const onKeyboardReturnPressed = (e) => {
+  const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    inputRef.current.blur();
+    inputRef.current?.blur();
+    if (searchQuery) {
+      router.push(getSearchQueryNavigationUrl(searchQuery));
+    }
   };
 
   return (
@@ -47,7 +53,7 @@ const Header: React.FC<Props> = ({
         <>
           <DrawerSearchIcon />
           <div className={classNames(styles.searchInputContainer)}>
-            <form onSubmit={onKeyboardReturnPressed}>
+            <form onSubmit={onSubmit} className={styles.from}>
               <input
                 className={styles.searchInput}
                 type="search"

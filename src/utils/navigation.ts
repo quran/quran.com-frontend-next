@@ -281,7 +281,7 @@ export const resolveUrlBySearchNavigationType = (
  * @returns {string}
  */
 export const getSearchQueryNavigationUrl = (query?: string): string =>
-  `/search${query ? `?${QueryParam.QUERY}=${query}` : ''}`;
+  `/search${query ? `?${QueryParam.QUERY}=${encodeURIComponent(query)}` : ''}`;
 
 /**
  * Get the href link to the info page of a Surah.

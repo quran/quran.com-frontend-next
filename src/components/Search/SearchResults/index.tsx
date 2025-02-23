@@ -3,9 +3,9 @@ import React from 'react';
 import useTranslation from 'next-translate/useTranslation';
 
 import SearchResultItem from './SearchResultItem';
-import SearchResultsHeader from './SearchResultsHeader';
 
 import Pagination from '@/dls/Pagination/Pagination';
+import useScrollToTop from '@/hooks/useScrollToTop';
 import SearchQuerySource from '@/types/SearchQuerySource';
 import { toLocalizedNumber } from '@/utils/locale';
 import { SearchResponse } from 'types/ApiResponses';
@@ -16,7 +16,6 @@ interface Props {
   currentPage?: number;
   pageSize?: number;
   onPageChange?: (page: number) => void;
-  onSearchResultClicked?: () => void;
   source: SearchQuerySource;
 }
 
@@ -27,28 +26,24 @@ const SearchResults: React.FC<Props> = ({
   currentPage,
   onPageChange,
   pageSize,
-  onSearchResultClicked,
 }) => {
   const results = searchResult.result.navigation.concat(searchResult.result.verses);
   const isSearchDrawer = source === SearchQuerySource.SearchDrawer;
   const { t, lang } = useTranslation('common');
+  const scrollToTop = useScrollToTop();
+
+  const handlePageChange = (page: number) => {
+    scrollToTop();
+    onPageChange?.(page);
+  };
+
   return (
     <div>
-      {isSearchDrawer ? (
-        <SearchResultsHeader
-          searchQuery={searchQuery}
-          onSearchResultClicked={onSearchResultClicked}
-          source={source}
-        />
-      ) : (
+      {!isSearchDrawer && searchQuery && (
         <>
-          {searchQuery && (
-            <>
-              {t('search-results', {
-                count: toLocalizedNumber(searchResult.pagination.totalRecords, lang),
-              })}
-            </>
-          )}
+          {t('search-results', {
+            count: toLocalizedNumber(searchResult.pagination.totalRecords, lang),
+          })}
         </>
       )}
       <>
@@ -65,7 +60,7 @@ const SearchResults: React.FC<Props> = ({
         <Pagination
           currentPage={currentPage}
           totalCount={searchResult.pagination.totalRecords}
-          onPageChange={onPageChange}
+          onPageChange={handlePageChange}
           pageSize={pageSize}
         />
       )}
