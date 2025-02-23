@@ -5,13 +5,18 @@
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
+    padding-block-start: var(--spacing-medium2-px);
     padding-block-end: var(--spacing-medium);
+    @include breakpoints.tablet {
+        padding-block-end: var(--spacing-large-px);
+        padding-block-start: var(--spacing-xlarge-px);
+    }
 
     h1 {
-        font-size: var(--font-size-xlarge);
+        font-size: var(--font-size-xlarge-px);
         font-weight: var(--font-weight-bold);
         @include breakpoints.tablet {
-            font-size: var(--font-size-jumbo);
+            font-size: var(--font-size-jumbo-px);
         }
     }
 }
@@ -23,6 +28,7 @@
     gap: var(--spacing-medium);
 
     @include breakpoints.smallerThanTablet {
+        gap: 0;
         flex-direction: column;
     }
 }
@@ -43,11 +49,46 @@
     }
 }
 
+.myQuranText {
+    @include breakpoints.tablet {
+        font-size: var(--font-size-normal-px);
+    }
+}
+
+.stayConsistentText {
+    padding-block-start: var(--spacing-small-px);
+    @include breakpoints.tablet {
+        font-size: var(--font-size-normal-px);
+    }
+}
+
+.iconContainer {
+    display: flex;
+    padding-inline-end: var(--spacing-small-px);
+    svg {
+        width: var(--spacing-large-px);
+        height: var(--spacing-large-px);
+    }
+}
+
+.myQuranContainer {
+    display: flex;
+    @include breakpoints.smallerThanTablet {
+        svg {
+            width: 12px;
+            height: 12px;
+        }
+    }
+}
+
 .cardWithIcon {
     display: flex;
     flex-direction: row;
     align-items: center;
     gap: var(--spacing-micro);
+    @include breakpoints.tablet {
+        font-size: var(--font-size-large-px);
+    }
 }
 
 .streakCardLeft {
@@ -65,7 +106,12 @@
 }
 
 .streakCard {
+    box-shadow: none !important;
+    padding-inline: var(--spacing-medium-px);
     background-color: var(--color-streaks-light);
+    @include breakpoints.smallerThanTablet {
+        padding: var(--spacing-small-px) var(--spacing-small-px) var(--spacing-small-px) var(--spacing-medium-px);
+    }
 }
 
 .readingSectionContainer {
@@ -86,8 +132,14 @@
 
 .firstTimeReadingCard {
     @include breakpoints.smallerThanTablet {
-        box-shadow: none;
+        box-shadow: none !important;
         border-radius: 0;
         padding: var(--spacing-xxsmall);
+    }
+}
+
+.arrowIcon {
+    @include breakpoints.smallerThanTablet {
+        display: none;
     }
 }

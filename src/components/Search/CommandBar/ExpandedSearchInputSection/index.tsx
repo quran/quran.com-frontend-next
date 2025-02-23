@@ -51,6 +51,7 @@ interface Props {
 }
 
 const ExpandedSearchInputSection: React.FC<Props> = ({ searchQuery }) => {
+  const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual) as string[];
   const { t, lang } = useTranslation('common');
   const recentNavigations = useSelector(
     selectRecentNavigations,
@@ -86,8 +87,8 @@ const ExpandedSearchInputSection: React.FC<Props> = ({ searchQuery }) => {
   );
 
   const quickSearchFetcher = useCallback(() => {
-    return getNewSearchResults(getQuickSearchQuery(searchQuery, 10));
-  }, [searchQuery]);
+    return getNewSearchResults(getQuickSearchQuery(searchQuery, 10, selectedTranslations));
+  }, [searchQuery, selectedTranslations]);
 
   /**
    * This function will be used by DataFetcher and will run only when there is no API error

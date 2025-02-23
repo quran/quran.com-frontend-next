@@ -2,25 +2,22 @@
 import React from 'react';
 
 import classNames from 'classnames';
-import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
 import { useSelector } from 'react-redux';
 
 import ChapterCard from './ChapterCard';
+import NewCard from './NewCard';
 import NoGoalOrStreakCard from './NoGoalOrStreakCard';
 import styles from './ReadingSection.module.scss';
 import StreakOrGoalCard from './StreakOrGoalCard';
 
 import Card from '@/components/HomePage/Card';
-import IconContainer, { IconSize } from '@/dls/IconContainer/IconContainer';
 import Link, { LinkVariant } from '@/dls/Link/Link';
 import useGetStreakWithMetadata from '@/hooks/auth/useGetStreakWithMetadata';
 import BookmarkRemoveIcon from '@/icons/bookmark_remove.svg';
-import SunIcon from '@/icons/sun.svg';
-import ArrowIcon from '@/public/icons/arrow.svg';
 import { selectUserState } from '@/redux/slices/session';
 import { logButtonClick } from '@/utils/eventLogger';
-import { getFirstTimeReadingGuideNavigationUrl, getProfileNavigationUrl } from '@/utils/navigation';
+import { getProfileNavigationUrl } from '@/utils/navigation';
 import { isMobile } from '@/utils/responsive';
 import { getVerseNumberFromKey } from '@/utils/verse';
 
@@ -40,10 +37,6 @@ const ReadingSection: React.FC<Props> = () => {
     logButtonClick('homepage_my_quran');
   };
 
-  const onFirstTimeReadingGuideClicked = () => {
-    logButtonClick('homepage_first_time_reading_guide');
-  };
-
   let headerText = '';
   if (isGuestWithReadingSessions || isUserWithReadingSessions) {
     headerText = t('continue-read');
@@ -55,13 +48,15 @@ const ReadingSection: React.FC<Props> = () => {
     <div className={styles.header}>
       <h1>{headerText}</h1>
       <div className={styles.cardWithIcon}>
-        <BookmarkRemoveIcon />
+        <div className={styles.myQuranContainer}>
+          <BookmarkRemoveIcon />
+        </div>
         <Link
           variant={LinkVariant.Blend}
           href={getProfileNavigationUrl()}
           onClick={onMyQuranClicked}
         >
-          {t('my-quran')}
+          <p className={styles.myQuranText}>{t('my-quran')}</p>
         </Link>
       </div>
     </div>
@@ -91,39 +86,26 @@ const ReadingSection: React.FC<Props> = () => {
     );
 
   const newCard = (
-    <Card
-      className={styles.firstTimeReadingCard}
-      link={getFirstTimeReadingGuideNavigationUrl()}
-      isNewTab
-      onClick={onFirstTimeReadingGuideClicked}
-    >
-      <div className={styles.cardOuterContainer}>
-        <div className={styles.cardWithIcon}>
-          <SunIcon />
-          <div className={styles.link}>
-            <Trans
-              i18nKey={
-                isGuestWithReadingSessions || isUserWithReadingSessions
-                  ? 'home:know-someone'
-                  : 'home:first-time-reading'
-              }
-              components={{
-                link: (
-                  <Link
-                    isNewTab
-                    variant={LinkVariant.Blend}
-                    href={getFirstTimeReadingGuideNavigationUrl()}
-                    className={styles.linkHref}
-                  />
-                ),
-              }}
-            />
+    <NewCard
+      isGuestWithReadingSessions={isGuestWithReadingSessions}
+      isUserWithReadingSessions={isUserWithReadingSessions}
+    />
+  );
+
+  if (isGuestWithReadingSessions) {
+    return (
+      <>
+        {header}
+        <div className={styles.cardsContainer}>
+          <div className={styles.cardContainer}>{continueReadingCard}</div>
+          <div className={styles.cardContainer}>
+            {goalsOrStreakCard}
+            {newCard}
           </div>
         </div>
-        <IconContainer size={IconSize.Xsmall} icon={<ArrowIcon />} shouldForceSetColors={false} />
-      </div>
-    </Card>
-  );
+      </>
+    );
+  }
 
   if (isFirstTimeGuest || !isUserWithReadingSessions) {
     return (
@@ -155,21 +137,6 @@ const ReadingSection: React.FC<Props> = () => {
         </>
       );
     }
-    return (
-      <>
-        {header}
-        <div className={styles.cardsContainer}>
-          <div className={styles.cardContainer}>{continueReadingCard}</div>
-          <div className={styles.cardContainer}>
-            {goalsOrStreakCard}
-            {newCard}
-          </div>
-        </div>
-      </>
-    );
-  }
-
-  if (isGuestWithReadingSessions) {
     return (
       <>
         {header}

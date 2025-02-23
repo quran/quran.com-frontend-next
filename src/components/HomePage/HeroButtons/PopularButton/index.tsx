@@ -39,7 +39,7 @@ const PopularButton = () => {
             icon={<PopularIcon />}
             shouldForceSetColors={false}
           />
-          <p>{t('popular')}</p>
+          <p className={heroButtonStyles.popularText}>{t('popular')}</p>
         </div>
       </Button>
       {isExpanded && (

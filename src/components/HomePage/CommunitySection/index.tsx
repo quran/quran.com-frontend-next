@@ -42,7 +42,7 @@ const CommunitySection = () => {
             <div className={styles.ramadanTitle}>
               <div className={styles.titleWithIcon}>
                 <TicketIcon />
-                <p>{t('ramadan.title')}</p>
+                <p className={styles.title}>{t('ramadan.title')}</p>
               </div>
               <IconContainer
                 size={IconSize.Xsmall}

@@ -1,3 +1,5 @@
+@use "src/styles/breakpoints";
+
 .quickLink {
   background-color: var(--color-topics-grey);
   padding: var(--spacing-small);
@@ -21,4 +23,7 @@
   align-items: center;
   gap: var(--spacing-small);
   font-size: var(--font-size-xsmall);
+  @include breakpoints.tablet {
+    font-size: var(--font-size-normal-px);
+  }
 }

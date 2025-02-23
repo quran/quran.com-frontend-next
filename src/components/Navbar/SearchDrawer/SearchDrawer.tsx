@@ -30,7 +30,7 @@ const SearchBodyContainer = dynamic(() => import('@/components/Search/SearchBody
 const DEBOUNCING_PERIOD_MS = 1000;
 
 const SearchDrawer: React.FC = () => {
-  const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
+  const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual) as string[];
   const [focusInput, searchInputRef]: [() => void, RefObject<HTMLInputElement>] = useFocus();
   const [searchQuery, setSearchQuery] = useState<string>('');
   const isOpen = useSelector(selectNavbar, shallowEqual).isSearchDrawerOpen;
@@ -53,7 +53,7 @@ const SearchDrawer: React.FC = () => {
       addToSearchHistory(dispatch, debouncedSearchQuery, SearchQuerySource.SearchDrawer);
       setIsSearching(true);
       logTextSearchQuery(debouncedSearchQuery, SearchQuerySource.SearchDrawer);
-      getNewSearchResults(getQuickSearchQuery(debouncedSearchQuery, 10))
+      getNewSearchResults(getQuickSearchQuery(debouncedSearchQuery, 10, selectedTranslations))
         .then((response) => {
           setSearchResult({
             ...response,

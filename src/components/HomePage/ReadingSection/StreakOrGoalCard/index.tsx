@@ -67,7 +67,7 @@ const StreakOrGoalCard: React.FC<Props> = ({ goal, streak, currentActivityDay })
           )}
         </div>
       </Link>
-      <div>
+      <div className={styles.container}>
         {goal ? (
           <div className={styles.circularProgressbarContainer}>
             <div className={styles.circularProgressbar}>

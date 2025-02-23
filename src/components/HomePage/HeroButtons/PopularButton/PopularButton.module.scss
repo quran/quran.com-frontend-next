@@ -1,5 +1,4 @@
 @use "src/styles/breakpoints";
-$height: calc(16 * var(--spacing-mega));
 
 @keyframes slideUpFade {
     from {
@@ -16,18 +15,27 @@ $height: calc(16 * var(--spacing-mega));
     display: flex;
     flex-direction: column;
     align-items: center;
-    width: 100px;
+    width: 125px;
+    @include breakpoints.smallerThanTablet {
+        width: 85px;
+    }
 }
 
 .dropdownContainer {
     width: 710px;
     margin-inline-start: -180px;
-    margin-top: -50px;
+    margin-top: -42%;
     border-radius: var(--border-radius-rounded);
     box-shadow: var(--shadow-medium);
     background: var(--color-background-elevated);
     z-index: var(--z-index-default);
     animation: slideUpFade 0.1s ease-out forwards;
+
+    @include breakpoints.smallerThanTablet {
+        width: 350px;
+        margin-inline-start: -150px;
+        margin-top: -30px;
+    }
 
     hr {
         background: var(--color-borders-hairline);
@@ -39,7 +47,7 @@ $height: calc(16 * var(--spacing-mega));
 }
 
 .container {
-    padding: var(--spacing-xsmall);
+    padding: var(--spacing-small-px);
     background: var(--color-background-elevated);
     box-sizing: border-box;
     border-radius: var(--border-radius-rounded);
@@ -64,8 +72,14 @@ $height: calc(16 * var(--spacing-mega));
     align-items: center;
     gap: var(--spacing-xsmall);
     color: var(--color-text-faded-new);
+    @include breakpoints.tablet {
+        font-size: var(--font-size-normal-px);
+    }
 }
 
 .chaptersAndVerses {
     font-weight: var(--font-weight-bold);
+    @include breakpoints.tablet {
+        font-size: var(--font-size-normal-px);
+    }
 }

@@ -4,6 +4,8 @@ type AyahReflectionsRequestParams = {
   locale: string;
   page?: number;
   tab?: string;
+  reviewed?: boolean;
+  postTypeIds?: string[];
 };
 
 export default AyahReflectionsRequestParams;

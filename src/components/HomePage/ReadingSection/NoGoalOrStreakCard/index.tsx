@@ -16,12 +16,14 @@ const NoGoalOrStreakCard = () => {
     <Card link={getLoginNavigationUrl(getReadingGoalNavigationUrl())} isNewTab>
       <div className={styles.cardOuterContainer}>
         <div className={styles.cardWithIcon}>
-          <CirclesIcon />
+          <div className={styles.iconContainer}>
+            <CirclesIcon />
+          </div>
           {t('achieve-quran-goals')}
         </div>
         <IconContainer size={IconSize.Xsmall} icon={<ArrowIcon />} shouldForceSetColors={false} />
       </div>
-      <p>{t('stay-consistent')}</p>
+      <p className={styles.stayConsistentText}>{t('stay-consistent')}</p>
     </Card>
   );
 };

@@ -102,7 +102,7 @@
   "command-bar": {
     "navigations": "Navigations",
     "no-nav-results": "No navigation results",
-    "placeholder": "What do you want to read?",
+    "placeholder": "Search the Quran...",
     "recent-navigations": "Recent navigations",
     "search-by-voice": "Search by voice",
     "try-navigating": "Try navigating to"
@@ -124,6 +124,7 @@
   "copied": "Copied",
   "copied-to-clipboard": "Copied to clipboard",
   "copy": "Copy",
+  "copylink": "Copy link",
   "counter": {
     "decrease": "Decrease",
     "increase": "Increase"
@@ -288,6 +289,8 @@
   "reciters": "Reciters",
   "reflect": "Reflect",
   "reflections": "Reflections",
+  "reflections-and-lessons": "Reflections & Lessons",
+  "lessons": "Lessons",
   "remove": "Remove",
   "rename": "Rename",
   "retry": "Retry",

@@ -45,7 +45,7 @@ export const navigateToExternalUrl = (url: string) => {
  * @returns {string}
  */
 export const getBasePath = (): string =>
-  `${process.env.NEXT_PUBLIC_VERCEL_ENV === 'development' ? 'https' : 'https'}://${
+  `${process.env.NEXT_PUBLIC_VERCEL_ENV === 'development' ? 'http' : 'https'}://${
     process.env.NEXT_PUBLIC_VERCEL_URL
   }`;
 

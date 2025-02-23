@@ -4,6 +4,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { GetStaticProps, NextPage } from 'next';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
+import { useSelector } from 'react-redux';
 
 import styles from './search.module.scss';
 
@@ -13,11 +14,13 @@ import NextSeoWrapper from '@/components/NextSeoWrapper';
 import SearchBodyContainer from '@/components/Search/SearchBodyContainer';
 import SearchInput from '@/components/Search/SearchInput';
 import useAddQueryParamsToUrl from '@/hooks/useAddQueryParamsToUrl';
+import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
 import QueryParam from '@/types/QueryParam';
 import SearchResponse from '@/types/Search/SearchResponse';
 import SearchService from '@/types/Search/SearchService';
 import SearchQuerySource from '@/types/SearchQuerySource';
 import { makeNewSearchResultsUrl } from '@/utils/apiPaths';
+import { areArraysEqual } from '@/utils/array';
 import { getAllChaptersData } from '@/utils/chapter';
 import {
   logEvent,
@@ -43,6 +46,7 @@ const source = SearchQuerySource.SearchPage;
 
 const SearchPage: NextPage<SearchPageProps> = (): JSX.Element => {
   const { t, lang } = useTranslation('common');
+  const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual) as string[];
   const router = useRouter();
   const [searchQuery, setSearchQuery] = useState<string>(() => {
     if (typeof window !== 'undefined') {
@@ -86,7 +90,12 @@ const SearchPage: NextPage<SearchPageProps> = (): JSX.Element => {
   );
   useAddQueryParamsToUrl(navigationUrl, queryParams);
 
-  const REQUEST_PARAMS = getAdvancedSearchQuery(searchQuery, currentPage, PAGE_SIZE);
+  const REQUEST_PARAMS = getAdvancedSearchQuery(
+    searchQuery,
+    currentPage,
+    PAGE_SIZE,
+    selectedTranslations,
+  );
   const fetcher = async () => {
     logTextSearchQuery(REQUEST_PARAMS.query, source);
 

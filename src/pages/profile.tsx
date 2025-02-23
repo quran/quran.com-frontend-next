@@ -74,12 +74,12 @@ const ProfilePage: NextPage<Props> = () => {
       className={classNames(layoutStyle.flowItem, layoutStyle.fullWidth, styles.actionsContainer)}
     >
       <div className={styles.action}>
-        <DeleteAccountButton isDisabled={isLoading} />
-      </div>
-      <div className={styles.action}>
         <Button isDisabled={isLoading} onClick={onLogoutClicked}>
           {t('common:logout')}
         </Button>
+      </div>
+      <div className={styles.action}>
+        <DeleteAccountButton isDisabled={isLoading} />
       </div>
     </div>
   );
