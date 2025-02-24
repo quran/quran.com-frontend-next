@@ -8,7 +8,6 @@
     align-items: center;
     padding: var(--spacing-mega);
     flex-direction: column;
-    background-color: var(--color-background-default);
     width: 400px;
     margin-inline: auto;
 }
@@ -18,10 +17,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: var(--spacing-large);
-    background-color: var(--color-background-elevated);
-    border-radius: var(--border-radius-large);
-    box-shadow: var(--shadow-small);
 }
 
 .title {
@@ -42,7 +37,7 @@
 }
 
 .formContainer {
-    width: 100%;
+    width: 90%;
     display: flex;
     flex-direction: column;
     gap: var(--spacing-large);
@@ -65,7 +60,7 @@
 
     input {
         border: none;
-        width: 100%;
+        width: 90%;
         background: transparent;
         color: var(--color-text-default);
 
@@ -80,7 +75,7 @@
 }
 
 .submitButton {
-    width: 100%;
+    width: 90%;
     padding: var(--spacing-medium);
     font-size: var(--font-size-normal);
     font-weight: var(--font-weight-bold);
@@ -98,7 +93,7 @@
 }
 
 .backButton {
-    width: 100%;
-    margin-top: var(--spacing-medium);
+    width: 50%;
+    margin-block: var(--spacing-medium);
     border-radius: var(--border-radius-pill);
 }

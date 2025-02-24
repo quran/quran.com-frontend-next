@@ -4,11 +4,11 @@ import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
 import AuthTabs, { AuthTab } from './AuthTabs';
-import SocialButtons from './SocialButtons';
+import ServiceCard from './ServiceCard';
 import VerificationCodeForm from './VerificationCode/VerificationCodeForm';
 
-import Button from '@/dls/Button/Button';
-import ArrowLeftIcon from '@/icons/west.svg';
+import Button, { ButtonVariant } from '@/dls/Button/Button';
+import ArrowLeft from '@/icons/west.svg';
 import authStyles from '@/styles/auth/auth.module.scss';
 import { signUp } from '@/utils/auth/authRequests';
 import { logButtonClick, logEvent } from '@/utils/eventLogger';
@@ -28,7 +28,7 @@ const LoginContainer: FC<Props> = ({ redirect }) => {
   const { t } = useTranslation('login');
   const [loginView, setLoginView] = useState<LoginView>(LoginView.SOCIAL);
   const [activeTab, setActiveTab] = useState(AuthTab.SignIn);
-  const [signUpData, setSignUpData] = useState<SignUpRequest | null>(null);
+  const [signUpData, setSignUpData] = useState<Partial<SignUpRequest> | null>(null);
   const router = useRouter();
 
   const onBack = () => {
@@ -42,25 +42,28 @@ const LoginContainer: FC<Props> = ({ redirect }) => {
     }
   };
 
+  const onEmailLoginClick = () => {
+    logEvent('login_email_click');
+    setLoginView(LoginView.EMAIL);
+  };
+
   const onTabChange = (tab: AuthTab) => {
     logEvent('login_tab_change', { tab });
     setActiveTab(tab);
   };
 
-  const onEmailLoginClick = () => {
-    setLoginView(LoginView.EMAIL);
-  };
-
-  const onSignUpSuccess = (data: SignUpRequest) => {
+  const handleEmailLoginSubmit = async (data: {
+    email: string;
+  }): Promise<void | { errors: { email: string } }> => {
     setSignUpData(data);
     setLoginView(LoginView.VERIFICATION);
   };
 
   const handleResendCode = async () => {
-    if (!signUpData) return;
+    if (!signUpData?.email) return;
 
     try {
-      const { data: response } = await signUp(signUpData);
+      const { data: response } = await signUp(signUpData as SignUpRequest);
 
       if (!response.success) {
         throw new Error('Failed to resend verification code');
@@ -76,7 +79,7 @@ const LoginContainer: FC<Props> = ({ redirect }) => {
         <div className={authStyles.pageContainer}>
           <VerificationCodeForm
             email={signUpData?.email || ''}
-            signUpData={signUpData}
+            signUpData={signUpData as SignUpRequest}
             onBack={onBack}
             onResendCode={handleResendCode}
           />
@@ -84,26 +87,47 @@ const LoginContainer: FC<Props> = ({ redirect }) => {
       );
     }
 
+    if (loginView === LoginView.EMAIL) {
+      return (
+        <>
+          <AuthTabs
+            activeTab={activeTab}
+            onTabChange={onTabChange}
+            redirect={redirect}
+            onSignUpSuccess={handleEmailLoginSubmit}
+          />
+          <Button variant={ButtonVariant.Compact} onClick={onBack}>
+            <ArrowLeft />
+            {t('back')}
+          </Button>
+        </>
+      );
+    }
+
+    const benefits = {
+      quran: [
+        { id: 'feature-6', label: t('feature-6') },
+        { id: 'feature-1', label: t('feature-1') },
+        { id: 'feature-2', label: t('feature-2') },
+        { id: 'feature-3', label: t('feature-3') },
+        { id: 'feature-4', label: t('feature-4') },
+        { id: 'feature-5', label: t('feature-5') },
+      ],
+      reflect: [
+        { id: 'reflect-1', label: t('reflect-feature-1') },
+        { id: 'reflect-2', label: t('reflect-feature-2') },
+        { id: 'reflect-3', label: t('reflect-feature-3') },
+        { id: 'reflect-4', label: t('reflect-feature-4') },
+      ],
+    };
+
     return (
-      <>
-        <h1 className={authStyles.title}>{t('sign-in-or-sign-up')}</h1>
-        {loginView === LoginView.SOCIAL ? (
-          <SocialButtons redirect={redirect} onEmailLoginClick={onEmailLoginClick} />
-        ) : (
-          <>
-            <AuthTabs
-              activeTab={activeTab}
-              onTabChange={onTabChange}
-              redirect={redirect}
-              onSignUpSuccess={onSignUpSuccess}
-            />
-            <Button onClick={onBack} className={authStyles.backButton}>
-              <ArrowLeftIcon />
-              {t('back')}
-            </Button>
-          </>
-        )}
-      </>
+      <ServiceCard
+        benefits={benefits}
+        isEmailLogin={false}
+        onOtherOptionsClicked={onEmailLoginClick}
+        redirect={redirect}
+      />
     );
   };
 

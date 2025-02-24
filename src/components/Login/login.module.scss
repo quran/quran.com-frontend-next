@@ -28,7 +28,6 @@ $container-width: 370px;
 
 .title {
   font-size: var(--font-size-xlarge);
-  font-weight: var(--font-weight-bold);
   color: var(--color-text-default);
   margin-bottom: var(--spacing-large);
   text-align: center;
@@ -56,18 +55,14 @@ $container-width: 370px;
   align-items: center;
   inline-size: 100%;
   padding: var(--spacing-large);
-  border-radius: 16px;
-  border: 1px solid var(--color-borders-hairline);
   background: var(--color-background-default);
-  box-shadow: var(--shadow-small);
 }
 
 .serviceLogo {
-  margin-block-end: var(--spacing-large);
   text-align: center;
 
   svg {
-    height: 48px;
+    height: 30px;
     width: auto;
   }
 }
@@ -95,7 +90,7 @@ $container-width: 370px;
   display: flex;
   align-items: center;
   gap: var(--spacing-small);
-  font-size: var(--font-size-medium);
+  font-size: var(--font-size-medium-px);
   color: var(--color-text-default);
 }
 
@@ -117,8 +112,8 @@ $container-width: 370px;
   padding: var(--spacing-medium);
   font-size: var(--font-size-normal);
   font-weight: var(--font-weight-bold);
-  border-radius: var(--border-radius-pill);
-  border: 1px solid var(--color-borders-hairline);
+  border-radius: var(--border-radius-rounded);
+  border: 1px solid var(--color-text-default);
   background-color: var(--color-background-default);
   color: var(--color-text-default);
   transition: all 0.2s ease-in-out;
@@ -198,12 +193,41 @@ $container-width: 370px;
   text-align: center;
   font-size: var(--font-size-small);
   color: var(--color-text-faded);
-  margin-block-start: var(--spacing-xlarge);
-  line-height: 1.5;
+  margin-block-start: var(--spacing-xlarge-px);
 }
 
 .bold {
   font-weight: var(--font-weight-bold);
+}
+
+.authContainer {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background: var(--color-background-elevated);
+  overflow: hidden;
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+.authLogos {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-large);
+  padding: var(--spacing-large);
+
+  svg {
+    height: 32px;
+    width: auto;
+  }
+}
+
+.qrLogos {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-small-px);
 }
 
 .authTabs {
@@ -212,33 +236,11 @@ $container-width: 370px;
   display: flex;
   flex-direction: column;
   gap: var(--spacing-large);
+}
 
-  :global {
-    .tabs {
-      width: 100%;
-      background: var(--color-background-alternative-faint);
-      padding: var(--spacing-xxsmall);
-      border-radius: 100px;
-      display: flex;
-    }
-
-    .tab {
-      flex: 1;
-      padding: var(--spacing-medium);
-      border-radius: 100px;
-      font-size: var(--font-size-medium);
-      font-weight: var(--font-weight-semibold);
-      color: var(--color-text-default);
-      transition: all 0.2s ease;
-      text-align: center;
-      cursor: pointer;
-
-      &[aria-selected="true"] {
-        background: var(--color-background-default);
-        box-shadow: var(--shadow-small);
-      }
-    }
-  }
+.authSwitchContainer {
+  width: 95%;
+  margin-inline: auto;
 }
 
 .authTitle {
@@ -247,15 +249,20 @@ $container-width: 370px;
   margin: 0;
   text-align: center;
   color: var(--color-text-default);
-  text-transform: lowercase;
 }
 
 .formContainer {
   width: 100%;
+  margin-inline: auto;
   display: flex;
+  align-items: center;
   flex-direction: column;
   gap: var(--spacing-large);
   margin-top: var(--spacing-large);
+
+  form {
+    width: 95%;
+  }
 
   .form-field {
     margin-bottom: var(--spacing-medium);
@@ -307,17 +314,14 @@ $container-width: 370px;
 }
 
 .formActions {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: var(--spacing-medium);
-  margin-top: var(--spacing-medium);
+  width: 95%;
 }
 
 .forgotPassword {
   color: var(--color-success-medium);
   text-decoration: none;
   font-size: var(--font-size-medium);
+  text-align: start;
 
   &:hover {
     text-decoration: underline;
@@ -401,4 +405,33 @@ $container-width: 370px;
   color: var(--color-text-default);
   font-size: var(--font-size-medium);
   margin-top: var(--spacing-large);
+}
+
+.servicesContainer {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  margin-block-start: var(--spacing-large);
+  border: 1px solid var(--color-text-default);
+  border-radius: var(--border-radius-rounded);
+  background: var(--color-background-elevated);
+  padding: 0;
+}
+
+.serviceSection {
+  padding: var(--spacing-large);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.serviceDivider {
+  width: 95%;
+  border: none;
+  border-top: 1px solid var(--color-borders-hairline);
+  margin: auto;
+}
+
+.loginCta {
+  padding-block: var(--spacing-large);
 }
