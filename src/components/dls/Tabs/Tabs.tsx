@@ -2,7 +2,7 @@ import classNames from 'classnames';
 
 import styles from './Tabs.module.scss';
 
-type Tab = {
+export type Tab = {
   title: string;
   value: string;
   id?: string;

@@ -369,6 +369,13 @@ export const getFirstTimeReadingGuideNavigationUrl = () => '/first-time-reading-
 
 export const getNotesNavigationUrl = () => '/notes-and-reflections';
 
+export const getForgotPasswordNavigationUrl = () => `/forgot-password`;
+
+export const getResetPasswordNavigationUrl = () => `/reset-password`;
+
+export const getVerifyEmailNavigationUrl = (email?: string) =>
+  `/verify-email${email ? `?${QueryParam.EMAIL}=${email}` : ''}`;
+
 export const getNotificationSettingsNavigationUrl = () => '/notification-settings';
 export const getQuranicCalendarNavigationUrl = () => '/calendar';
 export const getQuranMediaMakerNavigationUrl = (params?: ParsedUrlQuery) => {

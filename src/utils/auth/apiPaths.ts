@@ -37,6 +37,10 @@ export const makeSyncLocalDataUrl = (): string => makeUrl('users/syncLocalData')
 
 export const makeVerificationCodeUrl = (): string => makeUrl('users/verificationCode');
 
+export const makeForgotPasswordUrl = (): string => makeUrl('users/forgetPassword');
+
+export const makeResetPasswordUrl = (): string => makeUrl('users/resetPassword');
+
 export const makeSendMagicLinkUrl = (redirect?: string): string =>
   makeUrl('auth/magiclogin', redirect ? { redirect } : undefined);
 
@@ -48,6 +52,10 @@ export const makeFacebookLoginUrl = (redirect?: string): string =>
 
 export const makeAppleLoginUrl = (redirect?: string): string =>
   makeUrl('auth/apple', redirect ? { redirect } : undefined);
+
+export const makeSignInUrl = (): string => makeUrl('users/login');
+
+export const makeSignUpUrl = (): string => makeUrl('users/signup');
 
 export const makeBookmarksUrl = (mushafId: number, limit?: number): string =>
   makeUrl('bookmarks', { mushafId, limit });

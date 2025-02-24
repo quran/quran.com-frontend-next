@@ -25,6 +25,8 @@ enum QueryParam {
   VIDEO_ID = 'videoId',
   SURAH = 'surah',
   PAGE = 'page',
+  EMAIL = 'email',
+  TOKEN = 'token',
 }
 
 export default QueryParam;
