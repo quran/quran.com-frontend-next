@@ -15,6 +15,7 @@ import layoutStyle from '@/pages/index.module.scss';
 import PreviewMode from '@/types/Media/PreviewMode';
 import { shortenUrl } from '@/utils/auth/api';
 import { logButtonClick } from '@/utils/eventLogger';
+import { getQuranMediaMakerNavigationUrl } from '@/utils/navigation';
 import { getBasePath, getCurrentPath } from '@/utils/url';
 
 type Props = {
@@ -56,7 +57,9 @@ const RenderControls: React.FC<Props> = ({ inputProps, isFetching, playerRef }) 
     const path = getCurrentPath();
     const response = await shortenUrl(`${path}&previewMode=${PreviewMode.ENABLED}`);
 
-    const url = response?.id ? `${getBasePath()}/media/${response.id}` : path;
+    const url = response?.id
+      ? `${getBasePath()}${getQuranMediaMakerNavigationUrl()}/${response.id}`
+      : path;
     if (url) {
       clipboardCopy(url).then(() => {
         setIsCopied(true);
