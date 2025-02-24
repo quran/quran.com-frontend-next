@@ -3,6 +3,7 @@ import Orientation from '../../types/Media/Orientation';
 import QuranFont from '../../types/Media/QuranFont';
 
 import AvailableTranslation from '@/types/AvailableTranslation';
+import PreviewMode from '@/types/Media/PreviewMode';
 import Reciter from '@/types/Reciter';
 
 export const isValidTranslationsQueryParamValue = (value: string): boolean => {
@@ -117,4 +118,8 @@ export const isValidBorderSizeQueryParamValue = (value: string): boolean => {
   const isValidNumber = isValidNumberQueryParamValue(value);
   // 1 and 5 are the ranges of all the valid scales
   return isValidNumber && Number(value) >= 1 && Number(value) <= 5;
+};
+
+export const isValidPreviewModeQueryParamValue = (value: string): boolean => {
+  return Object.values(PreviewMode).includes(value as PreviewMode);
 };
