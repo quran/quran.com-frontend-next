@@ -2,14 +2,12 @@ import { FC } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
+import AuthHeader from './AuthHeader';
 import styles from './login.module.scss';
 import SignInForm from './SignInForm';
 import SignUpForm from './SignUpForm';
 
 import Switch, { SwitchSize } from '@/dls/Switch/Switch';
-import QuranLogo from '@/icons/logo_main.svg';
-import QRColoredLogo from '@/icons/qr-colored.svg';
-import QuranReflectLogo from '@/icons/qr-logo.svg';
 import SignUpRequest from 'types/auth/SignUpRequest';
 
 export enum AuthTab {
@@ -40,14 +38,7 @@ const AuthTabs: FC<Props> = ({ activeTab, onTabChange, redirect, onSignUpSuccess
 
   return (
     <div className={styles.authContainer}>
-      <div className={styles.authLogos}>
-        <QuranLogo />
-        <div className={styles.qrLogos}>
-          <QRColoredLogo />
-          <QuranReflectLogo />
-        </div>
-      </div>
-      <hr className={styles.serviceDivider} />
+      <AuthHeader />
       <div className={styles.authTabs}>
         <h1 className={styles.authTitle}>{t('sign-in-or-sign-up')}</h1>
         <div className={styles.authSwitchContainer}>

@@ -228,6 +228,10 @@ $container-width: 370px;
   align-items: center;
   justify-content: center;
   gap: var(--spacing-small-px);
+  svg {
+    height: 29px;
+    width: auto;
+  }
 }
 
 .authTabs {
@@ -249,6 +253,14 @@ $container-width: 370px;
   margin: 0;
   text-align: center;
   color: var(--color-text-default);
+}
+
+.description {
+  text-align: center;
+  color: var(--color-text-default);
+  margin-bottom: var(--spacing-large);
+  font-size: var(--font-size-large);
+  line-height: 1.5;
 }
 
 .formContainer {

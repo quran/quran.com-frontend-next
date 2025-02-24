@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
+import AuthHeader from '../AuthHeader';
+import styles from '../login.module.scss';
 import getFormErrors, { ErrorType } from '../SignUpForm/errors';
 import { getEmailField } from '../SignUpFormFields/credentialFields';
 
@@ -10,7 +12,7 @@ import Button, { ButtonShape, ButtonType, ButtonVariant } from '@/components/dls
 import FormBuilder from '@/components/FormBuilder/FormBuilder';
 import { FormBuilderFormField } from '@/components/FormBuilder/FormBuilderTypes';
 import { useToast, ToastStatus } from '@/dls/Toast/Toast';
-import authStyles from '@/styles/auth/auth.module.scss';
+import ArrowLeft from '@/icons/west.svg';
 import { requestPasswordReset } from '@/utils/auth/authRequests';
 import { logButtonClick, logFormSubmission } from '@/utils/eventLogger';
 import { getLoginNavigationUrl } from '@/utils/navigation';
@@ -54,33 +56,30 @@ const ForgotPasswordForm: React.FC = () => {
       block
       shape={ButtonShape.Pill}
       type={ButtonType.Success}
-      className={authStyles.submitButton}
+      className={styles.submitButton}
     >
       {t('reset-password')}
     </Button>
   );
 
   return (
-    <div className={authStyles.outerContainer}>
-      <div className={authStyles.innerContainer}>
-        <h1 className={authStyles.title}>{t('forgot-password-title')}</h1>
-        <p className={authStyles.description}>{t('forgot-password-description')}</p>
-        <div className={authStyles.formContainer}>
-          <FormBuilder
-            formFields={formFields}
-            onSubmit={handleSubmit}
-            renderAction={renderAction}
-            isSubmitting={isSubmitting}
-          />
-          <Button
-            variant={ButtonVariant.Outlined}
-            shape={ButtonShape.Pill}
-            className={authStyles.backButton}
-            onClick={handleBack}
-            isDisabled={isSubmitting}
-          >
-            {t('back-to-login')}
-          </Button>
+    <div className={styles.outerContainer}>
+      <div className={styles.authContainer}>
+        <AuthHeader />
+        <div className={styles.authContent}>
+          <h1 className={styles.authTitle}>{t('forgot-password-title')}</h1>
+          <p className={styles.description}>{t('forgot-password-description')}</p>
+          <div className={styles.formContainer}>
+            <FormBuilder
+              formFields={formFields}
+              onSubmit={handleSubmit}
+              renderAction={renderAction}
+              isSubmitting={isSubmitting}
+            />
+            <Button variant={ButtonVariant.Compact} onClick={handleBack} isDisabled={isSubmitting}>
+              <ArrowLeft /> {t('back')}
+            </Button>
+          </div>
         </div>
       </div>
     </div>

@@ -97,8 +97,7 @@ const LoginContainer: FC<Props> = ({ redirect }) => {
             onSignUpSuccess={handleEmailLoginSubmit}
           />
           <Button variant={ButtonVariant.Compact} onClick={onBack}>
-            <ArrowLeft />
-            {t('back')}
+            <ArrowLeft /> {t('back')}
           </Button>
         </>
       );
