@@ -3,11 +3,10 @@ import { FC } from 'react';
 
 import { useRouter } from 'next/router';
 
-import AuthHeader from '../AuthHeader';
-import styles from '../login.module.scss';
-
 import VerificationCodeBase from './VerificationCodeBase';
 
+import AuthHeader from '@/components/Login/AuthHeader';
+import styles from '@/components/Login/login.module.scss';
 import SignUpRequest from '@/types/auth/SignUpRequest';
 import { signUp } from '@/utils/auth/authRequests';
 import { logFormSubmission } from '@/utils/eventLogger';
@@ -41,14 +40,12 @@ const VerificationCodeForm: FC<Props> = ({ email, onBack, onResendCode, signUpDa
   return (
     <div className={styles.authContainer}>
       <AuthHeader />
-      <div className={styles.authContent}>
-        <VerificationCodeBase
-          email={email}
-          onBack={onBack}
-          onResendCode={onResendCode}
-          onSubmitCode={handleSubmitCode}
-        />
-      </div>
+      <VerificationCodeBase
+        email={email}
+        onBack={onBack}
+        onResendCode={onResendCode}
+        onSubmitCode={handleSubmitCode}
+      />
     </div>
   );
 };

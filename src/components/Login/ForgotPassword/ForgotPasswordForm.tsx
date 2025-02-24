@@ -58,7 +58,7 @@ const ForgotPasswordForm: React.FC = () => {
       type={ButtonType.Success}
       className={styles.submitButton}
     >
-      {t('reset-password')}
+      {t('confirm')}
     </Button>
   );
 
@@ -66,20 +66,18 @@ const ForgotPasswordForm: React.FC = () => {
     <div className={styles.outerContainer}>
       <div className={styles.authContainer}>
         <AuthHeader />
-        <div className={styles.authContent}>
-          <h1 className={styles.authTitle}>{t('forgot-password-title')}</h1>
-          <p className={styles.description}>{t('forgot-password-description')}</p>
-          <div className={styles.formContainer}>
-            <FormBuilder
-              formFields={formFields}
-              onSubmit={handleSubmit}
-              renderAction={renderAction}
-              isSubmitting={isSubmitting}
-            />
-            <Button variant={ButtonVariant.Compact} onClick={handleBack} isDisabled={isSubmitting}>
-              <ArrowLeft /> {t('back')}
-            </Button>
-          </div>
+        <h1 className={styles.authTitle}>{t('forgot-password-title')}</h1>
+        <p className={styles.description}>{t('forgot-password-description')}</p>
+        <div className={styles.formContainer}>
+          <FormBuilder
+            formFields={formFields}
+            onSubmit={handleSubmit}
+            renderAction={renderAction}
+            isSubmitting={isSubmitting}
+          />
+          <Button variant={ButtonVariant.Compact} onClick={handleBack} isDisabled={isSubmitting}>
+            <ArrowLeft /> {t('back')}
+          </Button>
         </div>
       </div>
     </div>

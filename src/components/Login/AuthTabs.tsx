@@ -46,7 +46,7 @@ const AuthTabs: FC<Props> = ({ activeTab, onTabChange, redirect, onSignUpSuccess
             items={items}
             selected={activeTab}
             onSelect={onTabChange}
-            size={SwitchSize.Small}
+            size={SwitchSize.Normal}
           />
         </div>
         {activeTab === AuthTab.SignIn ? (

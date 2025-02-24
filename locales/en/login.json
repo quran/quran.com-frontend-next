@@ -10,7 +10,9 @@
   "first-name-placeholder": "First Name",
   "last-name-placeholder": "Last Name",
   "username-placeholder": "Username",
-  "confirm-password-placeholder": "Confirm Password",
+  "confirm-password-placeholder": "Confirm password",
+  "confirm-new-password-placeholder": "Confirm new password",
+  "confirm": "Confirm",
   "error": {
     "email-required": "Email is missing!",
     "invalid-email": "Invalid Email Format!",
@@ -56,6 +58,7 @@
   "forgot-password-title": "Forgot password?",
   "forgot-password-description": "Enter your email address and we'll send you instructions to reset your password.",
   "reset-password": "Reset Password",
+  "set-new-password": "Set a new password",
   "back-to-login": "Back to Login",
   "forgot-password-success": "Password reset email sent! Please check your inbox.",
   "password-reset-success": "Password reset successfully!",
@@ -68,6 +71,7 @@
   "login-title": "Login to Quran.com",
   "other-options": "Other Login Options",
   "password-placeholder": "Password",
+  "new-password-placeholder": "New password",
   "privacy-policy": "Protecting your privacy is our priority – By signing up, you consent to our <link>Privacy Policy</link> and <link1>Terms and conditions</link1>.",
   "quran-title": "Quran.com",
   "sign-in": "Sign in",
@@ -101,5 +105,6 @@
   "verification-code-spam-note": "Didn't receive an email? Check your spam folder",
   "verification-code-resend": "Resend email",
   "verification-code-resend-countdown": "Resend verification email in {{seconds}} sec...",
-  "verification-code-sent": "Verification code sent!"
+  "verification-code-sent": "Verification code sent!",
+  "reset-password-success": "Password reset successfully!"
 }

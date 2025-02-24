@@ -9,7 +9,11 @@ import { FormBuilderFormField } from '@/components/FormBuilder/FormBuilderTypes'
 import { RuleType } from '@/types/FieldRule';
 import { FormFieldType } from '@/types/FormField';
 
-const getPasswordFields = (t: any): FormBuilderFormField[] => {
+const getPasswordFields = (
+  t: any,
+  passwordPlaceholderKey = 'password-placeholder',
+  confirmPasswordPlaceholderKey = 'confirm-password-placeholder',
+): FormBuilderFormField[] => {
   const PasswordInput: FC<{
     value: string;
     onChange: (value: string) => void;
@@ -22,7 +26,7 @@ const getPasswordFields = (t: any): FormBuilderFormField[] => {
     {
       field: 'password',
       type: FormFieldType.Password,
-      placeholder: t('password-placeholder'),
+      placeholder: t(passwordPlaceholderKey),
       rules: [
         {
           type: RuleType.Required,
@@ -51,7 +55,7 @@ const getPasswordFields = (t: any): FormBuilderFormField[] => {
     {
       field: 'confirmPassword',
       type: FormFieldType.Password,
-      placeholder: t('confirm-password-placeholder'),
+      placeholder: t(confirmPasswordPlaceholderKey),
       rules: [
         {
           type: RuleType.Required,

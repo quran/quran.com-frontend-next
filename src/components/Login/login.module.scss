@@ -11,7 +11,7 @@ $container-width: 370px;
   padding: var(--spacing-mega);
   flex-direction: column;
   background-color: var(--color-background-default);
-  width: 400px;
+  max-width: 400px;
   margin-inline: auto;
 }
 
@@ -38,7 +38,6 @@ $container-width: 370px;
   margin-block-end: var(--spacing-xlarge);
   color: var(--color-text-default);
   max-width: 400px;
-  line-height: 1.5;
 }
 
 .inlineText {
@@ -96,7 +95,6 @@ $container-width: 370px;
 
 .benefitText {
   margin: 0;
-  line-height: 1.5;
 }
 
 .authButtons {
@@ -204,7 +202,6 @@ $container-width: 370px;
   width: 100%;
   display: flex;
   flex-direction: column;
-  background: var(--color-background-elevated);
   overflow: hidden;
   max-width: 400px;
   margin: 0 auto;
@@ -220,6 +217,9 @@ $container-width: 370px;
   svg {
     height: 32px;
     width: auto;
+    @include breakpoints.smallerThanTablet {
+      height: 20px;
+    }
   }
 }
 
@@ -231,6 +231,9 @@ $container-width: 370px;
   svg {
     height: 29px;
     width: auto;
+    @include breakpoints.smallerThanTablet {
+      height: 20px;
+    }
   }
 }
 
@@ -253,14 +256,14 @@ $container-width: 370px;
   margin: 0;
   text-align: center;
   color: var(--color-text-default);
+  margin-block: var(--spacing-large);
 }
 
 .description {
   text-align: center;
   color: var(--color-text-default);
-  margin-bottom: var(--spacing-large);
+  margin-block: var(--spacing-large);
   font-size: var(--font-size-large);
-  line-height: 1.5;
 }
 
 .formContainer {
@@ -274,21 +277,6 @@ $container-width: 370px;
 
   form {
     width: 95%;
-  }
-
-  .form-field {
-    margin-bottom: var(--spacing-medium);
-  }
-
-  .input-container {
-    border: 1px solid var(--color-borders-hairline);
-    border-radius: var(--border-radius-default);
-    background: var(--color-background-default);
-    transition: border-color 0.2s ease;
-
-    &:focus-within {
-      border-color: var(--color-success-medium);
-    }
   }
 
   input {
@@ -426,7 +414,6 @@ $container-width: 370px;
   margin-block-start: var(--spacing-large);
   border: 1px solid var(--color-text-default);
   border-radius: var(--border-radius-rounded);
-  background: var(--color-background-elevated);
   padding: 0;
 }
 

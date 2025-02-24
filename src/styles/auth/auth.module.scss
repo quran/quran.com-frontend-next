@@ -8,7 +8,7 @@
     align-items: center;
     padding: var(--spacing-mega);
     flex-direction: column;
-    width: 400px;
+    max-width: 400px;
     margin-inline: auto;
 }
 
@@ -42,21 +42,6 @@
     flex-direction: column;
     gap: var(--spacing-large);
     margin-top: var(--spacing-large);
-
-    .form-field {
-        margin-bottom: var(--spacing-medium);
-    }
-
-    .input-container {
-        border: 1px solid var(--color-borders-hairline);
-        border-radius: var(--border-radius-default);
-        background: var(--color-background-default);
-        transition: border-color 0.2s ease;
-
-        &:focus-within {
-            border-color: var(--color-success-medium);
-        }
-    }
 
     input {
         border: none;

@@ -3,14 +3,13 @@ import { FC, useState } from 'react';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
-import { FormBuilderFormField } from '../FormBuilder/FormBuilderTypes';
-
 import styles from './login.module.scss';
 import SignInPasswordField from './SignInForm/SignInPasswordField';
 import getFormErrors, { ErrorType } from './SignUpForm/errors';
 import { getEmailField } from './SignUpFormFields/credentialFields';
 
 import FormBuilder from '@/components/FormBuilder/FormBuilder';
+import { FormBuilderFormField } from '@/components/FormBuilder/FormBuilderTypes';
 import Button, { ButtonShape, ButtonType } from '@/dls/Button/Button';
 import Link, { LinkVariant } from '@/dls/Link/Link';
 import { RuleType } from '@/types/FieldRule';

@@ -3,6 +3,8 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
+import AuthHeader from '../AuthHeader';
+import styles from '../login.module.scss';
 import getFormErrors, { ErrorType } from '../SignUpForm/errors';
 import getPasswordFields from '../SignUpForm/PasswordFields';
 
@@ -10,7 +12,7 @@ import Button, { ButtonShape, ButtonType, ButtonVariant } from '@/components/dls
 import FormBuilder from '@/components/FormBuilder/FormBuilder';
 import { FormBuilderFormField } from '@/components/FormBuilder/FormBuilderTypes';
 import { useToast, ToastStatus } from '@/dls/Toast/Toast';
-import authStyles from '@/styles/auth/auth.module.scss';
+import ArrowLeft from '@/icons/west.svg';
 import QueryParam from '@/types/QueryParam';
 import { resetPassword } from '@/utils/auth/authRequests';
 import { logButtonClick, logFormSubmission } from '@/utils/eventLogger';
@@ -23,7 +25,11 @@ const ResetPasswordForm: React.FC = () => {
   const toast = useToast();
   const token = router.query[QueryParam.TOKEN] as string;
 
-  const formFields: FormBuilderFormField[] = getPasswordFields(t);
+  const formFields: FormBuilderFormField[] = getPasswordFields(
+    t,
+    'new-password-placeholder',
+    'confirm-new-password-placeholder',
+  );
 
   const handleSubmit = async (values: { password: string; confirmPassword: string }) => {
     logFormSubmission('reset_password');
@@ -63,31 +69,26 @@ const ResetPasswordForm: React.FC = () => {
       block
       shape={ButtonShape.Pill}
       type={ButtonType.Success}
-      className={authStyles.submitButton}
+      className={styles.submitButton}
     >
-      {t('reset-password')}
+      {t('confirm')}
     </Button>
   );
 
   return (
-    <div className={authStyles.outerContainer}>
-      <div className={authStyles.innerContainer}>
-        <h1 className={authStyles.title}>{t('reset-password')}</h1>
-        <div className={authStyles.formContainer}>
+    <div className={styles.outerContainer}>
+      <div className={styles.authContainer}>
+        <AuthHeader />
+        <h1 className={styles.authTitle}>{t('set-new-password')}</h1>
+        <div className={styles.formContainer}>
           <FormBuilder
             formFields={formFields}
             onSubmit={handleSubmit}
             renderAction={renderAction}
             isSubmitting={isSubmitting}
           />
-          <Button
-            variant={ButtonVariant.Outlined}
-            shape={ButtonShape.Pill}
-            className={authStyles.backButton}
-            onClick={handleBack}
-            isDisabled={isSubmitting}
-          >
-            {t('back-to-login')}
+          <Button variant={ButtonVariant.Compact} onClick={handleBack} isDisabled={isSubmitting}>
+            <ArrowLeft /> {t('back')}
           </Button>
         </div>
       </div>
