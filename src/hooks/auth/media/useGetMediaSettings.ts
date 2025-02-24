@@ -6,6 +6,7 @@ import AvailableTranslation from '@/types/AvailableTranslation';
 import Alignment from '@/types/Media/Alignment';
 import MediaSettings from '@/types/Media/MediaSettings';
 import Orientation from '@/types/Media/Orientation';
+import PreviewMode from '@/types/Media/PreviewMode';
 import QueryParam from '@/types/QueryParam';
 import { QuranFont } from '@/types/QuranReader';
 import Reciter from '@/types/Reciter';
@@ -66,6 +67,9 @@ const useGetMediaSettings = (
   );
   const { value: videoId }: { value: number } = useGetQueryParamOrReduxValue(QueryParam.VIDEO_ID);
   const { value: surah }: { value: number } = useGetQueryParamOrReduxValue(QueryParam.SURAH);
+  const { value: previewMode }: { value: PreviewMode } = useGetQueryParamOrReduxValue(
+    QueryParam.PREVIEW_MODE,
+  );
 
   return useMemo(() => {
     return {
@@ -86,6 +90,7 @@ const useGetMediaSettings = (
       orientation,
       videoId,
       surah,
+      previewMode,
     };
   }, [
     backgroundColor,
@@ -105,6 +110,7 @@ const useGetMediaSettings = (
     verseFrom,
     verseTo,
     videoId,
+    previewMode,
   ]);
 };
 

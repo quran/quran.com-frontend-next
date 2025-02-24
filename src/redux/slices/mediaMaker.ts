@@ -11,6 +11,7 @@ import {
   DEFAULT_BORDER_SIZE,
   DEFAULT_FONT_COLOR,
   DEFAULT_OPACITY,
+  DEFAULT_PREVIEW_MODE,
   DEFAULT_QURAN_FONT_SCALE,
   DEFAULT_QURAN_FONT_STYLE,
   DEFAULT_RECITER_ID,
@@ -38,6 +39,7 @@ const initialState: MediaSettings = {
   surah: DEFAULT_SURAH,
   verseFrom: '1',
   verseTo: '1',
+  previewMode: DEFAULT_PREVIEW_MODE,
 };
 
 export const mediaGeneratorSlice = createSlice({
@@ -84,5 +86,6 @@ export const selectSurahAndVersesFromAndTo = (state: RootState) => ({
 export const selectBorderColor = (state: RootState) => state.mediaMaker.borderColor;
 export const selectBorderSize = (state: RootState) => state.mediaMaker.borderSize;
 export const selectBackgroundColor = (state: RootState) => state.mediaMaker.backgroundColor;
+export const selectPreviewMode = (state: RootState) => state.mediaMaker.previewMode;
 
 export default mediaGeneratorSlice.reducer;

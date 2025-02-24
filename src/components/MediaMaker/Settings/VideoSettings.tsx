@@ -64,6 +64,7 @@ const MEDIA_SETTINGS_TO_QUERY_PARAM = {
   orientation: QueryParam.ORIENTATION,
   videoId: QueryParam.VIDEO_ID,
   surah: QueryParam.SURAH,
+  previewMode: QueryParam.PREVIEW_MODE,
 } as Record<keyof MediaSettings, QueryParam>;
 
 const VideoSettings: React.FC<Props> = ({

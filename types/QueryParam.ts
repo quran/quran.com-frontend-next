@@ -25,6 +25,7 @@ enum QueryParam {
   VIDEO_ID = 'videoId',
   SURAH = 'surah',
   PAGE = 'page',
+  PREVIEW_MODE = 'previewMode',
 }
 
 export default QueryParam;
