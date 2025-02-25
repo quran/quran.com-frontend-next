@@ -103,7 +103,6 @@
     "navigations": "Navigasi",
     "no-nav-results": "Tiada hasil navigasi",
     "placeholder": "Apa yang anda mahu baca?",
-    "powered-by": "Carian suara dikuasakan oleh Tarteel.ai",
     "recent-navigations": "Navigasi terkini",
     "search-by-voice": "Cari melalui suara",
     "try-navigating": "Cuba navigasi ke"
@@ -361,10 +360,6 @@
     "tafsir-desc": "Baca {{tafsirName}} untuk Ayah {{verseNumber}} Surah {{surahName}}",
     "tafsirs-desc": "Baca pelbagai Tafsir Ayah {{ayahNumber}} Surah {{surahName}} oleh ulama Tafsir yang dipercayai",
     "title": "Tafsir"
-  },
-  "tarteel": {
-    "app": "Aplikasi Tarteel",
-    "name": "Tarteel.ai"
   },
   "terms-and-conditions": "Terma dan Syarat",
   "theme": "Tema",

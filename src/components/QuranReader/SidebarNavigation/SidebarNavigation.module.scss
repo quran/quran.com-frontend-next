@@ -5,9 +5,17 @@
 
 $sections-menu-height: 2.25rem;
 $progress-bar-height: var(--spacing-micro);
-$top-menu-height: calc($sections-menu-height + var(--navbar-container-height) + $progress-bar-height);
+$navbar-height: var(--navbar-container-height);
+
+// Homepage heights (without sections menu and without progress bar)
+$top-menu-height-home: $navbar-height;
+$context-menu-height-home: 0;
+
+// Non-homepage heights (with sections menu and progress bar)
+$top-menu-height: calc($sections-menu-height + $navbar-height + $progress-bar-height);
 $context-menu-height: calc($sections-menu-height + $progress-bar-height);
-$isNavbarVisible : var(--isNavbarVisible);
+
+$isNavbarVisible: var(--isNavbarVisible);
 
 @mixin sidebarVisible {
   z-index: var(--z-index-sticky);
@@ -15,21 +23,39 @@ $isNavbarVisible : var(--isNavbarVisible);
 }
 
 @mixin sidebarInvisibleExpanded {
-  transform: translateX(-100%) translateY(calc($top-menu-height));
-  [dir="rtl"] & {
-    transform: translateX(100%) translateY(calc($top-menu-height));
+  &[data-is-homepage="true"] {
+    transform: translateX(-100%) translateY($top-menu-height-home);
+    [dir="rtl"] & {
+      transform: translateX(100%) translateY($top-menu-height-home);
+    }
+  }
+
+  &[data-is-homepage="false"] {
+    transform: translateX(-100%) translateY($top-menu-height);
+    [dir="rtl"] & {
+      transform: translateX(100%) translateY($top-menu-height);
+    }
   }
 }
 
 @mixin sidebarInvisibleCollapsed {
-  transform: translateX(-100%) translateY(calc($context-menu-height));
-  [dir="rtl"] & {
-    transform: translateX(100%) translateY(calc($context-menu-height));
+  &[data-is-homepage="true"] {
+    transform: translateX(-100%) translateY($context-menu-height-home);
+    [dir="rtl"] & {
+      transform: translateX(100%) translateY($context-menu-height-home);
+    }
+  }
+
+  &[data-is-homepage="false"] {
+    transform: translateX(-100%) translateY($context-menu-height);
+    [dir="rtl"] & {
+      transform: translateX(100%) translateY($context-menu-height);
+    }
   }
 }
 
 .container {
-  --sidebar-size: calc(100% - (2 * var(--spacing-mega)));
+  --sidebar-size: calc(100% - calc(1.5 * var(--spacing-mega)));
   @include breakpoints.tablet {
     --sidebar-size: calc(10 * var(--spacing-mega));
   }
@@ -46,7 +72,9 @@ $isNavbarVisible : var(--isNavbarVisible);
   border-inline-end: 1px solid var(--color-borders-hairline);
   width: var(--sidebar-size);
   padding-inline: var(--spacing-large);
-  transition: transform var(--transition-regular), height var(--transition-regular);
+  transition:
+    transform var(--transition-regular),
+    height var(--transition-regular);
   display: flex;
   flex-direction: column;
   overflow-y: hidden;
@@ -62,23 +90,56 @@ $isNavbarVisible : var(--isNavbarVisible);
 
 .visibleContainer {
   @include sidebarVisible();
-  [dir="rtl"] & {
-    transform: translateX(0%) translateY(calc($top-menu-height));
+
+  &[data-is-homepage="true"] {
+    transform: translateY($top-menu-height-home);
+    [dir="rtl"] & {
+      transform: translateY($top-menu-height-home);
+    }
+  }
+
+  &[data-is-homepage="false"] {
+    transform: translateY($top-menu-height);
+    [dir="rtl"] & {
+      transform: translateY($top-menu-height);
+    }
   }
 }
 
 .visibleContainerCollapsed {
   @include sidebarVisible();
-  [dir="rtl"] & {
-    transform: translateX(0%) translateY(calc($context-menu-height));
+
+  &[data-is-homepage="true"] {
+    transform: translateY($context-menu-height-home);
+    [dir="rtl"] & {
+      transform: translateY($context-menu-height-home);
+    }
+  }
+
+  &[data-is-homepage="false"] {
+    transform: translateY($context-menu-height);
+    [dir="rtl"] & {
+      transform: translateY($context-menu-height);
+    }
   }
 }
 
 .containerAuto {
   @include breakpoints.tablet {
     @include sidebarVisible();
-    [dir="rtl"] & {
-      transform: translateX(0%) translateY(calc($top-menu-height));
+
+    &[data-is-homepage="true"] {
+      transform: translateY($top-menu-height-home);
+      [dir="rtl"] & {
+        transform: translateY($top-menu-height-home);
+      }
+    }
+
+    &[data-is-homepage="false"] {
+      transform: translateY($top-menu-height);
+      [dir="rtl"] & {
+        transform: translateY($top-menu-height);
+      }
     }
   }
 }
@@ -86,8 +147,19 @@ $isNavbarVisible : var(--isNavbarVisible);
 .containerAutoCollapsed {
   @include breakpoints.tablet {
     @include sidebarVisible();
-    [dir="rtl"] & {
-      transform: translateX(0%) translateY(calc($context-menu-height));
+
+    &[data-is-homepage="true"] {
+      transform: translateY($context-menu-height-home);
+      [dir="rtl"] & {
+        transform: translateY($context-menu-height-home);
+      }
+    }
+
+    &[data-is-homepage="false"] {
+      transform: translateY($context-menu-height);
+      [dir="rtl"] & {
+        transform: translateY($context-menu-height);
+      }
     }
   }
 }
@@ -111,9 +183,6 @@ $isNavbarVisible : var(--isNavbarVisible);
 .surahBodyContainer {
   display: flex;
   flex: 1;
-  & > .verseListContainer {
-    margin-inline-start: var(--spacing-xsmall);
-  }
 }
 
 .scrollableSectionContainer {
@@ -157,8 +226,6 @@ $isNavbarVisible : var(--isNavbarVisible);
   flex-direction: column;
 }
 .verseListContainer {
-  padding-inline-start: var(--spacing-xsmall);
-  border-inline-start: 1px solid var(--color-borders-hairline);
   flex: 1;
   display: flex;
   flex-direction: column;
@@ -180,15 +247,27 @@ $isNavbarVisible : var(--isNavbarVisible);
 }
 
 .spaceOnTop {
-  transform: translateY($top-menu-height);
-  height: calc(100vh - $top-menu-height);
+  &[data-is-homepage="true"] {
+    transform: translateY($top-menu-height-home);
+    height: calc(100vh - $top-menu-height-home);
+  }
 
+  &[data-is-homepage="false"] {
+    transform: translateY($top-menu-height);
+    height: calc(100vh - $top-menu-height);
+  }
 }
 
 .spaceOnTopCollapsed {
-  transform: translateY($context-menu-height);
-  height: calc(100vh - $context-menu-height);
+  &[data-is-homepage="true"] {
+    transform: translateY($top-menu-height-home);
+    height: 100vh;
+  }
 
+  &[data-is-homepage="false"] {
+    transform: translateY($context-menu-height);
+    height: calc(100vh - $context-menu-height);
+  }
 }
 
 .chapterNumber {

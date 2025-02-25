@@ -14811,6 +14811,11 @@ react-toastify@^9.0.8:
   dependencies:
     clsx "^1.1.1"
 
+react-verification-input@^4.2.2:
+  version "4.2.2"
+  resolved "https://registry.yarnpkg.com/react-verification-input/-/react-verification-input-4.2.2.tgz#8d0e54705ed38b23adced59bd41a06ee6aa52a75"
+  integrity sha512-GqcsiZ5iwcXD4V0cKbZv1pbknqAZRszPoXzSKc5LLlfSdo3iOnxLxEbmDi+BWN1LfhCx2iXhEDGke9Bdk3q+4A==
+
 react-virtuoso@^2.19.0:
   version "2.19.1"
   resolved "https://registry.yarnpkg.com/react-virtuoso/-/react-virtuoso-2.19.1.tgz#a660a5c3cafcc7a84b59dfc356e1916e632c1e3a"

@@ -103,7 +103,6 @@
     "navigations": "Lundrimet",
     "no-nav-results": "Nuk ka rezultate navigimi",
     "placeholder": "Çfarë doni të lexoni?",
-    "powered-by": "Kërkimi zanor i mundësuar nga Tarteel.ai",
     "recent-navigations": "Lundrimet e fundit",
     "search-by-voice": "Kërko me zë",
     "try-navigating": "Provoni të lundroni në"
@@ -361,10 +360,6 @@
     "tafsir-desc": "Lexoni {{tafsirName}} për Ajetin {{Numri i {{verseNumber}} të sures {{surahName}}",
     "tafsirs-desc": "Lexoni tefsire të ndryshme të Ajetit {{ayahNumber}} të sures {{surahName}} nga dijetarë të besuar të tefsirit",
     "title": "Tefsir"
-  },
-  "tarteel": {
-    "app": "Aplikacioni Tarteel",
-    "name": "Tarteel.ai"
   },
   "terms-and-conditions": "Termat dhe Kushtet",
   "theme": "Tema",

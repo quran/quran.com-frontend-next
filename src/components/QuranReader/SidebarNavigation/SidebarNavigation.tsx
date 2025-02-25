@@ -2,6 +2,7 @@
 import { useRef } from 'react';
 
 import classNames from 'classnames';
+import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
@@ -22,13 +23,15 @@ import {
   selectIsSidebarNavigationVisible,
   selectNavigationItem,
   selectSelectedNavigationItem,
-  setIsVisible,
+  setIsSidebarNavigationVisible,
 } from '@/redux/slices/QuranReader/sidebarNavigation';
 import { selectIsReadingByRevelationOrder } from '@/redux/slices/revelationOrder';
 import { logButtonClick, logEvent, logValueChange } from '@/utils/eventLogger';
 import { isMobile } from '@/utils/responsive';
 
 const SidebarNavigation = () => {
+  const router = useRouter();
+  const isHomePage = router.pathname === '/';
   const isSidebarVisible = useSelector(selectIsSidebarNavigationVisible);
   const { isVisible: isNavbarVisible } = useSelector(selectNavbar, shallowEqual);
   const selectedNavigationItem = useSelector(selectSelectedNavigationItem);
@@ -42,7 +45,7 @@ const SidebarNavigation = () => {
     sidebarRef,
     () => {
       logEvent('sidebar_navigation_close_outside_click');
-      dispatch(setIsVisible(false));
+      dispatch(setIsSidebarNavigationVisible(false));
     },
     isSidebarVisible && isMobile(),
   );
@@ -53,13 +56,13 @@ const SidebarNavigation = () => {
       value: NavigationItem.Surah,
     },
     {
+      name: t('verse'),
+      value: NavigationItem.Verse,
+    },
+    {
       name: t('juz'),
       value: NavigationItem.Juz,
     },
-    // {
-    //   name: t('hizb'),
-    //   value: NavigationItem.Hizb,
-    // },
     {
       name: t('page'),
       value: NavigationItem.Page,
@@ -72,6 +75,7 @@ const SidebarNavigation = () => {
   return (
     <div
       ref={sidebarRef}
+      data-is-homepage={isHomePage}
       className={classNames(styles.container, {
         [styles.visibleContainer]: showSidebar && isNavbarVisible,
         [styles.visibleContainerCollapsed]: showSidebar && !isNavbarVisible,
@@ -104,7 +108,7 @@ const SidebarNavigation = () => {
               variant={ButtonVariant.Ghost}
               onClick={() => {
                 logButtonClick('sidebar_navigation_close');
-                dispatch(setIsVisible(false));
+                dispatch(setIsSidebarNavigationVisible(false));
               }}
               ariaLabel={t('aria.sidebar-nav-close')}
             >
@@ -134,7 +138,7 @@ const SidebarNavigation = () => {
               variant={ButtonVariant.Ghost}
               onClick={() => {
                 logButtonClick('sidebar_navigation_close');
-                dispatch(setIsVisible(false));
+                dispatch(setIsSidebarNavigationVisible(false));
               }}
               ariaLabel={t('aria.sidebar-nav-close')}
             >

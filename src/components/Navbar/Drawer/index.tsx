@@ -21,7 +21,6 @@ import {
   setIsSettingsDrawerOpen,
   setIsVisible,
 } from '@/redux/slices/navbar';
-import { stopSearchDrawerVoiceFlow } from '@/redux/slices/voiceSearch';
 import { logEvent } from '@/utils/eventLogger';
 
 export enum DrawerType {
@@ -112,9 +111,6 @@ const Drawer: React.FC<Props> = ({
       }
 
       dispatch({ type: getActionCreator(type), payload: false });
-      if (type === DrawerType.Search) {
-        dispatch({ type: stopSearchDrawerVoiceFlow.type });
-      }
       logDrawerCloseEvent(type, actionSource);
     },
     [dispatch, type, canCloseDrawer],

@@ -6,7 +6,7 @@
     "auth-onboarding": {
       "data-sync": {
         "action": "Next",
-        "description": "Whether you’re using Quran.com on your phone or your laptop, your bookmarks, last read verses, and your preferences will be available",
+        "description": "Whether you're using Quran.com on your phone or your laptop, your bookmarks, last read verses, and your preferences will be available",
         "title": "Your data will be synced <br></br> across devices"
       },
       "feedback": {
@@ -102,8 +102,7 @@
   "command-bar": {
     "navigations": "Navigations",
     "no-nav-results": "No navigation results",
-    "placeholder": "What do you want to read?",
-    "powered-by": "Voice search powered by Tarteel.ai",
+    "placeholder": "Search the Quran...",
     "recent-navigations": "Recent navigations",
     "search-by-voice": "Search by voice",
     "try-navigating": "Try navigating to"
@@ -125,6 +124,7 @@
   "copied": "Copied",
   "copied-to-clipboard": "Copied to clipboard",
   "copy": "Copy",
+  "copylink": "Copy link",
   "counter": {
     "decrease": "Decrease",
     "increase": "Increase"
@@ -190,7 +190,11 @@
     "email": "Email",
     "firstName": "First Name",
     "lastName": "Last Name",
-    "title": "Title"
+    "title": "Title",
+    "username": "Username",
+    "password": "Password",
+    "confirm-password": "Confirm Password",
+    "verification-code": "Verification Code"
   },
   "from": "From",
   "fundraising-sticky-banner": {
@@ -219,6 +223,7 @@
   "less": "Less",
   "loading": "Loading",
   "login": "Login",
+  "sign-in": "Sign in",
   "logout": "Logout",
   "meccan": "Meccan",
   "medinan": "Medinan",
@@ -230,6 +235,8 @@
   "my-learning-plans": "My Learning Plans",
   "navigate": "Navigate",
   "network": "Network",
+  "our-projects": "Our Projects",
+  "projects-desc": "Non-profit projects owned, managed, or sponsored by Quran.Foundation",
   "new": "New!",
   "newest": "Newest",
   "next": "Next",
@@ -281,7 +288,6 @@
     "reading": "Reading",
     "translation": "Translation"
   },
-  "ready-for-ramadan": "Ready for Ramadan?",
   "recitation": "Recitation",
   "reciter": "Reciter",
   "reciter-summary": "(With kind permission of Tafsir Center)",
@@ -344,6 +350,7 @@
     "search-juz": "Search Juz",
     "search-page": "Search Page",
     "search-surah": "Search Surah",
+    "search-verse": "Search Verse",
     "try-navigating-with": "Tip: try navigating with"
   },
   "sitemap": "Sitemap",
@@ -365,10 +372,6 @@
     "tafsir-desc": "Read {{tafsirName}} for Ayah {{verseNumber}} of Surah {{surahName}}",
     "tafsirs-desc": "Read various Tafsirs of Ayah {{ayahNumber}} of Surah {{surahName}} by trusted Tafsir scholars",
     "title": "Tafsir"
-  },
-  "tarteel": {
-    "app": "Tarteel app",
-    "name": "Tarteel.ai"
   },
   "terms-and-conditions": "Terms and Conditions",
   "theme": "Theme",
@@ -425,5 +428,6 @@
   "word-tooltip": "Word Tooltip",
   "yes": "Yes",
   "ready-for-ramadan": "Ready for Ramadan?",
-  "get-started": "Get Started"
+  "contribute-to-our-mission": "Contribute to our mission",
+  "donate-now": "Donate now"
 }
