@@ -1,0 +1,100 @@
+@use "src/styles/theme";
+
+.container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: var(--border-radius-rounded);
+    padding: var(--spacing-medium);
+    @include theme.light {
+        box-shadow: 0px 4px 25px 0px rgba(0, 0, 0, 0.1);
+    }
+    @include theme.dark {
+        box-shadow: 0px 4px 25px 0px rgba(0, 0, 0, 0.8);
+    }
+    @include theme.sepia {
+        box-shadow: 0px 4px 25px 0px rgba(0, 0, 0, 0.1);
+    }
+}
+
+.content {
+    flex: 1;
+}
+
+.title {
+    font-size: var(--font-size-large);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--spacing-xsmall);
+    color: var(--color-text-default);
+}
+
+.description {
+    font-size: var(--font-size-medium);
+    color: var(--color-text-default);
+    margin-bottom: var(--spacing-small);
+}
+
+.actions {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-medium);
+}
+
+.rightActions {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-medium);
+}
+
+.shareButton {
+    background-color: var(--color-success-faded);
+    --themed-bg: var(--color-success-faded);
+    --themed-border: var(--color-success-faded);
+    color: var(--color-text-link-new);
+    font-weight: var(--font-weight-bold);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xsmall);
+
+    &:hover {
+        --themed-bg: var(--color-success-faded);
+        --themed-border: var(--color-success-faded);
+        color: var(--color-text-link-new);
+    }
+    svg {
+        padding-inline-end: var(--spacing-small-px);
+    }
+}
+
+.donateButton {
+    font-weight: var(--font-weight-bold);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xsmall);
+    svg {
+        padding-inline-end: var(--spacing-small-px);
+    }
+}
+
+.learnMoreLink {
+    text-decoration: underline;
+}
+
+.closeButton {
+    position: absolute;
+    top: var(--spacing-xsmall);
+    right: var(--spacing-xsmall);
+    color: var(--color-text-faded);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: var(--spacing-xsmall);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+        color: var(--color-text-default);
+    }
+}

@@ -26,7 +26,6 @@
   padding-block: var(--spacing-medium2-px);
 
   @include breakpoints.tablet {
-    max-width: calc(18 * var(--spacing-mega));
     padding-block: var(--spacing-large-px);
   }
 

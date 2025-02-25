@@ -9,6 +9,7 @@ import useTranslation from 'next-translate/useTranslation';
 import styles from './index.module.scss';
 
 import ChapterAndJuzListWrapper from '@/components/chapters/ChapterAndJuzList';
+import HomepageFundraisingBanner from '@/components/Fundraising/HomepageFundraisingBanner';
 import CommunitySection from '@/components/HomePage/CommunitySection';
 import ExploreTopicsSection from '@/components/HomePage/ExploreTopicsSection';
 import HomePageHero from '@/components/HomePage/HomePageHero';
@@ -49,6 +50,9 @@ const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }): JSX.El
           <div className={styles.bodyContainer}>
             <div className={classNames(styles.flowItem, styles.fullWidth, styles.homepageCard)}>
               <ReadingSection />
+            </div>
+            <div className={classNames(styles.flowItem, styles.fullWidth, styles.homepageCard)}>
+              <HomepageFundraisingBanner />
             </div>
             {isMobile() ? (
               <MobileHomepageSections isUserLoggedIn={isUserLoggedIn} />

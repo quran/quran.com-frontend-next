@@ -7,6 +7,7 @@ enum SliceName {
   AUDIO_PLAYER_STATE = 'audioPlayerState',
   DEFAULT_SETTINGS = 'defaultSettings',
   BANNER = 'banner',
+  FUNDRAISING_BANNER = 'fundraisingBanner',
   NAVBAR = 'navbar',
   SESSION = 'session',
   BOOKMARKS = 'bookmarks',
