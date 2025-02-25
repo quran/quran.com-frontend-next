@@ -7,6 +7,7 @@ import defaultVerses from './defaultVerses.json';
 
 import Alignment from '@/types/Media/Alignment';
 import Orientation from '@/types/Media/Orientation';
+import PreviewMode from '@/types/Media/PreviewMode';
 import WatermarkColor from '@/types/Media/WatermarkColor';
 import { QuranFont } from '@/types/QuranReader';
 import Verse from '@/types/Verse';
@@ -35,6 +36,7 @@ export const MAXIMUM_OPACITY = 1;
 export const OPACITY_VALUES = [0, 0.2, 0.4, 0.6, 0.8, 1];
 export const MINIMUM_BORDER = 0;
 export const MAXIMUM_BORDER = 10;
+export const DEFAULT_PREVIEW_MODE = PreviewMode.DISABLED;
 
 export function getDefaultVerseKeys(lang = 'en') {
   const keys = defaultVerses.map((verse) => `${verse.chapterId}:${verse.verseNumber}`);
@@ -115,4 +117,5 @@ export const DEFAULT_PROPS = {
   borderColor: DEFAULT_BORDER_COLOR,
   borderSize: DEFAULT_BORDER_SIZE,
   backgroundColor: DEFAULT_BACKGROUND_COLOR,
+  previewMode: DEFAULT_PREVIEW_MODE,
 };

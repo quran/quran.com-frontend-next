@@ -2,6 +2,7 @@ import { QuranFont } from '../QuranReader';
 
 import Alignment from '@/types/Media/Alignment';
 import Orientation from '@/types/Media/Orientation';
+import PreviewMode from '@/types/Media/PreviewMode';
 
 type MediaSettings = {
   verseTo: string;
@@ -21,6 +22,7 @@ type MediaSettings = {
   orientation: Orientation;
   videoId: number;
   surah: number;
+  previewMode: PreviewMode;
 };
 
 export type ChangedSettings = {
