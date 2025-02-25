@@ -3,6 +3,10 @@ import { useState } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import { useSWRConfig } from 'swr';
 
+import styles from '../CompleteSignupForm.module.scss';
+
+import EmailVerificationSection from './EmailVerificationSection';
+
 import buildFormBuilderFormField from '@/components/FormBuilder/buildFormBuilderFormField';
 import FormBuilder from '@/components/FormBuilder/FormBuilder';
 import { makeUserProfileUrl } from '@/utils/auth/apiPaths';
