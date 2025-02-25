@@ -69,8 +69,6 @@ const SupportPage: NextPage = (): JSX.Element => {
               ]}
             />
           </p>
-          <h2>{t('fiqh-q')}</h2>
-          <p>{t('fiqh-a')}</p>
           <h2>{t('tafsir-q')}</h2>
           <p>{t('tafsir-a')}</p>
           <h2>{t('translations-q')}</h2>
@@ -95,7 +93,20 @@ const SupportPage: NextPage = (): JSX.Element => {
           <p>
             <Trans
               i18nKey="support:mobile-a"
-              components={[<Link key={0} href="/apps" shouldPrefetch={false} />]}
+              components={[
+                <Link
+                  key={0}
+                  href="https://play.google.com/store/apps/details?id=com.quran.labs.androidquran&hl=en&pli=1"
+                  shouldPrefetch={false}
+                  isNewTab
+                />,
+                <Link
+                  key={1}
+                  href="https://apps.apple.com/us/app/quran-by-quran-com-%D9%82%D8%B1%D8%A2%D9%86/id1118663303"
+                  shouldPrefetch={false}
+                  isNewTab
+                />,
+              ]}
             />
           </p>
           {/* <h2>
