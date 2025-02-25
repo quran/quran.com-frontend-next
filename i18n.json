@@ -22,7 +22,7 @@
   "defaultLocale": "en",
   "pages": {
     "*": ["common", "error", "radio", "quick-links", "onboarding"],
-    "/": ["home", "radio", "collection", "reading-goal", "reciter"],
+    "/": ["home", "radio", "collection", "reading-goal", "reciter", "learn"],
     "/reading-goal": ["reading-goal", "reciter"],
     "/my-learning-plans": ["learn"],
     "/learning-plans": ["learn"],
@@ -57,6 +57,8 @@
     "/reciters": ["reciter", "home"],
     "/profile": ["home", "profile", "collection", "quran-reader"],
     "/login": ["login"],
+    "/forgot-password": ["login"],
+    "/reset-password": ["login"],
     "/about-the-quran": ["about-quran"],
     "/notes-and-reflections": ["notes"],
     "/ramadan": ["ramadan-activities"],

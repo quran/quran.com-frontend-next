@@ -365,7 +365,16 @@ export const getLoginNavigationUrl = (redirectTo?: string) =>
 
 export const getReadingGoalProgressNavigationUrl = () => '/reading-goal/progress';
 
+export const getFirstTimeReadingGuideNavigationUrl = () => '/first-time-reading-guide';
+
 export const getNotesNavigationUrl = () => '/notes-and-reflections';
+
+export const getForgotPasswordNavigationUrl = () => `/forgot-password`;
+
+export const getResetPasswordNavigationUrl = () => `/reset-password`;
+
+export const getVerifyEmailNavigationUrl = (email?: string) =>
+  `/verify-email${email ? `?${QueryParam.EMAIL}=${email}` : ''}`;
 
 export const getNotificationSettingsNavigationUrl = () => '/notification-settings';
 export const getQuranicCalendarNavigationUrl = () => '/calendar';

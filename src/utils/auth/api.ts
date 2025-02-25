@@ -7,6 +7,7 @@ import { getTimezone } from '../datetime';
 import { prepareGenerateMediaFileRequestData } from '../media/utils';
 
 import { BANNED_USER_ERROR_ID } from './constants';
+import { AuthErrorCodes } from './errors';
 import generateSignature from './signature';
 import BookmarkByCollectionIdQueryParams from './types/BookmarkByCollectionIdQueryParams';
 import GetAllNotesQueryParams from './types/Note/GetAllNotesQueryParams';
@@ -104,6 +105,18 @@ type RequestData = Record<string, any>;
 const IGNORE_ERRORS = [
   MediaRenderError.MediaVersesRangeLimitExceeded,
   MediaRenderError.MediaFilesPerUserLimitExceeded,
+  AuthErrorCodes.InvalidCredentials,
+  AuthErrorCodes.NotFound,
+  AuthErrorCodes.BadRequest,
+  AuthErrorCodes.Invalid,
+  AuthErrorCodes.Mismatch,
+  AuthErrorCodes.Missing,
+  AuthErrorCodes.Duplicate,
+  AuthErrorCodes.Banned,
+  AuthErrorCodes.Expired,
+  AuthErrorCodes.Used,
+  AuthErrorCodes.Immutable,
+  AuthErrorCodes.ValidationError,
 ];
 
 const handleErrors = async (res) => {

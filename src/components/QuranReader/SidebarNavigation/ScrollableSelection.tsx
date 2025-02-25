@@ -17,6 +17,7 @@ const ScrollableSelection = ({
   getHref,
   isJuz = true,
   selectedItem,
+  onAfterNavigationItemRouted,
 }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const router = useRouter();
@@ -50,14 +51,27 @@ const ScrollableSelection = ({
     scroll();
   }, [selectedItem, scroll]);
 
+  const navigateAndHandleAfterNavigation = (href: string) => {
+    router.push(href).then(() => {
+      if (onAfterNavigationItemRouted) {
+        onAfterNavigationItemRouted();
+      }
+    });
+  };
+
   // handle when user press `Enter` in input box
   const handleInputSubmit = (e) => {
     e.preventDefault();
     const firstFilteredItem = filteredItems[0];
     if (filteredItems) {
       const href = getHref(firstFilteredItem.value);
-      router.push(href);
+      navigateAndHandleAfterNavigation(href);
     }
+  };
+
+  const handleItemClick = (e: React.MouseEvent, href: string) => {
+    e.preventDefault();
+    navigateAndHandleAfterNavigation(href);
   };
 
   return (
@@ -72,19 +86,27 @@ const ScrollableSelection = ({
       </form>
       <div className={styles.listContainer}>
         <div className={styles.list}>
-          {filteredItems.map((item) => (
-            <Link href={getHref(item.value)} key={item.value} shouldPrefetch={false}>
-              <div
-                ref={item.value === selectedItem ? selectedItemRef : null}
-                className={classNames(
-                  styles.listItem,
-                  item.value === selectedItem && styles.selectedItem,
-                )}
+          {filteredItems.map((item) => {
+            const href = getHref(item.value);
+            return (
+              <Link
+                href={href}
+                key={item.value}
+                shouldPrefetch={false}
+                onClick={(e) => handleItemClick(e, href)}
               >
-                {renderItem(item)}
-              </div>
-            </Link>
-          ))}
+                <div
+                  ref={item.value === selectedItem ? selectedItemRef : null}
+                  className={classNames(
+                    styles.listItem,
+                    item.value === selectedItem && styles.selectedItem,
+                  )}
+                >
+                  {renderItem(item)}
+                </div>
+              </Link>
+            );
+          })}
         </div>
       </div>
     </div>

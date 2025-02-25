@@ -103,7 +103,6 @@
     "navigations": "Navigatie",
     "no-nav-results": "Geen navigatieresultaten",
     "placeholder": "Wat wil je lezen?",
-    "powered-by": "Gesproken zoekopdracht mogelijk gemaakt door Tarteel.ai",
     "recent-navigations": "Recente navigatie",
     "search-by-voice": "Zoek bij stem",
     "try-navigating": "Probeer te navigeren naar"
@@ -361,10 +360,6 @@
     "tafsir-desc": "Lees {{tafsirName}} voor Ayah {{verseNumber}} van Surah {{surahName}}",
     "tafsirs-desc": "Lees verschillende Tafsirs van Ayah {{ayahNumber}} van Surah {{surahName}} door vertrouwde Tafsir-geleerden",
     "title": "Tafsir"
-  },
-  "tarteel": {
-    "app": "Tarteel-app",
-    "name": "Tarteel.ai"
   },
   "terms-and-conditions": "Algemene voorwaarden",
   "theme": "Thema",

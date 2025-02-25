@@ -11,17 +11,13 @@ import IconDevelopers from '@/icons/developers.svg';
 import IconFeedback from '@/icons/feedback.svg';
 import IconHome from '@/icons/home.svg';
 import IconInfo from '@/icons/info.svg';
-import IconLock from '@/icons/lock.svg';
-import MobileIcon from '@/icons/mobile.svg';
 import IconProductUpdates from '@/icons/product-updates.svg';
 import IconQ from '@/icons/Q_simple.svg';
 import QuranReflect from '@/icons/QR.svg';
 import IconQuestionMark from '@/icons/question-mark.svg';
 import IconRadio2 from '@/icons/radio-2.svg';
 import IconRadio from '@/icons/radio.svg';
-import Tarteel from '@/icons/tarteel.svg';
 // import MobileApps from '../MobileApps';
-import { logTarteelLinkClick } from '@/utils/eventLogger';
 
 // import IconDonate from '@/icons/donate.svg';
 // import IconUpdates from '@/icons/updates.svg';
@@ -37,16 +33,7 @@ const NavigationDrawerBody = () => {
       <NavigationDrawerItem href="/radio" title={t('quran-radio')} icon={<IconRadio2 />} />
       <NavigationDrawerItem href="/reciters" title={t('reciters')} icon={<IconRadio />} />
       <NavigationDrawerItem title={t('about')} icon={<IconInfo />} href="/about-us" />
-      <NavigationDrawerItem title={t('mobile-apps')} icon={<MobileIcon />} href="/apps" />
-      {/* <NavigationDrawerItem title="Updates" icon={<IconUpdates />} href="/updates" /> */}
       <NavigationDrawerItem title={t('developers')} icon={<IconDevelopers />} href="/developers" />
-      {/* <NavigationDrawerItem title="Contribute" icon={<IconDonate />} href="/contribute" /> */}
-      <NavigationDrawerItem title={t('privacy')} icon={<IconLock />} href="/privacy" />
-      <NavigationDrawerItem
-        title={t('terms-and-conditions')}
-        icon={<IconProductUpdates />}
-        href="/terms-and-conditions"
-      />
       <NavigationDrawerItem
         title={t('product-updates')}
         icon={<IconProductUpdates />}
@@ -64,7 +51,8 @@ const NavigationDrawerBody = () => {
       {/* <NavigationDrawerItem title="Jewels of Quran" icon={<IconCollection />} /> */}
       {/* <NavigationDrawerItem title="Names of Allah" icon={<IconCollection />} /> */}
       {/* <NavigationDrawerItem title="Revelation" icon={<IconCollection />} />  */}
-      <h3 className={styles.subtitle}>{t('network')}</h3>
+      <h3 className={styles.subtitle}>{t('our-projects')}</h3>
+      <p className={styles.projectsDesc}>{t('projects-desc')}</p>
       <NavigationDrawerItem
         title="Quranicaudio.com"
         icon={<IconQ />}
@@ -106,15 +94,6 @@ const NavigationDrawerBody = () => {
         icon={<QuranReflect />}
         href="https://quranreflect.com/"
         isExternalLink
-      />
-      <NavigationDrawerItem
-        onClick={() => {
-          logTarteelLinkClick('navigation_menu_network');
-        }}
-        isExternalLink
-        title={t('tarteel.name')}
-        icon={<Tarteel />}
-        href="https://download.tarteel.ai/"
       />
     </div>
   );

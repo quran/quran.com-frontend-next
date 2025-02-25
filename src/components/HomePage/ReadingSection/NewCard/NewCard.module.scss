@@ -1,0 +1,67 @@
+@use "src/styles/breakpoints";
+
+.cardWithIcon {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--spacing-micro);
+    @include breakpoints.tablet {
+        font-size: var(--font-size-large-px);
+    }
+
+    @include breakpoints.smallerThanTablet {
+        margin: auto;
+    }
+}
+
+.iconContainer {
+    display: flex;
+    padding-inline-end: var(--spacing-small-px);
+    svg {
+        width: var(--spacing-large-px);
+        height: var(--spacing-large-px);
+    }
+
+    @include breakpoints.smallerThanTablet {
+        padding-inline-end: var(--spacing-xxsmall-px);
+        svg {
+            width: var(--spacing-medium-px);
+            height: var(--spacing-medium-px);
+        }
+    }
+}
+
+.cardOuterContainer {
+    justify-content: space-between;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: var(--spacing-micro);
+    font-weight: var(--font-weight-semibold);
+    width: 100%;
+}
+
+.link {
+    @include breakpoints.smallerThanTablet {
+        color: var(--color-text-faded-new);
+    }
+}
+
+.linkHref {
+    color: var(--color-text-link);
+}
+
+.firstTimeReadingCard {
+    @include breakpoints.smallerThanTablet {
+        font-size: var(--font-size-xsmall-px);
+        box-shadow: none !important;
+        border-radius: 0;
+        padding: 0 !important;
+    }
+}
+
+.arrowIcon {
+    @include breakpoints.smallerThanTablet {
+        display: none;
+    }
+}

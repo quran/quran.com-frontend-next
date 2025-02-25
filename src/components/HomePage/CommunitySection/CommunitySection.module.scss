@@ -1,0 +1,118 @@
+@use "src/styles/breakpoints";
+
+.header {
+    padding-block-end: var(--spacing-medium);
+    @include breakpoints.tablet {
+        padding-block-end: var(--spacing-large-px);
+    }
+
+    h1 {
+        font-size: var(--font-size-xlarge-px);
+        font-weight: var(--font-weight-bold);
+        @include breakpoints.tablet {
+            font-size: var(--font-size-xxlarge-px);
+        }
+    }
+}
+
+.cardsContainer {
+    display: flex;
+    flex-direction: row;
+    @include breakpoints.smallerThanTablet {
+        flex-direction: column;
+    }
+    gap: var(--spacing-medium);
+    justify-content: space-between;
+    width: 100%;
+}
+
+.ramadanTitle {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: var(--spacing-micro);
+    font-size: var(--font-size-large);
+    align-items: center;
+    color: var(--color-text-default-new);
+}
+
+.titleWithIcon {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-micro);
+    font-size: var(--font-size-large);
+    font-weight: var(--font-weight-semibold);
+}
+
+.cardDescription {
+    color: var(--color-text-faded-new);
+    @include breakpoints.smallerThanTablet {
+        font-size: var(--font-size-small);
+    }
+    @include breakpoints.tablet {
+        font-size: var(--font-size-normal-px);
+    }
+}
+
+.qrIcons {
+    display: flex;
+    flex-direction: row;
+    gap: var(--spacing-micro);
+    align-items: center;
+}
+
+.coloredIcon {
+    @include breakpoints.smallerThanTablet {
+        width: var(--spacing-medium2-px) !important;
+        height: var(--spacing-medium2-px) !important;
+    }
+}
+
+.logoIcon {
+    @include breakpoints.smallerThanTablet {
+        height: 14px !important;
+        width: 83px !important;
+    }
+}
+.cardContent {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-small);
+    @include breakpoints.smallerThanTablet {
+        gap: var(--spacing-xxsmall-px);
+    }
+
+    justify-content: space-between;
+    height: 100%;
+}
+
+.card {
+    height: 100%;
+}
+
+.link {
+    width: 50%;
+    @include breakpoints.smallerThanTablet {
+        width: 100%;
+    }
+    display: flex;
+    flex-direction: column;
+}
+
+.title {
+    @include breakpoints.smallerThanTablet {
+        font-size: var(--font-size-normal);
+    }
+    @include breakpoints.tablet {
+        font-size: var(--font-size-large-px);
+    }
+}
+
+.arrowIcon {
+    svg {
+        @include breakpoints.smallerThanTablet {
+            width: 12px !important;
+            height: 12px !important;
+        }
+    }
+}

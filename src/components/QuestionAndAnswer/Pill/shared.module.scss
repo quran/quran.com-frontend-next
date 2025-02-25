@@ -2,18 +2,8 @@
 
 %clarification {
     font-weight: var(--font-weight-semibold) !important;
-    @include theme.light {
-        --background-color: #fff8e4;
-        --text-color: #7c6e21;
-    }
-    @include theme.dark {
-        --background-color: #fff8e4;
-        --text-color: #7c6e21;
-    }
-    @include theme.sepia {
-        --background-color: #f1d5b7;
-        --text-color: #7c6e21;
-    }
+    --background-color: var(--color-scholars-say-background);
+    --text-color: var(--color-scholars-say-text);
 }
 
 %explore_answers {

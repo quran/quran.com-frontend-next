@@ -40,7 +40,11 @@ const filterSurah = (surahs: Chapter[], searchQuery: string) => {
   return filteredSurah as Chapter[];
 };
 
-const SurahList = () => {
+type Props = {
+  onAfterNavigationItemRouted?: () => void;
+};
+
+const SurahList: React.FC<Props> = ({ onAfterNavigationItemRouted }) => {
   const { t, lang } = useTranslation('common');
   const lastReadVerseKey = useSelector(selectLastReadVerseKey);
   const isReadingByRevelationOrder = useSelector(selectIsReadingByRevelationOrder);
@@ -99,13 +103,27 @@ const SurahList = () => {
     scrollTo();
   }, [currentChapterId, scrollTo]);
 
+  const navigateAndHandleAfterNavigation = (href: string) => {
+    router.push(href).then(() => {
+      if (onAfterNavigationItemRouted) {
+        onAfterNavigationItemRouted();
+      }
+    });
+  };
+
   // Handle when user press `Enter` in input box
   const handleSurahInputSubmit = (e) => {
     e.preventDefault();
     const firstFilteredChapter = filteredChapters[0];
     if (firstFilteredChapter) {
-      router.push(getSurahNavigationUrl(firstFilteredChapter.id));
+      const href = getSurahNavigationUrl(firstFilteredChapter.id);
+      navigateAndHandleAfterNavigation(href);
     }
+  };
+
+  const handleChapterClick = (e: React.MouseEvent, href: string) => {
+    e.preventDefault();
+    navigateAndHandleAfterNavigation(href);
   };
 
   return (
@@ -120,19 +138,27 @@ const SurahList = () => {
       </form>
       <div className={styles.listContainer}>
         <div className={styles.list}>
-          {filteredChapters.map((chapter) => (
-            <Link key={chapter.id} href={getSurahNavigationUrl(chapter.id)} shouldPrefetch={false}>
-              <div
-                ref={chapter.id.toString() === currentChapterId ? selectedChapterRef : null}
-                className={classNames(styles.listItem, {
-                  [styles.selectedItem]: chapter.id.toString() === currentChapterId,
-                })}
+          {filteredChapters.map((chapter) => {
+            const href = getSurahNavigationUrl(chapter.id);
+            return (
+              <Link
+                key={chapter.id}
+                href={href}
+                shouldPrefetch={false}
+                onClick={(e) => handleChapterClick(e, href)}
               >
-                <span className={styles.chapterNumber}>{chapter.localizedId}</span>
-                <span>{chapter.transliteratedName}</span>
-              </div>
-            </Link>
-          ))}
+                <div
+                  ref={chapter.id.toString() === currentChapterId ? selectedChapterRef : null}
+                  className={classNames(styles.listItem, {
+                    [styles.selectedItem]: chapter.id.toString() === currentChapterId,
+                  })}
+                >
+                  <span className={styles.chapterNumber}>{chapter.localizedId}</span>
+                  <span>{chapter.transliteratedName}</span>
+                </div>
+              </Link>
+            );
+          })}
         </div>
       </div>
     </div>

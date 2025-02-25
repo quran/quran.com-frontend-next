@@ -103,7 +103,6 @@
     "navigations": "Навигация",
     "no-nav-results": "Нет результатов навигации",
     "placeholder": "Что ты хочешь прочитать?",
-    "powered-by": "Голосовой поиск на платформе Tarteel.ai",
     "recent-navigations": "Недавние переходы",
     "search-by-voice": "Голосовой поиск",
     "try-navigating": "Попробуйте перейти к"
@@ -361,10 +360,6 @@
     "tafsir-desc": "Прочтите {{tafsirName}} {{verseNumber}} суры {{surahName}}",
     "tafsirs-desc": "Прочтите различные тафсиры аята {{ayahNumber}} суры {{surahName}} от доверенных ученых-тафсиров",
     "title": "Тафсир"
-  },
-  "tarteel": {
-    "app": "Приложение Tarteel",
-    "name": "Tarteel.ai"
   },
   "terms-and-conditions": "Условия и положения",
   "theme": "Тема",

@@ -219,3 +219,14 @@
   padding-inline-start: 0;
   padding-inline-end: 0;
 }
+
+.simplified {
+  --themed-bg: #22a5ad;
+  background-color: transparent;
+  color: var(--themed-bg);
+  font-weight: var(--font-weight-bold);
+  border-radius: var(--border-radius-rounded);
+  border: 1px solid var(--themed-bg);
+  font-size: var(--font-size-small);
+  padding: var(--spacing-xxsmall);
+}

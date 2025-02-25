@@ -2,6 +2,27 @@
   "no-bookmarks": "You do not have any bookmarks yet",
   "no-recently-read": "You do not have any reading sessions yet",
   "noble-quran": "The Noble Quran",
+  "navigate-quran": "Navigate Quran",
+  "chapters-and-verses": "Chapters and Verses",
+  "listen-to-radio": "Listen to Quran Radio",
+  "begin": "Begin",
+  "popular": "Popular",
+  "first-time-reading": "New to the Quran? <link>Start here</link>",
+  "know-someone": "Share this helpful <modalLink>Guide to the Quran!</modalLink>",
+  "achieve-quran-goals": "Achieve Your Quran Goals",
+  "stay-consistent": "Track Streaks, Create Custom Goals, Stay Consistent",
+  "start-read": "Start Reading",
+  "continue-read": "Continue Reading",
+  "explore-topics": "Explore Topics",
+  "set-custom-goal": "Set a Goal",
+  "my-quran": "My Quran",
+  "learning-plan": "Learning Plans",
+  "see-more-learning-plans": "See More",
+  "ramadan": {
+    "title": "Ready for Ramadan?",
+    "header": "Tools to Deepen Your Connection with the Quran"
+  },
+  "qr-community": "Read today’s featured Verses and Reflections",
   "qgj": {
     "learning-plans": {
       "cta": {
@@ -37,5 +58,9 @@
   },
   "welcome": {
     "title": "It's the Month of the Quran! Help millions of users get access to the guidance of the Quran."
+  },
+  "share-quran": {
+    "title": "Share the Quran!",
+    "description": "Help spread the Quran to new learners"
   }
 }

@@ -2,11 +2,11 @@ import useTranslation from 'next-translate/useTranslation';
 import { useSWRConfig } from 'swr';
 
 import buildFormBuilderFormField from '../FormBuilder/buildFormBuilderFormField';
-import FormBuilder from '../FormBuilder/FormBuilder';
 
 import styles from './CompleteSignupForm.module.scss';
 import EmailVerificationForm from './EmailVerificationForm';
 
+import FormBuilder from '@/components/FormBuilder/FormBuilder';
 import { completeSignup } from '@/utils/auth/api';
 import { makeUserProfileUrl } from '@/utils/auth/apiPaths';
 import { logFormSubmission } from '@/utils/eventLogger';

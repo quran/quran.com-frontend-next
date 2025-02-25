@@ -15,7 +15,6 @@ import useDebounce from '@/hooks/useDebounce';
 import useFocus from '@/hooks/useFocusElement';
 import { selectNavbar } from '@/redux/slices/navbar';
 import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
-import { selectIsSearchDrawerVoiceFlowStarted } from '@/redux/slices/voiceSearch';
 import SearchService from '@/types/Search/SearchService';
 import SearchQuerySource from '@/types/SearchQuerySource';
 import { areArraysEqual } from '@/utils/array';
@@ -27,13 +26,6 @@ const SearchBodyContainer = dynamic(() => import('@/components/Search/SearchBody
   ssr: false,
   loading: () => <Spinner />,
 });
-const VoiceSearchBodyContainer = dynamic(
-  () => import('@/components/TarteelVoiceSearch/BodyContainer'),
-  {
-    ssr: false,
-    loading: () => <Spinner />,
-  },
-);
 
 const DEBOUNCING_PERIOD_MS = 1000;
 
@@ -46,7 +38,6 @@ const SearchDrawer: React.FC = () => {
   const [isSearching, setIsSearching] = useState(false);
   const [hasError, setHasError] = useState(false);
   const [searchResult, setSearchResult] = useState<SearchResponse>(null);
-  const isVoiceSearchFlowStarted = useSelector(selectIsSearchDrawerVoiceFlowStarted, shallowEqual);
   // Debounce search query to avoid having to call the API on every type. The API will be called once the user stops typing.
   const debouncedSearchQuery = useDebounce<string>(searchQuery, DEBOUNCING_PERIOD_MS);
   // once the drawer is open, focus the input field
@@ -118,11 +109,9 @@ const SearchDrawer: React.FC = () => {
 
   return (
     <Drawer
-      hideCloseButton={isVoiceSearchFlowStarted}
       type={DrawerType.Search}
       header={
         <SearchDrawerHeader
-          isVoiceFlowStarted={isVoiceSearchFlowStarted}
           onSearchQueryChange={onSearchQueryChange}
           resetQueryAndResults={resetQueryAndResults}
           inputRef={searchInputRef}
@@ -133,21 +122,15 @@ const SearchDrawer: React.FC = () => {
     >
       <div>
         {isOpen && (
-          <>
-            {isVoiceSearchFlowStarted ? (
-              <VoiceSearchBodyContainer />
-            ) : (
-              <SearchBodyContainer
-                onSearchKeywordClicked={onSearchKeywordClicked}
-                searchQuery={searchQuery}
-                searchResult={searchResult}
-                isSearching={isSearching}
-                hasError={hasError}
-                shouldSuggestFullSearchWhenNoResults
-                source={SearchQuerySource.SearchDrawer}
-              />
-            )}
-          </>
+          <SearchBodyContainer
+            onSearchKeywordClicked={onSearchKeywordClicked}
+            searchQuery={searchQuery}
+            searchResult={searchResult}
+            isSearching={isSearching}
+            hasError={hasError}
+            shouldSuggestFullSearchWhenNoResults
+            source={SearchQuerySource.SearchDrawer}
+          />
         )}
       </div>
     </Drawer>

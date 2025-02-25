@@ -87,10 +87,6 @@
       "description": "Zgjidhni nga një shumëllojshmëri përkthimesh në shumë gjuhë. Këshillë: Krahasoni përkthimet duke zgjedhur opsione të shumta",
       "title": "Përkthime"
     },
-    "voice-search": {
-      "description": "Prekni ikonën e mikrofonit dhe recitoni vargun që po kërkoni. Këshillë e shpejtë! Për të zbuluar se ku po reciton dikush (p.sh. lutjet e teravive), trokitni lehtë mbi ikonën e mikrofonit. Pasi të zbulohen një ose dy vargje, shtypni stop për të gjetur vendndodhjen",
-      "title": "Kërkimi me zë (Tarteel)"
-    },
     "wbw-audio": {
       "description": "Zgjidhni këtë opsion për të dëgjuar çdo fjalë veç e veç duke klikuar thjesht mbi fjalën!",
       "title": "Dëgjoni transliterimin fjalë për fjalë duke klikuar fjalën"

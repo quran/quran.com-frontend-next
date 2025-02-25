@@ -22,7 +22,7 @@ import { selectNotes } from '@/redux/slices/QuranReader/notes';
 import { selectLastReadVerseKey } from '@/redux/slices/QuranReader/readingTracker';
 import {
   selectIsSidebarNavigationVisible,
-  setIsVisible,
+  setIsSidebarNavigationVisible,
 } from '@/redux/slices/QuranReader/sidebarNavigation';
 import { Mushaf } from '@/types/QuranReader';
 import { getChapterData, getChapterReadingProgress } from '@/utils/chapter';
@@ -97,9 +97,9 @@ const ContextMenu = () => {
                 if (isSidebarNavigationVisible === 'auto') {
                   // eslint-disable-next-line no-unneeded-ternary
                   const shouldBeVisible = isMobile() ? true : false;
-                  dispatch(setIsVisible(shouldBeVisible));
+                  dispatch(setIsSidebarNavigationVisible(shouldBeVisible));
                 } else {
-                  dispatch(setIsVisible(!isSidebarNavigationVisible));
+                  dispatch(setIsSidebarNavigationVisible(!isSidebarNavigationVisible));
                 }
               }}
             >

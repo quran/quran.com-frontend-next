@@ -6,7 +6,7 @@ import styles from './NewLabel.module.scss';
 
 const NewLabel = () => {
   const { t } = useTranslation('common');
-  return <p className={styles.label}>{t('new')}</p>;
+  return <span className={styles.label}>{t('new')}</span>;
 };
 
 export default NewLabel;

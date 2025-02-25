@@ -103,7 +103,6 @@
     "navigations": "นำทาง",
     "no-nav-results": "ไม่มีผลลัพธ์การนำทาง",
     "placeholder": "คุณอยากอ่านอะไร?",
-    "powered-by": "การค้นหาด้วยเสียง ขับเคลื่อนโดย Tarteel.ai",
     "recent-navigations": "การนำทางล่าสุด",
     "search-by-voice": "ค้นหาด้วยเสียง",
     "try-navigating": "ลองไปที่"
@@ -361,10 +360,6 @@
     "tafsir-desc": "อ่าน {{tafsirName}} สำหรับอายะห์ที่  {{verseNumber}} ของซูเราะห์ {{surahName}}",
     "tafsirs-desc": "อ่านตัฟซีรต่างๆของโองกาารที่ {{ayahNumber}} ของซูเราะห์ {{surahName}} โดยนักวิชาการด้านตัฟซีร ที่เชื่อถือได้",
     "title": "ตัฟซีร"
-  },
-  "tarteel": {
-    "app": "แอพ Tarteel",
-    "name": "Tarteel.ai"
   },
   "terms-and-conditions": "ข้อกำหนดและเงื่อนไข",
   "theme": "ธีม",
