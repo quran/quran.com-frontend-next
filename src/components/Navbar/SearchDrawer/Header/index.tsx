@@ -1,6 +1,7 @@
 import React, { RefObject } from 'react';
 
 import classNames from 'classnames';
+import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
 import DrawerSearchIcon from '../Buttons/DrawerSearchIcon';
@@ -8,6 +9,7 @@ import DrawerSearchIcon from '../Buttons/DrawerSearchIcon';
 import styles from './Header.module.scss';
 
 import Separator from '@/dls/Separator/Separator';
+import { getSearchQueryNavigationUrl } from '@/utils/navigation';
 
 interface Props {
   isSearching: boolean;
@@ -25,20 +27,25 @@ const Header: React.FC<Props> = ({
   searchQuery,
 }) => {
   const { t } = useTranslation('common');
+  const router = useRouter();
 
-  const onKeyboardReturnPressed = (e) => {
+  const onSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    inputRef.current.blur();
+    inputRef.current?.blur();
+    if (searchQuery) {
+      router.push(getSearchQueryNavigationUrl(searchQuery));
+    }
   };
 
   return (
     <>
       <DrawerSearchIcon />
       <div className={classNames(styles.searchInputContainer)}>
-        <form onSubmit={onKeyboardReturnPressed}>
+        <form onSubmit={onSubmit} className={styles.from}>
           <input
             className={styles.searchInput}
-            type="text"
+            type="search"
+            enterKeyHint="search"
             ref={inputRef}
             dir="auto"
             placeholder={t('search.title')}

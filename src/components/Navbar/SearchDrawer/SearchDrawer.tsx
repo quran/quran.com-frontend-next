@@ -123,7 +123,6 @@ const SearchDrawer: React.FC = () => {
       <div>
         {isOpen && (
           <SearchBodyContainer
-            onSearchResultClicked={() => searchInputRef?.current?.blur()}
             onSearchKeywordClicked={onSearchKeywordClicked}
             searchQuery={searchQuery}
             searchResult={searchResult}

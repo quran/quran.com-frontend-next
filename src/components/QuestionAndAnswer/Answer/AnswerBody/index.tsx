@@ -1,10 +1,12 @@
 /* eslint-disable i18next/no-literal-string */
 import React, { useState } from 'react';
 
+import { MilkdownProvider } from '@milkdown/react';
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from './AnswerBody.module.scss';
 
+import MarkdownEditor from '@/components/MarkdownEditor';
 import Button, { ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import ShareButtons from '@/dls/ShareButtons';
 import ShareIcon from '@/icons/share.svg';
@@ -33,11 +35,15 @@ const AnswerBody: React.FC<Props> = ({ question }) => {
     <>
       <div className={styles.answerBody}>
         <p className={styles.header}>{t('q-and-a.answer')}</p>
-        <div className={styles.text}>{question?.answers[0]?.body}</div>
+        <MilkdownProvider>
+          <MarkdownEditor isEditable={false} defaultValue={question?.answers[0]?.body} />
+        </MilkdownProvider>
         {question?.summary && (
           <>
             <p className={styles.header}>{t('q-and-a.summary')}</p>
-            <div className={styles.text}>{question?.summary}</div>
+            <MilkdownProvider>
+              <MarkdownEditor isEditable={false} defaultValue={question?.summary} />
+            </MilkdownProvider>
           </>
         )}
         {question?.references && (

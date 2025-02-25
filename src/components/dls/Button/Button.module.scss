@@ -1,4 +1,11 @@
-@use "src/styles/utility";
+// we are using this mixin ase using the one from utility.scss will break the remotion build
+@mixin lighten-background-color {
+  background-image: linear-gradient(
+    to right,
+    var(--color-background-lighten),
+    var(--color-background-lighten)
+  );
+}
 
 .base {
   border: none;
@@ -130,7 +137,7 @@
   color: var(--themed-bg);
   &:hover {
     background-color: var(--themed-bg);
-    @include utility.lighten-background-color;
+    @include lighten-background-color;
   }
 }
 // corner case for secondary ghost button

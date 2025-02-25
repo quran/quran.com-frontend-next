@@ -11,6 +11,7 @@ import {
   selectFontColor,
   selectOpacity,
   selectOrientation,
+  selectPreviewMode,
   selectQuranTextFontScale,
   selectQuranTextFontStyle,
   selectReciter,
@@ -30,6 +31,7 @@ import {
   DEFAULT_BACKGROUND_COLOR,
   DEFAULT_BORDER_COLOR,
   DEFAULT_FONT_COLOR,
+  DEFAULT_PREVIEW_MODE,
   DEFAULT_RECITER_ID,
   DEFAULT_SURAH,
   DEFAULT_TRANSLATION,
@@ -48,6 +50,7 @@ import {
   isValidFontStyleQueryParamValue,
   isValidOpacityQueryParamValue,
   isValidOrientationQueryParamValue,
+  isValidPreviewModeQueryParamValue,
   isValidReciterId,
   isValidTranslationsQueryParamValue,
   isValidTranslationsQueryParamValueWithExistingKey,
@@ -185,6 +188,13 @@ export const QUERY_PARAMS_DATA = {
     reduxValueEqualityFunction: shallowEqual,
     queryParamValueType: QueryParamValueType.Number,
     isValidQueryParam: (val) => isValidVideoIdQueryParamValue(val),
+  },
+  [QueryParam.PREVIEW_MODE]: {
+    reduxValueSelector: selectPreviewMode,
+    reduxValueEqualityFunction: shallowEqual,
+    queryParamValueType: QueryParamValueType.String,
+    isValidQueryParam: (val) => isValidPreviewModeQueryParamValue(val),
+    customValueGetterWhenParamIsInvalid: () => DEFAULT_PREVIEW_MODE,
   },
 } as QueryParamsData;
 

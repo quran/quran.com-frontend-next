@@ -27,6 +27,7 @@ enum QueryParam {
   PAGE = 'page',
   EMAIL = 'email',
   TOKEN = 'token',
+  PREVIEW_MODE = 'previewMode',
 }
 
 export default QueryParam;
