@@ -13,6 +13,7 @@ import CopyLinkIcon from '@/icons/copy-link.svg';
 import CopyIcon from '@/icons/copy.svg';
 import VideoIcon from '@/icons/video.svg';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
+import PreviewMode from '@/types/Media/PreviewMode';
 import QueryParam from '@/types/QueryParam';
 import Verse from '@/types/Verse';
 import { logButtonClick } from '@/utils/eventLogger';
@@ -117,6 +118,7 @@ const ShareVerseActionsMenu: React.FC<Props> = ({
         [QueryParam.SURAH]: verse.chapterId as string,
         [QueryParam.VERSE_FROM]: String(verse.verseNumber),
         [QueryParam.VERSE_TO]: String(verse.verseNumber),
+        [QueryParam.PREVIEW_MODE]: PreviewMode.DISABLED,
       }),
     );
   };

@@ -12,8 +12,11 @@ import RenderVideoButton from './RenderVideoButton';
 import Button, { ButtonType } from '@/dls/Button/Button';
 import CopyIcon from '@/icons/copy.svg';
 import layoutStyle from '@/pages/index.module.scss';
+import PreviewMode from '@/types/Media/PreviewMode';
+import { shortenUrl } from '@/utils/auth/api';
 import { logButtonClick } from '@/utils/eventLogger';
-import { getCurrentPath } from '@/utils/url';
+import { getQuranMediaMakerNavigationUrl } from '@/utils/navigation';
+import { getBasePath, getCurrentPath } from '@/utils/url';
 
 type Props = {
   inputProps: MediaFileCompositionProps;
@@ -49,11 +52,16 @@ const RenderControls: React.FC<Props> = ({ inputProps, isFetching, playerRef }) 
     };
   }, [isCopied]);
 
-  const onCopyLinkClicked = () => {
+  const onCopyLinkClicked = async () => {
     logButtonClick('video_generation_copy_link');
     const path = getCurrentPath();
-    if (origin) {
-      clipboardCopy(path).then(() => {
+    const response = await shortenUrl(`${path}&previewMode=${PreviewMode.ENABLED}`);
+
+    const url = response?.id
+      ? `${getBasePath()}${getQuranMediaMakerNavigationUrl()}/${response.id}`
+      : path;
+    if (url) {
+      clipboardCopy(url).then(() => {
         setIsCopied(true);
       });
     }
