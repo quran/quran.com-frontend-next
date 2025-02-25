@@ -23,7 +23,6 @@ const Links = () => {
         { text: t('reciters'), url: '/reciters' },
         { text: t('about'), url: '/about-us' },
         { text: t('donate'), isExternal: true, url: makeDonateUrl() },
-        { text: t('mobile-apps'), url: '/apps' },
         { text: t('developers'), url: '/developers' },
         { text: t('product-updates'), url: '/product-updates' },
         { text: t('feedback'), url: 'https://feedback.quran.com/', isExternal: true },

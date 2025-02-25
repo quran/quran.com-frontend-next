@@ -17,11 +17,6 @@ import QuranReflect from '@/icons/QR.svg';
 import IconQuestionMark from '@/icons/question-mark.svg';
 import IconRadio2 from '@/icons/radio-2.svg';
 import IconRadio from '@/icons/radio.svg';
-// import MobileApps from '../MobileApps';
-
-// import IconDonate from '@/icons/donate.svg';
-// import IconUpdates from '@/icons/updates.svg';
-// import IconCollection from '@/icons/collection.svg';
 
 const NavigationDrawerBody = () => {
   const { t } = useTranslation('common');
@@ -46,29 +41,42 @@ const NavigationDrawerBody = () => {
         isExternalLink
       />
       <NavigationDrawerItem title={t('help')} icon={<IconQuestionMark />} href="/support" />
-      {/* <h3 className={styles.subtitle}>Selected Collections</h3> */}
-      {/* <NavigationDrawerItem title="Duaas" icon={<IconCollection />} /> */}
-      {/* <NavigationDrawerItem title="Jewels of Quran" icon={<IconCollection />} /> */}
-      {/* <NavigationDrawerItem title="Names of Allah" icon={<IconCollection />} /> */}
-      {/* <NavigationDrawerItem title="Revelation" icon={<IconCollection />} />  */}
       <h3 className={styles.subtitle}>{t('our-projects')}</h3>
       <p className={styles.projectsDesc}>{t('projects-desc')}</p>
       <NavigationDrawerItem
-        title="Quranicaudio.com"
+        title="Quran.com"
         icon={<IconQ />}
-        href="https://quranicaudio.com"
+        href="https://quran.com"
         isExternalLink
       />
       <NavigationDrawerItem
-        title="Salah.com"
+        title="Quran For Android"
         icon={<IconQ />}
-        href="https://salah.com"
+        href="https://play.google.com/store/apps/details?id=com.quran.labs.androidquran&hl=en&pli=1 "
+        isExternalLink
+      />
+      <NavigationDrawerItem
+        title="Quran iOS"
+        icon={<IconQ />}
+        href="https://apps.apple.com/us/app/quran-by-quran-com-%D9%82%D8%B1%D8%A2%D9%86/id1118663303 "
+        isExternalLink
+      />
+      <NavigationDrawerItem
+        title="QuranReflect.com"
+        icon={<QuranReflect />}
+        href="https://quranreflect.com/"
         isExternalLink
       />
       <NavigationDrawerItem
         title="Sunnah.com"
         icon={<IconQ />}
-        href="https://sunnah.com"
+        href="https://sunnah.com/"
+        isExternalLink
+      />
+      <NavigationDrawerItem
+        title="Nuqayah.com"
+        icon={<IconQ />}
+        href="https://nuqayah.com/"
         isExternalLink
       />
       <NavigationDrawerItem
@@ -78,21 +86,9 @@ const NavigationDrawerBody = () => {
         isExternalLink
       />
       <NavigationDrawerItem
-        title="Previous.quran.com"
-        icon={<IconQ />}
-        href="https://previous.quran.com"
-        isExternalLink
-      />
-      <NavigationDrawerItem
         title="Corpus.quran.com"
         icon={<IconQ />}
         href="https://corpus.quran.com"
-        isExternalLink
-      />
-      <NavigationDrawerItem
-        title="QuranReflect.com"
-        icon={<QuranReflect />}
-        href="https://quranreflect.com/"
         isExternalLink
       />
     </div>
