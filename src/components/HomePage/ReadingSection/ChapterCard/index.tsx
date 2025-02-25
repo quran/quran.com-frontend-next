@@ -47,7 +47,7 @@ const ChapterCard: React.FC<Props> = ({
         <div className={styles.surahInfo}>
           <div>
             <span className={styles.transliteratedName}>
-              {toLocalizedNumber(surahNumber, lang)} {chapterData.transliteratedName}
+              {toLocalizedNumber(surahNumber, lang)}. {chapterData.transliteratedName}
             </span>
             <span className={styles.translatedName}>
               {' '}
