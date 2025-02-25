@@ -57,6 +57,8 @@
     "/reciters": ["reciter", "home"],
     "/profile": ["home", "profile", "collection", "quran-reader"],
     "/login": ["login"],
+    "/forgot-password": ["login"],
+    "/reset-password": ["login"],
     "/about-the-quran": ["about-quran"],
     "/notes-and-reflections": ["notes"],
     "/ramadan": ["ramadan-activities"],
