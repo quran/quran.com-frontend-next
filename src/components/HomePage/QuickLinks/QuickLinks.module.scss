@@ -2,7 +2,10 @@
 
 .quickLink {
   background-color: var(--color-topics-grey);
-  padding: var(--spacing-small);
+  padding: var(--spacing-xxsmall-px) var(--spacing-small-px);
+  @include breakpoints.tablet {
+    padding: var(--spacing-small-px);
+  }
   min-width: max-content;
   display: flex;
   flex-direction: row;
@@ -13,8 +16,8 @@
   display: flex;
   flex-wrap: wrap;
   width: 100%;
-  gap: var(--spacing-xsmall);
-  padding-block: var(--spacing-small);
+  gap: var(--spacing-xxsmall-px);
+  padding-block: var(--spacing-small-px);
 }
 
 .quickLinkText {
@@ -24,6 +27,6 @@
   gap: var(--spacing-small);
   font-size: var(--font-size-xsmall);
   @include breakpoints.tablet {
-    font-size: var(--font-size-normal-px);
+    font-size: var(--font-size-small-px);
   }
 }

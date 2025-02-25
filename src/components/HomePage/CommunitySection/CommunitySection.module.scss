@@ -10,7 +10,7 @@
         font-size: var(--font-size-xlarge-px);
         font-weight: var(--font-weight-bold);
         @include breakpoints.tablet {
-            font-size: var(--font-size-jumbo-px);
+            font-size: var(--font-size-xxlarge-px);
         }
     }
 }
@@ -61,10 +61,27 @@
     align-items: center;
 }
 
+.coloredIcon {
+    @include breakpoints.smallerThanTablet {
+        width: var(--spacing-medium2-px) !important;
+        height: var(--spacing-medium2-px) !important;
+    }
+}
+
+.logoIcon {
+    @include breakpoints.smallerThanTablet {
+        height: 14px !important;
+        width: 83px !important;
+    }
+}
 .cardContent {
     display: flex;
     flex-direction: column;
     gap: var(--spacing-small);
+    @include breakpoints.smallerThanTablet {
+        gap: var(--spacing-xxsmall-px);
+    }
+
     justify-content: space-between;
     height: 100%;
 }
@@ -88,5 +105,14 @@
     }
     @include breakpoints.tablet {
         font-size: var(--font-size-large-px);
+    }
+}
+
+.arrowIcon {
+    svg {
+        @include breakpoints.smallerThanTablet {
+            width: 12px !important;
+            height: 12px !important;
+        }
     }
 }

@@ -22,10 +22,16 @@
     align-items: center;
     gap: var(--spacing-micro);
     & > svg:first-child {
-        padding-inline-start: var(--spacing-medium-px);
-        padding-inline-end: var(--spacing-medium2-px);
+        padding-inline-start: var(--spacing-small-px);
+        padding-inline-end: var(--spacing-small-px);
 
+        width: var(--spacing-medium2-px);
+        height: var(--spacing-medium2-px);
         @include breakpoints.tablet {
+            width: var(--spacing-large-px);
+            height: var(--spacing-large-px);
+            padding-inline-start: var(--spacing-medium-px);
+            padding-inline-end: var(--spacing-medium2-px);
             width: 60px;
             height: 60px;
         }
@@ -47,10 +53,6 @@
     @include breakpoints.tablet {
         font-size: var(--font-size-normal-px);
     }
-}
-
-.container {
-    padding-inline-end: var(--spacing-medium-px);
 }
 
 .circularProgressbar {
@@ -93,4 +95,13 @@
     dominant-baseline: middle;
     text-anchor: middle;
     font-weight: var(--font-weight-bold);
+}
+
+.goalArrowIcon {
+    svg {
+        @include breakpoints.smallerThanTablet {
+            width: 12px !important;
+            height: 12px !important;
+        }
+    }
 }

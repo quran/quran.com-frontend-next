@@ -3,10 +3,12 @@
 .surahName {
     line-height: normal;
     font-family: "surahnames" !important;
-    font-size: calc(2 * var(--font-size-jumbo));
+    font-size: calc(2.5 * var(--font-size-jumbo-px));
+    margin-inline-start: -20px;
     @include breakpoints.smallerThanTablet {
         font-size: calc(1.2 * var(--font-size-jumbo));
         padding-inline-end: var(--spacing-medium-px);
+        margin-inline-start: -15px;
     }
 }
 
@@ -48,7 +50,7 @@
     color: var(--color-text-faded-new);
     @include breakpoints.smallerThanTablet {
         display: block;
-        font-size: calc(2 * var(--spacing-xsmall-px));
+        font-size: var(--font-size-xsmall-px);
     }
 }
 
@@ -69,15 +71,23 @@
 .transliteratedName {
     font-weight: var(--font-weight-semibold);
     @include breakpoints.smallerThanTablet {
-        font-size: calc(2 * var(--spacing-xsmall-px));
+        font-size: var(--font-size-small-px);
     }
 }
 
 .beginButton {
-    @include breakpoints.smallerThanTablet {
-        border-radius: var(--border-radius-rounded);
-    }
+    border-radius: var(--border-radius-rounded);
     @include breakpoints.tablet {
         font-size: var(--font-size-normal-px);
+        padding: var(--spacing-small-px) var(--spacing-medium-px);
+    }
+}
+
+.continueReadingArrowIcon {
+    svg {
+        @include breakpoints.smallerThanTablet {
+            width: 12px !important;
+            height: 12px !important;
+        }
     }
 }

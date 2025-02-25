@@ -22,7 +22,7 @@
 }
 
 .dropdownContainer {
-    width: 710px;
+    width: 750px;
     margin-inline-start: -230px;
     margin-top: -42%;
     border-radius: var(--border-radius-rounded);
@@ -32,9 +32,9 @@
     animation: slideUpFade 0.1s ease-out forwards;
 
     @include breakpoints.smallerThanTablet {
-        width: 350px;
-        margin-inline-start: -150px;
-        margin-top: -30px;
+        width: 360px;
+        margin-inline-start: -160px;
+        margin-top: -35px;
     }
 
     hr {
@@ -47,10 +47,10 @@
 }
 
 .container {
-    padding: var(--spacing-small-px);
+    padding: var(--spacing-medium2-px);
     background: var(--color-background-elevated);
     box-sizing: border-box;
-    border-radius: var(--border-radius-rounded);
+    border-radius: var(--border-radius-circle);
 }
 
 .bodyContainer {

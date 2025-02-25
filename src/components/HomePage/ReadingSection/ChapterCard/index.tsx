@@ -67,6 +67,7 @@ const ChapterCard: React.FC<Props> = ({
                   size={IconSize.Xsmall}
                   icon={<ArrowIcon />}
                   shouldForceSetColors={false}
+                  className={styles.continueReadingArrowIcon}
                 />
               </div>
             </Link>

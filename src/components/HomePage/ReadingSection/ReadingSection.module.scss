@@ -16,7 +16,7 @@
         font-size: var(--font-size-xlarge-px);
         font-weight: var(--font-weight-bold);
         @include breakpoints.tablet {
-            font-size: var(--font-size-jumbo-px);
+            font-size: var(--font-size-xxlarge-px);
         }
     }
 }
@@ -36,6 +36,7 @@
 .cardContainer {
     @include breakpoints.smallerThanTablet {
         width: 100%;
+        padding-block-end: var(--spacing-small-px);
     }
     width: 50%;
     display: flex;
@@ -50,24 +51,35 @@
 }
 
 .myQuranText {
+    font-size: var(--font-size-small-px);
     @include breakpoints.tablet {
         font-size: var(--font-size-normal-px);
     }
 }
 
 .stayConsistentText {
-    padding-block-start: var(--spacing-small-px);
+    padding-block-start: var(--spacing-xxsmall-px);
+    font-size: var(--font-size-xsmall-px);
     @include breakpoints.tablet {
+        padding-block-start: var(--spacing-small-px);
         font-size: var(--font-size-normal-px);
     }
 }
 
 .iconContainer {
     display: flex;
-    padding-inline-end: var(--spacing-small-px);
+    padding-inline-end: var(--spacing-xxsmall-px);
+    @include breakpoints.tablet {
+        padding-inline-end: var(--spacing-small-px);
+    }
+
     svg {
-        width: var(--spacing-large-px);
-        height: var(--spacing-large-px);
+        width: var(--spacing-medium2-px);
+        height: var(--spacing-medium2-px);
+        @include breakpoints.tablet {
+            width: var(--spacing-large-px);
+            height: var(--spacing-large-px);
+        }
     }
 }
 
@@ -75,8 +87,8 @@
     display: flex;
     @include breakpoints.smallerThanTablet {
         svg {
-            width: 12px;
-            height: 12px;
+            width: 12px !important;
+            height: 12px !important;
         }
     }
 }
@@ -141,5 +153,14 @@
 .arrowIcon {
     @include breakpoints.smallerThanTablet {
         display: none;
+    }
+}
+
+.arrowIconRight {
+    @include breakpoints.smallerThanTablet {
+        svg {
+            width: 12px !important;
+            height: 12px !important;
+        }
     }
 }

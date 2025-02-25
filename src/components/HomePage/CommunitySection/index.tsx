@@ -48,6 +48,7 @@ const CommunitySection = () => {
                 size={IconSize.Xsmall}
                 icon={<ArrowIcon />}
                 shouldForceSetColors={false}
+                className={styles.arrowIcon}
               />
             </div>
             <p className={styles.cardDescription}>{t('ramadan.header')}</p>
@@ -63,13 +64,14 @@ const CommunitySection = () => {
           <div className={styles.cardContent}>
             <div className={styles.ramadanTitle}>
               <div className={styles.qrIcons}>
-                <QRColoredIcon />
-                <QRLogoIcon />
+                <QRColoredIcon className={styles.coloredIcon} />
+                <QRLogoIcon className={styles.logoIcon} />
               </div>
               <IconContainer
                 size={IconSize.Xsmall}
                 icon={<ArrowIcon />}
                 shouldForceSetColors={false}
+                className={styles.arrowIcon}
               />
             </div>
             <p className={styles.cardDescription}>{t('qr-community')}</p>

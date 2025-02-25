@@ -21,7 +21,12 @@ const NoGoalOrStreakCard = () => {
           </div>
           {t('achieve-quran-goals')}
         </div>
-        <IconContainer size={IconSize.Xsmall} icon={<ArrowIcon />} shouldForceSetColors={false} />
+        <IconContainer
+          size={IconSize.Xsmall}
+          icon={<ArrowIcon />}
+          shouldForceSetColors={false}
+          className={styles.arrowIconRight}
+        />
       </div>
       <p className={styles.stayConsistentText}>{t('stay-consistent')}</p>
     </Card>

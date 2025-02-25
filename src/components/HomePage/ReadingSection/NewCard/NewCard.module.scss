@@ -53,10 +53,10 @@
 
 .firstTimeReadingCard {
     @include breakpoints.smallerThanTablet {
+        font-size: var(--font-size-xsmall-px);
         box-shadow: none !important;
         border-radius: 0;
-        padding: var(--spacing-xxsmall);
-        padding-block: var(--spacing-small-px);
+        padding: 0 !important;
     }
 }
 

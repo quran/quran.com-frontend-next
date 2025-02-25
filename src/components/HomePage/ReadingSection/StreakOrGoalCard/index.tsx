@@ -93,6 +93,7 @@ const StreakOrGoalCard: React.FC<Props> = ({ goal, streak, currentActivityDay })
                 size={IconSize.Xsmall}
                 icon={<ArrowIcon />}
                 shouldForceSetColors={false}
+                className={styles.goalArrowIcon}
               />
             </Link>
           </div>

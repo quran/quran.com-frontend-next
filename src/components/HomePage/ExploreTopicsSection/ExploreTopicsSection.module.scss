@@ -10,7 +10,7 @@
         font-size: var(--font-size-xlarge-px);
         font-weight: var(--font-weight-bold);
         @include breakpoints.tablet {
-            font-size: var(--font-size-jumbo-px);
+            font-size: var(--font-size-xxlarge-px);
         }
     }
 }
