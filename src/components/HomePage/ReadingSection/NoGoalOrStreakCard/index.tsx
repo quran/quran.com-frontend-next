@@ -7,13 +7,20 @@ import styles from '@/components/HomePage/ReadingSection/ReadingSection.module.s
 import IconContainer, { IconSize } from '@/dls/IconContainer/IconContainer';
 import CirclesIcon from '@/icons/circles.svg';
 import ArrowIcon from '@/public/icons/arrow.svg';
+import { isLoggedIn } from '@/utils/auth/login';
 import { getLoginNavigationUrl, getReadingGoalNavigationUrl } from '@/utils/navigation';
 
 const NoGoalOrStreakCard = () => {
   const { t } = useTranslation('home');
 
   return (
-    <Card link={getLoginNavigationUrl(getReadingGoalNavigationUrl())}>
+    <Card
+      link={
+        isLoggedIn()
+          ? getReadingGoalNavigationUrl()
+          : getLoginNavigationUrl(getReadingGoalNavigationUrl())
+      }
+    >
       <div className={styles.cardOuterContainer}>
         <div className={styles.cardWithIcon}>
           <div className={styles.iconContainer}>
