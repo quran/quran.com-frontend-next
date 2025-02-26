@@ -21,11 +21,13 @@ import styles from '@/pages/contentPage.module.scss';
 import pageStyles from '@/pages/ramadan/RamadanActivities.module.scss';
 import AyahLevelSettings from '@/public/images/ayah-level-settings.jpeg';
 import { makeDonatePageUrl } from '@/utils/apiPaths';
+import { isLoggedIn } from '@/utils/auth/login';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getLanguageAlternates } from '@/utils/locale';
 import {
   getCanonicalUrl,
   getCourseNavigationUrl,
+  getLoginNavigationUrl,
   getRamadanNavigationUrl,
   getReadingGoalNavigationUrl,
 } from '@/utils/navigation';
@@ -119,13 +121,21 @@ const PreparingForRamadanPage: NextPage = (): JSX.Element => {
                   onButtonClicked('goal_setting');
                 }}
                 variant={ButtonVariant.Shadow}
-                href={getReadingGoalNavigationUrl()}
+                href={
+                  isLoggedIn()
+                    ? getReadingGoalNavigationUrl()
+                    : getLoginNavigationUrl(getReadingGoalNavigationUrl())
+                }
                 isNewTab
                 className={styles.button}
               >
                 Set Your Goal
               </Button>
             </div>
+          </div>
+          <hr />
+          <div className={styles.subSection}>
+            <h1>Our Featured Ramadan Programs</h1>
           </div>
           <hr />
           <div className={styles.subSection} id="mindful-fasting">
@@ -139,6 +149,7 @@ const PreparingForRamadanPage: NextPage = (): JSX.Element => {
               <li>Gain Quranic insights into patience, gratitude, and self-control.</li>
               <li>Deepen your connection with Allah through intentional practices.</li>
             </ul>
+            <div>Start this learning plan now:</div>
             <div className={styles.ctaContainer}>
               <Button
                 onClick={() => {
@@ -196,8 +207,7 @@ const PreparingForRamadanPage: NextPage = (): JSX.Element => {
           </div>
           <hr />
           <div className={styles.subSection} id="preparing-our-hearts">
-            <h1>Our Featured Ramadan Programs</h1>
-            <h2>Preparing Our Hearts for Ramadan</h2>
+            <h1>Preparing Our Hearts for Ramadan</h1>
             <div>
               It's never too late to prepare for the days of Ramadan! Enhance your spiritual and
               mental readiness with our Learning Plan, Preparing Our Hearts for Ramadan. Start today
