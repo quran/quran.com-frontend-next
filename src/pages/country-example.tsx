@@ -13,8 +13,8 @@ export default function Index({
   currencyCode,
   currencySymbol,
 }) {
-  name = decodeURIComponent(name);
-  city = decodeURIComponent(city);
+  name = name ? decodeURIComponent(name) : 'Not available';
+  city = city ? decodeURIComponent(city) : 'Not available';
   return (
     <div>
       <h1>Country Example</h1>

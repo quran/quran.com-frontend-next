@@ -5,7 +5,7 @@ import countries from '@/data/countries.json';
 
 // run only on homepage
 export const config = {
-  matcher: '/',
+  matcher: ['/', '/country-example'],
 };
 
 export async function middleware(req: NextRequest) {
