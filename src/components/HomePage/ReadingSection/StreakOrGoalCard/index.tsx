@@ -45,7 +45,7 @@ const StreakOrGoalCard: React.FC<Props> = ({ goal, streak, currentActivityDay })
 
   return (
     <div className={styles.streakCard}>
-      <Link isNewTab href={getReadingGoalProgressNavigationUrl()} onClick={onStreakCardClicked}>
+      <Link href={getReadingGoalProgressNavigationUrl()} onClick={onStreakCardClicked}>
         <div className={styles.streakCardLeft}>
           <PlantIcon />
           <Trans
@@ -100,7 +100,6 @@ const StreakOrGoalCard: React.FC<Props> = ({ goal, streak, currentActivityDay })
         ) : (
           <Button
             href={getReadingGoalNavigationUrl()}
-            isNewTab
             size={ButtonSize.Small}
             className={styles.customGoalButton}
             variant={ButtonVariant.Simplified}

@@ -30,17 +30,23 @@ const VerseList: React.FC<Props> = ({ onAfterNavigationItemRouted }) => {
   const chapterIds = useChapterIdsByUrlPath(lang);
   const urlChapterId = chapterIds && chapterIds.length > 0 ? chapterIds[0] : null;
 
-  const [currentChapterId, setCurrentChapterId] = useState(urlChapterId);
+  // Default to chapter 1 (Al-Fatiha) if no chapter is selected
+  const [currentChapterId, setCurrentChapterId] = useState<string>(urlChapterId || '1');
 
   useEffect(() => {
-    setCurrentChapterId(lastReadVerseKey.chapterId);
-  }, [lastReadVerseKey]);
+    if (lastReadVerseKey.chapterId) {
+      setCurrentChapterId(lastReadVerseKey.chapterId);
+    } else if (!currentChapterId) {
+      // If no chapter is selected, default to chapter 1
+      setCurrentChapterId('1');
+    }
+  }, [lastReadVerseKey, currentChapterId]);
 
   useEffect(() => {
     // when the user navigates to a new chapter, reset the search query, and update the current chapter id
     setSearchQuery('');
-    setCurrentChapterId(urlChapterId);
-  }, [urlChapterId]);
+    setCurrentChapterId(urlChapterId || currentChapterId || '1');
+  }, [urlChapterId, currentChapterId]);
 
   const verseKeys = useMemo(
     () => (currentChapterId ? generateChapterVersesKeys(chaptersData, currentChapterId) : []),
@@ -109,7 +115,7 @@ const VerseList: React.FC<Props> = ({ onAfterNavigationItemRouted }) => {
           value={searchQuery}
           onChange={onSearchQueryChange}
           className={styles.searchInput}
-          placeholder={t('sidebar.search-verse')}
+          placeholder={t('verse')}
         />
       </form>
       <div className={styles.listContainer}>

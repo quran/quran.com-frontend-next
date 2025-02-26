@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch, useSelector } from 'react-redux';
@@ -6,6 +6,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import styles from './HomepageFundraisingBanner.module.scss';
 
 import Button, { ButtonSize, ButtonType, ButtonVariant } from '@/components/dls/Button/Button';
+import { ModalSize } from '@/components/dls/Modal/Content';
+import Modal from '@/components/dls/Modal/Modal';
+import ShareButtons from '@/components/dls/ShareButtons';
 import Link, { LinkVariant } from '@/dls/Link/Link';
 import CloseIcon from '@/icons/close.svg';
 import DiamondIcon from '@/icons/diamond.svg';
@@ -20,12 +23,24 @@ import { makeDonatePageUrl, makeDonateUrl } from '@/utils/apiPaths';
 import { logButtonClick, logEvent } from '@/utils/eventLogger';
 import { navigateToExternalUrl } from '@/utils/url';
 
-const HomepageFundraisingBanner = () => {
+interface HomepageFundraisingBannerProps {
+  /**
+   * Whether the banner can be dismissed by the user
+   * When false, the banner will always be shown and cannot be closed
+   * When true, the banner visibility is controlled by Redux state
+   * @default true
+   */
+  isDismissible?: boolean;
+}
+
+const HomepageFundraisingBanner = ({ isDismissible = true }: HomepageFundraisingBannerProps) => {
   const { t } = useTranslation('common');
   const dispatch = useDispatch();
   const isVisible = useSelector(selectIsHomepageBannerVisible);
+  const [isShareModalOpen, setIsShareModalOpen] = useState(false);
 
-  if (!isVisible) {
+  // If dismissible and not visible in Redux state, don't render
+  if (isDismissible && !isVisible) {
     return null;
   }
 
@@ -38,7 +53,12 @@ const HomepageFundraisingBanner = () => {
   };
 
   const onShareClicked = () => {
-    logButtonClick('share_button_clicked');
+    logButtonClick('fundraising_banner_share_button_clicked');
+    setIsShareModalOpen(true);
+  };
+
+  const onCloseShareModal = () => {
+    setIsShareModalOpen(false);
   };
 
   const onLearnMoreClicked = () => {
@@ -54,55 +74,77 @@ const HomepageFundraisingBanner = () => {
     dispatch(setIsHomepageBannerVisible(false));
   };
 
+  const shareURL = makeDonateUrl();
+  const shareTitle = t('fundraising.title');
+
   return (
-    <div className={styles.container}>
-      <div className={styles.content}>
-        <h2 className={styles.title}>{t('fundraising.title')}</h2>
-        <div className={styles.description}>
-          <span>{`${t('fundraising.description')} `}</span>
-          <Link
-            href={makeDonateUrl()}
-            onClick={onLearnMoreClicked}
-            variant={LinkVariant.Highlight}
-            isNewTab
-            className={styles.learnMoreLink}
-          >
-            {t('learn-more')}
-          </Link>
-        </div>
-        <div className={styles.actions}>
-          <Button
-            onClick={onShareClicked}
-            type={ButtonType.Primary}
-            size={ButtonSize.Small}
-            variant={ButtonVariant.Simplified}
-            className={styles.shareButton}
-          >
-            {t('share')}
-          </Button>
-          <div className={styles.rightActions}>
+    <>
+      <div className={styles.container}>
+        <div className={styles.content}>
+          <h2 className={styles.title}>{t('fundraising.title')}</h2>
+          <div className={styles.description}>
+            <span>{`${t('fundraising.description')} `}</span>
+            <Link
+              href={makeDonateUrl()}
+              onClick={onLearnMoreClicked}
+              variant={LinkVariant.Highlight}
+              isNewTab
+              className={styles.learnMoreLink}
+            >
+              {t('learn-more')}
+            </Link>
+          </div>
+          <div className={styles.actions}>
             <Button
-              onClick={onDonateClicked}
+              onClick={onShareClicked}
               type={ButtonType.Primary}
               size={ButtonSize.Small}
               variant={ButtonVariant.Simplified}
-              className={styles.donateButton}
+              className={styles.shareButton}
             >
-              <DiamondIcon />
-              {t('donate-now')}
+              {t('share')}
             </Button>
+            <div className={styles.rightActions}>
+              <Button
+                onClick={onDonateClicked}
+                type={ButtonType.Primary}
+                size={ButtonSize.Small}
+                variant={ButtonVariant.Simplified}
+                className={styles.donateButton}
+              >
+                <DiamondIcon />
+                {t('donate-now')}
+              </Button>
+            </div>
           </div>
         </div>
+        {isDismissible && (
+          <button
+            onClick={onCloseClicked}
+            aria-label={t('close')}
+            className={styles.closeButton}
+            type="button"
+          >
+            <CloseIcon />
+          </button>
+        )}
       </div>
-      <button
-        onClick={onCloseClicked}
-        aria-label={t('close')}
-        className={styles.closeButton}
-        type="button"
-      >
-        <CloseIcon />
-      </button>
-    </div>
+
+      <Modal isOpen={isShareModalOpen} onClickOutside={onCloseShareModal} size={ModalSize.MEDIUM}>
+        <Modal.Body>
+          <button
+            onClick={onCloseShareModal}
+            type="button"
+            aria-label={t('close')}
+            className={styles.modalCloseButton}
+          >
+            <CloseIcon />
+          </button>
+          <Modal.Title>{t('fundraising-share-title')}</Modal.Title>
+          <ShareButtons url={shareURL} title={shareTitle} analyticsContext="fundraising_banner" />
+        </Modal.Body>
+      </Modal>
+    </>
   );
 };
 
