@@ -5,7 +5,6 @@ import styles from './Footer.module.scss';
 
 import Link, { LinkVariant } from '@/dls/Link/Link';
 import useGetChaptersData from '@/hooks/useGetChaptersData';
-import { makeDonateUrl } from '@/utils/apiPaths';
 
 const Links = () => {
   const { t, lang } = useTranslation('common');
@@ -22,7 +21,6 @@ const Links = () => {
         { text: t('quran-radio'), url: '/radio' },
         { text: t('reciters'), url: '/reciters' },
         { text: t('about'), url: '/about-us' },
-        { text: t('donate'), isExternal: true, url: makeDonateUrl() },
         { text: t('developers'), url: '/developers' },
         { text: t('product-updates'), url: '/product-updates' },
         { text: t('feedback'), url: 'https://feedback.quran.com/', isExternal: true },
@@ -30,15 +28,24 @@ const Links = () => {
       ],
     },
     {
-      title: t('network'),
+      title: t('our-projects'),
       links: [
-        { text: 'QuranicAudio.com', url: 'https://quranicaudio.com', isExternal: true },
-        { text: 'Salah.com', url: 'https://salah.com', isExternal: true },
-        { text: 'Sunnah.com', url: 'https://sunnah.com', isExternal: true },
-        { text: 'Legacy.Quran.com', url: 'https://legacy.quran.com', isExternal: true },
-        { text: 'Previous.Quran.com', url: 'https://previous.quran.com', isExternal: true },
-        { text: 'Corpus.Quran.com', url: 'https://corpus.quran.com', isExternal: true },
+        { text: 'Quran.com', url: 'https://quran.com', isExternal: true },
+        {
+          text: 'Quran For Android',
+          url: 'https://play.google.com/store/apps/details?id=com.quran.labs.androidquran&hl=en&pli=1',
+          isExternal: true,
+        },
+        {
+          text: 'Quran iOS',
+          url: 'https://apps.apple.com/us/app/quran-by-quran-com-%D9%82%D8%B1%D8%A2%D9%86/id1118663303',
+          isExternal: true,
+        },
         { text: 'QuranReflect.com', url: 'https://quranreflect.com', isExternal: true },
+        { text: 'Sunnah.com', url: 'https://sunnah.com', isExternal: true },
+        { text: 'Nuqayah.com', url: 'https://nuqayah.com', isExternal: true },
+        { text: 'Legacy.Quran.com', url: 'https://legacy.quran.com', isExternal: true },
+        { text: 'Corpus.Quran.com', url: 'https://corpus.quran.com', isExternal: true },
       ],
     },
     {
