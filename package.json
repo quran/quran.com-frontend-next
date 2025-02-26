@@ -76,6 +76,7 @@
     "@sentry/nextjs": "^7.77.0",
     "@types/crypto-js": "^4.2.2",
     "@umalqura/core": "^0.0.7",
+    "@vercel/functions": "^2.0.0",
     "@xstate/react": "^3.0.1",
     "classnames": "^2.3.2",
     "clipboard-copy": "^4.0.1",
