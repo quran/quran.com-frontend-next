@@ -62,7 +62,6 @@ const NewCard: React.FC<Props> = ({ isGuestWithReadingSessions, isUserWithReadin
                 components={{
                   link: (
                     <Link
-                      isNewTab
                       variant={LinkVariant.Blend}
                       href={getFirstTimeReadingGuideNavigationUrl()}
                       className={styles.linkHref}

@@ -126,3 +126,22 @@
         color: var(--color-text-default);
     }
 }
+
+/* Modal styles */
+.modalCloseButton {
+    position: absolute;
+    top: var(--spacing-medium);
+    right: var(--spacing-medium);
+    color: var(--color-text-faded);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: var(--spacing-xsmall);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+        color: var(--color-text-default);
+    }
+}

@@ -2,6 +2,7 @@ import { useState } from 'react';
 
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
+import { useDispatch } from 'react-redux';
 
 import styles from './ProfileAvatarButton.module.scss';
 
@@ -14,6 +15,7 @@ import LogoutIcon from '@/icons/logout.svg';
 import NotesIcon from '@/icons/notes-filled.svg';
 import NotificationBellIcon from '@/icons/notification-bell.svg';
 import IconPerson from '@/icons/person.svg';
+import { setIsSidebarNavigationVisible } from '@/redux/slices/QuranReader/sidebarNavigation';
 import { logoutUser } from '@/utils/auth/api';
 import { isLoggedIn } from '@/utils/auth/login';
 import { removeLastSyncAt } from '@/utils/auth/userDataSync';
@@ -31,10 +33,11 @@ const ProfileAvatarButton = () => {
   const [isOpen, setIsOpen] = useState(false);
   const { t } = useTranslation('common');
   const router = useRouter();
-
+  const dispatch = useDispatch();
   const isUserLoggedIn = isLoggedIn();
 
   const onTriggerClicked = () => {
+    dispatch({ type: setIsSidebarNavigationVisible.type, payload: false });
     if (!isUserLoggedIn) {
       logButtonClick('profile_avatar_login');
     }
