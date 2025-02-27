@@ -84,6 +84,7 @@
     "crypto-js": "^4.2.0",
     "firebase": "^9.10.0",
     "fuse.js": "^6.6.2",
+    "geoip-lite": "^1.4.10",
     "groq": "^3.4.0",
     "http-proxy-middleware": "^3.0.0",
     "humps": "^2.0.1",
@@ -113,6 +114,7 @@
     "refresh-fetch": "^0.8.0",
     "remark-directive": "^3.0.0",
     "remotion": "^4.0.266",
+    "request-ip": "^3.3.0",
     "swr": "1.2.1",
     "xstate": "^4.33.6"
   },

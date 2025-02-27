@@ -1,33 +1,30 @@
-import { geolocation } from '@vercel/functions';
-import { type NextRequest, NextResponse } from 'next/server';
+// middleware.ts
+import geoip from 'geoip-lite';
+import { NextRequest, NextResponse } from 'next/server';
+import requestIp from 'request-ip';
 
-import countries from '@/data/countries.json';
+export function middleware(req: NextRequest) {
+  // Get the user's IP address
+  const clientIp = requestIp.getClientIp(req) || '';
 
-// run only on homepage
-export const config = {
-  matcher: ['/', '/country-example'],
-};
+  // Get the user's location based on IP
+  const geo = geoip.lookup(clientIp);
 
-export async function middleware(req: NextRequest) {
-  const { nextUrl: url } = req;
-  const geo = geolocation(req);
-  const country = geo.country || 'US';
-  const city = geo.city || 'San Francisco';
-  const region = geo.countryRegion || 'CA';
+  // Create a response object
+  const response = NextResponse.next();
 
-  const countryInfo = countries.find((x) => x.cca2 === country);
+  // Add geo information to request headers that will be available in the page
+  if (geo) {
+    response.headers.set('x-user-country', geo.country || '');
+    response.headers.set('x-user-region', geo.region || '');
+    response.headers.set('x-user-city', geo.city || '');
+    response.headers.set('x-user-timezone', geo.timezone || '');
+  }
 
-  const currencyCode = Object.keys(countryInfo.currencies)[0];
-  const currency = countryInfo.currencies[currencyCode];
-  const languages = Object.values(countryInfo.languages).join(', ');
-
-  url.searchParams.set('country', country);
-  url.searchParams.set('city', city);
-  url.searchParams.set('region', region);
-  url.searchParams.set('currencyCode', currencyCode);
-  url.searchParams.set('currencySymbol', currency.symbol);
-  url.searchParams.set('name', currency.name);
-  url.searchParams.set('languages', languages);
-
-  return NextResponse.rewrite(url);
+  return response;
 }
+
+// Apply middleware to specific paths
+export const config = {
+  matcher: '/country-example',
+};
