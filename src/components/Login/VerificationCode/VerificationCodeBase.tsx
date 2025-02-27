@@ -1,5 +1,6 @@
 import { FC, useEffect, useState } from 'react';
 
+import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
 import VerificationInput from 'react-verification-input';
 
@@ -24,6 +25,7 @@ interface Props {
   errorTranslationKey?: string;
   formSubmissionKey?: string;
   resendClickKey?: string;
+  shouldShowEmail?: boolean;
 }
 
 const VerificationCodeBase: FC<Props> = ({
@@ -32,10 +34,11 @@ const VerificationCodeBase: FC<Props> = ({
   onResendCode,
   onSubmitCode,
   titleTranslationKey = 'check-email-title',
-  descriptionTranslationKey = 'verification-code-sent-to',
+  descriptionTranslationKey = 'login:verification-code-sent-to',
   errorTranslationKey = 'errors.verification-code-invalid',
   formSubmissionKey = 'verification_code_submit',
   resendClickKey = 'verification_code_resend',
+  shouldShowEmail = true,
 }) => {
   const { t } = useTranslation('login');
   const showToast = useToast();
@@ -89,8 +92,16 @@ const VerificationCodeBase: FC<Props> = ({
     <div className={styles.container}>
       <h1 className={styles.title}>{t(titleTranslationKey)}</h1>
       <div className={styles.emailContainer}>
-        <p className={styles.description}>{t(descriptionTranslationKey)}</p>
-        <p className={styles.email}>{email}</p>
+        <p className={styles.description}>
+          <Trans
+            i18nKey={descriptionTranslationKey}
+            values={{ email }}
+            components={{
+              strong: <strong className={styles.confirmationText} />,
+            }}
+          />
+        </p>
+        {shouldShowEmail && <p className={styles.email}>{email}</p>}
       </div>
       <p className={styles.instruction}>{t('verification-code-instruction')}</p>
 

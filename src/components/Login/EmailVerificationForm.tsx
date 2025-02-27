@@ -67,11 +67,12 @@ const EmailVerificationForm = ({ emailFormField }: EmailVerificationFormProps) =
           onBack={onBack}
           onResendCode={handleResendCode}
           onSubmitCode={handleSubmitCode}
-          titleTranslationKey="email-verification.email-verification"
-          descriptionTranslationKey="email-verification.email-sent"
+          titleTranslationKey="common:email-verification.email-verification"
+          descriptionTranslationKey="common:email-verification.email-sent"
           errorTranslationKey="errors.verification-code-invalid"
           formSubmissionKey="email_verification_submit"
           resendClickKey="email_verification_resend"
+          shouldShowEmail={false}
         />
       ) : (
         <FormBuilder
