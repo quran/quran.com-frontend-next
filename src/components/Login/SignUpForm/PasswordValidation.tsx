@@ -41,7 +41,16 @@ const PasswordValidation: FC<Props> = ({ value = '' }) => {
       messageKey: 'password-rules.number',
     },
     {
-      test: (password) => /[!@#$%^&*_-]/.test(password),
+      test: (password) => {
+        // Check if at least one allowed special character exists
+        const hasAllowedSpecial = /[!@#$%^&*_-]/.test(password);
+
+        // Check if there are any characters that aren't letters, numbers, or allowed special chars
+        const hasDisallowedChars = /[^a-zA-Z0-9!@#$%^&*_-]/.test(password);
+
+        // Return true only if there's at least one allowed special char AND no disallowed chars
+        return hasAllowedSpecial && !hasDisallowedChars;
+      },
       messageKey: 'password-rules.special',
     },
   ];
