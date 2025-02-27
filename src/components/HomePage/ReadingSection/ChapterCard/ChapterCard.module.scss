@@ -32,6 +32,8 @@
         padding: calc(var(--spacing-small-px) + var(--spacing-micro-px)) var(--spacing-small-px)
             calc(var(--spacing-small-px) + var(--spacing-micro-px)) var(--spacing-medium-px);
     }
+    height: 100%;
+    box-sizing: border-box;
 }
 
 .surahContainer {
