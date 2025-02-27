@@ -9,6 +9,10 @@ interface CountryExampleProps {
   city: string;
   timezone: string;
   initialServerData: boolean;
+  debugInfo: {
+    geoLookupFailed: boolean;
+    clientIp: string;
+  };
 }
 
 const CountryExample: NextPage<CountryExampleProps> = ({
@@ -17,6 +21,7 @@ const CountryExample: NextPage<CountryExampleProps> = ({
   city,
   timezone,
   initialServerData,
+  debugInfo,
 }) => {
   return (
     <div className="container mx-auto px-4 py-8">
@@ -50,7 +55,20 @@ const CountryExample: NextPage<CountryExampleProps> = ({
               </p>
             </div>
           ) : (
-            <p>Location data could not be determined.</p>
+            <div>
+              <p>Location data could not be determined.</p>
+
+              {/* Debug information */}
+              <div className="mt-4 p-4 bg-gray-100 rounded-md">
+                <h3 className="text-lg font-medium mb-2">Debug Information</h3>
+                <p>Geo Lookup Failed: {debugInfo.geoLookupFailed ? 'Yes' : 'No'}</p>
+                <p>Detected IP: {debugInfo.clientIp || 'None detected'}</p>
+                <p className="text-sm text-gray-500 mt-2">
+                  Note: When testing locally, geolocation may not work correctly as localhost IPs
+                  (127.0.0.1) don't have geographic data.
+                </p>
+              </div>
+            </div>
           )}
         </div>
 
@@ -97,6 +115,10 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
   const city = (req.headers['x-user-city'] as string) || '';
   const timezone = (req.headers['x-user-timezone'] as string) || '';
 
+  // Debug information
+  const geoLookupFailed = req.headers['x-geo-lookup-failed'] === 'true';
+  const clientIp = (req.headers['x-client-ip'] as string) || '';
+
   const initialServerData = !!(country || region || city || timezone);
 
   return {
@@ -106,6 +128,10 @@ export const getServerSideProps: GetServerSideProps = async ({ req }) => {
       city,
       timezone,
       initialServerData,
+      debugInfo: {
+        geoLookupFailed,
+        clientIp,
+      },
     },
   };
 };

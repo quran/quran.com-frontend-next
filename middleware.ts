@@ -1,14 +1,15 @@
 // middleware.ts
 import geoip from 'geoip-lite';
 import { NextRequest, NextResponse } from 'next/server';
-import requestIp from 'request-ip';
 
 export function middleware(req: NextRequest) {
-  // Get the user's IP address
-  const clientIp = requestIp.getClientIp(req) || '';
+  // Get the user's IP address from various headers
+  // In production, you might want to use X-Forwarded-For or similar
+  const forwarded = req.headers.get('x-forwarded-for');
+  const ip = forwarded ? forwarded.split(',')[0] : req.ip || '';
 
   // Get the user's location based on IP
-  const geo = geoip.lookup(clientIp);
+  const geo = geoip.lookup(ip);
 
   // Create a response object
   const response = NextResponse.next();
@@ -19,6 +20,12 @@ export function middleware(req: NextRequest) {
     response.headers.set('x-user-region', geo.region || '');
     response.headers.set('x-user-city', geo.city || '');
     response.headers.set('x-user-timezone', geo.timezone || '');
+  } else {
+    // For debugging - set a fallback or log that geo lookup failed
+    // eslint-disable-next-line no-console
+    console.log('Geo lookup failed for IP:', ip);
+    response.headers.set('x-geo-lookup-failed', 'true');
+    response.headers.set('x-client-ip', ip);
   }
 
   return response;
