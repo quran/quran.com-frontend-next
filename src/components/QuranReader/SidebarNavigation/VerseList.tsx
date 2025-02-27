@@ -18,9 +18,10 @@ import DataContext from 'src/contexts/DataContext';
 
 type Props = {
   onAfterNavigationItemRouted?: () => void;
+  selectedChapterId?: string;
 };
 
-const VerseList: React.FC<Props> = ({ onAfterNavigationItemRouted }) => {
+const VerseList: React.FC<Props> = ({ onAfterNavigationItemRouted, selectedChapterId }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const { t, lang } = useTranslation('common');
   const lastReadVerseKey = useSelector(selectLastReadVerseKey);
@@ -30,23 +31,30 @@ const VerseList: React.FC<Props> = ({ onAfterNavigationItemRouted }) => {
   const chapterIds = useChapterIdsByUrlPath(lang);
   const urlChapterId = chapterIds && chapterIds.length > 0 ? chapterIds[0] : null;
 
-  // Default to chapter 1 (Al-Fatiha) if no chapter is selected
-  const [currentChapterId, setCurrentChapterId] = useState<string>(urlChapterId || '1');
+  // Use the provided selectedChapterId if available, otherwise use URL or fallback logic
+  const [currentChapterId, setCurrentChapterId] = useState<string>(
+    selectedChapterId || urlChapterId || '1',
+  );
 
   useEffect(() => {
-    if (lastReadVerseKey.chapterId) {
+    // If selectedChapterId is provided externally, use it
+    if (selectedChapterId) {
+      setCurrentChapterId(selectedChapterId);
+    } else if (lastReadVerseKey.chapterId) {
       setCurrentChapterId(lastReadVerseKey.chapterId);
     } else if (!currentChapterId) {
       // If no chapter is selected, default to chapter 1
       setCurrentChapterId('1');
     }
-  }, [lastReadVerseKey, currentChapterId]);
+  }, [lastReadVerseKey, currentChapterId, selectedChapterId]);
 
   useEffect(() => {
     // when the user navigates to a new chapter, reset the search query, and update the current chapter id
     setSearchQuery('');
-    setCurrentChapterId(urlChapterId || currentChapterId || '1');
-  }, [urlChapterId, currentChapterId]);
+    if (!selectedChapterId) {
+      setCurrentChapterId(urlChapterId || currentChapterId || '1');
+    }
+  }, [urlChapterId, currentChapterId, selectedChapterId]);
 
   const verseKeys = useMemo(
     () => (currentChapterId ? generateChapterVersesKeys(chaptersData, currentChapterId) : []),
@@ -76,12 +84,16 @@ const VerseList: React.FC<Props> = ({ onAfterNavigationItemRouted }) => {
   const navigateAndHandleAfterNavigation = (href: string) => {
     router
       .push(href, undefined, {
-        shallow: true, // preserve the shallow routing option
+        shallow: false, // Change to false to force a full page reload
       })
       .then(() => {
         if (onAfterNavigationItemRouted) {
           onAfterNavigationItemRouted();
         }
+      })
+      .catch(() => {
+        // As a fallback, we can use window.location
+        window.location.href = href;
       });
   };
 
