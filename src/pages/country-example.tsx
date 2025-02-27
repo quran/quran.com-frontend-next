@@ -1,3 +1,4 @@
+/* eslint-disable react/no-unescaped-entities */
 /* eslint-disable i18next/no-literal-string */
 import { GetServerSideProps, NextPage } from 'next';
 import Head from 'next/head';
