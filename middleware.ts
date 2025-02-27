@@ -1,37 +1,23 @@
-// middleware.ts
-import geoip from 'geoip-lite';
 import { NextRequest, NextResponse } from 'next/server';
 
 export function middleware(req: NextRequest) {
-  // Get the user's IP address from various headers
-  // In production, you might want to use X-Forwarded-For or similar
-  const forwarded = req.headers.get('x-forwarded-for');
-  const ip = forwarded ? forwarded.split(',')[0] : req.ip || '';
+  const country = req.headers.get('x-vercel-ip-country') || 'Unknown';
+  const region = req.headers.get('x-vercel-ip-country-region') || 'Unknown';
+  const city = req.headers.get('x-vercel-ip-city') || 'Unknown';
+  const ip = req.headers.get('x-real-ip') || 'Unknown';
 
-  // Get the user's location based on IP
-  const geo = geoip.lookup(ip);
+  const requestHeaders = new Headers(req.headers);
+  requestHeaders.set('x-custom-country', country);
+  requestHeaders.set('x-custom-region', region);
+  requestHeaders.set('x-custom-city', city);
+  requestHeaders.set('x-custom-ip', ip);
 
-  // Create a response object
-  const response = NextResponse.next();
-
-  // Add geo information to request headers that will be available in the page
-  if (geo) {
-    response.headers.set('x-user-country', geo.country || '');
-    response.headers.set('x-user-region', geo.region || '');
-    response.headers.set('x-user-city', geo.city || '');
-    response.headers.set('x-user-timezone', geo.timezone || '');
-  } else {
-    // For debugging - set a fallback or log that geo lookup failed
-    // eslint-disable-next-line no-console
-    console.log('Geo lookup failed for IP:', ip);
-    response.headers.set('x-geo-lookup-failed', 'true');
-    response.headers.set('x-client-ip', ip);
-  }
-
-  return response;
+  return NextResponse.next({
+    request: { headers: requestHeaders },
+  });
 }
 
-// Apply middleware to specific paths
+// Run middleware on all requests
 export const config = {
-  matcher: '/country-example',
+  matcher: '/:path*',
 };

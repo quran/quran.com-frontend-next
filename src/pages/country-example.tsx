@@ -1,139 +1,33 @@
-/* eslint-disable react/no-unescaped-entities */
 /* eslint-disable i18next/no-literal-string */
-import { GetServerSideProps, NextPage } from 'next';
-import Head from 'next/head';
-
-interface CountryExampleProps {
-  country: string;
-  region: string;
-  city: string;
-  timezone: string;
-  initialServerData: boolean;
-  debugInfo: {
-    geoLookupFailed: boolean;
-    clientIp: string;
-  };
-}
-
-const CountryExample: NextPage<CountryExampleProps> = ({
+export default function Home({
   country,
   region,
   city,
-  timezone,
-  initialServerData,
-  debugInfo,
-}) => {
+  ip,
+}: {
+  country: string;
+  region: string;
+  city: string;
+  ip: string;
+}) {
   return (
-    <div className="container mx-auto px-4 py-8">
-      <Head>
-        <title>Country Example Page</title>
-        <meta name="description" content="Example page showing geolocation data" />
-      </Head>
-
-      <main>
-        <h1 className="text-3xl font-bold mb-6">Location-Based Content</h1>
-
-        <div className="bg-white shadow-md rounded-lg p-6 mb-6">
-          <h2 className="text-xl font-semibold mb-4">Your Location Information</h2>
-
-          {initialServerData ? (
-            <div className="space-y-2">
-              <p>
-                <span className="font-medium">Country:</span> {country || 'Unknown'}
-              </p>
-              <p>
-                <span className="font-medium">Region:</span> {region || 'Unknown'}
-              </p>
-              <p>
-                <span className="font-medium">City:</span> {city || 'Unknown'}
-              </p>
-              <p>
-                <span className="font-medium">Timezone:</span> {timezone || 'Unknown'}
-              </p>
-              <p className="text-sm text-gray-500 mt-4">
-                This data was detected server-side via our middleware.
-              </p>
-            </div>
-          ) : (
-            <div>
-              <p>Location data could not be determined.</p>
-
-              {/* Debug information */}
-              <div className="mt-4 p-4 bg-gray-100 rounded-md">
-                <h3 className="text-lg font-medium mb-2">Debug Information</h3>
-                <p>Geo Lookup Failed: {debugInfo.geoLookupFailed ? 'Yes' : 'No'}</p>
-                <p>Detected IP: {debugInfo.clientIp || 'None detected'}</p>
-                <p className="text-sm text-gray-500 mt-2">
-                  Note: When testing locally, geolocation may not work correctly as localhost IPs
-                  (127.0.0.1) don't have geographic data.
-                </p>
-              </div>
-            </div>
-          )}
-        </div>
-
-        {country && (
-          <div className="bg-white shadow-md rounded-lg p-6">
-            <h2 className="text-xl font-semibold mb-4">Customized Content for {country}</h2>
-
-            {country === 'US' && (
-              <div className="p-4 bg-blue-50 rounded">
-                <p>
-                  Welcome to our US visitors! Check out our special offers for the United States.
-                </p>
-              </div>
-            )}
-
-            {country === 'GB' && (
-              <div className="p-4 bg-red-50 rounded">
-                <p>Greetings from across the pond! Here's our UK-specific content.</p>
-              </div>
-            )}
-
-            {country === 'CA' && (
-              <div className="p-4 bg-red-50 rounded">
-                <p>Hello to our Canadian friends! We have maple-flavored content just for you.</p>
-              </div>
-            )}
-
-            {!['US', 'GB', 'CA'].includes(country) && (
-              <div className="p-4 bg-green-50 rounded">
-                <p>Welcome international visitor from {country}! We're glad you're here.</p>
-              </div>
-            )}
-          </div>
-        )}
-      </main>
+    <div>
+      <h1>Geolocation Data</h1>
+      <p>Country: {country}</p>
+      <p>Region: {region}</p>
+      <p>City: {city}</p>
+      <p>IP: {ip}</p>
     </div>
   );
-};
+}
 
-export const getServerSideProps: GetServerSideProps = async ({ req }) => {
-  // Extract geo information from request headers (set by middleware)
-  const country = (req.headers['x-user-country'] as string) || '';
-  const region = (req.headers['x-user-region'] as string) || '';
-  const city = (req.headers['x-user-city'] as string) || '';
-  const timezone = (req.headers['x-user-timezone'] as string) || '';
-
-  // Debug information
-  const geoLookupFailed = req.headers['x-geo-lookup-failed'] === 'true';
-  const clientIp = (req.headers['x-client-ip'] as string) || '';
-
-  const initialServerData = !!(country || region || city || timezone);
-
+export async function getServerSideProps({ req }) {
   return {
     props: {
-      country,
-      region,
-      city,
-      timezone,
-      initialServerData,
-      debugInfo: {
-        geoLookupFailed,
-        clientIp,
-      },
+      country: req.headers['x-custom-country'] || 'Unknown',
+      region: req.headers['x-custom-region'] || 'Unknown',
+      city: req.headers['x-custom-city'] || 'Unknown',
+      ip: req.headers['x-custom-ip'] || 'Unknown',
     },
   };
-};
-
-export default CountryExample;
+}
