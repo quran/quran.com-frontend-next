@@ -1,0 +1,23 @@
+.contentModal {
+    padding: var(--spacing-medium);
+}
+
+.header {
+    font-weight: var(--font-weight-bold);
+}
+
+.closeIcon {
+    color: var(--color-text-default);
+    padding-block-start: 0;
+    margin-block-start: var(--spacing-small-px);
+}
+
+.modalContent {
+    max-width: 100%;
+    padding-block-start: var(--spacing-small-px);
+
+    p {
+        margin-bottom: var(--spacing-small-px);
+        font-size: var(--font-medium-small);
+    }
+}
