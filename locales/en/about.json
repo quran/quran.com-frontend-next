@@ -1,14 +1,42 @@
 {
-  "credits": {
-    "desc": "This project wouldn't have been possible without the many open source libraries and projects we've used:",
-    "lokalize": "<0>Lokalize</0>: A computer-aided translation system that focuses on productivity and quality assurance and provides a seamless localization workflow.",
-    "quran-align": "<0>Collin Fair</0>: A tool for producing word-precise segmentation of recorded Qur'anic recitation.",
-    "quran-complex": "<0>QuranComplex</0>: King Fahd Glorious Qur'an Printing Complex is a leader in serving the Glorious Qur’an and its Sciences, translating its Meanings, and safeguarding the Qur’anic Text from distortion, through the optimal use of advanced technologies in the field of printing, audio recordings, electronic publishing and digital applications.",
-    "quran-enc": "<0>QuranEnc</0>: A portal featuring free and trustworthy translations of the meanings and exegeses of the noble Qur'an in many world languages.",
-    "tanzil": "<0>Tanzil</0>: An international Quranic project aimed at providing a highly-verified precise Quran text.",
-    "title": "Credits",
-    "vercel": "<0>Vercel</0>: is a deployment and collaboration platform for frontend developers which puts the frontend developer first, giving them comprehensive tools to build high-performance websites and applications.",
-    "zekr": "<0>Zekr</0>: An open platform Quran study tool for browsing and researching on the Quran"
+  "main-description": "Since its founding in 1995, Quran.com has been committed to making the Quran available to everyone in a way that is clear, authentic, and easy to engage with. Every day, millions of people worldwide turn to Quran.com to read, listen, study, and reflect on the Quran—whether they are lifelong students, scholars, or just beginning their journey.",
+  "our-mission": {
+    "title": "Our Mission",
+    "desc": "The Quran is meant to be read, understood, and reflected upon. Our mission is to remove barriers to access and empower individuals and communities by providing a reliable, well-designed, and deeply enriching Quranic experience. We aim to serve as a trusted source for anyone seeking to engage with the Quran, guided by the principles of accuracy, clarity, and sincerity."
   },
-  "main-description": "Quran.com was founded in 1995. The website aims to make it easy for anyone to read, study, and learn the Quran."
+  "key-features": {
+    "title": "Key Features & Offerings",
+    "desc": "Quran.com is designed to support every stage of engagement with the Quran—from reading and memorization to study and reflection. Our features include:",
+    "features": [
+      "User-Friendly Quran Interface– A clean and intuitive reading experience on any device.",
+      "Multiple Translations & Tafsir – Access to translations in multiple languages, along with tafsir.",
+      "Audio Recitations – Listen to high-quality recitations from world-renowned Qaris, with the ability to follow along word by word.",
+      "Advanced Search & Navigation – Find verses instantly by topic or keywords across the entire Quran.",
+      "Ayah Bookmarking & Notes – Save verses and write personal reflections for later reference.",
+      "QuranReflect Integration – Engage with a global community through reflections and insights shared by scholars and individuals.",
+      "Reading Progress Tracking and Goals – Keep track of your daily goals and reading history",
+      "APIs for Developers – Free access to content and features to power Islamic apps and R&D.",
+      "And much more, Alhamdullilah."
+    ]
+  },
+  "who-we-are": {
+    "title": "Who We Are",
+    "desc": "Quran.com is a waqf (endowment), established as a public trust to ensure that the Quran remains accessible to all, free of charge and without commercial interests. It is managed by Quran.Foundation, a 501(c)(3) nonprofit organization, which sustains and develops Quran.com as part of its mission to provide high-quality, authentic Quranic resources to the world. Our commitment is to serve the Quran and its readers with excellence, sincerity, and responsibility."
+  },
+  "global-effort": {
+    "title": "A Global Effort",
+    "desc": "Millions of people from all over the world rely on Quran.com as their primary digital Quran resource. Whether they come to recite, reflect, memorize, or study, they share a common purpose: a sincere desire to connect with the words of Allah.\nAs we continue to grow, we remain committed to ensuring that Quran.com remains a trusted, accessible, and beautifully designed space for anyone seeking to engage with the Quran."
+  },
+  "credits": {
+    "title": "Credits",
+    "desc": "We extend our gratitude to all those who have supported and contributed to this project, helping to make the Quran accessible to millions worldwide.",
+    "tanzil": "<0>Tanzil</0>: An international Quranic project aimed at providing a highly-verified precise Quran text.",
+    "quran-complex": "<0>QuranComplex</0>: King Fahd Glorious Qur'an Printing Complex is a leader in serving the Glorious Qur'an and its Sciences, translating its Meanings, and safeguarding the Qur'anic Text from distortion, through the optimal use of advanced technologies in the field of printing, audio recordings, electronic publishing and digital applications.",
+    "quran-align": "<0>Collin Fair</0>: A tool for producing word-precise segmentation of recorded Qur'anic recitation.",
+    "quran-enc": "<0>QuranEnc</0>: A portal featuring free and trustworthy translations of the meanings and exegeses of the noble Qur'an in many world languages.",
+    "zekr": "<0>Zekr</0>: An open platform Quran study tool for browsing and researching on the Quran",
+    "tarteel": "<0>Tarteel</0>: An AI-powered Quran memorization app. It's designed to help you memorize smarter, whether you're searching for a verse, tracking your progress, or following along with your recitation.",
+    "lokalize": "<0>Lokalize</0>: A computer-aided translation system that focuses on productivity and quality assurance and provides a seamless localization workflow.",
+    "vercel": "<0>Vercel</0>: is a deployment and collaboration platform for frontend developers which puts the frontend developer first, giving them comprehensive tools to build high-performance websites and applications."
+  }
 }

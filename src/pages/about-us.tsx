@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 /* eslint-disable jsx-a11y/anchor-has-content */
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import Image from 'next/image';
@@ -30,7 +31,28 @@ const AboutUsPage = () => {
           <p>
             <Trans i18nKey="about:main-description" />
           </p>
-          <p className={styles.heading}>{t('credits.title')}</p>
+
+          <h2 className={styles.heading}>{t('our-mission.title')}</h2>
+          <p>{t('our-mission.desc')}</p>
+
+          <h2 className={styles.heading}>{t('key-features.title')}</h2>
+          <p>{t('key-features.desc')}</p>
+          <ul className={styles.list}>
+            {(t('key-features.features', {}, { returnObjects: true }) as string[]).map(
+              (feature, index) => (
+                // eslint-disable-next-line react/no-array-index-key
+                <li key={`feature-${index}`}>{feature}</li>
+              ),
+            )}
+          </ul>
+
+          <h2 className={styles.heading}>{t('who-we-are.title')}</h2>
+          <p>{t('who-we-are.desc')}</p>
+
+          <h2 className={styles.heading}>{t('global-effort.title')}</h2>
+          <p>{t('global-effort.desc')}</p>
+
+          <h2 className={styles.heading}>{t('credits.title')}</h2>
           <p>{t('credits.desc')}</p>
           <ul className={styles.list}>
             <li>
@@ -85,6 +107,14 @@ const AboutUsPage = () => {
                 i18nKey="about:credits.zekr"
                 components={[
                   <a key={0} target="_blank" href="https://zekr.org" rel="noreferrer" />,
+                ]}
+              />
+            </li>
+            <li>
+              <Trans
+                i18nKey="about:credits.tarteel"
+                components={[
+                  <a key={0} target="_blank" href="https://tarteel.ai/" rel="noreferrer" />,
                 ]}
               />
             </li>
