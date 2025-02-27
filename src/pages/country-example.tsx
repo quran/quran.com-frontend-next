@@ -1,5 +1,3 @@
-import { useEffect, useState } from 'react';
-
 import { GetServerSideProps, NextPage } from 'next';
 import Head from 'next/head';
 
@@ -18,12 +16,6 @@ const CountryExample: NextPage<CountryExampleProps> = ({
   timezone,
   initialServerData,
 }) => {
-  const [isClient, setIsClient] = useState(false);
-
-  useEffect(() => {
-    setIsClient(true);
-  }, []);
-
   return (
     <div className="container mx-auto px-4 py-8">
       <Head>
