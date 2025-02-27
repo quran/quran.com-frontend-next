@@ -6,10 +6,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: var(--spacing-mega);
     flex-direction: column;
-    max-width: 480px;
     margin-inline: auto;
+
+    @include breakpoints.desktop {
+        max-width: 480px;
+    }
 }
 
 .innerContainer {

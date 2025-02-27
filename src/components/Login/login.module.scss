@@ -27,10 +27,14 @@ $container-width: 370px;
 }
 
 .title {
-  font-size: var(--font-size-xlarge);
+  font-size: var(--font-size-normal-px);
   color: var(--color-text-default);
-  margin-bottom: var(--spacing-large);
   text-align: center;
+  margin-bottom: var(--spacing-xsmall-px);
+  @include breakpoints.desktop {
+    font-size: var(--font-size-xlarge-px);
+    margin-bottom: var(--spacing-large);
+  }
 }
 
 .subtitle {
@@ -38,6 +42,7 @@ $container-width: 370px;
   margin-block-end: var(--spacing-xlarge);
   color: var(--color-text-default);
   max-width: 400px;
+  font-size: var(--font-size-xsmall-px);
 }
 
 .inlineText {
@@ -53,16 +58,22 @@ $container-width: 370px;
   flex-direction: column;
   align-items: center;
   inline-size: 100%;
-  padding: var(--spacing-large);
+  padding-inline: var(--spacing-large);
   background: var(--color-background-default);
+  @include breakpoints.desktop {
+    padding-block: var(--spacing-large);
+  }
 }
 
 .serviceLogo {
   text-align: center;
 
   svg {
-    height: 30px;
+    height: 20px;
     width: auto;
+    @include breakpoints.desktop {
+      height: 30px;
+    }
   }
 }
 
@@ -80,9 +91,12 @@ $container-width: 370px;
 .benefits {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: var(--spacing-small-px);
+  gap: var(--spacing-xxsmall-px);
   inline-size: 100%;
-  margin-block-start: var(--spacing-large);
+  margin-block-start: var(--spacing-xsmall-px);
+  @include breakpoints.desktop {
+    margin-block-start: var(--spacing-large-px);
+  }
 }
 
 .quranBenefits {
@@ -105,7 +119,7 @@ $container-width: 370px;
   margin-left: var(--spacing-micro-px);
   margin-right: var(--spacing-micro-px);
   text-align: center;
-  font-size: var(--font-size-medium-px);
+  font-size: var(--font-size-xsmall-px);
 }
 
 .authButtons {
@@ -202,7 +216,7 @@ $container-width: 370px;
   text-align: center;
   font-size: var(--font-size-small);
   color: var(--color-text-faded);
-  margin-block-start: var(--spacing-xlarge-px);
+  margin-block-start: var(--spacing-medium-px);
 }
 
 .bold {
@@ -422,14 +436,17 @@ $container-width: 370px;
   display: flex;
   flex-direction: column;
   width: 100%;
-  margin-block-start: var(--spacing-large);
+  margin-block-start: var(--spacing-small-px);
   border: 1px solid var(--color-text-default);
   border-radius: var(--border-radius-rounded);
   padding: 0;
 }
 
 .serviceSection {
-  padding: var(--spacing-medium2-px);
+  padding: var(--spacing-xsmall-px);
+  @include breakpoints.desktop {
+    padding: var(--spacing-small-px);
+  }
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -443,7 +460,11 @@ $container-width: 370px;
 }
 
 .loginCta {
-  padding-block: var(--spacing-large);
+  font-size: var(--font-size-xsmall-px);
+  padding-block: var(--spacing-xsmall-px);
+  @include breakpoints.desktop {
+    padding-block: var(--spacing-small-px);
+  }
 }
 
 .emailButton {
