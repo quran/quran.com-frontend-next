@@ -38,7 +38,7 @@ const AboutUsPage = () => {
           <h2 className={styles.heading}>{t('key-features.title')}</h2>
           <p>{t('key-features.desc')}</p>
           <ul className={styles.list}>
-            {(t('key-features.features', {}, { returnObjects: true }) as string[]).map(
+            {(t('key-features.features', {}, { returnObjects: true }) as string[])?.map(
               (feature, index) => (
                 // eslint-disable-next-line react/no-array-index-key
                 <li key={`feature-${index}`}>{feature}</li>
