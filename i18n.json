@@ -21,7 +21,7 @@
   ],
   "defaultLocale": "en",
   "pages": {
-    "*": ["common", "error", "radio", "quick-links", "onboarding"],
+    "*": ["common", "error", "radio", "quick-links", "onboarding", "login"],
     "/": ["home", "radio", "collection", "reading-goal", "reciter", "learn"],
     "/reading-goal": ["reading-goal", "reciter"],
     "/my-learning-plans": ["learn"],
