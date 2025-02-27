@@ -1,5 +1,6 @@
 import { FC } from 'react';
 
+import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from './login.module.scss';
@@ -58,7 +59,7 @@ const SocialButtons: FC<Props> = ({ redirect, onEmailLoginClick }) => {
           onEmailLoginClick();
           onSocialButtonClick(AuthType.Email);
         }}
-        className={styles.loginButton}
+        className={classNames(styles.loginButton, styles.emailButton)}
         variant={ButtonVariant.Ghost}
         shape={ButtonShape.Pill}
       >

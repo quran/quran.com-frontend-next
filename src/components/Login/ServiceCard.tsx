@@ -1,5 +1,6 @@
 import { FC } from 'react';
 
+import classNames from 'classnames';
 import Link from 'next/link';
 import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
@@ -54,7 +55,7 @@ const ServiceCard: FC<Props> = ({
           <QuranLogo />
         )}
       </div>
-      <div className={styles.benefits}>
+      <div className={classNames(styles.benefits, { [styles.quranBenefits]: !isQuranReflect })}>
         {(isQuranReflect ? benefits.reflect : benefits.quran).map(({ id, label }) => (
           <Feature key={id} label={label} />
         ))}

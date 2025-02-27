@@ -80,21 +80,32 @@ $container-width: 370px;
 .benefits {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: var(--spacing-medium);
+  gap: var(--spacing-small-px);
   inline-size: 100%;
   margin-block-start: var(--spacing-large);
 }
 
+.quranBenefits {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
 .benefit {
   display: flex;
+  justify-content: center;
+}
+
+.benefitContent {
+  display: flex;
   align-items: center;
-  gap: var(--spacing-small);
-  font-size: var(--font-size-medium-px);
-  color: var(--color-text-default);
 }
 
 .benefitText {
-  margin: 0;
+  margin-left: var(--spacing-micro-px);
+  margin-right: var(--spacing-micro-px);
+  text-align: center;
+  font-size: var(--font-size-medium-px);
 }
 
 .authButtons {
@@ -418,7 +429,7 @@ $container-width: 370px;
 }
 
 .serviceSection {
-  padding: var(--spacing-large);
+  padding: var(--spacing-medium2-px);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -433,4 +444,11 @@ $container-width: 370px;
 
 .loginCta {
   padding-block: var(--spacing-large);
+}
+
+.emailButton {
+  color: var(--color-qdc-blue);
+  &:hover {
+    color: var(--color-qdc-deep-blue);
+  }
 }

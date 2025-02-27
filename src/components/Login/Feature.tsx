@@ -14,8 +14,10 @@ const Feature: FC<Props> = ({ label }) => {
 
   return (
     <div dir={direction} className={styles.benefit}>
-      <SunIcon />
-      <p className={styles.benefitText}>{label}</p>
+      <div className={styles.benefitContent}>
+        <SunIcon />
+        <p className={styles.benefitText}>{label}</p>
+      </div>
     </div>
   );
 };
