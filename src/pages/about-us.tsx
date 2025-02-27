@@ -38,12 +38,14 @@ const AboutUsPage = () => {
           <h2 className={styles.heading}>{t('key-features.title')}</h2>
           <p>{t('key-features.desc')}</p>
           <ul className={styles.list}>
-            {(t('key-features.features', {}, { returnObjects: true }) as string[])?.map(
-              (feature, index) => (
-                // eslint-disable-next-line react/no-array-index-key
-                <li key={`feature-${index}`}>{feature}</li>
-              ),
-            )}
+            {Array.isArray(t('key-features.features', {}, { returnObjects: true }))
+              ? (t('key-features.features', {}, { returnObjects: true }) as string[]).map(
+                  (feature, index) => (
+                    // eslint-disable-next-line react/no-array-index-key
+                    <li key={`feature-${index}`}>{feature}</li>
+                  ),
+                )
+              : null}
           </ul>
 
           <h2 className={styles.heading}>{t('who-we-are.title')}</h2>
