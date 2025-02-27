@@ -40,8 +40,10 @@ const ChapterCard: React.FC<Props> = ({
     logButtonClick('homepage_chapter_card_begin');
   };
 
+  const link = getChapterWithStartingVerseUrl(`${surahNumber}:${verseNumber}`);
+
   return (
-    <Card className={styles.chapterCard}>
+    <Card className={styles.chapterCard} {...(isContinueReading && { link })}>
       <div className={styles.surahContainer}>
         <div className={styles.surahName}>{surahNumberString.padStart(3, '0')}</div>
         <div className={styles.surahInfo}>
@@ -55,11 +57,7 @@ const ChapterCard: React.FC<Props> = ({
             </span>
           </div>
           {isContinueReading ? (
-            <Link
-              href={getChapterWithStartingVerseUrl(`${surahNumber}:${verseNumber}`)}
-              variant={LinkVariant.Primary}
-              onClick={onContinueReadingClicked}
-            >
+            <Link href={link} variant={LinkVariant.Primary} onClick={onContinueReadingClicked}>
               <div className={styles.continueReading}>
                 <span>{t('common:verse')}</span>
                 <span>{toLocalizedNumber(verseNumber, lang)}</span>
@@ -74,7 +72,7 @@ const ChapterCard: React.FC<Props> = ({
           ) : (
             <Button
               size={ButtonSize.Small}
-              href={getChapterWithStartingVerseUrl(`${surahNumber}:${verseNumber}`)}
+              href={link}
               onClick={onBeginClicked}
               className={styles.beginButton}
             >

@@ -47,6 +47,7 @@ const Links = () => {
         { text: 'Legacy.Quran.com', url: 'https://legacy.quran.com', isExternal: true },
         { text: 'Corpus.Quran.com', url: 'https://corpus.quran.com', isExternal: true },
       ],
+      description: t('projects-desc'),
     },
     {
       title: t('popular-links'),
@@ -92,6 +93,7 @@ const Links = () => {
               )}
             </div>
           ))}
+          {group.description && <div className={styles.groupDescription}>{group.description}</div>}
         </div>
       ))}
     </div>

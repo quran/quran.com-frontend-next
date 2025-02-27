@@ -85,12 +85,7 @@ const ReadingSection: React.FC<Props> = () => {
       <>{!isMobile() && <NoGoalOrStreakCard />}</>
     );
 
-  const newCard = (
-    <NewCard
-      isGuestWithReadingSessions={isGuestWithReadingSessions}
-      isUserWithReadingSessions={isUserWithReadingSessions}
-    />
-  );
+  const newCard = <NewCard />;
 
   if (isGuestWithReadingSessions) {
     return (

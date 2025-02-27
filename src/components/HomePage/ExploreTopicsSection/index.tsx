@@ -21,11 +21,11 @@ const TOPICS = [
     logKey: 'about-quran',
     key: 'about-quran',
   },
-  {
-    slug: 'jesus-in-the-quran',
-    logKey: 'jesus-in-quran',
-    key: 'jesus-in-quran',
-  },
+  // {
+  //   slug: 'jesus-in-the-quran',
+  //   logKey: 'jesus-in-quran',
+  //   key: 'jesus-in-quran',
+  // },
   {
     slug: 'collections/the-authority-and-importance-of-the-sunnah-clem7p7lf15921610rsdk4xzulfj',
     key: 'sunnah',

@@ -1,3 +1,4 @@
+/* eslint-disable i18next/no-literal-string */
 import React, { useState } from 'react';
 
 import dynamic from 'next/dynamic';
@@ -8,31 +9,18 @@ import styles from './NewCard.module.scss';
 import Card from '@/components/HomePage/Card';
 import IconContainer, { IconSize } from '@/dls/IconContainer/IconContainer';
 import Link, { LinkVariant } from '@/dls/Link/Link';
-import SunIcon from '@/icons/sun.svg';
 import ArrowIcon from '@/public/icons/arrow.svg';
 import { logButtonClick } from '@/utils/eventLogger';
-import { getFirstTimeReadingGuideNavigationUrl } from '@/utils/navigation';
+import { getRamadanNavigationUrl } from '@/utils/navigation';
 
 const ShareQuranModal = dynamic(() => import('./ShareQuranModal'), {
   ssr: false,
 });
 
-interface Props {
-  isGuestWithReadingSessions?: boolean;
-  isUserWithReadingSessions?: boolean;
-}
-
-const NewCard: React.FC<Props> = ({ isGuestWithReadingSessions, isUserWithReadingSessions }) => {
+const NewCard: React.FC = () => {
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
 
-  const onFirstTimeReadingGuideClicked = () => {
-    logButtonClick('homepage_first_time_reading_guide');
-  };
-
-  const onShareQuranClicked = (e: React.MouseEvent<HTMLAnchorElement>) => {
-    e.preventDefault();
-    e.stopPropagation();
-    setIsShareModalOpen(true);
+  const onShareQuranClicked = () => {
     logButtonClick('homepage_share_quran');
   };
 
@@ -42,38 +30,21 @@ const NewCard: React.FC<Props> = ({ isGuestWithReadingSessions, isUserWithReadin
 
   return (
     <>
-      <Card
-        className={styles.firstTimeReadingCard}
-        link={getFirstTimeReadingGuideNavigationUrl()}
-        isNewTab
-      >
+      <Card className={styles.firstTimeReadingCard} link={getRamadanNavigationUrl()} isNewTab>
         <div className={styles.cardOuterContainer}>
           <div className={styles.cardWithIcon}>
-            <div className={styles.iconContainer}>
-              <SunIcon />
-            </div>
+            <div className={styles.iconContainer}>☪️</div>
             <div className={styles.link}>
               <Trans
-                i18nKey={
-                  isGuestWithReadingSessions || isUserWithReadingSessions
-                    ? 'home:know-someone'
-                    : 'home:first-time-reading'
-                }
+                i18nKey="home:know-someone"
                 components={{
-                  link: (
-                    <Link
-                      variant={LinkVariant.Blend}
-                      href={getFirstTimeReadingGuideNavigationUrl()}
-                      className={styles.linkHref}
-                      onClick={onFirstTimeReadingGuideClicked}
-                    />
-                  ),
                   modalLink: (
                     <Link
                       variant={LinkVariant.Blend}
-                      href={getFirstTimeReadingGuideNavigationUrl()}
+                      href={getRamadanNavigationUrl()}
                       className={styles.linkHref}
                       onClick={onShareQuranClicked}
+                      isNewTab
                     />
                   ),
                 }}
