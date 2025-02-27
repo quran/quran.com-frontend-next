@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { useContext, useEffect, useMemo, useState } from 'react';
 
 import classNames from 'classnames';
@@ -42,9 +43,17 @@ const filterSurah = (surahs: Chapter[], searchQuery: string) => {
 
 type Props = {
   onAfterNavigationItemRouted?: () => void;
+  customChapterSelectHandler?: (chapterId: string) => void;
+  shouldDisableNavigation?: boolean;
+  selectedChapterId?: string;
 };
 
-const SurahList: React.FC<Props> = ({ onAfterNavigationItemRouted }) => {
+const SurahList: React.FC<Props> = ({
+  onAfterNavigationItemRouted,
+  customChapterSelectHandler,
+  shouldDisableNavigation = false,
+  selectedChapterId: externalSelectedChapterId,
+}) => {
   const { t, lang } = useTranslation('common');
   const lastReadVerseKey = useSelector(selectLastReadVerseKey);
   const isReadingByRevelationOrder = useSelector(selectIsReadingByRevelationOrder);
@@ -54,16 +63,22 @@ const SurahList: React.FC<Props> = ({ onAfterNavigationItemRouted }) => {
   const chapterIds = useChapterIdsByUrlPath(lang);
   const urlChapterId = chapterIds && chapterIds.length > 0 ? chapterIds[0] : null;
 
-  const [currentChapterId, setCurrentChapterId] = useState(urlChapterId);
+  // Use external selectedChapterId if provided, otherwise use internal state
+  const [internalCurrentChapterId, setInternalCurrentChapterId] = useState(urlChapterId);
+  const currentChapterId = externalSelectedChapterId || internalCurrentChapterId;
 
   useEffect(() => {
-    setCurrentChapterId(lastReadVerseKey.chapterId);
-  }, [lastReadVerseKey]);
+    if (!externalSelectedChapterId) {
+      setInternalCurrentChapterId(lastReadVerseKey.chapterId);
+    }
+  }, [lastReadVerseKey, externalSelectedChapterId]);
 
   useEffect(() => {
-    // when the user navigates to a new chapter, the current chapter id
-    setCurrentChapterId(urlChapterId);
-  }, [urlChapterId]);
+    // when the user navigates to a new chapter, update the current chapter id
+    if (!externalSelectedChapterId) {
+      setInternalCurrentChapterId(urlChapterId);
+    }
+  }, [urlChapterId, externalSelectedChapterId]);
 
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -121,8 +136,16 @@ const SurahList: React.FC<Props> = ({ onAfterNavigationItemRouted }) => {
     }
   };
 
-  const handleChapterClick = (e: React.MouseEvent, href: string) => {
+  const handleChapterClick = (e: React.MouseEvent, href: string, chapterId: string) => {
     e.preventDefault();
+
+    // If we have a custom handler and navigation is disabled, use the custom handler
+    if (customChapterSelectHandler && shouldDisableNavigation) {
+      customChapterSelectHandler(chapterId);
+      return;
+    }
+
+    // Otherwise use the default navigation behavior
     navigateAndHandleAfterNavigation(href);
   };
 
@@ -145,7 +168,7 @@ const SurahList: React.FC<Props> = ({ onAfterNavigationItemRouted }) => {
                 key={chapter.id}
                 href={href}
                 shouldPrefetch={false}
-                onClick={(e) => handleChapterClick(e, href)}
+                onClick={(e) => handleChapterClick(e, href, chapter.id)}
               >
                 <div
                   ref={chapter.id.toString() === currentChapterId ? selectedChapterRef : null}
