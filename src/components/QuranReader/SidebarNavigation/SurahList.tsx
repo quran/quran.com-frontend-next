@@ -168,7 +168,7 @@ const SurahList: React.FC<Props> = ({
                 key={chapter.id}
                 href={href}
                 shouldPrefetch={false}
-                onClick={(e) => handleChapterClick(e, href, chapter.id)}
+                onClick={(e) => handleChapterClick(e, href, chapter.id.toString())}
               >
                 <div
                   ref={chapter.id.toString() === currentChapterId ? selectedChapterRef : null}
