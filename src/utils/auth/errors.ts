@@ -46,6 +46,7 @@ export enum AuthEndpoint {
   SignUp = 'signUp',
   ForgotPassword = 'forgotPassword',
   ResetPassword = 'resetPassword',
+  CompleteSignup = 'completeSignup',
 }
 
 // Map of API endpoint to their error field keys
@@ -67,6 +68,12 @@ const API_ERROR_FIELD_MAP: Record<AuthEndpoint, ErrorFieldMap> = {
   [AuthEndpoint.ResetPassword]: {
     password: 'password',
     token: 'token',
+  },
+  [AuthEndpoint.CompleteSignup]: {
+    email: 'email',
+    firstName: 'firstName',
+    lastName: 'lastName',
+    username: 'username',
   },
 };
 

@@ -1,5 +1,6 @@
 import { privateFetcher } from './api';
 import {
+  makeCompleteSignupUrl,
   makeForgotPasswordUrl,
   makeResetPasswordUrl,
   makeSignInUrl,
@@ -9,6 +10,7 @@ import mapAPIErrorToFormFields, { AuthEndpoint } from './errors';
 
 import SignUpRequest from '@/types/auth/SignUpRequest';
 import BaseAuthResponse from '@/types/BaseAuthResponse';
+import CompleteSignupRequest from '@/types/CompleteSignupRequest';
 
 const CONTENT_TYPE = 'Content-Type';
 
@@ -82,6 +84,17 @@ export const requestPasswordReset = async (
 ): Promise<APIResponse<BaseAuthResponse>> => {
   return handleAuthRequest(makeForgotPasswordUrl(), { email }, AuthEndpoint.ForgotPassword, {
     email: 'email',
+  });
+};
+
+export const completeSignup = async (
+  data: CompleteSignupRequest,
+): Promise<APIResponse<BaseAuthResponse>> => {
+  return handleAuthRequest(makeCompleteSignupUrl(), data, AuthEndpoint.CompleteSignup, {
+    email: 'email',
+    firstName: 'firstName',
+    lastName: 'lastName',
+    username: 'username',
   });
 };
 
