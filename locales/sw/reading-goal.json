@@ -7,6 +7,7 @@
   "create-plan": "Unda mpango",
   "create-reading-goal": "Tengeneza Lengo",
   "daily-progress": "Maendeleo ya Kila Siku",
+  "daily-progress-completed": "Imekamilika! 🎉",
   "daily": {
     "description": "Lengo lako litawekwa upya kila siku",
     "title": "Lengo la kila siku"
@@ -40,16 +41,17 @@
     "description": "Ikiwa lengo lako litawekwa upya kila siku au kila idadi ya siku, Usiwe na wasi wasi, tutafuatilia maendeleo yako bila kujali idadi ya marudio utakayochagua.",
     "title": "Chagua idadi ya marudio ya lengo lako"
   },
+  "goal-completed": "Lengo Limekamilika! 🎉 ",
   "goal-done": {
     "description": "Usomaji wowote wa ziada bado utarekodiwa",
     "title": "Umekamilisha lengo la leo"
   },
   "goal-target": {
-    "description": "Je, ni muda gani, kurasa ngapi, au aya ngapi unapaswa kusoma ili kukamilisha lengo lako?",
+    "description": "Je, ni muda gani, kurasa ngapi, au aya ngapi ungependa kusoma ili kukamilisha lengo lako?",
     "title": "Weka kusudio kwa lengo lako"
   },
   "goal-type": {
-    "description": "Je, lengo lako linapaswa kutegemea wakati, kurasa, au msururu maalum (yaani, Juzu 3 za Qur'ani)?",
+    "description": "Je, lengo lako linategemea wakati, kurasa, au msururu maalum (yaani, Juzu 3 za Qur'ani)?",
     "title": "Chagua kigezo cha lengo lako"
   },
   "goal-types": {
@@ -82,13 +84,17 @@
     "time-goal": "soma {{time}} ya Qur'ani"
   },
   "reading-goal": "Lengo la Kusoma",
+  "reading-goal-description": "Je, unaona ni changamoto kudumisha uthabiti na malengo yako ya usomaji wa Kurani? <br/> <br/> Safari ya Ukuzaji wa Kurani ni kipengele kinachobadilika kilichoundwa ili kukusaidia kuendelea kuwa thabiti katika safari yako ya Kurani. Iwe unalenga kusoma dakika 10 kwa siku, kukamilisha Juz katika mwezi mmoja, au kumaliza Kurani nzima kwa mwaka mmoja, n.k., Quran.com sasa inaweza kukusaidia kuweka lengo maalum na kufuatilia mfululizo wako wa kusoma kila siku, huku ukirekebisha kadiri unavyoendelea. Ni bure kabisa kutumia na tunatumai itakusaidia kukaa na motisha kufikia lengo lako!",
   "reading-goal-label": "Uko kwenye",
+  "reading-goal-title": "Kuanzisha Safari ya Ukuaji wa Qur'ani",
   "recommended": "Imependekezwa",
   "remaining": "Iliyobakia leo",
+  "remaining-base": "Iliyosalia",
   "remaining-days": {
     "one": "",
     "other": ""
   },
+  "set-a-new-goal": "Weka Lengo jipya",
   "set-reading-goal-success": "Lengo lako la kusoma limetengenezwa kwa mafanikio.",
   "start-journey": "Anza safari yako!",
   "start-reading": "Anza Kusoma",
