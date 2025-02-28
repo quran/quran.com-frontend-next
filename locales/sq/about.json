@@ -1,14 +1,42 @@
 {
   "credits": {
-    "desc": "Ky projekt nuk do të ishte i mundur pa shumë librari dhe projekte me burim të hapur që kemi përdorur:",
-    "lokalize": "<0>Lokalize</0>: Një sistem përkthimi me ndihmën e kompjuterit që fokusohet në produktivitetin dhe sigurimin e cilësisë dhe ofron një rrjedhë pune lokalizimi pa probleme.",
+    "desc": "Ne shprehim mirënjohjen tonë për të gjithë ata që kanë mbështetur dhe kontribuar në këtë projekt, duke ndihmuar për ta bërë Kuranin të aksesueshëm për miliona njerëz në mbarë botën.",
+    "lokalize": "<0>Lokalize</0>: Një sistem përkthimi me ndihmën e kompjuterit që fokusohet në produktivitetin dhe sigurimin e cilësisë dhe ofron një rrjedhë pune të pandërprerë të lokalizimit.",
     "quran-align": "<0>Collin Fair</0>: Një mjet për prodhimin e segmentimit të saktë të fjalëve të recitimit të regjistruar Kur'anor.",
-    "quran-complex": "<0>Kompleksi Mbretit Fehd për printimin e Kur'anit të lavdishëm</0>:Kompleksi Mbretit Fehd për printimin e Kur'anit të lavdishëm është një lider në shërbimin e Kur'anit të lavdishëm dhe shkencave të tij, në përkthimin e kuptimeve të tij dhe në mbrojtjen e tekstit kuranor nga shtrembërimi, nëpërmjet përdorimit optimal të teknologji të avancuara në fushën e printimit, regjistrimeve audio, publikimeve elektronike dhe aplikacioneve dixhitale.",
+    "quran-complex": "<0>Kompleksi i Kuranit</0>: Kompleksi i Shtypjes së Kur'anit të Lavdishëm Mbreti Fahd është një lider në shërbimin e Kur'anit të Lavdishëm dhe Shkencave të tij, në përkthimin e Domethënieve të tij dhe në ruajtjen e Tekstit Kur'anor nga shtrembërimi, nëpërmjet përdorimit optimal të teknologjive të përparuara në fushën e printimit, regjistrimeve audio, botimit elektronik dhe aplikacioneve dixhitale.",
     "quran-enc": "<0>QuranEnc</0>: Një portal që paraqet përkthime falas dhe të besueshme të kuptimeve dhe interpretimeve të Kuranit fisnik në shumë gjuhë të botës.",
-    "tanzil": "<0>Tanzil</0> : Një projekt ndërkombëtar Kur'anor që synon të sigurojë një tekst të saktë të Kur'anit me verifikim të lartë.",
-    "title": "Akretidime",
-    "vercel": "<0>Vercel</0>: është një platformë vendosjeje dhe bashkëpunimi për zhvilluesit e front-endit, e cila e vendos në plan të parë zhvilluesin e frontendit, duke u dhënë atyre mjete gjithëpërfshirëse për të ndërtuar faqe interneti dhe aplikacione me performancë të lartë.",
+    "tanzil": "<0>Tanzil</0>: Një projekt ndërkombëtar kuranor që synon të sigurojë një tekst të saktë të Kuranit shumë të verifikuar.",
+    "tarteel": "<0>Tarteel</0>: Një aplikacion për memorizimin e Kuranit i mbështetur nga AI. Është krijuar për t'ju ndihmuar të mësoni përmendësh më të zgjuar, pavarësisht nëse jeni duke kërkuar për një varg, duke ndjekur përparimin tuaj ose duke ndjekur së bashku me recitimin tuaj.",
+    "title": "Kreditë",
+    "vercel": "<0>Vercel</0>: është një platformë vendosjeje dhe bashkëpunimi për zhvilluesit e frontendit, e cila e vendos në plan të parë zhvilluesin e frontendit, duke u dhënë atyre mjete gjithëpërfshirëse për të ndërtuar faqe interneti dhe aplikacione me performancë të lartë.",
     "zekr": "<0>Zekr</0>: Një platformë e hapur mjet studimi i Kuranit për shfletimin dhe kërkimin mbi Kuranin"
   },
-  "main-description": "Quran.com u themelua në vitin 1995. Faqja e internetit synon ta bëjë të lehtë për këdo leximin, studimin dhe mësimin e Kuranit."
+  "global-effort": {
+    "desc": "Miliona njerëz nga e gjithë bota mbështeten te Quran.com si burimi i tyre kryesor dixhital i Kuranit. Pavarësisht nëse vijnë për të recituar, reflektuar, mësuar përmendësh ose studiuar, ata ndajnë një qëllim të përbashkët: një dëshirë të sinqertë për t'u lidhur me fjalët e Allahut. \\n Ndërsa vazhdojmë të rritemi, ne mbetemi të përkushtuar për të siguruar që Quran.com të mbetet një hapësirë ​​e besueshme, e aksesueshme dhe e dizajnuar bukur për këdo që kërkon të angazhohet me Kuranin.",
+    "title": "Një Përpjekje Globale"
+  },
+  "key-features": {
+    "desc": "Quran.com është krijuar për të mbështetur çdo fazë të angazhimit me Kuranin – nga leximi dhe memorizimi deri te studimi dhe reflektimi. Karakteristikat tona përfshijnë:",
+    "features": [
+      "Ndërfaqja miqësore e Kuranit - Një përvojë e pastër dhe intuitive leximi në çdo pajisje.",
+      "Përkthime të Shumëfishta dhe Tefsir – Qasje në përkthime në shumë gjuhë, së bashku me tefsirin.",
+      "Recitime audio – Dëgjoni recitime me cilësi të lartë nga Qaris me famë botërore, me aftësinë për të ndjekur fjalë për fjalë.",
+      "Kërkim dhe navigim i avancuar – Gjeni vargjet në çast sipas temës ose fjalëve kyçe në të gjithë Kuranin.",
+      "Ayah Bookmarking & Notes – Ruani vargjet dhe shkruani reflektime personale për referencë të mëvonshme.",
+      "Kurani Reflect Integrimi – Angazhohuni me një komunitet global përmes reflektimeve dhe njohurive të ndara nga studiues dhe individë.",
+      "Ndjekja e progresit dhe objektivat e leximit – Mbani gjurmët e qëllimeve tuaja ditore dhe historisë së leximit",
+      "API për Zhvilluesit – Qasje falas në përmbajtje dhe veçori për të fuqizuar aplikacionet islamike dhe R&D.",
+      "Dhe shumë më tepër, Elhamdullilah."
+    ],
+    "title": "Karakteristikat dhe Ofertat kryesore"
+  },
+  "main-description": "Që nga themelimi i tij në 1995, Quran.com është përkushtuar që ta bëjë Kuranin të disponueshëm për të gjithë në një mënyrë që është e qartë, autentike dhe e lehtë për t'u përfshirë. Çdo ditë, miliona njerëz në mbarë botën i drejtohen Quran.com për të lexuar, dëgjuar, studiuar dhe reflektuar mbi Kuranin – qofshin ata studentë të përjetshëm, studiues apo sapo kanë filluar udhëtimin e tyre.",
+  "our-mission": {
+    "desc": "Kurani është menduar për t'u lexuar, kuptuar dhe reflektuar mbi të. Misioni ynë është të heqim pengesat për aksesin dhe fuqizojmë individët dhe komunitetet duke ofruar një përvojë Kuranore të besueshme, të mirë-projektuar dhe pasuruese të thellë. Ne synojmë të shërbejmë si një burim i besueshëm për këdo që kërkon të angazhohet me Kuranin, të udhëhequr nga parimet e saktësisë, qartësisë dhe sinqeritetit.",
+    "title": "Misioni ynë"
+  },
+  "who-we-are": {
+    "desc": "Quran.com është një vakëf (dhurim), i krijuar si një besim publik për të siguruar që Kurani të mbetet i aksesueshëm për të gjithë, pa pagesë dhe pa interesa komerciale. Ai menaxhohet nga Quran.Foundation, një organizatë jofitimprurëse 501(c)(3), e cila mbështet dhe zhvillon Quran.com si pjesë e misionit të saj për të ofruar burime autentike kuranore me cilësi të lartë në botë. Angazhimi ynë është t'i shërbejmë Kur'anit dhe lexuesve të tij me përsosmëri, sinqeritet dhe përgjegjësi.",
+    "title": "Kush Jemi Ne"
+  }
 }
