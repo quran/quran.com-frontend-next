@@ -24,7 +24,9 @@
     "feedback-success": "Thank you for your feedback!",
     "your-feedback": "Your Feedback"
   },
+  "help-about-reflection": "Help about reflection feature",
   "learn-duration": "Duration",
+  "learn-more": "Learn more",
   "learning-plan-material": "Learning Plan Material",
   "learning-plan-meta-desc": "This Learning Plan will help transform the way you engage with the Quran, begin your journey today!",
   "learning-plans-desc": "Boost your knowledge with easy-to-follow lessons that keep you growing in your journey with the Quran. <br></br>Start a Learning Plan today! Your progress is tracked until you reach the finish line.",
@@ -34,14 +36,12 @@
   "next-lesson": "Next Lesson",
   "not-enrolled": "You are not enrolled in the <link>Learning Plan</link> yet.",
   "prev-lesson": "Previous Lesson",
+  "reflection-description-1": "Clicking \"Add Reflection\" will take you to QuranReflect, a platform for sharing personal reflections on the Quran. Unlike Tafsir (scholarly interpretation), reflections are personal insights and experiences related to the verses.",
+  "reflection-description-2": "If you post publicly, your reflection will be reviewed by the moderation team and become visible to the QuranReflect community.",
   "start-learning": "Start Learning",
   "tabs": {
     "main": "Main Details",
     "syllabus": "Syllabus"
   },
-  "what-happens-when-you-click-add-reflection": "What happens when you click \"Add Reflection\"?",
-  "reflection-description-1": "Clicking \"Add Reflection\" will take you to QuranReflect, a platform for sharing personal reflections on the Quran. Unlike Tafsir (scholarly interpretation), reflections are personal insights and experiences related to the verses.",
-  "reflection-description-2": "If you post publicly, your reflection will be reviewed by the moderation team and become visible to the QuranReflect community.",
-  "learn-more": "Learn more",
-  "help-about-reflection": "Help about reflection feature"
+  "what-happens-when-you-click-add-reflection": "What happens when you click \"Add Reflection\"?"
 }
