@@ -7,6 +7,7 @@
   "create-plan": "Buat rancangan",
   "create-reading-goal": "Cipta Matlamat",
   "daily-progress": "Kemajuan Harian",
+  "daily-progress-completed": "Selesai! 🎉",
   "daily": {
     "description": "Matlamat anda akan ditetapkan semula setiap hari",
     "title": "Matlamat harian"
@@ -40,6 +41,7 @@
     "description": "Adakah matlamat anda perlu ditetapkan semula setiap hari atau setiap bilangan hari? Jangan risau, kami akan menjejaki kemajuan anda tanpa mengira kekerapan yang anda pilih.",
     "title": "Pilih kekerapan untuk matlamat anda"
   },
+  "goal-completed": "Matlamat Selesai! 🎉 ",
   "goal-done": {
     "description": "Sebarang bacaan tambahan masih akan direkodkan",
     "title": "Anda telah melengkapkan matlamat hari ini"
@@ -81,12 +83,16 @@
     "time-goal": "membaca {{time}} al-Quran"
   },
   "reading-goal": "Matlamat Membaca",
+  "reading-goal-description": "Adakah anda merasa sukar untuk mengekalkan konsistensi dengan matlamat membaca Al-Quran anda? <br/> <br/> Perjalanan Pertumbuhan Al-Quran ialah ciri dinamik yang dibangunkan untuk membantu anda kekal konsisten dalam perjalanan anda dengan Al-Quran. Sama ada anda menyasarkan untuk membaca 10 minit sehari, menghabiskan satu Juz dalam sebulan, atau menghabiskan keseluruhan Al-Quran dalam setahun, dsb., Quran.com kini boleh membantu anda menetapkan matlamat tersuai dan menjejaki coretan bacaan harian anda, sambil menyesuaikan diri semasa anda membuat kemajuan. Ia adalah percuma untuk digunakan dan kami berharap ia akan membantu anda kekal bermotivasi untuk mencapai matlamat anda!",
   "reading-goal-label": "Anda berada di",
+  "reading-goal-title": "Memperkenalkan Kembara Pertumbuhan Al-Quran",
   "recommended": "Disyorkan",
   "remaining": "Berbaki untuk hari ini",
+  "remaining-base": "yang tinggal",
   "remaining-days": {
     "other": "{{days}} hari lagi"
   },
+  "set-a-new-goal": "Tetapkan Matlamat baharu",
   "set-reading-goal-success": "Matlamat membaca anda telah berjaya ditetapkan.",
   "start-journey": "Mulakan pengembaraan anda!",
   "start-reading": "Mula membaca",
