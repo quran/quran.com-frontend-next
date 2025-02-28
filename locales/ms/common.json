@@ -102,7 +102,7 @@
   "command-bar": {
     "navigations": "Navigasi",
     "no-nav-results": "Tiada hasil navigasi",
-    "placeholder": "Apa yang anda mahu baca?",
+    "placeholder": "Carilah Al-Quran...",
     "recent-navigations": "Navigasi terkini",
     "search-by-voice": "Cari melalui suara",
     "try-navigating": "Cuba navigasi ke"
@@ -121,9 +121,11 @@
     }
   },
   "continue": "Teruskan",
+  "contribute-to-our-mission": "Menyumbang kepada misi kami",
   "copied": "Selesai salin",
   "copied-to-clipboard": "Disalin ke papan keratan",
   "copy": "Salin",
+  "copylink": "Salin pautan",
   "counter": {
     "decrease": "Mengurang",
     "increase": "Meningkat"
@@ -133,6 +135,7 @@
   "developers": "Pemaju (Developers)",
   "display": "Paparan",
   "donate": "Derma",
+  "donate-now": "Derma sekarang",
   "donate_monthly": "Derma bulanan",
   "donate_once": "Derma sekali",
   "edit": "Sunting",
@@ -156,6 +159,34 @@
     "ranges-too-many-verses": "*Max {{maxNumberOfVerses}} Ayah",
     "ranges-wrong-order": "Ayat permulaan hendaklah sebelum ayat akhir."
   },
+  "errors": {
+    "account-banned": "Maaf, Akaun anda dilarang. Hubungi Quran.Foundation",
+    "badRequest": "*Permintaan tidak sah",
+    "banned": "*Maaf, Akaun anda dilarang. Hubungi Quran.Foundation",
+    "confirm": "*Sahkan kata laluan tidak sepadan dengan kata laluan",
+    "email": "*Format E-mel Tidak Sah!",
+    "exactLength": "*Nilai mestilah panjang tepat",
+    "expiredToken": "*Token ini telah tamat tempoh",
+    "forgot-password-failed": "Gagal menghantar e-mel tetapan semula kata laluan. Sila cuba lagi.",
+    "immutable": "*Nilai ini tidak boleh diubah",
+    "invalid": "* {{fieldName}} ini tidak sah",
+    "invalidEmailOrPassword": "*E-mel atau kata laluan tidak sah",
+    "max": "* {{fieldName}} mestilah kurang daripada atau sama dengan {{max}} digit",
+    "min": "* {{fieldName}} mestilah lebih daripada atau sama dengan {{min}} digit",
+    "name": "* {{fieldName}} hendaklah huruf dan nombor sahaja",
+    "notFound": "*Tidak dijumpai",
+    "required": "* {{fieldName}} tiada!",
+    "reset-password-failed": "Gagal menetapkan semula kata laluan. Sila cuba lagi.",
+    "signin-failed": "Log masuk gagal. Sila cuba lagi.",
+    "signup-failed": "Pendaftaran gagal. Sila cuba lagi.",
+    "taken": "* {{fieldName}} sudah wujud!",
+    "usedToken": "*Token ini sudah digunakan",
+    "username": "* {{fieldName}} terima garis bawah dan huruf sahaja",
+    "verification-code-invalid": "Kod pengesahan ini tidak sah",
+    "verification-code-length": "Kod pengesahan mestilah {{length}} digit",
+    "verification-failed": "Pengesahan gagal. Sila cuba lagi.",
+    "verification-resend-failed": "Gagal menghantar semula kod pengesahan"
+  },
   "exciting-updates": "Kemas Kini Menarik",
   "feedback": "Maklum balas",
   "fonts": {
@@ -178,20 +209,25 @@
     "translation-font-size": "Saiz fon terjemahan"
   },
   "footer": {
-    "description": "Quran.com adalah Sadaqah Jariyah. Kami berharap agar kami dapat memudahkan semua orang dapat membaca, mempelajari dan memahami erti Al-Quran. Al-Quran yang mulia mempunyai banyak nama antaranya Al-Quran Al-Kareem, Al-Kitab, Al-Furqan, Al-Maw'itha, Al-Zikir, dan Al-Nur.",
+    "description": "Quran.com ialah platform dipercayai yang digunakan oleh berjuta-juta orang di seluruh dunia untuk membaca, mencari, mendengar dan merenung Al-Quran dalam pelbagai bahasa. Ia menyediakan terjemahan, tafsir, bacaan, terjemahan perkataan demi perkataan, dan alat untuk kajian yang lebih mendalam, menjadikan al-Quran boleh diakses oleh semua orang. <br/> <br/> Sebagai Sadaqah Jariyah, Quran.com berdedikasi untuk membantu orang ramai berhubung secara mendalam dengan al-Quran. Disokong oleh Quran.Foundation, sebuah organisasi bukan untung 501(c)(3), Quran.com terus berkembang sebagai sumber percuma dan berharga untuk semua, Alhamdullilah”",
     "hiring": "Kami ada jawatan kosong untuk di penuhi! Sertai pasukan QuranFoundation dan menyumbang kepada misi kami. <link> Mohon sekarang! </link>",
     "rights": "Hak cipta terpelihara",
-    "title": "Baca, kaji dan pelajari Al-Quran."
+    "title": "Baca, Dengar, Cari, dan Renungkan Al-Quran"
   },
   "form": {
     "body": "Badan",
     "code": "Kod pengesahan",
+    "confirm-password": "Sahkan Kata Laluan",
     "email": "E-mel",
     "firstName": "Nama pertama",
     "lastName": "Nama terakhir",
-    "title": "Tajuk"
+    "password": "Kata laluan",
+    "title": "Tajuk",
+    "username": "Nama pengguna",
+    "verification-code": "Kod Pengesahan"
   },
   "from": "Dari",
+  "fundraising-share-title": "Kongsi Pengumpulan Dana Quran.com",
   "fundraising-sticky-banner": {
     "cta": "Derma",
     "title": "Berikan pada hari-hari terbaik!"
@@ -216,6 +252,7 @@
   "learn-more": "Ketahui lebih lanjut",
   "learning-plans": "Rancangan Pembelajaran",
   "less": "Kurang",
+  "lessons": "Pelajaran",
   "loading": "Sedang dimuat ",
   "login": "Log masuk",
   "logout": "Log keluar",
@@ -249,6 +286,7 @@
   "off": "Tutup",
   "oldest": "Terdahulu",
   "on": "Pasang",
+  "our-projects": "Projek Kami",
   "page": "Halaman",
   "pages": "Muka Surat",
   "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} daripada {{totalNumberOfResults}} hasil carian",
@@ -271,6 +309,7 @@
   "privacy": "Privasi",
   "product-updates": "Kemas kini produk",
   "profile": "Profil",
+  "projects-desc": "Projek bukan untung yang dimiliki, diurus atau ditaja oleh Quran.Foundation",
   "q-reflect": "QuranReflect",
   "quran-com": "Quran.com",
   "quran-radio": "Radio Al-Quran",
@@ -286,6 +325,7 @@
   "reciters": "Qari",
   "reflect": "Renungkan",
   "reflections": "Renungan",
+  "reflections-and-lessons": "Refleksi & Pengajaran",
   "remove": "Keluarkan",
   "rename": "Namakan semula",
   "retry": "Cuba lagi (Retry)",
@@ -295,10 +335,12 @@
   "save-to-collection": "Simpan ke Koleksi",
   "search-for": "Cari '{{searchQuery}}'",
   "search-results": "{{count}} hasil carian",
+  "search-results-no-count": "Hasil Carian",
   "search": {
     "filters": "Penapis",
     "hint": "Cuba cari",
     "jump-to": "Lompat Ke",
+    "more-results": "Lagi hasil",
     "no-results": "Tiada keputusan dijumpai",
     "no-results-suggestion": "Kami tidak dapat mencari sebarang hasil carian yang sepadan untuk \" {{searchQuery}} \". cuba cari kata kunci lain.",
     "popular": "Carian popular",
@@ -339,8 +381,10 @@
     "search-juz": "Cari Juzuk",
     "search-page": "Halaman Carian",
     "search-surah": "Cari Surah",
+    "search-verse": "Ayat Carian",
     "try-navigating-with": "Nasihat: cuba navigasi dengan"
   },
+  "sign-in": "Log masuk",
   "sitemap": "Peta laman",
   "sort": {
     "ascending": "Menaik",
@@ -395,13 +439,13 @@
   "view": "Lihat",
   "voice": {
     "ask-permission": "Sila benarkan pemasangan mikrofon untuk mula menggunakan Carian Suara",
-    "error": "Kesilapan telah berlaku. Sila cuba sebentar lagi. Atau muat turun",
-    "no-permission": "Nampaknya anda tidak memberi kebenaran kepada pemasangan mikrofon. Sila benarkan pemasangan mikrofon dan cuba lagi sekali atau muat turun",
-    "not-supported": "Nampaknya web anda tidak menyokong mikrofon. Sila cuba web lain atau muat turun",
+    "error": "Ralat telah berlaku, sila cuba sebentar lagi.",
+    "no-permission": "Nampaknya anda tidak mempunyai kebenaran mikrofon didayakan. Sila dayakan kebenaran mikrofon dan cuba lagi.",
+    "not-supported": "Nampaknya penyemak imbas anda tidak menyokong mikrofon. Sila cuba pelayar lain.",
     "suggest": "Mulakan bacaan anda, ayat pilihan itu akan muncul",
     "suggest-subtitle": "Bacalah mana-mana ayat dalam bahasa Arab dan ayat itu akan muncul",
     "suggest-title": "Mula bacaan anda",
-    "voice-search-powered-by": "Enjin carian suara dihasilkan oleh"
+    "voice-search-powered-by": "Carian Suara Dikuasakan oleh"
   },
   "wbw": "Per kata",
   "wbw-lang-summary": "Sumber terjemahan per kata: <link> {{source}} </link> . Sumber ini bebas daripada pilihan terjemahan ayat.",
