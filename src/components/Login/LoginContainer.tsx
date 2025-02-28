@@ -1,4 +1,4 @@
-import { FC, useState } from 'react';
+import { useState } from 'react';
 
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
@@ -10,6 +10,7 @@ import VerificationCodeForm from './VerificationCode/VerificationCodeForm';
 import Button, { ButtonVariant } from '@/dls/Button/Button';
 import ArrowLeft from '@/icons/west.svg';
 import authStyles from '@/styles/auth/auth.module.scss';
+import QueryParam from '@/types/QueryParam';
 import { signUp } from '@/utils/auth/authRequests';
 import { logButtonClick, logEvent } from '@/utils/eventLogger';
 import SignUpRequest from 'types/auth/SignUpRequest';
@@ -20,16 +21,16 @@ enum LoginView {
   VERIFICATION = 'verification',
 }
 
-interface Props {
-  redirect?: string;
-}
-
-const LoginContainer: FC<Props> = ({ redirect }) => {
+const LoginContainer = () => {
   const { t } = useTranslation('login');
   const [loginView, setLoginView] = useState<LoginView>(LoginView.SOCIAL);
   const [activeTab, setActiveTab] = useState(AuthTab.SignIn);
   const [signUpData, setSignUpData] = useState<Partial<SignUpRequest> | null>(null);
   const router = useRouter();
+  const { query } = useRouter();
+  const redirect = query?.[QueryParam.REDIRECT_TO]
+    ? decodeURIComponent(query?.[QueryParam.REDIRECT_TO]?.toString())
+    : undefined;
 
   const onBack = () => {
     logButtonClick('login_back');
