@@ -24,7 +24,9 @@
     "feedback-success": "感谢您的反馈意见！",
     "your-feedback": "您的反馈"
   },
+  "help-about-reflection": "有关反射功能的帮助",
   "learn-duration": "期间",
+  "learn-more": "了解更多",
   "learning-plan-material": "学习计划材料",
   "learning-plan-meta-desc": "该学习计划将帮助您改变学习《古兰经》的方式，今天就开始您的旅程吧！",
   "learning-plans-desc": "通过简单易懂的课程来增长您的知识，让您在《古兰经》的旅程中不断成长。 <br></br>今天就开始制定学习计划！系统会跟踪您的进度，直到您到达终点线。",
@@ -34,9 +36,12 @@
   "next-lesson": "下一课",
   "not-enrolled": "您尚未加入<link>学习计划</link> 。",
   "prev-lesson": "上一课",
+  "reflection-description-1": "点击“添加反思”将带您进入 QuranReflect，这是一个分享个人对《古兰经》反思的平台。与 Tafsir（学术解释）不同，反思是与经文相关的个人见解和经验。",
+  "reflection-description-2": "如果您公开发布，您的反思将由审核团队审核，并向 QuranReflect 社区公开。",
   "start-learning": "开始学习",
   "tabs": {
     "main": "主要细节",
     "syllabus": "教学大纲"
-  }
+  },
+  "what-happens-when-you-click-add-reflection": "当您点击“添加反射”时会发生什么？"
 }
