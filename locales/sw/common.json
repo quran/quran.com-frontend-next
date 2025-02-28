@@ -12,7 +12,7 @@
       "feedback": {
         "action": "Sawa, nimeipata",
         "description": "Asante kwa kutumia Quran.com na tutafurahi kusikia maoni yako kwenye <link> feedback.quran.com </link>",
-        "title": "Tunataka kusikia mawazo yako"
+        "title": "Tungependa kusikia mawazo yako"
       },
       "quran-foundation-link": {
         "action": "Inayofuata",
@@ -81,7 +81,7 @@
       "start-over": "Anza upya",
       "start-playing": "Anza Kucheza",
       "stop-repeating": "Acha Kurudia",
-      "times": "nyakati",
+      "times": "mara",
       "verses-range": "Msururu wa aya",
       "volume-control": "Urekebishaji wa sauti"
     },
@@ -102,7 +102,7 @@
   "command-bar": {
     "navigations": "Uchunguzi",
     "no-nav-results": "Hakuna matokeo",
-    "placeholder": "Unataka kusoma nini?",
+    "placeholder": "Tafuta Quran...",
     "recent-navigations": "Uchunguzi wa hivi majuzi",
     "search-by-voice": "Tafuta kutumia sauti",
     "try-navigating": "Nenda hadi"
@@ -121,9 +121,11 @@
     }
   },
   "continue": "Endelea",
+  "contribute-to-our-mission": "Changia kwa utume wetu",
   "copied": "Imenakiliwa",
   "copied-to-clipboard": "Imenakiliwa kwenye ubao wa kunakili",
   "copy": "Nakili",
+  "copylink": "Nakili kiungo",
   "counter": {
     "decrease": "Punguza",
     "increase": "Ongeza"
@@ -133,6 +135,7 @@
   "developers": "Watengenezaji",
   "display": "Onyesho",
   "donate": "Changia",
+  "donate-now": "Changia sasa",
   "donate_monthly": "Changia kila mwezi",
   "donate_once": "Changia mara moja",
   "edit": "Hariri",
@@ -156,6 +159,34 @@
     "ranges-too-many-verses": "*Upeo wa Aya {{maxNumberOfVerses}}",
     "ranges-wrong-order": "Mstari wa kuanzia lazima uwe kabla ya mstari wa kumalizia."
   },
+  "errors": {
+    "account-banned": "Samahani, Akaunti yako imepigwa marufuku. Wasiliana na Quran.Foundation",
+    "badRequest": "*Ombi batili",
+    "banned": "*Samahani, Akaunti yako imepigwa marufuku. Wasiliana na Quran.Foundation",
+    "confirm": "*Thibitisha nenosiri hailingani na nenosiri",
+    "email": "*Muundo wa Barua pepe si Sahihi!",
+    "exactLength": "*Thamani lazima iwe urefu kamili",
+    "expiredToken": "*Tokeni hii imekwisha muda wake",
+    "forgot-password-failed": "Imeshindwa kutuma barua pepe ya kuweka upya nenosiri. Tafadhali jaribu tena.",
+    "immutable": "*Thamani hii haiwezi kubadilishwa",
+    "invalid": "*Hii {{fieldName}} si sahihi",
+    "invalidEmailOrPassword": "*Barua pepe au nenosiri batili",
+    "max": "* {{fieldName}} lazima iwe chini ya au sawa na tarakimu {{max}}",
+    "min": "* {{fieldName}} lazima iwe zaidi ya au sawa na tarakimu {{min}}",
+    "name": "* {{fieldName}} inapaswa kuwa herufi na nambari pekee",
+    "notFound": "*Haijapatikana",
+    "required": "* {{fieldName}} haipo!",
+    "reset-password-failed": "Imeshindwa kuweka upya nenosiri. Tafadhali jaribu tena.",
+    "signin-failed": "Kuingia kumeshindwa. Tafadhali jaribu tena.",
+    "signup-failed": "Kujisajili kumeshindwa. Tafadhali jaribu tena.",
+    "taken": "* {{fieldName}} tayari ipo!",
+    "usedToken": "*Toni hii tayari imetumika",
+    "username": "* {{fieldName}} kubali chini na herufi pekee",
+    "verification-code-invalid": "Nambari hii ya uthibitishaji si sahihi",
+    "verification-code-length": "Nambari ya kuthibitisha lazima iwe tarakimu {{length}}",
+    "verification-failed": "Uthibitishaji haukufaulu. Tafadhali jaribu tena.",
+    "verification-resend-failed": "Imeshindwa kutuma tena nambari ya kuthibitisha"
+  },
   "exciting-updates": "Sasisho za Kusisimua",
   "feedback": "Maoni",
   "fonts": {
@@ -178,20 +209,25 @@
     "translation-font-size": "Ukubwa wa fonti ya tarjuma"
   },
   "footer": {
-    "description": "Quran.com ni Sadaqah Jariyah. Tunatumai kurahisisha kwa kila mtu kusoma, kuchunguza na kujifunza Qur'ani Tukufu. Qur'ani Tukufu ina majina mengi yakiwemo Al-Quran Al-Kareem, Al-Ketab, Al-Furqan, Al-Maw'itha, Al-Thikr, na Al-Noor.",
+    "description": "Quran.com ni jukwaa linaloaminika linalotumiwa na mamilioni ya watu duniani kote kusoma, kutafuta, kusikiliza na kutafakari Kurani katika lugha nyingi. Inatoa tafsiri, tafsir, vikariri, tafsiri ya neno kwa neno, na zana za kusoma kwa kina, na kufanya Quran ipatikane na kila mtu. <br/> <br/> Kama Sadaqah Jariyah, Quran.com imejitolea kusaidia watu kuunganishwa kwa kina na Kurani. Ikiungwa mkono na Quran.Foundation, 501(c)(3) shirika lisilo la faida, Quran.com inaendelea kukua kama rasilimali ya bure na yenye thamani kwa wote, Alhamdullilah\"",
     "hiring": "Tunaajiri! Jiunge na timu ya QuranFoundation na uchangie katika dhamira yetu. <link> Tuma ombi sasa! </link>",
     "rights": "Haki Zote Zimehifadhiwa",
-    "title": "Soma, chunguza na ujifunze Qur'ani Tukufu."
+    "title": "Soma, Sikiliza, Tafuta, na Tafakari juu ya Quran"
   },
   "form": {
     "body": "Mwili",
     "code": "Nambari ya Uthibitishaji",
+    "confirm-password": "Thibitisha Nenosiri",
     "email": "Barua pepe",
     "firstName": "Jina la kwanza",
     "lastName": "Jina la mwisho",
-    "title": "Kichwa"
+    "password": "Nenosiri",
+    "title": "Kichwa",
+    "username": "Jina la mtumiaji",
+    "verification-code": "Nambari ya Uthibitishaji"
   },
   "from": "Kutoka",
+  "fundraising-share-title": "Shiriki Uchangishaji wa Quran.com",
   "fundraising-sticky-banner": {
     "cta": "Changia",
     "title": "Toa wakati wa siku bora!"
@@ -200,6 +236,7 @@
     "description": "Michango ya kila mwezi hutusaidia kuboresha Quran.com na kudumisha shughuli ili tusizingatie sana uchangishaji wa pesa na tuzingatie zaidi kuleta athari.",
     "title": "Kuwa Mfadhili wa Kila Mwezi"
   },
+  "get-started": "Anza",
   "hear-it-pronounced": "Bonyeza neno lolote la Qur'ani, lisikie likitamkwa",
   "help": "Msaada",
   "hizb": "Hizb",
@@ -215,6 +252,7 @@
   "learn-more": "Jifunze zaidi",
   "learning-plans": "Mipango ya Kujifunza",
   "less": "Kidogo",
+  "lessons": "Masomo",
   "loading": "Inapakia",
   "login": "Ingia",
   "logout": "Ondoka",
@@ -248,6 +286,7 @@
   "off": "Zima",
   "oldest": "Zee zaidi",
   "on": "Washa",
+  "our-projects": "Miradi Yetu",
   "page": "Ukurasa",
   "pages": "Kurasa",
   "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} kati ya {{totalNumberOfResults}} matokeo ya utafutaji",
@@ -270,6 +309,7 @@
   "privacy": "Faragha",
   "product-updates": "Sasisho za Bidhaa",
   "profile": "Wasifu",
+  "projects-desc": "Miradi isiyo ya faida inayomilikiwa, kusimamiwa, au kufadhiliwa na Quran.Foundation",
   "q-reflect": "Quranreflect",
   "quran-com": "Quran.com",
   "quran-radio": "Redio ya Qur'ani",
@@ -278,12 +318,14 @@
     "reading": "Soma",
     "translation": "Tarjuma"
   },
+  "ready-for-ramadan": "Je, uko tayari kwa Ramadhani?",
   "recitation": "Usomaji",
   "reciter": "Msomaji",
   "reciter-summary": "(Kwa idhini njema ya Kituo cha Tafsir)",
   "reciters": "Wasomaji",
   "reflect": "Tafakari",
   "reflections": "Tafakari",
+  "reflections-and-lessons": "Tafakari na Mafunzo",
   "remove": "Ondoa",
   "rename": "Badilisha jina",
   "retry": "Jaribu tena",
@@ -293,10 +335,12 @@
   "save-to-collection": "Hifadhi kwenye Mkusanyiko",
   "search-for": "Tafuta ' {{searchQuery}} '",
   "search-results": "{{count}} matokeo ya utafutaji",
+  "search-results-no-count": "Matokeo ya Utafutaji",
   "search": {
     "filters": "Vichujio",
     "hint": "Jaribu kutafuta",
     "jump-to": "Nenda mpaka",
+    "more-results": "Matokeo zaidi",
     "no-results": "Hakuna matokeo yaliyopatikana",
     "no-results-suggestion": "Hatukuweza kupata matokeo yoyote ya utafutaji yanayolingana na \" {{searchQuery}} \". jaribu kutumia neno lingine tofauti.",
     "popular": "Chunguzi maarufu",
@@ -337,13 +381,15 @@
     "search-juz": "Tafuta Juz",
     "search-page": "Tafuta Ukurasa",
     "search-surah": "Tafuta Sura",
+    "search-verse": "Tafuta Aya",
     "try-navigating-with": "Jaribu kutafuta ukitumia"
   },
+  "sign-in": "Ingia",
   "sitemap": "Ramani ya tovuti",
   "sort": {
-    "ascending": "Utaratibu wa kupaa",
-    "by": "Panga kupitia",
-    "descending": "Kushuka"
+    "ascending": "Kuenda juu",
+    "by": "Panga",
+    "descending": "Kuenda chini"
   },
   "style": "Mtindo",
   "submit": "Wasilisha",
@@ -393,9 +439,9 @@
   "view": "Tazama",
   "voice": {
     "ask-permission": "Tafadhali wezesha ruhusa ya maikrofoni ili kuanza kutumia Utafutaji kupitia sauti",
-    "error": "Hitilafu imetokea, tafadhali jaribu tena baadaye. Au pakua ",
-    "no-permission": "Inaonekana huna ruhusa za maikrofoni zilizowezeshwa. Tafadhali wezesha ruhusa za maikrofoni na ujaribu tena au pakua ",
-    "not-supported": "Inaonekana kivinjari chako hakitumii maikrofoni. Tafadhali jaribu kivinjari tofauti au pakua ",
+    "error": "Hitilafu imetokea, tafadhali jaribu tena baadaye.",
+    "no-permission": "Inaonekana huna ruhusa za maikrofoni zilizowezeshwa. Tafadhali washa ruhusa za maikrofoni na ujaribu tena.",
+    "not-supported": "Inaonekana kivinjari chako hakitumii maikrofoni. Tafadhali jaribu kivinjari tofauti.",
     "suggest": "Tafadhali anza kusoma na aya yako itaonekana.",
     "suggest-subtitle": "Soma aya yoyote kwa Kiarabu, na aya itaonekana",
     "suggest-title": "Soma sasa",

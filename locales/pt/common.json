@@ -102,7 +102,7 @@
   "command-bar": {
     "navigations": "Navegações",
     "no-nav-results": "Sem resultados de navegação",
-    "placeholder": "O que voce quer ler",
+    "placeholder": "Pesquise no Alcorão...",
     "recent-navigations": "Navegações recentes",
     "search-by-voice": "Pesquisa por voz",
     "try-navigating": "Tente navegar para"
@@ -121,9 +121,11 @@
     }
   },
   "continue": "Prosseguir",
+  "contribute-to-our-mission": "Contribua para a nossa missão",
   "copied": "Copiado",
   "copied-to-clipboard": "Copiado para a área de transferência",
   "copy": "cópia de",
+  "copylink": "Copiar link",
   "counter": {
     "decrease": "Diminuir",
     "increase": "Aumentar"
@@ -133,6 +135,7 @@
   "developers": "Desenvolvedores",
   "display": "Mostrar",
   "donate": "Doar",
+  "donate-now": "Doe agora",
   "donate_monthly": "Doe mensalmente",
   "donate_once": "Doe uma vez",
   "edit": "Editar",
@@ -156,6 +159,34 @@
     "ranges-too-many-verses": "*Máx {{maxNumberOfVerses}} Ayahs",
     "ranges-wrong-order": "O verso inicial deve estar antes do verso final."
   },
+  "errors": {
+    "account-banned": "Desculpe, sua conta foi banida. Contate Quran.Foundation",
+    "badRequest": "*Pedido inválido",
+    "banned": "*Desculpe, sua conta foi banida. Contate Quran.Foundation",
+    "confirm": "*A senha de confirmação não corresponde à senha",
+    "email": "*Formato de e-mail inválido!",
+    "exactLength": "*O valor deve ter o comprimento exato",
+    "expiredToken": "*Este token expirou",
+    "forgot-password-failed": "Falha ao enviar e-mail de redefinição de senha. Tente novamente.",
+    "immutable": "*Este valor não pode ser alterado",
+    "invalid": "*Este {{fieldName}} é inválido",
+    "invalidEmailOrPassword": "*E-mail ou senha inválidos",
+    "max": "* {{fieldName}} deve ser menor ou igual a {{max}} dígitos",
+    "min": "* {{fieldName}} deve ter mais ou igual a {{min}} dígitos",
+    "name": "* {{fieldName}} deve conter apenas letras e números",
+    "notFound": "*Não encontrado",
+    "required": "* {{fieldName}} está faltando!",
+    "reset-password-failed": "Falha ao redefinir a senha. Tente novamente.",
+    "signin-failed": "Falha no login. Tente novamente.",
+    "signup-failed": "Falha na inscrição. Tente novamente.",
+    "taken": "* {{fieldName}} já existe!",
+    "usedToken": "*Este token já foi usado",
+    "username": "* {{fieldName}} aceita somente sublinhados e letras",
+    "verification-code-invalid": "Este código de verificação é inválido",
+    "verification-code-length": "O código de verificação deve ter {{length}} dígitos",
+    "verification-failed": "A verificação falhou. Por favor, tente novamente.",
+    "verification-resend-failed": "Falha ao reenviar o código de verificação"
+  },
   "exciting-updates": "Atualizações emocionantes",
   "feedback": "Comentários",
   "fonts": {
@@ -178,20 +209,25 @@
     "translation-font-size": "Tamanho da fonte da tradução"
   },
   "footer": {
-    "description": "Quran.com é um Sadaqah Jariyah. Esperamos tornar mais fácil para todos ler, estudar e aprender o Nobre Alcorão. O Nobre Alcorão tem muitos nomes, incluindo Al-Quran Al-Kareem, Al-Ketab, Al-Furqan, Al-Maw'itha, Al-Thikr e Al-Noor.",
+    "description": "Quran.com é uma plataforma confiável usada por milhões de pessoas no mundo todo para ler, pesquisar, ouvir e refletir sobre o Alcorão em vários idiomas. Ela fornece traduções, tafsir, recitações, tradução palavra por palavra e ferramentas para estudo mais profundo, tornando o Alcorão acessível a todos. <br/> <br/> Como uma Sadaqah Jariyah, Quran.com se dedica a ajudar as pessoas a se conectarem profundamente com o Alcorão. Apoiado pela Quran.Foundation, uma organização sem fins lucrativos 501(c)(3), Quran.com continua a crescer como um recurso gratuito e valioso para todos, Alhamdullilah”",
     "hiring": "Estamos contratando! Junte-se à equipe da QuranFoundation e contribua para a nossa missão. <link> Inscreva-se agora! </link>",
     "rights": "Todos os direitos reservados",
-    "title": "Leia, estude e aprenda O Nobre Alcorão."
+    "title": "Leia, ouça, pesquise e reflita sobre o Alcorão"
   },
   "form": {
     "body": "Corpo",
     "code": "Código de verificação",
+    "confirm-password": "Confirme sua senha",
     "email": "E-mail",
     "firstName": "Primeiro nome",
     "lastName": "Sobrenome",
-    "title": "Título"
+    "password": "Senha",
+    "title": "Título",
+    "username": "Nome de usuário",
+    "verification-code": "Código de Verificação"
   },
   "from": "A partir de",
+  "fundraising-share-title": "Compartilhe Quran.com Arrecadação de fundos",
   "fundraising-sticky-banner": {
     "cta": "Doar",
     "title": "Dê nos melhores dias!"
@@ -216,6 +252,7 @@
   "learn-more": "Saber mais",
   "learning-plans": "Planos de aprendizagem",
   "less": "Menos",
+  "lessons": "Lições",
   "loading": "Carregando",
   "login": "Conecte-se",
   "logout": "Sair",
@@ -249,6 +286,7 @@
   "off": "Desligado",
   "oldest": "Mais antigo",
   "on": "Sobre",
+  "our-projects": "Nossos Projetos",
   "page": "Página",
   "pages": "Páginas",
   "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} de {{totalNumberOfResults}} resultados da pesquisa",
@@ -271,6 +309,7 @@
   "privacy": "Privacidade",
   "product-updates": "Atualizações de produtos",
   "profile": "Perfil",
+  "projects-desc": "Projetos sem fins lucrativos de propriedade, administrados ou patrocinados pela Quran.Foundation",
   "q-reflect": "QuranReflect",
   "quran-com": "Quran.com",
   "quran-radio": "Rádio Alcorão",
@@ -286,6 +325,7 @@
   "reciters": "Recitadores",
   "reflect": "Refletir",
   "reflections": "Reflexões",
+  "reflections-and-lessons": "Reflexões e Lições",
   "remove": "Retirar",
   "rename": "Renomear",
   "retry": "Tentar novamente",
@@ -295,10 +335,12 @@
   "save-to-collection": "Salvar na coleção",
   "search-for": "Procure por '{{searchQuery}}'",
   "search-results": "{{count}} resultados de pesquisa",
+  "search-results-no-count": "Resultados da pesquisa",
   "search": {
     "filters": "Filtros",
     "hint": "Tente pesquisar por",
     "jump-to": "Pule para",
+    "more-results": "Mais resultados",
     "no-results": "Nenhum resultado encontrado",
     "no-results-suggestion": "Não foi possível encontrar resultados de pesquisa correspondentes para \" {{searchQuery}} \". tente pesquisar por uma palavra-chave diferente.",
     "popular": "Pesquisas populares",
@@ -339,8 +381,10 @@
     "search-juz": "Pesquisar Juz",
     "search-page": "Página de Pesquisa",
     "search-surah": "Surata de pesquisa",
+    "search-verse": "Pesquisar Verso",
     "try-navigating-with": "Dica: tente navegar com"
   },
+  "sign-in": "Entrar",
   "sitemap": "Mapa do site",
   "sort": {
     "ascending": "Ascendente",
@@ -395,9 +439,9 @@
   "view": "Visualizar",
   "voice": {
     "ask-permission": "Ative a permissão do microfone para começar a usar a Pesquisa por voz",
-    "error": "Ocorreu um erro, tente novamente mais tarde. Ou baixe o",
-    "no-permission": "Parece que você não tem as permissões de microfone ativadas. Ative as permissões do microfone e tente novamente ou baixe o",
-    "not-supported": "Parece que seu navegador não oferece suporte a microfone. Tente um navegador diferente ou baixe o",
+    "error": "Ocorreu um erro. Tente novamente mais tarde.",
+    "no-permission": "Parece que você não tem as permissões de microfone habilitadas. Habilite as permissões de microfone e tente novamente.",
+    "not-supported": "Parece que seu navegador não suporta microfone. Tente um navegador diferente.",
     "suggest": "Por favor, comece a recitar e seu verso aparecerá.",
     "suggest-subtitle": "Recite qualquer versículo em árabe e o verso aparecerá",
     "suggest-title": "Recite agora",
