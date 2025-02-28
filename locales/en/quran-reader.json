@@ -88,16 +88,5 @@
   "trans-change": "Change",
   "translation-by": "Translation by",
   "verses-range": "Range of verses",
-  "view-on-quran-reflect": "View on QuranReflect",
-  "q-and-a": {
-    "clarification": "Clarification",
-    "community": "Community",
-    "tafsir": "Tafsir",
-    "explore_answers": "Explore Answers",
-    "explore_answers_tooltip": "'Explore Answers' is a curated list of thoughtful questions and essential notes relating to specific verses that will enhance your understanding and connection with the Quran.",
-    "answer": "Answer",
-    "summary": "Summary",
-    "references": "References",
-    "questions": "Questions"
-  }
+  "view-on-quran-reflect": "View on QuranReflect"
 }
