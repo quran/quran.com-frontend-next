@@ -1,14 +1,42 @@
 {
   "credits": {
-    "desc": "Projek ini tidak mungkin terjadi tanpa adanya banyak sumber perpustakaan terbuka dan rujukan projek yang lain yang telah kami gunakan:",
-    "lokalize": "<0> Lokalize </0> : Sistem terjemahan berbantuan komputer yang berfokus pada produktivitas dan jaminan kualitas serta menyediakan alur kerja pelokalan yang mulus.",
-    "quran-align": "<0> Collin Fair </0> : Alat untuk menghasilkan segmentasi kata yang tepat dari rekaman bacaan Al-Qur'an.",
-    "quran-complex": "<0> QuranComplex </0> : Kompleks Percetakan Al-Qur'an King Fahd adalah panutan dalam menyajikan Al-Qur'an dan Ilmu-ilmunya, menerjemahkan maknanya, dan menjaga Teks Al-Qur'an dari distorsi, melalui penggunaan teknologi canggih di bidang percetakan, rakaman audio, penerbitan elektronik dan aplikasi digital secara optimal.",
-    "quran-enc": "<0> QuranEnc </0> : Sebuah portal yang menampilkan terjemahan gratis dan terpercaya dari makna dan tafsir Al-Qur'an yang mulia dalam banyak bahasa dunia.",
-    "tanzil": "<0> Tanzil </0> : Sebuah proyek Al-Qur'an internasional yang bertujuan untuk menyediakan teks Al-Qur'an yang akurat dengan verifikasi yang sangat ketat.",
-    "title": "Penghargaan",
-    "vercel": "<0> Vercel </0> : ialah platform penggunaan dan kerjasama untuk para Front-End Developer yang mengutamakan pembangunan Front-End Development , memberi mereka alat yang komprehensif untuk membina website dan aplikasi yang andal.",
-    "zekr": "<0> Zekr </0> : Platform belajar Qur'an yang terbuka untuk menelusuri dan mengulangkaji al-Qur'an"
+    "desc": "Kami menyampaikan rasa terima kasih kepada semua pihak yang telah mendukung dan berkontribusi pada proyek ini, membantu menjadikan Al-Quran dapat diakses oleh jutaan orang di seluruh dunia.",
+    "lokalize": "<0>Lokalize</0>: Sistem penerjemahan berbantuan komputer yang berfokus pada produktivitas dan jaminan kualitas serta menyediakan alur kerja pelokalan yang lancar.",
+    "quran-align": "<0>Collin Fair</0>: Alat untuk menghasilkan segmentasi kata yang tepat dari rekaman bacaan Al-Qur'an.",
+    "quran-complex": "<0>QuranComplex</0>: Kompleks Percetakan Al-Qur'an Agung Raja Fahd merupakan pelopor dalam penyajian Al-Qur'an Agung dan Ilmu Pengetahuannya, penerjemahan Maknanya, dan penjagaan Teks Al-Qur'an dari distorsi, melalui pemanfaatan teknologi canggih secara optimal di bidang percetakan, rekaman audio, penerbitan elektronik, dan aplikasi digital.",
+    "quran-enc": "<0>QuranEnc</0>: Sebuah portal yang menyajikan terjemahan makna dan tafsir Al-Quran yang mulia dalam berbagai bahasa dunia secara gratis dan terpercaya.",
+    "tanzil": "<0>Tanzil</0>: Sebuah proyek Al-Quran internasional yang bertujuan untuk menyediakan teks Al-Quran yang akurat dan terverifikasi.",
+    "tarteel": "<0>Tarteel</0>: Aplikasi menghafal Al-Quran yang didukung AI. Aplikasi ini dirancang untuk membantu Anda menghafal dengan lebih cerdas, baik saat mencari ayat, melacak kemajuan, atau mengikuti bacaan Anda.",
+    "title": "Kredit",
+    "vercel": "<0>Vercel</0>: adalah platform kolaborasi dan penerapan bagi pengembang frontend yang mengutamakan pengembang frontend, memberi mereka alat komprehensif untuk membangun situs web dan aplikasi berkinerja tinggi.",
+    "zekr": "<0>Zekr</0>: Alat studi Al-Quran platform terbuka untuk menelusuri dan meneliti Al-Quran"
   },
-  "main-description": "Quran.com didirikan pada tahun 1995. Situs web ini bertujuan untuk memudahkan siapa saja dalam membaca, mempelajari, dan mendalami Al-Quran."
+  "global-effort": {
+    "desc": "Jutaan orang dari seluruh dunia mengandalkan Quran.com sebagai sumber utama Al-Quran digital mereka. Baik mereka datang untuk membaca, merenung, menghafal, atau belajar, mereka memiliki tujuan yang sama: keinginan tulus untuk terhubung dengan firman Allah. \\n Seiring dengan pertumbuhan kami, kami tetap berkomitmen untuk memastikan bahwa Quran.com tetap menjadi tempat yang tepercaya, mudah diakses, dan dirancang dengan indah bagi siapa pun yang ingin terlibat dengan Al-Quran.",
+    "title": "Upaya Global"
+  },
+  "key-features": {
+    "desc": "Quran.com dirancang untuk mendukung setiap tahap keterlibatan dengan Al-Quran—mulai dari membaca dan menghafal hingga belajar dan merenung. Fitur-fitur kami meliputi:",
+    "features": [
+      "Antarmuka Al-Quran yang Mudah Digunakan– Pengalaman membaca yang bersih dan intuitif di perangkat apa pun.",
+      "Berbagai Terjemahan & Tafsir – Akses ke terjemahan dalam berbagai bahasa, beserta tafsir.",
+      "Bacaan Audio – Dengarkan bacaan berkualitas tinggi dari Qaris ternama dunia, dengan kemampuan mengikuti kata demi kata.",
+      "Pencarian & Navigasi Lanjutan – Temukan ayat-ayat secara instan berdasarkan topik atau kata kunci di seluruh Al-Quran.",
+      "Penanda dan Catatan Ayat – Menyimpan ayat dan menulis renungan pribadi untuk referensi nanti.",
+      "Integrasi QuranReflect – Berinteraksi dengan komunitas global melalui refleksi dan wawasan yang dibagikan oleh para cendekiawan dan individu.",
+      "Pelacakan Kemajuan Membaca dan Tujuan – Lacak tujuan harian dan riwayat membaca Anda",
+      "API untuk Pengembang – Akses gratis ke konten dan fitur untuk mendukung aplikasi Islam dan R&D.",
+      "Dan masih banyak lagi, Alhamdulillah."
+    ],
+    "title": "Fitur & Penawaran Utama"
+  },
+  "main-description": "Sejak didirikan pada tahun 1995, Quran.com telah berkomitmen untuk menyediakan Al-Quran bagi semua orang dengan cara yang jelas, autentik, dan mudah dipahami. Setiap hari, jutaan orang di seluruh dunia beralih ke Quran.com untuk membaca, mendengarkan, mempelajari, dan merenungkan Al-Quran—baik mereka yang sudah lama belajar, sarjana, atau baru memulai perjalanan mereka.",
+  "our-mission": {
+    "desc": "Al-Quran dimaksudkan untuk dibaca, dipahami, dan direnungkan. Misi kami adalah menghilangkan hambatan untuk mengakses dan memberdayakan individu dan masyarakat dengan menyediakan pengalaman Al-Quran yang andal, dirancang dengan baik, dan sangat memperkaya. Kami bertujuan untuk menjadi sumber tepercaya bagi siapa pun yang ingin terlibat dengan Al-Quran, dipandu oleh prinsip-prinsip akurasi, kejelasan, dan ketulusan.",
+    "title": "Misi Kami"
+  },
+  "who-we-are": {
+    "desc": "Quran.com adalah wakaf (dana abadi), yang didirikan sebagai amanah publik untuk memastikan bahwa Al-Quran tetap dapat diakses oleh semua orang, tanpa biaya dan tanpa kepentingan komersial. Situs ini dikelola oleh Quran.Foundation, sebuah organisasi nirlaba 501(c)(3), yang mendukung dan mengembangkan Quran.com sebagai bagian dari misinya untuk menyediakan sumber daya Al-Quran yang berkualitas tinggi dan autentik bagi dunia. Komitmen kami adalah untuk melayani Al-Quran dan para pembacanya dengan keunggulan, ketulusan, dan tanggung jawab.",
+    "title": "Siapakah Kami"
+  }
 }
