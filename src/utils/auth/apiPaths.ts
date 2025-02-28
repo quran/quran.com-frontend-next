@@ -11,14 +11,14 @@ import { StreakWithMetadataParams } from '@/types/auth/Streak';
 import Language from '@/types/Language';
 import { MediaType } from '@/types/Media/GenerateMediaFileRequest';
 import { Mushaf } from '@/types/QuranReader';
-import { getAuthApiPath } from '@/utils/url';
+import { getProxiedServiceUrl } from '@/utils/url';
 import BookmarkType from 'types/BookmarkType';
 
 export const makeUrl = (url: string, parameters?: Record<string, unknown>): string => {
   if (!parameters) {
-    return getAuthApiPath(url);
+    return getProxiedServiceUrl('auth/', url);
   }
-  return getAuthApiPath(`${url}${`?${stringify(parameters)}`}`);
+  return getProxiedServiceUrl('auth/', `${url}${`?${stringify(parameters)}`}`);
 };
 
 export const makeUserProfileUrl = (): string => makeUrl('users/profile');
@@ -37,6 +37,10 @@ export const makeSyncLocalDataUrl = (): string => makeUrl('users/syncLocalData')
 
 export const makeVerificationCodeUrl = (): string => makeUrl('users/verificationCode');
 
+export const makeForgotPasswordUrl = (): string => makeUrl('users/forgetPassword');
+
+export const makeResetPasswordUrl = (): string => makeUrl('users/resetPassword');
+
 export const makeSendMagicLinkUrl = (redirect?: string): string =>
   makeUrl('auth/magiclogin', redirect ? { redirect } : undefined);
 
@@ -48,6 +52,10 @@ export const makeFacebookLoginUrl = (redirect?: string): string =>
 
 export const makeAppleLoginUrl = (redirect?: string): string =>
   makeUrl('auth/apple', redirect ? { redirect } : undefined);
+
+export const makeSignInUrl = (): string => makeUrl('users/login');
+
+export const makeSignUpUrl = (): string => makeUrl('users/signup');
 
 export const makeBookmarksUrl = (mushafId: number, limit?: number): string =>
   makeUrl('bookmarks', { mushafId, limit });
@@ -244,3 +252,18 @@ export const makeGetMediaFileProgressUrl = (renderId: string) =>
 
 export const makeGetMonthlyMediaFilesCountUrl = (type: MediaType) =>
   makeUrl(`media/monthly-count`, { type });
+
+/**
+ * Compose the url for shorten-url API.
+ *
+ * @returns {string}
+ */
+export const makeShortenUrlUrl = (): string => makeUrl('/shorten-url');
+
+/**
+ * Compose the url for get full URL by id.
+ *
+ * @param {string} id
+ * @returns {string}
+ */
+export const makeFullUrlById = (id: string): string => makeUrl(`/shorten-url/${id}`);

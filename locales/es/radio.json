@@ -1,0 +1,27 @@
+{
+  "change": "Cambiar",
+  "curated-station": {
+    "juz-amma": {
+      "description": "Escuche el Juz final del Corán",
+      "title": "Juz Amma"
+    },
+    "popular-recitations": {
+      "description": "Fuente de recitaciones seleccionada diariamente",
+      "title": "Recitaciones populares"
+    },
+    "surah-al-kahf": {
+      "description": "Escuche Surah Alkahf repetidamente",
+      "title": "Sura Al-Kahf"
+    },
+    "yaseen-alwaqiah-al-mulk": {
+      "description": "Las suras de una selección de recitadores",
+      "title": "Yaseen, Al-Waqiah, Al-Mulk"
+    }
+  },
+  "curated-stations": "Estaciones seleccionadas",
+  "pause-radio": "Pausar la radio",
+  "play-radio": "Reproducir radio",
+  "radio-desc": "Escucha la hermosa recitación ininterrumpida del Sagrado Corán por varios recitadores.",
+  "reciter-stations": "Estaciones de recitación",
+  "station": "Estación"
+}

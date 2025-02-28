@@ -1,0 +1,107 @@
+@use "src/styles/breakpoints";
+
+.streakCard {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.streak {
+    padding-inline-end: var(--spacing-small-px);
+    font-size: var(--font-size-jumbo);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text-black);
+    @include breakpoints.tablet {
+        font-size: var(--font-size-xjumbo-px);
+    }
+}
+
+.streakCardLeft {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-micro);
+    & > svg:first-child {
+        padding-inline-start: var(--spacing-small-px);
+        padding-inline-end: var(--spacing-small-px);
+
+        width: var(--spacing-medium2-px);
+        height: var(--spacing-medium2-px);
+        @include breakpoints.tablet {
+            width: var(--spacing-large-px);
+            height: var(--spacing-large-px);
+            padding-inline-start: var(--spacing-medium-px);
+            padding-inline-end: var(--spacing-medium2-px);
+            width: 60px;
+            height: 60px;
+        }
+    }
+}
+
+.customGoalButton {
+    background-color: var(--color-streaks-dark);
+    color: var(--color-text-white);
+    font-weight: var(--font-weight-bold);
+    svg {
+        path {
+            fill: var(--color-text-white);
+        }
+    }
+    &:hover {
+        background-color: var(--color-streaks-dark);
+    }
+    @include breakpoints.tablet {
+        font-size: var(--font-size-normal-px);
+    }
+}
+
+.circularProgressbar {
+    height: 60px;
+    width: 60px;
+}
+
+.circularProgressbarContainer {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: var(--spacing-micro);
+}
+
+.streakDay {
+    font-size: var(--font-size-normal);
+    color: var(--color-text-gray);
+    font-weight: var(--font-weight-semibold);
+    @include breakpoints.tablet {
+        font-size: var(--font-size-large-px);
+    }
+}
+
+.circularProgressbarPath {
+    stroke: var(--color-streaks-dark);
+    stroke-linecap: round;
+    transition: stroke-dashoffset 0.5s ease 0s;
+}
+
+.circularProgressbarTrail {
+    stroke: var(--color-daily-progress);
+    /* Used when trail is not full diameter, i.e. when props.circleRatio is set */
+    stroke-linecap: round;
+}
+
+.circularProgressbarText {
+    fill: var(--color-text-black);
+    font-size: 20px;
+    dominant-baseline: middle;
+    text-anchor: middle;
+    font-weight: var(--font-weight-bold);
+}
+
+.goalArrowIcon {
+    svg {
+        @include breakpoints.smallerThanTablet {
+            width: 12px !important;
+            height: 12px !important;
+        }
+    }
+}

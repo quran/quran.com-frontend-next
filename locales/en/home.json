@@ -1,7 +1,19 @@
 {
+  "achieve-quran-goals": "Achieve Your Quran Goals",
+  "begin": "Begin",
+  "chapters-and-verses": "Chapters and Verses",
+  "continue-read": "Continue Reading",
+  "explore-topics": "Explore Topics",
+  "first-time-reading": "New to the Quran? <link>Start here</link>",
+  "know-someone": "Grow with us this <modalLink>Ramadan</modalLink>",
+  "learning-plan": "Learning Plans",
+  "listen-to-radio": "Listen to Quran Radio",
+  "my-quran": "My Quran",
+  "navigate-quran": "Navigate Quran",
   "no-bookmarks": "You do not have any bookmarks yet",
   "no-recently-read": "You do not have any reading sessions yet",
   "noble-quran": "The Noble Quran",
+  "popular": "Popular",
   "qgj": {
     "learning-plans": {
       "cta": {
@@ -23,10 +35,23 @@
     },
     "title": "Quran Growth Journey"
   },
-  "ramadan-activities-cta": "<link>Follow the <b>Global Quranic Calendar<\/b> for weekly readings, inspiring podcasts, and a call to reflect!<\/link>",
+  "qr-community": "Read today’s featured Verses and Reflections",
+  "ramadan-activities-cta": "<link>Follow the <b>Global Quranic Calendar</b> for weekly readings, inspiring podcasts, and a call to reflect!</link>",
+  "ramadan": {
+    "header": "Tools to Deepen Your Connection with the Quran",
+    "title": "Ready for Ramadan?"
+  },
   "read-juz": "Read Juz",
   "recently-read": "Recently Read",
-  "revelation-order-disclaimer": "This view shows the chronological order of Surahs in the Quran based on when they were revealed to the Prophet Muhammad <hover>ﷺ<\/hover>. The chronology is a subject of scholarly opinion and some Surahs were revealed in parts at different times. The ordering here is based on the work of <link>Tanzil.net<\/link>. [Note: the compiled Mushaf order from al-Fatiha to al-Nas is a matter of consensus.]",
+  "revelation-order-disclaimer": "This view shows the chronological order of Surahs in the Quran based on when they were revealed to the Prophet Muhammad <hover>ﷺ</hover>. The chronology is a subject of scholarly opinion and some Surahs were revealed in parts at different times. The ordering here is based on the work of <link>Tanzil.net</link>. [Note: the compiled Mushaf order from al-Fatiha to al-Nas is a matter of consensus.]",
+  "see-more-learning-plans": "See More",
+  "set-custom-goal": "Set a Goal",
+  "share-quran": {
+    "description": "Help spread the Quran to new learners",
+    "title": "Share the Quran!"
+  },
+  "start-read": "Start Reading",
+  "stay-consistent": "Track Streaks, Create Custom Goals, Stay Consistent",
   "tab": {
     "bookmarks": "Bookmarks",
     "popular": "Popular"

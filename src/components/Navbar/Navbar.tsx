@@ -9,9 +9,10 @@ import NavbarBody from './NavbarBody';
 
 import Banner from '@/components/Banner/Banner';
 import { useOnboarding } from '@/components/Onboarding/OnboardingProvider';
-import Button, { ButtonSize, ButtonType } from '@/dls/Button/Button';
+import Button, { ButtonSize, ButtonType, ButtonShape } from '@/dls/Button/Button';
+import DiamondIcon from '@/icons/diamond.svg';
 import { selectNavbar } from '@/redux/slices/navbar';
-import { getRamadanNavigationUrl } from '@/utils/navigation';
+import { makeDonatePageUrl } from '@/utils/apiPaths';
 
 const Navbar = () => {
   const { isActive } = useOnboarding();
@@ -25,14 +26,18 @@ const Navbar = () => {
       <nav className={classNames(styles.container, { [styles.hiddenNav]: !showNavbar })}>
         <Banner
           shouldShowPrefixIcon={false}
-          text={`✨ ${t('ready-for-ramadan')}`}
+          text={t('contribute-to-our-mission')}
           ctaButton={
             <Button
-              href={getRamadanNavigationUrl()}
+              href={makeDonatePageUrl(false, true)}
+              isNewTab
               size={ButtonSize.Small}
-              type={ButtonType.Success}
+              type={ButtonType.Primary}
+              shape={ButtonShape.Pill}
+              className={styles.donateButton}
+              prefix={<DiamondIcon />}
             >
-              {`${t('get-started')}!`}
+              {t('donate-now')}
             </Button>
           }
         />

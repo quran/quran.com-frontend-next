@@ -1,7 +1,19 @@
 {
+  "achieve-quran-goals": "Raggiungi i tuoi obiettivi del Corano",
+  "begin": "Inizio",
+  "chapters-and-verses": "Capitoli e versetti",
+  "continue-read": "Continua a leggere",
+  "explore-topics": "Esplora gli argomenti",
+  "first-time-reading": "Nuovo al Corano? <link> Inizia qui </link>",
+  "know-someone": "Cresci con noi questo <modalLink> Ramadan </modalLink>",
+  "learning-plan": "Piani di apprendimento",
+  "listen-to-radio": "Ascolta la radio del Corano",
+  "my-quran": "Il mio Corano",
+  "navigate-quran": "Navigare nel Corano",
   "no-bookmarks": "Non hai ancora nessun segnalibro",
   "no-recently-read": "Non hai ancora sessioni di lettura",
   "noble-quran": "Il Nobile Corano",
+  "popular": "Popolare",
   "qgj": {
     "learning-plans": {
       "cta": {
@@ -23,10 +35,23 @@
     },
     "title": "Viaggio di crescita del Corano"
   },
-  "ramadan-activities-cta": "<link> Segui il <b> Calendario coranico globale <\/b> per letture settimanali, podcast stimolanti e un invito a riflettere! <\/link>",
+  "qr-community": "Leggi i versetti e le riflessioni in evidenza oggi",
+  "ramadan-activities-cta": "<link> Segui il <b> Calendario coranico globale </b> per letture settimanali, podcast stimolanti e un invito a riflettere! </link>",
+  "ramadan": {
+    "header": "Strumenti per approfondire la tua connessione con il Corano",
+    "title": "Pronti per il Ramadan?"
+  },
   "read-juz": "Leggi Juz",
   "recently-read": "Letto di recente",
-  "revelation-order-disclaimer": "Questa visione mostra l'ordine cronologico delle sure nel Corano in base a quando furono rivelate al profeta Maometto <hover> ﷺ <\/hover> . La cronologia è oggetto di opinione accademica e alcune sure sono state rivelate in parti in tempi diversi. L'ordinamento qui si basa sul lavoro di <link> Tanzil.net <\/link> . [Nota: l'ordine Mushaf compilato da al-Fatiha ad al-Nas è una questione di consenso.]",
+  "revelation-order-disclaimer": "Questa visione mostra l'ordine cronologico delle sure nel Corano in base a quando furono rivelate al profeta Maometto <hover> ﷺ </hover> . La cronologia è oggetto di opinione accademica e alcune sure sono state rivelate in parti in tempi diversi. L'ordinamento qui si basa sul lavoro di <link> Tanzil.net </link> . [Nota: l'ordine Mushaf compilato da al-Fatiha ad al-Nas è una questione di consenso.]",
+  "see-more-learning-plans": "Vedi altro",
+  "set-custom-goal": "Stabilisci un obiettivo",
+  "share-quran": {
+    "description": "Aiuta a diffondere il Corano ai nuovi studenti",
+    "title": "Condividi il Corano!"
+  },
+  "start-read": "Inizia a leggere",
+  "stay-consistent": "Tieni traccia delle serie, crea obiettivi personalizzati, mantieni la coerenza",
   "tab": {
     "bookmarks": "segnalibri",
     "popular": "Popolare"

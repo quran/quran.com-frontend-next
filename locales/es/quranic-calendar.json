@@ -1,0 +1,35 @@
+{
+  "hero": {
+    "line-1": "El Calendario Coránico Global es un programa de lectura diseñado para fomentar la lectura reflexiva de todo el Corán desde el final de un Ramadán hasta el comienzo del siguiente. Te animamos a que te tomes un tiempo para comprender y reflexionar sobre los versículos para que puedas lograr una conexión más profunda y sincera."
+  },
+  "interact-with-post": "Interactúa con esta publicación en QuranReflect.",
+  "islamic-months": {
+    "1": "Muharram.",
+    "2": "Safar.",
+    "3": "Rabi' al-Awwal.",
+    "4": "Rabi' ath-Thani.",
+    "5": "Jumada al-Awwal.",
+    "6": "Jumada ath-Thani.",
+    "7": "Rájab.",
+    "8": "Shabán.",
+    "9": "Ramadán.",
+    "10": "Shawwal.",
+    "11": "Dhu al-Qaidah.",
+    "12": "Dhu al-Hijjah."
+  },
+  "join-qc": {
+    "line-1": "Estamos en la <highlight> semana {{weekNumber}} </highlight> del calendario Coránico.",
+    "line-2": "<normal> ¡Únete a nosotros para la lectura de esta semana incluso si es su primera vez! </normal>"
+  },
+  "join-quranic-calendar": "Suscríbete para recibir actualizaciones y recursos a través de QuranReflect.",
+  "join-quranic-calendar-success": "¡Te has unido al Club del Libro Divino con éxito!",
+  "quranic-calendar": "El Calendario Coránico Global.",
+  "reading-options": {
+    "default-settings": "Leer con mi configuración predeterminada.",
+    "en-and-ar": "Leer en español y árabe.",
+    "en-only": "Leer solo en español."
+  },
+  "supplemental-resources": "Recursos de apoyo.",
+  "today": "La fecha de hoy es: <highlight>{{day}} de {{month}} de  {{year}} , {{gregorianDate}}. </highlight>",
+  "week-title": "Semana {{weekNumber}} ( {{month}} ) que abarca los versículos {{rangeStart}} al {{rangeEnd}}."
+}

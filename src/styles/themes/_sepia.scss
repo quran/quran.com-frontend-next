@@ -26,12 +26,18 @@
   --color-warning-medium: #9d5c01;
   --color-warning-deep: #ab570a;
 
+  --color-text-default-new: #272727;
   --color-text-default: #010101;
   --color-text-faded: #666;
+  --color-text-faded-new: #666666;
   --color-text-inverse: #fff;
   --color-text-link: #2ca4ab;
+  --color-text-link-new: #72603f;
   --color-text-warning: #ab570a;
   --color-text-error: #c50000;
+  --color-text-black: #000000;
+  --color-text-white: #ffffff;
+  --color-text-gray: #495057;
 
   --color-background-default: #f8ebd5;
   --color-background-elevated: #fff7ea;
@@ -52,11 +58,13 @@
 
   --shadow-small: 0px 2px 4px rgba(0, 0, 0, 0.1);
   --shadow-normal: 0px 4px 8px rgba(0, 0, 0, 0.12);
+  --shadow-medium: 0px 4px 10px 0px rgba(0, 0, 0, 0.1);
   --shadow-large: 0 5px 10px rgba(0, 0, 0, 0.12);
   --shadow-xlarge: 0 8px 30px rgba(0, 0, 0, 0.12);
   --shadow-jumbo: 0 30px 60px rgba(0, 0, 0, 0.12);
   --shadow-hover: 0 30px 60px rgba(0, 0, 0, 0.12);
   --shadow-sticky: 0 12px 10px -10px rgba(0, 0, 0, 0.12);
+  --shadow-strong: 0px 4px 4px 0px rgba(0, 0, 0, 0.5);
   font-palette: --Sepia;
 
   // scrollbar styles
@@ -64,4 +72,24 @@
   --scrollbar-thumb: #f0cd8c;
   --scrollbar-thumb-hover: #d4b478;
   --scrollbar-thumb-active: #8d774e;
+
+  --color-grey-icons: #d8c6a5;
+  --color-daily-progress: #ced4da;
+  --color-separators: #f8ebd5;
+  --color-blue-buttons-and-icons: #72603f;
+  --color-faint-blue-icons: #f2e0bf;
+  --color-black-buttons: #000000;
+  --color-topics-grey: #efe2cd;
+  --color-topics-gold: #fae7a9;
+  --color-gqc: #cb955b;
+  --color-qdc-blue: #22a5ad;
+  --color-qdc-faded-blue: #ebf9fa;
+  --color-qdc-faint-blue: #c2edef;
+  --color-qdc-deep-blue: #258c91;
+  --color-streaks-dark: #415d49;
+  --color-streaks-light: #efe2cd;
+  --color-calligraphy: #ccb996;
+  --color-scholars-say-background: #f1d5b7;
+  --color-scholars-say-text: #7c4221;
+  --color-search-background: #d8c6a5;
 }

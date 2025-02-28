@@ -6,13 +6,13 @@
     "auth-onboarding": {
       "data-sync": {
         "action": "Next",
-        "description": "Whether you’re using Quran.com on your phone or your laptop, your bookmarks, last read verses, and your preferences will be available",
+        "description": "Whether you're using Quran.com on your phone or your laptop, your bookmarks, last read verses, and your preferences will be available",
         "title": "Your data will be synced <br></br> across devices"
       },
       "feedback": {
         "action": "Okay, got it",
         "description": "Thank you for using Quran.com and we would be glad to hear your feedback on <link>feedback.quran.com</link>",
-        "title": "We wanna hear your thoughts"
+        "title": "We want to hear your thoughts"
       },
       "quran-foundation-link": {
         "action": "Next",
@@ -102,8 +102,7 @@
   "command-bar": {
     "navigations": "Navigations",
     "no-nav-results": "No navigation results",
-    "placeholder": "What do you want to read?",
-    "powered-by": "Voice search powered by Tarteel.ai",
+    "placeholder": "Search the Quran...",
     "recent-navigations": "Recent navigations",
     "search-by-voice": "Search by voice",
     "try-navigating": "Try navigating to"
@@ -122,9 +121,11 @@
     }
   },
   "continue": "Continue",
+  "contribute-to-our-mission": "Contribute to our mission",
   "copied": "Copied",
   "copied-to-clipboard": "Copied to clipboard",
   "copy": "Copy",
+  "copylink": "Copy link",
   "counter": {
     "decrease": "Decrease",
     "increase": "Increase"
@@ -134,6 +135,7 @@
   "developers": "Developers",
   "display": "Display",
   "donate": "Donate",
+  "donate-now": "Donate now",
   "donate_monthly": "Donate monthly",
   "donate_once": "Donate once",
   "edit": "Edit",
@@ -157,6 +159,34 @@
     "ranges-too-many-verses": "*Max {{maxNumberOfVerses}} Ayahs",
     "ranges-wrong-order": "The starting verse has to be before the ending verse."
   },
+  "errors": {
+    "account-banned": "Sorry, Your account is banned. Contact Quran.Foundation",
+    "badRequest": "*Invalid request",
+    "banned": "*Sorry, Your account is banned. Contact Quran.Foundation",
+    "confirm": "*Confirm password doesn't match the password",
+    "email": "*Invalid Email Format!",
+    "exactLength": "*Value must be exact length",
+    "expiredToken": "*This token is expired",
+    "forgot-password-failed": "Failed to send password reset email. Please try again.",
+    "immutable": "*This value cannot be changed",
+    "invalid": "*This {{fieldName}} is invalid",
+    "invalidEmailOrPassword": "*Invalid email or password",
+    "max": "*{{fieldName}} must be less than or equal to {{max}} digits",
+    "min": "*{{fieldName}} must be more than or equal to {{min}} digits",
+    "name": "*{{fieldName}} should be letters and numbers only",
+    "notFound": "*Not found",
+    "required": "*{{fieldName}} is missing!",
+    "reset-password-failed": "Failed to reset password. Please try again.",
+    "signin-failed": "Signin failed. Please try again.",
+    "signup-failed": "Signup failed. Please try again.",
+    "taken": "*{{fieldName}} already exists!",
+    "usedToken": "*This token already used",
+    "username": "*{{fieldName}} accept underscore and letters only",
+    "verification-code-invalid": "This verification code is invalid",
+    "verification-code-length": "Verification code must be {{length}} digits",
+    "verification-failed": "Verification failed. Please try again.",
+    "verification-resend-failed": "Failed to resend verification code"
+  },
   "exciting-updates": "Exciting Updates",
   "feedback": "Feedback",
   "fonts": {
@@ -179,20 +209,25 @@
     "translation-font-size": "Translation font size"
   },
   "footer": {
-    "description": "Quran.com is a Sadaqah Jariyah. We hope to make it easy for everyone to read, study, and learn The Noble Quran. The Noble Quran has many names including Al-Quran Al-Kareem, Al-Ketab, Al-Furqan, Al-Maw'itha, Al-Thikr, and Al-Noor.",
+    "description": "Quran.com is a trusted platform used by millions worldwide to read, search, listen to, and reflect on the Quran in multiple languages. It provides translations, tafsir, recitations, word-by-word translation, and tools for deeper study, making the Quran accessible to everyone. <br/> <br/> As a Sadaqah Jariyah, Quran.com is dedicated to helping people connect deeply with the Quran. Supported by Quran.Foundation, a 501(c)(3) non-profit organization, Quran.com continues to grow as a free and valuable resource for all, Alhamdullilah”",
     "hiring": "We're hiring! Join the QuranFoundation team and contribute to our mission. <link>Apply now!</link>",
     "rights": "All Rights Reserved",
-    "title": "Read, study, and learn The Noble Quran."
+    "title": "Read, Listen, Search, and Reflect on the Quran"
   },
   "form": {
     "body": "Body",
     "code": "Verification Code",
+    "confirm-password": "Confirm Password",
     "email": "Email",
     "firstName": "First Name",
     "lastName": "Last Name",
-    "title": "Title"
+    "password": "Password",
+    "title": "Title",
+    "username": "Username",
+    "verification-code": "Verification Code"
   },
   "from": "From",
+  "fundraising-share-title": "Share Quran.com Fundraising",
   "fundraising-sticky-banner": {
     "cta": "Donate",
     "title": "Give during the best days!"
@@ -217,6 +252,7 @@
   "learn-more": "Learn more",
   "learning-plans": "Learning Plans",
   "less": "Less",
+  "lessons": "Lessons",
   "loading": "Loading",
   "login": "Login",
   "logout": "Logout",
@@ -250,6 +286,7 @@
   "off": "Off",
   "oldest": "Oldest",
   "on": "On",
+  "our-projects": "Our Projects",
   "page": "Page",
   "pages": "Pages",
   "pagination-summary": "{{currentResultNumber}}-{{endOfResultNumber}} of {{totalNumberOfResults}} search results",
@@ -272,6 +309,7 @@
   "privacy": "Privacy",
   "product-updates": "Product Updates",
   "profile": "Profile",
+  "projects-desc": "Non-profit projects owned, managed, or sponsored by Quran.Foundation",
   "q-reflect": "QuranReflect",
   "quran-com": "Quran.com",
   "quran-radio": "Quran Radio",
@@ -287,6 +325,7 @@
   "reciters": "Reciters",
   "reflect": "Reflect",
   "reflections": "Reflections",
+  "reflections-and-lessons": "Reflections & Lessons",
   "remove": "Remove",
   "rename": "Rename",
   "retry": "Retry",
@@ -296,10 +335,12 @@
   "save-to-collection": "Save to Collection",
   "search-for": "Search for '{{searchQuery}}'",
   "search-results": "{{count}} search results",
+  "search-results-no-count": "Search Results",
   "search": {
     "filters": "Filters",
     "hint": "Try searching for",
     "jump-to": "Jump To",
+    "more-results": "More results",
     "no-results": "No results found",
     "no-results-suggestion": "We could not find any matching search results for \"{{searchQuery}}\". try searching for a different keyword.",
     "popular": "Popular searches",
@@ -340,8 +381,10 @@
     "search-juz": "Search Juz",
     "search-page": "Search Page",
     "search-surah": "Search Surah",
+    "search-verse": "Search Verse",
     "try-navigating-with": "Tip: try navigating with"
   },
+  "sign-in": "Sign in",
   "sitemap": "Sitemap",
   "sort": {
     "ascending": "Ascending",
@@ -361,10 +404,6 @@
     "tafsir-desc": "Read {{tafsirName}} for Ayah {{verseNumber}} of Surah {{surahName}}",
     "tafsirs-desc": "Read various Tafsirs of Ayah {{ayahNumber}} of Surah {{surahName}} by trusted Tafsir scholars",
     "title": "Tafsir"
-  },
-  "tarteel": {
-    "app": "Tarteel app",
-    "name": "Tarteel.ai"
   },
   "terms-and-conditions": "Terms and Conditions",
   "theme": "Theme",
@@ -400,9 +439,9 @@
   "view": "View",
   "voice": {
     "ask-permission": "Please enable microphone permission to start using Voice Search",
-    "error": "An error has occurred, please try again later. Or download the ",
-    "no-permission": "It looks like you do not have the microphone permissions enabled. Please enable the microphone permissions and try again or download the ",
-    "not-supported": "It looks like your browser does not support microphone. Please try a different browser or download the ",
+    "error": "An error has occurred, please try again later.",
+    "no-permission": "It looks like you do not have the microphone permissions enabled. Please enable the microphone permissions and try again.",
+    "not-supported": "It looks like your browser does not support microphone. Please try a different browser.",
     "suggest": "Please begin reciting and your verse will appear.",
     "suggest-subtitle": "Recite any verse in Arabic, and the verse will appear",
     "suggest-title": "Recite now",

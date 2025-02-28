@@ -102,8 +102,7 @@
   "command-bar": {
     "navigations": "Lundrimet",
     "no-nav-results": "Nuk ka rezultate navigimi",
-    "placeholder": "Çfarë doni të lexoni?",
-    "powered-by": "Kërkimi zanor i mundësuar nga Tarteel.ai",
+    "placeholder": "Kërkoni në Kuran...",
     "recent-navigations": "Lundrimet e fundit",
     "search-by-voice": "Kërko me zë",
     "try-navigating": "Provoni të lundroni në"
@@ -122,9 +121,11 @@
     }
   },
   "continue": "Vazhdoni",
+  "contribute-to-our-mission": "Kontribuoni në misionin tonë",
   "copied": "E kopjuar",
   "copied-to-clipboard": "Kopjuar në kujtesën tuaj",
   "copy": "Kopjo",
+  "copylink": "Kopjo lidhjen",
   "counter": {
     "decrease": "Ulje",
     "increase": "Rrit"
@@ -134,6 +135,7 @@
   "developers": "Zhvilluesit",
   "display": "Ekrani",
   "donate": "Dhuroni",
+  "donate-now": "Dhuroni tani",
   "donate_monthly": "Dhuroni çdo muaj",
   "donate_once": "Dhuroni një herë",
   "edit": "Redakto",
@@ -157,6 +159,34 @@
     "ranges-too-many-verses": "*Max {{maxNumberOfVerses}} Ajete",
     "ranges-wrong-order": "Vargu fillestar duhet të jetë para vargut përfundimtar."
   },
+  "errors": {
+    "account-banned": "Na vjen keq, llogaria juaj është e ndaluar. Kontakto Kuran.Fondacioni",
+    "badRequest": "*Kërkesë e pavlefshme",
+    "banned": "*Na falni, llogaria juaj është e ndaluar. Kontakto Kuran.Fondacioni",
+    "confirm": "*Konfirmo që fjalëkalimi nuk përputhet me fjalëkalimin",
+    "email": "*Format i pavlefshëm i postës elektronike!",
+    "exactLength": "*Vlera duhet të jetë gjatësia e saktë",
+    "expiredToken": "*Ky token ka skaduar",
+    "forgot-password-failed": "Dërgimi i email-it për rivendosjen e fjalëkalimit dështoi. Ju lutemi provoni përsëri.",
+    "immutable": "*Kjo vlerë nuk mund të ndryshohet",
+    "invalid": "*Kjo {{fieldName}} është e pavlefshme",
+    "invalidEmailOrPassword": "*Email ose fjalëkalim i pavlefshëm",
+    "max": "* {{fieldName}} duhet të jetë më pak ose e barabartë me {{max}} shifra",
+    "min": "* {{fieldName}} duhet të jetë më shumë se ose e barabartë me {{min}} shifra",
+    "name": "* {{fieldName}} duhet të jetë vetëm shkronja dhe numra",
+    "notFound": "*Nuk u gjet",
+    "required": "* {{fieldName}} mungon!",
+    "reset-password-failed": "Rivendosja e fjalëkalimit dështoi. Ju lutemi provoni përsëri.",
+    "signin-failed": "Identifikimi dështoi. Ju lutemi provoni përsëri.",
+    "signup-failed": "Regjistrimi dështoi. Ju lutemi provoni përsëri.",
+    "taken": "* {{fieldName}} ekziston tashmë!",
+    "usedToken": "*Kjo shenjë është përdorur tashmë",
+    "username": "* {{fieldName}} pranoni vetëm nënvizat dhe shkronjat",
+    "verification-code-invalid": "Ky kod verifikimi është i pavlefshëm",
+    "verification-code-length": "Kodi i verifikimit duhet të jetë {{length}} shifra",
+    "verification-failed": "Verifikimi dështoi. Ju lutemi provoni përsëri.",
+    "verification-resend-failed": "Dështoi ridërgimi i kodit të verifikimit"
+  },
   "exciting-updates": "Përditësime emocionuese",
   "feedback": "Feedback",
   "fonts": {
@@ -179,20 +209,25 @@
     "translation-font-size": "Madhësia e shkronjave të përkthimit"
   },
   "footer": {
-    "description": "Quran.com është një Jariyah Sadakah. Shpresojmë t'ua bëjmë të lehtë të gjithëve leximin, studimin dhe mësimin e Kuranit Fisnik. Kurani Fisnik ka shumë emra duke përfshirë Al-Kuran Al-Kareem, Al-Ketab, Al-Furkan, Al-Maw'itha, Al-Thikr dhe Al-Noor.",
+    "description": "Quran.com është një platformë e besuar e përdorur nga miliona njerëz në mbarë botën për të lexuar, kërkuar, dëgjuar dhe reflektuar mbi Kuranin në shumë gjuhë. Ai ofron përkthime, tefsir, recitime, përkthim fjalë për fjalë dhe mjete për studim më të thellë, duke e bërë Kuranin të arritshëm për të gjithë. <br/> <br/> Si një Jariyah Sadakah, Quran.com është i përkushtuar për të ndihmuar njerëzit të lidhen thellë me Kuranin. Mbështetur nga Quran.Foundation, një organizatë jofitimprurëse 501(c)(3), Quran.com vazhdon të rritet si një burim falas dhe i vlefshëm për të gjithë, Alhamdullilah”.",
     "hiring": "Ne po punësojmë! Bashkohuni me ekipin e QuranFoundation dhe kontribuoni në misionin tonë. <link> Apliko tani! </link>",
     "rights": "Të gjitha të drejtat e rezervuara",
-    "title": "Lexoni, studioni dhe mësoni Kuranin Fisnik."
+    "title": "Lexoni, dëgjoni, kërkoni dhe reflektoni mbi Kuranin"
   },
   "form": {
     "body": "Trupi",
     "code": "Kodi i Verifikimit",
+    "confirm-password": "Konfirmo fjalëkalimin",
     "email": "Email",
     "firstName": "Emri",
     "lastName": "Mbiemri",
-    "title": "Titulli"
+    "password": "Fjalëkalimi",
+    "title": "Titulli",
+    "username": "Emri i përdoruesit",
+    "verification-code": "Kodi i verifikimit"
   },
   "from": "Nga",
+  "fundraising-share-title": "Share Quran.com Mbledhja e fondeve",
   "fundraising-sticky-banner": {
     "cta": "Dhuroni",
     "title": "Jepni në ditët më të mira!"
@@ -217,6 +252,7 @@
   "learn-more": "Mëso më shumë",
   "learning-plans": "Planet mësimore",
   "less": "Më pak",
+  "lessons": "Mësimet",
   "loading": "Po ngarkohet",
   "login": "Identifikohu",
   "logout": "Shkyç",
@@ -250,6 +286,7 @@
   "off": "Joaktiv",
   "oldest": "Më e vjetra",
   "on": "Aktiv",
+  "our-projects": "Projektet tona",
   "page": "Faqe",
   "pages": "Faqet",
   "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} nga {{totalNumberOfResults}} rezultate kërkimi",
@@ -272,6 +309,7 @@
   "privacy": "Privatësia",
   "product-updates": "Përditësimet e produktit",
   "profile": "Profili",
+  "projects-desc": "Projektet jofitimprurëse të zotëruara, të menaxhuara ose të sponsorizuara nga Quran.Foundation",
   "q-reflect": "Kurani Reflekto",
   "quran-com": "Quran.com",
   "quran-radio": "Kuran Radio",
@@ -287,6 +325,7 @@
   "reciters": "Recituesit",
   "reflect": "Pasqyrim",
   "reflections": "Reflektime",
+  "reflections-and-lessons": "Reflektime & Mësime",
   "remove": "Hiq",
   "rename": "Riemërto",
   "retry": "Provo sërish",
@@ -296,10 +335,12 @@
   "save-to-collection": "Ruaje në Koleksion",
   "search-for": "Kërko për \"{{searchQuery}}\"",
   "search-results": "{{count}} rezultatet e  kërkimit",
+  "search-results-no-count": "Rezultatet e Kërkimit",
   "search": {
     "filters": "Filtrat",
     "hint": "Provoni të kërkoni për",
     "jump-to": "Kërce Te",
+    "more-results": "Më shumë rezultate",
     "no-results": "Nuk u gjet asnjë rezultat",
     "no-results-suggestion": "Nuk gjetëm asnjë rezultat kërkimi që përputhej për \" {{searchQuery}} \". provoni të kërkoni për një fjalë kyçe të ndryshme.",
     "popular": "Kërkimet popullore",
@@ -340,8 +381,10 @@
     "search-juz": "Kërko Xhuzin",
     "search-page": "Kërko Faqja",
     "search-surah": "Kërko suren",
+    "search-verse": "Kërko Vargu",
     "try-navigating-with": "Këshillë: provoni të lundroni me"
   },
+  "sign-in": "Identifikohu",
   "sitemap": "Harta e faqes",
   "sort": {
     "ascending": "Në ngjitje",
@@ -361,10 +404,6 @@
     "tafsir-desc": "Lexoni {{tafsirName}} për Ajetin {{Numri i {{verseNumber}} të sures {{surahName}}",
     "tafsirs-desc": "Lexoni tefsire të ndryshme të Ajetit {{ayahNumber}} të sures {{surahName}} nga dijetarë të besuar të tefsirit",
     "title": "Tefsir"
-  },
-  "tarteel": {
-    "app": "Aplikacioni Tarteel",
-    "name": "Tarteel.ai"
   },
   "terms-and-conditions": "Termat dhe Kushtet",
   "theme": "Tema",
@@ -400,9 +439,9 @@
   "view": "Pamje",
   "voice": {
     "ask-permission": "Ju lutemi aktivizoni lejen e mikrofonit për të filluar përdorimin e Kërkimit me zë",
-    "error": "Një gabim ka ndodhur.Ju lutemi, provojeni përsëri më vonë. Ose shkarkoni",
-    "no-permission": "Me sa duket nuk i ke të aktivizuara lejet e mikrofonit. Aktivizo lejet e mikrofonit dhe provo sërish ose shkarko",
-    "not-supported": "Duket sikur shfletuesi juaj nuk e mbështet mikrofonin. Ju lutemi provoni një shfletues tjetër ose shkarkoni",
+    "error": "Ka ndodhur një gabim, ju lutemi provoni përsëri më vonë.",
+    "no-permission": "Me sa duket nuk i ke të aktivizuara lejet e mikrofonit. Aktivizo lejet e mikrofonit dhe provo sërish.",
+    "not-supported": "Duket sikur shfletuesi juaj nuk e mbështet mikrofonin. Ju lutemi provoni një shfletues tjetër.",
     "suggest": "Ju lutemi filloni të recitoni dhe vargu juaj do të shfaqet.",
     "suggest-subtitle": "Recitoni çdo varg në arabisht dhe vargu do të shfaqet",
     "suggest-title": "Recitoni tani",

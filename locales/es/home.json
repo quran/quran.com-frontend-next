@@ -1,0 +1,66 @@
+{
+  "achieve-quran-goals": "Alcanza tus objetivos coránicos",
+  "begin": "Comenzar",
+  "chapters-and-verses": "Capítulos y versículos",
+  "continue-read": "Continuar leyendo",
+  "explore-topics": "Explorar temas",
+  "first-time-reading": "¿Es nuevo en el Corán? <link> Comience aquí </link>",
+  "know-someone": "Crece con nosotros este <modalLink> Ramadán </modalLink>",
+  "learning-plan": "Planes de aprendizaje",
+  "listen-to-radio": "Escuchar la radio del Corán",
+  "my-quran": "Mi Corán",
+  "navigate-quran": "Navegar por el Corán",
+  "no-bookmarks": "No tienes favoritos aún",
+  "no-recently-read": "Aún no tienes ninguna sesión de lectura.",
+  "noble-quran": "El Noble Corán",
+  "popular": "Popular",
+  "qgj": {
+    "learning-plans": {
+      "cta": {
+        "all-plans": "Ver todos los planes",
+        "my-plans": "Mis planes"
+      },
+      "desc": {
+        "logged-in": "¿Alguna vez comenzaste un programa de aprendizaje y te saliste a mitad de camino? Los planes de aprendizaje se dividen en partes manejables y hacemos un seguimiento de tu progreso hasta que llegas a la meta. Explora nuestra oferta actual de cursos hoy mismo",
+        "logged-in-no-plans": "¿Alguna vez comenzaste un programa de aprendizaje y te saliste a mitad de camino? Los planes de aprendizaje se dividen en partes manejables y hacemos un seguimiento de tu progreso hasta que llegas a la meta. Explora nuestra oferta actual de cursos hoy mismo",
+        "logged-out": "¿Alguna vez comenzaste un programa de aprendizaje y te saliste a mitad de camino? Los planes de aprendizaje se dividen en partes manejables y hacemos un seguimiento de tu progreso hasta que llegas a la meta. Explora nuestra oferta actual de cursos hoy mismo"
+      },
+      "title": "Planes de aprendizaje"
+    },
+    "quran-reading-goals": {
+      "desc": {
+        "logged-out": "¿Quieres leer 10 minutos al día, completar un Juz en un mes o terminar el Corán entero en un año? Es fácil crear un objetivo personalizado y hacer un seguimiento de tu progreso."
+      },
+      "title": "Objetivos de lectura del Corán personalizados"
+    },
+    "title": "Viaje de crecimiento del Corán"
+  },
+  "qr-community": "Lea los versículos y reflexiones destacados de hoy",
+  "ramadan-activities-cta": "<link> ¡Sigue el <b> Calendario Coránico Global </b> para obtener lecturas semanales, podcasts inspiradores y un llamado a la reflexión! </link>",
+  "ramadan": {
+    "header": "Herramientas para profundizar su conexión con el Corán",
+    "title": "¿Listo para el Ramadán?"
+  },
+  "read-juz": "Leer Juz",
+  "recently-read": "Leído recientemente",
+  "revelation-order-disclaimer": "Esta vista muestra el orden cronológico de las suras del Corán según el momento en que fueron reveladas al profeta Muhammad <hover> ﷺ </hover>. La cronología es un tema de opinión académica y algunas suras fueron reveladas en partes en diferentes momentos. El orden que se muestra aquí se basa en el trabajo de <link> Tanzil.net </link>. [Nota: el orden de las suras compiladas desde al-Fatiha hasta al-Nas es una cuestión de consenso.]",
+  "see-more-learning-plans": "Ver más",
+  "set-custom-goal": "Establezca una meta",
+  "share-quran": {
+    "description": "Ayude a difundir el Corán entre los nuevos estudiantes",
+    "title": "¡Comparte el Corán!"
+  },
+  "start-read": "Empezar a leer",
+  "stay-consistent": "Realice un seguimiento de sus rachas, cree objetivos personalizados y manténgase constante",
+  "tab": {
+    "bookmarks": "Favoritos",
+    "popular": "Populares"
+  },
+  "view-all-bookmarks": "Ver todos los marcadores",
+  "voice": {
+    "trigger": "Acceso rápido"
+  },
+  "welcome": {
+    "title": "¡Es el mes del Corán! Ayuda a millones de usuarios a acceder a la guía del Corán."
+  }
+}

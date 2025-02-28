@@ -5,13 +5,14 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from './ActionButtons.module.scss';
 import CompleteButton from './CompleteButton';
+import ReflectionButton from './ReflectionButton';
 
 import CourseFeedback, { FeedbackSource } from '@/components/Course/CourseFeedback';
 import {
   mutateCachedCourseAfterCompletion,
   mutateCachedLessonsAfterCompletion,
 } from '@/components/Course/utils/mutations';
-import Button, { ButtonSize, ButtonType } from '@/dls/Button/Button';
+import Button, { ButtonSize } from '@/dls/Button/Button';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import useMutateMultipleKeys from '@/hooks/useMutateMultipleKeys';
 import useMutateWithoutRevalidation from '@/hooks/useMutateWithoutRevalidation';
@@ -94,13 +95,6 @@ const ActionButtons: React.FC<Props> = ({ lesson, courseSlug }) => {
     navigateToLesson(course.slug, nextLessonSlug);
   };
 
-  const onAddReflectionClick = () => {
-    logButtonClick('add_lesson_reflection', {
-      lessonId: id,
-      isCompleted,
-    });
-  };
-
   const shouldShowAddFeedbackButton =
     course?.userHasFeedback === false &&
     (course?.isCompleted === true || shouldOpenFeedbackModal === true);
@@ -137,15 +131,7 @@ const ActionButtons: React.FC<Props> = ({ lesson, courseSlug }) => {
         )}
       </div>
       <div className={styles.addReflectionButton}>
-        <Button
-          size={ButtonSize.Small}
-          onClick={onAddReflectionClick}
-          href="https://quranreflect.com"
-          isNewTab
-          type={ButtonType.Success}
-        >
-          {t('add-reflection')}
-        </Button>
+        <ReflectionButton lessonId={id} isCompleted={isCompleted} />
         {shouldShowAddFeedbackButton && (
           <CourseFeedback
             shouldOpenModal={shouldOpenFeedbackModal}

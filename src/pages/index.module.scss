@@ -10,9 +10,6 @@ $list-max-width: 80rem;
   @include breakpoints.smallerThanTablet {
     padding-block-start: var(--banner-height);
   }
-  @include breakpoints.tablet {
-    padding-block-start: var(--spacing-small);
-  }
 }
 
 .loadingContainer {
@@ -61,5 +58,36 @@ $list-max-width: 80rem;
     @include breakpoints.tablet {
       --flow-side-spacing: 0;
     }
+  }
+}
+
+.homepageCard:not(:first-child) {
+  padding-block-start: var(--spacing-medium2-px);
+  @include breakpoints.tablet {
+    padding-block-start: var(--spacing-large-px);
+  }
+}
+
+.homepageCard {
+  @include breakpoints.smallerThanTablet {
+    padding-inline: var(--spacing-small-px);
+    margin-inline: var(--spacing-medium2-px);
+  }
+  padding-block-end: var(--spacing-medium2-px);
+  @include breakpoints.tablet {
+    padding-block-end: var(--spacing-large-px);
+  }
+  border-bottom: 1px solid var(--color-separators);
+}
+
+.mobileOnly {
+  @include utility.mobileOnly;
+}
+
+.bodyContainer {
+  background: var(--color-background-elevated);
+  @include breakpoints.smallerThanTablet {
+    border-start-start-radius: var(--border-radius-rounded);
+    border-start-end-radius: var(--border-radius-rounded);
   }
 }

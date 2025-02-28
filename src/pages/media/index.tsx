@@ -27,6 +27,7 @@ import { getMediaGeneratorOgImageUrl } from '@/lib/og';
 import Error from '@/pages/_error';
 import layoutStyles from '@/pages/index.module.scss';
 import AudioData from '@/types/AudioData';
+import PreviewMode from '@/types/Media/PreviewMode';
 import QueryParam from '@/types/QueryParam';
 import { MushafLines, QuranFont } from '@/types/QuranReader';
 import Reciter from '@/types/Reciter';
@@ -114,6 +115,7 @@ const MediaMaker: NextPage<MediaMaker> = ({
     quranTextFontStyle,
     translationFontScale,
     orientation,
+    previewMode,
   } = mediaSettings;
 
   const queryParams = {
@@ -132,6 +134,7 @@ const MediaMaker: NextPage<MediaMaker> = ({
     [QueryParam.QURAN_TEXT_FONT_STYLE]: String(quranTextFontStyle),
     [QueryParam.TRANSLATION_FONT_SCALE]: String(translationFontScale),
     [QueryParam.ORIENTATION]: orientation,
+    [QueryParam.PREVIEW_MODE]: previewMode,
   };
 
   useAddQueryParamsToUrl(getQuranMediaMakerNavigationUrl(queryParams), {});
@@ -430,16 +433,19 @@ const MediaMaker: NextPage<MediaMaker> = ({
             />
           </>
         </div>
-        <div className={layoutStyles.flow}>
-          <VideoSettings
-            chaptersList={chaptersList}
-            reciters={reciters}
-            playerRef={playerRef}
-            isFetching={isFetching}
-            inputProps={inputProps}
-            mediaSettings={mediaSettings}
-          />
-        </div>
+
+        {previewMode === PreviewMode.DISABLED && (
+          <div className={layoutStyles.flow}>
+            <VideoSettings
+              chaptersList={chaptersList}
+              reciters={reciters}
+              playerRef={playerRef}
+              isFetching={isFetching}
+              inputProps={inputProps}
+              mediaSettings={mediaSettings}
+            />
+          </div>
+        )}
       </div>
     </>
   );

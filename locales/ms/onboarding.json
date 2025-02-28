@@ -87,10 +87,6 @@
       "description": "Pilih daripada pelbagai terjemahan dalam pelbagai bahasa. Tip: Bandingkan terjemahan dengan memilih berbilang pilihan",
       "title": "Terjemahan"
     },
-    "voice-search": {
-      "description": "Sentuh ikon mikrofon dan bacakan ayat yang anda cari. Laluan Cepat! : Untuk mengetahui ayat yang sedang dibaca (Cth. Solat Tarawih), sentuh ikon mikrofon. Selepas satu atau dua ayat dikesan, tekan berhenti untuk mencari lokasi ayat-ayat yang di baca",
-      "title": "Carian Suara (Tarteel)"
-    },
     "wbw-audio": {
       "description": "Guna pilihan ini untuk mendengar setiap perkataan secara individu dengan hanya satu sentuhan pada perkataan yang tertentu!",
       "title": "Dengar transliterasi per kata dengan mengklik pada perkataan tersebut"

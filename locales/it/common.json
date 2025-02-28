@@ -102,8 +102,7 @@
   "command-bar": {
     "navigations": "Navigazioni",
     "no-nav-results": "Nessun risultato di navigazione",
-    "placeholder": "Cosa vuoi leggere?",
-    "powered-by": "Ricerca vocale fornita da Tarteel.ai",
+    "placeholder": "Cerca nel Corano...",
     "recent-navigations": "Navigazioni recenti",
     "search-by-voice": "Ricerca vocale",
     "try-navigating": "Prova a navigare in"
@@ -122,9 +121,11 @@
     }
   },
   "continue": "Continua",
+  "contribute-to-our-mission": "Contribuisci alla nostra missione",
   "copied": "copiato",
   "copied-to-clipboard": "Copiato negli appunti",
   "copy": "copia",
+  "copylink": "Copia il collegamento",
   "counter": {
     "decrease": "Diminuire",
     "increase": "Aumento"
@@ -134,6 +135,7 @@
   "developers": "Sviluppatori",
   "display": "Schermo",
   "donate": "Donare",
+  "donate-now": "Dona ora",
   "donate_monthly": "Dona mensilmente",
   "donate_once": "Dona una volta",
   "edit": "Modificare",
@@ -157,6 +159,34 @@
     "ranges-too-many-verses": "*Max {{maxNumberOfVerses}} versetti",
     "ranges-wrong-order": "Il verso iniziale deve precedere quello finale."
   },
+  "errors": {
+    "account-banned": "Spiacenti, il tuo account è stato bannato. Contatta Quran.Foundation",
+    "badRequest": "*Richiesta non valida",
+    "banned": "*Spiacenti, il tuo account è stato bannato. Contatta Quran.Foundation",
+    "confirm": "*La password di conferma non corrisponde alla password",
+    "email": "*Formato email non valido!",
+    "exactLength": "*Il valore deve essere della lunghezza esatta",
+    "expiredToken": "*Questo token è scaduto",
+    "forgot-password-failed": "Impossibile inviare l'email di reimpostazione della password. Riprova.",
+    "immutable": "*Questo valore non può essere modificato",
+    "invalid": "*Questo {{fieldName}} non è valido",
+    "invalidEmailOrPassword": "*Email o password non valide",
+    "max": "* {{fieldName}} deve essere minore o uguale a {{max}} cifre",
+    "min": "* {{fieldName}} deve essere maggiore o uguale a {{min}} cifre",
+    "name": "* {{fieldName}} deve contenere solo lettere e numeri",
+    "notFound": "*Non trovato",
+    "required": "* {{fieldName}} mancante!",
+    "reset-password-failed": "Impossibile reimpostare la password. Riprova.",
+    "signin-failed": "Accesso non riuscito. Riprova.",
+    "signup-failed": "Registrazione non riuscita. Riprova.",
+    "taken": "* {{fieldName}} esiste già!",
+    "usedToken": "*Questo token è già stato utilizzato",
+    "username": "* {{fieldName}} accetta solo caratteri di sottolineatura e lettere",
+    "verification-code-invalid": "Questo codice di verifica non è valido",
+    "verification-code-length": "Il codice di verifica deve essere di {{length}} cifre",
+    "verification-failed": "Verifica non riuscita. Riprova.",
+    "verification-resend-failed": "Impossibile inviare nuovamente il codice di verifica"
+  },
   "exciting-updates": "Aggiornamenti entusiasmanti",
   "feedback": "Feedback",
   "fonts": {
@@ -179,20 +209,25 @@
     "translation-font-size": "Dimensione del carattere della traduzione"
   },
   "footer": {
-    "description": "Quran.com è un Sadaqah Jariyah. Speriamo di rendere facile per tutti la lettura, lo studio e l'apprendimento del Nobile Corano. Il Nobile Corano ha molti nomi tra cui Al-Quran Al-Kareem, Al-Ketab, Al-Furqan, Al-Maw'itha, Al-Thikr e Al-Noor.",
+    "description": "Quran.com è una piattaforma affidabile utilizzata da milioni di persone in tutto il mondo per leggere, cercare, ascoltare e riflettere sul Corano in più lingue. Fornisce traduzioni, tafsir, recitazioni, traduzione parola per parola e strumenti per uno studio più approfondito, rendendo il Corano accessibile a tutti. <br/> <br/> In quanto Sadaqah Jariyah, Quran.com si dedica ad aiutare le persone a connettersi profondamente con il Corano. Supportato da Quran.Foundation, un'organizzazione non-profit 501(c)(3), Quran.com continua a crescere come una risorsa gratuita e preziosa per tutti, Alhamdullilah”",
     "hiring": "Stiamo assumendo! Unisciti al team della QuranFoundation e contribuisci alla nostra missione. <link> Candidati ora! </link>",
     "rights": "Tutti i diritti riservati",
-    "title": "Leggi, studia e impara Il Nobile Corano."
+    "title": "Leggi, ascolta, cerca e rifletti sul Corano"
   },
   "form": {
     "body": "Corpo",
     "code": "Codice di verifica",
+    "confirm-password": "Conferma password",
     "email": "E-mail",
     "firstName": "Nome di battesimo",
     "lastName": "Cognome",
-    "title": "Titolo"
+    "password": "Password",
+    "title": "Titolo",
+    "username": "Nome utente",
+    "verification-code": "Codice di verifica"
   },
   "from": "A partire dal",
+  "fundraising-share-title": "Condividi la raccolta fondi di Quran.com",
   "fundraising-sticky-banner": {
     "cta": "Donare",
     "title": "Regala nei giorni migliori!"
@@ -217,6 +252,7 @@
   "learn-more": "Scopri di più",
   "learning-plans": "Piani di apprendimento",
   "less": "Meno",
+  "lessons": "Lezioni",
   "loading": "Caricamento in corso",
   "login": "Login",
   "logout": "Disconnettersi",
@@ -250,6 +286,7 @@
   "off": "Spento",
   "oldest": "Il più antico",
   "on": "Sopra",
+  "our-projects": "I nostri progetti",
   "page": "Pagina",
   "pages": "Pagine",
   "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} di {{totalNumberOfResults}} risultati di ricerca",
@@ -272,6 +309,7 @@
   "privacy": "Privacy",
   "product-updates": "Aggiornamenti del prodotto",
   "profile": "Profilo",
+  "projects-desc": "Progetti senza scopo di lucro posseduti, gestiti o sponsorizzati da Quran.Foundation",
   "q-reflect": "CoranoRiflesso",
   "quran-com": "Corano.com",
   "quran-radio": "Radio del Corano",
@@ -287,6 +325,7 @@
   "reciters": "Recitatori",
   "reflect": "Riflettere",
   "reflections": "Riflessi",
+  "reflections-and-lessons": "Riflessioni e lezioni",
   "remove": "Rimuovere",
   "rename": "Rinominare",
   "retry": "Riprova",
@@ -296,10 +335,12 @@
   "save-to-collection": "Salva nella raccolta",
   "search-for": "Cerca '{{searchQuery}}'",
   "search-results": "{{count}} risultati di ricerca",
+  "search-results-no-count": "Risultati della ricerca",
   "search": {
     "filters": "Filtri",
     "hint": "Prova a cercare",
     "jump-to": "Salta a",
+    "more-results": "Altri risultati",
     "no-results": "nessun risultato trovato",
     "no-results-suggestion": "Impossibile trovare risultati di ricerca corrispondenti per \" {{searchQuery}} \". prova a cercare una parola chiave diversa.",
     "popular": "Ricerche popolari",
@@ -340,8 +381,10 @@
     "search-juz": "Cerca Juz",
     "search-page": "Pagina di ricerca",
     "search-surah": "Cerca Sura",
+    "search-verse": "Cerca Versetto",
     "try-navigating-with": "Suggerimento: prova a navigare con"
   },
+  "sign-in": "Registrazione",
   "sitemap": "Mappa del sito",
   "sort": {
     "ascending": "Ascendente",
@@ -361,10 +404,6 @@
     "tafsir-desc": "Leggi {{tafsirName}} per Ayah {{verseNumber}} di Sura {{surahName}}",
     "tafsirs-desc": "Leggi vari Tafsir di Ayah {{ayahNumber}} di Sura {{surahName}} da parte di fidati studiosi di Tafsir",
     "title": "Tafsir"
-  },
-  "tarteel": {
-    "app": "App Tarteel",
-    "name": "Tarteel.ai"
   },
   "terms-and-conditions": "Termini e Condizioni",
   "theme": "Tema",
@@ -400,13 +439,13 @@
   "view": "Visualizzazione",
   "voice": {
     "ask-permission": "Abilita l'autorizzazione del microfono per iniziare a utilizzare Ricerca vocale",
-    "error": "Si è verificato un errore, riprova più tardi. Oppure scarica il",
-    "no-permission": "Sembra che tu non abbia le autorizzazioni per il microfono abilitate. Abilita i permessi del microfono e riprova o scarica il",
-    "not-supported": "Sembra che il tuo browser non supporti il microfono. Si prega di provare un browser diverso o scaricare il",
+    "error": "Si è verificato un errore, riprova più tardi.",
+    "no-permission": "Sembra che non hai abilitato i permessi del microfono. Abilita i permessi del microfono e riprova.",
+    "not-supported": "Sembra che il tuo browser non supporti il microfono. Prova un altro browser.",
     "suggest": "Per favore, inizia a recitare e il tuo verso apparirà.",
     "suggest-subtitle": "Recita qualsiasi versetto in arabo e il versetto apparirà",
     "suggest-title": "Recita ora",
-    "voice-search-powered-by": "Ricerca vocale Powered by"
+    "voice-search-powered-by": "Ricerca vocale fornita da"
   },
   "wbw": "Parola per parola",
   "wbw-lang-summary": "Fonte della traduzione parola per parola: <link> {{source}} </link> . Questa fonte è indipendente dalla selezione della traduzione in versi.",

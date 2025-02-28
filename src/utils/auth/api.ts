@@ -1,24 +1,28 @@
 /* eslint-disable max-lines */
 import { NextApiRequest } from 'next';
+import Router from 'next/router';
 import { configureRefreshFetch } from 'refresh-fetch';
 
 import { getTimezone } from '../datetime';
 import { prepareGenerateMediaFileRequestData } from '../media/utils';
 
+import { BANNED_USER_ERROR_ID } from './constants';
+import { AuthErrorCodes } from './errors';
 import generateSignature from './signature';
 import BookmarkByCollectionIdQueryParams from './types/BookmarkByCollectionIdQueryParams';
 import GetAllNotesQueryParams from './types/Note/GetAllNotesQueryParams';
+import { ShortenUrlResponse } from './types/ShortenUrl';
 
 import { fetcher, X_AUTH_SIGNATURE, X_INTERNAL_CLIENT, X_TIMESTAMP } from '@/api';
 import {
+  ActivityDay,
+  ActivityDayType,
   FilterActivityDaysParams,
   QuranActivityDay,
-  UpdateQuranActivityDayBody,
-  ActivityDayType,
   UpdateActivityDayBody,
-  ActivityDay,
-  UpdateLessonActivityDayBody,
   UpdateActivityDayParams,
+  UpdateLessonActivityDayBody,
+  UpdateQuranActivityDayBody,
 } from '@/types/auth/ActivityDay';
 import ConsentType from '@/types/auth/ConsentType';
 import { Course } from '@/types/auth/Course';
@@ -32,53 +36,55 @@ import MediaRenderError from '@/types/Media/MediaRenderError';
 import QuestionResponse from '@/types/QuestionsAndAnswers/QuestionResponse';
 import { Mushaf } from '@/types/QuranReader';
 import {
-  makeBookmarksUrl,
-  makeCompleteSignupUrl,
-  makeUserProfileUrl,
-  makeDeleteAccountUrl,
-  makeBookmarksRangeUrl,
-  makeBookmarkUrl,
-  makeReadingSessionsUrl,
-  makeUserPreferencesUrl,
-  makeVerificationCodeUrl,
-  makeUserBulkPreferencesUrl,
-  makeLogoutUrl,
-  makeCompleteAnnouncementUrl,
-  makeSyncLocalDataUrl,
-  makeRefreshTokenUrl,
-  makeCollectionsUrl,
-  makeGetBookmarkByCollectionId,
+  CollectionsQueryParams,
+  makeActivityDaysUrl,
+  makeAddCollectionBookmarkUrl,
   makeAddCollectionUrl,
   makeBookmarkCollectionsUrl,
-  CollectionsQueryParams,
-  makeUpdateCollectionUrl,
-  makeDeleteCollectionUrl,
-  makeAddCollectionBookmarkUrl,
+  makeBookmarksRangeUrl,
+  makeBookmarksUrl,
+  makeBookmarkUrl,
+  makeCollectionsUrl,
+  makeCompleteAnnouncementUrl,
+  makeCompleteSignupUrl,
+  makeCountNotesWithinRangeUrl,
+  makeCountQuestionsWithinRangeUrl,
+  makeCourseFeedbackUrl,
+  makeDeleteAccountUrl,
+  makeDeleteBookmarkUrl,
   makeDeleteCollectionBookmarkByIdUrl,
   makeDeleteCollectionBookmarkByKeyUrl,
-  makeDeleteBookmarkUrl,
-  makeActivityDaysUrl,
-  makeGoalUrl,
-  makeFilterActivityDaysUrl,
-  makeStreakUrl,
-  makeEstimateRangesReadingTimeUrl,
-  makeUserFeatureFlagsUrl,
-  makeUserConsentsUrl,
-  makeNotesUrl,
+  makeDeleteCollectionUrl,
   makeDeleteOrUpdateNoteUrl,
-  makeCountNotesWithinRangeUrl,
   makeEnrollUserUrl,
+  makeEstimateRangesReadingTimeUrl,
+  makeFilterActivityDaysUrl,
+  makeFullUrlById,
+  makeGenerateMediaFileUrl,
+  makeGetBookmarkByCollectionId,
   makeGetCoursesUrl,
   makeGetCourseUrl,
-  makePublishNoteUrl,
-  makeCourseFeedbackUrl,
-  makeGetUserCoursesCountUrl,
-  makeGenerateMediaFileUrl,
   makeGetMediaFileProgressUrl,
   makeGetMonthlyMediaFilesCountUrl,
-  makeCountQuestionsWithinRangeUrl,
-  makeGetQuestionsByVerseKeyUrl,
   makeGetQuestionByIdUrl,
+  makeGetQuestionsByVerseKeyUrl,
+  makeGetUserCoursesCountUrl,
+  makeGoalUrl,
+  makeLogoutUrl,
+  makeNotesUrl,
+  makePublishNoteUrl,
+  makeReadingSessionsUrl,
+  makeRefreshTokenUrl,
+  makeShortenUrlUrl,
+  makeStreakUrl,
+  makeSyncLocalDataUrl,
+  makeUpdateCollectionUrl,
+  makeUserBulkPreferencesUrl,
+  makeUserConsentsUrl,
+  makeUserFeatureFlagsUrl,
+  makeUserPreferencesUrl,
+  makeUserProfileUrl,
+  makeVerificationCodeUrl,
 } from '@/utils/auth/apiPaths';
 import { isStaticBuild } from '@/utils/build';
 import CompleteAnnouncementRequest from 'types/auth/CompleteAnnouncementRequest';
@@ -99,15 +105,37 @@ type RequestData = Record<string, any>;
 const IGNORE_ERRORS = [
   MediaRenderError.MediaVersesRangeLimitExceeded,
   MediaRenderError.MediaFilesPerUserLimitExceeded,
+  AuthErrorCodes.InvalidCredentials,
+  AuthErrorCodes.NotFound,
+  AuthErrorCodes.BadRequest,
+  AuthErrorCodes.Invalid,
+  AuthErrorCodes.Mismatch,
+  AuthErrorCodes.Missing,
+  AuthErrorCodes.Duplicate,
+  AuthErrorCodes.Banned,
+  AuthErrorCodes.Expired,
+  AuthErrorCodes.Used,
+  AuthErrorCodes.Immutable,
+  AuthErrorCodes.ValidationError,
 ];
 
 const handleErrors = async (res) => {
   const body = await res.json();
+  const error = body?.error || body?.details?.error;
+  const errorName = body?.name || body?.details?.name;
+
   // sometimes FE needs to handle the error from the API instead of showing a general something went wrong message
-  const shouldIgnoreError = IGNORE_ERRORS.includes(body?.error?.code);
+  const shouldIgnoreError = IGNORE_ERRORS.includes(error?.code);
   if (shouldIgnoreError) {
     return body;
   }
+  // const toast = useToast();
+
+  if (errorName === BANNED_USER_ERROR_ID) {
+    await logoutUser();
+    return Router.push(`/login?error=${errorName}`);
+  }
+
   throw new Error(body?.message);
 };
 
@@ -459,6 +487,26 @@ export const addOrUpdateBulkUserPreferences = async (
   preferences: Record<PreferenceGroup, any>,
   mushafId: Mushaf,
 ) => postRequest(makeUserBulkPreferencesUrl(mushafId), preferences);
+
+/**
+ * Shorten a URL.
+ *
+ * @param {string} url
+ * @returns {Promise<ShortenUrlResponse>}
+ */
+export const shortenUrl = async (url: string): Promise<ShortenUrlResponse> => {
+  return postRequest(makeShortenUrlUrl(), { url });
+};
+
+/**
+ * Get full URL by id.
+ *
+ * @param {string} id
+ * @returns {Promise<ShortenUrlResponse>}
+ */
+export const getFullUrlById = async (id: string): Promise<ShortenUrlResponse> => {
+  return privateFetcher(makeFullUrlById(id));
+};
 
 export const logoutUser = async () => {
   return postRequest(makeLogoutUrl(), {});

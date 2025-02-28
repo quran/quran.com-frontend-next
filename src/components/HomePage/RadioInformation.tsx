@@ -2,7 +2,7 @@
 import { useActor } from '@xstate/react';
 import useTranslation from 'next-translate/useTranslation';
 
-import Link from '../dls/Link/Link';
+import Link, { LinkVariant } from '../dls/Link/Link';
 
 import styles from './PlayRadioButton.module.scss';
 
@@ -21,8 +21,15 @@ const RadioInformation = ({ radioActor }) => {
 
   return (
     <div className={styles.stationInfo}>
-      <span className={styles.stationTitle}>{stationInfo.title}</span>{' '}
-      <Link onClick={onChangeClicked} href="/radio" className={styles.editStationButton}>
+      <span className={styles.stationTitle}>
+        <span className={styles.station}>{t('station')}</span>: {stationInfo.title}
+      </span>{' '}
+      <Link
+        variant={LinkVariant.Highlight}
+        onClick={onChangeClicked}
+        href="/radio"
+        className={styles.editStationButton}
+      >
         ({t('change')})
       </Link>
     </div>

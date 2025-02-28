@@ -8,7 +8,7 @@ import { getVerseAndChapterNumbersFromKey, getVerseNumberRangeFromKey } from './
 
 import QueryParam from '@/types/QueryParam';
 import { QuranReaderFlow } from '@/types/QuranReader';
-import { SearchNavigationType } from 'types/SearchNavigationResult';
+import { SearchNavigationType } from 'types/Search/SearchNavigationResult';
 
 /**
  * Get the href link to a verse.
@@ -133,6 +133,14 @@ export const getVerseReflectionNavigationUrl = (verseKey: string): string =>
   `/${verseKey}/reflections`;
 
 /**
+ * Get the href link to lessons of Ayah.
+ *
+ * @param {string} verseKey
+ * @returns {string}
+ */
+export const getVerseLessonNavigationUrl = (verseKey: string): string => `/${verseKey}/lessons`;
+
+/**
  * Get the href link to questions of Ayah.
  *
  * @param {string} verseKey
@@ -237,7 +245,11 @@ export const resolveUrlBySearchNavigationType = (
   isKalimatSearch = false,
 ): string => {
   const stringKey = isKalimatSearch ? searchIdToNavigationKey(type, String(key)) : String(key);
-  if (type === SearchNavigationType.AYAH) {
+  if (
+    type === SearchNavigationType.AYAH ||
+    type === SearchNavigationType.TRANSLITERATION ||
+    type === SearchNavigationType.TRANSLATION
+  ) {
     return getChapterWithStartingVerseUrl(stringKey);
   }
   if (type === SearchNavigationType.JUZ) {
@@ -269,7 +281,7 @@ export const resolveUrlBySearchNavigationType = (
  * @returns {string}
  */
 export const getSearchQueryNavigationUrl = (query?: string): string =>
-  `/search${query ? `?${QueryParam.QUERY}=${query}` : ''}`;
+  `/search${query ? `?${QueryParam.QUERY}=${encodeURIComponent(query)}` : ''}`;
 
 /**
  * Get the href link to the info page of a Surah.
@@ -353,7 +365,16 @@ export const getLoginNavigationUrl = (redirectTo?: string) =>
 
 export const getReadingGoalProgressNavigationUrl = () => '/reading-goal/progress';
 
+export const getFirstTimeReadingGuideNavigationUrl = () => '/first-time-reading-guide';
+
 export const getNotesNavigationUrl = () => '/notes-and-reflections';
+
+export const getForgotPasswordNavigationUrl = () => `/forgot-password`;
+
+export const getResetPasswordNavigationUrl = () => `/reset-password`;
+
+export const getVerifyEmailNavigationUrl = (email?: string) =>
+  `/verify-email${email ? `?${QueryParam.EMAIL}=${email}` : ''}`;
 
 export const getNotificationSettingsNavigationUrl = () => '/notification-settings';
 export const getQuranicCalendarNavigationUrl = () => '/calendar';

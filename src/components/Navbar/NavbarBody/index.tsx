@@ -1,18 +1,19 @@
 import { memo } from 'react';
 
+import dynamic from 'next/dynamic';
 import useTranslation from 'next-translate/useTranslation';
 import { useDispatch } from 'react-redux';
-
-import LanguageSelector from '../LanguageSelector';
-import NavbarLogoWrapper from '../Logo/NavbarLogoWrapper';
-import NavigationDrawer from '../NavigationDrawer/NavigationDrawer';
-import SearchDrawer from '../SearchDrawer/SearchDrawer';
-import SettingsDrawer from '../SettingsDrawer/SettingsDrawer';
 
 import styles from './NavbarBody.module.scss';
 import ProfileAvatarButton from './ProfileAvatarButton';
 
+import LanguageSelector from '@/components/Navbar/LanguageSelector';
+import NavbarLogoWrapper from '@/components/Navbar/Logo/NavbarLogoWrapper';
+import NavigationDrawer from '@/components/Navbar/NavigationDrawer/NavigationDrawer';
+import SearchDrawer from '@/components/Navbar/SearchDrawer/SearchDrawer';
+import SettingsDrawer from '@/components/Navbar/SettingsDrawer/SettingsDrawer';
 import Button, { ButtonShape, ButtonVariant } from '@/dls/Button/Button';
+import Spinner from '@/dls/Spinner/Spinner';
 import IconMenu from '@/icons/menu.svg';
 import IconSearch from '@/icons/search.svg';
 import IconSettings from '@/icons/settings.svg';
@@ -20,8 +21,17 @@ import {
   setIsSearchDrawerOpen,
   setIsNavigationDrawerOpen,
   setIsSettingsDrawerOpen,
+  setDisableSearchDrawerTransition,
 } from '@/redux/slices/navbar';
 import { logEvent } from '@/utils/eventLogger';
+
+const SidebarNavigation = dynamic(
+  () => import('@/components/QuranReader/SidebarNavigation/SidebarNavigation'),
+  {
+    ssr: false,
+    loading: () => <Spinner />,
+  },
+);
 
 /**
  * Log drawer events.
@@ -44,6 +54,8 @@ const NavbarBody: React.FC = () => {
   const openSearchDrawer = () => {
     logDrawerOpenEvent('search');
     dispatch({ type: setIsSearchDrawerOpen.type, payload: true });
+    // reset the disable transition state
+    dispatch({ type: setDisableSearchDrawerTransition.type, payload: false });
   };
 
   const openSettingsDrawer = () => {
@@ -99,6 +111,7 @@ const NavbarBody: React.FC = () => {
               <IconSearch />
             </Button>
             <SearchDrawer />
+            <SidebarNavigation />
           </>
         </div>
       </div>

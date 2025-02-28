@@ -1,26 +1,27 @@
 {
-    "change": "修改",
-    "curated-station": {
-        "juz-amma": {
-            "description": "聆听《古兰经》的最后一卷",
-            "title": "尤兹阿玛"
-        },
-        "popular-recitations": {
-            "description": "每日精选的诵读",
-            "title": "广泛收听的诵读"
-        },
-        "surah-al-kahf": {
-            "description": "重复听山洞章",
-            "title": "山洞章"
-        },
-        "yaseen-alwaqiah-al-mulk": {
-            "description": "朗诵者策展的古兰经",
-            "title": "雅辛章、大事章、国权章"
-        }
+  "change": "修改",
+  "curated-station": {
+    "juz-amma": {
+      "description": "聆听《古兰经》的最后一卷",
+      "title": "尤兹阿玛"
     },
-    "curated-stations": "策划站",
-    "pause-radio": "暂停播放",
-    "play-radio": "在线听古兰经",
-    "radio-desc": "聆听各种朗诵者不停优美地朗诵《古兰经》。",
-    "reciter-stations": "朗诵站"
+    "popular-recitations": {
+      "description": "每日精选的诵读",
+      "title": "广泛收听的诵读"
+    },
+    "surah-al-kahf": {
+      "description": "重复听山洞章",
+      "title": "山洞章"
+    },
+    "yaseen-alwaqiah-al-mulk": {
+      "description": "朗诵者策展的古兰经",
+      "title": "雅辛章、大事章、国权章"
+    }
+  },
+  "curated-stations": "策划站",
+  "pause-radio": "暂停播放",
+  "play-radio": "在线听古兰经",
+  "radio-desc": "聆听各种朗诵者不停优美地朗诵《古兰经》。",
+  "reciter-stations": "朗诵站",
+  "station": "车站"
 }

@@ -10,13 +10,18 @@ import VerseListItem from './VerseListItem';
 import useChapterIdsByUrlPath from '@/hooks/useChapterId';
 import { selectLastReadVerseKey } from '@/redux/slices/QuranReader/readingTracker';
 import SearchQuerySource from '@/types/SearchQuerySource';
-import { logEmptySearchResults, logTextSearchQuery } from '@/utils/eventLogger';
+import { logButtonClick, logEmptySearchResults, logTextSearchQuery } from '@/utils/eventLogger';
 import { toLocalizedNumber } from '@/utils/locale';
 import { getChapterWithStartingVerseUrl } from '@/utils/navigation';
 import { generateChapterVersesKeys, getVerseNumberFromKey } from '@/utils/verse';
 import DataContext from 'src/contexts/DataContext';
 
-const VerseList = () => {
+type Props = {
+  onAfterNavigationItemRouted?: () => void;
+  selectedChapterId?: string;
+};
+
+const VerseList: React.FC<Props> = ({ onAfterNavigationItemRouted, selectedChapterId }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const { t, lang } = useTranslation('common');
   const lastReadVerseKey = useSelector(selectLastReadVerseKey);
@@ -26,17 +31,30 @@ const VerseList = () => {
   const chapterIds = useChapterIdsByUrlPath(lang);
   const urlChapterId = chapterIds && chapterIds.length > 0 ? chapterIds[0] : null;
 
-  const [currentChapterId, setCurrentChapterId] = useState(urlChapterId);
+  // Use the provided selectedChapterId if available, otherwise use URL or fallback logic
+  const [currentChapterId, setCurrentChapterId] = useState<string>(
+    selectedChapterId || urlChapterId || '1',
+  );
 
   useEffect(() => {
-    setCurrentChapterId(lastReadVerseKey.chapterId);
-  }, [lastReadVerseKey]);
+    // If selectedChapterId is provided externally, use it
+    if (selectedChapterId) {
+      setCurrentChapterId(selectedChapterId);
+    } else if (lastReadVerseKey.chapterId) {
+      setCurrentChapterId(lastReadVerseKey.chapterId);
+    } else if (!currentChapterId) {
+      // If no chapter is selected, default to chapter 1
+      setCurrentChapterId('1');
+    }
+  }, [lastReadVerseKey, currentChapterId, selectedChapterId]);
 
   useEffect(() => {
     // when the user navigates to a new chapter, reset the search query, and update the current chapter id
     setSearchQuery('');
-    setCurrentChapterId(urlChapterId);
-  }, [urlChapterId]);
+    if (!selectedChapterId) {
+      setCurrentChapterId(urlChapterId || currentChapterId || '1');
+    }
+  }, [urlChapterId, currentChapterId, selectedChapterId]);
 
   const verseKeys = useMemo(
     () => (currentChapterId ? generateChapterVersesKeys(chaptersData, currentChapterId) : []),
@@ -63,15 +81,43 @@ const VerseList = () => {
     }
   }, [searchQuery, filteredVerseKeys]);
 
+  const navigateAndHandleAfterNavigation = (href: string) => {
+    router
+      .push(href, undefined, {
+        shallow: false, // Change to false to force a full page reload
+      })
+      .then(() => {
+        if (onAfterNavigationItemRouted) {
+          onAfterNavigationItemRouted();
+        }
+      })
+      .catch(() => {
+        // As a fallback, we can use window.location
+        window.location.href = href;
+      });
+  };
+
   // Handle when user press `Enter` in input box
   const handleVerseInputSubmit = (e) => {
     e.preventDefault();
     const firstFilteredVerseKey = filteredVerseKeys[0];
     if (firstFilteredVerseKey) {
-      router.push(getChapterWithStartingVerseUrl(firstFilteredVerseKey), undefined, {
-        shallow: true, // https://nextjs.org/docs/routing/shallow-routing
-      });
+      const href = getChapterWithStartingVerseUrl(firstFilteredVerseKey);
+      navigateAndHandleAfterNavigation(href);
     }
+  };
+
+  const handleVerseClick = (e: React.MouseEvent, verseKey: string) => {
+    e.preventDefault();
+    const href = getChapterWithStartingVerseUrl(verseKey);
+    navigateAndHandleAfterNavigation(href);
+    logButtonClick(`navigation_list_verse`, {
+      verseKey,
+    });
+  };
+
+  const onSearchQueryChange = (e) => {
+    setSearchQuery(e.target.value);
   };
 
   return (
@@ -79,16 +125,20 @@ const VerseList = () => {
       <form onSubmit={handleVerseInputSubmit}>
         <input
           value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
+          onChange={onSearchQueryChange}
           className={styles.searchInput}
           placeholder={t('verse')}
         />
       </form>
       <div className={styles.listContainer}>
         <div className={styles.list}>
-          {filteredVerseKeys.map((verseKey) => {
-            return <VerseListItem verseKey={verseKey} key={verseKey} />;
-          })}
+          {filteredVerseKeys.map((verseKey) => (
+            <VerseListItem
+              verseKey={verseKey}
+              key={verseKey}
+              onVerseClick={(e) => handleVerseClick(e, verseKey)}
+            />
+          ))}
         </div>
       </div>
     </div>

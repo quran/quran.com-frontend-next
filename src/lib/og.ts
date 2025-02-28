@@ -35,3 +35,6 @@ export const getChapterOgImageUrl = ({
 
 export const getWhatIsRamadanOgImageUrl = ({ locale }: BaseOgOptions) =>
   `${BASE_OG_URL}/api/og/what-is-ramadan?lang=${locale}`;
+
+export const getExploreAnswersOgImageUrl = ({ locale }: BaseOgOptions) =>
+  `${BASE_OG_URL}/api/og/explore-answers?lang=${locale}`;

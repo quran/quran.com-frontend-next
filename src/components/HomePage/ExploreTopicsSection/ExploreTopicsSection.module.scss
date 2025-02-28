@@ -1,0 +1,44 @@
+@use "src/styles/breakpoints";
+
+.header {
+    padding-block-end: var(--spacing-medium);
+    @include breakpoints.tablet {
+        padding-block-end: var(--spacing-large-px);
+    }
+
+    h1 {
+        font-size: var(--font-size-xlarge-px);
+        font-weight: var(--font-weight-bold);
+        @include breakpoints.tablet {
+            font-size: var(--font-size-xxlarge-px);
+        }
+    }
+}
+
+.topic {
+    background-color: var(--color-topics-grey);
+    padding: var(--spacing-medium-px) !important;
+    min-width: max-content;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    color: var(--color-text-default-new);
+
+    @include breakpoints.tablet {
+        font-size: var(--font-size-large-px);
+    }
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: var(--spacing-small);
+    @include breakpoints.smallerThanTablet {
+        gap: var(--spacing-xxsmall);
+    }
+}
+
+.highlighted {
+    background-color: var(--color-topics-gold);
+}

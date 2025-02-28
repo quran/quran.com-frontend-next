@@ -14,3 +14,8 @@
   border-block-end: 1px var(--color-borders-hairline) solid;
   min-height: calc(var(--spacing-mega) + var(--spacing-small));
 }
+
+.projectsDesc {
+  font-size: var(--font-size-small);
+  margin-block-start: var(--spacing-small);
+}

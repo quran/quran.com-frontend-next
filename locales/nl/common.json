@@ -102,8 +102,7 @@
   "command-bar": {
     "navigations": "Navigatie",
     "no-nav-results": "Geen navigatieresultaten",
-    "placeholder": "Wat wil je lezen?",
-    "powered-by": "Gesproken zoekopdracht mogelijk gemaakt door Tarteel.ai",
+    "placeholder": "Doorzoek de Koran...",
     "recent-navigations": "Recente navigatie",
     "search-by-voice": "Zoek bij stem",
     "try-navigating": "Probeer te navigeren naar"
@@ -122,9 +121,11 @@
     }
   },
   "continue": "Doorgaan met",
+  "contribute-to-our-mission": "Draag bij aan onze missie",
   "copied": "gekopieerd",
   "copied-to-clipboard": "Gekopieerd naar het klembord",
   "copy": "Kopiëren",
+  "copylink": "Link kopiëren",
   "counter": {
     "decrease": "Verminderen",
     "increase": "Toename"
@@ -134,6 +135,7 @@
   "developers": "ontwikkelaars",
   "display": "Weergave",
   "donate": "Doneren",
+  "donate-now": "Doneer nu",
   "donate_monthly": "Doneer maandelijks",
   "donate_once": "Doneer eenmalig",
   "edit": "Bewerking",
@@ -157,6 +159,34 @@
     "ranges-too-many-verses": "*Max {{maxNumberOfVerses}} Ayahs",
     "ranges-wrong-order": "Het beginvers moet vóór het eindvers staan."
   },
+  "errors": {
+    "account-banned": "Sorry, uw account is geblokkeerd. Neem contact op met Quran.Foundation",
+    "badRequest": "*Ongeldige aanvraag",
+    "banned": "*Sorry, uw account is geblokkeerd. Neem contact op met Quran.Foundation",
+    "confirm": "*Bevestig wachtwoord komt niet overeen met het wachtwoord",
+    "email": "*Ongeldig e-mailadres!",
+    "exactLength": "*Waarde moet exacte lengte zijn",
+    "expiredToken": "*Dit token is verlopen",
+    "forgot-password-failed": "Het is niet gelukt om de e-mail voor het opnieuw instellen van het wachtwoord te versturen. Probeer het opnieuw.",
+    "immutable": "*Deze waarde kan niet worden gewijzigd",
+    "invalid": "*Deze {{fieldName}} is ongeldig",
+    "invalidEmailOrPassword": "*Ongeldig e-mailadres of wachtwoord",
+    "max": "* {{fieldName}} moet kleiner zijn dan of gelijk zijn aan {{max}} cijfers",
+    "min": "* {{fieldName}} moet meer dan of gelijk zijn aan {{min}} cijfers",
+    "name": "* {{fieldName}} mag alleen uit letters en cijfers bestaan",
+    "notFound": "*Niet gevonden",
+    "required": "* {{fieldName}} ontbreekt!",
+    "reset-password-failed": "Wachtwoord resetten mislukt. Probeer het opnieuw.",
+    "signin-failed": "Aanmelden mislukt. Probeer het opnieuw.",
+    "signup-failed": "Registratie mislukt. Probeer het opnieuw.",
+    "taken": "* {{fieldName}} bestaat al!",
+    "usedToken": "*Dit token is al gebruikt",
+    "username": "* {{fieldName}} accepteert alleen onderstrepingstekens en letters",
+    "verification-code-invalid": "Deze verificatiecode is ongeldig",
+    "verification-code-length": "Verificatiecode moet {{length}} cijfers lang zijn",
+    "verification-failed": "Verificatie mislukt. Probeer het opnieuw.",
+    "verification-resend-failed": "Het opnieuw verzenden van de verificatiecode is mislukt"
+  },
   "exciting-updates": "Spannende updates",
   "feedback": "Feedback",
   "fonts": {
@@ -179,20 +209,25 @@
     "translation-font-size": "Vertaling lettergrootte"
   },
   "footer": {
-    "description": "Quran.com is een Sadaqah Jariyah. We hopen het voor iedereen gemakkelijk te maken om de Edele Koran te lezen, te bestuderen en te leren. De Edele Koran heeft vele namen, waaronder Al-Quran Al-Kareem, Al-Ketab, Al-Furqan, Al-Maw'itha, Al-Thikr en Al-Noor.",
+    "description": "Quran.com is een vertrouwd platform dat door miljoenen mensen wereldwijd wordt gebruikt om de Koran in meerdere talen te lezen, te doorzoeken, te beluisteren en erover na te denken. Het biedt vertalingen, tafsir, recitaties, woord-voor-woordvertalingen en hulpmiddelen voor diepere studie, waardoor de Koran voor iedereen toegankelijk is. <br/> <br/> Als Sadaqah Jariyah is Quran.com toegewijd om mensen te helpen een diepe verbinding met de Koran te maken. Ondersteund door Quran.Foundation, een 501(c)(3) non-profitorganisatie, blijft Quran.com groeien als een gratis en waardevolle bron voor iedereen, Alhamdullilah”",
     "hiring": "Wij werven aan! Sluit je aan bij het team van QuranFoundation en draag bij aan onze missie. <link> Solliciteer nu! </link>",
     "rights": "Alle rechten voorbehouden",
-    "title": "Lees, bestudeer en leer de Edele Koran."
+    "title": "Lees, luister, zoek en denk na over de Koran"
   },
   "form": {
     "body": "Lichaam",
     "code": "Verificatie code",
+    "confirm-password": "Bevestig wachtwoord",
     "email": "E-mail",
     "firstName": "Voornaam",
     "lastName": "Achternaam",
-    "title": "Titel"
+    "password": "Wachtwoord",
+    "title": "Titel",
+    "username": "Gebruikersnaam",
+    "verification-code": "Verificatiecode"
   },
   "from": "Van",
+  "fundraising-share-title": "Deel Quran.com Fondsenwerving",
   "fundraising-sticky-banner": {
     "cta": "Doneer",
     "title": "Geef tijdens de mooiste dagen!"
@@ -217,6 +252,7 @@
   "learn-more": "Leer meer",
   "learning-plans": "Leerplannen",
   "less": "Minder",
+  "lessons": "Lessen",
   "loading": "Bezig met laden",
   "login": "Log in",
   "logout": "Uitloggen",
@@ -250,6 +286,7 @@
   "off": "Uit",
   "oldest": "Oudste",
   "on": "Op",
+  "our-projects": "Onze projecten",
   "page": "Bladzijde",
   "pages": "Pagina's",
   "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} van {{totalNumberOfResults}} zoekresultaten",
@@ -272,6 +309,7 @@
   "privacy": "Privacy",
   "product-updates": "Productupdates",
   "profile": "Profiel",
+  "projects-desc": "Non-profitprojecten die eigendom zijn van, beheerd worden door of gesponsord worden door Quran.Foundation",
   "q-reflect": "KoranReflect",
   "quran-com": "koran.com",
   "quran-radio": "Koran Radio",
@@ -287,6 +325,7 @@
   "reciters": "voordragers",
   "reflect": "Reflecteren",
   "reflections": "Reflecties",
+  "reflections-and-lessons": "Reflecties en lessen",
   "remove": "Verwijderen",
   "rename": "Hernoemen",
   "retry": "Opnieuw proberen",
@@ -296,10 +335,12 @@
   "save-to-collection": "Opslaan in collectie",
   "search-for": "Zoeken naar '{{searchQuery}}'",
   "search-results": "{{count}} zoekresultaten",
+  "search-results-no-count": "Zoekresultaten",
   "search": {
     "filters": "Filters",
     "hint": "Probeer te zoeken naar",
     "jump-to": "Spring naar",
+    "more-results": "Meer resultaten",
     "no-results": "geen resultaten gevonden",
     "no-results-suggestion": "We konden geen overeenkomende zoekresultaten vinden voor \" {{searchQuery}} \". probeer een ander trefwoord te zoeken.",
     "popular": "Populaire zoekopdrachten",
@@ -340,8 +381,10 @@
     "search-juz": "Zoek Juz",
     "search-page": "Zoekpagina",
     "search-surah": "zoek soera",
+    "search-verse": "Zoek Vers",
     "try-navigating-with": "Tip: probeer te navigeren met"
   },
+  "sign-in": "Aanmelden",
   "sitemap": "Sitemap",
   "sort": {
     "ascending": "Oplopend",
@@ -361,10 +404,6 @@
     "tafsir-desc": "Lees {{tafsirName}} voor Ayah {{verseNumber}} van Surah {{surahName}}",
     "tafsirs-desc": "Lees verschillende Tafsirs van Ayah {{ayahNumber}} van Surah {{surahName}} door vertrouwde Tafsir-geleerden",
     "title": "Tafsir"
-  },
-  "tarteel": {
-    "app": "Tarteel-app",
-    "name": "Tarteel.ai"
   },
   "terms-and-conditions": "Algemene voorwaarden",
   "theme": "Thema",
@@ -400,13 +439,13 @@
   "view": "Weergave",
   "voice": {
     "ask-permission": "Schakel microfoontoestemming in om gesproken zoekopdrachten te gaan gebruiken",
-    "error": "Er is een fout opgetreden, probeer het later opnieuw. Of download de",
-    "no-permission": "Het lijkt erop dat u de microfoonrechten niet hebt ingeschakeld. Schakel de microfoonrechten in en probeer het opnieuw of download de",
-    "not-supported": "Het lijkt erop dat uw browser geen microfoon ondersteunt. Probeer een andere browser of download de",
+    "error": "Er is een fout opgetreden. Probeer het later opnieuw.",
+    "no-permission": "Het lijkt erop dat u de microfoonrechten niet hebt ingeschakeld. Schakel de microfoonrechten in en probeer het opnieuw.",
+    "not-supported": "Het lijkt erop dat uw browser geen microfoon ondersteunt. Probeer een andere browser.",
     "suggest": "Begin alsjeblieft met reciteren en je vers zal verschijnen.",
     "suggest-subtitle": "Reciteer een vers in het Arabisch, en het vers zal verschijnen",
     "suggest-title": "Reciteer nu",
-    "voice-search-powered-by": "Gesproken zoekopdracht Mogelijk gemaakt door"
+    "voice-search-powered-by": "Stem zoeken Aangedreven door"
   },
   "wbw": "Woord voor woord",
   "wbw-lang-summary": "Woord voor woord vertalingsbron: <link> {{source}} </link> . Deze bron is onafhankelijk van de selectie van de versvertaling.",

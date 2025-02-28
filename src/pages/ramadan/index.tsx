@@ -21,12 +21,13 @@ import styles from '@/pages/contentPage.module.scss';
 import pageStyles from '@/pages/ramadan/RamadanActivities.module.scss';
 import AyahLevelSettings from '@/public/images/ayah-level-settings.jpeg';
 import { makeDonatePageUrl } from '@/utils/apiPaths';
+import { isLoggedIn } from '@/utils/auth/login';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getLanguageAlternates } from '@/utils/locale';
 import {
   getCanonicalUrl,
   getCourseNavigationUrl,
-  getCoursesNavigationUrl,
+  getLoginNavigationUrl,
   getRamadanNavigationUrl,
   getReadingGoalNavigationUrl,
 } from '@/utils/navigation';
@@ -53,7 +54,7 @@ const PreparingForRamadanPage: NextPage = (): JSX.Element => {
       <PageContainer>
         <div className={classNames(pageStyles.container, styles.contentPage)} dir="ltr">
           <div className={styles.subSection}>
-            <h1>Preparing for Ramadan: Deepen Your Connection with the Quran</h1>
+            <h1>Deepen Your Connection with the Quran this Ramadan</h1>
             <div>
               Ramadan is a time of immense blessings and reflection, a month where hearts are
               softened and connections with the Quran are deepened. It’s the perfect opportunity to
@@ -71,15 +72,22 @@ const PreparingForRamadanPage: NextPage = (): JSX.Element => {
               </li>
               <li>
                 <InlineLink
-                  text="Preparing Our Hearts for Ramadan"
-                  href="#preparing-our-hearts"
+                  text="Mindful Fasting: A Ramadan Learning Plan"
+                  href="#mindful-fasting"
                   isNewTab={false}
                 />
               </li>
               <li>
                 <InlineLink
-                  text="Mindful Fasting: A Ramadan Learning Plan"
-                  href="#mindful-fasting"
+                  text="Quranic Duas: Reflect and Connect"
+                  href="#quranic-duas"
+                  isNewTab={false}
+                />
+              </li>
+              <li>
+                <InlineLink
+                  text="Preparing Our Hearts for Ramadan"
+                  href="#preparing-our-hearts"
                   isNewTab={false}
                 />
               </li>
@@ -113,7 +121,11 @@ const PreparingForRamadanPage: NextPage = (): JSX.Element => {
                   onButtonClicked('goal_setting');
                 }}
                 variant={ButtonVariant.Shadow}
-                href={getReadingGoalNavigationUrl()}
+                href={
+                  isLoggedIn()
+                    ? getReadingGoalNavigationUrl()
+                    : getLoginNavigationUrl(getReadingGoalNavigationUrl())
+                }
                 isNewTab
                 className={styles.button}
               >
@@ -122,12 +134,84 @@ const PreparingForRamadanPage: NextPage = (): JSX.Element => {
             </div>
           </div>
           <hr />
-          <div className={styles.subSection} id="preparing-our-hearts">
+          <div className={styles.subSection}>
             <h1>Our Featured Ramadan Programs</h1>
-            <h2>Preparing Our Hearts for Ramadan</h2>
+          </div>
+          <hr />
+          <div className={styles.subSection} id="mindful-fasting">
+            <h1>Mindful Fasting: A Ramadan Learning Plan</h1>
             <div>
-              Embark on a journey to mentally and spiritually prepare for Ramadan with our enhanced
-              Learning Plan, Preparing Our Hearts for Ramadan. This revised program is based on last
+              Discover the beauty of fasting beyond abstention with Mindful Fasting, a unique
+              Learning Plan designed to help you:
+            </div>
+            <ul>
+              <li>Reflect on the deeper purpose of fasting.</li>
+              <li>Gain Quranic insights into patience, gratitude, and self-control.</li>
+              <li>Deepen your connection with Allah through intentional practices.</li>
+            </ul>
+            <div>Start this learning plan now:</div>
+            <div className={styles.ctaContainer}>
+              <Button
+                onClick={() => {
+                  onButtonClicked('mindful_fasting');
+                }}
+                variant={ButtonVariant.Shadow}
+                href={getCourseNavigationUrl('mindful-fasting')}
+                isNewTab
+                className={styles.button}
+              >
+                Enroll Now
+              </Button>
+            </div>
+          </div>
+          <hr />
+          <div className={styles.subSection} id="quranic-duas">
+            <h1>Quranic Duas: Reflect and Connect</h1>
+            <div>
+              This Ramadan, join Shaykh Hammad Fahim and the QuranReflect community in a
+              transformative journey through the Duas in the Quran. Each session invites you to:
+            </div>
+            <ul>
+              <li>Reflect deeply on selected Quranic supplications.</li>
+              <li>Understand the meaning and context of these powerful prayers.</li>
+              <li>Share and engage with reflections from a global community.</li>
+            </ul>
+            <div>To participate, sign into QuranRelect:</div>
+            <div className={styles.ctaContainer}>
+              <Button
+                onClick={() => {
+                  onButtonClicked('quranic_duas');
+                }}
+                variant={ButtonVariant.Shadow}
+                href="https://quranreflect.com/users/sign_in"
+                isNewTab
+                className={styles.button}
+              >
+                Sign in
+              </Button>
+            </div>
+            <div>
+              Sign up on QuranReflect.com to automatically follow Shaykh Fahim and receive updates.
+              Explore{' '}
+              <InlineLink
+                text="#QuranicDuas"
+                href="https://quranreflect.com/?tags=%23QuranicDuas"
+                isNewTab
+              />{' '}
+              throughout the month to read community reflections.
+            </div>
+            <br />
+            <div>
+              (Already have a Quran.com account? Sign in with the same email to link your accounts.)
+            </div>
+          </div>
+          <hr />
+          <div className={styles.subSection} id="preparing-our-hearts">
+            <h1>Preparing Our Hearts for Ramadan</h1>
+            <div>
+              It's never too late to prepare for the days of Ramadan! Enhance your spiritual and
+              mental readiness with our Learning Plan, Preparing Our Hearts for Ramadan. Start today
+              and make the most of the blessed days ahead. This revised program is based on last
               year’s highly-rated course, enriched with additional insights and reflections to help
               you approach Ramadan with a rejuvenated focus.
             </div>
@@ -214,28 +298,6 @@ const PreparingForRamadanPage: NextPage = (): JSX.Element => {
             </div>
           </div>
           <hr />
-          <div className={styles.subSection} id="mindful-fasting">
-            <h1>Mindful Fasting: A Ramadan Learning Plan</h1>
-            <div>
-              Discover the beauty of fasting beyond abstention with Mindful Fasting, a unique
-              Learning Plan designed to help you:
-            </div>
-            <ul>
-              <li>Reflect on the deeper purpose of fasting.</li>
-              <li>Gain Quranic insights into patience, gratitude, and self-control.</li>
-              <li>Deepen your connection with Allah through intentional practices.</li>
-            </ul>
-            <div>
-              Launching: 1st day of Ramadan on{' '}
-              <InlineLink
-                text="Learning Plans - Quran.com"
-                href={getCoursesNavigationUrl()}
-                isNewTab={false}
-              />
-              , insha’Allah.
-            </div>
-          </div>
-          <hr />
           <div className={styles.subSection} id="share-the-month-of-the-quran">
             <h1>Share the Month of the Quran! Visit 'What Is Ramadan?'</h1>
             <div>
@@ -291,7 +353,13 @@ const PreparingForRamadanPage: NextPage = (): JSX.Element => {
               We remain committed to our mission to empower every human being to benefit from the
               Quran. The modern technology and human talent needed to accomplish our mission
               requires resources. Monthly donations help us retain top talent and sustain operations
-              so we focus less on fundraising and more on creating impact.
+              so we focus less on fundraising and more on creating impact. To learn more and donate,
+              visit:
+              <InlineLink
+                text="donate.quran.foundation"
+                href="https://donate.quran.foundation"
+                isNewTab
+              />
             </div>
             <div className={styles.ctaContainer}>
               <Button
