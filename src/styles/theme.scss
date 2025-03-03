@@ -84,6 +84,7 @@
   --transition-fast: 0.16s;
   --transition-regular: 0.4s;
   --transition-slow: 0.6s;
+  --transition-timing-regular: ease-in-out;
 
   @include shades.shades-dangerous;
   @include light.mode;

@@ -13,11 +13,14 @@ $containerMaxWidth: calc(6 * var(--spacing-mega));
   padding-block: var(--spacing-medium);
   padding-inline: var(--spacing-medium);
   border-radius: var(--border-radius-default);
+  transition: var(--transition-regular) var(--transition-timing-regular);
+  transition-property: background-color, border-color;
   cursor: pointer;
+
   @media (hover: hover) {
     &:hover {
-      border: 1px solid var(--color-success-medium);
       background-color: var(--color-background-alternative-faded);
+      border-color: var(--color-success-medium);
     }
   }
 }
