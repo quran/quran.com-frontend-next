@@ -91,8 +91,8 @@
   "remaining": "Remaining for today",
   "remaining-base": "Remaining",
   "remaining-days": {
-    "one": "<p>{{days}}</p> <span>day remaining</span>",
-    "other": "<p>{{days}}</p> <span>days remaining</span>"
+    "one": "{{days}} day remaining",
+    "other": "{{days}} days remaining"
   },
   "set-a-new-goal": "Set a new Goal",
   "set-reading-goal-success": "Your reading goal has been set successfully.",
