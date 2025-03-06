@@ -17,9 +17,11 @@ import {
   isValidOpacityQueryParamValue,
   isValidVideoIdQueryParamValue,
   isValidFontStyleQueryParamValue,
+  isValidPreviewModeQueryParamValue,
 } from './queryParamValidator';
 
 import AvailableTranslation from '@/types/AvailableTranslation';
+import PreviewMode from '@/types/Media/PreviewMode';
 import Reciter from '@/types/Reciter';
 
 const reciters = [
@@ -154,6 +156,17 @@ describe('isValidOrientationQueryParamValue', () => {
   });
   it('Returns false for invalid orientation', () => {
     expect(isValidOrientationQueryParamValue('sdfsdfsdf')).toBe(false);
+  });
+});
+
+describe('isValidPreviewModeQueryParamValue', () => {
+  it('Returns true for valid preview mode', () => {
+    expect(isValidPreviewModeQueryParamValue(PreviewMode.DISABLED)).toBe(true);
+    expect(isValidPreviewModeQueryParamValue(PreviewMode.ENABLED)).toBe(true);
+  });
+
+  it('Returns false for invalid preview mode', () => {
+    expect(isValidPreviewModeQueryParamValue('sdfsdfsdf')).toBe(false);
   });
 });
 

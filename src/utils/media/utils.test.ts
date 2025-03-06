@@ -15,6 +15,7 @@ import {
 import Alignment from '@/types/Media/Alignment';
 import GenerateMediaFileRequest, { MediaType } from '@/types/Media/GenerateMediaFileRequest';
 import Orientation from '@/types/Media/Orientation';
+import PreviewMode from '@/types/Media/PreviewMode';
 import WatermarkColor from '@/types/Media/WatermarkColor';
 import QueryParam from '@/types/QueryParam';
 import { QuranFont } from '@/types/QuranReader';
@@ -486,6 +487,7 @@ describe('prepareGenerateMediaFileRequestData', () => {
       isPlayer: true,
       translations: [131],
       frame: 0,
+      previewMode: PreviewMode.DISABLED,
       type: MediaType.VIDEO,
       chaptersDataArabic: '',
     } as GenerateMediaFileRequest;
@@ -515,6 +517,7 @@ describe('prepareGenerateMediaFileRequestData', () => {
       chapterId: rawData.verses[0].chapterId,
       startVerseKey: rawData.verses[0].verseKey,
       endVerseKey: rawData.verses[rawData.verses.length - 1].verseKey,
+      previewMode: rawData.previewMode,
     });
   });
   it('should format request when type is image', () => {
@@ -861,6 +864,7 @@ describe('prepareGenerateMediaFileRequestData', () => {
       frame: 0,
       type: MediaType.IMAGE,
       chaptersDataArabic: '',
+      previewMode: PreviewMode.DISABLED,
     } as GenerateMediaFileRequest;
 
     const result = prepareGenerateMediaFileRequestData(rawData);
@@ -888,6 +892,7 @@ describe('prepareGenerateMediaFileRequestData', () => {
       audio: {
         reciterId: rawData.audio.reciterId,
       },
+      previewMode: rawData.previewMode,
     });
   });
 });
