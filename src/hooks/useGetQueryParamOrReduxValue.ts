@@ -241,15 +241,16 @@ const useGetQueryParamOrReduxValue = (
   const reduxParamValue = reduxObjectKey
     ? reduxSelectorValueOrValues[reduxObjectKey]
     : reduxSelectorValueOrValues;
+
   // if the param exists in the url
   if (isReady && query[queryParam] !== undefined) {
     const queryParamStringValue = String(query[queryParam]);
-    const isQueryParamDifferent = isQueryParamDifferentThanReduxValue(
+    const parsedQueryParamValue = getQueryParamValueByType(
       queryParamStringValue,
       queryParamValueType,
-      reduxParamValue,
     );
 
+    // Check if the URL parameter is valid
     const isValidValue = isValidQueryParam(
       queryParamStringValue,
       chaptersData,
@@ -257,28 +258,33 @@ const useGetQueryParamOrReduxValue = (
       reduxSelectorValueOrValues,
       extraData,
     );
-    const parsedQueryParamValue = getQueryParamValueByType(
-      queryParamStringValue,
-      queryParamValueType,
-    );
 
-    // if the url param is not valid, return the redux value
+    // If the URL parameter is not valid, return the Redux value
     if (!isValidValue) {
       if (customValueGetterWhenParamIsInvalid) {
         return {
-          isQueryParamDifferent: false,
           value: customValueGetterWhenParamIsInvalid(reduxSelectorValueOrValues, query),
+          isQueryParamDifferent: false,
         };
       }
-      return { isQueryParamDifferent: false, value: reduxParamValue };
+      return { value: reduxParamValue, isQueryParamDifferent: false };
     }
 
+    // Check if the URL value is different from Redux
+    const isQueryParamDifferent = isQueryParamDifferentThanReduxValue(
+      queryParamStringValue,
+      queryParamValueType,
+      reduxParamValue,
+    );
+
+    // Always return the URL value if it's valid, regardless of whether it's different
     return {
       value: parsedQueryParamValue,
       isQueryParamDifferent,
     };
   }
 
+  // If no URL parameter exists, use the Redux value
   return {
     value: reduxParamValue,
     isQueryParamDifferent: false,
