@@ -16,6 +16,7 @@
   padding-inline-end: var(--flow-side-spacing);
   @include breakpoints.tablet {
     --flow-side-spacing: 0;
+    width: unset;
   }
 
   /**
