@@ -7,20 +7,20 @@
 const getVoiceSearchErrorInfo = (errorMessage: string): { key: string; fallback: string } => {
   if (errorMessage === 'Microphone access denied') {
     return {
-      key: 'voice-search.mic-permission-denied',
+      key: 'voice.no-permission',
       fallback: 'Microphone access denied. Please allow microphone access to use voice search.',
     };
   }
 
   if (errorMessage === 'No speech detected') {
     return {
-      key: 'voice-search.no-speech-detected',
+      key: 'voice.not-supported',
       fallback: 'No speech detected. Please try again.',
     };
   }
 
   return {
-    key: 'voice-search.error',
+    key: 'voice.error',
     fallback: 'An error occurred during voice search. Please try again.',
   };
 };
