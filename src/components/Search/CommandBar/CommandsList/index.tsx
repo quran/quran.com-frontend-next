@@ -35,6 +35,7 @@ export interface Command extends SearchNavigationResult {
 interface Props {
   commandGroups: { groups: Record<string, Command[]>; numberOfCommands: number };
   searchQuery?: string;
+  onResetSearchResults?: () => void;
 }
 
 export const RESULTS_GROUP = 'results';
@@ -42,6 +43,7 @@ export const RESULTS_GROUP = 'results';
 const CommandsList: React.FC<Props> = ({
   commandGroups: { groups, numberOfCommands },
   searchQuery,
+  onResetSearchResults,
 }) => {
   const { t } = useTranslation('common');
   const [scrollToSelectedCommand, selectedItemRef]: [() => void, RefObject<HTMLLIElement>] =
@@ -83,12 +85,20 @@ const CommandsList: React.FC<Props> = ({
   const navigateToLink = useCallback(
     (command: Command) => {
       const { name, resultType, key } = command;
-      router.push(resolveUrlBySearchNavigationType(resultType, key)).then(() => {
-        dispatch({ type: addRecentNavigation.type, payload: { name, resultType, key } });
-        dispatch({ type: setIsExpanded.type, payload: false });
-      });
+
+      // Reset search results and close command bar before navigation
+      if (onResetSearchResults) {
+        onResetSearchResults();
+      }
+      dispatch({ type: setIsExpanded.type, payload: false });
+
+      // Add to recent navigation history
+      dispatch({ type: addRecentNavigation.type, payload: { name, resultType, key } });
+
+      // Navigate to the link
+      router.push(resolveUrlBySearchNavigationType(resultType, key));
     },
-    [dispatch, router],
+    [dispatch, router, onResetSearchResults],
   );
   useHotkeys(
     'up',
@@ -111,17 +121,27 @@ const CommandsList: React.FC<Props> = ({
   useHotkeys(
     'enter',
     () => {
-      router.push(getSearchQueryNavigationUrl(searchQuery)).then(() => {
-        navigateToLink({
+      // Reset search results and close command bar before navigation
+      if (onResetSearchResults) {
+        onResetSearchResults();
+      }
+      dispatch({ type: setIsExpanded.type, payload: false });
+
+      // Add to recent navigation history
+      dispatch({
+        type: addRecentNavigation.type,
+        payload: {
           name: searchQuery,
           resultType: SearchNavigationType.SEARCH_PAGE,
           key: searchQuery,
-          group: RESULTS_GROUP,
-        });
+        },
       });
+
+      // Navigate to the search page
+      router.push(getSearchQueryNavigationUrl(searchQuery));
     },
     { enabled: !!searchQuery, enableOnFormTags: ['INPUT'] },
-    [searchQuery, navigateToLink, router],
+    [searchQuery, router, dispatch, onResetSearchResults],
   );
   const onRemoveCommandClicked = (
     event: MouseEvent<Element>,

@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import React, { useCallback, useRef, useState, useEffect } from 'react';
 
 import classNames from 'classnames';
@@ -9,7 +10,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import styles from './SearchInput.module.scss';
 
 import ExpandedSearchInputSection from '@/components/Search/CommandBar/ExpandedSearchInputSection';
-import VoiceSearch from '@/components/Search/VoiceSearch';
+import VoiceSearch, { VoiceSearchRef } from '@/components/Search/VoiceSearch';
 import Input, { InputSize } from '@/dls/Forms/Input';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import useOutsideClickDetector from '@/hooks/useOutsideClickDetector';
@@ -49,16 +50,17 @@ const SearchInput: React.FC<Props> = ({
     searchQuery,
     setSearchQuery,
     hasSearchResults,
+    setHasSearchResults,
     inputRef,
     keepSearchResultsVisible,
     onSearchQueryChange,
     onClearClicked,
-    setHasSearchResults,
   } = useSearchWithVoice(initialSearchQuery, false);
 
   const isExpanded = useSelector(selectIsExpanded);
   const dispatch = useDispatch();
   const containerRef = useRef<HTMLDivElement>(null);
+  const voiceSearchRef = useRef<VoiceSearchRef>(null);
 
   // Handle microphone permission errors
   const handleMicError = useCallback(
@@ -73,6 +75,34 @@ const SearchInput: React.FC<Props> = ({
   useEffect(() => {
     setIsSpeechRecognitionSupported(checkSpeechRecognitionSupport());
   }, []);
+
+  // Handle clear button click - stop microphone if active
+  const handleClearClick = useCallback(() => {
+    // Stop the microphone if it's active
+    if (voiceSearchRef.current) {
+      voiceSearchRef.current.stopMicrophone();
+    }
+
+    // Call the original clear function
+    onClearClicked();
+
+    // Log the click
+    logButtonClick('search_input_clear_query');
+
+    // Keep the dropdown visible after clearing
+    if (shouldExpandOnClick) {
+      keepSearchResultsVisible();
+      dispatch({ type: setIsExpanded.type, payload: true });
+    }
+  }, [onClearClicked, shouldExpandOnClick, keepSearchResultsVisible, dispatch]);
+
+  // Effect to stop microphone when search results are received
+  useEffect(() => {
+    // If we have search results and the voice search ref is available, stop the microphone
+    if (hasSearchResults && voiceSearchRef.current) {
+      voiceSearchRef.current.stopMicrophone();
+    }
+  }, [hasSearchResults]);
 
   // Ensure expansion works correctly regardless of voice search support
   useEffect(() => {
@@ -96,20 +126,9 @@ const SearchInput: React.FC<Props> = ({
     enableOnFormTags: ['INPUT'],
   });
 
-  const handleClearClicked = () => {
-    logButtonClick('search_input_clear_query');
-    onClearClicked();
+  const onInputClick = useCallback(() => {
+    const shouldSearchBeInSearchDrawer = shouldOpenDrawerOnMobile && isMobile();
 
-    // Keep the dropdown visible after clearing
-    if (shouldExpandOnClick) {
-      keepSearchResultsVisible();
-      dispatch({ type: setIsExpanded.type, payload: true });
-    }
-  };
-
-  const shouldSearchBeInSearchDrawer = shouldOpenDrawerOnMobile && isMobile();
-
-  const onInputClick = () => {
     if (shouldSearchBeInSearchDrawer) {
       dispatch({ type: setDisableSearchDrawerTransition.type, payload: true });
       dispatch({ type: setIsSearchDrawerOpen.type, payload: true });
@@ -124,15 +143,24 @@ const SearchInput: React.FC<Props> = ({
       // Set hasSearchResults to true to ensure the dropdown shows
       setHasSearchResults(true);
     }
-  };
+  }, [
+    shouldOpenDrawerOnMobile,
+    dispatch,
+    shouldExpandOnClick,
+    keepSearchResultsVisible,
+    setHasSearchResults,
+  ]);
 
-  const onSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (searchQuery) {
-      router.push(getSearchQueryNavigationUrl(searchQuery), undefined, { shallow: true });
-      keepSearchResultsVisible();
-    }
-  };
+  const onSubmit = useCallback(
+    (e: React.FormEvent) => {
+      e.preventDefault();
+      if (searchQuery) {
+        router.push(getSearchQueryNavigationUrl(searchQuery), undefined, { shallow: true });
+        keepSearchResultsVisible();
+      }
+    },
+    [searchQuery, router, keepSearchResultsVisible],
+  );
 
   return (
     <div
@@ -149,16 +177,18 @@ const SearchInput: React.FC<Props> = ({
             onChange={onSearchQueryChange}
             value={searchQuery}
             placeholder={placeholder}
-            onClearClicked={handleClearClicked}
+            onClearClicked={handleClearClick}
             clearable
             prefix={<SearchIcon />}
             suffix={
               isSpeechRecognitionSupported ? (
                 <VoiceSearch
+                  ref={voiceSearchRef}
                   searchQuery={searchQuery}
                   setSearchQuery={setSearchQuery}
                   inputRef={inputRef}
                   onError={handleMicError}
+                  shouldOpenDrawerOnMobile={shouldOpenDrawerOnMobile}
                 />
               ) : null
             }
@@ -174,7 +204,10 @@ const SearchInput: React.FC<Props> = ({
       </div>
       {(isExpanded || hasSearchResults) && (
         <div className={styles.dropdownContainer}>
-          <ExpandedSearchInputSection searchQuery={searchQuery} />
+          <ExpandedSearchInputSection
+            searchQuery={searchQuery}
+            onResetSearchResults={() => setHasSearchResults(false)}
+          />
         </div>
       )}
     </div>

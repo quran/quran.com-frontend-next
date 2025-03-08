@@ -3,6 +3,7 @@ import { useState, useRef, useEffect, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { setIsExpanded } from '@/redux/slices/CommandBar/state';
+import { setIsSearchDrawerOpen, setDisableSearchDrawerTransition } from '@/redux/slices/navbar';
 import type { SpeechRecognitionInterface } from '@/services/speechRecognition';
 import {
   isSpeechRecognitionSupported,
@@ -10,7 +11,9 @@ import {
 } from '@/services/speechRecognition';
 import Language from '@/types/Language';
 import { logButtonClick } from '@/utils/eventLogger';
+import { isMobile } from '@/utils/responsive';
 import cleanTranscript from '@/utils/text';
+import { VOICE_SEARCH_REQUESTED_EVENT } from '@/utils/voice-search';
 
 export interface UseVoiceSearchOptions {
   searchQuery: string;
@@ -18,6 +21,7 @@ export interface UseVoiceSearchOptions {
   inputRef: React.RefObject<HTMLInputElement>;
   isInSearchDrawer?: boolean;
   onError?: (error: Error) => void;
+  shouldOpenDrawerOnMobile?: boolean;
 }
 
 /**
@@ -124,25 +128,40 @@ const useVoiceSearch = (options: UseVoiceSearchOptions) => {
   }, [options]);
 
   /**
-   * Stop speech recognition
+   * Stop the microphone
    */
-  const stopSpeechRecognition = useCallback(() => {
-    if (!speechRecRef.current) return;
-
-    try {
-      speechRecRef.current.stop();
-      logButtonClick('voice_search_stop');
-    } catch (error) {
-      setIsMicActive(false);
+  const stopMicrophone = useCallback(() => {
+    if (speechRecRef.current && isMicActive) {
+      try {
+        // Call the stop method directly on the speech recognition instance
+        speechRecRef.current.stop();
+        setIsMicActive(false);
+      } catch (error) {
+        console.error('Error stopping speech recognition:', error);
+      }
     }
-    setIsMicActive(false);
-  }, []);
+  }, [isMicActive]);
 
   /**
    * Handle voice search functionality
    */
   const handleVoiceSearch = useCallback(() => {
     try {
+      // Check if we should open the search drawer on mobile
+      const shouldOpenDrawer =
+        options.shouldOpenDrawerOnMobile && !options.isInSearchDrawer && isMobile();
+
+      if (shouldOpenDrawer) {
+        // Open the search drawer on mobile
+        dispatch({ type: setDisableSearchDrawerTransition.type, payload: true });
+        dispatch({ type: setIsSearchDrawerOpen.type, payload: true });
+
+        // Dispatch a custom event to indicate that voice search was requested
+        window.dispatchEvent(new Event(VOICE_SEARCH_REQUESTED_EVENT));
+
+        return; // Exit early as the drawer will handle voice search
+      }
+
       if (!isMicActive) {
         // Initialize and start speech recognition
         if (initializeSpeechRecognition()) {
@@ -150,7 +169,7 @@ const useVoiceSearch = (options: UseVoiceSearchOptions) => {
         }
       } else {
         // Stop speech recognition
-        stopSpeechRecognition();
+        stopMicrophone();
       }
     } catch (error) {
       setIsMicActive(false);
@@ -162,14 +181,16 @@ const useVoiceSearch = (options: UseVoiceSearchOptions) => {
     isMicActive,
     initializeSpeechRecognition,
     startSpeechRecognition,
-    stopSpeechRecognition,
+    stopMicrophone,
     options,
+    dispatch,
   ]);
 
   return {
     isMicActive,
     isSupported,
     handleVoiceSearch,
+    stopMicrophone,
   };
 };
 
