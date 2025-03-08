@@ -1,13 +1,13 @@
 /* eslint-disable react-func/max-lines-per-function */
 /* eslint-disable max-lines */
 /* eslint-disable react/no-multi-comp */
-import React, { RefObject, useCallback, useEffect, useMemo, useRef, useState } from 'react';
+import React, { RefObject, useCallback, useEffect, useMemo } from 'react';
 
 import dynamic from 'next/dynamic';
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
-import SearchDrawerHeader, { SearchDrawerHeaderRef } from './Header';
+import SearchDrawerHeader from './Header';
 
 import { getNewSearchResults } from '@/api';
 import DataFetcher from '@/components/DataFetcher';
@@ -25,7 +25,7 @@ import { makeNewSearchResultsUrl } from '@/utils/apiPaths';
 import { areArraysEqual } from '@/utils/array';
 import { logButtonClick, logTextSearchQuery } from '@/utils/eventLogger';
 import { addToSearchHistory, getQuickSearchQuery } from '@/utils/search';
-import getVoiceSearchErrorInfo, { VOICE_SEARCH_REQUESTED_EVENT } from '@/utils/voice-search';
+import getVoiceSearchErrorInfo from '@/utils/voice-search';
 import { SearchResponse } from 'types/ApiResponses';
 
 const SearchBodyContainer = dynamic(() => import('@/components/Search/SearchBodyContainer'), {
@@ -41,8 +41,6 @@ const SearchDrawer: React.FC = () => {
   const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual) as string[];
   const [focusInput, searchInputRef]: [() => void, RefObject<HTMLInputElement>] = useFocus();
   const { searchQuery, setSearchQuery } = useSearchWithVoice('', true);
-  const headerRef = useRef<SearchDrawerHeaderRef>(null);
-  const [shouldStartVoiceSearch, setShouldStartVoiceSearch] = useState<boolean>(false);
 
   const isOpen = useSelector(selectNavbar, shallowEqual).isSearchDrawerOpen;
   const dispatch = useDispatch();
@@ -53,37 +51,8 @@ const SearchDrawer: React.FC = () => {
   useEffect(() => {
     if (isOpen) {
       focusInput();
-
-      // Check if we should start voice search automatically
-      // This happens when the drawer is opened from the voice search button
-      if (shouldStartVoiceSearch) {
-        // Start voice search after a short delay to ensure the drawer is fully open
-        const voiceSearchTimeout = setTimeout(() => {
-          if (headerRef.current) {
-            headerRef.current.startMicrophone();
-          }
-          // Reset the flag after starting voice search
-          setShouldStartVoiceSearch(false);
-        }, 300);
-
-        return () => clearTimeout(voiceSearchTimeout);
-      }
     }
-    return undefined; // Add explicit return for when the condition is not met
-  }, [isOpen, focusInput, shouldStartVoiceSearch]);
-
-  // Listen for a custom event that indicates the drawer was opened from the voice search button
-  useEffect(() => {
-    const handleVoiceSearchRequested = () => {
-      setShouldStartVoiceSearch(true);
-    };
-
-    window.addEventListener(VOICE_SEARCH_REQUESTED_EVENT, handleVoiceSearchRequested);
-
-    return () => {
-      window.removeEventListener(VOICE_SEARCH_REQUESTED_EVENT, handleVoiceSearchRequested);
-    };
-  }, []);
+  }, [isOpen, focusInput]);
 
   // Handle microphone permission errors
   const handleMicError = useCallback(
@@ -110,11 +79,11 @@ const SearchDrawer: React.FC = () => {
     }
   }, [debouncedSearchQuery, dispatch]);
 
-  const resetQueryAndResults = useCallback(() => {
+  const resetQueryAndResults = () => {
     logButtonClick('search_drawer_clear_input');
     // reset the search query
     setSearchQuery('');
-  }, [setSearchQuery]);
+  };
 
   /**
    * Handle when the search query is changed.
@@ -167,11 +136,6 @@ const SearchDrawer: React.FC = () => {
    */
   const renderSearchResults = useCallback(
     (searchResult: SearchResponse) => {
-      // If we have search results, we should stop the microphone
-      if (headerRef.current) {
-        headerRef.current.stopMicrophone();
-      }
-
       return (
         <SearchBodyContainer
           onSearchKeywordClicked={onSearchKeywordClicked}
@@ -181,11 +145,10 @@ const SearchDrawer: React.FC = () => {
           hasError={false}
           shouldSuggestFullSearchWhenNoResults
           source={SearchQuerySource.SearchDrawer}
-          onResetSearchResults={resetQueryAndResults}
         />
       );
     },
-    [searchQuery, onSearchKeywordClicked, resetQueryAndResults],
+    [searchQuery, onSearchKeywordClicked],
   );
 
   /**
@@ -210,7 +173,6 @@ const SearchDrawer: React.FC = () => {
       type={DrawerType.Search}
       header={
         <SearchDrawerHeader
-          ref={headerRef}
           onSearchQueryChange={onSearchQueryChange}
           resetQueryAndResults={resetQueryAndResults}
           inputRef={searchInputRef}

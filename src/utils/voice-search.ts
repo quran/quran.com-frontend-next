@@ -1,5 +1,3 @@
-export const VOICE_SEARCH_REQUESTED_EVENT = 'voice-search-requested';
-
 /**
  * Helper function to get error message key and fallback based on error message
  *

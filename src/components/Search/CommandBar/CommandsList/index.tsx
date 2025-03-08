@@ -35,7 +35,6 @@ export interface Command extends SearchNavigationResult {
 interface Props {
   commandGroups: { groups: Record<string, Command[]>; numberOfCommands: number };
   searchQuery?: string;
-  onResetSearchResults?: () => void;
 }
 
 export const RESULTS_GROUP = 'results';
@@ -43,7 +42,6 @@ export const RESULTS_GROUP = 'results';
 const CommandsList: React.FC<Props> = ({
   commandGroups: { groups, numberOfCommands },
   searchQuery,
-  onResetSearchResults,
 }) => {
   const { t } = useTranslation('common');
   const [scrollToSelectedCommand, selectedItemRef]: [() => void, RefObject<HTMLLIElement>] =
@@ -85,20 +83,12 @@ const CommandsList: React.FC<Props> = ({
   const navigateToLink = useCallback(
     (command: Command) => {
       const { name, resultType, key } = command;
-
-      // Reset search results and close command bar before navigation
-      if (onResetSearchResults) {
-        onResetSearchResults();
-      }
-      dispatch({ type: setIsExpanded.type, payload: false });
-
-      // Add to recent navigation history
-      dispatch({ type: addRecentNavigation.type, payload: { name, resultType, key } });
-
-      // Navigate to the link
-      router.push(resolveUrlBySearchNavigationType(resultType, key));
+      router.push(resolveUrlBySearchNavigationType(resultType, key)).then(() => {
+        dispatch({ type: addRecentNavigation.type, payload: { name, resultType, key } });
+        dispatch({ type: setIsExpanded.type, payload: false });
+      });
     },
-    [dispatch, router, onResetSearchResults],
+    [dispatch, router],
   );
   useHotkeys(
     'up',
@@ -121,27 +111,17 @@ const CommandsList: React.FC<Props> = ({
   useHotkeys(
     'enter',
     () => {
-      // Reset search results and close command bar before navigation
-      if (onResetSearchResults) {
-        onResetSearchResults();
-      }
-      dispatch({ type: setIsExpanded.type, payload: false });
-
-      // Add to recent navigation history
-      dispatch({
-        type: addRecentNavigation.type,
-        payload: {
+      router.push(getSearchQueryNavigationUrl(searchQuery)).then(() => {
+        navigateToLink({
           name: searchQuery,
           resultType: SearchNavigationType.SEARCH_PAGE,
           key: searchQuery,
-        },
+          group: RESULTS_GROUP,
+        });
       });
-
-      // Navigate to the search page
-      router.push(getSearchQueryNavigationUrl(searchQuery));
     },
     { enabled: !!searchQuery, enableOnFormTags: ['INPUT'] },
-    [searchQuery, router, dispatch, onResetSearchResults],
+    [searchQuery, navigateToLink, router],
   );
   const onRemoveCommandClicked = (
     event: MouseEvent<Element>,

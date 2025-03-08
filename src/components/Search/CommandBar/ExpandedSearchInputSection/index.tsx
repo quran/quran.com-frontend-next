@@ -49,10 +49,9 @@ const NAVIGATE_TO = [
 
 interface Props {
   searchQuery: string;
-  onResetSearchResults?: () => void;
 }
 
-const ExpandedSearchInputSection: React.FC<Props> = ({ searchQuery, onResetSearchResults }) => {
+const ExpandedSearchInputSection: React.FC<Props> = ({ searchQuery }) => {
   const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual) as string[];
   const { t, lang } = useTranslation('common');
   const recentNavigations = useSelector(
@@ -142,19 +141,10 @@ const ExpandedSearchInputSection: React.FC<Props> = ({ searchQuery, onResetSearc
             ),
             numberOfCommands, // this is needed so that we can know when we have reached the last command when using keyboard navigation across multiple groups
           }}
-          onResetSearchResults={onResetSearchResults}
         />
       );
     },
-    [
-      chaptersData,
-      getPreInputCommands,
-      lang,
-      recentNavigations.length,
-      searchQuery,
-      t,
-      onResetSearchResults,
-    ],
+    [chaptersData, getPreInputCommands, lang, recentNavigations.length, searchQuery, t],
   );
 
   return (
