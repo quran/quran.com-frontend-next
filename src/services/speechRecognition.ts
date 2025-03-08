@@ -1,5 +1,6 @@
 /* eslint-disable react-func/max-lines-per-function */
 import checkSpeechRecognitionSupport from '@/utils/browser';
+import cleanTranscript from '@/utils/text';
 import { OFFLINE_ERROR } from 'src/api';
 
 // TypeScript interface for SpeechRecognition
@@ -108,7 +109,9 @@ export const createSpeechRecognition = (
     const isFinal = event.results.isFinal !== undefined ? event.results.isFinal : true;
 
     if (options.onResult) {
-      options.onResult({ transcript, isFinal });
+      // Clean the transcript by removing left-to-right and right-to-left marks
+      const cleanedTranscript = cleanTranscript(transcript);
+      options.onResult({ transcript: cleanedTranscript, isFinal });
     }
   };
 

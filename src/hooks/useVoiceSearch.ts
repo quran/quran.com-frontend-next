@@ -10,6 +10,7 @@ import {
 } from '@/services/speechRecognition';
 import Language from '@/types/Language';
 import { logButtonClick } from '@/utils/eventLogger';
+import cleanTranscript from '@/utils/text';
 
 export interface UseVoiceSearchOptions {
   searchQuery: string;
@@ -49,7 +50,11 @@ const useVoiceSearch = (options: UseVoiceSearchOptions) => {
    */
   const handleSpeechResult = useCallback(
     (transcript: string) => {
-      options.setSearchQuery(transcript);
+      // Clean the transcript by removing left-to-right and right-to-left marks
+      const cleanedTranscript = cleanTranscript(transcript);
+
+      // Set the cleaned transcript as the search query
+      options.setSearchQuery(cleanedTranscript);
 
       // Only expand the command bar if we're not in the search drawer
       if (!options.isInSearchDrawer) {
