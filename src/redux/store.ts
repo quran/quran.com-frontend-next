@@ -22,6 +22,7 @@ import commandBar from './slices/CommandBar/state';
 import defaultSettings from './slices/defaultSettings';
 import fundraisingBanner from './slices/fundraisingBanner';
 import mediaMaker from './slices/mediaMaker';
+import microphone from './slices/microphone';
 import navbar from './slices/navbar';
 import notifications from './slices/notifications';
 import onboarding from './slices/onboarding';
@@ -100,6 +101,7 @@ export const rootReducer = combineReducers({
   notifications,
   onboarding,
   mediaMaker,
+  microphone,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);
