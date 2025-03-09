@@ -209,7 +209,7 @@
     "translation-font-size": "Translation font size"
   },
   "footer": {
-    "description": "Quran.com is a trusted platform used by millions worldwide to read, search, listen to, and reflect on the Quran in multiple languages. It provides translations, tafsir, recitations, word-by-word translation, and tools for deeper study, making the Quran accessible to everyone. <br/> <br/> As a Sadaqah Jariyah, Quran.com is dedicated to helping people connect deeply with the Quran. Supported by Quran.Foundation, a 501(c)(3) non-profit organization, Quran.com continues to grow as a free and valuable resource for all, Alhamdullilah”",
+    "description": "Quran.com is a trusted platform used by millions worldwide to read, search, listen to, and reflect on the Quran in multiple languages. It provides translations, tafsir, recitations, word-by-word translation, and tools for deeper study, making the Quran accessible to everyone. <br/> <br/> As a Sadaqah Jariyah, Quran.com is dedicated to helping people connect deeply with the Quran. Supported by Quran.Foundation, a 501(c)(3) non-profit organization, Quran.com continues to grow as a free and valuable resource for all, Alhamdullilah",
     "hiring": "We're hiring! Join the QuranFoundation team and contribute to our mission. <link>Apply now!</link>",
     "rights": "All Rights Reserved",
     "title": "Read, Listen, Search, and Reflect on the Quran"
@@ -440,11 +440,15 @@
   "voice": {
     "ask-permission": "Please enable microphone permission to start using Voice Search",
     "error": "An error has occurred, please try again later.",
+    "network": "Network error. Please check your internet connection and try again.",
+    "no-microphone": "No microphone detected. Please connect a microphone and try again.",
     "no-permission": "It looks like you do not have the microphone permissions enabled. Please enable the microphone permissions and try again.",
+    "no-speech": "No speech was detected. Please try speaking again.",
     "not-supported": "It looks like your browser does not support microphone. Please try a different browser.",
     "suggest": "Please begin reciting and your verse will appear.",
     "suggest-subtitle": "Recite any verse in Arabic, and the verse will appear",
     "suggest-title": "Recite now",
+    "language-unavailable": "Arabic is not supported by your browser.",
     "voice-search-powered-by": "Voice Search Powered by"
   },
   "wbw": "Word By Word",

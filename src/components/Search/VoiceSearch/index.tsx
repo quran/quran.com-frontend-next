@@ -1,11 +1,17 @@
 import React from 'react';
 
 import classNames from 'classnames';
+import { useSelector } from 'react-redux';
 
 import styles from './VoiceSearch.module.scss';
 
 import useVoiceSearch from '@/hooks/useVoiceSearch';
 import MicIcon from '@/icons/microphone.svg';
+import { selectMicrophoneActive } from '@/redux/slices/microphone';
+
+export interface VoiceSearchHandle {
+  stopMicrophone: () => void;
+}
 
 interface VoiceSearchProps {
   searchQuery: string;
@@ -36,13 +42,16 @@ const VoiceSearch: React.FC<VoiceSearchProps> = ({
     }
   };
 
-  const { isMicActive, isSupported, handleVoiceSearch } = useVoiceSearch({
+  const { isSupported, handleVoiceSearch } = useVoiceSearch({
     searchQuery,
     setSearchQuery,
     inputRef,
     isInSearchDrawer,
     onError: handleError,
   });
+
+  // Get microphone state from Redux
+  const isMicActive = useSelector(selectMicrophoneActive);
 
   // Don't render the button if speech recognition is not supported
   if (!isSupported) return null;

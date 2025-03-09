@@ -1,32 +1,52 @@
+/* eslint-disable max-lines */
 /* eslint-disable react-func/max-lines-per-function */
+import Language from '@/types/Language';
 import checkSpeechRecognitionSupport from '@/utils/browser';
 import cleanTranscript from '@/utils/text';
-import { OFFLINE_ERROR } from 'src/api';
+import { SpeechRecognitionErrorCode } from '@/utils/voice-search-errors';
 
 // TypeScript interface for SpeechRecognition
 export interface SpeechRecognitionEvent extends Event {
-  results: {
-    [index: number]: {
-      [index: number]: {
-        transcript: string;
-      };
-    };
-    isFinal?: boolean;
-  };
+  results: SpeechRecognitionResultList;
+}
+
+export interface SpeechRecognitionResultList {
+  readonly length: number;
+  [index: number]: SpeechRecognitionResult;
+}
+
+export interface SpeechRecognitionResult {
+  readonly length: number;
+  isFinal?: boolean;
+  [index: number]: SpeechRecognitionAlternative;
+}
+
+export interface SpeechRecognitionAlternative {
+  transcript: string;
+  confidence: number;
 }
 
 export interface SpeechRecognitionError extends Event {
-  error: string;
+  error: SpeechRecognitionErrorCode;
 }
 
 export interface SpeechRecognitionInterface extends EventTarget {
   lang: string;
   interimResults: boolean;
+  continuous: boolean;
+  maxAlternatives: number;
   start(): void;
   stop(): void;
   onresult: (event: SpeechRecognitionEvent) => void;
   onend: () => void;
   onerror: (event: SpeechRecognitionError) => void;
+  onnomatch?: () => void;
+  onaudiostart?: () => void;
+  onaudioend?: () => void;
+  onsoundstart?: () => void;
+  onsoundend?: () => void;
+  onspeechstart?: () => void;
+  onspeechend?: () => void;
 }
 
 // Define the global SpeechRecognition types
@@ -37,7 +57,7 @@ declare global {
   }
 }
 
-export interface SpeechRecognitionResult {
+export interface SpeechRecognitionResultData {
   transcript: string;
   isFinal: boolean;
 }
@@ -45,9 +65,18 @@ export interface SpeechRecognitionResult {
 export interface SpeechRecognitionOptions {
   lang?: string;
   interimResults?: boolean;
-  onResult?: (result: SpeechRecognitionResult) => void;
+  continuous?: boolean;
+  maxAlternatives?: number;
+  onResult?: (result: SpeechRecognitionResultData) => void;
   onEnd?: () => void;
   onError?: (error: Error) => void;
+  onNoMatch?: () => void;
+  onAudioStart?: () => void;
+  onAudioEnd?: () => void;
+  onSoundStart?: () => void;
+  onSoundEnd?: () => void;
+  onSpeechStart?: () => void;
+  onSpeechEnd?: () => void;
 }
 
 /**
@@ -63,19 +92,14 @@ export const isSpeechRecognitionSupported = (): boolean => {
  * Handle speech recognition errors
  *
  * @param {SpeechRecognitionError} event - Error event
- * @returns {Error} Error object
+ * @returns {Error} Error object with the original error code
  */
 export const handleSpeechRecognitionError = (event: SpeechRecognitionError): Error => {
-  if (event.error === 'network') {
-    return new Error(OFFLINE_ERROR);
-  }
-  if (event.error === 'not-allowed') {
-    return new Error('Microphone access denied');
-  }
-  if (event.error === 'no-speech') {
-    return new Error('No speech detected');
-  }
-  return new Error(`Speech recognition error: ${event.error}`);
+  // Create a custom error that preserves the original error code
+  const error = new Error(`Speech recognition error: ${event.error}`);
+  // Add the original error code to the error object
+  (error as any).error = event.error;
+  return error;
 };
 
 /**
@@ -100,13 +124,25 @@ export const createSpeechRecognition = (
   const recognition = new SpeechRecognition();
 
   // Set default options
-  recognition.lang = options.lang || 'ar';
-  recognition.interimResults = options.interimResults !== undefined ? options.interimResults : true;
+  recognition.lang = options.lang || Language.AR;
+  if (options.interimResults !== undefined) {
+    recognition.interimResults = options.interimResults;
+  }
+  if (options.continuous !== undefined) {
+    recognition.continuous = options.continuous;
+  }
+  if (options.maxAlternatives !== undefined) {
+    recognition.maxAlternatives = options.maxAlternatives;
+  }
 
   // Set up event handlers
   recognition.onresult = (event) => {
-    const { transcript } = event.results[0][0];
-    const isFinal = event.results.isFinal !== undefined ? event.results.isFinal : true;
+    const lastResultIndex = event.results.length - 1;
+    const { transcript } = event.results[lastResultIndex][0];
+    const isFinal =
+      event.results[lastResultIndex].isFinal !== undefined
+        ? event.results[lastResultIndex].isFinal
+        : true;
 
     if (options.onResult) {
       // Clean the transcript by removing left-to-right and right-to-left marks
@@ -129,6 +165,35 @@ export const createSpeechRecognition = (
       options.onError(error);
     }
   };
+
+  // Add additional event handlers if provided
+  if (options.onNoMatch) {
+    recognition.onnomatch = options.onNoMatch;
+  }
+
+  if (options.onAudioStart) {
+    recognition.onaudiostart = options.onAudioStart;
+  }
+
+  if (options.onAudioEnd) {
+    recognition.onaudioend = options.onAudioEnd;
+  }
+
+  if (options.onSoundStart) {
+    recognition.onsoundstart = options.onSoundStart;
+  }
+
+  if (options.onSoundEnd) {
+    recognition.onsoundend = options.onSoundEnd;
+  }
+
+  if (options.onSpeechStart) {
+    recognition.onspeechstart = options.onSpeechStart;
+  }
+
+  if (options.onSpeechEnd) {
+    recognition.onspeechend = options.onSpeechEnd;
+  }
 
   return recognition;
 };

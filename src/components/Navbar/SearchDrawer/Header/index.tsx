@@ -20,7 +20,7 @@ interface Props {
   resetQueryAndResults: () => void;
   inputRef: RefObject<HTMLInputElement>;
   setSearchQuery: (query: string) => void;
-  onMicPermissionError?: (error: Error) => void;
+  onMicError?: (error: Error) => void;
 }
 
 const Header: React.FC<Props> = ({
@@ -30,7 +30,7 @@ const Header: React.FC<Props> = ({
   isSearching,
   searchQuery,
   setSearchQuery,
-  onMicPermissionError,
+  onMicError,
 }) => {
   const { t } = useTranslation('common');
   const router = useRouter();
@@ -64,8 +64,8 @@ const Header: React.FC<Props> = ({
 
   // Handle voice search errors
   const handleVoiceSearchError = (error: Error) => {
-    if (onMicPermissionError) {
-      onMicPermissionError(error);
+    if (onMicError) {
+      onMicError(error);
     }
   };
 

@@ -1,8 +1,14 @@
+/* eslint-disable max-lines */
 import { useState, useRef, useEffect, useCallback } from 'react';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { setIsExpanded } from '@/redux/slices/CommandBar/state';
+import {
+  selectMicrophoneActive,
+  setMicrophoneActive,
+  stopMicrophone,
+} from '@/redux/slices/microphone';
 import type { SpeechRecognitionInterface } from '@/services/speechRecognition';
 import {
   isSpeechRecognitionSupported,
@@ -27,10 +33,12 @@ export interface UseVoiceSearchOptions {
  * @returns {object} Voice search state and handlers
  */
 const useVoiceSearch = (options: UseVoiceSearchOptions) => {
-  const [isMicActive, setIsMicActive] = useState<boolean>(false);
   const [isSupported, setIsSupported] = useState<boolean>(true); // Assume supported initially
   const speechRecRef = useRef<SpeechRecognitionInterface | null>(null);
   const dispatch = useDispatch();
+
+  // Get microphone state from Redux
+  const isMicActive = useSelector(selectMicrophoneActive);
 
   // Check if speech recognition is supported on mount
   useEffect(() => {
@@ -65,65 +73,6 @@ const useVoiceSearch = (options: UseVoiceSearchOptions) => {
   );
 
   /**
-   * Handle speech recognition end
-   */
-  const handleSpeechEnd = useCallback(() => {
-    setIsMicActive(false);
-    // Focus the input after speech recognition ends
-    if (options.inputRef.current) {
-      options.inputRef.current.focus();
-    }
-  }, [options.inputRef]);
-
-  /**
-   * Initialize speech recognition
-   */
-  const initializeSpeechRecognition = useCallback(() => {
-    if (speechRecRef.current) return true;
-
-    try {
-      speechRecRef.current = createSpeechRecognition({
-        lang: Language.AR,
-        interimResults: true,
-        onResult: ({ transcript }) => handleSpeechResult(transcript),
-        onEnd: handleSpeechEnd,
-        onError: (error) => {
-          setIsMicActive(false);
-          if (options.onError) {
-            options.onError(error);
-          }
-        },
-      });
-      return true;
-    } catch (error) {
-      if (options.onError && error instanceof Error) {
-        options.onError(error);
-      }
-      return false;
-    }
-  }, [options, handleSpeechResult, handleSpeechEnd]);
-
-  /**
-   * Start speech recognition
-   */
-  const startSpeechRecognition = useCallback(() => {
-    if (!speechRecRef.current) return false;
-
-    try {
-      speechRecRef.current.start();
-      setIsMicActive(true);
-      logButtonClick('voice_search_start');
-      return true;
-    } catch (error) {
-      setIsMicActive(false);
-      if (options.onError && error instanceof Error) {
-        options.onError(error);
-      }
-      return false;
-    }
-  }, [options]);
-
-  /**
    * Stop speech recognition
    */
   const stopSpeechRecognition = useCallback(() => {
@@ -133,10 +82,102 @@ const useVoiceSearch = (options: UseVoiceSearchOptions) => {
       speechRecRef.current.stop();
       logButtonClick('voice_search_stop');
     } catch (error) {
-      setIsMicActive(false);
+      // eslint-disable-next-line no-console
+      console.error('Error stopping speech recognition', error);
     }
-    setIsMicActive(false);
-  }, []);
+
+    // Update Redux state
+    dispatch(stopMicrophone());
+  }, [dispatch]);
+
+  /**
+   * Handle speech end event
+   */
+  const handleSpeechEnd = useCallback(() => {
+    stopSpeechRecognition();
+
+    // Focus the input after speech recognition ends
+    if (options.inputRef.current) {
+      options.inputRef.current.focus();
+    }
+  }, [stopSpeechRecognition, options.inputRef]);
+
+  /**
+   * Handle speech recognition end
+   */
+  const handleRecognitionEnd = useCallback(() => {
+    // If the microphone is still active, restart recognition
+    // This helps with continuous recognition
+    if (isMicActive && speechRecRef.current) {
+      try {
+        speechRecRef.current.start();
+      } catch (error) {
+        // If we can't restart, stop the microphone
+        dispatch(stopMicrophone());
+      }
+    }
+  }, [isMicActive, dispatch]);
+
+  /**
+   * Create speech recognition configuration
+   */
+  const createSpeechRecognitionConfig = useCallback(() => {
+    return {
+      lang: Language.AR,
+      interimResults: true,
+      onResult: ({ transcript }) => handleSpeechResult(transcript),
+      onEnd: handleRecognitionEnd,
+      onSpeechEnd: handleSpeechEnd,
+      onError: (error) => {
+        stopSpeechRecognition();
+
+        if (options.onError) {
+          options.onError(error);
+        }
+      },
+    };
+  }, [handleRecognitionEnd, handleSpeechEnd, handleSpeechResult, stopSpeechRecognition, options]);
+
+  /**
+   * Initialize speech recognition
+   */
+  const initializeSpeechRecognition = useCallback(() => {
+    if (speechRecRef.current) return true;
+
+    try {
+      speechRecRef.current = createSpeechRecognition(createSpeechRecognitionConfig());
+      return true;
+    } catch (error) {
+      if (options.onError && error instanceof Error) {
+        options.onError(error);
+      }
+      return false;
+    }
+  }, [options, createSpeechRecognitionConfig]);
+
+  /**
+   * Start speech recognition
+   */
+  const startSpeechRecognition = useCallback(() => {
+    if (!speechRecRef.current) return false;
+
+    try {
+      speechRecRef.current.start();
+      // Update Redux state
+      dispatch(setMicrophoneActive(true));
+
+      logButtonClick('voice_search_start');
+      return true;
+    } catch (error) {
+      // Update Redux state
+      dispatch(stopMicrophone());
+
+      if (options.onError && error instanceof Error) {
+        options.onError(error);
+      }
+      return false;
+    }
+  }, [options, dispatch]);
 
   /**
    * Handle voice search functionality
@@ -153,7 +194,9 @@ const useVoiceSearch = (options: UseVoiceSearchOptions) => {
         stopSpeechRecognition();
       }
     } catch (error) {
-      setIsMicActive(false);
+      // Update Redux state
+      dispatch(stopMicrophone());
+
       if (options.onError && error instanceof Error) {
         options.onError(error);
       }
@@ -164,12 +207,14 @@ const useVoiceSearch = (options: UseVoiceSearchOptions) => {
     startSpeechRecognition,
     stopSpeechRecognition,
     options,
+    dispatch,
   ]);
 
   return {
     isMicActive,
     isSupported,
     handleVoiceSearch,
+    stopSpeechRecognition,
   };
 };
 

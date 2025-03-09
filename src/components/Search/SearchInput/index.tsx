@@ -11,7 +11,7 @@ import styles from './SearchInput.module.scss';
 import ExpandedSearchInputSection from '@/components/Search/CommandBar/ExpandedSearchInputSection';
 import VoiceSearch from '@/components/Search/VoiceSearch';
 import Input, { InputSize } from '@/dls/Forms/Input';
-import { ToastStatus, useToast } from '@/dls/Toast/Toast';
+import { useToast } from '@/dls/Toast/Toast';
 import useOutsideClickDetector from '@/hooks/useOutsideClickDetector';
 import useSearchWithVoice from '@/hooks/useSearchWithVoice';
 import SearchIcon from '@/icons/search.svg';
@@ -21,7 +21,7 @@ import checkSpeechRecognitionSupport from '@/utils/browser';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getSearchQueryNavigationUrl } from '@/utils/navigation';
 import { isMobile } from '@/utils/responsive';
-import getVoiceSearchErrorInfo from '@/utils/voice-search';
+import { useHandleMicError } from '@/utils/voice-search';
 
 type Props = {
   placeholder?: string;
@@ -61,13 +61,7 @@ const SearchInput: React.FC<Props> = ({
   const containerRef = useRef<HTMLDivElement>(null);
 
   // Handle microphone permission errors
-  const handleMicError = useCallback(
-    (error: Error) => {
-      const { key, fallback } = getVoiceSearchErrorInfo(error.message);
-      toast(t(key, { fallback }), { status: ToastStatus.Error });
-    },
-    [toast, t],
-  );
+  const handleMicError = useHandleMicError(toast, t);
 
   // Check if speech recognition is supported
   useEffect(() => {

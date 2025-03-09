@@ -13,7 +13,7 @@ import { getNewSearchResults } from '@/api';
 import DataFetcher from '@/components/DataFetcher';
 import Drawer, { DrawerType } from '@/components/Navbar/Drawer';
 import Spinner from '@/dls/Spinner/Spinner';
-import { ToastStatus, useToast } from '@/dls/Toast/Toast';
+import { useToast } from '@/dls/Toast/Toast';
 import useDebounce from '@/hooks/useDebounce';
 import useFocus from '@/hooks/useFocusElement';
 import useSearchWithVoice from '@/hooks/useSearchWithVoice';
@@ -25,7 +25,7 @@ import { makeNewSearchResultsUrl } from '@/utils/apiPaths';
 import { areArraysEqual } from '@/utils/array';
 import { logButtonClick, logTextSearchQuery } from '@/utils/eventLogger';
 import { addToSearchHistory, getQuickSearchQuery } from '@/utils/search';
-import getVoiceSearchErrorInfo from '@/utils/voice-search';
+import { useHandleMicError } from '@/utils/voice-search';
 import { SearchResponse } from 'types/ApiResponses';
 
 const SearchBodyContainer = dynamic(() => import('@/components/Search/SearchBodyContainer'), {
@@ -55,13 +55,7 @@ const SearchDrawer: React.FC = () => {
   }, [isOpen, focusInput]);
 
   // Handle microphone permission errors
-  const handleMicError = useCallback(
-    (error: Error) => {
-      const { key, fallback } = getVoiceSearchErrorInfo(error.message);
-      toast(t(key, { fallback }), { status: ToastStatus.Error });
-    },
-    [toast, t],
-  );
+  const handleMicError = useHandleMicError(toast, t);
 
   // Ensure the drawer stays open when the search query changes
   useEffect(() => {
@@ -179,7 +173,7 @@ const SearchDrawer: React.FC = () => {
           isSearching={false}
           searchQuery={searchQuery}
           setSearchQuery={setSearchQuery}
-          onMicPermissionError={handleMicError}
+          onMicError={handleMicError}
         />
       }
     >
