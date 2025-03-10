@@ -1,8 +1,4 @@
-import { useState, useRef, useCallback, useEffect } from 'react';
-
-import { useDispatch } from 'react-redux';
-
-import { setIsExpanded } from '@/redux/slices/CommandBar/state';
+import { useState, useRef, useEffect } from 'react';
 
 /**
  * Custom hook to manage search state with voice search support
@@ -13,57 +9,14 @@ import { setIsExpanded } from '@/redux/slices/CommandBar/state';
  */
 const useSearchWithVoice = (initialQuery: string = '', isInSearchDrawer: boolean = false) => {
   const [searchQuery, setSearchQuery] = useState<string>(initialQuery || '');
-  const [hasSearchResults, setHasSearchResults] = useState<boolean>(false);
   const inputRef = useRef<HTMLInputElement>(null);
-  const searchTimeoutRef = useRef<NodeJS.Timeout | null>(null);
-  const dispatch = useDispatch();
-
-  // Function to ensure search results stay visible
-  const keepSearchResultsVisible = useCallback(() => {
-    // Only expand the command bar if we're not in the search drawer
-    if (!isInSearchDrawer) {
-      dispatch({ type: setIsExpanded.type, payload: true });
-    }
-  }, [dispatch, isInSearchDrawer]);
 
   // Update search query when initialQuery changes
   useEffect(() => {
     if (initialQuery) {
       setSearchQuery(initialQuery);
-
-      // If we have an initial search query, we should expand the results
-      if (initialQuery.trim() !== '') {
-        keepSearchResultsVisible();
-        setHasSearchResults(true);
-      }
     }
-  }, [initialQuery, keepSearchResultsVisible]);
-
-  // Update hasSearchResults when searchQuery changes
-  useEffect(() => {
-    const hasQuery = searchQuery.trim() !== '';
-    setHasSearchResults(hasQuery);
-
-    // Keep the search expanded if we have a query
-    if (hasQuery) {
-      keepSearchResultsVisible();
-
-      // Set a timeout to ensure the search results stay visible
-      if (searchTimeoutRef.current) {
-        clearTimeout(searchTimeoutRef.current);
-      }
-
-      searchTimeoutRef.current = setTimeout(() => {
-        keepSearchResultsVisible();
-      }, 500);
-    }
-
-    return () => {
-      if (searchTimeoutRef.current) {
-        clearTimeout(searchTimeoutRef.current);
-      }
-    };
-  }, [searchQuery, keepSearchResultsVisible]);
+  }, [initialQuery]);
 
   // Focus the input when the search query changes
   useEffect(() => {
@@ -85,10 +38,6 @@ const useSearchWithVoice = (initialQuery: string = '', isInSearchDrawer: boolean
    */
   const onSearchQueryChange = (newSearchQuery: string): void => {
     setSearchQuery(newSearchQuery);
-    keepSearchResultsVisible();
-    // Only set hasSearchResults based on query content if we're actually typing
-    // This allows the dropdown to stay open even with an empty query when clicked
-    setHasSearchResults(newSearchQuery.trim() !== '');
   };
 
   const onClearClicked = () => {
@@ -101,10 +50,7 @@ const useSearchWithVoice = (initialQuery: string = '', isInSearchDrawer: boolean
   return {
     searchQuery,
     setSearchQuery,
-    hasSearchResults,
-    setHasSearchResults,
     inputRef,
-    keepSearchResultsVisible,
     onSearchQueryChange,
     onClearClicked,
     isInSearchDrawer,

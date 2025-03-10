@@ -45,16 +45,8 @@ const SearchInput: React.FC<Props> = ({
   const toast = useToast();
   const router = useRouter();
   const [isSpeechRecognitionSupported, setIsSpeechRecognitionSupported] = useState<boolean>(false);
-  const {
-    searchQuery,
-    setSearchQuery,
-    hasSearchResults,
-    inputRef,
-    keepSearchResultsVisible,
-    onSearchQueryChange,
-    onClearClicked,
-    setHasSearchResults,
-  } = useSearchWithVoice(initialSearchQuery, false);
+  const { searchQuery, setSearchQuery, inputRef, onSearchQueryChange, onClearClicked } =
+    useSearchWithVoice(initialSearchQuery, false);
 
   const isExpanded = useSelector(selectIsExpanded);
   const dispatch = useDispatch();
@@ -68,25 +60,14 @@ const SearchInput: React.FC<Props> = ({
     setIsSpeechRecognitionSupported(checkSpeechRecognitionSupport());
   }, []);
 
-  // Ensure expansion works correctly regardless of voice search support
-  useEffect(() => {
-    // If we have a search query, make sure the results are visible
-    if (searchQuery && searchQuery.trim() !== '') {
-      keepSearchResultsVisible();
-    }
-  }, [searchQuery, keepSearchResultsVisible]);
-
   const collapseContainer = useCallback(() => {
     // Always collapse when clicking outside, regardless of hasSearchResults
     dispatch({ type: setIsExpanded.type, payload: false });
+  }, [dispatch]);
 
-    // Reset hasSearchResults when clicking outside
-    setHasSearchResults(false);
-  }, [dispatch, setHasSearchResults]);
-
-  useOutsideClickDetector(containerRef, collapseContainer, isExpanded || hasSearchResults);
+  useOutsideClickDetector(containerRef, collapseContainer, isExpanded);
   useHotkeys('Escape', collapseContainer, {
-    enabled: isExpanded || hasSearchResults,
+    enabled: isExpanded,
     enableOnFormTags: ['INPUT'],
   });
 
@@ -96,7 +77,6 @@ const SearchInput: React.FC<Props> = ({
 
     // Keep the dropdown visible after clearing
     if (shouldExpandOnClick) {
-      keepSearchResultsVisible();
       dispatch({ type: setIsExpanded.type, payload: true });
     }
   };
@@ -108,15 +88,8 @@ const SearchInput: React.FC<Props> = ({
       dispatch({ type: setDisableSearchDrawerTransition.type, payload: true });
       dispatch({ type: setIsSearchDrawerOpen.type, payload: true });
     } else if (shouldExpandOnClick) {
-      // Always keep search results visible when clicking on the input
-      // regardless of voice search support
-      keepSearchResultsVisible();
-
       // Explicitly set isExpanded to true to ensure the dropdown shows
       dispatch({ type: setIsExpanded.type, payload: true });
-
-      // Set hasSearchResults to true to ensure the dropdown shows
-      setHasSearchResults(true);
     }
   };
 
@@ -124,7 +97,6 @@ const SearchInput: React.FC<Props> = ({
     e.preventDefault();
     if (searchQuery) {
       router.push(getSearchQueryNavigationUrl(searchQuery), undefined, { shallow: true });
-      keepSearchResultsVisible();
     }
   };
 
@@ -132,7 +104,7 @@ const SearchInput: React.FC<Props> = ({
     <div
       ref={containerRef}
       className={classNames(styles.headerOuterContainer, {
-        [styles.expanded]: isExpanded || hasSearchResults,
+        [styles.expanded]: isExpanded,
       })}
     >
       <div className={styles.inputContainer}>
@@ -166,7 +138,7 @@ const SearchInput: React.FC<Props> = ({
           />
         </form>
       </div>
-      {(isExpanded || hasSearchResults) && (
+      {isExpanded && (
         <div className={styles.dropdownContainer}>
           <ExpandedSearchInputSection searchQuery={searchQuery} />
         </div>
