@@ -17,6 +17,7 @@ import CopyLinkIcon from '@/icons/copy-link.svg';
 import CopyIcon from '@/icons/copy.svg';
 import VideoIcon from '@/icons/video.svg';
 import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
+import Language from '@/types/Language';
 import PreviewMode from '@/types/Media/PreviewMode';
 import QueryParam from '@/types/QueryParam';
 import { QuranFont } from '@/types/QuranReader';
@@ -117,7 +118,7 @@ const ShareVerseActionsMenu: React.FC<Props> = ({
       shouldCopyFont,
       translations,
       verseKey: verse.verseKey,
-      lang,
+      lang: lang as Language,
       chaptersData,
     })
       .then(() => {
