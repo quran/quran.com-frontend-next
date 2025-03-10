@@ -20,6 +20,7 @@ import {
   removeRecentNavigation,
   setIsExpanded,
 } from '@/redux/slices/CommandBar/state';
+import { stopMicrophone } from '@/redux/slices/microphone';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getSearchQueryNavigationUrl, resolveUrlBySearchNavigationType } from '@/utils/navigation';
 import { getResultType } from '@/utils/search';
@@ -83,6 +84,10 @@ const CommandsList: React.FC<Props> = ({
   const navigateToLink = useCallback(
     (command: Command) => {
       const { name, resultType, key } = command;
+
+      // Stop the microphone if it's active
+      dispatch(stopMicrophone());
+
       router.push(resolveUrlBySearchNavigationType(resultType, key)).then(() => {
         dispatch({ type: addRecentNavigation.type, payload: { name, resultType, key } });
         dispatch({ type: setIsExpanded.type, payload: false });
@@ -111,6 +116,9 @@ const CommandsList: React.FC<Props> = ({
   useHotkeys(
     'enter',
     () => {
+      // Stop the microphone if it's active
+      dispatch(stopMicrophone());
+
       router.push(getSearchQueryNavigationUrl(searchQuery)).then(() => {
         navigateToLink({
           name: searchQuery,
@@ -130,6 +138,10 @@ const CommandsList: React.FC<Props> = ({
     logButtonClick('remove_command_bar_navigation');
     // to not allow the event to bubble up to the parent container
     event.stopPropagation();
+
+    // Stop the microphone if it's active
+    dispatch(stopMicrophone());
+
     dispatch({ type: removeRecentNavigation.type, payload: navigationItemKey });
   };
 

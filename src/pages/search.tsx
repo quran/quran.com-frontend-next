@@ -142,7 +142,11 @@ const SearchPage: NextPage<SearchPageProps> = (): JSX.Element => {
       />
       <div className={styles.pageContainer}>
         <div className={styles.searchInputContainer}>
-          <SearchInput initialSearchQuery={searchQuery} placeholder={t('search.title')} />
+          <SearchInput
+            initialSearchQuery={searchQuery}
+            placeholder={t('search.title')}
+            shouldExpandOnClick
+          />
         </div>
         <div className={styles.pageBody}>
           <div className={styles.searchBodyContainer}>
