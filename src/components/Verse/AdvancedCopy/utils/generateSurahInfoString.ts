@@ -1,3 +1,4 @@
+import Language from '@/types/Language';
 import { toLocalizedNumber, toLocalizedVerseKey } from '@/utils/locale';
 import { getVerseNumberFromKey } from '@/utils/verse';
 
@@ -25,7 +26,7 @@ const generateSurahInfoString = (
 
   if (chaptersData && chaptersData[surahNumber]) {
     const surahName =
-      lang === 'ar'
+      lang === Language.AR
         ? chaptersData[surahNumber].transliteratedName
         : chaptersData[surahNumber].translatedName;
 
@@ -45,7 +46,7 @@ const generateSurahInfoString = (
     }
 
     surahInfoString =
-      lang === 'ar' ? `(${verseRangeStr}) ${surahName}` : `${surahName} (${verseRangeStr}) `;
+      lang === Language.AR ? `(${verseRangeStr}) ${surahName}` : `${surahName} (${verseRangeStr}) `;
   }
 
   return surahInfoString;

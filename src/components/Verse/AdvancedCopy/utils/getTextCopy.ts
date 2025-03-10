@@ -2,6 +2,7 @@ import buildVerseURL from './buildVerseURL';
 import generateSurahInfoString from './generateSurahInfoString';
 import processApiOptions from './processApiOptions';
 
+import Language from '@/types/Language';
 import { getAdvancedCopyRawResult } from 'src/api';
 
 /**
@@ -29,7 +30,7 @@ const getTextToCopy = ({
   shouldCopyFootnotes,
   shouldIncludeTranslatorName,
   shouldCopyFont,
-  lang = 'en',
+  lang = Language.EN,
   chaptersData,
 }) => {
   // Determine verse range

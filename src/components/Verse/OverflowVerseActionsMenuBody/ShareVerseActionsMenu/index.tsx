@@ -7,8 +7,7 @@ import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import { useSelector } from 'react-redux';
 
-import copyVerse from '../../AdvancedCopy/utils/copyVerse';
-
+import copyVerse from '@/components/Verse/AdvancedCopy/utils/copyVerse';
 import VerseActionAdvancedCopy from '@/components/Verse/VerseActionAdvancedCopy';
 import DataContext from '@/contexts/DataContext';
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
