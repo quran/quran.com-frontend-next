@@ -205,6 +205,8 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
       shouldCopyFont,
       translations,
       verseKey: verse.verseKey,
+      lang,
+      chaptersData,
     })
       .then((blob) => {
         setIsLoadingData(false);

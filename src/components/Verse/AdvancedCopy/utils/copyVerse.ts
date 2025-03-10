@@ -19,6 +19,8 @@ const copyVerse = async ({
   shouldCopyFont,
   translations,
   verseKey,
+  lang = 'en',
+  chaptersData,
 }) => {
   const textBlobPromise = getTextToCopy({
     rangeEndVerse,
@@ -29,6 +31,8 @@ const copyVerse = async ({
     showRangeOfVerses,
     translations,
     verseKey,
+    lang,
+    chaptersData,
   }).then(textToBlob);
 
   copyText(textBlobPromise);
