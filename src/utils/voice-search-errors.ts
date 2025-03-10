@@ -68,7 +68,7 @@ export function getErrorKeyFromCode(errorCode: string): string {
   }
 
   // For all other errors, return the general error message
-  return 'voice.error';
+  return errorCode;
 }
 
 /**
