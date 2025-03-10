@@ -177,7 +177,7 @@ const SurahList: React.FC<Props> = ({
                   })}
                 >
                   <span className={styles.chapterNumber}>{chapter.localizedId}</span>
-                  <span>{chapter.transliteratedName}</span>
+                  <span translate="no">{chapter.transliteratedName}</span>
                 </div>
               </Link>
             );
