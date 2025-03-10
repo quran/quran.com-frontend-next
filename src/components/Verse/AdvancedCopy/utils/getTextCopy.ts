@@ -1,11 +1,24 @@
-import { MushafLines } from '@/types/QuranReader';
-import { getMushafId } from '@/utils/api';
+import buildVerseURL from './buildVerseURL';
+import generateSurahInfoString from './generateSurahInfoString';
+import processApiOptions from './processApiOptions';
+
 import { getAdvancedCopyRawResult } from 'src/api';
 
 /**
  * Given these parameters, get the `text to be copied` from API
  *
- * @returns {string} textToCopy
+ * @param {object} options - Options for the copy request
+ * @param {string} options.verseKey - The verse key
+ * @param {boolean} options.showRangeOfVerses - Whether to show a range of verses
+ * @param {string} options.rangeStartVerse - The starting verse in the range
+ * @param {string} options.rangeEndVerse - The ending verse in the range
+ * @param {object} options.translations - The translations object
+ * @param {boolean} options.shouldCopyFootnotes - Whether to copy footnotes
+ * @param {boolean} options.shouldIncludeTranslatorName - Whether to include translator name
+ * @param {boolean} options.shouldCopyFont - Whether to copy font
+ * @param {string} [options.lang='en'] - The language code
+ * @param {object} options.chaptersData - The chapters data object
+ * @returns {Promise<string>} textToCopy
  */
 const getTextToCopy = ({
   verseKey,
@@ -16,32 +29,51 @@ const getTextToCopy = ({
   shouldCopyFootnotes,
   shouldIncludeTranslatorName,
   shouldCopyFont,
+  lang = 'en',
+  chaptersData,
 }) => {
-  // by default the from and to will be the current verse.
+  // Determine verse range
   let fromVerse = verseKey;
   let toVerse = verseKey;
-  // if range of verse was selected
+
   if (showRangeOfVerses) {
     fromVerse = rangeStartVerse;
     toVerse = rangeEndVerse;
   }
-  // filter the translations
+
+  // Filter translations to copy
   const toBeCopiedTranslations = Object.keys(translations).filter(
     (translationId) => translations[translationId].shouldBeCopied === true,
   );
-  return getAdvancedCopyRawResult({
-    raw: true,
-    from: fromVerse,
-    to: toVerse,
-    footnote: shouldCopyFootnotes,
-    translatorName: shouldIncludeTranslatorName,
-    ...(toBeCopiedTranslations.length > 0 && {
-      translations: toBeCopiedTranslations.join(', '),
-    }), // only include the translations when at least 1 translation has been selected.
-    ...(shouldCopyFont && {
-      ...getMushafId(shouldCopyFont, MushafLines.SixteenLines),
-    }), // only include the fonts when at least 1 font has been selected.
-  }).then((res) => res.result);
+
+  const verseUrl = buildVerseURL(fromVerse, toVerse, lang);
+
+  // Generate surah info string
+  const surahInfoString = generateSurahInfoString(
+    fromVerse,
+    showRangeOfVerses,
+    rangeStartVerse,
+    rangeEndVerse,
+    lang,
+    chaptersData,
+  );
+
+  // Process API options
+  const apiOptions = processApiOptions(
+    fromVerse,
+    toVerse,
+    shouldCopyFootnotes,
+    shouldIncludeTranslatorName,
+    toBeCopiedTranslations,
+    shouldCopyFont,
+  );
+
+  // Get the result and format the final text
+  return getAdvancedCopyRawResult(apiOptions).then((res) => {
+    const text = showRangeOfVerses ? res.result : res.result.split('\n').slice(3).join('\n'); // Remove the first 3 lines which contain the verse key
+
+    return `${surahInfoString}\n\n${text}${verseUrl}`;
+  });
 };
 
 export default getTextToCopy;
