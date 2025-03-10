@@ -2,7 +2,7 @@
 /* eslint-disable react-func/max-lines-per-function */
 import Language from '@/types/Language';
 import checkSpeechRecognitionSupport from '@/utils/browser';
-import cleanTranscript from '@/utils/text';
+import { cleanTranscript } from '@/utils/string';
 import { SpeechRecognitionErrorCode } from '@/utils/voice-search-errors';
 
 // TypeScript interface for SpeechRecognition

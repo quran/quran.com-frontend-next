@@ -21,7 +21,7 @@ import checkSpeechRecognitionSupport from '@/utils/browser';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getSearchQueryNavigationUrl } from '@/utils/navigation';
 import { isMobile } from '@/utils/responsive';
-import { useHandleMicError } from '@/utils/voice-search';
+import { useHandleMicError } from '@/utils/voice-search-errors';
 
 type Props = {
   placeholder?: string;

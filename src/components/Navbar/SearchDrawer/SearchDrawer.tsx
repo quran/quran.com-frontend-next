@@ -25,7 +25,7 @@ import { makeNewSearchResultsUrl } from '@/utils/apiPaths';
 import { areArraysEqual } from '@/utils/array';
 import { logButtonClick, logTextSearchQuery } from '@/utils/eventLogger';
 import { addToSearchHistory, getQuickSearchQuery } from '@/utils/search';
-import { useHandleMicError } from '@/utils/voice-search';
+import { useHandleMicError } from '@/utils/voice-search-errors';
 import { SearchResponse } from 'types/ApiResponses';
 
 const SearchBodyContainer = dynamic(() => import('@/components/Search/SearchBodyContainer'), {

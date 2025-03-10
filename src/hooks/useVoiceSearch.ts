@@ -16,7 +16,7 @@ import {
 } from '@/services/speechRecognition';
 import Language from '@/types/Language';
 import { logButtonClick } from '@/utils/eventLogger';
-import cleanTranscript from '@/utils/text';
+import { cleanTranscript } from '@/utils/string';
 
 export interface UseVoiceSearchOptions {
   searchQuery: string;
