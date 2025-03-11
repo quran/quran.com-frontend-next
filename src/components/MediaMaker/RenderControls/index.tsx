@@ -13,6 +13,7 @@ import Button, { ButtonType } from '@/dls/Button/Button';
 import CopyIcon from '@/icons/copy.svg';
 import layoutStyle from '@/pages/index.module.scss';
 import PreviewMode from '@/types/Media/PreviewMode';
+import QueryParam from '@/types/QueryParam';
 import { shortenUrl } from '@/utils/auth/api';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getQuranMediaMakerNavigationUrl } from '@/utils/navigation';
@@ -52,18 +53,48 @@ const RenderControls: React.FC<Props> = ({ inputProps, isFetching, playerRef }) 
     };
   }, [isCopied]);
 
+  /**
+   * Handles copying the media share URL to clipboard with browser compatibility
+   * - Generates a shortened share URL with preview mode enabled
+   * - Attempts modern clipboard API first, falls back to legacy execCommand method
+   * - Updates UI state to show copy feedback
+   * @async
+   * @function onCopyLinkClicked
+   * @memberof RenderControls
+   * @returns {Promise<void>}
+   */
   const onCopyLinkClicked = async () => {
     logButtonClick('video_generation_copy_link');
     const path = getCurrentPath();
-    const response = await shortenUrl(`${path}&previewMode=${PreviewMode.ENABLED}`);
+    const url = new URL(path);
+    url.searchParams.set(QueryParam.PREVIEW_MODE, PreviewMode.ENABLED);
 
-    const url = response?.id
-      ? `${getBasePath()}${getQuranMediaMakerNavigationUrl()}/${response.id}`
-      : path;
-    if (url) {
-      clipboardCopy(url).then(() => {
+    let shareUrl = url.toString();
+    try {
+      const response = await shortenUrl(url.toString());
+      if (response?.id) {
+        shareUrl = `${getBasePath()}${getQuranMediaMakerNavigationUrl()}/${response.id}`;
+      }
+    } catch (error) {
+      // If URL shortening fails, we'll use the full URL without shortening
+      clipboardCopy(url.toString()).then(() => {
         setIsCopied(true);
       });
+
+      return;
+    }
+
+    try {
+      await navigator.clipboard.writeText(shareUrl);
+      setIsCopied(true);
+    } catch (error) {
+      const textArea = document.createElement('textarea');
+      textArea.value = shareUrl;
+      document.body.appendChild(textArea);
+      textArea.select();
+      document.execCommand('copy');
+      document.body.removeChild(textArea);
+      setIsCopied(true);
     }
   };
 
