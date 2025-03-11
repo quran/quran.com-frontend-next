@@ -22,7 +22,7 @@ import NextSeoWrapper from '@/components/NextSeoWrapper';
 import Spinner, { SpinnerSize } from '@/dls/Spinner/Spinner';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import useGetMediaSettings from '@/hooks/auth/media/useGetMediaSettings';
-import useAddQueryParamsToUrl from '@/hooks/useAddQueryParamsToUrl';
+import useAddQueryParamsToUrlSkipFirstRender from '@/hooks/useAddQueryParamsToUrlSkipFirstRender';
 import { getMediaGeneratorOgImageUrl } from '@/lib/og';
 import Error from '@/pages/_error';
 import layoutStyles from '@/pages/index.module.scss';
@@ -134,10 +134,10 @@ const MediaMaker: NextPage<MediaMaker> = ({
     [QueryParam.QURAN_TEXT_FONT_STYLE]: String(quranTextFontStyle),
     [QueryParam.TRANSLATION_FONT_SCALE]: String(translationFontScale),
     [QueryParam.ORIENTATION]: orientation,
-    [QueryParam.PREVIEW_MODE]: previewMode,
+    [QueryParam.PREVIEW_MODE]: String(previewMode),
   };
 
-  useAddQueryParamsToUrl(getQuranMediaMakerNavigationUrl(queryParams), {});
+  useAddQueryParamsToUrlSkipFirstRender(getQuranMediaMakerNavigationUrl(queryParams), {});
 
   const API_PARAMS = useMemo(() => {
     return {
@@ -268,6 +268,7 @@ const MediaMaker: NextPage<MediaMaker> = ({
       chapterEnglishName,
       isPlayer: true,
       translations,
+      previewMode,
     };
   }, [
     verseData.verses,
@@ -287,6 +288,7 @@ const MediaMaker: NextPage<MediaMaker> = ({
     translationFontScale,
     orientation,
     chapterEnglishName,
+    previewMode,
   ]);
 
   const method = isChromeIOS() ? 'base64' : 'blob-url';
@@ -373,6 +375,22 @@ const MediaMaker: NextPage<MediaMaker> = ({
     }));
   }, [chaptersData, lang]);
 
+  useEffect(() => {
+    let timeoutId: ReturnType<typeof setTimeout>;
+    if (previewMode === PreviewMode.ENABLED && playerRef.current) {
+      timeoutId = setTimeout(() => {
+        playerRef.current?.play();
+        playerRef.current?.mute();
+      }, 100);
+    }
+
+    return () => {
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+    };
+  }, [previewMode]);
+
   if (hasError) {
     return <Error statusCode={500} />;
   }
@@ -409,6 +427,8 @@ const MediaMaker: NextPage<MediaMaker> = ({
             </div>
 
             <Player
+              key={`player-${previewMode}`}
+              ref={playerRef}
               className={classNames(styles.player, {
                 [styles.playerHeightSafari]: isSafari(),
                 [styles.playerHeight]: !isSafari(),
@@ -421,7 +441,6 @@ const MediaMaker: NextPage<MediaMaker> = ({
               allowFullscreen
               doubleClickToFullscreen
               fps={VIDEO_FPS}
-              ref={playerRef}
               controls={!isFetching && areMediaFilesReady}
               bufferStateDelayInMilliseconds={200} // wait for 200ms second before showing the spinner
               renderPoster={renderPoster}
@@ -434,7 +453,7 @@ const MediaMaker: NextPage<MediaMaker> = ({
           </>
         </div>
 
-        {previewMode === PreviewMode.DISABLED && (
+        {previewMode === PreviewMode.DISABLED ? (
           <div className={layoutStyles.flow}>
             <VideoSettings
               chaptersList={chaptersList}
@@ -445,6 +464,8 @@ const MediaMaker: NextPage<MediaMaker> = ({
               mediaSettings={mediaSettings}
             />
           </div>
+        ) : (
+          <div className={layoutStyles.additionalVerticalGapLarge} />
         )}
       </div>
     </>
