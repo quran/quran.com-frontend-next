@@ -68,7 +68,7 @@ export function getErrorKeyFromCode(errorCode: string): string {
   }
 
   // For all other errors, return the general error message
-  return errorCode;
+  return 'voice.error';
 }
 
 /**
@@ -100,15 +100,21 @@ export const useHandleMicError = (
   t: (key: string, options?: any) => string,
 ) => {
   return (error: Error) => {
+    let key = '';
+    let errorCode = '';
     // If the error has an 'error' property, it's a SpeechRecognitionError
     if ('error' in error && typeof (error as any).error === 'string') {
-      const errorCode = (error as any).error as SpeechRecognitionErrorCode;
-      const key = getErrorKeyFromCode(errorCode);
-      toast(t(key), { status: ToastStatus.Warning });
+      errorCode = (error as any).error as SpeechRecognitionErrorCode;
+      key = getErrorKeyFromCode(errorCode);
     } else {
       // Fallback to using the error message
-      const key = getErrorKeyFromMessage(error.message);
-      toast(t(key), { status: ToastStatus.Warning });
+      key = getErrorKeyFromMessage(error.message);
     }
+    toast(
+      t(key, {
+        errorCode,
+      }),
+      { status: ToastStatus.Warning },
+    );
   };
 };

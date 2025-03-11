@@ -439,7 +439,7 @@
   "view": "View",
   "voice": {
     "ask-permission": "Please enable microphone permission to start using Voice Search",
-    "error": "An error has occurred, please try again later.",
+    "error": "An error has occurred, please try again ({{errorCode}}).",
     "network": "Network error. Please check your internet connection and try again.",
     "no-microphone": "No microphone detected. Please connect a microphone and try again.",
     "no-permission": "It looks like you do not have the microphone permissions enabled. Please enable the microphone permissions and try again.",
