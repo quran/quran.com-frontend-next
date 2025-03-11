@@ -1,26 +1,32 @@
-import React, { useState, useEffect } from 'react';
+/* eslint-disable max-lines */
+/* eslint-disable react-func/max-lines-per-function */
+import React, { useContext, useEffect, useState } from 'react';
 
 import clipboardCopy from 'clipboard-copy';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
-import { useSelector, shallowEqual } from 'react-redux';
+import { useSelector } from 'react-redux';
 
+import copyVerse from '@/components/Verse/AdvancedCopy/utils/copyVerse';
 import VerseActionAdvancedCopy from '@/components/Verse/VerseActionAdvancedCopy';
+import DataContext from '@/contexts/DataContext';
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import ChevronLeftIcon from '@/icons/chevron-left.svg';
 import CopyLinkIcon from '@/icons/copy-link.svg';
 import CopyIcon from '@/icons/copy.svg';
 import VideoIcon from '@/icons/video.svg';
-import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
+import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
+import Language from '@/types/Language';
 import PreviewMode from '@/types/Media/PreviewMode';
 import QueryParam from '@/types/QueryParam';
+import { QuranFont } from '@/types/QuranReader';
 import Verse from '@/types/Verse';
+import { areArraysEqual } from '@/utils/array';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getQuranMediaMakerNavigationUrl } from '@/utils/navigation';
 import { getWindowOrigin } from '@/utils/url';
 import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
-import { getWordTextFieldNameByFont } from '@/utils/word';
 
 const RESET_ACTION_TEXT_TIMEOUT_MS = 3 * 1000;
 
@@ -61,7 +67,8 @@ const ShareVerseActionsMenu: React.FC<Props> = ({
 }) => {
   const { t, lang } = useTranslation('common');
   const [isCopied, setIsCopied] = useState(false);
-  const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
+  const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual) as number[];
+  const chaptersData = useContext(DataContext);
   const toast = useToast();
   const router = useRouter();
 
@@ -86,12 +93,40 @@ const ShareVerseActionsMenu: React.FC<Props> = ({
       // eslint-disable-next-line i18next/no-literal-string
       `${isTranslationView ? 'translation_view' : 'reading_view'}_verse_actions_menu_copy`,
     );
-    const verseText = verse.words
-      .map((word) => word[getWordTextFieldNameByFont(quranReaderStyles.quranFont)])
-      .join(' ');
-    clipboardCopy(verseText).then(() => {
-      setIsCopied(true);
+
+    const showRangeOfVerses = false;
+    const rangeEndVerse = null;
+    const rangeStartVerse = null;
+    const shouldCopyFootnotes = false;
+    const shouldIncludeTranslatorName = true;
+    const shouldCopyFont = QuranFont.Uthmani;
+    const translations = {};
+
+    selectedTranslations.forEach((translationId) => {
+      translations[translationId] = {
+        shouldBeCopied: true, // the default is to copy the translation
+        name: '',
+      };
     });
+
+    copyVerse({
+      showRangeOfVerses,
+      rangeEndVerse,
+      rangeStartVerse,
+      shouldCopyFootnotes,
+      shouldIncludeTranslatorName,
+      shouldCopyFont,
+      translations,
+      verseKey: verse.verseKey,
+      lang: lang as Language,
+      chaptersData,
+    })
+      .then(() => {
+        setIsCopied(true);
+      })
+      .catch(() => {
+        setIsCopied(false);
+      });
   };
 
   const onCopyLinkClicked = () => {
