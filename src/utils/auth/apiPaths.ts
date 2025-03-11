@@ -258,7 +258,7 @@ export const makeGetMonthlyMediaFilesCountUrl = (type: MediaType) =>
  *
  * @returns {string}
  */
-export const makeShortenUrlUrl = (): string => makeUrl('/shorten-url');
+export const makeShortenUrlUrl = (): string => makeUrl('shorten-url');
 
 /**
  * Compose the url for get full URL by id.
@@ -266,4 +266,4 @@ export const makeShortenUrlUrl = (): string => makeUrl('/shorten-url');
  * @param {string} id
  * @returns {string}
  */
-export const makeFullUrlById = (id: string): string => makeUrl(`/shorten-url/${id}`);
+export const makeFullUrlById = (id: string): string => makeUrl(`shorten-url/${id}`);
