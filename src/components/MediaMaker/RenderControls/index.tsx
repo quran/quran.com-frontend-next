@@ -2,6 +2,7 @@ import React, { MutableRefObject, useEffect, useState } from 'react';
 
 import { PlayerRef } from '@remotion/player';
 import classNames from 'classnames';
+import clipboardCopy from 'clipboard-copy';
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from './RenderControls.module.scss';
@@ -68,11 +69,20 @@ const RenderControls: React.FC<Props> = ({ inputProps, isFetching, playerRef }) 
     const url = new URL(path);
     url.searchParams.set(QueryParam.PREVIEW_MODE, PreviewMode.ENABLED);
 
-    const response = await shortenUrl(url.toString());
+    let shareUrl = url.toString();
+    try {
+      const response = await shortenUrl(url.toString());
+      if (response?.id) {
+        shareUrl = `${getBasePath()}${getQuranMediaMakerNavigationUrl()}/${response.id}`;
+      }
+    } catch (error) {
+      // If URL shortening fails, we'll use the full URL without shortening
+      clipboardCopy(url.toString()).then(() => {
+        setIsCopied(true);
+      });
 
-    const shareUrl = response?.id
-      ? `${getBasePath()}${getQuranMediaMakerNavigationUrl()}/${response.id}`
-      : url.toString();
+      return;
+    }
 
     try {
       await navigator.clipboard.writeText(shareUrl);

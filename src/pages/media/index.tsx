@@ -453,7 +453,7 @@ const MediaMaker: NextPage<MediaMaker> = ({
           </>
         </div>
 
-        {previewMode === PreviewMode.DISABLED && (
+        {previewMode === PreviewMode.DISABLED ? (
           <div className={layoutStyles.flow}>
             <VideoSettings
               chaptersList={chaptersList}
@@ -464,6 +464,8 @@ const MediaMaker: NextPage<MediaMaker> = ({
               mediaSettings={mediaSettings}
             />
           </div>
+        ) : (
+          <div className={layoutStyles.additionalVerticalGapLarge} />
         )}
       </div>
     </>
