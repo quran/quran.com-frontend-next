@@ -43,7 +43,7 @@ const ChapterCard: React.FC<Props> = ({
   const link = getChapterWithStartingVerseUrl(`${surahNumber}:${verseNumber}`);
 
   return (
-    <Card className={styles.chapterCard} {...(isContinueReading && { link })}>
+    <Card className={styles.chapterCard} link={link}>
       <div className={styles.surahContainer}>
         <div className={styles.surahName}>{surahNumberString.padStart(3, '0')}</div>
         <div className={styles.surahInfo}>
