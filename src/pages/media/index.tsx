@@ -1,4 +1,5 @@
 /* eslint-disable max-lines */
+
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import { Player, PlayerRef, RenderPoster } from '@remotion/player';
@@ -134,10 +135,10 @@ const MediaMaker: NextPage<MediaMaker> = ({
     [QueryParam.QURAN_TEXT_FONT_STYLE]: String(quranTextFontStyle),
     [QueryParam.TRANSLATION_FONT_SCALE]: String(translationFontScale),
     [QueryParam.ORIENTATION]: orientation,
-    [QueryParam.PREVIEW_MODE]: String(previewMode),
+    [QueryParam.PREVIEW_MODE]: previewMode,
   };
 
-  useAddQueryParamsToUrlSkipFirstRender(getQuranMediaMakerNavigationUrl(queryParams), {});
+  useAddQueryParamsToUrlSkipFirstRender(getQuranMediaMakerNavigationUrl(), queryParams);
 
   const API_PARAMS = useMemo(() => {
     return {
