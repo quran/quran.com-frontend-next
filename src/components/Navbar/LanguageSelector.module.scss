@@ -32,3 +32,11 @@
   inset-block-end: 1px;
   transform: rotate(180deg);
 }
+
+.languageMenuContent {
+  max-height: calc(3 * var(--spacing-mega-px));
+  @include breakpoints.tablet {
+    max-height: calc(6 * var(--spacing-mega-px));
+  }
+  overflow-y: auto;
+}
