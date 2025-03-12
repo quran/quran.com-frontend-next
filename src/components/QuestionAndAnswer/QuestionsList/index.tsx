@@ -14,7 +14,7 @@ import LoadingSpinner from '@/dls/Spinner/Spinner';
 import ChevronDownIcon from '@/icons/chevron-down.svg';
 import { Question } from '@/types/QuestionsAndAnswers/Question';
 import { logEvent } from '@/utils/eventLogger';
-import { fakeNavigate, getQuestionNavigationUrl } from '@/utils/navigation';
+import { fakeNavigate, getAnswerNavigationUrl } from '@/utils/navigation';
 
 type Props = {
   questions: Question[];
@@ -39,7 +39,7 @@ const QuestionsList: React.FC<Props> = ({
     });
     setOpenQuestionId(isOpen ? questionId : null);
     if (isOpen) {
-      fakeNavigate(getQuestionNavigationUrl(questionId), lang);
+      fakeNavigate(getAnswerNavigationUrl(questionId), lang);
     } else {
       fakeNavigate(router.asPath, router.locale);
     }

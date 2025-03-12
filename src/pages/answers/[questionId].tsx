@@ -10,14 +10,14 @@ import Answer from '@/components/QuestionAndAnswer/Answer';
 import QuestionHeader from '@/components/QuestionAndAnswer/QuestionHeader';
 import { getExploreAnswersOgImageUrl } from '@/lib/og';
 import Error from '@/pages/_error';
+import styles from '@/pages/answers/questions.module.scss';
 import contentPageStyles from '@/pages/contentPage.module.scss';
-import styles from '@/pages/questions/questions.module.scss';
 import { Question } from '@/types/QuestionsAndAnswers/Question';
 import QuestionResponse from '@/types/QuestionsAndAnswers/QuestionResponse';
 import { getQuestionById } from '@/utils/auth/api';
 import { getAllChaptersData } from '@/utils/chapter';
 import { getLanguageAlternates } from '@/utils/locale';
-import { getCanonicalUrl, getQuestionNavigationUrl } from '@/utils/navigation';
+import { getCanonicalUrl, getAnswerNavigationUrl } from '@/utils/navigation';
 import {
   REVALIDATION_PERIOD_ON_ERROR_SECONDS,
   ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
@@ -38,7 +38,7 @@ const QuestionPage: NextPage<QuestionPageProps> = ({ hasError, questionId, quest
   }
   const { type, theme: themes, body } = questionData as Question;
 
-  const navigationUrl = getQuestionNavigationUrl(questionId);
+  const navigationUrl = getAnswerNavigationUrl(questionId);
 
   return (
     <>
