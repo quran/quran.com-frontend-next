@@ -35,4 +35,10 @@
       --flow-side-spacing: 0;
     }
   }
+
+  &.lessonView {
+    @include breakpoints.tablet {
+      width: 80%;
+    }
+  }
 }
