@@ -37,9 +37,7 @@ const QuestionsSurahAndAyahSelection: React.FC<Props> = ({
     logItemSelectionChange('question_verse_number', newVerseNumber);
     setSelectedVerseNumber(newVerseNumber.toString());
     fakeNavigate(
-      getVerseAnswersNavigationUrl(
-        makeVerseKey(Number(selectedChapterId), Number(newVerseNumber)),
-      ),
+      getVerseAnswersNavigationUrl(makeVerseKey(Number(selectedChapterId), Number(newVerseNumber))),
       lang,
     );
   };
