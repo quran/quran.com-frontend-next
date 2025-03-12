@@ -1,4 +1,5 @@
 /* eslint-disable max-lines */
+
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import { Player, PlayerRef, RenderPoster } from '@remotion/player';
@@ -137,7 +138,7 @@ const MediaMaker: NextPage<MediaMaker> = ({
     [QueryParam.PREVIEW_MODE]: String(previewMode),
   };
 
-  useAddQueryParamsToUrlSkipFirstRender(getQuranMediaMakerNavigationUrl(queryParams), {});
+  useAddQueryParamsToUrlSkipFirstRender(getQuranMediaMakerNavigationUrl(), queryParams);
 
   const API_PARAMS = useMemo(() => {
     return {

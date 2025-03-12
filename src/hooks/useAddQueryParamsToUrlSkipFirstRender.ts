@@ -29,7 +29,7 @@ const useAddQueryParamsToUrlSkipFirstRender = (
       // Only update parameters that have changed
       let needsUpdate = false;
       Object.entries(params).forEach(([parameter, value]) => {
-        if (value) {
+        if (value !== undefined && value !== null) {
           const currentValue = currentSearchParams.get(parameter);
           const newValue = String(value);
 
@@ -43,7 +43,8 @@ const useAddQueryParamsToUrlSkipFirstRender = (
 
       // Only update the URL if parameters have changed
       if (needsUpdate) {
-        const newUrl = `${relativeUrl}?${currentSearchParams.toString()}`;
+        const queryString = currentSearchParams.toString();
+        const newUrl = `${relativeUrl}${queryString ? `?${queryString}` : ''}`;
         window.history.replaceState(
           { ...window.history.state, as: newUrl, url: newUrl },
           '',
