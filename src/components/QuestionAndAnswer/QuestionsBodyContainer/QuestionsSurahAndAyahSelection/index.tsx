@@ -5,7 +5,7 @@ import useTranslation from 'next-translate/useTranslation';
 import styles from '@/components/QuranReader/ReflectionView/ReflectionBodyContainer/ReflectionSurahAndAyahSelection/ReflectionSurahAndAyahSelection.module.scss';
 import SurahAndAyahSelection from '@/components/QuranReader/TafsirView/SurahAndAyahSelection';
 import { logItemSelectionChange } from '@/utils/eventLogger';
-import { fakeNavigate, getVerseQuestionsNavigationUrl } from '@/utils/navigation';
+import { fakeNavigate, getVerseAnswersNavigationUrl } from '@/utils/navigation';
 import { makeVerseKey } from '@/utils/verse';
 
 interface Props {
@@ -28,7 +28,7 @@ const QuestionsSurahAndAyahSelection: React.FC<Props> = ({
     const newVerseNumber = '1';
     setSelectedVerseNumber(newVerseNumber); // reset verse number to 1 every time chapter changes
     fakeNavigate(
-      getVerseQuestionsNavigationUrl(makeVerseKey(newChapterId, Number(newVerseNumber))),
+      getVerseAnswersNavigationUrl(makeVerseKey(newChapterId, Number(newVerseNumber))),
       lang,
     );
   };
@@ -37,9 +37,7 @@ const QuestionsSurahAndAyahSelection: React.FC<Props> = ({
     logItemSelectionChange('question_verse_number', newVerseNumber);
     setSelectedVerseNumber(newVerseNumber.toString());
     fakeNavigate(
-      getVerseQuestionsNavigationUrl(
-        makeVerseKey(Number(selectedChapterId), Number(newVerseNumber)),
-      ),
+      getVerseAnswersNavigationUrl(makeVerseKey(Number(selectedChapterId), Number(newVerseNumber))),
       lang,
     );
   };

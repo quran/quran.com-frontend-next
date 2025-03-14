@@ -9,7 +9,7 @@ import QuestionAndAnswerPill from '@/components/QuestionAndAnswer/Pill';
 import QuestionsModal from '@/components/QuestionAndAnswer/QuestionsModal';
 import QuestionType from '@/types/QuestionsAndAnswers/QuestionType';
 import { logButtonClick } from '@/utils/eventLogger';
-import { fakeNavigate, getVerseQuestionsNavigationUrl } from '@/utils/navigation';
+import { fakeNavigate, getVerseAnswersNavigationUrl } from '@/utils/navigation';
 
 type VerseQuestionsProps = {
   verseKey: string;
@@ -30,7 +30,7 @@ const VerseQuestions: React.FC<VerseQuestionsProps> = ({
     logButtonClick('verse_questions', {
       isTranslationView,
     });
-    fakeNavigate(getVerseQuestionsNavigationUrl(verseKey), lang);
+    fakeNavigate(getVerseAnswersNavigationUrl(verseKey), lang);
     setIsModalOpen(true);
   };
 

@@ -12,7 +12,7 @@ import translationViewStyles from '@/components/QuranReader/TranslationView/Tran
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import ScholarsSayIcon from '@/icons/lighbulb.svg';
 import { logButtonClick, logEvent } from '@/utils/eventLogger';
-import { fakeNavigate, getVerseQuestionsNavigationUrl } from '@/utils/navigation';
+import { fakeNavigate, getVerseAnswersNavigationUrl } from '@/utils/navigation';
 
 interface Props {
   verseKey: string;
@@ -30,7 +30,7 @@ const QuestionsButton: React.FC<Props> = ({ verseKey, onActionTriggered }) => {
     e.preventDefault();
     logButtonClick(`reading_view_verse_actions_menu_questions`);
     setIsContentModalOpen(true);
-    fakeNavigate(getVerseQuestionsNavigationUrl(verseKey), lang);
+    fakeNavigate(getVerseAnswersNavigationUrl(verseKey), lang);
   };
 
   const onModalClose = () => {
