@@ -146,10 +146,18 @@ export const getVerseLessonNavigationUrl = (verseKey: string): string => `/${ver
  * @param {string} verseKey
  * @returns {string}
  */
-export const getVerseQuestionsNavigationUrl = (verseKey: string): string =>
-  `/${verseKey}/questions`;
+export const getVerseAnswersNavigationUrl = (verseKey: string): string => `/${verseKey}/answers`;
 
-export const getQuestionNavigationUrl = (questionId: string): string => `/questions/${questionId}`;
+/**
+ * Get the href link to a specific answer with its associated verse key.
+ *
+ * @param {string} questionId - The ID of the question
+ * @param {string} verseKey - The verse key associated with the question (e.g. "2:6")
+ * @returns {string} - The URL to the answer page
+ */
+export const getAnswerNavigationUrl = (questionId: string, verseKey: string): string => {
+  return `/${verseKey}/answers/${questionId}`;
+};
 
 /**
  * Get the href link to a surah.
