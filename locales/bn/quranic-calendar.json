@@ -4,12 +4,12 @@
   },
   "interact-with-post": "QuranReflect-এ এই পোস্টের সাথে যোগাযোগ করুন",
   "islamic-months": {
-    "1": "মহরম",
-    "2": "সাফার",
+    "1": "মহররম",
+    "2": "সফর",
     "3": "রবিউল আউয়াল",
-    "4": "রাবি'আল-থানি",
+    "4": "রাবি'আল-সানি",
     "5": "জুমাদা আল আউয়াল",
-    "6": "জুমাদা আল-থানি",
+    "6": "জুমাদা আল-সানি",
     "7": "রজব",
     "8": "শা'বান",
     "9": "রমজান",
@@ -18,8 +18,8 @@
     "12": "জুল হিজ্জাহ"
   },
   "join-qc": {
-    "line-1": "আমরা কুরআনিক ক্যালেন্ডারের <highlight> সপ্তাহ {{weekNumber}} <\/highlight> এ আছি।",
-    "line-2": "<normal> এই সপ্তাহের পড়ার জন্য আমাদের সাথে যোগ দিন যদিও এটি আপনার প্রথমবার! <\/normal>"
+    "line-1": "আমরা কুরআনিক ক্যালেন্ডারের <highlight> সপ্তাহ {{weekNumber}} </highlight> এ আছি।",
+    "line-2": "<normal> এই সপ্তাহের পড়ার জন্য আমাদের সাথে যোগ দিন যদিও এটি আপনার প্রথমবার! </normal>"
   },
   "join-quranic-calendar": "QuranReflect এর মাধ্যমে আপডেট এবং সংস্থান পেতে সদস্যতা নিন",
   "join-quranic-calendar-success": "আপনি সফলভাবে ডিভাইন বুক ক্লাবে যোগ দিয়েছেন!",
@@ -30,6 +30,6 @@
     "en-only": "শুধুমাত্র ইংরেজিতে পড়ুন"
   },
   "supplemental-resources": "সাপোর্টিং রিসোর্স",
-  "today": "আজকের তারিখ হল: <highlight> {{month}} {{day}} {{year}} , {{gregorianDate}} <\/highlight>",
-  "week-title": "সপ্তাহ {{weekNumber}} ( {{month}} ) {{rangeStart}} থেকে {{rangeEnd}} পর্যন্ত শ্লোকগুলি কভার করছে"
+  "today": "আজকের তারিখ হল: <highlight> {{month}} {{day}} {{year}} , {{gregorianDate}} </highlight>",
+  "week-title": "সপ্তাহ {{weekNumber}} ( {{month}} ) {{rangeStart}} থেকে {{rangeEnd}} পর্যন্ত আয়াতগুলো কভার করছে"
 }
