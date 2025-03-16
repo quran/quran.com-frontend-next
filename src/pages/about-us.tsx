@@ -9,7 +9,7 @@ import styles from './contentPage.module.scss';
 
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import PageContainer from '@/components/PageContainer';
-import Link from '@/dls/Link/Link';
+import Link, { LinkVariant } from '@/dls/Link/Link';
 import { getBlurDataUrl } from '@/utils/image';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl } from '@/utils/navigation';
@@ -49,7 +49,14 @@ const AboutUsPage = () => {
           </ul>
 
           <h2 className={styles.heading}>{t('who-we-are.title')}</h2>
-          <p>{t('who-we-are.desc')}</p>
+          <p>
+            <Trans
+              i18nKey="about:who-we-are.desc"
+              components={{
+                link: <Link href="https://quran.foundation" variant={LinkVariant.Blend} isNewTab />,
+              }}
+            />
+          </p>
 
           <h2 className={styles.heading}>{t('global-effort.title')}</h2>
           <p>{t('global-effort.desc')}</p>
