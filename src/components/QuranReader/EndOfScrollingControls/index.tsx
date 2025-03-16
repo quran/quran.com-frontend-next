@@ -39,9 +39,6 @@ const EndOfScrollingControls: React.FC<Props> = ({
       <div className={styles.progressWidgetContainer}>
         <QuranReaderReadingStreak />
       </div>
-      <div className={styles.progressWidgetContainer}>
-        <HomepageFundraisingBanner isDismissible={false} />
-      </div>
       {isReadingByRevelationOrder && quranReaderDataType === QuranReaderDataType.Chapter && (
         <RevelationOrderNavigationNotice
           view={RevelationOrderNavigationNoticeView.EndOfScrollingControls}
@@ -66,6 +63,9 @@ const EndOfScrollingControls: React.FC<Props> = ({
             <HizbControls lastVerse={lastVerse} />
           )}
         </div>
+      </div>
+      <div className={styles.progressWidgetContainer}>
+        <HomepageFundraisingBanner isDismissible={false} />
       </div>
     </>
   );
