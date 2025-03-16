@@ -64,7 +64,7 @@ const QuestionPage: NextPage<QuestionPageProps> = ({
         imageHeight={630}
         canonical={getCanonicalUrl(lang, navigationUrl)}
         languageAlternates={getLanguageAlternates(navigationUrl)}
-        description={t('questions-meta-desc')}
+        description={`${verseKey} ${body} ${t('questions-meta-desc')}`}
       />
       <PageContainer>
         <div className={classNames(contentPageStyles.contentPage, styles.contentPage)}>
