@@ -66,6 +66,6 @@
     "/calendar": ["quranic-calendar"],
     "/media": ["media"],
     "/[chapterId]/answers": ["quran-reader", "question"],
-    "/answers/[questionId]": ["quran-reader", "question"]
+    "/[chapterId]/answers/[questionId]": ["quran-reader", "question"]
   }
 }

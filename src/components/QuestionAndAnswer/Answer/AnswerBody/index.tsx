@@ -28,7 +28,8 @@ const AnswerBody: React.FC<Props> = ({ question }) => {
     setShouldShowShareOptions(true);
   };
 
-  const shareURL = `${getBasePath()}${getAnswerNavigationUrl(question.id)}`;
+  const [verseKey] = question?.ranges[0]?.split('-') ?? ['1:1'];
+  const shareURL = `${getBasePath()}${getAnswerNavigationUrl(question.id, verseKey)}`;
   const title = t('q-and-a.explore_answers');
 
   return (

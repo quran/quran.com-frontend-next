@@ -33,13 +33,18 @@ const QuestionsList: React.FC<Props> = ({
   const [openQuestionId, setOpenQuestionId] = useState<string | null>(null);
   const router = useRouter();
 
-  const onQuestionCollapseOpenChange = (isOpen: boolean, questionId: string) => {
+  const onQuestionCollapseOpenChange = (
+    isOpen: boolean,
+    questionId: string,
+    question: Question,
+  ) => {
     logEvent('question_collapse_open', {
       isOpen,
     });
     setOpenQuestionId(isOpen ? questionId : null);
     if (isOpen) {
-      fakeNavigate(getAnswerNavigationUrl(questionId), lang);
+      const [verseKey] = question?.ranges[0]?.split('-') ?? ['1:1'];
+      fakeNavigate(getAnswerNavigationUrl(questionId, verseKey), lang);
     } else {
       fakeNavigate(router.asPath, router.locale);
     }
@@ -58,7 +63,7 @@ const QuestionsList: React.FC<Props> = ({
           isDefaultOpen={false}
           shouldOpen={openQuestionId === question.id}
           onOpenChange={(isOpen) => {
-            onQuestionCollapseOpenChange(isOpen, question?.id);
+            onQuestionCollapseOpenChange(isOpen, question?.id, question);
           }}
         >
           {({ isOpen: isOpenRenderProp }) => {
