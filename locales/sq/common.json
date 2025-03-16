@@ -209,7 +209,7 @@
     "translation-font-size": "Madhësia e shkronjave të përkthimit"
   },
   "footer": {
-    "description": "Quran.com është një platformë e besuar e përdorur nga miliona njerëz në mbarë botën për të lexuar, kërkuar, dëgjuar dhe reflektuar mbi Kuranin në shumë gjuhë. Ai ofron përkthime, tefsir, recitime, përkthim fjalë për fjalë dhe mjete për studim më të thellë, duke e bërë Kuranin të arritshëm për të gjithë. <br/> <br/> Si një Jariyah Sadakah, Quran.com është i përkushtuar për të ndihmuar njerëzit të lidhen thellë me Kuranin. Mbështetur nga Quran.Foundation, një organizatë jofitimprurëse 501(c)(3), Quran.com vazhdon të rritet si një burim falas dhe i vlefshëm për të gjithë, Alhamdullilah”.",
+    "description": "Quran.com është një platformë e besuar e përdorur nga miliona njerëz në mbarë botën për të lexuar, kërkuar, dëgjuar dhe reflektuar mbi Kuranin në shumë gjuhë. Ai ofron përkthime, tefsir, recitime, përkthim fjalë për fjalë dhe mjete për studim më të thellë, duke e bërë Kuranin të arritshëm për të gjithë. <br/> <br/> Si një Jariyah Sadakah, Quran.com është i përkushtuar për të ndihmuar njerëzit të lidhen thellë me Kuranin. Mbështetur nga <link>Quran.Foundation</link>, një organizatë jofitimprurëse 501(c)(3), Quran.com vazhdon të rritet si një burim falas dhe i vlefshëm për të gjithë, Alhamdullilah”.",
     "hiring": "Ne po punësojmë! Bashkohuni me ekipin e QuranFoundation dhe kontribuoni në misionin tonë. <link> Apliko tani! </link>",
     "rights": "Të gjitha të drejtat e rezervuara",
     "title": "Lexoni, dëgjoni, kërkoni dhe reflektoni mbi Kuranin"
@@ -309,7 +309,7 @@
   "privacy": "Privatësia",
   "product-updates": "Përditësimet e produktit",
   "profile": "Profili",
-  "projects-desc": "Projektet jofitimprurëse të zotëruara, të menaxhuara ose të sponsorizuara nga Quran.Foundation",
+  "projects-desc": "Projektet jofitimprurëse të zotëruara, të menaxhuara ose të sponsorizuara nga <link>Quran.Foundation</link>",
   "q-reflect": "Kurani Reflekto",
   "quran-com": "Quran.com",
   "quran-radio": "Kuran Radio",
