@@ -65,7 +65,7 @@
     "/notification-settings": ["notification-settings"],
     "/calendar": ["quranic-calendar"],
     "/media": ["media"],
-    "/[chapterId]/questions": ["quran-reader", "question"],
-    "/questions/[questionId]": ["quran-reader", "question"]
+    "/[chapterId]/answers": ["quran-reader", "question"],
+    "/[chapterId]/answers/[questionId]": ["quran-reader", "question"]
   }
 }
