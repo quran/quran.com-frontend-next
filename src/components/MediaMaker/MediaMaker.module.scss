@@ -391,3 +391,13 @@ $colorPickerBorderRadius: calc(var(--spacing-medium) * 3);
   justify-content: center;
   padding-top: var(--spacing-xsmall);
 }
+
+.generateVideoButton {
+  width: 100%;
+  max-width: 250px;
+  margin: 0 auto;
+  margin-bottom: var(--spacing-mega);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

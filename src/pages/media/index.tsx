@@ -6,6 +6,7 @@ import { Player, PlayerRef, RenderPoster } from '@remotion/player';
 import classNames from 'classnames';
 import { GetStaticProps, NextPage } from 'next';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import { AbsoluteFill, cancelRender, prefetch, staticFile } from 'remotion';
 import useSWRImmutable from 'swr/immutable';
@@ -20,10 +21,12 @@ import PlayerContent from '@/components/MediaMaker/Content';
 import styles from '@/components/MediaMaker/MediaMaker.module.scss';
 import VideoSettings from '@/components/MediaMaker/Settings/VideoSettings';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
+import Button, { ButtonType } from '@/dls/Button/Button';
 import Spinner, { SpinnerSize } from '@/dls/Spinner/Spinner';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import useGetMediaSettings from '@/hooks/auth/media/useGetMediaSettings';
 import useAddQueryParamsToUrlSkipFirstRender from '@/hooks/useAddQueryParamsToUrlSkipFirstRender';
+import VideoIcon from '@/icons/video.svg';
 import { getMediaGeneratorOgImageUrl } from '@/lib/og';
 import Error from '@/pages/_error';
 import layoutStyles from '@/pages/index.module.scss';
@@ -38,6 +41,7 @@ import { makeChapterAudioDataUrl, makeVersesUrl } from '@/utils/apiPaths';
 import { areArraysEqual } from '@/utils/array';
 import { getAllChaptersData, getChapterData } from '@/utils/chapter';
 import { isChromeIOS, isSafari } from '@/utils/device-detector';
+import { logButtonClick } from '@/utils/eventLogger';
 import { getLanguageAlternates, toLocalizedNumber } from '@/utils/locale';
 import {
   DEFAULT_API_PARAMS,
@@ -92,6 +96,8 @@ const MediaMaker: NextPage<MediaMaker> = ({
   const areMediaFilesReady = videoFileReady && audioFileReady;
 
   const playerRef = useRef<PlayerRef>(null);
+
+  const router = useRouter();
 
   useEffect(() => {
     setIsReady(true);
@@ -292,6 +298,25 @@ const MediaMaker: NextPage<MediaMaker> = ({
     previewMode,
   ]);
 
+  /**
+   * Disables preview mode by setting the preview_mode URL parameter to disabled
+   */
+  const disablePreviewMode = () => {
+    logButtonClick('video_generation_disable_preview');
+
+    const newQuery = { ...router.query };
+    newQuery[QueryParam.PREVIEW_MODE] = PreviewMode.DISABLED;
+
+    router.push(
+      {
+        pathname: router.pathname,
+        query: newQuery,
+      },
+      undefined,
+      { shallow: true },
+    );
+  };
+
   const method = isChromeIOS() ? 'base64' : 'blob-url';
   useEffect(() => {
     setVideoFileReady(false);
@@ -466,7 +491,21 @@ const MediaMaker: NextPage<MediaMaker> = ({
             />
           </div>
         ) : (
-          <div className={layoutStyles.additionalVerticalGapLarge} />
+          <>
+            <div className={layoutStyles.additionalVerticalGapLarge} />
+
+            <Button
+              className={styles.generateVideoButton}
+              type={ButtonType.Primary}
+              prefix={<VideoIcon />}
+              onClick={(e) => {
+                e.stopPropagation();
+                disablePreviewMode();
+              }}
+            >
+              {t('media:generate-your-video')}
+            </Button>
+          </>
         )}
       </div>
     </>
