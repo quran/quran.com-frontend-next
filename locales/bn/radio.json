@@ -2,15 +2,15 @@
   "change": "পরিবর্তন",
   "curated-station": {
     "juz-amma": {
-      "description": "কুরআনের শেষ জুজ শুনুন",
-      "title": "জুজ আম্মা"
+      "description": "কুরআনের শেষ জুয শুনুন",
+      "title": "জুয আম্মা"
     },
     "popular-recitations": {
       "description": "আবৃত্তির দৈনিক কিউরেটেড ফিড",
       "title": "জনপ্রিয় আবৃত্তি"
     },
     "surah-al-kahf": {
-      "description": "সূরা আলকাফ বারবার শুনুন",
+      "description": "সূরা আল কাহফ বারবার শুনুন",
       "title": "সূরা আল কাহফ"
     },
     "yaseen-alwaqiah-al-mulk": {
@@ -22,6 +22,6 @@
   "pause-radio": "রেডিও থামান",
   "play-radio": "রেডিও চালান",
   "radio-desc": "বিভিন্ন তেলাওয়াতকারীদের দ্বারা পবিত্র কুরআনের অবিরাম সুন্দর তেলাওয়াত শুনুন।",
-  "reciter-stations": "আবৃত্তিকারী স্টেশন",
+  "reciter-stations": "রিসাইটার স্টেশন",
   "station": "স্টেশন"
 }
