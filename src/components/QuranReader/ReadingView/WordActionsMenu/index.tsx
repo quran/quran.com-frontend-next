@@ -1,6 +1,7 @@
 import React from 'react';
 
 import QuranReflectButton from '../../QuranReflectButton';
+import CopyButton from '../CopyButton';
 
 import styles from './WordActionsMenu.module.scss';
 
@@ -38,6 +39,9 @@ const ReadingViewWordActionsMenu: React.FC<Props> = ({ word, onActionTriggered }
           onActionTriggered={onActionTriggered}
         />
       )}
+
+      <CopyButton verseKey={word.verseKey} onActionTriggered={onActionTriggered} />
+
       <div className={styles.readingViewOverflowVerseActionsMenu}>
         <OverflowVerseActionsMenu
           isTranslationView={false}
