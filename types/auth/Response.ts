@@ -17,9 +17,21 @@ type Error = {
   details?: Record<string, any>;
 };
 
-export type Response<Data = unknown> = {
+export type BaseResponse<Data = unknown> = {
   success: boolean;
   data?: Data;
   error?: Error;
   pagination?: Pagination;
+};
+
+export type Response<Data = unknown> = {
+  success: boolean;
+  data?: Data;
+  message?: string;
+  type?: string;
+  details?: {
+    success: boolean;
+    error?: Error;
+    [key: string]: any;
+  };
 };
