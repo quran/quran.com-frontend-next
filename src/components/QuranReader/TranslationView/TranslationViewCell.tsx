@@ -17,6 +17,7 @@ import styles from './TranslationViewCell.module.scss';
 
 import { useOnboarding } from '@/components/Onboarding/OnboardingProvider';
 import QuranReflectButton from '@/components/QuranReader/QuranReflectButton';
+import CopyButton from '@/components/QuranReader/ReadingView/CopyButton';
 import TafsirButton from '@/components/QuranReader/TafsirButton';
 import VerseNotes from '@/components/Verse/Notes';
 import OverflowVerseActionsMenu from '@/components/Verse/OverflowVerseActionsMenu';
@@ -109,6 +110,9 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
             </div>
             <div className={classNames(styles.actionItem)}>
               <QuranReflectButton verseKey={verse.verseKey} />
+            </div>
+            <div className={classNames(styles.actionItem)}>
+              <CopyButton verseKey={verse.verseKey} isTranslationView />
             </div>
           </div>
           <div className={styles.actionContainerRight}>

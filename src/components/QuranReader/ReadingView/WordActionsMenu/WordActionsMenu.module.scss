@@ -9,3 +9,26 @@
     width: var(--spacing-mega) !important;
   }
 }
+
+.copyButton {
+  padding: var(--spacing-xxsmall);
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  transition: opacity var(--transition-fast);
+
+  &:hover {
+    opacity: var(--opacity-70);
+  }
+}
+
+.copyButtonText {
+  font-size: var(--font-size-xsmall);
+  margin-top: var(--spacing-xxsmall);
+  text-align: center;
+  white-space: nowrap;
+}
