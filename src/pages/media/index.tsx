@@ -31,6 +31,7 @@ import { getMediaGeneratorOgImageUrl } from '@/lib/og';
 import Error from '@/pages/_error';
 import layoutStyles from '@/pages/index.module.scss';
 import AudioData from '@/types/AudioData';
+import Orientation from '@/types/Media/Orientation';
 import PreviewMode from '@/types/Media/PreviewMode';
 import QueryParam from '@/types/QueryParam';
 import { MushafLines, QuranFont } from '@/types/QuranReader';
@@ -448,14 +449,17 @@ const MediaMaker: NextPage<MediaMaker> = ({
     <>
       {SEOComponent}
       <div className={styles.pageContainer}>
-        <div className={classNames(styles.playerWrapper, layoutStyles.flowItem)}>
+        {!isPreviewMode && (
+          <div className={styles.titleContainer}>
+            <h1>{t('media:title')}</h1>
+          </div>
+        )}
+        <div
+          className={classNames(styles.playerWrapper, layoutStyles.flowItem, {
+            [styles.portraitAspectRatio]: orientation === Orientation.PORTRAIT,
+          })}
+        >
           <>
-            {!isPreviewMode && (
-              <div className={styles.titleContainer}>
-                <h1>{t('media:title')}</h1>
-              </div>
-            )}
-
             <Player
               key={`player-${previewMode}`}
               ref={playerRef}

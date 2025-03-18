@@ -50,6 +50,15 @@ $colorPickerBorderRadius: calc(var(--spacing-medium) * 3);
   aspect-ratio: 16 / 9;
 }
 
+.portraitAspectRatio {
+  aspect-ratio: 9 / 16;
+  max-width: 30% !important;
+  @include breakpoints.smallerThanTablet {
+    max-width: 90% !important;
+    margin-block-start: var(--banner-height);
+  }
+}
+
 .versePreviewContainer {
   padding: var(--spacing-large);
   background-color: var(--color-background-alternative-faded);
