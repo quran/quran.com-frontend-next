@@ -50,6 +50,15 @@ $colorPickerBorderRadius: calc(var(--spacing-medium) * 3);
   aspect-ratio: 16 / 9;
 }
 
+.portraitAspectRatio {
+  aspect-ratio: 9 / 16;
+  max-width: 30% !important;
+  @include breakpoints.smallerThanTablet {
+    max-width: 90% !important;
+    margin-block-start: var(--banner-height);
+  }
+}
+
 .versePreviewContainer {
   padding: var(--spacing-large);
   background-color: var(--color-background-alternative-faded);
@@ -85,6 +94,7 @@ $colorPickerBorderRadius: calc(var(--spacing-medium) * 3);
 
   @include breakpoints.smallerThanDesktop {
     width: 90%;
+    margin-block-start: var(--banner-height);
   }
 }
 
@@ -390,4 +400,14 @@ $colorPickerBorderRadius: calc(var(--spacing-medium) * 3);
   display: flex;
   justify-content: center;
   padding-top: var(--spacing-xsmall);
+}
+
+.generateVideoButton {
+  width: 100%;
+  max-width: 250px;
+  margin: 0 auto;
+  margin-bottom: var(--spacing-mega);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
