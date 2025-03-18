@@ -442,15 +442,19 @@ const MediaMaker: NextPage<MediaMaker> = ({
     return <>{SEOComponent}</>;
   }
 
+  const isPreviewMode = previewMode === PreviewMode.ENABLED;
+
   return (
     <>
       {SEOComponent}
       <div className={styles.pageContainer}>
         <div className={classNames(styles.playerWrapper, layoutStyles.flowItem)}>
           <>
-            <div className={styles.titleContainer}>
-              <h1>{t('media:title')}</h1>
-            </div>
+            {!isPreviewMode && (
+              <div className={styles.titleContainer}>
+                <h1>{t('media:title')}</h1>
+              </div>
+            )}
 
             <Player
               key={`player-${previewMode}`}
@@ -479,18 +483,7 @@ const MediaMaker: NextPage<MediaMaker> = ({
           </>
         </div>
 
-        {previewMode === PreviewMode.DISABLED ? (
-          <div className={layoutStyles.flow}>
-            <VideoSettings
-              chaptersList={chaptersList}
-              reciters={reciters}
-              playerRef={playerRef}
-              isFetching={isFetching}
-              inputProps={inputProps}
-              mediaSettings={mediaSettings}
-            />
-          </div>
-        ) : (
+        {isPreviewMode ? (
           <>
             <div className={layoutStyles.additionalVerticalGapLarge} />
 
@@ -506,6 +499,17 @@ const MediaMaker: NextPage<MediaMaker> = ({
               {t('media:generate-your-video')}
             </Button>
           </>
+        ) : (
+          <div className={layoutStyles.flow}>
+            <VideoSettings
+              chaptersList={chaptersList}
+              reciters={reciters}
+              playerRef={playerRef}
+              isFetching={isFetching}
+              inputProps={inputProps}
+              mediaSettings={mediaSettings}
+            />
+          </div>
         )}
       </div>
     </>

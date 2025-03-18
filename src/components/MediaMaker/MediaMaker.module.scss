@@ -85,6 +85,7 @@ $colorPickerBorderRadius: calc(var(--spacing-medium) * 3);
 
   @include breakpoints.smallerThanDesktop {
     width: 90%;
+    margin-block-start: var(--banner-height);
   }
 }
 
