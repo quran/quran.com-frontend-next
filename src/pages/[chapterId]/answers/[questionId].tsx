@@ -44,19 +44,19 @@ const QuestionPage: NextPage<QuestionPageProps> = ({
   questionData,
   verseKey,
 }) => {
-  const { t, lang } = useTranslation('question');
+  const { lang } = useTranslation('question');
 
   if (hasError) {
     return <Error statusCode={500} />;
   }
 
-  const { type, theme: themes, body } = questionData as Question;
+  const { type, theme: themes, body, summary } = questionData as Question;
   const navigationUrl = getAnswerNavigationUrl(questionId, verseKey);
 
   return (
     <>
       <NextSeoWrapper
-        title={t('quran-reader:q-and-a.explore_answers')}
+        title={'Quran ' + String(verseKey) + ' - ' + String(body)}
         image={getExploreAnswersOgImageUrl({
           locale: lang,
         })}
@@ -64,7 +64,7 @@ const QuestionPage: NextPage<QuestionPageProps> = ({
         imageHeight={630}
         canonical={getCanonicalUrl(lang, navigationUrl)}
         languageAlternates={getLanguageAlternates(navigationUrl)}
-        description={`${verseKey} ${body} ${t('questions-meta-desc')}`}
+        description={String(summary)}
       />
       <PageContainer>
         <div className={classNames(contentPageStyles.contentPage, styles.contentPage)}>
