@@ -17,7 +17,7 @@ import layoutStyle from '@/pages/index.module.scss';
 import PreviewMode from '@/types/Media/PreviewMode';
 import QueryParam from '@/types/QueryParam';
 import { shortenUrl } from '@/utils/auth/api';
-import { isChromeIOS, isSafari } from '@/utils/device-detector';
+import { isSafari } from '@/utils/device-detector';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getQuranMediaMakerNavigationUrl } from '@/utils/navigation';
 import { getBasePath } from '@/utils/url';
@@ -46,7 +46,7 @@ const RenderControls: React.FC<Props> = ({ inputProps, isFetching, playerRef }) 
   const [isCopied, setIsCopied] = useState(false);
   const [urlGenerated, setUrlGenerated] = useState(false);
   const [shareUrl, setShareUrl] = useState('');
-  const isSafariBrowser = typeof window !== 'undefined' ? isSafari() && !isChromeIOS() : false;
+  const isSafariBrowser = typeof window !== 'undefined' ? isSafari() : false;
 
   // Store the URL search params at the time of link generation
   const lastUrlParamsRef = useRef<string | null>(null);
