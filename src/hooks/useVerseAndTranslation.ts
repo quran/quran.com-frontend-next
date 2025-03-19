@@ -5,6 +5,7 @@ import useSWR from 'swr/immutable';
 import useQcfFont from '@/hooks/useQcfFont';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
+import { QuranFont } from '@/types/QuranReader';
 import { getDefaultWordFields, getMushafId } from '@/utils/api';
 import { makeVersesUrl } from '@/utils/apiPaths';
 import { areArraysEqual } from '@/utils/array';
@@ -15,21 +16,27 @@ interface Props {
   chapter: number;
   from: number;
   to: number;
+  quranFont?: QuranFont;
+  translationsLimit?: number;
 }
 
-const useVerseAndTranslation = ({ chapter, from, to }: Props) => {
+const useVerseAndTranslation = ({ chapter, from, to, quranFont, translationsLimit }: Props) => {
   const { lang } = useTranslation();
   const translations = useSelector(selectSelectedTranslations, areArraysEqual);
-  const { quranFont, mushafLines, translationFontScale } = useSelector(
-    selectQuranReaderStyles,
-    shallowEqual,
-  );
+  const {
+    quranFont: selectedQuranFont,
+    mushafLines,
+    translationFontScale,
+  } = useSelector(selectQuranReaderStyles, shallowEqual);
 
-  const mushafId = getMushafId(quranFont, mushafLines).mushaf;
+  const resolvedFont = quranFont ?? selectedQuranFont;
+  const resolvedTranslationsList = translations.slice(0, translationsLimit);
+
+  const mushafId = getMushafId(resolvedFont, mushafLines).mushaf;
   const apiParams = {
-    ...getDefaultWordFields(quranFont),
+    ...getDefaultWordFields(resolvedFont),
     translationFields: 'resource_name,language_id',
-    translations: translations.join(','),
+    translations: resolvedTranslationsList.join(','),
     mushaf: mushafId,
     from: `${chapter}:${from}`,
     to: `${chapter}:${to}`,
@@ -42,7 +49,7 @@ const useVerseAndTranslation = ({ chapter, from, to }: Props) => {
     fetcher,
   );
 
-  useQcfFont(quranFont, data?.verses ? data.verses : []);
+  useQcfFont(resolvedFont, data?.verses ? data.verses : []);
 
   return {
     data,

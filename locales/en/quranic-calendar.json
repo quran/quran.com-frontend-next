@@ -69,6 +69,7 @@
   "share-reflections": "Share your Reflections",
   "completed-weeks": "{{completedWeeks}}/{{totalWeeks}} Weeks Completed",
   "faq": "Frequently Asked Questions",
+  "weekly-verses-help-description-1": "This PDF contains a flowing translation adapted mainly from the work of M.A.S. Abdel Haleem. Each week’s document is divided into seven portions, making it easier to spread the reading over the week if you prefer. There are short introductions to the surahs, headers and notes to clarify some essential points, and each daily portion has a reflection question and suggested action",
   "faq-items": [
     {
       "question": "What is \"Quran in a Year\"?",
