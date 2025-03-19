@@ -1,5 +1,5 @@
 /* eslint-disable max-lines */
-import React, { MutableRefObject, useState, useEffect, useRef } from 'react';
+import React, { MutableRefObject, useEffect, useRef, useState } from 'react';
 
 import { PlayerRef } from '@remotion/player';
 import classNames from 'classnames';
@@ -10,14 +10,14 @@ import styles from './RenderControls.module.scss';
 import RenderImageButton from './RenderImageButton';
 import RenderVideoButton from './RenderVideoButton';
 
-import Button, { ButtonType, ButtonSize } from '@/dls/Button/Button';
+import Button, { ButtonSize, ButtonType } from '@/dls/Button/Button';
 import CopyLinkIcon from '@/icons/copy-link.svg';
 import CopyIcon from '@/icons/copy.svg';
 import layoutStyle from '@/pages/index.module.scss';
 import PreviewMode from '@/types/Media/PreviewMode';
 import QueryParam from '@/types/QueryParam';
 import { shortenUrl } from '@/utils/auth/api';
-import { isChromeIOS, isSafari } from '@/utils/device-detector';
+import { isSafari } from '@/utils/device-detector';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getQuranMediaMakerNavigationUrl } from '@/utils/navigation';
 import { getBasePath } from '@/utils/url';
@@ -46,7 +46,7 @@ const RenderControls: React.FC<Props> = ({ inputProps, isFetching, playerRef }) 
   const [isCopied, setIsCopied] = useState(false);
   const [urlGenerated, setUrlGenerated] = useState(false);
   const [shareUrl, setShareUrl] = useState('');
-  const isSafariBrowser = typeof window !== 'undefined' ? isSafari() && !isChromeIOS() : false;
+  const isSafariBrowser = typeof window !== 'undefined' ? isSafari() : false;
 
   // Store the URL search params at the time of link generation
   const lastUrlParamsRef = useRef<string | null>(null);
