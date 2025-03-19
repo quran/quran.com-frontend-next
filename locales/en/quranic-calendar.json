@@ -1,7 +1,12 @@
 {
   "hero": {
-    "line-1": "The Global Quranic Calendar is a reading schedule designed to encourage reflective reading of the entire Quran from the end of one Ramadan to the beginning of the next. We encourage you to take time to understand and reflect on the verses so you can gain a deeper, more heartfelt connection."
+    "line-1": "The Global Quranic Calendar is a reading schedule designed to encourage reflective reading of the entire Quran from the end of one Ramadan to the beginning of the next. We encourage you to take time to understand and reflect on the verses so you can gain a deeper, more heartfelt connection.",
+    "description": "A thoughtfully designed schedule that makes it easy for you to read and understand the entire Quran from one Ramadan to the next, at a steady and manageable pace."
   },
+  "join-whatsapp": "Join our Whatsapp",
+  "join-telegram": "Join our Telegram",
+  "join-whatsapp-mobile": "Whatsapp",
+  "join-telegram-mobile": "Telegram",
   "interact-with-post": "Interact with this post on QuranReflect",
   "islamic-months": {
     "1": "Muharram",
@@ -23,7 +28,9 @@
   },
   "join-quranic-calendar": "Subscribe to receive updates and resources via QuranReflect",
   "join-quranic-calendar-success": "You've joined the Divine Book Club successfully!",
-  "quranic-calendar": "The Global Quranic Calendar",
+  "quranic-calendar": "Quran in a Year",
+  "quran-calendar-title": "Quran in a Year – A Simple Plan to Read & Understand the Entire Quran",
+  "quran-calendar-description": "A structured reading plan to complete the Quran in a year. Build consistency, deepen your understanding, and stay on track—without feeling overwhelmed.",
   "reading-options": {
     "default-settings": "Read with my default settings",
     "en-and-ar": "Read in English and Arabic",
@@ -31,5 +38,81 @@
   },
   "supplemental-resources": "Supporting Resources",
   "today": "Today's date is: <highlight>{{month}} {{day}} {{year}}, {{gregorianDate}}</highlight>",
-  "week-title": "Week {{weekNumber}} ({{month}}) covering verses {{rangeStart}} to {{rangeEnd}}"
+  "week-title": "Week {{weekNumber}} ({{month}}) covering verses {{rangeStart}} to {{rangeEnd}}",
+  "my-progress": "My Progress",
+  "start-tracking": "Start tracking",
+  "progress-subtitle": "Feel free to go back and complete the weeks that you've missed!",
+  "month": "Month",
+  "ramadan": "Ramadan",
+  "week": "Week",
+  "end-of-calendar": "End of Calendar",
+  "complete": "Complete",
+  "read-this-weeks-verses": "Read this Week's Verses",
+  "verses-subtitle": "You are encouraged to focus on understanding the basic meanings, so select the language that works for you.",
+  "verse": "Verse",
+  "reflection-prompts": "💭 REFLECTION prompts from this week's reading <span>(Download the PDF to see more)</span>:",
+  "reflection-prompt-1": "What happens when we read the Quran while being sure that it has no doubt in it?",
+  "reflection-prompt-2": "What qualities allow mankind to fulfil their role upon the Earth?",
+  "reflection-prompt-3": "How do we believe in Allah without seeing Him?",
+  "mark-as-completed": "Mark as Completed",
+  "week-completed": "Completed",
+  "marked-as-completed": "This week has been marked as completed successfully!",
+  "english-pdf": "English PDF",
+  "read-online": "Read Online",
+  "additional-resources": "Additional Resources",
+  "additional-resources-subtitle": "These additional resources will help you gain a deeper connection with the Verses that you have read.",
+  "divine-book-club": "The Divine Book Club",
+  "divine-book-club-description": "This is a light group discussion which helps you follow the context of each week's reading.",
+  "watch-episode": "Watch Episode {{weekNumber}}",
+  "quran-reflect": "QuranReflect",
+  "quran-reflect-description": "Engage with others regarding the Verses you have read this week.",
+  "share-reflections": "Share your Reflections",
+  "completed-weeks": "{{completedWeeks}}/{{totalWeeks}} Weeks Completed",
+  "faq": "Frequently Asked Questions",
+  "faq-items": [
+    {
+      "question": "What is \"Quran in a Year\"?",
+      "answer": "Quran in a Year is a simple, structured reading plan to help you complete the entire Quran in one year—from the end of one Ramadan to the beginning of the next. The goal is to gain a basic understanding of the Quran from cover to cover without feeling pressured or overwhelmed."
+    },
+    {
+      "question": "How does the program work?",
+      "answer": "You are invited to make time each week to read just a few pages of the Quran in a language you understand. There are 46 readings in total, one for each week in the Islamic calendar from Shawwal to Sha'ban. This division of the Quran complements other divisions, such as the famous 30 parts which facilitate reading the Quran in one month."
+    },
+    {
+      "question": "Do I need to know how to read Arabic to participate?",
+      "answer": "Not at all. The starting point in this program is to engage with the Quran's meanings through any language (translation) you are comfortable with. Quran.com offers translations in many languages to make this accessible for everyone. We aim to inspire participants to keep leveling up from year to year."
+    },
+    {
+      "question": "Where do I find the weekly reading assignments?",
+      "answer": "Each week, the updated reading assignment will be available at Quran.com/calendar. You can read directly on Quran.com, where a dedicated link will take you straight to the primary reading for the week.\n\nYou can also open the English PDF, and print it at home. This contains a flowing translation adapted mainly from the work of M.A.S. Abdel Haleem. Each week's document is divided into seven portions, making it easier to spread the reading over the week if you prefer. There are short introductions to the surahs, headers and notes to clarify some essential points, and each daily portion has a reflection question and suggested action."
+    },
+    {
+      "question": "How can I receive weekly reading reminders?",
+      "answer": "You have multiple options to stay on track. We highly recommend subscribing to receive emails with the weekly reading assignments attached. We have also created community channels on Telegram and WhatsApp which will contain reminders and encouragement. Simply click the buttons of your choice on Quran.com/calendar to subscribe. You may choose all three if you wish."
+    },
+    {
+      "question": "How can I personalize my reading experience?",
+      "answer": "On Quran.com, go to the settings menu to:\n• Adjust font sizes and styles\n• Switch between light, dark, and sepia mode\n• Choose from multiple available translations\n\nThis makes it easy for anyone to participate in the language they understand best, and with a translation that is clear and informative."
+    },
+    {
+      "question": "What extra resources do you provide?",
+      "answer": "We encourage you to browse QuranReflect.com for other people's reflections on the passages read each week, and as soon as you feel ready, post to share your own thoughts!\n\nAlso make sure to check out The Divine Book Club podcast: an insightful scholar-led discussion that follows this schedule. It is just an hour each week, and provides very helpful context."
+    },
+    {
+      "question": "What if I fall behind or join late?",
+      "answer": "No problem. Just pick up at the current week's reading—there's no need to catch up on missed weeks. Stay consistent and focus on moving forward. There is always next year to pick up on anything you missed."
+    },
+    {
+      "question": "How can I make the most of this journey?",
+      "answer": "The best way to stay consistent is by reading with others. We encourage you to start a personal book club—with family, friends, or even online. Meet weekly, discuss what you've read, and support each other on this journey."
+    },
+    {
+      "question": "Will there be deeper study options later?",
+      "answer": "We do plan to promote next steps and higher levels. In the current year, we are inviting as many people as possible to start by keeping it simple: read the full Quran with basic understanding. Once you have done this, you will feel ready to read again and go deeper!"
+    },
+    {
+      "question": "Is this free? Can I share it?",
+      "answer": "Yes. \"Quran in a Year\" is completely free, and we encourage you to share it with others. Invite a friend, start a book club, and help more people complete their first full reading of the Quran."
+    }
+  ]
 }

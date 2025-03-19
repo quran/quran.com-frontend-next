@@ -23,13 +23,16 @@ import {
   UpdateActivityDayParams,
   UpdateLessonActivityDayBody,
   UpdateQuranActivityDayBody,
+  UpdateQuranReadingProgramActivityDayBody,
 } from '@/types/auth/ActivityDay';
 import ConsentType from '@/types/auth/ConsentType';
 import { Course } from '@/types/auth/Course';
 import { CreateGoalRequest, Goal, GoalCategory, UpdateGoalRequest } from '@/types/auth/Goal';
 import { Note } from '@/types/auth/Note';
+import QuranProgramWeekResponse from '@/types/auth/QuranProgramWeekResponse';
 import { Response } from '@/types/auth/Response';
 import { StreakWithMetadataParams, StreakWithUserMetadata } from '@/types/auth/Streak';
+import UserProgramResponse from '@/types/auth/UserProgramResponse';
 import Language from '@/types/Language';
 import GenerateMediaFileRequest, { MediaType } from '@/types/Media/GenerateMediaFileRequest';
 import MediaRenderError from '@/types/Media/MediaRenderError';
@@ -64,11 +67,13 @@ import {
   makeGetBookmarkByCollectionId,
   makeGetCoursesUrl,
   makeGetCourseUrl,
+  makeEnrollUserInQuranProgramUrl,
   makeGetMediaFileProgressUrl,
   makeGetMonthlyMediaFilesCountUrl,
   makeGetQuestionByIdUrl,
   makeGetQuestionsByVerseKeyUrl,
   makeGetUserCoursesCountUrl,
+  makeGetUserQuranProgramUrl,
   makeGoalUrl,
   makeLogoutUrl,
   makeNotesUrl,
@@ -85,6 +90,7 @@ import {
   makeUserPreferencesUrl,
   makeUserProfileUrl,
   makeVerificationCodeUrl,
+  makeGetQuranicWeekUrl,
 } from '@/utils/auth/apiPaths';
 import { isStaticBuild } from '@/utils/build';
 import CompleteAnnouncementRequest from 'types/auth/CompleteAnnouncementRequest';
@@ -290,6 +296,11 @@ export const updateActivityDay = async (
   if (params.type === ActivityDayType.QURAN) {
     const { mushafId, type, ...body } = params as UpdateActivityDayBody<UpdateQuranActivityDayBody>;
     return postRequest(makeActivityDaysUrl({ mushafId, type }), body);
+  }
+  if (params.type === ActivityDayType.QURAN_READING_PROGRAM) {
+    const { type, ...body } =
+      params as UpdateActivityDayBody<UpdateQuranReadingProgramActivityDayBody>;
+    return postRequest(makeActivityDaysUrl({ type }), body);
   }
   const { type, ...body } = params as UpdateActivityDayBody<UpdateLessonActivityDayBody>;
   return postRequest(makeActivityDaysUrl({ type }), body);
@@ -506,6 +517,29 @@ export const shortenUrl = async (url: string): Promise<ShortenUrlResponse> => {
  */
 export const getFullUrlById = async (id: string): Promise<ShortenUrlResponse> => {
   return privateFetcher(makeFullUrlById(id));
+};
+
+export const getUserPrograms = async ({
+  programId,
+}: {
+  programId: string;
+}): Promise<{ data: UserProgramResponse }> => {
+  return privateFetcher(makeGetUserQuranProgramUrl(programId));
+};
+
+export const enrollUserInQuranProgram = async (
+  programId: string,
+): Promise<{ success: boolean }> => {
+  return postRequest(makeEnrollUserInQuranProgramUrl(), {
+    programId,
+  });
+};
+
+export const getQuranProgramWeek = async (
+  programId: string,
+  weekId: string,
+): Promise<{ data: QuranProgramWeekResponse }> => {
+  return privateFetcher(makeGetQuranicWeekUrl(programId, weekId));
 };
 
 export const logoutUser = async () => {
