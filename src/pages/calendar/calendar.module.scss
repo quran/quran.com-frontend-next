@@ -1,3 +1,8 @@
-.container {
-    height: 80vh;
+.section {
+    margin-bottom: var(--spacing-xxlarge);
+    padding-top: var(--spacing-medium);
+}
+
+.section:first-child {
+    padding-block-start: 0 !important;
 }
