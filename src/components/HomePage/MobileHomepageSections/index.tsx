@@ -5,6 +5,7 @@ import classNames from 'classnames';
 import CommunitySection from '../CommunitySection';
 import ExploreTopicsSection from '../ExploreTopicsSection';
 import LearningPlansSection from '../LearningPlansSection';
+import QuranInYearSection from '../QuranInYearSection';
 
 import styles from '@/pages/index.module.scss';
 
@@ -15,6 +16,9 @@ type Props = {
 const MobileHomepageSections: React.FC<Props> = ({ isUserLoggedIn }) => {
   return isUserLoggedIn ? (
     <>
+      <div className={classNames(styles.flowItem, styles.fullWidth, styles.homepageCard)}>
+        <QuranInYearSection />
+      </div>
       <div className={classNames(styles.flowItem, styles.fullWidth, styles.homepageCard)}>
         <LearningPlansSection />
       </div>
@@ -29,6 +33,9 @@ const MobileHomepageSections: React.FC<Props> = ({ isUserLoggedIn }) => {
     <>
       <div className={classNames(styles.flowItem, styles.fullWidth, styles.homepageCard)}>
         <ExploreTopicsSection />
+      </div>
+      <div className={classNames(styles.flowItem, styles.fullWidth, styles.homepageCard)}>
+        <QuranInYearSection />
       </div>
       <div className={classNames(styles.flowItem, styles.fullWidth, styles.homepageCard)}>
         <LearningPlansSection />

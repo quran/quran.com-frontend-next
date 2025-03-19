@@ -17,6 +17,7 @@ import HomePageHero from '@/components/HomePage/HomePageHero';
 import LearningPlansSection from '@/components/HomePage/LearningPlansSection';
 import MobileHomepageSections from '@/components/HomePage/MobileHomepageSections';
 import QuranGrowthJourneySection from '@/components/HomePage/QuranGrowthJourneySection';
+import QuranInYearSection from '@/components/HomePage/QuranInYearSection';
 import ReadingSection from '@/components/HomePage/ReadingSection';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import { selectIsHomepageBannerVisible } from '@/redux/slices/fundraisingBanner';
@@ -69,6 +70,11 @@ const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }): JSX.El
                     <div
                       className={classNames(styles.flowItem, styles.fullWidth, styles.homepageCard)}
                     >
+                      <QuranInYearSection />
+                    </div>
+                    <div
+                      className={classNames(styles.flowItem, styles.fullWidth, styles.homepageCard)}
+                    >
                       <LearningPlansSection />
                     </div>
                     <div
@@ -88,6 +94,11 @@ const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }): JSX.El
                       className={classNames(styles.flowItem, styles.fullWidth, styles.homepageCard)}
                     >
                       <ExploreTopicsSection />
+                    </div>
+                    <div
+                      className={classNames(styles.flowItem, styles.fullWidth, styles.homepageCard)}
+                    >
+                      <QuranInYearSection />
                     </div>
                     <div
                       className={classNames(styles.flowItem, styles.fullWidth, styles.homepageCard)}

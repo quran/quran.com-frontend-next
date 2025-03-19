@@ -1,81 +1,90 @@
 import umalqura from '@umalqura/core';
+import { GetStaticProps } from 'next';
 import useTranslation from 'next-translate/useTranslation';
-import { Virtuoso } from 'react-virtuoso';
 
 import styles from './calendar.module.scss';
 
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import PageContainer from '@/components/PageContainer';
-import JoinQuranicCalendarButton from '@/components/QuranicCalendar/JoinQuranicCalendarButton';
+import AdditionalResources from '@/components/QuranicCalendar/AdditionalResources';
+import FAQ from '@/components/QuranicCalendar/FAQ';
+import MyProgress from '@/components/QuranicCalendar/MyProgress';
 import QuranicCalendarHero from '@/components/QuranicCalendar/QuranicCalendarHero';
-import QuranicCalendarMonth from '@/components/QuranicCalendar/QuranicCalendarMonth';
-import monthsMap from '@/data/quranic-calendar.json';
+import WeeklyVerses from '@/components/QuranicCalendar/WeeklyVerses';
+import useGetQuranicProgramWeek from '@/hooks/auth/useGetQuranicProgramWeek';
+import { getQuranicCalendarOgImageUrl } from '@/lib/og';
+import { QURANIC_CALENDAR_PROGRAM_ID } from '@/utils/auth/constants';
+import { getAllChaptersData } from '@/utils/chapter';
 import { getCurrentQuranicCalendarWeek } from '@/utils/hijri-date';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl, getQuranicCalendarNavigationUrl } from '@/utils/navigation';
 
-const MONTHS_WEEKS = Object.values(monthsMap);
 const PATH = getQuranicCalendarNavigationUrl();
 
 const QuranicCalendarPage = () => {
   const { t, lang } = useTranslation('quranic-calendar');
   const currentHijriDate = umalqura();
-
-  /**
-   * Get the index of the current month in the MONTHS_WEEKS array
-   * by comparing the current month and year with the month and year of each month in the array.
-   *
-   * @returns {number} The index of the current month in the MONTHS_WEEKS array
-   */
-  const getInitialTopMostItemIndex = () => {
-    for (let index = 0; index < MONTHS_WEEKS.length; index += 1) {
-      const monthWeeks = MONTHS_WEEKS[index];
-      const calendarMonth = umalqura(
-        Number(monthWeeks[0].hijriYear),
-        Number(monthWeeks[0].hijriMonth),
-        1,
-      );
-      const isCurrentMonthAndYear =
-        calendarMonth.hm === currentHijriDate.hm && currentHijriDate.hy === calendarMonth.hy;
-      if (isCurrentMonthAndYear) {
-        return index;
-      }
-    }
-    return 0;
-  };
   const currentQuranicCalendarWeek = getCurrentQuranicCalendarWeek(currentHijriDate);
+
+  // Get the current week data using our hook
+  const { weekData, isLoading } = useGetQuranicProgramWeek({
+    programId: QURANIC_CALENDAR_PROGRAM_ID,
+    currentWeek: currentQuranicCalendarWeek,
+  });
+
+  // Use range from the API response if available, otherwise fallback to default
+  const weekRanges = weekData?.ranges?.[0] || '1:1-2:1';
 
   return (
     <>
       <NextSeoWrapper
-        title={t('quranic-calendar')}
+        title={t('quran-calendar-title')}
         url={getCanonicalUrl(lang, PATH)}
         languageAlternates={getLanguageAlternates(PATH)}
+        description={t('quran-calendar-description')}
+        image={getQuranicCalendarOgImageUrl({
+          locale: lang,
+        })}
+        imageWidth={1200}
+        imageHeight={630}
       />
-      <QuranicCalendarHero />
+      <QuranicCalendarHero
+        currentQuranicCalendarWeek={currentQuranicCalendarWeek}
+        currentHijriDate={currentHijriDate}
+      />
       <PageContainer>
-        <JoinQuranicCalendarButton
-          currentQuranicCalendarWeek={currentQuranicCalendarWeek}
-          currentHijriDate={currentHijriDate}
-        />
-        <div className={styles.container}>
-          <Virtuoso
-            data={MONTHS_WEEKS}
-            initialItemCount={1}
-            initialTopMostItemIndex={getInitialTopMostItemIndex()}
-            totalCount={MONTHS_WEEKS.length}
-            itemContent={(index, monthWeeks) => (
-              <QuranicCalendarMonth
-                currentQuranicCalendarWeek={currentQuranicCalendarWeek}
-                key={index}
-                monthWeeks={monthWeeks}
-              />
-            )}
+        <div className={styles.section}>
+          <WeeklyVerses
+            weekNumber={currentQuranicCalendarWeek}
+            weekRanges={weekRanges}
+            isLoading={isLoading}
+            weekData={weekData}
           />
+        </div>
+
+        <div className={styles.section}>
+          <AdditionalResources weekData={weekData} weekNumber={currentQuranicCalendarWeek} />
+        </div>
+        <div className={styles.section}>
+          <MyProgress />
+        </div>
+
+        <div className={styles.section}>
+          <FAQ />
         </div>
       </PageContainer>
     </>
   );
+};
+
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
+  const allChaptersData = await getAllChaptersData(locale);
+
+  return {
+    props: {
+      chaptersData: allChaptersData,
+    },
+  };
 };
 
 export default QuranicCalendarPage;

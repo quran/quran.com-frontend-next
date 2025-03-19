@@ -267,3 +267,12 @@ export const makeShortenUrlUrl = (): string => makeUrl('shorten-url');
  * @returns {string}
  */
 export const makeFullUrlById = (id: string): string => makeUrl(`shorten-url/${id}`);
+
+export const makeGetUserQuranProgramUrl = (programId: string): string =>
+  makeUrl(`quran-reading-program/${programId}`);
+
+export const makeEnrollUserInQuranProgramUrl = (): string =>
+  makeUrl('quran-reading-program/enroll');
+
+export const makeGetQuranicWeekUrl = (programId: string, weekId: string): string =>
+  makeUrl(`quran-reading-program/week/${programId}/${weekId}`);
