@@ -33,9 +33,11 @@ export const getCurrentQuranicCalendarWeek = (currentHijriDate: umalqura.UmAlQur
   for (const key in monthsMap) {
     const weeks = monthsMap[key];
     for (const week of weeks) {
-      const startDate = new Date(week.year, week.month - 1, week.day);
+      const startDate = new Date(Number(week.year), Number(week.month) - 1, Number(week.day));
+      startDate.setHours(0, 0, 0, 0);
       const endDate = new Date(startDate);
       endDate.setDate(startDate.getDate() + 7);
+      endDate.setHours(0, 0, 0, 0);
 
       if (today >= startDate && today < endDate) {
         return Number(week.weekNumber);
