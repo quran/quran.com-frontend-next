@@ -25,7 +25,7 @@ const HelpModal: React.FC<Props> = ({ isOpen, onClose }) => {
       onEscapeKeyDown={onClose}
       size={ContentModalSize.MEDIUM}
       contentClassName={styles.contentModal}
-      // closeIconClassName={styles.closeIcon}
+      closeIconClassName={styles.closeIcon}
       headerClassName={styles.header}
     >
       {isOpen && (
