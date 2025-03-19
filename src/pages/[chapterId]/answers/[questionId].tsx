@@ -24,6 +24,7 @@ import {
 } from '@/utils/staticPageGeneration';
 import { isValidVerseKey } from '@/utils/validator';
 import ChaptersData from 'types/ChaptersData';
+import { toLocalizedVerseKey } from '@/utils/locale';
 
 type QuestionPageProps = {
   hasError?: boolean;
@@ -44,7 +45,7 @@ const QuestionPage: NextPage<QuestionPageProps> = ({
   questionData,
   verseKey,
 }) => {
-  const { lang } = useTranslation('question');
+  const { t, lang } = useTranslation('question');
 
   if (hasError) {
     return <Error statusCode={500} />;
@@ -56,7 +57,7 @@ const QuestionPage: NextPage<QuestionPageProps> = ({
   return (
     <>
       <NextSeoWrapper
-        title={'Quran ' + String(verseKey) + ' - ' + String(body)}
+        title={t('quran-reader:q-and-a.quran') + ' ' + toLocalizedVerseKey(verseKey, lang) + ' - ' + body}
         image={getExploreAnswersOgImageUrl({
           locale: lang,
         })}
@@ -64,7 +65,7 @@ const QuestionPage: NextPage<QuestionPageProps> = ({
         imageHeight={630}
         canonical={getCanonicalUrl(lang, navigationUrl)}
         languageAlternates={getLanguageAlternates(navigationUrl)}
-        description={String(summary)}
+        description={summary}
       />
       <PageContainer>
         <div className={classNames(contentPageStyles.contentPage, styles.contentPage)}>

@@ -59,7 +59,8 @@
     "questions": "Questions",
     "references": "References",
     "summary": "Summary",
-    "tafsir": "Tafsir"
+    "tafsir": "Tafsir",
+    "quran": "Quran"
   },
   "qalqala": "Qalqala (echo)",
   "query-param-message": "You are viewing preselected reading settings. <0>Dismiss</0> to view in your current settings or <1>Save</1> to update your setting",
