@@ -57,7 +57,7 @@ const QuestionPage: NextPage<QuestionPageProps> = ({
   return (
     <>
       <NextSeoWrapper
-        title={t('quran-reader:q-and-a.quran') + ' ' + toLocalizedVerseKey(verseKey, lang) + ' - ' + body}
+        title={`${t('quran-reader:q-and-a.quran')} ${toLocalizedVerseKey(verseKey, lang)} - ${body}`}
         image={getExploreAnswersOgImageUrl({
           locale: lang,
         })}
