@@ -13,10 +13,16 @@ const TOTAL_DAYS =
  *
  * @returns {object} Object containing chapter and verse number
  */
-const getCurrentDayAyah = (): { chapter: number; verse: number } => {
+const getCurrentDayAyah = (): { chapter: number; verse: number } | null => {
   // Get current date in GMT/UTC
   const now = new Date();
   const today = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()));
+  const startDate = new Date(Date.UTC(2025, 3, 1)); // April 1, 2025
+
+  // Return null if we're before April 1st, 2025
+  if (today < startDate) {
+    return null;
+  }
 
   // Handle special cases for the first three days of April 2025
   if (today.getUTCFullYear() === 2025 && today.getUTCMonth() === 3) {
@@ -28,7 +34,7 @@ const getCurrentDayAyah = (): { chapter: number; verse: number } => {
   }
 
   // Check if we're within the valid date range for the program
-  if (today < START_DATE || today > END_DATE) {
+  if (today > END_DATE) {
     return { chapter: 1, verse: 1 }; // Default to the first verse of the Quran
   }
 
