@@ -18,6 +18,15 @@ const getCurrentDayAyah = (): { chapter: number; verse: number } => {
   const now = new Date();
   const today = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()));
 
+  // Handle special cases for the first three days of April 2025
+  if (today.getUTCFullYear() === 2025 && today.getUTCMonth() === 3) {
+    // 3 = April
+    const day = today.getUTCDate();
+    if (day === 1) return { chapter: 57, verse: 16 };
+    if (day === 2) return { chapter: 59, verse: 23 };
+    if (day === 3) return { chapter: 63, verse: 9 };
+  }
+
   // Check if we're within the valid date range for the program
   if (today < START_DATE || today > END_DATE) {
     return { chapter: 1, verse: 1 }; // Default to the first verse of the Quran
