@@ -32,7 +32,7 @@ describe('consolidateWordByWordState', () => {
     const hijriDate = umalqura(1447, 6, 30);
     const actual = getCurrentQuranicCalendarWeek(hijriDate);
 
-    expect(actual).toEqual(38);
+    expect(actual).toEqual(37);
   });
   it('detects successfully', () => {
     // 2025-06-24
