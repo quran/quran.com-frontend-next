@@ -16,7 +16,7 @@ import { Question } from '@/types/QuestionsAndAnswers/Question';
 import QuestionResponse from '@/types/QuestionsAndAnswers/QuestionResponse';
 import { getQuestionById } from '@/utils/auth/api';
 import { getAllChaptersData } from '@/utils/chapter';
-import { getLanguageAlternates } from '@/utils/locale';
+import { getLanguageAlternates, toLocalizedVerseKey } from '@/utils/locale';
 import { getCanonicalUrl, getAnswerNavigationUrl } from '@/utils/navigation';
 import {
   REVALIDATION_PERIOD_ON_ERROR_SECONDS,
@@ -50,13 +50,16 @@ const QuestionPage: NextPage<QuestionPageProps> = ({
     return <Error statusCode={500} />;
   }
 
-  const { type, theme: themes, body } = questionData as Question;
+  const { type, theme: themes, body, summary } = questionData as Question;
   const navigationUrl = getAnswerNavigationUrl(questionId, verseKey);
 
   return (
     <>
       <NextSeoWrapper
-        title={t('quran-reader:q-and-a.explore_answers')}
+        title={`${t('quran-reader:q-and-a.quran')} ${toLocalizedVerseKey(
+          verseKey,
+          lang,
+        )} - ${body}`}
         image={getExploreAnswersOgImageUrl({
           locale: lang,
         })}
@@ -64,7 +67,7 @@ const QuestionPage: NextPage<QuestionPageProps> = ({
         imageHeight={630}
         canonical={getCanonicalUrl(lang, navigationUrl)}
         languageAlternates={getLanguageAlternates(navigationUrl)}
-        description={`${verseKey} ${body} ${t('questions-meta-desc')}`}
+        description={summary}
       />
       <PageContainer>
         <div className={classNames(contentPageStyles.contentPage, styles.contentPage)}>
