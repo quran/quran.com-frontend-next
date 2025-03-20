@@ -1,5 +1,6 @@
+/* eslint-disable max-lines */
 /* eslint-disable react/no-multi-comp */
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import classNames from 'classnames';
 import { NextPage, GetStaticProps } from 'next';
@@ -25,6 +26,7 @@ import { isLoggedIn } from '@/utils/auth/login';
 import { getAllChaptersData } from '@/utils/chapter';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl } from '@/utils/navigation';
+import getCurrentDayAyah from '@/utils/quranInYearCalendar';
 import { isMobile } from '@/utils/responsive';
 import { ChaptersResponse } from 'types/ApiResponses';
 import ChaptersData from 'types/ChaptersData';
@@ -38,6 +40,7 @@ const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }): JSX.El
   const { t, lang } = useTranslation('home');
   const isUserLoggedIn = isLoggedIn();
   const isFundraisingBannerVisible = useSelector(selectIsHomepageBannerVisible);
+  const todayAyah = useMemo(() => getCurrentDayAyah(), []);
 
   return (
     <>
@@ -62,16 +65,22 @@ const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }): JSX.El
               </div>
             )}
             {isMobile() ? (
-              <MobileHomepageSections isUserLoggedIn={isUserLoggedIn} />
+              <MobileHomepageSections isUserLoggedIn={isUserLoggedIn} todayAyah={todayAyah} />
             ) : (
               <>
                 {isUserLoggedIn ? (
                   <>
-                    <div
-                      className={classNames(styles.flowItem, styles.fullWidth, styles.homepageCard)}
-                    >
-                      <QuranInYearSection />
-                    </div>
+                    {todayAyah && (
+                      <div
+                        className={classNames(
+                          styles.flowItem,
+                          styles.fullWidth,
+                          styles.homepageCard,
+                        )}
+                      >
+                        <QuranInYearSection />
+                      </div>
+                    )}
                     <div
                       className={classNames(styles.flowItem, styles.fullWidth, styles.homepageCard)}
                     >
@@ -95,11 +104,17 @@ const Index: NextPage<IndexProps> = ({ chaptersResponse: { chapters } }): JSX.El
                     >
                       <ExploreTopicsSection />
                     </div>
-                    <div
-                      className={classNames(styles.flowItem, styles.fullWidth, styles.homepageCard)}
-                    >
-                      <QuranInYearSection />
-                    </div>
+                    {todayAyah && (
+                      <div
+                        className={classNames(
+                          styles.flowItem,
+                          styles.fullWidth,
+                          styles.homepageCard,
+                        )}
+                      >
+                        <QuranInYearSection />
+                      </div>
+                    )}
                     <div
                       className={classNames(styles.flowItem, styles.fullWidth, styles.homepageCard)}
                     >
