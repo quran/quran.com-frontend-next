@@ -1,6 +1,6 @@
 {
   "all-saved-verses": "সমস্ত সংরক্ষিত আয়াত",
-  "alphabetical": "AZ",
+  "alphabetical": "এ-জেড",
   "back-to-collection-list": "সংগ্রহ তালিকায় ফিরে যান",
   "collapse-all": "সমস্ত আয়াত সঙ্কুচিত করুন",
   "collection-list-empty": "সংগ্রহের তালিকা খালি। আপনি এখনো কোনো সংগ্রহ তৈরি করেননি",
@@ -16,8 +16,8 @@
   "empty": "সংগ্রহ খালি",
   "expand-all": "সব আয়াত প্রসারিত",
   "go-to-ayah": "আয়াতে যান",
-  "load-more": "আর ঢুকাও",
-  "recently-added": "সম্প্রতি যোগ",
-  "recently-updated": "সম্প্রতি আপডেট করা হয়েছে",
-  "verse-key": "অধ্যায় ও পদ সংখ্যা"
+  "load-more": "আরো লোড করুন",
+  "recently-added": "সম্প্রতি যোগকৃত",
+  "recently-updated": "সম্প্রতি আপডেটকৃত",
+  "verse-key": "অধ্যায় ও আয়াত সংখ্যা"
 }
