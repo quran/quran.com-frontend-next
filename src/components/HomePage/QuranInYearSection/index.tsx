@@ -25,6 +25,11 @@ const QuranInYearSection = () => {
   // Get the Ayah for today's date
   const todayAyah = useMemo(() => getCurrentDayAyah(), []);
 
+  // Don't render anything if we're before April 1st, 2025
+  if (!todayAyah) {
+    return null;
+  }
+
   return (
     <>
       <div className={styles.header}>

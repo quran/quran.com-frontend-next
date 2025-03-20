@@ -133,14 +133,6 @@
     color: var(--color-text-faded);
 }
 
-.promptsList {
-    list-style-type: disc;
-    padding-left: var(--spacing-large);
-    @include breakpoints.smallerThanTablet {
-        font-size: var(--font-size-xsmall-px);
-    }
-}
-
 .actionButtons {
     display: flex;
     gap: var(--spacing-small);

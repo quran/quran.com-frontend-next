@@ -1,4 +1,4 @@
-import useSWR from 'swr';
+import useSWR from 'swr/immutable';
 
 import UserProgramResponse from '@/types/auth/UserProgramResponse';
 import { getUserPrograms } from '@/utils/auth/api';

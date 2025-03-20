@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import umalqura from '@umalqura/core';
 import { GetStaticProps } from 'next';
 import useTranslation from 'next-translate/useTranslation';
@@ -25,11 +27,12 @@ const QuranicCalendarPage = () => {
   const { t, lang } = useTranslation('quranic-calendar');
   const currentHijriDate = umalqura();
   const currentQuranicCalendarWeek = getCurrentQuranicCalendarWeek(currentHijriDate);
+  const [selectedWeek, setSelectedWeek] = useState<number>(currentQuranicCalendarWeek);
 
-  // Get the current week data using our hook
+  // Get the week data using our hook
   const { weekData, isLoading } = useGetQuranicProgramWeek({
     programId: QURANIC_CALENDAR_PROGRAM_ID,
-    currentWeek: currentQuranicCalendarWeek,
+    currentWeek: selectedWeek,
   });
 
   // Use range from the API response if available, otherwise fallback to default
@@ -49,13 +52,13 @@ const QuranicCalendarPage = () => {
         imageHeight={630}
       />
       <QuranicCalendarHero
-        currentQuranicCalendarWeek={currentQuranicCalendarWeek}
+        currentQuranicCalendarWeek={selectedWeek}
         currentHijriDate={currentHijriDate}
       />
       <PageContainer>
         <div className={styles.section}>
           <WeeklyVerses
-            weekNumber={currentQuranicCalendarWeek}
+            weekNumber={selectedWeek}
             weekRanges={weekRanges}
             isLoading={isLoading}
             weekData={weekData}
@@ -63,10 +66,10 @@ const QuranicCalendarPage = () => {
         </div>
 
         <div className={styles.section}>
-          <AdditionalResources weekData={weekData} weekNumber={currentQuranicCalendarWeek} />
+          <AdditionalResources weekData={weekData} weekNumber={selectedWeek} />
         </div>
         <div className={styles.section}>
-          <MyProgress />
+          <MyProgress onWeekSelect={setSelectedWeek} />
         </div>
 
         <div className={styles.section}>
