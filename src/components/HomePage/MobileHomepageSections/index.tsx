@@ -11,14 +11,17 @@ import styles from '@/pages/index.module.scss';
 
 type Props = {
   isUserLoggedIn: boolean;
+  todayAyah: { chapter: number; verse: number } | null;
 };
 
-const MobileHomepageSections: React.FC<Props> = ({ isUserLoggedIn }) => {
+const MobileHomepageSections: React.FC<Props> = ({ isUserLoggedIn, todayAyah }) => {
   return isUserLoggedIn ? (
     <>
-      <div className={classNames(styles.flowItem, styles.fullWidth, styles.homepageCard)}>
-        <QuranInYearSection />
-      </div>
+      {todayAyah && (
+        <div className={classNames(styles.flowItem, styles.fullWidth, styles.homepageCard)}>
+          <QuranInYearSection />
+        </div>
+      )}
       <div className={classNames(styles.flowItem, styles.fullWidth, styles.homepageCard)}>
         <LearningPlansSection />
       </div>
@@ -34,9 +37,11 @@ const MobileHomepageSections: React.FC<Props> = ({ isUserLoggedIn }) => {
       <div className={classNames(styles.flowItem, styles.fullWidth, styles.homepageCard)}>
         <ExploreTopicsSection />
       </div>
-      <div className={classNames(styles.flowItem, styles.fullWidth, styles.homepageCard)}>
-        <QuranInYearSection />
-      </div>
+      {todayAyah && (
+        <div className={classNames(styles.flowItem, styles.fullWidth, styles.homepageCard)}>
+          <QuranInYearSection />
+        </div>
+      )}
       <div className={classNames(styles.flowItem, styles.fullWidth, styles.homepageCard)}>
         <LearningPlansSection />
       </div>

@@ -1,12 +1,20 @@
 import React from 'react';
 
+import { MilkdownProvider } from '@milkdown/react';
 import Trans from 'next-translate/Trans';
-import useTranslation from 'next-translate/useTranslation';
 
 import styles from './WeeklyVerses.module.scss';
 
-const ReflectionPrompts: React.FC = () => {
-  const { t } = useTranslation('quranic-calendar');
+import MarkdownEditor from '@/components/MarkdownEditor';
+
+type Props = {
+  description: string;
+};
+
+const ReflectionPrompts: React.FC<Props> = ({ description }) => {
+  if (!description) {
+    return null;
+  }
 
   return (
     <>
@@ -18,11 +26,9 @@ const ReflectionPrompts: React.FC = () => {
           }}
         />
       </h3>
-      <ul className={styles.promptsList}>
-        <li>{t('reflection-prompt-1')}</li>
-        <li>{t('reflection-prompt-2')}</li>
-        <li>{t('reflection-prompt-3')}</li>
-      </ul>
+      <MilkdownProvider>
+        <MarkdownEditor isEditable={false} defaultValue={description} />
+      </MilkdownProvider>
     </>
   );
 };

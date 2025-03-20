@@ -124,7 +124,7 @@ const WeeklyVerses: React.FC<Props> = ({ weekNumber, weekRanges, isLoading, week
             </div>
           </div>
         </div>
-        <ReflectionPrompts />
+        <ReflectionPrompts description={weekData?.description} />
         <ActionButtons
           onMarkAsCompletedClick={onMarkAsCompletedClick}
           isCompleted={isCompleted}
