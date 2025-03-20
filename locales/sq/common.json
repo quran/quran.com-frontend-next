@@ -108,9 +108,9 @@
     "try-navigating": "Provoni të lundroni në"
   },
   "community": {
-    "cta": "Bashkohuni me komunitetin",
-    "header": "Bashkohuni me Komunitetin QDC të ndërtuesve dhe teknologëve muslimanë.",
-    "sub-header": "Regjistrohu për Quran.com Discord për të marrë pjesë dhe për të bashkëpunuar me komunitetin kryesor që ndërton teknologjinë islame.",
+    "cta": "Kontaktoni",
+    "header": "Dëshironi të kontribuoni me aftësitë tuaja teknike për të çuar përpara misionin e Kuranit?",
+    "sub-header": "Ndani interesin tuaj duke plotësuar këtë formular dhe ne do të kontaktojmë kur të jetë në dispozicion një mundësi e përshtatshme, insha'Allah.",
     "title": "Komuniteti"
   },
   "complete-sign-up": "Plotësoni regjistrimin tuaj",
@@ -233,7 +233,7 @@
     "title": "Jepni në ditët më të mira!"
   },
   "fundraising": {
-    "description": "Donacionet mujore na ndihmojnë të përmirësojmë Quran.com dhe të mbajmë operacionet, kështu që ne fokusohemi më pak në mbledhjen e fondeve dhe më shumë në krijimin e ndikimit.",
+    "description": "Mos e humbisni mundësinë për të fituar shpërblime të shumëfishta këto netët e fundit të bekuara të Ramazanit. Edhe donacionet e vogla mujore kanë ndikim!",
     "title": "Bëhuni një donator mujor"
   },
   "get-started": "Filloni",
@@ -297,7 +297,7 @@
     "footnote": "Donacionet mujore na lejojnë të fokusohemi më pak në mbledhjen e fondeve",
     "text-1": "Ne jemi të përkushtuar t'i shërbejmë njohurive dhe teknologjisë botërore kuranore, gjithmonë falas.",
     "text-2": "Mundësia e përsosur për bamirësi të vazhdueshme (Sadaka Jariyah). Investoni në Ahiretin tuaj si donator mujor (ose një herë).",
-    "title": "Jepni gjatë ditëve më të mira!"
+    "title": "I dashur shok i Kur'anit,"
   },
   "powered-by": "Mundësuar nga",
   "prepare-hearts": {

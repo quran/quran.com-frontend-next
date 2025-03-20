@@ -108,9 +108,9 @@
     "try-navigating": "Nenda hadi"
   },
   "community": {
-    "cta": "Jiunge na Jumuiya",
-    "header": "Jiunge na Jumuiya ya QDC ya wajenzi na wanateknolojia wa Kiislamu.",
-    "sub-header": "Jisajili kwa Quran.com Discord ili ushiriki na ushirikiane na jumuiya inayoongoza kwa kujenga teknolojia ya Kiislamu.",
+    "cta": "Wasiliana",
+    "header": "Je, ungependa kuchangia ujuzi wako wa kiufundi ili kuendeleza dhamira ya Kurani?",
+    "sub-header": "Shiriki nia yako kwa kujaza fomu hii, na tutawasiliana wakati fursa inayofaa inapatikana, insha'Allah.",
     "title": "Jumuiya"
   },
   "complete-sign-up": "Kamilisha usajili wako",
@@ -233,7 +233,7 @@
     "title": "Toa wakati wa siku bora!"
   },
   "fundraising": {
-    "description": "Michango ya kila mwezi hutusaidia kuboresha Quran.com na kudumisha shughuli ili tusizingatie sana uchangishaji wa pesa na tuzingatie zaidi kuleta athari.",
+    "description": "Usikose fursa ya kupata zawadi nyingi za usiku huu uliobarikiwa wa Ramadhani. Hata michango ndogo ya kila mwezi hufanya athari!",
     "title": "Kuwa Mfadhili wa Kila Mwezi"
   },
   "get-started": "Anza",
@@ -297,7 +297,7 @@
     "footnote": "Michango ya kila mwezi huturuhusu kupunguza uchangishaji",
     "text-1": "Tumejitolea kutumikia ulimwengu kupitia elimu ya Qur'ani pamoja na teknolojia, bila malipo.",
     "text-2": "Fursa nzuri ya kutoa sadaka endelevu (Sadaqa Jariyah). Wekeza katika Akhera yako kama mfadhili wa kila mwezi (au mara moja).",
-    "title": "Toa Wakati wa Siku Bora!"
+    "title": "Mpendwa Sahaba wa Quran,"
   },
   "powered-by": "Inaendeshwa na",
   "prepare-hearts": {
