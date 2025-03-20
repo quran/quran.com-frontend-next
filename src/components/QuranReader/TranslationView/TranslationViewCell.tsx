@@ -86,6 +86,9 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
       >
         <div className={styles.actionContainer}>
           <div className={styles.actionContainerLeft}>
+            <div className={classNames(styles.actionItem)}>
+              <CopyButton verseKey={verse.verseKey} isTranslationView />
+            </div>
             <div className={styles.actionItem}>
               <VerseLink verseKey={verse.verseKey} />
             </div>
@@ -107,9 +110,6 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
             </div>
             <div className={classNames(styles.actionItem)}>
               <QuranReflectButton verseKey={verse.verseKey} />
-            </div>
-            <div className={classNames(styles.actionItem)}>
-              <CopyButton verseKey={verse.verseKey} isTranslationView />
             </div>
           </div>
           <div className={styles.actionContainerRight}>
