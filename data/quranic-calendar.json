@@ -53,7 +53,7 @@
       "hijriMonth": "11",
       "year": "2025",
       "month": "5",
-      "day": "6",
+      "day": "7",
       "ranges": "3:110-3:200"
     },
     {
@@ -62,7 +62,7 @@
       "hijriMonth": "11",
       "year": "2025",
       "month": "5",
-      "day": "13",
+      "day": "14",
       "ranges": "4:1-4:57"
     },
     {
@@ -71,7 +71,7 @@
       "hijriMonth": "11",
       "year": "2025",
       "month": "5",
-      "day": "20",
+      "day": "21",
       "ranges": "4:58-4:115"
     },
     {
@@ -80,7 +80,7 @@
       "hijriMonth": "11",
       "year": "2025",
       "month": "5",
-      "day": "27",
+      "day": "28",
       "ranges": "4:116-4:176"
     }
   ],
@@ -91,7 +91,7 @@
       "hijriMonth": "12",
       "year": "2025",
       "month": "6",
-      "day": "3",
+      "day": "5",
       "ranges": "5:1-5:50"
     },
     {
@@ -100,7 +100,7 @@
       "hijriMonth": "12",
       "year": "2025",
       "month": "6",
-      "day": "10",
+      "day": "12",
       "ranges": "5:51-5:120"
     },
     {
@@ -109,7 +109,7 @@
       "hijriMonth": "12",
       "year": "2025",
       "month": "6",
-      "day": "17",
+      "day": "19",
       "ranges": "6:1-6:94"
     },
     {
@@ -118,7 +118,7 @@
       "hijriMonth": "12",
       "year": "2025",
       "month": "6",
-      "day": "24",
+      "day": "26",
       "ranges": "6:95-6:165"
     }
   ],
@@ -129,7 +129,7 @@
       "hijriMonth": "1",
       "year": "2025",
       "month": "7",
-      "day": "1",
+      "day": "4",
       "ranges": "7:1-7:102"
     },
     {
@@ -138,7 +138,7 @@
       "hijriMonth": "1",
       "year": "2025",
       "month": "7",
-      "day": "8",
+      "day": "11",
       "ranges": "7:103-7:206"
     },
     {
@@ -147,7 +147,7 @@
       "hijriMonth": "1",
       "year": "2025",
       "month": "7",
-      "day": "15",
+      "day": "18",
       "ranges": "8:1-8:75"
     },
     {
@@ -156,27 +156,27 @@
       "hijriMonth": "1",
       "year": "2025",
       "month": "7",
-      "day": "22",
+      "day": "25",
       "ranges": "9:1-9:59"
-    },
+    }
+  ],
+  "1447-2": [
     {
       "weekNumber": "18",
       "hijriYear": "1447",
       "hijriMonth": "1",
       "year": "2025",
-      "month": "7",
-      "day": "29",
+      "month": "8",
+      "day": "2",
       "ranges": "9:60-9:129"
-    }
-  ],
-  "1447-2": [
+    },
     {
       "weekNumber": "19",
       "hijriYear": "1447",
       "hijriMonth": "2",
       "year": "2025",
       "month": "8",
-      "day": "5",
+      "day": "9",
       "ranges": "10:1-10:109"
     },
     {
@@ -185,7 +185,7 @@
       "hijriMonth": "2",
       "year": "2025",
       "month": "8",
-      "day": "12",
+      "day": "16",
       "ranges": "11:1-11:123"
     },
     {
@@ -194,27 +194,27 @@
       "hijriMonth": "2",
       "year": "2025",
       "month": "8",
-      "day": "19",
+      "day": "23",
       "ranges": "12:1-12:111"
-    },
+    }
+  ],
+  "1447-3": [
     {
       "weekNumber": "22",
       "hijriYear": "1447",
       "hijriMonth": "2",
       "year": "2025",
-      "month": "8",
-      "day": "26",
+      "month": "9",
+      "day": "1",
       "ranges": "13:1-14:52"
-    }
-  ],
-  "1447-3": [
+    },
     {
       "weekNumber": "23",
       "hijriYear": "1447",
       "hijriMonth": "3",
       "year": "2025",
       "month": "9",
-      "day": "2",
+      "day": "8",
       "ranges": "15:1-16:89"
     },
     {
@@ -223,7 +223,7 @@
       "hijriMonth": "3",
       "year": "2025",
       "month": "9",
-      "day": "9",
+      "day": "15",
       "ranges": "16:90-17:111"
     },
     {
@@ -232,7 +232,7 @@
       "hijriMonth": "3",
       "year": "2025",
       "month": "9",
-      "day": "16",
+      "day": "22",
       "ranges": "18:1-18:110"
     },
     {
@@ -241,27 +241,27 @@
       "hijriMonth": "3",
       "year": "2025",
       "month": "9",
-      "day": "23",
+      "day": "29",
       "ranges": "19:1-20:135"
-    },
+    }
+  ],
+  "1447-4": [
     {
       "weekNumber": "27",
       "hijriYear": "1447",
       "hijriMonth": "3",
       "year": "2025",
-      "month": "9",
-      "day": "30",
+      "month": "10",
+      "day": "6",
       "ranges": "21:1-21:112"
-    }
-  ],
-  "1447-4": [
+    },
     {
       "weekNumber": "28",
       "hijriYear": "1447",
       "hijriMonth": "4",
       "year": "2025",
       "month": "10",
-      "day": "7",
+      "day": "13",
       "ranges": "22:1-23:118"
     },
     {
@@ -270,7 +270,7 @@
       "hijriMonth": "4",
       "year": "2025",
       "month": "10",
-      "day": "14",
+      "day": "20",
       "ranges": "24:1-24:64"
     },
     {
@@ -279,27 +279,27 @@
       "hijriMonth": "4",
       "year": "2025",
       "month": "10",
-      "day": "21",
+      "day": "27",
       "ranges": "25:1-26:227"
-    },
+    }
+  ],
+  "1447-5": [
     {
       "weekNumber": "31",
       "hijriYear": "1447",
       "hijriMonth": "4",
       "year": "2025",
-      "month": "10",
-      "day": "28",
+      "month": "11",
+      "day": "5",
       "ranges": "27:1-28:50"
-    }
-  ],
-  "1447-5": [
+    },
     {
       "weekNumber": "32",
       "hijriYear": "1447",
       "hijriMonth": "5",
       "year": "2025",
       "month": "11",
-      "day": "4",
+      "day": "12",
       "ranges": "28:51-29:69"
     },
     {
@@ -308,7 +308,7 @@
       "hijriMonth": "5",
       "year": "2025",
       "month": "11",
-      "day": "11",
+      "day": "19",
       "ranges": "30:1-32:30"
     },
     {
@@ -317,27 +317,27 @@
       "hijriMonth": "5",
       "year": "2025",
       "month": "11",
-      "day": "18",
+      "day": "26",
       "ranges": "33:1-34:30"
-    },
+    }
+  ],
+  "1447-6": [
     {
       "weekNumber": "35",
       "hijriYear": "1447",
       "hijriMonth": "5",
       "year": "2025",
-      "month": "11",
-      "day": "25",
+      "month": "12",
+      "day": "3",
       "ranges": "34:31-36:83"
-    }
-  ],
-  "1447-6": [
+    },
     {
       "weekNumber": "36",
       "hijriYear": "1447",
       "hijriMonth": "6",
       "year": "2025",
       "month": "12",
-      "day": "2",
+      "day": "10",
       "ranges": "37:1-38:88"
     },
     {
@@ -346,7 +346,7 @@
       "hijriMonth": "6",
       "year": "2025",
       "month": "12",
-      "day": "9",
+      "day": "17",
       "ranges": "39:1-40:85"
     },
     {
@@ -355,36 +355,36 @@
       "hijriMonth": "6",
       "year": "2025",
       "month": "12",
-      "day": "16",
+      "day": "24",
       "ranges": "41:1-42:53"
-    },
+    }
+  ],
+  "1447-7": [
     {
       "weekNumber": "39",
       "hijriYear": "1447",
       "hijriMonth": "6",
-      "year": "2025",
-      "month": "12",
-      "day": "23",
+      "year": "2026",
+      "month": "1",
+      "day": "2",
       "ranges": "43:1-45:37"
     },
     {
       "weekNumber": "40",
       "hijriYear": "1447",
       "hijriMonth": "6",
-      "year": "2025",
-      "month": "12",
-      "day": "30",
+      "year": "2026",
+      "month": "1",
+      "day": "9",
       "ranges": "46:1-49:18"
-    }
-  ],
-  "1447-7": [
+    },
     {
       "weekNumber": "41",
       "hijriYear": "1447",
       "hijriMonth": "7",
       "year": "2026",
       "month": "1",
-      "day": "6",
+      "day": "16",
       "ranges": "50:1-54:55"
     },
     {
@@ -393,7 +393,7 @@
       "hijriMonth": "7",
       "year": "2026",
       "month": "1",
-      "day": "13",
+      "day": "23",
       "ranges": "55:1-58:22"
     },
     {
@@ -402,27 +402,27 @@
       "hijriMonth": "7",
       "year": "2026",
       "month": "1",
-      "day": "20",
+      "day": "30",
       "ranges": "59:1-66:12"
-    },
+    }
+  ],
+  "1447-8": [
     {
       "weekNumber": "44",
       "hijriYear": "1447",
       "hijriMonth": "7",
       "year": "2026",
-      "month": "1",
-      "day": "27",
+      "month": "2",
+      "day": "7",
       "ranges": "67:1-74:56"
-    }
-  ],
-  "1447-8": [
+    },
     {
       "weekNumber": "45",
       "hijriYear": "1447",
       "hijriMonth": "8",
       "year": "2026",
       "month": "2",
-      "day": "3",
+      "day": "14",
       "ranges": "75:1-83:36"
     },
     {
@@ -431,7 +431,7 @@
       "hijriMonth": "8",
       "year": "2026",
       "month": "2",
-      "day": "10",
+      "day": "21",
       "ranges": "84:1-114:6"
     }
   ]
