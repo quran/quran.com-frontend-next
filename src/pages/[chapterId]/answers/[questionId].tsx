@@ -16,7 +16,7 @@ import { Question } from '@/types/QuestionsAndAnswers/Question';
 import QuestionResponse from '@/types/QuestionsAndAnswers/QuestionResponse';
 import { getQuestionById } from '@/utils/auth/api';
 import { getAllChaptersData } from '@/utils/chapter';
-import { getLanguageAlternates } from '@/utils/locale';
+import { getLanguageAlternates, toLocalizedVerseKey } from '@/utils/locale';
 import { getCanonicalUrl, getAnswerNavigationUrl } from '@/utils/navigation';
 import {
   REVALIDATION_PERIOD_ON_ERROR_SECONDS,
@@ -24,7 +24,6 @@ import {
 } from '@/utils/staticPageGeneration';
 import { isValidVerseKey } from '@/utils/validator';
 import ChaptersData from 'types/ChaptersData';
-import { toLocalizedVerseKey } from '@/utils/locale';
 
 type QuestionPageProps = {
   hasError?: boolean;
@@ -57,7 +56,10 @@ const QuestionPage: NextPage<QuestionPageProps> = ({
   return (
     <>
       <NextSeoWrapper
-        title={`${t('quran-reader:q-and-a.quran')} ${toLocalizedVerseKey(verseKey, lang)} - ${body}`}
+        title={`${t('quran-reader:q-and-a.quran')} ${toLocalizedVerseKey(
+          verseKey,
+          lang,
+        )} - ${body}`}
         image={getExploreAnswersOgImageUrl({
           locale: lang,
         })}
