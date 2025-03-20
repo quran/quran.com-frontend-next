@@ -1,6 +1,7 @@
 {
   "achieve-quran-goals": "Kuran Hedeflerinize Ulaşın",
   "begin": "Başlamak",
+  "calendar-cta": "Takvim",
   "chapters-and-verses": "Bölümler ve Ayetler",
   "continue-read": "Okumaya devam et",
   "explore-topics": "Konuları Keşfedin",
@@ -36,6 +37,8 @@
     "title": "Kuran Büyüme Yolculuğu"
   },
   "qr-community": "Bugünün öne çıkan Ayetlerini ve Düşüncelerini okuyun",
+  "quran-in-year": "Bir Yılda Kuran",
+  "quran-in-year-cta": "Bu Haftanın Okumaları",
   "ramadan-activities-cta": "<link> Haftalık okumalar, ilham verici podcast'ler ve düşünmeye yönelik bir çağrı için <b> Küresel Kuran Takvimi </b> 'ni takip edin! </link>",
   "ramadan": {
     "header": "Kuran ile Bağlantınızı Derinleştirecek Araçlar",

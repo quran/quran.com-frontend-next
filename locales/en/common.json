@@ -108,9 +108,9 @@
     "try-navigating": "Try navigating to"
   },
   "community": {
-    "cta": "Join Community",
-    "header": "Join the QDC Community of Muslim builders and technologists.",
-    "sub-header": "Sign up for the Quran.com Discord to participate and collaborate with the leading community building Islamic tech.",
+    "cta": "Get in touch",
+    "header": "Want to contribute your technical skills to further the mission of the Quran?",
+    "sub-header": "Share your interest by filling out this form, and we’ll reach out when a suitable opportunity is available, insha’Allah.",
     "title": "Community"
   },
   "complete-sign-up": "Complete your registration",
@@ -209,7 +209,7 @@
     "translation-font-size": "Translation font size"
   },
   "footer": {
-    "description": "Quran.com is a trusted platform used by millions worldwide to read, search, listen to, and reflect on the Quran in multiple languages. It provides translations, tafsir, recitations, word-by-word translation, and tools for deeper study, making the Quran accessible to everyone. <br/> <br/> As a Sadaqah Jariyah, Quran.com is dedicated to helping people connect deeply with the Quran. Supported by Quran.Foundation, a 501(c)(3) non-profit organization, Quran.com continues to grow as a free and valuable resource for all, Alhamdullilah”",
+    "description": "Quran.com is a trusted platform used by millions worldwide to read, search, listen to, and reflect on the Quran in multiple languages. It provides translations, tafsir, recitations, word-by-word translation, and tools for deeper study, making the Quran accessible to everyone. <br/> <br/> As a Sadaqah Jariyah, Quran.com is dedicated to helping people connect deeply with the Quran. Supported by Quran.Foundation, a 501(c)(3) non-profit organization, Quran.com continues to grow as a free and valuable resource for all, Alhamdullilah",
     "hiring": "We're hiring! Join the QuranFoundation team and contribute to our mission. <link>Apply now!</link>",
     "rights": "All Rights Reserved",
     "title": "Read, Listen, Search, and Reflect on the Quran"
@@ -233,7 +233,7 @@
     "title": "Give during the best days!"
   },
   "fundraising": {
-    "description": "Monthly donations help us improve Quran.com and sustain operations so we focus less on fundraising and more on creating impact.",
+    "description": "Don't miss the opportunity to gain multiplied rewards these last blessed nights of Ramadan. Even small monthly donations make an impact!",
     "title": "Become A Monthly Donor"
   },
   "get-started": "Get Started",
@@ -297,7 +297,7 @@
     "footnote": "Monthly donations allow us to focus less on fundraising",
     "text-1": "We are committed to serving the world Quranic knowledge and technology, always for free.",
     "text-2": "The perfect opportunity for continous charity (Sadaqa Jariyah). Invest in your Hereafter as a monthly (or one time) donor.",
-    "title": "Give During The Best Days!"
+    "title": "Dear Companion of the Quran,"
   },
   "powered-by": "Powered by",
   "prepare-hearts": {
@@ -439,8 +439,12 @@
   "view": "View",
   "voice": {
     "ask-permission": "Please enable microphone permission to start using Voice Search",
-    "error": "An error has occurred, please try again later.",
+    "error": "An error has occurred, please try again ({{errorCode}}).",
+    "language-unavailable": "Arabic is not supported by your browser.",
+    "network": "Network error. Please check your internet connection and try again.",
+    "no-microphone": "No microphone detected. Please connect a microphone and try again.",
     "no-permission": "It looks like you do not have the microphone permissions enabled. Please enable the microphone permissions and try again.",
+    "no-speech": "No speech was detected. Please try speaking again.",
     "not-supported": "It looks like your browser does not support microphone. Please try a different browser.",
     "suggest": "Please begin reciting and your verse will appear.",
     "suggest-subtitle": "Recite any verse in Arabic, and the verse will appear",

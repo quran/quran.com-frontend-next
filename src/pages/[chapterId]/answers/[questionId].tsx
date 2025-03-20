@@ -9,19 +9,20 @@ import PageContainer from '@/components/PageContainer';
 import Answer from '@/components/QuestionAndAnswer/Answer';
 import QuestionHeader from '@/components/QuestionAndAnswer/QuestionHeader';
 import { getExploreAnswersOgImageUrl } from '@/lib/og';
+import styles from '@/pages/[chapterId]/answers/questions.module.scss';
 import Error from '@/pages/_error';
 import contentPageStyles from '@/pages/contentPage.module.scss';
-import styles from '@/pages/questions/questions.module.scss';
 import { Question } from '@/types/QuestionsAndAnswers/Question';
 import QuestionResponse from '@/types/QuestionsAndAnswers/QuestionResponse';
 import { getQuestionById } from '@/utils/auth/api';
 import { getAllChaptersData } from '@/utils/chapter';
-import { getLanguageAlternates } from '@/utils/locale';
-import { getCanonicalUrl, getQuestionNavigationUrl } from '@/utils/navigation';
+import { getLanguageAlternates, toLocalizedVerseKey } from '@/utils/locale';
+import { getCanonicalUrl, getAnswerNavigationUrl } from '@/utils/navigation';
 import {
   REVALIDATION_PERIOD_ON_ERROR_SECONDS,
   ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
 } from '@/utils/staticPageGeneration';
+import { isValidVerseKey } from '@/utils/validator';
 import ChaptersData from 'types/ChaptersData';
 
 type QuestionPageProps = {
@@ -29,21 +30,36 @@ type QuestionPageProps = {
   chaptersData: ChaptersData;
   questionData: QuestionResponse;
   questionId: string;
+  verseKey: string;
 };
 
-const QuestionPage: NextPage<QuestionPageProps> = ({ hasError, questionId, questionData }) => {
+/**
+ * Question page component that displays a question and its answer
+ * with the new URL format: /{verseKey}/answers/{questionId}
+ * @returns {JSX.Element} The rendered question page
+ */
+const QuestionPage: NextPage<QuestionPageProps> = ({
+  hasError,
+  questionId,
+  questionData,
+  verseKey,
+}) => {
   const { t, lang } = useTranslation('question');
+
   if (hasError) {
     return <Error statusCode={500} />;
   }
-  const { type, theme: themes, body } = questionData as Question;
 
-  const navigationUrl = getQuestionNavigationUrl(questionId);
+  const { type, theme: themes, body, summary } = questionData as Question;
+  const navigationUrl = getAnswerNavigationUrl(questionId, verseKey);
 
   return (
     <>
       <NextSeoWrapper
-        title={t('quran-reader:q-and-a.explore_answers')}
+        title={`${t('quran-reader:q-and-a.quran')} ${toLocalizedVerseKey(
+          verseKey,
+          lang,
+        )} - ${body}`}
         image={getExploreAnswersOgImageUrl({
           locale: lang,
         })}
@@ -51,7 +67,7 @@ const QuestionPage: NextPage<QuestionPageProps> = ({ hasError, questionId, quest
         imageHeight={630}
         canonical={getCanonicalUrl(lang, navigationUrl)}
         languageAlternates={getLanguageAlternates(navigationUrl)}
-        description={t('questions-meta-desc')}
+        description={summary}
       />
       <PageContainer>
         <div className={classNames(contentPageStyles.contentPage, styles.contentPage)}>
@@ -63,32 +79,53 @@ const QuestionPage: NextPage<QuestionPageProps> = ({ hasError, questionId, quest
   );
 };
 
+/**
+ * Get static props for the question page
+ * @param {object} context - The context object
+ * @param {object} context.params - The route parameters
+ * @param {string} context.locale - The current locale
+ * @returns {Promise<object>} The props for the question page
+ */
 export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
-  const { questionId } = params;
+  const { chapterId, questionId } = params;
   const chaptersData = await getAllChaptersData(locale);
   const questionIdString = String(questionId);
+  const verseKeyString = String(chapterId);
+
+  // Validate the verse key
+  if (!isValidVerseKey(chaptersData, verseKeyString)) {
+    return {
+      notFound: true,
+    };
+  }
+
   try {
     const questionData = await getQuestionById(questionIdString);
 
     return {
       props: {
-        questionId,
+        questionId: questionIdString,
         chaptersData,
         questionData,
+        verseKey: verseKeyString,
       },
-      revalidate: ONE_WEEK_REVALIDATION_PERIOD_SECONDS, // verses will be generated at runtime if not found in the cache, then cached for subsequent requests for 7 days.
+      revalidate: ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
     };
   } catch (error) {
     return {
       props: { hasError: true },
-      revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS, // 35 seconds will be enough time before we re-try generating the page again.
+      revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS,
     };
   }
 };
 
+/**
+ * Get static paths for the question page
+ * @returns {object} Empty paths array with blocking fallback
+ */
 export const getStaticPaths: GetStaticPaths = async () => ({
-  paths: [], // no pre-rendered chapters at build time.
-  fallback: 'blocking', // will server-render pages on-demand if the path doesn't exist.
+  paths: [], // no pre-rendered pages at build time
+  fallback: 'blocking', // will server-render pages on-demand if the path doesn't exist
 });
 
 export default QuestionPage;

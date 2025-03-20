@@ -1,5 +1,5 @@
 /* eslint-disable max-lines */
-import React, { useState, useEffect, useCallback, useMemo, useContext } from 'react';
+import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
@@ -18,6 +18,7 @@ import Select from '@/dls/Forms/Select';
 import HelperTooltip from '@/dls/HelperTooltip/HelperTooltip';
 import Link, { LinkVariant } from '@/dls/Link/Link';
 import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
+import Language from '@/types/Language';
 import { QuranFont } from '@/types/QuranReader';
 import { makeTranslationsUrl } from '@/utils/apiPaths';
 import { areArraysEqual } from '@/utils/array';
@@ -205,6 +206,8 @@ const VerseAdvancedCopy: React.FC<Props> = ({ verse, children }) => {
       shouldCopyFont,
       translations,
       verseKey: verse.verseKey,
+      lang: lang as Language,
+      chaptersData,
     })
       .then((blob) => {
         setIsLoadingData(false);

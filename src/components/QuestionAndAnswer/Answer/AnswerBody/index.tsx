@@ -12,7 +12,7 @@ import ShareButtons from '@/dls/ShareButtons';
 import ShareIcon from '@/icons/share.svg';
 import { Question } from '@/types/QuestionsAndAnswers/Question';
 import { logButtonClick } from '@/utils/eventLogger';
-import { getQuestionNavigationUrl } from '@/utils/navigation';
+import { getAnswerNavigationUrl } from '@/utils/navigation';
 import { getBasePath } from '@/utils/url';
 
 type Props = {
@@ -28,7 +28,8 @@ const AnswerBody: React.FC<Props> = ({ question }) => {
     setShouldShowShareOptions(true);
   };
 
-  const shareURL = `${getBasePath()}${getQuestionNavigationUrl(question.id)}`;
+  const [verseKey] = question?.ranges[0]?.split('-') ?? ['1:1'];
+  const shareURL = `${getBasePath()}${getAnswerNavigationUrl(question.id, verseKey)}`;
   const title = t('q-and-a.explore_answers');
 
   return (

@@ -8,11 +8,13 @@
   "count": "{{count}}",
   "deselect": "Tümünü seçimi kaldır",
   "download-image": "Resmi İndir",
-  "download-share": "İndir\/Paylaş",
+  "download-share": "İndir/Paylaş",
   "download-video": "Videoyu İndir",
+  "generate-link": "Bağlantıyı oluştur",
+  "generate-your-video": "Videonuzu Oluşturun",
   "justified": "Haklı çıkarıldı",
   "landscape": "Manzara",
-  "limit": " \/ {{limit}}",
+  "limit": " / {{limit}}",
   "maker-meta-desc": "Kuran Medya Oluşturucu, Kuran ayetlerinin güzel videolarını ve ekran görüntülerini oluşturmak için ücretsiz bir araçtır. İnancınızı paylaşın ve başkalarına ilham verin.",
   "maker-title": "Kuran Videosu Oluşturucu - Çarpıcı Kuran Videoları ve Görüntüleri Oluşturun",
   "max-ayahs": "En fazla 10 ayet",
@@ -27,5 +29,6 @@
   "title": "Kuran-ı Kerim videoları oluşturun ve paylaşın",
   "to": "ile",
   "verse-key": "Bölüm ve Ayet Numarası örneğin 2:255",
-  "video-picker": "Arkaplan videosu"
+  "video-picker": "Arkaplan videosu",
+  "your-link": "Bağlantınızı kopyalayın"
 }

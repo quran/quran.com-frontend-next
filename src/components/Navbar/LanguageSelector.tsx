@@ -151,6 +151,7 @@ const LanguageSelector = ({
       }
       onOpenChange={onOpenChange}
       isPortalled={false}
+      contentClassName={styles.languageMenuContent}
     >
       {options.map((option) => (
         <PopoverMenu.Item

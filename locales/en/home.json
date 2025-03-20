@@ -1,6 +1,7 @@
 {
   "achieve-quran-goals": "Achieve Your Quran Goals",
   "begin": "Begin",
+  "calendar-cta": "Calendar",
   "chapters-and-verses": "Chapters and Verses",
   "continue-read": "Continue Reading",
   "explore-topics": "Explore Topics",
@@ -29,13 +30,15 @@
     },
     "quran-reading-goals": {
       "desc": {
-        "logged-out": "Do you want to read 10 minutes a day, complete a Juz in a month, or finish the entire Quran in a year? It’s easy to create a custom goal and track your progress"
+        "logged-out": "Do you want to read 10 minutes a day, complete a Juz in a month, or finish the entire Quran in a year? It's easy to create a custom goal and track your progress"
       },
       "title": "Custom Quran Reading Goals"
     },
     "title": "Quran Growth Journey"
   },
-  "qr-community": "Read today’s featured Verses and Reflections",
+  "qr-community": "Read today's featured Verses and Reflections",
+  "quran-in-year": "Quran in a Year",
+  "quran-in-year-cta": "This Week’s Reading",
   "ramadan-activities-cta": "<link>Follow the <b>Global Quranic Calendar</b> for weekly readings, inspiring podcasts, and a call to reflect!</link>",
   "ramadan": {
     "header": "Tools to Deepen Your Connection with the Quran",

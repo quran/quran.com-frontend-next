@@ -10,10 +10,12 @@ import styles from './SearchResultItem.module.scss';
 
 import DataContext from '@/contexts/DataContext';
 import Link from '@/dls/Link/Link';
+import Language from '@/types/Language';
 import { SearchNavigationResult } from '@/types/Search/SearchNavigationResult';
 import SearchService from '@/types/Search/SearchService';
 import SearchQuerySource from '@/types/SearchQuerySource';
 import { logButtonClick } from '@/utils/eventLogger';
+import { Direction } from '@/utils/locale';
 import { resolveUrlBySearchNavigationType } from '@/utils/navigation';
 import { getResultType, getSearchNavigationResult } from '@/utils/search';
 
@@ -51,6 +53,8 @@ const SearchResultItem: React.FC<Props> = ({ source, service, result }) => {
           className={classNames(styles.resultText, {
             [styles.arabic]: isArabic,
           })}
+          dir={isArabic ? Direction.RTL : undefined}
+          lang={isArabic ? Language.AR : undefined}
           dangerouslySetInnerHTML={{
             __html: `${name}`,
           }}

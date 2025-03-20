@@ -108,9 +108,9 @@
     "try-navigating": "Cuba navigasi ke"
   },
   "community": {
-    "cta": "Sertai Komuniti",
-    "header": "Sertai Komuniti Muslim QDC pembina dan ahli teknologi.",
-    "sub-header": "Daftar untuk Discord Quran.com untuk mengambil bahagian dan bekerjasama dengan  pembinaan komuniti teknologi Islam.",
+    "cta": "Hubungi",
+    "header": "Ingin menyumbang kemahiran teknikal anda untuk memajukan misi Al-Quran?",
+    "sub-header": "Kongsi minat anda dengan mengisi borang ini, dan kami akan menghubungi apabila peluang yang sesuai tersedia, insha'Allah.",
     "title": "Komuniti"
   },
   "complete-sign-up": "Lengkapkan pendaftaran anda",
@@ -209,7 +209,7 @@
     "translation-font-size": "Saiz fon terjemahan"
   },
   "footer": {
-    "description": "Quran.com ialah platform dipercayai yang digunakan oleh berjuta-juta orang di seluruh dunia untuk membaca, mencari, mendengar dan merenung Al-Quran dalam pelbagai bahasa. Ia menyediakan terjemahan, tafsir, bacaan, terjemahan perkataan demi perkataan, dan alat untuk kajian yang lebih mendalam, menjadikan al-Quran boleh diakses oleh semua orang. <br/> <br/> Sebagai Sadaqah Jariyah, Quran.com berdedikasi untuk membantu orang ramai berhubung secara mendalam dengan al-Quran. Disokong oleh Quran.Foundation, sebuah organisasi bukan untung 501(c)(3), Quran.com terus berkembang sebagai sumber percuma dan berharga untuk semua, Alhamdullilah”",
+    "description": "Quran.com ialah platform dipercayai yang digunakan oleh berjuta-juta orang di seluruh dunia untuk membaca, mencari, mendengar dan merenung Al-Quran dalam pelbagai bahasa. Ia menyediakan terjemahan, tafsir, bacaan, terjemahan perkataan demi perkataan, dan alat untuk kajian yang lebih mendalam, menjadikan al-Quran boleh diakses oleh semua orang. <br/> <br/> Sebagai Sadaqah Jariyah, Quran.com berdedikasi untuk membantu orang ramai berhubung secara mendalam dengan al-Quran. Disokong oleh <link>Quran.Foundation</link>, sebuah organisasi bukan untung 501(c)(3), Quran.com terus berkembang sebagai sumber percuma dan berharga untuk semua, Alhamdullilah",
     "hiring": "Kami ada jawatan kosong untuk di penuhi! Sertai pasukan QuranFoundation dan menyumbang kepada misi kami. <link> Mohon sekarang! </link>",
     "rights": "Hak cipta terpelihara",
     "title": "Baca, Dengar, Cari, dan Renungkan Al-Quran"
@@ -233,7 +233,7 @@
     "title": "Berikan pada hari-hari terbaik!"
   },
   "fundraising": {
-    "description": "Derma bulanan membantu kami menambah baik Quran.com dan mengekalkan operasi supaya kami kurang menumpukan pada pengumpulan dana dan lebih kepada mencipta impak.",
+    "description": "Jangan lepaskan peluang untuk meraih pahala berlipat kali ganda pada malam-malam terakhir Ramadhan ini. Malah sumbangan bulanan yang kecil memberi kesan!",
     "title": "Jadilah Penderma Bulanan"
   },
   "get-started": "Mulakan",
@@ -297,7 +297,7 @@
     "footnote": "Derma bulanan anda membantu mengurangkan usaha pengutipan dana kami sejurusnya melebihkan tumpuan pada program yang manfaat",
     "text-1": "Kami komited untuk memberi khidmat percuma dalam pengluasan pengetahuan dan teknologi pembelajaran al-Quran ke seantaro dunia.",
     "text-2": "Peluang terbaik untuk amal yang berterusan (Sadaqa Jariyah). Melabur untuk Akhirat anda sebagai penderma bulanan (atau sekali).",
-    "title": "Derma Pada Hari-Hari Yang Terbaik Ini!"
+    "title": "Sahabat al-Quran yang dihormati,"
   },
   "powered-by": "Dikuasai oleh",
   "prepare-hearts": {
@@ -309,7 +309,7 @@
   "privacy": "Privasi",
   "product-updates": "Kemas kini produk",
   "profile": "Profil",
-  "projects-desc": "Projek bukan untung yang dimiliki, diurus atau ditaja oleh Quran.Foundation",
+  "projects-desc": "Projek bukan untung yang dimiliki, diurus atau ditaja oleh <link>Quran.Foundation</link>",
   "q-reflect": "QuranReflect",
   "quran-com": "Quran.com",
   "quran-radio": "Radio Al-Quran",
@@ -440,7 +440,11 @@
   "voice": {
     "ask-permission": "Sila benarkan pemasangan mikrofon untuk mula menggunakan Carian Suara",
     "error": "Ralat telah berlaku, sila cuba sebentar lagi.",
+    "language-unavailable": "Bahasa Arab tidak disokong oleh penyemak imbas anda.",
+    "network": "Ralat rangkaian. Sila semak sambungan internet anda dan cuba lagi.",
+    "no-microphone": "Tiada mikrofon dikesan. Sila sambungkan mikrofon dan cuba lagi.",
     "no-permission": "Nampaknya anda tidak mempunyai kebenaran mikrofon didayakan. Sila dayakan kebenaran mikrofon dan cuba lagi.",
+    "no-speech": "Tiada pertuturan dikesan. Sila cuba bercakap sekali lagi.",
     "not-supported": "Nampaknya penyemak imbas anda tidak menyokong mikrofon. Sila cuba pelayar lain.",
     "suggest": "Mulakan bacaan anda, ayat pilihan itu akan muncul",
     "suggest-subtitle": "Bacalah mana-mana ayat dalam bahasa Arab dan ayat itu akan muncul",

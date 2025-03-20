@@ -6,9 +6,10 @@ export const isSafari = () => {
   }
 
   const { userAgent } = navigator;
+
   const safari = userAgent.toLowerCase().includes('safari');
   const chrome = userAgent.toLowerCase().includes('chrome');
-  return safari && !chrome;
+  return safari && !chrome; // TODO: This should have the check of !isChromeIOS();
 };
 
 export const isChromeIOS = () => {

@@ -31,6 +31,10 @@ $list-max-width: 80rem;
   padding-block: var(--spacing-medium);
 }
 
+.additionalVerticalGapLarge {
+  padding-top: var(--spacing-mega);
+}
+
 .flowItem {
   @include utility.pageContainer();
   margin-block-start: 0;

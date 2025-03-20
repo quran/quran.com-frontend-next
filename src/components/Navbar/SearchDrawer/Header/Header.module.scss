@@ -7,6 +7,12 @@
   justify-content: space-between;
 }
 
+.actionsContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+
 .searchInput {
   width: 100%;
   border: 0;

@@ -1,5 +1,61 @@
 {
+  "additional-resources": "其他资源",
+  "additional-resources-subtitle": "这些额外的资源将帮助您与已经读过的诗句建立更深的联系。",
+  "complete": "完全的",
+  "completed-weeks": "{{completedWeeks}} / {{totalWeeks}}已完成周数",
+  "divine-book-club": "神圣读书俱乐部",
+  "divine-book-club-description": "这是一个轻松的小组讨论，可以帮助您了解每周阅读的内容。",
+  "end-of-calendar": "日历结束",
+  "english-pdf": "英文PDF",
+  "faq": "常见问题",
+  "faq-items": [
+    {
+      "answer": "《一年读完古兰经》是一项简单、结构化的阅读计划，可帮助您在一年内（从一个斋月结束到下一个斋月开始）读完整本《古兰经》。目标是从头到尾对《古兰经》有一个基本的了解，而不会感到有压力或不知所措。",
+      "question": "“一年读古兰经”是啥意思？"
+    },
+    {
+      "answer": "我们邀请您每周抽出时间，用您能理解的语言阅读几页《古兰经》。《古兰经》一共有 46 篇读物，从 Shawwal 到 Sha'ban，伊斯兰历法中每周一篇。《古兰经》的这一部分与其他部分相辅相成，例如著名的 30 个部分，方便您在一个月内阅读《古兰经》。",
+      "question": "该计划如何运作？"
+    },
+    {
+      "answer": "完全不是。本课程的起点是通过您熟悉的任何语言（翻译）来理解《古兰经》的含义。Quran.com 提供多种语言的翻译，让每个人都能理解。我们的目标是激励参与者逐年提高水平。",
+      "question": "我需要懂阿拉伯语才能参加吗？"
+    },
+    {
+      "answer": "每周，更新后的阅读任务都会在 Quran.com/calendar 上提供。您可以直接在 Quran.com 上阅读，专用链接会直接带您到本周的主要阅读内容。__ \\n \\n您也可以打开英文 PDF 并在家打印。其中包含流畅的翻译，主要改编自 MAS Abdel Haleem 的作品。每周的文件分为七个部分，如果您愿意，可以更轻松地在一周内分批阅读。对苏拉、标题和注释有简短的介绍，以澄清一些要点，每个每日部分都有一个反思问题和建议的行动。",
+      "question": "我在哪里可以找到每周的阅读作业？"
+    },
+    {
+      "answer": "您有多种选择来保持正轨。我们强烈建议您订阅电子邮件，其中包含每周阅读任务。我们还在 Telegram 和 WhatsApp 上创建了社区频道，其中包含提醒和鼓励。只需在 Quran.com/calendar 上单击您选择的按钮即可订阅。如果您愿意，您可以选择全部三个。",
+      "question": "我如何才能收到每周阅读提醒？"
+    },
+    {
+      "answer": "在 Quran.com 上，转到设置菜单以： \\n • 调整字体大小和样式\\n • 在浅色、深色和棕褐色模式之间切换\\n • 从多个可用翻译中进行选择\\n这使得任何人\\n可以轻松地以他们最了解的语言参与，并获得清晰且信息丰富的翻译。",
+      "question": "我如何才能个性化我的阅读体验？"
+    },
+    {
+      "answer": "我们鼓励您浏览 QuranReflect.com，了解其他人对每周所读段落的反思，一旦您准备好，就发布分享自己的想法！ \\n \\n另外，请务必查看 The Divine Book Club 播客：这是一场由学者主导的富有洞察力的讨论，遵循此时间表。每周只有一小时，提供非常有用的背景信息。",
+      "question": "您提供哪些额外资源？"
+    },
+    {
+      "answer": "没问题。只需阅读本周的内容即可——无需补读错过的几周。保持一致并专注于前进。明年总有时间补上你错过的内容。",
+      "question": "如果我落后或者迟到怎么办？"
+    },
+    {
+      "answer": "坚持阅读的最佳方式是与他人一起阅读。我们鼓励您与家人、朋友甚至在线一起创办个人读书俱乐部。每周聚会一次，讨论您读过的书，并在这一旅程中互相支持。",
+      "question": "我怎样才能充分利用这次旅程？"
+    },
+    {
+      "answer": "我们确实计划推动下一步和更高水平的学习。今年，我们邀请尽可能多的人从简单开始：在基本理解的基础上阅读整本《古兰经》。一旦你做到了这一点，你就会准备好再次阅读并深入了解！",
+      "question": "以后还会有更深入的学习选择吗？"
+    },
+    {
+      "answer": "是的。《一年读完古兰经》完全免费，我们鼓励您与他人分享。邀请朋友、创办读书俱乐部，帮助更多人第一次完整阅读古兰经。",
+      "question": "这是免费的吗？我可以分享吗？"
+    }
+  ],
   "hero": {
+    "description": "精心设计的时间表，让您可以轻松地以稳定且易于控制的速度从一个斋月到下一个斋月阅读和理解整部《古兰经》。",
     "line-1": "全球古兰经日历是一个阅读计划，旨在鼓励人们从斋月结束到下一个斋月开始对整本古兰经进行反思性阅读。我们鼓励您花时间理解和反思经文，这样您就可以获得更深刻、更真诚的联系。"
   },
   "interact-with-post": "在 QuranReflect 上与此帖子互动",
@@ -23,13 +79,38 @@
   },
   "join-quranic-calendar": "订阅通过 QuranReflect 接收更新和资源",
   "join-quranic-calendar-success": "您已成功加入神书俱乐部！",
+  "join-telegram": "加入我们的电报",
+  "join-telegram-mobile": "电报",
+  "join-whatsapp": "加入我们的 Whatsapp",
+  "join-whatsapp-mobile": "Whatsapp",
+  "mark-as-completed": "标记为已完成",
+  "marked-as-completed": "本周已标记为成功完成！",
+  "month": "月",
+  "my-progress": "我的进度",
+  "progress-subtitle": "您可以随时返回并完成您错过的几周！",
+  "quran-calendar-description": "结构化的阅读计划，让您在一年内读完《古兰经》。坚持不懈，加深理解，坚持下去，不会感到不知所措。",
+  "quran-calendar-title": "一年读完《古兰经》——阅读和理解整部《古兰经》的简单计划",
+  "quran-reflect": "古兰经反思",
+  "quran-reflect-description": "与其他人讨论您本周读过的诗句。",
   "quranic-calendar": "全球古兰经日历",
+  "ramadan": "斋月",
+  "read-online": "在线阅读",
+  "read-this-weeks-verses": "阅读本周的经文",
   "reading-options": {
     "default-settings": "使用我的默认设置阅读",
     "en-and-ar": "以英语和阿拉伯语阅读",
     "en-only": "仅提供英文版本"
   },
+  "reflection-prompts": "💭 本周阅读的反思提示<span> （下载 PDF 查看更多） </span> ：",
+  "share-reflections": "分享你的想法",
+  "start-tracking": "开始追踪",
   "supplemental-resources": "支持资源",
   "today": "今天的日期是： <highlight> {{month}} {{day}} {{year}} , {{gregorianDate}} </highlight>",
-  "week-title": "第{{weekNumber}}周 ( {{month}} )，涵盖从{{rangeStart}}到{{rangeEnd}}时间段"
+  "verse": "诗",
+  "verses-subtitle": "我们鼓励您集中精力理解基本含义，因此选择适合您的语言。",
+  "watch-episode": "观看第{{weekNumber}}集",
+  "week": "星期",
+  "week-completed": "完全的",
+  "week-title": "第{{weekNumber}}周 ( {{month}} )，涵盖从{{rangeStart}}到{{rangeEnd}}时间段",
+  "weekly-verses-help-description-1": "此 PDF 包含流畅的翻译，主要改编自 MAS Abdel Haleem 的作品。每周的文件分为七个部分，如果您愿意，可以更轻松地在一周内阅读。对苏拉、标题和注释进行了简短介绍，以澄清一些要点，并且每个每日部分都有一个反思问题和建议的行动"
 }

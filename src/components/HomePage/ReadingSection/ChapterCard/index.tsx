@@ -43,15 +43,17 @@ const ChapterCard: React.FC<Props> = ({
   const link = getChapterWithStartingVerseUrl(`${surahNumber}:${verseNumber}`);
 
   return (
-    <Card className={styles.chapterCard} {...(isContinueReading && { link })}>
+    <Card className={styles.chapterCard} link={link}>
       <div className={styles.surahContainer}>
-        <div className={styles.surahName}>{surahNumberString.padStart(3, '0')}</div>
+        <div className={styles.surahName} translate="no">
+          {surahNumberString.padStart(3, '0')}
+        </div>
         <div className={styles.surahInfo}>
           <div>
-            <span className={styles.transliteratedName}>
+            <span className={styles.transliteratedName} translate="no">
               {toLocalizedNumber(surahNumber, lang)}. {chapterData.transliteratedName}
             </span>
-            <span className={styles.translatedName}>
+            <span className={styles.translatedName} translate="no">
               {' '}
               {isMobile() ? `${chapterData.translatedName}` : `(${chapterData.translatedName})`}
             </span>

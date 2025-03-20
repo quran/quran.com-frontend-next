@@ -8,11 +8,13 @@
   "count": "{{count}}",
   "deselect": "取消全部选择",
   "download-image": "下载图片",
-  "download-share": "下载\/分享",
+  "download-share": "下载/分享",
   "download-video": "下载视频",
+  "generate-link": "生成链接",
+  "generate-your-video": "生成您的视频",
   "justified": "对齐",
   "landscape": "景观",
-  "limit": " \/ {{limit}}",
+  "limit": " / {{limit}}",
   "maker-meta-desc": "古兰经媒体制作器是一款免费工具，可用于制作精美的古兰经经文视频和截图。分享您的信仰并激励他人。",
   "maker-title": "古兰经视频制作器 - 创建令人惊叹的古兰经视频和图像",
   "max-ayahs": "最多 10 节经文",
@@ -27,5 +29,6 @@
   "title": "制作并分享《古兰经》的视频",
   "to": "到",
   "verse-key": "章节号，例如 2:255",
-  "video-picker": "背景视频"
+  "video-picker": "背景视频",
+  "your-link": "复制您的链接"
 }

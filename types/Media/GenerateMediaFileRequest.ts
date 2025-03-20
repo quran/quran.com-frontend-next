@@ -25,6 +25,7 @@ interface Request {
   opacity: string;
   translations: number[];
   orientation: string;
+  previewMode: string;
   videoId: number;
   chapterEnglishName: string;
   isPlayer?: boolean;

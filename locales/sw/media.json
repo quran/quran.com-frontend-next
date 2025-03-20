@@ -10,6 +10,8 @@
   "download-image": "Pakua Picha",
   "download-share": "Pakua/Shiriki",
   "download-video": "Pakua Video",
+  "generate-link": "Tengeneza kiungo",
+  "generate-your-video": "Tengeneza Video Yako",
   "justified": "Imeratibiwa",
   "landscape": "Upana",
   "limit": " / {{limit}}",
@@ -22,10 +24,11 @@
   "render-image": "Piga picha ya skrini",
   "render-video": "Onyesha",
   "reset-defaults": "Ungependa kuweka upya mipangilio chaguomsingi?",
-  "style": "Mtindo wa fonti wa Qur'ani",
+  "style": "Mtindo wa fonti ya Qur'ani",
   "text-color": "Rangi ya maandishi",
   "title": "Tengeneza na shiriki video za Qur'ani",
   "to": "hadi",
   "verse-key": "Sura na Nambari ya Aya km 2:255",
-  "video-picker": "Video ya usuli"
+  "video-picker": "Video ya usuli",
+  "your-link": "Nakili kiungo chako"
 }
