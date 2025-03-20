@@ -92,6 +92,9 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
             <div className={styles.actionItem}>
               <VerseLink verseKey={verse.verseKey} />
             </div>
+            <div className={classNames(styles.actionItem)}>
+              <CopyButton verseKey={verse.verseKey} isTranslationView />
+            </div>
             <div className={styles.actionItem}>
               <BookmarkIcon
                 verse={verse}
