@@ -84,11 +84,11 @@ const MonthCard: React.FC<MonthCardProps> = ({
 
               return (
                 <div
-                  key={`week-${month.id}-${week.localWeekNumber}`}
+                  key={`week-${month.id}-${week.globalWeekNumber}`}
                   className={weekClass}
                   role="button"
                   tabIndex={isCompleted ? -1 : 0}
-                  aria-label={`${t('week')} ${week.localWeekNumber} of ${month.name}${
+                  aria-label={`${t('week')} ${week.globalWeekNumber} of ${month.name}${
                     isCompleted ? ` - ${t('completed')}` : ''
                   }`}
                   data-week-number={week.globalWeekNumber}
@@ -104,7 +104,7 @@ const MonthCard: React.FC<MonthCardProps> = ({
                   {isLoading ? (
                     <Spinner size={SpinnerSize.Small} isCentered={false} />
                   ) : (
-                    toLocalizedNumber(week.localWeekNumber, lang)
+                    toLocalizedNumber(week.globalWeekNumber, lang)
                   )}
                 </div>
               );
