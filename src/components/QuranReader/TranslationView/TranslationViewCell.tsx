@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import React, { RefObject, memo, useContext, useEffect } from 'react';
 
 import { useSelector as useSelectorXstate } from '@xstate/react';
