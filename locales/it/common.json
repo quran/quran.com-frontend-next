@@ -209,7 +209,7 @@
     "translation-font-size": "Dimensione del carattere della traduzione"
   },
   "footer": {
-    "description": "Quran.com è una piattaforma affidabile utilizzata da milioni di persone in tutto il mondo per leggere, cercare, ascoltare e riflettere sul Corano in più lingue. Fornisce traduzioni, tafsir, recitazioni, traduzione parola per parola e strumenti per uno studio più approfondito, rendendo il Corano accessibile a tutti. <br/> <br/> In quanto Sadaqah Jariyah, Quran.com si dedica ad aiutare le persone a connettersi profondamente con il Corano. Supportato da Quran.Foundation, un'organizzazione non-profit 501(c)(3), Quran.com continua a crescere come una risorsa gratuita e preziosa per tutti, Alhamdullilah”",
+    "description": "Quran.com è una piattaforma affidabile utilizzata da milioni di persone in tutto il mondo per leggere, cercare, ascoltare e riflettere sul Corano in più lingue. Fornisce traduzioni, tafsir, recitazioni, traduzione parola per parola e strumenti per uno studio più approfondito, rendendo il Corano accessibile a tutti. <br/> <br/> In quanto Sadaqah Jariyah, Quran.com si dedica ad aiutare le persone a connettersi profondamente con il Corano. Supportato da <link>Quran.Foundation</link>, un'organizzazione non-profit 501(c)(3), Quran.com continua a crescere come una risorsa gratuita e preziosa per tutti, Alhamdullilah",
     "hiring": "Stiamo assumendo! Unisciti al team della QuranFoundation e contribuisci alla nostra missione. <link> Candidati ora! </link>",
     "rights": "Tutti i diritti riservati",
     "title": "Leggi, ascolta, cerca e rifletti sul Corano"
@@ -309,7 +309,7 @@
   "privacy": "Privacy",
   "product-updates": "Aggiornamenti del prodotto",
   "profile": "Profilo",
-  "projects-desc": "Progetti senza scopo di lucro posseduti, gestiti o sponsorizzati da Quran.Foundation",
+  "projects-desc": "Progetti senza scopo di lucro posseduti, gestiti o sponsorizzati da <link>Quran.Foundation</link>",
   "q-reflect": "CoranoRiflesso",
   "quran-com": "Corano.com",
   "quran-radio": "Radio del Corano",
@@ -440,7 +440,11 @@
   "voice": {
     "ask-permission": "Abilita l'autorizzazione del microfono per iniziare a utilizzare Ricerca vocale",
     "error": "Si è verificato un errore, riprova più tardi.",
+    "language-unavailable": "Il tuo browser non supporta l'arabo.",
+    "network": "Errore di rete. Controlla la tua connessione Internet e riprova.",
+    "no-microphone": "Nessun microfono rilevato. Collega un microfono e riprova.",
     "no-permission": "Sembra che non hai abilitato i permessi del microfono. Abilita i permessi del microfono e riprova.",
+    "no-speech": "Non è stato rilevato alcun discorso. Riprova a parlare.",
     "not-supported": "Sembra che il tuo browser non supporti il microfono. Prova un altro browser.",
     "suggest": "Per favore, inizia a recitare e il tuo verso apparirà.",
     "suggest-subtitle": "Recita qualsiasi versetto in arabo e il versetto apparirà",

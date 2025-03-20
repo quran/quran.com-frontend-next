@@ -8,11 +8,12 @@
   "count": "{{count}}",
   "deselect": "Alles deselecteren",
   "download-image": "Afbeelding downloaden",
-  "download-share": "Downloaden\/Delen",
+  "download-share": "Downloaden/Delen",
   "download-video": "Video downloaden",
+  "generate-link": "Link genereren",
   "justified": "Gerechtvaardigd",
   "landscape": "Landschap",
-  "limit": " \/ {{limit}}",
+  "limit": " / {{limit}}",
   "maker-meta-desc": "Quran Media Maker is een gratis tool om prachtige video's en screenshots van Koranverzen te maken. Deel je geloof en inspireer anderen.",
   "maker-title": "Koran Video Maker - Maak verbluffende Koran Video's en Afbeeldingen",
   "max-ayahs": "Maximaal 10 Ayahs",
@@ -27,5 +28,6 @@
   "title": "Genereer en deel video's van de Koran",
   "to": "naar",
   "verse-key": "Hoofdstuk- en versnummer bijv. 2:255",
-  "video-picker": "Achtergrondvideo"
+  "video-picker": "Achtergrondvideo",
+  "your-link": "Kopieer uw link"
 }

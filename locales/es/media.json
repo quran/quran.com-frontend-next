@@ -10,6 +10,7 @@
   "download-image": "Descargar imagen",
   "download-share": "Descargar/Compartir",
   "download-video": "Descargar video",
+  "generate-link": "Generar enlace",
   "justified": "Justificado",
   "landscape": "Horizontal",
   "limit": " / {{limit}}",
@@ -27,5 +28,6 @@
   "title": "Generar y compartir vídeos del Corán",
   "to": "de",
   "verse-key": "Capítulo y número de versículo, por ejemplo 2:255",
-  "video-picker": "Vídeo de fondo"
+  "video-picker": "Vídeo de fondo",
+  "your-link": "Copia tu enlace"
 }

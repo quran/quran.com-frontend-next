@@ -209,7 +209,7 @@
     "translation-font-size": "Ukuran font terjemahan"
   },
   "footer": {
-    "description": "Quran.com adalah platform tepercaya yang digunakan oleh jutaan orang di seluruh dunia untuk membaca, mencari, mendengarkan, dan merenungkan Al-Quran dalam berbagai bahasa. Platform ini menyediakan terjemahan, tafsir, bacaan, terjemahan kata demi kata, dan berbagai alat untuk mempelajari Al-Quran lebih dalam, sehingga Al-Quran dapat diakses oleh semua orang. <br/> <br/> Sebagai Sadaqah Jariyah, Quran.com didedikasikan untuk membantu orang-orang terhubung secara mendalam dengan Al-Quran. Didukung oleh Quran.Foundation, sebuah organisasi nirlaba 501(c)(3), Quran.com terus berkembang sebagai sumber informasi gratis dan berharga bagi semua orang, Alhamdulillah”",
+    "description": "Quran.com adalah platform tepercaya yang digunakan oleh jutaan orang di seluruh dunia untuk membaca, mencari, mendengarkan, dan merenungkan Al-Quran dalam berbagai bahasa. Platform ini menyediakan terjemahan, tafsir, bacaan, terjemahan kata demi kata, dan berbagai alat untuk mempelajari Al-Quran lebih dalam, sehingga Al-Quran dapat diakses oleh semua orang. <br/> <br/> Sebagai Sadaqah Jariyah, Quran.com didedikasikan untuk membantu orang-orang terhubung secara mendalam dengan Al-Quran. Didukung oleh <link>Quran.Foundation</link>, sebuah organisasi nirlaba 501(c)(3), Quran.com terus berkembang sebagai sumber informasi gratis dan berharga bagi semua orang, Alhamdulillah",
     "hiring": "Kami sedang merekrut! Bergabunglah dengan tim QuranFoundation dan berkontribusi pada misi kami. <link> Daftar sekarang! </link>",
     "rights": "Hak Cipta Terlindungi",
     "title": "Baca, Dengarkan, Cari, dan Renungkan Al-Quran"
@@ -309,7 +309,7 @@
   "privacy": "Kerahasiaan",
   "product-updates": "Pengkinian Produk",
   "profile": "Profil",
-  "projects-desc": "Proyek nirlaba yang dimiliki, dikelola, atau disponsori oleh Quran.Foundation",
+  "projects-desc": "Proyek nirlaba yang dimiliki, dikelola, atau disponsori oleh <link>Quran.Foundation</link>",
   "q-reflect": "QuranReflect",
   "quran-com": "Quran.com",
   "quran-radio": "Radio Qur'an",
@@ -440,7 +440,11 @@
   "voice": {
     "ask-permission": "Mohon izin mikrofon untuk mulai menggunakan Pencarian Suara",
     "error": "Telah terjadi kesalahan, coba lagi nanti.",
+    "language-unavailable": "Bahasa Arab tidak didukung oleh browser Anda.",
+    "network": "Terjadi kesalahan jaringan. Harap periksa koneksi internet Anda dan coba lagi.",
+    "no-microphone": "Mikrofon tidak terdeteksi. Harap sambungkan mikrofon dan coba lagi.",
     "no-permission": "Sepertinya Anda tidak mengaktifkan izin mikrofon. Harap aktifkan izin mikrofon dan coba lagi.",
+    "no-speech": "Tidak ada ucapan yang terdeteksi. Silakan coba bicara lagi.",
     "not-supported": "Sepertinya browser Anda tidak mendukung mikrofon. Coba browser lain.",
     "suggest": "Baca ayatnya, maka ayat akan mulai muncul",
     "suggest-subtitle": "Baca ayat apa saja dalam bahasa Arab, dan ayat itu akan muncul",

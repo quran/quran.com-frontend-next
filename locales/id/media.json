@@ -8,11 +8,12 @@
   "count": "{{count}}",
   "deselect": "Batalkan pilihan semua",
   "download-image": "Unduh Gambar",
-  "download-share": "Unduh\/Bagikan",
+  "download-share": "Unduh/Bagikan",
   "download-video": "Unduh Video",
+  "generate-link": "Hasilkan tautan",
   "justified": "Dibenarkan",
   "landscape": "Lanskap",
-  "limit": " \/ {{limit}}",
+  "limit": " / {{limit}}",
   "maker-meta-desc": "Quran Media Maker adalah alat gratis untuk membuat video dan tangkapan layar ayat-ayat Al-Quran yang indah. Bagikan iman Anda dan berikan inspirasi kepada orang lain.",
   "maker-title": "Pembuat Video Al-Quran - Buat Video dan Gambar Al-Quran yang Menakjubkan",
   "max-ayahs": "Maksimal 10 ayat",
@@ -27,5 +28,6 @@
   "title": "Hasilkan dan bagikan video Al-Quran",
   "to": "ke",
   "verse-key": "Nomor Bab dan Ayat misalnya 2:255",
-  "video-picker": "Video latar belakang"
+  "video-picker": "Video latar belakang",
+  "your-link": "Salin tautan Anda"
 }

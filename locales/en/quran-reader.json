@@ -57,10 +57,10 @@
     "explore_answers": "Explore Answers",
     "explore_answers_tooltip": "'Explore Answers' is a curated list of thoughtful questions and essential notes relating to specific verses that will enhance your understanding and connection with the Quran.",
     "questions": "Questions",
+    "quran": "Quran",
     "references": "References",
     "summary": "Summary",
-    "tafsir": "Tafsir",
-    "quran": "Quran"
+    "tafsir": "Tafsir"
   },
   "qalqala": "Qalqala (echo)",
   "query-param-message": "You are viewing preselected reading settings. <0>Dismiss</0> to view in your current settings or <1>Save</1> to update your setting",

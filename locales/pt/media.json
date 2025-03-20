@@ -8,11 +8,12 @@
   "count": "{{count}}",
   "deselect": "Desmarcar tudo",
   "download-image": "Baixar Imagem",
-  "download-share": "Baixar\/Compartilhar",
+  "download-share": "Baixar/Compartilhar",
   "download-video": "Baixar vídeo",
+  "generate-link": "Gerar link",
   "justified": "Justificado",
   "landscape": "Paisagem",
-  "limit": " \/ {{limit}}",
+  "limit": " / {{limit}}",
   "maker-meta-desc": "Quran Media Maker é uma ferramenta gratuita para criar belos vídeos e capturas de tela de versículos do Alcorão. Compartilhe sua fé e inspire outros.",
   "maker-title": "Quran Video Maker - Crie vídeos e imagens impressionantes do Alcorão",
   "max-ayahs": "Máximo de 10 versículos",
@@ -27,5 +28,6 @@
   "title": "Gere e compartilhe vídeos do Alcorão",
   "to": "para",
   "verse-key": "Número do capítulo e versículo, por exemplo 2:255",
-  "video-picker": "Vídeo de fundo"
+  "video-picker": "Vídeo de fundo",
+  "your-link": "Copie seu link"
 }

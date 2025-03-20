@@ -8,11 +8,12 @@
   "count": "{{count}}",
   "deselect": "Deseleziona tutto",
   "download-image": "Scarica Immagine",
-  "download-share": "Scarica\/Condividi",
+  "download-share": "Scarica/Condividi",
   "download-video": "Scarica il video",
+  "generate-link": "Genera collegamento",
   "justified": "Giustificato",
   "landscape": "Paesaggio",
-  "limit": " \/ {{limit}}",
+  "limit": " / {{limit}}",
   "maker-meta-desc": "Quran Media Maker è uno strumento gratuito per creare bellissimi video e screenshot dei versetti del Corano. Condividi la tua fede e ispira gli altri.",
   "maker-title": "Quran Video Maker - Crea video e immagini del Corano straordinari",
   "max-ayahs": "Max 10 versetti",
@@ -27,5 +28,6 @@
   "title": "Genera e condividi video del Corano",
   "to": "A",
   "verse-key": "Numero del capitolo e del versetto, ad esempio 2:255",
-  "video-picker": "Video di sfondo"
+  "video-picker": "Video di sfondo",
+  "your-link": "Copia il tuo link"
 }

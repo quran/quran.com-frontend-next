@@ -209,7 +209,7 @@
     "translation-font-size": "Çeviri yazı tipi boyutu"
   },
   "footer": {
-    "description": "Quran.com, dünya çapında milyonlarca kişinin Kuran'ı birden fazla dilde okumak, aramak, dinlemek ve üzerinde düşünmek için kullandığı güvenilir bir platformdur. Çeviriler, tefsirler, okumalar, kelime kelime çeviriler ve daha derin çalışma araçları sunarak Kuran'ı herkes için erişilebilir hale getirir. <br/> <br/> Bir Sadaka Jariyah olarak, Quran.com insanların Kuran ile derin bir bağ kurmasına yardımcı olmaya kendini adamıştır. 501(c)(3) kar amacı gütmeyen bir kuruluş olan Quran.Foundation tarafından desteklenen Quran.com, herkes için ücretsiz ve değerli bir kaynak olarak büyümeye devam ediyor, Elhamdülillah”",
+    "description": "Quran.com, dünya çapında milyonlarca kişinin Kuran'ı birden fazla dilde okumak, aramak, dinlemek ve üzerinde düşünmek için kullandığı güvenilir bir platformdur. Çeviriler, tefsirler, okumalar, kelime kelime çeviriler ve daha derin çalışma araçları sunarak Kuran'ı herkes için erişilebilir hale getirir. <br/> <br/> Bir Sadaka Jariyah olarak, Quran.com insanların Kuran ile derin bir bağ kurmasına yardımcı olmaya kendini adamıştır. 501(c)(3) kar amacı gütmeyen bir kuruluş olan <link>Quran.Foundation</link> tarafından desteklenen Quran.com, herkes için ücretsiz ve değerli bir kaynak olarak büyümeye devam ediyor, Elhamdülillah",
     "hiring": "İşe alıyoruz! Kuran Vakfı ekibine katılın ve misyonumuza katkıda bulunun. <link> Şimdi başvurun! </link>",
     "rights": "Her hakkı saklıdır",
     "title": "Kuran'ı Oku, Dinle, Araştır ve Üzerinde Düşün"
@@ -309,7 +309,7 @@
   "privacy": "Gizlilik",
   "product-updates": "Ürün Güncellemeleri",
   "profile": "Profil",
-  "projects-desc": "Kuran Vakfı'nın sahip olduğu, yönettiği veya sponsor olduğu kar amacı gütmeyen projeler",
+  "projects-desc": "<link>Quran.Foundation</link> tarafından sahip olunan, yönetilen veya desteklenen kar amacı gütmeyen projeler",
   "q-reflect": "KuranYansıtmak",
   "quran-com": "Quran.com",
   "quran-radio": "Kuran Radyo",
@@ -440,7 +440,11 @@
   "voice": {
     "ask-permission": "Sesli Arama'yı kullanmaya başlamak için lütfen mikrofon iznini etkinleştirin",
     "error": "Bir hata oluştu, lütfen daha sonra tekrar deneyin.",
+    "language-unavailable": "Tarayıcınız Arapçayı desteklemiyor.",
+    "network": "Ağ hatası. Lütfen internet bağlantınızı kontrol edip tekrar deneyin.",
+    "no-microphone": "Mikrofon algılanmadı. Lütfen bir mikrofon bağlayın ve tekrar deneyin.",
     "no-permission": "Mikrofon izinlerinizin etkinleştirilmemiş gibi görünüyor. Lütfen mikrofon izinlerini etkinleştirin ve tekrar deneyin.",
+    "no-speech": "Konuşma algılanmadı. Lütfen tekrar konuşmayı deneyin.",
     "not-supported": "Tarayıcınız mikrofonu desteklemiyor gibi görünüyor. Lütfen farklı bir tarayıcı deneyin.",
     "suggest": "Lütfen okumaya başlayın, ayetiniz görünecektir.",
     "suggest-subtitle": "Arapça herhangi bir ayeti okuyun ve ayet görünecektir",

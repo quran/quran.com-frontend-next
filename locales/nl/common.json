@@ -209,7 +209,7 @@
     "translation-font-size": "Vertaling lettergrootte"
   },
   "footer": {
-    "description": "Quran.com is een vertrouwd platform dat door miljoenen mensen wereldwijd wordt gebruikt om de Koran in meerdere talen te lezen, te doorzoeken, te beluisteren en erover na te denken. Het biedt vertalingen, tafsir, recitaties, woord-voor-woordvertalingen en hulpmiddelen voor diepere studie, waardoor de Koran voor iedereen toegankelijk is. <br/> <br/> Als Sadaqah Jariyah is Quran.com toegewijd om mensen te helpen een diepe verbinding met de Koran te maken. Ondersteund door Quran.Foundation, een 501(c)(3) non-profitorganisatie, blijft Quran.com groeien als een gratis en waardevolle bron voor iedereen, Alhamdullilah”",
+    "description": "Quran.com is een vertrouwd platform dat door miljoenen mensen wereldwijd wordt gebruikt om de Koran in meerdere talen te lezen, te doorzoeken, te beluisteren en erover na te denken. Het biedt vertalingen, tafsir, recitaties, woord-voor-woordvertalingen en hulpmiddelen voor diepere studie, waardoor de Koran voor iedereen toegankelijk is. <br/> <br/> Als Sadaqah Jariyah is Quran.com toegewijd om mensen te helpen een diepe verbinding met de Koran te maken. Ondersteund door <link>Quran.Foundation</link>, een 501(c)(3) non-profitorganisatie, blijft Quran.com groeien als een gratis en waardevolle bron voor iedereen, Alhamdullilah",
     "hiring": "Wij werven aan! Sluit je aan bij het team van QuranFoundation en draag bij aan onze missie. <link> Solliciteer nu! </link>",
     "rights": "Alle rechten voorbehouden",
     "title": "Lees, luister, zoek en denk na over de Koran"
@@ -309,7 +309,7 @@
   "privacy": "Privacy",
   "product-updates": "Productupdates",
   "profile": "Profiel",
-  "projects-desc": "Non-profitprojecten die eigendom zijn van, beheerd worden door of gesponsord worden door Quran.Foundation",
+  "projects-desc": "Non-profitprojecten die eigendom zijn van, beheerd worden door of gesponsord worden door <link>Quran.Foundation</link>",
   "q-reflect": "KoranReflect",
   "quran-com": "koran.com",
   "quran-radio": "Koran Radio",
@@ -440,7 +440,11 @@
   "voice": {
     "ask-permission": "Schakel microfoontoestemming in om gesproken zoekopdrachten te gaan gebruiken",
     "error": "Er is een fout opgetreden. Probeer het later opnieuw.",
+    "language-unavailable": "Arabisch wordt niet ondersteund door uw browser.",
+    "network": "Netwerkfout. Controleer uw internetverbinding en probeer het opnieuw.",
+    "no-microphone": "Geen microfoon gedetecteerd. Sluit een microfoon aan en probeer het opnieuw.",
     "no-permission": "Het lijkt erop dat u de microfoonrechten niet hebt ingeschakeld. Schakel de microfoonrechten in en probeer het opnieuw.",
+    "no-speech": "Er is geen spraak gedetecteerd. Probeer het opnieuw.",
     "not-supported": "Het lijkt erop dat uw browser geen microfoon ondersteunt. Probeer een andere browser.",
     "suggest": "Begin alsjeblieft met reciteren en je vers zal verschijnen.",
     "suggest-subtitle": "Reciteer een vers in het Arabisch, en het vers zal verschijnen",

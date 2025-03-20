@@ -10,6 +10,7 @@
   "download-image": "Télécharger l'image",
   "download-share": "Télécharger/Partager",
   "download-video": "Télécharger la vidéo",
+  "generate-link": "Générer un lien",
   "justified": "Justifié",
   "landscape": "Paysage",
   "limit": " / {{limit}}",
@@ -27,5 +28,6 @@
   "title": "Générer et partager des vidéos du Coran",
   "to": "à",
   "verse-key": "Chapitre et numéro d'Ayah, par exemple 2:255",
-  "video-picker": "Vidéo d'arrière-plan"
+  "video-picker": "Vidéo d'arrière-plan",
+  "your-link": "Copiez votre lien"
 }

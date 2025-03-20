@@ -8,11 +8,12 @@
   "count": "{{count}}",
   "deselect": "Çzgjidh të gjitha",
   "download-image": "Shkarko imazhin",
-  "download-share": "Shkarko\/Shpërndaje",
+  "download-share": "Shkarko/Shpërndaje",
   "download-video": "Shkarko Video",
+  "generate-link": "Krijo lidhje",
   "justified": "I justifikuar",
   "landscape": "Peizazhi",
-  "limit": " \/ {{limit}}",
+  "limit": " / {{limit}}",
   "maker-meta-desc": "Quran Media Maker është një mjet falas për të krijuar video të bukura dhe pamje nga ekranet e vargjeve të Kuranit. Ndani besimin tuaj dhe frymëzojini të tjerët.",
   "maker-title": "Krijuesi i videove të Kuranit - Krijoni video dhe imazhe mahnitëse të Kuranit",
   "max-ayahs": "Maksimumi 10 ajete",
@@ -27,5 +28,6 @@
   "title": "Krijoni dhe shpërndani video të Kuranit",
   "to": "te",
   "verse-key": "Numri i kapitullit dhe vargut p.sh. 2:255",
-  "video-picker": "Video në sfond"
+  "video-picker": "Video në sfond",
+  "your-link": "Kopjoni lidhjen tuaj"
 }

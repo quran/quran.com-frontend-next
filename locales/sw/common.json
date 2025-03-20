@@ -209,7 +209,7 @@
     "translation-font-size": "Ukubwa wa fonti ya tarjuma"
   },
   "footer": {
-    "description": "Quran.com ni jukwaa linaloaminika linalotumiwa na mamilioni ya watu duniani kote kusoma, kutafuta, kusikiliza na kutafakari Kurani katika lugha nyingi. Inatoa tafsiri, tafsir, vikariri, tafsiri ya neno kwa neno, na zana za kusoma kwa kina, na kufanya Quran ipatikane na kila mtu. <br/> <br/> Kama Sadaqah Jariyah, Quran.com imejitolea kusaidia watu kuunganishwa kwa kina na Kurani. Ikiungwa mkono na Quran.Foundation, 501(c)(3) shirika lisilo la faida, Quran.com inaendelea kukua kama rasilimali ya bure na yenye thamani kwa wote, Alhamdullilah\"",
+    "description": "Quran.com ni jukwaa linaloaminika linalotumiwa na mamilioni ya watu duniani kote kusoma, kutafuta, kusikiliza na kutafakari Kurani katika lugha nyingi. Inatoa tafsiri, tafsir, vikariri, tafsiri ya neno kwa neno, na zana za kusoma kwa kina, na kufanya Quran ipatikane na kila mtu. <br/> <br/> Kama Sadaqah Jariyah, Quran.com imejitolea kusaidia watu kuunganishwa kwa kina na Kurani. Ikiungwa mkono na <link>Quran.Foundation</link>, 501(c)(3) shirika lisilo la faida, Quran.com inaendelea kukua kama rasilimali ya bure na yenye thamani kwa wote, Alhamdullilah",
     "hiring": "Tunaajiri! Jiunge na timu ya QuranFoundation na uchangie katika dhamira yetu. <link> Tuma ombi sasa! </link>",
     "rights": "Haki Zote Zimehifadhiwa",
     "title": "Soma, Sikiliza, Tafuta, na Tafakari juu ya Quran"
@@ -309,7 +309,7 @@
   "privacy": "Faragha",
   "product-updates": "Sasisho za Bidhaa",
   "profile": "Wasifu",
-  "projects-desc": "Miradi isiyo ya faida inayomilikiwa, kusimamiwa, au kufadhiliwa na Quran.Foundation",
+  "projects-desc": "Miradi isiyo ya faida inayomilikiwa, kusimamiwa, au kufadhiliwa na <link>Quran.Foundation</link>",
   "q-reflect": "Quranreflect",
   "quran-com": "Quran.com",
   "quran-radio": "Redio ya Qur'ani",
@@ -440,7 +440,11 @@
   "voice": {
     "ask-permission": "Tafadhali wezesha ruhusa ya maikrofoni ili kuanza kutumia Utafutaji kupitia sauti",
     "error": "Hitilafu imetokea, tafadhali jaribu tena baadaye.",
+    "language-unavailable": "Kiarabu hakitumiki na kivinjari chako.",
+    "network": "Hitilafu ya mtandao. Tafadhali angalia muunganisho wako wa intaneti na ujaribu tena.",
+    "no-microphone": "Hakuna maikrofoni iliyotambuliwa. Tafadhali unganisha maikrofoni na ujaribu tena.",
     "no-permission": "Inaonekana huna ruhusa za maikrofoni zilizowezeshwa. Tafadhali washa ruhusa za maikrofoni na ujaribu tena.",
+    "no-speech": "Hakuna hotuba iliyotambuliwa. Tafadhali jaribu kuzungumza tena.",
     "not-supported": "Inaonekana kivinjari chako hakitumii maikrofoni. Tafadhali jaribu kivinjari tofauti.",
     "suggest": "Tafadhali anza kusoma na aya yako itaonekana.",
     "suggest-subtitle": "Soma aya yoyote kwa Kiarabu, na aya itaonekana",
