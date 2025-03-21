@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import React, { RefObject, memo, useContext, useEffect } from 'react';
 
 import { useSelector as useSelectorXstate } from '@xstate/react';
@@ -86,6 +87,9 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
       >
         <div className={styles.actionContainer}>
           <div className={styles.actionContainerLeft}>
+            <div className={classNames(styles.actionItem)}>
+              <CopyButton verseKey={verse.verseKey} isTranslationView />
+            </div>
             <div className={styles.actionItem}>
               <VerseLink verseKey={verse.verseKey} />
             </div>

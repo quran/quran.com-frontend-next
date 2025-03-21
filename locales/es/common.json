@@ -108,9 +108,9 @@
     "try-navigating": "Intenta navegar a"
   },
   "community": {
-    "cta": "Únete a la comunidad",
-    "header": "Únete a la comunidad QDC de constructores y tecnólogos musulmanes.",
-    "sub-header": "Regístrate en el Discord de Quran.com para particilar y colaborar en la comunidad líder en la construcción de tecnología islámica.",
+    "cta": "Ponte en contacto con nosotros",
+    "header": "¿Quieres aportar tus habilidades técnicas para promover la misión del Corán?",
+    "sub-header": "Comparta su interés completando este formulario y nos comunicaremos con usted cuando haya una oportunidad adecuada disponible, insha'Allah.",
     "title": "Comunidad"
   },
   "complete-sign-up": "Completa tu registro",
@@ -209,7 +209,7 @@
     "translation-font-size": "Tamaño de fuente de la traducción"
   },
   "footer": {
-    "description": "Quran.com es una plataforma confiable utilizada por millones de personas en todo el mundo para leer, buscar, escuchar y reflexionar sobre el Corán en varios idiomas. Ofrece traducciones, tafsir, recitaciones, traducción palabra por palabra y herramientas para un estudio más profundo, lo que hace que el Corán sea accesible para todos. <br/> <br/> Como Sadaqah Jariyah, Quran.com se dedica a ayudar a las personas a conectarse profundamente con el Corán. Con el apoyo de <link>Quran.Foundation</link>, una organización sin fines de lucro 501(c)(3), Quran.com continúa creciendo como un recurso gratuito y valioso para todos, Alhamdullilah”",
+    "description": "Quran.com es una plataforma confiable utilizada por millones de personas en todo el mundo para leer, buscar, escuchar y reflexionar sobre el Corán en varios idiomas. Ofrece traducciones, tafsir, recitaciones, traducción palabra por palabra y herramientas para un estudio más profundo, lo que hace que el Corán sea accesible para todos. <br/> <br/> Como Sadaqah Jariyah, Quran.com se dedica a ayudar a las personas a conectarse profundamente con el Corán. Con el apoyo de <link>Quran.Foundation</link>, una organización sin fines de lucro 501(c)(3), Quran.com continúa creciendo como un recurso gratuito y valioso para todos, Alhamdullilah",
     "hiring": "¡Estamos contratando! Únete al equipo de QuranFoundation y contribuye a nuestra misión. <link> Postúlate ahora </link>",
     "rights": "Reservados todos los derechos",
     "title": "Lea, escuche, busque y reflexione sobre el Corán"
@@ -233,7 +233,7 @@
     "title": "¡Dona durante los mejores días!"
   },
   "fundraising": {
-    "description": "Las donaciones mensuales nos ayudan a mejorar Quran.com y sostener las operaciones para que nos centremos menos en la recaudación de fondos y más en crear impacto.",
+    "description": "No pierdas la oportunidad de obtener recompensas multiplicadas estas últimas noches benditas de Ramadán. ¡Incluso las pequeñas donaciones mensuales tienen un gran impacto!",
     "title": "Conviértete en donante mensual"
   },
   "get-started": "Empezar",
@@ -297,7 +297,7 @@
     "footnote": "Las donaciones mensuales nos permiten centrarnos menos en la recaudación de fondos.",
     "text-1": "Estamos comprometidos a servir al mundo el conocimiento y la tecnología coránica, siempre de forma gratuita.",
     "text-2": "La oportunidad perfecta para la caridad continua (Sadaqa Jariyah). Invierte en tu Más Allá como donante mensual (o solo una vez).",
-    "title": "¡Dona durante los mejores días!"
+    "title": "Querido Compañero del Corán,"
   },
   "powered-by": "Desarrollado por",
   "prepare-hearts": {
@@ -440,7 +440,11 @@
   "voice": {
     "ask-permission": "Habilita el permiso del micrófono para comenzar a utilizar la búsqueda por voz.",
     "error": "Se ha producido un error, inténtelo de nuevo más tarde.",
+    "language-unavailable": "Su navegador no admite el árabe.",
+    "network": "Error de red. Comprueba tu conexión a internet y vuelve a intentarlo.",
+    "no-microphone": "No se detectó el micrófono. Conecte un micrófono y vuelva a intentarlo.",
     "no-permission": "Parece que no tienes habilitados los permisos del micrófono. Habilita los permisos del micrófono e inténtalo de nuevo.",
+    "no-speech": "No se detectó ninguna voz. Intente hablar de nuevo.",
     "not-supported": "Parece que tu navegador no admite el micrófono. Prueba con otro navegador.",
     "suggest": "Por favor comienza a recitar y tu verso aparecerá.",
     "suggest-subtitle": "Recita cualquier verso en árabe y el verso aparecerá.",

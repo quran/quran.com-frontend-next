@@ -108,9 +108,9 @@
     "try-navigating": "尝试导航到"
   },
   "community": {
-    "cta": "加入社区",
-    "header": "加入由穆斯林建设者和技术人员组成的 QDC 社区。",
-    "sub-header": "注册 Quran.com Discord，参与并与领先的社区建设伊斯兰技术合作。",
+    "cta": "联系我们",
+    "header": "想要贡献您的技术技能来进一步推进《古兰经》的使命吗？",
+    "sub-header": "请填写此表格来分享您的兴趣，当有合适的机会时，我们会与您联系，如果上帝愿意的话。",
     "title": "社区"
   },
   "complete-sign-up": "完成您的注册",
@@ -209,7 +209,7 @@
     "translation-font-size": "翻译字体大小"
   },
   "footer": {
-    "description": "Quran.com 是一个值得信赖的平台，全球数百万人使用它来阅读、搜索、聆听和思考多种语言的《古兰经》。它提供翻译、注释、朗诵、逐字翻译和深入研究的工具，让每个人都能接触到《古兰经》。 <br/> <br/>作为 Sadaqah Jariyah，Quran.com 致力于帮助人们与《古兰经》建立深厚的联系。在 501(c)(3) 非营利组织 <link>Quran.Foundation</link> 的支持下，Quran.com 继续发展成为所有人的免费和宝贵资源，Alhamdullilah”",
+    "description": "Quran.com 是一个值得信赖的平台，全球数百万人使用它来阅读、搜索、聆听和思考多种语言的《古兰经》。它提供翻译、注释、朗诵、逐字翻译和深入研究的工具，让每个人都能接触到《古兰经》。 <br/> <br/>作为 Sadaqah Jariyah，Quran.com 致力于帮助人们与《古兰经》建立深厚的联系。在 501(c)(3) 非营利组织 <link>Quran.Foundation</link> 的支持下，Quran.com 继续发展成为所有人的免费和宝贵资源，Alhamdullilah",
     "hiring": "我们正在招聘！加入古兰经基金会团队并为我们的使命做出贡献。 <link>立即申请！ </link>",
     "rights": "版权所有",
     "title": "阅读、聆听、探索并思考《古兰经》"
@@ -233,7 +233,7 @@
     "title": "在最好的日子里赠送！"
   },
   "fundraising": {
-    "description": "每月的捐款帮助我们改善 Quran.com 并维持运营，因此我们不再专注于筹款，而是更多地关注创造影响力。",
+    "description": "不要错过斋月最后几个夜晚获得双倍奖励的机会。即使每月捐款不多，也能产生影响！",
     "title": "成为每月捐助者"
   },
   "get-started": "立即开始",
@@ -297,7 +297,7 @@
     "footnote": "每月捐款让我们可以减少对筹款的关注",
     "text-1": "我们致力于为世界提供古兰经知识和技术，始终免费。",
     "text-2": "这是持续慈善 (Sadaqa Jariyah) 的绝佳机会。作为每月 (或一次性) 捐赠者，投资您的来世。",
-    "title": "在最好的日子里赠送！"
+    "title": "亲爱的《古兰经》同伴，"
   },
   "powered-by": "Powered by",
   "prepare-hearts": {
@@ -440,7 +440,11 @@
   "voice": {
     "ask-permission": "请启用麦克风权限以开始使用语音搜索",
     "error": "发生错误，请稍后重试。",
+    "language-unavailable": "您的浏览器不支持阿拉伯语。",
+    "network": "网络错误。请检查您的互联网连接并重试。",
+    "no-microphone": "未检测到麦克风。请连接麦克风并重试。",
     "no-permission": "您似乎未启用麦克风权限。请启用麦克风权限，然后重试。",
+    "no-speech": "未检测到语音。请尝试重说。",
     "not-supported": "您的浏览器似乎不支持麦克风。请尝试使用其他浏览器。",
     "suggest": "请开始诵读，经文就会显示",
     "suggest-subtitle": "用阿拉伯语背诵任何一节经文，这节经文就会出现",

@@ -13,6 +13,8 @@
   "download-image": "Download Image",
   "download-share": "Download/Share",
   "download-video": "Download Video",
+  "generate-link": "Generate link",
+  "generate-your-video": "Generate Your Video",
   "justified": "Justified",
   "landscape": "Landscape",
   "limit": " / {{limit}}",
@@ -30,5 +32,6 @@
   "title": "Generate and share videos of the Quran",
   "to": "to",
   "verse-key": "Chapter and Verse Number e.g. 2:255",
-  "video-picker": "Background video"
+  "video-picker": "Background video",
+  "your-link": "Copy your link"
 }

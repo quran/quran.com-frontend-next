@@ -108,9 +108,9 @@
     "try-navigating": "Essayez de naviguer vers"
   },
   "community": {
-    "cta": "Rejoindre la communauté",
-    "header": "Rejoignez la communauté QDC de composés de constructeurs et d'ingénieurs musulmans.",
-    "sub-header": "Rejoignez le Discord de Quran.com pour participer et collaborer avec la principale technologie islamique de construction de communauté.",
+    "cta": "Entrer en contact",
+    "header": "Vous souhaitez mettre vos compétences techniques au service de la mission du Coran ?",
+    "sub-header": "Partagez votre intérêt en remplissant ce formulaire et nous vous contacterons lorsqu'une opportunité appropriée sera disponible, incha'Allah.",
     "title": "Communauté"
   },
   "complete-sign-up": "Complétez votre inscription",
@@ -209,7 +209,7 @@
     "translation-font-size": "Taille de la police de traduction"
   },
   "footer": {
-    "description": "Quran.com est une plateforme de confiance utilisée par des millions de personnes dans le monde pour lire, rechercher, écouter et réfléchir sur le Coran en plusieurs langues. Elle propose des traductions, des tafsir, des récitations, des traductions mot à mot et des outils pour une étude plus approfondie, rendant le Coran accessible à tous. <br/> <br/> En tant que Sadaqah Jariyah, Quran.com se consacre à aider les gens à se connecter profondément au Coran. Soutenu par <link>Quran.Foundation</link>, une organisation à but non lucratif 501(c)(3), Quran.com continue de se développer en tant que ressource gratuite et précieuse pour tous, Alhamdullilah”",
+    "description": "Quran.com est une plateforme de confiance utilisée par des millions de personnes dans le monde pour lire, rechercher, écouter et réfléchir sur le Coran en plusieurs langues. Elle propose des traductions, des tafsir, des récitations, des traductions mot à mot et des outils pour une étude plus approfondie, rendant le Coran accessible à tous. <br/> <br/> En tant que Sadaqah Jariyah, Quran.com se consacre à aider les gens à se connecter profondément au Coran. Soutenu par <link>Quran.Foundation</link>, une organisation à but non lucratif 501(c)(3), Quran.com continue de se développer en tant que ressource gratuite et précieuse pour tous, Alhamdullilah",
     "hiring": "Nous recrutons ! Rejoignez l'équipe de QuranFoundation et contribuez à notre mission. <link> Postulez maintenant ! </link>",
     "rights": "Tous droits réservés",
     "title": "Lisez, écoutez, recherchez et réfléchissez sur le Coran"
@@ -233,7 +233,7 @@
     "title": "Donnez pendant les meilleurs jours !"
   },
   "fundraising": {
-    "description": "Les dons mensuels nous aident à améliorer Quran.com, et à maintenir notre projet. Ces dons nous permettent de nous concentrer sur l'amélioration continue de Quran.com, plutôt que sur la collecte de fonds.",
+    "description": "Ne manquez pas l'occasion de multiplier vos récompenses pendant ces dernières nuits bénies du Ramadan. Même les petits dons mensuels ont un impact !",
     "title": "Devenir un donateur mensuel"
   },
   "get-started": "Commencer",
@@ -297,7 +297,7 @@
     "footnote": "Les dons mensuels nous permettent de moins nous concentrer sur la collecte de fonds",
     "text-1": "Nous nous engageons à transmettre la connaissance du Coran gratuitement pour toutes et tous.",
     "text-2": "L’occasion idéale pour une charité continue (Sadaqa Jariyah). Investissez dans votre au-delà en tant que donateur mensuel (ou ponctuel).",
-    "title": "Donnez pendant les meilleurs jours !"
+    "title": "Cher compagnon du Coran,"
   },
   "powered-by": "Propulsé par",
   "prepare-hearts": {
@@ -440,7 +440,11 @@
   "voice": {
     "ask-permission": "Veuillez activer l'autorisation du microphone pour commencer à utiliser la recherche vocale",
     "error": "Une erreur s'est produite, veuillez réessayer ultérieurement.",
+    "language-unavailable": "L'arabe n'est pas pris en charge par votre navigateur.",
+    "network": "Erreur réseau. Veuillez vérifier votre connexion Internet et réessayer.",
+    "no-microphone": "Aucun microphone détecté. Veuillez connecter un microphone et réessayer.",
     "no-permission": "Il semble que les autorisations du microphone ne soient pas activées. Veuillez activer les autorisations du microphone et réessayer.",
+    "no-speech": "Aucune voix n'a été détectée. Veuillez réessayer.",
     "not-supported": "Il semble que votre navigateur ne prenne pas en charge le microphone. Veuillez essayer un autre navigateur.",
     "suggest": "Veuillez commencer à réciter et votre Ayah apparaîtra.",
     "suggest-subtitle": "Récitez n'importe quelle Ayah en arabe, et l'Ayah apparaîtra",

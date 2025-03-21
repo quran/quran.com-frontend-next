@@ -1,6 +1,7 @@
 {
   "achieve-quran-goals": "Capailah Tujuan Anda dalam Membaca Al Quran",
   "begin": "Mulai",
+  "calendar-cta": "Kalender",
   "chapters-and-verses": "Bab dan Ayat",
   "continue-read": "Lanjutkan Membaca",
   "explore-topics": "Jelajahi Topik",
@@ -36,6 +37,8 @@
     "title": "Perjalanan Kemajuan ber-Qur'an"
   },
   "qr-community": "Baca Ayat dan Renungan Pilihan Hari Ini",
+  "quran-in-year": "Al Quran dalam Setahun",
+  "quran-in-year-cta": "Bacaan Minggu Ini",
   "ramadan-activities-cta": "<link> Ikuti <b> Kalender Al-Quran Global </b> untuk bacaan mingguan, podcast yang menginspirasi, dan ajakan untuk berefleksi! </link>",
   "ramadan": {
     "header": "Alat untuk Memperdalam Hubungan Anda dengan Al-Quran",

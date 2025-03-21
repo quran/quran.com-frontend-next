@@ -109,7 +109,7 @@
   },
   "community": {
     "cta": "Get in touch",
-    "header": " Want to contribute your technical skills to further the mission of the Quran?",
+    "header": "Want to contribute your technical skills to further the mission of the Quran?",
     "sub-header": "Share your interest by filling out this form, and we’ll reach out when a suitable opportunity is available, insha’Allah.",
     "title": "Community"
   },
@@ -441,6 +441,7 @@
   "voice": {
     "ask-permission": "Please enable microphone permission to start using Voice Search",
     "error": "An error has occurred, please try again ({{errorCode}}).",
+    "language-unavailable": "Arabic is not supported by your browser.",
     "network": "Network error. Please check your internet connection and try again.",
     "no-microphone": "No microphone detected. Please connect a microphone and try again.",
     "no-permission": "It looks like you do not have the microphone permissions enabled. Please enable the microphone permissions and try again.",
@@ -449,7 +450,6 @@
     "suggest": "Please begin reciting and your verse will appear.",
     "suggest-subtitle": "Recite any verse in Arabic, and the verse will appear",
     "suggest-title": "Recite now",
-    "language-unavailable": "Arabic is not supported by your browser.",
     "voice-search-powered-by": "Voice Search Powered by"
   },
   "wbw": "Word By Word",
