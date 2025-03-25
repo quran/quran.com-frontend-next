@@ -8,6 +8,7 @@ import styles from '@/components/QuranReader/TranslationView/TranslationViewCell
 import copyVerse from '@/components/Verse/AdvancedCopy/utils/copyVerse';
 import DataContext from '@/contexts/DataContext';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
+import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import CopyIcon from '@/icons/copy.svg';
 import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
 import Language from '@/types/Language';
@@ -32,6 +33,7 @@ const CopyButton: React.FC<Props> = ({
   const [isCopied, setIsCopied] = useState(false);
   const chaptersData = useContext(DataContext);
   const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual) as number[];
+  const toast = useToast();
 
   const getTranslationObjects = () => {
     const translations = {};
@@ -81,6 +83,7 @@ const CopyButton: React.FC<Props> = ({
     })
       .then(() => {
         setIsCopied(true);
+        toast(t('verse-copied'), { status: ToastStatus.Success });
       })
       .catch(() => {
         setIsCopied(false);

@@ -48,7 +48,7 @@ const QuranInYearSection = () => {
           chapter={todayAyah.chapter}
           from={todayAyah.verse}
           to={todayAyah.verse}
-          quranFont={QuranFont.Uthmani}
+          quranFont={QuranFont.QPCHafs}
           translationsLimit={1}
           arabicVerseClassName={styles.customArabicVerse}
           translationClassName={styles.customTranslation}
