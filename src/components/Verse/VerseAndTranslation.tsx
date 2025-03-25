@@ -31,7 +31,7 @@ interface Props {
 
 const VerseAndTranslation: React.FC<Props> = (props) => {
   const { data, error, mutate, translationFontScale } = useVerseAndTranslation(props);
-  const { arabicVerseClassName, translationClassName } = props;
+  const { arabicVerseClassName, translationClassName, quranFont } = props;
 
   if (error) return <Error error={error} onRetryClicked={mutate} />;
 
@@ -42,7 +42,7 @@ const VerseAndTranslation: React.FC<Props> = (props) => {
       {data?.verses.map((verse) => (
         <div key={verse.verseKey} className={styles.verseContainer}>
           <div className={classNames(styles.arabicVerseContainer, arabicVerseClassName)}>
-            <PlainVerseText words={getVerseWords(verse)} />
+            <PlainVerseText quranFont={quranFont} words={getVerseWords(verse)} />
           </div>
           <div className={classNames(styles.translationsListContainer, translationClassName)}>
             {verse.translations?.map((translation) => (

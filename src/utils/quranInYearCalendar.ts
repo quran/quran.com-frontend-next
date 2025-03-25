@@ -6,6 +6,19 @@ const END_DATE = new Date(Date.UTC(2026, 1, 28)); // 1 = February
 const TOTAL_DAYS =
   Math.ceil((END_DATE.getTime() - START_DATE.getTime()) / (1000 * 60 * 60 * 24)) + 1;
 
+const CUSTOM_DATE_VERSES: Record<string, { chapter: number; verse: number }> = {
+  '2025-03-25': { chapter: 39, verse: 53 },
+  '2025-03-26': { chapter: 9, verse: 124 },
+  '2025-03-27': { chapter: 67, verse: 30 },
+  '2025-03-28': { chapter: 47, verse: 31 },
+  '2025-03-29': { chapter: 25, verse: 71 },
+  '2025-03-30': { chapter: 57, verse: 6 },
+  '2025-03-31': { chapter: 38, verse: 29 },
+  '2025-04-01': { chapter: 57, verse: 16 },
+  '2025-04-02': { chapter: 59, verse: 23 },
+  '2025-04-03': { chapter: 63, verse: 9 },
+};
+
 /**
  * Get the Ayah that corresponds to the current date based on the Quran in a Year schedule.
  * Uses GMT/UTC timing to ensure consistency across different timezones.
@@ -17,25 +30,17 @@ const getCurrentDayAyah = (): { chapter: number; verse: number } | null => {
   // Get current date in GMT/UTC
   const now = new Date();
   const today = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate()));
-  const startDate = new Date(Date.UTC(2025, 3, 1)); // April 1, 2025
+  // Format today's date as YYYY-MM-DD for lookup
+  const dateString = today.toISOString().split('T')[0];
 
-  // Return null if we're before April 1st, 2025
-  if (today < startDate) {
-    return null;
+  // Check if there's a custom verse assigned for this date
+  if (CUSTOM_DATE_VERSES[dateString]) {
+    return CUSTOM_DATE_VERSES[dateString];
   }
 
-  // Handle special cases for the first three days of April 2025
-  if (today.getUTCFullYear() === 2025 && today.getUTCMonth() === 3) {
-    // 3 = April
-    const day = today.getUTCDate();
-    if (day === 1) return { chapter: 57, verse: 16 };
-    if (day === 2) return { chapter: 59, verse: 23 };
-    if (day === 3) return { chapter: 63, verse: 9 };
-  }
-
-  // Check if we're within the valid date range for the program
+  // If the current date is outside the schedule range, return null since the program is over
   if (today > END_DATE) {
-    return { chapter: 1, verse: 1 }; // Default to the first verse of the Quran
+    return null;
   }
 
   // Calculate the day number (1-indexed) in the program
