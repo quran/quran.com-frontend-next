@@ -375,7 +375,6 @@
   },
   "share": "Share",
   "shared": "Link has been copied to the clipboard!",
-  "verse-copied": "Verse has been copied to the clipboard!",
   "show-more": "Show more",
   "sidebar": {
     "search-hizb": "Search Hizb",
@@ -436,6 +435,7 @@
   "verse": "Verse",
   "verse-bookmark-removed": "Verse bookmark removed!",
   "verse-bookmarked": "Verse bookmarked!",
+  "verse-copied": "Verse has been copied to the clipboard!",
   "verses": "Verses",
   "view": "View",
   "voice": {
