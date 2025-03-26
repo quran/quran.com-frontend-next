@@ -13,6 +13,7 @@ import InlineLink from '@/components/RamadanActivity/InlineLink';
 import PlainVerseText from '@/components/Verse/PlainVerseText';
 import Button, { ButtonVariant } from '@/dls/Button/Button';
 import Link, { LinkVariant } from '@/dls/Link/Link';
+import { getBeyondRamadanOgImageUrl } from '@/lib/og';
 import styles from '@/pages/contentPage.module.scss';
 import pageStyles from '@/pages/ramadan/RamadanActivities.module.scss';
 import { makeDonatePageUrl } from '@/utils/apiPaths';
@@ -42,6 +43,9 @@ const BeyondRamadanPage: NextPage = (): JSX.Element => {
         title="Beyond Ramadan: Keep Growing with the Quran – Stay Connected Year-Round"
         url={getCanonicalUrl(lang, PATH)}
         languageAlternates={getLanguageAlternates(PATH)}
+        image={getBeyondRamadanOgImageUrl({
+          locale: lang,
+        })}
         description="Ramadan may be over, but your journey with the Quran continues. Stay consistent with structured plans, powerful tools, and guided lessons to help you stay on track. Take the next step today!"
       />
       <PageContainer>
