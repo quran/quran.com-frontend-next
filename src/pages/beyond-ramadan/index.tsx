@@ -21,6 +21,7 @@ import { isLoggedIn } from '@/utils/auth/login';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getLanguageAlternates } from '@/utils/locale';
 import {
+  getBeyondRamadanNavigationUrl,
   getCanonicalUrl,
   getCourseNavigationUrl,
   getLoginNavigationUrl,
@@ -29,7 +30,7 @@ import {
 } from '@/utils/navigation';
 import verse3829 from 'src/data/verses/verse3829';
 
-const PATH = '/beyond-ramadan';
+const PATH = getBeyondRamadanNavigationUrl();
 const BeyondRamadanPage: NextPage = (): JSX.Element => {
   const { lang } = useTranslation();
 
