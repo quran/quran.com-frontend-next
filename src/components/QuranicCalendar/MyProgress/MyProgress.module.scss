@@ -153,11 +153,6 @@
     }
 }
 
-/* Add styles for the last month (Ramadan) */
-.monthCard:last-child .weekItem:last-child {
-    background-color: var(--color-success-faded);
-}
-
 .endOfCalendarLabel {
     font-size: var(--font-size-normal);
     color: var(--color-text-faded-new);

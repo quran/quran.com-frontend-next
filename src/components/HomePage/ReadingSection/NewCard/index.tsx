@@ -11,7 +11,7 @@ import IconContainer, { IconSize } from '@/dls/IconContainer/IconContainer';
 import Link, { LinkVariant } from '@/dls/Link/Link';
 import ArrowIcon from '@/public/icons/arrow.svg';
 import { logButtonClick } from '@/utils/eventLogger';
-import { getRamadanNavigationUrl } from '@/utils/navigation';
+import { getBeyondRamadanNavigationUrl } from '@/utils/navigation';
 
 const ShareQuranModal = dynamic(() => import('./ShareQuranModal'), {
   ssr: false,
@@ -30,18 +30,25 @@ const NewCard: React.FC = () => {
 
   return (
     <>
-      <Card className={styles.firstTimeReadingCard} link={getRamadanNavigationUrl()} isNewTab>
+      <Card
+        onClick={() => {
+          logButtonClick('homepage_grow_beyond_ramadan');
+        }}
+        className={styles.firstTimeReadingCard}
+        link={getBeyondRamadanNavigationUrl()}
+        isNewTab
+      >
         <div className={styles.cardOuterContainer}>
           <div className={styles.cardWithIcon}>
-            <div className={styles.iconContainer}>☪️</div>
+            <div className={styles.iconContainer}>🚀</div>
             <div className={styles.link}>
               <Trans
-                i18nKey="home:know-someone"
+                i18nKey="home:grow-beyond-ramadan"
                 components={{
                   modalLink: (
                     <Link
                       variant={LinkVariant.Blend}
-                      href={getRamadanNavigationUrl()}
+                      href={getBeyondRamadanNavigationUrl()}
                       className={styles.linkHref}
                       onClick={onShareQuranClicked}
                       isNewTab
