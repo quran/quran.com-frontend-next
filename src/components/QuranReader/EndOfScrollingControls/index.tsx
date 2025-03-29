@@ -15,7 +15,6 @@ import QuranReaderReadingStreak from './QuranReaderReadingStreak';
 import RubControls from './RubControls';
 import VerseControls from './VerseControls';
 
-import HomepageFundraisingBanner from '@/components/Fundraising/HomepageFundraisingBanner';
 import { selectIsReadingByRevelationOrder } from '@/redux/slices/revelationOrder';
 import { QuranReaderDataType } from '@/types/QuranReader';
 import { VersesResponse } from 'types/ApiResponses';
@@ -63,9 +62,6 @@ const EndOfScrollingControls: React.FC<Props> = ({
             <HizbControls lastVerse={lastVerse} />
           )}
         </div>
-      </div>
-      <div className={styles.progressWidgetContainer}>
-        <HomepageFundraisingBanner isDismissible={false} />
       </div>
     </>
   );
