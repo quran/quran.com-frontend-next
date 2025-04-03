@@ -21,6 +21,7 @@ import { getAdvancedCopyRawResult } from 'src/api';
  * @param {object} options.chaptersData - The chapters data object
  * @returns {Promise<string>} textToCopy
  */
+// eslint-disable-next-line react-func/max-lines-per-function
 const getTextToCopy = ({
   verseKey,
   showRangeOfVerses,
@@ -75,7 +76,7 @@ const getTextToCopy = ({
       ? res.result
       : res.result.split('\n').slice(2).join('\n').replace(/\n+$/, ''); // remove trailing newlines
 
-    // construct the final complete text for the clipboard copy feature
+    // construct the final complete text for the clipboard
     return `${surahInfoString}\n\n${text}\n\n${verseUrl}`;
   });
 };
