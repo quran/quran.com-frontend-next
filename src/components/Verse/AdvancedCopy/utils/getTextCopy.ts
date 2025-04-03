@@ -71,9 +71,8 @@ const getTextToCopy = ({
 
   // Get the result and format the final text
   return getAdvancedCopyRawResult(apiOptions).then((res) => {
-    const text = showRangeOfVerses ? res.result : res.result.split('\n').slice(2).join('\n'); // Remove the first 2 lines which contain the verse key
-
-    return `${surahInfoString}\n\n${text}${verseUrl}`;
+    const text = showRangeOfVerses ? res.result : res.result.split('\n').slice(2).join('\n').replace(/\n+$/, '');    ; // Remove the first 2 lines which contain the verse key
+    return `${surahInfoString}\n\n${text}\n\n${verseUrl}`;
   });
 };
 
