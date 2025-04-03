@@ -72,14 +72,10 @@ const getTextToCopy = ({
   // Get the result and format the final text
   return getAdvancedCopyRawResult(apiOptions).then((res) => {
     const text = showRangeOfVerses
-    ? res.result
-    : res.result
-        .split('\n')
-        .slice(2)
-        .join('\n')
-        .replace(/\n+$/, ''); // remove trailing newlines
-  
-    // construct the final complete text for the clipboard 
+      ? res.result
+      : res.result.split('\n').slice(2).join('\n').replace(/\n+$/, ''); // remove trailing newlines
+
+    // construct the final complete text for the clipboard copy feature
     return `${surahInfoString}\n\n${text}\n\n${verseUrl}`;
   });
 };
