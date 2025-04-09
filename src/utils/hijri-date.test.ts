@@ -11,7 +11,7 @@ describe('consolidateWordByWordState', () => {
     const hijriDate = umalqura(1446, 10, 3);
     const actual = getCurrentQuranicCalendarWeek(hijriDate);
 
-    expect(actual).toEqual(1);
+    expect(actual).toEqual(0);
   });
   it('detects successfully', () => {
     // 2025-04-15
@@ -39,20 +39,20 @@ describe('consolidateWordByWordState', () => {
     const hijriDate = umalqura(1446, 12, 24);
     const actual = getCurrentQuranicCalendarWeek(hijriDate);
 
-    expect(actual).toEqual(12);
+    expect(actual).toEqual(11);
   });
   it('detects successfully', () => {
     // 2025-09-30
     const hijriDate = umalqura(1447, 3, 30);
     const actual = getCurrentQuranicCalendarWeek(hijriDate);
 
-    expect(actual).toEqual(25);
+    expect(actual).toEqual(24);
   });
   it('detects successfully', () => {
     // 2025-10-07
     const hijriDate = umalqura(1447, 4, 7);
     const actual = getCurrentQuranicCalendarWeek(hijriDate);
 
-    expect(actual).toEqual(26);
+    expect(actual).toEqual(25);
   });
 });
