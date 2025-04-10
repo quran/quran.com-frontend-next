@@ -1,7 +1,7 @@
 @use "src/styles/breakpoints";
 
 .container {
-  padding-block-start: var(--spacing-xsmall);
+  padding-block-start: var(--navbar-height);
   padding-block-end: var(--spacing-xsmall);
   padding-inline-start: 0;
   padding-inline-end: 0;
@@ -12,6 +12,7 @@
   max-width: 90%;
   @include breakpoints.tablet {
     max-width: 75%;
+    padding-block-start: var(--spacing-xsmall);
   }
 }
 
