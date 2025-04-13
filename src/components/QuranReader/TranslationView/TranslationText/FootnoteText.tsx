@@ -1,6 +1,6 @@
 /* eslint-disable react/no-danger */
 
-import React, { MouseEvent } from 'react';
+import React, { MouseEvent, useMemo } from 'react';
 
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
@@ -10,10 +10,10 @@ import transStyles from './TranslationText.module.scss';
 
 import Button, { ButtonSize, ButtonShape, ButtonVariant } from '@/dls/Button/Button';
 import Spinner from '@/dls/Spinner/Spinner';
-import useChapterIdsByUrlPath from '@/hooks/useChapterId';
 import CloseIcon from '@/icons/close.svg';
 import Language from '@/types/Language';
 import { getLanguageDataById, findLanguageIdByLocale } from '@/utils/locale';
+import { formatVerseReferencesToLinks } from '@/utils/string';
 import Footnote from 'types/Footnote';
 
 interface FootnoteTextProps {
@@ -33,32 +33,13 @@ const FootnoteText: React.FC<FootnoteTextProps> = ({
 }) => {
   const { t, lang } = useTranslation('quran-reader');
 
-  const chapterIds = useChapterIdsByUrlPath(lang);
-  const urlChapterId = chapterIds && chapterIds.length > 0 ? chapterIds[0] : null;
-
   const languageId = footnote?.languageId || findLanguageIdByLocale(lang as Language);
-  const landData = getLanguageDataById(languageId);
+  const languageData = getLanguageDataById(languageId);
 
-  const updatedText =
-    footnote && footnote.text
-      ? footnote.text.replace(/(\d{1,2}[:-]\d{1,2}(?:-\d{1,2})?)(?![^<]*<\/a>)/g, (match) => {
-          let formattedMatch = match;
-          let url = '/';
-
-          // If it's digit:digit or digit:digit-digit (e.g., 7:23 or 11:25-48)
-          if (match.includes(':')) {
-            formattedMatch = match.replace(':', '/'); // Replace ':' with '/' for correct URL format
-            url += formattedMatch;
-          }
-          // If it's digit-digit (e.g., 26-31), replace - with : and include urlChapterId
-          else if (match.includes('-')) {
-            formattedMatch = match.replace('-', ':'); // Replace '-' with ':' for correct URL format
-            url += `${urlChapterId}/${formattedMatch}`;
-          }
-
-          return `<a href="${url}" target="_blank">${match}</a>`;
-        })
-      : ''; // If footnote or footnote.text is null or undefined, fallback to an empty string
+  const updatedText = useMemo(() => {
+    if (!footnote?.text) return '';
+    return formatVerseReferencesToLinks(footnote.text);
+  }, [footnote?.text]);
 
   return (
     <div className={styles.footnoteContainer}>
@@ -81,8 +62,8 @@ const FootnoteText: React.FC<FootnoteTextProps> = ({
         <div
           className={classNames(
             styles.text,
-            transStyles[landData.direction],
-            transStyles[landData.font],
+            transStyles[languageData.direction],
+            transStyles[languageData.font],
           )}
           dangerouslySetInnerHTML={{ __html: updatedText }}
           {...(onTextClicked && { onClick: onTextClicked })}
