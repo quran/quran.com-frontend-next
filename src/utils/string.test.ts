@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { it, expect, describe } from 'vitest';
 
 import { truncateString, stripHTMLTags, formatVerseReferencesToLinks } from './string';
@@ -147,5 +148,103 @@ describe('Test formatVerseReferencesToLinks', () => {
     const input = '<script>const verse = "1:1";</script>';
     const expected = '<script>const verse = "<a href="/1:1" target="_blank">1:1</a>";</script>';
     expect(formatVerseReferencesToLinks(input)).toEqual(expected);
+  });
+
+  // Test cases for verse references in different languages
+  it('should convert verse references in English text', () => {
+    const input = 'This is a normal text with verse 1:1 and 2:3 in it';
+    const expected =
+      'This is a normal text with verse <a href="/1:1" target="_blank">1:1</a> and <a href="/2:3" target="_blank">2:3</a> in it';
+    expect(formatVerseReferencesToLinks(input)).toEqual(expected);
+  });
+
+  it('should convert verse references in Arabic text', () => {
+    const input = 'هذا نص عادي يحتوي على الآية 1:1 والآية 2:3';
+    const expected =
+      'هذا نص عادي يحتوي على الآية <a href="/1:1" target="_blank">1:1</a> والآية <a href="/2:3" target="_blank">2:3</a>';
+    expect(formatVerseReferencesToLinks(input)).toEqual(expected);
+  });
+
+  it('should convert verse references in French text', () => {
+    const input = 'Ceci est un texte normal avec le verset 1:1 et 2:3';
+    const expected =
+      'Ceci est un texte normal avec le verset <a href="/1:1" target="_blank">1:1</a> et <a href="/2:3" target="_blank">2:3</a>';
+    expect(formatVerseReferencesToLinks(input)).toEqual(expected);
+  });
+
+  it('should convert verse references in Spanish text', () => {
+    const input = 'Este es un texto normal con el versículo 1:1 y 2:3';
+    const expected =
+      'Este es un texto normal con el versículo <a href="/1:1" target="_blank">1:1</a> y <a href="/2:3" target="_blank">2:3</a>';
+    expect(formatVerseReferencesToLinks(input)).toEqual(expected);
+  });
+
+  it('should convert verse references in Chinese text', () => {
+    const input = '这是一个普通文本，包含经文 1:1 和 2:3';
+    const expected =
+      '这是一个普通文本，包含经文 <a href="/1:1" target="_blank">1:1</a> 和 <a href="/2:3" target="_blank">2:3</a>';
+    expect(formatVerseReferencesToLinks(input)).toEqual(expected);
+  });
+
+  it('should convert verse references in Japanese text', () => {
+    const input = 'これは普通のテキストで、聖句 1:1 と 2:3 を含みます';
+    const expected =
+      'これは普通のテキストで、聖句 <a href="/1:1" target="_blank">1:1</a> と <a href="/2:3" target="_blank">2:3</a> を含みます';
+    expect(formatVerseReferencesToLinks(input)).toEqual(expected);
+  });
+
+  it('should convert verse references in Korean text', () => {
+    const input = '이것은 일반 텍스트로, 성구 1:1과 2:3을 포함합니다';
+    const expected =
+      '이것은 일반 텍스트로, 성구 <a href="/1:1" target="_blank">1:1</a>과 <a href="/2:3" target="_blank">2:3</a>을 포함합니다';
+    expect(formatVerseReferencesToLinks(input)).toEqual(expected);
+  });
+
+  it('should convert verse references in Russian text', () => {
+    const input = 'Это обычный текст с аятом 1:1 и 2:3';
+    const expected =
+      'Это обычный текст с аятом <a href="/1:1" target="_blank">1:1</a> и <a href="/2:3" target="_blank">2:3</a>';
+    expect(formatVerseReferencesToLinks(input)).toEqual(expected);
+  });
+
+  // Test cases for text without verse references
+  it('should not modify English text without verse references', () => {
+    const input = 'This is a normal text without any verse references';
+    expect(formatVerseReferencesToLinks(input)).toEqual(input);
+  });
+
+  it('should not modify Arabic text without verse references', () => {
+    const input = 'هذا نص عادي لا يحتوي على أي إشارات للآيات';
+    expect(formatVerseReferencesToLinks(input)).toEqual(input);
+  });
+
+  it('should not modify French text without verse references', () => {
+    const input = 'Ceci est un texte normal sans aucune référence aux versets';
+    expect(formatVerseReferencesToLinks(input)).toEqual(input);
+  });
+
+  it('should not modify Spanish text without verse references', () => {
+    const input = 'Este es un texto normal sin referencias a versículos';
+    expect(formatVerseReferencesToLinks(input)).toEqual(input);
+  });
+
+  it('should not modify Chinese text without verse references', () => {
+    const input = '这是一个没有经文引用的普通文本';
+    expect(formatVerseReferencesToLinks(input)).toEqual(input);
+  });
+
+  it('should not modify Japanese text without verse references', () => {
+    const input = 'これは聖句の参照を含まない通常のテキストです';
+    expect(formatVerseReferencesToLinks(input)).toEqual(input);
+  });
+
+  it('should not modify Korean text without verse references', () => {
+    const input = '이것은 성구 참조가 없는 일반 텍스트입니다';
+    expect(formatVerseReferencesToLinks(input)).toEqual(input);
+  });
+
+  it('should not modify Russian text without verse references', () => {
+    const input = 'Это обычный текст без ссылок на аяты';
+    expect(formatVerseReferencesToLinks(input)).toEqual(input);
   });
 });
