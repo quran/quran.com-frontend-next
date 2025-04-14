@@ -84,7 +84,7 @@ const VerseAndTranslation: React.FC<Props> = (props) => {
 
   return (
     <div className={styles.container}>
-      {data?.verses.map((verse) => (
+      {data?.verses?.map((verse) => (
         <div key={verse.verseKey} className={styles.verseContainer}>
           <div className={classNames(styles.arabicVerseContainer, restProps.arabicVerseClassName)}>
             <PlainVerseText
