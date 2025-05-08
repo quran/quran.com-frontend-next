@@ -1,0 +1,36 @@
+service: quran-frontend
+image: quran/deployments
+
+servers: [$SERVER_IPS$]
+
+ssh:
+  config: true
+  user: root
+
+registry:
+  server: ghcr.io
+  username: quran
+  password:
+    - GITHUB_TOKEN
+
+builder:
+  arch: arm64
+  context: $PWD$
+  driver: docker
+  cache:
+    type: gha
+    options: mode=max
+    image: kamal-app-build-cache
+
+boot:
+  limit: 1 # Can also specify as a percentage of total hosts, such as "25%"
+  wait: 60
+
+proxy:
+  host: onprem-test.quran.com
+  ssl: false
+  app_port: 80
+  healthcheck:
+    interval: 3
+    path: /
+    timeout: 60
