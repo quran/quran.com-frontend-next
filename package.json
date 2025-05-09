@@ -9,6 +9,7 @@
   "scripts": {
     "dev": "next dev",
     "dev:https": "node server.js",
+    "prod": "node server-http.js",
     "build": "IS_BUILD_TIME=true next build",
     "media-maker:studio": "npx remotion studio src/components/MediaMaker/index.ts",
     "media-maker:deploy": "node scripts/media/deploy.mjs",
