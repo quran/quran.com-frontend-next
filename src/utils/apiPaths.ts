@@ -264,6 +264,19 @@ export const makeByVerseKeyUrl = (verseKey: string, params?: Record<string, unkn
   makeUrl(`/verses/by_key/${verseKey}`, params);
 
 /**
+ * Compose the url for country detection API.
+ *
+ * @param {string} countryCode  the country code.
+ * @param {string} userDeviceLanguage  the user's device language.
+ * @returns {string}
+ */
+export const makeCountryDetectionUrl = (countryCode: string, userDeviceLanguage: string): string =>
+  makeUrl('/resources/country_language_preference', {
+    countryCode,
+    userDeviceLanguage,
+  });
+
+/**
  * Compose the url for page's verses API.
  *
  * @param {string} id  the Id of the page.
