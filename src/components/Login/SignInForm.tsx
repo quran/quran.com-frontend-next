@@ -3,6 +3,7 @@ import { FC, useState } from 'react';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
+import TextInputField, { InputType } from './common/TextInputField';
 import styles from './login.module.scss';
 import SignInPasswordField from './SignInForm/SignInPasswordField';
 import getFormErrors, { ErrorType } from './SignUpForm/errors';
@@ -33,7 +34,12 @@ const SignInForm: FC<Props> = ({ redirect }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const formFields: FormBuilderFormField[] = [
-    getEmailField(t),
+    {
+      ...getEmailField(t),
+      customRender: (props) => <TextInputField {...props} type={InputType.EMAIL} />,
+      errorClassName: styles.errorText,
+      containerClassName: styles.inputContainer,
+    },
     {
       field: 'password',
       type: FormFieldType.Password,
@@ -46,6 +52,8 @@ const SignInForm: FC<Props> = ({ redirect }) => {
         },
       ],
       customRender: SignInPasswordField,
+      errorClassName: styles.errorText,
+      containerClassName: styles.inputContainer,
     },
   ];
 
@@ -69,15 +77,25 @@ const SignInForm: FC<Props> = ({ redirect }) => {
   };
 
   const renderAction = (props) => (
-    <Button
-      {...props}
-      block
-      shape={ButtonShape.Pill}
-      type={ButtonType.Success}
-      className={styles.submitButton}
-    >
-      {t('continue')}
-    </Button>
+    <>
+      <Link
+        href={getForgotPasswordNavigationUrl()}
+        variant={LinkVariant.Primary}
+        className={styles.forgotPassword}
+      >
+        {t('forgot-password')}?
+      </Link>
+
+      <Button
+        {...props}
+        block
+        shape={ButtonShape.Pill}
+        type={ButtonType.Success}
+        className={styles.submitButton}
+      >
+        {t('continue')}
+      </Button>
+    </>
   );
 
   return (
@@ -88,15 +106,6 @@ const SignInForm: FC<Props> = ({ redirect }) => {
         renderAction={renderAction}
         isSubmitting={isSubmitting}
       />
-      <div className={styles.formActions}>
-        <Link
-          href={getForgotPasswordNavigationUrl()}
-          variant={LinkVariant.Primary}
-          className={styles.forgotPassword}
-        >
-          {t('forgot-password')}?
-        </Link>
-      </div>
     </div>
   );
 };

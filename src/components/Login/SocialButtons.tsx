@@ -30,7 +30,7 @@ const SocialButtons: FC<Props> = ({ redirect, onEmailLoginClick }) => {
       <Button
         href={makeGoogleLoginUrl(redirect)}
         prefix={<GoogleIcon />}
-        className={styles.loginButton}
+        className={classNames(styles.loginButton, styles.googleButton)}
         onClick={() => onSocialButtonClick(AuthType.Google)}
         shape={ButtonShape.Pill}
       >
@@ -38,8 +38,8 @@ const SocialButtons: FC<Props> = ({ redirect, onEmailLoginClick }) => {
       </Button>
       <Button
         href={makeFacebookLoginUrl(redirect)}
-        prefix={<FacebookIcon />}
-        className={styles.loginButton}
+        prefix={<FacebookIcon color="#4267b2" />}
+        className={classNames(styles.loginButton, styles.facebookButton)}
         onClick={() => onSocialButtonClick(AuthType.Facebook)}
         shape={ButtonShape.Pill}
       >
@@ -48,7 +48,7 @@ const SocialButtons: FC<Props> = ({ redirect, onEmailLoginClick }) => {
       <Button
         href={makeAppleLoginUrl(redirect)}
         prefix={<AppleIcon />}
-        className={styles.loginButton}
+        className={classNames(styles.loginButton, styles.appleButton)}
         onClick={() => onSocialButtonClick(AuthType.Apple)}
         shape={ButtonShape.Pill}
       >

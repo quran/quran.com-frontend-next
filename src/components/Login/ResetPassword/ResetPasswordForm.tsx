@@ -4,15 +4,15 @@ import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
 import AuthHeader from '../AuthHeader';
+import BackButton from '../BackButton';
 import styles from '../login.module.scss';
 import getFormErrors, { ErrorType } from '../SignUpForm/errors';
 import getPasswordFields from '../SignUpForm/PasswordFields';
 
-import Button, { ButtonShape, ButtonType, ButtonVariant } from '@/components/dls/Button/Button';
+import Button, { ButtonShape, ButtonType } from '@/components/dls/Button/Button';
 import FormBuilder from '@/components/FormBuilder/FormBuilder';
 import { FormBuilderFormField } from '@/components/FormBuilder/FormBuilderTypes';
-import { useToast, ToastStatus } from '@/dls/Toast/Toast';
-import ArrowLeft from '@/icons/west.svg';
+import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import QueryParam from '@/types/QueryParam';
 import { resetPassword } from '@/utils/auth/authRequests';
 import { logButtonClick, logFormSubmission } from '@/utils/eventLogger';
@@ -87,9 +87,7 @@ const ResetPasswordForm: React.FC = () => {
             renderAction={renderAction}
             isSubmitting={isSubmitting}
           />
-          <Button variant={ButtonVariant.Compact} onClick={handleBack} isDisabled={isSubmitting}>
-            <ArrowLeft /> {t('back')}
-          </Button>
+          <BackButton onClick={handleBack} />
         </div>
       </div>
     </div>
