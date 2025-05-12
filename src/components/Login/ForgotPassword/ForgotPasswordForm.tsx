@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
 import AuthHeader from '../AuthHeader';
+import TextInputField, { InputType } from '../common/TextInputField';
 import styles from '../login.module.scss';
 import getFormErrors, { ErrorType } from '../SignUpForm/errors';
 import { getEmailField } from '../SignUpFormFields/credentialFields';
@@ -11,7 +12,7 @@ import { getEmailField } from '../SignUpFormFields/credentialFields';
 import Button, { ButtonShape, ButtonType, ButtonVariant } from '@/components/dls/Button/Button';
 import FormBuilder from '@/components/FormBuilder/FormBuilder';
 import { FormBuilderFormField } from '@/components/FormBuilder/FormBuilderTypes';
-import { useToast, ToastStatus } from '@/dls/Toast/Toast';
+import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import ArrowLeft from '@/icons/west.svg';
 import { requestPasswordReset } from '@/utils/auth/authRequests';
 import { logButtonClick, logFormSubmission } from '@/utils/eventLogger';
@@ -23,7 +24,14 @@ const ForgotPasswordForm: React.FC = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const toast = useToast();
 
-  const formFields: FormBuilderFormField[] = [getEmailField(t)];
+  const formFields: FormBuilderFormField[] = [
+    {
+      ...getEmailField(t),
+      customRender: (props) => <TextInputField {...props} type={InputType.EMAIL} />,
+      errorClassName: styles.errorText,
+      containerClassName: styles.inputContainer,
+    },
+  ];
 
   const handleSubmit = async (values: { email: string }) => {
     logFormSubmission('forgot_password');

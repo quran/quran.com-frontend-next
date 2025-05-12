@@ -3,6 +3,7 @@ import { useSWRConfig } from 'swr';
 
 import buildFormBuilderFormField from '../FormBuilder/buildFormBuilderFormField';
 
+import TextInputField, { InputType } from './common/TextInputField';
 import styles from './CompleteSignupForm.module.scss';
 import EmailVerificationForm from './EmailVerificationForm';
 import getFormErrors, { ErrorType } from './SignUpForm/errors';
@@ -54,12 +55,17 @@ const CompleteSignupForm: React.FC<CompleteSignupFormProps> = ({ requiredFields,
   const emailFormField = requiredFields.find((field) => field.field === 'email');
   const isEmailRequired = !!emailFormField;
   if (isEmailRequired) {
+    const formField = buildFormBuilderFormField(
+      { ...emailFormField, placeholder: t(`form.email`) },
+      t,
+    );
+
     return (
       <EmailVerificationForm
-        emailFormField={buildFormBuilderFormField(
-          { ...emailFormField, placeholder: t(`form.email`) },
-          t,
-        )}
+        emailFormField={{
+          ...formField,
+          customRender: (props) => <TextInputField {...props} type={InputType.EMAIL} />,
+        }}
       />
     );
   }
@@ -68,9 +74,27 @@ const CompleteSignupForm: React.FC<CompleteSignupFormProps> = ({ requiredFields,
     <div className={styles.container}>
       <h2 className={styles.title}>{t('complete-sign-up')}</h2>
       <FormBuilder
-        formFields={requiredFields.map((field) =>
-          buildFormBuilderFormField({ ...field, placeholder: t(`form.${field.field}`) }, t),
-        )}
+        formFields={requiredFields.map((field) => {
+          const formField = buildFormBuilderFormField(
+            { ...field, placeholder: t(`form.${field.field}`) },
+            t,
+          );
+
+          // Add customRender with TextInputField to all fields except password fields
+          if (field.field !== 'password' && field.field !== 'confirmPassword') {
+            return {
+              ...formField,
+              customRender: (props) => (
+                <TextInputField
+                  {...props}
+                  type={field.field === 'email' ? InputType.EMAIL : InputType.TEXT}
+                />
+              ),
+            };
+          }
+
+          return formField;
+        })}
         onSubmit={handleSubmit}
         actionText={t('submit')}
       />

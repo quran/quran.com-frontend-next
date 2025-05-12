@@ -1,16 +1,21 @@
 @use "src/styles/theme";
 @use "src/styles/breakpoints";
 
+$container-width: 370px;
+
 .outerContainer {
-    min-height: 80vh;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     margin-inline: auto;
+    max-width: $container-width;
+    padding-block: calc(var(--spacing-xsmall) * 3);
+    box-sizing: border-box;
 
-    @include breakpoints.desktop {
-        max-width: 480px;
+    @include breakpoints.smallerThanMobileL {
+        padding-inline: var(--spacing-small-px);
     }
 }
 

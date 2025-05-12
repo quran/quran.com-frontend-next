@@ -15,7 +15,7 @@ const PasswordInput: FC<Props> = ({ value = '', onChange, placeholder }) => {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <div className={styles.passwordInputContainer}>
+    <div className={`${styles.passwordInputContainer} ${value ? styles.hasValue : ''}`}>
       <input
         type={showPassword ? 'text' : 'password'}
         value={value}

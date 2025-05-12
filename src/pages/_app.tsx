@@ -27,6 +27,7 @@ import { isLoggedIn } from '@/utils/auth/login';
 import { logAndRedirectUnsupportedLogicalCSS } from '@/utils/css';
 import * as gtag from '@/utils/gtag';
 import { getDir } from '@/utils/locale';
+import { isAuthPage } from '@/utils/routes';
 import { createSEOConfig } from '@/utils/seo';
 import DataContext from 'src/contexts/DataContext';
 import ThemeProvider from 'src/styles/ThemeProvider';
@@ -64,6 +65,8 @@ function MyApp({ Component, pageProps }): JSX.Element {
     };
   }, [router.events]);
 
+  const isAuthRoute = isAuthPage(router);
+
   return (
     <>
       <Head>
@@ -90,12 +93,12 @@ function MyApp({ Component, pageProps }): JSX.Element {
                       />
                       <GlobalListeners />
 
-                      <Navbar />
+                      {!isAuthRoute && <Navbar />}
 
                       <DeveloperUtility />
                       <Component {...pageProps} />
                       <AudioPlayer />
-                      <Footer />
+                      {!isAuthRoute && <Footer />}
                     </OnboardingProvider>
                   </ThemeProvider>
                   <SessionIncrementor />

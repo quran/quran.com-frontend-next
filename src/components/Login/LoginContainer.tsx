@@ -1,14 +1,16 @@
 import { useState } from 'react';
 
+import Link from 'next/link';
 import { useRouter } from 'next/router';
+import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
 
 import AuthTabs, { AuthTab } from './AuthTabs';
+import BackButton from './BackButton';
+import loginStyles from './login.module.scss';
 import ServiceCard from './ServiceCard';
 import VerificationCodeForm from './VerificationCode/VerificationCodeForm';
 
-import Button, { ButtonVariant } from '@/dls/Button/Button';
-import ArrowLeft from '@/icons/west.svg';
 import authStyles from '@/styles/auth/auth.module.scss';
 import QueryParam from '@/types/QueryParam';
 import { signUp } from '@/utils/auth/authRequests';
@@ -97,9 +99,17 @@ const LoginContainer = () => {
             redirect={redirect}
             onSignUpSuccess={handleEmailLoginSubmit}
           />
-          <Button variant={ButtonVariant.Compact} onClick={onBack}>
-            <ArrowLeft /> {t('back')}
-          </Button>
+          <BackButton onClick={onBack} />
+
+          <p className={loginStyles.privacyText}>
+            <Trans
+              i18nKey="login:privacy-policy"
+              components={{
+                link: <Link href="/privacy" />,
+                link1: <Link href="/terms-and-conditions" />,
+              }}
+            />
+          </p>
         </>
       );
     }
@@ -127,23 +137,12 @@ const LoginContainer = () => {
         isEmailLogin={false}
         onOtherOptionsClicked={onEmailLoginClick}
         redirect={redirect}
+        onBackClick={onBack}
       />
     );
   };
 
-  return (
-    <div className={authStyles.outerContainer}>
-      <div
-        className={
-          loginView === LoginView.VERIFICATION
-            ? authStyles.fullContainer
-            : authStyles.innerContainer
-        }
-      >
-        {renderContent()}
-      </div>
-    </div>
-  );
+  return <div className={authStyles.outerContainer}>{renderContent()}</div>;
 };
 
 export default LoginContainer;
