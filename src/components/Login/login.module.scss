@@ -213,6 +213,7 @@ $container-width: 370px;
 .authSwitchContainer {
   width: 100%;
   margin-inline: auto;
+  margin-block-end: var(--spacing-large-px);
 }
 
 .authTitle {
@@ -227,8 +228,8 @@ $container-width: 370px;
 .description {
   text-align: center;
   color: var(--color-text-default);
-  margin-block: var(--spacing-large);
-  font-size: var(--font-size-large);
+  margin-block-end: var(--spacing-large);
+  font-size: var(--font-size-small);
 }
 
 .formContainer {
@@ -238,7 +239,6 @@ $container-width: 370px;
   align-items: center;
   flex-direction: column;
   gap: var(--spacing-small-px);
-  // margin-top: var(--spacing-large-px);
 
   form {
     width: 100%;
@@ -271,7 +271,7 @@ $container-width: 370px;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
 
-  &:hover {
+  &:not(:disabled):not(.disabled):hover {
     background-color: var(--color-success-medium);
     color: var(--color-text-inverse);
   }

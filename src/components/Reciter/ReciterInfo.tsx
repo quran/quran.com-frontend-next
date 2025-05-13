@@ -1,7 +1,7 @@
 /* eslint-disable react/no-danger */
 import { useContext, useState } from 'react';
-import Image from 'next/image';
 
+import Image from 'next/image';
 import useTranslation from 'next-translate/useTranslation';
 
 import Button from '../dls/Button/Button';
