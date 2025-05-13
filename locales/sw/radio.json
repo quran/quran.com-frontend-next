@@ -1,0 +1,27 @@
+{
+  "change": "Badilisha",
+  "curated-station": {
+    "juz-amma": {
+      "description": "Sikiliza Juz ya mwisho ya Qur'ani",
+      "title": "Juz Amma"
+    },
+    "popular-recitations": {
+      "description": "Usomaji wa kila siku ulioratibiwa",
+      "title": "Visomo Maarufu"
+    },
+    "surah-al-kahf": {
+      "description": "Sikiliza Surah Alkahf kwa kurudia",
+      "title": "Surah Al-Kahf"
+    },
+    "yaseen-alwaqiah-al-mulk": {
+      "description": "Sura hizi kutoka kwa wasomaji mbalimbali",
+      "title": "Yaseen, Al-Waqiah, Al-Mulk"
+    }
+  },
+  "curated-stations": "Vituo Vilivyoratibiwa",
+  "pause-radio": "Sitisha Redio",
+  "play-radio": "Cheza Redio",
+  "radio-desc": "Sikiliza usomaji mzuri wa Qur'ani Tukufu bila kukoma kutoka kwa wasomaji mbalimbali.",
+  "reciter-stations": "Vituo vya usomaji",
+  "station": "Kituo"
+}

@@ -1,65 +1,95 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
-import QuickLink from './QuickLink';
 import styles from './QuickLinks.module.scss';
 
-import { isLoggedIn } from '@/utils/auth/login';
+import DataContext from '@/contexts/DataContext';
+import Button, { ButtonShape, ButtonSize, ButtonType, ButtonVariant } from '@/dls/Button/Button';
+import ArrowIcon from '@/public/icons/arrow.svg';
+import { getChapterData } from '@/utils/chapter';
+import { logButtonClick } from '@/utils/eventLogger';
+import { toLocalizedNumber } from '@/utils/locale';
 
-const isProduction = process.env.NEXT_PUBLIC_VERCEL_ENV === 'production';
+enum QuickLinkType {
+  Surah = 'surah',
+  Ayah = 'ayah',
+  Range = 'range',
+}
 
 const QUICK_LINKS = [
   {
-    slug: 'about-the-quran',
-    logKey: 'about-quran',
-    key: 'about-quran',
+    slug: 'al-mulk',
+    type: QuickLinkType.Surah,
+    surah: 67,
   },
   {
-    slug: 'surah-al-mulk',
-    logKey: 'surah-al-mulk',
-    key: 'mulk',
+    slug: 'al-kahf',
+    type: QuickLinkType.Surah,
+    surah: 18,
   },
   {
-    slug: 'surah-ya-sin',
-    logKey: 'surah-ya-sin',
-    key: 'yaseen',
+    slug: 'ya-sin',
+    type: QuickLinkType.Surah,
+    surah: 36,
   },
   {
-    slug: 'surah-al-kahf',
-    logKey: 'surah-al-kahf',
-    key: 'kahf',
+    slug: 'ayatul-kursi',
+    type: QuickLinkType.Ayah,
+    translationKey: 'ayat-ul-kursi',
   },
   {
-    slug: 'surah-al-waqiah',
-    logKey: 'surah-al-waqiah',
-    key: 'waqiah',
+    slug: 'al-baqarah',
+    number: [285, 286],
+    type: QuickLinkType.Range,
+    surah: 2,
   },
 ];
 
-// TODO: this is temporary and needs to be updated.
-if (isLoggedIn() && isProduction) {
-  QUICK_LINKS.push({
-    slug: 'collections/the-authority-and-importance-of-the-sunnah-clem7p7lf15921610rsdk4xzulfj',
-    key: 'sunnah',
-    logKey: 'sunnah_collection',
-  });
-}
-
 const QuickLinks: React.FC = () => {
-  const { t } = useTranslation('quick-links');
+  const { t, lang } = useTranslation('quick-links');
+  const chaptersData = useContext(DataContext);
 
   return (
-    <div className={styles.quickLinksContainer}>
-      {QUICK_LINKS.map((quickLink) => (
-        <QuickLink
-          key={quickLink.slug}
-          slug={quickLink.slug}
-          logKey={quickLink.logKey}
-          text={t(quickLink.key)}
-          className={styles.link}
-        />
-      ))}
+    <div className={styles.container}>
+      {QUICK_LINKS.map((quickLink) => {
+        let text = '';
+        if (quickLink.type === QuickLinkType.Ayah) {
+          text = t(quickLink.translationKey);
+        } else {
+          const chapterData = getChapterData(chaptersData, String(quickLink.surah));
+          text = `${toLocalizedNumber(quickLink.surah, lang)}. ${chapterData?.transliteratedName}`;
+          if (quickLink.type === QuickLinkType.Range) {
+            text = `${text} ${toLocalizedNumber(quickLink.number[0], lang)}-${toLocalizedNumber(
+              quickLink.number[1],
+              lang,
+            )}`;
+          }
+        }
+
+        return (
+          <Button
+            key={quickLink.slug}
+            size={ButtonSize.Small}
+            href={`/${
+              quickLink.type === QuickLinkType.Range
+                ? `${quickLink.slug}/${quickLink.number[0]}-${quickLink.number[1]}`
+                : quickLink.slug
+            }`}
+            type={ButtonType.Primary}
+            variant={ButtonVariant.Compact}
+            shape={ButtonShape.Pill}
+            onClick={() => {
+              logButtonClick(`quick_link_${quickLink.slug}`);
+            }}
+            className={styles.quickLink}
+          >
+            <div className={styles.quickLinkText}>
+              {text} <ArrowIcon />
+            </div>
+          </Button>
+        );
+      })}
     </div>
   );
 };

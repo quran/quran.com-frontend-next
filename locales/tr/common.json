@@ -93,6 +93,7 @@
   "ayah": "Ayet",
   "ayahs": "Ayet",
   "beta": "Beta",
+  "beyond-ramadan": "Ramazan'dan Sonra da Büyümeye Devam Edin!",
   "bookmark": "Yer imi",
   "bookmarked": "İşaretli",
   "both": "Her ikisi de",
@@ -102,16 +103,15 @@
   "command-bar": {
     "navigations": "Navigasyonlar",
     "no-nav-results": "Navigasyon sonucu yok",
-    "placeholder": "Ne okumak istersiniz?",
-    "powered-by": "Tarteel.ai tarafından desteklenen sesli arama",
+    "placeholder": "Kuran'ı ara...",
     "recent-navigations": "Son gezinmeler",
     "search-by-voice": "Sesle ara",
     "try-navigating": "Gezinmeyi deneyin"
   },
   "community": {
-    "cta": "Topluluğa Katılın",
-    "header": "Müslüman geliştiriciler ve teknoloji uzmanlarından oluşan QDC Topluluğuna katılın.",
-    "sub-header": "İslami teknoloji inşa eden önde gelen toplulukla işbirliği yapmak ve katılmak için Kuran.com Discord'a kaydolun.",
+    "cta": "Bizimle iletişime geçin",
+    "header": "Teknik becerilerinizi Kur'an'ın misyonuna katkıda bulunmak için kullanmak ister misiniz?",
+    "sub-header": "Bu formu doldurarak ilginizi bizimle paylaşın, uygun bir fırsat olduğunda inşaAllah size ulaşacağız.",
     "title": "Toplum"
   },
   "complete-sign-up": "Kaydınızı tamamlayın",
@@ -122,9 +122,11 @@
     }
   },
   "continue": "Devam et",
+  "contribute-to-our-mission": "Misyonumuza katkıda bulunun",
   "copied": "kopyalandı",
   "copied-to-clipboard": "Panoya kopyalandı",
   "copy": "Kopyala",
+  "copylink": "Bağlantıyı kopyala",
   "counter": {
     "decrease": "Azalt",
     "increase": "Arttır"
@@ -134,6 +136,7 @@
   "developers": "Geliştiriciler",
   "display": "Görüntülemek",
   "donate": "Bağış Yapın",
+  "donate-now": "Şimdi bağış yapın",
   "donate_monthly": "Aylık bağış yapın",
   "donate_once": "Bir kez bağış yapın",
   "edit": "Düzenlemek",
@@ -145,6 +148,7 @@
     "resend-email-in": "Doğrulama e-postasını {{remainingTime}} saniye içinde yeniden gönderin...",
     "verify-code": "Doğrulama kodu"
   },
+  "end-year-donate": "2024'ü sadaka ile bitirin ❤️",
   "error": {
     "MediaVersesRangeLimitExceeded": "Bir seferde en fazla {{limit}} ayet seçebilirsiniz. Lütfen daha küçük bir aralık seçin.",
     "bookmark-sync": "Yer imi senkronize değil.",
@@ -155,6 +159,34 @@
     "ranges-no-value": "Aralık başlangıcı ve bitişi bir değere sahip olmalıdır",
     "ranges-too-many-verses": "*Maksimum {{maxNumberOfVerses}} Ayet",
     "ranges-wrong-order": "Başlangıç mısrası bitiş mısrasından önce olmalıdır."
+  },
+  "errors": {
+    "account-banned": "Üzgünüz, Hesabınız yasaklandı. Quran.Foundation ile iletişime geçin",
+    "badRequest": "*Geçersiz istek",
+    "banned": "*Üzgünüz, Hesabınız yasaklandı. Quran.Foundation ile iletişime geçin",
+    "confirm": "*Şifreyi onayla şifreyle uyuşmuyor",
+    "email": "*Geçersiz E-posta Biçimi!",
+    "exactLength": "*Değer tam uzunlukta olmalıdır",
+    "expiredToken": "*Bu token'ın süresi doldu",
+    "forgot-password-failed": "Şifre sıfırlama e-postası gönderilemedi. Lütfen tekrar deneyin.",
+    "immutable": "*Bu değer değiştirilemez",
+    "invalid": "*Bu {{fieldName}} geçersizdir",
+    "invalidEmailOrPassword": "*Geçersiz e-posta veya şifre",
+    "max": "* {{fieldName}} {{max}} basamaktan az veya eşit olmalıdır",
+    "min": "* {{fieldName}} {{min}} basamaktan fazla veya eşit olmalıdır",
+    "name": "* {{fieldName}} yalnızca harf ve sayılardan oluşmalıdır",
+    "notFound": "*Bulunamadı",
+    "required": "* {{fieldName}} eksik!",
+    "reset-password-failed": "Şifreyi sıfırlama başarısız. Lütfen tekrar deneyin.",
+    "signin-failed": "Giriş başarısız. Lütfen tekrar deneyin.",
+    "signup-failed": "Kayıt başarısız. Lütfen tekrar deneyin.",
+    "taken": "* {{fieldName}} zaten var!",
+    "usedToken": "*Bu token zaten kullanıldı",
+    "username": "* {{fieldName}} yalnızca alt çizgi ve harfleri kabul eder",
+    "verification-code-invalid": "Bu doğrulama kodu geçersiz",
+    "verification-code-length": "Doğrulama kodu {{length}} basamaklı olmalıdır",
+    "verification-failed": "Doğrulama başarısız oldu. Lütfen tekrar deneyin.",
+    "verification-resend-failed": "Doğrulama kodunu yeniden gönderme başarısız oldu"
   },
   "exciting-updates": "Heyecan Verici Güncellemeler",
   "feedback": "Geri Bildirim",
@@ -178,28 +210,34 @@
     "translation-font-size": "Çeviri yazı tipi boyutu"
   },
   "footer": {
-    "description": "Kuran.com bir sadaka-i cariyedir. Herkesin Kur'an-ı Kerim'i okumasını, incelemesini ve öğrenmesini kolaylaştırmayı umuyoruz. Kur'an-ı Kerim'in Al-Quran Al-Kareem, Al-Ketab, Al-Furqan, Al-Maw'itha, Al-Thikr ve Al-Noor gibi birçok ismi vardır.",
+    "description": "Quran.com, dünya çapında milyonlarca kişinin Kuran'ı birden fazla dilde okumak, aramak, dinlemek ve üzerinde düşünmek için kullandığı güvenilir bir platformdur. Çeviriler, tefsirler, okumalar, kelime kelime çeviriler ve daha derin çalışma araçları sunarak Kuran'ı herkes için erişilebilir hale getirir. <br/> <br/> Bir Sadaka Jariyah olarak, Quran.com insanların Kuran ile derin bir bağ kurmasına yardımcı olmaya kendini adamıştır. 501(c)(3) kar amacı gütmeyen bir kuruluş olan <link>Quran.Foundation</link> tarafından desteklenen Quran.com, herkes için ücretsiz ve değerli bir kaynak olarak büyümeye devam ediyor, Elhamdülillah",
     "hiring": "İşe alıyoruz! Kuran Vakfı ekibine katılın ve misyonumuza katkıda bulunun. <link> Şimdi başvurun! </link>",
     "rights": "Her hakkı saklıdır",
-    "title": "Kur'an-ı Kerim'i okuyun, inceleyin ve öğrenin."
+    "title": "Kuran'ı Oku, Dinle, Araştır ve Üzerinde Düşün"
   },
   "form": {
     "body": "Vücut",
     "code": "Doğrulama kodu",
+    "confirm-password": "Şifreyi Onayla",
     "email": "E-posta",
     "firstName": "İlk adı",
     "lastName": "Soy isim",
-    "title": "Başlık"
+    "password": "Şifre",
+    "title": "Başlık",
+    "username": "Kullanıcı adı",
+    "verification-code": "Doğrulama Kodu"
   },
   "from": "İtibaren",
+  "fundraising-share-title": "Quran.com Bağış Toplamasını Paylaşın",
   "fundraising-sticky-banner": {
     "cta": "Bağış yapmak",
     "title": "En iyi günlerde ver!"
   },
   "fundraising": {
-    "description": "Aylık bağışlar, Kuran.com'u geliştirmemize ve operasyonlarımızı sürdürmemize yardımcı oluyor; böylece bağış toplamaya daha az, etki yaratmaya daha çok odaklanıyoruz.",
+    "description": "Aylık bağışlar, Quran.com'u geliştirmemize ve operasyonlarımızı sürdürmemize yardımcı oluyor, böylece bağış toplamaya daha az, etki yaratmaya daha çok odaklanabiliyoruz.",
     "title": "Aylık Bağışçımız Olun"
   },
+  "get-started": "Başlayın",
   "hear-it-pronounced": "Kuran kelimelerini tıklayın, telaffuzunu dinleyin",
   "help": "Yardım",
   "hizb": "Hizb",
@@ -215,6 +253,7 @@
   "learn-more": "Daha fazla bilgi edinin",
   "learning-plans": "Öğrenme Planları",
   "less": "Daha az",
+  "lessons": "Dersler",
   "loading": "Yükleniyor",
   "login": "Oturum aç",
   "logout": "Çıkış Yap",
@@ -248,16 +287,18 @@
   "off": "Kapalı",
   "oldest": "En eski",
   "on": "Açık",
+  "our-projects": "Projelerimiz",
   "page": "Sayfa",
   "pages": "Sayfalar",
   "pagination-summary": "{{currentResultNumber}} - {{endOfResultNumber}} / {{totalNumberOfResults}} arama sonucu",
   "pbuh": "Allah'ın selamı onun üzerine olsun",
   "popular-links": "Popüler Bağlantılar",
   "popup": {
+    "companion-title": "Sevgili Kur'an Arkadaşı,",
     "footnote": "Aylık bağışlar, bağış toplamaya daha az odaklanmamızı sağlıyor",
     "text-1": "Her zaman ücretsiz olarak dünya Kuran bilgisine ve teknolojisine hizmet etmeye kararlıyız.",
     "text-2": "Sürekli hayırseverlik (Sadaqa Jariyah) için mükemmel bir fırsat. Aylık (veya bir defalık) bağışçı olarak ahiretinize yatırım yapın.",
-    "title": "En İyi Günlerinizde Verin!"
+    "title": "Sevgili Kur'an Arkadaşı,"
   },
   "powered-by": "Tarafından desteklenmektedir",
   "prepare-hearts": {
@@ -269,6 +310,7 @@
   "privacy": "Gizlilik",
   "product-updates": "Ürün Güncellemeleri",
   "profile": "Profil",
+  "projects-desc": "<link>Quran.Foundation</link> tarafından sahip olunan, yönetilen veya desteklenen kar amacı gütmeyen projeler",
   "q-reflect": "KuranYansıtmak",
   "quran-com": "Quran.com",
   "quran-radio": "Kuran Radyo",
@@ -277,12 +319,14 @@
     "reading": "Okuma",
     "translation": "Meal"
   },
+  "ready-for-ramadan": "Ramazan'a hazır mısınız?",
   "recitation": "okuma",
   "reciter": "Okuyucu",
   "reciter-summary": "(Tefsir Merkezi'nin izniyle)",
   "reciters": "Okuyucular",
   "reflect": "Yansıt",
   "reflections": "Yansımalar",
+  "reflections-and-lessons": "Düşünceler ve Dersler",
   "remove": "Kaldırmak",
   "rename": "Yeniden Adlandır",
   "retry": "Yeniden dene",
@@ -292,10 +336,12 @@
   "save-to-collection": "Koleksiyona Kaydet",
   "search-for": "'{{searchQuery}}' için arama yapın",
   "search-results": "{{count}} arama sonucu",
+  "search-results-no-count": "Arama Sonuçları",
   "search": {
     "filters": "Filtreler",
     "hint": "Aramayı deneyin",
     "jump-to": "Atla",
+    "more-results": "Daha fazla sonuç",
     "no-results": "Sonuç bulunamadı",
     "no-results-suggestion": "{{searchQuery}} \" için eşleşen bir arama sonucu bulamadık. farklı bir anahtar kelime aramayı deneyin.",
     "popular": "Popüler aramalar",
@@ -336,8 +382,10 @@
     "search-juz": "Cüz ara",
     "search-page": "Arama Sayfası",
     "search-surah": "Sure ara",
+    "search-verse": "Ayet Ara",
     "try-navigating-with": "İpucu: ile gezinmeyi deneyin"
   },
+  "sign-in": "Giriş yap",
   "sitemap": "Site Haritası",
   "sort": {
     "ascending": "Artan",
@@ -357,10 +405,6 @@
     "tafsir-desc": "{{tafsirName}} {{verseNumber}} Suresi {{surahName}} için {{tafsirName}} okuyun",
     "tafsirs-desc": "{{ayahNumber}} {{surahName}} tefsirlerini güvenilir tefsir alimleri tarafından okuyun",
     "title": "Tefsir"
-  },
-  "tarteel": {
-    "app": "Tarteel uygulaması",
-    "name": "Tarteel.ai"
   },
   "terms-and-conditions": "Şartlar ve koşullar",
   "theme": "Tema",
@@ -392,17 +436,22 @@
   "verse": "Ayet",
   "verse-bookmark-removed": "Ayet imi kaldırıldı!",
   "verse-bookmarked": "Ayet işaretlendi!",
+  "verse-copied": "Ayet panoya kopyalandı!",
   "verses": "Ayetler",
   "view": "Görüş",
   "voice": {
     "ask-permission": "Sesli Arama'yı kullanmaya başlamak için lütfen mikrofon iznini etkinleştirin",
-    "error": "Bir hata oluştu, lütfen tekrar deneyin",
-    "no-permission": "Mikrofon izinlerini etkinleştirmemişsiniz gibi görünüyor. Lütfen mikrofon izinlerini etkinleştirin ve tekrar deneyin",
-    "not-supported": "Tarayıcınız mikrofonu desteklemiyor gibi görünüyor. Lütfen farklı bir tarayıcı deneyin",
+    "error": "Bir hata oluştu, lütfen daha sonra tekrar deneyin.",
+    "language-unavailable": "Tarayıcınız Arapçayı desteklemiyor.",
+    "network": "Ağ hatası. Lütfen internet bağlantınızı kontrol edip tekrar deneyin.",
+    "no-microphone": "Mikrofon algılanmadı. Lütfen bir mikrofon bağlayın ve tekrar deneyin.",
+    "no-permission": "Mikrofon izinlerinizin etkinleştirilmemiş gibi görünüyor. Lütfen mikrofon izinlerini etkinleştirin ve tekrar deneyin.",
+    "no-speech": "Konuşma algılanmadı. Lütfen tekrar konuşmayı deneyin.",
+    "not-supported": "Tarayıcınız mikrofonu desteklemiyor gibi görünüyor. Lütfen farklı bir tarayıcı deneyin.",
     "suggest": "Lütfen okumaya başlayın, ayetiniz görünecektir.",
     "suggest-subtitle": "Arapça herhangi bir ayeti okuyun ve ayet görünecektir",
     "suggest-title": "Şimdi oku",
-    "voice-search-powered-by": "Sesli Aramayı Destekleyen"
+    "voice-search-powered-by": "Sesli Arama Powered by"
   },
   "wbw": "Kelime kelime",
   "wbw-lang-summary": "Kelime kelime çeviri kaynağı: <link> {{source}} </link> . Bu kaynak ayet çeviri seçiminden bağımsızdır.",

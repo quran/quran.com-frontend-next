@@ -1,0 +1,19 @@
+{
+  "footer": "- Timu ya Quran.com",
+  "header": "Msaada wa Usanidi",
+  "issues-cta": "Iwapo una maswali yoyote au unataka kuwasiliana na wasimamizi, andika tu hoja lako. Tutakujibu haraka tuwezavyo inshaAllah.",
+  "issues-guide": "Kwa kawaida sisi hutumia <0>Miradi ya Github</0> kama chanzo cha kazi inayofuata, nini kinakuja na ni hitilafu zipi zipo zinazohitaji kutatuliwa. Kwa mfano <1>url hii</1> ina orodha ya hitilafu, mambo tunayohitaji usaidizi, na vipengele vijavyo.",
+  "main-desc": "Asante kwa nia yako ya kutusaidia kukuza Quran.com na miradi yake. Tunafurahi kufanya kazi na wewe!",
+  "projects": {
+    "all": "Tuna idadi ya miradi iliyopangishwa kwenye Github. Unaweza kupata zote <0>hapa</0>. Lakini kutaja tu kwa muhtasari:",
+    "q-android": "<0>Quran Android</0> - imeandikwa kupitia Kotlin na Java.",
+    "q-api": "<0>Quran.com API</0> - imeandikwa kupitia Ruby on Rails.",
+    "q-api-docs": "<0>Quran.com API Docs</0> - Our API docs portal",
+    "q-audio": "<0>Sauti ya Qur'ani</0> na <1>Programu za sauti za simu za mkononi za Qur'ani</1>",
+    "q-audio-segments": "<0>Sehemu za Sauti za Qur'ani</0>",
+    "q-ios": "<0>Quran iOS</0> - imeandikwa kwa Swift.",
+    "q-next": "<0>Quran.com Frontend</0> - imeandikwa katika Next.js.",
+    "q-v2": "<0>Quran.com</0> - imeandikwa kupitia Ruby on Rails."
+  },
+  "thanks": "Tunatazamia mchango wako!"
+}

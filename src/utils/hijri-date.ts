@@ -33,9 +33,18 @@ export const getCurrentQuranicCalendarWeek = (currentHijriDate: umalqura.UmAlQur
   for (const key in monthsMap) {
     const weeks = monthsMap[key];
     for (const week of weeks) {
-      const startDate = new Date(week.year, week.month - 1, week.day);
+      // Create the base start date from the JSON data
+      const baseStartDate = new Date(Number(week.year), Number(week.month) - 1, Number(week.day));
+      baseStartDate.setHours(0, 0, 0, 0);
+
+      // Shift the start date by 3 days to make it start from Friday (April 4th instead of April 1st)
+      const startDate = new Date(baseStartDate);
+      startDate.setDate(baseStartDate.getDate() + 3);
+
+      // Calculate the end date (7 days after the shifted start date)
       const endDate = new Date(startDate);
       endDate.setDate(startDate.getDate() + 7);
+      endDate.setHours(0, 0, 0, 0);
 
       if (today >= startDate && today < endDate) {
         return Number(week.weekNumber);

@@ -1,5 +1,6 @@
 import getTextToCopy from './getTextCopy';
 
+import Language from '@/types/Language';
 import { textToBlob } from '@/utils/blob';
 import copyText from '@/utils/copyText';
 
@@ -19,6 +20,8 @@ const copyVerse = async ({
   shouldCopyFont,
   translations,
   verseKey,
+  lang = Language.EN,
+  chaptersData,
 }) => {
   const textBlobPromise = getTextToCopy({
     rangeEndVerse,
@@ -29,6 +32,8 @@ const copyVerse = async ({
     showRangeOfVerses,
     translations,
     verseKey,
+    lang,
+    chaptersData,
   }).then(textToBlob);
 
   copyText(textBlobPromise);

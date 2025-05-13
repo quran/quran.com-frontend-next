@@ -1,0 +1,83 @@
+@use "src/styles/breakpoints";
+
+.headerOuterContainer {
+    background: var(--color-background-elevated);
+    position: relative;
+    border-radius: var(--border-radius-pill);
+    box-shadow: var(--shadow-small);
+    width: 100%;
+    margin: 0 auto;
+    z-index: 1;
+    @include breakpoints.tablet {
+        width: 750px;
+        height: 49px;
+    }
+}
+
+.prefixSuffixContainer {
+    svg {
+        fill: var(--color-grey-icons) !important;
+    }
+}
+
+.expanded {
+    z-index: 100;
+    border-radius: var(--border-radius-circle-small);
+    border-radius: var(--border-radius-circle-small) var(--border-radius-circle-small) 0 0;
+}
+
+.inputContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.form {
+    display: contents;
+}
+
+.input {
+    border: none !important;
+    width: 100%;
+    height: 100%;
+    @include breakpoints.smallerThanTablet {
+        height: 44px !important;
+    }
+
+    input::placeholder {
+        color: var(--color-text-faded-new);
+        opacity: 1;
+        font-size: var(--font-size-small-px);
+        @include breakpoints.tablet {
+            font-size: var(--font-size-normal-px);
+        }
+    }
+
+    input {
+        &:-webkit-autofill,
+        &:-webkit-autofill:hover,
+        &:-webkit-autofill:focus,
+        &:-webkit-autofill:active {
+            -webkit-box-shadow: 0 0 0 30px transparent inset !important;
+            -webkit-text-fill-color: var(--color-text-default) !important;
+            transition: background-color 5000s ease-in-out 0s;
+            background-color: transparent !important;
+        }
+    }
+}
+
+.dropdownContainer {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    width: 100%;
+    z-index: 100;
+    border-radius: 0 0 var(--border-radius-circle-small) var(--border-radius-circle-small);
+    box-shadow: var(--shadow-small);
+    ::-webkit-scrollbar {
+        width: 7px;
+        height: 7px;
+    }
+}

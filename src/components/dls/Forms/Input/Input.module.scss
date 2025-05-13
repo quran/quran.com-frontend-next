@@ -89,6 +89,16 @@
   &.warning {
     color: var(--color-warning-medium);
   }
+
+  &:-webkit-autofill,
+  &:-webkit-autofill:hover,
+  &:-webkit-autofill:focus,
+  &:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px transparent inset !important;
+    -webkit-text-fill-color: var(--color-text-default) !important;
+    transition: background-color 5000s ease-in-out 0s;
+    background-color: transparent !important;
+  }
 }
 
 @mixin prefixSuffixContainer {
@@ -125,14 +135,4 @@
   border-end-start-radius: var(--border-radius-default);
   padding-inline-start: var(--spacing-xsmall);
   padding-inline-end: var(--spacing-xxsmall);
-}
-
-.suffix {
-  border-inline-start: 1px solid var(--color-background-alternative-deep);
-  border-start-end-radius: var(--border-radius-default);
-  border-end-end-radius: var(--border-radius-default);
-  background: var(--color-background-alternative-medium);
-
-  padding-inline-start: var(--spacing-xxsmall);
-  padding-inline-end: var(--spacing-xsmall);
 }

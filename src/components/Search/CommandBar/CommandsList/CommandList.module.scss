@@ -1,0 +1,57 @@
+@use "src/styles/breakpoints";
+
+$itemHeight: calc(1.2 * var(--spacing-mega));
+.noResult {
+  text-align: center;
+  font-size: var(--font-size-large);
+  color: var(--color-text-faded);
+}
+
+.groupHeader {
+  display: flex;
+  align-items: center;
+  background: transparent;
+  height: var(--spacing-mega);
+  font-size: var(--font-size-xsmall);
+  padding-block-start: 0;
+  padding-block-end: 0;
+  padding-inline-start: var(--spacing-micro);
+  padding-inline-end: var(--spacing-micro);
+  color: var(--color-text-faded);
+}
+
+.command {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: var(--font-size-normal);
+  padding-block-start: var(--spacing-xxsmall);
+  padding-block-end: var(--spacing-xxsmall);
+  padding-inline-start: var(--spacing-xsmall);
+  padding-inline-end: var(--spacing-xsmall);
+  cursor: pointer;
+  position: relative;
+  z-index: var(--z-index-default);
+  &.selected {
+    background: var(--color-background-alternative-medium);
+    border-radius: var(--border-radius-rounded);
+  }
+}
+
+.highlight {
+  transition: transform var(--transition-fast);
+  // min-height: $itemHeight;
+  width: 100%;
+  position: absolute;
+  border-radius: var(--border-radius-rounded);
+  background: var(--color-background-alternative-faint);
+  z-index: var(--z-index-default);
+  @include breakpoints.tablet {
+    margin-block-start: calc(-1 * var(--spacing-xsmall));
+  }
+}
+
+.keyboardInputContainer {
+  flex-direction: row;
+  display: flex;
+}

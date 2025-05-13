@@ -1,0 +1,8 @@
+enum QuestionType {
+  CLARIFICATION = 'CLARIFICATION',
+  TAFSIR = 'TAFSIR',
+  COMMUNITY = 'COMMUNITY',
+  EXPLORE_ANSWERS = 'EXPLORE_ANSWERS',
+}
+
+export default QuestionType;

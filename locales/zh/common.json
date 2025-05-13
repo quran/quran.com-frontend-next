@@ -93,6 +93,7 @@
   "ayah": "节",
   "ayahs": "节",
   "beta": "测试版",
+  "beyond-ramadan": "超越斋月！",
   "bookmark": "书签",
   "bookmarked": "书签",
   "both": "全选",
@@ -102,16 +103,15 @@
   "command-bar": {
     "navigations": "导航",
     "no-nav-results": "没有导航结果",
-    "placeholder": "你想读什么？",
-    "powered-by": "由 Tarteel.ai 提供支持的语音搜索",
+    "placeholder": "搜索《古兰经》...",
     "recent-navigations": "最近的导航",
     "search-by-voice": "语音搜索",
     "try-navigating": "尝试导航到"
   },
   "community": {
-    "cta": "加入社区",
-    "header": "加入由穆斯林建设者和技术人员组成的 QDC 社区。",
-    "sub-header": "注册 Quran.com Discord，参与并与领先的社区建设伊斯兰技术合作。",
+    "cta": "联系我们",
+    "header": "想要贡献您的技术技能来进一步推进《古兰经》的使命吗？",
+    "sub-header": "请填写此表格来分享您的兴趣，当有合适的机会时，我们会与您联系，如果上帝愿意的话。",
     "title": "社区"
   },
   "complete-sign-up": "完成您的注册",
@@ -122,9 +122,11 @@
     }
   },
   "continue": "继续",
+  "contribute-to-our-mission": "为我们的使命做出贡献",
   "copied": "已复制",
   "copied-to-clipboard": "复制到剪贴板",
   "copy": "复制",
+  "copylink": "复制链接",
   "counter": {
     "decrease": "减少",
     "increase": "增加"
@@ -134,6 +136,7 @@
   "developers": "开发者",
   "display": "展示",
   "donate": "捐",
+  "donate-now": "立即捐款",
   "donate_monthly": "每月捐款",
   "donate_once": "捐赠一次",
   "edit": "编辑",
@@ -145,6 +148,7 @@
     "resend-email-in": "在{{remainingTime}}秒内重新发送验证电子邮件...",
     "verify-code": "验证码"
   },
+  "end-year-donate": "用 Sadaqah ❤️ 结束 2024 年",
   "error": {
     "MediaVersesRangeLimitExceeded": "您一次最多只能选择{{limit}}节经文。请选择较小的范围。",
     "bookmark-sync": "书签不同步。",
@@ -155,6 +159,34 @@
     "ranges-no-value": "范围开始和结束必须具有值",
     "ranges-too-many-verses": "*最多{{maxNumberOfVerses}}个章节",
     "ranges-wrong-order": "起始诗句必须位于结束诗句之前。"
+  },
+  "errors": {
+    "account-banned": "抱歉，您的帐户已被禁止。联系 Quran.Foundation",
+    "badRequest": "*请求无效",
+    "banned": "*抱歉，您的帐户已被禁止。联系 Quran.Foundation",
+    "confirm": "*确认密码与密码不匹配",
+    "email": "*电子邮件格式无效！",
+    "exactLength": "*值的长度必须准确",
+    "expiredToken": "*此令牌已过期",
+    "forgot-password-failed": "无法发送密码重置电子邮件。请重试。",
+    "immutable": "*此值无法更改",
+    "invalid": "*此{{fieldName}}无效",
+    "invalidEmailOrPassword": "*邮箱或密码无效",
+    "max": "* {{fieldName}}必须小于或等于{{max}}位数字",
+    "min": "* {{fieldName}}必须大于或等于{{min}}位数字",
+    "name": "* {{fieldName}}只能为字母和数字",
+    "notFound": "*未找到",
+    "required": "* {{fieldName}}缺失！",
+    "reset-password-failed": "重置密码失败。请重试。",
+    "signin-failed": "登录失败。请重试。",
+    "signup-failed": "注册失败。请重试。",
+    "taken": "* {{fieldName}}已经存在！",
+    "usedToken": "*此令牌已被使用",
+    "username": "* {{fieldName}}仅接受下划线和字母",
+    "verification-code-invalid": "此验证码无效",
+    "verification-code-length": "验证码必须为{{length}}位数字",
+    "verification-failed": "验证失败。请重试。",
+    "verification-resend-failed": "重新发送验证码失败"
   },
   "exciting-updates": "令人兴奋的更新",
   "feedback": "反馈问题",
@@ -178,20 +210,25 @@
     "translation-font-size": "翻译字体大小"
   },
   "footer": {
-    "description": "Quran.com是一项持久的施舍。我们希望每个人都能轻松地阅读和学习尊贵的《古兰经》。尊贵的古兰经有很多名字，包括 Al-Quran Al-Kareem、Al-Ketab、Al-Furqan、Al-Maw'itha、Al-Thikr 和 Al-Noor。",
+    "description": "Quran.com 是一个值得信赖的平台，全球数百万人使用它来阅读、搜索、聆听和思考多种语言的《古兰经》。它提供翻译、注释、朗诵、逐字翻译和深入研究的工具，让每个人都能接触到《古兰经》。 <br/> <br/>作为 Sadaqah Jariyah，Quran.com 致力于帮助人们与《古兰经》建立深厚的联系。在 501(c)(3) 非营利组织 <link>Quran.Foundation</link> 的支持下，Quran.com 继续发展成为所有人的免费和宝贵资源，Alhamdullilah",
     "hiring": "我们正在招聘！加入古兰经基金会团队并为我们的使命做出贡献。 <link>立即申请！ </link>",
     "rights": "版权所有",
-    "title": "阅读、学习和学习《古兰经》。"
+    "title": "阅读、聆听、探索并思考《古兰经》"
   },
   "form": {
     "body": "身体",
     "code": "验证码",
+    "confirm-password": "确认密码",
     "email": "电子邮件",
     "firstName": "名",
     "lastName": "姓",
-    "title": "标题"
+    "password": "密码",
+    "title": "标题",
+    "username": "用户名",
+    "verification-code": "验证码"
   },
   "from": "从",
+  "fundraising-share-title": "分享 Quran.com 筹款活动",
   "fundraising-sticky-banner": {
     "cta": "捐",
     "title": "在最好的日子里赠送！"
@@ -200,6 +237,7 @@
     "description": "每月的捐款帮助我们改善 Quran.com 并维持运营，因此我们不再专注于筹款，而是更多地关注创造影响力。",
     "title": "成为每月捐助者"
   },
+  "get-started": "立即开始",
   "hear-it-pronounced": "点击《古兰经》单词，听发音",
   "help": "帮助",
   "hizb": "希兹布",
@@ -215,6 +253,7 @@
   "learn-more": "学到更多",
   "learning-plans": "学习计划",
   "less": "较少的",
+  "lessons": "课程",
   "loading": "加载中",
   "login": "登录",
   "logout": "登出",
@@ -248,16 +287,18 @@
   "off": "离开",
   "oldest": "最老的",
   "on": "在",
+  "our-projects": "我们的项目",
   "page": "页",
   "pages": "页面",
   "pagination-summary": "{{currentResultNumber}} - {{totalNumberOfResults}}搜索结果，共{{endOfResultNumber}}",
   "pbuh": "真主的祝福降临在他身上",
   "popular-links": "热门链接",
   "popup": {
+    "companion-title": "亲爱的《古兰经》同伴，",
     "footnote": "每月捐款让我们可以减少对筹款的关注",
     "text-1": "我们致力于为世界提供古兰经知识和技术，始终免费。",
     "text-2": "这是持续慈善 (Sadaqa Jariyah) 的绝佳机会。作为每月 (或一次性) 捐赠者，投资您的来世。",
-    "title": "在最好的日子里赠送！"
+    "title": "亲爱的《古兰经》同伴，"
   },
   "powered-by": "Powered by",
   "prepare-hearts": {
@@ -269,6 +310,7 @@
   "privacy": "隐私",
   "product-updates": "产品更新",
   "profile": "轮廓",
+  "projects-desc": "<link>Quran.Foundation</link> 拥有、管理或赞助的非营利项目",
   "q-reflect": "古兰经反射",
   "quran-com": "Quran.com",
   "quran-radio": "在线听古兰经",
@@ -277,12 +319,14 @@
     "reading": "诵读",
     "translation": "翻译"
   },
+  "ready-for-ramadan": "准备好迎接斋月了吗？",
   "recitation": "朗诵",
   "reciter": "诵读家",
   "reciter-summary": "（经 Tafsir Center 友情许可）",
   "reciters": "朗诵者",
   "reflect": "参悟",
   "reflections": "反思",
+  "reflections-and-lessons": "反思与教训",
   "remove": "消除",
   "rename": "改名",
   "retry": "重试",
@@ -292,10 +336,12 @@
   "save-to-collection": "保存到收藏",
   "search-for": "搜索 '{{searchQuery}}'",
   "search-results": "{{count}}搜索结果",
+  "search-results-no-count": "搜索结果",
   "search": {
     "filters": "过滤器",
     "hint": "尝试搜索",
     "jump-to": "跳到",
+    "more-results": "更多结果",
     "no-results": "未找到结果",
     "no-results-suggestion": "{{searchQuery}} ”的任何匹配搜索结果。尝试搜索不同的关键字。",
     "popular": "热门搜索",
@@ -336,8 +382,10 @@
     "search-juz": "按卷搜索",
     "search-page": "按页搜索",
     "search-surah": "按章搜索",
+    "search-verse": "搜索诗句",
     "try-navigating-with": "提示：尝试导航"
   },
+  "sign-in": "登入",
   "sitemap": "网站地图",
   "sort": {
     "ascending": "正序",
@@ -357,10 +405,6 @@
     "tafsir-desc": "阅读{{tafsirName}}以了解 Surah {{surahName} {{verseNumber}}的{{surahName}}",
     "tafsirs-desc": "阅读由值得信赖的 Tafsir 学者撰写的各种 Ayah {{ayahNumber}} of Surah {{surahName}}的 Tafsirs",
     "title": "经注"
-  },
-  "tarteel": {
-    "app": "Tarteel 应用程序",
-    "name": "Tarteel.ai"
   },
   "terms-and-conditions": "条款和条件",
   "theme": "主题",
@@ -392,17 +436,22 @@
   "verse": "节",
   "verse-bookmark-removed": "已删除节文书签！",
   "verse-bookmarked": "已添加节文书签！",
+  "verse-copied": "诗句已复制到剪贴板！",
   "verses": "节",
   "view": "看法",
   "voice": {
     "ask-permission": "请启用麦克风权限以开始使用语音搜索",
-    "error": "发生错误，请稍后重试。或下载",
-    "no-permission": "您似乎没有启用麦克风权限。请启用麦克风权限并重试或下载",
-    "not-supported": "您的浏览器似乎不支持麦克风。请尝试不同的浏览器或下载",
+    "error": "发生错误，请稍后重试。",
+    "language-unavailable": "您的浏览器不支持阿拉伯语。",
+    "network": "网络错误。请检查您的互联网连接并重试。",
+    "no-microphone": "未检测到麦克风。请连接麦克风并重试。",
+    "no-permission": "您似乎未启用麦克风权限。请启用麦克风权限，然后重试。",
+    "no-speech": "未检测到语音。请尝试重说。",
+    "not-supported": "您的浏览器似乎不支持麦克风。请尝试使用其他浏览器。",
     "suggest": "请开始诵读，经文就会显示",
     "suggest-subtitle": "用阿拉伯语背诵任何一节经文，这节经文就会出现",
     "suggest-title": "现在背诵",
-    "voice-search-powered-by": "语音搜索 技术支持单位"
+    "voice-search-powered-by": "语音搜索由"
   },
   "wbw": "在单词下方显示其译文",
   "wbw-lang-summary": "逐字翻译来源： <link> {{source}} </link> 。此来源独立于诗歌翻译选择。",

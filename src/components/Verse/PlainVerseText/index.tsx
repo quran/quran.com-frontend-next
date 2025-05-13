@@ -3,6 +3,7 @@ import React from 'react';
 import classNames from 'classnames';
 import { shallowEqual, useSelector } from 'react-redux';
 
+import SeoTextForVerse from '../SeoTextForVerse';
 import TajweedFontPalettes from '../TajweedFontPalettes';
 import styles from '../VerseText.module.scss';
 
@@ -12,6 +13,7 @@ import useIsFontLoaded from '@/components/QuranReader/hooks/useIsFontLoaded';
 import GlyphWord from '@/dls/QuranWord/GlyphWord';
 import TextWord from '@/dls/QuranWord/TextWord';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
+import { QuranFont } from '@/types/QuranReader';
 import { getFontClassName, isQCFFont } from '@/utils/fontFaceHelper';
 import Word from 'types/Word';
 
@@ -20,6 +22,7 @@ type Props = {
   shouldShowWordByWordTranslation?: boolean;
   shouldShowWordByWordTransliteration?: boolean;
   fontScale?: number;
+  quranFont?: QuranFont;
 };
 
 /**
@@ -35,16 +38,20 @@ const PlainVerseText: React.FC<Props> = ({
   shouldShowWordByWordTranslation = false,
   shouldShowWordByWordTransliteration = false,
   fontScale,
+  quranFont: quranFontFromProps,
 }: Props): JSX.Element => {
-  const { quranFont, quranTextFontScale, mushafLines } = useSelector(
-    selectQuranReaderStyles,
-    shallowEqual,
-  );
+  const {
+    quranFont: quranFontFromStore,
+    quranTextFontScale,
+    mushafLines,
+  } = useSelector(selectQuranReaderStyles, shallowEqual);
+  const quranFont = quranFontFromProps || quranFontFromStore;
   const isQcfFont = isQCFFont(quranFont);
   const { pageNumber } = words[0];
   const isFontLoaded = useIsFontLoaded(pageNumber, quranFont);
   return (
     <>
+      <SeoTextForVerse words={words} />
       <TajweedFontPalettes pageNumber={pageNumber} quranFont={quranFont} />
       <div
         className={classNames(

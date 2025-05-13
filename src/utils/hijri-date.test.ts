@@ -7,52 +7,52 @@ import { getCurrentQuranicCalendarWeek } from './hijri-date';
 
 describe('consolidateWordByWordState', () => {
   it('detects successfully', () => {
-    // 2024-04-12
-    const hijriDate = umalqura(1445, 10, 3);
+    // 2025-04-03 (falls within first week)
+    const hijriDate = umalqura(1446, 10, 3);
     const actual = getCurrentQuranicCalendarWeek(hijriDate);
 
-    expect(actual).toEqual(1);
+    expect(actual).toEqual(0);
   });
   it('detects successfully', () => {
-    // 2024-04-27
-    const hijriDate = umalqura(1445, 10, 18);
+    // 2025-04-15
+    const hijriDate = umalqura(1446, 10, 15);
     const actual = getCurrentQuranicCalendarWeek(hijriDate);
 
-    expect(actual).toEqual(3);
+    expect(actual).toEqual(2);
   });
   it('detects successfully', () => {
-    // 2024-05-24
-    const hijriDate = umalqura(1445, 11, 16);
+    // 2025-05-13
+    const hijriDate = umalqura(1446, 11, 13);
     const actual = getCurrentQuranicCalendarWeek(hijriDate);
 
-    expect(actual).toEqual(7);
+    expect(actual).toEqual(6);
   });
   it('detects successfully', () => {
-    // 2025-01-11
-    const hijriDate = umalqura(1446, 7, 11);
+    // 2025-12-30
+    const hijriDate = umalqura(1447, 6, 30);
     const actual = getCurrentQuranicCalendarWeek(hijriDate);
 
-    expect(actual).toEqual(40);
+    expect(actual).toEqual(37);
   });
   it('detects successfully', () => {
-    // 2024-07-06
-    const hijriDate = umalqura(1445, 12, 30);
+    // 2025-06-24
+    const hijriDate = umalqura(1446, 12, 24);
     const actual = getCurrentQuranicCalendarWeek(hijriDate);
 
-    expect(actual).toEqual(13);
+    expect(actual).toEqual(11);
   });
   it('detects successfully', () => {
-    // 2024-10-17
-    const hijriDate = umalqura(1446, 4, 14);
+    // 2025-09-30
+    const hijriDate = umalqura(1447, 3, 30);
     const actual = getCurrentQuranicCalendarWeek(hijriDate);
 
-    expect(actual).toEqual(27);
+    expect(actual).toEqual(24);
   });
   it('detects successfully', () => {
-    // 2024-10-18
-    const hijriDate = umalqura(1446, 4, 15);
+    // 2025-10-07
+    const hijriDate = umalqura(1447, 4, 7);
     const actual = getCurrentQuranicCalendarWeek(hijriDate);
 
-    expect(actual).toEqual(28);
+    expect(actual).toEqual(25);
   });
 });

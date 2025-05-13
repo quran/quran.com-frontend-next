@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 /* eslint-disable jsx-a11y/anchor-has-content */
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import Image from 'next/image';
@@ -8,8 +9,7 @@ import styles from './contentPage.module.scss';
 
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import PageContainer from '@/components/PageContainer';
-import Link from '@/dls/Link/Link';
-import { logTarteelLinkClick } from '@/utils/eventLogger';
+import Link, { LinkVariant } from '@/dls/Link/Link';
 import { getBlurDataUrl } from '@/utils/image';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl } from '@/utils/navigation';
@@ -17,10 +17,6 @@ import { getCanonicalUrl } from '@/utils/navigation';
 const path = '/about-us';
 const AboutUsPage = () => {
   const { t, lang } = useTranslation('about');
-
-  const onTarteelLinkClicked = () => {
-    logTarteelLinkClick('about_us_page');
-  };
 
   return (
     <>
@@ -33,14 +29,39 @@ const AboutUsPage = () => {
         <div className={styles.contentPage}>
           <h1>{t('common:about')}</h1>
           <p>
+            <Trans i18nKey="about:main-description" />
+          </p>
+
+          <h2 className={styles.heading}>{t('our-mission.title')}</h2>
+          <p>{t('our-mission.desc')}</p>
+
+          <h2 className={styles.heading}>{t('key-features.title')}</h2>
+          <p>{t('key-features.desc')}</p>
+          <ul className={styles.list}>
+            {Array.isArray(t('key-features.features', {}, { returnObjects: true }))
+              ? (t('key-features.features', {}, { returnObjects: true }) as string[]).map(
+                  (feature, index) => (
+                    // eslint-disable-next-line react/no-array-index-key
+                    <li key={`feature-${index}`}>{feature}</li>
+                  ),
+                )
+              : null}
+          </ul>
+
+          <h2 className={styles.heading}>{t('who-we-are.title')}</h2>
+          <p>
             <Trans
-              i18nKey="about:main-description"
-              components={[
-                <Link key={0} href="https://tarteel.ai" isNewTab onClick={onTarteelLinkClicked} />,
-              ]}
+              i18nKey="about:who-we-are.desc"
+              components={{
+                link: <Link href="https://quran.foundation" variant={LinkVariant.Blend} isNewTab />,
+              }}
             />
           </p>
-          <p className={styles.heading}>{t('credits.title')}</p>
+
+          <h2 className={styles.heading}>{t('global-effort.title')}</h2>
+          <p>{t('global-effort.desc')}</p>
+
+          <h2 className={styles.heading}>{t('credits.title')}</h2>
           <p>{t('credits.desc')}</p>
           <ul className={styles.list}>
             <li>
@@ -100,6 +121,14 @@ const AboutUsPage = () => {
             </li>
             <li>
               <Trans
+                i18nKey="about:credits.tarteel"
+                components={[
+                  <a key={0} target="_blank" href="https://tarteel.ai/" rel="noreferrer" />,
+                ]}
+              />
+            </li>
+            <li>
+              <Trans
                 i18nKey="about:credits.lokalize"
                 components={[
                   <a key={0} target="_blank" href="https://lokalise.com/" rel="noreferrer" />,
@@ -116,32 +145,6 @@ const AboutUsPage = () => {
                   alt="Lokalise"
                 />
               </div>
-            </li>
-            <li>
-              <Trans
-                i18nKey="about:credits.vercel"
-                components={[
-                  <a
-                    key={0}
-                    target="_blank"
-                    href="https://vercel.com/?utm_source=quran-pro&utm_campaign=oss"
-                    rel="noreferrer"
-                  />,
-                ]}
-              />
-              <Link href="https://vercel.com/?utm_source=quran-pro&utm_campaign=oss" isNewTab>
-                <div className={styles.image}>
-                  <Image
-                    src="/images/powered-by-vercel.svg"
-                    layout="fixed"
-                    width={150}
-                    height={70}
-                    placeholder="blur"
-                    blurDataURL={getBlurDataUrl(300, 70)}
-                    alt="Vercel"
-                  />
-                </div>
-              </Link>
             </li>
           </ul>
         </div>

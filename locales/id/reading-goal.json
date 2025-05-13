@@ -7,6 +7,7 @@
   "create-plan": "Buat rencana",
   "create-reading-goal": "Buat Sasaran",
   "daily-progress": "Kemajuan Harian",
+  "daily-progress-completed": "Selesai! 🎉",
   "daily": {
     "description": "Sasaran Anda akan disetel ulang setiap hari",
     "title": "Sasaran harian"
@@ -40,6 +41,7 @@
     "description": "Apakah sasaran Anda akan diatur ulang setiap hari atau setiap beberapa hari? Jangan khawatir, kami akan melacak kemajuan Anda terlepas dari frekuensi yang Anda pilih.",
     "title": "Pilih frekuensi untuk sasaran Anda"
   },
+  "goal-completed": "Sasaran tercapai! 🎉 ",
   "goal-done": {
     "description": "Bacaan tambahan apa pun akan tetap direkam",
     "title": "Anda mencapai sasaran hari ini"
@@ -81,12 +83,16 @@
     "time-goal": "baca Al-Qur'an {{time}}"
   },
   "reading-goal": "Sasaran Membaca",
+  "reading-goal-description": "Apakah Anda merasa sulit untuk tetap konsisten dengan tujuan membaca Al-Quran Anda? <br/> <br/> Quran Growth Journey adalah fitur dinamis yang dikembangkan untuk membantu Anda tetap konsisten dalam perjalanan Anda dengan Al-Quran. Apakah Anda ingin membaca 10 menit sehari, menyelesaikan satu Juz dalam sebulan, atau menyelesaikan seluruh Al-Quran dalam setahun, dsb., Quran.com kini dapat membantu Anda menetapkan tujuan khusus dan melacak laju bacaan harian Anda, sambil menyesuaikannya saat Anda membuat kemajuan. Aplikasi ini sepenuhnya gratis untuk digunakan dan kami harap ini akan membantu Anda tetap termotivasi untuk mencapai tujuan Anda!",
   "reading-goal-label": "Anda berada di",
+  "reading-goal-title": "Memperkenalkan Perjalanan Pertumbuhan Al-Quran",
   "recommended": "Direkomendasikan",
   "remaining": "Sisa untuk hari ini",
+  "remaining-base": "Tersisa",
   "remaining-days": {
     "other": "{{days}} hari tersisa"
   },
+  "set-a-new-goal": "Tetapkan Tujuan baru",
   "set-reading-goal-success": "Sasaran membaca Anda berhasil ditetapkan.",
   "start-journey": "Awali perjalanan Anda!",
   "start-reading": "Mulai Membaca",

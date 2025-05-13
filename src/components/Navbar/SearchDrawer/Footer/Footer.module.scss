@@ -1,8 +1,10 @@
+@use "src/styles/breakpoints";
+
 .container {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  font-size: var(--font-size-xsmall-dangerous);
+  @include breakpoints.tablet {
+    padding-block-end: var(--spacing-mega);
+  }
+  padding-block-end: calc(4 * var(--spacing-mega));
 }
 
 .betaContainer {

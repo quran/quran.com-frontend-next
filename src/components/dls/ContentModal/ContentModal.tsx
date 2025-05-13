@@ -26,10 +26,13 @@ type ContentModalProps = {
   hasHeader?: boolean;
   header?: React.ReactNode;
   innerRef?: ForwardedRef<ContentModalHandles>;
-  // using innerRef instead of using function forwardRef so we can dynamically load this component https://github.com/vercel/next.js/issues/4957#issuecomment-413841689
+  onClick?: (e: React.MouseEvent) => void;
   contentClassName?: string;
+  closeIconClassName?: string;
+  headerClassName?: string;
   size?: ContentModalSize;
   isFixedHeight?: boolean;
+  shouldBeFullScreen?: boolean;
 };
 
 const SCROLLBAR_WIDTH = 15;
@@ -43,9 +46,13 @@ const ContentModal = ({
   header,
   innerRef,
   contentClassName,
+  closeIconClassName,
+  headerClassName,
   size = ContentModalSize.MEDIUM,
   isFixedHeight,
   hasHeader = true,
+  onClick,
+  shouldBeFullScreen = false,
 }: ContentModalProps) => {
   const overlayRef = useRef<HTMLDivElement>();
   const { locale } = useRouter();
@@ -87,8 +94,12 @@ const ContentModal = ({
   return (
     <Dialog.Root open={isOpen}>
       <Dialog.Portal>
-        <Dialog.Overlay className={styles.overlay} ref={overlayRef}>
+        <Dialog.Overlay
+          className={classNames(styles.overlay, { [styles.fullScreen]: shouldBeFullScreen })}
+          ref={overlayRef}
+        >
           <Dialog.Content
+            {...(onClick && { onClick })}
             className={classNames(styles.contentWrapper, {
               [contentClassName]: contentClassName,
               [styles.small]: size === ContentModalSize.SMALL,
@@ -99,9 +110,9 @@ const ContentModal = ({
             onPointerDownOutside={onPointerDownOutside}
           >
             {hasHeader && (
-              <div className={styles.header}>
+              <div className={classNames(styles.header, headerClassName)}>
                 {hasCloseButton && (
-                  <Dialog.Close className={styles.closeIcon}>
+                  <Dialog.Close className={classNames(styles.closeIcon, closeIconClassName)}>
                     <Button
                       variant={ButtonVariant.Ghost}
                       shape={ButtonShape.Circle}

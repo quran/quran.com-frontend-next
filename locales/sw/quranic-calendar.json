@@ -1,0 +1,116 @@
+{
+  "additional-resources": "Rasilimali za Ziada",
+  "additional-resources-subtitle": "Nyenzo hizi za ziada zitakusaidia kupata muunganisho wa kina na Aya ambazo umesoma.",
+  "complete": "Kamilisha",
+  "completed-weeks": "{{completedWeeks}} / {{totalWeeks}} Zimekamilika",
+  "divine-book-club": "Klabu ya Vitabu vya Kimungu",
+  "divine-book-club-description": "Haya ni majadiliano mepesi ya kikundi ambayo hukusaidia kufuata muktadha wa usomaji wa kila wiki.",
+  "end-of-calendar": "Mwisho wa Kalenda",
+  "english-pdf": "Kiingereza PDF",
+  "faq": "Maswali Yanayoulizwa Mara Kwa Mara",
+  "faq-items": [
+    {
+      "answer": "Kurani katika Mwaka ni mpango rahisi na uliopangwa wa kusoma ili kukusaidia kukamilisha Kurani nzima katika mwaka mmoja-kutoka mwisho wa Ramadhani moja hadi mwanzoni mwa ujao. Lengo ni kupata ufahamu wa kimsingi wa Quran kuanzia mwanzo hadi mwisho bila kuhisi shinikizo au kulemewa.",
+      "question": "\"Quran ndani ya Mwaka\" ni nini?"
+    },
+    {
+      "answer": "Unaalikwa kutenga muda kila wiki kusoma kurasa chache tu za Kurani katika lugha unayoelewa. Kuna masomo 46 kwa jumla, moja kwa kila wiki katika kalenda ya Kiislamu kutoka Shawwal hadi Sha'ban. Mgawanyiko huu wa Quran unakamilisha migawanyiko mingine, kama vile sehemu 30 maarufu ambazo hurahisisha usomaji wa Kurani katika mwezi mmoja.",
+      "question": "Je, programu inafanya kazi vipi?"
+    },
+    {
+      "answer": "Sivyo kabisa. Mahali pa kuanzia katika programu hii ni kujihusisha na maana za Kurani kupitia lugha (tafsiri) yoyote unayoistarehesha. Quran.com inatoa tafsiri katika lugha nyingi ili kufanya hili lipatikane kwa kila mtu. Tunalenga kuwatia moyo washiriki kuendelea kujiweka sawa mwaka hadi mwaka.",
+      "question": "Je, ninahitaji kujua jinsi ya kusoma Kiarabu ili kushiriki?"
+    },
+    {
+      "answer": "Kila wiki, kazi iliyosasishwa ya kusoma itapatikana kwenye Quran.com/calendar. Unaweza kusoma moja kwa moja kwenye Quran.com, ambapo kiungo maalum kitakupeleka moja kwa moja kwenye usomaji wa msingi wa wiki. \\n \\n Unaweza pia kufungua PDF ya Kiingereza, na kuichapisha nyumbani. Hii ina tafsiri inayotiririka iliyochukuliwa hasa kutoka kwa kazi ya MAS Abdel Haleem. Hati ya kila juma imegawanywa katika sehemu saba, na hivyo kurahisisha kueneza usomaji kwa wiki ukipenda. Kuna utangulizi mfupi wa surah, vichwa na maelezo ili kufafanua baadhi ya mambo muhimu, na kila sehemu ya kila siku ina swali la kutafakari na hatua iliyopendekezwa.",
+      "question": "Je, ninapata wapi migawo ya kusoma kila juma?"
+    },
+    {
+      "answer": "Una chaguo nyingi ili uendelee kufuata mkondo. Tunapendekeza sana kujisajili ili kupokea barua pepe zilizo na kazi za kusoma za kila wiki zilizoambatishwa. Pia tumeunda chaneli za jamii kwenye Telegraph na WhatsApp ambazo zitakuwa na vikumbusho na kutia moyo. Bofya tu vitufe unavyopenda kwenye Quran.com/calendar ili kujisajili. Unaweza kuchagua zote tatu ikiwa unataka.",
+      "question": "Ninawezaje kupokea vikumbusho vya kusoma kila wiki?"
+    },
+    {
+      "answer": "Kwenye Quran.com, nenda kwenye menyu ya mipangilio ili: \\n • Kurekebisha ukubwa wa fonti na mitindo \\n • Badilisha kati ya hali ya mwanga, giza na mseto \\n • Chagua kutoka kwa tafsiri nyingi zinazopatikana \\n \\n Hii hurahisisha mtu yeyote kushiriki katika lugha anayoelewa vyema, na kwa tafsiri iliyo wazi na ya kuarifu.",
+      "question": "Ninawezaje kubinafsisha uzoefu wangu wa kusoma?"
+    },
+    {
+      "answer": "Tunakuhimiza kuvinjari QuranReflect.com kwa tafakari za watu wengine juu ya vifungu vinavyosomwa kila wiki, na mara tu unahisi kuwa tayari, chapishe ili kushiriki mawazo yako mwenyewe! \\n \\n Pia hakikisha kuwa umeangalia podikasti ya The Divine Book Club: mjadala wa maarifa unaoongozwa na mwanachuoni unaofuata ratiba hii. Ni saa moja tu kila wiki, na hutoa muktadha wa kusaidia sana.",
+      "question": "Je, unatoa rasilimali gani za ziada?"
+    },
+    {
+      "answer": "Hakuna tatizo. Endelea tu katika usomaji wa wiki ya sasa—hakuna haja ya kuendelea na wiki ambazo hazikufanyika. Kukaa thabiti na kuzingatia kusonga mbele. Kuna kila wakati mwaka ujao wa kuchukua chochote ambacho umekosa.",
+      "question": "Je, ikiwa nitarudi nyuma au kujiunga nimechelewa?"
+    },
+    {
+      "answer": "Njia bora ya kukaa thabiti ni kusoma na wengine. Tunakuhimiza uanzishe klabu ya vitabu vya kibinafsi—pamoja na familia, marafiki, au hata mtandaoni. Kutana kila wiki, jadili ulichosoma, na tusaidiane katika safari hii.",
+      "question": "Ninawezaje kufaidika zaidi na safari hii?"
+    },
+    {
+      "answer": "Tunapanga kukuza hatua zinazofuata na viwango vya juu. Katika mwaka huu, tunawaalika watu wengi iwezekanavyo kuanza kwa kuiweka rahisi: kusoma Kurani kamili kwa ufahamu wa kimsingi. Ukishafanya hivi, utajihisi uko tayari kusoma tena na kuingia ndani zaidi!",
+      "question": "Je, kutakuwa na chaguzi za kina zaidi za kusoma baadaye?"
+    },
+    {
+      "answer": "Ndiyo. \"Quran Katika Mwaka\" ni bure kabisa, na tunakuhimiza kuishiriki na wengine. Alika rafiki, anzisha klabu ya vitabu, na uwasaidie watu zaidi kukamilisha usomaji wao kamili wa kwanza wa Kurani.",
+      "question": "Je, hii ni bure? Je, ninaweza kuishiriki?"
+    }
+  ],
+  "hero": {
+    "description": "Ratiba iliyoundwa kwa uangalifu ambayo hukurahisishia kusoma na kuelewa Kurani nzima kutoka Ramadhani moja hadi nyingine, kwa kasi thabiti na inayoweza kudhibitiwa.",
+    "line-1": "The Global Quranic Calendar ni ratiba ya usomaji iliyoundwa ili kuhimiza usomaji kwa hali kutafakari Qur'ani nzima, kutoka mwisho wa Ramadhani moja hadi mwanzo wa Ramadhani inayofuata. Tunakuhimiza uchukue muda kuelewa na kutafakari aya ili uweze kupata mawasiliano wa kina, na wa dhati zaidi na Qur'ani."
+  },
+  "interact-with-post": "Wasiliana na chapisho hili kwenye QuranReflect",
+  "islamic-months": {
+    "1": "Muharram",
+    "2": "Safar",
+    "3": "Rabi' al-Awwal",
+    "4": "Rabi' al-Thani",
+    "5": "Jumada al-Awwal",
+    "6": "Jumada al-Thani",
+    "7": "Rajab",
+    "8": "Sha'ban",
+    "9": "Ramadhani",
+    "10": "Shawwal",
+    "11": "Dhu al-Qi'dah",
+    "12": "Dhu al-Hijjah"
+  },
+  "join-qc": {
+    "line-1": "Tuko katika <highlight> Wiki {{weekNumber}} </highlight> ya Quranic Calendar.",
+    "line-2": "<normal> Jiunge nasi kwa usomaji wa wiki hii hata ikiwa ni mara yako ya kwanza! </normal>"
+  },
+  "join-quranic-calendar": "Jisajili ili upate sasisho na nyenzo mbalimbali kupitia QuranReflect",
+  "join-quranic-calendar-success": "Umefanikiwa kujiunga na Divine Book Club!",
+  "join-telegram": "Jiunge na Telegraph yetu",
+  "join-telegram-mobile": "Telegramu",
+  "join-whatsapp": "Jiunge na Whatsapp yetu",
+  "join-whatsapp-mobile": "Whatsapp",
+  "mark-as-completed": "Weka alama kuwa Umekamilika",
+  "marked-as-completed": "Wiki hii imetiwa alama kuwa imekamilika!",
+  "month": "Mwezi",
+  "my-progress": "Maendeleo Yangu",
+  "progress-subtitle": "Jisikie huru kurudi na kukamilisha wiki ambazo umekosa!",
+  "quran-calendar-description": "Mpango wa usomaji uliopangwa wa kukamilisha Kurani katika mwaka mmoja. Jenga uthabiti, ongeza uelewa wako, na uendelee kufuata mkondo—bila kuhisi kulemewa.",
+  "quran-calendar-title": "Quran Katika Mwaka - Mpango Rahisi wa Kusoma na Kuelewa Kurani Nzima",
+  "quran-reflect": "QuranTafakari",
+  "quran-reflect-description": "Shirikiana na wengine kuhusiana na Aya ulizosoma wiki hii.",
+  "quranic-calendar": "The Global Quranic Calendar",
+  "ramadan": "Ramadhani",
+  "read-online": "Soma Mtandaoni",
+  "read-this-weeks-verses": "Soma Mistari ya Wiki hii",
+  "reading-options": {
+    "default-settings": "Soma na mipangilio yangu chaguomsingi",
+    "en-and-ar": "Soma kwa Kiingereza na Kiarabu",
+    "en-only": "Soma kwa Kiingereza pekee"
+  },
+  "reflection-prompts": "💭 TAFAKARI vidokezo kutoka kwa usomaji wa wiki hii <span> (Pakua PDF ili kuona zaidi) </span> :",
+  "share-reflections": "Shiriki Tafakari zako",
+  "start-tracking": "Anza kufuatilia",
+  "supplemental-resources": "Maelezo ya ziada",
+  "today": "Tarehe ya leo ni: <highlight> {{month}} {{day}} {{year}}, {{gregorianDate}} </highlight>",
+  "verse": "Aya",
+  "verses-subtitle": "Unahimizwa kuzingatia kuelewa maana za kimsingi, kwa hivyo chagua lugha inayokufaa.",
+  "watch-episode": "Tazama Kipindi cha {{weekNumber}}",
+  "week": "Wiki",
+  "week-completed": "Imekamilika",
+  "week-title": "Wiki {{weekNumber}} ( {{month}} ) inayojumuisha aya {{rangeStart}} hadi {{rangeEnd}}",
+  "weekly-verses-help-description-1": "PDF hii ina tafsiri inayotiririka iliyochukuliwa hasa kutoka kwa kazi ya MAS Abdel Haleem. Hati ya kila juma imegawanywa katika sehemu saba, na hivyo kurahisisha kueneza usomaji kwa wiki ukipenda. Kuna utangulizi mfupi wa surah, vichwa na maelezo ili kufafanua baadhi ya mambo muhimu, na kila sehemu ya kila siku ina swali la kutafakari na hatua iliyopendekezwa."
+}

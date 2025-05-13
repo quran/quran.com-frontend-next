@@ -15,7 +15,7 @@ import { getCanonicalUrl, getNotificationSettingsNavigationUrl } from '@/utils/n
 const NotificationSettingsPage = () => {
   const { t, lang } = useTranslation('common');
   const navigationUrl = getNotificationSettingsNavigationUrl();
-  const isProduction = process.env.NEXT_PUBLIC_VERCEL_ENV === 'production';
+  const isNotificationsEnabled = process.env.NEXT_PUBLIC_ENABLE_NOTIFICATIONS === 'true';
 
   return (
     <>
@@ -29,7 +29,7 @@ const NotificationSettingsPage = () => {
       <div className={layoutStyles.pageContainer}>
         <div className={layoutStyles.flow}>
           <div className={layoutStyles.flowItem}>
-            {isProduction ? (
+            {isNotificationsEnabled ? (
               <NotificationsProvider>
                 <NotificationSettingsTabs />
               </NotificationsProvider>

@@ -86,7 +86,7 @@
   margin-block-end: var(--spacing-medium);
   width: 50%;
   @include breakpoints.tablet {
-    width: auto;
+    width: 26%;
   }
 }
 
@@ -177,4 +177,11 @@
   padding: var(--spacing-small);
   margin-block: var(--spacing-small);
   border-radius: var(--border-radius-default);
+}
+
+.groupDescription {
+  opacity: var(--opacity-75);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-small);
+  margin-top: var(--spacing-xsmall);
 }

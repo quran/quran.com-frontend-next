@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import { useContext, useEffect, useMemo, useState } from 'react';
 
 import classNames from 'classnames';
@@ -40,7 +41,19 @@ const filterSurah = (surahs: Chapter[], searchQuery: string) => {
   return filteredSurah as Chapter[];
 };
 
-const SurahList = () => {
+type Props = {
+  onAfterNavigationItemRouted?: () => void;
+  customChapterSelectHandler?: (chapterId: string) => void;
+  shouldDisableNavigation?: boolean;
+  selectedChapterId?: string;
+};
+
+const SurahList: React.FC<Props> = ({
+  onAfterNavigationItemRouted,
+  customChapterSelectHandler,
+  shouldDisableNavigation = false,
+  selectedChapterId: externalSelectedChapterId,
+}) => {
   const { t, lang } = useTranslation('common');
   const lastReadVerseKey = useSelector(selectLastReadVerseKey);
   const isReadingByRevelationOrder = useSelector(selectIsReadingByRevelationOrder);
@@ -50,16 +63,22 @@ const SurahList = () => {
   const chapterIds = useChapterIdsByUrlPath(lang);
   const urlChapterId = chapterIds && chapterIds.length > 0 ? chapterIds[0] : null;
 
-  const [currentChapterId, setCurrentChapterId] = useState(urlChapterId);
+  // Use external selectedChapterId if provided, otherwise use internal state
+  const [internalCurrentChapterId, setInternalCurrentChapterId] = useState(urlChapterId);
+  const currentChapterId = externalSelectedChapterId || internalCurrentChapterId;
 
   useEffect(() => {
-    setCurrentChapterId(lastReadVerseKey.chapterId);
-  }, [lastReadVerseKey]);
+    if (!externalSelectedChapterId) {
+      setInternalCurrentChapterId(lastReadVerseKey.chapterId);
+    }
+  }, [lastReadVerseKey, externalSelectedChapterId]);
 
   useEffect(() => {
-    // when the user navigates to a new chapter, the current chapter id
-    setCurrentChapterId(urlChapterId);
-  }, [urlChapterId]);
+    // when the user navigates to a new chapter, update the current chapter id
+    if (!externalSelectedChapterId) {
+      setInternalCurrentChapterId(urlChapterId);
+    }
+  }, [urlChapterId, externalSelectedChapterId]);
 
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -99,13 +118,35 @@ const SurahList = () => {
     scrollTo();
   }, [currentChapterId, scrollTo]);
 
+  const navigateAndHandleAfterNavigation = (href: string) => {
+    router.push(href).then(() => {
+      if (onAfterNavigationItemRouted) {
+        onAfterNavigationItemRouted();
+      }
+    });
+  };
+
   // Handle when user press `Enter` in input box
   const handleSurahInputSubmit = (e) => {
     e.preventDefault();
     const firstFilteredChapter = filteredChapters[0];
     if (firstFilteredChapter) {
-      router.push(getSurahNavigationUrl(firstFilteredChapter.id));
+      const href = getSurahNavigationUrl(firstFilteredChapter.id);
+      navigateAndHandleAfterNavigation(href);
     }
+  };
+
+  const handleChapterClick = (e: React.MouseEvent, href: string, chapterId: string) => {
+    e.preventDefault();
+
+    // If we have a custom handler and navigation is disabled, use the custom handler
+    if (customChapterSelectHandler && shouldDisableNavigation) {
+      customChapterSelectHandler(chapterId);
+      return;
+    }
+
+    // Otherwise use the default navigation behavior
+    navigateAndHandleAfterNavigation(href);
   };
 
   return (
@@ -120,19 +161,27 @@ const SurahList = () => {
       </form>
       <div className={styles.listContainer}>
         <div className={styles.list}>
-          {filteredChapters.map((chapter) => (
-            <Link key={chapter.id} href={getSurahNavigationUrl(chapter.id)} shouldPrefetch={false}>
-              <div
-                ref={chapter.id.toString() === currentChapterId ? selectedChapterRef : null}
-                className={classNames(styles.listItem, {
-                  [styles.selectedItem]: chapter.id.toString() === currentChapterId,
-                })}
+          {filteredChapters.map((chapter) => {
+            const href = getSurahNavigationUrl(chapter.id);
+            return (
+              <Link
+                key={chapter.id}
+                href={href}
+                shouldPrefetch={false}
+                onClick={(e) => handleChapterClick(e, href, chapter.id.toString())}
               >
-                <span className={styles.chapterNumber}>{chapter.localizedId}</span>
-                <span>{chapter.transliteratedName}</span>
-              </div>
-            </Link>
-          ))}
+                <div
+                  ref={chapter.id.toString() === currentChapterId ? selectedChapterRef : null}
+                  className={classNames(styles.listItem, {
+                    [styles.selectedItem]: chapter.id.toString() === currentChapterId,
+                  })}
+                >
+                  <span className={styles.chapterNumber}>{chapter.localizedId}</span>
+                  <span translate="no">{chapter.transliteratedName}</span>
+                </div>
+              </Link>
+            );
+          })}
         </div>
       </div>
     </div>

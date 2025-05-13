@@ -1,0 +1,11 @@
+.container {
+    > div {
+        margin-block-end: var(--spacing-small);
+    }
+}
+
+.loadMoreContainer {
+    display: flex;
+    justify-content: center;
+    padding: var(--spacing-medium);
+}

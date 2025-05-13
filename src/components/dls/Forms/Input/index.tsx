@@ -7,6 +7,7 @@ import React, {
   RefObject,
   KeyboardEvent,
   HTMLAttributes,
+  InputHTMLAttributes,
 } from 'react';
 
 import classNames from 'classnames';
@@ -14,6 +15,7 @@ import classNames from 'classnames';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '../../Button/Button';
 
 import styles from './Input.module.scss';
+import InputSuffix from './Suffix';
 
 import ClearIcon from '@/icons/close.svg';
 
@@ -45,8 +47,10 @@ interface Props {
   suffix?: ReactNode;
   onClearClicked?: () => void;
   onChange?: (value: string) => void;
+  onClick?: () => void;
   onKeyDown?: (event: KeyboardEvent<HTMLInputElement>) => void;
   inputMode?: HTMLAttributes<HTMLInputElement>['inputMode'];
+  enterKeyHint?: InputHTMLAttributes<HTMLInputElement>['enterKeyHint'];
   value?: string;
   label?: string | JSX.Element;
   type?: InputType;
@@ -56,6 +60,8 @@ interface Props {
   htmlType?: React.HTMLInputTypeAttribute;
   isRequired?: boolean;
   inputRef?: RefObject<HTMLInputElement>;
+  prefixSuffixContainerClassName?: string;
+  shouldUseDefaultStyles?: boolean;
 }
 
 const Input: React.FC<Props> = ({
@@ -74,13 +80,17 @@ const Input: React.FC<Props> = ({
   onClearClicked,
   onChange,
   onKeyDown,
+  onClick,
   inputMode,
+  enterKeyHint,
   value = '',
   shouldFlipOnRTL = true,
   containerClassName,
+  prefixSuffixContainerClassName,
   htmlType,
   isRequired,
   inputRef,
+  shouldUseDefaultStyles = true,
 }) => {
   const [inputValue, setInputValue] = useState(value);
   // listen to any change in value in-case the value gets populated after and API call.
@@ -96,6 +106,25 @@ const Input: React.FC<Props> = ({
     }
   };
 
+  const handleClick = () => {
+    if (onClick) {
+      onClick();
+    }
+  };
+
+  // eslint-disable-next-line react/no-multi-comp
+  const Suffix = () => (
+    <>
+      {suffix && (
+        <InputSuffix
+          suffix={suffix}
+          suffixContainerClassName={styles.prefixSuffixContainer}
+          shouldUseDefaultStyles={shouldUseDefaultStyles}
+        />
+      )}
+    </>
+  );
+
   return (
     <>
       {label && <p className={styles.label}>{label}</p>}
@@ -105,7 +134,6 @@ const Input: React.FC<Props> = ({
           [styles.mediumContainer]: size === InputSize.Medium,
           [styles.largeContainer]: size === InputSize.Large,
           [styles.fixedWidth]: fixedWidth,
-          [styles.disabled]: disabled,
           [styles.error]: type === InputType.Error,
           [styles.success]: type === InputType.Success,
           [styles.warning]: type === InputType.Warning,
@@ -113,14 +141,24 @@ const Input: React.FC<Props> = ({
         })}
       >
         {prefix && (
-          <div className={classNames(styles.prefix, styles.prefixSuffixContainer)}>{prefix}</div>
+          <div
+            className={classNames(
+              styles.prefix,
+              styles.prefixSuffixContainer,
+              prefixSuffixContainerClassName,
+            )}
+          >
+            {prefix}
+          </div>
         )}
         <input
+          onClick={handleClick}
           className={classNames(styles.input, {
             [styles.error]: type === InputType.Error,
             [styles.success]: type === InputType.Success,
             [styles.warning]: type === InputType.Warning,
             [styles.rtlInput]: shouldFlipOnRTL,
+            [styles.disabled]: disabled,
           })}
           type={htmlType}
           required={isRequired}
@@ -132,12 +170,13 @@ const Input: React.FC<Props> = ({
           value={inputValue}
           onKeyDown={onKeyDown}
           inputMode={inputMode}
+          enterKeyHint={enterKeyHint}
           {...(placeholder && { placeholder })}
           {...(name && { name })}
         />
         {clearable ? (
           <>
-            {inputValue && (
+            {inputValue ? (
               <div className={styles.clearContainer}>
                 <Button
                   shape={ButtonShape.Circle}
@@ -148,16 +187,12 @@ const Input: React.FC<Props> = ({
                   <ClearIcon />
                 </Button>
               </div>
+            ) : (
+              <Suffix />
             )}
           </>
         ) : (
-          <>
-            {suffix && (
-              <div className={classNames(styles.suffix, styles.prefixSuffixContainer)}>
-                {suffix}
-              </div>
-            )}
-          </>
+          <Suffix />
         )}
       </div>
     </>

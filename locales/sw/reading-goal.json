@@ -1,0 +1,136 @@
+{
+  "continue-reading": "Endelea Kusoma",
+  "continuous": {
+    "description": "Lengo lako litahesabu maendeleo yako kwa muda wa siku kadhaa",
+    "title": "Kwa muda"
+  },
+  "create-plan": "Unda mpango",
+  "create-reading-goal": "Tengeneza Lengo",
+  "daily-progress": "Maendeleo ya Kila Siku",
+  "daily-progress-completed": "Imekamilika! 🎉",
+  "daily": {
+    "description": "Lengo lako litawekwa upya kila siku",
+    "title": "Lengo la kila siku"
+  },
+  "day-x": "Siku {{day}}",
+  "days": "Siku",
+  "duration": "Muda (siku)",
+  "ending-chapter": "Sura ya kumalizia",
+  "ending-verse": "Aya ya kumalizia",
+  "examples-subtitle": "Hapa kuna orodha ya malengo ya pamoja. Unaweza pia kuunda lengo lako mwenyewe.",
+  "examples-title": "Chagua lengo lililoundwa kabla au unda lako mwenyewe",
+  "examples": {
+    "custom": {
+      "description": "Weka lengo maalum linalokufaa",
+      "title": "Iliyo binafsishwa"
+    },
+    "khatm": {
+      "description": "Lengo maarufu la Khatm. Soma Juz 1 kwa siku",
+      "title": "Soma Qur'ani ndani ya siku 30"
+    },
+    "time": {
+      "description": "Lengo rahisi linalofaa kwa wanaoanza",
+      "title": "Soma dakika 10 kwa siku"
+    },
+    "year": {
+      "description": "Soma Qur'ani kwa kasi yako mwenyewe katika mwaka ujao",
+      "title": "Soma Qur'ani ndani ya mwaka mmoja"
+    }
+  },
+  "frequency-tab": {
+    "description": "Ikiwa lengo lako litawekwa upya kila siku au kila idadi ya siku, Usiwe na wasi wasi, tutafuatilia maendeleo yako bila kujali idadi ya marudio utakayochagua.",
+    "title": "Chagua idadi ya marudio ya lengo lako"
+  },
+  "goal-completed": "Lengo Limekamilika! 🎉 ",
+  "goal-done": {
+    "description": "Usomaji wowote wa ziada bado utarekodiwa",
+    "title": "Umekamilisha lengo la leo"
+  },
+  "goal-target": {
+    "description": "Je, ni muda gani, kurasa ngapi, au aya ngapi ungependa kusoma ili kukamilisha lengo lako?",
+    "title": "Weka kusudio kwa lengo lako"
+  },
+  "goal-type": {
+    "description": "Je, lengo lako linategemea wakati, kurasa, au msururu maalum (yaani, Juzu 3 za Qur'ani)?",
+    "title": "Chagua kigezo cha lengo lako"
+  },
+  "goal-types": {
+    "pages": {
+      "description": "Lengo lako litategemea kurasa",
+      "title": "Kurasa"
+    },
+    "range": {
+      "description": "Lengo lako litategemea msururu maalum ya aya (hii inaweza kuwa Surah, Juz, au hata Qur'ani nzima)",
+      "title": "Msururu maalum"
+    },
+    "time": {
+      "description": "Lengo lako litategemea wakati",
+      "title": "Wakati"
+    }
+  },
+  "plus-x-more-days": {
+    "one": "",
+    "other": ""
+  },
+  "preview-schedule": {
+    "description": "Hivi ndivyo lengo lako litakavyoonekana. Unaweza kuibadilisha baadaye.",
+    "title": "Hapa kuna muhtasari wa ratiba yako"
+  },
+  "progress": {
+    "complete": "Lengo la leo limekamilika 🎉",
+    "goal-complete": "Lengo lako lote limekamilika 🎉",
+    "pages-goal": "soma {{pages}} kurasa za Qur'ani",
+    "range-goal": "soma {{from}} hadi {{to}}",
+    "time-goal": "soma {{time}} ya Qur'ani"
+  },
+  "reading-goal": "Lengo la Kusoma",
+  "reading-goal-description": "Je, unaona ni changamoto kudumisha uthabiti na malengo yako ya usomaji wa Kurani? <br/> <br/> Safari ya Ukuzaji wa Kurani ni kipengele kinachobadilika kilichoundwa ili kukusaidia kuendelea kuwa thabiti katika safari yako ya Kurani. Iwe unalenga kusoma dakika 10 kwa siku, kukamilisha Juz katika mwezi mmoja, au kumaliza Kurani nzima kwa mwaka mmoja, n.k., Quran.com sasa inaweza kukusaidia kuweka lengo maalum na kufuatilia mfululizo wako wa kusoma kila siku, huku ukirekebisha kadiri unavyoendelea. Ni bure kabisa kutumia na tunatumai itakusaidia kukaa na motisha kufikia lengo lako!",
+  "reading-goal-label": "Uko kwenye",
+  "reading-goal-title": "Kuanzisha Safari ya Ukuaji wa Qur'ani",
+  "recommended": "Imependekezwa",
+  "remaining": "Iliyobakia leo",
+  "remaining-base": "Iliyosalia",
+  "remaining-days": {
+    "one": "",
+    "other": ""
+  },
+  "set-a-new-goal": "Weka Lengo jipya",
+  "set-reading-goal-success": "Lengo lako la kusoma limetengenezwa kwa mafanikio.",
+  "start-journey": "Anza safari yako!",
+  "start-reading": "Anza Kusoma",
+  "starting-chapter": "Sura ya kuanzia",
+  "starting-verse": "Aya ya kuanzia",
+  "streak": "Streak",
+  "streak-definition": "Streak ni idadi ya siku ulizosoma Qur'ani kwa mfululizo bila kukosa.",
+  "timeline-meaning": "Je, kalenda yako ya matukio inamaanisha nini?",
+  "timeline-states": {
+    "checked": "Umekamilisha lengo lako",
+    "filled": "Umesoma kiwango fulani lakini haitoshi kukamilisha lengo lako",
+    "none": "Bado hujasoma chochote siku hiyo",
+    "stroked": "Hujasoma chochote leo"
+  },
+  "todays-goal": "Lengo la Leo",
+  "view-progress": "Tazama Maendeleo",
+  "week-progress": "Maendeleo ya wiki hii",
+  "x-days": {
+    "one": "",
+    "other": ""
+  },
+  "x-days-streak": "Streak ya siku {{days}}",
+  "x-hours": {
+    "one": "",
+    "other": ""
+  },
+  "x-minutes": {
+    "one": "",
+    "other": ""
+  },
+  "x-pages": {
+    "one": "",
+    "other": ""
+  },
+  "x-seconds": {
+    "one": "",
+    "other": ""
+  }
+}

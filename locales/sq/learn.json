@@ -24,7 +24,9 @@
     "feedback-success": "Faleminderit për komentin tuaj!",
     "your-feedback": "Komentet tuaja"
   },
+  "help-about-reflection": "Ndihmë për veçorinë e reflektimit",
   "learn-duration": "Kohëzgjatja",
+  "learn-more": "Mësoni më shumë",
   "learning-plan-material": "Materiali i planit mësimor",
   "learning-plan-meta-desc": "Ky Plan Mësimi do të ndihmojë në transformimin e mënyrës se si angazhoheni me Kuranin, filloni udhëtimin tuaj sot!",
   "learning-plans-desc": "Rritni njohuritë tuaja me mësime të thjeshta për t'u ndjekur që ju bëjnë të rriteni në udhëtimin tuaj me Kuranin. <br></br> Filloni një plan mësimor sot! Përparimi juaj gjurmohet derisa të arrini në vijën e finishit.",
@@ -34,9 +36,12 @@
   "next-lesson": "Mësimi tjetër",
   "not-enrolled": "Nuk jeni regjistruar ende në <link> planin mësimor </link> .",
   "prev-lesson": "Mësimi i mëparshëm",
+  "reflection-description-1": "Duke klikuar \"Shto Refleksion\" do t'ju çojë te QuranReflect, një platformë për ndarjen e reflektimeve personale mbi Kuranin. Ndryshe nga Tefsiri (interpretimi dijetar), reflektimet janë njohuri dhe përvoja personale që lidhen me vargjet.",
+  "reflection-description-2": "Nëse postoni publikisht, reflektimi juaj do të shqyrtohet nga ekipi i moderimit dhe do të bëhet i dukshëm për komunitetin e KuranReflekt.",
   "start-learning": "Filloni të mësoni",
   "tabs": {
     "main": "Detajet kryesore",
     "syllabus": "Programi mësimor"
-  }
+  },
+  "what-happens-when-you-click-add-reflection": "Çfarë ndodh kur klikoni \"Shto reflektim\"?"
 }

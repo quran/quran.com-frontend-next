@@ -1,0 +1,4 @@
+{
+  "meta-description": "Soma na usikilize Sura {{transliteratedName}}. Sura imeteremshwa {{revelationPlace}}, kwa mpangilio wa {{chapterOrder}} ndani ya Qur'ani. Jina la Surah linamaanisha \" {{translatedName}} \" katika {{localeName}} na lina aya {{versesCount}}.",
+  "ranges-meta-desc": "Soma na sikiliza kutoka Aya {{rangeFrom}} hadi Aya {{rangeTo}}."
+}

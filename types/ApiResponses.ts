@@ -9,8 +9,9 @@ import LookupRange from './LookupRange';
 import LookupRecord from './LookupRecord';
 import MetaData from './MetaData';
 import Reciter from './Reciter';
+import { SearchNavigationResult } from './Search/SearchNavigationResult';
 import SearchService from './Search/SearchService';
-import { SearchNavigationResult } from './SearchNavigationResult';
+import SearchVerseItem from './Search/SearchVerseItem';
 import TafsirInfo from './TafsirInfo';
 import Verse from './Verse';
 
@@ -19,7 +20,7 @@ export interface BaseResponse {
   error?: string;
 }
 
-interface Pagination {
+export interface Pagination {
   perPage: number;
   currentPage: number;
   nextPage: number | null;
@@ -84,7 +85,7 @@ export interface SearchResponse extends BaseResponse {
   pagination: Pagination;
   result?: {
     navigation: SearchNavigationResult[];
-    verses: Verse[];
+    verses: SearchVerseItem[];
   };
 }
 

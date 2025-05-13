@@ -1,0 +1,119 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 400px;
+    margin: 0 auto;
+    padding: var(--spacing-medium);
+}
+
+.title {
+    font-size: var(--font-size-xlarge);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--spacing-mega);
+    text-align: center;
+}
+
+.emailContainer {
+    text-align: center;
+    margin-bottom: var(--spacing-large);
+}
+
+.description {
+    font-size: var(--font-size-large);
+    color: var(--color-text-default);
+    margin-bottom: var(--spacing-xsmall);
+}
+
+.email {
+    font-size: var(--font-size-large);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text-default);
+}
+
+.instruction {
+    font-size: var(--font-size-large);
+    color: var(--color-text-default);
+    text-align: center;
+    margin-bottom: var(--spacing-large);
+}
+
+.inputContainer {
+    margin-bottom: var(--spacing-medium);
+}
+
+.verificationContainer {
+    display: flex;
+    justify-content: space-between;
+    gap: var(--spacing-xsmall);
+    margin-bottom: var(--spacing-medium);
+}
+
+.character {
+    width: 48px;
+    height: 48px;
+    border: 1px solid var(--color-borders-hairline);
+    border-radius: var(--border-radius-default);
+    font-size: var(--font-size-jumbo);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text-default);
+    background-color: var(--color-background-default);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: text;
+
+    &:focus {
+        outline: none;
+        border-color: var(--color-primary-medium);
+        box-shadow: 0 0 0 1px var(--color-primary-medium);
+    }
+}
+
+.characterInactive {
+    background-color: var(--color-background-elevated);
+}
+
+.characterSelected {
+    border-color: var(--color-primary-medium);
+    box-shadow: 0 0 0 1px var(--color-primary-medium);
+}
+
+.error {
+    color: var(--color-error-medium);
+    font-size: var(--font-size-small);
+    margin-top: var(--spacing-xxsmall);
+    text-align: center;
+}
+
+.spamNote {
+    font-size: var(--font-size-medium);
+    color: var(--color-text-default);
+    text-align: center;
+    margin-bottom: var(--spacing-large);
+}
+
+.actions {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-small);
+    width: 100%;
+}
+
+.resendButton {
+    color: var(--color-text-faded);
+    font-size: var(--font-size-medium);
+
+    &:disabled {
+        opacity: 1;
+        cursor: not-allowed;
+    }
+}
+
+.backButton {
+    margin-top: var(--spacing-xsmall);
+}
+
+.confirmationText {
+    font-weight: var(--font-weight-bold);
+}

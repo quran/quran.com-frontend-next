@@ -11,7 +11,6 @@ import DebuggingObserverWindow from './DebuggingObserverWindow';
 import Notes from './Notes/Notes';
 import styles from './QuranReader.module.scss';
 import QuranReaderView from './QuranReaderView';
-import SidebarNavigation from './SidebarNavigation/SidebarNavigation';
 
 import FontPreLoader from '@/components/Fonts/FontPreLoader';
 import { selectNotes } from '@/redux/slices/QuranReader/notes';
@@ -66,7 +65,6 @@ const QuranReader = ({
           </VerseTrackerContextProvider>
         </div>
       </div>
-      <SidebarNavigation />
       <Notes />
     </>
   );

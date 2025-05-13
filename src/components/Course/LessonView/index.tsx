@@ -62,7 +62,7 @@ const LessonView: React.FC<Props> = ({ lesson, courseSlug, lessonSlugOrId }) => 
           lessons={lesson.course.lessons}
         />
         <div className={styles.container}>
-          <PageContainer>
+          <PageContainer isLessonView>
             <div className={styles.headerButtonsContainer}>
               <Button
                 onClick={onBackButtonClicked}

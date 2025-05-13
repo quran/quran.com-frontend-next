@@ -47,3 +47,28 @@ export const slugifiedCollectionIdToCollectionId = (slugifiedCollectionId: strin
   }
   return splits[splits.length - 1];
 };
+
+/**
+ * Cleans a transcript by removing left-to-right and right-to-left marks
+ *
+ * @param {string} text - The text to clean
+ * @returns {string} The cleaned text
+ */
+export const cleanTranscript = (text: string): string => {
+  return text.replace(/[\u200E\u200F]/g, '');
+};
+
+/**
+ * Converts verse references in text to clickable links.
+ * Example: "1:1" or "1:1-2" or "1:1-2:3" will be converted to HTML anchor tags.
+ *
+ * @param {string} text - The text containing verse references
+ * @returns {string} The text with verse references converted to links
+ */
+export const formatVerseReferencesToLinks = (text: string): string => {
+  if (!text) return '';
+  return text.replace(
+    /(\d{1,2}[:-]\d{1,2}(?:-\d{1,2}(?:[:]\d{1,2})?)?)(?![^<]*<\/a>)/g,
+    (match) => `<a href="${`/${match}`}" target="_blank">${match}</a>`,
+  );
+};

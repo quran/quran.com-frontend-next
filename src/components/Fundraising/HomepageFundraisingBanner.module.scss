@@ -1,0 +1,147 @@
+@use "src/styles/theme";
+@use "src/styles/breakpoints";
+
+.container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-radius: var(--border-radius-rounded);
+    padding: var(--spacing-medium);
+    @include theme.light {
+        box-shadow: 0px 4px 25px 0px rgba(0, 0, 0, 0.1);
+    }
+    @include theme.dark {
+        box-shadow: 0px 4px 25px 0px rgba(0, 0, 0, 0.8);
+    }
+    @include theme.sepia {
+        box-shadow: 0px 4px 25px 0px rgba(0, 0, 0, 0.1);
+    }
+}
+
+.content {
+    flex: 1;
+}
+
+.title {
+    font-size: var(--font-size-normal-px);
+    font-weight: var(--font-weight-bold);
+    margin-bottom: var(--spacing-xsmall);
+    color: var(--color-text-default);
+    @include breakpoints.tablet {
+        font-size: var(--font-size-large-px);
+    }
+}
+
+.description {
+    font-size: var(--font-size-xsmall-px);
+    @include breakpoints.tablet {
+        font-size: var(--font-size-medium-px);
+    }
+    color: var(--color-text-default);
+    margin-bottom: var(--spacing-small);
+}
+
+.actions {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-medium);
+}
+
+.rightActions {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-medium);
+}
+
+.shareButton {
+    padding-inline: var(--spacing-xxlarge-px);
+    background-color: var(--color-success-faded);
+    --themed-bg: var(--color-success-faded);
+    --themed-border: var(--color-success-faded);
+    color: var(--color-text-link-new);
+    font-weight: var(--font-weight-bold);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xsmall);
+
+    font-size: var(--font-size-xsmall-px);
+    @include breakpoints.tablet {
+        font-size: var(--font-size-medium-px);
+    }
+
+    &:hover {
+        --themed-bg: var(--color-success-faded);
+        --themed-border: var(--color-success-faded);
+        color: var(--color-text-link-new);
+    }
+    svg {
+        padding-inline-end: var(--spacing-small-px);
+    }
+}
+
+.donateButton {
+    padding-inline: var(--spacing-medium2-px);
+    color: var(--color-text-link-new);
+    font-size: var(--font-size-xsmall-px);
+    --themed-border: var(--color-blue-buttons-and-icons);
+    --themed-bg: var(--color-blue-buttons-and-icons);
+    @include breakpoints.tablet {
+        font-size: var(--font-size-medium-px);
+    }
+    font-weight: var(--font-weight-bold);
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xsmall);
+    svg {
+        padding-inline-end: var(--spacing-small-px);
+        path {
+            fill: var(--color-blue-buttons-and-icons);
+        }
+    }
+
+    span {
+        align-items: center;
+    }
+}
+
+.learnMoreLink {
+    text-decoration: underline;
+}
+
+.closeButton {
+    position: absolute;
+    top: var(--spacing-xsmall);
+    right: var(--spacing-xsmall);
+    color: var(--color-text-faded);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: var(--spacing-xsmall);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+        color: var(--color-text-default);
+    }
+}
+
+/* Modal styles */
+.modalCloseButton {
+    position: absolute;
+    top: var(--spacing-medium);
+    right: var(--spacing-medium);
+    color: var(--color-text-faded);
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: var(--spacing-xsmall);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    &:hover {
+        color: var(--color-text-default);
+    }
+}

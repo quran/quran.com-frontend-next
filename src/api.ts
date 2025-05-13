@@ -12,7 +12,6 @@ import {
   makeAudioTimestampsUrl,
   makeChapterAudioDataUrl,
   makeAvailableRecitersUrl,
-  makeSearchResultsUrl,
   makeTranslationsInfoUrl,
   makeTranslationsUrl,
   makeVersesUrl,
@@ -31,10 +30,9 @@ import {
   makeWordByWordTranslationsUrl,
 } from '@/utils/apiPaths';
 import { getAdditionalHeaders } from '@/utils/headers';
-import { SearchRequest, AdvancedCopyRequest, PagesLookUpRequest } from 'types/ApiRequests';
+import { AdvancedCopyRequest, PagesLookUpRequest } from 'types/ApiRequests';
 import {
   TranslationsResponse,
-  SearchResponse,
   AdvancedCopyRawResultResponse,
   LanguagesResponse,
   RecitersResponse,
@@ -51,13 +49,6 @@ import {
   WordByWordTranslationsResponse,
 } from 'types/ApiResponses';
 import AudioData from 'types/AudioData';
-
-export const SEARCH_FETCH_OPTIONS = {
-  headers: {
-    // eslint-disable-next-line @typescript-eslint/naming-convention
-    'x-api-key': process.env.NEXT_PUBLIC_SEARCH_API_KEY,
-  },
-};
 
 export const OFFLINE_ERROR = 'OFFLINE';
 
@@ -241,21 +232,12 @@ export const getAdvancedCopyRawResult = async (
 /**
  * Get the search results of a query.
  *
- * @param {SearchRequest} params
- * @returns  {Promise<SearchResponse>}
- */
-export const getSearchResults = async (params: SearchRequest): Promise<SearchResponse> =>
-  fetcher(makeSearchResultsUrl(params));
-
-/**
- * Get the search results of a query.
- *
  * @param {SearchRequestParams} params
  * @returns  {Promise<NewSearchResponse>}
  */
 export const getNewSearchResults = async <T extends SearchMode>(
   params: SearchRequestParams<T>,
-): Promise<NewSearchResponse> => fetcher(makeNewSearchResultsUrl(params), SEARCH_FETCH_OPTIONS);
+): Promise<NewSearchResponse> => fetcher(makeNewSearchResultsUrl(params));
 
 /**
  * Get the list of tafsirs.

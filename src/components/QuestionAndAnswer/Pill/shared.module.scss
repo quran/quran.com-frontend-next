@@ -1,0 +1,11 @@
+@use "src/styles/theme";
+
+%clarification {
+    font-weight: var(--font-weight-semibold) !important;
+    --background-color: var(--color-scholars-say-background);
+    --text-color: var(--color-scholars-say-text);
+}
+
+%explore_answers {
+    @extend %clarification;
+}

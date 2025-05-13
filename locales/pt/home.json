@@ -1,7 +1,21 @@
 {
+  "achieve-quran-goals": "Alcance seus objetivos do Alcorão",
+  "begin": "Começar",
+  "calendar-cta": "Calendário",
+  "chapters-and-verses": "Capítulos e Versículos",
+  "continue-read": "Continuar lendo",
+  "explore-topics": "Explorar tópicos",
+  "first-time-reading": "Novo no Alcorão? <link> Comece aqui </link>",
+  "grow-beyond-ramadan": "Cresça conosco <modalLink> Além do Ramadã </modalLink>",
+  "know-someone": "Cresça conosco neste <modalLink> Ramadã </modalLink>",
+  "learning-plan": "Planos de Aprendizagem",
+  "listen-to-radio": "Ouça a Rádio Alcorão",
+  "my-quran": "Meu Alcorão",
+  "navigate-quran": "Navegar pelo Alcorão",
   "no-bookmarks": "Você ainda não tem favoritos",
   "no-recently-read": "Você ainda não tem nenhuma sessão de leitura",
   "noble-quran": "O Nobre Alcorão",
+  "popular": "Popular",
   "qgj": {
     "learning-plans": {
       "cta": {
@@ -23,10 +37,25 @@
     },
     "title": "Jornada de Crescimento do Alcorão"
   },
-  "ramadan-activities-cta": "<link> Siga o <b> Calendário Corânico Global <\/b> para leituras semanais, podcasts inspiradores e um chamado para refletir! <\/link>",
+  "qr-community": "Leia os versículos e reflexões em destaque hoje",
+  "quran-in-year": "Alcorão em um ano",
+  "quran-in-year-cta": "Leitura desta semana",
+  "ramadan-activities-cta": "<link> Siga o <b> Calendário Corânico Global </b> para leituras semanais, podcasts inspiradores e um chamado para refletir! </link>",
+  "ramadan": {
+    "header": "Ferramentas para aprofundar sua conexão com o Alcorão",
+    "title": "Pronto para o Ramadã?"
+  },
   "read-juz": "Leia Juz",
   "recently-read": "Lidos recentemente",
-  "revelation-order-disclaimer": "Esta exibição mostra a ordem cronológica das suratas no Alcorão com base em quando foram reveladas ao Profeta Muhammad <hover> ﷺ <\/hover> . A cronologia é um assunto de opinião acadêmica e algumas suratas foram reveladas em partes em diferentes épocas. A ordem aqui é baseada no trabalho de <link> Tanzil.net <\/link> . [Nota: a ordem de Mushaf compilada de al-Fatiha a al-Nas é uma questão de consenso.]",
+  "revelation-order-disclaimer": "Esta exibição mostra a ordem cronológica das suratas no Alcorão com base em quando foram reveladas ao Profeta Muhammad <hover> ﷺ </hover> . A cronologia é um assunto de opinião acadêmica e algumas suratas foram reveladas em partes em diferentes épocas. A ordem aqui é baseada no trabalho de <link> Tanzil.net </link> . [Nota: a ordem de Mushaf compilada de al-Fatiha a al-Nas é uma questão de consenso.]",
+  "see-more-learning-plans": "Ver mais",
+  "set-custom-goal": "Defina uma meta",
+  "share-quran": {
+    "description": "Ajude a espalhar o Alcorão para novos alunos",
+    "title": "Compartilhe o Alcorão!"
+  },
+  "start-read": "Comece a ler",
+  "stay-consistent": "Acompanhe as sequências, crie metas personalizadas e seja consistente",
   "tab": {
     "bookmarks": "Favoritos",
     "popular": "Popular"

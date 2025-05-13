@@ -3,6 +3,7 @@ import { Mushaf } from '../QuranReader';
 export enum ActivityDayType {
   QURAN = 'QURAN',
   LESSON = 'LESSON',
+  QURAN_READING_PROGRAM = 'QURAN_READING_PROGRAM',
 }
 
 export type ActivityDay<T> = {
@@ -39,10 +40,17 @@ export type UpdateLessonActivityDayBody = {
   lessonId: string;
 };
 
+export type UpdateQuranReadingProgramActivityDayBody = {
+  programId: string;
+  weekNumber: number;
+};
+
 export type UpdateActivityDayBody<T> = ActivityDayBody & T;
 
 export type UpdateActivityDayParams = UpdateActivityDayBody<
-  UpdateQuranActivityDayBody | UpdateLessonActivityDayBody
+  | UpdateQuranActivityDayBody
+  | UpdateLessonActivityDayBody
+  | UpdateQuranReadingProgramActivityDayBody
 >;
 
 export type FilterActivityDaysParams = {

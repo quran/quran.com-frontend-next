@@ -16,7 +16,6 @@ import ResetModal from './ResetModal';
 import TextTab from './TextTab';
 
 import Switch, { SwitchSize } from '@/dls/Switch/Switch';
-import useRemoveQueryParam from '@/hooks/useRemoveQueryParam';
 import ColorIconSuccess from '@/icons/colors-success.svg';
 import ColorIcon from '@/icons/colors.svg';
 import AudioIconSuccess from '@/icons/headphones-success.svg';
@@ -64,6 +63,7 @@ const MEDIA_SETTINGS_TO_QUERY_PARAM = {
   orientation: QueryParam.ORIENTATION,
   videoId: QueryParam.VIDEO_ID,
   surah: QueryParam.SURAH,
+  previewMode: QueryParam.PREVIEW_MODE,
 } as Record<keyof MediaSettings, QueryParam>;
 
 const VideoSettings: React.FC<Props> = ({
@@ -77,7 +77,6 @@ const VideoSettings: React.FC<Props> = ({
   const [selectedTab, setSelectedTab] = useState<Tab>(Tab.AUDIO);
   const dispatch = useDispatch();
   const router = useRouter();
-  const removeQueryParam = useRemoveQueryParam();
 
   const seekToBeginning = useCallback(() => {
     const current = playerRef?.current;
@@ -97,16 +96,27 @@ const VideoSettings: React.FC<Props> = ({
       }
       seekToBeginning();
       dispatch(updateSettings(settings));
+
+      // Update the URL using router.push
+      const newQuery = { ...router.query };
       Object.keys(settings).forEach((settingKey) => {
         const toBeUpdatedQueryParamName =
           MEDIA_SETTINGS_TO_QUERY_PARAM[settingKey as keyof MediaSettings];
         const toBeUpdatedQueryParamValue = settings[settingKey];
-        router.query[toBeUpdatedQueryParamName] =
+        newQuery[toBeUpdatedQueryParamName] =
           toBeUpdatedQueryParamName === QueryParam.MEDIA_TRANSLATIONS
             ? toBeUpdatedQueryParamValue.join(',')
             : toBeUpdatedQueryParamValue;
       });
-      router.push({ pathname: router.pathname, query: router.query }, undefined, { shallow: true });
+
+      router.push(
+        {
+          pathname: router.pathname,
+          query: newQuery,
+        },
+        undefined,
+        { shallow: true },
+      );
     },
     [dispatch, mediaSettings, router, seekToBeginning],
   );
@@ -115,8 +125,16 @@ const VideoSettings: React.FC<Props> = ({
     logButtonClick('media_settings_reset');
     seekToBeginning();
     dispatch(resetToDefaults());
-    removeQueryParam(Object.values(QueryParam));
-  }, [dispatch, removeQueryParam, seekToBeginning]);
+
+    // Reset URL using router.push
+    router.push(
+      {
+        pathname: router.pathname,
+      },
+      undefined,
+      { shallow: true },
+    );
+  }, [dispatch, router, seekToBeginning]);
 
   const onTabChange = (value: Tab) => {
     logEvent('video_generation_tab_change', { tab: value });

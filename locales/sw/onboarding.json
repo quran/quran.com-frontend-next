@@ -1,0 +1,103 @@
+{
+  "checklist": {
+    "1": "Vipengele vya ukurasa wa nyumbani",
+    "2": "Binafsisha mipangilio yako",
+    "3": "Boresha uzoefu wako wa kusoma Aya",
+    "4": "Vipengele vilivyobinafsishwa"
+  },
+  "finish": "Maliza",
+  "onboarding-checklist": "Orodha hakiki ya Kuingia",
+  "onboarding-title": "Ongeza matumizi yako ya Quran.com hadi upeo! <br></br> Anza ziara yako sasa:",
+  "previous": "Iliyotangulia",
+  "skip": "Ruka",
+  "steps": {
+    "3-dot-menu": {
+      "description": "Bofya menyu ya nukta 3 ili kugundua chaguo za kunakili, kuweka alamisho na kurudia aya. Gundua chaguzi mbalimbali za kurudia aya",
+      "title": "Menyu ya nukta 3"
+    },
+    "ayah-reflection": {
+      "description": "Soma tafakari (tadabbur) kutoka kwa wanazuoni, wanafunzi wasomi, na  watu wa kawaida pia ili kukusaidia kukuza zaidi uhusiano wako wa kibinafsi na Qur'ani.",
+      "title": "Soma tafakari katika kiwango cha aya"
+    },
+    "ayah-tafsir": {
+      "description": "Chunguza Tafsir katika kiwango cha aya, itakayokupa umaizi wa kina ili kuboresha kuelewa kwako unaposoma. (Tafsir inaweza kupangwa kwa makundi ya aya wakati mwingine)",
+      "title": "Soma Tafsir katika kiwango cha Aya"
+    },
+    "font-size": {
+      "description": "Binafsisha usomaji wako wa Qur'ani kwa ukubwa za fonti zilizo rahisi kurekebisha ili usomaji wako uwe na raha",
+      "title": "Ukubwa wa Fonti"
+    },
+    "font-style": {
+      "description": "Chaguo zilizopo ni Uthmani - King Fahad Complex v1, Uthmani - King Fahad Complex v2, Uthmani QPC Hafs, Indopak mistari 15, Indopak mistari 16.",
+      "title": "Chagua hati ya kusoma unayopendelea"
+    },
+    "inline-wbw": {
+      "description": "Tazama tarjuma ya kila neno kwenye mstari (chini ya neno) au kwenye kiputo juu ya neno huku ukisikiliza Qur'ani",
+      "title": "Onyesha tarjuma ya neno kwa neno kwenye aya (chini ya neno) au onyesha tooltip"
+    },
+    "juz": {
+      "description": "Tazama Qur'ani kupitia Juz",
+      "title": "Tazama Qur'ani kupitia Juz"
+    },
+    "listen": {
+      "description": "Anzisha kicheza sauti ili kusikiliza kisomo",
+      "title": "Sikiliza Surah au Aya"
+    },
+    "login": {
+      "description": "Ingia na uhifadhi mipangilio kwenye vifaa vyote na upate ufikiaji wa vipengele vya ziada.",
+      "title": "Ingia"
+    },
+    "quran-radio": {
+      "description": "Sikiliza QuranRadio - Cheza Qur'ani bila matangazo",
+      "title": "Redio ya Qur'ani"
+    },
+    "reading-sessions": {
+      "description": "Kagua kwa urahisi safari yako ya Qur'ani kwa kutazama historia yako ya usomaji iliyobinafsishwa, ukifuatilia aya ambazo umezitazama kwenye Quran.com.",
+      "title": "Tazama historia ya kusoma"
+    },
+    "reading-view": {
+      "description": "Tazama Qur'ani katika hali ya kusoma mushaf",
+      "title": "Hali ya kusoma"
+    },
+    "search-bar": {
+      "description": "Tafuta aya, surah, maneno muhimu, juz na mada unazohitaji kwa kutumia upau wetu wa utafutaji.",
+      "title": "Upau wa Utafutaji"
+    },
+    "select-reciter": {
+      "description": "Binafsisha usikilizaji wako kwa kuchagua msomaji unayependa kumsikiliza zaidi!",
+      "title": "Chagua usikilizaji kutoka kwa wasomaji anuwai"
+    },
+    "settings": {
+      "description": "Dhibiti mapendeleo yako",
+      "title": "Mipangilio"
+    },
+    "streak": {
+      "description": "Weka malengo ya usomaji yaliyobinafsishwa, fuatilia maendeleo yako, na jenga tabia thabiti ya usomaji wa Qur'ani ukitumia kipengele chetu cha Streaks za kusoma na kipengele cha Mipango.",
+      "title": "Fuatilia  Streaks za kusoma na mipango ya kusoma"
+    },
+    "surah-info": {
+      "description": "Pata maarifa kuhusu kila Sura - inayopatikana kwa urahisi mwanzoni mwa kila Sura",
+      "title": "Soma Kuhusu Sura"
+    },
+    "theme": {
+      "description": "Chagua mwonekano unaoupenda—Light, Sepia au Dark mode—ili upate uzoefu mzuri wa kibinafsi wa kusoma Qur'ani.",
+      "title": "Soma Qur'ani kwa Light, Sepia au Dark mode"
+    },
+    "translations": {
+      "description": "Chagua kutoka kwa anuwai ya tarjuma katika lugha mbalimbali. Kidokezo: Linganisha tafsiri tofauti kwa kuchagua chaguo kadhaa",
+      "title": "Tarjuma"
+    },
+    "wbw-audio": {
+      "description": "Teua chaguo hili ili kusikiliza kila neno moja kwa moja kwa kubofya tu neno!",
+      "title": "Sikiliza unukuzi wa neno kwa neno kwa kubofya neno hilo"
+    },
+    "wbw-translation": {
+      "description": "Tazama maana ya maneno mahususi unaposoma au kusikiliza Qur'ani ili ikusaidie kuboresha msamiati wako wa Qur'ani",
+      "title": "Soma tarjuma ya neno kwa neno"
+    },
+    "wbw-transliteration": {
+      "description": "Tazama unukuzi wa kila neno ili kukusaidia katika safari yako ya kusoma Qur'ani",
+      "title": "Soma unukuzi wa neno kwa neno"
+    }
+  }
+}
