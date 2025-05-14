@@ -89,3 +89,15 @@ $container-width: 370px;
     margin-block: var(--spacing-medium);
     border-radius: var(--border-radius-pill);
 }
+
+.inputContainer {
+    display: flex;
+    flex-direction: column;
+    row-gap: var(--spacing-small-px);
+    margin-block: 0px !important;
+    margin-block-end: var(--spacing-small-px) !important;
+}
+
+.errorText {
+    color: var(--color-error-medium2) !important;
+}

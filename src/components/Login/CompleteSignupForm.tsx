@@ -9,6 +9,7 @@ import EmailVerificationForm from './EmailVerificationForm';
 import getFormErrors, { ErrorType } from './SignUpForm/errors';
 
 import FormBuilder from '@/components/FormBuilder/FormBuilder';
+import authStyles from '@/styles/auth/auth.module.scss';
 import { makeUserProfileUrl } from '@/utils/auth/apiPaths';
 import { completeSignup } from '@/utils/auth/authRequests';
 import { logFormSubmission } from '@/utils/eventLogger';
@@ -65,6 +66,8 @@ const CompleteSignupForm: React.FC<CompleteSignupFormProps> = ({ requiredFields,
         emailFormField={{
           ...formField,
           customRender: (props) => <TextInputField {...props} type={InputType.EMAIL} />,
+          errorClassName: authStyles.errorText,
+          containerClassName: authStyles.inputContainer,
         }}
       />
     );
@@ -90,6 +93,8 @@ const CompleteSignupForm: React.FC<CompleteSignupFormProps> = ({ requiredFields,
                   type={field.field === 'email' ? InputType.EMAIL : InputType.TEXT}
                 />
               ),
+              errorClassName: authStyles.errorText,
+              containerClassName: authStyles.inputContainer,
             };
           }
 
