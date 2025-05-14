@@ -24,6 +24,7 @@ interface SelectorProps {
   dropdownItems: RangeVerseItem[];
   onChange: (selectedName: string, dropdownId: string) => void;
   isDisabled?: boolean;
+  selectOnBlurMatch?: boolean;
 }
 
 /*
@@ -42,6 +43,7 @@ const SelectorContainer: React.FC<SelectorProps> = ({
   dropdownItems,
   onChange,
   isDisabled = false,
+  selectOnBlurMatch = false,
 }) => {
   const { t } = useTranslation('common');
   return (
@@ -56,6 +58,7 @@ const SelectorContainer: React.FC<SelectorProps> = ({
         initialInputValue={value}
         fixedWidth={false}
         disabled={isDisabled}
+        selectOnBlurMatch={selectOnBlurMatch}
         label={
           <span className={styles.comboboxLabel}>
             {`${type === RangeSelectorType.START ? t('from') : t('to')} ${t('verse')}:`}

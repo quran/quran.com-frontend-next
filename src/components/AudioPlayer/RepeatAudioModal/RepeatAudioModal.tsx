@@ -11,6 +11,7 @@ import SelectRepetitionMode, { RepetitionMode } from './SelectRepetitionMode';
 import { RangeVerseItem } from '@/components/Verse/AdvancedCopy/SelectorContainer';
 import Modal from '@/dls/Modal/Modal';
 import Separator from '@/dls/Separator/Separator';
+import Toggle from '@/dls/Toggle/Toggle';
 import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
 import useGetChaptersData from '@/hooks/useGetChaptersData';
 import { getChapterData } from '@/utils/chapter';
@@ -166,6 +167,12 @@ const RepeatAudioModal = ({
     setVerseRepetition({ ...verseRepetition, delayMultiplier: val });
   };
 
+  const isInfinite = verseRepetition.repeatRange === Infinity;
+
+  const handleToggleChange = (checked: boolean) => {
+    setVerseRepetition({ ...verseRepetition, repeatRange: checked ? Infinity : 8 });
+  };
+
   return (
     <Modal isOpen={isOpen} onClickOutside={onClose} onEscapeKeyDown={onClose}>
       <Modal.Body>
@@ -187,6 +194,12 @@ const RepeatAudioModal = ({
           <div className={styles.separator}>
             <Separator />
           </div>
+          <Toggle
+            id="play-range-infinity-toggle"
+            checked={isInfinite}
+            onChange={handleToggleChange}
+            label={t('audio.player.play-range-infinity')}
+          />
           <RepeatSetting
             label={t('audio.player.play-range')}
             value={verseRepetition.repeatRange}
