@@ -33,6 +33,7 @@ const VersesRangeSelector: React.FC<Props> = ({
       dropdownItems={dropdownItems}
       onChange={onChange}
       isDisabled={isDisabled}
+      selectOnBlurMatch
     />
     <SelectorContainer
       value={rangeEndVerse}
@@ -40,6 +41,7 @@ const VersesRangeSelector: React.FC<Props> = ({
       dropdownItems={dropdownItems}
       onChange={onChange}
       isDisabled={isDisabled}
+      selectOnBlurMatch
     />
   </div>
 );

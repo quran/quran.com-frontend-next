@@ -48,6 +48,7 @@ interface Props {
   hasError?: boolean;
   fixedWidth?: boolean;
   minimumRequiredItems?: number;
+  selectOnBlurMatch?: boolean;
 }
 
 const Combobox: React.FC<Props> = ({
@@ -67,6 +68,7 @@ const Combobox: React.FC<Props> = ({
   minimumRequiredItems = 0,
   onChange,
   fixedWidth = true,
+  selectOnBlurMatch = false,
 }) => {
   const [isOpened, setIsOpened] = useState(false);
   const [inputValue, setInputValue] = useState<string>(initialInputValue || '');
@@ -106,15 +108,58 @@ const Combobox: React.FC<Props> = ({
     return map;
   }, [items]);
 
+  const invokeOnChangeCallback = useCallback(
+    (newValue) => {
+      if (onChange) {
+        const isNewValueValid = onChange(
+          isMultiSelect ? Object.keys(newValue) : (newValue as string),
+          id,
+        );
+        // if the parent component doesn't return a boolean value, we should allow the value to go through since it means no validation is needed.
+        if (typeof isNewValueValid !== 'boolean') {
+          return true;
+        }
+        return !!isNewValueValid;
+      }
+      // if no on change callback, then no need to validate the value and we should allow it to go through.
+      return true;
+    },
+    [id, isMultiSelect, onChange],
+  );
+
   const closeCombobox = useCallback(() => {
     if (!isMultiSelect) {
+      // Check if the current input matches any item in the list
+      if (selectOnBlurMatch) {
+        const matchingItem = items.find(
+          (item) => item.label.toLowerCase() === inputValue.toLowerCase(),
+        );
+
+        if (matchingItem && matchingItem.value !== selectedValue) {
+          // If there's a match and it's not already selected, select it
+          const isNewValueValid = invokeOnChangeCallback(matchingItem.value);
+          if (isNewValueValid) {
+            setSelectedValue(matchingItem.value);
+          }
+        }
+      }
+
+      // Original behavior: display the current selection
       const currentValue = selectedValue as string;
       setInputValue(valueToLabelMap[currentValue] ?? currentValue);
     } else {
       setInputValue('');
     }
     setIsOpened(false);
-  }, [isMultiSelect, selectedValue, valueToLabelMap]);
+  }, [
+    isMultiSelect,
+    selectedValue,
+    valueToLabelMap,
+    items,
+    inputValue,
+    invokeOnChangeCallback,
+    selectOnBlurMatch,
+  ]);
 
   useOutsideClickDetector(comboBoxRef, closeCombobox, isOpened);
   useHotkeys('Escape', closeCombobox, { enabled: isOpened, enableOnFormTags: ['INPUT'] });
@@ -182,25 +227,6 @@ const Combobox: React.FC<Props> = ({
   const preventUnselectingItems =
     hasMinimumRequiredItems &&
     ((tags && tags.length <= minimumRequiredItems) || (!isMultiSelect && selectedValue));
-
-  const invokeOnChangeCallback = useCallback(
-    (newValue) => {
-      if (onChange) {
-        const isNewValueValid = onChange(
-          isMultiSelect ? Object.keys(newValue) : (newValue as string),
-          id,
-        );
-        // if the parent component doesn't return a boolean value, we should allow the value to go through since it means no validation is needed.
-        if (typeof isNewValueValid !== 'boolean') {
-          return true;
-        }
-        return !!isNewValueValid;
-      }
-      // if no on change callback, then no need to validate the value and we should allow it to go through.
-      return true;
-    },
-    [id, isMultiSelect, onChange],
-  );
 
   /**
    * We detect whether we should allow to delete the last selected tag when clicking
