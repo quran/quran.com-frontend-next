@@ -8,15 +8,15 @@ import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import { useSelector } from 'react-redux';
 
+import DrawerSearchIcon from '../SearchDrawer/Buttons/DrawerSearchIcon';
+
 import styles from './SearchSelectionBody.module.scss';
 
 import DataFetcher from '@/components/DataFetcher';
 import Checkbox from '@/dls/Forms/Checkbox/Checkbox';
-import Input from '@/dls/Forms/Input';
 import SpinnerContainer from '@/dls/Spinner/SpinnerContainer';
 import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
 import useRemoveQueryParam from '@/hooks/useRemoveQueryParam';
-import IconSearch from '@/icons/search.svg';
 import {
   selectTranslations,
   setSelectedTranslations,
@@ -122,14 +122,16 @@ const TranslationSelectionBody = () => {
     <div>
       <div className={styles.searchInputContainer}>
         <SpinnerContainer isLoading={isLoading}>
-          <Input
-            prefix={<IconSearch />}
+          <DrawerSearchIcon />
+          <input
+            className={styles.searchInput}
+            type="text"
             id="translations-search"
             value={searchQuery}
-            onChange={setSearchQuery}
+            onChange={(event) => {
+              setSearchQuery(event.target.value);
+            }}
             placeholder={t('settings.search-translations')}
-            fixedWidth={false}
-            containerClassName={styles.input}
           />
         </SpinnerContainer>
       </div>
@@ -175,4 +177,5 @@ const TranslationSelectionBody = () => {
   );
 };
 
+// eslint-disable-next-line max-lines
 export default TranslationSelectionBody;
