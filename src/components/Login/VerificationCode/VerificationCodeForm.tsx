@@ -17,6 +17,7 @@ interface Props {
   onResendCode: () => Promise<void>;
   signUpData: SignUpRequest;
   onSuccess?: () => void;
+  handleSubmit?: (code: string) => Promise<void>;
 }
 
 const VerificationCodeForm: FC<Props> = ({
@@ -25,6 +26,7 @@ const VerificationCodeForm: FC<Props> = ({
   onResendCode,
   signUpData,
   onSuccess,
+  handleSubmit,
 }) => {
   const router = useRouter();
 
@@ -56,7 +58,7 @@ const VerificationCodeForm: FC<Props> = ({
         email={email}
         onBack={onBack}
         onResendCode={onResendCode}
-        onSubmitCode={handleSubmitCode}
+        onSubmitCode={handleSubmit || handleSubmitCode}
       />
     </div>
   );

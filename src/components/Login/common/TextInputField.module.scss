@@ -26,5 +26,13 @@
     &::placeholder {
       color: var(--color-border-gray-light);
     }
+
+    &.disabled,
+    &:disabled {
+      cursor: not-allowed;
+      color: var(--color-border-gray-dark);
+      background-color: var(--color-border-gray-faded);
+      border: 1px solid var(--color-border-gray-lighter);
+    }
   }
 }

@@ -1,5 +1,7 @@
 import { FC } from 'react';
 
+import classNames from 'classnames';
+
 import styles from './TextInputField.module.scss';
 
 export enum InputType {
@@ -15,6 +17,7 @@ interface Props {
   className?: string;
   name?: string;
   autoComplete?: string;
+  disabled?: boolean;
 }
 
 const TextInputField: FC<Props> = ({
@@ -25,8 +28,13 @@ const TextInputField: FC<Props> = ({
   className = '',
   name,
   autoComplete,
+  disabled,
 }) => (
-  <div className={`${styles.textInputWrapper} ${className}`}>
+  <div
+    className={classNames(styles.textInputWrapper, className, {
+      [styles.disabled]: disabled,
+    })}
+  >
     <input
       type={type}
       value={value}
@@ -34,6 +42,7 @@ const TextInputField: FC<Props> = ({
       placeholder={placeholder}
       name={name}
       autoComplete={autoComplete}
+      disabled={disabled}
       className={value ? styles.hasValue : ''}
     />
   </div>
