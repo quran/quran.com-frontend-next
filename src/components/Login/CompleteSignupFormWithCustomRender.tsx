@@ -33,18 +33,20 @@ const addCustomRenderToCompleteSignupFormFields = (
 
       return {
         ...updatedField,
-        customRender: (props) => {
-          const inputProps = {
-            ...props,
-            type: isEmail ? InputType.EMAIL : InputType.TEXT,
-          };
-
-          if (isDisabled) {
-            // @ts-ignore - TextInputField does accept disabled prop
-            inputProps.disabled = true;
-          }
-
-          return <TextInputField {...inputProps} />;
+        customRender: (props: {
+          value: string;
+          onChange: (value: string) => void;
+          placeholder?: string;
+        }) => {
+          return (
+            <TextInputField
+              value={props.value}
+              onChange={props.onChange}
+              placeholder={props.placeholder}
+              type={isEmail ? InputType.EMAIL : InputType.TEXT}
+              disabled={isDisabled}
+            />
+          );
         },
         errorClassName: styles.errorText,
         containerClassName: styles.inputContainer,

@@ -83,6 +83,7 @@ import {
   makeStreakUrl,
   makeSyncLocalDataUrl,
   makeUpdateCollectionUrl,
+  makeUpdateUserProfileUrl,
   makeUserBulkPreferencesUrl,
   makeUserConsentsUrl,
   makeUserFeatureFlagsUrl,
@@ -231,6 +232,12 @@ export const refreshToken = async (): Promise<RefreshToken> =>
 
 export const completeSignup = async (data: CompleteSignupRequest): Promise<UserProfile> =>
   postRequest(makeCompleteSignupUrl(), data);
+
+export const updateUserProfile = (data: {
+  firstName?: string;
+  lastName?: string;
+  username?: string;
+}): Promise<UserProfile> => patchRequest(makeUpdateUserProfileUrl(), data);
 
 export const completeAnnouncement = async (data: CompleteAnnouncementRequest): Promise<any> => {
   return postRequest(makeCompleteAnnouncementUrl(), data);
