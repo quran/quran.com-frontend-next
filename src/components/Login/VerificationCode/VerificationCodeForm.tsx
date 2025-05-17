@@ -16,9 +16,16 @@ interface Props {
   onBack: () => void;
   onResendCode: () => Promise<void>;
   signUpData: SignUpRequest;
+  onSuccess?: () => void;
 }
 
-const VerificationCodeForm: FC<Props> = ({ email, onBack, onResendCode, signUpData }) => {
+const VerificationCodeForm: FC<Props> = ({
+  email,
+  onBack,
+  onResendCode,
+  signUpData,
+  onSuccess,
+}) => {
   const router = useRouter();
 
   const handleSubmitCode = async (code: string) => {
@@ -32,9 +39,14 @@ const VerificationCodeForm: FC<Props> = ({ email, onBack, onResendCode, signUpDa
       throw new Error('Invalid verification code');
     }
 
-    // If successful, redirect back or to home
-    const redirectPath = (router.query.redirect as string) || '/';
-    router.push(redirectPath);
+    // If successful, call onSuccess callback or redirect
+    if (onSuccess) {
+      onSuccess();
+    } else {
+      // Default behavior: redirect back or to home
+      const redirectPath = (router.query.redirect as string) || '/';
+      router.push(redirectPath);
+    }
   };
 
   return (

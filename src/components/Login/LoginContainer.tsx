@@ -79,14 +79,12 @@ const LoginContainer = () => {
   const renderContent = () => {
     if (loginView === LoginView.VERIFICATION) {
       return (
-        <div className={authStyles.pageContainer}>
-          <VerificationCodeForm
-            email={signUpData?.email || ''}
-            signUpData={signUpData as SignUpRequest}
-            onBack={onBack}
-            onResendCode={handleResendCode}
-          />
-        </div>
+        <VerificationCodeForm
+          email={signUpData?.email || ''}
+          signUpData={signUpData as SignUpRequest}
+          onBack={onBack}
+          onResendCode={handleResendCode}
+        />
       );
     }
 
