@@ -1,108 +1,128 @@
+/* eslint-disable max-lines */
+import React, { useState } from 'react';
+
 import useTranslation from 'next-translate/useTranslation';
-import { useSWRConfig } from 'swr';
+import useSWRImmutable from 'swr/immutable';
 
-import buildFormBuilderFormField from '../FormBuilder/buildFormBuilderFormField';
-
-import TextInputField, { InputType } from './common/TextInputField';
-import styles from './CompleteSignupForm.module.scss';
-import EmailVerificationForm from './EmailVerificationForm';
+import AuthHeader from './AuthHeader';
+import getCompleteSignupFormFields from './CompleteSignupFormFields';
+import addCustomRenderToCompleteSignupFormFields from './CompleteSignupFormWithCustomRender';
+import styles from './login.module.scss';
 import getFormErrors, { ErrorType } from './SignUpForm/errors';
+import VerificationCodeForm from './VerificationCode/VerificationCodeForm';
 
+import Button, { ButtonShape, ButtonType } from '@/components/dls/Button/Button';
 import FormBuilder from '@/components/FormBuilder/FormBuilder';
 import authStyles from '@/styles/auth/auth.module.scss';
+import { getUserProfile, requestVerificationCode } from '@/utils/auth/api';
 import { makeUserProfileUrl } from '@/utils/auth/apiPaths';
-import { completeSignup } from '@/utils/auth/authRequests';
+import { isLoggedIn } from '@/utils/auth/login';
 import { logFormSubmission } from '@/utils/eventLogger';
-import FormField from 'types/FormField';
 
-type CompleteSignupFormProps = {
-  requiredFields: FormField[];
-  onSuccess?: () => void;
+type FormData = {
+  [key: string]: string;
 };
 
-/**
- * If users' email is empty, return email verification form
- * otherwise, return normal user information form
- */
+interface CompleteSignupFormProps {
+  onSuccess?: () => void;
+}
 
-const CompleteSignupForm: React.FC<CompleteSignupFormProps> = ({ requiredFields, onSuccess }) => {
-  const { mutate } = useSWRConfig();
+const CompleteSignupForm: React.FC<CompleteSignupFormProps> = ({ onSuccess }) => {
   const { t } = useTranslation('common');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [showVerification, setShowVerification] = useState(false);
+  const [formData, setFormData] = useState<FormData>({});
+  const [email, setEmail] = useState<string>('');
 
-  const handleSubmit = async (data) => {
+  const { data: userData } = useSWRImmutable(
+    isLoggedIn() ? makeUserProfileUrl() : null,
+    getUserProfile,
+  );
+
+  const handleSubmit = async (data: FormData) => {
     logFormSubmission('complete_signUp');
 
+    const requiredFieldNames = ['firstName', 'lastName', 'email', 'username'];
+    const missingFields = requiredFieldNames.filter((field) => !data[field]);
+
+    if (missingFields.length > 0) {
+      const errors = {};
+      missingFields.forEach((field) => {
+        errors[field] = t('errors.required', { fieldName: t(`form.${field}`) });
+      });
+      return { errors };
+    }
+
+    setIsSubmitting(true);
     try {
-      const { data: response, errors } = await completeSignup(data);
-
-      if (!response?.success) {
-        return getFormErrors(t, ErrorType.API, errors);
-      }
-
-      // mutate the cache version of users/profile
-      await mutate(makeUserProfileUrl());
-
-      // Call onSuccess callback if provided
-      if (onSuccess) {
-        onSuccess();
-      }
-
+      setFormData(data);
+      setEmail(data.email);
+      await requestVerificationCode(data.email);
+      setShowVerification(true);
+      setIsSubmitting(false);
       return undefined;
-    } catch (error) {
-      return getFormErrors(t, ErrorType.SIGNUP);
+    } catch (err) {
+      setIsSubmitting(false);
+      return getFormErrors(t, ErrorType.API, err);
     }
   };
 
-  const emailFormField = requiredFields.find((field) => field.field === 'email');
-  const isEmailRequired = !!emailFormField;
-  if (isEmailRequired) {
-    const formField = buildFormBuilderFormField(
-      { ...emailFormField, placeholder: t(`form.email`) },
-      t,
-    );
+  const handleBack = () => setShowVerification(false);
 
+  const handleResendCode = async () => {
+    if (!email) throw new Error('Email is required');
+    await requestVerificationCode(email);
+  };
+
+  const renderAction = (props) => (
+    <Button
+      {...props}
+      block
+      shape={ButtonShape.Pill}
+      type={ButtonType.Success}
+      className={styles.submitButton}
+    >
+      {t('continue')}
+    </Button>
+  );
+
+  const formFields = React.useMemo(
+    () => addCustomRenderToCompleteSignupFormFields(getCompleteSignupFormFields(t), userData),
+    [t, userData],
+  );
+
+  if (showVerification) {
     return (
-      <EmailVerificationForm
-        emailFormField={{
-          ...formField,
-          customRender: (props) => <TextInputField {...props} type={InputType.EMAIL} />,
-          errorClassName: authStyles.errorText,
-          containerClassName: authStyles.inputContainer,
-        }}
-      />
+      <div className={styles.outerContainer}>
+        <VerificationCodeForm
+          email={email}
+          signUpData={formData as any}
+          onBack={handleBack}
+          onResendCode={handleResendCode}
+          onSuccess={onSuccess}
+        />
+      </div>
     );
   }
 
   return (
-    <div className={styles.container}>
-      <h2 className={styles.title}>{t('complete-sign-up')}</h2>
-      <FormBuilder
-        formFields={requiredFields.map((field) => {
-          const formField = buildFormBuilderFormField(
-            { ...field, placeholder: t(`form.${field.field}`) },
-            t,
-          );
-
-          // Add customRender with TextInputField to all fields except password fields
-          if (field.field !== 'password' && field.field !== 'confirmPassword') {
-            return {
-              ...formField,
-              customRender: (props) => (
-                <TextInputField
-                  {...props}
-                  type={field.field === 'email' ? InputType.EMAIL : InputType.TEXT}
-                />
-              ),
-              errorClassName: authStyles.errorText,
-              containerClassName: authStyles.inputContainer,
-            };
-          }
-
-          return formField;
-        })}
-        onSubmit={handleSubmit}
-        actionText={t('submit')}
-      />
+    <div className={authStyles.outerContainer}>
+      <div className={styles.authContainer}>
+        <AuthHeader />
+        <h1 className={styles.authTitle}>{t('complete-signup.title')}</h1>
+        <p className={styles.description}>{t('complete-signup.description')}</p>
+        <div className={styles.formContainer}>
+          {userData && (
+            <FormBuilder
+              key={userData.id}
+              formFields={formFields}
+              onSubmit={handleSubmit}
+              renderAction={renderAction}
+              isSubmitting={isSubmitting}
+            />
+          )}
+        </div>
+      </div>
     </div>
   );
 };

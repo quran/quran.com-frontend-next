@@ -17,6 +17,10 @@ $container-width: 370px;
     @include breakpoints.smallerThanMobileL {
         padding-inline: var(--spacing-small-px);
     }
+
+    * {
+        font-family: var(--font-family-figtree);
+    }
 }
 
 .innerContainer {
