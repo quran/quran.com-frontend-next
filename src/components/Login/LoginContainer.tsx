@@ -1,6 +1,5 @@
 import { useState } from 'react';
 
-import Link from 'next/link';
 import { useRouter } from 'next/router';
 import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
@@ -11,9 +10,11 @@ import loginStyles from './login.module.scss';
 import ServiceCard from './ServiceCard';
 import VerificationCodeForm from './VerificationCode/VerificationCodeForm';
 
+import Link, { LinkVariant } from '@/dls/Link/Link';
 import authStyles from '@/styles/auth/auth.module.scss';
 import QueryParam from '@/types/QueryParam';
 import { signUp } from '@/utils/auth/authRequests';
+import { ROUTES } from '@/utils/constants';
 import { logButtonClick, logEvent } from '@/utils/eventLogger';
 import SignUpRequest from 'types/auth/SignUpRequest';
 
@@ -103,8 +104,8 @@ const LoginContainer = () => {
             <Trans
               i18nKey="login:privacy-policy"
               components={{
-                link: <Link href="/privacy" />,
-                link1: <Link href="/terms-and-conditions" />,
+                link: <Link href={ROUTES.PRIVACY} isNewTab variant={LinkVariant.Blend} />,
+                link1: <Link href={ROUTES.TERMS} isNewTab variant={LinkVariant.Blend} />,
               }}
             />
           </p>
