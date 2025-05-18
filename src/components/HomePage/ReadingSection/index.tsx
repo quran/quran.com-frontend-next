@@ -13,20 +13,22 @@ import StreakOrGoalCard from './StreakOrGoalCard';
 
 import Card from '@/components/HomePage/Card';
 import Link, { LinkVariant } from '@/dls/Link/Link';
+import useGetRecentlyReadVerseKeys from '@/hooks/auth/useGetRecentlyReadVerseKeys';
 import useGetStreakWithMetadata from '@/hooks/auth/useGetStreakWithMetadata';
 import BookmarkRemoveIcon from '@/icons/bookmark_remove.svg';
 import { selectUserState } from '@/redux/slices/session';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getProfileNavigationUrl } from '@/utils/navigation';
 import { isMobile } from '@/utils/responsive';
-import { getVerseNumberFromKey } from '@/utils/verse';
 
 interface Props {}
 
 const ReadingSection: React.FC<Props> = () => {
   const { t } = useTranslation('home');
-  const { isFirstTimeGuest, isGuest, hasReadingSessions, lastReadVerse } =
-    useSelector(selectUserState);
+  const { isFirstTimeGuest, isGuest } = useSelector(selectUserState);
+  const { recentlyReadVerseKeys } = useGetRecentlyReadVerseKeys(false);
+  const hasReadingSessions = recentlyReadVerseKeys?.length > 0;
+  const lastReadVerse = recentlyReadVerseKeys?.[0];
   const isGuestWithReadingSessions = isGuest && hasReadingSessions;
   const isUserWithReadingSessions = !isGuest && hasReadingSessions;
   const { goal, streak, currentActivityDay } = useGetStreakWithMetadata({
@@ -64,10 +66,8 @@ const ReadingSection: React.FC<Props> = () => {
 
   const continueReadingCard = (
     <ChapterCard
-      surahNumber={lastReadVerse.chapterId ? Number(lastReadVerse.chapterId) : 1}
-      verseNumber={
-        lastReadVerse.verseKey ? getVerseNumberFromKey(lastReadVerse.verseKey) : undefined
-      }
+      surahNumber={lastReadVerse?.surah ? Number(lastReadVerse?.surah) : 1}
+      verseNumber={lastReadVerse?.ayah ? Number(lastReadVerse?.ayah) : undefined}
       isContinueReading
     />
   );
