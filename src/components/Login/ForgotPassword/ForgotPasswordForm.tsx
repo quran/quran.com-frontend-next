@@ -45,7 +45,7 @@ const ForgotPasswordForm: React.FC = () => {
       }
 
       toast(t('forgot-password-success'), { status: ToastStatus.Success });
-      router.push(getLoginNavigationUrl());
+      setIsSubmitting(false);
       return undefined;
     } catch (error) {
       setIsSubmitting(false);

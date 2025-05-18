@@ -261,6 +261,17 @@ $container-width: 370px;
   }
 }
 
+.generalError {
+  padding: calc(var(--spacing-xsmall-px) * 1.5);
+  margin-bottom: var(--spacing-xsmall-px);
+  font-size: var(--font-size-small);
+  color: white;
+  background-color: var(--color-error-medium2);
+  border-radius: calc(var(--border-radius-default) * 2);
+  width: 100%;
+  box-sizing: border-box;
+}
+
 .submitButton {
   width: 100%;
   padding: var(--spacing-medium);
