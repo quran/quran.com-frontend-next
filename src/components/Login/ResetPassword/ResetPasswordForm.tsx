@@ -22,6 +22,7 @@ const ResetPasswordForm: React.FC = () => {
   const { t } = useTranslation('login');
   const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [generalError, setGeneralError] = useState<string | null>(null);
   const toast = useToast();
   const token = router.query[QueryParam.TOKEN] as string;
 
@@ -44,7 +45,7 @@ const ResetPasswordForm: React.FC = () => {
       if (!response.success) {
         setIsSubmitting(false);
         if (errors.token) {
-          toast(t('errors.expiredToken'), { status: ToastStatus.Error });
+          setGeneralError(t('errors.expiredToken'));
         }
         return getFormErrors(t, ErrorType.API, errors);
       }
@@ -81,6 +82,8 @@ const ResetPasswordForm: React.FC = () => {
         <AuthHeader />
         <h1 className={styles.authTitle}>{t('set-new-password')}</h1>
         <div className={styles.formContainer}>
+          {generalError && <div className={styles.generalError}>{generalError}</div>}
+
           <FormBuilder
             formFields={formFields}
             onSubmit={handleSubmit}
