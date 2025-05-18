@@ -9,8 +9,7 @@
   input {
     width: 100%;
     height: var(--spacing-xxlarge-px);
-    box-sizing: border-box;
-    padding-inline: var(--spacing-small-px);
+    padding-inline: calc(var(--spacing-xsmall-px) * 2);
     border-radius: var(--border-radius-medium-px);
     border: 1px solid var(--color-border-gray-lighter);
     background-color: var(--color-background-default);
