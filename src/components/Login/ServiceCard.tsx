@@ -55,10 +55,22 @@ const ServiceCard: FC<Props> = ({
         {t('welcome-description-3')}
       </p>
       <div className={styles.servicesContainer}>
-        <Image src="/icons/logo_main.svg" alt="Quran Logo" width={140} height={26} />
+        <Image
+          src="/icons/logo_main.svg"
+          alt="Quran Logo"
+          width={140}
+          height={26}
+          className={styles.logos}
+        />
         <BenefitsSection benefits={benefits.quran} />
         <hr className={styles.serviceDivider} />
-        <Image src="/icons/qr-registration-logo.svg" alt="QR Logo" width={174} height={30} />
+        <Image
+          src="/icons/qr-registration-logo.svg"
+          alt="QR Logo"
+          width={174}
+          height={30}
+          className={styles.logos}
+        />
         <BenefitsSection benefits={benefits.reflect} />
       </div>
       <p className={styles.loginCta}>{t('login-cta')}</p>
