@@ -106,7 +106,6 @@ $container-width: 370px;
   border: 1px solid var(--color-border-gray-dark);
   background-color: var(--color-background-default);
   color: var(--color-text-default);
-  transition: all 0.2s ease-in-out;
 
   &:hover {
     background-color: var(--color-background-elevated);
@@ -340,18 +339,19 @@ $container-width: 370px;
 }
 
 .logos {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-large);
-  margin-block-end: var(--spacing-xlarge);
-  border-block-end: 1px solid var(--color-borders-hairline);
-  padding-block-end: var(--spacing-large);
-  width: 100%;
-  justify-content: center;
+  @include theme.light {
+    color: var(--color-text-black);
+    filter: brightness(1);
+  }
 
-  svg {
-    height: 32px;
-    width: auto;
+  @include theme.sepia {
+    color: var(--color-text-default);
+    filter: brightness(1);
+  }
+
+  @include theme.dark {
+    color: var(--color-text-inverse);
+    filter: brightness(0) invert(1);
   }
 }
 
