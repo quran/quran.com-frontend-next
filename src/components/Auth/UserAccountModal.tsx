@@ -4,7 +4,6 @@ import Modal from '@/dls/Modal/Modal';
 import useSyncUserData from '@/hooks/auth/useSyncUserData';
 import ConsentType from '@/types/auth/ConsentType';
 import Announcement from 'types/auth/Announcement';
-import FormField from 'types/FormField';
 
 const AnnouncementModalBodyResolver = dynamic(
   () => import('@/components/Auth/Announcements/AnnouncementModalBodyResolver'),
