@@ -4,6 +4,8 @@ import { useRouter } from 'next/router';
 import useSWRImmutable from 'swr/immutable';
 
 import CompleteSignupForm from '@/components/Login/CompleteSignupForm';
+import Spinner, { SpinnerSize } from '@/dls/Spinner/Spinner';
+import styles from '@/pages/index.module.scss';
 import { getUserProfile } from '@/utils/auth/api';
 import { makeUserProfileUrl } from '@/utils/auth/apiPaths';
 import { isCompleteProfile } from '@/utils/auth/complete-signup';
@@ -38,6 +40,14 @@ const CompleteSignupPage = () => {
   const handleSuccess = () => {
     router.push(ROUTES.HOME);
   };
+
+  if (isValidating || !userData) {
+    return (
+      <div className={styles.loadingContainer}>
+        <Spinner size={SpinnerSize.Large} />
+      </div>
+    );
+  }
 
   return <CompleteSignupForm onSuccess={handleSuccess} />;
 };
