@@ -2,18 +2,20 @@ import useTranslation from 'next-translate/useTranslation';
 import { useSWRConfig } from 'swr';
 
 import buildFormBuilderFormField from '../FormBuilder/buildFormBuilderFormField';
-import FormBuilder from '../FormBuilder/FormBuilder';
 
 import styles from './CompleteSignupForm.module.scss';
 import EmailVerificationForm from './EmailVerificationForm';
+import getFormErrors, { ErrorType } from './SignUpForm/errors';
 
-import { completeSignup } from '@/utils/auth/api';
+import FormBuilder from '@/components/FormBuilder/FormBuilder';
 import { makeUserProfileUrl } from '@/utils/auth/apiPaths';
+import { completeSignup } from '@/utils/auth/authRequests';
 import { logFormSubmission } from '@/utils/eventLogger';
 import FormField from 'types/FormField';
 
 type CompleteSignupFormProps = {
   requiredFields: FormField[];
+  onSuccess?: () => void;
 };
 
 /**
@@ -21,16 +23,32 @@ type CompleteSignupFormProps = {
  * otherwise, return normal user information form
  */
 
-const CompleteSignupForm: React.FC<CompleteSignupFormProps> = ({ requiredFields }) => {
+const CompleteSignupForm: React.FC<CompleteSignupFormProps> = ({ requiredFields, onSuccess }) => {
   const { mutate } = useSWRConfig();
   const { t } = useTranslation('common');
 
-  const onSubmit = (data) => {
+  const handleSubmit = async (data) => {
     logFormSubmission('complete_signUp');
-    completeSignup(data).then(() => {
+
+    try {
+      const { data: response, errors } = await completeSignup(data);
+
+      if (!response?.success) {
+        return getFormErrors(t, ErrorType.API, errors);
+      }
+
       // mutate the cache version of users/profile
-      mutate(makeUserProfileUrl());
-    });
+      await mutate(makeUserProfileUrl());
+
+      // Call onSuccess callback if provided
+      if (onSuccess) {
+        onSuccess();
+      }
+
+      return undefined;
+    } catch (error) {
+      return getFormErrors(t, ErrorType.SIGNUP);
+    }
   };
 
   const emailFormField = requiredFields.find((field) => field.field === 'email');
@@ -53,7 +71,7 @@ const CompleteSignupForm: React.FC<CompleteSignupFormProps> = ({ requiredFields 
         formFields={requiredFields.map((field) =>
           buildFormBuilderFormField({ ...field, placeholder: t(`form.${field.field}`) }, t),
         )}
-        onSubmit={onSubmit}
+        onSubmit={handleSubmit}
         actionText={t('submit')}
       />
     </div>

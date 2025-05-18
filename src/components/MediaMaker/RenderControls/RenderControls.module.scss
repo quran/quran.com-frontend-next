@@ -59,3 +59,39 @@ $pixel: 1px;
 .error {
   color: var(--color-error-medium);
 }
+
+.urlDisplayContainer {
+  border: 1px solid var(--color-borders-hairline);
+  padding: var(--spacing-small);
+  border-radius: var(--border-radius-default);
+  max-width: 100%;
+  overflow: hidden;
+  background-color: var(--color-background-elevated);
+
+  p {
+    font-weight: var(--font-weight-medium);
+    margin-bottom: var(--spacing-xsmall);
+  }
+
+  .urlDisplayHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: start;
+    margin-bottom: var(--spacing-xsmall);
+
+    p {
+      margin-bottom: 0;
+    }
+  }
+
+  .urlBox {
+    padding: var(--spacing-xsmall);
+    border: 1px solid var(--color-borders-hairline);
+    border-radius: var(--border-radius-default);
+    word-break: break-all;
+    background-color: var(--color-background-default);
+    font-family: monospace;
+    font-size: var(--font-size-small);
+    cursor: text;
+  }
+}

@@ -1,26 +1,27 @@
 {
-    "change": "Değiştir",
-    "curated-station": {
-        "juz-amma": {
-            "description": "Kuran'ın son Cüz'ünü dinleyin",
-            "title": "Amma cüzü"
-        },
-        "popular-recitations": {
-            "description": "Günlük küratörlü okuma akışı",
-            "title": "Popüler Anlatımlar"
-        },
-        "surah-al-kahf": {
-            "description": "Kehf Suresini tekrarlı dinleyin",
-            "title": "Kehf Suresi"
-        },
-        "yaseen-alwaqiah-al-mulk": {
-            "description": "Hafızların küratörlüğünden sureler",
-            "title": "Yasin, Vakı'a, Mülk"
-        }
+  "change": "Değiştir",
+  "curated-station": {
+    "juz-amma": {
+      "description": "Kuran'ın son Cüz'ünü dinleyin",
+      "title": "Amma cüzü"
     },
-    "curated-stations": "Veli İstasyonları",
-    "pause-radio": "Radyoyu Duraklat",
-    "play-radio": "Radyo Çal",
-    "radio-desc": "Çeşitli okuyucular tarafından Kur'an-ı Kerim'in kesintisiz güzel okunuşunu dinleyin.",
-    "reciter-stations": "Okuyucu İstasyonları"
+    "popular-recitations": {
+      "description": "Günlük küratörlü okuma akışı",
+      "title": "Popüler Anlatımlar"
+    },
+    "surah-al-kahf": {
+      "description": "Kehf Suresini tekrarlı dinleyin",
+      "title": "Kehf Suresi"
+    },
+    "yaseen-alwaqiah-al-mulk": {
+      "description": "Hafızların küratörlüğünden sureler",
+      "title": "Yasin, Vakı'a, Mülk"
+    }
+  },
+  "curated-stations": "Veli İstasyonları",
+  "pause-radio": "Radyoyu Duraklat",
+  "play-radio": "Radyo Çal",
+  "radio-desc": "Çeşitli okuyucular tarafından Kur'an-ı Kerim'in kesintisiz güzel okunuşunu dinleyin.",
+  "reciter-stations": "Okuyucu İstasyonları",
+  "station": "İstasyon"
 }

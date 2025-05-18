@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import stringify from '../qs-stringify';
 
 import BookmarkByCollectionIdQueryParams from './types/BookmarkByCollectionIdQueryParams';
@@ -7,16 +8,17 @@ import GetAllNotesQueryParams from './types/Note/GetAllNotesQueryParams';
 import { ActivityDayType, FilterActivityDaysParams } from '@/types/auth/ActivityDay';
 import { EstimateGoalRequest, GoalCategory } from '@/types/auth/Goal';
 import { StreakWithMetadataParams } from '@/types/auth/Streak';
+import Language from '@/types/Language';
 import { MediaType } from '@/types/Media/GenerateMediaFileRequest';
 import { Mushaf } from '@/types/QuranReader';
-import { getAuthApiPath } from '@/utils/url';
+import { getProxiedServiceUrl } from '@/utils/url';
 import BookmarkType from 'types/BookmarkType';
 
 export const makeUrl = (url: string, parameters?: Record<string, unknown>): string => {
   if (!parameters) {
-    return getAuthApiPath(url);
+    return getProxiedServiceUrl('auth/', url);
   }
-  return getAuthApiPath(`${url}${`?${stringify(parameters)}`}`);
+  return getProxiedServiceUrl('auth/', `${url}${`?${stringify(parameters)}`}`);
 };
 
 export const makeUserProfileUrl = (): string => makeUrl('users/profile');
@@ -35,6 +37,10 @@ export const makeSyncLocalDataUrl = (): string => makeUrl('users/syncLocalData')
 
 export const makeVerificationCodeUrl = (): string => makeUrl('users/verificationCode');
 
+export const makeForgotPasswordUrl = (): string => makeUrl('users/forgetPassword');
+
+export const makeResetPasswordUrl = (): string => makeUrl('users/resetPassword');
+
 export const makeSendMagicLinkUrl = (redirect?: string): string =>
   makeUrl('auth/magiclogin', redirect ? { redirect } : undefined);
 
@@ -46,6 +52,10 @@ export const makeFacebookLoginUrl = (redirect?: string): string =>
 
 export const makeAppleLoginUrl = (redirect?: string): string =>
   makeUrl('auth/apple', redirect ? { redirect } : undefined);
+
+export const makeSignInUrl = (): string => makeUrl('users/login');
+
+export const makeSignUpUrl = (): string => makeUrl('users/signup');
 
 export const makeBookmarksUrl = (mushafId: number, limit?: number): string =>
   makeUrl('bookmarks', { mushafId, limit });
@@ -59,6 +69,57 @@ export const makeCollectionsUrl = (queryParams: CollectionsQueryParams): string 
   makeUrl('collections', queryParams);
 
 export const makeAddCollectionUrl = () => makeUrl('collections');
+
+export const makeGetQuestionByIdUrl = (id: string) => makeUrl(`questions/${id}`);
+
+/**
+ * As per the specs, either Arabic for Arabic or English for all non-Arabic languages.
+ *
+ * @param {Language} language - The language to get questions in
+ * @returns {Language} - The language to get questions in
+ */
+const getQuestionsLanguage = (language: Language) => {
+  return language === Language.AR ? language : Language.EN;
+};
+
+export const makeGetQuestionsByVerseKeyUrl = ({
+  verseKey,
+  page = 1,
+  pageSize = 10,
+  language = Language.EN,
+}: {
+  verseKey: string;
+  page?: number;
+  pageSize?: number;
+  language?: Language;
+}) =>
+  makeUrl(`questions/by-verse/${verseKey}`, {
+    pageSize,
+    page,
+    language: getQuestionsLanguage(language),
+  });
+
+export const makeGetQuestionsWithinRangeUrl = (
+  startVerseKey: string,
+  endVerseKey: string,
+  language: Language = Language.EN,
+) =>
+  makeUrl(`questions/by-range`, {
+    from: startVerseKey,
+    to: endVerseKey,
+    language: getQuestionsLanguage(language),
+  });
+
+export const makeCountQuestionsWithinRangeUrl = (
+  startVerseKey: string,
+  endVerseKey: string,
+  language: Language = Language.EN,
+) =>
+  makeUrl(`questions/count-within-range`, {
+    from: startVerseKey,
+    to: endVerseKey,
+    language: getQuestionsLanguage(language),
+  });
 
 export const makeGetNotesByVerseUrl = (verseKey: string) => makeUrl(`notes/by-verse/${verseKey}`);
 
@@ -191,3 +252,27 @@ export const makeGetMediaFileProgressUrl = (renderId: string) =>
 
 export const makeGetMonthlyMediaFilesCountUrl = (type: MediaType) =>
   makeUrl(`media/monthly-count`, { type });
+
+/**
+ * Compose the url for shorten-url API.
+ *
+ * @returns {string}
+ */
+export const makeShortenUrlUrl = (): string => makeUrl('shorten-url');
+
+/**
+ * Compose the url for get full URL by id.
+ *
+ * @param {string} id
+ * @returns {string}
+ */
+export const makeFullUrlById = (id: string): string => makeUrl(`shorten-url/${id}`);
+
+export const makeGetUserQuranProgramUrl = (programId: string): string =>
+  makeUrl(`quran-reading-program/${programId}`);
+
+export const makeEnrollUserInQuranProgramUrl = (): string =>
+  makeUrl('quran-reading-program/enroll');
+
+export const makeGetQuranicWeekUrl = (programId: string, weekId: string): string =>
+  makeUrl(`quran-reading-program/week/${programId}/${weekId}`);

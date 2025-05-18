@@ -103,7 +103,7 @@ const ChapterAndJuzList: React.FC<ChapterAndJuzListProps> = ({
   return (
     <>
       <div className={styles.tabsContainer}>
-        <Tabs tabs={tabs} selected={view} onSelect={onTabSelected} />
+        <Tabs className={styles.tabItem} tabs={tabs} selected={view} onSelect={onTabSelected} />
         <div className={styles.sorter}>
           <div className={styles.uppercase}>{t('common:sort.by')}:</div>
           <div

@@ -45,20 +45,14 @@ export const navigateToExternalUrl = (url: string) => {
  * @returns {string}
  */
 export const getBasePath = (): string =>
-  `${process.env.NEXT_PUBLIC_VERCEL_ENV === 'development' ? 'https' : 'https'}://${
+  `${process.env.NEXT_PUBLIC_VERCEL_ENV === 'development' ? 'http' : 'https'}://${
     process.env.NEXT_PUBLIC_VERCEL_URL
   }`;
 
-/**
- * Get the auth api path.
- *
- * @param {string} path
- * @returns  {string}
- */
-export const getAuthApiPath = (path: string): string => {
-  const PROXY_PATH = '/api/proxy/auth/';
+export const getProxiedServiceUrl = (service: string, path: string): string => {
+  const PROXY_PATH = `/api/proxy/${service}`;
   const BASE_PATH = isStaticBuild
-    ? `${process.env.API_GATEWAY_URL}/auth/`
+    ? `${process.env.API_GATEWAY_URL}/${service}`
     : `${getBasePath()}${PROXY_PATH}`;
   return `${BASE_PATH}${path}`;
 };

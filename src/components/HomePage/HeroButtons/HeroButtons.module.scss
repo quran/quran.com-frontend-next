@@ -1,0 +1,45 @@
+@use "src/styles/breakpoints";
+
+.button {
+    color: var(--color-text-faded-new);
+    background: var(--color-background-elevated);
+    &:hover {
+        background: var(--color-background-elevated);
+        color: var(--color-text-faded-new);
+    }
+    border: none;
+    padding: var(--spacing-medium2-px);
+    box-shadow: var(--shadow-small);
+    @include breakpoints.smallerThanTablet {
+        padding: var(--spacing-small-px);
+    }
+}
+
+.buttonContent {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xsmall);
+
+    @include breakpoints.smallerThanTablet {
+        svg {
+            width: 12px;
+            height: 12px;
+        }
+    }
+}
+
+.popularText {
+    @include breakpoints.tablet {
+        font-size: var(--font-size-normal-px);
+    }
+}
+
+.navigateQuranText {
+    @include breakpoints.tablet {
+        font-size: var(--font-size-normal-px);
+    }
+}
+
+.buttonContainer {
+    background: var(--color-background-elevated);
+}

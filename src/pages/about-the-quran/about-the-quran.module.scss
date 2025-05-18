@@ -1,0 +1,27 @@
+.verseContainer {
+    margin-block: var(--spacing-large-px);
+    color: var(--color-text-black);
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: var(--spacing-medium2-px);
+    gap: var(--spacing-small-px);
+
+    background: var(--shade-0);
+    border-inline-start: 3px solid var(--color-qdc-blue);
+    border-radius: 0px var(--spacing-small-px) var(--spacing-small-px) 0px;
+}
+
+.verseTranslation {
+    font-size: calc(2 * var(--spacing-xsmall-px));
+    text-align: center;
+    line-height: normal !important;
+}
+
+.translationName {
+    color: var(--color-text-faded);
+    font-size: var(--spacing-medium-px);
+    font-weight: var(--font-weight-semibold);
+}

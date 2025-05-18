@@ -1,79 +1,96 @@
 /* eslint-disable max-lines */
 import { NextApiRequest } from 'next';
+import Router from 'next/router';
 import { configureRefreshFetch } from 'refresh-fetch';
 
 import { getTimezone } from '../datetime';
 import { prepareGenerateMediaFileRequestData } from '../media/utils';
 
+import { BANNED_USER_ERROR_ID } from './constants';
+import { AuthErrorCodes } from './errors';
 import generateSignature from './signature';
 import BookmarkByCollectionIdQueryParams from './types/BookmarkByCollectionIdQueryParams';
 import GetAllNotesQueryParams from './types/Note/GetAllNotesQueryParams';
+import { ShortenUrlResponse } from './types/ShortenUrl';
 
 import { fetcher, X_AUTH_SIGNATURE, X_INTERNAL_CLIENT, X_TIMESTAMP } from '@/api';
 import {
+  ActivityDay,
+  ActivityDayType,
   FilterActivityDaysParams,
   QuranActivityDay,
-  UpdateQuranActivityDayBody,
-  ActivityDayType,
   UpdateActivityDayBody,
-  ActivityDay,
-  UpdateLessonActivityDayBody,
   UpdateActivityDayParams,
+  UpdateLessonActivityDayBody,
+  UpdateQuranActivityDayBody,
+  UpdateQuranReadingProgramActivityDayBody,
 } from '@/types/auth/ActivityDay';
 import ConsentType from '@/types/auth/ConsentType';
 import { Course } from '@/types/auth/Course';
 import { CreateGoalRequest, Goal, GoalCategory, UpdateGoalRequest } from '@/types/auth/Goal';
 import { Note } from '@/types/auth/Note';
+import QuranProgramWeekResponse from '@/types/auth/QuranProgramWeekResponse';
 import { Response } from '@/types/auth/Response';
 import { StreakWithMetadataParams, StreakWithUserMetadata } from '@/types/auth/Streak';
+import UserProgramResponse from '@/types/auth/UserProgramResponse';
+import Language from '@/types/Language';
 import GenerateMediaFileRequest, { MediaType } from '@/types/Media/GenerateMediaFileRequest';
 import MediaRenderError from '@/types/Media/MediaRenderError';
+import QuestionResponse from '@/types/QuestionsAndAnswers/QuestionResponse';
 import { Mushaf } from '@/types/QuranReader';
 import {
-  makeBookmarksUrl,
-  makeCompleteSignupUrl,
-  makeUserProfileUrl,
-  makeDeleteAccountUrl,
-  makeBookmarksRangeUrl,
-  makeBookmarkUrl,
-  makeReadingSessionsUrl,
-  makeUserPreferencesUrl,
-  makeVerificationCodeUrl,
-  makeUserBulkPreferencesUrl,
-  makeLogoutUrl,
-  makeCompleteAnnouncementUrl,
-  makeSyncLocalDataUrl,
-  makeRefreshTokenUrl,
-  makeCollectionsUrl,
-  makeGetBookmarkByCollectionId,
+  CollectionsQueryParams,
+  makeActivityDaysUrl,
+  makeAddCollectionBookmarkUrl,
   makeAddCollectionUrl,
   makeBookmarkCollectionsUrl,
-  CollectionsQueryParams,
-  makeUpdateCollectionUrl,
-  makeDeleteCollectionUrl,
-  makeAddCollectionBookmarkUrl,
+  makeBookmarksRangeUrl,
+  makeBookmarksUrl,
+  makeBookmarkUrl,
+  makeCollectionsUrl,
+  makeCompleteAnnouncementUrl,
+  makeCompleteSignupUrl,
+  makeCountNotesWithinRangeUrl,
+  makeCountQuestionsWithinRangeUrl,
+  makeCourseFeedbackUrl,
+  makeDeleteAccountUrl,
+  makeDeleteBookmarkUrl,
   makeDeleteCollectionBookmarkByIdUrl,
   makeDeleteCollectionBookmarkByKeyUrl,
-  makeDeleteBookmarkUrl,
-  makeActivityDaysUrl,
-  makeGoalUrl,
-  makeFilterActivityDaysUrl,
-  makeStreakUrl,
-  makeEstimateRangesReadingTimeUrl,
-  makeUserFeatureFlagsUrl,
-  makeUserConsentsUrl,
-  makeNotesUrl,
+  makeDeleteCollectionUrl,
   makeDeleteOrUpdateNoteUrl,
-  makeCountNotesWithinRangeUrl,
   makeEnrollUserUrl,
+  makeEstimateRangesReadingTimeUrl,
+  makeFilterActivityDaysUrl,
+  makeFullUrlById,
+  makeGenerateMediaFileUrl,
+  makeGetBookmarkByCollectionId,
   makeGetCoursesUrl,
   makeGetCourseUrl,
-  makePublishNoteUrl,
-  makeCourseFeedbackUrl,
-  makeGetUserCoursesCountUrl,
-  makeGenerateMediaFileUrl,
+  makeEnrollUserInQuranProgramUrl,
   makeGetMediaFileProgressUrl,
   makeGetMonthlyMediaFilesCountUrl,
+  makeGetQuestionByIdUrl,
+  makeGetQuestionsByVerseKeyUrl,
+  makeGetUserCoursesCountUrl,
+  makeGetUserQuranProgramUrl,
+  makeGoalUrl,
+  makeLogoutUrl,
+  makeNotesUrl,
+  makePublishNoteUrl,
+  makeReadingSessionsUrl,
+  makeRefreshTokenUrl,
+  makeShortenUrlUrl,
+  makeStreakUrl,
+  makeSyncLocalDataUrl,
+  makeUpdateCollectionUrl,
+  makeUserBulkPreferencesUrl,
+  makeUserConsentsUrl,
+  makeUserFeatureFlagsUrl,
+  makeUserPreferencesUrl,
+  makeUserProfileUrl,
+  makeVerificationCodeUrl,
+  makeGetQuranicWeekUrl,
 } from '@/utils/auth/apiPaths';
 import { isStaticBuild } from '@/utils/build';
 import CompleteAnnouncementRequest from 'types/auth/CompleteAnnouncementRequest';
@@ -94,15 +111,37 @@ type RequestData = Record<string, any>;
 const IGNORE_ERRORS = [
   MediaRenderError.MediaVersesRangeLimitExceeded,
   MediaRenderError.MediaFilesPerUserLimitExceeded,
+  AuthErrorCodes.InvalidCredentials,
+  AuthErrorCodes.NotFound,
+  AuthErrorCodes.BadRequest,
+  AuthErrorCodes.Invalid,
+  AuthErrorCodes.Mismatch,
+  AuthErrorCodes.Missing,
+  AuthErrorCodes.Duplicate,
+  AuthErrorCodes.Banned,
+  AuthErrorCodes.Expired,
+  AuthErrorCodes.Used,
+  AuthErrorCodes.Immutable,
+  AuthErrorCodes.ValidationError,
 ];
 
 const handleErrors = async (res) => {
   const body = await res.json();
+  const error = body?.error || body?.details?.error;
+  const errorName = body?.name || body?.details?.name;
+
   // sometimes FE needs to handle the error from the API instead of showing a general something went wrong message
-  const shouldIgnoreError = IGNORE_ERRORS.includes(body?.error?.code);
+  const shouldIgnoreError = IGNORE_ERRORS.includes(error?.code);
   if (shouldIgnoreError) {
     return body;
   }
+  // const toast = useToast();
+
+  if (errorName === BANNED_USER_ERROR_ID) {
+    await logoutUser();
+    return Router.push(`/login?error=${errorName}`);
+  }
+
   throw new Error(body?.message);
 };
 
@@ -258,6 +297,11 @@ export const updateActivityDay = async (
     const { mushafId, type, ...body } = params as UpdateActivityDayBody<UpdateQuranActivityDayBody>;
     return postRequest(makeActivityDaysUrl({ mushafId, type }), body);
   }
+  if (params.type === ActivityDayType.QURAN_READING_PROGRAM) {
+    const { type, ...body } =
+      params as UpdateActivityDayBody<UpdateQuranReadingProgramActivityDayBody>;
+    return postRequest(makeActivityDaysUrl({ type }), body);
+  }
   const { type, ...body } = params as UpdateActivityDayBody<UpdateLessonActivityDayBody>;
   return postRequest(makeActivityDaysUrl({ type }), body);
 };
@@ -381,12 +425,33 @@ export const addCollection = async (collectionName: string) => {
   return postRequest(makeAddCollectionUrl(), { name: collectionName });
 };
 
+export const countQuestionsWithinRange = async (
+  from: string,
+  to: string,
+  language: Language,
+): Promise<Record<string, number>> => {
+  return privateFetcher(makeCountQuestionsWithinRangeUrl(from, to, language));
+};
+
 export const getAllNotes = async (params: GetAllNotesQueryParams) => {
   return privateFetcher(makeNotesUrl(params));
 };
 
 export const countNotesWithinRange = async (from: string, to: string) => {
   return privateFetcher(makeCountNotesWithinRangeUrl(from, to));
+};
+
+export const getAyahQuestions = async (ayahKey: string, language: Language) => {
+  return privateFetcher(
+    makeGetQuestionsByVerseKeyUrl({
+      verseKey: ayahKey,
+      language,
+    }),
+  );
+};
+
+export const getQuestionById = async (questionId: string): Promise<QuestionResponse> => {
+  return privateFetcher(makeGetQuestionByIdUrl(questionId));
 };
 
 export const addNote = async (payload: Pick<Note, 'body' | 'ranges' | 'saveToQR'>) => {
@@ -433,6 +498,49 @@ export const addOrUpdateBulkUserPreferences = async (
   preferences: Record<PreferenceGroup, any>,
   mushafId: Mushaf,
 ) => postRequest(makeUserBulkPreferencesUrl(mushafId), preferences);
+
+/**
+ * Shorten a URL.
+ *
+ * @param {string} url
+ * @returns {Promise<ShortenUrlResponse>}
+ */
+export const shortenUrl = async (url: string): Promise<ShortenUrlResponse> => {
+  return postRequest(makeShortenUrlUrl(), { url });
+};
+
+/**
+ * Get full URL by id.
+ *
+ * @param {string} id
+ * @returns {Promise<ShortenUrlResponse>}
+ */
+export const getFullUrlById = async (id: string): Promise<ShortenUrlResponse> => {
+  return privateFetcher(makeFullUrlById(id));
+};
+
+export const getUserPrograms = async ({
+  programId,
+}: {
+  programId: string;
+}): Promise<{ data: UserProgramResponse }> => {
+  return privateFetcher(makeGetUserQuranProgramUrl(programId));
+};
+
+export const enrollUserInQuranProgram = async (
+  programId: string,
+): Promise<{ success: boolean }> => {
+  return postRequest(makeEnrollUserInQuranProgramUrl(), {
+    programId,
+  });
+};
+
+export const getQuranProgramWeek = async (
+  programId: string,
+  weekId: string,
+): Promise<{ data: QuranProgramWeekResponse }> => {
+  return privateFetcher(makeGetQuranicWeekUrl(programId, weekId));
+};
 
 export const logoutUser = async () => {
   return postRequest(makeLogoutUrl(), {});

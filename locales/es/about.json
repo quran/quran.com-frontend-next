@@ -1,0 +1,42 @@
+{
+  "credits": {
+    "desc": "Extendemos nuestro agradecimiento a todos aquellos que han apoyado y contribuido a este proyecto, ayudando a que el Corán sea accesible a millones de personas en todo el mundo.",
+    "lokalize": "<0>Lokalize</0>: un sistema de traducción asistido por computadora que se centra en la productividad y la garantía de calidad y proporciona un flujo de trabajo de localización perfecto.",
+    "quran-align": "<0>Collin Fair</0>: Una herramienta para producir una segmentación con precisión de palabras de la recitación coránica grabada.",
+    "quran-complex": "<0>QuranComplex</0>: El Glorioso Complejo de Impresión del Corán Rey Fahd es líder en el servicio al Glorioso Corán y sus Ciencias, traduciendo sus Significados y salvaguardando el Texto Coránico de la distorsión, a través del uso óptimo de tecnologías avanzadas en el campo de la impresión, grabaciones de audio, publicaciones electrónicas y aplicaciones digitales.",
+    "quran-enc": "<0>QuranEnc</0>: Un portal que ofrece traducciones gratuitas y confiables de los significados y exégesis del noble Corán en muchos idiomas del mundo.",
+    "tanzil": "<0>Tanzil</0>: un proyecto coránico internacional cuyo objetivo es proporcionar un texto coránico preciso y altamente verificado.",
+    "tarteel": "<0>Tarteel</0>: una aplicación de memorización del Corán impulsada por IA. Está diseñada para ayudarte a memorizar de forma más inteligente, ya sea que estés buscando un versículo, haciendo un seguimiento de tu progreso o siguiendo tu recitación.",
+    "title": "Créditos",
+    "vercel": "<0>Vercel</0>: es una plataforma de implementación y colaboración para desarrolladores frontend que pone al desarrollador frontend en primer lugar, brindándole herramientas integrales para crear sitios web y aplicaciones de alto rendimiento.",
+    "zekr": "<0>Zekr</0>: una herramienta de estudio del Corán en plataforma abierta para navegar e investigar sobre el Corán."
+  },
+  "global-effort": {
+    "desc": "Millones de personas de todo el mundo confían en Quran.com como su principal recurso digital sobre el Corán. Ya sea que vengan a recitar, reflexionar, memorizar o estudiar, comparten un propósito común: un deseo sincero de conectarse con las palabras de Alá. \\n A medida que continuamos creciendo, mantenemos nuestro compromiso de garantizar que Quran.com siga siendo un espacio confiable, accesible y bellamente diseñado para cualquiera que busque interactuar con el Corán.",
+    "title": "Un esfuerzo global"
+  },
+  "key-features": {
+    "desc": "Quran.com está diseñado para brindar soporte en cada etapa del aprendizaje del Corán, desde la lectura y la memorización hasta el estudio y la reflexión. Nuestras funciones incluyen:",
+    "features": [
+      "Interfaz del Corán fácil de usar: una experiencia de lectura limpia e intuitiva en cualquier dispositivo.",
+      "Varias traducciones y tafsir: acceso a traducciones en varios idiomas, junto con tafsir.",
+      "Recitaciones de audio: escuche recitaciones de alta calidad de Qaris de renombre mundial, con la posibilidad de seguirlas palabra por palabra.",
+      "Búsqueda y navegación avanzadas: encuentre versículos instantáneamente por tema o palabras clave en todo el Corán.",
+      "Marcadores y notas de Ayah: guarde versículos y escriba reflexiones personales para referencia posterior.",
+      "Integración de QuranReflect: interactúe con una comunidad global a través de reflexiones y conocimientos compartidos por académicos e individuos.",
+      "Seguimiento del progreso de lectura y objetivos: realice un seguimiento de sus objetivos diarios y su historial de lectura.",
+      "API para desarrolladores: acceso gratuito a contenido y funciones para impulsar aplicaciones islámicas e I+D.",
+      "Y mucho más, Alhamdullilah."
+    ],
+    "title": "Características y ofertas principales"
+  },
+  "main-description": "Desde su fundación en 1995, Quran.com se ha comprometido a hacer que el Corán esté disponible para todos de una manera clara, auténtica y fácil de entender. Todos los días, millones de personas en todo el mundo recurren a Quran.com para leer, escuchar, estudiar y reflexionar sobre el Corán, ya sean estudiantes de toda la vida, académicos o recién comenzando su camino.",
+  "our-mission": {
+    "desc": "El Corán está destinado a ser leído, comprendido y reflexionado. Nuestra misión es eliminar las barreras de acceso y empoderar a las personas y las comunidades proporcionando una experiencia coránica fiable, bien diseñada y profundamente enriquecedora. Nuestro objetivo es servir como una fuente de confianza para todo aquel que desee interactuar con el Corán, guiados por los principios de precisión, claridad y sinceridad.",
+    "title": "Nuestra misión"
+  },
+  "who-we-are": {
+    "desc": "Quran.com es un waqf (fondo de donación) creado como fideicomiso público para garantizar que el Corán siga siendo accesible para todos, de forma gratuita y sin intereses comerciales. Está gestionado por Quran.Foundation, una organización sin ánimo de lucro 501(c)(3), que sostiene y desarrolla Quran.com como parte de su misión de proporcionar recursos coránicos auténticos y de alta calidad al mundo. Nuestro compromiso es servir al Corán y a sus lectores con excelencia, sinceridad y responsabilidad.",
+    "title": "Quienes somos"
+  }
+}

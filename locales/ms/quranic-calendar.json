@@ -1,5 +1,61 @@
 {
+  "additional-resources": "Sumber Tambahan",
+  "additional-resources-subtitle": "Sumber tambahan ini akan membantu anda mendapatkan hubungan yang lebih mendalam dengan Ayat yang telah anda baca.",
+  "complete": "lengkap",
+  "completed-weeks": "{{completedWeeks}} / {{totalWeeks}} Minggu Selesai",
+  "divine-book-club": "Kelab Buku Ilahi",
+  "divine-book-club-description": "Ini adalah perbincangan kumpulan ringan yang membantu anda mengikuti konteks bacaan setiap minggu.",
+  "end-of-calendar": "Tamat Kalendar",
+  "english-pdf": "PDF Bahasa Inggeris",
+  "faq": "Soalan Lazim",
+  "faq-items": [
+    {
+      "answer": "Quran dalam Setahun ialah pelan bacaan ringkas dan tersusun untuk membantu anda melengkapkan keseluruhan Al-Quran dalam satu tahun—dari penghujung satu Ramadan hingga awal Ramadan seterusnya. Matlamatnya adalah untuk mendapatkan pemahaman asas Al-Quran dari muka depan ke muka tanpa rasa tertekan atau tertekan.",
+      "question": "Apakah \"Quran dalam Setahun\"?"
+    },
+    {
+      "answer": "Anda dijemput untuk meluangkan masa setiap minggu untuk membaca hanya beberapa muka surat Al-Quran dalam bahasa yang anda fahami. Terdapat 46 bacaan secara keseluruhan, satu untuk setiap minggu dalam kalendar Islam dari Syawal hingga Sya'ban. Pembahagian al-Quran ini melengkapkan bahagian lain, seperti 30 bahagian terkenal yang memudahkan bacaan al-Quran dalam satu bulan.",
+      "question": "Bagaimanakah program ini berfungsi?"
+    },
+    {
+      "answer": "Tidak sama sekali. Titik permulaan dalam program ini ialah melibatkan diri dengan makna al-Quran melalui mana-mana bahasa (terjemahan) yang anda selesa. Quran.com menawarkan terjemahan dalam banyak bahasa untuk menjadikannya mudah diakses oleh semua orang. Kami berhasrat untuk memberi inspirasi kepada para peserta untuk terus meningkatkan tahap dari tahun ke tahun.",
+      "question": "Adakah saya perlu tahu membaca bahasa Arab untuk menyertai?"
+    },
+    {
+      "answer": "Setiap minggu, tugasan bacaan yang dikemas kini akan tersedia di Quran.com/calendar. Anda boleh membaca terus di Quran.com, di mana pautan khusus akan membawa anda terus ke bacaan utama untuk minggu itu. \\n \\n Anda juga boleh membuka PDF Bahasa Inggeris dan mencetaknya di rumah. Ini mengandungi terjemahan mengalir yang diadaptasi terutamanya daripada karya MAS Abdel Haleem. Dokumen setiap minggu dibahagikan kepada tujuh bahagian, menjadikannya lebih mudah untuk menyebarkan bacaan sepanjang minggu jika anda mahu. Terdapat pengenalan ringkas kepada surah, tajuk dan nota untuk menjelaskan beberapa perkara penting, dan setiap bahagian harian mempunyai soalan refleksi dan tindakan yang dicadangkan.",
+      "question": "Di manakah saya boleh mencari tugasan bacaan mingguan?"
+    },
+    {
+      "answer": "Anda mempunyai berbilang pilihan untuk kekal di landasan yang betul. Kami amat mengesyorkan melanggan untuk menerima e-mel dengan tugasan bacaan mingguan dilampirkan. Kami juga telah mencipta saluran komuniti di Telegram dan WhatsApp yang akan mengandungi peringatan dan galakan. Hanya klik butang pilihan anda di Quran.com/calendar untuk melanggan. Anda boleh memilih ketiga-tiganya jika anda mahu.",
+      "question": "Bagaimanakah saya boleh menerima peringatan membaca mingguan?"
+    },
+    {
+      "answer": "Di Quran.com, pergi ke menu tetapan untuk: \\n • Laraskan saiz dan gaya fon \\n • Beralih antara mod terang, gelap dan sepia \\n • Pilih daripada berbilang terjemahan yang tersedia \\n \\n Ini memudahkan sesiapa sahaja untuk mengambil bahagian dalam bahasa yang paling mereka fahami dan dengan terjemahan yang jelas dan bermaklumat.",
+      "question": "Bagaimanakah saya boleh memperibadikan pengalaman membaca saya?"
+    },
+    {
+      "answer": "Kami menggalakkan anda untuk melayari QuranReflect.com untuk renungan orang lain tentang petikan yang dibaca setiap minggu, dan sebaik sahaja anda berasa bersedia, siarkan untuk berkongsi pemikiran anda sendiri! \\n \\n Juga pastikan anda melihat podcast The Divine Book Club: perbincangan yang diterajui cendekiawan berwawasan yang mengikuti jadual ini. Ia hanya satu jam setiap minggu, dan menyediakan konteks yang sangat membantu.",
+      "question": "Apakah sumber tambahan yang anda sediakan?"
+    },
+    {
+      "answer": "Tiada masalah. Hanya ambil pada bacaan minggu semasa—tidak perlu mengejar minggu yang terlepas. Kekal konsisten dan fokus ke hadapan. Selalu ada tahun depan untuk mengambil apa-apa yang anda terlepas.",
+      "question": "Bagaimana jika saya ketinggalan atau menyertai lewat?"
+    },
+    {
+      "answer": "Cara terbaik untuk kekal konsisten adalah dengan membaca bersama orang lain. Kami menggalakkan anda untuk memulakan kelab buku peribadi—dengan keluarga, rakan, atau pun dalam talian. Bertemu setiap minggu, bincangkan perkara yang telah anda baca dan sokong satu sama lain dalam perjalanan ini.",
+      "question": "Bagaimanakah saya boleh memanfaatkan sepenuhnya perjalanan ini?"
+    },
+    {
+      "answer": "Kami merancang untuk mempromosikan langkah seterusnya dan tahap yang lebih tinggi. Pada tahun semasa, kami menjemput seramai mungkin orang untuk memulakan dengan ringkas: membaca Al-Quran penuh dengan pemahaman asas. Sebaik sahaja anda melakukan ini, anda akan berasa bersedia untuk membaca semula dan pergi lebih mendalam!",
+      "question": "Adakah terdapat pilihan kajian yang lebih mendalam nanti?"
+    },
+    {
+      "answer": "ya. \"Quran dalam Setahun\" adalah percuma sepenuhnya, dan kami menggalakkan anda untuk berkongsi dengan orang lain. Jemput rakan, mulakan kelab buku, dan bantu lebih ramai orang melengkapkan bacaan penuh pertama mereka Al-Quran.",
+      "question": "Adakah ini percuma? Boleh saya kongsikan?"
+    }
+  ],
   "hero": {
+    "description": "Jadual yang direka dengan teliti yang memudahkan anda membaca dan memahami keseluruhan Al-Quran dari satu Ramadan ke Ramadan seterusnya, pada kadar yang stabil dan terurus.",
     "line-1": "Kalendar Global Al-Quran ialah jadual bacaan untuk menggalakkan pembacaan reflektif keseluruhan Al-Quran dari penghujung satu Ramadan hingga awal Ramadan seterusnya. Luangkan masa untuk memahami dan merenung ayat-ayat al Quran untuk berinteraksi dengan lebih mendalam dan lebih bermakna."
   },
   "interact-with-post": "Berinteraksi dengan refleksi ini di QuranReflect",
@@ -23,13 +79,38 @@
   },
   "join-quranic-calendar": "Langgan untuk menerima kemas kini dan sumber melalui QuranReflect",
   "join-quranic-calendar-success": "Anda telah berjaya menyertai \"Divine Book Club\"!",
+  "join-telegram": "Sertai Telegram kami",
+  "join-telegram-mobile": "Telegram",
+  "join-whatsapp": "Sertai Whatsapp kami",
+  "join-whatsapp-mobile": "Whatsapp",
+  "mark-as-completed": "Tandai sebagai Selesai",
+  "marked-as-completed": "Minggu ini telah ditanda sebagai selesai dengan jayanya!",
+  "month": "bulan",
+  "my-progress": "Kemajuan Saya",
+  "progress-subtitle": "Jangan ragu untuk kembali dan melengkapkan minggu-minggu yang anda terlepas!",
+  "quran-calendar-description": "Rancangan bacaan berstruktur untuk khatam Al-Quran dalam masa setahun. Bina konsistensi, mendalami pemahaman anda dan kekal di landasan yang betul—tanpa rasa terharu.",
+  "quran-calendar-title": "Al-Quran Dalam Setahun – Pelan Mudah untuk Membaca & Memahami Keseluruhan Al-Quran",
+  "quran-reflect": "QuranReflect",
+  "quran-reflect-description": "Terlibat dengan orang lain mengenai Ayat yang telah anda baca minggu ini.",
   "quranic-calendar": "Kalendar Global Al Quran",
+  "ramadan": "Ramadhan",
+  "read-online": "Baca Dalam Talian",
+  "read-this-weeks-verses": "Baca Ayat Minggu ini",
   "reading-options": {
     "default-settings": "Baca dengan tetapan asal",
     "en-and-ar": "Baca dalam bahasa Inggeris dan Arab",
     "en-only": "Baca dalam bahasa Inggeris sahaja"
   },
+  "reflection-prompts": "💭 REFLEKSI gesaan daripada bacaan minggu ini <span> (Muat turun PDF untuk melihat lebih lanjut) </span> :",
+  "share-reflections": "Kongsi Refleksi anda",
+  "start-tracking": "Mula menjejak",
   "supplemental-resources": "Sumber Sokongan",
   "today": "Tarikh hari ini : <highlight> {{month}} {{day}} {{year}} , {{gregorianDate}} </highlight>",
-  "week-title": "Minggu {{weekNumber}} ( {{month}} ) meliputi ayat-ayat {{rangeStart}} hingga {{rangeEnd}}"
+  "verse": "ayat",
+  "verses-subtitle": "Anda digalakkan untuk memberi tumpuan kepada memahami makna asas, jadi pilih bahasa yang sesuai untuk anda.",
+  "watch-episode": "Tonton Episod {{weekNumber}}",
+  "week": "Minggu",
+  "week-completed": "Selesai",
+  "week-title": "Minggu {{weekNumber}} ( {{month}} ) meliputi ayat-ayat {{rangeStart}} hingga {{rangeEnd}}",
+  "weekly-verses-help-description-1": "PDF ini mengandungi terjemahan mengalir yang diadaptasi terutamanya daripada karya MAS Abdel Haleem. Dokumen setiap minggu dibahagikan kepada tujuh bahagian, menjadikannya lebih mudah untuk menyebarkan bacaan sepanjang minggu jika anda mahu. Terdapat pengenalan ringkas kepada surah, tajuk dan nota untuk menjelaskan beberapa perkara penting, dan setiap bahagian harian mempunyai soalan refleksi dan tindakan yang dicadangkan"
 }

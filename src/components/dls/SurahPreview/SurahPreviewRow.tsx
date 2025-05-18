@@ -63,8 +63,12 @@ const SurahPreviewRow = ({
           <span>{localizedSurahNumber}</span>
         </div>
         <div className={styles.surahNameContainer}>
-          <div className={styles.surahName}>{surahName}</div>
-          <div className={styles.translatedSurahName}>{translatedSurahName}</div>
+          <div className={styles.surahName} translate="no">
+            {surahName}
+          </div>
+          <div className={styles.translatedSurahName} translate="no">
+            {translatedSurahName}
+          </div>
         </div>
       </div>
       {isLoading && <Spinner />}

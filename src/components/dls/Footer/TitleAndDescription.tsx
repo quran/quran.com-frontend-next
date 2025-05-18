@@ -1,3 +1,4 @@
+import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from './Footer.module.scss';
@@ -15,7 +16,14 @@ const TitleAndDescription = () => {
         </div>
         <div className={styles.title}>{t('footer.title')}</div>
       </div>
-      <p className={styles.description}>{t('footer.description')}</p>
+      <p className={styles.description}>
+        <Trans
+          i18nKey="common:footer.description"
+          components={{
+            br: <br />,
+          }}
+        />
+      </p>
     </div>
   );
 };

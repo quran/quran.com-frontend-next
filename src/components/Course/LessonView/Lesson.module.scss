@@ -3,20 +3,20 @@
 .viewContainer {
     @include breakpoints.desktop {
         display: flex;
-        align-items: start;
+        align-items: flex-start;
     }
 }
 .modalHeading {
     font-size: var(--font-size-large);
-  font-weight: var(--font-weight-bold);
-  margin-block-end: var(--spacing-small);
+    font-weight: var(--font-weight-bold);
+    margin-block-end: var(--spacing-small);
 }
 
 .container {
-  min-block-size: 70vh;
-  @include breakpoints.desktop {
-    width: 50%;
-  }
+    min-block-size: 70vh;
+    @include breakpoints.desktop {
+        width: 50%;
+    }
 }
 
 .backText {

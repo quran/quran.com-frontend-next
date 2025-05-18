@@ -1,0 +1,42 @@
+{
+  "credits": {
+    "desc": "Tunatoa shukrani zetu kwa wale wote ambao wameunga mkono na kuchangia mradi huu, kusaidia kufanya Quran ipatikane kwa mamilioni duniani kote.",
+    "lokalize": "<0>Lokalize</0>: Mfumo wa utafsiri unaosaidiwa na kompyuta ambao unaangazia tija na uhakikisho wa ubora na hutoa mtiririko wa kazi wa ujanibishaji.",
+    "quran-align": "<0>Collin Fair</0>: Chombo cha kutengeneza sehemu za maneno kwa usahihi za usomaji wa Kurani uliorekodiwa.",
+    "quran-complex": "<0>QuranComplex</0>: Kiwanja cha Uchapishaji wa Qur'ani Tukufu cha Mfalme Fahd ni kiongozi katika kutumikia Qur'ani Tukufu na Sayansi zake, kutafsiri Maana zake, na kulinda Maandishi ya Qur'ani dhidi ya kupotoshwa, kupitia matumizi bora ya teknolojia ya hali ya juu katika uwanja wa uchapishaji, rekodi za sauti na uchapishaji wa programu za kielektroniki.",
+    "quran-enc": "<0>QuranEnc</0>: Lango yenye tafsiri za bure na za kuaminika za maana na ufafanuzi wa Qur'ani tukufu katika lugha nyingi za ulimwengu.",
+    "tanzil": "<0>Tanzil</0>: Mradi wa kimataifa wa Kurani unaolenga kutoa maandishi sahihi ya Kurani yaliyothibitishwa sana.",
+    "tarteel": "<0>Tarteel</0>: Programu ya kukariri Kurani inayoendeshwa na AI. Imeundwa ili kukusaidia kukariri vyema zaidi, iwe unatafuta aya, kufuatilia maendeleo yako, au kufuata pamoja na kukariri kwako.",
+    "title": "Mikopo",
+    "vercel": "<0>Vercel</0>: ni jukwaa la uwekaji na ushirikiano kwa wasanidi programu wa hali ya juu ambalo huweka msanidi programu kwanza, na kuwapa zana za kina za kuunda tovuti na programu zenye utendakazi wa hali ya juu.",
+    "zekr": "<0>Zekr</0>: Chombo cha wazi cha kujifunza Quran kwa ajili ya kuvinjari na kutafiti juu ya Quran"
+  },
+  "global-effort": {
+    "desc": "Mamilioni ya watu kutoka duniani kote wanategemea Quran.com kama nyenzo yao msingi ya Kurani ya dijiti. Iwe wanakuja kukariri, kutafakari, kukariri, au kusoma, wanashiriki kusudi moja: nia ya dhati ya kuunganishwa na maneno ya Mwenyezi Mungu. \\n Tunapoendelea kukua, tunasalia kujitolea kuhakikisha kuwa Quran.com inasalia kuwa nafasi inayoaminika, inayoweza kufikiwa na iliyoundwa kwa uzuri kwa mtu yeyote anayetaka kutumia Quran.",
+    "title": "Juhudi za Kimataifa"
+  },
+  "key-features": {
+    "desc": "Quran.com imeundwa kusaidia kila hatua ya kujihusisha na Kurani—kuanzia kusoma na kukariri hadi kusoma na kutafakari. Vipengele vyetu ni pamoja na:",
+    "features": [
+      "Kiolesura cha Kurani kinachofaa Mtumiaji- Uzoefu safi na angavu wa kusoma kwenye kifaa chochote.",
+      "Tafsiri Nyingi & Tafsir - Upatikanaji wa tafsiri katika lugha nyingi, pamoja na tafsir.",
+      "Vikariri vya Sauti - Sikiliza vikariri vya hali ya juu kutoka kwa Qaris maarufu duniani, kwa uwezo wa kufuata neno baada ya neno.",
+      "Utafutaji wa Hali ya Juu na Urambazaji - Tafuta aya mara moja kulingana na mada au maneno muhimu katika Kurani nzima.",
+      "Alamisho na Vidokezo vya Ayah - Hifadhi aya na uandike tafakari za kibinafsi kwa marejeleo ya baadaye.",
+      "Muunganisho wa QuranReflect - Shirikiana na jumuiya ya kimataifa kupitia tafakari na maarifa yaliyoshirikiwa na wasomi na watu binafsi.",
+      "Ufuatiliaji wa Maendeleo ya Kusoma na Malengo - Fuatilia malengo yako ya kila siku na historia ya kusoma",
+      "API za Wasanidi Programu - Ufikiaji bila malipo wa maudhui na vipengele ili kuwasha programu za Kiislamu na R&D.",
+      "Na mengine mengi, Alhamdullilah."
+    ],
+    "title": "Sifa Muhimu & Sadaka"
+  },
+  "main-description": "Tangu kuanzishwa kwake mwaka wa 1995, Quran.com imejitolea kuifanya Qur'an ipatikane kwa kila mtu kwa njia iliyo wazi, sahihi na rahisi kushughulikia. Kila siku, mamilioni ya watu ulimwenguni kote hugeukia Quran.com kusoma, kusikiliza, kusoma na kutafakari kuhusu Kurani—iwe ni wanafunzi wa maisha yote, wasomi, au ndio wanaoanza safari yao.",
+  "our-mission": {
+    "desc": "Quran imekusudiwa kusomwa, kueleweka, na kutafakariwa. Dhamira yetu ni kuondoa vizuizi vya kufikia na kuwawezesha watu binafsi na jamii kwa kutoa uzoefu wa kutegemewa, uliobuniwa vyema, na unaoboresha sana Kurani. Tunalenga kutumika kama chanzo kinachoaminika kwa yeyote anayetaka kujihusisha na Quran, tukiongozwa na kanuni za usahihi, uwazi na uaminifu.",
+    "title": "Dhamira Yetu"
+  },
+  "who-we-are": {
+    "desc": "Quran.com ni wakfu (wakfu), iliyoanzishwa kama amana ya umma ili kuhakikisha kuwa Quran inabaki kupatikana kwa wote, bila malipo na bila maslahi ya kibiashara. Inasimamiwa na Quran.Foundation, shirika lisilo la faida la 501(c)(3), ambalo hudumisha na kuendeleza Quran.com kama sehemu ya dhamira yake ya kutoa rasilimali za Qur'ani za ubora wa juu kwa ulimwengu. Dhamira yetu ni kuitumikia Quran na wasomaji wake kwa ubora, ikhlasi, na uwajibikaji.",
+    "title": "Sisi ni Nani"
+  }
+}

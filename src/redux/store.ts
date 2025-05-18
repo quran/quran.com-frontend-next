@@ -20,7 +20,9 @@ import banner from './slices/banner';
 import commandBarPersistConfig from './slices/CommandBar/persistConfig';
 import commandBar from './slices/CommandBar/state';
 import defaultSettings from './slices/defaultSettings';
+import fundraisingBanner from './slices/fundraisingBanner';
 import mediaMaker from './slices/mediaMaker';
+import microphone from './slices/microphone';
 import navbar from './slices/navbar';
 import notifications from './slices/notifications';
 import onboarding from './slices/onboarding';
@@ -40,7 +42,6 @@ import revelationOrder from './slices/revelationOrder';
 import search from './slices/Search/search';
 import session from './slices/session';
 import theme from './slices/theme';
-import voiceSearch from './slices/voiceSearch';
 import welcomeMessage from './slices/welcomeMessage';
 import SliceName from './types/SliceName';
 
@@ -63,6 +64,7 @@ const persistConfig = {
     SliceName.DEFAULT_SETTINGS,
     SliceName.SIDEBAR_NAVIGATION,
     SliceName.BANNER,
+    SliceName.FUNDRAISING_BANNER,
     SliceName.SESSION,
     SliceName.BOOKMARKS,
     SliceName.USER_DATA_SYNC,
@@ -87,18 +89,19 @@ export const rootReducer = combineReducers({
   readingTracker,
   commandBar: persistReducer(commandBarPersistConfig, commandBar),
   welcomeMessage,
-  voiceSearch,
   defaultSettings,
   fontFaces,
   sidebarNavigation,
   readingViewVerse,
   banner,
+  fundraisingBanner,
   session,
   persistGateHydration,
   revelationOrder,
   notifications,
   onboarding,
   mediaMaker,
+  microphone,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

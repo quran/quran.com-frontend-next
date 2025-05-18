@@ -24,7 +24,9 @@
     "feedback-success": "Geri bildiriminiz için teşekkür ederiz!",
     "your-feedback": "Görüşleriniz"
   },
+  "help-about-reflection": "Yansıma özelliği hakkında yardım",
   "learn-duration": "Süre",
+  "learn-more": "Daha fazla bilgi edin",
   "learning-plan-material": "Öğrenme Planı Materyali",
   "learning-plan-meta-desc": "Bu Öğrenme Planı, Kuran'la etkileşim şeklinizi değiştirmenize yardımcı olacak, yolculuğunuza bugün başlayın!",
   "learning-plans-desc": "Kuran yolculuğunuzda büyümenizi sağlayacak takip edilmesi kolay derslerle bilginizi artırın. <br></br> Bugün bir Öğrenme Planı başlatın! Bitiş çizgisine ulaşana kadar ilerlemeniz takip edilir.",
@@ -34,9 +36,12 @@
   "next-lesson": "Gelecek ders",
   "not-enrolled": "Henüz <link> Öğrenim Planına </link> kaydolmadınız.",
   "prev-lesson": "Önceki Ders",
+  "reflection-description-1": "\"Yansıma Ekle\"ye tıklamak sizi Kuran'a dair kişisel düşünceleri paylaşmak için bir platform olan QuranReflect'e götürecektir. Tefsir'in (bilimsel yorumlama) aksine, düşünceler ayetlerle ilgili kişisel içgörüler ve deneyimlerdir.",
+  "reflection-description-2": "Herkese açık olarak paylaşım yapmanız durumunda, düşünceleriniz moderasyon ekibi tarafından incelenecek ve QuranReflect topluluğuna görünür hale gelecektir.",
   "start-learning": "Öğrenmeye başla",
   "tabs": {
     "main": "Ana Detaylar",
     "syllabus": "Müfredat"
-  }
+  },
+  "what-happens-when-you-click-add-reflection": "\"Yansıma Ekle\"ye tıkladığınızda ne olur?"
 }

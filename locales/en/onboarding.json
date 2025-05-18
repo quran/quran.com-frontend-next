@@ -87,10 +87,6 @@
       "description": "Choose from a variety of translations in multiple languages. Tip: Compare translations by selecting multiple options",
       "title": "Translations"
     },
-    "voice-search": {
-      "description": "Tap the mic icon and recite the verse you are searching for. Quick Tip! To discover where someone is reciting (Eg. Taraweeh prayers), tap the mic icon. After one or two verses are detected, press stop to find the location",
-      "title": "Voice Search (Tarteel)"
-    },
     "wbw-audio": {
       "description": "Select this option to listen to every word individually by simply clicking on the word!",
       "title": "Listen to the word-by-word transliteration by clicking on word"

@@ -1,0 +1,33 @@
+export enum ServerErrorCodes {
+  INVALID = 'INVALID',
+  INVALID_CREDENTIALS = 'INVALID_CREDENTIALS',
+  MIN_LENGTH = 'MIN_LENGTH',
+  MAX_LENGTH = 'MAX_LENGTH',
+  MISSING = 'MISSING',
+  DUPLICATE = 'DUPLICATE',
+  EXACT_LENGTH = 'EXACT_LENGTH',
+  MISMATCH = 'MISMATCH',
+  USED = 'USED',
+  EXPIRED = 'EXPIRED',
+  BANNED = 'BANNED',
+  IMMUTABLE = 'IMMUTABLE',
+  BAD_REQUEST = 'BAD_REQUEST',
+  NOT_FOUND = 'NOT_FOUND',
+}
+
+export const BASE_SERVER_ERRORS_MAP: Record<ServerErrorCodes, string> = {
+  [ServerErrorCodes.DUPLICATE]: 'errors.taken',
+  [ServerErrorCodes.MIN_LENGTH]: 'errors.min',
+  [ServerErrorCodes.MAX_LENGTH]: 'errors.max',
+  [ServerErrorCodes.MISSING]: 'errors.required',
+  [ServerErrorCodes.INVALID]: 'errors.invalid',
+  [ServerErrorCodes.INVALID_CREDENTIALS]: 'errors.invalidEmailOrPassword',
+  [ServerErrorCodes.BANNED]: 'errors.banned',
+  [ServerErrorCodes.MISMATCH]: 'errors.confirm',
+  [ServerErrorCodes.USED]: 'errors.usedToken',
+  [ServerErrorCodes.EXPIRED]: 'errors.expiredToken',
+  [ServerErrorCodes.EXACT_LENGTH]: 'errors.exactLength',
+  [ServerErrorCodes.IMMUTABLE]: 'errors.immutable',
+  [ServerErrorCodes.BAD_REQUEST]: 'errors.badRequest',
+  [ServerErrorCodes.NOT_FOUND]: 'errors.notFound',
+};

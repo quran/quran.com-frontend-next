@@ -67,6 +67,14 @@ const FormBuilder = <T,>({
     }
   };
 
+  const renderExtraSection = (formField: FormBuilderFormField, value: string) => {
+    if (!formField.extraSection) return null;
+    if (typeof formField.extraSection === 'function') {
+      return formField.extraSection(value);
+    }
+    return formField.extraSection;
+  };
+
   return (
     <form className={styles.container} onSubmit={handleSubmit(internalOnSubmit)}>
       {formFields?.map((formField) => {
@@ -78,6 +86,20 @@ const FormBuilder = <T,>({
             rules={buildReactHookFormRules(formField)}
             name={formField.field}
             render={({ field, fieldState: { error } }) => {
+              if (formField.customRender) {
+                return (
+                  <div className={classNames(styles.inputContainer, formField.containerClassName)}>
+                    {formField.customRender({
+                      value: field.value,
+                      onChange: field.onChange,
+                      placeholder: formField.placeholder,
+                    })}
+                    {error && <span className={styles.errorText}>{error.message}</span>}
+                    {renderExtraSection(formField, field.value)}
+                  </div>
+                );
+              }
+
               const inputFieldProps = {
                 key: formField.field,
                 value: field.value,
@@ -85,7 +107,7 @@ const FormBuilder = <T,>({
                 name: formField.field,
                 containerClassName: formField.containerClassName,
                 fieldSetLegend: formField.fieldSetLegend,
-                label: formField.label,
+                label: formField.label as string,
                 placeholder: formField.placeholder,
                 onChange: (val) => {
                   field.onChange(val);
@@ -107,7 +129,7 @@ const FormBuilder = <T,>({
                 <div className={classNames(styles.inputContainer, formField.containerClassName)}>
                   <InputField {...inputFieldProps} />
                   {error && <span className={styles.errorText}>{error.message}</span>}
-                  {formField.extraSection && <div>{formField.extraSection}</div>}
+                  {renderExtraSection(formField, field.value)}
                 </div>
               );
             }}

@@ -33,7 +33,7 @@ const SurahPreviewBlock = ({
     <div className={styles.container}>
       <div className={styles.header}>
         <div>
-          <div className={styles.translatedSurahName}>
+          <div className={styles.translatedSurahName} translate="no">
             {isMinimalLayout && <>{t('surah')} </>}
             {translatedSurahName}
           </div>

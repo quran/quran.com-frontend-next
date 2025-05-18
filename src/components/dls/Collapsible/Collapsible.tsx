@@ -21,6 +21,8 @@ type Props = {
   shouldRotatePrefixOnToggle?: boolean;
   onOpenChange?: (isOpen: boolean) => void;
   direction?: CollapsibleDirection;
+  headerClassName?: string;
+  headerLeftClassName?: string;
 };
 
 export enum CollapsibleDirection {
@@ -38,6 +40,8 @@ const Collapsible = ({
   shouldOpen,
   onOpenChange,
   direction = CollapsibleDirection.Left,
+  headerClassName,
+  headerLeftClassName,
 }: Props) => {
   const [isOpen, setIsOpen] = useState(isDefaultOpen);
 
@@ -55,10 +59,10 @@ const Collapsible = ({
   return (
     <CollapsiblePrimitive.Root onOpenChange={onOpenChange} open={isOpen}>
       <CollapsiblePrimitive.Trigger asChild>
-        <div className={styles.header} onClick={onHeaderClicked}>
+        <div className={classNames(styles.header, headerClassName)} onClick={onHeaderClicked}>
           {direction === CollapsibleDirection.Left ? (
             <>
-              <div className={styles.headerLeft}>
+              <div className={classNames(styles.headerLeft, headerLeftClassName)}>
                 <div
                   className={classNames(styles.prefixContainer, {
                     [styles.prefixRotated]: shouldRotatePrefixOnToggle && isOpen,

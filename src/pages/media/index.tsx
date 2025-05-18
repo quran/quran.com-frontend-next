@@ -1,10 +1,12 @@
 /* eslint-disable max-lines */
+
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import { Player, PlayerRef, RenderPoster } from '@remotion/player';
 import classNames from 'classnames';
 import { GetStaticProps, NextPage } from 'next';
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import { AbsoluteFill, cancelRender, prefetch, staticFile } from 'remotion';
 import useSWRImmutable from 'swr/immutable';
@@ -19,14 +21,18 @@ import PlayerContent from '@/components/MediaMaker/Content';
 import styles from '@/components/MediaMaker/MediaMaker.module.scss';
 import VideoSettings from '@/components/MediaMaker/Settings/VideoSettings';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
+import Button, { ButtonType } from '@/dls/Button/Button';
 import Spinner, { SpinnerSize } from '@/dls/Spinner/Spinner';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import useGetMediaSettings from '@/hooks/auth/media/useGetMediaSettings';
-import useAddQueryParamsToUrl from '@/hooks/useAddQueryParamsToUrl';
+import useAddQueryParamsToUrlSkipFirstRender from '@/hooks/useAddQueryParamsToUrlSkipFirstRender';
+import VideoIcon from '@/icons/video.svg';
 import { getMediaGeneratorOgImageUrl } from '@/lib/og';
 import Error from '@/pages/_error';
 import layoutStyles from '@/pages/index.module.scss';
 import AudioData from '@/types/AudioData';
+import Orientation from '@/types/Media/Orientation';
+import PreviewMode from '@/types/Media/PreviewMode';
 import QueryParam from '@/types/QueryParam';
 import { MushafLines, QuranFont } from '@/types/QuranReader';
 import Reciter from '@/types/Reciter';
@@ -36,6 +42,7 @@ import { makeChapterAudioDataUrl, makeVersesUrl } from '@/utils/apiPaths';
 import { areArraysEqual } from '@/utils/array';
 import { getAllChaptersData, getChapterData } from '@/utils/chapter';
 import { isChromeIOS, isSafari } from '@/utils/device-detector';
+import { logButtonClick } from '@/utils/eventLogger';
 import { getLanguageAlternates, toLocalizedNumber } from '@/utils/locale';
 import {
   DEFAULT_API_PARAMS,
@@ -91,6 +98,8 @@ const MediaMaker: NextPage<MediaMaker> = ({
 
   const playerRef = useRef<PlayerRef>(null);
 
+  const router = useRouter();
+
   useEffect(() => {
     setIsReady(true);
   }, []);
@@ -114,6 +123,7 @@ const MediaMaker: NextPage<MediaMaker> = ({
     quranTextFontStyle,
     translationFontScale,
     orientation,
+    previewMode,
   } = mediaSettings;
 
   const queryParams = {
@@ -132,9 +142,10 @@ const MediaMaker: NextPage<MediaMaker> = ({
     [QueryParam.QURAN_TEXT_FONT_STYLE]: String(quranTextFontStyle),
     [QueryParam.TRANSLATION_FONT_SCALE]: String(translationFontScale),
     [QueryParam.ORIENTATION]: orientation,
+    [QueryParam.PREVIEW_MODE]: String(previewMode),
   };
 
-  useAddQueryParamsToUrl(getQuranMediaMakerNavigationUrl(queryParams), {});
+  useAddQueryParamsToUrlSkipFirstRender(getQuranMediaMakerNavigationUrl(), queryParams);
 
   const API_PARAMS = useMemo(() => {
     return {
@@ -265,6 +276,7 @@ const MediaMaker: NextPage<MediaMaker> = ({
       chapterEnglishName,
       isPlayer: true,
       translations,
+      previewMode,
     };
   }, [
     verseData.verses,
@@ -284,7 +296,27 @@ const MediaMaker: NextPage<MediaMaker> = ({
     translationFontScale,
     orientation,
     chapterEnglishName,
+    previewMode,
   ]);
+
+  /**
+   * Disables preview mode by setting the preview_mode URL parameter to disabled
+   */
+  const disablePreviewMode = () => {
+    logButtonClick('video_generation_disable_preview');
+
+    const newQuery = { ...router.query };
+    newQuery[QueryParam.PREVIEW_MODE] = PreviewMode.DISABLED;
+
+    router.push(
+      {
+        pathname: router.pathname,
+        query: newQuery,
+      },
+      undefined,
+      { shallow: true },
+    );
+  };
 
   const method = isChromeIOS() ? 'base64' : 'blob-url';
   useEffect(() => {
@@ -370,6 +402,22 @@ const MediaMaker: NextPage<MediaMaker> = ({
     }));
   }, [chaptersData, lang]);
 
+  useEffect(() => {
+    let timeoutId: ReturnType<typeof setTimeout>;
+    if (previewMode === PreviewMode.ENABLED && playerRef.current) {
+      timeoutId = setTimeout(() => {
+        playerRef.current?.play();
+        playerRef.current?.mute();
+      }, 100);
+    }
+
+    return () => {
+      if (timeoutId) {
+        clearTimeout(timeoutId);
+      }
+    };
+  }, [previewMode]);
+
   if (hasError) {
     return <Error statusCode={500} />;
   }
@@ -395,17 +443,26 @@ const MediaMaker: NextPage<MediaMaker> = ({
     return <>{SEOComponent}</>;
   }
 
+  const isPreviewMode = previewMode === PreviewMode.ENABLED;
+
   return (
     <>
       {SEOComponent}
       <div className={styles.pageContainer}>
-        <div className={classNames(styles.playerWrapper, layoutStyles.flowItem)}>
+        {!isPreviewMode && (
+          <div className={styles.titleContainer}>
+            <h1>{t('media:title')}</h1>
+          </div>
+        )}
+        <div
+          className={classNames(styles.playerWrapper, layoutStyles.flowItem, {
+            [styles.portraitAspectRatio]: orientation === Orientation.PORTRAIT,
+          })}
+        >
           <>
-            <div className={styles.titleContainer}>
-              <h1>{t('media:title')}</h1>
-            </div>
-
             <Player
+              key={`player-${previewMode}`}
+              ref={playerRef}
               className={classNames(styles.player, {
                 [styles.playerHeightSafari]: isSafari(),
                 [styles.playerHeight]: !isSafari(),
@@ -418,7 +475,6 @@ const MediaMaker: NextPage<MediaMaker> = ({
               allowFullscreen
               doubleClickToFullscreen
               fps={VIDEO_FPS}
-              ref={playerRef}
               controls={!isFetching && areMediaFilesReady}
               bufferStateDelayInMilliseconds={200} // wait for 200ms second before showing the spinner
               renderPoster={renderPoster}
@@ -430,16 +486,35 @@ const MediaMaker: NextPage<MediaMaker> = ({
             />
           </>
         </div>
-        <div className={layoutStyles.flow}>
-          <VideoSettings
-            chaptersList={chaptersList}
-            reciters={reciters}
-            playerRef={playerRef}
-            isFetching={isFetching}
-            inputProps={inputProps}
-            mediaSettings={mediaSettings}
-          />
-        </div>
+
+        {isPreviewMode ? (
+          <>
+            <div className={layoutStyles.additionalVerticalGapLarge} />
+
+            <Button
+              className={styles.generateVideoButton}
+              type={ButtonType.Primary}
+              prefix={<VideoIcon />}
+              onClick={(e) => {
+                e.stopPropagation();
+                disablePreviewMode();
+              }}
+            >
+              {t('media:generate-your-video')}
+            </Button>
+          </>
+        ) : (
+          <div className={layoutStyles.flow}>
+            <VideoSettings
+              chaptersList={chaptersList}
+              reciters={reciters}
+              playerRef={playerRef}
+              isFetching={isFetching}
+              inputProps={inputProps}
+              mediaSettings={mediaSettings}
+            />
+          </div>
+        )}
       </div>
     </>
   );

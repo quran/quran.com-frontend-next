@@ -1,54 +1,52 @@
 /* eslint-disable react-func/max-lines-per-function */
 /* eslint-disable max-lines */
 /* eslint-disable react/no-multi-comp */
-import React, { RefObject, useEffect, useState } from 'react';
+import React, { RefObject, useCallback, useEffect, useMemo } from 'react';
 
 import dynamic from 'next/dynamic';
+import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import SearchDrawerHeader from './Header';
 
+import { getNewSearchResults } from '@/api';
+import DataFetcher from '@/components/DataFetcher';
 import Drawer, { DrawerType } from '@/components/Navbar/Drawer';
 import Spinner from '@/dls/Spinner/Spinner';
+import { useToast } from '@/dls/Toast/Toast';
 import useDebounce from '@/hooks/useDebounce';
 import useFocus from '@/hooks/useFocusElement';
-import { selectNavbar } from '@/redux/slices/navbar';
+import useSearchWithVoice from '@/hooks/useSearchWithVoice';
+import { selectNavbar, setIsSearchDrawerOpen } from '@/redux/slices/navbar';
 import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
-import { selectIsSearchDrawerVoiceFlowStarted } from '@/redux/slices/voiceSearch';
+import SearchService from '@/types/Search/SearchService';
 import SearchQuerySource from '@/types/SearchQuerySource';
+import { makeNewSearchResultsUrl } from '@/utils/apiPaths';
 import { areArraysEqual } from '@/utils/array';
-import { logButtonClick } from '@/utils/eventLogger';
-import { addToSearchHistory, searchGetResults } from '@/utils/search';
+import { logButtonClick, logTextSearchQuery } from '@/utils/eventLogger';
+import { addToSearchHistory, getQuickSearchQuery } from '@/utils/search';
+import { useHandleMicError } from '@/utils/voice-search-errors';
 import { SearchResponse } from 'types/ApiResponses';
 
 const SearchBodyContainer = dynamic(() => import('@/components/Search/SearchBodyContainer'), {
   ssr: false,
   loading: () => <Spinner />,
 });
-const VoiceSearchBodyContainer = dynamic(
-  () => import('@/components/TarteelVoiceSearch/BodyContainer'),
-  {
-    ssr: false,
-    loading: () => <Spinner />,
-  },
-);
 
-const FIRST_PAGE_NUMBER = 1;
-const PAGE_SIZE = 10;
 const DEBOUNCING_PERIOD_MS = 1000;
 
 const SearchDrawer: React.FC = () => {
-  const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual);
+  const { t } = useTranslation('common');
+  const toast = useToast();
+  const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual) as string[];
   const [focusInput, searchInputRef]: [() => void, RefObject<HTMLInputElement>] = useFocus();
-  const [searchQuery, setSearchQuery] = useState<string>('');
+  const { searchQuery, setSearchQuery } = useSearchWithVoice('', true);
+
   const isOpen = useSelector(selectNavbar, shallowEqual).isSearchDrawerOpen;
   const dispatch = useDispatch();
-  const [isSearching, setIsSearching] = useState(false);
-  const [hasError, setHasError] = useState(false);
-  const [searchResult, setSearchResult] = useState<SearchResponse>(null);
-  const isVoiceSearchFlowStarted = useSelector(selectIsSearchDrawerVoiceFlowStarted, shallowEqual);
   // Debounce search query to avoid having to call the API on every type. The API will be called once the user stops typing.
   const debouncedSearchQuery = useDebounce<string>(searchQuery, DEBOUNCING_PERIOD_MS);
+
   // once the drawer is open, focus the input field
   useEffect(() => {
     if (isOpen) {
@@ -56,32 +54,29 @@ const SearchDrawer: React.FC = () => {
     }
   }, [isOpen, focusInput]);
 
+  // Handle microphone permission errors
+  const handleMicError = useHandleMicError(toast, t);
+
+  // Ensure the drawer stays open when the search query changes
   useEffect(() => {
-    // only when the search query has a value we call the API.
+    if (searchQuery && isOpen) {
+      // Make sure the drawer stays open when typing
+      dispatch({ type: setIsSearchDrawerOpen.type, payload: true });
+    }
+  }, [searchQuery, isOpen, dispatch]);
+
+  // Log search query when it changes
+  useEffect(() => {
     if (debouncedSearchQuery) {
       addToSearchHistory(dispatch, debouncedSearchQuery, SearchQuerySource.SearchDrawer);
-      searchGetResults(
-        SearchQuerySource.SearchDrawer,
-        debouncedSearchQuery,
-        FIRST_PAGE_NUMBER,
-        PAGE_SIZE,
-        setIsSearching,
-        setHasError,
-        setSearchResult,
-        null,
-        selectedTranslations?.length && selectedTranslations.join(','),
-      );
+      logTextSearchQuery(debouncedSearchQuery, SearchQuerySource.SearchDrawer);
     }
-  }, [debouncedSearchQuery, selectedTranslations, dispatch]);
+  }, [debouncedSearchQuery, dispatch]);
 
   const resetQueryAndResults = () => {
     logButtonClick('search_drawer_clear_input');
     // reset the search query
     setSearchQuery('');
-    // reset the result
-    setSearchResult(null);
-    // reset the error
-    setHasError(false);
   };
 
   /**
@@ -105,44 +100,91 @@ const SearchDrawer: React.FC = () => {
    *
    * @param {string} keyword
    */
-  const onSearchKeywordClicked = (keyword: string) => {
-    const end = keyword.length;
-    setSearchQuery(keyword);
-    searchInputRef.current.setSelectionRange(end, end);
-    focusInput();
-  };
+  const onSearchKeywordClicked = useCallback(
+    (keyword: string) => {
+      const end = keyword.length;
+      setSearchQuery(keyword);
+      searchInputRef.current.setSelectionRange(end, end);
+      focusInput();
+    },
+    [setSearchQuery, searchInputRef, focusInput],
+  );
+
+  const quickSearchQuery = useMemo(() => {
+    return getQuickSearchQuery(debouncedSearchQuery, 10, selectedTranslations);
+  }, [debouncedSearchQuery, selectedTranslations]);
+
+  /**
+   * Custom fetcher for search results
+   */
+  const searchFetcher = useCallback(() => {
+    if (!debouncedSearchQuery) return null;
+    return getNewSearchResults(quickSearchQuery).then((response) => ({
+      ...response,
+      service: SearchService.KALIMAT,
+    }));
+  }, [debouncedSearchQuery, quickSearchQuery]);
+
+  /**
+   * Render function for DataFetcher
+   */
+  const renderSearchResults = useCallback(
+    (searchResult: SearchResponse) => {
+      return (
+        <SearchBodyContainer
+          onSearchKeywordClicked={onSearchKeywordClicked}
+          searchQuery={searchQuery}
+          searchResult={searchResult}
+          isSearching={false}
+          hasError={false}
+          shouldSuggestFullSearchWhenNoResults
+          source={SearchQuerySource.SearchDrawer}
+        />
+      );
+    },
+    [searchQuery, onSearchKeywordClicked],
+  );
+
+  /**
+   * Loading component for DataFetcher
+   */
+  const renderLoading = useCallback(() => {
+    return (
+      <SearchBodyContainer
+        onSearchKeywordClicked={onSearchKeywordClicked}
+        searchQuery={searchQuery}
+        searchResult={null}
+        isSearching
+        hasError={false}
+        shouldSuggestFullSearchWhenNoResults
+        source={SearchQuerySource.SearchDrawer}
+      />
+    );
+  }, [searchQuery, onSearchKeywordClicked]);
 
   return (
     <Drawer
-      hideCloseButton={isVoiceSearchFlowStarted}
       type={DrawerType.Search}
       header={
         <SearchDrawerHeader
-          isVoiceFlowStarted={isVoiceSearchFlowStarted}
           onSearchQueryChange={onSearchQueryChange}
           resetQueryAndResults={resetQueryAndResults}
           inputRef={searchInputRef}
-          isSearching={isSearching}
+          isSearching={false}
           searchQuery={searchQuery}
+          setSearchQuery={setSearchQuery}
+          onMicError={handleMicError}
         />
       }
     >
       <div>
         {isOpen && (
-          <>
-            {isVoiceSearchFlowStarted ? (
-              <VoiceSearchBodyContainer />
-            ) : (
-              <SearchBodyContainer
-                onSearchResultClicked={() => searchInputRef?.current?.blur()}
-                onSearchKeywordClicked={onSearchKeywordClicked}
-                searchQuery={searchQuery}
-                searchResult={searchResult}
-                isSearching={isSearching}
-                hasError={hasError}
-              />
-            )}
-          </>
+          <DataFetcher
+            queryKey={debouncedSearchQuery ? makeNewSearchResultsUrl(quickSearchQuery) : null}
+            render={renderSearchResults}
+            fetcher={searchFetcher}
+            loading={renderLoading}
+          />
         )}
       </div>
     </Drawer>

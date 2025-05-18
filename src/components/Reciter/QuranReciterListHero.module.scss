@@ -24,7 +24,7 @@ $fallbackColor: #22a5ad;
   z-index: -1;
   inset: 0;
   background-color: $fallbackColor;
-  background-image: url("/images/background.jpg");
+  background-image: url("/images/background.png");
   background-size: cover;
   @include theme.dark {
     filter: saturate(0.1) brightness(0.3) contrast(1.1);

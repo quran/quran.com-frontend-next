@@ -1,0 +1,19 @@
+{
+  "footer": "Equipo Quran.com",
+  "header": "Ayuda para el desarrollo",
+  "issues-cta": "Si tienes alguna pregunta o quieres contactar a los encargados del mantenimiento, simplemente escribe un problema. Te responderemos lo antes posible, insha'Allah.",
+  "issues-guide": "Normalmente, utilizamos <0>proyectos de Github</0> como fuente para saber en qué trabajar a continuación, qué se viene y qué errores existen que deben solucionarse. Por ejemplo, <1>esta URL</1> contiene una lista de errores, cosas con las que necesitamos ayuda y características futuras.",
+  "main-desc": "Agradecemos tu interés en ayudar al desarrollo de los proyectos de Quran.com. ¡Nos emociona trabajar contigo!",
+  "projects": {
+    "all": "Contamos con varios proyectos alojados en Github. Puedes encontrarlos todos aquí. A continuación, te los detallamos:",
+    "q-android": "<0>Quran Android</0> - escrito en Kotlin y Java.",
+    "q-api": "< 0 > API de Quran.com < /0 > - escrito en Ruby on Rails.",
+    "q-api-docs": "<0>Documentación de la API de Quran.com</0>: Nuestro portal de documentación de API.",
+    "q-audio": "< 0 > Audio coránico < /0 > y < 1 > Aplicaciones móviles de audio coránico. < /1 >",
+    "q-audio-segments": "< 0 > Segmentos de audio del Corán. < /0 >",
+    "q-ios": "<0>Corán iOS</0> - escrito en Swift.",
+    "q-next": "<0>Quran.com Frontend</0> - escrito en Next.js.",
+    "q-v2": "< 0 > Quran.com < /0 > - escrito en Ruby on Rails."
+  },
+  "thanks": "¡Esperamos tu contribución!"
+}

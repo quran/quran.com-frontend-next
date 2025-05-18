@@ -1,7 +1,21 @@
 {
+  "achieve-quran-goals": "实现您的《古兰经》目标",
+  "begin": "开始",
+  "calendar-cta": "日历",
+  "chapters-and-verses": "章节和诗句",
+  "continue-read": "继续阅读",
+  "explore-topics": "探索主题",
+  "first-time-reading": "第一次阅读《古兰经》？ <link>从这里开始</link>",
+  "grow-beyond-ramadan": "与我们一起成长<modalLink>超越斋月</modalLink>",
+  "know-someone": "这个<modalLink>斋月与我们一起成长</modalLink>",
+  "learning-plan": "学习计划",
+  "listen-to-radio": "收听《古兰经》电台",
+  "my-quran": "我的古兰经",
+  "navigate-quran": "浏览古兰经",
   "no-bookmarks": "您还没有任何书签",
   "no-recently-read": "您还没有任何读书会",
   "noble-quran": "尊贵的古兰经",
+  "popular": "受欢迎的",
   "qgj": {
     "learning-plans": {
       "cta": {
@@ -23,10 +37,25 @@
     },
     "title": "古兰经成长之旅"
   },
-  "ramadan-activities-cta": "<link>关注<b>全球古兰经日历<\/b>获取每周阅读、启发性播客和反思呼吁！ <\/link>",
+  "qr-community": "阅读今天的精选经文和感想",
+  "quran-in-year": "一年读《古兰经》",
+  "quran-in-year-cta": "本周阅读",
+  "ramadan-activities-cta": "<link>关注<b>全球古兰经日历</b>获取每周阅读、启发性播客和反思呼吁！ </link>",
+  "ramadan": {
+    "header": "加深与《古兰经》联系的工具",
+    "title": "准备好迎接斋月了吗？"
+  },
   "read-juz": "读朱兹",
   "recently-read": "最近阅读",
-  "revelation-order-disclaimer": "此视图显示古兰经中古兰经的时间顺序，基于它们被启示给先知穆罕默德<hover> ﷺ <\/hover>的时间。年表是一个学术观点的主题，一些 Surahs 在不同的时间部分被揭示。此处的排序基于<link> Tanzil.net <\/link>的工作。 [注意：从 al-Fatiha 到 al-Nas 的编译 Mushaf 命令是一个共识问题。]",
+  "revelation-order-disclaimer": "此视图显示古兰经中古兰经的时间顺序，基于它们被启示给先知穆罕默德<hover> ﷺ </hover>的时间。年表是一个学术观点的主题，一些 Surahs 在不同的时间部分被揭示。此处的排序基于<link> Tanzil.net </link>的工作。 [注意：从 al-Fatiha 到 al-Nas 的编译 Mushaf 命令是一个共识问题。]",
+  "see-more-learning-plans": "查看更多",
+  "set-custom-goal": "设定目标",
+  "share-quran": {
+    "description": "帮助向新学习者传播《古兰经》",
+    "title": "分享古兰经！"
+  },
+  "start-read": "开始阅读",
+  "stay-consistent": "追踪连胜记录，创建自定义目标，保持一致",
   "tab": {
     "bookmarks": "书签",
     "popular": "受欢迎的"

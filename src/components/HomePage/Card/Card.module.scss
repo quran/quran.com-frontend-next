@@ -1,0 +1,19 @@
+@use "src/styles/theme";
+
+.card {
+    @include theme.light {
+        box-shadow: 0px 4px 25px 0px rgba(0, 0, 0, 0.1);
+    }
+    @include theme.dark {
+        box-shadow: 0px 4px 25px 0px rgba(0, 0, 0, 0.8);
+    }
+    @include theme.sepia {
+        box-shadow: 0px 4px 25px 0px rgba(0, 0, 0, 0.1);
+    }
+    border-radius: var(--border-radius-rounded);
+    padding: var(--spacing-medium);
+}
+
+.cardWithLink {
+    cursor: pointer;
+}

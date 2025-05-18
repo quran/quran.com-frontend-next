@@ -1,0 +1,10 @@
+{
+  "delete-account": "Futa Akaunti",
+  "delete-confirmation": {
+    "action-text": "Ninaelewa matokeo, futa akaunti yangu",
+    "confirmation-text": "futa akaunti yangu",
+    "instruction-text": "Tafadhali andika <strong> {{text}} </strong> ili kuthibitisha",
+    "subtitle": "Kitendo hiki hakiwezi kutenduliwa. Hii itafuta kabisa akaunti yako, alamisho zilizohifadhiwa, vipindi vya kusoma na data yako yote.",
+    "title": "Una uhakika kabisa?"
+  }
+}

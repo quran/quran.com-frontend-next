@@ -1,5 +1,61 @@
 {
+  "additional-resources": "Aanvullende bronnen",
+  "additional-resources-subtitle": "Deze aanvullende bronnen helpen u om een diepere verbinding te krijgen met de verzen die u hebt gelezen.",
+  "complete": "Compleet",
+  "completed-weeks": "{{completedWeeks}} / {{totalWeeks}} Weken voltooid",
+  "divine-book-club": "De Goddelijke Boekenclub",
+  "divine-book-club-description": "Dit is een korte groepsdiscussie waarmee u de context van de wekelijkse leesstof beter kunt volgen.",
+  "end-of-calendar": "Einde van de kalender",
+  "english-pdf": "Engels PDF",
+  "faq": "Veelgestelde vragen",
+  "faq-items": [
+    {
+      "answer": "Quran in a Year is een eenvoudig, gestructureerd leesplan om u te helpen de hele Koran in één jaar te voltooien, van het einde van de ene Ramadan tot het begin van de volgende. Het doel is om een basisbegrip van de Koran van kaft tot kaft te krijgen zonder dat u zich onder druk gezet of overweldigd voelt.",
+      "question": "Wat is \"Koran in een jaar\"?"
+    },
+    {
+      "answer": "U wordt uitgenodigd om elke week tijd te maken om slechts een paar pagina's van de Koran te lezen in een taal die u begrijpt. Er zijn in totaal 46 lezingen, één voor elke week in de islamitische kalender van Shawwal tot Sha'ban. Deze indeling van de Koran vult andere indelingen aan, zoals de beroemde 30 delen die het lezen van de Koran in één maand vergemakkelijken.",
+      "question": "Hoe werkt het programma?"
+    },
+    {
+      "answer": "Helemaal niet. Het uitgangspunt van dit programma is om je te verdiepen in de betekenissen van de Koran via elke taal (vertaling) waar je je prettig bij voelt. Quran.com biedt vertalingen in veel talen om dit voor iedereen toegankelijk te maken. We streven ernaar om deelnemers te inspireren om jaar na jaar een level omhoog te gaan.",
+      "question": "Moet ik Arabisch kunnen lezen om mee te kunnen doen?"
+    },
+    {
+      "answer": "Elke week is de bijgewerkte leesopdracht beschikbaar op Quran.com/calendar. U kunt rechtstreeks op Quran.com lezen, waar een speciale link u rechtstreeks naar de primaire lezing voor de week brengt. \\n \\n U kunt ook de Engelse PDF openen en thuis afdrukken. Deze bevat een vloeiende vertaling die voornamelijk is aangepast aan het werk van MAS Abdel Haleem. Het document van elke week is verdeeld in zeven delen, waardoor het gemakkelijker is om de lezing over de week te spreiden als u dat wilt. Er zijn korte inleidingen tot de soera's, kopteksten en aantekeningen om enkele essentiële punten te verduidelijken, en elk dagelijks deel heeft een reflectievraag en voorgestelde actie.",
+      "question": "Waar vind ik de wekelijkse leesopdrachten?"
+    },
+    {
+      "answer": "Je hebt meerdere opties om op koers te blijven. We raden je ten zeerste aan om je te abonneren om e-mails te ontvangen met de wekelijkse leesopdrachten als bijlage. We hebben ook communitykanalen op Telegram en WhatsApp aangemaakt die herinneringen en aanmoedigingen bevatten. Klik gewoon op de knoppen van jouw keuze op Quran.com/calendar om je te abonneren. Je kunt alle drie kiezen als je dat wilt.",
+      "question": "Hoe kan ik wekelijkse leesherinneringen ontvangen?"
+    },
+    {
+      "answer": "Ga op Quran.com naar het instellingenmenu om: \\n • Lettergroottes en -stijlen aan te passen \\n • Te schakelen tussen de lichte, donkere en sepia-modus \\n • Te kiezen uit meerdere beschikbare vertalingen \\n \\n Zo kan iedereen eenvoudig deelnemen in de taal die hij/zij het beste begrijpt, en met een vertaling die duidelijk en informatief is.",
+      "question": "Hoe kan ik mijn leeservaring personaliseren?"
+    },
+    {
+      "answer": "We moedigen u aan om QuranReflect.com te bekijken voor de reflecties van andere mensen op de passages die u elke week leest, en zodra u zich er klaar voor voelt, kunt u een bericht plaatsen om uw eigen gedachten te delen! \\n \\n Bekijk ook zeker de podcast The Divine Book Club: een inzichtelijke discussie onder leiding van een geleerde die dit schema volgt. Het duurt slechts een uur per week en biedt zeer nuttige context.",
+      "question": "Welke extra middelen biedt u?"
+    },
+    {
+      "answer": "Geen probleem. Pak gewoon de leesstof van de huidige week op. Het is niet nodig om gemiste weken in te halen. Blijf consistent en focus op vooruitgang. Er is altijd volgend jaar om alles op te pakken wat je gemist hebt.",
+      "question": "Wat als ik achterloop of te laat instroom?"
+    },
+    {
+      "answer": "De beste manier om consistent te blijven is door met anderen te lezen. We moedigen je aan om een persoonlijke boekenclub te starten, met familie, vrienden of zelfs online. Kom wekelijks bijeen, bespreek wat je hebt gelezen en steun elkaar op deze reis.",
+      "question": "Hoe kan ik het meeste uit deze reis halen?"
+    },
+    {
+      "answer": "We zijn van plan om volgende stappen en hogere niveaus te promoten. In het huidige jaar nodigen we zoveel mogelijk mensen uit om te beginnen met het simpel te houden: lees de volledige Koran met basiskennis. Als je dit eenmaal hebt gedaan, zul je je klaar voelen om opnieuw te lezen en dieper te gaan!",
+      "question": "Zijn er later nog mogelijkheden voor diepgaandere studie?"
+    },
+    {
+      "answer": "Ja. \"Quran in a Year\" is helemaal gratis en we moedigen u aan om het met anderen te delen. Nodig een vriend uit, start een boekenclub en help meer mensen hun eerste volledige lezing van de Koran te voltooien.",
+      "question": "Is dit gratis? Mag ik dit delen?"
+    }
+  ],
   "hero": {
+    "description": "Een doordacht schema waarmee u de hele Koran gemakkelijk kunt lezen en begrijpen, van de ene Ramadan tot de andere, in een stabiel en beheersbaar tempo.",
     "line-1": "De Global Quranic Calendar is een leesschema dat is ontworpen om het reflectief lezen van de hele Koran aan te moedigen, vanaf het einde van de ene Ramadan tot het begin van de volgende. We moedigen je aan de tijd te nemen om de verzen te begrijpen en erover na te denken, zodat je een diepere, meer oprechte verbinding kunt krijgen."
   },
   "interact-with-post": "Interactie met dit bericht op QuranReflect",
@@ -23,13 +79,38 @@
   },
   "join-quranic-calendar": "Abonneer u om updates en bronnen te ontvangen via QuranReflect",
   "join-quranic-calendar-success": "Je bent met succes lid geworden van de Divine Book Club!",
+  "join-telegram": "Sluit je aan bij ons Telegram",
+  "join-telegram-mobile": "Telegram",
+  "join-whatsapp": "Sluit je aan bij onze Whatsapp",
+  "join-whatsapp-mobile": "WhatsApp",
+  "mark-as-completed": "Markeer als voltooid",
+  "marked-as-completed": "Deze week is als succesvol voltooid gemarkeerd!",
+  "month": "Maand",
+  "my-progress": "Mijn voortgang",
+  "progress-subtitle": "Ga gerust terug en vul de weken in die u gemist hebt!",
+  "quran-calendar-description": "Een gestructureerd leesplan om de Koran in een jaar uit te lezen. Bouw consistentie op, verdiep je begrip en blijf op koers, zonder je overweldigd te voelen.",
+  "quran-calendar-title": "Koran in een jaar – Een eenvoudig plan om de hele Koran te lezen en te begrijpen",
+  "quran-reflect": "KoranReflectie",
+  "quran-reflect-description": "Praat met anderen over de verzen die u deze week hebt gelezen.",
   "quranic-calendar": "De mondiale korankalender",
+  "ramadan": "Ramadan",
+  "read-online": "Online lezen",
+  "read-this-weeks-verses": "Lees de verzen van deze week",
   "reading-options": {
     "default-settings": "Lezen met mijn standaardinstellingen",
     "en-and-ar": "Lees in het Engels en Arabisch",
     "en-only": "Alleen in het Engels lezen"
   },
+  "reflection-prompts": "💭 REFLECTIE-opdrachten uit de lezing van deze week <span> (Download de PDF om meer te zien) </span> :",
+  "share-reflections": "Deel je reflecties",
+  "start-tracking": "Begin met volgen",
   "supplemental-resources": "Ondersteunende bronnen",
   "today": "De datum van vandaag is: <highlight> {{month}} {{day}} {{year}} , {{gregorianDate}} </highlight>",
-  "week-title": "Week {{weekNumber}} ( {{month}} ) met verzen {{rangeStart}} tot {{rangeEnd}}"
+  "verse": "Vers",
+  "verses-subtitle": "Wij raden u aan om u te concentreren op het begrijpen van de basisbetekenissen. Selecteer daarom de taal die voor u werkt.",
+  "watch-episode": "Bekijk aflevering {{weekNumber}}",
+  "week": "Week",
+  "week-completed": "Voltooid",
+  "week-title": "Week {{weekNumber}} ( {{month}} ) met verzen {{rangeStart}} tot {{rangeEnd}}",
+  "weekly-verses-help-description-1": "Deze PDF bevat een vloeiende vertaling die voornamelijk is aangepast aan het werk van MAS Abdel Haleem. Het document van elke week is verdeeld in zeven delen, waardoor het gemakkelijker is om de lezing over de week te spreiden als u dat wilt. Er zijn korte inleidingen tot de soera's, kopteksten en aantekeningen om enkele essentiële punten te verduidelijken, en elk dagelijks deel heeft een reflectievraag en voorgestelde actie"
 }

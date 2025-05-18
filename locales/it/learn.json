@@ -24,7 +24,9 @@
     "feedback-success": "Grazie per il tuo feedback!",
     "your-feedback": "I tuoi commenti"
   },
+  "help-about-reflection": "Aiuto sulla funzione di riflessione",
   "learn-duration": "Durata",
+  "learn-more": "Saperne di più",
   "learning-plan-material": "Materiale del piano di apprendimento",
   "learning-plan-meta-desc": "Questo piano di apprendimento ti aiuterà a trasformare il modo in cui interagisci con il Corano, inizia il tuo viaggio oggi!",
   "learning-plans-desc": "Migliora le tue conoscenze con lezioni facili da seguire che ti aiutano a crescere nel tuo viaggio con il Corano. <br></br> Inizia un piano di apprendimento oggi stesso! I tuoi progressi vengono monitorati fino al raggiungimento del traguardo.",
@@ -34,9 +36,12 @@
   "next-lesson": "Prossima lezione",
   "not-enrolled": "Non sei ancora iscritto al <link> Piano di apprendimento </link> .",
   "prev-lesson": "Lezione precedente",
+  "reflection-description-1": "Cliccando su \"Aggiungi riflessione\" verrai indirizzato a QuranReflect, una piattaforma per condividere riflessioni personali sul Corano. A differenza del Tafsir (interpretazione accademica), le riflessioni sono intuizioni ed esperienze personali relative ai versetti.",
+  "reflection-description-2": "Se pubblichi un messaggio pubblico, la tua riflessione verrà esaminata dal team di moderazione e diventerà visibile alla comunità di QuranReflect.",
   "start-learning": "Inizia a imparare",
   "tabs": {
     "main": "Dettagli principali",
     "syllabus": "Programma"
-  }
+  },
+  "what-happens-when-you-click-add-reflection": "Cosa succede quando clicchi su \"Aggiungi riflessione\"?"
 }
