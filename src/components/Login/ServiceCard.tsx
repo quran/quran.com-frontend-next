@@ -1,7 +1,6 @@
 import { FC } from 'react';
 
 import Image from 'next/image';
-import Link from 'next/link';
 import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
 
@@ -12,6 +11,8 @@ import SocialButtons from './SocialButtons';
 
 import { SubmissionResult } from '@/components/FormBuilder/FormBuilder';
 import EmailLogin, { EmailLoginData } from '@/components/Login/EmailLogin';
+import Link, { LinkVariant } from '@/dls/Link/Link';
+import { ROUTES } from '@/utils/constants';
 
 interface Benefit {
   id: string;
@@ -69,8 +70,8 @@ const ServiceCard: FC<Props> = ({
         <Trans
           i18nKey="login:privacy-policy"
           components={{
-            link: <Link href="/privacy" />,
-            link1: <Link href="/terms-and-conditions" />,
+            link: <Link href={ROUTES.PRIVACY} isNewTab variant={LinkVariant.Blend} />,
+            link1: <Link href={ROUTES.TERMS} isNewTab variant={LinkVariant.Blend} />,
           }}
         />
       </p>

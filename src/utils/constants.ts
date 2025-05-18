@@ -9,6 +9,9 @@ export const ROUTES = {
   FORGET_PASSWORD: '/forgot-password',
   RESET_PASSWORD: '/reset-password',
   COMPLETE_SIGNUP: '/complete-signup',
+  PRIVACY: '/privacy',
+  TERMS: '/terms-and-conditions',
+  SITEMAP: '/sitemap.xml',
 };
 
 /**
