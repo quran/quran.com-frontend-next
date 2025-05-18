@@ -5,6 +5,7 @@ import useTranslation from 'next-translate/useTranslation';
 import styles from './login.module.scss';
 
 import ArrowLeft from '@/icons/west.svg';
+import { Direction } from '@/utils/locale';
 
 interface Props {
   onClick: () => void;
@@ -15,9 +16,9 @@ const BackButton: FC<Props> = ({ onClick, label }) => {
   const { t } = useTranslation('common');
 
   return (
-    <button type="button" onClick={onClick} className={styles.backButton}>
+    <button dir={Direction.LTR} type="button" onClick={onClick} className={styles.backButton}>
       <ArrowLeft />
-      <p>{label || t('back')}</p>
+      <p dir={Direction.RTL}>{label || t('back')}</p>
     </button>
   );
 };
