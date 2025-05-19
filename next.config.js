@@ -167,8 +167,8 @@ module.exports = withSentryConfig(configWithPlugins, {
   // https://www.npmjs.com/package/@sentry/webpack-plugin#options
 
   org: 'sentry',
-  project: 'javascript-nextjs',
-  sentryUrl: 'http://sentry.quran.foundation/',
+  project: process.env.NEXT_PUBLIC_SENTRY_PROJECT,
+  sentryUrl: process.env.NEXT_PUBLIC_SENTRY_URL,
 
   // Only print logs for uploading source maps in CI
   silent: !process.env.CI,
