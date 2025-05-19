@@ -14,7 +14,8 @@ Sentry.init({
   dsn: SENTRY_ENABLED ? SENTRY_DSN : null,
   debug: isDev,
   defaultIntegrations: false,
-  tracesSampleRate: isDev ? 1 : 0,
+  tracesSampleRate: isDev ? 1 : 0.1,
+  replaysOnErrorSampleRate: isDev ? 1 : 0.1,
 });
 
 export const onRouterTransitionStart = Sentry.captureRouterTransitionStart;
