@@ -210,7 +210,7 @@
     "translation-font-size": "Translation font size"
   },
   "footer": {
-    "description": "Quran.com is a trusted platform used by millions worldwide to read, search, listen to, and reflect on the Quran in multiple languages. It provides translations, tafsir, recitations, word-by-word translation, and tools for deeper study, making the Quran accessible to everyone. <br/> <br/> As a Sadaqah Jariyah, Quran.com is dedicated to helping people connect deeply with the Quran. Supported by Quran.Foundation, a 501(c)(3) non-profit organization, Quran.com continues to grow as a free and valuable resource for all, Alhamdullilah",
+    "description": "Quran.com is a trusted platform used by millions worldwide to read, search, listen to, and reflect on the Quran in multiple languages. It provides translations, tafsir, recitations, word-by-word translation, and tools for deeper study, making the Quran accessible to everyone. <br/> <br/> As a Sadaqah Jariyah, Quran.com is dedicated to helping people connect deeply with the Quran. Supported by <link>Quran.Foundation</link>, a 501(c)(3) non-profit organization, Quran.com continues to grow as a free and valuable resource for all, Alhamdullilah”",
     "hiring": "We're hiring! Join the QuranFoundation team and contribute to our mission. <link>Apply now!</link>",
     "rights": "All Rights Reserved",
     "title": "Read, Listen, Search, and Reflect on the Quran"
@@ -310,7 +310,7 @@
   "privacy": "Privacy",
   "product-updates": "Product Updates",
   "profile": "Profile",
-  "projects-desc": "Non-profit projects owned, managed, or sponsored by Quran.Foundation",
+  "projects-desc": "Non-profit projects owned, managed, or sponsored by <link>Quran.Foundation</link>",
   "q-reflect": "QuranReflect",
   "quran-com": "Quran.com",
   "quran-radio": "Quran Radio",
