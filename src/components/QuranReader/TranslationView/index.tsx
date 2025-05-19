@@ -13,6 +13,7 @@ import useScrollToVirtualizedVerse from './hooks/useScrollToVirtualizedVerse';
 import styles from './TranslationView.module.scss';
 import TranslationViewVerse from './TranslationViewVerse';
 
+import { PageQuestionsContext } from '@/components/QuranReader/ReadingView/context/PageQuestionsContext';
 import Spinner from '@/dls/Spinner/Spinner';
 import useGetQueryParamOrReduxValue from '@/hooks/useGetQueryParamOrReduxValue';
 import useGetQueryParamOrXstateValue from '@/hooks/useGetQueryParamOrXstateValue';
@@ -36,6 +37,7 @@ const EndOfScrollingControls = dynamic(() => import('../EndOfScrollingControls')
 });
 
 const INCREASE_VIEWPORT_BY_PIXELS = 1000;
+const EMPTY_QUESTIONS = {} as Record<string, number>;
 
 const TranslationView = ({
   quranReaderStyles,
@@ -125,19 +127,21 @@ const TranslationView = ({
         />
       )}
 
-      <div
-        className={styles.wrapper}
-        onCopy={(event) => onCopyQuranWords(event, verses, quranReaderStyles.quranFont)}
-      >
-        <Virtuoso
-          ref={virtuosoRef}
-          useWindowScroll
-          totalCount={versesCount + 1}
-          increaseViewportBy={INCREASE_VIEWPORT_BY_PIXELS}
-          initialItemCount={1} // needed for SSR.
-          itemContent={itemContentRenderer}
-        />
-      </div>
+      <PageQuestionsContext.Provider value={EMPTY_QUESTIONS}>
+        <div
+          className={styles.wrapper}
+          onCopy={(event) => onCopyQuranWords(event, verses, quranReaderStyles.quranFont)}
+        >
+          <Virtuoso
+            ref={virtuosoRef}
+            useWindowScroll
+            totalCount={versesCount + 1}
+            increaseViewportBy={INCREASE_VIEWPORT_BY_PIXELS}
+            initialItemCount={1} // needed for SSR.
+            itemContent={itemContentRenderer}
+          />
+        </div>
+      </PageQuestionsContext.Provider>
     </>
   );
 };
