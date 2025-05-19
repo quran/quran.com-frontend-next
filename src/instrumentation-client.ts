@@ -8,6 +8,7 @@ import * as Sentry from '@sentry/nextjs';
 const SENTRY_DSN = process.env.SENTRY_DSN || process.env.NEXT_PUBLIC_SENTRY_DSN;
 const SENTRY_ENABLED = process.env.NEXT_PUBLIC_CLIENT_SENTRY_ENABLED === 'true';
 const isDev = process.env.NODE_ENV === 'development';
+const version = `quran.com-frontend-next@${process.env.npm_package_version}`;
 
 Sentry.init({
   enabled: SENTRY_ENABLED,
@@ -16,6 +17,7 @@ Sentry.init({
   defaultIntegrations: false,
   tracesSampleRate: isDev ? 1 : 0.1,
   replaysOnErrorSampleRate: isDev ? 1 : 0.1,
+  release: version,
 });
 
 export const onRouterTransitionStart = Sentry.captureRouterTransitionStart;
