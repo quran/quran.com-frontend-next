@@ -1,5 +1,8 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
+import * as Sentry from '@sentry/nextjs';
 import classNames from 'classnames';
+import type { NextPageContext } from 'next';
+import NextErrorComponent from 'next/error';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
@@ -10,22 +13,24 @@ import Link, { LinkVariant } from '@/dls/Link/Link';
 
 // reference: https://nextjs.org/docs/advanced-features/custom-error-page#more-advanced-error-page-customizing
 type ErrorProps = {
+  // eslint-disable-next-line react/no-unused-prop-types
   statusCode?: number;
   hasFullWidth?: boolean;
 };
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-const Error = ({ statusCode, hasFullWidth = true }: ErrorProps) => {
+
+const Error = ({ hasFullWidth = true }: ErrorProps) => {
   const { t } = useTranslation('error');
   const router = useRouter();
 
-  // if previous page url exist, go back, otherwise go to home
+  // If a previous page exists, go back; otherwise, go to home.
   const onBackButtonClicked = () => {
-    if (document && document.referrer) {
+    if (typeof document !== 'undefined' && document.referrer) {
       router.back();
       return;
     }
-    router.push('/'); // go to home
+    router.push('/');
   };
+
   return (
     <div
       className={classNames(styles.container, {
@@ -44,6 +49,12 @@ const Error = ({ statusCode, hasFullWidth = true }: ErrorProps) => {
       </p>
     </div>
   );
+};
+
+// Capture errors with Sentry, then fall back to Next.js’ default error handling
+Error.getInitialProps = async (contextData: NextPageContext) => {
+  await Sentry.captureUnderscoreErrorException(contextData);
+  return NextErrorComponent.getInitialProps(contextData);
 };
 
 export default Error;
