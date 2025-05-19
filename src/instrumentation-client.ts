@@ -1,5 +1,6 @@
-// This file configures the initialization of Sentry on the browser.
-// The config you add here will be used whenever a page is visited.
+/* eslint-disable import/prefer-default-export */
+// This file configures the initialization of Sentry on the client.
+// The added config here will be used whenever a users loads a page in their browser.
 // https://docs.sentry.io/platforms/javascript/guides/nextjs/
 
 import * as Sentry from '@sentry/nextjs';
@@ -13,6 +14,7 @@ Sentry.init({
   dsn: SENTRY_ENABLED ? SENTRY_DSN : null,
   debug: isDev,
   defaultIntegrations: false,
-  autoSessionTracking: false,
   tracesSampleRate: isDev ? 1 : 0,
 });
+
+export const onRouterTransitionStart = Sentry.captureRouterTransitionStart;
