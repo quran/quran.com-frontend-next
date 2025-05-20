@@ -8,7 +8,6 @@
     "tanzil": "<0>Tanzil</0>: Një projekt ndërkombëtar kuranor që synon të sigurojë një tekst të saktë të Kuranit shumë të verifikuar.",
     "tarteel": "<0>Tarteel</0>: Një aplikacion për memorizimin e Kuranit i mbështetur nga AI. Është krijuar për t'ju ndihmuar të mësoni përmendësh më të zgjuar, pavarësisht nëse jeni duke kërkuar për një varg, duke ndjekur përparimin tuaj ose duke ndjekur së bashku me recitimin tuaj.",
     "title": "Kreditë",
-    "vercel": "<0>Vercel</0>: është një platformë vendosjeje dhe bashkëpunimi për zhvilluesit e frontendit, e cila e vendos në plan të parë zhvilluesin e frontendit, duke u dhënë atyre mjete gjithëpërfshirëse për të ndërtuar faqe interneti dhe aplikacione me performancë të lartë.",
     "zekr": "<0>Zekr</0>: Një platformë e hapur mjet studimi i Kuranit për shfletimin dhe kërkimin mbi Kuranin"
   },
   "global-effort": {
@@ -36,7 +35,7 @@
     "title": "Misioni ynë"
   },
   "who-we-are": {
-    "desc": "Quran.com është një vakëf (dhurim), i krijuar si një besim publik për të siguruar që Kurani të mbetet i aksesueshëm për të gjithë, pa pagesë dhe pa interesa komerciale. Ai menaxhohet nga Quran.Foundation, një organizatë jofitimprurëse 501(c)(3), e cila mbështet dhe zhvillon Quran.com si pjesë e misionit të saj për të ofruar burime autentike kuranore me cilësi të lartë në botë. Angazhimi ynë është t'i shërbejmë Kur'anit dhe lexuesve të tij me përsosmëri, sinqeritet dhe përgjegjësi.",
+    "desc": "Quran.com është një vakëf (dhurim), i krijuar si një besim publik për të siguruar që Kurani të mbetet i aksesueshëm për të gjithë, pa pagesë dhe pa interesa komerciale. Ai menaxhohet nga <link>Quran.Foundation</link>, një organizatë jofitimprurëse 501(c)(3), e cila mbështet dhe zhvillon Quran.com si pjesë e misionit të saj për të ofruar burime autentike kuranore me cilësi të lartë në botë. Angazhimi ynë është t'i shërbejmë Kur'anit dhe lexuesve të tij me përsosmëri, sinqeritet dhe përgjegjësi.",
     "title": "Kush Jemi Ne"
   }
 }

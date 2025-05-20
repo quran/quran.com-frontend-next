@@ -1,5 +1,6 @@
 import React from 'react';
 
+import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
 
 import NavigationDrawerItem from '../NavigationDrawerItem';
@@ -7,6 +8,7 @@ import NavigationDrawerItem from '../NavigationDrawerItem';
 import styles from './NavigationDrawerBody.module.scss';
 
 import FundraisingBanner from '@/components/Fundraising/FundraisingBanner';
+import Link, { LinkVariant } from '@/dls/Link/Link';
 import IconDevelopers from '@/icons/developers.svg';
 import IconFeedback from '@/icons/feedback.svg';
 import IconHome from '@/icons/home.svg';
@@ -42,7 +44,15 @@ const NavigationDrawerBody = () => {
       />
       <NavigationDrawerItem title={t('help')} icon={<IconQuestionMark />} href="/support" />
       <h3 className={styles.subtitle}>{t('our-projects')}</h3>
-      <p className={styles.projectsDesc}>{t('projects-desc')}</p>
+      <p className={styles.projectsDesc}>
+        <Trans
+          i18nKey="common:projects-desc"
+          components={{
+            link: <Link href="https://quran.foundation" variant={LinkVariant.Blend} isNewTab />,
+          }}
+        />
+      </p>
+
       <NavigationDrawerItem
         title="Quran.com"
         icon={<IconQ />}

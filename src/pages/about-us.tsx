@@ -9,7 +9,7 @@ import styles from './contentPage.module.scss';
 
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import PageContainer from '@/components/PageContainer';
-import Link from '@/dls/Link/Link';
+import Link, { LinkVariant } from '@/dls/Link/Link';
 import { getBlurDataUrl } from '@/utils/image';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl } from '@/utils/navigation';
@@ -49,7 +49,14 @@ const AboutUsPage = () => {
           </ul>
 
           <h2 className={styles.heading}>{t('who-we-are.title')}</h2>
-          <p>{t('who-we-are.desc')}</p>
+          <p>
+            <Trans
+              i18nKey="about:who-we-are.desc"
+              components={{
+                link: <Link href="https://quran.foundation" variant={LinkVariant.Blend} isNewTab />,
+              }}
+            />
+          </p>
 
           <h2 className={styles.heading}>{t('global-effort.title')}</h2>
           <p>{t('global-effort.desc')}</p>
@@ -138,32 +145,6 @@ const AboutUsPage = () => {
                   alt="Lokalise"
                 />
               </div>
-            </li>
-            <li>
-              <Trans
-                i18nKey="about:credits.vercel"
-                components={[
-                  <a
-                    key={0}
-                    target="_blank"
-                    href="https://vercel.com/?utm_source=quran-pro&utm_campaign=oss"
-                    rel="noreferrer"
-                  />,
-                ]}
-              />
-              <Link href="https://vercel.com/?utm_source=quran-pro&utm_campaign=oss" isNewTab>
-                <div className={styles.image}>
-                  <Image
-                    src="/images/powered-by-vercel.svg"
-                    layout="fixed"
-                    width={150}
-                    height={70}
-                    placeholder="blur"
-                    blurDataURL={getBlurDataUrl(300, 70)}
-                    alt="Vercel"
-                  />
-                </div>
-              </Link>
             </li>
           </ul>
         </div>

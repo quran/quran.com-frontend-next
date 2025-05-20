@@ -8,7 +8,6 @@
     "tanzil": "<0>Tanzil</0>: An international Quranic project aimed at providing a highly-verified precise Quran text.",
     "tarteel": "<0>Tarteel</0>: An AI-powered Quran memorization app. It's designed to help you memorize smarter, whether you're searching for a verse, tracking your progress, or following along with your recitation.",
     "title": "Credits",
-    "vercel": "<0>Vercel</0>: is a deployment and collaboration platform for frontend developers which puts the frontend developer first, giving them comprehensive tools to build high-performance websites and applications.",
     "zekr": "<0>Zekr</0>: An open platform Quran study tool for browsing and researching on the Quran"
   },
   "global-effort": {
@@ -36,7 +35,7 @@
     "title": "Our Mission"
   },
   "who-we-are": {
-    "desc": "Quran.com is a waqf (endowment), established as a public trust to ensure that the Quran remains accessible to all, free of charge and without commercial interests. It is managed by Quran.Foundation, a 501(c)(3) nonprofit organization, which sustains and develops Quran.com as part of its mission to provide high-quality, authentic Quranic resources to the world. Our commitment is to serve the Quran and its readers with excellence, sincerity, and responsibility.",
+    "desc": "Quran.com is a waqf (endowment), established as a public trust to ensure that the Quran remains accessible to all, free of charge and without commercial interests. It is managed by <link>Quran.Foundation</link>, a 501(c)(3) nonprofit organization, which sustains and develops Quran.com as part of its mission to provide high-quality, authentic Quranic resources to the world. Our commitment is to serve the Quran and its readers with excellence, sincerity, and responsibility.",
     "title": "Who We Are"
   }
 }

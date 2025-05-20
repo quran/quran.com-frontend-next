@@ -8,7 +8,6 @@
     "tanzil": "<0>Tanzil</0>: Sebuah proyek Al-Quran internasional yang bertujuan untuk menyediakan teks Al-Quran yang akurat dan terverifikasi.",
     "tarteel": "<0>Tarteel</0>: Aplikasi menghafal Al-Quran yang didukung AI. Aplikasi ini dirancang untuk membantu Anda menghafal dengan lebih cerdas, baik saat mencari ayat, melacak kemajuan, atau mengikuti bacaan Anda.",
     "title": "Kredit",
-    "vercel": "<0>Vercel</0>: adalah platform kolaborasi dan penerapan bagi pengembang frontend yang mengutamakan pengembang frontend, memberi mereka alat komprehensif untuk membangun situs web dan aplikasi berkinerja tinggi.",
     "zekr": "<0>Zekr</0>: Alat studi Al-Quran platform terbuka untuk menelusuri dan meneliti Al-Quran"
   },
   "global-effort": {
@@ -36,7 +35,7 @@
     "title": "Misi Kami"
   },
   "who-we-are": {
-    "desc": "Quran.com adalah wakaf (dana abadi), yang didirikan sebagai amanah publik untuk memastikan bahwa Al-Quran tetap dapat diakses oleh semua orang, tanpa biaya dan tanpa kepentingan komersial. Situs ini dikelola oleh Quran.Foundation, sebuah organisasi nirlaba 501(c)(3), yang mendukung dan mengembangkan Quran.com sebagai bagian dari misinya untuk menyediakan sumber daya Al-Quran yang berkualitas tinggi dan autentik bagi dunia. Komitmen kami adalah untuk melayani Al-Quran dan para pembacanya dengan keunggulan, ketulusan, dan tanggung jawab.",
+    "desc": "Quran.com adalah wakaf (dana abadi), yang didirikan sebagai amanah publik untuk memastikan bahwa Al-Quran tetap dapat diakses oleh semua orang, tanpa biaya dan tanpa kepentingan komersial. Situs ini dikelola oleh <link>Quran.Foundation</link>, sebuah organisasi nirlaba 501(c)(3), yang mendukung dan mengembangkan Quran.com sebagai bagian dari misinya untuk menyediakan sumber daya Al-Quran yang berkualitas tinggi dan autentik bagi dunia. Komitmen kami adalah untuk melayani Al-Quran dan para pembacanya dengan keunggulan, ketulusan, dan tanggung jawab.",
     "title": "Siapakah Kami"
   }
 }

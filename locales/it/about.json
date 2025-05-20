@@ -8,7 +8,6 @@
     "tanzil": "<0>Tanzil</0>: un progetto coranico internazionale che mira a fornire un testo coranico preciso e altamente verificato.",
     "tarteel": "<0>Tarteel</0>: un'app di memorizzazione del Corano basata sull'intelligenza artificiale. È progettata per aiutarti a memorizzare in modo più intelligente, sia che tu stia cercando un versetto, monitorando i tuoi progressi o seguendo la tua recitazione.",
     "title": "Crediti",
-    "vercel": "<0>Vercel</0>: è una piattaforma di distribuzione e collaborazione per sviluppatori frontend che mette al primo posto gli sviluppatori frontend, offrendo loro strumenti completi per creare siti web e applicazioni ad alte prestazioni.",
     "zekr": "<0>Zekr</0>: uno strumento di studio del Corano a piattaforma aperta per la navigazione e la ricerca sul Corano"
   },
   "global-effort": {
@@ -36,7 +35,7 @@
     "title": "La nostra missione"
   },
   "who-we-are": {
-    "desc": "Quran.com è un waqf (fondo di dotazione), istituito come trust pubblico per garantire che il Corano resti accessibile a tutti, gratuitamente e senza interessi commerciali. È gestito da Quran.Foundation, un'organizzazione non-profit 501(c)(3), che sostiene e sviluppa Quran.com come parte della sua missione di fornire risorse coraniche autentiche e di alta qualità al mondo. Il nostro impegno è quello di servire il Corano e i suoi lettori con eccellenza, sincerità e responsabilità.",
+    "desc": "Quran.com è un waqf (fondo di dotazione), istituito come trust pubblico per garantire che il Corano resti accessibile a tutti, gratuitamente e senza interessi commerciali. È gestito da <link>Quran.Foundation</link>, un'organizzazione non-profit 501(c)(3), che sostiene e sviluppa Quran.com come parte della sua missione di fornire risorse coraniche autentiche e di alta qualità al mondo. Il nostro impegno è quello di servire il Corano e i suoi lettori con eccellenza, sincerità e responsabilità.",
     "title": "Chi siamo"
   }
 }

@@ -8,7 +8,6 @@
     "tanzil": "<0>Tanzil</0>: Son derece doğrulanmış kesin bir Kur'an metni sağlamayı amaçlayan uluslararası bir Kur'an projesi.",
     "tarteel": "<0>Tarteel</0>: Yapay zeka destekli bir Kur'an ezberleme uygulaması. İster bir ayet arayın, ister ilerlemenizi takip edin veya okumanızı takip edin, daha akıllıca ezberlemenize yardımcı olmak için tasarlanmıştır.",
     "title": "Krediler",
-    "vercel": "<0>Vercel</0>: Ön uç geliştiricileri ön planda tutan, onlara yüksek performanslı web siteleri ve uygulamalar inşa etmeleri için kapsamlı araçlar sunan bir dağıtım ve işbirliği platformudur.",
     "zekr": "<0>Zekr</0>: Kuran'ı incelemek ve araştırmak için açık platformlu bir Kuran çalışma aracı"
   },
   "global-effort": {
@@ -36,7 +35,7 @@
     "title": "Misyonumuz"
   },
   "who-we-are": {
-    "desc": "Quran.com, Kuran'ın herkese ücretsiz ve ticari çıkarlar olmadan erişilebilir olmasını sağlamak için kamusal bir güven olarak kurulan bir vakıftır. 501(c)(3) kar amacı gütmeyen bir kuruluş olan Quran.Foundation tarafından yönetilir ve Kuran.com'u, dünyaya yüksek kaliteli, gerçek Kuran kaynakları sağlama misyonunun bir parçası olarak sürdürür ve geliştirir. Taahhüdümüz, Kuran'a ve okuyucularına mükemmellik, samimiyet ve sorumlulukla hizmet etmektir.",
+    "desc": "Quran.com, Kuran'ın herkese ücretsiz ve ticari çıkarlar olmadan erişilebilir olmasını sağlamak için kamusal bir güven olarak kurulan bir vakıftır. 501(c)(3) kar amacı gütmeyen bir kuruluş olan <link>Quran.Foundation</link> tarafından yönetilir ve Kuran.com'u, dünyaya yüksek kaliteli, gerçek Kuran kaynakları sağlama misyonunun bir parçası olarak sürdürür ve geliştirir. Taahhüdümüz, Kuran'a ve okuyucularına mükemmellik, samimiyet ve sorumlulukla hizmet etmektir.",
     "title": "Biz Kimiz"
   }
 }

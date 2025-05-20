@@ -1,4 +1,5 @@
 import classNames from 'classnames';
+import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from './Footer.module.scss';
@@ -47,7 +48,14 @@ const Links = () => {
         { text: 'Legacy.Quran.com', url: 'https://legacy.quran.com', isExternal: true },
         { text: 'Corpus.Quran.com', url: 'https://corpus.quran.com', isExternal: true },
       ],
-      description: t('projects-desc'),
+      description: (
+        <Trans
+          i18nKey="common:projects-desc"
+          components={{
+            link: <Link href="https://quran.foundation" variant={LinkVariant.Blend} isNewTab />,
+          }}
+        />
+      ),
     },
     {
       title: t('popular-links'),
