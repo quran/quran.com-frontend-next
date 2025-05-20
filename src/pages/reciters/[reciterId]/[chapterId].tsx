@@ -1,3 +1,4 @@
+/* eslint-disable react-func/max-lines-per-function */
 /* eslint-disable max-lines */
 import { useContext, useState } from 'react';
 
@@ -23,6 +24,7 @@ import DownloadIcon from '@/icons/download.svg';
 import PauseIcon from '@/icons/pause.svg';
 import PlayIcon from '@/icons/play-arrow.svg';
 import ReaderIcon from '@/icons/reader.svg';
+import { logErrorToSentry } from '@/lib/sentry';
 import { makeCDNUrl } from '@/utils/cdn';
 import { getAllChaptersData, getChapterData } from '@/utils/chapter';
 import { logButtonClick } from '@/utils/eventLogger';
@@ -31,6 +33,7 @@ import {
   getReciterChapterNavigationUrl,
   getSurahNavigationUrl,
 } from '@/utils/navigation';
+import { REVALIDATION_PERIOD_ON_ERROR_SECONDS } from '@/utils/staticPageGeneration';
 import { getCurrentPath } from '@/utils/url';
 import { isValidChapterId } from '@/utils/validator';
 import { selectCurrentAudioReciterId } from '@/xstate/actors/audioPlayer/selectors';
@@ -210,10 +213,19 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
         selectedChapter: { ...chapterData, id: chapterId },
       },
     };
-    // eslint-disable-next-line max-lines
   } catch (error) {
+    logErrorToSentry(error, {
+      transactionName: 'getStaticProps-ReciterChapterPage',
+      metadata: {
+        reciterId: String(params.reciterId),
+        chapterId: String(params.chapterId),
+        locale,
+      },
+    });
+
     return {
-      notFound: true,
+      props: { hasError: true },
+      revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS,
     };
   }
 };

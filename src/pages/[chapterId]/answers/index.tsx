@@ -9,6 +9,7 @@ import { fetcher } from '@/api';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import QuestionsBodyContainer from '@/components/QuestionAndAnswer/QuestionsBodyContainer';
 import { getChapterOgImageUrl } from '@/lib/og';
+import { logErrorToSentry } from '@/lib/sentry';
 import Error from '@/pages/_error';
 import layoutStyle from '@/pages/index.module.scss';
 import {
@@ -143,6 +144,15 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
       revalidate: ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
     };
   } catch (error) {
+    logErrorToSentry(error, {
+      transactionName: 'getStaticProps-VerseQuestionsPage',
+      metadata: {
+        chapterIdOrSlug: String(params.chapterId),
+        locale,
+        verseKey,
+      },
+    });
+
     return {
       props: { hasError: true },
       revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS,
