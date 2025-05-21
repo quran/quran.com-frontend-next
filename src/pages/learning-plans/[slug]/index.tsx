@@ -11,6 +11,7 @@ import NextSeoWrapper from '@/components/NextSeoWrapper';
 import PageContainer from '@/components/PageContainer';
 import Spinner from '@/dls/Spinner/Spinner';
 import { logErrorToSentry } from '@/lib/sentry';
+import Error from '@/pages/_error';
 import layoutStyles from '@/pages/index.module.scss';
 import { Course } from '@/types/auth/Course';
 import { getCourse, privateFetcher } from '@/utils/auth/api';
@@ -34,10 +35,13 @@ interface Props {
   course: Course;
 }
 
-const LearningPlanPage: NextPage<Props> = ({ course }) => {
+const LearningPlanPage: NextPage<Props> = ({ course, hasError }) => {
   const { lang, t } = useTranslation('learn');
   const router = useRouter();
   const { slug } = router.query;
+
+  if (hasError) return <Error statusCode={500} />;
+
   const url = getCourseNavigationUrl(course.slug);
 
   return (

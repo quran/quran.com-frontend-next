@@ -11,9 +11,9 @@ import LocalizationMessage from '@/components/Sanity/LocalizationMessage';
 import Page from '@/components/Sanity/Page';
 import { executeGroqQuery } from '@/lib/sanity';
 import { logErrorToSentry } from '@/lib/sentry';
+import Error from '@/pages/_error';
 import { getCanonicalUrl, getProductUpdatesUrl } from '@/utils/navigation';
 import { REVALIDATION_PERIOD_ON_ERROR_SECONDS } from '@/utils/staticPageGeneration';
-import Error from 'src/pages/_error';
 
 interface Props {
   hasError?: boolean;
