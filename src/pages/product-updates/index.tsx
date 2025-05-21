@@ -10,6 +10,7 @@ import PageContainer from '@/components/PageContainer';
 import LocalizationMessage from '@/components/Sanity/LocalizationMessage';
 import Page from '@/components/Sanity/Page';
 import { executeGroqQuery } from '@/lib/sanity';
+import { logErrorToSentry } from '@/lib/sentry';
 import { getCanonicalUrl, getProductUpdatesUrl } from '@/utils/navigation';
 import { REVALIDATION_PERIOD_ON_ERROR_SECONDS } from '@/utils/staticPageGeneration';
 import Error from 'src/pages/_error';
@@ -55,11 +56,17 @@ export const getStaticProps: GetStaticProps = async () => {
       revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS,
     };
   } catch (error) {
-    return {
-      props: {
-        hasError: true,
+    logErrorToSentry(error, {
+      transactionName: 'getStaticProps-ProductUpdatesPage',
+      metadata: {
+        query:
+          '*[_type == "productUpdate"]| order(date desc){ title, slug, mainPhoto, date, summary }',
       },
-      revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS, // 35 seconds will be enough time before we re-try generating the page again.
+    });
+
+    return {
+      props: { hasError: true, pages: [] },
+      revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS,
     };
   }
 };

@@ -4,8 +4,5 @@ export const PageQuestionsContext = createContext<Record<string, number> | undef
 
 export const usePageQuestions = () => {
   const context = useContext(PageQuestionsContext);
-  if (!context) {
-    throw new Error('usePageQuestions must be used within a VersesProvider');
-  }
-  return context;
+  return context ?? {};
 };
