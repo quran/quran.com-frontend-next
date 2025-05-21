@@ -12,7 +12,6 @@ import QuestionHeader from '@/components/QuestionAndAnswer/QuestionHeader';
 import { getExploreAnswersOgImageUrl } from '@/lib/og';
 import { logErrorToSentry } from '@/lib/sentry';
 import styles from '@/pages/[chapterId]/answers/questions.module.scss';
-import Error from '@/pages/_error';
 import contentPageStyles from '@/pages/contentPage.module.scss';
 import { Question } from '@/types/QuestionsAndAnswers/Question';
 import QuestionResponse from '@/types/QuestionsAndAnswers/QuestionResponse';
@@ -28,7 +27,6 @@ import { isValidVerseKey } from '@/utils/validator';
 import ChaptersData from 'types/ChaptersData';
 
 type QuestionPageProps = {
-  hasError?: boolean;
   chaptersData: ChaptersData;
   questionData: QuestionResponse;
   questionId: string;
@@ -40,17 +38,8 @@ type QuestionPageProps = {
  * with the new URL format: /{verseKey}/answers/{questionId}
  * @returns {JSX.Element} The rendered question page
  */
-const QuestionPage: NextPage<QuestionPageProps> = ({
-  hasError,
-  questionId,
-  questionData,
-  verseKey,
-}) => {
+const QuestionPage: NextPage<QuestionPageProps> = ({ questionData, questionId, verseKey }) => {
   const { t, lang } = useTranslation('question');
-
-  if (hasError) {
-    return <Error statusCode={500} />;
-  }
 
   const { type, theme: themes, body, summary } = questionData as Question;
   const navigationUrl = getAnswerNavigationUrl(questionId, verseKey);
@@ -122,9 +111,8 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
         locale,
       },
     });
-
     return {
-      props: { hasError: true },
+      notFound: true,
       revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS,
     };
   }

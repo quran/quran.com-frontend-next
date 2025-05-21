@@ -11,7 +11,6 @@ import NextSeoWrapper from '@/components/NextSeoWrapper';
 import PageContainer from '@/components/PageContainer';
 import Spinner from '@/dls/Spinner/Spinner';
 import { logErrorToSentry } from '@/lib/sentry';
-import Error from '@/pages/_error';
 import layoutStyles from '@/pages/index.module.scss';
 import { Course } from '@/types/auth/Course';
 import { getCourse, privateFetcher } from '@/utils/auth/api';
@@ -31,18 +30,15 @@ const Loading = () => (
 );
 
 interface Props {
-  hasError?: boolean;
   page?: any[];
   course: Course;
   chaptersData?: any;
 }
 
-const LearningPlanPage: NextPage<Props> = ({ course, hasError }) => {
+const LearningPlanPage: NextPage<Props> = ({ course }) => {
   const { lang, t } = useTranslation('learn');
   const router = useRouter();
   const { slug } = router.query;
-
-  if (hasError) return <Error statusCode={500} />;
 
   const url = getCourseNavigationUrl(course.slug);
 
@@ -99,10 +95,9 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
         slug: String(params.slug),
       },
     });
-
     return {
+      notFound: true,
       revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS,
-      props: { hasError: true },
     };
   }
 };
