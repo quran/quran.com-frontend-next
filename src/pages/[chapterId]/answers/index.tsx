@@ -76,10 +76,7 @@ const SelectedAyahQuestionsPage: NextPage<SelectedAyahQuestionsPageProps> = ({
         imageHeight={630}
         canonical={getCanonicalUrl(lang, navigationUrl)}
         languageAlternates={getLanguageAlternates(navigationUrl)}
-        description={t('reflections-desc', {
-          ayahNumber: verseNumber,
-          surahName: chapter.chapter.transliteratedName,
-        })}
+        description={t('questions-meta-desc')}
       />
       <div className={layoutStyle.pageContainer}>
         <div className={layoutStyle.flow}>
