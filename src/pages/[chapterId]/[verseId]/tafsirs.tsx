@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 /* eslint-disable react-func/max-lines-per-function */
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 import { useRouter } from 'next/router';
@@ -9,6 +10,7 @@ import styles from './tafsirs.module.scss';
 import { fetcher, getChapterIdBySlug } from '@/api';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import TafsirBody from '@/components/QuranReader/TafsirView/TafsirBody';
+import { logErrorToSentry } from '@/lib/sentry';
 import Error from '@/pages/_error';
 import {
   getQuranReaderStylesInitialState,
@@ -148,6 +150,14 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
       revalidate: ONE_WEEK_REVALIDATION_PERIOD_SECONDS, // verses will be generated at runtime if not found in the cache, then cached for subsequent requests for 7 days.
     };
   } catch (error) {
+    logErrorToSentry(error, {
+      transactionName: 'getStaticProps-VerseTafsirsPage',
+      metadata: {
+        chapterIdOrSlug: String(params.chapterId),
+        verseId: String(params.verseId),
+        locale,
+      },
+    });
     return notFoundResponse;
   }
 };

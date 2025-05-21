@@ -1,6 +1,8 @@
+/* eslint-disable react-func/max-lines-per-function */
 import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
 
 import InfoPage from '@/components/chapters/Info/InfoPage';
+import { logErrorToSentry } from '@/lib/sentry';
 import { getChapterData, getAllChaptersData } from '@/utils/chapter';
 import {
   REVALIDATION_PERIOD_ON_ERROR_SECONDS,
@@ -45,6 +47,14 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
       revalidate: ONE_MONTH_REVALIDATION_PERIOD_SECONDS, // chapter info will be generated at runtime if not found in the cache, then cached for subsequent requests for 30 days.
     };
   } catch (error) {
+    logErrorToSentry(error, {
+      transactionName: 'getStaticProps-ChapterInfoPage',
+      metadata: {
+        chapterIdOrSlug: String(params.chapterId),
+        locale,
+      },
+    });
+
     return {
       props: { hasError: true },
       revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS, // 35 seconds will be enough time before we re-try generating the page again.

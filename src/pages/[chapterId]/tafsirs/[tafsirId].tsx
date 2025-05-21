@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 /* eslint-disable react-func/max-lines-per-function */
 import React from 'react';
 
@@ -11,6 +12,7 @@ import { fetcher } from '@/api';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import TafsirBody from '@/components/QuranReader/TafsirView/TafsirBody';
 import { getChapterOgImageUrl } from '@/lib/og';
+import { logErrorToSentry } from '@/lib/sentry';
 import Error from '@/pages/_error';
 import { getQuranReaderStylesInitialState } from '@/redux/defaultSettings/util';
 import { makeTafsirContentUrl, makeTafsirsUrl } from '@/utils/apiPaths';
@@ -147,9 +149,18 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
       revalidate: ONE_WEEK_REVALIDATION_PERIOD_SECONDS, // verses will be generated at runtime if not found in the cache, then cached for subsequent requests for 7 days.
     };
   } catch (error) {
+    logErrorToSentry(error, {
+      transactionName: 'getStaticProps-TafsirPage',
+      metadata: {
+        chapterIdOrSlug: String(params.chapterId),
+        tafsirIdOrSlug: String(params.tafsirId),
+        locale,
+      },
+    });
+
     return {
       props: { hasError: true },
-      revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS, // 35 seconds will be enough time before we re-try generating the page again.
+      revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS,
     };
   }
 };

@@ -10,6 +10,7 @@ import { fetcher } from '@/api';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import ReflectionBodyContainer from '@/components/QuranReader/ReflectionView/ReflectionBodyContainer';
 import { getChapterOgImageUrl } from '@/lib/og';
+import { logErrorToSentry } from '@/lib/sentry';
 import Error from '@/pages/_error';
 import layoutStyle from '@/pages/index.module.scss';
 import {
@@ -160,9 +161,17 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
       revalidate: ONE_WEEK_REVALIDATION_PERIOD_SECONDS, // verses will be generated at runtime if not found in the cache, then cached for subsequent requests for 7 days.
     };
   } catch (error) {
+    logErrorToSentry(error, {
+      transactionName: 'getStaticProps-ReflectionsPage',
+      metadata: {
+        chapterIdOrSlug: String(params.chapterId),
+        locale,
+      },
+    });
+
     return {
       props: { hasError: true },
-      revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS, // 35 seconds will be enough time before we re-try generating the page again.
+      revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS,
     };
   }
 };

@@ -1,3 +1,4 @@
+/* eslint-disable react-func/max-lines-per-function */
 import React from 'react';
 
 import classNames from 'classnames';
@@ -9,6 +10,7 @@ import PageContainer from '@/components/PageContainer';
 import Answer from '@/components/QuestionAndAnswer/Answer';
 import QuestionHeader from '@/components/QuestionAndAnswer/QuestionHeader';
 import { getExploreAnswersOgImageUrl } from '@/lib/og';
+import { logErrorToSentry } from '@/lib/sentry';
 import styles from '@/pages/[chapterId]/answers/questions.module.scss';
 import Error from '@/pages/_error';
 import contentPageStyles from '@/pages/contentPage.module.scss';
@@ -112,6 +114,15 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
       revalidate: ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
     };
   } catch (error) {
+    logErrorToSentry(error, {
+      transactionName: 'getStaticProps-QuestionPage',
+      metadata: {
+        chapterIdOrSlug: String(params.chapterId),
+        questionId: String(params.questionId),
+        locale,
+      },
+    });
+
     return {
       props: { hasError: true },
       revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS,
