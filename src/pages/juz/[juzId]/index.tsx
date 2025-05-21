@@ -8,7 +8,6 @@ import { getJuzVerses, getPagesLookup } from '@/api';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import QuranReader from '@/components/QuranReader';
 import { logErrorToSentry } from '@/lib/sentry';
-import Error from '@/pages/_error';
 import { getQuranReaderStylesInitialState } from '@/redux/defaultSettings/util';
 import { QuranReaderDataType } from '@/types/QuranReader';
 import { getDefaultWordFields, getMushafId } from '@/utils/api';
@@ -28,18 +27,14 @@ import ChaptersData from 'types/ChaptersData';
 
 interface JuzPageProps {
   juzVerses?: VersesResponse;
-  hasError?: boolean;
   chaptersData: ChaptersData;
 }
 
-const JuzPage: NextPage<JuzPageProps> = ({ hasError, juzVerses }) => {
+const JuzPage: NextPage<JuzPageProps> = ({ juzVerses }) => {
   const { t, lang } = useTranslation('common');
   const {
     query: { juzId },
   } = useRouter();
-  if (hasError) {
-    return <Error statusCode={500} />;
-  }
 
   const path = getJuzNavigationUrl(Number(juzId));
   return (
@@ -112,9 +107,8 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
         locale,
       },
     });
-
     return {
-      props: { hasError: true },
+      notFound: true,
       revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS,
     };
   }

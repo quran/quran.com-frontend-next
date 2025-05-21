@@ -4,7 +4,6 @@ import classNames from 'classnames';
 import { GetStaticProps } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 
-import Error from '../_error';
 import layoutStyle from '../index.module.scss';
 
 import pageStyle from './reciterPage.module.scss';
@@ -17,10 +16,11 @@ import RecitersList from '@/components/Reciter/RecitersList';
 import { getAllChaptersData } from '@/utils/chapter';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl } from '@/utils/navigation';
+import { REVALIDATION_PERIOD_ON_ERROR_SECONDS } from '@/utils/staticPageGeneration';
 
 const NAVIGATION_URL = '/reciters';
 
-const RecitersListPage = ({ reciters, hasError }) => {
+const RecitersListPage = ({ reciters }) => {
   const { t, lang } = useTranslation('reciter');
   const [searchQuery, setSearchQuery] = useState('');
 
@@ -28,8 +28,6 @@ const RecitersListPage = ({ reciters, hasError }) => {
     () => (searchQuery ? filterReciters(reciters, searchQuery) : reciters),
     [searchQuery, reciters],
   );
-
-  if (hasError) return <Error statusCode={500} />;
 
   return (
     <>
@@ -66,9 +64,8 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
     };
   } catch (e) {
     return {
-      props: {
-        hasError: true,
-      },
+      notFound: true,
+      revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS,
     };
   }
 };

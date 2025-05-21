@@ -11,22 +11,17 @@ import LocalizationMessage from '@/components/Sanity/LocalizationMessage';
 import Page from '@/components/Sanity/Page';
 import { executeGroqQuery } from '@/lib/sanity';
 import { logErrorToSentry } from '@/lib/sentry';
-import Error from '@/pages/_error';
 import { getAllChaptersData } from '@/utils/chapter';
 import { getCanonicalUrl, getProductUpdatesUrl } from '@/utils/navigation';
 import { REVALIDATION_PERIOD_ON_ERROR_SECONDS } from '@/utils/staticPageGeneration';
 
 interface Props {
-  hasError?: boolean;
   pages?: any[];
   chaptersData?: any;
 }
 
-const ProductUpdatesPage: NextPage<Props> = ({ pages, hasError }) => {
+const ProductUpdatesPage: NextPage<Props> = ({ pages }) => {
   const { t, lang } = useTranslation('common');
-  if (hasError) {
-    return <Error statusCode={500} />;
-  }
   // TODO: add getLanguageAlternates when we internationalize this page
   return (
     <>
@@ -69,7 +64,7 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
     });
 
     return {
-      props: { hasError: true, pages: [] },
+      notFound: true,
       revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS,
     };
   }

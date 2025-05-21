@@ -15,7 +15,6 @@ import ReciterInfo from '@/components/Reciter/ReciterInfo';
 import Input from '@/dls/Forms/Input';
 import SearchIcon from '@/icons/search.svg';
 import { logErrorToSentry } from '@/lib/sentry';
-import Error from '@/pages/_error';
 import SearchQuerySource from '@/types/SearchQuerySource';
 import { getAllChaptersData } from '@/utils/chapter';
 import { logEmptySearchResults } from '@/utils/eventLogger';
@@ -46,9 +45,8 @@ const filterChapters = (chapters, searchQuery: string) => {
 type ReciterPageProps = {
   selectedReciter: Reciter;
   chaptersData: ChaptersData;
-  hasError?: boolean;
 };
-const ReciterPage = ({ selectedReciter, chaptersData, hasError }: ReciterPageProps) => {
+const ReciterPage = ({ selectedReciter, chaptersData }: ReciterPageProps) => {
   const { t, lang } = useTranslation();
 
   const [searchQuery, setSearchQuery] = useState('');
@@ -71,8 +69,6 @@ const ReciterPage = ({ selectedReciter, chaptersData, hasError }: ReciterPagePro
     () => (searchQuery ? filterChapters(allChaptersWithId, searchQuery) : allChaptersWithId),
     [searchQuery, allChaptersWithId],
   );
-
-  if (hasError) return <Error statusCode={500} />;
 
   const navigationUrl = getReciterNavigationUrl(selectedReciter.id.toString());
 
@@ -133,9 +129,8 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
         locale,
       },
     });
-
     return {
-      props: { hasError: true },
+      notFound: true,
       revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS,
     };
   }

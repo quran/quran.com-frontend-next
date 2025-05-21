@@ -12,18 +12,16 @@ import SanityPage from '@/components/Sanity/Page';
 import Spinner from '@/dls/Spinner/Spinner';
 import { executeGroqQuery } from '@/lib/sanity';
 import { logErrorToSentry } from '@/lib/sentry';
-import Error from '@/pages/_error';
 import { getAllChaptersData } from '@/utils/chapter';
 import { getCanonicalUrl, getProductUpdatesUrl } from '@/utils/navigation';
 import { REVALIDATION_PERIOD_ON_ERROR_SECONDS } from '@/utils/staticPageGeneration';
 
 interface Props {
-  hasError?: boolean;
   page?: any[];
   chaptersData?: any;
 }
 
-const ProductUpdatePage: NextPage<Props> = ({ hasError, page }) => {
+const ProductUpdatePage: NextPage<Props> = ({ page }) => {
   const { lang } = useTranslation();
   const router = useRouter();
   if (router.isFallback) {
@@ -32,9 +30,6 @@ const ProductUpdatePage: NextPage<Props> = ({ hasError, page }) => {
         <Spinner />
       </div>
     );
-  }
-  if (hasError) {
-    return <Error statusCode={500} />;
   }
   return (
     <>
@@ -85,9 +80,8 @@ export const getStaticProps: GetStaticProps = async (context) => {
         slug: id,
       },
     });
-
     return {
-      props: { hasError: true },
+      notFound: true,
       revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS,
     };
   }
