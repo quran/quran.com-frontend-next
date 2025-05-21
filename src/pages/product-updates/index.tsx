@@ -12,12 +12,14 @@ import Page from '@/components/Sanity/Page';
 import { executeGroqQuery } from '@/lib/sanity';
 import { logErrorToSentry } from '@/lib/sentry';
 import Error from '@/pages/_error';
+import { getAllChaptersData } from '@/utils/chapter';
 import { getCanonicalUrl, getProductUpdatesUrl } from '@/utils/navigation';
 import { REVALIDATION_PERIOD_ON_ERROR_SECONDS } from '@/utils/staticPageGeneration';
 
 interface Props {
   hasError?: boolean;
   pages?: any[];
+  chaptersData?: any;
 }
 
 const ProductUpdatesPage: NextPage<Props> = ({ pages, hasError }) => {
@@ -44,14 +46,16 @@ const ProductUpdatesPage: NextPage<Props> = ({ pages, hasError }) => {
   );
 };
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
   try {
     const pages = await executeGroqQuery(
       '*[_type == "productUpdate"]| order(date desc){ title, slug, mainPhoto, date, summary }',
     );
+    const chaptersData = await getAllChaptersData(locale);
     return {
       props: {
         pages,
+        chaptersData,
       },
       revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS,
     };

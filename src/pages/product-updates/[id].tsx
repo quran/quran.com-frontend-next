@@ -1,4 +1,5 @@
-import { NextPage } from 'next';
+/* eslint-disable react-func/max-lines-per-function */
+import { GetStaticProps, NextPage } from 'next';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
@@ -12,12 +13,14 @@ import Spinner from '@/dls/Spinner/Spinner';
 import { executeGroqQuery } from '@/lib/sanity';
 import { logErrorToSentry } from '@/lib/sentry';
 import Error from '@/pages/_error';
+import { getAllChaptersData } from '@/utils/chapter';
 import { getCanonicalUrl, getProductUpdatesUrl } from '@/utils/navigation';
 import { REVALIDATION_PERIOD_ON_ERROR_SECONDS } from '@/utils/staticPageGeneration';
 
 interface Props {
   hasError?: boolean;
   page?: any[];
+  chaptersData?: any;
 }
 
 const ProductUpdatePage: NextPage<Props> = ({ hasError, page }) => {
@@ -52,8 +55,9 @@ const ProductUpdatePage: NextPage<Props> = ({ hasError, page }) => {
   );
 };
 
-export const getStaticProps = async (context) => {
+export const getStaticProps: GetStaticProps = async (context) => {
   const { id = '' } = context.params;
+  const { locale } = context;
   try {
     const page = await executeGroqQuery(
       '*[_type == "productUpdate" && slug.current == $slug][0]',
@@ -66,9 +70,11 @@ export const getStaticProps = async (context) => {
       // @ts-ignore
       throw new Error('invalid slug');
     }
+    const chaptersData = await getAllChaptersData(locale);
     return {
       props: {
         page,
+        chaptersData,
       },
       revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS,
     };
