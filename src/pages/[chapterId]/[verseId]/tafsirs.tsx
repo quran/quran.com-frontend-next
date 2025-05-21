@@ -11,7 +11,6 @@ import { fetcher, getChapterIdBySlug } from '@/api';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import TafsirBody from '@/components/QuranReader/TafsirView/TafsirBody';
 import { logErrorToSentry } from '@/lib/sentry';
-import Error from '@/pages/_error';
 import {
   getQuranReaderStylesInitialState,
   getTafsirsInitialState,
@@ -36,20 +35,16 @@ import ChaptersData from 'types/ChaptersData';
 type AyahTafsirProp = {
   chapter?: ChapterResponse;
   verses?: VersesResponse;
-  hasError?: boolean;
   chaptersData: ChaptersData;
   fallback: any;
 };
 
-const AyahTafsir: NextPage<AyahTafsirProp> = ({ hasError, chapter, fallback }) => {
+const AyahTafsirPage: NextPage<AyahTafsirProp> = ({ chapter, fallback }) => {
   const { t, lang } = useTranslation('common');
   const router = useRouter();
   const {
     query: { verseId },
   } = router;
-  if (hasError) {
-    return <Error statusCode={500} />;
-  }
   const path = getVerseTafsirNavigationUrl(chapter.chapter.slug, Number(verseId));
 
   const localizedVerseNumber = toLocalizedNumber(Number(verseId), lang);
@@ -93,13 +88,6 @@ const AyahTafsir: NextPage<AyahTafsirProp> = ({ hasError, chapter, fallback }) =
   );
 };
 
-const notFoundResponse = {
-  props: {
-    hasError: true,
-  },
-  revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS, // 35 seconds will be enough time before we re-try generating the page again.
-};
-
 export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   try {
     let chapterIdOrSlug = String(params.chapterId);
@@ -134,7 +122,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
       fetcher(tafsirListUrl),
     ]);
 
-    if (!chapterData) return notFoundResponse;
+    if (!chapterData) return { notFound: true, revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS };
 
     return {
       props: {
@@ -147,7 +135,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
           chapter: { ...chapterData, id: chapterIdOrSlug },
         },
       },
-      revalidate: ONE_WEEK_REVALIDATION_PERIOD_SECONDS, // verses will be generated at runtime if not found in the cache, then cached for subsequent requests for 7 days.
+      revalidate: ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
     };
   } catch (error) {
     logErrorToSentry(error, {
@@ -158,12 +146,16 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
         locale,
       },
     });
-    return notFoundResponse;
+    return {
+      notFound: true,
+      revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS,
+    };
   }
 };
+
 export const getStaticPaths: GetStaticPaths = async () => ({
   paths: [], // no pre-rendered chapters at build time.
   fallback: 'blocking', // will server-render pages on-demand if the path doesn't exist.
 });
 
-export default AyahTafsir;
+export default AyahTafsirPage;

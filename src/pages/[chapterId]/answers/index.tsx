@@ -10,7 +10,6 @@ import NextSeoWrapper from '@/components/NextSeoWrapper';
 import QuestionsBodyContainer from '@/components/QuestionAndAnswer/QuestionsBodyContainer';
 import { getChapterOgImageUrl } from '@/lib/og';
 import { logErrorToSentry } from '@/lib/sentry';
-import Error from '@/pages/_error';
 import layoutStyle from '@/pages/index.module.scss';
 import {
   getQuranReaderStylesInitialState,
@@ -35,7 +34,6 @@ import ChaptersData from 'types/ChaptersData';
 
 type SelectedAyahQuestionsPageProps = {
   chapter?: ChapterResponse;
-  hasError?: boolean;
   verseNumber?: string;
   chapterId?: string;
   chaptersData: ChaptersData;
@@ -43,16 +41,12 @@ type SelectedAyahQuestionsPageProps = {
 };
 
 const SelectedAyahQuestionsPage: NextPage<SelectedAyahQuestionsPageProps> = ({
-  hasError,
   chapter,
   verseNumber,
   chapterId,
   fallback,
 }) => {
   const { t, lang } = useTranslation('question');
-  if (hasError) {
-    return <Error statusCode={500} />;
-  }
 
   const navigationUrl = getVerseAnswersNavigationUrl(`${chapterId}:${verseNumber}`);
   const verseQuestionsUrl = makeGetQuestionsByVerseKeyUrl({
@@ -149,9 +143,8 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
         verseKey,
       },
     });
-
     return {
-      props: { hasError: true },
+      notFound: true,
       revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS,
     };
   }
