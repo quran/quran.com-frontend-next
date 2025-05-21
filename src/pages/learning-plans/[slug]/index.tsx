@@ -11,10 +11,12 @@ import NextSeoWrapper from '@/components/NextSeoWrapper';
 import PageContainer from '@/components/PageContainer';
 import Spinner from '@/dls/Spinner/Spinner';
 import { logErrorToSentry } from '@/lib/sentry';
+import Error from '@/pages/_error';
 import layoutStyles from '@/pages/index.module.scss';
 import { Course } from '@/types/auth/Course';
 import { getCourse, privateFetcher } from '@/utils/auth/api';
 import { makeGetCourseUrl } from '@/utils/auth/apiPaths';
+import { getAllChaptersData } from '@/utils/chapter';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl, getCourseNavigationUrl } from '@/utils/navigation';
 import {
@@ -32,12 +34,16 @@ interface Props {
   hasError?: boolean;
   page?: any[];
   course: Course;
+  chaptersData?: any;
 }
 
-const LearningPlanPage: NextPage<Props> = ({ course }) => {
+const LearningPlanPage: NextPage<Props> = ({ course, hasError }) => {
   const { lang, t } = useTranslation('learn');
   const router = useRouter();
   const { slug } = router.query;
+
+  if (hasError) return <Error statusCode={500} />;
+
   const url = getCourseNavigationUrl(course.slug);
 
   return (
@@ -75,12 +81,14 @@ export const getStaticPaths: GetStaticPaths = async () => ({
   fallback: 'blocking', // will server-render pages on-demand if the path doesn't exist.
 });
 
-export const getStaticProps: GetStaticProps = async ({ params }) => {
+export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
   try {
     const course = await getCourse(params.slug as string);
+    const chaptersData = await getAllChaptersData(locale);
     return {
       props: {
         course,
+        chaptersData,
       },
       revalidate: ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
     };

@@ -3,6 +3,7 @@ import React from 'react';
 import classNames from 'classnames';
 import { shallowEqual, useSelector } from 'react-redux';
 
+import SeoTextForVerse from '../SeoTextForVerse';
 import TajweedFontPalettes from '../TajweedFontPalettes';
 import styles from '../VerseText.module.scss';
 
@@ -50,6 +51,7 @@ const PlainVerseText: React.FC<Props> = ({
   const isFontLoaded = useIsFontLoaded(pageNumber, quranFont);
   return (
     <>
+      <SeoTextForVerse words={words} />
       <TajweedFontPalettes pageNumber={pageNumber} quranFont={quranFont} />
       <div
         className={classNames(
