@@ -10,6 +10,7 @@ import DataFetcher from '@/components/DataFetcher';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import PageContainer from '@/components/PageContainer';
 import Spinner from '@/dls/Spinner/Spinner';
+import { logErrorToSentry } from '@/lib/sentry';
 import layoutStyles from '@/pages/index.module.scss';
 import { Course } from '@/types/auth/Course';
 import { getCourse, privateFetcher } from '@/utils/auth/api';
@@ -84,11 +85,16 @@ export const getStaticProps: GetStaticProps = async ({ params }) => {
       revalidate: ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
     };
   } catch (error) {
-    return {
-      props: {
-        hasError: true,
+    logErrorToSentry(error, {
+      transactionName: 'getStaticProps-LearningPlanPage',
+      metadata: {
+        slug: String(params.slug),
       },
-      revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS, // 35 seconds will be enough time before we re-try generating the page again.
+    });
+
+    return {
+      revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS,
+      props: { hasError: true },
     };
   }
 };

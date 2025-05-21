@@ -7,6 +7,7 @@ import useTranslation from 'next-translate/useTranslation';
 import { getJuzVerses, getPagesLookup } from '@/api';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import QuranReader from '@/components/QuranReader';
+import { logErrorToSentry } from '@/lib/sentry';
 import Error from '@/pages/_error';
 import { getQuranReaderStylesInitialState } from '@/redux/defaultSettings/util';
 import { QuranReaderDataType } from '@/types/QuranReader';
@@ -104,11 +105,17 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
       revalidate: ONE_WEEK_REVALIDATION_PERIOD_SECONDS, // verses will be generated at runtime if not found in the cache, then cached for subsequent requests for 7 days.
     };
   } catch (error) {
-    return {
-      props: {
-        hasError: true,
+    logErrorToSentry(error, {
+      transactionName: 'getStaticProps-JuzPage',
+      metadata: {
+        juzId: String(params.juzId),
+        locale,
       },
-      revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS, // 35 seconds will be enough time before we re-try generating the page again.
+    });
+
+    return {
+      props: { hasError: true },
+      revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS,
     };
   }
 };
