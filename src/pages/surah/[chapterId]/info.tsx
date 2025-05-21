@@ -16,12 +16,11 @@ import ChaptersData from 'types/ChaptersData';
 interface Props {
   chapterResponse?: ChapterResponse;
   chapterInfoResponse?: ChapterInfoResponse;
-  hasError?: boolean;
   chaptersData: ChaptersData;
 }
 
-const ChapterInfo: NextPage<Props> = (props) => {
-  return <InfoPage {...props} />;
+const ChapterInfo: NextPage<Props> = ({ chapterResponse, chapterInfoResponse, chaptersData }) => {
+  return <InfoPage {...{ chapterResponse, chapterInfoResponse, chaptersData }} />;
 };
 
 export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
@@ -54,10 +53,9 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
         locale,
       },
     });
-
     return {
-      props: { hasError: true },
-      revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS, // 35 seconds will be enough time before we re-try generating the page again.
+      notFound: true,
+      revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS,
     };
   }
 };

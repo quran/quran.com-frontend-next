@@ -25,7 +25,6 @@ import PauseIcon from '@/icons/pause.svg';
 import PlayIcon from '@/icons/play-arrow.svg';
 import ReaderIcon from '@/icons/reader.svg';
 import { logErrorToSentry } from '@/lib/sentry';
-import Error from '@/pages/_error';
 import { makeCDNUrl } from '@/utils/cdn';
 import { getAllChaptersData, getChapterData } from '@/utils/chapter';
 import { logButtonClick } from '@/utils/eventLogger';
@@ -45,14 +44,9 @@ import Reciter from 'types/Reciter';
 type ShareRecitationPageProps = {
   selectedReciter?: Reciter;
   selectedChapter?: Chapter;
-  hasError?: boolean;
 };
 
-const RecitationPage = ({
-  selectedReciter,
-  selectedChapter,
-  hasError,
-}: ShareRecitationPageProps) => {
+const RecitationPage = ({ selectedReciter, selectedChapter }: ShareRecitationPageProps) => {
   const { t, lang } = useTranslation();
   const toast = useToast();
   const router = useRouter();
@@ -63,8 +57,6 @@ const RecitationPage = ({
   );
   const currentSurah = useSelector(audioService, (state) => state.context.surah);
   const currentReciterId = useSelector(audioService, selectCurrentAudioReciterId);
-
-  if (hasError) return <Error statusCode={500} />;
 
   const isCurrentlyPlayingThisChapter =
     isAudioPlaying &&
@@ -229,9 +221,8 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
         locale,
       },
     });
-
     return {
-      props: { hasError: true },
+      notFound: true,
       revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS,
     };
   }

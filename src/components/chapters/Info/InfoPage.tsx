@@ -6,7 +6,6 @@ import Info from '.';
 
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import { getChapterOgImageUrl } from '@/lib/og';
-import Error from '@/pages/_error';
 import { getLanguageAlternates, toLocalizedNumber } from '@/utils/locale';
 import { getCanonicalUrl, getSurahInfoNavigationUrl } from '@/utils/navigation';
 import { ChapterInfoResponse, ChapterResponse } from 'types/ApiResponses';
@@ -14,14 +13,10 @@ import { ChapterInfoResponse, ChapterResponse } from 'types/ApiResponses';
 interface Props {
   chapterResponse?: ChapterResponse;
   chapterInfoResponse?: ChapterInfoResponse;
-  hasError?: boolean;
 }
 
-const InfoPage: React.FC<Props> = ({ hasError, chapterInfoResponse, chapterResponse }) => {
+const InfoPage: React.FC<Props> = ({ chapterInfoResponse, chapterResponse }) => {
   const { t, lang } = useTranslation('common');
-  if (hasError) {
-    return <Error statusCode={500} />;
-  }
   const navigationUrl = getSurahInfoNavigationUrl(chapterResponse.chapter.slug);
 
   return (
