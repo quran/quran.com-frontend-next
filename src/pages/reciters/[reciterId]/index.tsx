@@ -15,6 +15,7 @@ import ReciterInfo from '@/components/Reciter/ReciterInfo';
 import Input from '@/dls/Forms/Input';
 import SearchIcon from '@/icons/search.svg';
 import { logErrorToSentry } from '@/lib/sentry';
+import Error from '@/pages/_error';
 import SearchQuerySource from '@/types/SearchQuerySource';
 import { getAllChaptersData } from '@/utils/chapter';
 import { logEmptySearchResults } from '@/utils/eventLogger';
@@ -45,8 +46,9 @@ const filterChapters = (chapters, searchQuery: string) => {
 type ReciterPageProps = {
   selectedReciter: Reciter;
   chaptersData: ChaptersData;
+  hasError?: boolean;
 };
-const ReciterPage = ({ selectedReciter, chaptersData }: ReciterPageProps) => {
+const ReciterPage = ({ selectedReciter, chaptersData, hasError }: ReciterPageProps) => {
   const { t, lang } = useTranslation();
 
   const [searchQuery, setSearchQuery] = useState('');
@@ -55,7 +57,7 @@ const ReciterPage = ({ selectedReciter, chaptersData }: ReciterPageProps) => {
   // because `Fuse` library expects Array of objects, not Record<string, Chapter>
   const allChaptersWithId = useMemo(
     () =>
-      Object.entries(chaptersData).map(([chapterId, chapter]) => {
+      Object?.entries(chaptersData || {})?.map(([chapterId, chapter]) => {
         return {
           id: chapterId.toString(),
           localizedId: toLocalizedNumber(Number(chapterId), lang),
@@ -69,6 +71,8 @@ const ReciterPage = ({ selectedReciter, chaptersData }: ReciterPageProps) => {
     () => (searchQuery ? filterChapters(allChaptersWithId, searchQuery) : allChaptersWithId),
     [searchQuery, allChaptersWithId],
   );
+
+  if (hasError) return <Error statusCode={500} />;
 
   const navigationUrl = getReciterNavigationUrl(selectedReciter.id.toString());
 

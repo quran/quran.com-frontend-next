@@ -25,6 +25,7 @@ import PauseIcon from '@/icons/pause.svg';
 import PlayIcon from '@/icons/play-arrow.svg';
 import ReaderIcon from '@/icons/reader.svg';
 import { logErrorToSentry } from '@/lib/sentry';
+import Error from '@/pages/_error';
 import { makeCDNUrl } from '@/utils/cdn';
 import { getAllChaptersData, getChapterData } from '@/utils/chapter';
 import { logButtonClick } from '@/utils/eventLogger';
@@ -42,22 +43,28 @@ import Chapter from 'types/Chapter';
 import Reciter from 'types/Reciter';
 
 type ShareRecitationPageProps = {
-  selectedReciter: Reciter;
-  selectedChapter: Chapter;
+  selectedReciter?: Reciter;
+  selectedChapter?: Chapter;
+  hasError?: boolean;
 };
 
-const RecitationPage = ({ selectedReciter, selectedChapter }: ShareRecitationPageProps) => {
+const RecitationPage = ({
+  selectedReciter,
+  selectedChapter,
+  hasError,
+}: ShareRecitationPageProps) => {
   const { t, lang } = useTranslation();
   const toast = useToast();
   const router = useRouter();
   const [isDownloadingAudio, setIsDownloadingAudio] = useState(false);
-
   const audioService = useContext(AudioPlayerMachineContext);
   const isAudioPlaying = useSelector(audioService, (state) =>
     state.matches('VISIBLE.AUDIO_PLAYER_INITIATED.PLAYING'),
   );
   const currentSurah = useSelector(audioService, (state) => state.context.surah);
   const currentReciterId = useSelector(audioService, selectCurrentAudioReciterId);
+
+  if (hasError) return <Error statusCode={500} />;
 
   const isCurrentlyPlayingThisChapter =
     isAudioPlaying &&

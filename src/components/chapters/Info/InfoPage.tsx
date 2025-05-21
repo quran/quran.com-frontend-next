@@ -6,9 +6,9 @@ import Info from '.';
 
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import { getChapterOgImageUrl } from '@/lib/og';
+import Error from '@/pages/_error';
 import { getLanguageAlternates, toLocalizedNumber } from '@/utils/locale';
 import { getCanonicalUrl, getSurahInfoNavigationUrl } from '@/utils/navigation';
-import Error from 'src/pages/_error';
 import { ChapterInfoResponse, ChapterResponse } from 'types/ApiResponses';
 
 interface Props {

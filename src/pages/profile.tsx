@@ -14,6 +14,7 @@ import RecentReadingSessions from '@/components/Verses/RecentReadingSessions';
 import Button from '@/dls/Button/Button';
 import Skeleton from '@/dls/Skeleton/Skeleton';
 import useCurrentUser from '@/hooks/auth/useCurrentUser';
+import Error from '@/pages/_error';
 import { logoutUser } from '@/utils/auth/api';
 import { DEFAULT_PHOTO_URL } from '@/utils/auth/constants';
 import { isLoggedIn } from '@/utils/auth/login';
@@ -26,7 +27,6 @@ import {
   getLoginNavigationUrl,
   getProfileNavigationUrl,
 } from '@/utils/navigation';
-import Error from 'src/pages/_error';
 import ChaptersData from 'types/ChaptersData';
 
 interface Props {
