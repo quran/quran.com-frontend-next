@@ -8,7 +8,6 @@ import { getRubVerses, getPagesLookup } from '@/api';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import QuranReader from '@/components/QuranReader';
 import { logErrorToSentry } from '@/lib/sentry';
-import Error from '@/pages/_error';
 import { getQuranReaderStylesInitialState } from '@/redux/defaultSettings/util';
 import { QuranReaderDataType } from '@/types/QuranReader';
 import { getDefaultWordFields, getMushafId } from '@/utils/api';
@@ -28,17 +27,14 @@ import ChaptersData from 'types/ChaptersData';
 
 interface RubPageProps {
   rubVerses?: VersesResponse;
-  hasError?: boolean;
   chaptersData: ChaptersData;
 }
 
-const RubPage: NextPage<RubPageProps> = ({ hasError, rubVerses }) => {
+const RubPage: NextPage<RubPageProps> = ({ rubVerses }) => {
   const { t, lang } = useTranslation('common');
   const {
     query: { rubId },
   } = useRouter();
-
-  if (hasError) return <Error statusCode={500} />;
 
   const path = getRubNavigationUrl(Number(rubId));
   return (
@@ -114,9 +110,8 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
         locale,
       },
     });
-
     return {
-      props: { hasError: true },
+      notFound: true,
       revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS,
     };
   }

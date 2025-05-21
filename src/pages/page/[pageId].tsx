@@ -36,11 +36,10 @@ import ChaptersData from 'types/ChaptersData';
 
 interface Props {
   pageVerses: VersesResponse;
-  hasError?: boolean;
   chaptersData: ChaptersData;
 }
 
-const QuranicPage: NextPage<Props> = ({ hasError, pageVerses: initialData }) => {
+const QuranicPage: NextPage<Props> = ({ pageVerses: initialData }) => {
   const { t, lang } = useTranslation('common');
   const {
     query: { pageId },
@@ -68,12 +67,7 @@ const QuranicPage: NextPage<Props> = ({ hasError, pageVerses: initialData }) => 
     isUsingDefaultFont,
   );
 
-  if (
-    hasError ||
-    pageId > PAGES_MUSHAF_MAP[Number(mushafId)] ||
-    pagesLookupError ||
-    pageVersesError
-  ) {
+  if (pageId > PAGES_MUSHAF_MAP[Number(mushafId)] || pagesLookupError || pageVersesError) {
     return <Error statusCode={500} />;
   }
 
@@ -159,7 +153,7 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
     });
 
     return {
-      props: { hasError: true },
+      notFound: true,
       revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS,
     };
   }
