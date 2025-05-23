@@ -38,8 +38,6 @@ export const selectUserState = (state: RootState) => {
   return {
     isGuest,
     isFirstTimeGuest: isGuest && state.session.count === 2,
-    hasReadingSessions: !!state.readingTracker.lastReadVerse.chapterId,
-    lastReadVerse: state?.readingTracker?.lastReadVerse,
   };
 };
 
