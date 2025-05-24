@@ -73,6 +73,7 @@ const WordByWordSection = () => {
     action: Action,
     undoAction: Action,
     isReaderStyles = false,
+    successCallback: () => void = undefined,
   ) => {
     onSettingsChange(
       key,
@@ -80,6 +81,7 @@ const WordByWordSection = () => {
       action,
       undoAction,
       isReaderStyles ? PreferenceGroup.QURAN_READER_STYLES : PreferenceGroup.READING,
+      successCallback,
     );
   };
 
@@ -109,13 +111,16 @@ const WordByWordSection = () => {
 
   const onWordByWordLocaleChange = (value: string) => {
     logValueChange('wbw_locale', wordByWordLocale, value);
-    router.query[QueryParam.WBW_LOCALE] = value;
-    router.push(router, undefined, { shallow: true });
     onWordByWordSettingsChange(
       'selectedWordByWordLocale',
       value,
       setSelectedWordByWordLocale({ value, locale: lang }),
       setSelectedWordByWordLocale({ value: wordByWordLocale, locale: lang }),
+      false,
+      () => {
+        router.query[QueryParam.WBW_LOCALE] = value;
+        router.push(router, undefined, { shallow: true });
+      },
     );
   };
 

@@ -9,7 +9,7 @@ import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import { selectQuranFont, selectQuranMushafLines } from '@/redux/slices/QuranReader/styles';
 import { getMushafId } from '@/utils/api';
-import { addOrUpdateUserPreference } from '@/utils/auth/api';
+import { addOrUpdateUserPreference, throwIfResponseContainsError } from '@/utils/auth/api';
 import { isLoggedIn } from '@/utils/auth/login';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 
@@ -96,8 +96,14 @@ const usePersistPreferenceGroup = (): PersistPreferences => {
             preferenceGroup,
             getUpdatedMushafId(preferenceGroup, key, value),
           )
-            .then(() => {
+            .then((response) => {
+              throwIfResponseContainsError(response);
               callback();
+            })
+            .catch(() => {
+              toast(t('error.pref-persist-fail'), {
+                status: ToastStatus.Warning,
+              });
             })
             .finally(() => {
               setIsLoading(false);
@@ -123,7 +129,8 @@ const usePersistPreferenceGroup = (): PersistPreferences => {
             preferenceGroup,
             getUpdatedMushafId(preferenceGroup, key, value),
           )
-            .then(() => {
+            .then((response) => {
+              throwIfResponseContainsError(response);
               if (successCallback) {
                 successCallback();
               }
@@ -176,7 +183,8 @@ const usePersistPreferenceGroup = (): PersistPreferences => {
             preferenceGroup,
             getUpdatedMushafId(preferenceGroup, key, value),
           )
-            .then(() => {
+            .then((response) => {
+              throwIfResponseContainsError(response);
               if (successCallback) {
                 successCallback();
               }
