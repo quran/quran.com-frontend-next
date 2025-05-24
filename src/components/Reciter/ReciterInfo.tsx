@@ -1,7 +1,7 @@
 /* eslint-disable react/no-danger */
-/* eslint-disable @next/next/no-img-element */
 import { useContext, useState } from 'react';
 
+import Image from 'next/image';
 import useTranslation from 'next-translate/useTranslation';
 
 import Button from '../dls/Button/Button';
@@ -42,10 +42,13 @@ const ReciterInfo = ({ selectedReciter }: ReciterInfoProps) => {
   return (
     <div className={styles.container}>
       <div className={styles.reciterImageContainer}>
-        <img
+        <Image
           className={styles.reciterImage}
           src={makeCDNUrl(selectedReciter?.profilePicture)}
-          alt={selectedReciter?.translatedName?.name}
+          alt={selectedReciter?.translatedName?.name || 'Reciter profile'}
+          width={100}
+          height={100}
+          priority
         />
       </div>
       <div>
