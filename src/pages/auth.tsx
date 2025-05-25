@@ -4,6 +4,7 @@ import { GetServerSideProps, GetServerSidePropsContext, GetServerSidePropsResult
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
+import { fetcher } from '@/api';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import AuthError from '@/types/AuthError';
 import { makeRedirectTokenUrl } from '@/utils/auth/apiPaths';
@@ -83,13 +84,17 @@ const handleTokenRedirection = async (
  * @returns {Promise<Response>} - A promise that resolves to the response from the fetch request.
  */
 const fetchToken = async (token: string, context: GetServerSidePropsContext): Promise<Response> => {
-  return fetch(makeRedirectTokenUrl(token), {
-    method: 'GET',
-    headers: {
-      cookie: context.req.headers.cookie || '',
+  return fetcher(
+    makeRedirectTokenUrl(token),
+    {
+      method: 'GET',
+      headers: {
+        cookie: context.req.headers.cookie || '',
+      },
+      credentials: 'include',
     },
-    credentials: 'include',
-  });
+    true,
+  );
 };
 
 /**

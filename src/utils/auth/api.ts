@@ -8,12 +8,11 @@ import { prepareGenerateMediaFileRequestData } from '../media/utils';
 
 import { BANNED_USER_ERROR_ID } from './constants';
 import { AuthErrorCodes } from './errors';
-import generateSignature from './signature';
 import BookmarkByCollectionIdQueryParams from './types/BookmarkByCollectionIdQueryParams';
 import GetAllNotesQueryParams from './types/Note/GetAllNotesQueryParams';
 import { ShortenUrlResponse } from './types/ShortenUrl';
 
-import { fetcher, X_AUTH_SIGNATURE, X_INTERNAL_CLIENT, X_TIMESTAMP } from '@/api';
+import { fetcher } from '@/api';
 import {
   ActivityDay,
   ActivityDayType,
@@ -92,7 +91,7 @@ import {
   makeVerificationCodeUrl,
   makeGetQuranicWeekUrl,
 } from '@/utils/auth/apiPaths';
-import { isStaticBuild } from '@/utils/build';
+import { getAdditionalHeaders } from '@/utils/headers';
 import CompleteAnnouncementRequest from 'types/auth/CompleteAnnouncementRequest';
 import { GetBookmarkCollectionsIdResponse } from 'types/auth/GetBookmarksByCollectionId';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
@@ -582,23 +581,14 @@ export const withCredentialsFetcher = async <T>(
   init?: RequestInit,
 ): Promise<T> => {
   try {
-    let additionalHeaders = {};
-    if (isStaticBuild) {
-      const req: NextApiRequest = {
-        url: typeof input === 'string' ? input : input.url,
-        method: init.method || 'GET',
-        body: init.body,
-        headers: init.headers,
-        query: {},
-      } as NextApiRequest;
-
-      const { signature, timestamp } = generateSignature(req, req.url);
-      additionalHeaders = {
-        [X_AUTH_SIGNATURE]: signature,
-        [X_TIMESTAMP]: timestamp,
-        [X_INTERNAL_CLIENT]: process.env.INTERNAL_CLIENT_ID,
-      };
-    }
+    const request: NextApiRequest = {
+      url: typeof input === 'string' ? input : input.url,
+      method: init?.method || 'GET',
+      body: init?.body,
+      headers: init?.headers,
+      query: {},
+    } as NextApiRequest;
+    const additionalHeaders = getAdditionalHeaders(request);
     const data = await fetcher<T>(input, {
       ...init,
       credentials: 'include',
