@@ -3,7 +3,6 @@ import React, { useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import { useSWRConfig } from 'swr';
-import useSWRImmutable from 'swr/immutable';
 
 import AuthHeader from './AuthHeader';
 import getCompleteSignupFormFields from './CompleteSignupFormFields';
@@ -15,15 +14,14 @@ import VerificationCodeForm from './VerificationCode/VerificationCodeForm';
 import Button, { ButtonShape, ButtonType } from '@/components/dls/Button/Button';
 import FormBuilder from '@/components/FormBuilder/FormBuilder';
 import authStyles from '@/styles/auth/auth.module.scss';
-import {
-  completeSignup,
-  getUserProfile,
-  requestVerificationCode,
-  updateUserProfile,
-} from '@/utils/auth/api';
+import { updateUserProfile } from '@/utils/auth/api';
 import { makeUserProfileUrl } from '@/utils/auth/apiPaths';
-import { isLoggedIn } from '@/utils/auth/login';
+import {
+  handleResendVerificationCode,
+  handleVerificationCodeSubmit as submitVerificationCode,
+} from '@/utils/auth/verification';
 import { logFormSubmission } from '@/utils/eventLogger';
+import UserProfile from 'types/auth/UserProfile';
 
 type FormData = {
   [key: string]: string;
@@ -31,9 +29,10 @@ type FormData = {
 
 interface CompleteSignupFormProps {
   onSuccess?: () => void;
+  userData?: UserProfile;
 }
 
-const CompleteSignupForm: React.FC<CompleteSignupFormProps> = ({ onSuccess }) => {
+const CompleteSignupForm: React.FC<CompleteSignupFormProps> = ({ onSuccess, userData }) => {
   const { t } = useTranslation('common');
   const { mutate } = useSWRConfig();
 
@@ -41,11 +40,6 @@ const CompleteSignupForm: React.FC<CompleteSignupFormProps> = ({ onSuccess }) =>
   const [showVerification, setShowVerification] = useState(false);
   const [formData, setFormData] = useState<FormData>({});
   const [email, setEmail] = useState<string>('');
-
-  const { data: userData } = useSWRImmutable(
-    isLoggedIn() ? makeUserProfileUrl() : null,
-    getUserProfile,
-  );
 
   const validateFormData = (data: FormData) => {
     const requiredFieldNames = ['firstName', 'lastName', 'email', 'username'];
@@ -61,33 +55,67 @@ const CompleteSignupForm: React.FC<CompleteSignupFormProps> = ({ onSuccess }) =>
     return null;
   };
 
+  /**
+   * Updates the user profile data and manages state accordingly
+   * @param {FormData} data - Form data to update the profile with
+   * @returns {Promise<{success: boolean, error?: any}>} Result of the update operation
+   */
   const updateUserProfileData = async (data: FormData) => {
     try {
+      // Update the user profile
       await updateUserProfile({
         firstName: data.firstName,
         lastName: data.lastName,
         username: data.username,
       });
 
-      mutate(makeUserProfileUrl());
+      // Don't include email in the mutation if it's missing from the user profile
+      // This ensures the profile is still considered incomplete until verification is complete
+      const wasEmailMissing = !userData?.email;
+
+      // Update the global state with the new profile data
+      mutate(
+        makeUserProfileUrl(),
+        {
+          ...userData,
+          firstName: data.firstName,
+          lastName: data.lastName,
+          username: data.username,
+          // Only include email if it wasn't missing from the user profile
+          ...(!wasEmailMissing && { email: data.email || userData?.email }),
+        },
+        false,
+      );
+
       return { success: true };
     } catch (error) {
       return { success: false, error };
     }
   };
 
+  /**
+   * Sends a verification code to the specified email address
+   * @param {string} emailAddress - Email address to send the verification code to
+   * @returns {Promise<{success: boolean, error?: any}>} Result of the send operation
+   */
   const sendVerificationCodeToEmail = async (emailAddress: string) => {
     try {
-      await requestVerificationCode(emailAddress);
+      await handleResendVerificationCode(emailAddress);
       return { success: true };
     } catch (error) {
       return { success: false, error };
     }
   };
 
+  /**
+   * Handles the form submission
+   * @param {FormData} data - Form data submitted by the user
+   * @returns {Promise<any>} Form errors or undefined if successful
+   */
   const handleSubmit = async (data: FormData) => {
     logFormSubmission('complete_signUp');
 
+    // Validate form data
     const validationErrors = validateFormData(data);
     if (validationErrors) return validationErrors;
 
@@ -124,31 +152,32 @@ const CompleteSignupForm: React.FC<CompleteSignupFormProps> = ({ onSuccess }) =>
 
     // Email wasn't changed or wasn't missing, just redirect
     setIsSubmitting(false);
-    // Call onSuccess to redirect to home page
     if (onSuccess) {
       onSuccess();
     }
     return undefined;
   };
 
+  /**
+   * Handles the verification code submission
+   * @param {string} code - Verification code entered by the user
+   */
   const handleVerificationCodeSubmit = async (code: string) => {
-    if (!email) {
-      throw new Error('Email is required');
-    }
+    const result = await submitVerificationCode(email, code);
 
-    const response = await completeSignup({ email, verificationCode: code });
-    if (!response) {
-      throw new Error('Invalid verification code');
-    }
+    // Mutate the user profile data to update the global state
+    mutate(result.profileUrl);
 
-    mutate(makeUserProfileUrl());
+    // Call onSuccess to redirect to home page
+    if (onSuccess) {
+      onSuccess();
+    }
   };
 
   const handleBack = () => setShowVerification(false);
 
   const handleResendCode = async () => {
-    if (!email) throw new Error('Email is required');
-    await requestVerificationCode(email);
+    await handleResendVerificationCode(email);
   };
 
   const renderAction = (props) => (
@@ -163,10 +192,14 @@ const CompleteSignupForm: React.FC<CompleteSignupFormProps> = ({ onSuccess }) =>
     </Button>
   );
 
-  const formFields = React.useMemo(
-    () => addCustomRenderToCompleteSignupFormFields(getCompleteSignupFormFields(t), userData),
-    [t, userData],
-  );
+  /**
+   * Create form fields with form data passed directly to the custom render function
+   * This ensures that form data is prioritized over user data when displaying fields
+   */
+  const formFields = React.useMemo(() => {
+    const baseFields = getCompleteSignupFormFields(t);
+    return addCustomRenderToCompleteSignupFormFields(baseFields, userData, formData);
+  }, [t, userData, formData]);
 
   if (showVerification) {
     return (
