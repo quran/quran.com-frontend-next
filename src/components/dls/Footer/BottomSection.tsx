@@ -10,8 +10,8 @@ import FooterThemeSwitcher from './FooterThemeSwitcher';
 
 import LanguageSelector from '@/components/Navbar/LanguageSelector';
 import Link, { LinkVariant } from '@/dls/Link/Link';
-import { ROUTES } from '@/utils/constants';
 import { toLocalizedDate } from '@/utils/locale';
+import { ROUTES } from '@/utils/navigation';
 
 const BottomSection = () => {
   const { t, lang } = useTranslation('common');
