@@ -34,6 +34,7 @@ const ResetPasswordForm: React.FC = () => {
 
   const handleSubmit = async (values: { password: string; confirmPassword: string }) => {
     logFormSubmission('reset_password');
+    setGeneralError(null);
     try {
       if (values.password !== values.confirmPassword) {
         return getFormErrors(t, ErrorType.MISMATCH);
