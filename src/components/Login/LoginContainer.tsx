@@ -14,8 +14,8 @@ import Link, { LinkVariant } from '@/dls/Link/Link';
 import authStyles from '@/styles/auth/auth.module.scss';
 import QueryParam from '@/types/QueryParam';
 import { signUp } from '@/utils/auth/authRequests';
-import { ROUTES } from '@/utils/constants';
 import { logButtonClick, logEvent } from '@/utils/eventLogger';
+import { ROUTES } from '@/utils/navigation';
 import SignUpRequest from 'types/auth/SignUpRequest';
 
 enum LoginView {

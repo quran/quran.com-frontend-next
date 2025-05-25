@@ -10,7 +10,7 @@ import { getUserProfile } from '@/utils/auth/api';
 import { makeUserProfileUrl } from '@/utils/auth/apiPaths';
 import { isCompleteProfile } from '@/utils/auth/complete-signup';
 import { isLoggedIn } from '@/utils/auth/login';
-import { ROUTES } from '@/utils/constants';
+import { ROUTES } from '@/utils/navigation';
 
 const CompleteSignupPage = () => {
   const router = useRouter();

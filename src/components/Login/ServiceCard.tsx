@@ -12,7 +12,7 @@ import SocialButtons from './SocialButtons';
 import { SubmissionResult } from '@/components/FormBuilder/FormBuilder';
 import EmailLogin, { EmailLoginData } from '@/components/Login/EmailLogin';
 import Link, { LinkVariant } from '@/dls/Link/Link';
-import { ROUTES } from '@/utils/constants';
+import { ROUTES } from '@/utils/navigation';
 
 interface Benefit {
   id: string;
