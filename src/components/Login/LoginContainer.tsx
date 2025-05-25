@@ -1,21 +1,18 @@
 import { useState } from 'react';
 
 import { useRouter } from 'next/router';
-import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
 
 import AuthTabs, { AuthTab } from './AuthTabs';
 import BackButton from './BackButton';
-import loginStyles from './login.module.scss';
+import PrivacyPolicyText from './PrivacyPolicyText';
 import ServiceCard from './ServiceCard';
 import VerificationCodeForm from './VerificationCode/VerificationCodeForm';
 
-import Link, { LinkVariant } from '@/dls/Link/Link';
 import authStyles from '@/styles/auth/auth.module.scss';
 import QueryParam from '@/types/QueryParam';
 import { signUp } from '@/utils/auth/authRequests';
 import { logButtonClick, logEvent } from '@/utils/eventLogger';
-import { ROUTES } from '@/utils/navigation';
 import SignUpRequest from 'types/auth/SignUpRequest';
 
 enum LoginView {
@@ -100,15 +97,7 @@ const LoginContainer = () => {
           />
           <BackButton onClick={onBack} />
 
-          <p className={loginStyles.privacyText}>
-            <Trans
-              i18nKey="login:privacy-policy"
-              components={{
-                link: <Link href={ROUTES.PRIVACY} isNewTab variant={LinkVariant.Blend} />,
-                link1: <Link href={ROUTES.TERMS} isNewTab variant={LinkVariant.Blend} />,
-              }}
-            />
-          </p>
+          <PrivacyPolicyText />
         </>
       );
     }

@@ -1,18 +1,16 @@
 import { FC } from 'react';
 
 import Image from 'next/image';
-import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
 
 import BackButton from './BackButton';
 import BenefitsSection from './BenefitsSection';
 import styles from './login.module.scss';
+import PrivacyPolicyText from './PrivacyPolicyText';
 import SocialButtons from './SocialButtons';
 
 import { SubmissionResult } from '@/components/FormBuilder/FormBuilder';
 import EmailLogin, { EmailLoginData } from '@/components/Login/EmailLogin';
-import Link, { LinkVariant } from '@/dls/Link/Link';
-import { ROUTES } from '@/utils/navigation';
 
 interface Benefit {
   id: string;
@@ -78,15 +76,7 @@ const ServiceCard: FC<Props> = ({
 
       {onBackClick && <BackButton onClick={onBackClick} />}
 
-      <p className={styles.privacyText}>
-        <Trans
-          i18nKey="login:privacy-policy"
-          components={{
-            link: <Link href={ROUTES.PRIVACY} isNewTab variant={LinkVariant.Blend} />,
-            link1: <Link href={ROUTES.TERMS} isNewTab variant={LinkVariant.Blend} />,
-          }}
-        />
-      </p>
+      <PrivacyPolicyText />
     </>
   );
 
