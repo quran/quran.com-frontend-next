@@ -28,7 +28,6 @@ import useGetMediaSettings from '@/hooks/auth/media/useGetMediaSettings';
 import useAddQueryParamsToUrlSkipFirstRender from '@/hooks/useAddQueryParamsToUrlSkipFirstRender';
 import VideoIcon from '@/icons/video.svg';
 import { getMediaGeneratorOgImageUrl } from '@/lib/og';
-import Error from '@/pages/_error';
 import layoutStyles from '@/pages/index.module.scss';
 import AudioData from '@/types/AudioData';
 import Orientation from '@/types/Media/Orientation';
@@ -70,7 +69,6 @@ import ChaptersData from 'types/ChaptersData';
 
 interface MediaMaker {
   juzVerses?: VersesResponse;
-  hasError?: boolean;
   reciters: Reciter[];
   translationsData: Translation[];
   verses: any;
@@ -80,7 +78,6 @@ interface MediaMaker {
 }
 
 const MediaMaker: NextPage<MediaMaker> = ({
-  hasError,
   chaptersData,
   englishChaptersList,
   reciters,
@@ -418,10 +415,6 @@ const MediaMaker: NextPage<MediaMaker> = ({
     };
   }, [previewMode]);
 
-  if (hasError) {
-    return <Error statusCode={500} />;
-  }
-
   const { width, height } = orientationToDimensions(orientation);
   const PATH = getQuranMediaMakerNavigationUrl();
 
@@ -557,10 +550,8 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
     };
   } catch (e) {
     return {
-      props: {
-        hasError: true,
-        revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS,
-      },
+      notFound: true,
+      revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS,
     };
   }
 };

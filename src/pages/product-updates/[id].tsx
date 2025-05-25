@@ -1,4 +1,5 @@
-import { NextPage } from 'next';
+/* eslint-disable react-func/max-lines-per-function */
+import { GetStaticProps, NextPage } from 'next';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
@@ -10,16 +11,17 @@ import LocalizationMessage from '@/components/Sanity/LocalizationMessage';
 import SanityPage from '@/components/Sanity/Page';
 import Spinner from '@/dls/Spinner/Spinner';
 import { executeGroqQuery } from '@/lib/sanity';
+import { logErrorToSentry } from '@/lib/sentry';
+import { getAllChaptersData } from '@/utils/chapter';
 import { getCanonicalUrl, getProductUpdatesUrl } from '@/utils/navigation';
 import { REVALIDATION_PERIOD_ON_ERROR_SECONDS } from '@/utils/staticPageGeneration';
-import Error from 'src/pages/_error';
 
 interface Props {
-  hasError?: boolean;
   page?: any[];
+  chaptersData?: any;
 }
 
-const ProductUpdatePage: NextPage<Props> = ({ hasError, page }) => {
+const ProductUpdatePage: NextPage<Props> = ({ page }) => {
   const { lang } = useTranslation();
   const router = useRouter();
   if (router.isFallback) {
@@ -28,9 +30,6 @@ const ProductUpdatePage: NextPage<Props> = ({ hasError, page }) => {
         <Spinner />
       </div>
     );
-  }
-  if (hasError) {
-    return <Error statusCode={500} />;
   }
   return (
     <>
@@ -51,8 +50,9 @@ const ProductUpdatePage: NextPage<Props> = ({ hasError, page }) => {
   );
 };
 
-export const getStaticProps = async (context) => {
+export const getStaticProps: GetStaticProps = async (context) => {
   const { id = '' } = context.params;
+  const { locale } = context;
   try {
     const page = await executeGroqQuery(
       '*[_type == "productUpdate" && slug.current == $slug][0]',
@@ -65,18 +65,24 @@ export const getStaticProps = async (context) => {
       // @ts-ignore
       throw new Error('invalid slug');
     }
+    const chaptersData = await getAllChaptersData(locale);
     return {
       props: {
         page,
+        chaptersData,
       },
       revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS,
     };
   } catch (error) {
-    return {
-      props: {
-        hasError: true,
+    logErrorToSentry(error, {
+      transactionName: 'getStaticProps-ProductUpdatePage',
+      metadata: {
+        slug: id,
       },
-      revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS, // 35 seconds will be enough time before we re-try generating the page again.
+    });
+    return {
+      notFound: true,
+      revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS,
     };
   }
 };

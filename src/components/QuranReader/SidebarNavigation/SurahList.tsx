@@ -83,6 +83,10 @@ const SurahList: React.FC<Props> = ({
   const [searchQuery, setSearchQuery] = useState('');
 
   const chapterDataArray = useMemo(() => {
+    if (!chaptersData) {
+      return [];
+    }
+
     if (!isReadingByRevelationOrder) {
       return Object.entries(chaptersData).map(([id, chapter]) => {
         return {

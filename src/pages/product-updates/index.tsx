@@ -10,20 +10,18 @@ import PageContainer from '@/components/PageContainer';
 import LocalizationMessage from '@/components/Sanity/LocalizationMessage';
 import Page from '@/components/Sanity/Page';
 import { executeGroqQuery } from '@/lib/sanity';
+import { logErrorToSentry } from '@/lib/sentry';
+import { getAllChaptersData } from '@/utils/chapter';
 import { getCanonicalUrl, getProductUpdatesUrl } from '@/utils/navigation';
 import { REVALIDATION_PERIOD_ON_ERROR_SECONDS } from '@/utils/staticPageGeneration';
-import Error from 'src/pages/_error';
 
 interface Props {
-  hasError?: boolean;
   pages?: any[];
+  chaptersData?: any;
 }
 
-const ProductUpdatesPage: NextPage<Props> = ({ pages, hasError }) => {
+const ProductUpdatesPage: NextPage<Props> = ({ pages }) => {
   const { t, lang } = useTranslation('common');
-  if (hasError) {
-    return <Error statusCode={500} />;
-  }
   // TODO: add getLanguageAlternates when we internationalize this page
   return (
     <>
@@ -43,23 +41,31 @@ const ProductUpdatesPage: NextPage<Props> = ({ pages, hasError }) => {
   );
 };
 
-export const getStaticProps: GetStaticProps = async () => {
+export const getStaticProps: GetStaticProps = async ({ locale }) => {
   try {
     const pages = await executeGroqQuery(
       '*[_type == "productUpdate"]| order(date desc){ title, slug, mainPhoto, date, summary }',
     );
+    const chaptersData = await getAllChaptersData(locale);
     return {
       props: {
         pages,
+        chaptersData,
       },
       revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS,
     };
   } catch (error) {
-    return {
-      props: {
-        hasError: true,
+    logErrorToSentry(error, {
+      transactionName: 'getStaticProps-ProductUpdatesPage',
+      metadata: {
+        query:
+          '*[_type == "productUpdate"]| order(date desc){ title, slug, mainPhoto, date, summary }',
       },
-      revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS, // 35 seconds will be enough time before we re-try generating the page again.
+    });
+
+    return {
+      notFound: true,
+      revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS,
     };
   }
 };

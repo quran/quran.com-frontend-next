@@ -1,9 +1,10 @@
 const { createServer } = require('http');
 const { parse } = require('url');
+
 const next = require('next');
 
 const dev = process.env.NODE_ENV !== 'production';
-const port = parseInt(process.env.PORT || "3000", 10);
+const port = parseInt(process.env.PORT || '3000', 10);
 const app = next({ dev });
 const handle = app.getRequestHandler();
 
@@ -15,7 +16,7 @@ app.prepare().then(() => {
 
   console.log(
     `> Server listening at http://localhost:${port} as ${
-      dev ? "development" : process.env.NODE_ENV
+      dev ? 'development' : process.env.NODE_ENV
     }`,
   );
 });

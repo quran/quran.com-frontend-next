@@ -10,7 +10,7 @@ import { fetcher } from '@/api';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import ReflectionBodyContainer from '@/components/QuranReader/ReflectionView/ReflectionBodyContainer';
 import { getChapterOgImageUrl } from '@/lib/og';
-import Error from '@/pages/_error';
+import { logErrorToSentry } from '@/lib/sentry';
 import layoutStyle from '@/pages/index.module.scss';
 import {
   getQuranReaderStylesInitialState,
@@ -42,24 +42,19 @@ import ContentType from 'types/QuranReflect/ContentType';
 
 type AyahLessonProp = {
   chapter?: ChapterResponse;
-  hasError?: boolean;
   verseNumber?: string;
   chapterId?: string;
   chaptersData: ChaptersData;
   fallback?: any;
 };
 
-const SelectedAyahLesson: NextPage<AyahLessonProp> = ({
-  hasError,
+const AyahLessonPage: NextPage<AyahLessonProp> = ({
   chapter,
   verseNumber,
   chapterId,
   fallback,
 }) => {
   const { t, lang } = useTranslation('quran-reader');
-  if (hasError) {
-    return <Error statusCode={500} />;
-  }
 
   const navigationUrl = getVerseLessonNavigationUrl(`${chapterId}:${verseNumber}`);
   return (
@@ -162,8 +157,15 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
       revalidate: ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
     };
   } catch (error) {
+    logErrorToSentry(error, {
+      transactionName: 'getStaticProps-LessonsPage',
+      metadata: {
+        chapterIdOrSlug: String(params.chapterId),
+        locale,
+      },
+    });
     return {
-      props: { hasError: true },
+      notFound: true,
       revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS,
     };
   }
@@ -174,4 +176,4 @@ export const getStaticPaths: GetStaticPaths = async () => ({
   fallback: 'blocking',
 });
 
-export default SelectedAyahLesson;
+export default AyahLessonPage;

@@ -124,6 +124,33 @@ const IGNORE_ERRORS = [
   AuthErrorCodes.ValidationError,
 ];
 
+/**
+ * Checks if an API response contains error information and throws an error if it does.
+ * This is useful for handling responses from APIs that return error information in the response body
+ * instead of rejecting the promise (like when ValidationError is in IGNORE_ERRORS).
+ *
+ * @param {unknown} response - The API response to check
+ * @param {string} [errorMessage] - Optional custom error message to throw
+ * @throws {Error} If the response contains error information
+ * @returns {void}
+ */
+export const throwIfResponseContainsError = (response: unknown, errorMessage?: string): void => {
+  if (
+    response &&
+    typeof response === 'object' &&
+    ((response as any).error ||
+      (response as any).details?.error ||
+      (response as any).success === false)
+  ) {
+    const message =
+      errorMessage ||
+      (response as any).error?.message ||
+      (response as any).details?.error?.message ||
+      'API request failed';
+    throw new Error(message);
+  }
+};
+
 const handleErrors = async (res) => {
   const body = await res.json();
   const error = body?.error || body?.details?.error;

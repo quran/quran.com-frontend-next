@@ -7,7 +7,7 @@ import useTranslation from 'next-translate/useTranslation';
 import { getHizbVerses, getPagesLookup } from '@/api';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import QuranReader from '@/components/QuranReader';
-import Error from '@/pages/_error';
+import { logErrorToSentry } from '@/lib/sentry';
 import { getQuranReaderStylesInitialState } from '@/redux/defaultSettings/util';
 import { QuranReaderDataType } from '@/types/QuranReader';
 import { getDefaultWordFields, getMushafId } from '@/utils/api';
@@ -27,17 +27,14 @@ import ChaptersData from 'types/ChaptersData';
 
 interface HizbPageProps {
   hizbVerses?: VersesResponse;
-  hasError?: boolean;
   chaptersData: ChaptersData;
 }
 
-const HizbPage: NextPage<HizbPageProps> = ({ hasError, hizbVerses }) => {
+const HizbPage: NextPage<HizbPageProps> = ({ hizbVerses }) => {
   const { t, lang } = useTranslation('common');
   const {
     query: { hizbId },
   } = useRouter();
-
-  if (hasError) return <Error statusCode={500} />;
 
   const path = getHizbNavigationUrl(Number(hizbId));
   return (
@@ -101,11 +98,16 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
       revalidate: ONE_WEEK_REVALIDATION_PERIOD_SECONDS, // verses will be generated at runtime if not found in the cache, then cached for subsequent requests for 7 days.
     };
   } catch (error) {
-    return {
-      props: {
-        hasError: true,
+    logErrorToSentry(error, {
+      transactionName: 'getStaticProps-HizbPage',
+      metadata: {
+        hizbId: String(params.hizbId),
+        locale,
       },
-      revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS, // 35 seconds will be enough time before we re-try generating the page again.
+    });
+    return {
+      notFound: true,
+      revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS,
     };
   }
 };

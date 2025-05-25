@@ -14,11 +14,13 @@ import ChaptersList from '@/components/Reciter/ChaptersList';
 import ReciterInfo from '@/components/Reciter/ReciterInfo';
 import Input from '@/dls/Forms/Input';
 import SearchIcon from '@/icons/search.svg';
+import { logErrorToSentry } from '@/lib/sentry';
 import SearchQuerySource from '@/types/SearchQuerySource';
 import { getAllChaptersData } from '@/utils/chapter';
 import { logEmptySearchResults } from '@/utils/eventLogger';
 import { getLanguageAlternates, toLocalizedNumber } from '@/utils/locale';
 import { getCanonicalUrl, getReciterNavigationUrl } from '@/utils/navigation';
+import { REVALIDATION_PERIOD_ON_ERROR_SECONDS } from '@/utils/staticPageGeneration';
 import Chapter from 'types/Chapter';
 import ChaptersData from 'types/ChaptersData';
 import Reciter from 'types/Reciter';
@@ -53,7 +55,7 @@ const ReciterPage = ({ selectedReciter, chaptersData }: ReciterPageProps) => {
   // because `Fuse` library expects Array of objects, not Record<string, Chapter>
   const allChaptersWithId = useMemo(
     () =>
-      Object.entries(chaptersData).map(([chapterId, chapter]) => {
+      Object?.entries(chaptersData || {})?.map(([chapterId, chapter]) => {
         return {
           id: chapterId.toString(),
           localizedId: toLocalizedNumber(Number(chapterId), lang),
@@ -120,8 +122,16 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
       },
     };
   } catch (error) {
+    logErrorToSentry(error, {
+      transactionName: 'getStaticProps-ReciterPage',
+      metadata: {
+        reciterId: String(params.reciterId),
+        locale,
+      },
+    });
     return {
       notFound: true,
+      revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS,
     };
   }
 };

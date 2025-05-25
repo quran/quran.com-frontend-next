@@ -9,7 +9,7 @@ import { fetcher } from '@/api';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import QuestionsBodyContainer from '@/components/QuestionAndAnswer/QuestionsBodyContainer';
 import { getChapterOgImageUrl } from '@/lib/og';
-import Error from '@/pages/_error';
+import { logErrorToSentry } from '@/lib/sentry';
 import layoutStyle from '@/pages/index.module.scss';
 import {
   getQuranReaderStylesInitialState,
@@ -34,7 +34,6 @@ import ChaptersData from 'types/ChaptersData';
 
 type SelectedAyahQuestionsPageProps = {
   chapter?: ChapterResponse;
-  hasError?: boolean;
   verseNumber?: string;
   chapterId?: string;
   chaptersData: ChaptersData;
@@ -42,16 +41,12 @@ type SelectedAyahQuestionsPageProps = {
 };
 
 const SelectedAyahQuestionsPage: NextPage<SelectedAyahQuestionsPageProps> = ({
-  hasError,
   chapter,
   verseNumber,
   chapterId,
   fallback,
 }) => {
   const { t, lang } = useTranslation('question');
-  if (hasError) {
-    return <Error statusCode={500} />;
-  }
 
   const navigationUrl = getVerseAnswersNavigationUrl(`${chapterId}:${verseNumber}`);
   const verseQuestionsUrl = makeGetQuestionsByVerseKeyUrl({
@@ -75,10 +70,7 @@ const SelectedAyahQuestionsPage: NextPage<SelectedAyahQuestionsPageProps> = ({
         imageHeight={630}
         canonical={getCanonicalUrl(lang, navigationUrl)}
         languageAlternates={getLanguageAlternates(navigationUrl)}
-        description={t('reflections-desc', {
-          ayahNumber: verseNumber,
-          surahName: chapter.chapter.transliteratedName,
-        })}
+        description={t('questions-meta-desc')}
       />
       <div className={layoutStyle.pageContainer}>
         <div className={layoutStyle.flow}>
@@ -143,8 +135,16 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
       revalidate: ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
     };
   } catch (error) {
+    logErrorToSentry(error, {
+      transactionName: 'getStaticProps-VerseQuestionsPage',
+      metadata: {
+        chapterIdOrSlug: String(params.chapterId),
+        locale,
+        verseKey,
+      },
+    });
     return {
-      props: { hasError: true },
+      notFound: true,
       revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS,
     };
   }

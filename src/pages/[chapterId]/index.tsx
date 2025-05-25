@@ -9,6 +9,7 @@ import { getChapterIdBySlug, getChapterVerses, getPagesLookup, getRangeVerses } 
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import QuranReader from '@/components/QuranReader';
 import { getChapterOgImageUrl } from '@/lib/og';
+import { logErrorToSentry } from '@/lib/sentry';
 import { getQuranReaderStylesInitialState } from '@/redux/defaultSettings/util';
 import { QuranReaderDataType } from '@/types/QuranReader';
 import { getDefaultWordFields, getMushafId } from '@/utils/api';
@@ -33,14 +34,12 @@ import {
 import { isRangesStringValid, isValidChapterId, isValidVerseKey } from '@/utils/validator';
 import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
 import { parseVerseRange, generateVerseKeysBetweenTwoVerseKeys } from '@/utils/verseKeys';
-import Error from 'src/pages/_error';
 import { ChapterResponse, VersesResponse, PagesLookUpResponse } from 'types/ApiResponses';
 import ChaptersData from 'types/ChaptersData';
 
 type ChapterProps = {
   chapterResponse?: ChapterResponse;
   versesResponse?: VersesResponse;
-  hasError?: boolean;
   quranReaderDataType: QuranReaderDataType;
   chaptersData: ChaptersData;
 };
@@ -51,15 +50,12 @@ const isAyatulKursi = (chapterId: string, verseNumber: number): boolean =>
 const Chapter: NextPage<ChapterProps> = ({
   chapterResponse,
   versesResponse,
-  hasError,
   quranReaderDataType,
 }) => {
   const isRange = quranReaderDataType === QuranReaderDataType.Ranges;
   const isChapter = quranReaderDataType === QuranReaderDataType.Chapter;
   const { t, lang } = useTranslation('common');
-  if (hasError) {
-    return <Error statusCode={500} />;
-  }
+
   const getTitle = () => {
     if (isRange) {
       return `${toLocalizedVerseKey(
@@ -307,9 +303,16 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
       revalidate: ONE_WEEK_REVALIDATION_PERIOD_SECONDS, // chapters will be generated at runtime if not found in the cache, then cached for subsequent requests for 7 days.
     };
   } catch (error) {
+    logErrorToSentry(error, {
+      transactionName: 'getStaticProps-ChapterPage',
+      metadata: {
+        chapterIdOrVerseKeyOrSlug: String(params.chapterId),
+        locale,
+      },
+    });
     return {
-      props: { hasError: true },
-      revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS, // 35 seconds will be enough time before we re-try generating the page again.
+      notFound: true,
+      revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS,
     };
   }
 };
