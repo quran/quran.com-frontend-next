@@ -45,8 +45,10 @@ function MyApp({ Component, pageProps }): JSX.Element {
   const router = useRouter();
   const { locale } = router;
   const { t } = useTranslation('common');
+
+  const isLoggedInUser = isLoggedIn();
   const { data: userData } = useSWRImmutable(
-    isLoggedIn() ? makeUserProfileUrl() : null,
+    isLoggedInUser ? makeUserProfileUrl() : null,
     getUserProfile,
   );
 
@@ -67,22 +69,23 @@ function MyApp({ Component, pageProps }): JSX.Element {
     };
   }, [router.events]);
 
-  // Redirect to complete signup page if the user profile is not complete
-  // This checks if all required fields (firstName, lastName, email, username) are filled
-  const isProfileComplete = userData ? isCompleteProfile(userData) : true;
-  useEffect(() => {
-    if (!isProfileComplete && router.pathname !== ROUTES.COMPLETE_SIGNUP) {
+  // Redirect logged-in users away from complete-signup route to the home page if profile is complete
+  if (isLoggedInUser && userData) {
+    const isProfileComplete = isCompleteProfile(userData);
+    if (isProfileComplete && router.pathname === ROUTES.COMPLETE_SIGNUP) {
+      router.push(ROUTES.HOME);
+    } else if (!isProfileComplete && router.pathname !== ROUTES.COMPLETE_SIGNUP) {
       router.push(ROUTES.COMPLETE_SIGNUP);
     }
-  }, [router, isProfileComplete]);
+  }
 
   // Redirect logged-in users away from auth routes to the home page
-  const isAuthRoute = isAuthPage(router);
   useEffect(() => {
-    if (isLoggedIn() && isAuthRoute && router.pathname !== ROUTES.COMPLETE_SIGNUP) {
+    const isAuthRoute = isAuthPage(router);
+    if (isLoggedInUser && isAuthRoute && router.pathname !== ROUTES.COMPLETE_SIGNUP) {
       router.push(ROUTES.HOME);
     }
-  }, [router, isAuthRoute]);
+  }, [isLoggedInUser, router]);
 
   return (
     <>
@@ -109,12 +112,12 @@ function MyApp({ Component, pageProps }): JSX.Element {
                       />
                       <GlobalListeners />
 
-                      {!isAuthRoute && <Navbar />}
+                      {!isAuthPage(router) && <Navbar />}
 
                       <DeveloperUtility />
                       <Component {...pageProps} />
                       <AudioPlayer />
-                      {!isAuthRoute && <Footer />}
+                      {!isAuthPage(router) && <Footer />}
                     </OnboardingProvider>
                   </ThemeProvider>
                   <SessionIncrementor />

@@ -49,7 +49,7 @@ const CompleteSignupPage = () => {
     );
   }
 
-  return <CompleteSignupForm onSuccess={handleSuccess} />;
+  return <CompleteSignupForm userData={userData} onSuccess={handleSuccess} />;
 };
 
 export default CompleteSignupPage;
