@@ -31,7 +31,7 @@
   "include-translator": "Include translator name?",
   "juz-beginning": "Beginning of Juz",
   "lessons-desc": "Read and share Quranic lessons of Ayah {{ayahNumber}} of Surah {{surahName}}",
-  "lessons-disclaimer": "Lessons are personal insights and interpretations of the Quran. They are not meant to be taken as authoritative.",
+  "lessons-disclaimer": "Lessons are informed insights from scholars and seekers of knowledge, distinct from primary sources such as Tafsir (the scholarly interpretation of the Quran).",
   "lessons-not-available": "There are no reviewed lessons for this ayah",
   "mad-2": "Normal madd (2)",
   "mad-2-4-6": "Separated madd (2/4/6)",
@@ -60,8 +60,7 @@
     "quran": "Quran",
     "references": "References",
     "summary": "Summary",
-    "tafsir": "Tafsir",
-    "quran": "Quran"
+    "tafsir": "Tafsir"
   },
   "qalqala": "Qalqala (echo)",
   "query-param-message": "You are viewing preselected reading settings. <0>Dismiss</0> to view in your current settings or <1>Save</1> to update your setting",
