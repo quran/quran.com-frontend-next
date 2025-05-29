@@ -58,26 +58,24 @@ const TheBestDaysPage: NextPage = () => {
             <h1>What the Qur'an Says About Dhul-Hijjah</h1>
             <div className={pageStyles.postRamadanVerseContainer}>
               <div className={pageStyles.verseTranslation}>
-                <b>
-                  <i>
-                    "Indeed, the number of months ordained by Allah is twelve -in Allah's Record
-                    since the day He created the heavens and the earth -of which four are sacred.
-                  </i>
-                </b>{' '}
-                That is the correct religion. So do not wrong yourselves during them."{' '}
-                <Link variant={LinkVariant.Highlight} href="/9:36" isNewTab>
-                  At-Tawbah 9:36
-                </Link>
+                <p>
+                  <b>
+                    <i>
+                      “Indeed, the number of months ordained by Allah is twelve -in Allah’s Record
+                      since the day He created the heavens and the earth -of which four are sacred”
+                    </i>
+                  </b>{' '}
+                  <Link variant={LinkVariant.Highlight} href="/9:36" isNewTab>
+                    At-Tawbah 9:36
+                  </Link>{' '}
+                  Among these, Dhul-Hijjah holds unique weight, as it combines sacred time with
+                  sacred acts. Just as Makkah is a sacred place where both good and bad deeds carry
+                  amplified consequences, these sacred months demand heightened awareness and
+                  reverence. Dhul-Hijjah calls us to elevate our consciousness, avoid wrongdoing,
+                  and fill our days with acts of devotion and justice.
+                </p>
               </div>
             </div>
-
-            <p>
-              Among these sacred months, Dhul-Hijjah holds unique weight, as it combines sacred time
-              with sacred acts. Just as Makkah is a sacred place where both good and bad deeds carry
-              amplified consequences, these sacred months demand heightened awareness and reverence.
-              Dhul-Hijjah calls us to elevate our consciousness, avoid wrongdoing, and fill our days
-              with acts of devotion and justice.
-            </p>
             <p>
               The Quran emphasizes the importance of remembering Allah during these sacred days:
             </p>
@@ -102,7 +100,7 @@ const TheBestDaysPage: NextPage = () => {
               . Most scholars agree that these refer to the first ten days of this sacred month.
             </p>
 
-            <p className={styles.quote}>
+            <p>
               The Prophet Muhammad (peace be upon him) emphasized their significance, saying,{' '}
               <b>
                 <i>
@@ -140,14 +138,14 @@ const TheBestDaysPage: NextPage = () => {
               (peace be upon him) said,
             </p>
 
-            <p className={classNames(styles.quote, styles.arabic)} lang="ar">
+            <p className={styles.arabic} lang="ar">
               عَنْ عَبْدِ اللَّهِ بْنِ عَمْرٍو أَنَّ النَّبِيَّ صَلَّى اللَّهُ عَلَيْهِ وَسَلَّمَ
               قَالَ خَيْرُ الدُّعَاءِ دُعَاءُ يَوْمِ عَرَفَةَ وَخَيْرُ مَا قُلْتُ أَنَا
               وَالنَّبِيُّونَ مِنْ قَبْلِي لَا إِلَهَ إِلَّا اللَّهُ وَحْدَهُ لَا شَرِيكَ لَهُ لَهُ
               الْمُلْكُ وَلَهُ الْحَمْدُ وَهُوَ عَلَى كُلِّ شَيْءٍ قَدِيرٌ
             </p>
 
-            <p className={styles.quote}>
+            <p>
               "The most excellent dua is the dua on the Day of Arafa, and the best of what I and the
               prophets before me have said, "'There is no god but Allah, alone, Who has no partner.
               His is the dominion and His is all praise and He is Able to do all things. " Source:
@@ -181,7 +179,7 @@ const TheBestDaysPage: NextPage = () => {
               Days of Tashreeq (11th-13th) are marked by joy, remembrance, and the continual praise
               of Allah, as believers declare{' '}
               <b>
-                <i>"Allahu Akbar"</i>
+                <i>"Allahu Akbar" (God is Greater)</i>
               </b>{' '}
               after each prayer, carrying forward the spirit of devotion and gratitude.
             </p>
@@ -267,7 +265,7 @@ const TheBestDaysPage: NextPage = () => {
           <hr />
           <div className={styles.subSection}>
             <h1>The Ten Days Are Passing. Make Them Count.</h1>
-            <p className={styles.quote}>
+            <p>
               "There are no days in which righteous deeds are more beloved to Allah than these ten
               days..." -Prophet Muhammad (peace be upon him) (Bukhari)
             </p>
