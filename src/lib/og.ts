@@ -22,6 +22,9 @@ export const getPreparingForRamadanOgImageUrl = ({ locale }: BaseOgOptions) =>
 export const getBeyondRamadanOgImageUrl = ({ locale }: BaseOgOptions) =>
   `${BASE_OG_URL}/api/og/beyond-ramadan?lang=${locale}`;
 
+export const getBestDaysOgImageUrl = ({ locale }: BaseOgOptions) =>
+  `${BASE_OG_URL}/api/og/the-best-days?lang=${locale}`;
+
 export const getChapterOgImageUrl = ({
   chapterId,
   locale,

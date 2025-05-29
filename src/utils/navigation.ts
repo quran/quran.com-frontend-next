@@ -368,6 +368,9 @@ export const getMyCoursesNavigationUrl = () => '/my-learning-plans';
 export const getCoursesNavigationUrl = () => '/learning-plans';
 export const getRamadanNavigationUrl = () => '/ramadan';
 export const getBeyondRamadanNavigationUrl = () => '/beyond-ramadan';
+export const getBestDayNavigationUrl = () => '/the-best-days';
+export const getDonationUrl = () =>
+  'https://give.quran.foundation/give/474400/#!/donation/checkout';
 export const getWhatIsRamadanNavigationUrl = () => '/what-is-ramadan';
 export const getLoginNavigationUrl = (redirectTo?: string) =>
   `/login${redirectTo ? `?${QueryParam.REDIRECT_TO}=${redirectTo}` : ''}`;
