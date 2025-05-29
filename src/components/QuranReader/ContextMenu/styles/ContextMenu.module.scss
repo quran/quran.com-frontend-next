@@ -83,23 +83,19 @@ $pixel: 1px;
   }
 }
 
-.halfSection {
-  width: 50%; // when reading preference toggle is hidden
+.section {
+  flex: 1;
 }
 
-.section {
-  width: calc(100% / 3);
-  @include breakpoints.smallerThanTablet {
-    width: 50%;
+.readingPreferenceSection {
+  div {
+    margin-inline-end: 0;
+    padding-inline-end: 0;
   }
 }
 
-.alignStart {
-  text-align: start;
-}
-
-.alignEnd {
-  text-align: end;
+.alignCenter {
+  text-align: center;
 }
 
 .row {

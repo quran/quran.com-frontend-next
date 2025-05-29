@@ -63,8 +63,8 @@ const ContextMenu: React.FC = (): JSX.Element | null => {
     >
       <div className={styles.sectionsContainer}>
         {/* Chapter Navigation Section */}
-        <div className={showReadingPreferenceSwitcher ? styles.section : styles.halfSection}>
-          <div className={classNames(styles.row)}>
+        <div className={styles.section}>
+          <div className={styles.row}>
             <ChapterNavigation
               chapterName={chapterData.transliteratedName}
               isSidebarNavigationVisible={isSidebarNavigationVisible}
@@ -73,21 +73,10 @@ const ContextMenu: React.FC = (): JSX.Element | null => {
           </div>
         </div>
 
-        {/* Reading Preference Section */}
-        {showReadingPreferenceSwitcher && (
-          <div className={styles.halfSection}>
-            <ReadingPreferenceSwitcher
-              size={SwitchSize.XSmall}
-              isIconsOnly
-              type={ReadingPreferenceSwitcherType.ContextMenu}
-            />
-          </div>
-        )}
-
         {/* Page Information Section */}
-        <div className={showReadingPreferenceSwitcher ? styles.section : styles.halfSection}>
-          <div className={classNames(styles.row)}>
-            <p className={classNames(styles.alignEnd)} />
+        <div className={styles.section}>
+          <div className={styles.row}>
+            <p className={styles.alignCenter} />
             <PageInfo
               juzNumber={juzNumber}
               hizbNumber={localizedHizb}
@@ -95,6 +84,15 @@ const ContextMenu: React.FC = (): JSX.Element | null => {
               t={t}
             />
           </div>
+        </div>
+
+        {/* Reading Preference Section */}
+        <div className={classNames(styles.section, styles.readingPreferenceSection)}>
+          <ReadingPreferenceSwitcher
+            // isIconsOnly
+            size={SwitchSize.XSmall}
+            type={ReadingPreferenceSwitcherType.ContextMenu}
+          />
         </div>
       </div>
 
