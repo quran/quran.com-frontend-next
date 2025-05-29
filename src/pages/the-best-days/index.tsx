@@ -213,7 +213,7 @@ const TheBestDaysPage: NextPage = () => {
             <ol className={styles.numberedList}>
               <li>
                 <Link
-                  href="https://quranreflect.com/posts/15857"
+                  href="https://quranreflect.com/posts/9481"
                   isNewTab
                   variant={LinkVariant.Highlight}
                 >
@@ -222,7 +222,7 @@ const TheBestDaysPage: NextPage = () => {
               </li>
               <li>
                 <Link
-                  href="https://quranreflect.com/posts/15859"
+                  href="https://quranreflect.com/posts/27042"
                   isNewTab
                   variant={LinkVariant.Highlight}
                 >
@@ -231,7 +231,7 @@ const TheBestDaysPage: NextPage = () => {
               </li>
               <li>
                 <Link
-                  href="https://quranreflect.com/posts/15860"
+                  href="https://quranreflect.com/posts/26466"
                   isNewTab
                   variant={LinkVariant.Highlight}
                 >
@@ -240,7 +240,7 @@ const TheBestDaysPage: NextPage = () => {
               </li>
               <li>
                 <Link
-                  href="https://quranreflect.com/posts/15861"
+                  href="https://quranreflect.com/posts/26517"
                   isNewTab
                   variant={LinkVariant.Highlight}
                 >
