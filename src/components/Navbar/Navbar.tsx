@@ -13,7 +13,7 @@ import Button, { ButtonSize, ButtonType, ButtonShape } from '@/dls/Button/Button
 import DiamondIcon from '@/icons/diamond.svg';
 import { selectNavbar } from '@/redux/slices/navbar';
 import { logButtonClick } from '@/utils/eventLogger';
-import { getBeyondRamadanNavigationUrl } from '@/utils/navigation';
+import { getDonationUrl } from '@/utils/navigation';
 
 const Navbar = () => {
   const { isActive } = useOnboarding();
@@ -27,12 +27,12 @@ const Navbar = () => {
       <nav className={classNames(styles.container, { [styles.hiddenNav]: !showNavbar })}>
         <Banner
           shouldShowPrefixIcon={false}
-          text={t('beyond-ramadan')}
+          text={t('best-days-banner')}
           ctaButton={
             <Button
-              href={getBeyondRamadanNavigationUrl()}
+              href={getDonationUrl()}
               onClick={() => {
-                logButtonClick('navbar_beyond_ramadan');
+                logButtonClick('navbar_best_days');
               }}
               isNewTab
               size={ButtonSize.Small}
@@ -41,7 +41,7 @@ const Navbar = () => {
               className={styles.donateButton}
               prefix={<DiamondIcon />}
             >
-              {t('learn-more')}
+              {t('donate')}
             </Button>
           }
         />
