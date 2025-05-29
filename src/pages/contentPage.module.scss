@@ -70,16 +70,37 @@
 
 .list {
   list-style: unset;
-  padding-inline-start: var(--spacing-mega);
+}
+
+.quote {
+  font-style: italic;
+  padding-inline-start: var(--spacing-medium);
+  border-inline-start: var(--spacing-micro) solid var(--color-primary-medium);
+}
+
+.arabic {
+  text-align: right;
+  font-size: var(--font-size-normal);
+  font-style: italic;
+  direction: rtl;
+  display: block;
+  font-family: "Noto Nastaliq Arabic", "NotoNastaliq", serif;
+  word-spacing: 0.1em;
+  letter-spacing: 0.02em;
+  padding-block: var(--spacing-xsmall);
+}
+
+.numberedList {
+  list-style-type: decimal !important;
+  list-style-position: outside;
+
+  li {
+    display: list-item;
+  }
 }
 
 .underline {
   text-decoration: underline;
-}
-
-.subListItem {
-  list-style-type: circle;
-  margin-inline-start: var(--spacing-large);
 }
 
 .ctaContainer {
