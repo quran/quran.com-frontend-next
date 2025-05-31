@@ -70,6 +70,11 @@
 
 .list {
   list-style: unset;
+  padding-inline-start: var(--spacing-mega);
+}
+
+.unstyledList {
+  list-style: unset;
 }
 
 .arabic {
@@ -95,6 +100,11 @@
 
 .underline {
   text-decoration: underline;
+}
+
+.subListItem {
+  list-style-type: circle;
+  margin-inline-start: var(--spacing-large);
 }
 
 .ctaContainer {

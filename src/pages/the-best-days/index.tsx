@@ -10,11 +10,11 @@ import NextSeoWrapper from '@/components/NextSeoWrapper';
 import PageContainer from '@/components/PageContainer';
 import InlineLink from '@/components/RamadanActivity/InlineLink';
 import Link, { LinkVariant } from '@/dls/Link/Link';
-import { getBestDaysOgImageUrl } from '@/lib/og';
 import styles from '@/pages/contentPage.module.scss';
 import pageStyles from '@/pages/ramadan/RamadanActivities.module.scss';
+import { makeDonatePageUrl } from '@/utils/apiPaths';
 import { logButtonClick } from '@/utils/eventLogger';
-import { getBestDayNavigationUrl, getCanonicalUrl, getDonationUrl } from '@/utils/navigation';
+import { getBestDayNavigationUrl, getCanonicalUrl } from '@/utils/navigation';
 
 const PATH = getBestDayNavigationUrl();
 
@@ -27,8 +27,8 @@ const TheBestDaysPage: NextPage = () => {
         title="The Sacred Month and the Best Days"
         description="The sacred month of Dhul-Hijjah is one of the four sacred months mentioned in the Qur'an, a time divinely designated for heightened devotion, multiplied reward, and deep reflection."
         canonical={getCanonicalUrl(PATH, lang)}
-        image={getBestDaysOgImageUrl({ locale: lang })}
       />
+
       <PageContainer>
         <div className={classNames(pageStyles.container, styles.contentPage)} dir="ltr">
           <div className={styles.subSection}>
@@ -193,7 +193,7 @@ const TheBestDaysPage: NextPage = () => {
               <InlineLink href="https://quranreflect.com" isNewTab text="QuranReflect.com" />
               is <b>The Season of Sacrifice.</b>
             </p>
-            <ul className={styles.list}>
+            <ul className={styles.unstyledList}>
               <li>
                 Explore how the Qur'an defines devotion and what it means to submit your will to
                 Allah in everyday life.
@@ -254,7 +254,7 @@ const TheBestDaysPage: NextPage = () => {
               We've designed tools to help you stay consistent and deepen your understanding of the
               Quran year round:
             </p>
-            <ul className={styles.list}>
+            <ul className={styles.unstyledList}>
               <li>Notes & Reflections – Capture personal insights as you read</li>
               <li>Bookmarks – Easily return to key verses through the "My Quran" menu</li>
               <li>Tafsir & Translations – Understand the meaning on a deeper level</li>
@@ -292,7 +292,7 @@ const TheBestDaysPage: NextPage = () => {
             </p>
             <div className={styles.ctaContainer}>
               <Button
-                href={getDonationUrl()}
+                href={makeDonatePageUrl(false, true)}
                 onClick={() => {
                   logButtonClick('best_days_become_monthly_donor');
                 }}
