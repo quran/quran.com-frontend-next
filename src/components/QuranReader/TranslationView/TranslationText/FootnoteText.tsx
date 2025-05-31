@@ -1,6 +1,6 @@
 /* eslint-disable react/no-danger */
 
-import React, { MouseEvent } from 'react';
+import React, { MouseEvent, useMemo } from 'react';
 
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
@@ -13,6 +13,7 @@ import Spinner from '@/dls/Spinner/Spinner';
 import CloseIcon from '@/icons/close.svg';
 import Language from '@/types/Language';
 import { getLanguageDataById, findLanguageIdByLocale } from '@/utils/locale';
+import { formatVerseReferencesToLinks } from '@/utils/string';
 import Footnote from 'types/Footnote';
 
 interface FootnoteTextProps {
@@ -33,7 +34,12 @@ const FootnoteText: React.FC<FootnoteTextProps> = ({
   const { t, lang } = useTranslation('quran-reader');
 
   const languageId = footnote?.languageId || findLanguageIdByLocale(lang as Language);
-  const landData = getLanguageDataById(languageId);
+  const languageData = getLanguageDataById(languageId);
+
+  const updatedText = useMemo(() => {
+    if (!footnote?.text) return '';
+    return formatVerseReferencesToLinks(footnote.text);
+  }, [footnote?.text]);
 
   return (
     <div className={styles.footnoteContainer}>
@@ -56,10 +62,10 @@ const FootnoteText: React.FC<FootnoteTextProps> = ({
         <div
           className={classNames(
             styles.text,
-            transStyles[landData.direction],
-            transStyles[landData.font],
+            transStyles[languageData.direction],
+            transStyles[languageData.font],
           )}
-          dangerouslySetInnerHTML={{ __html: footnote.text }}
+          dangerouslySetInnerHTML={{ __html: updatedText }}
           {...(onTextClicked && { onClick: onTextClicked })}
         />
       )}
