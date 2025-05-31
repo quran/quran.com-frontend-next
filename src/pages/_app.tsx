@@ -37,6 +37,7 @@ import 'src/styles/fonts.scss';
 import 'src/styles/theme.scss';
 import 'src/styles/global.scss';
 import 'src/styles/variables.scss';
+import DonatePopup from '@/components/DonatePopup/DonatePopup';
 
 function MyApp({ Component, pageProps }): JSX.Element {
   const router = useRouter();
@@ -105,6 +106,7 @@ function MyApp({ Component, pageProps }): JSX.Element {
                       <Component {...pageProps} />
                       <AudioPlayer />
                       <Footer />
+                      <DonatePopup />
                     </OnboardingProvider>
                   </ThemeProvider>
                   <SessionIncrementor />

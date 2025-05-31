@@ -45,6 +45,7 @@ const DonatePopup = () => {
           </Button>
           <h1 className={styles.title}>{t('popup.title')}</h1>
           <div className={styles.textsContainer}>
+            <p className={styles.text}>{t('popup.subtitle')}</p>
             <p className={styles.text}>{t('popup.text-1')}</p>
             <p className={styles.text}>{t('popup.text-2')}</p>
           </div>
