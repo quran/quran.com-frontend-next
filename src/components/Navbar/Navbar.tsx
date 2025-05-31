@@ -1,19 +1,17 @@
-import React from 'react';
-
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
-import { useSelector, shallowEqual } from 'react-redux';
+import { shallowEqual, useSelector } from 'react-redux';
 
 import styles from './Navbar.module.scss';
 import NavbarBody from './NavbarBody';
 
 import Banner from '@/components/Banner/Banner';
 import { useOnboarding } from '@/components/Onboarding/OnboardingProvider';
-import Button, { ButtonSize, ButtonType, ButtonShape } from '@/dls/Button/Button';
+import Button, { ButtonShape, ButtonSize, ButtonType } from '@/dls/Button/Button';
 import DiamondIcon from '@/icons/diamond.svg';
 import { selectNavbar } from '@/redux/slices/navbar';
+import { makeDonatePageUrl } from '@/utils/apiPaths';
 import { logButtonClick } from '@/utils/eventLogger';
-import { getDonationUrl } from '@/utils/navigation';
 
 const Navbar = () => {
   const { isActive } = useOnboarding();
@@ -30,7 +28,7 @@ const Navbar = () => {
           text={t('best-days-banner')}
           ctaButton={
             <Button
-              href={getDonationUrl()}
+              href={makeDonatePageUrl(false, true)}
               onClick={() => {
                 logButtonClick('navbar_best_days');
               }}
