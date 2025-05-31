@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 
 import { DirectionProvider } from '@radix-ui/react-direction';
 import { TooltipProvider } from '@radix-ui/react-tooltip';
@@ -23,27 +23,32 @@ import ReduxProvider from '@/redux/Provider';
 import { API_HOST } from '@/utils/api';
 import { getUserProfile } from '@/utils/auth/api';
 import { makeUserProfileUrl } from '@/utils/auth/apiPaths';
+import { isCompleteProfile } from '@/utils/auth/complete-signup';
 import { isLoggedIn } from '@/utils/auth/login';
 import { logAndRedirectUnsupportedLogicalCSS } from '@/utils/css';
 import * as gtag from '@/utils/gtag';
 import { getDir } from '@/utils/locale';
+import { ROUTES } from '@/utils/navigation';
+import { isAuthPage } from '@/utils/routes';
 import { createSEOConfig } from '@/utils/seo';
 import DataContext from 'src/contexts/DataContext';
 import ThemeProvider from 'src/styles/ThemeProvider';
 import { AudioPlayerMachineProvider } from 'src/xstate/AudioPlayerMachineContext';
 
-import 'src/styles/reset.scss';
 import 'src/styles/fonts.scss';
-import 'src/styles/theme.scss';
 import 'src/styles/global.scss';
+import 'src/styles/reset.scss';
+import 'src/styles/theme.scss';
 import 'src/styles/variables.scss';
 
 function MyApp({ Component, pageProps }): JSX.Element {
   const router = useRouter();
   const { locale } = router;
   const { t } = useTranslation('common');
+
+  const isLoggedInUser = isLoggedIn();
   const { data: userData } = useSWRImmutable(
-    isLoggedIn() ? makeUserProfileUrl() : null,
+    isLoggedInUser ? makeUserProfileUrl() : null,
     getUserProfile,
   );
 
@@ -63,6 +68,24 @@ function MyApp({ Component, pageProps }): JSX.Element {
       router.events.off('routeChangeComplete', handleRouteChange);
     };
   }, [router.events]);
+
+  // Redirect logged-in users away from complete-signup route to the home page if profile is complete
+  if (isLoggedInUser && userData) {
+    const isProfileComplete = isCompleteProfile(userData);
+    if (isProfileComplete && router.pathname === ROUTES.COMPLETE_SIGNUP) {
+      router.push(ROUTES.HOME);
+    } else if (!isProfileComplete && router.pathname !== ROUTES.COMPLETE_SIGNUP) {
+      router.push(ROUTES.COMPLETE_SIGNUP);
+    }
+  }
+
+  // Redirect logged-in users away from auth routes to the home page
+  useEffect(() => {
+    const isAuthRoute = isAuthPage(router);
+    if (isLoggedInUser && isAuthRoute && router.pathname !== ROUTES.COMPLETE_SIGNUP) {
+      router.push(ROUTES.HOME);
+    }
+  }, [isLoggedInUser, router]);
 
   return (
     <>
@@ -90,7 +113,6 @@ function MyApp({ Component, pageProps }): JSX.Element {
                   <ThemeProvider>
                     <OnboardingProvider>
                       <UserAccountModal
-                        requiredFields={userData?.requiredFields}
                         announcement={userData?.announcement}
                         consents={userData?.consents}
                       />
@@ -99,12 +121,12 @@ function MyApp({ Component, pageProps }): JSX.Element {
                       />
                       <GlobalListeners />
 
-                      <Navbar />
+                      {!isAuthPage(router) && <Navbar />}
 
                       <DeveloperUtility />
                       <Component {...pageProps} />
                       <AudioPlayer />
-                      <Footer />
+                      {!isAuthPage(router) && <Footer />}
                     </OnboardingProvider>
                   </ThemeProvider>
                   <SessionIncrementor />

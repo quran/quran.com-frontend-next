@@ -6,6 +6,7 @@ import ConfirmPasswordField from './ConfirmPasswordField';
 import PasswordField from './PasswordField';
 
 import { FormBuilderFormField } from '@/components/FormBuilder/FormBuilderTypes';
+import styles from '@/components/Login/login.module.scss';
 import { RuleType } from '@/types/FieldRule';
 import { FormFieldType } from '@/types/FormField';
 
@@ -51,6 +52,8 @@ const getPasswordFields = (
         },
       ],
       customRender: PasswordInput,
+      errorClassName: styles.errorText,
+      containerClassName: styles.inputContainer,
     },
     {
       field: 'confirmPassword',
@@ -64,6 +67,8 @@ const getPasswordFields = (
         },
       ],
       customRender: ConfirmPasswordField,
+      errorClassName: styles.errorText,
+      containerClassName: styles.inputContainer,
     },
   ];
 };

@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 import classNames from 'classnames';
 import { Controller, useForm } from 'react-hook-form';
 
@@ -67,12 +68,13 @@ const FormBuilder = <T,>({
     }
   };
 
+  const renderError = (error: any, errorClassName?: string) =>
+    error && <span className={classNames(styles.errorText, errorClassName)}>{error.message}</span>;
   const renderExtraSection = (formField: FormBuilderFormField, value: string) => {
     if (!formField.extraSection) return null;
-    if (typeof formField.extraSection === 'function') {
-      return formField.extraSection(value);
-    }
-    return formField.extraSection;
+    return typeof formField.extraSection === 'function'
+      ? formField.extraSection(value)
+      : formField.extraSection;
   };
 
   return (
@@ -94,7 +96,7 @@ const FormBuilder = <T,>({
                       onChange: field.onChange,
                       placeholder: formField.placeholder,
                     })}
-                    {error && <span className={styles.errorText}>{error.message}</span>}
+                    {renderError(error, formField.errorClassName)}
                     {renderExtraSection(formField, field.value)}
                   </div>
                 );
@@ -128,7 +130,7 @@ const FormBuilder = <T,>({
               return (
                 <div className={classNames(styles.inputContainer, formField.containerClassName)}>
                   <InputField {...inputFieldProps} />
-                  {error && <span className={styles.errorText}>{error.message}</span>}
+                  {renderError(error, formField.errorClassName)}
                   {renderExtraSection(formField, field.value)}
                 </div>
               );
