@@ -92,6 +92,7 @@
   },
   "ayah": "Ayah",
   "ayahs": "Ayahs",
+  "best-days-banner": "Donnez pendant les meilleurs jours !",
   "beta": "Bêta",
   "beyond-ramadan": "Grandissez au-delà du Ramadan !",
   "bookmark": "Favori",
@@ -210,7 +211,7 @@
     "translation-font-size": "Taille de la police de traduction"
   },
   "footer": {
-    "description": "Quran.com est une plateforme de confiance utilisée par des millions de personnes dans le monde pour lire, rechercher, écouter et réfléchir sur le Coran en plusieurs langues. Elle propose des traductions, des tafsir, des récitations, des traductions mot à mot et des outils pour une étude plus approfondie, rendant le Coran accessible à tous. <br/> <br/> En tant que Sadaqah Jariyah, Quran.com se consacre à aider les gens à se connecter profondément au Coran. Soutenu par <link>Quran.Foundation</link>, une organisation à but non lucratif 501(c)(3), Quran.com continue de se développer en tant que ressource gratuite et précieuse pour tous, Alhamdullilah”",
+    "description": "Quran.com est une plateforme de confiance utilisée par des millions de personnes dans le monde pour lire, rechercher, écouter et réfléchir sur le Coran en plusieurs langues. Elle propose des traductions, des tafsir, des récitations, des traductions mot à mot et des outils pour une étude plus approfondie, rendant le Coran accessible à tous. <br/> <br/> En tant que Sadaqah Jariyah, Quran.com se consacre à aider les gens à se connecter profondément au Coran. Soutenu par <link>Quran.Foundation</link>, une organisation à but non lucratif 501(c)(3), Quran.com continue de se développer en tant que ressource gratuite et précieuse pour tous, Alhamdullilah",
     "hiring": "Nous recrutons ! Rejoignez l'équipe de QuranFoundation et contribuez à notre mission. <link> Postulez maintenant ! </link>",
     "rights": "Tous droits réservés",
     "title": "Lisez, écoutez, recherchez et réfléchissez sur le Coran"
