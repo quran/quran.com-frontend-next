@@ -3,12 +3,12 @@ import { FC, useState } from 'react';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
-import TextInputField, { InputType } from './common/TextInputField';
 import styles from './login.module.scss';
 import SignInPasswordField from './SignInForm/SignInPasswordField';
 import getFormErrors, { ErrorType } from './SignUpForm/errors';
 import { getEmailField } from './SignUpFormFields/credentialFields';
 
+import Input, { InputVariant } from '@/components/dls/Forms/Input';
 import FormBuilder from '@/components/FormBuilder/FormBuilder';
 import { FormBuilderFormField } from '@/components/FormBuilder/FormBuilderTypes';
 import Button, { ButtonShape, ButtonType } from '@/dls/Button/Button';
@@ -36,7 +36,9 @@ const SignInForm: FC<Props> = ({ redirect }) => {
   const formFields: FormBuilderFormField[] = [
     {
       ...getEmailField(t),
-      customRender: (props) => <TextInputField {...props} type={InputType.EMAIL} />,
+      customRender: (props) => (
+        <Input {...props} id="email" variant={InputVariant.AuthForm} htmlType="email" />
+      ),
       errorClassName: styles.errorText,
       containerClassName: styles.inputContainer,
     },
