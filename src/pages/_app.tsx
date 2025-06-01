@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 
 import { DirectionProvider } from '@radix-ui/react-direction';
 import { TooltipProvider } from '@radix-ui/react-tooltip';
@@ -11,6 +11,7 @@ import useSWRImmutable from 'swr/immutable';
 import AudioPlayer from '@/components/AudioPlayer/AudioPlayer';
 import UserAccountModal from '@/components/Auth/UserAccountModal';
 import DeveloperUtility from '@/components/DeveloperUtility/DeveloperUtility';
+import DonatePopup from '@/components/DonatePopup/DonatePopup';
 import FontPreLoader from '@/components/Fonts/FontPreLoader';
 import GlobalListeners from '@/components/GlobalListeners';
 import Navbar from '@/components/Navbar/Navbar';
@@ -32,12 +33,11 @@ import DataContext from 'src/contexts/DataContext';
 import ThemeProvider from 'src/styles/ThemeProvider';
 import { AudioPlayerMachineProvider } from 'src/xstate/AudioPlayerMachineContext';
 
-import 'src/styles/reset.scss';
 import 'src/styles/fonts.scss';
-import 'src/styles/theme.scss';
 import 'src/styles/global.scss';
+import 'src/styles/reset.scss';
+import 'src/styles/theme.scss';
 import 'src/styles/variables.scss';
-import DonatePopup from '@/components/DonatePopup/DonatePopup';
 
 function MyApp({ Component, pageProps }): JSX.Element {
   const router = useRouter();
