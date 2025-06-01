@@ -11,7 +11,8 @@ import { QuranReaderFlow } from '@/types/QuranReader';
 import { SearchNavigationType } from 'types/Search/SearchNavigationResult';
 
 /**
- * all routes
+ * all static routes
+ * dynamic routes should have a function to generate the url ie. getPageNavigationUrl
  */
 export const ROUTES = {
   HOME: '/',
@@ -22,6 +23,7 @@ export const ROUTES = {
   PRIVACY: '/privacy',
   TERMS: '/terms-and-conditions',
   SITEMAP: '/sitemap.xml',
+  // TODO: add all static routes here for incremental adoption
 };
 
 /**
