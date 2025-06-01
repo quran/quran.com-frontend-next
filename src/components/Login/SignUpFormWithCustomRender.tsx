@@ -1,7 +1,8 @@
-import TextInputField, { InputType } from './common/TextInputField';
+import { FormBuilderFormField } from '../FormBuilder/FormBuilderTypes';
 
-import { FormBuilderFormField } from '@/components/FormBuilder/FormBuilderTypes';
+import Input, { InputVariant } from '@/components/dls/Forms/Input';
 import styles from '@/components/Login/login.module.scss';
+import { FormFieldType } from '@/types/FormField';
 
 /**
  * Adds customRender to form fields for SignUpForm
@@ -13,13 +14,15 @@ const addCustomRenderToFormFields = (
 ): FormBuilderFormField[] => {
   return formFields.map((field) => {
     // Add customRender for text fields
-    if (field.type === 'text') {
+    if (field.type === FormFieldType.Text) {
       return {
         ...field,
         customRender: (props) => (
-          <TextInputField
+          <Input
             {...props}
-            type={field.field === InputType.EMAIL ? InputType.EMAIL : InputType.TEXT}
+            id={field.field}
+            variant={InputVariant.AuthForm}
+            htmlType={field.field === 'email' ? 'email' : 'text'}
           />
         ),
         errorClassName: styles.errorText,

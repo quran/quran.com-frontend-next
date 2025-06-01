@@ -1,8 +1,8 @@
 import React from 'react';
 
-import TextInputField, { InputType } from './common/TextInputField';
+import { FormBuilderFormField } from '../FormBuilder/FormBuilderTypes';
 
-import { FormBuilderFormField } from '@/components/FormBuilder/FormBuilderTypes';
+import Input, { InputVariant } from '@/components/dls/Forms/Input';
 import styles from '@/components/Login/login.module.scss';
 import UserProfile from 'types/auth/UserProfile';
 
@@ -40,14 +40,15 @@ const addCustomRenderToCompleteSignupFormFields = (
           value: string;
           onChange: (value: string) => void;
           placeholder?: string;
+          disabled?: boolean;
         }) => {
           return (
-            <TextInputField
-              value={props.value}
-              onChange={props.onChange}
-              placeholder={props.placeholder}
-              type={isEmail ? InputType.EMAIL : InputType.TEXT}
-              disabled={isDisabled}
+            <Input
+              {...props}
+              id={field.field}
+              variant={InputVariant.AuthForm}
+              htmlType={isEmail ? 'email' : 'text'}
+              disabled={isDisabled || props.disabled}
             />
           );
         },
