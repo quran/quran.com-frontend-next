@@ -105,11 +105,45 @@ $pixel: 1px;
   width: 100%;
 }
 
+.pageInfoContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  column-gap: var(--spacing-xsmall);
+  color: var(--color-text-faded-new);
+}
+
+.bookmarkButton {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-faded-new);
+  margin-right: var(--spacing-xxsmall);
+
+  &:hover {
+    color: var(--color-primary-medium);
+  }
+
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+
 .primaryInfo {
+  display: flex;
+  align-items: center;
+  column-gap: var(--spacing-xxsmall-px);
   font-weight: var(--font-weight-semibold);
 }
+
 .secondaryInfo {
-  font-weight: lighter;
+  font-weight: var(--font-weight-normal);
 }
 
 .surahName {
