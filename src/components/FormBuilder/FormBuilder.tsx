@@ -21,6 +21,7 @@ type FormBuilderProps<T> = {
   actionText?: string;
   actionProps?: ButtonProps;
   renderAction?: (props: ButtonProps) => React.ReactNode;
+  noValidate?: boolean;
 };
 
 /**
@@ -52,6 +53,7 @@ const FormBuilder = <T,>({
   actionProps = {},
   isSubmitting,
   renderAction,
+  noValidate,
 }: FormBuilderProps<T>) => {
   const { handleSubmit, control, setError } = useForm({ mode: 'onBlur' });
 
@@ -78,7 +80,11 @@ const FormBuilder = <T,>({
   };
 
   return (
-    <form className={styles.container} onSubmit={handleSubmit(internalOnSubmit)}>
+    <form
+      className={styles.container}
+      onSubmit={handleSubmit(internalOnSubmit)}
+      noValidate={noValidate}
+    >
       {formFields?.map((formField) => {
         return (
           <Controller

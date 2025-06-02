@@ -56,7 +56,12 @@ const SignUpForm = ({ onSuccess }: Props) => {
 
   return (
     <div className={styles.formContainer}>
-      <FormBuilder formFields={formFields} onSubmit={handleSubmit} renderAction={renderAction} />
+      <FormBuilder
+        formFields={formFields}
+        onSubmit={handleSubmit}
+        renderAction={renderAction}
+        noValidate
+      />
     </div>
   );
 };
