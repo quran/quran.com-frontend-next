@@ -84,6 +84,7 @@ const ForgotPasswordForm: React.FC = () => {
             onSubmit={handleSubmit}
             renderAction={renderAction}
             isSubmitting={isSubmitting}
+            noValidate
           />
           <BackButton onClick={handleBack} />
         </div>
