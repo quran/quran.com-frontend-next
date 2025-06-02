@@ -60,7 +60,7 @@ const SignUpForm = ({ onSuccess }: Props) => {
         formFields={formFields}
         onSubmit={handleSubmit}
         renderAction={renderAction}
-        noValidate
+        shouldSkipValidation
       />
     </div>
   );

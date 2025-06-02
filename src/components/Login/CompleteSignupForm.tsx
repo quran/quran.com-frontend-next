@@ -230,7 +230,7 @@ const CompleteSignupForm: React.FC<CompleteSignupFormProps> = ({ onSuccess, user
               onSubmit={handleSubmit}
               renderAction={renderAction}
               isSubmitting={isSubmitting}
-              noValidate
+              shouldSkipValidation
             />
           )}
         </div>

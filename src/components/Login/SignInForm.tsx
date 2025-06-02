@@ -107,7 +107,7 @@ const SignInForm: FC<Props> = ({ redirect }) => {
         onSubmit={handleSubmit}
         renderAction={renderAction}
         isSubmitting={isSubmitting}
-        noValidate
+        shouldSkipValidation
       />
     </div>
   );
