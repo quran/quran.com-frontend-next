@@ -1,70 +1,67 @@
 .micButton {
-    background: none;
-    border: none;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: var(--spacing-xsmall-px);
-    border-radius: var(--border-radius-circle);
-    transition: all 0.2s ease;
-    position: relative;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-xsmall-px);
+  border-radius: var(--border-radius-circle);
+  transition: all 0.2s ease;
+  position: relative;
 
+  svg {
+    fill: var(--color-primary-medium) !important;
+    transition: fill 0.3s ease;
+    z-index: 2;
+  }
+
+  &:hover {
+    background-color: var(--color-separators);
+  }
+
+  &.active {
     svg {
-        fill: var(--color-primary-medium) !important;
-        transition: fill 0.3s ease;
-        z-index: 2;
+      fill: var(--color-error-deep) !important;
     }
 
-    &:hover {
-        background-color: var(--color-separators);
+    &::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      border-radius: var(--border-radius-circle);
+      background-color: var(--color-scholars-say-background);
+      animation: pulseBackground 1.5s infinite;
+      z-index: 1;
     }
 
-    &.active {
-        svg {
-            fill: var(--color-error-deep) !important;
-        }
-
-        &::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            border-radius: var(--border-radius-circle);
-            background-color: var(--color-scholars-say-background);
-            animation: pulseBackground 1.5s infinite;
-            z-index: 1;
-        }
-
-        animation: pulseScale 1.5s infinite;
-    }
+    animation: pulseScale 1.5s infinite;
+  }
 }
 
 @keyframes pulseScale {
-    0% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.15);
-    }
-    100% {
-        transform: scale(1);
-    }
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.15);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 @keyframes pulseBackground {
-    0% {
-        transform: scale(0.8);
-        opacity: 0.7;
-    }
-    50% {
-        transform: scale(1.5);
-        opacity: 0;
-    }
-    100% {
-        transform: scale(0.8);
-        opacity: 0.7;
-    }
+  0% {
+    transform: scale(0.8);
+    opacity: 0.7;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(0.8);
+    opacity: 0.7;
+  }
 }

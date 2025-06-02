@@ -1,119 +1,119 @@
 .container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    max-width: 400px;
-    margin: 0 auto;
-    padding: var(--spacing-medium);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-inline-size: 400px;
+  margin: 0 auto;
+  padding: var(--spacing-medium);
 }
 
 .title {
-    font-size: var(--font-size-xlarge);
-    font-weight: var(--font-weight-bold);
-    margin-bottom: var(--spacing-mega);
-    text-align: center;
+  font-size: var(--font-size-xlarge);
+  font-weight: var(--font-weight-bold);
+  margin-block-end: var(--spacing-mega);
+  text-align: center;
 }
 
 .emailContainer {
-    text-align: center;
-    margin-bottom: var(--spacing-large);
+  text-align: center;
+  margin-block-end: var(--spacing-large);
 }
 
 .description {
-    font-size: var(--font-size-large);
-    color: var(--color-text-default);
-    margin-bottom: var(--spacing-xsmall);
+  font-size: var(--font-size-large);
+  color: var(--color-text-default);
+  margin-block-end: var(--spacing-xsmall);
 }
 
 .email {
-    font-size: var(--font-size-large);
-    font-weight: var(--font-weight-bold);
-    color: var(--color-text-default);
+  font-size: var(--font-size-large);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-default);
 }
 
 .instruction {
-    font-size: var(--font-size-large);
-    color: var(--color-text-default);
-    text-align: center;
-    margin-bottom: var(--spacing-large);
+  font-size: var(--font-size-large);
+  color: var(--color-text-default);
+  text-align: center;
+  margin-block-end: var(--spacing-large);
 }
 
 .inputContainer {
-    margin-bottom: var(--spacing-medium);
+  margin-block-end: var(--spacing-medium);
 }
 
 .verificationContainer {
-    display: flex;
-    justify-content: space-between;
-    gap: var(--spacing-xsmall);
-    margin-bottom: var(--spacing-medium);
+  display: flex;
+  justify-content: space-between;
+  gap: var(--spacing-xsmall);
+  margin-block-end: var(--spacing-medium);
 }
 
 .character {
-    width: 48px;
-    height: 48px;
-    border: 1px solid var(--color-borders-hairline);
-    border-radius: var(--border-radius-default);
-    font-size: var(--font-size-jumbo);
-    font-weight: var(--font-weight-bold);
-    color: var(--color-text-default);
-    background-color: var(--color-background-default);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: text;
+  inline-size: 48px;
+  block-size: 48px;
+  border: 1px solid var(--color-borders-hairline);
+  border-radius: var(--border-radius-default);
+  font-size: var(--font-size-jumbo);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-default);
+  background-color: var(--color-background-default);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: text;
 
-    &:focus {
-        outline: none;
-        border-color: var(--color-primary-medium);
-        box-shadow: 0 0 0 1px var(--color-primary-medium);
-    }
+  &:focus {
+    outline: none;
+    border-color: var(--color-primary-medium);
+    box-shadow: 0 0 0 1px var(--color-primary-medium);
+  }
 }
 
 .characterInactive {
-    background-color: var(--color-background-elevated);
+  background-color: var(--color-background-elevated);
 }
 
 .characterSelected {
-    border-color: var(--color-primary-medium);
-    box-shadow: 0 0 0 1px var(--color-primary-medium);
+  border-color: var(--color-primary-medium);
+  box-shadow: 0 0 0 1px var(--color-primary-medium);
 }
 
 .error {
-    color: var(--color-error-medium);
-    font-size: var(--font-size-small);
-    margin-top: var(--spacing-xxsmall);
-    text-align: center;
+  color: var(--color-error-medium);
+  font-size: var(--font-size-small);
+  margin-block-start: var(--spacing-xxsmall);
+  text-align: center;
 }
 
 .spamNote {
-    font-size: var(--font-size-medium);
-    color: var(--color-text-default);
-    text-align: center;
-    margin-bottom: var(--spacing-large);
+  font-size: var(--font-size-medium);
+  color: var(--color-text-default);
+  text-align: center;
+  margin-block-end: var(--spacing-large);
 }
 
 .actions {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-small);
-    width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-small);
+  inline-size: 100%;
 }
 
 .resendButton {
-    color: var(--color-text-faded);
-    font-size: var(--font-size-medium);
+  color: var(--color-text-faded);
+  font-size: var(--font-size-medium);
 
-    &:disabled {
-        opacity: 1;
-        cursor: not-allowed;
-    }
+  &:disabled {
+    opacity: 1;
+    cursor: not-allowed;
+  }
 }
 
 .backButton {
-    margin-top: var(--spacing-xsmall);
+  margin-block-start: var(--spacing-xsmall);
 }
 
 .confirmationText {
-    font-weight: var(--font-weight-bold);
+  font-weight: var(--font-weight-bold);
 }

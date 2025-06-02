@@ -1,5 +1,5 @@
-@use "src/styles/breakpoints";
-@use "src/styles/theme";
+@use 'src/styles/breakpoints';
+@use 'src/styles/theme';
 
 .container {
   display: flex;
@@ -14,8 +14,8 @@
 
 .reciterImage {
   position: absolute;
-  height: 100%;
-  width: 100%;
+  block-size: 100%;
+  inline-size: 100%;
   aspect-ratio: 1/1;
   object-fit: cover;
 }
@@ -25,9 +25,7 @@
   span {
     @include theme.light {
       background-color: var(--color-success-medium) !important;
-      color: var(
-        --color-text-inverse
-      ) !important; // white text on "success" background;
+      color: var(--color-text-inverse) !important; // white text on "success" background;
     }
     @include theme.dark {
       background-color: var(--color-background-elevated) !important;
@@ -52,8 +50,8 @@
 }
 
 .reciterImageContainer {
-  min-width: calc(5 * var(--spacing-mega));
-  min-height: calc(5 * var(--spacing-mega));
+  min-inline-size: calc(5 * var(--spacing-mega));
+  min-block-size: calc(5 * var(--spacing-mega));
   background-color: var(--color-background-alternative-deep);
   border-radius: var(--border-radius-circle);
   margin-inline-end: var(--spacing-medium);
@@ -79,8 +77,8 @@
   }
 }
 .playButton {
-  width: 100%;
+  inline-size: 100%;
   @include breakpoints.tablet {
-    width: auto;
+    inline-size: auto;
   }
 }

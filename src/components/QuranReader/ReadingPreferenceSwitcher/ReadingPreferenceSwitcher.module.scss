@@ -2,7 +2,7 @@ $readingPreferenceMaxWidth: calc(20 * var(--spacing-large));
 $contextMenuReadingPreferenceMaxWidth: calc(10 * var(--spacing-large));
 $readingPreferenceSwitcherContainerTopPadding: var(--spacing-large);
 .container {
-  max-width: $readingPreferenceMaxWidth;
+  max-inline-size: $readingPreferenceMaxWidth;
   margin-inline-start: auto;
   margin-inline-end: auto;
   padding-block-start: 0;
@@ -17,9 +17,9 @@ $readingPreferenceSwitcherContainerTopPadding: var(--spacing-large);
 }
 
 .tajweedMushaf {
-  padding-top: $readingPreferenceSwitcherContainerTopPadding;
+  padding-block-start: $readingPreferenceSwitcherContainerTopPadding;
 }
 
 .contextMenuContainer {
-  max-width: $contextMenuReadingPreferenceMaxWidth;
+  max-inline-size: $contextMenuReadingPreferenceMaxWidth;
 }

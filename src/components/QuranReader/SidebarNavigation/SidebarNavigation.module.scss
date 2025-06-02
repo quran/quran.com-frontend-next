@@ -1,7 +1,7 @@
-@use "src/styles/constants";
-@use "src/styles/breakpoints";
-@use "src/styles/theme";
-@use "sass:math";
+@use 'src/styles/constants';
+@use 'src/styles/breakpoints';
+@use 'src/styles/theme';
+@use 'sass:math';
 
 $sections-menu-height: 2.25rem;
 $progress-bar-height: var(--spacing-micro);
@@ -23,32 +23,32 @@ $isNavbarVisible: var(--isNavbarVisible);
 }
 
 @mixin sidebarInvisibleExpanded {
-  &[data-is-homepage="true"] {
+  &[data-is-homepage='true'] {
     transform: translateX(-100%) translateY($top-menu-height-home);
-    [dir="rtl"] & {
+    [dir='rtl'] & {
       transform: translateX(100%) translateY($top-menu-height-home);
     }
   }
 
-  &[data-is-homepage="false"] {
+  &[data-is-homepage='false'] {
     transform: translateX(-100%) translateY($top-menu-height);
-    [dir="rtl"] & {
+    [dir='rtl'] & {
       transform: translateX(100%) translateY($top-menu-height);
     }
   }
 }
 
 @mixin sidebarInvisibleCollapsed {
-  &[data-is-homepage="true"] {
+  &[data-is-homepage='true'] {
     transform: translateX(-100%) translateY($context-menu-height-home);
-    [dir="rtl"] & {
+    [dir='rtl'] & {
       transform: translateX(100%) translateY($context-menu-height-home);
     }
   }
 
-  &[data-is-homepage="false"] {
+  &[data-is-homepage='false'] {
     transform: translateX(-100%) translateY($context-menu-height);
-    [dir="rtl"] & {
+    [dir='rtl'] & {
       transform: translateX(100%) translateY($context-menu-height);
     }
   }
@@ -59,8 +59,8 @@ $isNavbarVisible: var(--isNavbarVisible);
   @include breakpoints.tablet {
     --sidebar-size: calc(10 * var(--spacing-mega));
   }
-  height: 100vh;
-  max-height: 100vh;
+  block-size: 100vh;
+  max-block-size: 100vh;
   position: fixed;
   inset-block-start: 0;
   inset-inline-start: 0;
@@ -70,11 +70,9 @@ $isNavbarVisible: var(--isNavbarVisible);
   z-index: var(--z-index-sticky);
   box-sizing: border-box;
   border-inline-end: 1px solid var(--color-borders-hairline);
-  width: var(--sidebar-size);
+  inline-size: var(--sidebar-size);
   padding-inline: var(--spacing-large);
-  transition:
-    transform var(--transition-regular),
-    height var(--transition-regular);
+  transition: transform var(--transition-regular), height var(--transition-regular);
   display: flex;
   flex-direction: column;
   overflow-y: hidden;
@@ -91,16 +89,16 @@ $isNavbarVisible: var(--isNavbarVisible);
 .visibleContainer {
   @include sidebarVisible();
 
-  &[data-is-homepage="true"] {
+  &[data-is-homepage='true'] {
     transform: translateY($top-menu-height-home);
-    [dir="rtl"] & {
+    [dir='rtl'] & {
       transform: translateY($top-menu-height-home);
     }
   }
 
-  &[data-is-homepage="false"] {
+  &[data-is-homepage='false'] {
     transform: translateY($top-menu-height);
-    [dir="rtl"] & {
+    [dir='rtl'] & {
       transform: translateY($top-menu-height);
     }
   }
@@ -109,16 +107,16 @@ $isNavbarVisible: var(--isNavbarVisible);
 .visibleContainerCollapsed {
   @include sidebarVisible();
 
-  &[data-is-homepage="true"] {
+  &[data-is-homepage='true'] {
     transform: translateY($context-menu-height-home);
-    [dir="rtl"] & {
+    [dir='rtl'] & {
       transform: translateY($context-menu-height-home);
     }
   }
 
-  &[data-is-homepage="false"] {
+  &[data-is-homepage='false'] {
     transform: translateY($context-menu-height);
-    [dir="rtl"] & {
+    [dir='rtl'] & {
       transform: translateY($context-menu-height);
     }
   }
@@ -128,16 +126,16 @@ $isNavbarVisible: var(--isNavbarVisible);
   @include breakpoints.tablet {
     @include sidebarVisible();
 
-    &[data-is-homepage="true"] {
+    &[data-is-homepage='true'] {
       transform: translateY($top-menu-height-home);
-      [dir="rtl"] & {
+      [dir='rtl'] & {
         transform: translateY($top-menu-height-home);
       }
     }
 
-    &[data-is-homepage="false"] {
+    &[data-is-homepage='false'] {
       transform: translateY($top-menu-height);
-      [dir="rtl"] & {
+      [dir='rtl'] & {
         transform: translateY($top-menu-height);
       }
     }
@@ -148,16 +146,16 @@ $isNavbarVisible: var(--isNavbarVisible);
   @include breakpoints.tablet {
     @include sidebarVisible();
 
-    &[data-is-homepage="true"] {
+    &[data-is-homepage='true'] {
       transform: translateY($context-menu-height-home);
-      [dir="rtl"] & {
+      [dir='rtl'] & {
         transform: translateY($context-menu-height-home);
       }
     }
 
-    &[data-is-homepage="false"] {
+    &[data-is-homepage='false'] {
       transform: translateY($context-menu-height);
-      [dir="rtl"] & {
+      [dir='rtl'] & {
         transform: translateY($context-menu-height);
       }
     }
@@ -206,7 +204,7 @@ $isNavbarVisible: var(--isNavbarVisible);
 }
 
 .listItem {
-  [dir="rtl"] & {
+  [dir='rtl'] & {
     direction: rtl;
   }
   padding: var(--spacing-xsmall);
@@ -237,7 +235,7 @@ $isNavbarVisible: var(--isNavbarVisible);
   padding: var(--spacing-xsmall) var(--spacing-xsmall);
   border-radius: var(--border-radius-rounded);
   margin-block-end: var(--spacing-medium);
-  width: 100%;
+  inline-size: 100%;
   background-color: var(--color-background-alternative-faded);
   color: var(--color-text-default);
   &::placeholder {
@@ -247,32 +245,32 @@ $isNavbarVisible: var(--isNavbarVisible);
 }
 
 .spaceOnTop {
-  &[data-is-homepage="true"] {
+  &[data-is-homepage='true'] {
     transform: translateY($top-menu-height-home);
-    height: calc(100vh - $top-menu-height-home);
+    block-size: calc(100vh - $top-menu-height-home);
   }
 
-  &[data-is-homepage="false"] {
+  &[data-is-homepage='false'] {
     transform: translateY($top-menu-height);
-    height: calc(100vh - $top-menu-height);
+    block-size: calc(100vh - $top-menu-height);
   }
 }
 
 .spaceOnTopCollapsed {
-  &[data-is-homepage="true"] {
+  &[data-is-homepage='true'] {
     transform: translateY($top-menu-height-home);
-    height: 100vh;
+    block-size: 100vh;
   }
 
-  &[data-is-homepage="false"] {
+  &[data-is-homepage='false'] {
     transform: translateY($context-menu-height);
-    height: calc(100vh - $context-menu-height);
+    block-size: calc(100vh - $context-menu-height);
   }
 }
 
 .chapterNumber {
   display: inline-block;
-  width: calc(2 * var(--spacing-medium));
+  inline-size: calc(2 * var(--spacing-medium));
 }
 
 .tip {

@@ -1,4 +1,4 @@
-@use "src/styles/breakpoints";
+@use 'src/styles/breakpoints';
 .container {
   display: flex;
   justify-content: space-between;
@@ -69,12 +69,12 @@
 }
 
 .translation {
-  max-width: calc(5 * var(--spacing-mega));
+  max-inline-size: calc(5 * var(--spacing-mega));
   @include breakpoints.mobileM {
-    max-width: calc(7 * var(--spacing-mega));
+    max-inline-size: calc(7 * var(--spacing-mega));
   }
   @include breakpoints.tablet {
-    max-width: calc(11 * var(--spacing-mega));
+    max-inline-size: calc(11 * var(--spacing-mega));
   }
 }
 .translationBy {
@@ -94,7 +94,7 @@
   align-items: center;
   margin-block-start: var(--spacing-large);
   // setting the value below to avoid the CLS issue when the surahnames font has not loaded yet
-  min-height: calc(3.75 * var(--spacing-medium));
+  min-block-size: calc(3.75 * var(--spacing-medium));
 }
 
 .chapterIconContainer {

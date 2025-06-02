@@ -1,4 +1,4 @@
-@use "src/styles/utility";
+@use 'src/styles/utility';
 
 .innerContainer {
   @include utility.center-horizontally;
@@ -8,5 +8,5 @@
 }
 
 .sliderContainer {
-  width: 100%;
+  inline-size: 100%;
 }

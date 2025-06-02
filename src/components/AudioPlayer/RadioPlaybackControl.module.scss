@@ -1,12 +1,12 @@
-@use "src/styles/breakpoints";
-@use "src/styles/utility";
+@use 'src/styles/breakpoints';
+@use 'src/styles/utility';
 
 .container {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 100%;
-  max-width: 100%;
+  block-size: 100%;
+  max-inline-size: 100%;
   padding-inline: var(--spacing-medium);
   @include breakpoints.tablet {
     margin-inline: auto;

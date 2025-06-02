@@ -1,4 +1,4 @@
-@use "src/styles/breakpoints";
+@use 'src/styles/breakpoints';
 $height: calc(16 * var(--spacing-mega));
 
 .container {
@@ -41,7 +41,7 @@ $height: calc(16 * var(--spacing-mega));
 .input {
   appearance: none;
   border-radius: 0;
-  width: 100%;
+  inline-size: 100%;
   background: transparent;
   border: 0;
   outline: 0;
@@ -66,9 +66,9 @@ $height: calc(16 * var(--spacing-mega));
   overflow-y: auto;
   position: relative;
   box-sizing: border-box;
-  max-height: $height;
+  max-block-size: $height;
 }
 
 .height {
-  height: $height;
+  block-size: $height;
 }

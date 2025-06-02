@@ -1,6 +1,6 @@
-@use "src/styles/utility";
-@use "src/styles/theme";
-@use "src/styles/breakpoints";
+@use 'src/styles/utility';
+@use 'src/styles/theme';
+@use 'src/styles/breakpoints';
 
 .container {
   display: flex;
@@ -8,7 +8,7 @@
   align-items: center;
   justify-content: center;
   position: relative;
-  min-height: calc(8 * var(--spacing-mega));
+  min-block-size: calc(8 * var(--spacing-mega));
 }
 
 $text-color: #fff; // text color is always white because the background is green (success)
@@ -24,7 +24,7 @@ $fallbackColor: #22a5ad;
   z-index: -1;
   inset: 0;
   background-color: $fallbackColor;
-  background-image: url("/images/background.png");
+  background-image: url('/images/background.png');
   background-size: cover;
   @include theme.dark {
     filter: saturate(0.1) brightness(0.3) contrast(1.1);
@@ -39,8 +39,8 @@ $fallbackColor: #22a5ad;
 
 .searchInputContainer {
   margin-block-start: var(--spacing-large);
-  width: 80%;
-  max-width: calc(25 * var(--spacing-mega));
+  inline-size: 80%;
+  max-inline-size: calc(25 * var(--spacing-mega));
 }
 
 .searchInput {

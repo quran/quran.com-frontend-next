@@ -5,7 +5,7 @@
   margin-inline-start: var(--spacing-micro);
 }
 
-.container[data-orientation="horizontal"] {
+.container[data-orientation='horizontal'] {
   align-items: center;
   justify-content: space-between;
   display: flex;

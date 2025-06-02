@@ -1,6 +1,6 @@
 .caretIconButton {
-  width: var(--spacing-medium);
-  height: var(--spacing-medium);
+  inline-size: var(--spacing-medium);
+  block-size: var(--spacing-medium);
   position: absolute;
   inset-inline-end: var(--spacing-medium);
   inset-block-start: 50%;

@@ -1,8 +1,8 @@
-@use "src/styles/breakpoints";
+@use 'src/styles/breakpoints';
 
 // surah layout (grid layout)
 .surahLayout {
-  width: 100%;
+  inline-size: 100%;
   display: flex;
   flex-direction: column;
   @include breakpoints.tablet {
@@ -73,14 +73,14 @@
     transform: rotate(180deg);
   }
   & > span > svg {
-    width: var(--spacing-small);
+    inline-size: var(--spacing-small);
     margin-inline-start: var(--spacing-xxsmall);
     transition: transform var(--transition-regular);
   }
 }
 
 .loadingContainer {
-  min-height: 100vh; // reduce layout shift
+  min-block-size: 100vh; // reduce layout shift
 }
 
 .uppercase {
