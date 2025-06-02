@@ -425,6 +425,20 @@ $container-width: 370px;
   margin-block: var(--spacing-medium-px);
 }
 
+.reflectLogos {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xsmall-px);
+}
+
+.reflectLogo {
+  width: auto;
+}
+
+.scaleDown {
+  scale: 0.85;
+}
+
 .loginCta {
   font-size: var(--font-size-xsmall-px);
   margin-top: var(--spacing-medium2-px);
