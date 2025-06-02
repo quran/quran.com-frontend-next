@@ -1,6 +1,5 @@
 import { FC } from 'react';
 
-import Image from 'next/image';
 import useTranslation from 'next-translate/useTranslation';
 
 import BackButton from './BackButton';
@@ -11,6 +10,9 @@ import SocialButtons from './SocialButtons';
 
 import { SubmissionResult } from '@/components/FormBuilder/FormBuilder';
 import EmailLogin, { EmailLoginData } from '@/components/Login/EmailLogin';
+import QuranLogo from '@/icons/logo_main.svg';
+import QRColoredLogo from '@/icons/qr-colored.svg';
+import QRLogo from '@/icons/qr-logo.svg';
 
 interface Benefit {
   id: string;
@@ -53,22 +55,13 @@ const ServiceCard: FC<Props> = ({
         {t('welcome-description-3')}
       </p>
       <div className={styles.servicesContainer}>
-        <Image
-          src="/icons/logo_main.svg"
-          alt="Quran Logo"
-          width={140}
-          height={26}
-          className={styles.logos}
-        />
+        <QuranLogo height={26} />
         <BenefitsSection benefits={benefits.quran} />
         <hr className={styles.serviceDivider} />
-        <Image
-          src="/icons/qr-registration-logo.svg"
-          alt="QR Logo"
-          width={174}
-          height={30}
-          className={styles.logos}
-        />
+        <div className={styles.reflectLogos}>
+          <QRColoredLogo className={styles.reflectLogo} />
+          <QRLogo className={styles.reflectLogo} />
+        </div>
         <BenefitsSection benefits={benefits.reflect} />
       </div>
       <p className={styles.loginCta}>{t('login-cta')}</p>

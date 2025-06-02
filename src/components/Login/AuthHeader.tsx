@@ -1,27 +1,22 @@
 import { FC } from 'react';
 
-import Image from 'next/image';
+import classNames from 'classnames';
 
 import styles from './login.module.scss';
+
+import QuranLogo from '@/icons/logo_main.svg';
+import QRColoredLogo from '@/icons/qr-colored.svg';
+import QRLogo from '@/icons/qr-logo.svg';
 
 const AuthHeader: FC = () => {
   return (
     <>
       <div className={styles.authLogos}>
-        <Image
-          src="/icons/logo_main.svg"
-          alt="Quran Logo"
-          width={96}
-          height={20}
-          className={styles.logos}
-        />
-        <Image
-          src="/icons/qr-registration-logo.svg"
-          alt="QR Logo"
-          width={120}
-          height={22}
-          className={styles.logos}
-        />
+        <QuranLogo height={20} />
+        <div className={classNames(styles.reflectLogos, styles.scaleDown)}>
+          <QRColoredLogo className={styles.reflectLogo} />
+          <QRLogo className={styles.reflectLogo} />
+        </div>
       </div>
       <hr className={styles.divider} />
     </>
