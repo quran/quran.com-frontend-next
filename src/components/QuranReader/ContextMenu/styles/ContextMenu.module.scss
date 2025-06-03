@@ -122,17 +122,22 @@ $pixel: 1px;
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--color-text-faded-new);
-  margin-right: var(--spacing-xxsmall);
-
-  &:hover {
-    color: var(--color-primary-medium);
-  }
 
   svg {
     width: 16px;
     height: 16px;
   }
+}
+
+.unbookmarkedIcon {
+  color: var(--color-text-faded-new);
+
+  &:hover {
+    color: var(--color-text-default);
+  }
+}
+.bookmarkedIcon {
+  color: var(--color-text-default);
 }
 
 .primaryInfo {

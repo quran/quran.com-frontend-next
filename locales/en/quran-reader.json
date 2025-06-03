@@ -60,8 +60,7 @@
     "quran": "Quran",
     "references": "References",
     "summary": "Summary",
-    "tafsir": "Tafsir",
-    "quran": "Quran"
+    "tafsir": "Tafsir"
   },
   "qalqala": "Qalqala (echo)",
   "query-param-message": "You are viewing preselected reading settings. <0>Dismiss</0> to view in your current settings or <1>Save</1> to update your setting",
@@ -71,6 +70,9 @@
   "reflection-disclaimer": "Reflections are personal perspectives (reviewed for quality) and should not be taken as authoritative.",
   "reflection-not-available": "There are no reviewed reflections for this ayah",
   "reflections-desc": "Read and share Quranic reflections of Ayah {{ayahNumber}} of Surah {{surahName}}",
+  "add-bookmark": "Add bookmark",
+  "page-bookmarked": "Page bookmarked",
+  "page-bookmark-removed": "Page bookmark removed",
   "remove-bookmark": "Remove bookmark",
   "removed-from": "Removed from {{collectionName}}",
   "revelation-order-notice": "Note: you're navigating the Quran by the order of revelation. <link>Click here</link> to revert to the default ordering.",

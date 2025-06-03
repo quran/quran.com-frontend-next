@@ -19,7 +19,7 @@ const PageInfo: React.FC<PageInfoProps> = ({ juzNumber, hizbNumber, pageNumber, 
   return (
     <div className={styles.pageInfoContainer}>
       <div className={styles.primaryInfo}>
-        <PageBookmarkAction pageNumber={Number(pageNumber)} t={t} />
+        <PageBookmarkAction pageNumber={Number(pageNumber)} />
         <span>
           {t('page')} {pageNumber}
         </span>

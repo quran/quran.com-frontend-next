@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 
-import { useSelector, shallowEqual } from 'react-redux';
+import useTranslation from 'next-translate/useTranslation';
+import { useSelector, shallowEqual, useDispatch } from 'react-redux';
 import { useSWRConfig } from 'swr';
 import useSWRImmutable from 'swr/immutable';
 
@@ -10,6 +11,7 @@ import Spinner from '@/components/dls/Spinner/Spinner';
 import { ToastStatus, useToast } from '@/components/dls/Toast/Toast';
 import BookmarkedIcon from '@/icons/bookmark.svg';
 import UnBookmarkedIcon from '@/icons/unbookmarked.svg';
+import { selectBookmarkedPages, togglePageBookmark } from '@/redux/slices/QuranReader/bookmarks';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import { getMushafId } from '@/utils/api';
 import { addBookmark, deleteBookmarkById, getBookmark } from '@/utils/auth/api';
@@ -20,19 +22,20 @@ import BookmarkType from 'types/BookmarkType';
 
 interface PageBookmarkActionProps {
   pageNumber: number;
-  t: (key: string) => string;
 }
 
 /**
  * Component for bookmarking a Quran page
  * @returns {JSX.Element} A React component that displays a bookmark icon for the current page
  */
-const PageBookmarkAction: React.FC<PageBookmarkActionProps> = ({ pageNumber, t }) => {
+const PageBookmarkAction: React.FC<PageBookmarkActionProps> = ({ pageNumber }) => {
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
+  const bookmarkedPages = useSelector(selectBookmarkedPages, shallowEqual);
   const mushafId = getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines).mushaf;
   const toast = useToast();
   const { cache } = useSWRConfig();
-
+  const { t } = useTranslation();
+  const dispatch = useDispatch();
   const {
     data: bookmark,
     isValidating: isPageBookmarkedLoading,
@@ -46,8 +49,15 @@ const PageBookmarkAction: React.FC<PageBookmarkActionProps> = ({ pageNumber, t }
   );
 
   const isPageBookmarked = useMemo(() => {
-    return !!bookmark;
-  }, [bookmark]);
+    const isUserLoggedIn = isLoggedIn();
+    if (isUserLoggedIn && bookmark) {
+      return bookmark;
+    }
+    if (!isUserLoggedIn) {
+      return !!bookmarkedPages?.[pageNumber.toString()];
+    }
+    return false;
+  }, [bookmarkedPages, bookmark, pageNumber]);
 
   // Handle bookmark toggle action
   const handleBookmarkAdd = () => {
@@ -58,12 +68,12 @@ const PageBookmarkAction: React.FC<PageBookmarkActionProps> = ({ pageNumber, t }
     })
       .then(() => {
         mutate();
-        toast(t('page-bookmarked'), {
+        toast(t('quran-reader:page-bookmarked'), {
           status: ToastStatus.Success,
         });
       })
       .catch(() => {
-        toast(t('error.general'), {
+        toast(t('common:error.general'), {
           status: ToastStatus.Error,
         });
       });
@@ -72,7 +82,7 @@ const PageBookmarkAction: React.FC<PageBookmarkActionProps> = ({ pageNumber, t }
   // Handle bookmark removal
   const handleBookmarkRemove = () => {
     deleteBookmarkById(bookmark.id).then(() => {
-      toast(t('page-bookmark-removed'), {
+      toast(t('quran-reader:page-bookmark-removed'), {
         status: ToastStatus.Success,
       });
     });
@@ -101,12 +111,19 @@ const PageBookmarkAction: React.FC<PageBookmarkActionProps> = ({ pageNumber, t }
       } else {
         handleBookmarkRemove();
       }
+    } else {
+      // For logged-out users, use Redux to store bookmarks locally
+      dispatch(togglePageBookmark(pageNumber.toString()));
     }
   };
 
   let bookmarkIcon = <Spinner />;
   if (!isPageBookmarkedLoading) {
-    bookmarkIcon = isPageBookmarked ? <BookmarkedIcon /> : <UnBookmarkedIcon />;
+    bookmarkIcon = isPageBookmarked ? (
+      <BookmarkedIcon className={styles.bookmarkedIcon} />
+    ) : (
+      <UnBookmarkedIcon className={styles.unbookmarkedIcon} />
+    );
   }
 
   return (
@@ -115,7 +132,9 @@ const PageBookmarkAction: React.FC<PageBookmarkActionProps> = ({ pageNumber, t }
       className={styles.bookmarkButton}
       onClick={onToggleBookmarkClicked}
       disabled={isPageBookmarkedLoading}
-      aria-label={isPageBookmarked ? t('remove-bookmark') : t('add-bookmark')}
+      aria-label={
+        isPageBookmarked ? t('quran-reader:remove-bookmark') : t('quran-reader:add-bookmark')
+      }
     >
       {bookmarkIcon}
     </button>
