@@ -14,6 +14,8 @@ export interface ReadingPreferenceIconProps {
   currentReadingPreference: ReadingPreference;
   /** The reading preference option this component represents */
   optionReadingPreference: ReadingPreference;
+  /** Whether to use success color variant for selected state */
+  useSuccessVariant?: boolean;
 }
 
 /**
@@ -24,19 +26,22 @@ export interface ReadingPreferenceIconProps {
 function ReadingPreferenceIcon({
   currentReadingPreference,
   optionReadingPreference,
+  useSuccessVariant = false,
 }: ReadingPreferenceIconProps): JSX.Element {
   // Determine if this option is currently selected
   const isSelected = currentReadingPreference === optionReadingPreference;
 
+  // Determine the style class based on selection state and variant
+  const getStyleClass = () => {
+    if (!isSelected) return styles.unselected;
+    return useSuccessVariant ? styles.successVariant : styles.selected;
+  };
+
   // Return the appropriate icon component based on the option type
   return optionReadingPreference === ReadingPreference.Reading ? (
-    <ReadingIcon
-      className={`${styles.readingIcon} ${isSelected ? styles.selected : styles.unselected}`}
-    />
+    <ReadingIcon className={`${styles.readingIcon} ${getStyleClass()}`} />
   ) : (
-    <TranslationIcon
-      className={`${styles.translationIcon} ${isSelected ? styles.selected : styles.unselected}`}
-    />
+    <TranslationIcon className={`${styles.translationIcon} ${getStyleClass()}`} />
   );
 }
 

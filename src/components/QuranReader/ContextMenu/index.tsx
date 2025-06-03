@@ -8,12 +8,14 @@ import ReadingPreferenceSwitcher, {
 import TajweedColors from '../TajweedBar/TajweedBar';
 
 import ChapterNavigation from './components/ChapterNavigation';
+import MobileReadingTabs from './components/MobileReadingTabs';
 import PageInfo from './components/PageInfo';
 import useContextMenuState from './hooks/useContextMenuState';
 import styles from './styles/ContextMenu.module.scss';
 
 import { SwitchSize } from '@/dls/Switch/Switch';
 import { Mushaf } from '@/types/QuranReader';
+import { isMobile } from '@/utils/responsive';
 
 /**
  * ContextMenu component for the Quran reader
@@ -25,7 +27,6 @@ const ContextMenu: React.FC = (): JSX.Element | null => {
     // State
     isSidebarNavigationVisible,
     showNavbar,
-    showReadingPreferenceSwitcher,
     isSideBarVisible,
     isExpanded,
     mushaf,
@@ -50,10 +51,14 @@ const ContextMenu: React.FC = (): JSX.Element | null => {
     return null;
   }
 
+  const isMobileScrolledView = !showNavbar && isMobile();
+
   return (
     <div
       className={classNames(styles.container, {
         [styles.visibleContainer]: showNavbar,
+        [styles.withVisibleBanner]: showNavbar,
+        [styles.progressContainer]: !showNavbar,
         [styles.expandedContainer]: isExpanded,
         [styles.withVisibleSideBar]: isSideBarVisible,
       })}
@@ -61,6 +66,22 @@ const ContextMenu: React.FC = (): JSX.Element | null => {
         ['--progress' as string]: `${progress}%`,
       })}
     >
+      {/* Page Information Section as its own row on mobile scrolled view */}
+      {isMobileScrolledView && (
+        <div className={classNames(styles.section, styles.pageInfoSection)}>
+          <div className={styles.row}>
+            <p className={styles.alignCenter} />
+            <PageInfo
+              juzNumber={juzNumber}
+              hizbNumber={localizedHizb}
+              pageNumber={localizedPageNumber}
+              containerClassName={styles.pageInfoCustomContainerMobileScrolled}
+              t={t}
+            />
+          </div>
+        </div>
+      )}
+
       <div className={styles.sectionsContainer}>
         {/* Chapter Navigation Section */}
         <div className={styles.section}>
@@ -73,29 +94,37 @@ const ContextMenu: React.FC = (): JSX.Element | null => {
           </div>
         </div>
 
-        {/* Page Information Section */}
-        <div className={styles.section}>
-          <div className={styles.row}>
-            <p className={styles.alignCenter} />
-            <PageInfo
-              juzNumber={juzNumber}
-              hizbNumber={localizedHizb}
-              pageNumber={localizedPageNumber}
-              t={t}
-            />
+        {/* Page Information Section (default, not mobile scrolled view) */}
+        {!isMobileScrolledView && (
+          <div className={classNames(styles.section)}>
+            <div className={styles.row}>
+              <p className={styles.alignCenter} />
+              <PageInfo
+                juzNumber={juzNumber}
+                hizbNumber={localizedHizb}
+                pageNumber={localizedPageNumber}
+                containerClassName={styles.pageInfoCustomContainer}
+                t={t}
+              />
+            </div>
           </div>
-        </div>
+        )}
 
         {/* Reading Preference Section */}
-        <div className={classNames(styles.section, styles.readingPreferenceSection)}>
+        <div
+          className={classNames(styles.section, styles.readingPreferenceSection, {
+            [styles.hideReadingPreferenceSectionOnMobile]: showNavbar,
+          })}
+        >
           <ReadingPreferenceSwitcher
-            // isIconsOnly
+            isIconsOnly={isMobileScrolledView}
             size={SwitchSize.XSmall}
             type={ReadingPreferenceSwitcherType.ContextMenu}
           />
         </div>
       </div>
 
+      {showNavbar && <MobileReadingTabs t={t} />}
       {/* Tajweed Colors */}
       {mushaf === Mushaf.QCFTajweedV4 && <TajweedColors />}
     </div>

@@ -1,5 +1,7 @@
 import React from 'react';
 
+import classNames from 'classnames';
+
 import styles from '../styles/ContextMenu.module.scss';
 
 import PageBookmarkAction from './PageBookmarkAction';
@@ -9,15 +11,22 @@ interface PageInfoProps {
   hizbNumber: string;
   pageNumber: string;
   t: (key: string) => string;
+  containerClassName?: string;
 }
 
 /**
  * Component for displaying Quran page information (juz, hizb, page numbers)
  * @returns {JSX.Element} A React component that displays page information including juz, hizb, and page numbers
  */
-const PageInfo: React.FC<PageInfoProps> = ({ juzNumber, hizbNumber, pageNumber, t }) => {
+const PageInfo: React.FC<PageInfoProps> = ({
+  juzNumber,
+  hizbNumber,
+  pageNumber,
+  t,
+  containerClassName,
+}) => {
   return (
-    <div className={styles.pageInfoContainer}>
+    <div className={classNames(styles.pageInfoContainer, containerClassName)}>
       <div className={styles.primaryInfo}>
         <PageBookmarkAction pageNumber={Number(pageNumber)} />
         <span>
