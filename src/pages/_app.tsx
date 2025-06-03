@@ -76,6 +76,7 @@ function MyApp({ Component, pageProps }): JSX.Element {
             __html: `window.__BUILD_INFO__ = {
               date: "${process.env.NEXT_PUBLIC_BUILD_DATE || new Date().toISOString()}",
               hash: "${process.env.NEXT_PUBLIC_COMMIT_HASH || 'development'}",
+              version: "${process.env.NEXT_PUBLIC_APP_VERSION || ''}",
               env: "${process.env.NEXT_PUBLIC_APP_ENV}"
             }`,
           }}
