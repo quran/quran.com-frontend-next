@@ -1,12 +1,12 @@
-@use "src/styles/breakpoints";
+@use 'src/styles/breakpoints';
 
 .contentPage {
   margin: auto;
   @include breakpoints.desktop {
-    width: 65%;
+    inline-size: 65%;
   }
   @include breakpoints.smallerThanDesktop {
-    width: 90%;
+    inline-size: 90%;
   }
   * {
     line-height: calc(1.3 * var(--line-height-xlarge));
@@ -71,6 +71,31 @@
 .list {
   list-style: unset;
   padding-inline-start: var(--spacing-mega);
+}
+
+.unstyledList {
+  list-style: unset;
+}
+
+.arabic {
+  text-align: start;
+  font-size: var(--font-size-normal);
+  font-style: italic;
+  direction: rtl;
+  display: block;
+  font-family: 'Noto Nastaliq Arabic', 'NotoNastaliq', serif;
+  word-spacing: 0.1em;
+  letter-spacing: 0.02em;
+  padding-block: var(--spacing-xsmall);
+}
+
+.numberedList {
+  list-style-type: decimal !important;
+  list-style-position: outside;
+
+  li {
+    display: list-item;
+  }
 }
 
 .underline {

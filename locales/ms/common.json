@@ -92,6 +92,7 @@
   },
   "ayah": "Ayat",
   "ayahs": "Ayat-ayat",
+  "best-days-banner": "Berikan pada hari-hari terbaik!",
   "beta": "Beta (Ujian)",
   "beyond-ramadan": "Grow Beyond Ramadan!",
   "bookmark": "Penanda buku",
@@ -210,7 +211,7 @@
     "translation-font-size": "Saiz fon terjemahan"
   },
   "footer": {
-    "description": "Quran.com ialah platform dipercayai yang digunakan oleh berjuta-juta orang di seluruh dunia untuk membaca, mencari, mendengar dan merenung Al-Quran dalam pelbagai bahasa. Ia menyediakan terjemahan, tafsir, bacaan, terjemahan perkataan demi perkataan, dan alat untuk kajian yang lebih mendalam, menjadikan al-Quran boleh diakses oleh semua orang. <br/> <br/> Sebagai Sadaqah Jariyah, Quran.com berdedikasi untuk membantu orang ramai berhubung secara mendalam dengan al-Quran. Disokong oleh <link>Quran.Foundation</link>, sebuah organisasi bukan untung 501(c)(3), Quran.com terus berkembang sebagai sumber percuma dan berharga untuk semua, Alhamdullilah”",
+    "description": "Quran.com ialah platform dipercayai yang digunakan oleh berjuta-juta orang di seluruh dunia untuk membaca, mencari, mendengar dan merenung Al-Quran dalam pelbagai bahasa. Ia menyediakan terjemahan, tafsir, bacaan, terjemahan perkataan demi perkataan, dan alat untuk kajian yang lebih mendalam, menjadikan al-Quran boleh diakses oleh semua orang. <br/> <br/> Sebagai Sadaqah Jariyah, Quran.com berdedikasi untuk membantu orang ramai berhubung secara mendalam dengan al-Quran. Disokong oleh <link>Quran.Foundation</link>, sebuah organisasi bukan untung 501(c)(3), Quran.com terus berkembang sebagai sumber percuma dan berharga untuk semua, Alhamdullilah",
     "hiring": "Kami ada jawatan kosong untuk di penuhi! Sertai pasukan QuranFoundation dan menyumbang kepada misi kami. <link> Mohon sekarang! </link>",
     "rights": "Hak cipta terpelihara",
     "title": "Baca, Dengar, Cari, dan Renungkan Al-Quran"
@@ -296,9 +297,10 @@
   "popup": {
     "companion-title": "Sahabat Al-Quran yang dihormati,",
     "footnote": "Derma bulanan anda membantu mengurangkan usaha pengutipan dana kami sejurusnya melebihkan tumpuan pada program yang manfaat",
+    "subtitle": "“Tidak ada hari-hari yang di dalamnya amal shalih lebih diredhai Allah daripada hari-hari ini.” [Riyad as-Salihin 1249]",
     "text-1": "Kami komited untuk memberi khidmat percuma dalam pengluasan pengetahuan dan teknologi pembelajaran al-Quran ke seantaro dunia.",
     "text-2": "Peluang terbaik untuk amal yang berterusan (Sadaqa Jariyah). Melabur untuk Akhirat anda sebagai penderma bulanan (atau sekali).",
-    "title": "Sahabat al-Quran yang dihormati,"
+    "title": "Berikan Semasa Hari-Hari Terbaik!"
   },
   "powered-by": "Dikuasai oleh",
   "prepare-hearts": {
