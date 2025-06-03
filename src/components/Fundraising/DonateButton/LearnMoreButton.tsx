@@ -12,15 +12,21 @@ import { logEvent } from '@/utils/eventLogger';
 
 type Props = {
   source: LearnMoreClickSource;
+  onAdditionalClick?: () => void;
 };
 
-const LearnMoreButton: React.FC<Props> = ({ source }) => {
+const LearnMoreButton: React.FC<Props> = ({ source, onAdditionalClick }) => {
   const { t } = useTranslation('common');
 
   const onButtonClicked = () => {
     logEvent('learn_more_button_clicked', {
       source,
     });
+
+    // Call additional click handler if provided
+    if (onAdditionalClick) {
+      onAdditionalClick();
+    }
   };
 
   return (

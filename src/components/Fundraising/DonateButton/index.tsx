@@ -17,6 +17,7 @@ type Props = {
   isOutlined?: boolean;
   isTextBasedOnType?: boolean;
   shouldUseProviderUrl?: boolean;
+  onAdditionalClick?: () => void;
 };
 
 const DonateButton: React.FC<Props> = ({
@@ -25,6 +26,7 @@ const DonateButton: React.FC<Props> = ({
   type,
   isOutlined = false,
   shouldUseProviderUrl = false,
+  onAdditionalClick,
 }) => {
   const { t } = useTranslation('common');
 
@@ -41,6 +43,12 @@ const DonateButton: React.FC<Props> = ({
        */
       source: `${source}${type ? `_${type}` : ''}`,
     });
+
+    // Call additional click handler if provided
+    if (onAdditionalClick) {
+      onAdditionalClick();
+    }
+
     navigateToExternalUrl(href);
   };
 
