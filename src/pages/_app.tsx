@@ -11,6 +11,7 @@ import useSWRImmutable from 'swr/immutable';
 import AudioPlayer from '@/components/AudioPlayer/AudioPlayer';
 import UserAccountModal from '@/components/Auth/UserAccountModal';
 import DeveloperUtility from '@/components/DeveloperUtility/DeveloperUtility';
+import DonatePopup from '@/components/DonatePopup/DonatePopup';
 import FontPreLoader from '@/components/Fonts/FontPreLoader';
 import GlobalListeners from '@/components/GlobalListeners';
 import Navbar from '@/components/Navbar/Navbar';
@@ -93,6 +94,15 @@ function MyApp({ Component, pageProps }): JSX.Element {
         <link rel="apple-touch-icon" sizes="192x192" href="/images/logo/Logo@192x192.png" />
         <link rel="manifest" href="/manifest.json" />
         <link rel="preconnect" href={API_HOST} />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `window.__BUILD_INFO__ = {
+              date: "${process.env.NEXT_PUBLIC_BUILD_DATE || new Date().toISOString()}",
+              hash: "${process.env.NEXT_PUBLIC_COMMIT_HASH || 'development'}",
+              env: "${process.env.NEXT_PUBLIC_APP_ENV}"
+            }`,
+          }}
+        />
       </Head>
       <FontPreLoader locale={locale} />
       <DirectionProvider dir={getDir(locale)}>
@@ -118,6 +128,7 @@ function MyApp({ Component, pageProps }): JSX.Element {
                       <Component {...pageProps} />
                       <AudioPlayer />
                       {!isAuthPage(router) && <Footer />}
+                      <DonatePopup />
                     </OnboardingProvider>
                   </ThemeProvider>
                   <SessionIncrementor />

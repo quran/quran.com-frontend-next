@@ -25,21 +25,25 @@ const recursiveSortedObjectToString = (params: any): string => {
 /**
  * Generates a signature for the given request.
  *
- * @param {NextApiRequest} req - The request object.
- * @returns {{ signature: string; timestamp: string }} - The generated signature and timestamp.
- */
-/**
- * Generates a signature for the given request.
+ * This function creates a signature using the request details, a specified URL, and a signature token.
+ * It supports requests with bodies for methods like POST, PUT, PATCH, and DELETE.
  *
- * @param {NextApiRequest} req - The request object.
- * @returns {{ signature: string; timestamp: string }} - The generated signature and timestamp.
+ * @param {NextApiRequest} req - The request object containing details of the HTTP request.
+ * @param {string} url - The URL for which the signature is being generated.
+ * @param {string} signatureToken - The token used to sign the request.
+ * @param {string} [timestamp] - An optional timestamp to use for the signature. If not provided, the current time is used.
+ * @returns {{ signature: string; timestamp: string }} - An object containing the generated signature and the timestamp used.
  */
-// Start of Selection
 const generateSignature = (
   req: NextApiRequest,
   url: string,
+  signatureToken: string,
+  timestamp?: string,
 ): { signature: string; timestamp: string } => {
-  const currentTimestamp = new Date().getTime().toString();
+  let currentTimestamp = timestamp;
+  if (!timestamp) {
+    currentTimestamp = new Date().getTime().toString();
+  }
   let params = {};
 
   try {
@@ -53,7 +57,7 @@ const generateSignature = (
   }
 
   const rawString = `${url}.${currentTimestamp}${recursiveSortedObjectToString(params)}`;
-  const signature = CryptoJS.HmacSHA512(rawString, process.env.SIGNATURE_TOKEN);
+  const signature = CryptoJS.HmacSHA512(rawString, signatureToken);
   const encodedSignature = CryptoJS.enc.Base64.stringify(signature);
 
   return { signature: encodedSignature, timestamp: currentTimestamp };

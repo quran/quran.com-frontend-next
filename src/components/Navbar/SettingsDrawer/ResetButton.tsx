@@ -28,27 +28,7 @@ const ResetButton = () => {
   const toast = useToast();
   const audioService = useContext(AudioPlayerMachineContext);
 
-  const onResetSettingsClicked = async () => {
-    logButtonClick('reset_settings');
-    const resetAndSetInitialState = () => {
-      dispatch(resetSettings(lang));
-      audioService.send({
-        type: 'SET_INITIAL_CONTEXT',
-        ...DEFAULT_XSTATE_INITIAL_STATE,
-      });
-    };
-
-    if (isLoggedIn()) {
-      try {
-        await dispatch(persistDefaultSettings(lang)).then(unwrapResult);
-        resetAndSetInitialState();
-      } catch {
-        // TODO: show an error
-      }
-    } else {
-      resetAndSetInitialState();
-    }
-
+  const cleanupUrlAndShowSuccess = () => {
     const queryParams = [
       QueryParam.TRANSLATIONS,
       QueryParam.RECITER,
@@ -61,6 +41,30 @@ const ResetButton = () => {
       router.push(router, undefined, { shallow: true });
     }
     toast(t('settings.reset-notif'), { status: ToastStatus.Success });
+  };
+
+  const resetAndSetInitialState = () => {
+    dispatch(resetSettings(lang));
+    audioService.send({
+      type: 'SET_INITIAL_CONTEXT',
+      ...DEFAULT_XSTATE_INITIAL_STATE,
+    });
+  };
+
+  const onResetSettingsClicked = async () => {
+    logButtonClick('reset_settings');
+    if (isLoggedIn()) {
+      try {
+        await dispatch(persistDefaultSettings(lang)).then(unwrapResult);
+        resetAndSetInitialState();
+        cleanupUrlAndShowSuccess();
+      } catch {
+        toast(t('error.general'), { status: ToastStatus.Error });
+      }
+    } else {
+      resetAndSetInitialState();
+      cleanupUrlAndShowSuccess();
+    }
   };
 
   return (

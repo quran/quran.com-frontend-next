@@ -10,7 +10,7 @@ import { fetcher } from '@/api';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import ReflectionBodyContainer from '@/components/QuranReader/ReflectionView/ReflectionBodyContainer';
 import { getChapterOgImageUrl } from '@/lib/og';
-import Error from '@/pages/_error';
+import { logErrorToSentry } from '@/lib/sentry';
 import layoutStyle from '@/pages/index.module.scss';
 import {
   getQuranReaderStylesInitialState,
@@ -41,24 +41,19 @@ import ChaptersData from 'types/ChaptersData';
 
 type AyahReflectionProp = {
   chapter?: ChapterResponse;
-  hasError?: boolean;
   verseNumber?: string;
   chapterId?: string;
   chaptersData: ChaptersData;
   fallback?: any;
 };
 
-const SelectedAyahReflection: NextPage<AyahReflectionProp> = ({
-  hasError,
+const ReflectionsPage: NextPage<AyahReflectionProp> = ({
   chapter,
   verseNumber,
   chapterId,
   fallback,
 }) => {
   const { t, lang } = useTranslation('quran-reader');
-  if (hasError) {
-    return <Error statusCode={500} />;
-  }
 
   const navigationUrl = getVerseReflectionNavigationUrl(`${chapterId}:${verseNumber}`);
   return (
@@ -157,12 +152,19 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
         verseNumber,
         fallback,
       },
-      revalidate: ONE_WEEK_REVALIDATION_PERIOD_SECONDS, // verses will be generated at runtime if not found in the cache, then cached for subsequent requests for 7 days.
+      revalidate: ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
     };
   } catch (error) {
+    logErrorToSentry(error, {
+      transactionName: 'getStaticProps-ReflectionsPage',
+      metadata: {
+        chapterIdOrSlug: String(params.chapterId),
+        locale,
+      },
+    });
     return {
-      props: { hasError: true },
-      revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS, // 35 seconds will be enough time before we re-try generating the page again.
+      notFound: true,
+      revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS,
     };
   }
 };
@@ -172,4 +174,4 @@ export const getStaticPaths: GetStaticPaths = async () => ({
   fallback: 'blocking', // will server-render pages on-demand if the path doesn't exist.
 });
 
-export default SelectedAyahReflection;
+export default ReflectionsPage;

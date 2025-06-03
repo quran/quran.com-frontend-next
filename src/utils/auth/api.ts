@@ -8,12 +8,11 @@ import { prepareGenerateMediaFileRequestData } from '../media/utils';
 
 import { BANNED_USER_ERROR_ID } from './constants';
 import { AuthErrorCodes } from './errors';
-import generateSignature from './signature';
 import BookmarkByCollectionIdQueryParams from './types/BookmarkByCollectionIdQueryParams';
 import GetAllNotesQueryParams from './types/Note/GetAllNotesQueryParams';
 import { ShortenUrlResponse } from './types/ShortenUrl';
 
-import { fetcher, X_AUTH_SIGNATURE, X_INTERNAL_CLIENT, X_TIMESTAMP } from '@/api';
+import { fetcher } from '@/api';
 import {
   ActivityDay,
   ActivityDayType,
@@ -93,7 +92,7 @@ import {
   makeVerificationCodeUrl,
   makeGetQuranicWeekUrl,
 } from '@/utils/auth/apiPaths';
-import { isStaticBuild } from '@/utils/build';
+import { getAdditionalHeaders } from '@/utils/headers';
 import CompleteAnnouncementRequest from 'types/auth/CompleteAnnouncementRequest';
 import { GetBookmarkCollectionsIdResponse } from 'types/auth/GetBookmarksByCollectionId';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
@@ -125,6 +124,33 @@ const IGNORE_ERRORS = [
   AuthErrorCodes.Immutable,
   AuthErrorCodes.ValidationError,
 ];
+
+/**
+ * Checks if an API response contains error information and throws an error if it does.
+ * This is useful for handling responses from APIs that return error information in the response body
+ * instead of rejecting the promise (like when ValidationError is in IGNORE_ERRORS).
+ *
+ * @param {unknown} response - The API response to check
+ * @param {string} [errorMessage] - Optional custom error message to throw
+ * @throws {Error} If the response contains error information
+ * @returns {void}
+ */
+export const throwIfResponseContainsError = (response: unknown, errorMessage?: string): void => {
+  if (
+    response &&
+    typeof response === 'object' &&
+    ((response as any).error ||
+      (response as any).details?.error ||
+      (response as any).success === false)
+  ) {
+    const message =
+      errorMessage ||
+      (response as any).error?.message ||
+      (response as any).details?.error?.message ||
+      'API request failed';
+    throw new Error(message);
+  }
+};
 
 const handleErrors = async (res) => {
   const body = await res.json();
@@ -562,23 +588,14 @@ export const withCredentialsFetcher = async <T>(
   init?: RequestInit,
 ): Promise<T> => {
   try {
-    let additionalHeaders = {};
-    if (isStaticBuild) {
-      const req: NextApiRequest = {
-        url: typeof input === 'string' ? input : input.url,
-        method: init.method || 'GET',
-        body: init.body,
-        headers: init.headers,
-        query: {},
-      } as NextApiRequest;
-
-      const { signature, timestamp } = generateSignature(req, req.url);
-      additionalHeaders = {
-        [X_AUTH_SIGNATURE]: signature,
-        [X_TIMESTAMP]: timestamp,
-        [X_INTERNAL_CLIENT]: process.env.INTERNAL_CLIENT_ID,
-      };
-    }
+    const request: NextApiRequest = {
+      url: typeof input === 'string' ? input : input.url,
+      method: init?.method || 'GET',
+      body: init?.body,
+      headers: init?.headers,
+      query: {},
+    } as NextApiRequest;
+    const additionalHeaders = getAdditionalHeaders(request);
     const data = await fetcher<T>(input, {
       ...init,
       credentials: 'include',

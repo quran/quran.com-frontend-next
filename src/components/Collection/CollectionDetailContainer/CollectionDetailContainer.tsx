@@ -11,6 +11,7 @@ import NextSeoWrapper from '@/components/NextSeoWrapper';
 import Spinner, { SpinnerSize } from '@/dls/Spinner/Spinner';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import ArrowLeft from '@/icons/west.svg';
+import Error from '@/pages/_error';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getLanguageAlternates } from '@/utils/locale';
 import {
@@ -21,7 +22,6 @@ import {
 import { slugifiedCollectionIdToCollectionId } from '@/utils/string';
 import CollectionDetail from 'src/components/Collection/CollectionDetail/CollectionDetail';
 import Button, { ButtonVariant } from 'src/components/dls/Button/Button';
-import Error from 'src/pages/_error';
 import {
   deleteBookmarkById,
   deleteCollectionBookmarkById,
