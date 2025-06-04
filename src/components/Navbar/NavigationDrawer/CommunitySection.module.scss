@@ -26,7 +26,7 @@
   z-index: -1;
   inset-inline-end: 0;
 
-  [data-theme="dark"] & {
+  [data-theme='dark'] & {
     opacity: var(--opacity-10);
   }
 

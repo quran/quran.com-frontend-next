@@ -1,4 +1,4 @@
-@use "src/styles/utility";
+@use 'src/styles/utility';
 .container {
   display: flex;
   justify-content: space-between;
@@ -35,8 +35,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: calc(2.5 * var(--spacing-medium));
-  height: calc(2.5 * var(--spacing-medium));
+  inline-size: calc(2.5 * var(--spacing-medium));
+  block-size: calc(2.5 * var(--spacing-medium));
   border-radius: var(--border-radius-default);
   transform: rotate(45deg);
   margin-inline-end: var(--spacing-large);

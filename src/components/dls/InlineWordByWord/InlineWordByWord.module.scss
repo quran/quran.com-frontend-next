@@ -1,4 +1,4 @@
-@use "src/styles/breakpoints";
+@use 'src/styles/breakpoints';
 
 .word {
   /**
@@ -21,36 +21,36 @@
 .xs {
   font-size: var(--font-size-xsmall-dangerous);
   @include breakpoints.tablet {
-    max-width: calc(3 * var(--spacing-mega));
+    max-inline-size: calc(3 * var(--spacing-mega));
   }
 }
 .sm {
   font-size: var(--font-size-xsmall);
   @include breakpoints.tablet {
-    max-width: calc(3.5 * var(--spacing-mega));
+    max-inline-size: calc(3.5 * var(--spacing-mega));
   }
 }
 .md {
   font-size: var(--font-size-small);
   @include breakpoints.tablet {
-    max-width: calc(3.7 * var(--spacing-mega));
+    max-inline-size: calc(3.7 * var(--spacing-mega));
   }
 }
 .lg {
   font-size: var(--font-size-normal);
   @include breakpoints.tablet {
-    max-width: calc(3.9 * var(--spacing-mega));
+    max-inline-size: calc(3.9 * var(--spacing-mega));
   }
 }
 .xl {
   font-size: var(--font-size-large);
   @include breakpoints.tablet {
-    max-width: calc(4 * var(--spacing-mega));
+    max-inline-size: calc(4 * var(--spacing-mega));
   }
 }
 .xxl {
   font-size: var(--font-size-xlarge);
   @include breakpoints.tablet {
-    max-width: calc(4.2 * var(--spacing-mega));
+    max-inline-size: calc(4.2 * var(--spacing-mega));
   }
 }

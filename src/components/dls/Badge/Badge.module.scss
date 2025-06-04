@@ -9,8 +9,8 @@
   align-items: center;
 
   color: var(--color-text-inverse);
-  height: var(--spacing-small);
-  width: var(--spacing-small);
+  block-size: var(--spacing-small);
+  inline-size: var(--spacing-small);
   background-color: var(--color-success-deep);
   border-radius: var(--border-radius-circle);
   font-size: var(--font-size-xsmall);

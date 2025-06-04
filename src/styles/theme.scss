@@ -1,7 +1,7 @@
-@use "./themes/light";
-@use "./themes/dark";
-@use "./themes/sepia";
-@use "./shades";
+@use './themes/light';
+@use './themes/dark';
+@use './themes/sepia';
+@use './shades';
 
 /** System theme (auto-detects OS light/dark mode), other themes extend this one */
 :root {
@@ -96,16 +96,16 @@
 }
 
 /** Light Theme */
-[data-theme="light"] {
+[data-theme='light'] {
   @include light.mode;
 }
 
 /** Dark Theme */
-[data-theme="dark"] {
+[data-theme='dark'] {
   @include dark.mode;
 }
 
 /** Sepia Theme */
-[data-theme="sepia"] {
+[data-theme='sepia'] {
   @include sepia.mode;
 }

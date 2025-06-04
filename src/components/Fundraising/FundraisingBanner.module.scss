@@ -21,8 +21,8 @@
 }
 
 .backgroundImageContainer {
-  width: calc(4 * var(--spacing-mega));
-  height: calc(4 * var(--spacing-mega));
+  inline-size: calc(4 * var(--spacing-mega));
+  block-size: calc(4 * var(--spacing-mega));
   position: absolute;
   inset-block-start: var(--spacing-large);
   inset-inline-end: 0;

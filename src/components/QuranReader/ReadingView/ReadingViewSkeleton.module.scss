@@ -1,6 +1,6 @@
-@use "src/styles/utility";
-@use "src/styles/constants";
-@use "src/styles/breakpoints";
+@use 'src/styles/utility';
+@use 'src/styles/constants';
+@use 'src/styles/breakpoints';
 
 .skeletonContainer {
   // the page's bottom margin + the height of the page footer
@@ -13,9 +13,9 @@
     margin-block-start: constants.$reading-view-container-top-margin;
   }
   margin-block-start: var(--spacing-xsmall);
-  height: var(--skeleton-height);
+  block-size: var(--skeleton-height);
 }
 
 .fixedWidth {
-  width: var(--line-width, auto);
+  inline-size: var(--line-width, auto);
 }

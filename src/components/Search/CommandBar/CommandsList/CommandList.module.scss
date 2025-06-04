@@ -1,4 +1,4 @@
-@use "src/styles/breakpoints";
+@use 'src/styles/breakpoints';
 
 $itemHeight: calc(1.2 * var(--spacing-mega));
 .noResult {
@@ -11,7 +11,7 @@ $itemHeight: calc(1.2 * var(--spacing-mega));
   display: flex;
   align-items: center;
   background: transparent;
-  height: var(--spacing-mega);
+  block-size: var(--spacing-mega);
   font-size: var(--font-size-xsmall);
   padding-block-start: 0;
   padding-block-end: 0;
@@ -41,7 +41,7 @@ $itemHeight: calc(1.2 * var(--spacing-mega));
 .highlight {
   transition: transform var(--transition-fast);
   // min-height: $itemHeight;
-  width: 100%;
+  inline-size: 100%;
   position: absolute;
   border-radius: var(--border-radius-rounded);
   background: var(--color-background-alternative-faint);

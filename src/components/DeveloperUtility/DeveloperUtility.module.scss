@@ -5,8 +5,8 @@
   position: fixed;
   inset-block-start: calc(var(--spacing-mega) + var(--spacing-mega));
   inset-inline-end: calc(var(--spacing-mega) + var(--spacing-medium));
-  height: calc(2 * var(--spacing-mega));
-  width: calc(2 * var(--spacing-mega));
+  block-size: calc(2 * var(--spacing-mega));
+  inline-size: calc(2 * var(--spacing-mega));
 
   z-index: var(--z-index-sticky);
   border-radius: 100%;
@@ -18,8 +18,8 @@
 
 .containerExpanded {
   cursor: unset;
-  height: auto;
-  width: auto;
+  block-size: auto;
+  inline-size: auto;
   padding-block-start: var(--spacing-xsmall);
   padding-block-end: var(--spacing-xsmall);
   padding-inline-start: var(--spacing-xsmall);
@@ -32,7 +32,7 @@
 }
 
 .separator {
-  width: 100%;
+  inline-size: 100%;
   margin-block-end: var(--spacing-xxxsmall);
 }
 
@@ -50,6 +50,6 @@
 }
 
 .wrench {
-  height: calc(2 * var(--spacing-mega));
-  width: calc(var(--spacing-large) + var(--spacing-xxsmall));
+  block-size: calc(2 * var(--spacing-mega));
+  inline-size: calc(var(--spacing-large) + var(--spacing-xxsmall));
 }

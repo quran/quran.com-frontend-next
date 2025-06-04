@@ -1,185 +1,185 @@
-@use "src/styles/theme";
-@use "src/styles/breakpoints";
+@use 'src/styles/theme';
+@use 'src/styles/breakpoints';
 
 .container {
-    padding-block: var(--spacing-large-px);
-    @include breakpoints.smallerThanTablet {
-        padding-block: var(--spacing-medium2-px);
-    }
+  padding-block: var(--spacing-large-px);
+  @include breakpoints.smallerThanTablet {
+    padding-block: var(--spacing-medium2-px);
+  }
 }
 
 .headerRow {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-block-end: var(--spacing-small-px);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-block-end: var(--spacing-small-px);
 }
 
 .title {
-    font-size: var(--font-size-xxlarge-px);
-    font-weight: var(--font-weight-bold);
-    color: var(--color-text-default-new);
-    @include breakpoints.smallerThanTablet {
-        font-size: var(--font-size-xlarge-px);
-    }
+  font-size: var(--font-size-xxlarge-px);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-default-new);
+  @include breakpoints.smallerThanTablet {
+    font-size: var(--font-size-xlarge-px);
+  }
 }
 
 .subtitle {
-    font-size: var(--font-size-normal);
-    color: var(--color-text-default-new);
-    margin-block-end: var(--spacing-large-px);
-    @include breakpoints.smallerThanTablet {
-        margin-block-end: var(--spacing-medium2-px);
-    }
+  font-size: var(--font-size-normal);
+  color: var(--color-text-default-new);
+  margin-block-end: var(--spacing-large-px);
+  @include breakpoints.smallerThanTablet {
+    margin-block-end: var(--spacing-medium2-px);
+  }
 }
 
 .trackingButton {
-    text-decoration: underline;
-    color: var(--color-text-faded-new);
+  text-decoration: underline;
+  color: var(--color-text-faded-new);
 }
 
 .progressCard {
-    background-color: var(--color-background-elevated-new);
-    border-radius: var(--border-radius-default);
-    padding: var(--spacing-large-px);
-    @include theme.light {
-        box-shadow: 0px 4px 25px 0px rgba(0, 0, 0, 0.1);
-    }
-    @include theme.dark {
-        box-shadow: 0px 4px 25px 0px rgba(0, 0, 0, 0.8);
-    }
-    @include theme.sepia {
-        box-shadow: 0px 4px 25px 0px rgba(0, 0, 0, 0.1);
-    }
+  background-color: var(--color-background-elevated-new);
+  border-radius: var(--border-radius-default);
+  padding: var(--spacing-large-px);
+  @include theme.light {
+    box-shadow: 0px 4px 25px 0px rgba(0, 0, 0, 0.1);
+  }
+  @include theme.dark {
+    box-shadow: 0px 4px 25px 0px rgba(0, 0, 0, 0.8);
+  }
+  @include theme.sepia {
+    box-shadow: 0px 4px 25px 0px rgba(0, 0, 0, 0.1);
+  }
 }
 
 .monthsRow {
-    display: flex;
-    gap: var(--spacing-large-px);
-    margin-bottom: var(--spacing-medium);
+  display: flex;
+  gap: var(--spacing-large-px);
+  margin-block-end: var(--spacing-medium);
 }
 
 .monthCard {
-    flex: 1;
-    border: 1px solid var(--color-borders-hairline);
-    border-radius: var(--border-radius-default);
-    padding: var(--spacing-large-px);
-    background-color: var(--color-background-elevated-new);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
+  flex: 1;
+  border: 1px solid var(--color-borders-hairline);
+  border-radius: var(--border-radius-default);
+  padding: var(--spacing-large-px);
+  background-color: var(--color-background-elevated-new);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .monthTitle {
-    font-size: var(--font-size-xxlarge-px);
-    font-weight: var(--font-weight-medium);
-    margin-bottom: var(--spacing-medium2-px);
-    text-align: center;
-    color: var(--color-text-default-new);
-    @include breakpoints.smallerThanTablet {
-        font-size: var(--font-size-large-px);
-    }
+  font-size: var(--font-size-xxlarge-px);
+  font-weight: var(--font-weight-medium);
+  margin-block-end: var(--spacing-medium2-px);
+  text-align: center;
+  color: var(--color-text-default-new);
+  @include breakpoints.smallerThanTablet {
+    font-size: var(--font-size-large-px);
+  }
 }
 
 .currentMonthTitle {
-    font-weight: var(--font-weight-extra-bold);
+  font-weight: var(--font-weight-extra-bold);
 }
 
 .weekLabel {
-    font-size: var(--font-size-small-px);
-    color: var(--color-text-faded-new);
-    text-align: center;
-    margin-bottom: var(--spacing-small-px);
-    @include breakpoints.smallerThanTablet {
-        font-size: var(--font-size-xsmall-px);
-    }
+  font-size: var(--font-size-small-px);
+  color: var(--color-text-faded-new);
+  text-align: center;
+  margin-block-end: var(--spacing-small-px);
+  @include breakpoints.smallerThanTablet {
+    font-size: var(--font-size-xsmall-px);
+  }
 }
 
 .weeksRow {
-    display: flex;
-    justify-content: center;
-    gap: var(--spacing-small-px);
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-small-px);
 }
 
 .weekItem {
-    display: flex;
-    width: var(--spacing-large-px);
-    height: var(--spacing-large-px);
-    padding: var(--spacing-small-px);
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: var(--spacing-small-px);
-    cursor: pointer;
-    font-size: var(--font-size-large-px);
-    border-radius: var(--border-radius-medium-px);
-    background-color: var(--color-background-alternative-faint);
-    @include breakpoints.smallerThanTablet {
-        font-size: var(--font-size-normal-px);
-        width: var(--spacing-medium2-px);
-        height: var(--spacing-medium2-px);
-    }
+  display: flex;
+  inline-size: var(--spacing-large-px);
+  block-size: var(--spacing-large-px);
+  padding: var(--spacing-small-px);
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: var(--spacing-small-px);
+  cursor: pointer;
+  font-size: var(--font-size-large-px);
+  border-radius: var(--border-radius-medium-px);
+  background-color: var(--color-background-alternative-faint);
+  @include breakpoints.smallerThanTablet {
+    font-size: var(--font-size-normal-px);
+    inline-size: var(--spacing-medium2-px);
+    block-size: var(--spacing-medium2-px);
+  }
 }
 
 .weekItemCompleted {
-    background-color: var(--color-green-light) !important;
-    color: var(--color-streaks-dark) !important;
+  background-color: var(--color-green-light) !important;
+  color: var(--color-streaks-dark) !important;
 }
 
 .weekItemActive {
-    background-color: var(--color-black-buttons) !important;
-    color: var(--color-text-inverse) !important;
+  background-color: var(--color-black-buttons) !important;
+  color: var(--color-text-inverse) !important;
 }
 
 .weekItemPassed {
-    background-color: var(--color-scholars-say-background) !important;
-    color: var(--color-scholars-say-text) !important;
+  background-color: var(--color-scholars-say-background) !important;
+  color: var(--color-scholars-say-text) !important;
 }
 
 .completedWeeks {
-    display: flex;
-    padding: var(--spacing-xxsmall-px) var(--spacing-medium-px);
-    align-items: center;
-    gap: var(--spacing-xxsmall-px);
-    border-radius: var(--spacing-medium2-px);
-    background: var(--color-scholars-say-background);
-    font-size: var(--font-size-normal-px);
-    color: var(--color-scholars-say-text);
-    font-weight: var(--font-weight-semibold);
+  display: flex;
+  padding: var(--spacing-xxsmall-px) var(--spacing-medium-px);
+  align-items: center;
+  gap: var(--spacing-xxsmall-px);
+  border-radius: var(--spacing-medium2-px);
+  background: var(--color-scholars-say-background);
+  font-size: var(--font-size-normal-px);
+  color: var(--color-scholars-say-text);
+  font-weight: var(--font-weight-semibold);
 
-    @include breakpoints.smallerThanTablet {
-        font-size: var(--font-size-xsmall-px);
-    }
+  @include breakpoints.smallerThanTablet {
+    font-size: var(--font-size-xsmall-px);
+  }
 }
 
 .endOfCalendarLabel {
-    font-size: var(--font-size-normal);
-    color: var(--color-text-faded-new);
-    text-align: center;
-    margin: var(--spacing-medium) 0;
+  font-size: var(--font-size-normal);
+  color: var(--color-text-faded-new);
+  text-align: center;
+  margin: var(--spacing-medium) 0;
 }
 
 .completeLabel {
-    display: flex;
-    height: var(--spacing-xxlarge-px);
-    padding: var(--spacing-xxsmall-px) var(--spacing-small-px);
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: var(--spacing-small-px);
-    align-self: stretch;
-    border-radius: var(--border-radius-medium-px);
-    background: var(--color-background-alternative-faint);
-    font-size: var(--font-size-large-px);
-    font-weight: var(--font-weight-semibold);
+  display: flex;
+  block-size: var(--spacing-xxlarge-px);
+  padding: var(--spacing-xxsmall-px) var(--spacing-small-px);
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: var(--spacing-small-px);
+  align-self: stretch;
+  border-radius: var(--border-radius-medium-px);
+  background: var(--color-background-alternative-faint);
+  font-size: var(--font-size-large-px);
+  font-weight: var(--font-weight-semibold);
 }
 
 .completeLabelCompleted {
-    background: var(--color-green-light);
-    color: var(--color-streaks-dark);
+  background: var(--color-green-light);
+  color: var(--color-streaks-dark);
 }
 
 .disabled {
-    cursor: default;
+  cursor: default;
 }

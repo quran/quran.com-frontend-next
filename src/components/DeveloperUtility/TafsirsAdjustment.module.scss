@@ -1,5 +1,5 @@
 .select {
   background-color: white;
-  width: 100%;
-  height: calc(5 * var(--spacing-mega));
+  inline-size: 100%;
+  block-size: calc(5 * var(--spacing-mega));
 }

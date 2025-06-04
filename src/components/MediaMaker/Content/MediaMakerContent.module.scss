@@ -4,26 +4,26 @@ $white: #ffffff;
   position: absolute;
   inset-block-start: 0;
   inset-block-end: 0;
-  width: 100%;
-  height: 100%;
+  inline-size: 100%;
+  block-size: 100%;
   overflow: hidden;
 }
 
 .videoContainer video {
   /* Make video to at least 100% wide and tall */
-  min-width: 100%;
-  min-height: 100%;
+  min-inline-size: 100%;
+  min-block-size: 100%;
 
   /* Setting width & height to auto prevents the browser from stretching or squishing the video */
-  width: auto;
-  height: auto;
+  inline-size: auto;
+  block-size: auto;
 
   /* Center the video */
   position: absolute;
   inset-block-start: 50%;
   inset-inline-start: 50%;
   transform: translate(-50%, -50%);
-  [dir="rtl"] & {
+  [dir='rtl'] & {
     transform: translate(50%, -50%);
   }
   object-fit: cover;
@@ -35,7 +35,7 @@ $white: #ffffff;
 }
 
 .verseJustified {
-  width: 100%;
+  inline-size: 100%;
   text-align: justify;
   padding: 0 2rem;
 }
@@ -46,20 +46,20 @@ $white: #ffffff;
 }
 
 .verseTranslationJustified {
-  width: 100%;
+  inline-size: 100%;
   padding: 0.5rem 2rem;
   text-align: justify;
 }
 
 .translation {
   direction: ltr;
-  font-family: "Figtree" !important;
+  font-family: 'Figtree' !important;
 }
 .watermark {
   text-align: center;
   color: $white;
   font-size: 28px;
-  font-family: "Figtree" !important;
+  font-family: 'Figtree' !important;
   font-weight: var(--font-weight-bold);
 }
 
@@ -74,7 +74,7 @@ $white: #ffffff;
 .logo {
   font-weight: 700;
   font-size: 42px;
-  font-family: "PlayfairDisplay" !important;
+  font-family: 'PlayfairDisplay' !important;
 }
 
 .logoPortrait {
@@ -87,7 +87,7 @@ $white: #ffffff;
 
 .space {
   display: inline-block;
-  width: 5px;
+  inline-size: 5px;
 }
 
 .chapterTitle {
@@ -102,22 +102,22 @@ $white: #ffffff;
 }
 
 .indopakFont {
-  font-family: "Indopak" !important;
+  font-family: 'Indopak' !important;
 }
 
 .uthmaniFont {
-  font-family: "UthmanicHafs" !important;
+  font-family: 'UthmanicHafs' !important;
 }
 
 .surahEnglish {
   font-size: 24px;
   font-weight: 400;
   color: $white;
-  font-family: "Figtree" !important;
+  font-family: 'Figtree' !important;
 }
 
 .surahArabic {
-  font-family: "NotoNastaliq" !important;
+  font-family: 'NotoNastaliq' !important;
   font-weight: 400;
   font-size: 30px;
   color: $white;
@@ -125,9 +125,9 @@ $white: #ffffff;
 
 .verseContainer {
   justify-content: center !important;
-  width: fit-content !important;
-  max-width: 97% !important;
-  height: fit-content !important;
+  inline-size: fit-content !important;
+  max-inline-size: 97% !important;
+  block-size: fit-content !important;
   margin: auto !important;
   border: 2px gray solid !important;
   border-radius: 20px !important;
@@ -139,13 +139,13 @@ $white: #ffffff;
 }
 
 .verseLandscape {
-  min-width: 60% !important;
-  min-height: 50% !important;
-  max-height: 70% !important;
+  min-inline-size: 60% !important;
+  min-block-size: 50% !important;
+  max-block-size: 70% !important;
 }
 
 .versePortrait {
-  min-width: 80% !important;
-  min-height: 25% !important;
-  max-height: 74.5% !important;
+  min-inline-size: 80% !important;
+  min-block-size: 25% !important;
+  max-block-size: 74.5% !important;
 }

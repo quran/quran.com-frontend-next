@@ -25,7 +25,7 @@
 }
 
 .monthName {
-  width: calc(3 * var(--spacing-mega));
+  inline-size: calc(3 * var(--spacing-mega));
   text-align: center;
 }
 

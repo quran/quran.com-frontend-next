@@ -1,9 +1,9 @@
-@use "src/styles/breakpoints";
+@use 'src/styles/breakpoints';
 
 .item {
   border: 1px solid var(--color-background-alternative-deep);
   border-radius: var(--border-radius-default);
-  min-height: calc(4 * var(--spacing-medium));
+  min-block-size: calc(4 * var(--spacing-medium));
   margin-block-end: var(--spacing-small);
   &:hover {
     background: var(--color-background-alternative-medium);
@@ -20,7 +20,7 @@
 }
 
 .sectionContainer {
-  height: calc(2 * var(--spacing-large));
+  block-size: calc(2 * var(--spacing-large));
 }
 
 .container {
@@ -34,12 +34,12 @@
 }
 
 .leftContainer {
-  width: 70%;
+  inline-size: 70%;
   display: flex;
 }
 
 .number {
-  min-width: calc(2 * var(--spacing-large));
+  min-inline-size: calc(2 * var(--spacing-large));
   margin-block-start: 0;
   margin-inline-end: 0;
   margin-block-end: 0;

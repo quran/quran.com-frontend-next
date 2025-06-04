@@ -13,8 +13,8 @@
 .itemIcon {
   display: flex;
   --icon-size: var(--spacing-medium);
-  width: var(--icon-size);
+  inline-size: var(--icon-size);
   > svg {
-    width: 100%;
+    inline-size: 100%;
   }
 }

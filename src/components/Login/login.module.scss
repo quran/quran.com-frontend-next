@@ -1,22 +1,22 @@
-@use "src/styles/theme";
-@use "src/styles/breakpoints";
+@use 'src/styles/theme';
+@use 'src/styles/breakpoints';
 
 $container-width: 370px;
 
 .outerContainer {
-  min-height: 80vh;
+  min-block-size: 80vh;
   display: flex;
   justify-content: center;
   align-items: center;
   padding: var(--spacing-mega);
   flex-direction: column;
   background-color: var(--color-background-default);
-  max-width: 400px;
+  max-inline-size: 400px;
   margin-inline: auto;
 }
 
 .innerContainer {
-  width: 100%;
+  inline-size: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -30,10 +30,10 @@ $container-width: 370px;
   font-size: var(--font-size-normal-px);
   color: var(--color-text-default);
   text-align: center;
-  margin-bottom: var(--spacing-xsmall-px);
+  margin-block-end: var(--spacing-xsmall-px);
   @include breakpoints.desktop {
     font-size: var(--font-size-xlarge-px);
-    margin-bottom: var(--spacing-large);
+    margin-block-end: var(--spacing-large);
   }
 }
 
@@ -41,7 +41,7 @@ $container-width: 370px;
   text-align: center;
   margin-block-end: var(--spacing-xlarge);
   color: var(--color-text-default);
-  max-width: 400px;
+  max-inline-size: 400px;
   font-size: var(--font-size-xsmall-px);
 }
 
@@ -69,17 +69,17 @@ $container-width: 370px;
   text-align: center;
 
   svg {
-    height: 20px;
-    width: auto;
+    block-size: 20px;
+    inline-size: auto;
     @include breakpoints.desktop {
-      height: 30px;
+      block-size: 30px;
     }
   }
 }
 
 .reflectLogo {
-  height: 40px;
-  width: auto;
+  block-size: 40px;
+  inline-size: auto;
 }
 
 .reflectLogos {
@@ -116,8 +116,7 @@ $container-width: 370px;
 }
 
 .benefitText {
-  margin-left: var(--spacing-micro-px);
-  margin-right: var(--spacing-micro-px);
+  margin-inline: var(--spacing-micro-px);
   text-align: center;
   font-size: var(--font-size-xsmall-px);
 }
@@ -126,11 +125,11 @@ $container-width: 370px;
   display: flex;
   flex-direction: column;
   gap: var(--spacing-medium);
-  width: 100%;
+  inline-size: 100%;
 }
 
 .loginButton {
-  width: 100%;
+  inline-size: 100%;
   justify-content: center;
   padding: var(--spacing-medium);
   font-size: var(--font-size-normal);
@@ -146,8 +145,8 @@ $container-width: 370px;
   }
 
   svg {
-    width: 20px;
-    height: 20px;
+    inline-size: 20px;
+    block-size: 20px;
   }
 }
 
@@ -224,11 +223,11 @@ $container-width: 370px;
 }
 
 .authContainer {
-  width: 100%;
+  inline-size: 100%;
   display: flex;
   flex-direction: column;
   overflow: hidden;
-  max-width: 400px;
+  max-inline-size: 400px;
   margin: 0 auto;
 }
 
@@ -240,10 +239,10 @@ $container-width: 370px;
   padding: var(--spacing-large);
 
   svg {
-    height: 32px;
-    width: auto;
+    block-size: 32px;
+    inline-size: auto;
     @include breakpoints.smallerThanTablet {
-      height: 20px;
+      block-size: 20px;
     }
   }
 }
@@ -254,24 +253,24 @@ $container-width: 370px;
   justify-content: center;
   gap: var(--spacing-small-px);
   svg {
-    height: 29px;
-    width: auto;
+    block-size: 29px;
+    inline-size: auto;
     @include breakpoints.smallerThanTablet {
-      height: 20px;
+      block-size: 20px;
     }
   }
 }
 
 .authTabs {
-  width: 100%;
-  margin-top: var(--spacing-large);
+  inline-size: 100%;
+  margin-block-start: var(--spacing-large);
   display: flex;
   flex-direction: column;
   gap: var(--spacing-large);
 }
 
 .authSwitchContainer {
-  width: 95%;
+  inline-size: 95%;
   margin-inline: auto;
 }
 
@@ -292,21 +291,21 @@ $container-width: 370px;
 }
 
 .formContainer {
-  width: 100%;
+  inline-size: 100%;
   margin-inline: auto;
   display: flex;
   align-items: center;
   flex-direction: column;
   gap: var(--spacing-large);
-  margin-top: var(--spacing-large);
+  margin-block-start: var(--spacing-large);
 
   form {
-    width: 95%;
+    inline-size: 95%;
   }
 
   input {
     border: none;
-    width: 100%;
+    inline-size: 100%;
     background: transparent;
     color: var(--color-text-default);
 
@@ -321,7 +320,7 @@ $container-width: 370px;
 }
 
 .submitButton {
-  width: 100%;
+  inline-size: 100%;
   padding: var(--spacing-medium);
   font-size: var(--font-size-normal);
   font-weight: var(--font-weight-bold);
@@ -331,7 +330,7 @@ $container-width: 370px;
   border: none;
   cursor: pointer;
   transition: all 0.2s ease-in-out;
-  margin-top: var(--spacing-medium);
+  margin-block-start: var(--spacing-medium);
 
   &:hover {
     background-color: var(--color-success-dark);
@@ -339,7 +338,7 @@ $container-width: 370px;
 }
 
 .formActions {
-  width: 95%;
+  inline-size: 95%;
 }
 
 .forgotPassword {
@@ -355,7 +354,7 @@ $container-width: 370px;
 
 .backButton {
   align-self: flex-start;
-  margin-bottom: var(--spacing-medium);
+  margin-block-end: var(--spacing-medium);
   color: var(--color-text-default);
   cursor: pointer;
   display: flex;
@@ -367,8 +366,8 @@ $container-width: 370px;
   padding: 0;
 
   svg {
-    width: 20px;
-    height: 20px;
+    inline-size: 20px;
+    block-size: 20px;
   }
 }
 
@@ -379,12 +378,12 @@ $container-width: 370px;
   margin-block-end: var(--spacing-xlarge);
   border-block-end: 1px solid var(--color-borders-hairline);
   padding-block-end: var(--spacing-large);
-  width: 100%;
+  inline-size: 100%;
   justify-content: center;
 
   svg {
-    height: 32px;
-    width: auto;
+    block-size: 32px;
+    inline-size: auto;
   }
 }
 
@@ -395,7 +394,7 @@ $container-width: 370px;
   justify-content: center;
   padding: var(--spacing-mega);
   gap: var(--spacing-medium);
-  width: 400px;
+  inline-size: 400px;
   margin: 0 auto;
 }
 
@@ -403,11 +402,11 @@ $container-width: 370px;
   display: flex;
   flex-direction: column;
   gap: var(--spacing-medium);
-  width: 100%;
+  inline-size: 100%;
 }
 
 .formField {
-  width: 100%;
+  inline-size: 100%;
   padding: var(--spacing-medium);
   font-size: var(--font-size-normal);
   border: 1px solid var(--color-borders-hairline);
@@ -429,13 +428,13 @@ $container-width: 370px;
   text-align: center;
   color: var(--color-text-default);
   font-size: var(--font-size-medium);
-  margin-top: var(--spacing-large);
+  margin-block-start: var(--spacing-large);
 }
 
 .servicesContainer {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  inline-size: 100%;
   margin-block-start: var(--spacing-small-px);
   border: 1px solid var(--color-text-default);
   border-radius: var(--border-radius-rounded);
@@ -453,9 +452,9 @@ $container-width: 370px;
 }
 
 .serviceDivider {
-  width: 95%;
+  inline-size: 95%;
   border: none;
-  border-top: 1px solid var(--color-borders-hairline);
+  border-block-start: 1px solid var(--color-borders-hairline);
   margin: auto;
 }
 

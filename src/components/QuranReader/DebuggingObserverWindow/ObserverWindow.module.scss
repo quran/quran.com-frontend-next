@@ -7,7 +7,7 @@ $reading-mode-bottom: 70vh;
   position: fixed;
   inset-block: $default-mode-top $default-mode-bottom;
   z-index: var(--z-index-sticky);
-  width: 100%;
+  inline-size: 100%;
   border: 1px solid var(--color-background-inverse);
 }
 

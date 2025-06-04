@@ -1,5 +1,5 @@
-@use "src/styles/breakpoints";
-@use "src/styles/utility";
+@use 'src/styles/breakpoints';
+@use 'src/styles/utility';
 
 .line {
   text-align: center;
@@ -18,5 +18,5 @@
 }
 
 .fixedWidth {
-  width: var(--line-width, auto);
+  inline-size: var(--line-width, auto);
 }

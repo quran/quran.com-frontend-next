@@ -1,4 +1,4 @@
-@use "sass:math";
+@use 'sass:math';
 
 // animations
 @mixin transform {
@@ -52,8 +52,7 @@
 
   @for $i from 2 through 5 {
     &:nth-last-child(#{$i}) {
-      transform: translate3d(0, #{$i * -7}px, 0)
-        scale(#{math.div(100 - $i, 100)});
+      transform: translate3d(0, #{$i * -7}px, 0) scale(#{math.div(100 - $i, 100)});
     }
   }
 
@@ -92,14 +91,14 @@
 .toastContainer {
   box-shadow: none;
   --toastify-toast-width: 480px;
-  min-height: calc(10 * var(--spacing-large));
+  min-block-size: calc(10 * var(--spacing-large));
 }
 
 .contentContainer {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  [dir="rtl"] & {
+  [dir='rtl'] & {
     flex-direction: row-reverse;
   }
 }
