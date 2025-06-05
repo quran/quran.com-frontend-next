@@ -8,6 +8,7 @@ import SignInPasswordField from './SignInForm/SignInPasswordField';
 import getFormErrors, { ErrorType } from './SignUpForm/errors';
 import { getEmailField } from './SignUpFormFields/credentialFields';
 
+import Input, { InputVariant } from '@/components/dls/Forms/Input';
 import FormBuilder from '@/components/FormBuilder/FormBuilder';
 import { FormBuilderFormField } from '@/components/FormBuilder/FormBuilderTypes';
 import Button, { ButtonShape, ButtonType } from '@/dls/Button/Button';
@@ -33,7 +34,14 @@ const SignInForm: FC<Props> = ({ redirect }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const formFields: FormBuilderFormField[] = [
-    getEmailField(t),
+    {
+      ...getEmailField(t),
+      customRender: (props) => (
+        <Input {...props} id="email" variant={InputVariant.AuthForm} htmlType="email" />
+      ),
+      errorClassName: styles.errorText,
+      containerClassName: styles.inputContainer,
+    },
     {
       field: 'password',
       type: FormFieldType.Password,
@@ -46,6 +54,8 @@ const SignInForm: FC<Props> = ({ redirect }) => {
         },
       ],
       customRender: SignInPasswordField,
+      errorClassName: styles.errorText,
+      containerClassName: styles.inputContainer,
     },
   ];
 
@@ -69,15 +79,25 @@ const SignInForm: FC<Props> = ({ redirect }) => {
   };
 
   const renderAction = (props) => (
-    <Button
-      {...props}
-      block
-      shape={ButtonShape.Pill}
-      type={ButtonType.Success}
-      className={styles.submitButton}
-    >
-      {t('continue')}
-    </Button>
+    <>
+      <Link
+        href={getForgotPasswordNavigationUrl()}
+        variant={LinkVariant.Primary}
+        className={styles.forgotPassword}
+      >
+        {t('forgot-password')}?
+      </Link>
+
+      <Button
+        {...props}
+        block
+        shape={ButtonShape.Pill}
+        type={ButtonType.Success}
+        className={styles.submitButton}
+      >
+        {t('continue')}
+      </Button>
+    </>
   );
 
   return (
@@ -87,16 +107,8 @@ const SignInForm: FC<Props> = ({ redirect }) => {
         onSubmit={handleSubmit}
         renderAction={renderAction}
         isSubmitting={isSubmitting}
+        shouldSkipValidation
       />
-      <div className={styles.formActions}>
-        <Link
-          href={getForgotPasswordNavigationUrl()}
-          variant={LinkVariant.Primary}
-          className={styles.forgotPassword}
-        >
-          {t('forgot-password')}?
-        </Link>
-      </div>
     </div>
   );
 };

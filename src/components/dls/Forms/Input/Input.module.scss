@@ -136,3 +136,133 @@
   padding-inline-start: var(--spacing-xsmall);
   padding-inline-end: var(--spacing-xxsmall);
 }
+
+.container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid var(--color-borders-hairline);
+  border-radius: var(--border-radius-rounded);
+  padding-inline: var(--spacing-small);
+
+  &.fixedWidth {
+    width: calc(8 * var(--spacing-mega));
+  }
+
+  &.fullWidth {
+    width: 100%;
+  }
+
+  &.disabled,
+  &.disabled * {
+    background: var(--color-background-alternative-medium);
+    pointer-events: none;
+    cursor: not-allowed;
+  }
+
+  &.error {
+    border-color: var(--color-error-deep);
+  }
+
+  &.success {
+    border-color: var(--color-success-medium);
+  }
+
+  &.warning {
+    border-color: var(--color-warning-medium);
+  }
+
+  &.authForm {
+    border-color: var(--color-border-gray-lighter);
+  }
+}
+
+.smallContainer {
+  @extend .container;
+  height: var(--spacing-mega);
+}
+
+.mediumContainer {
+  @extend .container;
+  height: var(--spacing-large);
+}
+
+.largeContainer {
+  @extend .container;
+  height: var(--spacing-xlarge);
+}
+
+.authContainer {
+  @extend .container;
+  height: var(--spacing-xxlarge-px);
+  border-radius: var(--border-radius-medium-px);
+  border: 1px solid var(--color-border-gray-lighter);
+  padding-inline: 0;
+  width: 100%;
+
+  &:hover,
+  &:focus-within {
+    border-color: var(--color-success-medium);
+  }
+
+  &.authForm {
+    &:hover,
+    &:focus-within {
+      border-color: var(--color-success-medium);
+    }
+  }
+}
+
+.main {
+  padding-inline: var(--spacing-xsmall);
+  padding-block: var(--spacing-xsmall);
+}
+
+.input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  font-size: var(--font-size-normal);
+  color: var(--color-text-default);
+
+  &.disabled,
+  &:disabled {
+    cursor: not-allowed;
+  }
+
+  &.error {
+    color: var(--color-error-deep);
+  }
+
+  &.success {
+    color: var(--color-success-medium);
+  }
+
+  &.warning {
+    color: var(--color-warning-medium);
+  }
+
+  &.authForm {
+    color: var(--color-text-default);
+  }
+}
+
+.authInput {
+  @extend .input;
+  padding-inline: calc(var(--spacing-xsmall-px) * 2);
+  height: 100%;
+  margin: 0;
+
+  &::placeholder {
+    color: var(--color-border-gray-light) !important;
+  }
+}
+
+// RTL support
+.rtlInput {
+  [dir="rtl"] & {
+    direction: rtl;
+  }
+}
