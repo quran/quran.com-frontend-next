@@ -8,6 +8,7 @@
     - data: Allows data: URIs to be used as a content source. Currently we use data to embed some images inline e.g. the App Store images in the Side Menu Drawer.
   - media-src: specifies valid sources for loading media using the <audio> and <video> elements. Currently we only allow audio from quranicaudio.com.
   - connect-src: restricts the URLs that we can connect to using script interfaces including <a>, XMLHttpRequest, WebSocket. Currently we allow all URLs.
+  - worker-src: specifies valid sources for Worker, SharedWorker, or ServiceWorker scripts. Required for Sentry Session Replay.
 */
 const ContentSecurityPolicy = `
   default-src 'self' *.qurancdn.com cdn.plaid.com;
@@ -15,6 +16,8 @@ const ContentSecurityPolicy = `
   font-src 'self' 'unsafe-inline' 'unsafe-eval' givingloop.org fonts.gstatic.com https://www.givingloop.org;
   frame-src 'self' 'unsafe-inline' 'unsafe-eval' https://js.stripe.com/v3 js.stripe.com  https://www.paypal.com www.paypal.com https://wchat.eu.freshchat.com https://www.google.com www.google.com www.youtube.com;
   style-src 'self' 'unsafe-inline' 'unsafe-eval' *.givingloop.org givingloop.org fonts.googleapis.com fonts.googleapis.com wchat.eu.freshchat.com;
+  worker-src 'self' blob:;
+  child-src 'self' blob:;
   img-src * data:;
   media-src 'self' data: blob: *.quranicaudio.com *.qurancdn.com https://qurancdn.com https://images.quran.com;
   connect-src *;
