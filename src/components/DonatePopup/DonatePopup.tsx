@@ -51,6 +51,7 @@ const DonatePopup = () => {
           <div className={styles.textsContainer}>
             <p className={styles.text}>{t('popup.subtitle')}</p>
             <p className={styles.text}>{t('popup.text-1')}</p>
+            <p className={styles.text}>{t('popup.text-2')}</p>
           </div>
           <div className={styles.actionsContainer}>
             <DonateButton
@@ -71,6 +72,7 @@ const DonatePopup = () => {
               onAdditionalClick={onPopupClose}
             />
           </div>
+          <div className={styles.text}>{t('popup.footnote')}.</div>
         </div>
       </div>
     </Modal>
