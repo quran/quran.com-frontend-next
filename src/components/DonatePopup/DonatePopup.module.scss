@@ -54,8 +54,6 @@
   display: none;
   background-color: var(--color-success-faded);
   color: var(--color-success-medium);
-  border-start-start-radius: var(--border-radius-rounded);
-  border-end-start-radius: var(--border-radius-rounded);
   @include breakpoints.tablet {
     display: inline-flex;
     padding: var(--spacing-medium);
@@ -65,11 +63,4 @@
 
 .modalSize {
   padding: 0px !important;
-  height: fit-content !important;
-
-  @include breakpoints.smallerThanTablet {
-    align-self: flex-end;
-    border-end-end-radius: 0px !important;
-    border-end-start-radius: 0px !important;
-  }
 }
