@@ -1,17 +1,19 @@
+import React from 'react';
+
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
-import { shallowEqual, useSelector } from 'react-redux';
+import { useSelector, shallowEqual } from 'react-redux';
 
 import styles from './Navbar.module.scss';
 import NavbarBody from './NavbarBody';
 
 import Banner from '@/components/Banner/Banner';
 import { useOnboarding } from '@/components/Onboarding/OnboardingProvider';
-import Button, { ButtonShape, ButtonSize, ButtonType } from '@/dls/Button/Button';
+import Button, { ButtonSize, ButtonType, ButtonShape } from '@/dls/Button/Button';
 import DiamondIcon from '@/icons/diamond.svg';
 import { selectNavbar } from '@/redux/slices/navbar';
-import { makeDonatePageUrl } from '@/utils/apiPaths';
 import { logButtonClick } from '@/utils/eventLogger';
+import { getBeyondRamadanNavigationUrl } from '@/utils/navigation';
 
 const Navbar = () => {
   const { isActive } = useOnboarding();
@@ -25,12 +27,12 @@ const Navbar = () => {
       <nav className={classNames(styles.container, { [styles.hiddenNav]: !showNavbar })}>
         <Banner
           shouldShowPrefixIcon={false}
-          text={t('best-days-banner')}
+          text={t('beyond-ramadan')}
           ctaButton={
             <Button
-              href={makeDonatePageUrl(false, true)}
+              href={getBeyondRamadanNavigationUrl()}
               onClick={() => {
-                logButtonClick('navbar_best_days');
+                logButtonClick('navbar_beyond_ramadan');
               }}
               isNewTab
               size={ButtonSize.Small}
@@ -39,7 +41,7 @@ const Navbar = () => {
               className={styles.donateButton}
               prefix={<DiamondIcon />}
             >
-              {t('donate')}
+              {t('learn-more')}
             </Button>
           }
         />
