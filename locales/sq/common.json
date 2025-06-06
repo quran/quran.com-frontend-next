@@ -210,7 +210,7 @@
     "translation-font-size": "Madhësia e shkronjave të përkthimit"
   },
   "footer": {
-    "description": "Quran.com është një platformë e besuar e përdorur nga miliona njerëz në mbarë botën për të lexuar, kërkuar, dëgjuar dhe reflektuar mbi Kuranin në shumë gjuhë. Ai ofron përkthime, tefsir, recitime, përkthim fjalë për fjalë dhe mjete për studim më të thellë, duke e bërë Kuranin të arritshëm për të gjithë. <br/> <br/> Si një Jariyah Sadakah, Quran.com është i përkushtuar për të ndihmuar njerëzit të lidhen thellë me Kuranin. Mbështetur nga <link>Quran.Foundation</link>, një organizatë jofitimprurëse 501(c)(3), Quran.com vazhdon të rritet si një burim falas dhe i vlefshëm për të gjithë, Alhamdullilah”.",
+    "description": "Quran.com është një platformë e besuar e përdorur nga miliona njerëz në mbarë botën për të lexuar, kërkuar, dëgjuar dhe reflektuar mbi Kuranin në shumë gjuhë. Ai ofron përkthime, tefsir, recitime, përkthim fjalë për fjalë dhe mjete për studim më të thellë, duke e bërë Kuranin të arritshëm për të gjithë. <br/> <br/> Si një Jariyah Sadakah, Quran.com është i përkushtuar për të ndihmuar njerëzit të lidhen thellë me Kuranin. Mbështetur nga <link>Quran.Foundation</link>, një organizatë jofitimprurëse 501(c)(3), Quran.com vazhdon të rritet si një burim falas dhe i vlefshëm për të gjithë, Alhamdullilah.",
     "hiring": "Ne po punësojmë! Bashkohuni me ekipin e QuranFoundation dhe kontribuoni në misionin tonë. <link> Apliko tani! </link>",
     "rights": "Të gjitha të drejtat e rezervuara",
     "title": "Lexoni, dëgjoni, kërkoni dhe reflektoni mbi Kuranin"
@@ -296,9 +296,9 @@
   "popup": {
     "companion-title": "I dashur shok i Kur'anit,",
     "footnote": "Donacionet mujore na lejojnë të fokusohemi më pak në mbledhjen e fondeve",
-    "subtitle": "\"Nuk ka ditë gjatë të cilave vepra e mirë është më e këndshme për Allahun sesa këto ditë\" [Rijad es-Salihin 1249]",
+    "subtitle": "\"Nuk ka ditë gjatë të cilave vepra e mirë është më e këndshme për Allahun sesa këto ditë\" [El-Buhari 969]",
     "text-1": "Ne jemi të përkushtuar t'i shërbejmë njohurive dhe teknologjisë botërore kuranore, gjithmonë falas.",
-    "text-2": "Mundësia e përsosur për bamirësi të vazhdueshme (Sadaka Jariyah). Investoni në Ahiretin tuaj si donator mujor (ose një herë).",
+    "text-2": "Mundësia perfekte për bamirësi të vazhdueshme (Sadaqa Jariyah). Investoni në Ahiretin tuaj si një donator mujor (ose një herë).",
     "title": "Dhuro në ditët më të mira!"
   },
   "powered-by": "Mundësuar nga",

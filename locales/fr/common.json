@@ -210,7 +210,7 @@
     "translation-font-size": "Taille de la police de traduction"
   },
   "footer": {
-    "description": "Quran.com est une plateforme de confiance utilisée par des millions de personnes dans le monde pour lire, rechercher, écouter et réfléchir sur le Coran en plusieurs langues. Elle propose des traductions, des tafsir, des récitations, des traductions mot à mot et des outils pour une étude plus approfondie, rendant le Coran accessible à tous. <br/> <br/> En tant que Sadaqah Jariyah, Quran.com se consacre à aider les gens à se connecter profondément au Coran. Soutenu par <link>Quran.Foundation</link>, une organisation à but non lucratif 501(c)(3), Quran.com continue de se développer en tant que ressource gratuite et précieuse pour tous, Alhamdullilah”",
+    "description": "Quran.com est une plateforme de confiance utilisée par des millions de personnes dans le monde pour lire, rechercher, écouter et réfléchir sur le Coran en plusieurs langues. Elle propose des traductions, des tafsir, des récitations, des traductions mot à mot et des outils pour une étude plus approfondie, rendant le Coran accessible à tous. <br/> <br/> En tant que Sadaqah Jariyah, Quran.com se consacre à aider les gens à se connecter profondément au Coran. Soutenu par <link>Quran.Foundation</link>, une organisation à but non lucratif 501(c)(3), Quran.com continue de se développer en tant que ressource gratuite et précieuse pour tous, Alhamdullilah",
     "hiring": "Nous recrutons ! Rejoignez l'équipe de QuranFoundation et contribuez à notre mission. <link> Postulez maintenant ! </link>",
     "rights": "Tous droits réservés",
     "title": "Lisez, écoutez, recherchez et réfléchissez sur le Coran"
@@ -296,9 +296,9 @@
   "popup": {
     "companion-title": "Cher compagnon du Coran,",
     "footnote": "Les dons mensuels nous permettent de moins nous concentrer sur la collecte de fonds",
-    "subtitle": "« Il n'y a pas de jours où la bonne action est aussi agréable à Allah que ces jours-ci » [Riyad as-Salihin 1249]",
+    "subtitle": "« Il n'y a pas de jours où la bonne action est aussi agréable à Allah que ces jours-ci » [Al-Bukhari 969]",
     "text-1": "Nous nous engageons à transmettre la connaissance du Coran gratuitement pour toutes et tous.",
-    "text-2": "L’occasion idéale pour une charité continue (Sadaqa Jariyah). Investissez dans votre au-delà en tant que donateur mensuel (ou ponctuel).",
+    "text-2": "L'occasion idéale de faire une charité continue (Sadaqa Jariyah). Investissez dans votre avenir en faisant un don mensuel (ou ponctuel).",
     "title": "Donnez pendant les meilleurs jours !"
   },
   "powered-by": "Propulsé par",

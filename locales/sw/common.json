@@ -93,7 +93,7 @@
   "ayah": "Aya",
   "ayahs": "Aya",
   "beta": "Beta",
-  "beyond-ramadan": "Kukua Zaidi ya Ramadhani!",
+  "beyond-ramadan": "Jiendeleze Baada ya Ramadhani!",
   "bookmark": "Alamisha",
   "bookmarked": "Zilizoalamishwa",
   "both": "Zote mbili",
@@ -103,14 +103,14 @@
   "command-bar": {
     "navigations": "Uchunguzi",
     "no-nav-results": "Hakuna matokeo",
-    "placeholder": "Tafuta Quran...",
+    "placeholder": "Pekua Quran...",
     "recent-navigations": "Uchunguzi wa hivi majuzi",
     "search-by-voice": "Tafuta kutumia sauti",
     "try-navigating": "Nenda hadi"
   },
   "community": {
     "cta": "Wasiliana",
-    "header": "Je, ungependa kuchangia ujuzi wako wa kiufundi ili kuendeleza dhamira ya Kurani?",
+    "header": "Je, ungependa kuchangia ujuzi wako wa kiufundi ili kuendeleza dhamira ya Qur'ani?",
     "sub-header": "Shiriki nia yako kwa kujaza fomu hii, na tutawasiliana wakati fursa inayofaa inapatikana, insha'Allah.",
     "title": "Jumuiya"
   },
@@ -122,7 +122,7 @@
     }
   },
   "continue": "Endelea",
-  "contribute-to-our-mission": "Changia kwa utume wetu",
+  "contribute-to-our-mission": "Changia kwa kazi yetu",
   "copied": "Imenakiliwa",
   "copied-to-clipboard": "Imenakiliwa kwenye ubao wa kunakili",
   "copy": "Nakili",
@@ -166,10 +166,10 @@
     "banned": "*Samahani, Akaunti yako imepigwa marufuku. Wasiliana na Quran.Foundation",
     "confirm": "*Thibitisha nenosiri hailingani na nenosiri",
     "email": "*Muundo wa Barua pepe si Sahihi!",
-    "exactLength": "*Thamani lazima iwe urefu kamili",
+    "exactLength": "*Tarakimu lazima iwe urefu kamili",
     "expiredToken": "*Tokeni hii imekwisha muda wake",
     "forgot-password-failed": "Imeshindwa kutuma barua pepe ya kuweka upya nenosiri. Tafadhali jaribu tena.",
-    "immutable": "*Thamani hii haiwezi kubadilishwa",
+    "immutable": "*Tarakimu hii haiwezi kubadilishwa",
     "invalid": "*Hii {{fieldName}} si sahihi",
     "invalidEmailOrPassword": "*Barua pepe au nenosiri batili",
     "max": "* {{fieldName}} lazima iwe chini ya au sawa na tarakimu {{max}}",
@@ -181,8 +181,8 @@
     "signin-failed": "Kuingia kumeshindwa. Tafadhali jaribu tena.",
     "signup-failed": "Kujisajili kumeshindwa. Tafadhali jaribu tena.",
     "taken": "* {{fieldName}} tayari ipo!",
-    "usedToken": "*Toni hii tayari imetumika",
-    "username": "* {{fieldName}} kubali chini na herufi pekee",
+    "usedToken": "*Tokeni hii tayari imetumika",
+    "username": "* {{fieldName}} kubali alama ya chini na herufi pekee",
     "verification-code-invalid": "Nambari hii ya uthibitishaji si sahihi",
     "verification-code-length": "Nambari ya kuthibitisha lazima iwe tarakimu {{length}}",
     "verification-failed": "Uthibitishaji haukufaulu. Tafadhali jaribu tena.",
@@ -210,7 +210,7 @@
     "translation-font-size": "Ukubwa wa fonti ya tarjuma"
   },
   "footer": {
-    "description": "Quran.com ni jukwaa linaloaminika linalotumiwa na mamilioni ya watu duniani kote kusoma, kutafuta, kusikiliza na kutafakari Kurani katika lugha nyingi. Inatoa tafsiri, tafsir, vikariri, tafsiri ya neno kwa neno, na zana za kusoma kwa kina, na kufanya Quran ipatikane na kila mtu. <br/> <br/> Kama Sadaqah Jariyah, Quran.com imejitolea kusaidia watu kuunganishwa kwa kina na Kurani. Ikiungwa mkono na <link>Quran.Foundation</link>, 501(c)(3) shirika lisilo la faida, Quran.com inaendelea kukua kama rasilimali ya bure na yenye thamani kwa wote, Alhamdullilah\"",
+    "description": "Quran.com ni jukwaa linaloaminika linalotumiwa na mamilioni ya watu duniani kote kusoma, kutafuta, kusikiliza na kutafakari Qur'ani katika lugha nyingi. Inatoa tarjuma, tafsiri, vikariri, tarjuma ya neno kwa neno, na zana za kusoma kwa kina, na kufanya Qur'ani ipatikane na kila mtu. <br/> <br/> Kama Sadaqah Jariyah, Quran.com imejitolea kueneza uhusiano wa kina na Qur'ani. Ikiungwa mkono na <link>Quran.Foundation</link>, 501(c)(3) shirika lisilo la faida, Quran.com inaendelea kukua kama rasilimali ya bure na yenye thamani kwa wote, Alhamdullilah",
     "hiring": "Tunaajiri! Jiunge na timu ya QuranFoundation na uchangie katika dhamira yetu. <link> Tuma ombi sasa! </link>",
     "rights": "Haki Zote Zimehifadhiwa",
     "title": "Soma, Sikiliza, Tafuta, na Tafakari juu ya Quran"
@@ -234,7 +234,7 @@
     "title": "Toa wakati wa siku bora!"
   },
   "fundraising": {
-    "description": "Michango ya kila mwezi hutusaidia kuboresha Quran.com na kudumisha shughuli ili tuzingatie kidogo uchangishaji na zaidi katika kuunda athari.",
+    "description": "Michango ya kila mwezi hutusaidia kuboresha Quran.com na kudumisha shughuli ili tuzingatie kuunda athari na tusizingatie kwa kiwango cha juu uchangishaji.",
     "title": "Kuwa Mfadhili wa Kila Mwezi"
   },
   "get-started": "Anza",
@@ -253,7 +253,7 @@
   "learn-more": "Jifunze zaidi",
   "learning-plans": "Mipango ya Kujifunza",
   "less": "Kidogo",
-  "lessons": "Masomo",
+  "lessons": "Mafunzo",
   "loading": "Inapakia",
   "login": "Ingia",
   "logout": "Ondoka",
@@ -296,10 +296,10 @@
   "popup": {
     "companion-title": "Mpendwa Mwenzi wa Qur'ani,",
     "footnote": "Michango ya kila mwezi huturuhusu kupunguza uchangishaji",
-    "subtitle": "“Hakuna siku ambazo vitendo vyema vinampendeza Mwenyezi Mungu kuliko siku hizi.” [Riyad as-Salihin 1249]",
+    "subtitle": "\"Hakuna siku ambazo vitendo vyema vinampendeza Mwenyezi Mungu kuliko siku hizi\" [Al-Bukhaariy: 969]",
     "text-1": "Tumejitolea kutumikia ulimwengu kupitia elimu ya Qur'ani pamoja na teknolojia, bila malipo.",
     "text-2": "Fursa nzuri ya kutoa sadaka endelevu (Sadaqa Jariyah). Wekeza katika Akhera yako kama mfadhili wa kila mwezi (au mara moja).",
-    "title": "Mpendwa Sahaba wa Quran,"
+    "title": "Toa Wakati wa Siku Bora!"
   },
   "powered-by": "Inaendeshwa na",
   "prepare-hearts": {
@@ -446,7 +446,7 @@
     "language-unavailable": "Kiarabu hakitumiki na kivinjari chako.",
     "network": "Hitilafu ya mtandao. Tafadhali angalia muunganisho wako wa intaneti na ujaribu tena.",
     "no-microphone": "Hakuna maikrofoni iliyotambuliwa. Tafadhali unganisha maikrofoni na ujaribu tena.",
-    "no-permission": "Inaonekana huna ruhusa za maikrofoni zilizowezeshwa. Tafadhali washa ruhusa za maikrofoni na ujaribu tena.",
+    "no-permission": "Inaonekana huna ruhusa za maikrofoni zilizowezeshwa. Tafadhali wezesha ruhusa za maikrofoni na ujaribu tena.",
     "no-speech": "Hakuna hotuba iliyotambuliwa. Tafadhali jaribu kuzungumza tena.",
     "not-supported": "Inaonekana kivinjari chako hakitumii maikrofoni. Tafadhali jaribu kivinjari tofauti.",
     "suggest": "Tafadhali anza kusoma na aya yako itaonekana.",

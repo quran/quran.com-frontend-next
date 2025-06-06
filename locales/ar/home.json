@@ -1,13 +1,14 @@
 {
   "achieve-quran-goals": "حقق أهدافك القرآنية",
-  "begin": "يبدأ",
+  "begin": "ابدأ",
+  "best-day": "لا تفوت مكافآت <modalLink> أفضل الأيام! </modalLink>",
   "calendar-cta": "تقويم",
-  "chapters-and-verses": "الفصول والآيات",
+  "chapters-and-verses": "السور والآيات",
   "continue-read": "متابعة القراءة",
   "explore-topics": "استكشاف المواضيع",
   "first-time-reading": "هل أنت جديد على القرآن الكريم؟ <link> ابدأ من هنا </link>",
-  "grow-beyond-ramadan": "انمو معنا <modalLink> بعد رمضان </modalLink>",
-  "know-someone": "تنمو معنا في <modalLink> رمضان </modalLink>",
+  "grow-beyond-ramadan": "استمرّ في التقدُّم معنا <modalLink> بعد رمضان </modalLink>",
+  "know-someone": "ارتقِ معنا هذا <modalLink>رمضان</modalLink>",
   "learning-plan": "خطط التعلم",
   "listen-to-radio": "استمع إلى راديو القرآن الكريم",
   "my-quran": "قرآني",
@@ -15,7 +16,7 @@
   "no-bookmarks": "ليس لديك أي إشارات مرجعية حتى الآن",
   "no-recently-read": "ليس لديك أي جلسات قراءة بعد",
   "noble-quran": "القرآن الكريم",
-  "popular": "شائع",
+  "popular": "رائج",
   "qgj": {
     "learning-plans": {
       "cta": {
@@ -37,7 +38,7 @@
     },
     "title": "رحلة نمو القرآن"
   },
-  "qr-community": "اقرأ الآيات والتأملات المميزة لهذا اليوم",
+  "qr-community": "اقرأ الآيات والتدبرات المميزة لهذا اليوم",
   "quran-in-year": "القرآن في عام",
   "quran-in-year-cta": "قراءة هذا الأسبوع",
   "ramadan-activities-cta": "<link> اتبع <b> التقويم القرآني العالمي </b> للحصول على قراءات أسبوعية، وبودكاست ملهمة، ودعوة للتأمل! </link>",
@@ -48,14 +49,14 @@
   "read-juz": "اقرأ الجزء",
   "recently-read": "قرئ مؤخرًا",
   "revelation-order-disclaimer": "يُظهر هذا المنظر الترتيب الزمني للسور في القرآن بناءً على وقت نزولها على النبي محمد <hover> ﷺ </hover> . التسلسل الزمني هو موضوع رأي العلماء وبعض السور نزلت مجزئة في أوقات مختلفة. الترتيب هنا يعتمد على عمل <link> Tanzil.net </link> . [ملحوظة: ترتيب المصحف المجمّع من سورة الفاتحة إلى سورة الناس محل إجماع.]",
-  "see-more-learning-plans": "شاهد المزيد",
+  "see-more-learning-plans": "عرض المزيد",
   "set-custom-goal": "حدد هدفا",
   "share-quran": {
     "description": "ساعد في نشر القرآن الكريم للمتعلمين الجدد",
     "title": "شارك القرآن!"
   },
   "start-read": "ابدأ القراءة",
-  "stay-consistent": "تتبع السلاسل، وإنشاء أهداف مخصصة، والبقاء على اتساق",
+  "stay-consistent": "تتبع الاستمرارية، وأنشئ أهدافًا مخصصة، وداوم على الالتزام.",
   "tab": {
     "bookmarks": "إشارات مرجعية",
     "popular": "شائع"
