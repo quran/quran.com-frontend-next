@@ -11,7 +11,7 @@ import IconContainer, { IconSize } from '@/dls/IconContainer/IconContainer';
 import Link, { LinkVariant } from '@/dls/Link/Link';
 import ArrowIcon from '@/public/icons/arrow.svg';
 import { logButtonClick } from '@/utils/eventLogger';
-import { getBestDayNavigationUrl } from '@/utils/navigation';
+import { getBeyondRamadanNavigationUrl } from '@/utils/navigation';
 
 const ShareQuranModal = dynamic(() => import('./ShareQuranModal'), {
   ssr: false,
@@ -20,8 +20,8 @@ const ShareQuranModal = dynamic(() => import('./ShareQuranModal'), {
 const NewCard: React.FC = () => {
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
 
-  const onBestDayClicked = () => {
-    logButtonClick('homepage_best_day');
+  const onShareQuranClicked = () => {
+    logButtonClick('homepage_share_quran');
   };
 
   const onCloseShareModal = () => {
@@ -32,25 +32,25 @@ const NewCard: React.FC = () => {
     <>
       <Card
         onClick={() => {
-          logButtonClick('homepage_best_day');
+          logButtonClick('homepage_grow_beyond_ramadan');
         }}
         className={styles.firstTimeReadingCard}
-        link={getBestDayNavigationUrl()}
+        link={getBeyondRamadanNavigationUrl()}
         isNewTab
       >
         <div className={styles.cardOuterContainer}>
           <div className={styles.cardWithIcon}>
-            <div className={styles.iconContainer}>🕋</div>
+            <div className={styles.iconContainer}>🚀</div>
             <div className={styles.link}>
               <Trans
-                i18nKey="home:best-day"
+                i18nKey="home:grow-beyond-ramadan"
                 components={{
                   modalLink: (
                     <Link
                       variant={LinkVariant.Blend}
-                      href={getBestDayNavigationUrl()}
+                      href={getBeyondRamadanNavigationUrl()}
                       className={styles.linkHref}
-                      onClick={onBestDayClicked}
+                      onClick={onShareQuranClicked}
                       isNewTab
                     />
                   ),
