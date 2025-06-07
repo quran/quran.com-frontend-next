@@ -14,7 +14,6 @@ Sentry.init({
   enabled: SENTRY_ENABLED,
   dsn: SENTRY_ENABLED ? SENTRY_DSN : null,
   debug: isDev,
-  defaultIntegrations: false,
   tracesSampleRate: isDev ? 1 : 0.1,
   replaysOnErrorSampleRate: isDev ? 1 : 0.1,
   // Session replays sample rate - captures 100% of sessions in dev, 10% in production
