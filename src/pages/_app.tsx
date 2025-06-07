@@ -11,7 +11,6 @@ import useSWRImmutable from 'swr/immutable';
 import AudioPlayer from '@/components/AudioPlayer/AudioPlayer';
 import UserAccountModal from '@/components/Auth/UserAccountModal';
 import DeveloperUtility from '@/components/DeveloperUtility/DeveloperUtility';
-import DonatePopup from '@/components/DonatePopup/DonatePopup';
 import FontPreLoader from '@/components/Fonts/FontPreLoader';
 import GlobalListeners from '@/components/GlobalListeners';
 import Navbar from '@/components/Navbar/Navbar';
@@ -33,10 +32,10 @@ import DataContext from 'src/contexts/DataContext';
 import ThemeProvider from 'src/styles/ThemeProvider';
 import { AudioPlayerMachineProvider } from 'src/xstate/AudioPlayerMachineContext';
 
-import 'src/styles/fonts.scss';
-import 'src/styles/global.scss';
 import 'src/styles/reset.scss';
+import 'src/styles/fonts.scss';
 import 'src/styles/theme.scss';
+import 'src/styles/global.scss';
 import 'src/styles/variables.scss';
 
 function MyApp({ Component, pageProps }): JSX.Element {
@@ -76,6 +75,7 @@ function MyApp({ Component, pageProps }): JSX.Element {
             __html: `window.__BUILD_INFO__ = {
               date: "${process.env.NEXT_PUBLIC_BUILD_DATE || new Date().toISOString()}",
               hash: "${process.env.NEXT_PUBLIC_COMMIT_HASH || 'development'}",
+              version: "${process.env.NEXT_PUBLIC_APP_VERSION || ''}",
               env: "${process.env.NEXT_PUBLIC_APP_ENV}"
             }`,
           }}
@@ -106,7 +106,6 @@ function MyApp({ Component, pageProps }): JSX.Element {
                       <Component {...pageProps} />
                       <AudioPlayer />
                       <Footer />
-                      <DonatePopup />
                     </OnboardingProvider>
                   </ThemeProvider>
                   <SessionIncrementor />
