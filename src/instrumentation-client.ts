@@ -22,7 +22,6 @@ Sentry.init({
   integrations: [
     // Add the replay integration for session replays
     Sentry.replayIntegration({
-      maskAllText: true,
       blockAllMedia: true,
     }),
   ],
