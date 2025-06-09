@@ -889,7 +889,7 @@ export const audioPlayerMachine =
           const ayahNumber = getActiveAyahNumber(activeVerseTiming);
           const wordLocation = activeVerseTiming
             ? getActiveWordLocation(activeVerseTiming, context.audioPlayer.currentTime * 1000)
-            : 0;
+            : context?.wordLocation || 0; // fallback to current wordLocation to preserve last known position
           return assign({
             elapsed: context.audioPlayer.currentTime,
             ayahNumber: ayahNumber || context.ayahNumber, // fallback to current ayahNumber if null
