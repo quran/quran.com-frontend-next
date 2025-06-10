@@ -121,7 +121,7 @@ const QuranWord = ({
   );
   const isRecitationEnabled = wordClickFunctionality === WordClickFunctionality.PlayAudio;
 
-  const onClick = useCallback(() => {
+  const handleWordAction = useCallback(() => {
     if (isRecitationEnabled) {
       logButtonClick('quran_word_pronounce');
       const currentState = audioService.getSnapshot();
@@ -142,11 +142,45 @@ const QuranWord = ({
     }
   }, [audioService, isRecitationEnabled, word]);
 
+  const onClick = useCallback(
+    (e: React.MouseEvent) => {
+      // Only handle clicks that are directly on word elements
+      // This prevents word pronunciation when clicking on modal content in Reading mode
+      if (e && e.target) {
+        const target = e.target as Element;
+        const wordElement = e.currentTarget as Element;
+
+        // Ensure the click is on this word element or its children, not bubbled from elsewhere
+        if (!wordElement.contains(target)) {
+          return;
+        }
+
+        // Additional check: ensure we're clicking on the actual word content, not just the container
+        const isClickingOnWordContent = wordElement?.getAttribute(DATA_ATTRIBUTE_WORD_LOCATION);
+        if (!isClickingOnWordContent) {
+          return;
+        }
+      }
+
+      handleWordAction();
+    },
+    [handleWordAction],
+  );
+
+  const onKeyPress = useCallback(
+    (e: React.KeyboardEvent) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        handleWordAction();
+      }
+    },
+    [handleWordAction],
+  );
+
   const shouldHandleWordClicking = word.charTypeName !== CharType.End;
 
   return (
     <div
-      {...(shouldHandleWordClicking && { onClick, onKeyPress: onClick })}
+      {...(shouldHandleWordClicking && { onClick, onKeyPress })}
       role="button"
       tabIndex={0}
       {...{
