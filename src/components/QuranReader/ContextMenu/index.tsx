@@ -10,10 +10,11 @@ import TajweedColors from '../TajweedBar/TajweedBar';
 import ChapterNavigation from './components/ChapterNavigation';
 import MobileReadingTabs from './components/MobileReadingTabs';
 import PageInfo from './components/PageInfo';
+import ProgressBar from './components/ProgressBar';
 import useContextMenuState from './hooks/useContextMenuState';
 import styles from './styles/ContextMenu.module.scss';
 
-import { SwitchSize } from '@/dls/Switch/Switch';
+import { SwitchSize, SwitchVariant } from '@/dls/Switch/Switch';
 import { Mushaf } from '@/types/QuranReader';
 import { isMobile } from '@/utils/responsive';
 
@@ -52,18 +53,15 @@ const ContextMenu: React.FC = (): JSX.Element | null => {
   }
 
   const isMobileScrolledView = !showNavbar && isMobile();
+  const isNotMobileOrScrolledView = !showNavbar || !isMobile();
 
   return (
     <div
       className={classNames(styles.container, {
         [styles.visibleContainer]: showNavbar,
         [styles.withVisibleBanner]: showNavbar,
-        [styles.progressContainer]: !showNavbar,
         [styles.expandedContainer]: isExpanded,
         [styles.withVisibleSideBar]: isSideBarVisible,
-      })}
-      style={Object.assign({} as React.CSSProperties, {
-        ['--progress' as string]: `${progress}%`,
       })}
     >
       {/* Page Information Section as its own row on mobile scrolled view */}
@@ -120,6 +118,7 @@ const ContextMenu: React.FC = (): JSX.Element | null => {
             isIconsOnly={isMobileScrolledView}
             size={SwitchSize.XSmall}
             type={ReadingPreferenceSwitcherType.ContextMenu}
+            variant={SwitchVariant.Alternative}
           />
         </div>
       </div>
@@ -127,6 +126,9 @@ const ContextMenu: React.FC = (): JSX.Element | null => {
       {showNavbar && <MobileReadingTabs t={t} />}
       {/* Tajweed Colors */}
       {mushaf === Mushaf.QCFTajweedV4 && <TajweedColors />}
+
+      {/* Reading progress bar */}
+      {isNotMobileOrScrolledView && <ProgressBar progress={progress} />}
     </div>
   );
 };

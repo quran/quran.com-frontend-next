@@ -37,7 +37,7 @@ $virtual-scrolling-height-bandage: calc(
   padding-block-start: $quran-reader-padding;
   padding-inline-start: 0;
   padding-inline-end: 0;
-  background-color: var(--color-background-default);
+  background-color: var(--color-background-elevated-new);
   background-image: var(--color-background-lighten);
   padding-block-end: $virtual-scrolling-height-bandage;
   @include breakpoints.tablet {

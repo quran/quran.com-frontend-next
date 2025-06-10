@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 import ReadingPreferenceOption from './ReadingPreferenceOption';
 import styles from './ReadingPreferenceSwitcher.module.scss';
 
-import Switch, { SwitchSize } from '@/dls/Switch/Switch';
+import Switch, { SwitchSize, SwitchVariant } from '@/dls/Switch/Switch';
 import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
 import useGetMushaf from '@/hooks/useGetMushaf';
 import {
@@ -30,14 +30,12 @@ export enum ReadingPreferenceSwitcherType {
 /**
  * Props for the ReadingPreferenceSwitcher component
  */
-interface ReadingPreferenceSwitcherProps {
-  /** Size of the switch component */
-  size?: SwitchSize;
-  /** Whether to show only icons without text */
+type Props = {
+  type: ReadingPreferenceSwitcherType;
   isIconsOnly?: boolean;
-  /** The context where this switcher is being used */
-  type?: ReadingPreferenceSwitcherType;
-}
+  size?: SwitchSize;
+  variant?: SwitchVariant;
+};
 
 /**
  * Component for switching between different reading preferences (Translation/Reading)
@@ -48,11 +46,12 @@ interface ReadingPreferenceSwitcherProps {
  * @param {ReadingPreferenceSwitcherType} [props.type] - The context where this switcher is being used
  * @returns {JSX.Element} React component for switching reading preferences
  */
-const ReadingPreferenceSwitcher: React.FC<ReadingPreferenceSwitcherProps> = ({
-  size,
+const ReadingPreferenceSwitcher = ({
+  type,
   isIconsOnly = false,
-  type = ReadingPreferenceSwitcherType.SurahHeader,
-}): JSX.Element => {
+  size = SwitchSize.Normal,
+  variant = SwitchVariant.Default,
+}: Props) => {
   // Redux state
   const readingPreferences = useSelector(selectReadingPreferences);
   const lastReadVerseKey = useSelector(selectLastReadVerseKey);
@@ -155,6 +154,7 @@ const ReadingPreferenceSwitcher: React.FC<ReadingPreferenceSwitcherProps> = ({
         selected={readingPreference}
         onSelect={onViewSwitched}
         size={size}
+        variant={variant}
       />
     </div>
   );

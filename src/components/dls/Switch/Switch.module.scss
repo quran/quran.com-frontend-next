@@ -19,6 +19,10 @@ $background-container-padding: calc(0.8 * var(--spacing-xxsmall));
   ); // use grid to prevent layout shift when `font-family: bold` on item selected https://css-tricks.com/bold-on-hover-without-the-layout-shift/
 }
 
+.alternativeVariant {
+  background-color: var(--color-background-alternative-faint-new);
+}
+
 .xSmallContainer {
   height: $switchHeight;
   border-radius: var(--border-radius-large-px) !important;
