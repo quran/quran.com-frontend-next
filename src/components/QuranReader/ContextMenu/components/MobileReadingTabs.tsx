@@ -111,7 +111,11 @@ const MobileReadingTabs: React.FC<MobileReadingTabsProps> = ({ t }) => {
             tabIndex={0}
             id={tab.id}
             onClick={() => onViewSwitched(tab.value as ReadingPreference)}
-            onKeyDown={() => onViewSwitched(tab.value as ReadingPreference)}
+            onKeyDown={(event) => {
+              if (event.key === 'Enter' || event.key === ' ') {
+                onViewSwitched(tab.value as ReadingPreference);
+              }
+            }}
           >
             <>
               <span className={readingPreferenceStyles.iconContainer}>
