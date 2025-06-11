@@ -8,7 +8,7 @@ import { getChapterIdBySlug, getChapterVerses, getPagesLookup } from '@/api';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import QuranReader from '@/components/QuranReader';
 import { getChapterOgImageUrl } from '@/lib/og';
-import Error from '@/pages/_error';
+import { logErrorToSentry } from '@/lib/sentry';
 import { getQuranReaderStylesInitialState } from '@/redux/defaultSettings/util';
 import { QuranReaderDataType } from '@/types/QuranReader';
 import { getDefaultWordFields, getMushafId } from '@/utils/api';
@@ -35,19 +35,14 @@ type VerseProps = {
   chapterResponse?: ChapterResponse;
   versesResponse?: VersesResponse;
   isVerse?: boolean;
-  hasError?: boolean;
   chaptersData?: ChaptersData;
 };
 
-const Verse: NextPage<VerseProps> = ({ chapterResponse, versesResponse, hasError, isVerse }) => {
+const Verse: NextPage<VerseProps> = ({ chapterResponse, versesResponse, isVerse }) => {
   const { t, lang } = useTranslation('common');
   const {
     query: { verseId },
   } = useRouter();
-  if (hasError || !versesResponse.verses.length) {
-    return <Error statusCode={500} />;
-  }
-
   const path = getVerseNavigationUrl(chapterResponse.chapter.slug, verseId as string);
   return (
     <>
@@ -143,12 +138,16 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
 
     const versesResponse = await getChapterVerses(chapterIdOrSlug, locale, apiParams);
     // if any of the APIs have failed due to internal server error, we will still receive a response but the body will be something like {"status":500,"error":"Internal Server Error"}.
+    if (!versesResponse.verses || !versesResponse.verses.length) {
+      return {
+        notFound: true,
+        revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS,
+      };
+    }
     const chapterData = getChapterData(chaptersData, chapterIdOrSlug);
     if (!chapterData) {
       return {
-        props: {
-          hasError: true,
-        },
+        props: {},
         revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS, // 35 seconds will be enough time before we re-try generating the page again.
       };
     }
@@ -168,11 +167,18 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
       revalidate: ONE_WEEK_REVALIDATION_PERIOD_SECONDS, // verses will be generated at runtime if not found in the cache, then cached for subsequent requests for 7 days.
     };
   } catch (error) {
-    return {
-      props: {
-        hasError: true,
+    logErrorToSentry(error, {
+      transactionName: 'getStaticProps-VerseViewPage',
+      metadata: {
+        chapterIdOrSlug: String(params.chapterId),
+        verseIdOrRange: String(params.verseId),
+        locale,
       },
-      revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS, // 35 seconds will be enough time before we re-try generating the page again.
+    });
+
+    return {
+      notFound: true,
+      revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS,
     };
   }
 };

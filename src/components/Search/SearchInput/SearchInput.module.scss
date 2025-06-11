@@ -1,7 +1,11 @@
 @use "src/styles/breakpoints";
+@use "src/styles/theme";
 
 .headerOuterContainer {
     background: var(--color-background-elevated);
+    @include theme.dark {
+        background: rgba(52, 58, 64, 1);
+    }
     position: relative;
     border-radius: var(--border-radius-pill);
     box-shadow: var(--shadow-small);

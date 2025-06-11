@@ -10,6 +10,7 @@ import useFetchPagesLookup from '@/components/QuranReader/hooks/useFetchPagesLoo
 import useFetchPageVerses from '@/components/QuranReader/hooks/useFetchPageVerses';
 import Spinner from '@/dls/Spinner/Spinner';
 import useGetMushaf from '@/hooks/useGetMushaf';
+import { logErrorToSentry } from '@/lib/sentry';
 import Error from '@/pages/_error';
 import { getQuranReaderStylesInitialState } from '@/redux/defaultSettings/util';
 import {
@@ -35,11 +36,10 @@ import ChaptersData from 'types/ChaptersData';
 
 interface Props {
   pageVerses: VersesResponse;
-  hasError?: boolean;
   chaptersData: ChaptersData;
 }
 
-const QuranicPage: NextPage<Props> = ({ hasError, pageVerses: initialData }) => {
+const QuranicPage: NextPage<Props> = ({ pageVerses: initialData }) => {
   const { t, lang } = useTranslation('common');
   const {
     query: { pageId },
@@ -67,12 +67,7 @@ const QuranicPage: NextPage<Props> = ({ hasError, pageVerses: initialData }) => 
     isUsingDefaultFont,
   );
 
-  if (
-    hasError ||
-    pageId > PAGES_MUSHAF_MAP[Number(mushafId)] ||
-    pagesLookupError ||
-    pageVersesError
-  ) {
+  if (pageId > PAGES_MUSHAF_MAP[Number(mushafId)] || pagesLookupError || pageVersesError) {
     return <Error statusCode={500} />;
   }
 
@@ -149,11 +144,17 @@ export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
       revalidate: ONE_WEEK_REVALIDATION_PERIOD_SECONDS, // verses will be generated at runtime if not found in the cache, then cached for subsequent requests for 7 days.
     };
   } catch (error) {
-    return {
-      props: {
-        hasError: true,
+    logErrorToSentry(error, {
+      transactionName: 'getStaticProps-QuranPage',
+      metadata: {
+        pageId: String(params.pageId),
+        locale,
       },
-      revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS, // 35 seconds will be enough time before we re-try generating the page again.
+    });
+
+    return {
+      notFound: true,
+      revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS,
     };
   }
 };
