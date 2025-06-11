@@ -1,3 +1,12 @@
+/**
+ * @deprecated This ContextMenu component is deprecated and will be removed in a future version.
+ * Please use the refactored version located at src/components/QuranReader/ContextMenu/index.tsx instead.
+ *
+ * The new implementation splits this component into smaller, more focused components for better maintainability
+ * and follows the single responsibility principle. The refactored version maintains the same functionality
+ * while improving code organization and accessibility.
+ */
+
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import React, { useContext, useMemo } from 'react';
@@ -33,6 +42,10 @@ import { isMobile } from '@/utils/responsive';
 import { getVerseNumberFromKey } from '@/utils/verse';
 import DataContext from 'src/contexts/DataContext';
 
+/**
+ * @deprecated Use the refactored ContextMenu component in src/components/QuranReader/ContextMenu/index.tsx
+ * @returns {JSX.Element|null} React component that renders the context menu UI with navigation, preferences, and page info, or null if data isn't loaded
+ */
 const ContextMenu = () => {
   const dispatch = useDispatch();
   const chaptersData = useContext(DataContext);
