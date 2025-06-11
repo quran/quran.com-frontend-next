@@ -1,4 +1,5 @@
 import {
+  EMAIL_REGEX,
   getEmailField as getOriginalEmailField,
   getUsernameField as getOriginalUsernameField,
 } from '../SignUpFormFields/credentialFields';
@@ -6,9 +7,6 @@ import { getNameFields } from '../SignUpFormFields/nameFields';
 
 import { FormBuilderFormField } from '@/components/FormBuilder/FormBuilderTypes';
 import { RuleType } from '@/types/FieldRule';
-
-// Simple email validation regex for the complete signup form
-const EMAIL_REGEX = '.+@.+..+';
 
 /**
  * Creates a modified field with updated properties for the complete signup form
