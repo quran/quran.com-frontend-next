@@ -44,6 +44,7 @@ type Props = {
  * @param {SwitchSize} [props.size] - Size of the switch component
  * @param {boolean} [props.isIconsOnly] - Whether to show only icons without text
  * @param {ReadingPreferenceSwitcherType} [props.type] - The context where this switcher is being used
+ * @param {SwitchVariant} [props.variant] - Variant of the switch component
  * @returns {JSX.Element} React component for switching reading preferences
  */
 const ReadingPreferenceSwitcher = ({
