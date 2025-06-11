@@ -71,14 +71,16 @@ function MyApp({ Component, pageProps }): JSX.Element {
   }, [router.events]);
 
   // Redirect logged-in users away from complete-signup route to the home page if profile is complete
-  if (isLoggedInUser && userData) {
-    const isProfileComplete = isCompleteProfile(userData);
-    if (isProfileComplete && router.pathname === ROUTES.COMPLETE_SIGNUP) {
-      router.push(ROUTES.HOME);
-    } else if (!isProfileComplete && router.pathname !== ROUTES.COMPLETE_SIGNUP) {
-      router.push(ROUTES.COMPLETE_SIGNUP);
+  useEffect(() => {
+    if (isLoggedInUser && userData) {
+      const isProfileComplete = isCompleteProfile(userData);
+      if (isProfileComplete && router.pathname === ROUTES.COMPLETE_SIGNUP) {
+        router.push(ROUTES.HOME);
+      } else if (!isProfileComplete && router.pathname !== ROUTES.COMPLETE_SIGNUP) {
+        router.push(ROUTES.COMPLETE_SIGNUP);
+      }
     }
-  }
+  }, [isLoggedInUser, userData, router]);
 
   // Redirect logged-in users away from auth routes to the home page
   useEffect(() => {
