@@ -123,8 +123,11 @@ const ContextMenu: React.FC = (): JSX.Element | null => {
         </div>
       </div>
 
+      {/* Mobile-specific tabs for switching between reading preferences
+      Appears only on mobile breakpoints when the navbar is visible */}
       {showNavbar && <MobileReadingTabs t={t} />}
-      {/* Tajweed Colors */}
+
+      {/* Tajweed colors bar will only show when tajweed mushaf enabled */}
       {mushaf === Mushaf.QCFTajweedV4 && <TajweedColors />}
 
       {/* Reading progress bar */}
