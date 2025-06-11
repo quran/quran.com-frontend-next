@@ -4,7 +4,9 @@ import React from 'react';
 import dynamic from 'next/dynamic';
 
 import useSyncReadingProgress from './hooks/useSyncReadingProgress';
-import ReadingPreferenceSwitcher from './ReadingPreferenceSwitcher';
+import ReadingPreferenceSwitcher, {
+  ReadingPreferenceSwitcherType,
+} from './ReadingPreferenceSwitcher';
 import TranslationView from './TranslationView';
 
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
@@ -35,7 +37,7 @@ const QuranReaderView: React.FC<Props> = ({
   if (isReadingPreference) {
     return (
       <>
-        <ReadingPreferenceSwitcher />
+        <ReadingPreferenceSwitcher type={ReadingPreferenceSwitcherType.SurahHeader} />
         <ReadingView
           quranReaderStyles={quranReaderStyles}
           quranReaderDataType={quranReaderDataType}
@@ -48,7 +50,7 @@ const QuranReaderView: React.FC<Props> = ({
 
   return (
     <>
-      <ReadingPreferenceSwitcher />
+      <ReadingPreferenceSwitcher type={ReadingPreferenceSwitcherType.SurahHeader} />
       <TranslationView
         quranReaderStyles={quranReaderStyles}
         quranReaderDataType={quranReaderDataType}
