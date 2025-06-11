@@ -73,31 +73,6 @@
   padding-inline-start: var(--spacing-mega);
 }
 
-.unstyledList {
-  list-style: unset;
-}
-
-.arabic {
-  text-align: start;
-  font-size: var(--font-size-normal);
-  font-style: italic;
-  direction: rtl;
-  display: block;
-  font-family: 'Noto Nastaliq Arabic', 'NotoNastaliq', serif;
-  word-spacing: 0.1em;
-  letter-spacing: 0.02em;
-  padding-block: var(--spacing-xsmall);
-}
-
-.numberedList {
-  list-style-type: decimal !important;
-  list-style-position: outside;
-
-  li {
-    display: list-item;
-  }
-}
-
 .underline {
   text-decoration: underline;
 }

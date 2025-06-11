@@ -3,6 +3,7 @@ import React from 'react';
 import useTranslation from 'next-translate/useTranslation';
 
 import SearchResultItem from './SearchResultItem';
+import SearchResultsHeader from './SearchResultsHeader';
 
 import Pagination from '@/dls/Pagination/Pagination';
 import useScrollToTop from '@/hooks/useScrollToTop';
@@ -39,11 +40,17 @@ const SearchResults: React.FC<Props> = ({
 
   return (
     <div>
-      {!isSearchDrawer && searchQuery && (
+      {isSearchDrawer ? (
+        <SearchResultsHeader searchQuery={searchQuery} source={source} />
+      ) : (
         <>
-          {t('search-results', {
-            count: toLocalizedNumber(searchResult.pagination.totalRecords, lang),
-          })}
+          {searchQuery && (
+            <>
+              {t('search-results', {
+                count: toLocalizedNumber(searchResult.pagination.totalRecords, lang),
+              })}
+            </>
+          )}
         </>
       )}
       <>

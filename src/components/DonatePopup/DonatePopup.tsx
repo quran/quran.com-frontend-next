@@ -25,10 +25,14 @@ const DonatePopup = () => {
     dispatch({ type: setIsDonationPopupVisible.type, payload: false });
   };
 
+  const onPopupClose = () => {
+    dispatch({ type: setIsDonationPopupVisible.type, payload: false });
+  };
+
   if (!isPopupVisible) return null;
 
   return (
-    <Modal hasHeader={false} isOpen contentClassName={styles.modalSize}>
+    <Modal hasHeader={false} isOpen contentClassName={styles.modalSize} onClose={onPopupClose}>
       <div className={styles.outerContainer}>
         <div className={styles.illustrationContainer}>
           <MoonIllustrationSVG />
@@ -45,6 +49,7 @@ const DonatePopup = () => {
           </Button>
           <h1 className={styles.title}>{t('popup.title')}</h1>
           <div className={styles.textsContainer}>
+            <p className={styles.text}>{t('popup.subtitle')}</p>
             <p className={styles.text}>{t('popup.text-1')}</p>
             <p className={styles.text}>{t('popup.text-2')}</p>
           </div>
@@ -53,14 +58,19 @@ const DonatePopup = () => {
               type={DonateButtonType.MONTHLY}
               source={DonateButtonClickSource.DONATE_POPOVER}
               shouldUseProviderUrl
+              onAdditionalClick={onPopupClose}
             />
             <DonateButton
               type={DonateButtonType.ONCE}
               isOutlined
               source={DonateButtonClickSource.DONATE_POPOVER}
               shouldUseProviderUrl
+              onAdditionalClick={onPopupClose}
             />
-            <LearnMoreButton source={LearnMoreClickSource.DONATE_POPOVER} />
+            <LearnMoreButton
+              source={LearnMoreClickSource.DONATE_POPOVER}
+              onAdditionalClick={onPopupClose}
+            />
           </div>
           <div className={styles.text}>{t('popup.footnote')}.</div>
         </div>
