@@ -81,11 +81,20 @@ const PageBookmarkAction: React.FC<PageBookmarkActionProps> = ({ pageNumber }) =
 
   // Handle bookmark removal
   const handleBookmarkRemove = () => {
-    deleteBookmarkById(bookmark.id).then(() => {
-      toast(t('quran-reader:page-bookmark-removed'), {
-        status: ToastStatus.Success,
+    deleteBookmarkById(bookmark.id)
+      .then(() => {
+        mutate();
+        toast(t('quran-reader:page-bookmark-removed'), {
+          status: ToastStatus.Success,
+        });
+      })
+      .catch(() => {
+        // Revalidate to restore the bookmark state in case of failure
+        mutate(bookmark, { revalidate: true });
+        toast(t('common:error.general'), {
+          status: ToastStatus.Error,
+        });
       });
-    });
   };
 
   const onToggleBookmarkClicked = () => {
