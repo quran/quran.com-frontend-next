@@ -4,8 +4,8 @@
   transform: translateY(-50%);
   z-index: 1;
   display: inline-block;
-  width: var(--spacing-small);
-  height: var(--spacing-small);
+  inline-size: var(--spacing-small);
+  block-size: var(--spacing-small);
   color: var(--color-background-alternative-deep);
   user-select: none;
 }
@@ -13,8 +13,8 @@
 .icon svg {
   display: flex;
   align-items: center;
-  width: var(--spacing-small);
-  height: var(--spacing-small);
+  inline-size: var(--spacing-small);
+  block-size: var(--spacing-small);
   overflow: hidden;
 }
 

@@ -13,10 +13,10 @@ $card-hover-background-color: rgba(
 
 // size
 .large {
-  min-width: calc(12 * var(--spacing-mega));
+  min-inline-size: calc(12 * var(--spacing-mega));
 }
 .medium {
-  min-width: calc(10 * var(--spacing-medium));
+  min-inline-size: calc(10 * var(--spacing-medium));
 }
 
 .imageContainer {
@@ -26,10 +26,10 @@ $card-hover-background-color: rgba(
   cursor: pointer;
 
   .medium & {
-    min-height: calc(9 * var(--spacing-medium));
+    min-block-size: calc(9 * var(--spacing-medium));
   }
   .large & {
-    min-height: calc(15 * var(--spacing-medium));
+    min-block-size: calc(15 * var(--spacing-medium));
   }
 }
 
@@ -42,7 +42,7 @@ $card-hover-background-color: rgba(
 
 .textsContainer {
   overflow: hidden;
-  width: 100%;
+  inline-size: 100%;
 }
 
 .title {
@@ -57,8 +57,8 @@ $card-hover-background-color: rgba(
 
 .img {
   position: absolute;
-  width: 100%;
-  height: 100%;
+  inline-size: 100%;
+  block-size: 100%;
   object-fit: cover;
 }
 

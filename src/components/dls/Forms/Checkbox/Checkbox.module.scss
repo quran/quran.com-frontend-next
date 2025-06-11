@@ -13,8 +13,8 @@
   background-color: var(--color-background-alternative-faint);
   border-radius: var(--border-radius-default);
   border: 1px solid var(--color-secondary-medium);
-  width: var(--spacing-medium);
-  height: var(--spacing-medium);
+  inline-size: var(--spacing-medium);
+  block-size: var(--spacing-medium);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -29,8 +29,8 @@
   }
 }
 
-.checkbox[data-state="checked"],
-.checkbox[data-state="indeterminate"] {
+.checkbox[data-state='checked'],
+.checkbox[data-state='indeterminate'] {
   border: 1px solid var(--color-borders-hairline);
 }
 .checkbox[disabled] {
@@ -51,8 +51,8 @@
 .indicator {
   background: var(--color-primary-medium);
   border-radius: var(--border-radius-default);
-  width: 100%;
-  height: 100%;
+  inline-size: 100%;
+  block-size: 100%;
 }
 
 .disabledIndicator {

@@ -4,7 +4,7 @@
 }
 
 .row {
-  width: auto;
-  height: calc(2 * var(--spacing-large));
+  inline-size: auto;
+  block-size: calc(2 * var(--spacing-large));
   margin-block-end: var(--spacing-large);
 }

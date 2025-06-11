@@ -22,13 +22,13 @@
 }
 
 .smallContainer {
-  height: var(--spacing-mega);
+  block-size: var(--spacing-mega);
 }
 .mediumContainer {
-  height: calc(2 * var(--spacing-large));
+  block-size: calc(2 * var(--spacing-large));
 }
 .largeContainer {
-  height: calc(3 * var(--spacing-medium));
+  block-size: calc(3 * var(--spacing-medium));
 }
 
 .disabledContainer {
@@ -36,8 +36,8 @@
 }
 
 .arrow {
-  width: var(--spacing-mega);
-  height: 100%;
+  inline-size: var(--spacing-mega);
+  block-size: 100%;
   position: absolute;
   inset-inline-end: 0;
   pointer-events: none;
@@ -64,7 +64,7 @@
 
 .select {
   appearance: none;
-  height: 100%;
+  block-size: 100%;
   border: none;
   box-shadow: none;
   color: var(--color-text-default);

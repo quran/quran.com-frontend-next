@@ -1,5 +1,5 @@
-@use "src/styles/breakpoints";
-@use "src/styles/utility";
+@use 'src/styles/breakpoints';
+@use 'src/styles/utility';
 
 .cellContainer {
   display: flex;
@@ -69,8 +69,8 @@
 
 .iconContainer.verseAction {
   color: var(--color-text-default);
-  height: calc(2.2 * var(--spacing-medium));
-  width: calc(2.2 * var(--spacing-medium));
+  block-size: calc(2.2 * var(--spacing-medium));
+  inline-size: calc(2.2 * var(--spacing-medium));
 
   &:hover {
     color: var(--color-text-default);
@@ -97,8 +97,8 @@
   align-items: center;
   justify-content: center;
   svg {
-    width: calc(1.1 * var(--spacing-medium));
-    height: calc(1.1 * var(--spacing-medium));
+    inline-size: calc(1.1 * var(--spacing-medium));
+    block-size: calc(1.1 * var(--spacing-medium));
   }
 }
 

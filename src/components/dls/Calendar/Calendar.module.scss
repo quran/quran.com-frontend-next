@@ -1,11 +1,11 @@
 .outerContainer {
-  min-height: calc(var(--spacing-mega) * 9.3);
+  min-block-size: calc(var(--spacing-mega) * 9.3);
 }
 
 .calendarContainer {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
-  max-width: calc(var(--spacing-mega) * 12);
+  max-inline-size: calc(var(--spacing-mega) * 12);
   margin-inline: auto;
 
   & > div {
@@ -24,8 +24,8 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 32px;
-      height: 32px;
+      inline-size: 32px;
+      block-size: 32px;
       border-radius: var(--border-radius-pill);
 
       &.disabled {

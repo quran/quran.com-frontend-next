@@ -19,9 +19,9 @@
 }
 
 .headerContainer {
-  max-width: calc(5 * var(--spacing-mega));
+  max-inline-size: calc(5 * var(--spacing-mega));
   margin-inline: auto;
-  width: 100%;
+  inline-size: 100%;
 }
 
 .description {

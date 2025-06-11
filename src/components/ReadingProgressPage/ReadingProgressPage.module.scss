@@ -1,4 +1,4 @@
-@use "src/styles/breakpoints";
+@use 'src/styles/breakpoints';
 
 $section-spacing: calc(var(--spacing-mega) * 1.5);
 $section-padding: calc(var(--spacing-large));
@@ -82,6 +82,6 @@ $section-padding: calc(var(--spacing-large));
 }
 
 .circularProgressbar {
-  height: 130px;
-  width: 130px;
+  block-size: 130px;
+  inline-size: 130px;
 }

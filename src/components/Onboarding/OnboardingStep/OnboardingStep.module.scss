@@ -3,8 +3,8 @@
   padding: var(--spacing-small);
   color: var(--color-text-inverse);
   background-color: var(--color-background-inverse);
-  max-width: 100%;
-  width: calc(var(--spacing-mega) * 10);
+  max-inline-size: 100%;
+  inline-size: calc(var(--spacing-mega) * 10);
   z-index: var(--z-index-onboarding-step);
 }
 
@@ -14,17 +14,17 @@
 }
 
 .description {
-  margin-top: var(--spacing-xsmall);
+  margin-block-start: var(--spacing-xsmall);
   font-size: var(--font-size-small);
 }
 
 .icon {
-  width: 24px;
-  height: 24px;
+  inline-size: 24px;
+  block-size: 24px;
 }
 
 .actionContainer {
-  margin-top: var(--spacing-large);
+  margin-block-start: var(--spacing-large);
   display: flex;
   align-items: center;
   gap: var(--spacing-xxsmall);

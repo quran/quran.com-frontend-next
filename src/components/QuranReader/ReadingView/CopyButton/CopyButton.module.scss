@@ -18,15 +18,15 @@
   }
 
   svg {
-    width: var(--spacing-medium);
-    height: var(--spacing-medium);
-    margin-bottom: var(--spacing-xxsmall);
+    inline-size: var(--spacing-medium);
+    block-size: var(--spacing-medium);
+    margin-block-end: var(--spacing-xxsmall);
   }
 }
 
 .copyButtonText {
   font-size: var(--font-size-xsmall);
   color: var(--color-text-default);
-  margin-top: var(--spacing-micro);
+  margin-block-start: var(--spacing-micro);
   text-align: center;
 }
