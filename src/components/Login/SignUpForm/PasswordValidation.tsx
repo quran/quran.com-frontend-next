@@ -1,6 +1,7 @@
 import { FC } from 'react';
 
 import classNames from 'classnames';
+import Image from 'next/image';
 import useTranslation from 'next-translate/useTranslation';
 
 import { PASSWORD_MAX_LENGTH, PASSWORD_MIN_LENGTH } from '../SignUpFormFields/consts';
@@ -72,8 +73,17 @@ const PasswordValidation: FC<Props> = ({ value = '' }) => {
               [styles.invalid]: !isValid,
             })}
           >
-            <span className={styles.ruleIcon}>{isValid ? '✓' : '×'}</span>
-            <span>{t(rule.messageKey)}</span>
+            <Image
+              className={classNames(styles.ruleIcon, {
+                [styles.valid]: isValid,
+                [styles.invalid]: !isValid,
+              })}
+              src={isValid ? '/icons/checkmark-icon.svg' : '/icons/close-icon.svg'}
+              alt={isValid ? 'Valid' : 'Invalid'}
+              width={isValid ? 14 : 12}
+              height={isValid ? 14 : 12}
+            />
+            <span className={styles.ruleText}>{t(rule.messageKey)}</span>
           </div>
         );
       })}
