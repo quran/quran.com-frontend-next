@@ -266,4 +266,11 @@ export default {
       wordClickFunctionality: WordClickFunctionality.PlayAudio,
     },
   }),
+  35: (state) => ({
+    ...state,
+    session: {
+      ...state.session,
+      isDonationPopupVisible: true,
+    },
+  }),
 };
