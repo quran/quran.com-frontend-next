@@ -8,6 +8,7 @@ import ChapterIconContainer, {
 
 interface ChapterIconProps {
   chapterId: string;
+  size?: ChapterIconsSize;
 }
 
 /**
@@ -15,10 +16,13 @@ interface ChapterIconProps {
  * @param {ChapterIconProps} props - Component props
  * @returns {JSX.Element} The ChapterIcon component
  */
-const ChapterIcon: React.FC<ChapterIconProps> = ({ chapterId }) => (
+const ChapterIcon: React.FC<ChapterIconProps> = ({
+  chapterId,
+  size = ChapterIconsSize.Massive,
+}) => (
   <div className={styles.header}>
     <div className={styles.chapterIconContainer}>
-      <ChapterIconContainer chapterId={chapterId} size={ChapterIconsSize.Mega} />
+      <ChapterIconContainer chapterId={chapterId} size={size} hasSurahPrefix={false} />
     </div>
   </div>
 );

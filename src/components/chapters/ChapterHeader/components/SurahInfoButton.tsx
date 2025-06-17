@@ -1,14 +1,17 @@
 import React from 'react';
 
+import classNames from 'classnames';
+import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
-import Button, { ButtonSize, ButtonVariant } from '@/dls/Button/Button';
+import styles from '../ChapterHeader.module.scss';
+
 import InfoIcon from '@/icons/info.svg';
-import { logButtonClick } from '@/utils/eventLogger';
 import { getSurahInfoNavigationUrl } from '@/utils/navigation';
 
 interface SurahInfoButtonProps {
-  chapterId: string;
+  chapterId?: string;
+  className?: string;
 }
 
 /**
@@ -16,25 +19,20 @@ interface SurahInfoButtonProps {
  * @param {SurahInfoButtonProps} props - Component props
  * @returns {JSX.Element} The SurahInfoButton component
  */
-const SurahInfoButton: React.FC<SurahInfoButtonProps> = ({ chapterId }) => {
-  const { t } = useTranslation('common');
-
+const SurahInfoButton: React.FC<SurahInfoButtonProps> = ({ chapterId, className }) => {
+  const { t } = useTranslation('quran-reader');
+  const router = useRouter();
   return (
-    <Button
-      size={ButtonSize.Small}
-      variant={ButtonVariant.Ghost}
-      prefix={<InfoIcon />}
-      href={getSurahInfoNavigationUrl(chapterId)}
-      shouldPrefetch={false}
-      hasSidePadding={false}
+    <button
+      className={classNames(styles.infoIconButton, className)}
       onClick={() => {
-        logButtonClick('chapter_header_info');
+        router.push(getSurahInfoNavigationUrl(chapterId));
       }}
-      id="surah-info-button"
-      aria-label={t('quran-reader:surah-info')}
+      aria-label={t('surah-info')}
+      type="button"
     >
-      {t('quran-reader:surah-info')}
-    </Button>
+      <InfoIcon width="18" height="18" />
+    </button>
   );
 };
 

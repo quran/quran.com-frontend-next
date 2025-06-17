@@ -1,20 +1,18 @@
 import { useEffect, useRef } from 'react';
 
-import useTranslation from 'next-translate/useTranslation';
 import useSWRImmutable from 'swr/immutable';
 
 import { useVerseTrackerContext } from '../../contexts/VerseTrackerContext';
 import TranslationViewCell from '../TranslationViewCell';
 
 import ChapterHeader from '@/components/chapters/ChapterHeader';
+import getTranslationNameString from '@/components/QuranReader/ReadingView/utils/translation';
 import useCountRangeNotes from '@/hooks/auth/useCountRangeNotes';
 import useCountRangeQuestions from '@/hooks/auth/useCountRangeQuestions';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
 import { VersesResponse } from '@/types/ApiResponses';
-import Translation from '@/types/Translation';
 import Verse from '@/types/Verse';
 import { getPageBookmarks } from '@/utils/auth/api';
-import { toLocalizedNumber } from '@/utils/locale';
 
 interface TranslationPageVerse {
   verse: Verse;
@@ -44,7 +42,6 @@ const TranslationPageVerse: React.FC<TranslationPageVerse> = ({
   isLastVerseInView,
   notesRange,
 }) => {
-  const { t, lang } = useTranslation('common');
   const containerRef = useRef<HTMLDivElement>(null);
   const { verseKeysQueue } = useVerseTrackerContext();
 
@@ -60,25 +57,6 @@ const TranslationPageVerse: React.FC<TranslationPageVerse> = ({
 
   const { data: notesCount } = useCountRangeNotes(notesRange);
   const { data: questionsCount } = useCountRangeQuestions(notesRange);
-
-  const getTranslationNameString = (translations?: Translation[]) => {
-    let translationName = t('settings.no-translation-selected');
-    if (translations?.length === 1) translationName = translations?.[0].resourceName;
-    if (translations?.length === 2) {
-      translationName = t('settings.value-and-other', {
-        value: translations?.[0].resourceName,
-        othersCount: toLocalizedNumber(translations.length - 1, lang),
-      });
-    }
-    if (translations?.length > 2) {
-      translationName = t('settings.value-and-others', {
-        value: translations?.[0].resourceName,
-        othersCount: toLocalizedNumber(translations.length - 1, lang),
-      });
-    }
-
-    return translationName;
-  };
 
   useEffect(() => {
     let observer: IntersectionObserver = null;
@@ -117,6 +95,7 @@ const TranslationPageVerse: React.FC<TranslationPageVerse> = ({
       {verse.verseNumber === 1 && (
         <ChapterHeader
           translationName={getTranslationNameString(verse.translations)}
+          translationCount={verse.translations?.length}
           chapterId={String(verse.chapterId)}
           pageNumber={verse.pageNumber}
           hizbNumber={verse.hizbNumber}

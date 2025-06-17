@@ -37,6 +37,7 @@ interface ReadingViewRequestKeyInput {
   locale: string;
   wordByWordLocale: string;
   pageVersesRange?: LookupRecord;
+  selectedTranslations: number[];
 }
 
 /**
@@ -124,21 +125,18 @@ export const getReaderViewRequestKey = ({
   reciter,
   wordByWordLocale,
   pageVersesRange,
+  selectedTranslations,
 }: ReadingViewRequestKeyInput): string => {
-  return makePageVersesUrl(
-    pageNumber,
-    locale,
-    {
-      ...getDefaultWordFields(quranReaderStyles.quranFont),
-      ...getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines),
-      reciter,
-      perPage: 'all',
-      wordTranslationLanguage: wordByWordLocale,
-      filterPageWords: true,
-      ...(pageVersesRange && { ...pageVersesRange }), // add the from and to verse range of the current page
-    },
-    false,
-  );
+  return makePageVersesUrl(pageNumber, locale, {
+    ...getDefaultWordFields(quranReaderStyles.quranFont),
+    ...getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines),
+    reciter,
+    perPage: 'all',
+    wordTranslationLanguage: wordByWordLocale,
+    filterPageWords: true,
+    translations: selectedTranslations.join(','),
+    ...(pageVersesRange && { ...pageVersesRange }), // add the from and to verse range of the current page
+  });
 };
 
 export const getPagesLookupParams = (
