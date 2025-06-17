@@ -11,7 +11,7 @@ type Props = Partial<Question> & {
   isPage?: boolean;
 };
 
-const QuestionHeader: React.FC<Props> = ({ body, theme: themes, type, isPage = false }) => {
+const QuestionHeader: React.FC<Props> = ({ body, type, isPage = false }) => {
   return (
     <div className={styles.header}>
       <div
@@ -22,11 +22,6 @@ const QuestionHeader: React.FC<Props> = ({ body, theme: themes, type, isPage = f
         {body}
       </div>
       <div className={styles.pillContainer}>
-        {themes?.map((theme) => (
-          <div key={theme} className={styles.theme}>
-            {theme}
-          </div>
-        ))}
         <QuestionAndAnswerPill type={type} isButton={false} />
       </div>
     </div>
