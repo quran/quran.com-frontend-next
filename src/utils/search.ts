@@ -170,7 +170,8 @@ export const getSearchNavigationResult = (
   if (
     resultType === SearchNavigationType.AYAH ||
     resultType === SearchNavigationType.TRANSLITERATION ||
-    resultType === SearchNavigationType.TRANSLATION
+    resultType === SearchNavigationType.TRANSLATION ||
+    resultType === SearchNavigationType.QURAN_RANGE
   ) {
     returnedResult = {
       ...returnedResult,

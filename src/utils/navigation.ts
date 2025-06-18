@@ -275,7 +275,7 @@ export const resolveUrlBySearchNavigationType = (
   if (type === SearchNavigationType.SEARCH_PAGE) {
     return getSearchQueryNavigationUrl(stringKey);
   }
-  if (type === SearchNavigationType.RANGE) {
+  if (type === SearchNavigationType.RANGE || type === SearchNavigationType.QURAN_RANGE) {
     return getSurahRangeNavigationUrlByVerseKey(stringKey);
   }
   // for the Surah navigation

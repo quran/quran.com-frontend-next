@@ -33,13 +33,22 @@ export const getActiveVerseTiming = (context) => {
     audioData: { verseTimings },
     ayahNumber,
   } = context;
+
+  // Safety check: ensure verseTimings exists and is not empty
+  if (!verseTimings || verseTimings.length === 0) {
+    return null;
+  }
+
   const { currentTime } = context.audioPlayer;
   const currentTimeMS = currentTime * 1000;
   const lastAyahOfSurahTimestampTo = verseTimings[verseTimings.length - 1].timestampTo;
 
   // if the reported time exceeded the maximum timestamp of the Surah from BE, just return the current Ayah which should be the last
   if (currentTimeMS > lastAyahOfSurahTimestampTo - TOLERANCE_PERIOD) {
-    return verseTimings[ayahNumber - 1];
+    const index = ayahNumber - 1;
+    return index >= 0 && index < verseTimings.length
+      ? verseTimings[index]
+      : verseTimings[verseTimings.length - 1];
   }
 
   const activeVerseTiming = verseTimings.find((ayah) => {
@@ -76,6 +85,9 @@ export const getWordTimeSegment = (verseTimings: VerseTiming[], word: Word) => {
 };
 
 export const getActiveAyahNumber = (activeVerseTiming?: VerseTiming) => {
+  if (!activeVerseTiming) {
+    return null;
+  }
   const [, verseNumber] = activeVerseTiming.verseKey.split(':');
   return Number(verseNumber);
 };
@@ -103,9 +115,9 @@ export const getMediaSessionMetaData = async (
   context: AudioPlayerContext,
   recitersList: Reciter[],
 ) => {
-  const reciterName = recitersList.find(
-    (reciter) => reciter.id === context.audioData.reciterId,
-  ).name;
+  const reciterName =
+    recitersList?.find((reciter) => reciter.id === context.audioData.reciterId)?.name ||
+    'Unknown Reciter';
   return new MediaMetadata({
     title: `Surah ${context.audioData.chapterId}`,
     artist: reciterName,
