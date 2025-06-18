@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useSelector } from 'react-redux';
 
-import ContextMenu from './ContextMenu/index';
+import ContextMenu from './ContextMenu';
 import { VerseTrackerContextProvider } from './contexts/VerseTrackerContext';
 import DebuggingObserverWindow from './DebuggingObserverWindow';
 import Notes from './Notes/Notes';
