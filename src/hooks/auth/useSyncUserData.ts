@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { useSWRConfig } from 'swr';
 
-import { selectBookmarks } from '@/redux/slices/QuranReader/bookmarks';
+import { selectBookmarks, selectBookmarkedPages } from '@/redux/slices/QuranReader/bookmarks';
 import {
   RecentReadingSessions,
   selectRecentReadingSessions,
@@ -34,6 +34,26 @@ const formatLocalBookmarkRecord = (
   };
 };
 
+/**
+ * Format a local page bookmark record for syncing with the server
+ * @param {string} pageNumber - The page number as a string
+ * @param {number} bookmarkTimestamp - The timestamp when the bookmark was created
+ * @param {number} mushafId - The mushaf ID
+ * @returns {object} Formatted page bookmark record for API
+ */
+const formatLocalPageBookmarkRecord = (
+  pageNumber: string,
+  bookmarkTimestamp: number,
+  mushafId: number,
+) => {
+  return {
+    createdAt: new Date(bookmarkTimestamp).toISOString(),
+    type: BookmarkType.Page,
+    key: Number(pageNumber),
+    mushaf: mushafId,
+  };
+};
+
 const formatLocalReadingSession = (ayahKey: string, updatedAt: number) => {
   const [surahNumber, ayahNumber] = getVerseAndChapterNumbersFromKey(ayahKey);
   return {
@@ -53,6 +73,7 @@ const useSyncUserData = () => {
   const dispatch = useDispatch();
   const { cache, mutate } = useSWRConfig();
   const bookmarkedVerses = useSelector(selectBookmarks, shallowEqual);
+  const bookmarkedPages = useSelector(selectBookmarkedPages, shallowEqual);
   const recentReadingSessions: RecentReadingSessions = useSelector(
     selectRecentReadingSessions,
     shallowEqual,
@@ -66,6 +87,9 @@ const useSyncUserData = () => {
       const requestPayload = {
         [SyncDataType.BOOKMARKS]: Object.keys(bookmarkedVerses).map((ayahKey) =>
           formatLocalBookmarkRecord(ayahKey, bookmarkedVerses[ayahKey], mushafId),
+        ),
+        [SyncDataType.PAGE_BOOKMARKS]: Object.keys(bookmarkedPages).map((pageNumber) =>
+          formatLocalPageBookmarkRecord(pageNumber, bookmarkedPages[pageNumber], mushafId),
         ),
         [SyncDataType.READING_SESSIONS]: Object.entries(recentReadingSessions).map(
           ([ayahKey, updatedAt]) => formatLocalReadingSession(ayahKey, updatedAt),
@@ -81,6 +105,6 @@ const useSyncUserData = () => {
         // eslint-disable-next-line @typescript-eslint/no-empty-function
         .catch(() => {});
     }
-  }, [bookmarkedVerses, cache, dispatch, mushafId, mutate, recentReadingSessions]);
+  }, [bookmarkedVerses, bookmarkedPages, cache, dispatch, mushafId, mutate, recentReadingSessions]);
 };
 export default useSyncUserData;
