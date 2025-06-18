@@ -44,6 +44,10 @@ $virtual-scrolling-height-bandage: calc(
     transition: var(--transition-regular);
     margin-inline-end: 0;
   }
+
+  @include breakpoints.smallerThanTablet {
+    padding-block-start: calc($quran-reader-padding + var(--mobile-reading-mode-tabs-height) + var(--banner-height));
+  }
 }
 
 .withVisibleSideBar {

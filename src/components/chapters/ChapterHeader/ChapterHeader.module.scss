@@ -27,12 +27,6 @@ $changeTranslationButtonInlineSizeMobile: 257px;
   max-inline-size: $chapterHeaderContainerMaxInlineSize;
   margin-block-start: var(--spacing-medium2);
   margin-block-end: var(--spacing-medium2);
-
-  @include breakpoints.smallerThanTablet {
-    margin-block-start: calc(
-      var(--spacing-medium2) + var(--mobile-reading-mode-tabs-height) + var(--context-menu-container-height)
-    );
-  }
 }
 
 .topControls {
