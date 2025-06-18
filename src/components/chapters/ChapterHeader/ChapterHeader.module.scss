@@ -26,7 +26,6 @@ $changeTranslationButtonInlineSizeMobile: 257px;
   inline-size: 100%;
   max-inline-size: $chapterHeaderContainerMaxInlineSize;
   margin-block-start: var(--spacing-medium2);
-  margin-block-end: var(--spacing-medium2);
 }
 
 .topControls {
@@ -108,7 +107,8 @@ $changeTranslationButtonInlineSizeMobile: 257px;
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  margin-block: var(--spacing-medium2);
+  margin-block-start: var(--spacing-medium2);
+  margin-block-end: var(--spacing-mega);
 }
 
 .chapterTitleWithTranslationName {
@@ -168,9 +168,15 @@ $changeTranslationButtonInlineSizeMobile: 257px;
 
 .bismillahContainer {
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  margin-block-start: var(--spacing-medium);
-  margin-block-end: calc(1.5 * var(--spacing-mega));
+  align-items: center;
+  margin-block-end: calc(2 * var(--spacing-mega));
+}
+
+.bismillahTranslation {
+  text-align: center;
+  margin-block-start: var(--spacing-xxsmall);
 }
 
 .arabicSurahNameContainer {

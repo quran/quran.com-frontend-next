@@ -117,7 +117,7 @@ const ChapterHeader: React.FC<ChapterHeaderProps> = ({
       />
 
       {/* Bismillah section */}
-      <BismillahSection chapterId={chapterId} />
+      <BismillahSection chapterId={chapterId} isArabicOrUrdu={isArabicOrUrdu} />
     </div>
   );
 };
