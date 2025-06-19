@@ -30,13 +30,11 @@ export enum InputType {
   Error = 'error',
   Warning = 'warning',
   Success = 'success',
-  AuthForm = 'authForm',
 }
 
 export enum InputVariant {
   Default = 'default',
   Main = 'main',
-  AuthForm = 'authForm',
 }
 interface Props {
   id: string;
@@ -60,6 +58,7 @@ interface Props {
   shouldFlipOnRTL?: boolean;
   variant?: InputVariant;
   containerClassName?: string;
+  inputClassName?: string;
   htmlType?: React.HTMLInputTypeAttribute;
   isRequired?: boolean;
   inputRef?: RefObject<HTMLInputElement>;
@@ -89,6 +88,7 @@ const Input: React.FC<Props> = ({
   value = '',
   shouldFlipOnRTL = true,
   containerClassName,
+  inputClassName,
   prefixSuffixContainerClassName,
   htmlType,
   isRequired,
@@ -96,21 +96,17 @@ const Input: React.FC<Props> = ({
   shouldUseDefaultStyles = true,
 }) => {
   const [inputValue, setInputValue] = useState(value);
-  const [actualSize, setActualSize] = useState<InputSize>(
-    variant === InputVariant.AuthForm ? InputSize.XLarge : size,
-  );
-  const [actualType, setActualType] = useState<InputType | undefined>(
-    variant === InputVariant.AuthForm ? InputType.AuthForm : type,
-  );
+  const [actualSize, setActualSize] = useState<InputSize>(size);
+  const [actualType, setActualType] = useState<InputType | undefined>(type);
   // listen to any change in value in-case the value gets populated after and API call.
   useEffect(() => {
     setInputValue(value);
   }, [value]);
 
   useEffect(() => {
-    setActualSize(variant === InputVariant.AuthForm ? InputSize.XLarge : size);
-    setActualType(variant === InputVariant.AuthForm ? InputType.AuthForm : type);
-  }, [size, type, variant]);
+    setActualSize(size);
+    setActualType(type);
+  }, [size, type]);
 
   const onValueChange = (event: ChangeEvent<HTMLInputElement>) => {
     const newValue = event.target.value;
@@ -144,28 +140,21 @@ const Input: React.FC<Props> = ({
       {label && <p className={styles.label}>{label}</p>}
       <div
         className={classNames(
-          // Apply the appropriate container class based on variant and size
+          // Apply the appropriate container class based on size
           {
-            // For auth forms, use auth container
-            [styles.authContainer]: variant === InputVariant.AuthForm,
-            // For non-auth forms, apply size-specific container
-            ...(variant !== InputVariant.AuthForm && {
-              [styles.smallContainer]: actualSize === InputSize.Small,
-              [styles.mediumContainer]: actualSize === InputSize.Medium,
-              [styles.largeContainer]: actualSize === InputSize.Large,
-            }),
+            [styles.smallContainer]: actualSize === InputSize.Small,
+            [styles.mediumContainer]: actualSize === InputSize.Medium,
+            [styles.largeContainer]: actualSize === InputSize.Large,
           },
           // Apply width classes
           {
             [styles.fixedWidth]: fixedWidth,
-            [styles.fullWidth]: variant === InputVariant.AuthForm, // Apply full width for auth forms
           },
           // Apply status classes based on type
           {
             [styles.error]: actualType === InputType.Error,
             [styles.success]: actualType === InputType.Success,
             [styles.warning]: actualType === InputType.Warning,
-            [styles.authForm]: actualType === InputType.AuthForm,
           },
           // Apply main variant class
           { [styles.main]: variant === InputVariant.Main },
@@ -187,25 +176,21 @@ const Input: React.FC<Props> = ({
         <input
           onClick={handleClick}
           className={classNames(
-            // Apply the appropriate input class based on variant
-            {
-              // For auth forms, use auth input
-              [styles.authInput]: variant === InputVariant.AuthForm,
-              // For non-auth forms, use regular input
-              [styles.input]: variant !== InputVariant.AuthForm,
-            },
+            // Use regular input class
+            { [styles.input]: !inputClassName },
             // Apply status classes based on type
             {
               [styles.error]: actualType === InputType.Error,
               [styles.success]: actualType === InputType.Success,
               [styles.warning]: actualType === InputType.Warning,
-              [styles.authForm]: actualType === InputType.AuthForm,
             },
             // Always apply these classes regardless of variant
             {
               [styles.rtlInput]: shouldFlipOnRTL,
               [styles.disabled]: disabled,
             },
+            // Apply custom input class if provided
+            inputClassName,
           )}
           type={htmlType}
           required={isRequired}

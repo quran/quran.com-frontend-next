@@ -1,6 +1,7 @@
 import { FormBuilderFormField } from '../FormBuilder/FormBuilderTypes';
 
-import Input, { InputVariant } from '@/components/dls/Forms/Input';
+import AuthInput from './AuthInput';
+
 import styles from '@/components/Login/login.module.scss';
 import { FormFieldType } from '@/types/FormField';
 
@@ -18,10 +19,9 @@ const addCustomRenderToFormFields = (
       return {
         ...field,
         customRender: (props) => (
-          <Input
+          <AuthInput
             {...props}
             id={field.field}
-            variant={InputVariant.AuthForm}
             htmlType={field.field === 'email' ? 'email' : 'text'}
           />
         ),
