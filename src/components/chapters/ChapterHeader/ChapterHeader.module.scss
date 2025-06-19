@@ -1,7 +1,6 @@
 @use "src/styles/breakpoints";
 
 $chapterHeaderContainerMaxInlineSize: 450px;
-$playChapterAudioButtonMinInlineSize: 95px;
 $changeTranslationButtonInlineSize: 310px;
 $changeTranslationButtonInlineSizeMobile: 257px;
 
@@ -43,13 +42,6 @@ $changeTranslationButtonInlineSizeMobile: 257px;
 .rightControls {
   display: flex;
   align-items: center;
-}
-
-.playChapterAudioButton {
-  button {
-    @include customButton;
-    min-inline-size: $playChapterAudioButtonMinInlineSize;
-  }
 }
 
 .changeTranslationButton {

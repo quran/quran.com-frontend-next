@@ -9,9 +9,7 @@ import BismillahSection from './components/BismillahSection';
 import ChapterTitle from './components/ChapterTitle';
 
 import { QURAN_READER_OBSERVER_ID } from '@/components/QuranReader/observer';
-import PlayChapterAudioButton, {
-  PlayButtonVariant,
-} from '@/components/QuranReader/PlayChapterAudioButton';
+import PlayChapterAudioButton from '@/components/QuranReader/PlayChapterAudioButton';
 import Button, { ButtonShape, ButtonSize, ButtonType } from '@/dls/Button/Button';
 import useDirection from '@/hooks/useDirection';
 import useIntersectionObserver from '@/hooks/useObserveElement';
@@ -78,13 +76,7 @@ const ChapterHeader: React.FC<ChapterHeaderProps> = ({
       {/* Top controls section */}
       <div dir={direction} className={styles.topControls}>
         <div className={styles.leftControls}>
-          <PlayChapterAudioButton
-            chapterId={Number(chapterId)}
-            playLabel={t('listen')}
-            pauseLabel={t('listen')}
-            type={PlayButtonVariant.Secondary}
-            containerClassName={styles.playChapterAudioButton}
-          />
+          <PlayChapterAudioButton chapterId={Number(chapterId)} />
         </div>
         <div className={styles.rightControls}>
           <Button

@@ -8,7 +8,7 @@ import Spinner from '../dls/Spinner/Spinner';
 
 import styles from './PlayButton.module.scss';
 
-import Button, { ButtonShape, ButtonSize, ButtonType, ButtonVariant } from '@/dls/Button/Button';
+import Button, { ButtonShape, ButtonSize, ButtonType } from '@/dls/Button/Button';
 import useGetQueryParamOrXstateValue from '@/hooks/useGetQueryParamOrXstateValue';
 import PauseIcon from '@/icons/pause.svg';
 import PlayIcon from '@/icons/play-arrow.svg';
@@ -22,24 +22,10 @@ import {
 } from 'src/xstate/actors/audioPlayer/selectors';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 
-export enum PlayButtonVariant {
-  Default = 'default',
-  Secondary = 'secondary',
-}
 interface Props {
   chapterId: number;
-  playLabel?: string;
-  pauseLabel?: string;
-  type?: PlayButtonVariant;
-  containerClassName?: string;
 }
-const PlayChapterAudioButton: React.FC<Props> = ({
-  chapterId,
-  playLabel,
-  pauseLabel,
-  type = PlayButtonVariant.Secondary,
-  containerClassName,
-}) => {
+const PlayChapterAudioButton: React.FC<Props> = ({ chapterId }) => {
   const { t } = useTranslation('common');
   const chaptersData = useContext(DataContext);
   const chapterData = getChapterData(chaptersData, chapterId.toString());
@@ -75,19 +61,12 @@ const PlayChapterAudioButton: React.FC<Props> = ({
     });
   };
 
-  // Determine button type, shape, and variant based on the PlayButtonVariant
-  const buttonType =
-    type === PlayButtonVariant.Secondary ? ButtonType.Secondary : ButtonType.Success;
-  const buttonShape = type === PlayButtonVariant.Secondary ? ButtonShape.Pill : undefined;
-  const buttonVariant = type === PlayButtonVariant.Default ? ButtonVariant.Ghost : undefined;
-
   if (isLoadingCurrentChapter) {
     return (
-      <div className={classNames(styles.container, containerClassName)}>
+      <div className={classNames(styles.container, styles.playChapterAudioButton)}>
         <Button
-          variant={buttonVariant}
-          type={buttonType}
-          shape={buttonShape}
+          type={ButtonType.Secondary}
+          shape={ButtonShape.Pill}
           size={ButtonSize.Small}
           prefix={<Spinner />}
           hasSidePadding={false}
@@ -101,25 +80,23 @@ const PlayChapterAudioButton: React.FC<Props> = ({
   }
 
   return (
-    <div className={classNames(styles.container, containerClassName)}>
+    <div className={classNames(styles.container, styles.playChapterAudioButton)}>
       {isPlayingCurrentChapter ? (
         <Button
-          variant={buttonVariant}
-          type={buttonType}
-          shape={buttonShape}
+          type={ButtonType.Secondary}
+          shape={ButtonShape.Pill}
           size={ButtonSize.Small}
           prefix={<PauseIcon />}
           onClick={pause}
           hasSidePadding={false}
           shouldFlipOnRTL={false}
         >
-          {pauseLabel || t('audio.player.pause-audio')}
+          {t('listen')}
         </Button>
       ) : (
         <Button
-          variant={buttonVariant}
-          type={buttonType}
-          shape={buttonShape}
+          type={ButtonType.Secondary}
+          shape={ButtonShape.Pill}
           size={ButtonSize.Small}
           prefix={<PlayIcon />}
           onClick={play}
@@ -127,7 +104,7 @@ const PlayChapterAudioButton: React.FC<Props> = ({
           shouldFlipOnRTL={false}
           ariaLabel={t('aria.play-surah', { surahName: chapterData.transliteratedName })}
         >
-          {playLabel || t('audio.play')}
+          {t('listen')}
         </Button>
       )}
     </div>
