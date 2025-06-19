@@ -249,7 +249,6 @@ export const getVerseWords = (verse: Verse, isReadingView = false): Word[] => {
     words.push({
       ...word,
       hizbNumber: verse.hizbNumber,
-      translations: verse.translations,
       ...(isReadingView && { verse: wordVerse }),
     });
   });
