@@ -14,10 +14,18 @@ Sentry.init({
   enabled: SENTRY_ENABLED,
   dsn: SENTRY_ENABLED ? SENTRY_DSN : null,
   debug: isDev,
-  defaultIntegrations: false,
   tracesSampleRate: isDev ? 1 : 0.1,
   replaysOnErrorSampleRate: isDev ? 1 : 0.1,
+  // Session replays sample rate - captures 100% of sessions in dev, 10% in production
+  replaysSessionSampleRate: isDev ? 1.0 : 0.1,
   release: version,
+  integrations: [
+    // Add the replay integration for session replays
+    Sentry.replayIntegration({
+      maskAllText: false,
+      blockAllMedia: true,
+    }),
+  ],
 });
 
 export const onRouterTransitionStart = Sentry.captureRouterTransitionStart;

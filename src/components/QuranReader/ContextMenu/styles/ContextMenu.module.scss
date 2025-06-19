@@ -31,7 +31,9 @@ $pixel: 1px;
 
 .withVisibleBanner {
   @include breakpoints.smallerThanTablet {
-    transform: translate3d(0, calc(var(--navbar-container-height) + var(--banner-height)), 0);
+    // TODO: we should add the banner height here if it's shown
+    // transform: translate3d(0, calc(var(--navbar-container-height) + var(--banner-height)), 0);
+    transform: translate3d(0, calc(var(--navbar-container-height)), 0);
   }
 }
 

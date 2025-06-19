@@ -16,6 +16,7 @@ import {
 } from '@/redux/slices/QuranReader/readingPreferences';
 import { selectLastReadVerseKey } from '@/redux/slices/QuranReader/readingTracker';
 import { logValueChange } from '@/utils/eventLogger';
+import { getVerseNumberFromKey } from '@/utils/verse';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
 import { ReadingPreference } from 'types/QuranReader';
 
@@ -43,8 +44,9 @@ const MobileReadingTabs: React.FC<MobileReadingTabsProps> = ({ t }) => {
     actions: { onSettingsChange },
   } = usePersistPreferenceGroup();
 
-  // Extract verse number from the last read verse key
-  const lastReadVerse = lastReadVerseKey.verseKey?.split(':')[1];
+  const lastReadVerse = lastReadVerseKey.verseKey
+    ? getVerseNumberFromKey(lastReadVerseKey.verseKey).toString()
+    : undefined;
 
   // Define tabs with icons
   const tabs: Tab[] = [

@@ -92,7 +92,6 @@
   },
   "ayah": "Ajeti",
   "ayahs": "Ajetet",
-  "best-days-banner": "Dhuroni në ditët më të mira!",
   "beta": "Beta",
   "beyond-ramadan": "Rrituni përtej Ramazanit!",
   "bookmark": "Shënoni faqeshënues",
@@ -297,9 +296,10 @@
   "popup": {
     "companion-title": "I dashur shok i Kur'anit,",
     "footnote": "Donacionet mujore na lejojnë të fokusohemi më pak në mbledhjen e fondeve",
+    "subtitle": "\"Nuk ka ditë gjatë të cilave vepra e mirë është më e këndshme për Allahun sesa këto ditë\" [El-Buhari 969]",
     "text-1": "Ne jemi të përkushtuar t'i shërbejmë njohurive dhe teknologjisë botërore kuranore, gjithmonë falas.",
-    "text-2": "Mundësia e përsosur për bamirësi të vazhdueshme (Sadaka Jariyah). Investoni në Ahiretin tuaj si donator mujor (ose një herë).",
-    "title": "I dashur shok i Kur'anit,"
+    "text-2": "Mundësia perfekte për bamirësi të vazhdueshme (Sadaqa Jariyah). Investoni në Ahiretin tuaj si një donator mujor (ose një herë).",
+    "title": "Dhuro në ditët më të mira!"
   },
   "powered-by": "Mundësuar nga",
   "prepare-hearts": {

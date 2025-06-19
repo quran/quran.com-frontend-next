@@ -887,13 +887,12 @@ export const audioPlayerMachine =
         setElapsedTime: pure((context) => {
           const activeVerseTiming = getActiveVerseTiming(context);
           const ayahNumber = getActiveAyahNumber(activeVerseTiming);
-          const wordLocation = getActiveWordLocation(
-            activeVerseTiming,
-            context.audioPlayer.currentTime * 1000,
-          );
+          const wordLocation = activeVerseTiming
+            ? getActiveWordLocation(activeVerseTiming, context.audioPlayer.currentTime * 1000)
+            : context?.wordLocation || 0; // preserve last known word position when timing data is unavailable to prevent highlight jumping back to start
           return assign({
             elapsed: context.audioPlayer.currentTime,
-            ayahNumber,
+            ayahNumber: ayahNumber || context.ayahNumber, // preserve current ayah when timing data cannot determine active ayah to maintain playback continuity
             wordLocation,
           });
         }),
