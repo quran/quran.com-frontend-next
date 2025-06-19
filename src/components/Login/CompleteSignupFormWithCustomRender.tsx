@@ -2,7 +2,8 @@ import React from 'react';
 
 import { FormBuilderFormField } from '../FormBuilder/FormBuilderTypes';
 
-import Input, { InputVariant } from '@/components/dls/Forms/Input';
+import AuthInput from './AuthInput';
+
 import styles from '@/components/Login/login.module.scss';
 import UserProfile from 'types/auth/UserProfile';
 
@@ -43,10 +44,9 @@ const addCustomRenderToCompleteSignupFormFields = (
           disabled?: boolean;
         }) => {
           return (
-            <Input
+            <AuthInput
               {...props}
               id={field.field}
-              variant={InputVariant.AuthForm}
               htmlType={isEmail ? 'email' : 'text'}
               disabled={isDisabled || props.disabled}
             />

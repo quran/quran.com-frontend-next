@@ -4,13 +4,13 @@ import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
 import AuthHeader from '../AuthHeader';
+import AuthInput from '../AuthInput';
 import BackButton from '../BackButton';
 import styles from '../login.module.scss';
 import getFormErrors, { ErrorType } from '../SignUpForm/errors';
 import { getEmailField } from '../SignUpFormFields/credentialFields';
 
 import Button, { ButtonShape, ButtonType } from '@/components/dls/Button/Button';
-import Input, { InputVariant } from '@/components/dls/Forms/Input';
 import FormBuilder from '@/components/FormBuilder/FormBuilder';
 import { FormBuilderFormField } from '@/components/FormBuilder/FormBuilderTypes';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
@@ -27,9 +27,7 @@ const ForgotPasswordForm: React.FC = () => {
   const formFields: FormBuilderFormField[] = [
     {
       ...getEmailField(t),
-      customRender: (props) => (
-        <Input {...props} id="email" variant={InputVariant.AuthForm} htmlType="email" />
-      ),
+      customRender: (props) => <AuthInput {...props} id="email" htmlType="email" />,
       errorClassName: styles.errorText,
       containerClassName: styles.inputContainer,
     },
