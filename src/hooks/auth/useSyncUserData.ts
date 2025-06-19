@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { useSWRConfig } from 'swr';
 
-import { selectBookmarks, selectBookmarkedPages } from '@/redux/slices/QuranReader/bookmarks';
+import { selectBookmarkedPages, selectBookmarks } from '@/redux/slices/QuranReader/bookmarks';
 import {
   RecentReadingSessions,
   selectRecentReadingSessions,
@@ -19,11 +19,30 @@ import SyncDataType from 'types/auth/SyncDataType';
 import UserProfile from 'types/auth/UserProfile';
 import BookmarkType from 'types/BookmarkType';
 
+interface BookmarkPayload {
+  key: number;
+  type: string;
+  verseNumber?: number;
+  createdAt: string;
+  mushaf: number;
+}
+
+type ReadingSessionPayload = {
+  updatedAt: string;
+  chapterNumber: number;
+  verseNumber: number;
+};
+
+type SyncPayload = {
+  [SyncDataType.BOOKMARKS]: BookmarkPayload[];
+  [SyncDataType.READING_SESSIONS]: ReadingSessionPayload[];
+};
+
 const formatLocalBookmarkRecord = (
   ayahKey: string,
   bookmarkTimestamp: number,
   mushafId: number,
-) => {
+): BookmarkPayload => {
   const [surahNumber, ayahNumber] = getVerseAndChapterNumbersFromKey(ayahKey);
   return {
     createdAt: new Date(bookmarkTimestamp).toISOString(),
@@ -45,7 +64,7 @@ const formatLocalPageBookmarkRecord = (
   pageNumber: string,
   bookmarkTimestamp: number,
   mushafId: number,
-) => {
+): BookmarkPayload => {
   return {
     createdAt: new Date(bookmarkTimestamp).toISOString(),
     type: BookmarkType.Page,
@@ -84,18 +103,21 @@ const useSyncUserData = () => {
   useEffect(() => {
     // if there is no local last sync stored, we should sync the local data to the DB
     if (isLoggedIn() && !getLastSyncAt()) {
-      const requestPayload = {
-        [SyncDataType.BOOKMARKS]: Object.keys(bookmarkedVerses).map((ayahKey) =>
-          formatLocalBookmarkRecord(ayahKey, bookmarkedVerses[ayahKey], mushafId),
-        ),
-        [SyncDataType.PAGE_BOOKMARKS]: Object.keys(bookmarkedPages).map((pageNumber) =>
-          formatLocalPageBookmarkRecord(pageNumber, bookmarkedPages[pageNumber], mushafId),
-        ),
+      const requestPayload: SyncPayload = {
+        [SyncDataType.BOOKMARKS]: [
+          ...Object.keys(bookmarkedVerses).map((ayahKey) =>
+            formatLocalBookmarkRecord(ayahKey, bookmarkedVerses[ayahKey], mushafId),
+          ),
+          ...Object.keys(bookmarkedPages).map((pageNumber) =>
+            formatLocalPageBookmarkRecord(pageNumber, bookmarkedPages[pageNumber], mushafId),
+          ),
+        ],
         [SyncDataType.READING_SESSIONS]: Object.entries(recentReadingSessions).map(
           ([ayahKey, updatedAt]) => formatLocalReadingSession(ayahKey, updatedAt),
         ),
       };
-      syncUserLocalData(requestPayload)
+
+      syncUserLocalData(requestPayload as Record<SyncDataType, any>)
         .then((response) => {
           const { lastSyncAt } = response;
           mutate(makeUserProfileUrl(), (data: UserProfile) => ({ ...data, lastSyncAt }));
