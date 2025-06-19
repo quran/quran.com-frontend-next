@@ -8,8 +8,8 @@ import ChapterIcon from './ChapterIcon';
 import SurahInfoButton from './SurahInfoButton';
 
 import { ChapterIconsSize } from '@/components/chapters/ChapterIcon/ChapterIconContainer';
+import useIsMobile from '@/hooks/useIsMobile';
 import { Direction } from '@/utils/locale';
-import { isMobile } from '@/utils/responsive';
 
 interface ChapterTitleProps {
   chapterId: string;
@@ -29,6 +29,8 @@ const ChapterTitle: React.FC<ChapterTitleProps> = ({
   translatedName,
   showTranslatedName,
 }) => {
+  const isMobile = useIsMobile();
+
   return (
     <div dir={Direction.RTL} className={styles.titleContainer}>
       <h1
@@ -54,7 +56,7 @@ const ChapterTitle: React.FC<ChapterTitleProps> = ({
         <div className={styles.arabicSurahNameContainer}>
           <ChapterIcon
             chapterId={chapterId}
-            size={isMobile() ? ChapterIconsSize.XMega : ChapterIconsSize.Massive}
+            size={isMobile ? ChapterIconsSize.XMega : ChapterIconsSize.Massive}
           />
         </div>
       </h1>
