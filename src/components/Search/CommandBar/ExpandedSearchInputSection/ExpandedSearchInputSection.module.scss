@@ -7,7 +7,12 @@ $height: calc(16 * var(--spacing-mega));
   @include breakpoints.smallerThanTablet {
     padding: 0 var(--spacing-xxsmall);
   }
-  background: var(--color-background-elevated);
+  @include theme.light {
+    background: var(--color-background-elevated);
+  }
+  @include theme.sepia {
+    background: var(--color-background-elevated);
+  }
   @include theme.dark {
     background: rgba(52, 58, 64, 1);
   }
