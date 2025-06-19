@@ -95,7 +95,7 @@ const TranslationPageVerse: React.FC<TranslationPageVerse> = ({
       {verse.verseNumber === 1 && (
         <ChapterHeader
           translationName={getTranslationNameString(verse.translations)}
-          translationCount={verse.translations?.length}
+          translationsCount={verse.translations?.length}
           chapterId={String(verse.chapterId)}
           pageNumber={verse.pageNumber}
           hizbNumber={verse.hizbNumber}

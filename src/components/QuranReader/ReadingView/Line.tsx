@@ -74,7 +74,7 @@ const Line = ({ lineKey, words, isBigTextLayout, pageIndex, lineIndex }: LinePro
       {shouldShowChapterHeader && (
         <ChapterHeader
           translationName={translationName}
-          translationCount={translationCount}
+          translationsCount={translationCount}
           isTranslationSelected={isTranslationSelected}
           chapterId={firstWordData[0]}
           pageNumber={words[0].pageNumber}

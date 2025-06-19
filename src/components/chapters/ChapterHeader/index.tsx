@@ -16,6 +16,7 @@ import Button, { ButtonShape, ButtonSize, ButtonType } from '@/dls/Button/Button
 import useDirection from '@/hooks/useDirection';
 import useIntersectionObserver from '@/hooks/useObserveElement';
 import { setIsSettingsDrawerOpen, setSettingsView, SettingsView } from '@/redux/slices/navbar';
+import Language from '@/types/Language';
 import { getChapterData } from '@/utils/chapter';
 import { logButtonClick } from '@/utils/eventLogger';
 import { toLocalizedNumber } from '@/utils/locale';
@@ -24,7 +25,7 @@ import DataContext from 'src/contexts/DataContext';
 interface ChapterHeaderProps {
   chapterId: string;
   translationName?: string;
-  translationCount?: number;
+  translationsCount?: number;
   pageNumber: number;
   hizbNumber: number;
   // eslint-disable-next-line react/no-unused-prop-types
@@ -41,7 +42,7 @@ interface ChapterHeaderProps {
 const ChapterHeader: React.FC<ChapterHeaderProps> = ({
   chapterId,
   translationName,
-  translationCount,
+  translationsCount,
   pageNumber,
   hizbNumber,
 }) => {
@@ -50,7 +51,7 @@ const ChapterHeader: React.FC<ChapterHeaderProps> = ({
   const headerRef = useRef<HTMLDivElement>(null);
   const chaptersData = useContext(DataContext);
   const chapterData = getChapterData(chaptersData, chapterId);
-  const isArabicOrUrdu = lang === 'ar' || lang === 'ur';
+  const isArabicOrUrdu = lang === Language.AR || lang === Language.UR;
   const direction = useDirection();
 
   /**
@@ -96,9 +97,9 @@ const ChapterHeader: React.FC<ChapterHeaderProps> = ({
             className={styles.changeTranslationButton}
             contentClassName={styles.translationName}
             suffix={
-              translationCount > 1 && (
-                <span className={styles.translationCount}>
-                  {`+${toLocalizedNumber(translationCount - 1, lang)}`}
+              translationsCount > 1 && (
+                <span className={styles.translationsCount}>
+                  {`+${toLocalizedNumber(translationsCount - 1, lang)}`}
                 </span>
               )
             }
@@ -117,7 +118,7 @@ const ChapterHeader: React.FC<ChapterHeaderProps> = ({
       />
 
       {/* Bismillah section */}
-      <BismillahSection chapterId={chapterId} isArabicOrUrdu={isArabicOrUrdu} />
+      <BismillahSection chapterId={chapterId} showTranslatedName={isArabicOrUrdu} />
     </div>
   );
 };
