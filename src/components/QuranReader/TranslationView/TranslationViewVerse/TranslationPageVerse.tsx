@@ -99,7 +99,6 @@ const TranslationPageVerse: React.FC<TranslationPageVerse> = ({
           chapterId={String(verse.chapterId)}
           pageNumber={verse.pageNumber}
           hizbNumber={verse.hizbNumber}
-          isTranslationSelected={selectedTranslations?.length > 0}
         />
       )}
 
