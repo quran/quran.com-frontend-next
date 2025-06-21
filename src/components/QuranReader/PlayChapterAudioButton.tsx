@@ -1,13 +1,14 @@
 import { useContext } from 'react';
 
 import { useSelector } from '@xstate/react';
+import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 
 import Spinner from '../dls/Spinner/Spinner';
 
 import styles from './PlayButton.module.scss';
 
-import Button, { ButtonSize, ButtonType, ButtonVariant } from '@/dls/Button/Button';
+import Button, { ButtonShape, ButtonSize, ButtonType } from '@/dls/Button/Button';
 import useGetQueryParamOrXstateValue from '@/hooks/useGetQueryParamOrXstateValue';
 import PauseIcon from '@/icons/pause.svg';
 import PlayIcon from '@/icons/play-arrow.svg';
@@ -62,10 +63,10 @@ const PlayChapterAudioButton: React.FC<Props> = ({ chapterId }) => {
 
   if (isLoadingCurrentChapter) {
     return (
-      <div className={styles.container}>
+      <div className={classNames(styles.container, styles.playChapterAudioButton)}>
         <Button
-          variant={ButtonVariant.Ghost}
-          type={ButtonType.Success}
+          type={ButtonType.Secondary}
+          shape={ButtonShape.Pill}
           size={ButtonSize.Small}
           prefix={<Spinner />}
           hasSidePadding={false}
@@ -79,23 +80,23 @@ const PlayChapterAudioButton: React.FC<Props> = ({ chapterId }) => {
   }
 
   return (
-    <div className={styles.container}>
+    <div className={classNames(styles.container, styles.playChapterAudioButton)}>
       {isPlayingCurrentChapter ? (
         <Button
-          variant={ButtonVariant.Ghost}
-          type={ButtonType.Success}
+          type={ButtonType.Secondary}
+          shape={ButtonShape.Pill}
           size={ButtonSize.Small}
           prefix={<PauseIcon />}
           onClick={pause}
           hasSidePadding={false}
           shouldFlipOnRTL={false}
         >
-          {t('audio.player.pause-audio')}
+          {t('listen')}
         </Button>
       ) : (
         <Button
-          variant={ButtonVariant.Ghost}
-          type={ButtonType.Success}
+          type={ButtonType.Secondary}
+          shape={ButtonShape.Pill}
           size={ButtonSize.Small}
           prefix={<PlayIcon />}
           onClick={play}
@@ -103,7 +104,7 @@ const PlayChapterAudioButton: React.FC<Props> = ({ chapterId }) => {
           shouldFlipOnRTL={false}
           ariaLabel={t('aria.play-surah', { surahName: chapterData.transliteratedName })}
         >
-          {t('audio.play')}
+          {t('listen')}
         </Button>
       )}
     </div>

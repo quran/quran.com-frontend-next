@@ -11,6 +11,8 @@ export enum ChapterIconsSize {
   Medium = 'medium',
   Large = 'large',
   Mega = 'mega',
+  XMega = 'xmega',
+  Massive = 'massive',
 }
 
 // TODO: maybe replace `hasSurahPrefix` with `variant` and use it to show v1 or v2 surah name font
@@ -30,6 +32,8 @@ const IconContainer: React.FC<Props> = ({
       [styles.iconContainerSmall]: size === ChapterIconsSize.Small,
       [styles.iconContainerLarge]: size === ChapterIconsSize.Large,
       [styles.iconContainerMega]: size === ChapterIconsSize.Mega,
+      [styles.iconContainerXMega]: size === ChapterIconsSize.XMega,
+      [styles.iconContainerMassive]: size === ChapterIconsSize.Massive,
     })}
   >
     <ChapterIcon id={chapterId} />
