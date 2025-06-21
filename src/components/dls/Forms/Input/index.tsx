@@ -96,17 +96,10 @@ const Input: React.FC<Props> = ({
   shouldUseDefaultStyles = true,
 }) => {
   const [inputValue, setInputValue] = useState(value);
-  const [actualSize, setActualSize] = useState<InputSize>(size);
-  const [actualType, setActualType] = useState<InputType | undefined>(type);
   // listen to any change in value in-case the value gets populated after and API call.
   useEffect(() => {
     setInputValue(value);
   }, [value]);
-
-  useEffect(() => {
-    setActualSize(size);
-    setActualType(type);
-  }, [size, type]);
 
   const onValueChange = (event: ChangeEvent<HTMLInputElement>) => {
     const newValue = event.target.value;
@@ -139,28 +132,16 @@ const Input: React.FC<Props> = ({
     <>
       {label && <p className={styles.label}>{label}</p>}
       <div
-        className={classNames(
-          // Apply the appropriate container class based on size
-          {
-            [styles.smallContainer]: actualSize === InputSize.Small,
-            [styles.mediumContainer]: actualSize === InputSize.Medium,
-            [styles.largeContainer]: actualSize === InputSize.Large,
-          },
-          // Apply width classes
-          {
-            [styles.fixedWidth]: fixedWidth,
-          },
-          // Apply status classes based on type
-          {
-            [styles.error]: actualType === InputType.Error,
-            [styles.success]: actualType === InputType.Success,
-            [styles.warning]: actualType === InputType.Warning,
-          },
-          // Apply main variant class
-          { [styles.main]: variant === InputVariant.Main },
-          // Apply custom container class if provided
-          containerClassName,
-        )}
+        className={classNames(styles.container, containerClassName, {
+          [styles.smallContainer]: size === InputSize.Small,
+          [styles.mediumContainer]: size === InputSize.Medium,
+          [styles.largeContainer]: size === InputSize.Large,
+          [styles.fixedWidth]: fixedWidth,
+          [styles.error]: type === InputType.Error,
+          [styles.success]: type === InputType.Success,
+          [styles.warning]: type === InputType.Warning,
+          [styles.main]: variant === InputVariant.Main,
+        })}
       >
         {prefix && (
           <div
@@ -176,20 +157,14 @@ const Input: React.FC<Props> = ({
         <input
           onClick={handleClick}
           className={classNames(
-            // Use regular input class
-            { [styles.input]: !inputClassName },
-            // Apply status classes based on type
             {
-              [styles.error]: actualType === InputType.Error,
-              [styles.success]: actualType === InputType.Success,
-              [styles.warning]: actualType === InputType.Warning,
-            },
-            // Always apply these classes regardless of variant
-            {
+              [styles.input]: !inputClassName,
+              [styles.error]: type === InputType.Error,
+              [styles.success]: type === InputType.Success,
+              [styles.warning]: type === InputType.Warning,
               [styles.rtlInput]: shouldFlipOnRTL,
               [styles.disabled]: disabled,
             },
-            // Apply custom input class if provided
             inputClassName,
           )}
           type={htmlType}
