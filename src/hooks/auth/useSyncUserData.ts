@@ -117,7 +117,7 @@ const useSyncUserData = () => {
         ),
       };
 
-      syncUserLocalData(requestPayload as Record<SyncDataType, any>)
+      syncUserLocalData(requestPayload)
         .then((response) => {
           const { lastSyncAt } = response;
           mutate(makeUserProfileUrl(), (data: UserProfile) => ({ ...data, lastSyncAt }));
