@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { useSWRConfig } from 'swr';
 
-import { selectBookmarks } from '@/redux/slices/QuranReader/bookmarks';
+import { selectBookmarkedPages, selectBookmarks } from '@/redux/slices/QuranReader/bookmarks';
 import {
   RecentReadingSessions,
   selectRecentReadingSessions,
@@ -19,17 +19,56 @@ import SyncDataType from 'types/auth/SyncDataType';
 import UserProfile from 'types/auth/UserProfile';
 import BookmarkType from 'types/BookmarkType';
 
+interface BookmarkPayload {
+  key: number;
+  type: string;
+  verseNumber?: number;
+  createdAt: string;
+  mushaf: number;
+}
+
+type ReadingSessionPayload = {
+  updatedAt: string;
+  chapterNumber: number;
+  verseNumber: number;
+};
+
+type SyncPayload = {
+  [SyncDataType.BOOKMARKS]: BookmarkPayload[];
+  [SyncDataType.READING_SESSIONS]: ReadingSessionPayload[];
+};
+
 const formatLocalBookmarkRecord = (
   ayahKey: string,
   bookmarkTimestamp: number,
   mushafId: number,
-) => {
+): BookmarkPayload => {
   const [surahNumber, ayahNumber] = getVerseAndChapterNumbersFromKey(ayahKey);
   return {
     createdAt: new Date(bookmarkTimestamp).toISOString(),
     type: BookmarkType.Ayah,
     key: Number(surahNumber),
     verseNumber: Number(ayahNumber),
+    mushaf: mushafId,
+  };
+};
+
+/**
+ * Format a local page bookmark record for syncing with the server
+ * @param {string} pageNumber - The page number as a string
+ * @param {number} bookmarkTimestamp - The timestamp when the bookmark was created
+ * @param {number} mushafId - The mushaf ID
+ * @returns {object} Formatted page bookmark record for API
+ */
+const formatLocalPageBookmarkRecord = (
+  pageNumber: string,
+  bookmarkTimestamp: number,
+  mushafId: number,
+): BookmarkPayload => {
+  return {
+    createdAt: new Date(bookmarkTimestamp).toISOString(),
+    type: BookmarkType.Page,
+    key: Number(pageNumber),
     mushaf: mushafId,
   };
 };
@@ -53,6 +92,7 @@ const useSyncUserData = () => {
   const dispatch = useDispatch();
   const { cache, mutate } = useSWRConfig();
   const bookmarkedVerses = useSelector(selectBookmarks, shallowEqual);
+  const bookmarkedPages = useSelector(selectBookmarkedPages, shallowEqual);
   const recentReadingSessions: RecentReadingSessions = useSelector(
     selectRecentReadingSessions,
     shallowEqual,
@@ -63,14 +103,20 @@ const useSyncUserData = () => {
   useEffect(() => {
     // if there is no local last sync stored, we should sync the local data to the DB
     if (isLoggedIn() && !getLastSyncAt()) {
-      const requestPayload = {
-        [SyncDataType.BOOKMARKS]: Object.keys(bookmarkedVerses).map((ayahKey) =>
-          formatLocalBookmarkRecord(ayahKey, bookmarkedVerses[ayahKey], mushafId),
-        ),
+      const requestPayload: SyncPayload = {
+        [SyncDataType.BOOKMARKS]: [
+          ...Object.keys(bookmarkedVerses).map((ayahKey) =>
+            formatLocalBookmarkRecord(ayahKey, bookmarkedVerses[ayahKey], mushafId),
+          ),
+          ...Object.keys(bookmarkedPages).map((pageNumber) =>
+            formatLocalPageBookmarkRecord(pageNumber, bookmarkedPages[pageNumber], mushafId),
+          ),
+        ],
         [SyncDataType.READING_SESSIONS]: Object.entries(recentReadingSessions).map(
           ([ayahKey, updatedAt]) => formatLocalReadingSession(ayahKey, updatedAt),
         ),
       };
+
       syncUserLocalData(requestPayload)
         .then((response) => {
           const { lastSyncAt } = response;
@@ -81,6 +127,6 @@ const useSyncUserData = () => {
         // eslint-disable-next-line @typescript-eslint/no-empty-function
         .catch(() => {});
     }
-  }, [bookmarkedVerses, cache, dispatch, mushafId, mutate, recentReadingSessions]);
+  }, [bookmarkedVerses, bookmarkedPages, cache, dispatch, mushafId, mutate, recentReadingSessions]);
 };
 export default useSyncUserData;

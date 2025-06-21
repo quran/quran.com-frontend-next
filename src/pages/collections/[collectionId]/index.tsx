@@ -4,6 +4,7 @@ import { GetStaticPaths, GetStaticProps } from 'next';
 import { useRouter } from 'next/router';
 
 import CollectionDetailContainer from '@/components/Collection/CollectionDetailContainer/CollectionDetailContainer';
+import BookmarkType from '@/types/BookmarkType';
 import { logValueChange } from '@/utils/eventLogger';
 import { makeGetBookmarkByCollectionId } from 'src/utils/auth/apiPaths';
 import { getAllChaptersData } from 'src/utils/chapter';
@@ -37,12 +38,14 @@ const CollectionDetailPage = () => {
     if (pageIndex === 0) {
       return makeGetBookmarkByCollectionId(collectionId, {
         sortBy,
+        type: BookmarkType.Ayah,
       });
     }
     const cursor = previousPageData.pagination?.endCursor;
     return makeGetBookmarkByCollectionId(collectionId, {
       sortBy,
       cursor,
+      type: BookmarkType.Ayah,
     });
   };
 

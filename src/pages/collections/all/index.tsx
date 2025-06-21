@@ -5,6 +5,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import withAuth from '@/components/Auth/withAuth';
 import CollectionDetailContainer from '@/components/Collection/CollectionDetailContainer/CollectionDetailContainer';
+import BookmarkType from '@/types/BookmarkType';
 import { isLoggedIn } from '@/utils/auth/login';
 import { logValueChange } from '@/utils/eventLogger';
 import { makeAllCollectionsItemsUrl } from 'src/utils/auth/apiPaths';
@@ -39,12 +40,14 @@ const CollectionDetailPage = () => {
     if (pageIndex === 0) {
       return makeAllCollectionsItemsUrl({
         sortBy,
+        type: BookmarkType.Ayah,
       });
     }
     const cursor = previousPageData.pagination?.endCursor;
     return makeAllCollectionsItemsUrl({
       sortBy,
       cursor,
+      type: BookmarkType.Ayah,
     });
   };
 

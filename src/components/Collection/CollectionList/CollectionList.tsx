@@ -16,6 +16,7 @@ import ConfirmationModal from '@/dls/ConfirmationModal/ConfirmationModal';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import OverflowMenuIcon from '@/icons/menu_more_horiz.svg';
 import BookmarkIcon from '@/icons/unbookmarked.svg';
+import BookmarkType from '@/types/BookmarkType';
 import { logButtonClick, logEvent, logValueChange } from '@/utils/eventLogger';
 import { toLocalizedNumber } from '@/utils/locale';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from 'src/components/dls/Button/Button';
@@ -34,6 +35,7 @@ const CollectionList = () => {
   const [sortBy, setSortBy] = useState(DEFAULT_SORT_OPTION);
   const apiParams = {
     sortBy,
+    type: BookmarkType.Ayah,
   };
 
   const { data, mutate } = useSWR<any>(makeCollectionsUrl(apiParams), () =>
