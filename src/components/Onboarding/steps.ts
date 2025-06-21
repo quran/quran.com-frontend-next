@@ -78,15 +78,6 @@ export const checklistIndexToOnboardingSteps = (
         },
       },
       {
-        ...getDetails('voice-search'),
-        step: {
-          ...commonStepOptions,
-          target: '#voice-search-trigger',
-          placement: 'bottom',
-        },
-      },
-
-      {
         ...getDetails('juz'),
         step: {
           ...commonStepOptions,

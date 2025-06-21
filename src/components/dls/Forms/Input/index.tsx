@@ -23,6 +23,7 @@ export enum InputSize {
   Small = 'small',
   Medium = 'medium',
   Large = 'large',
+  XLarge = 'xlarge',
 }
 
 export enum InputType {
@@ -57,6 +58,7 @@ interface Props {
   shouldFlipOnRTL?: boolean;
   variant?: InputVariant;
   containerClassName?: string;
+  inputClassName?: string;
   htmlType?: React.HTMLInputTypeAttribute;
   isRequired?: boolean;
   inputRef?: RefObject<HTMLInputElement>;
@@ -86,6 +88,7 @@ const Input: React.FC<Props> = ({
   value = '',
   shouldFlipOnRTL = true,
   containerClassName,
+  inputClassName,
   prefixSuffixContainerClassName,
   htmlType,
   isRequired,
@@ -153,13 +156,17 @@ const Input: React.FC<Props> = ({
         )}
         <input
           onClick={handleClick}
-          className={classNames(styles.input, {
-            [styles.error]: type === InputType.Error,
-            [styles.success]: type === InputType.Success,
-            [styles.warning]: type === InputType.Warning,
-            [styles.rtlInput]: shouldFlipOnRTL,
-            [styles.disabled]: disabled,
-          })}
+          className={classNames(
+            {
+              [styles.input]: !inputClassName,
+              [styles.error]: type === InputType.Error,
+              [styles.success]: type === InputType.Success,
+              [styles.warning]: type === InputType.Warning,
+              [styles.rtlInput]: shouldFlipOnRTL,
+              [styles.disabled]: disabled,
+            },
+            inputClassName,
+          )}
           type={htmlType}
           required={isRequired}
           dir="auto"

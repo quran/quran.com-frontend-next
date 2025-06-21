@@ -10,6 +10,7 @@ export type FormBuilderFormField = Pick<FormField, 'field' | 'type'> & {
   placeholder?: string;
   rules?: FormBuilderFieldRule[];
   containerClassName?: string;
+  errorClassName?: string;
   checked?: boolean;
   fieldSetLegend?: string;
   onChange?: (value: unknown) => void;

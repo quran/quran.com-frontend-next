@@ -1,5 +1,7 @@
 import { FC, useState } from 'react';
 
+import classNames from 'classnames';
+
 import styles from './PasswordInput.module.scss';
 
 import HideIcon from '@/icons/hide.svg';
@@ -15,7 +17,11 @@ const PasswordInput: FC<Props> = ({ value = '', onChange, placeholder }) => {
   const [showPassword, setShowPassword] = useState(false);
 
   return (
-    <div className={styles.passwordInputContainer}>
+    <div
+      className={classNames(styles.passwordInputContainer, {
+        [styles.hasValue]: value,
+      })}
+    >
       <input
         type={showPassword ? 'text' : 'password'}
         value={value}
