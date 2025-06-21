@@ -69,7 +69,6 @@ const TranslationViewVerse: React.FC<Props> = ({
         verseIdx={verseIdx}
         mushafId={mushafId}
         quranReaderStyles={quranReaderStyles}
-        selectedTranslations={selectedTranslations}
         bookmarksRangeUrl={bookmarksRangeUrl}
         initialData={initialData}
         firstVerseInPage={firstVerseInPage}

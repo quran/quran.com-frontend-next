@@ -16,7 +16,6 @@ import { getPageBookmarks } from '@/utils/auth/api';
 
 interface TranslationPageVerse {
   verse: Verse;
-  selectedTranslations?: number[];
   bookmarksRangeUrl: string | null;
   mushafId: number;
   verseIdx: number;
@@ -32,7 +31,6 @@ interface TranslationPageVerse {
 
 const TranslationPageVerse: React.FC<TranslationPageVerse> = ({
   verse,
-  selectedTranslations,
   bookmarksRangeUrl,
   mushafId,
   verseIdx,
