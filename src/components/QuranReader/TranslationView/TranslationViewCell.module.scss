@@ -8,11 +8,6 @@
   direction: ltr;
   padding: var(--spacing-small);
   --gap-size: calc(0.5 * var(--spacing-mega));
-  @include breakpoints.tablet {
-    --gap-size: calc(1.5 * var(--spacing-mega));
-    flex-direction: row;
-    padding: 0;
-  }
 }
 
 .highlightedContainer {
@@ -30,11 +25,6 @@
   direction: ltr;
   flex-direction: row;
   justify-content: space-between;
-  @include breakpoints.tablet {
-    flex-direction: column;
-    justify-content: start;
-    margin-inline-end: calc(2 * var(--spacing-mega));
-  }
   align-items: center;
 }
 .arabicVerseContainer {
@@ -55,10 +45,6 @@
 .actionContainerRight {
   display: flex;
   align-items: center;
-  @include breakpoints.tablet {
-    flex-direction: column;
-    justify-content: center;
-  }
 }
 .actionContainerLeft {
   justify-content: flex-start;
@@ -120,5 +106,66 @@
   margin-inline-end: calc(0.5 * var(--spacing-xxsmall));
   @include breakpoints.tablet {
     margin-inline-end: 0;
+  }
+}
+
+.bottomActionsContainer {
+  margin-top: var(--spacing-medium);
+  margin-bottom: var(--spacing-small);
+  padding-top: var(--spacing-small);
+  width: 100%;
+}
+
+.tabsContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--spacing-medium);
+
+  @media (min-width: 768px) {
+    gap: var(--spacing-large);
+  }
+}
+
+.tabItem {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: var(--spacing-xsmall);
+  cursor: pointer;
+  color: var(--color-text-faded);
+  transition: color 0.2s ease;
+  padding: var(--spacing-xsmall) 0;
+
+  &:hover {
+    color: var(--color-success-medium);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--color-success-medium);
+    border-radius: 4px;
+  }
+}
+
+.tabIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  svg {
+    width: var(--spacing-medium);
+    height: var(--spacing-medium);
+    color: currentColor;
+  }
+}
+
+.tabLabel {
+  font-size: var(--font-size-small);
+  font-weight: var(--font-weight-medium);
+  color: inherit;
+  white-space: nowrap;
+
+  @media (max-width: 480px) {
+    font-size: var(--font-size-xsmall);
   }
 }
