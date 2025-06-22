@@ -1,7 +1,6 @@
-import { useState, useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
-import useIsClient from './useIsClient';
-
+import isClient from '@/utils/isClient';
 import { isMobile } from '@/utils/responsive';
 
 /**
@@ -13,7 +12,6 @@ import { isMobile } from '@/utils/responsive';
  */
 const useIsMobile = (): boolean => {
   const [isMobileView, setIsMobileView] = useState(false);
-  const isClient = useIsClient();
 
   useEffect(() => {
     // Only run on the client side
@@ -34,7 +32,7 @@ const useIsMobile = (): boolean => {
       };
     }
     return undefined; // Return a value for the non-client case
-  }, [isClient]);
+  }, []);
 
   // Return false during SSR, actual value on client
   return isClient ? isMobileView : false;
