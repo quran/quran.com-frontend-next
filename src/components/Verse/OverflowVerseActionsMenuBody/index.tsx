@@ -5,6 +5,7 @@ import useTranslation from 'next-translate/useTranslation';
 import BookmarkAction from '../BookmarkAction';
 import NotesAction from '../Notes/NotesAction';
 import SaveToCollectionAction from '../SaveToCollectionAction';
+import VerseActionAdvancedCopy from '../VerseActionAdvancedCopy';
 import VerseActionRepeatAudio from '../VerseActionRepeatAudio';
 
 import styles from './OverflowVerseActionsMenuBody.module.scss';
@@ -47,12 +48,14 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
       {!isTranslationView && (
         <WordByWordVerseAction verse={verse} onActionTriggered={onActionTriggered} />
       )}
-      <BookmarkAction
-        verse={verse}
-        isTranslationView={isTranslationView}
-        onActionTriggered={onActionTriggered}
-        bookmarksRangeUrl={bookmarksRangeUrl}
-      />
+      {!isTranslationView && (
+        <BookmarkAction
+          verse={verse}
+          isTranslationView={isTranslationView}
+          onActionTriggered={onActionTriggered}
+          bookmarksRangeUrl={bookmarksRangeUrl}
+        />
+      )}
       {isLoggedIn() && (
         <SaveToCollectionAction
           verse={verse}
@@ -60,19 +63,26 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
           isTranslationView={isTranslationView}
         />
       )}
-      <PopoverMenu.Item icon={<ShareIcon />} onClick={onShareItemClicked}>
-        <div className={styles.menuWithNestedItems}>
-          {t('share')}
-          <div className={styles.newLabelContainer}>
-            <IconContainer
-              shouldForceSetColors={false}
-              icon={<ChevronRightIcon />}
-              shouldFlipOnRTL
-              size={IconSize.Small}
-            />
+      {!isTranslationView && (
+        <PopoverMenu.Item icon={<ShareIcon />} onClick={onShareItemClicked}>
+          <div className={styles.menuWithNestedItems}>
+            {t('share')}
+            <div className={styles.newLabelContainer}>
+              <IconContainer
+                shouldForceSetColors={false}
+                icon={<ChevronRightIcon />}
+                shouldFlipOnRTL
+                size={IconSize.Small}
+              />
+            </div>
           </div>
-        </div>
-      </PopoverMenu.Item>
+        </PopoverMenu.Item>
+      )}
+      <VerseActionAdvancedCopy
+        onActionTriggered={onActionTriggered}
+        verse={verse}
+        isTranslationView={isTranslationView}
+      />
       <VerseActionRepeatAudio isTranslationView={isTranslationView} verseKey={verse.verseKey} />
     </div>
   ) : (

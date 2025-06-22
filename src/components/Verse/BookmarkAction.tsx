@@ -2,24 +2,27 @@
 /* eslint-disable react-func/max-lines-per-function */
 import { useMemo } from 'react';
 
+import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 import { useSWRConfig } from 'swr';
 import useSWRImmutable from 'swr/immutable';
 
-import PopoverMenu from '../dls/PopoverMenu/PopoverMenu';
+import styles from '../QuranReader/TranslationView/TranslationViewCell.module.scss';
 
+import PopoverMenu from '@/components/dls/PopoverMenu/PopoverMenu';
+import Spinner from '@/components/dls/Spinner/Spinner';
+import { ToastStatus, useToast } from '@/components/dls/Toast/Toast';
+import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import BookmarkedIcon from '@/icons/bookmark.svg';
 import UnBookmarkedIcon from '@/icons/unbookmarked.svg';
-import Spinner from 'src/components/dls/Spinner/Spinner';
-import { ToastStatus, useToast } from 'src/components/dls/Toast/Toast';
-import { selectBookmarks, toggleVerseBookmark } from 'src/redux/slices/QuranReader/bookmarks';
-import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
-import { getMushafId } from 'src/utils/api';
-import { addBookmark, deleteBookmarkById, getBookmark } from 'src/utils/auth/api';
-import { makeBookmarksUrl, makeBookmarkUrl } from 'src/utils/auth/apiPaths';
-import { isLoggedIn } from 'src/utils/auth/login';
-import { logButtonClick } from 'src/utils/eventLogger';
+import { selectBookmarks, toggleVerseBookmark } from '@/redux/slices/QuranReader/bookmarks';
+import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
+import { getMushafId } from '@/utils/api';
+import { addBookmark, deleteBookmarkById, getBookmark } from '@/utils/auth/api';
+import { makeBookmarksUrl, makeBookmarkUrl } from '@/utils/auth/apiPaths';
+import { isLoggedIn } from '@/utils/auth/login';
+import { logButtonClick } from '@/utils/eventLogger';
 import BookmarkType from 'types/BookmarkType';
 
 const BookmarkAction = ({ verse, isTranslationView, onActionTriggered, bookmarksRangeUrl }) => {
@@ -80,7 +83,13 @@ const BookmarkAction = ({ verse, isTranslationView, onActionTriggered, bookmarks
     }
   };
 
-  const onToggleBookmarkClicked = () => {
+  const onToggleBookmarkClicked = (e?: React.MouseEvent) => {
+    // Prevent default to avoid page scroll
+    if (e) {
+      e.preventDefault();
+      e.stopPropagation(); // Also stop propagation to prevent any parent handlers
+    }
+
     // eslint-disable-next-line i18next/no-literal-string
     logButtonClick(
       // eslint-disable-next-line i18next/no-literal-string
@@ -148,9 +157,41 @@ const BookmarkAction = ({ verse, isTranslationView, onActionTriggered, bookmarks
 
   let bookmarkIcon = <Spinner />;
   if (!isVerseBookmarkedLoading) {
-    bookmarkIcon = isVerseBookmarked ? <BookmarkedIcon /> : <UnBookmarkedIcon />;
+    bookmarkIcon = isVerseBookmarked ? (
+      <BookmarkedIcon style={{ color: 'var(--color-text-default)' }} />
+    ) : (
+      <UnBookmarkedIcon />
+    );
   }
 
+  // For use in the TopActions component (standalone button)
+  if (isTranslationView) {
+    return (
+      <Button
+        size={ButtonSize.Small}
+        tooltip={isVerseBookmarked ? t('bookmarked') : t('bookmark')}
+        variant={ButtonVariant.Ghost}
+        shape={ButtonShape.Circle}
+        className={classNames(
+          styles.iconContainer,
+          styles.verseAction,
+          {
+            [styles.fadedVerseAction]: isTranslationView && !isVerseBookmarked,
+          },
+          'bookmark-verse-action-button',
+        )}
+        onClick={(e) => {
+          onToggleBookmarkClicked(e);
+        }}
+        isDisabled={isVerseBookmarkedLoading}
+        ariaLabel={isVerseBookmarked ? t('bookmarked') : t('bookmark')}
+      >
+        <span className={styles.icon}>{bookmarkIcon}</span>
+      </Button>
+    );
+  }
+
+  // For use in the overflow menu (PopoverMenu.Item)
   return (
     <>
       <PopoverMenu.Item

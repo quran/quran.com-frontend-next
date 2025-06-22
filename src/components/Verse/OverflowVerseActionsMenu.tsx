@@ -54,7 +54,7 @@ const OverflowVerseActionsMenu: React.FC<Props> = ({
             )}
             ariaLabel={t('more')}
           >
-            <span className={styles.icon}>
+            <span className={cellStyles.icon}>
               <OverflowMenuIcon />
             </span>
           </Button>

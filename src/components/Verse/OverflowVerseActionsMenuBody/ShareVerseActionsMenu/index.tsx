@@ -47,6 +47,7 @@ type Props = {
   isTranslationView: boolean;
   onActionTriggered?: () => void;
   setSelectedMenu: (selectedMenu: VerseActionsOverflowMenu) => void;
+  hasBackButton?: boolean;
 };
 
 const ShareVerseActionsMenu: React.FC<Props> = ({
@@ -54,6 +55,7 @@ const ShareVerseActionsMenu: React.FC<Props> = ({
   isTranslationView,
   onActionTriggered,
   setSelectedMenu,
+  hasBackButton = true,
 }) => {
   const { t, lang } = useTranslation('common');
   const [isCopied, setIsCopied] = useState(false);
@@ -106,22 +108,28 @@ const ShareVerseActionsMenu: React.FC<Props> = ({
   };
   return (
     <div>
-      <PopoverMenu.Item shouldFlipOnRTL icon={<ChevronLeftIcon />} onClick={onBackClicked}>
-        {t('common:share')}
-      </PopoverMenu.Item>
-      <PopoverMenu.Divider />
+      {hasBackButton && (
+        <>
+          <PopoverMenu.Item shouldFlipOnRTL icon={<ChevronLeftIcon />} onClick={onBackClicked}>
+            {t('common:share')}
+          </PopoverMenu.Item>
+          <PopoverMenu.Divider />
+        </>
+      )}
+
       <PopoverMenu.Item onClick={onCopyLinkClicked} icon={<CopyLinkIcon />}>
         {t('quran-reader:cpy-link')}
       </PopoverMenu.Item>
       <PopoverMenu.Item onClick={onGenerateClicked} icon={<VideoIcon />}>
         {t('quran-reader:generate-media')}
       </PopoverMenu.Item>
-
-      <VerseActionAdvancedCopy
-        onActionTriggered={onActionTriggered}
-        verse={verse}
-        isTranslationView={isTranslationView}
-      />
+      {!isTranslationView && (
+        <VerseActionAdvancedCopy
+          onActionTriggered={onActionTriggered}
+          verse={verse}
+          isTranslationView={isTranslationView}
+        />
+      )}
     </div>
   );
 };

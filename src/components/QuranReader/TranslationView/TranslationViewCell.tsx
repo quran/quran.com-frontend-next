@@ -25,7 +25,6 @@ import { selectEnableAutoScrolling } from '@/redux/slices/AudioPlayer/state';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
 import { getVerseWords, makeVerseKey } from '@/utils/verse';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
-import BookmarksMap from 'types/BookmarksMap';
 import Translation from 'types/Translation';
 import Verse from 'types/Verse';
 
@@ -33,7 +32,6 @@ type TranslationViewCellProps = {
   verse: Verse;
   quranReaderStyles: QuranReaderStyles;
   verseIndex: number;
-  pageBookmarks: BookmarksMap | undefined;
   bookmarksRangeUrl: string;
   hasNotes?: boolean;
   hasQuestions?: boolean;
@@ -43,7 +41,6 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
   verse,
   quranReaderStyles,
   verseIndex,
-  pageBookmarks,
   bookmarksRangeUrl,
   hasNotes,
   hasQuestions,
@@ -78,12 +75,7 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
           [styles.highlightedContainer]: isHighlighted,
         })}
       >
-        <TopActions
-          verse={verse}
-          pageBookmarks={pageBookmarks}
-          bookmarksRangeUrl={bookmarksRangeUrl}
-          hasNotes={hasNotes}
-        />
+        <TopActions verse={verse} bookmarksRangeUrl={bookmarksRangeUrl} hasNotes={hasNotes} />
 
         <div className={classNames(styles.contentContainer)}>
           <div className={styles.arabicVerseContainer}>
@@ -140,7 +132,6 @@ const areVersesEqual = (
   ) &&
   !verseTranslationChanged(prevProps.verse, nextProps.verse) &&
   !verseTranslationFontChanged(prevProps.quranReaderStyles, nextProps.quranReaderStyles) &&
-  JSON.stringify(prevProps.pageBookmarks) === JSON.stringify(nextProps.pageBookmarks) &&
   prevProps.bookmarksRangeUrl === nextProps.bookmarksRangeUrl &&
   prevProps.hasNotes === nextProps.hasNotes &&
   prevProps.hasQuestions === nextProps.hasQuestions;
