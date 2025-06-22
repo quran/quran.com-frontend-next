@@ -114,7 +114,12 @@
     "sub-header": "Share your interest by filling out this form, and we’ll reach out when a suitable opportunity is available, insha’Allah.",
     "title": "Community"
   },
-  "complete-sign-up": "Complete your registration",
+  "complete-signup": {
+    "title": "Complete your registration",
+    "description": "We require the following missing information to complete your registration.",
+    "verification-code": "Verification Code",
+    "verification-code-sent-to": "Verification code sent to {{email}}"
+  },
   "consents": {
     "communication": {
       "body": "🚀 Supercharge your progress through <boldSpan>personalized</boldSpan> notifications about your goal progress, maintaining streaks, and enhancing your usage of our current features.<br></br><br></br> Can we keep you in the loop through email and other channels? You're in control – feel free to adjust these preferences anytime in your account settings.<br></br><br></br> Simply select 'Allow' for <boldSpan>inspiring reminders</boldSpan> or 'Not Now' to decline.",
@@ -465,5 +470,6 @@
     "title": "Word Click"
   },
   "word-tooltip": "Word Tooltip",
-  "yes": "Yes"
+  "yes": "Yes",
+  "back": "Back"
 }
