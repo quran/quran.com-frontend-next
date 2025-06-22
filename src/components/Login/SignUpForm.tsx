@@ -2,6 +2,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from './login.module.scss';
 import getFormErrors, { ErrorType } from './SignUpForm/errors';
+import addCustomRenderToFormFields from './SignUpFormWithCustomRender';
 
 import FormBuilder from '@/components/FormBuilder/FormBuilder';
 import getSignUpFormFields from '@/components/Login/SignUpFormFields';
@@ -50,12 +51,16 @@ const SignUpForm = ({ onSuccess }: Props) => {
     </Button>
   );
 
+  // Get the base form fields and add customRender to text fields
+  const formFields = addCustomRenderToFormFields(getSignUpFormFields(t));
+
   return (
     <div className={styles.formContainer}>
       <FormBuilder
-        formFields={getSignUpFormFields(t)}
+        formFields={formFields}
         onSubmit={handleSubmit}
         renderAction={renderAction}
+        shouldSkipValidation
       />
     </div>
   );
