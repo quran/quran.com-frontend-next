@@ -19,6 +19,8 @@ export enum ErrorType {
   FORGOT_PASSWORD = 'forgot-password',
   SIGN_IN = 'sign-in',
   RESET_PASSWORD = 'reset-password',
+  COMPLETE_SIGNUP = 'complete-signup',
+  VERIFICATION_CODE = 'verification-code',
 }
 
 const getFormErrors = (t: any, type: ErrorType, apiErrors?: any): { errors: AuthErrors } => {
@@ -107,6 +109,20 @@ const getFormErrors = (t: any, type: ErrorType, apiErrors?: any): { errors: Auth
         errors: {
           ...baseErrors,
           password: t('errors.reset-password-failed'),
+        } as AuthErrors,
+      };
+    case ErrorType.COMPLETE_SIGNUP:
+      return {
+        errors: {
+          ...baseErrors,
+          username: t('errors.complete-signup-failed'),
+        } as AuthErrors,
+      };
+    case ErrorType.VERIFICATION_CODE:
+      return {
+        errors: {
+          ...baseErrors,
+          verificationCode: t('errors.verification-failed'),
         } as AuthErrors,
       };
     default:
