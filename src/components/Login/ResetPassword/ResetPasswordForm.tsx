@@ -46,7 +46,7 @@ const ResetPasswordForm: React.FC = () => {
       if (!response.success) {
         setIsSubmitting(false);
         if (errors.token) {
-          setGeneralError(t('errors.expiredToken'));
+          setGeneralError(t('errors.expiredRequest'));
         }
         return getFormErrors(t, ErrorType.API, errors);
       }
