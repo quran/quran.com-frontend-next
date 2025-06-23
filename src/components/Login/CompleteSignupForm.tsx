@@ -1,3 +1,4 @@
+/* eslint-disable react-func/max-lines-per-function */
 /* eslint-disable max-lines */
 import React, { useState } from 'react';
 
@@ -14,14 +15,14 @@ import VerificationCodeForm from './VerificationCode/VerificationCodeForm';
 import Button, { ButtonShape, ButtonType } from '@/components/dls/Button/Button';
 import FormBuilder from '@/components/FormBuilder/FormBuilder';
 import authStyles from '@/styles/auth/auth.module.scss';
-import { updateUserProfile } from '@/utils/auth/api';
+import UserProfile from '@/types/auth/UserProfile';
 import { makeUserProfileUrl } from '@/utils/auth/apiPaths';
+import { updateUserProfile } from '@/utils/auth/authRequests';
 import {
   handleResendVerificationCode,
   handleVerificationCodeSubmit as submitVerificationCode,
 } from '@/utils/auth/verification';
 import { logFormSubmission } from '@/utils/eventLogger';
-import UserProfile from 'types/auth/UserProfile';
 
 type FormData = {
   [key: string]: string;
@@ -55,23 +56,32 @@ const CompleteSignupForm: React.FC<CompleteSignupFormProps> = ({ onSuccess, user
     return null;
   };
 
-  /**
-   * Updates the user profile data and manages state accordingly
-   * @param {FormData} data - Form data to update the profile with
-   * @returns {Promise<{success: boolean, error?: any}>} Result of the update operation
-   */
-  const updateUserProfileData = async (data: FormData) => {
+  const handleSubmit = async (data: FormData) => {
+    logFormSubmission('complete_signUp');
+
+    // Validate form data
+    const validationErrors = validateFormData(data);
+    if (validationErrors) return validationErrors;
+
+    setIsSubmitting(true);
+
     try {
-      // Update the user profile
-      await updateUserProfile({
+      // Update the user profile using the auth request handler
+      const { data: response, errors } = await updateUserProfile({
         firstName: data.firstName,
         lastName: data.lastName,
         username: data.username,
       });
 
+      if (!response.success) {
+        setIsSubmitting(false);
+        return getFormErrors(t, ErrorType.API, errors);
+      }
+
       // Don't include email in the mutation if it's missing from the user profile
       // This ensures the profile is still considered incomplete until verification is complete
       const wasEmailMissing = !userData?.email;
+      const isEmailAdded = !!data.email;
 
       // Update the global state with the new profile data
       mutate(
@@ -87,90 +97,51 @@ const CompleteSignupForm: React.FC<CompleteSignupFormProps> = ({ onSuccess, user
         false,
       );
 
-      return { success: true };
-    } catch (error) {
-      return { success: false, error };
-    }
-  };
+      // Store form data and email
+      setFormData(data);
+      setEmail(data.email);
 
-  /**
-   * Sends a verification code to the specified email address
-   * @param {string} emailAddress - Email address to send the verification code to
-   * @returns {Promise<{success: boolean, error?: any}>} Result of the send operation
-   */
-  const sendVerificationCodeToEmail = async (emailAddress: string) => {
-    try {
-      await handleResendVerificationCode(emailAddress);
-      return { success: true };
-    } catch (error) {
-      return { success: false, error };
-    }
-  };
+      // Check if email was missing and has been added
+      if (wasEmailMissing && isEmailAdded) {
+        try {
+          // Email was missing and has been added, proceed with verification
+          await handleResendVerificationCode(data.email);
 
-  /**
-   * Handles the form submission
-   * @param {FormData} data - Form data submitted by the user
-   * @returns {Promise<any>} Form errors or undefined if successful
-   */
-  const handleSubmit = async (data: FormData) => {
-    logFormSubmission('complete_signUp');
-
-    // Validate form data
-    const validationErrors = validateFormData(data);
-    if (validationErrors) return validationErrors;
-
-    setIsSubmitting(true);
-
-    // Update user profile
-    const profileResult = await updateUserProfileData(data);
-    if (!profileResult.success) {
-      setIsSubmitting(false);
-      return getFormErrors(t, ErrorType.API, profileResult.error);
-    }
-
-    // Store form data and email
-    setFormData(data);
-    setEmail(data.email);
-
-    // Check if email was missing and has been added
-    const wasEmailMissing = !userData?.email;
-    const isEmailAdded = !!data.email;
-
-    if (wasEmailMissing && isEmailAdded) {
-      // Email was missing and has been added, proceed with verification
-      const verificationResult = await sendVerificationCodeToEmail(data.email);
-      if (!verificationResult.success) {
-        setIsSubmitting(false);
-        return getFormErrors(t, ErrorType.API, verificationResult.error);
+          // Show verification form
+          setShowVerification(true);
+          setIsSubmitting(false);
+          return undefined;
+        } catch (error) {
+          setIsSubmitting(false);
+          return getFormErrors(t, ErrorType.VERIFICATION_CODE, error);
+        }
       }
 
-      // Show verification form
-      setShowVerification(true);
+      // If we reach here, the profile was updated successfully and no verification is needed
+      onSuccess?.();
       setIsSubmitting(false);
       return undefined;
+    } catch (error) {
+      setIsSubmitting(false);
+      return getFormErrors(t, ErrorType.COMPLETE_SIGNUP, error);
     }
-
-    // Email wasn't changed or wasn't missing, just redirect
-    setIsSubmitting(false);
-    if (onSuccess) {
-      onSuccess();
-    }
-    return undefined;
   };
 
-  /**
-   * Handles the verification code submission
-   * @param {string} code - Verification code entered by the user
-   */
   const handleVerificationCodeSubmit = async (code: string) => {
-    const result = await submitVerificationCode(email, code);
+    try {
+      const result = await submitVerificationCode(email, code);
 
-    // Mutate the user profile data to update the global state
-    mutate(result.profileUrl);
+      // Mutate the user profile data to update the global state
+      mutate(result.profileUrl);
 
-    // Call onSuccess to redirect to home page
-    if (onSuccess) {
-      onSuccess();
+      // Call onSuccess to redirect to home page
+      if (onSuccess) {
+        onSuccess();
+      }
+    } catch (error) {
+      // Let the VerificationCodeBase component handle the error display
+      setIsSubmitting(false);
+      throw error;
     }
   };
 
@@ -192,10 +163,7 @@ const CompleteSignupForm: React.FC<CompleteSignupFormProps> = ({ onSuccess, user
     </Button>
   );
 
-  /**
-   * Create form fields with form data passed directly to the custom render function
-   * This ensures that form data is prioritized over user data when displaying fields
-   */
+  // Get the base form fields and add customRender to fields
   const formFields = React.useMemo(() => {
     const baseFields = getCompleteSignupFormFields(t);
     return addCustomRenderToCompleteSignupFormFields(baseFields, userData, formData);
