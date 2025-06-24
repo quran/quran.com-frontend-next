@@ -97,6 +97,8 @@ const SearchInput: React.FC<Props> = ({
     e.preventDefault();
     if (searchQuery) {
       router.push(getSearchQueryNavigationUrl(searchQuery), undefined, { shallow: true });
+      // Close the dropdown after navigation
+      dispatch({ type: setIsExpanded.type, payload: false });
     }
   };
 
