@@ -11,7 +11,9 @@ import ReadingViewSkeleton from './ReadingViewSkeleton';
 import { getReaderViewRequestKey, verseFetcher } from '@/components/QuranReader/api';
 import useIsUsingDefaultSettings from '@/hooks/useIsUsingDefaultSettings';
 import { selectIsPersistGateHydrationComplete } from '@/redux/slices/persistGateHydration';
+import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
+import { areArraysEqual } from '@/utils/array';
 import { VersesResponse } from 'types/ApiResponses';
 import LookupRecord from 'types/LookupRecord';
 import Verse from 'types/Verse';
@@ -104,6 +106,8 @@ const PageContainer: React.FC<Props> = ({
     [initialData.verses, pageIndex, pageNumber],
   );
 
+  const selectedTranslations = useSelector(selectSelectedTranslations, areArraysEqual) as number[];
+
   const isUsingDefaultSettings = useIsUsingDefaultSettings();
   const shouldUseInitialData = pageIndex === 0 && isUsingDefaultSettings;
 
@@ -123,6 +127,7 @@ const PageContainer: React.FC<Props> = ({
         reciter: reciterId,
         locale: lang,
         wordByWordLocale,
+        selectedTranslations,
       })
     : null;
 

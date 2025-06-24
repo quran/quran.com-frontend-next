@@ -66,6 +66,7 @@ export type CollectionsQueryParams = {
   cursor?: string;
   limit?: number;
   sortBy?: string;
+  type?: BookmarkType;
 };
 export const makeCollectionsUrl = (queryParams: CollectionsQueryParams): string =>
   makeUrl('collections', queryParams);

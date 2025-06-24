@@ -14,16 +14,15 @@ $pixel: 1px;
   color: var(--color-text-default);
   text-align: center;
   transition: var(--transition-regular);
-  margin-top: var(--spacing-micro);
   @include breakpoints.smallerThanTablet {
-    margin-top: var(--spacing-xsmall);
+    margin-top: 0px;
   }
   z-index: var(--z-index-min);
 }
 
 .visibleContainer {
   @include breakpoints.smallerThanTablet {
-    margin-top: var(--spacing-micro);
+    margin-top: 0px;
   }
 }
 

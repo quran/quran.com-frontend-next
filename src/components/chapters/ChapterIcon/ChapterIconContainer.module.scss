@@ -23,3 +23,15 @@
     font-size: calc(1.5 * var(--font-size-jumbo));
   }
 }
+
+.iconContainerXMega {
+  span {
+    font-size: calc(2 * var(--font-size-jumbo));
+  }
+}
+
+.iconContainerMassive {
+  span {
+    font-size: calc(3 * var(--font-size-jumbo));
+  }
+}
