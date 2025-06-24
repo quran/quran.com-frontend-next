@@ -1,4 +1,26 @@
+$playChapterAudioButtonMinInlineSize: 95px;
+
+@mixin customButton {
+  box-shadow: var(--shadow-small-new);
+
+  svg {
+    color: var(--color-success-medium);
+  }
+
+  &:hover {
+    border-color: var(--color-success-medium);
+    color: var(--color-text-faded-new);
+  }
+}
+
 .container {
   display: flex;
   justify-content: center;
+}
+
+.playChapterAudioButton {
+  button {
+    @include customButton;
+    min-inline-size: $playChapterAudioButtonMinInlineSize;
+  }
 }

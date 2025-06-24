@@ -846,7 +846,7 @@ $page-container-max-width: 80rem;
 @mixin pageContainer {
   max-width: $page-container-max-width;
   @include breakpoints.tablet {
-    width: 1230px;
+    max-width: 80%;
   }
 }
 

@@ -44,6 +44,12 @@ $virtual-scrolling-height-bandage: calc(
     transition: var(--transition-regular);
     margin-inline-end: 0;
   }
+
+  @include breakpoints.smallerThanTablet {
+    // TODO: we should add the banner height here if it's shown
+    // padding-block-start: calc($quran-reader-padding + var(--mobile-reading-mode-tabs-height) + var(--banner-height));
+    padding-block-start: calc($quran-reader-padding + var(--mobile-reading-mode-tabs-height));
+  }
 }
 
 .withVisibleSideBar {
