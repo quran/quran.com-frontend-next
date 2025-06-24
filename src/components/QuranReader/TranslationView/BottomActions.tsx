@@ -7,7 +7,8 @@ import styles from './TranslationViewCell.module.scss';
 
 import BookIcon from '@/icons/book-open.svg';
 import ChatIcon from '@/icons/chat.svg';
-import StarIcon from '@/icons/star.svg';
+import LightbulbOnIcon from '@/icons/lightbulb-on.svg';
+import LightbulbIcon from '@/icons/lightbulb.svg';
 import { selectSelectedTafsirs } from '@/redux/slices/QuranReader/tafsirs';
 import { logButtonClick } from '@/utils/eventLogger';
 import {
@@ -21,6 +22,7 @@ import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
 type BottomActionsProps = {
   verseKey: string;
   hasQuestions?: boolean;
+  isClarificationQuestion?: boolean;
 };
 
 /**
@@ -28,7 +30,11 @@ type BottomActionsProps = {
  * including Tafsir, Reflections & Lessons, and Answers
  * @returns {JSX.Element} JSX element containing the bottom action tabs
  */
-const BottomActions: React.FC<BottomActionsProps> = ({ verseKey, hasQuestions }) => {
+const BottomActions: React.FC<BottomActionsProps> = ({
+  verseKey,
+  hasQuestions,
+  isClarificationQuestion,
+}) => {
   const { t, lang } = useTranslation('common');
   const tafsirs = useSelector(selectSelectedTafsirs);
   const [chapterId, verseNumber] = getVerseAndChapterNumbersFromKey(verseKey);
@@ -100,7 +106,7 @@ const BottomActions: React.FC<BottomActionsProps> = ({ verseKey, hasQuestions })
             aria-label={t('answers')}
           >
             <span className={styles.tabIcon}>
-              <StarIcon />
+              {isClarificationQuestion ? <LightbulbOnIcon /> : <LightbulbIcon />}
             </span>
             <span className={styles.tabLabel}>{t('answers')}</span>
           </div>

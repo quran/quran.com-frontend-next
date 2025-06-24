@@ -1,7 +1,5 @@
 import { useEffect, useRef } from 'react';
 
-import useSWRImmutable from 'swr/immutable';
-
 import { useVerseTrackerContext } from '../../contexts/VerseTrackerContext';
 import TranslationViewCell from '../TranslationViewCell';
 
@@ -10,19 +8,14 @@ import getTranslationNameString from '@/components/QuranReader/ReadingView/utils
 import useCountRangeNotes from '@/hooks/auth/useCountRangeNotes';
 import useCountRangeQuestions from '@/hooks/auth/useCountRangeQuestions';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
-import { VersesResponse } from '@/types/ApiResponses';
 import Verse from '@/types/Verse';
-import { getPageBookmarks } from '@/utils/auth/api';
 
 interface TranslationPageVerse {
   verse: Verse;
   selectedTranslations?: number[];
   bookmarksRangeUrl: string | null;
-  mushafId: number;
   verseIdx: number;
   quranReaderStyles: QuranReaderStyles;
-  initialData: VersesResponse;
-  firstVerseInPage: Verse;
   isLastVerseInView: boolean;
   notesRange: {
     from: string;
@@ -34,29 +27,16 @@ const TranslationPageVerse: React.FC<TranslationPageVerse> = ({
   verse,
   selectedTranslations,
   bookmarksRangeUrl,
-  mushafId,
   verseIdx,
   quranReaderStyles,
-  initialData,
-  firstVerseInPage,
   isLastVerseInView,
   notesRange,
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const { verseKeysQueue } = useVerseTrackerContext();
 
-  const { data: pageBookmarks } = useSWRImmutable(bookmarksRangeUrl, async () => {
-    const response = await getPageBookmarks(
-      mushafId,
-      Number(firstVerseInPage.chapterId),
-      Number(firstVerseInPage.verseNumber),
-      initialData.pagination.perPage,
-    );
-    return response;
-  });
-
   const { data: notesCount } = useCountRangeNotes(notesRange);
-  const { data: questionsCount } = useCountRangeQuestions(notesRange);
+  const { data: questionsData } = useCountRangeQuestions(notesRange);
 
   useEffect(() => {
     let observer: IntersectionObserver = null;
@@ -82,7 +62,6 @@ const TranslationPageVerse: React.FC<TranslationPageVerse> = ({
     };
   }, [isLastVerseInView, verse, verseKeysQueue]);
 
-  const hasQuestions = questionsCount && questionsCount[verse.verseKey] > 0;
   const hasNotes = notesCount && notesCount[verse.verseKey] > 0;
 
   return (
@@ -108,10 +87,9 @@ const TranslationPageVerse: React.FC<TranslationPageVerse> = ({
         verse={verse}
         key={verse.id}
         quranReaderStyles={quranReaderStyles}
-        pageBookmarks={pageBookmarks}
         bookmarksRangeUrl={bookmarksRangeUrl}
         hasNotes={hasNotes}
-        hasQuestions={hasQuestions}
+        questionsData={questionsData}
       />
     </div>
   );

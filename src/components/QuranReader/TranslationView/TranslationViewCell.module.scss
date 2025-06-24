@@ -110,9 +110,6 @@
 }
 
 .bottomActionsContainer {
-  margin-top: var(--spacing-medium);
-  margin-bottom: var(--spacing-small);
-  padding-top: var(--spacing-small);
   width: 100%;
 }
 
@@ -131,19 +128,13 @@
   display: flex;
   flex-direction: row;
   align-items: center;
-  gap: var(--spacing-xsmall);
+  gap: calc(var(--spacing-xsmall) / 2);
   cursor: pointer;
   color: var(--color-text-faded);
   transition: color 0.2s ease;
-  padding: var(--spacing-xsmall) 0;
 
   &:hover {
     color: var(--color-success-medium);
-  }
-
-  &:focus-visible {
-    outline: 2px solid var(--color-success-medium);
-    border-radius: 4px;
   }
 }
 
@@ -153,19 +144,23 @@
   justify-content: center;
 
   svg {
-    width: var(--spacing-medium);
-    height: var(--spacing-medium);
     color: currentColor;
+    width: var(--spacing-medium2);
+    height: var(--spacing-medium2);
+
+    @include breakpoints.smallerThanTablet {
+      width: var(--spacing-medium);
+      height: var(--spacing-medium);
+    }
   }
 }
 
 .tabLabel {
-  font-size: var(--font-size-small);
-  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-normal);
   color: inherit;
   white-space: nowrap;
 
-  @media (max-width: 480px) {
+  @include breakpoints.smallerThanTablet {
     font-size: var(--font-size-xsmall);
   }
 }

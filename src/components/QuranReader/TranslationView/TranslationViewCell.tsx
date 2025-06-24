@@ -23,6 +23,8 @@ import Separator from '@/dls/Separator/Separator';
 import useScroll, { SMOOTH_SCROLL_TO_TOP } from '@/hooks/useScrollToElement';
 import { selectEnableAutoScrolling } from '@/redux/slices/AudioPlayer/state';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
+import QuestionType from '@/types/QuestionsAndAnswers/QuestionType';
+import { QuestionsCount } from '@/utils/auth/api';
 import { getVerseWords, makeVerseKey } from '@/utils/verse';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import Translation from 'types/Translation';
@@ -34,7 +36,7 @@ type TranslationViewCellProps = {
   verseIndex: number;
   bookmarksRangeUrl: string;
   hasNotes?: boolean;
-  hasQuestions?: boolean;
+  questionsData: Record<string, QuestionsCount>;
 };
 
 const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
@@ -43,13 +45,12 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
   verseIndex,
   bookmarksRangeUrl,
   hasNotes,
-  hasQuestions,
+  questionsData,
 }) => {
   const router = useRouter();
   const { startingVerse } = router.query;
 
   const audioService = useContext(AudioPlayerMachineContext);
-
   const isHighlighted = useSelectorXstate(audioService, (state) => {
     const { ayahNumber, surah } = state.context;
     return makeVerseKey(surah, ayahNumber) === verse.verseKey;
@@ -67,6 +68,9 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
       scrollToSelectedItem();
     }
   }, [isHighlighted, scrollToSelectedItem, enableAutoScrolling, startingVerse, verseIndex]);
+
+  const hasQuestions = questionsData?.[verse.verseKey]?.total > 0;
+  const isClarificationQuestion = !!questionsData?.[verse.verseKey].types?.CLARIFICATION;
 
   return (
     <div ref={selectedItemRef}>
@@ -94,7 +98,11 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
             ))}
           </div>
         </div>
-        <BottomActions verseKey={verse.verseKey} hasQuestions={hasQuestions} />
+        <BottomActions
+          verseKey={verse.verseKey}
+          hasQuestions={hasQuestions}
+          isClarificationQuestion={isClarificationQuestion}
+        />
       </div>
       <Separator />
     </div>
@@ -134,5 +142,5 @@ const areVersesEqual = (
   !verseTranslationFontChanged(prevProps.quranReaderStyles, nextProps.quranReaderStyles) &&
   prevProps.bookmarksRangeUrl === nextProps.bookmarksRangeUrl &&
   prevProps.hasNotes === nextProps.hasNotes &&
-  prevProps.hasQuestions === nextProps.hasQuestions;
+  prevProps.questionsData === nextProps.questionsData;
 export default memo(TranslationViewCell, areVersesEqual);
