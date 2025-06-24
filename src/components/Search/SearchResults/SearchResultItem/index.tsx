@@ -2,7 +2,7 @@
 import React, { useContext } from 'react';
 
 import classNames from 'classnames';
-import { useRouter } from 'next/router';
+import { NextRouter, useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
 import SearchResultItemIcon from '../SearchResultItemIcon';
@@ -52,7 +52,7 @@ const isSameUrl = (currentPath: string, targetUrl: string): boolean => {
 /**
  * Force scroll to verse by temporarily removing and re-adding the startingVerse param
  */
-const forceScrollToVerse = (router: any, verseNumber: string): void => {
+const forceScrollToVerse = (router: NextRouter, verseNumber: string): void => {
   const queryWithoutStartingVerse = { ...router.query };
   delete queryWithoutStartingVerse[QueryParam.STARTING_VERSE];
 
@@ -69,7 +69,7 @@ const forceScrollToVerse = (router: any, verseNumber: string): void => {
       router.replace(
         {
           pathname: router.pathname,
-          query: { ...router.query, [QueryParam.STARTING_VERSE]: verseNumber },
+          query: { ...queryWithoutStartingVerse, [QueryParam.STARTING_VERSE]: verseNumber },
         },
         undefined,
         { shallow: true },
