@@ -1,10 +1,17 @@
 @use "src/styles/breakpoints";
+@use "src/styles/theme";
 
 .container {
   display: flex;
   align-items: center;
   justify-content: center;
   width: 100%;
+  transition: all 0.3s ease;
+  cursor: pointer;
+
+  &:hover .unselected {
+    opacity: 0.9;
+  }
 }
 
 .spinner {
@@ -12,7 +19,8 @@
 }
 
 .preferenceTextContainer {
-  padding-inline-start: var(--spacing-xsmall);
+  padding-inline-start: calc(var(--spacing-xsmall) / 2);
+  transition: opacity 0.3s ease;
 }
 
 .iconContainer {
@@ -26,6 +34,122 @@
     & > svg {
       -webkit-margin-end: 0;
       margin-inline-end: 0;
+    }
+  }
+}
+
+.readingIcon,
+.translationIcon {
+  transition: all 0.3s ease;
+  border-radius: 2px;
+
+  rect,
+  path {
+    transition: all 0.3s ease;
+  }
+}
+
+.selected {
+  opacity: 1;
+
+  rect:first-child {
+    fill: var(--color-primary-medium, #272727);
+    stroke: var(--color-primary-medbutium, #272727);
+  }
+
+  path {
+    fill: white;
+  }
+
+  @include theme.dark {
+    rect:first-child {
+      fill: var(--color-primary-medium, #272727);
+      stroke: var(--color-primary-medium, #272727);
+    }
+
+    path {
+      fill: var(--color-background-elevated-new, #1f2125);
+    }
+  }
+
+  @include theme.sepia {
+    rect:first-child {
+      fill: var(--color-primary-medium, #000000);
+      stroke: var(--color-primary-medium, #000000);
+    }
+
+    path {
+      fill: white;
+    }
+  }
+}
+
+.successVariant {
+  opacity: 1;
+
+  rect:first-child {
+    fill: var(--color-success-medium);
+    stroke: var(--color-success-medium);
+  }
+
+  path {
+    fill: white;
+  }
+
+  @include theme.dark {
+    rect:first-child {
+      fill: var(--color-success-medium);
+      stroke: var(--color-success-medium);
+    }
+
+    path {
+      fill: var(--color-background-elevated-new, #1f2125);
+    }
+  }
+
+  @include theme.sepia {
+    rect:first-child {
+      fill: var(--color-success-medium);
+      stroke: var(--color-success-medium);
+    }
+
+    path {
+      fill: white;
+    }
+  }
+}
+
+.unselected {
+  opacity: 0.7;
+
+  rect:first-child {
+    fill: none;
+    stroke: #666666;
+  }
+
+  path {
+    fill: #666666;
+  }
+
+  @include theme.dark {
+    rect:first-child {
+      fill: none;
+      stroke: var(--color-text-faded-new, #dee2e6);
+    }
+
+    path {
+      fill: var(--color-text-faded-new, #dee2e6);
+    }
+  }
+
+  @include theme.sepia {
+    rect:first-child {
+      fill: none;
+      stroke: #666666;
+    }
+
+    path {
+      fill: #666666;
     }
   }
 }
