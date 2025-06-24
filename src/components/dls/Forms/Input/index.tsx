@@ -189,6 +189,7 @@ const Input: React.FC<Props> = ({
                   shape={ButtonShape.Circle}
                   variant={ButtonVariant.Ghost}
                   size={ButtonSize.Small}
+                  htmlType="button"
                   onClick={onClearClicked}
                 >
                   <ClearIcon />
