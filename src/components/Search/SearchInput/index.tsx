@@ -60,6 +60,19 @@ const SearchInput: React.FC<Props> = ({
     setIsSpeechRecognitionSupported(checkSpeechRecognitionSupport());
   }, []);
 
+  // Custom search query change handler that also expands the dropdown
+  const handleSearchQueryChange = useCallback(
+    (newSearchQuery: string) => {
+      onSearchQueryChange(newSearchQuery);
+
+      // Auto-expand dropdown when user starts typing (if shouldExpandOnClick is true)
+      if (shouldExpandOnClick && newSearchQuery?.length > 0 && !isExpanded) {
+        dispatch({ type: setIsExpanded.type, payload: true });
+      }
+    },
+    [onSearchQueryChange, shouldExpandOnClick, isExpanded, dispatch],
+  );
+
   const collapseContainer = useCallback(() => {
     // Always collapse when clicking outside, regardless of hasSearchResults
     dispatch({ type: setIsExpanded.type, payload: false });
@@ -114,7 +127,7 @@ const SearchInput: React.FC<Props> = ({
           <Input
             onClick={onInputClick}
             id="searchQuery"
-            onChange={onSearchQueryChange}
+            onChange={handleSearchQueryChange}
             value={searchQuery}
             placeholder={placeholder}
             onClearClicked={handleClearClicked}
