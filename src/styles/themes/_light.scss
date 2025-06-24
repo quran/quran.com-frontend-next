@@ -19,6 +19,7 @@
   --color-error-faded: #f7d4d6;
   --color-error-faint: #ff1a1a;
   --color-error-medium: #ee0102;
+  --color-error-medium2: #e61336;
   --color-error-deep: #c50000;
 
   --color-warning-faded: #fef3dc;
@@ -55,6 +56,11 @@
   // lighten the `background-color` by using it in `background-image`. check Button's ghost variant for example
 
   --color-borders-hairline: rgb(235, 238, 240);
+  --color-border-gray-dark: #505050;
+  --color-border-gray-medium: #8b8b8b;
+  --color-border-gray-light: #b0b0b0;
+  --color-border-gray-lighter: #cccccc;
+  --color-border-gray-faded: #ededed;
 
   --color-highlight: #79ffe1;
   --color-highlight-dark: #22a5ad;

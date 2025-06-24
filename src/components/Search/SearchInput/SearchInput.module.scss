@@ -2,7 +2,12 @@
 @use "src/styles/theme";
 
 .headerOuterContainer {
-    background: var(--color-background-elevated);
+    @include theme.light {
+        background: var(--color-background-elevated);
+    }
+    @include theme.sepia {
+        background: var(--color-background-elevated);
+    }
     @include theme.dark {
         background: rgba(52, 58, 64, 1);
     }
