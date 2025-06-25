@@ -16,6 +16,8 @@ import Verse from 'types/Verse';
 type ShareButtonProps = {
   verse: Verse;
   isTranslationView?: boolean;
+  isMenu?: boolean;
+  onClick?: () => void;
 };
 
 /**
@@ -23,7 +25,12 @@ type ShareButtonProps = {
  * Opens a ShareVerseActionsMenu when clicked
  * @returns {JSX.Element} JSX element containing the share button
  */
-const ShareButton: React.FC<ShareButtonProps> = ({ verse, isTranslationView = false }) => {
+const ShareButton: React.FC<ShareButtonProps> = ({
+  verse,
+  isTranslationView = false,
+  isMenu,
+  onClick,
+}) => {
   const { t } = useTranslation('common');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -33,31 +40,34 @@ const ShareButton: React.FC<ShareButtonProps> = ({ verse, isTranslationView = fa
 
   const handleClick = () => {
     logButtonClick('verse_share_button');
+    onClick?.();
     setIsMenuOpen(true);
   };
 
-  return (
-    <PopoverMenu
-      trigger={
-        <Button
-          size={ButtonSize.Small}
-          tooltip={t('share')}
-          variant={ButtonVariant.Ghost}
-          shape={ButtonShape.Circle}
-          className={classNames(styles.iconContainer, styles.verseAction, {
-            [styles.fadedVerseAction]: isTranslationView,
-          })}
-          onClick={handleClick}
-          ariaLabel={t('share')}
-        >
-          <span className={styles.icon}>
-            <ShareIcon />
-          </span>
-        </Button>
-      }
-      isOpen={isMenuOpen}
-      onOpenChange={setIsMenuOpen}
+  const trigger = (
+    <Button
+      size={ButtonSize.Small}
+      tooltip={t('share')}
+      variant={ButtonVariant.Ghost}
+      shape={ButtonShape.Circle}
+      className={classNames(styles.iconContainer, styles.verseAction, {
+        [styles.fadedVerseAction]: isTranslationView,
+      })}
+      onClick={handleClick}
+      ariaLabel={t('share')}
     >
+      <span className={styles.icon}>
+        <ShareIcon />
+      </span>
+    </Button>
+  );
+
+  if (!isMenu) {
+    return trigger;
+  }
+
+  return (
+    <PopoverMenu trigger={trigger} isOpen={isMenuOpen} onOpenChange={setIsMenuOpen}>
       <ShareVerseActionsMenu
         onActionTriggered={onActionTriggered}
         verse={verse}
