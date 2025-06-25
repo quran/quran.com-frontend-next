@@ -41,6 +41,7 @@ const CompleteSignupForm: React.FC<CompleteSignupFormProps> = ({ onSuccess, user
   const [showVerification, setShowVerification] = useState(false);
   const [formData, setFormData] = useState<FormData>({});
   const [email, setEmail] = useState<string>('');
+  const [generalError, setGeneralError] = useState<string | null>(null);
 
   const validateFormData = (data: FormData) => {
     const requiredFieldNames = ['firstName', 'lastName', 'email', 'username'];
@@ -58,6 +59,9 @@ const CompleteSignupForm: React.FC<CompleteSignupFormProps> = ({ onSuccess, user
 
   const handleSubmit = async (data: FormData) => {
     logFormSubmission('complete_signUp');
+
+    // Reset general error state
+    setGeneralError(null);
 
     // Validate form data
     const validationErrors = validateFormData(data);
@@ -113,7 +117,8 @@ const CompleteSignupForm: React.FC<CompleteSignupFormProps> = ({ onSuccess, user
           return undefined;
         } catch (error) {
           setIsSubmitting(false);
-          return getFormErrors(t, ErrorType.VERIFICATION_CODE, error);
+          setGeneralError(t('errors.verification-failed'));
+          return { errors: {} };
         }
       }
 
@@ -123,7 +128,8 @@ const CompleteSignupForm: React.FC<CompleteSignupFormProps> = ({ onSuccess, user
       return undefined;
     } catch (error) {
       setIsSubmitting(false);
-      return getFormErrors(t, ErrorType.COMPLETE_SIGNUP, error);
+      setGeneralError(t('errors.complete-signup-failed'));
+      return { errors: {} };
     }
   };
 
@@ -191,6 +197,7 @@ const CompleteSignupForm: React.FC<CompleteSignupFormProps> = ({ onSuccess, user
         <h1 className={styles.authTitle}>{t('complete-signup.title')}</h1>
         <p className={styles.description}>{t('complete-signup.description')}</p>
         <div className={styles.formContainer}>
+          {generalError && <div className={styles.generalError}>{generalError}</div>}
           {userData && (
             <FormBuilder
               key={userData.id}
