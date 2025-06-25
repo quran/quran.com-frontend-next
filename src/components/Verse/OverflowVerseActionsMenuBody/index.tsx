@@ -1,23 +1,13 @@
 import React, { useState } from 'react';
 
-import useTranslation from 'next-translate/useTranslation';
-
-import BookmarkAction from '../BookmarkAction';
-import NotesAction from '../Notes/NotesAction';
 import SaveToCollectionAction from '../SaveToCollectionAction';
 import VerseActionAdvancedCopy from '../VerseActionAdvancedCopy';
 import VerseActionRepeatAudio from '../VerseActionRepeatAudio';
 
-import styles from './OverflowVerseActionsMenuBody.module.scss';
-import ShareVerseActionsMenu, { VerseActionsOverflowMenu } from './ShareVerseActionsMenu';
+import ShareVerseActionsMenu from './ShareVerseActionsMenu';
 
-import WordByWordVerseAction from '@/components/QuranReader/ReadingView/WordByWordVerseAction';
-import IconContainer, { IconSize } from '@/dls/IconContainer/IconContainer';
-import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
-import ChevronRightIcon from '@/icons/chevron-right.svg';
-import ShareIcon from '@/icons/share.svg';
+import VerseActionsMenuType from '@/components/QuranReader/ReadingView/WordActionsMenu/types';
 import { isLoggedIn } from '@/utils/auth/login';
-import { logButtonClick } from '@/utils/eventLogger';
 import Verse from 'types/Verse';
 
 interface Props {
@@ -33,50 +23,16 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
   onActionTriggered,
   bookmarksRangeUrl,
 }) => {
-  const { t } = useTranslation('common');
-  const [selectedMenu, setSelectedMenu] = useState<VerseActionsOverflowMenu>(
-    VerseActionsOverflowMenu.Main,
-  );
-  const onShareItemClicked = () => {
-    logButtonClick(`share_verse_action`);
-    setSelectedMenu(VerseActionsOverflowMenu.Share);
-  };
+  const [selectedMenu, setSelectedMenu] = useState<VerseActionsMenuType>(VerseActionsMenuType.Main);
 
-  return selectedMenu === VerseActionsOverflowMenu.Main ? (
+  return selectedMenu === VerseActionsMenuType.Main ? (
     <div>
-      {!isTranslationView && <NotesAction verse={verse} />}
-      {!isTranslationView && (
-        <WordByWordVerseAction verse={verse} onActionTriggered={onActionTriggered} />
-      )}
-      {!isTranslationView && (
-        <BookmarkAction
-          verse={verse}
-          isTranslationView={isTranslationView}
-          onActionTriggered={onActionTriggered}
-          bookmarksRangeUrl={bookmarksRangeUrl}
-        />
-      )}
       {isLoggedIn() && (
         <SaveToCollectionAction
           verse={verse}
           bookmarksRangeUrl={bookmarksRangeUrl}
           isTranslationView={isTranslationView}
         />
-      )}
-      {!isTranslationView && (
-        <PopoverMenu.Item icon={<ShareIcon />} onClick={onShareItemClicked}>
-          <div className={styles.menuWithNestedItems}>
-            {t('share')}
-            <div className={styles.newLabelContainer}>
-              <IconContainer
-                shouldForceSetColors={false}
-                icon={<ChevronRightIcon />}
-                shouldFlipOnRTL
-                size={IconSize.Small}
-              />
-            </div>
-          </div>
-        </PopoverMenu.Item>
       )}
       <VerseActionAdvancedCopy
         onActionTriggered={onActionTriggered}

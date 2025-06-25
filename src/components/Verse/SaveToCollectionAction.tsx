@@ -13,6 +13,7 @@ import SaveToCollectionModal, {
 import PopoverMenu from '../dls/PopoverMenu/PopoverMenu';
 
 import PlusIcon from '@/icons/plus.svg';
+import Verse from '@/types/Verse';
 import { ToastStatus, useToast } from 'src/components/dls/Toast/Toast';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import { getMushafId } from 'src/utils/api';
@@ -33,7 +34,17 @@ import { isLoggedIn } from 'src/utils/auth/login';
 import { logButtonClick } from 'src/utils/eventLogger';
 import BookmarkType from 'types/BookmarkType';
 
-const SaveToCollectionAction = ({ verse, bookmarksRangeUrl, isTranslationView }) => {
+interface Props {
+  verse: Verse;
+  isTranslationView: boolean;
+  bookmarksRangeUrl?: string;
+}
+
+const SaveToCollectionAction: React.FC<Props> = ({
+  verse,
+  isTranslationView,
+  bookmarksRangeUrl,
+}) => {
   const [isSaveCollectionModalOpen, setIsSaveCollectionModalOpen] = useState(false);
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const mushafId = getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines).mushaf;

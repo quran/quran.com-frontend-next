@@ -467,5 +467,10 @@
   },
   "word-tooltip": "Word Tooltip",
   "yes": "Yes",
-  "listen": "Listen"
+  "listen": "Listen",
+  "back": "Back",
+  "share-quran-title": "Share the Quran!",
+  "share-quran-description-line-1": "The Prophet ﷺ said:",
+  "share-quran-description-line-2": "‘Convey from me, even if it is one verse.’",
+  "share-quran-description-line-3": "(Bukhari 3461)"
 }

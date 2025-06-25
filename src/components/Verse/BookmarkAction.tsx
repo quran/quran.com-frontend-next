@@ -18,6 +18,7 @@ import BookmarkedIcon from '@/icons/bookmark.svg';
 import UnBookmarkedIcon from '@/icons/unbookmarked.svg';
 import { selectBookmarks, toggleVerseBookmark } from '@/redux/slices/QuranReader/bookmarks';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
+import Verse from '@/types/Verse';
 import { getMushafId } from '@/utils/api';
 import { addBookmark, deleteBookmarkById, getBookmark } from '@/utils/auth/api';
 import { makeBookmarksUrl, makeBookmarkUrl } from '@/utils/auth/apiPaths';
@@ -25,7 +26,19 @@ import { isLoggedIn } from '@/utils/auth/login';
 import { logButtonClick } from '@/utils/eventLogger';
 import BookmarkType from 'types/BookmarkType';
 
-const BookmarkAction = ({ verse, isTranslationView, onActionTriggered, bookmarksRangeUrl }) => {
+interface Props {
+  verse: Verse;
+  isTranslationView: boolean;
+  onActionTriggered?: () => void;
+  bookmarksRangeUrl?: string;
+}
+
+const BookmarkAction: React.FC<Props> = ({
+  verse,
+  isTranslationView,
+  onActionTriggered,
+  bookmarksRangeUrl,
+}) => {
   const bookmarkedVerses = useSelector(selectBookmarks, shallowEqual);
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const mushafId = getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines).mushaf;

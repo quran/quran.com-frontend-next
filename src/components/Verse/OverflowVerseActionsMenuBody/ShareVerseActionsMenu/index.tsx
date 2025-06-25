@@ -4,7 +4,7 @@ import clipboardCopy from 'clipboard-copy';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
-import VerseActionAdvancedCopy from '@/components/Verse/VerseActionAdvancedCopy';
+import VerseActionsMenuType from '@/components/QuranReader/ReadingView/WordActionsMenu/types';
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import ChevronLeftIcon from '@/icons/chevron-left.svg';
@@ -37,16 +37,11 @@ export const copyLink = (
   }
 };
 
-export enum VerseActionsOverflowMenu {
-  Main = 'main',
-  Share = 'share',
-}
-
 type Props = {
   verse: Verse;
   isTranslationView: boolean;
   onActionTriggered?: () => void;
-  setSelectedMenu: (selectedMenu: VerseActionsOverflowMenu) => void;
+  setSelectedMenu: (selectedMenu: VerseActionsMenuType) => void;
   hasBackButton?: boolean;
 };
 
@@ -92,7 +87,7 @@ const ShareVerseActionsMenu: React.FC<Props> = ({
 
   const onBackClicked = () => {
     logButtonClick(`back_verse_actions_menu`);
-    setSelectedMenu(VerseActionsOverflowMenu.Main);
+    setSelectedMenu(VerseActionsMenuType.Main);
   };
 
   const onGenerateClicked = () => {
@@ -109,27 +104,16 @@ const ShareVerseActionsMenu: React.FC<Props> = ({
   return (
     <div>
       {hasBackButton && (
-        <>
-          <PopoverMenu.Item shouldFlipOnRTL icon={<ChevronLeftIcon />} onClick={onBackClicked}>
-            {t('common:share')}
-          </PopoverMenu.Item>
-          <PopoverMenu.Divider />
-        </>
+        <PopoverMenu.Item shouldFlipOnRTL icon={<ChevronLeftIcon />} onClick={onBackClicked}>
+          {t('common:share')}
+        </PopoverMenu.Item>
       )}
-
       <PopoverMenu.Item onClick={onCopyLinkClicked} icon={<CopyLinkIcon />}>
         {t('quran-reader:cpy-link')}
       </PopoverMenu.Item>
       <PopoverMenu.Item onClick={onGenerateClicked} icon={<VideoIcon />}>
         {t('quran-reader:generate-media')}
       </PopoverMenu.Item>
-      {!isTranslationView && (
-        <VerseActionAdvancedCopy
-          onActionTriggered={onActionTriggered}
-          verse={verse}
-          isTranslationView={isTranslationView}
-        />
-      )}
     </div>
   );
 };

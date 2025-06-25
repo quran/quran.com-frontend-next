@@ -23,7 +23,6 @@ import Separator from '@/dls/Separator/Separator';
 import useScroll, { SMOOTH_SCROLL_TO_TOP } from '@/hooks/useScrollToElement';
 import { selectEnableAutoScrolling } from '@/redux/slices/AudioPlayer/state';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
-import QuestionType from '@/types/QuestionsAndAnswers/QuestionType';
 import { QuestionsCount } from '@/utils/auth/api';
 import { getVerseWords, makeVerseKey } from '@/utils/verse';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
