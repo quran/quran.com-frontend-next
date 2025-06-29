@@ -40,9 +40,7 @@ const PlayAudioMenuItem: React.FC<PlayAudioMenuItemProps> = ({ verse, onActionTr
       ayahNumber: Number(verseNumber),
     });
 
-    if (onActionTriggered) {
-      onActionTriggered();
-    }
+    onActionTriggered?.();
   }, [audioService, chapterId, onActionTriggered, verseNumber]);
 
   return (

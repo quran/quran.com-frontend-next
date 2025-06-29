@@ -6,7 +6,6 @@ import TranslationViewCell from '../TranslationViewCell';
 import ChapterHeader from '@/components/chapters/ChapterHeader';
 import getTranslationNameString from '@/components/QuranReader/ReadingView/utils/translation';
 import useCountRangeNotes from '@/hooks/auth/useCountRangeNotes';
-import useCountRangeQuestions from '@/hooks/auth/useCountRangeQuestions';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
 import Verse from '@/types/Verse';
 
@@ -36,7 +35,6 @@ const TranslationPageVerse: React.FC<TranslationPageVerse> = ({
   const { verseKeysQueue } = useVerseTrackerContext();
 
   const { data: notesCount } = useCountRangeNotes(notesRange);
-  const { data: questionsData } = useCountRangeQuestions(notesRange);
 
   useEffect(() => {
     let observer: IntersectionObserver = null;
@@ -89,7 +87,6 @@ const TranslationPageVerse: React.FC<TranslationPageVerse> = ({
         quranReaderStyles={quranReaderStyles}
         bookmarksRangeUrl={bookmarksRangeUrl}
         hasNotes={hasNotes}
-        questionsData={questionsData}
       />
     </div>
   );

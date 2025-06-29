@@ -42,9 +42,7 @@ const TafsirMenuItem: React.FC<Props> = ({ verse, onActionTriggered }) => {
     logEvent('reading_view_tafsir_modal_close');
     setIsContentModalOpen(false);
     fakeNavigate(router.asPath, router.locale);
-    if (onActionTriggered) {
-      onActionTriggered();
-    }
+    onActionTriggered?.();
   };
 
   return (

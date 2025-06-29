@@ -63,9 +63,7 @@ const ShareVerseActionsMenu: React.FC<Props> = ({
     if (isCopied === true) {
       timeoutId = setTimeout(() => {
         setIsCopied(false);
-        if (onActionTriggered) {
-          onActionTriggered();
-        }
+        onActionTriggered?.();
       }, RESET_ACTION_TEXT_TIMEOUT_MS);
     }
     return () => {
@@ -80,18 +78,21 @@ const ShareVerseActionsMenu: React.FC<Props> = ({
       () => toast(t('shared'), { status: ToastStatus.Success }),
       lang,
     );
-    if (onActionTriggered) {
-      onActionTriggered();
-    }
+    onActionTriggered?.();
   };
 
   const onBackClicked = () => {
-    logButtonClick(`back_verse_actions_menu`);
+    logButtonClick(
+      `${isTranslationView ? 'translation_view' : 'reading_view'}_back_verse_actions_menu`,
+    );
     setSelectedMenu(VerseActionsMenuType.Main);
+    onActionTriggered?.();
   };
 
   const onGenerateClicked = () => {
-    logButtonClick(`generate_media_verse_action`);
+    logButtonClick(
+      `${isTranslationView ? 'translation_view' : 'reading_view'}_generate_media_verse_action`,
+    );
     router.push(
       getQuranMediaMakerNavigationUrl({
         [QueryParam.SURAH]: verse.chapterId as string,
@@ -100,6 +101,7 @@ const ShareVerseActionsMenu: React.FC<Props> = ({
         [QueryParam.PREVIEW_MODE]: PreviewMode.DISABLED,
       }),
     );
+    onActionTriggered?.();
   };
   return (
     <div>

@@ -62,9 +62,7 @@ const TranslationsMenuItem: React.FC<Props> = ({ verse, onActionTriggered }) => 
     setIsContentModalOpen(false);
     setTimeout(() => {
       // we set a really short timeout to close the popover after the modal has been closed to allow enough time for the fadeout css effect to apply.
-      if (onActionTriggered) {
-        onActionTriggered();
-      }
+      onActionTriggered?.();
     }, CLOSE_POPOVER_AFTER_MS);
   };
 

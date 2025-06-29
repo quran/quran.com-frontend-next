@@ -20,22 +20,28 @@ const ShareQuranModal = dynamic(
 type Props = {
   word: Word;
   children: React.ReactNode;
+  onOpenChange?: (isOpen: boolean) => void;
 };
 
-const ReadingViewWordPopover: React.FC<Props> = ({ word, children }) => {
+const ReadingViewWordPopover: React.FC<Props> = ({ word, children, onOpenChange }) => {
   const [isMenuOpened, setIsMenuOpened] = useState(false);
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
 
   const dispatch = useDispatch();
 
-  const onOpenChange = useCallback(
+  const handleOpenChange = useCallback(
     (isOpen: boolean) => {
       setIsMenuOpened(isOpen);
       // eslint-disable-next-line i18next/no-literal-string
       logEvent(`reading_view_overflow_menu_${isOpen ? 'open' : 'close'}`);
       dispatch(setReadingViewSelectedVerseKey(isOpen ? word.verseKey : null));
+
+      // Call the external onOpenChange handler if provided
+      if (onOpenChange) {
+        onOpenChange(isOpen);
+      }
     },
-    [dispatch, word.verseKey],
+    [dispatch, word.verseKey, onOpenChange],
   );
 
   const onHoverChange = useCallback(
@@ -45,8 +51,8 @@ const ReadingViewWordPopover: React.FC<Props> = ({ word, children }) => {
     [dispatch, word.verseKey],
   );
   const onActionTriggered = useCallback(() => {
-    onOpenChange(false);
-  }, [onOpenChange]);
+    handleOpenChange(false);
+  }, [handleOpenChange]);
 
   const onCloseShareModal = useCallback(() => {
     setIsShareModalOpen(false);
@@ -73,7 +79,7 @@ const ReadingViewWordPopover: React.FC<Props> = ({ word, children }) => {
           </div>
         }
         isOpen={isMenuOpened}
-        onOpenChange={onOpenChange}
+        onOpenChange={handleOpenChange}
         expandDirection={PopoverMenuExpandDirection.BOTTOM}
       >
         <ReadingViewWordActionsMenu

@@ -1,5 +1,6 @@
 import React from 'react';
 
+import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from './VerseLink.module.scss';
@@ -11,13 +12,16 @@ import { getChapterWithStartingVerseUrl } from '@/utils/navigation';
 
 interface Props {
   verseKey: string;
+  isTranslationView: boolean;
 }
 
-const VerseLink: React.FC<Props> = ({ verseKey }) => {
+const VerseLink: React.FC<Props> = ({ verseKey, isTranslationView }) => {
   const { lang } = useTranslation('');
   return (
     <Button
-      className={styles.verseLink}
+      className={classNames(styles.verseLink, {
+        [styles.fadedVerseAction]: isTranslationView,
+      })}
       size={ButtonSize.Small}
       shape={ButtonShape.Circle}
       href={getChapterWithStartingVerseUrl(verseKey)}
@@ -25,7 +29,7 @@ const VerseLink: React.FC<Props> = ({ verseKey }) => {
       variant={ButtonVariant.Ghost}
       shouldPrefetch={false}
       onClick={() => {
-        logButtonClick('translation_view_verse_link');
+        logButtonClick(`${isTranslationView ? 'translation_view' : 'reading_view'}_verse_link`);
       }}
     >
       {toLocalizedVerseKey(verseKey, lang)}

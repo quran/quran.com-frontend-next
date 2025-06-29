@@ -46,9 +46,7 @@ const CopyMenuItem: React.FC<Props> = ({ verse, onActionTriggered }) => {
     if (isCopied) {
       timeoutId = setTimeout(() => {
         setIsCopied(false);
-        if (onActionTriggered) {
-          onActionTriggered();
-        }
+        onActionTriggered?.();
       }, RESET_ACTION_TEXT_TIMEOUT_MS);
     }
     return () => {

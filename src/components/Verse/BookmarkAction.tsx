@@ -14,6 +14,7 @@ import PopoverMenu from '@/components/dls/PopoverMenu/PopoverMenu';
 import Spinner from '@/components/dls/Spinner/Spinner';
 import { ToastStatus, useToast } from '@/components/dls/Toast/Toast';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
+import useIsMobile from '@/hooks/useIsMobile';
 import BookmarkedIcon from '@/icons/bookmark.svg';
 import UnBookmarkedIcon from '@/icons/unbookmarked.svg';
 import { selectBookmarks, toggleVerseBookmark } from '@/redux/slices/QuranReader/bookmarks';
@@ -44,10 +45,9 @@ const BookmarkAction: React.FC<Props> = ({
   const mushafId = getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines).mushaf;
   const { t } = useTranslation('common');
   const dispatch = useDispatch();
-
+  const isMobile = useIsMobile();
   const toast = useToast();
   const { cache, mutate: globalMutate } = useSWRConfig();
-
   const {
     data: bookmark,
     isValidating: isVerseBookmarkedLoading,
@@ -163,9 +163,7 @@ const BookmarkAction: React.FC<Props> = ({
       dispatch(toggleVerseBookmark(verse.verseKey));
     }
 
-    if (onActionTriggered) {
-      onActionTriggered();
-    }
+    onActionTriggered?.();
   };
 
   let bookmarkIcon = <Spinner />;
@@ -178,7 +176,7 @@ const BookmarkAction: React.FC<Props> = ({
   }
 
   // For use in the TopActions component (standalone button)
-  if (isTranslationView) {
+  if (isTranslationView || (!isTranslationView && isMobile)) {
     return (
       <Button
         size={ButtonSize.Small}
@@ -204,7 +202,7 @@ const BookmarkAction: React.FC<Props> = ({
     );
   }
 
-  // For use in the overflow menu (PopoverMenu.Item)
+  // For use in the overflow menu Reading Mode Desktop (PopoverMenu.Item)
   return (
     <>
       <PopoverMenu.Item

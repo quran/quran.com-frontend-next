@@ -69,6 +69,10 @@ $translateYDistance: 200px;
   transition: opacity var(--transition-fast) ease;
 }
 
+.overlayMax {
+  z-index: var(--z-index-max);
+}
+
 .fullScreen {
   @include breakpoints.smallerThanTablet {
     padding-block-start: 0 !important;
@@ -88,6 +92,10 @@ $translateYDistance: 200px;
   @include breakpoints.tablet {
     overflow-y: visible;
   }
+}
+
+.isBottomSheetOnMobile {
+  border-radius: var(--border-radius-rounded) var(--border-radius-rounded) 0 0;
 }
 
 .autoHeight {

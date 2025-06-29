@@ -19,12 +19,12 @@ interface Props {
 
 const QuestionsMenuItem: React.FC<Props> = ({ verse, onActionTriggered }) => {
   const questionsData = usePageQuestions();
-  const { t, lang } = useTranslation('quran-reader');
+  const { t, lang } = useTranslation();
   const router = useRouter();
   const [isContentModalOpen, setIsContentModalOpen] = useState(false);
   const { verseKey } = verse;
   const hasQuestions = !!questionsData && questionsData[verseKey]?.total > 0;
-  const isClarificationQuestion = !!questionsData?.[verse.verseKey].types?.CLARIFICATION;
+  const isClarificationQuestion = !!questionsData?.[verse.verseKey]?.types?.CLARIFICATION;
 
   const onMenuItemClicked = () => {
     logButtonClick('reading_view_verse_actions_menu_questions');
@@ -36,9 +36,7 @@ const QuestionsMenuItem: React.FC<Props> = ({ verse, onActionTriggered }) => {
     logEvent('reading_view_questions_modal_close');
     setIsContentModalOpen(false);
     fakeNavigate(router.asPath, router.locale);
-    if (onActionTriggered) {
-      onActionTriggered();
-    }
+    onActionTriggered?.();
   };
 
   const onModalClick = (e: React.MouseEvent) => {
@@ -52,8 +50,10 @@ const QuestionsMenuItem: React.FC<Props> = ({ verse, onActionTriggered }) => {
         <PopoverMenu.Item
           icon={isClarificationQuestion ? <LightbulbOnIcon /> : <LightbulbIcon />}
           onClick={onMenuItemClicked}
+          shouldStopPropagation
+          shouldCloseMenuAfterClick
         >
-          {t('q-and-a.answers')}
+          {t('quran-reader:q-and-a.answers')}
         </PopoverMenu.Item>
 
         <QuestionsModal

@@ -33,26 +33,22 @@ const QuranReaderView: React.FC<Props> = ({
 
   if (isReadingPreference) {
     return (
-      <>
-        <ReadingView
-          quranReaderStyles={quranReaderStyles}
-          quranReaderDataType={quranReaderDataType}
-          initialData={initialData}
-          resourceId={resourceId}
-        />
-      </>
-    );
-  }
-
-  return (
-    <>
-      <TranslationView
+      <ReadingView
         quranReaderStyles={quranReaderStyles}
         quranReaderDataType={quranReaderDataType}
         initialData={initialData}
         resourceId={resourceId}
       />
-    </>
+    );
+  }
+
+  return (
+    <TranslationView
+      quranReaderStyles={quranReaderStyles}
+      quranReaderDataType={quranReaderDataType}
+      initialData={initialData}
+      resourceId={resourceId}
+    />
   );
 };
 

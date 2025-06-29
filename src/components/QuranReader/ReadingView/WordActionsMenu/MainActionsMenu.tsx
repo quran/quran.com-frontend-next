@@ -51,7 +51,7 @@ const MainActionsMenu: React.FC<Props> = ({
         onActionTriggered={onActionTriggered}
       />
       <CopyMenuItem verse={word.verse} onActionTriggered={onActionTriggered} />
-      <NotesAction verse={word.verse} />
+      <NotesAction verse={word.verse} onActionTriggered={onActionTriggered} />
 
       {/* Submenu navigation items */}
       <ShareMenuItem onActionTriggered={onActionTriggered} openShareModal={openShareModal} />

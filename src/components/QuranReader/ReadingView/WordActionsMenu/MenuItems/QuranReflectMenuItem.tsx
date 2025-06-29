@@ -34,9 +34,7 @@ const QuranReflectMenuItem: React.FC<Props> = ({ verse, onActionTriggered }) => 
   const onModalClose = () => {
     setIsContentModalOpen(false);
     fakeNavigate(router.asPath, lang);
-    if (onActionTriggered) {
-      onActionTriggered();
-    }
+    onActionTriggered?.();
   };
 
   const [initialChapterId, verseNumber] = getVerseAndChapterNumbersFromKey(verseKey);

@@ -7,6 +7,7 @@ import VerseActionRepeatAudio from '../VerseActionRepeatAudio';
 import ShareVerseActionsMenu from './ShareVerseActionsMenu';
 
 import VerseActionsMenuType from '@/components/QuranReader/ReadingView/WordActionsMenu/types';
+import WordByWordVerseAction from '@/components/QuranReader/ReadingView/WordByWordVerseAction';
 import { isLoggedIn } from '@/utils/auth/login';
 import Verse from 'types/Verse';
 
@@ -39,6 +40,7 @@ const OverflowVerseActionsMenuBody: React.FC<Props> = ({
         verse={verse}
         isTranslationView={isTranslationView}
       />
+      <WordByWordVerseAction verse={verse} onActionTriggered={onActionTriggered} />
       <VerseActionRepeatAudio isTranslationView={isTranslationView} verseKey={verse.verseKey} />
     </div>
   ) : (

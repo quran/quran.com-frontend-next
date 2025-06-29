@@ -1,7 +1,6 @@
 @use "src/styles/utility";
 
 .verseLink {
-  opacity: var(--opacity-50);
   text-align: center;
   color: var(--color-text-default);
 
@@ -18,4 +17,8 @@
       @include utility.lighten-background-color;
     }
   }
+}
+
+.fadedVerseAction {
+  opacity: var(--opacity-50);
 }

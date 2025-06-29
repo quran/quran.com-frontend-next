@@ -1,10 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import { useSelector } from 'react-redux';
 
-import styles from './TranslationViewCell.module.scss';
+import BottomActionsModals from './BottomActionsModals';
+import BottomActionsTabs, { TabId } from './BottomActionsTabs';
 
+import { usePageQuestions } from '@/components/QuranReader/ReadingView/context/PageQuestionsContext';
 import BookIcon from '@/icons/book-open.svg';
 import ChatIcon from '@/icons/chat.svg';
 import LightbulbOnIcon from '@/icons/lightbulb-on.svg';
@@ -19,100 +21,112 @@ import {
 } from '@/utils/navigation';
 import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
 
-type BottomActionsProps = {
+/**
+ * Props for the BottomActions component
+ */
+interface BottomActionsProps {
+  /**
+   * The verse key to display actions for
+   */
   verseKey: string;
-  hasQuestions?: boolean;
-  isClarificationQuestion?: boolean;
-};
+  /**
+   * Whether this is in translation view
+   */
+  isTranslationView?: boolean;
+}
 
 /**
- * Component that renders the bottom action tabs for a verse
- * including Tafsir, Reflections & Lessons, and Answers
- * @returns {JSX.Element} JSX element containing the bottom action tabs
+ * BottomActions component displays action tabs for a verse
+ * @param {BottomActionsProps} props - Component props
+ * @returns {JSX.Element} The rendered component
  */
-const BottomActions: React.FC<BottomActionsProps> = ({
-  verseKey,
-  hasQuestions,
-  isClarificationQuestion,
-}) => {
+const BottomActions = ({ verseKey, isTranslationView = true }: BottomActionsProps): JSX.Element => {
   const { t, lang } = useTranslation('common');
   const tafsirs = useSelector(selectSelectedTafsirs);
   const [chapterId, verseNumber] = getVerseAndChapterNumbersFromKey(verseKey);
+  const questionsData = usePageQuestions();
+  const hasQuestions = questionsData?.[verseKey]?.total > 0;
+  const isClarificationQuestion = !!questionsData?.[verseKey]?.types?.CLARIFICATION;
 
-  const handleTafsirClick = (e: React.MouseEvent | React.KeyboardEvent) => {
-    if (isKeyboardEvent(e) && e.key !== 'Enter' && e.key !== ' ') return;
+  // Modal states
+  const [isTafsirModalOpen, setIsTafsirModalOpen] = useState(false);
+  const [isReflectionModalOpen, setIsReflectionModalOpen] = useState(false);
+  const [isQuestionsModalOpen, setIsQuestionsModalOpen] = useState(false);
 
-    logButtonClick('translation_view_tafsir_tab');
-    fakeNavigate(
-      getVerseSelectedTafsirNavigationUrl(chapterId, Number(verseNumber), tafsirs[0]),
-      lang,
-    );
+  /**
+   * Handle tab click or keyboard event
+   * @param {TabId} tabType - Type of tab for logging
+   * @param {() => string} navigationFn - Function that returns navigation URL
+   * @returns {(e: React.MouseEvent | React.KeyboardEvent) => void} Event handler function
+   */
+  const createTabHandler = (tabType: TabId, navigationFn: () => string) => {
+    return () => {
+      // Open the corresponding modal
+      if (tabType === TabId.TAFSIR) {
+        setIsTafsirModalOpen(true);
+      } else if (tabType === TabId.REFLECTIONS) {
+        setIsReflectionModalOpen(true);
+      } else if (tabType === TabId.ANSWERS) {
+        setIsQuestionsModalOpen(true);
+      }
+
+      logButtonClick(
+        `${
+          isTranslationView ? 'translation_view' : 'reading_view'
+        }_verse_bottom_actions_${tabType}`,
+      );
+
+      // Update URL without triggering navigation
+      fakeNavigate(navigationFn(), lang);
+    };
   };
 
-  const handleReflectionsClick = (e: React.MouseEvent | React.KeyboardEvent) => {
-    if (isKeyboardEvent(e) && e.key !== 'Enter' && e.key !== ' ') return;
-
-    logButtonClick('translation_view_reflections_tab');
-    fakeNavigate(getVerseReflectionNavigationUrl(verseKey), lang);
-  };
-
-  const handleAnswersClick = (e: React.MouseEvent | React.KeyboardEvent) => {
-    if (isKeyboardEvent(e) && e.key !== 'Enter' && e.key !== ' ') return;
-
-    logButtonClick('translation_view_answers_tab');
-    fakeNavigate(getVerseAnswersNavigationUrl(verseKey), lang);
-  };
-
-  const isKeyboardEvent = (e: React.MouseEvent | React.KeyboardEvent): e is React.KeyboardEvent => {
-    return 'key' in e;
-  };
+  // Define tab configurations
+  const tabs = [
+    {
+      id: TabId.TAFSIR,
+      label: t('quran-reader:tafsirs'),
+      icon: <BookIcon />,
+      onClick: createTabHandler(TabId.TAFSIR, () =>
+        getVerseSelectedTafsirNavigationUrl(chapterId, Number(verseNumber), tafsirs[0]),
+      ),
+      condition: true,
+    },
+    {
+      id: TabId.REFLECTIONS,
+      label: t('reflections-and-lessons'),
+      icon: <ChatIcon />,
+      onClick: createTabHandler(TabId.REFLECTIONS, () => getVerseReflectionNavigationUrl(verseKey)),
+      condition: true,
+    },
+    {
+      id: TabId.ANSWERS,
+      label: t('answers'),
+      icon: isClarificationQuestion ? <LightbulbOnIcon /> : <LightbulbIcon />,
+      onClick: createTabHandler(TabId.ANSWERS, () => getVerseAnswersNavigationUrl(verseKey)),
+      condition: hasQuestions,
+    },
+  ];
 
   return (
-    <div className={styles.bottomActionsContainer}>
-      <div className={styles.tabsContainer}>
-        <div
-          className={styles.tabItem}
-          onClick={handleTafsirClick}
-          onKeyDown={handleTafsirClick}
-          role="button"
-          tabIndex={0}
-          aria-label={t('quran-reader:tafsirs')}
-        >
-          <span className={styles.tabIcon}>
-            <BookIcon />
-          </span>
-          <span className={styles.tabLabel}>{t('quran-reader:tafsirs')}</span>
-        </div>
-        <div
-          className={styles.tabItem}
-          onClick={handleReflectionsClick}
-          onKeyDown={handleReflectionsClick}
-          role="button"
-          tabIndex={0}
-          aria-label={t('reflections-and-lessons')}
-        >
-          <span className={styles.tabIcon}>
-            <ChatIcon />
-          </span>
-          <span className={styles.tabLabel}>{t('reflections-and-lessons')}</span>
-        </div>
-        {hasQuestions && (
-          <div
-            className={styles.tabItem}
-            onClick={handleAnswersClick}
-            onKeyDown={handleAnswersClick}
-            role="button"
-            tabIndex={0}
-            aria-label={t('answers')}
-          >
-            <span className={styles.tabIcon}>
-              {isClarificationQuestion ? <LightbulbOnIcon /> : <LightbulbIcon />}
-            </span>
-            <span className={styles.tabLabel}>{t('answers')}</span>
-          </div>
-        )}
-      </div>
-    </div>
+    <>
+      <BottomActionsTabs tabs={tabs} isTranslationView={isTranslationView} />
+
+      <BottomActionsModals
+        chapterId={chapterId}
+        verseNumber={verseNumber}
+        verseKey={verseKey}
+        tafsirs={tafsirs}
+        isTafsirModalOpen={isTafsirModalOpen}
+        isReflectionModalOpen={isReflectionModalOpen}
+        isQuestionsModalOpen={isQuestionsModalOpen}
+        hasQuestions={hasQuestions}
+        isTranslationView={isTranslationView}
+        setIsTafsirModalOpen={setIsTafsirModalOpen}
+        setIsReflectionModalOpen={setIsReflectionModalOpen}
+        setIsQuestionsModalOpen={setIsQuestionsModalOpen}
+      />
+    </>
   );
 };
 
