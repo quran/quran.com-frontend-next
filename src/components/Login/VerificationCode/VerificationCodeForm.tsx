@@ -30,15 +30,17 @@ const VerificationCodeForm: FC<Props> = ({
 }) => {
   const router = useRouter();
 
-  const handleSubmitCode = async (code: string) => {
+  const handleSubmitCode = async (code: string): Promise<void> => {
     logFormSubmission('verification_code_submit');
-    const { data: response } = await signUp({
+
+    const { data: response, errors } = await signUp({
       ...signUpData,
       verificationCode: code,
     });
 
     if (!response.success) {
-      throw new Error('Invalid verification code');
+      // Throw error to be caught by the VerificationCodeBase component
+      throw new Error(errors?.verificationCode || 'Invalid verification code');
     }
 
     // If successful, call onSuccess callback or redirect
