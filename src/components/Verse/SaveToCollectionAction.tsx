@@ -50,8 +50,11 @@ const SaveToCollectionAction: React.FC<Props> = ({
   const mushafId = getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines).mushaf;
   const { t } = useTranslation();
   const { data: collectionListData, mutate: mutateCollectionListData } = useSWR(
-    isLoggedIn() ? makeCollectionsUrl({}) : null,
-    () => getCollectionsList({}),
+    isLoggedIn() ? makeCollectionsUrl({ type: BookmarkType.Ayah }) : null,
+    () =>
+      getCollectionsList({
+        type: BookmarkType.Ayah,
+      }),
   );
 
   const { mutate: globalSWRMutate } = useSWRConfig();

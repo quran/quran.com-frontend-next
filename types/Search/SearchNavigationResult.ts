@@ -6,6 +6,7 @@ export enum SearchNavigationType {
   SEARCH_PAGE = 'search_page',
   PAGE = 'page',
   RANGE = 'range',
+  QURAN_RANGE = 'quran_range',
   HISTORY = 'history',
   AYAH = 'ayah',
   TRANSLITERATION = 'transliteration',

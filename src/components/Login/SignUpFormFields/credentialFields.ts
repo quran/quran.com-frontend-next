@@ -5,7 +5,7 @@ import { FormBuilderFormField } from '@/components/FormBuilder/FormBuilderTypes'
 import { RuleType } from '@/types/FieldRule';
 import { FormFieldType } from '@/types/FormField';
 
-const EMAIL_REGEX =
+export const EMAIL_REGEX =
   '^(([^<>()[\\]\\\\.,;:\\s@"]+(\\.[^<>()[\\]\\\\.,;:\\s@"]+)*)|(".+"))@((\\[[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\.[0-9]{1,3}\\])|(([a-zA-Z0-9]+(-[a-zA-Z0-9]+)*\\.)+[a-zA-Z]{2,}))$';
 
 export const REGEX_USERNAME = '^[a-zA-Z0-9_]+$';

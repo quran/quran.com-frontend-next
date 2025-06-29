@@ -11,6 +11,7 @@ import FooterThemeSwitcher from './FooterThemeSwitcher';
 import LanguageSelector from '@/components/Navbar/LanguageSelector';
 import Link, { LinkVariant } from '@/dls/Link/Link';
 import { toLocalizedDate } from '@/utils/locale';
+import { ROUTES } from '@/utils/navigation';
 
 const BottomSection = () => {
   const { t, lang } = useTranslation('common');
@@ -27,13 +28,13 @@ const BottomSection = () => {
     <div className={styles.bottomSectionContainer}>
       <div>
         <div className={styles.bottomLinks}>
-          <Link href="/sitemap.xml" shouldPrefetch={false} isNewTab>
+          <Link href={ROUTES.SITEMAP} shouldPrefetch={false} isNewTab>
             {t('sitemap')}
           </Link>
-          <Link href="/privacy" shouldPrefetch={false}>
+          <Link href={ROUTES.PRIVACY} shouldPrefetch={false} isNewTab>
             {t('privacy')}
           </Link>
-          <Link href="/terms-and-conditions" shouldPrefetch={false}>
+          <Link href={ROUTES.TERMS} shouldPrefetch={false} isNewTab>
             {t('terms-and-conditions')}
           </Link>
         </div>

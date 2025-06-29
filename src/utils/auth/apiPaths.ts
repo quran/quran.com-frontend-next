@@ -37,6 +37,8 @@ export const makeSyncLocalDataUrl = (): string => makeUrl('users/syncLocalData')
 
 export const makeVerificationCodeUrl = (): string => makeUrl('users/verificationCode');
 
+export const makeUpdateUserProfileUrl = (): string => makeUrl('users/update');
+
 export const makeForgotPasswordUrl = (): string => makeUrl('users/forgetPassword');
 
 export const makeResetPasswordUrl = (): string => makeUrl('users/resetPassword');
@@ -64,6 +66,7 @@ export type CollectionsQueryParams = {
   cursor?: string;
   limit?: number;
   sortBy?: string;
+  type?: BookmarkType;
 };
 export const makeCollectionsUrl = (queryParams: CollectionsQueryParams): string =>
   makeUrl('collections', queryParams);

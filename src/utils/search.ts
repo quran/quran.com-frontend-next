@@ -157,14 +157,29 @@ export const getSearchNavigationResult = (
     };
   }
 
-  if (resultType === SearchNavigationType.RANGE) {
+  if (
+    resultType === SearchNavigationType.RANGE ||
+    resultType === SearchNavigationType.QURAN_RANGE
+  ) {
     const { surah, from, to } = getVerseNumberRangeFromKey(key as string);
-    returnedResult = {
-      ...returnedResult,
-      name: `${t('common:surah')} ${
-        getChapterData(chaptersData, `${surah}`).transliteratedName
-      } ${t('common:ayah')} ${toLocalizedNumber(from, locale)} - ${toLocalizedNumber(to, locale)}`,
-    };
+    const localizedFrom = toLocalizedNumber(from, locale);
+    const localizedTo = toLocalizedNumber(to, locale);
+    const surahName = getChapterData(chaptersData, `${surah}`).transliteratedName;
+
+    if (resultType === SearchNavigationType.RANGE) {
+      returnedResult = {
+        ...returnedResult,
+        name: `${t('common:surah')} ${surahName} ${t(
+          'common:ayah',
+        )} ${localizedFrom} - ${localizedTo}`,
+      };
+    } else {
+      const localizedSurah = toLocalizedNumber(surah, locale);
+      returnedResult = {
+        ...returnedResult,
+        name: `${result.name} (${surahName} ${localizedSurah}:${localizedFrom}-${localizedTo})`,
+      };
+    }
   }
 
   if (

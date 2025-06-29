@@ -11,7 +11,6 @@ import Verse from '@/types/Verse';
 
 interface TranslationPageVerse {
   verse: Verse;
-  selectedTranslations?: number[];
   bookmarksRangeUrl: string | null;
   verseIdx: number;
   quranReaderStyles: QuranReaderStyles;
@@ -24,7 +23,6 @@ interface TranslationPageVerse {
 
 const TranslationPageVerse: React.FC<TranslationPageVerse> = ({
   verse,
-  selectedTranslations,
   bookmarksRangeUrl,
   verseIdx,
   quranReaderStyles,
@@ -76,7 +74,6 @@ const TranslationPageVerse: React.FC<TranslationPageVerse> = ({
           chapterId={String(verse.chapterId)}
           pageNumber={verse.pageNumber}
           hizbNumber={verse.hizbNumber}
-          isTranslationSelected={selectedTranslations?.length > 0}
         />
       )}
 

@@ -134,7 +134,7 @@ const ProfileAvatarButton = () => {
       ariaLabel={t('sign-in')}
       variant={ButtonVariant.Simplified}
       size={ButtonSize.Small}
-      href={getLoginNavigationUrl()}
+      href={getLoginNavigationUrl(router.asPath)}
       onClick={onTriggerClicked}
       id="login-button"
       className={styles.loginButton}
