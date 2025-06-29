@@ -50,18 +50,18 @@ const QuestionsMenuItem: React.FC<Props> = ({ verse, onActionTriggered }) => {
         <PopoverMenu.Item
           icon={isClarificationQuestion ? <LightbulbOnIcon /> : <LightbulbIcon />}
           onClick={onMenuItemClicked}
-          shouldStopPropagation
-          shouldCloseMenuAfterClick
         >
           {t('quran-reader:q-and-a.answers')}
         </PopoverMenu.Item>
 
-        <QuestionsModal
-          isOpen={isContentModalOpen}
-          onClose={onModalClose}
-          verseKey={verseKey}
-          onModalClick={onModalClick}
-        />
+        {isContentModalOpen && (
+          <QuestionsModal
+            isOpen
+            onClose={onModalClose}
+            verseKey={verseKey}
+            onModalClick={onModalClick}
+          />
+        )}
       </>
     );
   }

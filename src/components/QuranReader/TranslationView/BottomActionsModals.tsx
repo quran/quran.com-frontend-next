@@ -115,9 +115,9 @@ const BottomActionsModals: React.FC<BottomActionsModalsProps> = ({
       />
 
       {/* Questions Modal */}
-      {hasQuestions && (
+      {isQuestionsModalOpen && hasQuestions && (
         <QuestionsModal
-          isOpen={isQuestionsModalOpen}
+          isOpen
           onClose={onQuestionsModalClose}
           verseKey={verseKey}
           onModalClick={onQuestionsModalClick}
