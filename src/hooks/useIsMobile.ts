@@ -1,6 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useState, useEffect } from 'react';
 
-import isClient from '@/utils/isClient';
 import { isMobile } from '@/utils/responsive';
 
 /**
@@ -11,31 +10,31 @@ import { isMobile } from '@/utils/responsive';
  * @returns {boolean} True if the viewport is mobile-sized, false otherwise
  */
 const useIsMobile = (): boolean => {
-  const [isMobileView, setIsMobileView] = useState(false);
+  // Use a function for the initial state to correctly evaluate on client side
+  // during hydration, but safely handle SSR
+  const [isMobileView, setIsMobileView] = useState<boolean>(() => {
+    // During SSR, there is no window object
+    if (typeof window === 'undefined') return false;
+    // On client, immediately return the correct value
+    return isMobile();
+  });
 
   useEffect(() => {
-    // Only run on the client side
-    if (isClient) {
-      // Set initial mobile state
+    // This will run after hydration and update the state if needed
+    setIsMobileView(isMobile());
+
+    const handleResize = () => {
       setIsMobileView(isMobile());
+    };
 
-      // Add resize listener to update mobile state
-      const handleResize = () => {
-        setIsMobileView(isMobile());
-      };
+    window.addEventListener('resize', handleResize);
 
-      window.addEventListener('resize', handleResize);
-
-      // Clean up event listener
-      return () => {
-        window.removeEventListener('resize', handleResize);
-      };
-    }
-    return undefined; // Return a value for the non-client case
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
   }, []);
 
-  // Return false during SSR, actual value on client
-  return isClient ? isMobileView : false;
+  return isMobileView;
 };
 
 export default useIsMobile;

@@ -1,3 +1,12 @@
+/**
+ * @deprecated This component is being replaced by BottomActions component which now handles
+ * the rendering of tafsir modals directly. This component is kept for backward compatibility
+ * and will be removed in a future release.
+ *
+ * TafsirButton renders a button that opens a tafsir modal when clicked.
+ * It updates the URL via fakeNavigate to reflect the tafsir state without triggering
+ * a full page navigation.
+ */
 import { useRef, useState } from 'react';
 
 import classNames from 'classnames';
@@ -15,12 +24,26 @@ import { logButtonClick, logEvent } from '@/utils/eventLogger';
 import { fakeNavigate, getVerseSelectedTafsirNavigationUrl } from '@/utils/navigation';
 import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
 
+/**
+ * Props for the TafsirButton component
+ * @typedef {object} Props
+ * @property {string} verseKey - The verse key to show tafsir for
+ * @property {boolean} [isTranslationView=true] - Whether this is in translation view
+ * @property {Function} [onActionTriggered] - Callback for when the action is triggered
+ */
 type Props = {
   verseKey: string;
   isTranslationView?: boolean;
   onActionTriggered?: () => void;
 };
 
+/**
+ * @deprecated Use BottomActions component instead which now handles tafsir modals directly
+ *
+ * Button component that opens a tafsir modal when clicked
+ * @param {Props} props - Component props
+ * @returns {JSX.Element} The rendered component
+ */
 const TafsirButton: React.FC<Props> = ({
   verseKey,
   isTranslationView = true,
@@ -32,6 +55,10 @@ const TafsirButton: React.FC<Props> = ({
   const [isContentModalOpen, setIsContentModalOpen] = useState(false);
   const [chapterId, verseNumber] = getVerseAndChapterNumbersFromKey(verseKey);
 
+  /**
+   * Handles button click event
+   * Opens the tafsir modal and updates the URL via fakeNavigate
+   */
   const onButtonClicked = () => {
     logButtonClick(
       `${isTranslationView ? 'translation_view' : 'reading_view'}_verse_actions_menu_tafsir`,
@@ -45,6 +72,10 @@ const TafsirButton: React.FC<Props> = ({
 
   const contentModalRef = useRef(null);
 
+  /**
+   * Handles modal close event
+   * Logs the event, closes the modal, resets the URL, and calls the onActionTriggered callback
+   */
   const onModalClose = () => {
     if (isTranslationView) {
       logEvent('translation_view_tafsir_modal_close');
@@ -53,9 +84,7 @@ const TafsirButton: React.FC<Props> = ({
     }
     setIsContentModalOpen(false);
     fakeNavigate(router.asPath, router.locale);
-    if (onActionTriggered) {
-      onActionTriggered();
-    }
+    onActionTriggered?.();
   };
 
   return (

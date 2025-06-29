@@ -10,14 +10,17 @@ import EmptyNotesIcon from '@/icons/notes-empty.svg';
 import NotesIcon from '@/icons/notes-filled.svg';
 import Verse from '@/types/Verse';
 import { isLoggedIn } from '@/utils/auth/login';
-import { logButtonClick } from '@/utils/eventLogger';
+import { logButtonClick, logEvent } from '@/utils/eventLogger';
 import { getChapterWithStartingVerseUrl, getLoginNavigationUrl } from '@/utils/navigation';
 
 type Props = {
   verse: Verse;
+  onActionTriggered?: () => void;
 };
 
-const NotesAction: React.FC<Props> = ({ verse }) => {
+const CLOSE_POPOVER_AFTER_MS = 150;
+
+const NotesAction: React.FC<Props> = ({ verse, onActionTriggered }) => {
   const { data: notesCount } = useCountRangeNotes({ from: verse.verseKey, to: verse.verseKey });
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { t } = useTranslation('common');
@@ -34,10 +37,16 @@ const NotesAction: React.FC<Props> = ({ verse }) => {
     }
   };
 
-  const onClose = () => {
+  const onModalClose = () => {
+    logEvent('reading_view_notes_modal_close');
     setIsModalOpen(false);
+    if (onActionTriggered) {
+      setTimeout(() => {
+        // we set a really short timeout to close the popover after the modal has been closed to allow enough time for the fadeout css effect to apply.
+        onActionTriggered();
+      }, CLOSE_POPOVER_AFTER_MS);
+    }
   };
-
   const hasNotes = notesCount && notesCount[verse.verseKey] > 0;
 
   return (
@@ -48,7 +57,7 @@ const NotesAction: React.FC<Props> = ({ verse }) => {
       >
         {t('notes.title')}
       </PopoverMenu.Item>
-      <NoteModal isOpen={isModalOpen} onClose={onClose} verseKey={verse.verseKey} />
+      <NoteModal isOpen={isModalOpen} onClose={onModalClose} verseKey={verse.verseKey} />
     </>
   );
 };
