@@ -27,6 +27,7 @@
     "email": "*Invalid Email Format!",
     "exactLength": "*Value must be exact length",
     "expiredToken": "*This token is expired",
+    "expiredRequest": "*Your request is expired. Please try again.",
     "forgot-password-failed": "Failed to send password reset email. Please try again.",
     "immutable": "*This value cannot be changed",
     "invalid": "*This {{fieldName}} is invalid",
