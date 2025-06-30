@@ -22,11 +22,7 @@ test('Feedback item should open in a new tab', async ({ page }) => {
   // 2. Make sure feedback.quran.com opens in a new tab
   await Promise.all([
     page.waitForEvent('popup'),
-    page
-      .locator(
-        'a:nth-child(11) .LinkContainer_anchor__bOj_o .NavigationDrawerItem_container__ZbHp6 .NavigationDrawerItem_innerContainer__KIZpr',
-      )
-      .click(), // Feedback nav item
+    page.locator('a', { hasText: 'Feedback' }).first().click(), // Feedback nav item
   ]);
 });
 
