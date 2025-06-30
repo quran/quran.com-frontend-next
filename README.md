@@ -46,14 +46,19 @@ We trust that you will not copy this idea/project, this is at the end for the sa
 
 ### Running the App Locally
 
+#### Prerequisites
+
 - Ensure you have the latest `nodejs` and `npm` installed. Prefer 10+
 - Ensure you have `yarn` installed. Simply `npm i -g yarn`
-- Clone this repo
-- Run `yarn` on the repo to install `node_modules`
-- Run `yarn dev` to start the app. If you wish to run on a different port, run `yarn dev -p 8000`
-- Open `localhost:3000` in your browser
+  
+#### Instructions
+1. Fork this repository
+2. Clone your forked repo
+3. Run `yarn` on the repo to install `node_modules`
+4. Run `yarn dev` to start the app. If you wish to run on a different port, run `yarn dev -p 8000`
+5. Open `localhost:3000` in your browser.
 
-The app runs on Next.js and will automatically hot reload when you make changes.
+The app runs on Next.js and will automatically hot-reload when you make changes.
 
 ### Environment Variables
 
