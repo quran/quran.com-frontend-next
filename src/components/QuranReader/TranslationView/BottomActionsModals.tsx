@@ -10,19 +10,24 @@ import TafsirBody from '@/components/QuranReader/TafsirView/TafsirBody';
 import { logEvent } from '@/utils/eventLogger';
 import { fakeNavigate } from '@/utils/navigation';
 
+/**
+ * Enum for modal types
+ */
+export enum ModalType {
+  TAFSIR = 'tafsir',
+  REFLECTION = 'reflection',
+  QUESTIONS = 'questions',
+}
+
 interface BottomActionsModalsProps {
   chapterId: string;
   verseNumber: string;
   verseKey: string;
   tafsirs: string[];
-  isTafsirModalOpen: boolean;
-  isReflectionModalOpen: boolean;
-  isQuestionsModalOpen: boolean;
+  openedModal: ModalType | null;
   hasQuestions: boolean;
   isTranslationView: boolean;
-  setIsTafsirModalOpen: (isOpen: boolean) => void;
-  setIsReflectionModalOpen: (isOpen: boolean) => void;
-  setIsQuestionsModalOpen: (isOpen: boolean) => void;
+  onCloseModal: () => void;
 }
 
 const BottomActionsModals: React.FC<BottomActionsModalsProps> = ({
@@ -30,14 +35,10 @@ const BottomActionsModals: React.FC<BottomActionsModalsProps> = ({
   verseNumber,
   verseKey,
   tafsirs,
-  isTafsirModalOpen,
-  isReflectionModalOpen,
-  isQuestionsModalOpen,
+  openedModal,
   hasQuestions,
   isTranslationView,
-  setIsTafsirModalOpen,
-  setIsReflectionModalOpen,
-  setIsQuestionsModalOpen,
+  onCloseModal,
 }) => {
   const { t } = useTranslation('common');
   const router = useRouter();
@@ -47,21 +48,9 @@ const BottomActionsModals: React.FC<BottomActionsModalsProps> = ({
   const reflectionModalRef = useRef(null);
 
   // Modal close handlers
-  const onTafsirModalClose = () => {
-    logEvent(`${isTranslationView ? 'translation_view' : 'reading_view'}_tafsir_modal_close`);
-    setIsTafsirModalOpen(false);
-    fakeNavigate(router.asPath, router.locale);
-  };
-
-  const onReflectionModalClose = () => {
-    logEvent(`${isTranslationView ? 'translation_view' : 'reading_view'}_reflection_modal_close`);
-    setIsReflectionModalOpen(false);
-    fakeNavigate(router.asPath, router.locale);
-  };
-
-  const onQuestionsModalClose = () => {
-    logEvent(`${isTranslationView ? 'translation_view' : 'reading_view'}_questions_modal_close`);
-    setIsQuestionsModalOpen(false);
+  const handleModalClose = (modalType: ModalType) => {
+    logEvent(`${isTranslationView ? 'translation_view' : 'reading_view'}_${modalType}_modal_close`);
+    onCloseModal();
     fakeNavigate(router.asPath, router.locale);
   };
 
@@ -83,8 +72,8 @@ const BottomActionsModals: React.FC<BottomActionsModalsProps> = ({
         render={({ surahAndAyahSelection, languageAndTafsirSelection, body }) => (
           <ContentModal
             innerRef={tafsirModalRef}
-            isOpen={isTafsirModalOpen}
-            onClose={onTafsirModalClose}
+            isOpen={openedModal === ModalType.TAFSIR}
+            onClose={() => handleModalClose(ModalType.TAFSIR)}
             header={t('quran-reader:tafsirs')}
           >
             {surahAndAyahSelection}
@@ -104,8 +93,8 @@ const BottomActionsModals: React.FC<BottomActionsModalsProps> = ({
         render={({ surahAndAyahSelection, body }) => (
           <ContentModal
             innerRef={reflectionModalRef}
-            isOpen={isReflectionModalOpen}
-            onClose={onReflectionModalClose}
+            isOpen={openedModal === ModalType.REFLECTION}
+            onClose={() => handleModalClose(ModalType.REFLECTION)}
             header={t('reflections-and-lessons')}
           >
             {surahAndAyahSelection}
@@ -115,10 +104,10 @@ const BottomActionsModals: React.FC<BottomActionsModalsProps> = ({
       />
 
       {/* Questions Modal */}
-      {isQuestionsModalOpen && hasQuestions && (
+      {openedModal === ModalType.QUESTIONS && hasQuestions && (
         <QuestionsModal
           isOpen
-          onClose={onQuestionsModalClose}
+          onClose={() => handleModalClose(ModalType.QUESTIONS)}
           verseKey={verseKey}
           onModalClick={onQuestionsModalClick}
         />

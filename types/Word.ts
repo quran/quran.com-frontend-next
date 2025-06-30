@@ -29,7 +29,7 @@ interface Word {
   highlight?: string | boolean;
   text?: string;
   audioUrl: $TsFixMe;
-  verse: Verse;
+  verse?: Verse;
   [key: string]: $TsFixMe;
 }
 

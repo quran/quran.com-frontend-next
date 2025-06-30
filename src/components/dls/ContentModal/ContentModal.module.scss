@@ -95,7 +95,9 @@ $translateYDistance: 200px;
 }
 
 .isBottomSheetOnMobile {
-  border-radius: var(--border-radius-rounded) var(--border-radius-rounded) 0 0;
+  @include breakpoints.smallerThanTablet {
+    border-radius: var(--border-radius-rounded) var(--border-radius-rounded) 0 0;
+  }
 }
 
 .autoHeight {

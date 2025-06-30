@@ -128,7 +128,7 @@ const ShareButtons: React.FC<Props> = ({ url, title, analyticsContext, verse }) 
         <div className={styles.utilityIconWrapper}>
           <VideoIcon />
         </div>
-        <span>{t('quran-reader:generate-media', { fallback: 'Generate' })}</span>
+        <span>{t('quran-reader:generate-media')}</span>
       </button>
     </div>
   );

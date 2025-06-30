@@ -8,6 +8,7 @@ import QuestionsModal from '@/components/QuestionAndAnswer/QuestionsModal';
 import { usePageQuestions } from '@/components/QuranReader/ReadingView/context/PageQuestionsContext';
 import LightbulbOnIcon from '@/icons/lightbulb-on.svg';
 import LightbulbIcon from '@/icons/lightbulb.svg';
+import QuestionType from '@/types/QuestionsAndAnswers/QuestionType';
 import { logButtonClick, logEvent } from '@/utils/eventLogger';
 import { fakeNavigate, getVerseAnswersNavigationUrl } from '@/utils/navigation';
 import Verse from 'types/Verse';
@@ -19,12 +20,12 @@ interface Props {
 
 const QuestionsMenuItem: React.FC<Props> = ({ verse, onActionTriggered }) => {
   const questionsData = usePageQuestions();
-  const { t, lang } = useTranslation();
+  const { t, lang } = useTranslation('common');
   const router = useRouter();
   const [isContentModalOpen, setIsContentModalOpen] = useState(false);
   const { verseKey } = verse;
   const hasQuestions = !!questionsData && questionsData[verseKey]?.total > 0;
-  const isClarificationQuestion = !!questionsData?.[verse.verseKey]?.types?.CLARIFICATION;
+  const isClarificationQuestion = !!questionsData?.[verseKey]?.types?.[QuestionType.CLARIFICATION];
 
   const onMenuItemClicked = () => {
     logButtonClick('reading_view_verse_actions_menu_questions');
@@ -51,7 +52,7 @@ const QuestionsMenuItem: React.FC<Props> = ({ verse, onActionTriggered }) => {
           icon={isClarificationQuestion ? <LightbulbOnIcon /> : <LightbulbIcon />}
           onClick={onMenuItemClicked}
         >
-          {t('quran-reader:q-and-a.answers')}
+          {t('answers')}
         </PopoverMenu.Item>
 
         {isContentModalOpen && (

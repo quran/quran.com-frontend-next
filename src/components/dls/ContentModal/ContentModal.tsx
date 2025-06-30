@@ -9,7 +9,6 @@ import Button, { ButtonShape, ButtonVariant } from '../Button/Button';
 import styles from './ContentModal.module.scss';
 
 import ContentModalHandles from '@/dls/ContentModal/types/ContentModalHandles';
-import useIsMobile from '@/hooks/useIsMobile';
 import CloseIcon from '@/icons/close.svg';
 import { isRTLLocale } from '@/utils/locale';
 
@@ -57,11 +56,10 @@ const ContentModal = ({
   onClick,
   shouldBeFullScreen = false,
   isOverlayMax = false,
-  isBottomSheetOnMobile,
+  isBottomSheetOnMobile = true,
 }: ContentModalProps) => {
   const overlayRef = useRef<HTMLDivElement>();
   const { locale } = useRouter();
-  const isMobile = useIsMobile();
   useImperativeHandle(innerRef, () => ({
     scrollToTop: () => {
       if (overlayRef.current) overlayRef.current.scrollTop = 0;
@@ -113,7 +111,7 @@ const ContentModal = ({
               [styles.small]: size === ContentModalSize.SMALL,
               [styles.medium]: size === ContentModalSize.MEDIUM,
               [styles.autoHeight]: !isFixedHeight,
-              [styles.isBottomSheetOnMobile]: isBottomSheetOnMobile ?? isMobile,
+              [styles.isBottomSheetOnMobile]: isBottomSheetOnMobile,
             })}
             onEscapeKeyDown={onEscapeKeyDown}
             onPointerDownOutside={onPointerDownOutside}

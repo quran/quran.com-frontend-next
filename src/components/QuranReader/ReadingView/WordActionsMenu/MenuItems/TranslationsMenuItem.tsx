@@ -9,6 +9,7 @@ import ContentModalHandles from '@/components/dls/ContentModal/types/ContentModa
 import PopoverMenu from '@/components/dls/PopoverMenu/PopoverMenu';
 import TranslationsView from '@/components/QuranReader/ReadingView/TranslationsView';
 import TranslationViewCellSkeleton from '@/components/QuranReader/TranslationView/TranslationViewCellSkeleton';
+import useSafeTimeout from '@/hooks/useSafeTimeout';
 import TranslationsIcon from '@/icons/translation.svg';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
@@ -57,10 +58,15 @@ const TranslationsMenuItem: React.FC<Props> = ({ verse, onActionTriggered }) => 
     setIsContentModalOpen(true);
   };
 
+  // Use the safe timeout hook
+  const setSafeTimeout = useSafeTimeout();
+
   const onModalClosed = () => {
     logEvent('reading_view_translations_modal_close');
     setIsContentModalOpen(false);
-    setTimeout(() => {
+
+    // Use the safe timeout hook to handle cleanup automatically
+    setSafeTimeout(() => {
       // we set a really short timeout to close the popover after the modal has been closed to allow enough time for the fadeout css effect to apply.
       onActionTriggered?.();
     }, CLOSE_POPOVER_AFTER_MS);

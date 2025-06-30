@@ -6,6 +6,7 @@ import useTranslation from 'next-translate/useTranslation';
 import NoteModal from '@/components/Notes/NoteModal';
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import useCountRangeNotes from '@/hooks/auth/useCountRangeNotes';
+import useSafeTimeout from '@/hooks/useSafeTimeout';
 import EmptyNotesIcon from '@/icons/notes-empty.svg';
 import NotesIcon from '@/icons/notes-filled.svg';
 import Verse from '@/types/Verse';
@@ -37,11 +38,16 @@ const NotesAction: React.FC<Props> = ({ verse, onActionTriggered }) => {
     }
   };
 
+  // Use the safe timeout hook
+  const setSafeTimeout = useSafeTimeout();
+
   const onModalClose = () => {
     logEvent('reading_view_notes_modal_close');
     setIsModalOpen(false);
+
     if (onActionTriggered) {
-      setTimeout(() => {
+      // Use the safe timeout hook to handle cleanup automatically
+      setSafeTimeout(() => {
         // we set a really short timeout to close the popover after the modal has been closed to allow enough time for the fadeout css effect to apply.
         onActionTriggered();
       }, CLOSE_POPOVER_AFTER_MS);

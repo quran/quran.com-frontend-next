@@ -60,8 +60,8 @@ const Line = ({ lineKey, words, isBigTextLayout, pageIndex, lineIndex }: LinePro
   const isWordByWordLayout = showWordByWordTranslation || showWordByWordTransliteration;
   const verseTranslations = words[0].verse?.translations;
   const translationName = getTranslationNameString(verseTranslations);
-  const translationCount = verseTranslations?.length || 0;
-  const isTranslationSelected = translationCount > 0;
+  const translationsCount = verseTranslations?.length || 0;
+
   return (
     <div
       ref={selectedItemRef}
@@ -74,8 +74,7 @@ const Line = ({ lineKey, words, isBigTextLayout, pageIndex, lineIndex }: LinePro
       {shouldShowChapterHeader && (
         <ChapterHeader
           translationName={translationName}
-          translationsCount={translationCount}
-          isTranslationSelected={isTranslationSelected}
+          translationsCount={translationsCount}
           chapterId={firstWordData[0]}
           pageNumber={words[0].pageNumber}
           hizbNumber={words[0].hizbNumber}

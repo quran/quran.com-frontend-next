@@ -1,6 +1,6 @@
 // This is less than the modal and the popover in (OverflowVerseActionsMenu)
-$word-modal-z-index: 350;
-$word-modal-overlay-z-index: 300;
+$word-modal-z-index: var(--z-index-smaller-modal);
+$word-modal-overlay-z-index: var(--z-index-sticky);
 
 .container {
   width: 100%;

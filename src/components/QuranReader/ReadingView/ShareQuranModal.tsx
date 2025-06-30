@@ -9,7 +9,6 @@ import styles from '@/components/HomePage/ReadingSection/NewCard/ShareQuranModal
 import { ModalSize } from '@/dls/Modal/Content';
 import Modal from '@/dls/Modal/Modal';
 import ShareButtons from '@/dls/ShareButtons';
-import useIsMobile from '@/hooks/useIsMobile';
 import CloseIcon from '@/icons/close.svg';
 import { getFirstTimeReadingGuideNavigationUrl } from '@/utils/navigation';
 import { getBasePath } from '@/utils/url';
@@ -25,7 +24,6 @@ interface Props {
 
 const ShareQuranModal: React.FC<Props> = ({ isOpen, onClose, verse }) => {
   const { t } = useTranslation('common');
-  const isMobile = useIsMobile();
   const shareURL = verse
     ? (() => {
         const [chapterId, verseNumber] = getVerseAndChapterNumbersFromKey(verse.verseKey);
@@ -34,12 +32,7 @@ const ShareQuranModal: React.FC<Props> = ({ isOpen, onClose, verse }) => {
     : `${getBasePath()}${getFirstTimeReadingGuideNavigationUrl()}`;
 
   return (
-    <Modal
-      isOpen={isOpen}
-      onClickOutside={onClose}
-      size={ModalSize.MEDIUM}
-      isBottomSheetOnMobile={isMobile}
-    >
+    <Modal isOpen={isOpen} onClickOutside={onClose} size={ModalSize.MEDIUM}>
       <Modal.Body>
         <button className={styles.closeButton} onClick={onClose} type="button" aria-label="Close">
           <CloseIcon />

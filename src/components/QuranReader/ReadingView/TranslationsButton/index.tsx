@@ -58,17 +58,13 @@ const TranslationsButton: React.FC<Props> = ({ verse, onActionTriggered, isTrans
 
   const onButtonClicked = () => {
     logButtonClick(
-      // eslint-disable-next-line i18next/no-literal-string
-      `reading_${isTranslationView ? 'translation_view' : 'reading_view'}_translations_modal_open`,
+      `${isTranslationView ? 'translation_view' : 'reading_view'}_translations_modal_open`,
     );
     setIsContentModalOpen(true);
   };
 
   const onModalClosed = () => {
-    // eslint-disable-next-line i18next/no-literal-string
-    logEvent(
-      `reading_${isTranslationView ? 'translation_view' : 'reading_view'}_translations_modal_close`,
-    );
+    logEvent(`${isTranslationView ? 'translation_view' : 'reading_view'}_translations_modal_close`);
     setIsContentModalOpen(false);
     setTimeout(() => {
       // we set a really short timeout to close the popover after the modal has been closed to allow enough time for the fadeout css effect to apply.

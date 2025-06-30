@@ -28,7 +28,6 @@ const verseWords: Word[] = [
     pageNumber: 455,
     lineNumber: 4,
     text: 'كِتَٰبٌ',
-    verse: undefined,
   },
   {
     id: 32397,
@@ -43,7 +42,6 @@ const verseWords: Word[] = [
     pageNumber: 455,
     lineNumber: 4,
     text: 'أَنزَلۡنَٰهُ',
-    verse: undefined,
   },
   {
     id: 32398,
@@ -58,7 +56,6 @@ const verseWords: Word[] = [
     pageNumber: 455,
     lineNumber: 4,
     text: 'إِلَيۡكَ',
-    verse: undefined,
   },
   {
     id: 32399,
@@ -73,7 +70,6 @@ const verseWords: Word[] = [
     pageNumber: 455,
     lineNumber: 4,
     text: 'مُبَٰرَكٞ',
-    verse: undefined,
   },
   {
     id: 32400,
@@ -88,7 +84,6 @@ const verseWords: Word[] = [
     pageNumber: 455,
     lineNumber: 4,
     text: 'لِّيَدَّبَّرُوٓاْ',
-    verse: undefined,
   },
   {
     id: 32401,
@@ -103,7 +98,6 @@ const verseWords: Word[] = [
     pageNumber: 455,
     lineNumber: 4,
     text: 'ءَايَٰتِهِۦ',
-    verse: undefined,
   },
   {
     id: 32402,
@@ -118,7 +112,6 @@ const verseWords: Word[] = [
     pageNumber: 455,
     lineNumber: 4,
     text: 'وَلِيَتَذَكَّرَ',
-    verse: undefined,
   },
   {
     id: 32403,
@@ -133,7 +126,6 @@ const verseWords: Word[] = [
     pageNumber: 455,
     lineNumber: 4,
     text: 'أُوْلُواْ',
-    verse: undefined,
   },
   {
     id: 32404,
@@ -148,7 +140,6 @@ const verseWords: Word[] = [
     pageNumber: 455,
     lineNumber: 5,
     text: 'ٱلۡأَلۡبَٰبِ',
-    verse: undefined,
   },
   {
     id: 32405,
@@ -163,7 +154,6 @@ const verseWords: Word[] = [
     pageNumber: 455,
     lineNumber: 5,
     text: '٢٩',
-    verse: undefined,
   },
 ];
 
