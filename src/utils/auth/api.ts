@@ -456,13 +456,13 @@ type QuestionTypes = {
   [key in QuestionType]?: number;
 };
 
-export type QuestionsCount = { total: number; types: QuestionTypes };
+export type QuestionsData = { total: number; types: QuestionTypes };
 
 export const countQuestionsWithinRange = async (
   from: string,
   to: string,
   language: Language,
-): Promise<Record<string, QuestionsCount>> => {
+): Promise<Record<string, QuestionsData>> => {
   return privateFetcher(makeCountQuestionsWithinRangeUrl(from, to, language));
 };
 

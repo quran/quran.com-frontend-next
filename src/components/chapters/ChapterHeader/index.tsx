@@ -26,8 +26,6 @@ interface ChapterHeaderProps {
   translationsCount?: number;
   pageNumber: number;
   hizbNumber: number;
-  // eslint-disable-next-line react/no-unused-prop-types
-  isTranslationSelected?: boolean;
 }
 
 /**
