@@ -22,9 +22,6 @@ const PATH = getTakeNotesNavigationUrl();
 const TakeNotesPage: NextPage = (): JSX.Element => {
   const { lang } = useTranslation();
 
-  // This function is used for tracking button clicks when we add CTA buttons
-  // Format follows the pattern: ${section}_take_notes_cta
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const onButtonClicked = (section: string) => {
     logButtonClick(`${section}_take_notes_cta`);
   };
@@ -45,7 +42,7 @@ const TakeNotesPage: NextPage = (): JSX.Element => {
               Quran
             </h1>
             <p className={styles.noMarginEnd}>
-              <a href="#benefits" onClick={() => logButtonClick('benefits_section_link')}>
+              <a href="#benefits" onClick={() => onButtonClicked('benefits_section')}>
                 Benefits of Using the Notes Feature
               </a>
             </p>
@@ -246,7 +243,7 @@ const TakeNotesPage: NextPage = (): JSX.Element => {
                 href="https://quranreflect.com"
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={() => logButtonClick('quranreflect_link')}
+                onClick={() => onButtonClicked('quranreflect')}
               >
                 QuranReflect.com
               </a>
@@ -290,7 +287,7 @@ const TakeNotesPage: NextPage = (): JSX.Element => {
                 href="https://quranreflect.com/faq"
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={() => logButtonClick('quranreflect_faq_link')}
+                onClick={() => onButtonClicked('quranreflect_faq')}
               >
                 QuranReflect.com/faq
               </a>{' '}
@@ -299,7 +296,7 @@ const TakeNotesPage: NextPage = (): JSX.Element => {
                 href="https://quran.com/learning-plans/five-lenses-to-reflect-on-the-quran"
                 target="_blank"
                 rel="noopener noreferrer"
-                onClick={() => logButtonClick('five_lenses_link')}
+                onClick={() => onButtonClicked('five_lenses')}
               >
                 Five Lenses
               </a>{' '}
