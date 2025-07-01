@@ -159,6 +159,15 @@
   width: 100%;
 }
 
+.centeredText {
+  text-align: center;
+}
+
+.boldText {
+  font-weight: var(--font-weight-bold);
+  line-height: inherit;
+}
+
 .noMarginEnd {
   margin-block-end: 0 !important;
 }

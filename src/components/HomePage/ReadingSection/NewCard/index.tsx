@@ -40,7 +40,10 @@ const NewCard: React.FC = () => {
       >
         <div className={styles.cardOuterContainer}>
           <div className={styles.cardWithIcon}>
-            <div className={styles.iconContainer}>✏️</div>
+            <div className={styles.iconContainer}>
+              <span aria-hidden="true">✏️</span>
+              <span className={styles.srOnly}>Pencil icon</span>
+            </div>
             <div className={styles.link}>
               <Trans
                 i18nKey="home:take-notes"
