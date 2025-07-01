@@ -20,8 +20,8 @@ const ShareQuranModal = dynamic(() => import('./ShareQuranModal'), {
 const NewCard: React.FC = () => {
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
 
-  const onShareQuranClicked = () => {
-    logButtonClick('homepage_share_quran');
+  const onTakeNotesClicked = () => {
+    logButtonClick('homepage_take_notes_link');
   };
 
   const onCloseShareModal = () => {
@@ -50,7 +50,7 @@ const NewCard: React.FC = () => {
                       variant={LinkVariant.Blend}
                       href={getTakeNotesNavigationUrl()}
                       className={styles.linkHref}
-                      onClick={onShareQuranClicked}
+                      onClick={onTakeNotesClicked}
                       isNewTab
                     />
                   ),
