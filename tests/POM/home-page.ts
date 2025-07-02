@@ -127,6 +127,7 @@ class Homepage {
   }
 
   async openSettingsDrawer(isMobile: boolean = false) {
+    await this.closeNextjsErrorDialog();
     await openSettingsDrawerHelper(this.page, { isMobile });
   }
 

@@ -1,7 +1,7 @@
 /* eslint-disable max-lines */
 import { useEffect, useMemo, useState } from 'react';
 
-import { GetStaticProps, NextPage } from 'next';
+import { GetServerSideProps, NextPage } from 'next';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 import { useSelector } from 'react-redux';
@@ -31,6 +31,7 @@ import {
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl } from '@/utils/navigation';
 import { getAdvancedSearchQuery } from '@/utils/search';
+import withSsrRedux from '@/utils/withSsrRedux';
 import AvailableLanguage from 'types/AvailableLanguage';
 import ChaptersData from 'types/ChaptersData';
 
@@ -176,7 +177,8 @@ const SearchPage: NextPage<SearchPageProps> = (): JSX.Element => {
   );
 };
 
-export const getStaticProps: GetStaticProps = async ({ locale }) => {
+export const getServerSideProps: GetServerSideProps = withSsrRedux('/search', async (context) => {
+  const { locale } = context;
   try {
     const availableLanguagesResponse = await getAvailableLanguages(locale);
 
@@ -197,9 +199,11 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
     return {
       props: {
         hasError: true,
+        chaptersData: {},
+        languages: [],
       },
     };
   }
-};
+});
 
 export default SearchPage;

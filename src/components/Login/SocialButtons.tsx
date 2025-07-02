@@ -37,7 +37,6 @@ const SocialButtons: FC<Props> = ({ redirect }) => {
         ariaLabel={t('continue-google')}
         data-testid="google-login-button"
       />
-
       <Button
         href={makeFacebookLoginUrl(redirect)}
         prefix={<FacebookIcon color="#4267b2" />}
@@ -49,7 +48,6 @@ const SocialButtons: FC<Props> = ({ redirect }) => {
         ariaLabel={t('continue-facebook')}
         data-testid="facebook-login-button"
       />
-
       <Button
         href={makeAppleLoginUrl(redirect)}
         prefix={<AppleIcon />}

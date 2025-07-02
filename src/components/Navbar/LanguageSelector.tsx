@@ -11,10 +11,14 @@ import { ToastStatus, useToast } from '../dls/Toast/Toast';
 
 import styles from './LanguageSelector.module.scss';
 
+import { getCountryLanguagePreference } from '@/api';
 import ChevronSelectIcon from '@/icons/chevron-select.svg';
 import GlobeIcon from '@/icons/globe.svg';
-import resetSettings from '@/redux/actions/reset-settings';
-import { selectIsUsingDefaultSettings } from '@/redux/slices/defaultSettings';
+import {
+  selectUserHasCustomised,
+  selectDetectedCountry,
+  setDefaultsFromCountryPreference,
+} from '@/redux/slices/defaultSettings';
 import { addOrUpdateUserPreference } from '@/utils/auth/api';
 import { isLoggedIn } from '@/utils/auth/login';
 import { setLocaleCookie } from '@/utils/cookies';
@@ -39,7 +43,8 @@ const LanguageSelector = ({
   shouldShowSelectedLang: isFooter,
   expandDirection = PopoverMenuExpandDirection.BOTTOM,
 }: LanguageSelectorProps) => {
-  const isUsingDefaultSettings = useSelector(selectIsUsingDefaultSettings);
+  const userHasCustomised = useSelector(selectUserHasCustomised);
+  const detectedCountry = useSelector(selectDetectedCountry);
   const dispatch = useDispatch();
   const { t, lang } = useTranslation('common');
   const toast = useToast();
@@ -59,8 +64,11 @@ const LanguageSelector = ({
    */
   const onChange = async (newLocale: string) => {
     // if the user didn't change the settings and he is transitioning to a new locale, we want to apply the default settings of the new locale
-    if (isUsingDefaultSettings) {
-      dispatch(resetSettings(newLocale));
+    if (!userHasCustomised) {
+      const countryPreference = await getCountryLanguagePreference(newLocale, detectedCountry);
+      if (countryPreference) {
+        dispatch(setDefaultsFromCountryPreference({ countryPreference, locale: newLocale }));
+      }
     }
     logValueChange('locale', lang, newLocale);
 
@@ -127,6 +135,7 @@ const LanguageSelector = ({
               </span>
             }
             tooltip={t('languages')}
+            data-testid="language-selector-button-footer"
             variant={ButtonVariant.Ghost}
             suffix={
               <span className={styles.triggerSuffixContainer}>
@@ -141,6 +150,7 @@ const LanguageSelector = ({
             tooltip={t('languages')}
             shape={ButtonShape.Circle}
             variant={ButtonVariant.Ghost}
+            data-testid="language-selector-button-navbar"
             ariaLabel={t('aria.select-lng')}
           >
             <span className={styles.globeIconWrapper}>
@@ -158,6 +168,7 @@ const LanguageSelector = ({
           isSelected={option.value === lang}
           shouldCloseMenuAfterClick
           key={option.value}
+          dataTestId={`language-selector-item-${option.value}`}
           onClick={() => onChange(option.value)}
         >
           {option.label}

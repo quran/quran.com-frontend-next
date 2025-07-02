@@ -2,7 +2,7 @@
 /* eslint-disable max-lines */
 /* eslint-disable i18next/no-literal-string */
 import classNames from 'classnames';
-import { NextPage } from 'next';
+import { GetServerSideProps, NextPage } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 
 import WhatIsRamadanArabic from './WhatIsRamadanArabic';
@@ -15,6 +15,7 @@ import styles from '@/pages/contentPage.module.scss';
 import pageStyles from '@/pages/ramadan/RamadanActivities.module.scss';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl, getWhatIsRamadanNavigationUrl } from '@/utils/navigation';
+import withSsrRedux from '@/utils/withSsrRedux';
 
 const PATH = getWhatIsRamadanNavigationUrl();
 const WhatIsRamadanPage: NextPage = (): JSX.Element => {
@@ -42,9 +43,9 @@ const WhatIsRamadanPage: NextPage = (): JSX.Element => {
               <div>
                 At the heart of Ramadan lies the Quran, the holy book of Islam. Revealed over 1,400
                 years ago during this blessed month, the Quran is more than just a scripture; it is
-                a guide for life, offering wisdom, comfort, and answers to life’s deepest questions.
-                For Muslims, Ramadan is not just about fasting; it’s about reconnecting with the
-                Quran’s timeless message and allowing it to renew and transform their hearts and
+                a guide for life, offering wisdom, comfort, and answers to life's deepest questions.
+                For Muslims, Ramadan is not just about fasting; it's about reconnecting with the
+                Quran's timeless message and allowing it to renew and transform their hearts and
                 minds.
               </div>
             </div>
@@ -65,7 +66,7 @@ const WhatIsRamadanPage: NextPage = (): JSX.Element => {
                 billion Muslims worldwide. It is the ninth month of the Islamic calendar, a sacred
                 period of fasting, prayer, and reflection. From dawn to sunset, Muslims refrain from
                 food, drink, and sexual relations to focus on spiritual growth and self-discipline.
-                But Ramadan is so much more than abstaining; it’s about connecting—to God, to one’s
+                But Ramadan is so much more than abstaining; it's about connecting—to God, to one's
                 community, and to the divine message of the Quran. God tells us in the Quran,
               </div>
               <div className={styles.subSection}>
@@ -94,7 +95,7 @@ const WhatIsRamadanPage: NextPage = (): JSX.Element => {
               <div className={styles.subSection}>
                 Fasting during Ramadan carries many additional benefits for the heart and soul -
                 increased empathy for those in need, gratitude for blessings, and discipline over
-                desires. But it’s not just about the physical fast—it’s a fast of the heart and soul
+                desires. But it's not just about the physical fast—it's a fast of the heart and soul
                 from negativity and heedlessness, a reset for the mind and soul.
               </div>
             </div>
@@ -102,13 +103,13 @@ const WhatIsRamadanPage: NextPage = (): JSX.Element => {
               <h2>The Quran: The Heart of Ramadan</h2>
               <div>
                 What makes Ramadan unique is its intimate link with the Quran. Revealed over 1,400
-                years ago, the Quran is the direct word of God. It’s not just a book but a guide for
-                life, offering wisdom, comfort, and answers to life’s deepest questions.
+                years ago, the Quran is the direct word of God. It's not just a book but a guide for
+                life, offering wisdom, comfort, and answers to life's deepest questions.
               </div>
               <div className={styles.subSection}>
                 During Ramadan, Muslims dedicate extra time to reading, reciting, and reflecting on
                 the Quran. Special nightly prayers called Taraweeh are held, where the Quran is
-                recited in beautiful, melodic tones. This deep immersion in the Quran’s message
+                recited in beautiful, melodic tones. This deep immersion in the Quran's message
                 elevates Ramadan from a sacred observance into a profound journey of self-discovery,
                 spiritual renewal, and reconnection with God, providing a chance to shed bad habits,
                 realign the soul, and embrace a fresh start.
@@ -117,7 +118,7 @@ const WhatIsRamadanPage: NextPage = (): JSX.Element => {
             <div className={styles.subSection}>
               <h2>What Can Ramadan Teach You?</h2>
               <div>
-                Even if you’re not Muslim, Ramadan holds universal lessons. Have you ever wondered
+                Even if you're not Muslim, Ramadan holds universal lessons. Have you ever wondered
                 what it means to live with mindfulness? To practice gratitude even in moments of
                 challenge? To seek clarity about your place in the world? These are the questions
                 Ramadan invites us all to reflect upon.
@@ -139,13 +140,13 @@ const WhatIsRamadanPage: NextPage = (): JSX.Element => {
             <div className={styles.subSection}>
               <h2>Experience the Power of the Quran</h2>
               <div>
-                The Quran is not just a book for Muslims; it’s a wellspring of wisdom and
-                inspiration for any person willing to come to it with an open heart. Whether you’re
-                searching for peace, answers, or a deeper understanding of life’s purpose, the Quran
+                The Quran is not just a book for Muslims; it's a wellspring of wisdom and
+                inspiration for any person willing to come to it with an open heart. Whether you're
+                searching for peace, answers, or a deeper understanding of life's purpose, the Quran
                 speaks to the human soul in ways that transcend culture and time.
               </div>
               <div className={styles.subSection}>
-                As you explore the Quran, you’ll encounter profound ideas about justice, mercy,
+                As you explore the Quran, you'll encounter profound ideas about justice, mercy,
                 patience, and the beauty of creation. The Quran challenges us to think deeply, to
                 reflect, and to act with compassion. Could this be the message your soul has been
                 waiting for?
@@ -159,15 +160,15 @@ const WhatIsRamadanPage: NextPage = (): JSX.Element => {
                 discover how its timeless guidance can illuminate your path.
               </div>
               <div className={styles.subSection}>
-                Ramadan is a reminder that the soul’s nourishment is just as vital as the body’s.
-                Whether you’re fasting or simply curious, this month offers a chance to reflect,
+                Ramadan is a reminder that the soul's nourishment is just as vital as the body's.
+                Whether you're fasting or simply curious, this month offers a chance to reflect,
                 renew, and reconnect. What could be more powerful than a fresh start for your soul?
               </div>
             </div>
             <div className={styles.subSection}>
               <h2>Discover. Reflect. Begin.</h2>
               <div>
-                Let this Ramadan be your gateway to exploring the Quran’s profound impact. Who
+                Let this Ramadan be your gateway to exploring the Quran's profound impact. Who
                 knows? This moment of curiosity could be the beginning of a life-changing journey.
               </div>
             </div>
@@ -181,5 +182,7 @@ const WhatIsRamadanPage: NextPage = (): JSX.Element => {
     </>
   );
 };
+
+export const getServerSideProps: GetServerSideProps = withSsrRedux('/what-is-ramadan');
 
 export default WhatIsRamadanPage;

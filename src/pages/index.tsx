@@ -3,7 +3,7 @@
 import React, { useMemo } from 'react';
 
 import classNames from 'classnames';
-import { NextPage, GetStaticProps } from 'next';
+import { NextPage, GetServerSideProps } from 'next';
 import Head from 'next/head';
 import useTranslation from 'next-translate/useTranslation';
 
@@ -24,6 +24,7 @@ import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl } from '@/utils/navigation';
 import getCurrentDayAyah from '@/utils/quranInYearCalendar';
 import { isMobile } from '@/utils/responsive';
+import withSsrRedux from '@/utils/withSsrRedux';
 import { ChaptersResponse } from 'types/ApiResponses';
 import ChaptersData from 'types/ChaptersData';
 
@@ -137,7 +138,7 @@ const Index: NextPage<IndexProps> = ({
   );
 };
 
-export const getStaticProps: GetStaticProps = async ({ locale }) => {
+export const getServerSideProps: GetServerSideProps = withSsrRedux('/', async ({ locale }) => {
   const allChaptersData = await getAllChaptersData(locale);
 
   return {
@@ -151,6 +152,6 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
       },
     },
   };
-};
+});
 
 export default Index;

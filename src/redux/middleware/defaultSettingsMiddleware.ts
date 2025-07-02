@@ -2,7 +2,7 @@
 import { AnyAction, Middleware, MiddlewareAPI, Dispatch } from 'redux';
 
 import { RootState } from '../RootState';
-import { setIsUsingDefaultSettings } from '../slices/defaultSettings';
+import { setIsUsingDefaultSettings, setUserHasCustomised } from '../slices/defaultSettings';
 import SliceName from '../types/SliceName';
 
 import { RESET_SETTINGS_EVENT } from '@/redux/actions/reset-settings';
@@ -52,8 +52,10 @@ const DefaultSettingsMiddleware: Middleware<
     // the moment any of the actions that change the settings has changed, it means we are no longer using the default settings
     if (OBSERVED_ACTIONS.includes(type)) {
       storeAPI.dispatch({ type: setIsUsingDefaultSettings.type, payload: false });
+      storeAPI.dispatch({ type: setUserHasCustomised.type, payload: true });
     } else if (type === RESET_SETTINGS_EVENT) {
       storeAPI.dispatch({ type: setIsUsingDefaultSettings.type, payload: true });
+      storeAPI.dispatch({ type: setUserHasCustomised.type, payload: false });
     }
     return next(action);
   };
