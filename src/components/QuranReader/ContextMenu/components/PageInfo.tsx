@@ -12,6 +12,7 @@ interface PageInfoProps {
   pageNumber: string;
   t: (key: string) => string;
   containerClassName?: string;
+  showBookmark?: boolean;
 }
 
 /**
@@ -24,11 +25,12 @@ const PageInfo: React.FC<PageInfoProps> = ({
   pageNumber,
   t,
   containerClassName,
+  showBookmark,
 }) => {
   return (
     <div className={classNames(styles.pageInfoContainer, containerClassName)}>
       <div className={styles.primaryInfo}>
-        <PageBookmarkAction pageNumber={Number(pageNumber)} />
+        {showBookmark && <PageBookmarkAction pageNumber={Number(pageNumber)} />}
         <span>
           {t('page')} {pageNumber}
         </span>
