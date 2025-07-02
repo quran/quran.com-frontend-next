@@ -1,0 +1,114 @@
+{
+  "benefits": {
+    "access-anywhere": {
+      "bullet-points": [
+        "Nota anda disimpan dengan selamat dalam akaun Quran.com anda.",
+        "Segerakkan merentas peranti—teruskan kajian anda pada mudah alih, tablet atau desktop."
+      ],
+      "description": "Nota anda disegerakkan merentas peranti apabila anda log masuk, membolehkan anda mengakses pantulan anda sama ada anda menggunakan telefon, tablet atau komputer anda.",
+      "login-prompt": "Hanya buat log masuk percuma untuk bermula.",
+      "title": "Akses Di Mana-mana, Pada Bila-bila Masa"
+    },
+    "enhanced-memorization": {
+      "bullet-points": [
+        "Tulis penjelasan atau peringatan di sebelah ayat untuk membantu hafalan.",
+        "Perhatikan perkataan atau konsep yang sukar untuk semakan kemudian.",
+        "Gunakan nota untuk menandakan kemajuan dalam jadual hafalan."
+      ],
+      "description": "Menulis nota tentang ayat yang anda hafal boleh meningkatkan pengekalan dengan ketara. Cipta peranti mnemonik, corak nota atau tulis sambungan peribadi yang membantu ayat-ayat itu melekat dalam ingatan anda.",
+      "image": {
+        "alt": "Nota untuk hafalan dan ulangkaji"
+      },
+      "paragraph": "Sama ada anda menghafal secara aktif atau menyemak semula apa yang telah anda pelajari, nota boleh menjadi bantuan yang kuat dalam hafalan.",
+      "title": "Dipertingkatkan Penghafalan & Ulangkaji"
+    },
+    "organize-preserve": {
+      "description": "Pastikan pandangan anda disusun mengikut ayat, menjadikannya mudah untuk membina tafsir (komentar) peribadi dari semasa ke semasa. Nota anda disimpan dalam akaun anda, jadi anda tidak akan kehilangan detik inspirasi atau pemahaman itu.",
+      "images": {
+        "organized": "Nota tersusun pada peringkat pantun",
+        "preserved": "Nota belajar terpelihara"
+      },
+      "paragraph": "Pernahkah anda meninggalkan kelas atau kuliah dan terlupa semua tentang nota yang anda coretkan di suatu tempat dalam buku nota, aplikasi nota atau dokumen? Bayangkan mempunyai akses kepada setiap nota yang anda ambil pada ayat yang mudah diakses di peringkat ayah pada bila-bila masa anda membaca ayat itu semula.",
+      "title": "Susun dan Pelihara Kajian Anda"
+    },
+    "personal-reflection": {
+      "bullet-points": [
+        "Catatkan pemikiran, renungan dan kesedaran anda semasa anda membaca Al-Quran - semudah atau mendalam sekalipun.",
+        "Kuatkan hubungan anda dengan Al-Quran dengan melibatkan diri secara aktif dengan ayat-ayatnya daripada membaca cepat tanpa jeda."
+      ],
+      "description": "Mengambil nota membolehkan anda mendokumenkan perjalanan peribadi anda dengan Al-Quran. Catat pemikiran, soalan dan detik kejelasan anda semasa anda belajar. Dari masa ke masa, nota ini menjadi rekod berharga tentang pertumbuhan rohani anda dan pemahaman yang mendalam.",
+      "examples-heading": "Contoh nota:",
+      "images": {
+        "growth": "Contoh nota pertumbuhan rohani",
+        "reflection": "Contoh nota refleksi peribadi"
+      },
+      "title": "Refleksi Peribadi & Pertumbuhan Rohani"
+    },
+    "share-reflections": {
+      "community-paragraph": "Apabila dikongsi, renungan anda mungkin bergema dengan orang lain dan memupuk komuniti pertumbuhan berpusatkan al-Quran. Ketahui lebih lanjut di <0>QuranReflect.com/faq</0> dan terokai <1>Lima Kanta</1> untuk memperkayakan pantulan anda.",
+      "conclusion": {
+        "dua": "Semoga Allah menjadikan Al-Quran sebagai cahaya dadamu, musim semi di hatimu, menghilangkan kesedihanmu, dan menghilangkan kesusahanmu. Amin.",
+        "paragraph1": "Al-Quran ialah teman seumur hidup, dan menggunakan ciri Nota boleh membantu anda membina hubungan yang bermakna dan interaktif dengannya. Gunakannya untuk menangkap refleksi, menandakan cabaran, mengekalkan cerapan dan banyak lagi. Lama kelamaan, ia akan menjadi catatan peribadi usaha, keikhlasan, dan pertumbuhan anda dengan Kitab Allah, insha'Allah.",
+        "paragraph2": "Kami menjemput anda untuk mencabar diri anda untuk berhubung dengan Al-Quran setiap hari - walaupun hanya sepotong ayat - dan luangkan masa untuk merenung dan menulis nota. <0>Biar tindakan kecil dan konsisten ini menjadi cara untuk memperdalam hubungan anda dengan Kitab Allah, satu ayat pada satu masa.</0>",
+        "title": "Mulakan Perjalanan Anda Hari Ini"
+      },
+      "deeper-insights-title": "Wawasan yang Lebih Dalam:",
+      "deeper-insights": [
+        "Adakah nama-nama Allah disebut, dan bagaimana kaitannya dengan ayat tersebut?",
+        "Perkataan atau aspek linguistik yang manakah menarik perhatian anda?",
+        "Bolehkah anda membuat kaitan dengan konteks ayat, ayat al-Quran, hadis, atau peristiwa lain?"
+      ],
+      "description": "Akan datang: keupayaan untuk berkongsi nota yang dipilih dengan rakan, keluarga atau kumpulan belajar. Bekerjasama dalam memahami dan menyebarkan ilmu yang bermanfaat.",
+      "paragraph1": "Walaupun nota pada Quran.com disimpan secara tertutup, anda juga mempunyai pilihan untuk berkongsi pantulan yang dipilih secara terbuka di <0>QuranReflect.com</0>. Ini adalah platform komuniti bukan untung yang direka untuk menggalakkan penglibatan yang bernas dengan al-Quran - bukan melalui tafsir ilmiah (yang dikhaskan untuk ulama yang berkelayakan), tetapi melalui refleksi peribadi yang ikhlas yang disemak dan dibimbing oleh pasukan penyederhanaan yang berkelayakan.",
+      "paragraph2": "Allah menjemput semua orang beriman, bukan sahaja ulama, untuk terlibat dalam tadabbur:",
+      "quote": "Ini adalah kitab yang diberkati yang Kami turunkan kepadamu wahai Nabi supaya mereka merenungkan ayat-ayatnya dan orang-orang yang berakal untuk mengambil pelajaran. (Surah Sad 38:29)",
+      "reflection-prompt": "Contoh Soalan Refleksi Peribadi yang boleh anda gunakan untuk membuat refleksi:",
+      "reflection-questions": [
+        "Dalam cara apakah ayat ini telah menggerakkan atau memberi inspirasi kepada anda?",
+        "Adakah terdapat kualiti atau tindakan yang dinyatakan yang boleh anda perbaiki?",
+        "Adakah janji atau amaran/larangan yang boleh anda pakai dalam hidup anda?",
+        "Adakah anda mempunyai kisah peribadi yang berkaitan dengan ayat ini?",
+        "Apakah perubahan yang anda ingin lakukan berdasarkan ayat ini, dan bagaimanakah anda atau orang lain boleh melaksanakannya secara praktikal?"
+      ],
+      "title": "Kongsi renungan anda supaya orang lain mendapat manfaat"
+    },
+    "title": "Faedah Menggunakan Ciri Nota"
+  },
+  "description": "Temui 6 sebab yang kuat untuk mengambil nota di Quran.com dan cara nota boleh memainkan peranan penting dalam Perjalanan anda dengan Al-Quran.",
+  "heading": "6 Sebab Ampuh untuk Mengambil Nota - Dan Bagaimana Ia Boleh Mengubah Perjalanan Anda dengan Al-Quran",
+  "how-to-use": {
+    "saved-note-explanation": "Sebaik sahaja anda menyimpan nota untuk ayat, ikon nota akan bertukar menjadi biru, menjadikannya mudah untuk mengenal pasti ayat yang anda telah anotasikan sebelum ini semasa bacaan akan datang.",
+    "step1": "<0>Pilih Ayat:</0> Klik pada mana-mana ayat dan pilih pilihan Nota.",
+    "step2": "<0>Tambah Pemikiran Anda:</0> Taipkan renungan, peringatan atau soalan anda.",
+    "step3": "<0>Simpan:</0> Nota anda akan disimpan di bawah akaun anda.",
+    "step4": "<0>Akses Bila-bila Masa:</0> Kembali ke nota anda melalui profil anda atau terus pada ayat tersebut.",
+    "title": "Cara Menggunakan Ciri Nota"
+  },
+  "images": {
+    "adding-notes": {
+      "alt": "Menambah nota pada ayat"
+    },
+    "blue-icon": {
+      "alt": "Ikon nota biru menunjukkan nota disimpan"
+    },
+    "feature-available": {
+      "alt": "Ciri nota tersedia di sebelah setiap ayat",
+      "caption": "Ciri nota tersedia di sebelah setiap ayat"
+    }
+  },
+  "introduction": "Ciri Nota di Quran.com ialah cara yang bermakna untuk memperdalam penglibatan anda dengan al-Quran. Sama ada anda sedang mengkaji, merenung atau sekadar cuba memahami mesej dengan lebih baik, mengambil nota boleh membantu anda berhubung dengan lebih mendalam dengan ayat-ayat dan mengekalkan cerapan yang mungkin terlupa.",
+  "meta": {
+    "description": "Ketahui cara menggunakan ciri nota di Quran.com untuk meningkatkan pengalaman belajar Al-Quran anda.",
+    "title": "Ambil Nota - Quran.com"
+  },
+  "table-of-contents": {
+    "items": [
+      "Refleksi Peribadi & Pertumbuhan Rohani",
+      "Susun dan Pelihara Kajian Anda",
+      "Akses Di Mana-mana, Pada Bila-bila Masa",
+      "Dipertingkatkan Penghafalan & Ulangkaji",
+      "Kongsi renungan anda supaya orang lain mendapat manfaat"
+    ],
+    "title": "Faedah Menggunakan Ciri Nota"
+  }
+}

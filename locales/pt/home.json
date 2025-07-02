@@ -1,20 +1,20 @@
 {
-  "achieve-quran-goals": "Alcance seus objetivos do Alcorão",
+  "achieve-quran-goals": "Alcance seus objetivos do Quran",
   "begin": "Começar",
   "calendar-cta": "Calendário",
   "chapters-and-verses": "Capítulos e Versículos",
   "continue-read": "Continuar lendo",
   "explore-topics": "Explorar tópicos",
-  "first-time-reading": "Novo no Alcorão? <link> Comece aqui </link>",
-  "grow-beyond-ramadan": "Cresça conosco <modalLink> Além do Ramadã </modalLink>",
-  "know-someone": "Cresça conosco neste <modalLink> Ramadã </modalLink>",
+  "first-time-reading": "Novo no Quran? <link> Comece aqui </link>",
+  "grow-beyond-ramadan": "Cresça connosco <modalLink> Além do Ramadan </modalLink>",
+  "know-someone": "Cresça connosco neste <modalLink> Ramadan </modalLink>",
   "learning-plan": "Planos de Aprendizagem",
-  "listen-to-radio": "Ouça a Rádio Alcorão",
-  "my-quran": "Meu Alcorão",
-  "navigate-quran": "Navegar pelo Alcorão",
+  "listen-to-radio": "Ouça a Rádio Quran",
+  "my-quran": "Meu Quran",
+  "navigate-quran": "Navegar pelo Quran",
   "no-bookmarks": "Você ainda não tem favoritos",
   "no-recently-read": "Você ainda não tem nenhuma sessão de leitura",
-  "noble-quran": "O Nobre Alcorão",
+  "noble-quran": "O Nobre Quran",
   "popular": "Popular",
   "qgj": {
     "learning-plans": {
@@ -31,28 +31,28 @@
     },
     "quran-reading-goals": {
       "desc": {
-        "logged-out": "Você quer ler 10 minutos por dia, completar um Juz em um mês ou terminar o Alcorão inteiro em um ano? É fácil criar uma meta personalizada e acompanhar seu progresso"
+        "logged-out": "Quer ler 10 minutos por dia, completar um Juz em um mês ou terminar o Quran inteiro em um ano? É fácil criar uma meta personalizada e acompanhar o seu progresso"
       },
-      "title": "Metas personalizadas de leitura do Alcorão"
+      "title": "Metas personalizadas de leitura do Quran"
     },
-    "title": "Jornada de Crescimento do Alcorão"
+    "title": "Jornada de Crescimento do Quran"
   },
-  "qr-community": "Leia os versículos e reflexões em destaque hoje",
-  "quran-in-year": "Alcorão em um ano",
+  "qr-community": "Leia os versículos e reflexões em destaque de hoje",
+  "quran-in-year": "Quran em um Ano",
   "quran-in-year-cta": "Leitura desta semana",
-  "ramadan-activities-cta": "<link> Siga o <b> Calendário Corânico Global </b> para leituras semanais, podcasts inspiradores e um chamado para refletir! </link>",
+  "ramadan-activities-cta": "<link> Siga o <b> Calendário Qurânico Global </b> para leituras semanais, podcasts inspiradores e um chamado para refletir! </link>",
   "ramadan": {
-    "header": "Ferramentas para aprofundar sua conexão com o Alcorão",
-    "title": "Pronto para o Ramadã?"
+    "header": "Ferramentas para aprofundar sua conexão com o Quran",
+    "title": "Pronto para o Ramadan?"
   },
   "read-juz": "Leia Juz",
   "recently-read": "Lidos recentemente",
-  "revelation-order-disclaimer": "Esta exibição mostra a ordem cronológica das suratas no Alcorão com base em quando foram reveladas ao Profeta Muhammad <hover> ﷺ </hover> . A cronologia é um assunto de opinião acadêmica e algumas suratas foram reveladas em partes em diferentes épocas. A ordem aqui é baseada no trabalho de <link> Tanzil.net </link> . [Nota: a ordem de Mushaf compilada de al-Fatiha a al-Nas é uma questão de consenso.]",
+  "revelation-order-disclaimer": "Esta exibição mostra a ordem cronológica dos Surahs no Quran com base em quando foram reveladas ao Profeta Muhammad <hover> ﷺ </hover> . A cronologia é um assunto de opinião acadêmica e alguns Surahs foram revelados em partes em diferentes épocas. A ordem aqui é baseada no trabalho de <link> Tanzil.net </link> . [Nota: a ordem de Mushaf compilada de al-Fatiha a al-Nas é uma questão de consenso.]",
   "see-more-learning-plans": "Ver mais",
   "set-custom-goal": "Defina uma meta",
   "share-quran": {
-    "description": "Ajude a espalhar o Alcorão para novos alunos",
-    "title": "Compartilhe o Alcorão!"
+    "description": "Ajude a espalhar o Quran para novos alunos",
+    "title": "Compartilhe o Quran!"
   },
   "start-read": "Comece a ler",
   "stay-consistent": "Acompanhe as sequências, crie metas personalizadas e seja consistente",
@@ -60,11 +60,12 @@
     "bookmarks": "Favoritos",
     "popular": "Popular"
   },
+  "take-notes": "Você está perdendo o <modalLink> Notes? </modalLink>",
   "view-all-bookmarks": "Ver todos os favoritos",
   "voice": {
     "trigger": "Acesso rápido a qualquer coisa"
   },
   "welcome": {
-    "title": "É o mês do Alcorão! Ajude milhões de usuários a obter acesso à orientação do Alcorão."
+    "title": "É o mês do Quran! Ajude milhões de usuários a obter acesso à orientação do Quran."
   }
 }

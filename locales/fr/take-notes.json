@@ -1,0 +1,114 @@
+{
+  "benefits": {
+    "access-anywhere": {
+      "bullet-points": [
+        "Vos notes sont stockées en toute sécurité dans votre compte Quran.com.",
+        "Synchronisez sur tous vos appareils : continuez vos études sur mobile, tablette ou ordinateur de bureau."
+      ],
+      "description": "Vos notes se synchronisent sur tous les appareils lorsque vous êtes connecté, vous permettant d'accéder à vos réflexions que vous soyez sur votre téléphone, votre tablette ou votre ordinateur.",
+      "login-prompt": "Créez simplement un identifiant gratuit pour commencer.",
+      "title": "Accès partout, à tout moment"
+    },
+    "enhanced-memorization": {
+      "bullet-points": [
+        "Écrivez des explications ou des rappels à côté des versets pour faciliter la mémorisation.",
+        "Notez les mots ou les concepts difficiles pour les réviser ultérieurement.",
+        "Utilisez des notes pour marquer les progrès dans les programmes de mémorisation."
+      ],
+      "description": "Prendre des notes sur les versets que vous mémorisez peut améliorer considérablement la mémorisation. Créez des moyens mnémotechniques, des schémas de notation ou écrivez des liens personnels qui vous aideront à mémoriser les versets.",
+      "image": {
+        "alt": "Notes pour la mémorisation et la révision"
+      },
+      "paragraph": "Que vous mémorisiez activement ou révisiez ce que vous avez appris, les notes peuvent être une aide puissante à la mémorisation.",
+      "title": "Mémorisation et révision améliorées"
+    },
+    "organize-preserve": {
+      "description": "Organisez vos idées par verset, ce qui facilite la création d'un tafsir (commentaire) personnel au fil du temps. Vos notes sont conservées dans votre compte, vous ne perdrez donc jamais ce moment d'inspiration ou de compréhension.",
+      "images": {
+        "organized": "Notes organisées au niveau du verset",
+        "preserved": "Notes d'étude conservées"
+      },
+      "paragraph": "Avez-vous déjà quitté un cours ou une conférence en oubliant toutes les notes prises dans un cahier, une application ou un document ? Imaginez pouvoir accéder facilement à toutes vos notes sur un verset, au niveau du verset, à chaque fois que vous le relisez.",
+      "title": "Organisez et conservez votre étude"
+    },
+    "personal-reflection": {
+      "bullet-points": [
+        "Notez vos pensées, vos réflexions et vos réalisations pendant que vous lisez le Coran, aussi simples ou profondes soient-elles.",
+        "Renforcez votre relation avec le Coran en vous engageant activement dans ses versets plutôt qu’en le lisant rapidement sans pause."
+      ],
+      "description": "Prendre des notes vous permet de documenter votre cheminement personnel avec le Coran. Notez vos pensées, vos questions et vos moments de lucidité au cours de votre étude. Au fil du temps, ces notes deviendront un précieux témoignage de votre croissance spirituelle et de votre compréhension approfondie.",
+      "examples-heading": "Exemples de notes :",
+      "images": {
+        "growth": "Exemple de notes de croissance spirituelle",
+        "reflection": "Exemple de notes de réflexion personnelle"
+      },
+      "title": "Réflexion personnelle et croissance spirituelle"
+    },
+    "share-reflections": {
+      "community-paragraph": "En les partageant, vos réflexions peuvent trouver un profond écho auprès des autres et nourrir une communauté de développement centrée sur le Coran. Pour en savoir plus, rendez-vous sur <0>QuranReflect.com/faq</0> et explorez les <1>Cinq Objectifs</1> pour enrichir vos réflexions.",
+      "conclusion": {
+        "dua": "Qu'Allah fasse du Coran la lumière de votre poitrine, le printemps de votre cœur, le dissipant de vos chagrins et le soulagement de vos angoisses. Amine.",
+        "paragraph1": "Le Coran est un compagnon de vie, et la fonction Notes peut vous aider à construire une relation enrichissante et interactive avec lui. Utilisez-la pour consigner vos réflexions, souligner vos difficultés, conserver vos idées, et bien plus encore. Avec le temps, il deviendra un témoignage personnel de vos efforts, de votre sincérité et de votre progression avec le Livre d'Allah, incha'Allah.",
+        "paragraph2": "Nous vous invitons à vous mettre au défi de vous connecter quotidiennement au Coran – même s’il ne s’agit que d’un verset – et à prendre un moment pour réfléchir et écrire une note. <0>Que ce petit acte constant devienne un moyen d’approfondir votre relation avec le Livre d’Allah, un verset à la fois.</0>",
+        "title": "Commencez votre voyage aujourd'hui"
+      },
+      "deeper-insights-title": "Perspectives plus approfondies :",
+      "deeper-insights": [
+        "Y a-t-il des noms d’Allah mentionnés et quel est leur rapport avec le verset ?",
+        "Quels mots ou aspects linguistiques ont retenu votre attention ?",
+        "Pouvez-vous établir des liens avec le contexte du verset, d’autres versets coraniques, des hadiths ou des événements ?"
+      ],
+      "description": "Bientôt disponible : partagez vos notes sélectionnées avec vos amis, votre famille ou des groupes d'étude. Collaborez pour mieux comprendre et diffuser des connaissances utiles.",
+      "paragraph1": "Bien que les notes sur Quran.com soient enregistrées de manière privée, vous avez également la possibilité de partager publiquement certaines réflexions sur <0>QuranReflect.com</0>. Il s'agit d'une plateforme communautaire à but non lucratif conçue pour encourager un échange approfondi avec le Coran, non pas par le biais de tafsirs savants (réservés aux érudits qualifiés), mais par des réflexions sincères et personnelles, revues et guidées par une équipe de modération qualifiée.",
+      "paragraph2": "Allah invite tous les croyants, et pas seulement les savants, à s'engager dans le tadabbur :",
+      "quote": "Ceci est un Livre béni que Nous t'avons révélé, ô Prophète, afin qu'ils méditent sur ses versets et que les gens raisonnables réfléchissent. (Sourate Sad 38:29)",
+      "reflection-prompt": "Exemples de questions de réflexion personnelle que vous pouvez utiliser pour réfléchir :",
+      "reflection-questions": [
+        "De quelle manière ce verset vous a-t-il ému ou inspiré ?",
+        "Y a-t-il des qualités ou des actions mentionnées que vous pouvez améliorer ?",
+        "Existe-t-il une promesse ou un avertissement/une interdiction que vous pouvez appliquer à votre vie ?",
+        "Avez-vous une histoire personnelle liée à ce verset ?",
+        "Quels changements souhaitez-vous apporter en vous basant sur ce verset, et comment pouvez-vous ou quelqu’un d’autre les mettre en œuvre concrètement ?"
+      ],
+      "title": "Partagez vos réflexions pour que d'autres puissent en bénéficier"
+    },
+    "title": "Avantages de l'utilisation de la fonction Notes"
+  },
+  "description": "Découvrez 6 bonnes raisons de prendre des notes sur Quran.com et comment les notes peuvent jouer un rôle essentiel dans votre voyage avec le Coran.",
+  "heading": "6 bonnes raisons de prendre des notes – et comment elles peuvent transformer votre voyage avec le Coran",
+  "how-to-use": {
+    "saved-note-explanation": "Une fois que vous avez enregistré une note pour un verset, l'icône de note devient bleue, ce qui permet d'identifier facilement les versets que vous avez précédemment annotés lors des lectures futures.",
+    "step1": "<0>Sélectionnez un verset :</0> Cliquez sur n’importe quel verset et choisissez l’option Notes.",
+    "step2": "<0>Ajoutez vos pensées :</0> Tapez vos réflexions, rappels ou questions.",
+    "step3": "<0>Enregistrer :</0> Vos notes seront enregistrées sous votre compte.",
+    "step4": "<0>Accès à tout moment :</0> Revenez à vos notes via votre profil ou directement sur le verset.",
+    "title": "Comment utiliser la fonction Notes"
+  },
+  "images": {
+    "adding-notes": {
+      "alt": "Ajouter des notes à un verset"
+    },
+    "blue-icon": {
+      "alt": "Icône de note bleue indiquant les notes enregistrées"
+    },
+    "feature-available": {
+      "alt": "La fonction de notes est disponible à côté de chaque verset",
+      "caption": "La fonction notes est disponible à côté de chaque verset"
+    }
+  },
+  "introduction": "La fonction Notes sur Quran.com est un moyen efficace d'approfondir votre compréhension du Coran. Que vous étudiiez, réfléchissiez ou cherchiez simplement à mieux comprendre le message, prendre des notes peut vous aider à vous connecter plus profondément aux versets et à retenir des idées qui pourraient autrement être oubliées.",
+  "meta": {
+    "description": "Apprenez à utiliser la fonction notes sur Quran.com pour améliorer votre expérience d’étude du Coran.",
+    "title": "Prendre des notes - Quran.com"
+  },
+  "table-of-contents": {
+    "items": [
+      "Réflexion personnelle et croissance spirituelle",
+      "Organisez et conservez votre étude",
+      "Accès partout, à tout moment",
+      "Mémorisation et révision améliorées",
+      "Partagez vos réflexions pour que d'autres puissent en bénéficier"
+    ],
+    "title": "Avantages de l'utilisation de la fonction Notes"
+  }
+}

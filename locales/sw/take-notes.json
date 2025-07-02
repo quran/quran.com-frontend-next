@@ -1,0 +1,114 @@
+{
+  "benefits": {
+    "access-anywhere": {
+      "bullet-points": [
+        "Madokezo yako yamehifadhiwa kwa usalama katika akaunti yako ya Quran.com.",
+        "Sawazisha kwenye vifaa vyote—endelea na utafiti wako kwenye simu ya mkononi, kompyuta kibao au eneo-kazi."
+      ],
+      "description": "Vidokezo vyako husawazishwa kwenye vifaa vyote ukiwa umeingia, huku kuruhusu kufikia maakisi yako iwe unatumia simu, kompyuta kibao au kompyuta yako.",
+      "login-prompt": "Unda tu kuingia bila malipo ili kuanza.",
+      "title": "Fikia Popote, Wakati Wowote"
+    },
+    "enhanced-memorization": {
+      "bullet-points": [
+        "Andika maelezo au vikumbusho karibu na mistari ili kusaidia kukariri.",
+        "Kumbuka maneno au dhana ngumu kwa ukaguzi wa baadaye.",
+        "Tumia madokezo kuashiria maendeleo katika ratiba za kukariri."
+      ],
+      "description": "Kuandika madokezo kuhusu mistari unayokariri kunaweza kuboresha kwa kiasi kikubwa uhifadhi. Unda vifaa vya kumbukumbu, ruwaza za kumbukumbu, au andika miunganisho ya kibinafsi ambayo husaidia mistari kushikamana na kumbukumbu yako.",
+      "image": {
+        "alt": "Vidokezo vya kukariri na kusahihisha"
+      },
+      "paragraph": "Iwe unakariri au kukagua kwa bidii ulichojifunza, madokezo yanaweza kuwa msaada mkubwa katika kukariri.",
+      "title": "Ukariri na Usahihishaji Ulioimarishwa"
+    },
+    "organize-preserve": {
+      "description": "Weka maarifa yako yakiwa yamepangwa kulingana na aya, na kuifanya iwe rahisi kujenga tafsir ya kibinafsi (maoni) baada ya muda. Madokezo yako yamehifadhiwa katika akaunti yako, kwa hivyo hutawahi kupoteza wakati huo wa msukumo au kuelewa.",
+      "images": {
+        "organized": "Vidokezo vilivyopangwa katika kiwango cha mstari",
+        "preserved": "Vidokezo vya masomo vilivyohifadhiwa"
+      },
+      "paragraph": "Je, umewahi kuacha darasa au somo na kusahau yote kuhusu madokezo uliyoandika mahali fulani kwenye daftari, programu ya kumbukumbu au hati? Hebu wazia kupata kila nukuu uliyoandika kuhusu mstari unaopatikana kwa urahisi katika kiwango cha ayah wakati wowote unaposoma mstari huo tena.",
+      "title": "Panga na Uhifadhi Masomo Yako"
+    },
+    "personal-reflection": {
+      "bullet-points": [
+        "Andika mawazo yako, tafakari, na utambuzi unaposoma Quran - rahisi au ya kina kadri yanavyoweza kuwa.",
+        "Imarisha uhusiano wako na Quran kwa kushughulika kikamilifu na aya zake badala ya kusoma haraka bila kusimama."
+      ],
+      "description": "Kuandika maelezo hukuruhusu kuandika safari yako ya kibinafsi na Kurani. Rekodi mawazo yako, maswali, na nyakati za uwazi unapojifunza. Baada ya muda, vidokezo hivi vinakuwa rekodi muhimu ya ukuaji wako wa kiroho na uelewa wa kina.",
+      "examples-heading": "Mifano ya maelezo:",
+      "images": {
+        "growth": "Mfano wa maelezo ya ukuaji wa kiroho",
+        "reflection": "Mfano wa maelezo ya tafakari ya kibinafsi"
+      },
+      "title": "Tafakari ya Kibinafsi & Ukuaji wa Kiroho"
+    },
+    "share-reflections": {
+      "community-paragraph": "Inaposhirikiwa, tafakari zako zinaweza kuguswa sana na wengine na kukuza jumuiya ya ukuaji unaozingatia Quran. Pata maelezo zaidi katika <0>QuranReflect.com/faq</0> na uchunguze <1>Lenzi Tano</1> ili kuboresha tafakari zako.",
+      "conclusion": {
+        "dua": "Mwenyezi Mungu aijaalie Qur'an kuwa nuru ya kifua chako, na chemchemi ya moyo wako, na yenye kuondoa huzuni zako, na kukuondolea dhiki zako. Ameen.",
+        "paragraph1": "Quran ni sahaba wa maisha yote, na kutumia kipengele cha Vidokezo kunaweza kukusaidia kujenga uhusiano wa maana na mwingiliano nayo. Itumie kunasa tafakari, alama changamoto, kuhifadhi maarifa na mengine mengi. Baada ya muda, itakuwa rekodi ya kibinafsi ya juhudi zako, uaminifu, na ukuaji wako na Kitabu cha Mwenyezi Mungu, insha'Allah.",
+        "paragraph2": "Tunakualika ujitie changamoto kuungana na Quran kila siku - hata kama aya - na uchukue muda kutafakari na kuandika dokezo. <0>Kitendo hiki kidogo na thabiti kiwe njia ya kukuza uhusiano wako na Kitabu cha Mwenyezi Mungu, ayah moja baada ya nyingine.</0>",
+        "title": "Anza Safari Yako Leo"
+      },
+      "deeper-insights-title": "Maarifa ya kina:",
+      "deeper-insights": [
+        "Je, kuna majina yoyote ya Mwenyezi Mungu yaliyotajwa, na yanahusiana vipi na Aya?",
+        "Ni maneno gani au vipengele vipi vya kiisimu vilivyovutia umakini wako?",
+        "Je, unaweza kuunganisha muktadha wa aya, aya nyingine za Kurani, hadith, au matukio?"
+      ],
+      "description": "Inakuja hivi karibuni: uwezo wa kushiriki vidokezo vilivyochaguliwa na marafiki, familia au vikundi vya masomo. Shirikiana katika kuelewa na kueneza maarifa yenye manufaa.",
+      "paragraph1": "Ingawa madokezo kwenye Quran.com yamehifadhiwa kwa faragha, pia una chaguo la kushiriki tafakari zilizochaguliwa hadharani kwenye <0>QuranReflect.com</0>. Hili ni jukwaa la jumuiya isiyo ya faida iliyobuniwa kuhimiza mashirikiano ya kina na Qur'ani - si kwa njia ya tafsir ya kielimu (ambayo imetengwa kwa ajili ya wasomi waliohitimu), lakini kupitia tafakari za dhati, za kibinafsi ambazo hupitiwa upya na kuongozwa na timu ya usimamizi iliyohitimu.",
+      "paragraph2": "Mwenyezi Mungu anawaita waumini wote, na sio wanachuoni tu, kushiriki katika tadabbur:",
+      "quote": "Hiki ni Kitabu kilichobarikiwa, ambacho tumekuteremshia wewe, ewe Mtume, ili wazitafakari Aya zake, na watu wenye akili wapate kukumbuka. (Sura Sad 38:29)",
+      "reflection-prompt": "Mifano ya Maswali ya Tafakari ya Kibinafsi ambayo unaweza kutumia kutafakari:",
+      "reflection-questions": [
+        "Ni kwa njia gani mstari huu umekusonga au kukutia moyo?",
+        "Je, kuna sifa au vitendo vilivyotajwa ambavyo unaweza kuboresha?",
+        "Je, kuna ahadi au onyo/katazo ambalo unaweza kutekeleza katika maisha yako?",
+        "Je! una hadithi ya kibinafsi inayohusiana na aya hii?",
+        "Ni mabadiliko gani unayotaka kufanya kulingana na aya hii, na wewe au mtu mwingine unawezaje kuyatekeleza kivitendo?"
+      ],
+      "title": "Shiriki tafakari zako ili wengine wanufaike"
+    },
+    "title": "Faida za Kutumia Kipengele cha Vidokezo"
+  },
+  "description": "Gundua sababu 6 muhimu za kuandika madokezo kwenye Quran.com na jinsi madokezo yanaweza kuwa na jukumu muhimu katika Safari yako ya Kurani.",
+  "heading": "Sababu 6 Muhimu za Kuchukua Dokezo - Na Jinsi Zinavyoweza Kubadilisha Safari Yako na Quran",
+  "how-to-use": {
+    "saved-note-explanation": "Mara tu unapohifadhi dokezo kwa ajili ya mstari, aikoni ya noti itageuka kuwa ya buluu, na hivyo kurahisisha kutambua mistari ambayo umefafanua hapo awali wakati wa usomaji wa siku zijazo.",
+    "step1": "<0>Chagua Aya:</0> Bofya mstari wowote na uchague chaguo la Vidokezo.",
+    "step2": "<0>Ongeza Mawazo Yako:</0> Andika tafakari, vikumbusho au maswali yako.",
+    "step3": "<0>Hifadhi:</0> Madokezo yako yatahifadhiwa chini ya akaunti yako.",
+    "step4": "<0>Fikia Wakati Wowote:</0> Rudi kwenye madokezo yako kupitia wasifu wako au moja kwa moja kwenye mstari.",
+    "title": "Jinsi ya Kutumia Kipengele cha Vidokezo"
+  },
+  "images": {
+    "adding-notes": {
+      "alt": "Kuongeza maelezo kwa mstari"
+    },
+    "blue-icon": {
+      "alt": "Aikoni ya noti ya samawati inayoonyesha madokezo yaliyohifadhiwa"
+    },
+    "feature-available": {
+      "alt": "Kipengele cha maelezo kinachopatikana karibu na kila ayah",
+      "caption": "Kipengele cha noti kinapatikana karibu na kila ayah"
+    }
+  },
+  "introduction": "Kipengele cha Vidokezo kwenye Quran.com ni njia ya maana ya kukuza uhusiano wako na Quran. Iwe unasoma, unatafakari, au unajaribu kuelewa ujumbe vizuri zaidi, kuandika madokezo kunaweza kukusaidia kuunganishwa kwa kina zaidi na aya na kuhifadhi maarifa ambayo yanaweza kusahaulika.",
+  "meta": {
+    "description": "Jifunze jinsi ya kutumia kipengele cha madokezo kwenye Quran.com ili kuboresha uzoefu wako wa kusoma Kurani.",
+    "title": "Chukua Vidokezo - Quran.com"
+  },
+  "table-of-contents": {
+    "items": [
+      "Tafakari ya Kibinafsi & Ukuaji wa Kiroho",
+      "Panga na Uhifadhi Masomo Yako",
+      "Fikia Popote, Wakati Wowote",
+      "Ukariri na Usahihishaji Ulioimarishwa",
+      "Shiriki tafakari zako ili wengine wanufaike"
+    ],
+    "title": "Faida za Kutumia Kipengele cha Vidokezo"
+  }
+}

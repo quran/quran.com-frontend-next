@@ -1,0 +1,114 @@
+{
+  "benefits": {
+    "access-anywhere": {
+      "bullet-points": [
+        "Suas anotações são armazenadas com segurança na sua conta Quran.com.",
+        "Sincronize entre dispositivos — continue seus estudos no celular, tablet ou desktop."
+      ],
+      "description": "Suas anotações são sincronizadas em todos os dispositivos quando você está conectado, permitindo que você acesse suas reflexões esteja no seu telefone, tablet ou computador.",
+      "login-prompt": "Basta criar um login gratuito para começar.",
+      "title": "Acesso em qualquer lugar, a qualquer hora"
+    },
+    "enhanced-memorization": {
+      "bullet-points": [
+        "Escreva explicações ou lembretes ao lado dos versículos para ajudar na memorização.",
+        "Anote palavras ou conceitos difíceis para revisão posterior.",
+        "Use notas para marcar o progresso nos cronogramas de memorização."
+      ],
+      "description": "Anotar os versículos que você está memorizando pode melhorar significativamente a retenção. Crie dispositivos mnemônicos, padrões de anotações ou escreva conexões pessoais que ajudem os versículos a se fixarem na sua memória.",
+      "image": {
+        "alt": "Notas para memorização e revisão"
+      },
+      "paragraph": "Não importa se você está memorizando ativamente ou revisando o que aprendeu, as anotações podem ser uma ajuda poderosa na memorização.",
+      "title": "Memorização e revisão aprimoradas"
+    },
+    "organize-preserve": {
+      "description": "Mantenha seus insights organizados por verso, facilitando a construção de um tafsir (comentário) pessoal ao longo do tempo. Suas anotações são preservadas na sua conta, para que você nunca perca aquele momento de inspiração ou compreensão.",
+      "images": {
+        "organized": "Anotações organizadas em nível de verso",
+        "preserved": "Notas de estudo preservadas"
+      },
+      "paragraph": "Você já saiu de uma aula ou palestra e se esqueceu de todas as anotações que fez em algum lugar de um caderno, aplicativo de notas ou documento? Imagine ter acesso a todas as anotações que você fez sobre um versículo, facilmente acessíveis no nível de ayah, sempre que você ler esse versículo novamente.",
+      "title": "Organize e preserve seu estudo"
+    },
+    "personal-reflection": {
+      "bullet-points": [
+        "Anote seus pensamentos, reflexões e percepções enquanto lê o Alcorão, por mais simples ou profundos que sejam.",
+        "Fortaleça seu relacionamento com o Alcorão interagindo ativamente com seus versículos em vez de lê-los rapidamente, sem pausa."
+      ],
+      "description": "Tomar notas permite que você documente sua jornada pessoal com o Alcorão. Registre seus pensamentos, perguntas e momentos de clareza enquanto estuda. Com o tempo, essas notas se tornarão um registro valioso do seu crescimento espiritual e aprofundamento da compreensão.",
+      "examples-heading": "Exemplos de notas:",
+      "images": {
+        "growth": "Exemplo de notas de crescimento espiritual",
+        "reflection": "Exemplo de notas de reflexão pessoal"
+      },
+      "title": "Reflexão Pessoal e Crescimento Espiritual"
+    },
+    "share-reflections": {
+      "community-paragraph": "Quando compartilhadas, suas reflexões podem repercutir profundamente em outras pessoas e nutrir uma comunidade de crescimento centrada no Alcorão. Saiba mais em <0>QuranReflect.com/faq</0> e explore as <1>Cinco Lentes</1> para enriquecer suas reflexões.",
+      "conclusion": {
+        "dua": "Que Alá faça do Alcorão a luz do seu peito, a primavera do seu coração, o removedor das suas tristezas e o aliviador da sua angústia. Amém.",
+        "paragraph1": "O Alcorão é um companheiro para toda a vida, e usar o recurso Notas pode ajudar você a construir um relacionamento significativo e interativo com ele. Use-o para registrar reflexões, marcar desafios, preservar insights e muito mais. Com o tempo, ele se tornará um registro pessoal do seu esforço, sinceridade e crescimento com o Livro de Alá, insha'Allah.",
+        "paragraph2": "Convidamos você a se desafiar a se conectar com o Alcorão diariamente — mesmo que seja apenas um versículo — e reservar um momento para refletir e escrever uma nota. <0>Deixe que esse pequeno e consistente ato se torne um meio de aprofundar seu relacionamento com o Livro de Alá, um versículo de cada vez.</0>",
+        "title": "Comece sua jornada hoje"
+      },
+      "deeper-insights-title": "Insights mais profundos:",
+      "deeper-insights": [
+        "Há algum nome de Alá mencionado e como eles se relacionam com o versículo?",
+        "Quais palavras ou aspectos linguísticos chamaram sua atenção?",
+        "Você consegue fazer conexões com o contexto do versículo, outros versículos do Alcorão, hadiths ou eventos?"
+      ],
+      "description": "Em breve: a possibilidade de compartilhar notas selecionadas com amigos, familiares ou grupos de estudo. Colabore na compreensão e dissemine conhecimentos úteis.",
+      "paragraph1": "Embora as notas no Quran.com sejam salvas de forma privada, você também tem a opção de compartilhar reflexões selecionadas publicamente no <0>QuranReflect.com</0>. Esta é uma plataforma comunitária sem fins lucrativos, criada para incentivar o envolvimento reflexivo com o Alcorão – não por meio de tafsir acadêmico (reservado para acadêmicos qualificados), mas por meio de reflexões sinceras e pessoais, revisadas e orientadas por uma equipe de moderação qualificada.",
+      "paragraph2": "Allah convida todos os crentes, não apenas os estudiosos, a praticarem o tadabbur:",
+      "quote": "Este é um Livro abençoado que te revelamos, ó Profeta, para que os homens possam meditar nos seus versículos, e os sensatos possam meditar. (Sura Sad 38:29)",
+      "reflection-prompt": "Exemplos de perguntas de reflexão pessoal que você pode usar para refletir:",
+      "reflection-questions": [
+        "De que maneiras esse versículo o comoveu ou inspirou?",
+        "Há qualidades ou ações mencionadas que você pode melhorar?",
+        "Existe alguma promessa ou advertência/proibição que você pode aplicar à sua vida?",
+        "Você tem uma história pessoal relacionada a esse versículo?",
+        "Que mudanças você quer fazer com base neste versículo e como você ou outra pessoa pode implementá-las na prática?"
+      ],
+      "title": "Compartilhe suas reflexões para que outros possam se beneficiar"
+    },
+    "title": "Benefícios de usar o recurso Notas"
+  },
+  "description": "Descubra 6 motivos poderosos para fazer anotações no Quran.com e como as anotações podem desempenhar um papel essencial em sua jornada com o Alcorão.",
+  "heading": "6 razões poderosas para fazer anotações - e como elas podem transformar sua jornada com o Alcorão",
+  "how-to-use": {
+    "saved-note-explanation": "Depois de salvar uma nota para um versículo, o ícone da nota ficará azul, facilitando a identificação de versículos que você anotou anteriormente durante leituras futuras.",
+    "step1": "<0>Selecione um versículo:</0> Clique em qualquer versículo e escolha a opção Notas.",
+    "step2": "<0>Adicione seus pensamentos:</0> Digite suas reflexões, lembretes ou perguntas.",
+    "step3": "<0>Salvar:</0> Suas notas serão salvas em sua conta.",
+    "step4": "<0>Acesso a qualquer momento:</0> Retorne às suas anotações pelo seu perfil ou diretamente no versículo.",
+    "title": "Como usar o recurso Notas"
+  },
+  "images": {
+    "adding-notes": {
+      "alt": "Adicionando notas a um verso"
+    },
+    "blue-icon": {
+      "alt": "Ícone de nota azul indicando notas salvas"
+    },
+    "feature-available": {
+      "alt": "As notas estão disponíveis ao lado de cada versículo",
+      "caption": "O recurso de notas está disponível ao lado de cada versículo"
+    }
+  },
+  "introduction": "O recurso Notas do Quran.com é uma maneira significativa de aprofundar seu envolvimento com o Alcorão. Seja estudando, refletindo ou simplesmente tentando entender melhor a mensagem, fazer anotações pode ajudá-lo a se conectar mais profundamente com os versículos e reter insights que, de outra forma, poderiam ser esquecidos.",
+  "meta": {
+    "description": "Aprenda a usar o recurso de notas no Quran.com para melhorar sua experiência de estudo do Alcorão.",
+    "title": "Tome notas - Quran.com"
+  },
+  "table-of-contents": {
+    "items": [
+      "Reflexão Pessoal e Crescimento Espiritual",
+      "Organize e preserve seu estudo",
+      "Acesso em qualquer lugar, a qualquer hora",
+      "Memorização e revisão aprimoradas",
+      "Compartilhe suas reflexões para que outros possam se beneficiar"
+    ],
+    "title": "Benefícios de usar o recurso Notas"
+  }
+}
