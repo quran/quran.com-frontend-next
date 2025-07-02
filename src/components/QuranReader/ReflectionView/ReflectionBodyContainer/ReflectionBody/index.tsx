@@ -1,6 +1,7 @@
 import React, { useCallback, useContext, useMemo } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
+import { useSelector } from 'react-redux';
 
 import styles from './ReflectionBody.module.scss';
 
@@ -11,13 +12,14 @@ import TafsirEndOfScrollingActions from '@/components/QuranReader/TafsirView/Taf
 import VerseAndTranslation from '@/components/Verse/VerseAndTranslation';
 import Button from '@/dls/Button/Button';
 import Separator from '@/dls/Separator/Separator';
+import { selectAyahReflectionsLanguages } from '@/redux/slices/defaultSettings';
 import { logButtonClick } from '@/utils/eventLogger';
 import {
   fakeNavigate,
   getVerseLessonNavigationUrl,
   getVerseReflectionNavigationUrl,
 } from '@/utils/navigation';
-import { localeToReflectionLanguages } from '@/utils/quranReflect/locale';
+import { getReflectionLanguages } from '@/utils/quranReflect/locale';
 import { getQuranReflectVerseUrl } from '@/utils/quranReflect/navigation';
 import { isFirstVerseOfSurah, isLastVerseOfSurah, makeVerseKey } from '@/utils/verse';
 import DataContext from 'src/contexts/DataContext';
@@ -43,6 +45,7 @@ const ReflectionBody: React.FC<Props> = ({
 }) => {
   const { t, lang } = useTranslation('quran-reader');
   const chaptersData = useContext(DataContext);
+  const reduxReflectionLanguages = useSelector(selectAyahReflectionsLanguages);
   const hasNextVerse = !isLastVerseOfSurah(
     chaptersData,
     selectedChapterId,
@@ -91,10 +94,9 @@ const ReflectionBody: React.FC<Props> = ({
   ]);
 
   const filteredPosts = useMemo(() => {
-    return data?.posts?.filter((reflection) =>
-      localeToReflectionLanguages(lang).includes(reflection.language),
-    );
-  }, [data?.posts, lang]);
+    const allowedLanguages = getReflectionLanguages(lang, reduxReflectionLanguages);
+    return data?.posts?.filter((reflection) => allowedLanguages.includes(reflection.language));
+  }, [data?.posts, lang, reduxReflectionLanguages]);
 
   const onReadMoreClicked = () => {
     logButtonClick('read_more_reflections');

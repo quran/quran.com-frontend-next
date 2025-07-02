@@ -27,6 +27,11 @@ const createModifiedField = (
   modifiedField.label = t(`form.${field.field}`);
   modifiedField.placeholder = t(`form.${field.field}`);
 
+  // Add dataTestId if not already present
+  if (!modifiedField.dataTestId) {
+    modifiedField.dataTestId = `complete-signup-${field.field}-input`;
+  }
+
   // Apply any additional overrides
   return { ...modifiedField, ...overrides };
 };

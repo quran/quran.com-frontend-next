@@ -31,6 +31,7 @@ import { getDir } from '@/utils/locale';
 import { ROUTES } from '@/utils/navigation';
 import { isAuthPage } from '@/utils/routes';
 import { createSEOConfig } from '@/utils/seo';
+import { REDUX_STATE_PROP_NAME } from '@/utils/withSsrRedux';
 import DataContext from 'src/contexts/DataContext';
 import ThemeProvider from 'src/styles/ThemeProvider';
 import { AudioPlayerMachineProvider } from 'src/xstate/AudioPlayerMachineContext';
@@ -112,7 +113,11 @@ function MyApp({ Component, pageProps }): JSX.Element {
           <ToastContainerProvider>
             <DataContext.Provider value={pageProps.chaptersData}>
               <AudioPlayerMachineProvider>
-                <ReduxProvider locale={locale}>
+                <ReduxProvider
+                  locale={locale}
+                  countryLanguagePreference={pageProps.countryLanguagePreference}
+                  reduxState={pageProps[REDUX_STATE_PROP_NAME]}
+                >
                   <ThemeProvider>
                     <OnboardingProvider>
                       <UserAccountModal

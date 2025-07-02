@@ -4,7 +4,7 @@
 /* eslint-disable jsx-a11y/anchor-has-content */
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import classNames from 'classnames';
-import { NextPage } from 'next';
+import { NextPage, GetServerSideProps } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 
 import NextSeoWrapper from '@/components/NextSeoWrapper';
@@ -28,6 +28,7 @@ import {
   getQuranicCalendarNavigationUrl,
   getReadingGoalNavigationUrl,
 } from '@/utils/navigation';
+import withSsrRedux from '@/utils/withSsrRedux';
 import verse3829 from 'src/data/verses/verse3829';
 
 const PATH = getBeyondRamadanNavigationUrl();
@@ -306,5 +307,7 @@ const BeyondRamadanPage: NextPage = (): JSX.Element => {
     </>
   );
 };
+
+export const getServerSideProps: GetServerSideProps = withSsrRedux('/beyond-ramadan');
 
 export default BeyondRamadanPage;

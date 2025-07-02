@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { GetStaticPaths, GetStaticProps, NextPage } from 'next';
+import { GetServerSideProps, NextPage } from 'next';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
@@ -16,12 +16,9 @@ import { getLanguageAlternates, toLocalizedNumber } from '@/utils/locale';
 import { getCanonicalUrl, getRubNavigationUrl } from '@/utils/navigation';
 import { formatStringNumber } from '@/utils/number';
 import { getPageOrJuzMetaDescription } from '@/utils/seo';
-import {
-  REVALIDATION_PERIOD_ON_ERROR_SECONDS,
-  ONE_WEEK_REVALIDATION_PERIOD_SECONDS,
-} from '@/utils/staticPageGeneration';
 import { isValidRubId } from '@/utils/validator';
 import { generateVerseKeysBetweenTwoVerseKeys } from '@/utils/verseKeys';
+import withSsrRedux from '@/utils/withSsrRedux';
 import { VersesResponse } from 'types/ApiResponses';
 import ChaptersData from 'types/ChaptersData';
 
@@ -55,71 +52,31 @@ const RubPage: NextPage<RubPageProps> = ({ rubVerses }) => {
 };
 
 // eslint-disable-next-line react-func/max-lines-per-function
-export const getStaticProps: GetStaticProps = async ({ params, locale }) => {
-  let rubId = String(params.rubId);
-
-  // we need to validate the chapterId and rubId first to save calling BE since we haven't set the valid paths inside getStaticPaths to avoid pre-rendering them at build time.
-  if (!isValidRubId(rubId)) return { notFound: true };
-
-  const chaptersData = await getAllChaptersData(locale);
-  rubId = formatStringNumber(rubId);
-
-  const defaultMushafId = getMushafId(
-    getQuranReaderStylesInitialState(locale).quranFont,
-    getQuranReaderStylesInitialState(locale).mushafLines,
-  ).mushaf;
-
-  try {
-    const pagesLookupResponse = await getPagesLookup({
-      rubElHizbNumber: Number(rubId),
-      mushaf: defaultMushafId,
-    });
-
-    const firstPageOfRub = Object.keys(pagesLookupResponse.pages)[0];
-    const firstPageOfRubLookup = pagesLookupResponse.pages[firstPageOfRub];
-
-    const numberOfVerses = generateVerseKeysBetweenTwoVerseKeys(
-      chaptersData,
-      pagesLookupResponse.lookupRange.from,
-      pagesLookupResponse.lookupRange.to,
-    ).length;
-
-    const rubVersesResponse = await getRubVerses(rubId, locale, {
-      ...getDefaultWordFields(getQuranReaderStylesInitialState(locale).quranFont),
-      mushaf: defaultMushafId,
-      perPage: 'all',
-      from: firstPageOfRubLookup.from,
-      to: firstPageOfRubLookup.to,
-    });
-
-    const metaData = { numberOfVerses };
-    rubVersesResponse.metaData = metaData;
-    rubVersesResponse.pagesLookup = pagesLookupResponse;
-    return {
-      props: {
-        chaptersData,
-        rubVerses: rubVersesResponse,
-      },
-      revalidate: ONE_WEEK_REVALIDATION_PERIOD_SECONDS, // verses will be generated at runtime if not found in the cache, then cached for subsequent requests for 7 days.
-    };
-  } catch (error) {
-    logErrorToSentry(error, {
-      transactionName: 'getStaticProps-RubPage',
-      metadata: {
-        rubId: String(params.rubId),
-        locale,
-      },
-    });
-    return {
-      notFound: true,
-      revalidate: REVALIDATION_PERIOD_ON_ERROR_SECONDS,
-    };
-  }
-};
-
-export const getStaticPaths: GetStaticPaths = async () => ({
-  paths: [], // no pre-rendered chapters at build time.
-  fallback: 'blocking', // will server-render pages on-demand if the path doesn't exist.
-});
+export const getServerSideProps: GetServerSideProps = withSsrRedux(
+  '/rub/[rubId]',
+  async (context) => {
+    const { params, locale } = context;
+    const rubId = String(params.rubId);
+    const chaptersData = await getAllChaptersData(locale);
+    if (!isValidRubId(chaptersData, rubId)) {
+      return {
+        notFound: true,
+      };
+    }
+    try {
+      const rubVerses = await getRubVerses(locale, rubId);
+      return {
+        props: {
+          chaptersData,
+          rubVerses,
+        },
+      };
+    } catch (error) {
+      return {
+        notFound: true,
+      };
+    }
+  },
+);
 
 export default RubPage;

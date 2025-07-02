@@ -3,7 +3,7 @@
 /* eslint-disable i18next/no-literal-string */
 /* eslint-disable jsx-a11y/anchor-has-content */
 /* eslint-disable jsx-a11y/control-has-associated-label */
-import { NextPage } from 'next';
+import { NextPage, GetServerSideProps } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from '../contentPage.module.scss';
@@ -19,6 +19,7 @@ import { getAboutTheQuranImageUrl } from '@/lib/og';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl } from '@/utils/navigation';
+import withSsrRedux from '@/utils/withSsrRedux';
 import verse3829 from 'src/data/verses/verse3829';
 
 const PATH = '/about-quran';
@@ -323,5 +324,7 @@ const AboutQuranPage: NextPage = (): JSX.Element => {
     </>
   );
 };
+
+export const getServerSideProps: GetServerSideProps = withSsrRedux('/about-the-quran');
 
 export default AboutQuranPage;

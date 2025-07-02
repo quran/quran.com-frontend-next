@@ -1,5 +1,5 @@
 /* eslint-disable react/no-multi-comp */
-import { NextPage } from 'next';
+import { GetServerSideProps, NextPage } from 'next';
 import { useRouter } from 'next/router';
 import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
@@ -11,19 +11,23 @@ import LessonView from '@/components/Course/LessonView';
 import DataFetcher from '@/components/DataFetcher';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import PageContainer from '@/components/PageContainer';
+import { getCourseBySlug } from '@/components/Sanity/utils';
 import Link, { LinkVariant } from '@/dls/Link/Link';
 import Spinner from '@/dls/Spinner/Spinner';
+import { logError } from '@/lib/newrelic';
 import layoutStyles from '@/pages/index.module.scss';
 import ApiErrorMessage from '@/types/ApiErrorMessage';
 import { Lesson } from '@/types/auth/Course';
 import { privateFetcher } from '@/utils/auth/api';
 import { makeGetLessonUrl } from '@/utils/auth/apiPaths';
+import { getAllChaptersData } from '@/utils/chapter';
 import { logButtonClick } from '@/utils/eventLogger';
 import {
   getCanonicalUrl,
   getCourseNavigationUrl,
   getLessonNavigationUrl,
 } from '@/utils/navigation';
+import withSsrRedux from '@/utils/withSsrRedux';
 
 interface Props {
   hasError?: boolean;
@@ -104,5 +108,33 @@ const LessonPage: NextPage<Props> = () => {
     </div>
   );
 };
+
+export const getServerSideProps: GetServerSideProps = withSsrRedux(
+  '/learning-plans/[slug]/lessons/[lessonSlugOrId]',
+  async (context) => {
+    const { params, locale } = context;
+    const { slug } = params;
+
+    try {
+      const chaptersData = await getAllChaptersData(locale);
+
+      return {
+        props: {
+          chaptersData,
+        },
+      };
+    } catch (error) {
+      logError('Error occurred while getting chapters data', {
+        error,
+        slug,
+      });
+      return {
+        props: {
+          hasError: true,
+        },
+      };
+    }
+  },
+);
 
 export default withAuth(LessonPage);

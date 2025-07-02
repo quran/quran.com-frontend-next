@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 
+import { NextPage, GetServerSideProps } from 'next';
 import { useRouter } from 'next/router';
 import useSWRImmutable from 'swr/immutable';
 
@@ -11,8 +12,9 @@ import { makeUserProfileUrl } from '@/utils/auth/apiPaths';
 import { isCompleteProfile } from '@/utils/auth/complete-signup';
 import { isLoggedIn } from '@/utils/auth/login';
 import { ROUTES } from '@/utils/navigation';
+import withSsrRedux from '@/utils/withSsrRedux';
 
-const CompleteSignupPage = () => {
+const CompleteSignupPage: NextPage = () => {
   const router = useRouter();
   const {
     data: userData,
@@ -51,5 +53,7 @@ const CompleteSignupPage = () => {
 
   return <CompleteSignupForm userData={userData} onSuccess={handleSuccess} />;
 };
+
+export const getServerSideProps: GetServerSideProps = withSsrRedux('/complete-signup');
 
 export default CompleteSignupPage;

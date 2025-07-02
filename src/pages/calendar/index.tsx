@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import umalqura from '@umalqura/core';
-import { GetStaticProps } from 'next';
+import { GetServerSideProps } from 'next';
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from './calendar.module.scss';
@@ -20,6 +20,7 @@ import { getAllChaptersData } from '@/utils/chapter';
 import { getCurrentQuranicCalendarWeek } from '@/utils/hijri-date';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl, getQuranicCalendarNavigationUrl } from '@/utils/navigation';
+import withSsrRedux from '@/utils/withSsrRedux';
 
 const PATH = getQuranicCalendarNavigationUrl();
 
@@ -80,7 +81,8 @@ const QuranicCalendarPage = () => {
   );
 };
 
-export const getStaticProps: GetStaticProps = async ({ locale }) => {
+export const getServerSideProps: GetServerSideProps = withSsrRedux('/calendar', async (context) => {
+  const { locale } = context;
   const allChaptersData = await getAllChaptersData(locale);
 
   return {
@@ -88,6 +90,6 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
       chaptersData: allChaptersData,
     },
   };
-};
+});
 
 export default QuranicCalendarPage;

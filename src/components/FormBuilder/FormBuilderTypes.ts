@@ -19,5 +19,7 @@ export type FormBuilderFormField = Pick<FormField, 'field' | 'type'> & {
     value: string;
     onChange: (value: string) => void;
     placeholder?: string;
+    dataTestId?: string;
   }) => ReactNode;
+  dataTestId?: string;
 };

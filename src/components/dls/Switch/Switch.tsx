@@ -60,6 +60,7 @@ const Switch = ({
           })}
           key={item.value}
           onClick={() => onSelect(item.value)}
+          data-testid={`switch-item-${item.value}`}
         >
           {item.name}
         </button>

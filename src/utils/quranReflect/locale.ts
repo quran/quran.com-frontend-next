@@ -1,5 +1,8 @@
 /* eslint-disable import/prefer-default-export */
 
+import { useSelector } from 'react-redux';
+
+import { selectAyahReflectionsLanguages } from '@/redux/slices/defaultSettings';
 import ReflectionLanguage from 'types/QuranReflect/ReflectionLanguage';
 
 /**
@@ -28,9 +31,26 @@ const LOCALE_TO_REFLECTION_LANGUAGE_MAP = {
 };
 
 /**
+ * Get reflection languages from Redux store. This function should be used
+ * within React components that have access to the Redux store.
+ *
+ * @returns {ReflectionLanguage[]} Array of reflection languages from Redux state
+ */
+export const getReflections = (): ReflectionLanguage[] => {
+  // eslint-disable-next-line react-hooks/rules-of-hooks
+  const reflectionLanguages = useSelector(selectAyahReflectionsLanguages);
+
+  // Fallback to English if no languages are set
+  return reflectionLanguages.length > 0 ? reflectionLanguages : [ReflectionLanguage.ENGLISH];
+};
+
+/**
  * Convert Next.js's locale to an array of languages that posts
  * should only be in. E.g. if locale is 'ar', allowed posts' languages
  * should be ARABIC and ENGLISH only.
+ *
+ * This function serves as a fallback when Redux state is not available.
+ * For components with Redux access, use getReflections() instead.
  *
  * @param {string} locale e.g. 'ar'
  * @returns {ReflectionLanguage[]} e.g. ['ENGLISH', 'ARABIC']
@@ -44,4 +64,25 @@ export const localeToReflectionLanguages = (locale: string): ReflectionLanguage[
     allowedReflectionLanguages.push(currentLocaleReflectionLanguage);
   }
   return allowedReflectionLanguages;
+};
+
+/**
+ * Get reflection languages with Redux state support. This function can be used
+ * both inside and outside React components.
+ *
+ * @param {string} locale - Fallback locale for when Redux state is not available
+ * @param {ReflectionLanguage[]} [reduxReflectionLanguages] - Optional Redux state
+ * @returns {ReflectionLanguage[]} Array of reflection languages
+ */
+export const getReflectionLanguages = (
+  locale: string,
+  reduxReflectionLanguages?: ReflectionLanguage[],
+): ReflectionLanguage[] => {
+  // Use Redux state if available and not empty
+  if (reduxReflectionLanguages && reduxReflectionLanguages.length > 0) {
+    return reduxReflectionLanguages;
+  }
+
+  // Fallback to locale-based logic
+  return localeToReflectionLanguages(locale);
 };
