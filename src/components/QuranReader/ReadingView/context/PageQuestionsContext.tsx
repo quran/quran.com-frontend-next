@@ -1,8 +1,8 @@
 import { createContext, useContext } from 'react';
 
-import { QuestionsCount } from '@/utils/auth/api';
+import { QuestionsData } from '@/utils/auth/api';
 
-export const PageQuestionsContext = createContext<Record<string, QuestionsCount> | undefined>(
+export const PageQuestionsContext = createContext<Record<string, QuestionsData> | undefined>(
   undefined,
 );
 

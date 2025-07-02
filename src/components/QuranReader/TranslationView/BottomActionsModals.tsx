@@ -69,6 +69,7 @@ const BottomActionsModals: React.FC<BottomActionsModalsProps> = ({
         scrollToTop={() => {
           tafsirModalRef.current?.scrollToTop();
         }}
+        shouldRender={openedModal === ModalType.TAFSIR}
         render={({ surahAndAyahSelection, languageAndTafsirSelection, body }) => (
           <ContentModal
             innerRef={tafsirModalRef}

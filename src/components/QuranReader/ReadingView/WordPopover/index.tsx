@@ -20,7 +20,7 @@ const ShareQuranModal = dynamic(
 type Props = {
   word: Word;
   children: React.ReactNode;
-  onOpenChange?: (isOpen: boolean) => void;
+  onOpenChange: (isOpen: boolean) => void;
 };
 
 const ReadingViewWordPopover: React.FC<Props> = ({ word, children, onOpenChange }) => {
@@ -32,12 +32,10 @@ const ReadingViewWordPopover: React.FC<Props> = ({ word, children, onOpenChange 
   const handleOpenChange = useCallback(
     (isOpen: boolean) => {
       setIsMenuOpened(isOpen);
-      // eslint-disable-next-line i18next/no-literal-string
       logEvent(`reading_view_overflow_menu_${isOpen ? 'open' : 'close'}`);
       dispatch(setReadingViewSelectedVerseKey(isOpen ? word.verseKey : null));
 
-      // Call the external onOpenChange handler if provided
-      if (onOpenChange) {
+      if (isOpen) {
         onOpenChange(isOpen);
       }
     },
