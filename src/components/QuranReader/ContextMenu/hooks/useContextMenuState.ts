@@ -1,4 +1,4 @@
-import { useContext, useMemo } from 'react';
+import { useContext, useMemo, useState, useEffect } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
@@ -21,6 +21,7 @@ import { isMobile } from '@/utils/responsive';
 import { getVerseNumberFromKey } from '@/utils/verse';
 import DataContext from 'src/contexts/DataContext';
 
+const DEBOUNCE_DELAY = 150; // 150ms debounce delay
 /**
  * Custom hook to manage all state logic for the ContextMenu component
  * @returns {object} An object containing state, data, translations, and event handlers for the ContextMenu
@@ -37,7 +38,23 @@ const useContextMenuState = () => {
 
   const { isActive } = useOnboarding();
   const { isVisible: isNavbarVisible } = useSelector(selectNavbar, shallowEqual);
-  const showNavbar = isNavbarVisible || isActive;
+
+  // Use state to create a debounced version of the navbar visibility
+  const [debouncedShowNavbar, setDebouncedShowNavbar] = useState(isNavbarVisible || isActive);
+
+  // Debounce the navbar visibility changes to prevent UI flickering
+  useEffect(() => {
+    const rawShowNavbar = isNavbarVisible || isActive;
+
+    // Only update after a delay to prevent rapid toggling
+    const timerId = setTimeout(() => {
+      setDebouncedShowNavbar(rawShowNavbar);
+    }, DEBOUNCE_DELAY);
+
+    return () => clearTimeout(timerId);
+  }, [isNavbarVisible, isActive]);
+
+  const showNavbar = debouncedShowNavbar;
   const showReadingPreferenceSwitcher = isReadingPreferenceSwitcherVisible && !isActive;
 
   const { verseKey, chapterId, page, hizb } = useSelector(selectLastReadVerseKey, shallowEqual);
