@@ -21,12 +21,28 @@
     margin-block-end: var(--spacing-xsmall);
     font-weight: var(--font-weight-bold);
   }
+
   h2 {
     font-size: var(--font-size-normal);
     line-height: var(--line-height-jumbo);
     margin-block-end: var(--spacing-xsmall);
     font-weight: var(--font-weight-bold);
   }
+
+  h3 {
+    font-size: var(--font-size-large);
+    line-height: var(--line-height-xlarge);
+    margin-block-end: var(--spacing-xsmall);
+    font-weight: var(--font-weight-bold);
+  }
+
+  h4 {
+    font-size: var(--font-size-normal);
+    line-height: var(--line-height-xlarge);
+    margin-block-end: var(--spacing-xsmall);
+    font-weight: var(--font-weight-bold);
+  }
+
   p {
     line-height: var(--line-height-large);
     margin-block-end: var(--spacing-medium);
@@ -109,4 +125,49 @@
 
 .subHeading {
   font-weight: var(--font-weight-bold);
+}
+
+.imageContainer {
+  margin-block: var(--spacing-medium);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.imageCaption {
+  margin-top: var(--spacing-xsmall);
+  font-size: var(--font-size-small);
+  text-align: center;
+}
+
+.contentImage {
+  max-width: 100%;
+  height: auto;
+}
+
+.decimalList {
+  list-style-type: decimal !important;
+
+  strong {
+    font-weight: var(--font-weight-bold);
+  }
+}
+
+.spacer {
+  display: block;
+  height: var(--spacing-medium);
+  width: 100%;
+}
+
+.centeredText {
+  text-align: center;
+}
+
+.boldText {
+  font-weight: var(--font-weight-bold);
+  line-height: inherit;
+}
+
+.noMarginEnd {
+  margin-block-end: 0 !important;
 }
