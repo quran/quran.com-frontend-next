@@ -60,6 +60,7 @@
     "bookmarks": "বুকমার্ক",
     "popular": "জনপ্রিয়"
   },
+  "take-notes": "আপনি কি <modalLink> নোট মিস করছেন? </modalLink>",
   "view-all-bookmarks": "সব বুকমার্ক দেখুন",
   "voice": {
     "trigger": "যেকোনো কিছুতে দ্রুত অ্যাক্সেস"

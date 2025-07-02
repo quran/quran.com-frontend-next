@@ -60,6 +60,7 @@
     "bookmarks": "Yer imleri",
     "popular": "Popüler"
   },
+  "take-notes": "<modalLink> Notlar'ı mı kaçırdınız? </modalLink>",
   "view-all-bookmarks": "Tüm yer imlerini görüntüle",
   "voice": {
     "trigger": "Her şeye hızlı erişim"

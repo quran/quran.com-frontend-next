@@ -60,6 +60,7 @@
     "bookmarks": "Закладки",
     "popular": "Популярный"
   },
+  "take-notes": "Вы пропустили <modalLink> Заметки? </modalLink>",
   "view-all-bookmarks": "Посмотреть все закладки",
   "voice": {
     "trigger": "Быстрый доступ ко всему"

@@ -61,6 +61,7 @@
     "bookmarks": "Bookmarks",
     "popular": "Popular"
   },
+  "take-notes": "Have you been missing out on <modalLink>Notes?</modalLink>",
   "view-all-bookmarks": "View all bookmarks",
   "voice": {
     "trigger": "Quick access to anything"

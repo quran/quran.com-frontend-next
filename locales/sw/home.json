@@ -60,6 +60,7 @@
     "bookmarks": "Alamisho",
     "popular": "Maarufu"
   },
+  "take-notes": "Je, umekuwa ukikosa <modalLink> Notes? </modalLink>",
   "view-all-bookmarks": "Tazama alamisho zote",
   "voice": {
     "trigger": "Ufikiaji wa haraka wa chochote"
