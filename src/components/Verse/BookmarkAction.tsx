@@ -161,6 +161,15 @@ const BookmarkAction: React.FC<Props> = ({
       }
     } else {
       dispatch(toggleVerseBookmark(verse.verseKey));
+      if (bookmarkedVerses[verse.verseKey]) {
+        toast(t('verse-bookmark-removed'), {
+          status: ToastStatus.Success,
+        });
+      } else {
+        toast(t('verse-bookmarked'), {
+          status: ToastStatus.Success,
+        });
+      }
     }
 
     onActionTriggered?.();
