@@ -60,6 +60,7 @@
     "bookmarks": "Bladwijzers",
     "popular": "Populair"
   },
+  "take-notes": "Heb je <modalLink> Notities gemist? </modalLink>",
   "view-all-bookmarks": "Bekijk alle bladwijzers",
   "voice": {
     "trigger": "Snelle toegang tot alles"
