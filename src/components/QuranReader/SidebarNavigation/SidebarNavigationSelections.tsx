@@ -1,16 +1,22 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import dynamic from 'next/dynamic';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import SidebarSelectionSkeleton from './SidebarSelectionSkeleton';
 
+import {
+  selectLastReadVerseKey,
+  setLastReadVerse,
+} from '@/redux/slices/QuranReader/readingTracker';
 import {
   IsSidebarNavigationVisible,
   NavigationItem,
   setIsSidebarNavigationVisible,
 } from '@/redux/slices/QuranReader/sidebarNavigation';
+import NavigationItemType from '@/types/NavigationItemType';
 import { isMobile } from '@/utils/responsive';
+import DataContext from 'src/contexts/DataContext';
 
 const PageSelection = dynamic(() => import('./PageSelection'), {
   loading: SidebarSelectionSkeleton,
@@ -32,14 +38,54 @@ type Props = {
 
 const SidebarNavigationSelections: React.FC<Props> = ({ isVisible, selectedNavigationItem }) => {
   const dispatch = useDispatch();
+  const lastReadVerseKey = useSelector(selectLastReadVerseKey);
+  const chaptersData = useContext(DataContext);
   // we skip requesting any selection list if the drawer is not open.
   if (!isVisible) return <></>;
 
-  const onAfterNavigationItemRouted = () => {
-    const isDeviceMobile = isMobile();
-    // close the sidebar if the device is mobile after navigation
-    if (isDeviceMobile) {
-      dispatch({ type: setIsSidebarNavigationVisible.type, payload: false });
+  // Handle mobile sidebar closing after navigation
+  // Mobile sidebar is closed directly in onAfterNavigationItemRouted
+
+  // Update Redux state when a page is selected
+  const updateReduxStateWithPage = (pageNumber: string) => {
+    dispatch(
+      setLastReadVerse({
+        lastReadVerse: {
+          ...lastReadVerseKey,
+          page: pageNumber,
+          verseKey: null,
+          chapterId: null,
+        },
+        chaptersData,
+      }),
+    );
+  };
+
+  const updateReduxStateWithChapter = (chapterId: string) => {
+    dispatch(
+      setLastReadVerse({
+        lastReadVerse: {
+          ...lastReadVerseKey,
+          verseKey: `${chapterId}:1`,
+          chapterId,
+        },
+        chaptersData,
+      }),
+    );
+  };
+
+  const onAfterNavigationItemRouted = (itemValue?: string, itemType?: string) => {
+    if (isMobile()) {
+      dispatch(setIsSidebarNavigationVisible(false));
+    }
+
+    // If we have an item value and type, update Redux state
+    if (itemValue) {
+      if (itemType === NavigationItemType.PAGE) {
+        updateReduxStateWithPage(itemValue);
+      } else if (itemType === NavigationItemType.CHAPTER) {
+        updateReduxStateWithChapter(itemValue);
+      }
     }
   };
 

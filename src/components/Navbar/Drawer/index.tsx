@@ -131,11 +131,18 @@ const Drawer: React.FC<Props> = ({
     }
 
     // Hide navbar after successful navigation
-    router.events.on('routeChangeComplete', () => {
+    const handleRouteChange = () => {
       if (isOpen && closeOnNavigation) {
         closeDrawer(ActionSource.Navigation);
       }
-    });
+    };
+
+    router.events.on('routeChangeComplete', handleRouteChange);
+
+    // Cleanup function to remove the event listener
+    return () => {
+      router.events.off('routeChangeComplete', handleRouteChange);
+    };
   }, [closeDrawer, dispatch, router.events, isNavbarVisible, isOpen, closeOnNavigation]);
 
   useOutsideClickDetector(

@@ -4,6 +4,7 @@ import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useDispatch, useSelector } from 'react-redux';
 
 import { useOnboarding } from '@/components/Onboarding/OnboardingProvider';
+import useDebounceNavbarVisibility from '@/hooks/useDebounceNavbarVisibility';
 import useGetMushaf from '@/hooks/useGetMushaf';
 import { selectNavbar } from '@/redux/slices/navbar';
 import { selectContextMenu } from '@/redux/slices/QuranReader/contextMenu';
@@ -20,7 +21,6 @@ import { toLocalizedNumber } from '@/utils/locale';
 import { isMobile } from '@/utils/responsive';
 import { getVerseNumberFromKey } from '@/utils/verse';
 import DataContext from 'src/contexts/DataContext';
-
 /**
  * Custom hook to manage all state logic for the ContextMenu component
  * @returns {object} An object containing state, data, translations, and event handlers for the ContextMenu
@@ -37,7 +37,9 @@ const useContextMenuState = () => {
 
   const { isActive } = useOnboarding();
   const { isVisible: isNavbarVisible } = useSelector(selectNavbar, shallowEqual);
-  const showNavbar = isNavbarVisible || isActive;
+
+  // Use the shared hook to debounce navbar visibility changes
+  const showNavbar = useDebounceNavbarVisibility(isNavbarVisible, isActive);
   const showReadingPreferenceSwitcher = isReadingPreferenceSwitcherVisible && !isActive;
 
   const { verseKey, chapterId, page, hizb } = useSelector(selectLastReadVerseKey, shallowEqual);

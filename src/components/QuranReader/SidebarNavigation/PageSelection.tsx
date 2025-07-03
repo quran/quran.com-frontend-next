@@ -9,7 +9,7 @@ import { getPageNavigationUrl } from '@/utils/navigation';
 import { getPageIdsByMushaf } from '@/utils/page';
 
 type Props = {
-  onAfterNavigationItemRouted?: () => void;
+  onAfterNavigationItemRouted?: (itemValue?: string, itemType?: string) => void;
 };
 
 const PageSelection: React.FC<Props> = ({ onAfterNavigationItemRouted }) => {
