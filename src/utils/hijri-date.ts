@@ -17,40 +17,24 @@ type Month = {
 const ONE_DAY_MS = 24 * 60 * 60 * 1000;
 const WEEK_SHIFT_DAYS = 3; // Shift to make weeks start on Friday
 
-// Cache for precomputed UTC timestamps
-interface WeekCache {
-  startUTC: number;
-  endUTC: number;
-}
+// Pre-compute all UTC timestamps for better performance
+const weekUTCCache = new Map<string, { startTimestamp: number; endTimestamp: number }>();
 
-const weekUTCCache = new Map<string, WeekCache>();
-
-// Initialize cache when module loads
-(function initializeWeekCache() {
-  for (const monthKey in monthsMap) {
-    const weeks = monthsMap[monthKey];
-    for (const week of weeks) {
-      // Create the base start date from the JSON data using UTC
-      const baseStartDateUTC = Date.UTC(
-        Number(week.year),
-        Number(week.month) - 1,
-        Number(week.day),
-      );
-
+// Initialize cache (only stores first occurrence of each week number to preserve original behavior)
+for (const weeks of Object.values(monthsMap)) {
+  for (const week of weeks) {
+    // Only cache if this week number hasn't been seen before
+    if (!weekUTCCache.has(week.weekNumber)) {
+      const startTimestamp = Date.UTC(Number(week.year), Number(week.month) - 1, Number(week.day));
       // Shift the start date by WEEK_SHIFT_DAYS to make it start from Friday
-      const startDateUTC = baseStartDateUTC + WEEK_SHIFT_DAYS * ONE_DAY_MS;
+      const shiftedStartTimestamp = startTimestamp + WEEK_SHIFT_DAYS * ONE_DAY_MS;
+      // Add 6 days to get the end of the week (7 days total)
+      const endTimestamp = shiftedStartTimestamp + 6 * ONE_DAY_MS;
 
-      // Calculate the end date (7 days after the shifted start date)
-      const endDateUTC = startDateUTC + 7 * ONE_DAY_MS;
-
-      // Cache the computed values
-      weekUTCCache.set(week.weekNumber, {
-        startUTC: startDateUTC,
-        endUTC: endDateUTC,
-      });
+      weekUTCCache.set(week.weekNumber, { startTimestamp: shiftedStartTimestamp, endTimestamp });
     }
   }
-})();
+}
 
 /**
  * The idea is to sum the number of weeks from the start of the Quranic
@@ -69,7 +53,7 @@ export const getCurrentQuranicCalendarWeek = (currentHijriDate: umalqura.UmAlQur
 
   // Look up from cache - use for...of with Array.from to allow early return
   for (const [weekNumber, cache] of Array.from(weekUTCCache.entries())) {
-    if (todayUTC >= cache.startUTC && todayUTC < cache.endUTC) {
+    if (todayUTC >= cache.startTimestamp && todayUTC < cache.endTimestamp) {
       return Number(weekNumber);
     }
   }
