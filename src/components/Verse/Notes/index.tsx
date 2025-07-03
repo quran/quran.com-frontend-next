@@ -48,9 +48,17 @@ const VerseNotes = ({ verseKey, isTranslationView, hasNotes }: VerseNotesProps) 
 
   return (
     <>
-      <NoteModal isOpen={isModalOpen} onClose={onClose} verseKey={verseKey} />
+      <NoteModal
+        isOpen={isModalOpen}
+        onClose={onClose}
+        verseKey={verseKey}
+        isOverlayMax
+        isBottomSheetOnMobile
+      />
       <Button
-        className={classNames(styles.iconContainer, styles.verseAction, styles.fadedVerseAction)}
+        className={classNames(styles.iconContainer, styles.verseAction, {
+          [styles.fadedVerseAction]: isTranslationView,
+        })}
         onClick={onItemClicked}
         tooltip={t('notes.title')}
         type={ButtonType.Primary}

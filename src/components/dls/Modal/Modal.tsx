@@ -22,6 +22,7 @@ type ModalProps = {
   onClickOutside?: () => void;
   isPropagationStopped?: boolean;
   contentClassName?: string;
+  overlayClassName?: string;
   onEscapeKeyDown?: () => void;
   size?: ModalSize;
 };
@@ -34,6 +35,7 @@ const Modal = ({
   onEscapeKeyDown,
   isPropagationStopped,
   contentClassName,
+  overlayClassName,
   isBottomSheetOnMobile = true,
   isInvertedOverlay = false,
   size,
@@ -46,7 +48,9 @@ const Modal = ({
     )}
     <DialogPrimitive.Portal>
       <DialogPrimitive.Overlay
-        className={classNames(styles.overlay, { [styles.invertedOverlay]: isInvertedOverlay })}
+        className={classNames(styles.overlay, overlayClassName, {
+          [styles.invertedOverlay]: isInvertedOverlay,
+        })}
       />
       <Content
         isPropagationStopped={isPropagationStopped}
