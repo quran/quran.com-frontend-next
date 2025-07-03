@@ -67,16 +67,14 @@ export const getCurrentQuranicCalendarWeek = (currentHijriDate: umalqura.UmAlQur
   // IMPORTANT: Use UTC date components to avoid timezone mismatches
   const todayUTC = Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), today.getUTCDate());
 
-  // Look up from cache instead of computing each time
-  // Use forEach to avoid iterator issues
-  let foundWeek = 0;
-  weekUTCCache.forEach((cache, weekNumber) => {
+  // Look up from cache - use for...of with Array.from to allow early return
+  for (const [weekNumber, cache] of Array.from(weekUTCCache.entries())) {
     if (todayUTC >= cache.startUTC && todayUTC < cache.endUTC) {
-      foundWeek = Number(weekNumber);
+      return Number(weekNumber);
     }
-  });
+  }
 
-  return foundWeek;
+  return 0;
 };
 
 // TODO: add unit tests
