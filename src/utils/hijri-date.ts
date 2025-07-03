@@ -13,6 +13,8 @@ type Month = {
   day: number;
 };
 
+const ONE_DAY_MS = 24 * 60 * 60 * 1000;
+
 /**
  * The idea is to sum the number of weeks from the start of the Quranic
  * calendar to the current week. This is done by summing the number of weeks
@@ -39,10 +41,10 @@ export const getCurrentQuranicCalendarWeek = (currentHijriDate: umalqura.UmAlQur
       );
 
       // Shift the start date by 3 days to make it start from Friday (April 4th instead of April 1st)
-      const startDateUTC = baseStartDateUTC + 3 * 24 * 60 * 60 * 1000; // Add 3 days in milliseconds
+      const startDateUTC = baseStartDateUTC + 3 * ONE_DAY_MS; // Add 3 days in milliseconds
 
       // Calculate the end date (7 days after the shifted start date)
-      const endDateUTC = startDateUTC + 7 * 24 * 60 * 60 * 1000; // Add 7 days in milliseconds
+      const endDateUTC = startDateUTC + 7 * ONE_DAY_MS; // Add 7 days in milliseconds
 
       if (todayUTC >= startDateUTC && todayUTC < endDateUTC) {
         return Number(week.weekNumber);
