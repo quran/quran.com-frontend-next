@@ -10,6 +10,7 @@ import styles from '../styles/MobileReadingTabs.module.scss';
 import { Tab } from '@/components/dls/Tabs/Tabs';
 import { getReadingPreferenceIcon } from '@/components/QuranReader/ReadingPreferenceSwitcher/ReadingPreferenceIcon';
 import usePersistPreferenceGroup from '@/hooks/auth/usePersistPreferenceGroup';
+import useScrollRestoration from '@/hooks/useScrollRestoration';
 import { setLockVisibilityState } from '@/redux/slices/navbar';
 import {
   selectReadingPreferences,
@@ -69,26 +70,8 @@ const MobileReadingTabs: React.FC<MobileReadingTabsProps> = ({ t }) => {
    *
    * @param {ReadingPreference} view - The new reading preference to switch to
    */
-  /**
-   * Handles the translation tab's scrolling issues by using a MutationObserver
-   *
-   * @param {number} scrollPosition - The scroll position to maintain
-   */
-  const handleTranslationTabScroll = (scrollPosition: number) => {
-    // Create a MutationObserver to detect DOM changes and maintain scroll position
-    const observer = new MutationObserver(() => {
-      window.scrollTo(0, scrollPosition);
-    });
-
-    // Start observing the document with the configured parameters
-    observer.observe(document.body, { childList: true, subtree: true });
-
-    // Stop observing after a short period to allow initial rendering
-    setTimeout(() => {
-      observer.disconnect();
-      window.scrollTo(0, scrollPosition);
-    }, 500);
-  };
+  // Use the shared scroll restoration hook
+  const { restoreScrollPosition } = useScrollRestoration();
 
   /**
    * Prepares URL parameters for the reading preference change
@@ -124,14 +107,6 @@ const MobileReadingTabs: React.FC<MobileReadingTabsProps> = ({ t }) => {
     scrollPosition: number,
     isTranslationTab: boolean,
   ) => {
-    // Restore scroll position after navigation
-    window.scrollTo(0, scrollPosition);
-
-    // For translation tab, apply special handling
-    if (isTranslationTab) {
-      handleTranslationTabScroll(scrollPosition);
-    }
-
     // Update reading preference in Redux
     onSettingsChange(
       'readingPreference',
@@ -141,12 +116,10 @@ const MobileReadingTabs: React.FC<MobileReadingTabsProps> = ({ t }) => {
       PreferenceGroup.READING,
     );
 
-    // Unlock navbar visibility state after a delay to ensure all changes are complete
-    setTimeout(() => {
+    // Use the shared hook to restore scroll position and handle completion
+    restoreScrollPosition(scrollPosition, isTranslationTab, () => {
       dispatch(setLockVisibilityState(false));
-      // Make sure scroll position is maintained
-      window.scrollTo(0, scrollPosition);
-    }, 500); // Use a longer delay to ensure stability with translation tab
+    });
   };
 
   const onViewSwitched = (view: ReadingPreference) => {
