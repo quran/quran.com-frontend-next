@@ -4,6 +4,8 @@ import Trans from 'next-translate/Trans';
 import useTranslation from 'next-translate/useTranslation';
 import VerificationInput from 'react-verification-input';
 
+import BackButton from '../BackButton';
+
 import styles from './VerificationCode.module.scss';
 
 import {
@@ -12,7 +14,6 @@ import {
 } from '@/components/Login/SignUpFormFields/consts';
 import Button, { ButtonType, ButtonVariant } from '@/dls/Button/Button';
 import { useToast } from '@/dls/Toast/Toast';
-import ArrowLeft from '@/icons/west.svg';
 import { logButtonClick, logFormSubmission } from '@/utils/eventLogger';
 
 interface Props {
@@ -42,7 +43,7 @@ const VerificationCodeBase: FC<Props> = ({
 }) => {
   const { t } = useTranslation('login');
   const showToast = useToast();
-  const [resendTimer, setResendTimer] = useState(0);
+  const [resendTimer, setResendTimer] = useState(RESEND_COOLDOWN_SECONDS);
   const [verificationCode, setVerificationCode] = useState('');
   const [error, setError] = useState('');
 
@@ -138,9 +139,7 @@ const VerificationCodeBase: FC<Props> = ({
             : t('verification-code-resend')}
         </Button>
 
-        <Button variant={ButtonVariant.Compact} onClick={onBack} className={styles.backButton}>
-          <ArrowLeft /> {t('back')}
-        </Button>
+        <BackButton onClick={onBack} />
       </div>
     </div>
   );

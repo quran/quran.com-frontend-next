@@ -4,11 +4,11 @@ import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
 import AuthTabs, { AuthTab } from './AuthTabs';
+import BackButton from './BackButton';
+import PrivacyPolicyText from './PrivacyPolicyText';
 import ServiceCard from './ServiceCard';
 import VerificationCodeForm from './VerificationCode/VerificationCodeForm';
 
-import Button, { ButtonVariant } from '@/dls/Button/Button';
-import ArrowLeft from '@/icons/west.svg';
 import authStyles from '@/styles/auth/auth.module.scss';
 import QueryParam from '@/types/QueryParam';
 import { signUp } from '@/utils/auth/authRequests';
@@ -77,14 +77,12 @@ const LoginContainer = () => {
   const renderContent = () => {
     if (loginView === LoginView.VERIFICATION) {
       return (
-        <div className={authStyles.pageContainer}>
-          <VerificationCodeForm
-            email={signUpData?.email || ''}
-            signUpData={signUpData as SignUpRequest}
-            onBack={onBack}
-            onResendCode={handleResendCode}
-          />
-        </div>
+        <VerificationCodeForm
+          email={signUpData?.email || ''}
+          signUpData={signUpData as SignUpRequest}
+          onBack={onBack}
+          onResendCode={handleResendCode}
+        />
       );
     }
 
@@ -97,9 +95,9 @@ const LoginContainer = () => {
             redirect={redirect}
             onSignUpSuccess={handleEmailLoginSubmit}
           />
-          <Button variant={ButtonVariant.Compact} onClick={onBack}>
-            <ArrowLeft /> {t('back')}
-          </Button>
+          <BackButton onClick={onBack} />
+
+          <PrivacyPolicyText />
         </>
       );
     }
@@ -127,23 +125,12 @@ const LoginContainer = () => {
         isEmailLogin={false}
         onOtherOptionsClicked={onEmailLoginClick}
         redirect={redirect}
+        onBackClick={onBack}
       />
     );
   };
 
-  return (
-    <div className={authStyles.outerContainer}>
-      <div
-        className={
-          loginView === LoginView.VERIFICATION
-            ? authStyles.fullContainer
-            : authStyles.innerContainer
-        }
-      >
-        {renderContent()}
-      </div>
-    </div>
-  );
+  return <div className={authStyles.outerContainer}>{renderContent()}</div>;
 };
 
 export default LoginContainer;
