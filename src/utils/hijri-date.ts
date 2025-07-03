@@ -13,7 +13,44 @@ type Month = {
   day: number;
 };
 
+// Constants for better readability
 const ONE_DAY_MS = 24 * 60 * 60 * 1000;
+const WEEK_SHIFT_DAYS = 3; // Shift to make weeks start on Friday
+
+// Cache for precomputed UTC timestamps
+interface WeekCache {
+  startUTC: number;
+  endUTC: number;
+}
+
+const weekUTCCache = new Map<string, WeekCache>();
+
+// Initialize cache when module loads
+(function initializeWeekCache() {
+  for (const monthKey in monthsMap) {
+    const weeks = monthsMap[monthKey];
+    for (const week of weeks) {
+      // Create the base start date from the JSON data using UTC
+      const baseStartDateUTC = Date.UTC(
+        Number(week.year),
+        Number(week.month) - 1,
+        Number(week.day),
+      );
+
+      // Shift the start date by WEEK_SHIFT_DAYS to make it start from Friday
+      const startDateUTC = baseStartDateUTC + WEEK_SHIFT_DAYS * ONE_DAY_MS;
+
+      // Calculate the end date (7 days after the shifted start date)
+      const endDateUTC = startDateUTC + 7 * ONE_DAY_MS;
+
+      // Cache the computed values
+      weekUTCCache.set(week.weekNumber, {
+        startUTC: startDateUTC,
+        endUTC: endDateUTC,
+      });
+    }
+  }
+})();
 
 /**
  * The idea is to sum the number of weeks from the start of the Quranic
@@ -27,32 +64,19 @@ const ONE_DAY_MS = 24 * 60 * 60 * 1000;
 export const getCurrentQuranicCalendarWeek = (currentHijriDate: umalqura.UmAlQura): number => {
   // Today's date - use UTC to avoid timezone issues
   const today = currentHijriDate.date;
-  const todayUTC = Date.UTC(today.getFullYear(), today.getMonth(), today.getDate());
+  // IMPORTANT: Use UTC date components to avoid timezone mismatches
+  const todayUTC = Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), today.getUTCDate());
 
-  // Iterate through the weeks to find the current week
-  for (const key in monthsMap) {
-    const weeks = monthsMap[key];
-    for (const week of weeks) {
-      // Create the base start date from the JSON data using UTC
-      const baseStartDateUTC = Date.UTC(
-        Number(week.year),
-        Number(week.month) - 1,
-        Number(week.day),
-      );
-
-      // Shift the start date by 3 days to make it start from Friday (April 4th instead of April 1st)
-      const startDateUTC = baseStartDateUTC + 3 * ONE_DAY_MS; // Add 3 days in milliseconds
-
-      // Calculate the end date (7 days after the shifted start date)
-      const endDateUTC = startDateUTC + 7 * ONE_DAY_MS; // Add 7 days in milliseconds
-
-      if (todayUTC >= startDateUTC && todayUTC < endDateUTC) {
-        return Number(week.weekNumber);
-      }
+  // Look up from cache instead of computing each time
+  // Use forEach to avoid iterator issues
+  let foundWeek = 0;
+  weekUTCCache.forEach((cache, weekNumber) => {
+    if (todayUTC >= cache.startUTC && todayUTC < cache.endUTC) {
+      foundWeek = Number(weekNumber);
     }
-  }
+  });
 
-  return 0;
+  return foundWeek;
 };
 
 // TODO: add unit tests
