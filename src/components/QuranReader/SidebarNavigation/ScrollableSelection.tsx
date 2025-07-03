@@ -64,7 +64,7 @@ const ScrollableSelection = ({
   const handleInputSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const firstFilteredItem = filteredItems[0];
-    if (filteredItems) {
+    if (firstFilteredItem) {
       const href = getHref(firstFilteredItem.value);
       navigateAndHandleAfterNavigation(href, firstFilteredItem.value);
     }
