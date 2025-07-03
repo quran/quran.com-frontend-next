@@ -86,7 +86,7 @@ const CourseDetails: React.FC<Props> = ({ course }) => {
       </div>
 
       <div className={styles.imgContainer}>
-        <Image alt={title} src={image} layout="fill" />
+        <Image alt={title} src={image} width={1920} height={480} />
       </div>
 
       <Switch selected={selectedTab} items={tabs} onSelect={onTabChange} />

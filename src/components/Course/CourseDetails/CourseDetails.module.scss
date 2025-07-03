@@ -23,20 +23,10 @@
 }
 
 .imgContainer {
-    width: 100%;
-    @include breakpoints.smallerThanTablet {
-        height: calc(var(--spacing-mega) * 3);
+    img {
+        max-width: 100%;
+        height: auto;
     }
-
-    @include breakpoints.tablet {
-        height: calc(var(--spacing-mega) * 5);
-    }
-
-    @include breakpoints.desktop {
-        height: calc(var(--spacing-mega) * 8);
-    }
-
-    position: relative;
     margin: auto;
     margin-block-end: var(--spacing-small);
 }
