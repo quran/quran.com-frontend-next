@@ -23,30 +23,28 @@ type Month = {
  * @returns {number}
  */
 export const getCurrentQuranicCalendarWeek = (currentHijriDate: umalqura.UmAlQura): number => {
-  // Today's date
+  // Today's date - use UTC to avoid timezone issues
   const today = currentHijriDate.date;
-
-  // Convert today's date to the start of the day
-  today.setHours(0, 0, 0, 0);
+  const todayUTC = Date.UTC(today.getFullYear(), today.getMonth(), today.getDate());
 
   // Iterate through the weeks to find the current week
   for (const key in monthsMap) {
     const weeks = monthsMap[key];
     for (const week of weeks) {
-      // Create the base start date from the JSON data
-      const baseStartDate = new Date(Number(week.year), Number(week.month) - 1, Number(week.day));
-      baseStartDate.setHours(0, 0, 0, 0);
+      // Create the base start date from the JSON data using UTC
+      const baseStartDateUTC = Date.UTC(
+        Number(week.year),
+        Number(week.month) - 1,
+        Number(week.day),
+      );
 
       // Shift the start date by 3 days to make it start from Friday (April 4th instead of April 1st)
-      const startDate = new Date(baseStartDate);
-      startDate.setDate(baseStartDate.getDate() + 3);
+      const startDateUTC = baseStartDateUTC + 3 * 24 * 60 * 60 * 1000; // Add 3 days in milliseconds
 
       // Calculate the end date (7 days after the shifted start date)
-      const endDate = new Date(startDate);
-      endDate.setDate(startDate.getDate() + 7);
-      endDate.setHours(0, 0, 0, 0);
+      const endDateUTC = startDateUTC + 7 * 24 * 60 * 60 * 1000; // Add 7 days in milliseconds
 
-      if (today >= startDate && today < endDate) {
+      if (todayUTC >= startDateUTC && todayUTC < endDateUTC) {
         return Number(week.weekNumber);
       }
     }
