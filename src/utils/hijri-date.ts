@@ -28,8 +28,8 @@ for (const weeks of Object.values(monthsMap)) {
       const startTimestamp = Date.UTC(Number(week.year), Number(week.month) - 1, Number(week.day));
       // Shift the start date by WEEK_SHIFT_DAYS to make it start from Friday
       const shiftedStartTimestamp = startTimestamp + WEEK_SHIFT_DAYS * ONE_DAY_MS;
-      // Add 6 days to get the end of the week (7 days total)
-      const endTimestamp = shiftedStartTimestamp + 6 * ONE_DAY_MS;
+      // Add 7 days to get the end of the week (exclusive end range for 7-day weeks)
+      const endTimestamp = shiftedStartTimestamp + 7 * ONE_DAY_MS;
 
       weekUTCCache.set(week.weekNumber, { startTimestamp: shiftedStartTimestamp, endTimestamp });
     }
