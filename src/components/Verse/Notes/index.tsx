@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 
 import classNames from 'classnames';
 import { useRouter } from 'next/router';
@@ -12,6 +12,8 @@ import NotesIcon from '@/icons/notes-filled.svg';
 import { isLoggedIn } from '@/utils/auth/login';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getChapterWithStartingVerseUrl, getLoginNavigationUrl } from '@/utils/navigation';
+import AudioPlayerEventType from '@/xstate/actors/audioPlayer/types/AudioPlayerEventType';
+import { AudioPlayerMachineContext } from '@/xstate/AudioPlayerMachineContext';
 
 export enum VerseNotesTrigger {
   IconButton = 'button',
@@ -28,6 +30,7 @@ const VerseNotes = ({ verseKey, isTranslationView, hasNotes }: VerseNotesProps) 
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { t } = useTranslation('common');
   const router = useRouter();
+  const audioPlayerService = useContext(AudioPlayerMachineContext);
 
   const onItemClicked = () => {
     const isUserLoggedIn = isLoggedIn();
@@ -35,26 +38,27 @@ const VerseNotes = ({ verseKey, isTranslationView, hasNotes }: VerseNotesProps) 
       isTranslationView,
       isLoggedIn,
     });
+
     if (!isUserLoggedIn) {
-      router.push(getLoginNavigationUrl(getChapterWithStartingVerseUrl(verseKey)));
+      audioPlayerService.send({ type: 'CLOSE' } as AudioPlayerEventType);
+
+      try {
+        router.push(getLoginNavigationUrl(getChapterWithStartingVerseUrl(verseKey)));
+      } catch {
+        // If there's an error parsing the verseKey, navigate to chapter 1
+        router.push(getLoginNavigationUrl('/1'));
+      }
     } else {
       setIsModalOpen(true);
     }
   };
 
-  const onClose = () => {
+  const onModalClose = () => {
     setIsModalOpen(false);
   };
 
   return (
     <>
-      <NoteModal
-        isOpen={isModalOpen}
-        onClose={onClose}
-        verseKey={verseKey}
-        isOverlayMax
-        isBottomSheetOnMobile
-      />
       <Button
         className={classNames(styles.iconContainer, styles.verseAction, {
           [styles.fadedVerseAction]: isTranslationView,
@@ -65,9 +69,18 @@ const VerseNotes = ({ verseKey, isTranslationView, hasNotes }: VerseNotesProps) 
         shape={ButtonShape.Circle}
         variant={ButtonVariant.Ghost}
         size={ButtonSize.Small}
+        ariaLabel={t('notes.title')}
       >
         <span className={styles.icon}>{hasNotes ? <NotesIcon /> : <EmptyNotesIcon />}</span>
       </Button>
+
+      <NoteModal
+        isOpen={isModalOpen}
+        onClose={onModalClose}
+        verseKey={verseKey}
+        isOverlayMax
+        isBottomSheetOnMobile
+      />
     </>
   );
 };

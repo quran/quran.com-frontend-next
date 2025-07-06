@@ -50,7 +50,6 @@ const TopActions: React.FC<TopActionsProps> = ({
           isTranslationView={isTranslationView}
           openShareModal={() => onOpenModalChange(true)}
           hasTranslationsButton={!isTranslationView}
-          onActionTriggered={() => onOpenModalChange(false)}
         />
       </div>
 

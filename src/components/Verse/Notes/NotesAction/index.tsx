@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
@@ -13,6 +13,8 @@ import Verse from '@/types/Verse';
 import { isLoggedIn } from '@/utils/auth/login';
 import { logButtonClick, logEvent } from '@/utils/eventLogger';
 import { getChapterWithStartingVerseUrl, getLoginNavigationUrl } from '@/utils/navigation';
+import AudioPlayerEventType from '@/xstate/actors/audioPlayer/types/AudioPlayerEventType';
+import { AudioPlayerMachineContext } from '@/xstate/AudioPlayerMachineContext';
 
 type Props = {
   verse: Verse;
@@ -27,18 +29,25 @@ const NotesAction: React.FC<Props> = ({ verse, onActionTriggered }) => {
   const { t } = useTranslation('common');
 
   const router = useRouter();
+  const audioPlayerService = useContext(AudioPlayerMachineContext);
 
   const onNotesClicked = () => {
     const isUserLoggedIn = isLoggedIn();
     logButtonClick('note_menu_item', { isUserLoggedIn });
     if (!isUserLoggedIn) {
-      router.push(getLoginNavigationUrl(getChapterWithStartingVerseUrl(verse.verseKey)));
+      audioPlayerService.send({ type: 'CLOSE' } as AudioPlayerEventType);
+
+      try {
+        router.push(getLoginNavigationUrl(getChapterWithStartingVerseUrl(verse.verseKey)));
+      } catch {
+        // If there's an error parsing the verseKey, navigate to chapter 1
+        router.push(getLoginNavigationUrl('/1'));
+      }
     } else {
       setIsModalOpen(true);
     }
   };
 
-  // Use the safe timeout hook
   const setSafeTimeout = useSafeTimeout();
 
   const onModalClose = () => {
@@ -46,9 +55,7 @@ const NotesAction: React.FC<Props> = ({ verse, onActionTriggered }) => {
     setIsModalOpen(false);
 
     if (onActionTriggered) {
-      // Use the safe timeout hook to handle cleanup automatically
       setSafeTimeout(() => {
-        // we set a really short timeout to close the popover after the modal has been closed to allow enough time for the fadeout css effect to apply.
         onActionTriggered();
       }, CLOSE_POPOVER_AFTER_MS);
     }

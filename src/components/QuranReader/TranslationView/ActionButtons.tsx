@@ -22,7 +22,6 @@ type ActionButtonsProps = {
   isTranslationView?: boolean;
   openShareModal: () => void;
   hasTranslationsButton?: boolean;
-  onActionTriggered?: () => void;
 };
 
 /**
@@ -37,7 +36,6 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
   isTranslationView = true,
   openShareModal,
   hasTranslationsButton = false,
-  onActionTriggered,
 }) => {
   return (
     <>
@@ -57,7 +55,6 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
               verse={verse}
               isTranslationView={isTranslationView}
               bookmarksRangeUrl={bookmarksRangeUrl}
-              onActionTriggered={onActionTriggered}
             />
           </ActionItem>
           {hasTranslationsButton && (
@@ -96,7 +93,6 @@ const ActionButtons: React.FC<ActionButtonsProps> = ({
               bookmarksRangeUrl={bookmarksRangeUrl}
               verse={verse}
               isTranslationView={isTranslationView}
-              onActionTriggered={onActionTriggered}
             />
           </ActionItem>
         </>
