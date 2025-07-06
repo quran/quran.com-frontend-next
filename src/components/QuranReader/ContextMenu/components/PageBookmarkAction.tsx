@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useMemo } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import { useSelector, shallowEqual, useDispatch } from 'react-redux';
 import { useSWRConfig } from 'swr';
+import useSWRImmutable from 'swr/immutable';
 
 import styles from '../styles/ContextMenu.module.scss';
 
@@ -14,9 +15,10 @@ import { selectBookmarkedPages, togglePageBookmark } from '@/redux/slices/QuranR
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import { getMushafId } from '@/utils/api';
 import { addBookmark, deleteBookmarkById, getBookmark } from '@/utils/auth/api';
-import { makeBookmarksUrl } from '@/utils/auth/apiPaths';
+import { makeBookmarksUrl, makeBookmarkUrl } from '@/utils/auth/apiPaths';
 import { isLoggedIn } from '@/utils/auth/login';
 import { logButtonClick } from '@/utils/eventLogger';
+import Bookmark from 'types/Bookmark';
 import BookmarkType from 'types/BookmarkType';
 
 interface PageBookmarkActionProps {
@@ -27,7 +29,7 @@ interface PageBookmarkActionProps {
  * Component for bookmarking a Quran page
  * @returns {JSX.Element} A React component that displays a bookmark icon for the current page
  */
-const PageBookmarkAction: React.FC<PageBookmarkActionProps> = ({ pageNumber }) => {
+const PageBookmarkAction: React.FC<PageBookmarkActionProps> = React.memo(({ pageNumber }) => {
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const bookmarkedPages = useSelector(selectBookmarkedPages, shallowEqual);
   const mushafId = getMushafId(quranReaderStyles.quranFont, quranReaderStyles.mushafLines).mushaf;
@@ -35,77 +37,69 @@ const PageBookmarkAction: React.FC<PageBookmarkActionProps> = ({ pageNumber }) =
   const { cache } = useSWRConfig();
   const { t } = useTranslation();
   const dispatch = useDispatch();
-  // State to track loading state
-  const [isLoading, setIsLoading] = useState(false);
-  // State to track bookmark data
-  const [bookmark, setBookmark] = useState(null);
+  // Use SWR to fetch bookmark data
+  const {
+    data: bookmark,
+    isValidating: isLoading,
+    mutate,
+  } = useSWRImmutable<Bookmark>(
+    isLoggedIn() ? makeBookmarkUrl(mushafId, Number(pageNumber), BookmarkType.Page) : null,
+    async () => {
+      const response = await getBookmark(mushafId, Number(pageNumber), BookmarkType.Page);
+      return response;
+    },
+  );
 
   // Determine if the page is bookmarked based on user login status and data source
-  const isPageBookmarked = isLoggedIn() ? !!bookmark : !!bookmarkedPages?.[pageNumber.toString()];
-
-  // Fetch bookmark data whenever the page number changes
-  useEffect(() => {
-    const fetchBookmarkData = async () => {
-      if (!isLoggedIn()) return;
-
-      setIsLoading(true);
-      try {
-        const response = await getBookmark(mushafId, Number(pageNumber), BookmarkType.Page);
-        setBookmark(response);
-      } catch (error) {
-        // If there's an error, assume the page is not bookmarked
-        setBookmark(null);
-      } finally {
-        setIsLoading(false);
-      }
-    };
-
-    fetchBookmarkData();
-
-    // Clean up bookmark data when component unmounts or page changes
-    return () => {
-      setBookmark(null);
-    };
-  }, [pageNumber, mushafId]);
+  const isPageBookmarked = useMemo(() => {
+    const isUserLoggedIn = isLoggedIn();
+    if (isUserLoggedIn && bookmark) {
+      return bookmark;
+    }
+    if (!isUserLoggedIn) {
+      return !!bookmarkedPages?.[pageNumber.toString()];
+    }
+    return false;
+  }, [bookmarkedPages, bookmark, pageNumber]);
 
   // Handle bookmark toggle action
   const handleBookmarkAdd = async () => {
-    setIsLoading(true);
     try {
       const response = await addBookmark({
         key: Number(pageNumber),
         mushafId,
         type: BookmarkType.Page,
       });
-      setBookmark(response);
+      // Explicitly cast the response to Bookmark type
+      mutate(() => response as Bookmark, { revalidate: false });
       toast(t('quran-reader:page-bookmarked'), {
         status: ToastStatus.Success,
       });
     } catch (error) {
+      // Revalidate to get the correct state
+      mutate();
       toast(t('common:error.general'), {
         status: ToastStatus.Error,
       });
-    } finally {
-      setIsLoading(false);
     }
   };
 
   // Handle bookmark removal
   const handleBookmarkRemove = async () => {
     if (!bookmark) return;
-    setIsLoading(true);
     try {
+      // Optimistic update
+      mutate(null, { revalidate: false });
       await deleteBookmarkById(bookmark.id);
-      setBookmark(null);
       toast(t('quran-reader:page-bookmark-removed'), {
         status: ToastStatus.Success,
       });
     } catch (error) {
+      // Revalidate to get the correct state
+      mutate();
       toast(t('common:error.general'), {
         status: ToastStatus.Error,
       });
-    } finally {
-      setIsLoading(false);
     }
   };
 
@@ -153,6 +147,6 @@ const PageBookmarkAction: React.FC<PageBookmarkActionProps> = ({ pageNumber }) =
       {bookmarkIcon}
     </button>
   );
-};
+});
 
 export default PageBookmarkAction;

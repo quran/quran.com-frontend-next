@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import classNames from 'classnames';
 
@@ -27,10 +27,15 @@ const PageInfo: React.FC<PageInfoProps> = ({
   containerClassName,
   showBookmark,
 }) => {
+  // Memoize the bookmark component to prevent unnecessary re-renders
+  const bookmarkComponent = useMemo(() => {
+    return showBookmark ? <PageBookmarkAction pageNumber={Number(pageNumber)} /> : null;
+  }, [pageNumber, showBookmark]);
+
   return (
     <div className={classNames(styles.pageInfoContainer, containerClassName)}>
       <div className={styles.primaryInfo}>
-        {showBookmark && <PageBookmarkAction pageNumber={Number(pageNumber)} />}
+        {bookmarkComponent}
         <span>
           {t('page')} {pageNumber}
         </span>
