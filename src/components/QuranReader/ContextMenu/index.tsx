@@ -75,6 +75,7 @@ const ContextMenu: React.FC = (): JSX.Element | null => {
               pageNumber={localizedPageNumber}
               containerClassName={styles.pageInfoCustomContainerMobileScrolled}
               t={t}
+              showBookmark={!showNavbar}
             />
           </div>
         </div>
@@ -103,6 +104,7 @@ const ContextMenu: React.FC = (): JSX.Element | null => {
                 pageNumber={localizedPageNumber}
                 containerClassName={styles.pageInfoCustomContainer}
                 t={t}
+                showBookmark={!showNavbar}
               />
             </div>
           </div>
