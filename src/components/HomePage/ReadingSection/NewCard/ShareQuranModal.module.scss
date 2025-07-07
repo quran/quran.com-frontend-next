@@ -1,14 +1,27 @@
 @use "src/styles/breakpoints";
 
+.description {
+    margin-block-start: var(--spacing-xxsmall-px);
+    margin-block-end: var(--spacing-large-px);
+}
+
 .subtitle {
     text-align: center;
-    margin-block: var(--spacing-medium);
     color: var(--color-text-default);
-    font-size: var(--spacing-medium2-px);
+    font-size: var(--font-size-large);
+    white-space: pre-line;
+}
+
+.bold {
+    font-weight: var(--font-weight-semibold);
+}
+
+.gray {
+    color: var(--color-text-gray);
 }
 
 .title {
-    font-size: calc(var(--spacing-large-px) + var(--spacing-micro-px));
+    font-size: var(--font-size-jumbo);
 }
 
 .closeButton {

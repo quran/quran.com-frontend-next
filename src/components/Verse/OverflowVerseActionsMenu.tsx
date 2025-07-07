@@ -35,9 +35,19 @@ const OverflowVerseActionsMenu: React.FC<Props> = ({
   bookmarksRangeUrl,
 }) => {
   const { t } = useTranslation('common');
+
+  const onOpenModalChange = (open: boolean) => {
+    logEvent(
+      `${isTranslationView ? 'translation_view' : 'reading_view'}_verse_actions_menu_${
+        open ? 'open' : 'close'
+      }`,
+    );
+  };
+
   return (
     <div className={styles.container}>
       <PopoverMenu
+        contentClassName={classNames(cellStyles.menuOffset, cellStyles.overlayModal)}
         trigger={
           <Button
             size={ButtonSize.Small}
@@ -54,20 +64,14 @@ const OverflowVerseActionsMenu: React.FC<Props> = ({
             )}
             ariaLabel={t('more')}
           >
-            <span className={styles.icon}>
+            <span className={cellStyles.icon}>
               <OverflowMenuIcon />
             </span>
           </Button>
         }
         isModal
         isPortalled
-        onOpenChange={(open: boolean) => {
-          logEvent(
-            `${isTranslationView ? 'translation_view' : 'reading_view'}_verse_actions_menu_${
-              open ? 'open' : 'close'
-            }`,
-          );
-        }}
+        onOpenChange={onOpenModalChange}
       >
         <OverflowVerseActionsMenuBody
           verse={verse}

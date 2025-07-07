@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
@@ -6,38 +6,60 @@ import useTranslation from 'next-translate/useTranslation';
 import NoteModal from '@/components/Notes/NoteModal';
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import useCountRangeNotes from '@/hooks/auth/useCountRangeNotes';
+import useSafeTimeout from '@/hooks/useSafeTimeout';
 import EmptyNotesIcon from '@/icons/notes-empty.svg';
 import NotesIcon from '@/icons/notes-filled.svg';
 import Verse from '@/types/Verse';
 import { isLoggedIn } from '@/utils/auth/login';
-import { logButtonClick } from '@/utils/eventLogger';
+import { logButtonClick, logEvent } from '@/utils/eventLogger';
 import { getChapterWithStartingVerseUrl, getLoginNavigationUrl } from '@/utils/navigation';
+import AudioPlayerEventType from '@/xstate/actors/audioPlayer/types/AudioPlayerEventType';
+import { AudioPlayerMachineContext } from '@/xstate/AudioPlayerMachineContext';
 
 type Props = {
   verse: Verse;
+  onActionTriggered?: () => void;
 };
 
-const NotesAction: React.FC<Props> = ({ verse }) => {
+const CLOSE_POPOVER_AFTER_MS = 150;
+
+const NotesAction: React.FC<Props> = ({ verse, onActionTriggered }) => {
   const { data: notesCount } = useCountRangeNotes({ from: verse.verseKey, to: verse.verseKey });
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { t } = useTranslation('common');
 
   const router = useRouter();
+  const audioPlayerService = useContext(AudioPlayerMachineContext);
 
   const onNotesClicked = () => {
     const isUserLoggedIn = isLoggedIn();
     logButtonClick('note_menu_item', { isUserLoggedIn });
     if (!isUserLoggedIn) {
-      router.push(getLoginNavigationUrl(getChapterWithStartingVerseUrl(verse.verseKey)));
+      audioPlayerService.send({ type: 'CLOSE' } as AudioPlayerEventType);
+
+      try {
+        router.push(getLoginNavigationUrl(getChapterWithStartingVerseUrl(verse.verseKey)));
+      } catch {
+        // If there's an error parsing the verseKey, navigate to chapter 1
+        router.push(getLoginNavigationUrl('/1'));
+      }
     } else {
       setIsModalOpen(true);
     }
   };
 
-  const onClose = () => {
-    setIsModalOpen(false);
-  };
+  const setSafeTimeout = useSafeTimeout();
 
+  const onModalClose = () => {
+    logEvent('reading_view_notes_modal_close');
+    setIsModalOpen(false);
+
+    if (onActionTriggered) {
+      setSafeTimeout(() => {
+        onActionTriggered();
+      }, CLOSE_POPOVER_AFTER_MS);
+    }
+  };
   const hasNotes = notesCount && notesCount[verse.verseKey] > 0;
 
   return (
@@ -48,7 +70,7 @@ const NotesAction: React.FC<Props> = ({ verse }) => {
       >
         {t('notes.title')}
       </PopoverMenu.Item>
-      <NoteModal isOpen={isModalOpen} onClose={onClose} verseKey={verse.verseKey} />
+      <NoteModal isOpen={isModalOpen} onClose={onModalClose} verseKey={verse.verseKey} />
     </>
   );
 };
