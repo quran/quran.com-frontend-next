@@ -6,6 +6,7 @@ import classNames from 'classnames';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 
+import getTranslationsLabelString from '../ReadingView/utils/translation';
 import {
   verseFontChanged,
   verseTranslationChanged,
@@ -66,11 +67,15 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
     }
   }, [isHighlighted, scrollToSelectedItem, enableAutoScrolling, startingVerse, verseIndex]);
 
+  const translationsLabel = getTranslationsLabelString(verse.translations);
+  const translationsCount = verse.translations?.length || 0;
   const wordVerse: WordVerse = {
     chapterId: verse.chapterId,
     verseKey: verse.verseKey,
     verseNumber: verse.verseNumber,
     timestamps: verse.timestamps,
+    translationsLabel,
+    translationsCount,
   };
 
   return (
