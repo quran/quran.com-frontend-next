@@ -14,8 +14,9 @@ import {
   NavigationItem,
   setIsSidebarNavigationVisible,
 } from '@/redux/slices/QuranReader/sidebarNavigation';
+import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import NavigationItemType from '@/types/NavigationItemType';
-import { getPageNumbersForChapter } from '@/utils/chapter';
+import getFirstPageNumberForChapter from '@/utils/chapter-pages';
 import { formatStringNumber } from '@/utils/number';
 import { isMobile } from '@/utils/responsive';
 import DataContext from 'src/contexts/DataContext';
@@ -42,6 +43,7 @@ const SidebarNavigationSelections: React.FC<Props> = ({ isVisible, selectedNavig
   const dispatch = useDispatch();
   const lastReadVerseKey = useSelector(selectLastReadVerseKey);
   const chaptersData = useContext(DataContext);
+  const quranReaderStyles = useSelector(selectQuranReaderStyles);
   // we skip requesting any selection list if the drawer is not open.
   if (!isVisible) return <></>;
 
@@ -65,8 +67,12 @@ const SidebarNavigationSelections: React.FC<Props> = ({ isVisible, selectedNavig
     // First get the page number for this chapter
     try {
       const formattedChapterId = formatStringNumber(chapterId);
-      const chapterPages = await getPageNumbersForChapter(formattedChapterId);
-      const firstPageNumber = chapterPages?.[0];
+      // Use the new utility function that respects the current Mushaf
+      const firstPageNumber = await getFirstPageNumberForChapter(
+        formattedChapterId,
+        quranReaderStyles.quranFont,
+        quranReaderStyles.mushafLines,
+      );
 
       // Update Redux with both chapter and page information
       dispatch(

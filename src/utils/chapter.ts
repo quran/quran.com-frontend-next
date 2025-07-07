@@ -88,20 +88,6 @@ export const getChapterIdsForJuz = async (juzId: string): Promise<string[]> => {
   });
 };
 
-/**
- * Given a chapterId, get page numbers from a json file
- *
- * @param {string} chapterId
- * @returns {Promise<string[]>} pageNumbers
- */
-export const getPageNumbersForChapter = (chapterId: string): Promise<string[]> => {
-  return new Promise((res) => {
-    import(`@/data/chapter-to-page-mappings.json`).then((data) => {
-      res(data.default[chapterId]);
-    });
-  });
-};
-
 type ChapterAndVerseMapping = { [chapter: string]: string };
 /**
  * get ChapterAndVerseMapping for all juzs
