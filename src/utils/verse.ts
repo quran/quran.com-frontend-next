@@ -2,11 +2,12 @@
 /* eslint-disable react-func/max-lines-per-function */
 import range from 'lodash/range';
 
+import getTranslationsLabelString from '../components/QuranReader/ReadingView/utils/translation';
+
 import { getChapterData } from './chapter';
 import { formatStringNumber } from './number';
 import { parseVerseRange } from './verseKeys';
 
-import getTranslationsLabelString from '@/components/QuranReader/ReadingView/utils/translation';
 import ChaptersData from 'types/ChaptersData';
 import Verse from 'types/Verse';
 import Word from 'types/Word';
