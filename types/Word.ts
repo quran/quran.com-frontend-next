@@ -19,6 +19,8 @@ export interface WordVerse {
     duration: number;
     segments: [number[]];
   };
+  translationsLabel: string;
+  translationsCount: number;
 }
 
 interface Word {

@@ -6,6 +6,7 @@ import { getChapterData } from './chapter';
 import { formatStringNumber } from './number';
 import { parseVerseRange } from './verseKeys';
 
+import getTranslationsLabelString from '@/components/QuranReader/ReadingView/utils/translation';
 import ChaptersData from 'types/ChaptersData';
 import Verse from 'types/Verse';
 import Word from 'types/Word';
@@ -244,6 +245,9 @@ export const makeWordLocation = (verseKey: string, wordPosition: number): string
 export const getVerseWords = (verse: Verse): Word[] => {
   const words = [];
   verse.words.forEach((word) => {
+    const translationsLabel = getTranslationsLabelString(verse.translations);
+    const translationsCount = verse.translations?.length || 0;
+
     words.push({
       ...word,
       hizbNumber: verse.hizbNumber,
@@ -252,6 +256,8 @@ export const getVerseWords = (verse: Verse): Word[] => {
         verseKey: verse.verseKey,
         chapterId: verse.chapterId,
         timestamps: verse.timestamps,
+        translationsLabel,
+        translationsCount,
       },
     });
   });
