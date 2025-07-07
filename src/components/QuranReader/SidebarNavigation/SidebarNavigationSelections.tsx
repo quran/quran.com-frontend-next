@@ -15,6 +15,8 @@ import {
   setIsSidebarNavigationVisible,
 } from '@/redux/slices/QuranReader/sidebarNavigation';
 import NavigationItemType from '@/types/NavigationItemType';
+import { getPageNumbersForChapter } from '@/utils/chapter';
+import { formatStringNumber } from '@/utils/number';
 import { isMobile } from '@/utils/responsive';
 import DataContext from 'src/contexts/DataContext';
 
@@ -53,25 +55,44 @@ const SidebarNavigationSelections: React.FC<Props> = ({ isVisible, selectedNavig
         lastReadVerse: {
           ...lastReadVerseKey,
           page: pageNumber,
-          verseKey: null,
-          chapterId: null,
         },
         chaptersData,
       }),
     );
   };
 
-  const updateReduxStateWithChapter = (chapterId: string) => {
-    dispatch(
-      setLastReadVerse({
-        lastReadVerse: {
-          ...lastReadVerseKey,
-          verseKey: `${chapterId}:1`,
-          chapterId,
-        },
-        chaptersData,
-      }),
-    );
+  const updateReduxStateWithChapter = async (chapterId: string) => {
+    // First get the page number for this chapter
+    try {
+      const formattedChapterId = formatStringNumber(chapterId);
+      const chapterPages = await getPageNumbersForChapter(formattedChapterId);
+      const firstPageNumber = chapterPages?.[0];
+
+      // Update Redux with both chapter and page information
+      dispatch(
+        setLastReadVerse({
+          lastReadVerse: {
+            ...lastReadVerseKey,
+            verseKey: `${chapterId}:1`,
+            chapterId,
+            page: firstPageNumber || lastReadVerseKey.page, // Use the first page or keep existing
+          },
+          chaptersData,
+        }),
+      );
+    } catch (error) {
+      // If we can't get the page number, just update the chapter
+      dispatch(
+        setLastReadVerse({
+          lastReadVerse: {
+            ...lastReadVerseKey,
+            verseKey: `${chapterId}:1`,
+            chapterId,
+          },
+          chaptersData,
+        }),
+      );
+    }
   };
 
   const onAfterNavigationItemRouted = (itemValue?: string, itemType?: string) => {
