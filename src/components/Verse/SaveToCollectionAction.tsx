@@ -13,7 +13,6 @@ import SaveToCollectionModal, {
 import PopoverMenu from '../dls/PopoverMenu/PopoverMenu';
 
 import PlusIcon from '@/icons/plus.svg';
-import Verse from '@/types/Verse';
 import { WordVerse } from '@/types/Word';
 import { ToastStatus, useToast } from 'src/components/dls/Toast/Toast';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
@@ -28,8 +27,8 @@ import {
 import {
   makeBookmarkCollectionsUrl,
   makeBookmarksUrl,
-  makeCollectionsUrl,
   makeBookmarkUrl,
+  makeCollectionsUrl,
 } from 'src/utils/auth/apiPaths';
 import { isLoggedIn } from 'src/utils/auth/login';
 import { logButtonClick } from 'src/utils/eventLogger';
