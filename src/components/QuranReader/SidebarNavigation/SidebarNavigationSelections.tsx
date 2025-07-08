@@ -57,6 +57,10 @@ const SidebarNavigationSelections: React.FC<Props> = ({ isVisible, selectedNavig
         lastReadVerse: {
           ...lastReadVerseKey,
           page: pageNumber,
+          // Clear chapter and verse context when navigating by page
+          // to ensure consistent Redux state
+          verseKey: null,
+          chapterId: null,
         },
         chaptersData,
       }),
@@ -101,7 +105,8 @@ const SidebarNavigationSelections: React.FC<Props> = ({ isVisible, selectedNavig
     }
   };
 
-  const onAfterNavigationItemRouted = (itemValue?: string, itemType?: string) => {
+  // Make this function async to properly handle async Redux updates
+  const onAfterNavigationItemRouted = async (itemValue?: string, itemType?: string) => {
     if (isMobile()) {
       dispatch(setIsSidebarNavigationVisible(false));
     }
@@ -111,7 +116,8 @@ const SidebarNavigationSelections: React.FC<Props> = ({ isVisible, selectedNavig
       if (itemType === NavigationItemType.PAGE) {
         updateReduxStateWithPage(itemValue);
       } else if (itemType === NavigationItemType.CHAPTER) {
-        updateReduxStateWithChapter(itemValue);
+        // Add await to ensure the async function completes before proceeding
+        await updateReduxStateWithChapter(itemValue);
       }
     }
   };
