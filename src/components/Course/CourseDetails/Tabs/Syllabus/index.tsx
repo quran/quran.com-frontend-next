@@ -1,6 +1,7 @@
 /* eslint-disable react/no-array-index-key */
-import React from 'react';
+import React, { useContext } from 'react';
 
+import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from './Syllabus.module.scss';
@@ -12,6 +13,8 @@ import { isLoggedIn } from '@/utils/auth/login';
 import { logButtonClick } from '@/utils/eventLogger';
 import { toLocalizedNumber } from '@/utils/locale';
 import { getLessonNavigationUrl, getLoginNavigationUrl } from '@/utils/navigation';
+import AudioPlayerEventType from '@/xstate/actors/audioPlayer/types/AudioPlayerEventType';
+import { AudioPlayerMachineContext } from '@/xstate/AudioPlayerMachineContext';
 
 type Props = {
   course: Course;
@@ -20,7 +23,8 @@ type Props = {
 const Syllabus: React.FC<Props> = ({ course }) => {
   const { lessons = [], slug: courseSlug } = course;
   const { t, lang } = useTranslation('learn');
-
+  const audioPlayerService = useContext(AudioPlayerMachineContext);
+  const router = useRouter();
   const isUserLoggedIn = isLoggedIn();
 
   const onDayClick = (dayNumber: number, lessonId: string) => {
@@ -47,7 +51,15 @@ const Syllabus: React.FC<Props> = ({ course }) => {
             <span>
               {`: `}
               <Link
-                onClick={() => onDayClick(dayNumber, id)}
+                onClick={() => {
+                  onDayClick(dayNumber, id);
+                  if (!isUserLoggedIn) {
+                    audioPlayerService.send({ type: 'CLOSE' } as AudioPlayerEventType);
+                    router.push(getLoginNavigationUrl(url));
+                  } else {
+                    router.push(url);
+                  }
+                }}
                 href={isUserLoggedIn ? url : getLoginNavigationUrl(url)}
                 variant={LinkVariant.Highlight}
               >
