@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 
-import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
 import MonthlyMediaFileCounter from './MonthlyMediaFileCounter';
@@ -9,13 +8,14 @@ import Button from '@/dls/Button/Button';
 import Progress from '@/dls/Progress';
 import { RenderStatus, useGenerateMediaFile } from '@/hooks/auth/media/useGenerateMediaFile';
 import useGetMediaFilesCount from '@/hooks/auth/media/useGetMediaFilesCount';
+import useAudioNavigation from '@/hooks/useAudioNavigation';
 import IconDownload from '@/icons/download.svg';
 import { MediaType } from '@/types/Media/GenerateMediaFileRequest';
 import MediaRenderError from '@/types/Media/MediaRenderError';
 import { isLoggedIn } from '@/utils/auth/login';
 import { logButtonClick } from '@/utils/eventLogger';
 import { mutateGeneratedMediaCounter } from '@/utils/media/utils';
-import { getLoginNavigationUrl, getQuranMediaMakerNavigationUrl } from '@/utils/navigation';
+import { getQuranMediaMakerNavigationUrl, NavigationMethod } from '@/utils/navigation';
 
 type Props = {
   inputProps: any;
@@ -27,7 +27,7 @@ const RenderVideoButton: React.FC<Props> = ({ inputProps, isFetching }) => {
   const { renderMedia, state } = useGenerateMediaFile(inputProps);
   const { data, mutate } = useGetMediaFilesCount(MediaType.VIDEO);
   const downloadButtonRef = React.useRef<HTMLParagraphElement>();
-  const router = useRouter();
+  const { navigateWithAudioHandling } = useAudioNavigation();
   const [isLimitExceeded, setIsLimitExceeded] = useState(false);
 
   const onRenderClicked = () => {
@@ -35,7 +35,11 @@ const RenderVideoButton: React.FC<Props> = ({ inputProps, isFetching }) => {
     if (isLoggedIn()) {
       renderMedia(MediaType.VIDEO);
     } else {
-      router.replace(getLoginNavigationUrl(getQuranMediaMakerNavigationUrl()));
+      navigateWithAudioHandling(
+        getQuranMediaMakerNavigationUrl(),
+        undefined,
+        NavigationMethod.Replace,
+      )();
     }
   };
 

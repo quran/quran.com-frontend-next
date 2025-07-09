@@ -1,20 +1,18 @@
-import React, { useContext, useState } from 'react';
+import React, { useState } from 'react';
 
-import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
 import NoteModal from '@/components/Notes/NoteModal';
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import useCountRangeNotes from '@/hooks/auth/useCountRangeNotes';
+import useAudioNavigation from '@/hooks/useAudioNavigation';
 import useSafeTimeout from '@/hooks/useSafeTimeout';
 import EmptyNotesIcon from '@/icons/notes-empty.svg';
 import NotesIcon from '@/icons/notes-filled.svg';
 import Verse from '@/types/Verse';
 import { isLoggedIn } from '@/utils/auth/login';
 import { logButtonClick, logEvent } from '@/utils/eventLogger';
-import { getChapterWithStartingVerseUrl, getLoginNavigationUrl } from '@/utils/navigation';
-import AudioPlayerEventType from '@/xstate/actors/audioPlayer/types/AudioPlayerEventType';
-import { AudioPlayerMachineContext } from '@/xstate/AudioPlayerMachineContext';
+import { getChapterWithStartingVerseUrl } from '@/utils/navigation';
 
 type Props = {
   verse: Verse;
@@ -28,20 +26,17 @@ const NotesAction: React.FC<Props> = ({ verse, onActionTriggered }) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { t } = useTranslation('common');
 
-  const router = useRouter();
-  const audioPlayerService = useContext(AudioPlayerMachineContext);
+  const { navigateWithAudioHandling } = useAudioNavigation();
 
   const onNotesClicked = () => {
     const isUserLoggedIn = isLoggedIn();
     logButtonClick('note_menu_item', { isUserLoggedIn });
     if (!isUserLoggedIn) {
-      audioPlayerService.send({ type: 'CLOSE' } as AudioPlayerEventType);
-
       try {
-        router.push(getLoginNavigationUrl(getChapterWithStartingVerseUrl(verse.verseKey)));
+        navigateWithAudioHandling(getChapterWithStartingVerseUrl(verse.verseKey))();
       } catch {
         // If there's an error parsing the verseKey, navigate to chapter 1
-        router.push(getLoginNavigationUrl('/1'));
+        navigateWithAudioHandling('/1')();
       }
     } else {
       setIsModalOpen(true);

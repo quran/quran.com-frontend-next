@@ -5,14 +5,24 @@ import useTranslation from 'next-translate/useTranslation';
 import styles from './Footer.module.scss';
 
 import Link, { LinkVariant } from '@/dls/Link/Link';
+import useAudioNavigation from '@/hooks/useAudioNavigation';
 import useGetChaptersData from '@/hooks/useGetChaptersData';
 
 const Links = () => {
   const { t, lang } = useTranslation('common');
   const chaptersData = useGetChaptersData(lang);
   const isLoading = !chaptersData;
+  const { navigateWithAudioHandling } = useAudioNavigation();
 
   const getChapterSlug = (id) => (!isLoading ? `/${chaptersData[id].slug}` : undefined);
+
+  const createAudioNavLink = (text: string, url: string) => ({
+    text: t(text),
+    url,
+    onClick: (e: React.MouseEvent) => {
+      navigateWithAudioHandling(url)(e);
+    },
+  });
 
   const linksGroup = [
     {
@@ -21,11 +31,11 @@ const Links = () => {
         { text: t('home'), url: '/' },
         { text: t('quran-radio'), url: '/radio' },
         { text: t('reciters'), url: '/reciters' },
-        { text: t('about'), url: '/about-us' },
-        { text: t('developers'), url: '/developers' },
+        createAudioNavLink('about', '/about-us'),
+        createAudioNavLink('developers', '/developers'),
         { text: t('product-updates'), url: '/product-updates' },
         { text: t('feedback'), url: 'https://feedback.quran.com/', isExternal: true },
-        { text: t('help'), url: '/support' },
+        createAudioNavLink('help', '/support'),
       ],
     },
     {

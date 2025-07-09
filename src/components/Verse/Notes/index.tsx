@@ -1,19 +1,17 @@
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 
 import classNames from 'classnames';
-import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
 import NoteModal from '@/components/Notes/NoteModal';
 import styles from '@/components/QuranReader/TranslationView/TranslationViewCell.module.scss';
 import Button, { ButtonShape, ButtonSize, ButtonType, ButtonVariant } from '@/dls/Button/Button';
+import useAudioNavigation from '@/hooks/useAudioNavigation';
 import EmptyNotesIcon from '@/icons/notes-empty.svg';
 import NotesIcon from '@/icons/notes-filled.svg';
 import { isLoggedIn } from '@/utils/auth/login';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getChapterWithStartingVerseUrl, getLoginNavigationUrl } from '@/utils/navigation';
-import AudioPlayerEventType from '@/xstate/actors/audioPlayer/types/AudioPlayerEventType';
-import { AudioPlayerMachineContext } from '@/xstate/AudioPlayerMachineContext';
 
 export enum VerseNotesTrigger {
   IconButton = 'button',
@@ -29,8 +27,7 @@ type VerseNotesProps = {
 const VerseNotes = ({ verseKey, isTranslationView, hasNotes }: VerseNotesProps) => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const { t } = useTranslation('common');
-  const router = useRouter();
-  const audioPlayerService = useContext(AudioPlayerMachineContext);
+  const { navigateWithAudioHandling } = useAudioNavigation();
 
   const onItemClicked = () => {
     const isUserLoggedIn = isLoggedIn();
@@ -40,13 +37,13 @@ const VerseNotes = ({ verseKey, isTranslationView, hasNotes }: VerseNotesProps) 
     });
 
     if (!isUserLoggedIn) {
-      audioPlayerService.send({ type: 'CLOSE' } as AudioPlayerEventType);
-
       try {
-        router.push(getLoginNavigationUrl(getChapterWithStartingVerseUrl(verseKey)));
+        navigateWithAudioHandling(
+          getLoginNavigationUrl(getChapterWithStartingVerseUrl(verseKey)),
+        )();
       } catch {
         // If there's an error parsing the verseKey, navigate to chapter 1
-        router.push(getLoginNavigationUrl('/1'));
+        navigateWithAudioHandling(getLoginNavigationUrl('/1'))();
       }
     } else {
       setIsModalOpen(true);

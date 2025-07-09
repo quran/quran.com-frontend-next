@@ -9,6 +9,7 @@ import styles from './QuranicCalendarHero.module.scss';
 
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import useGetUserQuranProgramEnrollment from '@/hooks/auth/useGetUserQuranProgramEnrollment';
+import useAudioNavigation from '@/hooks/useAudioNavigation';
 import Background from '@/icons/background.svg';
 import { enrollUserInQuranProgram } from '@/utils/auth/api';
 import { QURANIC_CALENDAR_PROGRAM_ID } from '@/utils/auth/constants';
@@ -19,6 +20,7 @@ import {
   getLoginNavigationUrl,
   getNotificationSettingsNavigationUrl,
   getQuranicCalendarNavigationUrl,
+  NavigationMethod,
 } from '@/utils/navigation';
 
 type Props = {
@@ -37,6 +39,7 @@ const QuranicCalendarHero: React.FC<Props> = ({ currentQuranicCalendarWeek, curr
     programId: QURANIC_CALENDAR_PROGRAM_ID,
   });
   const [isEnrolling, setIsEnrolling] = useState(false);
+  const { navigateWithAudioHandling } = useAudioNavigation();
   const router = useRouter();
 
   const onEnrollButtonClicked = async () => {
@@ -61,7 +64,11 @@ const QuranicCalendarHero: React.FC<Props> = ({ currentQuranicCalendarWeek, curr
         }
       }
     } else {
-      router.replace(getLoginNavigationUrl(getQuranicCalendarNavigationUrl()));
+      navigateWithAudioHandling(
+        getLoginNavigationUrl(getQuranicCalendarNavigationUrl()),
+        undefined,
+        NavigationMethod.Replace,
+      )();
     }
   };
 

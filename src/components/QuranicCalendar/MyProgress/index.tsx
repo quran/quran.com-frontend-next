@@ -1,7 +1,6 @@
 import React, { useCallback } from 'react';
 
 import classNames from 'classnames';
-import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
 import CarouselView from './CarouselView';
@@ -12,11 +11,16 @@ import useMonthsData from './useMonthsData';
 
 import Button, { ButtonVariant } from '@/dls/Button/Button';
 import useGetUserQuranProgramEnrollment from '@/hooks/auth/useGetUserQuranProgramEnrollment';
+import useAudioNavigation from '@/hooks/useAudioNavigation';
 import { QURANIC_CALENDAR_PROGRAM_ID } from '@/utils/auth/constants';
 import { isLoggedIn } from '@/utils/auth/login';
 import { logButtonClick } from '@/utils/eventLogger';
 import { toLocalizedNumber } from '@/utils/locale';
-import { getLoginNavigationUrl, getQuranicCalendarNavigationUrl } from '@/utils/navigation';
+import {
+  getLoginNavigationUrl,
+  getQuranicCalendarNavigationUrl,
+  NavigationMethod,
+} from '@/utils/navigation';
 import { isMobile } from '@/utils/responsive';
 
 interface MyProgressProps {
@@ -25,7 +29,7 @@ interface MyProgressProps {
 
 const MyProgress: React.FC<MyProgressProps> = ({ onWeekSelect }) => {
   const { t, lang } = useTranslation('quranic-calendar');
-  const router = useRouter();
+  const { navigateWithAudioHandling } = useAudioNavigation();
 
   // Get month data for the carousel
   const { monthRows, monthSlides } = useMonthsData();
@@ -50,8 +54,14 @@ const MyProgress: React.FC<MyProgressProps> = ({ onWeekSelect }) => {
 
   const onTrackingButtonClick = useCallback(() => {
     logButtonClick('quranic_calendar_start_tracking');
-    router.replace(getLoginNavigationUrl(getQuranicCalendarNavigationUrl()));
-  }, [router]);
+    navigateWithAudioHandling(
+      getLoginNavigationUrl(getQuranicCalendarNavigationUrl()),
+      undefined,
+      NavigationMethod.Replace,
+    )();
+  }, [navigateWithAudioHandling]);
+
+  // Not used in this component - functionality moved to JoinQuranicCalendarButton
 
   return (
     <div className={styles.container}>

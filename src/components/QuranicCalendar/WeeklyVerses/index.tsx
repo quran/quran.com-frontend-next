@@ -1,6 +1,5 @@
 import React, { useContext, useState } from 'react';
 
-import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
 import ActionButtons from './ActionButtons';
@@ -12,6 +11,7 @@ import styles from './WeeklyVerses.module.scss';
 import Spinner from '@/dls/Spinner/Spinner';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import useGetUserQuranProgramEnrollment from '@/hooks/auth/useGetUserQuranProgramEnrollment';
+import useAudioNavigation from '@/hooks/useAudioNavigation';
 import { ActivityDayType } from '@/types/auth/ActivityDay';
 import QuranProgramWeekResponse from '@/types/auth/QuranProgramWeekResponse';
 import { updateActivityDay } from '@/utils/auth/api';
@@ -19,7 +19,7 @@ import { QURANIC_CALENDAR_PROGRAM_ID } from '@/utils/auth/constants';
 import { isLoggedIn } from '@/utils/auth/login';
 import { getChapterData } from '@/utils/chapter';
 import { logButtonClick } from '@/utils/eventLogger';
-import { getLoginNavigationUrl, getQuranicCalendarNavigationUrl } from '@/utils/navigation';
+import { getQuranicCalendarNavigationUrl } from '@/utils/navigation';
 import { parseVerseRange } from '@/utils/verseKeys';
 import DataContext from 'src/contexts/DataContext';
 
@@ -45,7 +45,7 @@ const WeeklyVerses: React.FC<Props> = ({ weekNumber, weekRanges, isLoading, week
   });
 
   const toast = useToast();
-  const router = useRouter();
+  const { navigateWithAudioHandling } = useAudioNavigation();
 
   const [
     { chapter: fromChapter, verse: fromVerse, verseKey: rangeFrom },
@@ -63,7 +63,7 @@ const WeeklyVerses: React.FC<Props> = ({ weekNumber, weekRanges, isLoading, week
   const onMarkAsCompletedClick = async () => {
     logButtonClick('quran_calendar_pdf_completed', { weekNumber, weekRanges });
     if (!isLoggedIn()) {
-      router.push(getLoginNavigationUrl(getQuranicCalendarNavigationUrl()));
+      navigateWithAudioHandling(getQuranicCalendarNavigationUrl())();
     } else if (!isCompleted) {
       setIsMarkingAsCompleted(true);
       try {

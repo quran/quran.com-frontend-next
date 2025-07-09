@@ -10,12 +10,13 @@ import styles from './JoinQuranicCalendarButton.module.scss';
 
 import Button, { ButtonShape, ButtonSize, ButtonType } from '@/dls/Button/Button';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
+import useAudioNavigation from '@/hooks/useAudioNavigation';
 import NotificationBellIcon from '@/icons/notification-bell.svg';
 import { isLoggedIn } from '@/utils/auth/login';
 import { followUser, isUserFollowed } from '@/utils/auth/qf/api';
 import { logButtonClick } from '@/utils/eventLogger';
 import { toLocalizedDate, toLocalizedNumber } from '@/utils/locale';
-import { getLoginNavigationUrl, getQuranicCalendarNavigationUrl } from '@/utils/navigation';
+import { getQuranicCalendarNavigationUrl, NavigationMethod } from '@/utils/navigation';
 
 const QC_USERNAME = 'calendar';
 
@@ -33,6 +34,7 @@ const JoinQuranicCalendarButton: React.FC<Props> = ({
   const [isLoading, setIsLoading] = useState(false);
   const [hasJoined, setHasJoined] = useState(false);
   const [hasError, setHasError] = useState(false);
+  const { navigateWithAudioHandling } = useAudioNavigation();
 
   useEffect(() => {
     if (isLoggedIn()) {
@@ -51,8 +53,20 @@ const JoinQuranicCalendarButton: React.FC<Props> = ({
   }, []);
 
   const router = useRouter();
-  const onClick = () => {
+  const onJoinQuranicCalendarClicked = () => {
     logButtonClick('join_quranic_calendar');
+    if (!isLoggedIn()) {
+      navigateWithAudioHandling(
+        getQuranicCalendarNavigationUrl(),
+        undefined,
+        NavigationMethod.Replace,
+      )();
+    } else {
+      router.push(getQuranicCalendarNavigationUrl());
+    }
+  };
+
+  const onClick = () => {
     if (isLoggedIn()) {
       setIsLoading(true);
       followUser(QC_USERNAME)
@@ -71,7 +85,7 @@ const JoinQuranicCalendarButton: React.FC<Props> = ({
           setIsLoading(false);
         });
     } else {
-      router.replace(getLoginNavigationUrl(getQuranicCalendarNavigationUrl()));
+      onJoinQuranicCalendarClicked();
     }
   };
 

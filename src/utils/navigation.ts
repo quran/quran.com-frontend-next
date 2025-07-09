@@ -200,6 +200,11 @@ export enum QuranicCalendarRangesNavigationSettings {
   DefaultSettings = 'defaultSettings',
 }
 
+export enum NavigationMethod {
+  Push = 'push',
+  Replace = 'replace',
+}
+
 export const getQuranicCalendarRangesNavigationUrl = (
   ranges: string,
   settings: QuranicCalendarRangesNavigationSettings,

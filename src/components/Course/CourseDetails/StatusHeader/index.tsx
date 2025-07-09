@@ -8,9 +8,10 @@ import styles from './StatusHeader.module.scss';
 
 import StartOrContinueLearning from '@/components/Course/Buttons/StartOrContinueLearning';
 import CourseFeedback, { FeedbackSource } from '@/components/Course/CourseFeedback';
-import Button from '@/dls/Button/Button';
+import Button from '@/components/dls/Button/Button';
 import Pill from '@/dls/Pill';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
+import useAudioNavigation from '@/hooks/useAudioNavigation';
 import useMutateWithoutRevalidation from '@/hooks/useMutateWithoutRevalidation';
 import { Course } from '@/types/auth/Course';
 import { enrollUser } from '@/utils/auth/api';
@@ -20,7 +21,7 @@ import { logButtonClick } from '@/utils/eventLogger';
 import {
   getCourseNavigationUrl,
   getLessonNavigationUrl,
-  getLoginNavigationUrl,
+  NavigationMethod,
 } from '@/utils/navigation';
 
 type Props = {
@@ -35,6 +36,7 @@ const StatusHeader: React.FC<Props> = ({ course, isCTA = false }) => {
   const router = useRouter();
   const { t } = useTranslation('learn');
   const mutate = useMutateWithoutRevalidation();
+  const { navigateWithAudioHandling } = useAudioNavigation();
 
   const onEnrollClicked = () => {
     if (isLoggedIn()) {
@@ -71,7 +73,11 @@ const StatusHeader: React.FC<Props> = ({ course, isCTA = false }) => {
         });
     } else {
       logButtonClick('guest_enroll_course', { courseId: id, isCTA });
-      router.replace(getLoginNavigationUrl(getCourseNavigationUrl(slug)));
+      navigateWithAudioHandling(
+        getCourseNavigationUrl(slug),
+        undefined,
+        NavigationMethod.Replace,
+      )();
     }
   };
 

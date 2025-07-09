@@ -8,7 +8,7 @@ type LinkContainerProps = {
   href?: string;
   isExternalLink?: boolean;
   children: React.ReactNode;
-  onClick?: () => void;
+  onClick?: (e: React.MouseEvent) => void;
 };
 
 const LinkContainer = ({ href, isExternalLink, children, onClick }: LinkContainerProps) => {

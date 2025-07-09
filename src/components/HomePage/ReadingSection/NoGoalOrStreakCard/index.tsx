@@ -5,6 +5,7 @@ import useTranslation from 'next-translate/useTranslation';
 import Card from '@/components/HomePage/Card';
 import styles from '@/components/HomePage/ReadingSection/ReadingSection.module.scss';
 import IconContainer, { IconSize } from '@/dls/IconContainer/IconContainer';
+import useAudioNavigation from '@/hooks/useAudioNavigation';
 import CirclesIcon from '@/icons/circles.svg';
 import ArrowIcon from '@/public/icons/arrow.svg';
 import { isLoggedIn } from '@/utils/auth/login';
@@ -12,6 +13,9 @@ import { getLoginNavigationUrl, getReadingGoalNavigationUrl } from '@/utils/navi
 
 const NoGoalOrStreakCard = () => {
   const { t } = useTranslation('home');
+  const { navigateWithAudioHandling } = useAudioNavigation();
+
+  const handleCardClick = navigateWithAudioHandling(getReadingGoalNavigationUrl());
 
   return (
     <Card
@@ -20,6 +24,7 @@ const NoGoalOrStreakCard = () => {
           ? getReadingGoalNavigationUrl()
           : getLoginNavigationUrl(getReadingGoalNavigationUrl())
       }
+      onClick={handleCardClick}
     >
       <div className={styles.cardOuterContainer}>
         <div className={styles.cardWithIcon}>

@@ -8,6 +8,7 @@ import styles from './ProfileAvatarButton.module.scss';
 
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
+import useAudioNavigation from '@/hooks/useAudioNavigation';
 import ClockIcon from '@/icons/clock.svg';
 import ArrowIcon from '@/icons/east.svg';
 import ReaderIcon from '@/icons/learning-plan.svg';
@@ -35,6 +36,7 @@ const ProfileAvatarButton = () => {
   const router = useRouter();
   const dispatch = useDispatch();
   const isUserLoggedIn = isLoggedIn();
+  const { navigateWithAudioHandling } = useAudioNavigation();
 
   const onTriggerClicked = () => {
     dispatch({ type: setIsSidebarNavigationVisible.type, payload: false });
@@ -135,7 +137,9 @@ const ProfileAvatarButton = () => {
       variant={ButtonVariant.Simplified}
       size={ButtonSize.Small}
       href={getLoginNavigationUrl(router.asPath)}
-      onClick={onTriggerClicked}
+      onClick={navigateWithAudioHandling(getLoginNavigationUrl(router.asPath), () => {
+        onTriggerClicked();
+      })}
       id="login-button"
       className={styles.loginButton}
     >

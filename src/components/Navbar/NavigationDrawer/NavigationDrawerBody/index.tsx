@@ -9,6 +9,7 @@ import styles from './NavigationDrawerBody.module.scss';
 
 import FundraisingBanner from '@/components/Fundraising/FundraisingBanner';
 import Link, { LinkVariant } from '@/dls/Link/Link';
+import useAudioNavigation from '@/hooks/useAudioNavigation';
 import IconDevelopers from '@/icons/developers.svg';
 import IconFeedback from '@/icons/feedback.svg';
 import IconHome from '@/icons/home.svg';
@@ -22,6 +23,11 @@ import IconRadio from '@/icons/radio.svg';
 
 const NavigationDrawerBody = () => {
   const { t } = useTranslation('common');
+  const { navigateWithAudioHandling } = useAudioNavigation();
+
+  const createAudioNavHandler = (url: string) => (e: React.MouseEvent) => {
+    navigateWithAudioHandling(url)(e);
+  };
   return (
     <div className={styles.listItemsContainer}>
       <FundraisingBanner />
@@ -29,8 +35,18 @@ const NavigationDrawerBody = () => {
       <NavigationDrawerItem title={t('home')} icon={<IconHome />} href="/" />
       <NavigationDrawerItem href="/radio" title={t('quran-radio')} icon={<IconRadio2 />} />
       <NavigationDrawerItem href="/reciters" title={t('reciters')} icon={<IconRadio />} />
-      <NavigationDrawerItem title={t('about')} icon={<IconInfo />} href="/about-us" />
-      <NavigationDrawerItem title={t('developers')} icon={<IconDevelopers />} href="/developers" />
+      <NavigationDrawerItem
+        title={t('about')}
+        icon={<IconInfo />}
+        href="/about-us"
+        onClick={createAudioNavHandler('/about-us')}
+      />
+      <NavigationDrawerItem
+        title={t('developers')}
+        icon={<IconDevelopers />}
+        href="/developers"
+        onClick={createAudioNavHandler('/developers')}
+      />
       <NavigationDrawerItem
         title={t('product-updates')}
         icon={<IconProductUpdates />}
@@ -42,7 +58,12 @@ const NavigationDrawerBody = () => {
         href="https://feedback.quran.com/"
         isExternalLink
       />
-      <NavigationDrawerItem title={t('help')} icon={<IconQuestionMark />} href="/support" />
+      <NavigationDrawerItem
+        title={t('help')}
+        icon={<IconQuestionMark />}
+        href="/support"
+        onClick={createAudioNavHandler('/support')}
+      />
       <h3 className={styles.subtitle}>{t('our-projects')}</h3>
       <p className={styles.projectsDesc}>
         <Trans

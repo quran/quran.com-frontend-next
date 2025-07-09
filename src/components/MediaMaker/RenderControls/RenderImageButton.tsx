@@ -1,7 +1,6 @@
 import React, { MutableRefObject, useCallback, useEffect, useRef } from 'react';
 
 import { PlayerRef } from '@remotion/player';
-import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
 import MonthlyMediaFileCounter from './MonthlyMediaFileCounter';
@@ -9,13 +8,14 @@ import MonthlyMediaFileCounter from './MonthlyMediaFileCounter';
 import Button from '@/dls/Button/Button';
 import { RenderStatus, useGenerateMediaFile } from '@/hooks/auth/media/useGenerateMediaFile';
 import useGetMediaFilesCount from '@/hooks/auth/media/useGetMediaFilesCount';
+import useAudioNavigation from '@/hooks/useAudioNavigation';
 import IconDownload from '@/icons/download.svg';
 import { MediaType } from '@/types/Media/GenerateMediaFileRequest';
 import MediaRenderError from '@/types/Media/MediaRenderError';
 import { isLoggedIn } from '@/utils/auth/login';
 import { logButtonClick } from '@/utils/eventLogger';
 import { mutateGeneratedMediaCounter } from '@/utils/media/utils';
-import { getLoginNavigationUrl, getQuranMediaMakerNavigationUrl } from '@/utils/navigation';
+import { getQuranMediaMakerNavigationUrl, NavigationMethod } from '@/utils/navigation';
 
 type Props = {
   inputProps: any;
@@ -28,9 +28,9 @@ const RenderImageButton: React.FC<Props> = ({ inputProps, playerRef, isFetching 
   const { renderMedia, state, undo } = useGenerateMediaFile(inputProps);
   const { data, mutate } = useGetMediaFilesCount(MediaType.IMAGE);
   const previousFrame = useRef<number>();
-  const router = useRouter();
   const downloadButtonRef = React.useRef<HTMLParagraphElement>();
   const shouldRerender = useRef<boolean>(false);
+  const { navigateWithAudioHandling } = useAudioNavigation();
 
   const getCurrentFrame = useCallback(() => playerRef?.current?.getCurrentFrame(), [playerRef]);
   const getIsPlayerPlaying = () => playerRef?.current?.isPlaying();
@@ -58,7 +58,11 @@ const RenderImageButton: React.FC<Props> = ({ inputProps, playerRef, isFetching 
       if (isLoggedIn()) {
         triggerRenderImage();
       } else {
-        router.replace(getLoginNavigationUrl(getQuranMediaMakerNavigationUrl()));
+        navigateWithAudioHandling(
+          getQuranMediaMakerNavigationUrl(),
+          undefined,
+          NavigationMethod.Replace,
+        )();
       }
     } else if (isRenderingOrDone) {
       logButtonClick('download_image');
