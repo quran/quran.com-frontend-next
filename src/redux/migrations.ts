@@ -273,4 +273,11 @@ export default {
       isDonationPopupVisible: true,
     },
   }),
+  36: (state) => ({
+    ...state,
+    bookmarks: {
+      ...state.bookmarks,
+      bookmarkedPages: state.bookmarks?.bookmarkedPages || {},
+    },
+  }),
 };
