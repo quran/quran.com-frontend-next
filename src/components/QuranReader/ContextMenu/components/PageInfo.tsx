@@ -1,15 +1,18 @@
 import React, { useMemo } from 'react';
 
 import classNames from 'classnames';
+import useTranslation from 'next-translate/useTranslation';
 
 import styles from '../styles/ContextMenu.module.scss';
 
 import PageBookmarkAction from './PageBookmarkAction';
 
+import { toLocalizedNumber } from '@/utils/locale';
+
 interface PageInfoProps {
   juzNumber: string;
   hizbNumber: string;
-  pageNumber: string;
+  pageNumber: number;
   t: (key: string) => string;
   containerClassName?: string;
 }
@@ -25,9 +28,13 @@ const PageInfo: React.FC<PageInfoProps> = ({
   t,
   containerClassName,
 }) => {
+  const { lang } = useTranslation();
+
+  const localizedPageNumber = toLocalizedNumber(Number(pageNumber), lang);
+
   // Memoize the bookmark component to prevent unnecessary re-renders
   const bookmarkComponent = useMemo(() => {
-    return <PageBookmarkAction pageNumber={Number(pageNumber)} />;
+    return <PageBookmarkAction pageNumber={pageNumber} />;
   }, [pageNumber]);
 
   return (
@@ -35,7 +42,7 @@ const PageInfo: React.FC<PageInfoProps> = ({
       <div className={styles.primaryInfo}>
         {bookmarkComponent}
         <span>
-          {t('page')} {pageNumber}
+          {t('page')} {localizedPageNumber}
         </span>
       </div>
 
