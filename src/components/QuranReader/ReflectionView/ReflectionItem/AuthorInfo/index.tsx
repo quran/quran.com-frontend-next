@@ -13,6 +13,7 @@ import Reference from '@/types/QuranReflect/Reference';
 import { formatDateRelatively } from '@/utils/datetime';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getQuranReflectAuthorUrl } from '@/utils/quranReflect/navigation';
+import { ReflectionVerseReference } from 'types/QuranReflect/ReflectionVerseReference';
 
 type Props = {
   authorUsername: string;
@@ -51,10 +52,9 @@ const AuthorInfo: React.FC<Props> = ({
     logButtonClick('reflection_item_author');
   };
 
-  const referredVerseText = useMemo(
-    () => buildReferredVerseText(verseReferences, nonChapterVerseReferences, lang, t),
-    [verseReferences, nonChapterVerseReferences, lang, t],
-  );
+  const referredVerseText = useMemo(() => {
+    return buildReferredVerseText(verseReferences, lang, t);
+  }, [verseReferences, lang, t]);
 
   return (
     <div className={styles.authorInfo}>

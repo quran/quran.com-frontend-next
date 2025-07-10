@@ -36,7 +36,7 @@
       }
     }
   },
-  "answers": "",
+  "answers": "Respuestas",
   "aria": {
     "change-settings": "Cambiar configuración",
     "drawer-close": "Cerrar ventana desplegable.",
@@ -93,7 +93,7 @@
   },
   "ayah": "Aleya",
   "ayahs": "Aleyas",
-  "back": "",
+  "back": "Atrás",
   "beta": "Beta",
   "beyond-ramadan": "¡Crece más allá del Ramadán!",
   "bookmark": "Marcar",
@@ -118,10 +118,10 @@
   },
   "complete-sign-up": "Completa tu registro",
   "complete-signup": {
-    "description": "",
-    "title": "",
-    "verification-code": "",
-    "verification-code-sent-to": ""
+    "description": "Requerimos la siguiente información faltante para completar su registro.",
+    "title": "Completa tu registro",
+    "verification-code": "Código de verificación",
+    "verification-code-sent-to": "Código de verificación enviado a {{email}}"
   },
   "consents": {
     "communication": {
@@ -172,7 +172,7 @@
     "account-banned": "Lo sentimos, tu cuenta está bloqueada. Contacta con Quran.Foundation",
     "badRequest": "*Solicitud no válida",
     "banned": "*Lo sentimos, tu cuenta está bloqueada. Contacta con Quran.Foundation",
-    "complete-signup-failed": "",
+    "complete-signup-failed": "No se pudo completar el registro. Inténtalo de nuevo.",
     "confirm": "*Confirmar contraseña no coincide con la contraseña",
     "email": "*¡Formato de correo electrónico no válido!",
     "exactLength": "*El valor debe ser la longitud exacta",
@@ -219,7 +219,7 @@
     "translation-font-size": "Tamaño de fuente de la traducción"
   },
   "footer": {
-    "description": "Quran.com es una plataforma confiable utilizada por millones de personas en todo el mundo para leer, buscar, escuchar y reflexionar sobre el Corán en varios idiomas. Ofrece traducciones, tafsir, recitaciones, traducción palabra por palabra y herramientas para un estudio más profundo, lo que hace que el Corán sea accesible para todos. <br/> <br/> Como Sadaqah Jariyah, Quran.com se dedica a ayudar a las personas a conectarse profundamente con el Corán. Con el apoyo de <link>Quran.Foundation</link>, una organización sin fines de lucro 501(c)(3), Quran.com continúa creciendo como un recurso gratuito y valioso para todos, Alhamdullilah",
+    "description": "Quran.com es una plataforma confiable utilizada por millones de personas en todo el mundo para leer, buscar, escuchar y reflexionar sobre el Corán en varios idiomas. Ofrece traducciones, tafsir, recitaciones, traducción palabra por palabra y herramientas para un estudio más profundo, haciendo que el Corán sea accesible para todos. <br/> <br/> Como Sadaqah Jariyah, Quran.com se dedica a ayudar a las personas a conectar profundamente con el Corán. Con el apoyo de <link> Quran.Foundation </link>, una organización sin fines de lucro 501(c)(3), Quran.com continúa creciendo como un recurso gratuito y valioso para todos, Alhamdulillah.",
     "hiring": "¡Estamos contratando! Únete al equipo de QuranFoundation y contribuye a nuestra misión. <link> Postúlate ahora </link>",
     "rights": "Reservados todos los derechos",
     "title": "Lea, escuche, busque y reflexione sobre el Corán"
@@ -263,7 +263,7 @@
   "learning-plans": "Planes de aprendizaje",
   "less": "Menos",
   "lessons": "Lecciones",
-  "listen": "",
+  "listen": "Escuchar",
   "loading": "Cargando",
   "login": "Acceso",
   "logout": "Cerrar sesión",
@@ -283,11 +283,11 @@
   "next-ayah": "Aleya siguiente",
   "no": "No",
   "no-notifications": "No hay notificaciones todavía.",
-  "no-verses-available": "",
+  "no-verses-available": "No hay versos disponibles",
   "none": "Ninguna",
   "not-now": "Ahora no.",
   "notes": {
-    "label": "",
+    "label": "Notas",
     "title": "Mis notas y reflexiones"
   },
   "notification-settings": "Configuración de notificaciones.",
@@ -388,10 +388,10 @@
     "word-tooltip-helper": "Mostrar la traducción o transliteración al pasar el cursor o hacer clic en la palabra"
   },
   "share": "Compartir",
-  "share-quran-description-line-1": "",
-  "share-quran-description-line-2": "",
-  "share-quran-description-line-3": "",
-  "share-quran-title": "",
+  "share-quran-description-line-1": "El Profeta ﷺ dijo:",
+  "share-quran-description-line-2": "'Transmítelo de mí, aunque sea un solo verso.'",
+  "share-quran-description-line-3": "(Bujari 3461)",
+  "share-quran-title": "¡Comparte el Corán!",
   "shared": "¡El enlace ha sido copiado al portapapeles!",
   "show-more": "Mostrar más",
   "sidebar": {
