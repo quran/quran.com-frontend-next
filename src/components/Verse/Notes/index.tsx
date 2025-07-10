@@ -11,7 +11,7 @@ import EmptyNotesIcon from '@/icons/notes-empty.svg';
 import NotesIcon from '@/icons/notes-filled.svg';
 import { isLoggedIn } from '@/utils/auth/login';
 import { logButtonClick } from '@/utils/eventLogger';
-import { getChapterWithStartingVerseUrl, getLoginNavigationUrl } from '@/utils/navigation';
+import { getChapterWithStartingVerseUrl } from '@/utils/navigation';
 
 export enum VerseNotesTrigger {
   IconButton = 'button',
@@ -38,12 +38,10 @@ const VerseNotes = ({ verseKey, isTranslationView, hasNotes }: VerseNotesProps) 
 
     if (!isUserLoggedIn) {
       try {
-        navigateWithAudioHandling(
-          getLoginNavigationUrl(getChapterWithStartingVerseUrl(verseKey)),
-        )();
+        navigateWithAudioHandling(getChapterWithStartingVerseUrl(verseKey))();
       } catch {
         // If there's an error parsing the verseKey, navigate to chapter 1
-        navigateWithAudioHandling(getLoginNavigationUrl('/1'))();
+        navigateWithAudioHandling('/1')();
       }
     } else {
       setIsModalOpen(true);

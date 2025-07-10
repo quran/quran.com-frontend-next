@@ -166,7 +166,7 @@
 .markAsCompletedButton {
   border-color: var(--color-check) !important;
   color: var(--color-check) !important;
-  :hover {
+  &:hover {
     background-color: var(--color-check) !important;
     color: var(--color-text-white) !important;
   }

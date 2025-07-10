@@ -137,7 +137,7 @@ const ProfileAvatarButton = () => {
       variant={ButtonVariant.Simplified}
       size={ButtonSize.Small}
       href={getLoginNavigationUrl(router.asPath)}
-      onClick={navigateWithAudioHandling(getLoginNavigationUrl(router.asPath), () => {
+      onClick={navigateWithAudioHandling(router.asPath, () => {
         onTriggerClicked();
       })}
       id="login-button"
