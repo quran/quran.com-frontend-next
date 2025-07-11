@@ -57,9 +57,15 @@ const useContextMenuState = () => {
     return toLocalizedNumber(Number(hizb), lang);
   }, [hizb, lang]);
 
+  // Localized page number
   const localizedPageNumber = useMemo(() => {
     return toLocalizedNumber(Number(page), lang);
   }, [page, lang]);
+
+  // Non-localized page number
+  const pageNumber = useMemo(() => {
+    return Number(page);
+  }, [page]);
 
   // Progress calculation
   const progress = useMemo(() => {
@@ -96,6 +102,7 @@ const useContextMenuState = () => {
     juzNumber,
     localizedHizb,
     localizedPageNumber,
+    pageNumber,
     progress,
 
     // Translations
