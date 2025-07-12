@@ -27,7 +27,7 @@ const ShareQuranModal: React.FC<Props> = ({ isOpen, onClose, verse }) => {
   const shareURL = verse
     ? (() => {
         const [chapterId, verseNumber] = getVerseAndChapterNumbersFromKey(verse.verseKey);
-        return `${getBasePath()}/surah/${chapterId}/${verseNumber}`;
+        return `${getBasePath()}/${chapterId}/${verseNumber}`;
       })()
     : `${getBasePath()}${getFirstTimeReadingGuideNavigationUrl()}`;
 
