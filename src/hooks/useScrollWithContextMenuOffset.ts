@@ -19,7 +19,7 @@ const useScrollWithContextMenuOffset = <T extends HTMLElement>(): [() => void, R
         elementRef.current.getBoundingClientRect().top + currentScrollPosition;
 
       // Context menu height and responsive padding
-      const contextMenuHeight = 70;
+      const contextMenuHeight = DEFAULT_CONTEXT_MENU_HEIGHT;
       const additionalPadding = isMobile ? 22 : -23;
 
       window.scrollTo({
