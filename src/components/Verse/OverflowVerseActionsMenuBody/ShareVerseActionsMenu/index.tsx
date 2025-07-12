@@ -12,7 +12,7 @@ import CopyLinkIcon from '@/icons/copy-link.svg';
 import VideoIcon from '@/icons/video.svg';
 import PreviewMode from '@/types/Media/PreviewMode';
 import QueryParam from '@/types/QueryParam';
-import Verse from '@/types/Verse';
+import { WordVerse } from '@/types/Word';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getQuranMediaMakerNavigationUrl } from '@/utils/navigation';
 import { getWindowOrigin } from '@/utils/url';
@@ -38,7 +38,7 @@ export const copyLink = (
 };
 
 type Props = {
-  verse: Verse;
+  verse: WordVerse;
   isTranslationView: boolean;
   onActionTriggered?: () => void;
   setSelectedMenu: (selectedMenu: VerseActionsMenuType) => void;

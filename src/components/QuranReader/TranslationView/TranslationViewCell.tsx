@@ -6,6 +6,7 @@ import classNames from 'classnames';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 
+import getTranslationsLabelString from '../ReadingView/utils/translation';
 import {
   verseFontChanged,
   verseTranslationChanged,
@@ -23,6 +24,7 @@ import Separator from '@/dls/Separator/Separator';
 import useScroll, { SMOOTH_SCROLL_TO_TOP } from '@/hooks/useScrollToElement';
 import { selectEnableAutoScrolling } from '@/redux/slices/AudioPlayer/state';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
+import { WordVerse } from '@/types/Word';
 import { getVerseWords, makeVerseKey } from '@/utils/verse';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import Translation from 'types/Translation';
@@ -65,6 +67,17 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
     }
   }, [isHighlighted, scrollToSelectedItem, enableAutoScrolling, startingVerse, verseIndex]);
 
+  const translationsLabel = getTranslationsLabelString(verse.translations);
+  const translationsCount = verse.translations?.length || 0;
+  const wordVerse: WordVerse = {
+    chapterId: verse.chapterId,
+    verseKey: verse.verseKey,
+    verseNumber: verse.verseNumber,
+    timestamps: verse.timestamps,
+    translationsLabel,
+    translationsCount,
+  };
+
   return (
     <div ref={selectedItemRef}>
       <div
@@ -72,7 +85,7 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
           [styles.highlightedContainer]: isHighlighted,
         })}
       >
-        <TopActions verse={verse} bookmarksRangeUrl={bookmarksRangeUrl} hasNotes={hasNotes} />
+        <TopActions verse={wordVerse} bookmarksRangeUrl={bookmarksRangeUrl} hasNotes={hasNotes} />
 
         <div className={classNames(styles.contentContainer)}>
           <div className={styles.arabicVerseContainer}>

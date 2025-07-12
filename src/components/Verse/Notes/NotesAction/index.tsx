@@ -9,7 +9,7 @@ import useCountRangeNotes from '@/hooks/auth/useCountRangeNotes';
 import useSafeTimeout from '@/hooks/useSafeTimeout';
 import EmptyNotesIcon from '@/icons/notes-empty.svg';
 import NotesIcon from '@/icons/notes-filled.svg';
-import Verse from '@/types/Verse';
+import { WordVerse } from '@/types/Word';
 import { isLoggedIn } from '@/utils/auth/login';
 import { logButtonClick, logEvent } from '@/utils/eventLogger';
 import { getChapterWithStartingVerseUrl, getLoginNavigationUrl } from '@/utils/navigation';
@@ -17,7 +17,7 @@ import AudioPlayerEventType from '@/xstate/actors/audioPlayer/types/AudioPlayerE
 import { AudioPlayerMachineContext } from '@/xstate/AudioPlayerMachineContext';
 
 type Props = {
-  verse: Verse;
+  verse: WordVerse;
   onActionTriggered?: () => void;
 };
 
