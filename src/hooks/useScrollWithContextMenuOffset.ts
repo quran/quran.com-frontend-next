@@ -20,10 +20,12 @@ const useScrollWithContextMenuOffset = <T extends HTMLElement>(): [() => void, R
 
       // Context menu height and responsive padding
       const contextMenuHeight = DEFAULT_CONTEXT_MENU_HEIGHT;
-      const additionalPadding = isMobile ? 22 : -23;
+      const mobilePaddingOffset = 22; // Padding offset for mobile devices
+      const desktopPaddingOffset = -23; // Padding offset for desktop devices
+      const paddingOffset = isMobile ? mobilePaddingOffset : desktopPaddingOffset;
 
       window.scrollTo({
-        top: elementPosition - contextMenuHeight - additionalPadding,
+        top: elementPosition - contextMenuHeight - paddingOffset,
         behavior: 'smooth',
       });
     }
