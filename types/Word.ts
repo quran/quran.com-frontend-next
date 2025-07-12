@@ -1,5 +1,6 @@
 import Translation from './Translation';
 import Transliteration from './Transliteration';
+import VerseTiming from './VerseTiming';
 
 export enum CharType {
   Word = 'word',
@@ -12,13 +13,7 @@ export interface WordVerse {
   verseNumber: number;
   verseKey: string;
   chapterId: number | string;
-  timestamps?: {
-    verseKey: string;
-    timestampFrom: number;
-    timestampTo: number;
-    duration: number;
-    segments: [number[]];
-  };
+  timestamps?: VerseTiming;
   translationsLabel: string;
   translationsCount: number;
 }

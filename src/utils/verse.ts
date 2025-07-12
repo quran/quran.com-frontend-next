@@ -10,7 +10,7 @@ import { parseVerseRange } from './verseKeys';
 
 import ChaptersData from 'types/ChaptersData';
 import Verse from 'types/Verse';
-import Word from 'types/Word';
+import Word, { WordVerse } from 'types/Word';
 
 const COLON_SPLITTER = ':';
 
@@ -252,17 +252,33 @@ export const getVerseWords = (verse: Verse): Word[] => {
     words.push({
       ...word,
       hizbNumber: verse.hizbNumber,
-      verse: {
-        verseNumber: verse.verseNumber,
-        verseKey: verse.verseKey,
-        chapterId: verse.chapterId,
-        timestamps: verse.timestamps,
-        translationsLabel,
-        translationsCount,
-      },
+      verse: constructWordVerse(verse, translationsLabel, translationsCount),
     });
   });
   return words;
+};
+
+/**
+ * Constructs a WordVerse object from a Verse object.
+ *
+ * @param {Verse} verse - The verse object to extract data from
+ * @param {string} translationsLabel - The translations label string
+ * @param {number} translationsCount - The number of translations
+ * @returns {WordVerse} A WordVerse object
+ */
+export const constructWordVerse = (
+  verse: Verse,
+  translationsLabel: string,
+  translationsCount: number,
+): WordVerse => {
+  return {
+    verseNumber: verse.verseNumber,
+    verseKey: verse.verseKey,
+    chapterId: verse.chapterId,
+    timestamps: verse.timestamps,
+    translationsLabel,
+    translationsCount,
+  };
 };
 
 /**

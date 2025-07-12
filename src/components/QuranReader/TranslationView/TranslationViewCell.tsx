@@ -25,7 +25,7 @@ import useScroll, { SMOOTH_SCROLL_TO_TOP } from '@/hooks/useScrollToElement';
 import { selectEnableAutoScrolling } from '@/redux/slices/AudioPlayer/state';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
 import { WordVerse } from '@/types/Word';
-import { getVerseWords, makeVerseKey } from '@/utils/verse';
+import { constructWordVerse, getVerseWords, makeVerseKey } from '@/utils/verse';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import Translation from 'types/Translation';
 import Verse from 'types/Verse';
@@ -69,14 +69,7 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
 
   const translationsLabel = getTranslationsLabelString(verse.translations);
   const translationsCount = verse.translations?.length || 0;
-  const wordVerse: WordVerse = {
-    chapterId: verse.chapterId,
-    verseKey: verse.verseKey,
-    verseNumber: verse.verseNumber,
-    timestamps: verse.timestamps,
-    translationsLabel,
-    translationsCount,
-  };
+  const wordVerse: WordVerse = constructWordVerse(verse, translationsLabel, translationsCount);
 
   return (
     <div ref={selectedItemRef}>
