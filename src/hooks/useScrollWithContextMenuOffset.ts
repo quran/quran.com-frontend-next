@@ -1,0 +1,35 @@
+import { useCallback, useRef, RefObject } from 'react';
+
+import useIsMobile from '@/hooks/useIsMobile';
+
+/**
+ * A hook that scrolls to a specific element in the DOM with an offset for the context menu.
+ * The scrolling will only happen when executeScroll function is invoked.
+ *
+ * @returns {[() => void, RefObject<T>]} A tuple containing the scroll function and the element ref
+ */
+const useScrollWithContextMenuOffset = <T extends HTMLElement>(): [() => void, RefObject<T>] => {
+  const elementRef = useRef<T>(null);
+  const isMobile = useIsMobile();
+
+  const executeScroll = useCallback((): void => {
+    if (elementRef.current) {
+      const currentScrollPosition = window.scrollY;
+      const elementPosition =
+        elementRef.current.getBoundingClientRect().top + currentScrollPosition;
+
+      // Context menu height and responsive padding
+      const contextMenuHeight = 70;
+      const additionalPadding = isMobile ? 22 : -23;
+
+      window.scrollTo({
+        top: elementPosition - contextMenuHeight - additionalPadding,
+        behavior: 'smooth',
+      });
+    }
+  }, [isMobile]);
+
+  return [executeScroll, elementRef];
+};
+
+export default useScrollWithContextMenuOffset;
