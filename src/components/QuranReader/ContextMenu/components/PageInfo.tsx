@@ -12,7 +12,7 @@ import { toLocalizedNumber } from '@/utils/locale';
 interface PageInfoProps {
   juzNumber: string;
   hizbNumber: string;
-  pageNumber: string | number;
+  pageNumber: number;
   t: (key: string) => string;
   containerClassName?: string;
 }
@@ -34,7 +34,7 @@ const PageInfo: React.FC<PageInfoProps> = ({
 
   // Memoize the bookmark component to prevent unnecessary re-renders
   const bookmarkComponent = useMemo(() => {
-    return <PageBookmarkAction pageNumber={Number(pageNumber || 1)} />;
+    return <PageBookmarkAction pageNumber={pageNumber} />;
   }, [pageNumber]);
 
   return (
