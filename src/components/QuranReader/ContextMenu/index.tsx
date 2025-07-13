@@ -37,7 +37,7 @@ const ContextMenu: React.FC = (): JSX.Element | null => {
     chapterData,
     juzNumber,
     localizedHizb,
-    localizedPageNumber,
+    pageNumber,
     progress,
 
     // Translations
@@ -72,7 +72,7 @@ const ContextMenu: React.FC = (): JSX.Element | null => {
             <PageInfo
               juzNumber={juzNumber}
               hizbNumber={localizedHizb}
-              pageNumber={localizedPageNumber}
+              pageNumber={pageNumber}
               containerClassName={styles.pageInfoCustomContainerMobileScrolled}
               t={t}
             />
@@ -100,7 +100,7 @@ const ContextMenu: React.FC = (): JSX.Element | null => {
               <PageInfo
                 juzNumber={juzNumber}
                 hizbNumber={localizedHizb}
-                pageNumber={localizedPageNumber}
+                pageNumber={pageNumber}
                 containerClassName={styles.pageInfoCustomContainer}
                 t={t}
               />
