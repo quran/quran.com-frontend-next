@@ -2,6 +2,8 @@ import { useCallback, useRef, RefObject } from 'react';
 
 import useIsMobile from '@/hooks/useIsMobile';
 
+const DEFAULT_CONTEXT_MENU_HEIGHT = 70;
+
 /**
  * A hook that scrolls to a specific element in the DOM with an offset for the context menu.
  * The scrolling will only happen when executeScroll function is invoked.
