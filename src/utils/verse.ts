@@ -245,10 +245,10 @@ export const makeWordLocation = (verseKey: string, wordPosition: number): string
  */
 export const getVerseWords = (verse: Verse): Word[] => {
   const words = [];
-  verse.words.forEach((word) => {
-    const translationsLabel = getTranslationsLabelString(verse.translations);
-    const translationsCount = verse.translations?.length || 0;
+  const translationsLabel = getTranslationsLabelString(verse.translations);
+  const translationsCount = verse.translations?.length || 0;
 
+  verse.words.forEach((word) => {
     words.push({
       ...word,
       hizbNumber: verse.hizbNumber,

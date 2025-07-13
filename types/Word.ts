@@ -1,6 +1,6 @@
 import Translation from './Translation';
 import Transliteration from './Transliteration';
-import VerseTiming from './VerseTiming';
+import type VerseTiming from './VerseTiming';
 
 export enum CharType {
   Word = 'word',
