@@ -110,14 +110,7 @@ const WordByWordVerseAction: React.FC<Props> = ({
             fetcher={() => fetcher(makeVersesUrl(chapterId, lang, apiParams))}
             render={(data: VersesResponse) => {
               if (!data || !data.verses || data.verses.length === 0) {
-                return (
-                  <>
-                    <p className={styles.fallbackMessage}>{t('no-verses-available')}</p>
-                    <div className={styles.fallbackMessage}>
-                      {t('verse-key', { verseKey: verse.verseKey })}
-                    </div>
-                  </>
-                );
+                return <p className={styles.fallbackMessage}>{t('no-verses-available')}</p>;
               }
 
               const words = data.verses.map((verseItem) => getVerseWords(verseItem)).flat();
