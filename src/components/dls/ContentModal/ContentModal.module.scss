@@ -1,4 +1,5 @@
-@use 'src/styles/breakpoints';
+@use "src/styles/breakpoints";
+@use "src/styles/mixins/z-index" as z-index-mixins;
 
 $translateYDistance: 200px;
 
@@ -69,18 +70,7 @@ $translateYDistance: 200px;
   transition: opacity var(--transition-fast) ease;
 }
 
-/* Overlay z-index classes */
-.zIndexModal {
-  z-index: var(--z-index-modal); // 800
-}
-
-.zIndexHigh {
-  z-index: var(--z-index-high); // 999
-}
-
-.zIndexUltra {
-  z-index: var(--z-index-ultra); // 1200
-}
+@include z-index-mixins.z-index-variants;
 
 .fullScreen {
   @include breakpoints.smallerThanTablet {
@@ -136,19 +126,23 @@ $translateYDistance: 200px;
   }
 }
 
-.overlay[data-state='open'] {
+.overlay[data-state="open"] {
   animation: fadeIn var(--transition-regular);
 }
-.overlay[data-state='closed'] {
+.overlay[data-state="closed"] {
   animation: fadeOut var(--transition-regular);
 }
 
-.contentWrapper[data-state='open'] {
-  animation: contentIn var(--transition-regular) ease, fadeIn var(--transition-regular) ease;
+.contentWrapper[data-state="open"] {
+  animation:
+    contentIn var(--transition-regular) ease,
+    fadeIn var(--transition-regular) ease;
 }
 
-.contentWrapper[data-state='closed'] {
-  animation: contentOut var(--transition-regular) ease, fadeOut var(--transition-regular) ease;
+.contentWrapper[data-state="closed"] {
+  animation:
+    contentOut var(--transition-regular) ease,
+    fadeOut var(--transition-regular) ease;
 }
 
 .closeIcon {
