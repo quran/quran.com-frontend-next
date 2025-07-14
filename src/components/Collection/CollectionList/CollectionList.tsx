@@ -49,7 +49,12 @@ const CollectionList = () => {
 
   if (!data) return null;
 
-  const collections = data?.data || [];
+  // Filter out any duplicate collection IDs to prevent React key errors
+  const collections = data?.data
+    ? data.data.filter(
+        (collection, index, self) => index === self.findIndex((c) => c.id === collection.id),
+      )
+    : [];
 
   const onSortOptionChanged = (nextSortBy) => {
     logValueChange('collection_list', sortBy, nextSortBy);

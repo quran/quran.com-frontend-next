@@ -192,7 +192,7 @@ const SaveToCollectionAction: React.FC<Props> = ({
         .then(() => {
           mutateIsResourceBookmarked();
           mutateCollectionListData();
-          mutateBookmarkCollectionIdsData([...bookmarkCollectionIdsData, newCollection.id]);
+          mutateBookmarkCollectionIdsData();
           mutateBookmarksUrl();
         })
         .catch((err) => {
@@ -211,13 +211,19 @@ const SaveToCollectionAction: React.FC<Props> = ({
 
   const isDataReady = bookmarkCollectionIdsData && collectionListData;
 
+  // Ensure we have unique collection IDs by filtering out duplicates
   const collections = !isDataReady
     ? []
-    : (collectionListData.data.map((collection) => ({
-        id: collection.id,
-        name: collection.name,
-        checked: bookmarkCollectionIdsData?.includes(collection.id),
-      })) as Collection[]);
+    : (collectionListData.data
+        // Filter out any duplicate IDs to prevent React key errors
+        .filter(
+          (collection, index, self) => index === self.findIndex((c) => c.id === collection.id),
+        )
+        .map((collection) => ({
+          id: collection.id,
+          name: collection.name,
+          checked: bookmarkCollectionIdsData?.includes(collection.id),
+        })) as Collection[]);
 
   return (
     <>
