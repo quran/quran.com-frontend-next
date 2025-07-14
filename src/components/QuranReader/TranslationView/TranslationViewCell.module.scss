@@ -1,5 +1,5 @@
-@use "src/styles/breakpoints";
-@use "src/styles/utility";
+@use 'src/styles/breakpoints';
+@use 'src/styles/utility';
 
 .cellContainer {
   display: flex;
@@ -72,10 +72,6 @@
       @include utility.lighten-background-color;
     }
   }
-}
-
-.overlayMax {
-  z-index: var(--z-index-max);
 }
 
 .overlayModal {

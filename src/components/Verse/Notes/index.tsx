@@ -9,6 +9,7 @@ import styles from '@/components/QuranReader/TranslationView/TranslationViewCell
 import Button, { ButtonShape, ButtonSize, ButtonType, ButtonVariant } from '@/dls/Button/Button';
 import EmptyNotesIcon from '@/icons/notes-empty.svg';
 import NotesIcon from '@/icons/notes-filled.svg';
+import ZIndexVariant from '@/types/enums/ZIndexVariant';
 import { isLoggedIn } from '@/utils/auth/login';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getChapterWithStartingVerseUrl, getLoginNavigationUrl } from '@/utils/navigation';
@@ -78,7 +79,7 @@ const VerseNotes = ({ verseKey, isTranslationView, hasNotes }: VerseNotesProps) 
         isOpen={isModalOpen}
         onClose={onModalClose}
         verseKey={verseKey}
-        isOverlayMax
+        zIndexVariant={ZIndexVariant.HIGH}
         isBottomSheetOnMobile
       />
     </>

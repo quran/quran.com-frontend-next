@@ -1,5 +1,5 @@
-@use "src/styles/breakpoints";
-@use "src/components/dls/Modal/constants";
+@use 'src/styles/breakpoints';
+@use 'src/components/dls/Modal/constants';
 
 @keyframes fadeIn {
   from {
@@ -28,9 +28,21 @@
   inset: 0;
   z-index: var(--z-index-overlay);
 }
-.overlay[data-state="open"] {
+
+.zIndexModal {
+  z-index: var(--z-index-modal);
+}
+
+.zIndexHigh {
+  z-index: var(--z-index-high);
+}
+
+.zIndexUltra {
+  z-index: var(--z-index-ultra);
+}
+.overlay[data-state='open'] {
   animation: fadeIn constants.$animationDuration constants.$animationEasing;
 }
-.overlay[data-state="closed"] {
+.overlay[data-state='closed'] {
   animation: fadeOut constants.$animationDuration constants.$animationEasing;
 }
