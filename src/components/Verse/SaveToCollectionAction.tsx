@@ -221,7 +221,10 @@ const SaveToCollectionAction: React.FC<Props> = ({
 
   return (
     <>
-      <PopoverMenu.Item onClick={onMenuClicked} icon={<PlusIcon color="var(--color-grey-icons-new)" />}>
+      <PopoverMenu.Item
+        onClick={onMenuClicked}
+        icon={<PlusIcon color="var(--color-grey-icons-new)" />}
+      >
         {t('common:save-to-collection')}
       </PopoverMenu.Item>
       {isDataReady && (
