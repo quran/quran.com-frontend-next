@@ -22,7 +22,7 @@ import DataContext from 'src/contexts/DataContext';
 
 interface ChapterHeaderProps {
   chapterId: string;
-  translationName?: string;
+  translationsLabel?: string;
   translationsCount?: number;
   pageNumber: number;
   hizbNumber: number;
@@ -37,7 +37,7 @@ interface ChapterHeaderProps {
  */
 const ChapterHeader: React.FC<ChapterHeaderProps> = ({
   chapterId,
-  translationName,
+  translationsLabel,
   translationsCount,
   pageNumber,
   hizbNumber,
@@ -94,7 +94,7 @@ const ChapterHeader: React.FC<ChapterHeaderProps> = ({
               )
             }
           >
-            <span>{translationName}</span>
+            <span>{translationsLabel}</span>
           </Button>
         </div>
       </div>
