@@ -76,7 +76,10 @@ const TranslationsMenuItem: React.FC<Props> = ({ verse, onActionTriggered }) => 
 
   return (
     <>
-      <PopoverMenu.Item icon={<TranslationsIcon />} onClick={onMenuItemClicked}>
+      <PopoverMenu.Item
+        icon={<TranslationsIcon color="var(--color-grey-icons-new)" />}
+        onClick={onMenuItemClicked}
+      >
         {t('translations')}
       </PopoverMenu.Item>
       <ContentModal

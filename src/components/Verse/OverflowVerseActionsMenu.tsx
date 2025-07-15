@@ -57,15 +57,12 @@ const OverflowVerseActionsMenu: React.FC<Props> = ({
             className={classNames(
               cellStyles.iconContainer,
               cellStyles.verseAction,
-              {
-                [cellStyles.fadedVerseAction]: isTranslationView,
-              },
               'overflow-verse-actions-menu-trigger', // for onboarding
             )}
             ariaLabel={t('more')}
           >
             <span className={cellStyles.icon}>
-              <OverflowMenuIcon />
+              <OverflowMenuIcon color="var(--color-grey-icons-new)" />
             </span>
           </Button>
         }

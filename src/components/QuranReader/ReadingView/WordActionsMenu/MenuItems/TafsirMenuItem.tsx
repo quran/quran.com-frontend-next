@@ -47,7 +47,10 @@ const TafsirMenuItem: React.FC<Props> = ({ verse, onActionTriggered }) => {
 
   return (
     <>
-      <PopoverMenu.Item icon={<BookOpenIcon />} onClick={onMenuItemClicked}>
+      <PopoverMenu.Item
+        icon={<BookOpenIcon color="var(--color-grey-icons-new)" />}
+        onClick={onMenuItemClicked}
+      >
         {t('quran-reader:tafsirs')}
       </PopoverMenu.Item>
       <TafsirBody

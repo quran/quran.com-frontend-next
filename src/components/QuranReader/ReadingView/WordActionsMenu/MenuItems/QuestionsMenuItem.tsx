@@ -49,7 +49,13 @@ const QuestionsMenuItem: React.FC<Props> = ({ verse, onActionTriggered }) => {
     return (
       <>
         <PopoverMenu.Item
-          icon={isClarificationQuestion ? <LightbulbOnIcon /> : <LightbulbIcon />}
+          icon={
+            isClarificationQuestion ? (
+              <LightbulbOnIcon />
+            ) : (
+              <LightbulbIcon color="var(--color-grey-icons-new)" />
+            )
+          }
           onClick={onMenuItemClicked}
         >
           {t('answers')}

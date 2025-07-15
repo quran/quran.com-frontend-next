@@ -178,9 +178,9 @@ const BookmarkAction: React.FC<Props> = ({
   let bookmarkIcon = <Spinner />;
   if (!isVerseBookmarkedLoading) {
     bookmarkIcon = isVerseBookmarked ? (
-      <BookmarkedIcon style={{ color: 'var(--color-text-default)' }} />
+      <BookmarkedIcon color="var(--color-text-default)" />
     ) : (
-      <UnBookmarkedIcon />
+      <UnBookmarkedIcon color="var(--color-grey-icons-new)" />
     );
   }
 
@@ -195,9 +195,6 @@ const BookmarkAction: React.FC<Props> = ({
         className={classNames(
           styles.iconContainer,
           styles.verseAction,
-          {
-            [styles.fadedVerseAction]: isTranslationView && !isVerseBookmarked,
-          },
           'bookmark-verse-action-button',
         )}
         onClick={(e) => {

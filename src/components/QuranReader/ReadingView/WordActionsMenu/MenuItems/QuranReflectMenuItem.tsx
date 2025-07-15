@@ -41,7 +41,10 @@ const QuranReflectMenuItem: React.FC<Props> = ({ verse, onActionTriggered }) => 
 
   return (
     <>
-      <PopoverMenu.Item icon={<ChatIcon />} onClick={onMenuItemClicked}>
+      <PopoverMenu.Item
+        icon={<ChatIcon color="var(--color-grey-icons-new)" />}
+        onClick={onMenuItemClicked}
+      >
         {t('reflections-and-lessons')}
       </PopoverMenu.Item>
       <ReflectionBodyContainer

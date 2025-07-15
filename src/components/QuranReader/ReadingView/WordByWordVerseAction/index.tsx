@@ -59,7 +59,10 @@ const WordByWordVerseAction: React.FC<Props> = ({
 
   return (
     <>
-      <PopoverMenu.Item icon={<SearchIcon />} onClick={onIconClicked}>
+      <PopoverMenu.Item
+        icon={<SearchIcon color="var(--color-grey-icons-new)" />}
+        onClick={onIconClicked}
+      >
         {t('wbw')}
       </PopoverMenu.Item>
       <ContentModal

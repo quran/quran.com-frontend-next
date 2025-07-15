@@ -50,14 +50,12 @@ const ShareButton: React.FC<ShareButtonProps> = ({
       tooltip={t('share')}
       variant={ButtonVariant.Ghost}
       shape={ButtonShape.Circle}
-      className={classNames(styles.iconContainer, styles.verseAction, {
-        [styles.fadedVerseAction]: isTranslationView,
-      })}
+      className={classNames(styles.iconContainer, styles.verseAction)}
       onClick={handleClick}
       ariaLabel={t('share')}
     >
       <span className={styles.icon}>
-        <ShareIcon />
+        <ShareIcon color="var(--color-grey-icons-new)" />
       </span>
     </Button>
   );

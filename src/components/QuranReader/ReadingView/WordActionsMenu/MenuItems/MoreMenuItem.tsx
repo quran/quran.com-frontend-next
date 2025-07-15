@@ -4,7 +4,10 @@ import useTranslation from 'next-translate/useTranslation';
 
 import VerseActionsMenuType from '../types';
 
+import styles from './MoreMenuItem.module.scss';
+
 import PopoverMenu from '@/components/dls/PopoverMenu/PopoverMenu';
+import ChevronRightIcon from '@/icons/chevron-right.svg';
 import OverflowMenuIcon from '@/icons/menu_more_horiz.svg';
 import { logButtonClick } from '@/utils/eventLogger';
 
@@ -21,8 +24,14 @@ const MoreMenuItem: React.FC<Props> = ({ onMenuChange }) => {
   };
 
   return (
-    <PopoverMenu.Item icon={<OverflowMenuIcon />} onClick={onMoreClicked}>
-      {t('more')}
+    <PopoverMenu.Item
+      icon={<OverflowMenuIcon color="var(--color-grey-icons-new)" />}
+      onClick={onMoreClicked}
+    >
+      <div className={styles.menuWithChevron}>
+        {t('more')}
+        <ChevronRightIcon />
+      </div>
     </PopoverMenu.Item>
   );
 };

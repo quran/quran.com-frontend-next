@@ -6,7 +6,7 @@ import { RepetitionMode } from '../AudioPlayer/RepeatAudioModal/SelectRepetition
 import PopoverMenu from '../dls/PopoverMenu/PopoverMenu';
 
 import RepeatAudioModal from '@/components/AudioPlayer/RepeatAudioModal/RepeatAudioModal';
-import RepeatIcon from '@/icons/repeat.svg';
+import RepeatIcon from '@/icons/repeat-new.svg';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getChapterNumberFromKey } from '@/utils/verse';
 
@@ -37,7 +37,10 @@ const VerseActionRepeatAudio = ({ verseKey, isTranslationView }: VerseActionRepe
         isOpen={isModalOpen}
         onClose={() => setIsModalOpen(false)}
       />
-      <PopoverMenu.Item icon={<RepeatIcon />} onClick={onItemClicked}>
+      <PopoverMenu.Item
+        icon={<RepeatIcon color="var(--color-grey-icons-new)" />}
+        onClick={onItemClicked}
+      >
         {t('audio.player.repeat-1-verse')}
       </PopoverMenu.Item>
     </>

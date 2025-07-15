@@ -20,6 +20,7 @@ import {
   getVerseReflectionNavigationUrl,
   getVerseSelectedTafsirNavigationUrl,
 } from '@/utils/navigation';
+import { isSmallMobile } from '@/utils/responsive';
 import { getVerseAndChapterNumbersFromKey } from '@/utils/verse';
 
 /**
@@ -93,7 +94,7 @@ const BottomActions = ({ verseKey, isTranslationView = true }: BottomActionsProp
     },
     {
       id: TabId.REFLECTIONS,
-      label: t('reflections-and-lessons'),
+      label: isSmallMobile() ? t('reflections') : t('reflections-and-lessons'),
       icon: <ChatIcon />,
       onClick: createTabHandler(TabId.REFLECTIONS, () => getVerseReflectionNavigationUrl(verseKey)),
       condition: true,

@@ -55,7 +55,10 @@ const VerseActionAdvancedCopy = ({
 
   return (
     <>
-      <PopoverMenu.Item icon={<AdvancedCopyIcon />} onClick={onModalOpen}>
+      <PopoverMenu.Item
+        icon={<AdvancedCopyIcon color="var(--color-grey-icons-new)" />}
+        onClick={onModalOpen}
+      >
         {t('advanced-copy')}
       </PopoverMenu.Item>
       <ContentModal

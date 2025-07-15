@@ -82,7 +82,10 @@ const CopyMenuItem: React.FC<Props> = ({ verse, onActionTriggered }) => {
   };
 
   return (
-    <PopoverMenu.Item icon={<CopyIcon />} onClick={onCopyTextClicked}>
+    <PopoverMenu.Item
+      icon={<CopyIcon color="var(--color-grey-icons-new)" />}
+      onClick={onCopyTextClicked}
+    >
       {isCopied ? t('copied') : t('quran-reader:copy-verse')}
     </PopoverMenu.Item>
   );

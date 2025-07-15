@@ -44,7 +44,11 @@ const PlayAudioMenuItem: React.FC<PlayAudioMenuItemProps> = ({ verse, onActionTr
   }, [audioService, chapterId, onActionTriggered, verseNumber]);
 
   return (
-    <PopoverMenu.Item icon={<PlayIcon />} onClick={onPlayClicked} isDisabled={isVerseLoading}>
+    <PopoverMenu.Item
+      icon={<PlayIcon color="var(--color-grey-icons-new)" />}
+      onClick={onPlayClicked}
+      isDisabled={isVerseLoading}
+    >
       {t('audio.player.play')}
     </PopoverMenu.Item>
   );

@@ -96,12 +96,10 @@ const CopyButton: React.FC<Props> = ({
       tooltip={isCopied ? t('copied') : t('quran-reader:copy-verse')}
       shouldFlipOnRTL={false}
       shape={ButtonShape.Circle}
-      className={classNames(styles.iconContainer, styles.verseAction, {
-        [styles.fadedVerseAction]: isTranslationView,
-      })}
+      className={classNames(styles.iconContainer, styles.verseAction)}
     >
       <span className={styles.icon}>
-        <CopyIcon />
+        <CopyIcon color="var(--color-grey-icons-new)" />
       </span>
     </Button>
   );

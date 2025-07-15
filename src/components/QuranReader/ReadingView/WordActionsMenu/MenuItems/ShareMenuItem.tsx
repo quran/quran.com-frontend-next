@@ -21,7 +21,10 @@ const ShareMenuItem: React.FC<Props> = ({ onActionTriggered, openShareModal }) =
   };
 
   return (
-    <PopoverMenu.Item icon={<ShareIcon />} onClick={onShareClicked}>
+    <PopoverMenu.Item
+      icon={<ShareIcon color="var(--color-grey-icons-new)" />}
+      onClick={onShareClicked}
+    >
       {t('share')}
     </PopoverMenu.Item>
   );

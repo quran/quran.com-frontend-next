@@ -19,9 +19,7 @@ const VerseLink: React.FC<Props> = ({ verseKey, isTranslationView }) => {
   const { lang } = useTranslation('');
   return (
     <Button
-      className={classNames(styles.verseLink, {
-        [styles.fadedVerseAction]: isTranslationView,
-      })}
+      className={classNames(styles.verseLink)}
       size={ButtonSize.Small}
       shape={ButtonShape.Circle}
       href={getChapterWithStartingVerseUrl(verseKey)}

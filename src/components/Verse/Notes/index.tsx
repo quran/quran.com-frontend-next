@@ -7,8 +7,8 @@ import useTranslation from 'next-translate/useTranslation';
 import NoteModal from '@/components/Notes/NoteModal';
 import styles from '@/components/QuranReader/TranslationView/TranslationViewCell.module.scss';
 import Button, { ButtonShape, ButtonSize, ButtonType, ButtonVariant } from '@/dls/Button/Button';
-import EmptyNotesIcon from '@/icons/notes-empty.svg';
-import NotesIcon from '@/icons/notes-filled.svg';
+import NotesFilledIcon from '@/icons/notes-with-pencil-filled.svg';
+import NotesIcon from '@/icons/notes-with-pencil.svg';
 import { isLoggedIn } from '@/utils/auth/login';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getChapterWithStartingVerseUrl, getLoginNavigationUrl } from '@/utils/navigation';
@@ -60,18 +60,18 @@ const VerseNotes = ({ verseKey, isTranslationView, hasNotes }: VerseNotesProps) 
   return (
     <>
       <Button
-        className={classNames(styles.iconContainer, styles.verseAction, {
-          [styles.fadedVerseAction]: isTranslationView,
-        })}
+        className={classNames(styles.iconContainer, styles.verseAction)}
         onClick={onItemClicked}
-        tooltip={t('notes.title')}
+        tooltip={t('notes.label')}
         type={ButtonType.Primary}
         shape={ButtonShape.Circle}
         variant={ButtonVariant.Ghost}
         size={ButtonSize.Small}
-        ariaLabel={t('notes.title')}
+        ariaLabel={t('notes.label')}
       >
-        <span className={styles.icon}>{hasNotes ? <NotesIcon /> : <EmptyNotesIcon />}</span>
+        <span className={styles.icon}>
+          {hasNotes ? <NotesFilledIcon /> : <NotesIcon color="var(--color-grey-icons-new)" />}
+        </span>
       </Button>
 
       <NoteModal

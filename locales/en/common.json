@@ -282,7 +282,8 @@
   "none": "None",
   "not-now": "Not Now",
   "notes": {
-    "title": "My Notes & Reflections"
+    "title": "My Notes & Reflections",
+    "label": "Notes"
   },
   "notification-settings": "Notification Settings",
   "notification": {

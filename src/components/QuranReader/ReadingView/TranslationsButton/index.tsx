@@ -86,7 +86,7 @@ const TranslationsButton: React.FC<Props> = ({ verse, onActionTriggered, isTrans
         className={classNames(styles.iconContainer, styles.verseAction)}
       >
         <span className={styles.icon}>
-          <TranslationsIcon />
+          <TranslationsIcon color="var(--color-grey-icons-new)" />
         </span>
       </Button>
       <ContentModal
