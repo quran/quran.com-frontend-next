@@ -9,8 +9,8 @@ import cellStyles from '../QuranReader/TranslationView/TranslationViewCell.modul
 
 import styles from './OverflowVerseActionsMenuBody.module.scss';
 
-import IconContainer, { IconColor, IconSize } from '@/components/dls/IconContainer/IconContainer';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
+import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import Spinner from '@/dls/Spinner/Spinner';
 import OverflowMenuIcon from '@/icons/menu_more_horiz.svg';

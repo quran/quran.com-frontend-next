@@ -3,10 +3,10 @@ import { useState } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 
 import { RepetitionMode } from '../AudioPlayer/RepeatAudioModal/SelectRepetitionMode';
-import IconContainer, { IconColor, IconSize } from '../dls/IconContainer/IconContainer';
-import PopoverMenu from '../dls/PopoverMenu/PopoverMenu';
 
 import RepeatAudioModal from '@/components/AudioPlayer/RepeatAudioModal/RepeatAudioModal';
+import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
+import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import RepeatIcon from '@/icons/repeat-new.svg';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getChapterNumberFromKey } from '@/utils/verse';

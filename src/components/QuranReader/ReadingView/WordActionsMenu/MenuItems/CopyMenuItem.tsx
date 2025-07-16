@@ -3,11 +3,11 @@ import React, { useContext, useEffect, useState } from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import { useSelector } from 'react-redux';
 
-import IconContainer, { IconColor, IconSize } from '@/components/dls/IconContainer/IconContainer';
 import PopoverMenu from '@/components/dls/PopoverMenu/PopoverMenu';
 import { ToastStatus, useToast } from '@/components/dls/Toast/Toast';
 import copyVerse from '@/components/Verse/AdvancedCopy/utils/copyVerse';
 import DataContext from '@/contexts/DataContext';
+import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
 import CopyIcon from '@/icons/copy.svg';
 import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
 import Language from '@/types/Language';

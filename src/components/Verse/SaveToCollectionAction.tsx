@@ -10,9 +10,9 @@ import useSWRImmutable from 'swr/immutable';
 import SaveToCollectionModal, {
   Collection,
 } from '../Collection/SaveToCollectionModal/SaveToCollectionModal';
-import IconContainer, { IconColor, IconSize } from '../dls/IconContainer/IconContainer';
-import PopoverMenu from '../dls/PopoverMenu/PopoverMenu';
 
+import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
+import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import PlusIcon from '@/icons/plus.svg';
 import { WordVerse } from '@/types/Word';
 import { ToastStatus, useToast } from 'src/components/dls/Toast/Toast';

@@ -6,9 +6,9 @@ import VerseAdvancedCopy from '../AdvancedCopy/VerseAdvancedCopy';
 
 import styles from './VerseActionAdvancedCopy.module.scss';
 
-import IconContainer, { IconColor, IconSize } from '@/components/dls/IconContainer/IconContainer';
 import ContentModal from '@/dls/ContentModal/ContentModal';
 import ContentModalHandles from '@/dls/ContentModal/types/ContentModalHandles';
+import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
 import Action from '@/dls/Modal/Action';
 import Footer from '@/dls/Modal/Footer';
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';

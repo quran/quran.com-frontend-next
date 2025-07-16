@@ -10,9 +10,9 @@ import styles from './WordByWordVerseAction.module.scss';
 
 import { fetcher } from '@/api';
 import DataFetcher from '@/components/DataFetcher';
-import IconContainer, { IconColor, IconSize } from '@/components/dls/IconContainer/IconContainer';
 import PlainVerseText from '@/components/Verse/PlainVerseText';
 import ContentModalHandles from '@/dls/ContentModal/types/ContentModalHandles';
+import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import Separator from '@/dls/Separator/Separator';
 import SearchIcon from '@/icons/search-book.svg';

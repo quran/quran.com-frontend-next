@@ -10,11 +10,11 @@ import useSWRImmutable from 'swr/immutable';
 
 import styles from '../QuranReader/TranslationView/TranslationViewCell.module.scss';
 
-import IconContainer, { IconColor, IconSize } from '@/components/dls/IconContainer/IconContainer';
 import PopoverMenu from '@/components/dls/PopoverMenu/PopoverMenu';
 import Spinner from '@/components/dls/Spinner/Spinner';
 import { ToastStatus, useToast } from '@/components/dls/Toast/Toast';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
+import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
 import useIsMobile from '@/hooks/useIsMobile';
 import BookmarkedIcon from '@/icons/bookmark.svg';
 import UnBookmarkedIcon from '@/icons/unbookmarked.svg';

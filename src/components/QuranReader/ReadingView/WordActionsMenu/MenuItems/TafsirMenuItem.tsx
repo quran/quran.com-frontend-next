@@ -5,9 +5,9 @@ import useTranslation from 'next-translate/useTranslation';
 import { useSelector } from 'react-redux';
 
 import ContentModal from '@/components/dls/ContentModal/ContentModal';
-import IconContainer, { IconColor, IconSize } from '@/components/dls/IconContainer/IconContainer';
 import PopoverMenu from '@/components/dls/PopoverMenu/PopoverMenu';
 import TafsirBody from '@/components/QuranReader/TafsirView/TafsirBody';
+import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
 import BookOpenIcon from '@/icons/book-open.svg';
 import { selectSelectedTafsirs } from '@/redux/slices/QuranReader/tafsirs';
 import { WordVerse } from '@/types/Word';

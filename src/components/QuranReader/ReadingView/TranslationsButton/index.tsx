@@ -8,11 +8,11 @@ import { useSelector } from 'react-redux';
 import styles from './TranslationsButton.module.scss';
 
 import DataFetcher from '@/components/DataFetcher';
-import IconContainer, { IconColor, IconSize } from '@/components/dls/IconContainer/IconContainer';
 import TranslationsView from '@/components/QuranReader/ReadingView/TranslationsView';
 import TranslationViewCellSkeleton from '@/components/QuranReader/TranslationView/TranslationViewCellSkeleton';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import ContentModalHandles from '@/dls/ContentModal/types/ContentModalHandles';
+import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
 import TranslationsIcon from '@/icons/translation.svg';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';

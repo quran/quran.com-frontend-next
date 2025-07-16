@@ -6,10 +6,10 @@ import { useSelector } from 'react-redux';
 
 import DataFetcher from '@/components/DataFetcher';
 import ContentModalHandles from '@/components/dls/ContentModal/types/ContentModalHandles';
-import IconContainer, { IconColor, IconSize } from '@/components/dls/IconContainer/IconContainer';
 import PopoverMenu from '@/components/dls/PopoverMenu/PopoverMenu';
 import TranslationsView from '@/components/QuranReader/ReadingView/TranslationsView';
 import TranslationViewCellSkeleton from '@/components/QuranReader/TranslationView/TranslationViewCellSkeleton';
+import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
 import useSafeTimeout from '@/hooks/useSafeTimeout';
 import TranslationsIcon from '@/icons/translation.svg';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';

@@ -3,10 +3,10 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
-import IconContainer, { IconColor, IconSize } from '@/components/dls/IconContainer/IconContainer';
 import PopoverMenu from '@/components/dls/PopoverMenu/PopoverMenu';
 import QuestionsModal from '@/components/QuestionAndAnswer/QuestionsModal';
 import { usePageQuestions } from '@/components/QuranReader/ReadingView/context/PageQuestionsContext';
+import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
 import LightbulbOnIcon from '@/icons/lightbulb-on.svg';
 import LightbulbIcon from '@/icons/lightbulb.svg';
 import QuestionType from '@/types/QuestionsAndAnswers/QuestionType';

@@ -7,9 +7,9 @@ import styles from '../QuranReader/TranslationView/TranslationViewCell.module.sc
 
 import ShareVerseActionsMenu from './OverflowVerseActionsMenuBody/ShareVerseActionsMenu';
 
-import IconContainer, { IconColor, IconSize } from '@/components/dls/IconContainer/IconContainer';
 import PopoverMenu from '@/components/dls/PopoverMenu/PopoverMenu';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
+import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
 import ShareIcon from '@/icons/share.svg';
 import { WordVerse } from '@/types/Word';
 import { logButtonClick } from '@/utils/eventLogger';

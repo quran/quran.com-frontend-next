@@ -2,8 +2,8 @@ import React from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
-import IconContainer, { IconColor, IconSize } from '@/components/dls/IconContainer/IconContainer';
 import PopoverMenu from '@/components/dls/PopoverMenu/PopoverMenu';
+import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
 import ShareIcon from '@/icons/share.svg';
 import { logButtonClick } from '@/utils/eventLogger';
 

@@ -6,11 +6,11 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from '../QuranReader/TranslationView/TranslationViewCell.module.scss';
 
-import IconContainer, { IconColor, IconSize } from '@/components/dls/IconContainer/IconContainer';
 import Spinner from '@/components/dls/Spinner/Spinner';
 import OnboardingEvent from '@/components/Onboarding/OnboardingChecklist/hooks/OnboardingEvent';
 import { useOnboarding } from '@/components/Onboarding/OnboardingProvider';
 import Button, { ButtonShape, ButtonSize, ButtonType, ButtonVariant } from '@/dls/Button/Button';
+import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
 import useGetQueryParamOrXstateValue from '@/hooks/useGetQueryParamOrXstateValue';
 import PlayIcon from '@/icons/play-outline.svg';
 import OnboardingGroup from '@/types/OnboardingGroup';

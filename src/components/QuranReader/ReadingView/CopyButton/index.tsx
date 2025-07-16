@@ -4,11 +4,11 @@ import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 import { useSelector } from 'react-redux';
 
-import IconContainer, { IconColor, IconSize } from '@/components/dls/IconContainer/IconContainer';
 import styles from '@/components/QuranReader/TranslationView/TranslationViewCell.module.scss';
 import copyVerse from '@/components/Verse/AdvancedCopy/utils/copyVerse';
 import DataContext from '@/contexts/DataContext';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
+import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import CopyIcon from '@/icons/copy.svg';
 import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';

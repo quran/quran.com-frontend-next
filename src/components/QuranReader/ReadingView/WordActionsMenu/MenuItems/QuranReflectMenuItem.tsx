@@ -4,9 +4,9 @@ import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
 import ContentModal from '@/components/dls/ContentModal/ContentModal';
-import IconContainer, { IconColor, IconSize } from '@/components/dls/IconContainer/IconContainer';
 import PopoverMenu from '@/components/dls/PopoverMenu/PopoverMenu';
 import ReflectionBodyContainer from '@/components/QuranReader/ReflectionView/ReflectionBodyContainer';
+import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
 import ChatIcon from '@/icons/chat.svg';
 import { WordVerse } from '@/types/Word';
 import { logButtonClick } from '@/utils/eventLogger';

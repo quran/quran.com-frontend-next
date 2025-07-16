@@ -6,8 +6,8 @@ import VerseActionsMenuType from '../types';
 
 import styles from './MoreMenuItem.module.scss';
 
-import IconContainer, { IconColor, IconSize } from '@/components/dls/IconContainer/IconContainer';
 import PopoverMenu from '@/components/dls/PopoverMenu/PopoverMenu';
+import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
 import ChevronRightIcon from '@/icons/chevron-right.svg';
 import OverflowMenuIcon from '@/icons/menu_more_horiz.svg';
 import { logButtonClick } from '@/utils/eventLogger';

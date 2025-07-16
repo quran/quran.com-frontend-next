@@ -4,10 +4,10 @@ import classNames from 'classnames';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
-import IconContainer, { IconColor, IconSize } from '@/components/dls/IconContainer/IconContainer';
 import NoteModal from '@/components/Notes/NoteModal';
 import styles from '@/components/QuranReader/TranslationView/TranslationViewCell.module.scss';
 import Button, { ButtonShape, ButtonSize, ButtonType, ButtonVariant } from '@/dls/Button/Button';
+import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
 import NotesFilledIcon from '@/icons/notes-with-pencil-filled.svg';
 import NotesIcon from '@/icons/notes-with-pencil.svg';
 import { isLoggedIn } from '@/utils/auth/login';
