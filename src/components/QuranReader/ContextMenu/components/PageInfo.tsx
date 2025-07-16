@@ -34,7 +34,7 @@ const PageInfo: React.FC<PageInfoProps> = ({
 
   // Memoize the bookmark component to prevent unnecessary re-renders
   const bookmarkComponent = useMemo(() => {
-    return <PageBookmarkAction pageNumber={Number(pageNumber)} />;
+    return <PageBookmarkAction pageNumber={Number(pageNumber || 1)} />;
   }, [pageNumber]);
 
   return (

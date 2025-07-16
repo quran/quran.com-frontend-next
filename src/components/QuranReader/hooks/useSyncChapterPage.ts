@@ -37,14 +37,11 @@ const useSyncChapterPage = (initialData?: any): void => {
     isUsingDefaultFont,
   );
 
-  const firstPageNumber = useGetFirstPageNumberForChapter(
-    lastReadVerseKey?.chapterId,
-    pagesLookupData,
-  );
+  const firstPageNumber = useGetFirstPageNumberForChapter(pagesLookupData);
 
   useEffect(() => {
     if (lastReadVerseKey?.chapterId && firstPageNumber) {
-      if (firstPageNumber && firstPageNumber !== lastReadVerseKey.page) {
+      if (lastReadVerseKey.page !== firstPageNumber) {
         dispatch(
           setLastReadVerse({
             lastReadVerse: {
@@ -56,8 +53,8 @@ const useSyncChapterPage = (initialData?: any): void => {
         );
       }
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [firstPageNumber, lastReadVerseKey?.chapterId]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps -- chaptersData is from context and stable; omitting to prevent unnecessary re-renders
+  }, [firstPageNumber, lastReadVerseKey, dispatch]);
 };
 
 export default useSyncChapterPage;

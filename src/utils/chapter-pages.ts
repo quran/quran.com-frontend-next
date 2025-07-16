@@ -4,42 +4,30 @@ import { PagesLookUpResponse } from 'types/ApiResponses';
  * Extract the first page number from existing pagesLookup data
  *
  * @param {PagesLookUpResponse | undefined} pagesLookup - The existing pages lookup data
- * @param {string} chapterNumber - The chapter number to get the first page for
  * @returns {string | null} - The first page number for the chapter or null if not found
  */
-const getFirstPageFromLookup = (
-  pagesLookup?: PagesLookUpResponse,
-  chapterNumber?: string,
-): string | null => {
+const getFirstPageFromLookup = (pagesLookup?: PagesLookUpResponse): string | null => {
   // Early returns for invalid inputs
-  if (!pagesLookup || !chapterNumber) return null;
+  if (!pagesLookup) return null;
 
-  try {
-    // Get the first mushaf ID from the lookup data
-    const firstPage = Object.keys(pagesLookup.pages)[0];
-    if (!firstPage) return null;
-
-    return firstPage;
-  } catch {
-    // Return null if any errors occur during lookup
-    return null;
-  }
+  // Get the smallest numeric key from the lookup data
+  const numericKeys = Object.keys(pagesLookup.pages)
+    .map((key) => parseInt(key, 10))
+    .filter((key) => !Number.isNaN(key));
+  const firstPage = numericKeys.length > 0 ? Math.min(...numericKeys).toString() : null;
+  return firstPage;
 };
 
 /**
  * Get the first page number for a specific chapter based on the current Mushaf.
  * Uses existing pagesLookup data if available, otherwise falls back to API call.
  *
- * @param {string} chapterNumber - The chapter number to get the first page for
- * @param {PagesLookUpResponse} [existingPagesLookup] - Optional existing pagesLookup data
+ * @param {PagesLookUpResponse} [pagesLookup] - Optional existing pagesLookup data
  * @returns {string | null} - The first page number for the chapter or null if not found
  */
-const getFirstPageNumberForChapter = (
-  chapterNumber?: string,
-  existingPagesLookup?: PagesLookUpResponse,
-): string | null => {
+const getFirstPageNumberForChapter = (pagesLookup?: PagesLookUpResponse): string | null => {
   // Try to get page from existing data first
-  const pageFromLookup = getFirstPageFromLookup(existingPagesLookup, chapterNumber || '');
+  const pageFromLookup = getFirstPageFromLookup(pagesLookup);
   if (pageFromLookup) return pageFromLookup;
 
   // If we couldn't get a page number, return null
@@ -49,13 +37,10 @@ const getFirstPageNumberForChapter = (
 /**
  * React hook to get the first page number for a chapter using context data when available
  *
- * @param {string} chapterNumber - The chapter number to get the first page for
  * @param {PagesLookUpResponse} [pagesLookup] - The pages lookup data
  * @returns {string | null} - Function that returns the first page number or null
  */
-export const useGetFirstPageNumberForChapter = (
-  chapterNumber?: string,
-  pagesLookup?: PagesLookUpResponse,
-): string | null => getFirstPageNumberForChapter(chapterNumber || '', pagesLookup);
+export const useGetFirstPageNumberForChapter = (pagesLookup?: PagesLookUpResponse): string | null =>
+  getFirstPageNumberForChapter(pagesLookup);
 
 export default getFirstPageNumberForChapter;

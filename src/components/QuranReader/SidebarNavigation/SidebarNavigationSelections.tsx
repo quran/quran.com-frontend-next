@@ -72,11 +72,11 @@ const SidebarNavigationSelections: React.FC<Props> = ({ isVisible, selectedNavig
     );
   };
 
-  const updateReduxStateWithChapter = async (chapterId: string) => {
+  const updateReduxStateWithChapter = (chapterId: string) => {
     updateReduxWithChapterOnly(chapterId);
   };
 
-  const onAfterNavigationItemRouted = async (itemValue?: string, itemType?: string) => {
+  const onAfterNavigationItemRouted = (itemValue?: string, itemType?: string) => {
     if (isMobile()) {
       dispatch(setIsSidebarNavigationVisible(false));
     }
@@ -85,7 +85,7 @@ const SidebarNavigationSelections: React.FC<Props> = ({ isVisible, selectedNavig
       if (itemType === NavigationItemType.PAGE) {
         updateReduxStateWithPage(itemValue);
       } else if (itemType === NavigationItemType.CHAPTER) {
-        await updateReduxStateWithChapter(itemValue);
+        updateReduxStateWithChapter(itemValue);
       }
     }
   };
