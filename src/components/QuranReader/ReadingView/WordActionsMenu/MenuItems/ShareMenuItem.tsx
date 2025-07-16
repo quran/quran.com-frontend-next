@@ -2,6 +2,7 @@ import React from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
+import IconContainer, { IconColor, IconSize } from '@/components/dls/IconContainer/IconContainer';
 import PopoverMenu from '@/components/dls/PopoverMenu/PopoverMenu';
 import ShareIcon from '@/icons/share.svg';
 import { logButtonClick } from '@/utils/eventLogger';
@@ -22,7 +23,9 @@ const ShareMenuItem: React.FC<Props> = ({ onActionTriggered, openShareModal }) =
 
   return (
     <PopoverMenu.Item
-      icon={<ShareIcon color="var(--color-grey-icons-new)" />}
+      icon={
+        <IconContainer icon={<ShareIcon />} color={IconColor.tertiary} size={IconSize.Custom} />
+      }
       onClick={onShareClicked}
     >
       {t('share')}

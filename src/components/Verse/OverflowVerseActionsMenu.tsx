@@ -9,6 +9,7 @@ import cellStyles from '../QuranReader/TranslationView/TranslationViewCell.modul
 
 import styles from './OverflowVerseActionsMenuBody.module.scss';
 
+import IconContainer, { IconColor, IconSize } from '@/components/dls/IconContainer/IconContainer';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import Spinner from '@/dls/Spinner/Spinner';
@@ -62,7 +63,11 @@ const OverflowVerseActionsMenu: React.FC<Props> = ({
             ariaLabel={t('more')}
           >
             <span className={cellStyles.icon}>
-              <OverflowMenuIcon color="var(--color-grey-icons-new)" />
+              <IconContainer
+                icon={<OverflowMenuIcon />}
+                color={IconColor.tertiary}
+                size={IconSize.Custom}
+              />
             </span>
           </Button>
         }

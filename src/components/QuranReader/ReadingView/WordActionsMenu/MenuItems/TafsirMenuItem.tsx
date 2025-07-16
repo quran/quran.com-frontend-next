@@ -5,6 +5,7 @@ import useTranslation from 'next-translate/useTranslation';
 import { useSelector } from 'react-redux';
 
 import ContentModal from '@/components/dls/ContentModal/ContentModal';
+import IconContainer, { IconColor, IconSize } from '@/components/dls/IconContainer/IconContainer';
 import PopoverMenu from '@/components/dls/PopoverMenu/PopoverMenu';
 import TafsirBody from '@/components/QuranReader/TafsirView/TafsirBody';
 import BookOpenIcon from '@/icons/book-open.svg';
@@ -48,7 +49,13 @@ const TafsirMenuItem: React.FC<Props> = ({ verse, onActionTriggered }) => {
   return (
     <>
       <PopoverMenu.Item
-        icon={<BookOpenIcon color="var(--color-grey-icons-new)" />}
+        icon={
+          <IconContainer
+            icon={<BookOpenIcon />}
+            color={IconColor.tertiary}
+            size={IconSize.Custom}
+          />
+        }
         onClick={onMenuItemClicked}
       >
         {t('quran-reader:tafsirs')}

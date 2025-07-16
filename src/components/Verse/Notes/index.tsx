@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
+import IconContainer, { IconColor, IconSize } from '@/components/dls/IconContainer/IconContainer';
 import NoteModal from '@/components/Notes/NoteModal';
 import styles from '@/components/QuranReader/TranslationView/TranslationViewCell.module.scss';
 import Button, { ButtonShape, ButtonSize, ButtonType, ButtonVariant } from '@/dls/Button/Button';
@@ -70,7 +71,11 @@ const VerseNotes = ({ verseKey, isTranslationView, hasNotes }: VerseNotesProps) 
         ariaLabel={t('notes.label')}
       >
         <span className={styles.icon}>
-          {hasNotes ? <NotesFilledIcon /> : <NotesIcon color="var(--color-grey-icons-new)" />}
+          {hasNotes ? (
+            <NotesFilledIcon />
+          ) : (
+            <IconContainer icon={<NotesIcon />} color={IconColor.tertiary} size={IconSize.Custom} />
+          )}
         </span>
       </Button>
 

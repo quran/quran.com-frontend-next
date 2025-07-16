@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 
 import DataFetcher from '@/components/DataFetcher';
 import ContentModalHandles from '@/components/dls/ContentModal/types/ContentModalHandles';
+import IconContainer, { IconColor, IconSize } from '@/components/dls/IconContainer/IconContainer';
 import PopoverMenu from '@/components/dls/PopoverMenu/PopoverMenu';
 import TranslationsView from '@/components/QuranReader/ReadingView/TranslationsView';
 import TranslationViewCellSkeleton from '@/components/QuranReader/TranslationView/TranslationViewCellSkeleton';
@@ -77,7 +78,13 @@ const TranslationsMenuItem: React.FC<Props> = ({ verse, onActionTriggered }) => 
   return (
     <>
       <PopoverMenu.Item
-        icon={<TranslationsIcon color="var(--color-grey-icons-new)" />}
+        icon={
+          <IconContainer
+            icon={<TranslationsIcon />}
+            color={IconColor.tertiary}
+            size={IconSize.Custom}
+          />
+        }
         onClick={onMenuItemClicked}
       >
         {t('translations')}

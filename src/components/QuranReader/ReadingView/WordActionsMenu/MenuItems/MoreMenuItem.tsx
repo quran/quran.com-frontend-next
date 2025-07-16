@@ -6,6 +6,7 @@ import VerseActionsMenuType from '../types';
 
 import styles from './MoreMenuItem.module.scss';
 
+import IconContainer, { IconColor, IconSize } from '@/components/dls/IconContainer/IconContainer';
 import PopoverMenu from '@/components/dls/PopoverMenu/PopoverMenu';
 import ChevronRightIcon from '@/icons/chevron-right.svg';
 import OverflowMenuIcon from '@/icons/menu_more_horiz.svg';
@@ -25,7 +26,13 @@ const MoreMenuItem: React.FC<Props> = ({ onMenuChange }) => {
 
   return (
     <PopoverMenu.Item
-      icon={<OverflowMenuIcon color="var(--color-grey-icons-new)" />}
+      icon={
+        <IconContainer
+          icon={<OverflowMenuIcon />}
+          color={IconColor.tertiary}
+          size={IconSize.Custom}
+        />
+      }
       onClick={onMoreClicked}
     >
       <div className={styles.menuWithChevron}>

@@ -7,6 +7,7 @@ import styles from '../QuranReader/TranslationView/TranslationViewCell.module.sc
 
 import ShareVerseActionsMenu from './OverflowVerseActionsMenuBody/ShareVerseActionsMenu';
 
+import IconContainer, { IconColor, IconSize } from '@/components/dls/IconContainer/IconContainer';
 import PopoverMenu from '@/components/dls/PopoverMenu/PopoverMenu';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
 import ShareIcon from '@/icons/share.svg';
@@ -55,7 +56,7 @@ const ShareButton: React.FC<ShareButtonProps> = ({
       ariaLabel={t('share')}
     >
       <span className={styles.icon}>
-        <ShareIcon color="var(--color-grey-icons-new)" />
+        <IconContainer icon={<ShareIcon />} color={IconColor.tertiary} size={IconSize.Custom} />
       </span>
     </Button>
   );

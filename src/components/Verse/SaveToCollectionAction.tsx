@@ -10,6 +10,7 @@ import useSWRImmutable from 'swr/immutable';
 import SaveToCollectionModal, {
   Collection,
 } from '../Collection/SaveToCollectionModal/SaveToCollectionModal';
+import IconContainer, { IconColor, IconSize } from '../dls/IconContainer/IconContainer';
 import PopoverMenu from '../dls/PopoverMenu/PopoverMenu';
 
 import PlusIcon from '@/icons/plus.svg';
@@ -223,7 +224,9 @@ const SaveToCollectionAction: React.FC<Props> = ({
     <>
       <PopoverMenu.Item
         onClick={onMenuClicked}
-        icon={<PlusIcon color="var(--color-grey-icons-new)" />}
+        icon={
+          <IconContainer icon={<PlusIcon />} color={IconColor.tertiary} size={IconSize.Custom} />
+        }
       >
         {t('common:save-to-collection')}
       </PopoverMenu.Item>

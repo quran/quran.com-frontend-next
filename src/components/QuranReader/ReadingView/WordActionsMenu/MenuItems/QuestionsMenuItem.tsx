@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
+import IconContainer, { IconColor, IconSize } from '@/components/dls/IconContainer/IconContainer';
 import PopoverMenu from '@/components/dls/PopoverMenu/PopoverMenu';
 import QuestionsModal from '@/components/QuestionAndAnswer/QuestionsModal';
 import { usePageQuestions } from '@/components/QuranReader/ReadingView/context/PageQuestionsContext';
@@ -53,7 +54,11 @@ const QuestionsMenuItem: React.FC<Props> = ({ verse, onActionTriggered }) => {
             isClarificationQuestion ? (
               <LightbulbOnIcon />
             ) : (
-              <LightbulbIcon color="var(--color-grey-icons-new)" />
+              <IconContainer
+                icon={<LightbulbIcon />}
+                color={IconColor.tertiary}
+                size={IconSize.Custom}
+              />
             )
           }
           onClick={onMenuItemClicked}

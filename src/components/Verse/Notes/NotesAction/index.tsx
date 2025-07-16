@@ -3,6 +3,7 @@ import React, { useContext, useState } from 'react';
 import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
+import IconContainer, { IconColor, IconSize } from '@/components/dls/IconContainer/IconContainer';
 import NoteModal from '@/components/Notes/NoteModal';
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import useCountRangeNotes from '@/hooks/auth/useCountRangeNotes';
@@ -66,7 +67,13 @@ const NotesAction: React.FC<Props> = ({ verse, onActionTriggered }) => {
     <>
       <PopoverMenu.Item
         onClick={onNotesClicked}
-        icon={hasNotes ? <NotesFilledIcon /> : <NotesIcon color="var(--color-grey-icons-new)" />}
+        icon={
+          hasNotes ? (
+            <NotesFilledIcon />
+          ) : (
+            <IconContainer icon={<NotesIcon />} color={IconColor.tertiary} size={IconSize.Custom} />
+          )
+        }
       >
         {t('notes.label')}
       </PopoverMenu.Item>

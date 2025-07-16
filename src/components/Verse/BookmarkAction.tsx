@@ -10,6 +10,7 @@ import useSWRImmutable from 'swr/immutable';
 
 import styles from '../QuranReader/TranslationView/TranslationViewCell.module.scss';
 
+import IconContainer, { IconColor, IconSize } from '@/components/dls/IconContainer/IconContainer';
 import PopoverMenu from '@/components/dls/PopoverMenu/PopoverMenu';
 import Spinner from '@/components/dls/Spinner/Spinner';
 import { ToastStatus, useToast } from '@/components/dls/Toast/Toast';
@@ -180,7 +181,11 @@ const BookmarkAction: React.FC<Props> = ({
     bookmarkIcon = isVerseBookmarked ? (
       <BookmarkedIcon color="var(--color-text-default)" />
     ) : (
-      <UnBookmarkedIcon color="var(--color-grey-icons-new)" />
+      <IconContainer
+        icon={<UnBookmarkedIcon />}
+        color={IconColor.tertiary}
+        size={IconSize.Custom}
+      />
     );
   }
 

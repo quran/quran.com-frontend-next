@@ -4,6 +4,7 @@ import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 import { useSelector } from 'react-redux';
 
+import IconContainer, { IconColor, IconSize } from '@/components/dls/IconContainer/IconContainer';
 import styles from '@/components/QuranReader/TranslationView/TranslationViewCell.module.scss';
 import copyVerse from '@/components/Verse/AdvancedCopy/utils/copyVerse';
 import DataContext from '@/contexts/DataContext';
@@ -99,7 +100,7 @@ const CopyButton: React.FC<Props> = ({
       className={classNames(styles.iconContainer, styles.verseAction)}
     >
       <span className={styles.icon}>
-        <CopyIcon color="var(--color-grey-icons-new)" />
+        <IconContainer icon={<CopyIcon />} color={IconColor.tertiary} size={IconSize.Custom} />
       </span>
     </Button>
   );

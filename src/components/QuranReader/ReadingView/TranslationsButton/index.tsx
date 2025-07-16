@@ -8,6 +8,7 @@ import { useSelector } from 'react-redux';
 import styles from './TranslationsButton.module.scss';
 
 import DataFetcher from '@/components/DataFetcher';
+import IconContainer, { IconColor, IconSize } from '@/components/dls/IconContainer/IconContainer';
 import TranslationsView from '@/components/QuranReader/ReadingView/TranslationsView';
 import TranslationViewCellSkeleton from '@/components/QuranReader/TranslationView/TranslationViewCellSkeleton';
 import Button, { ButtonShape, ButtonSize, ButtonVariant } from '@/dls/Button/Button';
@@ -86,7 +87,11 @@ const TranslationsButton: React.FC<Props> = ({ verse, onActionTriggered, isTrans
         className={classNames(styles.iconContainer, styles.verseAction)}
       >
         <span className={styles.icon}>
-          <TranslationsIcon color="var(--color-grey-icons-new)" />
+          <IconContainer
+            icon={<TranslationsIcon />}
+            color={IconColor.tertiary}
+            size={IconSize.Custom}
+          />
         </span>
       </Button>
       <ContentModal

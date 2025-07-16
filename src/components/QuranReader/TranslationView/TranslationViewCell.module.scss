@@ -70,8 +70,10 @@
       background-color: var(--color-success-medium);
       @include utility.lighten-background-color;
 
-      svg {
-        color: var(--color-success-medium);
+      .icon span {
+        svg {
+          color: var(--color-success-medium) !important;
+        }
       }
     }
   }

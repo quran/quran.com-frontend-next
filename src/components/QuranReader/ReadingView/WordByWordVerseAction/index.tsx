@@ -10,6 +10,7 @@ import styles from './WordByWordVerseAction.module.scss';
 
 import { fetcher } from '@/api';
 import DataFetcher from '@/components/DataFetcher';
+import IconContainer, { IconColor, IconSize } from '@/components/dls/IconContainer/IconContainer';
 import PlainVerseText from '@/components/Verse/PlainVerseText';
 import ContentModalHandles from '@/dls/ContentModal/types/ContentModalHandles';
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
@@ -93,7 +94,9 @@ const WordByWordVerseAction: React.FC<Props> = ({
   return (
     <>
       <PopoverMenu.Item
-        icon={<SearchIcon color="var(--color-grey-icons-new)" />}
+        icon={
+          <IconContainer icon={<SearchIcon />} color={IconColor.tertiary} size={IconSize.Custom} />
+        }
         onClick={onIconClicked}
       >
         {t('wbw')}

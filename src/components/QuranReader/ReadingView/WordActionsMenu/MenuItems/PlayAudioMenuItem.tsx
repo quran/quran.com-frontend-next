@@ -2,6 +2,7 @@ import React, { useCallback, useContext } from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 
+import IconContainer, { IconColor, IconSize } from '@/components/dls/IconContainer/IconContainer';
 import PopoverMenu from '@/components/dls/PopoverMenu/PopoverMenu';
 import PlayIcon from '@/icons/play-outline.svg';
 import { logButtonClick } from '@/utils/eventLogger';
@@ -45,7 +46,7 @@ const PlayAudioMenuItem: React.FC<PlayAudioMenuItemProps> = ({ verse, onActionTr
 
   return (
     <PopoverMenu.Item
-      icon={<PlayIcon color="var(--color-grey-icons-new)" />}
+      icon={<IconContainer icon={<PlayIcon />} color={IconColor.tertiary} size={IconSize.Custom} />}
       onClick={onPlayClicked}
       isDisabled={isVerseLoading}
     >

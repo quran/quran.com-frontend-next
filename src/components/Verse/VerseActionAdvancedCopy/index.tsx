@@ -6,6 +6,7 @@ import VerseAdvancedCopy from '../AdvancedCopy/VerseAdvancedCopy';
 
 import styles from './VerseActionAdvancedCopy.module.scss';
 
+import IconContainer, { IconColor, IconSize } from '@/components/dls/IconContainer/IconContainer';
 import ContentModal from '@/dls/ContentModal/ContentModal';
 import ContentModalHandles from '@/dls/ContentModal/types/ContentModalHandles';
 import Action from '@/dls/Modal/Action';
@@ -56,7 +57,13 @@ const VerseActionAdvancedCopy = ({
   return (
     <>
       <PopoverMenu.Item
-        icon={<AdvancedCopyIcon color="var(--color-grey-icons-new)" />}
+        icon={
+          <IconContainer
+            icon={<AdvancedCopyIcon />}
+            color={IconColor.tertiary}
+            size={IconSize.Custom}
+          />
+        }
         onClick={onModalOpen}
       >
         {t('advanced-copy')}

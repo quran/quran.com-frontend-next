@@ -6,6 +6,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from '../QuranReader/TranslationView/TranslationViewCell.module.scss';
 
+import IconContainer, { IconColor, IconSize } from '@/components/dls/IconContainer/IconContainer';
 import Spinner from '@/components/dls/Spinner/Spinner';
 import OnboardingEvent from '@/components/Onboarding/OnboardingChecklist/hooks/OnboardingEvent';
 import { useOnboarding } from '@/components/Onboarding/OnboardingProvider';
@@ -122,7 +123,7 @@ const PlayVerseAudioButton: React.FC<PlayVerseAudioProps> = ({
       ariaLabel={t('aria.play-surah', { surahName: chapterData.transliteratedName })}
     >
       <span className={classNames(styles.icon, styles.playIcon)}>
-        <PlayIcon color="var(--color-grey-icons-new)" />
+        <IconContainer icon={<PlayIcon />} color={IconColor.tertiary} size={IconSize.Custom} />
       </span>
     </Button>
   );
