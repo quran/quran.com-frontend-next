@@ -1,5 +1,3 @@
-/* eslint-disable react/no-multi-comp */
-
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 import { shallowEqual, useSelector } from 'react-redux';
@@ -32,7 +30,6 @@ const QuranReader = ({
   quranReaderDataType = QuranReaderDataType.Chapter,
 }: QuranReaderProps) => {
   const { lang } = useTranslation();
-  // const dispatch = useDispatch();
   const isSideBarVisible = useSelector(selectNotes, shallowEqual).isVisible;
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const isSidebarNavigationVisible = useSelector(selectIsSidebarNavigationVisible);
