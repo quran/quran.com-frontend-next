@@ -10,6 +10,7 @@ import Button, { ButtonShape, ButtonSize, ButtonType, ButtonVariant } from '@/dl
 import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
 import NotesFilledIcon from '@/icons/notes-with-pencil-filled.svg';
 import NotesIcon from '@/icons/notes-with-pencil.svg';
+import ZIndexVariant from '@/types/enums/ZIndexVariant';
 import { isLoggedIn } from '@/utils/auth/login';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getChapterWithStartingVerseUrl, getLoginNavigationUrl } from '@/utils/navigation';
@@ -83,7 +84,7 @@ const VerseNotes = ({ verseKey, isTranslationView, hasNotes }: VerseNotesProps) 
         isOpen={isModalOpen}
         onClose={onModalClose}
         verseKey={verseKey}
-        isOverlayMax
+        zIndexVariant={ZIndexVariant.HIGH}
         isBottomSheetOnMobile
       />
     </>

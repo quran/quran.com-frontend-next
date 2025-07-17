@@ -13,6 +13,7 @@ import ContentModal, { ContentModalSize } from '@/dls/ContentModal/ContentModal'
 import ContentModalHandles from '@/dls/ContentModal/types/ContentModalHandles';
 import { BaseResponse } from '@/types/ApiResponses';
 import { Note } from '@/types/auth/Note';
+import ZIndexVariant from '@/types/enums/ZIndexVariant';
 import { getNotesByVerse, getNoteById } from '@/utils/auth/api';
 import { makeGetNoteByIdUrl, makeGetNotesByVerseUrl } from '@/utils/auth/apiPaths';
 
@@ -24,7 +25,7 @@ interface NoteModalProps {
   onNoteUpdated?: (data: Note) => void;
   onNoteDeleted?: () => void;
   isBottomSheetOnMobile?: boolean;
-  isOverlayMax?: boolean;
+  zIndexVariant?: ZIndexVariant;
 }
 
 const NoteModal: React.FC<NoteModalProps> = ({
@@ -35,7 +36,7 @@ const NoteModal: React.FC<NoteModalProps> = ({
   onNoteUpdated,
   onNoteDeleted,
   isBottomSheetOnMobile = false,
-  isOverlayMax = false,
+  zIndexVariant,
 }) => {
   const contentModalRef = useRef<ContentModalHandles>();
 
@@ -68,7 +69,7 @@ const NoteModal: React.FC<NoteModalProps> = ({
       onEscapeKeyDown={onClose}
       size={ContentModalSize.MEDIUM}
       isBottomSheetOnMobile={isBottomSheetOnMobile}
-      isOverlayMax={isOverlayMax}
+      zIndexVariant={zIndexVariant}
     >
       <DataFetcher
         queryKey={queryKey}

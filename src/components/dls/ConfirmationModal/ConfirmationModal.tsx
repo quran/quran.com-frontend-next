@@ -4,8 +4,13 @@ import { useMemo } from 'react';
 import { useConfirmModal } from './hooks';
 
 import Modal from '@/dls/Modal/Modal';
+import ZIndexVariant from '@/types/enums/ZIndexVariant';
 
-const ConfirmationModal = () => {
+interface ConfirmationModalProps {
+  zIndexVariant?: ZIndexVariant;
+}
+
+const ConfirmationModal = ({ zIndexVariant }: ConfirmationModalProps = {}) => {
   const { onCancel, onConfirm, state } = useConfirmModal();
 
   const actions = useMemo(() => {
@@ -33,7 +38,12 @@ const ConfirmationModal = () => {
   };
 
   return (
-    <Modal isOpen={!!state.open} onClickOutside={onClose} onEscapeKeyDown={onClose}>
+    <Modal
+      isOpen={!!state.open}
+      onClickOutside={onClose}
+      onEscapeKeyDown={onClose}
+      zIndexVariant={zIndexVariant}
+    >
       <Modal.Body>
         <Modal.Header>
           <Modal.Title>{state.title}</Modal.Title>

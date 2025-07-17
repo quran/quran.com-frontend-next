@@ -10,6 +10,7 @@ import styles from './ContentModal.module.scss';
 
 import ContentModalHandles from '@/dls/ContentModal/types/ContentModalHandles';
 import CloseIcon from '@/icons/close.svg';
+import ZIndexVariant from '@/types/enums/ZIndexVariant';
 import { isRTLLocale } from '@/utils/locale';
 
 export enum ContentModalSize {
@@ -33,7 +34,7 @@ type ContentModalProps = {
   size?: ContentModalSize;
   isFixedHeight?: boolean;
   shouldBeFullScreen?: boolean;
-  isOverlayMax?: boolean;
+  zIndexVariant?: ZIndexVariant;
   isBottomSheetOnMobile?: boolean;
 };
 
@@ -55,7 +56,7 @@ const ContentModal = ({
   hasHeader = true,
   onClick,
   shouldBeFullScreen = false,
-  isOverlayMax = false,
+  zIndexVariant,
   isBottomSheetOnMobile = true,
 }: ContentModalProps) => {
   const overlayRef = useRef<HTMLDivElement>();
@@ -111,7 +112,9 @@ const ContentModal = ({
         <Dialog.Overlay
           className={classNames(styles.overlay, {
             [styles.fullScreen]: shouldBeFullScreen,
-            [styles.overlayMax]: isOverlayMax,
+            [styles.zIndexModal]: zIndexVariant === ZIndexVariant.MODAL,
+            [styles.zIndexHigh]: zIndexVariant === ZIndexVariant.HIGH,
+            [styles.zIndexUltra]: zIndexVariant === ZIndexVariant.ULTRA,
           })}
           ref={overlayRef}
         >
