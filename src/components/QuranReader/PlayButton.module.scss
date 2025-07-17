@@ -1,6 +1,8 @@
 $playChapterAudioButtonMinInlineSize: 95px;
 
 @mixin customButton {
+  border: none;
+  background-color: var(--color-background-elevated-new);
   box-shadow: var(--shadow-small-new);
 
   svg {
@@ -8,7 +10,7 @@ $playChapterAudioButtonMinInlineSize: 95px;
   }
 
   &:hover {
-    border-color: var(--color-success-medium);
+    border: 1px solid var(--color-success-medium);
     color: var(--color-text-faded-new);
   }
 }
