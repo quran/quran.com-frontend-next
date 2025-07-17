@@ -6,6 +6,7 @@ import useTranslation from 'next-translate/useTranslation';
 import ContentModal from '@/components/dls/ContentModal/ContentModal';
 import PopoverMenu from '@/components/dls/PopoverMenu/PopoverMenu';
 import ReflectionBodyContainer from '@/components/QuranReader/ReflectionView/ReflectionBodyContainer';
+import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
 import ChatIcon from '@/icons/chat.svg';
 import { logButtonClick } from '@/utils/eventLogger';
 import { fakeNavigate, getVerseReflectionNavigationUrl } from '@/utils/navigation';
@@ -41,7 +42,12 @@ const QuranReflectMenuItem: React.FC<Props> = ({ verse, onActionTriggered }) => 
 
   return (
     <>
-      <PopoverMenu.Item icon={<ChatIcon />} onClick={onMenuItemClicked}>
+      <PopoverMenu.Item
+        icon={
+          <IconContainer icon={<ChatIcon />} color={IconColor.tertiary} size={IconSize.Custom} />
+        }
+        onClick={onMenuItemClicked}
+      >
         {t('reflections-and-lessons')}
       </PopoverMenu.Item>
       <ReflectionBodyContainer

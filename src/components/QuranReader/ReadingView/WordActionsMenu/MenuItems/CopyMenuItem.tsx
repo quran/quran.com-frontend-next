@@ -7,6 +7,7 @@ import PopoverMenu from '@/components/dls/PopoverMenu/PopoverMenu';
 import { ToastStatus, useToast } from '@/components/dls/Toast/Toast';
 import copyVerse from '@/components/Verse/AdvancedCopy/utils/copyVerse';
 import DataContext from '@/contexts/DataContext';
+import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
 import CopyIcon from '@/icons/copy.svg';
 import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
 import Language from '@/types/Language';
@@ -82,7 +83,10 @@ const CopyMenuItem: React.FC<Props> = ({ verse, onActionTriggered }) => {
   };
 
   return (
-    <PopoverMenu.Item icon={<CopyIcon />} onClick={onCopyTextClicked}>
+    <PopoverMenu.Item
+      icon={<IconContainer icon={<CopyIcon />} color={IconColor.tertiary} size={IconSize.Custom} />}
+      onClick={onCopyTextClicked}
+    >
       {isCopied ? t('copied') : t('quran-reader:copy-verse')}
     </PopoverMenu.Item>
   );

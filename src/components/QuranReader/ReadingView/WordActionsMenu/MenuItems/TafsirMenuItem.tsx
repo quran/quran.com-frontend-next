@@ -7,6 +7,7 @@ import { useSelector } from 'react-redux';
 import ContentModal from '@/components/dls/ContentModal/ContentModal';
 import PopoverMenu from '@/components/dls/PopoverMenu/PopoverMenu';
 import TafsirBody from '@/components/QuranReader/TafsirView/TafsirBody';
+import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
 import BookOpenIcon from '@/icons/book-open.svg';
 import { selectSelectedTafsirs } from '@/redux/slices/QuranReader/tafsirs';
 import { logButtonClick, logEvent } from '@/utils/eventLogger';
@@ -47,7 +48,16 @@ const TafsirMenuItem: React.FC<Props> = ({ verse, onActionTriggered }) => {
 
   return (
     <>
-      <PopoverMenu.Item icon={<BookOpenIcon />} onClick={onMenuItemClicked}>
+      <PopoverMenu.Item
+        icon={
+          <IconContainer
+            icon={<BookOpenIcon />}
+            color={IconColor.tertiary}
+            size={IconSize.Custom}
+          />
+        }
+        onClick={onMenuItemClicked}
+      >
         {t('quran-reader:tafsirs')}
       </PopoverMenu.Item>
       <TafsirBody

@@ -9,6 +9,7 @@ import ContentModalHandles from '@/components/dls/ContentModal/types/ContentModa
 import PopoverMenu from '@/components/dls/PopoverMenu/PopoverMenu';
 import TranslationsView from '@/components/QuranReader/ReadingView/TranslationsView';
 import TranslationViewCellSkeleton from '@/components/QuranReader/TranslationView/TranslationViewCellSkeleton';
+import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
 import useSafeTimeout from '@/hooks/useSafeTimeout';
 import TranslationsIcon from '@/icons/translation.svg';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
@@ -76,7 +77,16 @@ const TranslationsMenuItem: React.FC<Props> = ({ verse, onActionTriggered }) => 
 
   return (
     <>
-      <PopoverMenu.Item icon={<TranslationsIcon />} onClick={onMenuItemClicked}>
+      <PopoverMenu.Item
+        icon={
+          <IconContainer
+            icon={<TranslationsIcon />}
+            color={IconColor.tertiary}
+            size={IconSize.Custom}
+          />
+        }
+        onClick={onMenuItemClicked}
+      >
         {t('translations')}
       </PopoverMenu.Item>
       <ContentModal
