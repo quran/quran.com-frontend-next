@@ -1,0 +1,19 @@
+.popoverContainer {
+  position: relative;
+}
+
+/* For popovers that appear on the left side of the word */
+.leftSidePopover {
+  margin-left: var(--popover-margin-left);
+  margin-top: var(--popover-margin-top, 0);
+  /* Ensure the popover appears outside the content area */
+  position: absolute;
+}
+
+/* For popovers that appear on the right side of the word */
+.rightSidePopover {
+  margin-left: var(--popover-margin-left);
+  margin-top: var(--popover-margin-top, 0);
+  /* Ensure the popover appears outside the content area */
+  position: absolute;
+}
