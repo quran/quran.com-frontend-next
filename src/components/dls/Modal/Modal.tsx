@@ -13,6 +13,8 @@ import styles from './Modal.module.scss';
 import Subtitle from './Subtitle';
 import Title from './Title';
 
+import ZIndexVariant from '@/types/enums/ZIndexVariant';
+
 type ModalProps = {
   children: React.ReactNode;
   trigger?: React.ReactNode;
@@ -25,6 +27,7 @@ type ModalProps = {
   overlayClassName?: string;
   onEscapeKeyDown?: () => void;
   size?: ModalSize;
+  zIndexVariant?: ZIndexVariant;
 };
 
 const Modal = ({
@@ -39,6 +42,7 @@ const Modal = ({
   isBottomSheetOnMobile = true,
   isInvertedOverlay = false,
   size,
+  zIndexVariant,
 }: ModalProps) => (
   <DialogPrimitive.Root open={isOpen}>
     {trigger && (
@@ -50,6 +54,9 @@ const Modal = ({
       <DialogPrimitive.Overlay
         className={classNames(styles.overlay, overlayClassName, {
           [styles.invertedOverlay]: isInvertedOverlay,
+          [styles.zIndexModal]: zIndexVariant === ZIndexVariant.MODAL,
+          [styles.zIndexHigh]: zIndexVariant === ZIndexVariant.HIGH,
+          [styles.zIndexUltra]: zIndexVariant === ZIndexVariant.ULTRA,
         })}
       />
       <Content
@@ -57,7 +64,11 @@ const Modal = ({
         onEscapeKeyDown={onEscapeKeyDown}
         onPointerDownOutside={onClickOutside}
         isBottomSheetOnMobile={isBottomSheetOnMobile}
-        contentClassName={contentClassName}
+        contentClassName={classNames(contentClassName, {
+          [styles.zIndexModal]: zIndexVariant === ZIndexVariant.MODAL,
+          [styles.zIndexHigh]: zIndexVariant === ZIndexVariant.HIGH,
+          [styles.zIndexUltra]: zIndexVariant === ZIndexVariant.ULTRA,
+        })}
         size={size}
       >
         {children}
