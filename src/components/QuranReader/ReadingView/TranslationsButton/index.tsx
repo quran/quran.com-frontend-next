@@ -16,6 +16,7 @@ import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconCont
 import TranslationsIcon from '@/icons/translation.svg';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
 import { selectSelectedTranslations } from '@/redux/slices/QuranReader/translations';
+import ZIndexVariant from '@/types/enums/ZIndexVariant';
 import { WordVerse } from '@/types/Word';
 import { getDefaultWordFields, getMushafId } from '@/utils/api';
 import { makeByVerseKeyUrl } from '@/utils/apiPaths';
@@ -101,7 +102,7 @@ const TranslationsButton: React.FC<Props> = ({ verse, onActionTriggered, isTrans
         hasCloseButton
         onClose={onModalClosed}
         onEscapeKeyDown={onModalClosed}
-        isOverlayMax
+        zIndexVariant={ZIndexVariant.MODAL}
         isBottomSheetOnMobile
       >
         <DataFetcher

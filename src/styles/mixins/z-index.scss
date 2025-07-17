@@ -1,0 +1,17 @@
+/**
+ * Z-index variant mixins for consistent modal stacking
+ */
+
+@mixin z-index-variants {
+  .zIndexModal {
+    z-index: var(--z-index-modal);
+  }
+
+  .zIndexHigh {
+    z-index: var(--z-index-high);
+  }
+
+  .zIndexUltra {
+    z-index: var(--z-index-ultra);
+  }
+}
