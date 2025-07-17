@@ -10,10 +10,11 @@ import useSWRImmutable from 'swr/immutable';
 import SaveToCollectionModal, {
   Collection,
 } from '../Collection/SaveToCollectionModal/SaveToCollectionModal';
-import PopoverMenu from '../dls/PopoverMenu/PopoverMenu';
 
+import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
+import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import PlusIcon from '@/icons/plus.svg';
-import Verse from '@/types/Verse';
+import { WordVerse } from '@/types/Word';
 import { ToastStatus, useToast } from 'src/components/dls/Toast/Toast';
 import { selectQuranReaderStyles } from 'src/redux/slices/QuranReader/styles';
 import { getMushafId } from 'src/utils/api';
@@ -27,15 +28,15 @@ import {
 import {
   makeBookmarkCollectionsUrl,
   makeBookmarksUrl,
-  makeCollectionsUrl,
   makeBookmarkUrl,
+  makeCollectionsUrl,
 } from 'src/utils/auth/apiPaths';
 import { isLoggedIn } from 'src/utils/auth/login';
 import { logButtonClick } from 'src/utils/eventLogger';
 import BookmarkType from 'types/BookmarkType';
 
 interface Props {
-  verse: Verse;
+  verse: WordVerse;
   isTranslationView: boolean;
   bookmarksRangeUrl?: string;
 }
@@ -221,7 +222,12 @@ const SaveToCollectionAction: React.FC<Props> = ({
 
   return (
     <>
-      <PopoverMenu.Item onClick={onMenuClicked} icon={<PlusIcon />}>
+      <PopoverMenu.Item
+        onClick={onMenuClicked}
+        icon={
+          <IconContainer icon={<PlusIcon />} color={IconColor.tertiary} size={IconSize.Custom} />
+        }
+      >
         {t('common:save-to-collection')}
       </PopoverMenu.Item>
       {isDataReady && (

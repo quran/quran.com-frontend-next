@@ -282,7 +282,8 @@
   "none": "None",
   "not-now": "Not Now",
   "notes": {
-    "title": "My Notes & Reflections"
+    "title": "My Notes & Reflections",
+    "label": "Notes"
   },
   "notification-settings": "Notification Settings",
   "notification": {
@@ -478,5 +479,6 @@
   "share-quran-title": "Share the Quran!",
   "share-quran-description-line-1": "The Prophet ﷺ said:",
   "share-quran-description-line-2": "‘Convey from me, even if it is one verse.’",
-  "share-quran-description-line-3": "(Bukhari 3461)"
+  "share-quran-description-line-3": "(Bukhari 3461)",
+  "no-verses-available": "No verses available"
 }

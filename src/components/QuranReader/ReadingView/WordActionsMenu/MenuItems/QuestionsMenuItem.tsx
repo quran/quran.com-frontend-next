@@ -6,15 +6,16 @@ import useTranslation from 'next-translate/useTranslation';
 import PopoverMenu from '@/components/dls/PopoverMenu/PopoverMenu';
 import QuestionsModal from '@/components/QuestionAndAnswer/QuestionsModal';
 import { usePageQuestions } from '@/components/QuranReader/ReadingView/context/PageQuestionsContext';
+import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
 import LightbulbOnIcon from '@/icons/lightbulb-on.svg';
 import LightbulbIcon from '@/icons/lightbulb.svg';
 import QuestionType from '@/types/QuestionsAndAnswers/QuestionType';
+import { WordVerse } from '@/types/Word';
 import { logButtonClick, logEvent } from '@/utils/eventLogger';
 import { fakeNavigate, getVerseAnswersNavigationUrl } from '@/utils/navigation';
-import Verse from 'types/Verse';
 
 interface Props {
-  verse: Verse;
+  verse: WordVerse;
   onActionTriggered?: () => void;
 }
 
@@ -49,7 +50,17 @@ const QuestionsMenuItem: React.FC<Props> = ({ verse, onActionTriggered }) => {
     return (
       <>
         <PopoverMenu.Item
-          icon={isClarificationQuestion ? <LightbulbOnIcon /> : <LightbulbIcon />}
+          icon={
+            isClarificationQuestion ? (
+              <LightbulbOnIcon />
+            ) : (
+              <IconContainer
+                icon={<LightbulbIcon />}
+                color={IconColor.tertiary}
+                size={IconSize.Custom}
+              />
+            )
+          }
           onClick={onMenuItemClicked}
         >
           {t('answers')}

@@ -8,16 +8,17 @@ import styles from './VerseActionAdvancedCopy.module.scss';
 
 import ContentModal from '@/dls/ContentModal/ContentModal';
 import ContentModalHandles from '@/dls/ContentModal/types/ContentModalHandles';
+import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconContainer';
 import Action from '@/dls/Modal/Action';
 import Footer from '@/dls/Modal/Footer';
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import Spinner from '@/dls/Spinner/Spinner';
 import AdvancedCopyIcon from '@/icons/clipboard.svg';
+import { WordVerse } from '@/types/Word';
 import { logEvent } from '@/utils/eventLogger';
-import Verse from 'types/Verse';
 
 type VerseActionAdvancedCopyProps = {
-  verse: Verse;
+  verse: WordVerse;
   isTranslationView: boolean;
   onActionTriggered?: () => void;
 };
@@ -55,7 +56,16 @@ const VerseActionAdvancedCopy = ({
 
   return (
     <>
-      <PopoverMenu.Item icon={<AdvancedCopyIcon />} onClick={onModalOpen}>
+      <PopoverMenu.Item
+        icon={
+          <IconContainer
+            icon={<AdvancedCopyIcon />}
+            color={IconColor.tertiary}
+            size={IconSize.Custom}
+          />
+        }
+        onClick={onModalOpen}
+      >
         {t('advanced-copy')}
       </PopoverMenu.Item>
       <ContentModal
