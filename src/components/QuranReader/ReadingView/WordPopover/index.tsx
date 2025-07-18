@@ -110,7 +110,9 @@ const ReadingViewWordPopover: React.FC<Props> = ({ word, children, onOpenChange 
         />
       </PopoverMenu>
 
-      <ShareQuranModal isOpen={isShareModalOpen} onClose={onCloseShareModal} verse={word.verse} />
+      {isShareModalOpen && (
+        <ShareQuranModal isOpen={isShareModalOpen} onClose={onCloseShareModal} verse={word.verse} />
+      )}
     </>
   );
 };

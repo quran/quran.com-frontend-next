@@ -6,7 +6,7 @@ import { PopoverMenuExpandDirection } from '@/components/dls/PopoverMenu/Popover
 // Constants for popover positioning
 const POPOVER_WIDTH = 228; // Width of the popover in pixels
 const BASE_MARGIN = 20; // Base margin to ensure some spacing
-const POPUP_HEIGHT = 256; // Height of the popover in pixels
+const POPUP_HEIGHT = 356; // Height of the popover in pixels
 
 interface ContainerAndWordPositions {
   wordRect: DOMRect;
