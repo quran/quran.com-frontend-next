@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useRef } from 'react';
+import React, { useCallback, useState, useRef, useEffect } from 'react';
 
 import classNames from 'classnames';
 import dynamic from 'next/dynamic';
@@ -32,8 +32,9 @@ const ReadingViewWordPopover: React.FC<Props> = ({ word, children, onOpenChange 
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
   const wordRef = useRef<HTMLDivElement>(null);
 
-  const { popoverDirection, hasEnoughHorizontalSpace } = usePopoverPosition({
+  const { popoverDirection, hasEnoughHorizontalSpace, marginLeft, marginTop } = usePopoverPosition({
     wordRef,
+    containerSelector: '#quran-reader-container',
     isMenuOpened,
   });
 
@@ -78,6 +79,13 @@ const ReadingViewWordPopover: React.FC<Props> = ({ word, children, onOpenChange 
     onHoverChange(false);
   }, [onHoverChange]);
 
+  useEffect(() => {
+    if (isMenuOpened) {
+      document.documentElement.style.setProperty('--popover-margin-left', marginLeft);
+      document.documentElement.style.setProperty('--popover-margin-top', marginTop);
+    }
+  }, [marginLeft, marginTop, isMenuOpened]);
+
   return (
     <>
       <PopoverMenu
@@ -109,7 +117,6 @@ const ReadingViewWordPopover: React.FC<Props> = ({ word, children, onOpenChange 
           openShareModal={openShareModal}
         />
       </PopoverMenu>
-
       {isShareModalOpen && (
         <ShareQuranModal isOpen={isShareModalOpen} onClose={onCloseShareModal} verse={word.verse} />
       )}
