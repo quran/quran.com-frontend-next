@@ -13,6 +13,29 @@ type Month = {
   day: number;
 };
 
+// Constants for better readability
+const ONE_DAY_MS = 24 * 60 * 60 * 1000;
+const WEEK_SHIFT_DAYS = 3; // Shift to make weeks start on Friday
+
+// Pre-compute all UTC timestamps for better performance
+const weekUTCCache = new Map<string, { startTimestamp: number; endTimestamp: number }>();
+
+// Initialize cache (only stores first occurrence of each week number to preserve original behavior)
+for (const weeks of Object.values(monthsMap)) {
+  for (const week of weeks) {
+    // Only cache if this week number hasn't been seen before
+    if (!weekUTCCache.has(week.weekNumber)) {
+      const startTimestamp = Date.UTC(Number(week.year), Number(week.month) - 1, Number(week.day));
+      // Shift the start date by WEEK_SHIFT_DAYS to make it start from Friday
+      const shiftedStartTimestamp = startTimestamp + WEEK_SHIFT_DAYS * ONE_DAY_MS;
+      // Add 7 days to get the end of the week (exclusive end range for 7-day weeks)
+      const endTimestamp = shiftedStartTimestamp + 7 * ONE_DAY_MS;
+
+      weekUTCCache.set(week.weekNumber, { startTimestamp: shiftedStartTimestamp, endTimestamp });
+    }
+  }
+}
+
 /**
  * The idea is to sum the number of weeks from the start of the Quranic
  * calendar to the current week. This is done by summing the number of weeks
@@ -23,32 +46,15 @@ type Month = {
  * @returns {number}
  */
 export const getCurrentQuranicCalendarWeek = (currentHijriDate: umalqura.UmAlQura): number => {
-  // Today's date
+  // Today's date - use UTC to avoid timezone issues
   const today = currentHijriDate.date;
+  // IMPORTANT: Use UTC date components to avoid timezone mismatches
+  const todayUTC = Date.UTC(today.getUTCFullYear(), today.getUTCMonth(), today.getUTCDate());
 
-  // Convert today's date to the start of the day
-  today.setHours(0, 0, 0, 0);
-
-  // Iterate through the weeks to find the current week
-  for (const key in monthsMap) {
-    const weeks = monthsMap[key];
-    for (const week of weeks) {
-      // Create the base start date from the JSON data
-      const baseStartDate = new Date(Number(week.year), Number(week.month) - 1, Number(week.day));
-      baseStartDate.setHours(0, 0, 0, 0);
-
-      // Shift the start date by 3 days to make it start from Friday (April 4th instead of April 1st)
-      const startDate = new Date(baseStartDate);
-      startDate.setDate(baseStartDate.getDate() + 3);
-
-      // Calculate the end date (7 days after the shifted start date)
-      const endDate = new Date(startDate);
-      endDate.setDate(startDate.getDate() + 7);
-      endDate.setHours(0, 0, 0, 0);
-
-      if (today >= startDate && today < endDate) {
-        return Number(week.weekNumber);
-      }
+  // Look up from cache - use for...of with Array.from to allow early return
+  for (const [weekNumber, cache] of Array.from(weekUTCCache.entries())) {
+    if (todayUTC >= cache.startTimestamp && todayUTC < cache.endTimestamp) {
+      return Number(weekNumber);
     }
   }
 
