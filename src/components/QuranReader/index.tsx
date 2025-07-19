@@ -44,6 +44,7 @@ const QuranReader = ({
       <ContextMenu />
       <DebuggingObserverWindow isReadingMode={isReadingPreference} />
       <div
+        id="quran-reader-container"
         className={classNames(styles.container, {
           [styles.withVisibleSideBar]: isSideBarVisible,
           [styles.withSidebarNavigationOpenOrAuto]: isSidebarNavigationVisible,
