@@ -26,8 +26,9 @@ const QuestionsMenuItem: React.FC<Props> = ({ verse, onActionTriggered }) => {
   const [isContentModalOpen, setIsContentModalOpen] = useState(false);
   const { verseKey } = verse;
   const hasQuestions = !!questionsData && questionsData[verseKey]?.total > 0;
-  const isClarificationQuestion = !!questionsData?.[verseKey]?.types?.[QuestionType.CLARIFICATION];
-
+  const isClarificationQuestion = !!Object.entries(questionsData?.[verseKey]?.types || {}).some(
+    ([type, count]) => type.toUpperCase() === QuestionType.CLARIFICATION && count > 0,
+  );
   const onMenuItemClicked = () => {
     logButtonClick('reading_view_verse_actions_menu_questions');
     setIsContentModalOpen(true);
