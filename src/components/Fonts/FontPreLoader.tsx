@@ -1,11 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 
 import Head from 'next/head';
 
 const DEFAULT_LOCALE = 'en';
-
-// Global registry to track which fonts have been preloaded
-const preloadedFonts = new Set<string>();
 
 const SURAH_NAMES_FONT = {
   type: 'font/woff2',
@@ -61,28 +58,11 @@ const getToBePreLoadedFonts = (locale: string, isQuranReader: boolean) => {
 };
 
 const FontPreLoader: React.FC<Props> = ({ locale, isQuranReader = false }) => {
-  const [fontsToPreload, setFontsToPreload] = useState<Array<{ type: string; location: string }>>(
-    [],
-  );
-
-  useEffect(() => {
-    const toBePreLoadedFonts = getToBePreLoadedFonts(locale, isQuranReader);
-    // Filter out fonts that have already been preloaded
-    const newFontsToPreload = toBePreLoadedFonts.filter(
-      (fontDetails) => !preloadedFonts.has(fontDetails.location),
-    );
-
-    // Add new fonts to the preloaded registry
-    newFontsToPreload.forEach((fontDetails) => {
-      preloadedFonts.add(fontDetails.location);
-    });
-
-    setFontsToPreload(newFontsToPreload);
-  }, [locale, isQuranReader]);
+  const toBePreLoadedFonts = getToBePreLoadedFonts(locale, isQuranReader);
 
   return (
     <Head>
-      {fontsToPreload.map((fontDetails) => (
+      {toBePreLoadedFonts.map((fontDetails) => (
         <link
           key={fontDetails.location}
           rel="preload"
