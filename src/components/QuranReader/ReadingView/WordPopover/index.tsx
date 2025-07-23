@@ -1,4 +1,4 @@
-import React, { useCallback, useState, useRef, useEffect } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 import classNames from 'classnames';
 import dynamic from 'next/dynamic';
@@ -31,11 +31,11 @@ const ReadingViewWordPopover: React.FC<Props> = ({ word, children, onOpenChange 
   const [isMenuOpened, setIsMenuOpened] = useState(false);
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
   const wordRef = useRef<HTMLDivElement>(null);
-
-  const { popoverDirection, hasEnoughHorizontalSpace, marginLeft, marginTop } = usePopoverPosition({
-    wordRef,
-    isMenuOpened,
-  });
+  const { popoverDirection, hasEnoughHorizontalSpace, marginLeft, marginRight, marginTop } =
+    usePopoverPosition({
+      wordRef,
+      isMenuOpened,
+    });
 
   const dispatch = useDispatch();
 
@@ -81,9 +81,10 @@ const ReadingViewWordPopover: React.FC<Props> = ({ word, children, onOpenChange 
   useEffect(() => {
     if (isMenuOpened) {
       document.documentElement.style.setProperty('--popover-margin-left', marginLeft);
+      document.documentElement.style.setProperty('--popover-margin-right', marginRight);
       document.documentElement.style.setProperty('--popover-margin-top', marginTop);
     }
-  }, [marginLeft, marginTop, isMenuOpened]);
+  }, [marginLeft, marginRight, marginTop, isMenuOpened]);
 
   return (
     <>
