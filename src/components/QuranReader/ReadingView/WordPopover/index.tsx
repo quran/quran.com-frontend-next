@@ -34,7 +34,6 @@ const ReadingViewWordPopover: React.FC<Props> = ({ word, children, onOpenChange 
 
   const { popoverDirection, hasEnoughHorizontalSpace, marginLeft, marginTop } = usePopoverPosition({
     wordRef,
-    containerSelector: '#quran-reader-container',
     isMenuOpened,
   });
 

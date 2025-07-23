@@ -7,7 +7,12 @@
 export const getCSSVariableValue = (variableName: string, fallbackValue: number): number => {
   const value = getComputedStyle(document.documentElement).getPropertyValue(variableName).trim();
   if (!value) return fallbackValue;
-  return parseInt(value, 10);
+
+  // Parse the value, removing any non-numeric characters (like 'px', 'em', etc.)
+  const parsed = parseInt(value, 10);
+
+  // Return fallback if parsing resulted in NaN
+  return Number.isNaN(parsed) ? fallbackValue : parsed;
 };
 
 /**

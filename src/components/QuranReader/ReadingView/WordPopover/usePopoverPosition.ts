@@ -42,7 +42,7 @@ interface UsePopoverPositionResult {
 const usePopoverPosition = ({
   wordRef,
   isMenuOpened,
-  containerSelector = '#quran-reader-container',
+  containerSelector,
 }: UsePopoverPositionProps): UsePopoverPositionResult => {
   const [popoverDirection, setPopoverDirection] = useState<PopoverMenuExpandDirection>(
     PopoverMenuExpandDirection.BOTTOM,
@@ -60,19 +60,26 @@ const usePopoverPosition = ({
     (wordElement: HTMLElement): ContainerAndWordPositions | null => {
       const wordRect = wordElement.getBoundingClientRect();
       const pageElement = wordElement.closest('[id^="page-"]');
-      if (!pageElement) return null;
 
-      const contentContainer = document.getElementById(containerSelector);
-      const contentRect = contentContainer ? contentContainer.getBoundingClientRect() : null;
-      const containerRect = contentRect || pageElement.getBoundingClientRect();
-      const containerWidth = containerRect.width;
+      let containerElement: HTMLElement | null = null;
+      if (containerSelector) {
+        containerElement = document.querySelector(containerSelector);
+      }
+
+      if (!pageElement && !containerElement) return null;
+
+      const pageRect = pageElement.getBoundingClientRect();
+      const containerRect = containerElement ? containerElement.getBoundingClientRect() : null;
+      const rect = containerRect || pageRect;
+
+      const containerWidth = rect.width;
 
       const containerLeft = (window.innerWidth - containerWidth) / 2;
       const containerRight = containerLeft + containerWidth;
 
-      const containerHeight = containerRect.height;
-      const containerTop = containerRect.top;
-      const containerBottom = containerRect.bottom;
+      const containerHeight = rect.height;
+      const containerTop = rect.top;
+      const containerBottom = rect.bottom;
       const containerMiddleY = containerTop + containerHeight / 2;
 
       return {

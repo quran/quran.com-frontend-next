@@ -1,5 +1,7 @@
 import { useEffect, useCallback } from 'react';
 
+import useSafeTimeout from './useSafeTimeout';
+
 /**
  * A custom hook that adds a debounced event listener for window resize events.
  * This helps improve performance by preventing excessive calculations during resize operations.
@@ -13,19 +15,17 @@ const useWindowResizeListener = (
   delay = 200,
   dependencies: React.DependencyList = [],
 ): void => {
+  const setSafeTimeout = useSafeTimeout();
+
   // Create a memoized, debounced version of the callback
   const debouncedCallback = useCallback(() => {
-    let timeoutId: NodeJS.Timeout | null = null;
     return () => {
-      if (timeoutId) {
-        clearTimeout(timeoutId);
-      }
-      timeoutId = setTimeout(() => {
+      // Use setSafeTimeout which automatically handles clearing previous timeouts
+      setSafeTimeout(() => {
         callback();
-        timeoutId = null;
       }, delay);
     };
-  }, [callback, delay]);
+  }, [callback, delay, setSafeTimeout]);
 
   // Add the event listener with the debounced callback
   useEffect(() => {
