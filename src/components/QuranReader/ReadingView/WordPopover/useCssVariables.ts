@@ -9,10 +9,10 @@ import { useEffect } from 'react';
  * @property {string} [marginTop='0'] - Value for the --popover-margin-top CSS variable
  */
 interface UseCssVariablesProps {
-  isActive: boolean;
-  marginLeft: string;
-  marginRight: string;
-  marginTop: string;
+  isActive?: boolean;
+  marginLeft?: string;
+  marginRight?: string;
+  marginTop?: string;
 }
 
 /**
@@ -39,7 +39,7 @@ const useCssVariables = ({
   marginLeft = '0',
   marginRight = '0',
   marginTop = '0',
-}: Partial<UseCssVariablesProps> = {}) => {
+}: UseCssVariablesProps) => {
   useEffect(() => {
     const cssVars = [
       { name: '--popover-margin-left', value: marginLeft },
@@ -51,12 +51,18 @@ const useCssVariables = ({
       cssVars.forEach(({ name, value }) => {
         document.documentElement.style.setProperty(name, value);
       });
-    }
-
-    return () => {
+    } else {
       cssVars.forEach(({ name }) => {
         document.documentElement.style.removeProperty(name);
       });
+    }
+
+    return () => {
+      if (isActive) {
+        cssVars.forEach(({ name }) => {
+          document.documentElement.style.removeProperty(name);
+        });
+      }
     };
   }, [isActive, marginLeft, marginRight, marginTop]);
 };
