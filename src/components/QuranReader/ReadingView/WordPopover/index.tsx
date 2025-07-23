@@ -1,9 +1,10 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useRef, useState } from 'react';
 
 import classNames from 'classnames';
 import dynamic from 'next/dynamic';
 import { useDispatch } from 'react-redux';
 
+import useCssVariables from './useCssVariables';
 import usePopoverPosition from './usePopoverPosition';
 import styles from './WordPopover.module.scss';
 
@@ -78,13 +79,12 @@ const ReadingViewWordPopover: React.FC<Props> = ({ word, children, onOpenChange 
     onHoverChange(false);
   }, [onHoverChange]);
 
-  useEffect(() => {
-    if (isMenuOpened) {
-      document.documentElement.style.setProperty('--popover-margin-left', marginLeft);
-      document.documentElement.style.setProperty('--popover-margin-right', marginRight);
-      document.documentElement.style.setProperty('--popover-margin-top', marginTop);
-    }
-  }, [marginLeft, marginRight, marginTop, isMenuOpened]);
+  useCssVariables({
+    isActive: isMenuOpened,
+    marginLeft,
+    marginRight,
+    marginTop,
+  });
 
   return (
     <>
