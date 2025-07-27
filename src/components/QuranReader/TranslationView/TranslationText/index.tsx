@@ -154,7 +154,7 @@ const TranslationText: React.FC<Props> = ({
 
   const shouldShowFootnote = showFootnote && (footnote || isLoading);
   return (
-    <div className={styles[`translation-font-size-${translationFontScale}`]}>
+    <div className={styles[`translation-font-size-${translationFontScale}`]} translate="no">
       <div
         onClick={(event) => onTextClicked(event)}
         className={classNames(styles.text, styles[langData.direction], styles[langData.font])}
