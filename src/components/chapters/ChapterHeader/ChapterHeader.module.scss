@@ -175,12 +175,15 @@ $bismillahSvgInlineSizeMobile: 148px;
   justify-content: center;
   align-items: center;
 
-  margin-block-end: var(--spacing-max);
   svg {
     @include breakpoints.smallerThanTablet {
       inline-size: $bismillahSvgInlineSizeMobile;
     }
   }
+}
+
+.withReadingView {
+  margin-block-end: var(--spacing-max);
 }
 
 .withTranslationView {

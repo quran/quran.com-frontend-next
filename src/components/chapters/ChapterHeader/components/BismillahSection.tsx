@@ -34,6 +34,7 @@ const BismillahSection: React.FC<BismillahSectionProps> = ({
   return (
     <div
       className={classNames(styles.bismillahContainer, {
+        [styles.withReadingView]: !isTranslationView,
         [styles.withTranslationView]: isTranslationView,
       })}
     >
