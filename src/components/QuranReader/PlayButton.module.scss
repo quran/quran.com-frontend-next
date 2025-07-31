@@ -1,4 +1,7 @@
+@use "src/styles/breakpoints";
+
 $playChapterAudioButtonMinInlineSize: 95px;
+$playChapterAudioButtonMinInlineSizeMobile: 0.9375rem;
 
 @mixin customButton {
   border: none;
@@ -7,6 +10,11 @@ $playChapterAudioButtonMinInlineSize: 95px;
 
   svg {
     color: var(--color-success-medium);
+
+    @include breakpoints.smallerThanTablet {
+      width: $playChapterAudioButtonMinInlineSizeMobile;
+      height: $playChapterAudioButtonMinInlineSizeMobile;
+    }
   }
 
   &:hover {
@@ -24,5 +32,6 @@ $playChapterAudioButtonMinInlineSize: 95px;
   button {
     @include customButton;
     min-inline-size: $playChapterAudioButtonMinInlineSize;
+    font-size: var(--font-size-small);
   }
 }
