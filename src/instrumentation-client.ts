@@ -16,8 +16,8 @@ Sentry.init({
   debug: isDev,
   tracesSampleRate: isDev ? 1 : 0.1,
   replaysOnErrorSampleRate: isDev ? 1 : 0.1,
-  // Session replays sample rate - captures 100% of sessions in dev, 10% in production
-  replaysSessionSampleRate: isDev ? 1.0 : 0.1,
+  // Session replays sample rate - only capture dev sessions
+  replaysSessionSampleRate: isDev ? 1.0 : 0,
   release: version,
   integrations: [
     // Add the replay integration for session replays
