@@ -1,7 +1,6 @@
 @use "src/styles/breakpoints";
 
 $playChapterAudioButtonMinInlineSize: 95px;
-$playChapterAudioButtonMinInlineSizeMobile: 0.9375rem;
 
 @mixin customButton {
   border: none;
@@ -12,8 +11,8 @@ $playChapterAudioButtonMinInlineSizeMobile: 0.9375rem;
     color: var(--color-success-medium);
 
     @include breakpoints.smallerThanTablet {
-      width: $playChapterAudioButtonMinInlineSizeMobile;
-      height: $playChapterAudioButtonMinInlineSizeMobile;
+      width: var(--spacing-medium-px);
+      height: var(--spacing-medium-px);
     }
   }
 
