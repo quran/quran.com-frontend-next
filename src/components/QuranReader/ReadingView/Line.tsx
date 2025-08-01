@@ -76,6 +76,7 @@ const Line = ({ lineKey, words, isBigTextLayout, pageIndex, lineIndex }: LinePro
           chapterId={firstWordData[0]}
           pageNumber={words[0].pageNumber}
           hizbNumber={words[0].hizbNumber}
+          isTranslationView={false}
         />
       )}
       <div

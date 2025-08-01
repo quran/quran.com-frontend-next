@@ -74,6 +74,7 @@ const TranslationPageVerse: React.FC<TranslationPageVerse> = ({
           chapterId={String(verse.chapterId)}
           pageNumber={verse.pageNumber}
           hizbNumber={verse.hizbNumber}
+          isTranslationView
         />
       )}
 

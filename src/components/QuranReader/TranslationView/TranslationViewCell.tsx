@@ -99,7 +99,7 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
         </div>
         <BottomActions verseKey={verse.verseKey} />
       </div>
-      <Separator />
+      <Separator className={styles.verseSeparator} />
     </div>
   );
 };

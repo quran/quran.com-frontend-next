@@ -58,6 +58,7 @@ const OverflowVerseActionsMenu: React.FC<Props> = ({
             className={classNames(
               cellStyles.iconContainer,
               cellStyles.verseAction,
+              { [styles.moreMenuTrigger]: isTranslationView },
               'overflow-verse-actions-menu-trigger', // for onboarding
             )}
             ariaLabel={t('more')}

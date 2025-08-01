@@ -17,6 +17,7 @@ import styles from './styles/ContextMenu.module.scss';
 import { SwitchSize, SwitchVariant } from '@/dls/Switch/Switch';
 import { Mushaf } from '@/types/QuranReader';
 import { isMobile } from '@/utils/responsive';
+import { getChapterNumberFromKey } from '@/utils/verse';
 
 /**
  * ContextMenu component for the Quran reader
@@ -88,6 +89,7 @@ const ContextMenu: React.FC = (): JSX.Element | null => {
               chapterName={chapterData.transliteratedName}
               isSidebarNavigationVisible={isSidebarNavigationVisible}
               onToggleSidebar={handleSidebarToggle}
+              chapterNumber={getChapterNumberFromKey(verseKey)}
             />
           </div>
         </div>

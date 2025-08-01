@@ -31,8 +31,8 @@
   padding-inline: var(--spacing-medium);
   padding-top: var(--spacing-medium);
   padding-bottom: var(--spacing-large);
-  font-weight: var(--font-weight-semibold);
-  color: var(--color-text-default);
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-faded-new);
   width: 50%;
   border-bottom: 2px solid var(--color-separators-ayah-level);
   cursor: pointer;
@@ -46,5 +46,5 @@
 .selectedTab {
   color: var(--color-success-medium);
   border-bottom: 2px solid var(--color-success-medium);
-  font-weight: var(--font-weight-bold);
+  font-weight: var(--font-weight-semibold);
 }
