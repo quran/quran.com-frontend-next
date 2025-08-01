@@ -8,8 +8,8 @@ import IconContainer, { IconColor, IconSize } from '@/dls/IconContainer/IconCont
 import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
 import useCountRangeNotes from '@/hooks/auth/useCountRangeNotes';
 import useSafeTimeout from '@/hooks/useSafeTimeout';
-import NotesIcon from '@/icons/notes-filled.svg';
 import NotesFilledIcon from '@/icons/notes-with-pencil-filled.svg';
+import NotesIcon from '@/icons/notes-with-pencil.svg';
 import { WordVerse } from '@/types/Word';
 import { isLoggedIn } from '@/utils/auth/login';
 import { logButtonClick, logEvent } from '@/utils/eventLogger';
