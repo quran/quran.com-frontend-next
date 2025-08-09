@@ -1,3 +1,5 @@
+@use "../../styles/breakpoints";
+
 $verseLinkMinWidth: calc(6 * var(--spacing-mega));
 .sessionsContainer {
   padding-block-start: 0;
@@ -25,10 +27,30 @@ $verseLinkMinWidth: calc(6 * var(--spacing-mega));
   display: flex;
   flex-wrap: nowrap;
   overflow-x: auto;
+  padding-bottom: var(--spacing-xxsmall);
+  
   &::-webkit-scrollbar {
     -webkit-appearance: none;
     height: 0;
   }
+
+  @include breakpoints.desktop {
+    &::-webkit-scrollbar {
+      height: 7px;
+    }
+    &::-webkit-scrollbar-track {
+      background: var(--color-success-faint);
+    }
+    &::-webkit-scrollbar-thumb {
+      background-color: var(--color-success-medium);
+      border-radius: var(--border-radius-default);
+      border: transparent;
+    }
+    &::-webkit-scrollbar-thumb:hover {
+      background-color: var(--color-success-deep);
+    }
+  }
+
   & > .verseLink {
     min-width: $verseLinkMinWidth;
   }
