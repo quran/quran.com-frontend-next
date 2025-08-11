@@ -27,10 +27,19 @@ interface Props {
   translationsLimit?: number;
   arabicVerseClassName?: string;
   translationClassName?: string;
+  fixedFontScale?: number; // Optional override for font scales of Quran text and translations
 }
 
 const VerseAndTranslation: React.FC<Props> = (props) => {
-  const { data, error, mutate, translationFontScale } = useVerseAndTranslation(props);
+  // If fixedFontScale is provided as a prop, use it; otherwise, get from hook (Redux)
+  const { fixedFontScale, ...restProps } = props;
+  const {
+    data,
+    error,
+    mutate,
+    translationFontScale: reduxTranslationFontScale,
+    quranTextFontScale: reduxQuranTextFontScale,
+  } = useVerseAndTranslation(restProps);
   const { arabicVerseClassName, translationClassName, quranFont } = props;
 
   if (error) return <Error error={error} onRetryClicked={mutate} />;
@@ -42,7 +51,11 @@ const VerseAndTranslation: React.FC<Props> = (props) => {
       {data?.verses?.map((verse) => (
         <div key={verse.verseKey} className={styles.verseContainer}>
           <div className={classNames(styles.arabicVerseContainer, arabicVerseClassName)}>
-            <PlainVerseText quranFont={quranFont} words={getVerseWords(verse)} />
+            <PlainVerseText
+              quranFont={quranFont}
+              words={getVerseWords(verse)}
+              fontScale={fixedFontScale ?? reduxQuranTextFontScale}
+            />
           </div>
           <div className={classNames(styles.translationsListContainer, translationClassName)}>
             {verse.translations?.map((translation) => (
@@ -50,7 +63,7 @@ const VerseAndTranslation: React.FC<Props> = (props) => {
                 <TranslationText
                   languageId={translation.languageId}
                   resourceName={translation.resourceName}
-                  translationFontScale={translationFontScale}
+                  translationFontScale={fixedFontScale ?? reduxTranslationFontScale}
                   text={translation.text}
                 />
               </div>
