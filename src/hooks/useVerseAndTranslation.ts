@@ -27,6 +27,7 @@ const useVerseAndTranslation = ({ chapter, from, to, quranFont, translationsLimi
     quranFont: selectedQuranFont,
     mushafLines,
     translationFontScale,
+    quranTextFontScale,
   } = useSelector(selectQuranReaderStyles, shallowEqual);
 
   const resolvedFont = quranFont ?? selectedQuranFont;
@@ -57,6 +58,7 @@ const useVerseAndTranslation = ({ chapter, from, to, quranFont, translationsLimi
     mutate,
     translations,
     translationFontScale,
+    quranTextFontScale,
     quranFont,
   };
 };

@@ -15,6 +15,9 @@ import { logButtonClick } from '@/utils/eventLogger';
 import { getQuranicCalendarNavigationUrl } from '@/utils/navigation';
 import getCurrentDayAyah from '@/utils/quranInYearCalendar';
 
+// Set a fixed font scale for both Arabic and translation text
+const FONT_SCALE = 3;
+
 const QuranInYearSection = () => {
   const { t } = useTranslation('home');
 
@@ -52,6 +55,7 @@ const QuranInYearSection = () => {
           translationsLimit={1}
           arabicVerseClassName={styles.customArabicVerse}
           translationClassName={styles.customTranslation}
+          fixedFontScale={FONT_SCALE}
         />
         <Button
           type={ButtonType.Primary}
