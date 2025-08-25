@@ -46,12 +46,19 @@ function MyApp({ Component, pageProps }): JSX.Element {
   const { locale } = router;
   const { t } = useTranslation('common');
 
+  const DEDUPING_INTERVAL_MS = 30000; // 30 seconds
+  const SWR_CONFIG = {
+    revalidateOnFocus: false, // Prevent focus-based revalidation that causes random redirects
+    revalidateOnReconnect: false, // Prevent network reconnect revalidation
+    dedupingInterval: DEDUPING_INTERVAL_MS, // Cache for 30 seconds to reduce API calls
+  };
+
   const isLoggedInUser = isLoggedIn();
   const {
     data: userData,
     error: userError,
     isValidating,
-  } = useSWRImmutable(isLoggedInUser ? makeUserProfileUrl() : null, getUserProfile);
+  } = useSWRImmutable(isLoggedInUser ? makeUserProfileUrl() : null, getUserProfile, SWR_CONFIG);
   const hasValidProfile = !!userData?.email; // basic guard to ensure it's a real profile
 
   // listen to in-app changes of the locale and update the HTML dir accordingly.
