@@ -29,6 +29,7 @@ import { Course } from '@/types/auth/Course';
 import { CreateGoalRequest, Goal, GoalCategory, UpdateGoalRequest } from '@/types/auth/Goal';
 import { Note } from '@/types/auth/Note';
 import QuranProgramWeekResponse from '@/types/auth/QuranProgramWeekResponse';
+import { Response as ResponseType } from '@/types/auth/Response';
 import { StreakWithMetadataParams, StreakWithUserMetadata } from '@/types/auth/Streak';
 import UserProgramResponse from '@/types/auth/UserProgramResponse';
 import Language from '@/types/Language';
@@ -58,6 +59,7 @@ import {
   makeDeleteCollectionBookmarkByKeyUrl,
   makeDeleteCollectionUrl,
   makeDeleteOrUpdateNoteUrl,
+  makeEnrollUserInQuranProgramUrl,
   makeEnrollUserUrl,
   makeEstimateRangesReadingTimeUrl,
   makeFilterActivityDaysUrl,
@@ -66,11 +68,11 @@ import {
   makeGetBookmarkByCollectionId,
   makeGetCoursesUrl,
   makeGetCourseUrl,
-  makeEnrollUserInQuranProgramUrl,
   makeGetMediaFileProgressUrl,
   makeGetMonthlyMediaFilesCountUrl,
   makeGetQuestionByIdUrl,
   makeGetQuestionsByVerseKeyUrl,
+  makeGetQuranicWeekUrl,
   makeGetUserCoursesCountUrl,
   makeGetUserQuranProgramUrl,
   makeGoalUrl,
@@ -89,7 +91,6 @@ import {
   makeUserPreferencesUrl,
   makeUserProfileUrl,
   makeVerificationCodeUrl,
-  makeGetQuranicWeekUrl,
 } from '@/utils/auth/apiPaths';
 import CompleteAnnouncementRequest from 'types/auth/CompleteAnnouncementRequest';
 import { GetBookmarkCollectionsIdResponse } from 'types/auth/GetBookmarksByCollectionId';
@@ -531,17 +532,23 @@ export const updateNote = async (id: string, body: string, saveToQR: boolean) =>
 
 export const deleteNote = async (id: string) => deleteRequest(makeDeleteOrUpdateNoteUrl(id));
 
-export const getMediaFileProgress = async (renderId: string): Promise<Response> =>
+export const getMediaFileProgress = async (
+  renderId: string,
+): Promise<ResponseType<{ isDone: boolean; progress: number; url?: string }>> =>
   privateFetcher(makeGetMediaFileProgressUrl(renderId));
 
-export const getMonthlyMediaFilesCount = async (type: MediaType): Promise<Response> =>
+export const getMonthlyMediaFilesCount = async (
+  type: MediaType,
+): Promise<ResponseType<{ count: number; limit: number }>> =>
   privateFetcher(makeGetMonthlyMediaFilesCountUrl(type));
 
-export const generateMediaFile = async (payload: GenerateMediaFileRequest): Promise<Response> => {
+export const generateMediaFile = async (
+  payload: GenerateMediaFileRequest,
+): Promise<ResponseType<{ renderId?: string; url?: string }>> => {
   return postRequest(makeGenerateMediaFileUrl(), prepareGenerateMediaFileRequestData(payload));
 };
 
-export const requestVerificationCode = async (emailToVerify) => {
+export const requestVerificationCode = async (emailToVerify: string) => {
   return postRequest(makeVerificationCodeUrl(), { email: emailToVerify });
 };
 export const addOrUpdateBulkUserPreferences = async (
