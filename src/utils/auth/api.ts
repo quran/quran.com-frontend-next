@@ -13,6 +13,7 @@ import GetAllNotesQueryParams from './types/Note/GetAllNotesQueryParams';
 import { ShortenUrlResponse } from './types/ShortenUrl';
 
 import { fetcher } from '@/api';
+import { logErrorToSentry } from '@/lib/sentry';
 import {
   ActivityDay,
   ActivityDayType,
@@ -29,7 +30,7 @@ import { Course } from '@/types/auth/Course';
 import { CreateGoalRequest, Goal, GoalCategory, UpdateGoalRequest } from '@/types/auth/Goal';
 import { Note } from '@/types/auth/Note';
 import QuranProgramWeekResponse from '@/types/auth/QuranProgramWeekResponse';
-import { Response } from '@/types/auth/Response';
+import type * as Auth from '@/types/auth/Response';
 import { StreakWithMetadataParams, StreakWithUserMetadata } from '@/types/auth/Streak';
 import UserProgramResponse from '@/types/auth/UserProgramResponse';
 import Language from '@/types/Language';
@@ -108,6 +109,9 @@ import { Collection } from 'types/Collection';
 import CompleteSignupRequest from 'types/CompleteSignupRequest';
 
 type RequestData = Record<string, any>;
+
+// A curated list of API error codes that should not surface as thrown errors.
+// Instead, return the body so call-sites can handle them gracefully (e.g., show validation messages).
 const IGNORE_ERRORS = [
   MediaRenderError.MediaVersesRangeLimitExceeded,
   MediaRenderError.MediaFilesPerUserLimitExceeded,
@@ -152,24 +156,42 @@ export const throwIfResponseContainsError = (response: unknown, errorMessage?: s
   }
 };
 
-const handleErrors = async (res) => {
-  const body = await res.json();
-  const error = body?.error || body?.details?.error;
-  const errorName = body?.name || body?.details?.name;
+/**
+ * Normalizes error responses from APIs that return structured error bodies even on 200.
+ * - Returns the body when the error code is ignorable (validation-like errors)
+ * - Logs out and redirects when the user is banned
+ * - Otherwise throws a typed Error with message from the body
+ *
+ * Note: This does not interfere with 401 refresh logic since `fetcher` throws Response for non-OK.
+ *
+ * @returns {Promise<any>} The parsed response body when error is ignorable or after banned redirect.
+ */
+/**
+ * Parses a fetch Response and applies error handling rules.
+ * @returns {Promise<any>} The parsed response body or throws on non-ignorable errors
+ */
+export const handleErrorsResponse = async (res: Response): Promise<any> => {
+  const body = await res.json().catch(() => ({}));
+  return handleErrorsBody(body as Auth.Response);
+};
 
-  // sometimes FE needs to handle the error from the API instead of showing a general something went wrong message
-  const shouldIgnoreError = IGNORE_ERRORS.includes(error?.code);
-  if (shouldIgnoreError) {
-    return body;
-  }
-  // const toast = useToast();
+/**
+ * Applies error handling rules on a parsed API response body.
+ * @returns {Promise<any>} The body for ignorable/banned cases, otherwise throws
+ */
+export const handleErrorsBody = async (body: Auth.Response): Promise<any> => {
+  const error = (body as any)?.error || (body as any)?.details?.error;
+  const errorName = (body as any)?.name || (body as any)?.details?.name;
+
+  if (IGNORE_ERRORS.includes(error?.code)) return body;
 
   if (errorName === BANNED_USER_ERROR_ID) {
     await logoutUser();
-    return Router.push(`/login?error=${errorName}`);
+    await Router.push(`/login?error=${errorName}`);
+    return body;
   }
 
-  throw new Error(body?.message);
+  throw new Error((body as any)?.message || 'Request failed');
 };
 
 /**
@@ -510,17 +532,17 @@ export const deleteNote = async (id: string) => deleteRequest(makeDeleteOrUpdate
 
 export const getMediaFileProgress = async (
   renderId: string,
-): Promise<Response<{ isDone: boolean; progress: number; url?: string }>> =>
+): Promise<Auth.Response<{ isDone: boolean; progress: number; url?: string }>> =>
   privateFetcher(makeGetMediaFileProgressUrl(renderId));
 
 export const getMonthlyMediaFilesCount = async (
   type: MediaType,
-): Promise<Response<{ count: number; limit: number }>> =>
+): Promise<Auth.Response<{ count: number; limit: number }>> =>
   privateFetcher(makeGetMonthlyMediaFilesCountUrl(type));
 
 export const generateMediaFile = async (
   payload: GenerateMediaFileRequest,
-): Promise<Response<{ renderId?: string; url?: string }>> => {
+): Promise<Auth.Response<{ renderId?: string; url?: string }>> => {
   return postRequest(makeGenerateMediaFileUrl(), prepareGenerateMediaFileRequestData(payload));
 };
 
@@ -580,35 +602,67 @@ export const logoutUser = async () => {
 };
 
 const shouldRefreshToken = (error) => {
-  return error?.message === 'must refresh token';
+  // Only refresh when server explicitly signals it via message
+  if (!error) return false;
+  const message = (error.message || '').toString().trim().toLowerCase();
+  return error.status === 401 && message === 'must refresh token';
+};
+
+const buildAuthHeaders = (
+  init: RequestInit | undefined,
+  additionalHeaders: HeadersInit,
+): HeadersInit => ({
+  ...(init?.headers || {}),
+  // eslint-disable-next-line @typescript-eslint/naming-convention
+  'x-timezone': getTimezone(),
+  ...additionalHeaders,
+});
+
+const wrapUnauthorizedError = async (e: Response) => {
+  const cloned = e.clone();
+  const body = await cloned.json().catch((err) => {
+    logErrorToSentry(err, {
+      transactionName: 'wrapUnauthorizedError',
+      metadata: { message: 'Failed to parse 401 response body' },
+    });
+
+    return {};
+  });
+
+  const code = body?.error?.code || body?.code;
+  const message = body?.error?.message || body?.message;
+  const wrapped = new Error(message || 'Unauthorized');
+  (wrapped as any).status = e.status;
+  (wrapped as any).code = code;
+  return wrapped;
 };
 
 export const withCredentialsFetcher = async <T>(
   input: RequestInfo,
   init?: RequestInit,
 ): Promise<T> => {
+  const request: NextApiRequest = {
+    url: typeof input === 'string' ? input : input.url,
+    method: init?.method || 'GET',
+    body: init?.body,
+    headers: init?.headers,
+    query: {},
+  } as NextApiRequest;
+  const additionalHeaders = getAdditionalHeaders(request);
+  // Let fetcher throw on non-OK; for 401, wrap with parsed body so shouldRefreshToken can inspect synchronously
   try {
-    const request: NextApiRequest = {
-      url: typeof input === 'string' ? input : input.url,
-      method: init?.method || 'GET',
-      body: init?.body,
-      headers: init?.headers,
-      query: {},
-    } as NextApiRequest;
-    const additionalHeaders = getAdditionalHeaders(request);
-    const data = await fetcher<T>(input, {
+    return await fetcher<T>(input, {
       ...init,
       credentials: 'include',
-      headers: {
-        ...init?.headers,
-        // eslint-disable-next-line @typescript-eslint/naming-convention
-        'x-timezone': getTimezone(),
-        ...additionalHeaders,
-      },
+      headers: buildAuthHeaders(init, additionalHeaders),
     });
-    return data;
-  } catch (error) {
-    return handleErrors(error);
+  } catch (e) {
+    // fetcher throws Response on non-OK
+    if (e instanceof Response && e.status === 401) {
+      // If parsing fails, rethrow original Response
+      throw await wrapUnauthorizedError(e).catch(() => e);
+    }
+    throw e;
   }
 };
 

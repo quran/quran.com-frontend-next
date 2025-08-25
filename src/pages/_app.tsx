@@ -19,11 +19,11 @@ import SessionIncrementor from '@/components/SessionIncrementor';
 import ThirdPartyScripts from '@/components/ThirdPartyScripts/ThirdPartyScripts';
 import Footer from '@/dls/Footer/Footer';
 import ToastContainerProvider from '@/dls/Toast/ToastProvider';
+import useProfileRedirect from '@/hooks/useProfileRedirect';
 import ReduxProvider from '@/redux/Provider';
 import { API_HOST } from '@/utils/api';
 import { getUserProfile } from '@/utils/auth/api';
 import { makeUserProfileUrl } from '@/utils/auth/apiPaths';
-import { isCompleteProfile } from '@/utils/auth/complete-signup';
 import { isLoggedIn } from '@/utils/auth/login';
 import { logAndRedirectUnsupportedLogicalCSS } from '@/utils/css';
 import * as gtag from '@/utils/gtag';
@@ -47,10 +47,12 @@ function MyApp({ Component, pageProps }): JSX.Element {
   const { t } = useTranslation('common');
 
   const isLoggedInUser = isLoggedIn();
-  const { data: userData } = useSWRImmutable(
-    isLoggedInUser ? makeUserProfileUrl() : null,
-    getUserProfile,
-  );
+  const {
+    data: userData,
+    error: userError,
+    isValidating,
+  } = useSWRImmutable(isLoggedInUser ? makeUserProfileUrl() : null, getUserProfile);
+  const hasValidProfile = !!userData?.email; // basic guard to ensure it's a real profile
 
   // listen to in-app changes of the locale and update the HTML dir accordingly.
   useEffect(() => {
@@ -69,25 +71,18 @@ function MyApp({ Component, pageProps }): JSX.Element {
     };
   }, [router.events]);
 
-  // Redirect logged-in users away from complete-signup route to the home page if profile is complete
-  useEffect(() => {
-    if (isLoggedInUser && userData) {
-      const isProfileComplete = isCompleteProfile(userData);
-      if (isProfileComplete && router.pathname === ROUTES.COMPLETE_SIGNUP) {
-        router.push(ROUTES.HOME);
-      } else if (!isProfileComplete && router.pathname !== ROUTES.COMPLETE_SIGNUP) {
-        router.push(ROUTES.COMPLETE_SIGNUP);
-      }
-    }
-  }, [isLoggedInUser, userData, router]);
+  useProfileRedirect(router, isLoggedInUser, userData, userError, isValidating, hasValidProfile);
 
-  // Redirect logged-in users away from auth routes to the home page
+  // Redirect logged-in users away from auth routes to the home page (after profile is ready)
   useEffect(() => {
     const isAuthRoute = isAuthPage(router);
-    if (isLoggedInUser && isAuthRoute && router.pathname !== ROUTES.COMPLETE_SIGNUP) {
-      router.push(ROUTES.HOME);
-    }
-  }, [isLoggedInUser, router]);
+    if (!isAuthRoute) return;
+    if (router.pathname === ROUTES.COMPLETE_SIGNUP) return; // handled by the effect above
+    if (!isLoggedInUser) return;
+    if (isValidating || userError || !hasValidProfile) return; // wait for valid profile
+
+    router.replace(ROUTES.HOME);
+  }, [isLoggedInUser, userData, userError, isValidating, hasValidProfile, router]);
 
   return (
     <>
@@ -96,6 +91,7 @@ function MyApp({ Component, pageProps }): JSX.Element {
         <link rel="manifest" href="/manifest.json" />
         <link rel="preconnect" href={API_HOST} />
         <script
+          // eslint-disable-next-line react/no-danger
           dangerouslySetInnerHTML={{
             __html: `window.__BUILD_INFO__ = {
               date: "${process.env.NEXT_PUBLIC_BUILD_DATE || new Date().toISOString()}",
