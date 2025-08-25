@@ -25,6 +25,7 @@ import ReduxProvider from '@/redux/Provider';
 import { API_HOST } from '@/utils/api';
 import { getUserProfile } from '@/utils/auth/api';
 import { makeUserProfileUrl } from '@/utils/auth/apiPaths';
+import { isCompleteProfile } from '@/utils/auth/complete-signup';
 import { isLoggedIn } from '@/utils/auth/login';
 import { logAndRedirectUnsupportedLogicalCSS } from '@/utils/css';
 import * as gtag from '@/utils/gtag';
@@ -36,10 +37,10 @@ import DataContext from 'src/contexts/DataContext';
 import ThemeProvider from 'src/styles/ThemeProvider';
 import { AudioPlayerMachineProvider } from 'src/xstate/AudioPlayerMachineContext';
 
-import 'src/styles/reset.scss';
 import 'src/styles/fonts.scss';
-import 'src/styles/theme.scss';
 import 'src/styles/global.scss';
+import 'src/styles/reset.scss';
+import 'src/styles/theme.scss';
 import 'src/styles/variables.scss';
 
 function MyApp({ Component, pageProps }): JSX.Element {
@@ -60,7 +61,6 @@ function MyApp({ Component, pageProps }): JSX.Element {
     error: userError,
     isValidating,
   } = useSWRImmutable(isLoggedInUser ? makeUserProfileUrl() : null, getUserProfile, SWR_CONFIG);
-  const hasValidProfile = !!userData?.email; // basic guard to ensure it's a real profile
 
   // listen to in-app changes of the locale and update the HTML dir accordingly.
   useEffect(() => {
@@ -81,7 +81,9 @@ function MyApp({ Component, pageProps }): JSX.Element {
 
   useProfileRedirect(router, isLoggedInUser, userData, userError, isValidating);
 
-  // Redirect logged-in users away from auth routes to the home page (after profile is ready)
+  // Redirect logged-in users away from auth routes:
+  // - If profile is complete: send to HOME.
+  // - If incomplete: let useProfileRedirect handle sending to COMPLETE_SIGNUP.
   useEffect(() => {
     const currentPath = router.pathname;
     const isAuthRoute = isAuthPage(currentPath);
@@ -89,10 +91,14 @@ function MyApp({ Component, pageProps }): JSX.Element {
     if (!isAuthRoute) return;
     if (currentPath === ROUTES.COMPLETE_SIGNUP) return; // handled by the effect above
     if (!isLoggedInUser) return;
-    if (isValidating || userError || !hasValidProfile) return; // wait for valid profile
 
-    router.replace(ROUTES.HOME);
-  }, [isLoggedInUser, userData, userError, isValidating, hasValidProfile, router.pathname, router]);
+    if (isValidating || userError || !userData) return; // wait for profile
+
+    const profileComplete = isCompleteProfile(userData);
+    if (profileComplete) {
+      router.replace(ROUTES.HOME);
+    }
+  }, [isLoggedInUser, userData, userError, isValidating, router.pathname, router]);
 
   return (
     <>
