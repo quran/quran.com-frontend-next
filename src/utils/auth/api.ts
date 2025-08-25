@@ -29,7 +29,6 @@ import { Course } from '@/types/auth/Course';
 import { CreateGoalRequest, Goal, GoalCategory, UpdateGoalRequest } from '@/types/auth/Goal';
 import { Note } from '@/types/auth/Note';
 import QuranProgramWeekResponse from '@/types/auth/QuranProgramWeekResponse';
-import type * as Auth from '@/types/auth/Response';
 import { StreakWithMetadataParams, StreakWithUserMetadata } from '@/types/auth/Streak';
 import UserProgramResponse from '@/types/auth/UserProgramResponse';
 import Language from '@/types/Language';
@@ -170,19 +169,20 @@ export const throwIfResponseContainsError = (response: unknown, errorMessage?: s
  */
 export const handleErrorsResponse = async (res: Response): Promise<any> => {
   const body = await res.json().catch(() => ({}));
-  return handleErrorsBody(body as Auth.Response);
+  return handleErrorsBody(body as any);
 };
 
 /**
  * Applies error handling rules on a parsed API response body.
  * @returns {Promise<any>} The body for ignorable/banned cases, otherwise throws
  */
-export const handleErrorsBody = async (body: Auth.Response): Promise<any> => {
+export const handleErrorsBody = async (body: any): Promise<any> => {
   const error = (body as any)?.error || (body as any)?.details?.error;
   const errorName = error?.name || (body as any)?.details?.name;
+  const errorCode = error?.code || (body as any)?.details?.code;
 
   // Handle banned before IGNORE_ERRORS so we can logout/redirect
-  if (errorName === BANNED_USER_ERROR_ID) {
+  if (errorName === BANNED_USER_ERROR_ID || errorCode === AuthErrorCodes.Banned) {
     await logoutUser();
     if (typeof window !== 'undefined') {
       await Router.replace(`/login?error=${encodeURIComponent(errorName)}`);
@@ -190,7 +190,7 @@ export const handleErrorsBody = async (body: Auth.Response): Promise<any> => {
     return body;
   }
 
-  if (IGNORE_ERRORS.includes(error?.code)) return body;
+  if (IGNORE_ERRORS.includes(errorCode)) return body;
 
   throw new Error((body as any)?.message || error?.message || 'Request failed');
 };
@@ -531,19 +531,13 @@ export const updateNote = async (id: string, body: string, saveToQR: boolean) =>
 
 export const deleteNote = async (id: string) => deleteRequest(makeDeleteOrUpdateNoteUrl(id));
 
-export const getMediaFileProgress = async (
-  renderId: string,
-): Promise<{ data: { isDone: boolean; progress: number; url?: string } }> =>
+export const getMediaFileProgress = async (renderId: string): Promise<Response> =>
   privateFetcher(makeGetMediaFileProgressUrl(renderId));
 
-export const getMonthlyMediaFilesCount = async (
-  type: MediaType,
-): Promise<{ data: { count: number; limit: number } }> =>
+export const getMonthlyMediaFilesCount = async (type: MediaType): Promise<Response> =>
   privateFetcher(makeGetMonthlyMediaFilesCountUrl(type));
 
-export const generateMediaFile = async (
-  payload: GenerateMediaFileRequest,
-): Promise<{ success: boolean; data: { renderId?: string; url?: string }; details?: any }> => {
+export const generateMediaFile = async (payload: GenerateMediaFileRequest): Promise<Response> => {
   return postRequest(makeGenerateMediaFileUrl(), prepareGenerateMediaFileRequestData(payload));
 };
 
@@ -680,8 +674,9 @@ export const privateFetcher = async <T>(url: string, options?: RequestInit): Pro
     // Handle error in response body
     const error = maybeErrorResponse?.error || maybeErrorResponse?.details?.error;
     const errorName = error?.name || maybeErrorResponse?.details?.name;
+    const errorCode = error?.code;
 
-    if (errorName === BANNED_USER_ERROR_ID) {
+    if (errorName === BANNED_USER_ERROR_ID || errorCode === AuthErrorCodes.Banned) {
       await logoutUser();
       if (typeof window !== 'undefined') {
         await Router.replace(`/login?error=${encodeURIComponent(errorName)}`);
@@ -690,7 +685,8 @@ export const privateFetcher = async <T>(url: string, options?: RequestInit): Pro
       return response as T;
     }
 
-    if (error && !IGNORE_ERRORS.includes(errorName)) {
+    // errorCode computed above
+    if (error && !IGNORE_ERRORS.includes(errorCode)) {
       const errorMessage = error.message || 'Unknown error occurred';
       throw new Error(errorMessage);
     }
