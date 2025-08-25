@@ -184,11 +184,27 @@ export const handleErrorsBody = async (body: any): Promise<any> => {
 
   // Handle banned before IGNORE_ERRORS so we can logout/redirect
   if (errorName === BANNED_USER_ERROR_ID || errorCode === AuthErrorCodes.Banned) {
-    await logoutUser();
+    const errorLabel = String(errorName || errorCode || BANNED_USER_ERROR_ID);
+    try {
+      await logoutUser();
+    } catch (e) {
+      logErrorToSentry(e, { transactionName: 'logoutUserOnBanned' });
+    }
     if (typeof window !== 'undefined') {
-      await Router.replace(`/login?error=${encodeURIComponent(errorName)}`);
+      try {
+        await Router.replace(`/login?error=${encodeURIComponent(errorLabel)}`);
+      } catch (e) {
+        logErrorToSentry(e, { transactionName: 'routerReplaceOnBanned' });
+      }
     }
     return body;
+  }
+
+  // Bodies that signal failure but don't include a structured error
+  if ((body as any)?.success === false && !error) {
+    // If your API sets top-level codes in this case, you can check IGNORE_ERRORS here too.
+    const message = (body as any)?.message || 'Request failed';
+    throw new Error(message);
   }
 
   if (IGNORE_ERRORS.includes(errorCode)) return body;
@@ -627,8 +643,9 @@ const wrapUnauthorizedError = async (e: Response) => {
     return {};
   });
 
-  const code = body?.error?.code || body?.code;
-  const message = body?.error?.message || body?.message;
+  const code = body?.error?.code || body?.details?.error?.code || body?.code;
+  const message =
+    body?.error?.message || body?.details?.error?.message || body?.message || e.statusText;
   const wrapped = new Error(message || 'Unauthorized');
   (wrapped as any).status = e.status;
   (wrapped as any).code = code;
@@ -676,27 +693,7 @@ export const privateFetcher = async <T>(url: string, options?: RequestInit): Pro
 
   // Check if response is an object with error information
   if (response && typeof response === 'object') {
-    const maybeErrorResponse = response as any;
-
-    // Handle error in response body
-    const error = maybeErrorResponse?.error || maybeErrorResponse?.details?.error;
-    const errorName = error?.name || maybeErrorResponse?.details?.name;
-    const errorCode = error?.code;
-
-    if (errorName === BANNED_USER_ERROR_ID || errorCode === AuthErrorCodes.Banned) {
-      await logoutUser();
-      if (typeof window !== 'undefined') {
-        await Router.replace(`/login?error=${encodeURIComponent(errorName)}`);
-      }
-      // Return the response as is for banned users after redirect
-      return response as T;
-    }
-
-    // errorCode computed above
-    if (error && !IGNORE_ERRORS.includes(errorCode)) {
-      const errorMessage = error.message || 'Unknown error occurred';
-      throw new Error(errorMessage);
-    }
+    return handleErrorsBody(response) as T;
   }
 
   // Return the response as is
