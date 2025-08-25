@@ -4,6 +4,7 @@ import { DirectionProvider } from '@radix-ui/react-direction';
 import { TooltipProvider } from '@radix-ui/react-tooltip';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
+import Script from 'next/script';
 import { DefaultSeo } from 'next-seo';
 import useTranslation from 'next-translate/useTranslation';
 import useSWRImmutable from 'swr/immutable';
@@ -99,18 +100,15 @@ function MyApp({ Component, pageProps }): JSX.Element {
         <link rel="apple-touch-icon" sizes="192x192" href="/images/logo/Logo@192x192.png" />
         <link rel="manifest" href="/manifest.json" />
         <link rel="preconnect" href={API_HOST} />
-        <script
-          // eslint-disable-next-line react/no-danger
-          dangerouslySetInnerHTML={{
-            __html: `window.__BUILD_INFO__ = ${JSON.stringify({
-              date: process.env.NEXT_PUBLIC_BUILD_DATE || new Date().toISOString(),
-              hash: process.env.NEXT_PUBLIC_COMMIT_HASH || 'development',
-              version: process.env.NEXT_PUBLIC_APP_VERSION || '',
-              env: process.env.NEXT_PUBLIC_APP_ENV,
-            })}`,
-          }}
-        />
       </Head>
+      <Script id="build-info" strategy="afterInteractive">
+        {`window.__BUILD_INFO__ = ${JSON.stringify({
+          date: process.env.NEXT_PUBLIC_BUILD_DATE || new Date().toISOString(),
+          hash: process.env.NEXT_PUBLIC_COMMIT_HASH || 'development',
+          version: process.env.NEXT_PUBLIC_APP_VERSION || '',
+          env: process.env.NEXT_PUBLIC_APP_ENV,
+        })}`}
+      </Script>
       <FontPreLoader locale={locale} />
       <DirectionProvider dir={getDir(locale)}>
         <TooltipProvider>

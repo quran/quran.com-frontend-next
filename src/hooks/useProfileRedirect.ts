@@ -23,15 +23,22 @@ const useProfileRedirect = (
   isValidating: boolean,
 ): void => {
   const redirectFrameRef = useRef<number>();
-  const lastRedirectRef = useRef<string>('');
+  // Track the last "from -> to" to avoid re-issuing identical redirects while still
+  // allowing the same target if the source path changes.
+  const lastRedirectKeyRef = useRef<string>('');
 
   const performRedirect = useCallback(
-    (targetRoute: string) => {
-      lastRedirectRef.current = targetRoute;
+    (fromPath: string, targetRoute: string) => {
+      lastRedirectKeyRef.current = `${fromPath}->${targetRoute}`;
       router.replace(targetRoute);
     },
     [router],
   );
+
+  // Reset redirect tracking when pathname changes (user navigation)
+  useEffect(() => {
+    lastRedirectKeyRef.current = '';
+  }, [router.pathname]);
 
   useEffect(() => {
     // Clear any pending redirects
@@ -59,11 +66,12 @@ const useProfileRedirect = (
       targetRoute = ROUTES.COMPLETE_SIGNUP;
     }
 
-    // Only redirect if we have a target and it's different from last redirect
-    if (targetRoute && lastRedirectRef.current !== targetRoute) {
+    // Only redirect if we have a target and it's different from the last "from->to" pair
+    const redirectKey = targetRoute ? `${currentPath}->${targetRoute}` : '';
+    if (targetRoute && lastRedirectKeyRef.current !== redirectKey) {
       // Use requestAnimationFrame instead of setTimeout for safer async operation
       redirectFrameRef.current = requestAnimationFrame(() => {
-        performRedirect(targetRoute!);
+        performRedirect(currentPath, targetRoute!);
       });
     }
   }, [isLoggedInUser, userData, userError, isValidating, performRedirect, router.pathname]);

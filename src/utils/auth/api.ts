@@ -533,17 +533,17 @@ export const deleteNote = async (id: string) => deleteRequest(makeDeleteOrUpdate
 
 export const getMediaFileProgress = async (
   renderId: string,
-): Promise<Auth.Response<{ isDone: boolean; progress: number; url?: string }>> =>
+): Promise<{ data: { isDone: boolean; progress: number; url?: string } }> =>
   privateFetcher(makeGetMediaFileProgressUrl(renderId));
 
 export const getMonthlyMediaFilesCount = async (
   type: MediaType,
-): Promise<Auth.Response<{ count: number; limit: number }>> =>
+): Promise<{ data: { count: number; limit: number } }> =>
   privateFetcher(makeGetMonthlyMediaFilesCountUrl(type));
 
 export const generateMediaFile = async (
   payload: GenerateMediaFileRequest,
-): Promise<Auth.Response<{ renderId?: string; url?: string }>> => {
+): Promise<{ success: boolean; data: { renderId?: string; url?: string }; details?: any }> => {
   return postRequest(makeGenerateMediaFileUrl(), prepareGenerateMediaFileRequestData(payload));
 };
 
@@ -655,9 +655,47 @@ export const withCredentialsFetcher = async <T>(
   }
 };
 
-export const privateFetcher = configureRefreshFetch({
+// Original privateFetcher implementation
+const originalPrivateFetcher = configureRefreshFetch({
   shouldRefreshToken,
   // @ts-ignore
   refreshToken,
   fetch: withCredentialsFetcher,
 });
+
+/**
+ * Enhanced privateFetcher that automatically handles errors from API responses
+ * This allows consumers to get raw data directly without having to handle errors themselves
+ * @param {string} url The URL to fetch
+ * @param {RequestInit} [options] Request options
+ * @returns {Promise<T>} The response data with error handling applied
+ */
+export const privateFetcher = async <T>(url: string, options?: RequestInit): Promise<T> => {
+  const response = await originalPrivateFetcher(url, options);
+
+  // Check if response is an object with error information
+  if (response && typeof response === 'object') {
+    const maybeErrorResponse = response as any;
+
+    // Handle error in response body
+    const error = maybeErrorResponse?.error || maybeErrorResponse?.details?.error;
+    const errorName = error?.name || maybeErrorResponse?.details?.name;
+
+    if (errorName === BANNED_USER_ERROR_ID) {
+      await logoutUser();
+      if (typeof window !== 'undefined') {
+        await Router.replace(`/login?error=${encodeURIComponent(errorName)}`);
+      }
+      // Return the response as is for banned users after redirect
+      return response as T;
+    }
+
+    if (error && !IGNORE_ERRORS.includes(errorName)) {
+      const errorMessage = error.message || 'Unknown error occurred';
+      throw new Error(errorMessage);
+    }
+  }
+
+  // Return the response as is
+  return response as T;
+};
