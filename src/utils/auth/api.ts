@@ -1,5 +1,4 @@
 /* eslint-disable max-lines */
-import { NextApiRequest } from 'next';
 import Router from 'next/router';
 import { configureRefreshFetch } from 'refresh-fetch';
 
@@ -93,7 +92,6 @@ import {
   makeVerificationCodeUrl,
   makeGetQuranicWeekUrl,
 } from '@/utils/auth/apiPaths';
-import { getAdditionalHeaders } from '@/utils/headers';
 import CompleteAnnouncementRequest from 'types/auth/CompleteAnnouncementRequest';
 import { GetBookmarkCollectionsIdResponse } from 'types/auth/GetBookmarksByCollectionId';
 import PreferenceGroup from 'types/auth/PreferenceGroup';
@@ -181,17 +179,20 @@ export const handleErrorsResponse = async (res: Response): Promise<any> => {
  */
 export const handleErrorsBody = async (body: Auth.Response): Promise<any> => {
   const error = (body as any)?.error || (body as any)?.details?.error;
-  const errorName = (body as any)?.name || (body as any)?.details?.name;
+  const errorName = error?.name || (body as any)?.details?.name;
 
-  if (IGNORE_ERRORS.includes(error?.code)) return body;
-
+  // Handle banned before IGNORE_ERRORS so we can logout/redirect
   if (errorName === BANNED_USER_ERROR_ID) {
     await logoutUser();
-    await Router.push(`/login?error=${errorName}`);
+    if (typeof window !== 'undefined') {
+      await Router.replace(`/login?error=${encodeURIComponent(errorName)}`);
+    }
     return body;
   }
 
-  throw new Error((body as any)?.message || 'Request failed');
+  if (IGNORE_ERRORS.includes(error?.code)) return body;
+
+  throw new Error((body as any)?.message || error?.message || 'Request failed');
 };
 
 /**
@@ -608,14 +609,10 @@ const shouldRefreshToken = (error) => {
   return error.status === 401 && message === 'must refresh token';
 };
 
-const buildAuthHeaders = (
-  init: RequestInit | undefined,
-  additionalHeaders: HeadersInit,
-): HeadersInit => ({
+const buildAuthHeaders = (init: RequestInit | undefined): HeadersInit => ({
   ...(init?.headers || {}),
   // eslint-disable-next-line @typescript-eslint/naming-convention
   'x-timezone': getTimezone(),
-  ...additionalHeaders,
 });
 
 const wrapUnauthorizedError = async (e: Response) => {
@@ -641,20 +638,12 @@ export const withCredentialsFetcher = async <T>(
   input: RequestInfo,
   init?: RequestInit,
 ): Promise<T> => {
-  const request: NextApiRequest = {
-    url: typeof input === 'string' ? input : input.url,
-    method: init?.method || 'GET',
-    body: init?.body,
-    headers: init?.headers,
-    query: {},
-  } as NextApiRequest;
-  const additionalHeaders = getAdditionalHeaders(request);
   // Let fetcher throw on non-OK; for 401, wrap with parsed body so shouldRefreshToken can inspect synchronously
   try {
     return await fetcher<T>(input, {
       ...init,
       credentials: 'include',
-      headers: buildAuthHeaders(init, additionalHeaders),
+      headers: buildAuthHeaders(init),
     });
   } catch (e) {
     // fetcher throws Response on non-OK

@@ -2,6 +2,7 @@ import { useEffect, useRef, useCallback } from 'react';
 
 import type { NextRouter } from 'next/router';
 
+import type UserProfile from '@/types/auth/UserProfile';
 import { isCompleteProfile } from '@/utils/auth/complete-signup';
 import { ROUTES } from '@/utils/navigation';
 
@@ -10,18 +11,16 @@ import { ROUTES } from '@/utils/navigation';
  * Uses requestAnimationFrame for safer async operations instead of setTimeout.
  * @param {NextRouter} router - The Next.js router object.
  * @param {boolean} isLoggedInUser - Whether the user is logged in.
- * @param {any} userData - The user data.
- * @param {any} userError - The user error.
+ * @param {UserProfile | undefined} userData - The user profile data.
+ * @param {unknown} userError - Any error from fetching user data.
  * @param {boolean} isValidating - Whether the profile is validating.
- * @param {boolean} hasValidProfile - Whether the profile is valid.
  */
 const useProfileRedirect = (
   router: NextRouter,
   isLoggedInUser: boolean,
-  userData: any,
-  userError: any,
+  userData: UserProfile | undefined,
+  userError: unknown,
   isValidating: boolean,
-  hasValidProfile: boolean,
 ): void => {
   const redirectFrameRef = useRef<number>();
   const lastRedirectRef = useRef<string>('');
@@ -43,7 +42,12 @@ const useProfileRedirect = (
     if (!isLoggedInUser) return;
     if (isValidating) return; // wait until SWR settles
     if (userError) return; // don't redirect on error; treat as unauthenticated elsewhere
-    if (!userData || !hasValidProfile) return;
+    // Wait until we have a profile object, but don't gate on "hasValidProfile":
+    // we still need to redirect incomplete profiles to COMPLETE_SIGNUP.
+    if (!userData) return;
+
+    // Type guard: ensure userData is a valid UserProfile object
+    if (!('id' in userData) || typeof userData.id !== 'string') return;
 
     const isProfileComplete = isCompleteProfile(userData);
     const currentPath = router.pathname;
@@ -62,15 +66,7 @@ const useProfileRedirect = (
         performRedirect(targetRoute!);
       });
     }
-  }, [
-    isLoggedInUser,
-    userData,
-    userError,
-    isValidating,
-    hasValidProfile,
-    performRedirect,
-    router.pathname,
-  ]);
+  }, [isLoggedInUser, userData, userError, isValidating, performRedirect, router.pathname]);
 
   // Cleanup effect
   useEffect(() => {

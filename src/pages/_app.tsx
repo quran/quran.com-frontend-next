@@ -78,18 +78,20 @@ function MyApp({ Component, pageProps }): JSX.Element {
     };
   }, [router.events]);
 
-  useProfileRedirect(router, isLoggedInUser, userData, userError, isValidating, hasValidProfile);
+  useProfileRedirect(router, isLoggedInUser, userData, userError, isValidating);
 
   // Redirect logged-in users away from auth routes to the home page (after profile is ready)
   useEffect(() => {
-    const isAuthRoute = isAuthPage(router);
+    const currentPath = router.pathname;
+    const isAuthRoute = isAuthPage(currentPath);
+
     if (!isAuthRoute) return;
-    if (router.pathname === ROUTES.COMPLETE_SIGNUP) return; // handled by the effect above
+    if (currentPath === ROUTES.COMPLETE_SIGNUP) return; // handled by the effect above
     if (!isLoggedInUser) return;
     if (isValidating || userError || !hasValidProfile) return; // wait for valid profile
 
     router.replace(ROUTES.HOME);
-  }, [isLoggedInUser, userData, userError, isValidating, hasValidProfile, router]);
+  }, [isLoggedInUser, userData, userError, isValidating, hasValidProfile, router.pathname, router]);
 
   return (
     <>
@@ -100,12 +102,12 @@ function MyApp({ Component, pageProps }): JSX.Element {
         <script
           // eslint-disable-next-line react/no-danger
           dangerouslySetInnerHTML={{
-            __html: `window.__BUILD_INFO__ = {
-              date: "${process.env.NEXT_PUBLIC_BUILD_DATE || new Date().toISOString()}",
-              hash: "${process.env.NEXT_PUBLIC_COMMIT_HASH || 'development'}",
-              version: "${process.env.NEXT_PUBLIC_APP_VERSION || ''}",
-              env: "${process.env.NEXT_PUBLIC_APP_ENV}"
-            }`,
+            __html: `window.__BUILD_INFO__ = ${JSON.stringify({
+              date: process.env.NEXT_PUBLIC_BUILD_DATE || new Date().toISOString(),
+              hash: process.env.NEXT_PUBLIC_COMMIT_HASH || 'development',
+              version: process.env.NEXT_PUBLIC_APP_VERSION || '',
+              env: process.env.NEXT_PUBLIC_APP_ENV,
+            })}`,
           }}
         />
       </Head>
@@ -127,12 +129,12 @@ function MyApp({ Component, pageProps }): JSX.Element {
                       />
                       <GlobalListeners />
 
-                      {!isAuthPage(router) && <Navbar />}
+                      {!isAuthPage(router.pathname) && <Navbar />}
 
                       <DeveloperUtility />
                       <Component {...pageProps} />
                       <AudioPlayer />
-                      {!isAuthPage(router) && <Footer />}
+                      {!isAuthPage(router.pathname) && <Footer />}
                     </OnboardingProvider>
                   </ThemeProvider>
                   <SessionIncrementor />
