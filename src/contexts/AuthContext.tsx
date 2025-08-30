@@ -164,7 +164,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
    */
   const logout = useCallback(() => {
     dispatch({ type: 'LOGOUT' });
-    router.push('/login');
+    router.push(ROUTES.LOGIN);
   }, [router]);
 
   /**

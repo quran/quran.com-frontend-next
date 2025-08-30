@@ -19,6 +19,7 @@ import ThirdPartyScripts from '@/components/ThirdPartyScripts/ThirdPartyScripts'
 import { AuthProvider } from '@/contexts/AuthContext';
 import Footer from '@/dls/Footer/Footer';
 import ToastContainerProvider from '@/dls/Toast/ToastProvider';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import useAuthData from '@/hooks/auth/useAuthData';
 import ReduxProvider from '@/redux/Provider';
 import { API_HOST } from '@/utils/api';
@@ -42,9 +43,6 @@ function MyApp({ Component, pageProps }: { Component: any; pageProps: any }) {
   const { locale } = router;
   const { t } = useTranslation('common');
 
-  // Use the new auth data hook
-  const { userData } = useAuthData();
-
   useEffect(() => {
     document.documentElement.dir = getDir(locale);
     logAndRedirectUnsupportedLogicalCSS();
@@ -57,6 +55,26 @@ function MyApp({ Component, pageProps }: { Component: any; pageProps: any }) {
   }, [router.events]);
 
   const isAuth = isAuthPage(router);
+
+  // Component that uses auth data - must be inside AuthProvider
+  // eslint-disable-next-line react/no-multi-comp
+  function AppContent() {
+    const { userData } = useAuthData();
+
+    return (
+      <>
+        <UserAccountModal announcement={userData?.announcement} consents={userData?.consents} />
+        <DefaultSeo {...createSEOConfig({ locale, description: t('default-description') })} />
+        <GlobalListeners />
+        {!isAuth && <Navbar />}
+        <DeveloperUtility />
+        <Component {...pageProps} />
+        <AudioPlayer />
+        {!isAuth && <Footer />}
+      </>
+    );
+  }
+
   return (
     <AuthProvider>
       <Head>
@@ -84,19 +102,7 @@ function MyApp({ Component, pageProps }: { Component: any; pageProps: any }) {
                 <ReduxProvider locale={locale}>
                   <ThemeProvider>
                     <OnboardingProvider>
-                      <UserAccountModal
-                        announcement={userData?.announcement}
-                        consents={userData?.consents}
-                      />
-                      <DefaultSeo
-                        {...createSEOConfig({ locale, description: t('default-description') })}
-                      />
-                      <GlobalListeners />
-                      {!isAuth && <Navbar />}
-                      <DeveloperUtility />
-                      <Component {...pageProps} />
-                      <AudioPlayer />
-                      {!isAuth && <Footer />}
+                      <AppContent />
                     </OnboardingProvider>
                   </ThemeProvider>
                   <SessionIncrementor />
