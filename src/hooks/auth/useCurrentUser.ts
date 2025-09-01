@@ -1,22 +1,17 @@
-import useSWR from 'swr';
+import { useAuthData } from './useAuthData';
 
-import { getUserProfile } from '@/utils/auth/api';
-import { makeUserProfileUrl } from '@/utils/auth/apiPaths';
-import { isLoggedIn } from '@/utils/auth/login';
-
+/**
+ * @deprecated Use useAuthData instead. This hook is maintained for backward compatibility.
+ * @returns {object} - Object containing user data, loading state, error, and authentication status
+ */
 const useCurrentUser = () => {
-  const isUserLoggedIn = isLoggedIn();
-  const {
-    data: userData,
-    isValidating,
-    error,
-  } = useSWR(isUserLoggedIn ? makeUserProfileUrl() : null, getUserProfile);
+  const { userData, isLoading, userDataError, isAuthenticated } = useAuthData();
 
   return {
     user: userData || ({} as typeof userData),
-    isLoading: isValidating && !userData,
-    error,
-    isUserLoggedIn,
+    isLoading,
+    error: userDataError,
+    isUserLoggedIn: isAuthenticated,
   };
 };
 

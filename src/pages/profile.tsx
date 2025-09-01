@@ -13,7 +13,7 @@ import BookmarksAndCollectionsSection from '@/components/Verses/BookmarksAndColl
 import RecentReadingSessions from '@/components/Verses/RecentReadingSessions';
 import Button from '@/dls/Button/Button';
 import Skeleton from '@/dls/Skeleton/Skeleton';
-import useCurrentUser from '@/hooks/auth/useCurrentUser';
+import { useAuthData } from '@/hooks/auth/useAuthData';
 import Error from '@/pages/_error';
 import { logoutUser } from '@/utils/auth/api';
 import { DEFAULT_PHOTO_URL } from '@/utils/auth/constants';
@@ -38,7 +38,12 @@ const emailSample = 'mohammadali@quran.com';
 const ProfilePage: NextPage<Props> = () => {
   const { t, lang } = useTranslation();
   const router = useRouter();
-  const { user, isLoading, error, isUserLoggedIn } = useCurrentUser();
+  const {
+    userData: user,
+    isLoading,
+    userDataError: error,
+    isAuthenticated: isUserLoggedIn,
+  } = useAuthData();
 
   const onLogoutClicked = async () => {
     if (!isLoggedIn()) {

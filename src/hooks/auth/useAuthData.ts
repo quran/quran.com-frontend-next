@@ -2,37 +2,45 @@ import { useEffect } from 'react';
 
 import useSWRImmutable from 'swr/immutable';
 
-import { useAuth, AuthState } from '@/contexts/AuthContext';
+import { useAuthContext } from '@/contexts/AuthContext';
 import { logErrorToSentry } from '@/lib/sentry';
+import { AuthState } from '@/types/auth/AuthState';
 import UserProfile from '@/types/auth/UserProfile';
 import { getUserProfile } from '@/utils/auth/api';
 import { makeUserProfileUrl } from '@/utils/auth/apiPaths';
 import { isLoggedIn } from '@/utils/auth/login';
 
-interface UseAuthDataReturn extends AuthState {
-  userData: UserProfile | undefined;
-  isUserDataLoading: boolean;
-  userDataError: any;
+export interface UseAuthDataReturn extends AuthState {
+  /** User profile data (when available) */
+  userData?: UserProfile;
+  /** Error from data fetching (if any) */
+  userDataError?: any;
+  /** Function to refresh user data */
+  refreshUserData: () => Promise<UserProfile | null>;
 }
 
 /**
- * Custom hook that integrates SWR data fetching with AuthContext
- * Automatically updates auth state when user data is fetched
- * @returns {UseAuthDataReturn} Auth data and state
+ * Authentication data hook with SWR integration
+ * Provides authentication state and user data management
+ * @returns {UseAuthDataReturn} Authentication data and state
  */
-function useAuthData(): UseAuthDataReturn {
-  const { state, dispatch } = useAuth();
+export function useAuthData(): UseAuthDataReturn {
+  const { state, dispatch } = useAuthContext();
   const isLoggedInUser = isLoggedIn();
 
   const {
     data: userData,
     isValidating: isUserDataLoading,
     error: userDataError,
-  } = useSWRImmutable(isLoggedInUser ? makeUserProfileUrl() : null, getUserProfile);
+    mutate: refreshUserData,
+  } = useSWRImmutable(isLoggedInUser ? makeUserProfileUrl() : null, getUserProfile, {
+    revalidateOnFocus: false,
+    shouldRetryOnError: true,
+  });
 
-  // Update auth state when data changes
+  // Sync SWR data with auth context
   useEffect(() => {
-    if (isUserDataLoading) {
+    if (isUserDataLoading && !userData) {
       dispatch({ type: 'SET_LOADING', payload: true });
     } else if (userDataError) {
       logErrorToSentry(userDataError, {
@@ -46,18 +54,19 @@ function useAuthData(): UseAuthDataReturn {
     } else if (userData) {
       dispatch({ type: 'SET_USER', payload: userData });
     } else if (!isLoggedInUser) {
-      // User is not logged in - clear any existing state
+      // User is not logged in - set to idle state
       dispatch({ type: 'SET_LOADING', payload: false });
-      dispatch({ type: 'SET_USER', payload: null });
+      if (!state.user) {
+        dispatch({ type: 'SET_USER', payload: null });
+      }
     }
-  }, [userData, isUserDataLoading, userDataError, isLoggedInUser, dispatch]);
+  }, [userData, isUserDataLoading, userDataError, isLoggedInUser, dispatch, state.user]);
 
   return {
-    userData,
-    isUserDataLoading,
-    userDataError,
-    // Re-export auth state for convenience
     ...state,
+    userData,
+    userDataError,
+    refreshUserData,
   };
 }
 

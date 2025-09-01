@@ -19,8 +19,7 @@ import ThirdPartyScripts from '@/components/ThirdPartyScripts/ThirdPartyScripts'
 import { AuthProvider } from '@/contexts/AuthContext';
 import Footer from '@/dls/Footer/Footer';
 import ToastContainerProvider from '@/dls/Toast/ToastProvider';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import useAuthData from '@/hooks/auth/useAuthData';
+import { useAuthData } from '@/hooks/auth/useAuthData';
 import ReduxProvider from '@/redux/Provider';
 import { API_HOST } from '@/utils/api';
 import { logAndRedirectUnsupportedLogicalCSS } from '@/utils/css';
