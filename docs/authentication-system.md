@@ -75,9 +75,14 @@ function MyComponent() {
 
 ### Core Components
 
-1. **AuthContext** - Central state management with useReducer
-2. **useAuthData Hook** - SWR integration for automatic data fetching
-3. **AuthProvider** - App wrapper that provides authentication context
+1. **AuthContext** - Central state management with useReducer and helper functions
+2. **useAuthData Hook** - SWR integration for automatic data fetching and context synchronization
+3. **useAuthContext Hook** - Direct access to authentication context with type safety
+4. **AuthProvider** - App wrapper that provides authentication context
+5. **Error Handling System** - Comprehensive error classification, mapping, and recovery utilities
+6. **Auth Request Handlers** - Generic request handling with automatic error mapping and validation
+7. **State Management** - Consolidated reducer with individual handler functions for better
+   maintainability
 
 ### State Structure
 
@@ -91,257 +96,179 @@ interface AuthState {
 }
 ```
 
-## Authentication Flows
+### Error Types
 
-### Application Initialization Flow
+```typescript
+enum AuthErrorType {
+  NETWORK_ERROR = 'network_error',
+  UNAUTHORIZED = 'unauthorized',
+  FORBIDDEN = 'forbidden',
+  PROFILE_INCOMPLETE = 'profile_incomplete',
+  VALIDATION_ERROR = 'validation_error',
+  SERVER_ERROR = 'server_error',
+  UNKNOWN_ERROR = 'unknown_error',
+}
 
-```
-App Start → AuthProvider → useAuthData Hook → SWR Data Fetching
-     ↓
-Initial State: { isLoading: true, isAuthenticated: false }
-     ↓
-Check Login Status → Fetch User Profile (if logged in)
-     ↓
-Update Auth State → Handle Redirects → Render App
-```
-
-### User Authentication State Flows
-
-#### Flow A: Unauthenticated User Journey
-
-```
-User visits any page → AuthProvider loads → useAuthData checks login status
-     ↓
-isLoggedIn() = false → No data fetching → State remains unauthenticated
-     ↓
-User can browse app normally → No redirects → Full app access
+interface AuthError {
+  type: AuthErrorType;
+  message: string;
+  originalError?: any;
+  context?: Record<string, any>;
+  recoverable: boolean;
+}
 ```
 
-#### Flow B: Authenticated User with Complete Profile
+## Error Handling System
 
-```
-User visits any page → AuthProvider loads → useAuthData fetches profile
-     ↓
-isLoggedIn() = true → SWR fetches user data → Profile is complete
-     ↓
-Auth state: { isAuthenticated: true, isProfileComplete: true }
-     ↓
-If on auth page → Redirect to home (/) → Normal app usage
-```
+The authentication system includes a comprehensive error handling framework that provides:
 
-#### Flow C: Authenticated User with Incomplete Profile
+- **Error Classification**: Automatic categorization of errors by type
+- **Error Mapping**: Conversion of API errors to user-friendly form field errors
+- **Recovery Mechanisms**: Automatic retry logic and user guidance
+- **Sentry Integration**: Comprehensive error logging and monitoring
 
-```
-User visits any page → AuthProvider loads → useAuthData fetches profile
-     ↓
-isLoggedIn() = true → SWR fetches user data → Profile incomplete
-     ↓
-Auth state: { isAuthenticated: true, isProfileComplete: false }
-     ↓
-If not on /complete-signup → Redirect to /complete-signup
-     ↓
-User completes profile → Redirect to home (/)
-```
+### Error Classification
 
-### Profile Completion Flow
+The system automatically classifies errors based on their characteristics:
 
-#### Complete Signup Page Flow
+```typescript
+// Network-related errors
+createNetworkError(error, context);
 
-```
-User lands on /complete-signup → Check login status
-     ↓
-Not logged in → Redirect to /login
-     ↓
-Logged in → Fetch user data with SWR
-     ↓
-Loading → Show spinner
-     ↓
-Error → Log to Sentry → Redirect to /login
-     ↓
-Success → Show CompleteSignupForm → User fills required fields
-     ↓
-Form submission success → Redirect to home (/)
+// Authentication errors
+createUnauthorizedError(error, context);
+createForbiddenError(error, context);
+
+// Validation errors
+createValidationError(error, context);
+
+// Server errors
+createServerError(error, context);
+
+// Profile-related errors
+createProfileIncompleteError(error, context);
 ```
 
-### Authentication Actions Flow
+### API Error Mapping
 
-#### Login Flow
+The system provides automatic mapping of API validation errors to form fields:
 
-```
-User clicks login → login(user) called → Dispatch SET_USER action
-     ↓
-Reducer updates state: { isAuthenticated: true, isProfileComplete: checkProfile(user) }
-     ↓
-handleAuthRedirect triggered → Check profile completion
-     ↓
-If incomplete → Redirect to /complete-signup
-If complete → Stay on current page or redirect from auth pages
-```
+```typescript
+// Example: Sign in form errors
+const errors = await mapAPIErrorToFormFields(response, {
+  endpoint: AuthEndpoint.SignIn,
+  fieldMap: {
+    credentials: 'password',
+    email: 'email',
+  },
+});
 
-#### Logout Flow
-
-```
-User clicks logout → logout() called → Dispatch LOGOUT action
-     ↓
-State reset to initialState with isLoading: false
-     ↓
-Router.push('/login') → User redirected to login page
+// Result: { email: 'Invalid email format', password: 'Invalid credentials' }
 ```
 
-#### Profile Update Flow
+### Error Recovery
 
-```
-User updates profile → updateProfile(user) called → Dispatch SET_USER action
-     ↓
-State updated with new user data → Profile completion re-evaluated
-     ↓
-If profile now complete → Redirect logic may trigger
-```
+- **Automatic Retries**: SWR handles network errors with exponential backoff
+- **User Guidance**: Clear error messages guide users to resolution
+- **Graceful Degradation**: System continues to function despite errors
+- **Context Preservation**: Error context is maintained for debugging
 
-### Error Handling Flows
+### Error Endpoints
 
-#### Data Fetching Error Flow
+The system handles errors for all authentication endpoints:
 
-```
-useAuthData → SWR fetch fails → userDataError set
-     ↓
-Dispatch SET_ERROR action → State: { error: message, isLoading: false }
-     ↓
-Error logged to Sentry with context → UI shows error state
-```
-
-#### Network Error Recovery Flow
-
-```
-Network error occurs → SWR retry logic → Automatic retry
-     ↓
-If retry succeeds → Normal data flow resumes
-     ↓
-If retry fails → Error state maintained → User can retry manually
+```typescript
+enum AuthEndpoint {
+  SignIn = 'signIn',
+  SignUp = 'signUp',
+  ForgotPassword = 'forgotPassword',
+  ResetPassword = 'resetPassword',
+  CompleteSignup = 'completeSignup',
+  UpdateUserProfile = 'updateUserProfile',
+}
 ```
 
-### Page Navigation Flows
+## API Request Handling
 
-#### Auth Page Protection Flow
+The authentication system includes consolidated request handling utilities that provide:
 
-```
-User navigates to auth page (/login, /forgot-password, etc.)
-     ↓
-isAuthPage(router) = true
-     ↓
-If user authenticated + profile complete → Redirect to home (/)
-     ↓
-If user authenticated + profile incomplete → Allow access to /complete-signup only
-```
+- **Generic Request Handler**: Unified API request processing
+- **Automatic Error Mapping**: Convert API errors to form field errors
+- **Type Safety**: Full TypeScript support for all endpoints
+- **Consistent Response Format**: Standardized response structure
 
-#### Non-Auth Page Access Flow
+### Generic Request Handler
 
-```
-User navigates to regular app page
-     ↓
-isAuthPage(router) = false
-     ↓
-If user authenticated + profile incomplete → Redirect to /complete-signup
-     ↓
-Otherwise → Allow normal access
+```typescript
+const handleAuthRequest = async <T>(
+  url: string,
+  data: T,
+  endpoint: AuthEndpoint,
+  fieldMap: AuthFieldMap,
+  method?: string,
+): Promise<APIResponse<BaseAuthResponse>>
 ```
 
-### State Management Flow
+### Authentication Request Functions
 
-#### Reducer State Transitions
+```typescript
+// Sign in with automatic error mapping
+const signIn = async (email: string, password: string): Promise<APIResponse<BaseAuthResponse>>
 
-```
-Initial State: { user: null, isLoading: true, isAuthenticated: false, error: null, isProfileComplete: false }
-     ↓
-SET_LOADING: { ...state, isLoading: payload }
-     ↓
-SET_USER: { user: payload, isAuthenticated: !!payload, isProfileComplete: checkProfile(payload), isLoading: false, error: null }
-     ↓
-SET_ERROR: { ...state, error: payload, isLoading: false }
-     ↓
-SET_PROFILE_COMPLETE: { ...state, isProfileComplete: payload }
-     ↓
-LOGOUT: { ...initialState, isLoading: false }
-```
+// Sign up with validation
+const signUp = async (data: SignUpRequest): Promise<APIResponse<BaseAuthResponse>>
 
-### Data Synchronization Flow
+// Password reset
+const requestPasswordReset = async (email: string): Promise<APIResponse<BaseAuthResponse>>
 
-#### useAuthData Synchronization
+// Complete signup
+const completeSignup = async (data: CompleteSignupRequest): Promise<APIResponse<BaseAuthResponse>>
 
-```
-Component mounts → useAuthData hook initializes
-     ↓
-Check isLoggedIn() → Conditional SWR fetch
-     ↓
-SWR states: isValidating, data, error
-     ↓
-useEffect syncs to auth context:
-  - isValidating → SET_LOADING
-  - data → SET_USER
-  - error → SET_ERROR + Sentry log
-  - !isLoggedIn → SET_LOADING(false) + SET_USER(null)
+// Reset password
+const resetPassword = async (password: string, token: string): Promise<APIResponse<BaseAuthResponse>>
+
+// Update profile
+const updateUserProfile = async (data: {
+  firstName?: string;
+  lastName?: string;
+  username?: string;
+}): Promise<APIResponse<BaseAuthResponse>>
 ```
 
-### Component Integration Flow
+### Response Format
 
-#### App-level Integration
+All request functions return a consistent response format:
 
-```
-_app.tsx → AuthProvider wraps entire app
-     ↓
-AppContent component inside AuthProvider
-     ↓
-useAuthData hook called → Provides user data to UserAccountModal
-     ↓
-Auth state available throughout app via useAuth() hook
+```typescript
+interface APIResponse<T> {
+  data: T; // API response data
+  errors: Record<string, string>; // Mapped field errors
+}
 ```
 
-### Profile Completion Logic Flow
+### Error Mapping Example
 
-#### Profile Validation Flow
+```typescript
+// API Error Response
+{
+  "error": {
+    "code": "INVALID_CREDENTIALS",
+    "details": {
+      "email": "INVALID_EMAIL_FORMAT",
+      "password": "MIN_LENGTH"
+    }
+  }
+}
 
+// Mapped to Form Fields
+{
+  "data": { /* response data */ },
+  "errors": {
+    "email": "Invalid email format",
+    "password": "Password must be at least 8 characters"
+  }
+}
 ```
-User profile data → isCompleteProfile(user)
-     ↓
-Required fields check: email, firstName, lastName, username
-     ↓
-All fields present → true (profile complete)
-     ↓
-Any field missing → false (profile incomplete)
-     ↓
-getMissingFields() → Returns array of missing field names
-     ↓
-convertMissingFieldsToFormFields() → Creates form fields for completion
-```
-
-### User Journey States
-
-**Unauthenticated User:**
-
-- Can browse and use the app without restrictions
-- No redirects or interruptions
-- Full access to public features
-
-**Authenticated User with Complete Profile:**
-
-- Seamless app usage
-- Automatic redirects from auth pages to home
-- Enhanced features available
-
-**Authenticated User with Incomplete Profile:**
-
-- Automatic redirect to `/complete-signup`
-- Profile completion flow
-- Redirect to home after completion
-
-### Key Flow Characteristics
-
-- ✅ **No forced logins** - Users can browse without authentication
-- ✅ **Automatic redirects** based on authentication and profile status
-- ✅ **Seamless onboarding** for new users
-- ✅ **Persistent authentication** state
-- ✅ **Error recovery** with automatic retries
-- ✅ **State synchronization** between hooks and context
 
 ## Common Usage Patterns
 
@@ -442,6 +369,28 @@ function Component() {
 - `error`: Error message (if any)
 - `refreshUserData`: Function to refresh user data
 
+### useAuthContext (Direct Context Access)
+
+Direct access to the authentication context with type safety and helper functions.
+
+```tsx
+import { useAuthContext } from '@/contexts/AuthContext';
+
+function AuthComponent() {
+  const { state, dispatch, login, logout, updateProfile } = useAuthContext();
+
+  // Use context directly...
+}
+```
+
+**Returns:**
+
+- `state`: Current authentication state
+- `dispatch`: Dispatch function for auth actions
+- `login`: Helper function to set authenticated user
+- `logout`: Helper function to log out user
+- `updateProfile`: Helper function to update user profile
+
 ### useCurrentUser (Legacy Hook)
 
 Alternative hook for user data (deprecated, use `useAuthData` instead).
@@ -518,10 +467,13 @@ if (error) {
 
 ## Performance
 
-- **Efficient caching** with SWR
-- **Minimal re-renders** with proper memoization
-- **Lazy loading** of user data
-- **Bundle size**: ~3KB (gzipped)
+- **Efficient caching** with SWR and configurable retry logic
+- **Minimal re-renders** with proper memoization and useCallback/useMemo
+- **Lazy loading** of user data with conditional fetching
+- **Error retry configuration** with exponential backoff (3 retries, 1s interval)
+- **Bundle size**: ~4KB (gzipped) including error handling utilities
+- **Optimized reducer** with individual handler functions for better performance
+- **Type-safe context** with minimal dependency arrays
 
 ## Troubleshooting
 
@@ -619,6 +571,61 @@ type AuthAction =
   | { type: 'LOGOUT' };
 ```
 
+### Reducer Structure
+
+The authentication reducer uses individual handler functions for better maintainability and
+testability:
+
+```typescript
+// Individual handler functions
+function handleSetLoading(state: AuthState, payload: boolean): AuthState {
+  return { ...state, isLoading: payload };
+}
+
+function handleSetUser(state: AuthState, user: UserProfile | null): AuthState {
+  const isAuthenticated = !!user;
+  const isProfileComplete = user ? isCompleteProfile(user) : false;
+  return {
+    ...state,
+    user,
+    isAuthenticated,
+    isProfileComplete,
+    isLoading: false,
+    error: null,
+  };
+}
+
+function handleSetError(state: AuthState, error: string): AuthState {
+  return { ...state, error, isLoading: false };
+}
+
+function handleSetProfileComplete(state: AuthState, isComplete: boolean): AuthState {
+  return { ...state, isProfileComplete: isComplete };
+}
+
+function handleLogout(): AuthState {
+  return { ...initialState, isLoading: false };
+}
+
+// Main reducer function
+export function authReducer(state: AuthState, action: AuthAction): AuthState {
+  switch (action.type) {
+    case 'SET_LOADING':
+      return handleSetLoading(state, action.payload);
+    case 'SET_USER':
+      return handleSetUser(state, action.payload);
+    case 'SET_ERROR':
+      return handleSetError(state, action.payload);
+    case 'SET_PROFILE_COMPLETE':
+      return handleSetProfileComplete(state, action.payload);
+    case 'LOGOUT':
+      return handleLogout();
+    default:
+      return state;
+  }
+}
+```
+
 ## Profile Completion Requirements
 
 A user profile is considered complete when all of the following fields are present:
@@ -645,10 +652,15 @@ A user profile is considered complete when all of the following fields are prese
 ## Files to Reference
 
 - **Core Implementation**: `src/contexts/AuthContext.tsx`, `src/hooks/auth/useAuthData.ts`
+- **State Management**: `src/contexts/authActions.ts` (reducer with handler functions)
+- **Context Access**: `src/hooks/auth/useAuthContext.ts` (direct context access)
 - **Usage Examples**: `src/pages/_app.tsx`, `src/pages/profile.tsx`
 - **Components**: `src/components/Login/CompleteSignupForm.tsx`
-- **API Integration**: `src/utils/auth/api.ts`
-- **Error Handling**: `src/utils/auth/errorHandling.ts`, `src/utils/auth/errors.ts`
+- **API Integration**: `src/utils/auth/api.ts`, `src/utils/auth/authRequests.ts`
+- **Error Handling**: `src/utils/auth/errorTypes.ts`, `src/utils/auth/errors.ts`,
+  `src/utils/auth/errorHandling.ts`
+- **Request Handling**: `src/utils/auth/authRequests.ts` (generic request utilities)
+- **SWR Integration**: `src/hooks/auth/useUserProfile.ts` (separate SWR hook)
 
 ## Key Benefits
 

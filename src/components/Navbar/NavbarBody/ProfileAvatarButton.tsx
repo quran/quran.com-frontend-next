@@ -48,7 +48,7 @@ const ProfileAvatarButton = () => {
 
     await logoutUser();
     removeLastSyncAt();
-    router.reload();
+    router.push(getLoginNavigationUrl());
   };
 
   const onProfileClicked = () => {

@@ -10,7 +10,6 @@ export type AuthAction =
   | { type: 'SET_LOADING'; payload: boolean }
   | { type: 'SET_USER'; payload: UserProfile | null }
   | { type: 'SET_ERROR'; payload: string | null }
-  | { type: 'SET_PROFILE_COMPLETE'; payload: boolean }
   | { type: 'LOGOUT' };
 
 /**
@@ -26,74 +25,6 @@ export const initialState: AuthState = {
 };
 
 /**
- * Handle SET_LOADING action
- * @param {AuthState} state - Current authentication state
- * @param {boolean} payload - Loading state payload
- * @returns {AuthState} Updated authentication state
- */
-function handleSetLoading(state: AuthState, payload: boolean): AuthState {
-  return {
-    ...state,
-    isLoading: payload,
-  };
-}
-
-/**
- * Handle SET_USER action
- * @param {AuthState} state - Current authentication state
- * @param {UserProfile | null} user - User profile data
- * @returns {AuthState} Updated authentication state
- */
-function handleSetUser(state: AuthState, user: UserProfile | null): AuthState {
-  const isAuthenticated = !!user;
-  const isProfileComplete = user ? isCompleteProfile(user) : false;
-
-  return {
-    ...state,
-    user,
-    isAuthenticated,
-    isProfileComplete,
-    isLoading: false,
-    error: null,
-  };
-}
-
-/**
- * Handle SET_ERROR action
- * @param {AuthState} state - Current authentication state
- * @param {string} error - Error message
- * @returns {AuthState} Updated authentication state
- */
-function handleSetError(state: AuthState, error: string): AuthState {
-  return {
-    ...state,
-    error,
-    isLoading: false,
-  };
-}
-
-/**
- * Handle SET_PROFILE_COMPLETE action
- * @param {AuthState} state - Current authentication state
- * @param {boolean} isComplete - Whether profile is complete
- * @returns {AuthState} Updated authentication state
- */
-function handleSetProfileComplete(state: AuthState, isComplete: boolean): AuthState {
-  return { ...state, isProfileComplete: isComplete };
-}
-
-/**
- * Handle LOGOUT action
- * @returns {AuthState} Initial authentication state
- */
-function handleLogout(): AuthState {
-  return {
-    ...initialState,
-    isLoading: false,
-  };
-}
-
-/**
  * Authentication reducer function
  * @param {AuthState} state - Current authentication state
  * @param {AuthAction} action - Action to process
@@ -102,15 +33,31 @@ function handleLogout(): AuthState {
 export function authReducer(state: AuthState, action: AuthAction): AuthState {
   switch (action.type) {
     case 'SET_LOADING':
-      return handleSetLoading(state, action.payload);
-    case 'SET_USER':
-      return handleSetUser(state, action.payload);
+      return { ...state, isLoading: action.payload };
+
+    case 'SET_USER': {
+      const isAuthenticated = !!action.payload;
+      const isProfileComplete = action.payload ? isCompleteProfile(action.payload) : false;
+      return {
+        ...state,
+        user: action.payload,
+        isAuthenticated,
+        isProfileComplete,
+        isLoading: false,
+        error: null,
+      };
+    }
+
     case 'SET_ERROR':
-      return handleSetError(state, action.payload);
-    case 'SET_PROFILE_COMPLETE':
-      return handleSetProfileComplete(state, action.payload);
+      return {
+        ...state,
+        error: action.payload,
+        isLoading: false,
+      };
+
     case 'LOGOUT':
-      return handleLogout();
+      return { ...initialState, isLoading: false };
+
     default:
       return state;
   }

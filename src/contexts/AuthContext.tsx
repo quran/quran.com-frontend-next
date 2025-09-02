@@ -1,6 +1,6 @@
-import { createContext, useCallback, useContext, useMemo, useReducer } from 'react';
+import { createContext, useCallback, useMemo, useReducer } from 'react';
 
-import { authReducer, initialState } from './authActions';
+import { authReducer, initialState, AuthAction } from './authActions';
 
 import { AuthState } from '@/types/auth/AuthState';
 import UserProfile from '@/types/auth/UserProfile';
@@ -13,13 +13,11 @@ export interface AuthContextType {
   /** Current authentication state */
   state: AuthState;
   /** Dispatch function to update authentication state */
-  dispatch: React.Dispatch<any>;
+  dispatch: React.Dispatch<AuthAction>;
   /** Helper function to set authenticated user */
-  login: (user: UserProfile) => void;
+  setUser: (user: UserProfile | null) => void;
   /** Helper function to log out user */
   logout: () => void;
-  /** Helper function to update user profile */
-  updateProfile: (user: UserProfile) => void;
 }
 
 /**
@@ -37,19 +35,6 @@ export interface AuthProviderProps {
 }
 
 /**
- * Custom hook to access authentication context
- * @returns {AuthContextType} Authentication context with state and helper functions
- * @throws Error if used outside of AuthProvider
- */
-export function useAuthContext(): AuthContextType {
-  const context = useContext(AuthContext);
-  if (context === undefined) {
-    throw new Error('useAuthContext must be used within an AuthProvider');
-  }
-  return context;
-}
-
-/**
  * Authentication Provider Component
  * Provides authentication context to the entire application
  * @param {AuthProviderProps} props - Props for the AuthProvider component
@@ -61,8 +46,8 @@ export function AuthProvider({ children }: AuthProviderProps): JSX.Element {
   /**
    * Helper function to set authenticated user
    */
-  const login = useCallback(
-    (user: UserProfile) => {
+  const setUser = useCallback(
+    (user: UserProfile | null) => {
       dispatch({ type: 'SET_USER', payload: user });
     },
     [dispatch],
@@ -75,25 +60,14 @@ export function AuthProvider({ children }: AuthProviderProps): JSX.Element {
     dispatch({ type: 'LOGOUT' });
   }, [dispatch]);
 
-  /**
-   * Helper function to update user profile
-   */
-  const updateProfile = useCallback(
-    (user: UserProfile) => {
-      dispatch({ type: 'SET_USER', payload: user });
-    },
-    [dispatch],
-  );
-
   const contextValue = useMemo(
     () => ({
       state,
       dispatch,
-      login,
+      setUser,
       logout,
-      updateProfile,
     }),
-    [state, dispatch, login, logout, updateProfile],
+    [state, dispatch, setUser, logout],
   );
 
   return <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>;

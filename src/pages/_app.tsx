@@ -8,6 +8,7 @@ import { DefaultSeo } from 'next-seo';
 import useTranslation from 'next-translate/useTranslation';
 
 import AudioPlayer from '@/components/AudioPlayer/AudioPlayer';
+import AuthRedirectHandler from '@/components/Auth/AuthRedirectHandler';
 import UserAccountModal from '@/components/Auth/UserAccountModal';
 import DeveloperUtility from '@/components/DeveloperUtility/DeveloperUtility';
 import FontPreLoader from '@/components/Fonts/FontPreLoader';
@@ -62,6 +63,7 @@ function MyApp({ Component, pageProps }: { Component: any; pageProps: any }) {
 
     return (
       <>
+        <AuthRedirectHandler />
         <UserAccountModal announcement={userData?.announcement} consents={userData?.consents} />
         <DefaultSeo {...createSEOConfig({ locale, description: t('default-description') })} />
         <GlobalListeners />
