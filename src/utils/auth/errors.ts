@@ -1,3 +1,4 @@
+/* eslint-disable react-func/max-lines-per-function */
 /* eslint-disable max-lines */
 import { AuthError, AuthErrorType } from './errorTypes';
 
@@ -387,7 +388,13 @@ export const classifyError = (error: any, context?: Record<string, any>): AuthEr
   if (!error) return createNullError(error, context);
 
   // Network errors
-  if (error.code === 'NETWORK_ERROR' || error.message?.includes('fetch')) {
+  if (
+    error.code === 'NETWORK_ERROR' ||
+    error.name === 'NetworkError' ||
+    (error.message?.toLowerCase().includes('network') &&
+      error.message?.toLowerCase().includes('error')) ||
+    error.message?.match(/fetch failed|failed to fetch/i)
+  ) {
     return createNetworkError(error, context);
   }
 
@@ -409,7 +416,12 @@ export const classifyError = (error: any, context?: Record<string, any>): AuthEr
   }
 
   // Profile-related errors
-  if (error.message?.includes('profile') || error.message?.includes('complete')) {
+  if (
+    (error.message?.toLowerCase().includes('profile') &&
+      error.message?.toLowerCase().includes('incomplete')) ||
+    error.message?.toLowerCase().includes('complete your profile') ||
+    error.code === 'PROFILE_INCOMPLETE'
+  ) {
     return createProfileIncompleteError(error, context);
   }
 

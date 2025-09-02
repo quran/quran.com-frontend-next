@@ -31,6 +31,17 @@ const CompleteSignupPage = () => {
     if (!loggedIn) router.replace(ROUTES.LOGIN);
   }, [loggedIn, router]);
 
+  // Handle error state
+  useEffect(() => {
+    if (error) {
+      logErrorToSentry(error, {
+        transactionName: 'CompleteSignupPage',
+        metadata: { error },
+      });
+      router.push(ROUTES.LOGIN);
+    }
+  }, [error, router]);
+
   // Handle loading state (only when logged in)
   if (loggedIn && (isValidating || !userData)) {
     return (
@@ -40,15 +51,7 @@ const CompleteSignupPage = () => {
     );
   }
 
-  // Handle error state
   if (error) {
-    logErrorToSentry(error, {
-      transactionName: 'CompleteSignupPage',
-      metadata: { error },
-    });
-
-    // Redirect to login if we can't get user data
-    router.push(ROUTES.LOGIN);
     return null;
   }
 

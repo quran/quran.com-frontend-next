@@ -49,8 +49,10 @@ export function useAuthData(): UseAuthDataReturn {
         type: 'SET_ERROR',
         payload: userDataError.message || 'Failed to fetch user data',
       });
+      dispatch({ type: 'SET_LOADING', payload: false });
     } else if (userData) {
       setUser(userData);
+      dispatch({ type: 'SET_LOADING', payload: false });
     } else if (!userData && !isUserDataLoading && !userDataError) {
       // Not logged in or no data - set to idle state
       // Only do this if we're not currently loading and there's no error

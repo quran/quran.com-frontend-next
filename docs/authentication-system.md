@@ -46,7 +46,7 @@ guiding authenticated users through necessary profile completion steps.
 ## Quick Start
 
 ```tsx
-import useAuthData from '@/hooks/auth/useAuthData';
+import { useAuthData } from '@/hooks/auth/useAuthData';
 
 function MyComponent() {
   const { userData, isLoading, isAuthenticated, isProfileComplete } = useAuthData();
