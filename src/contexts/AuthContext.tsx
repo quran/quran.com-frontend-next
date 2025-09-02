@@ -1,9 +1,11 @@
 import { createContext, useCallback, useContext, useMemo, useReducer } from 'react';
 
 import { authReducer, initialState } from './authActions';
+import type { AuthAction } from './authActions';
 
 import { AuthState } from '@/types/auth/AuthState';
 import UserProfile from '@/types/auth/UserProfile';
+import { isLoggedIn } from '@/utils/auth/login';
 
 /**
  * Authentication Context Type
@@ -13,7 +15,7 @@ export interface AuthContextType {
   /** Current authentication state */
   state: AuthState;
   /** Dispatch function to update authentication state */
-  dispatch: React.Dispatch<any>;
+  dispatch: React.Dispatch<AuthAction>;
   /** Helper function to set authenticated user */
   login: (user: UserProfile) => void;
   /** Helper function to log out user */
@@ -55,8 +57,15 @@ export function useAuthContext(): AuthContextType {
  * @param {AuthProviderProps} props - Props for the AuthProvider component
  * @returns {JSX.Element} AuthProvider component
  */
-export function AuthProvider({ children }: AuthProviderProps): JSX.Element {
-  const [state, dispatch] = useReducer(authReducer, initialState);
+export const AuthProvider = ({ children }: AuthProviderProps): JSX.Element => {
+  // Initialize auth state based on the presence of the login cookie on the client.
+  // This avoids a brief unauthenticated state that can cause premature redirects.
+  const [state, dispatch] = useReducer(authReducer, initialState, (init): AuthState => {
+    if (typeof window === 'undefined') return init;
+    // Assume authenticated initially if cookie exists; validation happens in useAuthData
+    const loggedIn = isLoggedIn();
+    return { ...init, isAuthenticated: loggedIn };
+  });
 
   /**
    * Helper function to set authenticated user
@@ -93,8 +102,8 @@ export function AuthProvider({ children }: AuthProviderProps): JSX.Element {
       logout,
       updateProfile,
     }),
-    [state, dispatch, login, logout, updateProfile],
+    [state, login, logout, updateProfile],
   );
 
   return <AuthContext.Provider value={contextValue}>{children}</AuthContext.Provider>;
-}
+};

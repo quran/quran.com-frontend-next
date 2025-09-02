@@ -4,29 +4,19 @@ import { DirectionProvider } from '@radix-ui/react-direction';
 import { TooltipProvider } from '@radix-ui/react-tooltip';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
-import { DefaultSeo } from 'next-seo';
-import useTranslation from 'next-translate/useTranslation';
 
-import AudioPlayer from '@/components/AudioPlayer/AudioPlayer';
-import UserAccountModal from '@/components/Auth/UserAccountModal';
-import DeveloperUtility from '@/components/DeveloperUtility/DeveloperUtility';
+import AppContent from '@/components/AppContent/AppContent';
 import FontPreLoader from '@/components/Fonts/FontPreLoader';
-import GlobalListeners from '@/components/GlobalListeners';
-import Navbar from '@/components/Navbar/Navbar';
 import { OnboardingProvider } from '@/components/Onboarding/OnboardingProvider';
 import SessionIncrementor from '@/components/SessionIncrementor';
 import ThirdPartyScripts from '@/components/ThirdPartyScripts/ThirdPartyScripts';
 import { AuthProvider } from '@/contexts/AuthContext';
-import Footer from '@/dls/Footer/Footer';
 import ToastContainerProvider from '@/dls/Toast/ToastProvider';
-import { useAuthData } from '@/hooks/auth/useAuthData';
 import ReduxProvider from '@/redux/Provider';
 import { API_HOST } from '@/utils/api';
 import { logAndRedirectUnsupportedLogicalCSS } from '@/utils/css';
 import * as gtag from '@/utils/gtag';
 import { getDir } from '@/utils/locale';
-import { isAuthPage } from '@/utils/routes';
-import { createSEOConfig } from '@/utils/seo';
 import DataContext from 'src/contexts/DataContext';
 import ThemeProvider from 'src/styles/ThemeProvider';
 import { AudioPlayerMachineProvider } from 'src/xstate/AudioPlayerMachineContext';
@@ -40,39 +30,19 @@ import 'src/styles/variables.scss';
 function MyApp({ Component, pageProps }: { Component: any; pageProps: any }) {
   const router = useRouter();
   const { locale } = router;
-  const { t } = useTranslation('common');
+  const resolvedLocale = locale ?? 'en';
+  const languageDirection = getDir(resolvedLocale);
 
   useEffect(() => {
-    document.documentElement.dir = getDir(locale);
+    document.documentElement.dir = languageDirection;
     logAndRedirectUnsupportedLogicalCSS();
-  }, [locale]);
+  }, [languageDirection]);
 
   useEffect(() => {
     const handleRouteChange = (url: string) => gtag.pageView(url);
     router.events.on('routeChangeComplete', handleRouteChange);
     return () => router.events.off('routeChangeComplete', handleRouteChange);
   }, [router.events]);
-
-  const isAuth = isAuthPage(router);
-
-  // Component that uses auth data - must be inside AuthProvider
-  // eslint-disable-next-line react/no-multi-comp
-  function AppContent() {
-    const { userData } = useAuthData();
-
-    return (
-      <>
-        <UserAccountModal announcement={userData?.announcement} consents={userData?.consents} />
-        <DefaultSeo {...createSEOConfig({ locale, description: t('default-description') })} />
-        <GlobalListeners />
-        {!isAuth && <Navbar />}
-        <DeveloperUtility />
-        <Component {...pageProps} />
-        <AudioPlayer />
-        {!isAuth && <Footer />}
-      </>
-    );
-  }
 
   return (
     <AuthProvider>
@@ -92,16 +62,16 @@ function MyApp({ Component, pageProps }: { Component: any; pageProps: any }) {
           }}
         />
       </Head>
-      <FontPreLoader locale={locale} />
-      <DirectionProvider dir={getDir(locale)}>
+      <FontPreLoader locale={resolvedLocale} />
+      <DirectionProvider dir={languageDirection}>
         <TooltipProvider>
           <ToastContainerProvider>
             <DataContext.Provider value={pageProps.chaptersData}>
               <AudioPlayerMachineProvider>
-                <ReduxProvider locale={locale}>
+                <ReduxProvider locale={resolvedLocale}>
                   <ThemeProvider>
                     <OnboardingProvider>
-                      <AppContent />
+                      <AppContent Component={Component} pageProps={pageProps} />
                     </OnboardingProvider>
                   </ThemeProvider>
                   <SessionIncrementor />

@@ -1,38 +1,31 @@
 import { useEffect } from 'react';
 
 import { useRouter } from 'next/router';
-import useSWRImmutable from 'swr/immutable';
 
+import withAuth from '@/components/Auth/withAuth';
 import CompleteSignupForm from '@/components/Login/CompleteSignupForm';
 import Spinner, { SpinnerSize } from '@/dls/Spinner/Spinner';
-import { logErrorToSentry } from '@/lib/sentry';
+import useAuthData from '@/hooks/auth/useAuthData';
 import styles from '@/pages/index.module.scss';
-import UserProfile from '@/types/auth/UserProfile';
-import { getUserProfile } from '@/utils/auth/api';
-import { makeUserProfileUrl } from '@/utils/auth/apiPaths';
-import { isLoggedIn } from '@/utils/auth/login';
-import { ROUTES } from '@/utils/navigation';
+import { ROUTES, getLoginNavigationUrl } from '@/utils/navigation';
 
 const CompleteSignupPage = () => {
   const router = useRouter();
-  const loggedIn = isLoggedIn();
-  const {
-    data: userData,
-    isValidating,
-    error,
-  } = useSWRImmutable<UserProfile>(loggedIn ? makeUserProfileUrl() : null, getUserProfile);
+  const { userData, isLoading, userDataError } = useAuthData();
 
   const handleSuccess = () => {
     router.push(ROUTES.HOME);
   };
 
-  // Redirect logged-out users
+  // Handle error state: per docs, log then redirect to login
   useEffect(() => {
-    if (!loggedIn) router.replace(ROUTES.LOGIN);
-  }, [loggedIn, router]);
+    if (userDataError) {
+      router.replace(getLoginNavigationUrl());
+    }
+  }, [userDataError, router]);
 
-  // Handle loading state (only when logged in)
-  if (loggedIn && (isValidating || !userData)) {
+  // Handle loading state
+  if (isLoading || !userData) {
     return (
       <div className={styles.loadingContainer}>
         <Spinner size={SpinnerSize.Large} />
@@ -40,19 +33,15 @@ const CompleteSignupPage = () => {
     );
   }
 
-  // Handle error state
-  if (error) {
-    logErrorToSentry(error, {
-      transactionName: 'CompleteSignupPage',
-      metadata: { error },
-    });
-
-    // Redirect to login if we can't get user data
-    router.push(ROUTES.LOGIN);
-    return null;
+  if (userDataError) {
+    return (
+      <div className={styles.loadingContainer}>
+        <Spinner size={SpinnerSize.Large} />
+      </div>
+    );
   }
 
   return <CompleteSignupForm userData={userData} onSuccess={handleSuccess} />;
 };
 
-export default CompleteSignupPage;
+export default withAuth(CompleteSignupPage);

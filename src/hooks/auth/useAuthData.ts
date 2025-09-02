@@ -2,19 +2,22 @@ import { useEffect } from 'react';
 
 import useSWRImmutable from 'swr/immutable';
 
+import useIsLoggedIn from './useIsLoggedIn';
+
 import { useAuthContext } from '@/contexts/AuthContext';
 import { logErrorToSentry } from '@/lib/sentry';
 import { AuthState } from '@/types/auth/AuthState';
+import { AuthError } from '@/types/auth/errorTypes';
 import UserProfile from '@/types/auth/UserProfile';
 import { getUserProfile } from '@/utils/auth/api';
 import { makeUserProfileUrl } from '@/utils/auth/apiPaths';
-import { isLoggedIn } from '@/utils/auth/login';
+import { classifyError } from '@/utils/auth/errors';
 
 export interface UseAuthDataReturn extends AuthState {
   /** User profile data (when available) */
   userData?: UserProfile;
   /** Error from data fetching (if any) */
-  userDataError?: any;
+  userDataError: AuthError;
   /** Function to refresh user data */
   refreshUserData: () => Promise<UserProfile | null>;
 }
@@ -24,43 +27,73 @@ export interface UseAuthDataReturn extends AuthState {
  * Provides authentication state and user data management
  * @returns {UseAuthDataReturn} Authentication data and state
  */
-export function useAuthData(): UseAuthDataReturn {
+const useAuthData = (): UseAuthDataReturn => {
   const { state, dispatch } = useAuthContext();
-  const isLoggedInUser = isLoggedIn();
+  const { isLoggedIn: isLoggedInUser } = useIsLoggedIn();
+
+  const swrKey = isLoggedInUser ? makeUserProfileUrl() : null;
+  const shouldRetryOnError = (error: any) => {
+    // Do not retry on 401 Unauthorized errors
+    if (error?.status === 401 || error?.response?.status === 401) return false;
+    return true;
+  };
 
   const {
     data: userData,
     isValidating: isUserDataLoading,
     error: userDataError,
     mutate: refreshUserData,
-  } = useSWRImmutable(isLoggedInUser ? makeUserProfileUrl() : null, getUserProfile, {
+  } = useSWRImmutable(swrKey, getUserProfile, {
     revalidateOnFocus: false,
-    shouldRetryOnError: true,
+    shouldRetryOnError,
   });
+
+  // Keep isAuthenticated in sync with the login cookie
+  useEffect(() => {
+    dispatch({ type: 'SET_AUTHENTICATED', payload: isLoggedInUser });
+  }, [isLoggedInUser, dispatch]);
 
   // Sync SWR data with auth context
   useEffect(() => {
+    // Early return: If user data is loading, set loading state
     if (isUserDataLoading && !userData) {
       dispatch({ type: 'SET_LOADING', payload: true });
-    } else if (userDataError) {
+      return;
+    }
+
+    if (userDataError) {
+      const authError = classifyError(userDataError, {
+        transactionName: 'useAuthData',
+        userDataError,
+      });
+
       logErrorToSentry(userDataError, {
         transactionName: 'useAuthData',
         metadata: { userDataError },
       });
-      dispatch({
-        type: 'SET_ERROR',
-        payload: userDataError.message || 'Failed to fetch user data',
-      });
-    } else if (userData) {
-      dispatch({ type: 'SET_USER', payload: userData });
-    } else if (!isLoggedInUser) {
-      // User is not logged in - set to idle state
-      dispatch({ type: 'SET_LOADING', payload: false });
-      if (!state.user) {
-        dispatch({ type: 'SET_USER', payload: null });
+
+      // If unauthorized, mark as unauthenticated and clear user to prevent stale state
+      if (authError.type === 'unauthorized') {
+        dispatch({ type: 'SET_AUTHENTICATED', payload: false });
       }
+
+      dispatch({ type: 'SET_ERROR', payload: authError });
+      return;
     }
-  }, [userData, isUserDataLoading, userDataError, isLoggedInUser, dispatch, state.user]);
+
+    // Early return: Handle successful user data fetch
+    if (userData) {
+      dispatch({ type: 'SET_USER', payload: userData });
+    }
+  }, [
+    userData,
+    isUserDataLoading,
+    userDataError,
+    state.isAuthenticated,
+    dispatch,
+    state.user,
+    isLoggedInUser,
+  ]);
 
   return {
     ...state,
@@ -68,6 +101,6 @@ export function useAuthData(): UseAuthDataReturn {
     userDataError,
     refreshUserData,
   };
-}
+};
 
 export default useAuthData;
