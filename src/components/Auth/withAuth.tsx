@@ -1,9 +1,8 @@
-import useHasMounted from '../../hooks/useHasMounted';
-
 import RedirectToLoginPage from './RedirectToLoginPage';
 
 import Spinner, { SpinnerSize } from '@/dls/Spinner/Spinner';
 import useAuthData from '@/hooks/auth/useAuthData';
+import useHasMounted from '@/hooks/useHasMounted';
 /**
  * withAuth is a Higher-Order Component (HOC) that wraps a component and checks if the user is authenticated.
  * If the user is authenticated, it renders the wrapped component.

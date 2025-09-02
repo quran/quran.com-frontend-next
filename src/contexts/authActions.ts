@@ -84,7 +84,10 @@ const handleSetAuthenticated = (state: AuthState, isAuthenticated: boolean): Aut
   return {
     ...state,
     isAuthenticated,
+    isLoading: false,
     user: isAuthenticated ? state.user : null, // Clear user on logout
+    isProfileComplete: isAuthenticated ? state.isProfileComplete : false, // Reset profile completeness on logout
+    error: isAuthenticated ? state.error : null, // Clear auth errors on logout
   };
 };
 

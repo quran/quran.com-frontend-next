@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-import useSWRImmutable from 'swr/immutable';
+import useSWR from 'swr';
 
 import useIsLoggedIn from './useIsLoggedIn';
 
@@ -43,8 +43,7 @@ const useAuthData = (): UseAuthDataReturn => {
     isValidating: isUserDataLoading,
     error: userDataError,
     mutate: refreshUserData,
-  } = useSWRImmutable(swrKey, getUserProfile, {
-    revalidateOnFocus: false,
+  } = useSWR(swrKey, getUserProfile, {
     shouldRetryOnError,
   });
 
@@ -85,15 +84,7 @@ const useAuthData = (): UseAuthDataReturn => {
     if (userData) {
       dispatch({ type: 'SET_USER', payload: userData });
     }
-  }, [
-    userData,
-    isUserDataLoading,
-    userDataError,
-    state.isAuthenticated,
-    dispatch,
-    state.user,
-    isLoggedInUser,
-  ]);
+  }, [userData, isUserDataLoading, userDataError, dispatch, state.user, isLoggedInUser]);
 
   return {
     ...state,

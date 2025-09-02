@@ -1,3 +1,4 @@
+/* eslint-disable react-func/max-lines-per-function */
 import { useEffect } from 'react';
 
 import { useRouter } from 'next/router';
@@ -48,7 +49,15 @@ const AuthRedirects = (): null => {
     if (isAuthenticated && isProfileComplete && onAuthPage) {
       if (path !== ROUTES.HOME) router.replace(ROUTES.HOME);
     }
-  }, [router, isAuthenticated, isProfileComplete, isLoading]);
+  }, [
+    router.isReady,
+    router.pathname,
+    router.asPath,
+    isAuthenticated,
+    isProfileComplete,
+    isLoading,
+    router,
+  ]);
 
   return null;
 };
