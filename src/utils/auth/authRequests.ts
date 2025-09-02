@@ -7,7 +7,7 @@ import {
   makeSignUpUrl,
   makeUpdateUserProfileUrl,
 } from './apiPaths';
-import mapAPIErrorToFormFields, { AuthEndpoint } from './errors';
+import { AuthEndpoint, mapAPIErrorToFormFields } from './errors';
 
 import SignUpRequest from '@/types/auth/SignUpRequest';
 import BaseAuthResponse from '@/types/BaseAuthResponse';
