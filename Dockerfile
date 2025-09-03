@@ -1,6 +1,10 @@
 FROM node:18-bookworm-slim
 
-RUN apt-get update && apt-get install -y ca-certificates && npm install -g pm2
+RUN set -eux; \
+    apt-get update; \
+    apt-get install -y --no-install-recommends ca-certificates; \
+    rm -rf /var/lib/apt/lists/*; \
+    npm install -g pm2@6
 
 SHELL ["/bin/bash", "-c"]
 
