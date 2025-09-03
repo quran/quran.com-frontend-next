@@ -60,6 +60,7 @@
     "bookmarks": "书签",
     "popular": "受欢迎的"
   },
+  "take-notes": "您是否错过了<modalLink> Notes？ </modalLink>",
   "view-all-bookmarks": "查看所有书签",
   "voice": {
     "trigger": "快速访问任何东西"

@@ -5,8 +5,9 @@ import {
   makeResetPasswordUrl,
   makeSignInUrl,
   makeSignUpUrl,
+  makeUpdateUserProfileUrl,
 } from './apiPaths';
-import mapAPIErrorToFormFields, { AuthEndpoint } from './errors';
+import { AuthEndpoint, mapAPIErrorToFormFields } from './errors';
 
 import SignUpRequest from '@/types/auth/SignUpRequest';
 import BaseAuthResponse from '@/types/BaseAuthResponse';
@@ -32,9 +33,10 @@ const handleAuthRequest = async <T>(
   data: T,
   endpoint: AuthEndpoint,
   fieldMap: AuthFieldMap,
+  method?: string,
 ): Promise<APIResponse<BaseAuthResponse>> => {
   const response = await privateFetcher<BaseAuthResponse>(url, {
-    method: 'POST',
+    method: method || 'POST',
     headers: {
       [CONTENT_TYPE]: 'application/json',
     },
@@ -110,5 +112,27 @@ export const resetPassword = async (
       password: 'password',
       token: 'token',
     },
+  );
+};
+
+/**
+ * Update user profile request handler
+ * @returns {Promise<APIResponse<BaseAuthResponse>>} Promise containing the authentication response and any validation errors
+ */
+export const updateUserProfile = async (data: {
+  firstName?: string;
+  lastName?: string;
+  username?: string;
+}): Promise<APIResponse<BaseAuthResponse>> => {
+  return handleAuthRequest(
+    makeUpdateUserProfileUrl(),
+    data,
+    AuthEndpoint.UpdateUserProfile,
+    {
+      firstName: 'firstName',
+      lastName: 'lastName',
+      username: 'username',
+    },
+    'PATCH',
   );
 };

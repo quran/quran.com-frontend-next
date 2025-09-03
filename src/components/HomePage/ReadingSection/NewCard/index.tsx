@@ -11,7 +11,7 @@ import IconContainer, { IconSize } from '@/dls/IconContainer/IconContainer';
 import Link, { LinkVariant } from '@/dls/Link/Link';
 import ArrowIcon from '@/public/icons/arrow.svg';
 import { logButtonClick } from '@/utils/eventLogger';
-import { getBeyondRamadanNavigationUrl } from '@/utils/navigation';
+import { getTakeNotesNavigationUrl } from '@/utils/navigation';
 
 const ShareQuranModal = dynamic(() => import('./ShareQuranModal'), {
   ssr: false,
@@ -20,8 +20,8 @@ const ShareQuranModal = dynamic(() => import('./ShareQuranModal'), {
 const NewCard: React.FC = () => {
   const [isShareModalOpen, setIsShareModalOpen] = useState(false);
 
-  const onShareQuranClicked = () => {
-    logButtonClick('homepage_share_quran');
+  const onTakeNotesClicked = () => {
+    logButtonClick('homepage_take_notes_link');
   };
 
   const onCloseShareModal = () => {
@@ -32,25 +32,28 @@ const NewCard: React.FC = () => {
     <>
       <Card
         onClick={() => {
-          logButtonClick('homepage_grow_beyond_ramadan');
+          logButtonClick('homepage_take_notes');
         }}
         className={styles.firstTimeReadingCard}
-        link={getBeyondRamadanNavigationUrl()}
+        link={getTakeNotesNavigationUrl()}
         isNewTab
       >
         <div className={styles.cardOuterContainer}>
           <div className={styles.cardWithIcon}>
-            <div className={styles.iconContainer}>🚀</div>
+            <div className={styles.iconContainer}>
+              <span aria-hidden="true">✏️</span>
+              <span className={styles.srOnly}>Pencil icon</span>
+            </div>
             <div className={styles.link}>
               <Trans
-                i18nKey="home:grow-beyond-ramadan"
+                i18nKey="home:take-notes"
                 components={{
                   modalLink: (
                     <Link
                       variant={LinkVariant.Blend}
-                      href={getBeyondRamadanNavigationUrl()}
+                      href={getTakeNotesNavigationUrl()}
                       className={styles.linkHref}
-                      onClick={onShareQuranClicked}
+                      onClick={onTakeNotesClicked}
                       isNewTab
                     />
                   ),

@@ -15,6 +15,7 @@ const TYPE_ICON_MAP = {
   [SearchNavigationType.JUZ]: JuzIcon,
   [SearchNavigationType.PAGE]: PageIcon,
   [SearchNavigationType.RANGE]: AyahRangeIcon,
+  [SearchNavigationType.QURAN_RANGE]: AyahRangeIcon,
   // TODO: change this after it's ready
   [SearchNavigationType.RUB_EL_HIZB]: ArabicIcon,
   // TODO: change this after it's ready

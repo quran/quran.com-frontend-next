@@ -60,6 +60,7 @@
     "bookmarks": "บุ๊คมาร์ก",
     "popular": "เป็นที่นิยม"
   },
+  "take-notes": "คุณเคยพลาด <modalLink> Notes หรือเปล่า? </modalLink>",
   "view-all-bookmarks": "ดูบุ๊คมาร์กทั้งหมด",
   "voice": {
     "trigger": "เข้าถึงอย่างรวดเร็ว"

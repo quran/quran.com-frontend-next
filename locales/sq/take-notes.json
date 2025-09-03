@@ -1,0 +1,114 @@
+{
+  "benefits": {
+    "access-anywhere": {
+      "bullet-points": [
+        "Shënimet tuaja ruhen në mënyrë të sigurt në llogarinë tuaj Quran.com.",
+        "Sinkronizoni në të gjitha pajisjet - vazhdoni studimin tuaj në celular, tablet ose desktop."
+      ],
+      "description": "Shënimet tuaja sinkronizohen në të gjitha pajisjet kur jeni i kyçur, duke ju lejuar të keni akses në reflektimet tuaja pavarësisht nëse jeni në telefonin, tabletin apo kompjuterin tuaj.",
+      "login-prompt": "Thjesht krijoni një hyrje falas për të filluar.",
+      "title": "Qasje kudo, në çdo kohë"
+    },
+    "enhanced-memorization": {
+      "bullet-points": [
+        "Shkruani shpjegime ose përkujtesa pranë vargjeve për të ndihmuar në mësimin përmendsh.",
+        "Shënoni fjalët ose konceptet e vështira për t'i shqyrtuar më vonë.",
+        "Përdorni shënime për të shënuar progresin në oraret e të mësuarit përmendsh."
+      ],
+      "description": "Të shkruash shënime rreth vargjeve që po mëson përmendsh mund ta përmirësojë ndjeshëm kujtesën. Krijo mjete mnemonike, modele shënimesh ose shkruaj lidhje personale që ndihmojnë vargjet të të ngelen në kujtesë.",
+      "image": {
+        "alt": "Shënime për memorizim dhe përsëritje"
+      },
+      "paragraph": "Pavarësisht nëse po e mësoni përmendësh në mënyrë aktive apo po e rishikoni atë që keni mësuar, shënimet mund të jenë një ndihmë e fuqishme në të mësuarit përmendsh.",
+      "title": "Mësim përmendësh dhe përsëritje e përmirësuar"
+    },
+    "organize-preserve": {
+      "description": "Mbaji njohuritë e tua të organizuara sipas vargjeve, duke e bërë të lehtë ndërtimin e një tefsiri (komentimi) personal me kalimin e kohës. Shënimet e tua ruhen në rrëfimin tënd, kështu që nuk do ta humbasësh kurrë atë moment frymëzimi ose kuptimi.",
+      "images": {
+        "organized": "Shënime të organizuara në nivel vargjesh",
+        "preserved": "Shënime studimi të ruajtura"
+      },
+      "paragraph": "A keni lënë ndonjëherë një orë mësimi ose një leksion dhe keni harruar të gjitha shënimet që keni bërë diku në një fletore, aplikacion shënimesh ose dokument? Imagjinoni të keni qasje në çdo shënim që keni bërë në një varg, lehtësisht të arritshëm në nivelin e ajetit sa herë që e lexoni përsëri atë varg.",
+      "title": "Organizoni dhe Ruani Studimin Tuaj"
+    },
+    "personal-reflection": {
+      "bullet-points": [
+        "Shënoni mendimet, reflektimet dhe realizimet tuaja ndërsa lexoni Kuranin - sado të thjeshta ose të thella që mund të jenë ato.",
+        "Forconi marrëdhënien tuaj me Kuranin duke u angazhuar në mënyrë aktive me vargjet e tij në vend që të lexoni shpejt e pa pushim."
+      ],
+      "description": "Mbajtja e shënimeve ju lejon të dokumentoni udhëtimin tuaj personal me Kuranin. Regjistroni mendimet, pyetjet dhe momentet e qartësisë ndërsa studioni. Me kalimin e kohës, këto shënime bëhen një dokument i vlefshëm i rritjes suaj shpirtërore dhe thellimit të të kuptuarit.",
+      "examples-heading": "Shembuj të shënimeve:",
+      "images": {
+        "growth": "Shembull i shënimeve për rritjen shpirtërore",
+        "reflection": "Shembull i shënimeve të reflektimit personal"
+      },
+      "title": "Reflektim Personal dhe Rritje Shpirtërore"
+    },
+    "share-reflections": {
+      "community-paragraph": "Kur ndahen, reflektimet tuaja mund të gjejnë jehonë të thellë te të tjerët dhe të ushqejnë një komunitet me rritje të përqendruar te Kurani. Mësoni më shumë në <0>QuranReflect.com/faq</0> dhe eksploroni <1>Pesë Lente</1> për të pasuruar reflektimet tuaja.",
+      "conclusion": {
+        "dua": "Allahu e bëftë Kuranin dritën e gjoksit tënd, pranverën e zemrës sate, larguesin e hidhërimeve dhe lehtësimin e shqetësimeve të tua. Amin.",
+        "paragraph1": "Kurani është një shoqërues i përjetshëm dhe përdorimi i funksionit Shënime mund t'ju ndihmojë të ndërtoni një marrëdhënie kuptimplote dhe interaktive me të. Përdoreni atë për të kapur reflektime, për të shënuar sfida, për të ruajtur njohuri dhe më shumë. Me kalimin e kohës, ai do të bëhet një dokument personal i përpjekjeve, sinqeritetit dhe rritjes suaj me Librin e Allahut, insha'Allah.",
+        "paragraph2": "Ju ftojmë të sfidoni veten për t'u lidhur me Kuranin çdo ditë - edhe nëse është vetëm një varg - dhe të merrni një moment për të reflektuar dhe për të shkruar një shënim. <0>Le të bëhet ky akt i vogël dhe i vazhdueshëm një mjet për të thelluar marrëdhënien tuaj me Librin e Allahut, një ajet në të njëjtën kohë.</0>",
+        "title": "Filloni Udhëtimin Tuaj Sot"
+      },
+      "deeper-insights-title": "Njohuri më të thella:",
+      "deeper-insights": [
+        "A përmenden ndonjë emër i Allahut dhe si lidhen ato me ajetin?",
+        "Cilat fjalë ose aspekte gjuhësore ju tërhoqën vëmendjen?",
+        "A mund të bësh lidhje me kontekstin e ajetit, ajete të tjera kuranore, hadithe ose ngjarje?"
+      ],
+      "description": "Së shpejti: mundësia për të ndarë shënime të zgjedhura me miqtë, familjen ose grupet e studimit. Bashkëpunoni për të kuptuar dhe përhapur njohuri të dobishme.",
+      "paragraph1": "Ndërsa shënimet në Quran.com ruhen privatisht, ju keni gjithashtu mundësinë të ndani reflektime të zgjedhura publikisht në <0>QuranReflect.com</0>. Kjo është një platformë komunitare jofitimprurëse e projektuar për të inkurajuar angazhimin e menduar me Kuranin - jo përmes tefsirit shkencor (i cili është i rezervuar për studiues të kualifikuar), por përmes reflektimeve të sinqerta dhe personale që rishikohen dhe udhëhiqen nga një ekip moderimi i kualifikuar.",
+      "paragraph2": "Allahu i fton të gjithë besimtarët, jo vetëm dijetarët, të angazhohen në tadabbur:",
+      "quote": "Ky është një Libër i bekuar që Ne ta kemi shpallur ty, o Profet, që ata të mund të meditojnë mbi vargjet e tij dhe që njerëzit e arsyeshëm të jenë të vetëdijshëm. (Sure Sad 38:29)",
+      "reflection-prompt": "Shembuj të pyetjeve për reflektim personal që mund t'i përdorni për të reflektuar:",
+      "reflection-questions": [
+        "Në çfarë mënyrash ju ka prekur ose frymëzuar ky varg?",
+        "A përmenden cilësi ose veprime që mund t’i përmirësoni?",
+        "A ka ndonjë premtim apo paralajmërim/ndalim që mund ta zbatosh në jetën tënde?",
+        "A keni ndonjë histori personale që lidhet me këtë varg?",
+        "Çfarë ndryshimesh doni të bëni bazuar në këtë varg dhe si mund t’i zbatoni ato në praktikë ju ose dikush tjetër?"
+      ],
+      "title": "Ndani reflektimet tuaja në mënyrë që të tjerët të përfitojnë"
+    },
+    "title": "Përfitimet e përdorimit të funksionit të shënimeve"
+  },
+  "description": "Zbuloni 6 arsye të fuqishme për të mbajtur shënime në Quran.com dhe si shënimet mund të luajnë një rol jetësor në udhëtimin tuaj me Kuranin.",
+  "heading": "6 Arsye të Fuqishme për të Mbajtur Shënime - Dhe Si Ato Mund ta Transformojnë Udhëtimin Tuaj me Kuranin",
+  "how-to-use": {
+    "saved-note-explanation": "Pasi të ruani një shënim për një varg, ikona e shënimit do të bëhet blu, duke e bërë të lehtë identifikimin e vargjeve që i keni shënuar më parë gjatë leximeve të ardhshme.",
+    "step1": "<0>Zgjidh një varg:</0> Klikoni mbi çdo varg dhe zgjidhni opsionin Shënime.",
+    "step2": "<0>Shtoni Mendimet Tuaja:</0> Shkruani reflektimet, përkujtesat ose pyetjet tuaja.",
+    "step3": "<0>Ruaj:</0> Shënimet tuaja do të ruhen në llogarinë tuaj.",
+    "step4": "<0>Qasje në çdo kohë:</0> Kthehuni te shënimet tuaja nëpërmjet profilit tuaj ose direkt në varg.",
+    "title": "Si të përdorni funksionin e shënimeve"
+  },
+  "images": {
+    "adding-notes": {
+      "alt": "Shtimi i shënimeve në një varg"
+    },
+    "blue-icon": {
+      "alt": "Ikona e shënimit blu që tregon shënimet e ruajtura"
+    },
+    "feature-available": {
+      "alt": "Funksioni i shënimeve është i disponueshëm pranë çdo ajeti",
+      "caption": "Funksioni i shënimeve është i disponueshëm pranë çdo ajeti"
+    }
+  },
+  "introduction": "Funksioni Shënime në Quran.com është një mënyrë kuptimplote për të thelluar angazhimin tuaj me Kuranin. Pavarësisht nëse jeni duke studiuar, reflektuar apo thjesht duke u përpjekur ta kuptoni më mirë mesazhin, marrja e shënimeve mund t'ju ndihmojë të lidheni më thellë me ajetet dhe të ruani njohuritë që përndryshe mund të harroheshin.",
+  "meta": {
+    "description": "Mësoni si të përdorni funksionin e shënimeve në Quran.com për të përmirësuar përvojën tuaj të studimit të Kuranit.",
+    "title": "Merrni shënime - Quran.com"
+  },
+  "table-of-contents": {
+    "items": [
+      "Reflektim Personal dhe Rritje Shpirtërore",
+      "Organizoni dhe Ruani Studimin Tuaj",
+      "Qasje kudo, në çdo kohë",
+      "Mësim përmendësh dhe përsëritje e përmirësuar",
+      "Ndani reflektimet tuaja në mënyrë që të tjerët të përfitojnë"
+    ],
+    "title": "Përfitimet e përdorimit të funksionit të shënimeve"
+  }
+}

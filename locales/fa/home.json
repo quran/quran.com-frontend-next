@@ -60,6 +60,7 @@
     "bookmarks": "نشانک ها",
     "popular": "محبوب"
   },
+  "take-notes": "آیا تا به حال یادداشت‌های <modalLink> را از دست داده‌اید؟ </modalLink>",
   "view-all-bookmarks": "مشاهده همه نشانک ها",
   "voice": {
     "trigger": "دسترسی سریع به هر چیزی"

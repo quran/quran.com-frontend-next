@@ -1,0 +1,114 @@
+{
+  "benefits": {
+    "access-anywhere": {
+      "bullet-points": [
+        "Your notes are securely stored in your Quran.com account.",
+        "Sync across devices—continue your study on mobile, tablet, or desktop."
+      ],
+      "description": "Your notes sync across devices when you're logged in, allowing you to access your reflections whether you're on your phone, tablet, or computer.",
+      "login-prompt": "Simply create a free log-in to start.",
+      "title": "Access Anywhere, Anytime"
+    },
+    "enhanced-memorization": {
+      "bullet-points": [
+        "Write explanations or reminders next to verses to aid memorization.",
+        "Note difficult words or concepts for later review.",
+        "Use notes to mark progress in memorization schedules."
+      ],
+      "description": "Writing notes about verses you're memorizing can significantly improve retention. Create mnemonic devices, note patterns, or write personal connections that help the verses stick in your memory.",
+      "image": {
+        "alt": "Notes for memorization and revision"
+      },
+      "paragraph": "Whether you're actively memorizing or reviewing what you've learned, notes can be a powerful aid in memorization.",
+      "title": "Enhanced Memorization & Revision"
+    },
+    "organize-preserve": {
+      "description": "Keep your insights organized by verse, making it easy to build a personal tafsir (commentary) over time. Your notes are preserved in your account, so you'll never lose that moment of inspiration or understanding.",
+      "images": {
+        "organized": "Organized notes at verse level",
+        "preserved": "Preserved study notes"
+      },
+      "paragraph": "Have you ever left a class or a lecture and forgotten all about the notes you scribbled down somewhere in a notebook, note app, or document? Imagine having access to every note you have taken on a verse easily accessible at the ayah level any time you read that verse again.",
+      "title": "Organize and Preserve Your Study"
+    },
+    "personal-reflection": {
+      "bullet-points": [
+        "Jot down your thoughts, reflections, and realizations as you read the Quran - as simple or profound as they may be.",
+        "Strengthen your relationship with the Quran by actively engaging with its verses rather than quickly reading without pause."
+      ],
+      "description": "Taking notes allows you to document your personal journey with the Quran. Record your thoughts, questions, and moments of clarity as you study. Over time, these notes become a valuable record of your spiritual growth and deepening understanding.",
+      "examples-heading": "Examples of notes:",
+      "images": {
+        "growth": "Example of spiritual growth notes",
+        "reflection": "Example of personal reflection notes"
+      },
+      "title": "Personal Reflection & Spiritual Growth"
+    },
+    "share-reflections": {
+      "community-paragraph": "When shared, your reflections may resonate deeply with others and nurture a community of Quran-centered growth. Learn more at <0>QuranReflect.com/faq</0> and explore the <1>Five Lenses</1> to enrich your reflections.",
+      "conclusion": {
+        "dua": "May Allah make the Quran the light of your chest, the springtime of your heart, the remover of your sorrows, and the reliever of your distress. Ameen.",
+        "paragraph1": "The Quran is a lifelong companion, and using the Notes feature can help you build a meaningful, interactive relationship with it. Use it to capture reflections, mark challenges, preserve insights, and more. Over time, it will become a personal record of your effort, sincerity, and growth with the Book of Allah, insha'Allah.",
+        "paragraph2": "We invite you to challenge yourself to connect with the Quran daily - even if just a verse - and take a moment to reflect and write a note. <0>Let this small, consistent act become a means of deepening your relationship with the Book of Allah, one ayah at a time.</0>",
+        "title": "Begin Your Journey Today"
+      },
+      "deeper-insights-title": "Deeper Insights:",
+      "deeper-insights": [
+        "Are there any names of Allah mentioned, and how do they relate to the verse?",
+        "Which words or linguistic aspects caught your attention?",
+        "Can you draw connections to the verse's context, other Quranic verses, hadith, or events?"
+      ],
+      "description": "Coming soon: the ability to share selected notes with friends, family, or study groups. Collaborate on understanding and spread beneficial knowledge.",
+      "paragraph1": "While notes on Quran.com are saved privately, you also have the option to share selected reflections publicly on <0>QuranReflect.com</0>. This is a non-profit community platform designed to encourage thoughtful engagement with the Quran - not through scholarly tafsir (which is reserved for qualified scholars), but through sincere, personal reflections that are reviewed and guided by a qualified moderation team.",
+      "paragraph2": "Allah invites all believers, not only scholars, to engage in tadabbur:",
+      "quote": "This is a blessed Book which We have revealed to you O Prophet so that they may contemplate its verses, and people of reason may be mindful. (Surah Sad 38:29)",
+      "reflection-prompt": "Examples of Personal Reflection Questions that you can use to reflect:",
+      "reflection-questions": [
+        "In what ways has this verse moved or inspired you?",
+        "Are there qualities or actions mentioned that you can improve upon?",
+        "Is there a promise or a warning/prohibition that you can apply to your life?",
+        "Do you have a personal story related to this verse?",
+        "What changes do you want to make based on this verse, and how can you or someone else practically implement them?"
+      ],
+      "title": "Share your reflections so others can benefit"
+    },
+    "title": "Benefits of Using the Notes Feature"
+  },
+  "description": "Discover 6 powerful reasons to take notes on Quran.com and how notes can play a vital role in your Journey with the Quran.",
+  "heading": "6 Powerful Reasons to Take Notes - And How They Can Transform Your Journey with the Quran",
+  "how-to-use": {
+    "saved-note-explanation": "Once you save a note for a verse, the note icon will turn blue, making it easy to identify verses you've previously annotated during future readings.",
+    "step1": "<0>Select a Verse:</0> Click on any verse and choose the Notes option.",
+    "step2": "<0>Add Your Thoughts:</0> Type your reflections, reminders, or questions.",
+    "step3": "<0>Save:</0> Your notes will be saved under your account.",
+    "step4": "<0>Access Anytime:</0> Return to your notes via your profile or directly on the verse.",
+    "title": "How to Use the Notes Feature"
+  },
+  "images": {
+    "adding-notes": {
+      "alt": "Adding notes to a verse"
+    },
+    "blue-icon": {
+      "alt": "Blue note icon indicating saved notes"
+    },
+    "feature-available": {
+      "alt": "The notes feature available next to every ayah",
+      "caption": "The notes feature is available next to every ayah"
+    }
+  },
+  "introduction": "The Notes feature on Quran.com is a meaningful way to deepen your engagement with the Quran. Whether you're studying, reflecting, or simply trying to better understand the message, taking notes can help you connect more deeply with the verses and retain insights that might otherwise be forgotten.",
+  "meta": {
+    "description": "Learn how to use the notes feature on Quran.com to enhance your Quran study experience.",
+    "title": "Take Notes - Quran.com"
+  },
+  "table-of-contents": {
+    "items": [
+      "Personal Reflection & Spiritual Growth",
+      "Organize and Preserve Your Study",
+      "Access Anywhere, Anytime",
+      "Enhanced Memorization & Revision",
+      "Share your reflections so others can benefit"
+    ],
+    "title": "Benefits of Using the Notes Feature"
+  }
+}

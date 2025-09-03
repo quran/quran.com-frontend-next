@@ -6,7 +6,7 @@
   "continue-read": "Lanjutkan Membaca",
   "explore-topics": "Jelajahi Topik",
   "first-time-reading": "Baru mengenal Al-Quran? <link> Mulai di sini </link>",
-  "grow-beyond-ramadan": "Tumbuh bersama kami <modalLink> Melampaui Ramadhan </modalLink>",
+  "grow-beyond-ramadan": "Mari terus bertumbuh <modalLink> Selepas Ramadhan </modalLink>",
   "know-someone": "Berkembang bersama kami <modalLink> Ramadhan </modalLink> ini",
   "learning-plan": "Rencana Pembelajaran",
   "listen-to-radio": "Dengarkan Radio Al-Quran",
@@ -60,6 +60,7 @@
     "bookmarks": "Penanda",
     "popular": "Populer"
   },
+  "take-notes": "Apakah Anda kehilangan <modalLink> Catatan? </modalLink>",
   "view-all-bookmarks": "Lihat semua Penanda",
   "voice": {
     "trigger": "Akses cepat ke semuanya"

@@ -16,25 +16,41 @@ interface Props {
   onBack: () => void;
   onResendCode: () => Promise<void>;
   signUpData: SignUpRequest;
+  onSuccess?: () => void;
+  handleSubmit?: (code: string) => Promise<void>;
 }
 
-const VerificationCodeForm: FC<Props> = ({ email, onBack, onResendCode, signUpData }) => {
+const VerificationCodeForm: FC<Props> = ({
+  email,
+  onBack,
+  onResendCode,
+  signUpData,
+  onSuccess,
+  handleSubmit,
+}) => {
   const router = useRouter();
 
-  const handleSubmitCode = async (code: string) => {
+  const handleSubmitCode = async (code: string): Promise<void> => {
     logFormSubmission('verification_code_submit');
-    const { data: response } = await signUp({
+
+    const { data: response, errors } = await signUp({
       ...signUpData,
       verificationCode: code,
     });
 
     if (!response.success) {
-      throw new Error('Invalid verification code');
+      // Throw error to be caught by the VerificationCodeBase component
+      throw new Error(errors?.verificationCode || 'Invalid verification code');
     }
 
-    // If successful, redirect back or to home
-    const redirectPath = (router.query.redirect as string) || '/';
-    router.push(redirectPath);
+    // If successful, call onSuccess callback or redirect
+    if (onSuccess) {
+      onSuccess();
+    } else {
+      // Default behavior: redirect back or to home
+      const redirectPath = (router.query.redirect as string) || '/';
+      router.push(redirectPath);
+    }
   };
 
   return (
@@ -44,7 +60,7 @@ const VerificationCodeForm: FC<Props> = ({ email, onBack, onResendCode, signUpDa
         email={email}
         onBack={onBack}
         onResendCode={onResendCode}
-        onSubmitCode={handleSubmitCode}
+        onSubmitCode={handleSubmit || handleSubmitCode}
       />
     </div>
   );

@@ -60,6 +60,7 @@
     "bookmarks": "Faqeruajtësit",
     "popular": "Popullore"
   },
+  "take-notes": "A keni humbur ndonjë gjë nga Shënimet e <modalLink>? </modalLink>",
   "view-all-bookmarks": "Shikoni të gjithë faqeshënuesit",
   "voice": {
     "trigger": "Qasje e shpejtë në çdo gjë"

@@ -31,7 +31,7 @@ export const RemotionRoot = () => {
   );
   const FigtreeFont = new FontFace(
     `Figtree`,
-    `url('${staticFile('/Figtree.ttf')}') format('woff2')`,
+    `url('${staticFile('/Figtree.ttf')}') format('truetype')`,
   );
   const playfairDisplay = new FontFace(
     'PlayfairDisplay',

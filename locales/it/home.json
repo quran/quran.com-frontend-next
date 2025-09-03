@@ -60,6 +60,7 @@
     "bookmarks": "segnalibri",
     "popular": "Popolare"
   },
+  "take-notes": "Ti sei perso le <modalLink> Note? </modalLink>",
   "view-all-bookmarks": "Visualizza tutti i segnalibri",
   "voice": {
     "trigger": "Accesso rapido a qualsiasi cosa"
