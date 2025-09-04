@@ -13,8 +13,13 @@ export interface AuthState {
   isAuthenticated: boolean;
   /** Error message if authentication fails */
   error: AuthError | null;
-  /** Whether the user's profile is complete */
-  isProfileComplete: boolean;
+  /**
+   * Whether the user's profile is complete.
+   * null => unknown/not yet determined (e.g. profile fetch pending or failed transiently)
+   * false => known incomplete (we have a user object but it's missing required fields)
+   * true => known complete
+   */
+  isProfileComplete: boolean | null;
   /** Whether the profile (user object) has been loaded (success or error) */
   profileLoaded?: boolean;
 }
