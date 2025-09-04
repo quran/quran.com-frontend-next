@@ -61,8 +61,10 @@ const AuthRedirects = (): null => {
       return;
     }
 
-    // 2) Authenticated with incomplete profile -> restrict to /complete-signup
-    if (isAuthenticated && !isProfileComplete) {
+    // 2) Authenticated with CONFIRMED incomplete profile -> restrict to /complete-signup
+    //    We now require profileLoaded === true to avoid redirecting when the profile fetch
+    //    failed or is still pending (previous behavior incorrectly redirected on timeout).
+    if (isAuthenticated && profileLoaded && !isProfileComplete) {
       if (path !== ROUTES.COMPLETE_SIGNUP) {
         logMessageToSentry('AuthRedirects redirect -> complete-signup', {
           transactionName: 'AuthRedirects',
@@ -130,10 +132,10 @@ const AuthRedirects = (): null => {
         userId: userData?.id || null,
         timeoutMs: TIMEOUT_MS,
       });
-      // After timeout we proceed with redirect logic similar to original (incomplete -> complete-signup)
-      if (!isProfileComplete && router.pathname !== ROUTES.COMPLETE_SIGNUP) {
-        router.replace(ROUTES.COMPLETE_SIGNUP);
-      }
+      // IMPORTANT: We no longer redirect on timeout because we cannot be certain the
+      // profile is incomplete; doing so caused false positives when the profile API
+      // was slow or failed. Only the main effect (which now requires profileLoaded)
+      // will perform the redirect once we have definitive data.
     }, TIMEOUT_MS);
 
     // eslint-disable-next-line consistent-return
