@@ -1,15 +1,15 @@
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 
 import useSWR from 'swr';
 
 import useIsLoggedIn from './useIsLoggedIn';
 
 import { useAuthContext } from '@/contexts/AuthContext';
-import { logErrorToSentry } from '@/lib/sentry';
+import { logErrorToSentry, addSentryBreadcrumb } from '@/lib/sentry';
 import { AuthState } from '@/types/auth/AuthState';
 import { AuthError } from '@/types/auth/errorTypes';
 import UserProfile from '@/types/auth/UserProfile';
-import { getUserProfile } from '@/utils/auth/api';
+import { getUserProfile, isTokenRefreshInProgress } from '@/utils/auth/api';
 import { makeUserProfileUrl } from '@/utils/auth/apiPaths';
 import { classifyError } from '@/utils/auth/errors';
 
@@ -53,38 +53,64 @@ const useAuthData = (): UseAuthDataReturn => {
   }, [isLoggedInUser, dispatch]);
 
   // Sync SWR data with auth context
+  const handleUserDataError = useCallback(() => {
+    if (!userDataError) return false;
+    // If a token refresh is in progress, treat this as a transient state and skip error handling.
+    if (isTokenRefreshInProgress()) {
+      addSentryBreadcrumb('auth.refresh', 'profile fetch skipped - refresh in progress');
+      return true;
+    }
+    const authError = classifyError(userDataError, {
+      transactionName: 'useAuthData',
+      userDataError,
+    });
+    logErrorToSentry(userDataError, {
+      transactionName: 'useAuthData',
+      metadata: { userDataError },
+    });
+    if (authError.type === 'unauthorized') {
+      dispatch({ type: 'SET_AUTHENTICATED', payload: false });
+    }
+    dispatch({ type: 'SET_ERROR', payload: authError });
+    return true;
+  }, [userDataError, dispatch]);
+
+  const handleUserDataSuccessOrEmpty = useCallback(() => {
+    if (userData) {
+      dispatch({ type: 'SET_USER', payload: userData });
+      return;
+    }
+    if (
+      !isUserDataLoading &&
+      !userData &&
+      !userDataError &&
+      state.isAuthenticated &&
+      !state.profileLoaded
+    ) {
+      dispatch({ type: 'SET_ERROR', payload: null });
+    }
+  }, [
+    userData,
+    isUserDataLoading,
+    userDataError,
+    state.isAuthenticated,
+    state.profileLoaded,
+    dispatch,
+  ]);
+
   useEffect(() => {
-    // Early return: If user data is loading, set loading state
-    if (isUserDataLoading && !userData) {
+    if ((isUserDataLoading || isTokenRefreshInProgress()) && !userData) {
+      addSentryBreadcrumb('auth.loading', 'profile fetch loading', {
+        isUserDataLoading,
+        isTokenRefreshInProgress: isTokenRefreshInProgress(),
+        userDataLoaded: !!userData,
+      });
       dispatch({ type: 'SET_LOADING', payload: true });
       return;
     }
-
-    if (userDataError) {
-      const authError = classifyError(userDataError, {
-        transactionName: 'useAuthData',
-        userDataError,
-      });
-
-      logErrorToSentry(userDataError, {
-        transactionName: 'useAuthData',
-        metadata: { userDataError },
-      });
-
-      // If unauthorized, mark as unauthenticated and clear user to prevent stale state
-      if (authError.type === 'unauthorized') {
-        dispatch({ type: 'SET_AUTHENTICATED', payload: false });
-      }
-
-      dispatch({ type: 'SET_ERROR', payload: authError });
-      return;
-    }
-
-    // Early return: Handle successful user data fetch
-    if (userData) {
-      dispatch({ type: 'SET_USER', payload: userData });
-    }
-  }, [userData, isUserDataLoading, userDataError, dispatch, state.user, isLoggedInUser]);
+    if (handleUserDataError()) return;
+    handleUserDataSuccessOrEmpty();
+  }, [userData, isUserDataLoading, handleUserDataError, handleUserDataSuccessOrEmpty, dispatch]);
 
   return {
     ...state,

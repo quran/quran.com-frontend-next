@@ -13,6 +13,7 @@ import GetAllNotesQueryParams from './types/Note/GetAllNotesQueryParams';
 import { ShortenUrlResponse } from './types/ShortenUrl';
 
 import { fetcher } from '@/api';
+import { addSentryBreadcrumb, logErrorToSentry } from '@/lib/sentry';
 import {
   ActivityDay,
   ActivityDayType,
@@ -228,6 +229,30 @@ export const getUserFeatureFlags = async (): Promise<Record<string, boolean>> =>
 
 export const refreshToken = async (): Promise<RefreshToken> =>
   privateFetcher(makeRefreshTokenUrl());
+
+// Track token refresh progress to allow UI / logic to defer actions while refreshing
+let tokenRefreshInProgress = false;
+export const isTokenRefreshInProgress = () => tokenRefreshInProgress;
+
+const refreshTokenWithFlag = async (): Promise<RefreshToken> => {
+  if (!tokenRefreshInProgress) {
+    tokenRefreshInProgress = true;
+    addSentryBreadcrumb('auth.refresh', 'token refresh start');
+  }
+  try {
+    const result = await refreshToken();
+    addSentryBreadcrumb('auth.refresh', 'token refresh success');
+    return result;
+  } catch (e) {
+    addSentryBreadcrumb('auth.refresh', 'token refresh failure');
+    logErrorToSentry(e, {
+      transactionName: 'auth.refresh',
+    });
+    throw e;
+  } finally {
+    tokenRefreshInProgress = false;
+  }
+};
 
 export const completeSignup = async (data: CompleteSignupRequest): Promise<UserProfile> =>
   postRequest(makeCompleteSignupUrl(), data);
@@ -608,6 +633,6 @@ export const withCredentialsFetcher = async <T>(
 export const privateFetcher = configureRefreshFetch({
   shouldRefreshToken,
   // @ts-ignore
-  refreshToken,
+  refreshToken: refreshTokenWithFlag,
   fetch: withCredentialsFetcher,
 });
