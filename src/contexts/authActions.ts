@@ -24,6 +24,7 @@ export const initialState: AuthState = {
   isAuthenticated: false,
   error: null,
   isProfileComplete: false,
+  profileLoaded: false,
 };
 
 /**
@@ -56,6 +57,7 @@ const handleSetUser = (state: AuthState, user: UserProfile | null): AuthState =>
     isProfileComplete,
     isLoading: false,
     error: null,
+    profileLoaded: true,
   };
 };
 
@@ -70,6 +72,7 @@ const handleSetError = (state: AuthState, error: AuthError | null): AuthState =>
     ...state,
     error,
     isLoading: false,
+    profileLoaded: true,
   };
 };
 
@@ -88,6 +91,8 @@ const handleSetAuthenticated = (state: AuthState, isAuthenticated: boolean): Aut
     user: isAuthenticated ? state.user : null, // Clear user on logout
     isProfileComplete: isAuthenticated ? state.isProfileComplete : false, // Reset profile completeness on logout
     error: isAuthenticated ? state.error : null, // Clear auth errors on logout
+    // Do not mark profileLoaded true here unless we already had it; ensures we still wait for profile fetch
+    profileLoaded: isAuthenticated ? state.profileLoaded : false,
   };
 };
 
@@ -99,6 +104,7 @@ const handleLogout = (): AuthState => {
   return {
     ...initialState,
     isLoading: false,
+    profileLoaded: false,
   };
 };
 

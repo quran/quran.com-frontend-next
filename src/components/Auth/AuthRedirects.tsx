@@ -1,9 +1,10 @@
 /* eslint-disable react-func/max-lines-per-function */
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
 import { useRouter } from 'next/router';
 
 import useAuthData from '@/hooks/auth/useAuthData';
+import { logMessageToSentry, addSentryBreadcrumb } from '@/lib/sentry';
 import { ROUTES, getLoginNavigationUrl } from '@/utils/navigation';
 import { isAuthPage } from '@/utils/routes';
 
@@ -19,7 +20,12 @@ import { isAuthPage } from '@/utils/routes';
  */
 const AuthRedirects = (): null => {
   const router = useRouter();
-  const { isAuthenticated, isProfileComplete, isLoading } = useAuthData();
+  const { isAuthenticated, isProfileComplete, isLoading, userData, profileLoaded } = useAuthData();
+
+  // Timeout to avoid indefinite waiting for profileLoaded (e.g., network hang).
+  const TIMEOUT_MS = Number(process.env.NEXT_PUBLIC_AUTH_PROFILE_TIMEOUT_MS) || 4000;
+  const timeoutFiredRef = useRef(false);
+  // Removed snapshotDebounceRef
 
   useEffect(() => {
     if (!router.isReady) return;
@@ -37,9 +43,32 @@ const AuthRedirects = (): null => {
       return; // unauthenticated can browse public pages freely
     }
 
+    // Guard: Authenticated but user profile not yet loaded (flicker prevention)
+    // Without this, we might think profile is incomplete (default false) and redirect prematurely.
+    if (isAuthenticated && !isProfileComplete && !profileLoaded) {
+      logMessageToSentry('AuthRedirects defer redirect until profile loads', {
+        transactionName: 'AuthRedirects',
+        metadata: { reason: 'awaiting-user-data', path, asPath },
+      });
+      addSentryBreadcrumb('auth.redirect', 'defer redirect until profile loads', {
+        path,
+        asPath,
+        isAuthenticated,
+        isProfileComplete,
+        profileLoaded,
+        userId: userData?.id || null,
+      });
+      return;
+    }
+
     // 2) Authenticated with incomplete profile -> restrict to /complete-signup
     if (isAuthenticated && !isProfileComplete) {
       if (path !== ROUTES.COMPLETE_SIGNUP) {
+        logMessageToSentry('AuthRedirects redirect -> complete-signup', {
+          transactionName: 'AuthRedirects',
+          metadata: { from: path, to: ROUTES.COMPLETE_SIGNUP },
+        });
+        addSentryBreadcrumb('auth.redirect', 'to complete-signup', { from: path });
         router.replace(ROUTES.COMPLETE_SIGNUP);
       }
       return;
@@ -47,7 +76,14 @@ const AuthRedirects = (): null => {
 
     // 3) Authenticated with complete profile -> keep away from auth pages
     if (isAuthenticated && isProfileComplete && onAuthPage) {
-      if (path !== ROUTES.HOME) router.replace(ROUTES.HOME);
+      if (path !== ROUTES.HOME) {
+        logMessageToSentry('AuthRedirects redirect -> home (auth page)', {
+          transactionName: 'AuthRedirects',
+          metadata: { from: path, to: ROUTES.HOME },
+        });
+        addSentryBreadcrumb('auth.redirect', 'to home from auth page', { from: path });
+        router.replace(ROUTES.HOME);
+      }
     }
   }, [
     router.isReady,
@@ -56,7 +92,63 @@ const AuthRedirects = (): null => {
     isAuthenticated,
     isProfileComplete,
     isLoading,
+    userData,
+    profileLoaded,
     router,
+  ]);
+
+  // Separate effect to handle timeout fallback when profileLoaded never resolves
+  useEffect(() => {
+    if (!router.isReady) return;
+    if (!isAuthenticated) return; // Only relevant when logged in
+    if (profileLoaded) return; // Already resolved
+    if (timeoutFiredRef.current) return; // Already fired
+
+    const id = setTimeout(() => {
+      if (profileLoaded || timeoutFiredRef.current) return;
+      timeoutFiredRef.current = true;
+      const { pathname: path, asPath } = router;
+      logMessageToSentry('AuthRedirects profile load timeout', {
+        transactionName: 'AuthRedirects',
+        metadata: {
+          path,
+          asPath,
+          isAuthenticated,
+          isProfileComplete,
+          isLoading,
+          profileLoaded,
+          userId: userData?.id || null,
+          timeoutMs: TIMEOUT_MS,
+        },
+      });
+      addSentryBreadcrumb('auth.redirect', 'profile load timeout', {
+        path,
+        asPath,
+        isAuthenticated,
+        isProfileComplete,
+        profileLoaded,
+        userId: userData?.id || null,
+        timeoutMs: TIMEOUT_MS,
+      });
+      // After timeout we proceed with redirect logic similar to original (incomplete -> complete-signup)
+      if (!isProfileComplete && router.pathname !== ROUTES.COMPLETE_SIGNUP) {
+        router.replace(ROUTES.COMPLETE_SIGNUP);
+      }
+    }, TIMEOUT_MS);
+
+    // eslint-disable-next-line consistent-return
+    return () => {
+      clearTimeout(id);
+    };
+  }, [
+    router.isReady,
+    isAuthenticated,
+    profileLoaded,
+    isProfileComplete,
+    isLoading,
+    userData,
+    router,
+    TIMEOUT_MS,
   ]);
 
   return null;
