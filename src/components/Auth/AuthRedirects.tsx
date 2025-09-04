@@ -1,4 +1,4 @@
-/* eslint-disable react-func/max-lines-per-function */
+/* eslint-disable react-func/max-lines-per-function, indent */
 import { useEffect, useRef } from 'react';
 
 import { useRouter } from 'next/router';
@@ -42,10 +42,9 @@ const AuthRedirects = (): null => {
       }
       return; // unauthenticated can browse public pages freely
     }
-
     // Guard: Authenticated but user profile not yet loaded (flicker prevention)
     // Without this, we might think profile is incomplete (default false) and redirect prematurely.
-    if (isAuthenticated && !isProfileComplete && !profileLoaded) {
+    if (isAuthenticated && isProfileComplete === null && !profileLoaded) {
       logMessageToSentry('AuthRedirects defer redirect until profile loads', {
         transactionName: 'AuthRedirects',
         metadata: { reason: 'awaiting-user-data', path, asPath },
@@ -60,28 +59,26 @@ const AuthRedirects = (): null => {
       });
       return;
     }
-
     // 2) Authenticated with CONFIRMED incomplete profile -> restrict to /complete-signup
     //    We now require profileLoaded === true to avoid redirecting when the profile fetch
     //    failed or is still pending (previous behavior incorrectly redirected on timeout).
-    if (isAuthenticated && profileLoaded && !isProfileComplete) {
+    if (isAuthenticated && profileLoaded && userData && isProfileComplete === false) {
       if (path !== ROUTES.COMPLETE_SIGNUP) {
         logMessageToSentry('AuthRedirects redirect -> complete-signup', {
           transactionName: 'AuthRedirects',
-          metadata: { from: path, to: ROUTES.COMPLETE_SIGNUP },
+          metadata: { from: path, to: ROUTES.COMPLETE_SIGNUP, userId: userData?.id || null },
         });
         addSentryBreadcrumb('auth.redirect', 'to complete-signup', { from: path });
         router.replace(ROUTES.COMPLETE_SIGNUP);
       }
       return;
     }
-
     // 3) Authenticated with complete profile -> keep away from auth pages
-    if (isAuthenticated && isProfileComplete && onAuthPage) {
+    if (isAuthenticated && isProfileComplete === true && onAuthPage) {
       if (path !== ROUTES.HOME) {
         logMessageToSentry('AuthRedirects redirect -> home (auth page)', {
           transactionName: 'AuthRedirects',
-          metadata: { from: path, to: ROUTES.HOME },
+          metadata: { from: path, to: ROUTES.HOME, userId: userData?.id || null },
         });
         addSentryBreadcrumb('auth.redirect', 'to home from auth page', { from: path });
         router.replace(ROUTES.HOME);
