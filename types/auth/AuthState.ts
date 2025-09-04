@@ -15,4 +15,6 @@ export interface AuthState {
   error: AuthError | null;
   /** Whether the user's profile is complete */
   isProfileComplete: boolean;
+  /** Whether the profile (user object) has been loaded (success or error) */
+  profileLoaded?: boolean;
 }
