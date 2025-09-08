@@ -11,31 +11,24 @@ SHELL ["/bin/bash", "-c"]
 ENV LANG=en_US.utf8
 ENV NODE_ENV=production
 ENV HOST=0.0.0.0
-ENV PORT=3000
+ENV PORT=80
 
 WORKDIR /app
 
 COPY package.json ./
 COPY yarn.lock ./
 
-# Install all dependencies (needed for build)
-# Use yarn install with frozen lockfile for consistency
+# Used yarn install with frozen lockfile for consistency
 # Set NODE_ENV=development temporarily to get dev dependencies for build
 RUN NODE_ENV=development yarn install --frozen-lockfile
 
-# Copy source code
 COPY . .
 
-# Build the application
-# Use NODE_ENV=production for the build to avoid React context issues
-RUN NODE_ENV=production yarn build
-
-# Remove dev dependencies after build
-RUN yarn install --production --frozen-lockfile && yarn cache clean
+RUN yarn build
 
 # Create env.sh for runtime environment variables
 RUN cp .env env.sh && sed -i 's/^/export /g' env.sh
 
-EXPOSE 3000
+EXPOSE 80
 
 CMD ["bash", "-c", ". /app/env.sh && exec pm2-runtime /app/server-http.js -i max --max-memory-restart 512M"]
