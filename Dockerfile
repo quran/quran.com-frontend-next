@@ -33,6 +33,9 @@ RUN NODE_ENV=production yarn build
 # Remove dev dependencies after build
 RUN yarn install --production --frozen-lockfile && yarn cache clean
 
+# Create env.sh for runtime environment variables
+RUN cp .env env.sh && sed -i 's/^/export /g' env.sh
+
 EXPOSE 3000
 
-CMD ["pm2-runtime", "start", "server-http.js", "-i", "max", "--max-memory-restart", "512M"]
+CMD ["bash", "-c", ". /app/env.sh && exec pm2-runtime /app/server-http.js -i max --max-memory-restart 512M"]
