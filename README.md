@@ -38,7 +38,7 @@
 [![Stargazers][stars-shield]][stars-url]
 [![MIT License][license-shield]][license-url]
 
-This project is the frontend for Quran.com. It is built on top of [Next.js](https://nextjs.org/docs/getting-started), a popular framework that takes the trouble and setup of setting up an isomorphic react app. We deploy it on now.sh automatically with automatic generation of builds for PRs.
+This project is the frontend for Quran.com. It is built on top of [Next.js](https://nextjs.org/docs/getting-started), a popular framework that takes the trouble and setup of setting up an isomorphic react app.
 
 ### How to Contribute
 
@@ -90,7 +90,6 @@ Thank you for taking time to file a bug! We'd appreciate your help on fixing it 
 <a href="https://discord.gg/SpEeJ5bWEQ"><strong>Join Quran.com Discord community »</strong></a>
 
 <!-- MARKDOWN LINKS & IMAGES -->
-<!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
 [contributors-shield]: https://img.shields.io/github/contributors/quran/quran.com-frontend-next?style=for-the-badge
 [contributors-url]: https://github.com/quran/quran.com-frontend-next/graphs/contributors
