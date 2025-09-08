@@ -12,13 +12,13 @@ SHELL ["/bin/bash", "-c"]
 # Set environment variables
 ENV LANG=en_US.utf8
 ENV NODE_ENV=production
-ENV HOSTNAME=0.0.0.0
-ENV PORT=80
+ENV HOST=0.0.0.0
+ENV PORT=3000
 
 WORKDIR /app
 
 # Copy package files
-COPY package*.json ./
+COPY package.json ./
 COPY yarn.lock ./
 
 # Install all dependencies (needed for build)
@@ -39,7 +39,7 @@ RUN perl -i -pe 's/^(const nextConfig = \{)$/$1\n  eslint: { ignoreDuringBuilds:
 RUN yarn install --production --frozen-lockfile && yarn cache clean
 
 # Expose the port the app runs on
-EXPOSE 80
+EXPOSE 3000
 
 # Start the application with PM2
 CMD ["pm2-runtime", "start", "server-http.js", "-i", "max", "--max-memory-restart", "512M"]
