@@ -31,9 +31,7 @@ COPY . .
 
 # Build the application
 # Use NODE_ENV=production for the build to avoid React context issues
-# Add ESLint ignore config to avoid TypeScript resolver issues in Docker
-RUN perl -i -pe 's/^(const nextConfig = \{)$/$1\n  eslint: { ignoreDuringBuilds: true },/' next.config.js && \
-    NODE_ENV=production yarn build
+RUN NODE_ENV=production yarn build
 
 # Remove dev dependencies after build
 RUN yarn install --production --frozen-lockfile && yarn cache clean
