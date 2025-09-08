@@ -16,11 +16,14 @@ import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import useMutation from '@/hooks/useMutation';
 import EditIcon from '@/icons/edit.svg';
 import { AttachedEntityType, Note } from '@/types/auth/Note';
-import { deleteNote as baseDeleteNote, publishNoteToQR } from '@/utils/auth/api';
+import { deleteNote as baseDeleteNote } from '@/utils/auth/api';
 import { makeGetNoteByIdUrl, makeGetNotesByVerseUrl } from '@/utils/auth/apiPaths';
 import { logButtonClick } from '@/utils/eventLogger';
+import adjustNoteCounts from '@/utils/notes/adjustNoteCounts';
+import { mutateNotesCache } from '@/utils/notes/mutateNotesCache';
+import { createReflection } from '@/utils/quranReflect/apiPaths';
+import { rangesToReflectionReferences, getReflectionPostId } from '@/utils/quranReflect/mapping';
 import { getQuranReflectPostUrl } from '@/utils/quranReflect/navigation';
-import { isVerseKeyWithinRanges } from '@/utils/verse';
 
 type Props = {
   note: Note;
@@ -42,57 +45,22 @@ const EditNoteListItem: React.FC<Props> = ({
   const { mutate, cache } = useSWRConfig();
   const [isInEditMode, setIsInEditMode] = useState<boolean>(false);
 
-  const clearCountCache = () => {
-    // we need to invalidate one of keys that look like: ['countNotes', notesRange]
-    // so that the count is updated
-    const keys = [...(cache as any).keys()].filter((key) => {
-      if (!key.startsWith('countNotes/')) {
-        return false;
-      }
+  // Removed clearCountCache; counts are adjusted client-side
 
-      if (verseKey) {
-        // check if the note is within the range
-        const rangeString = key.replace('countNotes/', '');
-        return isVerseKeyWithinRanges(verseKey, rangeString);
-      }
-
-      if (noteId) {
-        // if we're on the notes page, just invalidate all keys
-        return true;
-      }
-
-      // if we're not on the quran reader page, we can just invalidate all the keys
-      return true;
-    }) as string[];
-
-    if (keys.length) {
-      keys.forEach((key) => {
-        cache.delete(key);
-        mutate(key);
-      });
-    }
-  };
-
-  const mutateCache = (data: unknown) => {
-    if (verseKey) {
-      mutate(makeGetNotesByVerseUrl(verseKey), data);
-    }
-
-    if (noteId) {
-      mutate(makeGetNoteByIdUrl(noteId), data);
-    }
-  };
+  const mutateCache = (updated: Note | Note[]) =>
+    mutateNotesCache(mutate, { verseKey, noteId, updated });
 
   const { mutate: postOnQuranReflect, isMutating: isPostingOnQuranReflect } = useMutation(
     () => {
-      return publishNoteToQR(note.id, {
+      return createReflection({
         body: note.body,
-        ranges: note?.ranges || [],
+        references: rangesToReflectionReferences(note?.ranges || []),
       });
     },
     {
       onSuccess: (response) => {
-        const { postId } = response;
+        const { data } = response;
+        const postId = data?.id;
         toast(t('notes:export-success'), {
           status: ToastStatus.Success,
         });
@@ -101,11 +69,13 @@ const EditNoteListItem: React.FC<Props> = ({
           attachedEntities: [
             {
               type: AttachedEntityType.REFLECTION,
-              id: postId,
+              id: String(postId),
               createdAt: new Date(),
               updatedAt: new Date(),
             },
           ],
+          // mark as published to keep UI consistent
+          saveToQR: true,
         });
       },
       onError: () => {
@@ -117,16 +87,30 @@ const EditNoteListItem: React.FC<Props> = ({
   );
 
   const { mutate: deleteNote, isMutating: isDeletingNote } = useMutation<unknown, string>(
-    async (id) => {
-      return baseDeleteNote(id);
-    },
+    async (id) => baseDeleteNote(id),
     {
       onSuccess: () => {
         toast(t('notes:delete-success'), {
           status: ToastStatus.Success,
         });
-        mutateCache([]);
-        clearCountCache();
+        if (verseKey) {
+          const key = makeGetNotesByVerseUrl(verseKey);
+          // Remove the deleted note from the cached list without revalidating
+          mutate(
+            key,
+            (prev: any) => {
+              const list: Note[] = Array.isArray(prev) ? (prev as Note[]) : [];
+              return list.filter((n) => n.id !== note.id);
+            },
+            false,
+          );
+        }
+        if (noteId) {
+          // If editing a single note, drop its cache
+          mutate(makeGetNoteByIdUrl(noteId), undefined, false);
+        }
+        // Adjust cached per-range counts client-side
+        adjustNoteCounts(cache, mutate, verseKey, -1);
         if (onNoteDeleted) {
           onNoteDeleted();
         }
@@ -172,9 +156,7 @@ const EditNoteListItem: React.FC<Props> = ({
     isLoading: shouldDisableActions,
   };
 
-  const noteReflectionId = note?.attachedEntities?.find(
-    (entity) => entity.type === AttachedEntityType.REFLECTION,
-  )?.id;
+  const reflectionId = getReflectionPostId(note);
 
   const onNoteUpdatedHandler = (updatedNote: Note) => {
     setIsInEditMode(false);
@@ -206,18 +188,20 @@ const EditNoteListItem: React.FC<Props> = ({
             >
               <EditIcon />
             </Button>
-            <DeleteNoteModal
-              onConfirm={onDeleteConfirm}
-              note={note}
-              isDisabled={shouldDisableActions}
-            />
+            {!reflectionId && (
+              <DeleteNoteModal
+                onConfirm={onDeleteConfirm}
+                note={note}
+                isDisabled={shouldDisableActions}
+              />
+            )}
           </div>
           <div className={styles.noteBody}>{note.body}</div>
-          {noteReflectionId ? (
+          {reflectionId ? (
             <div className={styles.shareButtonContainer}>
               <Button
                 size={ButtonSize.Small}
-                href={getQuranReflectPostUrl(noteReflectionId)}
+                href={getQuranReflectPostUrl(reflectionId)}
                 isNewTab
                 onClick={onViewOnQrClicked}
                 {...buttonProps}

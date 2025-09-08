@@ -45,7 +45,7 @@ const UserPublicReflectionsListItem: React.FC<UserPublicReflectionsListItemProps
       {reflection.references && (
         <div className={styles.indicatorsContainer}>
           {reflection.references.map((reference) => {
-            return <ReflectionReferenceIndicator key={reference.surahId} reference={reference} />;
+            return <ReflectionReferenceIndicator key={reference.chapterId} reference={reference} />;
           })}
         </div>
       )}

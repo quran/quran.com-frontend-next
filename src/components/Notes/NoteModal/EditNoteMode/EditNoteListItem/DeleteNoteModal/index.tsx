@@ -45,7 +45,7 @@ const DeleteNoteModal = ({ isDisabled, note: { id }, onConfirm }: DeleteNoteButt
       <Button
         variant={ButtonVariant.Ghost}
         onClick={onDeleteClicked}
-        tooltip={t('delete')}
+        tooltip={t('common:delete')}
         size={ButtonSize.Small}
         type={ButtonType.Warning}
         {...buttonProps}

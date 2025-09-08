@@ -2,6 +2,13 @@ import { isStaticBuild } from '@/utils/build';
 
 const getLocalePostfix = (locale: string) => (locale !== 'en' ? `/${locale}` : '');
 
+export enum QuranFoundationService {
+  SEARCH = 'search',
+  AUTH = 'auth',
+  CONTENT = 'content',
+  QURAN_REFLECT = 'quran-reflect',
+}
+
 export const getCurrentPath = () => {
   if (typeof window !== 'undefined') {
     return window.location.href;
@@ -49,7 +56,7 @@ export const getBasePath = (): string =>
     process.env.NEXT_PUBLIC_VERCEL_URL
   }`;
 
-export const getProxiedServiceUrl = (service: string, path: string): string => {
+export const getProxiedServiceUrl = (service: QuranFoundationService, path: string): string => {
   const PROXY_PATH = `/api/proxy/${service}`;
   const BASE_PATH = isStaticBuild
     ? `${process.env.API_GATEWAY_URL}/${service}`
