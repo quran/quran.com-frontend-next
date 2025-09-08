@@ -33,7 +33,6 @@ COPY . .
 # Use NODE_ENV=production for the build to avoid React context issues
 # Add ESLint ignore config to avoid TypeScript resolver issues in Docker
 RUN perl -i -pe 's/^(const nextConfig = \{)$/$1\n  eslint: { ignoreDuringBuilds: true },/' next.config.js && \
-    cp .env env.sh && sed -i 's/^/export /g' env.sh && source env.sh && \
     NODE_ENV=production yarn build
 
 # Remove dev dependencies after build
@@ -43,4 +42,4 @@ RUN yarn install --production --frozen-lockfile && yarn cache clean
 EXPOSE 80
 
 # Start the application with PM2
-ENTRYPOINT ["bash", "-c", ". /app/env.sh && exec pm2-runtime /app/server-http.js -i max --max-memory-restart 512M"]
+CMD ["pm2-runtime", "start", "server-http.js", "-i", "max", "--max-memory-restart", "512M"]
