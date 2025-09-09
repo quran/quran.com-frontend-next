@@ -9,7 +9,7 @@ import { isCompleteProfile } from '@/utils/auth/complete-signup';
  */
 export type AuthAction =
   | { type: 'SET_LOADING'; payload: boolean }
-  | { type: 'SET_USER'; payload: UserProfile | null }
+  | { type: 'SET_USER_DATA'; payload: UserProfile | null }
   | { type: 'SET_ERROR'; payload: AuthError | null }
   | { type: 'SET_AUTHENTICATED'; payload: boolean }
   | { type: 'LOGOUT' };
@@ -126,7 +126,7 @@ export const authReducer = (state: AuthState, action: AuthAction): AuthState => 
   switch (action.type) {
     case 'SET_LOADING':
       return handleSetLoading(state, action.payload);
-    case 'SET_USER':
+    case 'SET_USER_DATA':
       return handleSetUser(state, action.payload);
     case 'SET_ERROR':
       return handleSetError(state, action.payload);
