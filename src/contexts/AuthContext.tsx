@@ -71,8 +71,8 @@ export const AuthProvider = ({ children }: AuthProviderProps): JSX.Element => {
    * Helper function to set authenticated user
    */
   const login = useCallback(
-    (user: UserProfile) => {
-      dispatch({ type: 'SET_USER', payload: user });
+    (userData: UserProfile) => {
+      dispatch({ type: 'SET_USER_DATA', payload: userData });
     },
     [dispatch],
   );
@@ -88,8 +88,8 @@ export const AuthProvider = ({ children }: AuthProviderProps): JSX.Element => {
    * Helper function to update user profile
    */
   const updateProfile = useCallback(
-    (user: UserProfile) => {
-      dispatch({ type: 'SET_USER', payload: user });
+    (userData: UserProfile) => {
+      dispatch({ type: 'SET_USER_DATA', payload: userData });
     },
     [dispatch],
   );
