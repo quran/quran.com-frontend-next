@@ -1,4 +1,4 @@
-import { useEffect, useCallback } from 'react';
+import { useEffect, useCallback, useRef } from 'react';
 
 import useSWR from 'swr';
 
@@ -20,6 +20,12 @@ export interface UseAuthDataReturn extends AuthState {
   userDataError: AuthError;
   /** Function to refresh user data */
   refreshUserData: () => Promise<UserProfile | null>;
+  /** True while SWR is actively fetching the user profile */
+  isUserDataLoading: boolean;
+  /** True if a token refresh is currently in progress */
+  isRefreshingToken: boolean;
+  /** True after we have received at least one NETWORK (not just cache) success for profile */
+  hasValidatedProfileFromNetwork: boolean;
 }
 
 /**
@@ -38,6 +44,10 @@ const useAuthData = (): UseAuthDataReturn => {
     return true;
   };
 
+  // Track whether we've observed a network response (success) to distinguish stale cached data
+  // returned immediately by SWR from a prior session. We only want to enforce "incomplete profile"
+  // redirects after confirming fresh data OR after an error classification (handled separately).
+  const networkValidatedRef = useRef(false);
   const {
     data: userData,
     isValidating: isUserDataLoading,
@@ -45,6 +55,9 @@ const useAuthData = (): UseAuthDataReturn => {
     mutate: refreshUserData,
   } = useSWR(swrKey, getUserProfile, {
     shouldRetryOnError,
+    onSuccess: () => {
+      networkValidatedRef.current = true;
+    },
   });
 
   // Keep isAuthenticated in sync with the login cookie
@@ -77,7 +90,7 @@ const useAuthData = (): UseAuthDataReturn => {
 
   const handleUserDataSuccessOrEmpty = useCallback(() => {
     if (userData) {
-      dispatch({ type: 'SET_USER', payload: userData });
+      dispatch({ type: 'SET_USER_DATA', payload: userData });
       return;
     }
     if (
@@ -117,6 +130,9 @@ const useAuthData = (): UseAuthDataReturn => {
     userData,
     userDataError,
     refreshUserData,
+    isUserDataLoading,
+    isRefreshingToken: isTokenRefreshInProgress(),
+    hasValidatedProfileFromNetwork: networkValidatedRef.current,
   };
 };
 

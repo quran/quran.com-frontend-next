@@ -613,7 +613,7 @@ interface AuthState {
 ```typescript
 type AuthAction =
   | { type: 'SET_LOADING'; payload: boolean }
-  | { type: 'SET_USER'; payload: UserProfile | null }
+  | { type: 'SET_USER_DATA'; payload: UserProfile | null }
   | { type: 'SET_ERROR'; payload: string | null }
   | { type: 'SET_PROFILE_COMPLETE'; payload: boolean }
   | { type: 'LOGOUT' };
