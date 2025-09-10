@@ -9,16 +9,26 @@ RUN set -eux; \
 SHELL ["/bin/bash", "-c"]
 
 ENV LANG=en_US.utf8
-# set here, and _not_ in .env, since it causes issues with deps if set in .env
 ENV NODE_ENV=production
+ENV HOST=0.0.0.0
+ENV PORT=80
 
-COPY . /app
 WORKDIR /app
 
-RUN cp .env env.sh && sed -i 's/^/export /g' env.sh && source env.sh
+COPY package.json ./
+COPY yarn.lock ./
+
+# Used yarn install with frozen lockfile for consistency
+# Set NODE_ENV=development temporarily to get dev dependencies for build
+RUN NODE_ENV=development yarn install --frozen-lockfile
+
+COPY . .
+
 RUN yarn build
 
-ENV HOSTNAME=0.0.0.0
+# Create env.sh for runtime environment variables
+RUN cp .env env.sh && sed -i 's/^/export /g' env.sh
+
 EXPOSE 80
 
-ENTRYPOINT ["bash", "-c", ". /app/env.sh && exec pm2-runtime /app/server-http.js -i max --max-memory-restart 512M"]
+CMD ["bash", "-c", ". /app/env.sh && exec pm2-runtime /app/server-http.js -i max --max-memory-restart 512M"]
