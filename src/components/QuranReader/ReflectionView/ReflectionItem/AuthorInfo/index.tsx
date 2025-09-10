@@ -4,15 +4,16 @@ import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from './AuthorInfo.module.scss';
-import buildReferredVerseText from './buildReferredVerseText';
 
 import Link, { LinkVariant } from '@/dls/Link/Link';
 import ChevronDownIcon from '@/icons/chevron-down.svg';
 import VerifiedIcon from '@/icons/verified.svg';
+import Reference from '@/types/QuranReflect/Reference';
 import { formatDateRelatively } from '@/utils/datetime';
 import { logButtonClick } from '@/utils/eventLogger';
+import { toLocalizedNumber } from '@/utils/locale';
 import { getQuranReflectAuthorUrl } from '@/utils/quranReflect/navigation';
-import { ReflectionVerseReference } from 'types/QuranReflect/ReflectionVerseReference';
+import { makeVerseKey } from '@/utils/verse';
 
 type Props = {
   authorUsername: string;
@@ -21,8 +22,8 @@ type Props = {
   isAuthorVerified: boolean;
   shouldShowReferredVerses: boolean;
   date: string;
-  verseReferences: ReflectionVerseReference[];
-  nonChapterVerseReferences: ReflectionVerseReference[];
+  verseReferences: Reference[];
+  nonChapterVerseReferences: Reference[];
   reflectionGroup?: string;
   reflectionGroupLink?: string;
   onReferredVersesHeaderClicked: () => void;
@@ -52,8 +53,30 @@ const AuthorInfo: React.FC<Props> = ({
   };
 
   const referredVerseText = useMemo(() => {
-    return buildReferredVerseText(verseReferences, lang, t);
-  }, [verseReferences, lang, t]);
+    let text = '';
+    const chapters = verseReferences
+      .filter((verse) => !verse.from || !verse.to)
+      .map((verse) => toLocalizedNumber(verse.chapterId, lang));
+
+    if (chapters.length > 0) {
+      text += `${t('common:surah')} ${chapters.join(',')}`;
+    }
+
+    const verses = nonChapterVerseReferences.map((verse) =>
+      makeVerseKey(
+        toLocalizedNumber(verse.chapterId, lang),
+        toLocalizedNumber(verse.from, lang),
+        toLocalizedNumber(verse.to, lang),
+      ),
+    );
+
+    if (verses.length > 0) {
+      if (chapters.length > 0) text += ` ${t('common:and')} `;
+      text += `${t('common:ayah')} ${verses.join(',')}`;
+    }
+
+    return text;
+  }, [verseReferences, nonChapterVerseReferences, lang, t]);
 
   return (
     <div className={styles.authorInfo}>

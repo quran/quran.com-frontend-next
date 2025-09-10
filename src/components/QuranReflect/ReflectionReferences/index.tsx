@@ -6,12 +6,13 @@ import ReflectionReferenceIndicator from '@/components/QuranReflect/ReflectionRe
 import VerseAndTranslation from '@/components/Verse/VerseAndTranslation';
 import Link from '@/dls/Link/Link';
 import ChevronDownIcon from '@/icons/chevron-down.svg';
-import ReflectionReferenceType from '@/types/QuranReflect/ReflectionReference';
+import Reference from '@/types/QuranReflect/Reference';
 import { logButtonClick, logEvent } from '@/utils/eventLogger';
+import { isSurahReference } from '@/utils/quranReflect/string';
 import Collapsible from 'src/components/dls/Collapsible/Collapsible';
 
 type Props = {
-  references: ReflectionReferenceType[];
+  references: Reference[];
 };
 
 /**
@@ -37,13 +38,14 @@ const ReflectionReferences: React.FC<Props> = ({ references }: Props) => {
   return (
     <>
       {references.map((reference) => {
-        const { surahId, fromAyah, toAyah, isSurah } = reference;
+        const { id, chapterId, from, to } = reference;
+        const isSurah = isSurahReference(id);
         if (isSurah) {
           return (
             <Link
-              key={reference.surahId}
+              key={chapterId}
               className={styles.verseKey}
-              href={`/${surahId}`}
+              href={`/${chapterId}`}
               onClick={onNoteSurahReferenceClicked}
               isNewTab
             >
@@ -55,7 +57,7 @@ const ReflectionReferences: React.FC<Props> = ({ references }: Props) => {
         }
         return (
           <Collapsible
-            key={reference.surahId}
+            key={chapterId}
             title={
               <div className={styles.headerContainer}>
                 <ReflectionReferenceIndicator reference={reference} />
@@ -64,10 +66,11 @@ const ReflectionReferences: React.FC<Props> = ({ references }: Props) => {
             prefix={<ChevronDownIcon />}
             shouldRotatePrefixOnToggle
             onOpenChange={onOpenChange}
+            headerLeftClassName={styles.headerLeftClassName}
           >
             {({ isOpen: isOpenRenderProp }) => {
               if (!isOpenRenderProp) return null;
-              return <VerseAndTranslation chapter={Number(surahId)} from={fromAyah} to={toAyah} />;
+              return <VerseAndTranslation chapter={chapterId} from={from} to={to} />;
             }}
           </Collapsible>
         );
