@@ -17,7 +17,7 @@ const ReflectionReferenceIndicator: React.FC<Props> = ({ reference }) => {
   const { lang, t } = useTranslation('common');
   const chaptersData = useContext(DataContext);
   if (!reference) {
-    return <></>;
+    return null;
   }
 
   const { id, chapterId, from, to } = reference;

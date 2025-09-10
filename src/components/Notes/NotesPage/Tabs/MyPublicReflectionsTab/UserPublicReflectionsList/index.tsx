@@ -28,8 +28,9 @@ const UserPublicReflectionsList = ({
   const { t } = useTranslation('notes');
   const [selectedReflection, setSelectedReflection] = useState<AyahReflection | null>(null); // for the note modal
 
-  const lastPageData = data[data.length - 1];
-  const hasNextPage = lastPageData.currentPage < lastPageData.pages;
+  const lastPageData = data?.[data.length - 1];
+  const hasNextPage =
+    !!lastPageData && Number(lastPageData.currentPage) < Number(lastPageData.pages);
 
   const reflections = useMemo(() => {
     return data ? data.map((response) => response.data).flat() : [];
