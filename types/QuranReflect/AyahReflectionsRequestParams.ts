@@ -3,8 +3,6 @@ type AyahReflectionsRequestParams = {
   ayahNumber: string;
   locale: string;
   page?: number;
-  tab?: string;
-  reviewed?: boolean;
   postTypeIds?: string[];
 };
 

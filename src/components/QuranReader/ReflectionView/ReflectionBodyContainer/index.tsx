@@ -11,8 +11,8 @@ import TafsirSkeleton from '@/components/QuranReader/TafsirView/TafsirSkeleton';
 import NewLabel from '@/dls/Badge/NewLabel';
 import Tabs from '@/dls/Tabs/Tabs';
 import useGlobalIntersectionObserverWithDelay from '@/hooks/useGlobalIntersectionObserverWithDelay';
+import { logErrorToSentry } from '@/lib/sentry';
 import { isLoggedIn } from '@/utils/auth/login';
-import { postReflectionViews } from '@/utils/auth/qf/api';
 import { logEvent } from '@/utils/eventLogger';
 import {
   fakeNavigate,
@@ -21,7 +21,7 @@ import {
 } from '@/utils/navigation';
 import {
   makeAyahReflectionsUrl,
-  postReflectionViews as postReflectionViewsToQuranReflect,
+  logPostView,
   REFLECTION_POST_TYPE_ID,
   LESSON_POST_TYPE_ID,
 } from '@/utils/quranReflect/apiPaths';
@@ -88,13 +88,16 @@ const ReflectionBodyContainer = ({
    */
   const onReflectionViewed = useCallback((reflectionContainer: Element) => {
     const postId = reflectionContainer.getAttribute('data-post-id');
-    if (isLoggedIn()) {
-      // eslint-disable-next-line @typescript-eslint/no-empty-function
-      postReflectionViews(postId).catch(() => {});
-    } else {
-      // eslint-disable-next-line @typescript-eslint/no-empty-function
-      postReflectionViewsToQuranReflect(postId).catch(() => {});
-    }
+    logPostView(postId).catch((e) => {
+      logErrorToSentry(e, {
+        transactionName: isLoggedIn()
+          ? 'post_reflection_views_logged_in'
+          : 'post_reflection_views_logged_out',
+        metadata: {
+          postId,
+        },
+      });
+    });
   }, []);
   useGlobalIntersectionObserverWithDelay(
     { threshold: 1 },
@@ -128,7 +131,6 @@ const ReflectionBodyContainer = ({
           surahId: selectedChapterId,
           ayahNumber: selectedVerseNumber,
           locale: lang,
-          reviewed: true,
           postTypeIds: [
             selectedContentType === ContentType.REFLECTIONS
               ? REFLECTION_POST_TYPE_ID

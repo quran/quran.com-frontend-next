@@ -40,6 +40,7 @@ const NoteRanges: React.FC<Props> = ({ ranges }: Props) => {
         prefix={<ChevronDownIcon />}
         shouldRotatePrefixOnToggle
         onOpenChange={onOpenChange}
+        headerLeftClassName={styles.headerLeftClassName}
       >
         {({ isOpen: isOpenRenderProp }) => {
           if (!isOpenRenderProp) return null;
