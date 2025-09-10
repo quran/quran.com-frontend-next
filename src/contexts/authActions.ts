@@ -9,7 +9,7 @@ import { isCompleteProfile } from '@/utils/auth/complete-signup';
  */
 export type AuthAction =
   | { type: 'SET_LOADING'; payload: boolean }
-  | { type: 'SET_USER'; payload: UserProfile | null }
+  | { type: 'SET_USER_DATA'; payload: UserProfile | null }
   | { type: 'SET_ERROR'; payload: AuthError | null }
   | { type: 'SET_AUTHENTICATED'; payload: boolean }
   | { type: 'LOGOUT' };
@@ -23,7 +23,8 @@ export const initialState: AuthState = {
   isLoading: true,
   isAuthenticated: false,
   error: null,
-  isProfileComplete: false,
+  // null => unknown; we haven't successfully derived completeness yet
+  isProfileComplete: null,
   profileLoaded: false,
 };
 
@@ -48,7 +49,7 @@ const handleSetLoading = (state: AuthState, payload: boolean): AuthState => {
  */
 const handleSetUser = (state: AuthState, user: UserProfile | null): AuthState => {
   const isAuthenticated = !!user;
-  const isProfileComplete = user ? isCompleteProfile(user) : false;
+  const isProfileComplete = user ? isCompleteProfile(user) : null; // only derive when we have user
 
   return {
     ...state,
@@ -72,7 +73,10 @@ const handleSetError = (state: AuthState, error: AuthError | null): AuthState =>
     ...state,
     error,
     isLoading: false,
-    profileLoaded: true,
+    // Do not force profileLoaded true if we never had a successful user fetch; keep prior value.
+    // If we already loaded a profile earlier, preserve that; else remain false so logic can still await.
+    profileLoaded: state.profileLoaded,
+    // Preserve existing isProfileComplete (could be true/false from earlier) but never coerce to false.
   };
 };
 
@@ -89,9 +93,8 @@ const handleSetAuthenticated = (state: AuthState, isAuthenticated: boolean): Aut
     isAuthenticated,
     isLoading: false,
     user: isAuthenticated ? state.user : null, // Clear user on logout
-    isProfileComplete: isAuthenticated ? state.isProfileComplete : false, // Reset profile completeness on logout
+    isProfileComplete: isAuthenticated ? state.isProfileComplete : null, // Reset to unknown on logout
     error: isAuthenticated ? state.error : null, // Clear auth errors on logout
-    // Do not mark profileLoaded true here unless we already had it; ensures we still wait for profile fetch
     profileLoaded: isAuthenticated ? state.profileLoaded : false,
   };
 };
@@ -123,7 +126,7 @@ export const authReducer = (state: AuthState, action: AuthAction): AuthState => 
   switch (action.type) {
     case 'SET_LOADING':
       return handleSetLoading(state, action.payload);
-    case 'SET_USER':
+    case 'SET_USER_DATA':
       return handleSetUser(state, action.payload);
     case 'SET_ERROR':
       return handleSetError(state, action.payload);

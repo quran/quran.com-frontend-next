@@ -1,51 +1,48 @@
-/* eslint-disable react-func/max-lines-per-function */
+/* eslint-disable consistent-return */
+/* eslint-disable react-func/max-lines-per-function, indent, max-lines */
 import { useEffect, useRef } from 'react';
 
 import { useRouter } from 'next/router';
 
 import useAuthData from '@/hooks/auth/useAuthData';
 import { logMessageToSentry, addSentryBreadcrumb } from '@/lib/sentry';
+import { isCompleteProfile } from '@/utils/auth/complete-signup'; // NEW: to recompute completeness defensively
 import { ROUTES, getLoginNavigationUrl } from '@/utils/navigation';
 import { isAuthPage } from '@/utils/routes';
 
-/**
- * Global auth-based redirect handler.
- * Implements flows:
- * - Unauthenticated visiting complete-signup -> redirect to login with redirectTo
- * - Authenticated with incomplete profile -> force /complete-signup (except on that page)
- * - Authenticated with complete profile visiting auth pages -> redirect to home
- *
- * Client-only; returns null and renders nothing.
- * @returns {null}
- */
 const AuthRedirects = (): null => {
   const router = useRouter();
-  const { isAuthenticated, isProfileComplete, isLoading, userData, profileLoaded } = useAuthData();
-
-  // Timeout to avoid indefinite waiting for profileLoaded (e.g., network hang).
+  const {
+    isAuthenticated,
+    isProfileComplete,
+    isLoading,
+    userData,
+    profileLoaded,
+    hasValidatedProfileFromNetwork,
+    isRefreshingToken,
+  } = useAuthData();
   const TIMEOUT_MS = Number(process.env.NEXT_PUBLIC_AUTH_PROFILE_TIMEOUT_MS) || 4000;
   const timeoutFiredRef = useRef(false);
-  // Removed snapshotDebounceRef
 
+  // Core redirect effect: decides if/where to redirect once we know enough about auth + profile state.
+  // NOTE: We intentionally gate redirects that depend on profile completeness behind
+  // `hasValidatedProfileFromNetwork` to avoid acting on stale SWR cache values that can appear
+  // momentarily during a token refresh (root cause of prior double redirect issue: chapter -> complete-signup -> home).
   useEffect(() => {
     if (!router.isReady) return;
-    if (isLoading) return; // avoid redirects while determining auth state
-
+    if (isLoading) return;
     const { pathname: path, asPath } = router;
     const onAuthPage = isAuthPage(router);
-
-    // 1) Unauthenticated user trying to access complete signup -> send to login with redirect
     if (!isAuthenticated) {
+      // Unauthenticated user: ensure we don't leave them on a post-signup completion route.
       if (path === ROUTES.COMPLETE_SIGNUP) {
         const loginUrl = getLoginNavigationUrl(asPath);
         if (asPath !== loginUrl) router.replace(loginUrl);
       }
-      return; // unauthenticated can browse public pages freely
+      return;
     }
-
-    // Guard: Authenticated but user profile not yet loaded (flicker prevention)
-    // Without this, we might think profile is incomplete (default false) and redirect prematurely.
-    if (isAuthenticated && !isProfileComplete && !profileLoaded) {
+    if (isAuthenticated && isProfileComplete === null && !profileLoaded) {
+      // Auth session confirmed but profile still loading: defer any redirect decisions.
       logMessageToSentry('AuthRedirects defer redirect until profile loads', {
         transactionName: 'AuthRedirects',
         metadata: { reason: 'awaiting-user-data', path, asPath },
@@ -60,28 +57,85 @@ const AuthRedirects = (): null => {
       });
       return;
     }
+    if (isAuthenticated && profileLoaded && userData && isProfileComplete === false) {
+      // Recompute completeness defensively in case context flag is stale vs latest userData
+      const recomputedComplete = isCompleteProfile(userData as any);
+      if (recomputedComplete) {
+        addSentryBreadcrumb('auth.redirect', 'skip redirect - recomputed profile complete', {
+          path,
+          asPath,
+          storedIsProfileComplete: isProfileComplete,
+          recomputedComplete: true,
+          userId: userData?.id ?? null,
+        });
+        return;
+      }
 
-    // 2) Authenticated with CONFIRMED incomplete profile -> restrict to /complete-signup
-    //    We now require profileLoaded === true to avoid redirecting when the profile fetch
-    //    failed or is still pending (previous behavior incorrectly redirected on timeout).
-    if (isAuthenticated && profileLoaded && !isProfileComplete) {
+      // Require a stable id; without id treat as still loading / not actionable
+      if (userData?.id == null) {
+        addSentryBreadcrumb('auth.redirect', 'skip incomplete redirect - missing user id', {
+          path,
+          asPath,
+          hasValidatedProfileFromNetwork,
+        });
+        return;
+      }
+
+      if (!hasValidatedProfileFromNetwork) {
+        // We saw an incomplete profile but only from (potentially) stale cache; wait for network validation.
+        addSentryBreadcrumb(
+          'auth.redirect',
+          'skip incomplete redirect - awaiting network validation',
+          {
+            path,
+            asPath,
+            isAuthenticated,
+            profileLoaded,
+            isProfileComplete,
+            hasValidatedProfileFromNetwork,
+            isRefreshingToken,
+            userId: userData?.id || null,
+          },
+        );
+        return;
+      }
       if (path !== ROUTES.COMPLETE_SIGNUP) {
+        // Only log when we're actually performing the redirect, not when just evaluating
         logMessageToSentry('AuthRedirects redirect -> complete-signup', {
           transactionName: 'AuthRedirects',
-          metadata: { from: path, to: ROUTES.COMPLETE_SIGNUP },
+          metadata: { from: path, to: ROUTES.COMPLETE_SIGNUP, userId: userData?.id || null },
         });
-        addSentryBreadcrumb('auth.redirect', 'to complete-signup', { from: path });
+        addSentryBreadcrumb('auth.redirect', 'to complete-signup', {
+          from: path,
+          userId: userData?.id || null,
+        });
         router.replace(ROUTES.COMPLETE_SIGNUP);
       }
       return;
     }
-
-    // 3) Authenticated with complete profile -> keep away from auth pages
-    if (isAuthenticated && isProfileComplete && onAuthPage) {
+    if (isAuthenticated && isProfileComplete === true && onAuthPage) {
+      if (!hasValidatedProfileFromNetwork) {
+        // Avoid prematurely pushing a user off an auth page (e.g., login) if completeness may still change once network fetch validates.
+        addSentryBreadcrumb(
+          'auth.redirect',
+          'skip auth-page redirect - awaiting network validation',
+          {
+            path,
+            asPath,
+            isAuthenticated,
+            profileLoaded,
+            isProfileComplete,
+            hasValidatedProfileFromNetwork,
+            isRefreshingToken,
+            userId: userData?.id || null,
+          },
+        );
+        return;
+      }
       if (path !== ROUTES.HOME) {
         logMessageToSentry('AuthRedirects redirect -> home (auth page)', {
           transactionName: 'AuthRedirects',
-          metadata: { from: path, to: ROUTES.HOME },
+          metadata: { from: path, to: ROUTES.HOME, userId: userData?.id || null },
         });
         addSentryBreadcrumb('auth.redirect', 'to home from auth page', { from: path });
         router.replace(ROUTES.HOME);
@@ -96,16 +150,16 @@ const AuthRedirects = (): null => {
     isLoading,
     userData,
     profileLoaded,
+    hasValidatedProfileFromNetwork,
+    isRefreshingToken,
     router,
   ]);
 
-  // Separate effect to handle timeout fallback when profileLoaded never resolves
   useEffect(() => {
     if (!router.isReady) return;
-    if (!isAuthenticated) return; // Only relevant when logged in
-    if (profileLoaded) return; // Already resolved
-    if (timeoutFiredRef.current) return; // Already fired
-
+    if (!isAuthenticated) return;
+    if (profileLoaded) return;
+    if (timeoutFiredRef.current) return;
     const id = setTimeout(() => {
       if (profileLoaded || timeoutFiredRef.current) return;
       timeoutFiredRef.current = true;
@@ -132,13 +186,7 @@ const AuthRedirects = (): null => {
         userId: userData?.id || null,
         timeoutMs: TIMEOUT_MS,
       });
-      // IMPORTANT: We no longer redirect on timeout because we cannot be certain the
-      // profile is incomplete; doing so caused false positives when the profile API
-      // was slow or failed. Only the main effect (which now requires profileLoaded)
-      // will perform the redirect once we have definitive data.
     }, TIMEOUT_MS);
-
-    // eslint-disable-next-line consistent-return
     return () => {
       clearTimeout(id);
     };

@@ -175,6 +175,11 @@ export const logMessageToSentry = (
       if (options.transactionName) {
         scope.setTransactionName(options.transactionName);
       }
+      if (getUserIdCookie()) {
+        scope.setUser({
+          id: getUserIdCookie(),
+        });
+      }
       return scope;
     });
   }
