@@ -56,7 +56,7 @@ class Homepage {
   }
 
   async openSettingsDrawer() {
-    await this.page.locator('[aria-label="Change Settings"]').click();
+    await this.page.getByLabel('Change Settings').click();
   }
 }
 
