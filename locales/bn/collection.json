@@ -1,9 +1,9 @@
 {
-  "all-saved-verses": "সমস্ত সংরক্ষিত আয়াত",
+  "all-saved-verses": "সংরক্ষিত সকল আয়াত",
   "alphabetical": "AZ",
-  "back-to-collection-list": "সংগ্রহ তালিকায় ফিরে যান",
+  "back-to-collection-list": "সংগৃহিত তালিকায় ফিরে যান",
   "collapse-all": "সমস্ত আয়াত সঙ্কুচিত করুন",
-  "collection-list-empty": "সংগ্রহের তালিকা খালি। আপনি এখনো কোনো সংগ্রহ তৈরি করেননি",
+  "collection-list-empty": "সংগ্রহের তালিকা শূন্য। আপনি এখনো কোনো সংগ্রহ তৈরি করেননি",
   "collections": "সংগ্রহ",
   "delete-bookmark": {
     "subtitle": "আপনি কি {{bookmarkName}} {{collectionName}} সংগ্রহ থেকে মুছতে চান?",
@@ -16,7 +16,7 @@
   "empty": "সংগ্রহ খালি",
   "expand-all": "সব আয়াত প্রসারিত",
   "go-to-ayah": "আয়াতে যান",
-  "load-more": "আর ঢুকাও",
+  "load-more": "আর লোড করুন",
   "recently-added": "সম্প্রতি যোগ",
   "recently-updated": "সম্প্রতি আপডেট করা হয়েছে",
   "verse-key": "অধ্যায় ও পদ সংখ্যা"
