@@ -1,4 +1,9 @@
 {
+  "careers": {
+    "career": "Oportunidades profesionales",
+    "cta": "Ver posiciones",
+    "header": "Explora nuestras ofertas de trabajo actuales"
+  },
   "footer": "Equipo Quran.com",
   "header": "Ayuda para el desarrollo",
   "issues-cta": "Si tienes alguna pregunta o quieres contactar a los encargados del mantenimiento, simplemente escribe un problema. Te responderemos lo antes posible, insha'Allah.",
