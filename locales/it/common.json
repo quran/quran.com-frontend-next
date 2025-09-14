@@ -36,6 +36,7 @@
       }
     }
   },
+  "answers": "",
   "aria": {
     "change-settings": "Cambia impostazioni",
     "drawer-close": "Chiudere il cassetto",
@@ -92,6 +93,7 @@
   },
   "ayah": "Ayah",
   "ayahs": "ayah",
+  "back": "",
   "beta": "Beta",
   "beyond-ramadan": "Cresci oltre il Ramadan!",
   "bookmark": "Segnalibro",
@@ -110,11 +112,17 @@
   },
   "community": {
     "cta": "Mettiti in contatto",
-    "header": "Vuoi contribuire con le tue competenze tecniche a promuovere la missione del Corano?",
+    "header": "Vuoi mettere a disposizione le tue competenze tecniche per promuovere la missione del Corano?",
     "sub-header": "Condividi il tuo interesse compilando questo modulo e ti contatteremo quando sarà disponibile un'opportunità adatta, insha'Allah.",
     "title": "Comunità"
   },
   "complete-sign-up": "Completa la tua registrazione",
+  "complete-signup": {
+    "description": "",
+    "title": "",
+    "verification-code": "",
+    "verification-code-sent-to": ""
+  },
   "consents": {
     "communication": {
       "body": "🚀 Potenzia i tuoi progressi tramite notifiche <boldSpan> personalizzate </boldSpan> sui progressi del tuo obiettivo, sul mantenimento dei successi e sul miglioramento dell'utilizzo delle nostre funzionalità attuali. <br></br> <br></br> Possiamo tenerti aggiornato tramite e-mail e altri canali? Hai il controllo: sentiti libero di modificare queste preferenze in qualsiasi momento nelle impostazioni del tuo account. <br></br> <br></br> Seleziona semplicemente \"Consenti\" per <boldSpan> promemoria stimolanti </boldSpan> o \"Non ora\" per rifiutarli.",
@@ -164,6 +172,7 @@
     "account-banned": "Spiacenti, il tuo account è stato bannato. Contatta Quran.Foundation",
     "badRequest": "*Richiesta non valida",
     "banned": "*Spiacenti, il tuo account è stato bannato. Contatta Quran.Foundation",
+    "complete-signup-failed": "",
     "confirm": "*La password di conferma non corrisponde alla password",
     "email": "*Formato email non valido!",
     "exactLength": "*Il valore deve essere della lunghezza esatta",
@@ -254,6 +263,7 @@
   "learning-plans": "Piani di apprendimento",
   "less": "Meno",
   "lessons": "Lezioni",
+  "listen": "",
   "loading": "Caricamento in corso",
   "login": "Login",
   "logout": "Disconnettersi",
@@ -273,9 +283,11 @@
   "next-ayah": "Avanti Sì",
   "no": "No",
   "no-notifications": "Nessuna notifica ancora",
+  "no-verses-available": "",
   "none": "Nessuno",
   "not-now": "Non adesso",
   "notes": {
+    "label": "",
     "title": "I miei appunti e riflessioni"
   },
   "notification-settings": "Impostazioni di notifica",
@@ -376,6 +388,10 @@
     "word-tooltip-helper": "Visualizza la traduzione o la traslitterazione quando si passa con il mouse o si fa clic sulla parola"
   },
   "share": "Condividere",
+  "share-quran-description-line-1": "",
+  "share-quran-description-line-2": "",
+  "share-quran-description-line-3": "",
+  "share-quran-title": "",
   "shared": "Il link è stato copiato negli appunti!",
   "show-more": "Mostra di più",
   "sidebar": {
