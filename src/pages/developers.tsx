@@ -7,6 +7,7 @@ import useTranslation from 'next-translate/useTranslation';
 
 import styles from './contentPage.module.scss';
 
+import CareersSection from '@/components/CareersSection/CareersSection';
 import CommunitySection from '@/components/Navbar/NavigationDrawer/CommunitySection';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import PageContainer from '@/components/PageContainer';
@@ -26,6 +27,8 @@ const DevelopersPage = () => {
       />
       <PageContainer>
         <div className={styles.contentPage}>
+          <h1>{t('careers.career')}</h1>
+          <CareersSection />
           <h1>{t('header')}</h1>
           <CommunitySection />
           <p>{t('main-desc')}</p>

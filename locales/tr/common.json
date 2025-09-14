@@ -36,6 +36,7 @@
       }
     }
   },
+  "answers": "",
   "aria": {
     "change-settings": "Ayarları değiştir",
     "drawer-close": "Çekmeceyi Kapat",
@@ -92,8 +93,9 @@
   },
   "ayah": "Ayet",
   "ayahs": "Ayet",
+  "back": "",
   "beta": "Beta",
-  "beyond-ramadan": "Ramazan'dan Sonra da Büyümeye Devam Edin!",
+  "beyond-ramadan": "Ramazan'dan sonra da gelişin!",
   "bookmark": "Yer imi",
   "bookmarked": "İşaretli",
   "both": "Her ikisi de",
@@ -110,11 +112,17 @@
   },
   "community": {
     "cta": "Bizimle iletişime geçin",
-    "header": "Teknik becerilerinizi Kur'an'ın misyonuna katkıda bulunmak için kullanmak ister misiniz?",
+    "header": "Teknik becerilerinizi Kuran'ın misyonunu ilerletmek için gönüllü olarak kullanmak ister misiniz?",
     "sub-header": "Bu formu doldurarak ilginizi bizimle paylaşın, uygun bir fırsat olduğunda inşaAllah size ulaşacağız.",
     "title": "Toplum"
   },
   "complete-sign-up": "Kaydınızı tamamlayın",
+  "complete-signup": {
+    "description": "",
+    "title": "",
+    "verification-code": "",
+    "verification-code-sent-to": ""
+  },
   "consents": {
     "communication": {
       "body": "🚀 Hedef ilerlemeniz, serilerinizi sürdürmeniz ve mevcut özelliklerimizi daha iyi kullanmanızı sağlayan <boldSpan> kişiselleştirilmiş </boldSpan> bildirimleri aracılığıyla ilerlemenizi güçlendirin. <br></br> <br></br> Sizi e-posta ve diğer kanallar aracılığıyla gelişmelerden haberdar edebilir miyiz? Kontrol sizde; bu tercihleri istediğiniz zaman hesap ayarlarınızdan değiştirmekten çekinmeyin. <br></br> <br></br> <boldSpan> ilham veren hatırlatıcılar </boldSpan> için 'İzin Ver'i veya reddetmek için 'Şimdi Değil'i seçmeniz yeterli.",
@@ -164,6 +172,7 @@
     "account-banned": "Üzgünüz, Hesabınız yasaklandı. Quran.Foundation ile iletişime geçin",
     "badRequest": "*Geçersiz istek",
     "banned": "*Üzgünüz, Hesabınız yasaklandı. Quran.Foundation ile iletişime geçin",
+    "complete-signup-failed": "",
     "confirm": "*Şifreyi onayla şifreyle uyuşmuyor",
     "email": "*Geçersiz E-posta Biçimi!",
     "exactLength": "*Değer tam uzunlukta olmalıdır",
@@ -254,6 +263,7 @@
   "learning-plans": "Öğrenme Planları",
   "less": "Daha az",
   "lessons": "Dersler",
+  "listen": "",
   "loading": "Yükleniyor",
   "login": "Oturum aç",
   "logout": "Çıkış Yap",
@@ -273,9 +283,11 @@
   "next-ayah": "Sonraki Ayah",
   "no": "Numara",
   "no-notifications": "Henüz bildirim yok",
+  "no-verses-available": "",
   "none": "Hiçbiri",
   "not-now": "Şimdi değil",
   "notes": {
+    "label": "",
     "title": "Notlarım ve Düşüncelerim"
   },
   "notification-settings": "Bildirim ayarları",
@@ -296,7 +308,7 @@
   "popup": {
     "companion-title": "Sevgili Kur'an Arkadaşı,",
     "footnote": "Aylık bağışlar, bağış toplamaya daha az odaklanmamızı sağlıyor",
-    "subtitle": "\"Allah katında salih amelin en çok hoş karşılandığı günler bu günlerdir.\" [Buhari 969]",
+    "subtitle": "“Salih amel için Allah katında bu günler kadar sevindirici başka günler yoktur.” [Sahih-i Buhârî 969]",
     "text-1": "Her zaman ücretsiz olarak dünya Kuran bilgisine ve teknolojisine hizmet etmeye kararlıyız.",
     "text-2": "Sürekli sadaka (Sadaqa Jariyah) için mükemmel bir fırsat. Aylık (veya tek seferlik) bağışçı olarak ahiretinize yatırım yapın.",
     "title": "En İyi Gününüzde Verin!"
@@ -376,6 +388,10 @@
     "word-tooltip-helper": "Kelimeyi gezdirirken veya tıklatırken çeviriyi veya harf çevirisini görüntüleyin"
   },
   "share": "Paylaş",
+  "share-quran-description-line-1": "",
+  "share-quran-description-line-2": "",
+  "share-quran-description-line-3": "",
+  "share-quran-title": "",
   "shared": "Bağlantı panoya kopyalandı!",
   "show-more": "Daha fazla göster",
   "sidebar": {

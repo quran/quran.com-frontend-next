@@ -1,4 +1,9 @@
 {
+  "careers": {
+    "career": "工作机会",
+    "cta": "查看职位",
+    "header": "了解我们目前的职位空缺"
+  },
   "footer": "- Quran.com 团队",
   "header": "开发帮助",
   "issues-cta": "如果您有任何问题或想联系维护人员，只需写一个问题！我们会尽快回复您，inshAllah。",

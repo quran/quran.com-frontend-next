@@ -6,23 +6,23 @@
     "auth-onboarding": {
       "data-sync": {
         "action": "Volgende",
-        "description": "Of je nu Quran.com op je telefoon of je laptop gebruikt, je bladwijzers, laatst gelezen verzen en je voorkeuren zijn beschikbaar",
+        "description": "Of je nu Quran.com op je telefoon of je laptop gebruikt, je bladwijzers, laatst gelezen verzen en je voorkeuren zullen beschikbaar zijn",
         "title": "Uw gegevens worden <br></br> op verschillende apparaten gesynchroniseerd"
       },
       "feedback": {
         "action": "Oké, snap het",
         "description": "Bedankt voor het gebruik van Quran.com en we horen graag uw feedback op <link> feedback.quran.com </link>",
-        "title": "We willen je gedachten horen"
+        "title": "We willen je mening horen"
       },
       "quran-foundation-link": {
         "action": "Volgende",
         "description": "Gebruik uw Quran.com-login voor toegang tot QuranReflect.com - een bloeiende wereldwijde gemeenschap die zich bezighoudt met koranreflectie.",
-        "title": "Gebruik uw account in alle Quran.Foundation-apps!"
+        "title": "Gebruik uw account in alle Quran.Foundation apps!"
       },
       "quran-growth-journey": {
         "action": "Volgende",
-        "description": "Behoud uw koranleesreeks en boek vooruitgang bij het behalen van uw doelen terwijl u nieuwe gewoonten opbouwt",
-        "title": "Begin uw korangroeireis!"
+        "description": "Behoud uw koran lees reeks en boek vooruitgang bij het behalen van uw doelen terwijl u nieuwe gewoonten opbouwt",
+        "title": "Begin uw koran groei reis!"
       },
       "welcome": {
         "action": "Zie wat nieuw is",
@@ -36,6 +36,7 @@
       }
     }
   },
+  "answers": "",
   "aria": {
     "change-settings": "Instellingen veranderen",
     "drawer-close": "Sluit lade",
@@ -83,7 +84,7 @@
       "stop-repeating": "Stop met herhalen",
       "times": "keer",
       "verses-range": "Bereik van verzen",
-      "volume-control": "Volumeregeling"
+      "volume-control": "Volume regeling"
     },
     "repeat-moved": "De herhaalinstellingen zijn verplaatst naar de audiospeler. Klik op het <0> </0> om ze te openen",
     "select-reciter": "Selecteer voordrager",
@@ -92,6 +93,7 @@
   },
   "ayah": "Aya",
   "ayahs": "Ayahs",
+  "back": "",
   "beta": "bèta",
   "beyond-ramadan": "Groei verder dan de Ramadan!",
   "bookmark": "Bladwijzer",
@@ -110,15 +112,21 @@
   },
   "community": {
     "cta": "Neem contact op",
-    "header": "Wilt u uw technische vaardigheden inzetten om de missie van de Koran verder te brengen?",
+    "header": "Wilt u uw technische vaardigheden vrijwillig inzetten om de missie van de Koran te bevorderen?",
     "sub-header": "Deel uw interesse door dit formulier in te vullen. Wij nemen dan contact met u op zodra er een geschikte mogelijkheid beschikbaar is, insha'Allah.",
     "title": "Gemeenschap"
   },
   "complete-sign-up": "Voltooi je registratie",
+  "complete-signup": {
+    "description": "",
+    "title": "",
+    "verification-code": "",
+    "verification-code-sent-to": ""
+  },
   "consents": {
     "communication": {
       "body": "🚀 Verbeter uw voortgang via <boldSpan> gepersonaliseerde </boldSpan> meldingen over uw doelvoortgang, het bijhouden van streaks en het verbeteren van uw gebruik van onze huidige functies. <br></br> <br></br> Kunnen we u op de hoogte houden via e-mail en andere kanalen? U heeft de controle. U kunt deze voorkeuren op elk gewenst moment aanpassen in uw accountinstellingen. <br></br> <br></br> Selecteer eenvoudig 'Toestaan' voor <boldSpan> inspirerende herinneringen </boldSpan> of 'Niet nu' om te weigeren.",
-      "header": "We helpen u graag <boldSpan> toegewijd en consistent </boldSpan> te blijven tijdens uw Korangroeireis! 📖🌟"
+      "header": "We helpen u graag <boldSpan> toegewijd en consistent </boldSpan> te blijven tijdens uw Koran groei reis! 📖🌟"
     }
   },
   "continue": "Doorgaan met",
@@ -164,6 +172,7 @@
     "account-banned": "Sorry, uw account is geblokkeerd. Neem contact op met Quran.Foundation",
     "badRequest": "*Ongeldige aanvraag",
     "banned": "*Sorry, uw account is geblokkeerd. Neem contact op met Quran.Foundation",
+    "complete-signup-failed": "",
     "confirm": "*Bevestig wachtwoord komt niet overeen met het wachtwoord",
     "email": "*Ongeldig e-mailadres!",
     "exactLength": "*Waarde moet exacte lengte zijn",
@@ -210,10 +219,10 @@
     "translation-font-size": "Vertaling lettergrootte"
   },
   "footer": {
-    "description": "Quran.com is een vertrouwd platform dat door miljoenen mensen wereldwijd wordt gebruikt om de Koran in meerdere talen te lezen, te doorzoeken, te beluisteren en erover na te denken. Het biedt vertalingen, tafsir, recitaties, woord-voor-woordvertalingen en hulpmiddelen voor diepere studie, waardoor de Koran voor iedereen toegankelijk is. <br/> <br/> Als Sadaqah Jariyah is Quran.com toegewijd om mensen te helpen een diepe verbinding met de Koran te maken. Ondersteund door <link>Quran.Foundation</link>, een 501(c)(3) non-profitorganisatie, blijft Quran.com groeien als een gratis en waardevolle bron voor iedereen, Alhamdullilah",
+    "description": "Quran.com is een vertrouwd platform dat door miljoenen mensen wereldwijd wordt gebruikt om de Koran in meerdere talen te lezen, te zoeken, te beluisteren en erover te reflecteren. Het biedt vertalingen, tafseer, recitaties, woord-voor-woord vertalingen en hulpmiddelen voor diepere studie, waardoor de Koran voor iedereen toegankelijk is. <br/> <br/> Als Sadaqah Jariyah is Quran.com toegewijd om mensen te helpen een diepe verbinding met de Koran te maken. Ondersteund door <link>Quran.Foundation</link>, een 501(c)(3) non-profitorganisatie, blijft Quran.com groeien als een gratis en waardevolle bron voor iedereen, Alhamdulillah.",
     "hiring": "Wij werven aan! Sluit je aan bij het team van QuranFoundation en draag bij aan onze missie. <link> Solliciteer nu! </link>",
     "rights": "Alle rechten voorbehouden",
-    "title": "Lees, luister, zoek en denk na over de Koran"
+    "title": "Lees, luister, zoek en reflecteer over de Koran"
   },
   "form": {
     "body": "Lichaam",
@@ -225,13 +234,13 @@
     "password": "Wachtwoord",
     "title": "Titel",
     "username": "Gebruikersnaam",
-    "verification-code": "Verificatiecode"
+    "verification-code": "Verificatie code"
   },
   "from": "Van",
   "fundraising-share-title": "Deel Quran.com Fondsenwerving",
   "fundraising-sticky-banner": {
     "cta": "Doneer",
-    "title": "Geef tijdens de mooiste dagen!"
+    "title": "Geef tijdens de beste dagen!"
   },
   "fundraising": {
     "description": "Met maandelijkse donaties kunnen we Quran.com verbeteren en onze activiteiten voortzetten. Zo hoeven we ons minder op fondsenwerving te richten en meer op het creëren van impact.",
@@ -254,6 +263,7 @@
   "learning-plans": "Leerplannen",
   "less": "Minder",
   "lessons": "Lessen",
+  "listen": "",
   "loading": "Bezig met laden",
   "login": "Log in",
   "logout": "Uitloggen",
@@ -273,9 +283,11 @@
   "next-ayah": "Volgende Aya",
   "no": "Nee",
   "no-notifications": "Nog geen meldingen",
+  "no-verses-available": "",
   "none": "Geen",
   "not-now": "Niet nu",
   "notes": {
+    "label": "",
     "title": "Mijn aantekeningen en reflecties"
   },
   "notification-settings": "Notificatie instellingen",
@@ -311,7 +323,7 @@
   "privacy": "Privacy",
   "product-updates": "Productupdates",
   "profile": "Profiel",
-  "projects-desc": "Non-profitprojecten die eigendom zijn van, beheerd worden door of gesponsord worden door <link>Quran.Foundation</link>",
+  "projects-desc": "Non-profitprojecten die eigendom zijn van, beheerd worden door of gesponsord worden door <link>Quran.Foundation</link>.",
   "q-reflect": "KoranReflect",
   "quran-com": "koran.com",
   "quran-radio": "Koran Radio",
@@ -333,7 +345,7 @@
   "retry": "Opnieuw proberen",
   "revelation_order": "Openbaring orde",
   "rub": "Rub el Hizb",
-  "save": "Redden",
+  "save": "Bewaren",
   "save-to-collection": "Opslaan in collectie",
   "search-for": "Zoeken naar '{{searchQuery}}'",
   "search-results": "{{count}} zoekresultaten",
@@ -376,13 +388,17 @@
     "word-tooltip-helper": "Geef de vertaling of transliteratie weer wanneer u met de muis over het woord zweeft of op het woord klikt"
   },
   "share": "Deel",
+  "share-quran-description-line-1": "",
+  "share-quran-description-line-2": "",
+  "share-quran-description-line-3": "",
+  "share-quran-title": "",
   "shared": "Link is gekopieerd naar het klembord!",
   "show-more": "Laat meer zien",
   "sidebar": {
     "search-hizb": "Zoek Hizb",
     "search-juz": "Zoek Juz",
     "search-page": "Zoekpagina",
-    "search-surah": "zoek soera",
+    "search-surah": "Zoek soera",
     "search-verse": "Zoek Vers",
     "try-navigating-with": "Tip: probeer te navigeren met"
   },
@@ -442,11 +458,11 @@
   "view": "Weergave",
   "voice": {
     "ask-permission": "Schakel microfoontoestemming in om gesproken zoekopdrachten te gaan gebruiken",
-    "error": "Er is een fout opgetreden. Probeer het later opnieuw.",
+    "error": "Er is een fout opgetreden, probeer het later opnieuw.",
     "language-unavailable": "Arabisch wordt niet ondersteund door uw browser.",
     "network": "Netwerkfout. Controleer uw internetverbinding en probeer het opnieuw.",
     "no-microphone": "Geen microfoon gedetecteerd. Sluit een microfoon aan en probeer het opnieuw.",
-    "no-permission": "Het lijkt erop dat u de microfoonrechten niet hebt ingeschakeld. Schakel de microfoonrechten in en probeer het opnieuw.",
+    "no-permission": "Het lijkt erop dat u de microfoon rechten niet hebt ingeschakeld. Schakel de microfoon rechten in en probeer het opnieuw.",
     "no-speech": "Er is geen spraak gedetecteerd. Probeer het opnieuw.",
     "not-supported": "Het lijkt erop dat uw browser geen microfoon ondersteunt. Probeer een andere browser.",
     "suggest": "Begin alsjeblieft met reciteren en je vers zal verschijnen.",
