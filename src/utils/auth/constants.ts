@@ -32,3 +32,5 @@ export const AUTH_ONBOARDING_ANNOUNCEMENT_TYPE = 'auth-onboarding';
 export const BANNED_USER_ERROR_ID = 'external.banned';
 
 export const QURANIC_CALENDAR_PROGRAM_ID = '1';
+
+export const SSO_PLATFORMS = [{ id: 'QR', url: process.env.QR_URL as string }];
