@@ -138,8 +138,8 @@ export default function Logout() {
   // this component should not render. If it does render, it means
   // there was an error in the server-side redirect.
   return (
-      <div>
-        <p>Signing you out...</p>
-      </div>
+    <div>
+      <p>Signing you out...</p>
+    </div>
   );
 }
