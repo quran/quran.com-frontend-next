@@ -41,7 +41,7 @@ const useLogout = (): LogoutFunction => {
         removeLastSyncAt();
 
         if (!redirectToLogin) {
-          const redirect = window?.location?.pathname;
+          const redirect = router.asPath;
           await router.replace(`${ROUTES.LOGOUT}?${QueryParam.REDIRECT_TO}=${redirect}`);
         }
       } catch (error) {

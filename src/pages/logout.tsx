@@ -32,12 +32,11 @@ const triggerPlatformLogouts = async (
 
   const { [QueryParam.REDIRECT_TO]: redirectTo } = context.query;
   if (nextPlatform) {
-    // const currentUrl = new URL(ROUTES.LOGOUT, getBasePath())
     const updatedVisited = [...visitedPlatformIds, nextPlatform.id];
     const redirectBackUrl = buildRedirectBackUrl(
       ROUTES.LOGOUT,
       updatedVisited,
-      '',
+      undefined,
       redirectTo as string,
     );
     const nextPlatformUrl = buildNextPlatformUrl(nextPlatform, redirectBackUrl);
@@ -139,29 +138,8 @@ export default function Logout() {
   // this component should not render. If it does render, it means
   // there was an error in the server-side redirect.
   return (
-    <div
-      style={{
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        height: '100vh',
-        fontFamily: 'system-ui, sans-serif',
-      }}
-    >
-      <div style={{ textAlign: 'center' }}>
-        <div
-          style={{
-            width: '40px',
-            height: '40px',
-            border: '4px solid #f3f3f3',
-            borderTop: '4px solid #3498db',
-            borderRadius: '50%',
-            animation: 'spin 1s linear infinite',
-            margin: '0 auto 16px',
-          }}
-        />
+      <div>
         <p>Signing you out...</p>
       </div>
-    </div>
   );
 }
