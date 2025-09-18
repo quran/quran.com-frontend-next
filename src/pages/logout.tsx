@@ -3,7 +3,7 @@ import { GetServerSideProps, GetServerSidePropsContext, GetServerSidePropsResult
 import { fetcher } from '@/api';
 import QueryParam from '@/types/QueryParam';
 import { makeLogoutUrl } from '@/utils/auth/apiPaths';
-import { SSO_PLATFORMS } from '@/utils/auth/constants';
+import { SSO_ENABLED, SSO_PLATFORMS } from '@/utils/auth/constants';
 import { buildNextPlatformUrl, buildRedirectBackUrl } from '@/utils/auth/login';
 import { setProxyCookies } from '@/utils/cookies';
 import { ROUTES } from '@/utils/navigation';
@@ -104,7 +104,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const visitedPlatformIds = visitedPlatform
     ? visitedPlatform.toString().split(',').filter(Boolean)
     : [];
-  const SSO_ENABLED = process.env.SSO_ENABLED === 'true';
 
   try {
     if (SSO_ENABLED && silent !== '1') {

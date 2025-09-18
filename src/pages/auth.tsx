@@ -8,7 +8,7 @@ import { fetcher } from '@/api';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import AuthError from '@/types/AuthError';
 import { makeRedirectTokenUrl } from '@/utils/auth/apiPaths';
-import { SSO_PLATFORMS } from '@/utils/auth/constants';
+import { SSO_ENABLED, SSO_PLATFORMS } from '@/utils/auth/constants';
 import { buildNextPlatformUrl, buildRedirectBackUrl } from '@/utils/auth/login';
 import { setProxyCookies } from '@/utils/cookies';
 import { ROUTES } from '@/utils/navigation';
@@ -176,7 +176,6 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const { r, token, silent } = context.query;
   const redirectUrl = (r || '/') as string;
   const destination = redirectUrl === LOGIN_URL ? '/' : redirectUrl;
-  const SSO_ENABLED = process.env.SSO_ENABLED === 'true';
 
   if (token) {
     if (SSO_ENABLED && silent !== '1') {
