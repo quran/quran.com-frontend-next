@@ -1,5 +1,7 @@
 import { GetServerSideProps, GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 
+import { fetcher } from '@/api';
+import QueryParam from '@/types/QueryParam';
 import { makeLogoutUrl } from '@/utils/auth/apiPaths';
 import { SSO_PLATFORMS } from '@/utils/auth/constants';
 import { buildNextPlatformUrl, buildRedirectBackUrl } from '@/utils/auth/login';
@@ -24,9 +26,16 @@ const triggerPlatformLogouts = async (
 ): Promise<GetServerSidePropsResult<any>> => {
   const nextPlatform = PLATFORMS.find((platform) => !visitedPlatformIds.includes(platform.id));
 
+  const { [QueryParam.REDIRECT_TO]: redirectTo } = context.query;
   if (nextPlatform) {
+    // const currentUrl = new URL(ROUTES.LOGOUT, getBasePath())
     const updatedVisited = [...visitedPlatformIds, nextPlatform.id];
-    const redirectBackUrl = buildRedirectBackUrl(context.req.url, updatedVisited);
+    const redirectBackUrl = buildRedirectBackUrl(
+      ROUTES.LOGOUT,
+      updatedVisited,
+      '',
+      redirectTo as string,
+    );
     const nextPlatformUrl = buildNextPlatformUrl(nextPlatform, redirectBackUrl);
 
     return {
@@ -38,8 +47,9 @@ const triggerPlatformLogouts = async (
     };
   }
 
+  const pathname = redirectTo ? decodeURIComponent(redirectTo as string) : '/';
   // All platforms are covered, perform logout
-  return performLogout(context, getBasePath());
+  return performLogout(context, new URL(pathname, getBasePath()).toString());
 };
 
 /**
@@ -53,14 +63,20 @@ const performLogout = async (
   destination: string,
 ): Promise<GetServerSidePropsResult<any>> => {
   const { cookie } = context.req.headers;
-  const response = await fetch(makeLogoutUrl(), {
-    method: 'POST',
-    headers: {
-      cookie,
+
+  const response: Response = await fetcher(
+    makeLogoutUrl(),
+    {
+      method: 'POST',
+      headers: {
+        // eslint-disable-next-line @typescript-eslint/naming-convention
+        'content-type': 'application/json',
+        cookie,
+      },
+      body: null,
     },
-    credentials: 'include',
-    body: JSON.stringify({}),
-  });
+    true,
+  );
 
   setProxyCookies(response, context);
 
@@ -79,7 +95,12 @@ const performLogout = async (
  * @returns {Promise<GetServerSidePropsResult<any>>} - The result of the server-side props function, including redirection.
  */
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { silent, redirectBack, visitedPlatform } = context.query;
+  const {
+    silent,
+    redirectBack,
+    visitedPlatform,
+    [QueryParam.REDIRECT_TO]: redirectTo,
+  } = context.query;
   const visitedPlatformIds = visitedPlatform
     ? visitedPlatform.toString().split(',').filter(Boolean)
     : [];
@@ -90,8 +111,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       return triggerPlatformLogouts(visitedPlatformIds, context);
     }
 
+    let finalPath = silent ? decodeURIComponent(redirectBack as string) : getBasePath();
+    finalPath = redirectTo ? decodeURIComponent(redirectTo as string) : finalPath;
     // Call the main logout API
-    return performLogout(context, decodeURIComponent(redirectBack as string));
+    return performLogout(context, finalPath);
   } catch (error) {
     // eslint-disable-next-line no-console
     console.error('Error during logout:', error);
