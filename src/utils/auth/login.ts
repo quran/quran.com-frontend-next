@@ -20,7 +20,7 @@ export const buildRedirectBackUrl = (
   redirectTo?: string,
 ): URL => {
   const url = new URL(pathname, getBasePath());
-  url.searchParams.set(QueryParam.VISITEDPLATFORM, updatedVisited.toString());
+  url.searchParams.set(QueryParam.VISITEDPLATFORM, updatedVisited.join(','));
   if (token) url.searchParams.set(QueryParam.TOKEN, token);
   if (redirectTo) url.searchParams.set(QueryParam.REDIRECT_TO, redirectTo);
   return url;
@@ -32,10 +32,7 @@ export const buildNextPlatformUrl = (
   token?: string,
 ): URL => {
   const nextPlatformUrl = new URL(nextPlatform.url);
-  nextPlatformUrl.searchParams.set(
-    QueryParam.REDIRECTBACK,
-    encodeURIComponent(redirectBackUrl.toString()),
-  );
+  nextPlatformUrl.searchParams.set(QueryParam.REDIRECTBACK, redirectBackUrl.toString());
   nextPlatformUrl.searchParams.set(QueryParam.SILENT, '1');
   if (token) nextPlatformUrl.searchParams.set(QueryParam.TOKEN, token);
 

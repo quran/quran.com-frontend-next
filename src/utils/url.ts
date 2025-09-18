@@ -63,3 +63,31 @@ export const getProxiedServiceUrl = (service: QuranFoundationService, path: stri
     : `${getBasePath()}${PROXY_PATH}`;
   return `${BASE_PATH}${path}`;
 };
+
+/**
+ * Sanitizes a redirect URL to prevent open redirect vulnerabilities.
+ * Only allows same-origin relative paths or absolute URLs to allowed domains.
+ *
+ * @param {string} rawUrl - The raw URL string to sanitize
+ * @returns {string} A safe redirect URL or '/' if the input is unsafe
+ */
+export const resolveSafeRedirect = (rawUrl: string): string => {
+  if (!rawUrl) return '/';
+
+  try {
+    const url = new URL(rawUrl, getBasePath());
+
+    // If it's an absolute URL, check if it's same origin
+    if (url.origin !== new URL(getBasePath()).origin) {
+      return '/';
+    }
+
+    // Return the relative path with query and hash preserved
+    return `${url.pathname}${url.search}${url.hash}`;
+  } catch {
+    // If URL parsing fails, assume it's a relative path
+    // Remove any leading slashes and dangerous characters
+    const cleanPath = rawUrl.replace(/^\/+/, '').replace(/[\r\n\t]/g, '');
+    return cleanPath ? `/${cleanPath}` : '/';
+  }
+};

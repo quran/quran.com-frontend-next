@@ -35,5 +35,11 @@ export const QURANIC_CALENDAR_PROGRAM_ID = '1';
 
 export const SSO_ENABLED = process.env.SSO_ENABLED === 'true';
 
-// List of supported SSO platforms
-export const SSO_PLATFORMS = SSO_ENABLED ? [{ id: 'QR', url: process.env.QR_URL as string }] : [];
+export const getSSOPlatforms = () => {
+  if (!SSO_ENABLED) return [];
+
+  const qrUrl = process.env.NEXT_PUBLIC_QURAN_REFLECT_URL;
+  if (!qrUrl) return [];
+
+  return [{ id: 'QR', url: qrUrl }];
+};

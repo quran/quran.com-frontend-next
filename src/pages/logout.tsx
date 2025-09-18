@@ -3,16 +3,13 @@ import { GetServerSideProps, GetServerSidePropsContext, GetServerSidePropsResult
 import { fetcher } from '@/api';
 import QueryParam from '@/types/QueryParam';
 import { makeLogoutUrl } from '@/utils/auth/apiPaths';
-import { SSO_ENABLED, SSO_PLATFORMS } from '@/utils/auth/constants';
+import { SSO_ENABLED, getSSOPlatforms } from '@/utils/auth/constants';
 import { buildNextPlatformUrl, buildRedirectBackUrl } from '@/utils/auth/login';
 import { setProxyCookies } from '@/utils/cookies';
 import { ROUTES } from '@/utils/navigation';
-import { getBasePath } from '@/utils/url';
+import { getBasePath, resolveSafeRedirect } from '@/utils/url';
 
-const PLATFORMS = SSO_PLATFORMS.map((platform) => {
-  const url = new URL(ROUTES.LOGOUT, platform.url);
-  return { id: platform.id, url: url.toString() };
-});
+// Note: PLATFORMS is computed server-side in functions to avoid client exposure
 
 /**
  * Triggers logout for all platforms by redirecting to each platform's logout URL.
@@ -24,6 +21,13 @@ const triggerPlatformLogouts = async (
   visitedPlatformIds: string[],
   context: GetServerSidePropsContext,
 ): Promise<GetServerSidePropsResult<any>> => {
+  // Compute platforms server-side to avoid client exposure
+  const ssoPlatforms = getSSOPlatforms();
+  const PLATFORMS = ssoPlatforms.map((platform) => {
+    const url = new URL(ROUTES.LOGOUT, platform.url);
+    return { id: platform.id, url: url.toString() };
+  });
+
   const nextPlatform = PLATFORMS.find((platform) => !visitedPlatformIds.includes(platform.id));
 
   const { [QueryParam.REDIRECT_TO]: redirectTo } = context.query;
@@ -47,7 +51,7 @@ const triggerPlatformLogouts = async (
     };
   }
 
-  const pathname = redirectTo ? decodeURIComponent(redirectTo as string) : '/';
+  const pathname = redirectTo ? resolveSafeRedirect(decodeURIComponent(redirectTo as string)) : '/';
   // All platforms are covered, perform logout
   return performLogout(context, new URL(pathname, getBasePath()).toString());
 };
@@ -94,6 +98,7 @@ const performLogout = async (
  * @param {GetServerSidePropsContext} context - The context object containing request details.
  * @returns {Promise<GetServerSidePropsResult<any>>} - The result of the server-side props function, including redirection.
  */
+/* eslint-disable react-func/max-lines-per-function */
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const {
     silent,
@@ -111,7 +116,9 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     }
 
     let finalPath = silent ? decodeURIComponent(redirectBack as string) : getBasePath();
-    finalPath = redirectTo ? decodeURIComponent(redirectTo as string) : finalPath;
+    finalPath = redirectTo
+      ? resolveSafeRedirect(decodeURIComponent(redirectTo as string))
+      : finalPath;
     // Call the main logout API
     return performLogout(context, finalPath);
   } catch (error) {
@@ -120,7 +127,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     return {
       props: {},
       redirect: {
-        destination: getBasePath(),
+        destination: '/',
         permanent: false,
       },
     };
@@ -128,5 +135,33 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
 };
 
 export default function Logout() {
-  return null;
+  // Since logout is handled server-side via getServerSideProps,
+  // this component should not render. If it does render, it means
+  // there was an error in the server-side redirect.
+  return (
+    <div
+      style={{
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        height: '100vh',
+        fontFamily: 'system-ui, sans-serif',
+      }}
+    >
+      <div style={{ textAlign: 'center' }}>
+        <div
+          style={{
+            width: '40px',
+            height: '40px',
+            border: '4px solid #f3f3f3',
+            borderTop: '4px solid #3498db',
+            borderRadius: '50%',
+            animation: 'spin 1s linear infinite',
+            margin: '0 auto 16px',
+          }}
+        />
+        <p>Signing you out...</p>
+      </div>
+    </div>
+  );
 }
