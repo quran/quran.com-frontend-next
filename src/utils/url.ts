@@ -75,10 +75,11 @@ export const resolveSafeRedirect = (rawUrl: string): string => {
   if (!rawUrl) return '/';
 
   try {
-    const url = new URL(rawUrl, getBasePath());
-
+    const base = getBasePath();
+    const url = new URL(rawUrl, base);
+    const baseOrigin = new URL(base).origin;
     // If it's an absolute URL, check if it's same origin
-    if (url.origin !== new URL(getBasePath()).origin) {
+    if (url.origin !== baseOrigin) {
       return '/';
     }
 
