@@ -2,6 +2,15 @@ import { test, expect } from '@playwright/test';
 
 test.beforeEach(async ({ page }) => {
   await page.goto('/');
+
+  // Hide the nextjs error overlay to be able to click on elements behind it
+  await page.addStyleTag({
+    content: `
+      nextjs-portal {
+        display: none;
+      }
+    `,
+  });
 });
 
 test('Clicking on Nav bar language selector icon should open the language selector menu', async ({

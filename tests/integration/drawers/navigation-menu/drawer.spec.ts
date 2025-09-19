@@ -1,7 +1,17 @@
 import { test, expect } from '@playwright/test';
 
 test.beforeEach(async ({ page }) => {
+  // Go to the home page
   await page.goto('/');
+
+  // Hide the nextjs error overlay to be able to click on elements behind it
+  await page.addStyleTag({
+    content: `
+      nextjs-portal {
+        display: none;
+      }
+    `,
+  });
 });
 
 test('Navigation drawer icon should open the drawer when clicked', async ({ page }) => {
@@ -19,15 +29,14 @@ test('Feedback item should open in a new tab', async ({ page }) => {
   // 1. Open the navigation menu drawer
   await page.locator('[aria-label="Open Navigation Drawer"]').click();
 
-  // 2. Make sure feedback.quran.com opens in a new tab
-  await Promise.all([
-    page.waitForEvent('popup'),
-    page
-      .locator(
-        'a:nth-child(11) .LinkContainer_anchor__bOj_o .NavigationDrawerItem_container__ZbHp6 .NavigationDrawerItem_innerContainer__KIZpr',
-      )
-      .click(), // Feedback nav item
-  ]);
+  // 2. Click on the feedback nav item (has href="https://feedback.quran.com/")
+  // and make sure it opens in a new
+  await page.locator('[href="https://feedback.quran.com/"]').first().click();
+
+  // 3. Make sure a new tab is opened with the correct url
+  const newPage = await page.context().waitForEvent('page');
+  await newPage.waitForLoadState();
+  expect(newPage.url()).toBe('https://feedback.quran.com/');
 });
 
 test('Navigation drawer close icon should close the drawer', async ({ page }) => {

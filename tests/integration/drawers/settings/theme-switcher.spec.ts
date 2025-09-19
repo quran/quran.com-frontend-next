@@ -4,6 +4,15 @@ import Homepage from '@/tests/POM/home-page';
 
 test.beforeEach(async ({ page }) => {
   await page.goto('/');
+
+  // Hide the nextjs error overlay to be able to click on elements behind it
+  await page.addStyleTag({
+    content: `
+      nextjs-portal {
+        display: none;
+      }
+    `,
+  });
 });
 
 test.describe('Theme Switcher', () => {

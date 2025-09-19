@@ -6,6 +6,15 @@ import { MushafLines, QuranFont } from '@/types/QuranReader';
 
 test.beforeEach(async ({ page }) => {
   await page.goto('/');
+
+  // Hide the nextjs error overlay to be able to click on elements behind it
+  await page.addStyleTag({
+    content: `
+      nextjs-portal {
+        display: none;
+      }
+    `,
+  });
 });
 
 test('Selecting a non-default theme should persist the selected font', async ({
