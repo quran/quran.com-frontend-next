@@ -3,8 +3,8 @@ import { GetServerSideProps, GetServerSidePropsContext, GetServerSidePropsResult
 import { fetcher } from '@/api';
 import QueryParam from '@/types/QueryParam';
 import { makeLogoutUrl } from '@/utils/auth/apiPaths';
-import { SSO_ENABLED, getSSOPlatforms } from '@/utils/auth/constants';
-import { buildNextPlatformUrl, buildRedirectBackUrl } from '@/utils/auth/login';
+import { SSO_ENABLED } from '@/utils/auth/constants';
+import { buildNextPlatformUrl, buildRedirectBackUrl, getSsoPlatformPath } from '@/utils/auth/login';
 import { setProxyCookies } from '@/utils/cookies';
 import { ROUTES } from '@/utils/navigation';
 import { getBasePath, resolveSafeRedirect } from '@/utils/url';
@@ -21,14 +21,8 @@ const triggerPlatformLogouts = async (
   visitedPlatformIds: string[],
   context: GetServerSidePropsContext,
 ): Promise<GetServerSidePropsResult<any>> => {
-  // Compute platforms server-side to avoid client exposure
-  const ssoPlatforms = getSSOPlatforms();
-  const PLATFORMS = ssoPlatforms.map((platform) => {
-    const url = new URL(ROUTES.LOGOUT, platform.url);
-    return { id: platform.id, url: url.toString() };
-  });
-
-  const nextPlatform = PLATFORMS.find((platform) => !visitedPlatformIds.includes(platform.id));
+  const ssoPlatforms = getSsoPlatformPath(ROUTES.LOGOUT);
+  const nextPlatform = ssoPlatforms.find((platform) => !visitedPlatformIds.includes(platform.id));
 
   const { [QueryParam.REDIRECT_TO]: redirectTo } = context.query;
   if (nextPlatform) {
@@ -36,7 +30,7 @@ const triggerPlatformLogouts = async (
     const redirectBackUrl = buildRedirectBackUrl(
       ROUTES.LOGOUT,
       updatedVisited,
-      undefined,
+      '', // Empty string for token in logout case
       redirectTo as string,
     );
     const nextPlatformUrl = buildNextPlatformUrl(nextPlatform, redirectBackUrl);
@@ -101,13 +95,17 @@ const performLogout = async (
 /* eslint-disable react-func/max-lines-per-function */
 export const getServerSideProps: GetServerSideProps = async (context) => {
   const {
-    silent,
-    redirectBack,
-    visitedPlatform,
+    [QueryParam.SILENT]: silent,
+    [QueryParam.REDIRECTBACK]: redirectBack,
+    [QueryParam.VISITEDPLATFORM]: visitedPlatform,
     [QueryParam.REDIRECT_TO]: redirectTo,
   } = context.query;
   const visitedPlatformIds = visitedPlatform
-    ? visitedPlatform.toString().split(',').filter(Boolean)
+    ? visitedPlatform
+        .toString()
+        .split(',')
+        .map((v) => v.trim())
+        .filter(Boolean)
     : [];
 
   try {

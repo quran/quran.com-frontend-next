@@ -7,9 +7,10 @@ import useTranslation from 'next-translate/useTranslation';
 import { fetcher } from '@/api';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import AuthError from '@/types/AuthError';
+import QueryParam from '@/types/QueryParam';
 import { makeRedirectTokenUrl } from '@/utils/auth/apiPaths';
-import { SSO_ENABLED, getSSOPlatforms } from '@/utils/auth/constants';
-import { buildNextPlatformUrl, buildRedirectBackUrl } from '@/utils/auth/login';
+import { SSO_ENABLED } from '@/utils/auth/constants';
+import { buildNextPlatformUrl, buildRedirectBackUrl, getSsoPlatformPath } from '@/utils/auth/login';
 import { setProxyCookies } from '@/utils/cookies';
 import { ROUTES } from '@/utils/navigation';
 import { resolveSafeRedirect } from '@/utils/url';
@@ -64,7 +65,7 @@ const handleTokenRedirection = async (
     if (!response.ok) {
       throw new Error('Network response was not ok');
     }
-    const { silent, redirectBack } = context.query;
+    const { [QueryParam.SILENT]: silent, [QueryParam.REDIRECTBACK]: redirectBack } = context.query;
 
     setProxyCookies(response, context);
 
@@ -122,7 +123,7 @@ const handleSSORedirection = async (
   destination: string,
   redirectUrl?: string,
 ): Promise<GetServerSidePropsResult<any>> => {
-  const { visitedPlatform: visitedPlatformQuery } = context.query;
+  const { [QueryParam.VISITEDPLATFORM]: visitedPlatformQuery } = context.query;
   // Use .toString().split(',') to get visited platform IDs
   const visitedPlatformIds = (visitedPlatformQuery || '')
     .toString()
@@ -130,14 +131,8 @@ const handleSSORedirection = async (
     .map((v) => v.trim())
     .filter(Boolean);
 
-  // Compute platforms server-side to avoid client exposure
-  const ssoPlatforms = getSSOPlatforms();
-  const PLATFORMS = ssoPlatforms.map((platform) => {
-    const url = new URL(ROUTES.AUTH, platform.url);
-    return { id: platform.id, url: url.toString() };
-  });
-
-  const nextPlatform = PLATFORMS.find((platform) => !visitedPlatformIds.includes(platform.id));
+  const ssoPlatforms = getSsoPlatformPath(ROUTES.AUTH);
+  const nextPlatform = ssoPlatforms.find((platform) => !visitedPlatformIds.includes(platform.id));
 
   if (nextPlatform) {
     // Prepare updated visitedPlatform IDs
@@ -185,7 +180,11 @@ const fetchToken = async (token: string, context: GetServerSidePropsContext): Pr
  * @returns {Promise<GetServerSidePropsResult<any>>} - A promise that resolves to the server-side props result.
  */
 export const getServerSideProps: GetServerSideProps = async (context) => {
-  const { r, token, silent } = context.query;
+  const {
+    [QueryParam.REDIRECT_TO]: r,
+    [QueryParam.TOKEN]: token,
+    [QueryParam.SILENT]: silent,
+  } = context.query;
   const redirectUrl = (r || '/') as string;
   // Sanitize redirect URL to prevent open redirect vulnerabilities
   const destination = resolveSafeRedirect(redirectUrl);
