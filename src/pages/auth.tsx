@@ -19,8 +19,6 @@ interface AuthProps {
   error?: string;
 }
 
-// Note: PLATFORMS is computed server-side in getServerSideProps to avoid client exposure
-
 /**
  * Auth component that handles displaying authentication errors and redirects.
  *
@@ -51,14 +49,14 @@ const Auth: React.FC<AuthProps> = ({ error }) => {
  * @param {GetServerSidePropsContext} context - The context object containing request and response information.
  * @param {string} token - The token used for authentication.
  * @param {string} destination - The destination URL for redirection.
- * @returns {Promise<GetServerSidePropsResult<any>>} - A promise that resolves to the server-side props result.
+ * @returns {Promise<GetServerSidePropsResult<AuthProps>>} - A promise that resolves to the server-side props result.
  */
 /* eslint-disable react-func/max-lines-per-function */
 const handleTokenRedirection = async (
   context: GetServerSidePropsContext,
   token: string,
   destination: string,
-): Promise<GetServerSidePropsResult<any>> => {
+): Promise<GetServerSidePropsResult<AuthProps>> => {
   try {
     const response = await fetchToken(token, context);
 
@@ -114,7 +112,7 @@ const handleTokenRedirection = async (
  * @param {string} token - The token used for authentication.
  * @param {string} destination - The destination URL for redirection.
  * @param {string} [redirectUrl] - The original redirect URL from the query parameters.
- * @returns {Promise<GetServerSidePropsResult<any>>} - A promise that resolves to the server-side props result.
+ * @returns {Promise<GetServerSidePropsResult<AuthProps>>} - A promise that resolves to the server-side props result.
  *
  */
 const handleSSORedirection = async (
@@ -122,7 +120,7 @@ const handleSSORedirection = async (
   token: string,
   destination: string,
   redirectUrl?: string,
-): Promise<GetServerSidePropsResult<any>> => {
+): Promise<GetServerSidePropsResult<AuthProps>> => {
   const { [QueryParam.VISITEDPLATFORM]: visitedPlatformQuery } = context.query;
   // Use .toString().split(',') to get visited platform IDs
   const visitedPlatformIds = (visitedPlatformQuery || '')
