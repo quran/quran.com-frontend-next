@@ -9,7 +9,6 @@ import { setProxyCookies } from '@/utils/cookies';
 import { ROUTES } from '@/utils/navigation';
 import { getBasePath, resolveSafeRedirect } from '@/utils/url';
 
-// Note: PLATFORMS is computed server-side in functions to avoid client exposure
 
 /**
  * Triggers logout for all platforms by redirecting to each platform's logout URL.
