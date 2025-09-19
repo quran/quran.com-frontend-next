@@ -52,7 +52,8 @@ const triggerPlatformLogouts = async (
 
   const pathname = redirectTo ? resolveSafeRedirect(decodeURIComponent(redirectTo as string)) : '/';
   // All platforms are covered, perform logout
-  return performLogout(context, new URL(pathname, getBasePath()).toString());
+  const absolute = new URL(pathname, getBasePath()).toString();
+  return performLogout(context, absolute);
 };
 
 /**
@@ -114,7 +115,10 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       return triggerPlatformLogouts(visitedPlatformIds, context);
     }
 
-    let finalPath = silent ? decodeURIComponent(redirectBack as string) : getBasePath();
+    let finalPath =
+      silent && redirectBack
+        ? resolveSafeRedirect(decodeURIComponent(redirectBack as string))
+        : getBasePath();
     finalPath = redirectTo
       ? resolveSafeRedirect(decodeURIComponent(redirectTo as string))
       : finalPath;

@@ -1,10 +1,9 @@
 import Cookies from 'js-cookie';
 
-import { getBasePath } from '../url';
-
 import { NOTIFICATION_SUBSCRIBER_COOKIE_NAME, USER_ID_COOKIE_NAME } from './constants';
 
 import QueryParam from '@/types/QueryParam';
+import { getBasePath } from '@/utils/url';
 
 export const getUserIdCookie = () => Cookies.get(USER_ID_COOKIE_NAME);
 export const removeUserIdCookie = () => Cookies.remove(USER_ID_COOKIE_NAME);
@@ -26,13 +25,18 @@ export const buildRedirectBackUrl = (
   return url;
 };
 
+interface NextPlatform {
+  id: string;
+  url: string;
+}
+
 export const buildNextPlatformUrl = (
-  nextPlatform: { id: string; url: string },
+  nextPlatform: NextPlatform,
   redirectBackUrl: URL,
   token?: string,
 ): URL => {
   const nextPlatformUrl = new URL(nextPlatform.url);
-  nextPlatformUrl.searchParams.set(QueryParam.REDIRECTBACK, redirectBackUrl.toString());
+  nextPlatformUrl.searchParams.set(QueryParam.REDIRECTBACK, redirectBackUrl.href);
   nextPlatformUrl.searchParams.set(QueryParam.SILENT, '1');
   if (token) nextPlatformUrl.searchParams.set(QueryParam.TOKEN, token);
 

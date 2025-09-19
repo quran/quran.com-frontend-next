@@ -124,7 +124,11 @@ const handleSSORedirection = async (
 ): Promise<GetServerSidePropsResult<any>> => {
   const { visitedPlatform: visitedPlatformQuery } = context.query;
   // Use .toString().split(',') to get visited platform IDs
-  const visitedPlatformIds = (visitedPlatformQuery || '').toString().split(',').filter(Boolean);
+  const visitedPlatformIds = (visitedPlatformQuery || '')
+    .toString()
+    .split(',')
+    .map((v) => v.trim())
+    .filter(Boolean);
 
   // Compute platforms server-side to avoid client exposure
   const ssoPlatforms = getSSOPlatforms();
@@ -184,8 +188,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
   const { r, token, silent } = context.query;
   const redirectUrl = (r || '/') as string;
   // Sanitize redirect URL to prevent open redirect vulnerabilities
-  const destination =
-    resolveSafeRedirect(redirectUrl) === '/' ? '/' : resolveSafeRedirect(redirectUrl);
+  const destination = resolveSafeRedirect(redirectUrl);
 
   if (token) {
     if (SSO_ENABLED && silent !== '1') {
