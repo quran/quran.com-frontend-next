@@ -94,6 +94,7 @@ const NavbarBody: React.FC = () => {
               onClick={openSettingsDrawer}
               ariaLabel={t('aria.change-settings')}
               id="settings-button"
+              data-testid="settings-button"
             >
               <IconSettings />
             </Button>

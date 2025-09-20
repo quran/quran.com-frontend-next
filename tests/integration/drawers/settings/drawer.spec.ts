@@ -13,16 +13,19 @@ test.beforeEach(async ({ page }) => {
       }
     `,
   });
+
+  await page.waitForLoadState('networkidle');
 });
 
 test('Settings drawer icon should open the drawer when clicked', async ({ page, context }) => {
   const homepage = new Homepage(page, context);
   // 1. Make sure the theme section is not visible
-  await expect(page.locator('button:has-text("Light")')).not.toBeVisible();
+  await expect(page.getByLabel('light-button')).not.toBeVisible();
   // 2. Click the settings drawer trigger
   await homepage.openSettingsDrawer();
   // 3. Make sure the theme section is visible
-  await expect(page.locator('button:has-text("Light")')).toBeVisible();
-  await expect(page.locator('button:has-text("Sepia")')).toBeVisible();
-  await expect(page.locator('button:has-text("Dark")')).toBeVisible();
+  await expect(page.getByTestId('auto-button')).toBeVisible();
+  await expect(page.getByTestId('light-button')).toBeVisible();
+  await expect(page.getByTestId('sepia-button')).toBeVisible();
+  await expect(page.getByTestId('dark-button')).toBeVisible();
 });

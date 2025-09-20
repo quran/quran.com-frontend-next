@@ -80,6 +80,7 @@
     "@types/crypto-js": "^4.2.2",
     "@umalqura/core": "^0.0.7",
     "@xstate/react": "^3.0.1",
+    "@playwright/test": "^1.46.1",
     "classnames": "^2.3.2",
     "clipboard-copy": "^4.0.1",
     "cookie": "^0.5.0",
@@ -126,7 +127,6 @@
   "devDependencies": {
     "@lokalise/node-api": "^12.7.0",
     "@next/eslint-plugin-next": "^12.3.1",
-    "@playwright/test": "^1.46.1",
     "@storybook/addon-a11y": "^8.2.9",
     "@storybook/addon-actions": "^8.2.9",
     "@storybook/addon-essentials": "^8.2.9",

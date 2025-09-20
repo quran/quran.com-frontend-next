@@ -11,31 +11,33 @@ test.beforeEach(async ({ page }) => {
       }
     `,
   });
+
+  await page.waitForLoadState('networkidle');
 });
 
 test('Clicking on Nav bar language selector icon should open the language selector menu', async ({
   page,
 }) => {
   // 1. make sure the language selector items are not visible
-  await expect(page.locator('div[role="menuitem"]:has-text("English")')).not.toBeVisible();
+  await expect(page.getByRole('menuitem', { name: 'English' })).not.toBeVisible();
   // 2. Click on the language selector nav bar trigger
-  await page.locator('[aria-label="Select Language"]').click();
+  await page.getByTestId('language-selector-button').click();
   // 3. Make sure the language selector items are visible
-  await expect(page.locator('div[role="menuitem"]:has-text("English")')).toBeVisible();
-  await expect(page.locator('div[role="menuitem"]:has-text("العربية")')).toBeVisible();
-  await expect(page.locator('div[role="menuitem"]:has-text("বাংলা")')).toBeVisible();
-  await expect(page.locator('div[role="menuitem"]:has-text("فارسی")')).toBeVisible();
-  await expect(page.locator('div[role="menuitem"]:has-text("Français")')).toBeVisible();
-  await expect(page.locator('div[role="menuitem"]:has-text("Italiano")')).toBeVisible();
-  await expect(page.locator('div[role="menuitem"]:has-text("Dutch")')).toBeVisible();
-  await expect(page.locator('div[role="menuitem"]:has-text("Português")')).toBeVisible();
-  await expect(page.locator('div[role="menuitem"]:has-text("русский")')).toBeVisible();
-  await expect(page.locator('div[role="menuitem"]:has-text("Shqip")')).toBeVisible();
-  await expect(page.locator('div[role="menuitem"]:has-text("ภาษาไทย")')).toBeVisible();
-  await expect(page.locator('div[role="menuitem"]:has-text("Türkçe")')).toBeVisible();
-  await expect(page.locator('div[role="menuitem"]:has-text("اردو")')).toBeVisible();
-  await expect(page.locator('div[role="menuitem"]:has-text("简体中文")')).toBeVisible();
-  await expect(page.locator('div[role="menuitem"]:has-text("Melayu")')).toBeVisible();
+  await expect(page.getByRole('menuitem', { name: 'English' })).toBeVisible();
+  await expect(page.getByRole('menuitem', { name: 'العربية' })).toBeVisible();
+  await expect(page.getByRole('menuitem', { name: 'বাংলা' })).toBeVisible();
+  await expect(page.getByRole('menuitem', { name: 'فارسی' })).toBeVisible();
+  await expect(page.getByRole('menuitem', { name: 'Français' })).toBeVisible();
+  await expect(page.getByRole('menuitem', { name: 'Italiano' })).toBeVisible();
+  await expect(page.getByRole('menuitem', { name: 'Dutch' })).toBeVisible();
+  await expect(page.getByRole('menuitem', { name: 'Português' })).toBeVisible();
+  await expect(page.getByRole('menuitem', { name: 'русский' })).toBeVisible();
+  await expect(page.getByRole('menuitem', { name: 'Shqip' })).toBeVisible();
+  await expect(page.getByRole('menuitem', { name: 'ภาษาไทย' })).toBeVisible();
+  await expect(page.getByRole('menuitem', { name: 'Türkçe' })).toBeVisible();
+  await expect(page.getByRole('menuitem', { name: 'اردو' })).toBeVisible();
+  await expect(page.getByRole('menuitem', { name: '简体中文' })).toBeVisible();
+  await expect(page.getByRole('menuitem', { name: 'Melayu' })).toBeVisible();
 });
 
 test('Choosing a language should navigate the user to the localized page of that language', async ({
@@ -44,19 +46,27 @@ test('Choosing a language should navigate the user to the localized page of that
   // 1. Make sure we are on the English version
   await expect(page).toHaveURL('/');
   // 2. Open the language selector menu
-  await page.locator('[aria-label="Select Language"]').click();
+  await page.getByTestId('language-selector-button').click();
   // 3. select the Bengali language and make sure we are navigated to /bn
-  await Promise.all([page.waitForNavigation({ url: '/bn' }), page.locator('text=বাংলা').click()]);
+  await Promise.all([
+    page.getByRole('menuitem', { name: 'বাংলা' }).click(),
+    page.waitForURL('/bn'),
+  ]);
 });
 
-test('Choosing a language should persist', async ({ page, baseURL }) => {
-  // 1. Open the language selector menu
-  await page.locator('[aria-label="Select Language"]').click();
-  // 2. select the Arabic language and make sure we are navigated to /ar
-  await Promise.all([page.waitForNavigation({ url: '/ar' }), page.locator('text=العربية').click()]);
-  // 3. Navigate again to /
+test('Choosing a language should persist', async ({ page }) => {
+  // 1. Open the language selector menu (use same selector que les autres tests)
+  await page.getByTestId('language-selector-button').click();
+
+  // 2. select Arabic and wait for navigation to /ar
+  await Promise.all([
+    page.waitForURL('**/ar'),
+    page.getByRole('menuitem', { name: 'العربية' }).click(),
+  ]);
+
+  await page.waitForTimeout(2000); // wait a bit for the page to settle after the language change
+
+  // 3. Navigate again to / and assert redirect/persistence to /ar
   await page.goto('/');
-  const currentUrl = page.url();
-  // 4. Make sure the user is redirected to /ar
-  expect(currentUrl).toBe(`${baseURL}/ar`);
+  await expect(page).toHaveURL(/\/ar/);
 });

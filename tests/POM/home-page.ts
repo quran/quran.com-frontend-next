@@ -1,4 +1,4 @@
-import { BrowserContext, expect, Page } from '@playwright/test';
+import { BrowserContext, Page } from '@playwright/test';
 
 class Homepage {
   readonly page: Page;
@@ -38,14 +38,25 @@ class Homepage {
    * @returns {any|null}
    */
   async getPersistedValue(name: string, storageKey = 'persist:root'): Promise<any | null> {
-    await this.page.waitForTimeout(1000);
+    // Wait for the page to be fully loaded and React to initialize localStorage
+    await this.page.waitForLoadState('networkidle');
+
+    // Wait for React hydration and localStorage to be populated
+    await this.page.waitForFunction(
+      () => {
+        return window.localStorage.getItem('persist:root') !== null;
+      },
+      { timeout: 10000 },
+    );
+
     const storage = await this.context.storageState();
-    expect(storage?.origins?.[0]?.localStorage).not.toBe(undefined);
-    const localStorageArray = storage?.origins?.[0]?.localStorage;
+
+    const localStorageArray = storage.origins[0].localStorage;
     const persistedRoot = localStorageArray.filter(
       (localStorageObject) => localStorageObject.name === storageKey,
     );
-    if (!persistedRoot) {
+
+    if (!persistedRoot || persistedRoot.length === 0) {
       return null;
     }
     const parentObject = JSON.parse(persistedRoot[0].value);
@@ -56,7 +67,7 @@ class Homepage {
   }
 
   async openSettingsDrawer() {
-    await this.page.locator('[aria-label="Change Settings"]').click();
+    await this.page.getByTestId('settings-button').click();
   }
 }
 

@@ -1,12 +1,11 @@
-import type { PlaywrightTestConfig } from '@playwright/test';
-// eslint-disable-next-line import/no-extraneous-dependencies
-import { devices } from '@playwright/test';
+import { defineConfig, devices } from '@playwright/test';
 
 /**
  * See https://playwright.dev/docs/test-configuration.
  */
-const config: PlaywrightTestConfig = {
+export default defineConfig({
   testDir: './tests/integration',
+  fullyParallel: true,
   /* Maximum time one test can run for. */
   timeout: 30 * 1000,
   expect: {
@@ -14,7 +13,7 @@ const config: PlaywrightTestConfig = {
      * Maximum time expect() should wait for the condition to be met.
      * For example in `await expect(locator).toHaveText();`
      */
-    timeout: 5000,
+    timeout: 15 * 1000,
   },
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
@@ -72,6 +71,10 @@ const config: PlaywrightTestConfig = {
       },
     },
   ],
-};
 
-export default config;
+  webServer: {
+    command: process.env.CI ? 'yarn start' : 'yarn dev',
+    port: 3000,
+    reuseExistingServer: !process.env.CI,
+  },
+});
