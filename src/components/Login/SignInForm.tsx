@@ -51,7 +51,7 @@ const SignInForm: FC<Props> = ({ redirect }) => {
           errorMessage: t('error.password-required'),
         },
       ],
-      customRender: SignInPasswordField,
+      customRender: (props) => <SignInPasswordField {...props} />,
       errorClassName: styles.errorText,
       containerClassName: styles.inputContainer,
     },
