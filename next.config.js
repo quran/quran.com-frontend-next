@@ -33,9 +33,6 @@ const nextConfig = {
   reactStrictMode: true,
   productionBrowserSourceMaps: true,
   swcMinify: true,
-  experimental: {
-    instrumentationHook: true,
-  },
   images: {
     formats: ['image/avif', 'image/webp'],
     domains: [
