@@ -44,7 +44,7 @@ const ReflectionItem: React.FC<Props> = ({
   const { t, lang } = useTranslation();
   const [shouldShowReferredVerses, setShouldShowReferredVerses] = useState(false);
   const chaptersData = useContext(DataContext);
-  const reflectionBodyRef = useRef(null);
+  const reflectionBodyRef = useRef<HTMLDivElement | null>(null);
   useIntersectionObserver(reflectionBodyRef, REFLECTIONS_OBSERVER_ID);
 
   const onReferredVersesHeaderClicked = () => {

@@ -24,7 +24,7 @@ const TAJWEED_RULES = [
 
 const TajweedColors = () => {
   const { t } = useTranslation('quran-reader');
-  const ref = useRef(null);
+  const ref = useRef<HTMLDivElement | null>(null);
 
   const [showTajweedBar, setShowTajweedBar] = useState(false);
   const [height, setHeight] = useState(0);
