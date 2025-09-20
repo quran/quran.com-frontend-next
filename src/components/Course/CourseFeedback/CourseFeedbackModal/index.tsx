@@ -22,7 +22,7 @@ interface NoteModalProps {
 
 const CourseFeedbackModal: React.FC<NoteModalProps> = ({ onClose, isOpen, course }) => {
   const { t } = useTranslation('learn');
-  const contentModalRef = useRef<ContentModalHandles>();
+  const contentModalRef = useRef<ContentModalHandles>(null);
 
   const { title } = course;
 

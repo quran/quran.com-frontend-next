@@ -16,7 +16,7 @@ interface Props {
 
 const AddReflectionModal: React.FC<Props> = ({ isOpen, onClose }) => {
   const { t } = useTranslation('learn');
-  const contentModalRef = useRef<ContentModalHandles>();
+  const contentModalRef = useRef<ContentModalHandles>(null);
 
   return (
     <ContentModal

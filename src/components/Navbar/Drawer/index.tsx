@@ -96,7 +96,7 @@ const Drawer: React.FC<Props> = ({
   bodyId,
 }) => {
   const { isVisible: isNavbarVisible } = useSelector(selectNavbar, shallowEqual);
-  const drawerRef = useRef(null);
+  const drawerRef = useRef<HTMLDivElement | null>(null);
   const dispatch = useDispatch();
   const navbar = useSelector(selectNavbar, shallowEqual);
   const isOpen = getIsOpen(type, navbar);

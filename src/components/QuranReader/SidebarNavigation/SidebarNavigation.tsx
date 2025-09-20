@@ -39,7 +39,7 @@ const SidebarNavigation = () => {
 
   const dispatch = useDispatch();
   const { t } = useTranslation('common');
-  const sidebarRef = useRef();
+  const sidebarRef = useRef<HTMLDivElement | null>(null);
 
   useOutsideClickDetector(
     sidebarRef,

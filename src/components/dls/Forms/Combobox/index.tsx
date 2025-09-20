@@ -81,7 +81,7 @@ const Combobox: React.FC<Props> = ({
   });
   const [filteredItems, setFilteredItems] = useState<DropdownItem[]>(items);
   const [focusInput, inputRef]: [() => void, RefObject<HTMLInputElement>] = useFocus();
-  const comboBoxRef = useRef(null);
+  const comboBoxRef = useRef<HTMLDivElement | null>(null);
 
   const getNewValue = useCallback(
     (isNewValueValid: boolean, previousValue, newValue) => {

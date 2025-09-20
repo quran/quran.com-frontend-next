@@ -18,7 +18,7 @@ interface ReflectionModalProps {
 }
 
 const ReflectionModal: React.FC<ReflectionModalProps> = ({ onClose, isOpen, reflection }) => {
-  const contentModalRef = useRef<ContentModalHandles>();
+  const contentModalRef = useRef<ContentModalHandles>(null);
   const formattedText = useReflectionBodyParser(reflection.body, styles.hashtag);
   const { lang } = useTranslation();
 

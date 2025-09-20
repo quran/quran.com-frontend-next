@@ -20,7 +20,7 @@ const QuestionsModal: React.FC<QuestionModalProps> = ({
   verseKey,
   onModalClick,
 }) => {
-  const contentModalRef = useRef<ContentModalHandles>();
+  const contentModalRef = useRef<ContentModalHandles>(null);
 
   return (
     <ContentModal
