@@ -39,7 +39,7 @@
     "postpack": "pinst --enable"
   },
   "dependencies": {
-    "@babel/eslint-parser": "^7.25.1",
+    "@babel/eslint-parser": "^7.28.4",
     "@milkdown/core": "^7.5.0",
     "@milkdown/ctx": "^7.5.0",
     "@milkdown/kit": "^7.5.5",
@@ -125,7 +125,7 @@
   },
   "devDependencies": {
     "@lokalise/node-api": "^12.7.0",
-    "@next/eslint-plugin-next": "^12.3.1",
+    "@next/eslint-plugin-next": "^12.3.7",
     "@playwright/test": "^1.46.1",
     "@storybook/addon-a11y": "^8.2.9",
     "@storybook/addon-actions": "^8.2.9",
@@ -147,8 +147,8 @@
     "@types/react-redux": "^7.1.23",
     "@types/refresh-fetch": "^0.6.1",
     "@types/wicg-mediasession": "^1.1.3",
-    "@typescript-eslint/eslint-plugin": "^6.14.0",
-    "@typescript-eslint/parser": "^6.14.0",
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.21.0",
     "@vitejs/plugin-react": "^4.3.1",
     "@vitest/coverage-c8": "^0.33.0",
     "@vitest/coverage-v8": "^2.0.5",
@@ -159,15 +159,15 @@
     "eslint": "^8.24.0",
     "eslint-config-airbnb": "^19.0.4",
     "eslint-config-next": "^15.5.3",
-    "eslint-config-prettier": "^8.5.0",
-    "eslint-plugin-i18next": "^6.0.0-4",
-    "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-jsdoc": "^46.9.0",
-    "eslint-plugin-jsx-a11y": "^6.6.1",
-    "eslint-plugin-prettier": "^4.2.1",
-    "eslint-plugin-react": "^7.31.8",
+    "eslint-config-prettier": "^8.10.2",
+    "eslint-plugin-i18next": "^6.1.3",
+    "eslint-plugin-import": "^2.32.0",
+    "eslint-plugin-jsdoc": "^46.10.1",
+    "eslint-plugin-jsx-a11y": "^6.10.2",
+    "eslint-plugin-prettier": "^4.2.5",
+    "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-func": "^0.1.18",
-    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-react-hooks": "^4.6.2",
     "eslint-plugin-sonarjs": "^0.15.0",
     "eslint-plugin-storybook": "^0.6.15",
     "eslint-plugin-unicorn": "^43.0.2",
@@ -201,5 +201,8 @@
     "*.{tsx,ts}": "yarn lint:fix",
     "*.scss": "yarn lint:scss",
     "*": "prettier --write"
+  },
+  "resolutions": {
+    "eslint-plugin-react-hooks": "4.6.2"
   }
 }
