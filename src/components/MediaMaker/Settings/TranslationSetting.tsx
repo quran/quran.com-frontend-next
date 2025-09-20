@@ -28,7 +28,7 @@ interface Props extends MediaSettingsProps {
 const TranslationSelectionBody: React.FC<Props> = ({ selectedTranslations, onSettingsUpdate }) => {
   const { t, lang } = useTranslation('common');
   const [searchQuery, setSearchQuery] = useState('');
-  const inputRef = useRef(null);
+  const inputRef = useRef<HTMLInputElement | null>(null);
 
   const onTranslationsChange = useCallback(
     (selectedTranslationId: number) => {

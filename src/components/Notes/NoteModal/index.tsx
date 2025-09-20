@@ -38,7 +38,7 @@ const NoteModal: React.FC<NoteModalProps> = ({
   isBottomSheetOnMobile = false,
   zIndexVariant,
 }) => {
-  const contentModalRef = useRef<ContentModalHandles>();
+  const contentModalRef = useRef<ContentModalHandles>(null);
 
   const queryKey = noteId ? makeGetNoteByIdUrl(noteId) : makeGetNotesByVerseUrl(verseKey);
   const customFetcher = async (): Promise<BaseResponse> => {

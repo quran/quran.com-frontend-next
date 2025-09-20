@@ -32,7 +32,7 @@ const VerseActionAdvancedCopy = ({
 }: VerseActionAdvancedCopyProps) => {
   const { t } = useTranslation('quran-reader');
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const contentModalRef = useRef<ContentModalHandles>();
+  const contentModalRef = useRef<ContentModalHandles>(null);
 
   const onModalClose = () => {
     logEvent(
