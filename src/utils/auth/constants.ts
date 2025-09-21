@@ -34,7 +34,7 @@ export const BANNED_USER_ERROR_ID = 'external.banned';
 
 export const QURANIC_CALENDAR_PROGRAM_ID = '1';
 
-export const SSO_ENABLED = process.env.SSO_ENABLED === 'true';
+export const SSO_ENABLED = process.env.NEXT_PUBLIC_SSO_ENABLED === 'true';
 
 /**
  * Configuration for all supported SSO platforms

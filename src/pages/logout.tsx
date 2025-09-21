@@ -9,7 +9,6 @@ import { setProxyCookies } from '@/utils/cookies';
 import { ROUTES } from '@/utils/navigation';
 import { getBasePath, resolveSafeRedirect } from '@/utils/url';
 
-
 /**
  * Triggers logout for all platforms by redirecting to each platform's logout URL.
  * @param {string[]} visitedPlatformIds - Array of platform IDs that have already been visited.
