@@ -126,7 +126,7 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
     return {
       props: {},
       redirect: {
-        destination: '/',
+        destination: getBasePath(),
         permanent: false,
       },
     };
