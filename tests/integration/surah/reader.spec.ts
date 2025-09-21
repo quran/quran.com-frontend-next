@@ -1,5 +1,7 @@
 import { test, expect } from '@playwright/test';
 
+import { chapter } from '@/tests/mocks/chapters';
+
 test.beforeEach(async ({ page }) => {
   await page.goto('/1', { waitUntil: 'networkidle' });
 });
@@ -10,13 +12,13 @@ test.describe('Surah Reader', () => {
     await expect(page.getByTestId('chapter-title')).toBeVisible();
 
     // The surah name in arabic calligraphy (it uses a special font)
-    await expect(page.getByTestId('chapter-title')).toContainText('001');
+    await expect(page.getByTestId('chapter-title')).toContainText(chapter.surahCaligraphy);
 
     // The surah name transliteration
-    await expect(page.getByTestId('chapter-title')).toContainText('Al-Fatihah');
+    await expect(page.getByTestId('chapter-title')).toContainText(chapter.transliteratedName);
 
     // The surah name translation
-    await expect(page.getByTestId('chapter-title')).toContainText('The Opener');
+    await expect(page.getByTestId('chapter-title')).toContainText(chapter.translatedName);
   });
 
   test('opening a surah displays its first verse', async ({ page }) => {

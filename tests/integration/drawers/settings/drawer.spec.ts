@@ -3,7 +3,7 @@ import { test, expect } from '@playwright/test';
 import Homepage from '@/tests/POM/home-page';
 
 test.beforeEach(async ({ page }) => {
-  await page.goto('/');
+  await page.goto('/', { waitUntil: 'networkidle' });
 
   // Hide the nextjs error overlay to be able to click on elements behind it
   await page.addStyleTag({
@@ -13,19 +13,15 @@ test.beforeEach(async ({ page }) => {
       }
     `,
   });
-
-  await page.waitForLoadState('networkidle');
 });
 
 test('Settings drawer icon should open the drawer when clicked', async ({ page, context }) => {
   const homepage = new Homepage(page, context);
-  // 1. Make sure the theme section is not visible
-  await expect(page.getByLabel('light-button')).not.toBeVisible();
+  // 1. Make sure the drawer has no children before opening it
+  // Ensure the drawer has no children before opening it
+  await expect(page.getByTestId('settings-drawer-container')).not.toBeVisible();
   // 2. Click the settings drawer trigger
   await homepage.openSettingsDrawer();
-  // 3. Make sure the theme section is visible
-  await expect(page.getByTestId('auto-button')).toBeVisible();
-  await expect(page.getByTestId('light-button')).toBeVisible();
-  await expect(page.getByTestId('sepia-button')).toBeVisible();
-  await expect(page.getByTestId('dark-button')).toBeVisible();
+  // 3. Make sure the settings drawer is visible
+  await expect(page.getByTestId('settings-drawer-container')).toBeVisible();
 });

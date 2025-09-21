@@ -1,5 +1,8 @@
 import { test, expect } from '@playwright/test';
 
+import mockFootnoteKhattabSurah1Verse2 from '@/tests/mocks/footnotes';
+import { mockTranslationKhattab } from '@/tests/mocks/translations';
+
 test.beforeEach(async ({ page }) => {
   await page.goto('/1', { waitUntil: 'networkidle' });
 });
@@ -8,15 +11,13 @@ test.describe('Surah Content - Text Display', () => {
   test('verse arabic is displayed', async ({ page }) => {
     // Verify the first verse contains Arabic text
     const firstVerse = page.getByTestId('verse-1:1');
-    await expect(firstVerse).toContainText('بِسْمِ ٱللَّهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ');
+    await expect(firstVerse).toContainText(mockTranslationKhattab().arabic);
   });
 
   test('verse translation is displayed', async ({ page }) => {
     // Verify the first verse translation is visible
     const firstVerse = page.getByTestId('verse-1:1');
-    await expect(firstVerse).toContainText(
-      'In the Name of Allah—the Most Compassionate, Most Merciful.',
-    );
+    await expect(firstVerse).toContainText(mockTranslationKhattab().text);
   });
 });
 
@@ -35,7 +36,7 @@ test.describe('Surah Content - Footnotes', () => {
 
     // 4. Make sure the footnote content is correct
     await expect(page.getByTestId('footnote-content')).toContainText(
-      'i.e., Lord of everything in existence including angels, humans, and animals.',
+      mockFootnoteKhattabSurah1Verse2().text,
     );
   });
 
@@ -44,6 +45,8 @@ test.describe('Surah Content - Footnotes', () => {
     const secondVerse = page.getByTestId('verse-1:2');
     const footnoteTrigger = secondVerse.locator('sup').first();
     await footnoteTrigger.click();
+
+    await page.waitForTimeout(500); // wait for the footnote to open
 
     // Close the footnote
     await footnoteTrigger.click();
