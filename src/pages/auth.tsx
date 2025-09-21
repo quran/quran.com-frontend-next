@@ -68,7 +68,7 @@ const handleTokenRedirection = async (
     setProxyCookies(response, context);
 
     if (silent === '1' && redirectBack) {
-      // Sanitize redirectBack to prevent open redirect vulnerabilities
+      // Sanitize redirectBack - external URLs are allowed for SSO platform redirects
       const safeRedirectUrl = resolveSafeRedirect(decodeURIComponent(redirectBack as string));
       return {
         props: {},
