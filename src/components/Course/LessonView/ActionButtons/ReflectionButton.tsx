@@ -8,6 +8,7 @@ import AddReflectionModal from './AddReflectionModal';
 import Button, { ButtonSize, ButtonType } from '@/dls/Button/Button';
 import QuestionMarkIcon from '@/icons/question-mark.svg';
 import { logButtonClick } from '@/utils/eventLogger';
+import { getQRNavigationUrl } from '@/utils/quranReflect/navigation';
 
 interface Props {
   lessonId: string;
@@ -31,7 +32,7 @@ const ReflectionButton: React.FC<Props> = ({ lessonId, isCompleted }) => {
         <Button
           size={ButtonSize.Small}
           onClick={onAddReflectionClick}
-          href="https://quranreflect.com"
+          href={getQRNavigationUrl()}
           isNewTab
           type={ButtonType.Success}
         >
