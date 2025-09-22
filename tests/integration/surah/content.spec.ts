@@ -46,7 +46,7 @@ test.describe('Surah Content - Footnotes', () => {
     const footnoteTrigger = secondVerse.locator('sup').first();
     await footnoteTrigger.click();
 
-    await page.waitForTimeout(500); // wait for the footnote to open
+    await page.waitForTimeout(1500); // wait for the footnote to open
 
     // Close the footnote
     await footnoteTrigger.click();

@@ -79,31 +79,30 @@ test('Searching for a specific verse is working', async ({ page }) => {
   await expect(searchResults.getByText('2:255')).toBeVisible();
 });
 
-test('Search history is preserved', async ({ page }) => {
+test('Searching for a number displays the correct results', async ({ page }) => {
   // 1. Click on the search bar (#searchQuery)
   const searchBar = page.locator('#searchQuery');
-  await searchBar.fill('juz 30');
+  await searchBar.fill('5');
 
-  // 2. In the "search-results" div, we should see the "Juz 30" result
+  // 2. In the "search-results" div, we should see one result
   const searchResults = page.getByTestId('search-results');
-  await expect(searchResults.getByText('Juz 30')).toBeVisible();
+  await expect(searchResults.getByText("Surah Al-Ma'idah")).toBeVisible();
+  await expect(searchResults.getByText('Page 5')).toBeVisible();
+  await expect(searchResults.getByText('Juz 5')).toBeVisible();
+});
 
-  // 3. Click on the "Juz 30" result and check that we are navigated to /juz/30
-  await Promise.all([searchResults.getByText('Juz 30').click(), page.waitForURL('/juz/30')]);
+test('Searching for a no-result query displays a link to advanced search', async ({ page }) => {
+  // 1. Click on the search bar (#searchQuery)
+  const searchBar = page.locator('#searchQuery');
+  await searchBar.fill('abcd');
 
-  await page.waitForTimeout(1500); // wait for a bit to ensure the navigation is fully done
+  // 2. In the "search-results" div, we should see one result
+  const searchResults = page.getByTestId('search-results');
+  await expect(searchResults.getByText("Search for 'abcd'")).toBeVisible();
 
-  // 4. Redirect back to /
-  await page.goto('/', { waitUntil: 'networkidle' });
-  await page.addStyleTag({
-    content: `
-        nextjs-portal {
-            display: none;
-        }
-        `,
-  });
-
-  // 5. Click on the search bar again and make sure that we see "Juz 30" in the recent navigations
-  await searchBar.click();
-  await expect(page.getByTestId('search-results').getByText('Juz 30')).toBeVisible();
+  // 3. Click on the "Search for 'abcd'" result and check that we are navigated to /search?query=abcd
+  await Promise.all([
+    searchResults.getByText("Search for 'abcd'").click(),
+    page.waitForURL('/search?page=1&query=abcd'),
+  ]);
 });
