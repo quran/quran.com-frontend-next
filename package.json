@@ -4,7 +4,7 @@
   "main": "index.js",
   "license": "MIT",
   "engines": {
-    "node": "18.x"
+    "node": "24.x"
   },
   "scripts": {
     "dev": "next dev",
@@ -124,7 +124,7 @@
     "xstate": "^4.33.6"
   },
   "devDependencies": {
-    "@lokalise/node-api": "^12.7.0",
+    "@lokalise/node-api": "^15.2.1",
     "@next/eslint-plugin-next": "^12.3.7",
     "@playwright/test": "^1.46.1",
     "@storybook/addon-a11y": "^8.2.9",
@@ -139,8 +139,8 @@
     "@types/cookie": "^0.6.0",
     "@types/js-cookie": "^3.0.2",
     "@types/lodash": "^4.17.7",
-    "@types/node": "^22.5.0",
-    "@types/node-fetch": "^2.6.2",
+    "@types/node": "^24.5.2",
+    "@types/node-fetch": "^2.6.13",
     "@types/qs": "^6.9.15",
     "@types/react": "^19.1.1",
     "@types/react-dom": "^19.1.1",
@@ -200,7 +200,7 @@
   "lint-staged": {
     "*.{tsx,ts}": "yarn lint:fix",
     "*.scss": "yarn lint:scss",
-    "*": "prettier --write"
+    "*": "prettier --write --ignore-unknown"
   },
   "resolutions": {
     "eslint-plugin-react-hooks": "4.6.2"
