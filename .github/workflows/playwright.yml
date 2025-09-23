@@ -22,6 +22,9 @@ jobs:
       - name: Install dependencies
         run: yarn install --frozen-lockfile
 
+      - name: Build application
+        run: yarn build
+
       - name: Install Playwright browsers
         run: npx playwright install --with-deps
 
