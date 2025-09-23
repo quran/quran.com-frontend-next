@@ -38,20 +38,11 @@ test.describe('Surah Content - Footnotes', () => {
     await expect(page.getByTestId('footnote-content')).toContainText(
       mockFootnoteKhattabSurah1Verse2().text,
     );
-  });
 
-  test('footnote can be closed', async ({ page }) => {
-    // Open footnote first
-    const secondVerse = page.getByTestId('verse-1:2');
-    const footnoteTrigger = secondVerse.locator('sup').first();
+    // 5. Click the footnote trigger again to close the footnote
     await footnoteTrigger.click();
 
-    await page.waitForTimeout(1500); // wait for the footnote to open
-
-    // Close the footnote
-    await footnoteTrigger.click();
-
-    // Make sure the footnote content is not visible anymore
+    // 6. Make sure the footnote content is not visible anymore
     await expect(page.getByTestId('footnote-content')).not.toBeVisible();
   });
 });
