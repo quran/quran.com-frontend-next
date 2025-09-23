@@ -150,6 +150,7 @@ const MobileReadingTabs: React.FC<MobileReadingTabsProps> = ({ t }) => {
       <div className={styles.tabsContainer} role="tablist">
         {tabs.map((tab) => (
           <div
+            data-is-selected={readingPreference === tab.value}
             className={classNames(
               styles.tab,
               readingPreference === tab.value && styles.selectedTab,

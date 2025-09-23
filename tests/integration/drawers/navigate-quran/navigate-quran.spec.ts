@@ -103,6 +103,7 @@ test('Pages shows up in the Navigate Quran drawer', async ({ page }) => {
 
 test('All navigation options (Surah, Juz, Page, Verse) are clickable and navigate to the correct page', async ({
   page,
+  isMobile,
 }) => {
   // 1. Click on the Navigate Quran button
   await page.getByLabel('Navigate Quran').click();
@@ -115,7 +116,7 @@ test('All navigation options (Surah, Juz, Page, Verse) are clickable and navigat
   await expect(page).toHaveURL(/\/9$/);
 
   // On mobile, the drawer might have closed after navigation, so we need to reopen it
-  await openNavigateQuranDrawer(page);
+  await openNavigateQuranDrawer(page, isMobile);
 
   // 3. Now click on the "Verse" button
   const verseButton = page.getByTestId('verse-button');
@@ -128,7 +129,7 @@ test('All navigation options (Surah, Juz, Page, Verse) are clickable and navigat
   await expect(page).toHaveURL(/\/9\?startingVerse=128$/);
 
   // On mobile, the drawer might have closed after navigation, so we need to reopen it
-  await openNavigateQuranDrawer(page);
+  await openNavigateQuranDrawer(page, isMobile);
 
   // 5. Now click on the "Juz" button
   const juzButton = page.getByTestId('juz-button');
@@ -140,7 +141,7 @@ test('All navigation options (Surah, Juz, Page, Verse) are clickable and navigat
   await expect(page).toHaveURL(/\/juz\/18$/);
 
   // On mobile, the drawer might have closed after navigation, so we need to reopen it
-  await openNavigateQuranDrawer(page);
+  await openNavigateQuranDrawer(page, isMobile);
 
   // 7. Now click on the "Page" button
   const pageButton = page.getByTestId('page-button');
@@ -155,18 +156,21 @@ test('All navigation options (Surah, Juz, Page, Verse) are clickable and navigat
 /**
  * Opens the Navigate Quran drawer if it is not already open.
  */
-async function openNavigateQuranDrawer(page: Page): Promise<void> {
-  await page.waitForTimeout(1000);
+async function openNavigateQuranDrawer(page: Page, isMobile: boolean): Promise<void> {
+  if (isMobile) {
+    await page.waitForTimeout(1000); // wait for a bit to ensure any animations are done (closing the drawer on mobile)
+  }
 
   // If the drawer is already open, do nothing
   if (await page.getByTestId('sidebar-navigation').isVisible()) {
     return;
   }
 
-  const navigateQuranButton = page.getByLabel('Navigate Quran');
-  if (await navigateQuranButton.isVisible()) {
+  if (!isMobile) {
+    const navigateQuranButton = page.getByLabel('Navigate Quran');
     await navigateQuranButton.click();
+  } else {
+    const secondChapterNavigationButton = page.getByTestId('chapter-navigation');
+    await secondChapterNavigationButton.click();
   }
-  const secondChapterNavigationButton = page.getByTestId('chapter-navigation');
-  await secondChapterNavigationButton.click();
 }
