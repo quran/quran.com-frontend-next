@@ -106,7 +106,7 @@
     "react-dom": "^19.1.1",
     "react-hook-form": "^7.36.1",
     "react-hotkeys-hook": "^4.5.0",
-    "react-joyride": "^3.0.0-7",
+    "react-joyride": "3.0.0-7",
     "react-redux": "^9.1.2",
     "react-share": "^5.2.0",
     "react-toastify": "^9.0.8",
@@ -125,7 +125,7 @@
   },
   "devDependencies": {
     "@lokalise/node-api": "^15.2.1",
-    "@next/eslint-plugin-next": "^12.3.7",
+    "@next/eslint-plugin-next": "^15.5.4",
     "@playwright/test": "^1.46.1",
     "@storybook/addon-a11y": "^8.2.9",
     "@storybook/addon-actions": "^8.2.9",
@@ -156,9 +156,9 @@
     "browserify-fs": "^1.0.0",
     "cross-env": "^7.0.3",
     "dotenv": "^16.0.2",
-    "eslint": "^8.24.0",
+    "eslint": "^8.57.0",
     "eslint-config-airbnb": "^19.0.4",
-    "eslint-config-next": "^15.5.3",
+    "eslint-config-next": "^15.5.4",
     "eslint-config-prettier": "^8.10.2",
     "eslint-plugin-i18next": "^6.1.3",
     "eslint-plugin-import": "^2.32.0",
@@ -167,7 +167,7 @@
     "eslint-plugin-prettier": "^4.2.5",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-func": "^0.1.18",
-    "eslint-plugin-react-hooks": "^4.6.2",
+    "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-sonarjs": "^0.15.0",
     "eslint-plugin-storybook": "^0.6.15",
     "eslint-plugin-unicorn": "^43.0.2",
@@ -201,8 +201,5 @@
     "*.{tsx,ts}": "yarn lint:fix",
     "*.scss": "yarn lint:scss",
     "*": "prettier --write --ignore-unknown"
-  },
-  "resolutions": {
-    "eslint-plugin-react-hooks": "4.6.2"
   }
 }
