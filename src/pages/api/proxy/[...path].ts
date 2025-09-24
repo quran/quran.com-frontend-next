@@ -47,7 +47,6 @@ const handleProxyReq = (proxyReq, req, res) => {
 
   attachCookies(proxyReq, req);
   attachSignatureHeaders(proxyReq, req);
-  attachRefererHeader(proxyReq);
   fixRequestBody(proxyReq, req);
 };
 
@@ -86,14 +85,6 @@ const attachSignatureHeaders = (proxyReq, req) => {
   proxyReq.setHeader(X_AUTH_SIGNATURE, signature);
   proxyReq.setHeader(X_TIMESTAMP, timestamp);
   proxyReq.setHeader(X_INTERNAL_CLIENT, process.env.INTERNAL_CLIENT_ID);
-};
-
-const attachRefererHeader = (proxyReq) => {
-  // Ensure upstream services consistently identify quran.com as the referrer
-  proxyReq.setHeader('Referer', 'https://quran.com');
-  proxyReq.setHeader('x-forwarded-proto', 'https');
-  proxyReq.setHeader('x-forwarded-port', '80');
-  proxyReq.setHeader('x-forwarded-host', 'quran.com');
 };
 
 const apiProxy = createProxyMiddleware<NextApiRequest, NextApiResponse>({
