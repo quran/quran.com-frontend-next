@@ -5,6 +5,7 @@
 - **Build**: `yarn build` (production) or `yarn dev` (development)
 - **Lint**: `yarn lint` (check) or `yarn lint:fix` (auto-fix)
 - **Test**: `yarn test` (all), `yarn test:watch` (watch mode), `yarn test:coverage` (with coverage)
+- **UI Tests**: `yarn playwright test` (run all Playwright tests)
 - **Single test**: `yarn test <filename>` or `vitest run <filename>`
 - **Integration tests**: `yarn test:integration` (Playwright)
 - **SCSS lint**: `yarn lint:scss`
