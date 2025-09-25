@@ -1,5 +1,5 @@
 /* eslint-disable max-lines */
-import React, { useState } from 'react';
+import React from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import { useSWRConfig } from 'swr';
@@ -16,8 +16,15 @@ import ErrorMessageId from '@/types/ErrorMessageId';
 import { RuleType } from '@/types/FieldRule';
 import { FormFieldType } from '@/types/FormField';
 import { updateNote as baseUpdateNote } from '@/utils/auth/api';
-import { makeGetNoteByIdUrl, makeGetNotesByVerseUrl } from '@/utils/auth/apiPaths';
 import { logButtonClick } from '@/utils/eventLogger';
+import { mutateNotesCache } from '@/utils/notes/mutateNotesCache';
+import { updateReflection } from '@/utils/quranReflect/apiPaths';
+import {
+  isReflectionNote,
+  getReflectionPostId,
+  mapReflectionToNote,
+  rangesToReflectionReferences,
+} from '@/utils/quranReflect/mapping';
 
 type Props = {
   note: Note;
@@ -48,46 +55,44 @@ const EditForm: React.FC<Props> = ({
   onCancelEditClicked,
 }) => {
   const { t } = useTranslation('common');
-  const [saveToQR, setSaveToQR] = useState(false);
   const toast = useToast();
   const { mutate } = useSWRConfig();
 
-  const mutateCache = (data: unknown) => {
-    if (verseKey) {
-      mutate(makeGetNotesByVerseUrl(verseKey), data);
-    }
+  // Check if this note is a reflection
+  const isReflection = isReflectionNote(note);
+  const reflectionPostId = isReflection ? getReflectionPostId(note) : null;
 
-    if (noteId) {
-      mutate(makeGetNoteByIdUrl(noteId), data);
-    }
-  };
+  const mutateCache = (updated: Note) => mutateNotesCache(mutate, { verseKey, noteId, updated });
 
   const { mutate: updateNote, isMutating: isUpdatingNote } = useMutation<
     Note,
     { id: string; body: string }
   >(
     async ({ id, body }) => {
-      return baseUpdateNote(id, body, saveToQR) as Promise<Note>;
+      // If it's a reflection, update via QuranReflect API
+      if (isReflection && reflectionPostId) {
+        // Include original references to prevent the reflection from getting un-attached
+        const references = note.ranges ? rangesToReflectionReferences(note.ranges) : [];
+        const reflectionResponse = await updateReflection(Number(reflectionPostId), {
+          body,
+          references,
+        });
+        return mapReflectionToNote(reflectionResponse.data);
+      }
+
+      // For regular notes, use the existing API
+      return baseUpdateNote(id, body, false) as Promise<Note>;
     },
     {
       onSuccess: (data) => {
-        // if publishing the note publicly call failed after saving the note succeeded
-        // @ts-ignore
-        if (data?.error === true) {
-          toast(t('notes:update-publish-failed'), {
-            status: ToastStatus.Error,
-          });
-          // @ts-ignore
-          onNoteUpdated?.(data.note);
-          // @ts-ignore
-          mutateCache([data.note]);
-        } else {
-          toast(t('notes:update-success'), {
-            status: ToastStatus.Success,
-          });
-          onNoteUpdated?.(data);
-          mutateCache([data]);
-        }
+        const successMessage = isReflection
+          ? t('notes:reflection-update-success')
+          : t('notes:update-success');
+        toast(successMessage, {
+          status: ToastStatus.Success,
+        });
+        onNoteUpdated?.(data);
+        mutateCache(data);
       },
       onError: () => {
         toast(t('common:error.general'), {
@@ -98,8 +103,8 @@ const EditForm: React.FC<Props> = ({
   );
 
   const onSubmit = async ({ body }: NoteFormData) => {
-    logButtonClick('update_note', {
-      saveToQR,
+    logButtonClick(isReflection ? 'update_reflection' : 'update_note', {
+      isReflection,
     });
     updateNote({ id: note.id, body });
   };
@@ -179,10 +184,9 @@ const EditForm: React.FC<Props> = ({
                 className={styles.saveButton}
                 onClick={(e) => {
                   e.stopPropagation();
-                  setSaveToQR(false);
                 }}
               >
-                {t('notes:save-privately')}
+                {isReflection ? t('notes:update-reflection') : t('notes:save-privately')}
               </Button>
             </div>
           </div>

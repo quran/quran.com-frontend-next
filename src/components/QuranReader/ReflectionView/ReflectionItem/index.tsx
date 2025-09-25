@@ -17,7 +17,6 @@ import { getChapterData } from '@/utils/chapter';
 import { logButtonClick } from '@/utils/eventLogger';
 import truncate from '@/utils/html-truncate';
 import { isRTLReflection } from '@/utils/quranReflect/locale';
-import { getVerseReferencesFromReflectionFilters } from '@/utils/quranReflect/string';
 import {
   MAX_REFLECTION_LENGTH,
   getInitialVisiblePostPercentage,
@@ -39,8 +38,6 @@ const ReflectionItem: React.FC<Props> = ({
 }) => {
   const { id, createdAt, author, estimatedReadingTime } = reflection;
   const reflectionText = reflection?.body;
-  // TODO: here
-  const verseReferences = getVerseReferencesFromReflectionFilters(reflection.filters);
   const [isExpanded, setIsExpanded] = useState(false);
   const { t } = useTranslation();
   const [shouldShowReferredVerses, setShouldShowReferredVerses] = useState(false);
@@ -69,12 +66,12 @@ const ReflectionItem: React.FC<Props> = ({
   // some reference, are referencing to the entire chapter (doesn't have from/to properties)
   // we only want to show the data for references that have from/to properties
   const nonChapterVerseReferences = useMemo(
-    () => verseReferences.filter((verse) => !!verse.from && !!verse.to),
-    [verseReferences],
+    () => reflection.references.filter((verse) => !!verse.from && !!verse.to),
+    [reflection.references],
   );
 
   const getSurahName = useCallback(
-    (chapterNumber) => {
+    (chapterNumber: number) => {
       const surahName = getChapterData(chaptersData, chapterNumber.toString())?.transliteratedName;
       return `${t('common:surah')} ${surahName} (${chapterNumber})`;
     },
@@ -98,13 +95,13 @@ const ReflectionItem: React.FC<Props> = ({
       <div className={styles.header}>
         <AuthorInfo
           authorUsername={author?.username}
-          authorName={author?.name}
-          avatarUrl={author?.profileImg}
+          authorName={`${author?.firstName} ${author?.lastName}`}
+          avatarUrl={author?.avatarUrls?.small}
           date={createdAt}
           isAuthorVerified={reflection?.author?.verified}
-          reflectionGroup={reflection?.group}
-          reflectionGroupLink={reflection?.groupLink}
-          verseReferences={verseReferences}
+          reflectionGroup={reflection?.room?.name}
+          reflectionGroupLink={reflection?.room?.url || reflection?.room?.subdomain || ''}
+          verseReferences={reflection.references}
           nonChapterVerseReferences={nonChapterVerseReferences}
           onReferredVersesHeaderClicked={onReferredVersesHeaderClicked}
           shouldShowReferredVerses={shouldShowReferredVerses}
@@ -117,12 +114,12 @@ const ReflectionItem: React.FC<Props> = ({
       </div>
       {shouldShowReferredVerses && nonChapterVerseReferences?.length > 0 && (
         <div className={styles.verseAndTranslationsListContainer}>
-          {nonChapterVerseReferences.map(({ chapter, from, to }) => (
+          {nonChapterVerseReferences.map(({ chapterId: chapter, from, to }) => (
             <div
               className={styles.verseAndTranslationContainer}
               key={makeVerseKey(chapter, from, to)}
             >
-              {verseReferences.length > 1 && (
+              {reflection.references.length > 1 && (
                 <span className={styles.surahName}>{getSurahName(chapter)}</span>
               )}
               <VerseAndTranslation chapter={chapter} from={from} to={to} />
@@ -134,7 +131,7 @@ const ReflectionItem: React.FC<Props> = ({
         ref={reflectionBodyRef}
         data-post-id={id}
         data-count-as-viewed-after={estimatedReadingTimeOfInitialVisiblePortion}
-        className={isRTLReflection(reflection.language) ? styles.rtl : styles.ltr}
+        className={isRTLReflection(reflection.languageId) ? styles.rtl : styles.ltr}
       >
         <p className="debugger" />
         <span
@@ -157,10 +154,9 @@ const ReflectionItem: React.FC<Props> = ({
         )}
       </div>
       <SocialInteraction
-        filters={reflection.filters}
+        references={reflection.references}
         reflectionText={reflectionText}
-        likesCount={reflection?.likes}
-        trimmedCitationTexts={reflection.trimmedCitationTexts}
+        likesCount={reflection?.likesCount}
         commentsCount={reflection?.commentsCount}
         postId={id}
       />

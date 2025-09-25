@@ -14,7 +14,7 @@ import ContentModalHandles from '@/dls/ContentModal/types/ContentModalHandles';
 import { BaseResponse } from '@/types/ApiResponses';
 import { Note } from '@/types/auth/Note';
 import ZIndexVariant from '@/types/enums/ZIndexVariant';
-import { privateFetcher } from '@/utils/auth/api';
+import { getNotesByVerse, getNoteById } from '@/utils/auth/api';
 import { makeGetNoteByIdUrl, makeGetNotesByVerseUrl } from '@/utils/auth/apiPaths';
 
 interface NoteModalProps {
@@ -41,11 +41,24 @@ const NoteModal: React.FC<NoteModalProps> = ({
   const contentModalRef = useRef<ContentModalHandles>();
 
   const queryKey = noteId ? makeGetNoteByIdUrl(noteId) : makeGetNotesByVerseUrl(verseKey);
+  const customFetcher = async (): Promise<BaseResponse> => {
+    try {
+      if (noteId) {
+        const data = await getNoteById(noteId);
+        return data as any; // Cast to match expected interface
+      }
+      const data = await getNotesByVerse(verseKey);
+      return data as any; // Cast to match expected interface
+    } catch (error) {
+      return { error: error.message } as BaseResponse;
+    }
+  };
 
   const deleteAndClose = () => {
     onNoteDeleted();
     onClose();
   };
+
   return (
     <ContentModal
       innerRef={contentModalRef}
@@ -60,10 +73,15 @@ const NoteModal: React.FC<NoteModalProps> = ({
     >
       <DataFetcher
         queryKey={queryKey}
-        fetcher={privateFetcher}
+        fetcher={customFetcher}
         showSpinnerOnRevalidate={false}
         render={(response: (Note | Note[]) & BaseResponse) => {
-          const note = noteId ? (response as Note) : (response[0] as Note);
+          // Check for error first
+          if ((response as BaseResponse).error) {
+            return <NewNoteMode verseKey={verseKey} />;
+          }
+
+          const note = noteId ? (response as Note) : (response as Note[])[0];
           if (note) {
             return (
               <EditNoteMode

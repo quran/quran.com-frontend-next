@@ -8,12 +8,12 @@ import styles from './AuthorInfo.module.scss';
 import Link, { LinkVariant } from '@/dls/Link/Link';
 import ChevronDownIcon from '@/icons/chevron-down.svg';
 import VerifiedIcon from '@/icons/verified.svg';
+import Reference from '@/types/QuranReflect/Reference';
 import { formatDateRelatively } from '@/utils/datetime';
 import { logButtonClick } from '@/utils/eventLogger';
 import { toLocalizedNumber } from '@/utils/locale';
 import { getQuranReflectAuthorUrl } from '@/utils/quranReflect/navigation';
 import { makeVerseKey } from '@/utils/verse';
-import { ReflectionVerseReference } from 'types/QuranReflect/ReflectionVerseReference';
 
 type Props = {
   authorUsername: string;
@@ -22,8 +22,8 @@ type Props = {
   isAuthorVerified: boolean;
   shouldShowReferredVerses: boolean;
   date: string;
-  verseReferences: ReflectionVerseReference[];
-  nonChapterVerseReferences: ReflectionVerseReference[];
+  verseReferences: Reference[];
+  nonChapterVerseReferences: Reference[];
   reflectionGroup?: string;
   reflectionGroupLink?: string;
   onReferredVersesHeaderClicked: () => void;
@@ -56,7 +56,7 @@ const AuthorInfo: React.FC<Props> = ({
     let text = '';
     const chapters = verseReferences
       .filter((verse) => !verse.from || !verse.to)
-      .map((verse) => toLocalizedNumber(verse.chapter, lang));
+      .map((verse) => toLocalizedNumber(verse.chapterId, lang));
 
     if (chapters.length > 0) {
       text += `${t('common:surah')} ${chapters.join(',')}`;
@@ -64,7 +64,7 @@ const AuthorInfo: React.FC<Props> = ({
 
     const verses = nonChapterVerseReferences.map((verse) =>
       makeVerseKey(
-        toLocalizedNumber(verse.chapter, lang),
+        toLocalizedNumber(verse.chapterId, lang),
         toLocalizedNumber(verse.from, lang),
         toLocalizedNumber(verse.to, lang),
       ),

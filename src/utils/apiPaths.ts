@@ -3,7 +3,7 @@ import { decamelizeKeys } from 'humps';
 // eslint-disable-next-line import/no-cycle
 import { getDefaultWordFields, getMushafId, ITEMS_PER_PAGE, makeUrl } from './api';
 import stringify from './qs-stringify';
-import { getProxiedServiceUrl } from './url';
+import { getProxiedServiceUrl, QuranFoundationService } from './url';
 
 import { DEFAULT_RECITER } from '@/redux/defaultSettings/defaultSettings';
 import {
@@ -148,7 +148,10 @@ export const makeAdvancedCopyUrl = (params: AdvancedCopyRequest): string =>
   makeUrl('/verses/advanced_copy', params as Record<string, unknown>);
 
 export const makeNewSearchResultsUrl = <T extends SearchMode>(params: SearchRequestParams<T>) => {
-  return getProxiedServiceUrl('search/v1/search', `?${stringify(decamelizeKeys(params))}`);
+  return getProxiedServiceUrl(
+    QuranFoundationService.SEARCH,
+    `/v1/search?${stringify(decamelizeKeys(params))}`,
+  );
 };
 
 /**

@@ -20,7 +20,7 @@ import BookmarkedIcon from '@/icons/bookmark.svg';
 import UnBookmarkedIcon from '@/icons/unbookmarked.svg';
 import { selectBookmarks, toggleVerseBookmark } from '@/redux/slices/QuranReader/bookmarks';
 import { selectQuranReaderStyles } from '@/redux/slices/QuranReader/styles';
-import Verse from '@/types/Verse';
+import { WordVerse } from '@/types/Word';
 import { getMushafId } from '@/utils/api';
 import { addBookmark, deleteBookmarkById, getBookmark } from '@/utils/auth/api';
 import { makeBookmarksUrl, makeBookmarkUrl } from '@/utils/auth/apiPaths';
@@ -29,7 +29,7 @@ import { logButtonClick } from '@/utils/eventLogger';
 import BookmarkType from 'types/BookmarkType';
 
 interface Props {
-  verse: Verse;
+  verse: WordVerse;
   isTranslationView: boolean;
   onActionTriggered?: () => void;
   bookmarksRangeUrl?: string;

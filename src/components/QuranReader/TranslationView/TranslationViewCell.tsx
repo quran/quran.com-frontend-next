@@ -6,6 +6,7 @@ import classNames from 'classnames';
 import { useRouter } from 'next/router';
 import { useSelector } from 'react-redux';
 
+import getTranslationsLabelString from '../ReadingView/utils/translation';
 import {
   verseFontChanged,
   verseTranslationChanged,
@@ -23,7 +24,8 @@ import Separator from '@/dls/Separator/Separator';
 import useScrollWithContextMenuOffset from '@/hooks/useScrollWithContextMenuOffset';
 import { selectEnableAutoScrolling } from '@/redux/slices/AudioPlayer/state';
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
-import { getVerseWords, makeVerseKey } from '@/utils/verse';
+import { WordVerse } from '@/types/Word';
+import { constructWordVerse, getVerseWords, makeVerseKey } from '@/utils/verse';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 import Translation from 'types/Translation';
 import Verse from 'types/Verse';
@@ -65,6 +67,10 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
     }
   }, [isHighlighted, scrollToSelectedItem, enableAutoScrolling, startingVerse, verseIndex]);
 
+  const translationsLabel = getTranslationsLabelString(verse.translations);
+  const translationsCount = verse.translations?.length || 0;
+  const wordVerse: WordVerse = constructWordVerse(verse, translationsLabel, translationsCount);
+
   return (
     <div ref={selectedItemRef}>
       <div
@@ -72,7 +78,7 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
           [styles.highlightedContainer]: isHighlighted,
         })}
       >
-        <TopActions verse={verse} bookmarksRangeUrl={bookmarksRangeUrl} hasNotes={hasNotes} />
+        <TopActions verse={wordVerse} bookmarksRangeUrl={bookmarksRangeUrl} hasNotes={hasNotes} />
 
         <div className={classNames(styles.contentContainer)}>
           <div className={styles.arabicVerseContainer}>
@@ -93,7 +99,7 @@ const TranslationViewCell: React.FC<TranslationViewCellProps> = ({
         </div>
         <BottomActions verseKey={verse.verseKey} />
       </div>
-      <Separator />
+      <Separator className={styles.verseSeparator} />
     </div>
   );
 };

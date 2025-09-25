@@ -1,33 +1,61 @@
-import React from 'react';
+import React, { useContext, useState } from 'react';
 
-import clipboardCopy from 'clipboard-copy';
 import useTranslation from 'next-translate/useTranslation';
+import useSWRImmutable from 'swr/immutable';
 
+import ReflectionSharePopoverMenu from './ReflectionSharePopoverMenu';
 import styles from './SocialInteraction.module.scss';
 
+import { getRangeVerses } from '@/api';
+import DataContext from '@/contexts/DataContext';
 import Button, { ButtonSize, ButtonVariant } from '@/dls/Button/Button';
-import PopoverMenu from '@/dls/PopoverMenu/PopoverMenu';
-import { ToastStatus, useToast } from '@/dls/Toast/Toast';
 import ChatIcon from '@/icons/chat.svg';
-import CopyLinkIcon from '@/icons/copy-link.svg';
-import CopyIcon from '@/icons/copy.svg';
 import LoveIcon from '@/icons/love.svg';
-import ShareIcon from '@/icons/share.svg';
+import Language from '@/types/Language';
+import Reference from '@/types/QuranReflect/Reference';
 import { logButtonClick } from '@/utils/eventLogger';
 import { toLocalizedNumber } from '@/utils/locale';
+import { localeToTranslationID } from '@/utils/quranReflect/locale';
 import { getQuranReflectPostUrl } from '@/utils/quranReflect/navigation';
-import { getCopyReflectionContent } from '@/utils/quranReflect/string';
-import { stripHTMLTags } from '@/utils/string';
-import ReflectionFilter from 'types/QuranReflect/ReflectionFilter';
-import TrimmedCitationTexts from 'types/QuranReflect/TrimmedCitationTexts';
 
 type Props = {
   likesCount: number;
   commentsCount: number;
   postId: number;
   reflectionText: string;
-  trimmedCitationTexts: TrimmedCitationTexts;
-  filters: ReflectionFilter[];
+  references: Reference[];
+};
+
+const referenceRequiresApiCall = (reference: Reference) => {
+  return reference.from && reference.to && reference.chapterId;
+};
+
+const fetchTrimmedCitationTexts = async (references: Reference[], currentLocale = Language.EN) => {
+  const translationId = localeToTranslationID(currentLocale);
+  const promises = references.map(async (reference, index) => {
+    if (referenceRequiresApiCall(reference)) {
+      const fromVerse = `${reference.chapterId}:${reference.from}`;
+      const toVerse = `${reference.chapterId}:${reference.to}`;
+      const response = await getRangeVerses(currentLocale, {
+        from: fromVerse,
+        to: toVerse,
+        translations: translationId,
+        perPage: 'all',
+        words: false,
+      });
+      return { index, verses: response?.verses };
+    }
+    return { index, verses: [] };
+  });
+
+  const results = await Promise.all(promises);
+  const citationTexts: Record<number, any[]> = {};
+
+  results.forEach(({ index, verses }) => {
+    citationTexts[index] = verses;
+  });
+
+  return citationTexts;
 };
 
 const SocialInteraction: React.FC<Props> = ({
@@ -35,11 +63,23 @@ const SocialInteraction: React.FC<Props> = ({
   commentsCount,
   postId,
   reflectionText,
-  trimmedCitationTexts,
-  filters,
+  references,
 }) => {
-  const { t, lang } = useTranslation();
-  const toast = useToast();
+  const chaptersData = useContext(DataContext);
+
+  const { lang } = useTranslation();
+  const [shouldFetchVerses, setShouldFetchVerses] = useState(false);
+
+  // Check if any references need API calls (have from, to, and chapterId)
+  const needsApiCall = references.some((reference) => referenceRequiresApiCall(reference));
+
+  // Only fetch when we need to and when popover is opened
+  const { data: versesData, isValidating } = useSWRImmutable(
+    shouldFetchVerses && needsApiCall ? ['verses', references] : null,
+    () => fetchTrimmedCitationTexts(references, lang as Language),
+  );
+
+  // We now handle the verses API shape directly in getCopyReflectionContent
 
   const onLikesCountClicked = () => {
     logButtonClick('reflection_item_likes');
@@ -49,25 +89,15 @@ const SocialInteraction: React.FC<Props> = ({
     logButtonClick('reflection_item_comments');
   };
 
-  const onCopyTextClicked = () => {
-    logButtonClick('reflection_item_copy_text');
-    clipboardCopy(
-      stripHTMLTags(
-        // eslint-disable-next-line i18next/no-literal-string
-        `${reflectionText}\r\n\r\n${getCopyReflectionContent(
-          trimmedCitationTexts,
-          filters,
-        )}\r\n\r\n${getQuranReflectPostUrl(postId)}`,
-      ),
-    ).then(() => toast(t('quran-reader:text-copied'), { status: ToastStatus.Success }));
+  const onShareMenuOpen = () => {
+    // Trigger data fetching when popover opens
+    if (needsApiCall && !shouldFetchVerses) {
+      setShouldFetchVerses(true);
+    }
   };
 
-  const onCopyLinkClicked = () => {
-    logButtonClick('reflection_item_copy_link');
-    clipboardCopy(getQuranReflectPostUrl(postId)).then(() =>
-      toast(t('common:shared'), { status: ToastStatus.Success }),
-    );
-  };
+  const isFetching = needsApiCall && isValidating;
+
   return (
     <div className={styles.socialInteractionContainer}>
       <Button
@@ -95,37 +125,15 @@ const SocialInteraction: React.FC<Props> = ({
         {toLocalizedNumber(commentsCount, lang)}
       </Button>
 
-      <PopoverMenu
-        isPortalled={false}
-        trigger={
-          <Button
-            className={styles.actionItemContainer}
-            variant={ButtonVariant.Compact}
-            size={ButtonSize.Small}
-            tooltip={t('common:share')}
-            shouldFlipOnRTL={false}
-          >
-            <ShareIcon />
-          </Button>
-        }
-      >
-        <PopoverMenu.Item
-          shouldCloseMenuAfterClick
-          icon={<CopyLinkIcon />}
-          onClick={onCopyLinkClicked}
-          className={styles.item}
-        >
-          {t('quran-reader:cpy-link')}
-        </PopoverMenu.Item>
-        <PopoverMenu.Item
-          shouldCloseMenuAfterClick
-          icon={<CopyIcon />}
-          onClick={onCopyTextClicked}
-          className={styles.item}
-        >
-          {t('quran-reader:copy-text')}
-        </PopoverMenu.Item>
-      </PopoverMenu>
+      <ReflectionSharePopoverMenu
+        postId={postId}
+        reflectionText={reflectionText}
+        references={references}
+        isFetching={isFetching}
+        versesData={versesData}
+        chaptersData={chaptersData}
+        onShareMenuOpen={onShareMenuOpen}
+      />
     </div>
   );
 };
