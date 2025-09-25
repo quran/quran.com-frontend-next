@@ -16,8 +16,35 @@ class Homepage {
     this.context = context;
   }
 
-  async goTo() {
-    await this.page.goto('/');
+  /**
+   * Navigate to a specific path.
+   * @param {string} path The path to navigate to, defaults to the homepage ('/')
+   */
+  async goTo(path: string = '/') {
+    await this.page.goto(path, { waitUntil: 'networkidle' });
+    await this.hideNextJSOverlay();
+  }
+
+  /**
+   * Reload the current page.
+   */
+  async reload() {
+    await this.page.reload({ waitUntil: 'networkidle' });
+    await this.hideNextJSOverlay();
+  }
+
+  /**
+   * Hide the Next.js error overlay that may appear on the page.
+   * Needed to click on elements behind it.
+   */
+  async hideNextJSOverlay() {
+    await this.page.addStyleTag({
+      content: `
+      nextjs-portal {
+        display: none;
+      }
+    `,
+    });
   }
 
   /**

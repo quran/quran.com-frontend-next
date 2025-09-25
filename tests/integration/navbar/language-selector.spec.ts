@@ -1,18 +1,12 @@
 import { test, expect } from '@playwright/test';
 
-test.beforeEach(async ({ page }) => {
-  await page.goto('/');
+import Homepage from '@/tests/POM/home-page';
 
-  // Hide the nextjs error overlay to be able to click on elements behind it
-  await page.addStyleTag({
-    content: `
-      nextjs-portal {
-        display: none;
-      }
-    `,
-  });
+let homePage: Homepage;
 
-  await page.waitForLoadState('networkidle');
+test.beforeEach(async ({ page, context }) => {
+  homePage = new Homepage(page, context);
+  await homePage.goTo();
 });
 
 test('Clicking on Nav bar language selector icon should open the language selector menu', async ({

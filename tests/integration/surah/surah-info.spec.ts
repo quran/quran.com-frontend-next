@@ -1,9 +1,13 @@
 import { test, expect } from '@playwright/test';
 
 import { chapter } from '@/tests/mocks/chapters';
+import Homepage from '@/tests/POM/home-page';
 
-test.beforeEach(async ({ page }) => {
-  await page.goto('/surah/1/info', { waitUntil: 'networkidle' });
+let homePage: Homepage;
+
+test.beforeEach(async ({ page, context }) => {
+  homePage = new Homepage(page, context);
+  await homePage.goTo('/surah/1/info');
 });
 
 test.describe('Surah Info Page', () => {

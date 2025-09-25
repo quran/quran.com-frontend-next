@@ -1,16 +1,12 @@
 import { test, expect } from '@playwright/test';
 
-test.beforeEach(async ({ page }) => {
-  await page.goto('/search', { waitUntil: 'networkidle' });
+import Homepage from '@/tests/POM/home-page';
 
-  // Hide the nextjs error overlay to be able to click on elements behind it
-  await page.addStyleTag({
-    content: `
-        nextjs-portal {
-            display: none;
-        }
-        `,
-  });
+let homePage: Homepage;
+
+test.beforeEach(async ({ page, context }) => {
+  homePage = new Homepage(page, context);
+  await homePage.goTo('/search');
 });
 
 test('Search for a juz is working', async ({ page }) => {
@@ -38,14 +34,7 @@ test('Popular searches are displayed', async ({ page }) => {
 
 test('Searching for a non-result displays the no results message', async ({ page }) => {
   // 1. Click on the search bar (#searchQuery)
-  await page.goto('/search?page=1&query=abcd', { waitUntil: 'networkidle' });
-  await page.addStyleTag({
-    content: `
-        nextjs-portal {
-            display: none;
-        }
-        `,
-  });
+  await homePage.goTo('/search?page=1&query=abcd');
 
   // 2. We should see the "No results found" message
   const searchResults = page.getByTestId('search-body-container');

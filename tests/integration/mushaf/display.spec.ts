@@ -1,7 +1,13 @@
 import { test, expect } from '@playwright/test';
 
-test.beforeEach(async ({ page, isMobile }) => {
-  await page.goto('/page/3', { waitUntil: 'networkidle' });
+import Homepage from '@/tests/POM/home-page';
+
+let homePage: Homepage;
+
+test.beforeEach(async ({ page, isMobile, context }) => {
+  homePage = new Homepage(page, context);
+
+  await homePage.goTo('/page/3');
 
   // Click on the reading button to switch to the mushaf view
   if (isMobile) {
@@ -34,7 +40,7 @@ test('selected mushaf view persists', async ({ page, isMobile }) => {
   await page.waitForTimeout(1500); // wait for a bit to ensure the navigation is fully done
 
   // refresh the page
-  await page.reload({ waitUntil: 'networkidle' });
+  await homePage.reload();
 
   // Verify we are still in the mushaf view
   if (isMobile) {

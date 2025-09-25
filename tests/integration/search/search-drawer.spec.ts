@@ -1,16 +1,12 @@
 import { test, expect } from '@playwright/test';
 
-test.beforeEach(async ({ page }) => {
-  await page.goto('/', { waitUntil: 'networkidle' });
+import Homepage from '@/tests/POM/home-page';
 
-  // Hide the nextjs error overlay to be able to click on elements behind it
-  await page.addStyleTag({
-    content: `
-        nextjs-portal {
-            display: none;
-        }
-        `,
-  });
+let homePage: Homepage;
+
+test.beforeEach(async ({ page, context }) => {
+  homePage = new Homepage(page, context);
+  await homePage.goTo();
 });
 
 test('Search history is preserved', async ({ page }) => {
@@ -33,14 +29,7 @@ test('Search history is preserved', async ({ page }) => {
   await page.waitForTimeout(1500); // wait for a bit to ensure the navigation is fully done
 
   // 4. Redirect back to /
-  await page.goto('/', { waitUntil: 'networkidle' });
-  await page.addStyleTag({
-    content: `
-        nextjs-portal {
-            display: none;
-        }
-        `,
-  });
+  await homePage.goTo();
 
   // 5. Click on the search bar again and make sure that we see "Juz 30" in the recent navigations
   await searchBar.click();

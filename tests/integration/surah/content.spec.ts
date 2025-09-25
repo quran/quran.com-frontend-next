@@ -2,9 +2,13 @@ import { test, expect } from '@playwright/test';
 
 import mockFootnoteKhattabSurah1Verse2 from '@/tests/mocks/footnotes';
 import { mockTranslationKhattab } from '@/tests/mocks/translations';
+import Homepage from '@/tests/POM/home-page';
 
-test.beforeEach(async ({ page }) => {
-  await page.goto('/1', { waitUntil: 'networkidle' });
+let homePage: Homepage;
+
+test.beforeEach(async ({ page, context }) => {
+  homePage = new Homepage(page, context);
+  await homePage.goTo('/1');
 });
 
 test.describe('Surah Content - Text Display', () => {

@@ -1,16 +1,12 @@
 import { test, expect, Page } from '@playwright/test';
 
-test.beforeEach(async ({ page }) => {
-  await page.goto('/', { waitUntil: 'networkidle' });
+import Homepage from '@/tests/POM/home-page';
 
-  // Hide the nextjs error overlay to be able to click on elements behind it
-  await page.addStyleTag({
-    content: `
-        nextjs-portal {
-            display: none;
-        }
-        `,
-  });
+let homePage: Homepage;
+
+test.beforeEach(async ({ page, context }) => {
+  homePage = new Homepage(page, context);
+  await homePage.goTo();
 });
 
 test('Navigate Quran Drawer Open and Close', async ({ page }) => {

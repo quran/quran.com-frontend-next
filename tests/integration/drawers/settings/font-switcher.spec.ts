@@ -4,27 +4,14 @@ import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
 import Homepage from '@/tests/POM/home-page';
 import { MushafLines, QuranFont } from '@/types/QuranReader';
 
-test.beforeEach(async ({ page }) => {
-  await page.goto('/');
+let homepage: Homepage;
 
-  // Hide the nextjs error overlay to be able to click on elements behind it
-  await page.addStyleTag({
-    content: `
-      nextjs-portal {
-        display: none;
-      }
-    `,
-  });
-
-  await page.waitForLoadState('networkidle');
+test.beforeEach(async ({ page, context }) => {
+  homepage = new Homepage(page, context);
+  await homepage.goTo();
 });
 
-test('Selecting a non-default theme should persist the selected font', async ({
-  page,
-  context,
-}) => {
-  const homepage = new Homepage(page, context);
-
+test('Selecting a non-default theme should persist the selected font', async ({ page }) => {
   // 1. make sure code v1 and 16-line Mushaf are persisted by default
   let persistedQuranReaderStyles = (await homepage.getPersistedValue(
     'quranReaderStyles',
@@ -46,15 +33,7 @@ test('Selecting a non-default theme should persist the selected font', async ({
   expect(persistedQuranReaderStyles.mushafLines).toBe(MushafLines.FifteenLines);
 
   // 6. reload the page.
-  await page.reload({ waitUntil: 'networkidle' });
-  // Hide the nextjs error overlay to be able to click on elements behind it
-  await page.addStyleTag({
-    content: `
-      nextjs-portal {
-        display: none;
-      }
-    `,
-  });
+  await homepage.reload();
 
   // 7. Open the settings drawer
   await homepage.openSettingsDrawer();
