@@ -26,7 +26,7 @@ const PopularButton = () => {
     setIsExpanded(false);
   };
   return (
-    <div className={styles.buttonWrapper}>
+    <>
       <Button
         variant={ButtonVariant.Simplified}
         className={heroButtonStyles.button}
@@ -43,39 +43,41 @@ const PopularButton = () => {
         </div>
       </Button>
       {isExpanded && (
-        <div className={styles.dropdownContainer}>
-          <div className={styles.container}>
-            <div className={styles.bodyContainer}>
-              <div className={styles.header}>
-                <div className={styles.popularHeader}>
-                  <IconContainer
-                    size={IconSize.Xsmall}
-                    icon={<PopularIcon />}
-                    shouldForceSetColors={false}
-                  />
-                  {t('popular')}
+        <div className={styles.buttonWrapper}>
+          <div className={styles.dropdownContainer}>
+            <div className={styles.container}>
+              <div className={styles.bodyContainer}>
+                <div className={styles.header}>
+                  <div className={styles.popularHeader}>
+                    <IconContainer
+                      size={IconSize.Xsmall}
+                      icon={<PopularIcon />}
+                      shouldForceSetColors={false}
+                    />
+                    {t('popular')}
+                  </div>
+                  <Button
+                    shape={ButtonShape.Circle}
+                    variant={ButtonVariant.Ghost}
+                    shouldFlipOnRTL={false}
+                    onClick={onCloseClicked}
+                  >
+                    <CloseIcon />
+                  </Button>
                 </div>
-                <Button
-                  shape={ButtonShape.Circle}
-                  variant={ButtonVariant.Ghost}
-                  shouldFlipOnRTL={false}
-                  onClick={onCloseClicked}
-                >
-                  <CloseIcon />
-                </Button>
-              </div>
-              <hr />
-              <div className={styles.body}>
-                <p className={styles.chaptersAndVerses}>{t('chapters-and-verses')}</p>
-                <QuickLinks />
                 <hr />
-                <PlayRadioButton />
+                <div className={styles.body}>
+                  <p className={styles.chaptersAndVerses}>{t('chapters-and-verses')}</p>
+                  <QuickLinks />
+                  <hr />
+                  <PlayRadioButton />
+                </div>
               </div>
             </div>
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 };
 
