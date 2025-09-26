@@ -29,14 +29,14 @@ interface Props {
   text: ReactNode;
   children: ReactNode | ReactNode[];
   onOpenChange?: (open: boolean) => void;
-  open?: boolean;
+  isOpen?: boolean;
   contentSide?: ContentSide;
   contentAlign?: ContentAlign;
-  avoidCollisions?: boolean;
-  tip?: boolean;
+  shouldAvoidCollisions?: boolean;
+  hasTip?: boolean;
   delay?: number;
-  invertColors?: boolean;
-  centerText?: boolean;
+  shouldInvertColors?: boolean;
+  shouldCenterText?: boolean;
   type?: TooltipType;
 }
 
@@ -44,19 +44,19 @@ const Tooltip: React.FC<Props> = ({
   text,
   children,
   onOpenChange,
-  open,
+  isOpen,
   type,
   contentSide = ContentSide.BOTTOM,
   contentAlign = ContentAlign.CENTER,
-  avoidCollisions = true,
+  shouldAvoidCollisions = true,
   delay = 400,
-  tip = true,
-  invertColors = true,
-  centerText = true,
+  hasTip = true,
+  shouldInvertColors = true,
+  shouldCenterText = true,
 }) => (
   <RadixTooltip.Root
     delayDuration={delay}
-    {...(typeof open !== 'undefined' && { open })}
+    {...(typeof isOpen !== 'undefined' && { open: isOpen })}
     {...(onOpenChange && { onOpenChange })}
   >
     <RadixTooltip.Trigger aria-label="Open tooltip" asChild>
@@ -66,10 +66,10 @@ const Tooltip: React.FC<Props> = ({
       sideOffset={2}
       side={contentSide}
       align={contentAlign}
-      avoidCollisions={avoidCollisions}
+      avoidCollisions={shouldAvoidCollisions}
       className={classNames(styles.content, {
-        [styles.noInverse]: invertColors === false,
-        [styles.noCenter]: centerText === false,
+        [styles.noInverse]: shouldInvertColors === false,
+        [styles.noCenter]: shouldCenterText === false,
         [styles.success]: type === TooltipType.SUCCESS,
         [styles.warning]: type === TooltipType.WARNING,
         [styles.error]: type === TooltipType.ERROR,
@@ -77,7 +77,7 @@ const Tooltip: React.FC<Props> = ({
       })}
     >
       {text}
-      {tip && <RadixTooltip.Arrow />}
+      {hasTip && <RadixTooltip.Arrow />}
     </RadixTooltip.Content>
   </RadixTooltip.Root>
 );

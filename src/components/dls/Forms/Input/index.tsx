@@ -41,9 +41,9 @@ interface Props {
   name?: string;
   size?: InputSize;
   placeholder?: string;
-  fixedWidth?: boolean;
-  disabled?: boolean;
-  clearable?: boolean;
+  isFixedWidth?: boolean;
+  isDisabled?: boolean;
+  isClearable?: boolean;
   prefix?: ReactNode;
   suffix?: ReactNode;
   onClearClicked?: () => void;
@@ -72,9 +72,9 @@ const Input: React.FC<Props> = ({
   label,
   placeholder,
   size = InputSize.Medium,
-  fixedWidth = true,
-  disabled = false,
-  clearable = false,
+  isFixedWidth = true,
+  isDisabled = false,
+  isClearable = false,
   type,
   variant,
   prefix,
@@ -136,7 +136,7 @@ const Input: React.FC<Props> = ({
           [styles.smallContainer]: size === InputSize.Small,
           [styles.mediumContainer]: size === InputSize.Medium,
           [styles.largeContainer]: size === InputSize.Large,
-          [styles.fixedWidth]: fixedWidth,
+          [styles.fixedWidth]: isFixedWidth,
           [styles.error]: type === InputType.Error,
           [styles.success]: type === InputType.Success,
           [styles.warning]: type === InputType.Warning,
@@ -163,7 +163,7 @@ const Input: React.FC<Props> = ({
               [styles.success]: type === InputType.Success,
               [styles.warning]: type === InputType.Warning,
               [styles.rtlInput]: shouldFlipOnRTL,
-              [styles.disabled]: disabled,
+              [styles.disabled]: isDisabled,
             },
             inputClassName,
           )}
@@ -172,7 +172,7 @@ const Input: React.FC<Props> = ({
           dir="auto"
           id={id}
           ref={inputRef}
-          disabled={disabled}
+          disabled={isDisabled}
           onChange={onValueChange}
           value={inputValue}
           onKeyDown={onKeyDown}
@@ -181,7 +181,7 @@ const Input: React.FC<Props> = ({
           {...(placeholder && { placeholder })}
           {...(name && { name })}
         />
-        {clearable ? (
+        {isClearable ? (
           <>
             {inputValue ? (
               <div className={styles.clearContainer}>

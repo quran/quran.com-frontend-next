@@ -41,14 +41,14 @@ const addCustomRenderToCompleteSignupFormFields = (
           value: string;
           onChange: (value: string) => void;
           placeholder?: string;
-          disabled?: boolean;
+          isDisabled?: boolean;
         }) => {
           return (
             <AuthInput
               {...props}
               id={field.field}
               htmlType={isEmail ? 'email' : 'text'}
-              disabled={isDisabled || props.disabled}
+              isDisabled={isDisabled || props.isDisabled}
             />
           );
         },

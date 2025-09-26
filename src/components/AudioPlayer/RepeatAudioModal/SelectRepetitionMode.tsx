@@ -57,7 +57,7 @@ const SelectRepetitionMode = ({
       </div>
       {repetitionMode === RepetitionMode.Single && (
         <Combobox
-          clearable={false}
+          isClearable={false}
           id={RepetitionMode.Single}
           value={verseKey}
           items={comboboxVerseItems}

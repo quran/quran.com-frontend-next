@@ -130,9 +130,9 @@ const TranslationView = ({
     <>
       {shouldShowQueryParamMessage && (
         <QueryParamMessage
-          translationsQueryParamDifferent={translationsQueryParamDifferent}
-          reciterQueryParamDifferent={reciterQueryParamDifferent}
-          wordByWordLocaleQueryParamDifferent={wordByWordLocaleQueryParamDifferent}
+          isTranslationsQueryParamDifferent={translationsQueryParamDifferent}
+          isReciterQueryParamDifferent={reciterQueryParamDifferent}
+          isWordByWordLocaleQueryParamDifferent={wordByWordLocaleQueryParamDifferent}
         />
       )}
 

@@ -237,7 +237,7 @@ const QuranWord = ({
             return (
               <MobilePopover
                 isOpen={isAudioPlayingWord && showTooltipWhenPlayingAudio ? true : undefined}
-                defaultStyling={false}
+                hasDefaultStyling={false}
                 content={translationViewTooltipContent}
                 onOpenChange={setIsTooltipOpened}
               >

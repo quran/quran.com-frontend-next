@@ -9,11 +9,11 @@ export default {
   args: {
     contentSide: ContentSide.BOTTOM,
     contentAlign: ContentAlign.CENTER,
-    avoidCollisions: true,
-    invertColors: true,
-    centerText: true,
-    open: undefined,
-    tip: true,
+    shouldAvoidCollisions: true,
+    shouldInvertColors: true,
+    shouldCenterText: true,
+    isOpen: undefined,
+    hasTip: true,
     delay: 400,
   },
   argTypes: {
@@ -54,7 +54,7 @@ export default {
         category: 'Optional',
       },
     },
-    avoidCollisions: {
+    shouldAvoidCollisions: {
       description: `When true, overrides the contentSide and contentAlign preferences to prevent collisions with window edges.`,
       defaultValue: true,
       control: { type: 'boolean' },
@@ -62,7 +62,7 @@ export default {
         category: 'Optional',
       },
     },
-    invertColors: {
+    shouldInvertColors: {
       description: `Whether we should invert background color or not.`,
       defaultValue: true,
       control: { type: 'boolean' },
@@ -70,7 +70,7 @@ export default {
         category: 'Optional',
       },
     },
-    centerText: {
+    shouldCenterText: {
       description: `Whether we should center the tooltip text or not.`,
       defaultValue: true,
       control: { type: 'boolean' },
@@ -78,7 +78,7 @@ export default {
         category: 'Optional',
       },
     },
-    open: {
+    isOpen: {
       defaultValue: true,
       control: { type: 'boolean' },
       table: {
@@ -87,7 +87,7 @@ export default {
       description:
         'This is to control the visibility of the overlay programmatically. onOpenChange will be ignored in that case.',
     },
-    tip: {
+    hasTip: {
       defaultValue: true,
       control: { type: 'boolean' },
       table: {
@@ -137,20 +137,20 @@ export const TooltipWithoutCenteredText = Template.bind({});
 TooltipWithoutCenteredText.args = {
   children: DefaultTrigger,
   text: LongText,
-  centerText: false,
+  shouldCenterText: false,
 };
 
 export const TooltipWithoutInvertedColors = Template.bind({});
 TooltipWithoutInvertedColors.args = {
   children: DefaultTrigger,
   text: Text,
-  invertColors: false,
+  shouldInvertColors: false,
 };
 export const TooltipWithoutDelay = Template.bind({});
 TooltipWithoutDelay.args = {
   children: DefaultTrigger,
   text: LongText,
-  delay: false,
+  delay: 0,
 };
 
 export const SuccessTooltip = Template.bind({});
@@ -185,21 +185,21 @@ export const TooltipWithoutTip = Template.bind({});
 TooltipWithoutTip.args = {
   children: DefaultTrigger,
   text: Text,
-  tip: false,
+  hasTip: false,
 };
 
 export const ControlledTooltip = Template.bind({});
 ControlledTooltip.args = {
   children: <p>Hovering away will not close the tooltip</p>,
   text: Text,
-  open: true,
+  isOpen: true,
 };
 
 export const TooltipCollidesWithWindowEdges = Template.bind({});
 TooltipCollidesWithWindowEdges.args = {
   children: DefaultTrigger,
   text: Text,
-  avoidCollisions: false,
+  shouldAvoidCollisions: false,
   contentSide: ContentSide.LEFT,
   contentAlign: ContentAlign.CENTER,
 };

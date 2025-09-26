@@ -28,15 +28,15 @@ import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext'
 import QueryParam from 'types/QueryParam';
 
 interface Props {
-  translationsQueryParamDifferent: boolean;
-  reciterQueryParamDifferent: boolean;
-  wordByWordLocaleQueryParamDifferent: boolean;
+  isTranslationsQueryParamDifferent: boolean;
+  isReciterQueryParamDifferent: boolean;
+  isWordByWordLocaleQueryParamDifferent: boolean;
 }
 
 const QueryParamMessage: React.FC<Props> = ({
-  translationsQueryParamDifferent,
-  reciterQueryParamDifferent,
-  wordByWordLocaleQueryParamDifferent,
+  isTranslationsQueryParamDifferent,
+  isReciterQueryParamDifferent,
+  isWordByWordLocaleQueryParamDifferent,
 }) => {
   const { lang } = useTranslation('common');
   const router = useRouter();
@@ -54,13 +54,13 @@ const QueryParamMessage: React.FC<Props> = ({
    * picks and applies them.
    */
   const onResetToReduxStateClicked = () => {
-    if (translationsQueryParamDifferent) {
+    if (isTranslationsQueryParamDifferent) {
       router.query[QueryParam.TRANSLATIONS] = selectedTranslations.join(',');
     }
-    if (reciterQueryParamDifferent) {
+    if (isReciterQueryParamDifferent) {
       router.query[QueryParam.RECITER] = String(selectedReciterId);
     }
-    if (wordByWordLocaleQueryParamDifferent) {
+    if (isWordByWordLocaleQueryParamDifferent) {
       router.query[QueryParam.WBW_LOCALE] = selectedWordByWordLocale;
     }
     // if is in Quranic Calendar flow, remove the flow query param
@@ -81,7 +81,7 @@ const QueryParamMessage: React.FC<Props> = ({
    */
   const onPersistQueryParamsClicked = () => {
     if (
-      translationsQueryParamDifferent &&
+      isTranslationsQueryParamDifferent &&
       isValidTranslationsQueryParamValue(router.query[QueryParam.TRANSLATIONS] as string)
     ) {
       const nextTranslations = (router.query[QueryParam.TRANSLATIONS] as string)
@@ -97,7 +97,7 @@ const QueryParamMessage: React.FC<Props> = ({
       );
     }
 
-    if (wordByWordLocaleQueryParamDifferent) {
+    if (isWordByWordLocaleQueryParamDifferent) {
       const nextWordByWord = router.query[QueryParam.WBW_LOCALE] as string;
       onSettingsChange(
         'selectedWordByWordLocale',
@@ -108,7 +108,7 @@ const QueryParamMessage: React.FC<Props> = ({
       );
     }
 
-    if (reciterQueryParamDifferent) {
+    if (isReciterQueryParamDifferent) {
       const nextReciterId = Number(router.query[QueryParam.RECITER]);
       onXstateSettingsChange(
         'reciter',

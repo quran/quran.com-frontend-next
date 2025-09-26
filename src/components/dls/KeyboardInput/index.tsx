@@ -7,28 +7,28 @@ import styles from './KeyboardInput.module.scss';
 
 interface Props {
   keyboardKey?: string;
-  invertColors?: boolean;
-  meta?: boolean;
-  shift?: boolean;
-  alt?: boolean;
-  ctrl?: boolean;
+  shouldInvertColors?: boolean;
+  hasMeta?: boolean;
+  hasShift?: boolean;
+  hasAlt?: boolean;
+  hasCtrl?: boolean;
 }
 
 const KeyboardInput: React.FC<Props> = ({
   keyboardKey,
-  meta,
-  shift,
-  alt,
-  ctrl,
-  invertColors = false,
+  hasMeta,
+  hasShift,
+  hasAlt,
+  hasCtrl,
+  shouldInvertColors: invertColors = false,
 }) => {
   const isMacOs = typeof window !== 'undefined' && window.navigator.userAgent.search('Mac') !== -1;
   return (
     <kbd className={classNames(styles.container, { [styles.invertedColors]: invertColors })}>
-      {meta && <span>{isMacOs ? '⌘' : 'ctrl'}</span>}
-      {shift && <span>⇧</span>}
-      {alt && <span>⌥</span>}
-      {ctrl && <span>⌃</span>}
+      {hasMeta && <span>{isMacOs ? '⌘' : 'ctrl'}</span>}
+      {hasShift && <span>⇧</span>}
+      {hasAlt && <span>⌥</span>}
+      {hasCtrl && <span>⌃</span>}
       {keyboardKey && <span>{keyboardKey}</span>}
     </kbd>
   );
