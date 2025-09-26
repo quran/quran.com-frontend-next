@@ -51,7 +51,7 @@ const SelectorContainer: React.FC<SelectorProps> = ({
         onChange={(changedValue) => {
           onChange(String(changedValue), type);
         }}
-        disabled={isDisabled}
+        isDisabled={isDisabled}
         size={SelectSize.Medium}
         className={styles.select}
       />

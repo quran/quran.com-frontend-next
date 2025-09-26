@@ -62,8 +62,8 @@ const SettingsDrawer = () => {
     <Drawer
       type={DrawerType.Settings}
       header={header}
-      closeOnNavigation={false}
-      canCloseDrawer={!isActive}
+      shouldCloseOnNavigation={false}
+      isDrawerClosable={!isActive}
       bodyId="settings-drawer-body"
     >
       {isSettingsDrawerOpen && settingsView === SettingsView.Body && <SettingsBody />}

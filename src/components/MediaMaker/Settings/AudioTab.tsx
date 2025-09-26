@@ -126,7 +126,7 @@ const AudioTab: FC<AudioTabProps> = ({
             options={chaptersList || []}
             value={String(surah)}
             onChange={onChapterChange}
-            disabled={isFetching}
+            isDisabled={isFetching}
             size={SelectSize.Medium}
             className={styles.select}
           />

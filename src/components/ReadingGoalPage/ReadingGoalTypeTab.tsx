@@ -44,7 +44,7 @@ const ReadingGoalTypeTab: React.FC<ReadingGoalTabProps> = ({ state, dispatch, na
               dispatch({ type: 'SET_TYPE', payload: { type: option.type } });
               logClick(option.key);
             }}
-            selected={state.type === option.type}
+            isSelected={state.type === option.type}
             option={t(`goal-types.${option.key}.title`)}
             description={t(`goal-types.${option.key}.description`)}
             icon={option.icon}

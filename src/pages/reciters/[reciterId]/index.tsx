@@ -96,7 +96,7 @@ const ReciterPage = ({ selectedReciter, chaptersData }: ReciterPageProps) => {
             value={searchQuery}
             onChange={setSearchQuery}
             placeholder={t('reciter:search-chapter')}
-            fixedWidth={false}
+            isFixedWidth={false}
           />
         </div>
 

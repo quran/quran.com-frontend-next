@@ -10,32 +10,32 @@ export interface RadioItem {
   value: string;
   id: string;
   label: string;
-  disabled?: boolean;
-  required?: boolean;
+  isDisabled?: boolean;
+  isRequired?: boolean;
 }
 
 interface Props extends RootProps {
   items: RadioItem[];
-  disabled?: boolean;
+  isDisabled?: boolean;
 }
 
-const RadioGroup = ({ items, disabled = false, ...props }: Props) => {
+const RadioGroup = ({ items, isDisabled = false, ...props }: Props) => {
   return (
     <Root {...props}>
       {items.map((item) => {
-        const isDisabled = disabled === true || item.disabled === true;
+        const isItemDisabled = isDisabled === true || item.isDisabled === true;
         return (
           <div className={styles.radioItemContainer} key={item.id}>
             <Item
               value={item.value}
               id={item.id}
-              disabled={isDisabled}
-              required={item.required || false}
+              disabled={isItemDisabled}
+              required={item.isRequired || false}
             />
 
             <label
               htmlFor={item.id}
-              className={classNames(styles.label, { [styles.disabled]: isDisabled })}
+              className={classNames(styles.label, { [styles.disabled]: isItemDisabled })}
             >
               {item.label}
             </label>

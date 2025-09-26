@@ -63,6 +63,6 @@ export const WithDisabledItem = Template.bind({});
 WithDisabledItem.args = {
   items: [
     { name: 'Translation', value: 'translation' },
-    { name: 'Reading', value: 'reading', disabled: true },
+    { name: 'Reading', value: 'reading', isDisabled: true },
   ],
 };

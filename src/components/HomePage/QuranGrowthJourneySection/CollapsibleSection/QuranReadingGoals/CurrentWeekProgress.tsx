@@ -13,10 +13,10 @@ import { convertFractionToPercent } from '@/utils/number';
 interface Props {
   weekData: ReturnType<typeof useGetStreakWithMetadata>['weekData'];
   goal?: ReturnType<typeof useGetStreakWithMetadata>['goal'];
-  fixedWidth?: boolean;
+  isFixedWidth?: boolean;
 }
 
-const CurrentWeekProgress: React.FC<Props> = ({ weekData, goal, fixedWidth = true }) => {
+const CurrentWeekProgress: React.FC<Props> = ({ weekData, goal, isFixedWidth = true }) => {
   const { lang, t } = useTranslation();
   const { days, readingDaysMap } = weekData;
 
@@ -39,7 +39,7 @@ const CurrentWeekProgress: React.FC<Props> = ({ weekData, goal, fixedWidth = tru
       <p className={styles.weekProgressLabel}>{t('reading-goal:week-progress')}</p>
       <div
         className={classNames(styles.week, {
-          [styles.fixedWidth]: fixedWidth,
+          [styles.fixedWidth]: isFixedWidth,
         })}
       >
         {days.map((day) => {

@@ -8,8 +8,8 @@ export default {
   title: 'dls/Select',
   component: Select,
   args: {
-    disabled: false,
-    required: false,
+    isDisabled: false,
+    isRequired: false,
     size: SelectSize.Medium,
     placeholder: 'Select an option',
   },
@@ -40,7 +40,7 @@ export default {
       description:
         'A function that will be called when an option is selected. The function will pass value of the option selected.',
     },
-    disabled: {
+    isDisabled: {
       control: { type: 'boolean' },
       defaultValue: false,
       table: {
@@ -48,7 +48,7 @@ export default {
       },
       description: 'Whether the select is disabled or not.',
     },
-    required: {
+    isRequired: {
       control: { type: 'boolean' },
       defaultValue: false,
       table: {
@@ -56,7 +56,7 @@ export default {
       },
       description: 'Whether the select is required or not for when submitting a form that has it.',
     },
-    defaultStyle: {
+    hasDefaultStyle: {
       control: { type: 'boolean' },
       defaultValue: false,
       table: {
@@ -64,7 +64,7 @@ export default {
       },
       description: 'Whether the select is default styled or not.',
     },
-    withBackground: {
+    isWithBackground: {
       control: { type: 'boolean' },
       defaultValue: true,
       table: {
@@ -103,7 +103,7 @@ const generateOptions = (numberOfOptions = 10, generateDisabled = false) => {
     options.push({
       label: `Option ${index}`,
       value: `option${index}`,
-      ...(generateDisabled && { disabled: !(index % 2) }),
+      ...(generateDisabled && { isDisabled: !(index % 2) }),
     });
   }
   return options;
@@ -118,7 +118,7 @@ const Template = (args) => (
 const ControlledRemoteValueTemplate = (args) => {
   const [value, setValue] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const { disabled } = args;
+  const { isDisabled } = args;
 
   // imitate the behavior of fetching from a remote datastore.
   useEffect(() => {
@@ -139,7 +139,7 @@ const ControlledRemoteValueTemplate = (args) => {
         value={value}
         onChange={onChange}
         placeholder={isLoading ? 'Loading...' : null}
-        disabled={disabled || isLoading}
+        isDisabled={isDisabled || isLoading}
       />
     </span>
   );
@@ -149,7 +149,7 @@ const ControlledRemoteOptionsAndValueTemplate = (args) => {
   const [options, setOptions] = useState([]);
   const [value, setValue] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
-  const { disabled } = args;
+  const { isDisabled } = args;
 
   // imitate the behavior of fetching from a remote datastore.
   useEffect(() => {
@@ -173,7 +173,7 @@ const ControlledRemoteOptionsAndValueTemplate = (args) => {
         value={value}
         onChange={onChange}
         placeholder={isLoading ? 'Loading...' : null}
-        disabled={disabled || isLoading}
+        isDisabled={isDisabled || isLoading}
       />
     </span>
   );

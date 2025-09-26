@@ -9,7 +9,7 @@ import CaretIcon from '@/icons/caret-down.svg';
 export interface SelectOption {
   label: string;
   value: string | number;
-  disabled?: boolean;
+  isDisabled?: boolean;
 }
 
 export enum SelectSize {
@@ -22,15 +22,15 @@ interface Props {
   id: string;
   name: string;
   options: SelectOption[];
-  disabled?: boolean;
-  required?: boolean;
+  isDisabled?: boolean;
+  isRequired?: boolean;
   size?: SelectSize;
   value?: string;
   placeholder?: string;
   onChange?: (value: string | number) => void;
-  defaultStyle?: boolean;
+  hasDefaultStyle?: boolean;
   className?: string;
-  withBackground?: boolean;
+  isWithBackground?: boolean;
 }
 
 const Select: React.FC<Props> = ({
@@ -39,13 +39,13 @@ const Select: React.FC<Props> = ({
   onChange,
   options,
   value,
-  disabled = false,
-  required = false,
+  isDisabled = false,
+  isRequired = false,
   size = SelectSize.Medium,
   placeholder = 'Select an option',
-  defaultStyle = true,
+  hasDefaultStyle = true,
   className,
-  withBackground = true,
+  isWithBackground = true,
 }) => {
   const onSelectChange = useCallback(
     (e: ChangeEvent<HTMLSelectElement>) => {
@@ -59,37 +59,37 @@ const Select: React.FC<Props> = ({
   return (
     <div
       className={classNames(styles.container, {
-        [styles.defaultStyledContainer]: defaultStyle,
+        [styles.defaultStyledContainer]: hasDefaultStyle,
         [className]: className,
-        [styles.disabledContainer]: disabled,
+        [styles.disabledContainer]: isDisabled,
         [styles.smallContainer]: size === SelectSize.Small,
         [styles.mediumContainer]: size === SelectSize.Medium,
         [styles.largeContainer]: size === SelectSize.Large,
-        [styles.withBackground]: withBackground,
+        [styles.withBackground]: isWithBackground,
       })}
     >
       <select
         className={classNames(styles.select, {
-          [styles.defaultStyledSelect]: defaultStyle,
-          [styles.disabledSelect]: disabled,
+          [styles.defaultStyledSelect]: hasDefaultStyle,
+          [styles.disabledSelect]: isDisabled,
         })}
         name={name}
         id={id}
         onChange={onSelectChange}
-        disabled={disabled}
-        required={required}
+        disabled={isDisabled}
+        required={isRequired}
         {...(value ? { value } : { defaultValue: '' })}
       >
         <option value="" disabled hidden>
           {placeholder}
         </option>
         {options.map((option) => (
-          <option key={option.value} value={option.value} disabled={option.disabled || false}>
+          <option key={option.value} value={option.value} disabled={option.isDisabled || false}>
             {option.label}
           </option>
         ))}
       </select>
-      <div className={classNames(styles.arrow, { [styles.disabledArrow]: disabled })}>
+      <div className={classNames(styles.arrow, { [styles.disabledArrow]: isDisabled })}>
         <CaretIcon />
       </div>
     </div>

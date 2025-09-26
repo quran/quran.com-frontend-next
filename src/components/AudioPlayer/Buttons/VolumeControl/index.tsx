@@ -79,7 +79,7 @@ const VolumeControl = () => {
           max={100}
           step={1}
           label="Volume"
-          withBackground
+          isWithBackground
           value={[volume * 100]}
           onValueChange={handleVolumeChange}
           variant={SliderVariant.Primary}

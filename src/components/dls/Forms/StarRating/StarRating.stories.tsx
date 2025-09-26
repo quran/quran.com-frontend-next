@@ -7,10 +7,10 @@ export default {
   title: 'dls/StarRating',
   component: StarRating,
   args: {
-    disabled: false,
+    isDisabled: false,
   },
   argTypes: {
-    disabled: {
+    isDisabled: {
       options: [true, false],
       control: { type: 'boolean' },
       table: {

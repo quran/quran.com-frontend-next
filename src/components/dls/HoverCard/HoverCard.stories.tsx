@@ -8,9 +8,9 @@ export default {
   args: {
     contentSide: ContentSide.BOTTOM,
     contentAlign: ContentAlign.CENTER,
-    avoidCollision: true,
-    open: undefined,
-    tip: true,
+    shouldAvoidCollisions: true,
+    isOpen: undefined,
+    hasTip: true,
     openDelay: 400,
     closeDelay: 300,
   },
@@ -43,7 +43,7 @@ export default {
         category: 'Optional',
       },
     },
-    avoidCollisions: {
+    shouldAvoidCollisions: {
       description: `When true, overrides the contentSide and contentAlign preferences to prevent collisions with window edges.`,
       defaultValue: true,
       control: { type: 'boolean' },
@@ -51,7 +51,7 @@ export default {
         category: 'Optional',
       },
     },
-    open: {
+    isOpen: {
       defaultValue: false,
       control: { type: 'boolean' },
       table: {
@@ -60,7 +60,7 @@ export default {
       description:
         'This is to control the visibility of the overlay programmatically. onOpenChange will be ignored in that case.',
     },
-    tip: {
+    hasTip: {
       defaultValue: true,
       control: { type: 'boolean' },
       table: {
@@ -133,21 +133,21 @@ export const HoverCardWithoutTip = Template.bind({});
 HoverCardWithoutTip.args = {
   children: DefaultTrigger,
   body: Body,
-  tip: false,
+  hasTip: false,
 };
 
 export const HoverCardControlledTooltip = Template.bind({});
 HoverCardControlledTooltip.args = {
   children: DefaultTrigger,
   body: Body,
-  open: true,
+  isOpen: true,
 };
 
 export const HoverCardCollidesWithWindowEdges = Template.bind({});
 HoverCardCollidesWithWindowEdges.args = {
   children: DefaultTrigger,
   body: Body,
-  avoidCollisions: false,
+  shouldAvoidCollisions: false,
   contentSide: ContentSide.LEFT,
   contentAlign: ContentAlign.CENTER,
 };

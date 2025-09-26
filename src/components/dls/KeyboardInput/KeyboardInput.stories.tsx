@@ -11,25 +11,25 @@ export default {
       table: { category: 'Optional' },
       control: { type: 'text' },
     },
-    meta: {
+    hasMeta: {
       description: 'whether META (cmd in MAC) modifier should be shown',
       table: { category: 'Optional' },
       defaultValue: false,
       control: { type: 'boolean' },
     },
-    shift: {
+    hasShift: {
       description: 'whether SHIFT modifier should be shown',
       table: { category: 'Optional' },
       defaultValue: false,
       control: { type: 'boolean' },
     },
-    alt: {
+    hasAlt: {
       description: 'whether ALT modifier should be shown',
       table: { category: 'Optional' },
       defaultValue: false,
       control: { type: 'boolean' },
     },
-    ctrl: {
+    hasCtrl: {
       description: 'whether CTRL modifier should be shown',
       table: { category: 'Optional' },
       defaultValue: false,
@@ -46,30 +46,30 @@ DefaultKeyboard.args = {
 };
 export const WithMeta = Template.bind({});
 WithMeta.args = {
-  meta: true,
+  hasMeta: true,
 };
 export const WithShift = Template.bind({});
 WithShift.args = {
-  shift: true,
+  hasShift: true,
 };
 export const WithAlt = Template.bind({});
 WithAlt.args = {
-  alt: true,
+  hasAlt: true,
 };
 export const WithCtrl = Template.bind({});
 WithCtrl.args = {
-  ctrl: true,
+  hasCtrl: true,
 };
 export const WithMetaAndK = Template.bind({});
 WithMetaAndK.args = {
-  meta: true,
+  hasMeta: true,
   keyboardKey: 'K',
 };
 export const WithAll = Template.bind({});
 WithAll.args = {
-  meta: true,
-  shift: true,
-  alt: true,
-  ctrl: true,
+  hasMeta: true,
+  hasShift: true,
+  hasAlt: true,
+  hasCtrl: true,
   keyboardKey: 'T',
 };

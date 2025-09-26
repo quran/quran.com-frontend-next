@@ -22,7 +22,7 @@ export const Default = (args) => {
 
 export const WithDisabled = Default.bind({});
 WithDisabled.args = {
-  disabled: true,
+  isDisabled: true,
 };
 
 export const WithLoading = Default.bind({});

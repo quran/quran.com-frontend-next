@@ -80,7 +80,7 @@ const SettingsReciter = () => {
             value={searchQuery}
             onChange={setSearchQuery}
             placeholder={t('settings.search-reciter')}
-            fixedWidth={false}
+            isFixedWidth={false}
             containerClassName={styles.input}
           />
         </SpinnerContainer>
