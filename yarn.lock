@@ -3709,7 +3709,7 @@
     "@emnapi/runtime" "^1.4.3"
     "@tybys/wasm-util" "^0.10.0"
 
-"@next/bundle-analyzer@^14.2.7":
+"@next/bundle-analyzer@^14.2.33":
   version "14.2.33"
   resolved "https://registry.yarnpkg.com/@next/bundle-analyzer/-/bundle-analyzer-14.2.33.tgz#87ac8d911f18847f74de56997f59b58a015199e1"
   integrity sha512-pKrmt1oQXOICfbQKytSbWwxh3Txqd+NG5nLb24ginP4neYy9GW6wZ3STEAcCLVhXPIBAMs9IEefuMtPJF4z9FA==
@@ -5299,7 +5299,7 @@
   resolved "https://registry.yarnpkg.com/@sentry/core/-/core-9.46.0.tgz#be4824d8b028b3184f9a05be9b232c9440cb35ac"
   integrity sha512-it7JMFqxVproAgEtbLgCVBYtQ9fIb+Bu0JD+cEplTN/Ukpe6GaolyYib5geZqslVxhp2sQgT+58aGvfd/k0N8Q==
 
-"@sentry/nextjs@^9.19.0":
+"@sentry/nextjs@^9.46.0":
   version "9.46.0"
   resolved "https://registry.yarnpkg.com/@sentry/nextjs/-/nextjs-9.46.0.tgz#b5ee5f932a95fdcc4442882749576f1901f6f539"
   integrity sha512-3kRTM4yFXV33+SqQd8Et6nsP2DlS/REKbiVvpt8fB8kP6m/cq9plnj9/dqzd9dL1YDiK7g6Lm1Ff9ZSCOhOm/w==
@@ -12931,12 +12931,12 @@ neo-async@^2.6.2:
   resolved "https://registry.yarnpkg.com/neo-async/-/neo-async-2.6.2.tgz#b4aafb93e3aeb2d8174ca53cf163ab7d7308305f"
   integrity sha512-Yd3UES5mWCSqR+qNT93S3UoYUkqAZ9lLg8a7g9rimsWmYGK8cVToA4/sF3RrshdyV3sAGMXVUmpMYOw+dLpOuw==
 
-next-compose-plugins@^2.2.0:
+next-compose-plugins@^2.2.1:
   version "2.2.1"
   resolved "https://registry.yarnpkg.com/next-compose-plugins/-/next-compose-plugins-2.2.1.tgz#020fc53f275a7e719d62521bef4300fbb6fde5ab"
   integrity sha512-OjJ+fV15FXO2uQXQagLD4C0abYErBjyjE0I0FHpOEIB8upw0hg1ldFP6cqHTJBH1cZqy96OeR3u1dJ+Ez2D4Bg==
 
-next-fonts@^1.0.3:
+next-fonts@^1.5.1:
   version "1.5.1"
   resolved "https://registry.yarnpkg.com/next-fonts/-/next-fonts-1.5.1.tgz#21f398ca6931b85a7f9c4597f1d3b851be5b5a16"
   integrity sha512-pgEJ40xO1oRhM6RqhQJ9CzuZOFp6Zq+aAD/V1P9sq/wdepvLzhFxDm3lCZNoE7+78NSuMKgT6b1qeXSsqWuUMQ==
@@ -12956,12 +12956,12 @@ next-pwa@^5.6.0:
     workbox-webpack-plugin "^6.5.4"
     workbox-window "^6.5.4"
 
-next-seo@^6.5.0:
+next-seo@^6.8.0:
   version "6.8.0"
   resolved "https://registry.yarnpkg.com/next-seo/-/next-seo-6.8.0.tgz#0265ec75ad5ddca3d2a11dd86534a15065043651"
   integrity sha512-zcxaV67PFXCSf8e6SXxbxPaOTgc8St/esxfsYXfQXMM24UESUVSXFm7f2A9HMkAwa0Gqn4s64HxYZAGfdF4Vhg==
 
-next-sitemap@^3.1.22:
+next-sitemap@^3.1.55:
   version "3.1.55"
   resolved "https://registry.yarnpkg.com/next-sitemap/-/next-sitemap-3.1.55.tgz#9ba3ce6a22d8da641c241ddd644e1e3aef9a13c5"
   integrity sha512-ZjkRfkqoSLbU+e8W9TWWe0zfOGNA47lpvm35kNcUCmj73gpLX2PIn51gwHT/B6bgGVAFYY0OXixJDrxIIwcEHw==
@@ -12986,7 +12986,7 @@ next-translate@^2.6.2:
   resolved "https://registry.yarnpkg.com/next-translate/-/next-translate-2.6.2.tgz#f9a1bc7dd3d635a36828f5a7a4d5bb8defb77d61"
   integrity sha512-Dcfo2Vyw+Ds06+8BJM0RcV/lfN7R59kTY/NP+XJgSpcrFKZV6QJuKfS+K4+OHkKBdQnF3ZOT3wk1np9eZx/PEA==
 
-next@^15.5.3:
+next@^15.5.4:
   version "15.5.4"
   resolved "https://registry.yarnpkg.com/next/-/next-15.5.4.tgz#e7412c805c0b686ceaf294de703b7c9be59a4081"
   integrity sha512-xH4Yjhb82sFYQfY3vbkJfgSDgXvBB6a8xPs9i35k6oZJRoQRihZH+4s9Yo2qsWpzBmZ3lPXaJ2KPXLfkvW4LnA==
