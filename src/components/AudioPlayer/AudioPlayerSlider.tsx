@@ -26,7 +26,7 @@ const AudioPlayerSlider = () => {
       <span className={styles.currentTime}>{secondsFormatter(elapsed, locale)}</span>
       <div className={styles.sliderContainer}>
         <Slider
-          showThumbs={false}
+          shouldShowThumbs={false}
           variant={SliderVariant.Secondary}
           label="audio-player"
           value={[downloadProgress]}
@@ -36,7 +36,7 @@ const AudioPlayerSlider = () => {
           }}
           max={duration}
           direction={direction as Direction}
-          withBackground
+          isWithBackground
         />
       </div>
       <div className={styles.sliderContainer}>

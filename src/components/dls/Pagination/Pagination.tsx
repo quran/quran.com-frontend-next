@@ -18,7 +18,7 @@ interface Props {
   onPageChange: (newPage: number) => void;
   pageSize?: number;
   siblingsCount?: number;
-  showSummary?: boolean;
+  shouldShowSummary?: boolean;
 }
 
 const DOTS = '...';
@@ -37,7 +37,7 @@ const Pagination: React.FC<Props> = ({
   currentPage,
   pageSize = DEFAULT_PAGE_SIZE,
   siblingsCount = DEFAULT_SIBLINGS_COUNT,
-  showSummary = true,
+  shouldShowSummary = true,
 }) => {
   const { t, lang } = useTranslation('common');
   const paginationRange = useMemo(() => {
@@ -134,7 +134,7 @@ const Pagination: React.FC<Props> = ({
           <NextIcon />
         </Button>
       </div>
-      {showSummary && (
+      {shouldShowSummary && (
         <p className={styles.uppercase}>
           {t('pagination-summary', {
             currentResultNumber: toLocalizedNumber(showingUntilItem - (pageSize - 1), lang),

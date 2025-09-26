@@ -116,7 +116,7 @@ const CircularProgressbar: React.FC<Partial<CircularProgressbarProps>> = ({ ...i
 
       <Path
         className={classNames(classes?.trail)}
-        counterClockwise={counterClockwise}
+        isCounterClockwise={counterClockwise}
         dashRatio={circleRatio}
         pathRadius={pathRadius}
         strokeWidth={strokeWidth}
@@ -124,7 +124,7 @@ const CircularProgressbar: React.FC<Partial<CircularProgressbarProps>> = ({ ...i
 
       <Path
         className={classNames(classes?.path)}
-        counterClockwise={counterClockwise}
+        isCounterClockwise={counterClockwise}
         dashRatio={pathRatio * circleRatio}
         pathRadius={pathRadius}
         strokeWidth={strokeWidth}

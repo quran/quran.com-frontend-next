@@ -8,7 +8,7 @@ export default {
   title: 'dls/TextArea',
   component: TextArea,
   args: {
-    disabled: false,
+    isDisabled: false,
     value: '',
   },
   argTypes: {
@@ -24,7 +24,7 @@ export default {
       defaultValue: 'Start Typing...',
       description: 'The placeholder of the input.',
     },
-    disabled: {
+    isDisabled: {
       options: [true, false],
       defaultValue: false,
       control: { type: 'boolean' },
@@ -95,7 +95,7 @@ DefaultInput.args = {
 export const DisabledInput = Template.bind({});
 DisabledInput.args = {
   id: 'disabled-input',
-  disabled: true,
+  isDisabled: true,
 };
 export const DefaultControlledInput = ControlledLocalTemplate.bind({});
 DefaultControlledInput.args = {

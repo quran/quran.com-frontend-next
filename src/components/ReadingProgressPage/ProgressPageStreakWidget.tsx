@@ -32,7 +32,7 @@ const ProgressPageStreakWidget = ({
         <p>{t('reading-goal:x-days', { days: localizedStreak, count: streak })}</p>
       </div>
 
-      <CurrentWeekProgress weekData={weekData} goal={goal} fixedWidth={false} />
+      <CurrentWeekProgress weekData={weekData} goal={goal} isFixedWidth={false} />
     </>
   );
 

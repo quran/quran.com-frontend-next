@@ -14,7 +14,7 @@ interface Props {
   initialData?: BaseResponse;
   loading?: () => React.ReactElement;
   fetcher?: (queryKey: string) => Promise<BaseResponse>;
-  showSpinnerOnRevalidate?: boolean;
+  shouldShowSpinnerOnRevalidate?: boolean;
   onFetchSuccess?: (data: BaseResponse) => void;
 }
 
@@ -37,7 +37,7 @@ const DataFetcher: React.FC<Props> = ({
   initialData,
   loading = () => <Spinner />,
   fetcher: dataFetcher = fetcher,
-  showSpinnerOnRevalidate = true,
+  shouldShowSpinnerOnRevalidate = true,
   onFetchSuccess,
 }: Props): JSX.Element => {
   const { data, error, isValidating, mutate } = useSWRImmutable(
@@ -54,9 +54,9 @@ const DataFetcher: React.FC<Props> = ({
     },
   );
 
-  // if showSpinnerOnRevalidate is true, we should show the spinner if we are revalidating the data.
+  // if shouldShowSpinnerOnRevalidate is true, we should show the spinner if we are revalidating the data.
   // otherwise, we should only show the spinner on initial loads.
-  if (showSpinnerOnRevalidate ? isValidating : isValidating && !data) {
+  if (shouldShowSpinnerOnRevalidate ? isValidating : isValidating && !data) {
     return loading();
   }
 

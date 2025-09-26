@@ -2,7 +2,7 @@ import { VIEWBOX_CENTER_X, VIEWBOX_CENTER_Y } from '@/utils/circularProgress';
 
 interface PathProps {
   className?: string;
-  counterClockwise: boolean;
+  isCounterClockwise: boolean;
   dashRatio: number;
   pathRadius: number;
   strokeWidth: number;
@@ -11,7 +11,7 @@ interface PathProps {
 
 const Path: React.FC<PathProps> = ({
   className,
-  counterClockwise,
+  isCounterClockwise,
   dashRatio,
   pathRadius,
   strokeWidth,
@@ -20,10 +20,13 @@ const Path: React.FC<PathProps> = ({
   return (
     <path
       className={className}
-      style={{ ...style, ...getDashStyle({ pathRadius, dashRatio, counterClockwise }) }}
+      style={{
+        ...style,
+        ...getDashStyle({ pathRadius, dashRatio, counterClockwise: isCounterClockwise }),
+      }}
       d={getPathDescription({
         pathRadius,
-        counterClockwise,
+        counterClockwise: isCounterClockwise,
       })}
       strokeWidth={strokeWidth}
       fillOpacity={0}

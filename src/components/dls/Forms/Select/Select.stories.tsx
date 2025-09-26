@@ -8,8 +8,8 @@ export default {
   title: 'dls/Select',
   component: Select,
   args: {
-    disabled: false,
-    required: false,
+    isDisabled: false,
+    isRequired: false,
     size: SelectSize.Medium,
     placeholder: 'Select an option',
   },
@@ -103,7 +103,7 @@ const generateOptions = (numberOfOptions = 10, generateDisabled = false) => {
     options.push({
       label: `Option ${index}`,
       value: `option${index}`,
-      ...(generateDisabled && { disabled: !(index % 2) }),
+      ...(generateDisabled && { isDisabled: !(index % 2) }),
     });
   }
   return options;
@@ -139,7 +139,7 @@ const ControlledRemoteValueTemplate = (args) => {
         value={value}
         onChange={onChange}
         placeholder={isLoading ? 'Loading...' : null}
-        disabled={disabled || isLoading}
+        isDisabled={disabled || isLoading}
       />
     </span>
   );
@@ -173,7 +173,7 @@ const ControlledRemoteOptionsAndValueTemplate = (args) => {
         value={value}
         onChange={onChange}
         placeholder={isLoading ? 'Loading...' : null}
-        disabled={disabled || isLoading}
+        isDisabled={disabled || isLoading}
       />
     </span>
   );

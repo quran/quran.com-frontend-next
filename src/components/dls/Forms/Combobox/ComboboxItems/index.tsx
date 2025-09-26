@@ -12,9 +12,9 @@ import useScroll from '@/hooks/useScrollToElement';
 interface Props {
   isOpened: boolean;
   isMultiSelect: boolean;
-  disabled: boolean;
-  fixedWidth: boolean;
-  preventSelecting: boolean;
+  isDisabled: boolean;
+  isFixedWidth: boolean;
+  shouldPreventSelecting: boolean;
   size: ComboboxSize;
   id: string;
   filteredItems: DropdownItem[];
@@ -29,16 +29,16 @@ const SCROLL_TO_SELECTED_ELEMENT_OPTIONS = {
 
 const ComboboxItems: React.FC<Props> = ({
   isOpened,
-  disabled,
+  isDisabled,
   size,
   filteredItems,
   isMultiSelect,
-  preventSelecting,
+  shouldPreventSelecting,
   emptyMessage,
   id,
   onItemSelectedChange,
   selectedValue,
-  fixedWidth,
+  isFixedWidth: fixedWidth,
 }) => {
   const [scrollToSelectedItem, selectedItemRef]: [() => void, RefObject<HTMLDivElement>] =
     useScroll(SCROLL_TO_SELECTED_ELEMENT_OPTIONS);
@@ -69,14 +69,15 @@ const ComboboxItems: React.FC<Props> = ({
               checked = true;
             }
           }
-          const isItemDisabled = disabled === true || item.disabled === true || preventSelecting;
+          const isItemDisabled =
+            isDisabled === true || item.isDisabled === true || shouldPreventSelecting;
           const itemId = `${id}-${item.id}`;
           return (
             <ComboboxItem
               onItemSelectedChange={onItemSelectedChange}
               key={itemId}
-              checked={checked}
-              disabled={isItemDisabled}
+              isChecked={checked}
+              isDisabled={isItemDisabled}
               itemId={itemId}
               selectedItemRef={selectedItemRef}
               item={item}
@@ -84,7 +85,7 @@ const ComboboxItems: React.FC<Props> = ({
           );
         })}
         {!filteredItems.length && (
-          <ComboboxItem emptyMessage={emptyMessage} checked={false} disabled isNotFound />
+          <ComboboxItem emptyMessage={emptyMessage} isChecked={false} isDisabled isNotFound />
         )}
       </div>
     </div>

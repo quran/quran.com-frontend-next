@@ -21,11 +21,11 @@ interface Props {
   body: ReactNode;
   children: ReactNode | ReactNode[];
   onOpenChange?: (open: boolean) => void;
-  open?: boolean;
+  isOpen?: boolean;
   contentSide?: ContentSide;
   contentAlign?: ContentAlign;
-  avoidCollisions?: boolean;
-  tip?: boolean;
+  shouldAvoidCollisions?: boolean;
+  hasTip?: boolean;
   openDelay?: number;
   closeDelay?: number;
 }
@@ -34,18 +34,18 @@ const HoverCard: React.FC<Props> = ({
   body,
   children,
   onOpenChange,
-  open,
+  isOpen,
   contentSide = ContentSide.BOTTOM,
   contentAlign = ContentAlign.CENTER,
-  avoidCollisions = true,
+  shouldAvoidCollisions = true,
   openDelay = 400,
   closeDelay = 300,
-  tip = true,
+  hasTip = true,
 }) => (
   <RadixHoverCard.Root
     openDelay={openDelay}
     closeDelay={closeDelay}
-    {...(typeof open !== 'undefined' && { open })}
+    {...(typeof isOpen !== 'undefined' && { open: isOpen })}
     {...(onOpenChange && { onOpenChange })}
   >
     <RadixHoverCard.Trigger asChild className={styles.trigger}>
@@ -55,11 +55,11 @@ const HoverCard: React.FC<Props> = ({
       sideOffset={2}
       side={contentSide}
       align={contentAlign}
-      avoidCollisions={avoidCollisions}
+      avoidCollisions={shouldAvoidCollisions}
       className={styles.content}
     >
       {body}
-      {tip && <RadixHoverCard.Arrow />}
+      {hasTip && <RadixHoverCard.Arrow />}
     </RadixHoverCard.Content>
   </RadixHoverCard.Root>
 );

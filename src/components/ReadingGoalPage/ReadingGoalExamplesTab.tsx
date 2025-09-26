@@ -30,9 +30,9 @@ const ReadingGoalExamplesTab: React.FC<ReadingGoalTabProps> = ({
                 dispatch({ type: 'SET_EXAMPLE', payload: { exampleKey } });
                 logClick(exampleKey);
               }}
-              selected={state.exampleKey === exampleKey}
+              isSelected={state.exampleKey === exampleKey}
               option={t(`examples.${example.i18nKey}.title`)}
-              recommended={'recommended' in example && example.recommended}
+              isRecommended={'recommended' in example && example.recommended}
               description={t(`examples.${example.i18nKey}.description`)}
             />
           );

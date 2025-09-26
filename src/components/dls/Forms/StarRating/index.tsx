@@ -4,13 +4,13 @@ import Root, { Props as RootProps } from './Root';
 import Star from './Star';
 
 interface Props extends RootProps {
-  disabled?: boolean;
+  isDisabled?: boolean;
   maximumRating?: number;
 }
 
 const StarRating: React.FC<Props> = ({
   maximumRating = 5,
-  disabled = false,
+  isDisabled = false,
   defaultValue = '1',
   value,
   ...props
@@ -29,7 +29,7 @@ const StarRating: React.FC<Props> = ({
             // @ts-ignore
             value={starValue}
             id={starValueString}
-            disabled={disabled === true}
+            disabled={isDisabled === true}
           />
         );
       })}

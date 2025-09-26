@@ -19,7 +19,7 @@ export interface Props {
   onChange?: (value: string) => void;
   value?: string;
   name?: string;
-  required?: boolean;
+  isRequired?: boolean;
   className?: string;
   children?: React.ReactNode;
 }
@@ -30,7 +30,7 @@ const Root: React.FC<Props> = ({
   defaultValue,
   value,
   name,
-  required,
+  isRequired,
   children,
 }) => {
   const direction = useDirection();
@@ -43,7 +43,7 @@ const Root: React.FC<Props> = ({
       {...(defaultValue && { defaultValue })}
       {...(value && { value })}
       {...(name && { name })}
-      {...(required && { required })}
+      {...(isRequired && { required: isRequired })}
     >
       {children}
     </RadioGroupPrimitive.Root>

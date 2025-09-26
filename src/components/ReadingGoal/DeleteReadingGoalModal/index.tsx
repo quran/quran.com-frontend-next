@@ -82,7 +82,7 @@ const DeleteReadingGoalModal = ({ isDisabled }: DeleteReadingGoalButtonProps) =>
               id="delete-goal-confirmation"
               value={confirmationText}
               onChange={setConfirmationText}
-              fixedWidth={false}
+              isFixedWidth={false}
               containerClassName={styles.inputContainer}
             />
           </Modal.Header>

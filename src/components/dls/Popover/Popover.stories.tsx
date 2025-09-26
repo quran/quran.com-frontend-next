@@ -7,11 +7,11 @@ export default {
   component: Popover,
   args: {
     contentSide: ContentSide.BOTTOM,
-    tip: false,
-    useTooltipStyles: false,
+    hasTip: false,
+    shouldUseTooltipStyles: false,
     contentAlign: ContentAlign.CENTER,
-    avoidCollisions: true,
-    open: undefined,
+    shouldAvoidCollisions: true,
+    isOpen: undefined,
     isModal: false,
   },
   argTypes: {
@@ -36,14 +36,14 @@ export default {
         category: 'Optional',
       },
     },
-    tip: {
+    hasTip: {
       control: { type: 'boolean' },
       table: {
         category: 'Optional',
       },
       description: 'Whether to show the tip arrow or not.',
     },
-    useTooltipStyles: {
+    shouldUseTooltipStyles: {
       control: { type: 'boolean' },
       defaultValue: false,
       table: {
@@ -60,7 +60,7 @@ export default {
         category: 'Optional',
       },
     },
-    avoidCollisions: {
+    shouldAvoidCollisions: {
       description: `When true, overrides the contentSide and contentAlign preferences to prevent collisions with window edges.`,
       defaultValue: true,
       control: { type: 'boolean' },
@@ -68,7 +68,7 @@ export default {
         category: 'Optional',
       },
     },
-    open: {
+    isOpen: {
       defaultValue: false,
       control: { type: 'boolean' },
       table: {
@@ -109,14 +109,14 @@ export const ControlledPopover = Template.bind({});
 ControlledPopover.args = {
   trigger: <button type="button">Clicking me will not change open/close status status</button>,
   children: Overlay,
-  open: true,
+  isOpen: true,
 };
 
 export const PopoverCollidesWithWindowEdges = Template.bind({});
 PopoverCollidesWithWindowEdges.args = {
   trigger: DefaultTrigger,
   children: Overlay,
-  avoidCollisions: false,
+  shouldAvoidCollisions: false,
   contentSide: ContentSide.LEFT,
   contentAlign: ContentAlign.END,
 };
