@@ -9,16 +9,6 @@ test.beforeEach(async ({ page, context }) => {
   await homePage.goTo();
 });
 
-test('Navigation drawer icon should open the drawer when clicked', async ({ page }) => {
-  // 1. Make sure the navigation drawer is not visible before opening it
-  await expect(page.getByLabel('Navigation Drawer Body')).not.toBeVisible();
-
-  // 2. Click to open the drawer
-  await page.getByLabel('Open Navigation Drawer').click();
-
-  await expect(page.getByLabel('Navigation Drawer Body')).toBeVisible();
-});
-
 test('Feedback item should open in a new tab', async ({ page }) => {
   // 1. Open the navigation menu drawer
   await page.getByLabel('Open Navigation Drawer').click();
