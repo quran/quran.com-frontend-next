@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
 
+import languages from '@/tests/mocks/languages';
 import Homepage from '@/tests/POM/home-page';
 
 let homePage: Homepage;
@@ -10,7 +11,7 @@ test.beforeEach(async ({ page, context }) => {
 });
 
 test(
-  'Clicking on Nav bar language selector icon should open the language selector menu',
+  'Language selector in the navbar opens and displays all languages',
   {
     tag: ['@nav', '@language', '@fast'],
   },
@@ -19,22 +20,33 @@ test(
     await expect(page.getByRole('menuitem', { name: 'English' })).not.toBeVisible();
     // 2. Click on the language selector nav bar trigger
     await page.getByTestId('language-selector-button').click();
-    // 3. Make sure the language selector items are visible
-    await expect(page.getByRole('menuitem', { name: 'English' })).toBeVisible();
-    await expect(page.getByRole('menuitem', { name: 'العربية' })).toBeVisible();
-    await expect(page.getByRole('menuitem', { name: 'বাংলা' })).toBeVisible();
-    await expect(page.getByRole('menuitem', { name: 'فارسی' })).toBeVisible();
-    await expect(page.getByRole('menuitem', { name: 'Français' })).toBeVisible();
-    await expect(page.getByRole('menuitem', { name: 'Italiano' })).toBeVisible();
-    await expect(page.getByRole('menuitem', { name: 'Dutch' })).toBeVisible();
-    await expect(page.getByRole('menuitem', { name: 'Português' })).toBeVisible();
-    await expect(page.getByRole('menuitem', { name: 'русский' })).toBeVisible();
-    await expect(page.getByRole('menuitem', { name: 'Shqip' })).toBeVisible();
-    await expect(page.getByRole('menuitem', { name: 'ภาษาไทย' })).toBeVisible();
-    await expect(page.getByRole('menuitem', { name: 'Türkçe' })).toBeVisible();
-    await expect(page.getByRole('menuitem', { name: 'اردو' })).toBeVisible();
-    await expect(page.getByRole('menuitem', { name: '简体中文' })).toBeVisible();
-    await expect(page.getByRole('menuitem', { name: 'Melayu' })).toBeVisible();
+    // 3. Make sure all language selector items are visible
+    await Promise.all(
+      languages.map(async (language) => {
+        await expect(page.getByRole('menuitem', { name: language })).toBeVisible();
+      }),
+    );
+  },
+);
+
+test(
+  'Language selector in the footer opens and displays all languages',
+  { tag: ['@footer', '@language', '@fast'] },
+  async ({ page }) => {
+    const footer = page.locator('footer');
+    const languageSelector = footer.getByTestId('language-selector');
+    await expect(languageSelector).toBeVisible();
+
+    await languageSelector.locator('button').click();
+
+    await Promise.all(
+      languages.map(async (language) => {
+        await expect(languageSelector.getByRole('menuitem', { name: language })).toBeVisible();
+      }),
+    );
+
+    // I do not verify the navigation here as it's already covered in the nav bar language selector tests
+    // (it uses the same component)
   },
 );
 
@@ -57,7 +69,7 @@ test(
 );
 
 test(
-  'Choosing a language should persist',
+  'Choosing a language should persist (though the navbar)',
   {
     tag: ['@nav', '@language', '@slow'],
   },
