@@ -1,4 +1,4 @@
-import { useCallback, useState } from 'react';
+import { JSX, useCallback, useState } from 'react';
 
 import dynamic from 'next/dynamic';
 import useTranslation from 'next-translate/useTranslation';

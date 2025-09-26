@@ -32,7 +32,7 @@ import {
 import verse3829 from 'src/data/verses/verse3829';
 
 const PATH = getBeyondRamadanNavigationUrl();
-const BeyondRamadanPage: NextPage = (): JSX.Element => {
+const BeyondRamadanPage: NextPage = () => {
   const { lang } = useTranslation();
 
   const onButtonClicked = (section: string) => {

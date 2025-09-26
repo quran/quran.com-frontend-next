@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { JSX, ReactNode } from 'react';
 
 import Popover, { ContentSide } from '@/dls/Popover';
 import Tooltip from '@/dls/Tooltip';

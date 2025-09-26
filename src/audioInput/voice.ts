@@ -1,5 +1,5 @@
 /* eslint-disable import/prefer-default-export */
-export const getAverageVolume = (analyser: AnalyserNode, volumes: Uint8Array) => {
+export const getAverageVolume = (analyser: AnalyserNode, volumes: Uint8Array<ArrayBuffer>) => {
   analyser.getByteFrequencyData(volumes);
   let values = 0;
 

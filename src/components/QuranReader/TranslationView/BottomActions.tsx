@@ -42,7 +42,7 @@ interface BottomActionsProps {
  * @param {BottomActionsProps} props - Component props
  * @returns {JSX.Element} The rendered component
  */
-const BottomActions = ({ verseKey, isTranslationView = true }: BottomActionsProps): JSX.Element => {
+const BottomActions = ({ verseKey, isTranslationView = true }: BottomActionsProps) => {
   const { t, lang } = useTranslation('common');
   const tafsirs = useSelector(selectSelectedTafsirs);
   const [chapterId, verseNumber] = getVerseAndChapterNumbersFromKey(verseKey);

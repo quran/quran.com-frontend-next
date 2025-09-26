@@ -57,7 +57,7 @@ export function useAuthContext(): AuthContextType {
  * @param {AuthProviderProps} props - Props for the AuthProvider component
  * @returns {JSX.Element} AuthProvider component
  */
-export const AuthProvider = ({ children }: AuthProviderProps): JSX.Element => {
+export const AuthProvider = ({ children }: AuthProviderProps) => {
   // Initialize auth state based on the presence of the login cookie on the client.
   // This avoids a brief unauthenticated state that can cause premature redirects.
   const [state, dispatch] = useReducer(authReducer, initialState, (init): AuthState => {

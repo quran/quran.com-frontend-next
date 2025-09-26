@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 
 import { useSelector } from '@xstate/react';
 import { useRouter } from 'next/router';
@@ -11,7 +11,7 @@ import { secondsFormatter } from '@/utils/datetime';
 import { logEvent } from '@/utils/eventLogger';
 import { AudioPlayerMachineContext } from 'src/xstate/AudioPlayerMachineContext';
 
-const AudioPlayerSlider = (): JSX.Element => {
+const AudioPlayerSlider = () => {
   const router = useRouter();
   const { locale } = router;
   const direction = useDirection();
