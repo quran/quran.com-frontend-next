@@ -34,7 +34,7 @@ interface Props {
   disabled?: boolean;
   onChange?: (value: string) => void;
   value?: string;
-  label?: string | JSX.Element;
+  label?: React.ReactNode;
   type?: TextAreaType;
   size?: TextAreaSize;
   shouldFlipOnRTL?: boolean;

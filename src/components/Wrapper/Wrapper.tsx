@@ -1,3 +1,5 @@
+import { JSX } from 'react';
+
 interface Props {
   shouldWrap: boolean;
   children: JSX.Element;
@@ -14,7 +16,7 @@ interface Props {
  * @param {Props} props
  * @returns {JSX.Element}
  */
-const Wrapper = ({ children, shouldWrap, wrapper }: Props): JSX.Element =>
+const Wrapper = ({ children, shouldWrap, wrapper }: Props) =>
   shouldWrap ? wrapper(children) : children;
 
 export default Wrapper;

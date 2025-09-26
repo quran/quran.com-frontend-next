@@ -73,7 +73,7 @@ const PageContainer: React.FC<Props> = ({
   pageIndex,
   setMushafPageToVersesMap,
   initialData,
-}: Props): JSX.Element => {
+}: Props) => {
   const pageNumber = useMemo(
     () => getPageNumberByPageIndex(pageIndex, pagesVersesRange),
     [pageIndex, pagesVersesRange],

@@ -1,4 +1,4 @@
-import React, { memo } from 'react';
+import React, { JSX, memo } from 'react';
 
 import useSWRImmutable from 'swr/immutable';
 
@@ -9,10 +9,10 @@ import { BaseResponse } from 'types/ApiResponses';
 
 interface Props {
   queryKey: string;
-  render: (data: BaseResponse) => JSX.Element;
-  renderError?: (error: any) => JSX.Element | undefined;
+  render: (data: BaseResponse) => React.ReactElement;
+  renderError?: (error: any) => React.ReactElement | undefined;
   initialData?: BaseResponse;
-  loading?: () => JSX.Element;
+  loading?: () => React.ReactElement;
   fetcher?: (queryKey: string) => Promise<BaseResponse>;
   showSpinnerOnRevalidate?: boolean;
   onFetchSuccess?: (data: BaseResponse) => void;
