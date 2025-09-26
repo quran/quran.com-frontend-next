@@ -74,7 +74,7 @@ const PageContainer: React.FC<Props> = ({
   pageIndex,
   setMushafPageToVersesMap,
   initialData,
-}: Props): JSX.Element => {
+}: Props) => {
   /**
    * HYDRATION RACE CONDITION FIX:
    *

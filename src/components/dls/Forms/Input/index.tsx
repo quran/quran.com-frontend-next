@@ -53,7 +53,7 @@ interface Props {
   inputMode?: HTMLAttributes<HTMLInputElement>['inputMode'];
   enterKeyHint?: InputHTMLAttributes<HTMLInputElement>['enterKeyHint'];
   value?: string;
-  label?: string | JSX.Element;
+  label?: React.ReactNode;
   type?: InputType;
   shouldFlipOnRTL?: boolean;
   variant?: InputVariant;

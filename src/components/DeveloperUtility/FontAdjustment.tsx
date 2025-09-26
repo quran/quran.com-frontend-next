@@ -23,7 +23,7 @@ import { QuranFont } from '@/types/QuranReader';
  *
  * @returns {JSX.Element}
  */
-const FontAdjustment = (): JSX.Element => {
+const FontAdjustment = () => {
   const dispatch = useDispatch();
   const quranReaderStyles = useSelector(selectQuranReaderStyles, shallowEqual);
   const { quranTextFontScale, quranFont, translationFontScale, tafsirFontScale } =

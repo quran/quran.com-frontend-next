@@ -14,7 +14,7 @@ export enum RadioRootOrientation {
 }
 
 export interface Props {
-  label?: string | JSX.Element;
+  label?: React.ReactNode;
   defaultValue?: string;
   onChange?: (value: string) => void;
   value?: string;

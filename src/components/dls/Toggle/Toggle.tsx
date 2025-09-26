@@ -10,7 +10,7 @@ interface Props {
   checked?: boolean;
   disabled?: boolean;
   required?: boolean;
-  label?: string | JSX.Element;
+  label?: React.ReactNode;
   name?: string;
   defaultChecked?: boolean;
 }
