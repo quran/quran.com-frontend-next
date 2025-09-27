@@ -69,24 +69,22 @@ test(
 );
 
 test(
-  'Choosing a language should persist (though the navbar)',
-  {
-    tag: ['@nav', '@language', '@slow'],
-  },
+  'HTML lang attribute is set correctly based on the selected language',
+  { tag: ['@nav', '@language', '@slow'] },
   async ({ page }) => {
-    // 1. Open the language selector menu (use same selector que les autres tests)
+    // 1. Make sure the lang attribute is set to en on the homepage
+    await expect(page.locator('html')).toHaveAttribute('lang', 'en');
+
+    // 2. Open the language selector menu
     await page.getByTestId('language-selector-button').click();
 
-    // 2. select Arabic and wait for navigation to /ar
+    // 3. select French and wait for navigation to /fr
     await Promise.all([
-      page.waitForURL('**/ar'),
-      page.getByRole('menuitem', { name: 'العربية' }).click(),
+      page.waitForURL('**/fr', { waitUntil: 'networkidle' }),
+      page.getByRole('menuitem', { name: 'Français' }).click(),
     ]);
 
-    await page.waitForTimeout(2000); // wait a bit for the page to settle after the language change
-
-    // 3. Navigate again to / and assert redirect/persistence to /ar
-    await page.goto('/');
-    await expect(page).toHaveURL(/\/ar/);
+    // 4. Make sure the lang attribute is set to fr
+    await expect(page.locator('html')).toHaveAttribute('lang', 'fr');
   },
 );

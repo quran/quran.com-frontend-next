@@ -45,6 +45,21 @@ test(
 );
 
 test(
+  'Clicking outside the drawer should close it',
+  { tag: ['@fast', '@drawer'] },
+  async ({ page }) => {
+    // 1. Open the navigation menu drawer
+    await page.getByTestId('open-navigation-drawer').click();
+
+    // 2. Click outside the drawer
+    await page.click('body');
+
+    // 3. Make sure the navigation drawer is no longer visible
+    await expect(page.getByTestId('navigation-drawer-body')).not.toBeVisible();
+  },
+);
+
+test(
   'Functional navigation links in the drawer',
   { tag: ['@fast', '@drawer'] },
   async ({ page }) => {

@@ -149,7 +149,11 @@ const ChapterAndJuzList: React.FC<ChapterAndJuzListProps> = ({
       >
         {view === View.Surah &&
           sortedChapters.map((chapter) => (
-            <div className={styles.chapterContainer} key={chapter.id}>
+            <div
+              className={styles.chapterContainer}
+              key={chapter.id}
+              data-testid={`chapter-${chapter.id}-container`}
+            >
               <Link
                 href={`/${chapter.id}`}
                 shouldPrefetch={MOST_VISITED_CHAPTERS[Number(chapter.id)] === true}
