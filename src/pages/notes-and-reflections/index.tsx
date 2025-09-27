@@ -7,7 +7,6 @@ import withAuth from '@/components/Auth/withAuth';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import NotesTabs from '@/components/Notes/NotesPage/Tabs';
 import layoutStyles from '@/pages/index.module.scss';
-import { getAllChaptersData } from '@/utils/chapter';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl, getNotesNavigationUrl } from '@/utils/navigation';
 import withSsrRedux from '@/utils/withSsrRedux';
@@ -36,17 +35,6 @@ const NotesAndReflectionsPage = () => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = withSsrRedux(
-  '/notes-and-reflections',
-  async ({ locale }) => {
-    const allChaptersData = await getAllChaptersData(locale);
-
-    return {
-      props: {
-        chaptersData: allChaptersData,
-      },
-    };
-  },
-);
+export const getServerSideProps: GetServerSideProps = withSsrRedux('/notes-and-reflections');
 
 export default withAuth(NotesAndReflectionsPage);

@@ -13,7 +13,7 @@ import { getQuranReaderStylesInitialState } from '@/redux/defaultSettings/util';
 import Language from '@/types/Language';
 import { QuranReaderDataType } from '@/types/QuranReader';
 import { getDefaultWordFields, getMushafId } from '@/utils/api';
-import { getAllChaptersData, getChapterData } from '@/utils/chapter';
+import { getChapterData } from '@/utils/chapter';
 import { getLanguageAlternates, toLocalizedNumber, toLocalizedVersesRange } from '@/utils/locale';
 import { getCanonicalUrl, getVerseNavigationUrl } from '@/utils/navigation';
 import getPlainTranslationText from '@/utils/plainTranslationText';
@@ -85,7 +85,8 @@ export const getServerSideProps: GetServerSideProps = withSsrRedux(
       if (sluggedChapterId) {
         chapterIdOrSlug = sluggedChapterId;
       }
-      const chaptersData = await getAllChaptersData(locale);
+      // chaptersData is injected by withSsrRedux
+      const { chaptersData } = (context as any).props || {};
       // 2. make sure that verse id/range are valid before calling BE to get the verses.
       if (
         !isValidVerseId(chaptersData, chapterIdOrSlug, verseIdOrRange) &&

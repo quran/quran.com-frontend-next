@@ -2,7 +2,6 @@ import { NextPage, GetServerSideProps } from 'next';
 
 import withAuth from '@/components/Auth/withAuth';
 import ReadingProgressPage from '@/components/ReadingProgressPage';
-import { getAllChaptersData } from '@/utils/chapter';
 import withSsrRedux from '@/utils/withSsrRedux';
 
 const ReadingGoalProgressPage: NextPage = () => {
@@ -10,16 +9,6 @@ const ReadingGoalProgressPage: NextPage = () => {
   return <ReadingProgressPage />;
 };
 
-export const getServerSideProps: GetServerSideProps = withSsrRedux(
-  '/reading-goal/progress',
-  async ({ locale }) => {
-    const allChaptersData = await getAllChaptersData(locale);
-    return {
-      props: {
-        chaptersData: allChaptersData,
-      },
-    };
-  },
-);
+export const getServerSideProps: GetServerSideProps = withSsrRedux('/reading-goal/progress');
 
 export default withAuth(ReadingGoalProgressPage);

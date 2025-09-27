@@ -4,7 +4,6 @@ import useTranslation from 'next-translate/useTranslation';
 import withAuth from '@/components/Auth/withAuth';
 import CoursesPageLayout from '@/components/Course/CoursesPageLayout';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
-import { getAllChaptersData } from '@/utils/chapter';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl, getMyCoursesNavigationUrl } from '@/utils/navigation';
 import withSsrRedux from '@/utils/withSsrRedux';
@@ -25,18 +24,6 @@ const MyLearningPlanPage: NextPage = () => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = withSsrRedux(
-  '/my-learning-plans',
-  async (context) => {
-    const { locale } = context;
-    const allChaptersData = await getAllChaptersData(locale);
-
-    return {
-      props: {
-        chaptersData: allChaptersData,
-      },
-    };
-  },
-);
+export const getServerSideProps: GetServerSideProps = withSsrRedux('/my-learning-plans');
 
 export default withAuth(MyLearningPlanPage);

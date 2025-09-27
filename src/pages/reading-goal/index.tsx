@@ -14,7 +14,6 @@ import NextSeoWrapper from '@/components/NextSeoWrapper';
 import ReadingGoalOnboarding from '@/components/ReadingGoalPage';
 import Spinner from '@/dls/Spinner/Spinner';
 import useGetStreakWithMetadata from '@/hooks/auth/useGetStreakWithMetadata';
-import { getAllChaptersData } from '@/utils/chapter';
 import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl, getReadingGoalNavigationUrl } from '@/utils/navigation';
 import withSsrRedux from '@/utils/withSsrRedux';
@@ -53,16 +52,6 @@ const ReadingGoalPage: NextPage = () => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = withSsrRedux(
-  '/reading-goal',
-  async ({ locale }) => {
-    const allChaptersData = await getAllChaptersData(locale);
-    return {
-      props: {
-        chaptersData: allChaptersData,
-      },
-    };
-  },
-);
+export const getServerSideProps: GetServerSideProps = withSsrRedux('/reading-goal');
 
 export default withAuth(ReadingGoalPage);

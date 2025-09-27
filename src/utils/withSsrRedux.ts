@@ -3,7 +3,11 @@ import { ParsedUrlQuery } from 'querystring';
 
 import { GetServerSidePropsContext, GetServerSidePropsResult } from 'next';
 
+import { logError } from '@/lib/newrelic';
+import { logErrorToSentry } from '@/lib/sentry';
 import getStore from '@/redux/store';
+import Language from '@/types/Language';
+import { getAllChaptersData } from '@/utils/chapter';
 import { performLanguageDetection } from '@/utils/serverSideLanguageDetection';
 import { GetSsrPropsWithRedux } from '@/utils/withSsrRedux.types';
 
@@ -33,8 +37,20 @@ const withSsrRedux =
       languageResult.detectedCountry,
     );
 
+    // Prefetch chaptersData so it is available inside page-level getServerSideProps logic.
+    let chaptersData: any;
+    let chaptersDataFailed = false;
+    try {
+      chaptersData = await getAllChaptersData(context.locale || Language.EN);
+    } catch (e) {
+      logErrorToSentry(e);
+      logError(e);
+      chaptersDataFailed = true;
+      chaptersData = [];
+    }
+
     const result = getSsrProps
-      ? await getSsrProps({ ...context, store }, languageResult)
+      ? await getSsrProps({ ...context, store, chaptersData }, languageResult)
       : { props: {} };
 
     if ('props' in result) {
@@ -42,6 +58,8 @@ const withSsrRedux =
         ...result,
         props: {
           ...result.props,
+          chaptersData, // enforce single source of truth
+          ...(chaptersDataFailed && { chaptersDataFailed: true }),
           [REDUX_STATE_PROP_NAME]: store.getState(),
           ...(languageResult.countryLanguagePreference && {
             countryLanguagePreference: languageResult.countryLanguagePreference,

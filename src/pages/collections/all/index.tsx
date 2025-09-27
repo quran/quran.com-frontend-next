@@ -10,7 +10,6 @@ import { isLoggedIn } from '@/utils/auth/login';
 import { logValueChange } from '@/utils/eventLogger';
 import withSsrRedux from '@/utils/withSsrRedux';
 import { makeAllCollectionsItemsUrl } from 'src/utils/auth/apiPaths';
-import { getAllChaptersData } from 'src/utils/chapter';
 import { CollectionDetailSortOption } from 'types/CollectionSortOptions';
 
 const CollectionDetailPage = () => {
@@ -63,17 +62,6 @@ const CollectionDetailPage = () => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = withSsrRedux(
-  '/collections/all',
-  async ({ locale }) => {
-    const allChaptersData = await getAllChaptersData(locale);
-
-    return {
-      props: {
-        chaptersData: allChaptersData,
-      },
-    };
-  },
-);
+export const getServerSideProps: GetServerSideProps = withSsrRedux('/collections/all');
 
 export default withAuth(CollectionDetailPage);

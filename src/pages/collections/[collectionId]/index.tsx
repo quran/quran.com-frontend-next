@@ -8,7 +8,6 @@ import BookmarkType from '@/types/BookmarkType';
 import { logValueChange } from '@/utils/eventLogger';
 import withSsrRedux from '@/utils/withSsrRedux';
 import { makeGetBookmarkByCollectionId } from 'src/utils/auth/apiPaths';
-import { getAllChaptersData } from 'src/utils/chapter';
 import { CollectionDetailSortOption } from 'types/CollectionSortOptions';
 
 const CollectionDetailPage = () => {
@@ -55,18 +54,6 @@ const CollectionDetailPage = () => {
   );
 };
 
-export const getServerSideProps: GetServerSideProps = withSsrRedux(
-  '/collections/[collectionId]',
-  async (context) => {
-    const { locale } = context;
-    const allChaptersData = await getAllChaptersData(locale);
-
-    return {
-      props: {
-        chaptersData: allChaptersData,
-      },
-    };
-  },
-);
+export const getServerSideProps: GetServerSideProps = withSsrRedux('/collections/[collectionId]');
 
 export default CollectionDetailPage;

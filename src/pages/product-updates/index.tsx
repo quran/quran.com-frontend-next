@@ -13,7 +13,6 @@ import { getProductUpdatesPage } from '@/components/Sanity/utils';
 import { logError } from '@/lib/newrelic';
 import { executeGroqQuery } from '@/lib/sanity';
 import { logErrorToSentry } from '@/lib/sentry';
-import { getAllChaptersData } from '@/utils/chapter';
 import { getCanonicalUrl, getProductUpdatesUrl } from '@/utils/navigation';
 import withSsrRedux from '@/utils/withSsrRedux';
 import { Course } from 'types/auth/Course';
@@ -47,16 +46,13 @@ const ProductUpdatesPage: NextPage<Props> = ({ pages }) => {
 export const getServerSideProps: GetServerSideProps = withSsrRedux(
   '/product-updates',
   async (context) => {
-    const { locale } = context;
     try {
       const pages = await executeGroqQuery(
         '*[_type == "productUpdate"]| order(date desc){ title, slug, mainPhoto, date, summary }',
       );
-      const chaptersData = await getAllChaptersData(locale);
       return {
         props: {
           pages,
-          chaptersData,
         },
       };
     } catch (error) {
