@@ -9,6 +9,7 @@ import styles from '@/components/QuranReader/TranslationView/TranslationViewCell
 import Button, { ButtonShape, ButtonSize, ButtonType, ButtonVariant } from '@/dls/Button/Button';
 import EmptyNotesIcon from '@/icons/notes-empty.svg';
 import NotesIcon from '@/icons/notes-filled.svg';
+import { logErrorToSentry } from '@/lib/sentry';
 import { isLoggedIn } from '@/utils/auth/login';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getChapterWithStartingVerseUrl, getLoginNavigationUrl } from '@/utils/navigation';
@@ -44,7 +45,8 @@ const VerseNotes = ({ verseKey, isTranslationView, hasNotes }: VerseNotesProps) 
 
       try {
         router.push(getLoginNavigationUrl(getChapterWithStartingVerseUrl(verseKey)));
-      } catch {
+      } catch (e) {
+        logErrorToSentry(e);
         // If there's an error parsing the verseKey, navigate to chapter 1
         router.push(getLoginNavigationUrl('/1'));
       }

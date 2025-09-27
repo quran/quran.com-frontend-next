@@ -7,6 +7,7 @@ import styles from './ResetButton.module.scss';
 
 import Button from '@/dls/Button/Button';
 import { ToastStatus, useToast } from '@/dls/Toast/Toast';
+import { logErrorToSentry } from '@/lib/sentry';
 import { resetDefaultSettings } from '@/redux/slices/defaultSettings';
 import { logButtonClick } from '@/utils/eventLogger';
 import QueryParam from 'types/QueryParam';
@@ -39,7 +40,8 @@ const ResetButton = () => {
     try {
       await dispatch(resetDefaultSettings(lang)).then(unwrapResult);
       cleanupUrlAndShowSuccess();
-    } catch {
+    } catch (e) {
+      logErrorToSentry(e);
       toast(t('error.general'), { status: ToastStatus.Error });
     }
   };

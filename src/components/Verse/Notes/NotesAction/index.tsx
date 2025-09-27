@@ -9,6 +9,7 @@ import useCountRangeNotes from '@/hooks/auth/useCountRangeNotes';
 import useSafeTimeout from '@/hooks/useSafeTimeout';
 import EmptyNotesIcon from '@/icons/notes-empty.svg';
 import NotesIcon from '@/icons/notes-filled.svg';
+import { logErrorToSentry } from '@/lib/sentry';
 import Verse from '@/types/Verse';
 import { isLoggedIn } from '@/utils/auth/login';
 import { logButtonClick, logEvent } from '@/utils/eventLogger';
@@ -39,7 +40,8 @@ const NotesAction: React.FC<Props> = ({ verse, onActionTriggered }) => {
 
       try {
         router.push(getLoginNavigationUrl(getChapterWithStartingVerseUrl(verse.verseKey)));
-      } catch {
+      } catch (e) {
+        logErrorToSentry(e);
         // If there's an error parsing the verseKey, navigate to chapter 1
         router.push(getLoginNavigationUrl('/1'));
       }
