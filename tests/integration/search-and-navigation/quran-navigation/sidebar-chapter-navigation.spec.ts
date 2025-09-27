@@ -122,6 +122,7 @@ test.describe('Quran Structure Navigation', () => {
   );
 });
 
+// eslint-disable-next-line react-func/max-lines-per-function
 test.describe('Navigation Functionality', () => {
   test(
     'All navigation options navigate to correct URLs',
@@ -143,6 +144,7 @@ test.describe('Navigation Functionality', () => {
       // 3. Now click on the "Verse" button
       const verseButton = page.getByTestId('verse-button');
       await verseButton.click();
+      await page.waitForTimeout(1500); // wait for the verse list to be populated
 
       // 4. Click on verse 128 and ensure we are navigated to /9?startingVerse=128
       const verseList = page.getByTestId('verse-list');
@@ -156,6 +158,7 @@ test.describe('Navigation Functionality', () => {
       // 5. Now click on the "Juz" button
       const juzButton = page.getByTestId('juz-button');
       await juzButton.click();
+      await page.waitForTimeout(1500); // wait for the verse list to be populated
 
       // 6. Click on Juz 18 and ensure we are navigated to /juz/18
       await navigationList.getByText('Juz 18').click();
@@ -168,6 +171,7 @@ test.describe('Navigation Functionality', () => {
       // 7. Now click on the "Page" button
       const pageButton = page.getByTestId('page-button');
       await pageButton.click();
+      await page.waitForTimeout(1500); // wait for the verse list to be populated
 
       // 8. Click on Page 100 and ensure we are navigated to /page/100
       await navigationList.getByText('Page 100').click();

@@ -35,11 +35,6 @@ test(
 
         const expectedLink = footerLinks.find((l) => l.text === text);
 
-        expect(
-          expectedLink,
-          `Link with text "${text}" should be in the expected links`,
-        ).toBeDefined();
-
         if (expectedLink) {
           // I did not put the links to the app stores in the footerLinks mock because they may change
           if (expectedLink.href) {

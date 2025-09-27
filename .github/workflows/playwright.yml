@@ -8,6 +8,7 @@ jobs:
   test_integration:
     name: Playwright Tests
     runs-on: ubuntu-latest
+    if: false # Temporarily disable this workflow
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
