@@ -15,13 +15,13 @@ test(
   { tag: ['@fast', '@drawer'] },
   async ({ page }) => {
     // Make sure the navigation drawer is not visible before opening it
-    await expect(page.getByLabel('Navigation Drawer Body')).not.toBeVisible();
+    await expect(page.getByTestId('navigation-drawer-body')).not.toBeVisible();
 
     // Click to open the drawer
-    await page.getByLabel('Open Navigation Drawer').click();
+    await page.getByTestId('open-navigation-drawer').click();
 
     // Verify that the drawer is now visible
-    await expect(page.getByLabel('Navigation Drawer Body')).toBeVisible();
+    await expect(page.getByTestId('navigation-drawer-body')).toBeVisible();
   },
 );
 
@@ -31,16 +31,16 @@ test(
 
   async ({ page }) => {
     // 1. Open the navigation menu drawer
-    await page.getByLabel('Open Navigation Drawer').click();
+    await page.getByTestId('open-navigation-drawer').click();
 
     // 2. Make sure the navigation drawer is visible after opening it
-    await expect(page.getByLabel('Navigation Drawer Body')).toBeVisible();
+    await expect(page.getByTestId('navigation-drawer-body')).toBeVisible();
 
     // 3. Click on the close drawer button
     await page.getByLabel('Close Drawer').first().click();
 
     // 4. Make sure the navigation drawer is no longer visible after closing it
-    await expect(page.getByLabel('Navigation Drawer Body')).not.toBeVisible();
+    await expect(page.getByTestId('navigation-drawer-body')).not.toBeVisible();
   },
 );
 
@@ -49,11 +49,11 @@ test(
   { tag: ['@fast', '@drawer'] },
   async ({ page }) => {
     // Open the navigation drawer
-    await page.getByLabel('Open Navigation Drawer').click();
-    await expect(page.getByLabel('Navigation Drawer Body')).toBeVisible();
+    await page.getByTestId('open-navigation-drawer').click();
+    await expect(page.getByTestId('navigation-drawer-body')).toBeVisible();
 
     // Check that the links in the drawer are working
-    const drawer = page.getByLabel('Navigation Drawer Body');
+    const drawer = page.getByTestId('navigation-drawer-body');
     const allLinks = drawer.locator('a');
 
     await Promise.all(
@@ -98,10 +98,10 @@ test(
     );
 
     // Open the navigation drawer
-    await page.getByLabel('Open Navigation Drawer').click();
-    await expect(page.getByLabel('Navigation Drawer Body')).toBeVisible();
+    await page.getByTestId('open-navigation-drawer').click();
+    await expect(page.getByTestId('navigation-drawer-body')).toBeVisible();
 
-    const drawer = page.getByLabel('Navigation Drawer Body');
+    const drawer = page.getByTestId('navigation-drawer-body');
     const androidLink = await drawer
       .getByRole('link', { name: 'Quran For Android' })
       .getAttribute('href');
@@ -120,10 +120,10 @@ test(
   { tag: ['@slow', '@drawer'] },
   async ({ page }) => {
     // 1. Open the navigation menu drawer
-    await page.getByLabel('Open Navigation Drawer').click();
+    await page.getByTestId('open-navigation-drawer').click();
 
     // Wait for the drawer body to be fully visible
-    await expect(page.getByLabel('Navigation Drawer Body')).toBeVisible();
+    await expect(page.getByTestId('navigation-drawer-body')).toBeVisible();
 
     // 2. Click on the donate monthly button
     await page.getByText('Donate monthly').click();

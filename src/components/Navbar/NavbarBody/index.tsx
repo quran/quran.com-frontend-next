@@ -74,6 +74,7 @@ const NavbarBody: React.FC = () => {
               shape={ButtonShape.Circle}
               onClick={openNavigationDrawer}
               ariaLabel={t('aria.nav-drawer-open')}
+              data-testid="open-navigation-drawer"
             >
               <IconMenu />
             </Button>
