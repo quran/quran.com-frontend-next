@@ -8,7 +8,8 @@ require('dotenv').config();
 const MAX_RETRIES = process.env.CI ? 2 : 0; // 2 retries on CI, 0 retry locally
 
 const botTokenEnv = process.env.DISCORD_BOT_TOKEN;
-const channelIdEnv = process.env.DISCORD_CHANNEL_ID;
+const channelIdEnv = process.env.DISCORD_CHANNEL_ID; // Channel ID to send messages to
+const notificationRoleIdEnv = process.env.DISCORD_NOTIFICATION_ROLE_ID; // Optional role to ping on failures
 
 // Validate Discord bot configuration
 function validateBotConfig() {
@@ -22,7 +23,11 @@ function validateBotConfig() {
     return null;
   }
 
-  return { botToken: botTokenEnv, channelId: channelIdEnv };
+  return {
+    botToken: botTokenEnv,
+    channelId: channelIdEnv,
+    notificationRoleId: notificationRoleIdEnv,
+  };
 }
 
 // Send message using bot
@@ -82,6 +87,35 @@ async function editBotMessage(channelId, messageId, payload) {
     return true;
   } catch (err) {
     console.error(`Bot edit error: ${err}`);
+    return false;
+  }
+}
+
+// Delete message using bot
+async function deleteBotMessage(channelId, messageId) {
+  const config = validateBotConfig();
+  if (!config) return false;
+
+  try {
+    const res = await fetch(
+      `https://discord.com/api/v10/channels/${channelId}/messages/${messageId}`,
+      {
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bot ${config.botToken}`,
+        },
+      },
+    );
+
+    if (!res.ok) {
+      const text = await res.text().catch(() => '');
+      console.error(`Bot delete error: ${res.status} ${res.statusText}${text ? ` - ${text}` : ''}`);
+      return false;
+    }
+
+    return true;
+  } catch (err) {
+    console.error(`Bot delete error: ${err}`);
     return false;
   }
 }
@@ -217,6 +251,8 @@ class DiscordReporter {
     this.failedTests = 0;
     this.skippedTests = 0;
     this.startTime = null;
+    this.hasFailures = false;
+    this.roleNotificationSent = false;
   }
 
   // Determine if a test failure should trigger a notification
@@ -297,7 +333,6 @@ class DiscordReporter {
     if (!this.config) return;
 
     // Update progress counters
-
     switch (result.status) {
       case 'passed':
         this.passedTests += 1;
@@ -308,6 +343,7 @@ class DiscordReporter {
         if (DiscordReporter.shouldNotify(test, result)) {
           this.failedTests += 1;
           this.completedTests += 1;
+          this.hasFailures = true;
         }
         break;
       case 'skipped':
@@ -324,7 +360,7 @@ class DiscordReporter {
     // Handle test failures
     if (!DiscordReporter.shouldNotify(test, result)) return;
 
-    // Create failures thread on first failure
+    // Create failures thread on first failure and send role notification
     if (!this.failuresThreadId && this.progressMessageId) {
       const now = new Date();
       const threadName = `❌ Test Failures - ${now.toLocaleDateString()} ${now
@@ -339,9 +375,17 @@ class DiscordReporter {
       );
 
       if (this.failuresThreadId) {
+        // Send initial message to thread with optional role ping
+        let threadContent =
+          '🚨 **Test Failures Thread**\nAll failed tests will be posted here to keep the main channel clean.';
+
+        if (this.config.notificationRoleId && !this.roleNotificationSent) {
+          threadContent = `<@&${this.config.notificationRoleId}> ${threadContent}`;
+          this.roleNotificationSent = true;
+        }
+
         await sendToThread(this.failuresThreadId, {
-          content:
-            '🚨 **Test Failures Thread**\nAll failed tests will be posted here to keep the main channel clean.',
+          content: threadContent,
         });
       }
     }
@@ -382,25 +426,39 @@ class DiscordReporter {
     const totalTime = Math.round((Date.now() - this.startTime) / 1000);
     const allPassed = this.failedTests === 0;
 
-    const embed = {
-      title: allPassed ? '✅ All Tests Passed!' : '❌ Tests Completed with Failures',
-      description: `Finished running ${this.totalTests} tests in ${formatTime(totalTime)}`,
-      color: allPassed ? 0x2ecc71 : 0xe74c3c,
-      fields: [
-        {
-          name: 'Final Results',
-          value: createProgressBar(this.totalTests, this.totalTests),
-          inline: false,
-        },
-        { name: '✅ Passed', value: String(this.passedTests), inline: true },
-        { name: '❌ Failed', value: String(this.failedTests), inline: true },
-        { name: '⏭️ Skipped', value: String(this.skippedTests), inline: true },
-        { name: '⏱️ Total Time', value: formatTime(totalTime), inline: true },
-      ],
-      timestamp: new Date().toISOString(),
-    };
+    if (allPassed) {
+      // All tests passed - delete the progress message to keep channel clean
+      console.log('All tests passed - deleting progress message to keep channel clean');
+      await deleteBotMessage(this.config.channelId, this.progressMessageId);
+    } else {
+      // Tests failed - update the message with final results (keep it for visibility)
+      const embed = {
+        title: '❌ Tests Completed with Failures',
+        description: `Finished running ${this.totalTests} tests in ${formatTime(totalTime)}`,
+        color: 0xe74c3c,
+        fields: [
+          {
+            name: 'Final Results',
+            value: createProgressBar(this.totalTests, this.totalTests),
+            inline: false,
+          },
+          { name: '✅ Passed', value: String(this.passedTests), inline: true },
+          { name: '❌ Failed', value: String(this.failedTests), inline: true },
+          { name: '⏭️ Skipped', value: String(this.skippedTests), inline: true },
+          { name: '⏱️ Total Time', value: formatTime(totalTime), inline: true },
+          {
+            name: '🧵 Details',
+            value: this.failuresThreadId
+              ? `Check the thread below for detailed failure information`
+              : 'Failed tests were posted above',
+            inline: false,
+          },
+        ],
+        timestamp: new Date().toISOString(),
+      };
 
-    await editBotMessage(this.config.channelId, this.progressMessageId, { embeds: [embed] });
+      await editBotMessage(this.config.channelId, this.progressMessageId, { embeds: [embed] });
+    }
   }
 }
 

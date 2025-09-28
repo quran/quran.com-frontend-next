@@ -15,6 +15,7 @@ Set the following environment variables for the Discord reporter to work:
 ```
 DISCORD_BOT_TOKEN=<your bot token>
 DISCORD_CHANNEL_ID=<the Discord channel ID where the bot should send messages>
+DISCORD_NOTIFICATION_ROLE_ID=<optional: role ID to mention if there are test failures>
 ```
 
 ## Usage
