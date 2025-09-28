@@ -7,22 +7,22 @@ require('dotenv').config();
 
 const MAX_RETRIES = process.env.CI ? 2 : 0; // 2 retries on CI, 0 retry locally
 
+const botTokenEnv = process.env.DISCORD_BOT_TOKEN;
+const channelIdEnv = process.env.DISCORD_CHANNEL_ID;
+
 // Validate Discord bot configuration
 function validateBotConfig() {
-  const botToken = process.env.DISCORD_BOT_TOKEN;
-  const channelId = process.env.DISCORD_CHANNEL_ID;
-
-  if (!botToken) {
+  if (!botTokenEnv) {
     console.error('DiscordReporter: DISCORD_BOT_TOKEN environment variable is required');
     return null;
   }
 
-  if (!channelId) {
+  if (!channelIdEnv) {
     console.error('DiscordReporter: DISCORD_CHANNEL_ID environment variable is required');
     return null;
   }
 
-  return { botToken, channelId };
+  return { botToken: botTokenEnv, channelId: channelIdEnv };
 }
 
 // Send message using bot
@@ -167,9 +167,14 @@ function stripAnsiCodes(str) {
 
 // Create a simple text-based progress bar
 function createProgressBar(completed, total, width = 20) {
-  const percentage = Math.round((completed / total) * 100);
-  const filledBars = Math.round((completed / total) * width);
-  const emptyBars = width - filledBars;
+  if (!total || total <= 0) {
+    return `${'░'.repeat(Math.max(0, width))} 0% (0/0)`;
+  }
+
+  const ratio = Math.min(1, Math.max(0, completed / total));
+  const percentage = Math.round(ratio * 100);
+  const filledBars = Math.round(ratio * width);
+  const emptyBars = Math.max(0, width - filledBars);
   const progressBar = '█'.repeat(filledBars) + '░'.repeat(emptyBars);
   return `${progressBar} ${percentage}% (${completed}/${total})`;
 }
@@ -217,7 +222,7 @@ class DiscordReporter {
   // Determine if a test failure should trigger a notification
   static shouldNotify(test, result) {
     if (result.status === 'passed' || result.status === 'skipped') return false;
-    const isLastRetry = result.retry === (process.env.CI ? MAX_RETRIES - 1 : 0);
+    const isLastRetry = result.retry === MAX_RETRIES;
     return isLastRetry;
   }
 
@@ -292,17 +297,22 @@ class DiscordReporter {
     if (!this.config) return;
 
     // Update progress counters
-    this.completedTests += 1;
 
     switch (result.status) {
       case 'passed':
         this.passedTests += 1;
+        this.completedTests += 1;
         break;
       case 'failed':
-        this.failedTests += 1;
+        // Only count as failed if it's last retry
+        if (DiscordReporter.shouldNotify(test, result)) {
+          this.failedTests += 1;
+          this.completedTests += 1;
+        }
         break;
       case 'skipped':
         this.skippedTests += 1;
+        this.completedTests += 1;
         break;
       default:
         break;

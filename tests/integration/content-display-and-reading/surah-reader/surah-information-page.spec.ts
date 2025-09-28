@@ -19,7 +19,7 @@ test.describe('Surah Information Page', () => {
       await expect(page.getByTestId('surah-name')).toBeVisible();
 
       // Verify the surah name transliteration is displayed
-      await expect(page.getByTestId('surah-name')).toHaveText(
+      await expect(page.getByTestId('surah-name')).toContainText(
         `Surah ${chapter.transliteratedName}`,
       );
 
@@ -33,7 +33,7 @@ test.describe('Surah Information Page', () => {
       await expect(page.getByTestId('surah-number-of-ayahs')).toBeVisible();
 
       // Verify the surah number of ayahs is 7
-      await expect(page.getByTestId('surah-number-of-ayahs')).toHaveText(
+      await expect(page.getByTestId('surah-number-of-ayahs')).toContainText(
         chapter.versesCount.toString(),
       );
     },

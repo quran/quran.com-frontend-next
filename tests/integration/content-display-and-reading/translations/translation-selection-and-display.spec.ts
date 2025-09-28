@@ -79,14 +79,16 @@ test.describe('Translation Display and Persistence', () => {
       await settingsBody.getByText(mockTranslationSaheeh().resourceName).click(); // check
       await settingsBody.getByText(mockTranslationHamidullah().resourceName).click(); // check
 
-      // Wait a few milliseconds to ensure the click is registered
-      await page.waitForTimeout(500);
+      // Wait for the selection to take effect: Khattab hidden, Saheeh and Hamidullah visible
+      const firstVerse = page.getByTestId('verse-1:1');
+      await expect(firstVerse.getByText(mockTranslationKhattab().text)).not.toBeVisible();
+      await expect(firstVerse.getByText(mockTranslationSaheeh().text)).toBeVisible();
+      await expect(firstVerse.getByText(mockTranslationHamidullah().text)).toBeVisible();
 
       // 4. reload the page
       await page.goto('/1', { waitUntil: 'networkidle' });
 
       // 5. check if verse 1:1 has the selected translations
-      const firstVerse = page.getByTestId('verse-1:1');
       await expect(firstVerse.getByText(mockTranslationKhattab().text)).not.toBeVisible(); // Dr. Mustafa Khattab should not be visible (we unchecked it)
       await expect(firstVerse.getByText(mockTranslationSaheeh().text)).toBeVisible(); // Saheeh International
       await expect(firstVerse.getByText(mockTranslationHamidullah().text)).toBeVisible(); // Muhammad Hamidullah

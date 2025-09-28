@@ -36,9 +36,7 @@ test(
     tag: ['@navbar', '@search'],
   },
   async ({ page, isMobile }) => {
-    if (isMobile) {
-      test.skip(); // This test is not applicable for mobile
-    }
+    test.skip(isMobile, "This test is not applicable for mobile as there's no Escape key");
 
     // Open the search drawer first
     await page.getByTestId('open-search-drawer').click();
@@ -58,9 +56,10 @@ test(
     tag: ['@navbar', '@search'],
   },
   async ({ page, isMobile }) => {
-    if (isMobile) {
-      test.skip(); // This test is not applicable for mobile as the drawer is full screen
-    }
+    test.skip(
+      isMobile,
+      'This test is skipped on mobile as the drawer takes the full screen, so clicking outside is not possible.',
+    );
 
     // Open the search drawer first
     await page.getByTestId('open-search-drawer').click();

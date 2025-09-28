@@ -48,7 +48,12 @@ test(
 test(
   'Clicking outside the drawer should close it',
   { tag: ['@fast', '@drawer'] },
-  async ({ page }) => {
+  async ({ page, isMobile }) => {
+    test.skip(
+      isMobile,
+      'This test is skipped on mobile as the drawer takes the full screen, so clicking outside is not possible.',
+    );
+
     // 1. Open the navigation menu drawer
     await page.getByTestId('open-navigation-drawer').click();
 

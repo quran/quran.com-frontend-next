@@ -9,6 +9,7 @@ test.beforeEach(async ({ page, context }) => {
   await homePage.goTo('/search');
 });
 
+// eslint-disable-next-line react-func/max-lines-per-function
 test.describe('Dedicated Search Page', () => {
   test(
     'Search for Juz from dedicated search page works correctly',
@@ -36,8 +37,9 @@ test.describe('Dedicated Search Page', () => {
       await expect(popularSearchesSection).toBeVisible();
 
       // 2. Make sure there's at least one popular search (one children to the popular searches section)
-      const itemCount = await popularSearchesSection.count();
-      expect(itemCount).toBeGreaterThanOrEqual(1);
+      const popularItems = popularSearchesSection.locator('li, a');
+      const itemCount = await popularItems.count();
+      expect(itemCount).toBeGreaterThan(0);
     },
   );
 

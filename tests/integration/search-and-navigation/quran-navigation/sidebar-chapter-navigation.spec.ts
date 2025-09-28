@@ -1,4 +1,4 @@
-import { test, expect, Page } from '@playwright/test';
+import { test, expect } from '@playwright/test';
 
 import Homepage from '@/tests/POM/home-page';
 
@@ -125,9 +125,9 @@ test.describe('Quran Structure Navigation', () => {
 // eslint-disable-next-line react-func/max-lines-per-function
 test.describe('Navigation Functionality', () => {
   test(
-    'All navigation options navigate to correct URLs',
-    { tag: ['@slow', '@navigation', '@links'] },
-    async ({ page, isMobile }) => {
+    'Surah navigation navigates to correct URL',
+    { tag: ['@slow', '@navigation', '@links', '@surah'] },
+    async ({ page }) => {
       // 1. Click on the Navigate Quran button
       await page.getByLabel('Navigate Quran').click();
 
@@ -137,68 +137,66 @@ test.describe('Navigation Functionality', () => {
       await navigationList.getByText('At-Tawbah').click();
       await page.waitForURL('/9');
       await expect(page).toHaveURL(/\/9$/);
+    },
+  );
 
-      // On mobile, the drawer might have closed after navigation, so we need to reopen it
-      await openNavigateQuranDrawer(page, isMobile);
+  test(
+    'Verse navigation navigates to correct URL',
+    { tag: ['@slow', '@navigation', '@links', '@verse'] },
+    async ({ page }) => {
+      // 1. Click on the Navigate Quran button
+      await page.getByLabel('Navigate Quran').click();
 
-      // 3. Now click on the "Verse" button
+      // 2. Now click on the "Verse" button
       const verseButton = page.getByTestId('verse-button');
       await verseButton.click();
-      await page.waitForTimeout(1500); // wait for the verse list to be populated
-
-      // 4. Click on verse 128 and ensure we are navigated to /9?startingVerse=128
       const verseList = page.getByTestId('verse-list');
-      await verseList.getByText('128').click();
-      await page.waitForURL('/9?startingVerse=128');
-      await expect(page).toHaveURL(/\/9\?startingVerse=128$/);
+      await verseList.getByText('3').waitFor({ state: 'visible' });
 
-      // On mobile, the drawer might have closed after navigation, so we need to reopen it
-      await openNavigateQuranDrawer(page, isMobile);
+      // 3. Click on verse 3 and ensure we are navigated to /1?startingVerse=3
+      await verseList.getByText('3').click();
+      await page.waitForURL('/1?startingVerse=3');
+      await expect(page).toHaveURL(/\/1\?startingVerse=3$/);
+    },
+  );
 
-      // 5. Now click on the "Juz" button
+  test(
+    'Juz navigation navigates to correct URL',
+    { tag: ['@slow', '@navigation', '@links', '@juz'] },
+    async ({ page }) => {
+      // 1. Click on the Navigate Quran button
+      await page.getByLabel('Navigate Quran').click();
+
+      // 2. Now click on the "Juz" button
       const juzButton = page.getByTestId('juz-button');
       await juzButton.click();
-      await page.waitForTimeout(1500); // wait for the verse list to be populated
+      const navigationList = page.getByTestId('sidebar-navigation');
+      await navigationList.getByText('Juz 18').waitFor({ state: 'visible' });
 
-      // 6. Click on Juz 18 and ensure we are navigated to /juz/18
+      // 3. Click on Juz 18 and ensure we are navigated to /juz/18
       await navigationList.getByText('Juz 18').click();
       await page.waitForURL('/juz/18');
       await expect(page).toHaveURL(/\/juz\/18$/);
+    },
+  );
 
-      // On mobile, the drawer might have closed after navigation, so we need to reopen it
-      await openNavigateQuranDrawer(page, isMobile);
+  test(
+    'Page navigation navigates to correct URL',
+    { tag: ['@slow', '@navigation', '@links', '@page'] },
+    async ({ page }) => {
+      // 1. Click on the Navigate Quran button
+      await page.getByLabel('Navigate Quran').click();
 
-      // 7. Now click on the "Page" button
+      // 2. Now click on the "Page" button
       const pageButton = page.getByTestId('page-button');
       await pageButton.click();
-      await page.waitForTimeout(1500); // wait for the verse list to be populated
+      const navigationList = page.getByTestId('sidebar-navigation');
+      await navigationList.getByText('Page 100').waitFor({ state: 'visible' });
 
-      // 8. Click on Page 100 and ensure we are navigated to /page/100
+      // 3. Click on Page 100 and ensure we are navigated to /page/100
       await navigationList.getByText('Page 100').click();
       await page.waitForURL('/page/100');
       await expect(page).toHaveURL(/\/page\/100$/);
     },
   );
 });
-
-/**
- * Opens the Navigate Quran drawer if it is not already open.
- */
-async function openNavigateQuranDrawer(page: Page, isMobile: boolean): Promise<void> {
-  if (isMobile) {
-    await page.waitForTimeout(1000); // wait for a bit to ensure any animations are done (closing the drawer on mobile)
-  }
-
-  // If the drawer is already open, do nothing
-  if (await page.getByTestId('sidebar-navigation').isVisible()) {
-    return;
-  }
-
-  if (!isMobile) {
-    const navigateQuranButton = page.getByLabel('Navigate Quran');
-    await navigateQuranButton.click();
-  } else {
-    const secondChapterNavigationButton = page.getByTestId('chapter-navigation');
-    await secondChapterNavigationButton.click();
-  }
-}

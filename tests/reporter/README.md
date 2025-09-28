@@ -13,6 +13,11 @@ failed tests are reported within that thread.
 Set the following environment variables for the Discord reporter to work:
 
 ```
-DISCORD_BOT_TOKEN=(your bot token)
-DISCORD_CHANNEL_ID=(the Discord channel ID where the bot should send messages)
+DISCORD_BOT_TOKEN=<your bot token>
+DISCORD_CHANNEL_ID=<the Discord channel ID where the bot should send messages>
 ```
+
+## Usage
+
+Simply run `yarn playwright test` as you normally would. Playwright will automatically use the
+`discord-reporter.js` to send updates to your Discord channel.

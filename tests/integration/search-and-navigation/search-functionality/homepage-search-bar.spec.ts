@@ -23,7 +23,8 @@ test.describe('Homepage Search Bar - Navigation Search', () => {
       await expect(searchResults.getByText('Juz 30')).toBeVisible();
 
       // 3. Click on the "Juz 30" result and check that we are navigated to /juz/30
-      await Promise.all([searchResults.getByText('Juz 30').click(), page.waitForURL('/juz/30')]);
+      await searchResults.getByText('Juz 30').click();
+      await expect(page).toHaveURL(/\/juz\/30$/);
     },
   );
 
@@ -40,7 +41,8 @@ test.describe('Homepage Search Bar - Navigation Search', () => {
       await expect(searchResults.getByText('Al-Baqarah')).toBeVisible();
 
       // 3. Click on the "Al-Baqarah" result and check that we are navigated to /2
-      await Promise.all([searchResults.getByText('Al-Baqarah').click(), page.waitForURL('/2')]);
+      await searchResults.getByText('Al-Baqarah').click();
+      await expect(page).toHaveURL(/\/2$/);
     },
   );
 });
@@ -61,10 +63,8 @@ test.describe('Homepage Search Bar - Verse Content Search', () => {
       await expect(searchResults.getByText('8:48')).toBeVisible();
 
       // 3. Click on the "2:186" result and check that we are navigated to /2?startingVerse=186
-      await Promise.all([
-        searchResults.getByText('2:186').click(),
-        page.waitForURL('/2?startingVerse=186'),
-      ]);
+      await searchResults.getByText('2:186').click();
+      await expect(page).toHaveURL(/\/2\?startingVerse=186$/);
     },
   );
 
@@ -130,10 +130,8 @@ test.describe('Homepage Search Bar - General Search Features', () => {
       await expect(searchResults.getByText("Search for 'abcd'")).toBeVisible();
 
       // 3. Click on the "Search for 'abcd'" result and check that we are navigated to /search?query=abcd
-      await Promise.all([
-        searchResults.getByText("Search for 'abcd'").click(),
-        page.waitForURL('/search?page=1&query=abcd'),
-      ]);
+      await searchResults.getByText("Search for 'abcd'").click();
+      await expect(page).toHaveURL(/\/search\?page=1&query=abcd$/);
     },
   );
 });

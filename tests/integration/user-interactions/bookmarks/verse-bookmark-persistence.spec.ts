@@ -20,8 +20,7 @@ test.describe('Verse Bookmarking', () => {
 
       // Click the bookmark button to add a bookmark
       await firstVerse.getByLabel('Bookmark').click();
-
-      await page.waitForTimeout(1500); // wait for the bookmark to be added
+      await expect(firstVerse.getByLabel('Bookmarked')).toBeVisible();
 
       // Reload the page
       await homePage.reload();

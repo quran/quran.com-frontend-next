@@ -42,8 +42,6 @@ test(
       page.getByRole('menuitem', { name: 'Español' }).click(),
     ]);
 
-    await page.waitForTimeout(1000); // wait for the page to stabilize
-
     const surah108 = page.getByTestId('chapter-108-container');
 
     // Espanol translation of Al-Kawthar is Al-Káuzar
@@ -62,7 +60,7 @@ test(
     // 1. Open the language selector menu
     await page.getByTestId('language-selector-button').click();
 
-    // 2. Select Spanish and wait for navigation to /es
+    // 2. Select French and wait for navigation to /fr
     await Promise.all([
       page.waitForURL('**/fr', { waitUntil: 'networkidle' }),
       page.getByRole('menuitem', { name: 'Français' }).click(),

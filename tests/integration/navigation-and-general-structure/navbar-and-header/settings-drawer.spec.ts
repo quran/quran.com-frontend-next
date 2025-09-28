@@ -31,9 +31,7 @@ test(
     tag: ['@navbar', '@settings'],
   },
   async ({ page, isMobile }) => {
-    if (isMobile) {
-      test.skip(); // This test is not applicable for mobile
-    }
+    test.skip(isMobile, "This test is not applicable for mobile as there's no Escape key");
 
     // 1. Open the settings drawer first
     await homePage.openSettingsDrawer();
@@ -53,9 +51,10 @@ test(
     tag: ['@navbar', '@settings'],
   },
   async ({ page, isMobile }) => {
-    if (isMobile) {
-      test.skip(); // This test is not applicable for mobile as the settings drawer is full screen
-    }
+    test.skip(
+      isMobile,
+      'This test is skipped on mobile as the settings drawer takes the full screen, so clicking outside is not possible.',
+    );
 
     // 1. Open the settings drawer first
     await homePage.openSettingsDrawer();
