@@ -448,9 +448,7 @@ class DiscordReporter {
           { name: '⏱️ Total Time', value: formatTime(totalTime), inline: true },
           {
             name: '🧵 Details',
-            value: this.failuresThreadId
-              ? `Check the thread below for detailed failure information`
-              : 'Failed tests were posted above',
+            value: `Check the thread below for detailed failure information`,
             inline: false,
           },
         ],
