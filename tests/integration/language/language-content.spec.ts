@@ -55,7 +55,7 @@ test(
   },
 );
 
-test.only(
+test(
   'User interface is displayed in the selected language',
   { tag: ['@language', '@slow'] },
   async ({ page }) => {

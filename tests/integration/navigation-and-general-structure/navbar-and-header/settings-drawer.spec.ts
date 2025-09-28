@@ -26,11 +26,15 @@ test(
 );
 
 test(
-  'Escape key should close the settings drawer when it is open',
+  'Escape key should close the settings drawer when it is open (desktop only)',
   {
     tag: ['@navbar', '@settings'],
   },
-  async ({ page }) => {
+  async ({ page, isMobile }) => {
+    if (isMobile) {
+      test.skip(); // This test is not applicable for mobile
+    }
+
     // 1. Open the settings drawer first
     await homePage.openSettingsDrawer();
     await expect(page.getByTestId('settings-drawer-container')).toBeVisible();
@@ -44,11 +48,15 @@ test(
 );
 
 test(
-  'Clicking outside the settings drawer should close it',
+  'Clicking outside the settings drawer should close it (desktop only)',
   {
     tag: ['@navbar', '@settings'],
   },
-  async ({ page }) => {
+  async ({ page, isMobile }) => {
+    if (isMobile) {
+      test.skip(); // This test is not applicable for mobile as the settings drawer is full screen
+    }
+
     // 1. Open the settings drawer first
     await homePage.openSettingsDrawer();
     await expect(page.getByTestId('settings-drawer-container')).toBeVisible();

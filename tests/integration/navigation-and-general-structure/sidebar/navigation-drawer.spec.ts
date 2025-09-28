@@ -1,3 +1,4 @@
+/* eslint-disable no-await-in-loop */
 import { expect, test } from '@playwright/test';
 
 import drawerLinks from '@/tests/mocks/drawer';
@@ -59,49 +60,39 @@ test(
   },
 );
 
-test(
-  'Functional navigation links in the drawer',
-  { tag: ['@fast', '@drawer'] },
-  async ({ page }) => {
-    // Open the navigation drawer
-    await page.getByTestId('open-navigation-drawer').click();
-    await expect(page.getByTestId('navigation-drawer-body')).toBeVisible();
+test('Functional navigation links in the drawer', { tag: ['@drawer'] }, async ({ page }) => {
+  // Open the navigation drawer
+  await page.getByTestId('open-navigation-drawer').click();
+  await expect(page.getByTestId('navigation-drawer-body')).toBeVisible();
 
-    // Check that the links in the drawer are working
-    const drawer = page.getByTestId('navigation-drawer-body');
-    const allLinks = drawer.locator('a');
+  // Check that the links in the drawer are working
+  const drawer = page.getByTestId('navigation-drawer-body');
+  const allLinks = drawer.locator('a');
 
-    await Promise.all(
-      (
-        await allLinks.all()
-      ).map(async (link) => {
-        const text = (await link.textContent())?.trim() || '';
-        const href = (await link.getAttribute('href')) || '';
-        const target = (await link.getAttribute('target')) || '';
+  const links = await allLinks.all();
+  // eslint-disable-next-line no-restricted-syntax
+  for (const link of links) {
+    const text = (await link.textContent())?.trim() || '';
+    const href = (await link.getAttribute('href')) || '';
+    const target = (await link.getAttribute('target')) || '';
 
-        const expectedLink = drawerLinks.find((l) => l.text === text);
+    const expectedLink = drawerLinks.find((l) => l.text === text);
 
-        expect(
-          expectedLink,
-          `Link with text "${text}" should be in the expected links`,
-        ).toBeDefined();
+    expect(expectedLink, `Link with text "${text}" should be in the expected links`).toBeDefined();
 
-        if (expectedLink) {
-          // I did not put the links to the app stores in the drawerLinks mock because they may change
-          if (expectedLink.href) {
-            expect(href, `Link with text "${text}" should have href "${expectedLink?.href}"`).toBe(
-              expectedLink.href,
-            );
-          }
-          expect(
-            target,
-            `Link with text "${text}" should have target "${expectedLink?.target}"`,
-          ).toBe(expectedLink.target);
-        }
-      }),
-    );
-  },
-);
+    if (expectedLink) {
+      // I did not put the links to the app stores in the drawerLinks mock because they may change
+      if (expectedLink.href) {
+        expect(href, `Link with text "${text}" should have href "${expectedLink?.href}"`).toBe(
+          expectedLink.href,
+        );
+      }
+      expect(target, `Link with text "${text}" should have target "${expectedLink?.target}"`).toBe(
+        expectedLink.target,
+      );
+    }
+  }
+});
 
 test(
   'Android and iOS app links are correct (the links should open the application store pages)',

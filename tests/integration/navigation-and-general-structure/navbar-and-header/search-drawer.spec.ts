@@ -31,11 +31,15 @@ test(
 );
 
 test(
-  'Escape key should close the search drawer when it is open',
+  'Escape key should close the search drawer when it is open (desktop only)',
   {
     tag: ['@navbar', '@search'],
   },
-  async ({ page }) => {
+  async ({ page, isMobile }) => {
+    if (isMobile) {
+      test.skip(); // This test is not applicable for mobile
+    }
+
     // Open the search drawer first
     await page.getByTestId('open-search-drawer').click();
     await expect(page.getByTestId('search-drawer-container')).toBeVisible();
@@ -49,11 +53,15 @@ test(
 );
 
 test(
-  'Clicking outside the search drawer should close it',
+  'Clicking outside the search drawer should close it (desktop only)',
   {
     tag: ['@navbar', '@search'],
   },
-  async ({ page }) => {
+  async ({ page, isMobile }) => {
+    if (isMobile) {
+      test.skip(); // This test is not applicable for mobile as the drawer is full screen
+    }
+
     // Open the search drawer first
     await page.getByTestId('open-search-drawer').click();
     await expect(page.getByTestId('search-drawer-container')).toBeVisible();

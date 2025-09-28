@@ -1,3 +1,4 @@
+/* eslint-disable no-await-in-loop */
 import { expect, test } from '@playwright/test';
 
 import footerLinks from '@/tests/mocks/footer';
@@ -18,37 +19,36 @@ test('Copyright year is current', { tag: ['@fast', '@footer'] }, async ({ page }
 
 test(
   'Functional navigation links and legal links in the footer',
-  { tag: ['@fast', '@footer'] },
+  { tag: ['@footer'] },
   async ({ page }) => {
     // Check that the links in the footer are working
     const footer = page.locator('footer');
 
     const allLinks = footer.locator('a');
 
-    await Promise.all(
-      (
-        await allLinks.all()
-      ).map(async (link) => {
-        const text = (await link.textContent())?.trim() || '';
-        const href = (await link.getAttribute('href')) || '';
-        const target = (await link.getAttribute('target')) || '';
+    const links = await allLinks.all();
+    // For loop is used here because the DOM can change while iterating over the links
+    // eslint-disable-next-line no-restricted-syntax
+    for (const link of links) {
+      const text = (await link.textContent())?.trim() || '';
+      const href = (await link.getAttribute('href')) || '';
+      const target = (await link.getAttribute('target')) || '';
 
-        const expectedLink = footerLinks.find((l) => l.text === text);
+      const expectedLink = footerLinks.find((l) => l.text === text);
 
-        if (expectedLink) {
-          // I did not put the links to the app stores in the footerLinks mock because they may change
-          if (expectedLink.href) {
-            expect(href, `Link with text "${text}" should have href "${expectedLink?.href}"`).toBe(
-              expectedLink.href,
-            );
-          }
-          expect(
-            target,
-            `Link with text "${text}" should have target "${expectedLink?.target}"`,
-          ).toBe(expectedLink.target);
+      if (expectedLink) {
+        // I did not put the links to the app stores in the footerLinks mock because they may change
+        if (expectedLink.href) {
+          expect(href, `Link with text "${text}" should have href "${expectedLink?.href}"`).toBe(
+            expectedLink.href,
+          );
         }
-      }),
-    );
+        expect(
+          target,
+          `Link with text "${text}" should have target "${expectedLink?.target}"`,
+        ).toBe(expectedLink.target);
+      }
+    }
   },
 );
 
