@@ -10,15 +10,15 @@
   "faq": "Perguntas frequentes",
   "faq-items": [
     {
-      "answer": "Quran in a Year é um plano de leitura simples e estruturado para ajudar você a completar o Alcorão inteiro em um ano — do fim de um Ramadã até o começo do próximo. O objetivo é obter uma compreensão básica do Alcorão de capa a capa sem se sentir pressionado ou sobrecarregado.",
-      "question": "O que é \"Alcorão em um Ano\"?"
+      "answer": "Quran em um Ano é um plano de leitura simples e estruturado para ajudar você a completar o Quran inteiro em um ano — do fim de um Ramadan até o começo do próximo. O objetivo é obter uma compreensão básica do Quran de capa a capa sem se sentir pressionado ou sobrecarregado.",
+      "question": "O que é \"Quran em um Ano\"?"
     },
     {
-      "answer": "Você está convidado a reservar um tempo a cada semana para ler apenas algumas páginas do Alcorão em um idioma que você entenda. Há 46 leituras no total, uma para cada semana do calendário islâmico de Shawwal a Sha'ban. Esta divisão do Alcorão complementa outras divisões, como as famosas 30 partes que facilitam a leitura do Alcorão em um mês.",
+      "answer": "Você está convidado a reservar um tempo a cada semana para ler apenas algumas páginas do Quran em um idioma que você entenda. Há 46 leituras no total, uma para cada semana do calendário islâmico de Shawwal a Sha'ban. Esta divisão do Quran complementa outras divisões, como as famosas 30 partes que facilitam a leitura do Quran em um mês.",
       "question": "Como o programa funciona?"
     },
     {
-      "answer": "De forma alguma. O ponto de partida neste programa é se envolver com os significados do Alcorão por meio de qualquer idioma (tradução) com o qual você se sinta confortável. O Quran.com oferece traduções em muitos idiomas para tornar isso acessível a todos. Nosso objetivo é inspirar os participantes a continuarem subindo de nível ano a ano.",
+      "answer": "De forma alguma. O ponto de partida neste programa é se envolver com os significados do Quran por meio de qualquer idioma (tradução) com o qual você se sinta confortável. O Quran.com oferece traduções em muitos idiomas para tornar isso acessível a todos. Nosso objetivo é inspirar os participantes a continuarem subindo de nível ano a ano.",
       "question": "Preciso saber ler árabe para participar?"
     },
     {
@@ -46,17 +46,17 @@
       "question": "Como posso aproveitar ao máximo essa jornada?"
     },
     {
-      "answer": "Nós planejamos promover os próximos passos e níveis mais altos. No ano atual, estamos convidando o máximo de pessoas possível para começar mantendo as coisas simples: leia o Alcorão completo com entendimento básico. Depois de fazer isso, você se sentirá pronto para ler novamente e se aprofundar!",
+      "answer": "Planeamos promover os próximos passos e níveis mais altos. No ano atual, estamos a convidar o maior número de pessoas possível para começar, com uma abordagem simples: leia o Quran completo com entendimento básico. Depois de fazer isso, sentirá pronto para ler novamente e se aprofundar!",
       "question": "Haverá opções de estudo mais aprofundado posteriormente?"
     },
     {
-      "answer": "Sim. \"Alcorão em um Ano\" é completamente gratuito, e nós o encorajamos a compartilhá-lo com outros. Convide um amigo, comece um clube do livro e ajude mais pessoas a completar sua primeira leitura completa do Alcorão.",
+      "answer": "Sim. \"Quran em um Ano\" é completamente gratuito, e encorajamos a compartilhá-lo com outros. Convide um amigo, comece um clube do livro e ajude mais pessoas a completar a sua primeira leitura completa do Quran.",
       "question": "Isso é grátis? Posso compartilhar?"
     }
   ],
   "hero": {
-    "description": "Um cronograma cuidadosamente elaborado que facilita a leitura e a compreensão de todo o Alcorão, de um Ramadã ao outro, em um ritmo constante e administrável.",
-    "line-1": "O Calendário Global do Alcorão é um cronograma de leitura projetado para incentivar a leitura reflexiva de todo o Alcorão, desde o final de um Ramadã até o início do próximo. Incentivamos você a reservar um tempo para compreender e refletir sobre os versículos, para que possa obter uma conexão mais profunda e sincera."
+    "description": "Um cronograma cuidadosamente elaborado que facilita a leitura e a compreensão de todo o Quran, de um Ramadan ao outro, em um ritmo constante e administrável.",
+    "line-1": "O Calendário Global do Quran é um cronograma de leitura projetado para incentivar a leitura reflexiva de todo o Quran, desde o final de um Ramadan até o início do próximo. Incentivamos você a reservar um tempo para compreender e refletir sobre os versículos, para que possa obter uma conexão mais profunda e sincera."
   },
   "interact-with-post": "Interaja com esta postagem no QuranReflect",
   "islamic-months": {
@@ -68,7 +68,7 @@
     "6": "Jumada al-Thani",
     "7": "Rajabe",
     "8": "Sha'ban",
-    "9": "Ramadã",
+    "9": "Ramadan",
     "10": "Shawwal",
     "11": "Dhu al-Qi'dah",
     "12": "Dhu al-Hijjah"
@@ -78,7 +78,7 @@
     "line-2": "<normal> Junte-se a nós na leitura desta semana, mesmo que seja sua primeira vez! </normal>"
   },
   "join-quranic-calendar": "Inscreva-se para receber atualizações e recursos via QuranReflect",
-  "join-quranic-calendar-success": "Você se juntou ao Divine Book Club com sucesso!",
+  "join-quranic-calendar-success": "Juntou-se ao Quran em um Ano com sucesso!",
   "join-telegram": "Junte-se ao nosso Telegram",
   "join-telegram-mobile": "Telegrama",
   "join-whatsapp": "Junte-se ao nosso Whatsapp",
@@ -88,12 +88,12 @@
   "month": "Mês",
   "my-progress": "Meu Progresso",
   "progress-subtitle": "Sinta-se à vontade para voltar e completar as semanas que você perdeu!",
-  "quran-calendar-description": "Um plano de leitura estruturado para completar o Alcorão em um ano. Crie consistência, aprofunde seu entendimento e permaneça no caminho certo — sem se sentir sobrecarregado.",
-  "quran-calendar-title": "Alcorão em um ano – Um plano simples para ler e entender todo o Alcorão",
-  "quran-reflect": "AlcorãoRefletir",
+  "quran-calendar-description": "Um plano de leitura estruturado para completar o Quran em um ano. Crie consistência, aprofunde seu entendimento e permaneça no caminho certo — sem se sentir sobrecarregado.",
+  "quran-calendar-title": "Quran em um Ano – Um plano simples para ler e entender todo o Quran",
+  "quran-reflect": "QuranReflect",
   "quran-reflect-description": "Interaja com outras pessoas em relação aos versículos que você leu esta semana.",
-  "quranic-calendar": "O Calendário Global do Alcorão",
-  "ramadan": "Ramadã",
+  "quranic-calendar": "Quran em um Ano",
+  "ramadan": "Ramadan",
   "read-online": "Ler Online",
   "read-this-weeks-verses": "Leia os Versículos desta Semana",
   "reading-options": {

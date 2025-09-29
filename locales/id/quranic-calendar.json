@@ -1,61 +1,61 @@
 {
-  "additional-resources": "Sumber Daya Tambahan",
-  "additional-resources-subtitle": "Sumber daya tambahan ini akan membantu Anda memperoleh hubungan yang lebih dalam dengan Ayat-ayat yang telah Anda baca.",
-  "complete": "Menyelesaikan",
+  "additional-resources": "Referensi Lanjutan",
+  "additional-resources-subtitle": "Referensi lanjutan ini akan membantu Anda memperdalam hubungan dengan Ayat-ayat yang Anda baca.",
+  "complete": "Lengkap",
   "completed-weeks": "{{completedWeeks}} / {{totalWeeks}} Minggu Selesai",
-  "divine-book-club": "Klub Buku Ilahi",
-  "divine-book-club-description": "Ini adalah diskusi kelompok ringan yang membantu Anda mengikuti konteks bacaan setiap minggu.",
+  "divine-book-club": "The Divine Book Club",
+  "divine-book-club-description": "Ini adalah suatu diskusi ringan yang membantu Anda mengikuti konteks bacaan setiap minggu.",
   "end-of-calendar": "Akhir Kalender",
   "english-pdf": "Bahasa Inggris PDF",
   "faq": "Pertanyaan yang Sering Diajukan",
   "faq-items": [
     {
-      "answer": "Quran in a Year adalah rencana bacaan sederhana dan terstruktur untuk membantu Anda menuntaskan seluruh Al-Quran dalam satu tahun—dari akhir Ramadan hingga awal Ramadan berikutnya. Tujuannya adalah untuk memperoleh pemahaman dasar tentang Al-Quran dari awal hingga akhir tanpa merasa tertekan atau kewalahan.",
-      "question": "Apa itu \"Quran Setahun\"?"
+      "answer": "Quran in a Year atau program Quran dalam Setahun adalah rencana bacaan sederhana dan terstruktur untuk membantu Anda menuntaskan seluruh Al-Quran dalam satu tahun—dari akhir Ramadan hingga awal Ramadan berikutnya. Tujuannya adalah untuk memperoleh pemahaman dasar tentang Al-Quran dari awal hingga akhir tanpa merasa tertekan atau kewalahan.",
+      "question": "Apa itu \"Quran dalam Setahun\"?"
     },
     {
-      "answer": "Anda diundang untuk meluangkan waktu setiap minggu untuk membaca beberapa halaman Al-Quran dalam bahasa yang Anda pahami. Total ada 46 bacaan, satu bacaan untuk setiap minggu dalam kalender Islam dari Syawal hingga Sya'ban. Pembagian Al-Quran ini melengkapi pembagian lainnya, seperti 30 bagian yang terkenal yang memudahkan pembacaan Al-Quran dalam satu bulan.",
+      "answer": "Mari meluangkan waktu setiap minggu untuk membaca beberapa halaman Al-Quran dalam bahasa yang Anda pahami. Total ada 46 bacaan, satu bacaan untuk setiap minggu dalam kalender Islam dari Syawal hingga Sya'ban. Pembagian Al-Quran ini melengkapi pembagian lainnya, seperti pembagian 30 juz yang kita kenal untuk membantu pembacaan Al-Quran dalam satu bulan.",
       "question": "Bagaimana cara kerja program ini?"
     },
     {
-      "answer": "Sama sekali tidak. Titik awal dalam program ini adalah untuk memahami makna Al-Quran melalui bahasa apa pun (terjemahan) yang Anda kuasai. Quran.com menawarkan terjemahan dalam banyak bahasa agar dapat diakses oleh semua orang. Kami bertujuan untuk menginspirasi peserta agar terus meningkat dari tahun ke tahun.",
-      "question": "Apakah saya perlu tahu cara membaca bahasa Arab untuk berpartisipasi?"
+      "answer": "Sama sekali tidak. Titik awal dalam program ini adalah untuk memahami makna Al-Quran melalui bahasa apa pun (terjemahan) yang Anda kuasai. Quran.com menawarkan terjemahan dalam banyak bahasa agar dapat diakses oleh semua orang. Tujuan kami adalah untuk menginspirasi peserta agar terus meningkat dari tahun ke tahun.",
+      "question": "Apakah saya harus bisa membaca bahasa Arab untuk berpartisipasi?"
     },
     {
-      "answer": "Setiap minggu, tugas bacaan yang diperbarui akan tersedia di Quran.com/calendar. Anda dapat membaca langsung di Quran.com, di mana tautan khusus akan membawa Anda langsung ke bacaan utama untuk minggu tersebut. \\n \\n Anda juga dapat membuka PDF bahasa Inggris, dan mencetaknya di rumah. Ini berisi terjemahan yang mengalir yang diadaptasi terutama dari karya MAS Abdel Haleem. Setiap dokumen minggu dibagi menjadi tujuh bagian, sehingga memudahkan untuk menyebarkan bacaan sepanjang minggu jika Anda mau. Ada pengantar singkat untuk surah, tajuk, dan catatan untuk mengklarifikasi beberapa poin penting, dan setiap bagian harian memiliki pertanyaan refleksi dan tindakan yang disarankan.",
+      "answer": "Setiap minggu, tugas bacaan baru akan tersedia di Quran.com/calendar. Anda dapat membaca langsung di Quran.com, di mana tautan khusus akan membawa Anda langsung ke bacaan utama untuk minggu tersebut. \\n \\n Anda juga dapat membuka PDF bahasa Inggrisnya, dan mencetaknya di rumah. Dokumen ini berisi terjemahan yang mengalir yang diadaptasi terutama dari karya MAS Abdel Haleem. Dokumen mingguan dibagi menjadi tujuh bagian, sehingga memudahkan untuk membagi bacaan sepanjang minggu jika Anda mau. Ada pengantar singkat untuk surah, topik inti, dan catatan untuk menjelaskan beberapa poin penting, dan setiap bagian harian memiliki pertanyaan untuk refleksi dan tindakan yang disarankan.",
       "question": "Di mana saya dapat menemukan tugas bacaan mingguan?"
     },
     {
-      "answer": "Anda memiliki beberapa pilihan untuk tetap mengikuti perkembangan. Kami sangat menyarankan untuk berlangganan guna menerima email dengan tugas bacaan mingguan terlampir. Kami juga telah membuat saluran komunitas di Telegram dan WhatsApp yang akan berisi pengingat dan dorongan. Cukup klik tombol pilihan Anda di Quran.com/calendar untuk berlangganan. Anda dapat memilih ketiganya jika Anda mau.",
-      "question": "Bagaimana saya bisa menerima pengingat membaca mingguan?"
+      "answer": "Anda memiliki beberapa pilihan untuk tetap on track. Kami sangat menyarankan untuk berlangganan guna menerima email dengan tugas bacaan mingguan terlampir. Kami juga telah membuat saluran komunitas di Telegram dan WhatsApp yang akan berisi pengingat dan dorongan. Cukup klik tombol pilihan Anda di Quran.com/calendar untuk berlangganan. Anda dapat memilih ketiganya jika Anda mau.",
+      "question": "Bagaimana caranya agar saya menerima pengingat membaca mingguan?"
     },
     {
-      "answer": "Di Quran.com, buka menu pengaturan untuk: \\n • Menyesuaikan ukuran dan gaya font \\n • Beralih antara mode terang, gelap, dan sepia \\n • Memilih dari beberapa terjemahan yang tersedia \\n \\n Ini memudahkan siapa saja untuk berpartisipasi dalam bahasa yang paling mereka pahami, dan dengan terjemahan yang jelas dan informatif.",
+      "answer": "Di Quran.com, buka menu Pengaturan untuk: \\n • Menyesuaikan ukuran dan gaya font \\n • Beralih antara mode terang, gelap, dan sepia \\n • Memilih dari beberapa terjemahan yang tersedia \\n \\n Ini memudahkan siapa saja untuk terlibat dengan menggunakan bahasa yang paling mereka pahami, dan dengan terjemahan yang jelas dan informatif.",
       "question": "Bagaimana saya dapat mempersonalisasi pengalaman membaca saya?"
     },
     {
-      "answer": "Kami menganjurkan Anda untuk menjelajahi QuranReflect.com untuk melihat refleksi orang lain tentang bagian-bagian yang dibaca setiap minggu, dan segera setelah Anda merasa siap, posting untuk membagikan pemikiran Anda sendiri! \\n \\n Pastikan juga untuk mendengarkan podcast The Divine Book Club: diskusi mendalam yang dipandu oleh para cendekiawan yang mengikuti jadwal ini. Podcast ini hanya berlangsung satu jam setiap minggu, dan menyediakan konteks yang sangat membantu.",
+      "answer": "Kami menganjurkan Anda untuk menjelajahi QuranReflect.com untuk melihat refleksi orang lain tentang bagian-bagian yang dibaca setiap minggu, dan segera setelah Anda merasa siap, posting untuk membagikan pemikiran Anda sendiri! \\n \\n Pastikan juga untuk mendengarkan podcast The Divine Book Club: diskusi mendalam yang dipandu oleh para cendekiawan yang mengikuti jadwal ini. Podcast ini hanya berlangsung satu jam setiap minggu, dan memberi konteks yang sangat membantu.",
       "question": "Sumber daya tambahan apa yang Anda sediakan?"
     },
     {
-      "answer": "Tidak masalah. Lanjutkan saja bacaan minggu ini—tidak perlu mengejar minggu yang terlewat. Tetaplah konsisten dan fokus untuk melangkah maju. Selalu ada tahun depan untuk melanjutkan apa pun yang terlewat.",
-      "question": "Bagaimana jika saya tertinggal atau bergabung terlambat?"
+      "answer": "Tidak masalah. Lanjutkan saja bacaan minggu ini—tidak perlu mengejar minggu yang terlewat. Tetaplah konsisten dan fokus untuk melangkah maju. Masih ada tahun depan untuk melanjutkan apa pun yang terlewat.",
+      "question": "Bagaimana jika saya tertinggal atau terlambat bergabung?"
     },
     {
-      "answer": "Cara terbaik untuk tetap konsisten adalah dengan membaca bersama orang lain. Kami menganjurkan Anda untuk memulai klub buku pribadi—dengan keluarga, teman, atau bahkan daring. Bertemu setiap minggu, diskusikan apa yang telah Anda baca, dan saling mendukung dalam perjalanan ini.",
+      "answer": "Cara terbaik untuk tetap konsisten adalah dengan membaca bersama orang lain. Kami menganjurkan Anda untuk memulai klub buku pribadi—dengan keluarga, teman, atau bahkan daring. Bertemu setiap minggu, diskusikan apa yang telah Anda baca, dan saling memperkuat dalam perjalanan ini.",
       "question": "Bagaimana saya dapat memanfaatkan perjalanan ini sebaik-baiknya?"
     },
     {
-      "answer": "Kami berencana untuk mempromosikan langkah-langkah berikutnya dan tingkat yang lebih tinggi. Tahun ini, kami mengundang sebanyak mungkin orang untuk memulai dengan membuatnya tetap sederhana: membaca Al-Quran secara lengkap dengan pemahaman dasar. Setelah Anda melakukan ini, Anda akan merasa siap untuk membaca lagi dan mendalaminya!",
-      "question": "Apakah akan ada pilihan studi yang lebih mendalam nanti?"
+      "answer": "Kami berencana untuk mempromosikan langkah-langkah berikutnya dan tingkat yang lebih tinggi lagi. Tahun ini, kami mengundang sebanyak mungkin orang untuk memulai dengan membuatnya tetap sederhana: membaca Al-Quran secara lengkap dengan pemahaman dasar. Setelah Anda melakukan ini, Anda akan merasa siap untuk membaca lagi dan mendalaminya!",
+      "question": "Apakah nantinya akan ada pilihan studi yang lebih mendalam lagi?"
     },
     {
-      "answer": "Ya. \"Quran dalam Setahun\" sepenuhnya gratis, dan kami mendorong Anda untuk membagikannya dengan orang lain. Undang teman, mulai klub buku, dan bantu lebih banyak orang menyelesaikan bacaan lengkap pertama mereka tentang Quran.",
+      "answer": "Ya. \"Quran dalam Setahun\" sepenuhnya gratis, dan kami mendorong Anda untuk membagikannya dengan orang lain. Undang teman, mulai klub buku, dan bantu lebih banyak orang menyelesaikan bacaan Quran mereka untuk pertama kali.",
       "question": "Apakah ini gratis? Bolehkah saya membagikannya?"
     }
   ],
   "hero": {
-    "description": "Jadwal yang dirancang secara cermat untuk memudahkan Anda membaca dan memahami seluruh Al-Quran dari satu Ramadan ke Ramadan berikutnya, dengan kecepatan yang stabil dan mudah diatur.",
+    "description": "Jadwal yang dirancang secara cermat untuk memudahkan Anda membaca dan memahami seluruh Al-Quran dari satu Ramadan ke Ramadan berikutnya, dengan laju yang stabil dan teratur.",
     "line-1": "Kalender Qur'an Global adalah jadwal membaca yang dirancang untuk mendorong pembacaan reflektif seluruh Al-Quran sejak dari akhir satu Ramadhan sampai awal Ramadhan berikutnya. Kami mendorong Anda meluangkan waktu untuk memahami dan merenungkan ayat-ayatnya sehingga Anda bisa merasakan getaran yang lebih dalam, yang lebih menyentuh hati."
   },
   "interact-with-post": "Berinteraksi dengan refleksi ini di QuranReflect",
@@ -78,30 +78,30 @@
     "line-2": "<normal> Sertai kami untuk pembacaan pekan ini meskipun Anda baru bergabung! </normal>"
   },
   "join-quranic-calendar": "Mendaftar untuk menerima pemutakhiran dan bahan-bahan melalui QuranReflect",
-  "join-quranic-calendar-success": "Anda berhasil bergabung dengan Divine Book Club!",
+  "join-quranic-calendar-success": "Anda berhasil bergabung dengan Kalender Qu'ran Setahun!",
   "join-telegram": "Bergabunglah dengan Telegram kami",
   "join-telegram-mobile": "Telegram",
-  "join-whatsapp": "Bergabunglah dengan Whatsapp kami",
-  "join-whatsapp-mobile": "Ada apa",
+  "join-whatsapp": "Gabung Whatsapp kami",
+  "join-whatsapp-mobile": "Whatsapp",
   "mark-as-completed": "Tandai sebagai Selesai",
-  "marked-as-completed": "Minggu ini telah ditandai sebagai selesai dengan sukses!",
+  "marked-as-completed": "Pekan ini berhasil ditandai sebagai selesai!",
   "month": "Bulan",
   "my-progress": "Kemajuan Saya",
-  "progress-subtitle": "Jangan ragu untuk kembali dan menyelesaikan minggu-minggu yang Anda lewatkan!",
+  "progress-subtitle": "Jangan ragu untuk kembali dan menyelesaikan pekan-pekan yang terlewatkan!",
   "quran-calendar-description": "Rencana bacaan terstruktur untuk menuntaskan Al-Quran dalam setahun. Bangun konsistensi, perdalam pemahaman Anda, dan tetaplah pada jalur yang benar—tanpa merasa kewalahan.",
-  "quran-calendar-title": "Quran dalam Setahun – Rencana Sederhana untuk Membaca & Memahami Seluruh Quran",
-  "quran-reflect": "QuranRenungan",
+  "quran-calendar-title": "Quran dalam Setahun – Cara Mudah untuk Membaca & Memahami Seluruh Quran",
+  "quran-reflect": "QuranReflect",
   "quran-reflect-description": "Berinteraksi dengan orang lain mengenai Ayat-ayat yang telah Anda baca minggu ini.",
-  "quranic-calendar": "Kalender Qur'an Global",
+  "quranic-calendar": "Kalender Qur'an Setahun",
   "ramadan": "Ramadan",
-  "read-online": "Baca Online",
-  "read-this-weeks-verses": "Baca Ayat Minggu Ini",
+  "read-online": "Baca secara Online",
+  "read-this-weeks-verses": "Baca Ayat Pekan Ini",
   "reading-options": {
     "default-settings": "Baca dengan pengaturan baku saya",
     "en-and-ar": "Baca dalam bahasa Inggris dan Arab",
     "en-only": "Baca dalam bahasa Inggris saja"
   },
-  "reflection-prompts": "💭 Pertanyaan RENUNGAN dari bacaan minggu ini <span> (Unduh PDF untuk melihat lebih lanjut) </span> :",
+  "reflection-prompts": "💭 Pertanyaan RENUNGAN dari bacaan pekan ini <span> (Unduh PDF untuk melihat lebih lanjut) </span> :",
   "share-reflections": "Bagikan Refleksi Anda",
   "start-tracking": "Mulai melacak",
   "supplemental-resources": "Sumber Daya Pendukung",
@@ -112,5 +112,5 @@
   "week": "Pekan",
   "week-completed": "Selesai",
   "week-title": "Pekan ke- {{weekNumber}} ( {{month}} ) mencakup ayat {{rangeStart}} sampai {{rangeEnd}}",
-  "weekly-verses-help-description-1": "PDF ini berisi terjemahan yang mengalir yang diadaptasi terutama dari karya MAS Abdel Haleem. Setiap dokumen minggu dibagi menjadi tujuh bagian, sehingga memudahkan untuk menyebarkan bacaan sepanjang minggu jika Anda mau. Ada pengantar singkat untuk surah, tajuk, dan catatan untuk memperjelas beberapa poin penting, dan setiap bagian harian memiliki pertanyaan refleksi dan tindakan yang disarankan."
+  "weekly-verses-help-description-1": "PDF ini berisi terjemahan yang mengalir yang diadaptasi terutama dari karya MAS Abdel Haleem. Dokumen mingguan dibagi menjadi tujuh bagian, sehingga memudahkan untuk membagi bacaan sepanjang minggu jika Anda mau. Ada pengantar singkat untuk surah, topik inti, dan catatan untuk menjelaskan beberapa poin penting, dan setiap bagian harian memiliki pertanyaan untuk refleksi dan tindakan yang disarankan."
 }
