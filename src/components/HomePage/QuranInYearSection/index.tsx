@@ -46,7 +46,7 @@ const QuranInYearSection = () => {
           </Link>
         </div>
       </div>
-      <div className={styles.container}>
+      <div className={styles.container} data-testid="quran-in-a-year-section">
         <VerseAndTranslation
           chapter={todayAyah.chapter}
           from={todayAyah.verse}
