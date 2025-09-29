@@ -10,7 +10,7 @@
   "know-someone": "ارتقِ معنا هذا <modalLink>رمضان</modalLink>",
   "learning-plan": "خطط التعلم",
   "listen-to-radio": "استمع إلى راديو القرآن الكريم",
-  "my-quran": "قرآني",
+  "my-quran": "مصحفي",
   "navigate-quran": "تصفح القرآن الكريم",
   "no-bookmarks": "ليس لديك أي إشارات مرجعية حتى الآن",
   "no-recently-read": "ليس لديك أي جلسات قراءة بعد",
@@ -60,7 +60,7 @@
     "bookmarks": "إشارات مرجعية",
     "popular": "شائع"
   },
-  "take-notes": "هل فاتتك <modalLink> ملاحظات؟ </modalLink>",
+  "take-notes": "هل فاتتك <modalLink>الملاحظات؟</modalLink>",
   "view-all-bookmarks": "عرض كل الإشارات المرجعية",
   "voice": {
     "trigger": "الوصول السريع إلى أي شيء"

@@ -36,7 +36,7 @@
       }
     }
   },
-  "answers": "",
+  "answers": "Risposte",
   "aria": {
     "change-settings": "Cambia impostazioni",
     "drawer-close": "Chiudere il cassetto",
@@ -93,7 +93,7 @@
   },
   "ayah": "Ayah",
   "ayahs": "ayah",
-  "back": "",
+  "back": "Indietro",
   "beta": "Beta",
   "beyond-ramadan": "Cresci oltre il Ramadan!",
   "bookmark": "Segnalibro",
@@ -118,10 +118,10 @@
   },
   "complete-sign-up": "Completa la tua registrazione",
   "complete-signup": {
-    "description": "",
-    "title": "",
-    "verification-code": "",
-    "verification-code-sent-to": ""
+    "description": "Per completare la registrazione abbiamo bisogno delle seguenti informazioni mancanti.",
+    "title": "Completa la tua registrazione",
+    "verification-code": "Codice di verifica",
+    "verification-code-sent-to": "Codice di verifica inviato a {{email}}"
   },
   "consents": {
     "communication": {
@@ -172,7 +172,7 @@
     "account-banned": "Spiacenti, il tuo account è stato bannato. Contatta Quran.Foundation",
     "badRequest": "*Richiesta non valida",
     "banned": "*Spiacenti, il tuo account è stato bannato. Contatta Quran.Foundation",
-    "complete-signup-failed": "",
+    "complete-signup-failed": "Impossibile completare la registrazione. Riprova.",
     "confirm": "*La password di conferma non corrisponde alla password",
     "email": "*Formato email non valido!",
     "exactLength": "*Il valore deve essere della lunghezza esatta",
@@ -263,7 +263,7 @@
   "learning-plans": "Piani di apprendimento",
   "less": "Meno",
   "lessons": "Lezioni",
-  "listen": "",
+  "listen": "Ascoltare",
   "loading": "Caricamento in corso",
   "login": "Login",
   "logout": "Disconnettersi",
@@ -283,11 +283,11 @@
   "next-ayah": "Avanti Sì",
   "no": "No",
   "no-notifications": "Nessuna notifica ancora",
-  "no-verses-available": "",
+  "no-verses-available": "Nessun verso disponibile",
   "none": "Nessuno",
   "not-now": "Non adesso",
   "notes": {
-    "label": "",
+    "label": "Note",
     "title": "I miei appunti e riflessioni"
   },
   "notification-settings": "Impostazioni di notifica",
@@ -388,10 +388,10 @@
     "word-tooltip-helper": "Visualizza la traduzione o la traslitterazione quando si passa con il mouse o si fa clic sulla parola"
   },
   "share": "Condividere",
-  "share-quran-description-line-1": "",
-  "share-quran-description-line-2": "",
-  "share-quran-description-line-3": "",
-  "share-quran-title": "",
+  "share-quran-description-line-1": "Il Profeta ﷺ disse:",
+  "share-quran-description-line-2": "\"Trasmetti da parte mia, anche se si tratta di un solo verso.\"",
+  "share-quran-description-line-3": "(Bukhari 3461)",
+  "share-quran-title": "Condividi il Corano!",
   "shared": "Il link è stato copiato negli appunti!",
   "show-more": "Mostra di più",
   "sidebar": {

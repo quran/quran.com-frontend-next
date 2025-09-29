@@ -36,7 +36,7 @@
       }
     }
   },
-  "answers": "",
+  "answers": "پاسخ‌ها",
   "aria": {
     "change-settings": "تغییر تنظیمات",
     "drawer-close": "کشو را ببندید",
@@ -93,7 +93,7 @@
   },
   "ayah": "آیه",
   "ayahs": "آیات",
-  "back": "",
+  "back": "برگشت",
   "beta": "بتا",
   "beyond-ramadan": "فراتر از ماه رمضان رشد کنید!",
   "bookmark": "نشانک",
@@ -118,10 +118,10 @@
   },
   "complete-sign-up": "ثبت نام خود را تکمیل کنید",
   "complete-signup": {
-    "description": "",
-    "title": "",
-    "verification-code": "",
-    "verification-code-sent-to": ""
+    "description": "برای تکمیل ثبت نام شما، به اطلاعات ناقص زیر نیاز داریم.",
+    "title": "ثبت نام خود را تکمیل کنید",
+    "verification-code": "کد تأیید",
+    "verification-code-sent-to": "کد تایید به {{email}} ارسال شد"
   },
   "consents": {
     "communication": {
@@ -172,7 +172,7 @@
     "account-banned": "با عرض پوزش، حساب شما مسدود شده است. با قرآن.بنیاد تماس بگیرید",
     "badRequest": "*درخواست نامعتبر",
     "banned": "*با عرض پوزش، حساب شما مسدود شده است. با قرآن.بنیاد تماس بگیرید",
-    "complete-signup-failed": "",
+    "complete-signup-failed": "ثبت نام انجام نشد. لطفا دوباره امتحان کنید.",
     "confirm": "*تأیید رمز عبور با رمز عبور مطابقت ندارد",
     "email": "*فرمت ایمیل نامعتبر است!",
     "exactLength": "*مقدار باید دقیقاً طول داشته باشد",
@@ -263,7 +263,7 @@
   "learning-plans": "برنامه های یادگیری",
   "less": "کمتر",
   "lessons": "درس ها",
-  "listen": "",
+  "listen": "گوش دهید",
   "loading": "بارگذاری",
   "login": "وارد شدن",
   "logout": "خروج",
@@ -283,11 +283,11 @@
   "next-ayah": "آیه بعدی",
   "no": "خیر",
   "no-notifications": "هنوز اطلاعیه ای وجود ندارد",
-  "no-verses-available": "",
+  "no-verses-available": "هیچ آیه‌ای موجود نیست",
   "none": "هیچ یک",
   "not-now": "الان نه",
   "notes": {
-    "label": "",
+    "label": "یادداشت‌ها",
     "title": "یادداشت ها و بازتاب های من"
   },
   "notification-settings": "تنظیمات اعلان",
@@ -388,10 +388,10 @@
     "word-tooltip-helper": "نمایش ترجمه یا نویسه‌گردانی هنگام نگه‌داشتن روی کلمه یا کلیک کردن روی آن"
   },
   "share": "اشتراک گذاری",
-  "share-quran-description-line-1": "",
-  "share-quran-description-line-2": "",
-  "share-quran-description-line-3": "",
-  "share-quran-title": "",
+  "share-quran-description-line-1": "پیامبر اکرم صلی الله علیه و آله فرمودند:",
+  "share-quran-description-line-2": "«از من ابلاغ کنید، اگرچه یک آیه باشد.»",
+  "share-quran-description-line-3": "(بخاری ۳۴۶۱)",
+  "share-quran-title": "قرآن را به اشتراک بگذارید",
   "shared": "پیوند در کلیپ بورد کپی شده است!",
   "show-more": "بیشتر نشان بده، اطلاعات بیشتر",
   "sidebar": {

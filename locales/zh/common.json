@@ -36,7 +36,7 @@
       }
     }
   },
-  "answers": "",
+  "answers": "答案",
   "aria": {
     "change-settings": "更改设置",
     "drawer-close": "关闭抽屉",
@@ -93,7 +93,7 @@
   },
   "ayah": "节",
   "ayahs": "节",
-  "back": "",
+  "back": "后退",
   "beta": "测试版",
   "beyond-ramadan": "超越斋月！",
   "bookmark": "书签",
@@ -118,10 +118,10 @@
   },
   "complete-sign-up": "完成您的注册",
   "complete-signup": {
-    "description": "",
-    "title": "",
-    "verification-code": "",
-    "verification-code-sent-to": ""
+    "description": "我们需要以下缺失的信息来完成您的注册。",
+    "title": "完成注册",
+    "verification-code": "验证码",
+    "verification-code-sent-to": "验证码已发送至{{email}}"
   },
   "consents": {
     "communication": {
@@ -172,7 +172,7 @@
     "account-banned": "抱歉，您的帐户已被禁止。联系 Quran.Foundation",
     "badRequest": "*请求无效",
     "banned": "*抱歉，您的帐户已被禁止。联系 Quran.Foundation",
-    "complete-signup-failed": "",
+    "complete-signup-failed": "无法完成注册。请重试。",
     "confirm": "*确认密码与密码不匹配",
     "email": "*电子邮件格式无效！",
     "exactLength": "*值的长度必须准确",
@@ -263,7 +263,7 @@
   "learning-plans": "学习计划",
   "less": "较少的",
   "lessons": "课程",
-  "listen": "",
+  "listen": "听",
   "loading": "加载中",
   "login": "登录",
   "logout": "登出",
@@ -283,11 +283,11 @@
   "next-ayah": "下一节文",
   "no": "不",
   "no-notifications": "还没有通知",
-  "no-verses-available": "",
+  "no-verses-available": "没有可用的诗句",
   "none": "无",
   "not-now": "现在不要",
   "notes": {
-    "label": "",
+    "label": "笔记",
     "title": "我的笔记和思考"
   },
   "notification-settings": "通知设置",
@@ -388,10 +388,10 @@
     "word-tooltip-helper": "鼠标悬停或单击单词时显示其意译或音译"
   },
   "share": "分享",
-  "share-quran-description-line-1": "",
-  "share-quran-description-line-2": "",
-  "share-quran-description-line-3": "",
-  "share-quran-title": "",
+  "share-quran-description-line-1": "先知ﷺ说道：",
+  "share-quran-description-line-2": "“请代我传达，哪怕只有一节诗。”",
+  "share-quran-description-line-3": "（布哈里 3461）",
+  "share-quran-title": "分享古兰经！",
   "shared": "链接已复制到剪贴板！",
   "show-more": "展示更多",
   "sidebar": {

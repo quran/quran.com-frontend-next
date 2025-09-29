@@ -36,7 +36,7 @@
       }
     }
   },
-  "answers": "",
+  "answers": "الإجابات",
   "aria": {
     "change-settings": "تغيير الإعدادات",
     "drawer-close": "أغلق الدرج",
@@ -93,7 +93,7 @@
   },
   "ayah": "آية",
   "ayahs": "آيات",
-  "back": "",
+  "back": "رجوع",
   "beta": "تجريبي",
   "beyond-ramadan": "استمرّ في التقدُّم بعد رمضان!",
   "bookmark": "علامة مرجعية",
@@ -112,16 +112,16 @@
   },
   "community": {
     "cta": "تواصل معنا",
-    "header": "هل تريد أن تتطوع بمهاراتك التقنية لتعزيز مهمة القرآن الكريم؟",
+    "header": "هل ترغب في التطوع بمهاراتك التقنية للمساهمة في خدمة رسالة القرآن الكريم؟",
     "sub-header": "شارك اهتمامك عبر تعبئة هذا النموذج، وسنتواصل معك عند توفر فرصة مناسبة بإذن الله.",
     "title": "المجتمع"
   },
-  "complete-sign-up": "إتمام عملية التسجيل",
+  "complete-sign-up": "أكمل تسجيلك",
   "complete-signup": {
-    "description": "",
-    "title": "",
-    "verification-code": "",
-    "verification-code-sent-to": ""
+    "description": "نحتاج إلى المعلومات المفقودة التالية لاستكمال التسجيل الخاص بك.",
+    "title": "أكمل التسجيل الخاص بك",
+    "verification-code": "رمز التحقق",
+    "verification-code-sent-to": "تم إرسال رمز التحقق إلى {{email}}"
   },
   "consents": {
     "communication": {
@@ -172,7 +172,7 @@
     "account-banned": "عذرًا، تم حظر حسابك. يُرجى التواصل مع مؤسسة Quran.Foundation",
     "badRequest": "*طلب غير صالح",
     "banned": "*عذرًا، تم حظر حسابك. يُرجى التواصل مع مؤسسة Quran.Foundation",
-    "complete-signup-failed": "",
+    "complete-signup-failed": "فشل في إتمام التسجيل. يرجى المحاولة مرة أخرى.",
     "confirm": "*تأكيد كلمة المرور غير متطابق",
     "email": "*تنسيق البريد الإلكتروني غير صحيح!",
     "exactLength": "*يجب أن يكون طول القيمة دقيقًا",
@@ -263,7 +263,7 @@
   "learning-plans": "خطط التعلم",
   "less": "أقل",
   "lessons": "الدروس",
-  "listen": "",
+  "listen": "استمع",
   "loading": "التحميل جارٍ",
   "login": "تسجيل الدخول",
   "logout": "تسجيل الخروج",
@@ -283,11 +283,11 @@
   "next-ayah": "الآية التالية",
   "no": "لا",
   "no-notifications": "لا توجد إشعارات حتى الآن",
-  "no-verses-available": "",
+  "no-verses-available": "لا توجد آيات متاحة",
   "none": "لا شيء",
   "not-now": "ليس الآن",
   "notes": {
-    "label": "",
+    "label": "ملاحظات",
     "title": "ملاحظاتي وتدبراتي"
   },
   "notification-settings": "إعدادات الإشعارات",
@@ -388,10 +388,10 @@
     "word-tooltip-helper": "اعرض الترجمة أو النقل الحرفي (النقحرة) عند التمرير أو النقر فوق الكلمة"
   },
   "share": "شارك",
-  "share-quran-description-line-1": "",
-  "share-quran-description-line-2": "",
-  "share-quran-description-line-3": "",
-  "share-quran-title": "",
+  "share-quran-description-line-1": "قال النبي ﷺ:",
+  "share-quran-description-line-2": "`بَلِّغُوا عَنِّي وَلَوْ آيَةً.`",
+  "share-quran-description-line-3": "(البخاري ٣٤٦١)",
+  "share-quran-title": "انشر القرآن!",
   "shared": "تم نسخ الرابط إلى الحافظة!",
   "show-more": "أظهر المزيد",
   "sidebar": {

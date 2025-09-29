@@ -36,7 +36,7 @@
     "title": "Collecte d'informations"
   },
   "log-data": {
-    "desc": "Nous recueillons les informations que votre navigateur envoie chaque fois que vous visitez notre Service (« Données de journalisation »). Ces données de journal peuvent inclure des informations telles que l'adresse de l'adresse IP de votre ordinateur, le type de navigateur, la version du navigateur, les pages de notre service que vous visitez, l'heure et la date de votre visite, le temps passé sur ces pages et d'autres statistiques.",
+    "desc": "Nous recueillons les informations que votre navigateur envoie chaque fois que vous visitez notre Service (« Données de journalisation »). Ces données de journal peuvent inclure des informations telles que l'adresse de l'adresse IP de votre PC, le type de navigateur, la version du navigateur, les pages de notre service que vous visitez, l'heure et la date de votre visite, le temps passé sur ces pages et d'autres statistiques.",
     "title": "Données de journalisation"
   },
   "main-privacy-desc": "Quran Foundation, Inc. (qui comprend Quran.com) est une organisation à but non lucratif 501(c)(3) qui s'efforce de permettre à chaque être humain de bénéficier du Coran. Quran Foundation, Inc. valorise et respecte la vie privée de tous ses utilisateurs.",
@@ -44,5 +44,5 @@
     "desc": "Nous collectons les informations personnelles pour les fins suivantes : <li><underline>Création et gestion de compte</underline> : Votre adresse e-mail est utilisée pour créer et gérer votre compte sur notre site Web. Il vous permet de vous connecter, d'accéder à vos paramètres et de stocker vos favoris et votre historique de lecture.</li><li><underline>Personnalisation</underline>: nous pouvons utiliser votre historique de lecture pour fournir des recommandations et des suggestions personnalisées en fonction de vos préférences et intérêts.</li><br/>",
     "title": "Utilisation des informations personnelles"
   },
-  "privacy-header": "Politique de confidentialité"
+  "privacy-header": "Politique de Confidentialité"
 }
