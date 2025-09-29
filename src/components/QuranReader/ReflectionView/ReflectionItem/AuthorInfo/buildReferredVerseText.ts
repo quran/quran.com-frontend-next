@@ -54,13 +54,12 @@ function buildLTRText(
     text += `${t('common:surah')} ${chapters.join(', ')}`;
   }
 
-  const verses = nonChapterVerseReferences.map((r) =>
-    makeVerseKey(
-      toLocalizedNumber(r.chapterId, lang),
-      toLocalizedNumber(r.from, lang),
-      toLocalizedNumber(r.to, lang),
-    ),
-  );
+  const verses = nonChapterVerseReferences.map((r) => {
+    const chapter = toLocalizedNumber(r.chapterId, lang);
+    const from = toLocalizedNumber(r.from, lang);
+    const rangeTo = hasRange(r) ? toLocalizedNumber(r.to, lang) : undefined;
+    return makeVerseKey(chapter, from, rangeTo);
+  });
 
   if (verses.length > 0) {
     if (chapters.length > 0) text += ` ${t('common:and')} `;
