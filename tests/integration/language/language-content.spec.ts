@@ -1,3 +1,4 @@
+/* eslint-disable react-func/max-lines-per-function */
 import { test, expect } from '@playwright/test';
 
 import Homepage from '@/tests/POM/home-page';
@@ -84,6 +85,8 @@ test(
     await page.getByTestId('settings-button').click();
 
     const settingsBody = page.getByTestId('settings-drawer-container');
+
+    await settingsBody.waitFor();
 
     const settingsText = (await settingsBody.evaluate((el) => el.textContent)) || '';
     expect(settingsText).toContain('Paramètres');

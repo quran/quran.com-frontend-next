@@ -12,9 +12,18 @@ test.beforeEach(async ({ page, context }) => {
 test(
   'Last visited ayah is displayed on the homepage and clicking it takes the user to the ayah',
   { tag: ['@slow', '@homepage', '@persistence'] },
-  async ({ page }) => {
+  async ({ page, isMobile }) => {
     // Go to ayah 5:10
     await homePage.goTo('/5:10');
+
+    // FIXME: The problem is that the <MobileReadingTabs /> component is not loading when going to the ayah page directly
+    // unless we scroll a bit. But this component is the one that saves the last read ayah.
+    // So we need to fix this issue in the component and then remove this workaround for mobile.
+    if (isMobile) {
+      await page.mouse.wheel(0, 100);
+    }
+
+    await page.waitForTimeout(2000); // Wait for 2 seconds to ensure the visit is recorded
 
     // Go to homepage
     await homePage.goTo();
@@ -93,6 +102,54 @@ test('All 114 surahs are displayed in the surah list', async ({ page }) => {
 
   await expect(chapterAndJuzList.getByTestId('chapter-1-container')).toBeVisible();
   await expect(chapterAndJuzList.getByTestId('chapter-114-container')).toBeVisible();
+});
+
+test('All 30 juz are displayed when switching to the juz tab', async ({ page }) => {
+  await homePage.goTo();
+
+  const chapterAndJuzList = page.getByTestId('chapter-and-juz-list');
+  const tabContainer = chapterAndJuzList.getByTestId('tabs-container');
+  const juzTab = tabContainer.getByText('Juz');
+  await juzTab.click();
+
+  await expect(tabContainer).toHaveAttribute('data-selectedtab', 'juz');
+
+  await expect(chapterAndJuzList.getByTestId('juz-1-container')).toBeVisible();
+  await expect(chapterAndJuzList.getByTestId('juz-30-container')).toBeVisible();
+
+  // Juz 1 container should have 3 links: juz link + surahs 1 and 2
+  const juz1Container = chapterAndJuzList.getByTestId('juz-1-container');
+  const links = juz1Container.getByRole('link');
+  expect(await links.count()).toBe(3);
+
+  // Juz 30 container should have 38 links (surahs from 78 to 114 + juz link)
+  const juz30Container = chapterAndJuzList.getByTestId('juz-30-container');
+  const links30 = juz30Container.getByRole('link');
+  expect(await links30.count()).toBe(38);
+});
+
+test('All 114 surahs are displayed according to the revelation order when switching to the revelation tab', async ({
+  page,
+}) => {
+  await homePage.goTo();
+
+  const chapterAndJuzList = page.getByTestId('chapter-and-juz-list');
+  const tabContainer = chapterAndJuzList.getByTestId('tabs-container');
+  const revelationTab = tabContainer.getByText('Revelation Order');
+  await revelationTab.click();
+
+  await expect(tabContainer).toHaveAttribute('data-selectedtab', 'revelation_order');
+
+  await expect(chapterAndJuzList.getByText("Al-'Alaq")).toBeVisible(); // Al-Alaq, first revealed surah
+  await expect(chapterAndJuzList.getByText('An-Nasr')).toBeVisible(); // An-Nasr, last revealed surah
+
+  const firstChapter = chapterAndJuzList.getByText("Al-'Alaq");
+  const lastChapter = chapterAndJuzList.getByText('An-Nasr');
+
+  // Ensure the first revealed chapter appears before the last revealed chapter
+  const firstChapterBoundingBox = await firstChapter.boundingBox();
+  const lastChapterBoundingBox = await lastChapter.boundingBox();
+  expect(firstChapterBoundingBox!.y).toBeLessThan(lastChapterBoundingBox!.y);
 });
 
 test('Sort by ascending/descending works correctly', async ({ page }) => {

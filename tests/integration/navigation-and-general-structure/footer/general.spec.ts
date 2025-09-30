@@ -36,17 +36,19 @@ test(
 
       const expectedLink = footerLinks.find((l) => l.text === text);
 
-      if (expectedLink.target) {
+      if (expectedLink && expectedLink.target) {
         // I did not put the links to the app stores in the footerLinks mock because they may change
         if (expectedLink.href) {
           expect(href, `Link with text "${text}" should have href "${expectedLink?.href}"`).toBe(
             expectedLink.href,
           );
         }
-        expect(
-          target,
-          `Link with text "${text}" should have target "${expectedLink?.target}"`,
-        ).toBe(expectedLink.target);
+        if (expectedLink.target) {
+          expect(
+            target,
+            `Link with text "${text}" should have target "${expectedLink?.target}"`,
+          ).toBe(expectedLink.target);
+        }
       }
     }
   },
