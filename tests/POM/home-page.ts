@@ -96,6 +96,19 @@ class Homepage {
   async openSettingsDrawer() {
     await this.page.getByTestId('settings-button').click();
   }
+
+  async enableMushafMode(isMobile: boolean) {
+    if (isMobile) {
+      // scroll down a little to make the tab visible (bypassing a render issue)
+      // FIXME: Remove this workaround when the underlying issue is fixed
+      await this.page.mouse.wheel(0, 200);
+      await this.page.mouse.wheel(0, -100);
+
+      await this.page.getByTestId('reading-tab').click();
+    } else {
+      await this.page.getByTestId('reading-button').click();
+    }
+  }
 }
 
 export default Homepage;
