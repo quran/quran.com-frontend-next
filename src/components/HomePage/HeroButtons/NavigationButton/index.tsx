@@ -24,6 +24,7 @@ const NavigationButton = () => {
       onClick={onClick}
       size={ButtonSize.Small}
       ariaLabel={t('navigate-quran')}
+      data-testid="navigate-quran-button"
     >
       <div className={heroButtonStyles.buttonContent}>
         <IconContainer size={IconSize.Xsmall} icon={<TheListIcon />} shouldForceSetColors={false} />

@@ -9,6 +9,19 @@ test.beforeEach(async ({ page, context }) => {
   await homePage.goTo();
 });
 
+test(
+  'CTRL+K opens the search drawer',
+  { tag: ['@fast', '@search', '@drawer', '@nav', '@shortcut'] },
+  async ({ page }) => {
+    // 1. Press CTRL+K to open the search drawer
+    await page.keyboard.press('Control+KeyK');
+
+    // 2. Make sure the search drawer is visible
+    const searchDrawer = page.getByTestId('search-drawer-container');
+    await expect(searchDrawer).toBeVisible();
+  },
+);
+
 test.describe('Search Drawer History', () => {
   test(
     'Search input is focused when opening the search drawer',

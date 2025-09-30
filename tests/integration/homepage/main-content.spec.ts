@@ -19,6 +19,7 @@ test(
     // FIXME: The problem is that the <MobileReadingTabs /> component is not loading when going to the ayah page directly
     // unless we scroll a bit. But this component is the one that saves the last read ayah.
     // So we need to fix this issue in the component and then remove this workaround for mobile.
+    // I know the problem comes from line 51 of src\components\QuranReader\ContextMenu\index.tsx (where it early returns null if first render)
     if (isMobile) {
       await page.mouse.wheel(0, 100);
     }
@@ -180,4 +181,18 @@ test('Sort by ascending/descending works correctly', async ({ page }) => {
   const updatedFirstChapterBoundingBox = await firstChapter.boundingBox();
   const updatedLastChapterBoundingBox = await lastChapter.boundingBox();
   expect(updatedLastChapterBoundingBox!.y).toBeLessThan(updatedFirstChapterBoundingBox!.y);
+});
+
+test('Popular button shows the popular surahs/verses', { tag: ['@homepage'] }, async ({ page }) => {
+  await homePage.goTo();
+
+  const popularButton = page.getByTestId('popular-button');
+  await expect(popularButton).toBeVisible();
+  await popularButton.click();
+
+  const dropdownContainer = page.getByTestId('quick-links');
+  await expect(dropdownContainer).toBeVisible();
+
+  const items = dropdownContainer.getByRole('link');
+  expect(await items.count()).toBeGreaterThanOrEqual(3);
 });
