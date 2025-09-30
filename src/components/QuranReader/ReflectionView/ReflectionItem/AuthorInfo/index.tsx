@@ -5,6 +5,7 @@ import Image from 'next/image';
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from './AuthorInfo.module.scss';
+import buildReferredVerseText from './buildReferredVerseText';
 
 import Link, { LinkVariant } from '@/dls/Link/Link';
 import ChevronDownIcon from '@/icons/chevron-down.svg';
@@ -12,10 +13,8 @@ import VerifiedIcon from '@/icons/verified.svg';
 import Reference from '@/types/QuranReflect/Reference';
 import { formatDateRelatively } from '@/utils/datetime';
 import { logButtonClick } from '@/utils/eventLogger';
-import { toLocalizedNumber } from '@/utils/locale';
 import { AUTHOR_DEFAULT_IMAGE, getImageSrc } from '@/utils/media/utils';
 import { getQuranReflectAuthorUrl } from '@/utils/quranReflect/navigation';
-import { makeVerseKey } from '@/utils/verse';
 
 type Props = {
   authorUsername: string;
@@ -54,31 +53,10 @@ const AuthorInfo: React.FC<Props> = ({
     logButtonClick('reflection_item_author');
   };
 
-  const referredVerseText = useMemo(() => {
-    let text = '';
-    const chapters = verseReferences
-      .filter((verse) => !verse.from || !verse.to)
-      .map((verse) => toLocalizedNumber(verse.chapterId, lang));
-
-    if (chapters.length > 0) {
-      text += `${t('common:surah')} ${chapters.join(',')}`;
-    }
-
-    const verses = nonChapterVerseReferences.map((verse) =>
-      makeVerseKey(
-        toLocalizedNumber(verse.chapterId, lang),
-        toLocalizedNumber(verse.from, lang),
-        toLocalizedNumber(verse.to, lang),
-      ),
-    );
-
-    if (verses.length > 0) {
-      if (chapters.length > 0) text += ` ${t('common:and')} `;
-      text += `${t('common:ayah')} ${verses.join(',')}`;
-    }
-
-    return text;
-  }, [verseReferences, nonChapterVerseReferences, lang, t]);
+  const referredVerseText = useMemo(
+    () => buildReferredVerseText(verseReferences, nonChapterVerseReferences, lang, t),
+    [verseReferences, nonChapterVerseReferences, lang, t],
+  );
 
   const handleImageError = useCallback(() => {
     setImageError(true);
