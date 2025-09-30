@@ -16,10 +16,11 @@
 import { describe, it, expect, vi, beforeAll } from 'vitest';
 
 /* eslint-disable max-lines, react-func/max-lines-per-function */
-import type Reference from '../../../types/QuranReflect/Reference';
 import buildReferredVerseText from '../../components/QuranReader/ReflectionView/ReflectionItem/AuthorInfo/buildReferredVerseText';
-import { isRTLLocale, toLocalizedNumber } from '../locale';
-import { makeVerseKey } from '../verse';
+
+import type Reference from '@/types/QuranReflect/Reference';
+import { isRTLLocale, toLocalizedNumber } from '@/utils/locale';
+import { makeVerseKey } from '@/utils/verse';
 
 type CommonDict = Record<'ayah' | 'surah' | 'and', string>;
 
@@ -179,6 +180,16 @@ describe('buildReferredVerseText — edge cases', () => {
     const out = buildReferredVerseText(all, all, 'en', t);
     expect(out).not.toMatch(/\s{2,}/);
     expect(out.endsWith(',')).toBe(false);
+    expect(out.endsWith(' ')).toBe(false);
+  });
+
+  it('no extra spaces or trailing commas (RTL)', async () => {
+    const { default: getT } = await import('next-translate/getT');
+    const t = await getT('ar', 'common');
+    const all = [makeRef(2, 1, 1), makeRef(1, 1, 1)];
+    const out = buildReferredVerseText(all, all, 'ar', t);
+    expect(out).not.toMatch(/\s{2,}/);
+    expect(out.endsWith('،')).toBe(false);
     expect(out.endsWith(' ')).toBe(false);
   });
 });

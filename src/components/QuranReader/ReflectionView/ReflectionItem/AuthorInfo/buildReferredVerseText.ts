@@ -2,6 +2,7 @@ import Reference from '@/types/QuranReflect/Reference';
 import { isRTLLocale, toLocalizedNumber } from '@/utils/locale';
 import { makeVerseKey } from '@/utils/verse';
 
+const AR_COMMA = '، ';
 const isChapterOnly = (r: Reference) => r.from === 0 && r.to === 0;
 const hasRange = (r: Reference): r is Reference & { to: number } =>
   typeof r.to === 'number' && r.to > 0 && r.to !== r.from;
@@ -12,8 +13,6 @@ function buildRTLText(
   lang: string,
   t: (key: string) => string,
 ): string {
-  const AR_COMMA = '، ';
-
   const chapterNumbers = verseReferences
     .filter(isChapterOnly)
     .map((r) => toLocalizedNumber(r.chapterId, lang));
@@ -23,8 +22,9 @@ function buildRTLText(
   const verseItems = nonChapterVerseReferences.map((r) => {
     const chapterNum = toLocalizedNumber(r.chapterId, lang);
     const startAyah = toLocalizedNumber(r.from, lang);
-    const endAyah = hasRange(r) ? toLocalizedNumber(r.to, lang) : '';
-    return hasRange(r) ? `${startAyah}:${chapterNum}-${endAyah}` : `${startAyah}:${chapterNum}`;
+    const isRange = hasRange(r);
+    const endAyah = isRange ? toLocalizedNumber(r.to, lang) : '';
+    return isRange ? `${startAyah}:${chapterNum}-${endAyah}` : `${startAyah}:${chapterNum}`;
   });
 
   const versesText = verseItems.join(AR_COMMA);
