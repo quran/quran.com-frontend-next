@@ -1,5 +1,6 @@
 import { test, expect } from '@playwright/test';
 
+import ayahOfTheDayData from '@/data/ayah_of_the_day.json';
 import Homepage from '@/tests/POM/home-page';
 
 let homePage: Homepage;
@@ -34,6 +35,19 @@ test(
 );
 
 test('Quran in a Year section appears and has a Quranic verse', async ({ page }) => {
+  // Check if today's date has an entry in the ayah_of_the_day.json file
+  const now = new Date();
+  const day = String(now.getUTCDate()).padStart(2, '0');
+  const month = String(now.getUTCMonth() + 1).padStart(2, '0'); // Months are 0-indexed
+  const year = now.getUTCFullYear();
+  const todayString = `${day}/${month}/${year}`;
+
+  const ayahEntry = ayahOfTheDayData.find((entry) => entry.date === todayString);
+  if (!ayahEntry) {
+    test.skip(true, `No Ayah of the Day entry for today's date: ${todayString}`);
+    return;
+  }
+
   await homePage.goTo();
 
   const quranInAYearSection = page.getByTestId('quran-in-a-year-section');
