@@ -54,17 +54,14 @@ const MulkLearningPlanBanner: React.FC = () => {
     };
   }, []);
 
-  const shouldShowBanner = isVisible;
-
   return (
     <>
       <div ref={sentinelRef} aria-hidden="true" className={styles.sentinel} />
 
       <aside
         className={classNames(styles.bannerWrapper, {
-          [styles.visible]: shouldShowBanner,
+          [styles.visible]: isVisible,
         })}
-        role="region"
         aria-label="Learning plan promotion"
         aria-live="polite"
       >
@@ -99,7 +96,7 @@ const MulkLearningPlanBanner: React.FC = () => {
             {t('mulk-lp.cta-text')}
           </Button>
 
-          <div className={styles.desktopCaptionRow} aria-labelledby="mulk-banner-caption">
+          <div className={styles.desktopCaptionRow}>
             <p className={styles.desktopCaption}>
               <strong className={styles.captionBold}>{t('mulk-lp.caption-bold')} </strong>
               {t('mulk-lp.caption-suffix')}

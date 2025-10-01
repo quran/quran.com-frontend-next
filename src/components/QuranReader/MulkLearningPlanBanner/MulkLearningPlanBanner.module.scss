@@ -35,7 +35,6 @@
   max-inline-size: 100%;
 
   @include breakpoints.smallerThanTablet {
-    min-inline-size: 390px;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -48,7 +47,7 @@
 
   @include breakpoints.smallerThanTablet {
     display: block;
-    inline-size: 370px;
+    inline-size: calc(100% - 20px);
     max-inline-size: 100%;
     padding-block: 0;
     padding-inline: 10px;
