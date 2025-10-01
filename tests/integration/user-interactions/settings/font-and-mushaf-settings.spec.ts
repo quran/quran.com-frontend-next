@@ -1,3 +1,4 @@
+/* eslint-disable react-func/max-lines-per-function */
 import { test, expect } from '@playwright/test';
 
 import QuranReaderStyles from '@/redux/types/QuranReaderStyles';
@@ -8,7 +9,7 @@ let homepage: Homepage;
 
 test.beforeEach(async ({ page, context }) => {
   homepage = new Homepage(page, context);
-  await homepage.goTo();
+  await homepage.goTo('/112');
 });
 
 test.describe('Font and Mushaf Settings', () => {
@@ -43,6 +44,39 @@ test.describe('Font and Mushaf Settings', () => {
       await homepage.openSettingsDrawer();
       // 8. Make sure the selected font is 15 lines that was hydrated from Redux
       expect(await page.getByTestId('lines').inputValue()).toBe(MushafLines.FifteenLines);
+    },
+  );
+
+  test(
+    'Changing font updates the font in the reader',
+    { tag: ['@settings', '@fonts', '@reader'] },
+    async ({ page }) => {
+      // Open the settings drawer
+      await homepage.openSettingsDrawer();
+      // Choose Indopak font
+      await page.getByTestId('text_indopak-button').click();
+      // Make sure the font in the reader is updated
+      const firstWord = page.locator('[data-word-location="112:1:1"]').first();
+      // get the plus petit element (enfin de lenfant de lenfant, le dernier spam)
+      const lastSpan = firstWord.locator('span').last();
+      await expect(lastSpan).toHaveClass(/IndoPak/);
+    },
+  );
+
+  test(
+    'Tajweed font works correctly',
+    { tag: ['@settings', '@fonts', '@reader'] },
+    async ({ page }) => {
+      // Open the settings drawer
+      await homepage.openSettingsDrawer();
+      // Choose Tajweed font
+      await page.getByTestId('tajweed-button').click();
+      // Make sure the font in the reader is updated
+      const firstWord = page.locator('[data-word-location="112:1:1"]').first();
+      // get the plus petit element (enfin de lenfant de lenfant, le dernier spam)
+      const lastSpan = firstWord.locator('span').last();
+      await expect(lastSpan).toHaveClass(/GlyphWord/); // Check that it contains the GlyphWord class
+      await expect(lastSpan).toHaveCSS('font-family', /p604/); // Check that the font-family is correct
     },
   );
 });
