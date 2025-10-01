@@ -480,5 +480,13 @@
   "share-quran-description-line-1": "The Prophet ﷺ said:",
   "share-quran-description-line-2": "‘Convey from me, even if it is one verse.’",
   "share-quran-description-line-3": "(Bukhari 3461)",
-  "no-verses-available": "No verses available"
+  "no-verses-available": "No verses available",
+  "mulk-lp": {
+    "caption-bold": "Discover powerful lessons in Surah Mulk today",
+    "caption-suffix": "(A free Learning Plan)",
+    "cta-text": "Begin Now",
+    "aria-image-link": "View The Rescuer learning plan for Surah Al-Mulk",
+    "aria-cta": "Learn more about The Rescuer learning plan",
+    "image-alt": "The Rescuer: Powerful Lessons in Surah Mulk learning plan banner"
+  }
 }
