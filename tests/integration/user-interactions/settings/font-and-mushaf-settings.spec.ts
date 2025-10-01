@@ -57,7 +57,7 @@ test.describe('Font and Mushaf Settings', () => {
       await page.getByTestId('text_indopak-button').click();
       // Make sure the font in the reader is updated
       const firstWord = page.locator('[data-word-location="112:1:1"]').first();
-      // get the plus petit element (enfin de lenfant de lenfant, le dernier spam)
+      // Get the deepest nested span element which contains the actual font styling
       const lastSpan = firstWord.locator('span').last();
       await expect(lastSpan).toHaveClass(/IndoPak/);
     },
@@ -73,7 +73,7 @@ test.describe('Font and Mushaf Settings', () => {
       await page.getByTestId('tajweed-button').click();
       // Make sure the font in the reader is updated
       const firstWord = page.locator('[data-word-location="112:1:1"]').first();
-      // get the plus petit element (enfin de lenfant de lenfant, le dernier spam)
+      // Get the deepest nested span element which contains the actual font styling
       const lastSpan = firstWord.locator('span').last();
       await expect(lastSpan).toHaveClass(/GlyphWord/); // Check that it contains the GlyphWord class
       await expect(lastSpan).toHaveCSS('font-family', /p604/); // Check that the font-family is correct

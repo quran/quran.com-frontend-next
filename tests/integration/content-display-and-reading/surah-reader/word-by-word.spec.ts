@@ -1,9 +1,50 @@
 /* eslint-disable react-func/max-lines-per-function */
+/* eslint-disable react-func/max-lines-per-function */
 import { test, expect } from '@playwright/test';
 
 import Homepage from '@/tests/POM/home-page';
 
 let homePage: Homepage;
+
+// Helper functions to reduce code duplication
+async function hoverFirstWordInVerse2(page: any): Promise<string | null> {
+  const firstWord = page.locator('[data-word-location="78:2:2"]').first();
+  await firstWord.hover();
+
+  const verse2 = page.getByTestId('verse-78:2');
+  return verse2.textContent();
+}
+
+async function modifySettingsAndClose(
+  page: any,
+  settingsFn: (page: any) => Promise<void>,
+): Promise<void> {
+  await homePage.openSettingsDrawer();
+  await settingsFn(page);
+  await page.keyboard.press('Escape');
+}
+
+async function openWordByWordModal(page: any): Promise<any> {
+  // Get verse 2
+  const verse = page.getByTestId('verse-78:2');
+  await expect(verse).toBeVisible();
+
+  // Click on the more button
+  const moreButton = verse.getByLabel('More');
+  await expect(moreButton).toBeVisible();
+  await moreButton.click();
+
+  // Click on the role="menuitem" with text "Word By Word"
+  const wordByWordButton = page.getByRole('menuitem', { name: 'Word By Word' });
+  await expect(wordByWordButton).toBeVisible();
+  await wordByWordButton.click();
+
+  // Check that the modal is open
+  const modal = page.getByTestId('wbw-verse-modal-content');
+  await expect(modal).toBeVisible();
+
+  return modal;
+}
 
 test.beforeEach(async ({ page, context }) => {
   homePage = new Homepage(page, context);
@@ -15,23 +56,7 @@ test.describe('Word by Word Modal', () => {
     'Should open modal and display word-by-word content correctly',
     { tag: ['@slow', '@reader', '@word-by-word'] },
     async ({ page }) => {
-      // Get verse 2
-      const verse = page.getByTestId('verse-78:2');
-      await expect(verse).toBeVisible();
-
-      // Click on the more button
-      const moreButton = verse.getByLabel('More');
-      await expect(moreButton).toBeVisible();
-      await moreButton.click();
-
-      // Click on the role="menuitem" with text "Word By Word"
-      const wordByWordButton = page.getByRole('menuitem', { name: 'Word By Word' });
-      await expect(wordByWordButton).toBeVisible();
-      await wordByWordButton.click();
-
-      // Check that the modal is open
-      const modal = page.getByTestId('wbw-verse-modal-content');
-      await expect(modal).toBeVisible();
+      const modal = await openWordByWordModal(page);
 
       // Check that the modal contains the word by word translation and transliteration
       await expect(modal.getByText('About', { exact: true })).toBeVisible();
@@ -57,23 +82,7 @@ test.describe('Word by Word Modal', () => {
       // Change the language to German
       await page.getByTestId('wordByWord').selectOption('de'); // (Deutsch)
 
-      // Get verse 2
-      const verse = page.getByTestId('verse-78:2');
-      await expect(verse).toBeVisible();
-
-      // Click on the more button
-      const moreButton = verse.getByLabel('More');
-      await expect(moreButton).toBeVisible();
-      await moreButton.click();
-
-      // Click on the role="menuitem" with text "Word By Word"
-      const wordByWordButton = page.getByRole('menuitem', { name: 'Word By Word' });
-      await expect(wordByWordButton).toBeVisible();
-      await wordByWordButton.click();
-
-      // Check that the modal is open
-      const modal = page.getByTestId('wbw-verse-modal-content');
-      await expect(modal).toBeVisible();
+      const modal = await openWordByWordModal(page);
 
       // Check that the modal contains the word by word translation and transliteration
       await expect(modal.getByText('Nach', { exact: true })).toBeVisible();
@@ -88,12 +97,7 @@ test.describe('Word by Word Tooltip', () => {
     'Should show translation tooltip when hovering over a word',
     { tag: ['@reader', '@word-by-word'] },
     async ({ page }) => {
-      // Hover over the first word in verse 2
-      const firstWord = page.locator('[data-word-location="78:2:2"]').first();
-      await firstWord.hover();
-
-      const verse2 = page.getByTestId('verse-78:2');
-      const tooltip = await verse2.textContent();
+      const tooltip = await hoverFirstWordInVerse2(page);
 
       // Check that the tooltip contains the word by word translation
       expect(tooltip).toContain('the News');
@@ -104,19 +108,13 @@ test.describe('Word by Word Tooltip', () => {
     'Should show transliteration tooltip when enabled in settings',
     { tag: ['@reader', '@word-by-word'] },
     async ({ page }) => {
-      // Open the settings
-      await homePage.openSettingsDrawer();
-      // Enable word by word transliteration
-      await page.locator('#wbw-transliteration').check();
-      // Close the settings drawer
-      await page.keyboard.press('Escape');
+      await modifySettingsAndClose(page, async (settingsPage) => {
+        await settingsPage.locator('#wbw-transliteration').check();
+      });
 
       // Hover over the first word in verse 2
-      const firstWord = page.locator('[data-word-location="78:2:2"]').first();
-      await firstWord.hover();
+      const tooltip = await hoverFirstWordInVerse2(page);
 
-      const verse2 = page.getByTestId('verse-78:2');
-      const tooltip = await verse2.textContent();
       // Check that the tooltip contains the word by word transliteration
       expect(tooltip).toContain('l-naba-i');
     },
@@ -126,18 +124,12 @@ test.describe('Word by Word Tooltip', () => {
     'Should show German translation tooltip when language changed',
     { tag: ['@reader', '@word-by-word', '@language'] },
     async ({ page }) => {
-      // Open the settings
-      await homePage.openSettingsDrawer();
-      // Change the language to German
-      await page.getByTestId('wordByWord').selectOption('de'); // (Deutsch)
-      // Close the settings drawer
-      await page.keyboard.press('Escape');
-      // Hover over the first word in verse 2
-      const firstWord = page.locator('[data-word-location="78:2:2"]').first();
-      await firstWord.hover();
+      await modifySettingsAndClose(page, async (settingsPage) => {
+        await settingsPage.getByTestId('wordByWord').selectOption('de'); // (Deutsch)
+      });
 
-      const verse2 = page.getByTestId('verse-78:2');
-      const tooltip = await verse2.textContent();
+      // Hover over the first word in verse 2
+      const tooltip = await hoverFirstWordInVerse2(page);
 
       // Check that the tooltip contains the word by word translation in German
       expect(tooltip).toContain('der Kunde');
@@ -148,23 +140,12 @@ test.describe('Word by Word Tooltip', () => {
     'Should not show tooltip when disabled in settings',
     { tag: ['@reader', '@word-by-word'] },
     async ({ page }) => {
-      // Open the settings
-      await homePage.openSettingsDrawer();
-      // Disable word by word tooltip
-      await page.locator('#tooltip').uncheck();
-      // Close the settings drawer
-      await page.keyboard.press('Escape');
-
-      // Get verse 2
-      const verse = page.getByTestId('verse-78:2');
-      await expect(verse).toBeVisible();
+      await modifySettingsAndClose(page, async (settingsPage) => {
+        await settingsPage.locator('#tooltip').uncheck();
+      });
 
       // Hover over the first word in verse 2
-      const firstWord = page.locator('[data-word-location="78:2:2"]').first();
-      await firstWord.hover();
-
-      const verse2 = page.getByTestId('verse-78:2');
-      const tooltip = await verse2.textContent();
+      const tooltip = await hoverFirstWordInVerse2(page);
 
       // Check that the tooltip does not contain the word by word translation
       expect(tooltip).not.toContain('the News');
@@ -177,14 +158,11 @@ test.describe('Word by Word Inline Display', () => {
     'Should display inline translation and transliteration when enabled',
     { tag: ['@reader', '@word-by-word'] },
     async ({ page }) => {
-      // Open the settings
-      await homePage.openSettingsDrawer();
-      // Enable word by word inline
-      await page.locator('#inline').check();
-      await page.locator('#wbw-transliteration').check();
+      await modifySettingsAndClose(page, async (settingsPage) => {
+        await settingsPage.locator('#inline').check();
+        await settingsPage.locator('#wbw-transliteration').check();
+      });
 
-      // Close the settings drawer
-      await page.keyboard.press('Escape');
       // Get verse 2
       const verse = page.getByTestId('verse-78:2');
       await expect(verse).toBeVisible();
@@ -201,24 +179,13 @@ test.describe('Word by Word Settings', () => {
     'Should hide translation and transliteration when disabled in settings',
     { tag: ['@reader', '@word-by-word'] },
     async ({ page }) => {
-      // Open the settings
-      await homePage.openSettingsDrawer();
-      // Disable word by word translation and transliteration
-      await page.locator('#wbw-translation').uncheck();
-      await page.locator('#wbw-transliteration').uncheck();
-      // Close the settings drawer
-      await page.keyboard.press('Escape');
-
-      // Get verse 2
-      const verse = page.getByTestId('verse-78:2');
-      await expect(verse).toBeVisible();
+      await modifySettingsAndClose(page, async (settingsPage) => {
+        await settingsPage.locator('#wbw-translation').uncheck();
+        await settingsPage.locator('#wbw-transliteration').uncheck();
+      });
 
       // Hover over the first word in verse 2
-      const firstWord = page.locator('[data-word-location="78:2:2"]').first();
-      await firstWord.hover();
-
-      const verse2 = page.getByTestId('verse-78:2');
-      const tooltip = await verse2.textContent();
+      const tooltip = await hoverFirstWordInVerse2(page);
 
       // Check that the tooltip does not contain the word by word translation or transliteration
       expect(tooltip).not.toContain('the News');
