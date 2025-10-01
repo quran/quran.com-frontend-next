@@ -66,7 +66,7 @@ const MulkLearningPlanBanner: React.FC = () => {
         aria-live="polite"
       >
         <div className={styles.bannerContainer}>
-          <p className={styles.mobileCaption} id="mulk-banner-caption">
+          <p className={styles.mobileCaption}>
             <strong className={styles.captionBold}>{t('mulk-lp.caption-bold')} </strong>
             {t('mulk-lp.caption-suffix')}
           </p>
