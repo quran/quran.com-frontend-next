@@ -109,10 +109,17 @@ test(
 test(
   'Page /juz/N should load Juz N with correct title',
   { tag: ['@url', '@juz', '@reader'] },
-  async ({ page }) => {
+  async ({ page, isMobile }) => {
     await homePage.goTo('/juz/30');
+
+    if (isMobile) {
+      // Scroll a bit to show the header
+      await page.mouse.wheel(0, 300);
+      await page.waitForTimeout(1000);
+    }
+
     await expect(page.getByText('Juz 30')).toBeVisible();
-    await expect(await page.getByText('An-Naba').first()).toBeVisible();
+    await expect(page.getByText('An-Naba').first()).toBeVisible();
     expect(await page.title()).toContain('Juz 30');
   },
 );

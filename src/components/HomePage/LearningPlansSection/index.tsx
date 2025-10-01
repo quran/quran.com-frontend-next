@@ -66,96 +66,94 @@ const LearningPlansSection = () => {
           </Link>
         </div>
       </div>
-      <div data-testid="learning-plans-section">
-        <DataFetcher
-          loading={Loading}
-          fetcher={privateFetcher}
-          queryKey={makeGetCoursesUrl({ myCourses: false })}
-          render={(data: CoursesResponse) => {
-            const sortedCourses = [...data.data].sort(learningPlansSorter);
-            const firstNonEnrolledIndex = sortedCourses.findIndex(
-              (c) => typeof c.isCompleted === 'undefined',
-            );
+      <DataFetcher
+        loading={Loading}
+        fetcher={privateFetcher}
+        queryKey={makeGetCoursesUrl({ myCourses: false })}
+        render={(data: CoursesResponse) => {
+          const sortedCourses = [...data.data].sort(learningPlansSorter);
+          const firstNonEnrolledIndex = sortedCourses.findIndex(
+            (c) => typeof c.isCompleted === 'undefined',
+          );
 
-            return (
-              <div className={styles.cardsContainer}>
-                {sortedCourses.map((course, index) => {
-                  const { isCompleted } = course;
-                  const courseUrl = getCourseNavigationUrl(course.slug);
-                  const userHasEnrolled = typeof isCompleted !== 'undefined';
-                  const enrolledButNotCompleted = userHasEnrolled && !isCompleted;
-                  const isFirstNonEnrolledCourse =
-                    !userHasEnrolled && index === firstNonEnrolledIndex;
+          return (
+            <div className={styles.cardsContainer} data-testid="learning-plans-section">
+              {sortedCourses.map((course, index) => {
+                const { isCompleted } = course;
+                const courseUrl = getCourseNavigationUrl(course.slug);
+                const userHasEnrolled = typeof isCompleted !== 'undefined';
+                const enrolledButNotCompleted = userHasEnrolled && !isCompleted;
+                const isFirstNonEnrolledCourse =
+                  !userHasEnrolled && index === firstNonEnrolledIndex;
 
-                  return (
-                    <div key={course.id} className={styles.learnPlanCard}>
-                      <Card
-                        className={styles.card}
-                        link={courseUrl}
-                        onClick={() => onLearningPlanCardClicked(course.slug)}
-                      >
-                        <div className={styles.cardWrapper}>
-                          <Image
-                            width={150}
-                            height={100}
-                            src={course.thumbnail}
-                            alt={course.title}
-                            className={styles.thumbnail}
-                          />
-                          <div className={styles.cardContent}>
-                            <div className={styles.learningPlanTitle}>
-                              <span>{course.title}</span>
-                              {isFirstNonEnrolledCourse && <NewLabel />}
-                            </div>
+                return (
+                  <div key={course.id} className={styles.learnPlanCard}>
+                    <Card
+                      className={styles.card}
+                      link={courseUrl}
+                      onClick={() => onLearningPlanCardClicked(course.slug)}
+                    >
+                      <div className={styles.cardWrapper}>
+                        <Image
+                          width={150}
+                          height={100}
+                          src={course.thumbnail}
+                          alt={course.title}
+                          className={styles.thumbnail}
+                        />
+                        <div className={styles.cardContent}>
+                          <div className={styles.learningPlanTitle}>
+                            <span>{course.title}</span>
+                            {isFirstNonEnrolledCourse && <NewLabel />}
+                          </div>
 
-                            <div
-                              className={classNames(styles.learningPlanStatus, {
-                                [styles.enrolledPlanStatus]: userHasEnrolled,
-                              })}
+                          <div
+                            className={classNames(styles.learningPlanStatus, {
+                              [styles.enrolledPlanStatus]: userHasEnrolled,
+                            })}
+                          >
+                            {enrolledButNotCompleted && (
+                              <div className={styles.enrolledPill}>{t('learn:enrolled')}</div>
+                            )}
+                            {userHasEnrolled && isCompleted && (
+                              <div className={styles.completedPill}>{t('learn:completed')}</div>
+                            )}
+                            <Link
+                              className={styles.startLearningLink}
+                              variant={LinkVariant.Highlight}
+                              href={courseUrl}
+                              onClick={() =>
+                                onStartOrContinueLearningClicked(
+                                  enrolledButNotCompleted,
+                                  course.slug,
+                                )
+                              }
                             >
-                              {enrolledButNotCompleted && (
-                                <div className={styles.enrolledPill}>{t('learn:enrolled')}</div>
-                              )}
-                              {userHasEnrolled && isCompleted && (
-                                <div className={styles.completedPill}>{t('learn:completed')}</div>
-                              )}
-                              <Link
-                                className={styles.startLearningLink}
-                                variant={LinkVariant.Highlight}
-                                href={courseUrl}
-                                onClick={() =>
-                                  onStartOrContinueLearningClicked(
-                                    enrolledButNotCompleted,
-                                    course.slug,
-                                  )
-                                }
-                              >
-                                <div className={styles.startLearningLinkContent}>
-                                  <span>
-                                    {enrolledButNotCompleted
-                                      ? t('learn:continue-learning')
-                                      : t('learn:start-learning')}
-                                  </span>
-                                  <IconContainer
-                                    size={IconSize.Xsmall}
-                                    icon={<ArrowIcon />}
-                                    shouldForceSetColors={false}
-                                    className={styles.startLearningLinkIcon}
-                                  />
-                                </div>
-                              </Link>
-                            </div>
+                              <div className={styles.startLearningLinkContent}>
+                                <span>
+                                  {enrolledButNotCompleted
+                                    ? t('learn:continue-learning')
+                                    : t('learn:start-learning')}
+                                </span>
+                                <IconContainer
+                                  size={IconSize.Xsmall}
+                                  icon={<ArrowIcon />}
+                                  shouldForceSetColors={false}
+                                  className={styles.startLearningLinkIcon}
+                                />
+                              </div>
+                            </Link>
                           </div>
                         </div>
-                      </Card>
-                    </div>
-                  );
-                })}
-              </div>
-            );
-          }}
-        />
-      </div>
+                      </div>
+                    </Card>
+                  </div>
+                );
+              })}
+            </div>
+          );
+        }}
+      />
     </>
   );
 };

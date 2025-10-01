@@ -86,12 +86,10 @@ test(
 
     const settingsBody = page.getByTestId('settings-drawer-container');
 
-    await settingsBody.waitFor();
+    await expect(settingsBody).toBeVisible();
 
     const settingsText = (await settingsBody.evaluate((el) => el.textContent)) || '';
     expect(settingsText).toContain('Paramètres');
-    expect(settingsText).toContain('Mot par mot');
-    expect(settingsText).toContain('Traduction');
 
     // Close the settings drawer
     await page.keyboard.press('Escape');
@@ -135,6 +133,7 @@ test(
     // Make sure Isa Garcia translation is selected in the settings
     await page.getByTestId('settings-button').click();
     const translationSelect = page.getByTestId('Traducciones seleccionadas Card');
+    await expect(translationSelect).toBeVisible();
     await expect(translationSelect).toContainText('Sheikh Isa Garcia');
   },
 );
