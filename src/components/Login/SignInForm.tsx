@@ -1,5 +1,6 @@
 import { FC, useState } from 'react';
 
+import { useRouter } from 'next/router';
 import useTranslation from 'next-translate/useTranslation';
 
 import AuthInput from './AuthInput';
@@ -12,7 +13,6 @@ import FormBuilder from '@/components/FormBuilder/FormBuilder';
 import { FormBuilderFormField } from '@/components/FormBuilder/FormBuilderTypes';
 import Button, { ButtonShape, ButtonType } from '@/dls/Button/Button';
 import Link, { LinkVariant } from '@/dls/Link/Link';
-import useAuthRedirect from '@/hooks/auth/useAuthRedirect';
 import { RuleType } from '@/types/FieldRule';
 import { FormFieldType } from '@/types/FormField';
 import { signIn } from '@/utils/auth/authRequests';
@@ -30,7 +30,7 @@ interface Props {
 
 const SignInForm: FC<Props> = ({ redirect }) => {
   const { t } = useTranslation('login');
-  const { redirectWithToken } = useAuthRedirect();
+  const router = useRouter();
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const formFields: FormBuilderFormField[] = [
@@ -68,7 +68,7 @@ const SignInForm: FC<Props> = ({ redirect }) => {
         return getFormErrors(t, ErrorType.API, errors);
       }
 
-      redirectWithToken(redirect || '/', response?.token);
+      router.push(redirect || '/');
       return undefined;
     } catch (error) {
       setIsSubmitting(false);
