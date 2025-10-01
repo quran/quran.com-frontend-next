@@ -52,7 +52,6 @@ const SeekButton = ({ type, isLoading }: SeekButtonProps) => {
       shape={ButtonShape.Circle}
       onClick={onSeek}
       isDisabled={isDisabled}
-      data-testid={type === SeekButtonType.PrevAyah ? 'audio-prev-ayah' : 'audio-next-ayah'}
     >
       {type === SeekButtonType.PrevAyah ? <BackwardIcon /> : <ForwardIcon />}
     </Button>
