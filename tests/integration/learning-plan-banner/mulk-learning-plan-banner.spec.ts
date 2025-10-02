@@ -64,8 +64,6 @@ test.describe('English language - navigation', () => {
   });
 });
 
-test.describe('English language - visibility behavior', () => {});
-
 test.describe('English language - viewport', () => {
   test('works across viewport sizes', async ({ page }) => {
     await page.setViewportSize({ width: 1024, height: 768 });
