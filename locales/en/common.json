@@ -481,12 +481,15 @@
   "share-quran-description-line-2": "‘Convey from me, even if it is one verse.’",
   "share-quran-description-line-3": "(Bukhari 3461)",
   "no-verses-available": "No verses available",
-  "mulk-lp": {
-    "caption-bold": "Discover powerful lessons in Surah Mulk today",
-    "caption-suffix": "(A free Learning Plan)",
-    "cta-text": "Begin Now",
-    "aria-image-link": "View The Rescuer learning plan for Surah Al-Mulk",
-    "aria-cta": "Learn more about The Rescuer learning plan",
-    "image-alt": "The Rescuer: Powerful Lessons in Surah Mulk learning plan banner"
+  "learning-plan-banner": {
+    "main-headline": "Discover powerful lessons in Surah Mulk today",
+    "subtitle-description": "(A free Learning Plan)",
+    "call-to-action-button": "Begin Now",
+    "banner-image-description": "View The Rescuer learning plan for Surah Al-Mulk",
+    "button-accessibility-label": "Learn more about The Rescuer learning plan",
+    "banner-image-alt-text": "The Rescuer: Powerful Lessons in Surah Mulk learning plan banner",
+    "banner-wrapper-aria-label": "Learning plan promotion banner",
+    "mobile-caption-text": "Discover powerful lessons in Surah Mulk today (A free Learning Plan)",
+    "desktop-caption-text": "Discover powerful lessons in Surah Mulk today (A free Learning Plan)"
   }
 }

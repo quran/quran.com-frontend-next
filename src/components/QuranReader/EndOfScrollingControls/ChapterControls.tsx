@@ -3,11 +3,14 @@ import React from 'react';
 import useTranslation from 'next-translate/useTranslation';
 import { useSelector } from 'react-redux';
 
+import LearningPlanBanner from '../LearningPlanBanner';
+
 import Button, { ButtonType } from '@/dls/Button/Button';
 import useScrollToTop from '@/hooks/useScrollToTop';
 import ChevronLeftIcon from '@/icons/chevron-left.svg';
 import ChevronRightIcon from '@/icons/chevron-right.svg';
 import { selectIsReadingByRevelationOrder } from '@/redux/slices/revelationOrder';
+import Language from '@/types/Language';
 import { isFirstSurah, isLastSurah } from '@/utils/chapter';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getNextSurahNavigationUrl, getPreviousSurahNavigationUrl } from '@/utils/navigation';
@@ -26,6 +29,7 @@ const ChapterControls: React.FC<Props> = ({ initialData }) => {
   // example : "2:253" -> chapter 2 verse 253
   const chapterId = chapterIdAndLastVerse.split(':')[0];
   const chapterNumber = Number(chapterId);
+  const { lang } = useTranslation();
 
   return (
     <>
@@ -62,6 +66,8 @@ const ChapterControls: React.FC<Props> = ({ initialData }) => {
           {t('next-surah')}
         </Button>
       )}
+
+      <LearningPlanBanner shouldShow={lang === Language.EN && chapterNumber === 67} />
     </>
   );
 };

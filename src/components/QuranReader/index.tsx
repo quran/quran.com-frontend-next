@@ -6,7 +6,7 @@ import ContextMenu from './ContextMenu';
 import { VerseTrackerContextProvider } from './contexts/VerseTrackerContext';
 import DebuggingObserverWindow from './DebuggingObserverWindow';
 import useSyncChapterPage from './hooks/useSyncChapterPage';
-import MulkLearningPlanBanner from './MulkLearningPlanBanner';
+import LearningPlanBanner from './LearningPlanBanner';
 import Notes from './Notes/Notes';
 import styles from './QuranReader.module.scss';
 import QuranReaderView from './QuranReaderView';
@@ -66,14 +66,8 @@ const QuranReader = ({
           </VerseTrackerContextProvider>
         </div>
       </div>
+      <LearningPlanBanner />
       <Notes />
-      {lang === 'en' &&
-        quranReaderDataType === QuranReaderDataType.Chapter &&
-        Number(id) === 67 && (
-          <MulkLearningPlanBanner
-            key={`mulk-banner-${isReadingPreference ? 'reading' : 'translation'}`}
-          />
-        )}
     </>
   );
 };

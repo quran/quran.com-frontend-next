@@ -25,3 +25,6 @@ export const getQuranReflectTagUrl = (tag: string) =>
   `${API_HOST}/?tags=${encodeURIComponent(tag)}`;
 
 export const getQRNavigationUrl = () => `${API_HOST}`;
+
+export const getLearningPlanBannerUrl = () =>
+  '/learning-plans/the-rescuer-powerful-lessons-in-surah-al-mulk';
