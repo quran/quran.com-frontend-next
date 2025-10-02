@@ -16,12 +16,13 @@ async function scrollToBottom(page: Page) {
 }
 
 async function waitForBannerPresent(page: Page) {
+  await scrollToBottom(page);
+  // Wait for virtualized list to settle
+  await page.waitForLoadState('domcontentloaded');
+  
   await expect
     .poll(
       async () => {
-        await scrollToBottom(page);
-        // give the virtualized list time to render the tail item
-        await page.waitForTimeout(100);
         return banner(page).count();
       },
       { timeout: 15000 },
