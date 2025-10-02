@@ -6,7 +6,6 @@ import ContextMenu from './ContextMenu';
 import { VerseTrackerContextProvider } from './contexts/VerseTrackerContext';
 import DebuggingObserverWindow from './DebuggingObserverWindow';
 import useSyncChapterPage from './hooks/useSyncChapterPage';
-import LearningPlanBanner from './LearningPlanBanner';
 import Notes from './Notes/Notes';
 import styles from './QuranReader.module.scss';
 import QuranReaderView from './QuranReaderView';
@@ -66,7 +65,6 @@ const QuranReader = ({
           </VerseTrackerContextProvider>
         </div>
       </div>
-      <LearningPlanBanner />
       <Notes />
     </>
   );

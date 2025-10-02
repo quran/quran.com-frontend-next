@@ -9,7 +9,8 @@ import Button, { ButtonSize } from '@/dls/Button/Button';
 import Link from '@/dls/Link/Link';
 import { getLearningPlanBannerUrl } from '@/utils/quranReflect/navigation';
 
-const LEARNING_PLAN_URL = getLearningPlanBannerUrl();
+const LEARNING_PLAN_SLUG = 'the-rescuer-powerful-lessons-in-surah-al-mulk';
+const LEARNING_PLAN_URL = getLearningPlanBannerUrl(LEARNING_PLAN_SLUG);
 const BANNER_IMAGE_PATH =
   'https://images.quran.com/the-rescuer-powerful-lessons-in-surah-al-mulk/Banner.png';
 const BANNER_WIDTH = 1230;
@@ -32,7 +33,6 @@ const LearningPlanBanner: React.FC = () => {
 
         <Link
           href={LEARNING_PLAN_URL}
-          className={styles.imageLink}
           ariaLabel={t('learning-plan-banner.banner-image-description')}
         >
           <div className={styles.imageWrap}>

@@ -488,8 +488,6 @@
     "banner-image-description": "View The Rescuer learning plan for Surah Al-Mulk",
     "button-accessibility-label": "Learn more about The Rescuer learning plan",
     "banner-image-alt-text": "The Rescuer: Powerful Lessons in Surah Mulk learning plan banner",
-    "banner-wrapper-aria-label": "Learning plan promotion banner",
-    "mobile-caption-text": "Discover powerful lessons in Surah Mulk today (A free Learning Plan)",
-    "desktop-caption-text": "Discover powerful lessons in Surah Mulk today (A free Learning Plan)"
+    "banner-wrapper-aria-label": "Learning plan promotion banner"
   }
 }
