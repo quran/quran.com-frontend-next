@@ -12,7 +12,7 @@
   "contributors": "Wachangiaji",
   "day": "Siku",
   "description": "Maelezo",
-  "duration-daily": "Kila Somo fupi huchukua chini ya dakika {{dailyMins}} kukamilisha {{days}} ya Masomo.",
+  "duration-daily": "Kila Somo fupi huchukua chini ya dakika {{dailyMins}} kukamilisha {{days}} ya Masomo",
   "empty-learning-plans": "Bado hujajiandikisha katika <link> Mipango yoyote ya Mafunzo </link>.",
   "enroll": "Jiandikishe",
   "enroll-success": "Hongera, Umeongeza {{title}} kwenye orodha yako!",

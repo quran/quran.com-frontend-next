@@ -12,7 +12,7 @@
   "contributors": "Collaboratori",
   "day": "Giorno",
   "description": "Descrizione",
-  "duration-daily": "Ogni lezione breve richiede meno di {{dailyMins}} minuti per completare un totale {{days}} lezioni.",
+  "duration-daily": "Ogni lezione breve richiede meno di {{dailyMins}} minuti per completare un totale {{days}} lezioni",
   "empty-learning-plans": "Non sei ancora iscritto ad alcun <link> Piano di apprendimento </link> .",
   "enroll": "Iscriversi",
   "enroll-success": "Congratulazioni, hai aggiunto {{title}} alla tua lista!",

@@ -12,7 +12,7 @@
   "contributors": "المساهمون",
   "day": "اليوم",
   "description": "الوصف",
-  "duration-daily": "يستغرق كل درس قصير أقل من {{dailyMins}} دقيقة لإكمال {{days}} دروس إجمالية.",
+  "duration-daily": "يستغرق كل درس قصير أقل من {{dailyMins}} دقيقة لإكمال {{days}} دروس إجمالية",
   "empty-learning-plans": "أنت غير مسجل في أي <link> خطط للتعلم </link> حتى الآن.",
   "enroll": "سجل",
   "enroll-success": "تهانينا، لقد أضفت {{title}} إلى قائمتك!",

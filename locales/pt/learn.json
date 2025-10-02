@@ -12,7 +12,7 @@
   "contributors": "Contribuidores",
   "day": "Dia",
   "description": "Descrição",
-  "duration-daily": "Cada aula curta leva menos de {{dailyMins}} minutos para ser concluída {{days}} aulas no total.",
+  "duration-daily": "Cada aula curta leva menos de {{dailyMins}} minutos para ser concluída {{days}} aulas no total",
   "empty-learning-plans": "Você ainda não está inscrito em nenhum <link> Plano de Aprendizagem </link> .",
   "enroll": "Matricular",
   "enroll-success": "Parabéns, você adicionou {{title}} à sua lista!",

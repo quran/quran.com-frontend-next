@@ -12,7 +12,7 @@
   "contributors": "Katkıda bulunanlar",
   "day": "Gün",
   "description": "Tanım",
-  "duration-daily": "Her kısa Dersin toplam {{days}} Dersi tamamlaması {{dailyMins}} dakikadan az sürer.",
+  "duration-daily": "Her kısa Dersin toplam {{days}} Dersi tamamlaması {{dailyMins}} dakikadan az sürer",
   "empty-learning-plans": "Henüz herhangi bir <link> Öğrenim Planına </link> kayıtlı değilsiniz.",
   "enroll": "Kayıt ol",
   "enroll-success": "Tebrikler, {{title}} listenize eklendi!",

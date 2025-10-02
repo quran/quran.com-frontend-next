@@ -12,7 +12,7 @@
   "contributors": "Contributeurs",
   "day": "Jour",
   "description": "Description",
-  "duration-daily": "Les leçons courtes prennent moins de {{dailyMins}} minute(s) pour compléter {{days}} leçon(s) au total.",
+  "duration-daily": "Les leçons courtes prennent moins de {{dailyMins}} minute(s) pour compléter {{days}} leçon(s) au total",
   "empty-learning-plans": "Vous n'êtes pas encore inscrit(e) à un <link>plan d'Apprentissage</link>.",
   "enroll": "S'inscrire",
   "enroll-success": "Félicitations, vous avez ajouté {{title}} à votre liste !",
