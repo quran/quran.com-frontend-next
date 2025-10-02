@@ -26,7 +26,7 @@ test(
     await playButton.click();
 
     // The first line should be highlighted
-    const firstLine = page.getByTestId('verse-101:1');
+    const firstLine = page.getByTestId('verse-arabic-101:1');
     await expect(firstLine).toHaveClass(/highlight/);
 
     // Wait a few moment to ensure the audio is playing
@@ -39,7 +39,7 @@ test(
     await page.keyboard.press('ArrowRight');
 
     // The highlight should move to a different line
-    const secondLine = page.getByTestId('verse-101:5');
+    const secondLine = page.getByTestId('verse-arabic-101:5');
     await expect(secondLine).toHaveClass(/highlight/);
     await expect(firstLine).not.toHaveClass(/highlight/);
   },

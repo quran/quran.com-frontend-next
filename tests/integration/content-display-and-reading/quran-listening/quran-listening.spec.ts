@@ -1,3 +1,4 @@
+/* eslint-disable max-lines */
 /* eslint-disable react-func/max-lines-per-function */
 import { test, expect } from '@playwright/test';
 
@@ -190,5 +191,38 @@ test.describe('Audio Player Advanced Behaviour', () => {
     // Move backward to go back to second ayah
     await page.keyboard.press('ArrowLeft');
     await expect(secondAyah).toHaveClass(/highlighted/);
+  });
+});
+
+test.describe('Verse-Specific Play Button', () => {
+  test('Clicking play button on second verse starts audio player and highlights that verse', async ({
+    page,
+  }) => {
+    const secondAyah = page.getByTestId('verse-103:2');
+    await expect(secondAyah).not.toHaveClass(/highlighted/);
+
+    const playVerseButton = secondAyah.locator('#play-verse-button');
+    await playVerseButton.click();
+
+    await expect(page.getByTestId('audio-player-body')).toBeVisible();
+    await expect(secondAyah).toHaveClass(/highlighted/);
+  });
+
+  test('Clicking play button on third verse starts playback from that verse', async ({ page }) => {
+    const thirdAyah = page.getByTestId('verse-103:3');
+    await thirdAyah.locator('#play-verse-button').click();
+
+    await expect(page.getByTestId('audio-player-body')).toBeVisible();
+    await expect(thirdAyah).toHaveClass(/highlighted/);
+    await expect(page.getByTestId('audio-pause-toggle')).toBeVisible();
+  });
+
+  test('Clicking play on first verse highlights only that verse initially', async ({ page }) => {
+    const firstAyah = page.getByTestId('verse-103:1');
+    await firstAyah.locator('#play-verse-button').click();
+
+    await expect(page.getByTestId('audio-player-body')).toBeVisible();
+    await expect(firstAyah).toHaveClass(/highlighted/);
+    await expect(page.getByTestId('verse-103:2')).not.toHaveClass(/highlighted/);
   });
 });

@@ -88,6 +88,7 @@ test(
 
     // Click on the chapter beginning button
     await page.getByTestId('chapter-beginning-button').click();
+    await page.waitForTimeout(1000); // wait for a bit to ensure the scroll is done
 
     // We should be at the top of the page now
     const currentScrollPosition = await page.evaluate(() => window.scrollY);
