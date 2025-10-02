@@ -1,0 +1,133 @@
+@use 'src/styles/breakpoints';
+@use 'src/styles/theme';
+
+.bannerWrapper {
+  display: flex;
+  justify-content: center;
+  padding-block: var(--spacing-mega);
+  @include breakpoints.smallerThanTablet {
+    padding-block: var(--spacing-large);
+  }
+}
+
+.bannerContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--spacing-small-px);
+  width: 100%;
+
+  @include breakpoints.smallerThanTablet {
+    justify-content: center;
+    align-items: center;
+    gap: var(--spacing-medium-px);
+  }
+}
+
+.mobileCaption {
+  display: none;
+
+  @include breakpoints.smallerThanTablet {
+    display: block;
+    text-align: center;
+    font-weight: var(--font-weight-normal);
+    line-height: 1.2;
+    color: var(--color-text-default-new);
+  }
+}
+
+.imageWrap {
+  flex-shrink: 0;
+  img {
+    width: 100%;
+    max-width: 1230px;
+    height: 100%;
+  }
+
+  @include breakpoints.smallerThanTablet {
+    height: 117px;
+    align-self: stretch;
+    width: 100vw;
+  }
+}
+
+.mobileButton {
+  display: none;
+
+  @include breakpoints.smallerThanTablet {
+    display: flex;
+    padding: var(--spacing-xxsmall-px) var(--spacing-medium-px);
+    border-radius: var(--border-radius-medium-px);
+    background: var(--color-success-medium);
+    font-weight: var(--font-weight-normal);
+    border: none;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+
+    &:hover {
+      background: var(--color-success-medium);
+      color: inherit;
+    }
+
+    @include theme.light {
+      color: var(--color-text-inverse);
+    }
+    @include theme.dark {
+      color: var(--color-text-default-new);
+    }
+    @include theme.sepia {
+      color: var(--color-text-inverse);
+    }
+  }
+}
+
+.desktopCaptionRow {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xlarge-px);
+  align-self: stretch;
+  padding-inline-start: 167px;
+
+  @include breakpoints.smallerThanTablet {
+    display: none;
+  }
+}
+
+.desktopCaption {
+  font-size: var(--font-size-large-px);
+  color: var(--color-text-default-new);
+}
+
+.captionBold {
+  font-weight: var(--font-weight-bold);
+}
+
+.desktopButton {
+  display: flex;
+  padding: var(--spacing-small-px) var(--spacing-medium2-px);
+  justify-content: center;
+  align-items: center;
+  border-radius: var(--border-radius-rounded);
+  background: var(--color-success-medium);
+  white-space: nowrap;
+  font-size: var(--font-size-normal-px);
+  font-weight: var(--font-weight-semibold);
+  border: none;
+
+  &:hover {
+    background: var(--color-success-medium);
+    color: inherit;
+  }
+
+  @include theme.light {
+    color: var(--color-text-inverse);
+  }
+  @include theme.dark {
+    color: var(--color-text-default-new);
+  }
+  @include theme.sepia {
+    color: var(--color-text-inverse);
+  }
+}
+
