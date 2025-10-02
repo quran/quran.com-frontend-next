@@ -7,6 +7,7 @@ import styles from './LearningPlanBanner.module.scss';
 
 import Button, { ButtonSize } from '@/dls/Button/Button';
 import Link from '@/dls/Link/Link';
+import { logButtonClick } from '@/utils/eventLogger';
 import { getLearningPlanBannerUrl } from '@/utils/quranReflect/navigation';
 
 const LEARNING_PLAN_SLUG = 'the-rescuer-powerful-lessons-in-surah-al-mulk';
@@ -17,7 +18,7 @@ const BANNER_WIDTH = 1230;
 const BANNER_HEIGHT = 307;
 
 const LearningPlanBanner: React.FC = () => {
-  const { t } = useTranslation('common');
+  const { t } = useTranslation('quran-reader');
 
   return (
     <aside
@@ -34,6 +35,7 @@ const LearningPlanBanner: React.FC = () => {
         <Link
           href={LEARNING_PLAN_URL}
           ariaLabel={t('learning-plan-banner.banner-image-description')}
+          onClick={() => logButtonClick('learning_plan_banner_image')}
         >
           <div className={styles.imageWrap}>
             <Image
@@ -50,6 +52,7 @@ const LearningPlanBanner: React.FC = () => {
           href={LEARNING_PLAN_URL}
           className={styles.mobileButton}
           ariaLabel={t('learning-plan-banner.button-accessibility-label')}
+          onClick={() => logButtonClick('learning_plan_banner_cta')}
         >
           {t('learning-plan-banner.call-to-action-button')}
         </Button>
@@ -66,6 +69,7 @@ const LearningPlanBanner: React.FC = () => {
             href={LEARNING_PLAN_URL}
             className={styles.desktopButton}
             ariaLabel={t('learning-plan-banner.button-accessibility-label')}
+            onClick={() => logButtonClick('learning_plan_banner_cta')}
           >
             {t('learning-plan-banner.call-to-action-button')}
           </Button>
