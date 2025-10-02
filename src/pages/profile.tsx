@@ -6,7 +6,6 @@ import useTranslation from 'next-translate/useTranslation';
 import layoutStyle from './index.module.scss';
 import styles from './profile.module.scss';
 
-import withAuth from '@/components/Auth/withAuth';
 import NextSeoWrapper from '@/components/NextSeoWrapper';
 import DeleteAccountButton from '@/components/Profile/DeleteAccountButton';
 import BookmarksAndCollectionsSection from '@/components/Verses/BookmarksAndCollectionsSection';
@@ -139,4 +138,4 @@ export const getStaticProps: GetStaticProps = async ({ locale }) => {
   };
 };
 
-export default withAuth(ProfilePage);
+export default ProfilePage;
