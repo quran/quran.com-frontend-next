@@ -45,9 +45,8 @@
   }
 
   @include breakpoints.smallerThanTablet {
-    height: 117px;
-    align-self: stretch;
     width: 100vw;
+    height: 117px;
   }
 }
 
@@ -87,6 +86,7 @@
   align-items: center;
   gap: var(--spacing-xlarge-px);
   align-self: stretch;
+  // Align caption with content below the banner image
   padding-inline-start: 167px;
 
   @include breakpoints.smallerThanTablet {
