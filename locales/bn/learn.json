@@ -12,7 +12,7 @@
   "contributors": "অবদানকারী",
   "day": "দিন",
   "description": "বর্ণনা",
-  "duration-daily": "প্রতিটি ছোট পাঠের মোট {{days}} টি পাঠ শেষ হতে {{dailyMins}} মিনিটেরও কম সময় লাগে",
+  "duration-daily": "প্রতিটি ছোট পাঠের মোট {{days}} টি পাঠ শেষ হতে {{dailyMins}} মিনিটেরও কম সময় লাগে.",
   "empty-learning-plans": "আপনি এখনও কোনো <link> লার্নিং প্ল্যান </link> এ নথিভুক্ত নন।",
   "enroll": "নথিভুক্ত করুন",
   "enroll-success": "অভিনন্দন, আপনি আপনার তালিকায় {{title}} যোগ করেছেন!",

@@ -12,7 +12,7 @@
   "contributors": "Medewerkers",
   "day": "Dag",
   "description": "Beschrijving",
-  "duration-daily": "Elke korte les duurt minder dan {{dailyMins}} minuten om in totaal {{days}} lessen te voltooien",
+  "duration-daily": "Elke korte les duurt minder dan {{dailyMins}} minuten om in totaal {{days}} lessen te voltooien.",
   "empty-learning-plans": "U bent nog niet ingeschreven voor <link> Leerplannen </link> .",
   "enroll": "Inschrijven",
   "enroll-success": "Gefeliciteerd, je hebt {{title}} aan je lijst toegevoegd!",

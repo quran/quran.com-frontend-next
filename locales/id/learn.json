@@ -12,7 +12,7 @@
   "contributors": "Kontributor",
   "day": "Hari",
   "description": "Keterangan",
-  "duration-daily": "Setiap Pelajaran singkat membutuhkan waktu kurang dari {{dailyMins}} menit untuk menyelesaikan semua {{days}} Pelajaran",
+  "duration-daily": "Setiap Pelajaran singkat membutuhkan waktu kurang dari {{dailyMins}} menit untuk menyelesaikan semua {{days}} Pelajaran.",
   "empty-learning-plans": "Anda belum terdaftar dalam <link> Rencana Pembelajaran </link> apa pun.",
   "enroll": "Mendaftar",
   "enroll-success": "Selamat, Anda menambahkan {{title}} ke daftar Anda!",

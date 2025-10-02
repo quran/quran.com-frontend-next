@@ -12,7 +12,7 @@
   "contributors": "Kontribuesit",
   "day": "Dita",
   "description": "Përshkrim",
-  "duration-daily": "Çdo mësim i shkurtër merr më pak se {{dailyMins}} minuta për të përfunduar {{days}} mësime në total",
+  "duration-daily": "Çdo mësim i shkurtër merr më pak se {{dailyMins}} minuta për të përfunduar {{days}} mësime në total.",
   "empty-learning-plans": "Nuk jeni regjistruar ende në asnjë plan mësimor <link> </link> .",
   "enroll": "Regjistrohu",
   "enroll-success": "Urime, keni shtuar {{title}} në listën tuaj!",

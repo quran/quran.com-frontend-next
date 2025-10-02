@@ -12,7 +12,7 @@
   "contributors": "贡献者",
   "day": "天",
   "description": "描述",
-  "duration-daily": "每节简短课程只需不到{{dailyMins}}分钟即可完成总共{{days}}节课程",
+  "duration-daily": "每节简短课程只需不到{{dailyMins}}分钟即可完成总共{{days}}节课程。",
   "empty-learning-plans": "您尚未注册任何<link>学习计划</link> 。",
   "enroll": "注册",
   "enroll-success": "恭喜，您已将{{title}}添加到您的列表中！",
