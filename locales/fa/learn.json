@@ -12,7 +12,7 @@
   "contributors": "مشارکت کنندگان",
   "day": "روز",
   "description": "شرح",
-  "duration-daily": "هر درس کوتاه کمتر از {{dailyMins}} دقیقه طول می‌کشد تا {{days}} کل دروس تکمیل شود.",
+  "duration-daily": "هر درس کوتاه کمتر از {{dailyMins}} دقیقه طول می‌کشد تا {{days}} کل دروس تکمیل شود",
   "empty-learning-plans": "شما هنوز در هیچ <link> برنامه های آموزشی </link> ثبت نام نکرده اید.",
   "enroll": "ثبت نام کنید",
   "enroll-success": "تبریک می گویم، شما {{title}} به لیست خود اضافه کردید!",
