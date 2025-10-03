@@ -2,7 +2,24 @@ import React from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import { useSelector } from 'react-redux';
+import React from 'react';
+
+import useTranslation from 'next-translate/useTranslation';
+import { useSelector } from 'react-redux';
+
+import Button, { ButtonType } from '@/dls/Button/Button';
+import useScrollToTop from '@/hooks/useScrollToTop';
+import ChevronLeftIcon from '@/icons/chevron-left.svg';
+import ChevronRightIcon from '@/icons/chevron-right.svg';
+import { selectIsReadingByRevelationOrder } from '@/redux/slices/revelationOrder';
+import Language from '@/types/Language';
+import { isFirstSurah, isLastSurah } from '@/utils/chapter';
+import { logButtonClick } from '@/utils/eventLogger';
+import { getNextSurahNavigationUrl, getPreviousSurahNavigationUrl } from '@/utils/navigation';
+
 import { VersesResponse } from 'types/ApiResponses';
+
+import LearningPlanBanner from '../LearningPlanBanner';
 
 import LearningPlanBanner from '../LearningPlanBanner';
 
