@@ -1,4 +1,4 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useRef } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -29,6 +29,9 @@ const useSyncChapterPage = (initialData?: any): void => {
   const quranReaderStyles = useSelector(selectQuranReaderStyles);
   const chaptersData = useContext(DataContext);
 
+  // Store previous chapter ID to detect actual chapter changes
+  const previousChapterIdRef = useRef<string | null>(null);
+
   const { data: pagesLookupData } = useFetchPagesLookup(
     String(lastReadVerseKey?.chapterId),
     QuranReaderDataType.Chapter,
@@ -41,7 +44,14 @@ const useSyncChapterPage = (initialData?: any): void => {
 
   useEffect(() => {
     if (lastReadVerseKey?.chapterId && firstPageNumber) {
-      if (lastReadVerseKey.page !== firstPageNumber) {
+      // Check if the chapter has actually changed
+      const chapterChanged = previousChapterIdRef.current !== lastReadVerseKey.chapterId;
+
+      // Update the reference for next comparison
+      previousChapterIdRef.current = lastReadVerseKey.chapterId;
+
+      // Only update the page if the chapter has changed
+      if (chapterChanged && lastReadVerseKey.page !== firstPageNumber) {
         dispatch(
           setLastReadVerse({
             lastReadVerse: {
