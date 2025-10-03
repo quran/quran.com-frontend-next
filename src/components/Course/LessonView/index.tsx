@@ -39,6 +39,7 @@ const LessonView: React.FC<Props> = ({ lesson, courseSlug, lessonSlugOrId }) => 
     setCourseMaterialModalOpen(true);
   };
 
+  // FIXME: remove once markdown in api is converted to html
   const shouldUseMilkdown = /(^|\n)\s*#/m.test(content ?? '') || /\\$/m.test(content ?? '');
 
   return (

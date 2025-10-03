@@ -23,6 +23,7 @@ const MainDetails: React.FC<Props> = ({ course }) => {
   //   return `${acc}, ${currentValue}`;
   // }, '');
 
+  // FIXME: remove once markdown in api is converted to html
   const shouldUseMilkdown = /(^|\n)\s*#/m.test(description ?? '') || /\\$/m.test(description ?? '');
 
   return (
