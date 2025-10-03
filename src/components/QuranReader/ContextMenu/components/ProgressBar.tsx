@@ -23,7 +23,11 @@ interface ProgressBarProps {
  */
 const ProgressBar: React.FC<ProgressBarProps> = ({ progress, className }) => {
   return (
-    <div className={classNames(styles.container, className, { [styles.hide]: !progress })}>
+    <div
+      className={classNames(styles.container, className, { [styles.hide]: !progress })}
+      data-testid="progress-bar"
+      data-progress={progress}
+    >
       <div className={styles.track}>
         <div className={styles.indicator} style={{ width: `${progress}%` }} />
       </div>

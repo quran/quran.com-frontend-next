@@ -26,7 +26,7 @@ const PopularButton = () => {
     setIsExpanded(false);
   };
   return (
-    <div className={styles.buttonWrapper}>
+    <div className={styles.buttonWrapper} data-testid="popular-button">
       <Button
         variant={ButtonVariant.Simplified}
         className={heroButtonStyles.button}
