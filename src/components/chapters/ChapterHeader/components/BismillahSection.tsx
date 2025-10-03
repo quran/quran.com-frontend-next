@@ -9,7 +9,7 @@ import Bismillah from '@/dls/Bismillah/Bismillah';
 
 interface BismillahSectionProps {
   chapterId: string;
-  showTranslatedName: boolean;
+  shouldShowTranslatedName: boolean;
   isTranslationView: boolean;
 }
 
@@ -22,7 +22,7 @@ const CHAPTERS_WITHOUT_BISMILLAH = ['1', '9'];
  */
 const BismillahSection: React.FC<BismillahSectionProps> = ({
   chapterId,
-  showTranslatedName,
+  shouldShowTranslatedName,
   isTranslationView,
 }) => {
   const { t } = useTranslation('quran-reader');
@@ -39,7 +39,9 @@ const BismillahSection: React.FC<BismillahSectionProps> = ({
       })}
     >
       <Bismillah />
-      {!showTranslatedName && <span className={styles.bismillahTranslation}>{t('bismillah')}</span>}
+      {!shouldShowTranslatedName && (
+        <span className={styles.bismillahTranslation}>{t('bismillah')}</span>
+      )}
     </div>
   );
 };

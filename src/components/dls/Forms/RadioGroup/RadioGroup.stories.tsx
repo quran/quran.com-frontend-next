@@ -7,7 +7,7 @@ export default {
   title: 'dls/RadioGroup',
   component: RadioGroup,
   args: {
-    disabled: false,
+    isDisabled: false,
     orientation: RadioGroupOrientation.Vertical,
   },
   argTypes: {
@@ -23,7 +23,7 @@ export default {
       },
       description: 'The label that will be used inside aria-label',
     },
-    disabled: {
+    isDisabled: {
       options: [true, false],
       control: { type: 'boolean' },
       table: {
@@ -93,22 +93,22 @@ DefaultRadioGroup.args = {
       value: 'option1',
       id: 'option1',
       label: 'Option 1',
-      disabled: false,
-      required: false,
+      isDisabled: false,
+      isRequired: false,
     },
     {
       value: 'option2',
       id: 'option2',
       label: 'Option 2',
-      disabled: false,
-      required: false,
+      isDisabled: false,
+      isRequired: false,
     },
     {
       value: 'option3',
       id: 'option3',
       label: 'Option 3',
-      disabled: true,
-      required: false,
+      isDisabled: true,
+      isRequired: false,
     },
   ],
 };

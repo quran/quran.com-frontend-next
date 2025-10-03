@@ -16,7 +16,7 @@ import { getLanguageAlternates } from '@/utils/locale';
 import { getCanonicalUrl, getWhatIsRamadanNavigationUrl } from '@/utils/navigation';
 
 const PATH = getWhatIsRamadanNavigationUrl();
-const WhatIsRamadanPage: NextPage = (): JSX.Element => {
+const WhatIsRamadanPage: NextPage = () => {
   const { lang } = useTranslation('ramadan-activities');
 
   return (

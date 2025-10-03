@@ -1,7 +1,7 @@
 /* eslint-disable react-func/max-lines-per-function */
 /* eslint-disable max-lines */
 /* eslint-disable i18next/no-literal-string */
-import React, { useCallback, useContext, useEffect, useState } from 'react';
+import React, { JSX, useCallback, useContext, useEffect, useState } from 'react';
 
 import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';

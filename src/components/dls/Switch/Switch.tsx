@@ -11,7 +11,7 @@ import { isRTLLocale } from '@/utils/locale';
 type Item = {
   name: React.ReactNode;
   value: string;
-  disabled?: boolean;
+  isDisabled?: boolean;
 };
 export enum SwitchSize {
   XSmall = 'xsmall',
@@ -50,7 +50,7 @@ const Switch = ({
     >
       {items.map((item) => (
         <button
-          disabled={item.disabled}
+          disabled={item.isDisabled}
           type="button"
           className={classNames(styles.item, selected === item.value && styles.itemSelected, {
             [styles.itemLarge]: size === SwitchSize.Large,

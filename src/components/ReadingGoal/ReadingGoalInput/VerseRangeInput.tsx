@@ -191,7 +191,7 @@ const VerseRangeInput = ({
           <Combobox
             id="start-chapter"
             size={ComboboxSize.Large}
-            fixedWidth={false}
+            isFixedWidth={false}
             label={<p className={styles.label}>{t('starting-chapter')}</p>}
             items={startChapterOptions}
             value={startChapter}
@@ -204,8 +204,8 @@ const VerseRangeInput = ({
           <Combobox
             id="starting-verse"
             size={ComboboxSize.Large}
-            fixedWidth={false}
-            disabled={!startChapter}
+            isFixedWidth={false}
+            isDisabled={!startChapter}
             label={<p className={styles.label}>{t('starting-verse')}</p>}
             items={startingVerseOptions}
             value={startingVerse}
@@ -219,7 +219,7 @@ const VerseRangeInput = ({
           <Combobox
             id="end-chapter"
             size={ComboboxSize.Large}
-            fixedWidth={false}
+            isFixedWidth={false}
             label={<p className={styles.label}>{t('ending-chapter')}</p>}
             items={endChapterOptions}
             value={endChapter}
@@ -232,11 +232,11 @@ const VerseRangeInput = ({
           <Combobox
             id="end-verse"
             size={ComboboxSize.Large}
-            fixedWidth={false}
+            isFixedWidth={false}
             label={<p className={styles.label}>{t('ending-verse')}</p>}
             items={endingVerseOptions}
             value={endingVerse}
-            disabled={!endChapter}
+            isDisabled={!endChapter}
             initialInputValue={getInitialInputValue(RangeItem.EndingVerse)}
             onChange={onVerseChange(RangeItemPosition.End)}
           />

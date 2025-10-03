@@ -23,7 +23,7 @@ import { getCanonicalUrl } from '@/utils/navigation';
 import verse3829 from 'src/data/verses/verse3829';
 
 const PATH = '/about-quran';
-const AboutQuranPage: NextPage = (): JSX.Element => {
+const AboutQuranPage: NextPage = () => {
   const { t, lang } = useTranslation('about-quran');
 
   const onStartReadingClicked = () => {

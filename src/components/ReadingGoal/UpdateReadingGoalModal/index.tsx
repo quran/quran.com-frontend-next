@@ -242,7 +242,7 @@ const UpdateReadingGoalModal = ({ isDisabled, goal }: UpdateReadingGoalButtonPro
                 onRangeChange={(newRange) => setRange(newRange)}
                 onPagesChange={setPages}
                 onSecondsChange={setSeconds}
-                widthFull={false}
+                isWidthFull={false}
                 logChange={logAmountChange}
               />
 

@@ -37,7 +37,7 @@ const TafsirVerseAction = ({
   const tafsirs = useSelector(selectSelectedTafsirs);
   const router = useRouter();
 
-  const contentModalRef = useRef<ContentModalHandles>();
+  const contentModalRef = useRef<ContentModalHandles>(null);
 
   const onModalClose = () => {
     if (isTranslationView) {
