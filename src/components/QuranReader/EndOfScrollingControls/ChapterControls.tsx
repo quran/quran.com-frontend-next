@@ -2,6 +2,7 @@ import React from 'react';
 
 import useTranslation from 'next-translate/useTranslation';
 import { useSelector } from 'react-redux';
+import { VersesResponse } from 'types/ApiResponses';
 
 import LearningPlanBanner from '../LearningPlanBanner';
 
@@ -14,7 +15,9 @@ import Language from '@/types/Language';
 import { isFirstSurah, isLastSurah } from '@/utils/chapter';
 import { logButtonClick } from '@/utils/eventLogger';
 import { getNextSurahNavigationUrl, getPreviousSurahNavigationUrl } from '@/utils/navigation';
-import { VersesResponse } from 'types/ApiResponses';
+
+// Surah Al-Mulk
+const LEARNING_PLAN_CHAPTER = 67;
 
 interface Props {
   initialData: VersesResponse;
@@ -23,13 +26,12 @@ interface Props {
 const ChapterControls: React.FC<Props> = ({ initialData }) => {
   const isReadingByRevelationOrder = useSelector(selectIsReadingByRevelationOrder);
 
-  const { t } = useTranslation('quran-reader');
+  const { t, lang } = useTranslation('quran-reader');
   const scrollToTop = useScrollToTop();
   const chapterIdAndLastVerse = initialData.pagesLookup.lookupRange.to;
   // example : "2:253" -> chapter 2 verse 253
   const chapterId = chapterIdAndLastVerse.split(':')[0];
   const chapterNumber = Number(chapterId);
-  const { lang } = useTranslation();
 
   return (
     <>
@@ -67,7 +69,7 @@ const ChapterControls: React.FC<Props> = ({ initialData }) => {
         </Button>
       )}
 
-      {lang === Language.EN && chapterNumber === 67 && <LearningPlanBanner />}
+      {lang === Language.EN && chapterNumber === LEARNING_PLAN_CHAPTER && <LearningPlanBanner />}
     </>
   );
 };

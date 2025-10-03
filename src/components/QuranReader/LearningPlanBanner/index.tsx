@@ -27,15 +27,29 @@ const LearningPlanBanner: React.FC = () => {
       aria-live="polite"
     >
       <div className={styles.bannerContainer}>
-        <p className={styles.mobileCaption}>
-          <strong className={styles.captionBold}>{t('learning-plan-banner.main-headline')} </strong>
-          {t('learning-plan-banner.subtitle-description')}
-        </p>
+        <div className={styles.captionRow}>
+          <p className={styles.caption}>
+            <strong className={styles.captionBold}>
+              {t('learning-plan-banner.main-headline')}
+            </strong>
+            {t('learning-plan-banner.subtitle-description')}
+          </p>
+          <Button
+            size={ButtonSize.Medium}
+            href={LEARNING_PLAN_URL}
+            className={styles.ctaButton}
+            ariaLabel={t('learning-plan-banner.button-accessibility-label')}
+            onClick={() => logButtonClick('learning_plan_banner_cta')}
+          >
+            {t('learning-plan-banner.call-to-action-button')}
+          </Button>
+        </div>
 
         <Link
           href={LEARNING_PLAN_URL}
           ariaLabel={t('learning-plan-banner.banner-image-description')}
           onClick={() => logButtonClick('learning_plan_banner_image')}
+          className={styles.imageLink}
         >
           <div className={styles.imageWrap}>
             <Image
@@ -43,37 +57,10 @@ const LearningPlanBanner: React.FC = () => {
               alt={t('learning-plan-banner.banner-image-alt-text')}
               width={BANNER_WIDTH}
               height={BANNER_HEIGHT}
+              priority
             />
           </div>
         </Link>
-
-        <Button
-          size={ButtonSize.Medium}
-          href={LEARNING_PLAN_URL}
-          className={styles.mobileButton}
-          ariaLabel={t('learning-plan-banner.button-accessibility-label')}
-          onClick={() => logButtonClick('learning_plan_banner_cta')}
-        >
-          {t('learning-plan-banner.call-to-action-button')}
-        </Button>
-
-        <div className={styles.desktopCaptionRow}>
-          <p className={styles.desktopCaption}>
-            <strong className={styles.captionBold}>
-              {t('learning-plan-banner.main-headline')}{' '}
-            </strong>
-            {t('learning-plan-banner.subtitle-description')}
-          </p>
-          <Button
-            size={ButtonSize.Medium}
-            href={LEARNING_PLAN_URL}
-            className={styles.desktopButton}
-            ariaLabel={t('learning-plan-banner.button-accessibility-label')}
-            onClick={() => logButtonClick('learning_plan_banner_cta')}
-          >
-            {t('learning-plan-banner.call-to-action-button')}
-          </Button>
-        </div>
       </div>
     </aside>
   );

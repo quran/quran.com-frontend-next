@@ -5,110 +5,95 @@
   display: flex;
   justify-content: center;
   padding-block: var(--spacing-mega);
+
   @include breakpoints.smallerThanTablet {
     padding-block: var(--spacing-large);
   }
 }
 
 .bannerContainer {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  gap: var(--spacing-small-px);
   width: 100%;
+  display: grid;
+  gap: var(--spacing-medium2-px);
+  grid-template-columns: 1fr auto;
+  grid-template-rows: auto auto;
+  grid-template-areas:
+    'image image'
+    'captionRow captionRow';
 
   @include breakpoints.smallerThanTablet {
-    justify-content: center;
-    align-items: center;
     gap: var(--spacing-medium-px);
+    justify-items: center; 
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    grid-template-areas:
+      'caption'
+      'image'
+      'button';
   }
 }
 
-.mobileCaption {
-  display: none;
 
-  @include breakpoints.smallerThanTablet {
-    display: block;
-    text-align: center;
-    font-weight: var(--font-weight-normal);
-    line-height: 1.2;
-    color: var(--color-text-default-new);
-  }
-}
+.imageLink { grid-area: image; }
 
 .imageWrap {
   flex-shrink: 0;
+
   img {
     width: 100%;
-    max-width: 1230px;
     height: 100%;
+    max-width: 1230px;
   }
-
+  
   @include breakpoints.smallerThanTablet {
-    width: 100vw;
-    height: 117px;
-  }
-}
-
-.mobileButton {
-  display: none;
-
-  @include breakpoints.smallerThanTablet {
-    display: flex;
-    padding: var(--spacing-xxsmall-px) var(--spacing-medium-px);
-    border-radius: var(--border-radius-medium-px);
-    background: var(--color-success-medium);
-    font-weight: var(--font-weight-normal);
-    border: none;
-    justify-content: center;
-    align-items: center;
+    width: 100%;
     height: auto;
-
-    &:hover {
-      background: var(--color-success-medium);
-      color: inherit;
-    }
-
-    @include theme.light {
-      color: var(--color-text-inverse);
-    }
-    @include theme.dark {
-      color: var(--color-text-default-new);
-    }
-    @include theme.sepia {
-      color: var(--color-text-inverse);
+    img {
+      height: auto;
+      object-fit: cover;
     }
   }
+
 }
 
-.desktopCaptionRow {
+.captionRow {
+  grid-area: captionRow;
   display: flex;
   align-items: center;
-  gap: var(--spacing-xlarge-px);
-  align-self: stretch;
-  // Align caption with content below the banner image
-  padding-inline-start: 167px;
-
+  gap: var(--spacing-xlarge-px); 
   @include breakpoints.smallerThanTablet {
-    display: none;
+    display: contents;
   }
 }
-
-.desktopCaption {
-  font-size: var(--font-size-large-px);
+.caption {
+  grid-area: caption;
   color: var(--color-text-default-new);
+  line-height: 1.2;
+
+  // Desktop caption aligns with content below banner image via padding-left: 167px
+  padding-inline-start: 167px;
+  font-size: var(--font-size-large-px);
+  font-weight: var(--font-weight-normal);
+  @include breakpoints.smallerThanTablet {
+    padding-inline-start: 0;
+    text-align: center;
+    font-size: var(--font-size-small-px);
+    font-weight: var(--font-weight-normal);
+  }
 }
 
 .captionBold {
   font-weight: var(--font-weight-bold);
 }
 
-.desktopButton {
+.ctaButton {
+  grid-area: button;
+  
   display: flex;
-  padding: var(--spacing-small-px) var(--spacing-medium2-px);
+  padding: var(--spacing-small-px) var(--spacing-medium-px);
   justify-content: center;
   align-items: center;
-  border-radius: var(--border-radius-rounded);
+  border-radius: var(--border-radius-medium-px);
   background: var(--color-success-medium);
   white-space: nowrap;
   font-size: var(--font-size-normal-px);
@@ -120,14 +105,19 @@
     color: inherit;
   }
 
-  @include theme.light {
-    color: var(--color-text-inverse);
-  }
-  @include theme.dark {
-    color: var(--color-text-default-new);
-  }
-  @include theme.sepia {
-    color: var(--color-text-inverse);
+  @include theme.light { color: var(--color-text-inverse); }
+  @include theme.dark { color: var(--color-text-default-new); }
+  @include theme.sepia { color: var(--color-text-inverse); }
+
+  @include breakpoints.smallerThanTablet {
+    
+    justify-self: center;
+    align-self: center;
+    padding: var(--spacing-xxsmall-px) var(--spacing-medium-px);
+    border-radius: var(--border-radius-medium-px);
+    font-weight: var(--font-weight-normal);
+    max-width: 100%;
+    white-space: normal;
+    line-height: 1.2;
   }
 }
-
