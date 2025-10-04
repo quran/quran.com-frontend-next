@@ -60,30 +60,55 @@ async function editBotMessage(channelId, messageId, payload) {
   const config = validateBotConfig();
   if (!config) return false;
 
-  try {
-    const res = await fetch(
-      `https://discord.com/api/v10/channels/${channelId}/messages/${messageId}`,
-      {
-        method: 'PATCH',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bot ${config.botToken}`,
-        },
-        body: JSON.stringify(payload),
-      },
-    );
+  // Ensure we have fields to track rate-limiting and serialization
+  if (!editBotMessage.lastEditTimestamp) {
+    editBotMessage.lastEditTimestamp = 0;
+  }
+  if (!editBotMessage.lastEditPromise) {
+    editBotMessage.lastEditPromise = Promise.resolve();
+  }
 
-    if (!res.ok) {
-      const text = await res.text().catch(() => '');
-      console.error(`Bot edit error: ${res.status} ${res.statusText}${text ? ` - ${text}` : ''}`);
+  // The actual edit operation (delays if called too soon after the previous edit)
+  const runEdit = async () => {
+    const now = Date.now();
+    const elapsed = now - editBotMessage.lastEditTimestamp;
+    if (elapsed < 1000) {
+      await new Promise((resolve) => {
+        setTimeout(resolve, 1000 - elapsed);
+      });
+    }
+    // mark the timestamp as the moment we start this request
+    editBotMessage.lastEditTimestamp = Date.now();
+
+    try {
+      const res = await fetch(
+        `https://discord.com/api/v10/channels/${channelId}/messages/${messageId}`,
+        {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bot ${config.botToken}`,
+          },
+          body: JSON.stringify(payload),
+        },
+      );
+
+      if (!res.ok) {
+        const text = await res.text().catch(() => '');
+        console.error(`Bot edit error: ${res.status} ${res.statusText}${text ? ` - ${text}` : ''}`);
+        return false;
+      }
+
+      return true;
+    } catch (err) {
+      console.error(`Bot edit error: ${err}`);
       return false;
     }
+  };
 
-    return true;
-  } catch (err) {
-    console.error(`Bot edit error: ${err}`);
-    return false;
-  }
+  // Chain the operation to the previous one so edits are serialized
+  editBotMessage.lastEditPromise = editBotMessage.lastEditPromise.then(runEdit, runEdit);
+  return editBotMessage.lastEditPromise;
 }
 
 // Create thread using bot
