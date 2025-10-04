@@ -4,15 +4,14 @@ import classNames from 'classnames';
 import useTranslation from 'next-translate/useTranslation';
 
 import styles from './AuthorInfo.module.scss';
+import buildReferredVerseText from './buildReferredVerseText';
 
 import Link, { LinkVariant } from '@/dls/Link/Link';
 import ChevronDownIcon from '@/icons/chevron-down.svg';
 import VerifiedIcon from '@/icons/verified.svg';
 import { formatDateRelatively } from '@/utils/datetime';
 import { logButtonClick } from '@/utils/eventLogger';
-import { toLocalizedNumber } from '@/utils/locale';
 import { getQuranReflectAuthorUrl } from '@/utils/quranReflect/navigation';
-import { makeVerseKey } from '@/utils/verse';
 import { ReflectionVerseReference } from 'types/QuranReflect/ReflectionVerseReference';
 
 type Props = {
@@ -53,30 +52,8 @@ const AuthorInfo: React.FC<Props> = ({
   };
 
   const referredVerseText = useMemo(() => {
-    let text = '';
-    const chapters = verseReferences
-      .filter((verse) => !verse.from || !verse.to)
-      .map((verse) => toLocalizedNumber(verse.chapter, lang));
-
-    if (chapters.length > 0) {
-      text += `${t('common:surah')} ${chapters.join(',')}`;
-    }
-
-    const verses = nonChapterVerseReferences.map((verse) =>
-      makeVerseKey(
-        toLocalizedNumber(verse.chapter, lang),
-        toLocalizedNumber(verse.from, lang),
-        toLocalizedNumber(verse.to, lang),
-      ),
-    );
-
-    if (verses.length > 0) {
-      if (chapters.length > 0) text += ` ${t('common:and')} `;
-      text += `${t('common:ayah')} ${verses.join(',')}`;
-    }
-
-    return text;
-  }, [verseReferences, nonChapterVerseReferences, lang, t]);
+    return buildReferredVerseText(verseReferences, lang, t);
+  }, [verseReferences, lang, t]);
 
   return (
     <div className={styles.authorInfo}>
