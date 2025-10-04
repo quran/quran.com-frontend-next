@@ -47,12 +47,28 @@ test.describe('Dedicated Search Page', () => {
     'No results message is displayed for invalid searches',
     { tag: ['@fast', '@search', '@page'] },
     async ({ page }) => {
-      // 1. Click on the search bar (#searchQuery)
+      // Search for a random string that should yield no results
       await homePage.goTo('/search?page=1&query=abcd');
 
-      // 2. We should see the "No results found" message
+      // We should see the "No results found" message
       const searchResults = page.getByTestId('search-body-container');
       await expect(searchResults.getByText('No results found')).toBeVisible();
+    },
+  );
+
+  test(
+    'Searching for "ayatul kursi" displays 2:255 in results',
+    { tag: ['@fast', '@search', '@page'] },
+    async ({ page }) => {
+      // 1. Click on the search bar (#searchQuery)
+      const searchBar = page.locator('#searchQuery');
+      await searchBar.fill('ayatul kursi');
+      // press enter to trigger the search
+      await searchBar.press('Enter');
+
+      // 2. In the "search-body-container" div, we should see the "2:255" result
+      const searchResults = page.getByTestId('search-body-container');
+      await expect(searchResults.getByText('2:255')).toBeVisible();
     },
   );
 });

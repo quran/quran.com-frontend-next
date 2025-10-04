@@ -18,7 +18,7 @@ test.describe('Navigation Sidebar Operations', () => {
       await expect(page.getByTestId('sidebar-navigation')).not.toBeVisible();
 
       // 1. Click on the Navigate Quran button
-      await page.getByLabel('Navigate Quran').click();
+      await page.getByTestId('navigate-quran-button').click();
       // 2. Make sure the Navigate Quran drawer is visible
       await expect(page.getByTestId('sidebar-navigation')).toBeVisible();
 
@@ -38,7 +38,7 @@ test.describe('Chapter Navigation and Search', () => {
     { tag: ['@fast', '@navigation', '@search'] },
     async ({ page }) => {
       // 1. Click on the Navigate Quran button
-      await page.getByLabel('Navigate Quran').click();
+      await page.getByTestId('navigate-quran-button').click();
 
       // 2. Make sure the Surahs list is visible
       const surahsList = page.getByTestId('sidebar-navigation');
@@ -61,7 +61,7 @@ test.describe('Chapter Navigation and Search', () => {
     { tag: ['@fast', '@navigation', '@verses'] },
     async ({ page }) => {
       // 1. Click on the Navigate Quran button
-      await page.getByLabel('Navigate Quran').click();
+      await page.getByTestId('navigate-quran-button').click();
 
       // 2. Click on the Verse button
       const verseButton = page.getByTestId('verse-button');
@@ -88,7 +88,7 @@ test.describe('Quran Structure Navigation', () => {
     { tag: ['@fast', '@navigation', '@juz'] },
     async ({ page }) => {
       // 1. Click on the Navigate Quran button
-      await page.getByLabel('Navigate Quran').click();
+      await page.getByTestId('navigate-quran-button').click();
 
       // 2. Click on the Juz button
       const juzButton = page.getByTestId('juz-button');
@@ -107,7 +107,7 @@ test.describe('Quran Structure Navigation', () => {
     { tag: ['@fast', '@navigation', '@pages'] },
     async ({ page }) => {
       // 1. Click on the Navigate Quran button
-      await page.getByLabel('Navigate Quran').click();
+      await page.getByTestId('navigate-quran-button').click();
 
       // 2. Click on the Page button
       const pageButton = page.getByTestId('page-button');
@@ -129,7 +129,7 @@ test.describe('Navigation Functionality', () => {
     { tag: ['@slow', '@navigation', '@links', '@surah'] },
     async ({ page }) => {
       // 1. Click on the Navigate Quran button
-      await page.getByLabel('Navigate Quran').click();
+      await page.getByTestId('navigate-quran-button').click();
 
       const navigationList = page.getByTestId('sidebar-navigation');
 
@@ -145,7 +145,7 @@ test.describe('Navigation Functionality', () => {
     { tag: ['@slow', '@navigation', '@links', '@verse'] },
     async ({ page }) => {
       // 1. Click on the Navigate Quran button
-      await page.getByLabel('Navigate Quran').click();
+      await page.getByTestId('navigate-quran-button').click();
 
       // 2. Now click on the "Verse" button
       const verseButton = page.getByTestId('verse-button');
@@ -165,7 +165,7 @@ test.describe('Navigation Functionality', () => {
     { tag: ['@slow', '@navigation', '@links', '@juz'] },
     async ({ page }) => {
       // 1. Click on the Navigate Quran button
-      await page.getByLabel('Navigate Quran').click();
+      await page.getByTestId('navigate-quran-button').click();
 
       // 2. Now click on the "Juz" button
       const juzButton = page.getByTestId('juz-button');
@@ -185,7 +185,7 @@ test.describe('Navigation Functionality', () => {
     { tag: ['@slow', '@navigation', '@links', '@page'] },
     async ({ page }) => {
       // 1. Click on the Navigate Quran button
-      await page.getByLabel('Navigate Quran').click();
+      await page.getByTestId('navigate-quran-button').click();
 
       // 2. Now click on the "Page" button
       const pageButton = page.getByTestId('page-button');

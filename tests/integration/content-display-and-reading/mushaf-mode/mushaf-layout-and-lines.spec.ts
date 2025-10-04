@@ -7,34 +7,137 @@ let homePage: Homepage;
 test.beforeEach(async ({ page, isMobile, context }) => {
   homePage = new Homepage(page, context);
 
-  await homePage.goTo('/page/3');
+  await homePage.goTo('/78');
 
-  // Click on the reading button to switch to the mushaf view
-  if (isMobile) {
-    // scroll down a little to make the tab visible (bypassing a render issue)
-    // FIXME: Remove this workaround when the underlying issue is fixed
-    await page.mouse.wheel(0, 200);
-    await page.mouse.wheel(0, -100);
-
-    await page.getByTestId('reading-tab').click();
-  } else {
-    await page.getByTestId('reading-button').click();
-  }
+  // Switch to mushaf view
+  await homePage.enableMushafMode(isMobile);
 });
 
 test(
   'Mushaf displays exactly 15 lines per page',
   { tag: ['@slow', '@mushaf', '@layout'] },
   async ({ page }) => {
-    const pageContainer = page.locator('#page-3');
+    const pageContainer = page.locator('#page-582');
     await expect(pageContainer).toBeVisible();
 
-    // Verify it has 15 lines that all start with an id `Page3-LineN`
-    for (let i = 1; i <= 15; i += 1) {
-      const line = pageContainer.locator(`#Page3-Line${i}`);
+    // Verify that all lines (from 3 to 15) for this surah are visible
+    for (let i = 3; i <= 15; i += 1) {
+      const line = pageContainer.locator(`#Page582-Line${i}`);
       // eslint-disable-next-line no-await-in-loop
       await expect(line).toBeVisible();
     }
+
+    // Verify that line 16 is not present
+    const line16 = pageContainer.locator('#Page582-Line16');
+    await expect(line16).toHaveCount(0);
+  },
+);
+
+test('Mushaf displays all page of the Surah', { tag: ['@mushaf', '@layout'] }, async ({ page }) => {
+  // Verify that all pages for this surah are visible (page 582 and 583 for Surah An-Naba)
+  for (let i = 582; i <= 583; i += 1) {
+    const pageContainer = page.locator(`#page-${i}`);
+    // eslint-disable-next-line no-await-in-loop
+    await expect(pageContainer).toBeVisible();
+  }
+
+  // Verify that page 584 is not present
+  const page584 = page.locator('#page-584');
+  await expect(page584).toHaveCount(0);
+
+  // Verify that all lines (from 1 to 7 for Surah An-Naba) for page 583 are visible
+  const page583 = page.locator('#page-583');
+  for (let i = 1; i <= 7; i += 1) {
+    const line = page583.locator(`#Page583-Line${i}`);
+    // eslint-disable-next-line no-await-in-loop
+    await expect(line).toBeVisible();
+  }
+
+  // Verify that line 8 is not present
+  const line8 = page583.locator('#Page583-Line8');
+  await expect(line8).toHaveCount(0);
+});
+
+test(
+  'Next Surah Button works correctly in Mushaf view',
+  { tag: ['@mushaf', '@navigation'] },
+  async ({ page, isMobile }) => {
+    // Click on the next surah button
+    await Promise.all([page.getByTestId('next-surah-button').click(), page.waitForURL('/79')]);
+    await expect(page).toHaveURL(/\/79$/);
+
+    // Verify we are still in the mushaf view
+    if (isMobile) {
+      // FIXME: Remove this workaround when the underlying issue is fixed
+      await page.mouse.wheel(0, 200);
+      await page.mouse.wheel(0, -100);
+
+      await expect(page.getByTestId('reading-tab')).toHaveAttribute('data-is-selected', 'true');
+    } else {
+      await expect(page.getByTestId('reading-button')).toHaveAttribute('data-is-selected', 'true');
+    }
+  },
+);
+
+test(
+  'Chapter Beginning Button works correctly in Mushaf view',
+  { tag: ['@mushaf', '@navigation'] },
+  async ({ page }) => {
+    // Scroll down a bit to make sure we are not at the top of the page
+    await page.mouse.wheel(0, 500);
+
+    // Click on the chapter beginning button
+    await page.getByTestId('chapter-beginning-button').click();
+    await page.waitForTimeout(1000); // wait for a bit to ensure the scroll is done
+
+    // We should be at the top of the page now
+    const currentScrollPosition = await page.evaluate(() => window.scrollY);
+    expect(currentScrollPosition).toBe(0);
+  },
+);
+
+test(
+  'Previous Surah Button works correctly in Mushaf view',
+  { tag: ['@mushaf', '@navigation'] },
+  async ({ page, isMobile }) => {
+    // Click on the previous surah button
+    await Promise.all([page.getByTestId('previous-surah-button').click(), page.waitForURL('/77')]);
+    await expect(page).toHaveURL(/\/77$/);
+
+    // Verify we are still in the mushaf view
+    if (isMobile) {
+      // FIXME: Remove this workaround when the underlying issue is fixed
+      await page.mouse.wheel(0, 200);
+      await page.mouse.wheel(0, -100);
+
+      await expect(page.getByTestId('reading-tab')).toHaveAttribute('data-is-selected', 'true');
+    } else {
+      await expect(page.getByTestId('reading-button')).toHaveAttribute('data-is-selected', 'true');
+    }
+  },
+);
+
+test(
+  'Previous Surah Button is not displayed on first Surah in Mushaf view',
+  { tag: ['@mushaf', '@navigation'] },
+  async ({ page }) => {
+    await homePage.goTo('/1');
+
+    // Verify the previous surah button is not visible
+    const previousSurahButton = page.getByTestId('previous-surah-button');
+    await expect(previousSurahButton).toHaveCount(0);
+  },
+);
+
+test(
+  'Next Surah Button is not displayed on last Surah in Mushaf view',
+  { tag: ['@mushaf', '@navigation'] },
+  async ({ page }) => {
+    await homePage.goTo('/114');
+
+    // Verify the next surah button is not visible
+    const nextSurahButton = page.getByTestId('next-surah-button');
+    await expect(nextSurahButton).toHaveCount(0);
   },
 );
 

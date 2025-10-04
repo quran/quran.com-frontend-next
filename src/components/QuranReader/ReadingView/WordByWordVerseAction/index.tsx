@@ -122,13 +122,13 @@ const WordByWordVerseAction: React.FC<Props> = ({
               const words = data.verses.map((verseItem) => getVerseWords(verseItem)).flat();
 
               return (
-                <>
+                <div data-testid="wbw-verse-modal-content">
                   <WordByWordHeading isTranslation />
                   <PlainVerseText words={words} shouldShowWordByWordTranslation />
                   <Separator className={styles.separator} />
                   <WordByWordHeading isTranslation={false} />
                   <PlainVerseText words={words} shouldShowWordByWordTransliteration />
-                </>
+                </div>
               );
             }}
           />

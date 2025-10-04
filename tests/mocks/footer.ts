@@ -10,7 +10,7 @@ const footerLinks = [
   { text: 'Help', href: '/support', target: '' },
 
   // Our Projects section
-  { text: 'Quran.com', href: 'https://quran.com', target: '_blank' },
+  { text: 'Quran.com', href: 'https://quran.com', target: '' },
   {
     text: 'Quran For Android',
     href: '',
