@@ -36,17 +36,42 @@ export default defineConfig({
   /* Configure projects for major browsers */
   projects: [
     {
+      name: 'setup',
+      testMatch: /.*\.setup\.ts/,
+      testDir: './tests',
+    },
+    /* Tests that require user authentication */
+    {
+      name: 'Authentificated Chromium',
+      testDir: './tests/integration/loggedin',
+      use: {
+        ...devices['Desktop Chrome'],
+        storageState: './playwright/.auth/user.json',
+      },
+      dependencies: ['setup'],
+    },
+    {
+      name: 'Authentificated Mobile Chrome',
+      testDir: './tests/integration/loggedin',
+      use: {
+        ...devices['Pixel 5'],
+        storageState: './playwright/.auth/user.json',
+      },
+      dependencies: ['setup'],
+    },
+    {
       name: 'chromium',
       use: {
         ...devices['Desktop Chrome'],
       },
+      testIgnore: '**/loggedin/**',
     },
-    /* Test against mobile viewports. */
     {
       name: 'Mobile Chrome',
       use: {
         ...devices['Pixel 5'],
       },
+      testIgnore: '**/loggedin/**',
     },
   ],
 
