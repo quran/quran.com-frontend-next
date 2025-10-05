@@ -30,10 +30,10 @@ const MainDetails: React.FC<Props> = ({ course }) => {
     <>
       <DetailSection
         title={t('learn-duration')}
-        description={t('duration-daily', {
+        description={`${t('duration-daily', {
           dailyMins: dailyMinutes,
           days: lessons.length,
-        })}
+        })}.`}
       />
       {shouldUseMilkdown ? (
         <MilkdownProvider>
