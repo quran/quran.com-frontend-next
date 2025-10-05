@@ -84,7 +84,7 @@ test(
   { tag: ['@mushaf', '@navigation'] },
   async ({ page }) => {
     // Scroll down a bit to make sure we are not at the top of the page
-    await page.mouse.wheel(0, 500);
+    await page.evaluate(() => window.scrollTo(0, 500));
 
     // Click on the chapter beginning button
     await page.getByTestId('chapter-beginning-button').click();
