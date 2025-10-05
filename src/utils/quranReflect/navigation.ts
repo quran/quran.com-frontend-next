@@ -30,3 +30,5 @@ export const getQuranReflectTagUrl = (tag: string) =>
   `${API_HOST}/?tags=${encodeURIComponent(tag)}`;
 
 export const getQRNavigationUrl = () => `${API_HOST}`;
+
+export const getLearningPlanBannerUrl = (slug: string): string => `/learning-plans/${slug}`;
