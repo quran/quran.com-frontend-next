@@ -4,11 +4,11 @@ import { useRouter } from 'next/router';
 
 import { useAuthContext } from '@/contexts/AuthContext';
 import { logErrorToSentry } from '@/lib/sentry';
-import QueryParam from '@/types/QueryParam';
+import { logoutUser } from '@/utils/auth/api';
 import { removeUserIdCookie } from '@/utils/auth/login';
 import { removeLastSyncAt } from '@/utils/auth/userDataSync';
 import { logButtonClick } from '@/utils/eventLogger';
-import { ROUTES } from '@/utils/navigation';
+import { getLoginNavigationUrl } from '@/utils/navigation';
 
 type LogoutOptions = {
   eventName?: string;
@@ -37,13 +37,7 @@ const useLogout = (): LogoutFunction => {
       if (eventName) logButtonClick(eventName);
 
       try {
-        authContextLogout();
-        removeLastSyncAt();
-
-        if (!redirectToLogin) {
-          const redirect = router.asPath;
-          await router.replace(`${ROUTES.LOGOUT}?${QueryParam.REDIRECT_TO}=${redirect}`);
-        }
+        await logoutUser();
       } catch (error) {
         // TODO: Notify user of remote logout failure (e.g., toast/snackbar)
         logErrorToSentry(error, {
@@ -52,6 +46,13 @@ const useLogout = (): LogoutFunction => {
         });
         // Best-effort local cleanup when server logout fails
         removeUserIdCookie();
+      }
+      authContextLogout();
+      removeLastSyncAt();
+
+      if (redirectToLogin) {
+        // Use replace instead of push to prevent back-navigation to protected pages.
+        await router.replace(getLoginNavigationUrl());
       }
     },
     [router, authContextLogout, state?.user?.id],
