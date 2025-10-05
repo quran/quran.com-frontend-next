@@ -19,7 +19,7 @@ async function waitForBannerPresent(page: Page) {
   await scrollToBottom(page);
   // Wait for virtualized list to settle
   await page.waitForLoadState('domcontentloaded');
-  
+
   await expect
     .poll(
       async () => {
