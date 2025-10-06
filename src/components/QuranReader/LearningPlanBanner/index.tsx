@@ -30,12 +30,12 @@ const LearningPlanBanner: React.FC = () => {
         <div className={styles.captionRow}>
           <p className={styles.caption}>
             <strong className={styles.captionBold}>
-              {t('learning-plan-banner.main-headline')}
+              {t('learning-plan-banner.main-headline')}{' '}
             </strong>
             {t('learning-plan-banner.subtitle-description')}
           </p>
           <Button
-            size={ButtonSize.Medium}
+            size={ButtonSize.Small}
             href={LEARNING_PLAN_URL}
             className={styles.ctaButton}
             ariaLabel={t('learning-plan-banner.button-accessibility-label')}
