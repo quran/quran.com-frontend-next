@@ -17,7 +17,7 @@ interface Room {
   avatarFileSize?: number;
   avatarUpdatedAt?: Date;
   verified?: boolean;
-  roomType?: string;
+  roomType?: RoomType;
   subdomain?: string;
   url?: string;
   country?: string;
@@ -25,6 +25,11 @@ interface Room {
   metadata?: PageMetadata;
   isAdmin?: boolean | string;
   isOwner?: boolean | string;
+}
+
+export enum RoomType {
+  GROUP = 'group',
+  PAGE = 'page',
 }
 
 export default Room;
