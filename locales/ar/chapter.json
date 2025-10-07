@@ -1,4 +1,4 @@
 {
-  "meta-description": "اقرأ واستمع إلى سورة {{transliteratedName}}. نزلت في {{revelationPlace}}، وترتيبها في القرآن {{chapterOrder}}، وآياتها {{versesCount}}.",
-  "ranges-meta-desc": "اقرأ واستمع من آية {{rangeFrom}} إلى آية {{rangeTo}} ."
+  "meta-description": "اقرأ واستمع إلى سورة {{transliteratedName}}. نَزَلَتِ فِي {{revelationPlace}}، وترتيبها في القرآن {{chapterOrder}}، وآياتها {{versesCount}}.",
+  "ranges-meta-desc": "اقرأ واستمع من آية {{rangeFrom}} إلى آية {{rangeTo}}."
 }

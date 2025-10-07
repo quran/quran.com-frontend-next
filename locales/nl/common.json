@@ -49,7 +49,7 @@
   "audio": {
     "auto-scroll": {
       "off": "Uit",
-      "on": "Op",
+      "on": "Aan",
       "title": "Automatisch scrollen"
     },
     "displaying": "Weergeven",
@@ -58,7 +58,7 @@
     "experience": "Ervaring",
     "play": "Audio afspelen",
     "playback-normal": "Normaal",
-    "playback-speed": "Afspeelsnelheid",
+    "playback-speed": "Afspeel snelheid",
     "playback-speed-unit": "x",
     "player": {
       "close-audio-player": "Sluit audio speler",
@@ -72,7 +72,7 @@
       "pause-audio": "Audio pauzeren",
       "play": "start",
       "play-audio": "Audio afspelen",
-      "play-range": "Speelbereik",
+      "play-range": "Speel bereik",
       "previous-ayah": "Vorige Ayah",
       "repeat-1-verse": "Herhaal vers",
       "repeat-settings": "Instellingen herhalen",
@@ -86,7 +86,7 @@
       "verses-range": "Bereik van verzen",
       "volume-control": "Volume regeling"
     },
-    "repeat-moved": "De herhaalinstellingen zijn verplaatst naar de audiospeler. Klik op het <0> </0> om ze te openen",
+    "repeat-moved": "De herhaal instellingen zijn verplaatst naar de audiospeler. Klik op het <0> </0> om ze te openen",
     "select-reciter": "Selecteer reciteur",
     "speed": "Snelheid",
     "title": "Audio"
@@ -204,7 +204,7 @@
     "16_lines": "16 lijnen",
     "code_v1": "Koning Fahad Complex V1",
     "code_v2": "Koning Fahad Complex V2",
-    "font-size": "Lettertypegrootte",
+    "font-size": "Lettertype grootte",
     "lines": "lijnen",
     "qcf-desc": "Koning Fahad Complex (V1 en V2) Fonts bieden een hogere kwaliteit, maar laden duurt langer.",
     "qcf-v4-desc": "Tajweed-lettertypen zijn gemaakt met behulp van Easy Quran - Dar Al Marifa Tajweed Mushaf en King Fahad Glorious Quran Printing Complex (KFGQPC) - Uthmanic Hafs V4-lettertypen, nadat we van beide partijen toestemming hadden gekregen.",
@@ -219,7 +219,7 @@
     "translation-font-size": "Vertaling lettergrootte"
   },
   "footer": {
-    "description": "Quran.com is een vertrouwd platform dat door miljoenen mensen wereldwijd wordt gebruikt om de Koran in meerdere talen te lezen, te zoeken, te beluisteren en erover te reflecteren. Het biedt vertalingen, tafseer, recitaties, woord-voor-woord vertalingen en hulpmiddelen voor diepere studie, waardoor de Koran voor iedereen toegankelijk is. <br/> <br/> Als Sadaqah Jariyah is Quran.com toegewijd om mensen te helpen een diepe verbinding met de Koran te maken. Ondersteund door <link>Quran.Foundation</link>, een 501(c)(3) non-profitorganisatie, blijft Quran.com groeien als een gratis en waardevolle bron voor iedereen, Alhamdulillah.",
+    "description": "Quran.com is een vertrouwd platform dat wereldwijd door miljoenen mensen wordt gebruikt om de Koran in meerdere talen te lezen, te doorzoeken, te beluisteren en erover na te denken. Het biedt vertalingen, tafsir, recitaties, woord-voor-woordvertalingen en tools voor diepgaandere studie, waardoor de Koran voor iedereen toegankelijk is. <br/> <br/> Als Sadaqah Jariyah zet Quran.com zich in om mensen te helpen een diepe verbinding met de Koran te maken. Ondersteund door <link> Quran.Foundation </link>, een non-profitorganisatie met 501(c)(3)-status, blijft Quran.com groeien als een gratis en waardevolle bron voor iedereen, Alhamdulillah.",
     "hiring": "Wij werven aan! Sluit je aan bij het team van QuranFoundation en draag bij aan onze missie. <link> Solliciteer nu! </link>",
     "rights": "Alle rechten voorbehouden",
     "title": "Lees, luister, zoek en reflecteer over de Koran"
@@ -325,7 +325,7 @@
   "profile": "Profiel",
   "projects-desc": "Non-profitprojecten die eigendom zijn van, beheerd worden door of gesponsord worden door <link>Quran.Foundation</link>.",
   "q-reflect": "QuranReflect",
-  "quran-com": "koran.com",
+  "quran-com": "Quran.com",
   "quran-radio": "Koran Radio",
   "reading-history": "Geschiedenis lezen",
   "reading-preference": {
@@ -357,8 +357,8 @@
     "more-results": "Meer resultaten",
     "no-results": "Geen resultaten gevonden",
     "no-results-suggestion": "We konden geen overeenkomende zoekresultaten vinden voor \" {{searchQuery}} \". probeer een ander trefwoord te zoeken.",
-    "popular": "Populaire zoekopdrachten",
-    "recent": "Recente zoekopdrachten",
+    "popular": "Populaire zoek opdrachten",
+    "recent": "Recente zoek opdrachten",
     "results": "resultaten",
     "show-all": "Toon alle resultaten",
     "switch-mode": "Overschakelen naar Geavanceerd zoeken",
@@ -431,11 +431,11 @@
     "light": "Licht",
     "sepia": "Sepia",
     "system": "Systeem",
-    "system-desc": "Het systeemthema past zich automatisch aan uw instellingen voor licht/donkermodus aan"
+    "system-desc": "Het systeem thema past zich automatisch aan uw instellingen voor licht-donkermodus"
   },
   "to": "Tot",
-  "tooltip": "Knopinfo",
-  "tooltip-trans-lang": "Taal voor knopinfo",
+  "tooltip": "Knop info",
+  "tooltip-trans-lang": "knopinfo voor Taal",
   "trans-lang": "Vertaling Taal",
   "translation": "Vertaling",
   "translations": "Vertalingen",
@@ -457,7 +457,7 @@
   "verses": "Verzen",
   "view": "Weergave",
   "voice": {
-    "ask-permission": "Schakel microfoontoestemming in om gesproken zoekopdrachten te gaan gebruiken",
+    "ask-permission": "Schakel microfoon toestemming in om gesproken zoekopdrachten te gaan gebruiken.",
     "error": "Er is een fout opgetreden, probeer het later opnieuw.",
     "language-unavailable": "Arabisch wordt niet ondersteund door uw browser.",
     "network": "Netwerkfout. Controleer uw internetverbinding en probeer het opnieuw.",

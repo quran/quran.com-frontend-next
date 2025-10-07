@@ -6,45 +6,45 @@
     "auth-onboarding": {
       "data-sync": {
         "action": "التالي",
-        "description": "سواء كنت تستخدم موقع Quran.com على هاتفك أو حاسوبك المحمول، ستتوفر إشاراتك المرجعية وآخر آيات قرأتها وتفضيلاتك",
+        "description": "سواء كنت تستخدم Quran.com على هاتفك أو حاسوبك، فستجد ما حفظته من آيات وإعدادات متاحة دائمًا.",
         "title": "ستتم مزامنة بياناتك <br></br> عبر الأجهزة"
       },
       "feedback": {
-        "action": "حسنا، فهمت",
-        "description": "شكرا لاستخدامك موقع Quran.com ويسعدنا سماع ملاحظاتك على <link> feedback.Quran.com </link>",
-        "title": "نريد أن نسمع أفكارك"
+        "action": "حسنًا، فهمتُ",
+        "description": "شكرًا لاستخدامك Quran.comويسعدنا سماع ملاحظاتك على <link> feedback.Quran.com </link>",
+        "title": "يسعدنا سماع آرائك"
       },
       "quran-foundation-link": {
         "action": "التالي",
         "description": "استخدم تسجيل الدخول الخاص بك إلى موقع قرآن دوت كوم (Quran.com) للوصول إلى موقع تدبرات قرآنية (QuranReflect.com) - مجتمع عالمي مزدهر يشارك في التفكير القرآني.",
-        "title": "استخدم حسابك عبر تطبيقات Quran.Foundation!"
+        "title": "يمكنك استخدام حسابك في جميع تطبيقات Quran.Foundation!"
       },
       "quran-growth-journey": {
         "action": "التالي",
         "description": "حافظ على استمراريتك في قراءة القرآن وحقق أهدافك مع بناء عادات جديدة",
-        "title": "ابدأ رحلتك للارتقاء بالقرآن!"
+        "title": "ابدأ رحلتك الإيمانية مع القرآن!"
       },
       "welcome": {
-        "action": "أرني ما الجديد",
-        "title": "مرحبا بكم في حساب المستخدم التجريبي لموقع Quran.com <br></br>"
+        "action": "اكتشف ما هو جديد",
+        "title": "مرحبًا بك في حسابك على Quran.com <br></br>"
       }
     },
     "collections-announcement": {
       "slide-1": {
         "description": "يسعدنا أن نعلن أنه يمكنك الآن تجميع الإشارات المرجعية ضمن \"المجموعات\"! <br/> <br/> <li> أضف أي عدد تريده من المجموعات </li> <li> أضف إشارة مرجعية إلى مجموعة واحدة أو أكثر </li> <li> والمزيد! </li>",
-        "title": "مجموعات الإشارات المرجعية هنا!"
+        "title": "هنا تجد مجموعاتك المحفوظة!"
       }
     }
   },
   "answers": "الإجابات",
   "aria": {
     "change-settings": "تغيير الإعدادات",
-    "drawer-close": "أغلق الدرج",
+    "drawer-close": "اغلق القائمة الجانبية",
     "msg-close": "إغلاق الرسالة",
-    "nav-drawer-open": "افتح درج التنقل",
+    "nav-drawer-open": "افتح القائمة الجانبية",
     "play-surah": "تشغيل السورة {{surahName}}",
     "select-lng": "اختر اللغة",
-    "sidebar-nav-close": "إغلاق شريط التنقل الجانبي"
+    "sidebar-nav-close": "اغلق القائمة الجانبية"
   },
   "audio": {
     "auto-scroll": {
@@ -53,9 +53,9 @@
       "title": "تحريك تلقائي"
     },
     "displaying": "العرض",
-    "exp-tip": "<span>تغيير المحتوى المعروض ضمن</span><br></br> <boldSpan>الإعدادات</boldSpan> > <boldSpan>كلمة بكلمة</boldSpan>",
+    "exp-tip": "<span>قُم بتغيير المحتوى المعروض ضمن</span><br></br> <boldSpan>الإعدادات</boldSpan> > <boldSpan>كلمة بكلمة</boldSpan>",
     "exp-tip-no-select": "<span>حدد خيار عرض تلميح الأداة وحدد <br></br> الترجمة و / أو خيار كتابة لغة بأحرف لغة أخرى</span><br></br><span> ضمن </span><boldSpan>الإعدادات</boldSpan> > <boldSpan>كلمة بكلمة</boldSpan><span>، إلى </span><br></br> <span>تمكين هذه الميزة.</span>",
-    "experience": "النمط",
+    "experience": "خيارات العرض",
     "play": "تشغيل الصوت",
     "playback-normal": "طبيعي",
     "playback-speed": "سرعة التشغيل",
@@ -86,8 +86,8 @@
       "verses-range": "مجموعة الآيات",
       "volume-control": "التحكم في مستوى الصوت"
     },
-    "repeat-moved": "تم نقل إعدادات التكرار إلى مشغل الصوت. انقر فوق <0> </0> للوصول إليها",
-    "select-reciter": "حدد القارئ",
+    "repeat-moved": "تم نقل إعدادات التكرار إلى مشغل الصوت.اضغط على أيقونة <0> </0> للوصول إليها",
+    "select-reciter": "اختر القارئ",
     "speed": "السرعة",
     "title": "الصوت"
   },
@@ -116,7 +116,7 @@
     "sub-header": "شارك اهتمامك عبر تعبئة هذا النموذج، وسنتواصل معك عند توفر فرصة مناسبة بإذن الله.",
     "title": "المجتمع"
   },
-  "complete-sign-up": "أكمل تسجيلك",
+  "complete-sign-up": "أكمل التسجيل",
   "complete-signup": {
     "description": "نحتاج إلى المعلومات المفقودة التالية لاستكمال التسجيل الخاص بك.",
     "title": "أكمل التسجيل الخاص بك",
@@ -149,50 +149,50 @@
   "donate_once": "تبرع مرة واحدة",
   "edit": "تعديل",
   "email-verification": {
-    "check-spam": "ألم تتلق رسالة التحقق؟ تحقق من البريد الإلكتروني العشوائي",
-    "email-sent": "لقد أرسلنا للتو بريدًا إلكترونيًا إلى <strong> {{email}} </strong>",
-    "email-verification": "تأكيد بواسطة البريد الالكتروني",
+    "check-spam": "لم تستلم رسالة التحقق؟ تحقق من مجلد الرسائل المزعجة",
+    "email-sent": "لقد أرسلنا للتو رسالة إلى <strong> {{email}} </strong>",
+    "email-verification": "التحقق بواسطة البريد الإلكتروني",
     "resend-email": "إعادة إرسال البريد الإلكتروني",
-    "resend-email-in": "إعادة إرسال رسالة التحقق في غضون {{remainingTime}} ثانية ...",
+    "resend-email-in": "أعد إرسال رسالة التحقق بعد {{remainingTime}} ثانية ...",
     "verify-code": "التحقق من الرمز"
   },
-  "end-year-donate": "اجعل ختام 2024 صدقة ❤️",
+  "end-year-donate": "إختم عام ٢٠٢٤ بالصدقة ❤️",
   "error": {
-    "MediaVersesRangeLimitExceeded": "لا يمكنك اختيار أكثر من {{limit}} آية في نفس الوقت. يرجى اختيار نطاق أصغر.",
-    "bookmark-sync": "الإشارة المرجعية غير متزامنة.",
+    "MediaVersesRangeLimitExceeded": "يمكنك تحديد {{limit}} فقط في المرة الواحدة. يرجى اختيار مدى أصغر.",
+    "bookmark-sync": "سجلات الحفظ غير متزامنة",
     "email-login-fail": "فشل تسجيل الدخول بالبريد الإلكتروني. يرجى المحاولة مرة أخرى",
     "general": "هناك خطأ ما. حاول مرة أخرى.",
     "offline": "يبدو أنك فقدت الاتصال. يرجى التحقق من ذلك وحاول مرة أخرى.",
-    "pref-persist-fail": "فشلت مزامنة إعداداتك مع السحابة.",
-    "ranges-no-value": "يجب تحديد بداية ونهاية النطاق",
+    "pref-persist-fail": "فشل مزامنة إعداداتك مع جميع أجهزتك",
+    "ranges-no-value": "يجب تحديد قيمة لكل من البداية والنهاية",
     "ranges-too-many-verses": "بحد أقصى {{maxNumberOfVerses}} آيات",
-    "ranges-wrong-order": "يجب أن تكون الآية الابتدائية قبل الآية الختامية."
+    "ranges-wrong-order": "الآية الافتتاحية يجب أن تكون قبل الآية الختامية."
   },
   "errors": {
     "account-banned": "عذرًا، تم حظر حسابك. يُرجى التواصل مع مؤسسة Quran.Foundation",
     "badRequest": "*طلب غير صالح",
     "banned": "*عذرًا، تم حظر حسابك. يُرجى التواصل مع مؤسسة Quran.Foundation",
     "complete-signup-failed": "فشل في إتمام التسجيل. يرجى المحاولة مرة أخرى.",
-    "confirm": "*تأكيد كلمة المرور غير متطابق",
-    "email": "*تنسيق البريد الإلكتروني غير صحيح!",
-    "exactLength": "*يجب أن يكون طول القيمة دقيقًا",
+    "confirm": "تأكيد كلمة المرور لا يطابق كلمة المرور",
+    "email": "صيغة البريد الإلكتروني غير صحيحة!",
+    "exactLength": "*يجب أن يكون الطول مطابقًا",
     "expiredToken": "*انتهت صلاحية هذا الرمز",
     "forgot-password-failed": "تعذر إرسال رسالة إعادة تعيين كلمة المرور. يرجى المحاولة مرة أخرى.",
     "immutable": "*لا يمكن تغيير هذه القيمة",
     "invalid": "*{{fieldName}} غير صالح",
-    "invalidEmailOrPassword": "*المعلومات المدخلة غير صحيحة ",
+    "invalidEmailOrPassword": "*البريد الإلكتروني أو كلمة المرور غير صالحة",
     "max": "* يجب أن يكون {{fieldName}} أقل من أو يساوي {{max}} رقمًا",
     "min": "* يجب أن يكون {{fieldName}} أكبر من أو يساوي {{min}} رقمًا",
-    "name": "* يجب أن يتكون {{fieldName}} من أحرف وأرقام فقط",
+    "name": "* يجب أن يتكون {{fieldName}} من الحروف والأرقام فقط.",
     "notFound": "*غير موجود",
     "required": "*{{fieldName}} مطلوب!",
     "reset-password-failed": "تعذر إعادة تعيين كلمة المرور. يرجى المحاولة مرة أخرى.",
     "signin-failed": "فشل تسجيل الدخول. يرجى المحاولة مرة أخرى.",
     "signup-failed": "تعذر إتمام التسجيل. يرجى المحاولة مرة أخرى.",
     "taken": "* {{fieldName}} موجود بالفعل!",
-    "usedToken": "*تم استخدام هذا الرمز بالفعل",
-    "username": "* {{fieldName}} يقبل الشرطة السفلية والأحرف فقط",
-    "verification-code-invalid": "هذا رمز التحقق غير صالح",
+    "usedToken": "هذا الرمز مستخدم بالفعل",
+    "username": "* {{fieldName}} يُقبل الخط السفلي (underscore) والحروف فقط.",
+    "verification-code-invalid": "رمز التحقق هذا غير صالح",
     "verification-code-length": "يجب أن يكون رمز التحقق مكونًا {{length}} رقمًا",
     "verification-failed": "تعذر التحقق. يرجى المحاولة مرة أخرى.",
     "verification-resend-failed": "تعذر إعادة إرسال رمز التحقق"
@@ -243,16 +243,16 @@
     "title": "تبرع في أفضل الأيام!"
   },
   "fundraising": {
-    "description": "تساعدنا التبرعات الشهرية على تطوير موقع Quran.com واستمرار عمله، مما يتيح لنا التركيز على تحقيق الأثر بدلاً من الانشغال بجمع التبرعات.",
+    "description": "التبرعات الشهرية تساعدنا على تحسين Quran.com وضمان استمراريته، لنتمكّن من التركيز أقل على جمع التبرعات وأكثر على تحقيق الأثر.",
     "title": "كن متبرعا شهريا"
   },
-  "get-started": "البدء",
+  "get-started": "ابدأ الآن",
   "hear-it-pronounced": "انقر على الكلمات القرآنية للاستماع إلى نطقها",
   "help": "مساعدة",
   "hizb": "حزب",
   "home": "الصفحة الرئيسة",
   "hours": "ساعات",
-  "inline": "ضمن السطر",
+  "inline": "في نفس السطر",
   "input": {
     "clear": "مسح"
   },
@@ -268,14 +268,14 @@
   "login": "تسجيل الدخول",
   "logout": "تسجيل الخروج",
   "meccan": "مكية",
-  "medinan": "مدنية",
+  "medinan": "مَدَنِيَّة",
   "menu": "القائمة",
   "minutes": "دقائق",
   "mobile-apps": "تطبيقات المحمول",
   "mode": "الوضع",
   "more": "المزيد",
   "my-learning-plans": "خطط التعلم الخاصة بي",
-  "navigate": "التنقل",
+  "navigate": "انتقل",
   "network": "الشبكة",
   "new": "جديد!",
   "newest": "الأحدث",
@@ -292,8 +292,8 @@
   },
   "notification-settings": "إعدادات الإشعارات",
   "notification": {
-    "mark-all-as-read": "ضع إشارة مقروء على الكل",
-    "mark-as-read": "ضع إشارة مقروء"
+    "mark-all-as-read": "تحديد الكل كمقروء",
+    "mark-as-read": "وضع علامة كمقروء"
   },
   "notifications": "إشعارات",
   "off": "إيقاف",
@@ -306,11 +306,11 @@
   "pbuh": "صلى الله عليه وسلم",
   "popular-links": "روابط شائعة",
   "popup": {
-    "companion-title": "يا رفيق القرآن العزيز",
+    "companion-title": "أيها الرفيق في القرآن الكريم,",
     "footnote": "التبرعات الشهرية تمكننا من التركيز بشكل أقل على جمع التبرعات",
-    "subtitle": "«مَا الْعَمَلُ فِي أَيَّامِ الْعَشْرِ أَفْضَلَ مِنَ الْعَمَلِ فِي هَذِهِ» [البخاري 969]",
-    "text-1": "نحن ملتزمون بخدمة العالم المعرفة القرآنية والتقنية بالمجان دائماً",
-    "text-2": "فرصة مثالية للصدقة الجارية. استثمر في آخرتك عبر التبرع الشهري أو لمرة واحدة.",
+    "subtitle": "«ما من أيام العمل الصالح فيها أحب إلى الله من هذه الأيام» [البخاري 969]",
+    "text-1": "نحن ملتزمون بتقديم المعرفة القرآنية والتقنية للعالم، دائمًا مجانًا",
+    "text-2": "الفرصة المثالية للصدقة المستمرة (صدقة جارية). استثمر في آخرتك كمتبرع شهريًا أو لمرة واحدة",
     "title": "تبرع في أفضل الأيام!"
   },
   "powered-by": "مشغل بواسطة",
@@ -326,7 +326,7 @@
   "projects-desc": "المشاريع غير الربحية التي تملكها أو تديرها أو ترعاها مؤسسة <link>Quran.Foundation</link>",
   "q-reflect": "QuranReflect",
   "quran-com": "Quran.com",
-  "quran-radio": "راديو القرآن",
+  "quran-radio": "راديو القرآن الكريم",
   "reading-history": "سجل القراءة",
   "reading-preference": {
     "reading": "القراءة",
@@ -335,8 +335,8 @@
   "ready-for-ramadan": "هل أنت مستعد لرمضان؟",
   "recitation": "التلاوة",
   "reciter": "القارئ",
-  "reciter-summary": "(بإذن كريم من مركز التفسير)",
-  "reciters": "القراء",
+  "reciter-summary": "(بتصريح من مركز التفسير)",
+  "reciters": "القرّاء",
   "reflect": "تدبر",
   "reflections": "تدبرات",
   "reflections-and-lessons": "تدبرات ودروس",
@@ -367,10 +367,10 @@
   "seconds": "ثواني",
   "see-new": "اطّلع على الجديد",
   "settings": {
-    "no-tafsir-selected": "لم يتم اختيار تفسير",
+    "no-tafsir-selected": "لم يتم اختيار أي تفسير",
     "no-translation-selected": "لم يتم اختيار ترجمة",
     "reading-experience": "تجربة القراءة",
-    "reset": "إعادة تعيين",
+    "reset": "إعادة ضبط",
     "reset-cta": "استعادة الإعدادات المحددة مسبقًا",
     "reset-notif": "تمت إعادة تعيين إعداداتك إلى الإعدادات المحددة مسبقًا",
     "search-reciter": "ابحث عن قارئ",
@@ -379,13 +379,13 @@
     "selected-reciter": "القارئ المختار",
     "selected-tafsirs": "التفاسير المختارة",
     "selected-translations": "الترجمات المختارة",
-    "show-tooltip-when-playing-audio": "إظهار تلميح الأداة عند تشغيل الصوت",
+    "show-tooltip-when-playing-audio": "إظهار مربع منبثق أثناء تشغيل الصوت",
     "title": "الإعدادات",
-    "tooltip-playing-audio-helper": "إظهار ترجمة الكلمات في تلميح الأداة أثناء تشغيل الآية",
-    "value-and-other": "{{value}} وترجمة أخرى",
+    "tooltip-playing-audio-helper": "إظهار ترجمة الكلمة في مربع منبثق أثناء تشغيل الآية",
+    "value-and-other": "{{value}} و {{othersCount}} آخرون",
     "value-and-others": "{{value}} و {{othersCount}} أخرى",
     "wbw-helper": "اعرض الترجمة أو النقل الحرفي مباشرة تحت الكلمة",
-    "word-tooltip-helper": "اعرض الترجمة أو النقل الحرفي (النقحرة) عند التمرير أو النقر فوق الكلمة"
+    "word-tooltip-helper": "اعرض الترجمة أو النطق عند تمرير المؤشر أو الضغظ على الكلمة"
   },
   "share": "شارك",
   "share-quran-description-line-1": "قال النبي ﷺ:",
@@ -393,9 +393,9 @@
   "share-quran-description-line-3": "(البخاري ٣٤٦١)",
   "share-quran-title": "انشر القرآن!",
   "shared": "تم نسخ الرابط إلى الحافظة!",
-  "show-more": "أظهر المزيد",
+  "show-more": "عرض المزيد",
   "sidebar": {
-    "search-hizb": "بحث عن حزب",
+    "search-hizb": "ابحث عن حزب",
     "search-juz": "ابحث عن جزء",
     "search-page": "ابحث عن صفحة",
     "search-surah": "ابحث عن سورة",
@@ -416,11 +416,11 @@
   "surah": "سورة",
   "tafsir": {
     "font-size": "حجم خط التفسير",
-    "group-message": "أنت تقرأ التفسير لمجموعة الآيات {{from}} إلى {{to}}",
-    "no-text": "{{tafsirName}} غير متوفر للآية الحالية.",
+    "group-message": "أنت تقرأ تفسيرًا لمجموعة الآيات {{from}}إلى {{to}}",
+    "no-text": "تفسير {{tafsirName}} غير متوفر لهذه الآية حاليًا.",
     "surah": "تفسير سورة",
-    "tafsir-desc": "اقرأ {{tafsirName}} عن آية {{verseNumber}} من سورة {{surahName}}",
-    "tafsirs-desc": "اقرأ العديد من التفسيرات للآية {{ayahNumber}} من سورة {{surahName}} لعلماء تفسير موثوقين",
+    "tafsir-desc": "اقرأ تفسير {{tafsirName}} للآية {{verseNumber}} من سورة {{surahName}}",
+    "tafsirs-desc": "اقرأ تفاسير مختلفة للآية {{ayahNumber}} من السورة {{surahName}} لعلماء تفسير معتمدين",
     "title": "التفسير"
   },
   "terms-and-conditions": "الشروط والأحكام",
@@ -435,7 +435,7 @@
   },
   "to": "إلى",
   "tooltip": "أداة إرشادية",
-  "tooltip-trans-lang": "لغة الأداة الإرشادية",
+  "tooltip-trans-lang": "لغة التلميح (لغة المربعات المنبثقة)",
   "trans-lang": "لغة الترجمة",
   "translation": "الترجمة",
   "translations": "الترجمات",
@@ -445,41 +445,41 @@
   "undo": "تراجع",
   "validation": {
     "invalid-email": "{{field}} يجب أن يكون عنوان بريد إلكتروني صالحًا",
-    "invalid-field": "الرجاء إدخال قيمة صالحة {{field}}",
-    "maximum-length": "لا يمكن أن يتجاوز {{field}} {{value}} حرفًا",
-    "minimum-length": "يجب أن يكون {{field}} {{value}} حرفًا على الأقل",
+    "invalid-field": "يرجى إدخال قيمة صالحة لـ {{field}}",
+    "maximum-length": "{{field}}لا يمكن أن يتجاوز{{value}} أحرف",
+    "minimum-length": "{{field}}يجب أن يكون{{value}} أحرف على الأقل",
     "required-field": "{{field}} مطلوب"
   },
   "verse": "آية",
-  "verse-bookmark-removed": "تمت إزالة إشارة مرجعية الآية!",
-  "verse-bookmarked": "تم وضع إشارة مرجعية على الآية!",
+  "verse-bookmark-removed": "تمت إزالة الآية من المحفوظات!",
+  "verse-bookmarked": "تم حفظ الآية في المحفوظات!",
   "verse-copied": "تم نسخ الآية إلى الحافظة!",
   "verses": "آيات",
   "view": "عرض",
   "voice": {
     "ask-permission": "الرجاء السماح باستخدام الميكروفون لبدء استخدام البحث الصوتي",
     "error": "حدث خطأ، يرجى المحاولة مرة أخرى ({{errorCode}}).",
-    "language-unavailable": "المتصفح الذي تستخدمه لا يدعم اللغة العربية.",
+    "language-unavailable": "المتصفح الخاص بك لا يدعم اللغة العربية.",
     "network": "خطأ في الشبكة. يُرجى التحقق من اتصالك بالإنترنت والمحاولة مرة أخرى.",
     "no-microphone": "لم يتم العثور على ميكروفون. يُرجى توصيل ميكروفون والمحاولة مرة أخرى.",
-    "no-permission": "يبدو أنك لم تقم بتمكين أذونات الميكروفون. يُرجى تفعيل أذونات الميكروفون ثم المحاولة مرة أخرى.",
-    "no-speech": "لم يتم اكتشاف صوت. يرجى المحاولة مرة أخرى.",
+    "no-permission": "يبدو أن صلاحيات الميكروفون غير مُفعّلة لديك. يُرجى تفعيلها والمحاولة مجددًا.",
+    "no-speech": "لم يتم اكتشاف أي كلام. يُرجى المحاولة مرة أخرى.",
     "not-supported": "يبدو أن متصفحك لا يدعم الميكروفون. يرجى تجربة متصفح آخر.",
-    "suggest": "يرجى البدء في التلاوة وستظهر آياتك.",
-    "suggest-subtitle": "اقرأ أي آية باللغة العربية، وستظهر الآية",
-    "suggest-title": "اقرأ الآن",
+    "suggest": "ابدأ بالتلاوة وستظهر الآية",
+    "suggest-subtitle": "اتْلُوا أي آية باللغة العربية، وستظهر الآية",
+    "suggest-title": "اتْلُوا الان",
     "voice-search-powered-by": "البحث الصوتي مدعوم بواسطة"
   },
   "wbw": "كلمة بكلمة",
   "wbw-lang-summary": "مصدر الترجمة كلمة بكلمة: <link> {{source}} </link> . هذا المصدر مستقل عن اختيار ترجمة الآية.",
   "wbw-trans-lang": "لغة الترجمة كلمة بكلمة",
-  "wbw-translation": "ترجمة الكلمات",
-  "wbw-transliteration": "النقل الحرفي للكلمات",
+  "wbw-translation": "الترجمة كلمة بكلمة",
+  "wbw-transliteration": "الترجمة الصوتية كلمة بكلمة",
   "word-click": {
     "no-audio": "لا صوت",
     "play-audio": "تشغيل الصوت",
     "title": "نطق الكلمة عند النقر عليها"
   },
-  "word-tooltip": "الأداة الإرشادية للكلمات",
+  "word-tooltip": "مربع منبثق للكلمة",
   "yes": "نعم"
 }
