@@ -17,6 +17,7 @@ import { getChapterData } from '@/utils/chapter';
 import { logButtonClick } from '@/utils/eventLogger';
 import truncate from '@/utils/html-truncate';
 import { isRTLReflection } from '@/utils/quranReflect/locale';
+import { getReflectionGroupLink } from '@/utils/quranReflect/navigation';
 import {
   MAX_REFLECTION_LENGTH,
   getInitialVisiblePostPercentage,
@@ -100,7 +101,7 @@ const ReflectionItem: React.FC<Props> = ({
           date={createdAt}
           isAuthorVerified={reflection?.author?.verified}
           reflectionGroup={reflection?.room?.name}
-          reflectionGroupLink={reflection?.room?.url || reflection?.room?.subdomain || ''}
+          reflectionGroupLink={getReflectionGroupLink(reflection?.room)}
           verseReferences={reflection.references}
           nonChapterVerseReferences={nonChapterVerseReferences}
           onReferredVersesHeaderClicked={onReferredVersesHeaderClicked}
