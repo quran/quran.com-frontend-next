@@ -38,6 +38,4 @@ Follow all Cursor rules in `.cursor/rules/` including:
 - Follow Next.js Pages Router patterns (not App Router)
 - Implement proper i18n with next-translate
 - Use SCSS modules for component styling
-- Run lint and typecheck after changes: `yarn lint && yarn build`</content> </xai:function_call/>
-  </xai:function_call name="read">
-  <parameter name="filePath">/Users/ahmed/Projects/QuranFoundation/quran.com-frontend-next/AGENTS.md
+- Run lint and typecheck after changes: `yarn lint && yarn build`
