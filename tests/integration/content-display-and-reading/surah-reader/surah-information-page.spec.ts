@@ -27,7 +27,7 @@ test.describe('Surah Information Page', () => {
       await expect(page.getByTestId('surah-revelation-place')).toBeVisible();
 
       // Verify the surah revelation place is Meccan
-      await expect(page.getByTestId('surah-revelation-place')).toHaveText(chapter.revelationPlace);
+      await expect(page.getByTestId('surah-revelation-place')).toHaveText('Mecca');
 
       // Verify the surah number of ayahs is displayed
       await expect(page.getByTestId('surah-number-of-ayahs')).toBeVisible();

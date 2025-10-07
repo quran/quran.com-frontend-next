@@ -1,8 +1,16 @@
 import { test, expect } from '@playwright/test';
 
 import mockFootnoteKhattabSurah1Verse2 from '@/tests/mocks/footnotes';
-import { mockTranslationKhattab } from '@/tests/mocks/translations';
 import Homepage from '@/tests/POM/home-page';
+
+const TRANSLATION_KHATTAB = {
+  languageName: 'english',
+  arabic: 'بِسْمِ ٱللَّهِ ٱلرَّحْمَـٰنِ ٱلرَّحِيمِ',
+  text: 'In the Name of Allah—the Most Compassionate, Most Merciful.',
+  resourceName: 'Dr. Mustafa Khattab',
+  resourceId: 102,
+  authorName: 'Dr. Mustafa Khattab, The Clear Quran',
+};
 
 let homePage: Homepage;
 
@@ -18,7 +26,7 @@ test.describe('Verse Content Display', () => {
     async ({ page }) => {
       // Verify the first verse contains Arabic text
       const firstVerse = page.getByTestId('verse-1:1');
-      await expect(firstVerse).toContainText(mockTranslationKhattab().arabic);
+      await expect(firstVerse).toContainText(TRANSLATION_KHATTAB.arabic);
     },
   );
 
@@ -28,7 +36,7 @@ test.describe('Verse Content Display', () => {
     async ({ page }) => {
       // Verify the first verse translation is visible
       const firstVerse = page.getByTestId('verse-1:1');
-      await expect(firstVerse).toContainText(mockTranslationKhattab().text);
+      await expect(firstVerse).toContainText(TRANSLATION_KHATTAB.text);
     },
   );
 });

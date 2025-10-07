@@ -26,8 +26,9 @@ test(
 
     // Scroll a bit
     for (let i = 0; i < 5; i += 1) {
-      await page.mouse.wheel(0, 200);
-      await page.waitForTimeout(500); // wait a bit between scrolls
+      await page.mouse.wheel(0, 500);
+      // Wait for progress to update after scroll
+      await page.waitForTimeout(200);
     }
 
     // The progress bar should be > initial progress

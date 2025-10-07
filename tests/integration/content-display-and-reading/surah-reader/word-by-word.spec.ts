@@ -24,7 +24,9 @@ async function modifySettingsAndClose(
   await page.keyboard.press('Escape');
 }
 
-async function openWordByWordModal(page: any): Promise<any> {
+async function openWordByWordModal(
+  page: any,
+): Promise<{ wbwTranslation: any; wbwTransliteration: any }> {
   // Get verse 2
   const verse = page.getByTestId('verse-78:2');
   await expect(verse).toBeVisible();
@@ -40,10 +42,12 @@ async function openWordByWordModal(page: any): Promise<any> {
   await wordByWordButton.click();
 
   // Check that the modal is open
-  const modal = page.getByTestId('wbw-verse-modal-content');
-  await expect(modal).toBeVisible();
+  const wbwTranslation = page.getByTestId('wbw-translation');
+  await expect(wbwTranslation).toBeVisible();
+  const wbwTransliteration = page.getByTestId('wbw-transliteration');
+  await expect(wbwTransliteration).toBeVisible();
 
-  return modal;
+  return { wbwTranslation, wbwTransliteration };
 }
 
 test.beforeEach(async ({ page, context }) => {
@@ -56,15 +60,15 @@ test.describe('Word by Word Modal', () => {
     'Should open modal and display word-by-word content correctly',
     { tag: ['@slow', '@reader', '@word-by-word'] },
     async ({ page }) => {
-      const modal = await openWordByWordModal(page);
+      const { wbwTranslation, wbwTransliteration } = await openWordByWordModal(page);
 
       // Check that the modal contains the word by word translation and transliteration
-      await expect(modal.getByText('About', { exact: true })).toBeVisible();
-      await expect(modal.getByText('the News', { exact: true })).toBeVisible();
-      await expect(modal.getByText('the Great', { exact: true })).toBeVisible();
-      await expect(modal.getByText('ʿani', { exact: true })).toBeVisible();
-      await expect(modal.getByText('l-naba-i', { exact: true })).toBeVisible();
-      await expect(modal.getByText('l-ʿaẓīmi', { exact: true })).toBeVisible();
+      await expect(wbwTranslation.getByText('About', { exact: true })).toBeVisible();
+      await expect(wbwTranslation.getByText('the News', { exact: true })).toBeVisible();
+      await expect(wbwTranslation.getByText('the Great', { exact: true })).toBeVisible();
+      await expect(wbwTransliteration.getByText('ʿani', { exact: true })).toBeVisible();
+      await expect(wbwTransliteration.getByText('l-naba-i', { exact: true })).toBeVisible();
+      await expect(wbwTransliteration.getByText('l-ʿaẓīmi', { exact: true })).toBeVisible();
     },
   );
 
@@ -82,12 +86,12 @@ test.describe('Word by Word Modal', () => {
       // Change the language to German
       await page.getByTestId('wordByWord').selectOption('de'); // (Deutsch)
 
-      const modal = await openWordByWordModal(page);
+      const { wbwTranslation } = await openWordByWordModal(page);
 
       // Check that the modal contains the word by word translation and transliteration
-      await expect(modal.getByText('Nach', { exact: true })).toBeVisible();
-      await expect(modal.getByText('der Kunde', { exact: true })).toBeVisible();
-      await expect(modal.getByText('gewaltigen', { exact: true })).toBeVisible();
+      await expect(wbwTranslation.getByText('Nach', { exact: true })).toBeVisible();
+      await expect(wbwTranslation.getByText('der Kunde', { exact: true })).toBeVisible();
+      await expect(wbwTranslation.getByText('gewaltigen', { exact: true })).toBeVisible();
     },
   );
 });

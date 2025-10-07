@@ -26,7 +26,8 @@ test.describe('Verse Bookmarking', () => {
       await homePage.reload();
 
       // Verify the first verse is still bookmarked
-      await expect(firstVerse.getByLabel('Bookmarked')).toBeVisible();
+      const reloadedVerse = page.getByTestId('verse-1:1');
+      await expect(reloadedVerse.getByLabel('Bookmarked')).toBeVisible();
     },
   );
 });

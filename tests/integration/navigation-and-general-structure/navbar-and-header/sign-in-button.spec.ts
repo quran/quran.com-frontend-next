@@ -14,10 +14,10 @@ test(
   { tag: ['@slow', '@navbar'] },
   async ({ page }) => {
     // Click on the Sign In Button and verify it goes to the /login page
-    const logoElement = page.getByLabel('Sign in');
-    await logoElement.click();
+    const signInButton = page.getByLabel('Sign in');
+    await signInButton.click();
 
-    // Make sure we are redirected to the homepage
+    // Make sure we are redirected to the /login page
     await expect(page).toHaveURL(/\/login/);
   },
 );

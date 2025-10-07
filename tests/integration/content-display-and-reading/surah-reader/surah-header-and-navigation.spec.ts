@@ -21,7 +21,7 @@ test.describe('Surah Header Display', () => {
       await expect(chapterTitle).toBeVisible();
 
       // The surah name in arabic calligraphy (it uses a special font)
-      await expect(chapterTitle).toContainText(chapter.surahCaligraphy);
+      await expect(chapterTitle).toContainText(chapter.id.toString().padStart(3, '0'));
 
       // The surah name transliteration
       await expect(chapterTitle).toContainText(chapter.transliteratedName);

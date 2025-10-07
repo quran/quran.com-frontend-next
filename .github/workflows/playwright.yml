@@ -2,6 +2,11 @@ name: Playwright Tests
 on:
   push:
     branches: [master, main, develop, testing]
+    paths:
+      - 'src/**'
+      - 'tests/**'
+      - 'playwright.config.ts'
+      - '.github/workflows/playwright.yml'
   pull_request:
     branches: [master, main, develop]
 jobs:

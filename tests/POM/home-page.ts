@@ -1,4 +1,4 @@
-import { BrowserContext, Page } from '@playwright/test';
+import { BrowserContext, Locator, Page } from '@playwright/test';
 
 class Homepage {
   readonly page: Page;
@@ -78,7 +78,11 @@ class Homepage {
 
     const storage = await this.context.storageState();
 
+    if (!storage.origins || storage.origins.length === 0) {
+      return null;
+    }
     const localStorageArray = storage.origins[0].localStorage;
+
     const persistedRoot = localStorageArray.filter(
       (localStorageObject) => localStorageObject.name === storageKey,
     );
@@ -108,6 +112,17 @@ class Homepage {
     } else {
       await this.page.getByTestId('reading-button').click();
     }
+  }
+
+  /**
+   * Search for a query using the search bar and return the search results locator.
+   * @param {string} query The search query to fill in the search bar
+   * @returns {Promise<Locator>} The search results locator
+   */
+  async searchFor(query: string): Promise<Locator> {
+    const searchBar = this.page.locator('#searchQuery');
+    await searchBar.fill(query);
+    return this.page.getByTestId('search-results');
   }
 }
 

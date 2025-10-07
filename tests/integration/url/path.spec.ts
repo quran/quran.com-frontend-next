@@ -10,7 +10,7 @@ test.beforeEach(async ({ page, context }) => {
 
 test('Page /S should load Surah S', { tag: ['@url'] }, async ({ page }) => {
   await homePage.goTo('/75');
-  await expect(await page.getByText('Al-Qiyamah').first()).toBeVisible();
+  await expect(page.getByText('Al-Qiyamah').first()).toBeVisible();
   expect(await page.title()).toContain('Al-Qiyamah');
 });
 

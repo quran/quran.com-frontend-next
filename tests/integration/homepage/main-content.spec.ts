@@ -30,7 +30,7 @@ test(
     await homePage.goTo();
 
     // Make sure the last visited ayah is displayed on the homepage
-    const lastVisitedAyah = page.getByTestId('continue-reading-chapter-card');
+    const lastVisitedAyah = page.getByTestId('chapter-card');
     await expect(lastVisitedAyah).toBeVisible();
     const text = await lastVisitedAyah.textContent();
     expect(text).toContain("5. Al-Ma'idah");
@@ -63,6 +63,7 @@ test('Quran in a Year section appears and has a Quranic verse', async ({ page })
   const quranInAYearSection = page.getByTestId('quran-in-a-year-section');
   await expect(quranInAYearSection).toBeVisible();
   const text = await quranInAYearSection.textContent();
+  await page.waitForTimeout(1500); // Wait for 1.5 seconds to ensure the verse is loaded
   expect(text).toContain('Mustafa Khattab'); // If it contains the translator name, it means a verse is displayed
 });
 

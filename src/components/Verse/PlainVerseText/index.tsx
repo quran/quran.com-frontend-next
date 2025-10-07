@@ -54,6 +54,7 @@ const PlainVerseText: React.FC<Props> = ({
       <SeoTextForVerse words={words} />
       <TajweedFontPalettes pageNumber={pageNumber} quranFont={quranFont} />
       <div
+        data-testid={`wbw-${shouldShowWordByWordTranslation ? 'translation' : 'transliteration'}`}
         className={classNames(
           styles.verseTextContainer,
           styles.tafsirOrTranslationMode,
