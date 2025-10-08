@@ -45,8 +45,11 @@ const nextConfig = {
       'now.sh',
       'quran.com',
       'images.quran.com',
+      // Google OAuth user avatars
       'lh3.googleusercontent.com',
+      // S3-hosted avatars (generic domain required for OAuth providers)
       's3.amazonaws.com',
+      // Facebook OAuth user avatars
       'platform-lookaside.fbsbx.com',
     ],
   },
